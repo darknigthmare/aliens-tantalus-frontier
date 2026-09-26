@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-120-armored-burster",
+  "name": "Armored Burster",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Burster. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Burster as pictured (NOT a Chestburster larva): low quadrupedal adult xenomorph with FOUR clawed limbs, ribbed torso, smooth elongated eyeless dome carrying several closed bright yellow-green rounded sacs/nodules, yellow-green accents on limb interiors, ONE long segmented pointed tail curled behind. Preserve lean crouching adult silhouette and intact green sacs. Add dark organic armor plates to torso and joints, without new appendages, gas, spray or explosion.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp",
+    "sha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df",
+    "visualNotes": "Viewed Burster base sheet: adult four-limbed low xenomorph, long dome studded with bright yellow-green closed nodules, green limb accents, ribbed torso and long curled tail; distinct from limbless Chestburster."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-4ccf64ae-fce0-48e5-bcd4-59af98803de7.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-120-armored-burster.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "1a0552520f912e2bebaab2e215d5801aa574991d9647c298b5cc911709552724",
+    "bboxAlphaAtLeast16": [
+      91,
+      107,
+      1439,
+      951
+    ],
+    "alphaMin": 0,
+    "alpha0": 1096833,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One right-facing adult quadrupedal Burster, four limbs, elongated dome with closed yellow-green sacs, green limb material, single complete curled blade tail. Not Chestburster. Preview halo pixels (750,200),(1400,200),(750,990) have alpha0. Side/bottom padding below10%, complete.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 91,
+      "top": 107,
+      "right": 97,
+      "bottom": 73
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.56,
+      "y": 0.9287109375
+    },
+    "sourceFacing": 1
+  }
+}

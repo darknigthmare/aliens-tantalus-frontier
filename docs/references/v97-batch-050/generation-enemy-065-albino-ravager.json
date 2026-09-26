@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-065-albino-ravager",
+  "name": "Albino Ravager",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and detailed raster style reference only. Create ONE newly authored Albino Ravager in standing alert idle pose. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-013-ravager identity lock only. Preserve one tall, heavily armored, eyeless biped with a raised backward-curved cranial crest, lateral backward head spines, a narrow ribbed torso, exactly two long powerful main arms terminating in enormous integral crescent forearm blades, two strong digitigrade legs and one complete segmented tail. The crescents are anatomical blade structures continuous with the forearms, never swords, axes or equipment held in hands. Albino changes newly authored pigment and material response only: warm bone-ivory, pearl gray and pale mineral blue chitin, cool gray recesses, restrained translucent blush at thin membranes, dark mouth cavity and pale horn blades with distinct material breakup; never pure flat white, ice, crystal, glow or an automatic recolor. Preserve strict right-facing profile and the four-clip biped contract, but do not inherit uncertified numeric sourceScaleByClip values. No Queen secondary arms, Praetorian fan crown, ordinary claw hands, armor, clothing, firearm or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nClearly separate the two long crescent blade forearms; both crescent blades are part of the anatomy and no hands hold objects. ONE complete subject, orthographic side profile looking RIGHT; both feet grounded, entire single tail curling behind left. True transparent alpha, no floor/shadow/halo. Place entire silhouette within central 75% of canvas with generous transparent padding on every side. No sheet, repeated poses, text, watermark, props, gore or cropping. Static sprite, not animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-ravager-action-sheet.png",
+    "sha256": "f7c58823ce59b27aa2ebe779d380966f40fb48fa9e1dfe165fd38ad306999070",
+    "visualNotes": "Reviewed base sheet: tall crested biped, two integral crescent forearm blades, two digitigrade legs and one curved tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-1f9cdbb9-142e-4564-b001-274d01d56d14.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-065-albino-ravager.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "7fd50d2d0cd6fb2415c1df99751961adf28360ddec5c688eb570e8d127ae0b8e",
+    "bboxAlphaAtLeast16": [
+      216,
+      179,
+      1053,
+      1090
+    ],
+    "alphaMin": 0,
+    "alpha0": 1240649,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Two complete integral crescent blades are clear, with no held weapon; raised swept crest, two feet and single complete tail verified. All alpha bounds have more than 10% padding. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5606060606060606,
+      "y": 0.868421052631579
+    },
+    "sourceFacing": 1
+  }
+}

@@ -194,3 +194,35 @@ test('hidden actions are inert and dispose removes owned listeners/RAF', t => {
   assert.equal(m.frames.size, 0); assert.equal(m.listeners.size, 0);
   for (const node of Object.values(m.nodes)) assert.equal(node.events.size, 0);
 });
+
+test('V89 returning from options restores its menu focus once without changing the save or replaying unlock', t => {
+  const m = mount(t);
+  let save = { profile: 2, createdAt: 12345, settings: { reducedMotion: false }, strategy: {} };
+  m.setSave(save); m.ui.show(); m.flush(); m.menu();
+  m.key('End'); m.key('Enter');
+  assert.equal(m.calls.options, 1); assert.equal(m.ui.state, 'closed');
+  save = { ...save, settings: { reducedMotion: true } };
+  const before = JSON.stringify(save); m.setSave(save); m.ui.show(); m.flush();
+  assert.equal(m.ui.state, 'menu'); assert.equal(m.nodes['#title-menu'].hidden, false);
+  assert.equal(m.doc.activeElement.id, 'title-options'); assert.equal(m.calls.unlock, 1);
+  assert.equal(JSON.stringify(save), before);
+  m.key('Home'); assert.equal(m.doc.activeElement.id, 'title-continue');
+  m.ui.hide(); m.ui.show(); m.flush();
+  assert.equal(m.ui.state, 'idle'); assert.equal(m.doc.activeElement.id, 'title-start');
+});
+
+for (const change of ['profile', 'timeline', 'clear', 'recovery']) {
+  test(`V89 options return is invalidated by ${change}`, t => {
+    let recovery = null;
+    const m = mount(t, { getRecoveryStatus: () => recovery });
+    const save = { profile: 2, createdAt: 12345, strategy: {} };
+    m.setSave(save); m.ui.show(); m.flush(); m.menu(); m.ui.openOptions();
+    if (change === 'profile') m.setSave({ ...save, profile: 1 });
+    if (change === 'timeline') m.setSave({ ...save, createdAt: 67890 });
+    if (change === 'clear') m.ui.clearMenuReturnV89();
+    if (change === 'recovery') recovery = { profile: 2 };
+    m.ui.show(); m.flush();
+    assert.equal(m.ui.state, 'idle'); assert.equal(m.doc.activeElement.id, 'title-start');
+    assert.deepEqual(m.calls.continue, []); assert.equal(m.calls.new, 0);
+  });
+}

@@ -148,7 +148,7 @@ test('le cache hors-ligne V80 précache le shell et le niveau BIOFORGE, les autr
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v86-physical-placeables-shell-9['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v86-xeno-trials-v97-shell-1['"]/);
   await access(localPath('/src/player-airborne-presentation-v87.js'));
   assert.ok(workerContains(worker, '/src/player-airborne-presentation-v87.js'), 'Player physics presentation must be available offline');
   for (const documentPath of [

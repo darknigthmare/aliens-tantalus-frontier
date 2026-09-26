@@ -1,3 +1,5 @@
+import { resolveTitleMenuContextV89, titleMenuOwnerV89, sameTitleMenuOwnerV89 } from './title-menu-context-v89.js';
+
 export const TITLE_SCREEN_SCHEMA = 61;
 
 export function resolveTitleContinueTarget(save) {
@@ -29,6 +31,8 @@ export class TitleScreenController {
     this.listeners = [];
     this.confirmSave = null;
     this.confirmTimer = 0;
+    this.returnMenuOwnerV89 = null;
+    this.menuContextV89 = null;
     this.startButton = root.querySelector('#title-start');
     this.menu = root.querySelector('#title-menu');
     this.continueButton = root.querySelector('#title-continue');
@@ -38,6 +42,15 @@ export class TitleScreenController {
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
     this.recoveryWarning = root.querySelector('#title-recovery-warning');
+    this.resumeContextV89 = root.querySelector('#title-resume-context-v89');
+    const documentRef = root.ownerDocument || globalThis.document;
+    if (!this.resumeContextV89 && documentRef?.createElement && this.menu?.prepend) {
+      this.resumeContextV89 = documentRef.createElement('p');
+      this.resumeContextV89.id = 'title-resume-context-v89';
+      this.resumeContextV89.className = 'title-resume-context-v89';
+      this.menu.prepend(this.resumeContextV89);
+    }
+    if (this.resumeContextV89) this.continueButton.setAttribute?.('aria-describedby', this.resumeContextV89.id);
     this.bind();
   }
 
@@ -109,31 +122,38 @@ export class TitleScreenController {
   show() {
     const save = this.getSave();
     const recovery = this.getRecoveryStatus();
+    const restoreMenu = !recovery && sameTitleMenuOwnerV89(this.returnMenuOwnerV89, save);
+    this.clearMenuReturnV89();
+    this.menuContextV89 = resolveTitleMenuContextV89(save);
     this.cancelNewTimelineConfirmation();
     this.root.hidden = false;
     this.resetHorizontalScroll();
     this.app.hidden = true;
-    this.root.dataset.state = 'idle';
-    this.state = 'idle';
-    this.menu.hidden = true;
-    this.startButton.hidden = false;
+    this.state = restoreMenu ? 'menu' : 'idle';
+    this.root.dataset.state = this.state;
+    this.menu.hidden = !restoreMenu;
+    this.startButton.hidden = restoreMenu;
     this.continueButton.disabled = Boolean(recovery);
     if (this.recoveryWarning) {
       this.recoveryWarning.hidden = !recovery;
       this.recoveryWarning.textContent = recovery ? `Profil ${recovery.profile} inaccessible. Sauvegarde préservée. Ouvrez Système pour récupérer les données ou choisir un autre profil.` : '';
     }
-    this.continueButton.textContent = save?.strategy?.currentOperation
-      ? 'REPRENDRE L’OPÉRATION'
-      : save?.statistics?.playSeconds > 0 ? 'CONTINUER' : 'ENTRER SUR LE TANTALUS';
+    this.continueButton.textContent = this.menuContextV89.continueLabel;
+    if (this.resumeContextV89) {
+      this.resumeContextV89.hidden = Boolean(recovery);
+      this.resumeContextV89.textContent = recovery ? '' : this.menuContextV89.summary;
+      this.resumeContextV89.dataset.context = this.menuContextV89.kind;
+    }
     const day = String(save?.clock?.day || 1).padStart(2, '0');
     const hour = String(Math.floor(save?.clock?.hour || 0)).padStart(2, '0');
     const minute = String(Math.floor(((save?.clock?.hour || 0) % 1) * 60 + 0.000001)).padStart(2, '0');
     this.profileStatus.textContent = 'PROFIL ' + (save?.profile || 1) + ' · J' + day + ' ' + hour + ':' + minute + ' · SAUVEGARDE LOCALE';
     if (recovery) this.profileStatus.textContent = `PROFIL ${recovery.profile} · RÉCUPÉRATION REQUISE`;
-    this.liveStatus.textContent = 'Écran titre. Appuyez pour ouvrir le menu principal.';
+    this.liveStatus.textContent = restoreMenu ? 'Retour au menu principal. Système sélectionné.'
+      : 'Écran titre. Appuyez pour ouvrir le menu principal.';
     document.documentElement.classList.add('title-mode');
     this.scene?.show?.(save);
-    this.scheduleFocus(this.startButton, 'idle');
+    this.scheduleFocus(restoreMenu ? this.optionsButton : this.startButton, this.state);
     this.startGamepadPolling();
   }
 
@@ -181,9 +201,12 @@ export class TitleScreenController {
 
   openOptions() {
     if (this.root.hidden || this.state !== 'menu') return;
+    this.returnMenuOwnerV89 = titleMenuOwnerV89(this.getSave());
     this.hide();
     this.onOptions?.();
   }
+
+  clearMenuReturnV89() { this.returnMenuOwnerV89 = null; }
 
   openForge() {
     if (this.root.hidden || this.state !== 'menu') return;
@@ -308,6 +331,7 @@ export class TitleScreenController {
   }
 
   dispose() {
+    this.clearMenuReturnV89();
     this.hide();
     this.listeners.splice(0).forEach((remove) => remove());
     this.scene?.dispose?.();
@@ -321,6 +345,7 @@ export class TitleScreenController {
       menuVisible: !this.menu.hidden,
       forgeAvailable: Boolean(this.forgeButton),
       continueTarget: resolveTitleContinueTarget(this.getSave()),
+      resumeContext: this.menuContextV89,
       scene: this.scene?.getSnapshot?.() || null
     };
   }

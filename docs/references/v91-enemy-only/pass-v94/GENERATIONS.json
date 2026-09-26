@@ -1,0 +1,117 @@
+{
+  "pass": 94,
+  "generatedAt": "2026-09-23",
+  "mode": "integrated-imagegen-only",
+  "batchLaunches": [
+    4,
+    5
+  ],
+  "requestedDistinctIdentities": 9,
+  "notes": [
+    "Each request produced one separate file, not a collage.",
+    "Candidate naming records intended request identity, not a guarantee of the resulting identity.",
+    "No safety refusal in this batch. Seven first attempts held for visual deviations.",
+    "Original generated files preserved; no pixel processing."
+  ],
+  "generations": [
+    {
+      "id": "v94-gorilla",
+      "n": 4,
+      "prompt": "Create ONE standalone enemy sprite PNG for a 2D game. Use the FIRST of the included reference images as the sole anatomy/palette/pose authority; ignore any other reference creatures. This is a faithful fan-game adaptation of that exact licensed NECA Kenner-tribute design, not a new hybrid. Preserve the reference's proportions, silhouette, appendage count, material colors and visible sculpt details. Retain the pictured camera and pose instead of inventing unseen anatomy. Render a crisp high-detail painted game bitmap with a clean silhouette, not a photograph of a toy. Remove mechanical toy-joint seams only, without redesigning biology. Entire creature including all limbs and entire tail safely inside the canvas with at least 6% clear padding on every edge. TRUE TRANSPARENT alpha background, no opaque white/black/gray background, no checkerboard printed into pixels, no floor, no ground shadow, no glow, no scenery, no text, no labels, no inset, no watermark. Exactly one character, one pose, one 1x1 static sprite, no sheet, no collage, no multi-view. TARGET: Gorilla Alien, exact dark blue-black NECA Series 10 sculpt shown in reference1. Main full-body figure only, ignore its small upper-left head inset. Keep smooth CLOSED glossy black elongated dome, silver teeth, heavily ribbed torso, massive elongated spined forearms with FOUR hooks on each outer forearm, large skeletal hands, two shorter legs, blue-black dorsal spikes, segmented tail curving toward left ending in the distinctive wide open three-pronged forked blade. Do not use the inset's exposed skull. Match its front three-quarter pose.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-b4d9e192-136e-4d73-88c7-a206494202ed.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-b4d9e192-136e-4d73-88c7-a206494202ed.png",
+      "numLastImages": 4,
+      "candidate": "v94-gorilla-attempt1.png",
+      "status": "accepted-static-adaptation",
+      "canonExact": false
+    },
+    {
+      "id": "v94-snake",
+      "n": 3,
+      "prompt": "Create ONE standalone enemy sprite PNG for a 2D game. Use the FIRST of the included reference images as the sole anatomy/palette/pose authority; ignore any other reference creatures. This is a faithful fan-game adaptation of that exact licensed NECA Kenner-tribute design, not a new hybrid. Preserve the reference's proportions, silhouette, appendage count, material colors and visible sculpt details. Retain the pictured camera and pose instead of inventing unseen anatomy. Render a crisp high-detail painted game bitmap with a clean silhouette, not a photograph of a toy. Remove mechanical toy-joint seams only, without redesigning biology. Entire creature including all limbs and entire tail safely inside the canvas with at least 6% clear padding on every edge. TRUE TRANSPARENT alpha background, no opaque white/black/gray background, no checkerboard printed into pixels, no floor, no ground shadow, no glow, no scenery, no text, no labels, no inset, no watermark. Exactly one character, one pose, one 1x1 static sprite, no sheet, no collage, no multi-view. TARGET: Snake Alien, exact NECA Series13 sculpt in reference1. STRICT anatomy: NO arms and NO legs. Wide symmetrical ribbed cobra hood with the many paired outward bony prongs shown, dark green-black hood and long vertebral serpent body, dusty rose-brown ridged elongated skull and silver teeth with paired long ivory cheek tusks. Long single segmented body descends and curves left along base into narrow purplish blade-tail. Preserve the unusual armless cobra silhouette, matching front view, and do not replace it with a humanoid xenomorph.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-4549613d-5655-4a61-9e11-cfe89ec032fb.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-4549613d-5655-4a61-9e11-cfe89ec032fb.png",
+      "numLastImages": 3,
+      "candidate": "v94-snake-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    },
+    {
+      "id": "v94-scorpion",
+      "n": 2,
+      "prompt": "Create ONE standalone enemy sprite PNG for a 2D game. Use the FIRST of the included reference images as the sole anatomy/palette/pose authority; ignore any other reference creatures. This is a faithful fan-game adaptation of that exact licensed NECA Kenner-tribute design, not a new hybrid. Preserve the reference's proportions, silhouette, appendage count, material colors and visible sculpt details. Retain the pictured camera and pose instead of inventing unseen anatomy. Render a crisp high-detail painted game bitmap with a clean silhouette, not a photograph of a toy. Remove mechanical toy-joint seams only, without redesigning biology. Entire creature including all limbs and entire tail safely inside the canvas with at least 6% clear padding on every edge. TRUE TRANSPARENT alpha background, no opaque white/black/gray background, no checkerboard printed into pixels, no floor, no ground shadow, no glow, no scenery, no text, no labels, no inset, no watermark. Exactly one character, one pose, one 1x1 static sprite, no sheet, no collage, no multi-view. TARGET: Scorpion Alien, exact bronze-brown/black NECA Series13 sculpt in reference1. TWO arms and TWO legs, biped not a literal scorpion. Long ridged black/bronze skull, open toothed mouth, FOUR long pointed dorsal tubes, ribbed torso, bronze shin/thigh/shoulder plates, paired pointed wrist/backhand projections, long thin segmented tail curving between legs and to right ending hooked stinger. Match front standing pose with viewer-left hand raised. No extra limbs.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-3f707d3c-a1d2-4c09-9000-a34a1ec00178.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-3f707d3c-a1d2-4c09-9000-a34a1ec00178.png",
+      "numLastImages": 2,
+      "candidate": "v94-scorpion-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    },
+    {
+      "id": "v94-panther",
+      "n": 1,
+      "prompt": "Create ONE standalone enemy sprite PNG for a 2D game. Use the FIRST of the included reference images as the sole anatomy/palette/pose authority; ignore any other reference creatures. This is a faithful fan-game adaptation of that exact licensed NECA Kenner-tribute design, not a new hybrid. Preserve the reference's proportions, silhouette, appendage count, material colors and visible sculpt details. Retain the pictured camera and pose instead of inventing unseen anatomy. Render a crisp high-detail painted game bitmap with a clean silhouette, not a photograph of a toy. Remove mechanical toy-joint seams only, without redesigning biology. Entire creature including all limbs and entire tail safely inside the canvas with at least 6% clear padding on every edge. TRUE TRANSPARENT alpha background, no opaque white/black/gray background, no checkerboard printed into pixels, no floor, no ground shadow, no glow, no scenery, no text, no labels, no inset, no watermark. Exactly one character, one pose, one 1x1 static sprite, no sheet, no collage, no multi-view. TARGET: Ultimate Kenner Tribute Panther Alien, exact NECA sculpt in reference1. Quadruped low prowling body; smooth deep translucent crimson-red elongated head dome; face/rib cage/limb inner tendons pale blue-gray; shoulder loops/outer limbs/haunch armor metallic ochre-copper-gold. Exactly FOUR walking limbs, clawed forehands, bent rear legs. Keep very long looped segmented tail and its broad gold sculpted end. Match reference right-facing three-quarter prowling pose. No separate flying drone, no rock or display base, no generic black Runner substitution.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-f11370e4-f192-4166-ac93-94a02c90c34e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-f11370e4-f192-4166-ac93-94a02c90c34e.png",
+      "numLastImages": 1,
+      "candidate": "v94-panther-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    },
+    {
+      "id": "v94-rhino",
+      "n": 2,
+      "prompt": "Produce ONE isolated full-body enemy character sprite, a single 1x1 static frame PNG for a 2D fan game. Preserve exact visible proportions, face, armor shapes, clothing panels, colors, accessories, hand/foot anatomy and weapon shape of the specified character in the supplied reference. Faithful recreation of that specific design, no redesign or hybridization. Match reference camera and pose. Crisp detailed painted bitmap sprite, clean cut-out silhouette. Entire character and weapon or tail must be contained inside the canvas with at least 6% empty padding on every edge. TRUE TRANSPARENT alpha background, no matte, no printed checkerboard, no ground or ground shadow, no glow, no scenery, no text, no labels, no inset, no other characters, no collage, no sheet, no multiview. Use FIRST reference only (Rhino); ignore the second reference of androids. Exact NECA 2020 V1 Rhino Alien Kenner Tribute: facing LEFT in low hunched quadrupedal stance, very long two arms and two thick hind legs; hugely enlarged helmet-like head and neck/shield, long black nasal horn and smaller upper horn, dark burgundy-black armor/ribs atop translucent orange-red tissues, four short curled dorsal tubes, spine ridge. Preserve its SHORT thick tail ending broad black openwork arrow/spade as pictured, absolutely no generic long curled tail. Match all orange versus dark armored regions and exact silhouette. Remove only toy engineering seam-lines, no biological redesign.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-e3d477ce-b7c0-47c0-a790-2e7779b1aa3e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-e3d477ce-b7c0-47c0-a790-2e7779b1aa3e.png",
+      "numLastImages": 2,
+      "candidate": "v94-rhino-attempt1.png",
+      "status": "accepted-static-adaptation",
+      "canonExact": false
+    },
+    {
+      "id": "v94-synth-trooper",
+      "n": 1,
+      "prompt": "Produce ONE isolated full-body enemy character sprite, a single 1x1 static frame PNG for a 2D fan game. Preserve exact visible proportions, face, armor shapes, clothing panels, colors, accessories, hand/foot anatomy and weapon shape of the specified character in the supplied reference. Faithful recreation of that specific design, no redesign or hybridization. Match reference camera and pose. Crisp detailed painted bitmap sprite, clean cut-out silhouette. Entire character and weapon or tail must be contained inside the canvas with at least 6% empty padding on every edge. TRUE TRANSPARENT alpha background, no matte, no printed checkerboard, no ground or ground shadow, no glow, no scenery, no text, no labels, no inset, no other characters, no collage, no sheet, no multiview. Reference is a four-character group; extract/recreate ONLY the FAR LEFT android, Synth Trooper from Aliens Fireteam Elite. Pale bald synthetic humanoid head, slim dark gray uniform, light gray/white breastplate, abdomen plating and long white shin guards; comparatively lightly armored dark upper arms; dark boots. Weapon held pointing DOWN beside viewer-left leg, slim long black/gray shotgun as visible. Standing front three-quarter pose. Do NOT inherit the second soldier's large white shoulders/forearms or horizontal rifle, do not invent helmet. Fully separate this leftmost character from neighbors; complete only small occluded edges conservatively.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-3568d5e1-c1fc-4af1-b42a-2b79991c4d75.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-3568d5e1-c1fc-4af1-b42a-2b79991c4d75.png",
+      "numLastImages": 1,
+      "candidate": "v94-synth-trooper-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    },
+    {
+      "id": "v94-synth-guard",
+      "n": 1,
+      "prompt": "Produce ONE isolated full-body enemy character sprite, a single 1x1 static frame PNG for a 2D fan game. Preserve exact visible proportions, face, armor shapes, clothing panels, colors, accessories, hand/foot anatomy and weapon shape of the specified character in the supplied reference. Faithful recreation of that specific design, no redesign or hybridization. Match reference camera and pose. Crisp detailed painted bitmap sprite, clean cut-out silhouette. Entire character and weapon or tail must be contained inside the canvas with at least 6% empty padding on every edge. TRUE TRANSPARENT alpha background, no matte, no printed checkerboard, no ground or ground shadow, no glow, no scenery, no text, no labels, no inset, no other characters, no collage, no sheet, no multiview. Reference is a four-character group; recreate ONLY SECOND character FROM LEFT, front center armored bald pale android, Synth Guard from Aliens Fireteam Elite. Broad white/light gray raised shoulder pauldrons, white chest plate with dark central emblem, thick white armored forearms, dark gray utility uniform and pouches, white groin/thigh details and long white shin guards, black boots. Holds the exact large gray/white angular futuristic rifle horizontally across chest in both hands, barrel extending to viewer-left. Preserve visible rifle geometry and armor separation. No helmet. Exclude all three neighbors and their raised weapon.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-359ef68b-26c7-401f-abd5-f84cf7922cdd.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-359ef68b-26c7-401f-abd5-f84cf7922cdd.png",
+      "numLastImages": 1,
+      "candidate": "v94-synth-guard-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    },
+    {
+      "id": "v94-synth-sniper",
+      "n": 1,
+      "prompt": "Produce ONE isolated full-body enemy character sprite, a single 1x1 static frame PNG for a 2D fan game. Preserve exact visible proportions, face, armor shapes, clothing panels, colors, accessories, hand/foot anatomy and weapon shape of the specified character in the supplied reference. Faithful recreation of that specific design, no redesign or hybridization. Match reference camera and pose. Crisp detailed painted bitmap sprite, clean cut-out silhouette. Entire character and weapon or tail must be contained inside the canvas with at least 6% empty padding on every edge. TRUE TRANSPARENT alpha background, no matte, no printed checkerboard, no ground or ground shadow, no glow, no scenery, no text, no labels, no inset, no other characters, no collage, no sheet, no multiview. Reference is a four-character group; recreate ONLY THIRD character FROM LEFT, black-clad bald android with RED EYES, Synth Sniper from Aliens Fireteam Elite. Pale synthetic face, opaque dark tactical uniform and dark broad chest armor with very tall square collar, dark shoulder plates, red/orange small chest accent, belt pouches, ribbed dark kneepads and black boots. Keep reference's raised right arm (viewer-left) and the small light-gray gun held raised beside its head exactly as visible, other arm down at viewer-right. Do not turn it into the adjacent white-armored guards or helmeted Heavy. No invented long sniper rifle hidden from reference, no extra equipment; isolate only this one character.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-fe5217de-7bf9-41a9-9e11-675af05e51fb.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-fe5217de-7bf9-41a9-9e11-675af05e51fb.png",
+      "numLastImages": 1,
+      "candidate": "v94-synth-sniper-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    },
+    {
+      "id": "v94-synth-heavy",
+      "n": 1,
+      "prompt": "Produce ONE isolated full-body enemy character sprite, a single 1x1 static frame PNG for a 2D fan game. Preserve exact visible proportions, face, armor shapes, clothing panels, colors, accessories, hand/foot anatomy and weapon shape of the specified character in the supplied reference. Faithful recreation of that specific design, no redesign or hybridization. Match reference camera and pose. Crisp detailed painted bitmap sprite, clean cut-out silhouette. Entire character and weapon or tail must be contained inside the canvas with at least 6% empty padding on every edge. TRUE TRANSPARENT alpha background, no matte, no printed checkerboard, no ground or ground shadow, no glow, no scenery, no text, no labels, no inset, no other characters, no collage, no sheet, no multiview. Reference is a four-character group; recreate ONLY FAR RIGHT character, Synth Heavy from Aliens Fireteam Elite. Tall stocky android, white segmented helmet with circular ear details and dark visor showing pale face; massive high dark armored neck collar, broad white/light gray breastplate and black tactical lower body, dark broad knee protection and heavy boots. Holds its large futuristic black-gray minigun/heavy cannon diagonally up toward viewer-right with both hands, exactly the barrel geometry, blue-gray inset details and white lower housing shown. Match wide planted stance, whole weapon uncut. No bald head, no added missile blasts/effects. Exclude all other soldiers.",
+      "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-9a721f05-3af7-46c2-a702-bbe3f39302ec.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "sourceFile": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-9a721f05-3af7-46c2-a702-bbe3f39302ec.png",
+      "numLastImages": 1,
+      "candidate": "v94-synth-heavy-attempt1.png",
+      "status": "held-fidelity",
+      "canonExact": false
+    }
+  ]
+}

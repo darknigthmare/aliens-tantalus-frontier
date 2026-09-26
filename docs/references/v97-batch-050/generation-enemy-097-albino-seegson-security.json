@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-097-albino-seegson-security",
+  "name": "Albino Seegson Security",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay human character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows a human station-security guard with white protective open-cut helmet and dark front face shield, light collared short-sleeve work shirt over dark elbow-length undersleeves, utility belt, dark trousers/knee protection, heavy boots and gloves, holding one long pump shotgun at low ready. Preserve these exact distinct uniform and shotgun silhouettes; pale ivory/ash-gray equipment variation only, retain dark belt/boots/visor. No skin/ethnicity change; no additional armor plates or weapons. Use intact first-row ready stance.\nSubject: Albino Seegson Security. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nImportant: for this human subject, the label Albino means pale FIELD EQUIPMENT ONLY, not skin depigmentation or ethnicity. Preserve any exposed skin and hair from the base reference.\nComposition: one full-body human in near-side profile facing RIGHT, slight three-quarter angle only to separate arms. Every boot, helmet and equipment extremity fully within canvas. Fit ENTIRE subject within central 75 percent of width and height, leaving generous genuine transparent margins on all four sides. Grounded neutral ready stance, feet on one invisible ground. One character only, no second pose.\nStyle: detailed hand-painted science-fiction gameplay sprite matching reference, crisp readable silhouette, modeled material texture, controlled highlights and dark recesses, warm ivory/ash-gray textile/equipment materials, realistic proportions.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, lettering, faction insignia, watermark, blood or gore. Preserve exact existing equipment; no added armor, extra arms, invented weapon or mechanical body redesign.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/seegson-security-action-sheet-v56.png",
+    "sha256": "0572100615745fa2701d1d0b5f2bf6a6232e48da9748972b38ee64605b2e88d0",
+    "visualNotes": "Reference sheet shows a human station-security guard with white protective open-cut helmet and dark front face shield, light collared short-sleeve work shirt over dark elbow-length undersleeves, utility belt, dark trousers/knee protection, heavy boots and gloves, holding one long pump shotgun at low ready. Preserve these exact distinct uniform and shotgun silhouettes; pale ivory/ash-gray equipment variation only, retain dark belt/boots/visor. No skin/ethnicity change; no additional armor plates or weapons. Use intact first-row ready stance."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-bd6fd72e-f29f-4b7e-9aa3-8493ef4149ae.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-097-albino-seegson-security.png",
+    "width": 1230,
+    "height": 1278,
+    "sha256": "090bcef178373276296c23216a47c18eb33ffb42e5156c23898d02ed2b7cc248",
+    "bboxAlphaAtLeast16": [
+      282,
+      104,
+      1083,
+      1203
+    ],
+    "alphaMin": 0,
+    "alpha0": 1222297,
+    "totalPixels": 1571940
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing security guard, short-sleeve collared shirt over dark undersleeves, helmet face shield, utility belt, pants and one pump shotgun retained; no added combat armor. Native alpha confirmed. All anatomy and equipment uncropped; requested 10% padding is not met on every vertical margin, documented without pixel editing. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.49,
+      "y": 0.9413145539906104
+    },
+    "sourceFacing": 1
+  }
+}

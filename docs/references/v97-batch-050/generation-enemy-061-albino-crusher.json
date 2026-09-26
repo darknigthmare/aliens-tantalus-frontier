@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-061-albino-crusher",
+  "name": "Albino Crusher",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1 is base anatomy and raster rendering reference only. Create ONE newly authored Albino Crusher in stable quadruped idle stance. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-009-crusher identity lock only. Preserve one huge, low, eyeless quadruped with a broad flared armored head shield, massive shoulders and forequarters, visibly shorter hindquarters, exactly four weight-bearing limbs and one long continuous segmented tail; the head shield, not a horn or carried object, leads every charge. Albino changes newly authored pigment and material response only: warm bone-ivory, pearl gray and pale beige chitin, cool gray recesses, restrained translucent blush at thin joint membranes, a dark mouth cavity and moist highlights; never pure flat white, icy, glowing or an automatic recolor. Preserve the base strict right-facing profile, low support polygon, physical scale, thorax/support-foot root and five-clip siege topology. No Queen or Praetorian crown, small chest arms, humanoid biped, armor plates, eyes, clothing or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nONE whole creature, strict orthographic RIGHT-facing side profile. Show all four weight-bearing limbs with far-side legs subtly staggered. Entire continuous tail trails left, broad headshield on right. Genuine transparent alpha; no floor, shadow or halo. Keep subject small enough for at least 10 percent transparent border on every side including tail tip, headshield and feet. Detailed raster game material style matching reference. No sheet, grid, duplicate, text, logo, watermark, props, gore or cropping. One static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v81/enemy-009-crusher.webp",
+    "sha256": "ccac0fc3ad73aa0c7026ef13acedafe27fba6819d43b3226992406d4787b2e85",
+    "visualNotes": "Reviewed base sheet: low heavy quadruped, broad swept head shield, massive forequarters and smaller rear quarters, one segmented tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-43a48c84-d39c-44d6-8216-78dc31406620.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-061-albino-crusher.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "f34fdc28ebd3f4c4d2674210c71b758c32edd35ae49c68549805238f92e5bcd6",
+    "bboxAlphaAtLeast16": [
+      92,
+      180,
+      1492,
+      834
+    ],
+    "alphaMin": 0,
+    "alpha0": 1136520,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Four weight-bearing limbs, broad leading shield, intact single tail and pale organic material verified. Whole body fits without clipping; lateral padding 2.9-6.0% falls below requested 10%. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.630859375,
+      "y": 0.8134765625
+    },
+    "sourceFacing": 1
+  }
+}

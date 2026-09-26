@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-105-armored-ovomorph",
+  "name": "Armored Ovomorph",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Ovomorph. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Ovomorph as pictured: ONE closed upright organic leathery egg, elongated tapered oval shape with heavy round base and a four-lobed closed seam at the top. No eyes, limbs, face or tail. Preserve egg silhouette and natural textured surface. Add dark organic carapace layering over the egg walls, closed top seam still visible; no metal mechanical container.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-001-ovomorph.webp",
+    "sha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4",
+    "visualNotes": "Viewed base sheet: upright textured oval organic egg in closed/open states; four petal-like lips at top, broad grounded base. Selected one closed intact egg, no appendages."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-81771655-320f-4894-a098-f201a80cbd56.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-105-armored-ovomorph.png",
+    "width": 1145,
+    "height": 1374,
+    "sha256": "a8a7b29439b15c8c702e75893e7a59efbfc6b9e1d70f49ab74ecbe70fdaf0add",
+    "bboxAlphaAtLeast16": [
+      184,
+      103,
+      986,
+      1285
+    ],
+    "alphaMin": 0,
+    "alpha0": 839607,
+    "totalPixels": 1573230
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single closed upright Ovomorph with four-lobed top seam and organic dark overlapping carapace. No limbs/eyes/mechanical casing. Near-symmetrical egg has no meaningful head-facing direction; sourceFacing 1 is runtime convention. No cropping; top/bottom padding below 10%.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 184,
+      "top": 103,
+      "right": 159,
+      "bottom": 89
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.51,
+      "y": 0.9352256186317321
+    },
+    "sourceFacing": 1
+  }
+}

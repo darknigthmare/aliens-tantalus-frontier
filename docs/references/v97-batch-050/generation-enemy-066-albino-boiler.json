@@ -1,0 +1,38 @@
+{
+  "profileId": "enemy-066-albino-boiler",
+  "name": "Albino Boiler",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and detailed raster reference only. Create ONE newly authored Albino Boiler in non-attacking hunched bipedal idle pose. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-014-boiler identity lock only. Preserve one gaunt, blind, hunched BIPEDAL Boiler with a drooping damaged elongated ridged head, short deformed dorsal tubes, a narrow ribbed torso, exactly two long bent skeletal clawed arms, two bowed digitigrade legs, one complete segmented tail and numerous irregular functional cystic boils concentrated over shoulders, upper back, ribcage and hips. Albino changes newly authored pigment and material response only: warm parchment-ivory and pearl-gray exoskeleton, cool taupe recesses, restrained pink-beige translucent membranes and pale yellow-green to weak acid-amber cysts whose functional translucency remains distinct from the body; never pure white, glow, ice, crystal or an automatic recolor. Preserve the blind lopsided shuffle, strict right-facing profile and four-clip explosive contract; attack is chronological body inflation and terminal acid-detonation preparation, while death resolves to a separate motionless body. Do not inherit uncertified numeric sourceScaleByClip values. Not the low quadruped Burster, a healthy Drone, bloated sphere, armored unit or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nThe non-graphic intact creature stands on its two feet, two thin bent arms hang forward; pale muted acid cysts stay closed. ONE whole subject in strict orthographic RIGHT-facing profile; entire segmented tail trailing left. Actual transparent alpha background, no floor/shadow/halo. Entire silhouette fits inside central 75% of canvas with generous clear transparent border. No sheet, grid, repeated poses, text, logos, watermark, objects, gore, liquids, detonation or cropping. Single static idle sprite only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-boiler-action-sheet-v56.png",
+    "sha256": "93390cab29d7bf85ca2a6dfecb6a0c2f72f6a3201750a0684728bc3bc5becbeb",
+    "visualNotes": "Reviewed base sheet: gaunt biped with short tubes, two hanging arms, two legs, one tail, irregular yellow-green cysts."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-73c51004-df89-4ef3-a2ba-ddd8825f3029.png",
+    "path": null,
+    "intendedPath": "assets/openai/sprites/static-enemy-v97/enemy-066-albino-boiler.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "133b42b27994e0c738092a35ac5ad68f32ff4ac8f2c9fad023c3c213713639fa",
+    "bboxAlphaAtLeast16": [
+      94,
+      231,
+      1157,
+      1143
+    ],
+    "alphaMin": 0,
+    "alpha0": 1219282,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "held",
+    "notes": "Intact silhouette and native alpha, but second forearm/hand is not cleanly separable where it overlaps the thigh and knee. Held for anatomy ambiguity; no runtime copy and no retry. Side margins 7.5-7.7%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.6060606060606061,
+      "y": 0.9106858054226475
+    },
+    "sourceFacing": 1
+  }
+}

@@ -3,6 +3,7 @@ import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { validatePlayerIdentityV84 } from './player-onboarding-v84.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { CREW } from './content-core-v50.js';
+import { resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -200,6 +201,8 @@ export function buildMissionPlan({ campaign = {}, world = {}, levelSeed = {}, di
 
 export class GameEngine extends MissionEngine {
   start(options = {}) {
+    const userWeaponV95 = resolveUserEquipmentLoadoutV95(options.userEquipmentV95).weapon;
+    if (userWeaponV95) options = { ...options, weapon: userWeaponV95 };
     // The frozen deployment identity owns J1; a later profile/form edit cannot
     // rename an already running operation. Missing/invalid identities stay legacy.
     const identityResultV84 = validatePlayerIdentityV84(options.playerIdentityV84);
@@ -400,7 +403,7 @@ export class GameEngine extends MissionEngine {
   weaponProfile(player) {
     const profile = super.weaponProfile(player);
     if (profile.mode === 'apc-turret' && !this.vehicle.canFire) return { ...profile, ammo: 0, damage: 0 };
-    if (player?.crewV85?.personalEquipment && profile.mode !== 'apc-turret') {
+    if (player?.crewV85?.personalEquipment && !player.userEquipmentV95?.weaponId && profile.mode !== 'apc-turret') {
       const weapon = player.crewV85.weaponRuntime;
       return weapon ? { ...profile, mode: 'rifle', ammo: player.ammo, damage: weapon.damage,
         interval: 1 / weapon.fireRate, penetration: weapon.penetration, weaponId: weapon.id }
@@ -411,7 +414,7 @@ export class GameEngine extends MissionEngine {
   }
 
   reloadWeaponV77(actor) {
-    return actor?.crewV85?.personalEquipment ? actor.crewV85.weaponRuntime || { id: 'unarmed', family: 'melee' } : super.reloadWeaponV77(actor);
+    return actor?.crewV85?.personalEquipment && !actor.userEquipmentV95?.weaponId ? actor.crewV85.weaponRuntime || { id: 'unarmed', family: 'melee' } : super.reloadWeaponV77(actor);
   }
 
   interact(actor = this.player) {

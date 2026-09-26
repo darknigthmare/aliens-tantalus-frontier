@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-083-albino-dust-runner",
+  "name": "Albino Dust Runner",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomical and art-style reference, NOT a sheet to reproduce. Reference is a multi-pose sheet of a lean low quadrupedal biomechanical runner with elongated smooth dome, short ribbed torso, two long forelimbs and two powerful hindlegs, one slender segmented curling tail. Output one grounded alert stalking pose.\nSubject: Albino Dust Runner. This is an original systemic project adaptation, not an official model or a canonical 1:1 claim.\nVariant lock: PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-031 Dust Runner. Preserve one extremely low and long adult quadrupedal project xenomorph with a smooth eyeless elongated skull, compact barrel ribcage, long forelimbs, powerful digitigrade hind legs, exactly four readable supports, toothed maw and inner jaw, no dorsal tubes, and one complete long segmented blade-tipped tail rooted at the sacrum. Albino changes newly authored organic pigment/material response only: warm pearl and pale parchment shell, cool ash-gray wet recesses, restrained translucent rose-taupe flexion membranes, chalk-ivory teeth and sparse neutral beige-gray dust deposits. Low runner proportions, skull length, limb count, support pattern, absence of dorsal tubes, tail, strict right-facing profile and project scale remain invariant. No bipedal drift, eyes, armor, equipment, wings, rider horns, metal plates, glow, ice, flat white, uniform yellow recolor, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.\nComposition: full body, near-side profile facing RIGHT, slightly three-quarter only enough to separate limbs; all head, feet, claws and complete tail inside canvas, with ten percent clear transparent padding on every side. Grounded neutral ready stance, feet on a common invisible ground. One creature only, no second pose.\nStyle: match reference's detailed dark science-fiction biomechanical digital painted sprite, precise chitin/rib relief, controlled highlights, consistent readable shading; use requested ivory/ash/pink material variation instead of pure white.\nBackground: genuinely transparent PNG alpha, no backdrop, no floor shadow, no scene, no grid, no contact sheet, no UI, text, watermark, blood or gore. Preserve exact base anatomy; no extra limbs or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+    "sha256": "0a327424631fbf0b11f547be8408fdf999e89dd29b9f51be93c71a1240cca5d7",
+    "visualNotes": "Reference is a multi-pose sheet of a lean low quadrupedal biomechanical runner with elongated smooth dome, short ribbed torso, two long forelimbs and two powerful hindlegs, one slender segmented curling tail. Output one grounded alert stalking pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-713c25bf-34ca-4584-8585-d14a7af32929.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-083-albino-dust-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "3bc21a5c342ad75291a1f93c6d0aa1de347e8256b8899a239f8d1ebd2a703a94",
+    "bboxAlphaAtLeast16": [
+      48,
+      203,
+      1498,
+      844
+    ],
+    "alphaMin": 0,
+    "alpha0": 1174895,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing low quadruped, four supports and complete segmented curling tail. Native alpha confirmed. Clear side margins 2.5–3.1% rather than requested 10%; no anatomy cropped. Original project systemic static adaptation, not a canonical 1:1 or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.62,
+      "y": 0.82421875
+    },
+    "sourceFacing": 1
+  }
+}

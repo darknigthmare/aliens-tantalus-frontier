@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-098-albino-colonial-raider",
+  "name": "Albino Colonial Raider",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay human character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows one human male-presenting colonial raider, short brown hair, rugged stubbled face partly covered by compact respirator, patched jacket with short lower coat panels, mixed tactical straps and a small backpack, utility pouches, reinforced knees and boots, one compact improvised-looking rifle held at low ready. Preserve exact anatomy, brown hair, exposed natural skin and respirator, coat panels, and rifle. Only field equipment shifts to weathered ivory/ash-gray; do NOT change ethnicity/skin pigment. Use intact first-row alert stance.\nSubject: Albino Colonial Raider. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nImportant: for this human subject, the label Albino means pale FIELD EQUIPMENT ONLY, not skin depigmentation or ethnicity. Preserve any exposed skin and hair from the base reference.\nComposition: one full-body human in near-side profile facing RIGHT, slight three-quarter angle only to separate arms. Every boot, helmet and equipment extremity fully within canvas. Fit ENTIRE subject within central 75 percent of width and height, leaving generous genuine transparent margins on all four sides. Grounded neutral ready stance, feet on one invisible ground. One character only, no second pose.\nStyle: detailed hand-painted science-fiction gameplay sprite matching reference, crisp readable silhouette, modeled material texture, controlled highlights and dark recesses, warm ivory/ash-gray textile/equipment materials, realistic proportions.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, lettering, faction insignia, watermark, blood or gore. Preserve exact existing equipment; no added armor, extra arms, invented weapon or mechanical body redesign.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/colonial-raider-action-sheet-v56.png",
+    "sha256": "438b0bc32e11984425a179c643645c3df01cb19232afc079735f3a21f0d01754",
+    "visualNotes": "Reference sheet shows one human male-presenting colonial raider, short brown hair, rugged stubbled face partly covered by compact respirator, patched jacket with short lower coat panels, mixed tactical straps and a small backpack, utility pouches, reinforced knees and boots, one compact improvised-looking rifle held at low ready. Preserve exact anatomy, brown hair, exposed natural skin and respirator, coat panels, and rifle. Only field equipment shifts to weathered ivory/ash-gray; do NOT change ethnicity/skin pigment. Use intact first-row alert stance."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-3c741ecc-4997-45d2-97e1-065a32dcaa08.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-098-albino-colonial-raider.png",
+    "width": 1222,
+    "height": 1287,
+    "sha256": "4d64510fd04592af952fdde9fdd95832afb5e10b51b42c9cfbc80dbfb022db94",
+    "bboxAlphaAtLeast16": [
+      350,
+      131,
+      963,
+      1164
+    ],
+    "alphaMin": 0,
+    "alpha0": 1231497,
+    "totalPixels": 1572714
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing raider with short brown hair, natural exposed skin, compact respirator, weathered coat panels, backpack/straps and single rifle retained; pale field equipment only. Native alpha confirmed. All anatomy and equipment uncropped; requested 10% padding is not met on every vertical margin, documented without pixel editing. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.52,
+      "y": 0.9044289044289044
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-101-albino-wild-boar-host",
+  "name": "Albino Wild Boar Host",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Albino Wild Boar Host. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Ordinary wild boar host: compact heavy barrel body, coarse fur/bristles, long pig snout, small visible tusks, small pointed ears, FOUR short hoofed legs and ONE small thin tail. Stay a real boar-shaped animal, no xenomorph head or alien appendages.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/wild-boar-host-action-sheet-v56.png",
+    "sha256": "a79046e9a54e9eabd4fa89593e75e228bd0b03eeda18032dfe7a7c966ca2af0c",
+    "visualNotes": "Viewed base sheet: ordinary dark-furred boar with four hoofed legs, pig snout/small tusks, short ears and thin tail; side/right poses."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-e24b9b0b-9e23-4ea7-ac4a-905e8d24092c.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-101-albino-wild-boar-host.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "93cc54b97eec6f335d61b882031edc9c053783f2fcbe6061823613f460320fc0",
+    "bboxAlphaAtLeast16": [
+      190,
+      141,
+      1411,
+      921
+    ],
+    "alphaMin": 0,
+    "alpha0": 953524,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single ordinary pale wild boar with four hoofed legs, snout/tusk/ears and short tail; anatomy intact and right-facing. Native preview showed a halo, but read-only RGBA inspection confirmed those background pixels have alpha0: (750,75), (120,400), (750,100), (1400,300). RGB color under alpha0 is not rendered in the game. Body sample (500,500) alpha252. No pixel postprocessing; actual side padding slightly below10%, no cropping.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 190,
+      "top": 141,
+      "right": 125,
+      "bottom": 103
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.48,
+      "y": 0.8994140625
+    },
+    "sourceFacing": 1
+  }
+}

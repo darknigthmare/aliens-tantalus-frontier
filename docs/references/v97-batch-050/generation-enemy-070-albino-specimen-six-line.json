@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-070-albino-specimen-six-line",
+  "name": "Albino Specimen Six Line",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and detailed raster reference. Create ONE newly authored Albino Specimen Six Line, athletic lean Warrior-stage biped in alert idle pose. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-018-specimen-six-line identity lock only. Preserve one athletic, lean and intelligent-looking but non-human Warrior-stage biped with a long horizontally elongated ridged eyeless skull, double jaw, narrow ribbed torso, two clawed arms, two digitigrade legs, four slender dorsal tubes and exactly one long complete segmented tail. Lock the Warrior stage across every clip: no Praetorian crest, Queen crown or mixed evolution. Do not reproduce the original individual's Number Six brand or life history on this population-level line. Albino changes newly authored pigment and material response only: warm pearl-ivory and pale bone ridged carapace, cool blue-gray and ash-gray recesses, restrained translucent rose-taupe tissues, dark desaturated cavities, wet highlights and metallic ivory/silver teeth; never flat pure white, glow, ice or an automatic recolor. Preserve strict right-facing orthographic gameplay profile, stable skull/ribcage/pelvis proportions and the queue's biped motions. Do not inherit numeric sourceScaleByClip values or legacy bounds-center-bottom roots: the base has no completed scaleCalibrationReview, no scaleCalibrationEvidence and no entry in the reviewed anchor registry. Do not reproduce the rejected move tail overflow, the active base's short/tight move-tail drift or death cross-cell boundary contact. No smooth Big Chap or Monica dome, royal anatomy, armor, equipment, eyes, extra limb or official Albino Specimen Six model claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.\nClearly show the ridged horizontally elongated skull and four slender dorsal tubes with tips separately readable; no smooth dome and no brand mark. Two clawed hands separately visible and two feet slightly staggered. ONE full creature facing RIGHT in strict orthographic side profile, entire single long tail behind left. True transparent alpha, no floor/shadow/halo. Compose entire silhouette in central 75% canvas with at least 10% transparent border every side. No sheet, grid, repeated poses, text, logos, watermark, props, gore or crop. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png",
+    "sha256": "be902ad624e15ace97da27e4983a2a685891e7e221cf72aef282485f06c7d858",
+    "visualNotes": "Reviewed base sheet: lean ridged-cranium Warrior biped, narrow ribs, dorsal tubes and full single tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-65da1b7f-5ffc-453f-ace5-e2d045253a1f.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-070-albino-specimen-six-line.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "10a9d8197cf2f844d492e2cb90268550795e6009b61e610cca8cfb91a0639994",
+    "bboxAlphaAtLeast16": [
+      89,
+      261,
+      1167,
+      1055
+    ],
+    "alphaMin": 0,
+    "alpha0": 1281354,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Ridged horizontal skull, lean biped, two complete claw hands, two feet, and complete tail verified; no number brand or royal crest. Dorsal tubes overlap in side profile (three tips clearly separable). Real alpha and intact silhouette; side padding about 7%. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5956937799043063,
+      "y": 0.8405103668261563
+    },
+    "sourceFacing": 1
+  }
+}

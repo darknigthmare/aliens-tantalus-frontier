@@ -1,0 +1,77 @@
+{
+  "id": "pose-v96-kenner-queen-facehugger",
+  "status": "accepted-static-adaptation",
+  "version": 96,
+  "date": "2026-09-26",
+  "tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "promptSha256": "8636bcc5a31fc2a4cd7fdb42f03c26905743a0d35b00bfc7e18ccca5798b500a",
+  "output": {
+    "nativePath": "C:/Users/chuck/.codex/generated_images/01a0df72-5de7-7b13-b83e-245a21e05d37/exec-3b001744-1388-47a7-832b-99c473a92756.png",
+    "runtimePath": "/assets/openai/sprites/static-enemy-v96/queen-facehugger-neca.png",
+    "sha256": "62ec9f2b9d46dbd337cfc77de80749940fc27155f46dfe42227a8c44f638c40c",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1911357,
+    "format": "RGBA8 non-interlaced",
+    "copiedByteIdentical": true,
+    "transforms": [],
+    "alphaBoundsThreshold": 16,
+    "alphaBoundsConvention": "[left, top, rightExclusive, bottomExclusive]",
+    "alphaBounds": [31, 26, 1520, 1011],
+    "alpha0": 1198941,
+    "alphaMin": 0,
+    "alphaMax": 254,
+    "alpha255": 0,
+    "meanBodyAlphaAtLeast128": 250.48928677342823,
+    "visibleMargins": { "left": 31, "top": 26, "right": 16, "bottom": 13 },
+    "requestedEightPercentPaddingMet": false
+  },
+  "review": {
+    "primaryPhotographInspectedBeforeGeneration": true,
+    "browser": "Chrome/153.0.8010.54",
+    "method": "Isolated QA browser CDP screenshot; official source image never downloaded as a local asset.",
+    "referenceCapture": "docs/references/v96-xeno-trials/queen-visual-review/neca-51621-browser-reference.png",
+    "compositeCapture": "docs/references/v96-xeno-trials/queen-visual-review/queen-native-white-black-game-scale.png",
+    "compositeBackgrounds": ["white", "black"],
+    "checkedRuntimeWidth": 238,
+    "checksPassed": ["one creature only", "eight articulated legs", "red lateral membranes between legs", "black ridged shell", "single complete red-black segmented tail", "no visible clipping", "clean alpha on white and black", "readable dedicated silhouette at game scale", "no text or toy packaging", "original PNG preserved byte for byte"],
+    "limitations": ["Pose, orientation and fine anatomy remain interpreted.", "Tail tip is more triangular than the photographed small flattened reference tip; not certified 1:1.", "Padding is narrower than requested but all visible appendages are complete; no local cropping or enlargement was applied.", "Maximum alpha is 254, with mean body alpha 250.49; no entirely opaque pixels, but near-opaque body remains clean on both tested backgrounds.", "Elevated three-quarter image has differing projected leg heights; ground pivot uses the lowest foreground leg, not a skeletal rig."],
+    "tests": "node --test tests/enemy-expansion-queen-v96.test.mjs: 3/3 PASS"
+  },
+  "runtimeContract": {
+    "frames": 1,
+    "animation": false,
+    "automaticEncounter": false,
+    "locomotion": "ground",
+    "encounterGroup": "engineered",
+    "behavior": "generic-melee-project-adaptation",
+    "specializedBehaviorStatus": "not-implemented",
+    "canonExact": false,
+    "identityVerified": false
+  },
+  "heldSourcePolicy": "No previously refused or held source was used, renamed or regenerated; this is a distinct primary-reference-reviewed licensed identity.",
+  "referenceRoles": [
+    {
+      "path": "docs/references/v96-xeno-trials/queen-visual-review/neca-51621-browser-reference.png",
+      "role": "primary manufacturer browser screenshot; anatomy of large figure on right only"
+    },
+    {
+      "path": "assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png",
+      "role": "project style only"
+    },
+    {
+      "path": "assets/openai/sprites/static-enemy-v94/kenner-rhino-neca.png",
+      "role": "project style only"
+    },
+    {
+      "path": "assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png",
+      "role": "project style only"
+    }
+  ],
+  "primaryReference": "https://store.necaonline.com/blogs/news/shipping-this-week-aliens-series-10-freddy-s-revenge-1-4-scale-freddy-and-foam-space-jockey",
+  "photograph": "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2016/12/1200x-51621-Facehuggers1-.jpg",
+  "inspection": "Real 1400x1000 browser screenshot inspected, manufacturer source photograph 1200x793; larger right-hand figure only. No official JPEG downloaded or shipped.",
+  "canonExact": false,
+  "prompt": "Use case: stylized-concept; original fan-made static enemy sprite for a 2D Aliens-inspired game.\nGenerate ONE full-body Kenner/NECA Series 10 QUEEN FACEHUGGER, a single creature only, on a genuinely transparent RGBA background.\nReference roles: reference image 1 is a browser screenshot of the manufacturer's NECA 51621 Facehuggers1 product photograph. Use ONLY the LARGE Queen Facehugger on the RIGHT as the anatomical reference. Ignore the smaller companion on the left, white photo background, and browser surround. References 2, 3 and 4 are existing project Gorilla, Rhino and Panther sprites: STYLE, surface detail, sharp edges and lighting references ONLY; do not inherit their bodies, heads, horns, limbs or tails.\nIdentity lock: the licensed Kenner tribute Queen Facehugger shown in reference 1; NOT the ordinary film Facehugger, NOT the Royal Facehugger from Alien 3, NOT an adult Alien Queen or a humanoid Warrior.\nAnatomy observed in the primary photograph: a low squat oval crab-like central body, black ridged shell plates on top, dark scarlet red biomechanical folds under the shell; eight long thin black articulated finger-like legs in four matching pairs, extending laterally in a spider-like supporting stance; leathery muted red/pink membrane panels stretched BETWEEN adjoining leg bases on each side, like the reference, not separate wings; one very long flexible segmented tail starting at the REAR of the central body, red and black vertebral ridges, tapering continuously to the reference's small flattened red pointed tip. No extra tail, no face, no eyes, no tall skull dome, no humanoid hands, no pincers, no stinger bulb.\nComposition: elevated three-quarter side view suitable for a 2D ground enemy, creature front toward SCREEN RIGHT, tail trailing behind to SCREEN LEFT then curling gently upward. Standing on its leg tips, stable grounded resting-ready pose, all eight legs readable with natural depth overlaps. Full tail and all leg tips entirely inside canvas. Body sufficiently large to read at game scale; centered total silhouette occupies about 75-80 percent of canvas width and height, at least 8 percent clean transparent margin on every edge. No crop, no contact with image border.\nStyle: match the supplied project's detailed polished 3D-sculpt/concept-render sprite style, carefully modeled alien anatomy, crisp biomechanical ridges, controlled glossy black carapace, scarlet/red body, restrained pale-red membranes and subtle neutral/cool edge light. Neutral studio illumination with clear form, not neon. It must look like a living fictional creature rendered for the game, not a photograph of plastic action figure joints, packaging or a display base.\nOutput: one isolated complete static creature, transparent background, clean alpha edges, no environmental floor or cast shadow, no scene, no props, no host, no injury, no gore, no text, no label, no logo, no watermark, no extra creatures, no sprite sheet. This is a reference-guided fan adaptation, not an official asset extraction or a certified 1:1 replica."
+}

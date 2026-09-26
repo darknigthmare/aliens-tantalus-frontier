@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-058-albino-runner",
+  "name": "Albino Runner",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1 is the anatomy and raster rendering-style reference. Create ONE newly authored Albino Runner in a neutral alert standing quadrupedal pose matching the first-row proportions. PROJECT_ADAPTATION systemic albino derivative of V66 enemy-006-runner only: preserve the reviewed Alien 3 Dog Alien/Runner identity as one lean eyeless low quadruped with a smooth long backward-swept dome, narrow ribbed trunk, two elongated forelimbs, two powerful digitigrade hind limbs, clawed feet, metallic teeth with telescoping inner jaw, no dorsal tubes and exactly one very long pointed articulated tail. Albino changes newly authored pigment and material response only: warm bone-ivory and pale gray-beige carapace, cool blue-gray recesses, restrained translucent rose-taupe subsurface structures and moist highlights; never pure flat white, glow, ice or an automatic recolor. Preserve strict right-facing orthographic profile, the base per-clip scale calibration, shoulder/pelvis physical root and four-foot idle/move/attack/death topology. No bipedal Warrior, ridged Warrior skull, dorsal pipes, canine fur, visible eyes, royal crown, armor, clothing, weapon or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nONE whole subject only in strict orthographic RIGHT-facing profile, head pointing right, entire single tail curving behind to the left. Both forefeet and both hindfeet are grounded and clearly distinguishable, far limbs subtly staggered. Genuine transparent alpha, no backdrop, floor or shadow ellipse. Entire subject including tail occupies no more than 78 percent of canvas width or height; retain at least 10 percent empty padding on all sides. Crisp detailed game-sprite material realism. No sheet, grid, duplicates, text, logo, watermark, extra objects, gore or crop. One static pose, not animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-006-runner.webp",
+    "sha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3",
+    "visualNotes": "Reviewed base sheet: lean smooth-domed quadruped, narrow ribcage, no dorsal tubes, single curled pointed tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-6c32cbaa-18de-49c7-9fad-b812396fdf68.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-058-albino-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "4f4acbfc53b41843c4a394ada331a391e6142402c28ce8bec18bd08741ea8bfa",
+    "bboxAlphaAtLeast16": [
+      144,
+      210,
+      1347,
+      833
+    ],
+    "alphaMin": 0,
+    "alpha0": 1284915,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Four grounded limbs, smooth eyeless dome and complete single tail verified. Ivory material retains rib relief. Audit alpha bounds are tight; apparent RGB halo in preview has alpha 0 at sampled surrounding points. Left padding 9.4%, all anatomy intact. Static pose only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5833333333333334,
+      "y": 0.8125
+    },
+    "sourceFacing": 1
+  }
+}

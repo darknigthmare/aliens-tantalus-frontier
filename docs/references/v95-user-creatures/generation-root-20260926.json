@@ -1,0 +1,23 @@
+[
+  {
+    "number": 50,
+    "file": "Xeno-Brute.jpg",
+    "notes": "Keep the bulky bronze armored biped, large elongated head, dorsal tubes, two arms, two feet and raised hooked tail intact, facing left.",
+    "prompt": "Use case: background-extraction. Asset type: one static game PNG. Input image 1 is the sole edit target; ignore all conversation images. Keep the bulky bronze armored biped, large elongated head, dorsal tubes, two arms, two feet and raised hooked tail intact, facing left. Preserve source pose, proportions, distinctive anatomy, palette and drawing texture. Remove the entire backdrop and floor shadow. Reframe the complete creature smaller centered with 10 percent transparent padding on every side; no clipped appendages. Output genuine transparent alpha, no background, no floor, no checkerboard, no text, no border, no extra views or other subjects. Not a sprite sheet.",
+    "status": "accepted",
+    "path": "/assets/openai/sprites/static-enemy-v95/xeno-brute.png",
+    "sha256": "c093b0f9bf4ab5b6fa79de9f5787d2552957d1959670c639054c1c01875fca13",
+    "nativeOutput": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-429a640c-cda4-48c9-af4e-2e7bd61c0ea7.png",
+    "review": "Full bronze biped preserved; margin 4.37% minimum, not clipped."
+  },
+  {
+    "number": 51,
+    "file": "Xeno-Carrier--Empty.jpg",
+    "notes": "Keep the black biomechanical figure with white elongated dome facing left, long articulated dorsal branches, two arms and legs and segmented tail. No passengers on branches. If the far-right branch is cut by the source edge, complete only its minimal tip, no other redesign.",
+    "prompt": "Use case: background-extraction. Asset type: one static game PNG. Input image 1 is the sole edit target; ignore all conversation images. Keep the black biomechanical figure with white elongated dome facing left, long articulated dorsal branches, two arms and legs and segmented tail. No passengers on branches. If the far-right branch is cut by the source edge, complete only its minimal tip, no other redesign. Preserve source pose, proportions, distinctive anatomy, palette and drawing texture. Remove the entire backdrop and floor shadow. Reframe the complete creature smaller centered with 10 percent transparent padding on every side; no clipped appendages. Output genuine transparent alpha, no background, no floor, no checkerboard, no text, no border, no extra views or other subjects. Not a sprite sheet.",
+    "status": "moderation_blocked",
+    "requestId": "692b8a5b-9e92-4dcf-b5f0-e698e012dcfc",
+    "stage": "output",
+    "retry": false
+  }
+]

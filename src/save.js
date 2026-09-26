@@ -41,11 +41,18 @@ import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle
 import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV78, assertSaveProfileIdV78, inspectSaveSlotV78, parseImportedSaveV78 } from './save-profile-v78.js';
 import { sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { createBioforgeV80, sanitizeBioforgeV80 } from './bioforge-session-v80.js';
+import { sanitizeEnemyDiscoveryV88 } from './enemy-discovery-v88.js';
+import { sanitizeUserCasteCampaignV88 } from './enemy-user-campaign-v88.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { createPlayerOnboardingV84, normalizePlayerOnboardingV84, validatePlayerIdentityV84 } from './player-onboarding-v84.js';
+import { createPlayerOpeningV88, normalizePlayerOpeningV88, advancePlayerOpeningV88, getOpeningDeploymentSupportV88 } from './player-opening-v88.js';
+import { createOpeningExerciseV89, normalizeOpeningExerciseV89 } from './opening-exercise-v89.js';
+import { createPortMeridienV90, normalizePortMeridienV90 } from './port-meridien-v90.js';
 import { createRecruitmentV85, sanitizeRecruitmentV85, sanitizeRecruitProfileV85, generateNextRecruitmentPoolV85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-state-v87.js';
+import { normalizeUserEquipmentV95, resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
+import { createXenoTrialsProgressV96, normalizeXenoTrialsProgressV96 } from './xeno-trials-progress-v96.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -203,6 +210,9 @@ export function createDefaultSave(profile = 1) {
     levelSeedId: 'level-001',
     difficulty: 'standard',
     onboardingV84: null,
+    openingV88: null,
+    openingExerciseV89: null,
+    portMeridienV90: null,
     needsPlayerCreationV84: true,
     presentation: { titleScene: sanitizeTitleScenePresentationV79() },
     player: {
@@ -214,6 +224,7 @@ export function createDefaultSave(profile = 1) {
       weaponIds: ['weapon-001-m41a-pulse-rifle', 'weapon-003-m4a3-service-pistol'],
       equipmentIds: ['equipment-001-motion-tracker', 'equipment-006-medkit'],
       costumeId: 'costume-001',
+      userEquipmentV95: normalizeUserEquipmentV95(),
       ammo: { primary: 420, secondary: 96, grenades: 4 }
     },
     crew: CREW.map((member) => ({
@@ -230,6 +241,7 @@ export function createDefaultSave(profile = 1) {
     hub: {
       deck: 0,
       positionX: 180,
+      positionY: null,
       facing: 1,
       roomId: 'bridge',
       visited: ['bridge'],
@@ -266,6 +278,8 @@ export function createDefaultSave(profile = 1) {
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
+    xenoTrialsV96: createXenoTrialsProgressV96(),
+    enemyDiscoveryV88: sanitizeEnemyDiscoveryV88(),
     shipAnimalsV1: migrateShipAnimalStateV87(),
     shipPortV1: createShipPortStateV87(),
     editor: { projects: [], activeProjectId: null },
@@ -1288,6 +1302,8 @@ export function getOperationBrief(save, campaign, world) {
   let fuel = 2 + Math.ceil(world.danger / 3);
   if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) fuel = Math.max(1, fuel - 1);
   fuel = Math.max(1, fuel - annexSupportV71.powerLoaderFuelReduction);
+  const openingSupportV88 = getOpeningDeploymentSupportV88(save.openingV88);
+  if (openingSupportV88.energy) fuel = Math.max(1, fuel - 2);
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
   const reward = { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
@@ -1303,12 +1319,16 @@ export function getOperationBrief(save, campaign, world) {
     crewReady,
     ready: save.galaxy.unlockedWorldIds.includes(world.id) && crewReady && canAfford(save, cost),
     worldUnlocked: save.galaxy.unlockedWorldIds.includes(world.id),
-    annexSupportV71
+    annexSupportV71,
+    openingSupportV88
   };
 }
 
 export function beginOperation(save, campaign, world) {
+  if (save.portMeridienV90 && save.openingV88?.phase === 'ready' && normalizePortMeridienV90(save.portMeridienV90)?.phase !== 'complete') throw new Error('Terminez le débarquement au quai des vivants avant la première opération.');
   if (save.onboardingV84 && save.onboardingV84.phase !== 'complete') throw new Error('Terminez le réveil et le briefing dans le Tantalus avant un déploiement.');
+  const openingV88 = normalizePlayerOpeningV88(save.openingV88);
+  if (openingV88 && !['ready', 'deployed', 'complete'].includes(openingV88.phase)) throw new Error('Terminez votre prise de poste et chargez le fret de secours au hangar avant le départ.');
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation?.campaignId === campaign.id) {
     const operation = strategy.currentOperation;
@@ -1320,6 +1340,9 @@ export function beginOperation(save, campaign, world) {
     }
     operation.vehicleId = resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
     operation.costumeId ??= save.player.costumeId || null;
+    // Legacy active operations retain their original standard dotation. A new
+    // selection never retroactively replaces a frozen deployment manifest.
+    operation.userEquipmentV95 = normalizeUserEquipmentV95(operation.userEquipmentV95);
     operation.neuroProfileId ??= strategy.selectedNeuroProfileId || null;
     operation.apexDossierId ??= strategy.selectedApexDossierId || null;
     operation.difficulty ??= save.settings?.difficulty || save.difficulty || 'standard';
@@ -1358,6 +1381,7 @@ export function beginOperation(save, campaign, world) {
     equipmentIds: [...save.player.equipmentIds],
     vehicleId: strategy.selectedVehicleId,
     costumeId: save.player.costumeId || null,
+    userEquipmentV95: normalizeUserEquipmentV95(save.player.userEquipmentV95),
     neuroProfileId: strategy.selectedNeuroProfileId || null,
     apexDossierId: strategy.selectedApexDossierId || null,
     difficulty: save.settings?.difficulty || save.difficulty || 'standard',
@@ -1365,10 +1389,15 @@ export function beginOperation(save, campaign, world) {
     insertionState: null,
     ...(campaign.specialOperationId ? { specialOperationId: campaign.specialOperationId } : {}),
     flags: {
+      ...(brief.openingSupportV88.medical ? { 'v88-opening-medical': true } : {}),
+      ...(brief.openingSupportV88.energy ? { 'v88-opening-energy': true } : {}),
       ...(brief.annexSupportV71.provingGround ? { 'v71-proving-ground-support': true } : {}),
       ...(brief.annexSupportV71.durandal ? { 'v71-durandal-ew-support': true } : {})
     }
   };
+  if (openingV88?.phase === 'ready') {
+    save.openingV88 = advancePlayerOpeningV88(openingV88, 'deploy', { onboardingComplete: true, operationId: strategy.currentOperation.id }).state;
+  }
   consumeHubAnnexDeploymentSupportV71(save);
   strategy.plannedCampaignId = campaign.id;
   addStrategyLog(save, { type: 'operation', title: campaign.name, risk: brief.risk, incident: false, result: 'Deploiement lance vers ' + world.name + '.' });
@@ -1406,6 +1435,7 @@ const sanitizeNativeOperationResumeState = (candidate, { operation = null } = {}
   const sanitized = sanitizeNativeResumeValue(candidate);
   if (!isRecord(sanitized) || Number(sanitized.schema) !== 1 || !isRecord(sanitized.identity)) return null;
   sanitized.schema = 1;
+  if (Object.hasOwn(candidate, 'userCasteCampaignV88')) sanitized.userCasteCampaignV88 = sanitizeUserCasteCampaignV88(candidate.userCasteCampaignV88);
   const requestedSpecialOperation = isRecord(candidate.specialOperation) ? candidate.specialOperation : null;
   const requestsAlienSurvival = Boolean(requestedSpecialOperation
     && (requestedSpecialOperation.operationId === ALIEN_SURVIVAL_OPERATION_ID_V70
@@ -1564,6 +1594,7 @@ export function resolveOperationDeployment(save, {
   const equipment = equipmentIds.map((id) => equipmentCatalog.find((entry) => entry.id === id)).filter(Boolean);
   const vehicle = vehicleId ? vehicleCatalog.find((entry) => entry.id === vehicleId) || null : null;
   const costume = costumeId ? costumeCatalog.find((entry) => entry.id === costumeId) || null : null;
+  const userEquipmentV95 = resolveUserEquipmentLoadoutV95(operation.userEquipmentV95);
   const neuroProfile = neuroProfileId ? neuroProfileCatalog.find((entry) => entry.id === neuroProfileId) || null : null;
   const apexDossier = apexDossierId ? apexDossierCatalog.find((entry) => entry.id === apexDossierId) || null : null;
   return {
@@ -1579,7 +1610,8 @@ export function resolveOperationDeployment(save, {
     resumeState: operation.resumeState ? structuredClone(operation.resumeState) : null,
     crew,
     weapons,
-    weapon: weapons.at(-1) || null,
+    weapon: userEquipmentV95.weapon || weapons.at(-1) || null,
+    userEquipmentV95: userEquipmentV95.state,
     equipment,
     vehicle,
     costume,
@@ -1779,6 +1811,10 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     completedHour: save.clock.hour
   };
   recordCrewMissionV85(save, operation, resolvedSuccess, resolvedReason);
+  if (save.openingV88?.phase === 'deployed') {
+    const opening = advancePlayerOpeningV88(save.openingV88, 'resolve', { onboardingComplete: true, operationId: operation.id, success: resolvedSuccess });
+    if (opening.ok) save.openingV88 = opening.state;
+  }
   strategy.currentOperation = null;
   addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !resolvedSuccess, result });
   return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation };
@@ -1811,6 +1847,12 @@ export function migrateSave(input, profile = 1) {
   const migrated = structuredClone(base);
   const source = structuredClone(input);
   migrated.onboardingV84 = normalizePlayerOnboardingV84(source.onboardingV84);
+  migrated.openingV88 = migrated.onboardingV84 ? normalizePlayerOpeningV88(source.openingV88) : null;
+  migrated.openingExerciseV89 = migrated.openingV88 ? normalizeOpeningExerciseV89(source.openingExerciseV89) : null;
+  migrated.portMeridienV90 = migrated.openingV88 ? normalizePortMeridienV90(source.portMeridienV90) : null;
+  // Eligible V88/V89 crews which have not deployed can discover the new arrival.
+  // Explicit null remains an opt-out; active and completed operations are never rewound.
+  if (source.portMeridienV90 === undefined && migrated.openingV88 && !['deployed', 'complete'].includes(migrated.openingV88.phase)) migrated.portMeridienV90 = createPortMeridienV90();
   migrated.needsPlayerCreationV84 = source.needsPlayerCreationV84 === true && !migrated.onboardingV84;
 
   const player = isRecord(source.player) ? source.player : {};
@@ -1825,6 +1867,7 @@ export function migrateSave(input, profile = 1) {
   for (const key of ['health', 'armor', 'stress']) migrated.player[key] = numberBetween(player[key], base.player[key], 0, 100);
   migrated.player.weaponIds = stringList(player.weaponIds, base.player.weaponIds);
   migrated.player.equipmentIds = stringList(player.equipmentIds, base.player.equipmentIds);
+  migrated.player.userEquipmentV95 = normalizeUserEquipmentV95(player.userEquipmentV95);
   migrated.player.ammo = mergeNumbers(base.player.ammo, player.ammo, 0, 999999);
 
   const hub = isRecord(source.hub) ? source.hub : {};
@@ -1835,6 +1878,7 @@ export function migrateSave(input, profile = 1) {
   const v50HubPosition = sourceSchema === 48 ? legacyHubPosition * 2
     : sourceSchema === 49 ? legacyHubPosition * (4 / 3) : legacyHubPosition;
   migrated.hub.positionX = numberBetween(v50HubPosition, base.hub.positionX, 40, 5030);
+  migrated.hub.positionY = Number.isFinite(hub.positionY) && hub.positionY >= 0 && hub.positionY <= 532 ? hub.positionY : null;
   migrated.hub.facing = normalizePlayerFacingV81(hub.facing);
   migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
   migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
@@ -1954,6 +1998,7 @@ export function migrateSave(input, profile = 1) {
         VEHICLES
       ),
       costumeId: typeof candidate.costumeId === 'string' ? candidate.costumeId.slice(0, 120) : null,
+      userEquipmentV95: normalizeUserEquipmentV95(candidate.userEquipmentV95),
       neuroProfileId: typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
       apexDossierId: typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
       ...(typeof candidate.specialOperationId === 'string' && candidate.specialOperationId.trim()
@@ -2006,6 +2051,8 @@ export function migrateSave(input, profile = 1) {
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
+  migrated.xenoTrialsV96 = normalizeXenoTrialsProgressV96(source.xenoTrialsV96);
+  migrated.enemyDiscoveryV88 = sanitizeEnemyDiscoveryV88(source.enemyDiscoveryV88);
   migrated.shipAnimalsV1 = migrateShipAnimalStateV87(source.shipAnimalsV1);
   migrated.shipPortV1 = migrateShipPortStateV87(source.shipPortV1);
   if (migrated.strategy.lastOperation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
@@ -2163,6 +2210,9 @@ export class SaveSystem {
     if (!checked.ok) throw new Error(Object.values(checked.errors).join(' '));
     const candidate = createDefaultSave(target);
     candidate.onboardingV84 = createPlayerOnboardingV84(checked.identity);
+    candidate.openingV88 = createPlayerOpeningV88();
+    candidate.openingExerciseV89 = createOpeningExerciseV89();
+    candidate.portMeridienV90 = createPortMeridienV90();
     candidate.needsPlayerCreationV84 = false;
     Object.assign(candidate.player, { name: checked.identity.name, callsign: checked.identity.callsign, operatorId: checked.identity.id, classId: 'marine' });
     Object.assign(candidate.hub, { deck: 0, roomId: 'cryo-bay', positionX: 4560, facing: -1, visited: ['cryo-bay'] });

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-084-albino-salvage-hive-brute",
+  "name": "Albino Salvage Hive Brute",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomical and art-style reference, NOT a sheet to reproduce. Reference is a multi-pose sheet of a very bulky low hunched biped with massive shoulders and forearms that can brace on its knuckles; low protected elongated eyeless skull, two bent legs and complete segmented tail. Sparse rust-brown salvage at upper back/outer shoulder/flank with dead cable loops under amber hive resin. Preserve this exact anatomy and sparse debris, output one calm braced ready pose.\nSubject: Albino Salvage Hive Brute. Original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-032 Salvage Hive Brute. Preserve one very stocky low hive xenomorph with huge shoulders, massive forearms and knuckles, a protected low elongated eyeless organic head, thick ribbed torso, broad pelvis, powerful digitigrade legs, exactly two arms and two legs, and one complete segmented tail visibly rooted at the sacrum. It remains a low biped that may brace on one or both knuckles, never a permanent quadruped. Preserve the same few asymmetrical oxidized salvage pieces and dead charcoal cable loops permanently trapped under matte amber hive resin on upper back, outer shoulder and flank; they remain passive, unpowered and identical across poses and never replace anatomy. Albino changes newly authored organic pigment/material response only: warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe flexion membranes and chalk-ivory teeth. Amber resin, sparse rust-brown salvage and dead charcoal cables retain their non-organic material identity. Heavy mass, skull shield, limb count, salvage placement, cable loops, tail root, scale and right-facing profile remain invariant. No clean or powered hardware, articulated armor, backpack, weapon, exoskeleton, mech, cyborg, permanent quadruped, glow, ice, flat white, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.\nComposition: full body, side profile facing RIGHT, slightly three-quarter only enough to separate limbs; complete head, feet, claws and tail inside canvas. Fit ENTIRE silhouette within central 80 percent of width AND height, leaving ten percent clear transparent padding on all four sides. Grounded neutral ready stance, feet on a common invisible ground. One creature only, no second pose.\nStyle: match reference's detailed dark science-fiction biomechanical digital painted sprite, precise chitin/rib relief, controlled highlights, readable shading. Ivory/ash/pink material variation, not flat white.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve exact base anatomy; no extra limbs or new equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png",
+    "sha256": "0446bd58418c9a4ab6ac7d4061cbb82484fbc1c37960a5eef22f7ecf89dc3bfe",
+    "visualNotes": "Reference is a multi-pose sheet of a very bulky low hunched biped with massive shoulders and forearms that can brace on its knuckles; low protected elongated eyeless skull, two bent legs and complete segmented tail. Sparse rust-brown salvage at upper back/outer shoulder/flank with dead cable loops under amber hive resin. Preserve this exact anatomy and sparse debris, output one calm braced ready pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-4d92156f-893f-43f1-aba9-5d0367b273e5.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-084-albino-salvage-hive-brute.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "bd6a869c017617d0b569c12b97500697a6155197839ec28493ed881c910584ff",
+    "bboxAlphaAtLeast16": [
+      94,
+      134,
+      1440,
+      892
+    ],
+    "alphaMin": 0,
+    "alpha0": 1092580,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing heavy knuckle-braced biped, two arms and two legs; sparse oxidized debris with amber resin and dead cables retained, complete tail. Organic pallor separate from passive salvage materials. Native transparent alpha confirmed. Requested 10% margins not met on every side, but entire anatomy has clear uncropped margins. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.65,
+      "y": 0.87109375
+    },
+    "sourceFacing": 1
+  }
+}

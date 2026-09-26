@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-078-albino-foundry-crusher",
+  "name": "Albino Foundry Crusher",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and detailed raster style reference. Create ONE newly authored Albino Foundry Crusher in stable low quadrupedal idle. PROJECT_ADAPTATION systemic albino derivative of reviewed enemy-026-foundry-crusher, bounded by the broad anatomy visible in licensed Hiya Aliens: Colonial Marines Crusher product photography. Preserve one low, heavy four-legged siege Xenomorph with a large broad backward-swept head shield, small jaw beneath it, massively developed front limbs, lower smaller hindquarters and exactly one heavy articulated spear tail. The Albino modifier changes newly authored organic pigment/material response only: warm pearl, pale parchment and cool ash-gray chitin with restrained translucent rose-taupe recesses; shield edges remain chalk-ivory/aged bone while localized soot, brown heat tarnish and non-glowing mineral abrasions carry the project Foundry history. Never copy licensed or predecessor pixels and never reproduce red photo lighting or watermark. Strict RIGHT-facing orthographic gameplay profile across idle, move, discrete crest-bash attack, terminal death and a separate grounded acceleration/braking charge. No upright Warrior/Queen anatomy, horns, lava, machinery, copied pixels, official Albino model, canonExact or 1:1 claim.\nClearly show FOUR grounded limbs: large front pair and shorter hind pair, far feet subtly staggered. Broad swept head SHIELD, not a horn; small jaw beneath. Pale ivory shell with localized matte soot and brown heat-tarnish, no glowing effects. Complete single articulated spear tail extends behind left. ONE whole creature, strict orthographic RIGHT-facing profile. True transparent alpha with no floor/shadow/halo. Compose smaller within central 75% canvas, all silhouette at least 10% from edges. No sheet, grid, duplicates, text, logos, watermark, equipment, gore or crop. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+    "sha256": "3ada141e2d40c9354637aca6c8008afc069a59c3fa10396de1f99a9adb2db77f",
+    "visualNotes": "Reviewed base sheet: low quadrupedal siege creature with broad swept head shield, large front limbs, smaller rear limbs and full heavy pointed tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-af4e4961-e46c-48f0-86c3-8f6f617ece41.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-078-albino-foundry-crusher.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "b4c1e7987fc263fda231fe402ad4d950a04b7fb92cc0a075808497462b2a9fbf",
+    "bboxAlphaAtLeast16": [
+      85,
+      398,
+      1172,
+      903
+    ],
+    "alphaMin": 0,
+    "alpha0": 1313849,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Low quadruped, leading shield rather than horn, four limbs (front feet partially overlap), one full tail, ivory/ash organic shell with localized matte soot verified. Native alpha and no crop; lateral padding 6.5-6.8%. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.60207336523126,
+      "y": 0.7192982456140351
+    },
+    "sourceFacing": 1
+  }
+}

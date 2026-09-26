@@ -55,7 +55,8 @@ function harness() {
       destroy() { calls.push(['destroy-dialogue']); this.openState = false; }
     },
     hubEngine: {
-      state: { deck: 0, visited: ['cryo-bay'] }, player: { x: 4500, facing: -1 },
+      state: { deck: 0, visited: ['cryo-bay'] }, player: { x: 4500, y: 420, facing: -1 },
+      currentAnnexV71: () => null,
       currentRoom: () => ({ id: 'cryo-bay' }), stop: (...args) => calls.push(['hub-stop', ...args]),
       resume: () => calls.push(['hub-resume']), setOnboardingV84: () => calls.push(['set-onboarding']),
       onboardingContactV84: () => ({ phase: 'medical', crewId: 'crew-10-david-8r' }),
@@ -142,6 +143,21 @@ test('application persistHub keeps both in-memory hub and bytes unchanged on wri
   assert.throws(() => context.persistHub({ positionX: 777 }), (error) => error.code === 'SAVE_WRITE_FAILED');
   assert.equal(saveSystem.data, root);
   assert.equal(JSON.stringify(root), before);
+  assert.equal(backend.values.get(SAVE_PREFIX + '1'), bytes);
+});
+
+test('V88 hub height commits with its horizontal pose and startup callbacks never overwrite it', () => {
+  const { context, backend, saveSystem } = harness();
+  context.persistHub({ positionX: 777 });
+  assert.equal(saveSystem.data.hub.positionX, 777);
+  assert.equal(saveSystem.data.hub.positionY, 420);
+  const bytes = backend.values.get(SAVE_PREFIX + '1');
+  assert.equal(JSON.parse(bytes).hub.positionY, 420);
+  context.hubEngine.restoringHubPoseV88 = true;
+  context.hubEngine.player.y = 532;
+  context.persistHub({ positionX: 888 });
+  assert.equal(saveSystem.data.hub.positionX, 777);
+  assert.equal(saveSystem.data.hub.positionY, 420);
   assert.equal(backend.values.get(SAVE_PREFIX + '1'), bytes);
 });
 

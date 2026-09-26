@@ -12,6 +12,7 @@ import { captureGameplaySupportV72, restoreGameplaySupportV72 } from './gameplay
 import { captureTacticalReloadV77, restoreTacticalReloadV77, cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
 import { withPlaceablesRuntimeV86 } from './placeables-runtime-v86.js';
+import { withUserCasteCampaignV88 } from './enemy-user-campaign-runtime-v88.js';
 
 export * from './game-production-core.js';
 
@@ -22,6 +23,7 @@ const V68ProductionEngine = withNarrativeCollectablesRuntimeV68(V67ProductionEng
 const V69ProductionEngine = withAlphaBravoCoopRuntimeV69(V68ProductionEngine);
 const V70ProductionEngine = withAlienSurvivalRuntimeV70(V69ProductionEngine);
 const V86ProductionEngine = withPlaceablesRuntimeV86(V70ProductionEngine);
+const V88ProductionEngine = withUserCasteCampaignV88(V86ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -34,7 +36,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V86ProductionEngine {
+export class GameEngine extends V88ProductionEngine {
   start(options = {}) {
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });
@@ -61,7 +63,7 @@ export class GameEngine extends V86ProductionEngine {
   }
 
   canPerformGameplayAction(actor = this.player) {
-    return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65
+    return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
       && this.mission?.state === 'active' && actor?.alive
       && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor));
   }

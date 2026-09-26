@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-054-albino-facehugger",
+  "name": "Albino Facehugger",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and rendering style reference. Create ONE newly authored Albino Facehugger in a low neutral idle stance. Exact systemic derivative of the validated V65 Facehugger: same low flattened central body, eight long articulated finger-like walking limbs in four bilateral pairs, paired ventral lobes/proboscis structure and one long flexible trailing tail; same realistic dimensions, motion, attack arc, scale, ground pivot and strict right-facing orientation. Albino changes only authored pigment/material response: pale warm ivory-beige flesh, translucent blush-pink joints and ventral tissue, faint cool gray folds and restrained wet highlights. Preserve readable segmentation and depth; never bleach to flat white or apply an automatic recolor. No extra limbs, new armor, eyes, mandibles, caste or official albino-model claim. All future pixels are original project adaptation art. All eight limbs must be anatomically grounded, with far-side pair placement slightly staggered for clarity.\nONE isolated whole subject, orthographic right-facing side profile, tail trailing left fully visible. Genuine transparent alpha background with no floor or shadow ellipse. Centered with at least 10% clear padding around entire silhouette including tail. Match reference detailed raster sprite material realism. No sprite sheet, grid, repeated subjects, text, logo, watermark, props, gore, or cropping. This is one static pose, not animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp",
+    "sha256": "6c945329f8e03e3473bba35367a99773cc8fecb115df508bfc06ebe4a67eab27",
+    "visualNotes": "Reviewed sheet: low tan articulated eight-limbed body, single tail trailing left; near-side fingerlike limbs prominent."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-5e0b88a7-e89e-4d6d-b124-d6792e775888.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-054-albino-facehugger.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "cb77b001d79d1b5dc873598d946b501fd29b0dad7bbf57d71a6c9070b14b5e90",
+    "bboxAlphaAtLeast16": [
+      135,
+      335,
+      1655,
+      679
+    ],
+    "alphaMin": 0,
+    "alpha0": 1348817,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One intact right-directed facehugger with complete single tail, pale warm segmented tissue and no added eyes or armor. Alpha and full silhouette verified; side padding is 6.7-7.6%, below requested 10%, with no clipping."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.6933483652762119,
+      "y": 0.7643742953776775
+    },
+    "sourceFacing": 1
+  }
+}

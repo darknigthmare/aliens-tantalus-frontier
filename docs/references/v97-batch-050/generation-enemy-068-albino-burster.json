@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-068-albino-burster",
+  "name": "Albino Burster",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and detailed raster style reference. Create ONE newly authored Albino Burster in neutral non-attacking quadrupedal idle. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-016-burster identity lock only. Preserve one eyeless lean low quadrupedal Fireteam Elite Burster with a short cranial plate, large biological acid-blister membranes clustered over the cranium and neck and repeated in restrained groups on the forelimbs and thighs, one narrow ribbed torso, exactly two forelegs and two digitigrade hind legs, no tall dorsal tubes, one complete long segmented tail and one broad flattened tail blade. Preserve the double jaw and the same four-limb Burster anatomy through idle, locomotion, inflation/detonation preparation and terminal collapse. Albino changes newly authored pigment and material response only: warm pearl-ivory and pale gray-beige chitin, cool gray recesses, translucent blush-taupe thin tissues and muted yellow-green acid membranes with readable internal fluid; never pure flat white, whole-body fluorescence, neon glow, ice, a filtered base sheet or automatic recolor. The attack prepares terminal acid detonation but does not embed the final damage splash, which remains a separate runtime effect. Preserve strict right-facing orthographic gameplay profile and stable ribcage/pelvis proportions. Do not inherit numeric sourceScaleByClip values: the base metadata has no completed scaleCalibrationReview or scaleCalibrationEvidence. No Prowler shield, Boiler bipedal hunch, Crusher mass, Warrior tubes, royal crown, eyes, armor, bomb, equipment, extra limb, missing tail or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nShow exactly four weight-bearing legs clearly with far-side feet staggered. Single tail with broad flat blade fully in frame on left, head on right, no explosion. ONE whole creature in orthographic RIGHT-facing side profile. True transparent alpha, no floor, shadow or halo. Entire silhouette inside central 75 percent of canvas with at least 10 percent empty transparent border each edge. No sheet, grid, repeated subjects, text, logos, watermark, gore, fluids, explosions or cropping. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp",
+    "sha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df",
+    "visualNotes": "Reviewed base sheet: low quadruped with short acid-blistered cranium, slim ribcage, four legs and long segmented blade tail; no dorsal tubes."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-594086b1-403f-4980-b506-b30653480aa6.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-068-albino-burster.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "1eebd34c5ec6062ed6de7b9a4698bc4012c9075416fd5012bd0ac90c5152957f",
+    "bboxAlphaAtLeast16": [
+      122,
+      123,
+      1436,
+      906
+    ],
+    "alphaMin": 0,
+    "alpha0": 1210240,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Four legs, short cranium with muted closed acid membranes, no tall tubes, and one complete broad blade tail verified. Pale material is readable; tail blade also contains pale membrane detail. Native alpha and full silhouette verified. Side padding 6.5-7.9%. Static pose only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5338541666666666,
+      "y": 0.8837890625
+    },
+    "sourceFacing": 1
+  }
+}

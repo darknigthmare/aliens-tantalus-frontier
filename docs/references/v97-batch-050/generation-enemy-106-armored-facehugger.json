@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-106-armored-facehugger",
+  "name": "Armored Facehugger",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Facehugger. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Facehugger as pictured: low palm-shaped ribbed central body, exactly EIGHT elongated jointed finger-like legs (four left, four right), paired lateral breathing sacs, ONE long thin segmented whip tail trailing to LEFT. No separate animal head, no eyes, no pincers or insect antennae. Its leading legs point RIGHT. Add restrained dark natural carapace patches over central body and leg joints, without losing the fleshy Facehugger morphology or flexibility.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp",
+    "sha256": "6c945329f8e03e3473bba35367a99773cc8fecb115df508bfc06ebe4a67eab27",
+    "visualNotes": "Viewed base sheet: small tan palm-like ribbed body, eight finger-like legs and one long thin tail; no eyes or distinct head. Preserve standard Facehugger rather than Queen or Royal variants."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-c1f994b3-a45e-4b8a-a53a-de9bec5fa1f6.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-106-armored-facehugger.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "483f49ca0021b3908421dddd25c0cda4d6424bedb9d83126d7d659265ab43343",
+    "bboxAlphaAtLeast16": [
+      67,
+      291,
+      1691,
+      769
+    ],
+    "alphaMin": 0,
+    "alpha0": 1298451,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One intact right-facing Facehugger with eight finger-like leg layout, paired sacs, single full tail and dark organic plate reinforcement. No separate head or added insect pincers. Tail/legs complete; side padding less than requested10%, minimum67px, no clipping.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 67,
+      "top": 291,
+      "right": 83,
+      "bottom": 118
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.68,
+      "y": 0.8669673055242391
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-110-armored-runner",
+  "name": "Armored Runner",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Runner. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Runner as pictured: lean digitigrade quadrupedal xenomorph, exactly FOUR limbs (two elongated clawed forelimbs and two powerful bent rear legs), long smooth eyeless backward-extended dome, ribbed biomechanical torso, ONE long segmented pointed tail. Preserve low athletic dog-like stance with all four feet near ground; not upright human-shaped. Brown-copper ribbed understructure and dark natural armored plates across shoulders/back/limbs, no mechanical suit, no bulky new head crest.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-006-runner.webp",
+    "sha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3",
+    "visualNotes": "Viewed base sheet: lean brown-copper quadrupedal Runner, long smooth dome, four limbs, narrow ribbed torso, one curling segmented pointed tail; no Queen crest."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-270cda7d-60b6-4ed9-afb0-11f4819c0aaf.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-110-armored-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "3db62341e648d4fa020c1b17ab56205f605362cc6337f58fe563b6fcbe998630",
+    "bboxAlphaAtLeast16": [
+      96,
+      159,
+      1438,
+      917
+    ],
+    "alphaMin": 0,
+    "alpha0": 1145186,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One lean right-facing quadrupedal Runner with four clawed limbs, smooth dome, ribbed copper-brown understructure, dark natural reinforcement and complete curved bladed tail. Preview halo is hidden RGB: sampled (600,250),(750,100),(750,960) all alpha0. No image postprocessing; side margins below10%, no cropping.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 96,
+      "top": 159,
+      "right": 98,
+      "bottom": 107
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.59,
+      "y": 0.8955078125
+    },
+    "sourceFacing": 1
+  }
+}

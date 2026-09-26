@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-075-albino-atarax-ripper",
+  "name": "Albino ATARAX Ripper",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1 is exact base identity and raster style reference. Create ONE newly authored Albino ATARAX Ripper in a grounded heavy bipedal idle stance. PROJECT_ADAPTATION systemic albino derivative of the reviewed project-original V66 enemy-023-atarax-ripper. Preserve one heavy melee Xenomorph with a long eyeless skull, layered segmented cranial and dorsal armor, massive strike forearms, two digitigrade hindlegs, integrated tendons/cables and exactly one long free articulated tail. The Albino modifier changes organic pigment and material response only: black wet tissue becomes warm pearl, pale parchment and cool ash-gray with restrained translucent rose-taupe recesses; existing armored plates remain distinct brighter chalk-ivory/aged bone. Practical restraints and tendon cables stay gunmetal, neural scars stay restrained dark burgundy and exactly one compact blue skull sensor remains. Do not flatten the creature into a pure-white silhouette or bleach hardware. Keep strict right-facing orthographic gameplay profile across four clips. Attack is a heavy claw or inner-jaw melee sequence, never artillery. Do not inherit the predecessor's numeric scale, exact root coordinates, border contacts, near-duplicate timing, magenta residue or weak strike semantics. No Queen crown, royal proportions, laser cannon, firearm, robot armor, extra sensor, second tail, copied predecessor pixels or official/canon-exact claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.\nPreserve the compact heavy melee proportions of reference, two massive forearms with clearly separated claw hands, two feet, layered organic armor, dark gunmetal integrated cables and exactly ONE small blue skull sensor; no biological eyes. Single complete articulated tail behind left. ONE whole character, strict orthographic RIGHT-facing profile. Genuine transparent alpha, no floor/shadow/halo. Compose small within central 75% canvas with 10%+ empty transparent margins all sides. No sheet, grid, repeated subjects, text, logos, watermark, guns, gore, crop or extra parts. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+    "sha256": "321b78c95da7374bd3cac8b2ae5d18fb26c146aaddae47b536132b16b8f261ae",
+    "visualNotes": "Reviewed base sheet: heavy compact biped with layered cranial/dorsal organic plates, broad arms, cables and compact blue skull sensor."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-8027d29d-0a84-49a8-bab8-7c2d31126c30.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-075-albino-atarax-ripper.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "32ff991d11c5bc959a7ab39a362c0b523515c596e1082bef085443bcbc6b04c2",
+    "bboxAlphaAtLeast16": [
+      125,
+      287,
+      1119,
+      1064
+    ],
+    "alphaMin": 0,
+    "alpha0": 1203554,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Two massive forearms and claw hands, two grounded feet, one complete tail and exactly one blue sensor clear. Gunmetal cables remain dark against ivory plates and pale tissue. Native alpha and near-10% or greater margins, no clipping. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.518341307814992,
+      "y": 0.8476874003189793
+    },
+    "sourceFacing": 1
+  }
+}

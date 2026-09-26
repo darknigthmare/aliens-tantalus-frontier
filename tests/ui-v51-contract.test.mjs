@@ -16,13 +16,15 @@ test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et cons
   for (const contract of [
     "from './game-production-runtime.js'",
     "from './mission-levels-v52.js'",
-    "from './hub-onboarding-v84.js'",
+    "from './hub-opening-v88.js'",
     "from './mission-insertion-ui-v62.js'",
     "from './world-crisis.js'",
     "from './campaign-consequences.js'",
     "from './advanced-systems.js'",
     "from './save.js'"
   ]) assert.match(app, new RegExp(contract.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  const opening = await readFile(new URL('../src/hub-opening-v88.js', import.meta.url), 'utf8');
+  assert.match(opening, /from '\.\/hub-onboarding-v84\.js'/);
 
   for (const action of [
     'executeStrategicAction', 'completeResearchProject', 'installShipModule', 'repairShipModule',

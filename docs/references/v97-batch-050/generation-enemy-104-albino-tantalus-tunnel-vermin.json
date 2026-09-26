@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-104-albino-tantalus-tunnel-vermin",
+  "name": "Albino Tantalus Tunnel Vermin",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Albino Tantalus Tunnel Vermin. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Tantalus Tunnel Vermin as pictured: low elongated insectoid arthropod, layered overlapping dorsal shell plates, rounded segmented rear abdomen, narrowed forward head with small dark eyes, short paired antennae, small mandibles and multiple short jointed legs arranged bilaterally. Keep six walking legs (three pairs) and the reference's beetle-like silhouette; no mammalian fur or long tail.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+    "sha256": "6a824553bf7b6355b32e5ea5933998e7de51c5ea7a8b6c1233cc3bf8c76aa104",
+    "visualNotes": "Viewed base sheet: elongated beetle-like vermin with overlapping ridged tan shell plates, segmented rear abdomen, paired antennae, mandibles, six jointed walking legs and small dark eyes."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-cc9049af-922c-4413-a3dc-f8337773648f.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-104-albino-tantalus-tunnel-vermin.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "e5fab2ce734a9e6412a23f2b683912632f5a0f06e586bcc52b141804da469587",
+    "bboxAlphaAtLeast16": [
+      223,
+      261,
+      1600,
+      762
+    ],
+    "alphaMin": 0,
+    "alpha0": 1221904,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single right-facing armored insect-like Tunnel Vermin, layered shell, paired antennae, small eyes, mandibles and six-legged layout. Ivory/gray-beige palette. Full silhouette complete.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 223,
+      "top": 261,
+      "right": 174,
+      "bottom": 125
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.51,
+      "y": 0.859075535512965
+    },
+    "sourceFacing": 1
+  }
+}

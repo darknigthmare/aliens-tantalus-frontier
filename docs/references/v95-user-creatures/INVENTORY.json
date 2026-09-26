@@ -1,0 +1,2751 @@
+{
+  "schemaVersion": 1,
+  "pass": "v95-user-creatures",
+  "auditDate": "2026-09-23",
+  "sourceDirectory": "C:\\Users\\chuck\\Downloads\\AlienTentalusAintergrer",
+  "scope": "Inventaire documentaire seulement. Sources intactes ; aucune extraction, génération, normalisation de pixels, copie runtime ou admission V95 effectuée par cet audit.",
+  "summary": {
+    "jpgFiles": 79,
+    "jpgBytes": 149964474,
+    "visuallyReviewedJpgFiles": 79,
+    "anonymousGeminiFiles": 22,
+    "categoryCounts": {
+      "monstre": 58,
+      "arme": 3,
+      "reference-a-identifier": 9,
+      "armure-humanoide": 7,
+      "variante-etat": 2
+    },
+    "existingPosesCompared": 43,
+    "exactDuplicateSourceGroups": [],
+    "exactHashMatchesAgainst43": [],
+    "runtimeSpritesAdded": 0,
+    "uniqueCreatureCount": null,
+    "uniqueCreatureCountReason": "Les 79 fichiers comprennent armes, armures, planches, effets, états et variantes de rendu. Aucun total d’identités uniques n’est certifié."
+  },
+  "method": {
+    "metadata": "Taille et SHA-256 calculés sur les fichiers originaux en lecture seule. Dimensions décodées par System.Drawing.Image puis handles libérés.",
+    "visual": "79 JPEG et 43 PNG actuels affichés entiers en grilles DOM locales temporaires via Chrome CDP 9245, CSS object-fit:contain ; aucun média source édité et aucune grille image écrite.",
+    "comparison": "Comparaison visuelle de silhouettes et équipements, plus SHA-256. Pas de déduplication sur nom seul. Les différences JPEG/PNG empêchent de conclure à l’absence de ressemblance à partir des hashes.",
+    "identity": "Noms utilisateur conservés exactement ; noms anonymes non remplacés par des castes supposées. Les descriptions sont morphologiques, sans attribution canonique.",
+    "transparency": "Les 79 sources sont des JPEG sans canal alpha. Le damier apparent d’Antilope est imprimé dans les pixels ; il ne représente pas une transparence."
+  },
+  "archive": {
+    "file": "AlienTentalusAintergrer.rar",
+    "bytes": 149615882,
+    "sha256": "e4462d372c0270941ba3a7c8c3c6399ec81e2a42c5fe4a3f99f48599cd9a556d",
+    "validationReportedByCoordinator": {
+      "rarTestCommand": "UnRAR.exe t -idq",
+      "exitCode": 0,
+      "archiveListEntries": 79,
+      "folderNamesDifferenceCount": 0,
+      "unrarVerboseVsFolderCrc32": {
+        "files": 79,
+        "matches": 79,
+        "mismatches": [],
+        "bytes": 149964474
+      },
+      "extractedByThisPass": false
+    },
+    "note": "Intégrité et CRC32 de l’archive transmis par l’agent coordinateur ; SHA-256 archive calculé par cet inventaire."
+  },
+  "generationStatus": {
+    "pngProduced": 0,
+    "status": "blocked-before-generation",
+    "sourceDocument": "GENERATION-ATTEMPTS.json",
+    "reasonReportedByCoordinator": "Le générateur intégré échoue sur l’accès aux références locales (Windows helper apply deny-read ACLs). Huit erreurs avant production ; aucune génération de remplacement autorisée par cet audit.",
+    "diskReportedByCoordinator": "C: FreeSpace 0 au dernier contrôle. Aucune nouvelle génération lancée."
+  },
+  "groups": [
+    {
+      "id": "carrier-empty-full",
+      "entryNumbers": [
+        51,
+        52
+      ],
+      "relation": "same-creature-state-variants",
+      "confidence": "high-visual",
+      "recommendation": "Une identité utilisateur Carrier, deux états vide/chargé, deux fichiers conservés ; rapprochement séparé avec Carrier Extinction à décider."
+    },
+    {
+      "id": "anonymous-breath-background",
+      "entryNumbers": [
+        11,
+        20
+      ],
+      "relation": "same-composition-background-variants",
+      "confidence": "high-visual",
+      "recommendation": "Une même référence visuelle tronquée sur fonds noir/gris ; pas deux ennemis ni deux états de combat. Hashes différents conservés."
+    },
+    {
+      "id": "big-xeno",
+      "entryNumbers": [
+        40,
+        41
+      ],
+      "relation": "closely-related-design-and-pose-variants",
+      "confidence": "medium-high-visual",
+      "recommendation": "Très forte parenté de silhouette et de pose ; conserver les deux rendus. Ni deux identités ni états de combat certifiés."
+    },
+    {
+      "id": "queen-winged",
+      "entryNumbers": [
+        36,
+        37
+      ],
+      "relation": "related-winged-designs-different-view-and-palette",
+      "confidence": "medium-visual",
+      "recommendation": "Probable famille utilisateur commune ; face/profil, palette et raccord d’aile diffèrent. Ne pas convertir automatiquement en états."
+    },
+    {
+      "id": "chameleon",
+      "entryNumbers": [
+        54,
+        55
+      ],
+      "relation": "same-user-name-substantially-different-designs",
+      "confidence": "high-visual-difference",
+      "recommendation": "Maintenir les deux designs distincts : rouge/noir à dos plat versus noir/os à grande crête. Aucune transformation de couleur confirmée."
+    },
+    {
+      "id": "mecha",
+      "entryNumbers": [
+        42,
+        43,
+        44,
+        64
+      ],
+      "relation": "mechanical-theme-distinct-designs",
+      "confidence": "high-visual-difference",
+      "recommendation": "Ne pas regrouper les quatre en états d’un seul ennemi sans choix utilisateur."
+    },
+    {
+      "id": "human-xeno-armor",
+      "entryNumbers": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "relation": "four-armor-designs-dual-requested-use",
+      "confidence": "user-confirmed-and-visual",
+      "requestedUses": [
+        "enemy",
+        "player-equipment"
+      ],
+      "userDecisionConfirmed": true,
+      "recommendation": "Quatre images, usage double confirmé. Séparer profils humains équipés et objets d’équipement ; ne pas annoncer huit nouveaux monstres."
+    },
+    {
+      "id": "flesh-experiments",
+      "entryNumbers": [
+        59,
+        60
+      ],
+      "relation": "related-hybrid-theme-unconfirmed-state-link",
+      "confidence": "medium-visual",
+      "recommendation": "Vêtement, masse crânienne, torse et queue diffèrent. Aucun avant/après ou état de combat confirmé."
+    },
+    {
+      "id": "multicephalic-experiments",
+      "entryNumbers": [
+        58,
+        62
+      ],
+      "relation": "shared-name-theme-different-anatomy",
+      "confidence": "high-visual-difference",
+      "recommendation": "Ne pas traiter comme deux angles équivalents : membres, tête et queue diffèrent. Nombre exact de têtes à contrôler avant dérivé."
+    },
+    {
+      "id": "trex-king-queen",
+      "entryNumbers": [
+        76,
+        77
+      ],
+      "relation": "shared-body-composition-distinct-head-designs",
+      "confidence": "high-visual",
+      "recommendation": "Conserver les deux noms utilisateur ; tête couronnée versus allongée. Pas deux états d’une même identité affirmés."
+    },
+    {
+      "id": "prowler-warrior-red",
+      "entryNumbers": [
+        68,
+        79
+      ],
+      "relation": "similar-body-pose-distinct-head-designs",
+      "confidence": "medium-high-visual",
+      "recommendation": "Pose et palette proches, crânes différents ; garder Prowler et Warrior-Red séparés tant que leur relation n’est pas décidée."
+    },
+    {
+      "id": "unnamed-snake",
+      "entryNumbers": [
+        46,
+        71
+      ],
+      "relation": "related-serpentine-anatomy-different-designs",
+      "confidence": "medium-visual",
+      "recommendation": "Deux bras et queue serpentiforme communs, mais proportions, crâne, dorsales et palette diffèrent. Xeno-.jpg reste sans identité attribuée."
+    },
+    {
+      "id": "host-big-xeno",
+      "entryNumbers": [
+        1,
+        40,
+        41
+      ],
+      "relation": "filename-suggests-host-link-not-visual-identity",
+      "confidence": "filename-only-for-relationship",
+      "recommendation": "Le titre fourni suggère un hôte ; ce n’est pas une preuve de transformation ni une variante d’état. Conserver le nom exact Crudible."
+    }
+  ],
+  "firstProcessingCandidatesReportedByCoordinator": [
+    {
+      "number": 47,
+      "file": "Xeno-Antilope.jpg",
+      "caveat": "Damier imprimé dans le JPEG à traiter sans altérer le sujet."
+    },
+    {
+      "number": 48,
+      "file": "Xeno-Aquatic-Swimming Alien.jpg",
+      "caveat": "Fichier de référence visible ; dérivé non produit ni admis."
+    },
+    {
+      "number": 49,
+      "file": "Xeno-Bat.jpg",
+      "caveat": "Fichier de référence visible ; dérivé non produit ni admis."
+    },
+    {
+      "number": 52,
+      "file": "Xeno-Carrier-Full.jpg",
+      "caveat": "Etat chargé d’une identité partagée avec Carrier--Empty."
+    },
+    {
+      "number": 63,
+      "file": "xeno-GiantFacehugger.jpg",
+      "caveat": "Fichier de référence visible ; dérivé non produit ni admis."
+    },
+    {
+      "number": 75,
+      "file": "Xeno-trematodes.jpg",
+      "caveat": "Fichier de référence visible ; dérivé non produit ni admis."
+    },
+    {
+      "number": 73,
+      "file": "Xeno-Spiker.jpg",
+      "caveat": "Source tronquée à droite : queue complète inconnue, pas de promesse entier 1:1."
+    },
+    {
+      "number": 5,
+      "file": "Fauna-Reptilian.jpg",
+      "caveat": "Fichier de référence visible ; dérivé non produit ni admis."
+    }
+  ],
+  "globalFidelity": "Fidélité 1:1 non certifiée. Un dérivé doit être comparé à sa source exacte, contrôlé en entier et obtenir une admission indépendante. Les sources partielles ne suffisent pas à certifier les parties absentes.",
+  "entries": [
+    {
+      "number": 1,
+      "file": "Crudible host for big xeno.jpg",
+      "bytes": 2119113,
+      "width": 2516,
+      "height": 1696,
+      "sha256": "419b09744c99190f2dcea6dd421833e9dfb9ab722c70b66535af2b58c95a9ed6",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Crudible host for big xeno",
+      "visualDescription": "Quadrupède massif gris à large carapace noire dorsale, tête basse et appendices buccaux tentaculaires.",
+      "flags": [
+        "identite-utilisateur-preservee"
+      ],
+      "groups": [
+        "host-big-xeno"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 2,
+      "file": "Engineer-Weapons-AcidProto.jpg",
+      "bytes": 1721450,
+      "width": 2698,
+      "height": 1568,
+      "sha256": "5f634f6824eb3bb04e390c9dbba5a651ec402e407fa6a1a91aa88ba3b8b2555e",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "arme",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Engineer-Weapons-AcidProto",
+      "visualDescription": "Arme longue isolée biomécanique noire et os, canon et crosse visibles ; aucun porteur.",
+      "flags": [
+        "arme-separee"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 3,
+      "file": "Engineer-Weapons-BoneGun.jpg",
+      "bytes": 2035757,
+      "width": 2698,
+      "height": 1568,
+      "sha256": "8c2bd708f7acc90aad80937b3a573a0733503b23907910060eb2b9f033a8d334",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "arme",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Engineer-Weapons-BoneGun",
+      "visualDescription": "Arme courte osseuse isolée, poignée descendante et corps formé de vertèbres.",
+      "flags": [
+        "arme-separee"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 4,
+      "file": "Engineer-Weapons-BoneRifle.jpg",
+      "bytes": 2306908,
+      "width": 2698,
+      "height": 1568,
+      "sha256": "34e2065638d83fa6df4bd3b1ebce740757a0aea64ede0a776bc6a136233ad555",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "arme",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Engineer-Weapons-BoneRifle",
+      "visualDescription": "Arme osseuse longue au premier plan ; montage avec silhouettes et scènes dans le fond.",
+      "flags": [
+        "arme-separee",
+        "planche-composite",
+        "fond-non-isole"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 5,
+      "file": "Fauna-Reptilian.jpg",
+      "bytes": 2645984,
+      "width": 2752,
+      "height": 1536,
+      "sha256": "60b111a6f9cccb1fa98d12e37d94e1eda02dfe9488e2c04894298780a6b052a1",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Fauna-Reptilian",
+      "visualDescription": "Quadrupède reptilien cuirassé vert gris, museau denté, plaques dorsales et queue enroulée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 6,
+      "file": "Gemini_Generated_Image_1uteuq1uteuq1ute.jpg",
+      "bytes": 2007987,
+      "width": 2442,
+      "height": 1728,
+      "sha256": "ed4a913a5b4c2d96b782f0b564e757f135d33c3fb084680ad05a198196b7551f",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Créature bipède biomécanique jaune et noire, deux grands appendices crâniens enroulés, mandibules, queue épineuse.",
+      "flags": [
+        "identite-anonyme",
+        "ombre-sol"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 7,
+      "file": "Gemini_Generated_Image_24l27c24l27c24l2.jpg",
+      "bytes": 443275,
+      "width": 1291,
+      "height": 816,
+      "sha256": "adb74e74bec3b6fad02c932d73af250be5e2dca7b4bf315ff29c08cd85eca431",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Xénomorphe sombre bipède, large crête relevée, tubes ou pointes dorsales, queue dressée.",
+      "flags": [
+        "identite-anonyme",
+        "ombre-sol"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 8,
+      "file": "Gemini_Generated_Image_4ja9ot4ja9ot4ja9.jpg",
+      "bytes": 1768678,
+      "width": 2732,
+      "height": 1568,
+      "sha256": "d70982d7689f329ce288a454e9590c15f2a54c9c19b32c3a2f2cf282bdde4ff2",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède brun à tête basse, masses bulbeuses beiges sur le dos et longue queue épaissie au bout.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 9,
+      "file": "Gemini_Generated_Image_5371if5371if5371.jpg",
+      "bytes": 1410888,
+      "width": 2528,
+      "height": 1688,
+      "sha256": "8979c38d6fb8bf3069b4fb18a2a33c319b1ab0cb6436cf2bfb09f784550e0d21",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Planche composite : xénomorphe humanoïde sombre entier accompagné d’un buste humain armé en repère d’échelle.",
+      "flags": [
+        "identite-anonyme",
+        "plusieurs-sujets",
+        "repere-humain-a-exclure"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 10,
+      "file": "Gemini_Generated_Image_53feyo53feyo53fe.jpg",
+      "bytes": 1803133,
+      "width": 1920,
+      "height": 2202,
+      "sha256": "7e4b9615fe19c2f5fac950955e6403579af9834f09a30c9a49b56b100d0296d2",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Bipède biomécanique brun sombre, dôme lisse allongé, queue recourbée à pointes épaisses.",
+      "flags": [
+        "identite-anonyme",
+        "ombre-sol"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 11,
+      "file": "Gemini_Generated_Image_9gp13f9gp13f9gp1.jpg",
+      "bytes": 2332923,
+      "width": 2528,
+      "height": 1694,
+      "sha256": "bef450991d3e225e9812662761137fb1790ae264f418bf97ed4987a79f695bb8",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Créature biomécanique noir et os orientée latéralement, museau allongé, épines dorsales, bouche projetant une brume ; arrière et extrémités coupés par le cadre source.",
+      "flags": [
+        "identite-anonyme",
+        "source-cadree-partielle",
+        "effet-bouche"
+      ],
+      "groups": [
+        "anonymous-breath-background"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 12,
+      "file": "Gemini_Generated_Image_apq4qsapq4qsapq4.jpg",
+      "bytes": 2226169,
+      "width": 2400,
+      "height": 1792,
+      "sha256": "34d48824b10212e301e2e031dd5fbfe5a33c573dd78bae4221cb8ec8c8b0119e",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Xénomorphe bleu et violet bipède entier avec longue queue, accompagné d’une seconde vue rapprochée de tête.",
+      "flags": [
+        "identite-anonyme",
+        "plusieurs-vues",
+        "encart-tete-a-exclure"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 13,
+      "file": "Gemini_Generated_Image_d90oiyd90oiyd90o.jpg",
+      "bytes": 1797866,
+      "width": 3456,
+      "height": 1246,
+      "sha256": "1064e8543d4f6c3449201d76c74232c836806d8adc5d47c7e8afcd8eb4da61d7",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède brun squelettique, longues pointes en arrière des épaules et longue queue fine.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 14,
+      "file": "Gemini_Generated_Image_dwc3u7dwc3u7dwc3.jpg",
+      "bytes": 1527811,
+      "width": 1728,
+      "height": 2444,
+      "sha256": "475933373f7374a03871629e7529f57b5c382a9de4347b5c2677af1612bd6e07",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Créature aquatique violette au corps de poisson, dôme xénomorphe, nageoires épineuses et queue caudale.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 15,
+      "file": "Gemini_Generated_Image_emlp3qemlp3qemlp.jpg",
+      "bytes": 1653798,
+      "width": 2566,
+      "height": 1664,
+      "sha256": "36177185cbc01fbe328fe94c442a912bf29a0382a5e88895fa7c5334f9b0585a",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Bipède brun bronze à très longue crête plate percée de grandes ouvertures, petite corne frontale, torse côtelé, griffes et longue queue segmentée en boucle.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 16,
+      "file": "Gemini_Generated_Image_eqngv9eqngv9eqng.jpg",
+      "bytes": 2180465,
+      "width": 1312,
+      "height": 3172,
+      "sha256": "770a168a28b95b55ed48207bd700c5ec2528bac2d5709fb8d5d15bd3f9d5780e",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Humanoïde debout à tête et visage pâles découverts, portant une enveloppe ou armure biomécanique noire côtelée ; aucune longue queue visible.",
+      "flags": [
+        "identite-anonyme",
+        "nature-armure-ou-corps-a-confirmer"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 17,
+      "file": "Gemini_Generated_Image_fmrnhxfmrnhxfmrn.jpg",
+      "bytes": 2097486,
+      "width": 2528,
+      "height": 1664,
+      "sha256": "b994218f9880269236c382809a84162d1e6709fd2d409d88dcaf1239e06fbb6b",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Créature rouge-brun cuirassée à posture basse, casque crânien cornu, extensions en lames derrière la tête et les épaules, grands membres antérieurs et longue queue pointue.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 18,
+      "file": "Gemini_Generated_Image_fvh27hfvh27hfvh2.jpg",
+      "bytes": 1981029,
+      "width": 2528,
+      "height": 1688,
+      "sha256": "69b04e1ffb9fd95052476ce4cbeb229f259acc741729a6c3cd9d495332121298",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Bipède biomécanique brun à dôme verdâtre lisse, projection tubulaire devant la bouche, tubes dorsaux et longue queue recourbée.",
+      "flags": [
+        "identite-anonyme",
+        "ombre-sol"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 19,
+      "file": "Gemini_Generated_Image_gwuus4gwuus4gwuu.jpg",
+      "bytes": 2304954,
+      "width": 2616,
+      "height": 1632,
+      "sha256": "028440dc801afdccf9cbe053646a6f919b12c3b0f5a1d24f17bf5eeec9b7492d",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède massif à corps rose charnu, plaques dorsales bleu sombre, collerette, tête courte et queue épaisse à extrémité filamenteuse.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 20,
+      "file": "Gemini_Generated_Image_ivluyivluyivluyi.jpg",
+      "bytes": 2314759,
+      "width": 2528,
+      "height": 1694,
+      "sha256": "959e3b03b1d982261094e7b392b3cb45bfadda7f3d22c73badafada7f9edd0df",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Même composition visible que le fichier anonyme 9gp13f : créature biomécanique noir et os latérale, brume devant la bouche, arrière tronqué ; fond ici gris clair.",
+      "flags": [
+        "identite-anonyme",
+        "source-cadree-partielle",
+        "effet-bouche",
+        "variante-fond-11-20"
+      ],
+      "groups": [
+        "anonymous-breath-background"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 21,
+      "file": "Gemini_Generated_Image_lw929glw929glw92.jpg",
+      "bytes": 1872508,
+      "width": 2732,
+      "height": 1568,
+      "sha256": "98784d8446fd4ab7aa4c475f8403dbcab25ad649533d4906b601c79468d7e401",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède accroupi violet et noir, crâne renflé lobé, queue courte épaissie, longs avant-bras fins.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 22,
+      "file": "Gemini_Generated_Image_n66mdvn66mdvn66m.jpg",
+      "bytes": 1678998,
+      "width": 2488,
+      "height": 1728,
+      "sha256": "a5955dbf3ae7fd36f77b4c20e1dd6cccde3124ab1ecab96082024b27014c7783",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède biomécanique noir et or avec vésicules vertes sur le crâne et les membres, tubes dorsaux et longue queue à lame.",
+      "flags": [
+        "identite-anonyme",
+        "ressemblance-burster-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "visual-family-close-review-required",
+        "poseIds": [
+          "castes-game_afe_burster"
+        ],
+        "note": "Vésicules vertes crâniennes et membres, palette noir/or et queue à lame proches du Burster AFE ; dessin et pose différents. Ne pas créer ou fusionner une identité sur cette seule ressemblance."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 23,
+      "file": "Gemini_Generated_Image_n985bqn985bqn985.jpg",
+      "bytes": 1537146,
+      "width": 2874,
+      "height": 1472,
+      "sha256": "f1e200a0184e6091afea1bc6ca8682235a85a93c505fe8cd4b7f9a9e35a1c3cd",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède biomécanique sombre à dôme lisse, thorax côtelé, membres fins et longue queue recourbée vers la gauche.",
+      "flags": [
+        "identite-anonyme",
+        "ressemblance-runner-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "visual-family-close-review-required",
+        "poseIds": [
+          "castes-film_runner_alien3_1992"
+        ],
+        "note": "Silhouette quadrupède à dôme lisse proche du Runner déjà présent ; proportions, pose et teinte différentes."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 24,
+      "file": "Gemini_Generated_Image_r3z0bgr3z0bgr3z0.jpg",
+      "bytes": 2011988,
+      "width": 3178,
+      "height": 1344,
+      "sha256": "a47c9ef177c51d725127c9e82ed99f03c3c5ba77c99084dcbbe57b84561e07c2",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède noir à tête allongée cuirassée, crête dorsale en nageoire, appendices filiformes traînant en arrière et longue queue épaisse recourbée.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 25,
+      "file": "Gemini_Generated_Image_rlavtbrlavtbrlav.jpg",
+      "bytes": 1915182,
+      "width": 2468,
+      "height": 1728,
+      "sha256": "839cff5329ebce8323be1ea888cc3076a36a0b416b282d606c6717d22d3d4122",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Grand quadrupède pâle à très longue lame crânienne inclinée vers l’arrière, épines vert gris sur le dos et les épaules, bouche rouge dentée et longues griffes.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "visual-family-only-not-equivalent",
+        "poseIds": [
+          "castes-game_pathogen_runner",
+          "castes-game_pathogen_brute"
+        ],
+        "note": "Palette pâle et épines pouvant évoquer les Pathogen, mais silhouette et anatomie différentes ; identité anonyme non attribuée."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 26,
+      "file": "Gemini_Generated_Image_t2yow1t2yow1t2yo.jpg",
+      "bytes": 1636566,
+      "width": 2442,
+      "height": 1728,
+      "sha256": "ad81dbffecaf04080ef0faccdee42ed6b4f944e50ad7141228c46c6247f8f977",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Bipède xénomorphe brun orangé, tête allongée striée, tubes dorsaux, griffes et longue queue en S.",
+      "flags": [
+        "identite-anonyme",
+        "ombre-sol"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 27,
+      "file": "Gemini_Generated_Image_ysxxlrysxxlrysxx.jpg",
+      "bytes": 1688991,
+      "width": 2684,
+      "height": 1568,
+      "sha256": "36b7462cee10e2171445045d8ff37459eae05b7bad898f00ba1d82a32a8673b6",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": null,
+      "visualDescription": "Quadrupède reptilien gris-brun à tête dentée non domée, grande nageoire dorsale sombre, appendices dorsaux et longue queue fine en boucle.",
+      "flags": [
+        "identite-anonyme"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 28,
+      "file": "Human Xeno Armor - Female version Queen.jpg",
+      "bytes": 1715392,
+      "width": 2848,
+      "height": 1500,
+      "sha256": "31802b060dfbf5cb640bbb838f1e68fa1a67931a97800390bf40435b4a46d078",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Human Xeno Armor - Female version Queen",
+      "visualDescription": "Humain de profil dans une armure noire à crête et longue queue, bras nus ; titre utilisateur Female version Queen conservé.",
+      "flags": [
+        "double-usage-confirme"
+      ],
+      "groups": [
+        "human-xeno-armor"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95",
+      "requestedUses": [
+        "enemy",
+        "player-equipment"
+      ],
+      "userDecisionConfirmed": true
+    },
+    {
+      "number": 29,
+      "file": "Human Xeno Armor - female version.jpg",
+      "bytes": 1842309,
+      "width": 2848,
+      "height": 1500,
+      "sha256": "4c2f1edae22ec487164162f11e159c06cbdfe7e40bb199e87da9825b65277a55",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Human Xeno Armor - female version",
+      "visualDescription": "Humain de profil, bras nus, portant armure à très grande crête osseuse et queue ; titre utilisateur female version conservé.",
+      "flags": [
+        "double-usage-confirme"
+      ],
+      "groups": [
+        "human-xeno-armor"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95",
+      "requestedUses": [
+        "enemy",
+        "player-equipment"
+      ],
+      "userDecisionConfirmed": true
+    },
+    {
+      "number": 30,
+      "file": "Human Xeno Armor - Male version full armor.jpg",
+      "bytes": 1714780,
+      "width": 2752,
+      "height": 1536,
+      "sha256": "f193c38dd9f4098438de0518c3cd3337b3e06e9e3eacbe36111a9ff108577473",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Human Xeno Armor - Male version full armor",
+      "visualDescription": "Silhouette humaine entièrement recouverte d’une armure biomécanique sombre, grand casque et queue à large lame.",
+      "flags": [
+        "double-usage-confirme"
+      ],
+      "groups": [
+        "human-xeno-armor"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95",
+      "requestedUses": [
+        "enemy",
+        "player-equipment"
+      ],
+      "userDecisionConfirmed": true
+    },
+    {
+      "number": 31,
+      "file": "Human Xeno Armor - Male version.jpg",
+      "bytes": 1735161,
+      "width": 2848,
+      "height": 1500,
+      "sha256": "fb8f6a365a48a189693f6ef89de9544c0f0712609dbcbdaaa35b333684ed637e",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Human Xeno Armor - Male version",
+      "visualDescription": "Humain de profil, bras nus, casque sombre et armure côtelée à queue ; titre utilisateur Male version conservé.",
+      "flags": [
+        "double-usage-confirme"
+      ],
+      "groups": [
+        "human-xeno-armor"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95",
+      "requestedUses": [
+        "enemy",
+        "player-equipment"
+      ],
+      "userDecisionConfirmed": true
+    },
+    {
+      "number": 32,
+      "file": "Ingineer-Mother.jpg",
+      "bytes": 427136,
+      "width": 864,
+      "height": 1241,
+      "sha256": "36b47aaa83539e427648f2aa3b94812b70954c4ac14f5e780b66dac51d151f2e",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Ingineer-Mother",
+      "visualDescription": "Humanoïde pâle à tête nue enchâssée dans une silhouette biomécanique noire, très longs bras et appendices dorsaux.",
+      "flags": [
+        "nature-armure-ou-corps-a-confirmer"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 33,
+      "file": "Neomorph-Bloodbuster.jpg",
+      "bytes": 1968056,
+      "width": 3156,
+      "height": 1344,
+      "sha256": "4b768ff32d86ecaef37485cd9a52299689e34530849677f432464e4ea748dbc9",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Neomorph-Bloodbuster",
+      "visualDescription": "Petite créature pâle quadrupède à crâne très renflé, bras fins, pattes arrière et queue annelée recourbée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 34,
+      "file": "Neomorph-Motes.jpg",
+      "bytes": 170576,
+      "width": 1024,
+      "height": 694,
+      "sha256": "f2c7fd82285e1fe23d9738cdb1142615b5310c94530fc69b3a2a9476f1b85619",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Neomorph-Motes",
+      "visualDescription": "Nuage noir ramifié ou particules en suspension devant un fond naturel flou ; pas de corps individuel isolé.",
+      "flags": [
+        "effet-ou-essaim",
+        "pas-sprite-creature-unique"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 35,
+      "file": "Neomorph-Neomorph.jpg",
+      "bytes": 1667729,
+      "width": 2048,
+      "height": 2048,
+      "sha256": "84a92f198168968a42ba683cb7684222219770420dbf35e834c5624ac32d0fc3",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Neomorph-Neomorph",
+      "visualDescription": "Créature pâle à tête allongée, épines dorsales et bras griffus ; vue partielle coupée aux jambes et à l’arrière.",
+      "flags": [
+        "source-cadree-partielle"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "same-user-label-different-reference",
+        "poseIds": [
+          "castes-film_neomorph_2017"
+        ],
+        "note": "Nom Neomorph commun, mais tête/épines et cadrage partiel différents de la pose existante ; pas de substitution automatique."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 36,
+      "file": "Queen Xeno Winged 2.jpg",
+      "bytes": 1325442,
+      "width": 2550,
+      "height": 1664,
+      "sha256": "239049c105de759c0068aedaf6b03421ff1eb232ff8cda3adffee5200c0af11b",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Queen Xeno Winged 2",
+      "visualDescription": "Reine xénomorphe ailée noire, membranes rouge orangé, vue latérale en vol ; aile à droite séparée visuellement du tronc.",
+      "flags": [
+        "groupe-queen-winged-provisoire",
+        "anatomie-aile-a-controler"
+      ],
+      "groups": [
+        "queen-winged"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-winged-design",
+        "poseIds": [
+          "castes-film_queen_aliens_1986"
+        ],
+        "note": "Ailes membraneuses absentes de la Reine mobile existante ; conserver les noms utilisateur sans extrapoler une version film."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 37,
+      "file": "Queen Xeno Winged.jpg",
+      "bytes": 1454159,
+      "width": 2550,
+      "height": 1664,
+      "sha256": "2b5edc2c0b9799655dde5ea19926aa3fb83f8c2d95086cb0346a9fd3e64d0c12",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Queen Xeno Winged",
+      "visualDescription": "Reine xénomorphe ailée bleu noir vue de face trois-quarts, deux grandes ailes brun sombre déployées, queue recourbée.",
+      "flags": [
+        "groupe-queen-winged-provisoire"
+      ],
+      "groups": [
+        "queen-winged"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-winged-design",
+        "poseIds": [
+          "castes-film_queen_aliens_1986"
+        ],
+        "note": "Ailes membraneuses absentes de la Reine mobile existante ; conserver les noms utilisateur sans extrapoler une version film."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 38,
+      "file": "SpaceJokey-Armored.jpg",
+      "bytes": 2829389,
+      "width": 1952,
+      "height": 2178,
+      "sha256": "e2ef5c97110eedd37039e090eee8a0ccd43c734f62143354e863cf8462311afb",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "SpaceJokey-Armored",
+      "visualDescription": "Humanoïde à tête allongée et trompe dans casque transparent, combinaison verte, sac dorsal et arme portée.",
+      "flags": [
+        "identite-utilisateur-preservee",
+        "personnage-equipe"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 39,
+      "file": "Xeno abobimantion.jpg",
+      "bytes": 1879009,
+      "width": 2088,
+      "height": 2048,
+      "sha256": "5417b7bd8d2fd81375d39081a5e2918de12d1aa1a8f3b61190bf3a6ddd802a35",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno abobimantion",
+      "visualDescription": "Bipède biomécanique noir brun, mandibules et appendices crâniens pendants, longue queue recourbée.",
+      "flags": [
+        "ressemblance-abomination-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "visual-family-close-review-required",
+        "poseIds": [
+          "castes-game_abomination_avp2010"
+        ],
+        "note": "Mandibules, appendices céphaliques pendants et silhouette proches de l’Abomination ; proportions et pose diffèrent."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 40,
+      "file": "Xeno Big Xeno 1.jpg",
+      "bytes": 1857780,
+      "width": 2272,
+      "height": 1884,
+      "sha256": "401f976a766cdffb868c9aa65835f139e019da01b2c8959a0fc972e9c30127f3",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Big Xeno 1",
+      "visualDescription": "Très grand xénomorphe noir massif à avant-bras volumineux, dorsal hérissé, pieds courts et longue queue.",
+      "flags": [
+        "groupe-big-xeno-provisoire"
+      ],
+      "groups": [
+        "big-xeno",
+        "host-big-xeno"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 41,
+      "file": "Xeno Big Xeno 2.jpg",
+      "bytes": 2766614,
+      "width": 2272,
+      "height": 1884,
+      "sha256": "c03df8287334047365c92962bf48b509195867da4aa9cf84feae9946a84503ab",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Big Xeno 2",
+      "visualDescription": "Même silhouette générale Big Xeno noir massif, autre rendu et cadrage, grandes mains rapprochées devant le torse.",
+      "flags": [
+        "groupe-big-xeno-provisoire"
+      ],
+      "groups": [
+        "big-xeno",
+        "host-big-xeno"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 42,
+      "file": "Xeno Bruiser Mecha.jpg",
+      "bytes": 2390588,
+      "width": 2730,
+      "height": 1536,
+      "sha256": "1fd2fb070f8dd2985e29ba169e0d709d4acb81e83d3b7ed6843055d5b3453d1c",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Bruiser Mecha",
+      "visualDescription": "Bipède biomécanique massif noir à dôme arrondi, bras lourds et longue queue ; dessins techniques derrière le sujet.",
+      "flags": [
+        "fond-planche-technique"
+      ],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 43,
+      "file": "Xeno mecha 2.jpg",
+      "bytes": 2368460,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "36a6645273f850f17e550d0b5edf5b352e46db7bc13821796f36215ed241a37f",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno mecha 2",
+      "visualDescription": "Xénomorphe mécanique bleu métallique avec insertions orange, crête découpée, griffes et longue queue courbée.",
+      "flags": [
+        "mecha-design-distinct"
+      ],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 44,
+      "file": "Xeno mecha.jpg",
+      "bytes": 1622013,
+      "width": 2730,
+      "height": 1536,
+      "sha256": "3f6447268d0e84cfa613dc661e72f9c0ab4ac4170750c46478cfa07e0af56283",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno mecha",
+      "visualDescription": "Xénomorphe mécanique gris métal à dôme et tubes dorsaux, bras bas, queue étirée latéralement.",
+      "flags": [
+        "mecha-design-distinct"
+      ],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 45,
+      "file": "Xeno Winged.jpg",
+      "bytes": 2062748,
+      "width": 2048,
+      "height": 2048,
+      "sha256": "cd5f0e69d08c3e8efe08af54ec096de09686e830ee8bb521117cf37c1cd9de71",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Winged",
+      "visualDescription": "Xénomorphe noir ailé accroupi de face trois-quarts ; ailes sombres déployées, queue vers la droite.",
+      "flags": [
+        "bord-superieur-aile-proche-ou-coupe"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-winged-design",
+        "poseIds": [
+          "castes-film_queen_aliens_1986"
+        ],
+        "note": "Ailes membraneuses absentes de la Reine mobile existante ; conserver les noms utilisateur sans extrapoler une version film."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 46,
+      "file": "Xeno-.jpg",
+      "bytes": 1990614,
+      "width": 2724,
+      "height": 1568,
+      "sha256": "b7d4bae4e0d71e9fa1eef15cc657b5fac271d1cf789f5a4a246b3add0839b550",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": "Xeno-",
+      "visualDescription": "Créature biomécanique gris beige à torse et deux bras griffus, long dôme lisse et bas du corps serpentin enroulé, sans jambes visibles.",
+      "flags": [
+        "identite-a-confirmer",
+        "different-du-snake-neca"
+      ],
+      "groups": [
+        "unnamed-snake"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-snake"
+        ],
+        "note": "La source a un torse à deux bras et un bas du corps serpentin. Le Snake NECA existant possède une large collerette/cage latérale et une silhouette différente ; ne pas les fusionner par le seul mot Snake."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 47,
+      "file": "Xeno-Antilope.jpg",
+      "bytes": 1895602,
+      "width": 2752,
+      "height": 1536,
+      "sha256": "89f535273cd5b5ff8a1ab3c0d3dbbf1d447caa1bcc27b031a043624254bc3544",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Antilope",
+      "visualDescription": "Quadrupède brun à cornes recourbées, tête et carapace xénomorphes, queue et épines dorsales.",
+      "flags": [
+        "damier-imprime-dans-jpeg"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 48,
+      "file": "Xeno-Aquatic-Swimming Alien.jpg",
+      "bytes": 1981386,
+      "width": 2848,
+      "height": 1496,
+      "sha256": "0a6f652cadbff05eb73ce16d9da8ab099b4002c088402936d786b77a0134e262",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Aquatic-Swimming Alien",
+      "visualDescription": "Créature aquatique bleu sombre à tête xénomorphe, membres antérieurs, long corps nageant et grande nageoire caudale.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 49,
+      "file": "Xeno-Bat.jpg",
+      "bytes": 1871822,
+      "width": 1760,
+      "height": 2378,
+      "sha256": "8fe0620101c64d9a058dd18ef69e70375454eea2b03a39cc2b4c4f15a25fd199",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Bat",
+      "visualDescription": "Créature xénomorphe violette dressée, grande aile membraneuse ocre, jambes allongées et queue enroulée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 50,
+      "file": "Xeno-Brute.jpg",
+      "bytes": 2026471,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "cc3918b20826ab2b9482256e2c61e027cce971cda8c71fd12b200b8e256d5e95",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Brute",
+      "visualDescription": "Bipède cuirassé bronze à tête renforcée de bosses et cornes, grands bras griffus et queue levée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 51,
+      "file": "Xeno-Carrier--Empty.jpg",
+      "bytes": 1849771,
+      "width": 1792,
+      "height": 2334,
+      "sha256": "46772db9d0583aa073a6ae31b6c92f14e36504ef283f2af4825b37bf9baae02d",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "variante-etat",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Carrier--Empty",
+      "visualDescription": "Carrier à dôme pâle lisse, corps noir, longues branches dorsales et queue ; branches sans passagers.",
+      "flags": [
+        "groupe-carrier-empty-full",
+        "etat-vide"
+      ],
+      "groups": [
+        "carrier-empty-full"
+      ],
+      "comparisonExisting43": {
+        "status": "same-user-label-different-design",
+        "poseIds": [
+          "castes-game_avp_extinction_carrier"
+        ],
+        "note": "Carrier existe déjà. Le nouveau couple a un dôme pâle et de longues branches dorsales très différentes du sprite Extinction ; préserver le design fourni et ses deux états sans l’annoncer comme une nouvelle caste canonique."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 52,
+      "file": "Xeno-Carrier-Full.jpg",
+      "bytes": 1977431,
+      "width": 1792,
+      "height": 2334,
+      "sha256": "103231c06d33e4ccd4b3cf4c4cb68df8d8b2dce37605e14d3720c24d31e090a9",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "variante-etat",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Carrier-Full",
+      "visualDescription": "Même Carrier et même pose que Carrier--Empty, avec plusieurs petits organismes bruns agrippés aux longues branches dorsales.",
+      "flags": [
+        "groupe-carrier-empty-full",
+        "etat-charge"
+      ],
+      "groups": [
+        "carrier-empty-full"
+      ],
+      "comparisonExisting43": {
+        "status": "same-user-label-different-design",
+        "poseIds": [
+          "castes-game_avp_extinction_carrier"
+        ],
+        "note": "Carrier existe déjà. Le nouveau couple a un dôme pâle et de longues branches dorsales très différentes du sprite Extinction ; préserver le design fourni et ses deux états sans l’annoncer comme une nouvelle caste canonique."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 53,
+      "file": "Xeno-CasteToDefine-.jpg",
+      "bytes": 1726020,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "2c984885baf558f2db5786fd06fe1a8aa9f62e7f43d86ddb4507e5e4bb6ddea1",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "provisional-unidentified",
+      "providedName": "Xeno-CasteToDefine-",
+      "visualDescription": "Alien humanoïde bleu gris dressé, crête inclinée vers l’arrière, fins appendices dorsaux ou céphaliques et extrémités griffues ; caste non établie.",
+      "flags": [
+        "identite-a-confirmer",
+        "nom-caste-non-definie-preserve"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 54,
+      "file": "Xeno-Chameleon (2).jpg",
+      "bytes": 2523891,
+      "width": 2752,
+      "height": 1536,
+      "sha256": "cf33a67a98d1609ac059df7b16319848a90d9a214e9e39f4c017e3b690b1b774",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Chameleon (2)",
+      "visualDescription": "Quadrupède noir et rouge à longues pattes, plaques rouges dorsales, tête domée et queue spiralée rouge.",
+      "flags": [
+        "groupe-chameleon-designs-distincts"
+      ],
+      "groups": [
+        "chameleon"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 55,
+      "file": "Xeno-Chameleon.jpg",
+      "bytes": 2249909,
+      "width": 2864,
+      "height": 1472,
+      "sha256": "6c21bf1aacd59f45cdece84d49dd89cbff6443ea0362453df3e762d73ef9a9a5",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Chameleon",
+      "visualDescription": "Quadrupède noir à casque cornu et grande crête vertébrale claire, longue queue osseuse en spirale.",
+      "flags": [
+        "groupe-chameleon-designs-distincts",
+        "marque-graphique-dans-source"
+      ],
+      "groups": [
+        "chameleon"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 56,
+      "file": "Xeno-Defender.jpg",
+      "bytes": 378085,
+      "width": 768,
+      "height": 1379,
+      "sha256": "8622c2d8db831f259fe9a172341d9b7ccbb3865a57a979e3e5032ddcaabcfb01",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Defender",
+      "visualDescription": "Quadrupède bleu gris à queue dressée en arche, trois tubes dorsaux, longues lames d’avant-bras et crête céphalique ; rapprochement visuel marqué avec Arachnoid Capcom à contrôler.",
+      "flags": [
+        "nom-defender-a-conserver",
+        "ressemblance-arachnoid-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "strong-visual-match-identity-review-required",
+        "poseIds": [
+          "castes-game_avp_capcom_arachnoid"
+        ],
+        "note": "Même composition reconnaissable qu’Arachnoid : queue en haute arche, trois tubes, tête à crête et lames d’avant-bras. Le nom utilisateur Defender diffère. Garder les deux noms et demander une décision avant duplication d’identité ou remplacement."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 57,
+      "file": "Xeno-Drone-Variante.jpg",
+      "bytes": 1685317,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "4b7b51751bec1d4d2a435663d92e47282be582e25956f35fffdaaadd7eefeb01",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Drone-Variante",
+      "visualDescription": "Xénomorphe noir à dôme lisse, deux tubes dorsaux visibles, posture penchée bras bas et queue fine étirée.",
+      "flags": [
+        "variante-design-non-etat"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 58,
+      "file": "Xeno-Experiment-3Headed.jpg",
+      "bytes": 2457216,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "afc27cd9c5be630992a0f3c410edf1ec666d6af4590b8244091dc031227e3fd8",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-3Headed",
+      "visualDescription": "Bipède xénomorphe bleu violet avec plusieurs visages ou têtes accolés, membres supplémentaires visibles et queue.",
+      "flags": [
+        "nombre-anatomique-a-controler",
+        "groupe-multitetes-non-equivalent"
+      ],
+      "groups": [
+        "multicephalic-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 59,
+      "file": "Xeno-Experiment-Flesh.jpg",
+      "bytes": 2208134,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "18571c6324977e8676245a0c0a6dbc6b6881c660581935e449a57ed327c3a30c",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-Flesh",
+      "visualDescription": "Hybride humanoïde pâle vêtu d’une veste, tête charnue renflée et longue queue rose épineuse.",
+      "flags": [
+        "groupe-flesh-provisoire"
+      ],
+      "groups": [
+        "flesh-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 60,
+      "file": "Xeno-Experiment-FleshBurstingHost .jpg",
+      "bytes": 1843066,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "536975ba3ddff130d0ede9c60729bd90d49a86d75d680ecbf59254a23a8797de",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-FleshBurstingHost ",
+      "visualDescription": "Hybride humanoïde pâle peu vêtu, grosse masse crânienne charnue, bras humains et silhouette altérée.",
+      "flags": [
+        "groupe-flesh-provisoire"
+      ],
+      "groups": [
+        "flesh-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 61,
+      "file": "Xeno-Experiment-Renaissance.jpg",
+      "bytes": 2145634,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "eb23c08a5fead144f81e2a4d21ec10135b9483c6839b4beb919766a715fe0930",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-Renaissance",
+      "visualDescription": "Humanoïde violet pâle à crâne asymétrique allongé, torse organique côtelé, longues mains, sans queue visible.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 62,
+      "file": "Xeno-Experiment-Xeno3Head.jpg",
+      "bytes": 2116292,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "900d8fe0bdfa6a36f844368165858350ef08f7dd5b0b609f5355c7a59e9c3130",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-Xeno3Head",
+      "visualDescription": "Bipède gris sombre à plusieurs crêtes ou têtes superposées, torse orangé et double appendice caudal charnu.",
+      "flags": [
+        "nombre-anatomique-a-controler",
+        "groupe-multitetes-non-equivalent"
+      ],
+      "groups": [
+        "multicephalic-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 63,
+      "file": "xeno-GiantFacehugger.jpg",
+      "bytes": 1658533,
+      "width": 2016,
+      "height": 2114,
+      "sha256": "cfc4e7b98a08090e3651eec8f0b175f180a0c5b8e85638b4719a0b7bc1e98ad2",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "xeno-GiantFacehugger",
+      "visualDescription": "Grand organisme arachniforme sombre à pattes allongées, corps central massif et très longue queue annelée en boucles.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-facehugger-design",
+        "poseIds": [
+          "castes-film_facehugger_alien_1979",
+          "castes-game_alien3_thegun_super_facehugger"
+        ],
+        "note": "Famille arachniforme/facehugger apparentée mais taille visuelle, couleur, carapace et queue différentes ; aucune équivalence canonique déduite."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 64,
+      "file": "Xeno-Mechanoid.jpg",
+      "bytes": 2218108,
+      "width": 1856,
+      "height": 2294,
+      "sha256": "8689531006ec23e2b8e2bde9aa71f0a19be1d94dee58c4403f359bfdeae5239a",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Mechanoid",
+      "visualDescription": "Bipède métallique os clair à éléments mécaniques circulaires, grands tubes dorsaux effilés, griffes et queue articulée.",
+      "flags": [],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 65,
+      "file": "Xeno-Necromorph.jpg",
+      "bytes": 2514204,
+      "width": 1888,
+      "height": 2258,
+      "sha256": "7b9d8a643c6e8eabd426e449efa77eab91497911d46a983b055541ba29443553",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Necromorph",
+      "visualDescription": "Xénomorphe vert sombre à tête luisante et traces pendantes ; silhouette coupée sous les cuisses.",
+      "flags": [
+        "source-cadree-partielle",
+        "nom-necromorph-utilisateur-non-canon-assigne"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 66,
+      "file": "Xeno-Phantera-Black.jpg",
+      "bytes": 1537671,
+      "width": 1760,
+      "height": 2400,
+      "sha256": "e0237eea5dc74cffd1b6194389803ee3cc2d06aa5106ad6f1b48d18ef64299fc",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Phantera-Black",
+      "visualDescription": "Quadrupède noir rouge à tête argentée, très longue queue dressée, posture de marche.",
+      "flags": [
+        "different-du-panther-neca-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-panther"
+        ],
+        "note": "Phantera-Black est noir/rouge à tête argentée, sans la palette ocre/rouge ni les détails du Panther NECA existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 67,
+      "file": "Xeno-Praetorian-1.jpg",
+      "bytes": 1952360,
+      "width": 2048,
+      "height": 2106,
+      "sha256": "28b3bf594635ba182069993bc7526b926689fe98a8f7b1bf96f2d0a21467f3fa",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Praetorian-1",
+      "visualDescription": "Bipède noir brun à grande couronne crânienne osseuse, tubes dorsaux, bras griffus et longue queue recourbée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 68,
+      "file": "Xeno-Prowler.jpg",
+      "bytes": 2108930,
+      "width": 1792,
+      "height": 2376,
+      "sha256": "0649aa74b486e3db61c72abb20417019f42648c584cec6106f425f9b46e2ba28",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Prowler",
+      "visualDescription": "Quadrupède rouge noir à crâne cuirassé et perforé, longue queue levée à lame, pattes fines.",
+      "flags": [
+        "ressemblance-prowler-a-verifier"
+      ],
+      "groups": [
+        "prowler-warrior-red"
+      ],
+      "comparisonExisting43": {
+        "status": "visual-family-close-review-required",
+        "poseIds": [
+          "castes-game_afe_prowler"
+        ],
+        "note": "Palette rouge/noir, crâne renforcé et queue à lame proches du Prowler déjà présent ; nouvelle pose et rendu."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 69,
+      "file": "Xeno-Rhino.jpg",
+      "bytes": 1675700,
+      "width": 1952,
+      "height": 2206,
+      "sha256": "9c0d55d542bea16c49c94029156cec65b8d1ece7e37fefc573fcfe379e83a642",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Rhino",
+      "visualDescription": "Créature mécanique quadrupède noir argent à lourde armure, museau renforcé et avant-train massif.",
+      "flags": [
+        "different-du-rhino-neca-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-rhino"
+        ],
+        "note": "Le Rhino fourni est noir/argent, mécanique et fortement armuré ; le Rhino NECA déjà intégré est organique rouge/orange. Pas un doublon établi."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 70,
+      "file": "Xeno-Scorched-Facehugger.jpg",
+      "bytes": 2025482,
+      "width": 2304,
+      "height": 1844,
+      "sha256": "b0e069a9d3073fa3ef575da8242a93185e0a0b5129a5b880aac01aa20fb7334b",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Scorched-Facehugger",
+      "visualDescription": "Organisme arachniforme brun à corps central en sacs, pattes fines, dos hérissé et queue recourbée.",
+      "flags": [
+        "variante-design-non-etat"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-facehugger-design",
+        "poseIds": [
+          "castes-film_facehugger_alien_1979",
+          "castes-game_alien3_thegun_super_facehugger"
+        ],
+        "note": "Famille arachniforme/facehugger apparentée mais taille visuelle, couleur, carapace et queue différentes ; aucune équivalence canonique déduite."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 71,
+      "file": "Xeno-Snake.jpg",
+      "bytes": 2011815,
+      "width": 1792,
+      "height": 2342,
+      "sha256": "a072aa9baca449589fca1d5f36de53ba43264daba60652f7273755e98d05781f",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Snake",
+      "visualDescription": "Xénomorphe noir à dôme rose violet, deux bras griffus et bas du corps serpentin enroulé, tubes dorsaux.",
+      "flags": [
+        "different-du-snake-neca"
+      ],
+      "groups": [
+        "unnamed-snake"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-snake"
+        ],
+        "note": "La source a un torse à deux bras et un bas du corps serpentin. Le Snake NECA existant possède une large collerette/cage latérale et une silhouette différente ; ne pas les fusionner par le seul mot Snake."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 72,
+      "file": "xeno-Soldier-Brown.jpg",
+      "bytes": 2039108,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "92ca6528eef327589717e3a5c0ec43be8cfd8b3b230fccbb1c44c2c5abfd1353",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "xeno-Soldier-Brown",
+      "visualDescription": "Xénomorphe bipède brun à dôme lisse, tubes dorsaux et longue queue recourbée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 73,
+      "file": "Xeno-Spiker.jpg",
+      "bytes": 2374729,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "66ebef495231a60250aaefcc63b0f2f74517f78fe51e9261afa9fcdc8157ad70",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Spiker",
+      "visualDescription": "Quadrupède bronze massif couvert de piquants, veines ou stries bleues ; queue sortant du cadre à droite.",
+      "flags": [
+        "source-cadree-partielle"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 74,
+      "file": "Xeno-Spitter.jpg",
+      "bytes": 1674166,
+      "width": 2016,
+      "height": 2142,
+      "sha256": "a3cbd57bc25e87dc7f9e9ff431023fb07c3f15c2a703c82c49e543116965cdd8",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Spitter",
+      "visualDescription": "Xénomorphe brun bipède à dôme étroit, poches vertes latérales du crâne, tubes dorsaux et queue anguleuse.",
+      "flags": [
+        "ressemblance-spitter-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "same-user-label-different-design",
+        "poseIds": [
+          "castes-game_acm_spitter"
+        ],
+        "note": "Spitter existe déjà, mais le nouveau bipède brun/vert, sa tête étroite et ses tubes diffèrent nettement du sprite ACM noir/jaune hérissé."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 75,
+      "file": "Xeno-trematodes.jpg",
+      "bytes": 2319136,
+      "width": 2694,
+      "height": 1568,
+      "sha256": "86892ad909a7061da64a5eb9d2d7eb9e1bf6f678503b105a34aa1d7a1e486a70",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-trematodes",
+      "visualDescription": "Créature serpentine rouge noir annelée et cuirassée, tête xénomorphe avec appendices mandibulaires, corps en boucle.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 76,
+      "file": "Xeno-Trex-King.jpg",
+      "bytes": 1978647,
+      "width": 3378,
+      "height": 1216,
+      "sha256": "f8017c365016e572ebb44c3730d0edda9b56c6108b3240e05869546c28f35524",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Trex-King",
+      "visualDescription": "Créature dinosaurienne noire violette, tête à grande couronne, petits membres antérieurs, jambes puissantes et longue queue rouge épineuse.",
+      "flags": [
+        "groupe-trex-designs-lies"
+      ],
+      "groups": [
+        "trex-king-queen"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 77,
+      "file": "Xeno-TRex-Queen.jpg",
+      "bytes": 1812639,
+      "width": 3378,
+      "height": 1216,
+      "sha256": "850d2763261afacea8d3a49cd82128aad2d5f45aeae684a25b8e93175d015553",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-TRex-Queen",
+      "visualDescription": "Même morphologie dinosaurienne générale, tête allongée sans la couronne de Trex-King, queue rouge épineuse.",
+      "flags": [
+        "groupe-trex-designs-lies"
+      ],
+      "groups": [
+        "trex-king-queen"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 78,
+      "file": "Xeno-Ultramorph.jpg",
+      "bytes": 2423107,
+      "width": 2572,
+      "height": 1664,
+      "sha256": "10ed0192b9d7ad49b8a5d7c6567a059d6985e809949ea287db67bd4e2fe20473",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Ultramorph",
+      "visualDescription": "Xénomorphe bipède gris métal à dôme très allongé, tubes dorsaux, longue queue ; petite annotation textuelle dans le fond.",
+      "flags": [
+        "texte-dans-source"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    {
+      "number": 79,
+      "file": "Xeno-Warrior-Red.jpg",
+      "bytes": 1894325,
+      "width": 1792,
+      "height": 2376,
+      "sha256": "27baf206ef1eafc63535e604716767d563090ca9f76ad7f96019d46356b47e70",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Warrior-Red",
+      "visualDescription": "Quadrupède rouge sombre à dôme strié, membres fins, grande queue levée à lame.",
+      "flags": [
+        "groupe-prowler-warrior-designs-lies"
+      ],
+      "groups": [
+        "prowler-warrior-red"
+      ],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    }
+  ],
+  "existing43Snapshot": {
+    "registry": "src/enemy-static-poses-v94.js / ENEMY_STATIC_POSES_V94",
+    "count": 43,
+    "entries": [
+      {
+        "id": "castes-film_chestburster_alien_1979",
+        "name": "Chestburster",
+        "basename": "film_chestburster_alien_1979",
+        "path": "/assets/user/castes-v87/film_chestburster_alien_1979.png",
+        "bytes": 1752675,
+        "sha256": "bab2dc1b8284650c97675220e95279a1533ab27713f0f0876a13d2863247521b"
+      },
+      {
+        "id": "castes-film_facehugger_alien_1979",
+        "name": "Facehugger",
+        "basename": "film_facehugger_alien_1979",
+        "path": "/assets/user/castes-v87/film_facehugger_alien_1979.png",
+        "bytes": 2116496,
+        "sha256": "6adcc55496bf8d88f87573de36f54cbfab7e7c435a9dd15a9cdffd3294dbc308"
+      },
+      {
+        "id": "castes-film_queen_chestburster_alien3_1992",
+        "name": "Queen chestburster",
+        "basename": "film_queen_chestburster_alien3_1992",
+        "path": "/assets/user/castes-v87/film_queen_chestburster_alien3_1992.png",
+        "bytes": 1708019,
+        "sha256": "1f8d468480b3a98e25a59a390d5bdadc3f7d29b5e07aeac5501f62b54d906d82"
+      },
+      {
+        "id": "castes-film_runner_alien3_1992",
+        "name": "Runner / Dog Alien",
+        "basename": "film_runner_alien3_1992",
+        "path": "/assets/user/castes-v87/film_runner_alien3_1992.png",
+        "bytes": 1606970,
+        "sha256": "f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3"
+      },
+      {
+        "id": "castes-film_runner_juvenile_alien3_1992",
+        "name": "Runner juvénile — Bambi-burster",
+        "basename": "film_runner_juvenile_alien3_1992",
+        "path": "/assets/user/castes-v87/film_runner_juvenile_alien3_1992.png",
+        "bytes": 1561925,
+        "sha256": "7077fa92454f92a901db226fd020e84efc37b5538c2ffa386933b7fe0b76434e"
+      },
+      {
+        "id": "castes-film_grid_avp_2004",
+        "name": "Grid",
+        "basename": "film_grid_avp_2004",
+        "path": "/assets/user/castes-v87/film_grid_avp_2004.png",
+        "bytes": 1782091,
+        "sha256": "49d756a01928adb1c3fa787d47efbb158da988699fd9d0008bf9a723a7002a74"
+      },
+      {
+        "id": "castes-film_neomorph_2017",
+        "name": "Neomorph adulte",
+        "basename": "film_neomorph_2017",
+        "path": "/assets/user/castes-v87/film_neomorph_2017.png",
+        "bytes": 1840014,
+        "sha256": "0b1670263a48fb16f17e83adc3a3608eacba9f1f146818466e99f9cf1d4c1f84"
+      },
+      {
+        "id": "castes-film_ovomorphe_aliens_1986",
+        "name": "Ovomorphe fermé",
+        "basename": "film_ovomorphe_aliens_1986",
+        "path": "/assets/user/castes-v87/film_ovomorphe_aliens_1986.png",
+        "bytes": 2594158,
+        "sha256": "b7b3c189e4c39a0b12c5fc31828ed134bd2d19d4dcc133e801f913e7ef9077a3"
+      },
+      {
+        "id": "castes-film_queen_aliens_1986",
+        "name": "Reine mobile",
+        "basename": "film_queen_aliens_1986",
+        "path": "/assets/user/castes-v87/film_queen_aliens_1986.png",
+        "bytes": 1929156,
+        "sha256": "985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991"
+      },
+      {
+        "id": "castes-film_warrior_aliens_1986",
+        "name": "Warrior",
+        "basename": "film_warrior_aliens_1986",
+        "path": "/assets/user/castes-v87/film_warrior_aliens_1986.png",
+        "bytes": 1801730,
+        "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f"
+      },
+      {
+        "id": "castes-film_deacon_2012",
+        "name": "Deacon",
+        "basename": "film_deacon_2012",
+        "path": "/assets/user/castes-v87/film_deacon_2012.png",
+        "bytes": 1150358,
+        "sha256": "6788ba772edfcb4b7989b1fa55606670c610a9fec74230316b5e36c906048853"
+      },
+      {
+        "id": "castes-game_xenoborg_avp1999",
+        "name": "Xenoborg",
+        "basename": "game_xenoborg_avp1999",
+        "path": "/assets/user/castes-v87/game_xenoborg_avp1999.png",
+        "bytes": 1769486,
+        "sha256": "d6532326d96fbdd14e7feb8d19946b92edac55a0f8ae88ccc916cc692b192a09"
+      },
+      {
+        "id": "castes-game_predalien_avp2_primal_hunt",
+        "name": "Predalien — Primal Hunt",
+        "basename": "game_predalien_avp2_primal_hunt",
+        "path": "/assets/user/castes-v87/game_predalien_avp2_primal_hunt.png",
+        "bytes": 1604259,
+        "sha256": "3c39acccb5bcfd571026d2511553946078be96b4f2c0e2c2470b39197f770bb5"
+      },
+      {
+        "id": "castes-game_abomination_avp2010",
+        "name": "Abomination",
+        "basename": "game_abomination_avp2010",
+        "path": "/assets/user/castes-v87/game_abomination_avp2010.png",
+        "bytes": 1956709,
+        "sha256": "d73620b4b9759de5baaa65c543407f45987b9013eda87b381e5a5460ab3a23ba"
+      },
+      {
+        "id": "castes-game_avp_extinction_carrier",
+        "name": "Carrier",
+        "basename": "game_avp_extinction_carrier",
+        "path": "/assets/user/castes-v87/game_avp_extinction_carrier.png",
+        "bytes": 1517335,
+        "sha256": "18dd4936cc8cdd0e8ae3f5b28fe2a2790f4a841a4f03cb9c3116ae9c8fd0a8f3"
+      },
+      {
+        "id": "castes-game_avp_extinction_ravager",
+        "name": "Ravager",
+        "basename": "game_avp_extinction_ravager",
+        "path": "/assets/user/castes-v87/game_avp_extinction_ravager.png",
+        "bytes": 1602219,
+        "sha256": "7e2d1e236ef7de411c5458aee40520951c2c6dec2dc932a21164eea087738cbe"
+      },
+      {
+        "id": "castes-game_acm_boiler",
+        "name": "Boiler",
+        "basename": "game_acm_boiler",
+        "path": "/assets/user/castes-v87/game_acm_boiler.png",
+        "bytes": 1729724,
+        "sha256": "c1385916ec2e5bb3f1d6ff421f2a58850cb907697bdbcc7845d3b1f729f00ac1"
+      },
+      {
+        "id": "castes-game_acm_crusher",
+        "name": "Crusher",
+        "basename": "game_acm_crusher",
+        "path": "/assets/user/castes-v87/game_acm_crusher.png",
+        "bytes": 1885823,
+        "sha256": "eca7855c29455b87bf9fc4e26afe2ab07adbd3ff4afa2c5ffb36dc6b4ebc2baa"
+      },
+      {
+        "id": "castes-game_acm_spitter",
+        "name": "Spitter",
+        "basename": "game_acm_spitter",
+        "path": "/assets/user/castes-v87/game_acm_spitter.png",
+        "bytes": 2167113,
+        "sha256": "c281ad7c020999e2796af1c904be45c028bd8643e45bfc45b93edaf5ba4642c7"
+      },
+      {
+        "id": "castes-game_afe_burster",
+        "name": "Burster",
+        "basename": "game_afe_burster",
+        "path": "/assets/user/castes-v87/game_afe_burster.png",
+        "bytes": 1775455,
+        "sha256": "b2db2418502099d9f2551434cf207ef72fe0a09dc68914fbc85e18705720ce13"
+      },
+      {
+        "id": "castes-game_afe_crusher",
+        "name": "Crusher",
+        "basename": "game_afe_crusher",
+        "path": "/assets/user/castes-v87/game_afe_crusher.png",
+        "bytes": 2261639,
+        "sha256": "72137611a95e8134cade0e32fd17a3d9e0e7415a7ef9aab559018fe519a94f34"
+      },
+      {
+        "id": "castes-game_afe_prowler",
+        "name": "Prowler",
+        "basename": "game_afe_prowler",
+        "path": "/assets/user/castes-v87/game_afe_prowler.png",
+        "bytes": 2383160,
+        "sha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544"
+      },
+      {
+        "id": "castes-game_afe_pathogen_popper",
+        "name": "Popper",
+        "basename": "game_afe_pathogen_popper",
+        "path": "/assets/user/castes-v87/game_afe_pathogen_popper.png",
+        "bytes": 1850650,
+        "sha256": "fbae8b00fdd98c56f420f802532cb5efa4833e47285a62b926656f4a9e998d38"
+      },
+      {
+        "id": "castes-game_afe_pathogen_stalker",
+        "name": "Stalker — Pathogen",
+        "basename": "game_afe_pathogen_stalker",
+        "path": "/assets/user/castes-v87/game_afe_pathogen_stalker.png",
+        "bytes": 2264254,
+        "sha256": "262d3181e1951d2e888af3d3ddfd09f6137f548460782e507b8489f8c7ce7cc1"
+      },
+      {
+        "id": "castes-game_pathogen_blight",
+        "name": "Pathogen Blight",
+        "basename": "game_pathogen_blight",
+        "path": "/assets/user/castes-v87/game_pathogen_blight.png",
+        "bytes": 2095022,
+        "sha256": "0a8080a14a63f942bea16b811e0d3050e37c2b71fc89a9d57e75955da66d9a3f"
+      },
+      {
+        "id": "castes-game_pathogen_brute",
+        "name": "Pathogen Brute",
+        "basename": "game_pathogen_brute",
+        "path": "/assets/user/castes-v87/game_pathogen_brute.png",
+        "bytes": 2070736,
+        "sha256": "e565782f1505657f8d6ab447b3eda7d37775b248ebba6237a8b124549d99b2dc"
+      },
+      {
+        "id": "castes-game_pathogen_queen",
+        "name": "Pathogen Queen",
+        "basename": "game_pathogen_queen",
+        "path": "/assets/user/castes-v87/game_pathogen_queen.png",
+        "bytes": 2385872,
+        "sha256": "5e5e9ea0fc8af2c34753b2f56b40e017924762c571fe71c22db8b107bdfe270a"
+      },
+      {
+        "id": "castes-game_pathogen_runner",
+        "name": "Pathogen Runner",
+        "basename": "game_pathogen_runner",
+        "path": "/assets/user/castes-v87/game_pathogen_runner.png",
+        "bytes": 2121771,
+        "sha256": "cf67346994f7827e817c718b84768e79e0bedaa181394b6930af2ee7f4dc0bce"
+      },
+      {
+        "id": "castes-game_alien3_thegun_super_facehugger",
+        "name": "Super Face-Hugger",
+        "basename": "game_alien3_thegun_super_facehugger",
+        "path": "/assets/user/castes-v87/game_alien3_thegun_super_facehugger.png",
+        "bytes": 1485994,
+        "sha256": "42652f8749b9d65f93ed27f7a91062710638166b9b986c975b8c2bd632386ba3"
+      },
+      {
+        "id": "castes-game_avp_capcom_arachnoid",
+        "name": "Arachnoid",
+        "basename": "game_avp_capcom_arachnoid",
+        "path": "/assets/user/castes-v87/game_avp_capcom_arachnoid.png",
+        "bytes": 1644894,
+        "sha256": "84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee"
+      },
+      {
+        "id": "castes-game_avp_capcom_chrysalis",
+        "name": "Chrysalis",
+        "basename": "game_avp_capcom_chrysalis",
+        "path": "/assets/openai/sprites/static-enemy-v93/game_avp_capcom_chrysalis.png",
+        "bytes": 1364066,
+        "sha256": "616aeca6329e615cd42be6324d50de450d22b62d8950c7891acaf56e4a70abb7"
+      },
+      {
+        "id": "castes-game_avp_capcom_razor_claws",
+        "name": "Razor Claws",
+        "basename": "game_avp_capcom_razor_claws",
+        "path": "/assets/user/castes-v87/game_avp_capcom_razor_claws.png",
+        "bytes": 1743461,
+        "sha256": "a1d024f5a20e4a7210b7f77f011ed2f81e6a177ba787afd07a430b5cd71d1987"
+      },
+      {
+        "id": "castes-game_avp_capcom_royal_guard",
+        "name": "Royal Guard",
+        "basename": "game_avp_capcom_royal_guard",
+        "path": "/assets/user/castes-v87/game_avp_capcom_royal_guard.png",
+        "bytes": 1629021,
+        "sha256": "f8678cd4d343ec643c79791258fc4d25540aba43de40fc4b20ae720818b04cd3"
+      },
+      {
+        "id": "castes-game_avp_capcom_smasher",
+        "name": "Smasher",
+        "basename": "game_avp_capcom_smasher",
+        "path": "/assets/openai/sprites/static-enemy-v92/game_avp_capcom_smasher.png",
+        "bytes": 1192142,
+        "sha256": "0efaa9b6afe6f817567725d7aae0b57c15093d1f68a8e480bb34ede566c7dee8"
+      },
+      {
+        "id": "castes-game_avp_capcom_stalker",
+        "name": "Stalker",
+        "basename": "game_avp_capcom_stalker",
+        "path": "/assets/user/castes-v87/game_avp_capcom_stalker.png",
+        "bytes": 1504032,
+        "sha256": "e1e4fd52067a1d69b170935855f21ed6f38686fed8804c890bb961c67d6e5ad7"
+      },
+      {
+        "id": "pose-v94-kenner-gorilla",
+        "name": "Gorilla Alien",
+        "basename": "kenner-gorilla-neca",
+        "path": "/assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png",
+        "bytes": 1348118,
+        "sha256": "c91b539cebeb76fd69ac39ef5c9966166584a45f8a51a064c09a7306d54f4685"
+      },
+      {
+        "id": "pose-v94-kenner-rhino",
+        "name": "Rhino Alien",
+        "basename": "kenner-rhino-neca",
+        "path": "/assets/openai/sprites/static-enemy-v94/kenner-rhino-neca.png",
+        "bytes": 1553918,
+        "sha256": "056cff7c33e15760ea867185dba4228542eabc291328034d40246589180e7ce8"
+      },
+      {
+        "id": "pose-v94-kenner-snake",
+        "name": "Snake Alien",
+        "basename": "kenner-snake-neca",
+        "path": "/assets/openai/sprites/static-enemy-v94/kenner-snake-neca.png",
+        "bytes": 779874,
+        "sha256": "add655b4eb67bb402a3b10a254a135995fd3056517d62bc8411bc05c995fbed4"
+      },
+      {
+        "id": "pose-v94-kenner-panther",
+        "name": "Panther Alien",
+        "basename": "kenner-panther-neca",
+        "path": "/assets/openai/sprites/static-enemy-v94/kenner-panther-neca.png",
+        "bytes": 1130333,
+        "sha256": "575f23d532b10eb34f2dd0df9e8a860e1511cdecf4e7ab20eb5fa7742acc549c"
+      },
+      {
+        "id": "pose-v94-afe-synth-trooper",
+        "name": "Synth Trooper",
+        "basename": "game-afe-synth-trooper",
+        "path": "/assets/openai/sprites/static-enemy-v94/game-afe-synth-trooper.png",
+        "bytes": 1836982,
+        "sha256": "524e20c5f99303a243baaa8e2e763f22e2bb983decc24d34e90ebb89c1260338"
+      },
+      {
+        "id": "pose-v94-afe-synth-guard",
+        "name": "Synth Guard",
+        "basename": "game-afe-synth-guard",
+        "path": "/assets/openai/sprites/static-enemy-v94/game-afe-synth-guard.png",
+        "bytes": 1831696,
+        "sha256": "b0d36997b4ea3ddc7816bd1738b89de239fc441707611de8cbcf6333d6523c05"
+      },
+      {
+        "id": "pose-v94-afe-synth-sniper",
+        "name": "Synth Sniper",
+        "basename": "game-afe-synth-sniper",
+        "path": "/assets/openai/sprites/static-enemy-v94/game-afe-synth-sniper.png",
+        "bytes": 1759217,
+        "sha256": "6541a21be18321c71b2e8e2a8b76f5ac7e58581babe5e190a3dcde6247f5977b"
+      },
+      {
+        "id": "pose-v94-afe-synth-heavy",
+        "name": "Synth Heavy",
+        "basename": "game-afe-synth-heavy",
+        "path": "/assets/openai/sprites/static-enemy-v94/game-afe-synth-heavy.png",
+        "bytes": 1971647,
+        "sha256": "71a4ad45aafe454e33eb7a90a9f4574b59c731fe9406f19a5382987a6a9d5a4d"
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-094-albino-combat-synthetic",
+  "name": "Albino Combat Synthetic",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference is a multi-archetype sheet. Use ONLY the THIRD ROW: bulky armored humanoid combat robot, round sensor head with small optical ports, dark segmented metal shell, shoulder armor, ribbed mechanics, two robotic arms holding one compact rifle at low ready, two mechanical legs, no human face. Preserve exact combat robot body and weapon shape. Make its metal outer shell warm ivory with ash-gray mechanical recesses, subtle wear, no organic flesh, no new equipment. Output one intact right-facing third-row-derived robot only.\nSubject: Albino Combat Synthetic. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT; slightly three-quarter only enough to separate limbs. Every extremity and all existing equipment inside canvas. Entire subject must occupy at most 75 percent of width and height, with clear transparent padding on all four sides. Grounded neutral ready stance on invisible ground. One character only, no second pose.\nStyle: detailed science-fiction digital painted game sprite matching the reference, finely shaded surface relief, controlled restrained highlights, dark recesses, warm ivory and parchment pale material variant with cool gray; not a flat white silhouette.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve base anatomy and existing equipment only; no extra limbs or new weapons.",
+  "reference": {
+    "path": "assets/openai/synthetic-android-animation-sheet.png",
+    "sha256": "8b8da47dd0d58a54ae624d3ff6997d1fd20fb93d1a66cb9d6c5ac73101f486a4",
+    "visualNotes": "Reference is a multi-archetype sheet. Use ONLY the THIRD ROW: bulky armored humanoid combat robot, round sensor head with small optical ports, dark segmented metal shell, shoulder armor, ribbed mechanics, two robotic arms holding one compact rifle at low ready, two mechanical legs, no human face. Preserve exact combat robot body and weapon shape. Make its metal outer shell warm ivory with ash-gray mechanical recesses, subtle wear, no organic flesh, no new equipment. Output one intact right-facing third-row-derived robot only."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-6131f674-cb8c-4369-9bef-b013b7ce651d.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-094-albino-combat-synthetic.png",
+    "width": 1227,
+    "height": 1282,
+    "sha256": "36bd4bb9795f8a3f4716cec27df5da521ef0170760215ce1228987e5552bfb13",
+    "bboxAlphaAtLeast16": [
+      269,
+      97,
+      1031,
+      1199
+    ],
+    "alphaMin": 0,
+    "alpha0": 1193356,
+    "totalPixels": 1573014
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing armored combat robot derived from the reference third row, round optical sensor head, ivory shell, dark mechanisms, one compact rifle retained, two arms/two legs. Native alpha confirmed; top/bottom margins about 6.5–7.6%, entire figure and rifle uncropped. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.515,
+      "y": 0.9352574102964119
+    },
+    "sourceFacing": 1
+  }
+}

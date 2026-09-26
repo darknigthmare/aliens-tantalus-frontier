@@ -25,7 +25,8 @@ function surface(random) {
   root.parentElement = new Element(document);
   let listener;
   const media = { matches: false, addEventListener(type, callback) { listener = callback; } };
-  const controller = new TitleSceneControllerV79({ root, fallback, random, supportsScene: () => true, matchMedia: () => media });
+  // Isolate placement RNG; native-angle selection has its own V88/V90 coverage.
+  const controller = new TitleSceneControllerV79({ root, fallback, random, shipAngleAssets: [], supportsScene: () => true, matchMedia: () => media });
   return { root, controller, media, changeMotion: () => listener() };
 }
 const save = () => ({ worldId: 'world-01-acheron-lv-426', settings: { quality: 'high', reducedMotion: false } });
@@ -143,7 +144,7 @@ test('le halo partage les variables de cadre, sans balayage géométrique, pour 
     assert.equal(css.split(`[data-placement='${placement}']`).length - 1, 3);
   }
   for (const keyframes of ['title-sweep-v79', 'title-sweep-reduced-v79']) {
-    const animation = css.slice(css.indexOf('@keyframes ' + keyframes)).split('\n}\n')[0];
+    const animation = css.slice(css.indexOf('@keyframes ' + keyframes)).split(/\r?\n}\r?\n/)[0];
     assert.doesNotMatch(animation, /transform|translate|rotate|scale/);
   }
   assert.match(css, /\[data-mode='static'\] \.title-scene-layer-v79\s*\{[^}]*animation-play-state: paused !important/);

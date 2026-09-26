@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import { ENEMIES } from '../src/content-core-v50.js';
 import { GameEngine } from '../src/game-v51-runtime.js';
 import { buildEnemyRuntime } from '../src/game-runtime.js';
@@ -29,7 +28,6 @@ import {
 } from '../src/enemy-batch-combat-v66.js';
 import { spriteImageDimensions } from './helpers/sprite-image-dimensions.mjs';
 
-const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const IDS = ['enemy-009-crusher', 'enemy-010-spitter'];
 const read = (relative) => readFileSync(new URL('../' + relative.replaceAll('\\', '/'), import.meta.url));
 const json = (relative) => JSON.parse(read(relative));
@@ -73,7 +71,7 @@ test('V81: manifeste, sources, métadonnées et deux atlas restent reliés par l
       height: entry.grid.rows * entry.grid.cellHeight
     });
   }
-  assert.ok(ROOT.endsWith('project\\') || ROOT.endsWith('project/'));
+  assert.equal(json('package.json').name, 'aliens-tantalus-frontier', 'les preuves sont résolues depuis ce dépôt, quel que soit le nom de son dossier');
 });
 
 test('V81: registre exact, orientation, clips et géométrie ne réutilisent aucun placeholder', () => {

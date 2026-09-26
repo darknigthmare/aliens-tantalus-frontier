@@ -9,12 +9,27 @@ import { QZ17_COLLECTABLES_SHEET_V68 } from '../src/narrative-collectables-visua
 import { ALPHA_BRAVO_CONSOLE_SHEET_V69 } from '../src/alpha-bravo-visuals-v69.js';
 import { ALIEN_SURVIVAL_SYSTEMS_SHEET_V70 } from '../src/alien-survival-visuals-v70.js';
 import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
+import { ENEMY_SPRITE_REVISIONS_V92 } from '../src/enemy-sprite-revisions-v92.js';
+import { ENEMY_SPRITE_REVISIONS_V93 } from '../src/enemy-sprite-revisions-v93.js';
+import { ENEMY_ADDITIONAL_POSES_V94 } from '../src/enemy-additional-poses-v94.js';
+import { ENEMY_USER_CREATIONS_V95 } from '../src/enemy-user-creations-v95.js';
+import { USER_EQUIPMENT_ART_V95 } from '../src/user-equipment-art-v95.js';
+import { USER_REFERENCE_GALLERY_V95 } from '../src/user-reference-effects-v95.js';
+import { ENEMY_HISTORICAL_VARIANTS_V95 } from '../src/enemy-historical-variants-v95.js';
+import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_EXPANSION_ASSETS_V96 } from '../src/enemy-expansion-assets-v96.js';
+import { ENEMY_EXPANSION_QUEEN_V96 } from '../src/enemy-expansion-queen-v96.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
 const includeBuildAsset = createBuildAssetFilter(repoRoot);
+// Dedicated 1x1 poses have their own SHA/geometry contract, not 4x4 animation sheets.
+const staticRuntimeFiles = new Set([...ENEMY_DEDICATED_POSES_V97, ...ENEMY_EXPANSION_ASSETS_V96, ...ENEMY_EXPANSION_QUEEN_V96, ...ENEMY_SPRITE_REVISIONS_V92, ...ENEMY_SPRITE_REVISIONS_V93, ...ENEMY_ADDITIONAL_POSES_V94,
+  ...ENEMY_USER_CREATIONS_V95.flatMap(entry => [entry, ...(entry.states || [])]), ...USER_EQUIPMENT_ART_V95, ...USER_REFERENCE_GALLERY_V95,
+  ...Object.values(ENEMY_HISTORICAL_VARIANTS_V95).flatMap(family => family.states)
+].map(entry => entry.path.slice(1)));
 const dedicatedRuntimeFiles = new Set([
   ...Object.values(CARGO_BRUTAL_VISUAL_REGISTRY_V67).map((entry) => entry.path.replace(/^\//, '')),
   QZ17_COLLECTABLES_SHEET_V68.path.replace(/^\//, ''),
@@ -125,7 +140,7 @@ test('the shared sprite manifest covers every deployed raw and normalized sheet 
   const allPngs = await listPngFiles(spriteRoot);
   const rawFiles = allPngs
     .map(repoPathFromAbsolute)
-    .filter((file) => !file.includes('/normalized/') && includeBuildAsset(resolve(repoRoot, file)))
+    .filter((file) => !file.includes('/normalized/') && !staticRuntimeFiles.has(file) && includeBuildAsset(resolve(repoRoot, file)))
     .sort();
   const normalizedFiles = allPngs
     .map(repoPathFromAbsolute)

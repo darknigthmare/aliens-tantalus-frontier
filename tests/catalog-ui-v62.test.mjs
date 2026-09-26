@@ -1,3 +1,5 @@
+import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
+import { getEnemyStaticPoseV95 } from '../src/enemy-static-poses-v95.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
@@ -114,7 +116,7 @@ class FakeDocument {
   createElement(tagName) { return new FakeElement(tagName, this); }
 }
 
-const makeWorkbench = ({ catalogs = ['enemies'], query = '', getActions, reducedMotion = true } = {}) => {
+const makeWorkbench = ({ catalogs = ['enemies'], query = '', getActions, getDiscoveryV88, reducedMotion = true } = {}) => {
   const documentRef = new FakeDocument();
   const root = documentRef.createElement('section');
   const tree = documentRef.createElement('aside');
@@ -131,6 +133,7 @@ const makeWorkbench = ({ catalogs = ['enemies'], query = '', getActions, reduced
     search,
     catalogs,
     getActions,
+    getDiscoveryV88,
     limit: 8,
     reducedMotion
   });
@@ -143,6 +146,98 @@ test('la recherche UI sélectionne le meilleur résultat et ouvre tous ses ancê
   assert.equal(state.selectedEntry.id, state.bestEntry.id);
   assert.ok(state.bestEntry.ancestryIds.every((id) => state.expandedNodeIds.includes(id)));
   assert.ok(state.records.every((record) => record.catalog === 'vehicles'));
+});
+
+test('la fiche native reste une pose entière et affiche la découverte de campagne', () => {
+  const id = 'castes-film_warrior_aliens_1986';
+  const { workbench, detail } = makeWorkbench({ query: id, getDiscoveryV88: () => ({ seen: true, status: 'observed', defeated: 2, firstWorldId: 'world-001' }) });
+  workbench.refresh();
+  assert.match(detail.textContent, /Pose fixe native · animations manquantes/);
+  assert.match(detail.textContent, /Rencontré en mission · neutralisations 2/);
+  assert.equal(detail.querySelector('[data-discovery-status]').dataset.discoveryStatus, 'observed');
+  const figure = detail.querySelector('[data-visual-mode="static-pose"]');
+  assert.equal(figure.dataset.animationStatus, 'missing');
+  assert.equal(figure.children[0].style.objectFit, 'contain');
+  workbench.destroy();
+});
+
+test('Arachnoid detail previews Grey/Purple whole PNGs while preserving one record and gameplay stats', () => {
+  const id = 'castes-game_avp_capcom_arachnoid', record = getCatalogEntryV62(id);
+  const before = JSON.stringify(record);
+  const { workbench, detail } = makeWorkbench({ query: id });
+  workbench.refresh();
+  const selector = detail.querySelector('[data-static-state-select-v95]');
+  assert.ok(selector); assert.equal(selector.dataset.staticStateSelectV95, id);
+  assert.deepEqual(selector.children.map(option => option.value), ['grey', 'purple']);
+  assert.equal(selector.value, 'grey');
+  const figure = detail.querySelector('[data-visual-mode="static-pose"]');
+  const image = figure.children[0];
+  for (const colour of ['purple', 'grey']) {
+    selector.value = colour; selector.listeners.get('change')();
+    assert.equal(image.src, getEnemyStaticPoseV95(id, colour).path);
+    assert.equal(figure.dataset.visualStateV95, colour);
+    assert.equal(image.style.objectFit, 'contain');
+    assert.equal(image.style.width, '100%'); assert.equal(image.style.height, '100%');
+    assert.equal(figure.dataset.animationStatus, 'missing');
+    assert.equal(figure.dataset.frame, '0');
+  }
+  selector.value = 'foreign'; selector.listeners.get('change')();
+  assert.equal(image.src, getEnemyStaticPoseV95(id).path);
+  assert.equal(JSON.stringify(record), before);
+  workbench.destroy();
+  const defender = makeWorkbench({ query: 'pose-v95-user-xeno-defender' }); defender.workbench.refresh();
+  assert.equal(defender.detail.querySelector('[data-static-state-select-v95]'), null); defender.workbench.destroy();
+});
+
+test('V89 affiche uniquement les trois attaques natives documentées et leurs références', () => {
+  for (const [basename, kind, label] of [
+    ['game_afe_burster', 'acid-burst', 'Explosion acide'],
+    ['game_pathogen_blight', 'timed-acid', 'Projectile acide temporisé'],
+    ['game_pathogen_brute', 'ground-slam', 'Frappe au sol']
+  ]) {
+    const { workbench, detail } = makeWorkbench({ query: 'castes-' + basename });
+    workbench.refresh();
+    assert.equal(detail.querySelector('[data-combat-behavior-v89]')?.dataset.combatBehaviorV89, kind);
+    assert.match(detail.textContent, new RegExp(label));
+    assert.match(detail.textContent, /animations manquantes/);
+    assert.match(detail.textContent, /fidélité canonique non certifiée/);
+    const links = detail.querySelectorAll('[data-combat-behavior-source-v89]');
+    assert.ok(links.length);
+    for (const link of links) {
+      assert.match(link.href, /^https:\/\/www\.aliensfireteamelite\.com\//);
+      assert.equal(link.rel, 'noopener noreferrer');
+    }
+    workbench.destroy();
+  }
+  const { workbench, detail } = makeWorkbench({ query: 'castes-film_warrior_aliens_1986' });
+  workbench.refresh();
+  assert.equal(detail.querySelector('[data-combat-behavior-v89]'), null);
+  assert.match(detail.textContent, /comportement de campagne simplifié/);
+  workbench.destroy();
+});
+
+test('V89 les sources de combat restent des liens HTTPS sans HTML ni credentials', () => {
+  const { workbench, detail } = makeWorkbench();
+  workbench.renderCombatBehaviorV89({ catalog: 'enemies', combatBehaviorV89: {
+    id: 'test', label: '<img onerror=alert(1)>', summary: '<script>bad</script>',
+    sourceUrls: ['javascript:alert(1)', 'data:text/html,script', 'https://user:secret@example.com/', 'http://example.com/', 'not a url', 'https://example.com/source', 'https://example.com/source']
+  } });
+  assert.equal(detail.querySelectorAll('[data-combat-behavior-source-v89]').length, 1);
+  assert.equal(detail.querySelector('[data-combat-behavior-source-v89]').href, 'https://example.com/source');
+  assert.match(detail.textContent, /<script>bad<\/script>/);
+  workbench.destroy();
+});
+
+test('V89 les fiches françaises distinguent contrôle de fichier et exactitude canonique', () => {
+  assert.equal(formatCatalogValueV62('source-grounded-partial-v89'), 'Documentée, adaptation partielle');
+  assert.equal(formatCatalogValueV62('static-pose'), 'Pose fixe');
+  assert.match(formatCatalogValueV62('sha256-dimensions-alpha-verified'), /fidélité canonique non certifiée/);
+  const { workbench, detail } = makeWorkbench({ query: 'castes-game_pathogen_brute' });
+  workbench.refresh();
+  assert.doesNotMatch(detail.textContent, /source-grounded-partial-v89|sha256-dimensions-alpha-verified|Encounter World Ids|world-06-lv-895/);
+  assert.match(detail.textContent, /LV-895/);
+  assert.match(detail.textContent, /AnimationsManquantes/);
+  workbench.destroy();
 });
 
 test('un nœud actif filtre réellement ses descendants sans recherche textuelle', () => {
@@ -244,7 +339,7 @@ test('les valeurs inconnues sont signalées sans inventer de donnée', () => {
 
 test('V72 pages the complete roster and keeps list previews static', () => {
   const { workbench, root, list } = makeWorkbench();
-  assert.match(list.textContent, /571/);
+  assert.match(list.textContent, new RegExp(String(571 + CURRENT_STATIC.length)));
   assert.equal(list.querySelectorAll('[data-catalog-entry-card]').length, 48);
   assert.ok([...workbench.animator.animations].every((animation) => animation.timer === null));
   const more = list.querySelector('[data-catalog-show-more]');

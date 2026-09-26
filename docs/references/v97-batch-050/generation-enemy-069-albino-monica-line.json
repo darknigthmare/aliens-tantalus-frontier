@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-069-albino-monica-line",
+  "name": "Albino Monica Line",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1 is the base anatomy and detailed raster rendering reference. Create ONE newly authored Albino Monica Line in a stable standing bipedal idle stance. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-017-monica-line identity lock only. Preserve one unusually large, heavy and resilient but still recognizably XX121 bipedal Drone with a long smooth eyeless dome, double jaw, ribbed biomechanical torso, two long clawed arms, two digitigrade legs, four dorsal tubes and exactly one complete segmented tail. Preserve the base line's controlled irregular Pathogen striping as newly authored low-chroma material variation, never an individual's exact markings. Albino changes pigment and material response only: warm pearl-ivory and pale bone carapace, cool ash-gray recesses, restrained translucent rose-taupe tissue and muted gray-taupe Pathogen bands, dark desaturated cavities, wet highlights and metallic ivory/silver teeth; never flat pure white, glow, ice or an automatic recolor. Keep strict right-facing orthographic gameplay profile, stable dome/ribcage/pelvis proportions and the queue's biped motions. Do not inherit numeric sourceScaleByClip values or legacy bounds-center-bottom roots: the base has no completed scaleCalibrationReview, no scaleCalibrationEvidence and no entry in the reviewed anchor registry. Do not reproduce the base attack's cross-cell boundary contacts. No human face, hair, clothing, nameplate, Crusher shield, Queen crown, Specimen-Six ridged Warrior skull, missing tubes, extra limb or official Albino Monica model claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.\nKeep the unusually heavy Drone proportions and SMOOTH long dome, four dorsal tubes, both long arms and their complete claw hands separately visible, feet slightly staggered. ONE complete subject in strict orthographic RIGHT-facing side profile, single full tail trailing to left. Genuine transparent alpha background, no floor, shadow or halo. Entire silhouette sits in central 75% canvas with clear 10% or larger transparent padding on all sides. No sheet, grid, duplicates, text, logo, watermark, props, gore or cropped anatomy. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png",
+    "sha256": "7bea16e251795d207ec5796016513d8631399906864c171c3d6445fe2efc77b3",
+    "visualNotes": "Reviewed base sheet: heavy bipedal Drone with smooth elongated dome, dorsal tube group, two long arms, two legs and full spear tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-dcbd4eb0-f579-4566-a043-d37cc7951c8c.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-069-albino-monica-line.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "6eaa6b116ab6ad936a9724d0e0e68008ae7e77ac504f55d50ea03ea42a12b2d9",
+    "bboxAlphaAtLeast16": [
+      87,
+      232,
+      1174,
+      1030
+    ],
+    "alphaMin": 0,
+    "alpha0": 1280608,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Heavy Drone silhouette, smooth pale dome with muted gray bands, two separate claw hands and complete tail verified. Dorsal tubes overlap in side view (three tips clearly separable). Native alpha and no cropping; side padding 6.4-6.9%. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.6778309409888357,
+      "y": 0.8205741626794258
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-085-albino-arcology-lurker",
+  "name": "Albino Arcology Lurker",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomical and art-style reference, NOT a sheet to reproduce. Reference is a multi-pose sheet of a slender long-armed dark biomechanical humanoid lurking xenomorph, smooth elongated eyeless dome, narrow ribbed torso, two long clawed arms, two digitigrade legs, long slender segmented tail trailing left. Output one low crouched but bipedal stalking pose facing right.\nSubject: Albino Arcology Lurker. Original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT, slightly three-quarter only enough to separate limbs; complete head, feet, claws and tail inside canvas. Fit ENTIRE silhouette within central 80 percent of width AND height, leaving ten percent clear transparent padding on all four sides. Grounded neutral ready stance, feet on a common invisible ground. One creature only, no second pose.\nStyle: match reference's detailed dark science-fiction biomechanical digital painted sprite, precise chitin/rib relief, controlled highlights, readable shading. Ivory/ash/pink material variation, not flat white.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve exact base anatomy; no extra limbs or new equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png",
+    "sha256": "7e8c2108fb90998185d28e9d158f98fe78bc4eafe756605b5f923145c2d1df3c",
+    "visualNotes": "Reference is a multi-pose sheet of a slender long-armed dark biomechanical humanoid lurking xenomorph, smooth elongated eyeless dome, narrow ribbed torso, two long clawed arms, two digitigrade legs, long slender segmented tail trailing left. Output one low crouched but bipedal stalking pose facing right."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-2c3e5508-7ad2-4fc6-ba81-8a1f0873b923.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-085-albino-arcology-lurker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "8233265c7bd68b89f7fbd1e0a050ec467a315c788b0f13f50e23a2f8b413a4da",
+    "bboxAlphaAtLeast16": [
+      62,
+      164,
+      1477,
+      864
+    ],
+    "alphaMin": 0,
+    "alpha0": 1285569,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing low biped, elongated dome, long clawed arms and complete tail; gaunt ribbed anatomy retained. Native transparent alpha confirmed. Requested 10% margins not met on every side, but entire anatomy has clear uncropped margins. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.56,
+      "y": 0.84375
+    },
+    "sourceFacing": 1
+  }
+}

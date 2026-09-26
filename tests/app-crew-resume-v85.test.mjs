@@ -11,13 +11,15 @@ for (const enabled of [false,true]) for (const nativeResume of [false,true]) {
     const log={textContent:''};
     const engine={coopEnabled:false,activeSquadActors(){return Array.from({length:this.coopEnabled?3:4});},setCoop(value){calls.push(['coop',value]);this.coopEnabled=value;},start(){calls.push(['start']);this.coopEnabled=!enabled;this.lastResumeResult={applied:nativeResume};}};
     const scope={engine,ENEMIES:[],profileEpochV78:1,pendingMissionLaunchV62:{},missionOwnerV78:null,
-      saveSystem:{profile:1,data:{settings:{coop:enabled},strategy:{currentOperation:{id:'operation-v85'}}}},
+      saveSystem:{profile:1,data:{createdAt:12345,settings:{coop:enabled},strategy:{currentOperation:{id:'operation-v85'}}}},
+      getSpecialOperationByCampaignIdV67:()=>null,applyOpeningMissionSuppliesV88:()=>false,
       destroyMissionInsertionUiV62(){},applyMissionResumeState(){calls.push(['compat']);engine.coopEnabled=!enabled;},
       setupAlphaBravoCommandDockV69:()=>({refresh(){calls.push(['dock',engine.coopEnabled]);}}),
       setupAlienSurvivalDockV70:()=>({refresh(){}}),renderMissionEquipment(){},byId:id=>id==='mission-log'?log:{focus(){}},
-      context:{levelSeed:{seed:85},world:{},worldState:{},deployment:{operation:{}},operationLoadout:{resumeState:{schema:2}}}};
+      context:{campaign:{id:'campaign-v85'},levelSeed:{seed:85},world:{},worldState:{},deployment:{operation:{}},operationLoadout:{resumeState:{schema:2}}}};
     runInNewContext(start+'\nstartMissionRuntimeV62(context);',scope);
     assert.equal(engine.coopEnabled,enabled);
+    assert.equal(scope.missionOwnerV78.timeline, scope.saveSystem.data.createdAt, 'Campaign events own the same saved timeline');
     assert.ok(log.textContent.includes(`${enabled?3:4} alliés IA physiques`));
     assert.deepEqual(calls.at(-2),['coop',enabled]);
     assert.deepEqual(calls.at(-1),['dock',enabled]);

@@ -1,0 +1,126 @@
+{
+  "schema": 96,
+  "date": "2026-09-26",
+  "profileId": "enemy-145-armored-working-joe",
+  "name": "Armored Working Joe",
+  "provenance": "systemic-variant",
+  "canonExact": false,
+  "method": "Integrated OpenAI image_gen native generation with one project atlas as identity/style reference. No CLI/API fallback. PNG bytes copied unchanged; no resizing, recoloring, alpha editing or normalization.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-041-working-joe.webp",
+    "sha256": "ea6ff8e9042c6d348545b8d00f189a9f65250a3528e19114f624de6a29d93010",
+    "role": "base identity and style; not edit target",
+    "referenceUrls": [
+      "https://www.dreadcentral.com/editorials/515017/alien-isolation-and-the-terror-of-its-working-joes/"
+    ],
+    "notes": "Pale bald synthetic head, olive/orange working suit, empty hands and mechanical bearing remain recognizable. Practical dark vest and guards are a project invention. No distinct canonical armored Working Joe design is asserted."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D side-view game sprite with native transparency, for Alien: Tantalus Frontier.\nInput image 1 is a STYLE AND BASE IDENTITY REFERENCE: the existing Working Joe sprite atlas. Do NOT reproduce its grid or multiple figures.\nPrimary request: create ONE full-body Armored Working Joe: the project's non-canonical armored variant of the Alien: Isolation industrial synthetic. Preserve the reference's pale bald expressionless humanoid head, dark olive maintenance jumpsuit with restrained orange seams, work boots, stiff robotic bearing, ordinary human limb proportions, and two empty hands. Add a clearly legible practical protective vest and segmented forearm/shin guards over the same uniform, dark desaturated industrial steel, not a futuristic superhero suit. Keep the face visible and no helmet.\nStyle/medium: match the reference's detailed painted game-character rendering, crisp defined edges, restrained industrial palette, subtle realistic texture and shaded volumes. This is not pixel art and not a photograph.\nComposition/framing: strict lateral gameplay view facing RIGHT, entire silhouette visible from crown to both soles, neutral grounded ready stance with slightly separated feet and hands away from torso, single centered figure. Leave at least 10 percent genuinely transparent padding on every side. The image contains only this one sprite; no contact shadow or floor.\nConstraints: actually transparent RGBA background; no scenery, no grid, no labels, no text, no logos, no watermark, no multiple poses, no added weapon, no gore. This is an original project variant based on the existing model, not an exact canonical armored model.",
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-927e3a6c-0c10-4325-a79e-432e41d38ac6.png",
+    "path": "assets/openai/sprites/static-enemy-v96/armored-working-joe.png",
+    "width": 1024,
+    "height": 1536,
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "format": "RGBA8 non-interlaced",
+    "bytes": 1422648,
+    "sha256": "e361bb35804e23c66a2b981375d3eff3b99361f684ba394ce93f6bf9c7d28210",
+    "totalPixels": 1572864,
+    "alphaMin": 0,
+    "alphaMax": 254,
+    "alpha0": 1245776,
+    "alpha1to254": 327088,
+    "alpha255": 0,
+    "transparentFraction": 0.7920430501302084,
+    "alphaAtLeast16": 317840,
+    "alphaAtLeast128": 315135,
+    "meanBodyAlphaAtLeast128": 252.20584511399875,
+    "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+    "bboxAlphaNonzero": [
+      65,
+      128,
+      1010,
+      1536
+    ],
+    "bboxAlphaAtLeast16": [
+      325,
+      131,
+      723,
+      1381
+    ],
+    "alphaBounds": [
+      325,
+      131,
+      723,
+      1381
+    ],
+    "bboxAlphaAtLeast128": [
+      326,
+      132,
+      722,
+      1380
+    ],
+    "bboxAlpha255": null,
+    "marginsAlphaAtLeast16": {
+      "left": 325,
+      "top": 131,
+      "right": 301,
+      "bottom": 155
+    },
+    "marginFractionsAlphaAtLeast16": {
+      "left": 0.3173828125,
+      "top": 0.08528645833333333,
+      "right": 0.2939453125,
+      "bottom": 0.10091145833333333
+    },
+    "visiblePadding5Percent": true,
+    "visiblePadding8Percent": true,
+    "outer8PercentBand": {
+      "fraction": 0.08,
+      "nonzeroPixels": 59,
+      "visiblePixels": 0,
+      "maxAlpha": 1
+    },
+    "pivotCandidates": {
+      "visibleBoundsBottomCenter": {
+        "x": 0.51171875,
+        "y": 0.8990885416666666
+      },
+      "alphaWeightedBottom": {
+        "x": 0.4964025086169345,
+        "y": 0.8990885416666666
+      },
+      "canvasBottomCenter": {
+        "x": 0.5,
+        "y": 1
+      },
+      "status": "measurement-only-requires-visual-ground-contact-review"
+    }
+  },
+  "runtimeContract": {
+    "parentId": "enemy-145-armored-working-joe",
+    "duplicateEnemy": false,
+    "frames": 1,
+    "animation": false,
+    "sourceFacing": 1,
+    "geometryPolicy": "Draw whole native PNG at isotropic scale; do not crop transparent padding or normalize. Existing profile stats and collider remain authoritative.",
+    "pivot": {
+      "x": 0.5,
+      "y": 0.8990885416666666
+    },
+    "pivotReview": "X is approximate pelvis/support center from full-body visual inspection; Y is complete lowest sole alpha bound. Parent integration must verify actor ground contact and visual size."
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "reviewer": "v96_native_sprites",
+    "visual": "Full figure including feet and equipment, right-facing near-side three-quarter gameplay pose, no unexpected duplicate figure, text or environment. Armor variants are visually distinct from their base atlases.",
+    "alphaComposite": "Viewed all three native RGBA images actually composited in local Chrome on white, black and checkerboard. No opaque matte or visible diffuse halo at gallery scale. Raw RGB preview halo on Joe is not present in real composites.",
+    "proof": [
+      "E:/CodexQA/AliensTantalus/v96-native-sprites-20260926/white.png",
+      "E:/CodexQA/AliensTantalus/v96-native-sprites-20260926/black.png",
+      "E:/CodexQA/AliensTantalus/v96-native-sprites-20260926/checker.png"
+    ],
+    "limits": "Gallery-scale inspection only, not exhaustive 100% pixel QC. Requested 10% padding not achieved on every edge; measured visible margin minimum >5%. Slight near-side three-quarter view, not geometrically exact orthographic side profile. All three are generated project adaptations, never certified 1:1 canon. Static poses only; historical animation-clip production remains pending."
+  }
+}

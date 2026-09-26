@@ -58,7 +58,13 @@ function identityFingerprint(plan) {
     // The supporting platform may change when formerly stepped surfaces become
     // coplanar. Its attachment is checked separately, never silently discarded.
     hazards: plan.hazards.map(({ y, surfacePlatformId, ...gameplay }) => gameplay),
-    events: plan.events,
+    // V94 wires the existing surface group to its existing storm trigger.
+    // Keep the pre-V87 digest intact while asserting this one approved change.
+    events: plan.events.map(event => {
+      if (plan.templateId !== 'planet-exterior' || event.id !== 'planet-storm-front') return event;
+      assert.deepEqual(event.actions, ['weather:storm', 'activate:planet-hazard-radiation', 'art:low-visibility', 'spawn:planet-surface-fauna']);
+      return { ...event, actions: event.actions.slice(0, -1) };
+    }),
     spawns: plan.spawns
   };
 }
@@ -213,7 +219,7 @@ test('V87 les deux raccords de la balise planétaire sont des échelles distinct
   }
 });
 
-test('V87 conserve identités de reprise et hasard V86, hors les deux raccords planétaires explicitement corrigés', () => {
+test('V87 conserve identités de reprise et hasard V86, hors les deux raccords planétaires et le déclencheur de surface V94 explicitement corrigés', () => {
   // Captured from git HEAD before this structural patch, not from a rewritten
   // fixture produced by the implementation under test.
   const historical = {

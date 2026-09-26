@@ -1,0 +1,38 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-121-armored-monica-line",
+  "name": "Armored Monica Line",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Monica Line. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Monica Line as pictured: tall sturdy upright black biomechanical xenomorph, exactly TWO long clawed arms and TWO digitigrade legs, long smooth glossy eyeless head dome with subtle transverse ridges, ribbed torso and rounded shoulder joint shells, several curved dorsal tubes extending backward, ONE thick segmented tail tapering to blade. Preserve black/silver reflective palette and reference humanoid-monster silhouette. Add natural dark overlapping carapace plates integrated into shoulders/thighs without metallic fabricated armor or altered anatomy.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png",
+    "sha256": "7bea16e251795d207ec5796016513d8631399906864c171c3d6445fe2efc77b3",
+    "visualNotes": "Viewed Monica Line sheet: sturdy upright glossy black/silver xenomorph, two arms/two legs, smooth ridged dome, rounded shoulder shells, dorsal tubes and one long heavy blade-ended tail."
+  },
+  "output": {
+    "providerPath": null,
+    "path": null,
+    "width": null,
+    "height": null,
+    "sha256": null,
+    "bboxAlphaAtLeast16": null,
+    "alphaMin": null,
+    "alpha0": null,
+    "totalPixels": null,
+    "requestedOutputPath": "assets/openai/sprites/static-enemy-v97/enemy-121-armored-monica-line.png"
+  },
+  "review": {
+    "status": "held",
+    "notes": "Native output explicitly rejected by safety system: moderation_blocked, moderation_stage output, category other, request41b41376-a47c-48f0-84ff-32d092f13d60. No image returned, no retry, no workaround.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "failureCode": "moderation_blocked",
+    "attribution": "explicit-target"
+  },
+  "runtimeContract": {
+    "pivot": null,
+    "sourceFacing": 1
+  }
+}

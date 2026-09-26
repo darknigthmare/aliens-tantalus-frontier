@@ -1319,6 +1319,7 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     updateEnemyOnMissionLevelV66(enemy, delta) {
+      if (enemy?.userCasteIdleV88) return super.updateEnemy(enemy, delta);
       // Aquatic actors must not enter the subsequent surface/ladder snap path.
       if (updateCetoV75(this, enemy, delta)) return;
       if (enemy?.dormant) {

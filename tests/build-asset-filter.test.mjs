@@ -9,6 +9,30 @@ const V66_BATCH_001_IDS = Object.freeze(['enemy-001-ovomorph', 'enemy-003-chestb
 const v66Path = (id) => `assets/openai/sprites/normalized/enemy-profiles-v66/${id}.webp`;
 const v66AcceptedAssets = () => V66_BATCH_001_IDS.map((profileId) => ({ profileId, path: `/${v66Path(profileId)}`, reviewStatus: 'accepted', identityVerified: true }));
 
+test('la copie exclut exactement l’inventaire utilisateur privé V95 avant descente, sans modifier les voisins publics', async (t) => {
+  const fixture = await mkdtemp(join(tmpdir(), 'tantalus-private-inventory-filter-'));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  const sourceRoot = join(fixture, 'source'), outputRoot = join(fixture, 'output');
+  const privateRoot = 'docs/references/v95-user-creatures';
+  const privateFiles = [`${privateRoot}/INVENTORY.json`, `${privateRoot}/nested/user-source-paths.txt`];
+  const publicFiles = ['docs/references/v95-user-creatures-public/README.md', 'docs/V95_PUBLIC_REPORT.md'];
+  for (const file of [...privateFiles, ...publicFiles]) {
+    await mkdir(dirname(join(sourceRoot, file)), { recursive: true });
+    await writeFile(join(sourceRoot, file), `fixture:${file}`);
+  }
+  const filter = createBuildAssetFilter(sourceRoot), visited = [];
+  for (const path of [privateRoot, ...privateFiles]) assert.equal(filter(join(sourceRoot, path)), false, path);
+  await cp(sourceRoot, outputRoot, { recursive: true, filter(source) {
+    visited.push(relative(sourceRoot, source).replaceAll('\\', '/'));
+    return filter(source);
+  } });
+  assert.ok(visited.includes(privateRoot));
+  assert.equal(visited.some(path => path.startsWith(`${privateRoot}/`)), false, 'Private contents are never traversed');
+  await assert.rejects(access(join(outputRoot, privateRoot)), { code: 'ENOENT' });
+  for (const file of privateFiles) await access(join(sourceRoot, file));
+  for (const file of publicFiles) assert.equal(await readFile(join(outputRoot, file), 'utf8'), `fixture:${file}`);
+});
+
 test('la copie ne traverse pas les intermédiaires V64/V65/V66 et conserve les atlas runtime', async (t) => {
   const fixture = await mkdtemp(join(tmpdir(), 'tantalus-build-filter-'));
   t.after(() => rm(fixture, { recursive: true, force: true }));

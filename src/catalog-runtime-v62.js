@@ -5,6 +5,8 @@ import {
   WEAPONS
 } from './content-core-v50.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
+import { enemyDedicatedCatalogVisualV97 as enemyDedicatedCatalogVisualV96, getEnemyDedicatedPoseV97 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v97.js';
+import { ENEMY_ENCYCLOPEDIA_CATALOG_V88, getEnemyUserCampaignV88, userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 import {
   resolveEquipmentVisualProfileV56,
   resolveEquipmentVisualStateV56
@@ -58,7 +60,7 @@ export const HUMAN_COMPARISON_REFERENCE_V62 = Object.freeze({
 const CATALOGS = Object.freeze({
   weapons: WEAPONS,
   equipment: EQUIPMENT,
-  enemies: ENEMIES,
+  enemies: ENEMY_ENCYCLOPEDIA_CATALOG_V88,
   vehicles: VEHICLES
 });
 
@@ -194,6 +196,8 @@ function equipmentVisual(entry) {
 }
 
 function enemyVisual(entry) {
+  const native = enemyDedicatedCatalogVisualV96(entry.id) || userCasteStaticVisualV88(entry.id);
+  if (native) return native;
   const profile = resolveEnemyVisualProfile(entry);
   if (!profile) return null;
   const animation = resolveEnemyAnimation({
@@ -261,6 +265,7 @@ const VISUAL_RESOLVERS = Object.freeze({
 });
 
 const catalogProvenance = (entry, visual) => freezeObject({
+  ...(getEnemyUserCampaignV88(entry.id) ? { work: entry.source, encounterStatus: entry.encounterStatus, encounterNote: entry.encounterNote } : {}),
   provenance: knownString(entry.provenance),
   referenceStatus: knownString(visual?.identity?.referenceStatus),
   canonExact: visual?.identity?.canonExact === true
@@ -320,7 +325,8 @@ const gameplayStatsFor = (kind, entry) => {
     frequency: knownString(entry.frequency),
     encounterWorldIds: freezeArray(entry.encounterWorldIds || []),
     habitats: freezeArray(entry.habitats || []),
-    behavior: knownString(entry.behavior)
+    behavior: knownString(entry.behavior),
+    ...(getEnemyUserCampaignV88(entry.id) || getEnemyDedicatedPoseV96(entry.id) ? { animationStatus: 'missing', visualMode: 'static-pose', specializedBehaviorStatus: entry.specializedBehaviorStatus } : {})
   });
   return freezeObject({
     hull: entry.hull,
@@ -425,6 +431,7 @@ const recordSearchFields = (record, entry) => freezeArray([
   entry.fit,
   entry.referenceStatus,
   entry.provenance,
+  (entry.specializedBehaviorV95 || entry.specializedBehaviorV90 || entry.specializedBehaviorV89)?.label,
   ...(entry.tags || []),
   ...(entry.habitats || [])
 ].filter((value) => value !== undefined && value !== null));
@@ -433,6 +440,8 @@ const buildRecord = (kind, entry) => {
   const visual = VISUAL_RESOLVERS[kind](entry);
   const taxonomy = taxonomyFor(kind, entry, visual);
   const segments = hierarchySegmentsFor(kind, taxonomy);
+  const specialized = kind === 'enemies' ? entry.specializedBehaviorV95 || entry.specializedBehaviorV90 || entry.specializedBehaviorV89 : null;
+  const combatBehavior = specialized ? freezeObject({ ...specialized, sourceUrls: freezeArray(specialized.sourceUrls || []) }) : null;
   const record = {
     id: entry.id,
     catalog: kind,
@@ -448,6 +457,11 @@ const buildRecord = (kind, entry) => {
       claims: canonClaimsFor(kind, entry, visual)
     }),
     gameplayStats: gameplayStatsFor(kind, entry),
+    ...(combatBehavior ? { combatBehavior,
+      // Preserve the V89 public field for its three historical contracts.
+      ...(entry.specializedBehaviorV95 ? { combatBehaviorV95: combatBehavior }
+        : entry.specializedBehaviorV90 ? { combatBehaviorV90: combatBehavior } : { combatBehaviorV89: combatBehavior })
+    } : {}),
     visual,
     dimensions: null,
     biologicalRelationIds: freezeArray([])
@@ -575,7 +589,7 @@ export const CATALOG_COUNTS_V62 = Object.freeze({
   total: CATALOG_RECORDS_V62.length,
   weapons: WEAPONS.length,
   equipment: EQUIPMENT.length,
-  enemies: ENEMIES.length,
+  enemies: ENEMY_ENCYCLOPEDIA_CATALOG_V88.length,
   vehicles: VEHICLES.length
 });
 

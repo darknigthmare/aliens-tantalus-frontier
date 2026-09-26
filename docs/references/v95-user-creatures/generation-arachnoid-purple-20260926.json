@@ -1,0 +1,52 @@
+{
+  "schema": 95,
+  "date": "2026-09-26",
+  "profileId": "castes-game_avp_capcom_arachnoid",
+  "request": "Deux variantes Grey et Purple de la même caste Arachnoid, référence fournie par utilisateur.",
+  "reference": {
+    "url": "https://avp.fandom.com/wiki/Arachnoid",
+    "verification": "Direct open HTTP402; indexed content lists Blue-grey, Purple and gallery Grey variant/Purple variant",
+    "canonExact": false
+  },
+  "source": {
+    "path": "assets/user/castes-v87/game_avp_capcom_arachnoid.png",
+    "sha256": "84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee",
+    "unchanged": true
+  },
+  "method": "Integrated image_gen edit only; no CLI/API; native bytes copied unchanged",
+  "prompt": "Use case: precise-object-edit\nAsset type: existing game creature static sprite, Purple color variant\nInput images: Image 1 is the edit target, the project's existing blue-grey Arachnoid PNG.\nPrimary request: change only this creature's blue-grey armor and mesoskeleton palette into the Purple Arachnoid color variant, using deep plum and violet midtones, muted lavender highlights and charcoal shadows. Keep teeth and small specular reflections pale neutral. This is the SAME Arachnoid, not a new species.\nConstraints: preserve the exact quadrupedal pose, anatomy, crouch, right-facing orientation, high arched tail and needle tip, head crest, long forearm blades, dorsal tubes, proportions, pixel-art illustration texture, composition and full-body framing. Do not add, remove, redesign, mirror or crop appendages. Keep the original canvas layout and dimensions as closely as possible. Change palette only. Genuine transparent background, clean alpha silhouette, no outer glow, no halo, no ground shadow, no background, no text, logo or watermark. One independent full-body PNG only.",
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dee0-c4ae-7571-97a2-40090ca5e427/exec-7424c97b-c52b-419b-b87a-53e8fcb1e02e.png",
+    "path": "assets/openai/sprites/static-enemy-v95/arachnoid-purple-v95.png",
+    "sha256": "3d43d7bd98a470605ecb17d45ed11c7455bd4b160748515f32760fcdba679a72",
+    "bytes": 1751650,
+    "width": 1536,
+    "height": 1024,
+    "format": "RGBA8 non-interlaced",
+    "alpha0": 1154566,
+    "totalPixels": 1572864,
+    "transparentFraction": 0.7340532938639323,
+    "alphaMax": 254,
+    "bodyMeanAlpha": 250.4164076611165,
+    "alphaBounds": [
+      206,
+      15,
+      1429,
+      1021
+    ]
+  },
+  "review": {
+    "native": "Purple palette, right-facing, preserved quadruped pose, tail arc/tip, blades, tubes and framing. Visible bounds differ <=1px from original Grey.",
+    "composite": "Grey and Purple genuinely composited in Chrome on white, checkerboard and black. Independently inspected via view_image: no opaque matte or diffuse halo visible at gallery scale; Purple remains distinct while silhouette and right-facing orientation are preserved. The native preview's apparent background glow is not visible in these composites.",
+    "proof": [
+      "E:/CodexQA/AliensTantalus/v95-defender-20260926/composite-grey-purple-25/report.json",
+      "E:/CodexQA/AliensTantalus/v95-defender-20260926/composite-grey-purple-25/native-white-1.png",
+      "E:/CodexQA/AliensTantalus/v95-defender-20260926/composite-grey-purple-25/native-checker-1.png",
+      "E:/CodexQA/AliensTantalus/v95-defender-20260926/composite-grey-purple-25/native-black-1.png"
+    ],
+    "limits": "Composite review at gallery display size, not exhaustive 100% pixel inspection. Original tight top/bottom margins deliberately preserved (15px top, 3px bottom), no claim of 10% padding. Generated colour adaptation, not an exact Capcom sprite or animation.",
+    "status": "accepted",
+    "reviewer": "v95_generate_a independent visual review, 2026-09-26"
+  },
+  "stats": "Same parent id, collider, health, damage, armor, speed and cost; no Purple-exclusive ability."
+}

@@ -1,0 +1,368 @@
+{
+  "shard": "b",
+  "status": "complete",
+  "accepted": [
+    {
+      "id": "enemy-081-albino-siege-royal",
+      "profileId": "enemy-081-albino-siege-royal",
+      "name": "Albino Siege Royal",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-081-albino-siege-royal.png",
+      "sourceWidth": 1361,
+      "sourceHeight": 1156,
+      "alphaBounds": [
+        90,
+        67,
+        1276,
+        1107
+      ],
+      "sha256": "1c9eb66f3d496951927d515285f081fdef57b9014e8a9a79a28826d7bf8172a7",
+      "pivot": {
+        "x": 0.7,
+        "y": 0.9576124567474048
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 142
+    },
+    {
+      "id": "enemy-082-albino-pale-crucible-hunter",
+      "profileId": "enemy-082-albino-pale-crucible-hunter",
+      "name": "Albino Pale Crucible Hunter",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-082-albino-pale-crucible-hunter.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        77,
+        163,
+        1460,
+        884
+      ],
+      "sha256": "e5e828176942ca01738d1cfbcb2cdff0f4b9503e2f45e770eb0784d2aa14b8c7",
+      "pivot": {
+        "x": 0.54,
+        "y": 0.86328125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 106
+    },
+    {
+      "id": "enemy-083-albino-dust-runner",
+      "profileId": "enemy-083-albino-dust-runner",
+      "name": "Albino Dust Runner",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-083-albino-dust-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        48,
+        203,
+        1498,
+        844
+      ],
+      "sha256": "3bc21a5c342ad75291a1f93c6d0aa1de347e8256b8899a239f8d1ebd2a703a94",
+      "pivot": {
+        "x": 0.62,
+        "y": 0.82421875
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-084-albino-salvage-hive-brute",
+      "profileId": "enemy-084-albino-salvage-hive-brute",
+      "name": "Albino Salvage Hive Brute",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-084-albino-salvage-hive-brute.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        94,
+        134,
+        1440,
+        892
+      ],
+      "sha256": "bd6a869c017617d0b569c12b97500697a6155197839ec28493ed881c910584ff",
+      "pivot": {
+        "x": 0.65,
+        "y": 0.87109375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 124
+    },
+    {
+      "id": "enemy-085-albino-arcology-lurker",
+      "profileId": "enemy-085-albino-arcology-lurker",
+      "name": "Albino Arcology Lurker",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-085-albino-arcology-lurker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        62,
+        164,
+        1477,
+        864
+      ],
+      "sha256": "8233265c7bd68b89f7fbd1e0a050ec467a315c788b0f13f50e23a2f8b413a4da",
+      "pivot": {
+        "x": 0.56,
+        "y": 0.84375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 96
+    },
+    {
+      "id": "enemy-086-albino-caravan-stalker",
+      "profileId": "enemy-086-albino-caravan-stalker",
+      "name": "Albino Caravan Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-086-albino-caravan-stalker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        114,
+        235,
+        1410,
+        815
+      ],
+      "sha256": "56a222b54c3a3b9ac48fbcb32cc583881fa1560c0d75c913ea9086287aeb6239",
+      "pivot": {
+        "x": 0.62,
+        "y": 0.7958984375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-087-albino-trilobite-echo",
+      "profileId": "enemy-087-albino-trilobite-echo",
+      "name": "Albino Trilobite Echo",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-087-albino-trilobite-echo.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        183,
+        221,
+        1356,
+        826
+      ],
+      "sha256": "68c6ddc158b1010f91f2f2b5a1fe255381b245e6af85fa26df5b67e983d560e5",
+      "pivot": {
+        "x": 0.49,
+        "y": 0.806640625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 104
+    },
+    {
+      "id": "enemy-088-albino-deacon-line",
+      "profileId": "enemy-088-albino-deacon-line",
+      "name": "Albino Deacon Line",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-088-albino-deacon-line.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        364,
+        111,
+        963,
+        1162
+      ],
+      "sha256": "2f739dc8bdf2a4b669c4a11810e079e012e15335d483813754a7ba96c9781a11",
+      "pivot": {
+        "x": 0.48,
+        "y": 0.9266347687400319
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 136
+    },
+    {
+      "id": "enemy-090-albino-protomorph",
+      "profileId": "enemy-090-albino-protomorph",
+      "name": "Albino Protomorph",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-090-albino-protomorph.png",
+      "sourceWidth": 1374,
+      "sourceHeight": 1145,
+      "alphaBounds": [
+        143,
+        93,
+        1197,
+        1069
+      ],
+      "sha256": "d44c2bc8140e9f85d0890b7a7df53cdb08d9ea35fb5288547f73dc655e17c790",
+      "pivot": {
+        "x": 0.61,
+        "y": 0.9336244541484716
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 136
+    },
+    {
+      "id": "enemy-092-albino-pathogen-mimic",
+      "profileId": "enemy-092-albino-pathogen-mimic",
+      "name": "Albino Pathogen Mimic",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-092-albino-pathogen-mimic.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        107,
+        238,
+        1429,
+        889
+      ],
+      "sha256": "496098f0ed29789e38a3a4046ec3f6fa1ed12896a98f0647b38f13709310c5d7",
+      "pivot": {
+        "x": 0.54,
+        "y": 0.8681640625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 96
+    },
+    {
+      "id": "enemy-093-albino-working-joe",
+      "profileId": "enemy-093-albino-working-joe",
+      "name": "Albino Working Joe",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-093-albino-working-joe.png",
+      "sourceWidth": 1225,
+      "sourceHeight": 1284,
+      "alphaBounds": [
+        397,
+        58,
+        867,
+        1224
+      ],
+      "sha256": "f74da03d30631461fbaf27cf88174e335f77c95134a52b07e5e7e955aea82e17",
+      "pivot": {
+        "x": 0.51,
+        "y": 0.9532710280373832
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 116
+    },
+    {
+      "id": "enemy-094-albino-combat-synthetic",
+      "profileId": "enemy-094-albino-combat-synthetic",
+      "name": "Albino Combat Synthetic",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-094-albino-combat-synthetic.png",
+      "sourceWidth": 1227,
+      "sourceHeight": 1282,
+      "alphaBounds": [
+        269,
+        97,
+        1031,
+        1199
+      ],
+      "sha256": "36bd4bb9795f8a3f4716cec27df5da521ef0170760215ce1228987e5552bfb13",
+      "pivot": {
+        "x": 0.515,
+        "y": 0.9352574102964119
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 104
+    },
+    {
+      "id": "enemy-095-albino-weyland-yutani-commando",
+      "profileId": "enemy-095-albino-weyland-yutani-commando",
+      "name": "Albino Weyland-Yutani Commando",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-095-albino-weyland-yutani-commando.png",
+      "sourceWidth": 1246,
+      "sourceHeight": 1263,
+      "alphaBounds": [
+        356,
+        133,
+        955,
+        1163
+      ],
+      "sha256": "9c76e43aa183de45549f7840432c9bc4b19e941ec6bcd8bc5e10d5564b804242",
+      "pivot": {
+        "x": 0.495,
+        "y": 0.9208234362628662
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-096-albino-upp-vanguard",
+      "profileId": "enemy-096-albino-upp-vanguard",
+      "name": "Albino UPP Vanguard",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-096-albino-upp-vanguard.png",
+      "sourceWidth": 1226,
+      "sourceHeight": 1283,
+      "alphaBounds": [
+        312,
+        134,
+        1027,
+        1157
+      ],
+      "sha256": "77af84ca2c342bc10d34227f69fdfeb387e58fd74bd893fa38c86b4bf268c750",
+      "pivot": {
+        "x": 0.51,
+        "y": 0.9017926734216679
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 134
+    },
+    {
+      "id": "enemy-097-albino-seegson-security",
+      "profileId": "enemy-097-albino-seegson-security",
+      "name": "Albino Seegson Security",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-097-albino-seegson-security.png",
+      "sourceWidth": 1230,
+      "sourceHeight": 1278,
+      "alphaBounds": [
+        282,
+        104,
+        1083,
+        1203
+      ],
+      "sha256": "090bcef178373276296c23216a47c18eb33ffb42e5156c23898d02ed2b7cc248",
+      "pivot": {
+        "x": 0.49,
+        "y": 0.9413145539906104
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-098-albino-colonial-raider",
+      "profileId": "enemy-098-albino-colonial-raider",
+      "name": "Albino Colonial Raider",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-098-albino-colonial-raider.png",
+      "sourceWidth": 1222,
+      "sourceHeight": 1287,
+      "alphaBounds": [
+        350,
+        131,
+        963,
+        1164
+      ],
+      "sha256": "4d64510fd04592af952fdde9fdd95832afb5e10b51b42c9cfbc80dbfb022db94",
+      "pivot": {
+        "x": 0.52,
+        "y": 0.9044289044289044
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 138
+    },
+    {
+      "id": "enemy-099-albino-atarax-controller",
+      "profileId": "enemy-099-albino-atarax-controller",
+      "name": "Albino ATARAX Controller",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-099-albino-atarax-controller.png",
+      "sourceWidth": 1192,
+      "sourceHeight": 1320,
+      "alphaBounds": [
+        407,
+        84,
+        802,
+        1224
+      ],
+      "sha256": "9d8e6b45bd50ae0a1585df5e8f2e5dd11bf2e9ea6afcb6453d07e20c4545d82c",
+      "pivot": {
+        "x": 0.515,
+        "y": 0.9272727272727272
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 142
+    }
+  ],
+  "held": [],
+  "count": 17,
+  "canonExact": false,
+  "animationStatus": "static-only",
+  "nativePixelsUnchanged": true
+}

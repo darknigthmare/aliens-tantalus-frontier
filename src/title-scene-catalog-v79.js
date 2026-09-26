@@ -1,4 +1,5 @@
 import { TITLE_SCENE_READY_ASSETS_V79, TITLE_SCENE_READY_BY_ID_V79, TITLE_RETIRED_ASSET_IDS_V87 } from './title-scene-assets-v79.js';
+import { TITLE_SHIP_ANGLE_ASSETS_V88 } from './title-scene-angle-assets-v88.js';
 
 export const TITLE_SCENE_SCHEMA_V79 = 79;
 
@@ -70,6 +71,65 @@ export function sanitizeTitleShipNameV87(value) {
   return /^[A-Z0-9][A-Z0-9 .'-]{0,23}$/.test(name) ? name : null;
 }
 
+// An authored camera view is a bitmap, never a mirrored/scaled reference hull.
+export const TITLE_SHIP_ANGLE_IDS_V88 = Object.freeze(['front-quarter', 'rear-quarter', 'side-profile', 'side-quarter']);
+const boundedRectangle = (rect, width, height) => rect && ['x', 'y', 'width', 'height'].every(key => Number.isFinite(rect[key]))
+  && rect.x >= 0 && rect.y >= 0 && rect.width > 0 && rect.height > 0
+  && rect.x + rect.width <= width && rect.y + rect.height <= height;
+export function validateTitleShipAngleV88(asset) {
+  const version = /^orbitals-[a-z0-9-]+-v(88|90)$/u.exec(asset?.id || '')?.[1];
+  return Boolean(asset?.status === 'ready' && asset.viewAuthorship === 'native-authored-angle'
+    && TITLE_SCENE_SHIP_MODELS_V87.some(ship => ship.shipId === asset.shipId)
+    && TITLE_SHIP_ANGLE_IDS_V88.includes(asset.angleId)
+    && version && new RegExp(`^title\\.v${version}\\.ship\\.[a-z0-9.-]+$`, 'u').test(asset.runtimeId || '')
+    && new RegExp(`^/assets/openai/ui/title/v${version}/orbitals/[a-z0-9_-]+\\.png$`, 'u').test(asset.src || '')
+    && (version !== '90' || (asset.fidelityStatus === 'fan-made-reference-reviewed' && asset.canonExact === false
+      && asset.provenance?.generator === 'integrated-imagegen' && asset.provenance?.pixelPolicy === 'native-unchanged'))
+    && /^[a-f0-9]{64}$/u.test(asset.sha256 || '')
+    && Number.isInteger(asset.sourceWidth) && asset.sourceWidth > 0
+    && Number.isInteger(asset.sourceHeight) && asset.sourceHeight > 0
+    && boundedRectangle(asset.hullRegistration, asset.sourceWidth, asset.sourceHeight)
+    && asset.hullRegistration.sourceWidth === asset.sourceWidth
+    && asset.hullRegistration.sourceHeight === asset.sourceHeight
+    && (!asset.namePlate || boundedRectangle(asset.namePlate, asset.sourceWidth, asset.sourceHeight)));
+}
+export function getTitleSceneShipAnglesV88(shipId, assets = TITLE_SHIP_ANGLE_ASSETS_V88) {
+  const reference = TITLE_SCENE_SHIP_MODELS_V87.find(ship => ship.shipId === shipId);
+  if (!reference) return Object.freeze([]);
+  const seenIds = new Set([reference.id]), seenPaths = new Set([reference.src]), seenHashes = new Set([reference.sha256]);
+  const angles = [Object.freeze({ ...reference, angleId: 'reference', viewAuthorship: 'native-reference' })];
+  for (const asset of Array.isArray(assets) ? assets : []) {
+    if (asset?.shipId !== shipId || !validateTitleShipAngleV88(asset) || seenIds.has(asset.id) || seenPaths.has(asset.src) || seenHashes.has(asset.sha256)) continue;
+    seenIds.add(asset.id);
+    seenPaths.add(asset.src);
+    seenHashes.add(asset.sha256);
+    angles.push(Object.freeze({ ...asset, role: 'orbitals', layerHint: 'high-orbit' }));
+  }
+  return Object.freeze(angles);
+}
+export function chooseTitleShipAngleV88(shipId, previous = null, random = Math.random, assets = TITLE_SHIP_ANGLE_ASSETS_V88) {
+  const angles = getTitleSceneShipAnglesV88(shipId, assets);
+  if (angles.length < 2) return angles[0]?.id || null;
+  const choices = angles.filter(asset => asset.id !== previous);
+  let sample = 0;
+  try { sample = Number(random()); } catch { sample = 0; }
+  if (!Number.isFinite(sample)) sample = 0;
+  return choices[Math.floor(Math.max(0, Math.min(1 - Number.EPSILON, sample)) * choices.length)].id;
+}
+
+// This ephemeral camera/event contract is intentionally separate from save data.
+// A docked ship, a dark world or a quarantine preset is not evidence of wreckage.
+export function resolveTitleSceneContextV88(context = {}) {
+  const validId = value => typeof value === 'string' && /^[a-z0-9][a-z0-9._:-]{0,95}$/iu.test(value);
+  const station = context?.viewpoint === 'station-observer' && validId(context.stationId);
+  const debris = context?.debris;
+  const justifiedDebris = debris?.active === true && debris.kind === 'wreck-field'
+    && ['mission', 'event'].includes(debris.sourceType) && validId(debris.sourceId);
+  return Object.freeze({ viewpoint: station ? 'station-observer' : 'exterior',
+    stationId: station ? context.stationId : null,
+    debris: justifiedDebris ? Object.freeze({ kind: 'wreck-field', sourceType: debris.sourceType, sourceId: debris.sourceId }) : null });
+}
+
 const proceduralLayer = (id, role, depth, modes = ALL_MODES) => Object.freeze({
   id,
   role,
@@ -100,7 +160,7 @@ const BASE_LAYERS_V79 = Object.freeze([
 ]);
 
 const bitmapLayer = (id, depth, modes = ALL_MODES) => {
-  const asset = TITLE_SCENE_READY_BY_ID_V79[id];
+  const asset = typeof id === 'object' ? id : TITLE_SCENE_READY_BY_ID_V79[id];
   if (!asset || asset.status !== 'ready') throw new Error(`Asset titre V79 non accepté : ${id}`);
   return Object.freeze({
     id: `bitmap-${asset.id}`,
@@ -111,6 +171,8 @@ const bitmapLayer = (id, depth, modes = ALL_MODES) => {
     assetId: asset.id,
     runtimeId: asset.runtimeId,
     assetSrc: asset.src,
+    shipId: asset.shipId,
+    angleId: asset.angleId || (asset.shipId ? 'reference' : undefined),
     sha256: asset.sha256,
     sphereRegistration: asset.sphereRegistration || TITLE_PLANET_EFFECT_REGISTRATION_V87[id],
     hullRegistration: asset.hullRegistration,
@@ -254,22 +316,27 @@ export function validateTitleSceneCatalogV79(presets = TITLE_SCENE_PRESETS_V79) 
 export function getTitleSceneRuntimeAssetsV79(presets = TITLE_SCENE_PRESETS_V79) {
   return Object.freeze([...new Set([...presets.flatMap((entry) => entry.layers)
     .filter((layer) => layer.renderer === 'image' && typeof layer.assetSrc === 'string')
-    .map((layer) => layer.assetSrc), ...TITLE_SCENE_SHIP_MODELS_V87.map(asset => asset.src)])]);
+    .map((layer) => layer.assetSrc), ...TITLE_SCENE_SHIP_MODELS_V87.flatMap(asset => getTitleSceneShipAnglesV88(asset.shipId).map(angle => angle.src))])]);
 }
 
 export function buildTitleSceneModelV79(save = {}, options = {}) {
   const preset = resolveTitleScenePresetV79(save);
   const mode = resolveTitleSceneModeV79(save, options);
   const context = sanitizeTitleScenePresentationV79(save?.presentation?.titleScene);
-  const shipAssetId = TITLE_SCENE_SHIP_MODELS_V87.find(asset => asset.shipId === context.shipId)?.id || defaultShipIdV87(preset.id);
-  const shipAsset = TITLE_SCENE_READY_BY_ID_V79[shipAssetId];
-  const shipId = shipAsset.shipId;
-  const shipName = shipAsset.namePlate ? context.shipName || shipAsset.defaultShipName || 'TANTALUS' : null;
+  const referenceId = TITLE_SCENE_SHIP_MODELS_V87.find(asset => asset.shipId === context.shipId)?.id || defaultShipIdV87(preset.id);
+  const reference = TITLE_SCENE_READY_BY_ID_V79[referenceId];
+  const angles = getTitleSceneShipAnglesV88(reference.shipId, options.shipAngleAssets);
+  const shipAsset = angles.find(asset => asset.id === options.shipAngleAssetId) || angles[0];
+  const shipAssetId = shipAsset.id, shipId = reference.shipId;
+  const shipName = reference.namePlate ? context.shipName || reference.defaultShipName || 'TANTALUS' : null;
+  const sceneContext = resolveTitleSceneContextV88(options.sceneContext);
   // One real ship, never an extra silhouette/utility craft or a generic exhaust.
   const excluded = new Set(['high-orbit', 'patrol-traffic', 'near-traffic', 'ion-pulse']);
-  const layers = preset.layers.filter(layer => layer.modes.includes(mode) && !excluded.has(layer.id))
+  const layers = preset.layers.filter(layer => layer.modes.includes(mode) && !excluded.has(layer.id)
+    && (layer.role !== 'foreground' || sceneContext.viewpoint === 'station-observer')
+    && (layer.role !== 'debris' || sceneContext.debris))
     .map(layer => layer.renderer === 'image' && layer.role === 'orbitals'
-      ? Object.freeze({ ...bitmapLayer(shipAssetId, layer.depth), shipName }) : layer);
+      ? Object.freeze({ ...bitmapLayer(shipAsset, layer.depth), shipName }) : layer);
   return Object.freeze({
     schema: TITLE_SCENE_SCHEMA_V79,
     placementId: TITLE_SCENE_PLACEMENTS_V87.includes(options.placementId) ? options.placementId : 'starboard',
@@ -277,7 +344,10 @@ export function buildTitleSceneModelV79(save = {}, options = {}) {
     presetLabel: preset.label,
     shipId,
     shipAssetId,
+    shipAngleId: shipAsset.angleId,
+    availableShipAngles: angles.length,
     shipName,
+    sceneContext,
     tone: preset.tone,
     seed: titleSceneSeedV79(save),
     mode,

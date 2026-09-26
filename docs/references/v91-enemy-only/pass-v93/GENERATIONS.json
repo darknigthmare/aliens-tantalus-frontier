@@ -1,0 +1,26 @@
+{
+  "pass": 93,
+  "date": "2026-09-23",
+  "scope": "enemy sprites only",
+  "jobs": [
+    {
+      "id": "v93-chrysalis",
+      "referenceUrls": [
+        "https://www.spriters-resource.com/arcade/alienvspredator/asset/55354/",
+        "https://www.spriters-resource.com/media/assets/52/55354.png?updated=1755473123",
+        "https://necaonline.com/2017/07/alien%e2%80%8b-vs-predator%e2%80%8b-arcade-appearance-aliens-assortment/",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2017/07/51678-Chrysalis1.jpg"
+      ],
+      "prompt": "Create ONE dedicated full-body 2D game sprite of CHRYSALIS from Capcom Alien vs. Predator (1994). Reference image 1 is the zoomed original arcade sprite sheet on a blue field: use the SECOND complete standing/crouching pose visible in the middle, facing RIGHT, as the anatomical, silhouette, pose and palette authority. Reference image 2 is NECA's official 2017 Arcade Appearance figure, a secondary reference for face and armor detail ONLY, never copy toy engineering. This is one static frame, not a sprite sheet, collage, turnaround or several creatures. Faithful fan-made rendering with crisp high-resolution pixel-art contours and clustered shading, matching the charcoal gray-green body and warm ochre-gold carapace of the arcade. Preserve the massive rounded segmented shell arch over head and back, not a queen crest; narrow long skull-like gray head underneath with open jaw, dark orbital recesses and teeth; ribbed torso; two bent arms with gold forearm armor and clawed hands; exactly two bent legs with full organic knee surfaces; long thin segmented tail extending to LEFT with a gold pointed terminal blade. No toy hinge pins, no circular black pin holes at knees, no screw holes, no doll articulation seams. Keep the arcade proportions and leg stance, no redesign or added spikes or limbs. Full entire tail, head, hands, claws and feet must fit comfortably with approximately 10% clear space around the silhouette. Wide landscape canvas around 1536x1024. GENUINELY TRANSPARENT BACKGROUND with PNG alpha, no opaque black/blue/white background, no painted checkerboard, no glow, no halo, no ground shadow, no floor, no scene, no labels, no text, no logo, no watermark. Output only this single isolated sprite.",
+      "tool": "integrated-imagegen",
+      "apiCliUsed": false,
+      "result": {
+        "status": "generated",
+        "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-851a5598-7153-4ec4-82fe-ee7083e98d01.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "sourcePath": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-851a5598-7153-4ec4-82fe-ee7083e98d01.png",
+        "retried": false
+      },
+      "canonicalExact": false
+    }
+  ]
+}

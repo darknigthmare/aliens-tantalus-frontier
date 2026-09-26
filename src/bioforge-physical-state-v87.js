@@ -1,5 +1,5 @@
 import { captureTacticalReloadV77, restoreTacticalReloadV77 } from './tactical-reload-v77.js';
-import { getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
+import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95, getEnemyStaticPoseStatesV96 as getEnemyStaticPoseStatesV95 } from './enemy-static-poses-v96.js';
 import { captureOvomorphCycleResumeV66, getOvomorphChildIdV66,
   restoreOvomorphCycleResumeV66, OVOMORPH_CYCLE_V66 } from './enemy-ovomorph-cycle-v66.js';
 
@@ -25,7 +25,7 @@ const BODY_KEYS = ['x', 'y', 'w', 'h', 'vx', 'vy', 'facing', 'health', 'maxHealt
 const PLAYER_KEYS = [...BODY_KEYS, ...PLAYER_CLOCKS, ...PLAYER_FLAGS, 'maxArmor', 'ammo', 'ammoReserve',
   'magazineSize', 'weaponMode', 'shots', 'kills', 'damageTaken', 'damageBlocked', 'tacticalReloadV77'];
 const ENEMY_KEYS = [...BODY_KEYS, ...ENEMY_CLOCKS, ...ENEMY_FLAGS, 'id', 'profileId', 'parentId', 'groundY',
-  'spawnX', 'pendingMeleeTargetId', 'ovomorphCycleV66', 'facehuggerAttackV65', 'batchAttackV66'];
+  'spawnX', 'pendingMeleeTargetId', 'ovomorphCycleV66', 'facehuggerAttackV65', 'batchAttackV66', 'visualStateV95'];
 const CHARGE_KEYS = ['medkits', 'grenades', 'trackerCharges', 'batteryCharges'];
 const numericFields = (source, fields, fallback = 0) => Object.fromEntries(fields.map(key => [key, source[key] ?? fallback]));
 
@@ -104,7 +104,13 @@ function sanitizeEnemy(raw) {
     || raw.facehuggerAttackV65 !== null && raw.batchAttackV66 !== null
     || raw.parentId !== null && (raw.profileId !== OVOMORPH_CYCLE_V66.childProfileId
       || raw.id !== getOvomorphChildIdV66({ id: raw.parentId }))) return null;
-  return clone(raw);
+  const result = clone(raw);
+  if (Object.hasOwn(result, 'visualStateV95')) {
+    const state = sanitizeEnemyStaticPoseStateV95(result.profileId, result.visualStateV95);
+    if (state) result.visualStateV95 = state;
+    else delete result.visualStateV95;
+  }
+  return result;
 }
 
 /** No coercion/clamping: a present invalid snapshot is not a legacy absent snapshot. */
@@ -148,6 +154,7 @@ function captureEnemy(enemy) {
     ...capturedBody(enemy), ...numericFields(enemy, ENEMY_CLOCKS),
     ...Object.fromEntries(ENEMY_FLAGS.map(key => [key, enemy[key] ?? false])),
     id: enemy.id, profileId, parentId: enemy.ovomorphParentIdV66 ?? null,
+    ...(sanitizeEnemyStaticPoseStateV95(profileId, enemy.visualStateV95) ? { visualStateV95: enemy.visualStateV95 } : {}),
     groundY: enemy.groundY ?? enemy.y + enemy.h, spawnX: enemy.spawnX ?? enemy.x,
     pendingMeleeTargetId: enemy.pendingMeleeTargetId ?? null,
     ovomorphCycleV66: egg ? { ...egg, releaseBlocked: scratch.ovomorphCycleV66?.releaseBlocked ?? false } : null,
@@ -205,6 +212,10 @@ export function restoreBioforgeEnemyPhysicalV87(enemy, saved) {
     next.ovomorphCycleV66 = { ...scratch.ovomorphCycleV66, releaseBlocked: safe.ovomorphCycleV66.releaseBlocked };
   }
   Object.assign(enemy, next);
+  if (getEnemyStaticPoseStatesV95(identity).length) {
+    enemy.visualStateV95 = sanitizeEnemyStaticPoseStateV95(identity, safe.visualStateV95);
+    enemy.visualImageKey = getEnemyUserCasteV87(identity, enemy.visualStateV95).imageKey;
+  }
   if (safe.parentId === null) delete enemy.ovomorphParentIdV66;
   else enemy.ovomorphParentIdV66 = safe.parentId;
   return enemy;

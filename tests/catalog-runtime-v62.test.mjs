@@ -1,3 +1,4 @@
+import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { existsSync } from 'node:fs';
@@ -29,10 +30,10 @@ const idStartingWith = (catalog, prefix) => catalog.find((entry) => entry.id.sta
 
 test('le runtime V62 indexe les quatre catalogues sans perdre ni dupliquer une entrée', () => {
   assert.deepEqual(CATALOG_COUNTS_V62, {
-    total: WEAPONS.length + EQUIPMENT.length + ENEMIES.length + VEHICLES.length,
+    total: WEAPONS.length + EQUIPMENT.length + ENEMIES.length + CURRENT_STATIC.length + VEHICLES.length,
     weapons: 146,
     equipment: 106,
-    enemies: 571,
+    enemies: 571 + CURRENT_STATIC.length,
     vehicles: 279
   });
   assert.equal(CATALOG_RECORDS_V62.length, CATALOG_COUNTS_V62.total);
@@ -49,6 +50,21 @@ test('le runtime V62 indexe les quatre catalogues sans perdre ni dupliquer une e
     assert.equal(getCatalogNodeV62(root.id), root);
     assert.equal(getCatalogChildrenV62(root.id), root.children);
   }
+});
+
+test('V89 les attaques documentées sont consultables sans promouvoir leur fidélité visuelle', () => {
+  const native = CATALOG_RECORDS_V62.filter(record => record.combatBehaviorV89);
+  assert.equal(native.length, 3);
+  for (const record of native) {
+    assert.equal(record.catalog, 'enemies');
+    assert.ok(Object.isFrozen(record.combatBehaviorV89));
+    assert.ok(Object.isFrozen(record.combatBehaviorV89.sourceUrls));
+    assert.equal(record.visual.identity.canonExact, false);
+    assert.equal(record.visual.animationStatus, 'missing');
+    assert.ok(record.combatBehaviorV89.summary);
+  }
+  const results = searchCatalogV62('Projectile acide temporisé', { catalog: 'enemies' });
+  assert.ok(results.some(result => result.entry.id === 'castes-game_pathogen_blight'));
 });
 
 test('la taxonomie utilise uniquement les champs existants et signale les faits absents', () => {

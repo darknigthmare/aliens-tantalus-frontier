@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-096-albino-upp-vanguard",
+  "name": "Albino UPP Vanguard",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay human character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows a human armored infantry soldier with enclosed rounded olive full helmet and dark visor, compact backpack, body armor over a military jumpsuit, shoulder panels and utility pouches, kneepads, combat boots, both hands holding one compact rifle. Preserve these exact gear silhouettes and the same rifle, now warm ivory/ash-gray field equipment with dark visor and flexible joints. No skin/ethnicity change and no new faction symbols. Use intact first-row ready stance.\nSubject: Albino UPP Vanguard. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nImportant: for this human subject, the label Albino means pale FIELD EQUIPMENT ONLY, not skin depigmentation or ethnicity. Preserve any exposed skin and hair from the base reference.\nComposition: one full-body human in near-side profile facing RIGHT, slight three-quarter angle only to separate arms. Every boot, helmet and equipment extremity fully within canvas. Fit ENTIRE subject within central 75 percent of width and height, leaving generous genuine transparent margins on all four sides. Grounded neutral ready stance, feet on one invisible ground. One character only, no second pose.\nStyle: detailed hand-painted science-fiction gameplay sprite matching reference, crisp readable silhouette, modeled material texture, controlled highlights and dark recesses, warm ivory/ash-gray textile/equipment materials, realistic proportions.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, lettering, faction insignia, watermark, blood or gore. Preserve exact existing equipment; no added armor, extra arms, invented weapon or mechanical body redesign.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+    "sha256": "09d44286a91aaf143a6b638c6a4e500f290ef14ecfed5e6dd28cdc13b52ccf61",
+    "visualNotes": "Reference sheet shows a human armored infantry soldier with enclosed rounded olive full helmet and dark visor, compact backpack, body armor over a military jumpsuit, shoulder panels and utility pouches, kneepads, combat boots, both hands holding one compact rifle. Preserve these exact gear silhouettes and the same rifle, now warm ivory/ash-gray field equipment with dark visor and flexible joints. No skin/ethnicity change and no new faction symbols. Use intact first-row ready stance."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-d151dc1e-99e9-499b-90d2-a1c8e2cd7346.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-096-albino-upp-vanguard.png",
+    "width": 1226,
+    "height": 1283,
+    "sha256": "77af84ca2c342bc10d34227f69fdfeb387e58fd74bd893fa38c86b4bf268c750",
+    "bboxAlphaAtLeast16": [
+      312,
+      134,
+      1027,
+      1157
+    ],
+    "alphaMin": 0,
+    "alpha0": 1244142,
+    "totalPixels": 1572958
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing armored Vanguard, enclosed dark visor, tactical pack/pouches and one rifle retained; ivory equipment only. Native alpha confirmed. All anatomy and equipment uncropped; requested 10% padding is not met on every vertical margin, documented without pixel editing. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.51,
+      "y": 0.9017926734216679
+    },
+    "sourceFacing": 1
+  }
+}

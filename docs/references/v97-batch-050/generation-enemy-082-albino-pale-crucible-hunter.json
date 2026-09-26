@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-082-albino-pale-crucible-hunter",
+  "name": "Albino Pale Crucible Hunter",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomical and art-style reference, NOT a sheet to reproduce. Reference is a multi-pose sheet of a slender hunched pale biomechanical hunter, two very long clawed arms, two bent digitigrade legs, one narrow segmented tail, elongated eyeless rounded skull. Output one grounded stalking pose.\nSubject: Albino Pale Crucible Hunter. This is an original systemic project adaptation, not an official model or a canonical 1:1 claim.\nVariant lock: PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-030 Pale Crucible Hunter. Preserve one gaunt forge-born bipedal project xeno hunter with one eyeless elongated cranium, sick ivory exoskeletal plates over wet charcoal muscle seams, crucible-forged dorsal spines, narrow ribbed torso, exactly two very long sinewy forearms with dark claws, exactly two digitigrade legs and one complete long segmented tail. Albino changes newly authored pigment/material response only: increase the warm pearl/parchment translucency of the existing pale plates, shift wet seams toward cool ash-gray with restrained rose-taupe subsurface joints, retain dark smoked claws and deep recess contrast, and avoid a flat-white silhouette. The already-pale base anatomy, cranial length, dorsal-spine topology, gaunt proportions, limb count, tail, strict right-facing side view and project scale remain invariant. No eyes, clothing, equipment, armor, weapon, generic Warrior redesign, four Warrior dorsal tubes, royal crest, quadruped body, glow, snow/ice, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.\nComposition: full body, near-side profile facing RIGHT, slightly three-quarter only enough to separate limbs; all head, feet, claws and complete tail inside canvas, with ten percent clear transparent padding on every side. Grounded neutral ready stance, feet on a common invisible ground. One creature only, no second pose.\nStyle: match reference's detailed dark science-fiction biomechanical digital painted sprite, precise chitin/rib relief, controlled highlights, consistent readable shading; use requested ivory/ash/pink material variation instead of pure white.\nBackground: genuinely transparent PNG alpha, no backdrop, no floor shadow, no scene, no grid, no contact sheet, no UI, text, watermark, blood or gore. Preserve exact base anatomy; no extra limbs or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png",
+    "sha256": "551267a12dc90b18ec206c5a853c5c3de0d30fcbe5fe5bea19391f952c4d977c",
+    "visualNotes": "Reference is a multi-pose sheet of a slender hunched pale biomechanical hunter, two very long clawed arms, two bent digitigrade legs, one narrow segmented tail, elongated eyeless rounded skull. Output one grounded stalking pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-699a9003-b171-4683-bd99-9bcb5e1a02bc.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-082-albino-pale-crucible-hunter.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "e5e828176942ca01738d1cfbcb2cdff0f4b9503e2f45e770eb0784d2aa14b8c7",
+    "bboxAlphaAtLeast16": [
+      77,
+      163,
+      1460,
+      884
+    ],
+    "alphaMin": 0,
+    "alpha0": 1224268,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing gaunt biped, two long clawed arms and two legs, complete tail and dorsal spines. Native alpha confirmed; no opaque backdrop. Clear horizontal margins about 5% rather than requested 10%; no anatomy cropped. Original project systemic static adaptation, not a canonical 1:1 or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.54,
+      "y": 0.86328125
+    },
+    "sourceFacing": 1
+  }
+}

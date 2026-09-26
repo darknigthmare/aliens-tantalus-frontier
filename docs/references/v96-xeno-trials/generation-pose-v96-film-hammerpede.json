@@ -1,0 +1,53 @@
+{
+  "version": 96,
+  "id": "pose-v96-film-hammerpede",
+  "status": "accepted-static-adaptation",
+  "tool": "image_gen.imagegen",
+  "generatedOn": "2026-09-26",
+  "transparentBackground": true,
+  "promptSha256": "1bb545e486ea63aa6873d638bbc70bc2e9c6887548f0264412623277b749e29d",
+  "prompt": "Use case: stylized-concept. Asset type: one native full-body transparent PNG enemy pose for the existing 2D fan game Aliens: Tantalus Frontier. Create ONE original reference-guided Hammerpede from Prometheus (2012), not the Deacon, not a Facehugger, and not a humanoid xenomorph. The reviewed NECA Prometheus Series 2 accessory shows a long slender pale ivory translucent worm with a continuous smooth tapering body, subtle longitudinal surface lines, no limbs, no eyes, and a flattened flared cobra-like open head with a central vertical slit and pale folded inner membranes. Preserve this anatomy; do not add insect legs, armor, dorsal pipes, spikes, teeth outside the mouth, or tentacle crowns. Pose the entire single creature in an elegant low S curve along the bottom, tapering tail trailing to the left and front third lifted in an alert hooked curve, head pointing to the RIGHT, hood slightly turned just enough to remain readable in gameplay side view. Entire tip of tail and entire head must be visible, with generous clear margins on all sides. Style: finely detailed biomechanical creature illustration rendered as a polished realistic 3D model, crisp contour and readable sculpted folds, restrained cool shadowing, softly wet surface, same premium game-bestiary rendering quality as the project's NECA-derived Gorilla/Rhino creature cutouts, but with pale natural Hammerpede skin instead of their dark armor. Single static pose, no collage, no sprite grid, no duplicated creature or extra props. Truly transparent RGBA background, no cast ground shadow, no floor, no label, no text, no logo, no watermark. This is a faithful fan-made adaptation for review, not an official extraction.",
+  "toolOutputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a0df70-7e88-7ce0-aa4a-e382e65175e3 as C:\\Users\\chuck\\.codex\\generated_images\\01a0df70-7e88-7ce0-aa4a-e382e65175e3\\exec-eda5c024-3dd4-43b5-a766-04a9d8e93157.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "visualReferences": {
+    "authority": "primary-licensed-manufacturer",
+    "method": "browser displayed the actual official product photograph",
+    "inspectedUrls": [
+      "https://necaonline.com/wp-content/uploads/2013/02/51349_Series_2_Deacon.jpg"
+    ],
+    "styleReference": "assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png",
+    "referenceImagesPassedToTool": false
+  },
+  "output": {
+    "nativePath": "C:/Users/chuck/.codex/generated_images/01a0df70-7e88-7ce0-aa4a-e382e65175e3/exec-eda5c024-3dd4-43b5-a766-04a9d8e93157.png",
+    "runtimePath": "/assets/openai/sprites/static-enemy-v96/hammerpede-prometheus.png",
+    "sha256": "99a39588c02c9b907a3e4bcbbbfd899f179acf2ad2880958ce56e4498beaa6ed",
+    "width": 1536,
+    "height": 1024,
+    "format": "RGBA8 non-interlaced",
+    "alphaBoundsThreshold": 16,
+    "alphaBounds": [
+      22,
+      29,
+      1519,
+      975
+    ],
+    "alpha0": 1228070,
+    "alphaMax": 254,
+    "transforms": [],
+    "copiedByteIdentical": true
+  },
+  "runtimeContract": {
+    "animation": false,
+    "frames": 1,
+    "automaticEncounter": false,
+    "behavior": "generic-melee-project-adaptation",
+    "canonExact": false,
+    "identityVerified": false
+  },
+  "reviewNotes": [
+    "The pale limbless Hammerpede accessories were visually reviewed in the official NECA product photo, not inferred from the Deacon figure.",
+    "Native image contains nonzero RGB under transparent pixels; these are preserved and must be composited with its real alpha.",
+    "Open hood proportion and surface folds remain a fan-made interpretation."
+  ],
+  "heldSourcePolicy": "No held V95 source was sent or regenerated; this is a distinct newly reviewed licensed identity."
+}

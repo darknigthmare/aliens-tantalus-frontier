@@ -1,0 +1,430 @@
+[
+  {
+    "number": 76,
+    "file": "Xeno-Trex-King.jpg",
+    "slug": "xeno-trex-king",
+    "notes": "Retain the complete purple-black crouched tyrannosaur-like biped, horned crown, dorsal tubes, tiny arms, broad clawed hindfeet, open toothed mouth and entire long curled blade tail, left facing.",
+    "prompt": "Use case: background-extraction. Input image 1 is the sole target; ignore all conversation images. Retain the complete purple-black crouched tyrannosaur-like biped, horned crown, dorsal tubes, tiny arms, broad clawed hindfeet, open toothed mouth and entire long curled blade tail, left facing. Change only background and framing: preserve source pose, anatomy, proportions, texture, colors and distinctive details. Isolate whole single subject on genuine transparent alpha. Smaller centered composition with 10 percent entirely transparent padding on every side, no cut tips. Remove floor shadows, captions and backdrop. No scene, floor, border, checkerboard, duplicate views, extra objects or redesign. One static 1x1 full-creature PNG, not an animation sheet.",
+    "status": "accepted-static-adaptation",
+    "nativePath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-6591718f-d18c-469e-9da7-dc1e4cd98904.png",
+    "destination": "/assets/openai/sprites/static-enemy-v95/xeno-trex-king.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-6591718f-d18c-469e-9da7-dc1e4cd98904.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 886182,
+      "sha256": "3c8907228297b8db491834d835528d517e0cd98534ed26f35cfe7cb017991a2b",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1259131,
+      "alpha1to254": 312467,
+      "alpha255": 918,
+      "transparentFraction": 0.8007110897440789,
+      "alphaAtLeast16": 280923,
+      "alphaAtLeast128": 272187,
+      "meanBodyAlphaAtLeast128": 250.4567778769743,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        47,
+        49,
+        1238,
+        1228
+      ],
+      "bboxAlphaAtLeast16": [
+        51,
+        375,
+        1235,
+        941
+      ],
+      "alphaBounds": [
+        51,
+        375,
+        1235,
+        941
+      ],
+      "bboxAlphaAtLeast128": [
+        51,
+        376,
+        1234,
+        941
+      ],
+      "bboxAlpha255": [
+        65,
+        389,
+        1220,
+        940
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 51,
+        "top": 375,
+        "right": 19,
+        "bottom": 313
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.04066985645933014,
+        "top": 0.29904306220095694,
+        "right": 0.015151515151515152,
+        "bottom": 0.24960127591706538
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 26687,
+        "visiblePixels": 21633,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5127591706539075,
+          "y": 0.7503987240829346
+        },
+        "alphaWeightedBottom": {
+          "x": 0.42077058064449624,
+          "y": 0.7503987240829346
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": {
+      "completeSilhouette": true,
+      "sourceFacing": -1,
+      "realAlpha": true,
+      "groundContactReviewed": true,
+      "pivot": {
+        "x": 0.42,
+        "y": 0.7503987240829346
+      },
+      "qualification": "Détourage intégré OpenAI, PNG natif intact. Silhouette complète et pose relues, détails légèrement réinterprétés ; pas une extraction pixel identique. Marge visible minimale mesurée 1.52 %, non tronquée."
+    }
+  },
+  {
+    "number": 77,
+    "file": "Xeno-TRex-Queen.jpg",
+    "slug": "xeno-trex-queen",
+    "notes": "Retain the complete purple-black crouched tyrannosaur-like biped with its long swept queen head crest, dorsal tubes, tiny arms, two broad hindfeet and entire curled blade tail, left facing. Distinct source head and closed mouth must remain unchanged.",
+    "prompt": "Use case: background-extraction. Input image 1 is the sole target; ignore all conversation images. Retain the complete purple-black crouched tyrannosaur-like biped with its long swept queen head crest, dorsal tubes, tiny arms, two broad hindfeet and entire curled blade tail, left facing. Distinct source head and closed mouth must remain unchanged. Change only background and framing: preserve source pose, anatomy, proportions, texture, colors and distinctive details. Isolate whole single subject on genuine transparent alpha. Smaller centered composition with 10 percent entirely transparent padding on every side, no cut tips. Remove floor shadows, captions and backdrop. No scene, floor, border, checkerboard, duplicate views, extra objects or redesign. One static 1x1 full-creature PNG, not an animation sheet.",
+    "status": "accepted-static-adaptation",
+    "nativePath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-dc8e1aad-96cc-4bfd-a6de-788facaf7963.png",
+    "destination": "/assets/openai/sprites/static-enemy-v95/xeno-trex-queen.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-dc8e1aad-96cc-4bfd-a6de-788facaf7963.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 850241,
+      "sha256": "95f927aa4f382847bbf8a1f871d8b2f6ada8c84660aa0d597c132bab1fd6eb40",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1269354,
+      "alpha1to254": 301770,
+      "alpha255": 1392,
+      "transparentFraction": 0.807212136474287,
+      "alphaAtLeast16": 278593,
+      "alphaAtLeast128": 272167,
+      "meanBodyAlphaAtLeast128": 250.86523347797493,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        33,
+        21,
+        1225,
+        1228
+      ],
+      "bboxAlphaAtLeast16": [
+        40,
+        341,
+        1223,
+        953
+      ],
+      "alphaBounds": [
+        40,
+        341,
+        1223,
+        953
+      ],
+      "bboxAlphaAtLeast128": [
+        40,
+        342,
+        1222,
+        953
+      ],
+      "bboxAlpha255": [
+        49,
+        344,
+        1221,
+        949
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 40,
+        "top": 341,
+        "right": 31,
+        "bottom": 301
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.03189792663476874,
+        "top": 0.2719298245614035,
+        "right": 0.024720893141945772,
+        "bottom": 0.24003189792663476
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 19654,
+        "visiblePixels": 16872,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5035885167464115,
+          "y": 0.7599681020733652
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4501222516563277,
+          "y": 0.7599681020733652
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": {
+      "completeSilhouette": true,
+      "sourceFacing": -1,
+      "realAlpha": true,
+      "groundContactReviewed": true,
+      "pivot": {
+        "x": 0.45,
+        "y": 0.7599681020733652
+      },
+      "qualification": "Détourage intégré OpenAI, PNG natif intact. Silhouette complète et pose relues, détails légèrement réinterprétés ; pas une extraction pixel identique. Marge visible minimale mesurée 2.47 %, non tronquée."
+    }
+  },
+  {
+    "number": 78,
+    "file": "Xeno-Ultramorph.jpg",
+    "slug": "xeno-ultramorph",
+    "notes": "Retain the complete metallic gray tall biomechanical biped in exact left-profile pose, unusually long smooth cranial dome, dorsal tubes, extended hands, two legs and whole long segmented pointed tail. Remove the species label entirely.",
+    "prompt": "Use case: background-extraction. Input image 1 is the sole target; ignore all conversation images. Retain the complete metallic gray tall biomechanical biped in exact left-profile pose, unusually long smooth cranial dome, dorsal tubes, extended hands, two legs and whole long segmented pointed tail. Remove the species label entirely. Change only background and framing: preserve source pose, anatomy, proportions, texture, colors and distinctive details. Isolate whole single subject on genuine transparent alpha. Smaller centered composition with 10 percent entirely transparent padding on every side, no cut tips. Remove floor shadows, captions and backdrop. No scene, floor, border, checkerboard, duplicate views, extra objects or redesign. One static 1x1 full-creature PNG, not an animation sheet.",
+    "status": "accepted-static-adaptation",
+    "nativePath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-05f90ec3-d9f5-4a0c-b311-a283a7caf53d.png",
+    "destination": "/assets/openai/sprites/static-enemy-v95/xeno-ultramorph.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-05f90ec3-d9f5-4a0c-b311-a283a7caf53d.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 718339,
+      "sha256": "3aae299b54ada13416d6a7ba2146609504d3e576204039a55712134a2a281fdc",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1318671,
+      "alpha1to254": 252637,
+      "alpha255": 1208,
+      "transparentFraction": 0.8385739795334356,
+      "alphaAtLeast16": 228918,
+      "alphaAtLeast128": 222641,
+      "meanBodyAlphaAtLeast128": 250.45748087728674,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        60,
+        21,
+        1193,
+        1254
+      ],
+      "bboxAlphaAtLeast16": [
+        64,
+        215,
+        1191,
+        1095
+      ],
+      "alphaBounds": [
+        64,
+        215,
+        1191,
+        1095
+      ],
+      "bboxAlphaAtLeast128": [
+        64,
+        216,
+        1190,
+        1094
+      ],
+      "bboxAlpha255": [
+        82,
+        235,
+        1172,
+        1093
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 64,
+        "top": 215,
+        "right": 63,
+        "bottom": 159
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.051036682615629984,
+        "top": 0.17145135566188197,
+        "right": 0.050239234449760764,
+        "bottom": 0.12679425837320574
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 3603,
+        "visiblePixels": 1876,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5003987240829346,
+          "y": 0.8732057416267942
+        },
+        "alphaWeightedBottom": {
+          "x": 0.37124627937736215,
+          "y": 0.8732057416267942
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": {
+      "completeSilhouette": true,
+      "sourceFacing": -1,
+      "realAlpha": true,
+      "groundContactReviewed": true,
+      "pivot": {
+        "x": 0.37,
+        "y": 0.8732057416267942
+      },
+      "qualification": "Détourage intégré OpenAI, PNG natif intact. Silhouette complète et pose relues, détails légèrement réinterprétés ; pas une extraction pixel identique. Marge visible minimale mesurée 5.02 %, non tronquée."
+    }
+  },
+  {
+    "number": 79,
+    "file": "Xeno-Warrior-Red.jpg",
+    "slug": "xeno-warrior-red",
+    "notes": "Retain the complete red-black biomechanical quadrupedal crouching creature, smooth elongated head, four supporting limbs and raised segmented tail with enormous blade. Preserve its exact left-facing pose and metallic red finish.",
+    "prompt": "Use case: background-extraction. Input image 1 is the sole target; ignore all conversation images. Retain the complete red-black biomechanical quadrupedal crouching creature, smooth elongated head, four supporting limbs and raised segmented tail with enormous blade. Preserve its exact left-facing pose and metallic red finish. Change only background and framing: preserve source pose, anatomy, proportions, texture, colors and distinctive details. Isolate whole single subject on genuine transparent alpha. Smaller centered composition with 10 percent entirely transparent padding on every side, no cut tips. Remove floor shadows, captions and backdrop. No scene, floor, border, checkerboard, duplicate views, extra objects or redesign. One static 1x1 full-creature PNG, not an animation sheet.",
+    "status": "accepted-static-adaptation",
+    "nativePath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-bce72c08-72e4-4fb9-a064-ef01c8ba89d3.png",
+    "destination": "/assets/openai/sprites/static-enemy-v95/xeno-warrior-red.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-bce72c08-72e4-4fb9-a064-ef01c8ba89d3.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1039691,
+      "sha256": "c9ed4247aa61b27018dcb1b01e4210ce3e47592f66467bd7407d46e039fd1e3d",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1212648,
+      "alpha1to254": 358260,
+      "alpha255": 1608,
+      "transparentFraction": 0.7711514541028517,
+      "alphaAtLeast16": 332625,
+      "alphaAtLeast128": 325199,
+      "meanBodyAlphaAtLeast128": 251.2735709519402,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        81,
+        1196,
+        1254
+      ],
+      "bboxAlphaAtLeast16": [
+        170,
+        84,
+        1151,
+        1149
+      ],
+      "alphaBounds": [
+        170,
+        84,
+        1151,
+        1149
+      ],
+      "bboxAlphaAtLeast128": [
+        171,
+        84,
+        1150,
+        1148
+      ],
+      "bboxAlpha255": [
+        172,
+        85,
+        1149,
+        1143
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 170,
+        "top": 84,
+        "right": 103,
+        "bottom": 105
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.13556618819776714,
+        "top": 0.06698564593301436,
+        "right": 0.08213716108452951,
+        "bottom": 0.08373205741626795
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 912,
+        "visiblePixels": 654,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5267145135566188,
+          "y": 0.916267942583732
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5099497697245164,
+          "y": 0.916267942583732
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": {
+      "completeSilhouette": true,
+      "sourceFacing": -1,
+      "realAlpha": true,
+      "groundContactReviewed": true,
+      "pivot": {
+        "x": 0.51,
+        "y": 0.916267942583732
+      },
+      "qualification": "Détourage intégré OpenAI, PNG natif intact. Silhouette complète et pose relues, détails légèrement réinterprétés ; pas une extraction pixel identique. Marge visible minimale mesurée 6.70 %, non tronquée."
+    }
+  }
+]

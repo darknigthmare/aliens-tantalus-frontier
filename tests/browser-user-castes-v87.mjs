@@ -1,3 +1,4 @@
+import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -110,7 +111,7 @@ async function uncoveredActors() {
   return actors;
 }
 const preview = `(()=>{const image=document.querySelector('#bioforge-profile-preview-v80'),thumb=document.querySelector('#bioforge-profile-thumbnail-v80'),line=document.querySelector('#bioforge-composition-v87 .bioforge-line-thumbnail-v87'),style=getComputedStyle(thumb),rect=thumb.getBoundingClientRect();return {selected:document.querySelector('#bioforge-profile-v80').value,src:image.currentSrc||image.src,complete:image.complete,width:image.naturalWidth,height:image.naturalHeight,alt:image.alt,columns:thumb.dataset.atlasColumns,rows:thumb.dataset.atlasRows,backgroundImage:style.backgroundImage,backgroundSize:style.backgroundSize,backgroundPosition:style.backgroundPosition,thumbnail:{width:rect.width,height:rect.height},line:line?{columns:line.dataset.atlasColumns,rows:line.dataset.atlasRows,backgroundSize:getComputedStyle(line).backgroundSize}:null,label:document.querySelector('#bioforge-profile-name-v80').textContent,disclosure:document.querySelector('#bioforge-cost-v80').textContent};})()`;
-const drawObserver = `(()=>{const native=CanvasRenderingContext2D.prototype.drawImage;globalThis.__QA_CASTES_DRAW_V87__={};CanvasRenderingContext2D.prototype.drawImage=function(image,...args){const src=typeof image?.src==='string'?image.src:'';if(this.canvas?.id==='bioforge-canvas-v80'&&src.includes('/assets/user/castes-v87/')){const d=globalThis.__QA_CASTES_DRAW_V87__[src]||={count:0,argCounts:[],facings:[],sizes:[],natural:[image.naturalWidth,image.naturalHeight]};d.count++;if(!d.argCounts.includes(args.length))d.argCounts.push(args.length);const facing=Math.sign(this.getTransform().a);if(!d.facings.includes(facing))d.facings.push(facing);const size=args.slice(-2).join('x');if(!d.sizes.includes(size))d.sizes.push(size);}return Reflect.apply(native,this,[image,...args]);};})()`;
+const drawObserver = `(()=>{const native=CanvasRenderingContext2D.prototype.drawImage;globalThis.__QA_CASTES_DRAW_V87__={};CanvasRenderingContext2D.prototype.drawImage=function(image,...args){const src=typeof image?.src==='string'?image.src:'';if(this.canvas?.id==='bioforge-canvas-v80'&&${JSON.stringify(ENEMY_USER_CASTES_V87.map(d => d.path))}.includes(new URL(src,location.href).pathname)){const d=globalThis.__QA_CASTES_DRAW_V87__[src]||={count:0,argCounts:[],facings:[],sizes:[],natural:[image.naturalWidth,image.naturalHeight]};d.count++;if(!d.argCounts.includes(args.length))d.argCounts.push(args.length);const facing=Math.sign(this.getTransform().a);if(!d.facings.includes(facing))d.facings.push(facing);const size=args.slice(-2).join('x');if(!d.sizes.includes(size))d.sizes.push(size);}return Reflect.apply(native,this,[image,...args]);};})()`;
 
 try {
   ({ browserContextId: context } = await cdp('Target.createBrowserContext', {}, true));
@@ -127,7 +128,7 @@ try {
   await until(`${R}.getBioforgeSnapshotV80().assets.ready===6&&document.querySelector('#bioforge-ui-v80').classList.contains('active')`, 'six native lab assets');
   const before = await read(fingerprint);
   const options = await read("[...document.querySelector('#bioforge-profile-v80').options].map(option=>({value:option.value,text:option.textContent}))");
-  assert.equal(options.length, 46); assert.equal(new Set(options.map(option => option.value)).size, 46);
+  assert.equal(options.length, 46 + ADDITIONAL.length); assert.equal(new Set(options.map(option => option.value)).size, 46 + ADDITIONAL.length);
   for (const definition of ENEMY_USER_CASTES_V87) assert.ok(options.some(option => option.value === definition.id));
   assert.match(options.find(option => option.value === OLD).text, /Altered/i);
   assert.doesNotMatch(options.find(option => option.value === NEW).text, /Altered/i);
@@ -150,7 +151,7 @@ try {
     console.log(JSON.stringify({ stage: 'profile', checked: report.profiles.length, total: 35, id: definition.id }));
   }
   milestone('all35NativePreviews', { checked: report.profiles.length, landscapeRatio: 1.5, portraitEggRatio: 2 / 3 });
-  const requested = new Set(responses.filter(response => response.url.includes('/assets/user/castes-v87/')).map(response => new URL(response.url).pathname));
+  const requested = new Set(responses.filter(response => ENEMY_USER_CASTES_V87.some(d => new URL(response.url).pathname === d.path)).map(response => new URL(response.url).pathname));
   assert.deepEqual([...requested].sort(), ENEMY_USER_CASTES_V87.map(definition => definition.path).sort());
   milestone('all35NativeRequests', { count: requested.size, paths: [...requested].sort() });
 
@@ -243,7 +244,7 @@ try {
   try { await capture('failure'); report.lastState = await read(pose); } catch {}
   throw error;
 } finally {
-  report.finishedAt = new Date().toISOString(); report.nativeAssetResponses = responses.filter(response => response.url.includes('/assets/user/castes-v87/'));
+  report.finishedAt = new Date().toISOString(); report.nativeAssetResponses = responses.filter(response => ENEMY_USER_CASTES_V87.some(d => new URL(response.url).pathname === d.path));
   await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   for (const code of pressed) try { await key(code, false); } catch {}
   if (context) try { await cdp('Target.disposeBrowserContext', { browserContextId: context }, true); } catch {}

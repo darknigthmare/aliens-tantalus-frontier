@@ -1,4 +1,5 @@
-import { getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
+import { getEnemyStaticPoseV96 as getEnemyUserCasteV87 } from './enemy-static-poses-v96.js';
+import { getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v97.js';
 
 export const BIOFORGE_LEVEL_SCHEMA_V80 = 80;
 
@@ -163,14 +164,22 @@ export function placeBioforgeSpecimenV80(specimen, index, level = AUTHORED_LEVEL
   const slot = getBioforgeSpawnSlotV80(index, level);
   if (!slot || !specimen) return null;
   const supplied = getEnemyUserCasteV87(specimen.profileId);
-  const w = supplied?.bodyWidth ?? clamp(specimen.w || specimen.width || 52, 18, 180);
-  const h = supplied?.bodyHeight ?? clamp(specimen.h || specimen.height || 82, 18, 230);
+  const dedicated = getEnemyDedicatedPoseV97(specimen.profileId);
+  // An admitted dedicated bitmap does not change its historical combat collider.
+  // The runtime still rejects placements without a wide enough support or bounds.
+  const historicalBody = dedicated && dedicated.bioforgeEligible !== false
+    && Number.isFinite(specimen.w) && specimen.w > 0 && Number.isFinite(specimen.h) && specimen.h > 0;
+  const w = supplied?.bodyWidth ?? (historicalBody ? specimen.w : clamp(specimen.w || specimen.width || 52, 18, 180));
+  const h = supplied?.bodyHeight ?? (historicalBody ? specimen.h : clamp(specimen.h || specimen.height || 82, 18, 230));
+  // Water is an explicit contained basin. Neither swimmers nor flyers are placed on a catwalk.
+  const volumetric = ['flying', 'aquatic'].includes(supplied?.locomotion);
+  const groundY = volumetric ? level.world.floorY : slot.groundY;
   const centerTarget = Number(target?.x || 0) + Number(target?.w || 0) / 2;
   return {
     ...specimen,
     x: slot.x - w / 2,
-    y: slot.groundY - h,
-    groundY: slot.groundY,
+    y: groundY - h - (supplied?.locomotion === 'flying' ? 240 : supplied?.locomotion === 'aquatic' ? 12 : 0),
+    groundY,
     w,
     h,
     facing: resolveBioforgeFacingV80(slot.x, centerTarget),

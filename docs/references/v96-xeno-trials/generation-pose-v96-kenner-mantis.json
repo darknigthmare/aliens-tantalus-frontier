@@ -1,0 +1,55 @@
+{
+  "version": 96,
+  "id": "pose-v96-kenner-mantis",
+  "status": "accepted-static-adaptation",
+  "tool": "image_gen.imagegen",
+  "generatedOn": "2026-09-26",
+  "transparentBackground": true,
+  "promptSha256": "0e67390aadc0d45ca16c0319faa851ac7f70ee7c706d3b6bc30468a4fa17f3dc",
+  "prompt": "Use case: stylized-concept. Asset type: ONE full-body transparent native PNG static enemy pose for a 2D fan game. Draw an original reference-guided adaptation of the Mantis Alien specifically from the NECA Aliens Series 10 Kenner tribute figure, not a generic insect or a film caste. The actual inspected official NECA product photograph shows a biomechanical xenomorph with luminous translucent lime-green flesh under weathered silver-gray skeletal armor, a tall elongated ridged head swept back in a high arc, small toothy eyeless mouth with yellow-green inner jaw, open oval recesses along the head crest, ribbed torso with a narrow green waist, paired open-frame curved dorsal tubes, exactly TWO extraordinarily long mantis-like forearms angled down and forward with serrated silver-gray edges and hooked prongs rather than ordinary hands, and exactly TWO bent digitigrade hind legs with skeletal three-clawed feet. The long segmented green tail has silver-gray ridged upper plating and a small ochre curved blade tip. Render that unmistakable four-limbed NECA/Kenner anatomy. Full creature in a balanced predatory standing crouch facing RIGHT, strict readable near-side view with a slight three-quarter turn only to separate the two serrated forearms and feet, tail curving behind toward the left. Keep all long forelimb tips, crest, feet, dorsal tubes and tail tip inside the canvas with ample clear margins; no cropping. Material and finish: richly detailed biomechanical bestiary art, polished realistic 3D creature sculpt with crisp contours and glossy translucent green accents, subtle worn silver-gray sculpted exoskeleton, premium game asset quality compatible with an existing realistic NECA Gorilla Alien cutout. Preserve legibility and separation of limbs. One creature, one pose, no humans, no pedestal, no toy articulation joints, no collage, no sprite grid. Truly transparent RGBA background with solid opaque armor and only carefully localized translucent green material; no mist or glow halo, no ground shadow, no floor, no text, no signature, no logo, no watermark. This is an original fan-made adaptation guided by the reviewed licensed toy reference, not an official extraction and not claimed 1:1.",
+  "toolOutputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a0df70-7e88-7ce0-aa4a-e382e65175e3 as C:\\Users\\chuck\\.codex\\generated_images\\01a0df70-7e88-7ce0-aa4a-e382e65175e3\\exec-9a6b22d8-b240-49a5-93f5-43eaf652a422.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "visualReferences": {
+    "authority": "primary-licensed-manufacturer",
+    "method": "browser displayed the actual official product photograph",
+    "inspectedUrls": [
+      "https://necaonline.com/2016/12/closer-look-aliens-series-10-kenner-tribute-action-figures/1200x-51619-mantis1/",
+      "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2016/12/1200x-51619-Mantis1-.jpg"
+    ],
+    "styleReference": "assets/openai/sprites/static-enemy-v94/kenner-gorilla-neca.png",
+    "referenceImagesPassedToTool": false
+  },
+  "output": {
+    "nativePath": "C:/Users/chuck/.codex/generated_images/01a0df70-7e88-7ce0-aa4a-e382e65175e3/exec-9a6b22d8-b240-49a5-93f5-43eaf652a422.png",
+    "runtimePath": "/assets/openai/sprites/static-enemy-v96/mantis-alien-neca.png",
+    "sha256": "d84bcb3069b7eb0119fb627a6f5aef5eb60da3478b3e18a9d254a4302a564ef7",
+    "width": 1226,
+    "height": 1283,
+    "format": "RGBA8 non-interlaced",
+    "alphaBoundsThreshold": 16,
+    "alphaBounds": [
+      14,
+      6,
+      1213,
+      1271
+    ],
+    "alpha0": 1007197,
+    "alphaMax": 255,
+    "transforms": [],
+    "copiedByteIdentical": true
+  },
+  "runtimeContract": {
+    "animation": false,
+    "frames": 1,
+    "automaticEncounter": false,
+    "behavior": "generic-melee-project-adaptation",
+    "canonExact": false,
+    "identityVerified": false
+  },
+  "reviewNotes": [
+    "Official NECA Mantis1 photograph visually inspected through the browser before generation.",
+    "Green translucent inserts, silver skeletal shell, long ridged head, two long serrated forearms and two hind legs were compared.",
+    "Native canvas preserved: six-pixel top margin at alpha >= 16; very faint alpha fringe touches canvas. No opaque silhouette part is clipped.",
+    "Kenner/NECA licensed toy design, not a claim of a film caste or an official game model."
+  ],
+  "heldSourcePolicy": "No held V95 source was sent or regenerated; this is a distinct newly reviewed licensed identity."
+}

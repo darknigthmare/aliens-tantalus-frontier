@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-088-albino-deacon-line",
+  "name": "Albino Deacon Line",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows a slim upright blue-gray organic humanoid with a very distinctive smooth pointed rearward-swept wedge skull, elongated face and small mouth, two slender arms with long fingers, two long humanlike legs, no tail and no dorsal tubes. Preserve Deacon-line smooth anatomical silhouette, not a conventional domed xenomorph. Output one calm hunched upright side pose facing right.\nSubject: Albino Deacon Line. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT, slightly three-quarter only enough to separate limbs; every extremity inside canvas. Entire creature must occupy at most 75 percent of width and height, with clear transparent padding on all four sides. Grounded neutral ready stance on invisible ground. One creature only, no second pose.\nStyle: detailed science-fiction painted game sprite matching the reference anatomy, finely shaded surface relief, dark recesses, ivory and warm parchment surfaces, cool gray and restrained rose-taupe joints; no pure white silhouette.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve exact base anatomy and appendage count; no new equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png",
+    "sha256": "b1de6bc249f8d3fbad6c808edebac0c850c160d92c601f3ffd549df75008c4c8",
+    "visualNotes": "Reference sheet shows a slim upright blue-gray organic humanoid with a very distinctive smooth pointed rearward-swept wedge skull, elongated face and small mouth, two slender arms with long fingers, two long humanlike legs, no tail and no dorsal tubes. Preserve Deacon-line smooth anatomical silhouette, not a conventional domed xenomorph. Output one calm hunched upright side pose facing right."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-49fb53e1-686a-4d6b-b1dc-d6eb5d707d48.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-088-albino-deacon-line.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "2f739dc8bdf2a4b669c4a11810e079e012e15335d483813754a7ba96c9781a11",
+    "bboxAlphaAtLeast16": [
+      364,
+      111,
+      963,
+      1162
+    ],
+    "alphaMin": 0,
+    "alpha0": 1331572,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete upright slim Deacon-line biped with pointed rear-swept wedge skull, two arms, two legs, no tail and no dorsal tubes; right-facing. Native alpha confirmed. Head/feet clear margins are below requested 10% but uncropped. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.48,
+      "y": 0.9266347687400319
+    },
+    "sourceFacing": 1
+  }
+}

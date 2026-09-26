@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-053-albino-ovomorph",
+  "name": "Albino Ovomorph",
+  "prompt": "Use case: stylized-concept. Asset type: production game static enemy sprite, original project adaptation.\nImage 1 is base anatomy and rendering-style reference only, not a sheet to reproduce. Create one newly authored Albino Ovomorph, one whole closed upright egg in one idle pose, matching the first-row reference identity. Exact systemic derivative of the locked V66 Ovomorph anatomy: same upright leathery ovoid, broad stable lower shell, narrower cap, exactly four apical lips, no root tentacles, no legs, no parasite baked into the egg, and identical sealed/opening/release/destroyed logic. Albino changes only authored pigmentation and material response: warm bone-ivory and pale gray-beige outer membrane with restrained translucent pink-beige veins and interior, subtle wet highlights and enough value separation to preserve pebbled relief. It is not pure white, glowing, crystalline or a flat automatic recolor. No new caste or official-model claim. Strict right-facing contract, unchanged scale, root and silhouette. Future pixels must be an original hand-authored adaptation of the base lock.\nBackground: genuine transparent alpha, no floor, no shadow ellipse, no checkerboard painted into image.\nComposition: ONE isolated subject only; orthographic side-gameplay presentation with right-facing orientation convention, full silhouette and all shell visible, centered with at least 10 percent transparent padding on every edge. Sharp detailed raster game asset matching reference material realism.\nNo sprite sheet, no grid, no repeated subjects, no extra objects, no text, label, watermark, gore, cropping, or cut-off silhouette. Output a single static pose, not animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-001-ovomorph.webp",
+    "sha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4",
+    "visualNotes": "Reviewed base sheet: leathery closed upright egg with narrow apex and broad resting lower shell; four-part apical opening in later cells."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-12f61826-32ab-4578-92fd-4b3eb6430720.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-053-albino-ovomorph.png",
+    "width": 1223,
+    "height": 1286,
+    "sha256": "f896c86eb05b2819204940b25c557fc52b3df47238627b7d53677bcc70af97a3",
+    "bboxAlphaAtLeast16": [
+      288,
+      215,
+      937,
+      1139
+    ],
+    "alphaMin": 0,
+    "alpha0": 1094866,
+    "totalPixels": 1572778
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One intact closed egg, broad stable shell, pale ivory pebbled relief and restrained pink seams. Full silhouette and transparent padding verified. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5004088307440719,
+      "y": 0.8849144634525661
+    },
+    "sourceFacing": 1
+  }
+}

@@ -88,3 +88,10 @@ docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/a
 docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/scale-review.fragment.json -text whitespace=cr-at-eol
 docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/anchor-review.fragment.json -text whitespace=cr-at-eol
 docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/scale-review.fragment.json -text whitespace=cr-at-eol
+# V79/V81/V82 reviewed evidence was authored and signed as LF.
+# Keep checkout/export bytes stable without changing historical SHA-256 values.
+assets/openai/sprites/metadata/v81/enemy-009-crusher.json text eol=lf
+assets/openai/sprites/metadata/v81/enemy-010-spitter.json text eol=lf
+assets/openai/sprites/metadata/v81/enemy-wave-manifest.json text eol=lf
+docs/references/v79-title-scene-production/exact-generation-prompts.md text eol=lf
+docs/references/V82_ENEMY_PROGRESS.json text eol=lf

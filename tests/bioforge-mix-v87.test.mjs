@@ -1,3 +1,8 @@
+import { ENEMY_USER_CREATIONS_V95 as USER_ADDITIONS } from '../src/enemy-user-creations-v95.js';
+import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
+import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
+const DEDICATED = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.bioforgeEligible !== false);
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -25,9 +30,9 @@ function ready(composition = three, maxConcurrent = 4) {
 const print = (state, now = 103, population) => advanceBioforgeSessionV80(state, { now, population });
 const reload = state => sanitizeBioforgeV80(clone(state));
 
-test('MIX separates allocation 48, concurrent 1..12 and budget12, keeping exactly11 profiles', () => {
+test('MIX separates allocation 48, concurrent 1..12 and budget12 from the admitted roster size', () => {
   assert.equal(BIOFORGE_MAX_TOTAL_V87, 48);
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 46);
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 11 + CURRENT_STATIC.length + DEDICATED.length);
   const valid = validateBioforgeCompositionV87({ composition: three, maxConcurrent: 4 });
   assert.equal(valid.ok, true); assert.equal(valid.totalQuantity, 18); assert.equal(valid.totalCost, 36);
   assert.equal(validateBioforgeCompositionV87({ composition: [line('A', C, 48)], maxConcurrent: 1 }).ok, true);

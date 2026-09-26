@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-079-albino-reef-stalker",
+  "name": "Albino Reef Stalker",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: exact base anatomy and raster material style reference. Create ONE newly authored Albino Reef Stalker in low quadrupedal stalking idle stance. PROJECT_ADAPTATION albino marine ecophenotype derived from the reviewed project Reef Stalker. Preserve one low, long, streamlined amphibious XX121-derived quadruped with a smooth eyeless dome, biomechanical ribs, exactly two forelimbs and two hindlimbs, low flattened dorsal fin-plates and exactly one complete propulsive segmented tail ending in one contained vertical swimming blade. Albino changes pigment/material response only: warm pearl and pale parchment shell, cool ash-gray wet recesses, restrained translucent rose-taupe joints and faint sea-glass cyan bioluminescent pinpoints; salt and algae deposits remain sparse gray-green, never a green body wash. It must remain distinct from Albino Reef Spitter: no raised narrow cranium, no throat gland, no projectile posture and no acid sac. Strict orthographic gameplay profile facing RIGHT in all clips. No fish eyes, fish face, giant gills, shark mouth, tentacles, extra limbs, second tail, weapon, snow/ice theme, flat-white silhouette, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.\nKeep low flattened dorsal FIN PLATES, smooth eyeless dome, streamlined ribbed trunk, four limbs clearly grounded with far feet staggered. Single complete propulsive segmented tail trailing left ends in one small contained VERTICAL swimming blade. No acid sacs, throat gland, tall pipes, fish face or large sail. ONE whole subject, strict orthographic RIGHT-facing side profile. Genuine transparent alpha, no floor/shadow/halo. Entire silhouette in central 75% canvas with at least 10% empty transparent margins each side. Pale ivory shell, cool ash recesses, only tiny subtle cyan pinpoints. No sheet, grid, duplicate subjects, text, logo, watermark, props, gore or cropping. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png",
+    "sha256": "a23097c5933b2ddd7b5e97b5c5985cf0901da2ec2f075ca20e28be113cefb10a",
+    "visualNotes": "Reviewed base sheet: low amphibious quadruped, smooth dome, swept finlike dorsal plates and one long narrow tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-48a645e5-7395-4142-aa43-652fe649edd7.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-079-albino-reef-stalker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "cf600d1f6b9fa891437c07d19fa73c68d4f0d3a844c99e816e146c1d4c634a4c",
+    "bboxAlphaAtLeast16": [
+      111,
+      320,
+      1426,
+      787
+    ],
+    "alphaMin": 0,
+    "alpha0": 1334400,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Four grounded limbs, smooth eyeless dome, one complete tail with contained vertical swimming blade and pale gray/ivory wet material verified. Dorsal structures are flat finlike plates, no throat sac or acid posture. Native alpha and full silhouette; side padding about 7.2%. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.6608072916666666,
+      "y": 0.767578125
+    },
+    "sourceFacing": 1
+  }
+}

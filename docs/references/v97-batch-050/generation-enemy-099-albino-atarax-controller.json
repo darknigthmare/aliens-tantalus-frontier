@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-099-albino-atarax-controller",
+  "name": "Albino ATARAX Controller",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay human character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows one unhelmeted human male-presenting controller with short dark hair, dark communication earset with small antenna, dark tactical jumpsuit with rounded shoulder/elbow pads, compact electronics backpack and cables, chest electronics, utility belt and holstered sidearm, boots. Preserve exact equipment and human anatomy. Keep both hands empty and relaxed in the first-row standing stance; do not add rifle. New ivory/ash-gray outer clothing/equipment material variant only, keep natural human skin, dark hair and communication details. No ethnicity change.\nSubject: Albino ATARAX Controller. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nImportant: for this human subject, the label Albino means pale FIELD EQUIPMENT ONLY, not skin depigmentation or ethnicity. Preserve any exposed skin and hair from the base reference.\nComposition: one full-body human in near-side profile facing RIGHT, slight three-quarter angle only to separate arms. Every boot, helmet and equipment extremity fully within canvas. Fit ENTIRE subject within central 75 percent of width and height, leaving generous genuine transparent margins on all four sides. Grounded neutral ready stance, feet on one invisible ground. One character only, no second pose.\nStyle: detailed hand-painted science-fiction gameplay sprite matching reference, crisp readable silhouette, modeled material texture, controlled highlights and dark recesses, warm ivory/ash-gray textile/equipment materials, realistic proportions.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, lettering, faction insignia, watermark, blood or gore. Preserve exact existing equipment; no added armor, extra arms, invented weapon or mechanical body redesign.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-controller-action-sheet-v56.png",
+    "sha256": "3eabe8d1eccba7939d95db0c9de94a12a3e717a03ea0feb4c29296905d74f975",
+    "visualNotes": "Reference sheet shows one unhelmeted human male-presenting controller with short dark hair, dark communication earset with small antenna, dark tactical jumpsuit with rounded shoulder/elbow pads, compact electronics backpack and cables, chest electronics, utility belt and holstered sidearm, boots. Preserve exact equipment and human anatomy. Keep both hands empty and relaxed in the first-row standing stance; do not add rifle. New ivory/ash-gray outer clothing/equipment material variant only, keep natural human skin, dark hair and communication details. No ethnicity change."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-8b3ad556-6754-4913-90dd-a05d2621938e.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-099-albino-atarax-controller.png",
+    "width": 1192,
+    "height": 1320,
+    "sha256": "9d8e6b45bd50ae0a1585df5e8f2e5dd11bf2e9ea6afcb6453d07e20c4545d82c",
+    "bboxAlphaAtLeast16": [
+      407,
+      84,
+      802,
+      1224
+    ],
+    "alphaMin": 0,
+    "alpha0": 1296419,
+    "totalPixels": 1573440
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing unhelmeted human controller, natural exposed skin, short dark hair, communication earset/antenna, electronic pack/cables and holstered sidearm retained; both hands empty. Pale field equipment only. Native alpha confirmed. All anatomy and equipment uncropped; requested 10% padding is not met on every vertical margin, documented without pixel editing. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.515,
+      "y": 0.9272727272727272
+    },
+    "sourceFacing": 1
+  }
+}

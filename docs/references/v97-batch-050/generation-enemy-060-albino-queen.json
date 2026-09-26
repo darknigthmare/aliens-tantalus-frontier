@@ -1,0 +1,38 @@
+{
+  "profileId": "enemy-060-albino-queen",
+  "name": "Albino Queen",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: anatomy and detailed raster style reference only. Create ONE newly authored Albino Queen, mobile royal in poised idle stance. PROJECT_ADAPTATION systemic albino derivative of reviewed V66 enemy-008-queen only. Preserve the mobile Aliens (1986) Queen as one towering eyeless royal with a huge swept-back layered fan crown and paired lobes, narrow neck and waist, ribbed torso, exactly four arms (two large outer arms plus two much smaller chest arms), two powerful digitigrade legs and one long continuous segmented spear-tail; no ovipositor on this combat profile. Albino changes authored pigment and material response only: warm pearl-ivory and pale gray-beige chitin, restrained translucent rose-taupe in thin crown margins and membranes, cool gray recesses, dark mouth cavity and moist highlights; never pure flat white, icy, glowing or an automatic recolor. Preserve the base strict right-facing profile, physical scale, pelvis/support-foot root and five-clip royal animation topology. No two-arm Praetorian substitution, armor, eyes, clothing or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nCarefully separate four arms: two large outer arms and two small chest arms, all belonging to the same creature. ONE whole subject, strict orthographic RIGHT-facing side profile, grounded two feet, entire long tail to left and crown fully in frame. Real transparent alpha background. At least 10 percent clear transparent padding around every edge of complete silhouette. No backdrop, floor, shadow, halo, sheet, grid, repeated poses, text, watermark, gore or cropping. One static pose, no animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-queen-action-sheet-v56.png",
+    "sha256": "4d014575b316fed25b5eb59f7adb6177dc17e1477e023e7f6799800e3fdc8e21",
+    "visualNotes": "Reviewed royal base sheet: swept crown, two legs, two large and two small arms, single tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-733df991-8113-49de-b1d7-383acd5aaba7.png",
+    "path": null,
+    "intendedPath": "assets/openai/sprites/static-enemy-v97/enemy-060-albino-queen.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "d08fc6b8655e52c4cb33ba9cddac29afda0b6cd59e2cb90b532043a9a8afbc9d",
+    "bboxAlphaAtLeast16": [
+      47,
+      41,
+      1470,
+      982
+    ],
+    "alphaMin": 0,
+    "alpha0": 1183655,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "held",
+    "notes": "Whole subject and alpha are present, but only one major outer arm is clearly separable alongside two small chest arms; cannot certify the required four-arm topology. Margins are only 3-4%. No runtime copy and no retry."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.6510416666666666,
+      "y": 0.9580078125
+    },
+    "sourceFacing": 1
+  }
+}

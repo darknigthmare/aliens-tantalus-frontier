@@ -1,0 +1,38 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-115-armored-lurker",
+  "name": "Armored Lurker",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Lurker. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Lurker as pictured: crouching deep purple-black xenomorph, exactly TWO elongated clawed arms and TWO powerful folded digitigrade rear legs, long glossy smooth eyeless head dome, compact ribbed torso, narrow upward/backward dorsal tubes/spines, ONE long flexible segmented tail. Very low stalking pose, all four limb extremities near imaginary floor, head facing right. Add discrete dark natural carapace layering while keeping the sleek purple-black body and long reaching forearms; not a hulking Crusher.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-lurker-action-sheet.png",
+    "sha256": "e250acd441e8d77eb4c7cbfa686c26ffa83348e8701245c20cda5600892fabb1",
+    "visualNotes": "Viewed Lurker action sheet: sleek deep-purple smooth dome, long reaching forearms, crouched bent rear legs, dorsal tubes/spines and one thin segmented curling tail."
+  },
+  "output": {
+    "providerPath": null,
+    "path": null,
+    "width": null,
+    "height": null,
+    "sha256": null,
+    "bboxAlphaAtLeast16": null,
+    "alphaMin": null,
+    "alpha0": null,
+    "totalPixels": null,
+    "requestedOutputPath": "assets/openai/sprites/static-enemy-v97/enemy-115-armored-lurker.png"
+  },
+  "review": {
+    "status": "held",
+    "notes": "Held after grouped native generation interruption. Three independent calls for Armored Queen112, Crusher113, Lurker115 were launched using Promise.all. One call returned output moderation_blocked request c50d3bef-e02a-4624-ae9d-369d2e7c1baa; aggregate failure ended the exec before any of the three results were stored. The exact rejected target is unknown; the other two outputs were not recovered. This does NOT assert three moderation refusals. No target in this group was retried, no alternative source or local modification was used.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "failureCode": "moderation_blocked",
+    "attribution": "uncertain-within-three-call-group"
+  },
+  "runtimeContract": {
+    "pivot": null,
+    "sourceFacing": 1
+  }
+}

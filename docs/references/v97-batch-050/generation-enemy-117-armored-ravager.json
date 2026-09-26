@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-117-armored-ravager",
+  "name": "Armored Ravager",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Ravager. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Ravager as pictured: tall predatory red-black xenomorph, TWO digitigrade legs, TWO main arms ending in long organically grown curved scythe blades rather than ordinary hands, one backward-elongated eyeless cranial dome, angular spiked shoulders/back, ribbed chest, ONE segmented tapered bladed tail. Preserve reference silhouette, red-maroon ridged natural exoskeleton with dark armored plates reinforcing body and blade bases. Do not add extra blades or arms.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-ravager-action-sheet.png",
+    "sha256": "f7c58823ce59b27aa2ebe779d380966f40fb48fa9e1dfe165fd38ad306999070",
+    "visualNotes": "Viewed Ravager base sheet: red-maroon upright xenomorph with two legs, two long scythe-like forearms, rear-extended dome, shoulder/back spines and single long tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-a4976a48-7174-471e-9373-ddc191a7f793.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-117-armored-ravager.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "1c2de23b311763f75ef8b79e81b1367b52155685c9735bdbfb55a521cfe90b3d",
+    "bboxAlphaAtLeast16": [
+      102,
+      167,
+      1150,
+      1101
+    ],
+    "alphaMin": 0,
+    "alpha0": 1187519,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One right-facing upright Ravager, two legs and two long organic scythe forearms, spiked shoulders, red-black carapace and complete single tail. Silhouette and specialized forearms preserved; no fabricated suit. Side padding about8%, complete.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 102,
+      "top": 167,
+      "right": 104,
+      "bottom": 153
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.61,
+      "y": 0.8779904306220095
+    },
+    "sourceFacing": 1
+  }
+}

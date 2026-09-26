@@ -1,0 +1,3180 @@
+[
+  {
+    "sourceNumber": 32,
+    "slug": "ingineer-mother",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.51,
+    "source": {
+      "number": 32,
+      "file": "Ingineer-Mother.jpg",
+      "bytes": 427136,
+      "width": 864,
+      "height": 1241,
+      "sha256": "36b47aaa83539e427648f2aa3b94812b70954c4ac14f5e780b66dac51d151f2e",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Ingineer-Mother",
+      "visualDescription": "Humanoïde pâle à tête nue enchâssée dans une silhouette biomécanique noire, très longs bras et appendices dorsaux.",
+      "flags": [
+        "nature-armure-ou-corps-a-confirmer"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Ingineer-Mother.jpg. Ignore other conversation images.\nPrimary request: Pale humanoid head, grey bone-biomechanical suit/body, four arms including extremely long outer arms, long narrow limbs, dorsal architecture. Preserve exact proportions and visible anatomy.\nChange only background isolation and framing (plus explicitly requested minimal completion). Keep the source's exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no text or annotation. Center the whole visible subject at a reduced size with at least 10 percent completely transparent clear margin on ALL four sides; every tail, horn, wing and foot tip must be inside. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-a70997d3-09ae-412a-a6ae-518268724c9a.png",
+    "decision": "accepted-with-native-padding-qualification",
+    "filename": "ref-32-ingineer-mother.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-32-ingineer-mother.png",
+      "width": 1046,
+      "height": 1503,
+      "sourceWidth": 1046,
+      "sourceHeight": 1503,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 984887,
+      "sha256": "57d9533a4e5f7ea2ece10c903c2e7352d6cfc1bac839809418457c494918a889",
+      "totalPixels": 1572138,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1198984,
+      "alpha1to254": 372365,
+      "alpha255": 789,
+      "transparentFraction": 0.7626455183959678,
+      "alphaAtLeast16": 351237,
+      "alphaAtLeast128": 343650,
+      "meanBodyAlphaAtLeast128": 251.16740288083807,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        29,
+        32,
+        964,
+        1414
+      ],
+      "bboxAlphaAtLeast16": [
+        300,
+        82,
+        868,
+        1402
+      ],
+      "alphaBounds": [
+        300,
+        82,
+        868,
+        1402
+      ],
+      "bboxAlphaAtLeast128": [
+        301,
+        83,
+        867,
+        1402
+      ],
+      "bboxAlpha255": [
+        306,
+        101,
+        852,
+        1372
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 300,
+        "top": 82,
+        "right": 178,
+        "bottom": 101
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.28680688336520077,
+        "top": 0.054557551563539586,
+        "right": 0.1701720841300191,
+        "bottom": 0.06719893546240852
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 5512,
+        "visiblePixels": 4338,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5583173996175909,
+          "y": 0.9328010645375915
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5447003966157618,
+          "y": 0.9328010645375915
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, silhouette, pose, palette et détails distinctifs préservés; détail légèrement réinterprété.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 33,
+    "slug": "neomorph-bloodbuster",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.48,
+    "source": {
+      "number": 33,
+      "file": "Neomorph-Bloodbuster.jpg",
+      "bytes": 1968056,
+      "width": 3156,
+      "height": 1344,
+      "sha256": "4b768ff32d86ecaef37485cd9a52299689e34530849677f432464e4ea748dbc9",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Neomorph-Bloodbuster",
+      "visualDescription": "Petite créature pâle quadrupède à crâne très renflé, bras fins, pattes arrière et queue annelée recourbée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Neomorph-Bloodbuster.jpg. Ignore other conversation images.\nPrimary request: Pale crouched quadrupedal alien, long smooth head, glossy ivory-pink skin, slender arms and legs, long curled tail. Keep this exact crouching pose and silhouette.\nChange only background isolation and framing (plus explicitly requested minimal completion). Keep the source's exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no text or annotation. Center the whole visible subject at a reduced size with at least 10 percent completely transparent clear margin on ALL four sides; every tail, horn, wing and foot tip must be inside. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-007d5c44-bdde-4f3c-940f-491ceb16f5de.png",
+    "decision": "accepted-with-native-padding-qualification",
+    "filename": "ref-33-neomorph-bloodbuster.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-33-neomorph-bloodbuster.png",
+      "width": 1921,
+      "height": 819,
+      "sourceWidth": 1921,
+      "sourceHeight": 819,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 775926,
+      "sha256": "7766dcdd0abf503e7c6199e1f604418f00bb9a14d7bc49c27c93bfb471f25788",
+      "totalPixels": 1573299,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1257740,
+      "alpha1to254": 313017,
+      "alpha255": 2542,
+      "transparentFraction": 0.7994284621041519,
+      "alphaAtLeast16": 297084,
+      "alphaAtLeast128": 291143,
+      "meanBodyAlphaAtLeast128": 251.30374764291088,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        313,
+        98,
+        1773,
+        791
+      ],
+      "bboxAlphaAtLeast16": [
+        338,
+        104,
+        1669,
+        789
+      ],
+      "alphaBounds": [
+        338,
+        104,
+        1669,
+        789
+      ],
+      "bboxAlphaAtLeast128": [
+        338,
+        105,
+        1669,
+        788
+      ],
+      "bboxAlpha255": [
+        362,
+        106,
+        1667,
+        785
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 338,
+        "top": 104,
+        "right": 252,
+        "bottom": 30
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.17595002602811036,
+        "top": 0.12698412698412698,
+        "right": 0.13118167621030713,
+        "bottom": 0.03663003663003663
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 7172,
+        "visiblePixels": 5302,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5223841749089017,
+          "y": 0.9633699633699634
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4508094866537507,
+          "y": 0.9633699633699634
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, silhouette, pose, palette et détails distinctifs préservés; détail légèrement réinterprété.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 34,
+    "slug": "neomorph-motes",
+    "kind": "effect",
+    "sourceFacing": 1,
+    "pivotX": 0.5,
+    "source": {
+      "number": 34,
+      "file": "Neomorph-Motes.jpg",
+      "bytes": 170576,
+      "width": 1024,
+      "height": 694,
+      "sha256": "f2c7fd82285e1fe23d9738cdb1142615b5310c94530fc69b3a2a9476f1b85619",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Neomorph-Motes",
+      "visualDescription": "Nuage noir ramifié ou particules en suspension devant un fond naturel flou ; pas de corps individuel isolé.",
+      "flags": [
+        "effet-ou-essaim",
+        "pas-sprite-creature-unique"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Neomorph-Motes.jpg. Ignore other conversation images.\nPrimary request: Isolate only the central black suspended fine-particle spore cloud. This is an environmental particle effect, NOT a creature or figure. Preserve irregular wispy shape and fine semitransparent particles. Remove blurred background entirely.\nChange only background isolation and framing (plus explicitly requested minimal completion). Keep the source's exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no text or annotation. Center the whole visible subject at a reduced size with at least 10 percent completely transparent clear margin on ALL four sides; every tail, horn, wing and foot tip must be inside. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-9b27c5fa-d3f5-4e55-88de-99d33991eb9b.png",
+    "decision": "accepted-with-native-padding-qualification",
+    "filename": "ref-34-neomorph-motes.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-34-neomorph-motes.png",
+      "width": 1523,
+      "height": 1032,
+      "sourceWidth": 1523,
+      "sourceHeight": 1032,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 890414,
+      "sha256": "bc77855206df59b393ba71140fe005cebc838b8d8e479a2e64a15837f7ee1411",
+      "totalPixels": 1571736,
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "alpha0": 1223935,
+      "alpha1to254": 347801,
+      "alpha255": 0,
+      "transparentFraction": 0.7787153822270406,
+      "alphaAtLeast16": 257487,
+      "alphaAtLeast128": 157787,
+      "meanBodyAlphaAtLeast128": 222.25374080247423,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        20,
+        1461,
+        1032
+      ],
+      "bboxAlphaAtLeast16": [
+        208,
+        229,
+        1229,
+        904
+      ],
+      "alphaBounds": [
+        208,
+        229,
+        1229,
+        904
+      ],
+      "bboxAlphaAtLeast128": [
+        265,
+        255,
+        1216,
+        892
+      ],
+      "bboxAlpha255": null,
+      "marginsAlphaAtLeast16": {
+        "left": 208,
+        "top": 229,
+        "right": 294,
+        "bottom": 128
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.1365725541694025,
+        "top": 0.22189922480620156,
+        "right": 0.19304005252790546,
+        "bottom": 0.12403100775193798
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 538,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4717662508207485,
+          "y": 0.875968992248062
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5519551638988967,
+          "y": 0.875968992248062
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Nuage de particules seul, translucide; pas une créature. Texture atmosphérique légèrement réinterprétée.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 35,
+    "slug": "neomorph-neomorph",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.5,
+    "source": {
+      "number": 35,
+      "file": "Neomorph-Neomorph.jpg",
+      "bytes": 1667729,
+      "width": 2048,
+      "height": 2048,
+      "sha256": "84a92f198168968a42ba683cb7684222219770420dbf35e834c5624ac32d0fc3",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Neomorph-Neomorph",
+      "visualDescription": "Créature pâle à tête allongée, épines dorsales et bras griffus ; vue partielle coupée aux jambes et à l’arrière.",
+      "flags": [
+        "source-cadree-partielle"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "same-user-label-different-reference",
+        "poseIds": [
+          "castes-film_neomorph_2017"
+        ],
+        "note": "Nom Neomorph commun, mais tête/épines et cadrage partiel différents de la pose existante ; pas de substitution automatique."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Neomorph-Neomorph.jpg. Ignore other conversation images.\nPrimary request: Pale blue-veined alien with swept long head, spiny back, slender arms and bent legs. Preserve all visible anatomy and pose. Source crops the lower legs, hands and tail: minimally complete only those cut extremities consistent with this existing body, with no added limbs; completion is a project interpretation.\nChange only background isolation and framing (plus explicitly requested minimal completion). Keep the source's exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no text or annotation. Center the whole visible subject at a reduced size with at least 10 percent completely transparent clear margin on ALL four sides; every tail, horn, wing and foot tip must be inside. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 21d783e5-456d-41a1-9e3a-b176dca3a13e.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "decision": "blocked-moderation",
+    "filename": "ref-35-neomorph-neomorph.png",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 36,
+    "slug": "queen-xeno-winged-2",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.56,
+    "source": {
+      "number": 36,
+      "file": "Queen Xeno Winged 2.jpg",
+      "bytes": 1325442,
+      "width": 2550,
+      "height": 1664,
+      "sha256": "239049c105de759c0068aedaf6b03421ff1eb232ff8cda3adffee5200c0af11b",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Queen Xeno Winged 2",
+      "visualDescription": "Reine xénomorphe ailée noire, membranes rouge orangé, vue latérale en vol ; aile à droite séparée visuellement du tronc.",
+      "flags": [
+        "groupe-queen-winged-provisoire",
+        "anatomie-aile-a-controler"
+      ],
+      "groups": [
+        "queen-winged"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-winged-design",
+        "poseIds": [
+          "castes-film_queen_aliens_1986"
+        ],
+        "note": "Ailes membraneuses absentes de la Reine mobile existante ; conserver les noms utilisateur sans extrapoler une version film."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Queen Xeno Winged 2.jpg. Ignore other conversation images.\nPrimary request: Isolate only the central black queen-like alien with its attached orange-red wing, tail and raised-leg pose. Omit the detached wing detail floating at upper right; it is a secondary study view, not another creature part to leave floating. Preserve main figure and its visible attached wing unchanged.\nChange only background isolation and framing (plus explicitly requested minimal completion). Keep the source's exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no text or annotation. Center the whole visible subject at a reduced size with at least 10 percent completely transparent clear margin on ALL four sides; every tail, horn, wing and foot tip must be inside. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-7c192629-1ca7-4a6b-b2a6-b94131d79ea5.png",
+    "decision": "accepted-with-native-padding-qualification",
+    "filename": "ref-36-queen-xeno-winged-2.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-36-queen-xeno-winged-2.png",
+      "width": 1552,
+      "height": 1013,
+      "sourceWidth": 1552,
+      "sourceHeight": 1013,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 784020,
+      "sha256": "5d3a9946cfe04400bc17afb3dea11e1f94672fcded22b99374941c865f0442ce",
+      "totalPixels": 1572176,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1274635,
+      "alpha1to254": 296739,
+      "alpha255": 802,
+      "transparentFraction": 0.8107457434791016,
+      "alphaAtLeast16": 278269,
+      "alphaAtLeast128": 272701,
+      "meanBodyAlphaAtLeast128": 251.18807778482662,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        25,
+        33,
+        1456,
+        989
+      ],
+      "bboxAlphaAtLeast16": [
+        369,
+        60,
+        1168,
+        963
+      ],
+      "alphaBounds": [
+        369,
+        60,
+        1168,
+        963
+      ],
+      "bboxAlphaAtLeast128": [
+        370,
+        61,
+        1167,
+        963
+      ],
+      "bboxAlpha255": [
+        377,
+        65,
+        1129,
+        961
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 369,
+        "top": 60,
+        "right": 384,
+        "bottom": 50
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.23775773195876287,
+        "top": 0.059230009871668314,
+        "right": 0.24742268041237114,
+        "bottom": 0.049358341559723594
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 6129,
+        "visiblePixels": 4928,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4951675257731959,
+          "y": 0.9506416584402764
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5087335296266917,
+          "y": 0.9506416584402764
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure principale préservée, aile orange attachée et queue; étude d'aile détachée omise.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 37,
+    "slug": "queen-xeno-winged",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.62,
+    "source": {
+      "number": 37,
+      "file": "Queen Xeno Winged.jpg",
+      "bytes": 1454159,
+      "width": 2550,
+      "height": 1664,
+      "sha256": "2b5edc2c0b9799655dde5ea19926aa3fb83f8c2d95086cb0346a9fd3e64d0c12",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Queen Xeno Winged",
+      "visualDescription": "Reine xénomorphe ailée bleu noir vue de face trois-quarts, deux grandes ailes brun sombre déployées, queue recourbée.",
+      "flags": [
+        "groupe-queen-winged-provisoire"
+      ],
+      "groups": [
+        "queen-winged"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-winged-design",
+        "poseIds": [
+          "castes-film_queen_aliens_1986"
+        ],
+        "note": "Ailes membraneuses absentes de la Reine mobile existante ; conserver les noms utilisateur sans extrapoler une version film."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Queen Xeno Winged.jpg. Ignore other conversation images.\nPrimary request: Dark blue queen-like alien hovering with two broad brown membranous wings spread, long curled tail and bent legs. Preserve both attached wings and full silhouette.\nChange only background isolation and framing. Keep exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no annotation. Center the whole subject SMALLER, occupying at most 75 percent of canvas width and height, with at least 10 percent completely transparent clear margin on ALL sides. Every tip inside. Genuine alpha transparency, not checkerboard or solid fill.",
+    "decision": "accepted",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-48ec9ed9-dca3-40fa-a89b-24302b8db0cd.png",
+    "filename": "ref-37-queen-xeno-winged.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-37-queen-xeno-winged.png",
+      "width": 1552,
+      "height": 1013,
+      "sourceWidth": 1552,
+      "sourceHeight": 1013,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 730969,
+      "sha256": "1ea18edc03f6d513927ed68ecf79a7cdd4b11510430b3e7c9a7e51d00cdb26af",
+      "totalPixels": 1572176,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1263732,
+      "alpha1to254": 307387,
+      "alpha255": 1057,
+      "transparentFraction": 0.8038107692777399,
+      "alphaAtLeast16": 291661,
+      "alphaAtLeast128": 286058,
+      "meanBodyAlphaAtLeast128": 251.304686462186,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        63,
+        21,
+        1528,
+        991
+      ],
+      "bboxAlphaAtLeast16": [
+        187,
+        131,
+        1348,
+        887
+      ],
+      "alphaBounds": [
+        187,
+        131,
+        1348,
+        887
+      ],
+      "bboxAlphaAtLeast128": [
+        187,
+        131,
+        1347,
+        886
+      ],
+      "bboxAlpha255": [
+        211,
+        132,
+        1332,
+        885
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 187,
+        "top": 131,
+        "right": 204,
+        "bottom": 126
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.12048969072164949,
+        "top": 0.12931885488647582,
+        "right": 0.13144329896907217,
+        "bottom": 0.12438302073050346
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 28,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4945231958762887,
+          "y": 0.8756169792694966
+        },
+        "alphaWeightedBottom": {
+          "x": 0.518044572352198,
+          "y": 0.8756169792694966
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Silhouette complète, pose, palette et attributs distinctifs préservés; détails légèrement réinterprétés. Deux ailes jointes et queue préservées; posture aérienne, pivot aux pieds repliés.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 38,
+    "slug": "spacejokey-armored",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.63,
+    "source": {
+      "number": 38,
+      "file": "SpaceJokey-Armored.jpg",
+      "bytes": 2829389,
+      "width": 1952,
+      "height": 2178,
+      "sha256": "e2ef5c97110eedd37039e090eee8a0ccd43c734f62143354e863cf8462311afb",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "armure-humanoide",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "SpaceJokey-Armored",
+      "visualDescription": "Humanoïde à tête allongée et trompe dans casque transparent, combinaison verte, sac dorsal et arme portée.",
+      "flags": [
+        "identite-utilisateur-preservee",
+        "personnage-equipe"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, SpaceJokey-Armored.jpg. Ignore other conversation images.\nPrimary request: Olive-green armored elephant-headed humanoid inside rounded transparent glass helmet, holds large technical device, hoses and backpack. Preserve helmet glass with alpha-aware translucency but creature/materials opaque, full figure including device and rear tube.\nChange only background isolation and framing. Keep exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no annotation. Center the whole subject SMALLER, occupying at most 75 percent of canvas width and height, with at least 10 percent completely transparent clear margin on ALL sides. Every tip inside. Genuine alpha transparency, not checkerboard or solid fill.",
+    "decision": "accepted",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-4f141d6a-ba7f-413f-91df-c4b46303cfba.png",
+    "filename": "ref-38-spacejokey-armored.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-38-spacejokey-armored.png",
+      "width": 1187,
+      "height": 1325,
+      "sourceWidth": 1187,
+      "sourceHeight": 1325,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1204673,
+      "sha256": "58b364b2e0c2ed7a0e83cb57a5290974709657879bb5a487f801516676670c4e",
+      "totalPixels": 1572775,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1132943,
+      "alpha1to254": 438886,
+      "alpha255": 946,
+      "transparentFraction": 0.7203465212760884,
+      "alphaAtLeast16": 428047,
+      "alphaAtLeast128": 424761,
+      "meanBodyAlphaAtLeast128": 251.47520841131836,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        33,
+        21,
+        1141,
+        1325
+      ],
+      "bboxAlphaAtLeast16": [
+        188,
+        143,
+        955,
+        1169
+      ],
+      "alphaBounds": [
+        188,
+        143,
+        955,
+        1169
+      ],
+      "bboxAlphaAtLeast128": [
+        189,
+        144,
+        954,
+        1169
+      ],
+      "bboxAlpha255": [
+        190,
+        147,
+        953,
+        1168
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 188,
+        "top": 143,
+        "right": 232,
+        "bottom": 156
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.15838247683235046,
+        "top": 0.1079245283018868,
+        "right": 0.1954507160909857,
+        "bottom": 0.11773584905660377
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 45,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4814658803706824,
+          "y": 0.8822641509433963
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5417929105313892,
+          "y": 0.8822641509433963
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Silhouette complète, pose, palette et attributs distinctifs préservés; détails légèrement réinterprétés. Casque et appareil préservés; très léger liseré cyan isolé près du casque à qualifier.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 39,
+    "slug": "xeno-abobimantion",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.51,
+    "source": {
+      "number": 39,
+      "file": "Xeno abobimantion.jpg",
+      "bytes": 1879009,
+      "width": 2088,
+      "height": 2048,
+      "sha256": "5417b7bd8d2fd81375d39081a5e2918de12d1aa1a8f3b61190bf3a6ddd802a35",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno abobimantion",
+      "visualDescription": "Bipède biomécanique noir brun, mandibules et appendices crâniens pendants, longue queue recourbée.",
+      "flags": [
+        "ressemblance-abomination-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "visual-family-close-review-required",
+        "poseIds": [
+          "castes-game_abomination_avp2010"
+        ],
+        "note": "Mandibules, appendices céphaliques pendants et silhouette proches de l’Abomination ; proportions et pose diffèrent."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno abobimantion.jpg. Ignore other conversation images.\nPrimary request: Dark bronze-black hybrid alien, head with hanging tube-like locks and outer mandibles, stance with spread arms and curled bladed tail. Preserve full silhouette and exact anatomy.\nChange only background isolation and framing. Keep exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no annotation. Center the whole subject SMALLER, occupying at most 75 percent of canvas width and height, with at least 10 percent completely transparent clear margin on ALL sides. Every tip inside. Genuine alpha transparency, not checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID d122df7c-d143-44ef-9500-13d0374922b5.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 40,
+    "slug": "xeno-big-xeno-1",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.6,
+    "source": {
+      "number": 40,
+      "file": "Xeno Big Xeno 1.jpg",
+      "bytes": 1857780,
+      "width": 2272,
+      "height": 1884,
+      "sha256": "401f976a766cdffb868c9aa65835f139e019da01b2c8959a0fc972e9c30127f3",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Big Xeno 1",
+      "visualDescription": "Très grand xénomorphe noir massif à avant-bras volumineux, dorsal hérissé, pieds courts et longue queue.",
+      "flags": [
+        "groupe-big-xeno-provisoire"
+      ],
+      "groups": [
+        "big-xeno",
+        "host-big-xeno"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno Big Xeno 1.jpg. Ignore other conversation images.\nPrimary request: Massive hunched black alien, two oversized armored pincering forehands, thick legs, heavy dorsal pipes and curled tail. Preserve this exact source view, dark green-black palette and softer rendering.\nChange only background isolation and framing. Keep exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no annotation. Center the whole subject SMALLER, occupying at most 75 percent of canvas width and height, with at least 10 percent completely transparent clear margin on ALL sides. Every tip inside. Genuine alpha transparency, not checkerboard or solid fill.",
+    "decision": "accepted",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-048c9f9b-77c9-43fa-88ee-e7d79bc4d2e7.png",
+    "filename": "ref-40-xeno-big-xeno-1.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-40-xeno-big-xeno-1.png",
+      "width": 1377,
+      "height": 1142,
+      "sourceWidth": 1377,
+      "sourceHeight": 1142,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1049115,
+      "sha256": "28c7e10e95a4ccc62fc44e961f5602e81d8835ee563f514a32adf3b5c33fbd7c",
+      "totalPixels": 1572534,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1126065,
+      "alpha1to254": 444636,
+      "alpha255": 1833,
+      "transparentFraction": 0.7160830862798515,
+      "alphaAtLeast16": 425457,
+      "alphaAtLeast128": 419023,
+      "meanBodyAlphaAtLeast128": 251.56600473005062,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        137,
+        17,
+        1285,
+        1122
+      ],
+      "bboxAlphaAtLeast16": [
+        182,
+        174,
+        1179,
+        1022
+      ],
+      "alphaBounds": [
+        182,
+        174,
+        1179,
+        1022
+      ],
+      "bboxAlphaAtLeast128": [
+        183,
+        175,
+        1178,
+        1021
+      ],
+      "bboxAlpha255": [
+        200,
+        177,
+        1174,
+        1017
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 182,
+        "top": 174,
+        "right": 198,
+        "bottom": 120
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.13217138707334786,
+        "top": 0.15236427320490367,
+        "right": 0.1437908496732026,
+        "bottom": 0.10507880910683012
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 113,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4941902687000726,
+          "y": 0.8949211908931699
+        },
+        "alphaWeightedBottom": {
+          "x": 0.49653455680972913,
+          "y": 0.8949211908931699
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Silhouette complète, pose, palette et attributs distinctifs préservés; détails légèrement réinterprétés.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 41,
+    "slug": "xeno-big-xeno-2",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.58,
+    "source": {
+      "number": 41,
+      "file": "Xeno Big Xeno 2.jpg",
+      "bytes": 2766614,
+      "width": 2272,
+      "height": 1884,
+      "sha256": "c03df8287334047365c92962bf48b509195867da4aa9cf84feae9946a84503ab",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Big Xeno 2",
+      "visualDescription": "Même silhouette générale Big Xeno noir massif, autre rendu et cadrage, grandes mains rapprochées devant le torse.",
+      "flags": [
+        "groupe-big-xeno-provisoire"
+      ],
+      "groups": [
+        "big-xeno",
+        "host-big-xeno"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno Big Xeno 2.jpg. Ignore other conversation images.\nPrimary request: Massive hunched glossy black alien, two oversized armored pincering forehands, thick legs, dorsal pipes and curled tail. Preserve this exact source view and glossy highlights.\nChange only background isolation and framing. Keep exact orientation, pose, palette, proportions, surface detail, rendering style and limb count. No redesign, no extra subject, no floor, no shadow, no annotation. Center the whole subject SMALLER, occupying at most 75 percent of canvas width and height, with at least 10 percent completely transparent clear margin on ALL sides. Every tip inside. Genuine alpha transparency, not checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 84284bc0-79c6-4aa0-956d-b1c6d79afd0f.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 42,
+    "slug": "xeno-bruiser-mecha",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.65,
+    "source": {
+      "number": 42,
+      "file": "Xeno Bruiser Mecha.jpg",
+      "bytes": 2390588,
+      "width": 2730,
+      "height": 1536,
+      "sha256": "1fd2fb070f8dd2985e29ba169e0d709d4acb81e83d3b7ed6843055d5b3453d1c",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Bruiser Mecha",
+      "visualDescription": "Bipède biomécanique massif noir à dôme arrondi, bras lourds et longue queue ; dessins techniques derrière le sujet.",
+      "flags": [
+        "fond-planche-technique"
+      ],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno Bruiser Mecha.jpg. Ignore all other conversation images.\nPrimary request: Dark blue and bronze armored mechanical alien standing with long straight tail to left. Remove technical paper/blueprint background completely, preserving the character only.\nChange only background isolation and framing except explicitly requested minimal completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID f44365ea-8bc9-4840-9637-dbc7ba6b6ae8.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 43,
+    "slug": "xeno-mecha-2",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.45,
+    "source": {
+      "number": 43,
+      "file": "Xeno mecha 2.jpg",
+      "bytes": 2368460,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "36a6645273f850f17e550d0b5edf5b352e46db7bc13821796f36215ed241a37f",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno mecha 2",
+      "visualDescription": "Xénomorphe mécanique bleu métallique avec insertions orange, crête découpée, griffes et longue queue courbée.",
+      "flags": [
+        "mecha-design-distinct"
+      ],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno mecha 2.jpg. Ignore all other conversation images.\nPrimary request: Dark mechanical alien with cyan and orange luminous details, extended inner jaw, articulated claws and long looping segmented blade tail. Preserve all hardware, lights and silhouette.\nChange only background isolation and framing except explicitly requested minimal completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-dee28ee3-6234-433d-a701-0b2dbeca9b51.png",
+    "filename": "ref-43-xeno-mecha-2.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-43-xeno-mecha-2.png",
+      "width": 1698,
+      "height": 926,
+      "sourceWidth": 1698,
+      "sourceHeight": 926,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 914487,
+      "sha256": "bf707b9cacac1244b3f78cf024ec100771cc01daea1e93335027b7637d52865f",
+      "totalPixels": 1572348,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1255749,
+      "alpha1to254": 313961,
+      "alpha255": 2638,
+      "transparentFraction": 0.7986457196498485,
+      "alphaAtLeast16": 293994,
+      "alphaAtLeast128": 285294,
+      "meanBodyAlphaAtLeast128": 250.6963132768302,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        97,
+        81,
+        1494,
+        849
+      ],
+      "bboxAlphaAtLeast16": [
+        394,
+        83,
+        1433,
+        847
+      ],
+      "alphaBounds": [
+        394,
+        83,
+        1433,
+        847
+      ],
+      "bboxAlphaAtLeast128": [
+        394,
+        84,
+        1432,
+        846
+      ],
+      "bboxAlpha255": [
+        395,
+        85,
+        1431,
+        845
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 394,
+        "top": 83,
+        "right": 265,
+        "bottom": 79
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.232037691401649,
+        "top": 0.08963282937365011,
+        "right": 0.15606595995288575,
+        "bottom": 0.08531317494600432
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 1,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5379858657243817,
+          "y": 0.9146868250539957
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4779661742871015,
+          "y": 0.9146868250539957
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, pose, palette métallique et détails distinctifs préservés; détails légèrement réinterprétés.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 44,
+    "slug": "xeno-mecha",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.65,
+    "source": {
+      "number": 44,
+      "file": "Xeno mecha.jpg",
+      "bytes": 1622013,
+      "width": 2730,
+      "height": 1536,
+      "sha256": "3f6447268d0e84cfa613dc661e72f9c0ab4ac4170750c46478cfa07e0af56283",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno mecha",
+      "visualDescription": "Xénomorphe mécanique gris métal à dôme et tubes dorsaux, bras bas, queue étirée latéralement.",
+      "flags": [
+        "mecha-design-distinct"
+      ],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno mecha.jpg. Ignore all other conversation images.\nPrimary request: Silver robotic alien with long straight segmented tail ending in three-pronged tool, standing posture and exposed dark cables. Preserve exact robot shape and metal palette.\nChange only background isolation and framing except explicitly requested minimal completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-ef101c39-3889-4ebc-9efc-9e2407ba0ef0.png",
+    "filename": "ref-44-xeno-mecha.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-44-xeno-mecha.png",
+      "width": 1672,
+      "height": 941,
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 736669,
+      "sha256": "570d77973535d107a073d0b49c8e5a2485cd5eba1481355f53a1fcbf12c6f61e",
+      "totalPixels": 1573352,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1327410,
+      "alpha1to254": 243584,
+      "alpha255": 2358,
+      "transparentFraction": 0.8436827868143937,
+      "alphaAtLeast16": 230532,
+      "alphaAtLeast128": 225131,
+      "meanBodyAlphaAtLeast128": 251.27829130595075,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        49,
+        96,
+        1537,
+        909
+      ],
+      "bboxAlphaAtLeast16": [
+        152,
+        99,
+        1305,
+        854
+      ],
+      "alphaBounds": [
+        152,
+        99,
+        1305,
+        854
+      ],
+      "bboxAlphaAtLeast128": [
+        152,
+        100,
+        1304,
+        854
+      ],
+      "bboxAlpha255": [
+        161,
+        101,
+        1303,
+        852
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 152,
+        "top": 99,
+        "right": 367,
+        "bottom": 87
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.09090909090909091,
+        "top": 0.10520722635494155,
+        "right": 0.21949760765550239,
+        "bottom": 0.0924548352816153
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 5,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.43570574162679426,
+          "y": 0.9075451647183846
+        },
+        "alphaWeightedBottom": {
+          "x": 0.6051634668313871,
+          "y": 0.9075451647183846
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, pose, palette métallique et détails distinctifs préservés; détails légèrement réinterprétés.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 45,
+    "slug": "xeno-winged",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.5,
+    "source": {
+      "number": 45,
+      "file": "Xeno Winged.jpg",
+      "bytes": 2062748,
+      "width": 2048,
+      "height": 2048,
+      "sha256": "cd5f0e69d08c3e8efe08af54ec096de09686e830ee8bb521117cf37c1cd9de71",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno Winged",
+      "visualDescription": "Xénomorphe noir ailé accroupi de face trois-quarts ; ailes sombres déployées, queue vers la droite.",
+      "flags": [
+        "bord-superieur-aile-proche-ou-coupe"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-winged-design",
+        "poseIds": [
+          "castes-film_queen_aliens_1986"
+        ],
+        "note": "Ailes membraneuses absentes de la Reine mobile existante ; conserver les noms utilisateur sans extrapoler une version film."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno Winged.jpg. Ignore all other conversation images.\nPrimary request: Black blue-highlighted alien with two large dark bat wings and curled tail. Preserve the figure and pose; minimally complete the wing tips cropped at top and sides, without extra appendages. Completion is a project interpretation.\nChange only background isolation and framing except explicitly requested minimal completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-1af9618a-8285-4910-82fd-5106082d70bd.png",
+    "filename": "ref-45-xeno-winged.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-45-xeno-winged.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1375610,
+      "sha256": "a7afa17d17220f61e72be003721f15811963c2aed7198464f237baa2a3829536",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1006352,
+      "alpha1to254": 564639,
+      "alpha255": 1525,
+      "transparentFraction": 0.639962963810861,
+      "alphaAtLeast16": 511251,
+      "alphaAtLeast128": 500179,
+      "meanBodyAlphaAtLeast128": 250.96101195771914,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        31,
+        8,
+        1226,
+        1226
+      ],
+      "bboxAlphaAtLeast16": [
+        57,
+        152,
+        1223,
+        1127
+      ],
+      "alphaBounds": [
+        57,
+        152,
+        1223,
+        1127
+      ],
+      "bboxAlphaAtLeast128": [
+        58,
+        153,
+        1222,
+        1126
+      ],
+      "bboxAlpha255": [
+        65,
+        160,
+        1221,
+        1125
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 57,
+        "top": 152,
+        "right": 31,
+        "bottom": 127
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.045454545454545456,
+        "top": 0.12121212121212122,
+        "right": 0.024720893141945772,
+        "bottom": 0.10127591706539076
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 25064,
+        "visiblePixels": 18859,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5103668261562998,
+          "y": 0.8987240829346093
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5316592671401196,
+          "y": 0.8987240829346093
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète; extrémités des ailes coupées dans la référence complétées minimalement. Anatomie et pose conservées, qualification adaptation.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 46,
+    "slug": "xeno-unnamed-serpentine",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.5,
+    "source": {
+      "number": 46,
+      "file": "Xeno-.jpg",
+      "bytes": 1990614,
+      "width": 2724,
+      "height": 1568,
+      "sha256": "b7d4bae4e0d71e9fa1eef15cc657b5fac271d1cf789f5a4a246b3add0839b550",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "provisional-unidentified",
+      "providedName": "Xeno-",
+      "visualDescription": "Créature biomécanique gris beige à torse et deux bras griffus, long dôme lisse et bas du corps serpentin enroulé, sans jambes visibles.",
+      "flags": [
+        "identite-a-confirmer",
+        "different-du-snake-neca"
+      ],
+      "groups": [
+        "unnamed-snake"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-snake"
+        ],
+        "note": "La source a un torse à deux bras et un bas du corps serpentin. Le Snake NECA existant possède une large collerette/cage latérale et une silhouette différente ; ne pas les fusionner par le seul mot Snake."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-.jpg. Ignore all other conversation images.\nPrimary request: Beige bronze biomechanical alien torso with two arms and a long coiled serpentine lower body, turquoise fine accents, long smooth domed head. Preserve exact coils and anatomy.\nChange only background isolation and framing except explicitly requested minimal completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 3deace27-dc5f-4d2f-ac30-ed9a43dea113.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 53,
+    "slug": "xeno-caste-to-define",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.47,
+    "source": {
+      "number": 53,
+      "file": "Xeno-CasteToDefine-.jpg",
+      "bytes": 1726020,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "2c984885baf558f2db5786fd06fe1a8aa9f62e7f43d86ddb4507e5e4bb6ddea1",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "provisional-unidentified",
+      "providedName": "Xeno-CasteToDefine-",
+      "visualDescription": "Alien humanoïde bleu gris dressé, crête inclinée vers l’arrière, fins appendices dorsaux ou céphaliques et extrémités griffues ; caste non établie.",
+      "flags": [
+        "identite-a-confirmer",
+        "nom-caste-non-definie-preserve"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-CasteToDefine-.jpg. Ignore other conversation images.\nPrimary request: Slender blue and ivory humanoid alien with four arms and flowing tendril-like head and dorsal extensions. Preserve exact limb count and pale blue palette; do not invent a name or caste.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-7429c03f-4fa9-4593-b01d-872016b34fd7.png",
+    "filename": "ref-53-xeno-caste-to-define.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-53-xeno-caste-to-define.png",
+      "width": 1121,
+      "height": 1403,
+      "sourceWidth": 1121,
+      "sourceHeight": 1403,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 954977,
+      "sha256": "94959012e396b121574ceee15d3a92851a7e8cdb84bb1f11ecb233e7dbb1dd98",
+      "totalPixels": 1572763,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1227723,
+      "alpha1to254": 343489,
+      "alpha255": 1551,
+      "transparentFraction": 0.7806153883325079,
+      "alphaAtLeast16": 303580,
+      "alphaAtLeast128": 296304,
+      "meanBodyAlphaAtLeast128": 250.8945609914142,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        25,
+        19,
+        1085,
+        1403
+      ],
+      "bboxAlphaAtLeast16": [
+        373,
+        99,
+        893,
+        1337
+      ],
+      "alphaBounds": [
+        373,
+        99,
+        893,
+        1337
+      ],
+      "bboxAlphaAtLeast128": [
+        374,
+        100,
+        893,
+        1337
+      ],
+      "bboxAlpha255": [
+        376,
+        113,
+        891,
+        1336
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 373,
+        "top": 99,
+        "right": 228,
+        "bottom": 66
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.3327386262265834,
+        "top": 0.07056307911617961,
+        "right": 0.2033898305084746,
+        "bottom": 0.047042052744119746
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 10297,
+        "visiblePixels": 7577,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5646743978590544,
+          "y": 0.9529579472558802
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5256102344454522,
+          "y": 0.9529579472558802
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète à quatre bras, palette bleu-ivoire préservée. Quelques liserés cyan/blanc aux contours fins; qualification native à contrôler sur fond sombre.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 54,
+    "slug": "xeno-chameleon-2",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.44,
+    "source": {
+      "number": 54,
+      "file": "Xeno-Chameleon (2).jpg",
+      "bytes": 2523891,
+      "width": 2752,
+      "height": 1536,
+      "sha256": "cf33a67a98d1609ac059df7b16319848a90d9a214e9e39f4c017e3b690b1b774",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Chameleon (2)",
+      "visualDescription": "Quadrupède noir et rouge à longues pattes, plaques rouges dorsales, tête domée et queue spiralée rouge.",
+      "flags": [
+        "groupe-chameleon-designs-distincts"
+      ],
+      "groups": [
+        "chameleon"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Chameleon (2).jpg. Ignore other conversation images.\nPrimary request: Black-red quadrupedal alien with broad flat red dorsal plates and long coral-red curling chameleon tail. Preserve the tail coil, limb geometry and palette exactly.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-3acd5e89-77fd-4ea5-a635-531cd7d7b7d8.png",
+    "filename": "ref-54-xeno-chameleon-2.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-54-xeno-chameleon-2.png",
+      "width": 1678,
+      "height": 937,
+      "sourceWidth": 1678,
+      "sourceHeight": 937,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 970726,
+      "sha256": "fe08176517bb488c5e42b60c1df72c48aa07bf9a3677615a91e9bf76a44d0b63",
+      "totalPixels": 1572286,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1207209,
+      "alpha1to254": 363553,
+      "alpha255": 1524,
+      "transparentFraction": 0.7678049667808529,
+      "alphaAtLeast16": 341825,
+      "alphaAtLeast128": 334944,
+      "meanBodyAlphaAtLeast128": 251.26977644024075,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        33,
+        32,
+        1622,
+        913
+      ],
+      "bboxAlphaAtLeast16": [
+        184,
+        205,
+        1563,
+        789
+      ],
+      "alphaBounds": [
+        184,
+        205,
+        1563,
+        789
+      ],
+      "bboxAlphaAtLeast128": [
+        185,
+        206,
+        1563,
+        789
+      ],
+      "bboxAlpha255": [
+        198,
+        216,
+        1549,
+        786
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 184,
+        "top": 205,
+        "right": 115,
+        "bottom": 148
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.10965435041716329,
+        "top": 0.21878335112059766,
+        "right": 0.06853396901072706,
+        "bottom": 0.15795090715048027
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 2649,
+        "visiblePixels": 2010,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5205601907032181,
+          "y": 0.8420490928495198
+        },
+        "alphaWeightedBottom": {
+          "x": 0.47466721483124646,
+          "y": 0.8420490928495198
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Quadrupède et queue en spirale complets, pose et palette rouge-noir préservées.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 55,
+    "slug": "xeno-chameleon",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.41,
+    "source": {
+      "number": 55,
+      "file": "Xeno-Chameleon.jpg",
+      "bytes": 2249909,
+      "width": 2864,
+      "height": 1472,
+      "sha256": "6c21bf1aacd59f45cdece84d49dd89cbff6443ea0362453df3e762d73ef9a9a5",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Chameleon",
+      "visualDescription": "Quadrupède noir à casque cornu et grande crête vertébrale claire, longue queue osseuse en spirale.",
+      "flags": [
+        "groupe-chameleon-designs-distincts",
+        "marque-graphique-dans-source"
+      ],
+      "groups": [
+        "chameleon"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Chameleon.jpg. Ignore other conversation images.\nPrimary request: Black-and-ivory quadrupedal alien with high bony sail, pointed triangular head crest and curled cream segmented tail. Remove backdrop and top-right graphic emblem entirely, preserve creature.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-265b796a-f6ea-4092-9f9b-ef703beaad25.png",
+    "filename": "ref-55-xeno-chameleon.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-55-xeno-chameleon.png",
+      "width": 1748,
+      "height": 899,
+      "sourceWidth": 1748,
+      "sourceHeight": 899,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1107682,
+      "sha256": "a14ba9e91e139c64d65aadc0233ac93f343c291ea5e76dd9a54518f8c6de6ae4",
+      "totalPixels": 1571452,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1186244,
+      "alpha1to254": 383631,
+      "alpha255": 1577,
+      "transparentFraction": 0.7548712910098431,
+      "alphaAtLeast16": 361081,
+      "alphaAtLeast128": 352577,
+      "meanBodyAlphaAtLeast128": 250.81425901292485,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        105,
+        91,
+        1704,
+        881
+      ],
+      "bboxAlphaAtLeast16": [
+        185,
+        100,
+        1630,
+        814
+      ],
+      "alphaBounds": [
+        185,
+        100,
+        1630,
+        814
+      ],
+      "bboxAlphaAtLeast128": [
+        186,
+        101,
+        1630,
+        813
+      ],
+      "bboxAlpha255": [
+        193,
+        109,
+        1628,
+        811
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 185,
+        "top": 100,
+        "right": 118,
+        "bottom": 85
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.10583524027459955,
+        "top": 0.11123470522803114,
+        "right": 0.06750572082379863,
+        "bottom": 0.09454949944382647
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 2539,
+        "visiblePixels": 2028,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5191647597254004,
+          "y": 0.9054505005561735
+        },
+        "alphaWeightedBottom": {
+          "x": 0.40826126826154086,
+          "y": 0.9054505005561735
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, haute voile dorsale et queue spiralée préservées; léger liseré jaune isolé aux détails fins.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 56,
+    "slug": "xeno-defender",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.5,
+    "source": {
+      "number": 56,
+      "file": "Xeno-Defender.jpg",
+      "bytes": 378085,
+      "width": 768,
+      "height": 1379,
+      "sha256": "8622c2d8db831f259fe9a172341d9b7ccbb3865a57a979e3e5032ddcaabcfb01",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Defender",
+      "visualDescription": "Quadrupède bleu gris à queue dressée en arche, trois tubes dorsaux, longues lames d’avant-bras et crête céphalique ; rapprochement visuel marqué avec Arachnoid Capcom à contrôler.",
+      "flags": [
+        "nom-defender-a-conserver",
+        "ressemblance-arachnoid-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "strong-visual-match-identity-review-required",
+        "poseIds": [
+          "castes-game_avp_capcom_arachnoid"
+        ],
+        "note": "Même composition reconnaissable qu’Arachnoid : queue en haute arche, trois tubes, tête à crête et lames d’avant-bras. Le nom utilisateur Defender diffère. Garder les deux noms et demander une décision avant duplication d’identité ou remplacement."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Defender.jpg. Ignore other conversation images.\nPrimary request: Blue-grey crouched biomechanical alien with long nearly vertical scorpion-like tail arcing overhead, long forearms and domed head. Preserve the original illustrated style and posture, without redesign.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow, text or annotation. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-81a498c1-861f-4ef5-a21b-69101c12042f.png",
+    "filename": "ref-56-xeno-defender.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-56-xeno-defender.png",
+      "width": 1024,
+      "height": 1536,
+      "sourceWidth": 1024,
+      "sourceHeight": 1536,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1602059,
+      "sha256": "729a6d131424591995e8f948f9f0e6059fe0a82397a5c54f28d1269a0b46cb83",
+      "totalPixels": 1572864,
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "alpha0": 1288259,
+      "alpha1to254": 284605,
+      "alpha255": 0,
+      "transparentFraction": 0.8190530141194662,
+      "alphaAtLeast16": 252002,
+      "alphaAtLeast128": 245681,
+      "meanBodyAlphaAtLeast128": 250.9651336489187,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        65,
+        64,
+        988,
+        1536
+      ],
+      "bboxAlphaAtLeast16": [
+        193,
+        133,
+        928,
+        1418
+      ],
+      "alphaBounds": [
+        193,
+        133,
+        928,
+        1418
+      ],
+      "bboxAlphaAtLeast128": [
+        194,
+        134,
+        927,
+        1417
+      ],
+      "bboxAlpha255": null,
+      "marginsAlphaAtLeast16": {
+        "left": 193,
+        "top": 133,
+        "right": 96,
+        "bottom": 118
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.1884765625,
+        "top": 0.08658854166666667,
+        "right": 0.09375,
+        "bottom": 0.07682291666666667
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 881,
+        "visiblePixels": 43,
+        "maxAlpha": 254
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.54736328125,
+          "y": 0.9231770833333334
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4946196826814224,
+          "y": 0.9231770833333334
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Référence proche de l’Arachnoid existant: identité canon non certifiée. Halo sombre dans la prévisualisation native; audit confirme 81,9% de pixels alpha0, corps moyen251/255 et aucun fond opaque. Qualification de contour à contrôler dans le jeu.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 57,
+    "slug": "xeno-drone-variante",
+    "kind": "creature",
+    "source": {
+      "number": 57,
+      "file": "Xeno-Drone-Variante.jpg",
+      "bytes": 1685317,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "4b7b51751bec1d4d2a435663d92e47282be582e25956f35fffdaaadd7eefeb01",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Drone-Variante",
+      "visualDescription": "Xénomorphe noir à dôme lisse, deux tubes dorsaux visibles, posture penchée bras bas et queue fine étirée.",
+      "flags": [
+        "variante-design-non-etat"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "decision": "held-prior-moderation-scope-review",
+    "attempted": false,
+    "prompt": null,
+    "generatedOutput": null,
+    "reason": "Dôme crânien lisse argenté très allongé, torse costal noir, tubes dorsaux et membres de drone classique : trop proche du design Big Chap 1979 déjà refusé pour considérer cette variante de pose comme une demande distincte sûre.",
+    "reviewRequired": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 58,
+    "slug": "xeno-experiment-3headed",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.53,
+    "source": {
+      "number": 58,
+      "file": "Xeno-Experiment-3Headed.jpg",
+      "bytes": 2457216,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "afc27cd9c5be630992a0f3c410edf1ec666d6af4590b8244091dc031227e3fd8",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-3Headed",
+      "visualDescription": "Bipède xénomorphe bleu violet avec plusieurs visages ou têtes accolés, membres supplémentaires visibles et queue.",
+      "flags": [
+        "nombre-anatomique-a-controler",
+        "groupe-multitetes-non-equivalent"
+      ],
+      "groups": [
+        "multicephalic-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Experiment-3Headed.jpg. Ignore other conversation images.\nPrimary request: Blue-white biomechanical multi-headed alien with two elongated alien heads plus small exposed skeletal face, four arms and two digitigrade legs. Keep exact existing heads, hands and anatomy. Remove diffuse smoke wisps belonging to backdrop.\nChange only background isolation and framing except specifically requested tiny completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or extra text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 7f312c53-eb69-4d02-8621-74095be26165.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 59,
+    "slug": "xeno-experiment-flesh",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.45,
+    "source": {
+      "number": 59,
+      "file": "Xeno-Experiment-Flesh.jpg",
+      "bytes": 2208134,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "18571c6324977e8676245a0c0a6dbc6b6881c660581935e449a57ed327c3a30c",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-Flesh",
+      "visualDescription": "Hybride humanoïde pâle vêtu d’une veste, tête charnue renflée et longue queue rose épineuse.",
+      "flags": [
+        "groupe-flesh-provisoire"
+      ],
+      "groups": [
+        "flesh-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Experiment-Flesh.jpg. Ignore other conversation images.\nPrimary request: Pink multi-headed science-fiction creature wearing a beige closed jacket, long curved pink spine-tail with bone blade, two long legs with metal ankle cuffs. Preserve all heads and jacket, same pose; no new gore or injury.\nChange only background isolation and framing except specifically requested tiny completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or extra text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-1e920a92-abaf-4b7a-9a8d-a9e8f98fdae3.png",
+    "filename": "ref-59-xeno-experiment-flesh.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-59-xeno-experiment-flesh.png",
+      "width": 1121,
+      "height": 1403,
+      "sourceWidth": 1121,
+      "sourceHeight": 1403,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 893104,
+      "sha256": "975e31ea6711917a6b6bb73444561ea3adda8ed6c797a5179712ba5a82a95e3d",
+      "totalPixels": 1572763,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1217950,
+      "alpha1to254": 352483,
+      "alpha255": 2330,
+      "transparentFraction": 0.7744014832495424,
+      "alphaAtLeast16": 333051,
+      "alphaAtLeast128": 327362,
+      "meanBodyAlphaAtLeast128": 251.60210409271693,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        25,
+        37,
+        1091,
+        1384
+      ],
+      "bboxAlphaAtLeast16": [
+        187,
+        133,
+        1020,
+        1284
+      ],
+      "alphaBounds": [
+        187,
+        133,
+        1020,
+        1284
+      ],
+      "bboxAlphaAtLeast128": [
+        188,
+        134,
+        1020,
+        1283
+      ],
+      "bboxAlpha255": [
+        201,
+        145,
+        1013,
+        1282
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 187,
+        "top": 133,
+        "right": 101,
+        "bottom": 119
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.16681534344335414,
+        "top": 0.0947968638631504,
+        "right": 0.09009812667261374,
+        "bottom": 0.08481824661439771
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 170,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5383586083853702,
+          "y": 0.9151817533856023
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4707004270880153,
+          "y": 0.9151817533856023
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, pose, vêtement et queue préservés; très léger liseré rouge/jaune aux contours.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 60,
+    "slug": "xeno-experiment-flesh-bursting-host",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.5,
+    "source": {
+      "number": 60,
+      "file": "Xeno-Experiment-FleshBurstingHost .jpg",
+      "bytes": 1843066,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "536975ba3ddff130d0ede9c60729bd90d49a86d75d680ecbf59254a23a8797de",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-FleshBurstingHost ",
+      "visualDescription": "Hybride humanoïde pâle peu vêtu, grosse masse crânienne charnue, bras humains et silhouette altérée.",
+      "flags": [
+        "groupe-flesh-provisoire"
+      ],
+      "groups": [
+        "flesh-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Experiment-FleshBurstingHost .jpg. Ignore other conversation images.\nPrimary request: Pale science-fiction humanoid with enlarged lobed head, respiratory fittings, tubes, metallic claw hand and small technical harness. Preserve the outfit/harness and exact posture, no added injury or gore.\nChange only background isolation and framing except specifically requested tiny completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or extra text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-20197e1c-7682-48a9-b7cc-45c35abe84b2.png",
+    "filename": "ref-60-xeno-experiment-flesh-bursting-host.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-60-xeno-experiment-flesh-bursting-host.png",
+      "width": 1121,
+      "height": 1403,
+      "sourceWidth": 1121,
+      "sourceHeight": 1403,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 670057,
+      "sha256": "9c960da196fca686830e007143b4b7faaa7155385a98892298cf913d42ea06d8",
+      "totalPixels": 1572763,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1282530,
+      "alpha1to254": 288309,
+      "alpha255": 1924,
+      "transparentFraction": 0.8154629782109574,
+      "alphaAtLeast16": 277972,
+      "alphaAtLeast128": 274666,
+      "meanBodyAlphaAtLeast128": 251.98805094187122,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        25,
+        36,
+        1105,
+        1370
+      ],
+      "bboxAlphaAtLeast16": [
+        372,
+        116,
+        775,
+        1303
+      ],
+      "alphaBounds": [
+        372,
+        116,
+        775,
+        1303
+      ],
+      "bboxAlphaAtLeast128": [
+        373,
+        117,
+        775,
+        1302
+      ],
+      "bboxAlpha255": [
+        374,
+        140,
+        769,
+        1297
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 372,
+        "top": 116,
+        "right": 346,
+        "bottom": 100
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.33184656556645853,
+        "top": 0.08267997148966501,
+        "right": 0.3086529884032114,
+        "bottom": 0.07127583749109052
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 1040,
+        "visiblePixels": 560,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5115967885816235,
+          "y": 0.9287241625089094
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5095976457859271,
+          "y": 0.9287241625089094
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète, pose et interfaces métalliques préservées; léger liseré orange/jaune natif.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 61,
+    "slug": "xeno-experiment-renaissance",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.42,
+    "source": {
+      "number": 61,
+      "file": "Xeno-Experiment-Renaissance.jpg",
+      "bytes": 2145634,
+      "width": 1842,
+      "height": 2304,
+      "sha256": "eb23c08a5fead144f81e2a4d21ec10135b9483c6839b4beb919766a715fe0930",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-Renaissance",
+      "visualDescription": "Humanoïde violet pâle à crâne asymétrique allongé, torse organique côtelé, longues mains, sans queue visible.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Experiment-Renaissance.jpg. Ignore other conversation images.\nPrimary request: Pale violet sleek multi-headed alien humanoid with four arms, long narrow legs. Preserve exact anatomy and pose; source cuts very bottom feet, minimally complete those feet consistently without extra limbs.\nChange only background isolation and framing except specifically requested tiny completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or extra text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-21065923-c03b-494f-9a61-d8bc351bb291.png",
+    "filename": "ref-61-xeno-experiment-renaissance.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-61-xeno-experiment-renaissance.png",
+      "width": 1121,
+      "height": 1403,
+      "sourceWidth": 1121,
+      "sourceHeight": 1403,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 782602,
+      "sha256": "f16469e31d48f35448cafaffd790fd2f0b01214e7b2dd471ff1526b2703cb9b6",
+      "totalPixels": 1572763,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1273071,
+      "alpha1to254": 297011,
+      "alpha255": 2681,
+      "transparentFraction": 0.8094487217718118,
+      "alphaAtLeast16": 286043,
+      "alphaAtLeast128": 281693,
+      "meanBodyAlphaAtLeast128": 251.82282129836383,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        49,
+        36,
+        1055,
+        1347
+      ],
+      "bboxAlphaAtLeast16": [
+        333,
+        96,
+        778,
+        1322
+      ],
+      "alphaBounds": [
+        333,
+        96,
+        778,
+        1322
+      ],
+      "bboxAlphaAtLeast128": [
+        334,
+        97,
+        778,
+        1322
+      ],
+      "bboxAlpha255": [
+        335,
+        98,
+        776,
+        1321
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 333,
+        "top": 96,
+        "right": 343,
+        "bottom": 81
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.2970561998215879,
+        "top": 0.0684248039914469,
+        "right": 0.30597680642283676,
+        "bottom": 0.05773342836778332
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 5234,
+        "visiblePixels": 4242,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.49553969669937553,
+          "y": 0.9422665716322167
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5003157546098653,
+          "y": 0.9422665716322167
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Figure complète à quatre bras, palette et double crâne préservés; extrémités des pieds hors source complétées minimalement, adaptation qualifiée.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 62,
+    "slug": "xeno-experiment-xeno3head",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.54,
+    "source": {
+      "number": 62,
+      "file": "Xeno-Experiment-Xeno3Head.jpg",
+      "bytes": 2116292,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "900d8fe0bdfa6a36f844368165858350ef08f7dd5b0b609f5355c7a59e9c3130",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Experiment-Xeno3Head",
+      "visualDescription": "Bipède gris sombre à plusieurs crêtes ou têtes superposées, torse orangé et double appendice caudal charnu.",
+      "flags": [
+        "nombre-anatomique-a-controler",
+        "groupe-multitetes-non-equivalent"
+      ],
+      "groups": [
+        "multicephalic-experiments"
+      ],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Experiment-Xeno3Head.jpg. Ignore other conversation images.\nPrimary request: Three-headed dark biomechanical alien wearing straps, chest orange light and small leg plate, long pink fleshy split-detail tail. Preserve heads, limbs, straps and full tail; same pose and rendering.\nChange only background isolation and framing except specifically requested tiny completion. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or extra text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 0a9ec41c-f2a5-43ea-aff2-77b9b659205d.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 64,
+    "slug": "xeno-mechanoid",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.54,
+    "source": {
+      "number": 64,
+      "file": "Xeno-Mechanoid.jpg",
+      "bytes": 2218108,
+      "width": 1856,
+      "height": 2294,
+      "sha256": "8689531006ec23e2b8e2bde9aa71f0a19be1d94dee58c4403f359bfdeae5239a",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Mechanoid",
+      "visualDescription": "Bipède métallique os clair à éléments mécaniques circulaires, grands tubes dorsaux effilés, griffes et queue articulée.",
+      "flags": [],
+      "groups": [
+        "mecha"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-mechanical-design",
+        "poseIds": [
+          "castes-game_xenoborg_avp1999"
+        ],
+        "note": "Vocabulaire mécanique partagé avec Xenoborg, mais pas ses canons d’avant-bras ni sa composition ; les quatre nouveaux designs ne sont pas équivalents au Xenoborg existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Mechanoid.jpg. Ignore other conversation images.\nPrimary request: Silver industrial biomechanical biped with transparent elongated cranial shell, round shoulder mechanisms, three long dorsal metal pipes, claw feet and broad segmented fin-like tail curling left. Keep exact pose and all hard-surface parts. Remove plain white background only.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or extra text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-cff46a6a-bf37-4a98-9582-d2e2ab0cada1.png",
+    "filename": "ref-64-xeno-mechanoid.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-64-xeno-mechanoid.png",
+      "width": 1128,
+      "height": 1394,
+      "sourceWidth": 1128,
+      "sourceHeight": 1394,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1216174,
+      "sha256": "f1c7d0ff020738e26fa9a792653f50d6b7a6e6e4021ebb3f73b8a42f6f74ef3c",
+      "totalPixels": 1572432,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1135615,
+      "alpha1to254": 434963,
+      "alpha255": 1854,
+      "transparentFraction": 0.7222029315099159,
+      "alphaAtLeast16": 395677,
+      "alphaAtLeast128": 385945,
+      "meanBodyAlphaAtLeast128": 250.99257407143506,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        35,
+        30,
+        1074,
+        1368
+      ],
+      "bboxAlphaAtLeast16": [
+        84,
+        132,
+        992,
+        1285
+      ],
+      "alphaBounds": [
+        84,
+        132,
+        992,
+        1285
+      ],
+      "bboxAlphaAtLeast128": [
+        85,
+        133,
+        991,
+        1285
+      ],
+      "bboxAlpha255": [
+        87,
+        135,
+        986,
+        1274
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 84,
+        "top": 132,
+        "right": 136,
+        "bottom": 109
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.07446808510638298,
+        "top": 0.09469153515064563,
+        "right": 0.12056737588652482,
+        "bottom": 0.0781922525107604
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 351,
+        "visiblePixels": 125,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4769503546099291,
+          "y": 0.9218077474892395
+        },
+        "alphaWeightedBottom": {
+          "x": 0.561095735203951,
+          "y": 0.9218077474892395
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Bipède mécanique complet, queue à ailettes et pièces métalliques préservées; léger liseré clair/cyan près des détails fins.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 65,
+    "slug": "xeno-necromorph",
+    "kind": "creature",
+    "source": {
+      "number": 65,
+      "file": "Xeno-Necromorph.jpg",
+      "bytes": 2514204,
+      "width": 1888,
+      "height": 2258,
+      "sha256": "7b9d8a643c6e8eabd426e449efa77eab91497911d46a983b055541ba29443553",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "reference-a-identifier",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Necromorph",
+      "visualDescription": "Xénomorphe vert sombre à tête luisante et traces pendantes ; silhouette coupée sous les cuisses.",
+      "flags": [
+        "source-cadree-partielle",
+        "nom-necromorph-utilisateur-non-canon-assigne"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "decision": "held-prior-moderation-scope-review",
+    "attempted": false,
+    "prompt": null,
+    "generatedOutput": null,
+    "reason": "Inspection visuelle: dôme lisse très allongé, double mâchoire, cage costale, quatre tubes dorsaux et bras biomécaniques reprennent l’anatomie du drone adulte classique déjà dans le périmètre refusé. La palette verte et les surfaces altérées ne suffisent pas à établir un design distinct; la coupe sous les cuisses demanderait aussi une extension substantielle. Aucun appel effectué pour cette image.",
+    "reviewRequired": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 66,
+    "slug": "xeno-phantera-black",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.52,
+    "source": {
+      "number": 66,
+      "file": "Xeno-Phantera-Black.jpg",
+      "bytes": 1537671,
+      "width": 1760,
+      "height": 2400,
+      "sha256": "e0237eea5dc74cffd1b6194389803ee3cc2d06aa5106ad6f1b48d18ef64299fc",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Phantera-Black",
+      "visualDescription": "Quadrupède noir rouge à tête argentée, très longue queue dressée, posture de marche.",
+      "flags": [
+        "different-du-panther-neca-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-panther"
+        ],
+        "note": "Phantera-Black est noir/rouge à tête argentée, sans la palette ocre/rouge ni les détails du Panther NECA existant."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Phantera-Black.jpg. Ignore other conversation images.\nPrimary request: Black-red quadruped biomechanical panther with a broad silver flattened head shield and exceptionally long tail raised vertically, black-red segments and long blade tip. Preserve this exact four-legged walking pose, full tall tail, rendering and palette.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-e87fd88a-df5e-47c6-b29a-b46758df1ea2.png",
+    "filename": "ref-66-xeno-phantera-black.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-66-xeno-phantera-black.png",
+      "width": 1074,
+      "height": 1464,
+      "sourceWidth": 1074,
+      "sourceHeight": 1464,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 601532,
+      "sha256": "cc51d5f6ed21fdf2778d3d50dc70b4053ad0ef41ae3789044178a38d2583e7bb",
+      "totalPixels": 1572336,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1349683,
+      "alpha1to254": 220664,
+      "alpha255": 1989,
+      "transparentFraction": 0.8583934985906321,
+      "alphaAtLeast16": 208189,
+      "alphaAtLeast128": 202959,
+      "meanBodyAlphaAtLeast128": 251.00474972777752,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        37,
+        999,
+        1432
+      ],
+      "bboxAlphaAtLeast16": [
+        89,
+        123,
+        997,
+        1347
+      ],
+      "alphaBounds": [
+        89,
+        123,
+        997,
+        1347
+      ],
+      "bboxAlphaAtLeast128": [
+        90,
+        124,
+        997,
+        1346
+      ],
+      "bboxAlpha255": [
+        117,
+        125,
+        995,
+        1343
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 89,
+        "top": 123,
+        "right": 77,
+        "bottom": 117
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.08286778398510242,
+        "top": 0.08401639344262295,
+        "right": 0.07169459962756052,
+        "bottom": 0.07991803278688525
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 708,
+        "visiblePixels": 439,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.505586592178771,
+          "y": 0.9200819672131147
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5525979915437647,
+          "y": 0.9200819672131147
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Quadrupède complet, palette argent/noir/rouge, pose et très longue queue levée préservées.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 67,
+    "slug": "xeno-praetorian-1",
+    "kind": "creature",
+    "source": {
+      "number": 67,
+      "file": "Xeno-Praetorian-1.jpg",
+      "bytes": 1952360,
+      "width": 2048,
+      "height": 2106,
+      "sha256": "28b3bf594635ba182069993bc7526b926689fe98a8f7b1bf96f2d0a21467f3fa",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Praetorian-1",
+      "visualDescription": "Bipède noir brun à grande couronne crânienne osseuse, tubes dorsaux, bras griffus et longue queue recourbée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "no-direct-equivalent-observed",
+        "poseIds": [],
+        "note": "Aucune équivalence directe établie par la comparaison visuelle des 43 poses de référence ; ce constat n’est pas un audit de toutes les identités du catalogue."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "decision": "held-prior-moderation-scope-review",
+    "attempted": false,
+    "prompt": null,
+    "generatedOutput": null,
+    "reason": "Inspection visuelle: large couronne osseuse évasée, torse costal et silhouette bipède sombre proches du Praetorian déjà refusé. Différences précises avec AFE non établies; retenu pour revue plutôt que relancé sous le nom du fichier.",
+    "reviewRequired": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 68,
+    "slug": "xeno-prowler",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.46,
+    "source": {
+      "number": 68,
+      "file": "Xeno-Prowler.jpg",
+      "bytes": 2108930,
+      "width": 1792,
+      "height": 2376,
+      "sha256": "0649aa74b486e3db61c72abb20417019f42648c584cec6106f425f9b46e2ba28",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Prowler",
+      "visualDescription": "Quadrupède rouge noir à crâne cuirassé et perforé, longue queue levée à lame, pattes fines.",
+      "flags": [
+        "ressemblance-prowler-a-verifier"
+      ],
+      "groups": [
+        "prowler-warrior-red"
+      ],
+      "comparisonExisting43": {
+        "status": "visual-family-close-review-required",
+        "poseIds": [
+          "castes-game_afe_prowler"
+        ],
+        "note": "Palette rouge/noir, crâne renforcé et queue à lame proches du Prowler déjà présent ; nouvelle pose et rendu."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Prowler.jpg. Ignore other conversation images.\nPrimary request: Red-black quadruped with perforated armored cranial shell, raised segmented tail with long straight blade, thin legs and crouching forelimbs. Preserve this exact four-legged stance and full tall tail.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "blocked-moderation",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID ff6fbee0-0ec2-44b1-86e0-deb13163657c.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 69,
+    "slug": "xeno-rhino",
+    "kind": "creature",
+    "sourceFacing": 1,
+    "pivotX": 0.49,
+    "source": {
+      "number": 69,
+      "file": "Xeno-Rhino.jpg",
+      "bytes": 1675700,
+      "width": 1952,
+      "height": 2206,
+      "sha256": "9c0d55d542bea16c49c94029156cec65b8d1ece7e37fefc573fcfe379e83a642",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Rhino",
+      "visualDescription": "Créature mécanique quadrupède noir argent à lourde armure, museau renforcé et avant-train massif.",
+      "flags": [
+        "different-du-rhino-neca-a-verifier"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-rhino"
+        ],
+        "note": "Le Rhino fourni est noir/argent, mécanique et fortement armuré ; le Rhino NECA déjà intégré est organique rouge/orange. Pas un doublon établi."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Rhino.jpg. Ignore other conversation images.\nPrimary request: Silver-black heavily armored quadruped biomechanical rhinoceros with nose horn, enormous curved head shell and two upright dorsal prongs. Preserve exact unusual armor geometry and four-legged stance, all tips and claws.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-5147e58a-f803-49d1-a9ac-5290f803d441.png",
+    "filename": "ref-69-xeno-rhino.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-69-xeno-rhino.png",
+      "width": 1374,
+      "height": 1145,
+      "sourceWidth": 1374,
+      "sourceHeight": 1145,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1069555,
+      "sha256": "eb8372566b0e069787da2e9c11a01e15a2929c049d89f7735e451443617c31ef",
+      "totalPixels": 1573230,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1186619,
+      "alpha1to254": 384392,
+      "alpha255": 2219,
+      "transparentFraction": 0.7542565295602042,
+      "alphaAtLeast16": 366942,
+      "alphaAtLeast128": 360706,
+      "meanBodyAlphaAtLeast128": 251.79194135944508,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        33,
+        1336,
+        1097
+      ],
+      "bboxAlphaAtLeast16": [
+        176,
+        153,
+        1195,
+        1067
+      ],
+      "alphaBounds": [
+        176,
+        153,
+        1195,
+        1067
+      ],
+      "bboxAlphaAtLeast128": [
+        177,
+        153,
+        1194,
+        1066
+      ],
+      "bboxAlpha255": [
+        185,
+        161,
+        1190,
+        1065
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 176,
+        "top": 153,
+        "right": 179,
+        "bottom": 78
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.12809315866084425,
+        "top": 0.13362445414847163,
+        "right": 0.13027656477438138,
+        "bottom": 0.06812227074235808
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 739,
+        "visiblePixels": 439,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.49890829694323147,
+          "y": 0.9318777292576419
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5331519039452902,
+          "y": 0.9318777292576419
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Quadrupède mécanique complet, armure argent/noir, double prong dorsal et corne préservés.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 70,
+    "slug": "xeno-scorched-facehugger",
+    "kind": "creature",
+    "sourceFacing": -1,
+    "pivotX": 0.25,
+    "source": {
+      "number": 70,
+      "file": "Xeno-Scorched-Facehugger.jpg",
+      "bytes": 2025482,
+      "width": 2304,
+      "height": 1844,
+      "sha256": "b0e069a9d3073fa3ef575da8242a93185e0a0b5129a5b880aac01aa20fb7334b",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Scorched-Facehugger",
+      "visualDescription": "Organisme arachniforme brun à corps central en sacs, pattes fines, dos hérissé et queue recourbée.",
+      "flags": [
+        "variante-design-non-etat"
+      ],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "distinct-facehugger-design",
+        "poseIds": [
+          "castes-film_facehugger_alien_1979",
+          "castes-game_alien3_thegun_super_facehugger"
+        ],
+        "note": "Famille arachniforme/facehugger apparentée mais taille visuelle, couleur, carapace et queue différentes ; aucune équivalence canonique déduite."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "prompt": "Use case: background-extraction\nAsset type: standalone static game PNG cutout, one frame.\nInput image 1 is the sole edit target, Xeno-Scorched-Facehugger.jpg. Ignore other conversation images.\nPrimary request: Brown arachniform alien organism with long narrow finger-like legs, two central oval sacs, ridged central back continuing into a long curled tail. Preserve the exact leg count, existing orientation and shape, all extremities. Isolate from grey backdrop.\nChange only background isolation and framing. Preserve orientation, pose, palette, proportions, detailed rendering and anatomy. No redesign, new subject, floor, shadow or text. Center the whole figure SMALLER, occupying at most 75 percent of canvas width and height, with 10 percent transparent empty margin ALL sides. Genuine alpha transparency, not a checkerboard or solid fill.",
+    "decision": "accepted-with-native-padding-qualification",
+    "generatedOutput": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee2-6d93-77e0-b19c-460e2fffb1cc\\exec-9cce286e-f83c-4e8b-a159-fd8d935ce16c.png",
+    "filename": "ref-70-xeno-scorched-facehugger.png",
+    "audit": {
+      "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\assets\\openai\\sprites\\static-enemy-v95\\ref-70-xeno-scorched-facehugger.png",
+      "width": 1402,
+      "height": 1122,
+      "sourceWidth": 1402,
+      "sourceHeight": 1122,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 760176,
+      "sha256": "e06fe64491ff90592d6c1dea913bf3ba04af4df3ed3c96fff2200652e5109fa6",
+      "totalPixels": 1573044,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1302996,
+      "alpha1to254": 268834,
+      "alpha255": 1214,
+      "transparentFraction": 0.828327751798424,
+      "alphaAtLeast16": 248924,
+      "alphaAtLeast128": 243023,
+      "meanBodyAlphaAtLeast128": 250.9150286186904,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        81,
+        21,
+        1358,
+        1058
+      ],
+      "bboxAlphaAtLeast16": [
+        90,
+        259,
+        1331,
+        858
+      ],
+      "alphaBounds": [
+        90,
+        259,
+        1331,
+        858
+      ],
+      "bboxAlphaAtLeast128": [
+        91,
+        260,
+        1330,
+        857
+      ],
+      "bboxAlpha255": [
+        95,
+        262,
+        1328,
+        856
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 90,
+        "top": 259,
+        "right": 71,
+        "bottom": 264
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.06419400855920114,
+        "top": 0.23083778966131907,
+        "right": 0.05064194008559201,
+        "bottom": 0.23529411764705882
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 4992,
+        "visiblePixels": 3892,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5067760342368046,
+          "y": 0.7647058823529411
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4341108598861755,
+          "y": 0.7647058823529411
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "visualReview": "Organisme arachniforme complet, orientation, sacs centraux, pattes et queue préservés. Pivot aux extrémités des pattes, pas au bout de queue.",
+    "attempted": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 71,
+    "slug": "xeno-snake",
+    "kind": "creature",
+    "source": {
+      "number": 71,
+      "file": "Xeno-Snake.jpg",
+      "bytes": 2011815,
+      "width": 1792,
+      "height": 2342,
+      "sha256": "a072aa9baca449589fca1d5f36de53ba43264daba60652f7273755e98d05781f",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "Xeno-Snake",
+      "visualDescription": "Xénomorphe noir à dôme rose violet, deux bras griffus et bas du corps serpentin enroulé, tubes dorsaux.",
+      "flags": [
+        "different-du-snake-neca"
+      ],
+      "groups": [
+        "unnamed-snake"
+      ],
+      "comparisonExisting43": {
+        "status": "distinct-from-similarly-named-native",
+        "poseIds": [
+          "pose-v94-kenner-snake"
+        ],
+        "note": "La source a un torse à deux bras et un bas du corps serpentin. Le Snake NECA existant possède une large collerette/cage latérale et une silhouette différente ; ne pas les fusionner par le seul mot Snake."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "decision": "held-prior-moderation-scope-review",
+    "attempted": false,
+    "prompt": null,
+    "generatedOutput": null,
+    "reason": "Inspection visuelle: même construction de torse à deux bras et bas du corps serpentin que la source46 refusée ce tour; palette rose/noir et détails différents, mais distinction de design insuffisamment établie pour une autre tentative.",
+    "reviewRequired": true,
+    "retryAttempted": false
+  },
+  {
+    "sourceNumber": 72,
+    "slug": "xeno-soldier-brown",
+    "kind": "creature",
+    "source": {
+      "number": 72,
+      "file": "xeno-Soldier-Brown.jpg",
+      "bytes": 2039108,
+      "width": 2816,
+      "height": 1536,
+      "sha256": "92ca6528eef327589717e3a5c0ec43be8cfd8b3b230fccbb1c44c2c5abfd1353",
+      "format": "JPEG",
+      "hasAlpha": false,
+      "category": "monstre",
+      "identityStatus": "user-filename-preserved-not-canon-certified",
+      "providedName": "xeno-Soldier-Brown",
+      "visualDescription": "Xénomorphe bipède brun à dôme lisse, tubes dorsaux et longue queue recourbée.",
+      "flags": [],
+      "groups": [],
+      "comparisonExisting43": {
+        "status": "generic-xenomorph-family-only",
+        "poseIds": [
+          "castes-film_runner_alien3_1992",
+          "castes-film_grid_avp_2004",
+          "castes-film_warrior_aliens_1986",
+          "castes-game_avp_capcom_smasher",
+          "castes-game_avp_capcom_stalker"
+        ],
+        "note": "Parenté biomécanique générale observée, pas de pose ni d’identité exactement équivalente établie. Aucun rapprochement automatique sur un nom de caste."
+      },
+      "canonExact": false,
+      "runtimeAdmission": "not-admitted-v95"
+    },
+    "decision": "held-prior-moderation-scope-review",
+    "attempted": false,
+    "prompt": null,
+    "generatedOutput": null,
+    "reason": "Inspection visuelle: dôme lisse allongé, tube dorsal central et quatre excroissances, double mâchoire, cage costale et membres fins reprennent le drone adulte classique. La palette brune et la pose ne suffisent pas à exclure le périmètre Big Chap/adultes déjà refusé.",
+    "reviewRequired": true,
+    "retryAttempted": false
+  }
+]

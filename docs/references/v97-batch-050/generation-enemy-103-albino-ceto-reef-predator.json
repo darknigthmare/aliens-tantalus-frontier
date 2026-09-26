@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-103-albino-ceto-reef-predator",
+  "name": "Albino Ceto Reef Predator",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Albino Ceto Reef Predator. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Ceto Reef Predator as pictured: low amphibious aquatic quadruped with smooth elongated shark-like head, visible small lateral eye and short gill slits, streamlined plated body, FOUR short bent clawed/webbed limbs tucked beneath it, ONE long tail ending in a broad paddle fin, subtle raised dorsal ridge and small turquoise flank dots. Preserve this unusual fish/reptile silhouette. No additional limbs or humanoid torso.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+    "sha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168",
+    "visualNotes": "Viewed base sheet: blue-gray streamlined shark-like amphibious quadruped, four short limbs, gill slits, small lateral eye, dorsal ridge, broad paddle tail and turquoise flank spots."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-768e6f5f-4bb6-4183-98d2-a0ba26f8d324.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-103-albino-ceto-reef-predator.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "f059472b572a019374f6df80534b1c648bb76a9d8f2ce55494738e1430141b2f",
+    "bboxAlphaAtLeast16": [
+      169,
+      284,
+      1641,
+      704
+    ],
+    "alphaMin": 0,
+    "alpha0": 1231989,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single right-facing Ceto with four short webbed/clawed limbs, eye/gills, dorsal ridge, turquoise flank spots and complete paddle tail. Pale organic materials. Side padding below 10%, no cropping.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 169,
+      "top": 284,
+      "right": 133,
+      "bottom": 183
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.63,
+      "y": 0.7936865839909808
+    },
+    "sourceFacing": 1
+  }
+}

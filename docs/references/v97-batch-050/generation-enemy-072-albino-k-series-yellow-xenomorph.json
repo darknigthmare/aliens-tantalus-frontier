@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
+  "name": "Albino K-Series Yellow Xenomorph",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: exact base anatomy and raster style reference. Create ONE newly authored Albino K-Series Yellow Xenomorph in stable bipedal idle stance. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-020-k-series-yellow-xenomorph identity only. Preserve one normal adult K-Series common Warrior from the licensed AVP: Extinction lineage: elongated eyeless ridged cranial shell with a raised central keel, exposed cranial rib lines, long narrow rib cage and slim waist, exactly two lean clawed arms, two strong digitigrade legs, four dorsal tubes and exactly one long segmented tail ending in a broad hooked blade. Select the front-left common Warrior anatomy in the retained game still, never the Queen behind it or the black foreground alien. Yellow denotes the base faction/material lineage, not a required saturated coat: albino changes pigment and material response only to warm pearl-ivory, pale parchment-bone and low-chroma straw highlights, cool gray-olive recesses, restrained translucent rose-taupe tissue, dark desaturated cavities, wet highlights and metallic ivory/silver teeth; never flat pure white, bright yellow, glow or automatic recolor. Keep strict right-facing orthographic gameplay profile, invariant shell/ribcage/pelvis proportions and the queue's biped motions. Do not inherit numeric sourceScaleByClip values, the historical final-pack scale or legacy bounds-center-bottom roots: the base has no completed measured scaleCalibrationReview, no retained scaleCalibrationEvidence and no reviewed anchor-registry entry. Do not reproduce the base attack's paired cross-cell contacts or documented residual fuchsia artifacts. No Queen crown, black foreground-warrior palette, Red-caste vermilion, robotic gear, silver armor, tusks, cysts, extra limb or official Albino K-Series claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.\nCritical head anatomy: visibly RIBBED RIDGED upper cranium with a raised central keel and transverse grooves across the upper shell, matching the reference, never a smooth domed surface. Two lean arms and complete claw hands separately visible, two feet slightly staggered, four dorsal tubes, one long segmented tail ending in broad hooked blade. ONE whole character in strict orthographic RIGHT-facing profile; full tail curls behind left. Genuine transparent alpha with no floor/shadow/halo. Entire silhouette inside central 75% of canvas with at least 10% clear transparent padding each side. No sheet, grid, multiple subjects, text, logos, watermark, equipment, gore or cropping. One static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+    "sha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
+    "visualNotes": "Reviewed base sheet: narrow K-Series Warrior with raised ridged cranial keel, two thin claw arms, two legs, dorsal tube group and broad hooked tail blade."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-dc4fdd2f-5d2b-4f7c-abab-a8af1470c077.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-072-albino-k-series-yellow-xenomorph.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "608782ff762f456a8ceb2885eb299de22346f8bdd6c9fc16e478b9e8d3e4b406",
+    "bboxAlphaAtLeast16": [
+      435,
+      115,
+      1173,
+      947
+    ],
+    "alphaMin": 0,
+    "alpha0": 1273339,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Ribbed upper cranial keel and complete broad hooked tail blade verified; two hands and feet separate, pale low-chroma straw/ivory material. Dorsal tubes overlap in side view. Native alpha and full silhouette; bottom margin 7.5%. Static adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.546875,
+      "y": 0.923828125
+    },
+    "sourceFacing": 1
+  }
+}

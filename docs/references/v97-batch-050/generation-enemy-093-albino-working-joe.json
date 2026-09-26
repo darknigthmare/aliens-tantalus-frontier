@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-093-albino-working-joe",
+  "name": "Albino Working Joe",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference is a sheet of one human-proportioned male-presenting utility android with short dark close-fitting hair, artificial expressionless pale face, practical buttoned collared utility coverall, patch pockets, utility belt, gloves and work boots; no weapon. Use first-row intact subject only, NOT damaged poses. Preserve this base face shape and equipment silhouette. Make outer synthetic face material ivory and coverall warm ivory/ash-gray while retaining dark gloves, boots and belt. Original systemic pale-equipment/shell variation, not an ethnicity change.\nSubject: Albino Working Joe. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT; slightly three-quarter only enough to separate limbs. Every extremity and all existing equipment inside canvas. Entire subject must occupy at most 75 percent of width and height, with clear transparent padding on all four sides. Grounded neutral ready stance on invisible ground. One character only, no second pose.\nStyle: detailed science-fiction digital painted game sprite matching the reference, finely shaded surface relief, controlled restrained highlights, dark recesses, warm ivory and parchment pale material variant with cool gray; not a flat white silhouette.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve base anatomy and existing equipment only; no extra limbs or new weapons.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png",
+    "sha256": "b9938c6d6f2b1af8065cf8120991319367279a3addb2b882d60ad3ea31c78a92",
+    "visualNotes": "Reference is a sheet of one human-proportioned male-presenting utility android with short dark close-fitting hair, artificial expressionless pale face, practical buttoned collared utility coverall, patch pockets, utility belt, gloves and work boots; no weapon. Use first-row intact subject only, NOT damaged poses. Preserve this base face shape and equipment silhouette. Make outer synthetic face material ivory and coverall warm ivory/ash-gray while retaining dark gloves, boots and belt. Original systemic pale-equipment/shell variation, not an ethnicity change."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-287e7f5b-1a83-4d26-aba9-8f0bb19d1b15.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-093-albino-working-joe.png",
+    "width": 1225,
+    "height": 1284,
+    "sha256": "f74da03d30631461fbaf27cf88174e335f77c95134a52b07e5e7e955aea82e17",
+    "bboxAlphaAtLeast16": [
+      397,
+      58,
+      867,
+      1224
+    ],
+    "alphaMin": 0,
+    "alpha0": 1277328,
+    "totalPixels": 1572900
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing utility android with retained short dark hair, artificial ivory face, collared pale utility coverall, belt, gloves and boots, no weapon. Native alpha confirmed; top/bottom margins about 4.5%, entire figure uncropped. Pale shell/equipment variant, not an ethnicity claim. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.51,
+      "y": 0.9532710280373832
+    },
+    "sourceFacing": 1
+  }
+}

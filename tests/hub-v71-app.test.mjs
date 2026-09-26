@@ -3,10 +3,14 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 
 import { getSpecialOperationV67 } from '../src/special-operations-v67.js';
+import { HubGame as OpeningHubV89 } from '../src/hub-opening-v88.js';
+import { HubGame as OnboardingHubV84 } from '../src/hub-onboarding-v84.js';
+import { HubGame as ProvingHubV81 } from '../src/hub-v81-runtime.js';
 
 const APP_URL = new URL('../src/app.js', import.meta.url);
 const source = await readFile(APP_URL, 'utf8');
 const onboardingSource = await readFile(new URL('../src/hub-onboarding-v84.js', import.meta.url), 'utf8');
+const openingSource = await readFile(new URL('../src/hub-opening-v88.js', import.meta.url), 'utf8');
 
 function between(startMarker, endMarker) {
   const start = source.indexOf(startMarker);
@@ -17,8 +21,14 @@ function between(startMarker, endMarker) {
   return source.slice(start, end);
 }
 
-test('app instancie exclusivement le HubGame composite V84, conservant V81 comme ancêtre', () => {
-  assert.match(source, /import\s*\{\s*HubGame,\s*HUB_DECKS,\s*HUB_NPC_ROSTER\s*\}\s*from\s*'\.\/hub-onboarding-v84\.js';/);
+test('app instancie le composite V88 avec interruption V89, conservant V84 et V81 comme ancêtres réels', () => {
+  assert.match(source, /import\s*\{\s*HubGame,\s*HUB_DECKS,\s*HUB_NPC_ROSTER\s*\}\s*from\s*'\.\/hub-opening-v88\.js';/);
+  assert.match(openingSource, /import \{ HubGame as PreviousHub, HUB_DECKS \} from '\.\/hub-onboarding-v84\.js'/);
+  assert.match(openingSource, /import \{ withOpeningExerciseV89 \} from '\.\/hub-opening-exercise-v89\.js'/);
+  assert.match(openingSource, /export class HubGame extends withPortMeridienV90\(withOpeningExerciseV89\(PreviousHub\)\)/);
+  assert.match(openingSource, /import \{ withPortMeridienV90 \} from '\.\/hub-port-meridien-v90\.js'/);
+  assert.ok(OnboardingHubV84.prototype.isPrototypeOf(OpeningHubV89.prototype));
+  assert.ok(ProvingHubV81.prototype.isPrototypeOf(OpeningHubV89.prototype));
   assert.match(source, /const hubEngine = new HubGame\(byId\('hub-canvas'\),\s*\{[\s\S]*?onAction:\s*handleHubAction,[\s\S]*?onPersist:\s*persistHub,[\s\S]*?onStatus:\s*renderHubStatus/);
   assert.doesNotMatch(source, /from\s*'\.\/hub-v(?:51|58|60|61|62)-runtime\.js';/);
   assert.match(onboardingSource, /import \{ HubGame as HubGameV81, HUB_DECKS \} from '\.\/hub-v81-runtime\.js'/);

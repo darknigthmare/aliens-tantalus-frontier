@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-118-armored-boiler",
+  "name": "Armored Boiler",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Boiler. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Boiler as pictured: hunched upright xenomorph with exactly TWO legs and TWO long clawed arms, elongated rounded eyeless head, ribbed torso, backward dorsal tubes, ONE segmented tail. Preserve the bony olive-gray surface and rounded yellow-green translucent nodules at shoulders and thighs, intact closed surfaces. Reinforce selected existing ridges with dark organic carapace plates without obscuring the yellow-green nodules. Static intact stance; no spraying, damage or eruption.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-boiler-action-sheet-v56.png",
+    "sha256": "93390cab29d7bf85ca2a6dfecb6a0c2f72f6a3201750a0684728bc3bc5becbeb",
+    "visualNotes": "Viewed Boiler action sheet: olive-gray skeletal upright xenomorph, elongated head, yellow-green shoulder/thigh nodules, long arms, dorsal tubes, single segmented tail. Selected intact standing state, not spray frames."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-1168a6b3-706d-4475-af38-67a5319f0fdf.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-118-armored-boiler.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "f2b5ba713356c5242b9f11633daac45a2d133bbadc94631291c59b781653eddf",
+    "bboxAlphaAtLeast16": [
+      295,
+      84,
+      1129,
+      962
+    ],
+    "alphaMin": 0,
+    "alpha0": 1261213,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One right-facing intact Boiler with two arms/two legs, bony olive-gray ribbing, dorsal tubes, one tail and closed yellow-green nodules preserved. Dark natural reinforcement, no spray/explosion. Preview halo pixels (600,250),(1200,400),(750,1000) have alpha0. Top/bottom padding under10%, complete.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 295,
+      "top": 84,
+      "right": 407,
+      "bottom": 62
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.53,
+      "y": 0.939453125
+    },
+    "sourceFacing": 1
+  }
+}

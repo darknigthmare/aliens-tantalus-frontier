@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-100-albino-cult-host",
+  "name": "Albino Cult Host",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: one dedicated static full-body 2D game character cutout for Alien Tantalus Frontier.\nInput image 1 is the existing Cult Host identity and rendering-style reference only, NOT an output grid. Create ONE new standing character pose, not a sprite sheet.\nSubject: Albino Cult Host, an original project systemic variant (not a canon-exact design). Preserve the reference's adult bald human, two ordinary arms, two ordinary legs, worn button-front work shirt with rolled sleeves, full trousers, heavy boots, and round respirator/filter hanging on chest straps. Slightly hunched wary neutral standing stance, head and body facing RIGHT, empty hands relaxed. Keep all clothing and recognizable human anatomy; no alien limbs.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nRendering: match the reference's detailed painted realistic 2D game sprite, textured workwear, readable silhouette, restrained directional highlights and dark contours, not cartoon/chibi.\nComposition: ONE character completely visible from scalp to soles in a single frame, slightly elevated side/three-quarter game view facing right. At least 10% fully transparent padding on ALL sides. Feet on a consistent imaginary ground line. Genuine transparent RGBA background with no ground plane, no shadow blob.\nAvoid: grid, panels, duplicate figures, text, logo, watermark, weapons, nudity, wounds, blood, gore, detached parts, cropped feet/head, scenery, painted checkerboard. No image postprocessing will be used.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png",
+    "sha256": "ea3ba3c83c55ee1d6b57d2f525135dc0a447de1493b5f4fa4caaa39ea85f0e2c",
+    "visualNotes": "Viewed action sheet: adult bald clothed man, rolled-sleeve tan work shirt, brown trousers/boots, chest-hanging round respirator; ordinary two-arm/two-leg anatomy, hunched right-facing stance. Source sheet has multiple poses; generated output requests a single neutral figure."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-1ce91e51-778c-4737-a8e8-f40889077845.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-100-albino-cult-host.png",
+    "width": 1180,
+    "height": 1333,
+    "sha256": "efdfe1c12bc043ca0188532afd570deded16feb1d5644c385a7cd805363ed5ae",
+    "bboxAlphaAtLeast16": [
+      356,
+      96,
+      839,
+      1246
+    ],
+    "alphaMin": 0,
+    "alpha0": 1236981,
+    "totalPixels": 1572940
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single clothed adult human, two arms/two legs, round chest respirator, boots and right-facing hunched pose match base. Pale cloth equipment variant. Full body intact; requested 10% top/bottom padding not achieved (actual margins recorded), no clipping.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 356,
+      "top": 96,
+      "right": 341,
+      "bottom": 87
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.515,
+      "y": 0.9347336834208552
+    },
+    "sourceFacing": 1
+  }
+}

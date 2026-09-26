@@ -1,6 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { openSync, readSync, closeSync } from 'node:fs';
 import { ENEMY_USER_CASTES_V87 } from '../src/enemy-user-castes-v87.js';
+import { ENEMY_STATIC_POSES_V95 } from '../src/enemy-static-poses-v95.js';
+import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
+import { ENEMY_DEDICATED_POSES_V97 as DEDICATED } from '../src/enemy-dedicated-poses-v97.js';
+import { getUserPoseHabitatV95, getUserPoseVisibleBoundsV95, isUserPoseInsideHabitatV95 } from '../src/enemy-user-pose-runtime-v87.js';
+
+// Model the browser's decoded native size from the real PNG, not a 1024px fake
+// or a duplicate of the manifest values that the runtime is meant to validate.
+const dedicatedNativeSizes = new Map(DEDICATED.map(definition => {
+  const handle = openSync(new URL(`..${definition.path}`, import.meta.url), 'r');
+  const header = Buffer.alloc(24);
+  try { assert.equal(readSync(handle, header, 0, 24, 0), 24, definition.path); }
+  finally { closeSync(handle); }
+  assert.equal(header.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', definition.path);
+  assert.equal(header.subarray(12, 16).toString('ascii'), 'IHDR', definition.path);
+  return [definition.imageKey, { naturalWidth: header.readUInt32BE(16), naturalHeight: header.readUInt32BE(20) }];
+}));
 
 globalThis.addEventListener = () => {};
 globalThis.requestAnimationFrame = () => 1;
@@ -21,8 +38,8 @@ function fixture(configuration = { profileId: 'enemy-002-facehugger', quantity: 
     assets: {}, testMode: true, autoLoop: false, now: () => ++clock,
     onEvent: event => events.push(event), onPersist: state => writes.push(structuredClone(state))
   });
-  for (const d of ENEMY_USER_CASTES_V87) engine.images.set(d.imageKey, {
-    complete: true, naturalWidth: d.sourceWidth, naturalHeight: d.sourceHeight, src: d.path
+  for (const d of [...CURRENT_STATIC, ...DEDICATED].flatMap(entry => [entry, ...(entry.states || [])])) engine.images.set(d.imageKey, {
+    complete: true, ...(dedicatedNativeSizes.get(d.imageKey) || { naturalWidth: d.sourceWidth, naturalHeight: d.sourceHeight }), src: d.path
   });
   if (configuration) engine.start({ configuration, autoLoop: false, testMode: true, assets: {} });
   return { engine, events, writes };
@@ -54,6 +71,87 @@ function resume(engine) {
   assert.ok(state.state.runtimeV81.physicalV87, 'the actual runtime remains fully capturable');
   assert.equal(next.start({ resumeState: state, autoLoop: false, testMode: true, assets: {} }).started, true);
   return next;
+}
+
+test('V97 dedicated fixture dimensions come from all 43 real PNG headers and match the admission contract', () => {
+  const batch = DEDICATED.filter(definition => definition.batch === 'v97-050');
+  assert.equal(batch.length, 43);
+  for (const definition of batch) {
+    assert.deepEqual(dedicatedNativeSizes.get(definition.imageKey), {
+      naturalWidth: definition.sourceWidth, naturalHeight: definition.sourceHeight
+    }, definition.profileId);
+  }
+});
+
+test('V97 incorrect native dimensions block every new terrestrial print without consuming its ticket', () => {
+  const batch = DEDICATED.filter(definition => definition.batch === 'v97-050' && definition.bioforgeEligible !== false);
+  assert.equal(batch.length, 42);
+  for (const definition of batch) {
+    const { engine, writes } = fixture({ profileId: definition.profileId, quantity: 1 }); enter(engine);
+    const originalImage = engine.images.get(definition.imageKey);
+    const before = structuredClone(engine.bioforgeRootV80.activeSession), writeCount = writes.length;
+    engine.bioforgePhaseClockV80 = .81;
+    engine.images.set(definition.imageKey, { ...originalImage, naturalWidth: originalImage.naturalWidth + 1 });
+    assert.equal(engine.advanceBioforgePhaseV80().reason, 'user-pose-invalid-dimensions', definition.profileId);
+    assert.deepEqual(engine.bioforgeRootV80.activeSession, before); assert.equal(writes.length, writeCount);
+    assert.equal(engine.enemies.length, 0); assert.equal(engine.bioforgePhaseClockV80, .81);
+    engine.images.set(definition.imageKey, originalImage);
+    assert.equal(print(engine).profileId, definition.profileId);
+  }
+});
+
+test('V97 Albino Ripper Queen prints and resumes its exact large historical collider, never a shrunken body', () => {
+  const profileId = 'enemy-076-albino-ripper-queen';
+  const { engine } = fixture({ profileId, quantity: 1 }); enter(engine);
+  const provisional = engine.createBioforgeActorV87(engine.bioforgeRootV80.activeSession.queue[0]);
+  assert.equal(provisional.w, 336); assert.equal(provisional.h, 268.28125);
+  const actor = print(engine);
+  assert.equal(actor.w, provisional.w); assert.equal(actor.h, provisional.h); assert.equal(actor.maxHealth, provisional.maxHealth);
+  const bounds = engine.bioforgeLevelV80.arenaBounds;
+  assert.ok(actor.x >= bounds.x && actor.x + actor.w <= bounds.x + bounds.w);
+  assert.ok(actor.y >= bounds.y && actor.y + actor.h <= bounds.y + bounds.h);
+  assert.ok(engine.platforms.some(surface => surface.y === actor.y + actor.h && actor.x >= surface.x && actor.x + actor.w <= surface.x + surface.w));
+  const restored = resume(engine).enemies.find(specimen => specimen.id === actor.id);
+  assert.equal(restored.w, 336); assert.equal(restored.h, 268.28125); assert.equal(restored.health, actor.health);
+});
+
+test('V97 large dedicated collider still refuses every undersized support without consuming its queue or resizing', () => {
+  const { engine, events, writes } = fixture({ profileId: 'enemy-076-albino-ripper-queen', quantity: 1 }); enter(engine);
+  const originalSupports = engine.platforms, before = structuredClone(engine.bioforgeRootV80.activeSession), writeCount = writes.length;
+  engine.platforms = originalSupports.map(surface => ({ ...surface, w: Math.min(surface.w, 335) }));
+  engine.bioforgePhaseClockV80 = .93;
+  assert.equal(engine.advanceBioforgePhaseV80().reason, 'no-safe-spawn-position');
+  assert.deepEqual(engine.bioforgeRootV80.activeSession, before); assert.equal(engine.enemies.length, 0);
+  assert.equal(engine.bioforgePhaseClockV80, .93); assert.equal(writes.length, writeCount);
+  assert.ok(!events.some(event => event.type === 'bioforge-specimen-printed'));
+  engine.platforms = originalSupports; const actor = print(engine);
+  assert.equal(actor.id, before.queue[0].id); assert.equal(actor.w, 336); assert.equal(actor.h, 268.28125);
+});
+
+for (const definition of ENEMY_STATIC_POSES_V95.filter(entry => entry.locomotion === 'aquatic')) {
+  test(`${definition.id}: Bioforge printing and physical resume keep the native alpha silhouette submerged`, () => {
+    const { engine } = fixture({ profileId: definition.id, quantity: 1 }); enter(engine);
+    const actor = print(engine);
+    const assertSubmerged = (runtime, specimen) => {
+      const water = getUserPoseHabitatV95(runtime, specimen);
+      assert.ok(isUserPoseInsideHabitatV95(specimen, water));
+      for (const facing of [-1, 1]) {
+        const visible = getUserPoseVisibleBoundsV95(specimen, facing);
+        assert.ok(visible.x >= water.x - 1e-8 && visible.y >= water.y - 1e-8);
+        assert.ok(visible.x + visible.w <= water.x + water.w + 1e-8 && visible.y + visible.h <= water.y + water.h + 1e-8);
+      }
+      return water;
+    };
+    const water = assertSubmerged(engine, actor);
+    const normal = resume(engine); assertSubmerged(normal, normal.enemies.find(entry => entry.id === actor.id));
+    const state = engine.captureBioforgeResumeStateV80();
+    const saved = state.state.runtimeV81.physicalV87.enemies.find(entry => entry.id === actor.id);
+    Object.assign(saved, { x: water.x, y: water.y });
+    const next = fixture(null).engine;
+    assert.equal(next.start({ resumeState: state, autoLoop: false, testMode: true, assets: {} }).started, true);
+    const repaired = next.enemies.find(entry => entry.id === actor.id); assertSubmerged(next, repaired);
+    assert.ok(repaired.x > saved.x && repaired.y > saved.y);
+  });
 }
 
 test('48 queue entries use twelve physical slots successively, without consuming a saturated queue', () => {

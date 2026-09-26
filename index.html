@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
   <link rel="stylesheet" href="/bioforge-v80.css">
+  <link rel="stylesheet" href="/xeno-trials-v96.css">
   <link rel="stylesheet" href="/player-onboarding-v84.css">
   <link rel="stylesheet" href="/crew-v85.css">
   <link rel="stylesheet" href="/placeables-v86.css">
@@ -71,6 +72,7 @@
         <button class="nav-button active" data-view="hub"><span>05</span> USS Tantalus</button>
         <button class="nav-button" data-view="armory"><span>06</span> Armurerie</button>
         <button class="nav-button" data-view="bestiary"><span>07</span> Xénobiologie</button>
+        <button class="nav-button" data-view="xenotrials"><span>WY</span> Xeno Trials</button>
         <button class="nav-button" data-view="vehicles"><span>08</span> Véhicules</button>
         <button class="nav-button" data-view="crew"><span>09</span> Echo-9</button>
         <button class="nav-button" data-view="settings"><span>10</span> Système</button>
@@ -212,6 +214,8 @@
           </div>
         </section>
 
+        <section id="xeno-trials-v96" class="view" data-panel="xenotrials" aria-label="Module Weyland-Yutani Xeno Trials"></section>
+
         <section class="view" data-panel="armory">
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
           <div class="section-intro"><div><p class="eyebrow">146 ARMES // 106 ÉQUIPEMENTS // INVENTAIRE RÉEL</p><h2>Armurerie & dotations</h2></div><div class="filter-row"><select id="armory-kind"><option value="weapon">Armes</option><option value="equipment">Équipements</option></select><input id="armory-search" type="search" placeholder="M41A, tracker, Ripper…"></div></div>
@@ -223,7 +227,7 @@
         </section>
 
         <section class="view" data-panel="bestiary">
-          <div class="section-intro"><div><p class="eyebrow">571 MENACES // COMPORTEMENTS & HABITATS</p><h2>Xénobiologie tactique</h2></div><div class="filter-row"><select id="biology-filter"><option value="all">Toutes biologies</option><option>xenomorph</option><option>hybrid</option><option>pathogen</option><option>synthetic</option><option>human</option><option>fauna</option></select><input id="enemy-search" type="search" placeholder="Drone, Reine, Newborn, Predalien…"></div></div>
+          <div class="section-intro"><div><p id="enemy-count-v88" class="eyebrow">DOSSIERS // COMPORTEMENTS & HABITATS</p><h2>Xénobiologie tactique</h2></div><div class="filter-row"><select id="biology-filter"><option value="all">Toutes biologies</option><option>xenomorph</option><option>hybrid</option><option>pathogen</option><option>synthetic</option><option>human</option><option>fauna</option></select><input id="enemy-search" type="search" placeholder="Drone, Reine, Newborn, Predalien…"></div></div>
           <div id="enemy-catalog-v62" role="region" aria-label="Catalogue hiérarchique xénobiologique">
             <aside id="enemy-catalog-tree" aria-label="Taxonomie des menaces"></aside>
             <div id="enemy-list" aria-live="polite"></div>

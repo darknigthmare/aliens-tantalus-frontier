@@ -38,10 +38,13 @@ import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
-import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-onboarding-v84.js';
+import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-opening-v88.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
 import { advancePlayerOnboardingV84, ONBOARDING_DIALOGUES_V84, getPlayerOnboardingObjectiveV84 } from './player-onboarding-v84.js';
+import { advancePlayerOpeningV88, getPlayerOpeningObjectiveV88, OPENING_SIGNAL_V88, applyOpeningMissionSuppliesV88 } from './player-opening-v88.js';
+import { advanceOpeningExerciseV89, getOpeningExerciseObjectiveV89 } from './opening-exercise-v89.js';
+import { advancePortMeridienV90, normalizePortMeridienV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
@@ -52,6 +55,8 @@ import { getTitleSceneShipOptionsV87, sanitizeTitleScenePresentationV79 } from '
 import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
+import { ENEMY_ENCYCLOPEDIA_CATALOG_V88 } from './enemy-user-campaign-v88.js';
+import { getEnemyDiscoveryV88, recordEnemyDiscoveryV88 } from './enemy-discovery-v88.js';
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
@@ -67,6 +72,9 @@ import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
 import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
 import { BioforgeRuntimeV80 } from './bioforge-runtime-v80.js';
 import { BioforgeUiV80, buildBioforgeUiModelV80 } from './bioforge-ui-v80.js';
+import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
+import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
+import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -143,10 +151,13 @@ let missionArchiveOverlayV68 = null;
 let alphaBravoCommandDockV69 = null;
 let alienSurvivalDockV70 = null;
 let bioforgeUiV80 = null;
+let xenoTrialsUiV96 = null;
+let xenoTrialsOwnerV96 = null;
 let creatorOwnerV84 = null;
 let hubOwnerV84 = null;
 let bioforgeOwnerV84 = null;
 let pendingOnboardingDialogV84 = null;
+let pendingOpeningDialogV88 = null;
 let crewUiV85 = null;
 let placeablesDockV86 = null;
 let lastMissionSaveFailureToastV86 = -Infinity;
@@ -190,6 +201,7 @@ const VIEW_META = Object.freeze({
   editor: ['FORGE // WORLD AUTHORING', 'Frontier Forge'],
   settings: ['SYSTEM // CONFIGURATION', 'Système'],
   bioforge: ['BIOFORGE // CONFINEMENT 80', 'Niveau expérimental isolé'],
+  xenotrials: ['WY // XENO TRIALS', 'Xeno Trials'],
   play: ['OPS // LIVE', 'Opération en cours']
 });
 
@@ -513,6 +525,7 @@ function currentEditorProject(kind = null) {
 
 function closeHubDialogue({ resume = true, restoreFocus = true } = {}) {
   pendingOnboardingDialogV84 = null;
+  pendingOpeningDialogV88 = null;
   const wasOpen = hubDialogueUiV76.close({ restoreFocus });
   pendingHubInteraction = null;
   pendingNpcConversationV62 = null;
@@ -613,9 +626,20 @@ function chooseNpcDialogueV62(choiceId) {
   return true;
 }
 
+function setupXenoTrialsUiV96() {
+  xenoTrialsUiV96 = new XenoTrialsUiV96({
+    root: byId('xeno-trials-v96'),
+    getProgress: () => saveSystem.data.xenoTrialsV96,
+    canCommit: () => ownsTimelineV84(xenoTrialsOwnerV96) && activeView === 'xenotrials' && !creatorOwnerV84,
+    onCommit: state => { saveSystem.commit({ xenoTrialsV96: state }); renderClock(); },
+    onReturn: () => showView('hub')
+  });
+}
+
 function showView(name) {
   if (!VIEW_META[name]) return;
   if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
+  if (name !== 'settings') titleScreen.clearMenuReturnV89();
   refugeControllerV87.close();
   shipCompanionControllerV87.close();
   if (saveSystem.data.onboardingV84 && saveSystem.data.onboardingV84.phase !== 'complete' && !['hub', 'settings'].includes(name) && !standaloneContext) {
@@ -633,6 +657,7 @@ function showView(name) {
   if (activeView === 'bioforge' && name !== 'bioforge') {
     bioforgeRuntimeV80.stop({ reason: 'view-change' });
   }
+  if (activeView === 'xenotrials' && name !== 'xenotrials' && typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   activeView = name;
   audio.setScene(resolveViewAudioSceneV77(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
@@ -646,9 +671,11 @@ function showView(name) {
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubOwnerV84 = currentOwnerV84();
-    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84 });
+    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90 });
+    if (hubEngine.isPortMeridienV90()) { byId('breadcrumb').textContent = 'PALISADE // PORT-MÉRIDIEN'; byId('view-title').textContent = 'Le quai des vivants'; }
   }
   if (name === 'bioforge') prepareBioforgeViewV80();
+  if (name === 'xenotrials') { xenoTrialsOwnerV96 = currentOwnerV84(); xenoTrialsUiV96?.open(); }
   if (name === 'hub' || name === 'play' || name === 'bioforge') {
     const focusTarget = name === 'hub'
       ? byId('hub-canvas')
@@ -713,17 +740,19 @@ function currentOwnerV84() { return { profile: saveSystem.profile, epoch: profil
 function ownsTimelineV84(owner) { return owner && owner.profile === saveSystem.profile && owner.epoch === profileEpochV78 && owner.timeline === saveSystem.data.createdAt; }
 function captureHubPoseV84() {
   if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || !hubEngine.player || standaloneContext) return {};
+  if (hubEngine.isPortMeridienV90?.()) return {}; // Ground coordinates must never overwrite the ship return pose.
   const annex = hubEngine.currentAnnexV71();
   if (annex) return projectRefugeHubSaveV87({
     deck: hubEngine.state.deck, roomId: annex.parentRoomId,
     positionX: Math.round(hubEngine.hubCommercialStateV71.returnContext?.x ?? saveSystem.data.hub.positionX),
+    positionY: Math.round(hubEngine.annexReturnPoseV71?.y ?? hubEngine.restoreReturnPoseV71(annex).y),
     facing: hubEngine.hubCommercialStateV71.returnContext?.facing ?? hubEngine.player.facing,
     visited: [...new Set(hubEngine.state.visited)],
     commercialV71: { ...clone(hubEngine.hubCommercialStateV71), annexPositionX: Math.round(hubEngine.player.x),
       annexPositionY: Math.round(hubEngine.player.y), annexClimbing: Boolean(hubEngine.player.climbing) }
   });
   return { deck: hubEngine.state.deck, roomId: hubEngine.currentRoom().id,
-    positionX: Math.round(hubEngine.player.x), facing: hubEngine.player.facing,
+    positionX: Math.round(hubEngine.player.x), positionY: Math.round(hubEngine.player.y), facing: hubEngine.player.facing,
     visited: [...new Set(hubEngine.state.visited)] };
 }
 const playerCreatorUiV84 = new PlayerCreatorUiV84({
@@ -748,6 +777,7 @@ function openPlayerCreatorV84(profile) {
   if (creatorOwnerV84) return false;
   creatorOwnerV84 = { ...currentOwnerV84(), target: profile, original: saveSystem.storage.getItem(saveSystem.key(profile)) };
   hubEngine.stop(false); engine.stop(); bioforgeRuntimeV80.stop({ reason: 'player-creation' });
+  if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   titleScreen.hide();
   playerCreatorUiV84.open(profile);
   return false;
@@ -797,12 +827,173 @@ function advanceOnboardingDialogueV84() {
   return true;
 }
 
+function commitOpeningEventV88(event, owner = hubOwnerV84) {
+  if (!ownsTimelineV84(owner) || activeView !== 'hub') throw new Error('Cette prise de poste n’appartient plus au profil actif.');
+  const contact = hubEngine.openingContactV88();
+  const result = advancePlayerOpeningV88(saveSystem.data.openingV88, event, {
+    onboardingComplete: saveSystem.data.onboardingV84?.phase === 'complete',
+    physicalContact: Boolean(contact), roomId: contact?.roomId,
+    weaponIds: saveSystem.data.player.weaponIds,
+    relaySeconds: hubEngine.openingRepairV88?.complete ? hubEngine.openingRepairV88.elapsed : 0
+  });
+  if (!result.ok) throw new Error(result.reason === 'm41a-required' ? 'Équipez le M41A dans l’armurerie avant le contrôle.' : 'Étape indisponible : rejoignez le poste indiqué.');
+  const candidate = clone(saveSystem.data);
+  candidate.openingV88 = result.state;
+  Object.assign(candidate.hub, captureHubPoseV84());
+  saveSystem.commit(candidate);
+  hubEngine.setOpeningV88(saveSystem.data.openingV88);
+  renderHubStatus();
+  return result.state;
+}
+
+function handleOpeningExerciseV89(interaction, owner = hubOwnerV84) {
+  if (interaction.action === 'opening-exercise:cancelled') { toast('Liaison interrompue. Revenez à la console et restez immobile.'); return true; }
+  try {
+    if (!ownsTimelineV84(owner) || activeView !== 'hub' || !hubEngine.running || standaloneContext
+      || !hubEngine.player?.alive || hubEngine.annexTransitionV71
+      || interaction.sessionId !== hubEngine.provingGroundStateV81?.sessionId) throw new Error('Exercice périmé : revenez dans votre session active.');
+    const event = interaction.action.replace('opening-exercise:', '');
+    const result = advanceOpeningExerciseV89(saveSystem.data.openingExerciseV89, event, {
+      onboardingComplete: saveSystem.data.onboardingV84?.phase === 'complete',
+      openingPhase: saveSystem.data.openingV88?.phase,
+      inProvingGround: hubEngine.isProvingGroundActiveV81(), session: hubEngine.provingGroundStateV81,
+      consoleContact: hubEngine.exerciseContactV89() === 'repair',
+      firingPadContact: hubEngine.exerciseContactV89() === 'resume',
+      repairSeconds: hubEngine.exerciseRepairV89?.complete ? hubEngine.exerciseRepairV89.elapsed : 0
+    });
+    if (!result.ok) throw new Error('Rejoignez le poste indiqué pour poursuivre l’exercice.');
+    const candidate = clone(saveSystem.data);
+    candidate.openingExerciseV89 = result.state;
+    Object.assign(candidate.hub, captureHubPoseV84(), { provingGroundV81: clone(hubEngine.provingGroundStateV81) });
+    saveSystem.commit(candidate);
+    hubEngine.setOpeningExerciseV89(saveSystem.data.openingExerciseV89);
+    renderHubStatus();
+    if (event !== 'restart') toast(event === 'interrupt' ? 'EXERCICE INTERROMPU · Signal prioritaire. Cibles et chrono suspendus : rejoignez la console.'
+      : event === 'repair' ? 'Liaison prioritaire rétablie. Rejoignez le pas de tir pour terminer la qualification.' : 'Qualification reprise : terminez les cibles restantes.');
+    return true;
+  } catch (error) { toast(`Exercice non enregistré : ${error.message}`); return false; }
+}
+
+function openOpeningDialogueV88() {
+  const state = saveSystem.data.openingV88;
+  if (!hubEngine.openingContactV88() || !['signal', 'manifest'].includes(state?.phase)) return false;
+  hubEngine.pause();
+  const owner = currentOwnerV84();
+  pendingOpeningDialogV88 = { owner, phase: state.phase, node: state.signalNode };
+  byId('hub-dialogue-speaker').textContent = state.phase === 'signal' ? 'DAVID-8R · RELAIS DU TANTALUS' : 'MANIFESTE · FRET DE SECOURS';
+  byId('hub-dialogue-text').textContent = state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.';
+  const portrait = byId('hub-dialogue-image');
+  portrait.classList.remove('is-sprite-cell-v62');
+  portrait.src = HUB_STATION_DIALOGUES_V61['dropship-hangar'].portrait;
+  portrait.alt = 'Poste opérationnel du Tantalus';
+  const choices = byId('hub-dialogue-choices');
+  choices.replaceChildren();
+  byId('hub-dialogue-continue').hidden = state.phase === 'manifest';
+  byId('hub-dialogue-continue').textContent = state.signalNode === OPENING_SIGNAL_V88.length - 1 ? 'REJOINDRE LE HANGAR' : 'ÉCOUTER LA SUITE';
+  if (state.phase === 'manifest') for (const [freight, label] of [['medical', 'MÉDICAMENTS · +2 TROUSSES'], ['energy', 'ÉNERGIE · −2 CARBURANT']]) {
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'hub-dialogue-choice'; button.dataset.openingFreightV88 = freight; button.textContent = label;
+    button.onclick = () => {
+      try { commitOpeningEventV88({ type: 'freight', freight }, owner); closeHubDialogue(); renderAll(); toast('Fret scellé. Rejoignez la salle de briefing pour votre première sortie.'); }
+      catch (error) { toast(error.message); }
+    };
+    choices.append(button);
+  }
+  hubDialogueUiV76.open({ initialFocus: state.phase === 'manifest' ? choices.firstElementChild : byId('hub-dialogue-continue') });
+  return true;
+}
+
+function advanceOpeningDialogueV88() {
+  const pending = pendingOpeningDialogV88;
+  if (!pending || pending.phase !== 'signal') return false;
+  try {
+    if (saveSystem.data.openingV88?.phase !== pending.phase) throw new Error('Le relais a déjà été traité.');
+    const state = commitOpeningEventV88({ type: 'signal-next', node: pending.node }, pending.owner);
+    if (state.phase === 'signal') openOpeningDialogueV88();
+    else { closeHubDialogue(); renderAll(); }
+  } catch (error) { toast(error.message); }
+  return true;
+}
+
+function handleOpeningActionV88(interaction) {
+  if (interaction.action === 'opening:repair-cancelled') { toast('Réparation interrompue. Revenez au relais et restez immobile.'); return true; }
+  if (!ownsTimelineV84(hubOwnerV84) || !hubEngine.running || hubEngine.openingContactV88()?.action !== interaction.action) return false;
+  try {
+    if (['opening:signal', 'opening:manifest'].includes(interaction.action)) return openOpeningDialogueV88();
+    if (interaction.action === 'opening:ready') {
+      if (saveSystem.data.portMeridienV90?.phase === 'pending') return boardPortMeridienV90();
+      return openHubDialogue({ ...interaction, action: 'navigate:operations' });
+    }
+    commitOpeningEventV88(interaction.phase);
+    toast(getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84)?.text || 'Prise de poste consignée.');
+    return true;
+  } catch (error) { hubEngine.openingRepairV88 = null; toast(error.message); return false; }
+}
+
+function boardPortMeridienV90() {
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || !hubEngine.running || standaloneContext) return false;
+  const portPhase = saveSystem.data.shipPortV1?.phase;
+  if ((portPhase && !['undocked', 'departed'].includes(portPhase))
+    || !validateShipPortDepartureV87(saveSystem.data, { physical: { roomId: 'briefing' } }).ok) {
+    toast('Départ suspendu : larguez le relais civil et terminez les transferts animaliers au hangar.');
+    return false;
+  }
+  const current = saveSystem.data.portMeridienV90;
+  const result = advancePortMeridienV90(current, 'board', {
+    revision: current?.revision, openingPhase: saveSystem.data.openingV88?.phase,
+    onboardingComplete: saveSystem.data.onboardingV84?.phase === 'complete',
+    briefingContact: hubEngine.openingContactV88()?.phase === 'ready', freight: saveSystem.data.openingV88?.freight
+  });
+  if (!result.ok) return false;
+  try {
+    const candidate = clone(saveSystem.data);
+    candidate.portMeridienV90 = result.state;
+    Object.assign(candidate.hub, captureHubPoseV84());
+    saveSystem.commit(candidate);
+    hubEngine.stop(false); showView('hub');
+    toast('Port-Méridien · le quai est encore habité. Le fret est à la rampe.'); return true;
+  } catch (error) { toast(`Débarquement non enregistré : ${error.message}`); return false; }
+}
+
+function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
+  if (!ownsTimelineV84(owner) || activeView !== 'hub' || standaloneContext || creatorOwnerV84
+    || !hubEngine.isPortMeridienV90() || !hubEngine.player?.alive) return false;
+  const current = normalizePortMeridienV90(saveSystem.data.portMeridienV90);
+  const runtime = hubEngine.capturePortMeridienV90();
+  if (!current || !runtime || current.phase !== runtime.phase || current.revision !== runtime.revision
+    || interaction.revision !== current.revision) return false;
+  const action = interaction.action.slice(5);
+  if (action === 'complete') {
+    if (!hubEngine.running || !hubEngine.portContactV90()) return false;
+    showView('operations'); return true;
+  }
+  if (action !== 'checkpoint' && !hubEngine.running) return false;
+  const result = action === 'checkpoint' ? { ok: true, state: runtime } : advancePortMeridienV90(current, action, {
+    revision: interaction.revision, openingPhase: saveSystem.data.openingV88?.phase,
+    onboardingComplete: saveSystem.data.onboardingV84?.phase === 'complete', actor: hubEngine.player,
+    taskSeconds: hubEngine.portTaskV90?.complete ? hubEngine.portTaskV90.elapsed : 0,
+    civiliansX: runtime.civiliansX
+  });
+  if (!result.ok) return false;
+  try {
+    // One transaction owns position, task phase, group progress and the unique receipt. No repeatable reward.
+    saveSystem.commit({ portMeridienV90: result.state });
+    if (action !== 'checkpoint') hubEngine.setPortMeridienV90(saveSystem.data.portMeridienV90);
+    if (action === 'report') toast('Constat transmis : trois habitants secourus, balise automatique contradictoire.');
+    return true;
+  } catch (error) {
+    toast(`Quai non enregistré : ${error.message} · E pour réessayer.`);
+    return false;
+  }
+}
+
 function openForgeContext() {
   refugeControllerV87.close();
   missionOwnerV78 = null;
   hubEngine.stop(false);
   engine.stop();
   bioforgeRuntimeV80.stop({ reason: 'forge-open' });
+  if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   forgePlaytest = null;
   if (!titleScreen.root.hidden) titleScreen.hide();
   standaloneContext = 'forge';
@@ -821,6 +1012,7 @@ function showTitleScreen() {
   hubEngine.stop(false);
   engine.stop();
   bioforgeRuntimeV80.stop({ reason: 'title-return' });
+  if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
   destroyMissionInsertionUiV62();
   forgePlaytest = null;
   standaloneContext = null;
@@ -1126,9 +1318,10 @@ function setupCatalogsV62() {
     catalogs: ['enemies'],
     predicate: (record) => {
       const biology = byId('biology-filter').value;
-      return biology === 'all' || ENEMIES.find((entry) => entry.id === record.id)?.biology === biology;
+      return biology === 'all' || ENEMY_ENCYCLOPEDIA_CATALOG_V88.find((entry) => entry.id === record.id)?.biology === biology;
     },
-    limit: ENEMIES.length
+    limit: ENEMY_ENCYCLOPEDIA_CATALOG_V88.length,
+    getDiscoveryV88: id => getEnemyDiscoveryV88(saveSystem.data.enemyDiscoveryV88, id)
   });
   vehicleCatalogV62 = new CatalogWorkbenchV62({
     root: byId('vehicle-catalog-v62'),
@@ -1147,13 +1340,39 @@ function renderArmory() {
   const catalog = byId('armory-kind').value === 'equipment' ? 'equipment' : 'weapons';
   if (armoryCatalogV62.getSnapshot().catalogs[0] !== catalog) armoryCatalogV62.setCatalogs([catalog]);
   else armoryCatalogV62.refresh();
+  let userPanel = byId('user-equipment-v95');
+  if (!userPanel) {
+    userPanel = document.createElement('section');
+    userPanel.id = 'user-equipment-v95';
+    userPanel.className = 'panel';
+    userPanel.setAttribute('aria-label', 'Dotation des références utilisateur');
+    byId('armory-catalog-v62').insertAdjacentElement('afterend', userPanel);
+    userPanel.addEventListener('click', event => {
+      const button = event.target.closest('[data-user-equipment-v95]');
+      if (!button || button.disabled) return;
+      try {
+        if (button.dataset.unequipV95) unequipUserEquipmentV95(saveSystem.data, button.dataset.unequipV95);
+        else equipUserEquipmentV95(saveSystem.data, button.dataset.userEquipmentV95);
+        saveSystem.commit();
+        renderAll();
+        toast('Dotation de référence enregistrée pour la prochaine opération.');
+      } catch (error) { toast(error.message); }
+    });
+  }
+  userPanel.innerHTML = userEquipmentPanelHtmlV95(saveSystem.data);
+  userPanel.hidden = !userPanel.innerHTML;
 }
 
 function renderEnemies() {
   if (!enemyCatalogV62) return;
+  if (!byId('user-reference-effects-v95')) {
+    const effects = createUserReferenceEffectsGalleryV95(document);
+    if (effects) byId('enemy-catalog-v62').insertAdjacentElement('afterend', effects);
+  }
+  byId('enemy-count-v88').textContent = `${ENEMY_ENCYCLOPEDIA_CATALOG_V88.length} DOSSIERS // COMPORTEMENTS & HABITATS`;
   enemyCatalogV62.setPredicate((record) => {
     const biology = byId('biology-filter').value;
-    return biology === 'all' || ENEMIES.find((entry) => entry.id === record.id)?.biology === biology;
+    return biology === 'all' || ENEMY_ENCYCLOPEDIA_CATALOG_V88.find((entry) => entry.id === record.id)?.biology === biology;
   });
 }
 
@@ -1227,7 +1446,15 @@ function renderHubStatus(status = lastHubStatus) {
   byId('hub-deck-label').textContent = status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`;
   byId('hub-room-label').textContent = room;
   const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
+  const openingObjectiveV88 = getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84);
   byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
+  if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${openingObjectiveV88.text} · A/D marcher · W/S ascenseur · E utiliser`;
+  const exerciseObjectiveV89 = getOpeningExerciseObjectiveV89(saveSystem.data.openingExerciseV89, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+  if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = exerciseObjectiveV89.text;
+  const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+  if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
+  byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
+  byId('exit-hub').textContent = hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
   const provingGroundActiveV81 = Boolean(
     status?.provingGroundActiveV81
     || status?.activeAnnexId === 'proving-ground'
@@ -1555,6 +1782,8 @@ function discardProfileRuntimeV78() {
   if (typeof crewUiV85 !== 'undefined') crewUiV85?.close();
   hubOwnerV84 = null;
   bioforgeOwnerV84 = null;
+  if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
+  if (typeof xenoTrialsOwnerV96 !== 'undefined') xenoTrialsOwnerV96 = null;
   pendingOnboardingDialogV84 = null;
   creatorOwnerV84 = null;
   if (playerCreatorUiV84.dialog.open) playerCreatorUiV84.dialog.close();
@@ -1577,8 +1806,10 @@ function startMissionRuntimeV62(context) {
     weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
   } = context;
   engine.setCoop(saveSystem.data.settings.coop);
-  missionOwnerV78 = { epoch: profileEpochV78, profile: saveSystem.profile, operationId: saveSystem.data.strategy.currentOperation?.id };
+  missionOwnerV78 = { epoch: profileEpochV78, profile: saveSystem.profile, timeline: saveSystem.data.createdAt, operationId: saveSystem.data.strategy.currentOperation?.id };
   engine.start({
+    userCasteCampaignV88: !getSpecialOperationByCampaignIdV67(campaign.id),
+    operationId: deployment.operation.id,
     seed: levelSeed.seed,
     world: { ...world, ...worldState },
     campaign,
@@ -1589,6 +1820,7 @@ function startMissionRuntimeV62(context) {
     vehicle,
     costume,
     levelSeed,
+    userEquipmentV95: operationLoadout.userEquipmentV95,
     missionLevel,
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
@@ -1609,7 +1841,12 @@ function startMissionRuntimeV62(context) {
       narrativeArchivesUiV68?.render();
     }
   });
-  if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
+  let resumedMissionV88 = engine.lastResumeResult?.applied === true;
+  if (operationLoadout.resumeState && !resumedMissionV88) resumedMissionV88 = applyMissionResumeState(operationLoadout.resumeState) === true;
+  if (applyOpeningMissionSuppliesV88(engine, deployment.operation, resumedMissionV88)) {
+    try { commitCurrentRuntimeV78(); }
+    catch (error) { toast(`Fret chargé, sauvegarde en attente : ${error.message}`); }
+  }
   // Restore the saved actors first, then honor the current explicit local-coop
   // setting. The transfer hook preserves their personal equipment and charges.
   engine.setCoop(Boolean(saveSystem.data.settings.coop));
@@ -1704,6 +1941,14 @@ function startMissionInsertionV62(context) {
 }
 
 function launchCampaign(campaign = null) {
+  if (saveSystem.data.portMeridienV90 && saveSystem.data.openingV88?.phase === 'ready' && saveSystem.data.portMeridienV90.phase !== 'complete') {
+    toast(getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84)?.text || 'Terminez le débarquement.');
+    showView('hub'); return false;
+  }
+  const opening = saveSystem.data.openingV88;
+  if (opening && !['ready', 'deployed', 'complete'].includes(opening.phase)) {
+    toast(getPlayerOpeningObjectiveV88(opening, saveSystem.data.onboardingV84)?.text || 'Terminez votre prise de poste dans le Tantalus.'); return false;
+  }
   const portPhase = saveSystem.data.shipPortV1?.phase;
   if (portPhase && !['undocked', 'departed'].includes(portPhase)) {
     toast('Larguez le relais civil au pupitre du hangar avant le départ en opération.'); return false;
@@ -1752,6 +1997,7 @@ function launchCampaign(campaign = null) {
     campaign,
     world: { ...world, ...worldState },
     levelSeeds: LEVEL_SEEDS,
+    templateId: deployment.resumed ? deployment.operation.missionTemplateId : null,
     variant: 0
   });
   const levelSeed = missionLevel.levelSeed;
@@ -1822,6 +2068,22 @@ function handleForgePlaytestEvent(event) {
 }
 
 function handleGameEvent(event) {
+  if (event?.type === 'enemy-discovered-v88' || event?.type === 'enemy-defeated-v88') {
+    if (event.scope !== 'campaign' || standaloneContext || !ownsTimelineV84(missionOwnerV78) || missionOwnerV78.operationId !== saveSystem.data.strategy.currentOperation?.id
+      || event.operationId !== missionOwnerV78.operationId) return null;
+    const candidate = { enemyDiscoveryV88: clone(saveSystem.data.enemyDiscoveryV88) };
+    if (recordEnemyDiscoveryV88(candidate, event)) {
+      try { saveSystem.commit({ enemyDiscoveryV88: candidate.enemyDiscoveryV88 }); }
+      catch {
+        if (!missionOwnerV78.discoveryWriteNoticeV88) {
+          missionOwnerV78.discoveryWriteNoticeV88 = true;
+          toast('Découverte non sauvegardée : vérifiez le stockage du profil. Nouvelle tentative automatique en mission.');
+        }
+        return false;
+      }
+    }
+    return true;
+  }
   if (standaloneContext === 'forge-playtest') {
     handleForgePlaytestEvent(event);
     return;
@@ -1992,12 +2254,18 @@ function handleGameEvent(event) {
 }
 
 function persistHub(patch) {
+  if (hubEngine.restoringHubPoseV88) return;
+  if (hubEngine.isPortMeridienV90?.()) return;
   if (standaloneContext === 'forge-playtest' && forgePlaytest) {
     forgePlaytest.hubState = { ...(forgePlaytest.hubState || {}), ...clone(patch) };
     return;
   }
   if (!ownsTimelineV84(hubOwnerV84) || creatorOwnerV84) return;
-  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch } });
+  // Annex runtimes already project their return pose and persist annexPositionY separately.
+  const annex = hubEngine.currentAnnexV71();
+  const parentY = annex ? hubEngine.annexReturnPoseV71?.y ?? hubEngine.restoreReturnPoseV71(annex).y : hubEngine.player?.y;
+  const height = Number.isFinite(parentY) ? { positionY: Math.round(parentY) } : {};
+  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch, ...height } });
 }
 
 function applyHubService(action) {
@@ -2168,17 +2436,30 @@ function resolveAnnexStationV71(interaction) {
 }
 
 function resolveProvingGroundQualificationV81(interaction) {
-  const result = applyProvingGroundQualificationV81(saveSystem.data, interaction?.receipt);
-  if (!result.applied) {
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub') return false;
+  const candidate = clone(saveSystem.data);
+  const result = applyProvingGroundQualificationV81(candidate, interaction?.receipt);
+  if (!result.applied && !result.duplicate) {
     if (!result.duplicate) toast('Qualification M41A refusée : reçu runtime invalide.');
-    return Boolean(result.duplicate);
+    return false;
   }
-  strategyLog(
-    'PROVING GROUND · QUALIFICATION M41A',
-    `Qualification physique validée · score ${Math.max(0, Number(interaction.receipt?.score) || 0)} · soutien armé pour la prochaine opération.`,
-    'hub-annex'
-  );
-  saveSystem.commit();
+  if (candidate.openingV88?.phase === 'qualification') {
+    const advanced = advancePlayerOpeningV88(candidate.openingV88, 'qualified', {
+      onboardingComplete: candidate.onboardingV84?.phase === 'complete',
+      qualificationId: interaction.receipt.id || interaction.receipt.idempotencyKey,
+      qualificationReceiptIds: candidate.hub.annexOperationsV71.provingGround.qualificationReceiptIdsV81
+    });
+    if (advanced.ok) candidate.openingV88 = advanced.state;
+  }
+  if (result.applied) candidate.strategy.log.unshift({
+    id: `qualification-${interaction.receipt.id || interaction.receipt.idempotencyKey}`,
+    day: candidate.clock.day, hour: candidate.clock.hour, type: 'hub-annex', risk: 0, incident: false,
+    title: 'PROVING GROUND · QUALIFICATION M41A',
+    result: `Qualification physique validée · score ${Math.max(0, Number(interaction.receipt?.score) || 0)} · soutien armé pour la prochaine opération.`
+  });
+  try { saveSystem.commit(candidate); }
+  catch (error) { toast(`Qualification non enregistrée : ${error.message}`); return false; }
+  hubEngine.setOpeningV88(saveSystem.data.openingV88);
   renderAll();
   toast('Qualification M41A validée · soutien tactique armé.');
   return true;
@@ -2222,6 +2503,7 @@ function handleShipAnimalRoomActionV87(interaction) {
 
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
+  if (interaction.action.startsWith('port:')) return handlePortMeridienV90(interaction);
   if (standaloneContext === 'forge-playtest') {
     const status = byId('hub-status');
     if (status) status.textContent = `PLAYTEST FORGE · ${interaction.action} · CAMPAGNE INCHANGÉE`;
@@ -2240,6 +2522,8 @@ function handleHubAction(interaction) {
     toast(getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84).text);
     return;
   }
+  if (interaction.action.startsWith('opening:')) return handleOpeningActionV88(interaction);
+  if (interaction.action.startsWith('opening-exercise:')) return handleOpeningExerciseV89(interaction);
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
   if (interaction.action.startsWith('refuge:')) return refugeControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet', 'ship-animal:observe'].includes(interaction.action))
@@ -2249,6 +2533,8 @@ function handleHubAction(interaction) {
     return resolveProvingGroundQualificationV81(interaction);
   }
   if (interaction.action === 'hub:proving-ground-armed' || interaction.action === 'hub:proving-ground-started') {
+    if (interaction.action.endsWith('armed') && saveSystem.data.openingExerciseV89 && saveSystem.data.openingExerciseV89.phase !== 'complete')
+      handleOpeningExerciseV89({ action: 'opening-exercise:restart', sessionId: interaction.sessionId });
     const status = byId('hub-status');
     if (status) status.textContent = interaction.action.endsWith('started')
       ? 'PROVING GROUND · qualification M41A en cours · 9 cibles · recharge obligatoire.'
@@ -2400,6 +2686,7 @@ function launchForgeMissionPlaytest(project) {
     crew: operationLoadout.crew,
     vehicle: operationLoadout.vehicle,
     costume: operationLoadout.costume,
+    userEquipmentV95: operationLoadout.userEquipmentV95,
     levelSeed: missionLevel.levelSeed,
     missionLevel,
     apexDossier: operationLoadout.apexDossier,
@@ -2568,6 +2855,7 @@ function bind() {
   };
   byId('hub-dialogue-cancel').onclick = () => closeHubDialogue();
   byId('hub-dialogue-continue').onclick = () => {
+    if (pendingOpeningDialogV88) { advanceOpeningDialogueV88(); return; }
     if (pendingOnboardingDialogV84) { advanceOnboardingDialogueV84(); return; }
     if (pendingNpcConversationV62) {
       closeHubDialogue();
@@ -2725,6 +3013,7 @@ function bind() {
     engine.stop();
     // A reload suspends the laboratory; only an explicit purge may destroy its population.
     bioforgeRuntimeV80.stop({ purge: false, reason: 'page-unload' });
+    if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
     if (standaloneContext || saveSystem.recoveryNeeded) return;
     persistMissionResumeState();
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
@@ -2738,6 +3027,7 @@ async function boot() {
   if (!validation.ok) throw new Error(`Contrat de contenu invalide : ${validation.failures.join(', ')}`);
   setupEditor();
   setupBioforgeUiV80();
+  setupXenoTrialsUiV96();
   setupRuntimeControls();
   setupCatalogsV62();
   setupNarrativeArchivesUiV68();
@@ -2752,6 +3042,10 @@ async function boot() {
   globalThis.__ATF_AUDIO_V77__ = audio;
   globalThis.__ATF_GAME__ = engine;
   globalThis.__ATF_HUB__ = hubEngine;
+  globalThis.__ATF_XENO_TRIALS_V96__ = {
+    open: () => showView('xenotrials'),
+    snapshot: () => ({ progress: clone(saveSystem.data.xenoTrialsV96), match: xenoTrialsUiV96?.runtime?.getState() || null })
+  };
   globalThis.__ATF_BIOFORGE_V80__ = {
     runtime: bioforgeRuntimeV80,
     ui: bioforgeUiV80,

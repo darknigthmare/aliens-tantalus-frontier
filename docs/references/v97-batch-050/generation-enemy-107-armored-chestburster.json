@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-107-armored-chestburster",
+  "name": "Armored Chestburster",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Armored Chestburster. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Chestburster as pictured: ONE small elongated serpentine larva, smooth eyeless rounded elongated head with a small toothed mouth, ribbed narrow neck and tapered long wormlike body/tail, NO walking legs, NO adult humanoid torso, no external arms in this reference. Rest the rear body on the invisible ground, front neck slightly raised, head facing RIGHT. Add dark organic segmented protective dorsal carapace while preserving the limbless larval silhouette.\nVariant lock: Original systemic armored variant: preserve exact base anatomy, equipment and silhouette family, add practical layered protection consistent with the base. Organic creatures have dark natural carapace plates, not mechanical suits; people retain recognizable uniform and equipment with additional guards. No extra appendages or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-003-chestburster.webp",
+    "sha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259",
+    "visualNotes": "Viewed base sheet: tan limbless serpentine larva, rounded eyeless head with small mouth, ribbed neck and narrow tapering tail; raising front-neck poses. No visible arms or legs."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-8f0f8d0c-7c3b-4661-9f3e-89304e01a9b9.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-107-armored-chestburster.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "24ee5035c5767cb64a574bd021f3ca7242599cf176118fe64e0df9fa631ef307",
+    "bboxAlphaAtLeast16": [
+      238,
+      157,
+      1636,
+      753
+    ],
+    "alphaMin": 0,
+    "alpha0": 1299891,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One intact limbless Chestburster with raised right-facing neck, eyeless toothed head, ribbed underside and dark dorsal organic plates. Single long tapering tail, no adult legs or arms. Right margin under10% but complete.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 238,
+      "top": 157,
+      "right": 138,
+      "bottom": 134
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.59,
+      "y": 0.8489289740698985
+    },
+    "sourceFacing": 1
+  }
+}

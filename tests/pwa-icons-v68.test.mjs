@@ -10,6 +10,7 @@ import { V81_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v81.
 import { PLAYER_VISUAL_ASSETS_V81 } from '../src/player-visual-contract-v81.js';
 import { spriteImageDimensions } from './helpers/sprite-image-dimensions.mjs';
 import { TITLE_SCENE_READY_ASSETS_V79, TITLE_SHIP_ASSETS_V87, TITLE_RETIRED_ASSET_IDS_V87 } from '../src/title-scene-assets-v79.js';
+import { TITLE_SHIP_ANGLE_ASSETS_V88 } from '../src/title-scene-angle-assets-v88.js';
 
 const ICONS = Object.freeze([
   Object.freeze({ src: '/assets/openai/pwa/tantalus-frontier-icon-192-v68.png', size: 192, purpose: 'any', bytes: 45917, hash: '9560b727c011e7d49de746a5994af342e2a6f3ab8dc58aa92bf680cefbe7e689' }),
@@ -84,7 +85,7 @@ test('le document HTML expose les favicons et l’icône Apple depuis les export
 test('le cache V84 conserve les assets runtime acceptés mais exclut le master PWA', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const shell = evaluatePrecacheShell(worker);
-  assert.match(worker, /const CACHE = ['"]atf-v86-physical-placeables-shell-9['"]/u);
+  assert.match(worker, /const CACHE = ['"]atf-v86-xeno-trials-v97-shell-1['"]/u);
   for (const icon of ICONS) {
     assert.ok(shell.includes(icon.src), `${icon.src} absent du tableau SHELL réellement précaché`);
   }
@@ -117,6 +118,7 @@ test('le cache V84 conserve les assets runtime acceptés mais exclut le master P
       '/assets/openai/refuge/v87/refuge-hologram-atlas.png',
       ...TITLE_SCENE_READY_ASSETS_V79.filter(({ id }) => !TITLE_RETIRED_ASSET_IDS_V87.includes(id)).map(({ src }) => src),
       ...TITLE_SHIP_ASSETS_V87.map(({ src }) => src),
+      ...TITLE_SHIP_ANGLE_ASSETS_V88.filter(({ status }) => status === 'ready').map(({ src }) => src),
       '/assets/openai/hub/layers/habitat-quarters-overhead.png',
       '/assets/openai/hub/layers/habitat-quarters-foreground.png',
       '/assets/openai/metroidvania/props/floor-segment.png',

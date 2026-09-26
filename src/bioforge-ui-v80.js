@@ -1,4 +1,9 @@
-import { getEnemyUserCasteV87, getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
+import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95,
+  getEnemyStaticPoseStateOptionsV96 as getEnemyStaticPoseStateOptionsV95, getEnemyStaticPoseDefaultStateV96 as getEnemyStaticPoseDefaultStateV95,
+  getEnemyStaticPoseBaseStateLabelV96 as getEnemyStaticPoseBaseStateLabelV95 } from './enemy-static-poses-v96.js';
+import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
+import { getEnemyUserCampaignV88 } from './enemy-user-campaign-v88.js';
+import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import {
   BIOFORGE_TERRESTRIAL_ROSTER_V80,
   getBioforgeCapacityV87,
@@ -33,6 +38,8 @@ const PROFILE_LABELS_V80 = Object.freeze({
 });
 
 export function getBioforgeProfileLabelV80(profileId) {
+  const dedicated = getBioforgeRosterEntryV80(profileId);
+  if (dedicated?.dedicatedHistoricalPoseV96) return `${dedicated.name} — variante systémique${dedicated.batch === 'v97-050' ? ' · pose fixe' : ' blindée'}`;
   const supplied = getEnemyUserCasteV87(profileId);
   if (supplied) return `${supplied.name} — ${supplied.work}`;
   return getLegacyEnemyAlteredLabelV87(profileId, PROFILE_LABELS_V80[profileId] || String(profileId || 'Profil inconnu'));
@@ -42,7 +49,8 @@ export function getBioforgeProfileLabelV80(profileId) {
 const TOTAL_LIMIT_V87 = 48;
 const ACTIVE_LIMIT_V87 = 12;
 let requestSerialV87 = 0;
-const copyCompositionV87 = lines => lines.map(({ lineId, profileId, quantity }) => ({ lineId, profileId, quantity }));
+const copyCompositionV87 = lines => lines.map(({ lineId, profileId, quantity, visualStateV95 }) => ({ lineId, profileId, quantity,
+  ...(sanitizeEnemyStaticPoseStateV95(profileId, visualStateV95) ? { visualStateV95 } : {}) }));
 const totalV87 = lines => lines.reduce((sum, line) => sum + Number(line.quantity || 0), 0);
 const configurationV87 = source => ({
   composition: copyCompositionV87(source?.composition?.length ? source.composition : [{
@@ -119,9 +127,9 @@ const buttonV87 = (document, text, label, action) => {
   button.addEventListener('click', action);
   return button;
 };
-function thumbnailV87(document, profileId) {
+function thumbnailV87(document, profileId, visualStateV95 = null) {
   const node = elementV87(document, 'span', 'bioforge-profile-thumbnail-v80 bioforge-line-thumbnail-v87');
-  const profile = getBioforgeRosterEntryV80(profileId);
+  const profile = getEnemyUserCasteV87(profileId, visualStateV95) || getBioforgeRosterEntryV80(profileId);
   node.style.backgroundImage = profile ? `url("${profile.path}")` : 'none';
   node.dataset.profileId = profileId;
   node.dataset.atlasColumns = profile?.visualMode === 'static-pose' ? '1' : '4';
@@ -151,6 +159,21 @@ class CompositionEditorV87 {
     this.disabled = false;
     this.limit = TOTAL_LIMIT_V87;
     populateRosterV87(document, profile);
+    // Fixed visual states share one biological identity, cost and discovery record.
+    this.stateLabelV95 = elementV87(document, 'label', 'bioforge-state-v95', 'ÉTAT VISUEL FIXE');
+    this.stateSelectV95 = document.createElement('select');
+    this.stateSelectV95.setAttribute('aria-label', 'État visuel du spécimen');
+    this.stateLabelV95.appendChild(this.stateSelectV95);
+    (profile.parentNode?.parentNode || host).appendChild(this.stateLabelV95);
+    this.stateLabelV95.hidden = true;
+    this.stateSelectV95.addEventListener('change', () => {
+      const line = this.lines.find(entry => entry.lineId === this.selectedId);
+      if (!line || this.disabled) return;
+      const state = sanitizeEnemyStaticPoseStateV95(line.profileId, this.stateSelectV95.value);
+      if (state) line.visualStateV95 = state;
+      else delete line.visualStateV95;
+      this.changed();
+    });
     profile.addEventListener('change', () => this.updateSelected());
     quantity.addEventListener('input', () => this.updateSelected());
     maximum.addEventListener('input', () => { this.changed(); });
@@ -197,14 +220,29 @@ class CompositionEditorV87 {
     const index = this.lines.indexOf(line) + 1;
     this.profile.setAttribute('aria-label', `Profil de la ligne ${index}`);
     this.quantity.setAttribute('aria-label', `Quantité de la ligne ${index}`);
+    this.showStatesV95(line);
+  }
+  showStatesV95(line) {
+    const options = getEnemyStaticPoseStateOptionsV95(line?.profileId);
+    this.stateLabelV95.hidden = options.length < 2;
+    this.stateSelectV95.replaceChildren(...options.map(state => {
+      const option = this.document.createElement('option');
+      option.value = state.stateId || state.id;
+      option.textContent = state.label || state.id;
+      return option;
+    }));
+    this.stateSelectV95.value = sanitizeEnemyStaticPoseStateV95(line?.profileId, line?.visualStateV95)
+      || getEnemyStaticPoseDefaultStateV95(line?.profileId) || '';
   }
   updateSelected() {
     if (this.disabled) return;
     const line = this.lines.find(entry => entry.lineId === this.selectedId);
     if (!line) return;
     line.profileId = this.profile.value;
+    if (!sanitizeEnemyStaticPoseStateV95(line.profileId, line.visualStateV95)) delete line.visualStateV95;
     // Keep invalid input visible and block submission instead of silently truncating it.
     line.quantity = Number(this.quantity.value);
+    this.showStatesV95(line);
     this.changed();
   }
   changed() { this.draw(); this.onChange?.(); }
@@ -221,7 +259,8 @@ class CompositionEditorV87 {
       const row = elementV87(this.document, 'li', 'bioforge-composition-line-v87');
       row.dataset.lineId = line.lineId;
       row.dataset.selected = String(line.lineId === this.selectedId);
-      const name = getBioforgeProfileLabelV80(line.profileId);
+      const state = getEnemyUserCasteV87(line.profileId, line.visualStateV95);
+      const name = getBioforgeProfileLabelV80(line.profileId) + (state?.stateLabelV95 ? ` · ${state.stateLabelV95}` : '');
       const select = buttonV87(this.document, `${index + 1}. ${name} × ${line.quantity}`, `Modifier la ligne ${index + 1} : ${name}`, () => {
         if (this.disabled) return;
         this.selectedId = line.lineId;
@@ -257,11 +296,11 @@ class CompositionEditorV87 {
       down.disabled = this.disabled || index === this.lines.length - 1;
       remove.disabled = this.disabled || this.lines.length === 1;
       actions.replaceChildren(up, down, remove);
-      row.replaceChildren(thumbnailV87(this.document, line.profileId), select, actions);
+      row.replaceChildren(thumbnailV87(this.document, line.profileId, line.visualStateV95), select, actions);
       return row;
     }));
     }
-    for (const input of [this.profile, this.quantity, this.maximum]) input.disabled = this.disabled;
+    for (const input of [this.profile, this.quantity, this.maximum, this.stateSelectV95]) input.disabled = this.disabled;
     this.add.disabled = this.disabled || sum >= this.limit;
   }
   focusLine(id) {
@@ -308,6 +347,11 @@ export class BioforgeUiV80 {
     this.busy = false;
     this.state = null;
     this.model = null;
+    this.missionBehaviorV90 = elementV87(this.document, 'span', 'bioforge-metrics-v80');
+    this.missionBehaviorV90.id = 'bioforge-mission-behavior-v90';
+    this.missionBehaviorV90.hidden = true;
+    (this.cost.parentNode || root).appendChild(this.missionBehaviorV90);
+    this.profile.setAttribute('aria-describedby', 'bioforge-cost-v80 bioforge-mission-behavior-v90');
     this.editor = new CompositionEditorV87({ document: this.document,
       host: requiredElementV80(root, '#bioforge-composition-editor-v87'), profile: this.profile, quantity: this.quantity,
       maximum: requiredElementV80(root, '#bioforge-max-concurrent-v87'), add: requiredElementV80(root, '#bioforge-add-line-v87'),
@@ -335,6 +379,8 @@ export class BioforgeUiV80 {
     this.terminalToggleV87.id = 'bioforge-terminal-toggle-v87';
     this.terminalToggleV87.className = 'button bioforge-terminal-toggle-v87';
     const terminal = root.querySelector('.bioforge-terminal-v80') || root;
+    const effects = createUserReferenceEffectsGalleryV95(this.document, { id: 'bioforge-reference-effects-v95' });
+    if (effects) terminal.appendChild(effects);
     if (terminal.prepend) terminal.prepend(this.terminalToggleV87);
     else terminal.appendChild(this.terminalToggleV87);
   }
@@ -348,7 +394,8 @@ export class BioforgeUiV80 {
   }
   readSelection() { return this.editor.selection(); }
   syncSelection() {
-    const profile = getBioforgeRosterEntryV80(this.profile.value);
+    const selected = this.editor?.lines.find(line => line.lineId === this.editor.selectedId);
+    const profile = getEnemyUserCasteV87(this.profile.value, selected?.visualStateV95) || getBioforgeRosterEntryV80(this.profile.value);
     const source = profile?.path || '';
     this.preview.src = source;
     const supplied = profile?.visualMode === 'static-pose';
@@ -358,9 +405,37 @@ export class BioforgeUiV80 {
     this.thumbnail.dataset.atlasRows = supplied ? '1' : '8';
     this.thumbnail.dataset.atlasFrame = '0';
     this.profileName.textContent = getBioforgeProfileLabelV80(profile?.profileId);
+    const baseStateLabel = supplied ? getEnemyStaticPoseBaseStateLabelV95(profile?.profileId) : null;
     this.cost.textContent = `COÛT ACTIF UNITAIRE ${profile?.cost || 0}/12 · ${supplied
-      ? 'Pose fixe · animations manquantes · comportement labo simplifié'
-      : 'APERÇU NON DÉFORMÉ'}`;
+      ? profile.dedicatedHistoricalPoseV96 ? 'Pose fixe dédiée · animations manquantes · comportement historique conservé'
+      : profile.specializedBehaviorV95?.runtimeScopes?.includes('bioforge')
+        ? 'Pose fixe · animations manquantes · garde défensive adaptée'
+        : 'Pose fixe · animations manquantes · comportement labo simplifié'
+      : 'APERÇU NON DÉFORMÉ'}${profile?.locomotion === 'aquatic' ? ' · bassin de confinement'
+      : profile?.locomotion === 'flying' ? ' · déplacement aérien 2D' : ''}${profile?.stateLabelV95 ? ` · ${profile.stateLabelV95}`
+      : baseStateLabel ? ` · ${baseStateLabel}${getEnemyStaticPoseStateOptionsV95(profile.profileId).length > 1 ? '' : ' (seul état visuel disponible)'}` : ''}`;
+    const definition = supplied ? getEnemyUserCampaignV88(profile.profileId) : null;
+    this.renderMissionBehaviorV90(definition?.specializedBehaviorV95 || definition?.specializedBehaviorV90 || definition?.specializedBehaviorV89);
+  }
+  renderMissionBehaviorV90(behavior) {
+    const host = this.missionBehaviorV90;
+    host.replaceChildren(); host.hidden = !behavior?.id || !behavior?.label;
+    delete host.dataset.missionBehavior;
+    if (host.hidden) return;
+    host.dataset.missionBehavior = behavior.id;
+    const inLab = behavior.runtimeScopes?.includes('bioforge');
+    host.appendChild(elementV87(this.document, 'span', '', inLab
+      ? `MISSION ET BIOFORGE — ${behavior.label} · adaptation partielle. ${behavior.summary} ${behavior.adaptationNote} `
+      : `EN MISSION — ${behavior.label} · adaptation partielle. Non reproduit dans le labo simplifié. `));
+    for (const source of new Set(Array.isArray(behavior.sourceUrls) ? behavior.sourceUrls : [])) {
+      let url;
+      try { url = new URL(source); } catch { continue; }
+      if (url.protocol !== 'https:' || url.username || url.password) continue;
+      const link = elementV87(this.document, 'a', '', `Référence — ${url.hostname}`);
+      link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
+      link.dataset.missionBehaviorSource = behavior.id;
+      host.appendChild(link);
+    }
   }
   async submitReinforcements() {
     if (this.busy || !this.model?.canEditQueue || typeof this.onReinforce !== 'function' || !this.reinforcementEditor.valid()) return false;

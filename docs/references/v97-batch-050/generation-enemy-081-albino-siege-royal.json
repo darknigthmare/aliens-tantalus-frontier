@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-081-albino-siege-royal",
+  "name": "Albino Siege Royal",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomical and art-style reference, NOT a sheet to reproduce. Reference is a multi-pose sheet of one heavy upright biomechanical biped facing right, thick limbs and low layered swept-back royal crest, four reduced dorsal tubes and one segmented tail. Use the first calm standing pose as anatomical reference; output only one new individual.\nSubject: Albino Siege Royal. This is an original systemic project adaptation, not an official model or a canonical 1:1 claim.\nVariant lock: PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-029 Siege Royal. Preserve one heavy upright biped at Praetorian scale with a substantially thick ribbed torso, pelvis, thighs, forearms and shoulders; one broad low layered royal crest swept backward, clearly smaller and less ornate than a Queen crown and never a Crusher head shield; one narrow eyeless anterior dome and toothed maw with inner jaw; exactly TWO main arms, TWO digitigrade legs and exactly four short reduced dorsal tubes below the crest; and one complete long segmented siege tail visibly rooted at a thick sacrum and ending in one sharp spear tip. Albino changes newly authored organic pigment/material response only: warm pearl and pale parchment carapace, cool ash-gray wet recesses, restrained translucent rose-taupe joints, chalk-ivory crest edges and teeth, with sparse neutral gray-brown battle wear. Heavy siege mass, crest contour, limb count, dorsal-tube count, sacral tail root, scale and right-facing profile remain invariant. No Queen secondary chest arms or ovipositor, Crusher shield/quadruped posture, armor, weapon, jewellery, cannon, cybernetics, pure white, glow, ice, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.\nComposition: full body, near-side profile facing RIGHT, slightly three-quarter only enough to separate limbs; all head, feet, claws and complete tail inside canvas, with ten percent clear transparent padding on every side. Grounded neutral ready stance, feet on a common invisible ground. One creature only, no second pose.\nStyle: match reference's detailed dark science-fiction biomechanical digital painted sprite, precise chitin/rib relief, controlled highlights, consistent readable shading; use requested ivory/ash/pink material variation instead of pure white.\nBackground: genuinely transparent PNG alpha, no backdrop, no floor shadow, no scene, no grid, no contact sheet, no UI, text, watermark, blood or gore. Preserve exact base anatomy; no extra limbs or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png",
+    "sha256": "44fb95c87bca817f17a0539109364c7eda306459eeaafc790bc0a61f77aa2a26",
+    "visualNotes": "Reference is a multi-pose sheet of one heavy upright biomechanical biped facing right, thick limbs and low layered swept-back royal crest, four reduced dorsal tubes and one segmented tail. Use the first calm standing pose as anatomical reference; output only one new individual."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-d4a80222-a2c2-4dba-808b-66aeb4e47531.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-081-albino-siege-royal.png",
+    "width": 1361,
+    "height": 1156,
+    "sha256": "1c9eb66f3d496951927d515285f081fdef57b9014e8a9a79a28826d7bf8172a7",
+    "bboxAlphaAtLeast16": [
+      90,
+      67,
+      1276,
+      1107
+    ],
+    "alphaMin": 0,
+    "alpha0": 1123070,
+    "totalPixels": 1573316
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing heavy biped, complete crest, feet and spear tail. Native alpha confirmed. Clear margins preserved but less than requested 10% on some sides; no anatomy cropped. Original project systemic static adaptation, not a canonical 1:1 or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.7,
+      "y": 0.9576124567474048
+    },
+    "sourceFacing": 1
+  }
+}

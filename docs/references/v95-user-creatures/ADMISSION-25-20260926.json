@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-26",
+  "sourceNumber": 25,
+  "status": "accepted-static-adaptation",
+  "runtimeAdmission": true,
+  "supersedes": "generation-quality-25-20260926.json",
+  "sourceFile": "Gemini_Generated_Image_rlavtbrlavtbrlav.jpg",
+  "sourceSha256": "839cff5329ebce8323be1ea888cc3076a36a0b416b282d606c6717d22d3d4122",
+  "nativeOutputPath": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-4fbcf7fb-2154-45c9-b715-f921098e16a2.png",
+  "runtimePath": "/assets/openai/sprites/static-enemy-v95/ref-25-quadrupede-pale-epineux.png",
+  "sha256": "a0fd251e4802655e3745b716af0ab1a80cb90eb16b4575263f5bbaf78bcf67db",
+  "bytes": 1446886,
+  "width": 1498,
+  "height": 1050,
+  "alphaBounds": [
+    81,
+    38,
+    1458,
+    1019
+  ],
+  "nativeBytesUnchanged": true,
+  "review": {
+    "status": "accepted-at-browser-display-scale",
+    "backgrounds": [
+      "white",
+      "checker",
+      "black"
+    ],
+    "reviewers": [
+      "root",
+      "v95_generate_a",
+      "v95_runtime_finish"
+    ],
+    "evidenceRoot": "E:/CodexQA/AliensTantalus/v95-defender-20260926/composite-grey-purple-25",
+    "evidenceFiles": [
+      "native-white-1.png",
+      "native-checker-1.png",
+      "native-black-1.png",
+      "report.json"
+    ],
+    "correction": "Le rejet provisoire reposait sur un aperçu natif exposant les couleurs RGB de pixels transparents. Les trois compositions réellement alpha-compositées ne montrent pas de halo diffus ni de fond opaque à leur échelle affichée. Le même PNG natif est admis sans modification de pixels.",
+    "limitations": [
+      "Inspection visuelle à l’échelle affichée des captures, pas certification exhaustive pixel par pixel.",
+      "Marge visible minimale mesurée 2,67 % ; la demande initiale de 10 % n’a pas été respectée, sans coupe visible de silhouette.",
+      "Légères réinterprétations des détails de bouche ; ce n’est pas une extraction pixel identique.",
+      "Nom descriptif provisoire ; aucune identité Pathogen canonique attribuée.",
+      "Pose statique unique ; aucune animation livrée."
+    ]
+  },
+  "groundContact": {
+    "pivot": {
+      "x": 0.56,
+      "y": 0.9704761904761905
+    },
+    "basis": "Ancrage horizontal sous le corps ; contact vertical à la griffe visible la plus basse. Géométrie de jeu adaptée, contrôlée dans le runtime.",
+    "runtimeCheck": { "actorY": 368, "bodyHeight": 102, "groundY": 470, "transformedAlphaBottom": 470, "renderWidth": 230, "renderHeight": 161.21495327102804 },
+    "evidence": ["E:/CodexQA/AliensTantalus/v95-defender-20260926/source25-campaign/report.json", "E:/CodexQA/AliensTantalus/v95-defender-20260926/source25-bioforge/report.json"],
+    "visualScope": "Campagne et Bioforge relus à l’échelle affichée ; membres arrière relevés dans la pose source, pas d’animation de marche inventée."
+  },
+  "regeneration": false,
+  "pixelPostProcessing": false
+}

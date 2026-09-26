@@ -1,0 +1,146 @@
+{
+  "schema": 90,
+  "createdAt": "2026-09-23",
+  "mode": "integrated-only",
+  "entries": [
+    {
+      "id": "uss-sulaco-front-quarter-v90",
+      "prompt": "Use case: stylized-concept. Produce ONE standalone original raster game sprite of the USS SULACO from Aliens (1986), not a redesign. The last THREE images are anatomy/geometry references: 1 full studio miniature side silhouette (aft LEFT, bow RIGHT); 2 starboard middle hull details; 3 actual aft rectangular exhaust/plate assembly. Sources: https://modelermagic.com/sulaco-studio-model/ with fabrication corroboration https://www.johnleemodelmaker.me/aliens.aspx. Preserve the extremely long narrow industrial rifle-like hull, forward rounded box bulge, cluster of unequal thin forward antenna spars and one vertical bow mast, one dorsal turret, long side rail and underslung aft keel. Rear is a broad rounded housing with the DARK RECTANGULAR projecting plates in reference3, NOT round rocket engines. Match cool gray hull, panel division and relative masses of the reference. No extra fins/wings, no spaceship cockpit canopy, no invented four circular thrusters, no glow. Full vessel with ALL antennae and keel in frame, 10% margin, 1536x1024 landscape. Newly painted highly detailed bitmap suitable for menu compositing, restrained space light revealing the actual structure, crisp clean contour, genuinely TRANSPARENT alpha background, opaque ship. No floor, cast shadow on backdrop, workshop/person/stand, photo borders, UI, text/nameplate/watermark. Exactly one ship and one camera view, not an atlas. CAMERA: bow-starboard three-quarter, moderately foreshortened: bow antennae nearest camera at lower RIGHT, aft recedes to upper LEFT. Camera 25 degrees ahead of true starboard side and 10 degrees above, so the bow's front face AND entire starboard side are visible. Preserve hull proportions in 3D; do not squash a side elevation or substitute an unrecognizable front-on fighter.",
+      "tool": "integrated-imagegen",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-46a4d04b-1ce6-4e6b-a7b7-f8fe7a06c3d8.png",
+      "projectPath": "docs/references/v90-art-batch/uss-sulaco-front-quarter.png",
+      "status": "reviewed-private-reserve",
+      "reviewNote": "Inscription SULACO integree : ne pas enregistrer comme Tantalus.",
+      "canonExact": false
+    },
+    {
+      "id": "uss-sulaco-rear-quarter-v90",
+      "prompt": "Use case: stylized-concept. Produce ONE standalone original raster game sprite of the USS SULACO from Aliens (1986), not a redesign. The last THREE images are anatomy/geometry references: 1 full studio miniature side silhouette (aft LEFT, bow RIGHT); 2 starboard middle hull details; 3 actual aft rectangular exhaust/plate assembly. Sources: https://modelermagic.com/sulaco-studio-model/ with fabrication corroboration https://www.johnleemodelmaker.me/aliens.aspx. Preserve the extremely long narrow industrial rifle-like hull, forward rounded box bulge, cluster of unequal thin forward antenna spars and one vertical bow mast, one dorsal turret, long side rail and underslung aft keel. Rear is a broad rounded housing with the DARK RECTANGULAR projecting plates in reference3, NOT round rocket engines. Match cool gray hull, panel division and relative masses of the reference. No extra fins/wings, no spaceship cockpit canopy, no invented four circular thrusters, no glow. Full vessel with ALL antennae and keel in frame, 10% margin, 1536x1024 landscape. Newly painted highly detailed bitmap suitable for menu compositing, restrained space light revealing the actual structure, crisp clean contour, genuinely TRANSPARENT alpha background, opaque ship. No floor, cast shadow on backdrop, workshop/person/stand, photo borders, UI, text/nameplate/watermark. Exactly one ship and one camera view, not an atlas. CAMERA: aft-starboard three-quarter, stronger depth than a side view: aft housing nearest camera at lower LEFT, long bow recedes towards upper RIGHT. Camera 30 degrees behind true starboard side and 12 degrees above. Actual segmented rear plates in reference3 clearly visible. Do not invent circular glowing engine bells. Entire elongated original silhouette remains recognizable.",
+      "tool": "integrated-imagegen",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-6922239c-d688-4e21-a4d2-a54e5f6f121a.png",
+      "projectPath": "docs/references/v90-art-batch/uss-sulaco-rear-quarter.png",
+      "status": "fan-made-reference-reviewed",
+      "runtimePath": "assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png",
+      "canonExact": false
+    },
+    {
+      "id": "narcissus-front-quarter-v90",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated detailed original bitmap spaceship for the game's orbital title screen. The last FOUR images are observed photos of film miniatures, NOT output canvases: image1 Narcissus front, image2 Narcissus side, image3 Nostromo whole ship, image4 Nostromo underside detail. Reference gallery by the original effects team: https://dennisvideo1138-1a506.kxcdn.com/Alien.html. Reconstruct ONLY the requested ship; do NOT combine the two ships. Follow the photo geometry, panel layouts, relative masses, taper and material as tightly as possible, not a generic spaceship. Muted weathered off-white/gray original 1979 paint, no yellow prototype paint. New high-detail raster rendering, not a photographic cutout, restrained clean lighting for compositing. Landscape1536x1024, entire ship centered with 10% empty safe margin. Truly TRANSPARENT alpha background, no rectangular backdrop, no floor/cast shadow, no halo, no flames, no stars/planet/UI, no text/logo/watermark, no workshop/stand/wires. Single vessel, single view, no collage or sprite sheet. SUBJECT: NARCISSUS lifeboat in Alien(1979), use ONLY images1 and2. Keep its very low squat triangular wedge/delta-planform hull, broad thin triangular lateral panels, raised short faceted cockpit body at the broad end, pale twin underslung pods and dense diagonal panel lines. CAMERA: almost matching the front view image1, but 15 degrees to starboard and slightly above, so the thin right edge gains depth. Do not turn it into a modern fighter with swept wings or tall tail fins. No Nostromo parts.",
+      "tool": "integrated-imagegen",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-e6622190-9b50-4fc5-a483-7e460a3e3081.png",
+      "projectPath": "docs/references/v90-art-batch/narcissus-front-quarter.png",
+      "status": "fan-made-reference-reviewed",
+      "runtimePath": "assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png",
+      "canonExact": false
+    },
+    {
+      "id": "narcissus-side-depth-v90",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated detailed original bitmap spaceship for the game's orbital title screen. The last FOUR images are observed photos of film miniatures, NOT output canvases: image1 Narcissus front, image2 Narcissus side, image3 Nostromo whole ship, image4 Nostromo underside detail. Reference gallery by the original effects team: https://dennisvideo1138-1a506.kxcdn.com/Alien.html. Reconstruct ONLY the requested ship; do NOT combine the two ships. Follow the photo geometry, panel layouts, relative masses, taper and material as tightly as possible, not a generic spaceship. Muted weathered off-white/gray original 1979 paint, no yellow prototype paint. New high-detail raster rendering, not a photographic cutout, restrained clean lighting for compositing. Landscape1536x1024, entire ship centered with 10% empty safe margin. Truly TRANSPARENT alpha background, no rectangular backdrop, no floor/cast shadow, no halo, no flames, no stars/planet/UI, no text/logo/watermark, no workshop/stand/wires. Single vessel, single view, no collage or sprite sheet. SUBJECT: NARCISSUS lifeboat in Alien(1979), use ONLY images1 and2. Keep its very low squat triangular wedge hull, raised faceted bridge at the broad end, underslung pods, steep taper to the narrow end exactly as in image2. CAMERA: three-quarter along the SIDE in image2, 15 degrees toward the broad end and15 degrees above, showing the top and near side while the narrow end recedes to the right. Full thin triangular ship, not a jetfighter or a different shuttle.",
+      "tool": "integrated-imagegen",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-92da552e-b352-4c2f-892b-3ada0d8528af.png",
+      "projectPath": "docs/references/v90-art-batch/narcissus-side-depth.png",
+      "status": "fan-made-reference-reviewed",
+      "runtimePath": "assets/openai/ui/title/v90/orbitals/narcissus-side-depth.png",
+      "canonExact": false
+    },
+    {
+      "id": "nostromo-threequarter-v90",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated detailed original bitmap spaceship for the game's orbital title screen. The last FOUR images are observed photos of film miniatures, NOT output canvases: image1 Narcissus front, image2 Narcissus side, image3 Nostromo whole ship, image4 Nostromo underside detail. Reference gallery by the original effects team: https://dennisvideo1138-1a506.kxcdn.com/Alien.html. Reconstruct ONLY the requested ship; do NOT combine the two ships. Follow the photo geometry, panel layouts, relative masses, taper and material as tightly as possible, not a generic spaceship. Muted weathered off-white/gray original 1979 paint, no yellow prototype paint. New high-detail raster rendering, not a photographic cutout, restrained clean lighting for compositing. Landscape1536x1024, entire ship centered with 10% empty safe margin. Truly TRANSPARENT alpha background, no rectangular backdrop, no floor/cast shadow, no halo, no flames, no stars/planet/UI, no text/logo/watermark, no workshop/stand/wires. Single vessel, single view, no collage or sprite sheet. SUBJECT: the USCSS NOSTROMO tug alone in Alien(1979), use ONLY images3 and4. No refinery tower/platform. CAMERA: preserve the whole-ship camera orientation of image3 with a slight10degree lateral orbit for added depth. Keep the photograph's broad industrial central body, small offset detailed bridge projection, two large squared foreground housings, paired raised box openings over central upper structure, lateral angled machinery arms and huge blocky side housings. Maintain asymmetric actual detailing and exact relative masses; not a symmetric sleek spacefighter. The view should be recognizable as the specific practical model.",
+      "tool": "integrated-imagegen",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-d98b65ca-4e7c-47cf-9879-37308248a1ab.png",
+      "projectPath": "docs/references/v90-art-batch/nostromo-threequarter.png",
+      "status": "fan-made-reference-reviewed",
+      "runtimePath": "assets/openai/ui/title/v90/orbitals/nostromo-threequarter.png",
+      "canonExact": false
+    },
+    {
+      "id": "nostromo-underside-depth-v90",
+      "prompt": "Use case: stylized-concept. Asset type: ONE isolated detailed original bitmap spaceship for the game's orbital title screen. The last FOUR images are observed photos of film miniatures, NOT output canvases: image1 Narcissus front, image2 Narcissus side, image3 Nostromo whole ship, image4 Nostromo underside detail. Reference gallery by the original effects team: https://dennisvideo1138-1a506.kxcdn.com/Alien.html. Reconstruct ONLY the requested ship; do NOT combine the two ships. Follow the photo geometry, panel layouts, relative masses, taper and material as tightly as possible, not a generic spaceship. Muted weathered off-white/gray original 1979 paint, no yellow prototype paint. New high-detail raster rendering, not a photographic cutout, restrained clean lighting for compositing. Landscape1536x1024, entire ship centered with 10% empty safe margin. Truly TRANSPARENT alpha background, no rectangular backdrop, no floor/cast shadow, no halo, no flames, no stars/planet/UI, no text/logo/watermark, no workshop/stand/wires. Single vessel, single view, no collage or sprite sheet. SUBJECT: USCSS NOSTROMO tug alone in Alien(1979), use ONLY images3 and4. No refinery. CAMERA: a low three-quarter underside view, approx30degrees below the main hull, near corner closest at lowerleft and other end receding upperright. Reconstruct the actual dense underside panel grid and hanging industrial plumbing seen in image4 and connect it to the exact broad squat silhouette and three large structural masses in image3. Full hull and lateral housings in frame, not the close-up crop. Never add arbitrary engine bells, modern aircraft wings or weapons.",
+      "tool": "integrated-imagegen",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-000748f8-1365-4800-9a12-7489f78b568a.png",
+      "projectPath": "docs/references/v90-art-batch/nostromo-underside-depth.png",
+      "status": "reviewed-private-reserve",
+      "reviewNote": "Geometrie ventrale extrapolee, reference insuffisante pour admission.",
+      "canonExact": false
+    },
+    {
+      "id": "film-queen-1986-base-v90",
+      "file": "film-queen-1986-base.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Create ONE standalone full-body base game sprite of the Alien Queen as seen in Aliens (1986). Use the FIRST THREE of the four attached images as observed anatomy references: officially licensed NECA photographs of the 1986 Queen, two details and one whole-body view. Ignore image four (a DIFFERENT creature). This is a newly drawn fan game production sprite, not a product-photo extraction. Faithfully retain the enormous swept-back multi-point crown, narrow long secondary head beneath its forward crest, tall black-blue biomechanical ribcage, TWO long primary arms and TWO smaller secondary chest arms (FOUR arms total), TWO tall reverse-jointed legs, and ONE long segmented blade-ended tail. Study the refs closely; no extra paired legs, no generic warrior dome, no wings. Remove collectible joint cuts and supports; depict coherent living biomechanical anatomy. Base idle crouch, body faces screen-right in a mild three-quarter RPG view, camera about 15 degrees above torso; crown and entire curling tail fully in frame, every silhouette tip within 10% transparent safe margin. Blue-black glossy exoskeleton, soft cool gray readable highlights, natural metallic teeth; no neon color redesign. Detailed clean raster game sprite, single character only, single view, NOT sprite sheet, not pixelated or a collage. Transparent alpha background, no floor, no glow, no halo, no cast shadow, no text, no watermark, no border, no props or human victim. Preserve recognizable source-specific anatomy over spectacle.",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-7b645fc8-14b1-4c59-8530-ca884471a793.png",
+      "projectPath": "docs/references/v90-art-batch/film-queen-1986-base.png",
+      "status": "reviewed-private-reserve",
+      "reviewNote": "Quatre bras et deux jambes lisibles, marge verticale6px trop serree ; aucun remplacement runtime.",
+      "canonExact": false
+    },
+    {
+      "id": "game-afe-spitter-base-v90",
+      "file": "game-afe-spitter-base.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Create ONE standalone full-body base game sprite of the Spitter from Aliens: Fireteam Elite, using ONLY the FOURTH attached image as anatomy and material reference: the official licensed NECA Spitter product photo on white. The first three show a different Queen and must NOT influence this creature. Newly draw the creature as an original fan-game asset, do not reuse the photograph. Match its distinctive flattened elongated dark cranial plate and THREE visible acid-green sacs along the side underneath it, narrow biomechanical torso, paired curved rear-facing dorsal tubes, TWO slim clawed arms, TWO crouching digitigrade legs, long ridged ONE tail curving behind. No Queen crown, no quadruped Burster body, no Colonial Marines Spitter spikes, no green sacs scattered over the body. The license toy has visible joints: remove toy hinges and seams while retaining proportions and source details. Full creature and tail tip within 10% transparent margin. Face screen-right, mild three-quarter angle with camera 15 degrees above torso for RPG presentation, alert low idle stance, all limbs separable in silhouette. Restrained dark gunmetal and brown-black gloss, acid-green side sacs and readable neutral highlights. High-detail clean raster sprite, not pixel art, no collage, no animation sheet. Transparent alpha background, no ground, no black backdrop or halo, no cast shadow, no text/logo, no props, no attack discharge. One faithful static base pose only.",
+      "originalPath": null,
+      "projectPath": null,
+      "status": "moderation_blocked",
+      "canonExact": false,
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 4a56f34c-8f60-45c7-9c6d-b68622a7b32b.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "retried": false
+    },
+    {
+      "id": "usm-auriga-threequarter-v90",
+      "file": "usm-auriga-threequarter.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Subject: USM Auriga from Alien Resurrection (1997). Use ONLY attached images ONE and TWO, the authentic studio miniature gallery from Propstore, as structural references. Images THREE through FIVE are a different vehicle and must not influence this one. Match the long flattened hull with narrow right-hand projection, a wide heavy midbody with multiple massive downward/ribbed box housings, the broader paired structures at the left end, and the small raised T-shaped top assembly visible on the prop. Reconstruct clean unbroken surfaces where the aged auction miniature has cracks; do not reproduce the black display pole or missing/damaged panels as intentional design. Camera: mild elevated three-quarter view, corresponding to image one, with the narrow right end closer to us and the broad left end receding, slightly greater longitudinal foreshortening than image one. This must still read as the elongated Auriga and not an ocean liner or generic frigate. Deliver one original high-detail raster game-menu ship illustration, faithful to the observed prop geometry rather than a redesigned spaceship. One ship only, one camera view, entire silhouette inside a generous 10 percent transparent margin, true transparent alpha background, no floor, no stand, no stars, no glow/halo, no border, no caption or watermark. Neutral readable gray studio lighting with restrained highlights. Keep proportions, visible structural arrangement and coherent industrial detail. Do not add unexplained wings, nacelles or weapons. No sheet or multiple views.",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-ce0baaf6-5bfd-4a71-89dd-e03105f3b646.png",
+      "projectPath": "docs/references/v90-art-batch/usm-auriga-threequarter.png",
+      "status": "reviewed-private-candidate",
+      "reviewNote": "Volumes principaux reconnaissables mais details amplifies ; integration non effectuee.",
+      "canonExact": false
+    },
+    {
+      "id": "usm-auriga-low-side-v90",
+      "file": "usm-auriga-low-side.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Subject: USM Auriga from Alien Resurrection (1997). Use ONLY attached images ONE and TWO, authentic studio miniature photos at Propstore. Ignore images THREE through FIVE (different dropship). Faithfully match the elongated flattened main body, the heavy repeated hanging box/rib modules, broad layered structures at the left end, narrow elongated right-hand projection, and small top T assembly. Keep relative sizes as the side reference image two; do not invent circular rocket engines or wings. Draw a separate new camera angle: nearly broadside with 12 degrees of longitudinal perspective, camera just BELOW the midline showing the bottom edges of the hanging rib modules without inventing a huge belly. Broad left end is slightly nearer, thin right end recedes. An actual perspective drawing, not stretching or mirroring another view. Remove auction stand and accidental cracks. Deliver one original high-detail raster game-menu ship illustration, faithful to the observed prop geometry rather than a redesigned spaceship. One ship only, one camera view, entire silhouette inside a generous 10 percent transparent margin, true transparent alpha background, no floor, no stand, no stars, no glow/halo, no border, no caption or watermark. Neutral readable gray studio lighting with restrained highlights. Keep proportions, visible structural arrangement and coherent industrial detail. Do not add unexplained wings, nacelles or weapons. No sheet or multiple views.",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-6fff4511-5a45-4229-90d7-6cb0fcf24f82.png",
+      "projectPath": "docs/references/v90-art-batch/usm-auriga-low-side.png",
+      "status": "reviewed-private-reserve",
+      "reviewNote": "Coque trop epaisse et compacte par rapport aux photos de production.",
+      "canonExact": false
+    },
+    {
+      "id": "ud4l-cheyenne-front-quarter-v90",
+      "file": "ud4l-cheyenne-front-quarter.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Subject: UD-4L Cheyenne dropship from Aliens (1986), ONLY attached images THREE FOUR FIVE are the authentic studio miniature geometry references; images ONE TWO show an unrelated Auriga. Keep the film miniature compact helicopter-like armored body and detailed dark faceted cockpit in a lowered pointed left nose, paired engine intakes on the upper rear fuselage, long narrow tail with fins, flank front missile housings. Match deployed upward/backward articulated wing-and-pod configuration shown in image THREE, not airplane wings. Preserve worn subdued olive brown military paint and coherent vents. View: FRONT three-quarter looking diagonally down toward cockpit, nose toward bottom-left, tail receding upper-right; about25 degrees ahead of broadside and15 degrees elevated. All nose, tail, pods and tips clearly distinct and fully visible. No helicopter rotor, no extended human-sized guns, no firing or flames. No extra aircraft. Deliver one original high-detail raster game-menu ship illustration, faithful to the observed prop geometry rather than a redesigned spaceship. One ship only, one camera view, entire silhouette inside a generous 10 percent transparent margin, true transparent alpha background, no floor, no stand, no stars, no glow/halo, no border, no caption or watermark. Neutral readable gray studio lighting with restrained highlights. Keep proportions, visible structural arrangement and coherent industrial detail. Do not add unexplained wings, nacelles or weapons. No sheet or multiple views.",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-77179aae-c554-4930-b59a-42ba3451d9ab.png",
+      "projectPath": "docs/references/v90-art-batch/ud4l-cheyenne-front-quarter.png",
+      "status": "reviewed-private-candidate",
+      "reviewNote": "Configuration deployee lisible, usure amplifiee ; integration non effectuee.",
+      "canonExact": false
+    },
+    {
+      "id": "ud4l-cheyenne-side-depth-v90",
+      "file": "ud4l-cheyenne-side-depth.png",
+      "tool": "image_gen.imagegen",
+      "prompt": "Subject: UD-4L Cheyenne dropship from Aliens (1986). Use ONLY attached images THREE FOUR FIVE, authentic miniature photos; ignore images ONE TWO which show a different ship. Match compact olive-brown armored helicopter-like fuselage, angular nose and cockpit at left, paired upper rear intakes, long narrow tapering tail with thin fins, broad front flank missile housings. This time wings/pods stowed along the sides exactly as FOUR and FIVE (not deployed as THREE). Separate camera view: almost broadside but20 degrees forward looking back along nose to tail, camera only5 degrees above hull, nose left nearer camera and tail right in depth. Faithful small flank markings without inventing a giant name. No rotors, no unrelated wings, no engine flames. A true distinct perspective, not a mirrored/scaled profile. Deliver one original high-detail raster game-menu ship illustration, faithful to the observed prop geometry rather than a redesigned spaceship. One ship only, one camera view, entire silhouette inside a generous 10 percent transparent margin, true transparent alpha background, no floor, no stand, no stars, no glow/halo, no border, no caption or watermark. Neutral readable gray studio lighting with restrained highlights. Keep proportions, visible structural arrangement and coherent industrial detail. Do not add unexplained wings, nacelles or weapons. No sheet or multiple views.",
+      "originalPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-bba6be8d-9c2a-42bc-a975-d9eb801df376.png",
+      "projectPath": "docs/references/v90-art-batch/ud4l-cheyenne-side-depth.png",
+      "status": "reviewed-private-candidate",
+      "reviewNote": "Configuration repliee lisible, panneaux simplifies ; integration non effectuee.",
+    "canonExact": false
+  },
+    {
+      "id": "film-warrior-1986-base-v90",
+      "file": "film-warrior-1986-base.png",
+      "tool": "integrated-imagegen",
+      "prompt": "Generate ONE standalone base game sprite representing specifically the Warrior from Aliens (1986), closely grounded in the two attached photographs from NECA's official licensed 1986 Warrior product. These photographs are visual anatomy references, not canvases to copy. Preserve the source's exposed RIDGED elongated head with skeletal oval rib structures rather than a smooth translucent dome, narrow ribcage with prominent hoses, paired swept-back dorsal tubes and the smaller central back structure, TWO long clawed arms, TWO slender legs and ONE long segmented tail with a narrow pointed blade. Keep the 1986-specific head, forearm blade-like protrusions and proportions. Jet-black glossy biomechanical surfaces with subtle neutral blue-gray highlights; no neon, no acid-green sacs, no Queen crest, no added limbs. Remove action figure joint cuts and stands, making anatomy continuous. Full-body alert idle pose in mild three-quarter side view facing screen-right, 12-degree elevated RPG game camera, hands clearly separated, tail gracefully extending left, mouth only slightly open. Newly render a detailed clean raster game asset, not a product cutout, not pixelated, no sprite sheet, no second character. ENTIRE head, claws, feet and tail tip inside 10 percent safe margin. Transparent alpha background. No visible background or halo, no floor, no cast shadow, no text, logo or watermark. Single unique pose, no action scene or victim.",
+      "originalPath": null,
+      "projectPath": null,
+      "status": "moderation_blocked",
+      "canonExact": false,
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 07087843-57a5-45b0-845a-a665e81b0d33.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "retried": false
+    }
+  ]
+}

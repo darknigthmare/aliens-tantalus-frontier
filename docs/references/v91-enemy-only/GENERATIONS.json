@@ -1,0 +1,263 @@
+{
+  "schema": 91,
+  "createdAt": "2026-09-23",
+  "scope": "enemy-sprites-only",
+  "mode": "integrated-only",
+  "entries": [
+    {
+      "id": "film-scorched-romulus-2024-v91",
+      "references": [
+        "https://store.necaonline.com/products/alien-romulus-ultimate-scorched-xenomorph-action-figure"
+      ],
+      "referenceImages": [
+        "https://store.necaonline.com/cdn/shop/files/51741_UNP_14.jpg?v=1721145372&width=1500",
+        "https://store.necaonline.com/cdn/shop/files/51741_UNP_6.jpg?v=1721145367&width=1500",
+        "https://store.necaonline.com/cdn/shop/files/51741_UNP_11.jpg?v=1721145375&width=1500"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone full-body bitmap enemy sprite for a 2D side-view Alien fan game. Subject: SCORCHED XENOMORPH from Alien: Romulus (2024), the exact individual, not generic Big Chap, not the ribbed-head Warrior from Aliens1986. The last THREE conversation images are observed official licensed NECA references: image1 forehead scorch detail and frontal anatomy, image2 head/neck side, image3 full body. Use them as subject geometry references, NOT as an output photograph or backdrop. Reconstruct the reference silhouette as closely as possible: very tall lanky black biomechanical figure, extraordinarily long narrow waist, long slender arms and long digitigrade legs, the precise long smoothly domed head with translucent warm-gray highlights and the narrow damaged/scorched patch along the FRONT of the dome visible in image1; exposed rectangular teeth and jaw geometry in image2; ribbed chest, fluted abdomen, oval ribbed thigh panels, ribbed back pipes, skeletal long clawed fingers, spined segmented tail with the reference's pointed end. Exactly two arms, two legs and one tail, no extra appendages, no queen crest or invented armor. Preserve anatomical joint positions, do not turn visible figure hinge seams into mechanical bolts. Pose: full body upright stalking, facing screen RIGHT, near side profile with just enough three-quarter view to read chest and the forehead mark; both feet separated and planted, hands slightly ahead, long tail sweeping behind to LEFT without crossing face or leaving frame. Entire head, claws, feet and tail tip visible. Landscape1536x1024 with at least8% transparent margin on EVERY side, subject no more than84% canvas height. Detailed faithful high-resolution game bitmap, crisp silhouette and original painted textures; neutral soft lighting revealing black and dark-gray materials, NO theatrical red spotlight. Genuinely TRANSPARENT background and opaque creature, no floor, shadows on backdrop, black rectangle, gradient, halo, photo frame, workshop, stand, support rod, interface, writing, logo or watermark. ONE creature and ONE pose only, not a spritesheet, collage or model turnaround. Do not reuse the picture pixels or text.",
+      "tool": "integrated-imagegen",
+      "status": "moderation_blocked",
+      "result": {
+        "error": "moderation_blocked",
+        "stage": "output",
+        "requestId": "e86a9916-1a07-4d20-a524-8c0af409413b",
+        "retried": false
+      },
+      "canonExact": false
+    },
+    {
+      "id": "film-xenomorph-covenant-2017-v91",
+      "references": [
+        "https://store.necaonline.com/blogs/news/massive-photo-gallery-alien-covenant-products-revealed-1"
+      ],
+      "referenceImages": [
+        "https://necaonline.com/wp-content/uploads/2017/05/51658_Xenomorph1.jpg",
+        "https://necaonline.com/wp-content/uploads/2017/05/51658-Xeno3.jpg",
+        "https://necaonline.com/wp-content/uploads/2017/05/51658-Xeno5.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE standalone full-body enemy bitmap for a 2D side-view game. Subject: adult XENOMORPH from Alien: Covenant (2017), this exact version, not the white Neomorph, not Big Chap1979, not Warrior1986. Input images: the LAST THREE images are official NECA geometry references; image1 full body side-threequarter with dorsal anatomy, image2 frontal low stance, image3 head/chest/hand detail. Reconstruct only this creature with the strongest possible anatomical correspondence. Keep its smooth extremely elongated glossy dark dome, stretched narrow skeletal face and teeth, very thin emaciated rib cage, sinewy exposed tendon-like surface rather than armored plates, tall narrow hips, exceptionally long thin arms and thighs, long lower legs and small clawed feet. Match the distinctive LONG swept-back narrow BLADE-LIKE DORSAL APPENDAGES in image1 and looped hoses at the neck, NOT the thick four tubular chimneys of other films. Match the finely segmented long tapering whip tail with small vertebral spurs, no giant invented tail axe. Exactly two arms, two legs, one tail. Dark brown charcoal with gray fibrous anatomical highlights as reference, not bone-white. Remove only visible toy hinge seams/peg holes, preserving all actual anatomical ridges. Pose: planted bent knees like reference1 but more open silhouette readable at gameplay scale, upright alert stalking toward screenRIGHT; side view with slight threequarter to separate both hands and legs; entire tail curving gently back into left empty space. Entire creature visible with8% clear transparent margin on ALL four sides; no cropped tail/claws/dorsal tips. Landscape1536x1024. Faithful highly detailed original game sprite rendering, restrained neutral light, crisp contour, genuinelyTRANSPARENT background, solid creature. NO floor, pedestal, stand, environment, black/white backdrop, haze, glow, labels, writing, watermark, logo, gore scene, extra specimens, turnaround or spritesheet. Do not copy photographic pixels or pack art. Single creature single pose.",
+      "tool": "integrated-imagegen",
+      "status": "moderation_blocked",
+      "result": {
+        "error": "moderation_blocked",
+        "stage": "output",
+        "requestId": "c0027dc9-b2bf-4eeb-b923-0ecec5ac744a",
+        "retried": false
+      },
+      "canonExact": false
+    },
+    {
+      "id": "film-resurrection-warrior-1997-v91",
+      "references": [
+        "https://necaonline.com/2019/01/aliens-7-scale-action-figure-series-14-alien-resurrection-assortment/"
+      ],
+      "referenceImages": [
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/01/Warrior1.jpg",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/01/Warrior5.jpg",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/01/Warrior10.jpg",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/01/Warrior2.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: one isolated enemy bitmap sprite for a side-view game. Subject: adult CLONED RESURRECTION WARRIOR from Alien: Resurrection(1997), specifically the brown adult alien in the LAST FOUR reference images, not the pale Newborn and NOT the distinct ribbed-head Warrior1986. Input1 frontal anatomy, input2 head/hand detail, input3 planted pose, input4 precise complete side silhouette to follow. Original faithful raster reconstruction, no redesign. Match the proportions and stance of image4 particularly: heavy smooth bronze-brown translucent elongated dome with rounded ends, short protruding toothed muzzle, thick ribbed shoulders and neck, deep curved chest ribs, narrow sinewy waist, long ribbed upper thighs, the DISTINCT extended digitigrade leg anatomy with bent shin and elevated hock above long lower ankle segment, forward planted clawed feet. Match the long thin clawed fingers and the paired swept-back curved dorsal pipes, not Covenant blade-shaped appendages. Match its thick segmented tail, two uneven rows of bony vertebral flanges/spines, rising terminal section and narrow long triangular pointed tip as image4. Exactly two arms, two legs and one tail. Brown/charcoal organic-biomachinery, lighter muted tan ribs, smoothly reflective dark brown head; no silver or bright neon variants. Preserve all anatomical ridges but remove obvious plastic toy joint holes/seams. Camera/pose: side view facing RIGHT matching image4, one foot slightly forward and both on common ground line, hands reaching ahead, tail curved to LEFT into same silhouette, no invented extra appendages. Everything from dorsal tips to feet and tail end inside canvas with8% clear transparent margin on every side. Landscape1536x1024. High-detail painted game bitmap with sharp clean edge and neutral soft lighting, genuinely transparent background, opaque creature. No scene, floor, backdrop, stand, gray rectangle, glow, shadow on backdrop, lettering, logo, watermark, multiple creatures, corpse, montage, animation sheet or turnarounds. ONE creature ONE dedicated pose; references only, no photographic cutout.",
+      "tool": "integrated-imagegen",
+      "status": "moderation_blocked",
+      "result": {
+        "error": "moderation_blocked",
+        "stage": "output",
+        "requestId": "8b1fd0a9-35f9-48d4-bb94-e2ec82012ea5",
+        "retried": false
+      },
+      "canonExact": false
+    },
+    {
+      "id": "comic-rogue-prime1-adaptation-v91",
+      "references": [
+        "https://www.prime1studio.com/dhal-rogue-alien-battle-diorama/PMDHAL-04EX.html"
+      ],
+      "referenceStatus": "licensed-statue-adaptation-not-comic-panel",
+      "referenceImages": [
+        "https://www.prime1studio.com/on/demandware.static/-/Sites-p1s-master-catalog/default/dw8f77bdc9/images/PMDHAL-04EX/catalog/pmdhal-04ex_a00-01.jpg",
+        "https://www.prime1studio.com/on/demandware.static/-/Sites-p1s-master-catalog/default/dw587f286b/images/PMDHAL-04EX/catalog/pmdhal-04ex_a00-03.jpg",
+        "https://www.prime1studio.com/on/demandware.static/-/Sites-p1s-master-catalog/default/dw713c65f8/images/PMDHAL-04EX/catalog/pmdhal-04ex_a00-05.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE full-body dedicated enemy sprite, original raster painting, 2D game side-view. Subject: ROGUE ALIEN from Aliens:Rogue, specifically matching the licensed Prime1Studio PMDHAL-04EX interpretation visible in the LAST THREE images, no redesign. Images1 and2 show Rogue frontal anatomy; image3 shows Rogue on the RIGHT, the blue queen at LEFT is NOT the subject and must not appear. Reconstruct only the Rogue, empty handed, with its exact huge spined crown shape, raised central keel and long upright needle spines, swept-back burgundy side blades around the black biomechanical crown, small shiny burgundy frontal dome, angular long toothed jaw, the thin curved cheek appendages, very bulky shoulders, thick muscular ribbed arms and legs, ornate overlapping black/burgundy organic armor and segmented spiny tail. Match the physical hierarchy and silhouettes in these references, not a regular queen or smooth-head drone. Two large arms, two legs, one tail as this sculpture; no additional small queen arms. Keep maroon-to-black color pattern, restrained gray highlights, sharp thin wine-red tips. Full side/threequarter pose facing screen RIGHT, low grounded crouch with both feet separated, both hands empty and visible, tail sweeping back to screenLEFT, crown/spines fully visible and not crossed by tail. Do not include the other alien held by the statue, any small alien, eggs, hive or base. Whole creature centered,1536x1024landscape with at least8% transparent safe margin on each side, not cropped. Crisp detailed game sprite, gently lit so all anatomy reads, no plastic toy seams, photoreal cutout, branding or pasted photo pixels. GENUINELY TRANSPARENT background, opaque subject. ONE single creature and ONE pose, no turnarounds, animation sheet, floor, cast shadow, ambient scene, glow, labels, text, logos or watermarks. Faithful to the depicted licensed statue's geometry; not a new generic Alien King design.",
+      "tool": "integrated-imagegen",
+      "operation": "generate",
+      "status": "generated-candidate",
+      "result": {
+        "originalPath": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-a3b17e17-f111-491a-9abe-79055059bc7f.png",
+        "file": "comic-rogue-prime1-adaptation-candidate.png",
+        "audit": {
+          "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\docs\\references\\v91-enemy-only\\comic-rogue-prime1-adaptation-candidate.png",
+          "width": 1536,
+          "height": 1024,
+          "format": "RGBA8 non-interlaced",
+          "bytes": 2262091,
+          "sha256": "5a3bcd3dd1a527cd5573fa684817018cf8c49d9fd8c19842783586489911e03f",
+          "totalPixels": 1572864,
+          "alphaMin": 0,
+          "alphaMax": 254,
+          "alpha0": 1037177,
+          "alpha1to254": 535687,
+          "alpha255": 0,
+          "alphaAtLeast16": 469373,
+          "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+          "bboxAlphaAtLeast16": [
+            66,
+            7,
+            1499,
+            1015
+          ],
+          "bboxSize": {
+            "width": 1433,
+            "height": 1008
+          },
+          "marginsAlphaAtLeast16": {
+            "left": 66,
+            "top": 7,
+            "right": 37,
+            "bottom": 9
+          }
+        },
+        "reviewNotes": [
+          "Reference identity: licensed Prime 1 interpretation, not inspected comic panels.",
+          "Single creature and maroon/black spined crown recognizable, but exact anatomical correspondence not certified.",
+          "Requested safe margins not met: top7px/bottom9px at alpha>=16.",
+          "Non-binary alpha: no alpha255 pixels. This is real transparency, not a wholly opaque background.",
+          "Background extraction/padding edit failed before generation because Windows reference-file access failed."
+        ]
+      },
+      "reviewStatus": "held",
+      "runtimeAdmitted": false,
+      "identityVerified": false,
+      "canonExact": false
+    },
+    {
+      "id": "comic-red-queen-mother-neca-adaptation-v91",
+      "references": [
+        "https://necaonline.com/?p=53254"
+      ],
+      "referenceImages": [
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2015/08/1300x-Red-Queen1.jpg",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2015/08/1300x-Red-Queen4.jpg"
+      ],
+      "prompt": "Create ONE isolated full-body dedicated enemy game sprite of the RED QUEEN MOTHER from Aliens:Genocide, matching the licensed NECA interpretation in the last TWO reference images precisely. Reference1 subject is the tall RED queen at LEFT, NOT the blue queen at right nor the smaller red drones. Reference2 subject is the tallest central RED queen, ignore all surrounding drones and scenery. Faithfully preserve her very wide low flattened multi-lobed red crown swept horizontally back, the small round red frontal dome, two prominent slender IVORY horns beside the brow curving upward, ivory teeth and narrow elongated jaw, pale ribbing of the long graceful arched throat, red shoulder and thigh carapace with black elongated insets, long black-and-red ribbed chest and abdomen, FOUR arms (two long outer arms and two small inner chest arms), two long digitigrade legs, and ONE slender long segmented spiny tail with the reference pointed end. Pose side/threequarter facing screenRIGHT, all four arms independently visible, feet apart grounded stalking, tail sweeps to screenLEFT, head crest fully visible. Match the photographed figure geometry without toy joints, mechanical bolts or base; original detailed bitmap painting, not a photograph or pasted reference pixels. Red is the actual body color, not red lighting. Moderate soft neutral light and crisp silhouette, no added armor or spikes, no generic alien drone head, no enormous invented front horns. Exactly ONE creature, ONE pose, no surrounding smaller aliens. Entire subject including tail, crown, horns and every claw contained comfortably inside1536x1024 landscape with at least10% clear margin ALL sides. Output a sprite with TRUE transparent alpha background, no opaque black or gray background, NO gradient, halo, glow, backdrop, floor, contact shadow, vignette, grid, labels, text, watermark, logo, frames or spritesheet. Fidelity to this specific licensed NECA version; do not blend different Queen Mother designs.",
+      "tool": "integrated-imagegen",
+      "operation": "generate",
+      "status": "generated-candidate",
+      "result": {
+        "originalPath": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-93da304e-a06d-4bdb-bae1-801c8c8afd8b.png",
+        "file": "comic-red-queen-mother-neca-adaptation-candidate.png",
+        "audit": {
+          "path": "D:\\CodexWork\\aliens-tantalus-frontier\\project\\docs\\references\\v91-enemy-only\\comic-red-queen-mother-neca-adaptation-candidate.png",
+          "width": 1536,
+          "height": 1024,
+          "format": "RGBA8 non-interlaced",
+          "bytes": 1985156,
+          "sha256": "3b3f3dd99f66f670d5e6f8c4bccacf11e70640beeacd955443bb6e804d717b98",
+          "totalPixels": 1572864,
+          "alphaMin": 0,
+          "alphaMax": 254,
+          "alpha0": 1192974,
+          "alpha1to254": 379890,
+          "alpha255": 0,
+          "alphaAtLeast16": 324271,
+          "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+          "bboxAlphaAtLeast16": [
+            26,
+            24,
+            1501,
+            1000
+          ],
+          "bboxSize": {
+            "width": 1475,
+            "height": 976
+          },
+          "marginsAlphaAtLeast16": {
+            "left": 26,
+            "top": 24,
+            "right": 35,
+            "bottom": 24
+          }
+        },
+        "reviewNotes": [
+          "Reference identity: licensed NECA Red Queen Mother from Genocide, not inspected comic panels.",
+          "Red carapace, horizontal crown, pale facial horns and ribbed long throat recognizable.",
+          "Only three arms clearly readable in this pose; four-arm anatomy and toy-like knee joint details need review before admission.",
+          "Requested10% margins not met; minimum24px at alpha>=16.",
+          "Non-binary alpha: no alpha255 pixels. No automatic fidelity or animation claim."
+        ]
+      },
+      "reviewStatus": "held",
+      "runtimeAdmitted": false,
+      "identityVerified": false,
+      "canonExact": false
+    },
+    {
+      "id": "game-praetorian-afe-v91",
+      "references": [
+        "https://fr.ign.com/aliens-fireteam-pc/53062/feature/aliens-fireteam-decouvrez-les-six-nouveaux-xenomorphes-ign-first",
+        "https://fr.ign.com/aliens-fireteam-pc/53063/gallery/embed"
+      ],
+      "referenceImages": [
+        "https://sm.ign.com/t/ign_fr/screenshot/default/xenos-ign-praetorian-1614991650865_1466.1200.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset: ONE dedicated standalone full-body enemy sprite for a side-view 2D game. Subject: PRAETORIAN from ALIENS:FIRETEAM ELITE, faithful to the anatomy of the creature shown in the last ONE reference image (the official game reveal artwork). This is not a Queen, not a Crusher, not the Spitter. Precisely preserve the enormous LOW LONG flattened armored crown swept horizontally backwards, the large open vaulted spaces at the sides of the crown, the toothed bony ridge following the top rear edge, the rounded light gray/ivory frontal forehead, the dark small jaw beneath, two back tubes under the crest, the restrained yellow-green visible beneath the rear crown and in the lateral ribcage. Black ribbed narrow torso, two large slender arms ending in long digits, TWO legs strongly bent with long digitigrade feet and large curved shin spurs, and ONE very long segmented tail trailing to left with thin pointed tip. EXACTLY TWO ARMS, not queen four arms. No big upright spikes, no rounded acid bubbles. Follow the depicted joint positions and proportions. Full-body threequarter side view facing screenRIGHT in a balanced low stalking pose, hands visible and not crossing the face, feet separated and completely visible, tail sweeping horizontally to the LEFT, crown not cropped. Keep original silhouette and sculpted structural details, original game-ready raster painting, not a copy/paste photo. Soft neutral lighting reveals the charcoal biomechanical surfaces and ivory crest; yellow accents restricted to the depicted sites. Landscape1536x1024. Fit the ENTIRE crown, tail tip, fingers and toes inside with at least10% transparent safe margin on ALL four edges. TRUE TRANSPARENT ALPHA background, no black rectangle, no vignette, no glow/halo, no atmospheric smoke, no floor or cast shadow, no environment, labels, text, logos, watermarks, frame, collage or sprite sheet. ONLY one creature and one pose. Remove all reference branding; it is anatomical reference only.",
+      "tool": "integrated-imagegen",
+      "operation": "generate",
+      "status": "moderation_blocked",
+      "result": {
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID c286123c-8179-4050-a89b-dc8ae454d3f8.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+        "requestId": "c286123c-8179-4050-a89b-dc8ae454d3f8",
+        "stage": "output",
+        "retried": false
+      },
+      "runtimeAdmitted": false,
+      "identityVerified": false,
+      "canonExact": false
+    },
+    {
+      "id": "comic-rogue-prime1-alpha-edit-v91",
+      "operation": "background-extraction",
+      "parentId": "comic-rogue-prime1-adaptation-v91",
+      "input": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-a3b17e17-f111-491a-9abe-79055059bc7f.png",
+      "references": [],
+      "referenceImages": [],
+      "prompt": "Use case: background-extraction. Edit this generated Rogue enemy image into a true transparent single game sprite. Change ONLY the background: remove ALL black/red smoky background, glow and halo to genuinely transparent alpha. Preserve the creature's exact identity, entire anatomy, horns, every spine, tail, pose, black/burgundy colors and every foreground pixel detail, do not redesign or add anything. Do not erase any of the creature's dark parts. Enlarge the transparent canvas if needed to give at least5% clear padding around the highest spine and claws; keep full creature at original scale, no cropping. Output RGBA PNG with truly transparent pixels around the opaque creature, not a black or checkerboard painted background. One creature only, no text.",
+      "tool": "integrated-imagegen",
+      "status": "reference-access-blocked",
+      "result": {
+        "error": "unable to read referenced image at `C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-a3b17e17-f111-491a-9abe-79055059bc7f.png`: fs sandbox helper failed with status exit code: 1: windows sandbox failed: helper_unknown_error: apply deny-read ACLs",
+        "requestId": null,
+        "stage": "reference-read",
+        "retried": false
+      },
+      "runtimeAdmitted": false,
+      "identityVerified": false,
+      "canonExact": false
+    },
+    {
+      "id": "comic-defiance-neca-adaptation-v91",
+      "references": [
+        "https://necaonline.com/2017/02/aliens-7-scale-action-figures-series-11-assortment/",
+        "https://store.necaonline.com/blogs/news/shipping-this-week-aliens-series-11"
+      ],
+      "referenceImages": [
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2017/02/51635-Aliens-S11-Defiance-Alien1.jpg",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2017/02/51635-Aliens-S11-Defiance-Alien4.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset: one full-body dedicated enemy game sprite. Subject: the specific Xenomorph of ALIENS:DEFIANCE as sculpted in NECA series11 in the last TWO reference images. This has a distinct cranial design: NOT the smooth Big Chap nor the rounded ridged Aliens1986 warrior. Match EXACT anatomy of the reference: long narrow low head with a high thin toothed central keel ridge, fluted exposed dark cranial side ribs, a thin flattened rear tip curving upwards, narrow smooth forehead plate tapering into rectangular mouth and teeth. Extremely lanky dark charcoal/brown biomechanical torso, ivory-brown thin ribs with deep spaces, tiny waist, round ribbed shoulder cap, long thin arms with visible paired/doubled digits, FOUR long swept-back hollow curved back tubes (not sharp solid horns), slender thighs with elongated fluted panels, very long lower digitigrade legs with raised heels, small clawed feet and ONE slender annulated tail with low squared spines and narrow end. Reference1 white background is authoritative for body color; red in reference2 is LIGHTING, never red skin. Original clean detailed painted bitmap rendition faithful to those reference silhouettes and proportions, remove toy joint seams but no anatomy redesign. One creature, two arms, two legs, one tail, full-body side/threequarter profile facing RIGHT, both feet separated grounded, both hands visible, tail sweeping left, do not crop head/tail/feet. Entire subject fits within central80% of1536x1024landscape canvas, large equal margins, no tall or broad queen crown. TRUE transparent background, actual alpha around opaque creature; no opaque black/white background, no glows, smoke, vignette, halo, cast shadows, floor, base, environment, text, logo or watermark, no panel, model sheet, collage or multiple poses. One precise static game sprite of this licensed Defiance version.",
+      "tool": "integrated-imagegen",
+      "operation": "generate",
+      "status": "moderation_blocked",
+      "result": {
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID c4da5058-4bcb-4e47-b4c4-7617ac581972.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+        "requestId": "c4da5058-4bcb-4e47-b4c4-7617ac581972",
+        "stage": "output",
+        "retried": false
+      },
+      "runtimeAdmitted": false,
+      "identityVerified": false,
+      "canonExact": false
+    }
+  ]
+}

@@ -1,0 +1,2197 @@
+[
+  {
+    "sourceNumber": 1,
+    "slug": "crudible-host",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep the entire bulky gray quadruped, dark layered dorsal carapace and mouth tentacles, left-facing three-quarter pose.\nChange only background and framing: preserve the exact source pose, anatomy, proportions, palette, texture, fine edges and internal details. Remove all backdrop and floor shadows. Reframe the whole unchanged creature smaller, centered with at least 10 percent entirely transparent padding on ALL sides; no clipped extremities. Output one standalone cutout with real alpha transparency. No scene, floor, checkerboard, caption, border, other creature or extra view. No redesign.",
+    "sourceFile": "Crudible host for big xeno.jpg",
+    "status": "accepted",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-9aca0c37-12d2-42bc-90bf-2ee7f7be26d2.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-9aca0c37-12d2-42bc-90bf-2ee7f7be26d2.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1470694,
+      "sha256": "a1395013c2e3d48c44d9763382b3a15e2021552abd57c40a34b8d27f9a3b1344",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 989296,
+      "alpha1to254": 582605,
+      "alpha255": 615,
+      "transparentFraction": 0.6291166512773161,
+      "alphaAtLeast16": 566747,
+      "alphaAtLeast128": 558186,
+      "meanBodyAlphaAtLeast128": 252.12163149917768,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        99,
+        213,
+        1131,
+        1152
+      ],
+      "bboxAlphaAtLeast16": [
+        120,
+        215,
+        1129,
+        1076
+      ],
+      "alphaBounds": [
+        120,
+        215,
+        1129,
+        1076
+      ],
+      "bboxAlphaAtLeast128": [
+        121,
+        216,
+        1128,
+        1076
+      ],
+      "bboxAlpha255": [
+        123,
+        226,
+        1127,
+        1060
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 120,
+        "top": 215,
+        "right": 125,
+        "bottom": 178
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.09569377990430622,
+        "top": 0.17145135566188197,
+        "right": 0.09968102073365231,
+        "bottom": 0.1419457735247209
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 1,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.49800637958532695,
+          "y": 0.8580542264752791
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5250149235620472,
+          "y": 0.8580542264752791
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Whole creature, pose and distinctive features visually reviewed; source palette and anatomy preserved with slight generated detail reinterpretation. No clipped extremity."
+  },
+  {
+    "sourceNumber": 6,
+    "slug": "bipede-tigre",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep the single yellow-and-black tiger-striped biomechanical biped, paired swept cranial prongs, raised inner mouth, two arms, two legs, and hooked spiny tail.\nChange only background and framing: preserve the exact source pose, anatomy, proportions, palette, texture, fine edges and internal details. Remove all backdrop and floor shadows. Reframe the whole unchanged creature smaller, centered with at least 10 percent entirely transparent padding on ALL sides; no clipped extremities. Output one standalone cutout with real alpha transparency. No scene, floor, checkerboard, caption, border, other creature or extra view. No redesign.",
+    "sourceFile": "Gemini_Generated_Image_1uteuq1uteuq1ute.jpg",
+    "status": "accepted",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-71893734-8174-493f-95e9-cec6a0744333.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-71893734-8174-493f-95e9-cec6a0744333.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1045742,
+      "sha256": "138d66d73d38d0d514b3766117e1aac4f00af108b9738c36b8ef608602ec70a7",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1202818,
+      "alpha1to254": 368635,
+      "alpha255": 1063,
+      "transparentFraction": 0.7649003253385022,
+      "alphaAtLeast16": 328184,
+      "alphaAtLeast128": 317480,
+      "meanBodyAlphaAtLeast128": 250.06284805342068,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        21,
+        1208,
+        1254
+      ],
+      "bboxAlphaAtLeast16": [
+        163,
+        217,
+        1141,
+        1146
+      ],
+      "alphaBounds": [
+        163,
+        217,
+        1141,
+        1146
+      ],
+      "bboxAlphaAtLeast128": [
+        164,
+        218,
+        1140,
+        1145
+      ],
+      "bboxAlpha255": [
+        166,
+        230,
+        1139,
+        1144
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 163,
+        "top": 217,
+        "right": 113,
+        "bottom": 108
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.12998405103668262,
+        "top": 0.17304625199362042,
+        "right": 0.09011164274322168,
+        "bottom": 0.0861244019138756
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 215,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5199362041467305,
+          "y": 0.9138755980861244
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4751473176195987,
+          "y": 0.9138755980861244
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Whole creature, pose and distinctive features visually reviewed; source palette and anatomy preserved with slight generated detail reinterpretation. No clipped extremity."
+  },
+  {
+    "sourceNumber": 7,
+    "slug": "bipede-crete-relevee",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep the single dark blue-teal biomechanical biped facing right, raised ornate head crest, dorsal spikes and raised left tail.\nChange only background and framing: preserve the exact source pose, anatomy, proportions, palette, texture, fine edges and internal details. Remove all backdrop and floor shadows. Reframe the whole unchanged creature smaller, centered with at least 10 percent entirely transparent padding on ALL sides; no clipped extremities. Output one standalone cutout with real alpha transparency. No scene, floor, checkerboard, caption, border, other creature or extra view. No redesign.",
+    "sourceFile": "Gemini_Generated_Image_24l27c24l27c24l2.jpg",
+    "status": "accepted",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-1f873047-09ee-4ed4-9f77-307a1cf2e694.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-1f873047-09ee-4ed4-9f77-307a1cf2e694.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 943763,
+      "sha256": "02578d158f03b630de2a30ad8603f977eec6b1b295df060e9b31ac2fd4223ac0",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1222498,
+      "alpha1to254": 348648,
+      "alpha255": 1370,
+      "transparentFraction": 0.7774153013387464,
+      "alphaAtLeast16": 313677,
+      "alphaAtLeast128": 302500,
+      "meanBodyAlphaAtLeast128": 249.54967272727274,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        21,
+        1212,
+        1254
+      ],
+      "bboxAlphaAtLeast16": [
+        215,
+        163,
+        1093,
+        1141
+      ],
+      "alphaBounds": [
+        215,
+        163,
+        1093,
+        1141
+      ],
+      "bboxAlphaAtLeast128": [
+        216,
+        164,
+        1092,
+        1140
+      ],
+      "bboxAlpha255": [
+        220,
+        211,
+        1092,
+        1139
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 215,
+        "top": 163,
+        "right": 161,
+        "bottom": 113
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.17145135566188197,
+        "top": 0.12998405103668262,
+        "right": 0.1283891547049442,
+        "bottom": 0.09011164274322168
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": true,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 174,
+        "visiblePixels": 0,
+        "maxAlpha": 1
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5215311004784688,
+          "y": 0.9098883572567783
+        },
+        "alphaWeightedBottom": {
+          "x": 0.527483613971515,
+          "y": 0.9098883572567783
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Whole creature, pose and distinctive features visually reviewed; source palette and anatomy preserved with slight generated detail reinterpretation. No clipped extremity."
+  },
+  {
+    "sourceNumber": 8,
+    "slug": "quadrupede-bulbeux",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep the single brown-green quadruped facing left, beige lobed head/back structures, and long club-ended tail.\nChange only background and framing: preserve the exact source pose, anatomy, proportions, palette, texture, fine edges and internal details. Remove all backdrop and floor shadows. Reframe the whole unchanged creature smaller, centered with at least 10 percent entirely transparent padding on ALL sides; no clipped extremities. Output one standalone cutout with real alpha transparency. No scene, floor, checkerboard, caption, border, other creature or extra view. No redesign.",
+    "sourceFile": "Gemini_Generated_Image_4ja9ot4ja9ot4ja9.jpg",
+    "status": "accepted",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-31d05af2-7acd-4042-9308-c4d42fe82688.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-31d05af2-7acd-4042-9308-c4d42fe82688.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 661932,
+      "sha256": "38c9af494b1e9419dcebdd5d836afbec63b9f6a8d8120cf7d384a9587b0fc618",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1312194,
+      "alpha1to254": 259056,
+      "alpha255": 1266,
+      "transparentFraction": 0.8344551025235991,
+      "alphaAtLeast16": 250188,
+      "alphaAtLeast128": 246793,
+      "meanBodyAlphaAtLeast128": 252.06460069775073,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        65,
+        53,
+        1224,
+        1230
+      ],
+      "bboxAlphaAtLeast16": [
+        71,
+        329,
+        1203,
+        972
+      ],
+      "alphaBounds": [
+        71,
+        329,
+        1203,
+        972
+      ],
+      "bboxAlphaAtLeast128": [
+        71,
+        330,
+        1202,
+        971
+      ],
+      "bboxAlpha255": [
+        73,
+        331,
+        1201,
+        970
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 71,
+        "top": 329,
+        "right": 51,
+        "bottom": 282
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.05661881977671451,
+        "top": 0.2623604465709729,
+        "right": 0.04066985645933014,
+        "bottom": 0.22488038277511962
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 4747,
+        "visiblePixels": 4076,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5079744816586922,
+          "y": 0.7751196172248804
+        },
+        "alphaWeightedBottom": {
+          "x": 0.40613542117533996,
+          "y": 0.7751196172248804
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Whole creature, pose and distinctive features visually reviewed; source palette and anatomy preserved with slight generated detail reinterpretation. No clipped extremity. Visible right padding is 4.1%, below requested10%; no crop, accepted measured native framing with runtime safe bounds."
+  },
+  {
+    "sourceNumber": 9,
+    "slug": "bipede-dome-vert",
+    "sourceFile": "Gemini_Generated_Image_5371if5371if5371.jpg",
+    "status": "held_moderation",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep ONLY the complete tall dark biomechanical biped with green swept dome, red eyes and bent tail. Remove the small human bust with weapon used for scale, entirely.\nChange only backdrop and framing except the specifically requested missing-extremity completion. Preserve the source pose, anatomy, proportions, colors, fine edges, materials and internal details. Remove background and floor shadows. Place the entire silhouette centered at smaller scale with 10 percent transparent padding on all sides. Output real alpha transparency, no checkerboard, scene, frame, caption or extra subject. No redesign.",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 1ac0f9f2-e7f0-418d-b23b-1f80e0c0f9ea.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "review": "Refus du système de sécurité ; aucune nouvelle tentative ni contournement."
+  },
+  {
+    "sourceNumber": 10,
+    "slug": "bipede-brun-dome-lisse",
+    "sourceFile": "Gemini_Generated_Image_53feyo53feyo53fe.jpg",
+    "status": "held_moderation",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep the dark bronze biped facing left, smooth swept dome, open mouth, long arms and legs, thick raised looped segmented tail and all claws.\nChange only backdrop and framing except the specifically requested missing-extremity completion. Preserve the source pose, anatomy, proportions, colors, fine edges, materials and internal details. Remove background and floor shadows. Place the entire silhouette centered at smaller scale with 10 percent transparent padding on all sides. Output real alpha transparency, no checkerboard, scene, frame, caption or extra subject. No redesign.",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 5057c822-35ff-4e9c-beed-000315849138.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+    "review": "Refus du système de sécurité ; aucune nouvelle tentative ni contournement."
+  },
+  {
+    "sourceNumber": 11,
+    "slug": "rapace-noir-os",
+    "sourceFile": "Gemini_Generated_Image_9gp13f9gp13f9gp1.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep the black-and-bone long-necked raptor creature facing left, dorsal feather-like spines, long clawed legs and forearms, segmented tail and mouth vapor. The source crops the rear tail and foot tips: zoom out and ONLY complete the missing extremities conservatively from the existing anatomy, preserving all visible anatomy and pose. This is a completed interpretation, not a claim of unseen canonical anatomy.\nChange only backdrop and framing except the specifically requested missing-extremity completion. Preserve the source pose, anatomy, proportions, colors, fine edges, materials and internal details. Remove background and floor shadows. Place the entire silhouette centered at smaller scale with 10 percent transparent padding on all sides. Output real alpha transparency, no checkerboard, scene, frame, caption or extra subject. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-d7bd9d56-2665-453c-a6b3-00ac148d35e6.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-d7bd9d56-2665-453c-a6b3-00ac148d35e6.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 880994,
+      "sha256": "3610c65456a6f0262d6987b1bf0fa642e095d64ae28f527b433db85c75bdc23b",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1271792,
+      "alpha1to254": 299666,
+      "alpha255": 1058,
+      "transparentFraction": 0.8087625181556182,
+      "alphaAtLeast16": 260770,
+      "alphaAtLeast128": 247002,
+      "meanBodyAlphaAtLeast128": 248.98321875936227,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        51,
+        1222,
+        1198
+      ],
+      "bboxAlphaAtLeast16": [
+        26,
+        347,
+        1217,
+        1027
+      ],
+      "alphaBounds": [
+        26,
+        347,
+        1217,
+        1027
+      ],
+      "bboxAlphaAtLeast128": [
+        35,
+        348,
+        1216,
+        1026
+      ],
+      "bboxAlpha255": [
+        89,
+        360,
+        1213,
+        1019
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 26,
+        "top": 347,
+        "right": 37,
+        "bottom": 227
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.02073365231259968,
+        "top": 0.2767145135566188,
+        "right": 0.029505582137161084,
+        "bottom": 0.1810207336523126
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 15456,
+        "visiblePixels": 11590,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.4956140350877193,
+          "y": 0.8189792663476874
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4931034929549832,
+          "y": 0.8189792663476874
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Extrémités absentes de la source complétées par interprétation ; pas une certification canon. Variante de fond 20 regroupée. Marges latérales visibles 2,1 % et 3,0 % ; brume proche du bord, corps entier non tronqué."
+  },
+  {
+    "sourceNumber": 12,
+    "slug": "bipede-bleu-violet",
+    "sourceFile": "Gemini_Generated_Image_apq4qsapq4qsapq4.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target, ignore every other conversation image. Keep ONLY the main full-body blue-and-purple biped with long crescent loop tail, legs and arms. Remove the separate head close-up inset entirely, do not merge its extra head into the creature.\nChange only backdrop and framing except the specifically requested missing-extremity completion. Preserve the source pose, anatomy, proportions, colors, fine edges, materials and internal details. Remove background and floor shadows. Place the entire silhouette centered at smaller scale with 10 percent transparent padding on all sides. Output real alpha transparency, no checkerboard, scene, frame, caption or extra subject. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-88b56b67-8415-4069-8b12-a675ac4a3ea2.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-88b56b67-8415-4069-8b12-a675ac4a3ea2.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1189240,
+      "sha256": "efbc42d94b00a53caa703d507a9be0dd5c3dfd895bfa49ea17fc74ea75e4e139",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1150542,
+      "alpha1to254": 420025,
+      "alpha255": 1949,
+      "transparentFraction": 0.7316567844142763,
+      "alphaAtLeast16": 359123,
+      "alphaAtLeast128": 346670,
+      "meanBodyAlphaAtLeast128": 249.83985057835983,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        19,
+        1238,
+        1254
+      ],
+      "bboxAlphaAtLeast16": [
+        90,
+        144,
+        1214,
+        1174
+      ],
+      "alphaBounds": [
+        90,
+        144,
+        1214,
+        1174
+      ],
+      "bboxAlphaAtLeast128": [
+        91,
+        145,
+        1213,
+        1173
+      ],
+      "bboxAlpha255": [
+        94,
+        146,
+        1208,
+        1172
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 90,
+        "top": 144,
+        "right": 40,
+        "bottom": 80
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.07177033492822966,
+        "top": 0.11483253588516747,
+        "right": 0.03189792663476874,
+        "bottom": 0.06379585326953748
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 20812,
+        "visiblePixels": 14140,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5199362041467305,
+          "y": 0.9362041467304625
+        },
+        "alphaWeightedBottom": {
+          "x": 0.46968647744848974,
+          "y": 0.9362041467304625
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Vue additionnelle de tête supprimée ; silhouette et palette relues. Marge droite visible 3,2 %, sans découpe du corps. Aucune certification canon."
+  },
+  {
+    "sourceNumber": 13,
+    "slug": "quadrupede-squelettique",
+    "sourceFile": "Gemini_Generated_Image_d90oiyd90oiyd90o.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the entire tan skeletal quadruped facing left, two long scapular spikes, bony snout, raised near foreclaw and very long thin pointed tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-f0e246fd-138f-4757-a6a8-020003786492.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-f0e246fd-138f-4757-a6a8-020003786492.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 460072,
+      "sha256": "4b5c491f2f79836763ca68b7e0e0c43788b1c08c3b371274126c669d1f12985b",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1424772,
+      "alpha1to254": 145848,
+      "alpha255": 1896,
+      "transparentFraction": 0.9060461070030448,
+      "alphaAtLeast16": 137710,
+      "alphaAtLeast128": 133990,
+      "meanBodyAlphaAtLeast128": 251.2263452496455,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        41,
+        52,
+        1198,
+        1197
+      ],
+      "bboxAlphaAtLeast16": [
+        75,
+        448,
+        1187,
+        863
+      ],
+      "alphaBounds": [
+        75,
+        448,
+        1187,
+        863
+      ],
+      "bboxAlphaAtLeast128": [
+        76,
+        449,
+        1187,
+        862
+      ],
+      "bboxAlpha255": [
+        77,
+        450,
+        1185,
+        858
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 75,
+        "top": 448,
+        "right": 67,
+        "bottom": 391
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.05980861244019139,
+        "top": 0.3572567783094099,
+        "right": 0.05342902711323764,
+        "bottom": 0.3118022328548644
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 1911,
+        "visiblePixels": 1424,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5031897926634769,
+          "y": 0.6881977671451356
+        },
+        "alphaWeightedBottom": {
+          "x": 0.3870680714183273,
+          "y": 0.6881977671451356
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 5.3 %, silhouette non tronquée. "
+  },
+  {
+    "sourceNumber": 14,
+    "slug": "poisson-violet",
+    "sourceFile": "Gemini_Generated_Image_dwc3u7dwc3u7dwc3.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the entire purple biomechanical fish facing left, swept head dome, spiked paired fins, dorsal spines and forked caudal fin. No legs; preserve its exact fish anatomy.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-ae5f1e7d-bcfa-4c8b-b275-b7665e3802a3.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-ae5f1e7d-bcfa-4c8b-b275-b7665e3802a3.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 874342,
+      "sha256": "e302603b79fdb092c63f3001c6e4893e367ccfcd35b9348f9517577a3b6f2743",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1253080,
+      "alpha1to254": 318211,
+      "alpha255": 1225,
+      "transparentFraction": 0.7968631161781502,
+      "alphaAtLeast16": 300689,
+      "alphaAtLeast128": 295562,
+      "meanBodyAlphaAtLeast128": 251.4681318978759,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        51,
+        21,
+        1218,
+        1196
+      ],
+      "bboxAlphaAtLeast16": [
+        100,
+        323,
+        1201,
+        1058
+      ],
+      "alphaBounds": [
+        100,
+        323,
+        1201,
+        1058
+      ],
+      "bboxAlphaAtLeast128": [
+        101,
+        324,
+        1200,
+        1057
+      ],
+      "bboxAlpha255": [
+        102,
+        328,
+        1192,
+        1040
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 100,
+        "top": 323,
+        "right": 53,
+        "bottom": 196
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.07974481658692185,
+        "top": 0.25757575757575757,
+        "right": 0.04226475279106858,
+        "bottom": 0.15629984051036683
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 3071,
+        "visiblePixels": 2297,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5187400318979266,
+          "y": 0.8437001594896332
+        },
+        "alphaWeightedBottom": {
+          "x": 0.48195114134442757,
+          "y": 0.8437001594896332
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 4.2 %, silhouette non tronquée. Forme aquatique sans pieds ; pivot au centre du corps, ne pas utiliser de marche terrestre."
+  },
+  {
+    "sourceNumber": 15,
+    "slug": "bipede-crete-ajouree",
+    "sourceFile": "Gemini_Generated_Image_emlp3qemlp3qemlp.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the bronze biped facing left, very long tall head crest with large circular openings, frontal horn, skeletal ribcage and hooked loop tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-eeefb01a-4777-473e-bfeb-48b9c627166c.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-eeefb01a-4777-473e-bfeb-48b9c627166c.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 903124,
+      "sha256": "428f8e2d2acc92787260ce6b80fadbbcab6782874028c2fade61aa2f2c02382f",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1255738,
+      "alpha1to254": 315483,
+      "alpha255": 1295,
+      "transparentFraction": 0.7985534010464759,
+      "alphaAtLeast16": 281011,
+      "alphaAtLeast128": 271406,
+      "meanBodyAlphaAtLeast128": 249.9645586317178,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        31,
+        17,
+        1202,
+        1198
+      ],
+      "bboxAlphaAtLeast16": [
+        72,
+        182,
+        1183,
+        1131
+      ],
+      "alphaBounds": [
+        72,
+        182,
+        1183,
+        1131
+      ],
+      "bboxAlphaAtLeast128": [
+        73,
+        183,
+        1182,
+        1130
+      ],
+      "bboxAlpha255": [
+        102,
+        198,
+        1181,
+        1127
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 72,
+        "top": 182,
+        "right": 71,
+        "bottom": 123
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.05741626794258373,
+        "top": 0.14513556618819776,
+        "right": 0.05661881977671451,
+        "bottom": 0.09808612440191387
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 4777,
+        "visiblePixels": 3369,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5003987240829346,
+          "y": 0.9019138755980861
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4538488481778956,
+          "y": 0.9019138755980861
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 5.7 %, silhouette non tronquée. "
+  },
+  {
+    "sourceNumber": 16,
+    "slug": "humanoide-armure-bronze",
+    "sourceFile": "Gemini_Generated_Image_eqngv9eqngv9eqng.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the single standing female-looking humanoid facing left, visible pale face, enclosing bronze-black biomechanical head armor and ribbed body armor, all hands and boots. Do not cover the visible face, add weapons or invent a tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-fc235427-538e-4965-81e7-836c026add8e.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-fc235427-538e-4965-81e7-836c026add8e.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 592891,
+      "sha256": "0a57c2d04da1397b4b49c6fd4457d444440a22c468a7a8860aec5825ccc2e8aa",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1369538,
+      "alpha1to254": 202229,
+      "alpha255": 749,
+      "transparentFraction": 0.8709215041373188,
+      "alphaAtLeast16": 192076,
+      "alphaAtLeast128": 188469,
+      "meanBodyAlphaAtLeast128": 251.56767956533966,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        59,
+        21,
+        1194,
+        1211
+      ],
+      "bboxAlphaAtLeast16": [
+        472,
+        58,
+        830,
+        1208
+      ],
+      "alphaBounds": [
+        472,
+        58,
+        830,
+        1208
+      ],
+      "bboxAlphaAtLeast128": [
+        472,
+        59,
+        830,
+        1208
+      ],
+      "bboxAlpha255": [
+        473,
+        64,
+        805,
+        1206
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 472,
+        "top": 58,
+        "right": 424,
+        "bottom": 46
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.3763955342902711,
+        "top": 0.046251993620414676,
+        "right": 0.33811802232854865,
+        "bottom": 0.03668261562998405
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 11072,
+        "visiblePixels": 9938,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5191387559808612,
+          "y": 0.9633173843700159
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5044369223702023,
+          "y": 0.9633173843700159
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 3.7 %, silhouette non tronquée. Humanoïde en armure à identité et nature biologique non établies ; ne pas assimiler automatiquement aux quatre Human Xeno Armor nommées."
+  },
+  {
+    "sourceNumber": 17,
+    "slug": "quadrupede-rouge-corne",
+    "sourceFile": "Gemini_Generated_Image_fmrnhxfmrnhxfmrn.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the entire rust-red armored low creature facing left, horned head crest, stacked long blades behind head and shoulders, large forelimbs, small inner arms and long hooked spiny tail. Preserve exact visible limb count.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-786324eb-31d8-4a76-8db9-bbd5e879a359.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-786324eb-31d8-4a76-8db9-bbd5e879a359.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 867878,
+      "sha256": "394ababca00c4eb2b14a42e886601b35890d04042aa386fb068938321bc1a03c",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1259904,
+      "alpha1to254": 309246,
+      "alpha255": 3366,
+      "transparentFraction": 0.8012026586692917,
+      "alphaAtLeast16": 289005,
+      "alphaAtLeast128": 281146,
+      "meanBodyAlphaAtLeast128": 250.70898394428517,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        0,
+        21,
+        1240,
+        1222
+      ],
+      "bboxAlphaAtLeast16": [
+        109,
+        277,
+        1189,
+        1016
+      ],
+      "alphaBounds": [
+        109,
+        277,
+        1189,
+        1016
+      ],
+      "bboxAlphaAtLeast128": [
+        110,
+        278,
+        1188,
+        1015
+      ],
+      "bboxAlpha255": [
+        114,
+        279,
+        1187,
+        1010
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 109,
+        "top": 277,
+        "right": 65,
+        "bottom": 238
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.08692185007974482,
+        "top": 0.22089314194577353,
+        "right": 0.051834130781499205,
+        "bottom": 0.189792663476874
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 4218,
+        "visiblePixels": 3389,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5175438596491229,
+          "y": 0.810207336523126
+        },
+        "alphaWeightedBottom": {
+          "x": 0.45761551482278523,
+          "y": 0.810207336523126
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 5.2 %, silhouette non tronquée. Les deux petits bras thoraciques sont préservés en plus des quatre grands membres."
+  },
+  {
+    "sourceNumber": 18,
+    "slug": "bipede-dome-verdoyant",
+    "sourceFile": "Gemini_Generated_Image_fvh27hfvh27hfvh2.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the bronze biomechanical biped facing right, translucent green dome, protruding narrow inner mouth, dorsal tubes and long curved segmented tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-1fff6464-e2c7-443f-8736-843411f1cd0b.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-1fff6464-e2c7-443f-8736-843411f1cd0b.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1119097,
+      "sha256": "7b53249ba6e7f4f4f04eac94c8fef068463937a7d884feba5cc2fe324921c5a4",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1183396,
+      "alpha1to254": 387168,
+      "alpha255": 1952,
+      "transparentFraction": 0.752549417621188,
+      "alphaAtLeast16": 363337,
+      "alphaAtLeast128": 355915,
+      "meanBodyAlphaAtLeast128": 251.1893204838234,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        39,
+        40,
+        1240,
+        1228
+      ],
+      "bboxAlphaAtLeast16": [
+        194,
+        143,
+        1148,
+        1172
+      ],
+      "alphaBounds": [
+        194,
+        143,
+        1148,
+        1172
+      ],
+      "bboxAlphaAtLeast128": [
+        195,
+        144,
+        1147,
+        1171
+      ],
+      "bboxAlpha255": [
+        197,
+        145,
+        1141,
+        1170
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 194,
+        "top": 143,
+        "right": 106,
+        "bottom": 82
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.1547049441786284,
+        "top": 0.11403508771929824,
+        "right": 0.08452950558213716,
+        "bottom": 0.06539074960127592
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 3284,
+        "visiblePixels": 2226,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5350877192982456,
+          "y": 0.9346092503987241
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5123481007542551,
+          "y": 0.9346092503987241
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 6.5 %, silhouette non tronquée. "
+  },
+  {
+    "sourceNumber": 19,
+    "slug": "quadrupede-plaques-bleues",
+    "sourceFile": "Gemini_Generated_Image_gwuus4gwuus4gwuu.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the fleshy dusty-pink quadruped facing left, multiple black eyes, layered dark-blue dorsal armor, purple tendrils and thick tail ending in flowing purple filaments.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-42918451-397f-48aa-a759-ef08af38bc33.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-42918451-397f-48aa-a759-ef08af38bc33.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1124792,
+      "sha256": "19cafc56135b410572ae10f9bf598e5a27e608107666e4155f483569763222b0",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1162937,
+      "alpha1to254": 407162,
+      "alpha255": 2417,
+      "transparentFraction": 0.7395390571542674,
+      "alphaAtLeast16": 390674,
+      "alphaAtLeast128": 384433,
+      "meanBodyAlphaAtLeast128": 251.76845119955883,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        33,
+        53,
+        1236,
+        1198
+      ],
+      "bboxAlphaAtLeast16": [
+        49,
+        303,
+        1233,
+        994
+      ],
+      "alphaBounds": [
+        49,
+        303,
+        1233,
+        994
+      ],
+      "bboxAlphaAtLeast128": [
+        50,
+        304,
+        1232,
+        994
+      ],
+      "bboxAlpha255": [
+        51,
+        305,
+        1222,
+        993
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 49,
+        "top": 303,
+        "right": 21,
+        "bottom": 260
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.03907496012759171,
+        "top": 0.24162679425837322,
+        "right": 0.01674641148325359,
+        "bottom": 0.20733652312599682
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 23308,
+        "visiblePixels": 20860,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.511164274322169,
+          "y": 0.7926634768740032
+        },
+        "alphaWeightedBottom": {
+          "x": 0.48817264392457843,
+          "y": 0.7926634768740032
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 1.7 %, silhouette non tronquée. "
+  },
+  {
+    "sourceNumber": 21,
+    "slug": "quadrupede-lobes-violets",
+    "sourceFile": "Gemini_Generated_Image_lw929glw929glw92.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the crouched purple-black biomechanical quadruped facing left, lobed bulbous skull, thin long forearms, hind legs and thickened tail tip.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-4c581827-eb91-4210-9816-62d2f2605c9e.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-4c581827-eb91-4210-9816-62d2f2605c9e.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 663494,
+      "sha256": "8bd1f08747535106f605166b97d75cad9b4026fc42d711d3c9efa6e3673ea4ff",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1347820,
+      "alpha1to254": 222891,
+      "alpha255": 1805,
+      "transparentFraction": 0.8571105158866428,
+      "alphaAtLeast16": 208955,
+      "alphaAtLeast128": 203650,
+      "meanBodyAlphaAtLeast128": 251.1184876012767,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        58,
+        49,
+        1204,
+        1196
+      ],
+      "bboxAlphaAtLeast16": [
+        61,
+        356,
+        1201,
+        960
+      ],
+      "alphaBounds": [
+        61,
+        356,
+        1201,
+        960
+      ],
+      "bboxAlphaAtLeast128": [
+        61,
+        356,
+        1200,
+        960
+      ],
+      "bboxAlpha255": [
+        72,
+        357,
+        1199,
+        958
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 61,
+        "top": 356,
+        "right": 53,
+        "bottom": 294
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.04864433811802233,
+        "top": 0.2838915470494418,
+        "right": 0.04226475279106858,
+        "bottom": 0.23444976076555024
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 4426,
+        "visiblePixels": 3631,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5031897926634769,
+          "y": 0.7655502392344498
+        },
+        "alphaWeightedBottom": {
+          "x": 0.40689873818755384,
+          "y": 0.7655502392344498
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 4.2 %, silhouette non tronquée. "
+  },
+  {
+    "sourceNumber": 22,
+    "slug": "quadrupede-vesicules-vertes",
+    "sourceFile": "Gemini_Generated_Image_n66mdvn66mdvn66m.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the black-and-gold biomechanical quadruped facing left, bright green skull vesicles and limb panels, dorsal tubes and very long raised blade-ended tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-04f2a798-9e28-4b4f-b8eb-c8da4fee26ba.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-04f2a798-9e28-4b4f-b8eb-c8da4fee26ba.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 742162,
+      "sha256": "ddd33d23528edb649cd894aaa5f572f7d0815e710b0c30f8da5e6561fcfc4e65",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1315247,
+      "alpha1to254": 255489,
+      "alpha255": 1780,
+      "transparentFraction": 0.8363965772049379,
+      "alphaAtLeast16": 231695,
+      "alphaAtLeast128": 225596,
+      "meanBodyAlphaAtLeast128": 250.69986169967552,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        37,
+        19,
+        1222,
+        1228
+      ],
+      "bboxAlphaAtLeast16": [
+        43,
+        256,
+        1219,
+        1029
+      ],
+      "alphaBounds": [
+        43,
+        256,
+        1219,
+        1029
+      ],
+      "bboxAlphaAtLeast128": [
+        43,
+        256,
+        1218,
+        1028
+      ],
+      "bboxAlpha255": [
+        46,
+        257,
+        1213,
+        1026
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 43,
+        "top": 256,
+        "right": 35,
+        "bottom": 225
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.0342902711323764,
+        "top": 0.20414673046251994,
+        "right": 0.027910685805422646,
+        "bottom": 0.17942583732057416
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 10772,
+        "visiblePixels": 9024,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5031897926634769,
+          "y": 0.8205741626794258
+        },
+        "alphaWeightedBottom": {
+          "x": 0.3602654911098913,
+          "y": 0.8205741626794258
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 2.8 %, silhouette non tronquée."
+  },
+  {
+    "sourceNumber": 23,
+    "slug": "quadrupede-dome-noir",
+    "sourceFile": "Gemini_Generated_Image_n985bqn985bqn985.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the whole black/dark-gray biomechanical quadruped facing right, long smooth dome, ribbed torso, thin forelimbs, bent hindlegs and long tail sweeping left.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-6fbafa9c-2e53-448c-9419-dce5b2a5854a.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-6fbafa9c-2e53-448c-9419-dce5b2a5854a.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 607851,
+      "sha256": "d4aa135264e99b4ea84d3cb623d00473e2b6dabbcdb52a236ecb878f2de1c494",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1344508,
+      "alpha1to254": 226099,
+      "alpha255": 1909,
+      "transparentFraction": 0.8550043369987969,
+      "alphaAtLeast16": 214293,
+      "alphaAtLeast128": 209295,
+      "meanBodyAlphaAtLeast128": 251.1399985666165,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        44,
+        53,
+        1210,
+        1198
+      ],
+      "bboxAlphaAtLeast16": [
+        47,
+        311,
+        1208,
+        975
+      ],
+      "alphaBounds": [
+        47,
+        311,
+        1208,
+        975
+      ],
+      "bboxAlphaAtLeast128": [
+        48,
+        312,
+        1207,
+        975
+      ],
+      "bboxAlpha255": [
+        51,
+        313,
+        1206,
+        974
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 47,
+        "top": 311,
+        "right": 46,
+        "bottom": 279
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.037480063795853266,
+        "top": 0.24800637958532695,
+        "right": 0.03668261562998405,
+        "bottom": 0.22248803827751196
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 7849,
+        "visiblePixels": 7131,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5003987240829346,
+          "y": 0.777511961722488
+        },
+        "alphaWeightedBottom": {
+          "x": 0.6289675456117158,
+          "y": 0.777511961722488
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 3.7 %, silhouette non tronquée."
+  },
+  {
+    "sourceNumber": 24,
+    "slug": "quadrupede-nageoire-noire",
+    "sourceFile": "Gemini_Generated_Image_r3z0bgr3z0bgr3z0.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the full dark brown-black armored quadruped facing left, sloped elongated head, dorsal sail, trailing thin tendrils and thick plated curving tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-8a486679-f444-4941-bd9f-5af3daa35f6a.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-8a486679-f444-4941-bd9f-5af3daa35f6a.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 648784,
+      "sha256": "3b3a78091028793320e98006ea40645dc5da59b78051eb1055c49dbee220d615",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1344947,
+      "alpha1to254": 226083,
+      "alpha255": 1486,
+      "transparentFraction": 0.8552835074492088,
+      "alphaAtLeast16": 209540,
+      "alphaAtLeast128": 203377,
+      "meanBodyAlphaAtLeast128": 250.6807554443226,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        83,
+        53,
+        1227,
+        1182
+      ],
+      "bboxAlphaAtLeast16": [
+        86,
+        429,
+        1224,
+        869
+      ],
+      "alphaBounds": [
+        86,
+        429,
+        1224,
+        869
+      ],
+      "bboxAlphaAtLeast128": [
+        86,
+        429,
+        1223,
+        868
+      ],
+      "bboxAlpha255": [
+        101,
+        435,
+        1221,
+        867
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 86,
+        "top": 429,
+        "right": 30,
+        "bottom": 385
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.0685805422647528,
+        "top": 0.34210526315789475,
+        "right": 0.023923444976076555,
+        "bottom": 0.30701754385964913
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 4602,
+        "visiblePixels": 3852,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5223285486443381,
+          "y": 0.6929824561403509
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4395765478537391,
+          "y": 0.6929824561403509
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 2.4 %, silhouette non tronquée."
+  },
+  {
+    "sourceNumber": 25,
+    "slug": "quadrupede-pale-epineux",
+    "sourceFile": "Gemini_Generated_Image_rlavtbrlavtbrlav.jpg",
+    "status": "held_visual_quality",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the whole pale bone-colored creature facing left, enormous swept blade-like cranial crest, sage-green dorsal spikes and long claws, naturally red mouth, four limbs. Preserve source creature, no new injuries.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-40a65331-0d25-40df-8865-9e3f1b8dc16e.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-40a65331-0d25-40df-8865-9e3f1b8dc16e.png",
+      "width": 1498,
+      "height": 1050,
+      "sourceWidth": 1498,
+      "sourceHeight": 1050,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 1406241,
+      "sha256": "82a3cdfece79e1a2b279d22a45c612bc7f80ae8c954c57020d84b914a72a0559",
+      "totalPixels": 1572900,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1045188,
+      "alpha1to254": 525521,
+      "alpha255": 2191,
+      "transparentFraction": 0.6644974251382796,
+      "alphaAtLeast16": 481672,
+      "alphaAtLeast128": 471524,
+      "meanBodyAlphaAtLeast128": 251.15399852393514,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        33,
+        9,
+        1456,
+        1020
+      ],
+      "bboxAlphaAtLeast16": [
+        104,
+        49,
+        1449,
+        1017
+      ],
+      "alphaBounds": [
+        104,
+        49,
+        1449,
+        1017
+      ],
+      "bboxAlphaAtLeast128": [
+        105,
+        50,
+        1449,
+        1016
+      ],
+      "bboxAlpha255": [
+        106,
+        53,
+        1448,
+        1014
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 104,
+        "top": 49,
+        "right": 49,
+        "bottom": 33
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.06942590120160214,
+        "top": 0.04666666666666667,
+        "right": 0.03271028037383177,
+        "bottom": 0.03142857142857143
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 17012,
+        "visiblePixels": 13101,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5183578104138852,
+          "y": 0.9685714285714285
+        },
+        "alphaWeightedBottom": {
+          "x": 0.5047512994561307,
+          "y": 0.9685714285714285
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Trois sorties intégrées conservées ; les contours présentent toujours des résidus verts/blancs parasites. Aucune copie runtime, aucune admission. Référence source préservée.",
+    "correctionPrompt": "Edit only the attached transparent PNG. Preserve exactly this single creature, its pose, anatomy, bone-white armor, muted sage-green spikes and claws, existing red mouth details, lighting, and texture. Clean the cutout edges: remove all bright neon green, cyan, yellow and white stray matte pixels outside the creature silhouette and in the transparent gaps between spikes, legs and claws. Do not recolor the actual sage-green spikes. Make every empty area truly transparent with clean antialiased edges and no color halo. Fit the complete unchanged creature inside the central 75 percent of the square canvas, leaving generous transparent space on all four sides. No scene, shadow, checkerboard or text.",
+    "attempts": [
+      {
+        "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the whole pale bone-colored creature facing left, enormous swept blade-like cranial crest, sage-green dorsal spikes and long claws, naturally red mouth, four limbs. Preserve source creature, no new injuries.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+        "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-d319cb1c-492f-44d6-883f-5b2f32c015e1.png",
+        "audit": {
+          "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-d319cb1c-492f-44d6-883f-5b2f32c015e1.png",
+          "width": 1254,
+          "height": 1254,
+          "sourceWidth": 1254,
+          "sourceHeight": 1254,
+          "format": "RGBA8 non-interlaced",
+          "bytes": 1133320,
+          "sha256": "8a83f15b642c4384eda149d7505c84a44411db4f97e46e57e09811cbe4e79457",
+          "totalPixels": 1572516,
+          "alphaMin": 0,
+          "alphaMax": 255,
+          "alpha0": 1146885,
+          "alpha1to254": 423468,
+          "alpha255": 2163,
+          "transparentFraction": 0.7293312118922797,
+          "alphaAtLeast16": 380240,
+          "alphaAtLeast128": 371342,
+          "meanBodyAlphaAtLeast128": 250.94826063305524,
+          "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+          "bboxAlphaNonzero": [
+            0,
+            21,
+            1236,
+            1222
+          ],
+          "bboxAlphaAtLeast16": [
+            70,
+            233,
+            1230,
+            1098
+          ],
+          "alphaBounds": [
+            70,
+            233,
+            1230,
+            1098
+          ],
+          "bboxAlphaAtLeast128": [
+            71,
+            234,
+            1229,
+            1097
+          ],
+          "bboxAlpha255": [
+            72,
+            241,
+            1226,
+            1090
+          ],
+          "marginsAlphaAtLeast16": {
+            "left": 70,
+            "top": 233,
+            "right": 24,
+            "bottom": 156
+          },
+          "marginFractionsAlphaAtLeast16": {
+            "left": 0.05582137161084529,
+            "top": 0.18580542264752792,
+            "right": 0.019138755980861243,
+            "bottom": 0.12440191387559808
+          },
+          "visiblePadding5Percent": false,
+          "visiblePadding8Percent": false,
+          "outer8PercentBand": {
+            "fraction": 0.08,
+            "nonzeroPixels": 10017,
+            "visiblePixels": 7512,
+            "maxAlpha": 255
+          },
+          "pivotCandidates": {
+            "visibleBoundsBottomCenter": {
+              "x": 0.518341307814992,
+              "y": 0.8755980861244019
+            },
+            "alphaWeightedBottom": {
+              "x": 0.507304277947035,
+              "y": 0.8755980861244019
+            },
+            "canvasBottomCenter": {
+              "x": 0.5,
+              "y": 1
+            },
+            "status": "measurement-only-requires-visual-ground-contact-review"
+          }
+        },
+        "review": "Silhouette complète mais résidus verts vifs et blancs autour des pointes et des pieds ; non admis avant correction."
+      },
+      {
+        "prompt": "Edit only the attached transparent PNG. Preserve exactly this single creature, its pose, anatomy, bone-white armor, muted sage-green spikes and claws, existing red mouth details, lighting, and texture. Clean the cutout edges: remove all bright neon green, cyan, yellow and white stray matte pixels outside the creature silhouette and in the transparent gaps between spikes, legs and claws. Do not recolor the actual sage-green spikes. Make every empty area truly transparent with clean antialiased edges and no color halo. Fit the complete unchanged creature inside the central 75 percent of the square canvas, leaving generous transparent space on all four sides. No scene, shadow, checkerboard or text.",
+        "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-04b99490-9ec6-4ae1-b9f7-92f1a7a8c9e5.png",
+        "review": "Correction visuelle insuffisante : résidus néon encore présents.",
+        "audit": {
+          "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-04b99490-9ec6-4ae1-b9f7-92f1a7a8c9e5.png",
+          "width": 1254,
+          "height": 1254,
+          "sourceWidth": 1254,
+          "sourceHeight": 1254,
+          "format": "RGBA8 non-interlaced",
+          "bytes": 1131059,
+          "sha256": "cc35fb2db79fe80c5bba54f34ad858bef5130064c40a748faa4f98295d6ca518",
+          "totalPixels": 1572516,
+          "alphaMin": 0,
+          "alphaMax": 255,
+          "alpha0": 1147557,
+          "alpha1to254": 424059,
+          "alpha255": 900,
+          "transparentFraction": 0.7297585525361904,
+          "alphaAtLeast16": 382177,
+          "alphaAtLeast128": 372397,
+          "meanBodyAlphaAtLeast128": 250.6645569110385,
+          "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+          "bboxAlphaNonzero": [
+            41,
+            19,
+            1232,
+            1228
+          ],
+          "bboxAlphaAtLeast16": [
+            72,
+            236,
+            1228,
+            1095
+          ],
+          "alphaBounds": [
+            72,
+            236,
+            1228,
+            1095
+          ],
+          "bboxAlphaAtLeast128": [
+            73,
+            237,
+            1227,
+            1094
+          ],
+          "bboxAlpha255": [
+            75,
+            244,
+            1214,
+            1073
+          ],
+          "marginsAlphaAtLeast16": {
+            "left": 72,
+            "top": 236,
+            "right": 26,
+            "bottom": 159
+          },
+          "marginFractionsAlphaAtLeast16": {
+            "left": 0.05741626794258373,
+            "top": 0.18819776714513556,
+            "right": 0.02073365231259968,
+            "bottom": 0.12679425837320574
+          },
+          "visiblePadding5Percent": false,
+          "visiblePadding8Percent": false,
+          "outer8PercentBand": {
+            "fraction": 0.08,
+            "nonzeroPixels": 9239,
+            "visiblePixels": 7292,
+            "maxAlpha": 255
+          },
+          "pivotCandidates": {
+            "visibleBoundsBottomCenter": {
+              "x": 0.518341307814992,
+              "y": 0.8732057416267942
+            },
+            "alphaWeightedBottom": {
+              "x": 0.5067751772267527,
+              "y": 0.8732057416267942
+            },
+            "canvasBottomCenter": {
+              "x": 0.5,
+              "y": 1
+            },
+            "status": "measurement-only-requires-visual-ground-contact-review"
+          }
+        }
+      },
+      {
+        "prompt": "Create a clean isolated transparent PNG cutout of the SINGLE creature in the attached original reference image. Keep the same exact pose, anatomy, proportions, bone-white sculpted armor, pale gray-green horns and claws, existing mouth coloring and fine sculpted textures. Do not modify or amplify the creature. Remove only the white background. Smooth professionally antialiased natural edges with absolutely no neon-colored outline, no green or cyan spill and no white halo. All gaps between its horns and limbs are empty transparency. Center the complete creature at 70 percent of canvas width, with generous transparent border. No backdrop, floor, shadow, text, checkerboard or extra subject.",
+        "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-40a65331-0d25-40df-8865-9e3f1b8dc16e.png",
+        "audit": {
+          "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-40a65331-0d25-40df-8865-9e3f1b8dc16e.png",
+          "width": 1498,
+          "height": 1050,
+          "sourceWidth": 1498,
+          "sourceHeight": 1050,
+          "format": "RGBA8 non-interlaced",
+          "bytes": 1406241,
+          "sha256": "82a3cdfece79e1a2b279d22a45c612bc7f80ae8c954c57020d84b914a72a0559",
+          "totalPixels": 1572900,
+          "alphaMin": 0,
+          "alphaMax": 255,
+          "alpha0": 1045188,
+          "alpha1to254": 525521,
+          "alpha255": 2191,
+          "transparentFraction": 0.6644974251382796,
+          "alphaAtLeast16": 481672,
+          "alphaAtLeast128": 471524,
+          "meanBodyAlphaAtLeast128": 251.15399852393514,
+          "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+          "bboxAlphaNonzero": [
+            33,
+            9,
+            1456,
+            1020
+          ],
+          "bboxAlphaAtLeast16": [
+            104,
+            49,
+            1449,
+            1017
+          ],
+          "alphaBounds": [
+            104,
+            49,
+            1449,
+            1017
+          ],
+          "bboxAlphaAtLeast128": [
+            105,
+            50,
+            1449,
+            1016
+          ],
+          "bboxAlpha255": [
+            106,
+            53,
+            1448,
+            1014
+          ],
+          "marginsAlphaAtLeast16": {
+            "left": 104,
+            "top": 49,
+            "right": 49,
+            "bottom": 33
+          },
+          "marginFractionsAlphaAtLeast16": {
+            "left": 0.06942590120160214,
+            "top": 0.04666666666666667,
+            "right": 0.03271028037383177,
+            "bottom": 0.03142857142857143
+          },
+          "visiblePadding5Percent": false,
+          "visiblePadding8Percent": false,
+          "outer8PercentBand": {
+            "fraction": 0.08,
+            "nonzeroPixels": 17012,
+            "visiblePixels": 13101,
+            "maxAlpha": 255
+          },
+          "pivotCandidates": {
+            "visibleBoundsBottomCenter": {
+              "x": 0.5183578104138852,
+              "y": 0.9685714285714285
+            },
+            "alphaWeightedBottom": {
+              "x": 0.5047512994561307,
+              "y": 0.9685714285714285
+            },
+            "canvasBottomCenter": {
+              "x": 0.5,
+              "y": 1
+            },
+            "status": "measurement-only-requires-visual-ground-contact-review"
+          }
+        },
+        "review": "Résidus néon verts/blancs encore visibles après correction depuis original. Non admis."
+      }
+    ],
+    "finalCorrectionPrompt": "Create a clean isolated transparent PNG cutout of the SINGLE creature in the attached original reference image. Keep the same exact pose, anatomy, proportions, bone-white sculpted armor, pale gray-green horns and claws, existing mouth coloring and fine sculpted textures. Do not modify or amplify the creature. Remove only the white background. Smooth professionally antialiased natural edges with absolutely no neon-colored outline, no green or cyan spill and no white halo. All gaps between its horns and limbs are empty transparency. Center the complete creature at 70 percent of canvas width, with generous transparent border. No backdrop, floor, shadow, text, checkerboard or extra subject."
+  },
+  {
+    "sourceNumber": 26,
+    "slug": "bipede-brun-orange",
+    "sourceFile": "Gemini_Generated_Image_t2yow1t2yow1t2yo.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the rust-orange biomechanical biped facing left, layered striated elongated head, dorsal tubes, claws and segmented S-shaped tail.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-5de0fdd1-c6b2-451f-8343-85123779f913.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-5de0fdd1-c6b2-451f-8343-85123779f913.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 921102,
+      "sha256": "247f29bbb7f13f97d3b7aaf939b66178445735ffd00b4fee9cfbd79b2a29bb49",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1226558,
+      "alpha1to254": 344167,
+      "alpha255": 1791,
+      "transparentFraction": 0.7799971510623739,
+      "alphaAtLeast16": 320786,
+      "alphaAtLeast128": 313860,
+      "meanBodyAlphaAtLeast128": 251.05667495061493,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        39,
+        21,
+        1222,
+        1254
+      ],
+      "bboxAlphaAtLeast16": [
+        165,
+        246,
+        1154,
+        1099
+      ],
+      "alphaBounds": [
+        165,
+        246,
+        1154,
+        1099
+      ],
+      "bboxAlphaAtLeast128": [
+        165,
+        247,
+        1153,
+        1098
+      ],
+      "bboxAlpha255": [
+        178,
+        249,
+        1152,
+        1097
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 165,
+        "top": 246,
+        "right": 100,
+        "bottom": 155
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.13157894736842105,
+        "top": 0.19617224880382775,
+        "right": 0.07974481658692185,
+        "bottom": 0.12360446570972887
+      },
+      "visiblePadding5Percent": true,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 172,
+        "visiblePixels": 0,
+        "maxAlpha": 6
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5259170653907496,
+          "y": 0.8763955342902712
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4809872237864926,
+          "y": 0.8763955342902712
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 8.0 %, silhouette non tronquée."
+  },
+  {
+    "sourceNumber": 27,
+    "slug": "reptilien-nageoire",
+    "sourceFile": "Gemini_Generated_Image_ysxxlrysxxlrysxx.jpg",
+    "status": "accepted",
+    "prompt": "Use case: background-extraction\nAsset type: one static 1x1 game creature PNG.\nInput image 1 is the sole edit target; ignore every other conversation image. Keep the gray-brown scaled reptilian quadruped facing left, multiple eyes on head, large blue-gray dorsal fin, trailing fine tendrils and looped long tail ending with a small fin.\nChange only background and framing. Preserve exact pose, anatomy, proportions, color palette, texture, fine edges and internal details. Remove all background and floor shadows. Reframe the entire unchanged silhouette smaller, centered with at least 10 percent entirely transparent padding on ALL sides; do not crop anything. Output one standalone PNG cutout with real alpha transparency. No checkerboard, scene, floor, caption, frame, extra view or extra creature. No redesign.",
+    "outputPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-50b49db8-956c-4e03-a246-c649ada922ff.png",
+    "audit": {
+      "path": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dee0-c4ae-7571-97a2-40090ca5e427\\exec-50b49db8-956c-4e03-a246-c649ada922ff.png",
+      "width": 1254,
+      "height": 1254,
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "format": "RGBA8 non-interlaced",
+      "bytes": 750746,
+      "sha256": "40596b4566d6bf99267b021ce45508a2419480186fc606380a3e75e131274471",
+      "totalPixels": 1572516,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alpha0": 1292300,
+      "alpha1to254": 279216,
+      "alpha255": 1000,
+      "transparentFraction": 0.8218040388778238,
+      "alphaAtLeast16": 256823,
+      "alphaAtLeast128": 250523,
+      "meanBodyAlphaAtLeast128": 250.99192888477305,
+      "bboxConvention": "[left, top, rightExclusive, bottomExclusive], zero-based",
+      "bboxAlphaNonzero": [
+        25,
+        21,
+        1253,
+        1198
+      ],
+      "bboxAlphaAtLeast16": [
+        77,
+        347,
+        1201,
+        965
+      ],
+      "alphaBounds": [
+        77,
+        347,
+        1201,
+        965
+      ],
+      "bboxAlphaAtLeast128": [
+        77,
+        348,
+        1200,
+        964
+      ],
+      "bboxAlpha255": [
+        78,
+        352,
+        1194,
+        963
+      ],
+      "marginsAlphaAtLeast16": {
+        "left": 77,
+        "top": 347,
+        "right": 53,
+        "bottom": 289
+      },
+      "marginFractionsAlphaAtLeast16": {
+        "left": 0.06140350877192982,
+        "top": 0.2767145135566188,
+        "right": 0.04226475279106858,
+        "bottom": 0.23046251993620415
+      },
+      "visiblePadding5Percent": false,
+      "visiblePadding8Percent": false,
+      "outer8PercentBand": {
+        "fraction": 0.08,
+        "nonzeroPixels": 10001,
+        "visiblePixels": 8782,
+        "maxAlpha": 255
+      },
+      "pivotCandidates": {
+        "visibleBoundsBottomCenter": {
+          "x": 0.5095693779904307,
+          "y": 0.7695374800637959
+        },
+        "alphaWeightedBottom": {
+          "x": 0.4491694041266247,
+          "y": 0.7695374800637959
+        },
+        "canvasBottomCenter": {
+          "x": 0.5,
+          "y": 1
+        },
+        "status": "measurement-only-requires-visual-ground-contact-review"
+      }
+    },
+    "review": "Détourage intégré OpenAI, alpha natif intact. Pose, anatomie, palette et extrémités relues ; aucune certification canon. Marge minimale visible 4.2 %, silhouette non tronquée."
+  }
+]

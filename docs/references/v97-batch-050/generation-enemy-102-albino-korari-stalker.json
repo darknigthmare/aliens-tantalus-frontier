@@ -1,0 +1,50 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-102-albino-korari-stalker",
+  "name": "Albino Korari Stalker",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: dedicated static creature sprite for Alien Tantalus Frontier.\nInput image 1 is the existing base identity AND rendering-style reference only. If it contains multiple animation frames, use them to understand the SAME single subject, never reproduce the grid.\nCreate ONE new full-body standing/ready static pose of Albino Korari Stalker. This is an original systemic project variant, not a canon-exact claim.\nAnatomy and identity: Korari Stalker as pictured: crouched low muscular reptilian quadruped, FOUR bent clawed legs, long tapered tail, short elongated predatory wedge head, overlapping rough stone-like scales/plates along back, small turquoise bioluminescent dots along side. Preserve this exact lizard/beast silhouette, not biped or xenomorph.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nStyle: match the source's detailed textured realistic painted game-sprite rendering, anatomically legible silhouette, controlled highlights and dark contours, not cartoon or chibi. Preserve identifying shape and appendage counts.\nComposition: exactly ONE subject, fully visible, head/front facing RIGHT, slightly elevated side/three-quarter 2D-game view, neutral alert stance. All appendages, tail tips and feet included. At least 10% empty transparent padding on every side. Grounded extremities share an imaginary ground plane, no drawn floor.\nBackground: genuinely transparent RGBA. No backdrop, scenery, cast shadow blob or checkerboard painted into pixels.\nAvoid: grid, contact sheet, duplicate bodies, panels, text, numbers, logos, watermark, gore, blood, wounds, extra limbs, new weapons, mechanical suits, cropping. Only the single intact requested subject.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp",
+    "sha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df",
+    "visualNotes": "Viewed reference sheet: low quadrupedal armored reptilian predator, chunky gray-green overlapping plates, four clawed legs, long tapered tail, wedge-shaped head and small turquoise flank spots."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-810e4260-9e64-4856-84a9-3cb348040e1d.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-102-albino-korari-stalker.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "5bc736965ac9fa0b5eaa6a851a9603c7a0ff62fa6a22fe68d1de5aa8f63e86f0",
+    "bboxAlphaAtLeast16": [
+      115,
+      187,
+      1646,
+      756
+    ],
+    "alphaMin": 0,
+    "alpha0": 1131133,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single right-facing four-legged plated Korari with long tail and turquoise flank spots; pale-material variant intact. Side padding below requested 10%, but extremities remain entirely inside canvas.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 115,
+      "top": 187,
+      "right": 128,
+      "bottom": 131
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.64,
+      "y": 0.8523111612175873
+    },
+    "sourceFacing": 1
+  }
+}

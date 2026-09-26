@@ -1,0 +1,66 @@
+{
+  "pass": 92,
+  "date": "2026-09-23",
+  "scope": "enemy sprites only",
+  "jobs": [
+    {
+      "id": "comic-genocide-red-neca-v92",
+      "operation": "generate",
+      "references": [
+        "https://store.necaonline.com/blogs/behind-the-scenes/closer-look-aliens-series-5-action-figures"
+      ],
+      "referenceImages": [
+        "https://necaonline.com/wp-content/uploads/2015/05/1300x-Genocide_Red_Alien1.jpg",
+        "https://necaonline.com/wp-content/uploads/2015/05/1300x-Genocide31.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Create one full-body dedicated game sprite of the RED XENOMORPH WARRIOR from Aliens:Genocide, matching the licensed NECA series5 version in these last TWO images. Image1 is the red subject full frontal; image2 red subject on RIGHT provides the cranial/torso side view, exclude the black creature at left. Use observed anatomy directly, no redesign. Preserve its narrow curved ridged head, exposed longitudinal ribbing and small transverse dorsal cranial spines, rounded red frontal forehead plate, metallic pale teeth, red long side neck tubes, thin widely spaced red chest ribs with dark recesses, very slender abdominal waist, long tubular limbs with ribbed thigh/forearm insets, paired long fingers, four backward arched dorsal tubes, and thin segmented tail with small dorsal thorns and narrow pointed tip. Exact reference scarlet/dark-red exoskeleton, not magenta or black recolor. Two arms, two legs, one tail, NO queen crown or invented armor/horns. Newly painted detailed bitmap rendition, not a pasted photograph or toy render; remove toy hinge holes while preserving biological structures. Pose side/threequarter profile facing RIGHT, both arms lowered forward with hands separated, both feet visible apart, tail sweeps behind to LEFT, entire subject fully visible. A single isolated static sprite, no scene, second creature, floor, rock, base or props. Landscape1536x1024, whole silhouette comfortably within central80% of canvas: >=10% clear safe padding every edge including tail tip and top tubes. Genuinely transparent alpha background with opaque creature; no gradient, halo, glow, backdrop, shadow, grid, words, label, logo, watermark or montage. Fidelity to this specific NECA Genocide red interpretation rather than mixing different comic designs.",
+      "tool": "integrated-imagegen",
+      "apiCliUsed": false,
+      "result": {
+        "status": "refused",
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 277de37b-2ffc-419f-a43f-8b1db309206a.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+        "retried": false
+      },
+      "canonicalExact": false
+    },
+    {
+      "id": "game-raven-acm-hiya-v92",
+      "operation": "generate",
+      "references": [
+        "https://www.previewsworld.com/Catalog/APR182283",
+        "https://tfsource.com/hiyatoys/colonial-marines/xenomorph-raven/"
+      ],
+      "referenceImages": [
+        "https://xogfdrdwnj.execute-api.us-west-2.amazonaws.com/production//reduced-image_13134_106.jpg"
+      ],
+      "prompt": "Create ONE dedicated full-body static bitmap creature sprite faithfully matching the RAVEN from Aliens: Colonial Marines as depicted in the licensed Hiya figure in the LAST reference image. Use exactly this specimen's visible design, silhouette and proportions, with the SAME three-quarter frontal camera angle and pose so unsupported hidden anatomy is not invented. This is a newly painted game-sprite adaptation of that Hiya interpretation, not a reused toy photograph. Preserve the tall backward curved elongated ribbed cranium and its narrow top row of spines; dark smooth long front forehead, exposed small skull-like face and pale teeth; heavily layered upper torso with narrow ribcage and slim waist; long ribbed arms with slim curved fingers; two bent legs with the specific knee and calf backward-facing horns and flat broad separated clawed feet; backward splayed ribbed dorsal tubes; one very long segmented tail tapering toward the LOWER RIGHT and ending in a harpoon tip surrounded by large sawtooth projections. Exactly TWO arms, TWO legs, ONE tail. Preserve charcoal-black surfaces with subdued brown/gray highlights. No generic replacement head, no queen fan crown, no extra armor, no added limbs. Remove toy seams and articulation screw holes while keeping anatomical surface relief. Keep all fingers and tail tip distinct and the entire creature visible. Landscape1536x1024 canvas, scale silhouette to central76%, minimum12% completely empty padding on all four sides. Genuine transparent alpha background and opaque subject; no white or black matte, floor, shadow, base, scene, light aura, glow, words, UI, logo, border, grid or multi-pose sheet. Prioritize a close match to the supplied reference over any stylistic invention.",
+      "tool": "integrated-imagegen",
+      "apiCliUsed": false,
+      "result": {
+        "status": "refused",
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 7a19f8ca-a14b-4ec7-b6b8-a755e5722d26.\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"other\\\"\\n      ]\\n    }\\n  }\\n}\")",
+        "retried": false
+      },
+      "canonicalExact": false
+    },
+    {
+      "id": "game-smasher-capcom-correction-v92",
+      "operation": "generate",
+      "references": [
+        "https://www.spriters-resource.com/arcade/alienvspredator/asset/52835/"
+      ],
+      "referenceImages": [
+        "https://www.spriters-resource.com/media/assets/50/52835.png?updated=1755473047"
+      ],
+      "prompt": "Create ONE single enemy sprite of SMASHER from the 1994 Capcom Alien vs Predator arcade game, directly and closely matching the TOP LEFT idle/walking sprite visible in the LAST reference image. That image is a zoomed view of original arcade sprites; use its top-left complete creature alone, do not reproduce the sheet or blue background. Preserve the original arcade pixel-art look, dark olive-green body and gold/ivory highlights, slender hunched two-legged silhouette, right-facing profile, long curved tail extending LEFT with small narrow pointed tip, narrow chest ribs, long thin arms with small clawed hands held ahead, long slim shin and thigh forms with pointed low feet, curved backward dorsal tubes. Most important correction: follow the shallow cranial grooves of the reference, with the rear half showing subdued segmented ribs and the front half a long broad smooth golden highlight. Do NOT turn the cranial ribs into deep armor blocks and do NOT remove them entirely. Keep original proportions, head shape, short mouth, shoulder outline, joint geometry and tail curvature of that exact top-left arcade pose. Detailed clean pixel clusters, limited reference palette, no photographic texture and no redesign. One complete static sprite, two arms, two legs, one tail. Landscape1536x1024, center the full silhouette in the central76% of the canvas with at least12% empty padding at all four edges. Genuinely transparent alpha background and opaque body. No blue matte, black matte, glow, halo, shadow, scenery, floor, frame, labels, writing, copyright marks, watermark, grid, montage or additional poses. This is a newly rendered faithful fan-made sprite adaptation, not a claim of being the extracted original asset.",
+      "tool": "integrated-imagegen",
+      "apiCliUsed": false,
+      "result": {
+        "status": "generated",
+        "outputHint": "Generated images are saved to C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1 as C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-bca43d2e-9f15-4616-b97d-ae8391a6676e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "candidatePath": "docs/references/v91-enemy-only/pass-v92/game-smasher-capcom-correction-v92-candidate.png"
+      },
+      "canonicalExact": false
+    }
+  ]
+}

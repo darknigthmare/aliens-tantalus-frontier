@@ -1,5 +1,9 @@
-const CACHE = 'atf-v86-physical-placeables-shell-9';
+const CACHE = 'atf-v86-xeno-trials-v97-shell-1';
 const TITLE_BITMAPS_V87 = [
+  '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
+  '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
+  '/assets/openai/ui/title/v90/orbitals/narcissus-side-depth.png',
+  '/assets/openai/ui/title/v90/orbitals/nostromo-threequarter.png',
   '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png',
   '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
   '/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png',
@@ -26,7 +30,31 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/depth-lab-v97.html', '/depth-lab-v97.css', '/src/depth-lab-v97.js', '/src/depth-lab-model-v97.js',
+  '/src/xeno-trials-presentation-v97.js', '/src/xeno-trials-selection-v97.js',
+  '/src/enemy-dedicated-poses-v97.js', '/src/enemy-dedicated-batch-v97.js',
+  '/xeno-trials-v96.css', '/src/xeno-trials-data-v96.js', '/src/xeno-trials-engine-v96.js',
+  '/src/xeno-trials-runtime-v96.js', '/src/xeno-trials-progress-v96.js', '/src/xeno-trials-ui-v96.js',
+  '/src/enemy-dedicated-poses-v96.js',
+  '/src/enemy-static-poses-v96.js', '/src/enemy-expansion-assets-v96.js',
+  '/src/enemy-expansion-queen-v96.js',
+  '/src/port-meridien-v90.js', '/src/hub-port-meridien-v90.js',
+  '/src/opening-exercise-v89.js', '/src/hub-opening-exercise-v89.js', '/src/title-menu-context-v89.js',
+  '/src/enemy-user-campaign-v88.js', '/src/enemy-user-campaign-runtime-v88.js', '/src/enemy-discovery-v88.js',
+  '/src/player-opening-v88.js', '/src/hub-opening-v88.js',
+  '/src/title-scene-angle-assets-v88.js', '/src/title-scene-motion-v88.js',
   '/src/enemy-user-castes-v87.js',
+  '/src/enemy-sprite-revisions-v92.js',
+  '/src/enemy-sprite-revisions-v93.js',
+  '/src/enemy-additional-poses-v94.js',
+  '/src/enemy-static-poses-v94.js',
+  '/src/enemy-user-creations-v95.js',
+  '/src/user-reference-art-v95.js',
+  '/src/user-reference-effects-v95.js',
+  '/src/enemy-static-poses-v95.js',
+  '/src/enemy-historical-variants-v95.js',
+  '/src/user-equipment-art-v95.js',
+  '/src/user-equipment-v95.js',
   '/src/enemy-user-pose-runtime-v87.js',
   ...TITLE_BITMAPS_V87,
   '/src/bioforge-physical-state-v87.js',

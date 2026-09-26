@@ -1,0 +1,293 @@
+{
+  "schema": 97,
+  "batch": "050",
+  "shard": "c",
+  "attempted": 16,
+  "received": 12,
+  "accepted": [
+    {
+      "id": "enemy-100-albino-cult-host",
+      "profileId": "enemy-100-albino-cult-host",
+      "name": "Albino Cult Host",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-100-albino-cult-host.png",
+      "sourceWidth": 1180,
+      "sourceHeight": 1333,
+      "alphaBounds": [
+        356,
+        96,
+        839,
+        1246
+      ],
+      "sha256": "efdfe1c12bc043ca0188532afd570deded16feb1d5644c385a7cd805363ed5ae",
+      "pivot": {
+        "x": 0.515,
+        "y": 0.9347336834208552
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 140
+    },
+    {
+      "id": "enemy-101-albino-wild-boar-host",
+      "profileId": "enemy-101-albino-wild-boar-host",
+      "name": "Albino Wild Boar Host",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-101-albino-wild-boar-host.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        190,
+        141,
+        1411,
+        921
+      ],
+      "sha256": "93cc54b97eec6f335d61b882031edc9c053783f2fcbe6061823613f460320fc0",
+      "pivot": {
+        "x": 0.48,
+        "y": 0.8994140625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-102-albino-korari-stalker",
+      "profileId": "enemy-102-albino-korari-stalker",
+      "name": "Albino Korari Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-102-albino-korari-stalker.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        115,
+        187,
+        1646,
+        756
+      ],
+      "sha256": "5bc736965ac9fa0b5eaa6a851a9603c7a0ff62fa6a22fe68d1de5aa8f63e86f0",
+      "pivot": {
+        "x": 0.64,
+        "y": 0.8523111612175873
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 288
+    },
+    {
+      "id": "enemy-103-albino-ceto-reef-predator",
+      "profileId": "enemy-103-albino-ceto-reef-predator",
+      "name": "Albino Ceto Reef Predator",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-103-albino-ceto-reef-predator.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        169,
+        284,
+        1641,
+        704
+      ],
+      "sha256": "f059472b572a019374f6df80534b1c648bb76a9d8f2ce55494738e1430141b2f",
+      "pivot": {
+        "x": 0.63,
+        "y": 0.7936865839909808
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 384
+    },
+    {
+      "id": "enemy-104-albino-tantalus-tunnel-vermin",
+      "profileId": "enemy-104-albino-tantalus-tunnel-vermin",
+      "name": "Albino Tantalus Tunnel Vermin",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-104-albino-tantalus-tunnel-vermin.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        223,
+        261,
+        1600,
+        762
+      ],
+      "sha256": "e5fab2ce734a9e6412a23f2b683912632f5a0f06e586bcc52b141804da469587",
+      "pivot": {
+        "x": 0.51,
+        "y": 0.859075535512965
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 76
+    },
+    {
+      "id": "enemy-105-armored-ovomorph",
+      "profileId": "enemy-105-armored-ovomorph",
+      "name": "Armored Ovomorph",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-105-armored-ovomorph.png",
+      "sourceWidth": 1145,
+      "sourceHeight": 1374,
+      "alphaBounds": [
+        184,
+        103,
+        986,
+        1285
+      ],
+      "sha256": "a8a7b29439b15c8c702e75893e7a59efbfc6b9e1d70f49ab74ecbe70fdaf0add",
+      "pivot": {
+        "x": 0.51,
+        "y": 0.9352256186317321
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 78
+    },
+    {
+      "id": "enemy-106-armored-facehugger",
+      "profileId": "enemy-106-armored-facehugger",
+      "name": "Armored Facehugger",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-106-armored-facehugger.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        67,
+        291,
+        1691,
+        769
+      ],
+      "sha256": "483f49ca0021b3908421dddd25c0cda4d6424bedb9d83126d7d659265ab43343",
+      "pivot": {
+        "x": 0.68,
+        "y": 0.8669673055242391
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 72
+    },
+    {
+      "id": "enemy-107-armored-chestburster",
+      "profileId": "enemy-107-armored-chestburster",
+      "name": "Armored Chestburster",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-107-armored-chestburster.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        238,
+        157,
+        1636,
+        753
+      ],
+      "sha256": "24ee5035c5767cb64a574bd021f3ca7242599cf176118fe64e0df9fa631ef307",
+      "pivot": {
+        "x": 0.59,
+        "y": 0.8489289740698985
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 188
+    },
+    {
+      "id": "enemy-110-armored-runner",
+      "profileId": "enemy-110-armored-runner",
+      "name": "Armored Runner",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-110-armored-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        96,
+        159,
+        1438,
+        917
+      ],
+      "sha256": "3db62341e648d4fa020c1b17ab56205f605362cc6337f58fe563b6fcbe998630",
+      "pivot": {
+        "x": 0.59,
+        "y": 0.8955078125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 256
+    },
+    {
+      "id": "enemy-117-armored-ravager",
+      "profileId": "enemy-117-armored-ravager",
+      "name": "Armored Ravager",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-117-armored-ravager.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        102,
+        167,
+        1150,
+        1101
+      ],
+      "sha256": "1c2de23b311763f75ef8b79e81b1367b52155685c9735bdbfb55a521cfe90b3d",
+      "pivot": {
+        "x": 0.61,
+        "y": 0.8779904306220095
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 158
+    },
+    {
+      "id": "enemy-118-armored-boiler",
+      "profileId": "enemy-118-armored-boiler",
+      "name": "Armored Boiler",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-118-armored-boiler.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        295,
+        84,
+        1129,
+        962
+      ],
+      "sha256": "f2b5ba713356c5242b9f11633daac45a2d133bbadc94631291c59b781653eddf",
+      "pivot": {
+        "x": 0.53,
+        "y": 0.939453125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 110
+    },
+    {
+      "id": "enemy-120-armored-burster",
+      "profileId": "enemy-120-armored-burster",
+      "name": "Armored Burster",
+      "path": "/assets/openai/sprites/static-enemy-v97/enemy-120-armored-burster.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        91,
+        107,
+        1439,
+        951
+      ],
+      "sha256": "1a0552520f912e2bebaab2e215d5801aa574991d9647c298b5cc911709552724",
+      "pivot": {
+        "x": 0.56,
+        "y": 0.9287109375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 256
+    }
+  ],
+  "held": [
+    {
+      "profileId": "enemy-112-armored-queen",
+      "name": "Armored Queen",
+      "receipt": "docs/references/v97-batch-050/generation-enemy-112-armored-queen.json",
+      "reason": "Held after grouped native generation interruption. Three independent calls for Armored Queen112, Crusher113, Lurker115 were launched using Promise.all. One call returned output moderation_blocked request c50d3bef-e02a-4624-ae9d-369d2e7c1baa; aggregate failure ended the exec before any of the three results were stored. The exact rejected target is unknown; the other two outputs were not recovered. This does NOT assert three moderation refusals. No target in this group was retried, no alternative source or local modification was used."
+    },
+    {
+      "profileId": "enemy-113-armored-crusher",
+      "name": "Armored Crusher",
+      "receipt": "docs/references/v97-batch-050/generation-enemy-113-armored-crusher.json",
+      "reason": "Held after grouped native generation interruption. Three independent calls for Armored Queen112, Crusher113, Lurker115 were launched using Promise.all. One call returned output moderation_blocked request c50d3bef-e02a-4624-ae9d-369d2e7c1baa; aggregate failure ended the exec before any of the three results were stored. The exact rejected target is unknown; the other two outputs were not recovered. This does NOT assert three moderation refusals. No target in this group was retried, no alternative source or local modification was used."
+    },
+    {
+      "profileId": "enemy-115-armored-lurker",
+      "name": "Armored Lurker",
+      "receipt": "docs/references/v97-batch-050/generation-enemy-115-armored-lurker.json",
+      "reason": "Held after grouped native generation interruption. Three independent calls for Armored Queen112, Crusher113, Lurker115 were launched using Promise.all. One call returned output moderation_blocked request c50d3bef-e02a-4624-ae9d-369d2e7c1baa; aggregate failure ended the exec before any of the three results were stored. The exact rejected target is unknown; the other two outputs were not recovered. This does NOT assert three moderation refusals. No target in this group was retried, no alternative source or local modification was used."
+    },
+    {
+      "profileId": "enemy-121-armored-monica-line",
+      "name": "Armored Monica Line",
+      "receipt": "docs/references/v97-batch-050/generation-enemy-121-armored-monica-line.json",
+      "reason": "Native output explicitly rejected by safety system: moderation_blocked, moderation_stage output, category other, request41b41376-a47c-48f0-84ff-32d092f13d60. No image returned, no retry, no workaround."
+    }
+  ],
+  "notes": [
+    "Native built-in imagegen only; exactly one call per requested asset, no retries, no CLI, no pixel transformations.",
+    "All16 source reference hashes checked against batch manifest; all12 admitted PNGs copied byte-for-byte.",
+    "Static poses only, animation missing; original project systemic variants, no canon1:1 claim.",
+    "Requested10%padding sometimes smaller; all admitted silhouettes complete with nonzero margins. Runtime pivots derive from visual support center and alpha16 bottom contact."
+  ]
+}

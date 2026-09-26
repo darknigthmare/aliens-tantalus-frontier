@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-087-albino-trilobite-echo",
+  "name": "Albino Trilobite Echo",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows a low soft-bodied pale fleshy cephalopod-like trilobite creature, broad oblong mantle/body low to the ground, clustered long curling fingerlike tentacles emerging around the right-facing front, no skull dome, no biped limbs, no metal or weapon. Preserve the reference tentacle distribution and body silhouette. Output one compact crawling alert pose.\nSubject: Albino Trilobite Echo. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT, slightly three-quarter only enough to separate limbs; every extremity inside canvas. Entire creature must occupy at most 75 percent of width and height, with clear transparent padding on all four sides. Grounded neutral ready stance on invisible ground. One creature only, no second pose.\nStyle: detailed science-fiction painted game sprite matching the reference anatomy, finely shaded surface relief, dark recesses, ivory and warm parchment surfaces, cool gray and restrained rose-taupe joints; no pure white silhouette.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve exact base anatomy and appendage count; no new equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png",
+    "sha256": "73c43b03c36146df4dd5481a4d0ef97d2e5fa89d74556bba66a59a3764926f77",
+    "visualNotes": "Reference sheet shows a low soft-bodied pale fleshy cephalopod-like trilobite creature, broad oblong mantle/body low to the ground, clustered long curling fingerlike tentacles emerging around the right-facing front, no skull dome, no biped limbs, no metal or weapon. Preserve the reference tentacle distribution and body silhouette. Output one compact crawling alert pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-160a7048-a951-40e3-a177-fde5503c0f37.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-087-albino-trilobite-echo.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "68c6ddc158b1010f91f2f2b5a1fe255381b245e6af85fa26df5b67e983d560e5",
+    "bboxAlphaAtLeast16": [
+      183,
+      221,
+      1356,
+      826
+    ],
+    "alphaMin": 0,
+    "alpha0": 1213767,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete low tentacled mantle organism with right-facing anterior and all curling extremities visible; does not become a humanoid or conventional xenomorph. Native alpha and ample margins confirmed. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.49,
+      "y": 0.806640625
+    },
+    "sourceFacing": 1
+  }
+}

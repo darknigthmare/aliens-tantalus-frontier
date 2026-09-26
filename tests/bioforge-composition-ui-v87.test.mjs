@@ -1,3 +1,9 @@
+import { ENEMY_USER_CREATIONS_V95 as USER_ADDITIONS } from '../src/enemy-user-creations-v95.js';
+import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
+import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
+const DEDICATED = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.bioforgeEligible !== false);
+import { getEnemyStaticPoseV95 } from '../src/enemy-static-poses-v95.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -164,18 +170,51 @@ test('ouvrir pour un autre propriétaire réinitialise explicitement le brouillo
 test('tous les profils validés ont leur propre chemin de vignette sans substitution', () => {
   const { ui, nodes } = harness();
   ui.render(createBioforgeV80());
-  assert.equal(nodes['profile-v80'].children.length, 46);
+  assert.equal(nodes['profile-v80'].children.length, 11 + CURRENT_STATIC.length + DEDICATED.length);
   const paths = new Set();
   for (const profile of BIOFORGE_TERRESTRIAL_ROSTER_V80) {
     change(nodes['profile-v80'], profile.profileId, 'change');
     assert.equal(nodes['profile-preview-v80'].src, profile.path);
     assert.equal(nodes['profile-thumbnail-v80'].dataset.atlasColumns, profile.visualMode === 'static-pose' ? '1' : '4');
     assert.equal(nodes['profile-thumbnail-v80'].dataset.atlasRows, profile.visualMode === 'static-pose' ? '1' : '8');
-    if (profile.visualMode === 'static-pose') assert.match(nodes['cost-v80'].textContent, /Pose fixe · animations manquantes · comportement labo simplifié/);
+    if (profile.visualMode === 'static-pose') assert.match(nodes['cost-v80'].textContent,
+      profile.dedicatedHistoricalPoseV96 ? /Pose fixe dédiée · animations manquantes · comportement historique conservé/
+      : profile.specializedBehaviorV95?.runtimeScopes?.includes('bioforge')
+        ? /Pose fixe · animations manquantes · garde défensive adaptée/
+        : /Pose fixe · animations manquantes · comportement labo simplifié/);
     assert.equal(nodes['composition-v87'].children[0].children[0].style.backgroundImage, `url("${profile.path}")`);
     paths.add(profile.path);
   }
-  assert.equal(paths.size, 46);
+  assert.equal(paths.size, 11 + CURRENT_STATIC.length + DEDICATED.length);
+});
+
+test('Arachnoid Grey/Purple UI selects two fixed colours without duplicating identity, cost or saved draft', () => {
+  const id = 'castes-game_avp_capcom_arachnoid';
+  const { ui, nodes } = harness();
+  const original = createBioforgeV80(), before = structuredClone(original);
+  ui.render(original); change(nodes['profile-v80'], id, 'change');
+  const selector = ui.editor.stateSelectV95;
+  assert.equal(ui.editor.stateLabelV95.hidden, false);
+  assert.deepEqual(selector.children.map(option => option.value), ['grey', 'purple']);
+  assert.equal(selector.value, 'grey');
+  assert.equal(nodes['profile-preview-v80'].src, getEnemyStaticPoseV95(id).path);
+  assert.match(nodes['cost-v80'].textContent, /Grey — bleu-gris/);
+  assert.doesNotMatch(nodes['cost-v80'].textContent, /seul état visuel disponible/);
+  for (const colour of ['purple', 'grey']) {
+    change(selector, colour, 'change');
+    const line = ui.readSelection().composition[0];
+    assert.equal(line.profileId, id); assert.equal(line.visualStateV95, colour); assert.equal(line.quantity, 1);
+    assert.equal(nodes['profile-preview-v80'].src, getEnemyStaticPoseV95(id, colour).path);
+    assert.match(nodes['cost-v80'].textContent, new RegExp(`COÛT ACTIF UNITAIRE ${getEnemyStaticPoseV95(id).cost}/12`));
+    assert.equal(nodes['composition-v87'].children[0].children[0].style.backgroundImage, `url("${getEnemyStaticPoseV95(id, colour).path}")`);
+  }
+  assert.deepEqual(original, before);
+  const saved = { ...createBioforgeV80(), configuration: ui.readSelection() };
+  ui.render(saved, { resetDraft: true });
+  assert.equal(ui.editor.stateSelectV95.value, 'grey');
+  change(nodes['profile-v80'], 'pose-v95-user-xeno-defender', 'change');
+  assert.equal(ui.editor.stateLabelV95.hidden, true);
+  assert.equal(ui.readSelection().composition[0].visualStateV95, undefined);
 });
 
 test('active terminal folds by default, can reopen without losing draft, and keeps emergency purge enabled', () => {

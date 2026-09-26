@@ -125,10 +125,12 @@ async function inspectTitle(shipId, shipName = null) {
   assert.equal(result.snapshot.scene.shipId, shipId);
   assert.equal(result.snapshot.scene.missingAssetCount, 0);
   assert.equal(result.snapshot.scene.fallbackVisible, false);
-  assert.ok(result.src.endsWith('/' + shipId + '-reference-v87.png'));
+  const approved = await evaluate(`(async()=>{const {getTitleSceneShipAnglesV88}=await import('/src/title-scene-catalog-v79.js');return getTitleSceneShipAnglesV88(${JSON.stringify(shipId)}).map(a=>({src:a.src,namePlate:a.namePlate||null}))})()`);
+  const currentAngle = approved.find(asset => asset.src === result.src);
+  assert.ok(currentAngle, 'Only a real approved native view may be selected');
   assert.ok(Math.abs(result.image.w / result.image.h - result.natural.w / result.natural.h) < .001);
   assert.equal(result.overflow, false);
-  if (shipName) {
+  if (shipName && currentAngle.namePlate) {
     assert.equal(result.mark?.text, shipName);
     assert.equal(result.mark.visibility, 'visible');
     assert.ok(result.mark.box.w > 0 && result.mark.box.h > 0);

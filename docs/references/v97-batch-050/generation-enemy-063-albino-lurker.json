@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-063-albino-lurker",
+  "name": "Albino Lurker",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: base anatomy and raster rendering reference. Create ONE newly authored Albino Lurker in a low alert stalking idle stance. PROJECT_ADAPTATION systemic albino derivative of reviewed V66 enemy-011-lurker only: preserve one lean eyeless low stalking xenomorph with a long smooth compressed dome and ribbed underside, narrow ribbed torso, two elongated clawed arms, two digitigrade hind legs, four stable dorsal tubes with restrained hooked tips, metallic teeth with telescoping inner jaw, and exactly one complete long vertebral spear tail. The creature may use all four limbs for stalking and pounce but must retain the same Lurker anatomy across every clip. Albino changes newly authored pigment and material response only: warm pearl-ivory and pale gray-beige shell, cool blue-gray biomechanical recesses, restrained translucent rose-taupe subsurface structures, dark desaturated joint cavities and moist highlights; never pure flat white, glow, ice, albinism-as-filter or an automatic recolor. Preserve strict right-facing orthographic gameplay profile, the reviewed pelvis/proximal-rear-leg physical root, four-tube silhouette and complete tail in idle/move/attack/death. Inter-clip scale must receive a new measured review before acceptance; no inherited factor is certified. No Warrior ridge crest, Runner anatomy, acid sacs, royal crown, armor, clothing, weapon, eyes, extra limb, missing tube or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nExactly four hooked dorsal tubes readable above back, smooth dome, four limbs with subtly staggered far-side feet. ONE whole creature, strict orthographic RIGHT-facing profile, single complete spear tail curving behind on left. True transparent alpha background, no backdrop, floor, shadow or halo. Compose smaller in canvas: entire creature contained inside central 75% rectangle, leaving at least 12.5% empty transparent margin each side. Detailed game sprite rendering. No sheet, grid, duplicates, text, logo, watermark, gore or cut-off anatomy. One static pose only.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-lurker-action-sheet.png",
+    "sha256": "e250acd441e8d77eb4c7cbfa686c26ffa83348e8701245c20cda5600892fabb1",
+    "visualNotes": "Reviewed base sheet: low smooth-domed stalking creature, four dorsal tubes, two long arms, two rear legs and single spear tail."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-19fab758-ef14-4b38-954f-9c93866bcad5.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-063-albino-lurker.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "838b2445379a02f8c7ae7a5692cb31f082fa641fe3f0f949959bdab3b58d69b4",
+    "bboxAlphaAtLeast16": [
+      130,
+      368,
+      1147,
+      881
+    ],
+    "alphaMin": 0,
+    "alpha0": 1370331,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Four separated hooked dorsal tubes, four limbs, long smooth eyeless dome, full tail and ivory ribbed material verified. Real alpha and no clipping. Right padding 8.5%, other margins exceed 10%. Static pose only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5925039872408293,
+      "y": 0.7017543859649122
+    },
+    "sourceFacing": 1
+  }
+}

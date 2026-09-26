@@ -174,7 +174,7 @@ test('completed onboarding snapshots identity into the operation, preserving it 
   const backend = storage();
   const saves = new SaveSystem(backend);
   saves.newPlayerTimelineV84(identity(), 1);
-  saves.commit({ onboardingV84: atStep(7) });
+  saves.commit({ onboardingV84: atStep(7), openingV88: null }); // Legacy V84 identity test; V88 gate has its own coverage.
   const { campaign, world } = operation(saves.data);
   const started = beginOperation(saves.data, campaign, world);
   const original = structuredClone(saves.data.onboardingV84.identity);

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-092-albino-pathogen-mimic",
+  "name": "Albino Pathogen Mimic",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay character sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference is a sheet of a low four-limbed hound-like mutated organic mimic, powerful near-crouching limbs, short irregular eyeless blunt head and fanged mouth, knotted sinewy surface, irregular spinal ridges, several flexible slender tendrils trailing from upper back and haunch. Keep this exact base organic hound anatomy and tendril distribution, no conventional smooth xenomorph dome, no mechanical parts. Output one calm quadruped ready pose.\nSubject: Albino Pathogen Mimic. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT; slightly three-quarter only enough to separate limbs. Every extremity and all existing equipment inside canvas. Entire subject must occupy at most 75 percent of width and height, with clear transparent padding on all four sides. Grounded neutral ready stance on invisible ground. One character only, no second pose.\nStyle: detailed science-fiction digital painted game sprite matching the reference, finely shaded surface relief, controlled restrained highlights, dark recesses, warm ivory and parchment pale material variant with cool gray; not a flat white silhouette.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve base anatomy and existing equipment only; no extra limbs or new weapons.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+    "sha256": "f5b8525e9c0f4d03c30e6c671d129b0e7147878de4ce9647ac78e5800ec631c2",
+    "visualNotes": "Reference is a sheet of a low four-limbed hound-like mutated organic mimic, powerful near-crouching limbs, short irregular eyeless blunt head and fanged mouth, knotted sinewy surface, irregular spinal ridges, several flexible slender tendrils trailing from upper back and haunch. Keep this exact base organic hound anatomy and tendril distribution, no conventional smooth xenomorph dome, no mechanical parts. Output one calm quadruped ready pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-656ba0ba-c721-4709-a741-6382dcbe2301.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-092-albino-pathogen-mimic.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "496098f0ed29789e38a3a4046ec3f6fa1ed12896a98f0647b38f13709310c5d7",
+    "bboxAlphaAtLeast16": [
+      107,
+      238,
+      1429,
+      889
+    ],
+    "alphaMin": 0,
+    "alpha0": 1107256,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing quadrupedal hound-like pathogen mimic, knotted ribbed body, blunt irregular head and multiple long trailing tendrils preserved. Native alpha confirmed; horizontal margins about 7% rather than 10%, no anatomy cropped. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.54,
+      "y": 0.8681640625
+    },
+    "sourceFacing": 1
+  }
+}

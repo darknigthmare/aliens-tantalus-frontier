@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-090-albino-protomorph",
+  "name": "Albino Protomorph",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay creature sprite.\nInput image 1 is the anatomy and art-style reference, NOT a sheet to reproduce. Reference sheet shows a slender sinewy biomechanical-organic biped with an elongated domed eyeless skull, visible dark rib cage and tendon relief, two long thin clawed arms, two digitigrade legs, a few short backward-curving dorsal appendages and one long segmented curling tail. Output one upright hunched ready pose facing right, faithfully retaining base anatomy.\nSubject: Albino Protomorph. An original systemic project adaptation, not an official model or canonical 1:1 claim.\nVariant lock: Original systemic pale-material variant of the exact existing base anatomy and equipment: warm ivory, ash-gray and restrained pink-beige material accents; preserve surface relief and readability. For humans this means pale field equipment, not a claim about ethnicity or a canonical faction uniform. No extra appendages, invented anatomy or new weapons.\nComposition: full body, side profile facing RIGHT, slightly three-quarter only enough to separate limbs; every extremity inside canvas. Entire creature must occupy at most 75 percent of width and height, with clear transparent padding on all four sides. Grounded neutral ready stance on invisible ground. One creature only, no second pose.\nStyle: detailed science-fiction painted game sprite matching the reference anatomy, finely shaded surface relief, dark recesses, ivory and warm parchment surfaces, cool gray and restrained rose-taupe joints; no pure white silhouette.\nBackground: genuinely transparent PNG alpha, no backdrop, floor shadow, scene, grid, contact sheet, UI, text, watermark, blood or gore. Preserve exact base anatomy and appendage count; no new equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png",
+    "sha256": "103633e135b17b7f74f3e86e05dfe846c45f9a7e304a3a4d3232f9cd9bae40e4",
+    "visualNotes": "Reference sheet shows a slender sinewy biomechanical-organic biped with an elongated domed eyeless skull, visible dark rib cage and tendon relief, two long thin clawed arms, two digitigrade legs, a few short backward-curving dorsal appendages and one long segmented curling tail. Output one upright hunched ready pose facing right, faithfully retaining base anatomy."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-b12b843a-c380-4def-ab75-2dac6d292e2a.png",
+    "path": "assets/openai/sprites/static-enemy-v97/enemy-090-albino-protomorph.png",
+    "width": 1374,
+    "height": 1145,
+    "sha256": "d44c2bc8140e9f85d0890b7a7df53cdb08d9ea35fb5288547f73dc655e17c790",
+    "bboxAlphaAtLeast16": [
+      143,
+      93,
+      1197,
+      1069
+    ],
+    "alphaMin": 0,
+    "alpha0": 1247744,
+    "totalPixels": 1573230
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing sinewy biped with domed skull, long arms, digitigrade legs, short dorsal appendages and complete curved tail. Native alpha confirmed. Top/bottom margins below requested 10% but all anatomy uncropped. Original systemic static project adaptation, not a 1:1 canon or animation claim."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.61,
+      "y": 0.9336244541484716
+    },
+    "sourceFacing": 1
+  }
+}

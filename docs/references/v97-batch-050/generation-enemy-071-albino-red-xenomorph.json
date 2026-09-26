@@ -1,0 +1,38 @@
+{
+  "profileId": "enemy-071-albino-red-xenomorph",
+  "name": "Albino Red Xenomorph",
+  "prompt": "Use case: stylized-concept. Asset type: production static game enemy sprite, original project adaptation. Image 1: anatomy/rendering reference ONLY from its TOP ROW red organic Warrior; ignore all yellow and robotic lower rows. Create ONE newly authored Albino Red Xenomorph in standing alert idle stance. PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-019-red-xenomorph identity only. Preserve one adult rival-hive Red-caste Warrior: long ridged eyeless dome, double jaw, narrow ribbed torso, lean waist, exactly two long clawed arms, two digitigrade legs, four dorsal tubes and exactly one complete segmented spear-tipped tail. Red denotes the Genocide hive lineage, not a required red coat: albino changes pigment and material response only to warm pearl-ivory and pale bone carapace, cool ash-gray biomechanical recesses, restrained translucent rose-taupe soft tissue, dark desaturated cavities, wet highlights and metallic ivory/silver teeth; no saturated vermilion shell, flat pure white, glow or automatic recolor. Keep strict right-facing orthographic gameplay profile, invariant dome/ribcage/pelvis proportions and the queue's biped motions. Do not inherit numeric sourceScaleByClip values, the historical final-pack scale or legacy bounds-center-bottom roots: the base has no completed measured scaleCalibrationReview, no retained scaleCalibrationEvidence and no reviewed anchor-registry entry. Do not reproduce the base move sheet's cross-cell boundary contacts or its weak locomotion/attack weight transfer. No Queen crown, Red King bulk, Prowler quadruped, yellow K-Series coat, equipment, extra limb or copied comic composition. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.\nThe species lineage is Red-caste but this new material variant is pale ivory. Keep two separately visible claw hands, two feet, exactly four organic dorsal tubes, ridged skull and full continuous spear-tipped tail. ONE whole creature, strict orthographic RIGHT-facing profile; tail behind left. True transparent alpha, no floor/shadow/halo. Entire silhouette inside central 75% canvas, with 10%+ empty transparent margins on every side. No sheet, grid, duplicates, text, logos, watermark, robotic machinery, props, gore or cropping. Single static pose only.",
+  "reference": {
+    "path": "assets/openai/neuro-xeno-animation-sheet.png",
+    "sha256": "9dc05f797a0e3acf936c9782dfeed9e9c6f8b30cfd2c7eaa2bb1b8105479b5c6",
+    "visualNotes": "Reviewed reference top row only: lean Red-caste Warrior with elongated cranial shell, ribbed torso and organic dorsal tubes; ignored robotic lower rows."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0dfac-686c-7292-a6bd-a26f9599abae\\exec-6c6aa070-ae03-4ac8-8e7c-43d5309dbafc.png",
+    "path": null,
+    "intendedPath": "assets/openai/sprites/static-enemy-v97/enemy-071-albino-red-xenomorph.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "9b34bc6bdf8d692dd5828008f4c221bdd9572da540de2073faa76a80285c7cdd",
+    "bboxAlphaAtLeast16": [
+      121,
+      191,
+      1128,
+      1084
+    ],
+    "alphaMin": 0,
+    "alpha0": 1232301,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "held",
+    "notes": "Full body and native alpha are valid, but generated top cranial shell is predominantly smooth rather than the locked ridged Warrior dome. Held for cranial identity drift; no runtime copy and no retry."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5422647527910686,
+      "y": 0.8636363636363636
+    },
+    "sourceFacing": 1
+  }
+}

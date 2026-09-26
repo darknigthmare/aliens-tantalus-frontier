@@ -1,3 +1,8 @@
+import { ENEMY_USER_CREATIONS_V95 as USER_ADDITIONS } from '../src/enemy-user-creations-v95.js';
+import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
+import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
+const DEDICATED = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.bioforgeEligible !== false);
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -70,19 +75,49 @@ test('V80 expose une racine séparée et toutes les phases contractuelles', () =
 });
 
 test('le roster terrestre est strict, validé et sans fallback legacy', () => {
-  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.length, 46);
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 46);
-  assert.equal(new Set(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80).size, 46);
+  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.length, 11 + CURRENT_STATIC.length + DEDICATED.length);
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 11 + CURRENT_STATIC.length + DEDICATED.length);
+  assert.equal(new Set(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80).size, 11 + CURRENT_STATIC.length + DEDICATED.length);
   assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-051-ceto-reef-predator'), false);
+  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-103-albino-ceto-reef-predator'), false);
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 159);
+  const batch = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.batch === 'v97-050');
+  assert.equal(batch.length, 43); assert.equal(batch.filter(entry => entry.bioforgeEligible !== false).length, 42);
+  for (const definition of batch) {
+    assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes(definition.profileId), definition.bioforgeEligible !== false, definition.profileId);
+    assert.equal(definition.id, definition.profileId, 'a dedicated pose preserves its historical identity');
+  }
+  for (const held of ['enemy-060-albino-queen', 'enemy-066-albino-boiler', 'enemy-071-albino-red-xenomorph',
+    'enemy-112-armored-queen', 'enemy-113-armored-crusher', 'enemy-115-armored-lurker', 'enemy-121-armored-monica-line']) {
+    assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes(held), false, `${held}: held pose must not become printable`);
+  }
 
   for (const profile of BIOFORGE_TERRESTRIAL_ROSTER_V80) {
-    assert.equal(profile.terrestrial, true);
+    assert.equal(profile.terrestrial, !['flying', 'aquatic'].includes(profile.locomotion));
+    if (!profile.terrestrial) assert.equal(profile.habitat, profile.locomotion === 'aquatic' ? 'contained-water-v95' : 'contained-air-v95');
     assert.notEqual(profile.spriteKey, 'legacy');
-    if (profile.visualMode === 'static-pose') {
+    if (profile.dedicatedHistoricalPoseV96) {
+      assert.equal(profile.path, DEDICATED.find(d => d.profileId === profile.profileId).path);
+      assert.equal(profile.behaviorStatus, 'historical-runtime-preserved');
       assert.equal(profile.identityVerified, false);
       assert.equal(profile.animationStatus, 'missing');
-      assert.equal(profile.specializedBehaviorStatus, 'not-implemented');
-      assert.match(profile.path, /^\/assets\/user\/castes-v87\//);
+    } else if (profile.visualMode === 'static-pose') {
+      assert.equal(profile.identityVerified, false);
+      assert.equal(profile.animationStatus, 'missing');
+      const currentDefinition = CURRENT_STATIC.find(entry => entry.id === profile.profileId);
+      assert.equal(profile.specializedBehaviorStatus, currentDefinition?.specializedBehaviorStatus || 'not-implemented');
+      if (profile.profileId === 'castes-game_avp_capcom_smasher') {
+        assert.equal(profile.path, '/assets/openai/sprites/static-enemy-v92/game_avp_capcom_smasher.png');
+      } else if (profile.profileId === 'castes-game_avp_capcom_chrysalis') {
+        assert.equal(profile.path, '/assets/openai/sprites/static-enemy-v93/game_avp_capcom_chrysalis.png');
+      } else if (ADDITIONAL.some(entry => entry.id === profile.profileId)) {
+        assert.equal(profile.path, ADDITIONAL.find(entry => entry.id === profile.profileId).path);
+      } else if (USER_ADDITIONS.some(entry => entry.id === profile.profileId)) {
+        assert.equal(profile.path, USER_ADDITIONS.find(entry => entry.id === profile.profileId).path);
+      } else if (currentDefinition?.visualRevision === 96) {
+        assert.equal(profile.path, currentDefinition.path);
+        assert.equal(currentDefinition.reviewStatus, 'accepted-static-adaptation');
+      } else assert.match(profile.path, /^\/assets\/user\/castes-v87\//);
     } else {
       assert.equal(profile.identityVerified, true);
       assert.match(profile.path, /^\/assets\/openai\/sprites\/normalized\//);
@@ -154,7 +189,7 @@ test('la création et la configuration sont autonomes et ne mutent pas la source
     unitCost: 3,
     budget: 3
   });
-  assert.equal(Object.keys(root.records).length, 46);
+  assert.equal(Object.keys(root.records).length, 11 + CURRENT_STATIC.length + DEDICATED.length);
 
   const configured = configureBioforgeV80(root, {
     profileId: 'enemy-001-ovomorph',

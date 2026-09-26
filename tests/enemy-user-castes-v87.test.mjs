@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ENEMIES } from '../src/content-core-v50.js';
 
-test('all 35 runtime PNGs retain the audited native bytes and dimensions', async () => {
+test('all 35 original imported PNGs retain the audited native bytes and dimensions', async () => {
   const { readFile } = await import('node:fs/promises');
   const { createHash } = await import('node:crypto');
   const receipt = JSON.parse(await readFile(new URL('../docs/references/user-castes-v87-integrity.json', import.meta.url)));
   assert.equal(receipt.count, CASTES.length);
   let total = 0;
-  for (const d of CASTES) {
+  for (const d of ORIGINALS) {
     const row = receipt.files.find(file => file.name === d.filename);
     assert.ok(row, d.filename);
     const bytes = await readFile(new URL('..' + d.path, import.meta.url));
@@ -21,7 +21,7 @@ test('all 35 runtime PNGs retain the audited native bytes and dimensions', async
   assert.equal(total, receipt.bytes);
 });
 
-import { ENEMY_USER_CASTES_V87 as CASTES, getEnemyUserCasteV87, getLegacyEnemyAlteredLabelV87 } from '../src/enemy-user-castes-v87.js';
+import { ENEMY_USER_CASTES_V87 as CASTES, ENEMY_USER_CASTES_ORIGINALS_V87 as ORIGINALS, getEnemyUserCasteV87, getLegacyEnemyAlteredLabelV87 } from '../src/enemy-user-castes-v87.js';
 import { createUserCasteActorV87, drawUserCastePoseV87, isUserCasteImageReadyV87, updateUserCasteActorV87 } from '../src/enemy-user-pose-runtime-v87.js';
 
 test('35 independent identities preserve 571 legacy IDs and qualify old equivalents only', () => {
