@@ -6,10 +6,12 @@ import { ENEMY_IMPORT_ADMISSIONS_V103 } from '../src/enemy-import-admissions-v10
 import { ENEMY_IMPORT_ADMISSIONS_V105 } from '../src/enemy-import-admissions-v105.js';
 import { ENEMY_IMPORT_ADMISSIONS_V106 } from '../src/enemy-import-admissions-v106.js';
 import { USER_SPECIMEN_ART_V106 } from '../src/user-specimens-v106.js';
-import { ENEMY_IMPORT_ANIMATIONS_V107 } from '../src/enemy-import-animation-v107.js';
+import { ENEMY_IMPORT_ANIMATIONS_V107, ENEMY_IMPORT_ANIMATIONS_V108 } from '../src/enemy-import-animation-v107.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
+  'assets/openai/sprites/static-import-v108',
+  'assets/openai/sprites/static-game-v108',
   'assets/openai/sprites/static-import-v107',
   'assets/openai/sprites/static-game-v107',
   'assets/openai/sprites/raw',
@@ -33,6 +35,7 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const readyV108Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V108.map(asset => asset.path.slice(1)));
   const readyV107Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V107.map(asset => asset.path.slice(1)));
   const readyV106Paths = new Set([...ENEMY_IMPORT_ADMISSIONS_V106, ...USER_SPECIMEN_ART_V106].filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
@@ -61,6 +64,7 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath.startsWith('assets/openai/sprites/animated-import-v108/')) return readyV108Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v107/')) return readyV107Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/static-(?:import|game)-v106\//.test(sourcePath)) return readyV106Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-import-v105/')) return readyV105Paths.has(sourcePath);

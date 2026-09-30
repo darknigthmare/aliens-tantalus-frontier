@@ -1,3 +1,4 @@
+import { ENEMY_IMPORT_ANIMATION_DATA_V108 } from './enemy-import-animation-data-v108.js';
 // Presentation only: authored atlas poses never change actors, collisions or damage.
 const freeze = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -12,7 +13,7 @@ export function createEnemyImportAnimationV107(input) {
   const fail = message => { throw new Error(`Invalid imported animation: ${message}`); };
   if (d.reviewStatus !== 'accepted-multi-pose-adaptation' || d.posesVerified !== true || d.alphaVerified !== true) fail('unreviewed');
   if (!/^pose-/.test(d.profileId || '') || !hash(d.sourcePoseSha256) || !hash(d.sha256)) fail('identity');
-  if (!/^\/assets\/openai\/sprites\/animated-import-v107\/[a-z0-9-]+\.png$/.test(d.path || '')) fail('path');
+  if (!/^\/assets\/openai\/sprites\/animated-import-v10[78]\/[a-z0-9-]+\.png$/.test(d.path || '')) fail('path');
   if (![d.sourceWidth, d.sourceHeight].every(n => Number.isInteger(n) && n > 0) || !positive(d.referenceHeight)
     || ![-1, 1].includes(d.sourceFacing)) fail('geometry');
   if (!Array.isArray(d.frames) || d.frames.length < 2 || new Set(d.frames.map(f => f.id)).size !== d.frames.length) fail('frames');
@@ -53,8 +54,11 @@ export const ENEMY_IMPORT_ANIMATIONS_V107 = Object.freeze([createEnemyImportAnim
   ], clips: { move: { frames: ['walk-0', 'walk-1', 'walk-2', 'walk-3'], fps: 7, loop: true } }
 })]);
 
+export const ENEMY_IMPORT_ANIMATIONS_V108 = Object.freeze(ENEMY_IMPORT_ANIMATION_DATA_V108.map(createEnemyImportAnimationV107));
+const animations = Object.freeze([...ENEMY_IMPORT_ANIMATIONS_V107, ...ENEMY_IMPORT_ANIMATIONS_V108]);
+
 export function getEnemyImportAnimationV107(definition) {
-  return ENEMY_IMPORT_ANIMATIONS_V107.find(d => d.profileId === definition?.id && d.sourcePoseSha256 === definition.sha256) || null;
+  return animations.find(d => d.profileId === definition?.id && d.sourcePoseSha256 === definition.sha256) || null;
 }
 
 export function getEnemyImportAnimationFrameV107(animation, action, timeSeconds, reducedMotion = false) {

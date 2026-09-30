@@ -443,7 +443,8 @@ export class BioforgeUiV80 {
         : 'Pose fixe · animations manquantes · comportement labo simplifié'
       : 'APERÇU NON DÉFORMÉ'}${profile?.locomotion === 'aquatic' ? ' · bassin de confinement'
       : profile?.locomotion === 'flying' ? ' · déplacement aérien 2D' : ''}${profile?.stateLabelV95 ? ` · ${profile.stateLabelV95}`
-      : baseStateLabel ? ` · ${baseStateLabel}${getEnemyStaticPoseStateOptionsV95(profile.profileId).length > 1 ? '' : ' (seul état visuel disponible)'}` : ''}`;
+      : baseStateLabel ? importedWalk ? ` · Aperçu : ${baseStateLabel.toLocaleLowerCase('fr')}`
+        : ` · ${baseStateLabel}${getEnemyStaticPoseStateOptionsV95(profile.profileId).length > 1 ? '' : ' (seul état visuel disponible)'}` : ''}`;
     const definition = supplied ? getEnemyUserCampaignV88(profile.profileId) : null;
     this.renderMissionBehaviorV90(definition?.specializedBehaviorV95 || definition?.specializedBehaviorV90 || definition?.specializedBehaviorV89);
   }
