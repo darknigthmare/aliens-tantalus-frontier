@@ -4,6 +4,7 @@ import { normalizeXenoTrialsProgressV96, getXenoTrialsUnlockCostV96,
   beginXenoTrialsV96, settleXenoTrialsV96, abandonXenoTrialsV96, unlockXenoTrialsFighterV96 } from './xeno-trials-progress-v96.js';
 import { createXenoTrialsRuntimeV96 } from './xeno-trials-runtime-v96.js';
 import { filterXenoTrialsRosterV97 } from './xeno-trials-selection-v97.js';
+import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 
 const options = entries => entries.map(e => `<option value="${e.id}">${e.label}</option>`).join('');
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
@@ -149,7 +150,8 @@ export class XenoTrialsUiV96 {
     this.el('portraits').innerHTML = ids.map((id, i) => {
       const f = FIGHTERS.find(entry => entry.id === id); if (!f) return '';
       const art = getXenoTrialsArtV96(id, this.form.elements[i ? 'opponentVariant' : 'playerVariant'].value);
-      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><img src="${art.path}" alt="${f.label}"><strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span></figure>`;
+      const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(150px, 26vw, 245px)') || `<img src="${art.path}" alt="${f.label}">`;
+      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption>${portrait}<strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span></figure>`;
     }).join('<span class="xt-versus" aria-hidden="true">VS</span>');
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
@@ -224,7 +226,8 @@ export class XenoTrialsUiV96 {
     this.el('count').textContent = `${filtered.length} / ${FIGHTERS.length} spécimens · Sélection : ${FIGHTERS.find(f => f.id === this.selected).label}`;
     this.el('roster').innerHTML = filtered.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);
-      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}><img src="${art.path}" alt="${f.label}" loading="lazy"><strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${specialLabel[f.special]}</small></button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
+      const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(70px, 9vw, 95px)') || `<img src="${art.path}" alt="${f.label}" loading="lazy">`;
+      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${specialLabel[f.special]}</small></button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const unavailable = !this.active || running || Boolean(state.pending) || Boolean(this.unsavedResult) || !state.unlocked.includes(this.selected);
     this.el('start').disabled = unavailable || this.selectionStep !== 'arena';

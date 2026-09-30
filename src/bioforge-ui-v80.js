@@ -4,6 +4,7 @@ import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseS
 import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
 import { getEnemyUserCampaignV88 } from './enemy-user-campaign-v88.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
+import { ENEMY_IMPORT_ADMISSIONS_V103 } from './enemy-import-admissions-v103.js';
 import {
   BIOFORGE_TERRESTRIAL_ROSTER_V80,
   getBioforgeCapacityV87,
@@ -127,6 +128,30 @@ const buttonV87 = (document, text, label, action) => {
   button.addEventListener('click', action);
   return button;
 };
+function frameImportThumbnailV103(document, node, profile) {
+  const art = ENEMY_IMPORT_ADMISSIONS_V103.find(entry => entry.path === profile?.path);
+  // Also clear an earlier import when the persistent main thumbnail is reused.
+  if (art) {
+    const namespace = 'http://www.w3.org/2000/svg';
+    const preview = document.createElementNS(namespace, 'svg');
+    const image = document.createElementNS(namespace, 'image');
+    const [left, top, right, bottom] = art.alphaBounds;
+    preview.setAttribute('viewBox', `${left} ${top} ${right - left} ${bottom - top}`);
+    preview.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    preview.setAttribute('aria-hidden', 'true');
+    preview.setAttribute('data-import-preview-v103', art.slug);
+    Object.assign(preview.style, { display: 'block', width: '100%', height: '100%', overflow: 'hidden', pointerEvents: 'none' });
+    image.setAttribute('href', art.path);
+    image.setAttribute('width', art.sourceWidth);
+    image.setAttribute('height', art.sourceHeight);
+    preview.appendChild(image);
+    node.replaceChildren(preview);
+    node.style.backgroundImage = 'none'; node.dataset.importPreviewV103 = art.slug;
+  } else if (node.dataset.importPreviewV103) {
+    node.replaceChildren();
+    delete node.dataset.importPreviewV103;
+  }
+}
 function thumbnailV87(document, profileId, visualStateV95 = null) {
   const node = elementV87(document, 'span', 'bioforge-profile-thumbnail-v80 bioforge-line-thumbnail-v87');
   const profile = getEnemyUserCasteV87(profileId, visualStateV95) || getBioforgeRosterEntryV80(profileId);
@@ -135,6 +160,7 @@ function thumbnailV87(document, profileId, visualStateV95 = null) {
   node.dataset.atlasColumns = profile?.visualMode === 'static-pose' ? '1' : '4';
   node.dataset.atlasRows = profile?.visualMode === 'static-pose' ? '1' : '8';
   node.dataset.atlasFrame = '0';
+  frameImportThumbnailV103(document, node, profile);
   node.setAttribute('aria-hidden', 'true');
   return node;
 }
@@ -404,6 +430,7 @@ export class BioforgeUiV80 {
     this.thumbnail.dataset.atlasColumns = supplied ? '1' : '4';
     this.thumbnail.dataset.atlasRows = supplied ? '1' : '8';
     this.thumbnail.dataset.atlasFrame = '0';
+    frameImportThumbnailV103(this.document, this.thumbnail, profile);
     this.profileName.textContent = getBioforgeProfileLabelV80(profile?.profileId);
     const baseStateLabel = supplied ? getEnemyStaticPoseBaseStateLabelV95(profile?.profileId) : null;
     this.cost.textContent = `COÛT ACTIF UNITAIRE ${profile?.cost || 0}/12 · ${supplied

@@ -15,6 +15,22 @@ export function getXenoTrialsRenderMetricsV96(id, variant = null) {
   const aspect = art.sourceWidth / art.sourceHeight;
   const pivotX = art.pivot?.x ?? .5;
   const bottom = art.alphaBounds ? art.alphaBounds[3] / art.sourceHeight : art.pivot?.y ?? .96;
+  if (art.visualRevision === 103 && art.alphaBounds) {
+    // Fit the measured silhouette, not unused transparent canvas. This keeps
+    // very narrow native imports intact without shrinking them to fit margins.
+    // Display tuning is intentionally separate from canonical physical sizes.
+    const [left, top, right, bottomPixel] = art.alphaBounds;
+    const visibleHeight = bottomPixel - top, visibleWidth = right - left;
+    const pivotPixel = pivotX * art.sourceWidth;
+    const horizontalExtent = Math.max(Math.abs(left - pivotPixel), Math.abs(right - pivotPixel));
+    const heightLimit = Math.min(220, art.targetOpaqueHeight * 1.5,
+      450 - definition.jump ** 2 / (2 * 1450) - 112);
+    const scale = Math.min(heightLimit / visibleHeight,
+      (definition.role === 'tank' ? 330 : 285) / visibleWidth,
+      (XENO_TRIALS_ARENA_V96.left - 2) / horizontalExtent);
+    return { width: art.sourceWidth * scale, height: art.sourceHeight * scale,
+      pivotX, bottom, sourceFacing: art.sourceFacing || 1 };
+  }
   const maxHeight = Math.min(220, (450 - definition.jump ** 2 / (2 * 1450) - 112) / bottom);
   const width = Math.min(definition.role === 'tank' ? 330 : 285, maxHeight * aspect,
     (XENO_TRIALS_ARENA_V96.left - 2) / Math.max(pivotX, 1 - pivotX));

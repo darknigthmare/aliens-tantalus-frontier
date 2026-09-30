@@ -7,8 +7,9 @@ import {
 } from './enemy-static-poses-v95.js';
 import { ENEMY_EXPANSION_ASSETS_V96 } from './enemy-expansion-assets-v96.js';
 import { ENEMY_EXPANSION_QUEEN_V96 } from './enemy-expansion-queen-v96.js';
+import { ENEMY_USER_IMPORTS_V103 } from './enemy-user-imports-v103.js';
 
-const ADDITIONS = Object.freeze([...ENEMY_EXPANSION_ASSETS_V96, ...ENEMY_EXPANSION_QUEEN_V96]);
+const ADDITIONS = Object.freeze([...ENEMY_EXPANSION_ASSETS_V96, ...ENEMY_EXPANSION_QUEEN_V96, ...ENEMY_USER_IMPORTS_V103]);
 
 /** Append-only admission. Research candidates and historical replacement art
  * are deliberately not new identities. Static poses do not imply animation. */
@@ -45,4 +46,8 @@ export function getEnemyStaticPoseStateOptionsV96(id) {
 export function selectEnemyStaticPoseEncounterStateV96(id, options = {}) {
   return EXTRA.has(id) ? null : selectEnemyStaticPoseEncounterStateV95(id, options);
 }
-export const getEnemyStaticPoseRangedBehaviorV96 = getEnemyStaticPoseRangedBehaviorV95;
+export function getEnemyStaticPoseRangedBehaviorV96(definition) {
+  // These supplied adults own a melee contract; a synthetic label must not
+  // silently give a Working Joe a rifle or a xeno an acid-spit attack.
+  return EXTRA.get(definition?.id)?.visualRevision === 103 ? 'melee' : getEnemyStaticPoseRangedBehaviorV95(definition);
+}

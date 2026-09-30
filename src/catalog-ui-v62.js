@@ -12,6 +12,7 @@ import {
 import { getCatalogGameplayScaleV72, getCatalogMarineReferenceV72, getCatalogComparisonLayoutV72 } from './catalog-scale-v72.js';
 import { getEnemyStaticPoseStateOptionsV96 as getEnemyStaticPoseStateOptionsV95, getEnemyStaticPoseDefaultStateV96 as getEnemyStaticPoseDefaultStateV95 } from './enemy-static-poses-v96.js';
 import { userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
+import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);
@@ -328,6 +329,24 @@ export class CatalogSpriteAnimatorV62 {
       viewport.dataset.animationStatus = 'missing';
     }
     viewport.append(image);
+    // World-scale cards/comparisons keep their exact gameplay transform.
+    // Only an independently fitted portrait may discard display margins.
+    const importPreview = !dimensions && renderEnemyImportPreviewV103(visual);
+    if (importPreview) {
+      // Keep the original image/frame bookkeeping; only V103 display margins
+      // use the measured alpha viewport. Historical sheets retain their DOM.
+      image.hidden = true;
+      image.style.display = 'none';
+      const frame = createElement(documentRef, 'span');
+      frame.style.position = 'absolute'; frame.style.inset = '0';
+      frame.innerHTML = importPreview;
+      viewport.append(frame);
+      viewport.dataset.importPreviewV103 = 'true';
+      if (!dimensions) {
+        viewport.style.aspectRatio = 'auto';
+        viewport.style.height = detail ? '240px' : '132px';
+      }
+    }
     target.append(viewport);
 
     const state = { image, visual, index: 0, timer: null, clipId: visual.idleClip.clip.id };
