@@ -7,6 +7,9 @@ import {
 const $ = id => document.getElementById(id);
 let state = createDepthLabStateV97();
 const images = new Map(), heldKeys = new Set(), heldPointers = new Map();
+const imageFailures = new Map(), pendingImageLoads = new Map();
+const IMAGE_TIMEOUT_MS = 15000;
+let loadingImages = false, imageBatchVersion = 0;
 const stages = [[$('flat-stage'), '2d'], [$('depth-stage'), '2.5d']];
 let frame = 0, previousTime = 0, disposed = false, dragging = null;
 const lifetime = new AbortController(), listen = (target, event, fn) => target.addEventListener(event, fn, { signal: lifetime.signal });
@@ -173,24 +176,63 @@ document.querySelectorAll('[data-move]').forEach(b => {
 });
 for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(window, event, e => { heldPointers.delete(e.pointerId); if (dragging?.id === e.pointerId) dragging = null; });
 listen(window, 'resize', draw);
-function dispose() { disposed = true; cancelAnimationFrame(frame); clearInput(); lifetime.abort(); }
+function dispose() {
+  disposed = true; imageBatchVersion++; loadingImages = false;
+  cancelAnimationFrame(frame); clearInput(); lifetime.abort();
+  for (const cancel of [...pendingImageLoads.values()]) cancel();
+}
 listen(window, 'pagehide', e => { if (!e.persisted) dispose(); else { clearInput(); cancelAnimationFrame(frame); previousTime = 0; } });
 listen(window, 'pageshow', e => { if (e.persisted && !disposed) { cancelAnimationFrame(frame); frame = requestAnimationFrame(frameLoop); } });
 
 // Diagnostic snapshot is read-only and detached: no state injection or save access.
 window.__ATF_DEPTH_LAB_V97__ = Object.freeze({ snapshot: () => ({ ...state, loaded: images.size, expected: DEPTH_LAB_ASSETS_V97.length, disposed,
+  loadingAssets: loadingImages, failedAssets: [...imageFailures.keys()], pendingAssets: pendingImageLoads.size,
   projection2d: projectDepthLabV97(state, { width: 900, height: 620 }, '2d', state.camera),
   projection25d: projectDepthLabV97(state, { width: 900, height: 620 }, '2.5d', state.camera) }) });
 syncControls(); draw();
-let loaded = 0;
-Promise.allSettled(DEPTH_LAB_ASSETS_V97.map(path => new Promise((resolve, reject) => {
-  const img = new Image(); img.onload = () => { images.set(path, img); loaded++; $('asset-status').textContent = `${loaded}/${DEPTH_LAB_ASSETS_V97.length} ressources`; resolve(path); };
-  img.onerror = () => reject(new Error(path)); img.src = path;
-}))).then(results => {
+function syncAssetControls() {
   if (disposed) return;
-  const failures = results.filter(r => r.status === 'rejected');
-  $('asset-status').textContent = failures.length ? `${failures.length} ressource(s) indisponible(s)` : `${loaded} ressources prêtes · état temporaire`;
-  if (failures.length) { $('load-error').hidden = false; $('load-error').textContent = `Chargement incomplet : ${failures.map(r => r.reason.message).join(', ')}. Aucun substitut graphique n’est généré.`; }
-  draw();
-});
+  $('asset-status').textContent = loadingImages
+    ? `${images.size}/${DEPTH_LAB_ASSETS_V97.length} ressources · chargement…`
+    : imageFailures.size ? `${imageFailures.size} ressource(s) indisponible(s)` : `${images.size} ressources prêtes · état temporaire`;
+  $('load-error').hidden = !imageFailures.size;
+  $('load-error').textContent = imageFailures.size
+    ? `Chargement incomplet : ${[...imageFailures].map(([path, reason]) => `${path} (${reason})`).join(', ')}. Aucun substitut graphique n’est généré.` : '';
+  $('retry-assets').hidden = !imageFailures.size;
+  $('retry-assets').disabled = loadingImages;
+}
+function loadImage(path) {
+  return new Promise(resolve => {
+    const img = new Image(); let settled = false;
+    const finish = status => {
+      if (settled) return;
+      settled = true; clearTimeout(timeout); pendingImageLoads.delete(path);
+      img.onload = null; img.onerror = null;
+      // Detached requests are cancelled; their late callbacks cannot populate
+      // the image cache after a timeout, retry or page disposal.
+      if (status === 'timeout' || status === 'cancelled') img.src = '';
+      if (!disposed) {
+        if (status === 'ready') { images.set(path, img); imageFailures.delete(path); }
+        else if (status !== 'cancelled') imageFailures.set(path, status === 'timeout' ? 'délai de 15 s dépassé' : 'chargement impossible');
+        syncAssetControls();
+      }
+      resolve({ path, status });
+    };
+    const timeout = setTimeout(() => finish('timeout'), IMAGE_TIMEOUT_MS);
+    pendingImageLoads.set(path, () => finish('cancelled'));
+    img.onload = () => finish('ready'); img.onerror = () => finish('failed');
+    img.src = path;
+  });
+}
+async function loadImages(paths) {
+  if (disposed || loadingImages) return false;
+  const candidates = [...new Set(paths)].filter(path => DEPTH_LAB_ASSETS_V97.includes(path) && !images.has(path));
+  if (!candidates.length) return false;
+  const batch = ++imageBatchVersion; loadingImages = true; syncAssetControls();
+  await Promise.all(candidates.map(loadImage));
+  if (disposed || batch !== imageBatchVersion) return false;
+  loadingImages = false; syncAssetControls(); draw(); return true;
+}
+listen($('retry-assets'), 'click', () => { void loadImages([...imageFailures.keys()]); });
+void loadImages(DEPTH_LAB_ASSETS_V97);
 frame = requestAnimationFrame(frameLoop);

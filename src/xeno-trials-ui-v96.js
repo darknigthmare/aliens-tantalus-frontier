@@ -29,7 +29,7 @@ export class XenoTrialsUiV96 {
         <label>Rôle<select data-xt="role"><option value="all">Tous les rôles</option>${Object.entries(roleLabel).map(([id,label]) => `<option value="${id}">${label}</option>`).join('')}</select></label>
         <label>Faction simulée<select data-xt="faction-filter"><option value="all">Toutes les factions</option>${options(FACTIONS)}</select></label>
         <label>Disponibilité<select data-xt="ownership"><option value="all">Toute l’écurie</option><option value="owned">Acquis</option><option value="locked">À débloquer</option></select></label>
-        <label>Trier<select data-xt="sort"><option value="catalog">Catalogue</option><option value="name">Nom A–Z</option><option value="health">Santé décroissante</option><option value="speed">Vitesse décroissante</option></select></label>
+        <label>Trier<select data-xt="sort"><option value="catalog">Catalogue</option><option value="name">Nom A–Z</option><option value="health">Santé décroissante</option><option value="speed">Vitesse décroissante</option><option value="cost">Coût de déblocage croissant</option></select></label>
       </div><button type="button" class="button" data-xt="reset-filters">RÉINITIALISER LES FILTRES</button><p data-xt="count" class="xt-help" role="status"></p><div data-xt="roster" class="xt-fighters"></div></aside>
       <div class="xt-main"><form data-xt="form" class="xt-config">
         <section class="xt-selection-fields" data-xt="fighter-config"><h3>01 / Choisissez les combattants</h3>
@@ -77,7 +77,7 @@ export class XenoTrialsUiV96 {
       const fighter = event.target.closest('[data-xt-fighter]');
       if (fighter && this.active && !this.isRunning() && !this.state().pending) { this.selected = fighter.dataset.xtFighter; this.render(); }
       const unlock = event.target.closest('[data-xt-unlock]');
-      if (unlock) this.commit(unlockXenoTrialsFighterV96(this.getProgress(), unlock.dataset.xtUnlock));
+      if (unlock && !this.unsavedResult) this.commit(unlockXenoTrialsFighterV96(this.getProgress(), unlock.dataset.xtUnlock));
       const arena = event.target.closest('[data-xt-arena]');
       if (arena) this.selectArena(arena.dataset.xtArena);
     });
@@ -92,7 +92,11 @@ export class XenoTrialsUiV96 {
     };
     this.el('search').addEventListener('input', () => this.render());
     this.el('restart').onclick = () => this.launch(this.state().pending?.config);
-    this.el('abandon').onclick = () => { if (this.commit(abandonXenoTrialsV96(this.getProgress()))) { this.closeRuntime(); this.selectionStep = 'fighters'; this.render(); } };
+    this.el('abandon').onclick = () => {
+      // A queued event must not discard a completed result awaiting a storage retry.
+      if (this.unsavedResult) return;
+      if (this.commit(abandonXenoTrialsV96(this.getProgress()))) { this.closeRuntime(); this.selectionStep = 'fighters'; this.render(); }
+    };
     this.el('pause').onclick = () => { if (!this.runtime || this.unsavedResult) return; this.runtime.getState().paused ? this.runtime.resume() : this.runtime.pause(); };
     this.el('next').onclick = () => this.runtime?.nextRound();
     this.el('retry-save').onclick = () => this.finish(this.unsavedResult);
@@ -212,6 +216,7 @@ export class XenoTrialsUiV96 {
     const transaction = settleXenoTrialsV96(this.getProgress(), result);
     if (!transaction.applied) { this.message('Résultat non applicable à ce duel. Aucun gain ajouté.'); return false; }
     this.unsavedResult = result;
+    this.render(); // Lock conflicting actions even when the storage commit below throws.
     if (!this.commit(transaction)) { this.el('retry-save').hidden = false; return false; }
     this.unsavedResult = null; this.el('retry-save').hidden = true;
     const outcome = { player: 'VICTOIRE', opponent: 'DÉFAITE', draw: 'ÉGALITÉ' }[result.winner];
@@ -227,7 +232,7 @@ export class XenoTrialsUiV96 {
     this.el('roster').innerHTML = filtered.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);
       const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(70px, 9vw, 95px)') || `<img src="${art.path}" alt="${f.label}" loading="lazy">`;
-      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${specialLabel[f.special]}</small></button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
+      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${specialLabel[f.special]}</small></button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const unavailable = !this.active || running || Boolean(state.pending) || Boolean(this.unsavedResult) || !state.unlocked.includes(this.selected);
     this.el('start').disabled = unavailable || this.selectionStep !== 'arena';

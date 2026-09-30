@@ -221,7 +221,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
     if (KEY_ACTION[event.code]) {
       event.preventDefault?.();
-      if (presentationView().blocksSimulation) blockedKeys.add(event.code);
+      if (match.paused || presentationView().blocksSimulation) blockedKeys.add(event.code);
       else if (!match.paused && !blockedKeys.has(event.code)) heldKeys.add(event.code);
     }
   }
