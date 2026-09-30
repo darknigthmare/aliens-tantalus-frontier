@@ -5,6 +5,7 @@ import {
   WEAPONS
 } from './content-core-v50.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
+import { getEnemyPhysicalSizeV100 } from './enemy-physical-size-v100.js';
 import { enemyDedicatedCatalogVisualV99 as enemyDedicatedCatalogVisualV96, getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { ENEMY_ENCYCLOPEDIA_CATALOG_V88, getEnemyUserCampaignV88, userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 import {
@@ -464,6 +465,7 @@ const buildRecord = (kind, entry) => {
     } : {}),
     visual,
     dimensions: null,
+    physicalSize: kind === 'enemies' ? getEnemyPhysicalSizeV100(entry.id) : null,
     biologicalRelationIds: freezeArray([])
   };
   return record;

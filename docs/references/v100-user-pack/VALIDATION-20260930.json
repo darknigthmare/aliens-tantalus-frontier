@@ -1,0 +1,83 @@
+{
+  "schema": "v100-validation/1",
+  "checkedAt": "2026-09-30T02:36:09.4401566Z",
+  "cleanTests": {
+    "pass": 3940,
+    "skipped": 1,
+    "fail": 0,
+    "tests": 3941
+  },
+  "workingTreeTests": {
+    "note": "Includes one independent Ceto test not shipped",
+    "pass": 3941,
+    "skipped": 1,
+    "fail": 0,
+    "tests": 3942
+  },
+  "syntaxModules": 634,
+  "sourceBrowser": {
+    "ok": true,
+    "consoleErrors": 0,
+    "checks": [
+      "boot",
+      "nativeNavigationAndInitialCount",
+      "emptySearchAndReset",
+      "blueSixStages",
+      "linkedViewAcrossFilters",
+      "syntheticsAndSeparateFaction",
+      "alteredParentNavigation",
+      "cocoonViewsRetained",
+      "explicitIdentityWarnings",
+      "pagination",
+      "allOriginalsBrowserDecoded",
+      "noSaveWrites",
+      "mobileNoHorizontalOverflow",
+      "mobileSelectionAndWholeOriginal",
+      "mobileSaveUnchanged"
+    ]
+  },
+  "buildBrowser": {
+    "ok": true,
+    "consoleErrors": 0,
+    "checks": [
+      "boot",
+      "nativeNavigationAndInitialCount",
+      "emptySearchAndReset",
+      "blueSixStages",
+      "linkedViewAcrossFilters",
+      "syntheticsAndSeparateFaction",
+      "alteredParentNavigation",
+      "cocoonViewsRetained",
+      "explicitIdentityWarnings",
+      "pagination",
+      "allOriginalsBrowserDecoded",
+      "noSaveWrites",
+      "mobileNoHorizontalOverflow",
+      "mobileSelectionAndWholeOriginal",
+      "mobileSaveUnchanged"
+    ]
+  },
+  "http": {
+    "v100": {
+      "images": 108,
+      "text": 10,
+      "private404": 6,
+      "passed": 124,
+      "failed": 0
+    },
+    "ok": true,
+    "previous": {
+      "text": 44,
+      "bitmaps": 203,
+      "private404": 213,
+      "held404": 29,
+      "passed": 489,
+      "failed": 0
+    }
+  },
+  "limits": [
+    "108 documentary originals; not 89 new combatants",
+    "No newly validated physical gameplay scaling",
+    "Local Vercel production build verified; publication is a separate gate"
+  ]
+}

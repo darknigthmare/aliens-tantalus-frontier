@@ -75,6 +75,7 @@ import { BioforgeUiV80, buildBioforgeUiModelV80 } from './bioforge-ui-v80.js';
 import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
+import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -1365,6 +1366,15 @@ function renderArmory() {
 
 function renderEnemies() {
   if (!enemyCatalogV62) return;
+  if (!byId('user-reference-library-v100')) {
+    const references = createUserReferenceLibraryV100(document, { onOpenEnemy: id => {
+      byId('biology-filter').value = 'all';
+      enemyCatalogV62.setPredicate(() => true);
+      enemyCatalogV62.setQuery('');
+      if (enemyCatalogV62.selectEntry(id, { focus: true })) byId('enemy-catalog-detail').scrollIntoView({ block: 'start', behavior: 'instant' });
+    } });
+    byId('enemy-catalog-v62').insertAdjacentElement('beforebegin', references);
+  }
   if (!byId('user-reference-effects-v95')) {
     const effects = createUserReferenceEffectsGalleryV95(document);
     if (effects) byId('enemy-catalog-v62').insertAdjacentElement('afterend', effects);

@@ -893,6 +893,13 @@ export class CatalogWorkbenchV62 {
   renderSizeSection(record) {
     const comparison = getHumanSizeComparisonV62(record.id, this.dimensions ? { dimensions: this.dimensions } : {});
     const section = this.renderSection('COMPARAISON HUMAINE', 'dimensions');
+    if (record.physicalSize) {
+      const size = record.physicalSize;
+      const measurement = size.measurementType === 'axial-length' ? 'longueur axiale, pas hauteur' : 'hauteur selon posture';
+      section.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+        `Repère candidat du 28/09/2026 : ${size.targetMeters === null ? 'à mesurer' : `${size.targetMeters} m`} (${measurement}). Estimation non certifiée canonique, non appliquée automatiquement aux sprites ou aux collisions.`));
+      for (const note of size.notes) section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', note));
+    }
     if (!comparison) {
       section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', 'Aucune dimension physique vérifiée et sourcée : comparateur masqué.'));
       this.detail.append(section);

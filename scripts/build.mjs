@@ -26,6 +26,7 @@ for (const directory of ['src', 'assets', 'docs']) {
 for (const path of ['depth-lab-v97.html', 'depth-lab-v97.css']) {
   await cp(join(root, path), join(output, path));
 }
+await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
 // QA masters, production intermediates and superseded duplicate atlases remain local, never deployed.
 await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });
 await rm(join(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'), { recursive: true, force: true });
