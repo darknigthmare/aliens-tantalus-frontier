@@ -1,4 +1,5 @@
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, getEnemyStaticPoseRangedBehaviorV96 as getEnemyStaticPoseRangedBehaviorV95, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
+import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 
 const clampV95 = (value, low, high) => Math.max(low, Math.min(high, value));
 const overlapV95 = (a, b) => a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -122,10 +123,18 @@ export function isUserCasteImageReadyV87(image, definition) {
     && Number(image.naturalHeight || image.height) === definition.sourceHeight);
 }
 
-/** No family resolver or borrowed atlas: each import owns its full 1x1 PNG. */
-export function drawUserCastePoseV87(ctx, enemy, image) {
+/** Exact identity only: reviewed walk atlas when ready, otherwise the original PNG. */
+export function drawUserCastePoseV87(ctx, enemy, image, options = {}) {
   const definition = getEnemyUserCasteV87(enemy?.profileId, enemy?.visualStateV95);
   if (!definition || !enemy.alive || !isUserCasteImageReadyV87(image, definition)) return false;
+  requestEnemyImportAnimationV107(options.imageStore, definition);
+  const moving = options.movementEnabled !== false && Math.abs(Number(enemy.vx) || 0) > 1 && Math.abs(Number(enemy.vy) || 0) <= 1
+    && enemy.grounded !== false && !enemy.dormant && !enemy.ventTransit && !enemy.attacking && !enemy.pendingMelee
+    && !['attackAnimationClock', 'attackWindupClock', 'staggerClock', 'hurtClock', 'v52HurtClock'].some(key => Number(enemy[key]) > 0);
+  if (drawEnemyImportAnimationV107(ctx, definition, options.imageStore, {
+    action: moving ? 'move' : 'idle', timeSeconds: options.timeSeconds, reducedMotion: options.reducedMotion,
+    x: enemy.x + enemy.w / 2, y: enemy.y + enemy.h * (definition.groundContact === false ? .5 : 1), facing: enemy.facing
+  })) return true;
   const { renderWidth: w, renderHeight: h, pivot } = definition;
   ctx.save();
   // Explicit non-contact art uses its measured body-centre pivot. Historical
@@ -166,7 +175,7 @@ export function createUserCasteActorV87(entry, groundY) {
   };
 }
 
-/** Physical movement/damage is real; the still is not advertised as an animated walk. */
+/** Physical movement/damage stays independent of optional presentation-only atlases. */
 export function updateUserCasteActorV87(engine, enemy, delta) {
   const d = getEnemyUserCasteV87(enemy?.profileId);
   if (!d || !enemy.alive) return false;

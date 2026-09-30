@@ -1385,7 +1385,11 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         ctx.shadowColor = 'rgba(166, 210, 116, .42)';
         ctx.shadowBlur = 7;
         const supplied = getEnemyUserCasteV87(enemy.profileId, enemy.visualStateV95);
-        if (supplied) drawUserCastePoseV87(ctx, enemy, this.images.get(supplied.imageKey));
+        if (supplied) drawUserCastePoseV87(ctx, enemy, this.images.get(supplied.imageKey), {
+          imageStore: this.images, timeSeconds: this.animationTime,
+          movementEnabled: ['printing', 'combat'].includes(this.bioforgeRootV80.activeSession?.phase),
+          reducedMotion: this.reducedMotion || this.accessibilityRuntime?.reducedMotion
+        });
         else super.drawEnemy?.(ctx, enemy);
         ctx.restore();
       }

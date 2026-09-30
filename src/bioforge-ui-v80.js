@@ -5,6 +5,7 @@ import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
 import { getEnemyUserCampaignV88 } from './enemy-user-campaign-v88.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { getEnemyImportArtV103 } from './enemy-import-admissions-v103.js';
+import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import {
   BIOFORGE_TERRESTRIAL_ROSTER_V80,
   getBioforgeCapacityV87,
@@ -425,7 +426,8 @@ export class BioforgeUiV80 {
     const source = profile?.path || '';
     this.preview.src = source;
     const supplied = profile?.visualMode === 'static-pose';
-    this.preview.alt = profile ? `${supplied ? 'Pose fixe' : 'Plaque validée'} · ${getBioforgeProfileLabelV80(profile.profileId)}` : '';
+    const importedWalk = getEnemyImportAnimationV107(profile);
+    this.preview.alt = profile ? `${importedWalk ? `Aperçu fixe · ${importedWalk.label}` : supplied ? 'Pose fixe' : 'Plaque validée'} · ${getBioforgeProfileLabelV80(profile.profileId)}` : '';
     this.thumbnail.style.backgroundImage = source ? `url("${source}")` : 'none';
     this.thumbnail.dataset.atlasColumns = supplied ? '1' : '4';
     this.thumbnail.dataset.atlasRows = supplied ? '1' : '8';
@@ -434,7 +436,8 @@ export class BioforgeUiV80 {
     this.profileName.textContent = getBioforgeProfileLabelV80(profile?.profileId);
     const baseStateLabel = supplied ? getEnemyStaticPoseBaseStateLabelV95(profile?.profileId) : null;
     this.cost.textContent = `COÛT ACTIF UNITAIRE ${profile?.cost || 0}/12 · ${supplied
-      ? profile.dedicatedHistoricalPoseV96 ? 'Pose fixe dédiée · animations manquantes · comportement historique conservé'
+      ? importedWalk ? `${importedWalk.label} · aperçu fixe · comportement labo simplifié`
+      : profile.dedicatedHistoricalPoseV96 ? 'Pose fixe dédiée · animations manquantes · comportement historique conservé'
       : profile.specializedBehaviorV95?.runtimeScopes?.includes('bioforge')
         ? 'Pose fixe · animations manquantes · garde défensive adaptée'
         : 'Pose fixe · animations manquantes · comportement labo simplifié'

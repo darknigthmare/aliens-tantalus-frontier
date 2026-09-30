@@ -1,8 +1,10 @@
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, setXenoTrialsPausedV96,
-  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-engine-v96.js';
+  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
 import { createXenoPresentationV97, getXenoPresentationViewV97, advanceXenoPresentationV97 } from './xeno-trials-presentation-v97.js';
 import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
+import { getEnemyImportAnimationV107, requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
+  createEnemyImportMotionTrackerV107, isEnemyImportAnimationImageReadyV107 } from './enemy-import-animation-v107.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special' });
@@ -34,6 +36,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     stageVisual: !stage.backdrop ? 'procedural' : images.has(stage.backdrop) ? 'backdrop-ready' : loaded ? 'procedural-fallback' : 'loading' });
   const images = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
+  const observedMovement = createEnemyImportMotionTrackerV107();
   let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null;
   let emittedResult = false, notifyElapsed = 0, lastStatus = '', assetFailure = false;
   const originalSize = { width: canvas.width, height: canvas.height };
@@ -112,7 +115,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     for (let x = -200; x < 1200; x += 90) { context.beginPath(); context.moveTo(x, 450); context.lineTo(x - 70, 560); context.stroke(); }
     context.globalAlpha = 1;
     text('WEYLAND-YUTANI  /  XENO TRIALS', 30, 128, 12, stage.accent);
-    text('SIMULATION • ADAPTATION DU PROJET • POSES FIXES', 970, 535, 11, '#b6bcc5', 'right');
+    const hasWalk = match.fighters.some(f => {
+      const animation = getEnemyImportAnimationV107(getXenoTrialsArtV96(f.id, f.variant));
+      return animation && isEnemyImportAnimationImageReadyV107(images.get(animation.path), animation);
+    });
+    text(hasWalk ? 'MARCHE ADAPTÉE • AUTRES ACTIONS FIXES' : 'SIMULATION • ADAPTATION DU PROJET • POSES FIXES', 970, 535, 11, '#b6bcc5', 'right');
     text(stage.label.toUpperCase(), 500, 482, 13, '#aebec7', 'center');
     if (stage.backdrop && loaded && !backdrop) text('DÉCOR INDISPONIBLE · FOND PROCÉDURAL', 30, 513, 11, '#ddbf69');
   }
@@ -123,10 +130,23 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     context.fillStyle = '#0008'; context.beginPath(); context.ellipse(body.center, 454, body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
     if (!image) { text('Visuel indisponible', fighter.x, ground - 90, 12, '#f0b6ac', 'center'); return; }
     const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV96(fighter.id, fighter.variant);
-    const flip = fighter.facing === sourceFacing ? 1 : -1;
-    context.save(); context.translate(fighter.x, ground); context.scale(flip, 1);
-    if (fighter.hitFlash > 0) context.globalAlpha = .65;
-    context.drawImage(image, -width * pivotX, -height * bottom, width, height); context.restore();
+    const timeSeconds = match.tick * XENO_TRIALS_STEP_V96;
+    const displaced = observedMovement(fighter, timeSeconds);
+    const moving = displaced && (Boolean(fighter.previousInput?.left) !== Boolean(fighter.previousInput?.right))
+      && fighter.hp > 0 && !fighter.attack && !fighter.guard && fighter.stun <= 0
+      && fighter.hitFlash <= 0 && fighter.y === 0 && match.phase === 'active';
+    const animated = drawEnemyImportAnimationV107(context, art, images, {
+      action: moving ? 'move' : 'idle', timeSeconds, height, x: fighter.x, y: ground, facing: fighter.facing,
+      maxHorizontalExtent: XENO_TRIALS_ARENA_V96.left - 2,
+      reducedMotion: options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
+        || doc?.documentElement?.classList?.contains?.('reduced-motion') === true
+    });
+    if (!animated) {
+      const flip = fighter.facing === sourceFacing ? 1 : -1;
+      context.save(); context.translate(fighter.x, ground); context.scale(flip, 1);
+      if (fighter.hitFlash > 0) context.globalAlpha = .65;
+      context.drawImage(image, -width * pivotX, -height * bottom, width, height); context.restore();
+    }
     if (fighter.guard) {
       context.strokeStyle = '#71e2f0'; context.lineWidth = 4;
       const face = fighter.facing > 0 ? body.right : body.left;
@@ -284,6 +304,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }));
       if (stopped) return false;
       // Missing scenery is cosmetic; missing fighter art still suspends the duel.
+      for (const fighter of match.fighters) requestEnemyImportAnimationV107(images,
+        getXenoTrialsArtV96(fighter.id, fighter.variant), loadImage, () => !stopped);
       loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');
       if (assetFailure) { setXenoTrialsPausedV96(match, true); options.onAssetError?.(paths.filter((path, i) => results[i].status === 'rejected')); }
       registerInputs(); running = true; previousTime = null;

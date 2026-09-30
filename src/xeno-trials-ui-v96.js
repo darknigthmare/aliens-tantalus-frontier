@@ -5,6 +5,7 @@ import { normalizeXenoTrialsProgressV96, getXenoTrialsUnlockCostV96,
 import { createXenoTrialsRuntimeV96 } from './xeno-trials-runtime-v96.js';
 import { filterXenoTrialsRosterV97 } from './xeno-trials-selection-v97.js';
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
+import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 
 const options = entries => entries.map(e => `<option value="${e.id}">${e.label}</option>`).join('');
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
@@ -18,7 +19,7 @@ export class XenoTrialsUiV96 {
     this.runtime = null; this.generation = 0; this.selected = 'warrior'; this.active = false;
     this.selectionStep = 'fighters';
     root.innerHTML = `<div class="section-intro"><div><p class="eyebrow">WEYLAND-YUTANI // ÉVALUATION COMPARATIVE</p><h2>Xeno Trials</h2></div><button class="button" data-xt="return">RETOUR AU VAISSEAU</button></div>
-      <p class="xt-notice">${XENO_TRIALS_LORE_NOTICE_V96}</p>
+      <p class="xt-notice">${XENO_TRIALS_LORE_NOTICE_V96.replace('Visuels dédiés en poses fixes.', 'Visuels dédiés : poses fixes et cycles de marche adaptés explicitement signalés. Les autres actions restent fixes.')}</p>
       <div class="xt-dashboard" data-xt="progress"></div>
       <nav class="xt-steps" aria-label="Préparation du duel" data-xt="steps"></nav>
       <a class="button xt-lab-link" href="/depth-lab-v97.html" target="_blank" rel="noopener">LABORATOIRE VISUEL · COMPARER 2D / 2.5D ↗</a>
@@ -61,7 +62,7 @@ export class XenoTrialsUiV96 {
       <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE / REPRENDRE</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div>
       <div data-xt="controls" class="xt-controls" role="group" aria-label="Commandes de combat tactiles">
         ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL']].map(([key,label]) => `<button type="button" data-xeno-action="${key}" aria-label="${controlLabel[key]}">${label}</button>`).join('')}
-      </div><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Pause : P. Deux manches gagnantes. La garde consomme de l’endurance. Coups lourds pour briser une garde épuisée. Les poses sont fixes ; déplacements et collisions sont simulés.</p></section>
+      </div><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Pause : P. Deux manches gagnantes. La garde consomme de l’endurance. Coups lourds pour briser une garde épuisée. Les poses sont fixes sauf les cycles de marche adaptés signalés sur les fiches ; déplacements et collisions sont simulés. Si un cycle est indisponible, la pose fixe est conservée.</p></section>
       <button type="button" class="button" data-xt="new-duel" hidden>PRÉPARER UN AUTRE DUEL</button>
       <div data-xt="result" class="xt-result" role="status" aria-live="polite"></div>
       <details class="xt-history"><summary>Journal des évaluations</summary><div data-xt="history"></div></details></div></div>`;
@@ -155,7 +156,8 @@ export class XenoTrialsUiV96 {
       const f = FIGHTERS.find(entry => entry.id === id); if (!f) return '';
       const art = getXenoTrialsArtV96(id, this.form.elements[i ? 'opponentVariant' : 'playerVariant'].value);
       const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(150px, 26vw, 245px)') || `<img src="${art.path}" alt="${f.label}">`;
-      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption>${portrait}<strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span></figure>`;
+      const walk = getEnemyImportAnimationV107(art);
+      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption>${portrait}<strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span>${walk ? `<small>Aperçu fixe · ${walk.label}</small>` : ''}</figure>`;
     }).join('<span class="xt-versus" aria-hidden="true">VS</span>');
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');

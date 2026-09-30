@@ -14,6 +14,10 @@ import { getEnemyStaticPoseStateOptionsV96 as getEnemyStaticPoseStateOptionsV95,
 import { userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 import { isCatalogRecordVisibleV105 } from './enemy-catalog-taxonomy-v105.js';
+import { getEnemyStaticPoseV96 } from './enemy-static-poses-v96.js';
+import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
+
+const importWalkV107 = id => getEnemyImportAnimationV107(getEnemyStaticPoseV96(id));
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);
@@ -310,9 +314,10 @@ export class CatalogSpriteAnimatorV62 {
     const firstFrame = getCatalogSpriteFrameV62(visual, 0);
     if (!isElementLike(target) || !firstFrame) return null;
     const documentRef = target.ownerDocument || this.document;
+    const importedWalk = importWalkV107(staticProfileId);
     const viewport = createElement(documentRef, 'figure', `catalog-v62__sprite${detail ? ' catalog-v62__sprite--detail' : ''}`);
     viewport.setAttribute('aria-label', visual.visualMode === 'static-pose'
-      ? `${label} — pose fixe native, animations manquantes`
+      ? importedWalk ? `${label} — aperçu fixe ; ${importedWalk.label}` : `${label} — pose fixe native, animations manquantes`
       : `${label} — animation ${visual.idleClip?.clip?.id || ''} issue de la plaquette dédiée`);
     viewport.dataset.sheetId = visual.sheetId || '';
     viewport.dataset.clipId = visual.idleClip?.clip?.id || '';
@@ -722,7 +727,7 @@ export class CatalogWorkbenchV62 {
     const media = createElement(this.document, 'div', 'catalog-v62__card-media');
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) media.classList.add('catalog-v72__world-media');
     const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(media, record)
-      : record.visual && this.animator.mount(media, record.visual, record.name, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false });
+      : record.visual && this.animator.mount(media, record.visual, record.name, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false, staticProfileId: record.id });
     if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
@@ -814,7 +819,7 @@ export class CatalogWorkbenchV62 {
       this.detail.append(section);
     }
     if (record.visual?.visualMode === 'static-pose') this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
-      `Pose fixe native · animations manquantes · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
+      `${importWalkV107(record.id) ? `Aperçu fixe du dossier · ${importWalkV107(record.id).label} · cycle disponible en campagne, BIOFORGE et Trials` : 'Pose fixe native · animations manquantes'} · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
     // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);
     if (record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
@@ -838,7 +843,10 @@ export class CatalogWorkbenchV62 {
     if (!record.documentaryReferenceV105) {
       const gameplaySection = this.renderSection('STATISTIQUES DE GAMEPLAY', 'gameplay');
       const gameplayData = createElement(this.document, 'dl', 'catalog-v62__data-list');
-      appendDefinitionRows(this.document, gameplayData, record.gameplayStats, { status: 'gameplay' });
+      const walk = importWalkV107(record.id);
+      appendDefinitionRows(this.document, gameplayData, walk
+        ? { ...record.gameplayStats, animationStatus: walk.label, visualMode: 'Aperçu fixe du dossier ; marche animée adaptée en jeu' }
+        : record.gameplayStats, { status: 'gameplay' });
       gameplaySection.append(gameplayData); this.detail.append(gameplaySection);
     }
     this.renderCombatBehaviorV89(record);
@@ -893,7 +901,12 @@ export class CatalogWorkbenchV62 {
   renderMediaSection(record) {
     const section = this.renderSection('MÉDIA ET IDENTITÉ VISUELLE', 'media');
     const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
-    if (record.visualReferenceV106) appendDefinitionRows(this.document, data, record.visualReferenceV106);
+    if (record.visualReferenceV106) {
+      const walk = importWalkV107(record.id);
+      appendDefinitionRows(this.document, data, walk ? { ...record.visualReferenceV106,
+        referenceNote: `Note historique du PNG fixe V106 : ${record.visualReferenceV106.referenceNote || ''} Complément actuel : ${walk.label}. Cycle distinct du PNG original, sans certification canonique.`
+      } : record.visualReferenceV106);
+    }
     if (record.documentaryReferenceV105) {
       const reference = record.documentaryReferenceV105;
       appendDefinitionRows(this.document, data, { sourceFile: reference.sourceFile, sourceSha256: reference.sourceSha256,
@@ -977,7 +990,7 @@ export class CatalogWorkbenchV62 {
       const plane = createElement(this.document, 'div', 'catalog-v72__comparison-plane');
       const size = layout.sizes[index];
       item.style.width = `calc(${layout.slots[index]} * var(--catalog-world-unit))`;
-      const preview = this.animator.mount(plane, entry.visual, entry.name, { worldScale: 0.35, animate: false });
+      const preview = this.animator.mount(plane, entry.visual, entry.name, { worldScale: 0.35, animate: false, staticProfileId: entry.id });
       if (!preview) this.renderMissingMedia(plane, entry);
       if (preview && size) {
         // CSS container units resize the whole line together, including pivots.

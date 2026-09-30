@@ -2179,7 +2179,11 @@ export class GameEngine {
       return drawn;
     }
     if (getEnemyUserCasteV87(enemy?.profileId, enemy?.visualStateV95)) {
-      const drawn = drawUserCastePoseV87(ctx, enemy, this.images.get(enemy.visualImageKey));
+      const drawn = drawUserCastePoseV87(ctx, enemy, this.images.get(enemy.visualImageKey), {
+        imageStore: this.images, timeSeconds: this.animationTime,
+        movementEnabled: this.mission?.state === 'active',
+        reducedMotion: this.reducedMotion || this.accessibilityRuntime?.reducedMotion
+      });
       if (drawn && (enemy.alert || enemy.isBoss)) {
         ctx.fillStyle = '#2b1616'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w, 4);
         ctx.fillStyle = enemy.isBoss ? '#d27662' : '#be5551'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w * Math.max(0, enemy.health / enemy.maxHealth), 4);
