@@ -1,0 +1,26 @@
+{
+  "profileId": "enemy-226-cryo-adapted-specimen-six-line",
+  "name": "Cryo-Adapted Specimen Six Line",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Specimen Six Line is a lean dark bronze-brown biomechanical biped with elongated low eyeless dome and gold-bronze ridges, ribbed narrow torso, curved dorsal tubes, two long clawed arms, two digitigrade legs and one long segmented curved pointed tail. It is leaner and warmer bronze than the black-silver Monica reference.\nSubject: Cryo-Adapted Specimen Six Line. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. One lean dark bronze-brown biped, exactly two arms and two legs, narrow ribbed body, long low domed eyeless head, curved dorsal tubes and full pointed tail trailing in a curve to the left. Preserve warm bronze identity highlights and lean proportions. Frost is a restrained pale blue-grey texture on exposed dorsal ridges, never an all-white replacement. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png",
+    "sha256": "be902ad624e15ace97da27e4983a2a685891e7e221cf72aef282485f06c7d858",
+    "visualNotes": "Reference Specimen Six Line is a lean dark bronze-brown biomechanical biped with elongated low eyeless dome and gold-bronze ridges, ribbed narrow torso, curved dorsal tubes, two long clawed arms, two digitigrade legs and one long segmented curved pointed tail. It is leaner and warmer bronze than the black-silver Monica reference."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset.",
+    "providerError": {
+      "httpStatus": 400,
+      "code": "moderation_blocked",
+      "moderationStage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "4b108ab1-845a-4dc8-94ab-9c5f6995b608",
+      "message": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 4b108ab1-845a-4dc8-94ab-9c5f6995b608."
+    }
+  },
+  "runtimeContract": null
+}

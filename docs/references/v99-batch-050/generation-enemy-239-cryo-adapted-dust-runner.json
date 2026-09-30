@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-239-cryo-adapted-dust-runner",
+  "name": "Cryo-Adapted Dust Runner",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Dust Runner. Base reference visual observations: A low lean quadrupedal runner with tan-bronze skeletal biomechanical ribbing, a dark smooth elongated head dome, exactly two long forelimbs with claws and two digitigrade hindlegs, one very thin long segmented tail curled upward behind. Preserve the warm tan/bronze understructure against charcoal dome from the intact top-row neutral stalking pose. Sparse low dorsal ridges, no equipment.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+    "sha256": "0a327424631fbf0b11f547be8408fdf999e89dd29b9f51be93c71a1240cca5d7",
+    "visualNotes": "A low lean quadrupedal runner with tan-bronze skeletal biomechanical ribbing, a dark smooth elongated head dome, exactly two long forelimbs with claws and two digitigrade hindlegs, one very thin long segmented tail curled upward behind. Preserve the warm tan/bronze understructure against charcoal dome from the intact top-row neutral stalking pose. Sparse low dorsal ridges, no equipment."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-b6f47291-5fe1-4cb9-b477-2e87c6d4c47c.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-239-cryo-adapted-dust-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "019f943dad00f41b01d25d5fa1371f75cd204d2294cd2950d7fd8fced10603ea",
+    "bboxAlphaAtLeast16": [
+      58,
+      125,
+      1483,
+      908
+    ],
+    "alphaMin": 0,
+    "alpha0": 1134919,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Visually inspected intact right-facing lean four-limbed runner, warm bronze/tan ribbed structure, charcoal dome and single complete curled segmented tail. Restrained blue-grey frost follows plate edges and existing dome, no added equipment, blood, scene or text. Actual margins recorded; some below requested10% but silhouette complete and unclipped. Native pixels preserved.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 58,
+      "top": 125,
+      "right": 53,
+      "bottom": 116
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.58,
+      "y": 0.88671875
+    },
+    "sourceFacing": 1
+  }
+}

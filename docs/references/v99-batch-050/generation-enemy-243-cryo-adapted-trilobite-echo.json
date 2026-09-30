@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-243-cryo-adapted-trilobite-echo",
+  "name": "Cryo-Adapted Trilobite Echo",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Trilobite Echo. Base reference visual observations: Low pale peach-pink cephalopod-like alien with an oval flattened folded fleshy mantle and a fan of long tapered curling tentacles emerging around its narrow front/right head region and arching back over the mantle. Retain the reference's paired tentacle arrangement and count, small right-facing mouth and intact leathery surface relief. No humanoid torso, legs, claws, separate scorpion tail or rigid shell. Use the intact top-row rest/crawl appearance, all tentacle tips visible.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png",
+    "sha256": "73c43b03c36146df4dd5481a4d0ef97d2e5fa89d74556bba66a59a3764926f77",
+    "visualNotes": "Low pale peach-pink cephalopod-like alien with an oval flattened folded fleshy mantle and a fan of long tapered curling tentacles emerging around its narrow front/right head region and arching back over the mantle. Retain the reference's paired tentacle arrangement and count, small right-facing mouth and intact leathery surface relief. No humanoid torso, legs, claws, separate scorpion tail or rigid shell. Use the intact top-row rest/crawl appearance, all tentacle tips visible."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-69bec30b-3d3e-4a57-8ed9-278eee480a3d.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-243-cryo-adapted-trilobite-echo.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "af9ca8b08595610d507ba45684ea5a2f0a5f9a869974f001bb9648fbba683e43",
+    "bboxAlphaAtLeast16": [
+      86,
+      203,
+      1464,
+      863
+    ],
+    "alphaMin": 0,
+    "alpha0": 1085526,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing pale peach-pink tentacled mantle creature, intact curling tentacle fan and small mouth appendages consistent with the supplied project reference. Restrained frost on exposed ridges retains the organic palette. Complete silhouette and all distal tips visible; native alpha independently audited. Requested padding is not uniformly ten percent; actual clear margins recorded without modifying any pixels. Ground contact is the underside of the mantle.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 86,
+      "top": 203,
+      "right": 72,
+      "bottom": 161
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.54,
+      "y": 0.8427734375
+    },
+    "sourceFacing": 1
+  }
+}

@@ -16,7 +16,7 @@ import { ENEMY_USER_CREATIONS_V95 } from '../src/enemy-user-creations-v95.js';
 import { USER_EQUIPMENT_ART_V95 } from '../src/user-equipment-art-v95.js';
 import { USER_REFERENCE_GALLERY_V95 } from '../src/user-reference-effects-v95.js';
 import { ENEMY_HISTORICAL_VARIANTS_V95 } from '../src/enemy-historical-variants-v95.js';
-import { ENEMY_DEDICATED_POSES_V98 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v98.js';
+import { ENEMY_DEDICATED_POSES_V99 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v99.js';
 import { ENEMY_EXPANSION_ASSETS_V96 } from '../src/enemy-expansion-assets-v96.js';
 import { ENEMY_EXPANSION_QUEEN_V96 } from '../src/enemy-expansion-queen-v96.js';
 

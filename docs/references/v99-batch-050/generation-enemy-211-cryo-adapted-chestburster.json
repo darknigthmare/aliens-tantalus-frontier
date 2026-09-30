@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-211-cryo-adapted-chestburster",
+  "name": "Cryo-Adapted Chestburster",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference beige Chestburster has a small smooth eyeless oval head, narrow toothed mouth, ribbed serpentine larval body and one tapering long tail, with no developed legs or large arms. It is shown as a single continuous organic snake-like form.\nSubject: Cryo-Adapted Chestburster. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Keep the single larval body low and horizontal, head slightly raised at the right, one complete tail stretching left. No legs, no adult torso, no added claws; retain warm beige organic base beneath sparse pale blue-grey frost on the dorsal ridges. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-003-chestburster.webp",
+    "sha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259",
+    "visualNotes": "Reference beige Chestburster has a small smooth eyeless oval head, narrow toothed mouth, ribbed serpentine larval body and one tapering long tail, with no developed legs or large arms. It is shown as a single continuous organic snake-like form."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-452761ac-0e68-4055-973b-146be40d3040.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-211-cryo-adapted-chestburster.png",
+    "width": 1919,
+    "height": 820,
+    "sha256": "f0674b4524e9c0df1d9102c38169c2b9ff129fff837482c2d584bf07e5181613",
+    "bboxAlphaAtLeast16": [
+      163,
+      236,
+      1788,
+      658
+    ],
+    "alphaMin": 0,
+    "alpha0": 1332965,
+    "totalPixels": 1573580
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing limbless beige larval form, raised eyeless head and narrow toothed mouth, continuous ribbed body and full tail preserved. Sparse dorsal frost does not replace its base color or add a scene. All contours inside frame; horizontal margins slightly below requested 10%, no crop. Native PNG bytes unchanged. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.52,
+      "y": 0.801219512195122
+    },
+    "sourceFacing": 1
+  }
+}

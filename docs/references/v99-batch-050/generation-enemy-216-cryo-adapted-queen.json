@@ -1,0 +1,26 @@
+{
+  "profileId": "enemy-216-cryo-adapted-queen",
+  "name": "Cryo-Adapted Queen",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference blue-black Queen: tall bipedal digitigrade legs, broad elongated swept-back fan-shaped cranial crest with pointed rear extensions, ribbed biomechanical torso, two primary long clawed arms and smaller secondary pair on chest, dorsal spines/tubes, one long segmented pointed tail.\nSubject: Cryo-Adapted Queen. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Exactly ONE Queen with TWO digitigrade legs and FOUR ARMS: two long primary arms at shoulders plus two distinctly smaller arms attached to front chest. Both small secondary hands must be clearly visible, separate from primary pair. Keep one full broad swept-back fan-like crown, eyeless narrow forward face and one long segmented pointed tail curving left. No wings, egg sac, throne or additional creature. Dominant blue-black material, frost on exposed crest and dorsal ridges only. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-queen-action-sheet-v56.png",
+    "sha256": "4d014575b316fed25b5eb59f7adb6177dc17e1477e023e7f6799800e3fdc8e21",
+    "visualNotes": "Reference blue-black Queen: tall bipedal digitigrade legs, broad elongated swept-back fan-shaped cranial crest with pointed rear extensions, ribbed biomechanical torso, two primary long clawed arms and smaller secondary pair on chest, dorsal spines/tubes, one long segmented pointed tail."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset.",
+    "providerError": {
+      "httpStatus": 400,
+      "code": "moderation_blocked",
+      "moderationStage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "7e5a3501-e797-4fac-96eb-13fde6fc18d9",
+      "message": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 7e5a3501-e797-4fac-96eb-13fde6fc18d9."
+    }
+  },
+  "runtimeContract": null
+}

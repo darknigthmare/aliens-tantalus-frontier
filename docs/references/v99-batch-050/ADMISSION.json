@@ -1,0 +1,388 @@
+{
+  "schema": 99,
+  "date": "2026-09-27",
+  "attempted": 50,
+  "accepted": 38,
+  "held": 12,
+  "priorHoldsUnchanged": 34,
+  "animation": false,
+  "canonExact": false,
+  "outcomes": [
+    {
+      "ordinal": 1,
+      "profileId": "enemy-191-acid-blooded-trilobite-echo",
+      "status": "held",
+      "reason": "Held on visual anatomy review: an upper middle tentacle forms an occluded arch without a traceable free tip, and several small forward appendages create ambiguity at the collar. Six independent reference tentacles cannot be certified. No runtime copy, no retry, no alteration. Measured visible margins in pixels: {\"left\":157,\"top\":203,\"right\":134,\"bottom\":174}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+    },
+    {
+      "ordinal": 2,
+      "profileId": "enemy-192-acid-blooded-deacon-line",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-192-acid-blooded-deacon-line.png",
+      "sha256": "68f1919ca3f8c58d5dc525ecf65bea6011467e84c29b0fefdf8906c367535c5c",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 3,
+      "profileId": "enemy-194-acid-blooded-protomorph",
+      "status": "held",
+      "reason": "Native image generation rejected at output moderation. No image returned; no retry or reformulation; no runtime file. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+    },
+    {
+      "ordinal": 4,
+      "profileId": "enemy-196-acid-blooded-pathogen-mimic",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-196-acid-blooded-pathogen-mimic.png",
+      "sha256": "36547d3d71394c21487048339eec513c39cf50a4e14b588ebb874b264578bfec",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 5,
+      "profileId": "enemy-197-acid-blooded-working-joe",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-197-acid-blooded-working-joe.png",
+      "sha256": "f7ca58dfcac1e3014878b0257dec0fcd2c3354da2149f040705b6229ad4f6bb6",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 6,
+      "profileId": "enemy-198-acid-blooded-combat-synthetic",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-198-acid-blooded-combat-synthetic.png",
+      "sha256": "d842755a850635f1cfa60b353b1531b983697d86c570457db9a6d7dbcb01d05b",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 7,
+      "profileId": "enemy-199-acid-blooded-weyland-yutani-commando",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-199-acid-blooded-weyland-yutani-commando.png",
+      "sha256": "49bcdca8ba97111f44ea1868533762ab58a6d942ad8edf245bfdc8990562e73b",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 8,
+      "profileId": "enemy-200-acid-blooded-upp-vanguard",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-200-acid-blooded-upp-vanguard.png",
+      "sha256": "55d218ab95e9b673afc65b3c65e20ab790fab58dc9d2a5f5451614bd48f9fcf5",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 9,
+      "profileId": "enemy-201-acid-blooded-seegson-security",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-201-acid-blooded-seegson-security.png",
+      "sha256": "2343f48f54b07ffa98782f5e236906bc3368322a0a88163ee543e1f8db752351",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 10,
+      "profileId": "enemy-202-acid-blooded-colonial-raider",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-202-acid-blooded-colonial-raider.png",
+      "sha256": "7db0d85c813dcfe9ebb6b54ea2a4f0f34382db5bb926f85278c87bda0cd94a06",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 11,
+      "profileId": "enemy-203-acid-blooded-atarax-controller",
+      "status": "held",
+      "reason": "Held on visual anatomy review: native output has THREE distinct trousered legs and three boots instead of the required two. Reference equipment largely retained but anatomy is invalid. No runtime copy, retry, reformulation or image edit. Measured visible margins in pixels: {\"left\":376,\"top\":87,\"right\":348,\"bottom\":86}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+    },
+    {
+      "ordinal": 12,
+      "profileId": "enemy-204-acid-blooded-cult-host",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-204-acid-blooded-cult-host.png",
+      "sha256": "1e90d7c22fe8513d4327175832eafbf2f86b5e6d8c9a36a90b9245dc56bb1ada",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 13,
+      "profileId": "enemy-205-acid-blooded-wild-boar-host",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-205-acid-blooded-wild-boar-host.png",
+      "sha256": "63fa0197e60e559e4d08a7c4ecbb488c6b506b389c407ed10280cd68655465d0",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 14,
+      "profileId": "enemy-206-acid-blooded-korari-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-206-acid-blooded-korari-stalker.png",
+      "sha256": "5263b96c9809b162da40aee63a7191380da9c111b24652ad0f59269c064eb7a1",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 15,
+      "profileId": "enemy-207-acid-blooded-ceto-reef-predator",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-207-acid-blooded-ceto-reef-predator.png",
+      "sha256": "ac7d36be92bc87902a0e73b2bcd41408de1387b43d4fcb7966a147f966a24569",
+      "bioforgeEligible": false
+    },
+    {
+      "ordinal": 16,
+      "profileId": "enemy-208-acid-blooded-tantalus-tunnel-vermin",
+      "status": "held",
+      "reason": "Held on visual anatomy review: only FIVE separately rooted legs/feet are visible, arranged as five sequential supports; the required three bilateral pairs/six legs cannot be certified. No runtime copy, retry, reformulation or image transformation. Measured visible margins in pixels: {\"left\":213,\"top\":364,\"right\":115,\"bottom\":251}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+    },
+    {
+      "ordinal": 17,
+      "profileId": "enemy-209-cryo-adapted-ovomorph",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-209-cryo-adapted-ovomorph.png",
+      "sha256": "71aefef2dbfb7d0670e5bed562ff827d7c2648da60294d4eef7c40e2c9c858f4",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 18,
+      "profileId": "enemy-210-cryo-adapted-facehugger",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-210-cryo-adapted-facehugger.png",
+      "sha256": "4d7172ff5a0d7f7313c47a9e42720bf2218415d7b87875302de6bc15a47a9f9d",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 19,
+      "profileId": "enemy-211-cryo-adapted-chestburster",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-211-cryo-adapted-chestburster.png",
+      "sha256": "f0674b4524e9c0df1d9102c38169c2b9ff129fff837482c2d584bf07e5181613",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 20,
+      "profileId": "enemy-214-cryo-adapted-runner",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-214-cryo-adapted-runner.png",
+      "sha256": "a1b567c20db6f19cdfa7eda91074359debeaf2cb9647868e0dbc4b5813953783",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 21,
+      "profileId": "enemy-216-cryo-adapted-queen",
+      "status": "held",
+      "reason": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset."
+    },
+    {
+      "ordinal": 22,
+      "profileId": "enemy-217-cryo-adapted-crusher",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-217-cryo-adapted-crusher.png",
+      "sha256": "bbe2c3b2729b6ac2f63acb3429d3bdd1ecf25ca21048e4a5bda004bd0798d759",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 23,
+      "profileId": "enemy-219-cryo-adapted-lurker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-219-cryo-adapted-lurker.png",
+      "sha256": "4a3714d06bb14cd3f37955a13c77d65804b415a26f1b29d11475217f6db2d4a4",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 24,
+      "profileId": "enemy-221-cryo-adapted-ravager",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-221-cryo-adapted-ravager.png",
+      "sha256": "9297e52b7e3fbe5956b6cfdaef527ec3919dc9cecab7f3f57a1e767cdde1eb76",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 25,
+      "profileId": "enemy-222-cryo-adapted-boiler",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-222-cryo-adapted-boiler.png",
+      "sha256": "0a37f495ed857beb16725b229a4fbdbe1b918b819fd56f348ec353a385fa6225",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 26,
+      "profileId": "enemy-224-cryo-adapted-burster",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-224-cryo-adapted-burster.png",
+      "sha256": "ede720f5aa9f1c5b800d825e5bd65092fb5b16f4810fb814a30d5c348476dd32",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 27,
+      "profileId": "enemy-225-cryo-adapted-monica-line",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-225-cryo-adapted-monica-line.png",
+      "sha256": "10e4a825fe25a868443a4dcc0485b446287cf54f15f084735d3e678037703f6d",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 28,
+      "profileId": "enemy-226-cryo-adapted-specimen-six-line",
+      "status": "held",
+      "reason": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset."
+    },
+    {
+      "ordinal": 29,
+      "profileId": "enemy-227-cryo-adapted-red-xenomorph",
+      "status": "held",
+      "reason": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset."
+    },
+    {
+      "ordinal": 30,
+      "profileId": "enemy-228-cryo-adapted-k-series-yellow-xenomorph",
+      "status": "held",
+      "reason": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset."
+    },
+    {
+      "ordinal": 31,
+      "profileId": "enemy-231-cryo-adapted-atarax-ripper",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-231-cryo-adapted-atarax-ripper.png",
+      "sha256": "d4b0299a85bc3831ba5a231e4f2fb99b870d4092f99f0b2f8aab72545b61e368",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 32,
+      "profileId": "enemy-232-cryo-adapted-ripper-queen",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-232-cryo-adapted-ripper-queen.png",
+      "sha256": "95484d0e0d42bfbe59514410707ef01ca2b95f7055d95ae6cf1a3c913b4b3379",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 33,
+      "profileId": "enemy-234-cryo-adapted-foundry-crusher",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-234-cryo-adapted-foundry-crusher.png",
+      "sha256": "5bd7c1ef40fc37e3a9f5d6ab9153307bd1c443e811ac01b9448ba6e6da3ac85d",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 34,
+      "profileId": "enemy-235-cryo-adapted-reef-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-235-cryo-adapted-reef-stalker.png",
+      "sha256": "5efad3c87c62cfa63723592b0641dca88dc37cdae402d025ae1db0932f4379aa",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 35,
+      "profileId": "enemy-237-cryo-adapted-siege-royal",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 36,
+      "profileId": "enemy-238-cryo-adapted-pale-crucible-hunter",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-238-cryo-adapted-pale-crucible-hunter.png",
+      "sha256": "22eeeea6ea215e55ba585442b1e82ea09596f8bc12bf1d1fd4f2c0513bfd1d60",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 37,
+      "profileId": "enemy-239-cryo-adapted-dust-runner",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-239-cryo-adapted-dust-runner.png",
+      "sha256": "019f943dad00f41b01d25d5fa1371f75cd204d2294cd2950d7fd8fced10603ea",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 38,
+      "profileId": "enemy-240-cryo-adapted-salvage-hive-brute",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-240-cryo-adapted-salvage-hive-brute.png",
+      "sha256": "43940d2a2d6f112a34c894a8a58b78b72350f19789bdc802e3b81dc80e716385",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 39,
+      "profileId": "enemy-241-cryo-adapted-arcology-lurker",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 40,
+      "profileId": "enemy-242-cryo-adapted-caravan-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-242-cryo-adapted-caravan-stalker.png",
+      "sha256": "f5a963f52a2a66929c3aad9d5ad3b2c97d3b8e927a604302bd30820db1372018",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 41,
+      "profileId": "enemy-243-cryo-adapted-trilobite-echo",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-243-cryo-adapted-trilobite-echo.png",
+      "sha256": "af9ca8b08595610d507ba45684ea5a2f0a5f9a869974f001bb9648fbba683e43",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 42,
+      "profileId": "enemy-244-cryo-adapted-deacon-line",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-244-cryo-adapted-deacon-line.png",
+      "sha256": "be40bdfdd5df888bc4cd1f9867c9cd879328a524f2402a6b7a7bf45fe4154d49",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 43,
+      "profileId": "enemy-246-cryo-adapted-protomorph",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 44,
+      "profileId": "enemy-248-cryo-adapted-pathogen-mimic",
+      "status": "held",
+      "reason": "One native request completed and was visually reviewed. The generated creature has additional forelimb/support structures (at least five distinct grounded feet/hands) inconsistent with the four-limb reference and requested anatomy. Alpha is valid, but anatomy is not admitted. Original provider PNG preserved; no copy into game assets, no retry, no pixel editing. This is a visual QA hold, not a moderation refusal."
+    },
+    {
+      "ordinal": 45,
+      "profileId": "enemy-249-cryo-adapted-working-joe",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-249-cryo-adapted-working-joe.png",
+      "sha256": "5c10ab69761beab48a83e4b3d7664df6b46dbfc389f3a7f3764e35a89a39459b",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 46,
+      "profileId": "enemy-250-cryo-adapted-combat-synthetic",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-250-cryo-adapted-combat-synthetic.png",
+      "sha256": "34a35e940934ba67db9498033a8688333f70dc8916ec2057fb4941e46f15d5f3",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 47,
+      "profileId": "enemy-251-cryo-adapted-weyland-yutani-commando",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-251-cryo-adapted-weyland-yutani-commando.png",
+      "sha256": "8e55bb3f980f5f028a6655b5be3b036a96065d4acc7d6d375dcdeaf6b2d81050",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 48,
+      "profileId": "enemy-252-cryo-adapted-upp-vanguard",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-252-cryo-adapted-upp-vanguard.png",
+      "sha256": "ec7f14b24401a2b83b6054213f19f667309c96d03930532d61259066df2601f5",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 49,
+      "profileId": "enemy-253-cryo-adapted-seegson-security",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-253-cryo-adapted-seegson-security.png",
+      "sha256": "d8949f6c2407db1e4c76ab50447a1721502cda0b431d6544b0649fbc881cc159",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 50,
+      "profileId": "enemy-254-cryo-adapted-colonial-raider",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-254-cryo-adapted-colonial-raider.png",
+      "sha256": "e6ca766c254dc7bc5814e34715e8cecb654f1e8605bff70c8e46a8dc586d38b5",
+      "bioforgeEligible": true
+    }
+  ]
+}

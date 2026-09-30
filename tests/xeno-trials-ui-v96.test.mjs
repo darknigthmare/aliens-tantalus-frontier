@@ -73,6 +73,36 @@ function validResult(config) {
   assert.ok(match.result?.completed); return match.result;
 }
 
+test('V99 arena cards synchronize with the select without creating or altering a saved ticket', t => {
+  const f = harness(t); f.ui.open();
+  assert.equal(f.ui.selectArena('tantalus-cargo'), false);
+  assert.equal(f.ui.confirmFighters(), true);
+  assert.equal((f.nodes.get('arena-cards').innerHTML.match(/data-xt-arena=/g) || []).length, 6);
+  assert.equal(f.ui.selectArena('tantalus-cargo'), true);
+  assert.equal(f.ui.form.elements.stageId.value, 'tantalus-cargo');
+  assert.match(f.nodes.get('stage-preview').innerHTML, /ship-cargo-far\.png/);
+  assert.match(f.nodes.get('arena-matchup').textContent, /Warrior contre/);
+  assert.equal(f.ui.selectArena('invented'), false);
+  assert.equal(f.state.commits, 0); assert.equal(f.state.value.pending, null);
+  f.ui.showFighters(); f.ui.confirmFighters();
+  assert.equal(f.ui.form.elements.stageId.value, 'tantalus-cargo');
+  f.state.value = ticket().state;
+  assert.equal(f.ui.selectArena('planet-surface'), false);
+  assert.equal(f.state.value.pending.config.stageId, 'containment-deck');
+});
+
+test('V99 faction filter and reset preserve fighter selection and progression', t => {
+  const f = harness(t); f.ui.open();
+  f.nodes.get('faction-filter').value = 'pursuit'; f.nodes.get('faction-filter').dispatch('change');
+  const html = f.nodes.get('roster').innerHTML;
+  assert.match(html, /data-xt-fighter="runner"/); assert.doesNotMatch(html, /data-xt-fighter="synth-heavy"/);
+  assert.equal(f.ui.selected, 'warrior');
+  f.nodes.get('search').value = 'nothing'; f.nodes.get('search').dispatch('input');
+  f.nodes.get('reset-filters').onclick();
+  assert.equal(f.nodes.get('faction-filter').value, 'all'); assert.equal(f.nodes.get('search').value, '');
+  assert.equal(f.ui.selected, 'warrior'); assert.equal(f.state.commits, 0);
+});
+
 test('V97 wizard back navigation preserves selections and never creates a ticket before launch', t => {
   const f = harness(t); f.ui.open(); f.ui.selected = 'arachnoid'; f.ui.render();
   const fields = f.ui.form.elements; fields.playerVariant.value = 'purple'; fields.difficulty.value = 'hard';
@@ -91,7 +121,7 @@ test('V97 wizard back navigation preserves selections and never creates a ticket
 test('V97 filters can hide the selected card without silently replacing the selected fighter', t => {
   const f = harness(t); f.ui.open(); f.ui.selected = 'arachnoid'; f.ui.render();
   f.nodes.get('family').value = 'synthetic'; f.nodes.get('family').dispatch('change');
-  assert.equal((f.nodes.get('roster').innerHTML.match(/data-xt-fighter=/g) || []).length, 11);
+  assert.equal((f.nodes.get('roster').innerHTML.match(/data-xt-fighter=/g) || []).length, 13);
   assert.equal(f.ui.selected, 'arachnoid'); assert.match(f.nodes.get('count').textContent, /Sélection : Arachnoid/);
   f.nodes.get('search').value = 'inexistant'; f.nodes.get('search').dispatch('input');
   assert.match(f.nodes.get('roster').innerHTML, /Votre sélection est conservée/);
@@ -134,11 +164,11 @@ test('V97 pending ticket locks roster selection even when a forged click reaches
   const transaction = ticket(), f = harness(t, { progress: transaction.state }); f.ui.open();
   const before = structuredClone(f.state.value), selected = f.ui.selected;
   const cards = [...f.nodes.get('roster').innerHTML.matchAll(/<button\b[^>]*data-xt-fighter="[^"]+"[^>]*>/g)];
-  assert.equal(cards.length, 43); assert.ok(cards.every(card => /\bdisabled\b/.test(card[0])));
+  assert.equal(cards.length, 53); assert.ok(cards.every(card => /\bdisabled\b/.test(card[0])));
   f.root.dispatch('click', { target: { closest: selector => selector === '[data-xt-fighter]' ? { dataset: { xtFighter: 'runner' } } : null } });
   assert.equal(f.ui.selected, selected); assert.deepEqual(f.state.value, before); assert.equal(f.state.commits, 0);
   f.nodes.get('family').value = 'synthetic'; f.nodes.get('family').dispatch('change');
-  assert.equal((f.nodes.get('roster').innerHTML.match(/data-xt-fighter=/g) || []).length, 11);
+  assert.equal((f.nodes.get('roster').innerHTML.match(/data-xt-fighter=/g) || []).length, 13);
   assert.equal(f.ui.selected, selected); assert.deepEqual(f.state.value.pending.config, transaction.config);
 });
 
@@ -152,8 +182,8 @@ test('V97 obsolete opponent or stage IDs in a valid historical ticket produce gu
   assert.equal(f.state.value.pending.config.opponentId, 'removed-fighter'); assert.equal(f.state.commits, 0);
 });
 
-test('V97 UI initializes 43 dedicated cards and confirms fighters before arena/start', t => {
-  const f = harness(t); assert.equal((f.nodes.get('roster').innerHTML.match(/data-xt-fighter=/g) || []).length, 43);
+test('V99 UI initializes 53 dedicated cards and confirms fighters before arena/start', t => {
+  const f = harness(t); assert.equal((f.nodes.get('roster').innerHTML.match(/data-xt-fighter=/g) || []).length, 53);
   assert.equal(f.nodes.get('start').disabled, true); f.ui.open(); assert.equal(f.nodes.get('start').disabled, true);
   assert.equal(f.ui.confirmFighters(), true); assert.equal(f.nodes.get('start').disabled, false);
   assert.equal(f.nodes.get('fighter-config').hidden, true); assert.equal(f.nodes.get('arena-config').hidden, false);

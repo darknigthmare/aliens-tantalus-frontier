@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-251-cryo-adapted-weyland-yutani-commando",
+  "name": "Cryo-Adapted Weyland-Yutani Commando",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Weyland-Yutani Commando. Base reference visual observations: Adult human commando fully enclosed in the intact ivory/cream padded tactical pressure suit seen in the top-left standing reference: black rounded helmet crown with cream face cage and dark visor, cream segmented chest and limb armor over padded cloth, dark gloves and black boots, compact black life-support backpack with curved hoses. Exactly two arms holding one cream-and-dark compact futuristic rifle at low ready across torso, muzzle directed right and slightly down; exactly two legs, upright grounded stance. No bare skin, no extra equipment or futuristic ice weapons. Preserve cream suit identity with practical insulated seam panels and subtle blue-grey frost at exposed armor edges.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png",
+    "sha256": "6e932e77244abc0186b0258812ef1391628d597147c560c77c3c11c813b7d918",
+    "visualNotes": "Adult human commando fully enclosed in the intact ivory/cream padded tactical pressure suit seen in the top-left standing reference: black rounded helmet crown with cream face cage and dark visor, cream segmented chest and limb armor over padded cloth, dark gloves and black boots, compact black life-support backpack with curved hoses. Exactly two arms holding one cream-and-dark compact futuristic rifle at low ready across torso, muzzle directed right and slightly down; exactly two legs, upright grounded stance. No bare skin, no extra equipment or futuristic ice weapons. Preserve cream suit identity with practical insulated seam panels and subtle blue-grey frost at exposed armor edges."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-ed03de33-2e8c-4460-bea1-ee4969a357fe.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-251-cryo-adapted-weyland-yutani-commando.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "8e55bb3f980f5f028a6655b5be3b036a96065d4acc7d6d375dcdeaf6b2d81050",
+    "bboxAlphaAtLeast16": [
+      356,
+      77,
+      993,
+      1190
+    ],
+    "alphaMin": 0,
+    "alpha0": 1169112,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Intact right-facing human commando with cream padded pressure suit, dark domed helmet and cream face cage, black life-support backpack and hoses, one low-ready cream/dark rifle. Exactly two hands and two full legs with boots visible. Insulated suit details and mild frost retain the source identity and practical equipment. No damage, scene or firing effect; actual margins recorded.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 356,
+      "top": 77,
+      "right": 261,
+      "bottom": 64
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5,
+      "y": 0.94896331738437
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "shard": "a",
+  "attempted": 17,
+  "accepted": 13,
+  "held": [
+    "enemy-191-acid-blooded-trilobite-echo",
+    "enemy-194-acid-blooded-protomorph",
+    "enemy-203-acid-blooded-atarax-controller",
+    "enemy-208-acid-blooded-tantalus-tunnel-vermin"
+  ],
+  "poses": [
+    {
+      "id": "enemy-192-acid-blooded-deacon-line",
+      "profileId": "enemy-192-acid-blooded-deacon-line",
+      "name": "Acid-Blooded Deacon Line",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-192-acid-blooded-deacon-line.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        469,
+        156,
+        855,
+        1134
+      ],
+      "sha256": "68f1919ca3f8c58d5dc525ecf65bea6011467e84c29b0fefdf8906c367535c5c",
+      "pivot": {
+        "x": 0.513,
+        "y": 0.9035087719298246
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 136
+    },
+    {
+      "id": "enemy-196-acid-blooded-pathogen-mimic",
+      "profileId": "enemy-196-acid-blooded-pathogen-mimic",
+      "name": "Acid-Blooded Pathogen Mimic",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-196-acid-blooded-pathogen-mimic.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        204,
+        277,
+        1342,
+        846
+      ],
+      "sha256": "36547d3d71394c21487048339eec513c39cf50a4e14b588ebb874b264578bfec",
+      "pivot": {
+        "x": 0.54,
+        "y": 0.8251953125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 96
+    },
+    {
+      "id": "enemy-197-acid-blooded-working-joe",
+      "profileId": "enemy-197-acid-blooded-working-joe",
+      "name": "Acid-Blooded Working Joe",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-197-acid-blooded-working-joe.png",
+      "sourceWidth": 1332,
+      "sourceHeight": 1181,
+      "alphaBounds": [
+        403,
+        102,
+        967,
+        1109
+      ],
+      "sha256": "f7ca58dfcac1e3014878b0257dec0fcd2c3354da2149f040705b6229ad4f6bb6",
+      "pivot": {
+        "x": 0.512,
+        "y": 0.9381879762912786
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 116
+    },
+    {
+      "id": "enemy-198-acid-blooded-combat-synthetic",
+      "profileId": "enemy-198-acid-blooded-combat-synthetic",
+      "name": "Acid-Blooded Combat Synthetic",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-198-acid-blooded-combat-synthetic.png",
+      "sourceWidth": 1312,
+      "sourceHeight": 1199,
+      "alphaBounds": [
+        298,
+        68,
+        1010,
+        1140
+      ],
+      "sha256": "d842755a850635f1cfa60b353b1531b983697d86c570457db9a6d7dbcb01d05b",
+      "pivot": {
+        "x": 0.505,
+        "y": 0.9499582985821518
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 104
+    },
+    {
+      "id": "enemy-199-acid-blooded-weyland-yutani-commando",
+      "profileId": "enemy-199-acid-blooded-weyland-yutani-commando",
+      "name": "Acid-Blooded Weyland-Yutani Commando",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-199-acid-blooded-weyland-yutani-commando.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        361,
+        199,
+        968,
+        1157
+      ],
+      "sha256": "49bcdca8ba97111f44ea1868533762ab58a6d942ad8edf245bfdc8990562e73b",
+      "pivot": {
+        "x": 0.491,
+        "y": 0.9218500797448166
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-200-acid-blooded-upp-vanguard",
+      "profileId": "enemy-200-acid-blooded-upp-vanguard",
+      "name": "Acid-Blooded UPP Vanguard",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-200-acid-blooded-upp-vanguard.png",
+      "sourceWidth": 1374,
+      "sourceHeight": 1145,
+      "alphaBounds": [
+        400,
+        126,
+        1051,
+        1041
+      ],
+      "sha256": "55d218ab95e9b673afc65b3c65e20ab790fab58dc9d2a5f5451614bd48f9fcf5",
+      "pivot": {
+        "x": 0.486,
+        "y": 0.9082969432314411
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 134
+    },
+    {
+      "id": "enemy-201-acid-blooded-seegson-security",
+      "profileId": "enemy-201-acid-blooded-seegson-security",
+      "name": "Acid-Blooded Seegson Security",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-201-acid-blooded-seegson-security.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        300,
+        167,
+        1074,
+        1140
+      ],
+      "sha256": "2343f48f54b07ffa98782f5e236906bc3368322a0a88163ee543e1f8db752351",
+      "pivot": {
+        "x": 0.465,
+        "y": 0.9082934609250398
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-202-acid-blooded-colonial-raider",
+      "profileId": "enemy-202-acid-blooded-colonial-raider",
+      "name": "Acid-Blooded Colonial Raider",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-202-acid-blooded-colonial-raider.png",
+      "sourceWidth": 1213,
+      "sourceHeight": 1296,
+      "alphaBounds": [
+        296,
+        165,
+        968,
+        1184
+      ],
+      "sha256": "7db0d85c813dcfe9ebb6b54ea2a4f0f34382db5bb926f85278c87bda0cd94a06",
+      "pivot": {
+        "x": 0.48,
+        "y": 0.9128086419753086
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 138
+    },
+    {
+      "id": "enemy-204-acid-blooded-cult-host",
+      "profileId": "enemy-204-acid-blooded-cult-host",
+      "name": "Acid-Blooded Cult Host",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-204-acid-blooded-cult-host.png",
+      "sourceWidth": 1226,
+      "sourceHeight": 1283,
+      "alphaBounds": [
+        415,
+        167,
+        823,
+        1170
+      ],
+      "sha256": "1e90d7c22fe8513d4327175832eafbf2f86b5e6d8c9a36a90b9245dc56bb1ada",
+      "pivot": {
+        "x": 0.505,
+        "y": 0.9111457521434139
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 140
+    },
+    {
+      "id": "enemy-205-acid-blooded-wild-boar-host",
+      "profileId": "enemy-205-acid-blooded-wild-boar-host",
+      "name": "Acid-Blooded Wild Boar Host",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-205-acid-blooded-wild-boar-host.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        256,
+        247,
+        1377,
+        902
+      ],
+      "sha256": "63fa0197e60e559e4d08a7c4ecbb488c6b506b389c407ed10280cd68655465d0",
+      "pivot": {
+        "x": 0.473,
+        "y": 0.8798828125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-206-acid-blooded-korari-stalker",
+      "profileId": "enemy-206-acid-blooded-korari-stalker",
+      "name": "Acid-Blooded Korari Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-206-acid-blooded-korari-stalker.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        77,
+        306,
+        1691,
+        778
+      ],
+      "sha256": "5263b96c9809b162da40aee63a7191380da9c111b24652ad0f59269c064eb7a1",
+      "pivot": {
+        "x": 0.637,
+        "y": 0.8759864712514093
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 288
+    },
+    {
+      "id": "enemy-207-acid-blooded-ceto-reef-predator",
+      "profileId": "enemy-207-acid-blooded-ceto-reef-predator",
+      "name": "Acid-Blooded Ceto Reef Predator",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-207-acid-blooded-ceto-reef-predator.png",
+      "sourceWidth": 1942,
+      "sourceHeight": 809,
+      "alphaBounds": [
+        107,
+        184,
+        1838,
+        649
+      ],
+      "sha256": "ac7d36be92bc87902a0e73b2bcd41408de1387b43d4fcb7966a147f966a24569",
+      "pivot": {
+        "x": 0.59,
+        "y": 0.8009888751545118
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 384
+    },
+    {
+      "id": "enemy-209-cryo-adapted-ovomorph",
+      "profileId": "enemy-209-cryo-adapted-ovomorph",
+      "name": "Cryo-Adapted Ovomorph",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-209-cryo-adapted-ovomorph.png",
+      "sourceWidth": 1207,
+      "sourceHeight": 1303,
+      "alphaBounds": [
+        298,
+        251,
+        908,
+        1090
+      ],
+      "sha256": "71aefef2dbfb7d0670e5bed562ff827d7c2648da60294d4eef7c40e2c9c858f4",
+      "pivot": {
+        "x": 0.495,
+        "y": 0.8357636224098235
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 78
+    }
+  ]
+}

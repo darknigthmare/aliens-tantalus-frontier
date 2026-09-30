@@ -26,9 +26,10 @@ export class XenoTrialsUiV96 {
         <label>Rechercher<input type="search" data-xt="search" placeholder="Nom du spécimen" maxlength="80"></label>
         <label>Famille<select data-xt="family"><option value="all">Toutes les familles</option><option value="xenomorph">Xénomorphes</option><option value="synthetic">Synthétiques / machines</option><option value="pathogen">Pathogènes</option></select></label>
         <label>Rôle<select data-xt="role"><option value="all">Tous les rôles</option>${Object.entries(roleLabel).map(([id,label]) => `<option value="${id}">${label}</option>`).join('')}</select></label>
+        <label>Faction simulée<select data-xt="faction-filter"><option value="all">Toutes les factions</option>${options(FACTIONS)}</select></label>
         <label>Disponibilité<select data-xt="ownership"><option value="all">Toute l’écurie</option><option value="owned">Acquis</option><option value="locked">À débloquer</option></select></label>
         <label>Trier<select data-xt="sort"><option value="catalog">Catalogue</option><option value="name">Nom A–Z</option><option value="health">Santé décroissante</option><option value="speed">Vitesse décroissante</option></select></label>
-      </div><p data-xt="count" class="xt-help" role="status"></p><div data-xt="roster" class="xt-fighters"></div></aside>
+      </div><button type="button" class="button" data-xt="reset-filters">RÉINITIALISER LES FILTRES</button><p data-xt="count" class="xt-help" role="status"></p><div data-xt="roster" class="xt-fighters"></div></aside>
       <div class="xt-main"><form data-xt="form" class="xt-config">
         <section class="xt-selection-fields" data-xt="fighter-config"><h3>01 / Choisissez les combattants</h3>
         <div data-xt="portraits" class="xt-portraits"></div>
@@ -41,8 +42,10 @@ export class XenoTrialsUiV96 {
         <button type="button" class="button primary" data-xt="confirm-fighters">CONFIRMER · CHOISIR L’ARÈNE →</button>
         </section>
         <section class="xt-selection-fields" data-xt="arena-config" hidden><h3>02 / Choisissez l’arène</h3>
+        <p class="xt-doctrine" data-xt="arena-matchup"></p>
         <label>Environnement<select name="stageId">${options(STAGES)}</select></label>
         <label>Durée d’une manche<select name="roundSeconds"><option value="60">60 secondes</option><option value="75">75 secondes</option><option value="99" selected>99 secondes · The Pit</option><option value="120">120 secondes</option></select></label>
+        <div data-xt="arena-cards" class="xt-arena-cards" role="group" aria-label="Arènes disponibles"></div>
         <div data-xt="stage-preview" class="xt-stage-preview"></div>
         <p class="xt-doctrine">Deux manches gagnantes. Présentation des deux spécimens, puis décompte 3–2–1. Le chrono ne démarre qu’au signal de combat.</p>
         <button type="button" class="button" data-xt="back-fighters">← MODIFIER LES COMBATTANTS</button>
@@ -74,12 +77,18 @@ export class XenoTrialsUiV96 {
       if (fighter && this.active && !this.isRunning() && !this.state().pending) { this.selected = fighter.dataset.xtFighter; this.render(); }
       const unlock = event.target.closest('[data-xt-unlock]');
       if (unlock) this.commit(unlockXenoTrialsFighterV96(this.getProgress(), unlock.dataset.xtUnlock));
+      const arena = event.target.closest('[data-xt-arena]');
+      if (arena) this.selectArena(arena.dataset.xtArena);
     });
     this.el('return').onclick = () => { this.close(); this.onReturn(); };
     this.el('confirm-fighters').onclick = () => this.confirmFighters();
     this.el('back-fighters').onclick = () => this.showFighters();
     this.el('new-duel').onclick = () => this.showFighters();
-    for (const key of ['family', 'role', 'ownership', 'sort']) this.el(key).addEventListener('change', () => this.render());
+    for (const key of ['family', 'role', 'ownership', 'sort', 'faction-filter']) this.el(key).addEventListener('change', () => this.render());
+    this.el('reset-filters').onclick = () => {
+      for (const key of ['family', 'role', 'ownership', 'faction-filter']) this.el(key).value = 'all';
+      this.el('sort').value = 'catalog'; this.el('search').value = ''; this.render();
+    };
     this.el('search').addEventListener('input', () => this.render());
     this.el('restart').onclick = () => this.launch(this.state().pending?.config);
     this.el('abandon').onclick = () => { if (this.commit(abandonXenoTrialsV96(this.getProgress()))) { this.closeRuntime(); this.selectionStep = 'fighters'; this.render(); } };
@@ -130,6 +139,11 @@ export class XenoTrialsUiV96 {
     if (this.isRunning() || this.state().pending || this.unsavedResult) return false;
     this.closeRuntime(); this.selectionStep = 'fighters'; this.render(); this.el('confirm-fighters').focus(); return true;
   }
+  selectArena(id) {
+    if (!this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult || !STAGES.some(s => s.id === id)) return false;
+    this.form.elements.stageId.value = id; this.renderPreviews();
+    this.root.querySelector(`[data-xt-arena="${id}"]`)?.focus(); return true;
+  }
   renderPreviews() {
     const ids = [this.selected, this.form.elements.opponentId.value];
     this.el('portraits').innerHTML = ids.map((id, i) => {
@@ -138,7 +152,11 @@ export class XenoTrialsUiV96 {
       return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><img src="${art.path}" alt="${f.label}"><strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span></figure>`;
     }).join('<span class="xt-versus" aria-hidden="true">VS</span>');
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
-    this.el('stage-preview').innerHTML = `<div class="xt-stage-scene" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}"><span>${stage.label}</span><i></i><i></i><i></i><i></i><i></i></div><p>${ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ')} · Arène simulée, sans danger de décor.</p>`;
+    const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
+    this.el('arena-matchup').textContent = `${matchup} · Combat 2D · Deux manches gagnantes`;
+    const locked = !this.active || this.selectionStep !== 'arena' || this.isRunning() || this.state().pending || this.unsavedResult;
+    this.el('arena-cards').innerHTML = STAGES.map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail">${s.backdrop ? `<img src="${s.backdrop}" alt="" loading="lazy">` : '<i></i><i></i><i></i>'}</span><strong>${s.label}</strong><small>${s.backdrop ? 'Décor du projet réutilisé' : 'Environnement procédural'} · 2D</small></button>`).join('');
+    this.el('stage-preview').innerHTML = `<div class="xt-stage-scene" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stage.backdrop ? `<img src="${stage.backdrop}" alt="Aperçu du décor sélectionné">` : '<i></i><i></i><i></i><i></i><i></i>'}<span>${stage.label}</span></div><p>${matchup} · Arène simulée, sans danger de décor. ${stage.backdrop ? 'Décor existant du projet, sans modification des collisions.' : ''}</p>`;
   }
   closeRuntime() { this.generation++; this.runtime?.stop(); this.runtime = null; this.loading = false; }
   close() {
@@ -201,7 +219,8 @@ export class XenoTrialsUiV96 {
   render() {
     const state = this.state(), running = this.isRunning();
     this.el('progress').textContent = `DIVISION ${Math.floor(state.xp / 300) + 1} · ${state.xp} XP · ${state.credits} crédits de simulation · ${state.wins} V / ${state.losses} D / ${state.draws} N · ${state.unlocked.length}/${FIGHTERS.length} spécimens`;
-    const filtered = filterXenoTrialsRosterV97(FIGHTERS, { family: this.el('family').value || 'all', role: this.el('role').value || 'all', ownership: this.el('ownership').value || 'all', sort: this.el('sort').value || 'catalog', query: this.el('search').value, unlocked: state.unlocked });
+    const filtered = filterXenoTrialsRosterV97(FIGHTERS, { family: this.el('family').value || 'all', role: this.el('role').value || 'all', ownership: this.el('ownership').value || 'all', sort: this.el('sort').value || 'catalog', query: this.el('search').value, unlocked: state.unlocked,
+      factionRoster: FACTIONS.find(f => f.id === this.el('faction-filter').value)?.roster || null });
     this.el('count').textContent = `${filtered.length} / ${FIGHTERS.length} spécimens · Sélection : ${FIGHTERS.find(f => f.id === this.selected).label}`;
     this.el('roster').innerHTML = filtered.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);

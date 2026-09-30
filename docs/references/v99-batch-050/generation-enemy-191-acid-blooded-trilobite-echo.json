@@ -1,0 +1,31 @@
+{
+  "profileId": "enemy-191-acid-blooded-trilobite-echo",
+  "name": "Acid-Blooded Trilobite Echo",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Trilobite Echo.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: A low pale pink-beige oval mantle with intact folded organic surface relief, one small forward collar/mouth at the RIGHT, and SIX long slender flexible tentacles attached around that forward collar, sweeping backwards and curling around/above the mantle. No walking legs, no humanoid torso, no bony skull, no tail distinct from these tentacles. Keep all six roots and six free tips separately visible and traceable, not fused, not closed loops. Preserve the reference's flattened mollusc-like body.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png",
+    "sha256": "73c43b03c36146df4dd5481a4d0ef97d2e5fa89d74556bba66a59a3764926f77",
+    "visualNotes": "Low pink-beige oval mollusc-like mantle with forward collar and a fan of six long tapering tentacles; no separate walking limbs."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-671a86ed-5b7d-41bb-b7df-1cc1d6509269.png",
+    "path": null,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "9692313bbd7e49a5bb50efa371472dcebebd8f50ed08113bb157abd98bd723f4",
+    "bboxAlphaAtLeast16": [
+      157,
+      203,
+      1402,
+      850
+    ],
+    "alphaMin": 0,
+    "alpha0": 1180195,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "held",
+    "notes": "Held on visual anatomy review: an upper middle tentacle forms an occluded arch without a traceable free tip, and several small forward appendages create ambiguity at the collar. Six independent reference tentacles cannot be certified. No runtime copy, no retry, no alteration. Measured visible margins in pixels: {\"left\":157,\"top\":203,\"right\":134,\"bottom\":174}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": null
+}

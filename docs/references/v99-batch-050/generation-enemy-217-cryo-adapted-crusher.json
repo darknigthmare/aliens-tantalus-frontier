@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-217-cryo-adapted-crusher",
+  "name": "Cryo-Adapted Crusher",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Crusher is a heavy dark charcoal quadruped with a large broad swept-back wedge/shield cranial plate, reinforced rounded shoulders, ribbed biomechanical trunk, two massive front limbs plus two rear legs, broad clawed feet, one long segmented tail curved left. Head crest has muted rusty bronze ridges over the charcoal body.\nSubject: Cryo-Adapted Crusher. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Keep the heavy quadrupedal build, exactly FOUR supporting limbs, large broad wedge-shaped head shield lowering toward the right, and one full segmented tail. Preserve charcoal-black body and subtle rusty bronze head relief, frost accents only on exposed ridges. No wings, extra arm pair, giant ice spikes or horn replacing the head shield. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v81/enemy-009-crusher.webp",
+    "sha256": "ccac0fc3ad73aa0c7026ef13acedafe27fba6819d43b3226992406d4787b2e85",
+    "visualNotes": "Reference Crusher is a heavy dark charcoal quadruped with a large broad swept-back wedge/shield cranial plate, reinforced rounded shoulders, ribbed biomechanical trunk, two massive front limbs plus two rear legs, broad clawed feet, one long segmented tail curved left. Head crest has muted rusty bronze ridges over the charcoal body."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-20b280ba-7eb3-4046-86ed-5013d0d521ef.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-217-cryo-adapted-crusher.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "bbe2c3b2729b6ac2f63acb3429d3bdd1ecf25ca21048e4a5bda004bd0798d759",
+    "bboxAlphaAtLeast16": [
+      52,
+      166,
+      1498,
+      912
+    ],
+    "alphaMin": 0,
+    "alpha0": 1037779,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One heavy quadruped with four complete clawed feet, broad bronze-charcoal shield head, reinforced shoulders and full segmented tail. Ridges carry restrained frost while charcoal body relief remains visible. No cropped crest, feet or tail; horizontal margins are narrower than requested 10%. Diffuse preview RGB is outside audited subject alpha bounds. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.61,
+      "y": 0.8896484375
+    },
+    "sourceFacing": 1
+  }
+}

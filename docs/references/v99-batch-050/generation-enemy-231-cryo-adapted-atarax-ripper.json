@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-231-cryo-adapted-atarax-ripper",
+  "name": "Cryo-Adapted ATARAX Ripper",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference ATARAX Ripper is a muscular hunched charcoal-silver biomechanical biped with a compact layered angular skull, pale overlapping cranial/back plates, heavy rounded armored shoulders, long stout clawed arms, two bent digitigrade legs and one long thin segmented tail. It is a stocky silver-gray armored project creature, not a smooth classic dome.\nSubject: Cryo-Adapted ATARAX Ripper. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Retain the stocky silver-charcoal ATARAX Ripper anatomy: two heavy clawed arms, two bent legs, layered angular compact skull, overlapping pale head/back plates and heavy rounded shoulder shells. One complete long thin segmented tail curves left. Keep its original armor-like organic relief and dark joints; frost limited to exposed ridge texture. No added weapons, appendages or large smooth dome replacing its angular skull. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+    "sha256": "321b78c95da7374bd3cac8b2ae5d18fb26c146aaddae47b536132b16b8f261ae",
+    "visualNotes": "Reference ATARAX Ripper is a muscular hunched charcoal-silver biomechanical biped with a compact layered angular skull, pale overlapping cranial/back plates, heavy rounded armored shoulders, long stout clawed arms, two bent digitigrade legs and one long thin segmented tail. It is a stocky silver-gray armored project creature, not a smooth classic dome."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-73382b71-e1c4-464a-bff7-647c9feb7ff1.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-231-cryo-adapted-atarax-ripper.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "d4b0299a85bc3831ba5a231e4f2fb99b870d4092f99f0b2f8aab72545b61e368",
+    "bboxAlphaAtLeast16": [
+      65,
+      98,
+      1448,
+      958
+    ],
+    "alphaMin": 0,
+    "alpha0": 1073945,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Stocky charcoal/silver Ripper keeps angular layered skull, overlapping pale head/back plates, heavy shoulder shells, two clawed arms, two bent legs and a full curved segmented tail. Native frost detail lies on existing exposed plating, no additional limbs or equipment. Complete uncut silhouette with margins below requested 10%. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.555,
+      "y": 0.9345703125
+    },
+    "sourceFacing": 1
+  }
+}

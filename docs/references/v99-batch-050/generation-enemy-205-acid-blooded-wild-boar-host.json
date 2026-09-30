@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-205-acid-blooded-wild-boar-host",
+  "name": "Acid-Blooded Wild Boar Host",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Wild Boar Host.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One natural stout wild boar matching the reference: dense coarse grey-brown bristles, heavy rounded shoulder/body, long tapered pig snout, small dark eye, two pointed furry ears, small short ivory tusks, exactly FOUR short hooved legs and ONE thin short drooping tail with small tuft. Calm grounded four-foot standing pose facing RIGHT, near/far legs offset so four feet are clearly countable. Preserve ordinary boar anatomy and realistic shaggy fur; no alien shell, tentacles, spines, armor or oversized tusks. Subtle olive-amber iridescence in individual fur highlights and a few very faint closed yellow-green seams on bare muzzle/ear skin, no bright aura or leaking acid.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/wild-boar-host-action-sheet-v56.png",
+    "sha256": "a79046e9a54e9eabd4fa89593e75e228bd0b03eeda18032dfe7a7c966ca2af0c",
+    "visualNotes": "Natural grey-brown bristled boar, heavy rounded body, tapered snout, pointed ears/small tusks, four short hoofed legs and one thin short tufted tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-92bd081d-52a1-4581-9e5d-5fc2f630afc1.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-205-acid-blooded-wild-boar-host.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "63fa0197e60e559e4d08a7c4ecbb488c6b506b389c407ed10280cd68655465d0",
+    "bboxAlphaAtLeast16": [
+      256,
+      247,
+      1377,
+      902
+    ],
+    "alphaMin": 0,
+    "alpha0": 1093959,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Whole right-facing wild boar, four clearly separate hoofed legs and one complete tail. Natural bristles and grey-brown identity preserved with restrained olive highlights and closed muzzle seams; no alien shell or extra appendages. Ground pivot centered between hoof supports, not the overhanging head. Measured visible margins in pixels: {\"left\":256,\"top\":247,\"right\":159,\"bottom\":122}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.473,
+      "y": 0.8798828125
+    },
+    "sourceFacing": 1
+  }
+}

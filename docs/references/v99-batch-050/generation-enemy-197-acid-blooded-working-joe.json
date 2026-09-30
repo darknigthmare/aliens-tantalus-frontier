@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-197-acid-blooded-working-joe",
+  "name": "Acid-Blooded Working Joe",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Working Joe.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One adult male-shaped maintenance synthetic matching the INTACT top row: pale chalky face, short dark brown hair, neutral expression, tan/khaki long-sleeved utility coverall with breast and thigh pockets, dark belt pouches, black work gloves and dark sturdy work boots. Exactly two normal arms, two legs. Unarmed, no helmet, no backpack or added tactical suit. Use an upright slightly ready stance, both boots separately visible. Clothing stays intact and practical. Restrained olive-amber sheen only in exposed synthetic face/neck material with very faint yellow-green subsurface seams, not human injury or bright clothing trim.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png",
+    "sha256": "b9938c6d6f2b1af8065cf8120991319367279a3addb2b882d60ad3ea31c78a92",
+    "visualNotes": "Intact male-shaped synthetic with short dark hair, chalky face, tan utility coverall/pockets, dark belt pouches, black work gloves and heavy dark boots; no weapon."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-c35686d7-c3ed-463a-b6a3-af6511d87994.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-197-acid-blooded-working-joe.png",
+    "width": 1332,
+    "height": 1181,
+    "sha256": "f7ca58dfcac1e3014878b0257dec0fcd2c3354da2149f040705b6229ad4f6bb6",
+    "bboxAlphaAtLeast16": [
+      403,
+      102,
+      967,
+      1109
+    ],
+    "alphaMin": 0,
+    "alpha0": 1290001,
+    "totalPixels": 1573092
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing synthetic preserves the reference uniform and unarmed equipment. Two hands and two separated boots visible; faint olive-yellow facial material seam supplies the systemic variant without damaged skin. Measured visible margins in pixels: {\"left\":403,\"top\":102,\"right\":365,\"bottom\":72}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.512,
+      "y": 0.9381879762912786
+    },
+    "sourceFacing": 1
+  }
+}

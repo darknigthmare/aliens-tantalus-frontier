@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-198-acid-blooded-combat-synthetic",
+  "name": "Acid-Blooded Combat Synthetic",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Combat Synthetic.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: Use ONLY the THIRD ROW COMBAT ROBOT in the reference, not the human android, hooded worker or damaged bottom row. One stocky dark graphite-and-steel mechanical humanoid with rounded compact metal skull, small pale circular optical lenses, plated chest/shoulders, segmented mechanical arms, visible circular hip and knee joints, two sturdy metal legs and broad dark feet. Exactly TWO arms and TWO legs. Hold the one compact dark rifle already present in that row in a natural two-handed low-ready grip pointing RIGHT. Preserve weapon shape and armored mechanical silhouette. Subtle olive-amber material sheen and restrained yellow-green seam accents on sealed mechanical plates indicate this systemic game variant; no organic skin, exposed fluid or damage.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/synthetic-android-animation-sheet.png",
+    "sha256": "8b8da47dd0d58a54ae624d3ff6997d1fd20fb93d1a66cb9d6c5ac73101f486a4",
+    "visualNotes": "Third-row combat robot: graphite steel plated humanoid, round compact mechanical skull and pale lenses, segmented limbs/circular joints, broad feet and one compact two-handed rifle."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-f8f87e17-bcb8-4059-841f-990ad4cb3840.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-198-acid-blooded-combat-synthetic.png",
+    "width": 1312,
+    "height": 1199,
+    "sha256": "d842755a850635f1cfa60b353b1531b983697d86c570457db9a6d7dbcb01d05b",
+    "bboxAlphaAtLeast16": [
+      298,
+      68,
+      1010,
+      1140
+    ],
+    "alphaMin": 0,
+    "alpha0": 1198687,
+    "totalPixels": 1573088
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing combat robot with two arms/two legs, two-handed grip and one reference rifle. Steel/graphite identity retained with restrained olive-amber/yellow seam accents; no organic mutation or damage. Measured visible margins in pixels: {\"left\":298,\"top\":68,\"right\":302,\"bottom\":59}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.505,
+      "y": 0.9499582985821518
+    },
+    "sourceFacing": 1
+  }
+}

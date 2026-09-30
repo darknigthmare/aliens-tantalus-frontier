@@ -4,7 +4,7 @@ import { openSync, readSync, closeSync } from 'node:fs';
 import { ENEMY_USER_CASTES_V87 } from '../src/enemy-user-castes-v87.js';
 import { ENEMY_STATIC_POSES_V95 } from '../src/enemy-static-poses-v95.js';
 import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
-import { ENEMY_DEDICATED_POSES_V98 as DEDICATED } from '../src/enemy-dedicated-poses-v98.js';
+import { ENEMY_DEDICATED_POSES_V99 as DEDICATED } from '../src/enemy-dedicated-poses-v99.js';
 import { getUserPoseHabitatV95, getUserPoseVisibleBoundsV95, isUserPoseInsideHabitatV95 } from '../src/enemy-user-pose-runtime-v87.js';
 
 // Model the browser's decoded native size from the real PNG, not a 1024px fake

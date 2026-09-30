@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-244-cryo-adapted-deacon-line",
+  "name": "Cryo-Adapted Deacon Line",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Deacon Line. Base reference visual observations: Slender upright dark blue-teal organic biped, smooth rear-pointing wedge or hooked crest continuing from the head, compact right-facing jaw, no external eyes apparent. Two long slim arms with narrow clawed hands, two long bent legs and flat elongated feet, no tail and no dorsal tubes. Shallow ribbed chest and skin folds, organic rather than metal armor. Match the intact standing poses of the reference, head and body facing right, both feet supported.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png",
+    "sha256": "b1de6bc249f8d3fbad6c808edebac0c850c160d92c601f3ffd549df75008c4c8",
+    "visualNotes": "Slender upright dark blue-teal organic biped, smooth rear-pointing wedge or hooked crest continuing from the head, compact right-facing jaw, no external eyes apparent. Two long slim arms with narrow clawed hands, two long bent legs and flat elongated feet, no tail and no dorsal tubes. Shallow ribbed chest and skin folds, organic rather than metal armor. Match the intact standing poses of the reference, head and body facing right, both feet supported."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-3409c5ce-7fdb-4ca5-a368-0e62b1a6a3bb.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-244-cryo-adapted-deacon-line.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "be40bdfdd5df888bc4cd1f9867c9cd879328a524f2402a6b7a7bf45fe4154d49",
+    "bboxAlphaAtLeast16": [
+      457,
+      55,
+      898,
+      1196
+    ],
+    "alphaMin": 0,
+    "alpha0": 1303633,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Intact right-facing blue-teal organic biped with rear-pointed hooked head crest, two arms and two legs, no tail or added dorsal tubes. Restrained frost leaves skin relief and base color visible. Entire head, hands and feet inside canvas. Actual margins recorded; no claim that requested ten-percent padding was achieved uniformly. Support center lies between both feet.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 457,
+      "top": 55,
+      "right": 356,
+      "bottom": 58
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.53,
+      "y": 0.9537480063795853
+    },
+    "sourceFacing": 1
+  }
+}

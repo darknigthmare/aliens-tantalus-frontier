@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-196-acid-blooded-pathogen-mimic",
+  "name": "Acid-Blooded Pathogen Mimic",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Pathogen Mimic.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: Low hunched pale TAUPE/IVORY organic quadruped with compact thick blunt skull, fully closed knotted sinewy ribbed body and exactly FOUR weight-bearing legs: two forelegs and two hindlegs, one foot on each leg. Show four distinct feet, no fifth central leg. Three thin flexible whip-like tendrils sweep backwards from the upper rear body with separate free tips. Maintain the reference's compact pale muscular body and crowded blunt face, not a smooth elongated alien dome or upright human. No added shell armor or separate tail.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+    "sha256": "f5b8525e9c0f4d03c30e6c671d129b0e7147878de4ce9647ac78e5800ec631c2",
+    "visualNotes": "Pale taupe knotted quadruped, compact blunt skull and ribbed closed torso, four weight-bearing legs and three rearward upper-body tendrils."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-7231b559-ac19-4d80-9088-7dbbb6a2052e.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-196-acid-blooded-pathogen-mimic.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "36547d3d71394c21487048339eec513c39cf50a4e14b588ebb874b264578bfec",
+    "bboxAlphaAtLeast16": [
+      204,
+      277,
+      1342,
+      846
+    ],
+    "alphaMin": 0,
+    "alpha0": 1211891,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Whole right-facing compact quadruped, exactly four separately traceable legs/feet and three distinct tendril tips. Pale identity palette retained with internal olive-yellow surface seams and original knotted relief. No extra central leg, crop or runtime effects. Measured visible margins in pixels: {\"left\":204,\"top\":277,\"right\":194,\"bottom\":178}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.54,
+      "y": 0.8251953125
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-206-acid-blooded-korari-stalker",
+  "name": "Acid-Blooded Korari Stalker",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Korari Stalker.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One low crouching alien reptilian quadruped matching Korari: muscular charcoal/grey-green body covered in irregular rounded natural stone-like scales/plates, narrow pointed reptilian head with small cyan eye, low brow ridges, exactly FOUR clawed legs and ONE long tapered muscular tail extending backwards LEFT. Retain the distinctive small CYAN DOT ROW along the flank, not an emitted glow. Low horizontal stalking stance; near/far legs offset to clearly show four separate feet. No fur, insect body, extra tentacles, added spikes, horns or mechanical armor. Preserve reference scale relief and grey-green/cyan identity, with only restrained olive-amber material iridescence and tiny closed yellow-green seam accents.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp",
+    "sha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df",
+    "visualNotes": "Low grey-green/charcoal scaled quadruped with narrow reptilian head, cyan eye and flank dot row, four clawed legs and one long tapered tail; irregular stone-like organic plate relief."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-5985d3dc-c153-45b4-b2ac-e4914f7b9f58.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-206-acid-blooded-korari-stalker.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "5263b96c9809b162da40aee63a7191380da9c111b24652ad0f59269c064eb7a1",
+    "bboxAlphaAtLeast16": [
+      77,
+      306,
+      1691,
+      778
+    ],
+    "alphaMin": 0,
+    "alpha0": 1170752,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing Korari with four traceable legs and one unbroken full tail. Cyan flank dots and eye retained against grey-green plates; subtle olive-yellow closed seam material. Pivot centers the four paw supports and excludes the long tail from support weighting. Measured visible margins in pixels: {\"left\":77,\"top\":306,\"right\":83,\"bottom\":109}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.637,
+      "y": 0.8759864712514093
+    },
+    "sourceFacing": 1
+  }
+}

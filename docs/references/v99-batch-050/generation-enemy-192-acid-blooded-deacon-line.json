@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-192-acid-blooded-deacon-line",
+  "name": "Acid-Blooded Deacon Line",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Deacon Line.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: Tall slender BLUE-GREY tail-less organic biped. Exactly TWO long slender clawed arms and TWO long legs; narrow intact ribbed torso, long neck, swept elongated smooth pointed cranial crest projecting backwards to LEFT, small forward jaw to RIGHT. Preserve the smooth blue material and lean silhouette. NO TAIL, NO DORSAL TUBES, no back spines, no armor or added shell. Both hands and both feet separated visibly, resting upright neutral stance.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png",
+    "sha256": "b1de6bc249f8d3fbad6c808edebac0c850c160d92c601f3ffd549df75008c4c8",
+    "visualNotes": "Tall slim blue-grey biped, two long arms and legs, swept backward pointed crest and narrow intact ribbed torso; no tail, tubes or additional appendages."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-fbc745d2-d21b-47e1-8b99-cf6eed183644.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-192-acid-blooded-deacon-line.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "68f1919ca3f8c58d5dc525ecf65bea6011467e84c29b0fefdf8906c367535c5c",
+    "bboxAlphaAtLeast16": [
+      469,
+      156,
+      855,
+      1134
+    ],
+    "alphaMin": 0,
+    "alpha0": 1370200,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing tail-less Deacon silhouette. Exactly two arms and two legs remain separately visible; blue identity and swept smooth crest preserved. Olive-amber/yellow-green material seams are subtle internal surface details, not an outline aura. Measured visible margins in pixels: {\"left\":469,\"top\":156,\"right\":399,\"bottom\":120}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.513,
+      "y": 0.9035087719298246
+    },
+    "sourceFacing": 1
+  }
+}

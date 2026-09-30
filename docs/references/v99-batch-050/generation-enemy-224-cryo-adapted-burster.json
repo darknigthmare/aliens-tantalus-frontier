@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-224-cryo-adapted-burster",
+  "name": "Cryo-Adapted Burster",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Burster is a low lean black-olive quadruped with four jointed clawed limbs, ribbed narrow trunk, long curved segmented pointed tail, and a broad elongated head covered in distinct rounded yellow-green sacs. Bright yellow-green limb insets contrast with the black/olive carapace; sacs and skin remain intact.\nSubject: Cryo-Adapted Burster. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Retain exactly FOUR long bent supporting limbs in a low quadrupedal stance, narrow dark ribbed trunk, one complete curved tail and broad elongated head carrying its characteristic closed yellow-green rounded sacs. Preserve bright green limb insets and dark olive base, restrained frost only along dorsal ridges. No explosion, spray, detached blobs, mist, extra legs or human torso. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp",
+    "sha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df",
+    "visualNotes": "Reference Burster is a low lean black-olive quadruped with four jointed clawed limbs, ribbed narrow trunk, long curved segmented pointed tail, and a broad elongated head covered in distinct rounded yellow-green sacs. Bright yellow-green limb insets contrast with the black/olive carapace; sacs and skin remain intact."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-c556c453-a3d7-4e51-bc68-de5569b1f64f.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-224-cryo-adapted-burster.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "ede720f5aa9f1c5b800d825e5bd65092fb5b16f4810fb814a30d5c348476dd32",
+    "bboxAlphaAtLeast16": [
+      85,
+      67,
+      1462,
+      970
+    ],
+    "alphaMin": 0,
+    "alpha0": 1051959,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Four distinct supporting limbs, low ribbed black/olive body, full curved pointed tail and broad head with closed yellow-green sacs match the reference anatomy. Green limb insets remain, with frost only on exposed ridges; no discharge. Silhouette uncut, several margins below requested 10%. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.52,
+      "y": 0.9462890625
+    },
+    "sourceFacing": 1
+  }
+}

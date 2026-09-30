@@ -1,0 +1,26 @@
+{
+  "profileId": "enemy-228-cryo-adapted-k-series-yellow-xenomorph",
+  "name": "Cryo-Adapted K-Series Yellow Xenomorph",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference K-Series Yellow is a gold-yellow biomechanical biped with compact ridged elongated eyeless dome, rounded shoulder shells, ribbed abdomen, three visible curved dorsal tubes in side view, two clawed arms, two digitigrade legs, and a long segmented tail ending in a broad arrow/spear point.\nSubject: Cryo-Adapted K-Series Yellow Xenomorph. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. ONE gold-yellow K-Series biped, exactly two clawed arms/two legs, compact ridged elongated dome and existing curved dorsal tubes; one full segmented tail raised behind to the left with complete arrow-shaped tip. Preserve dominant yellow-gold material and dark ribbed recesses; frost stays restrained on upward-facing ridges. No mixture with red or mechanical creatures, no gadgets, no ice armor. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+    "sha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
+    "visualNotes": "Reference K-Series Yellow is a gold-yellow biomechanical biped with compact ridged elongated eyeless dome, rounded shoulder shells, ribbed abdomen, three visible curved dorsal tubes in side view, two clawed arms, two digitigrade legs, and a long segmented tail ending in a broad arrow/spear point."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset.",
+    "providerError": {
+      "httpStatus": 400,
+      "code": "moderation_blocked",
+      "moderationStage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "5691405b-6035-4721-ae59-216b3da47e82",
+      "message": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 5691405b-6035-4721-ae59-216b3da47e82."
+    }
+  },
+  "runtimeContract": null
+}

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-225-cryo-adapted-monica-line",
+  "name": "Cryo-Adapted Monica Line",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Monica Line is a stocky glossy black-silver biomechanical biped, elongated rounded eyeless head with transverse dorsal ridges, ribbed torso, circular shoulder relief, two long clawed arms, two digitigrade legs, four short curved dorsal tubes/spines and one long thick segmented spear-tipped tail.\nSubject: Cryo-Adapted Monica Line. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Preserve stocky black-silver biped anatomy with exactly two arms and two digitigrade legs, long segmented tail with full spear tip, rounded elongated ridged dome and existing curved dorsal tubes. Neutral slightly hunched right-facing stance; hands and feet separated for legibility. Frost only atop head ridges, shoulders and exposed tail segments, while glossy black base remains dominant. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png",
+    "sha256": "7bea16e251795d207ec5796016513d8631399906864c171c3d6445fe2efc77b3",
+    "visualNotes": "Reference Monica Line is a stocky glossy black-silver biomechanical biped, elongated rounded eyeless head with transverse dorsal ridges, ribbed torso, circular shoulder relief, two long clawed arms, two digitigrade legs, four short curved dorsal tubes/spines and one long thick segmented spear-tipped tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-dcdb5520-5508-4734-9287-a55cc0b5e987.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-225-cryo-adapted-monica-line.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "10e4a825fe25a868443a4dcc0485b446287cf54f15f084735d3e678037703f6d",
+    "bboxAlphaAtLeast16": [
+      202,
+      119,
+      1333,
+      957
+    ],
+    "alphaMin": 0,
+    "alpha0": 1236395,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Stocky black/silver Monica-line biped with two arms, two complete legs, ridged elongated dome, circular shoulder relief, rear tube silhouette and full spear-tipped tail. Far-side dorsal detail is occluded in profile. Frost is limited to upper ridges. Uncut contours; bottom margin is below requested 10%. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.637,
+      "y": 0.93359375
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-xeno-trials-v98-shell-1';
+const CACHE = 'atf-v86-xeno-trials-v99-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -34,6 +34,7 @@ const CORE = [
   '/src/xeno-trials-presentation-v97.js', '/src/xeno-trials-selection-v97.js',
   '/src/enemy-dedicated-poses-v97.js', '/src/enemy-dedicated-batch-v97.js',
   '/src/enemy-dedicated-poses-v98.js', '/src/enemy-dedicated-batch-v98.js',
+  '/src/enemy-dedicated-poses-v99.js', '/src/enemy-dedicated-batch-v99.js',
   '/xeno-trials-v96.css', '/src/xeno-trials-data-v96.js', '/src/xeno-trials-engine-v96.js',
   '/src/xeno-trials-runtime-v96.js', '/src/xeno-trials-progress-v96.js', '/src/xeno-trials-ui-v96.js',
   '/src/enemy-dedicated-poses-v96.js',

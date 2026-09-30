@@ -1,6 +1,6 @@
 import { ENEMY_USER_CREATIONS_V95 as USER_ADDITIONS } from '../src/enemy-user-creations-v95.js';
 import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
-import { ENEMY_DEDICATED_POSES_V98 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v98.js';
+import { ENEMY_DEDICATED_POSES_V99 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v99.js';
 import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
 const DEDICATED = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.bioforgeEligible !== false);
 import { getEnemyStaticPoseV95 } from '../src/enemy-static-poses-v95.js';

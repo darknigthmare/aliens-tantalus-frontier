@@ -1,6 +1,6 @@
 import { GameEngine } from './game-production-runtime.js';
 import { ENEMIES } from './content-core-v50.js';
-import { getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v98.js';
+import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87 } from './enemy-static-poses-v96.js';
 import { createUserCasteActorV87, drawUserCastePoseV87, isUserCasteImageReadyV87, updateUserCasteActorV87,
   getUserPoseHabitatV95, confineUserPoseToHabitatV95 } from './enemy-user-pose-runtime-v87.js';

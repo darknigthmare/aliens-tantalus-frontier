@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-199-acid-blooded-weyland-yutani-commando",
+  "name": "Acid-Blooded Weyland-Yutani Commando",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Weyland-Yutani Commando.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One adult humanoid commando in the INTACT standing reference: ivory/off-white padded sealed armored uniform, black domed helmet top and pale rigid cage-like full-face guard, dark neck seal, compact black life-support pack/tubing on back, black gloves and dark boots. Exactly two arms and two legs. One reference compact ivory-and-black rifle held in both hands at low ready pointing RIGHT. Preserve helmet/face guard, pale uniform, chest panels and matching knee/shin pads; no additional weapons, blade, shield or new armor design. Restrained olive-amber/yellow-green material seams only, no leaking fluid or exposed body.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png",
+    "sha256": "6e932e77244abc0186b0258812ef1391628d597147c560c77c3c11c813b7d918",
+    "visualNotes": "Ivory padded armored commando with black domed helmet, rigid pale cage face guard, black life-support back unit/tubing, gloves and boots, and one ivory/black rifle."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-80cefbe7-9f7b-47df-bf1a-fc0d53530c6a.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-199-acid-blooded-weyland-yutani-commando.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "49bcdca8ba97111f44ea1868533762ab58a6d942ad8edf245bfdc8990562e73b",
+    "bboxAlphaAtLeast16": [
+      361,
+      199,
+      968,
+      1157
+    ],
+    "alphaMin": 0,
+    "alpha0": 1269622,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing armored human silhouette with two arms/legs and the one reference rifle held in both hands. Helmet cage, pale padded suit and black back unit preserved; restrained yellow-green sealed seams, no fluid effects. Measured visible margins in pixels: {\"left\":361,\"top\":199,\"right\":286,\"bottom\":97}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.491,
+      "y": 0.9218500797448166
+    },
+    "sourceFacing": 1
+  }
+}

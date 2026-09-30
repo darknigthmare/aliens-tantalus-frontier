@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-242-cryo-adapted-caravan-stalker",
+  "name": "Cryo-Adapted Caravan Stalker",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Caravan Stalker. Base reference visual observations: Lean brown/bronze-black quadrupedal biomechanical alien, one long rounded smooth dome, ribbed thorax, two long slender forelimbs and two digitigrade hindlegs, small claws, two short dorsal tube stubs, one thin long segmented tail curling behind. Intact neutral top-row right-facing standing pose. No carried equipment and no machine suit.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png",
+    "sha256": "9e6a7124eea69aa18a51739b7eaf6006ef863355ef39d977a6dec66c3864f713",
+    "visualNotes": "Lean brown/bronze-black quadrupedal biomechanical alien, one long rounded smooth dome, ribbed thorax, two long slender forelimbs and two digitigrade hindlegs, small claws, two short dorsal tube stubs, one thin long segmented tail curling behind. Intact neutral top-row right-facing standing pose. No carried equipment and no machine suit."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-806c89b2-cfa8-4e21-9ca4-6b3e8a0f940d.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-242-cryo-adapted-caravan-stalker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "f5a963f52a2a66929c3aad9d5ad3b2c97d3b8e927a604302bd30820db1372018",
+    "bboxAlphaAtLeast16": [
+      62,
+      203,
+      1467,
+      901
+    ],
+    "alphaMin": 0,
+    "alpha0": 1212602,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Visually inspected one intact right-facing four-limbed Caravan Stalker, bronze-black identity, smooth long dome, ribbed body, two short dorsal tubes and one complete tail. Blue-grey frost detail rests on original ridges and dome without ice armor or particles. Full figure uncut; actual native margins below10% horizontally documented, no transformations.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 62,
+      "top": 203,
+      "right": 69,
+      "bottom": 123
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.62,
+      "y": 0.8798828125
+    },
+    "sourceFacing": 1
+  }
+}

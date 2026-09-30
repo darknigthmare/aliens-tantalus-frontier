@@ -1,0 +1,24 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-246-cryo-adapted-protomorph",
+  "name": "Cryo-Adapted Protomorph",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Protomorph. Base reference visual observations: Tall slender brown-black organic alien biped, elongated smooth dark dome sweeping backward over head, ribbed chest, reddish-brown sinewy surface with dark raised plates, no visible eyes. Two long arms with slender clawed hands, two bent long legs with clawed elongated feet, one thin segmented curved tail ending in a pointed tip. Paired short curved dorsal projections behind shoulders, matching the reference. Preserve the intact top-row standing alert anatomy and right-facing jaw. Do not make it quadrupedal or replace the smooth dome with Deacon crest.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png",
+    "sha256": "103633e135b17b7f74f3e86e05dfe846c45f9a7e304a3a4d3232f9cd9bae40e4",
+    "visualNotes": "Tall slender brown-black organic alien biped, elongated smooth dark dome sweeping backward over head, ribbed chest, reddish-brown sinewy surface with dark raised plates, no visible eyes. Two long arms with slender clawed hands, two bent long legs with clawed elongated feet, one thin segmented curved tail ending in a pointed tip. Paired short curved dorsal projections behind shoulders, matching the reference. Preserve the intact top-row standing alert anatomy and right-facing jaw. Do not make it quadrupedal or replace the smooth dome with Deacon crest."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "reason": "native-output-moderation-blocked",
+    "notes": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted.",
+    "requestId": "dcd3e380-62a8-434e-bd13-c0b1afea5742",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

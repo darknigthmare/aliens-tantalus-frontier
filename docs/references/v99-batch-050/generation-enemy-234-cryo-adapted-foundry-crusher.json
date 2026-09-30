@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-234-cryo-adapted-foundry-crusher",
+  "name": "Cryo-Adapted Foundry Crusher",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference is a four-by-four sheet of the dark charcoal and bronze Foundry Crusher: low heavy quadrupedal body, enormous swept-up vertically tall plated head shield, compact lowered face, broad armored shoulders, two strong forelimbs, two bent hindlimbs, small dorsal plates and a single tapering segmented tail. Preserve the warm bronze seams on dark organic biomechanical plates and the distinctive upright head-shield silhouette.\nSubject: Cryo-Adapted Foundry Crusher. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Exactly FOUR load-bearing limbs (two forelegs and two hindlegs), clawed feet readable, upright swept cranial shield intact, one entire segmented tail extending left. Grounded low quadruped stance with slight separation of near and far feet so appendage count remains clear.  All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+    "sha256": "3ada141e2d40c9354637aca6c8008afc069a59c3fa10396de1f99a9adb2db77f",
+    "visualNotes": "Reference is a four-by-four sheet of the dark charcoal and bronze Foundry Crusher: low heavy quadrupedal body, enormous swept-up vertically tall plated head shield, compact lowered face, broad armored shoulders, two strong forelimbs, two bent hindlimbs, small dorsal plates and a single tapering segmented tail. Preserve the warm bronze seams on dark organic biomechanical plates and the distinctive upright head-shield silhouette."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-f06b8f6a-383b-4ba9-80fc-2ec3c52bae1c.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-234-cryo-adapted-foundry-crusher.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "5bd7c1ef40fc37e3a9f5d6ab9153307bd1c443e811ac01b9448ba6e6da3ac85d",
+    "bboxAlphaAtLeast16": [
+      51,
+      112,
+      1496,
+      912
+    ],
+    "alphaMin": 0,
+    "alpha0": 1051994,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Visually accepted: complete right-facing low quadruped with four load-bearing limbs, distinctive tall swept head shield, dark charcoal plates, warm bronze seams and entire segmented tail. Forefeet partly overlap in the side perspective but remain separately traceable; support midpoint used for X pivot. Frost restricted to exposed ridges. Horizontal padding is less than ten percent but no extremity is clipped; native pixels retained without margin edits. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.645,
+      "y": 0.8896484375
+    },
+    "sourceFacing": 1
+  }
+}

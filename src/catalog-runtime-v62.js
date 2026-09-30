@@ -5,7 +5,7 @@ import {
   WEAPONS
 } from './content-core-v50.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
-import { enemyDedicatedCatalogVisualV98 as enemyDedicatedCatalogVisualV96, getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v98.js';
+import { enemyDedicatedCatalogVisualV99 as enemyDedicatedCatalogVisualV96, getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { ENEMY_ENCYCLOPEDIA_CATALOG_V88, getEnemyUserCampaignV88, userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 import {
   resolveEquipmentVisualProfileV56,

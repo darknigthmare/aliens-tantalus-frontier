@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-250-cryo-adapted-combat-synthetic",
+  "name": "Cryo-Adapted Combat Synthetic",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Combat Synthetic. Base reference visual observations: Use ONLY the intact armored robot in ROW THREE of the supplied reference sheet as the Combat Synthetic identity; the other rows are different subjects and must not be combined. Human-proportioned biped robot with dark gunmetal segmented armor, rounded helmet-like mechanical head with small pale lenses, broad rounded shoulder plates, visible circular hip and knee joints, compact backpack/canister assembly and sturdy mechanical boots. Exactly two arms holding its single compact dark futuristic rifle across its torso, muzzle directed right and slightly downward in a non-firing ready stance; exactly two legs. Keep original metal plating and equipment silhouette, no human skin, no hood, no damage. Limited blue-grey frost at metal edges; do not recolor all armor white.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/synthetic-android-animation-sheet.png",
+    "sha256": "8b8da47dd0d58a54ae624d3ff6997d1fd20fb93d1a66cb9d6c5ac73101f486a4",
+    "visualNotes": "Use ONLY the intact armored robot in ROW THREE of the supplied reference sheet as the Combat Synthetic identity; the other rows are different subjects and must not be combined. Human-proportioned biped robot with dark gunmetal segmented armor, rounded helmet-like mechanical head with small pale lenses, broad rounded shoulder plates, visible circular hip and knee joints, compact backpack/canister assembly and sturdy mechanical boots. Exactly two arms holding its single compact dark futuristic rifle across its torso, muzzle directed right and slightly downward in a non-firing ready stance; exactly two legs. Keep original metal plating and equipment silhouette, no human skin, no hood, no damage. Limited blue-grey frost at metal edges; do not recolor all armor white."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-a668e078-0c90-4358-a956-cd757acda326.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-250-cryo-adapted-combat-synthetic.png",
+    "width": 1206,
+    "height": 1305,
+    "sha256": "34a35e940934ba67db9498033a8688333f70dc8916ec2057fb4941e46f15d5f3",
+    "bboxAlphaAtLeast16": [
+      236,
+      78,
+      1021,
+      1228
+    ],
+    "alphaMin": 0,
+    "alpha0": 1171104,
+    "totalPixels": 1573830
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing intact combat robot matching row three of the supplied multi-subject reference: gunmetal mechanical armor, round joints, canister backpack and one rifle held by two hands. Two complete legs and boots, no mixed human/hooded identity. Pale frost at raised metal edges preserves dark plating and brass accents. Static ready-step pose, native pixels unchanged, actual margins recorded.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 236,
+      "top": 78,
+      "right": 185,
+      "bottom": 77
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5,
+      "y": 0.9409961685823754
+    },
+    "sourceFacing": 1
+  }
+}

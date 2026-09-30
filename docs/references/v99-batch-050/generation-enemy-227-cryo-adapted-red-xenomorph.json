@@ -1,0 +1,26 @@
+{
+  "profileId": "enemy-227-cryo-adapted-red-xenomorph",
+  "name": "Cryo-Adapted Red Xenomorph",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Use ONLY the TOP ROW red creature in this mixed reference sheet: dark red/burgundy and black biomechanical biped, elongated smooth eyeless cranial dome, ribbed trunk, rounded shoulder joints, a fan of swept-back dorsal spikes, two long clawed arms and two digitigrade legs. Other yellow or mechanical rows are unrelated and must not be blended.\nSubject: Cryo-Adapted Red Xenomorph. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Generate only ONE RED xenomorph based exclusively on the TOP ROW red reference, never the yellow or mechanical rows. Preserve its two arms/two legs, elongated domed head and swept-back spine fan; include its single full segmented tail as part of the complete isolated body. Neutral ready stance, dominant dark red/burgundy shell and black recesses; sparse frost on existing exposed ridges. No machinery, white dorsal packs, weapons, acid spray or glow. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/neuro-xeno-animation-sheet.png",
+    "sha256": "9dc05f797a0e3acf936c9782dfeed9e9c6f8b30cfd2c7eaa2bb1b8105479b5c6",
+    "visualNotes": "Use ONLY the TOP ROW red creature in this mixed reference sheet: dark red/burgundy and black biomechanical biped, elongated smooth eyeless cranial dome, ribbed trunk, rounded shoulder joints, a fan of swept-back dorsal spikes, two long clawed arms and two digitigrade legs. Other yellow or mechanical rows are unrelated and must not be blended."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "Provider rejected this single native call at output moderation. No output file supplied, no retry, no alternate prompt/provider, no runtime asset.",
+    "providerError": {
+      "httpStatus": 400,
+      "code": "moderation_blocked",
+      "moderationStage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "5e3b568a-694b-4b35-973b-3328ba2a38ac",
+      "message": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 5e3b568a-694b-4b35-973b-3328ba2a38ac."
+    }
+  },
+  "runtimeContract": null
+}

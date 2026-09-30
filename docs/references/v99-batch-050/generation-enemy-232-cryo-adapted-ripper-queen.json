@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-232-cryo-adapted-ripper-queen",
+  "name": "Cryo-Adapted Ripper Queen",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference depicts the silver-gray and charcoal Ripper Queen with broad swept serrated cranial crown, armored shoulder shell, jagged spinal ridge, compact heavy torso, TWO long clawed arms, TWO powerful digitigrade legs, and ONE narrow coiled segmented tail with restrained dark rust-orange seams. Preserve the specific two-armed project anatomy; this is not the four-armed movie Queen.\nSubject: Cryo-Adapted Ripper Queen. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Preserve exactly TWO long clawed arms, TWO powerful digitigrade legs, one full segmented tail and the swept serrated crown from the supplied project Ripper Queen reference. Keep both feet visible on a common ground line, separate hands from torso silhouette, tail curving left.  All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png",
+    "sha256": "20878480f2538db0a9972743f1f5012845bdd898ea4188ab566c6efdbc1f7af8",
+    "visualNotes": "Reference depicts the silver-gray and charcoal Ripper Queen with broad swept serrated cranial crown, armored shoulder shell, jagged spinal ridge, compact heavy torso, TWO long clawed arms, TWO powerful digitigrade legs, and ONE narrow coiled segmented tail with restrained dark rust-orange seams. Preserve the specific two-armed project anatomy; this is not the four-armed movie Queen."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-50a40268-0ffe-4b3e-bd29-dd6a79e47f4f.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-232-cryo-adapted-ripper-queen.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "95484d0e0d42bfbe59514410707ef01ca2b95f7055d95ae6cf1a3c913b4b3379",
+    "bboxAlphaAtLeast16": [
+      79,
+      37,
+      1478,
+      1006
+    ],
+    "alphaMin": 0,
+    "alpha0": 969429,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Visually accepted: one complete right-facing Ripper Queen with the reference-specific TWO clawed arms and TWO digitigrade legs, swept serrated crown, jagged spinal ridge and continuous segmented tail. Silver-gray/charcoal identity and restrained rust seams remain readable under ridge frost. Both support feet are visible; pivot X is their visual support midpoint. All silhouette extremities fit, but top/bottom clearance is narrower than the requested ten percent; native pixels retained without padding edits. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.535,
+      "y": 0.9814453125
+    },
+    "sourceFacing": 1
+  }
+}

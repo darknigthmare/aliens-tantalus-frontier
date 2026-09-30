@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-235-cryo-adapted-reef-stalker",
+  "name": "Cryo-Adapted Reef Stalker",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference is a four-by-four sheet of the Reef Stalker: sleek dark blue-black biomechanical quadrupedal crouch, elongated smooth domed skull, slim rib cage, swept narrow dorsal spines, TWO slim long forelimbs ending in claws, TWO springy digitigrade hindlimbs, and ONE long narrow segmented tapering tail. Retain the blue-steel edge highlights and the smooth dome rather than adding a large crown, fins or new appendages.\nSubject: Cryo-Adapted Reef Stalker. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Exactly FOUR limbs: two long clawed forelimbs and two bent digitigrade hindlimbs, low stalking stance. One smooth elongated domed head, reference swept dorsal spines and entire long thin segmented tail extending left with tip visible. Separate near and far limbs enough to retain readable anatomy.  All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png",
+    "sha256": "a23097c5933b2ddd7b5e97b5c5985cf0901da2ec2f075ca20e28be113cefb10a",
+    "visualNotes": "Reference is a four-by-four sheet of the Reef Stalker: sleek dark blue-black biomechanical quadrupedal crouch, elongated smooth domed skull, slim rib cage, swept narrow dorsal spines, TWO slim long forelimbs ending in claws, TWO springy digitigrade hindlimbs, and ONE long narrow segmented tapering tail. Retain the blue-steel edge highlights and the smooth dome rather than adding a large crown, fins or new appendages."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-98eb7d37-d597-4e89-bff9-1c0fbce3b9b3.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-235-cryo-adapted-reef-stalker.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "5efad3c87c62cfa63723592b0641dca88dc37cdae402d025ae1db0932f4379aa",
+    "bboxAlphaAtLeast16": [
+      81,
+      194,
+      1695,
+      800
+    ],
+    "alphaMin": 0,
+    "alpha0": 1249701,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Visually accepted: complete right-facing dark blue-black Reef Stalker, smooth elongated dome, slim rib cage, swept dorsal spines, exactly two long forelimbs and two bent digitigrade hindlimbs, one continuous long narrow tail. All four extremities and tail tip remain distinct and inside frame. Support midpoint used for X pivot; frost stays on exposed ridges without replacing the dark identity. Left/right margins are narrower than requested ten percent but no clipping; no pixel edits. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.685,
+      "y": 0.9007891770011274
+    },
+    "sourceFacing": 1
+  }
+}

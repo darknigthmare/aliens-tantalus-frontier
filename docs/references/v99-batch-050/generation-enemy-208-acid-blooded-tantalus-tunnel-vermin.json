@@ -1,0 +1,31 @@
+{
+  "profileId": "enemy-208-acid-blooded-tantalus-tunnel-vermin",
+  "name": "Acid-Blooded Tantalus Tunnel Vermin",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Tantalus Tunnel Vermin.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One low elongated pale BEIGE/TAN armored arthropod with overlapping dorsal scutes, dark flexible segmented rear abdomen, a narrow wedge-shaped head facing RIGHT with TWO short curved feelers, and exactly SIX short jointed walking legs in THREE bilateral pairs. Keep small cyan flank dots. Pose near/far legs offset so all six individual leg roots/feet are traceable; no fused loops or seventh limb. No fur, mammalian paws, extra antennae, wings, pincers or separate long tail. Preserve low long body, short limbs and existing organic overlapping scute relief without extra armor bulk. Restrained olive-amber sheen and tiny closed yellow-green seam accents in the tan shell, while cyan dots remain cyan.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+    "sha256": "6a824553bf7b6355b32e5ea5933998e7de51c5ea7a8b6c1233cc3bf8c76aa104",
+    "visualNotes": "Low pale tan arthropod with overlapping scutes, dark segmented rear abdomen, narrow wedge head, two curved feelers, cyan flank dots and six short jointed walking legs in three bilateral pairs (same base lock as V98)."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-6d255a1f-f21e-45d6-8750-5ba3d0b0c89b.png",
+    "path": null,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "bde8d7485ff7de3b16240a3e6a68641c85660fec6bc6a89b49329ee44b8294b5",
+    "bboxAlphaAtLeast16": [
+      213,
+      364,
+      1421,
+      773
+    ],
+    "alphaMin": 0,
+    "alpha0": 1289391,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "held",
+    "notes": "Held on visual anatomy review: only FIVE separately rooted legs/feet are visible, arranged as five sequential supports; the required three bilateral pairs/six legs cannot be certified. No runtime copy, retry, reformulation or image transformation. Measured visible margins in pixels: {\"left\":213,\"top\":364,\"right\":115,\"bottom\":251}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": null
+}

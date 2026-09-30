@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-214-cryo-adapted-runner",
+  "name": "Cryo-Adapted Runner",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Runner is a lean copper-brown quadrupedal biomechanical alien, smooth elongated eyeless domed head, narrow ribbed trunk, four long jointed clawed limbs in a low stance, and one long segmented tapering tail curved behind. Copper-brown plates and dark recesses are central identity colors.\nSubject: Cryo-Adapted Runner. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Keep the copper-brown Runner as a lean low QUADRUPED with exactly four long jointed legs touching an implied level support, one eyeless elongated smooth cranial dome and one complete curved segmented tail. Preserve slim dog-like proportions and ribs; no upright human torso or added dorsal tube cluster. Restrained frost texture on top-facing ridges only. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-006-runner.webp",
+    "sha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3",
+    "visualNotes": "Reference Runner is a lean copper-brown quadrupedal biomechanical alien, smooth elongated eyeless domed head, narrow ribbed trunk, four long jointed clawed limbs in a low stance, and one long segmented tapering tail curved behind. Copper-brown plates and dark recesses are central identity colors."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-8fa11d3f-4874-43d5-aff7-34c53a28bbc2.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-214-cryo-adapted-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "a1b567c20db6f19cdfa7eda91074359debeaf2cb9647868e0dbc4b5813953783",
+    "bboxAlphaAtLeast16": [
+      82,
+      171,
+      1458,
+      903
+    ],
+    "alphaMin": 0,
+    "alpha0": 1160140,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Lean copper-brown quadruped with four distinct clawed limbs, full upward-curled segmented tail and elongated eyeless head. Frost stays on upper ridges; reference ribs and warm metallic-organic relief remain legible. Native alpha bounds exclude the diffuse RGB preview outside the silhouette. Margins are clear but below requested 10% horizontally. Native PNG bytes unchanged. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.57,
+      "y": 0.880859375
+    },
+    "sourceFacing": 1
+  }
+}

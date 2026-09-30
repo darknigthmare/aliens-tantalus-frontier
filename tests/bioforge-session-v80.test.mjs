@@ -1,6 +1,6 @@
 import { ENEMY_USER_CREATIONS_V95 as USER_ADDITIONS } from '../src/enemy-user-creations-v95.js';
 import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
-import { ENEMY_DEDICATED_POSES_V98 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v98.js';
+import { ENEMY_DEDICATED_POSES_V99 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v99.js';
 import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
 const DEDICATED = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.bioforgeEligible !== false);
 import test from 'node:test';
@@ -82,12 +82,21 @@ test('le roster terrestre est strict, validé et sans fallback legacy', () => {
   assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-103-albino-ceto-reef-predator'), false);
   const batchV98 = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.batch === 'v98-050');
   const batchV98Ids = new Set(batchV98.map(entry => entry.profileId));
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.filter(entry => !batchV98Ids.has(entry.profileId)).length, 159,
+  const batchV99 = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.batch === 'v99-050');
+  const batchV99Ids = new Set(batchV99.map(entry => entry.profileId));
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.filter(entry => !batchV98Ids.has(entry.profileId) && !batchV99Ids.has(entry.profileId)).length, 159,
     'the historical V97 roster remains unchanged outside the newly admitted batch');
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 198);
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.filter(entry => !batchV99Ids.has(entry.profileId)).length, 198,
+    'the historical V98 roster remains unchanged outside the newly admitted batch');
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 198 + batchV99.filter(entry => entry.bioforgeEligible !== false).length);
   assert.equal(batchV98.length, 40);
   assert.equal(batchV98.filter(entry => entry.bioforgeEligible !== false).length, 39);
   assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-155-armored-ceto-reef-predator'), false);
+  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-207-acid-blooded-ceto-reef-predator'), false);
+  for (const definition of batchV99) {
+    assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes(definition.profileId), definition.bioforgeEligible !== false, definition.profileId);
+    assert.equal(definition.id, definition.profileId);
+  }
   for (const definition of batchV98) {
     assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes(definition.profileId), definition.bioforgeEligible !== false, definition.profileId);
     assert.equal(definition.id, definition.profileId, 'a V98 dedicated pose preserves its historical identity');

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-207-acid-blooded-ceto-reef-predator",
+  "name": "Acid-Blooded Ceto Reef Predator",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Ceto Reef Predator.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One low aquatic alien quadruped matching Ceto exactly: dark teal/blue-black smooth scaled body, broad tapering fish-like head with small round pale golden eye and three short gill slits behind jaw, arched low continuous dorsal ridge/fin, exactly FOUR short articulated paddle-like clawed/webbed limbs under the body, and ONE thick rearward tail ending in the distinctive broad rounded fan fin at LEFT. Preserve tiny cyan flank dots and segmented smooth teal material. Near/far limbs offset so all four feet can be counted. Not a shark, crocodile, salamander redesign or legless fish. Keep the short low belly, smooth fish-head profile and rounded tail fan; no added horns, dorsal spikes or tentacles. Restrained olive-amber iridescence/yellow-green closed seams integrated in original teal surface relief only.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+    "sha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168",
+    "visualNotes": "Dark teal low aquatic quadruped with tapered fish-like head/golden eye, three gill slits, smooth arched dorsal fin, four short clawed limbs, tiny cyan flank dots and one broad rounded fan tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-fb657073-84b3-4a32-a191-a47af236743c.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-207-acid-blooded-ceto-reef-predator.png",
+    "width": 1942,
+    "height": 809,
+    "sha256": "ac7d36be92bc87902a0e73b2bcd41408de1387b43d4fcb7966a147f966a24569",
+    "bboxAlphaAtLeast16": [
+      107,
+      184,
+      1838,
+      649
+    ],
+    "alphaMin": 0,
+    "alpha0": 1077749,
+    "totalPixels": 1571078
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing Ceto preserves teal fish head, three gills, dorsal fin, cyan dot line, four distinct limb supports and full rounded fan tail. Restrained olive-gold material seams, no added appendages. Pivot centered under four limb supports rather than the full tail-to-snout width. Measured visible margins in pixels: {\"left\":107,\"top\":184,\"right\":104,\"bottom\":160}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.59,
+      "y": 0.8009888751545118
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "attempted": 16,
+  "received": 13,
+  "accepted": 12,
+  "status": "completed-with-holds",
+  "poses": [
+    {
+      "id": "enemy-238-cryo-adapted-pale-crucible-hunter",
+      "profileId": "enemy-238-cryo-adapted-pale-crucible-hunter",
+      "name": "Cryo-Adapted Pale Crucible Hunter",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-238-cryo-adapted-pale-crucible-hunter.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        101,
+        143,
+        1647,
+        796
+      ],
+      "sha256": "22eeeea6ea215e55ba585442b1e82ea09596f8bc12bf1d1fd4f2c0513bfd1d60",
+      "pivot": {
+        "x": 0.61,
+        "y": 0.8974069898534386
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 106
+    },
+    {
+      "id": "enemy-239-cryo-adapted-dust-runner",
+      "profileId": "enemy-239-cryo-adapted-dust-runner",
+      "name": "Cryo-Adapted Dust Runner",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-239-cryo-adapted-dust-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        58,
+        125,
+        1483,
+        908
+      ],
+      "sha256": "019f943dad00f41b01d25d5fa1371f75cd204d2294cd2950d7fd8fced10603ea",
+      "pivot": {
+        "x": 0.58,
+        "y": 0.88671875
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-240-cryo-adapted-salvage-hive-brute",
+      "profileId": "enemy-240-cryo-adapted-salvage-hive-brute",
+      "name": "Cryo-Adapted Salvage Hive Brute",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-240-cryo-adapted-salvage-hive-brute.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        128,
+        126,
+        1406,
+        905
+      ],
+      "sha256": "43940d2a2d6f112a34c894a8a58b78b72350f19789bdc802e3b81dc80e716385",
+      "pivot": {
+        "x": 0.655,
+        "y": 0.8837890625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 124
+    },
+    {
+      "id": "enemy-242-cryo-adapted-caravan-stalker",
+      "profileId": "enemy-242-cryo-adapted-caravan-stalker",
+      "name": "Cryo-Adapted Caravan Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-242-cryo-adapted-caravan-stalker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        62,
+        203,
+        1467,
+        901
+      ],
+      "sha256": "f5a963f52a2a66929c3aad9d5ad3b2c97d3b8e927a604302bd30820db1372018",
+      "pivot": {
+        "x": 0.62,
+        "y": 0.8798828125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-243-cryo-adapted-trilobite-echo",
+      "profileId": "enemy-243-cryo-adapted-trilobite-echo",
+      "name": "Cryo-Adapted Trilobite Echo",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-243-cryo-adapted-trilobite-echo.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        86,
+        203,
+        1464,
+        863
+      ],
+      "sha256": "af9ca8b08595610d507ba45684ea5a2f0a5f9a869974f001bb9648fbba683e43",
+      "pivot": {
+        "x": 0.54,
+        "y": 0.8427734375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 104
+    },
+    {
+      "id": "enemy-244-cryo-adapted-deacon-line",
+      "profileId": "enemy-244-cryo-adapted-deacon-line",
+      "name": "Cryo-Adapted Deacon Line",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-244-cryo-adapted-deacon-line.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        457,
+        55,
+        898,
+        1196
+      ],
+      "sha256": "be40bdfdd5df888bc4cd1f9867c9cd879328a524f2402a6b7a7bf45fe4154d49",
+      "pivot": {
+        "x": 0.53,
+        "y": 0.9537480063795853
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 136
+    },
+    {
+      "id": "enemy-249-cryo-adapted-working-joe",
+      "profileId": "enemy-249-cryo-adapted-working-joe",
+      "name": "Cryo-Adapted Working Joe",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-249-cryo-adapted-working-joe.png",
+      "sourceWidth": 1024,
+      "sourceHeight": 1536,
+      "alphaBounds": [
+        309,
+        81,
+        778,
+        1466
+      ],
+      "sha256": "5c10ab69761beab48a83e4b3d7664df6b46dbfc389f3a7f3764e35a89a39459b",
+      "pivot": {
+        "x": 0.53,
+        "y": 0.9544270833333334
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 116
+    },
+    {
+      "id": "enemy-250-cryo-adapted-combat-synthetic",
+      "profileId": "enemy-250-cryo-adapted-combat-synthetic",
+      "name": "Cryo-Adapted Combat Synthetic",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-250-cryo-adapted-combat-synthetic.png",
+      "sourceWidth": 1206,
+      "sourceHeight": 1305,
+      "alphaBounds": [
+        236,
+        78,
+        1021,
+        1228
+      ],
+      "sha256": "34a35e940934ba67db9498033a8688333f70dc8916ec2057fb4941e46f15d5f3",
+      "pivot": {
+        "x": 0.5,
+        "y": 0.9409961685823754
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 104
+    },
+    {
+      "id": "enemy-251-cryo-adapted-weyland-yutani-commando",
+      "profileId": "enemy-251-cryo-adapted-weyland-yutani-commando",
+      "name": "Cryo-Adapted Weyland-Yutani Commando",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-251-cryo-adapted-weyland-yutani-commando.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        356,
+        77,
+        993,
+        1190
+      ],
+      "sha256": "8e55bb3f980f5f028a6655b5be3b036a96065d4acc7d6d375dcdeaf6b2d81050",
+      "pivot": {
+        "x": 0.5,
+        "y": 0.94896331738437
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-252-cryo-adapted-upp-vanguard",
+      "profileId": "enemy-252-cryo-adapted-upp-vanguard",
+      "name": "Cryo-Adapted UPP Vanguard",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-252-cryo-adapted-upp-vanguard.png",
+      "sourceWidth": 1225,
+      "sourceHeight": 1284,
+      "alphaBounds": [
+        277,
+        99,
+        1017,
+        1204
+      ],
+      "sha256": "ec7f14b24401a2b83b6054213f19f667309c96d03930532d61259066df2601f5",
+      "pivot": {
+        "x": 0.49,
+        "y": 0.9376947040498442
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 134
+    },
+    {
+      "id": "enemy-253-cryo-adapted-seegson-security",
+      "profileId": "enemy-253-cryo-adapted-seegson-security",
+      "name": "Cryo-Adapted Seegson Security",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-253-cryo-adapted-seegson-security.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        263,
+        96,
+        1067,
+        1182
+      ],
+      "sha256": "d8949f6c2407db1e4c76ab50447a1721502cda0b431d6544b0649fbc881cc159",
+      "pivot": {
+        "x": 0.45,
+        "y": 0.9425837320574163
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-254-cryo-adapted-colonial-raider",
+      "profileId": "enemy-254-cryo-adapted-colonial-raider",
+      "name": "Cryo-Adapted Colonial Raider",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-254-cryo-adapted-colonial-raider.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        284,
+        72,
+        988,
+        1192
+      ],
+      "sha256": "e6ca766c254dc7bc5814e34715e8cecb654f1e8605bff70c8e46a8dc586d38b5",
+      "pivot": {
+        "x": 0.49,
+        "y": 0.9505582137161085
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 138
+    }
+  ],
+  "held": [
+    {
+      "id": "enemy-237-cryo-adapted-siege-royal",
+      "profileId": "enemy-237-cryo-adapted-siege-royal",
+      "name": "Cryo-Adapted Siege Royal",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "7eacdd6b-9c39-4443-be8e-60cf7ac7683c"
+    },
+    {
+      "id": "enemy-241-cryo-adapted-arcology-lurker",
+      "profileId": "enemy-241-cryo-adapted-arcology-lurker",
+      "name": "Cryo-Adapted Arcology Lurker",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "0c832626-2477-4fd2-aba5-d9d1081969e3"
+    },
+    {
+      "id": "enemy-246-cryo-adapted-protomorph",
+      "profileId": "enemy-246-cryo-adapted-protomorph",
+      "name": "Cryo-Adapted Protomorph",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "dcd3e380-62a8-434e-bd13-c0b1afea5742"
+    },
+    {
+      "id": "enemy-248-cryo-adapted-pathogen-mimic",
+      "profileId": "enemy-248-cryo-adapted-pathogen-mimic",
+      "name": "Cryo-Adapted Pathogen Mimic",
+      "status": "held",
+      "reason": "visual-anatomy-mismatch-extra-limbs",
+      "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df72-5de7-7b13-b83e-245a21e05d37/exec-02c3198e-50cc-4ca0-8115-aef55f46dacd.png"
+    }
+  ],
+  "canonExact": false,
+  "animationStatus": "missing",
+  "notes": "Sixteen sequential native image_gen requests, one per profile, with each reference visually inspected beforehand. Thirteen native PNG outputs received: twelve admitted unchanged and one held for extra limbs. Three other requests were blocked at output by native moderation; no retries or reformulations. All provider originals are preserved. Cryo variants are original project adaptations, not canon-exact or animated sprites."
+}

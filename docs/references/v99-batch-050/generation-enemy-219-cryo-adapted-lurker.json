@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-219-cryo-adapted-lurker",
+  "name": "Cryo-Adapted Lurker",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Lurker is a compact glossy dark purple-black biomechanical alien in a low crouch, an elongated smooth eyeless dome, two long clawed arms ahead, two folded rear legs, a thin curved segmented pointed tail, and a fan of slender dorsal spines/tubes with cool blue highlights.\nSubject: Cryo-Adapted Lurker. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. Keep ONE low crouched Lurker with two long clawed arms supported forward and two folded hind legs, four limbs total, one full thin segmented tail curving left. Preserve smooth dark plum dome, glossy purple-black body and the slender existing dorsal spines. Sparse blue-grey frost on ridge tops only, not ice armor. Keep the four hands/feet distinct and entire. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-lurker-action-sheet.png",
+    "sha256": "e250acd441e8d77eb4c7cbfa686c26ffa83348e8701245c20cda5600892fabb1",
+    "visualNotes": "Reference Lurker is a compact glossy dark purple-black biomechanical alien in a low crouch, an elongated smooth eyeless dome, two long clawed arms ahead, two folded rear legs, a thin curved segmented pointed tail, and a fan of slender dorsal spines/tubes with cool blue highlights."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-bc8d0e5b-1fea-4611-8371-062c54fe83d6.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-219-cryo-adapted-lurker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "4a3714d06bb14cd3f37955a13c77d65804b415a26f1b29d11475217f6db2d4a4",
+    "bboxAlphaAtLeast16": [
+      85,
+      200,
+      1468,
+      882
+    ],
+    "alphaMin": 0,
+    "alpha0": 1179632,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Low right-facing Lurker retains purple-black dome, five slender dorsal spines, two long front arms, two crouched hind legs and full pointed tail. Far hind foot is partly occluded behind the near forearm as expected in a side pose. Frost remains a surface texture. Full uncut silhouette; left/right margins below requested 10%. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.61,
+      "y": 0.8603515625
+    },
+    "sourceFacing": 1
+  }
+}

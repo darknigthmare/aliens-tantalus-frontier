@@ -1,0 +1,31 @@
+{
+  "profileId": "enemy-203-acid-blooded-atarax-controller",
+  "name": "Acid-Blooded ATARAX Controller",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded ATARAX Controller.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One adult male human technical controller from the intact TOP ROW: short swept-back dark hair, visible natural face, over-ear communications headset with small round earpiece and thin upright antenna, dark charcoal padded technician jacket and trousers, black harness/webbing, compact radio backpack with cables and antenna, belt pouches/closed thigh holster, wrist gear and dark boots. Exactly two arms/two legs. Hands empty in a neutral control-ready pose, no drawn pistol or new firearm. Preserve equipment scale and black/grey uniform, ordinary human proportions. Very subtle olive-amber face/neck iridescence with faint closed yellow-green subdermal seams; no mutation or damage.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-controller-action-sheet-v56.png",
+    "sha256": "3eabe8d1eccba7939d95db0c9de94a12a3e717a03ea0feb4c29296905d74f975",
+    "visualNotes": "Ordinary two-legged/two-armed human technician with short dark hair, over-ear headset/antenna, black padded outfit, harness, radio backpack, belt/thigh gear and boots; top-row hands empty."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-6240fb80-8cf7-419f-b492-b4e82efde23c.png",
+    "path": null,
+    "width": 1223,
+    "height": 1286,
+    "sha256": "fa987bcc376849b73d9637dd3d88768c555487deb3554da71f0b67f78a1c357f",
+    "bboxAlphaAtLeast16": [
+      376,
+      87,
+      875,
+      1200
+    ],
+    "alphaMin": 0,
+    "alpha0": 1255824,
+    "totalPixels": 1572778
+  },
+  "review": {
+    "status": "held",
+    "notes": "Held on visual anatomy review: native output has THREE distinct trousered legs and three boots instead of the required two. Reference equipment largely retained but anatomy is invalid. No runtime copy, retry, reformulation or image edit. Measured visible margins in pixels: {\"left\":376,\"top\":87,\"right\":348,\"bottom\":86}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": null
+}

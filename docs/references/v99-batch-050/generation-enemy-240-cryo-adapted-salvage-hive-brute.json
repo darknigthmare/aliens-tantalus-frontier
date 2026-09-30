@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-240-cryo-adapted-salvage-hive-brute",
+  "name": "Cryo-Adapted Salvage Hive Brute",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Salvage Hive Brute. Base reference visual observations: Stocky heavily hunched bronze-black biomechanical alien brute. Two massive long muscular forearms held near the floor, two shorter thick clawed hindlegs, one rounded elongated dome, ribbed chest and layered natural shoulder/back plates, several short swept dorsal spurs, one complete segmented tapering tail. Preserve the near-black organic body and warm bronze rib details of the neutral top-row pose, not a robot suit.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png",
+    "sha256": "0446bd58418c9a4ab6ac7d4061cbb82484fbc1c37960a5eef22f7ecf89dc3bfe",
+    "visualNotes": "Stocky heavily hunched bronze-black biomechanical alien brute. Two massive long muscular forearms held near the floor, two shorter thick clawed hindlegs, one rounded elongated dome, ribbed chest and layered natural shoulder/back plates, several short swept dorsal spurs, one complete segmented tapering tail. Preserve the near-black organic body and warm bronze rib details of the neutral top-row pose, not a robot suit."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-1b82a87a-198d-4afe-afcf-5ef862b8a7fd.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-240-cryo-adapted-salvage-hive-brute.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "43940d2a2d6f112a34c894a8a58b78b72350f19789bdc802e3b81dc80e716385",
+    "bboxAlphaAtLeast16": [
+      128,
+      126,
+      1406,
+      905
+    ],
+    "alphaMin": 0,
+    "alpha0": 1112139,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Native output inspected: single heavy hunched bronze-black brute, two large forearms and two short hindlegs, rounded dome, short dorsal spurs, one complete tail. Reference natural biomechanical silhouette and palette retained, frost microtexture confined to existing relief, no ice appendages or injury. Complete within native margins; static pose only and bytes unchanged.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 128,
+      "top": 126,
+      "right": 130,
+      "bottom": 119
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.655,
+      "y": 0.8837890625
+    },
+    "sourceFacing": 1
+  }
+}

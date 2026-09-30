@@ -1,5 +1,5 @@
 import { getEnemyStaticPoseV96 as getEnemyStaticPoseV95 } from './enemy-static-poses-v96.js';
-import { getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v98.js';
+import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v99.js';
 
 /** Xeno Trials is an original, non-canonical WY simulation, not a licensed story.
  * The dedicated source images remain static illustrations, never animation atlases.
@@ -59,7 +59,18 @@ export const XENO_TRIALS_FIGHTERS_V96 = Object.freeze([
   fighter('albino-six', 'enemy-070-albino-specimen-six-line', 'Lignée Six — variante albino', 'balanced', 220, 235, 1, 1, 'tail'),
   fighter('albino-ripper', 'enemy-075-albino-atarax-ripper', 'ATARAX Ripper — albino', 'agile', 195, 270, 1.05, 1, 'slash'),
   fighter('armored-runner', 'enemy-110-armored-runner', 'Runner blindé', 'balanced', 220, 235, 1, .95, 'pounce'),
-  fighter('armored-ravager', 'enemy-117-armored-ravager', 'Ravager blindé', 'tank', 290, 160, 1.1, 1.1, 'slash')
+  fighter('armored-ravager', 'enemy-117-armored-ravager', 'Ravager blindé', 'tank', 290, 160, 1.1, 1.1, 'slash'),
+  // V99 append-only selection: admitted V98/V99 project variants, not canon species.
+  fighter('armored-red', 'enemy-123-armored-red-xenomorph', 'Xénomorphe rouge — variante blindée', 'balanced', 240, 210, 1.05, 1, 'tail'),
+  fighter('armored-k-series', 'enemy-124-armored-k-series-yellow-xenomorph', 'K-Series jaune — variante blindée', 'tank', 270, 185, 1.05, 1, 'tail'),
+  fighter('armored-ripper', 'enemy-127-armored-atarax-ripper', 'ATARAX Ripper — variante blindée', 'agile', 215, 245, 1.06, 1, 'slash'),
+  fighter('armored-ripper-queen', 'enemy-128-armored-ripper-queen', 'Reine Ripper — variante blindée', 'tank', 300, 155, 1.1, 1.2, 'tail'),
+  fighter('acid-runner', 'enemy-162-acid-blooded-runner', 'Runner — variante acide', 'agile', 185, 290, .95, .9, 'pounce'),
+  fighter('acid-lurker', 'enemy-167-acid-blooded-lurker', 'Lurker — variante acide', 'balanced', 220, 225, 1.03, 1, 'slash'),
+  fighter('acid-ravager', 'enemy-169-acid-blooded-ravager', 'Ravager — variante acide', 'tank', 275, 180, 1.15, 1.1, 'slash'),
+  fighter('acid-boiler', 'enemy-170-acid-blooded-boiler', 'Boiler — variante acide', 'ranged', 180, 190, 1.08, .9, 'acid'),
+  fighter('acid-joe', 'enemy-197-acid-blooded-working-joe', 'Working Joe — variante acide', 'tank', 250, 155, 1, .9, 'ram'),
+  fighter('acid-combat-synth', 'enemy-198-acid-blooded-combat-synthetic', 'Synthétique de combat — variante acide', 'ranged', 235, 190, 1.05, 1, 'pulse')
 ]);
 const FIGHTERS = new Map(XENO_TRIALS_FIGHTERS_V96.map(entry => [entry.id, entry]));
 export function getXenoTrialsFighterV96(id) { return FIGHTERS.get(id) || null; }
@@ -70,18 +81,22 @@ export function getXenoTrialsArtV96(id, variant) {
 
 export const XENO_TRIALS_FACTIONS_V96 = Object.freeze([
   Object.freeze({ id: 'containment', label: 'WY / Confinement', description: 'Cellule simulée défensive : attente, garde et riposte.', doctrine: 'guard', color: '#60d6db',
-    roster: Object.freeze(['defender', 'chrysalis', 'royal-guard', 'crusher-acm', 'rhino', 'synth-guard', 'armored-joe', 'albino-joe', 'albino-crusher', 'armored-ravager', 'smasher']), projectOriginal: true }),
+    roster: Object.freeze(['defender', 'chrysalis', 'royal-guard', 'crusher-acm', 'rhino', 'synth-guard', 'armored-joe', 'albino-joe', 'albino-crusher', 'armored-ravager', 'smasher', 'armored-k-series', 'armored-ripper-queen', 'acid-joe']), projectOriginal: true }),
   Object.freeze({ id: 'pursuit', label: 'WY / Poursuite', description: 'Cellule simulée mobile : pression rapprochée et bonds.', doctrine: 'rush', color: '#f5a64b',
-    roster: Object.freeze(['runner', 'prowler', 'razor-claws', 'panther', 'mantis', 'stalker-arcade', 'albino-runner', 'albino-ripper', 'armored-runner']), projectOriginal: true }),
+    roster: Object.freeze(['runner', 'prowler', 'razor-claws', 'panther', 'mantis', 'stalker-arcade', 'albino-runner', 'albino-ripper', 'armored-runner', 'armored-ripper', 'acid-runner']), projectOriginal: true }),
   Object.freeze({ id: 'rival-lab', label: 'Laboratoire rival / simulé', description: 'Adversaire corporatiste fictif : maintien à distance et tirs.', doctrine: 'range', color: '#b88aff',
-    roster: Object.freeze(['spitter', 'xenoborg', 'arachnoid', 'synth-trooper', 'synth-sniper', 'synth-heavy', 'combat-synth', 'mecha', 'mecha-2', 'mechanoid', 'albino-combat-synth', 'albino-six']), projectOriginal: true }),
+    roster: Object.freeze(['spitter', 'xenoborg', 'arachnoid', 'synth-trooper', 'synth-sniper', 'synth-heavy', 'combat-synth', 'mecha', 'mecha-2', 'mechanoid', 'albino-combat-synth', 'albino-six', 'acid-combat-synth', 'acid-boiler']), projectOriginal: true }),
   Object.freeze({ id: 'hive', label: 'Ruche / simulation hostile', description: 'Modèle de pression de ruche ; aucun dressage canonique revendiqué.', doctrine: 'balanced', color: '#ed717d',
-    roster: Object.freeze(['warrior', 'grid', 'predalien', 'queen', 'ravager', 'boiler', 'burster', 'gorilla', 'ultramorph', 'albino-ravager', 'albino-burster']), projectOriginal: true })
+    roster: Object.freeze(['warrior', 'grid', 'predalien', 'queen', 'ravager', 'boiler', 'burster', 'gorilla', 'ultramorph', 'albino-ravager', 'albino-burster', 'armored-red', 'acid-lurker', 'acid-ravager']), projectOriginal: true })
 ]);
 export const XENO_TRIALS_STAGES_V96 = Object.freeze([
   Object.freeze({ id: 'containment-deck', label: 'Banc de confinement', background: '#101d24', accent: '#48aab1', floor: '#23343c' }),
   Object.freeze({ id: 'reactor-ring', label: 'Anneau réacteur simulé', background: '#241a18', accent: '#ce7645', floor: '#42302c' }),
-  Object.freeze({ id: 'hive-vault', label: 'Chambre de ruche simulée', background: '#191b23', accent: '#9970b7', floor: '#302b38' })
+  Object.freeze({ id: 'hive-vault', label: 'Chambre de ruche simulée', background: '#191b23', accent: '#9970b7', floor: '#302b38' }),
+  // Existing project backdrops reused as simulation skins: no DLC mission or depth gameplay.
+  Object.freeze({ id: 'tantalus-bridge', label: 'Tantalus / Passerelle simulée', background: '#101d24', accent: '#74d9e7', floor: '#23343c', backdrop: '/assets/openai/metroidvania/zones/ship-command-far.png' }),
+  Object.freeze({ id: 'tantalus-cargo', label: 'Tantalus / Soute simulée', background: '#241d18', accent: '#e2b56b', floor: '#352d25', backdrop: '/assets/openai/metroidvania/zones/ship-cargo-far.png' }),
+  Object.freeze({ id: 'planet-surface', label: 'Surface planétaire simulée', background: '#1b2425', accent: '#b3d39b', floor: '#2d3431', backdrop: '/assets/openai/metroidvania/planet-exterior-far.png' })
 ]);
 export const XENO_TRIALS_CONTROLS_V96 = Object.freeze({
   left: '← / Q / A', right: '→ / D', jump: '↑ / Z / W / Espace',

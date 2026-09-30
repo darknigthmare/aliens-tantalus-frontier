@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-209-cryo-adapted-ovomorph",
+  "name": "Cryo-Adapted Ovomorph",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Cryo-Adapted Ovomorph.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One CLOSED upright Ovomorph egg from the FIRST TWO ROWS ONLY. Rounded broad flat-supported base, tapering domed-pointed top, dark olive-brown pebbled/leathery organic shell with irregular raised folded cells and four fully sealed apex lobe seams. No open flower/lips, no visible interior, no creature emerging, no limbs, roots or tail. Preserve dark earthy olive/brown identity and rich shell relief. Static side-view game-object convention facing right, self-contained egg shape. Add only restrained pale blue-grey frost microtexture caught on some exposed upper ridges, with the majority of the original brown/olive shell clearly visible. No encasing ice, giant crystals, snow base, cold fog or aura. Entire egg and flat lower support contour visible.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-001-ovomorph.webp",
+    "sha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4",
+    "visualNotes": "Closed upright dark olive-brown organic egg with broad flat base, tapering apex, irregular pebbled/leathery raised cell relief and four sealed apex lobe seams; no limbs."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-25a921a2-f135-4008-ae3a-241c3d0fc91b.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-209-cryo-adapted-ovomorph.png",
+    "width": 1207,
+    "height": 1303,
+    "sha256": "71aefef2dbfb7d0670e5bed562ff827d7c2648da60294d4eef7c40e2c9c858f4",
+    "bboxAlphaAtLeast16": [
+      298,
+      251,
+      908,
+      1090
+    ],
+    "alphaMin": 0,
+    "alpha0": 1160434,
+    "totalPixels": 1572721
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Whole closed Ovomorph retains dark olive-brown organic shell and sealed apex. Pale blue-grey frost is limited to upper exposed relief, without ice armor, scene, particles or new appendages. Pivot centered on the flat lower shell contact. SourceFacing is the static game-object convention, not a claim of directional anatomy. Measured visible margins in pixels: {\"left\":298,\"top\":251,\"right\":299,\"bottom\":213}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.495,
+      "y": 0.8357636224098235
+    },
+    "sourceFacing": 1
+  }
+}

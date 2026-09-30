@@ -24,8 +24,9 @@ export function getXenoTrialsRenderMetricsV96(id, variant = null) {
 }
 
 /** Local Canvas controller. Owns only listeners/RAF/images, never progression or saves.
- * start() resolves after the two dedicated images load. Asset failure pauses instead
- * of silently substituting a different creature. stop() is idempotent and terminal. */
+ * start() waits for the two dedicated images and the optional selected backdrop.
+ * Fighter asset failure pauses; backdrop failure keeps the procedural arena.
+ * It never substitutes a different creature. stop() is idempotent and terminal. */
 export function createXenoTrialsRuntimeV96(options = {}) {
   const canvas = options.canvas;
   if (!canvas || typeof canvas.getContext !== 'function') throw new Error('Xeno Trials requires a canvas');
@@ -39,7 +40,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const match = createXenoTrialsMatchV96({ ...options.config, introSeconds: 0, holdRoundTransition: true });
   let presentation = createXenoPresentationV97();
   const presentationView = () => getXenoPresentationViewV97(presentation);
-  const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView() });
+  const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
+    stageVisual: !stage.backdrop ? 'procedural' : images.has(stage.backdrop) ? 'backdrop-ready' : loaded ? 'procedural-fallback' : 'loading' });
   const images = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
   let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null;
   let emittedResult = false, notifyElapsed = 0, lastStatus = '', assetFailure = false;
@@ -78,8 +80,19 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     options.onState?.(snapshot());
     if (match.result && !emittedResult) { emittedResult = true; options.onResult?.({ ...match.result, wins: { ...match.result.wins }, playerStats: { ...match.result.playerStats }, opponentStats: { ...match.result.opponentStats } }); }
   }
-  function text(content, x, y, size = 16, color = '#d7e9ed', align = 'left') {
-    context.font = `${size >= 22 ? 'bold ' : ''}${size}px monospace`; context.fillStyle = color; context.textAlign = align; context.fillText(content, x, y);
+  function text(content, x, y, size = 16, color = '#d7e9ed', align = 'left', maxWidth = null) {
+    const weight = size >= 22 ? 'bold ' : '';
+    context.font = `${weight}${size}px monospace`;
+    if (maxWidth) {
+      const measured = context.measureText(content)?.width;
+      if (Number.isFinite(measured) && measured > maxWidth) {
+        context.font = `${weight}${Math.max(12, Math.floor(size * maxWidth / measured))}px monospace`;
+        let shortened = content;
+        while (shortened.length > 1 && context.measureText(shortened + '…').width > maxWidth) shortened = shortened.slice(0, -1);
+        if (shortened !== content) content = shortened + '…';
+      }
+    }
+    context.fillStyle = color; context.textAlign = align; context.fillText(content, x, y);
   }
   function bar(x, y, width, ratio, color, reverse = false) {
     context.fillStyle = '#090f14'; context.fillRect(x, y, width, 15);
@@ -94,6 +107,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.strokeRect(x, 136, 94, 276); context.beginPath(); context.moveTo(x, 272); context.lineTo(x + 94, 272); context.stroke();
     }
     context.globalAlpha = 1;
+    const backdrop = images.get(stage.backdrop);
+    if (backdrop?.naturalWidth > 0 && backdrop?.naturalHeight > 0) {
+      // Fit without stretching. The shared floor and collision plane stay unchanged.
+      const scale = Math.max(1000 / backdrop.naturalWidth, 450 / backdrop.naturalHeight);
+      const width = backdrop.naturalWidth * scale, height = backdrop.naturalHeight * scale;
+      context.drawImage(backdrop, (1000 - width) / 2, (450 - height) / 2, width, height);
+      context.fillStyle = '#06101940'; context.fillRect(0, 0, 1000, 450);
+    }
     context.fillStyle = stage.floor; context.fillRect(0, 450, 1000, 110);
     context.fillStyle = stage.accent; context.fillRect(0, 449, 1000, 3);
     context.strokeStyle = '#5e6972'; context.globalAlpha = .2;
@@ -102,6 +123,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     text('WEYLAND-YUTANI  /  XENO TRIALS', 30, 128, 12, stage.accent);
     text('SIMULATION • ADAPTATION DU PROJET • POSES FIXES', 970, 535, 11, '#b6bcc5', 'right');
     text(stage.label.toUpperCase(), 500, 482, 13, '#aebec7', 'center');
+    if (stage.backdrop && loaded && !backdrop) text('DÉCOR INDISPONIBLE · FOND PROCÉDURAL', 30, 513, 11, '#ddbf69');
   }
   function drawFighter(fighter) {
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
@@ -138,7 +160,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
     match.fighters.forEach((fighter, i) => {
       const def = getXenoTrialsFighterV96(fighter.id), x = i === 0 ? 30 : 585;
-      text(`${i === 0 ? 'VOUS' : 'ADVERSAIRE'} / ${def.label}`, i === 0 ? 30 : 970, 31, 17, '#e4e9eb', i === 0 ? 'left' : 'right');
+      text(`${i === 0 ? 'VOUS' : 'ADVERSAIRE'} / ${def.label}`, i === 0 ? 30 : 970, 31, 17, '#e4e9eb', i === 0 ? 'left' : 'right', 385);
       bar(x, 44, 385, fighter.hp / def.hp, i === 0 ? '#6bd4c5' : '#ed858e', i === 1);
       bar(x, 65, 385, fighter.stamina / def.stamina, '#ddbf69', i === 1);
       text(`PV ${Math.ceil(fighter.hp)} / ${def.hp}  •  END ${Math.floor(fighter.stamina)}`, i === 0 ? 30 : 970, 99, 12, '#bfc9d0', i === 0 ? 'left' : 'right');
@@ -151,8 +173,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (loaded && !match.paused && intro.fighterSlot !== null) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
       context.fillStyle = '#061019df'; context.fillRect(200, 150, 600, 90);
-      text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center');
-      text(`${def.hp} PV  •  ${def.family === 'synthetic' ? 'SYNTHÉTIQUE' : 'XÉNOMORPHE'}  •  ${def.role.toUpperCase()}`, 500, 218, 15, '#d4e1e7', 'center');
+      text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center', 570);
+      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE' }[def.family];
+      const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
+      text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
       context.strokeStyle = stage.accent; context.lineWidth = 3; context.strokeRect(fighter.x - 145, 245, 290, 210);
     } else if (loaded && !match.paused && ['countdown', 'fight'].includes(intro.phase)) {
       text(intro.countdown ? String(intro.countdown) : 'COMBAT', 500, 235, 54, '#efe8cb', 'center');
@@ -257,9 +281,15 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     loading = (async () => {
       render(); notify(true);
       const paths = [...new Set(match.fighters.map(f => getXenoTrialsArtV96(f.id, f.variant).path))];
-      const results = await Promise.allSettled(paths.map(async path => { const image = await loadImage(path); if (!stopped) images.set(path, image); }));
+      const allPaths = stage.backdrop ? [...paths, stage.backdrop] : paths;
+      const results = await Promise.allSettled(allPaths.map(async path => {
+        const image = await loadImage(path);
+        if (path === stage.backdrop && !(image?.naturalWidth > 0 && image?.naturalHeight > 0)) throw new Error('Décor vide');
+        if (!stopped) images.set(path, image);
+      }));
       if (stopped) return false;
-      loaded = true; assetFailure = results.some(r => r.status === 'rejected');
+      // Missing scenery is cosmetic; missing fighter art still suspends the duel.
+      loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');
       if (assetFailure) { setXenoTrialsPausedV96(match, true); options.onAssetError?.(paths.filter((path, i) => results[i].status === 'rejected')); }
       registerInputs(); running = true; previousTime = null;
       if (doc?.hidden) setXenoTrialsPausedV96(match, true);

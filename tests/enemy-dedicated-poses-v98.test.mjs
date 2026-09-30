@@ -264,15 +264,15 @@ test('production build includes only exact admitted V98 PNGs and keeps held outp
 test('V98 service worker and every live native-pose consumer use the complete admission union', async () => {
   const source = path => readFile(join(root, path), 'utf8');
   const worker = await source('sw.js');
-  assert.match(worker, /atf-v86-xeno-trials-v98-shell-1/);
-  for (const version of [96, 97, 98]) {
+  assert.match(worker, /atf-v86-xeno-trials-v99-shell-1/);
+  for (const version of [96, 97, 98, 99]) {
     assert.ok(worker.includes(`'/src/enemy-dedicated-poses-v${version}.js'`));
     if (version > 96) assert.ok(worker.includes(`'/src/enemy-dedicated-batch-v${version}.js'`));
   }
   for (const path of ['src/bioforge-level-v80.js', 'src/bioforge-runtime-v80.js',
     'src/bioforge-session-v80.js', 'src/catalog-runtime-v62.js', 'src/game-v51-runtime.js',
     'src/game-v52-runtime.js', 'src/xeno-trials-data-v96.js']) {
-    assert.match(await source(path), /from '\.\/enemy-dedicated-poses-v98\.js'/, path);
+    assert.match(await source(path), /from '\.\/enemy-dedicated-poses-v99\.js'/, path);
   }
   // Large native PNGs remain on demand rather than turning installation into a bulk download.
   for (const pose of newPoses) assert.ok(!worker.includes(`'${pose.path}'`));

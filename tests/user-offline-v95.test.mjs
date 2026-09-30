@@ -30,7 +30,7 @@ function worker() {
   return {constants,caches,event,stores,setOffline:()=>{offline=true;},claims:()=>claimed};
 }
 test('V95 shell precaches every new module, but native Defender/Purple stay on demand',()=>{
-  const w=worker();assert.equal(w.constants.cache,'atf-v86-xeno-trials-v98-shell-1');
+  const w=worker();assert.equal(w.constants.cache,'atf-v86-xeno-trials-v99-shell-1');
   for(const path of ['/src/user-reference-art-v95.js','/src/enemy-user-creations-v95.js','/src/enemy-historical-variants-v95.js'])assert.ok(w.constants.shell.includes(path));
   for(const path of pngs)assert.equal(w.constants.shell.includes(path),false);
 });
@@ -51,6 +51,6 @@ test('real fetch listener caches visited V95 PNG responses and returns them offl
 });
 test('real activation removes the previous app cache only after new shell installation and claims the page',async()=>{
   const w=worker();await w.caches.open('atf-v86-user-creatures-v95-shell-2');await w.event('install');await w.event('activate');
-  assert.deepEqual(await w.caches.keys(),['atf-v86-xeno-trials-v98-shell-1']);assert.equal(w.claims(),1);
+  assert.deepEqual(await w.caches.keys(),['atf-v86-xeno-trials-v99-shell-1']);assert.equal(w.claims(),1);
   assert.ok(await w.caches.match('/src/enemy-historical-variants-v95.js'));
 });

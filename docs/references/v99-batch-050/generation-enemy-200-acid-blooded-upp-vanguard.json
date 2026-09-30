@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-200-acid-blooded-upp-vanguard",
+  "name": "Acid-Blooded UPP Vanguard",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded UPP Vanguard.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One intact adult human soldier in DARK OLIVE-GREY segmented tactical armor over a matching uniform. Closed rounded dark helmet with narrow opaque black visor/face covering, small red side detail from reference, shoulder and knee plates, webbing and belt/thigh pouches, dark gloves and heavy boots, compact dark back pack. Exactly two arms/two legs. Carry ONE compact dark rifle from the reference in a proper two-handed low-ready grip pointing RIGHT. Preserve dark olive identity and practical ordinary human anatomy; no creature features or extra weapons. Acid-blooded game variant indicated only through very restrained olive-amber iridescent material and tiny yellow-green sealed seam details, no bright outline.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+    "sha256": "09d44286a91aaf143a6b638c6a4e500f290ef14ecfed5e6dd28cdc13b52ccf61",
+    "visualNotes": "Dark olive-grey helmeted human with closed visor/face protection, segmented armor, webbing/pouches, backpack, gloves, boots and one compact rifle."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-0ec1709b-dd02-4f3d-acec-03cd2fad7672.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-200-acid-blooded-upp-vanguard.png",
+    "width": 1374,
+    "height": 1145,
+    "sha256": "55d218ab95e9b673afc65b3c65e20ab790fab58dc9d2a5f5451614bd48f9fcf5",
+    "bboxAlphaAtLeast16": [
+      400,
+      126,
+      1051,
+      1041
+    ],
+    "alphaMin": 0,
+    "alpha0": 1294672,
+    "totalPixels": 1573230
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing soldier with intact dark olive uniform, closed helmet and one rifle. Two arms and two booted legs, no new weapons or creature appendages; subtle sealed olive-yellow material seams. Measured visible margins in pixels: {\"left\":400,\"top\":126,\"right\":323,\"bottom\":104}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.486,
+      "y": 0.9082969432314411
+    },
+    "sourceFacing": 1
+  }
+}

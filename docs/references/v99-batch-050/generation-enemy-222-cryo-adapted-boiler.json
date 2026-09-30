@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-222-cryo-adapted-boiler",
+  "name": "Cryo-Adapted Boiler",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, NOT a sheet to reproduce. Reference Boiler is a hunched thin olive-brown and pale ochre biomechanical biped, ribbed skeletal trunk, two long clawed arms, two digitigrade legs, blunt elongated head with rounded olive-yellow sacs/nodules, matching rounded structures on shoulders/back and thighs, short upright dorsal tubes, one long pointed segmented tail. Surfaces are intact.\nSubject: Cryo-Adapted Boiler. Original systemic project adaptation, not a new official species or canonical 1:1 claim.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nComposition: ONE individual full body, neutral ready pose, near-side profile facing RIGHT. One whole hunched Boiler in relaxed ready stance with two arms, two legs, full segmented tail, short dorsal tubes, original rounded olive-yellow sacs on upper body and thighs. Keep pale ochre ribbing and olive-brown base colors, subtle blue-grey frost on ridge tops. Sacs stay closed and intact; no discharge, spray, droplets or swollen extra limbs. All head, appendages, feet and entire tail inside canvas with ten percent clear transparent padding on all sides.\nStyle: match the detailed science-fiction digitally painted game art of the reference, crisp anatomical contour, sculpted material relief and restrained highlights. Preserve base identity colors, frost only on exposed ridges; newly authored texture, not a white recolor.\nBackground: genuine transparent PNG alpha. No backdrop, scene, ground, cast shadow, sheet, grid, collage, UI, text, logo, watermark, particles, fog, aura, glow outline, blood, injury, extra appendages or second creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-boiler-action-sheet-v56.png",
+    "sha256": "93390cab29d7bf85ca2a6dfecb6a0c2f72f6a3201750a0684728bc3bc5becbeb",
+    "visualNotes": "Reference Boiler is a hunched thin olive-brown and pale ochre biomechanical biped, ribbed skeletal trunk, two long clawed arms, two digitigrade legs, blunt elongated head with rounded olive-yellow sacs/nodules, matching rounded structures on shoulders/back and thighs, short upright dorsal tubes, one long pointed segmented tail. Surfaces are intact."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-be2d4b15-5e98-408c-bfa8-4a7f2bef21ee.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-222-cryo-adapted-boiler.png",
+    "width": 1238,
+    "height": 1271,
+    "sha256": "0a37f495ed857beb16725b229a4fbdbe1b918b819fd56f348ec353a385fa6225",
+    "bboxAlphaAtLeast16": [
+      50,
+      100,
+      1197,
+      1198
+    ],
+    "alphaMin": 0,
+    "alpha0": 1110468,
+    "totalPixels": 1573498
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Hunched olive/ochre Boiler retains two arms, two legs, intact yellow-olive sacs at head, shoulders and thighs, short dorsal tubes and complete pointed segmented tail. No discharge or added creature. Frost texture leaves anatomical relief readable. Full hands and feet are present; margins narrower than requested 10%. Native PNG bytes unchanged, provider/output SHA identical. Original systemic static project adaptation; canonExact=false, not an animation or official model."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.635,
+      "y": 0.9417781274586939
+    },
+    "sourceFacing": 1
+  }
+}

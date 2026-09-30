@@ -1,0 +1,50 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-249-cryo-adapted-working-joe",
+  "name": "Cryo-Adapted Working Joe",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Working Joe. Base reference visual observations: Human-proportioned adult male-presenting service android from intact top row of reference: pale smooth synthetic face, short dark brown hair, khaki-grey long-sleeved utility coverall with chest pockets, dark utility belt with rectangular pouches, dark gloves and sturdy dark work boots. Exactly two arms, two hands, two legs, no weapon. Natural upright neutral stance facing right with arms relaxed but hands visible. Preserve full intact clothing and recognizable utility uniform; add modest practical insulated fabric panels and restrained frost on exposed seams, not bulky armor. Do not use the damaged lower-row poses.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png",
+    "sha256": "b9938c6d6f2b1af8065cf8120991319367279a3addb2b882d60ad3ea31c78a92",
+    "visualNotes": "Human-proportioned adult male-presenting service android from intact top row of reference: pale smooth synthetic face, short dark brown hair, khaki-grey long-sleeved utility coverall with chest pockets, dark utility belt with rectangular pouches, dark gloves and sturdy dark work boots. Exactly two arms, two hands, two legs, no weapon. Natural upright neutral stance facing right with arms relaxed but hands visible. Preserve full intact clothing and recognizable utility uniform; add modest practical insulated fabric panels and restrained frost on exposed seams, not bulky armor. Do not use the damaged lower-row poses."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-2df68277-c0bc-4009-9089-a8e12f1070d8.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-249-cryo-adapted-working-joe.png",
+    "width": 1024,
+    "height": 1536,
+    "sha256": "5c10ab69761beab48a83e4b3d7664df6b46dbfc389f3a7f3764e35a89a39459b",
+    "bboxAlphaAtLeast16": [
+      309,
+      81,
+      778,
+      1466
+    ],
+    "alphaMin": 0,
+    "alpha0": 1168600,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Right-facing intact service android matching the pale face, short dark hair and khaki utility uniform of the project reference. Two gloved hands and both complete boots visible; no weapon or damaged anatomy. Practical insulated collar and panels preserve the base outfit; restrained frost retains khaki identity. Complete native cutout, actual clear margins recorded.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 309,
+      "top": 81,
+      "right": 246,
+      "bottom": 70
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.53,
+      "y": 0.9544270833333334
+    },
+    "sourceFacing": 1
+  }
+}

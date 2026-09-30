@@ -18,9 +18,9 @@ const activeMatch = (config = {}) => {
   return match;
 };
 
-test('V97 roster has 43 unique admitted dedicated images and 4 explicit fictional doctrines', () => {
-  assert.equal(XENO_TRIALS_FIGHTERS_V96.length, 43);
-  assert.equal(new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id)).size, 43);
+test('V99 roster has 53 unique admitted dedicated images and 4 explicit fictional doctrines', () => {
+  assert.equal(XENO_TRIALS_FIGHTERS_V96.length, 53);
+  assert.equal(new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id)).size, 53);
   for (const entry of XENO_TRIALS_FIGHTERS_V96) {
     const art = getXenoTrialsArtV96(entry.id);
     assert.ok(art?.path.endsWith('.png'));
@@ -31,7 +31,7 @@ test('V97 roster has 43 unique admitted dedicated images and 4 explicit fictiona
   }
   assert.equal(XENO_TRIALS_FACTIONS_V96.length, 4);
   assert.ok(XENO_TRIALS_FACTIONS_V96.every(f => f.projectOriginal && f.roster.every(getXenoTrialsFighterV96)));
-  assert.equal(XENO_TRIALS_STAGES_V96.length, 3);
+  assert.equal(XENO_TRIALS_STAGES_V96.length, 6);
   assert.equal(getXenoTrialsArtV96('not-admitted'), null);
 });
 test('V96 Grey and Purple keep one Arachnoid identity and equal gameplay statistics', () => {
@@ -237,9 +237,49 @@ function runtimeFixture(extra = {}) {
     requestAnimationFrame: fn => { frames.set(++serial, fn); return serial; }, cancelAnimationFrame: id => frames.delete(id),
     loadImage: async () => ({ naturalWidth: 1536, naturalHeight: 1024 }),
     onState: state => states.push(state), onResult: result => results.push(result), onAssetError: error => errors.push(error), ...extra });
-  return { runtime, win, doc, canvas, root, frames, states, results, errors,
+  return { runtime, win, doc, canvas, context, root, frames, states, results, errors,
     run(count = 1, deltaMs = 1000 / 60) { for (let i = 0; i < count; i++) { const entry = frames.entries().next().value; if (!entry) break; frames.delete(entry[0]); time += deltaMs; entry[1](time); } } };
 }
+
+test('V99 loads only the selected arena backdrop alongside fighter images without changing gameplay', async t => {
+  const loaded = [];
+  const f = runtimeFixture({ config: { stageId: 'tantalus-cargo' }, loadImage: async path => {
+    loaded.push(path); return { naturalWidth: 1600, naturalHeight: 900 };
+  } }); t.after(() => f.runtime.stop());
+  assert.equal(await f.runtime.start(), true);
+  assert.equal(loaded.length, 3);
+  assert.equal(loaded.filter(p => p.includes('/metroidvania/')).length, 1);
+  assert.ok(loaded.includes('/assets/openai/metroidvania/zones/ship-cargo-far.png'));
+  assert.equal(f.runtime.getState().stageVisual, 'backdrop-ready');
+  assert.equal(f.runtime.getState().timeRemaining, 99);
+  assert.equal(f.runtime.getState().tick, 0);
+  assert.equal(f.errors.length, 0);
+});
+
+test('V99 long fighter labels remain inside their HUD and introduction panels', async t => {
+  const f = runtimeFixture({ config: { playerId: 'albino-combat-synth', opponentId: 'predalien' } });
+  t.after(() => f.runtime.stop());
+  const labels = [];
+  f.context.measureText = value => ({ width: value.length * Number(/(\d+)px/.exec(f.context.font)?.[1] || 16) * .65 });
+  f.context.fillText = (value, x, y) => labels.push({ value, x, y, width: f.context.measureText(value).width });
+  await f.runtime.start(); f.run(1);
+  const hud = labels.filter(l => l.y === 31), intro = labels.filter(l => l.y === 185);
+  assert.ok(hud.length && intro.length);
+  assert.ok(hud.every(l => l.width <= 385)); assert.ok(intro.every(l => l.width <= 570));
+  assert.ok(labels.some(l => l.y === 218 && l.value.includes('SYNTHÉTIQUE') && l.value.includes('POLYVALENT')));
+});
+
+test('V99 missing scenery falls back explicitly, while fighter art failures still block combat', async t => {
+  const f = runtimeFixture({ config: { stageId: 'tantalus-bridge' }, loadImage: async path => {
+    if (path.includes('/metroidvania/')) throw new Error('offline scenery');
+    return { naturalWidth: 1536, naturalHeight: 1024 };
+  } }); t.after(() => f.runtime.stop());
+  assert.equal(await f.runtime.start(), true);
+  assert.equal(f.runtime.getState().stageVisual, 'procedural-fallback');
+  assert.equal(f.runtime.getState().paused, false);
+  assert.equal(f.errors.length, 0);
+  f.run(65, 100); assert.ok(f.runtime.getState().tick > 0);
+});
 
 test('V97 presentation freezes timer, simulation, AI and stamina through both introductions and countdown', async t => {
   const f = runtimeFixture(); t.after(() => f.runtime.stop()); await f.runtime.start(); f.run(1, 100);

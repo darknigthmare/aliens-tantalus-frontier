@@ -1,0 +1,24 @@
+{
+  "profileId": "enemy-194-acid-blooded-protomorph",
+  "name": "Acid-Blooded Protomorph",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Protomorph.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: Tall lean dark BROWN and charcoal organic biped, narrow elongated smooth ridge-edged skull, intact sinewy ribbed torso, exactly TWO long clawed arms and TWO long digitigrade legs, TWO long backward-curving dorsal tubes and ONE fine long curling segmented tail. Preserve thin upright silhouette, small narrow head and warm brown natural surface relief. All limb roots and free tips visible separately. Do not bulk it up or add armor.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png",
+    "sha256": "103633e135b17b7f74f3e86e05dfe846c45f9a7e304a3a4d3232f9cd9bae40e4",
+    "visualNotes": "Lean upright brown-charcoal organic biped, elongated narrow skull, two arms/two legs, two backward dorsal tubes and a fine curled tail."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "Native image generation rejected at output moderation. No image returned; no retry or reformulation; no runtime file. One native attempt only. Original systemic project adaptation, not canonical-exact or animation.",
+    "providerError": {
+      "code": "moderation_blocked",
+      "stage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "d702525f-ef07-40b1-b8a4-a3c50792362b"
+    }
+  },
+  "runtimeContract": null
+}

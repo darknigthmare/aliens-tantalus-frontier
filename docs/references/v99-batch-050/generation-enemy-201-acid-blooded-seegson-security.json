@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-201-acid-blooded-seegson-security",
+  "name": "Acid-Blooded Seegson Security",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Seegson Security.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One intact adult human security guard from the TOP ROW only: white/light-grey collared short-sleeved security shirt over dark long undersleeves, blue-grey cargo trousers, dark belt with pouches, black gloves and heavy boots. White protective helmet with opaque dark visor/face shield. Exactly two arms/two legs. Hold ONE long dark pump-style shotgun matching the reference in both hands at low ready, full stock and barrel visible pointing RIGHT. No tactical battle armor, extra rifle, backpack or creature mutations. Preserve pale shirt, blue trousers and ordinary body proportions. Very restrained olive-amber material notes and tiny yellow-green closed seams only; absolutely no injuries or damaged lower-row reference content.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/seegson-security-action-sheet-v56.png",
+    "sha256": "0572100615745fa2701d1d0b5f2bf6a6232e48da9748972b38ee64605b2e88d0",
+    "visualNotes": "Intact security guard with white helmet/dark face shield, light collared short-sleeved shirt over dark undersleeves, blue-grey cargo trousers, belt pouches, gloves/boots and one long dark shotgun."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-f65d20b7-57de-4e3b-aa6a-7728b2634dbe.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-201-acid-blooded-seegson-security.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "2343f48f54b07ffa98782f5e236906bc3368322a0a88163ee543e1f8db752351",
+    "bboxAlphaAtLeast16": [
+      300,
+      167,
+      1074,
+      1140
+    ],
+    "alphaMin": 0,
+    "alpha0": 1274730,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing guard with recognizable light shirt/blue trousers and white face-shield helmet. Two hands naturally hold the single reference shotgun; two separated boots visible. Intact ordinary anatomy and restrained olive-yellow seams. Measured visible margins in pixels: {\"left\":300,\"top\":167,\"right\":180,\"bottom\":114}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.465,
+      "y": 0.9082934609250398
+    },
+    "sourceFacing": 1
+  }
+}

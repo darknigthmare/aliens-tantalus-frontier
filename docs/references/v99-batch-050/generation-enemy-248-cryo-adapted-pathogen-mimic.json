@@ -1,0 +1,38 @@
+{
+  "schema": 99,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-248-cryo-adapted-pathogen-mimic",
+  "name": "Cryo-Adapted Pathogen Mimic",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE dedicated static full-body side-view 2D game character cutout.\nInput image 1: base identity, exact anatomy and rendering style REFERENCE ONLY, not an output sheet.\nPrimary request: Cryo-Adapted Pathogen Mimic. Base reference visual observations: Low crouched pale grey-taupe organic quadrupedal beast with a broad angular low head facing right, compact toothy mouth, two robust front limbs and two rear limbs ending in splayed narrow claws. Intricate layered interwoven raised ridges over back and shoulders; several long slender trailing dorsal/rear tendrils, preserve the exact appendage count and origins visible in the intact first-row reference. Organic leathery intact skin, no metal and no wound. Keep the recognizable hunched silhouette and head proportions, not a standard elongated-dome xenomorph. All slender tips visible.\nVariant lock: Original systemic cold-adapted project variant, not a new official species. Preserve exact base anatomy, appendage count, equipment, silhouette, identity colors and existing material relief. Add restrained pale blue-grey frost microtexture at exposed ridges and newly authored cold-weather material details without concealing the base design. People retain recognizable uniforms and practical insulated panels; organic creatures remain organic. No generic white recolor, ice armor, icicle weapons, snow scene, particles, mist, aura, glow outline, extra appendages, blood or injury.\nPreserve the base identity, exact limb count, head shape, tail count, equipment and palette observed in the reference. Use one intact neutral alert pose, facing RIGHT, with clearly readable silhouette, grounded supports aligned to an imaginary horizontal line. Detailed painterly biomechanical game illustration matching the supplied reference, not a generic redesign.\nComposition: ONE complete character with all extremities and equipment visible, approximately 10 percent clear padding on all sides. Genuine RGBA transparent background. No scene, floor or cast shadow. Preserve original palette under limited blue-grey frost microtexture rather than repainting the whole subject white.\nOriginal authored project variant; not a new official species, canon-exact certification or animation.\nAvoid: multiple figures, grids, panels, spritesheets, text, logos, watermark, cropped parts, added limbs/heads/tails, snow scene, particles, mist, aura, glowing outlines, ice armor/weapons, blood, wounds or exposed tissue. Keep the entire subject intact.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+    "sha256": "f5b8525e9c0f4d03c30e6c671d129b0e7147878de4ce9647ac78e5800ec631c2",
+    "visualNotes": "Low crouched pale grey-taupe organic quadrupedal beast with a broad angular low head facing right, compact toothy mouth, two robust front limbs and two rear limbs ending in splayed narrow claws. Intricate layered interwoven raised ridges over back and shoulders; several long slender trailing dorsal/rear tendrils, preserve the exact appendage count and origins visible in the intact first-row reference. Organic leathery intact skin, no metal and no wound. Keep the recognizable hunched silhouette and head proportions, not a standard elongated-dome xenomorph. All slender tips visible."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df72-5de7-7b13-b83e-245a21e05d37/exec-02c3198e-50cc-4ca0-8115-aef55f46dacd.png",
+    "path": null,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "981caa69efa3e8e870d0e13af41e06f01e1c59bdd3c34926eb7d288c3b556a73",
+    "bboxAlphaAtLeast16": [
+      87,
+      214,
+      1461,
+      875
+    ],
+    "alphaMin": 0,
+    "alpha0": 1088278,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "held",
+    "reason": "visual-anatomy-mismatch-extra-limbs",
+    "notes": "One native request completed and was visually reviewed. The generated creature has additional forelimb/support structures (at least five distinct grounded feet/hands) inconsistent with the four-limb reference and requested anatomy. Alpha is valid, but anatomy is not admitted. Original provider PNG preserved; no copy into game assets, no retry, no pixel editing. This is a visual QA hold, not a moderation refusal.",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

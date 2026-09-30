@@ -27,7 +27,7 @@ import {
   drawPlayerSpriteV81
 } from './player-visual-contract-v81.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
-import { getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v98.js';
+import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import { isEnemyBatchCombatV66, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';

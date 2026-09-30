@@ -1,0 +1,315 @@
+{
+  "shard": "b",
+  "status": "complete",
+  "count": 17,
+  "acceptedCount": 13,
+  "heldCount": 4,
+  "canonExact": false,
+  "animationStatus": "static-only",
+  "nativePixelsUnchanged": true,
+  "poses": [
+    {
+      "id": "enemy-210-cryo-adapted-facehugger",
+      "profileId": "enemy-210-cryo-adapted-facehugger",
+      "name": "Cryo-Adapted Facehugger",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-210-cryo-adapted-facehugger.png",
+      "sourceWidth": 1983,
+      "sourceHeight": 793,
+      "alphaBounds": [
+        90,
+        205,
+        1887,
+        706
+      ],
+      "sha256": "4d7172ff5a0d7f7313c47a9e42720bf2218415d7b87875302de6bc15a47a9f9d",
+      "pivot": {
+        "x": 0.69,
+        "y": 0.8890290037831021
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 72
+    },
+    {
+      "id": "enemy-211-cryo-adapted-chestburster",
+      "profileId": "enemy-211-cryo-adapted-chestburster",
+      "name": "Cryo-Adapted Chestburster",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-211-cryo-adapted-chestburster.png",
+      "sourceWidth": 1919,
+      "sourceHeight": 820,
+      "alphaBounds": [
+        163,
+        236,
+        1788,
+        658
+      ],
+      "sha256": "f0674b4524e9c0df1d9102c38169c2b9ff129fff837482c2d584bf07e5181613",
+      "pivot": {
+        "x": 0.52,
+        "y": 0.801219512195122
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 188
+    },
+    {
+      "id": "enemy-214-cryo-adapted-runner",
+      "profileId": "enemy-214-cryo-adapted-runner",
+      "name": "Cryo-Adapted Runner",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-214-cryo-adapted-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        82,
+        171,
+        1458,
+        903
+      ],
+      "sha256": "a1b567c20db6f19cdfa7eda91074359debeaf2cb9647868e0dbc4b5813953783",
+      "pivot": {
+        "x": 0.57,
+        "y": 0.880859375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 256
+    },
+    {
+      "id": "enemy-217-cryo-adapted-crusher",
+      "profileId": "enemy-217-cryo-adapted-crusher",
+      "name": "Cryo-Adapted Crusher",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-217-cryo-adapted-crusher.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        52,
+        166,
+        1498,
+        912
+      ],
+      "sha256": "bbe2c3b2729b6ac2f63acb3429d3bdd1ecf25ca21048e4a5bda004bd0798d759",
+      "pivot": {
+        "x": 0.61,
+        "y": 0.8896484375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 320
+    },
+    {
+      "id": "enemy-219-cryo-adapted-lurker",
+      "profileId": "enemy-219-cryo-adapted-lurker",
+      "name": "Cryo-Adapted Lurker",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-219-cryo-adapted-lurker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        85,
+        200,
+        1468,
+        882
+      ],
+      "sha256": "4a3714d06bb14cd3f37955a13c77d65804b415a26f1b29d11475217f6db2d4a4",
+      "pivot": {
+        "x": 0.61,
+        "y": 0.8603515625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-221-cryo-adapted-ravager",
+      "profileId": "enemy-221-cryo-adapted-ravager",
+      "name": "Cryo-Adapted Ravager",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-221-cryo-adapted-ravager.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        66,
+        139,
+        1200,
+        1139
+      ],
+      "sha256": "9297e52b7e3fbe5956b6cfdaef527ec3919dc9cecab7f3f57a1e767cdde1eb76",
+      "pivot": {
+        "x": 0.625,
+        "y": 0.9074960127591707
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 158
+    },
+    {
+      "id": "enemy-222-cryo-adapted-boiler",
+      "profileId": "enemy-222-cryo-adapted-boiler",
+      "name": "Cryo-Adapted Boiler",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-222-cryo-adapted-boiler.png",
+      "sourceWidth": 1238,
+      "sourceHeight": 1271,
+      "alphaBounds": [
+        50,
+        100,
+        1197,
+        1198
+      ],
+      "sha256": "0a37f495ed857beb16725b229a4fbdbe1b918b819fd56f348ec353a385fa6225",
+      "pivot": {
+        "x": 0.635,
+        "y": 0.9417781274586939
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 110
+    },
+    {
+      "id": "enemy-224-cryo-adapted-burster",
+      "profileId": "enemy-224-cryo-adapted-burster",
+      "name": "Cryo-Adapted Burster",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-224-cryo-adapted-burster.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        85,
+        67,
+        1462,
+        970
+      ],
+      "sha256": "ede720f5aa9f1c5b800d825e5bd65092fb5b16f4810fb814a30d5c348476dd32",
+      "pivot": {
+        "x": 0.52,
+        "y": 0.9462890625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 256
+    },
+    {
+      "id": "enemy-225-cryo-adapted-monica-line",
+      "profileId": "enemy-225-cryo-adapted-monica-line",
+      "name": "Cryo-Adapted Monica Line",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-225-cryo-adapted-monica-line.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        202,
+        119,
+        1333,
+        957
+      ],
+      "sha256": "10e4a825fe25a868443a4dcc0485b446287cf54f15f084735d3e678037703f6d",
+      "pivot": {
+        "x": 0.637,
+        "y": 0.93359375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 126
+    },
+    {
+      "id": "enemy-231-cryo-adapted-atarax-ripper",
+      "profileId": "enemy-231-cryo-adapted-atarax-ripper",
+      "name": "Cryo-Adapted ATARAX Ripper",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-231-cryo-adapted-atarax-ripper.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        65,
+        98,
+        1448,
+        958
+      ],
+      "sha256": "d4b0299a85bc3831ba5a231e4f2fb99b870d4092f99f0b2f8aab72545b61e368",
+      "pivot": {
+        "x": 0.555,
+        "y": 0.9345703125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 112
+    },
+    {
+      "id": "enemy-232-cryo-adapted-ripper-queen",
+      "profileId": "enemy-232-cryo-adapted-ripper-queen",
+      "name": "Cryo-Adapted Ripper Queen",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-232-cryo-adapted-ripper-queen.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        79,
+        37,
+        1478,
+        1006
+      ],
+      "sha256": "95484d0e0d42bfbe59514410707ef01ca2b95f7055d95ae6cf1a3c913b4b3379",
+      "pivot": {
+        "x": 0.535,
+        "y": 0.9814453125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 340
+    },
+    {
+      "id": "enemy-234-cryo-adapted-foundry-crusher",
+      "profileId": "enemy-234-cryo-adapted-foundry-crusher",
+      "name": "Cryo-Adapted Foundry Crusher",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-234-cryo-adapted-foundry-crusher.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        51,
+        112,
+        1496,
+        912
+      ],
+      "sha256": "5bd7c1ef40fc37e3a9f5d6ab9153307bd1c443e811ac01b9448ba6e6da3ac85d",
+      "pivot": {
+        "x": 0.645,
+        "y": 0.8896484375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 128
+    },
+    {
+      "id": "enemy-235-cryo-adapted-reef-stalker",
+      "profileId": "enemy-235-cryo-adapted-reef-stalker",
+      "name": "Cryo-Adapted Reef Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v99/enemy-235-cryo-adapted-reef-stalker.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        81,
+        194,
+        1695,
+        800
+      ],
+      "sha256": "5efad3c87c62cfa63723592b0641dca88dc37cdae402d025ae1db0932f4379aa",
+      "pivot": {
+        "x": 0.685,
+        "y": 0.9007891770011274
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    }
+  ],
+  "held": [
+    {
+      "profileId": "enemy-216-cryo-adapted-queen",
+      "name": "Cryo-Adapted Queen",
+      "status": "held",
+      "reason": "provider-output-moderation-blocked",
+      "requestId": "7e5a3501-e797-4fac-96eb-13fde6fc18d9"
+    },
+    {
+      "profileId": "enemy-226-cryo-adapted-specimen-six-line",
+      "name": "Cryo-Adapted Specimen Six Line",
+      "status": "held",
+      "reason": "provider-output-moderation-blocked",
+      "requestId": "4b108ab1-845a-4dc8-94ab-9c5f6995b608"
+    },
+    {
+      "profileId": "enemy-227-cryo-adapted-red-xenomorph",
+      "name": "Cryo-Adapted Red Xenomorph",
+      "status": "held",
+      "reason": "provider-output-moderation-blocked",
+      "requestId": "5e3b568a-694b-4b35-973b-3328ba2a38ac"
+    },
+    {
+      "profileId": "enemy-228-cryo-adapted-k-series-yellow-xenomorph",
+      "name": "Cryo-Adapted K-Series Yellow Xenomorph",
+      "status": "held",
+      "reason": "provider-output-moderation-blocked",
+      "requestId": "5691405b-6035-4721-ae59-216b3da47e82"
+    }
+  ]
+}

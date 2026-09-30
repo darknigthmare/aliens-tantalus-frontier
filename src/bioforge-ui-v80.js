@@ -39,7 +39,7 @@ const PROFILE_LABELS_V80 = Object.freeze({
 
 export function getBioforgeProfileLabelV80(profileId) {
   const dedicated = getBioforgeRosterEntryV80(profileId);
-  if (dedicated?.dedicatedHistoricalPoseV96) return `${dedicated.name} — variante systémique${['v97-050', 'v98-050'].includes(dedicated.batch) ? ' · pose fixe' : ' blindée'}`;
+  if (dedicated?.dedicatedHistoricalPoseV96) return `${dedicated.name} — variante systémique${['v97-050', 'v98-050', 'v99-050'].includes(dedicated.batch) ? ' · pose fixe' : ' blindée'}`;
   const supplied = getEnemyUserCasteV87(profileId);
   if (supplied) return `${supplied.name} — ${supplied.work}`;
   return getLegacyEnemyAlteredLabelV87(profileId, PROFILE_LABELS_V80[profileId] || String(profileId || 'Profil inconnu'));

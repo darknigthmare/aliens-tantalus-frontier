@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-204-acid-blooded-cult-host",
+  "name": "Acid-Blooded Cult Host",
+  "prompt": "Use case: stylized-concept. Asset type: native transparent static side-view 2D game sprite.\nPrimary request: ONE original Acid-Blooded Cult Host.\nInput image 1: exact base identity, anatomy, equipment, palette and shaded sprite style reference ONLY, not output layout. Do not reproduce its sheet or sequence.\nSubject anatomy lock: One adult bald lean human cult host in the reference's upright pose: gaunt pale face, slightly stooped shoulders, tan/beige short-sleeved work shirt, dark brown loose work trousers, worn brown boots, dark thin straps holding a single round silver-grey pendant/device at the lower chest. Ordinary intact human body, exactly TWO arms with empty hands and TWO legs with separate boots. Preserve bald head, thin silhouette, simple civilian work clothes and round chest device. Clothes worn but whole, no tears revealing injury, no stains, blood or damaged skin. Faint olive-amber skin iridescence and sparse yellow-green closed subdermal seams on face/forearms only; no glow, new weapon or creature appendage.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: one complete static neutral-ready pose facing RIGHT. Side view with slight three-quarter separation only as necessary to make all limbs and appendages countable. Preserve base body proportions. Whole silhouette, every fingertip/foot/appendage tip and existing equipment visible, central 80% of image with at least 10% transparent padding all sides.\nStyle: detailed crisp pixel-painted/digitally shaded 2D game sprite matching the input, restrained dark contour and hard-edged material relief. Intact closed surfaces throughout.\nBackground: genuine transparent alpha, no floor or cast shadow, no environment, gradient, halo, aura or background marks.\nOne figure only, no duplicates, panels, grid, contact sheet, detached body parts, motion effects, text, labels, logos, watermark, crop, extra appendages, new weapons, blood, injury or gore. Fresh original project systemic variant, not official new species, canonical-exact claim or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png",
+    "sha256": "ea3ba3c83c55ee1d6b57d2f525135dc0a447de1493b5f4fa4caaa39ea85f0e2c",
+    "visualNotes": "Bald lean adult human in beige short-sleeved shirt, loose brown trousers/boots, thin dark straps and a single round silver-grey lower-chest device; unarmed stooped silhouette."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-42bf4640-4738-4b9e-8732-477fdce052cd.png",
+    "path": "assets/openai/sprites/static-enemy-v99/enemy-204-acid-blooded-cult-host.png",
+    "width": 1226,
+    "height": 1283,
+    "sha256": "1e90d7c22fe8513d4327175832eafbf2f86b5e6d8c9a36a90b9245dc56bb1ada",
+    "bboxAlphaAtLeast16": [
+      415,
+      167,
+      823,
+      1170
+    ],
+    "alphaMin": 0,
+    "alpha0": 1319360,
+    "totalPixels": 1572958
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing two-armed/two-legged human retains bald head, civilian clothes and round strapped chest device. Empty hands and both boots distinct, all clothing/skin intact; faint olive-yellow face/forearm material seams only. Measured visible margins in pixels: {\"left\":415,\"top\":167,\"right\":403,\"bottom\":113}. Native pixels unchanged. One native attempt only. Original systemic project adaptation, not canonical-exact or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.505,
+      "y": 0.9111457521434139
+    },
+    "sourceFacing": 1
+  }
+}
