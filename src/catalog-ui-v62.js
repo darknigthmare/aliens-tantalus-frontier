@@ -823,7 +823,7 @@ export class CatalogWorkbenchV62 {
       this.detail.append(section);
     }
     if (record.visual?.visualMode === 'static-pose') this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
-      `${importWalkV107(record.id) ? `Aperçu fixe du dossier · ${importWalkV107(record.id).label} · cycle disponible en campagne, BIOFORGE et Trials` : 'Pose fixe native · animations manquantes'} · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
+      `${importWalkV107(record.id) ? `Aperçu fixe du dossier · ${importWalkV107(record.id).label} · cycle de marche disponible en campagne, BIOFORGE et Trials${getEnemyImportAttackV109(getEnemyStaticPoseV96(record.id)) ? ' ; frappe légère uniquement dans Xeno Trials' : ''}` : 'Pose fixe native · animations manquantes'} · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
     // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);
     if (record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
