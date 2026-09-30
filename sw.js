@@ -1,5 +1,9 @@
-const CACHE = 'atf-v86-public-shell-14';
+const CACHE = 'atf-v86-ceto-final-v102-shell-1';
 const TITLE_BITMAPS_V87 = [
+  '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
+  '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
+  '/assets/openai/ui/title/v90/orbitals/narcissus-side-depth.png',
+  '/assets/openai/ui/title/v90/orbitals/nostromo-threequarter.png',
   '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png',
   '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
   '/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png',
@@ -23,34 +27,58 @@ const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v87/orbitals/prometheus-reference-v87.png',
 ];
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
+const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/user-pack-v100.js', '/src/user-reference-library-v100.js', '/src/user-reference-recovery-v100.js',
+  '/src/enemy-physical-size-v100.js', '/user-reference-library-v100.css',
+  '/depth-lab-v97.html', '/depth-lab-v97.css', '/src/depth-lab-v97.js', '/src/depth-lab-model-v97.js',
+  '/src/xeno-trials-presentation-v97.js', '/src/xeno-trials-selection-v97.js',
+  '/src/enemy-dedicated-poses-v97.js', '/src/enemy-dedicated-batch-v97.js',
+  '/src/enemy-dedicated-poses-v98.js', '/src/enemy-dedicated-batch-v98.js',
+  '/src/enemy-dedicated-poses-v99.js', '/src/enemy-dedicated-batch-v99.js',
+  '/xeno-trials-v96.css', '/src/xeno-trials-data-v96.js', '/src/xeno-trials-engine-v96.js',
+  '/src/xeno-trials-runtime-v96.js', '/src/xeno-trials-progress-v96.js', '/src/xeno-trials-ui-v96.js',
+  '/src/enemy-dedicated-poses-v96.js',
+  '/src/enemy-static-poses-v96.js', '/src/enemy-expansion-assets-v96.js',
+  '/src/enemy-expansion-queen-v96.js',
+  '/src/port-meridien-v90.js', '/src/hub-port-meridien-v90.js',
+  '/src/opening-exercise-v89.js', '/src/hub-opening-exercise-v89.js', '/src/title-menu-context-v89.js',
+  '/src/enemy-user-campaign-v88.js', '/src/enemy-user-campaign-runtime-v88.js', '/src/enemy-discovery-v88.js',
+  '/src/player-opening-v88.js', '/src/hub-opening-v88.js',
+  '/src/title-scene-angle-assets-v88.js', '/src/title-scene-motion-v88.js',
   '/src/enemy-user-castes-v87.js',
+  '/src/enemy-sprite-revisions-v92.js',
+  '/src/enemy-sprite-revisions-v93.js',
+  '/src/enemy-additional-poses-v94.js',
+  '/src/enemy-static-poses-v94.js',
+  '/src/enemy-user-creations-v95.js',
+  '/src/user-reference-art-v95.js',
+  '/src/user-reference-effects-v95.js',
+  '/src/enemy-static-poses-v95.js',
+  '/src/enemy-historical-variants-v95.js',
+  '/src/user-equipment-art-v95.js',
+  '/src/user-equipment-v95.js',
   '/src/enemy-user-pose-runtime-v87.js',
   ...TITLE_BITMAPS_V87,
   '/src/bioforge-physical-state-v87.js',
-  '/src/ship-animal-mica-frames-v87.js', '/src/ship-animal-terrarium-art-v87.js', '/src/ship-animal-terrarium-navigation-v87.js',
-  '/assets/openai/ship-animals/v87/mica-atlas-v2.png', '/assets/openai/ship-animals/v87/terrarium-props.png',
   '/src/player-airborne-presentation-v87.js',
   '/src/refuge-personal-state-v87.js', '/src/refuge-controller-v87.js', '/src/refuge-ui-v87.js',
   '/src/refuge-save-v87.js', '/src/refuge-room-v87.js', '/src/refuge-art-v87.js', '/src/refuge-v87.css',
   '/assets/openai/refuge/v87/refuge-props-atlas.png', '/assets/openai/refuge/v87/refuge-hologram-atlas.png',
   '/src/ship-carrier-presentation-v87.js',
-  '/src/ship-port-state-v87.js',
-  '/src/ship-port-art-v87.js',
-  '/src/ship-port-room-v87.js',
-  '/src/ship-port-ui-v87.js',
-  '/src/ship-port-v87.css',
-  '/src/ship-animal-routines-v87.js',
-  '/src/ship-animal-delivery-v87.js',
-  '/src/ship-companion-controller-v87.js',
   '/src/ship-animal-habitat-graph-v87.js',
+  '/src/ship-port-state-v87.js', '/src/ship-port-room-v87.js', '/src/ship-port-art-v87.js',
+  '/src/ship-port-ui-v87.js', '/src/ship-port-v87.css', '/src/ship-companion-controller-v87.js',
+  '/src/ship-animal-routines-v87.js', '/src/ship-animal-delivery-v87.js',
   '/assets/openai/ship-animals/v87/port-vendor-atlas.png', '/assets/openai/ship-animals/v87/port-props.png',
   '/src/ship-animal-state-v87.js', '/src/ship-animal-habitat-v87.js', '/src/hub-annex-registry-v87.js',
   '/src/ship-animal-art-v87.js', '/src/ship-animal-navigation-v87.js',
   '/assets/openai/ship-animals/v87/moka-atlas.png', '/assets/openai/ship-animals/v87/brume-atlas.png',
   '/assets/openai/ship-animals/v87/luciole-atlas.png',
   '/src/ship-animal-bonded-frames-v87.js', '/src/ship-animal-enclosure-art-v87.js',
+  '/src/ship-animal-mica-frames-v87.js', '/src/ship-animal-terrarium-art-v87.js', '/src/ship-animal-terrarium-navigation-v87.js',
+  '/assets/openai/ship-animals/v87/mica-atlas-v2.png', '/assets/openai/ship-animals/v87/terrarium-props.png',
   '/assets/openai/ship-animals/v87/noisette-atlas-v2.png', '/assets/openai/ship-animals/v87/cafe-atlas.png',
   '/assets/openai/ship-animals/v87/tic-atlas-v2.png', '/assets/openai/ship-animals/v87/tac-atlas-v2.png',
   '/assets/openai/ship-animals/v87/enclosure-props.png',
@@ -71,11 +99,19 @@ const CORE = [
   '/assets/openai/hub/props/operations-table-side-v72.webp',
   '/src/catalog-scale-v72.js', '/src/gameplay-support-v72.js', '/src/hub-annex-art-layout-v72.js', '/src/mission-large-actor-placement-v72.js',
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/title-scene-v79.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css', '/alien-survival-v70.css', '/bioforge-v80.css',
-  '/manifest.webmanifest',
+  '/manifest.webmanifest', SPRITE_MANIFEST,
   '/assets/openai/pwa/tantalus-frontier-icon-192-v68.png',
   '/assets/openai/pwa/tantalus-frontier-icon-512-v68.png',
   '/assets/openai/pwa/tantalus-frontier-maskable-192-v68.png',
   '/assets/openai/pwa/tantalus-frontier-maskable-512-v68.png',
+  '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md', '/docs/V58_ROOM_COHERENCE_AUDIT.md',
+  '/docs/VERSION_HISTORY_V59.md', '/docs/ART_PROVENANCE_V59.md',
+  '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
+  '/docs/VERSION_HISTORY_V60.md', '/docs/V60_LEVEL_DESIGN_AUDIT.md',
+  '/docs/references/V60_ASSET_COMPLETION_MATRIX.md',
+  '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/VERSION_HISTORY_V64.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md', '/docs/ART_PROVENANCE_V64.md',
+  '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
+  '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json', '/docs/references/V64_ASSET_COMPLETION_MATRIX.md', '/docs/references/V64_ENEMY_SOURCES.json', '/docs/references/V64_IMAGEGEN_PROMPTS.md', '/docs/references/V64_PNG_ALPHA_AUDIT.json',
   '/src/app.js', '/src/title-screen-v61.js', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js', '/src/hub-dialogue-ui-v76.js', '/src/content.js', '/src/content-core-v50.js', '/src/special-operations-v67.js', '/src/cargo-brutal-runtime-v67.js', '/src/cargo-brutal-visuals-v67.js', '/src/narrative-collectables-v68.js', '/src/narrative-collectables-runtime-v68.js', '/src/narrative-collectables-visuals-v68.js', '/src/narrative-archives-ui-v68.js', '/src/alpha-bravo-coop-v69.js', '/src/alpha-bravo-coop-runtime-v69.js', '/src/alpha-bravo-visuals-v69.js', '/src/alpha-bravo-ui-v69.js', '/src/alien-survival-systems-v70.js', '/src/alien-survival-runtime-v70.js', '/src/alien-survival-visuals-v70.js', '/src/alien-survival-ui-v70.js', '/src/bioforge-assets-v80.js', '/src/bioforge-session-v80.js', '/src/bioforge-level-v80.js', '/src/bioforge-runtime-v80.js', '/src/bioforge-ui-v80.js', '/src/proving-ground-assets-v81.js', '/src/proving-ground-session-v81.js', '/src/tantalus-proving-ground-v81.js', '/src/hub-v81-runtime.js', '/src/player-visual-contract-v81.js', '/src/enemy-profile-assets-v81.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/excel-content-bridge-v61.js', '/src/excel-content-bridge-v63.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
   '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
@@ -88,6 +124,8 @@ const CORE = [
   '/src/enemy-batch-combat-v66.js', '/src/enemy-ovomorph-cycle-v66.js', '/src/enemy-ceto-v75.js',
   '/src/enemy-profile-assets-v66.js', '/src/enemy-profile-registry-v66.js',
   '/src/enemy-profile-geometry-v66.js',
+  '/docs/VERSION_HISTORY_V65.md', '/docs/ART_PROVENANCE_V65.md',
+  '/docs/VERSION_HISTORY_V71.md', '/docs/V71_HUB_COMMERCIAL_AUDIT.md', '/docs/ART_PROVENANCE_V71.md', '/docs/VALIDATION_V71.md',
   '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/enemy-profile-assets-v65.js', '/src/enemy-profile-registry-v65.js', '/src/enemy-atlas-loader-v65.js', '/src/enemy-combat-runtime-v64.js', '/src/mission-levels-v52.js',
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/enemy-visual-overrides-v64.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
@@ -383,7 +421,6 @@ const SHELL = Object.freeze(CORE.filter((path) => (
     || path.startsWith('/assets/openai/hub/proving-ground/v82/')
     || path.startsWith('/assets/openai/hub/proving-ground/v81/')
     || path.startsWith('/assets/openai/sprites/normalized/player/')
-    || path.startsWith('/assets/openai/sprites/normalized/tools/')
     || path.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v81/')
     || path === '/assets/audio/manifest.json')
   && !path.startsWith('/docs/')
@@ -447,12 +484,6 @@ self.addEventListener('activate', (event) => event.waitUntil(
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  const url = new URL(event.request.url, self.location.origin);
-  if (url.origin === self.location.origin && (url.pathname.startsWith('/docs/') || url.pathname.startsWith('/tests/')
-    || url.pathname === '/README.md' || url.pathname === '/assets/openai/sprites/manifest.json')) {
-    event.respondWith(Promise.resolve(new Response('Not found', { status: 404 })));
-    return;
-  }
   const audioRequest = isAudioRequestV77(event.request);
   if (audioRequest && event.request.headers?.has?.('range')) return;
   event.respondWith(

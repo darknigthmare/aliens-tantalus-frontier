@@ -10,6 +10,8 @@ import {
   searchCatalogV62
 } from './catalog-runtime-v62.js';
 import { getCatalogGameplayScaleV72, getCatalogMarineReferenceV72, getCatalogComparisonLayoutV72 } from './catalog-scale-v72.js';
+import { getEnemyStaticPoseStateOptionsV96 as getEnemyStaticPoseStateOptionsV95, getEnemyStaticPoseDefaultStateV96 as getEnemyStaticPoseDefaultStateV95 } from './enemy-static-poses-v96.js';
+import { userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);
@@ -17,6 +19,7 @@ const UNKNOWN_LABEL = 'NON DOCUMENTÉ';
 
 const LABELS = Object.freeze({
   actions: 'Actions',
+  animationStatus: 'Animations',
   acid: 'Acide',
   armor: 'Armure',
   behavior: 'Comportement',
@@ -29,6 +32,9 @@ const LABELS = Object.freeze({
   damage: 'Dégâts',
   description: 'Description',
   exact: 'Identité exacte',
+  encounterWorldIds: 'Mondes de rencontre',
+  encounterStatus: 'Statut de la rencontre',
+  encounterNote: 'Contexte de rencontre',
   family: 'Famille',
   fireRate: 'Cadence',
   fit: 'Gabarit',
@@ -48,13 +54,35 @@ const LABELS = Object.freeze({
   reload: 'Rechargement',
   seats: 'Postes',
   source: 'Source',
+  specializedBehaviorStatus: 'Comportement documenté',
   species: 'Espèce',
   speed: 'Vitesse',
   stage: 'Stade',
   subspecies: 'Sous-espèce',
   tags: 'Marqueurs',
   type: 'Type',
-  utility: 'Utilité'
+  utility: 'Utilité',
+  visualMode: 'Présentation',
+  work: 'Œuvre',
+  clip: 'Pose / animation'
+});
+
+const DISPLAY_VALUES_V89 = Object.freeze({
+  'source-grounded-partial-v89': 'Documentée, adaptation partielle',
+  'source-grounded-partial-v90': 'Documentée, adaptation partielle',
+  'source-grounded-partial-v95': 'Documentée, adaptation partielle',
+  'simplified-campaign-behavior': 'Comportement simplifié',
+  'project-adaptation': 'Adaptation du projet',
+  'static-pose': 'Pose fixe',
+  'user-supplied-static-pose': 'Illustration fournie, pose fixe',
+  'reference-guided-static-pose': 'Pose fixe revue sur référence ; fidélité 1:1 non certifiée',
+  'openai-integrated-reference-guided': 'Générateur OpenAI intégré, références visuelles contrôlées',
+  'sha256-dimensions-alpha-verified': 'Fichier, dimensions et transparence vérifiés ; fidélité canonique non certifiée',
+  missing: 'Manquantes',
+  contextual: 'Contextuelle',
+  stalk: 'Traque',
+  control: 'Contrôle à distance',
+  guard: 'Garde'
 });
 
 const BIOLOGY_RELATION_LABELS = Object.freeze({
@@ -99,6 +127,7 @@ export function formatCatalogLabelV62(key) {
 
 export function formatCatalogValueV62(value) {
   if (value === CATALOG_UNKNOWN_V62) return UNKNOWN_LABEL;
+  if (typeof value === 'string' && Object.hasOwn(DISPLAY_VALUES_V89, value)) return DISPLAY_VALUES_V89[value];
   if (typeof value === 'boolean') return value ? 'OUI' : 'NON';
   if (Array.isArray(value)) {
     return value.length
@@ -226,6 +255,7 @@ function createElement(documentRef, tagName, className = '', text = null) {
 
 function appendDefinitionRows(documentRef, target, values, options = {}) {
   for (const [key, rawValue] of visibleEntries(values)) {
+    if (key === 'encounterWorldIds' && values.habitats?.length) continue;
     const value = formatCatalogValueV62(rawValue);
     if (value === null) continue;
     const row = createElement(documentRef, 'div', 'catalog-v62__data-row');
@@ -264,12 +294,14 @@ export class CatalogSpriteAnimatorV62 {
     return rootReduced || mediaReduced;
   }
 
-  mount(target, visual, label, { detail = false, controlsTarget = target, worldScale = null, animate = true } = {}) {
+  mount(target, visual, label, { detail = false, controlsTarget = target, worldScale = null, animate = true, staticProfileId = null } = {}) {
     const firstFrame = getCatalogSpriteFrameV62(visual, 0);
     if (!isElementLike(target) || !firstFrame) return null;
     const documentRef = target.ownerDocument || this.document;
     const viewport = createElement(documentRef, 'figure', `catalog-v62__sprite${detail ? ' catalog-v62__sprite--detail' : ''}`);
-    viewport.setAttribute('aria-label', `${label} — animation ${visual.idleClip?.clip?.id || ''} issue de la plaquette dédiée`);
+    viewport.setAttribute('aria-label', visual.visualMode === 'static-pose'
+      ? `${label} — pose fixe native, animations manquantes`
+      : `${label} — animation ${visual.idleClip?.clip?.id || ''} issue de la plaquette dédiée`);
     viewport.dataset.sheetId = visual.sheetId || '';
     viewport.dataset.clipId = visual.idleClip?.clip?.id || '';
     const dimensions = worldScale === null ? null : getCatalogGameplayScaleV72(visual, worldScale);
@@ -290,6 +322,11 @@ export class CatalogSpriteAnimatorV62 {
     image.alt = '';
     image.loading = detail ? 'eager' : 'lazy';
     image.decoding = 'async';
+    if (visual.visualMode === 'static-pose') {
+      image.style.objectFit = 'contain';
+      viewport.dataset.visualMode = 'static-pose';
+      viewport.dataset.animationStatus = 'missing';
+    }
     viewport.append(image);
     target.append(viewport);
 
@@ -320,6 +357,35 @@ export class CatalogSpriteAnimatorV62 {
       }, Math.round(1000 / fps));
     };
     play();
+    // Fixed colour/state choices are not animation frames or new biological entries.
+    const staticOptions = visual.visualMode === 'static-pose' ? getEnemyStaticPoseStateOptionsV95(staticProfileId) : [];
+    if (detail && staticOptions.length > 1) {
+      const controls = createElement(documentRef, 'div', 'catalog-v62__detail-actions');
+      const selector = createElement(documentRef, 'select');
+      selector.setAttribute('aria-label', `État visuel fixe de ${label}`);
+      selector.dataset.staticStateSelectV95 = staticProfileId;
+      for (const entry of staticOptions) {
+        const option = createElement(documentRef, 'option', '', entry.label);
+        option.value = entry.stateId || entry.id;
+        selector.append(option);
+      }
+      selector.value = getEnemyStaticPoseDefaultStateV95(staticProfileId) || '';
+      viewport.dataset.visualStateV95 = selector.value;
+      selector.addEventListener('change', () => {
+        if (!staticOptions.some(entry => (entry.stateId || entry.id) === selector.value)) return;
+        const next = userCasteStaticVisualV88(staticProfileId, selector.value);
+        if (!next) return;
+        state.visual = next; state.index = 0;
+        image.src = next.path;
+        const size = getCatalogGameplayScaleV72(next);
+        if (size) viewport.style.aspectRatio = `${size.worldWidth} / ${size.worldHeight}`;
+        viewport.dataset.visualStateV95 = selector.value;
+        viewport.setAttribute('aria-label', `${label} — ${staticOptions.find(entry => (entry.stateId || entry.id) === selector.value).label} — pose fixe native, animations manquantes`);
+        applyFrame();
+      });
+      controls.append(selector);
+      (isElementLike(controlsTarget) ? controlsTarget : target).append(controls);
+    }
     if (detail && visual.previewClips?.length > 1) {
       const controls = createElement(documentRef, 'div', 'catalog-v62__detail-actions');
       controls.dataset.animationControls = visual.sheetId;
@@ -378,6 +444,7 @@ export class CatalogWorkbenchV62 {
     this.catalogsSource = options.catalogs || options.catalog || [...VALID_CATALOGS];
     this.predicate = typeof options.predicate === 'function' ? options.predicate : null;
     this.getActions = typeof options.getActions === 'function' ? options.getActions : () => EMPTY_ARRAY;
+    this.getDiscoveryV88 = typeof options.getDiscoveryV88 === 'function' ? options.getDiscoveryV88 : null;
     this.onAction = typeof options.onAction === 'function' ? options.onAction : null;
     this.onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
     this.dimensions = options.dimensions;
@@ -603,6 +670,10 @@ export class CatalogWorkbenchV62 {
       createElement(this.document, 'span', 'catalog-v62__card-id', record.id)
     );
     select.append(media, body);
+    if (record.catalog === 'enemies' && this.getDiscoveryV88) {
+      const discovery = this.getDiscoveryV88(record.id);
+      body.append(createElement(this.document, 'span', 'catalog-v62__card-type', discovery.seen ? 'RENCONTRÉ EN MISSION' : 'DOSSIER NON RENCONTRÉ'));
+    }
     card.append(select);
     const actions = normalizeCatalogActionsV62(this.getActions(record));
     if (actions.length) card.append(this.renderActions(record, actions, 'catalog-v62__card-actions'));
@@ -641,7 +712,7 @@ export class CatalogWorkbenchV62 {
     }
     const header = createElement(this.document, 'header', 'catalog-v62__detail-header');
     const animationControls = createElement(this.document, 'div');
-    const preview = record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls });
+    const preview = record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
     if (!preview) this.renderMissingMedia(header, record);
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
@@ -651,6 +722,16 @@ export class CatalogWorkbenchV62 {
     );
     header.append(heading);
     this.detail.append(header);
+    if (record.catalog === 'enemies' && this.getDiscoveryV88) {
+      const discovery = this.getDiscoveryV88(record.id), section = this.renderSection('DÉCOUVERTE EN CAMPAGNE', 'discovery');
+      section.dataset.discoveryStatus = discovery.status;
+      section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', discovery.seen
+        ? `Rencontré en mission · neutralisations ${discovery.defeated} · premier monde ${discovery.firstWorldId || 'inconnu'}`
+        : 'Dossier disponible. Aucun spécimen rencontré dans cette campagne. Le laboratoire ne déverrouille pas la découverte.'));
+      this.detail.append(section);
+    }
+    if (record.visual?.visualMode === 'static-pose') this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+      `Pose fixe native · animations manquantes · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
     // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);
     if (record.catalog === 'enemies') this.renderGameplayScaleV72(record);
@@ -668,6 +749,7 @@ export class CatalogWorkbenchV62 {
     appendDefinitionRows(this.document, gameplayData, record.gameplayStats, { status: 'gameplay' });
     gameplaySection.append(gameplayData);
     this.detail.append(gameplaySection);
+    this.renderCombatBehaviorV89(record);
 
     this.renderMediaSection(record);
     this.renderBiologySection(record);
@@ -682,6 +764,38 @@ export class CatalogWorkbenchV62 {
     if (kind) section.dataset.sectionKind = kind;
     section.append(createElement(this.document, 'h4', '', title));
     return section;
+  }
+
+  renderCombatBehaviorV89(record) {
+    const behavior = record.catalog === 'enemies' ? record.combatBehaviorV95 || record.combatBehaviorV90 || record.combatBehaviorV89 || record.combatBehavior : null;
+    if (!behavior?.id || !behavior.label || !behavior.summary) return;
+    const section = this.renderSection(behavior.runtimeScopes?.includes('bioforge') ? 'COMPORTEMENT EN MISSION ET BIOFORGE' : 'COMPORTEMENT EN MISSION', 'combat-behavior');
+    section.dataset.combatBehavior = behavior.id;
+    if (record.combatBehaviorV95) section.dataset.combatBehaviorV95 = behavior.id;
+    else if (record.combatBehaviorV90) section.dataset.combatBehaviorV90 = behavior.id;
+    else if (record.combatBehaviorV89) section.dataset.combatBehaviorV89 = behavior.id;
+    section.append(
+      createElement(this.document, 'p', 'catalog-v62__eyebrow', behavior.label),
+      createElement(this.document, 'p', 'catalog-v62__fact-note', behavior.summary),
+      createElement(this.document, 'p', 'catalog-v62__fact-note', behavior.adaptationNote || 'Adaptation partielle au moteur 2D ; fidélité canonique non certifiée.')
+    );
+    // Source links remain navigation only. Never interpret imported strings as markup.
+    for (const source of new Set(Array.isArray(behavior.sourceUrls) ? behavior.sourceUrls : [])) {
+      let url;
+      try { url = new URL(source); } catch { continue; }
+      if (url.protocol !== 'https:' || url.username || url.password) continue;
+      const link = createElement(this.document, 'a', 'catalog-v62__fact-note', `Référence — ${url.hostname}`);
+      link.href = url.href;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.referrerPolicy = 'no-referrer';
+      link.dataset.combatBehaviorSource = behavior.id;
+      if (record.combatBehaviorV95) link.dataset.combatBehaviorSourceV95 = behavior.id;
+      else if (record.combatBehaviorV90) link.dataset.combatBehaviorSourceV90 = behavior.id;
+      else if (record.combatBehaviorV89) link.dataset.combatBehaviorSourceV89 = behavior.id;
+      section.append(link);
+    }
+    this.detail.append(section);
   }
 
   renderMediaSection(record) {
@@ -779,6 +893,13 @@ export class CatalogWorkbenchV62 {
   renderSizeSection(record) {
     const comparison = getHumanSizeComparisonV62(record.id, this.dimensions ? { dimensions: this.dimensions } : {});
     const section = this.renderSection('COMPARAISON HUMAINE', 'dimensions');
+    if (record.physicalSize) {
+      const size = record.physicalSize;
+      const measurement = size.measurementType === 'axial-length' ? 'longueur axiale, pas hauteur' : 'hauteur selon posture';
+      section.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+        `Repère candidat du 28/09/2026 : ${size.targetMeters === null ? 'à mesurer' : `${size.targetMeters} m`} (${measurement}). Estimation non certifiée canonique, non appliquée automatiquement aux sprites ou aux collisions.`));
+      for (const note of size.notes) section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', note));
+    }
     if (!comparison) {
       section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', 'Aucune dimension physique vérifiée et sourcée : comparateur masqué.'));
       this.detail.append(section);

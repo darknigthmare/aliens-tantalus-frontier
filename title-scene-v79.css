@@ -66,6 +66,21 @@
   height: auto;
   aspect-ratio: var(--ship-ratio-v87, 1.77778);
   container-type: inline-size;
+  /* A continuous delta-time flight, not an angle inferred from a mirrored PNG. */
+  animation: none !important;
+  transform: translate3d(var(--title-flight-x-v88, 0%), var(--title-flight-y-v88, 0%), 0);
+  will-change: transform;
+  transition: opacity 900ms ease;
+}
+
+.title-scene-layer-v79[data-renderer='image'][data-role='orbitals'][data-asset-status='loading'] {
+  opacity: 0;
+}
+
+.title-scene-v79[data-mode='static'] .title-scene-layer-v79[data-role='orbitals'],
+.title-scene-v79[data-active='false'] .title-scene-layer-v79[data-role='orbitals'] {
+  transition: none;
+  will-change: auto;
 }
 
 .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] > img {
@@ -77,20 +92,20 @@
   object-fit: contain;
 }
 
-.title-scene-layer-v79[data-asset-id='orbitals-uss-sulaco-reference-v87'],
-.title-scene-layer-v79[data-asset-id='orbitals-usm-auriga-reference-v87'] {
+.title-scene-layer-v79[data-ship-id='uss-sulaco'],
+.title-scene-layer-v79[data-ship-id='usm-auriga'] {
   --title-ship-width-v87: 62vw;
   --title-ship-top-v87: 40vh;
 }
 
-.title-scene-layer-v79[data-asset-id='orbitals-uscss-nostromo-reference-v87'] {
+.title-scene-layer-v79[data-ship-id='uscss-nostromo'] {
   --title-ship-width-v87: 46vw;
   --title-ship-top-v87: 28vh;
 }
 
-.title-scene-layer-v79[data-asset-id='orbitals-narcissus-reference-v87'],
-.title-scene-layer-v79[data-asset-id='orbitals-ud4l-cheyenne-reference-v87'],
-.title-scene-layer-v79[data-asset-id='orbitals-prometheus-reference-v87'] {
+.title-scene-layer-v79[data-ship-id='narcissus'],
+.title-scene-layer-v79[data-ship-id='ud4l-cheyenne'],
+.title-scene-layer-v79[data-ship-id='prometheus'] {
   --title-ship-width-v87: 43vw;
   --title-ship-top-v87: 36vh;
 }
@@ -509,10 +524,6 @@
   animation: title-cloud-light-v87 24s ease-in-out infinite alternate;
 }
 
-.title-scene-v79[data-active='true'][data-mode='full'] .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] {
-  animation: title-image-float-v79 20s ease-in-out infinite alternate;
-}
-
 .title-scene-v79[data-active='true'][data-mode='full'] .title-scene-layer-v79[data-renderer='image'][data-role='traffic'] {
   animation: title-image-traffic-v79 18s ease-in-out infinite alternate;
 }
@@ -526,7 +537,6 @@
 }
 
 .title-scene-v79[data-active='true'][data-mode='reduced'] .title-scene-layer-v79[data-renderer='image'][data-role='stars'],
-.title-scene-v79[data-active='true'][data-mode='reduced'] .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'],
 .title-scene-v79[data-active='true'][data-mode='reduced'] .title-scene-layer-v79[data-renderer='image'][data-role='traffic'],
 .title-scene-v79[data-active='true'][data-mode='reduced'] .title-scene-layer-v79[data-renderer='image'][data-role='debris'] {
   animation: title-image-float-v79 90s ease-in-out infinite alternate;
@@ -666,6 +676,12 @@
     --title-ship-top-v87: 32vh;
   }
 
+  /* Native alternate views keep their full canvas clear of mobile edges. */
+  .title-scene-layer-v79[data-renderer='image'][data-runtime-id^='title.v90.ship.'] {
+    --title-ship-width-v87: 90vw;
+    --title-ship-right-v87: 5vw;
+  }
+
   .title-scene-layer-v79[data-asset-id='debris-01-wreck-field'] {
     width: 90vw;
     top: 56vh;
@@ -706,5 +722,6 @@
 @media (prefers-reduced-motion: reduce) {
   .title-scene-v79 .title-scene-layer-v79 {
     animation: none !important;
+    transition: none !important;
   }
 }

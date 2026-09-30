@@ -341,7 +341,7 @@ const PLANET_TEMPLATE = Object.freeze({
     Object.freeze({ id: 'planet-hazard-seed', kind: '$seed-primary', zoneId: 'planet-ruins', x: 2760, y: FLOOR_Y - 20, w: 180, h: 20 })
   ]),
   events: Object.freeze([
-    Object.freeze({ id: 'planet-storm-front', trigger: Object.freeze({ type: 'enter-zone', zoneId: 'planet-surface' }), actions: Object.freeze(['weather:storm', 'activate:planet-hazard-radiation', 'art:low-visibility']) }),
+    Object.freeze({ id: 'planet-storm-front', trigger: Object.freeze({ type: 'enter-zone', zoneId: 'planet-surface' }), actions: Object.freeze(['weather:storm', 'activate:planet-hazard-radiation', 'art:low-visibility', 'spawn:planet-surface-fauna']) }),
     Object.freeze({ id: 'planet-cave-ambush', trigger: Object.freeze({ type: 'enter-zone', zoneId: 'planet-caves' }), actions: Object.freeze(['spawn:planet-cave-pack', 'art:bioluminescence']) }),
     Object.freeze({ id: 'planet-beacon-defense', trigger: Object.freeze({ type: 'interact-anchor', anchorId: 'archive' }), actions: Object.freeze(['spawn:planet-evac-wave', 'timer:extraction', 'weather:break']) })
   ]),
@@ -404,6 +404,10 @@ export function selectMissionLevelSeedV52(campaign = {}, levelSeeds = [], varian
 export function selectMissionTemplateV52({ campaign = {}, world = {}, templateId = null } = {}) {
   const explicit = String(templateId || campaign.templateId || '');
   if (MISSION_LEVEL_TEMPLATES_V52[explicit]) return explicit;
+  // Ceto's exterior FRONTIER sorties must reach the authored tidal basin.
+  // Its generic habitation biome otherwise selects a dry colony for every
+  // campaign. Explicit/saved templates and other Ceto mission modes stay intact.
+  if (world.id === 'world-10-ceto' && String(campaign.mode).toUpperCase() === 'FRONTIER') return PLANET_TEMPLATE.id;
   const text = [campaign.objective, campaign.name, world.name, world.atmosphere, ...list(world.biomes)]
     .filter(Boolean)
     .join(' ')

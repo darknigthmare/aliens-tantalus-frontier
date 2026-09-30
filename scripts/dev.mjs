@@ -10,21 +10,24 @@ const mime = {
   ...AUDIO_MIME_V77,
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png',
-  '.webp': 'image/webp', '.gif': 'image/gif',
+  '.webp': 'image/webp', '.gif': 'image/gif', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
   '.webmanifest': 'application/manifest+json; charset=utf-8', '.md': 'text/markdown; charset=utf-8'
 };
 
 function safePath(url) {
-  const requested = decodeURIComponent((url || '/').split('?')[0]);
+  let requested;
+  try { requested = decodeURIComponent((url || '/').split('?')[0]); }
+  catch { return null; }
   const relative = normalize(requested === '/' ? 'index.html' : requested.replace(/^\/+/, ''));
   if (relative.startsWith('..')) return null;
+  if (relative.split(/[\\/]/).some(segment => /^(?:docs?|tests?|scripts|references?|exports?|captures?|screenshots?|\.git|\.env.*|\.qa.*|\.vercel)$/i.test(segment))) return null;
   return join(root, relative);
 }
 
 await writeAudioManifestV77(root);
 createServer(async (request, response) => {
   let file = safePath(request.url);
-  if (!file) { response.writeHead(403).end('Forbidden'); return; }
+  if (!file) { response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found'); return; }
   try {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, 'index.html');
@@ -36,6 +39,13 @@ createServer(async (request, response) => {
     });
     response.end(body);
   } catch {
+    if (!extname(file)) {
+      try {
+        const body = await readFile(file + '.html');
+        response.writeHead(200, { 'content-type': mime['.html'], 'cache-control': 'no-store' }).end(body);
+        return;
+      } catch { /* Continue to the existing missing-asset or app-shell fallback. */ }
+    }
     // Missing sprite/module requests must not look like successful HTML pages.
     if (extname(file) || request.url?.startsWith('/assets/')) {
       response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found');

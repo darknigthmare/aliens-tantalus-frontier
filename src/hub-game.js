@@ -403,7 +403,7 @@ export class HubGame {
 
   loop(time, token) {
     if (!this.running || token !== this.loopToken) return;
-    const delta = Math.min(0.034, (time - this.last) / 1000 || 0);
+    const delta = Math.max(0, Math.min(0.034, (time - this.last) / 1000 || 0));
     this.last = time;
     this.update(delta);
     this.draw();

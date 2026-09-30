@@ -1,3 +1,5 @@
+import { applyEnemySpriteRevisionV93 } from './enemy-sprite-revisions-v93.js';
+
 /**
  * User-supplied single poses, independently audited on 2026-09-23.
  * Stats and geometry are project adaptations, not claims of canonical accuracy.
@@ -40,7 +42,7 @@ const ROWS = [
   ["game_avp_capcom_smasher","Smasher","Alien vs. Predator — Capcom (1994)","Arcade",null,"melee",245,25,0.9,18,4,98,104,276,184,0.64,0.925],
   ["game_avp_capcom_stalker","Stalker","Alien vs. Predator — Capcom (1994)","Arcade",null,"melee",180,22,1.3,10,3,62,106,234,156,0.59,0.95]
 ];
-export const ENEMY_USER_CASTES_V87 = Object.freeze(ROWS.map((row) => {
+export const ENEMY_USER_CASTES_ORIGINALS_V87 = Object.freeze(ROWS.map((row) => {
   const [basename, name, work, group, legacyCounterpartId, combatRole, health, damage, speed, armor,
     cost, bodyWidth, bodyHeight, renderWidth, renderHeight, pivotX, pivotY] = row;
   const portrait = basename === 'film_ovomorphe_aliens_1986';
@@ -60,6 +62,8 @@ export const ENEMY_USER_CASTES_V87 = Object.freeze(ROWS.map((row) => {
     automaticEncounter: false, encounterWorldIds: Object.freeze([])
   });
 }));
+// Keep the imported definitions auditable; only admitted visual revisions reach consumers.
+export const ENEMY_USER_CASTES_V87 = Object.freeze(ENEMY_USER_CASTES_ORIGINALS_V87.map(applyEnemySpriteRevisionV93));
 const BY_ID = new Map(ENEMY_USER_CASTES_V87.map(entry => [entry.id, entry]));
 const ALTERED = new Set(ENEMY_USER_CASTES_V87.map(entry => entry.legacyCounterpartId).filter(Boolean));
 export const ENEMY_USER_CASTES_IDS_V87 = Object.freeze(ENEMY_USER_CASTES_V87.map(entry => entry.id));

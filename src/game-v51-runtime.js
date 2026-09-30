@@ -5,6 +5,7 @@ import { MISSION_STRUCTURE_CROPS_V87, drawTiledMissionCropV87, drawMissionLadder
 import { getMissionStructureLayoutV87 } from './mission-structure-layout-v87.js';
 import { SPRITE_SHEETS, SPRITE_HITBOXES, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
+import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96, drawEnemyDedicatedPoseV99 as drawEnemyDedicatedPoseV96, isEnemyDedicatedPoseReadyV99 as isEnemyDedicatedPoseReadyV96 } from './enemy-dedicated-poses-v99.js';
 import {
   advanceEnemyMeleeAttackV64,
   armEnemyMeleeAttackV64,
@@ -30,6 +31,10 @@ import { MISSION_DOOR_ATLAS_V58, resolveMissionDoorArtV58 } from './mission-door
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import { detonateBursterV74, isBursterCombatV74, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
+import { getEnemyStaticPoseV96 as getEnemyUserCasteV87 } from './enemy-static-poses-v96.js';
+import { normalizeUserEquipmentV95, resolveUserEquipmentMuzzleV95 } from './user-equipment-v95.js';
+import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
+import { drawUserCastePoseV87, updateUserCasteActorV87, resolveDefenderGuardDamageV95 } from './enemy-user-pose-runtime-v87.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { pressTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77, consumeTacticalReloadBonusV77, getTacticalReloadHudV77 } from './tactical-reload-v77.js';
@@ -395,7 +400,7 @@ export class GameEngine {
     }
   }
 
-  start({ seed = 426, world, campaign, enemyCatalog = [], weapon, editorProject = null } = {}) {
+  start({ seed = 426, world, campaign, enemyCatalog = [], weapon, editorProject = null, userEquipmentV95 = null } = {}) {
     this.random = seeded(seed);
     this.world = world;
     this.campaign = campaign;
@@ -404,6 +409,7 @@ export class GameEngine {
     this.room = 0;
     this.camera = { x: 0, y: 250 };
     this.player = this.createPlayer(160, FLOOR_Y - 92, '#92d6a6', false);
+    this.player.userEquipmentV95 = normalizeUserEquipmentV95(userEquipmentV95);
     this.coop = this.createPlayer(105, FLOOR_Y - 92, '#e0bc6b', true);
     this.platforms = [
       { x: -300, y: FLOOR_Y, w: WORLD_WIDTH + 600, h: WORLD_HEIGHT - FLOOR_Y + 120, art: 'floor', floor: true },
@@ -539,7 +545,7 @@ export class GameEngine {
     const baseDamage = Number(source.damage) || (royal ? 24 : 12);
     return {
       id: `${source.id || 'enemy'}:${index}`,
-      name: source.name || (royal ? 'Xenomorph Queen' : 'Xenomorph Warrior'),
+      name: getLegacyEnemyAlteredLabelV87(source.id, source.name || (royal ? 'Xenomorph Queen' : 'Xenomorph Warrior')),
       biology,
       visualArchetype: visual.archetype,
       visualImageKey: visual.imageKey,
@@ -686,7 +692,7 @@ export class GameEngine {
 
   loop(time, generation = this.loopGeneration) {
     if (!this.running || generation !== this.loopGeneration) return;
-    const delta = Math.min(0.034, (time - this.last) / 1000 || 0);
+    const delta = Math.max(0, Math.min(0.034, (time - this.last) / 1000 || 0));
     this.last = time;
     this.gamepadInputV77?.poll();
     this.refreshEnemyAtlasAvailabilityV65();
@@ -943,6 +949,10 @@ export class GameEngine {
   }
 
   updateEnemy(enemy, delta) {
+    if (getEnemyUserCasteV87(enemy?.profileId)) {
+      if (!this.updateUserCampaignBehaviorV89?.(enemy, delta)) updateUserCasteActorV87(this, enemy, delta);
+      return;
+    }
     if (updateCetoV75(this, enemy, delta)) return;
     if (updateOvomorphCycleV66(this, enemy, delta)) return;
     if (updateEnemyBatchCombatV66(this, enemy, delta)) return;
@@ -1326,7 +1336,7 @@ export class GameEngine {
     else player.ammo -= 1;
     const reloadBonus = profile.mode === 'apc-turret' ? 1 : consumeTacticalReloadBonusV77(player, this.reloadWeaponV77(player));
     const mounted = profile.mode === 'apc-turret';
-    const origin = resolveCombatMuzzleV83(player, aim, mounted
+    const origin = (!mounted && resolveUserEquipmentMuzzleV95(player, aim)) || resolveCombatMuzzleV83(player, aim, mounted
       ? { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 } : {});
     const shot = buildCombatShotVectorsV83(aim, { speed: mounted ? 1100 : 890 })[0];
     this.bullets.push({
@@ -1400,13 +1410,16 @@ export class GameEngine {
 
   applyEnemyDamage(enemy, rawDamage, source = {}) {
     if (!enemy?.alive) return 0;
-    const damage = Math.max(1, rawDamage - enemy.armor * 0.35);
+    const armoredDamage = Math.max(1, rawDamage - enemy.armor * 0.35);
+    const damage = resolveDefenderGuardDamageV95(enemy, armoredDamage, source);
+    const guarded = damage < armoredDamage;
     enemy.health -= damage;
     enemy.alert = true;
     enemy.revealed = Math.max(enemy.revealed, 0.45);
     enemy.staggerClock = source.kind === 'ram' ? 0.7 : 0.12;
     enemy.hurtClock = Math.max(enemy.hurtClock || 0, 0.24);
-    this.spawnImpact(source.x || enemy.x, source.y || enemy.y + enemy.h * 0.45, enemy.biology === 'xenomorph' ? '#a7c742' : '#dc8a62');
+    this.spawnImpact(source.x || enemy.x, source.y || enemy.y + enemy.h * 0.45, guarded ? '#83becf' : enemy.biology === 'xenomorph' ? '#a7c742' : '#dc8a62');
+    if (guarded) this.onEvent?.({ type: 'defender-guard-v95', enemyId: enemy.id, damageBlocked: armoredDamage - damage });
     this.audio?.hit();
     if (enemy.health <= 0) this.defeatEnemy(enemy, source.owner);
     return damage;
@@ -1837,7 +1850,7 @@ export class GameEngine {
       if (enemy.dormant || (!enemy.alive && !(enemy.deathClock > 0))) return false;
       if (!this.camera) return true;
       const request = resolveEnemyAnimation(enemy);
-      const sheet = resolveSpriteSheet(request?.sheetId || enemy.visualSheetId);
+      const sheet = getEnemyDedicatedPoseV96(enemy) || resolveSpriteSheet(request?.sheetId || enemy.visualSheetId);
       const width = Math.max(Number(enemy.w) || 0, sheet?.renderWidth || 224);
       const height = Math.max(Number(enemy.h) || 0, sheet?.renderHeight || 170);
       const left = enemy.x + enemy.w / 2 - width / 2;
@@ -1849,7 +1862,7 @@ export class GameEngine {
 
   getVisibleEnemyAtlasSheetsV65(visibleEnemies = this.getVisibleEnemiesV65()) {
     return [
-      ...visibleEnemies.map((enemy) => resolveSpriteSheet(resolveEnemyAnimation(enemy)?.sheetId || enemy.visualSheetId)),
+      ...visibleEnemies.map((enemy) => getEnemyDedicatedPoseV96(enemy) || resolveSpriteSheet(resolveEnemyAnimation(enemy)?.sheetId || enemy.visualSheetId)),
       ...[this.player, this.coopEnabled ? this.coop : null]
         .filter((actor) => actor?.neuroVisualContract?.sheetId)
         .map((actor) => resolveSpriteSheet(actor.neuroVisualContract.sheetId))
@@ -1867,7 +1880,8 @@ export class GameEngine {
         void this.ensureEnemyAtlas(sheet);
         record = loader.recordStatus(sheet);
       }
-      return !record || record.status !== 'ready';
+      return !record || record.status !== 'ready'
+        || (getEnemyDedicatedPoseV96(sheet.profileId) && !isEnemyDedicatedPoseReadyV96(this.images.get(sheet.imageKey), sheet));
     });
     // Les demandes et retries ont été amorcés ci-dessus indépendamment de P/Échap.
     // La simulation ne redémarre qu'après chargement, sans retirer la pause utilisateur.
@@ -1976,13 +1990,21 @@ export class GameEngine {
   drawHazard(ctx, hazard) {
     if (!hazard.active) return;
     const profile = resolveMissionHazardArtV56(hazard.kind);
-    if (hazard.cetoHabitatId && profile) {
+    if (hazard.kind === 'flood' && hazard.cetoHabitatId && profile) {
       // Existing OpenAI bitmap water tiles repeat independently across this
-      // actual volume. Do not stretch one wave sheet across an entire room.
+      // actual volume. Native cells contain ~150px transparent top padding:
+      // align their measured water band, not the padded cell, to the waterline.
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * profile.fps);
+      const image = this.images.get(profile.world.key);
+      const safeFrame = Math.abs(frame) % profile.world.frameCount;
+      const band = profile.cetoVisibleBands?.[safeFrame];
       ctx.save(); ctx.beginPath(); ctx.rect(hazard.x, hazard.y, hazard.w, hazard.h); ctx.clip();
       for (let x = hazard.x; x < hazard.x + hazard.w; x += 256) {
-        this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
+        if (band && ready(image) && image.naturalWidth === 1024 && image.naturalHeight === 512) {
+          const inset = profile.cetoHorizontalInset;
+          ctx.drawImage(image, (safeFrame % 4) * 256 + inset, Math.floor(safeFrame / 4) * 256 + band[0],
+            256 - 2 * inset, band[1] - band[0], x, hazard.y, 256, hazard.h);
+        } else this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
         this.drawAtlasFrame(ctx, profile.accent, frame, x, hazard.y - 10, 256, 48);
       }
       ctx.restore(); return;
@@ -2146,6 +2168,24 @@ export class GameEngine {
   }
 
   drawEnemy(ctx, enemy) {
+    const dedicatedPose = getEnemyDedicatedPoseV96(enemy);
+    if (dedicatedPose) {
+      const drawn = drawEnemyDedicatedPoseV96(ctx, enemy, this.images.get(dedicatedPose.imageKey));
+      if (drawn && (enemy.alert || enemy.isBoss)) {
+        ctx.fillStyle = '#2b1616'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w, 4);
+        ctx.fillStyle = enemy.isBoss ? '#d27662' : '#be5551';
+        ctx.fillRect(enemy.x, enemy.y - 10, enemy.w * Math.max(0, enemy.health / enemy.maxHealth), 4);
+      }
+      return drawn;
+    }
+    if (getEnemyUserCasteV87(enemy?.profileId, enemy?.visualStateV95)) {
+      const drawn = drawUserCastePoseV87(ctx, enemy, this.images.get(enemy.visualImageKey));
+      if (drawn && (enemy.alert || enemy.isBoss)) {
+        ctx.fillStyle = '#2b1616'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w, 4);
+        ctx.fillStyle = enemy.isBoss ? '#d27662' : '#be5551'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w * Math.max(0, enemy.health / enemy.maxHealth), 4);
+      }
+      return drawn;
+    }
     let image;
     let sheetId = null;
     const requestedEnemySheet = resolveSpriteSheet(enemy.visualSheetId);

@@ -1,7 +1,9 @@
 import { GameEngine } from './game-production-runtime.js';
 import { ENEMIES } from './content-core-v50.js';
-import { getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
-import { createUserCasteActorV87, drawUserCastePoseV87, isUserCasteImageReadyV87, updateUserCasteActorV87 } from './enemy-user-pose-runtime-v87.js';
+import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
+import { getEnemyStaticPoseV96 as getEnemyUserCasteV87 } from './enemy-static-poses-v96.js';
+import { createUserCasteActorV87, drawUserCastePoseV87, isUserCasteImageReadyV87, updateUserCasteActorV87,
+  getUserPoseHabitatV95, confineUserPoseToHabitatV95 } from './enemy-user-pose-runtime-v87.js';
 import { getOvomorphChildIdV66, isOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { captureBioforgePhysicalV87, restoreBioforgePlayerPhysicalV87, restoreBioforgeEnemyPhysicalV87 } from './bioforge-physical-state-v87.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
@@ -633,10 +635,16 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     createBioforgeActorV87(entry) {
       const roster = getBioforgeRosterEntryV80(entry?.profileId);
       const source = ENEMIES.find((enemy) => enemy.id === entry?.profileId);
-      const supplied = getEnemyUserCasteV87(entry?.profileId);
+      const supplied = getEnemyUserCasteV87(entry?.profileId, entry?.visualStateV95);
       if (!roster || (!source && !supplied)) return null;
       const actor = supplied ? createUserCasteActorV87(entry, this.bioforgeLevelV80.world.floorY)
         : this.createEnemy(source, entry.index || 0, 0, this.bioforgeLevelV80.world.floorY, { boss: false, keyCarrier: false });
+      if (supplied?.locomotion === 'aquatic') {
+        const bounds = this.bioforgeLevelV80.arenaBounds, floor = this.bioforgeLevelV80.world.floorY;
+        this.userPoseAquaticHabitatsV95 = [{ id: 'bioforge-contained-water-v95', kind: 'water', active: true,
+          x: bounds.x, y: floor - 138, w: bounds.w, h: 138 }];
+        actor.habitatIdV95 = 'bioforge-contained-water-v95';
+      }
       return Object.assign(actor, {
         id: entry.id, profileId: roster.profileId, bioforgeCostV87: roster.cost,
         bioforgeSessionIdV87: this.bioforgeRootV80.activeSession?.id,
@@ -654,6 +662,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       let placed = null;
       if (restored && physical) {
         if (physical.maxHealth !== provisional.maxHealth || !restoreBioforgeEnemyPhysicalV87(provisional, physical) || !isInsideBioforgeArenaV80(provisional, this.bioforgeLevelV80)) return null;
+        if (provisional.locomotionV95 === 'aquatic' && !confineUserPoseToHabitatV95(provisional, getUserPoseHabitatV95(this, provisional))) return null;
         placed = provisional;
       } else {
         for (let offset = 0; offset < BIOFORGE_MAX_SPAWNS_V80; offset += 1) {
@@ -663,7 +672,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
           const support = this.platforms.find((surface) => surface.y === test.groundY && test.x + test.w / 2 >= surface.x && test.x + test.w / 2 <= surface.x + surface.w);
           if (!support || support.w < test.w) continue;
           test.x = Math.max(support.x, Math.min(support.x + support.w - test.w, test.x));
+          if (test.locomotionV95 === 'aquatic' && !confineUserPoseToHabitatV95(test, getUserPoseHabitatV95(this, test))) continue;
           if (!isInsideBioforgeArenaV80(test, this.bioforgeLevelV80) || this.walls.some((wall) => overlap(test, wall))) continue;
+          if (['flying', 'aquatic'].includes(test.locomotionV95) && this.platforms.some(surface => overlap(test, surface))) continue;
           // A legacy save has no physical snapshot. Preserve its valid authored
           // placement without imposing the new-print comfort margin retroactively.
           // Actual body overlap is still refused, including against the operator.
@@ -706,8 +717,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     advanceBioforgePhaseV80() {
       if (this.bioforgeLastErrorV80 === 'persistence-failed') return this.refuseBioforgeAfterPersistenceFailureV87();
       const session = this.bioforgeRootV80.activeSession;
+      const nextQueuedV95 = session?.queue.find(entry => entry.status === 'queued');
       const nextPose = session?.phase === 'printing'
-        ? getEnemyUserCasteV87(session.queue.find(entry => entry.status === 'queued')?.profileId) : null;
+        ? getEnemyDedicatedPoseV96(nextQueuedV95?.profileId) || getEnemyUserCasteV87(nextQueuedV95?.profileId, nextQueuedV95?.visualStateV95) : null;
       if (nextPose && !isUserCasteImageReadyV87(this.images.get(nextPose.imageKey), nextPose)) {
         void this.ensureEnemyAtlas(nextPose);
         const reason = this.getUserPoseIssueV87(nextPose);
@@ -979,7 +991,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         if (impact) {
           bullet.hit = true;
           if (impact.kind === 'enemy') {
-            this.applyEnemyDamage(impact.target, bullet.damage, { owner: bullet.owner, kind: 'bullet', x: impact.x, y: impact.y });
+            this.applyEnemyDamage(impact.target, bullet.damage, { ...bullet, kind: bullet.kind || 'bullet', x: impact.x, y: impact.y });
           }
         }
       }
@@ -988,7 +1000,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       for (const enemy of [...this.enemies]) {
         if (!enemy.alive) continue;
         const previousX = enemy.x;
-        const support = this.platforms.find(surface => Math.abs(surface.y - enemy.groundY) < .01
+        const support = !['flying', 'aquatic'].includes(enemy.locomotionV95) && this.platforms.find(surface => Math.abs(surface.y - enemy.groundY) < .01
           && enemy.x + enemy.w / 2 >= surface.x && enemy.x + enemy.w / 2 <= surface.x + surface.w);
         enemy.v52HurtClock = Math.max(0, Number(enemy.v52HurtClock || 0) - delta);
         if (getEnemyUserCasteV87(enemy.profileId)) updateUserCasteActorV87(this, enemy, delta);
@@ -1273,10 +1285,11 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     getVisibleEnemyAtlasSheetsV65(visibleEnemies = this.enemies || []) {
       const alive = visibleEnemies.filter(enemy => enemy.alive);
       const sheets = super.getVisibleEnemyAtlasSheetsV65(alive.filter(enemy => !getEnemyUserCasteV87(enemy.profileId)));
-      const imported = alive.map(enemy => getEnemyUserCasteV87(enemy.profileId)).filter(Boolean);
+      const imported = alive.map(enemy => getEnemyUserCasteV87(enemy.profileId, enemy.visualStateV95)).filter(Boolean);
       const session = this.bioforgeRootV80?.activeSession;
       if (['sealing', 'printing'].includes(session?.phase)) {
-        const next = getEnemyUserCasteV87(session.queue.find(entry => entry.status === 'queued')?.profileId);
+        const queued = session.queue.find(entry => entry.status === 'queued');
+        const next = getEnemyDedicatedPoseV96(queued?.profileId) || getEnemyUserCasteV87(queued?.profileId, queued?.visualStateV95);
         if (next) imported.push(next);
       }
       return [...new Map([...sheets, ...imported].map(sheet => [sheet.imageKey, sheet])).values()];
@@ -1358,12 +1371,20 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     drawBioforgeActorsV80(ctx) {
+      if (this.enemies.some(enemy => enemy.alive && enemy.locomotionV95 === 'aquatic')) {
+        const water = this.userPoseAquaticHabitatsV95?.[0];
+        if (water) {
+          ctx.save(); ctx.fillStyle = 'rgba(37,125,155,.18)'; ctx.fillRect(water.x, water.y, water.w, water.h);
+          ctx.strokeStyle = '#6dc9d9'; ctx.beginPath(); ctx.moveTo(water.x, water.y); ctx.lineTo(water.x + water.w, water.y); ctx.stroke();
+          ctx.fillStyle = '#b8e6ea'; ctx.font = '12px monospace'; ctx.fillText('BASSIN DE CONFINEMENT · ADAPTATION LABO', water.x + 16, water.y - 8); ctx.restore();
+        }
+      }
       for (const enemy of this.enemies) {
         if (!enemy.alive) continue;
         ctx.save();
         ctx.shadowColor = 'rgba(166, 210, 116, .42)';
         ctx.shadowBlur = 7;
-        const supplied = getEnemyUserCasteV87(enemy.profileId);
+        const supplied = getEnemyUserCasteV87(enemy.profileId, enemy.visualStateV95);
         if (supplied) drawUserCastePoseV87(ctx, enemy, this.images.get(supplied.imageKey));
         else super.drawEnemy?.(ctx, enemy);
         ctx.restore();

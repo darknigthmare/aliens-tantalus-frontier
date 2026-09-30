@@ -1,4 +1,5 @@
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
+import { resolveUserEquipmentLoadoutV95, loadUserEquipmentImagesV95, drawUserArmorV95, drawUserWeaponV95 } from './user-equipment-v95.js';
 import { attachCrewDeploymentV85, crewMovementV85, crewAimOffsetV85, crewSupportProfileV85,
   tickCrewRuntimeV85, stressCrewOnDamageV85, crewToolChargesV85, spendCrewToolV85,
   captureCrewRuntimeV85, restoreCrewRuntimeV85 } from './crew-runtime-v85.js';
@@ -26,6 +27,7 @@ import {
   drawPlayerSpriteV81
 } from './player-visual-contract-v81.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
+import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import { isEnemyBatchCombatV66, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
@@ -371,6 +373,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const squadRestored = pendingSquad && this.lastResumeResult?.applied ? this.restoreSquadState(pendingSquad) : 0;
       if (this.lastResumeResult?.applied) this.lastResumeResult = { ...this.lastResumeResult, squadRestored };
       this.pendingSquadResume = null;
+      this.configureUserEquipmentV95(options);
       this.onEvent({
         type: 'squad-ready',
         members: this.activeSquadActors().map((member) => ({ crewId: member.crewId, name: member.name, action: member.action })),
@@ -390,6 +393,33 @@ export function withV52MissionRuntime(BaseEngine) {
       this.player.spriteKey = 'echo9-marine';
       this.player.visualSheetId = PLAYER_VISUAL_CONTRACT_V81.fallback.sheetId;
       return contract;
+    }
+
+    configureUserEquipmentV95(options = {}) {
+      const loadout = resolveUserEquipmentLoadoutV95(options.userEquipmentV95);
+      // Neuro owns the deployed body and its melee contract. Keep the selected
+      // human loadout for a later deployment, but do not wear it or grant its bonus.
+      const humanEquipmentActive = !this.neuro?.active;
+      this.userEquipmentV95 = { ...loadout, active: humanEquipmentActive };
+      this.player.userEquipmentV95 = loadout.state;
+      delete this.player.playerVisualV95;
+      delete this.player.heldWeaponVisualV95;
+      const bonus = humanEquipmentActive ? loadout.armor?.armorBonus || 0 : 0;
+      this.player.maxArmor += bonus;
+      // Never refill protection when restoring a mission. Only the new deployment
+      // receives the extra capacity/initial armour, once after the legacy setup.
+      if (!this.lastResumeResult?.applied) this.player.armor = Math.min(this.player.maxArmor, this.player.armor + bonus);
+      else if (Number.isFinite(options.resumeState?.player?.armor)) this.player.armor = Math.max(0, Math.min(this.player.maxArmor, options.resumeState.player.armor));
+      if (loadout.weapon && humanEquipmentActive) {
+        this.player.weaponMode = 'rifle';
+        this.player.magazineSize = loadout.weapon.magazine;
+        if (!this.lastResumeResult?.applied) this.player.ammo = loadout.weapon.magazine;
+        this.weaponPickup.taken = true;
+      }
+      this.userEquipmentReadyV95 = loadUserEquipmentImagesV95(this.images, humanEquipmentActive ? loadout.state : null).then(results => {
+        this.onEvent?.({ type: 'user-equipment-ready-v95', items: results });
+        return results;
+      });
     }
 
     configureSpriteRuntime() {
@@ -814,7 +844,7 @@ export function withV52MissionRuntime(BaseEngine) {
 
     fire(actor) {
       if (this.isVehicleAccessLockedV59(actor)) return false;
-      const personal = actor?.crewV85?.personalEquipment && !actor.inVehicle;
+      const personal = actor?.crewV85?.personalEquipment && !actor.userEquipmentV95?.weaponId && !actor.inVehicle;
       if (personal && !actor.crewV85.weaponRuntime) return false;
       const previousWeapon = this.weaponRuntime;
       const previousBallistics = this.weaponBallistics;
@@ -2141,6 +2171,16 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     drawActor(ctx, actor) {
+      const equipmentV95 = actor === this.player && !this.neuro?.active ? this.userEquipmentV95 : null;
+      const armorV95 = equipmentV95?.armor;
+      if (armorV95 && drawUserArmorV95(ctx, actor, this.images?.get(armorV95.imageKey), armorV95)) {
+        // Human-sized collision stays independent of the static reference canvas.
+        actor.spriteHitbox = null;
+        const weaponV95 = equipmentV95.weapon;
+        if (weaponV95) drawUserWeaponV95(ctx, actor, this.images?.get(weaponV95.imageKey), weaponV95, armorV95);
+        if (actor.inCover) { ctx.strokeStyle = '#79c895'; ctx.strokeRect(actor.x - 3, actor.y + 32, actor.w + 6, actor.h - 29); }
+        return;
+      }
       const isCoop = actor === this.coop;
       const request = resolveIdentitySafePlayerAnimationV57(actor, Boolean(this.neuro?.active && actor === this.player));
       const entityId = getAnimationEntityKeyV57(isCoop ? 'coop' : 'player', actor, isCoop ? 'secondary' : 'primary');
@@ -2171,9 +2211,11 @@ export function withV52MissionRuntime(BaseEngine) {
         ctx.fillRect(actor.x + actor.w - 10, actor.y + 31, 5, 22);
         ctx.globalAlpha = 1;
       }
+      if (equipmentV95?.weapon) drawUserWeaponV95(ctx, actor, this.images?.get(equipmentV95.weapon.imageKey), equipmentV95.weapon);
     }
 
     drawEnemy(ctx, enemy) {
+      if (getEnemyDedicatedPoseV96(enemy)) return super.drawEnemy(ctx, enemy);
       const request = resolveEnemyAnimation(enemy);
       if (!request) {
         this.animationTelemetry?.fallbackFamilies?.add(enemy.biology || 'unknown');

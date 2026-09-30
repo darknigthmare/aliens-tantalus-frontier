@@ -435,6 +435,18 @@ export function resolveEnemyVisualOverrideV56(source = {}) {
     ? String(source.id ?? '').trim()
     : '';
 
+  // V91: the encyclopedia's display suffix must not turn this stable legacy
+  // identity into a Drone. This alias owns only the existing Boiler atlas;
+  // it neither borrows the native ACM pose nor promotes canonical fidelity.
+  if (profileId === 'enemy-014-boiler' && rawName === 'Boiler — Altered') {
+    return Object.freeze({
+      ...ENEMY_VISUAL_OVERRIDES_V56.Boiler,
+      identityStatus: ENEMY_VISUAL_OVERRIDE_IDENTITY_V56.adaptation,
+      referenceStatus: 'CANON_REFERENCE_ADAPTATION',
+      canonExact: false
+    });
+  }
+
   const direct = ENEMY_VISUAL_OVERRIDES_V56[rawName];
   if (direct) {
     const modifier = typeof source === 'object' && source !== null

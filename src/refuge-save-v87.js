@@ -22,6 +22,8 @@ export function projectRefugeHubSaveV87(hubState = {}) {
   result.deck = 1;
   result.roomId = SHIP_REFUGE_ANNEX_V87.parentRoomId;
   result.positionX = Math.round(Math.max(door.x, Math.min(door.x + door.w, requestedX)));
+  // Only new parent-height saves carry this field; never reuse the annex's local Y.
+  if ('positionY' in hubState) result.positionY = door.y + door.h - 92;
   result.facing = context.facing === -1 || context.facing === 1
     ? context.facing : hubState.facing === -1 ? -1 : 1;
 

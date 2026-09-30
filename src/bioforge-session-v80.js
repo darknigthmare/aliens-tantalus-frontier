@@ -3,7 +3,8 @@ import { V66_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v66.js';
 import { BIOFORGE_WORLD_V80 } from './bioforge-level-v80.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { sanitizeBioforgePhysicalV87 } from './bioforge-physical-state-v87.js';
-import { ENEMY_USER_CASTES_IDS_V87, getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
+import { ENEMY_DEDICATED_POSE_IDS_V99 as ENEMY_DEDICATED_POSE_IDS_V96, getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
+import { ENEMY_STATIC_POSE_IDS_V96 as ENEMY_USER_CASTES_IDS_V87, getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
 
 export const BIOFORGE_SCHEMA_V80 = 80;
 export const BIOFORGE_ROOT_KEY_V80 = 'bioforgeV80';
@@ -45,6 +46,7 @@ export const BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80 = Object.freeze([
   'enemy-020-k-series-yellow-xenomorph',
   'enemy-050-korari-stalker',
   'enemy-055-albino-chestburster',
+  ...ENEMY_DEDICATED_POSE_IDS_V96.filter(id => getEnemyDedicatedPoseV96(id)?.bioforgeEligible !== false),
   ...ENEMY_USER_CASTES_IDS_V87
 ]);
 
@@ -86,9 +88,14 @@ const READY_ASSET_BY_ID_V80 = new Map([
 
 function buildTerrestrialRosterV80() {
   return BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.map((profileId) => {
+    const dedicated = getEnemyDedicatedPoseV96(profileId);
+    if (dedicated) return Object.freeze({ ...dedicated, terrestrial: true, habitat: 'terrestrial',
+      dedicatedHistoricalPoseV96: true, behaviorStatus: 'historical-runtime-preserved' });
     // Supplied poses are deliberately not certified animation sheets.
     const supplied = getEnemyUserCasteV87(profileId);
-    if (supplied) return Object.freeze({ ...supplied, terrestrial: true, spriteKey: 'user-caste-static' });
+    if (supplied) return Object.freeze({ ...supplied, terrestrial: !['flying', 'aquatic'].includes(supplied.locomotion),
+      habitat: supplied.locomotion === 'aquatic' ? 'contained-water-v95' : supplied.locomotion === 'flying' ? 'contained-air-v95' : 'terrestrial',
+      spriteKey: 'user-caste-static' });
     const asset = READY_ASSET_BY_ID_V80.get(profileId);
     if (!asset
       || asset.identityVerified !== true
@@ -186,7 +193,9 @@ export function validateBioforgeCompositionV87(candidate) {
     if (profile && Number.isSafeInteger(line.quantity) && line.quantity > 0) {
       totalQuantity += line.quantity; totalCost += profile.cost * line.quantity;
     }
-    composition.push(Object.freeze({ lineId: line.lineId, profileId: profile?.profileId || null, quantity: line.quantity }));
+    const visualStateV95 = sanitizeEnemyStaticPoseStateV95(profile?.profileId, line.visualStateV95);
+    composition.push(Object.freeze({ lineId: line.lineId, profileId: profile?.profileId || null, quantity: line.quantity,
+      ...(visualStateV95 ? { visualStateV95 } : {}) }));
   }
   if (totalQuantity > BIOFORGE_MAX_TOTAL_V87) errors.push('composition-exceeds-total');
   return Object.freeze({ ok: errors.length === 0, errors: Object.freeze([...new Set(errors)]),
@@ -239,6 +248,7 @@ export function buildBioforgePrintQueueV80({ sessionId, profileId, quantity, com
     index,
     lineId: line.lineId,
     profileId: line.profileId,
+    ...(line.visualStateV95 ? { visualStateV95: line.visualStateV95 } : {}),
     cost: getBioforgeRosterEntryV80(line.profileId).cost,
     status: 'queued',
     printedAt: null,
