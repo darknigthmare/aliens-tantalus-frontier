@@ -11,7 +11,7 @@ const modules = [
 
 test('V88 precaches the complete new gameplay, opening and title dependency set', async () => {
   const worker = await readFile('sw.js', 'utf8');
-  assert.match(worker, /atf-v86-reference-library-v100-shell-1/);
+  assert.match(worker, /atf-v86-reference-library-v100-shell-2/);
   for (const name of modules) {
     await access(`src/${name}.js`);
     assert.ok(worker.includes(`'/src/${name}.js'`), name);

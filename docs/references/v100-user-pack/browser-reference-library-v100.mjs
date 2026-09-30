@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 const base = process.env.APP_URL || 'http://127.0.0.1:4308';
 const output = resolve(process.env.QA_OUTPUT || '.qa/v100-browser');
 const phase = process.env.QA_PHASE || 'full';
+const directlyMobile = phase === 'mobile';
 await mkdir(output, { recursive: true });
 const info = await fetch('http://127.0.0.1:9266/json/version').then(r => r.json());
 const ws = new WebSocket(info.webSocketDebuggerUrl);
@@ -73,20 +74,24 @@ try {
   ({sessionId:session}=await cdp('Target.attachToTarget',{targetId,flatten:true},true));
   for(const domain of ['Page','Runtime','Network','DOMStorage']) await cdp(domain+'.enable');
   await cdp('Network.setBypassServiceWorker',{bypass:true});
-  await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+  await cdp('Emulation.setDeviceMetricsOverride',directlyMobile?{width:390,height:844,deviceScaleFactor:1,mobile:true}:{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
   await cdp('Page.navigate',{url:base+'/?qa=xeno-trials-v96'});
+  await cdp('Page.bringToFront');
   await until('globalThis.__ATF_V51__&&globalThis.__ATF_V61__&&!document.querySelector("#boot")','application boot',60000);
   const boot=await read('({title:document.title,bodyLength:document.body.innerText.length,overlay:!!document.querySelector(".vite-error-overlay,[data-nextjs-dialog],#webpack-dev-server-client-overlay"),buttons:[...document.querySelectorAll("button")].filter(e=>e.getBoundingClientRect().width&&e.getBoundingClientRect().height).map(e=>({text:e.innerText,view:e.dataset.view}))})');
   assert.ok(boot.bodyLength>100&&!boot.overlay&&boot.buttons.length);check('boot',boot);await capture('00-boot');
   if(phase!=='boot') {
     await read(`(async()=>{const {createDefaultSave}=await import('/src/save.js');const s=createDefaultSave();s.onboardingV84=null;s.openingV88=null;s.portMeridienV90=null;s.needsPlayerCreationV84=false;s.shipPortV1=null;s.scene='hub';__ATF_V51__.saveSystem.commit(s);__ATF_V61__.titleScreen.hide();__ATF_V51__.showView('settings');})()`);
+    if(directlyMobile) await click('#menu-toggle');
     await click('[data-view="bestiary"]');
+    if(directlyMobile&&await read('document.querySelector(".rail").classList.contains("open")'))await click('#menu-toggle');
     await until(`document.querySelector(${q(root)})?.getBoundingClientRect().width>0`,'library access');
     assert.match(await count(),/^108 \/ 108 images/); assert.equal(await read('document.querySelectorAll("[data-reference-entry]").length'),24);
     await until('document.querySelector("[data-reference-detail] img").naturalWidth>0','first original');
     check('nativeNavigationAndInitialCount',{count:await count(),initial:await detail()});
     await read(`document.querySelector(${q(root)}).scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-90)`);await capture('01-desktop-library');
     await wait(250);const beforeSave=await saved(),storageStart=storageEvents.length;
+    if(!directlyMobile) {
     await fill('[data-reference-search]','introuvable v100 zzz');
     assert.match(await count(),/^0 \/ 108 images/);assert.match((await detail()).text,/Aucune image/);
     await click('[data-reference-reset]');assert.match(await count(),/^108 \/ 108 images/);
@@ -123,21 +128,49 @@ try {
     await fill('[data-reference-search]','Offspring Adult');await click('[data-reference-entry="pack-v100-xeno-offspring-adult"]');
     const offspring=await detail();assert.match(offspring.text,/ailé/);assert.match(offspring.text,/pas une|Ne pas déclarer|non démontrée/);check('explicitIdentityWarnings',offspring);
     await click('[data-reference-reset]');const pages=[await count()];
-    for(const expected of [48,72,96,108]){await click('[data-reference-more]');assert.equal(await read('document.querySelectorAll("[data-reference-entry]").length'),expected);pages.push(await count());}
+    const firstImageHandle=(await cdp('Runtime.evaluate',{expression:'document.querySelector("[data-reference-entry] img")',returnByValue:false})).result.objectId;
+    for(const expected of [48,72,96,108]){
+      await click('[data-reference-more]');assert.equal(await read('document.querySelectorAll("[data-reference-entry]").length'),expected);pages.push(await count());
+      const identity=await cdp('Runtime.callFunctionOn',{objectId:firstImageHandle,functionDeclaration:'function(){return this===document.querySelector("[data-reference-entry] img")}',returnByValue:true});
+      assert.equal(identity.result.value,true,'Pagination must preserve existing IMG nodes');
+    }
+    await cdp('Runtime.releaseObject',{objectId:firstImageHandle});
     assert.equal(await read('document.querySelector("[data-reference-more]").hidden'),true);check('pagination',pages);
+    check('paginationPreservesExistingImages',{firstImageNodePreservedAcrossFourPages:true});
     const sources=await read('[...document.querySelectorAll("[data-reference-entry] img")].map(i=>i.src)');assert.equal(new Set(sources).size,108);
     const decoded=[];
     for(let i=0;i<sources.length;i+=8){decoded.push(...await read(`Promise.all(${JSON.stringify(sources.slice(i,i+8))}.map(src=>new Promise(resolve=>{const image=new Image();image.onload=async()=>{try{await image.decode();resolve({src,width:image.naturalWidth,height:image.naturalHeight,decoded:true})}catch(e){resolve({src,error:String(e)})}};image.onerror=()=>resolve({src,error:'image-load-error'});image.src=src;})))`));}
     assert.equal(decoded.length,108);assert.ok(decoded.every(x=>x.decoded&&x.width&&x.height));check('allOriginalsBrowserDecoded',decoded);
+    const lastId=await read('[...document.querySelectorAll("[data-reference-entry]")].at(-1).dataset.referenceEntry');
+    await click('[data-reference-entry="'+lastId+'"]');assert.equal((await detail()).id,lastId);
     await click('[data-reference-reset]');
+    const resetSelection=await read('({selected:document.querySelector("[data-reference-detail]").dataset.referenceId,visible:[...document.querySelectorAll("[data-reference-entry]")].map(e=>e.dataset.referenceEntry),scrollTop:document.querySelector(".reference-library-v100__grid").scrollTop})');
+    assert.equal(resetSelection.visible.length,24);assert.ok(resetSelection.visible.includes(resetSelection.selected));assert.equal(resetSelection.scrollTop,0);
+    check('resetAfterOffPageSelection',{previous:lastId,...resetSelection});
     assert.equal(await saved(),beforeSave,'Filters, navigation and pagination must preserve localStorage exactly');
     const filterStorageEvents=storageEvents.slice(storageStart);assert.deepEqual(filterStorageEvents,[],'No local/session storage rewrites during library use');check('noSaveWrites',{byteIdentical:true,storageEvents:filterStorageEvents.length});
+    }
     await cdp('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
     await read(`document.querySelector(${q(root)}).scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-90)`);await wait(150);
     const mobile=await read(`({viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth,library:document.querySelector(${q(root)}).getBoundingClientRect().toJSON(),controls:[...document.querySelectorAll(${q(root+' input, '+root+' select, '+root+' button')})].filter(e=>e.getBoundingClientRect().width>0).map(e=>({tag:e.tagName,left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right,width:e.getBoundingClientRect().width}))})`);
     assert.ok(mobile.scrollWidth<=mobile.viewport+1);assert.ok(mobile.controls.every(x=>x.left>=-1&&x.right<=mobile.viewport+1));check('mobileNoHorizontalOverflow',mobile);await capture('03-mobile-library');
     await choose('[data-reference-filter="lineage"]','Blueluminescent');assert.match(await count(),/^6 \/ 108 images/);
     await read('document.querySelector("[data-reference-count]").scrollIntoView({block:"start",behavior:"instant"});window.scrollBy(0,-90)');await capture('05-mobile-cards');
+    const mobileGrid=await read(`(()=>{const grid=document.querySelector('.reference-library-v100__grid'),r=grid.getBoundingClientRect();return {grid:{...r.toJSON(),scrollTop:grid.scrollTop,scrollHeight:grid.scrollHeight},images:[...grid.querySelectorAll('img')].map(i=>{const s=getComputedStyle(i);return {src:i.currentSrc,complete:i.complete,naturalWidth:i.naturalWidth,rect:i.getBoundingClientRect().toJSON(),style:{opacity:s.opacity,visibility:s.visibility,display:s.display,objectFit:s.objectFit,objectPosition:s.objectPosition,filter:s.filter,transform:s.transform,contentVisibility:s.contentVisibility}}})}})()`);
+    check('mobileGridPaintDiagnostics',mobileGrid);
+    // Exercise the actual inner-grid scroll; preserve both before/after captures for visual review.
+    await cdp('Input.dispatchMouseEvent',{type:'mouseWheel',x:Math.min(350,mobileGrid.grid.right-12),y:Math.max(110,Math.min(420,mobileGrid.grid.top+100)),deltaX:0,deltaY:directlyMobile?121:-500});
+    await wait(500);await capture('06-mobile-cards-after-scroll');
+    if(['1','unclip-only'].includes(process.env.QA_PAINT_PROBES)) {
+      // Explicitly authorized diagnostic-only DOM changes in the disposable context, never application files.
+      report.scope.push('Diagnostic paint probes temporarily change IMG loading and grid maxHeight only in this disposable browser DOM; these captures are not unmodified application acceptance evidence.');
+      if(process.env.QA_PAINT_PROBES!=='unclip-only') {
+        await read(`document.querySelectorAll('.reference-library-v100__grid img').forEach(i=>i.loading='eager')`);
+        await wait(500);await capture('07-diagnostic-eager');
+      }
+      await read(`document.querySelector('.reference-library-v100__grid').style.maxHeight='none'`);
+      await wait(500);await capture('08-diagnostic-unclipped');
+    }
     await click('[data-reference-entry="pack-v100-xeno-blueluminescent-queen"]');await until('document.querySelector("[data-reference-detail] img").naturalWidth>0','mobile queen');
     await read('document.querySelector("[data-reference-detail]").scrollIntoView({block:"start",behavior:"instant"});window.scrollBy(0,-90)');await wait(100);await capture('04-mobile-detail');
     const mobileDetail=await read('({id:document.querySelector("[data-reference-detail]").dataset.referenceId,fit:getComputedStyle(document.querySelector("[data-reference-detail] img")).objectFit,viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth,link:document.querySelector("[data-reference-detail] a").href})');assert.equal(mobileDetail.fit,'contain');assert.ok(mobileDetail.scrollWidth<=mobileDetail.viewport+1);check('mobileSelectionAndWholeOriginal',mobileDetail);

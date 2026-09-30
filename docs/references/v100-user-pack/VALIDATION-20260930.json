@@ -2,13 +2,13 @@
   "schema": "v100-validation/1",
   "checkedAt": "2026-09-30T02:36:09.4401566Z",
   "cleanTests": {
-    "pass": 3940,
+    "pass": 3944,
     "skipped": 1,
     "fail": 0,
-    "tests": 3941
+    "tests": 3945
   },
-  "workingTreeTests": {
-    "note": "Includes one independent Ceto test not shipped",
+  "preMobileFixWorkingTreeTests": {
+    "note": "Earlier working-tree run; includes one independent Ceto test not shipped. Final mobile fix is covered by cleanTests.",
     "pass": 3941,
     "skipped": 1,
     "fail": 0,
@@ -29,9 +29,12 @@
       "cocoonViewsRetained",
       "explicitIdentityWarnings",
       "pagination",
+      "paginationPreservesExistingImages",
+      "resetAfterOffPageSelection",
       "allOriginalsBrowserDecoded",
       "noSaveWrites",
       "mobileNoHorizontalOverflow",
+      "mobileGridPaintDiagnostics",
       "mobileSelectionAndWholeOriginal",
       "mobileSaveUnchanged"
     ]
@@ -50,9 +53,12 @@
       "cocoonViewsRetained",
       "explicitIdentityWarnings",
       "pagination",
+      "paginationPreservesExistingImages",
+      "resetAfterOffPageSelection",
       "allOriginalsBrowserDecoded",
       "noSaveWrites",
       "mobileNoHorizontalOverflow",
+      "mobileGridPaintDiagnostics",
       "mobileSelectionAndWholeOriginal",
       "mobileSaveUnchanged"
     ]
@@ -79,5 +85,14 @@
     "108 documentary originals; not 89 new combatants",
     "No newly validated physical gameplay scaling",
     "Local Vercel production build verified; publication is a separate gate"
-  ]
+  ],
+  "mobileRegression": {
+    "coldMobileChecksPassed": 6,
+    "consoleErrors": 0,
+    "paintProbesEnabled": false,
+    "visualReview": "Six Blueluminescent thumbnails visible in two columns, complete Queen original; source and built desktop-to-mobile and cold-mobile captures reviewed.",
+    "fixes": ["Page scrolling on mobile avoids blank nested-scroll thumbnails", "Pagination preserves existing image elements", "Reset restores a visible selected card and the grid origin", "Related-view selection is included in the rendered page"],
+    "cache": "atf-v86-reference-library-v100-shell-2"
+  },
+  "finalBuildTrialsLayout": { "passed": 6, "fighters": 53, "synthetics": 13, "arenas": 6, "combatReplayedThisRun": false }
 }

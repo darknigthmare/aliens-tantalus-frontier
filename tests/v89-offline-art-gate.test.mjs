@@ -6,7 +6,7 @@ import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
 
 test('V89 keeps exercise interruption and title context available offline', async () => {
   const worker = await readFile('sw.js', 'utf8');
-  assert.match(worker, /atf-v86-reference-library-v100-shell-1/);
+  assert.match(worker, /atf-v86-reference-library-v100-shell-2/);
   const filter = createBuildAssetFilter(process.cwd());
   for (const name of ['opening-exercise-v89', 'hub-opening-exercise-v89', 'title-menu-context-v89']) {
     await access('src/' + name + '.js');

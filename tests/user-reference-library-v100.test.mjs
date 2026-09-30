@@ -122,3 +122,84 @@ test('V100 browser dependency graph is precached without preloading the original
   assert.ok(worker.includes("'/user-reference-library-v100.css'"));
   assert.equal(worker.includes('/assets/user/pack-v100/'), false);
 });
+
+function interactiveLibrary({ mobile = false } = {}) {
+  const created = [];
+  const documentRef = { defaultView: { matchMedia: () => ({ matches: mobile }) }, createElement(tagName) {
+    const handlers = new Map();
+    const matches = (element, selector) => selector === '[data-reference-entry]'
+      ? Boolean(element.dataset.referenceEntry) : element.tagName === selector;
+    const element = {
+      tagName, children: [], dataset: {}, attributes: {}, textContent: '', scrollTop: 0,
+      append(...children) { this.children.push(...children); },
+      replaceChildren(...children) { this.children = children; },
+      setAttribute(key, value) { this.attributes[key] = value; },
+      addEventListener(type, handler) { handlers.set(type, handler); },
+      trigger(type) { handlers.get(type)?.(); },
+      click() { this.trigger('click'); },
+      focus() { this.focused = true; },
+      scrollIntoView() { this.scrolledIntoView = true; },
+      querySelectorAll(selector) {
+        return this.children.flatMap(child => [ ...(matches(child, selector) ? [child] : []), ...child.querySelectorAll(selector) ]);
+      },
+      querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
+    };
+    created.push(element);
+    return element;
+  } };
+  const section = createUserReferenceLibraryV100(documentRef);
+  const grid = created.find(element => element.className === 'reference-library-v100__grid');
+  const detail = created.find(element => element.dataset.referenceDetail);
+  return { section, grid, detail,
+    control: key => created.find(element => element.dataset[key]),
+    filter: key => created.find(element => element.dataset.referenceFilter === key),
+    selected: () => grid.querySelectorAll('[data-reference-entry]').filter(element => element.attributes['aria-pressed'] === 'true')
+  };
+}
+
+test('V100 pagination appends cards without reloading old originals or resetting grid scroll', () => {
+  const ui = interactiveLibrary();
+  const firstImages = ui.grid.querySelectorAll('img');
+  ui.grid.scrollTop = 300;
+  ui.control('referenceMore').click();
+  assert.equal(ui.grid.children.length, 48);
+  assert.deepEqual(ui.grid.querySelectorAll('img').slice(0, 24), firstImages);
+  assert.equal(ui.grid.scrollTop, 300);
+  assert.equal(ui.grid.children[24].querySelector('button').focused, true);
+});
+
+test('V100 reset after a later-page selection restores a visible selected card and grid origin', () => {
+  const ui = interactiveLibrary();
+  ui.control('referenceMore').click();
+  ui.grid.children[35].querySelector('button').click();
+  const previousId = ui.detail.dataset.referenceId;
+  ui.grid.scrollTop = 300;
+  ui.control('referenceReset').click();
+  assert.equal(ui.grid.children.length, 24);
+  assert.equal(ui.grid.scrollTop, 0);
+  assert.equal(ui.selected().length, 1);
+  assert.equal(ui.selected()[0].dataset.referenceEntry, ui.detail.dataset.referenceId);
+  assert.notEqual(ui.detail.dataset.referenceId, previousId);
+});
+
+test('V100 lineage navigation reveals the selected card even outside the first page', () => {
+  const ui = interactiveLibrary();
+  const lineage = ui.filter('lineage'); lineage.value = 'Blueluminescent'; lineage.trigger('change');
+  const sibling = ui.detail.querySelector('select');
+  sibling.value = 'pack-v100-xeno-blueluminescent-queen'; sibling.trigger('change');
+  assert.equal(ui.detail.dataset.referenceId, sibling.value);
+  assert.equal(ui.selected().length, 1);
+  assert.equal(ui.selected()[0].dataset.referenceEntry, sibling.value);
+  assert.ok(ui.grid.children.length <= 108);
+});
+
+test('V100 mobile opens the selected dossier using page scroll instead of a clipped inner grid', async () => {
+  const ui = interactiveLibrary({ mobile: true });
+  ui.grid.children[1].querySelector('button').click();
+  assert.equal(ui.detail.focused, true);
+  assert.equal(ui.detail.scrolledIntoView, true);
+  const desktop = interactiveLibrary(); desktop.grid.children[1].querySelector('button').click();
+  assert.equal(desktop.detail.scrolledIntoView, undefined);
+  const css = await readFile(new URL('../user-reference-library-v100.css', import.meta.url), 'utf8');
+  assert.match(css, /@media \(max-width: 780px\)[\s\S]*\.reference-library-v100__grid \{[^}]*max-height: none; overflow: visible;/u);
+});

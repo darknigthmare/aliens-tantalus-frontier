@@ -81,24 +81,31 @@ export function createUserReferenceLibraryV100(documentRef, { onOpenEnemy = null
   }
   const sort = field('Trier', node('select')); sort.dataset.referenceFilter = 'sort';
   for (const [value, label] of [['name', 'Nom'], ['lineage', 'Lignée'], ['stage', 'Stade']]) { const option = node('option', label); option.value = value; sort.append(option); }
-  sort.addEventListener('change', () => { filters.sort = sort.value; render(); });
+  sort.addEventListener('change', () => { filters.sort = sort.value; render({ revealSelected: true }); });
   const altered = field('Altered uniquement', node('input')); altered.type = 'checkbox'; altered.dataset.referenceAltered = 'true';
   altered.addEventListener('change', () => { filters.alteredOnly = altered.checked; limit = 24; render(); });
   const reset = node('button', 'Réinitialiser les filtres', 'button'); reset.type = 'button'; reset.dataset.referenceReset = 'true';
   reset.addEventListener('click', () => {
     for (const key of Object.keys(controlsByKey)) { controlsByKey[key].value = 'all'; filters[key] = 'all'; }
-    search.value = ''; filters.search = ''; sort.value = 'name'; filters.sort = 'name'; altered.checked = false; filters.alteredOnly = false; limit = 24; render();
+    search.value = ''; filters.search = ''; sort.value = 'name'; filters.sort = 'name'; altered.checked = false; filters.alteredOnly = false; limit = 24; selectedId = null; render();
   }); controls.append(reset); section.append(controls);
   const count = node('p', '', 'eyebrow'); count.setAttribute('aria-live', 'polite'); count.dataset.referenceCount = 'true';
   const body = node('div', '', 'reference-library-v100__body');
   const left = node('div'); const grid = node('div', '', 'reference-library-v100__grid');
   const more = node('button', 'Afficher 24 images de plus', 'button'); more.type = 'button'; more.dataset.referenceMore = 'true';
   more.addEventListener('click', () => {
-    const oldLimit = limit; limit += 24; renderList();
+    const oldLimit = limit; limit += 24; renderList({ appendOnly: true });
     grid.children[oldLimit]?.querySelector('button')?.focus();
   });
   const detail = node('article', '', 'reference-library-v100__detail'); detail.tabIndex = -1; detail.dataset.referenceDetail = 'true';
   left.append(grid, more); body.append(left, detail); section.append(count, body);
+
+  function focusDetail() {
+    detail.focus({ preventScroll: true });
+    // The mobile grid uses page scrolling, so bring the selected dossier into view.
+    if (documentRef.defaultView?.matchMedia?.('(max-width: 780px)').matches)
+      detail.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
 
   function renderDetail() {
     detail.replaceChildren();
@@ -142,13 +149,15 @@ export function createUserReferenceLibraryV100(documentRef, { onOpenEnemy = null
       select.addEventListener('change', () => {
         if (!select.value) return;
         // Reset incompatible filters so a sibling cannot become an invisible selection.
-        reset.click(); selectedId = select.value; render(); detail.focus({ preventScroll: true });
+        reset.click(); selectedId = select.value; render({ revealSelected: true }); focusDetail();
       }); label.append(select); detail.append(label);
     }
   }
-  function renderList() {
-    grid.replaceChildren();
-    for (const entry of visible.slice(0, limit)) {
+  function renderList({ appendOnly = false } = {}) {
+    // Pagination keeps already loaded images and their focus/scroll position.
+    const start = appendOnly ? grid.children.length : 0;
+    if (!appendOnly) grid.replaceChildren();
+    for (const entry of visible.slice(start, limit)) {
       const card = node('article'); const button = node('button'); button.type = 'button'; button.dataset.referenceEntry = entry.id;
       button.setAttribute('aria-pressed', String(entry.id === selectedId));
       const image = node('img'); image.src = entry.path; image.alt = ''; image.loading = 'lazy'; image.decoding = 'async';
@@ -156,16 +165,18 @@ export function createUserReferenceLibraryV100(documentRef, { onOpenEnemy = null
       button.addEventListener('click', () => {
         selectedId = entry.id;
         for (const other of grid.querySelectorAll('[data-reference-entry]')) other.setAttribute('aria-pressed', String(other.dataset.referenceEntry === selectedId));
-        renderDetail(); detail.focus({ preventScroll: true });
+        renderDetail(); focusDetail();
       }); card.append(button); grid.append(card);
     }
     more.hidden = visible.length <= limit;
     count.textContent = `${visible.length} / ${entries.length} images · ${Math.min(limit, visible.length)} affichées · aucun remplacement`;
   }
-  function render() {
+  function render({ revealSelected = false } = {}) {
     visible = filterUserReferencesV100(entries, filters);
-    if (!visible.some(item => item.id === selectedId)) selectedId = visible[0]?.id || null;
-    renderList(); renderDetail();
+    const selectedIndex = visible.findIndex(item => item.id === selectedId);
+    if (selectedIndex < 0 || (selectedIndex >= limit && !revealSelected)) selectedId = visible[0]?.id || null;
+    if (selectedIndex >= limit && revealSelected) limit = Math.ceil((selectedIndex + 1) / 24) * 24;
+    renderList(); grid.scrollTop = 0; renderDetail();
   }
   render(); return section;
 }
