@@ -55,7 +55,7 @@ import { getTitleSceneShipOptionsV87, sanitizeTitleScenePresentationV79 } from '
 import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
-import { ENEMY_ENCYCLOPEDIA_CATALOG_V88 } from './enemy-user-campaign-v88.js';
+import { CATALOG_COUNTS_V62, CATALOG_RECORDS_V62 } from './catalog-runtime-v62.js';
 import { getEnemyDiscoveryV88, recordEnemyDiscoveryV88 } from './enemy-discovery-v88.js';
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
@@ -1319,9 +1319,9 @@ function setupCatalogsV62() {
     catalogs: ['enemies'],
     predicate: (record) => {
       const biology = byId('biology-filter').value;
-      return biology === 'all' || ENEMY_ENCYCLOPEDIA_CATALOG_V88.find((entry) => entry.id === record.id)?.biology === biology;
+      return biology === 'all' || record.taxonomy.family === biology;
     },
-    limit: ENEMY_ENCYCLOPEDIA_CATALOG_V88.length,
+    limit: CATALOG_COUNTS_V62.enemies,
     getDiscoveryV88: id => getEnemyDiscoveryV88(saveSystem.data.enemyDiscoveryV88, id)
   });
   vehicleCatalogV62 = new CatalogWorkbenchV62({
@@ -1379,10 +1379,11 @@ function renderEnemies() {
     const effects = createUserReferenceEffectsGalleryV95(document);
     if (effects) byId('enemy-catalog-v62').insertAdjacentElement('afterend', effects);
   }
-  byId('enemy-count-v88').textContent = `${ENEMY_ENCYCLOPEDIA_CATALOG_V88.length} DOSSIERS // COMPORTEMENTS & HABITATS`;
+  const archived = CATALOG_RECORDS_V62.filter(record => record.catalog === 'enemies' && record.catalogPolicyV105?.archived).length;
+  byId('enemy-count-v88').textContent = `${CATALOG_COUNTS_V62.enemies} DOSSIERS // ${CATALOG_COUNTS_V62.enemies - archived} COURANTS · ${archived} ARCHIVES HISTORIQUES`;
   enemyCatalogV62.setPredicate((record) => {
     const biology = byId('biology-filter').value;
-    return biology === 'all' || ENEMY_ENCYCLOPEDIA_CATALOG_V88.find((entry) => entry.id === record.id)?.biology === biology;
+    return biology === 'all' || record.taxonomy.family === biology;
   });
 }
 

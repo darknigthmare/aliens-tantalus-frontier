@@ -25,7 +25,7 @@ export class XenoTrialsUiV96 {
       <div class="xt-layout" data-xt="layout"><aside class="xt-roster" data-xt="stable"><h3>Votre écurie</h3>
       <div class="xt-filters">
         <label>Rechercher<input type="search" data-xt="search" placeholder="Nom du spécimen" maxlength="80"></label>
-        <label>Famille<select data-xt="family"><option value="all">Toutes les familles</option><option value="xenomorph">Xénomorphes</option><option value="synthetic">Synthétiques / machines</option><option value="pathogen">Pathogènes</option></select></label>
+        <label>Famille<select data-xt="family"><option value="all">Toutes les familles</option><option value="xenomorph">Xénomorphes</option><option value="synthetic">Synthétiques / machines</option><option value="pathogen">Pathogènes</option><option value="engineer">Ingénieurs</option></select></label>
         <label>Rôle<select data-xt="role"><option value="all">Tous les rôles</option>${Object.entries(roleLabel).map(([id,label]) => `<option value="${id}">${label}</option>`).join('')}</select></label>
         <label>Faction simulée<select data-xt="faction-filter"><option value="all">Toutes les factions</option>${options(FACTIONS)}</select></label>
         <label>Disponibilité<select data-xt="ownership"><option value="all">Toute l’écurie</option><option value="owned">Acquis</option><option value="locked">À débloquer</option></select></label>

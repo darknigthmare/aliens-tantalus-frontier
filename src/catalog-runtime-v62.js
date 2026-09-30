@@ -6,6 +6,7 @@ import {
 } from './content-core-v50.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import { getEnemyPhysicalSizeV100 } from './enemy-physical-size-v100.js';
+import { ENGINEER_REFERENCE_DOSSIERS_V105, ENGINEER_REFERENCE_PROFILE_IDS_V105, getEnemyCatalogPolicyV105, isCatalogRecordVisibleV105 } from './enemy-catalog-taxonomy-v105.js';
 import { enemyDedicatedCatalogVisualV99 as enemyDedicatedCatalogVisualV96, getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { ENEMY_ENCYCLOPEDIA_CATALOG_V88, getEnemyUserCampaignV88, userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 import {
@@ -58,10 +59,18 @@ export const HUMAN_COMPARISON_REFERENCE_V62 = Object.freeze({
   status: 'comparison-reference-not-canon'
 });
 
+const engineerReferenceByProfileV105 = new Map(ENGINEER_REFERENCE_DOSSIERS_V105.flatMap(reference => {
+  const profileId = ENGINEER_REFERENCE_PROFILE_IDS_V105[reference.id];
+  return profileId && ENEMY_ENCYCLOPEDIA_CATALOG_V88.some(entry => entry.id === profileId)
+    ? [[profileId, reference]] : [];
+}));
+const engineerReferenceAliasesV105 = new Map([...engineerReferenceByProfileV105]
+  .map(([profileId, reference]) => [reference.id, profileId]));
 const CATALOGS = Object.freeze({
   weapons: WEAPONS,
   equipment: EQUIPMENT,
-  enemies: ENEMY_ENCYCLOPEDIA_CATALOG_V88,
+  enemies: Object.freeze([...ENEMY_ENCYCLOPEDIA_CATALOG_V88,
+    ...ENGINEER_REFERENCE_DOSSIERS_V105.filter(reference => !engineerReferenceAliasesV105.has(reference.id))]),
   vehicles: VEHICLES
 });
 
@@ -197,6 +206,7 @@ function equipmentVisual(entry) {
 }
 
 function enemyVisual(entry) {
+  if (entry.documentaryReferenceV105) return null;
   const native = enemyDedicatedCatalogVisualV96(entry.id) || userCasteStaticVisualV88(entry.id);
   if (native) return native;
   const profile = resolveEnemyVisualProfile(entry);
@@ -266,6 +276,8 @@ const VISUAL_RESOLVERS = Object.freeze({
 });
 
 const catalogProvenance = (entry, visual) => freezeObject({
+  ...(entry.documentaryReferenceV105 ? { work: entry.source, encounterStatus: 'documentary-only',
+    encounterNote: 'Original consultable ; aucune admission en campagne, Bioforge ou Xeno Trials.' } : {}),
   ...(getEnemyUserCampaignV88(entry.id) ? { work: entry.source, encounterStatus: entry.encounterStatus, encounterNote: entry.encounterNote } : {}),
   provenance: knownString(entry.provenance),
   referenceStatus: knownString(visual?.identity?.referenceStatus),
@@ -286,6 +298,10 @@ const canonClaimsFor = (kind, entry, visual) => {
     name: knownString(entry.name),
     canonicalName: knownString(resolveEquipmentVisualProfileV56(entry)?.canonicalName)
   });
+  if (kind === 'enemies' && getEnemyCatalogPolicyV105(entry).personnel) return freezeObject({
+    name: knownString(entry.name),
+    biology: getEnemyCatalogPolicyV105(entry).biology
+  });
   if (kind === 'enemies') return freezeObject({
     name: knownString(entry.name),
     biology: knownString(entry.biology),
@@ -300,6 +316,7 @@ const canonClaimsFor = (kind, entry, visual) => {
 };
 
 const gameplayStatsFor = (kind, entry) => {
+  if (entry.documentaryReferenceV105) return freezeObject({});
   if (kind === 'weapons') return freezeObject({
     damage: entry.damage,
     fireRate: entry.fireRate,
@@ -367,16 +384,20 @@ const taxonomyFor = (kind, entry, visual) => {
     stage: CATALOG_UNKNOWN_V62,
     type: knownString(entry.grade)
   });
-  if (kind === 'enemies') return freezeObject({
-    family: knownString(entry.biology),
-    category: 'organism',
-    // The source catalog does not make a formal species/subspecies claim.
-    species: CATALOG_UNKNOWN_V62,
-    subspecies: CATALOG_UNKNOWN_V62,
-    caste: knownString(entry.caste),
-    stage: enemyStage(entry),
-    type: knownString(visual?.archetype || baseIdentityName(entry))
-  });
+  if (kind === 'enemies') {
+    const policy = getEnemyCatalogPolicyV105(entry);
+    return freezeObject({
+      family: policy.biology,
+      category: policy.biology === 'synthetic' ? 'synthetic-unit' : policy.biology === 'human' ? 'personnel' : 'organism',
+      // The source catalog does not make a formal species/subspecies claim.
+      species: CATALOG_UNKNOWN_V62,
+      subspecies: CATALOG_UNKNOWN_V62,
+      caste: policy.personnel ? 'not-applicable' : knownString(entry.caste),
+      stage: policy.stage || enemyStage(entry),
+      ...(policy.personnel ? { role: policy.role, faction: policy.faction } : {}),
+      type: knownString(visual?.archetype || baseIdentityName(entry))
+    });
+  }
   return freezeObject({
     family: knownString(entry.family),
     category: 'vehicle',
@@ -403,6 +424,12 @@ const hierarchySegmentsFor = (kind, taxonomy) => {
   if (kind === 'equipment') return [
     ['family', taxonomy.family],
     ['category', taxonomy.category],
+    ['type', taxonomy.type]
+  ];
+  if (kind === 'enemies' && ['human', 'synthetic', 'engineer'].includes(taxonomy.family)) return [
+    ['family', taxonomy.family],
+    ['stage', taxonomy.stage],
+    ['role', taxonomy.role],
     ['type', taxonomy.type]
   ];
   if (kind === 'enemies') return [
@@ -432,6 +459,11 @@ const recordSearchFields = (record, entry) => freezeArray([
   entry.fit,
   entry.referenceStatus,
   entry.provenance,
+  entry.faction,
+  entry.lineage,
+  entry.stage,
+  entry.sourceFile,
+  ...Object.values(record.sourceReferenceV105 || {}).filter(value => typeof value === 'string'),
   (entry.specializedBehaviorV95 || entry.specializedBehaviorV90 || entry.specializedBehaviorV89)?.label,
   ...(entry.tags || []),
   ...(entry.habitats || [])
@@ -449,6 +481,14 @@ const buildRecord = (kind, entry) => {
     catalogNumber: catalogueNumber(entry),
     name: knownString(entry.name),
     taxonomy,
+    ...(kind === 'enemies' ? { catalogPolicyV105: getEnemyCatalogPolicyV105(entry) } : {}),
+    ...(engineerReferenceByProfileV105.has(entry.id) ? { sourceReferenceV105: engineerReferenceByProfileV105.get(entry.id) } : {}),
+    ...(entry.documentaryReferenceV105 ? { documentaryReferenceV105: freezeObject({
+      path: entry.path, sourceFile: entry.sourceFile, sourceSha256: entry.sourceSha256,
+      lineage: entry.lineage, stage: entry.stage, faction: entry.faction,
+      visualNotes: entry.visualNotes, ambiguities: freezeArray(entry.ambiguities),
+      assetWarnings: freezeArray(entry.assetWarnings), combatReady: false, automaticEncounter: false
+    }) } : {}),
     hierarchySegments: freezeArray(segments.map(([nodeKind, label]) => freezeObject({
       kind: nodeKind,
       label: knownString(label)
@@ -591,7 +631,7 @@ export const CATALOG_COUNTS_V62 = Object.freeze({
   total: CATALOG_RECORDS_V62.length,
   weapons: WEAPONS.length,
   equipment: EQUIPMENT.length,
-  enemies: ENEMY_ENCYCLOPEDIA_CATALOG_V88.length,
+  enemies: CATALOGS.enemies.length,
   vehicles: VEHICLES.length
 });
 
@@ -608,7 +648,7 @@ const searchIndex = CATALOG_RECORDS_V62.map((record) => {
 
 export function getCatalogEntryV62(entryOrId) {
   const id = typeof entryOrId === 'string' ? entryOrId : entryOrId?.id;
-  return id ? recordById.get(id) || null : null;
+  return id ? recordById.get(id) || recordById.get(engineerReferenceAliasesV105.get(id)) || null : null;
 }
 
 export function getCatalogNodeV62(nodeId) {
@@ -666,6 +706,7 @@ export function searchCatalogV62(query, options = {}) {
     : 24;
   const matches = searchIndex
     .filter((indexed) => (!requestedCatalog || indexed.record.catalog === requestedCatalog)
+      && isCatalogRecordVisibleV105(indexed.record, { includeLegacyVariants: options.includeLegacyVariants !== false })
       && terms.every((term) => indexed.haystack.includes(term)))
     .map((indexed) => ({
       indexed,

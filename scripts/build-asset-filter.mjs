@@ -3,6 +3,7 @@ import { V65_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v65.
 import { V66_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v66.js';
 import { V81_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v81.js';
 import { ENEMY_IMPORT_ADMISSIONS_V103 } from '../src/enemy-import-admissions-v103.js';
+import { ENEMY_IMPORT_ADMISSIONS_V105 } from '../src/enemy-import-admissions-v105.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -27,6 +28,10 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const readyV105Paths = new Set(ENEMY_IMPORT_ADMISSIONS_V105.filter(asset =>
+    asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && asset.path === `/assets/openai/sprites/static-import-v105/${asset.slug}.png`
+    && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV103Paths = new Set(ENEMY_IMPORT_ADMISSIONS_V103.filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && asset.path === `/assets/openai/sprites/static-import-v103/${asset.slug}.png`
@@ -46,6 +51,7 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath.startsWith('assets/openai/sprites/static-import-v105/')) return readyV105Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-import-v103/')) return readyV103Paths.has(sourcePath);
     if (sourcePath === 'docs' || sourcePath.startsWith('docs/')) return false;
     // Production references also contain source-contact sheets, anchors and

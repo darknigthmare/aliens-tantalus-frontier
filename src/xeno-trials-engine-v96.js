@@ -1,8 +1,10 @@
 import { getXenoTrialsFighterV96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
+import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105,
+  resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
 
 export const XENO_TRIALS_STEP_V96 = 1 / 120;
 // Margins reserve the full native silhouettes (including tails) in either facing.
-export const XENO_TRIALS_ARENA_V96 = Object.freeze({ width: 1000, height: 560, floor: 450, left: 240, right: 760 });
+export const XENO_TRIALS_ARENA_V96 = XENO_TRIALS_ARENA_V105;
 export const XENO_TRIALS_ATTACKS_V96 = Object.freeze({
   light: Object.freeze({ cost: 12, damage: 14, reach: 60, startup: .09, active: .08, recovery: .2, stun: .13, push: 15 }),
   heavy: Object.freeze({ cost: 25, damage: 28, reach: 86, startup: .23, active: .1, recovery: .39, stun: .3, push: 38 }),
@@ -93,11 +95,16 @@ function aiInput(match, dt) {
   const difficulty = match.config.difficulty;
   match.ai.decisionIn = difficulty === 'easy' ? .38 : difficulty === 'hard' ? .14 : .24;
   const doctrine = XENO_TRIALS_FACTIONS_V96.find(f => f.id === match.config.factionId).doctrine;
-  const distance = Math.abs(player.x - cpu.x), direction = player.x > cpu.x ? 1 : -1;
+  const direction = player.x > cpu.x ? 1 : -1, distance = getXenoTrialsBodyGapV105(cpu, player, direction);
   const rangeUser = ['acid', 'pulse'].includes(getXenoTrialsFighterV96(cpu.id).special);
-  const target = doctrine === 'range' && rangeUser ? 310 : 115;
+  const cpuBody = getXenoTrialsBodyBoundsV105(cpu), playerBody = getXenoTrialsBodyBoundsV105(player);
+  const shotY = cpu.y + cpuBody.height * .55;
+  const rangedLane = shotY >= playerBody.bottom && shotY <= playerBody.top;
+  // A tall shooter must approach a low creature instead of waiting forever above its hitbox.
+  // Projectiles keep their fixed trajectory, so jumping can still evade them.
+  const target = doctrine === 'range' && rangeUser && rangedLane ? 240 : 20;
   const next = emptyInput();
-  if (distance > target + 30) next[direction > 0 ? 'right' : 'left'] = true;
+  if (distance > target + 20) next[direction > 0 ? 'right' : 'left'] = true;
   else if (distance < target - 45 && doctrine === 'range') next[direction > 0 ? 'left' : 'right'] = true;
   if (player.attack && distance < 230 && cpu.y === 0 && rng(match) < (doctrine === 'guard' ? .85 : difficulty === 'easy' ? .25 : .6)) next.guard = true;
   if (!next.guard && distance < (rangeUser ? 650 : 215) && rng(match) > (difficulty === 'easy' ? .35 : .1)) {
@@ -152,20 +159,22 @@ function fighterStep(match, fighter, enemy, controls, dt) {
 function collectAttack(match, fighter, enemy, impacts) {
   const attack = fighter.attack;
   if (!attack) return;
-  const definition = getXenoTrialsFighterV96(fighter.id), other = getXenoTrialsFighterV96(enemy.id);
+  const definition = getXenoTrialsFighterV96(fighter.id);
   const spec = XENO_TRIALS_ATTACKS_V96[attack.kind];
   if (attack.age < spec.startup || attack.age >= spec.startup + spec.active || attack.hit) return;
   if (attack.kind === 'special' && ['acid', 'pulse'].includes(definition.special)) {
     if (!attack.emitted) {
       attack.emitted = true;
-      match.projectiles.push({ id: attack.id, owner: fighter.side, x: fighter.x + attack.facing * 50,
-        y: fighter.y + definition.height * .55, direction: attack.facing, life: 1.25, spec, power: definition.power, style: definition.special });
+      const body = getXenoTrialsBodyBoundsV105(fighter);
+      match.projectiles.push({ id: attack.id, owner: fighter.side, x: (attack.facing > 0 ? body.right : body.left) + attack.facing * 9,
+        y: fighter.y + body.height * .55, direction: attack.facing, life: 1.25, spec, power: definition.power, style: definition.special });
     }
     return;
   }
-  const horizontal = (enemy.x - fighter.x) * attack.facing;
-  const verticalOverlap = fighter.y <= enemy.y + other.height && enemy.y <= fighter.y + definition.height;
-  if (horizontal < 0 || horizontal > spec.reach * definition.reach + (definition.width + other.width) / 2 || !verticalOverlap) return;
+  const body = getXenoTrialsBodyBoundsV105(fighter), other = getXenoTrialsBodyBoundsV105(enemy);
+  const horizontal = getXenoTrialsBodyGapV105(fighter, enemy, attack.facing);
+  const verticalOverlap = body.bottom <= other.top && other.bottom <= body.top;
+  if ((other.center - body.center) * attack.facing < 0 || horizontal > spec.reach * definition.reach || !verticalOverlap) return;
   attack.hit = true; impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: attack.facing });
 }
 function applyImpact(match, impact) {
@@ -199,14 +208,11 @@ function fixedStep(match, playerControls, opponentControls, dt) {
     return;
   }
   const [a, b] = match.fighters;
+  const order = a.x <= b.x ? 1 : -1;
   fighterStep(match, a, b, playerControls, dt);
   fighterStep(match, b, a, opponentControls || aiInput(match, dt), dt);
-  const minDistance = (getXenoTrialsFighterV96(a.id).width + getXenoTrialsFighterV96(b.id).width) * .46;
-  if (Math.abs(a.y - b.y) < 70 && Math.abs(a.x - b.x) < minDistance) {
-    const sign = a.x <= b.x ? 1 : -1, center = (a.x + b.x) / 2;
-    const bounded = clamp(center, XENO_TRIALS_ARENA_V96.left + minDistance / 2, XENO_TRIALS_ARENA_V96.right - minDistance / 2);
-    a.x = bounded - sign * minDistance / 2; b.x = bounded + sign * minDistance / 2;
-  }
+  resolveXenoTrialsBodiesV105(a, b, order);
+  const impactOrder = a.x <= b.x ? 1 : -1;
   const impacts = [];
   // Capture both hit windows before applying damage: simultaneous KOs are legal.
   collectAttack(match, a, b, impacts); collectAttack(match, b, a, impacts);
@@ -214,13 +220,14 @@ function fixedStep(match, playerControls, opponentControls, dt) {
     const previous = projectile.x;
     projectile.x += projectile.direction * 560 * dt; projectile.life -= dt;
     const target = projectile.owner === 'player' ? b : a, owner = projectile.owner === 'player' ? a : b;
-    const targetDef = getXenoTrialsFighterV96(target.id), radius = targetDef.width / 2 + 9;
-    if (Math.max(previous, projectile.x) >= target.x - radius && Math.min(previous, projectile.x) <= target.x + radius && projectile.y >= target.y && projectile.y <= target.y + targetDef.height) {
+    const body = getXenoTrialsBodyBoundsV105(target);
+    if (Math.max(previous, projectile.x) >= body.left - 9 && Math.min(previous, projectile.x) <= body.right + 9 && projectile.y >= body.bottom && projectile.y <= body.top) {
       impacts.push({ from: owner, to: target, spec: projectile.spec, power: projectile.power, direction: projectile.direction }); projectile.life = 0;
     }
   }
   match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > 0 && p.x < XENO_TRIALS_ARENA_V96.width);
   for (const impact of impacts) applyImpact(match, impact);
+  resolveXenoTrialsBodiesV105(a, b, impactOrder);
   match.timeRemaining = Math.max(0, match.timeRemaining - dt);
   if (a.hp <= 0 || b.hp <= 0) finishRound(match, a.hp <= 0 && b.hp <= 0 ? 'double-ko' : 'ko');
   else if (match.timeRemaining <= 0) finishRound(match, 'time');

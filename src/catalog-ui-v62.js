@@ -13,6 +13,7 @@ import { getCatalogGameplayScaleV72, getCatalogMarineReferenceV72, getCatalogCom
 import { getEnemyStaticPoseStateOptionsV96 as getEnemyStaticPoseStateOptionsV95, getEnemyStaticPoseDefaultStateV96 as getEnemyStaticPoseDefaultStateV95 } from './enemy-static-poses-v96.js';
 import { userCasteStaticVisualV88 } from './enemy-user-campaign-v88.js';
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
+import { isCatalogRecordVisibleV105 } from './enemy-catalog-taxonomy-v105.js';
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);
@@ -37,6 +38,7 @@ const LABELS = Object.freeze({
   encounterStatus: 'Statut de la rencontre',
   encounterNote: 'Contexte de rencontre',
   family: 'Famille',
+  faction: 'Affiliation / fabricant',
   fireRate: 'Cadence',
   fit: 'Gabarit',
   frequency: 'Fréquence',
@@ -53,6 +55,7 @@ const LABELS = Object.freeze({
   rarity: 'Rareté',
   referenceStatus: 'Statut référence',
   reload: 'Rechargement',
+  role: 'Rôle de jeu',
   seats: 'Postes',
   source: 'Source',
   specializedBehaviorStatus: 'Comportement documenté',
@@ -69,6 +72,10 @@ const LABELS = Object.freeze({
 });
 
 const DISPLAY_VALUES_V89 = Object.freeze({
+  human: 'Humains', synthetic: 'Synthétiques', engineer: 'Engineers / Ingénieurs',
+  adult: 'Adulte', 'manufactured-unit': 'Unité fabriquée', 'not-applicable': 'Sans objet',
+  'synthetic-unit': 'Unité synthétique', personnel: 'Personnel humain',
+  'documentary-only': 'Référence documentaire, hors combat',
   'source-grounded-partial-v89': 'Documentée, adaptation partielle',
   'source-grounded-partial-v90': 'Documentée, adaptation partielle',
   'source-grounded-partial-v95': 'Documentée, adaptation partielle',
@@ -202,16 +209,18 @@ export function resolveCatalogQueryStateV62({
   activeNodeId = null,
   selectedEntryId = null,
   predicate = null,
+  includeLegacyVariants = false,
   limit = 250
 } = {}) {
   const scope = toCatalogs(catalogs);
-  const filter = typeof predicate === 'function' ? predicate : () => true;
+  const filter = record => isCatalogRecordVisibleV105(record, { includeLegacyVariants })
+    && (typeof predicate !== 'function' || predicate(record));
   const term = String(query || '').trim();
   const activeNode = getCatalogNodeV62(activeNodeId);
   let records;
 
   if (term) {
-    records = scope.flatMap((catalog) => searchCatalogV62(term, { catalog, limit }))
+    records = scope.flatMap((catalog) => searchCatalogV62(term, { catalog, limit, includeLegacyVariants }))
       .sort((left, right) => right.score - left.score || left.entry.name.localeCompare(right.entry.name, 'fr'))
       .slice(0, limit)
       .map((result) => result.entry)
@@ -273,7 +282,7 @@ function renderTaxonomyPath(documentRef, record) {
   const list = createElement(documentRef, 'ol', 'catalog-v62__breadcrumb');
   for (const segment of record.hierarchySegments) {
     const item = createElement(documentRef, 'li', segment.label === CATALOG_UNKNOWN_V62 ? 'is-unknown' : '',
-      segment.label === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : segment.label);
+      formatCatalogValueV62(segment.label));
     item.dataset.kind = segment.kind;
     list.append(item);
   }
@@ -475,6 +484,7 @@ export class CatalogWorkbenchV62 {
       activeNodeId: null,
       selectedEntryId: null,
       expandedNodeIds: new Set(),
+      includeLegacyVariants: false,
       query: String(this.search?.value || '')
     };
     this.catalogs.forEach((catalog) => this.state.expandedNodeIds.add(`catalog:${catalog}`));
@@ -512,6 +522,12 @@ export class CatalogWorkbenchV62 {
 
   setPredicate(predicate) {
     this.predicate = typeof predicate === 'function' ? predicate : null;
+    const active = getCatalogNodeV62(this.state.activeNodeId);
+    if (active && !active.descendantEntryIds.some(id => {
+      const record = getCatalogEntryV62(id);
+      return isCatalogRecordVisibleV105(record, { includeLegacyVariants: this.state.includeLegacyVariants })
+        && (!this.predicate || this.predicate(record));
+    })) this.state.activeNodeId = null;
     return this.render({ selectBest: true });
   }
 
@@ -526,6 +542,10 @@ export class CatalogWorkbenchV62 {
   selectEntry(entryOrId, { focus = false } = {}) {
     const record = getCatalogEntryV62(entryOrId);
     if (!record || !this.catalogs.includes(record.catalog) || (this.predicate && !this.predicate(record))) return false;
+    // Deep links from historical saves/discovery still resolve. Showing their
+    // dossier explicitly reveals the labelled archive; no ID is migrated.
+    if (record.catalogPolicyV105?.archived) this.state.includeLegacyVariants = true;
+    if (this.state.activeNodeId && !record.ancestryIds.includes(this.state.activeNodeId)) this.state.activeNodeId = null;
     if (this.state.query) {
       const remainsVisible = searchCatalogV62(this.state.query, { catalog: record.catalog, limit: this.limit })
         .some((result) => result.entry.id === record.id);
@@ -563,6 +583,7 @@ export class CatalogWorkbenchV62 {
       query: this.state.query,
       activeNodeId: this.state.activeNodeId,
       selectedEntryId: this.state.selectedEntryId,
+      includeLegacyVariants: this.state.includeLegacyVariants,
       expandedNodeIds: Object.freeze([...this.state.expandedNodeIds])
     });
   }
@@ -572,7 +593,12 @@ export class CatalogWorkbenchV62 {
       this.state.query = String(options.query || '');
       if (this.search) this.search.value = this.state.query;
     } else if (this.search) this.state.query = String(this.search.value || '');
-    if (Object.hasOwn(options, 'selectedEntryId')) this.state.selectedEntryId = options.selectedEntryId || null;
+    if (Object.hasOwn(options, 'selectedEntryId')) {
+      const selected = getCatalogEntryV62(options.selectedEntryId);
+      this.state.selectedEntryId = selected?.id || null;
+      if (selected?.catalogPolicyV105?.archived) this.state.includeLegacyVariants = true;
+      if (selected && this.state.activeNodeId && !selected.ancestryIds.includes(this.state.activeNodeId)) this.state.activeNodeId = null;
+    }
     return this.render({ selectBest: options.selectBest === true });
   }
 
@@ -583,6 +609,7 @@ export class CatalogWorkbenchV62 {
       activeNodeId: this.state.activeNodeId,
       selectedEntryId: selectBest ? null : this.state.selectedEntryId,
       predicate: this.predicate,
+      includeLegacyVariants: this.state.includeLegacyVariants,
       limit: this.limit
     });
     const selectedStillVisible = queryState.records.some((record) => record.id === this.state.selectedEntryId);
@@ -609,14 +636,27 @@ export class CatalogWorkbenchV62 {
     clearElement(this.tree);
     const label = createElement(this.document, 'p', 'catalog-v62__column-label', 'INDEX HIÉRARCHIQUE');
     this.tree.append(label);
+    if (this.catalogs.includes('enemies')) {
+      const archived = CATALOG_RECORDS_V62.filter(record => record.catalogPolicyV105?.archived).length;
+      const toggle = createElement(this.document, 'button', 'button compact',
+        `${this.state.includeLegacyVariants ? 'MASQUER' : 'AFFICHER'} LES ${archived} VARIANTES HISTORIQUES NON VALIDÉES`);
+      toggle.type = 'button'; toggle.dataset.catalogLegacyV105 = 'toggle';
+      toggle.setAttribute('aria-pressed', String(this.state.includeLegacyVariants));
+      this.tree.append(toggle);
+      if (this.state.includeLegacyVariants) this.tree.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+        'Archives de compatibilité : déclinaisons générées sans justification biologique, pas des identités canoniques.'));
+    }
     const list = createElement(this.document, 'ul', 'catalog-v62__tree-list');
     for (const root of CATALOG_TREE_V62.filter((entry) => this.catalogs.includes(entry.catalog))) {
-      list.append(this.renderTreeNode(root, 0));
+      const item = this.renderTreeNode(root, 0); if (item) list.append(item);
     }
     this.tree.append(list);
   }
 
   renderTreeNode(node, depth) {
+    const visibleCount = node.descendantEntryIds.filter(id => isCatalogRecordVisibleV105(getCatalogEntryV62(id),
+      { includeLegacyVariants: this.state.includeLegacyVariants })).length;
+    if (!visibleCount) return null;
     const item = createElement(this.document, 'li', 'catalog-v62__tree-item');
     const row = createElement(this.document, 'button', 'catalog-v62__tree-row');
     row.type = 'button';
@@ -629,15 +669,15 @@ export class CatalogWorkbenchV62 {
     if (this.state.selectedEntryId && nodeContainsEntry(node, this.state.selectedEntryId)) row.classList.add('is-in-path');
     const chevron = createElement(this.document, 'span', 'catalog-v62__tree-chevron', node.children.length ? (expanded ? '−' : '+') : '·');
     chevron.setAttribute('aria-hidden', 'true');
-    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', node.label === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : node.label);
+    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', formatCatalogValueV62(node.label));
     if (node.label === CATALOG_UNKNOWN_V62) text.classList.add('catalog-v62__unknown');
-    const count = createElement(this.document, 'span', 'catalog-v62__tree-count', String(node.count));
+    const count = createElement(this.document, 'span', 'catalog-v62__tree-count', String(visibleCount));
     row.append(chevron, text, count);
     item.append(row);
     if (node.children.length) {
       const children = createElement(this.document, 'ul', 'catalog-v62__tree-list');
       children.hidden = !expanded;
-      for (const child of node.children) children.append(this.renderTreeNode(child, depth + 1));
+      for (const child of node.children) { const item = this.renderTreeNode(child, depth + 1); if (item) children.append(item); }
       item.append(children);
     }
     return item;
@@ -678,23 +718,26 @@ export class CatalogWorkbenchV62 {
     select.dataset.catalogEntry = record.id;
     select.setAttribute('aria-pressed', String(record.id === this.state.selectedEntryId));
     const media = createElement(this.document, 'div', 'catalog-v62__card-media');
-    if (record.catalog === 'enemies') media.classList.add('catalog-v72__world-media');
-    const preview = record.visual && this.animator.mount(media, record.visual, record.name, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false });
+    if (record.catalog === 'enemies' && !record.documentaryReferenceV105) media.classList.add('catalog-v72__world-media');
+    const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(media, record)
+      : record.visual && this.animator.mount(media, record.visual, record.name, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false });
     if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
-      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${record.taxonomy.family === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : record.taxonomy.family}`),
+      createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${formatCatalogValueV62(record.taxonomy.family)}`),
       createElement(this.document, 'strong', 'catalog-v62__card-title', record.name),
       createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : record.taxonomy.type),
       createElement(this.document, 'span', 'catalog-v62__card-id', record.id)
     );
     select.append(media, body);
-    if (record.catalog === 'enemies' && this.getDiscoveryV88) {
+    if (record.catalogPolicyV105?.archived) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ARCHIVE GÉNÉRÉE · NON VALIDÉE'));
+    if (record.documentaryReferenceV105) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ORIGINAL DOCUMENTAIRE · HORS COMBAT'));
+    if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id);
       body.append(createElement(this.document, 'span', 'catalog-v62__card-type', discovery.seen ? 'RENCONTRÉ EN MISSION' : 'DOSSIER NON RENCONTRÉ'));
     }
     card.append(select);
-    const actions = normalizeCatalogActionsV62(this.getActions(record));
+    const actions = normalizeCatalogActionsV62(record.documentaryReferenceV105 ? [] : this.getActions(record));
     if (actions.length) card.append(this.renderActions(record, actions, 'catalog-v62__card-actions'));
     return card;
   }
@@ -704,6 +747,24 @@ export class CatalogWorkbenchV62 {
     message.dataset.catalogMediaMissing = record.id;
     message.setAttribute('aria-label', `${record.name} — média visuel non documenté`);
     target.append(message);
+  }
+
+  renderOriginalReferenceV105(target, record, detail = false) {
+    const reference = record.documentaryReferenceV105 || record.sourceReferenceV105;
+    if (!reference) return null;
+    const frame = createElement(this.document, 'figure');
+    frame.dataset.documentaryReferenceV105 = record.id;
+    frame.setAttribute('aria-label', `${record.name} — original documentaire, pas un sprite de combat`);
+    frame.style.margin = '0'; frame.style.width = '100%';
+    const image = createElement(this.document, 'img');
+    image.src = reference.path; image.alt = record.name; image.loading = detail ? 'eager' : 'lazy'; image.decoding = 'async';
+    image.style.width = '100%'; image.style.height = detail ? '300px' : '132px'; image.style.objectFit = 'contain';
+    image.addEventListener('error', () => { image.hidden = true; frame.append(createElement(this.document, 'p', '', 'Original indisponible, aucun substitut.')); }, { once: true });
+    if (detail) {
+      const link = createElement(this.document, 'a'); link.href = reference.path; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', `Ouvrir l’original entier : ${record.name}`); link.append(image); frame.append(link);
+    } else frame.append(image);
+    target.append(frame); return frame;
   }
 
   renderActions(record, actions, className) {
@@ -731,7 +792,8 @@ export class CatalogWorkbenchV62 {
     }
     const header = createElement(this.document, 'header', 'catalog-v62__detail-header');
     const animationControls = createElement(this.document, 'div');
-    const preview = record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
+    const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(header, record, true)
+      : record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
     if (!preview) this.renderMissingMedia(header, record);
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
@@ -741,7 +803,7 @@ export class CatalogWorkbenchV62 {
     );
     header.append(heading);
     this.detail.append(header);
-    if (record.catalog === 'enemies' && this.getDiscoveryV88) {
+    if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id), section = this.renderSection('DÉCOUVERTE EN CAMPAGNE', 'discovery');
       section.dataset.discoveryStatus = discovery.status;
       section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', discovery.seen
@@ -753,8 +815,16 @@ export class CatalogWorkbenchV62 {
       `Pose fixe native · animations manquantes · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
     // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);
-    if (record.catalog === 'enemies') this.renderGameplayScaleV72(record);
+    if (record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
+    if (record.catalog === 'enemies' && !record.documentaryReferenceV105) this.renderGameplayScaleV72(record);
     this.detail.append(renderTaxonomyPath(this.document, record));
+    if (record.catalogPolicyV105?.personnel) {
+      const classification = this.renderSection('CLASSEMENT DU DOSSIER · DISTINCT DU CANON', 'classification');
+      const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
+      appendDefinitionRows(this.document, data, { family: record.taxonomy.family, stage: record.taxonomy.stage,
+        role: record.taxonomy.role, faction: record.taxonomy.faction });
+      classification.append(data); this.detail.append(classification);
+    }
 
     const canonSection = this.renderSection('FAITS DE RÉFÉRENCE', 'canon');
     const canonData = createElement(this.document, 'dl', 'catalog-v62__data-list');
@@ -763,18 +833,19 @@ export class CatalogWorkbenchV62 {
     canonSection.append(canonData);
     this.detail.append(canonSection);
 
-    const gameplaySection = this.renderSection('STATISTIQUES DE GAMEPLAY', 'gameplay');
-    const gameplayData = createElement(this.document, 'dl', 'catalog-v62__data-list');
-    appendDefinitionRows(this.document, gameplayData, record.gameplayStats, { status: 'gameplay' });
-    gameplaySection.append(gameplayData);
-    this.detail.append(gameplaySection);
+    if (!record.documentaryReferenceV105) {
+      const gameplaySection = this.renderSection('STATISTIQUES DE GAMEPLAY', 'gameplay');
+      const gameplayData = createElement(this.document, 'dl', 'catalog-v62__data-list');
+      appendDefinitionRows(this.document, gameplayData, record.gameplayStats, { status: 'gameplay' });
+      gameplaySection.append(gameplayData); this.detail.append(gameplaySection);
+    }
     this.renderCombatBehaviorV89(record);
 
     this.renderMediaSection(record);
     this.renderBiologySection(record);
     this.renderSizeSection(record);
 
-    const actions = normalizeCatalogActionsV62(this.getActions(record));
+    const actions = normalizeCatalogActionsV62(record.documentaryReferenceV105 ? [] : this.getActions(record));
     if (actions.length) this.detail.append(this.renderActions(record, actions, 'catalog-v62__detail-actions'));
   }
 
@@ -820,7 +891,13 @@ export class CatalogWorkbenchV62 {
   renderMediaSection(record) {
     const section = this.renderSection('MÉDIA ET IDENTITÉ VISUELLE', 'media');
     const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
-    if (record.visual) {
+    if (record.documentaryReferenceV105) {
+      const reference = record.documentaryReferenceV105;
+      appendDefinitionRows(this.document, data, { sourceFile: reference.sourceFile, sourceSha256: reference.sourceSha256,
+        lineage: reference.lineage, stage: reference.stage, visualNotes: reference.visualNotes,
+        ambiguities: reference.ambiguities, assetWarnings: reference.assetWarnings });
+      section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', 'Illustration originale conservée sans retouche ; pas de dimensions de jeu, d’animation ni d’admission au combat.'));
+    } else if (record.visual) {
       appendDefinitionRows(this.document, data, {
         sheetId: record.visual.sheetId,
         clip: record.visual.idleClip?.clip?.id,
@@ -829,6 +906,14 @@ export class CatalogWorkbenchV62 {
         exact: record.visual.identity?.exact,
         canonExact: record.visual.identity?.canonExact
       });
+      if (record.sourceReferenceV105) {
+        const reference = record.sourceReferenceV105;
+        section.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+          'Original utilisateur conservé ci-dessous ; le sprite statique de jeu est une adaptation distincte, sans certification canonique ni animation.'));
+        this.renderOriginalReferenceV105(section, record, true);
+        appendDefinitionRows(this.document, data, { sourceFile: reference.sourceFile,
+          sourceSha256: reference.sourceSha256, lineage: reference.lineage, visualNotes: reference.visualNotes });
+      }
     } else {
       const row = createElement(this.document, 'div', 'catalog-v62__data-row');
       row.append(
@@ -937,6 +1022,13 @@ export class CatalogWorkbenchV62 {
   }
 
   handleClick(event) {
+    const legacy = event.target?.closest?.('[data-catalog-legacy-v105]');
+    if (legacy && this.root.contains(legacy)) {
+      this.state.includeLegacyVariants = !this.state.includeLegacyVariants;
+      this.render({ selectBest: true });
+      this.tree.querySelector('[data-catalog-legacy-v105]')?.focus?.();
+      return;
+    }
     const more = event.target?.closest?.('[data-catalog-show-more]');
     if (more && this.root.contains(more)) {
       const previousCount = this.list.querySelectorAll('[data-catalog-entry]').length;
@@ -971,7 +1063,7 @@ export class CatalogWorkbenchV62 {
     const actionButton = event.target?.closest?.('[data-catalog-action]');
     if (actionButton && this.root.contains(actionButton)) {
       const record = getCatalogEntryV62(actionButton.dataset.catalogEntryId);
-      if (record && this.onAction) this.onAction({
+      if (record && !record.documentaryReferenceV105 && this.onAction) this.onAction({
         id: actionButton.dataset.catalogAction,
         record,
         button: actionButton,

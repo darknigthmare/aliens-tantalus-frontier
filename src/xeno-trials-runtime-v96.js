@@ -1,7 +1,8 @@
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, setXenoTrialsPausedV96,
-  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96 } from './xeno-trials-engine-v96.js';
+  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-engine-v96.js';
 import { createXenoPresentationV97, getXenoPresentationViewV97, advanceXenoPresentationV97 } from './xeno-trials-presentation-v97.js';
+import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special' });
@@ -10,33 +11,7 @@ const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
 /** Fixed-scale whole-PNG layout; no crop, stretch or fake animation frames. */
 export function getXenoTrialsRenderMetricsV96(id, variant = null) {
-  const definition = getXenoTrialsFighterV96(id), art = getXenoTrialsArtV96(id, variant);
-  if (!definition || !art) return null;
-  const aspect = art.sourceWidth / art.sourceHeight;
-  const pivotX = art.pivot?.x ?? .5;
-  const bottom = art.alphaBounds ? art.alphaBounds[3] / art.sourceHeight : art.pivot?.y ?? .96;
-  if (art.visualRevision === 103 && art.alphaBounds) {
-    // Fit the measured silhouette, not unused transparent canvas. This keeps
-    // very narrow native imports intact without shrinking them to fit margins.
-    // Display tuning is intentionally separate from canonical physical sizes.
-    const [left, top, right, bottomPixel] = art.alphaBounds;
-    const visibleHeight = bottomPixel - top, visibleWidth = right - left;
-    const pivotPixel = pivotX * art.sourceWidth;
-    const horizontalExtent = Math.max(Math.abs(left - pivotPixel), Math.abs(right - pivotPixel));
-    const heightLimit = Math.min(220, art.targetOpaqueHeight * 1.5,
-      450 - definition.jump ** 2 / (2 * 1450) - 112);
-    const scale = Math.min(heightLimit / visibleHeight,
-      (definition.role === 'tank' ? 330 : 285) / visibleWidth,
-      (XENO_TRIALS_ARENA_V96.left - 2) / horizontalExtent);
-    return { width: art.sourceWidth * scale, height: art.sourceHeight * scale,
-      pivotX, bottom, sourceFacing: art.sourceFacing || 1 };
-  }
-  const maxHeight = Math.min(220, (450 - definition.jump ** 2 / (2 * 1450) - 112) / bottom);
-  const width = Math.min(definition.role === 'tank' ? 330 : 285, maxHeight * aspect,
-    (XENO_TRIALS_ARENA_V96.left - 2) / Math.max(pivotX, 1 - pivotX));
-  return { width, height: width / aspect, pivotX,
-    bottom,
-    sourceFacing: art.sourceFacing || 1 };
+  return getXenoTrialsRenderMetricsV105(id, variant);
 }
 
 /** Local Canvas controller. Owns only listeners/RAF/images, never progression or saves.
@@ -144,7 +119,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   function drawFighter(fighter) {
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
     const image = images.get(art.path), ground = 450 - fighter.y;
-    context.fillStyle = '#0008'; context.beginPath(); context.ellipse(fighter.x, 454, definition.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
+    const body = getXenoTrialsBodyBoundsV105(fighter);
+    context.fillStyle = '#0008'; context.beginPath(); context.ellipse(body.center, 454, body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
     if (!image) { text('Visuel indisponible', fighter.x, ground - 90, 12, '#f0b6ac', 'center'); return; }
     const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV96(fighter.id, fighter.variant);
     const flip = fighter.facing === sourceFacing ? 1 : -1;
@@ -153,15 +129,18 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     context.drawImage(image, -width * pivotX, -height * bottom, width, height); context.restore();
     if (fighter.guard) {
       context.strokeStyle = '#71e2f0'; context.lineWidth = 4;
-      context.beginPath(); context.arc(fighter.x + fighter.facing * 30, ground - 75, 65,
+      const face = fighter.facing > 0 ? body.right : body.left;
+      context.beginPath(); context.arc(face, ground - body.height * .55, body.height * .48,
         fighter.facing > 0 ? -Math.PI / 2 : Math.PI / 2, fighter.facing > 0 ? Math.PI / 2 : Math.PI * 1.5); context.stroke();
     }
     if (fighter.attack) {
-      const attack = fighter.attack, windowStart = attack.kind === 'light' ? .09 : attack.kind === 'heavy' ? .23 : .29;
+      const attack = fighter.attack, spec = XENO_TRIALS_ATTACKS_V96[attack.kind], windowStart = spec.startup;
       if (attack.age >= windowStart && attack.age < windowStart + .12) {
         context.strokeStyle = attack.kind === 'special' ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
-        context.beginPath(); context.moveTo(fighter.x + fighter.facing * 35, ground - 115);
-        context.quadraticCurveTo(fighter.x + fighter.facing * 130, ground - 70, fighter.x + fighter.facing * 80, ground - 20); context.stroke();
+        const face = attack.facing > 0 ? body.right : body.left, reach = spec.reach * definition.reach;
+        context.beginPath(); context.moveTo(face, ground - body.height * .85);
+        context.quadraticCurveTo(face + attack.facing * reach, ground - body.height * .55,
+          face + attack.facing * reach * .5, ground - body.height * .15); context.stroke();
       }
     }
     if (fighter.stun > .4) text('GARDE BRISÉE', fighter.x, ground - height * bottom - 12, 12, '#ffb86b', 'center');
@@ -190,7 +169,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
       context.fillStyle = '#061019df'; context.fillRect(200, 150, 600, 90);
       text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center', 570);
-      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE' }[def.family];
+      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR' }[def.family];
       const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
       text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
       context.strokeStyle = stage.accent; context.lineWidth = 3; context.strokeRect(fighter.x - 145, 245, 290, 210);
