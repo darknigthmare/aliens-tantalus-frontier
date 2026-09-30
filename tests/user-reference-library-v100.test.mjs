@@ -112,7 +112,8 @@ test('V100 originals are exact bytes and only manifest-owned assets enter builds
     assert.equal(filter(join(root, entry.path.slice(1))), true, entry.path);
   }
   for (const path of ['assets/user/pack-v100/unreviewed.jpg', 'assets/user/recovery-v100/other.jpg',
-    'docs/references/v100-user-pack/private.json', 'docs/references/v101-trials-roster/browser-trials-v101.mjs'])
+    'docs/references/v100-user-pack/private.json', 'docs/references/v101-trials-roster/browser-trials-v101.mjs',
+    'docs/references/v102-finalization/browser-ceto-v102.mjs', 'docs/references/v102-finalization/validation.json'])
     assert.equal(filter(join(root, path)), false, path);
 });
 

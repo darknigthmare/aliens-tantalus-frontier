@@ -264,7 +264,7 @@ test('production build includes only exact admitted V99 PNGs and keeps held outp
 test('V99 service worker and every live native-pose consumer use the complete admission union', async () => {
   const source = path => readFile(join(root, path), 'utf8');
   const worker = await source('sw.js');
-  assert.match(worker, /atf-v86-trials-roster-v101-shell-1/);
+  assert.match(worker, /atf-v86-ceto-final-v102-shell-1/);
   for (const version of [96, 97, 98, 99]) {
     assert.ok(worker.includes(`'/src/enemy-dedicated-poses-v${version}.js'`));
     if (version > 96) assert.ok(worker.includes(`'/src/enemy-dedicated-batch-v${version}.js'`));

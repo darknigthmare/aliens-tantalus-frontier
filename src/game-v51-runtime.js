@@ -1990,13 +1990,21 @@ export class GameEngine {
   drawHazard(ctx, hazard) {
     if (!hazard.active) return;
     const profile = resolveMissionHazardArtV56(hazard.kind);
-    if (hazard.cetoHabitatId && profile) {
+    if (hazard.kind === 'flood' && hazard.cetoHabitatId && profile) {
       // Existing OpenAI bitmap water tiles repeat independently across this
-      // actual volume. Do not stretch one wave sheet across an entire room.
+      // actual volume. Native cells contain ~150px transparent top padding:
+      // align their measured water band, not the padded cell, to the waterline.
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * profile.fps);
+      const image = this.images.get(profile.world.key);
+      const safeFrame = Math.abs(frame) % profile.world.frameCount;
+      const band = profile.cetoVisibleBands?.[safeFrame];
       ctx.save(); ctx.beginPath(); ctx.rect(hazard.x, hazard.y, hazard.w, hazard.h); ctx.clip();
       for (let x = hazard.x; x < hazard.x + hazard.w; x += 256) {
-        this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
+        if (band && ready(image) && image.naturalWidth === 1024 && image.naturalHeight === 512) {
+          const inset = profile.cetoHorizontalInset;
+          ctx.drawImage(image, (safeFrame % 4) * 256 + inset, Math.floor(safeFrame / 4) * 256 + band[0],
+            256 - 2 * inset, band[1] - band[0], x, hazard.y, 256, hazard.h);
+        } else this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
         this.drawAtlasFrame(ctx, profile.accent, frame, x, hazard.y - 10, 256, 48);
       }
       ctx.restore(); return;

@@ -100,7 +100,7 @@ test('le build et le service worker V86 conservent le contrat hors ligne BIOFORG
   assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84 && npm run qa:browser:v85 && npm run qa:browser:v86');
   assert.match(build, /'bioforge-v80\.css'/u);
   assert.match(build, /index\.includes\('bioforge-canvas-v80'\)/u);
-  assert.match(worker, /const CACHE = 'atf-v86-trials-roster-v101-shell-1'/u);
+  assert.match(worker, /const CACHE = 'atf-v86-ceto-final-v102-shell-1'/u);
   assert.match(worker, /path\.startsWith\('\/assets\/openai\/bioforge\/v80\/'\)/u);
   for (const path of [
     '/bioforge-v80.css',

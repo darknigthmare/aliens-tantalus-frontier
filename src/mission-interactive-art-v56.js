@@ -35,6 +35,12 @@ export const MISSION_HAZARD_ART_V56 = Object.freeze({
   darkness: Object.freeze({ world: file('hazardDarkness'), renderHeight: 220, fps: 5 }),
   flood: Object.freeze({
     world: file('hazardFloodWaterline', 4, 2),
+    // Measured alpha>=16 bands in each native 256px cell, bottom-exclusive.
+    // Only the deep Ceto habitat uses these; shallow historical hazards are unchanged.
+    cetoVisibleBands: Object.freeze([[150, 198], [148, 200], [144, 205], [143, 205],
+      [142, 207], [149, 200], [137, 211], [151, 197]].map(band => Object.freeze(band))),
+    // Each cell has a baked pale 2px vertical edge; omit it at repeated joins.
+    cetoHorizontalInset: 2,
     accent: file('hazardFloodRipple'),
     renderHeight: 92,
     fps: 8
