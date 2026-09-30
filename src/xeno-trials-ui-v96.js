@@ -6,6 +6,7 @@ import { createXenoTrialsRuntimeV96 } from './xeno-trials-runtime-v96.js';
 import { filterXenoTrialsRosterV97 } from './xeno-trials-selection-v97.js';
 import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
+import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 
 const options = entries => entries.map(e => `<option value="${e.id}">${e.label}</option>`).join('');
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
@@ -19,7 +20,7 @@ export class XenoTrialsUiV96 {
     this.runtime = null; this.generation = 0; this.selected = 'warrior'; this.active = false;
     this.selectionStep = 'fighters';
     root.innerHTML = `<div class="section-intro"><div><p class="eyebrow">WEYLAND-YUTANI // ÉVALUATION COMPARATIVE</p><h2>Xeno Trials</h2></div><button class="button" data-xt="return">RETOUR AU VAISSEAU</button></div>
-      <p class="xt-notice">${XENO_TRIALS_LORE_NOTICE_V96.replace('Visuels dédiés en poses fixes.', 'Visuels dédiés : poses fixes et cycles de marche adaptés explicitement signalés. Les autres actions restent fixes.')}</p>
+      <p class="xt-notice">${XENO_TRIALS_LORE_NOTICE_V96.replace('Visuels dédiés en poses fixes.', 'Visuels dédiés : poses fixes, marches et frappes légères adaptées explicitement signalées par combattant. Les actions non indiquées restent fixes.')}</p>
       <div class="xt-dashboard" data-xt="progress"></div>
       <nav class="xt-steps" aria-label="Préparation du duel" data-xt="steps"></nav>
       <a class="button xt-lab-link" href="/depth-lab-v97.html" target="_blank" rel="noopener">LABORATOIRE VISUEL · COMPARER 2D / 2.5D ↗</a>
@@ -157,7 +158,9 @@ export class XenoTrialsUiV96 {
       const art = getXenoTrialsArtV96(id, this.form.elements[i ? 'opponentVariant' : 'playerVariant'].value);
       const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(150px, 26vw, 245px)') || `<img src="${art.path}" alt="${f.label}">`;
       const walk = getEnemyImportAnimationV107(art);
-      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption>${portrait}<strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span>${walk ? `<small>Aperçu fixe · ${walk.label}</small>` : ''}</figure>`;
+      const attack = getEnemyImportAttackV109(art);
+      const motionLabel = attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label;
+      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption>${portrait}<strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span>${motionLabel ? `<small>Aperçu fixe · ${motionLabel}</small>` : ''}</figure>`;
     }).join('<span class="xt-versus" aria-hidden="true">VS</span>');
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');

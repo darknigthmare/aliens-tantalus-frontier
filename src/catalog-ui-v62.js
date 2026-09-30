@@ -16,8 +16,12 @@ import { renderEnemyImportPreviewV103 } from './enemy-import-admissions-v103.js'
 import { isCatalogRecordVisibleV105 } from './enemy-catalog-taxonomy-v105.js';
 import { getEnemyStaticPoseV96 } from './enemy-static-poses-v96.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
+import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 
-const importWalkV107 = id => getEnemyImportAnimationV107(getEnemyStaticPoseV96(id));
+const importWalkV107 = id => {
+  const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
+  return walk && attack ? { ...walk, label: `Marche : 4 poses adaptées · ${attack.label}` } : walk;
+};
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);

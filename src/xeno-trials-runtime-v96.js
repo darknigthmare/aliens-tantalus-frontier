@@ -5,6 +5,7 @@ import { createXenoPresentationV97, getXenoPresentationViewV97, advanceXenoPrese
 import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 import { getEnemyImportAnimationV107, requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
   createEnemyImportMotionTrackerV107, isEnemyImportAnimationImageReadyV107 } from './enemy-import-animation-v107.js';
+import { getEnemyImportAttackV109, requestEnemyImportAttackV109, drawEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special' });
@@ -119,7 +120,12 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const animation = getEnemyImportAnimationV107(getXenoTrialsArtV96(f.id, f.variant));
       return animation && isEnemyImportAnimationImageReadyV107(images.get(animation.path), animation);
     });
-    text(hasWalk ? 'MARCHE ADAPTÉE • AUTRES ACTIONS FIXES' : 'SIMULATION • ADAPTATION DU PROJET • POSES FIXES', 970, 535, 11, '#b6bcc5', 'right');
+    const hasAttack = match.fighters.some(f => {
+      const animation = getEnemyImportAttackV109(getXenoTrialsArtV96(f.id, f.variant));
+      return animation && isEnemyImportAnimationImageReadyV107(images.get(animation.path), animation);
+    });
+    text(hasAttack ? 'JOE : MARCHE / FRAPPE LÉGÈRE ADAPTÉES • AUTRES ACTIONS FIXES'
+      : hasWalk ? 'MARCHE ADAPTÉE • AUTRES ACTIONS FIXES' : 'SIMULATION • ADAPTATION DU PROJET • POSES FIXES', 970, 535, 11, '#b6bcc5', 'right');
     text(stage.label.toUpperCase(), 500, 482, 13, '#aebec7', 'center');
     if (stage.backdrop && loaded && !backdrop) text('DÉCOR INDISPONIBLE · FOND PROCÉDURAL', 30, 513, 11, '#ddbf69');
   }
@@ -135,11 +141,21 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const moving = displaced && (Boolean(fighter.previousInput?.left) !== Boolean(fighter.previousInput?.right))
       && fighter.hp > 0 && !fighter.attack && !fighter.guard && fighter.stun <= 0
       && fighter.hitFlash <= 0 && fighter.y === 0 && match.phase === 'active';
-    const animated = drawEnemyImportAnimationV107(context, art, images, {
+    const reducedMotion = options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
+      || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
+    // The engine owns the attack clock and locked facing. Art cannot restart an
+    // attack, extend its active window or change collision/damage/save data.
+    const canShowAttack = fighter.hp > 0 && fighter.y === 0 && fighter.stun <= 0
+      && fighter.hitFlash <= 0 && !fighter.guard && match.phase === 'active';
+    const attackDrawn = canShowAttack && drawEnemyImportAttackV109(context, art, images, {
+      attack: fighter.attack, spec: XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind], reducedMotion,
+      height, x: fighter.x, y: ground, facing: fighter.attack?.facing,
+      maxHorizontalExtent: XENO_TRIALS_ARENA_V96.left - 2
+    });
+    const animated = attackDrawn || drawEnemyImportAnimationV107(context, art, images, {
       action: moving ? 'move' : 'idle', timeSeconds, height, x: fighter.x, y: ground, facing: fighter.facing,
       maxHorizontalExtent: XENO_TRIALS_ARENA_V96.left - 2,
-      reducedMotion: options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
-        || doc?.documentElement?.classList?.contains?.('reduced-motion') === true
+      reducedMotion
     });
     if (!animated) {
       const flip = fighter.facing === sourceFacing ? 1 : -1;
@@ -304,8 +320,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }));
       if (stopped) return false;
       // Missing scenery is cosmetic; missing fighter art still suspends the duel.
-      for (const fighter of match.fighters) requestEnemyImportAnimationV107(images,
-        getXenoTrialsArtV96(fighter.id, fighter.variant), loadImage, () => !stopped);
+      for (const fighter of match.fighters) {
+        const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
+        requestEnemyImportAnimationV107(images, art, loadImage, () => !stopped);
+        requestEnemyImportAttackV109(images, art, loadImage, () => !stopped);
+      }
       loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');
       if (assetFailure) { setXenoTrialsPausedV96(match, true); options.onAssetError?.(paths.filter((path, i) => results[i].status === 'rejected')); }
       registerInputs(); running = true; previousTime = null;

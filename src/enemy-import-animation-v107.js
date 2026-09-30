@@ -108,6 +108,12 @@ export function drawEnemyImportAnimationV107(ctx, definition, images, options = 
   const frame = getEnemyImportAnimationFrameV107(animation, options.action, options.timeSeconds, options.reducedMotion);
   const image = animation && images?.get(animation.path);
   if (!frame || !isEnemyImportAnimationImageReadyV107(image, animation)) return false;
+  return drawEnemyImportAnimationFrameV107(ctx, definition, image, animation, frame, options);
+}
+
+/** Shared presentation geometry for reviewed walks and engine-timed Trials attacks. */
+export function drawEnemyImportAnimationFrameV107(ctx, definition, image, animation, frame, options = {}) {
+  if (!frame || !animation?.frames?.includes(frame) || !isEnemyImportAnimationImageReadyV107(image, animation)) return false;
   const height = options.height ?? definition.renderHeight;
   const b = definition.alphaBounds || [0, 0, definition.sourceWidth, definition.sourceHeight];
   let scale = height * (b[3] - b[1]) / definition.sourceHeight / animation.referenceHeight;
