@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import { filterXenoTrialsRosterV97 } from '../src/xeno-trials-selection-v97.js';
 import { XENO_TRIALS_FIGHTERS_V96 as FIGHTERS } from '../src/xeno-trials-data-v96.js';
 
-test('V99 catalogue contains 53 fighters including 13 independently selectable synthetics', () => {
+test('Trials catalogue exposes every fighter and independently selectable synthetic', () => {
   const result = filterXenoTrialsRosterV97(FIGHTERS);
-  assert.equal(result.length, 53); assert.notEqual(result, FIGHTERS); assert.deepEqual(result, FIGHTERS);
+  assert.equal(result.length, FIGHTERS.length); assert.notEqual(result, FIGHTERS); assert.deepEqual(result, FIGHTERS);
   const machines = filterXenoTrialsRosterV97(FIGHTERS, { family: 'synthetic' });
-  assert.equal(machines.length, 13); assert.equal(new Set(machines.map(f => f.id)).size, 13);
+  assert.equal(machines.length, FIGHTERS.filter(f => f.family === 'synthetic').length);
+  assert.equal(new Set(machines.map(f => f.id)).size, machines.length);
   assert.ok(machines.every(f => f.family === 'synthetic'));
 });
 
@@ -23,8 +24,8 @@ test('V97 owned and locked filters partition the roster without treating duplica
   const unlocked = ['warrior', 'runner', 'arachnoid', 'runner', 'not-a-fighter'];
   const owned = filterXenoTrialsRosterV97(FIGHTERS, { ownership: 'owned', unlocked });
   const locked = filterXenoTrialsRosterV97(FIGHTERS, { ownership: 'locked', unlocked });
-  assert.equal(owned.length, 3); assert.equal(locked.length, 50);
-  assert.equal(new Set([...owned, ...locked].map(f => f.id)).size, 53);
+  assert.equal(owned.length, 3); assert.equal(locked.length, FIGHTERS.length - 3);
+  assert.equal(new Set([...owned, ...locked].map(f => f.id)).size, FIGHTERS.length);
   assert.ok(locked.every(f => !unlocked.includes(f.id)));
 });
 

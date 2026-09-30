@@ -14,6 +14,19 @@ const fighter = (id, profileId, label, role, hp, speed, power, reach, special) =
     family: art.biology === 'synthetic' || /working-joe|combat-synthetic/.test(profileId) ? 'synthetic' : art.biology === 'pathogen' ? 'pathogen' : 'xenomorph',
     variants: id === 'arachnoid' ? Object.freeze(['grey', 'purple']) : Object.freeze([]) });
 };
+/** V101 reuses only accepted terrestrial poses. This is an arena admission,
+ * not a new species, animation, canonical size or additional campaign encounter.
+ * Carrier/chameleon/spiker names do not add spawning, invisibility or new powers. */
+const terrestrialFighterV101 = (...args) => {
+  const profileId = args[1];
+  const art = getEnemyStaticPoseV95(profileId) || getEnemyDedicatedPoseV97(profileId);
+  if (!art || art.reviewStatus !== 'accepted-static-adaptation'
+    || !['ground', 'terrestrial'].includes(art.locomotion) || art.bioforgeEligible === false
+    || art.groundContact === false || (art.biology && !['xenomorph', 'synthetic'].includes(art.biology))
+    || /ovomorph|facehugger|chestburster|winged|aquatic|ceto/.test(profileId))
+    throw new Error(`V101 requires an admitted terrestrial adult pose: ${profileId}`);
+  return fighter(...args);
+};
 export const XENO_TRIALS_FIGHTERS_V96 = Object.freeze([
   fighter('warrior', 'castes-film_warrior_aliens_1986', 'Warrior', 'balanced', 220, 225, 1, 1, 'tail'),
   fighter('runner', 'castes-film_runner_alien3_1992', 'Runner', 'agile', 180, 295, .9, .9, 'pounce'),
@@ -70,7 +83,59 @@ export const XENO_TRIALS_FIGHTERS_V96 = Object.freeze([
   fighter('acid-ravager', 'enemy-169-acid-blooded-ravager', 'Ravager — variante acide', 'tank', 275, 180, 1.15, 1.1, 'slash'),
   fighter('acid-boiler', 'enemy-170-acid-blooded-boiler', 'Boiler — variante acide', 'ranged', 180, 190, 1.08, .9, 'acid'),
   fighter('acid-joe', 'enemy-197-acid-blooded-working-joe', 'Working Joe — variante acide', 'tank', 250, 155, 1, .9, 'ram'),
-  fighter('acid-combat-synth', 'enemy-198-acid-blooded-combat-synthetic', 'Synthétique de combat — variante acide', 'ranged', 235, 190, 1.05, 1, 'pulse')
+  fighter('acid-combat-synth', 'enemy-198-acid-blooded-combat-synthetic', 'Synthétique de combat — variante acide', 'ranged', 235, 190, 1.05, 1, 'pulse'),
+  // V101: 50 append-only arena entries; 20 supplied V95 identities and 30
+  // already admitted V98/V99 systemic poses. All use the existing fixed-pose engine.
+  terrestrialFighterV101('user-antilope', 'pose-v95-user-xeno-antilope', 'Xeno-Antilope — référence utilisateur', 'agile', 185, 290, .95, 1, 'pounce'),
+  terrestrialFighterV101('user-brute', 'pose-v95-user-xeno-brute', 'Xeno-Brute — référence utilisateur', 'tank', 285, 165, 1.1, 1, 'ram'),
+  terrestrialFighterV101('user-carrier', 'pose-v95-user-xeno-carrier', 'Carrier chargé — référence utilisateur', 'balanced', 235, 205, 1, 1.1, 'tail'),
+  terrestrialFighterV101('user-spiker', 'pose-v95-user-xeno-spiker', 'Spiker — référence utilisateur', 'balanced', 240, 205, 1.08, 1.1, 'slash'),
+  terrestrialFighterV101('user-warrior-red', 'pose-v95-user-xeno-warrior-red', 'Warrior Red — référence utilisateur', 'balanced', 225, 225, 1.02, 1, 'tail'),
+  terrestrialFighterV101('user-phantera-black', 'pose-v95-user-xeno-phantera-black', 'Phantera Black — référence utilisateur', 'agile', 190, 295, 1, .95, 'pounce'),
+  terrestrialFighterV101('user-rhino', 'pose-v95-user-xeno-rhino', 'Xeno-Rhino — référence utilisateur', 'tank', 285, 170, 1.08, 1, 'ram'),
+  terrestrialFighterV101('user-chameleon', 'pose-v95-user-xeno-chameleon', 'Chameleon — référence utilisateur', 'balanced', 205, 235, 1, 1.05, 'tail'),
+  terrestrialFighterV101('user-chameleon-2', 'pose-v95-user-xeno-chameleon-2', 'Chameleon II — référence utilisateur', 'agile', 190, 270, .98, .95, 'pounce'),
+  terrestrialFighterV101('user-trex-king', 'pose-v95-user-xeno-trex-king', 'TRex King — référence utilisateur', 'tank', 300, 150, 1.15, 1.1, 'ram'),
+  terrestrialFighterV101('user-trex-queen', 'pose-v95-user-xeno-trex-queen', 'TRex Queen — référence utilisateur', 'tank', 305, 145, 1.1, 1.2, 'tail'),
+  terrestrialFighterV101('user-big-xeno', 'pose-v95-user-xeno-big-xeno-1', 'Big Xeno — référence utilisateur', 'tank', 290, 160, 1.1, 1.15, 'tail'),
+  terrestrialFighterV101('user-pale-spined', 'pose-v95-user-quadrupede-pale-epineux', 'Quadrupède pâle épineux — référence 25', 'balanced', 220, 220, 1.05, 1, 'slash'),
+  terrestrialFighterV101('user-tiger-biped', 'pose-v95-user-bipede-tigre', 'Bipède tigre — référence 06', 'agile', 195, 265, 1.05, 1, 'slash'),
+  terrestrialFighterV101('user-raised-crest', 'pose-v95-user-bipede-crete-relevee', 'Bipède à crête relevée — référence 07', 'balanced', 225, 220, 1, 1.1, 'tail'),
+  terrestrialFighterV101('user-bulbous-quadruped', 'pose-v95-user-quadrupede-bulbeux', 'Quadrupède bulbeux — référence 08', 'tank', 270, 180, 1.05, 1, 'ram'),
+  terrestrialFighterV101('user-black-bone-raptor', 'pose-v95-user-rapace-noir-os', 'Rapace noir et os — référence 11', 'agile', 185, 290, 1, .95, 'pounce'),
+  terrestrialFighterV101('user-blue-violet-biped', 'pose-v95-user-bipede-bleu-violet', 'Bipède bleu-violet — référence 12', 'balanced', 220, 230, 1, 1, 'tail'),
+  terrestrialFighterV101('user-skeletal-quadruped', 'pose-v95-user-quadrupede-squelettique', 'Quadrupède squelettique — référence 13', 'agile', 180, 290, .98, .95, 'pounce'),
+  terrestrialFighterV101('user-red-horned', 'pose-v95-user-quadrupede-rouge-corne', 'Quadrupède rouge corné — référence 17', 'balanced', 235, 215, 1.05, 1, 'ram'),
+  terrestrialFighterV101('cryo-runner', 'enemy-214-cryo-adapted-runner', 'Runner — variante cryo', 'agile', 185, 285, .95, .9, 'pounce'),
+  terrestrialFighterV101('cryo-crusher', 'enemy-217-cryo-adapted-crusher', 'Crusher — variante cryo', 'tank', 285, 155, 1.1, 1, 'ram'),
+  terrestrialFighterV101('cryo-lurker', 'enemy-219-cryo-adapted-lurker', 'Lurker — variante cryo', 'balanced', 220, 220, 1.03, 1, 'slash'),
+  terrestrialFighterV101('cryo-ravager', 'enemy-221-cryo-adapted-ravager', 'Ravager — variante cryo', 'tank', 275, 180, 1.12, 1.1, 'slash'),
+  terrestrialFighterV101('cryo-boiler', 'enemy-222-cryo-adapted-boiler', 'Boiler — variante cryo', 'ranged', 180, 190, 1.08, .9, 'acid'),
+  terrestrialFighterV101('cryo-burster', 'enemy-224-cryo-adapted-burster', 'Burster — variante cryo', 'agile', 180, 255, 1, .85, 'acid'),
+  terrestrialFighterV101('cryo-monica', 'enemy-225-cryo-adapted-monica-line', 'Lignée Monica — variante cryo', 'agile', 200, 265, 1, 1, 'pounce'),
+  terrestrialFighterV101('cryo-ripper', 'enemy-231-cryo-adapted-atarax-ripper', 'ATARAX Ripper — variante cryo', 'agile', 205, 255, 1.05, 1, 'slash'),
+  terrestrialFighterV101('cryo-ripper-queen', 'enemy-232-cryo-adapted-ripper-queen', 'Reine Ripper — variante cryo', 'tank', 300, 150, 1.1, 1.2, 'tail'),
+  terrestrialFighterV101('cryo-foundry-crusher', 'enemy-234-cryo-adapted-foundry-crusher', 'Foundry Crusher — variante cryo', 'tank', 285, 160, 1.08, 1.05, 'ram'),
+  terrestrialFighterV101('cryo-reef-stalker', 'enemy-235-cryo-adapted-reef-stalker', 'Reef Stalker — variante cryo', 'agile', 195, 265, 1, 1, 'pounce'),
+  terrestrialFighterV101('cryo-pale-hunter', 'enemy-238-cryo-adapted-pale-crucible-hunter', 'Pale Crucible Hunter — variante cryo', 'balanced', 225, 220, 1.05, 1.05, 'slash'),
+  terrestrialFighterV101('cryo-dust-runner', 'enemy-239-cryo-adapted-dust-runner', 'Dust Runner — variante cryo', 'agile', 185, 290, .98, .95, 'pounce'),
+  terrestrialFighterV101('cryo-salvage-brute', 'enemy-240-cryo-adapted-salvage-hive-brute', 'Salvage Hive Brute — variante cryo', 'tank', 275, 170, 1.1, 1.05, 'ram'),
+  terrestrialFighterV101('cryo-caravan-stalker', 'enemy-242-cryo-adapted-caravan-stalker', 'Caravan Stalker — variante cryo', 'balanced', 220, 230, 1, 1, 'slash'),
+  terrestrialFighterV101('cryo-joe', 'enemy-249-cryo-adapted-working-joe', 'Working Joe — variante cryo', 'tank', 250, 155, 1, .9, 'ram'),
+  terrestrialFighterV101('cryo-combat-synth', 'enemy-250-cryo-adapted-combat-synthetic', 'Synthétique de combat — variante cryo', 'ranged', 235, 190, 1.05, 1, 'pulse'),
+  terrestrialFighterV101('armored-foundry-crusher', 'enemy-130-armored-foundry-crusher', 'Foundry Crusher — variante blindée', 'tank', 290, 155, 1.08, 1.05, 'ram'),
+  terrestrialFighterV101('armored-reef-stalker', 'enemy-131-armored-reef-stalker', 'Reef Stalker — variante blindée', 'balanced', 225, 220, 1.03, 1, 'pounce'),
+  terrestrialFighterV101('armored-pale-hunter', 'enemy-134-armored-pale-crucible-hunter', 'Pale Crucible Hunter — variante blindée', 'tank', 265, 185, 1.08, 1.05, 'slash'),
+  terrestrialFighterV101('armored-dust-runner', 'enemy-135-armored-dust-runner', 'Dust Runner — variante blindée', 'balanced', 220, 235, 1, .95, 'pounce'),
+  terrestrialFighterV101('armored-salvage-brute', 'enemy-136-armored-salvage-hive-brute', 'Salvage Hive Brute — variante blindée', 'tank', 290, 160, 1.1, 1.05, 'ram'),
+  terrestrialFighterV101('armored-caravan-stalker', 'enemy-138-armored-caravan-stalker', 'Caravan Stalker — variante blindée', 'balanced', 240, 210, 1.03, 1, 'slash'),
+  terrestrialFighterV101('acid-queen', 'enemy-164-acid-blooded-queen', 'Reine mobile — variante acide', 'tank', 310, 145, 1.12, 1.25, 'tail'),
+  terrestrialFighterV101('acid-crusher', 'enemy-165-acid-blooded-crusher', 'Crusher — variante acide', 'tank', 290, 155, 1.1, 1, 'ram'),
+  terrestrialFighterV101('acid-burster', 'enemy-172-acid-blooded-burster', 'Burster — variante acide', 'agile', 180, 260, 1.02, .85, 'acid'),
+  terrestrialFighterV101('acid-k-series', 'enemy-176-acid-blooded-k-series-yellow-xenomorph', 'K-Series jaune — variante acide', 'balanced', 230, 220, 1.05, 1, 'tail'),
+  terrestrialFighterV101('acid-ripper', 'enemy-179-acid-blooded-atarax-ripper', 'ATARAX Ripper — variante acide', 'agile', 205, 260, 1.08, 1, 'slash'),
+  terrestrialFighterV101('acid-ripper-queen', 'enemy-180-acid-blooded-ripper-queen', 'Reine Ripper — variante acide', 'tank', 300, 150, 1.12, 1.2, 'tail'),
+  terrestrialFighterV101('acid-foundry-crusher', 'enemy-182-acid-blooded-foundry-crusher', 'Foundry Crusher — variante acide', 'tank', 285, 160, 1.1, 1.05, 'ram')
 ]);
 const FIGHTERS = new Map(XENO_TRIALS_FIGHTERS_V96.map(entry => [entry.id, entry]));
 export function getXenoTrialsFighterV96(id) { return FIGHTERS.get(id) || null; }
@@ -81,13 +146,17 @@ export function getXenoTrialsArtV96(id, variant) {
 
 export const XENO_TRIALS_FACTIONS_V96 = Object.freeze([
   Object.freeze({ id: 'containment', label: 'WY / Confinement', description: 'Cellule simulée défensive : attente, garde et riposte.', doctrine: 'guard', color: '#60d6db',
-    roster: Object.freeze(['defender', 'chrysalis', 'royal-guard', 'crusher-acm', 'rhino', 'synth-guard', 'armored-joe', 'albino-joe', 'albino-crusher', 'armored-ravager', 'smasher', 'armored-k-series', 'armored-ripper-queen', 'acid-joe']), projectOriginal: true }),
+    roster: Object.freeze(['defender', 'chrysalis', 'royal-guard', 'crusher-acm', 'rhino', 'synth-guard', 'armored-joe', 'albino-joe', 'albino-crusher', 'armored-ravager', 'smasher', 'armored-k-series', 'armored-ripper-queen', 'acid-joe',
+      'user-brute', 'user-rhino', 'user-bulbous-quadruped', 'cryo-crusher', 'cryo-foundry-crusher', 'cryo-joe', 'armored-foundry-crusher', 'armored-salvage-brute', 'acid-crusher', 'acid-foundry-crusher']), projectOriginal: true }),
   Object.freeze({ id: 'pursuit', label: 'WY / Poursuite', description: 'Cellule simulée mobile : pression rapprochée et bonds.', doctrine: 'rush', color: '#f5a64b',
-    roster: Object.freeze(['runner', 'prowler', 'razor-claws', 'panther', 'mantis', 'stalker-arcade', 'albino-runner', 'albino-ripper', 'armored-runner', 'armored-ripper', 'acid-runner']), projectOriginal: true }),
+    roster: Object.freeze(['runner', 'prowler', 'razor-claws', 'panther', 'mantis', 'stalker-arcade', 'albino-runner', 'albino-ripper', 'armored-runner', 'armored-ripper', 'acid-runner',
+      'user-antilope', 'user-phantera-black', 'user-chameleon-2', 'user-tiger-biped', 'user-black-bone-raptor', 'user-skeletal-quadruped', 'cryo-runner', 'cryo-monica', 'cryo-ripper', 'cryo-reef-stalker', 'cryo-dust-runner', 'armored-reef-stalker', 'armored-dust-runner', 'acid-ripper']), projectOriginal: true }),
   Object.freeze({ id: 'rival-lab', label: 'Laboratoire rival / simulé', description: 'Adversaire corporatiste fictif : maintien à distance et tirs.', doctrine: 'range', color: '#b88aff',
-    roster: Object.freeze(['spitter', 'xenoborg', 'arachnoid', 'synth-trooper', 'synth-sniper', 'synth-heavy', 'combat-synth', 'mecha', 'mecha-2', 'mechanoid', 'albino-combat-synth', 'albino-six', 'acid-combat-synth', 'acid-boiler']), projectOriginal: true }),
+    roster: Object.freeze(['spitter', 'xenoborg', 'arachnoid', 'synth-trooper', 'synth-sniper', 'synth-heavy', 'combat-synth', 'mecha', 'mecha-2', 'mechanoid', 'albino-combat-synth', 'albino-six', 'acid-combat-synth', 'acid-boiler',
+      'user-spiker', 'user-chameleon', 'cryo-boiler', 'cryo-burster', 'cryo-combat-synth', 'armored-pale-hunter', 'acid-burster']), projectOriginal: true }),
   Object.freeze({ id: 'hive', label: 'Ruche / simulation hostile', description: 'Modèle de pression de ruche ; aucun dressage canonique revendiqué.', doctrine: 'balanced', color: '#ed717d',
-    roster: Object.freeze(['warrior', 'grid', 'predalien', 'queen', 'ravager', 'boiler', 'burster', 'gorilla', 'ultramorph', 'albino-ravager', 'albino-burster', 'armored-red', 'acid-lurker', 'acid-ravager']), projectOriginal: true })
+    roster: Object.freeze(['warrior', 'grid', 'predalien', 'queen', 'ravager', 'boiler', 'burster', 'gorilla', 'ultramorph', 'albino-ravager', 'albino-burster', 'armored-red', 'acid-lurker', 'acid-ravager',
+      'user-carrier', 'user-warrior-red', 'user-trex-king', 'user-trex-queen', 'user-big-xeno', 'user-pale-spined', 'user-raised-crest', 'user-blue-violet-biped', 'user-red-horned', 'cryo-lurker', 'cryo-ravager', 'cryo-ripper-queen', 'cryo-pale-hunter', 'cryo-salvage-brute', 'cryo-caravan-stalker', 'armored-caravan-stalker', 'acid-queen', 'acid-k-series', 'acid-ripper-queen']), projectOriginal: true })
 ]);
 export const XENO_TRIALS_STAGES_V96 = Object.freeze([
   Object.freeze({ id: 'containment-deck', label: 'Banc de confinement', background: '#101d24', accent: '#48aab1', floor: '#23343c' }),

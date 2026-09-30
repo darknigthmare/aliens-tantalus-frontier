@@ -8,7 +8,7 @@ import { PORT_ASSETS_V90 } from '../src/hub-port-meridien-v90.js';
 
 test('V90 physical port modules ship with the renewed offline shell', async () => {
   const worker = await readFile('sw.js', 'utf8');
-  assert.match(worker, /atf-v86-reference-library-v100-shell-2/);
+  assert.match(worker, /atf-v86-trials-roster-v101-shell-1/);
   const filter = createBuildAssetFilter(process.cwd());
   for (const name of ['port-meridien-v90', 'hub-port-meridien-v90']) {
     await access('src/' + name + '.js');

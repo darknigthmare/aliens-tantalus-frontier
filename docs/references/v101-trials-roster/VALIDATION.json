@@ -1,0 +1,57 @@
+{
+  "schema": "atf-v101-validation/1",
+  "date": "2026-09-30",
+  "scope": {
+    "addedTrialsFighters": 50,
+    "totalTrialsFighters": 103,
+    "totalSynthetics": 15,
+    "historicalFightersPreserved": 53,
+    "newBitmapAssets": 0,
+    "newAnimations": 0,
+    "art": "Reuse of 50 distinct previously admitted transparent static PNGs; not new canonical species or animated sheets.",
+    "v100": "108 documentary reference dossiers preserved unchanged; not admitted as combat sprites by this lot."
+  },
+  "automated": {
+    "cleanSuite": { "tests": 3951, "passed": 3950, "failed": 0, "skipped": 1 },
+    "trialsSuite": { "passed": 119, "failed": 0 },
+    "independentCacheBuildChecks": { "passed": 60, "failed": 0 },
+    "syntax": { "modules": 635, "passed": true },
+    "build": { "passed": true, "catalogEntries": 3450, "builtAt": "2026-09-30T10:15:35.726Z" },
+    "http": { "passed": 668, "failed": 0, "v101": 55, "v100": 124, "v99": 489 },
+    "scopeNote": "Tests overlap; counts must not be added as independent test totals. Engine duels use bounded test fixtures, not 50 browser-played matches."
+  },
+  "browser": {
+    "browser": "Edge 154.0.4258.37, isolated disposable browser contexts",
+    "source": { "fullChecks": 16, "coldMobileChecks": 8, "passed": true },
+    "built": { "fullChecks": 16, "coldMobileChecks": 8, "v100MobileChecks": 6, "passed": true },
+    "consoleOrHttpErrors": 0,
+    "visualReview": "All 50 added PNGs on five contact sheets, arena selection, intros, duel result, 390px mobile synthetic filters and V100 reference cards inspected.",
+    "builtDuel": {
+      "player": "cryo-combat-synth",
+      "opponent": "user-brute",
+      "arena": "tantalus-cargo",
+      "purchaseCost": 1880,
+      "creditsAfterPurchase": 150,
+      "result": "2-0 KO",
+      "playerHits": 44,
+      "keyboardAttackActions": 128,
+      "reward": 80,
+      "reloadPersistedExactlyOnce": true
+    },
+    "fixtureDisclosure": "Fresh QA save skips onboarding and grants unlock cost plus 150 simulation credits. Purchase, navigation, movement and attacks use UI input. No combat health, position, result or clock injection. User saves and campaign balance unchanged. Service worker bypassed during runtime checks; precache contract tested separately."
+  },
+  "localEvidence": {
+    "cleanExport": "E:/CodexQA/AliensTantalus/v101-release-snapshot-20260930",
+    "testLog": "E:/CodexQA/AliensTantalus/v101-clean-tests.log",
+    "http": ".qa/v101/build-http.json",
+    "sourceBrowser": ".qa/v101/source/browser-full.json",
+    "builtBrowser": ".qa/v101/build/browser-full.json",
+    "builtColdMobile": ".qa/v101/build-cold-mobile/browser-mobile.json",
+    "v100Mobile": ".qa/v101/build-v100-regression/browser-mobile.json"
+  },
+  "releaseAtValidation": {
+    "productionPublished": false,
+    "reason": "Vercel CLI authentication unavailable. Build and browser evidence are local, not a production publication claim.",
+    "serviceWorkerCache": "atf-v86-trials-roster-v101-shell-1"
+  }
+}

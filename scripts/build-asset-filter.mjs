@@ -20,6 +20,7 @@ import { USER_REFERENCE_LIBRARY_V100 } from '../src/user-reference-library-v100.
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
   'docs/references/v100-user-pack',
+  'docs/references/v101-trials-roster',
   // Source inventory, prompts, native candidates and measurements remain private.
   'docs/references/v95-user-creatures',
   'docs/references/v96-xeno-trials',

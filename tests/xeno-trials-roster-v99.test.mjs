@@ -10,18 +10,18 @@ import { ENEMY_DEDICATED_BATCH_V99 } from '../src/enemy-dedicated-batch-v99.js';
 import { releaseOriginV99 } from '../docs/references/v99-batch-050/verify-release.mjs';
 
 test('V99 adds eight xenomorphs and two synthetics without changing the historical 43 records', () => {
-  assert.equal(fighters.length, 53);
+  assert.equal(fighters.slice(0, 53).length, 53);
   assert.equal(createHash('sha256').update(JSON.stringify(fighters.slice(0, 43))).digest('hex'),
     'f393140a14813731b7472b106ed139e92bbab5c2246eaa83a4d53c72eb6d8049');
-  assert.equal(fighters.filter(f => f.family === 'synthetic').length, 13);
-  const added = fighters.slice(43);
+  assert.equal(fighters.slice(0, 53).filter(f => f.family === 'synthetic').length, 13);
+  const added = fighters.slice(43, 53);
   assert.equal(added.filter(f => f.family === 'xenomorph').length, 8);
   const admitted = [...ENEMY_DEDICATED_BATCH_V98, ...ENEMY_DEDICATED_BATCH_V99];
   for (const [index, fighter] of fighters.entries()) {
     assert.equal(getXenoTrialsUnlockCostV96(fighter.id), index < 3 ? 0 : 100 + index * 20);
     assert.equal(factions.filter(f => f.roster.includes(fighter.id)).length, 1, fighter.id);
   }
-  assert.equal(new Set(fighters.map(f => f.id)).size, 53);
+  assert.equal(new Set(fighters.map(f => f.id)).size, fighters.length);
   for (const fighter of added) {
     assert.ok(admitted.some(p => p.profileId === fighter.profileId), fighter.id);
     const art = getXenoTrialsArtV96(fighter.id);
@@ -31,7 +31,7 @@ test('V99 adds eight xenomorphs and two synthetics without changing the historic
 });
 
 test('V99 newcomers require their price and survive save normalization in each new arena', () => {
-  for (const fighter of fighters.slice(43)) {
+  for (const fighter of fighters.slice(43, 53)) {
     for (const stage of stages.slice(3)) {
       const initial = createXenoTrialsProgressV96();
       assert.equal(unlockXenoTrialsFighterV96(initial, fighter.id).applied, false);
