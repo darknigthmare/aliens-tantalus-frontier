@@ -22,6 +22,7 @@ for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-galler
 for (const directory of ['src', 'assets']) {
   await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
 }
+await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
 // QA masters, production intermediates and superseded duplicate atlases remain local, never deployed.
 await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });
 await rm(join(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'), { recursive: true, force: true });

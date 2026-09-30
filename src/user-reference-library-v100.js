@@ -1,6 +1,7 @@
 import { USER_PACK_V100 } from './user-pack-v100.js';
 import { USER_REFERENCE_RECOVERY_V100 } from './user-reference-recovery-v100.js';
 import { getEnemyPhysicalSizeV100 } from './enemy-physical-size-v100.js';
+import { getReferenceAdaptationV106 } from './user-reference-status-v106.js';
 
 // These are original illustrations, not silently admitted combat sprites.
 // Keeping a separate identity/path for every view also preserves Altered designs.
@@ -63,7 +64,7 @@ export function createUserReferenceLibraryV100(documentRef, { onOpenEnemy = null
   section.setAttribute('aria-label', 'Imports et variantes Altered');
   section.append(node('p', 'ARCHIVES XÉNOBIOLOGIQUES // ORIGINAUX CONSERVÉS', 'eyebrow'));
   section.append(node('h3', 'Imports, lignées et variantes Altered'));
-  section.append(node('p', 'Illustrations fournies, conservées sans retouche. Les variantes ne remplacent jamais l’ennemi d’origine. Ces dossiers ne sont pas encore de nouveaux combattants : détourage, pivots, collisions et comportement restent à valider.'));
+  section.append(node('p', 'Illustrations fournies, conservées sans retouche. Les variantes ne remplacent jamais l’ennemi d’origine. Chaque dossier indique séparément la découpe admise en combat ou au banc de confinement. Une pose fixe ne constitue ni une animation ni une fidélité 1:1 certifiée.'));
   const controls = node('div', '', 'reference-library-v100__filters');
   const filters = { search: '', biology: 'all', lineage: 'all', stage: 'all', kind: 'all', sourceBatch: 'all', sort: 'name', alteredOnly: false };
   let limit = 24, selectedId = null, visible = [], controlsByKey = {};
@@ -118,6 +119,20 @@ export function createUserReferenceLibraryV100(documentRef, { onOpenEnemy = null
     image.addEventListener('error', () => { image.hidden = true; detail.append(node('p', 'Original indisponible : fichier à restaurer, aucune image de remplacement.')); }, { once: true });
     const full = node('a'); full.href = entry.path; full.target = '_blank'; full.rel = 'noopener'; full.setAttribute('aria-label', `Ouvrir l’original entier : ${entry.name}`); full.append(image); detail.append(full);
     detail.append(node('p', 'RÉFÉRENCE ORIGINALE · PAS UN NOUVEAU SPRITE DE COMBAT', 'reference-library-v100__status'));
+    const adaptation = getReferenceAdaptationV106(entry.id);
+    const status = node('p', adaptation.status === 'existing-combat-pose' ? 'POSE PRÉEXISTANTE LIÉE — ORIGINAL ALTERED CONSERVÉ'
+      : adaptation.status === 'combat-pose' ? 'DÉRIVÉ SÉPARÉ : POSE FIXE INTÉGRÉE AU MOTEUR'
+      : adaptation.status === 'confinement-pose' ? 'DÉRIVÉ SÉPARÉ : BANC DE CONFINEMENT, HORS COMBAT'
+        : 'ORIGINAL SEULEMENT : ADAPTATION NON ADMISE');
+    status.dataset.referenceAdaptation = adaptation.status; detail.append(status);
+    if (adaptation.art) {
+      const cutout = node('a', 'Ouvrir la découpe native validée'); cutout.href = adaptation.art.path; cutout.target = '_blank'; cutout.rel = 'noopener'; detail.append(cutout);
+      detail.append(node('p', adaptation.art.reviewNote));
+      if (adaptation.profileId && onOpenEnemy) {
+        const open = node('button', 'Voir la fiche intégrée', 'button'); open.type = 'button'; open.dataset.referenceAdmitted = adaptation.profileId;
+        open.addEventListener('click', () => onOpenEnemy(adaptation.profileId)); detail.append(open);
+      }
+    }
     const facts = node('dl');
     for (const [label, value] of [['Fichier original', entry.sourceFile], ['Famille', REFERENCE_LABELS_V100[entry.biology] || entry.biology],
       ['Faction', REFERENCE_LABELS_V100[entry.faction] || entry.faction], ['Lignée', entry.lineage], ['Stade', REFERENCE_LABELS_V100[entry.stage] || entry.stage],

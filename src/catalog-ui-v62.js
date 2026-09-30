@@ -58,6 +58,8 @@ const LABELS = Object.freeze({
   role: 'Rôle de jeu',
   seats: 'Postes',
   source: 'Source',
+  sourceCredit: 'Crédit de la référence',
+  referenceNote: 'Limites de l’adaptation',
   specializedBehaviorStatus: 'Comportement documenté',
   species: 'Espèce',
   speed: 'Vitesse',
@@ -891,6 +893,7 @@ export class CatalogWorkbenchV62 {
   renderMediaSection(record) {
     const section = this.renderSection('MÉDIA ET IDENTITÉ VISUELLE', 'media');
     const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
+    if (record.visualReferenceV106) appendDefinitionRows(this.document, data, record.visualReferenceV106);
     if (record.documentaryReferenceV105) {
       const reference = record.documentaryReferenceV105;
       appendDefinitionRows(this.document, data, { sourceFile: reference.sourceFile, sourceSha256: reference.sourceSha256,

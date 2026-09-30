@@ -76,6 +76,7 @@ import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
+import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -1366,6 +1367,7 @@ function renderArmory() {
 
 function renderEnemies() {
   if (!enemyCatalogV62) return;
+  if (!byId('user-specimen-bench-v106')) byId('enemy-catalog-v62').insertAdjacentElement('afterend', createUserSpecimenBenchV106(document));
   if (!byId('user-reference-library-v100')) {
     const references = createUserReferenceLibraryV100(document, { onOpenEnemy: id => {
       byId('biology-filter').value = 'all';

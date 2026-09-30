@@ -4,6 +4,8 @@ import { V66_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v66.
 import { V81_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v81.js';
 import { ENEMY_IMPORT_ADMISSIONS_V103 } from '../src/enemy-import-admissions-v103.js';
 import { ENEMY_IMPORT_ADMISSIONS_V105 } from '../src/enemy-import-admissions-v105.js';
+import { ENEMY_IMPORT_ADMISSIONS_V106 } from '../src/enemy-import-admissions-v106.js';
+import { USER_SPECIMEN_ART_V106 } from '../src/user-specimens-v106.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -28,6 +30,10 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const readyV106Paths = new Set([...ENEMY_IMPORT_ADMISSIONS_V106, ...USER_SPECIMEN_ART_V106].filter(asset =>
+    asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/openai\/sprites\/static-(?:import|game)-v106\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV105Paths = new Set(ENEMY_IMPORT_ADMISSIONS_V105.filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && asset.path === `/assets/openai/sprites/static-import-v105/${asset.slug}.png`
@@ -51,6 +57,7 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (/^assets\/openai\/sprites\/static-(?:import|game)-v106\//.test(sourcePath)) return readyV106Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-import-v105/')) return readyV105Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-import-v103/')) return readyV103Paths.has(sourcePath);
     if (sourcePath === 'docs' || sourcePath.startsWith('docs/')) return false;

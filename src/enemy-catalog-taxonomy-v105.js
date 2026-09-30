@@ -1,4 +1,5 @@
 import { USER_PACK_V100 } from './user-pack-v100.js';
+import { ENEMY_IMPORT_ADMISSIONS_V106 } from './enemy-import-admissions-v106.js';
 
 // Presentation policy only: never rewrite a saved enemy ID, combat biology,
 // statistics, reference image or source registry. Faction is not a species.
@@ -41,6 +42,8 @@ export const ENGINEER_REFERENCE_DOSSIERS_V105 = Object.freeze(USER_PACK_V100
 // A reference only becomes an alias when this exact admitted profile is also
 // present in the live registry. The original illustration stays in the library.
 export const ENGINEER_REFERENCE_PROFILE_IDS_V105 = Object.freeze({
+  ...Object.fromEntries(ENEMY_IMPORT_ADMISSIONS_V106.filter(art => art.slug.startsWith('engineer-'))
+    .map(art => [art.referenceId, 'pose-v106-import-' + art.slug])),
   'pack-v100-engineer-armorsuit': 'pose-v105-import-engineer-armorsuit'
 });
 

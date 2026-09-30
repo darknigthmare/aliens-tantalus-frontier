@@ -169,7 +169,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
       context.fillStyle = '#061019df'; context.fillRect(200, 150, 600, 90);
       text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center', 570);
-      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR' }[def.family];
+      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR', human: 'HUMAIN' }[def.family];
       const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
       text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
       context.strokeStyle = stage.accent; context.lineWidth = 3; context.strokeRect(fighter.x - 145, 245, 290, 210);

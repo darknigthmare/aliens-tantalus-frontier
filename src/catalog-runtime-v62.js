@@ -481,6 +481,9 @@ const buildRecord = (kind, entry) => {
     catalogNumber: catalogueNumber(entry),
     name: knownString(entry.name),
     taxonomy,
+    ...(entry.visualRevision === 106 ? { visualReferenceV106: freezeObject({
+      sourceCredit: entry.sourceCredit || null, referenceNote: entry.referenceNote || null
+    }) } : {}),
     ...(kind === 'enemies' ? { catalogPolicyV105: getEnemyCatalogPolicyV105(entry) } : {}),
     ...(engineerReferenceByProfileV105.has(entry.id) ? { sourceReferenceV105: engineerReferenceByProfileV105.get(entry.id) } : {}),
     ...(entry.documentaryReferenceV105 ? { documentaryReferenceV105: freezeObject({
@@ -683,7 +686,8 @@ export function getCatalogPathV62(entryOrId) {
 const scoreSearchMatch = (indexed, normalizedQuery, terms) => {
   const name = normalizeCatalogSearchV62(indexed.record.name);
   const id = normalizeCatalogSearchV62(indexed.record.id);
-  if (id === normalizedQuery || name === normalizedQuery) return 1000;
+  const originalId = normalizeCatalogSearchV62(indexed.record.sourceReferenceV105?.id || '');
+  if (id === normalizedQuery || name === normalizedQuery || originalId === normalizedQuery) return 1000;
   let score = name.startsWith(normalizedQuery) ? 700 : name.includes(normalizedQuery) ? 500 : 0;
   score += terms.reduce((total, term) => total + (
     name.startsWith(term) ? 80

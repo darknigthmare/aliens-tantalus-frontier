@@ -1,0 +1,8 @@
+.specimen-bench-v106 { margin-block: 1rem; border: 1px solid #376b69; }
+.specimen-bench-v106__controls { display: flex; flex-wrap: wrap; align-items: end; gap: .8rem; margin-block: 1rem; }
+.specimen-bench-v106__controls label { display: grid; gap: .35rem; min-width: 160px; flex: 1; }
+.specimen-bench-v106__controls select { width: 100%; max-width: 100%; }
+.specimen-bench-v106 canvas { display: block; width: 100%; max-width: 800px; height: auto; border: 1px solid #376b69; touch-action: pan-y; }
+.specimen-bench-v106 canvas:focus-visible { outline: 3px solid #b5eee5; outline-offset: 3px; }
+.specimen-bench-v106__note { max-width: 90ch; opacity: .85; }
+@media (max-width: 600px) { .specimen-bench-v106__controls label { flex-basis: 100%; min-width: 0; } }

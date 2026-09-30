@@ -13,7 +13,7 @@ export function getXenoTrialsRenderMetricsV105(id, variant = null) {
   const aspect = art.sourceWidth / art.sourceHeight;
   const pivotX = art.pivot?.x ?? .5;
   const bottom = art.alphaBounds ? art.alphaBounds[3] / art.sourceHeight : art.pivot?.y ?? .96;
-  if ([103, 105].includes(art.visualRevision) && art.alphaBounds && Number.isFinite(art.targetOpaqueHeight)) {
+  if ([103, 105, 106].includes(art.visualRevision) && art.alphaBounds && Number.isFinite(art.targetOpaqueHeight)) {
     const [left, top, right, bottomPixel] = art.alphaBounds;
     const visibleHeight = bottomPixel - top, visibleWidth = right - left;
     const pivotPixel = pivotX * art.sourceWidth;

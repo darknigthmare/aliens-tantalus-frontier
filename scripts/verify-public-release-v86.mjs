@@ -11,7 +11,7 @@ const ROOT_FILES = new Set([
   'alien-survival-v70.css', 'bioforge-v80.css', 'catalog-v62.css', 'crew-v85.css', 'hub-level.css',
   'hub-stations-v61.css', 'mission-insertion-v62.css', 'placeables-v86.css', 'player-onboarding-v84.css',
   'runtime-level.css', 'sprite-gallery.css', 'styles-v50.css', 'styles.css', 'title-scene-v79.css', 'title-screen-v61.css',
-  'xeno-trials-v96.css', 'depth-lab-v97.html', 'depth-lab-v97.css', 'user-reference-library-v100.css'
+  'xeno-trials-v96.css', 'depth-lab-v97.html', 'depth-lab-v97.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set(['audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
   'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs']);

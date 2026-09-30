@@ -1,3 +1,6 @@
+import { ENEMY_IMPORT_ADMISSIONS_V105 } from './enemy-import-admissions-v105.js';
+import { ENEMY_IMPORT_ADMISSIONS_V106 } from './enemy-import-admissions-v106.js';
+
 /** Reviewed native PNGs only. Documentary imports and unsuccessful generations
  * never enter this list. Source files and their V100 identities stay unchanged. */
 export const ENEMY_IMPORT_ADMISSIONS_V103 = Object.freeze([
@@ -73,10 +76,15 @@ export const ENEMY_IMPORT_ADMISSIONS_V103 = Object.freeze([
  * SVG viewBox removes unused display margins without raster editing, stretching,
  * synthesizing pixels or promoting any unaccepted documentary reference. */
 export function renderEnemyImportPreviewV103(visual, label = '', height = '100%') {
-  const art = ENEMY_IMPORT_ADMISSIONS_V103.find(entry => entry.path === visual?.path);
+  const art = getEnemyImportArtV103(visual?.path);
   if (!art) return null;
   const [left, top, right, bottom] = art.alphaBounds;
   const escape = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
   const accessibility = label ? `role="img" aria-label="${escape(label)}"` : 'aria-hidden="true"';
   return `<svg xmlns="http://www.w3.org/2000/svg" data-import-preview-v103="${art.slug}" ${accessibility} viewBox="${left} ${top} ${right - left} ${bottom - top}" preserveAspectRatio="xMidYMid meet" style="display:block;width:100%;height:${escape(height)};overflow:hidden;pointer-events:none"><image href="${art.path}" width="${art.sourceWidth}" height="${art.sourceHeight}"/></svg>`;
+}
+
+export function getEnemyImportArtV103(path) {
+  return [...ENEMY_IMPORT_ADMISSIONS_V103, ...ENEMY_IMPORT_ADMISSIONS_V105, ...ENEMY_IMPORT_ADMISSIONS_V106]
+    .find(entry => entry.path === path) || null;
 }

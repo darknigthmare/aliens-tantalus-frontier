@@ -4,7 +4,7 @@ import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseS
 import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
 import { getEnemyUserCampaignV88 } from './enemy-user-campaign-v88.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
-import { ENEMY_IMPORT_ADMISSIONS_V103 } from './enemy-import-admissions-v103.js';
+import { getEnemyImportArtV103 } from './enemy-import-admissions-v103.js';
 import {
   BIOFORGE_TERRESTRIAL_ROSTER_V80,
   getBioforgeCapacityV87,
@@ -129,7 +129,7 @@ const buttonV87 = (document, text, label, action) => {
   return button;
 };
 function frameImportThumbnailV103(document, node, profile) {
-  const art = ENEMY_IMPORT_ADMISSIONS_V103.find(entry => entry.path === profile?.path);
+  const art = getEnemyImportArtV103(profile?.path);
   // Also clear an earlier import when the persistent main thumbnail is reused.
   if (art) {
     const namespace = 'http://www.w3.org/2000/svg';

@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-collisions-v105-shell-1';
+const CACHE = 'atf-v86-full-batch-v106-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,8 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/enemy-import-admissions-v106.js', '/src/enemy-user-imports-v106.js',
+  '/src/user-specimens-v106.js', '/src/user-specimen-bench-v106.js', '/src/user-reference-status-v106.js', '/specimen-bench-v106.css',
   '/src/xeno-trials-geometry-v105.js', '/src/enemy-catalog-taxonomy-v105.js',
   '/src/enemy-import-admissions-v105.js', '/src/enemy-user-imports-v105.js', '/src/xeno-trials-user-admissions-v105.js',
   '/src/enemy-import-admissions-v103.js', '/src/enemy-user-imports-v103.js',
