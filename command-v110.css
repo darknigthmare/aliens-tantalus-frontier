@@ -1,0 +1,35 @@
+/* MU/TH/UR tactical terminal. Illustrations reuse the authored Tantalus rooms. */
+[data-panel="command"] { --terminal-cyan:#8ddad5; --terminal-amber:#eac788; }
+.command-hero-v110 { position:relative; min-height:310px; display:grid; align-items:end; overflow:hidden; border:1px solid #46616b; background:#0b171d; margin-bottom:18px; }
+.command-hero-v110>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 45%; opacity:.68; }
+.command-hero-v110::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg, #08151bf5, #08151b7a 60%, #08151b11),linear-gradient(0deg,#08151b,transparent 85%); }
+.command-hero-v110 .hero-copy { position:relative; z-index:1; max-width:720px; padding:32px; }
+.command-hero-v110 h2 { font-size:clamp(27px,3.7vw,48px); line-height:1.05; letter-spacing:.04em; margin:12px 0; }
+.command-hero-v110 p { max-width:580px; color:#c1d3d5; }
+.command-hero-v110 .eyebrow { color:var(--terminal-cyan); letter-spacing:.19em; }
+.command-links-v110 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:16px 0 24px; }
+.command-links-v110 button { min-height:48px; border:1px solid #405963; background:#0e2028; color:#c3e1e4; font:inherit; letter-spacing:.04em; cursor:pointer; }
+.command-links-v110 button:hover { background:#19343c; border-color:var(--terminal-cyan); }
+[data-panel="command"] :is(button,select,input,summary):focus-visible { outline:2px solid var(--terminal-amber); outline-offset:3px; }
+.command-brief-v110 { display:grid; grid-template-columns:minmax(240px,.85fr) minmax(0,1.15fr); gap:18px; margin:18px 0; }
+.command-brief-v110 .sticky { position:static; }
+.command-select-v110 { padding:20px; border:1px solid #3c535c; background:#0c1b22; }
+.command-select-v110>img { width:100%; height:160px; object-fit:cover; margin-bottom:14px; }
+.command-select-v110 label { display:block; color:#abc4cb; font-size:12px; letter-spacing:.08em; margin-top:16px; }
+.command-select-v110 select { width:100%; min-width:0; margin-top:8px; }
+.command-section-v110 { display:flex; align-items:center; gap:18px; border-top:1px solid #3a5056; margin:28px 0 16px; padding-top:16px; }
+.command-section-v110 img { width:128px; height:78px; object-fit:cover; border:1px solid #3b515a; }
+.command-section-v110 h2 { margin:4px 0; font-size:23px; }
+.command-section-v110 .eyebrow { color:var(--terminal-cyan); }
+.command-card-art-v110 { width:100%; height:96px; object-fit:cover; border-bottom:1px solid #3b515a; margin-bottom:15px; }
+[data-panel="command"] .dashboard-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+[data-panel="command"] .dashboard-grid .span-2 { grid-column:auto; }
+[data-panel="command"] .panel { background:#0c1b22; border-color:#314a52; }
+[data-panel="command"] .metric-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+[data-panel="command"] .metric b { color:var(--terminal-cyan); }
+.command-maintenance-v110 { margin-top:24px; border:1px solid #354f58; padding:16px; }
+.command-maintenance-v110>summary { cursor:pointer; color:#c8dbdd; letter-spacing:.08em; padding:8px; }
+.command-maintenance-v110 .catalog-grid { margin-top:14px; }
+[data-panel="operations"][hidden], [data-developer-only-v110][hidden] { display:none!important; }
+@media(max-width:1050px) { [data-panel="command"] .dashboard-grid { grid-template-columns:1fr; } .command-card-art-v110 { height:130px; } }
+@media(max-width:700px) { .command-brief-v110 { grid-template-columns:1fr; } .command-hero-v110 .hero-copy { padding:22px; } .command-links-v110 { grid-template-columns:repeat(2,minmax(0,1fr)); } .command-section-v110 { gap:12px; flex-wrap:wrap; } .command-section-v110 img { width:92px; height:64px; } [data-panel="command"] .metric-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }

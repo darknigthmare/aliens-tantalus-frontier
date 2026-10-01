@@ -11,7 +11,9 @@ import {
   getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69,
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
-import { CrewUiV85 } from './crew-ui-v85.js';
+import { Echo9UiV110 } from './echo9-ui-v110.js';
+import { setEcho9MarkingV110 } from './echo9-personnel-v110.js';
+import { isDeveloperShortcutV110, resolvePlayerViewV110, getCommandMissionsV110, commandMetricsV110 } from './player-surfaces-v110.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
 import { isShipAnimalTerrariumAtlasReadyV87 } from './ship-animal-terrarium-art-v87.js';
@@ -163,6 +165,7 @@ let pendingOpeningDialogV88 = null;
 let crewUiV85 = null;
 let placeablesDockV86 = null;
 let lastMissionSaveFailureToastV86 = -Infinity;
+let developerModeV110 = false;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -549,6 +552,7 @@ function closeHubStation({ resume = true } = {}) {
 }
 
 function openHubStation(view) {
+  if (view === 'operations' && !developerModeV110) { showView('command'); return true; }
   const station = document.querySelector(`.view[data-panel="${view}"]`);
   if (!station || !['operations', 'armory', 'crew'].includes(view)) return false;
   closeHubStation({ resume: false });
@@ -639,6 +643,7 @@ function setupXenoTrialsUiV96() {
 }
 
 function showView(name) {
+  name = resolvePlayerViewV110(name, developerModeV110);
   if (!VIEW_META[name]) return;
   if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
   if (name !== 'settings') titleScreen.clearMenuReturnV89();
@@ -1036,10 +1041,8 @@ function renderClock() {
 function renderCommand() {
   const resources = saveSystem.data.galaxy.resources;
   const systems = saveSystem.data.hub.systems;
-  byId('release-counts').innerHTML = [
-    ['CAMPAGNES', CONTENT_COUNTS.campaigns], ['MONDES', CONTENT_COUNTS.worlds], ['MENACES', CONTENT_COUNTS.enemies],
-    ['ARMES', CONTENT_COUNTS.weapons], ['VÉHICULES', CONTENT_COUNTS.vehicles], ['NIVEAUX', CONTENT_COUNTS.levelSeeds]
-  ].map(([label, value]) => `<div class="metric"><b>${number(value)}</b><span>${label}</span></div>`).join('');
+  byId('release-counts').innerHTML = commandMetricsV110(saveSystem.data)
+    .map(([label, value]) => `<div class="metric"><b>${escapeHtml(value)}</b><span>${label}</span></div>`).join('');
   byId('strategy-resources').innerHTML = [
     ['CR', resources.credits], ['ALLIAGE', resources.alloy], ['CARBURANT', resources.fuel], ['MÉD', resources.medical],
     ['R&D', resources.research], ['PATHOGÈNE', resources.pathogen], ['RAVIT.', systems.supplies], ['ÉNERGIE', systems.power]
@@ -1050,6 +1053,27 @@ function renderCommand() {
     ? `<span class="chip danger">INCIDENT ${escapeHtml(crisis.kind).toUpperCase()}</span><h3>Pont ${crisis.deck + 1} · ${escapeHtml(crisis.roomId)}</h3><p>${crisis.count} menaces doivent être combattues dans le niveau du Tantalus.</p><button class="button primary" data-open-hub>INTERVENIR À PIED</button>`
     : '<span class="chip success">AUCUNE CRISE ACTIVE</span><p>La simulation continue à chaque action, trajet et récupération.</p>';
   byId('frontier-alerts').innerHTML = (saveSystem.data.galaxy.alerts || []).slice(0, 6).map((alert) => `<article class="alert-item"><span>${escapeHtml(alert.severity || 'info')}</span><div><strong>${escapeHtml(alert.type || 'signal')}</strong><p>${escapeHtml(alert.message || '')}</p></div></article>`).join('') || '<p class="detail-copy">Aucune alerte stratégique.</p>';
+  renderCommandMissionsV110();
+}
+
+function renderCommandMissionsV110() {
+  const destination = byId('command-world-v110'), select = byId('command-mission-v110');
+  const active = saveSystem.data.strategy.currentOperation;
+  const eligible = getCommandMissionsV110(saveSystem.data, CAMPAIGNS);
+  const selected = CAMPAIGNS.find(c => c.id === (active?.campaignId || saveSystem.data.strategy.plannedCampaignId));
+  const worldIds = new Set(eligible.map(c => c.worldId));
+  const preferredWorld = active?.worldId || destination.value;
+  const worldId = worldIds.has(preferredWorld) ? preferredWorld : '';
+  destination.innerHTML = '<option value="">Toutes les routes ouvertes</option>' + WORLDS.filter(w => worldIds.has(w.id))
+    .map(w => `<option value="${escapeHtml(w.id)}">${escapeHtml(w.name)}</option>`).join('');
+  destination.value = worldId; destination.disabled = Boolean(active);
+  const missions = getCommandMissionsV110(saveSystem.data, CAMPAIGNS, worldId);
+  select.innerHTML = missions.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  // Selecting a destination is a filter, never an implicit campaign/save mutation.
+  select.value = missions.some(c => c.id === selected?.id) ? selected.id : '';
+  select.disabled = Boolean(active) || !missions.length;
+  byId('command-mission-status-v110').textContent = active ? 'MISSION ACTIVE · manifeste verrouillé'
+    : `${missions.length} ordres reçus. Sélectionnez une affectation pour consulter son manifeste.`;
 }
 
 function renderStrategy() {
@@ -1234,12 +1258,15 @@ function renderOperationPlan() {
           ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
           : '';
   const specialNotice = specialOperation
-    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V70</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
+    ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : '';
   byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
+  // This render may have selected the first unlocked fallback campaign. Keep
+  // the player selector synchronized with that exact displayed manifesto.
+  renderCommandMissionsV110();
 }
 
 function procurementActionsV62(record) {
@@ -1367,8 +1394,12 @@ function renderArmory() {
 
 function renderEnemies() {
   if (!enemyCatalogV62) return;
-  if (!byId('user-specimen-bench-v106')) byId('enemy-catalog-v62').insertAdjacentElement('afterend', createUserSpecimenBenchV106(document));
-  if (!byId('user-reference-library-v100')) {
+  enemyCatalogV62.developerModeV110 = developerModeV110;
+  for (const id of ['user-specimen-bench-v106', 'user-reference-library-v100', 'user-reference-effects-v95']) {
+    if (!developerModeV110) byId(id)?.remove();
+  }
+  if (developerModeV110 && !byId('user-specimen-bench-v106')) byId('enemy-catalog-v62').insertAdjacentElement('afterend', createUserSpecimenBenchV106(document));
+  if (developerModeV110 && !byId('user-reference-library-v100')) {
     const references = createUserReferenceLibraryV100(document, { onOpenEnemy: id => {
       byId('biology-filter').value = 'all';
       enemyCatalogV62.setPredicate(() => true);
@@ -1377,7 +1408,7 @@ function renderEnemies() {
     } });
     byId('enemy-catalog-v62').insertAdjacentElement('beforebegin', references);
   }
-  if (!byId('user-reference-effects-v95')) {
+  if (developerModeV110 && !byId('user-reference-effects-v95')) {
     const effects = createUserReferenceEffectsGalleryV95(document);
     if (effects) byId('enemy-catalog-v62').insertAdjacentElement('afterend', effects);
   }
@@ -1408,7 +1439,7 @@ function ensureCostumeFilterOptions(id, field) {
 function runCrewActionV85(action, args, owner) {
   if (standaloneContext || activeView !== 'crew') throw new Error('Ouvrez Echo-9 depuis votre campagne pour gérer le personnel.');
   const actions = { recruit: recruitCandidateV85, refresh: refreshRecruitmentV85, train: trainCrewAptitudeV85,
-    transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember };
+    transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember, marking: setEcho9MarkingV110 };
   const result = commitCrewTransactionV85({ saveSystem, owner, ownsOwner: ownsTimelineV84,
     action: actions[action], args, prepare: ensureAdvancedState,
     advanceTime: (candidate, hours) => advanceGalaxy(candidate, { hours, advanceClock: false }) });
@@ -1421,7 +1452,7 @@ function renderCrew() {
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
   const operationLockTitle = loadoutLocked ? ' title="Opération active : manifeste verrouillé"' : '';
   byId('crew-readiness').textContent = `${saveSystem.data.strategy.selectedCrewIds.length}/${MAX_SQUAD_SIZE} AFFECTÉS`;
-  if (!crewUiV85) crewUiV85 = new CrewUiV85({ root: byId('crew-list'), catalog: CREW,
+  if (!crewUiV85) crewUiV85 = new Echo9UiV110({ root: byId('crew-list'), catalog: CREW,
     itemCatalog: [...WEAPONS, ...EQUIPMENT], rules: RECRUITMENT_RULES_V85,
     getOwner: currentOwnerV84, onAction: runCrewActionV85 });
   crewUiV85.update(saveSystem.data);
@@ -2783,6 +2814,7 @@ function bindDelegatedActions() {
   document.addEventListener('click', (event) => {
     const target = event.target.closest('button,[data-view]');
     if (!target) return;
+    if (target.dataset.commandView) showView(target.dataset.commandView);
     if (target.dataset.openHub !== undefined) showView('hub');
     if (target.dataset.strategyAction) runTimedMutation(() => executeStrategicAction(saveSystem.data, target.dataset.strategyAction));
     if (target.dataset.researchId) runTimedMutation(() => completeResearchProject(saveSystem.data, target.dataset.researchId));
@@ -2797,7 +2829,7 @@ function bindDelegatedActions() {
     }
     if (target.dataset.planCampaign) {
       saveSystem.data.strategy.plannedCampaignId = target.dataset.planCampaign;
-      saveSystem.commit(); renderCampaigns(); toast('Campagne ajoutée au plan opérationnel.');
+      saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); toast('Campagne ajoutée au plan opérationnel.');
     }
     if (target.dataset.procureId) {
       const kind = target.dataset.procureKind;
@@ -2808,7 +2840,7 @@ function bindDelegatedActions() {
     if (target.dataset.selectVehicle) runTimedMutation(() => selectStrategicVehicle(saveSystem.data, target.dataset.selectVehicle), 'Véhicule affecté à l’opération.');
     if (target.dataset.crewAssign) runTimedMutation(() => assignCrewMember(saveSystem.data, target.dataset.crewAssign), 'Affectation Echo-9 actualisée.');
     if (target.dataset.crewTreat) runTimedMutation(() => treatCrewMember(saveSystem.data, target.dataset.crewTreat), 'Soin individuel terminé.');
-    if (target.dataset.costumeId) runTimedMutation(() => applyCostume(saveSystem.data, target.dataset.costumeId), 'Combinaison appliquée au runtime.');
+    if (target.dataset.costumeId) runTimedMutation(() => applyCostume(saveSystem.data, target.dataset.costumeId), 'Combinaison équipée.');
     if (target.dataset.diplomacy) {
       const world = WORLDS.find((entry) => entry.id === target.dataset.worldId);
       runTimedMutation(() => performDiplomacy(saveSystem.data, world, target.dataset.diplomacy), 'Conséquence diplomatique appliquée.');
@@ -2819,6 +2851,8 @@ function bindDelegatedActions() {
     }
     if (target.dataset.worldOperations) {
       byId('campaign-search').value = activeWorld.name;
+      byId('command-world-v110').value = target.dataset.worldOperations;
+      renderCommandMissionsV110();
       renderCampaigns(); showView('operations');
     }
     if (target.dataset.profile) {
@@ -2845,6 +2879,23 @@ function bindDelegatedActions() {
 }
 
 function bind() {
+  byId('command-world-v110').onchange = renderCommandMissionsV110;
+  byId('command-mission-v110').onchange = event => {
+    if (saveSystem.data.strategy.currentOperation) return;
+    const campaign = getCommandMissionsV110(saveSystem.data, CAMPAIGNS).find(c => c.id === event.target.value);
+    if (!campaign) return;
+    const previous = saveSystem.data.strategy.plannedCampaignId;
+    try { saveSystem.data.strategy.plannedCampaignId = campaign.id; saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); }
+    catch (error) { saveSystem.data.strategy.plannedCampaignId = previous; renderCommandMissionsV110(); toast(error.message); }
+  };
+  globalThis.addEventListener('keydown', event => {
+    if (!isDeveloperShortcutV110(event) || byId('app').hidden || standaloneContext) return;
+    event.preventDefault();
+    developerModeV110 = !developerModeV110;
+    all('[data-developer-only-v110]').forEach(element => { element.hidden = !developerModeV110; });
+    renderEnemies();
+    showView(developerModeV110 ? 'operations' : 'command');
+  });
   byId('nav').onclick = (event) => {
     const target = event.target.closest('[data-view]');
     if (!target) return;

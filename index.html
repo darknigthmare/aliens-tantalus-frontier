@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="/xeno-trials-v96.css">
   <link rel="stylesheet" href="/player-onboarding-v84.css">
   <link rel="stylesheet" href="/crew-v85.css">
+  <link rel="stylesheet" href="/echo9-v110.css">
+  <link rel="stylesheet" href="/command-v110.css">
   <link rel="stylesheet" href="/placeables-v86.css">
   <link rel="stylesheet" href="/src/ship-port-v87.css">
   <link rel="stylesheet" href="/src/refuge-v87.css">
@@ -69,7 +71,7 @@
       <nav id="nav">
         <button class="nav-button" data-view="command"><span>01</span> Commandement</button>
         <button class="nav-button" data-view="galaxy"><span>02</span> Carte galactique</button>
-        <button class="nav-button" data-view="operations"><span>03</span> Opérations</button>
+        <button class="nav-button" data-view="operations" data-developer-only-v110 hidden><span>DEV</span> Planification</button>
         <button class="nav-button" data-view="archives"><span>04</span> Archives</button>
         <button class="nav-button active" data-view="hub"><span>05</span> USS Tantalus</button>
         <button class="nav-button" data-view="armory"><span>06</span> Armurerie</button>
@@ -91,26 +93,36 @@
 
       <main id="workspace" tabindex="-1">
         <section class="view" data-panel="command">
-          <div class="hero">
-            <div class="hero-copy"><p class="eyebrow">BOUCLE STRATÉGIQUE EXÉCUTABLE // CONSÉQUENCES PERSISTANTES</p><h2>Chaque ordre avance réellement la Frontière.</h2><p>Décidez, équipez Echo-9, gérez le Tantalus, combattez les crises puis déployez-vous dans des missions physiques.</p><div class="button-row"><button id="continue-operation" class="button primary">CONTINUER / DÉPLOYER</button><button id="open-archives-command" class="button">CONSULTER LES ARCHIVES</button><button id="new-timeline" class="button">NOUVELLE CHRONOLOGIE</button></div></div>
-            <div class="hero-scan" aria-hidden="true"><span></span><i>USS TANTALUS // OPÉRATIONS FRONTIÈRE</i></div>
+          <div class="command-hero-v110">
+            <img src="/assets/openai/hub/rooms/command-bridge.png" alt="Passerelle de l’USS Tantalus, consoles de navigation face à l’espace">
+            <div class="hero-copy"><p class="eyebrow">MU/TH/UR // LIAISON DE COMMANDE</p><h2>USS TANTALUS<br>POSTE TACTIQUE</h2><p>La frontière attend vos ordres. Vérifiez le manifeste, les ressources du bord et les signaux entrants avant le prochain départ.</p><div class="button-row"><button id="continue-operation" class="button primary">CONTINUER / DÉPLOYER</button><button id="open-archives-command" class="button">JOURNAL DE MISSION</button><button id="new-timeline" class="button" data-developer-only-v110 hidden>NOUVELLE CHRONOLOGIE</button></div></div>
           </div>
           <div id="release-counts" class="metric-grid"></div>
           <div id="strategy-resources" class="resource-strip" role="group" aria-label="Ressources stratégiques"></div>
-          <div class="dashboard-grid">
-            <article class="panel span-2"><header><div><span class="eyebrow">SIMULATION GALACTIQUE</span><h3>Alertes persistantes</h3></div></header><div id="frontier-alerts" class="alert-list"></div></article>
-            <article class="panel"><header><h3>Echo-9 & systèmes</h3></header><div id="squad-summary"></div></article>
-            <article id="crisis-summary" class="panel crisis-panel"></article>
+          <nav class="command-links-v110" aria-label="Stations du Tantalus"><button type="button" data-command-view="crew">01 // ECHO-9</button><button type="button" data-command-view="armory">02 // DOTATIONS</button><button type="button" data-command-view="galaxy">03 // NAVIGATION</button><button type="button" data-command-view="hub">04 // REJOINDRE LE PONT</button></nav>
+          <div class="command-brief-v110">
+            <article class="command-select-v110"><img src="/assets/openai/hub/rooms/command-briefing.png" alt="Salle de briefing et table de préparation"><p class="eyebrow">ORDRES DISPONIBLES // ROUTES AUTORISÉES</p><h3>Prochaine affectation</h3><label>DESTINATION<select id="command-world-v110" aria-label="Destination de la mission"></select></label><label>ORDRE DE MISSION<select id="command-mission-v110" aria-label="Ordre de mission"></select></label><p id="command-mission-status-v110" class="hint" aria-live="polite"></p></article>
+            <article id="operation-plan" class="panel"></article>
           </div>
-          <div class="section-intro compact-intro"><div><p class="eyebrow">ORDRES DU TANTALUS</p><h2>Actions stratégiques</h2></div></div>
+          <details class="command-maintenance-v110"><summary>ÉQUIPEMENTS SPÉCIAUX // INTERFACE NEURO-XENO & CIBLES APEX</summary>
+            <article class="panel"><img class="command-card-art-v110" src="/assets/openai/hub/rooms/command-cic.png" alt="Console d’affectation des systèmes spéciaux" loading="lazy"><header><h3>Configuration du manifeste spécial</h3></header><label>PROFIL NEURO-XENO<select id="neuro-profile-select"></select></label><label>CIBLE APEX<select id="apex-dossier-select"></select></label><div id="advanced-loadout-status" class="data-list"></div><p class="hint">Paramétrez le harnais neural et le dossier de cible avant le départ. Le manifeste reste verrouillé tant qu’une opération est active.</p></article>
+          </details>
+          <div class="dashboard-grid">
+            <article class="panel"><img class="command-card-art-v110" src="/assets/openai/hub/rooms/engineering-sensors.png" alt="Poste de surveillance des capteurs" loading="lazy"><header><div><span class="eyebrow">TÉLÉMÉTRIE // FRONTIÈRE</span><h3>Signaux prioritaires</h3></div></header><div id="frontier-alerts" class="alert-list"></div></article>
+            <article class="panel"><img class="command-card-art-v110" src="/assets/openai/hub/rooms/habitat-quarters.png" alt="Quartiers de l’équipe" loading="lazy"><header><h3>Équipage et état du bord</h3></header><div id="squad-summary"></div></article>
+            <article class="panel crisis-panel"><img class="command-card-art-v110" src="/assets/openai/hub/rooms/industrial-quarantine.png" alt="Zone de confinement" loading="lazy"><div id="crisis-summary"></div></article>
+          </div>
+          <div class="command-section-v110"><img src="/assets/openai/hub/rooms/command-cic.png" alt="Centre d’information de combat" loading="lazy"><div><p class="eyebrow">TRANSMISSION D’ORDRES</p><h2>Protocoles du bord</h2></div></div>
           <div id="strategy-actions" class="strategy-grid"></div>
-          <div class="section-intro compact-intro"><div><p class="eyebrow">RECHERCHE APPLIQUÉE</p><h2>Projets actifs</h2></div></div>
+          <div class="command-section-v110"><img src="/assets/openai/hub/rooms/habitat-lab.png" alt="Laboratoire de recherche du Tantalus" loading="lazy"><div><p class="eyebrow">SCIENCES // ACCRÉDITATION MU/TH/UR</p><h2>Programmes de recherche</h2></div></div>
           <div id="research-projects" class="strategy-grid"></div>
-          <div class="section-intro compact-intro"><div><p class="eyebrow">JOURNAL DES CONSÉQUENCES</p><h2>Décisions enregistrées</h2></div></div>
+          <div class="command-section-v110"><img src="/assets/openai/hub/rooms/command-briefing.png" alt="Terminal du journal opérationnel" loading="lazy"><div><p class="eyebrow">REGISTRE DU COMMANDANT</p><h2>Dernières transmissions</h2></div></div>
           <div id="strategy-log" class="strategy-log"></div>
-          <div class="section-intro compact-intro"><div><p class="eyebrow">158 MODULES // ÉNERGIE & INTÉGRITÉ</p><h2>Architecture du vaisseau</h2></div><label class="search">RECHERCHER <input id="module-search" type="search" placeholder="Réacteur, sécurité, médical…"></label></div>
+          <details class="command-maintenance-v110"><summary>INGÉNIERIE // OUVRIR LES SYSTÈMES DU VAISSEAU</summary>
+          <div class="command-section-v110"><img src="/assets/openai/hub/rooms/engineering-reactor.png" alt="Réacteur du Tantalus" loading="lazy"><div><p class="eyebrow">ÉNERGIE & INTÉGRITÉ</p><h2>Architecture du vaisseau</h2></div><label class="search">RECHERCHER <input id="module-search" type="search" placeholder="Réacteur, sécurité, médical…"></label></div>
           <div id="module-summary" class="resource-strip"></div>
           <div id="module-list" class="catalog-grid"></div>
+          </details>
         </section>
 
         <section class="view" data-panel="galaxy">
@@ -118,7 +130,7 @@
           <div class="galaxy-layout"><div id="star-map" class="star-map" role="region" aria-label="Carte des mondes"></div><aside id="world-detail" class="panel sticky"></aside></div>
         </section>
 
-        <section class="view" data-panel="operations">
+        <section class="view" data-panel="operations" data-developer-only-v110 hidden>
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
           <div class="section-intro"><div><p class="eyebrow">440 CAMPAGNES // 19 DIRECTIVES CHATGPT // 23 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode" aria-label="Filtrer les campagnes par mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" aria-label="Rechercher une campagne" placeholder="Source, monde, objectif…"></div></div>
           <section class="special-operations-registry" aria-labelledby="special-operations-heading">
@@ -126,13 +138,7 @@
             <div id="special-operation-summary" class="special-operation-summary" aria-live="polite"></div>
             <div id="special-operation-list" class="special-operation-grid"></div>
           </section>
-          <div class="operations-layout">
-            <div><div id="campaign-list" class="catalog-grid"></div></div>
-            <aside class="operations-sidebar">
-              <article id="operation-plan" class="panel sticky"></article>
-              <article class="panel"><header><h3>Interface Neuro-Xeno</h3></header><label>PROFIL<select id="neuro-profile-select"></select></label><label>CIBLE APEX<select id="apex-dossier-select"></select></label><div id="advanced-loadout-status" class="data-list"></div><p class="hint">Le signal, les modes d’échec et les restrictions Apex sont évalués dans le runtime.</p></article>
-            </aside>
-          </div>
+          <div id="campaign-list" class="catalog-grid"></div>
         </section>
 
         <section class="view" data-panel="archives">

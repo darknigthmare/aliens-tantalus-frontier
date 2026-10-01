@@ -6,13 +6,16 @@ import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './x
 import { getEnemyImportAnimationV107, requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
   createEnemyImportMotionTrackerV107, isEnemyImportAnimationImageReadyV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109, requestEnemyImportAttackV109, drawEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
+import { getXenoTrialsDisplayScaleV110, getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
+import { getSynthTrialAttackV110, drawSynthConeV110 } from './synth-combat-v110.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special' });
 const ACTIONS = new Set(Object.values(KEY_ACTION));
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
-/** Fixed-scale whole-PNG layout; no crop, stretch or fake animation frames. */
+/** Legacy V105 physics/debug transform, preserved for historical consumers.
+ * Live presentation uses V110's shared two-fighter camera below. */
 export function getXenoTrialsRenderMetricsV96(id, variant = null) {
   return getXenoTrialsRenderMetricsV105(id, variant);
 }
@@ -32,6 +35,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const cancelFrame = options.cancelAnimationFrame || host?.cancelAnimationFrame?.bind(host);
   if (!requestFrame || !cancelFrame) throw new Error('Xeno Trials requires animation-frame scheduling');
   const match = createXenoTrialsMatchV96({ ...options.config, introSeconds: 0, holdRoundTransition: true });
+  const displayScale = getXenoTrialsDisplayScaleV110(match.fighters);
   let presentation = createXenoPresentationV97();
   const presentationView = () => getXenoPresentationViewV97(presentation);
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
@@ -43,6 +47,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const originalSize = { width: canvas.width, height: canvas.height };
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
   canvas.width = XENO_TRIALS_ARENA_V96.width; canvas.height = XENO_TRIALS_ARENA_V96.height;
+  canvas.setAttribute?.('data-xeno-display-scale-v110', String(displayScale));
   canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Flèches pour se déplacer, J K L pour attaquer, S pour la garde, P pour la pause.');
 
   function listen(target, type, handler, settings) {
@@ -135,7 +140,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const body = getXenoTrialsBodyBoundsV105(fighter);
     context.fillStyle = '#0008'; context.beginPath(); context.ellipse(body.center, 454, body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
     if (!image) { text('Visuel indisponible', fighter.x, ground - 90, 12, '#f0b6ac', 'center'); return; }
-    const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV96(fighter.id, fighter.variant);
+    const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
     const timeSeconds = match.tick * XENO_TRIALS_STEP_V96;
     const displaced = observedMovement(fighter, timeSeconds);
     const moving = displaced && (Boolean(fighter.previousInput?.left) !== Boolean(fighter.previousInput?.right))
@@ -169,7 +174,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.beginPath(); context.arc(face, ground - body.height * .55, body.height * .48,
         fighter.facing > 0 ? -Math.PI / 2 : Math.PI / 2, fighter.facing > 0 ? Math.PI / 2 : Math.PI * 1.5); context.stroke();
     }
-    if (fighter.attack) {
+    if (fighter.attack && !(fighter.attack.kind === 'special' && ['flame', 'detonation'].includes(definition.special))) {
       const attack = fighter.attack, spec = XENO_TRIALS_ATTACKS_V96[attack.kind], windowStart = spec.startup;
       if (attack.age >= windowStart && attack.age < windowStart + .12) {
         context.strokeStyle = attack.kind === 'special' ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
@@ -185,6 +190,23 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (stopped) return;
     drawArena();
     for (const fighter of [...match.fighters].sort((a, b) => a.y - b.y)) drawFighter(fighter);
+    // Feedback uses physical hitbox coordinates, not the independently scaled portrait.
+    for (const fighter of match.fighters) {
+      const definition = getXenoTrialsFighterV96(fighter.id), attack = fighter.attack;
+      if (attack?.kind !== 'special' || !['flame', 'detonation'].includes(definition.special)) continue;
+      const body = getXenoTrialsBodyBoundsV105(fighter), spec = getSynthTrialAttackV110(definition, 'special', XENO_TRIALS_ATTACKS_V96.special);
+      if (definition.special === 'flame' && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
+        drawSynthConeV110(context, attack.facing > 0 ? body.right : body.left, 450 - fighter.y - body.height * .55, attack.facing, spec.reach);
+      if (definition.special === 'detonation' && !attack.hit) {
+        context.strokeStyle = '#ffb364'; context.lineWidth = 3;
+        context.strokeRect(body.left - 5, 450 - body.top - 5, body.width + 10, body.height + 10);
+        text('SURCHARGE', fighter.x, 450 - body.top - 13, 12, '#ffca83', 'center');
+      }
+    }
+    for (const effect of match.synthEffectsV110 || []) {
+      context.fillStyle = '#ffc56c55'; context.strokeStyle = '#ffecc5'; context.lineWidth = 3; context.beginPath();
+      context.arc(effect.x, 450 - effect.y, effect.radius * (1 - effect.life / .4), 0, Math.PI * 2); context.fill(); context.stroke();
+    }
     for (const projectile of match.projectiles) {
       context.fillStyle = projectile.style === 'acid' ? '#c1f078' : '#a7dafa';
       context.beginPath(); context.ellipse(projectile.x, 450 - projectile.y, 13, 7, 0, 0, Math.PI * 2); context.fill();

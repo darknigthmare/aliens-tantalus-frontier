@@ -1,6 +1,7 @@
 import { CREW, WEAPONS } from './content-core-v50.js';
 import { RECRUIT_GEAR_CATALOG_V85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { captureTacticalReloadV77, restoreTacticalReloadV77, updateTacticalReloadV77 } from './tactical-reload-v77.js';
+import { sanitizeEcho9AppearanceV110 } from './echo9-personnel-v110.js';
 
 const bounded = (value, fallback, min, max) => Number.isFinite(Number(value)) ? Math.max(min, Math.min(max, Number(value))) : fallback;
 const copy = value => JSON.parse(JSON.stringify(value));
@@ -49,6 +50,10 @@ export function buildCrewDeploymentV85(member) {
 }
 
 export function attachCrewDeploymentV85(actor, member) {
+  // Cosmetic marking also applies to historical personnel without an individual V85 kit.
+  const appearanceV110 = sanitizeEcho9AppearanceV110(member?.appearanceV110);
+  if (appearanceV110) actor.appearanceV110 = appearanceV110;
+  else delete actor.appearanceV110;
   const state = buildCrewDeploymentV85(member);
   if (!state) return false;
   actor.crewV85 = state;

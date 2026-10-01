@@ -4,6 +4,7 @@ import { XENO_TRIALS_IMPORTS_V103 } from './enemy-user-imports-v103.js';
 import { XENO_TRIALS_USER_ADMISSIONS_V105 } from './xeno-trials-user-admissions-v105.js';
 import { XENO_TRIALS_IMPORTS_V105 } from './enemy-user-imports-v105.js';
 import { XENO_TRIALS_IMPORTS_V106 } from './enemy-user-imports-v106.js';
+import { XENO_TRIALS_SYNTHS_V110 } from './enemy-synth-adaptations-v110.js';
 
 /** Xeno Trials is an original, non-canonical WY simulation, not a licensed story.
  * The dedicated source images remain static illustrations, never animation atlases.
@@ -173,7 +174,11 @@ export const XENO_TRIALS_FIGHTERS_V96 = Object.freeze([
       entry.hp, entry.speed, entry.power, entry.reach, entry.special),
     importRevision: 105, referenceIdV100: entry.referenceIdV100, alteredOf: entry.alteredOf
   })),
-  ...XENO_TRIALS_IMPORTS_V106.map(terrestrialFighterV106)
+  ...XENO_TRIALS_IMPORTS_V106.map(terrestrialFighterV106),
+  ...XENO_TRIALS_SYNTHS_V110.map(entry => Object.freeze({
+    ...fighter(entry.id, entry.profileId, entry.label, entry.role, entry.hp, entry.speed, entry.power, entry.reach, entry.special),
+    importRevision: 110
+  }))
 ]);
 const FIGHTERS = new Map(XENO_TRIALS_FIGHTERS_V96.map(entry => [entry.id, entry]));
 export function getXenoTrialsFighterV96(id) { return FIGHTERS.get(id) || null; }
@@ -189,19 +194,22 @@ export const XENO_TRIALS_FACTIONS_V96 = Object.freeze([
       ...XENO_TRIALS_IMPORTS_V103.filter(entry => entry.factionId === 'containment').map(entry => entry.id),
       ...XENO_TRIALS_USER_ADMISSIONS_V105.filter(entry => entry.factionId === 'containment').map(entry => entry.id),
       ...XENO_TRIALS_IMPORTS_V105.filter(entry => entry.factionId === 'containment').map(entry => entry.id),
-      ...XENO_TRIALS_IMPORTS_V106.filter(entry => entry.factionId === 'containment').map(entry => entry.id)]), projectOriginal: true }),
+      ...XENO_TRIALS_IMPORTS_V106.filter(entry => entry.factionId === 'containment').map(entry => entry.id),
+      ...XENO_TRIALS_SYNTHS_V110.filter(entry => entry.factionId === 'containment').map(entry => entry.id)]), projectOriginal: true }),
   Object.freeze({ id: 'pursuit', label: 'WY / Poursuite', description: 'Cellule simulée mobile : pression rapprochée et bonds.', doctrine: 'rush', color: '#f5a64b',
     roster: Object.freeze(['runner', 'prowler', 'razor-claws', 'panther', 'mantis', 'stalker-arcade', 'albino-runner', 'albino-ripper', 'armored-runner', 'armored-ripper', 'acid-runner',
       'user-antilope', 'user-phantera-black', 'user-chameleon-2', 'user-tiger-biped', 'user-black-bone-raptor', 'user-skeletal-quadruped', 'cryo-runner', 'cryo-monica', 'cryo-ripper', 'cryo-reef-stalker', 'cryo-dust-runner', 'armored-reef-stalker', 'armored-dust-runner', 'acid-ripper',
       ...XENO_TRIALS_IMPORTS_V103.filter(entry => entry.factionId === 'pursuit').map(entry => entry.id),
       ...XENO_TRIALS_USER_ADMISSIONS_V105.filter(entry => entry.factionId === 'pursuit').map(entry => entry.id),
-      ...XENO_TRIALS_IMPORTS_V106.filter(entry => entry.factionId === 'pursuit').map(entry => entry.id)]), projectOriginal: true }),
+      ...XENO_TRIALS_IMPORTS_V106.filter(entry => entry.factionId === 'pursuit').map(entry => entry.id),
+      ...XENO_TRIALS_SYNTHS_V110.filter(entry => entry.factionId === 'pursuit').map(entry => entry.id)]), projectOriginal: true }),
   Object.freeze({ id: 'rival-lab', label: 'Laboratoire rival / simulé', description: 'Adversaire corporatiste fictif : maintien à distance et tirs.', doctrine: 'range', color: '#b88aff',
     roster: Object.freeze(['spitter', 'xenoborg', 'arachnoid', 'synth-trooper', 'synth-sniper', 'synth-heavy', 'combat-synth', 'mecha', 'mecha-2', 'mechanoid', 'albino-combat-synth', 'albino-six', 'acid-combat-synth', 'acid-boiler',
       'user-spiker', 'user-chameleon', 'cryo-boiler', 'cryo-burster', 'cryo-combat-synth', 'armored-pale-hunter', 'acid-burster',
       ...XENO_TRIALS_IMPORTS_V103.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
       ...XENO_TRIALS_USER_ADMISSIONS_V105.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
-      ...XENO_TRIALS_IMPORTS_V106.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id)]), projectOriginal: true }),
+      ...XENO_TRIALS_IMPORTS_V106.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
+      ...XENO_TRIALS_SYNTHS_V110.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id)]), projectOriginal: true }),
   Object.freeze({ id: 'hive', label: 'Ruche / simulation hostile', description: 'Modèle de pression de ruche ; aucun dressage canonique revendiqué.', doctrine: 'balanced', color: '#ed717d',
     roster: Object.freeze(['warrior', 'grid', 'predalien', 'queen', 'ravager', 'boiler', 'burster', 'gorilla', 'ultramorph', 'albino-ravager', 'albino-burster', 'armored-red', 'acid-lurker', 'acid-ravager',
       'user-carrier', 'user-warrior-red', 'user-trex-king', 'user-trex-queen', 'user-big-xeno', 'user-pale-spined', 'user-raised-crest', 'user-blue-violet-biped', 'user-red-horned', 'cryo-lurker', 'cryo-ravager', 'cryo-ripper-queen', 'cryo-pale-hunter', 'cryo-salvage-brute', 'cryo-caravan-stalker', 'armored-caravan-stalker', 'acid-queen', 'acid-k-series', 'acid-ripper-queen',

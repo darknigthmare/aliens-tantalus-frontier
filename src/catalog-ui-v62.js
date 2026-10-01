@@ -17,6 +17,7 @@ import { isCatalogRecordVisibleV105 } from './enemy-catalog-taxonomy-v105.js';
 import { getEnemyStaticPoseV96 } from './enemy-static-poses-v96.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
+import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -480,6 +481,7 @@ export class CatalogWorkbenchV62 {
     this.detail = options.detail;
     this.search = options.search || null;
     this.document = documentRef;
+    this.developerModeV110 = options.developerModeV110 === true;
     this.catalogsSource = options.catalogs || options.catalog || [...VALID_CATALOGS];
     this.predicate = typeof options.predicate === 'function' ? options.predicate : null;
     this.getActions = typeof options.getActions === 'function' ? options.getActions : () => EMPTY_ARRAY;
@@ -650,7 +652,7 @@ export class CatalogWorkbenchV62 {
     if (this.catalogs.includes('enemies')) {
       const archived = CATALOG_RECORDS_V62.filter(record => record.catalogPolicyV105?.archived).length;
       const toggle = createElement(this.document, 'button', 'button compact',
-        `${this.state.includeLegacyVariants ? 'MASQUER' : 'AFFICHER'} LES ${archived} VARIANTES HISTORIQUES NON VALIDÉES`);
+        `${this.state.includeLegacyVariants ? 'MASQUER' : 'AFFICHER'} LES ${archived} ARCHIVES HISTORIQUES${this.developerModeV110 ? ' NON VALIDÉES' : ''}`);
       toggle.type = 'button'; toggle.dataset.catalogLegacyV105 = 'toggle';
       toggle.setAttribute('aria-pressed', String(this.state.includeLegacyVariants));
       this.tree.append(toggle);
@@ -736,12 +738,12 @@ export class CatalogWorkbenchV62 {
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${formatCatalogValueV62(record.taxonomy.family)}`),
-      createElement(this.document, 'strong', 'catalog-v62__card-title', record.name),
-      createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : record.taxonomy.type),
-      createElement(this.document, 'span', 'catalog-v62__card-id', record.id)
+      createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
+      createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : record.taxonomy.type)
     );
+    if (this.developerModeV110 || record.catalog !== 'enemies') body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
     select.append(media, body);
-    if (record.catalogPolicyV105?.archived) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ARCHIVE GÉNÉRÉE · NON VALIDÉE'));
+    if (record.catalogPolicyV105?.archived) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ARCHIVE HISTORIQUE'));
     if (record.documentaryReferenceV105) body.append(createElement(this.document, 'span', 'catalog-v62__card-type', 'ORIGINAL DOCUMENTAIRE · HORS COMBAT'));
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id);
@@ -802,6 +804,7 @@ export class CatalogWorkbenchV62 {
       return;
     }
     const header = createElement(this.document, 'header', 'catalog-v62__detail-header');
+    const technical = this.developerModeV110 || record.catalog !== 'enemies';
     const animationControls = createElement(this.document, 'div');
     const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(header, record, true)
       : record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
@@ -809,9 +812,9 @@ export class CatalogWorkbenchV62 {
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', CATALOG_LABELS_V62[record.catalog]),
-      createElement(this.document, 'h3', '', record.name),
-      createElement(this.document, 'code', '', record.id)
+      createElement(this.document, 'h3', '', technical ? record.name : playerCatalogNameV110(record.name))
     );
+    if (technical) heading.append(createElement(this.document, 'code', '', record.id));
     header.append(heading);
     this.detail.append(header);
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
@@ -822,15 +825,15 @@ export class CatalogWorkbenchV62 {
         : 'Dossier disponible. Aucun spécimen rencontré dans cette campagne. Le laboratoire ne déverrouille pas la découverte.'));
       this.detail.append(section);
     }
-    if (record.visual?.visualMode === 'static-pose') this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+    if (technical && record.visual?.visualMode === 'static-pose') this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
       `${importWalkV107(record.id) ? `Aperçu fixe du dossier · ${importWalkV107(record.id).label} · cycle de marche disponible en campagne, BIOFORGE et Trials${getEnemyImportAttackV109(getEnemyStaticPoseV96(record.id)) ? ' ; frappe légère uniquement dans Xeno Trials' : ''}` : 'Pose fixe native · animations manquantes'} · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
     // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);
-    if (record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
+    if (technical && record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) this.renderGameplayScaleV72(record);
     this.detail.append(renderTaxonomyPath(this.document, record));
     if (record.catalogPolicyV105?.personnel) {
-      const classification = this.renderSection('CLASSEMENT DU DOSSIER · DISTINCT DU CANON', 'classification');
+      const classification = this.renderSection('IDENTIFICATION DU PERSONNEL', 'classification');
       const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
       appendDefinitionRows(this.document, data, { family: record.taxonomy.family, stage: record.taxonomy.stage,
         role: record.taxonomy.role, faction: record.taxonomy.faction });
@@ -839,23 +842,24 @@ export class CatalogWorkbenchV62 {
 
     const canonSection = this.renderSection('FAITS DE RÉFÉRENCE', 'canon');
     const canonData = createElement(this.document, 'dl', 'catalog-v62__data-list');
-    appendDefinitionRows(this.document, canonData, record.canonFacts.source, { status: 'canon' });
+    if (technical) appendDefinitionRows(this.document, canonData, record.canonFacts.source, { status: 'canon' });
     appendDefinitionRows(this.document, canonData, record.canonFacts.claims, { status: 'canon' });
     canonSection.append(canonData);
-    this.detail.append(canonSection);
+    if (technical || canonData.children.length) this.detail.append(canonSection);
 
     if (!record.documentaryReferenceV105) {
       const gameplaySection = this.renderSection('STATISTIQUES DE GAMEPLAY', 'gameplay');
       const gameplayData = createElement(this.document, 'dl', 'catalog-v62__data-list');
       const walk = importWalkV107(record.id);
-      appendDefinitionRows(this.document, gameplayData, walk
+      appendDefinitionRows(this.document, gameplayData, !technical ? playerCatalogStatsV110(record.gameplayStats) : walk
         ? { ...record.gameplayStats, animationStatus: walk.label, visualMode: 'Aperçu fixe du dossier ; marche animée adaptée en jeu' }
         : record.gameplayStats, { status: 'gameplay' });
       gameplaySection.append(gameplayData); this.detail.append(gameplaySection);
     }
     this.renderCombatBehaviorV89(record);
 
-    this.renderMediaSection(record);
+    if (technical) this.renderMediaSection(record);
+    else if (record.visualReferenceV106?.sourceCredit) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', `Référence visuelle : ${record.visualReferenceV106.sourceCredit}`));
     this.renderBiologySection(record);
     this.renderSizeSection(record);
 
@@ -880,11 +884,11 @@ export class CatalogWorkbenchV62 {
     else if (record.combatBehaviorV89) section.dataset.combatBehaviorV89 = behavior.id;
     section.append(
       createElement(this.document, 'p', 'catalog-v62__eyebrow', behavior.label),
-      createElement(this.document, 'p', 'catalog-v62__fact-note', behavior.summary),
-      createElement(this.document, 'p', 'catalog-v62__fact-note', behavior.adaptationNote || 'Adaptation partielle au moteur 2D ; fidélité canonique non certifiée.')
+      createElement(this.document, 'p', 'catalog-v62__fact-note', behavior.summary)
     );
+    if (this.developerModeV110) section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', behavior.adaptationNote || 'Adaptation partielle au moteur 2D ; fidélité canonique non certifiée.'));
     // Source links remain navigation only. Never interpret imported strings as markup.
-    for (const source of new Set(Array.isArray(behavior.sourceUrls) ? behavior.sourceUrls : [])) {
+    for (const source of new Set(this.developerModeV110 && Array.isArray(behavior.sourceUrls) ? behavior.sourceUrls : [])) {
       let url;
       try { url = new URL(source); } catch { continue; }
       if (url.protocol !== 'https:' || url.username || url.password) continue;
@@ -948,6 +952,7 @@ export class CatalogWorkbenchV62 {
 
   renderBiologySection(record) {
     if (record.catalog !== 'enemies') return;
+    if (['human', 'synthetic', 'automaton', 'engineer'].includes(record.taxonomy.family)) return;
     const relations = getBiologicalRelationsV62(record.id);
     const section = this.renderSection('RELATIONS BIOLOGIQUES', 'biology');
     if (!relations.length) {
@@ -981,8 +986,8 @@ export class CatalogWorkbenchV62 {
       { id: 'marine-reference', name: 'Marine', visual: getCatalogMarineReferenceV72() },
       getCatalogEntryV62('enemy-008-queen')];
     if (!references.some((entry) => entry.id === record.id)) references.push(record);
-    stage.setAttribute('aria-label', `Même échelle de jeu : ${references.map((entry) => entry.name).join(', ')}`);
-    const layout = getCatalogComparisonLayoutV72(references.map((entry) => entry.visual));
+    stage.setAttribute('aria-label', `Même échelle de jeu : ${references.map((entry) => this.developerModeV110 ? entry.name : playerCatalogNameV110(entry.name)).join(', ')}`);
+    const layout = getCatalogComparisonLayoutV72(references.map((entry) => entry.visual), references.map((entry) => entry.id));
     const legend = createElement(this.document, 'ol', 'catalog-v72__comparison-legend');
     stage.style.setProperty('--catalog-world-unit', layout.cssWorldUnit);
     stage.style.setProperty('--catalog-above-ground', String(layout.aboveGround));
@@ -994,30 +999,46 @@ export class CatalogWorkbenchV62 {
       const plane = createElement(this.document, 'div', 'catalog-v72__comparison-plane');
       const size = layout.sizes[index];
       item.style.width = `calc(${layout.slots[index]} * var(--catalog-world-unit))`;
-      const preview = this.animator.mount(plane, entry.visual, entry.name, { worldScale: 0.35, animate: false, staticProfileId: entry.id });
+      const label = this.developerModeV110 ? entry.name : playerCatalogNameV110(entry.name);
+      const preview = this.animator.mount(plane, entry.visual, label, { worldScale: 0.35, animate: false, staticProfileId: entry.id });
       if (!preview) this.renderMissingMedia(plane, entry);
       if (preview && size) {
         // CSS container units resize the whole line together, including pivots.
-        preview.style.width = `calc(${size.worldWidth} * var(--catalog-world-unit))`;
-        preview.style.height = `calc(${size.worldHeight} * var(--catalog-world-unit))`;
-        preview.style.marginBottom = `calc(${-size.groundOffset} * var(--catalog-world-unit))`;
+        preview.style.width = `calc(${size.worldVisibleWidth} * var(--catalog-world-unit))`;
+        preview.style.height = `calc(${size.worldVisibleHeight} * var(--catalog-world-unit))`;
+        preview.style.marginBottom = 'calc(0 * var(--catalog-world-unit))';
+        preview.style.flex = '0 0 auto';
+        // Comparison shows the measured visible idle frame. Only transparent
+        // margins are hidden; every source pixel keeps the same uniform scale.
+        const image = preview.querySelector?.('img');
+        if (image && size.alphaBounds) {
+          const [left, top, right, bottom] = size.alphaBounds;
+          const grid = entry.visual.grid, frame = entry.visual.idleClip.clip.frames[0];
+          const sheetWidth = grid.columns * size.cellWidth, sheetHeight = grid.rows * size.cellHeight;
+          image.style.width = `${sheetWidth / (right - left) * 100}%`;
+          image.style.height = `${sheetHeight / (bottom - top) * 100}%`;
+          image.style.objectFit = 'fill';
+          image.style.transform = `translate(${-(frame % grid.columns * size.cellWidth + left) / sheetWidth * 100}%, ${-(Math.floor(frame / grid.columns) * size.cellHeight + top) / sheetHeight * 100}%)`;
+        }
         preview.dataset.worldScale = 'responsive-common';
+        preview.dataset.groundContactV110 = 'measured-idle-alpha';
+        preview.dataset.visibleHeightV110 = String(size.worldVisibleHeight);
       }
       const marker = createElement(this.document, 'span', '', index + 1);
-      marker.setAttribute('aria-label', `${index + 1} : ${entry.name}`);
+      marker.setAttribute('aria-label', `${index + 1} : ${label}`);
       item.append(plane, marker);
       stage.append(item);
-      legend.append(createElement(this.document, 'li', '', entry.name));
+      legend.append(createElement(this.document, 'li', '', label));
     }
     section.append(stage, legend, createElement(this.document, 'p', 'catalog-v62__fact-note',
-      'Même facteur adapté à la largeur et même ligne de sol pour toutes les silhouettes. Dimensions du rendu en jeu, pas des mètres canoniques. Le portrait reste un zoom de détail.'));
+      'Même sol et échelle relative commune. Proportions estimées pour la simulation, pas des mesures canoniques.'));
     this.detail.append(section);
   }
 
   renderSizeSection(record) {
     const comparison = getHumanSizeComparisonV62(record.id, this.dimensions ? { dimensions: this.dimensions } : {});
     const section = this.renderSection('COMPARAISON HUMAINE', 'dimensions');
-    if (record.physicalSize) {
+    if (record.physicalSize && this.developerModeV110) {
       const size = record.physicalSize;
       const measurement = size.measurementType === 'axial-length' ? 'longueur axiale, pas hauteur' : 'hauteur selon posture';
       section.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
@@ -1025,6 +1046,7 @@ export class CatalogWorkbenchV62 {
       for (const note of size.notes) section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', note));
     }
     if (!comparison) {
+      if (!this.developerModeV110 && record.catalog === 'enemies') return;
       section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', 'Aucune dimension physique vérifiée et sourcée : comparateur masqué.'));
       this.detail.append(section);
       return;

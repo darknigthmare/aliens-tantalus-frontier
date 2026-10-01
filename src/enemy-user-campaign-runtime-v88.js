@@ -3,11 +3,12 @@ import { createUserCasteActorV87, isUserCasteImageReadyV87, updateUserCasteActor
   getUserPoseHabitatV95, moveUserPoseWithinHabitatV95, confineUserPoseToHabitatV95 } from './enemy-user-pose-runtime-v87.js';
 import { getEnemyStaticPoseV96 as getEnemyStaticPoseV95, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95, getEnemyStaticPoseStatesV96 as getEnemyStaticPoseStatesV95, selectEnemyStaticPoseEncounterStateV96 as selectEnemyStaticPoseEncounterStateV95 } from './enemy-static-poses-v96.js';
 import { findLargeMissionActorPlacementV72 } from './mission-large-actor-placement-v72.js';
+import { synthConeHitsV110, drawSynthConeV110 } from './synth-combat-v110.js';
 const IDS = new Set(ENEMY_ENCYCLOPEDIA_CATALOG_V88.map(d => d.id));
 const profileId = enemy => enemy?.profileId || String(enemy?.id || '').split(':')[0];
 const combatContract = enemy => {
   const definition = getEnemyUserCampaignV88(profileId(enemy));
-  return definition?.behaviorContractV90 || definition?.behaviorContractV89;
+  return definition?.behaviorContractV110 || definition?.behaviorContractV90 || definition?.behaviorContractV89;
 };
 const rangedContract = contract => ['timed-acid', 'cluster-acid'].includes(contract?.kind);
 const combatState = contract => ({ schema: 89, kind: contract.kind, phase: 'cooldown', clock: 1.2, serial: 0,
@@ -78,7 +79,7 @@ export function createUserCampaignActorV88(definition, previous, slot, difficult
     y: Math.max(habitat.y, Math.min(habitat.y + habitat.h - actor.h, previous.y)),
     groundY: habitat.y + habitat.h });
   if (definition.locomotion === 'aquatic' && !confineUserPoseToHabitatV95(actor, habitat)) return null;
-  const contract = definition.behaviorContractV90 || definition.behaviorContractV89;
+  const contract = definition.behaviorContractV110 || definition.behaviorContractV90 || definition.behaviorContractV89;
   if (contract) actor.userCasteCombatV89 = combatState(contract);
   return actor;
 }
@@ -255,7 +256,10 @@ export function withUserCasteCampaignV88(BaseEngine) {
 
     updateUserCampaignBehaviorV89(enemy, delta) {
       const contract = combatContract(enemy);
-      if (!this.userCasteCampaignActiveV88 || !enemy?.campaignCasteV88 || !contract) return false;
+      // The three V110 synths keep their explicit weapon contract in Bioforge
+      // as well as campaign; historical specialized actors retain their old gate.
+      const nativeSynth = getEnemyStaticPoseV95(profileId(enemy))?.visualRevision === 110;
+      if ((!nativeSynth && (!this.userCasteCampaignActiveV88 || !enemy?.campaignCasteV88)) || !contract) return false;
       const state = enemy.userCasteCombatV89 ||= combatState(contract), dt = effectDelta(delta);
       if (suspendDormantCombatV94(enemy, state, contract)) return true;
       if (!enemy.alive) { state.phase = 'spent'; state.clock = 0; return true; }
@@ -279,7 +283,7 @@ export function withUserCasteCampaignV88(BaseEngine) {
         state.clock = Math.max(0, state.clock - dt); enemy.attacking = true;
         if (state.clock > 0) return true;
         // Consume the attack before damage/events, so an intervening save sees no pending duplicate.
-        state.phase = contract.kind === 'acid-burst' ? 'spent' : 'cooldown'; state.clock = contract.cooldown;
+        state.phase = ['acid-burst', 'synth-detonation'].includes(contract.kind) ? 'spent' : 'cooldown'; state.clock = contract.cooldown;
         if (rangedContract(contract)) {
           const y = enemy.y + enemy.h * .45;
           const offsets = contract.clusterOffsets || [0];
@@ -296,7 +300,7 @@ export function withUserCasteCampaignV88(BaseEngine) {
         } else {
           // Mark the sacrificial actor dead before callbacks can capture a save.
           // No snapshot may contain an already delivered but still armed Burster.
-          if (contract.kind === 'acid-burst') this.defeatEnemy(enemy, null);
+          if (['acid-burst', 'synth-detonation'].includes(contract.kind)) this.defeatEnemy(enemy, null);
           this.userCasteAreaImpactV89(enemy, x, contract.kind === 'ground-slam' ? feet - 8 : enemy.y + enemy.h / 2, contract);
           this.userCasteEffectsV89.push({ kind: 'pulse', ownerId: enemy.id, x, y: feet - 8, vx: 0, vy: 0, life: .3, clock: 0, serial: state.serial });
         }
@@ -307,7 +311,7 @@ export function withUserCasteCampaignV88(BaseEngine) {
       state.clock = Math.max(0, state.clock - dt);
       const stop = contract.preferredRange || (contract.kind === 'timed-acid' ? 260 : contract.range * .8);
       if (enemy.alert && gap > stop) {
-        const previousX = enemy.x, destinationX = enemy.x + enemy.facing * enemy.speed * strideDistanceV90(contract, state, dt);
+        const previousX = enemy.x, destinationX = enemy.x + enemy.facing * enemy.speed * (contract.chargeSpeed || 1) * strideDistanceV90(contract, state, dt);
         if (this.missionLevelRuntime) this.moveEnemyOnMissionSurface(enemy, destinationX, dt);
         else { enemy.x = destinationX; this.resolveEnemyHorizontal?.(enemy, previousX); }
         enemy.vx = (enemy.x - previousX) / dt;
@@ -330,6 +334,8 @@ export function withUserCasteCampaignV88(BaseEngine) {
       for (const target of this.userCasteTargetsV89()) {
         const targetX = target.x + target.w / 2;
         const targetY = contract.kind === 'ground-slam' || scale !== 1 ? target.y + target.h - 8 : target.y + target.h * .5;
+        if (contract.kind === 'synth-flame' && !synthConeHitsV110(x, y, enemy.facing, contract.range,
+          { left: target.x, right: target.x + target.w, bottom: target.y, top: target.y + target.h })) continue;
         if (Math.hypot(targetX - x, targetY - y) > contract.radius
           || ((contract.kind === 'ground-slam' || scale !== 1) && Math.abs(target.y + target.h - y - 8) > 24)
           || ((contract.kind === 'ground-slam' || scale !== 1) && !this.userCasteGroundPathV89(x, targetX, y))
@@ -394,6 +400,16 @@ export function withUserCasteCampaignV88(BaseEngine) {
       for (const effect of this.userCasteEffectsV89 || []) {
         const contract = combatContract(this.enemies.find(e => e.id === effect.ownerId));
         if (!contract || effect.life <= 0) continue;
+        if (contract.kind === 'synth-flame') {
+          const owner = this.enemies.find(e => e.id === effect.ownerId);
+          drawSynthConeV110(ctx, effect.x, owner ? owner.y + owner.h * .5 : effect.y, owner?.facing || 1, contract.range, Math.min(.7, effect.life * 3));
+          continue;
+        }
+        if (contract.kind === 'synth-detonation') {
+          ctx.fillStyle = '#ffb85b66'; ctx.strokeStyle = '#ffe5b5'; ctx.lineWidth = 3; ctx.beginPath();
+          ctx.arc(effect.x, effect.y - contract.radius * .4, contract.radius * (1 - effect.life / .4), 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          continue;
+        }
         ctx.fillStyle = effect.kind === 'glob' ? '#e9e4d6' : 'rgba(213,222,160,.38)';
         ctx.strokeStyle = '#dfecb0'; ctx.lineWidth = 2; ctx.beginPath();
         ctx.ellipse(effect.x, effect.y, effect.kind === 'glob' ? 9 : contract.radius, effect.kind === 'glob' ? 9 : 7, 0, 0, Math.PI * 2);

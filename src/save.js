@@ -49,6 +49,7 @@ import { createPlayerOpeningV88, normalizePlayerOpeningV88, advancePlayerOpening
 import { createOpeningExerciseV89, normalizeOpeningExerciseV89 } from './opening-exercise-v89.js';
 import { createPortMeridienV90, normalizePortMeridienV90 } from './port-meridien-v90.js';
 import { createRecruitmentV85, sanitizeRecruitmentV85, sanitizeRecruitProfileV85, generateNextRecruitmentPoolV85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { sanitizeEcho9AppearanceV110 } from './echo9-personnel-v110.js';
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-state-v87.js';
 import { normalizeUserEquipmentV95, resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
@@ -1135,6 +1136,9 @@ function sanitizeCrewRecordV85(raw, fallback, profile = null) {
     injuries: Array.isArray(raw.injuries) ? raw.injuries.filter(isRecord).slice(0, 64) : fallback.injuries
   };
   delete member.aptitudesV85; // Derived, never trust an imported effective-stat override.
+  const appearanceV110 = sanitizeEcho9AppearanceV110(raw.appearanceV110);
+  if (appearanceV110) member.appearanceV110 = appearanceV110;
+  else delete member.appearanceV110;
   if (profile) Object.assign(member, { recruitV85: profile, name: profile.name, callsign: profile.callsign });
   else delete member.recruitV85;
   return sanitizeCrewProgressV85(member, raw, profile);

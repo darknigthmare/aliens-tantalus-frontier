@@ -1,4 +1,5 @@
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
+import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
 import { resolveUserEquipmentLoadoutV95, loadUserEquipmentImagesV95, drawUserArmorV95, drawUserWeaponV95 } from './user-equipment-v95.js';
 import { attachCrewDeploymentV85, crewMovementV85, crewAimOffsetV85, crewSupportProfileV85,
   tickCrewRuntimeV85, stressCrewOnDamageV85, crewToolChargesV85, spendCrewToolV85,
@@ -2199,6 +2200,7 @@ export function withV52MissionRuntime(BaseEngine) {
       actor.spriteHitbox = runtime;
       actor.spritePivot = runtime?.pivot || render.pivot;
       actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
+      if (!render.fallback) drawEcho9MarkingV110(ctx, actor);
       if (actor.inCover) {
         ctx.strokeStyle = '#79c895';
         ctx.strokeRect(actor.x - 3, actor.y + 32, actor.w + 6, actor.h - 29);
@@ -2289,6 +2291,7 @@ export function withV52MissionRuntime(BaseEngine) {
       ctx.save();
       if (!member.alive) ctx.globalAlpha = member.downed ? 0.72 : 0.38;
       const drawn = this.drawSpriteSample(ctx, sample, member);
+      if (drawn) drawEcho9MarkingV110(ctx, member);
       ctx.restore();
       if (!drawn) {
         ctx.fillStyle = member.species === 'synthetic' ? '#c4d5d2' : '#7fa88a';

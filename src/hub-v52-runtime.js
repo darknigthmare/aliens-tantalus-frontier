@@ -1,3 +1,4 @@
+import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
 import {
   HubGame as HubGameV51,
   HUB_DECKS,
@@ -339,7 +340,10 @@ export class HubGame extends HubGameV51 {
       const sample = this.sampleNpcAnimation(npc, { emit: true });
       if (sample) {
         const sampleImage = this.npcImagesBySheetId?.get(sample.sheet.id) || image;
-        return super.drawSheetCell(ctx, sampleImage, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
+        const result = super.drawSheetCell(ctx, sampleImage, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
+        const member = this.npcRoutineContextV62?.crew?.find(entry => entry.id === crewId);
+        if (sampleImage?.complete && sampleImage.naturalWidth > 0) drawEcho9MarkingV110(ctx, npc, member?.appearanceV110);
+        return result;
       }
     }
     return super.drawSheetCell(ctx, image, column, row, x, y, width, height, flip, columns, rows);

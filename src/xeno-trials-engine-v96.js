@@ -1,4 +1,5 @@
 import { getXenoTrialsFighterV96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
+import { getSynthTrialAttackV110, synthConeHitsV110 } from './synth-combat-v110.js';
 import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105,
   resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
 
@@ -138,7 +139,7 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     fighter.x += axis * definition.speed * dt;
     if (controls.jump && !fighter.previousInput.jump && fighter.y === 0) { fighter.vy = definition.jump; fighter.y = .001; }
     for (const action of ['special', 'heavy', 'light']) {
-      const spec = XENO_TRIALS_ATTACKS_V96[action];
+      const spec = getSynthTrialAttackV110(definition, action, XENO_TRIALS_ATTACKS_V96[action]);
       if (!controls[action] || fighter.previousInput[action] || fighter.stamina < spec.cost || (action === 'special' && fighter.specialCooldown > 0)) continue;
       fighter.attack = { kind: action, age: 0, hit: false, emitted: false, facing: fighter.facing, id: ++match.serial };
       fighter.stamina -= spec.cost;
@@ -147,10 +148,12 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     }
   }
   if (fighter.attack) {
-    const attack = fighter.attack, spec = XENO_TRIALS_ATTACKS_V96[attack.kind];
+    const attack = fighter.attack, spec = getSynthTrialAttackV110(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
     attack.age += dt;
     if (attack.kind === 'special' && ['ram', 'pounce'].includes(definition.special) && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
       fighter.x += attack.facing * 420 * dt;
+    if (attack.kind === 'special' && definition.special === 'detonation' && attack.age >= spec.startup && attack.age < spec.startup + spec.chargeDuration)
+      fighter.x += attack.facing * 410 * dt;
     if (attack.age >= spec.startup + spec.active + spec.recovery) fighter.attack = null;
   }
   fighter.x = clamp(fighter.x, XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);
@@ -160,8 +163,32 @@ function collectAttack(match, fighter, enemy, impacts) {
   const attack = fighter.attack;
   if (!attack) return;
   const definition = getXenoTrialsFighterV96(fighter.id);
-  const spec = XENO_TRIALS_ATTACKS_V96[attack.kind];
+  const spec = getSynthTrialAttackV110(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
   if (attack.age < spec.startup || attack.age >= spec.startup + spec.active || attack.hit) return;
+  if (attack.kind === 'special' && definition.special === 'flame') {
+    const pulse = Math.floor((attack.age - spec.startup) / spec.interval);
+    if (attack.flamePulse === pulse) return;
+    attack.flamePulse = pulse;
+    const body = getXenoTrialsBodyBoundsV105(fighter), other = getXenoTrialsBodyBoundsV105(enemy);
+    const face = attack.facing > 0 ? body.right : body.left;
+    if (synthConeHitsV110(face, fighter.y + body.height * .55, attack.facing, spec.reach, other))
+      impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: attack.facing });
+    return;
+  }
+  if (attack.kind === 'special' && definition.special === 'detonation') {
+    if (attack.age < spec.startup + spec.chargeDuration) return;
+    attack.hit = true;
+    const body = getXenoTrialsBodyBoundsV105(fighter), other = getXenoTrialsBodyBoundsV105(enemy);
+    const y = fighter.y + body.height * .5;
+    const nearestX = clamp(fighter.x, other.left, other.right), nearestY = clamp(y, other.bottom, other.top);
+    if (Math.hypot(nearestX - fighter.x, nearestY - y) <= spec.reach)
+      impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: enemy.x >= fighter.x ? 1 : -1 });
+    // The detonation consumes this robot even on a miss. Its windup can be interrupted.
+    fighter.hp = 0;
+    (match.synthEffectsV110 ||= []).push({ kind: 'detonation', x: fighter.x, y, radius: spec.reach, life: .4 });
+    event(match, 'synth-detonation', { side: fighter.side });
+    return;
+  }
   if (attack.kind === 'special' && ['acid', 'pulse'].includes(definition.special)) {
     if (!attack.emitted) {
       attack.emitted = true;
@@ -180,10 +207,13 @@ function collectAttack(match, fighter, enemy, impacts) {
 function applyImpact(match, impact) {
   const { from, to, spec, power, direction } = impact;
   const frontal = to.facing === -direction;
-  const guardCost = spec.damage * .82 * (to.id === 'defender' ? .75 : 1);
-  const guarded = to.guard && frontal && to.stamina >= guardCost;
-  const guardBreak = to.guard && frontal && !guarded;
-  const multiplier = guarded ? (to.id === 'defender' ? .03 : .08) : 1;
+  const shield = to.id === 'synth-containment';
+  const shieldBash = shield && to.attack?.kind === 'special';
+  const guarding = to.guard || shieldBash;
+  const guardCost = spec.damage * .82 * (to.id === 'defender' ? .75 : shield ? .65 : 1);
+  const guarded = guarding && frontal && to.stamina >= guardCost;
+  const guardBreak = guarding && frontal && !guarded;
+  const multiplier = guarded ? (to.id === 'defender' ? .03 : shield ? .04 : .08) : 1;
   const damage = Math.min(to.hp, Math.max(1, Math.round(spec.damage * power * multiplier)));
   to.hp = Math.max(0, to.hp - damage); to.hitFlash = .13;
   from.stats.hits++; from.stats.damage += damage;
@@ -194,6 +224,7 @@ function applyImpact(match, impact) {
 }
 function fixedStep(match, playerControls, opponentControls, dt) {
   match.tick++;
+  if (match.synthEffectsV110) match.synthEffectsV110 = match.synthEffectsV110.map(effect => ({ ...effect, life: effect.life - dt })).filter(effect => effect.life > 0);
   if (match.phase !== 'active') {
     // Presentation and inter-round buttons cannot buffer an opening attack.
     match.fighters[0].rearmControls = { ...playerControls };

@@ -6,6 +6,7 @@ import { validateContent, RELEASE } from '../src/content.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
 
 const ROOT_FILES = new Set([
+  'command-v110.css', 'echo9-v110.css',
   '.gitattributes', '.gitignore', '.vercelignore', 'LICENSE_NOTICE.md',
   'index.html', 'manifest.webmanifest', 'package.json', 'package-lock.json', 'sw.js', 'vercel.json',
   'alien-survival-v70.css', 'bioforge-v80.css', 'catalog-v62.css', 'crew-v85.css', 'hub-level.css',

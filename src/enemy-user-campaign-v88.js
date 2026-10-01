@@ -2,6 +2,7 @@ import { WORLDS, ENEMIES } from './content-core-v50.js';
 import { ENEMY_STATIC_POSES_V96 as ENEMY_USER_CASTES_V87, getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
 import { ENEMY_STATIC_POSE_IDS_V94 } from './enemy-static-poses-v94.js';
 import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
+import { SYNTH_CAMPAIGN_CONTRACTS_V110 } from './synth-combat-v110.js';
 
 // Gameplay encounter assignments, not claims that every crossover happened in canon.
 // Source-specific variants stay separate. Project worlds host displaced arcade/crossover dossiers.
@@ -36,7 +37,7 @@ const assignment = (d) => {
   if (/xenoborg|avp_extinction/.test(b)) return 'engineered';
   return 'crossover';
 };
-const caste = (d) => [103, 105, 106].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
+const caste = (d) => [103, 105, 106, 110].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
   : /facehugger/.test(d.basename) ? 'parasite' : /queen_aliens|pathogen_queen/.test(d.basename) ? 'royal'
     : d.combatRole === 'ranged' ? 'ranged' : 'stalker';
 
@@ -79,12 +80,13 @@ export const ENEMY_USER_CAMPAIGN_V88 = Object.freeze(ENEMY_USER_CASTES_V87.map(d
   return Object.freeze({ ...d, name: `${d.name} — ${d.work}`, source: d.work, caste: caste(d),
     modifier: 'Standard', behavior: d.combatRole === 'ranged' ? 'control' : ['idle', 'defensive-melee'].includes(d.combatRole) ? 'guard' : 'stalk',
     frequency: 'contextual', acid: 0, automaticEncounter: admitted, encounterGroup,
+    ...(d.visualRevision === 110 ? { behaviorContractV110: SYNTH_CAMPAIGN_CONTRACTS_V110[d.synthBehaviorV110] } : {}),
     encounterWorldIds: Object.freeze(worlds.map(world => world.id)),
     habitats: Object.freeze(worlds.map(world => world.name)),
     encounterStatus: admitted ? 'project-adaptation' : 'bioforge-only', encounterNote: admitted
       ? 'Rencontre adaptée au projet ; ne constitue pas une affirmation de continuité canonique.'
       : 'Référence admise au laboratoire ; aucun placement de campagne compatible validé.',
-    specializedBehaviorStatus: d.specializedBehaviorV95 ? 'source-grounded-partial-v95' : behaviorV90 ? 'source-grounded-partial-v90' : behavior ? 'source-grounded-partial-v89' : 'simplified-campaign-behavior',
+    specializedBehaviorStatus: d.visualRevision === 110 ? 'project-synth-behavior-v110' : d.specializedBehaviorV95 ? 'source-grounded-partial-v95' : behaviorV90 ? 'source-grounded-partial-v90' : behavior ? 'source-grounded-partial-v89' : 'simplified-campaign-behavior',
     behaviorContractV90: behaviorV90 || null,
     specializedBehaviorV90: behaviorV90 ? Object.freeze({ id: behaviorV90.kind, label: behaviorV90.label, summary: behaviorV90.summary,
       sourceUrls: Object.freeze([behaviorV90.source]),

@@ -12,11 +12,12 @@ const blockersV95 = engine => [...(engine.walls || []), ...(engine.platforms || 
  * Direction comes from projectile travel (or a legacy shooter's position), never
  * the impact point: impacts on the body do not establish the shot's origin. */
 export function resolveDefenderGuardDamageV95(enemy, damage, source = {}) {
-  if (enemy?.profileId !== 'pose-v95-user-xeno-defender' || !enemy.alive
+  if (!['pose-v95-user-xeno-defender', 'pose-v110-afe-synth-containment'].includes(enemy?.profileId) || !enemy.alive
     || enemy.dormant || enemy.ventTransit || enemy.attacking || enemy.pendingMelee
     || Number(enemy.attackAnimationClock) > 0 || Number(enemy.attackWindupClock) > 0
     || Number(enemy.staggerClock) > 0 || Math.abs(Number(enemy.vy) || 0) > 1) return damage;
-  const guard = getEnemyUserCasteV87(enemy.profileId)?.defenderGuardV95;
+  const definition = getEnemyUserCasteV87(enemy.profileId);
+  const guard = definition?.defenderGuardV95 || definition?.containmentGuardV110;
   if (!guard || !Number.isFinite(damage) || damage <= 0) return damage;
   // Family is authoritative when supplied; plain lab bullets have no family.
   const ballistic = source.family ? ['ballistic', 'smart', 'smartgun', 'sentry', 'silent'].includes(source.family)
@@ -147,15 +148,16 @@ export function drawUserCastePoseV87(ctx, enemy, image, options = {}) {
   return true;
 }
 
-/** Shared lab/campaign adaptation; specialized source-game behaviour is not delivered here. */
+/** Shared lab/campaign actor data. Special behaviours are supplied by explicit
+ * runtime contracts, never inferred from the actor's biological family. */
 export function createUserCasteActorV87(entry, groundY) {
   const d = getEnemyUserCasteV87(entry?.profileId, entry?.visualStateV95);
   if (!d) return null;
   return {
     id: entry.id, profileId: d.id, name: d.name + ' — ' + d.work, biology: d.biology,
     visualMode: d.visualMode, animationStatus: d.animationStatus, visualImageKey: d.imageKey,
-    ...(d.id.startsWith('pose-v95-') || [103, 105, 106].includes(d.visualRevision) ? { locomotionV95: d.locomotion || 'ground' } : {}),
-    ...([103, 105, 106].includes(d.visualRevision) ? { acid: 0, caste: d.caste } : {}),
+    ...(d.id.startsWith('pose-v95-') || [103, 105, 106, 110].includes(d.visualRevision) ? { locomotionV95: d.locomotion || 'ground' } : {}),
+    ...([103, 105, 106, 110].includes(d.visualRevision) ? { acid: 0, caste: d.caste } : {}),
     ...(sanitizeEnemyStaticPoseStateV95(d.id, entry?.visualStateV95)
       ? { visualStateV95: sanitizeEnemyStaticPoseStateV95(d.id, entry.visualStateV95) } : {}),
     visualSheetId: null, visualArchetype: d.name, visualIdentityStatus: d.identityStatus,

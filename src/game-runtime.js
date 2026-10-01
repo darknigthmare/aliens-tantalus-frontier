@@ -4,6 +4,7 @@ import { validatePlayerIdentityV84 } from './player-onboarding-v84.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { CREW } from './content-core-v50.js';
 import { resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
+import { sanitizeEcho9AppearanceV110 } from './echo9-personnel-v110.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -134,6 +135,7 @@ export function buildCrewRuntime(crew = []) {
     injuries: list(member.injuries),
     missions: Math.round(finite(member.missions, 0, 0)),
     kills: Math.round(finite(member.kills, 0, 0)),
+    ...(sanitizeEcho9AppearanceV110(member.appearanceV110) ? { appearanceV110: sanitizeEcho9AppearanceV110(member.appearanceV110) } : {}),
     ...(member.recruitV85 || member.trainingV85 || member.gearV85 ? {
       callsign: member.callsign, recruitV85: structuredClone(member.recruitV85),
       trainingV85: structuredClone(member.trainingV85 || {}),

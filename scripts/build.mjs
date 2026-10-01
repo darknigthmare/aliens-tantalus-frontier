@@ -23,6 +23,8 @@ for (const directory of ['src', 'assets']) {
   await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
 }
 await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
+await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));
+await cp(join(root, 'echo9-v110.css'), join(output, 'echo9-v110.css'));
 // QA masters, production intermediates and superseded duplicate atlases remain local, never deployed.
 await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });
 await rm(join(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'), { recursive: true, force: true });
