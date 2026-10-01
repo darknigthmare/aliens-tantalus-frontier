@@ -65,12 +65,19 @@ export class XenoTrialsUiV96 {
         <button type="button" class="button danger-outline" data-xt="abandon" hidden>ANNULER LE DUEL · SANS GAIN</button>
       </form>
       <p data-xt="status" class="xt-status" role="status" aria-live="polite">Choisissez votre spécimen puis une cellule adverse.</p>
-      <section data-xt="combat-panel" hidden><div class="xt-arena"><canvas width="1000" height="560" tabindex="0" data-xt="canvas" aria-label="Arène de combat Xeno Trials" aria-describedby="xeno-trials-help-v96"></canvas>
-      <p data-xt="health" class="xt-help" aria-label="Santé et endurance des combattants"></p></div>
-      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE / REPRENDRE</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div>
+      <section data-xt="combat-panel" hidden>
+      <div class="xt-match-hud" data-xt="combat-hud" role="group" aria-label="État du duel">
+        ${['player', 'opponent'].map((side, i) => `<div class="xt-vitals xt-vitals-${side}"><span class="xt-side">${i ? 'ADVERSAIRE' : 'VOUS'}</span><strong data-xt="${side}-name"></strong>
+        <span class="xt-vital-value" data-xt="${side}-hp-value"></span><progress class="xt-hp-meter" data-xt="${side}-hp" max="1" value="1" aria-label="Santé ${i ? 'adversaire' : 'joueur'}"></progress>
+        <span class="xt-vital-value xt-stamina-value" data-xt="${side}-stamina-value"></span><progress class="xt-stamina-meter" data-xt="${side}-stamina" max="1" value="1" aria-label="Endurance ${i ? 'adversaire' : 'joueur'}"></progress></div>`).join('')}
+        <div class="xt-match-clock"><span data-xt="round">MANCHE 1</span><strong data-xt="clock" role="timer" aria-live="off" aria-label="Secondes restantes">99</strong><span class="xt-clock-unit">SECONDES</span><strong data-xt="score" aria-label="Manches gagnées : joueur — adversaire">0 — 0</strong></div>
+      </div>
+      <div class="xt-arena"><canvas width="1000" height="560" tabindex="0" data-xt="canvas" aria-label="Arène de combat Xeno Trials" aria-describedby="xeno-trials-help-v96"></canvas>
+      <p data-xt="health" class="xt-sr-only" aria-label="Santé et endurance des combattants"></p></div>
+      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div>
       <div data-xt="controls" class="xt-controls" role="group" aria-label="Commandes de combat tactiles">
         ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL']].map(([key,label]) => `<button type="button" data-xeno-action="${key}" aria-label="${controlLabel[key]}">${label}</button>`).join('')}
-      </div><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Pause : P. Deux manches gagnantes. La garde consomme de l’endurance. Coups lourds pour briser une garde épuisée. Les poses sont fixes sauf les cycles de marche adaptés signalés sur les fiches ; déplacements et collisions sont simulés. Si un cycle est indisponible, la pose fixe est conservée.</p></section>
+      </div><details class="xt-combat-help"><summary>Commandes et règles du duel</summary><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Pause : P. Deux manches gagnantes. La garde consomme de l’endurance. Coups lourds pour briser une garde épuisée. Les poses sont fixes sauf les cycles de marche adaptés signalés sur les fiches ; déplacements et collisions sont simulés. Si un cycle est indisponible, la pose fixe est conservée.</p></details></section>
       <button type="button" class="button" data-xt="new-duel" hidden>PRÉPARER UN AUTRE DUEL</button>
       <div data-xt="result" class="xt-result" role="status" aria-live="polite"></div>
       <details class="xt-history"><summary>Journal des évaluations</summary><div data-xt="history"></div></details></div></div>`;
@@ -104,7 +111,10 @@ export class XenoTrialsUiV96 {
     this.el('abandon').onclick = () => {
       // A queued event must not discard a completed result awaiting a storage retry.
       if (this.unsavedResult) return;
-      if (this.commit(abandonXenoTrialsV96(this.getProgress()))) { this.closeRuntime(); this.selectionStep = 'fighters'; this.render(); }
+      if (this.commit(abandonXenoTrialsV96(this.getProgress()))) {
+        this.closeRuntime(); this.selectionStep = 'fighters'; this.render();
+        this.message('Duel annulé sans gain. Choisissez vos combattants pour une nouvelle évaluation.');
+      }
     };
     this.el('pause').onclick = () => { if (!this.runtime || this.unsavedResult) return; this.runtime.getState().paused ? this.runtime.resume() : this.runtime.pause(); };
     this.el('next').onclick = () => this.runtime?.nextRound();
@@ -176,7 +186,7 @@ export class XenoTrialsUiV96 {
     this.el('arena-cards').innerHTML = STAGES.map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail">${s.backdrop ? `<img src="${s.backdrop}" alt="" loading="lazy">` : '<i></i><i></i><i></i>'}</span><strong>${s.label}</strong><small>${s.backdrop ? 'Décor du projet réutilisé' : 'Environnement procédural'} · 2D</small></button>`).join('');
     this.el('stage-preview').innerHTML = `<div class="xt-stage-scene" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stage.backdrop ? `<img src="${stage.backdrop}" alt="Aperçu du décor sélectionné">` : '<i></i><i></i><i></i><i></i><i></i>'}<span>${stage.label}</span></div><p>${matchup} · Arène simulée, sans danger de décor. ${stage.backdrop ? 'Décor existant du projet, sans modification des collisions.' : ''}</p>`;
   }
-  closeRuntime() { this.generation++; this.runtime?.stop(); this.runtime = null; this.loading = false; }
+  closeRuntime() { this.generation++; this.runtime?.stop(); this.runtime = null; this.loading = false; this.lastStatus = null; }
   close() {
     this.active = false; this.closeRuntime(); this.unsavedResult = null; this.lastStatus = null;
     this.el('retry-save').hidden = true; this.el('next').hidden = true;
@@ -209,7 +219,7 @@ export class XenoTrialsUiV96 {
       }
       this.loading = false;
       if (ready === false) { this.closeRuntime(); this.render(); this.message('Sprite indisponible. Duel conservé : recommencez après rechargement.'); return false; }
-      this.render(); this.el('canvas').focus({ preventScroll: true }); return true;
+      this.render(); this.root.scrollTop = 0; this.el('canvas').focus({ preventScroll: true }); return true;
     } catch (error) {
       if (generation !== this.generation) return false;
       this.closeRuntime(); this.render(); this.message(`Duel non lancé : ${error.message}`); return false;
@@ -217,11 +227,30 @@ export class XenoTrialsUiV96 {
   }
   updateMatch(snapshot) {
     this.el('health').textContent = snapshot.fighters.map((f, i) => `${i === 0 ? 'Vous' : 'Adversaire'} : ${Math.ceil(f.hp)} PV · ${Math.floor(f.stamina)} endurance`).join(' / ');
+    // HTML meters retain readable text/touch scale even on a narrow canvas.
+    // They only reflect the runtime snapshot; no combat values are written here.
+    for (const [i, fighter] of snapshot.fighters.entries()) {
+      const side = i === 0 ? 'player' : 'opponent', definition = FIGHTERS.find(f => f.id === fighter.id);
+      this.el(`${side}-name`).textContent = definition.label;
+      this.el(`${side}-name`).setAttribute('title', definition.label);
+      for (const key of ['hp', 'stamina']) {
+        const current = Math.max(0, Math.min(definition[key], fighter[key]));
+        const meter = this.el(`${side}-${key}`);
+        meter.max = definition[key]; meter.value = current;
+        meter.setAttribute('data-low', String(current <= definition[key] * .25));
+        this.el(`${side}-${key}-value`).textContent = key === 'hp' ? `${Math.ceil(current)} / ${definition[key]} PV` : `Endurance ${Math.floor(current)} / ${definition[key]}`;
+      }
+    }
+    this.el('clock').textContent = String(Math.ceil(snapshot.timeRemaining));
+    this.el('clock').setAttribute('data-low', String(snapshot.timeRemaining <= 10));
+    this.el('round').textContent = `MANCHE ${snapshot.round}`;
+    this.el('score').textContent = `${snapshot.wins.player} — ${snapshot.wins.opponent}`;
     const phase = snapshot.paused ? 'PAUSE' : snapshot.presentation?.blocksSimulation ? snapshot.presentation.countdown ? `DÉPART DANS ${snapshot.presentation.countdown}` : 'PRÉSENTATION DES SPÉCIMENS' : { intro: 'PRÉPARATION', active: 'COMBAT', 'round-over': 'FIN DE MANCHE', 'match-over': 'ÉVALUATION TERMINÉE' }[snapshot.phase];
     const text = `${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
     if (this.lastStatus !== text && !this.unsavedResult) { this.message(text); this.lastStatus = text; }
     this.el('next').hidden = snapshot.phase !== 'round-over';
     this.el('pause').disabled = snapshot.phase === 'match-over' || Boolean(this.unsavedResult);
+    this.el('pause').textContent = snapshot.paused ? 'REPRENDRE' : 'PAUSE';
   }
   finish(result) {
     if (!result || !this.active || !this.canCommit()) return false;
@@ -254,7 +283,9 @@ export class XenoTrialsUiV96 {
     this.el('fighter-config').hidden = this.selectionStep !== 'fighters';
     this.el('arena-config').hidden = this.selectionStep !== 'arena';
     this.el('combat-panel').hidden = this.selectionStep !== 'combat';
+    this.el('combat-hud').hidden = !this.runtime || Boolean(this.loading);
     this.el('layout').setAttribute('data-step', this.selectionStep);
+    this.root.setAttribute('data-xt-step', this.selectionStep);
     this.el('steps').innerHTML = [['fighters','01 · COMBATTANTS'],['arena','02 · ARÈNE'],['combat','03 · DUEL']].map(([id,label]) => `<span ${id === this.selectionStep ? 'aria-current="step"' : ''}>${label}</span>`).join('');
     this.el('new-duel').hidden = this.selectionStep !== 'combat' || running || Boolean(state.pending) || Boolean(this.unsavedResult);
     this.el('restart').hidden = !state.pending || running;

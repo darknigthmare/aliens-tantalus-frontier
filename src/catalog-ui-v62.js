@@ -922,7 +922,7 @@ export class CatalogWorkbenchV62 {
     if (record.visualReferenceV106) {
       const walk = importWalkV107(record.id);
       appendDefinitionRows(this.document, data, walk ? { ...record.visualReferenceV106,
-        referenceNote: `Note historique du PNG fixe V106 : ${record.visualReferenceV106.referenceNote || ''} Complément actuel : ${walk.label}. Cycle distinct du PNG original, sans certification canonique.`
+        referenceNote: `Note historique du PNG fixe : ${record.visualReferenceV106.referenceNote || ''} Complément actuel : ${walk.label}. Cycle distinct du PNG original, sans certification canonique.`
       } : record.visualReferenceV106);
     }
     if (record.documentaryReferenceV105) {

@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-adaptations-v113-shell-2';
+const CACHE = 'atf-v86-adaptations-v114-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -45,6 +45,7 @@ const CORE = [
   '/src/enemy-import-attack-data-v109.js',
   '/src/enemy-import-animation-v107.js',
   '/src/enemy-import-animation-data-v108.js',
+  '/src/enemy-import-animation-data-v114.js',
   '/src/enemy-import-admissions-v106.js', '/src/enemy-user-imports-v106.js',
   '/src/user-specimens-v106.js', '/src/user-specimen-bench-v106.js', '/src/user-reference-status-v106.js', '/specimen-bench-v106.css',
   '/src/xeno-trials-geometry-v105.js', '/src/enemy-catalog-taxonomy-v105.js',

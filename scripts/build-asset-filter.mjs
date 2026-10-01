@@ -6,7 +6,7 @@ import { ENEMY_IMPORT_ADMISSIONS_V103 } from '../src/enemy-import-admissions-v10
 import { ENEMY_IMPORT_ADMISSIONS_V105 } from '../src/enemy-import-admissions-v105.js';
 import { ENEMY_IMPORT_ADMISSIONS_V106 } from '../src/enemy-import-admissions-v106.js';
 import { USER_SPECIMEN_ART_V106 } from '../src/user-specimens-v106.js';
-import { ENEMY_IMPORT_ANIMATIONS_V107, ENEMY_IMPORT_ANIMATIONS_V108 } from '../src/enemy-import-animation-v107.js';
+import { ENEMY_IMPORT_ANIMATIONS_V107, ENEMY_IMPORT_ANIMATIONS_V108, ENEMY_IMPORT_ANIMATIONS_V114 } from '../src/enemy-import-animation-v107.js';
 import { ENEMY_IMPORT_ATTACKS_V109 } from '../src/enemy-import-attacks-v109.js';
 import { ENEMY_SYNTH_ADAPTATIONS_V110 } from '../src/enemy-synth-adaptations-v110.js';
 import { ENEMY_SYNTH_ADAPTATIONS_V111 } from '../src/enemy-synth-adaptations-v111.js';
@@ -49,6 +49,7 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const readyV114Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V114.map(asset => asset.path.slice(1)));
   const v113Folders = ['assets/openai/sprites/static-import-v113', 'assets/openai/sprites/static-game-v113',
     'assets/openai/equipment/v113-weapons', 'assets/equipment/v113-vehicles'];
   const readyV113Paths = new Set([
@@ -109,6 +110,8 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath.startsWith('assets/openai/sprites/animated-import-v114/')) return readyV114Paths.has(sourcePath);
+    if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v114(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/animated-import-v114';
     if (v113Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV113Paths.has(sourcePath);
     if (/^assets\/(?:openai\/)?(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v113(?:[^0-9]|$)/i.test(sourcePath)) return v113Folders.includes(sourcePath);
     if (/^docs\/references\/(?:V113_|v113-)/i.test(sourcePath)) return false;
