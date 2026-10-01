@@ -37,7 +37,7 @@ const assignment = (d) => {
   if (/xenoborg|avp_extinction/.test(b)) return 'engineered';
   return 'crossover';
 };
-const caste = (d) => [103, 105, 106, 110, 111].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
+const caste = (d) => [103, 105, 106, 110, 111, 112].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
   : /facehugger/.test(d.basename) ? 'parasite' : /queen_aliens|pathogen_queen/.test(d.basename) ? 'royal'
     : d.combatRole === 'ranged' ? 'ranged' : 'stalker';
 

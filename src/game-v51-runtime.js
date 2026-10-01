@@ -39,6 +39,7 @@ import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { pressTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77, consumeTacticalReloadBonusV77, getTacticalReloadHudV77 } from './tactical-reload-v77.js';
 import { MissionGamepadInputV77 } from './mission-input-v77.js';
+import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -2109,6 +2110,13 @@ export class GameEngine {
     const visual = this.weaponVisual || resolveWeaponVisualProfileV63(this.weapon);
     const image = this.images.get(visual?.imageKey || 'rifle');
     if (!ready(image)) return;
+    if (visual?.visualMode === 'static-pose') {
+      drawNativeWeaponV112(ctx, image, visual, {
+        centerX: this.weaponPickup.x + this.weaponPickup.w / 2,
+        groundY: this.weaponPickup.y + this.weaponPickup.h
+      });
+      return;
+    }
     const frame = Math.floor(this.animationTime * 4) % 4;
     const width = visual?.width || 126;
     const height = visual?.height || 72;

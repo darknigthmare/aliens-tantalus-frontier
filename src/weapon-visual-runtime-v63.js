@@ -3,6 +3,11 @@ import {
   WEAPON_VISUAL_PROFILES_ALL_V61,
   resolveWeaponVisualProfileV61
 } from './weapon-visual-runtime-v61.js';
+import {
+  WEAPON_NATIVE_ASSETS_V112,
+  WEAPON_NATIVE_PROFILES_V112,
+  resolveNativeWeaponProfileV112
+} from './weapon-native-visuals-v112.js';
 
 export const ASSO_400_HARPOON_PROFILE_V63 = Object.freeze({
   baseNumber: 24,
@@ -31,7 +36,8 @@ export const WEAPON_VISUAL_PROFILES_NEW_V63 = Object.freeze([
 
 export const WEAPON_VISUAL_PROFILES_ALL_V63 = Object.freeze([
   ...WEAPON_VISUAL_PROFILES_ALL_V61,
-  ...WEAPON_VISUAL_PROFILES_NEW_V63
+  ...WEAPON_VISUAL_PROFILES_NEW_V63,
+  ...WEAPON_NATIVE_PROFILES_V112
 ]);
 
 export const WEAPON_VISUAL_ASSETS_NEW_V63 = Object.freeze({
@@ -40,7 +46,8 @@ export const WEAPON_VISUAL_ASSETS_NEW_V63 = Object.freeze({
 
 export const WEAPON_VISUAL_ASSETS_ALL_V63 = Object.freeze({
   ...WEAPON_VISUAL_ASSETS_ALL_V61,
-  ...WEAPON_VISUAL_ASSETS_NEW_V63
+  ...WEAPON_VISUAL_ASSETS_NEW_V63,
+  ...WEAPON_NATIVE_ASSETS_V112
 });
 
 export const WEAPON_VISUAL_NEW_COUNT_V63 = WEAPON_VISUAL_PROFILES_NEW_V63.length;
@@ -52,6 +59,8 @@ const catalogNumber = (source = {}) => {
 };
 
 export function resolveWeaponVisualProfileV63(source = {}) {
+  const native = resolveNativeWeaponProfileV112(source);
+  if (native) return native;
   const number = catalogNumber(source);
   const baseNumber = number ? ((number - 1) % 40) + 1 : 0;
   const baseName = String(source.name || '').split(' - ')[0].split(' — ')[0].trim();
@@ -73,7 +82,7 @@ export function resolveWeaponVisualProfileV63(source = {}) {
 
 export function resolveWeaponVisualAnimationV63(source = {}) {
   const entry = resolveWeaponVisualProfileV63(source);
-  if (!entry) return null;
+  if (!entry || entry.visualMode === 'static-pose') return null;
   const clipId = source.reloading ? 'reload'
     : source.firing || source.attacking || source.using ? 'action'
       : source.jammed || source.inspecting || source.damaged ? 'service'

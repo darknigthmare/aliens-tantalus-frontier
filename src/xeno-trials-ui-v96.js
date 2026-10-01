@@ -10,7 +10,7 @@ import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 
 const options = entries => entries.map(e => `<option value="${e.id}">${e.label}</option>`).join('');
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
-const specialLabel = { tail: 'Fouet caudal', pounce: 'Bond', ram: 'Charge', slash: 'Lacération', acid: 'Salve acide', pulse: 'Impulsion' };
+const specialLabel = { tail: 'Fouet caudal', pounce: 'Bond', ram: 'Charge', slash: 'Lacération', acid: 'Salve acide', pulse: 'Impulsion', baton: 'Frappe de matraque' };
 const controlLabel = { left: 'Aller à gauche', right: 'Aller à droite', jump: 'Sauter', guard: 'Maintenir la garde', light: 'Frappe rapide', heavy: 'Frappe lourde', special: 'Attaque spéciale' };
 
 /** UI owns no campaign money and never writes outside its current save owner. */

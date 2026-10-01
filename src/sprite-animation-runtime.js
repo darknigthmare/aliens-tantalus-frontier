@@ -456,7 +456,8 @@ export const SPRITE_SHEETS = Object.freeze({
   'vehicle.ripper-siege-loader.action.v56': sheet('vehicle.ripper-siege-loader.action.v56', 'ripperSiegeLoaderV56', '/assets/openai/sprites/normalized/vehicles/ripper-siege-loader-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ripper-siege-loader-frame', 170, 200, 'vehicle'),
   'weapon.m41a-pulse-rifle.action': sheet('weapon.m41a-pulse-rifle.action', 'rifle', '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png', 'rifle-action', 'weapon-grip', 'weapon-pickup', 126, 72, 'weapon'),
   ...Object.fromEntries(WEAPON_VISUAL_PROFILES_ALL_V63
-    .filter((entry) => entry.sheetId !== 'weapon.m41a-pulse-rifle.action')
+    .filter((entry) => entry.visualMode !== 'static-pose' && typeof entry.sheetId === 'string'
+      && entry.sheetId.length > 0 && entry.sheetId !== 'weapon.m41a-pulse-rifle.action')
     .map((entry) => [entry.sheetId, sheet(
       entry.sheetId, entry.imageKey, entry.path, entry.clipSet, entry.pivot, entry.hitbox, entry.width, entry.height, 'weapon'
     )])),
@@ -491,6 +492,7 @@ const sheetByImageKey = new Map(Object.values(SPRITE_SHEETS).map((entry) => [ent
 const clipBySet = new Map(Object.entries(SPRITE_CLIP_SETS).map(([id, clips]) => [id, new Map(clips.map((clip) => [clip.id, clip]))]));
 
 export function resolveSpriteSheet(idOrImageKey) {
+  if (typeof idOrImageKey !== 'string' || !idOrImageKey) return null;
   return SPRITE_SHEETS[idOrImageKey] || sheetByImageKey.get(idOrImageKey) || null;
 }
 

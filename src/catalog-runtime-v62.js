@@ -32,6 +32,7 @@ import {
   resolveWeaponVisualAnimationV63,
   resolveWeaponVisualProfileV63
 } from './weapon-visual-runtime-v63.js';
+import { resolveNativeVehicleCatalogVisualV112 } from './vehicle-native-visuals-v112.js';
 
 export const CATALOG_UNKNOWN_V62 = 'unknown';
 
@@ -177,6 +178,12 @@ const selectVisualFields = (profile, idle, extra = {}) => {
 function weaponVisual(entry) {
   const profile = resolveWeaponVisualProfileV63(entry);
   if (!profile) return null;
+  if (profile.visualMode === 'static-pose') return selectVisualFields(profile, null, {
+    grid: freezeObject({ columns: 1, rows: 1, cellWidth: profile.sourceWidth, cellHeight: profile.sourceHeight }),
+    idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
+    previewClips: freezeArray([]), visualMode: 'static-pose', animationStatus: 'missing',
+    category: knownString(profile.category), renderWidth: profile.width, renderHeight: profile.height
+  });
   const idle = clipDescriptor(resolveWeaponVisualAnimationV63(entry));
   return selectVisualFields(profile, idle, {
     category: knownString(profile.category),
@@ -237,6 +244,12 @@ function enemyVisual(entry) {
 }
 
 function vehicleVisual(entry) {
+  const native = resolveNativeVehicleCatalogVisualV112(entry);
+  if (native) return freezeObject({ ...native,
+    grid: freezeObject({ columns: 1, rows: 1, cellWidth: native.sourceWidth, cellHeight: native.sourceHeight }),
+    idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
+    previewClips: freezeArray([])
+  });
   const v56Profile = resolveVehicleVisualProfileV56(entry);
   let profile = v56Profile || resolveVehicleVisualProfile(entry);
   const animation = v56Profile

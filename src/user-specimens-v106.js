@@ -1,4 +1,5 @@
 import { USER_PACK_V100 } from './user-pack-v100.js';
+import { USER_SPECIMEN_RECORDS_V112 } from './user-specimens-v112.js';
 
 // Native cutouts used by the confinement bench. This does not create a fighter,
 // hatching cycle, new species or a claim of animation / canonical scale.
@@ -602,7 +603,7 @@ const records = [
     "groupId": "pack-v100-wy-prometheus-suit"
   }
 ];
-export const USER_SPECIMEN_ART_V106 = Object.freeze(records.map(art => {
+export const USER_SPECIMEN_ART_V106 = Object.freeze([...records, ...USER_SPECIMEN_RECORDS_V112].map(art => {
   const original = USER_PACK_V100.find(entry => entry.id === art.referenceId);
   if (!original) throw new Error('Unknown specimen reference: ' + art.referenceId);
   return Object.freeze({ ...art, name: original.name, biology: original.biology,

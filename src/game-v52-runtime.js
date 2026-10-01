@@ -2266,7 +2266,9 @@ export function withV52MissionRuntime(BaseEngine) {
     drawWeaponPickup(ctx) {
       if (!this.weaponPickup?.taken) {
         const request = { sheetId: this.weaponVisual?.sheetId || 'weapon.m41a-pulse-rifle.action', clipId: 'idle' };
-        const sample = this.spriteAnimation?.sample('weapon-pickup', request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+        // A reviewed single PNG owns the pickup; it must never fall back to an unrelated atlas.
+        const sample = this.weaponVisual?.visualMode === 'static-pose' ? null
+          : this.spriteAnimation?.sample('weapon-pickup', request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
         const anchor = this.weaponPickup ? { ...this.weaponPickup } : null;
         if (!this.drawSpriteSample(ctx, sample, anchor)) super.drawWeaponPickup(ctx);
       }

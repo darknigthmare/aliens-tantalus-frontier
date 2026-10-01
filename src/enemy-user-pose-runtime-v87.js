@@ -156,8 +156,8 @@ export function createUserCasteActorV87(entry, groundY) {
   return {
     id: entry.id, profileId: d.id, name: d.name + ' — ' + d.work, biology: d.biology,
     visualMode: d.visualMode, animationStatus: d.animationStatus, visualImageKey: d.imageKey,
-    ...(d.id.startsWith('pose-v95-') || [103, 105, 106, 110, 111].includes(d.visualRevision) ? { locomotionV95: d.locomotion || 'ground' } : {}),
-    ...([103, 105, 106, 110, 111].includes(d.visualRevision) ? { acid: 0, caste: d.caste } : {}),
+    ...(d.id.startsWith('pose-v95-') || [103, 105, 106, 110, 111, 112].includes(d.visualRevision) ? { locomotionV95: d.locomotion || 'ground' } : {}),
+    ...([103, 105, 106, 110, 111, 112].includes(d.visualRevision) ? { acid: 0, caste: d.caste } : {}),
     ...(sanitizeEnemyStaticPoseStateV95(d.id, entry?.visualStateV95)
       ? { visualStateV95: sanitizeEnemyStaticPoseStateV95(d.id, entry.visualStateV95) } : {}),
     visualSheetId: null, visualArchetype: d.name, visualIdentityStatus: d.identityStatus,

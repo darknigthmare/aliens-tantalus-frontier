@@ -33,6 +33,8 @@ export const ENEMY_DISPLAY_STATURES_V110 = Object.freeze({
   'pose-v110-afe-synth-incinerator': 144, 'pose-v110-afe-synth-detonator': 110,
   'pose-v110-afe-synth-containment': 132,
   'pose-v111-afe-synth-enforcer': 132,
+  'pose-v112-afe2-engineer-hybrid': 180,
+  'pose-v112-afe2-peacekeeper': 158,
   'pose-v106-import-game-dd-wy-commando': 126, 'pose-v106-import-game-dd-guardian': 132,
   'pose-v106-import-game-dd-synthetic': 126, 'pose-v106-import-wy-covenant-david': 126,
   'pose-v106-import-synth-eloise': 126, 'pose-v106-import-game-afe-synth-warden': 132

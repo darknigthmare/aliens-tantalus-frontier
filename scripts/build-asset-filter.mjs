@@ -10,6 +10,11 @@ import { ENEMY_IMPORT_ANIMATIONS_V107, ENEMY_IMPORT_ANIMATIONS_V108 } from '../s
 import { ENEMY_IMPORT_ATTACKS_V109 } from '../src/enemy-import-attacks-v109.js';
 import { ENEMY_SYNTH_ADAPTATIONS_V110 } from '../src/enemy-synth-adaptations-v110.js';
 import { ENEMY_SYNTH_ADAPTATIONS_V111 } from '../src/enemy-synth-adaptations-v111.js';
+import { ENEMY_AFE2_ADAPTATIONS_V112 } from '../src/enemy-afe2-adaptations-v112.js';
+import { ENEMY_AUTOMATON_ADAPTATIONS_V112 } from '../src/enemy-automaton-adaptations-v112.js';
+import { USER_SPECIMEN_RECORDS_V112 } from '../src/user-specimens-v112.js';
+import { WEAPON_NATIVE_PROFILES_V112 } from '../src/weapon-native-visuals-v112.js';
+import { UD4L_CATALOG_POSE_V112 } from '../src/vehicle-native-visuals-v112.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -40,6 +45,13 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const readyV112Paths = new Set([
+    ...USER_SPECIMEN_RECORDS_V112, ...ENEMY_AFE2_ADAPTATIONS_V112,
+    ...ENEMY_AUTOMATON_ADAPTATIONS_V112, ...WEAPON_NATIVE_PROFILES_V112, UD4L_CATALOG_POSE_V112
+  ].filter(asset => asset.reviewStatus === 'accepted-static-adaptation'
+      && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+      && /^\/assets\/openai\/(?:sprites\/static-(?:import|game)-v112|equipment\/v112-equipment)\/[a-z0-9-]+\.png$/.test(asset.path || '')
+      && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV111Paths = new Set(ENEMY_SYNTH_ADAPTATIONS_V111.filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && /^\/assets\/openai\/sprites\/static-game-v111\/[a-z0-9-]+\.png$/.test(asset.path || '')
@@ -83,6 +95,11 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (/^assets\/openai\/sprites\/static-(?:import|game)-v112\//.test(sourcePath)
+      || sourcePath.startsWith('assets/openai/equipment/v112-equipment/')) return readyV112Paths.has(sourcePath);
+    if (/^assets\/openai\/(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v112(?:[^0-9]|$)/i.test(sourcePath)) {
+      return ['assets/openai/sprites/static-import-v112', 'assets/openai/sprites/static-game-v112', 'assets/openai/equipment/v112-equipment'].includes(sourcePath);
+    }
     if (sourcePath.startsWith('assets/openai/sprites/static-game-v111/')) return readyV111Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v111(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/static-game-v111';
     if (sourcePath.startsWith('assets/openai/sprites/static-game-v110/')) return readyV110Paths.has(sourcePath);
