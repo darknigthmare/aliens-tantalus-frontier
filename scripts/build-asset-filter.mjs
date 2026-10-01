@@ -9,6 +9,7 @@ import { USER_SPECIMEN_ART_V106 } from '../src/user-specimens-v106.js';
 import { ENEMY_IMPORT_ANIMATIONS_V107, ENEMY_IMPORT_ANIMATIONS_V108 } from '../src/enemy-import-animation-v107.js';
 import { ENEMY_IMPORT_ATTACKS_V109 } from '../src/enemy-import-attacks-v109.js';
 import { ENEMY_SYNTH_ADAPTATIONS_V110 } from '../src/enemy-synth-adaptations-v110.js';
+import { ENEMY_SYNTH_ADAPTATIONS_V111 } from '../src/enemy-synth-adaptations-v111.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -39,6 +40,10 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const readyV111Paths = new Set(ENEMY_SYNTH_ADAPTATIONS_V111.filter(asset =>
+    asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/openai\/sprites\/static-game-v111\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV110Paths = new Set(ENEMY_SYNTH_ADAPTATIONS_V110.filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && /^\/assets\/openai\/sprites\/static-game-v110\/[a-z0-9-]+\.png$/.test(asset.path || '')
@@ -78,6 +83,8 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath.startsWith('assets/openai/sprites/static-game-v111/')) return readyV111Paths.has(sourcePath);
+    if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v111(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/static-game-v111';
     if (sourcePath.startsWith('assets/openai/sprites/static-game-v110/')) return readyV110Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v110(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/static-game-v110';
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v109/')) return readyV109Paths.has(sourcePath);

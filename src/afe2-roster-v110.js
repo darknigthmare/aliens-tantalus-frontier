@@ -33,7 +33,7 @@ export const AFE2_ROSTER_V110 = Object.freeze([
   row('engineer-hybrid', 'Engineer hybrid', 'pathogen', 'missing'),
   row('wey-yu-worker', 'Wey-Yu Worker', 'synthetic', 'missing'),
   row('trooper', 'Trooper', 'synthetic', 'afe1-adaptation', 'pose-v94-afe-synth-trooper', 'Aliens: Fireteam Elite'),
-  row('enforcer', 'Enforcer', 'synthetic', 'missing'),
+  row('enforcer', 'Enforcer', 'synthetic', 'synth-adaptation', 'pose-v111-afe-synth-enforcer', 'Fireteam Elite — adaptation de lignée'),
   row('detonator', 'Detonator', 'synthetic', 'synth-adaptation', 'pose-v110-afe-synth-detonator', 'Fireteam Elite — adaptation de lignée'),
   row('sniper', 'Sniper', 'synthetic', 'afe1-adaptation', 'pose-v94-afe-synth-sniper', 'Aliens: Fireteam Elite'),
   row('containment', 'Containment', 'synthetic', 'synth-adaptation', 'pose-v110-afe-synth-containment', 'Fireteam Elite — adaptation de lignée'),
