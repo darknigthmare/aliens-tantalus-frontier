@@ -10,7 +10,14 @@ import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 
 const options = entries => entries.map(e => `<option value="${e.id}">${e.label}</option>`).join('');
 const roleLabel = { balanced: 'Polyvalent', agile: 'Mobile', tank: 'Défensif', ranged: 'Distance' };
-const specialLabel = { tail: 'Fouet caudal', pounce: 'Bond', ram: 'Charge', slash: 'Lacération', acid: 'Salve acide', pulse: 'Impulsion', baton: 'Frappe de matraque' };
+export const XENO_TRIALS_SPECIAL_LABELS_V96 = Object.freeze({
+  tail: 'Fouet caudal', pounce: 'Bond', ram: 'Charge', slash: 'Lacération', acid: 'Salve acide',
+  pulse: 'Impulsion', baton: 'Frappe de matraque', flame: 'Lance-flammes',
+  detonation: 'Détonation', shield: 'Bouclier', dash: 'Ruée'
+});
+// Keep future roster additions readable without exposing an undefined label.
+export const getXenoTrialsSpecialLabelV96 = special => Object.hasOwn(XENO_TRIALS_SPECIAL_LABELS_V96, special)
+  ? XENO_TRIALS_SPECIAL_LABELS_V96[special] : 'Attaque spéciale';
 const controlLabel = { left: 'Aller à gauche', right: 'Aller à droite', jump: 'Sauter', guard: 'Maintenir la garde', light: 'Frappe rapide', heavy: 'Frappe lourde', special: 'Attaque spéciale' };
 
 /** UI owns no campaign money and never writes outside its current save owner. */
@@ -237,7 +244,7 @@ export class XenoTrialsUiV96 {
     this.el('roster').innerHTML = filtered.map(f => {
       const unlocked = state.unlocked.includes(f.id), art = getXenoTrialsArtV96(f.id, f.id === 'arachnoid' ? this.form.elements.playerVariant.value : null), cost = getXenoTrialsUnlockCostV96(f.id);
       const portrait = renderEnemyImportPreviewV103(art, f.label, 'clamp(70px, 9vw, 95px)') || `<img src="${art.path}" alt="${f.label}" loading="lazy">`;
-      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${specialLabel[f.special]}</small></button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
+      return `<article class="xt-fighter ${this.selected === f.id ? 'selected' : ''}"><button type="button" data-xt-fighter="${f.id}" aria-pressed="${this.selected === f.id}" ${running || state.pending ? 'disabled' : ''}>${portrait}<strong>${f.label}</strong><small>${roleLabel[f.role]} · ${f.hp} PV</small><small>${getXenoTrialsSpecialLabelV96(f.special)}</small></button>${unlocked ? '<span class="xt-owned">ACQUIS</span>' : `<button type="button" class="xt-unlock" data-xt-unlock="${f.id}" ${this.unsavedResult || state.pending || state.credits < cost ? 'disabled' : ''}>DÉBLOQUER · ${cost}</button>`}</article>`;
     }).join('') || '<p class="xt-help">Aucun spécimen ne correspond à ces filtres. Votre sélection est conservée.</p>';
     const unavailable = !this.active || running || Boolean(state.pending) || Boolean(this.unsavedResult) || !state.unlocked.includes(this.selected);
     this.el('start').disabled = unavailable || this.selectionStep !== 'arena';
