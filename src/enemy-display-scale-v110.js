@@ -2,12 +2,16 @@ import { ENEMIES } from './content-core-v50.js';
 import { ENEMY_STATIC_POSES_V96, getEnemyStaticPoseV96, getEnemyStaticPoseStatesV96 } from './enemy-static-poses-v96.js';
 import { ENEMY_DEDICATED_POSES_V99 } from './enemy-dedicated-poses-v99.js';
 import { ENEMY_DISPLAY_ALPHA_V110 } from './enemy-display-alpha-v110.js';
+import { ENEMY_AFE2_ADAPTATIONS_V113 } from './enemy-afe2-adaptations-v113.js';
+import { ENEMY_USER_RECONSTRUCTIONS_V113 } from './enemy-user-reconstructions-v113.js';
 
 // Visual staging units, NOT metres and NOT physics. The ordering reflects the
 // standing / low quadrupedal / royal silhouettes. V100 physical candidates stay
 // unverified and are deliberately not imported or applied here. Unknown custom
 // organisms retain their authored display stature instead of acquiring fake lore.
 export const ENEMY_DISPLAY_STATURES_V110 = Object.freeze({
+  ...Object.fromEntries([...ENEMY_AFE2_ADAPTATIONS_V113, ...ENEMY_USER_RECONSTRUCTIONS_V113]
+    .map(p => [p.id, p.targetOpaqueHeight])),
   'enemy-001-ovomorph': 56, 'enemy-002-facehugger': 20, 'enemy-003-chestburster': 22,
   'enemy-004-drone-big-chap': 156, 'enemy-005-warrior': 156, 'enemy-006-runner': 82,
   'enemy-007-praetorian': 210, 'enemy-008-queen': 298, 'enemy-009-crusher': 152,

@@ -7,6 +7,7 @@ export const AFE2_ROSTER_STATUS_V110 = Object.freeze({
   'synth-adaptation': 'Adaptation de synthétique disponible',
   'afe1-adaptation': 'Version Fireteam Elite disponible',
   'shared-species': 'Espèce présente — autre version',
+  'project-interpretation': 'Interprétation de famille — visuel AFE2 non certifié',
   missing: 'Contact non disponible'
 });
 export const AFE2_ROSTER_V110 = Object.freeze([
@@ -39,12 +40,12 @@ export const AFE2_ROSTER_V110 = Object.freeze([
   row('containment', 'Containment', 'synthetic', 'synth-adaptation', 'pose-v110-afe-synth-containment', 'Fireteam Elite — adaptation de lignée'),
   row('incinerator', 'Incinerator', 'synthetic', 'synth-adaptation', 'pose-v110-afe-synth-incinerator', 'Fireteam Elite — Heavy avec Volcan'),
   row('heavy', 'Heavy', 'synthetic', 'afe1-adaptation', 'pose-v94-afe-synth-heavy', 'Aliens: Fireteam Elite'),
-  row('spider', 'Spider', 'automaton', 'missing'),
+  row('spider', 'Spider', 'automaton', 'afe2-adaptation', 'pose-v113-afe2-spider', 'AFE2 — capture publiée, adaptation observationnelle'),
   row('peacekeeper', 'Peacekeeper', 'automaton', 'afe2-adaptation', 'pose-v112-afe2-peacekeeper', 'AFE2 — adaptation guidée par observation'),
-  row('huntsman', 'Huntsman', 'automaton', 'missing'),
+  row('huntsman', 'Huntsman', 'automaton', 'project-interpretation', 'pose-v113-afe2-huntsman', 'Famille Spider — interprétation de projet, rôle source non résolu'),
   row('bulwark', 'Bulwark', 'automaton', 'afe2-adaptation', 'pose-v106-import-game-afe2-bulwark', 'Aliens: Fireteam Elite 2'),
-  row('igniter', 'Igniter', 'automaton', 'missing'),
-  row('bombardier', 'Bombardier', 'automaton', 'missing')
+  row('igniter', 'Igniter', 'automaton', 'project-interpretation', 'pose-v113-afe2-igniter', 'Famille Peacekeeper — lance-flammes, silhouette interprétée'),
+  row('bombardier', 'Bombardier', 'automaton', 'project-interpretation', 'pose-v113-afe2-bombardier', 'Famille Peacekeeper — lance-grenades, silhouette interprétée')
 ]);
 export const getAfe2RosterEntryV110 = id => AFE2_ROSTER_V110.find(entry => entry.id === id) || null;
 export function summarizeAfe2RosterV110() {

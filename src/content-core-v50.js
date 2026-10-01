@@ -165,7 +165,7 @@ const weaponSeeds = [
   ['M94 Impact Grenade', 'explosive', 'USCM'], ['M40 HEDP Grenade', 'explosive', 'USCM'],
   ['UA 571-C Sentry Gun', 'sentry', 'USCM'], ['Heavy Pulse Rifle', 'ballistic', 'USCM'],
   ['F44AA Pulse Rifle', 'ballistic', 'USCM'], ['Type 88 Heavy Assault Rifle', 'ballistic', 'UPP'],
-  ['AK-4047 Pulse Rifle', 'ballistic', 'UPP'], ['ES-4 Electroshock Pistol', 'electric', 'Seegson'],
+  ['AK-4047 Pulse Rifle', 'ballistic', 'UPP'], ['ES-4 Electroshock Pistol', 'electric', 'Weyland Corp'],
   ['.357 Magnum Revolver', 'ballistic', 'Sevastopol'], ['Bolt Gun', 'ballistic', 'Sevastopol'],
   ['Compound Bow', 'silent', 'Frontier'], ['Harpoon Gun', 'ballistic', 'Marine'],
   ['Plasma Rifle', 'energy', 'Yautja archive'], ['Combi-Stick', 'melee', 'Yautja archive'],

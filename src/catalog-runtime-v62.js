@@ -33,6 +33,7 @@ import {
   resolveWeaponVisualProfileV63
 } from './weapon-visual-runtime-v63.js';
 import { resolveNativeVehicleCatalogVisualV112 } from './vehicle-native-visuals-v112.js';
+import { resolveNativeVehicleCatalogVisualV113 } from './vehicle-native-visuals-v113.js';
 
 export const CATALOG_UNKNOWN_V62 = 'unknown';
 
@@ -182,7 +183,9 @@ function weaponVisual(entry) {
     grid: freezeObject({ columns: 1, rows: 1, cellWidth: profile.sourceWidth, cellHeight: profile.sourceHeight }),
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
     previewClips: freezeArray([]), visualMode: 'static-pose', animationStatus: 'missing',
-    category: knownString(profile.category), renderWidth: profile.width, renderHeight: profile.height
+    category: knownString(profile.category), renderWidth: profile.width, renderHeight: profile.height,
+    visualLabel: profile.release === 'v113' ? optionalString(profile.canonicalName) : null,
+    illustrationNote: profile.release === 'v113' ? optionalString(profile.fallbackReason) : null
   });
   const idle = clipDescriptor(resolveWeaponVisualAnimationV63(entry));
   return selectVisualFields(profile, idle, {
@@ -244,11 +247,12 @@ function enemyVisual(entry) {
 }
 
 function vehicleVisual(entry) {
-  const native = resolveNativeVehicleCatalogVisualV112(entry);
+  const native = resolveNativeVehicleCatalogVisualV113(entry) || resolveNativeVehicleCatalogVisualV112(entry);
   if (native) return freezeObject({ ...native,
     grid: freezeObject({ columns: 1, rows: 1, cellWidth: native.sourceWidth, cellHeight: native.sourceHeight }),
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
-    previewClips: freezeArray([])
+    previewClips: freezeArray([]),
+    illustrationNote: native.release === 'v113' ? optionalString(native.fallbackReason) : null
   });
   const v56Profile = resolveVehicleVisualProfileV56(entry);
   let profile = v56Profile || resolveVehicleVisualProfile(entry);
@@ -292,7 +296,7 @@ const catalogProvenance = (entry, visual) => freezeObject({
   ...(entry.documentaryReferenceV105 ? { work: entry.source, encounterStatus: 'documentary-only',
     encounterNote: 'Original consultable ; aucune admission en campagne, Bioforge ou Xeno Trials.' } : {}),
   ...(getEnemyUserCampaignV88(entry.id) ? { work: entry.source, encounterStatus: entry.encounterStatus, encounterNote: entry.encounterNote } : {}),
-  provenance: knownString(entry.provenance),
+  provenance: visual?.identity?.referenceStatus === 'PROJECT_ORIGINAL' ? 'project-original' : knownString(entry.provenance),
   referenceStatus: knownString(visual?.identity?.referenceStatus),
   canonExact: visual?.identity?.canonExact === true
 });

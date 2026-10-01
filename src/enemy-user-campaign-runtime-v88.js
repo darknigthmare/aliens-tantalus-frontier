@@ -4,6 +4,7 @@ import { createUserCasteActorV87, isUserCasteImageReadyV87, updateUserCasteActor
 import { getEnemyStaticPoseV96 as getEnemyStaticPoseV95, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95, getEnemyStaticPoseStatesV96 as getEnemyStaticPoseStatesV95, selectEnemyStaticPoseEncounterStateV96 as selectEnemyStaticPoseEncounterStateV95 } from './enemy-static-poses-v96.js';
 import { findLargeMissionActorPlacementV72 } from './mission-large-actor-placement-v72.js';
 import { synthConeHitsV110, drawSynthConeV110 } from './synth-combat-v110.js';
+import { getAutomatonCampaignContractV113 } from './automaton-combat-v113.js';
 const IDS = new Set(ENEMY_ENCYCLOPEDIA_CATALOG_V88.map(d => d.id));
 const profileId = enemy => enemy?.profileId || String(enemy?.id || '').split(':')[0];
 const combatContract = enemy => {
@@ -258,7 +259,8 @@ export function withUserCasteCampaignV88(BaseEngine) {
       const contract = combatContract(enemy);
       // The three V110 synths keep their explicit weapon contract in Bioforge
       // as well as campaign; historical specialized actors retain their old gate.
-      const nativeSynth = getEnemyStaticPoseV95(profileId(enemy))?.visualRevision === 110;
+      const pose = getEnemyStaticPoseV95(profileId(enemy));
+      const nativeSynth = pose?.visualRevision === 110 || Boolean(getAutomatonCampaignContractV113(pose));
       if ((!nativeSynth && (!this.userCasteCampaignActiveV88 || !enemy?.campaignCasteV88)) || !contract) return false;
       const state = enemy.userCasteCombatV89 ||= combatState(contract), dt = effectDelta(delta);
       if (suspendDormantCombatV94(enemy, state, contract)) return true;

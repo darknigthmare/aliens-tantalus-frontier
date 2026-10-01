@@ -817,6 +817,14 @@ export class CatalogWorkbenchV62 {
     if (technical) heading.append(createElement(this.document, 'code', '', record.id));
     header.append(heading);
     this.detail.append(header);
+    // Player-facing illustration limits belong beside the image, not in the
+    // developer evidence section. Never expose generation receipts or hashes.
+    if (record.visual?.illustrationNote) {
+      const caption = createElement(this.document, 'p', 'catalog-v62__fact-note');
+      caption.dataset.illustrationCaption = record.id;
+      caption.textContent = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean).join(' — ');
+      this.detail.append(caption);
+    }
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id), section = this.renderSection('DÉCOUVERTE EN CAMPAGNE', 'discovery');
       section.dataset.discoveryStatus = discovery.status;

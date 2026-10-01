@@ -15,6 +15,10 @@ import { ENEMY_AUTOMATON_ADAPTATIONS_V112 } from '../src/enemy-automaton-adaptat
 import { USER_SPECIMEN_RECORDS_V112 } from '../src/user-specimens-v112.js';
 import { WEAPON_NATIVE_PROFILES_V112 } from '../src/weapon-native-visuals-v112.js';
 import { UD4L_CATALOG_POSE_V112 } from '../src/vehicle-native-visuals-v112.js';
+import { ENEMY_AFE2_ADAPTATIONS_V113 } from '../src/enemy-afe2-adaptations-v113.js';
+import { ENEMY_USER_RECONSTRUCTIONS_V113 } from '../src/enemy-user-reconstructions-v113.js';
+import { WEAPON_NATIVE_PROFILES_V113 } from '../src/weapon-native-visuals-v113.js';
+import { VEHICLE_NATIVE_POSES_V113 } from '../src/vehicle-native-visuals-v113.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -45,6 +49,16 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const v113Folders = ['assets/openai/sprites/static-import-v113', 'assets/openai/sprites/static-game-v113',
+    'assets/openai/equipment/v113-weapons', 'assets/equipment/v113-vehicles'];
+  const readyV113Paths = new Set([
+    ...ENEMY_AFE2_ADAPTATIONS_V113, ...ENEMY_USER_RECONSTRUCTIONS_V113,
+    ...WEAPON_NATIVE_PROFILES_V113, ...Object.values(VEHICLE_NATIVE_POSES_V113)
+  ].filter(asset => asset.reviewStatus === 'accepted-static-adaptation'
+    && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/(?:openai\/sprites\/static-(?:import|game)-v113|openai\/equipment\/v113-weapons|equipment\/v113-vehicles)\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && Number.isInteger(asset.sourceWidth) && asset.sourceWidth > 0
+    && Number.isInteger(asset.sourceHeight) && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV112Paths = new Set([
     ...USER_SPECIMEN_RECORDS_V112, ...ENEMY_AFE2_ADAPTATIONS_V112,
     ...ENEMY_AUTOMATON_ADAPTATIONS_V112, ...WEAPON_NATIVE_PROFILES_V112, UD4L_CATALOG_POSE_V112
@@ -95,6 +109,9 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (v113Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV113Paths.has(sourcePath);
+    if (/^assets\/(?:openai\/)?(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v113(?:[^0-9]|$)/i.test(sourcePath)) return v113Folders.includes(sourcePath);
+    if (/^docs\/references\/(?:V113_|v113-)/i.test(sourcePath)) return false;
     if (/^assets\/openai\/sprites\/static-(?:import|game)-v112\//.test(sourcePath)
       || sourcePath.startsWith('assets/openai/equipment/v112-equipment/')) return readyV112Paths.has(sourcePath);
     if (/^assets\/openai\/(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v112(?:[^0-9]|$)/i.test(sourcePath)) {

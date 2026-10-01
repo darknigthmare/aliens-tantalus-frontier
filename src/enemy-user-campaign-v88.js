@@ -3,6 +3,7 @@ import { ENEMY_STATIC_POSES_V96 as ENEMY_USER_CASTES_V87, getEnemyStaticPoseV96 
 import { ENEMY_STATIC_POSE_IDS_V94 } from './enemy-static-poses-v94.js';
 import { getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
 import { SYNTH_CAMPAIGN_CONTRACTS_V110 } from './synth-combat-v110.js';
+import { getAutomatonCampaignContractV113 } from './automaton-combat-v113.js';
 
 // Gameplay encounter assignments, not claims that every crossover happened in canon.
 // Source-specific variants stay separate. Project worlds host displaced arcade/crossover dossiers.
@@ -37,7 +38,7 @@ const assignment = (d) => {
   if (/xenoborg|avp_extinction/.test(b)) return 'engineered';
   return 'crossover';
 };
-const caste = (d) => [103, 105, 106, 110, 111, 112].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
+const caste = (d) => [103, 105, 106, 110, 111, 112, 113].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
   : /facehugger/.test(d.basename) ? 'parasite' : /queen_aliens|pathogen_queen/.test(d.basename) ? 'royal'
     : d.combatRole === 'ranged' ? 'ranged' : 'stalker';
 
@@ -81,6 +82,7 @@ export const ENEMY_USER_CAMPAIGN_V88 = Object.freeze(ENEMY_USER_CASTES_V87.map(d
     modifier: 'Standard', behavior: d.combatRole === 'ranged' ? 'control' : ['idle', 'defensive-melee'].includes(d.combatRole) ? 'guard' : 'stalk',
     frequency: 'contextual', acid: 0, automaticEncounter: admitted, encounterGroup,
     ...(d.visualRevision === 110 ? { behaviorContractV110: SYNTH_CAMPAIGN_CONTRACTS_V110[d.synthBehaviorV110] } : {}),
+    ...(getAutomatonCampaignContractV113(d) ? { behaviorContractV110:getAutomatonCampaignContractV113(d) } : {}),
     encounterWorldIds: Object.freeze(worlds.map(world => world.id)),
     habitats: Object.freeze(worlds.map(world => world.name)),
     encounterStatus: admitted ? 'project-adaptation' : 'bioforge-only', encounterNote: admitted
