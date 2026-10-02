@@ -403,10 +403,13 @@ export const VEHICLES = Object.freeze(Array.from({ length: 279 }, (_, index) => 
   const name = index < vehicleSeeds.length ? seed[0] : `${seed[0]} — ${fit}`;
   const stableBaseName = seed[3] || seed[0];
   const stableName = index < vehicleSeeds.length ? stableBaseName : `${stableBaseName} ${fit}`;
+  // Narcissus is a civilian lifeboat, not an armed shuttle. Its existing fits
+  // retain the same identity and tuning, but do not inherit the generic gunner.
+  const unarmedLifeboat = index % vehicleSeeds.length === 12;
   const seats = Array.from({ length: seed[2] }, (_, seatIndex) => ({
     id: `seat-${seatIndex + 1}`,
-    role: seatIndex === 0 ? 'driver' : seatIndex === 1 && seed[2] > 2 ? 'gunner' : seatIndex === 2 && seed[2] > 4 ? 'commander' : 'passenger',
-    actions: seatIndex === 0 ? ['drive', 'boost', 'brake'] : seatIndex === 1 ? ['aim', 'fire', 'reload'] : ['observe', 'support', 'disembark']
+    role: seatIndex === 0 ? 'driver' : seatIndex === 1 && seed[2] > 2 && !unarmedLifeboat ? 'gunner' : seatIndex === 2 && seed[2] > 4 ? 'commander' : 'passenger',
+    actions: seatIndex === 0 ? ['drive', 'boost', 'brake'] : seatIndex === 1 && !unarmedLifeboat ? ['aim', 'fire', 'reload'] : ['observe', 'support', 'disembark']
   }));
   return {
     id: `vehicle-${String(index + 1).padStart(3, '0')}-${slug(stableName)}`,

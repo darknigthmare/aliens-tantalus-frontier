@@ -21,6 +21,8 @@ import { WEAPON_NATIVE_PROFILES_V113 } from '../src/weapon-native-visuals-v113.j
 import { VEHICLE_NATIVE_POSES_V113 } from '../src/vehicle-native-visuals-v113.js';
 import { WEAPON_NATIVE_PROFILES_V116 } from '../src/weapon-native-visuals-v116.js';
 import { ENEMY_AUTOMATON_ADAPTATIONS_V116 } from '../src/enemy-automaton-adaptations-v116.js';
+import { WEAPON_NATIVE_PROFILES_V117 } from '../src/weapon-native-visuals-v117.js';
+import { VEHICLE_NATIVE_POSES_V117 } from '../src/vehicle-native-visuals-v117.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -51,6 +53,14 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const v117Folders = ['assets/openai/equipment/v117-weapons', 'assets/openai/equipment/v117-vehicles'];
+  const readyV117Paths = new Set([
+    ...WEAPON_NATIVE_PROFILES_V117, ...Object.values(VEHICLE_NATIVE_POSES_V117)
+  ].filter(asset => asset.reviewStatus === 'accepted-static-adaptation'
+    && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/openai\/equipment\/v117-(?:weapons|vehicles)\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && Number.isInteger(asset.sourceWidth) && asset.sourceWidth > 0
+    && Number.isInteger(asset.sourceHeight) && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const v116AutomatonFolder = 'assets/openai/sprites/static-automaton-v116';
   const readyV116AutomatonPaths = new Set(ENEMY_AUTOMATON_ADAPTATIONS_V116.filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation'
@@ -126,6 +136,9 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (v117Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV117Paths.has(sourcePath);
+    if (/^assets\/openai\/(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v117(?:[^0-9]|$)/i.test(sourcePath)) return v117Folders.includes(sourcePath);
+    if (/^docs\/references\/(?:V117_|v117-)/i.test(sourcePath)) return false;
     if (sourcePath.startsWith(v116AutomatonFolder + '/')) return readyV116AutomatonPaths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v116(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === v116AutomatonFolder;
     if (sourcePath.startsWith(v116WeaponFolder + '/')) return readyV116WeaponPaths.has(sourcePath);
