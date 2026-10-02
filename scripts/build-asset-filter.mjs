@@ -19,6 +19,8 @@ import { ENEMY_AFE2_ADAPTATIONS_V113 } from '../src/enemy-afe2-adaptations-v113.
 import { ENEMY_USER_RECONSTRUCTIONS_V113 } from '../src/enemy-user-reconstructions-v113.js';
 import { WEAPON_NATIVE_PROFILES_V113 } from '../src/weapon-native-visuals-v113.js';
 import { VEHICLE_NATIVE_POSES_V113 } from '../src/vehicle-native-visuals-v113.js';
+import { WEAPON_NATIVE_PROFILES_V116 } from '../src/weapon-native-visuals-v116.js';
+import { ENEMY_AUTOMATON_ADAPTATIONS_V116 } from '../src/enemy-automaton-adaptations-v116.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -49,6 +51,20 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  const v116AutomatonFolder = 'assets/openai/sprites/static-automaton-v116';
+  const readyV116AutomatonPaths = new Set(ENEMY_AUTOMATON_ADAPTATIONS_V116.filter(asset =>
+    asset.reviewStatus === 'accepted-static-adaptation'
+    && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/openai\/sprites\/static-automaton-v116\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && Number.isInteger(asset.sourceWidth) && asset.sourceWidth > 0
+    && Number.isInteger(asset.sourceHeight) && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
+  const v116WeaponFolder = 'assets/openai/equipment/v116-weapons';
+  const readyV116WeaponPaths = new Set(WEAPON_NATIVE_PROFILES_V116.filter(asset =>
+    asset.reviewStatus === 'accepted-static-adaptation'
+    && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/openai\/equipment\/v116-weapons\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && Number.isInteger(asset.sourceWidth) && asset.sourceWidth > 0
+    && Number.isInteger(asset.sourceHeight) && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV114Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V114.map(asset => asset.path.slice(1)));
   const v113Folders = ['assets/openai/sprites/static-import-v113', 'assets/openai/sprites/static-game-v113',
     'assets/openai/equipment/v113-weapons', 'assets/equipment/v113-vehicles'];
@@ -110,6 +126,10 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath.startsWith(v116AutomatonFolder + '/')) return readyV116AutomatonPaths.has(sourcePath);
+    if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v116(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === v116AutomatonFolder;
+    if (sourcePath.startsWith(v116WeaponFolder + '/')) return readyV116WeaponPaths.has(sourcePath);
+    if (/^assets\/openai\/equipment\/(?:[^/]+\/)*[^/]*v116(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === v116WeaponFolder;
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v114/')) return readyV114Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v114(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/animated-import-v114';
     if (v113Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV113Paths.has(sourcePath);

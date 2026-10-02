@@ -1,3 +1,5 @@
+import { WEAPONS_ADDITIONS_V116 } from './weapon-native-visuals-v116.js';
+
 export const RELEASE = Object.freeze({
   name: 'ALIENS: TANTALUS FRONTIER',
   version: '50.0.0',
@@ -178,7 +180,8 @@ const weaponSeeds = [
   ['Cryo Lance', 'cryo', 'Frontier'], ['Pathogen Containment Projector', 'chemical', 'Frontier']
 ];
 const weaponMarks = ['Standard', 'Field', 'Veteran', 'Prototype'];
-export const WEAPONS = Object.freeze(Array.from({ length: 146 }, (_, index) => {
+// Append sourced additions after the historical range; do not renumber saves.
+export const WEAPONS = Object.freeze([...Array.from({ length: 146 }, (_, index) => {
   const seed = weaponSeeds[index % weaponSeeds.length];
   const mark = weaponMarks[Math.floor(index / weaponSeeds.length) % weaponMarks.length];
   const name = index < weaponSeeds.length ? seed[0] : `${seed[0]} — ${mark}`;
@@ -197,7 +200,7 @@ export const WEAPONS = Object.freeze(Array.from({ length: 146 }, (_, index) => {
     rarity: rarity(index), provenance: index < weaponSeeds.length ? 'licensed-reference' : 'gameplay-variant',
     tags: [seed[1], index % 3 === 0 ? 'acid-safe' : 'field', index % 5 === 0 ? 'heavy' : 'portable']
   };
-}));
+}), ...WEAPONS_ADDITIONS_V116]);
 
 const equipmentSeeds = [
   'Motion Tracker', 'Access Tuner', 'Maintenance Jack', 'Cutting Torch', 'Flashlight', 'Medkit',
@@ -515,7 +518,7 @@ export const CONTENT_COUNTS = Object.freeze({
 export const CONTENT_TARGETS = Object.freeze({
   worlds: 64,
   campaigns: 436,
-  weapons: 146,
+  weapons: 146 + WEAPONS_ADDITIONS_V116.length,
   equipment: 106,
   enemies: 571,
   vehicles: 279,

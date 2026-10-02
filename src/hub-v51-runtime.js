@@ -868,12 +868,14 @@ export class HubGame extends HubGameV50 {
       ctx.fillRect(0, HUB_WORLD.floorY, HUB_WORLD.width, 4);
     }
     this.drawTraversal(ctx);
+    this.drawDepthFloorV116(ctx);
     for (const room of deck.rooms) {
       this.drawRoomMarker(ctx, room);
       if (room.id !== DROPSHIP_HANGAR_ART_V55.roomId) this.drawInteractionProp(ctx, room);
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
     for (const npc of this.npcs) {
+      this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
       const image = this.npcSheets[npc.sheet] || this.crewSheet;
       const renderWidth = 92;

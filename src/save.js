@@ -54,6 +54,7 @@ import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-state-v87.js';
 import { normalizeUserEquipmentV95, resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
 import { createXenoTrialsProgressV96, normalizeXenoTrialsProgressV96 } from './xeno-trials-progress-v96.js';
+import { sanitizeJumpStateV116, isJumpChargingV116 } from './galaxy-jump-v115.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -272,6 +273,8 @@ export function createDefaultSave(profile = 1) {
       }])),
       alerts: [],
       diplomacyWindows: {},
+      jumpV116: null,
+      shipWorldIdV116: WORLDS[0].id,
       resources: { credits: 3200, alloy: 80, fuel: 64, medical: 22, research: 0, pathogen: 0 }
     },
     strategy: createStrategyState(),
@@ -1329,6 +1332,7 @@ export function getOperationBrief(save, campaign, world) {
 }
 
 export function beginOperation(save, campaign, world) {
+  if (isJumpChargingV116(save)) throw new Error('Préparation hyperspatiale active : départ en opération suspendu.');
   if (save.portMeridienV90 && save.openingV88?.phase === 'ready' && normalizePortMeridienV90(save.portMeridienV90)?.phase !== 'complete') throw new Error('Terminez le débarquement au quai des vivants avant la première opération.');
   if (save.onboardingV84 && save.onboardingV84.phase !== 'complete') throw new Error('Terminez le réveil et le briefing dans le Tantalus avant un déploiement.');
   const openingV88 = normalizePlayerOpeningV88(save.openingV88);
@@ -1905,6 +1909,7 @@ export function migrateSave(input, profile = 1) {
 
   const galaxy = isRecord(source.galaxy) ? source.galaxy : {};
   Object.assign(migrated.galaxy, galaxy);
+  migrated.galaxy.jumpV116 = sanitizeJumpStateV116(galaxy.jumpV116, WORLDS);
   migrated.galaxy.resources = mergeNumbers(base.galaxy.resources, galaxy.resources, 0, 999999999);
   migrated.galaxy.unlockedWorldIds = stringList(galaxy.unlockedWorldIds, base.galaxy.unlockedWorldIds);
   migrated.galaxy.completedCampaignIds = stringList(galaxy.completedCampaignIds, base.galaxy.completedCampaignIds);
@@ -1935,6 +1940,8 @@ export function migrateSave(input, profile = 1) {
   for (const key of ['scene', 'worldId', 'levelSeedId', 'difficulty']) {
     if (typeof source[key] === 'string') migrated[key] = source[key].slice(0, 120);
   }
+  migrated.galaxy.shipWorldIdV116 = WORLDS.some(world => world.id === galaxy.shipWorldIdV116) ? galaxy.shipWorldIdV116
+    : WORLDS.some(world => world.id === migrated.worldId) ? migrated.worldId : base.worldId;
   if (typeof source.campaignId === 'string' || source.campaignId === null) migrated.campaignId = source.campaignId;
   migrated.presentation = {
     titleScene: sanitizeTitleScenePresentationV79(source.presentation?.titleScene)

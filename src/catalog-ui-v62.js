@@ -83,9 +83,12 @@ const LABELS = Object.freeze({
 });
 
 const DISPLAY_VALUES_V89 = Object.freeze({
-  human: 'Humains', synthetic: 'Synthétiques', engineer: 'Engineers / Ingénieurs',
+  human: 'Humains', synthetic: 'Synthétiques', engineer: 'Mala’kak / Engineers',
+  automaton: 'Automaton', 'mala-kak': "Mala’kak",
   adult: 'Adulte', 'manufactured-unit': 'Unité fabriquée', 'not-applicable': 'Sans objet',
   'synthetic-unit': 'Unité synthétique', personnel: 'Personnel humain',
+  'combat-automaton': 'Automate de combat', melee: 'Combat rapproché', ranged: 'Appui à distance',
+  'defensive-melee': 'Défense rapprochée', idle: 'Unité stationnaire',
   'documentary-only': 'Référence documentaire, hors combat',
   'source-grounded-partial-v89': 'Documentée, adaptation partielle',
   'source-grounded-partial-v90': 'Documentée, adaptation partielle',
@@ -289,11 +292,11 @@ function appendDefinitionRows(documentRef, target, values, options = {}) {
   }
 }
 
-function renderTaxonomyPath(documentRef, record) {
+function renderTaxonomyPath(documentRef, record, technical = false) {
   const list = createElement(documentRef, 'ol', 'catalog-v62__breadcrumb');
   for (const segment of record.hierarchySegments) {
     const item = createElement(documentRef, 'li', segment.label === CATALOG_UNKNOWN_V62 ? 'is-unknown' : '',
-      formatCatalogValueV62(segment.label));
+      formatCatalogValueV62(technical ? segment.label : playerCatalogNameV110(segment.label)));
     item.dataset.kind = segment.kind;
     list.append(item);
   }
@@ -682,7 +685,7 @@ export class CatalogWorkbenchV62 {
     if (this.state.selectedEntryId && nodeContainsEntry(node, this.state.selectedEntryId)) row.classList.add('is-in-path');
     const chevron = createElement(this.document, 'span', 'catalog-v62__tree-chevron', node.children.length ? (expanded ? '−' : '+') : '·');
     chevron.setAttribute('aria-hidden', 'true');
-    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', formatCatalogValueV62(node.label));
+    const text = createElement(this.document, 'span', 'catalog-v62__tree-name', formatCatalogValueV62(this.developerModeV110 ? node.label : playerCatalogNameV110(node.label)));
     if (node.label === CATALOG_UNKNOWN_V62) text.classList.add('catalog-v62__unknown');
     const count = createElement(this.document, 'span', 'catalog-v62__tree-count', String(visibleCount));
     row.append(chevron, text, count);
@@ -723,6 +726,7 @@ export class CatalogWorkbenchV62 {
   }
 
   renderCard(record) {
+    const playerName = this.developerModeV110 ? record.name : playerCatalogNameV110(record.name);
     const card = createElement(this.document, 'article', 'catalog-v62__card');
     card.classList.toggle('is-selected', record.id === this.state.selectedEntryId);
     card.dataset.catalogEntryCard = record.id;
@@ -733,13 +737,13 @@ export class CatalogWorkbenchV62 {
     const media = createElement(this.document, 'div', 'catalog-v62__card-media');
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) media.classList.add('catalog-v72__world-media');
     const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(media, record)
-      : record.visual && this.animator.mount(media, record.visual, record.name, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false, staticProfileId: record.id });
+      : record.visual && this.animator.mount(media, record.visual, playerName, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false, staticProfileId: record.id });
     if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${formatCatalogValueV62(record.taxonomy.family)}`),
       createElement(this.document, 'strong', 'catalog-v62__card-title', this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)),
-      createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : record.taxonomy.type)
+      createElement(this.document, 'span', 'catalog-v62__card-type', record.taxonomy.type === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : this.developerModeV110 ? record.taxonomy.type : playerCatalogNameV110(record.taxonomy.type))
     );
     if (this.developerModeV110 || record.catalog !== 'enemies') body.append(createElement(this.document, 'span', 'catalog-v62__card-id', record.id));
     select.append(media, body);
@@ -758,7 +762,7 @@ export class CatalogWorkbenchV62 {
   renderMissingMedia(target, record) {
     const message = createElement(this.document, 'span', 'catalog-v62__media-status', 'MÉDIA VISUEL NON DOCUMENTÉ');
     message.dataset.catalogMediaMissing = record.id;
-    message.setAttribute('aria-label', `${record.name} — média visuel non documenté`);
+    message.setAttribute('aria-label', `${this.developerModeV110 ? record.name : playerCatalogNameV110(record.name)} — média visuel non documenté`);
     target.append(message);
   }
 
@@ -767,15 +771,16 @@ export class CatalogWorkbenchV62 {
     if (!reference) return null;
     const frame = createElement(this.document, 'figure');
     frame.dataset.documentaryReferenceV105 = record.id;
-    frame.setAttribute('aria-label', `${record.name} — original documentaire, pas un sprite de combat`);
+    const label = this.developerModeV110 ? record.name : playerCatalogNameV110(record.name);
+    frame.setAttribute('aria-label', `${label} — original documentaire, pas un sprite de combat`);
     frame.style.margin = '0'; frame.style.width = '100%';
     const image = createElement(this.document, 'img');
-    image.src = reference.path; image.alt = record.name; image.loading = detail ? 'eager' : 'lazy'; image.decoding = 'async';
+    image.src = reference.path; image.alt = label; image.loading = detail ? 'eager' : 'lazy'; image.decoding = 'async';
     image.style.width = '100%'; image.style.height = detail ? '300px' : '132px'; image.style.objectFit = 'contain';
     image.addEventListener('error', () => { image.hidden = true; frame.append(createElement(this.document, 'p', '', 'Original indisponible, aucun substitut.')); }, { once: true });
     if (detail) {
       const link = createElement(this.document, 'a'); link.href = reference.path; link.target = '_blank'; link.rel = 'noopener noreferrer';
-      link.setAttribute('aria-label', `Ouvrir l’original entier : ${record.name}`); link.append(image); frame.append(link);
+      link.setAttribute('aria-label', `Ouvrir l’original entier : ${label}`); link.append(image); frame.append(link);
     } else frame.append(image);
     target.append(frame); return frame;
   }
@@ -807,7 +812,7 @@ export class CatalogWorkbenchV62 {
     const technical = this.developerModeV110 || record.catalog !== 'enemies';
     const animationControls = createElement(this.document, 'div');
     const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(header, record, true)
-      : record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
+      : record.visual && this.animator.mount(header, record.visual, technical ? record.name : playerCatalogNameV110(record.name), { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
     if (!preview) this.renderMissingMedia(header, record);
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
@@ -841,9 +846,10 @@ export class CatalogWorkbenchV62 {
     if (animationControls.children.length) this.detail.append(animationControls);
     if (technical && record.catalogPolicyV105?.note) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', record.catalogPolicyV105.note));
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105) this.renderGameplayScaleV72(record);
-    this.detail.append(renderTaxonomyPath(this.document, record));
+    this.detail.append(renderTaxonomyPath(this.document, record, technical));
     if (record.catalogPolicyV105?.personnel) {
-      const classification = this.renderSection('IDENTIFICATION DU PERSONNEL', 'classification');
+      const classification = this.renderSection(['synthetic', 'automaton'].includes(record.taxonomy.family)
+        ? 'IDENTIFICATION DE L’UNITÉ' : record.taxonomy.family === 'human' ? 'IDENTIFICATION DU PERSONNEL' : 'IDENTIFICATION DE L’ORGANISME', 'classification');
       const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
       appendDefinitionRows(this.document, data, { family: record.taxonomy.family, stage: record.taxonomy.stage,
         role: record.taxonomy.role, faction: record.taxonomy.faction });
@@ -851,6 +857,12 @@ export class CatalogWorkbenchV62 {
     }
 
     const canonSection = this.renderSection('FAITS DE RÉFÉRENCE', 'canon');
+    const appearances = record.canonFacts.source?.work;
+    if (appearances && appearances !== CATALOG_UNKNOWN_V62) {
+      const observations = this.renderSection('APPARITIONS / RÉFÉRENCES', 'appearances');
+      observations.append(createElement(this.document, 'p', 'catalog-v62__fact-note', appearances));
+      this.detail.append(observations);
+    }
     const canonData = createElement(this.document, 'dl', 'catalog-v62__data-list');
     if (technical) appendDefinitionRows(this.document, canonData, record.canonFacts.source, { status: 'canon' });
     appendDefinitionRows(this.document, canonData, record.canonFacts.claims, { status: 'canon' });
@@ -962,7 +974,7 @@ export class CatalogWorkbenchV62 {
 
   renderBiologySection(record) {
     if (record.catalog !== 'enemies') return;
-    if (['human', 'synthetic', 'automaton', 'engineer'].includes(record.taxonomy.family)) return;
+    if (['human', 'synthetic', 'automaton', 'engineer', 'mala-kak'].includes(record.taxonomy.family)) return;
     const relations = getBiologicalRelationsV62(record.id);
     const section = this.renderSection('RELATIONS BIOLOGIQUES', 'biology');
     if (!relations.length) {
@@ -975,10 +987,11 @@ export class CatalogWorkbenchV62 {
         button.type = 'button';
         button.dataset.catalogRelationEntry = relation.relatedEntry.id;
         const relationLabel = BIOLOGY_RELATION_LABELS[relation.type] || relation.type;
-        const direction = relation.direction === 'incoming' ? `${relation.relatedEntry.name} ${relationLabel}` : `${relationLabel} ${relation.relatedEntry.name}`;
+        const relatedName = this.developerModeV110 ? relation.relatedEntry.name : playerCatalogNameV110(relation.relatedEntry.name);
+        const direction = relation.direction === 'incoming' ? `${relatedName} ${relationLabel}` : `${relationLabel} ${relatedName}`;
         button.append(
           createElement(this.document, 'span', '', direction),
-          createElement(this.document, 'small', '', relation.status)
+          createElement(this.document, 'small', '', this.developerModeV110 ? relation.status : 'Cycle documenté')
         );
         item.append(button);
         list.append(item);

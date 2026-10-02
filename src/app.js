@@ -12,6 +12,7 @@ import {
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
 import { Echo9UiV110 } from './echo9-ui-v110.js';
+import { getJumpReadinessV115, confirmJumpV115, prepareJumpV116, cancelJumpV116, getJumpProgressV116, isJumpChargingV116, getShipWorldIdV116 } from './galaxy-jump-v115.js';
 import { setEcho9MarkingV110 } from './echo9-personnel-v110.js';
 import { isDeveloperShortcutV110, resolvePlayerViewV110, getCommandMissionsV110, commandMetricsV110 } from './player-surfaces-v110.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
@@ -309,14 +310,16 @@ function commit(message = '') {
 }
 
 function assertOperationMutable() {
+  if (isJumpChargingV116(saveSystem.data)) throw new Error('Préparation hyperspatiale active : annulez le transit avant de modifier les opérations.');
   if (saveSystem.data.strategy.currentOperation) throw new Error('Configuration verrouillée pendant une opération active.');
 }
 
-function runTimedMutation(mutation, successMessage) {
+function runTimedMutation(mutation, successMessage, { duringTransitV116 = false } = {}) {
   const previous = clone(saveSystem.data);
   const before = absoluteHours(saveSystem.data.clock);
   let result;
   try {
+    if (!duringTransitV116 && isJumpChargingV116(saveSystem.data)) throw new Error('Préparation hyperspatiale active : annulez le transit avant cette action.');
     result = mutation();
     simulateElapsed(before);
     ensureAdvancedState(saveSystem.data);
@@ -1141,9 +1144,56 @@ function renderGalaxy() {
   byId('star-map').innerHTML = worlds.map((world) => {
     const point = worldPosition(WORLDS.indexOf(world));
     const unlocked = saveSystem.data.galaxy.unlockedWorldIds.includes(world.id);
-    return `<button class="world-node ${world.id === activeWorld.id ? 'active' : ''} ${unlocked ? '' : 'locked'}" data-world-id="${world.id}" style="left:${point.left}%;top:${point.top}%">${escapeHtml(world.name)}</button>`;
+    const inOrbit = world.id === getShipWorldIdV116(saveSystem.data);
+    return `<button class="world-node ${world.id === activeWorld.id ? 'active' : ''} ${unlocked ? '' : 'locked'}" data-world-id="${world.id}" aria-current="${inOrbit ? 'location' : 'false'}" title="${inOrbit ? 'Tantalus en orbite' : 'Sélectionner une destination'}" style="left:${point.left}%;top:${point.top}%">${escapeHtml(world.name)}${inOrbit ? ' · TANTALUS' : ''}</button>`;
   }).join('');
   renderWorldDetail(activeWorld);
+  renderGalaxyJumpV116();
+}
+
+let galaxyJumpTimerV116 = null;
+let failedJumpOwnerV116 = null;
+function renderGalaxyJumpV116() {
+  const jump = getJumpReadinessV115(saveSystem.data, activeWorld, WORLDS);
+  const state = getJumpProgressV116(saveSystem.data, WORLDS);
+  const underway = state && ['charging', 'blocked'].includes(state.phase);
+  const destination = underway && WORLDS.find(world => world.id === state.destinationId);
+  const failed = failedJumpOwnerV116 && ownsTimelineV84(failedJumpOwnerV116);
+  const orbitalWorld = WORLDS.find(world => world.id === getShipWorldIdV116(saveSystem.data));
+  const preparation = underway ? `<p>DESTINATION · ${escapeHtml(destination?.name || '')}</p><p role="status" aria-live="polite" data-jump-countdown-v116>${state.phase === 'blocked' ? `Transit suspendu · ${escapeHtml(state.reason)} · carburant conservé` : failed ? 'Enregistrement refusé · arrivée non confirmée · réessayez ou annulez' : `Stabilisation du champ · T−${Math.ceil(state.remainingMs / 1000)} s`}</p><progress data-jump-progress-v116 max="1" value="${state.progress}" aria-label="Préparation hyperspatiale" style="width:100%;height:14px"></progress><div class="button-row"><button class="button compact" data-cancel-jump-v116>ANNULER SANS DÉBIT</button>${failed ? '<button class="button compact" data-retry-jump-v116>RÉESSAYER L’ARRIVÉE</button>' : ''}</div>` : '';
+  const content = `<section id="galaxy-jump-panel-v116" class="galaxy-jump-v115"><p class="eyebrow">TANTALUS · PRÉPARATION HYPERSPATIALE</p><p>ORBITE · ${escapeHtml(orbitalWorld?.name || 'Position indéterminée')}</p>${preparation}<p>${jump.ready ? `Route calculée · ${jump.fuel} unités de carburant · séquence de 8 secondes · annulation possible` : escapeHtml(jump.reasons.join(' · '))}</p><button class="button primary wide" data-confirm-jump-v115="${activeWorld.id}" ${jump.ready ? '' : 'disabled'}>PRÉPARER LE TRANSIT</button></section>`;
+  const panel = byId('galaxy-jump-panel-v116');
+  if (panel) panel.outerHTML = content;
+  else byId('world-detail').insertAdjacentHTML('beforeend', content);
+}
+
+// One scheduler reads the current profile, never an old captured save. The
+// durable deadline survives reloads; the transactional wrapper rolls back a
+// failed storage write and manual retry prevents a repeated error/toast loop.
+function tickGalaxyJumpV116() {
+  if (standaloneContext || saveSystem.recoveryNeeded || creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
+  const state = getJumpProgressV116(saveSystem.data, WORLDS);
+  if (state?.phase !== 'charging') return;
+  if (failedJumpOwnerV116 && ownsTimelineV84(failedJumpOwnerV116)) return;
+  if (!state.remainingMs) {
+    const owner = currentOwnerV84();
+    const destination = WORLDS.find(world => world.id === state.destinationId);
+    const result = runTimedMutation(() => confirmJumpV115(saveSystem.data, destination, WORLDS), undefined, { duringTransitV116: true });
+    if (!result && ownsTimelineV84(owner)) { failedJumpOwnerV116 = owner; renderGalaxyJumpV116(); }
+    return;
+  }
+  if (activeView === 'galaxy') {
+    const counter = document.querySelector('[data-jump-countdown-v116]');
+    const progress = document.querySelector('[data-jump-progress-v116]');
+    const label = `Stabilisation du champ · T−${Math.ceil(state.remainingMs / 1000)} s`;
+    if (counter && counter.textContent !== label) counter.textContent = label;
+    if (progress) progress.value = state.progress;
+  }
+}
+
+function startGalaxyJumpSchedulerV116() {
+  clearInterval(galaxyJumpTimerV116);
+  galaxyJumpTimerV116 = setInterval(tickGalaxyJumpV116, 250);
 }
 
 function renderCampaigns() {
@@ -1985,6 +2035,9 @@ function startMissionInsertionV62(context) {
 }
 
 function launchCampaign(campaign = null) {
+  if (isJumpChargingV116(saveSystem.data)) {
+    toast('Départ en opération suspendu pendant la préparation hyperspatiale. Annulez le transit ou attendez l’arrivée.'); return false;
+  }
   if (saveSystem.data.portMeridienV90 && saveSystem.data.openingV88?.phase === 'ready' && saveSystem.data.portMeridienV90.phase !== 'complete') {
     toast(getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84)?.text || 'Terminez le débarquement.');
     showView('hub'); return false;
@@ -2849,6 +2902,20 @@ function bindDelegatedActions() {
       activeWorld = WORLDS.find((world) => world.id === target.dataset.worldId) || activeWorld;
       renderGalaxy();
     }
+    if (target.dataset.confirmJumpV115) {
+      const destination = WORLDS.find(world => world.id === target.dataset.confirmJumpV115);
+      failedJumpOwnerV116 = null;
+      runTimedMutation(() => prepareJumpV116(saveSystem.data, destination, WORLDS));
+    }
+    if (target.hasAttribute('data-cancel-jump-v116')) {
+      failedJumpOwnerV116 = null;
+      const owner = currentOwnerV84();
+      const result = runTimedMutation(() => cancelJumpV116(saveSystem.data, WORLDS), undefined, { duringTransitV116: true });
+      if (!result && ownsTimelineV84(owner) && isJumpChargingV116(saveSystem.data)) {
+        failedJumpOwnerV116 = owner; renderGalaxyJumpV116();
+      }
+    }
+    if (target.hasAttribute('data-retry-jump-v116')) { failedJumpOwnerV116 = null; tickGalaxyJumpV116(); }
     if (target.dataset.worldOperations) {
       byId('campaign-search').value = activeWorld.name;
       byId('command-world-v110').value = target.dataset.worldOperations;
@@ -3101,6 +3168,9 @@ async function boot() {
   bind();
   applyRuntimeSettings();
   renderAll();
+  startGalaxyJumpSchedulerV116();
+  globalThis.addEventListener('pagehide', () => { clearInterval(galaxyJumpTimerV116); galaxyJumpTimerV116 = null; });
+  globalThis.addEventListener('pageshow', event => { if (event.persisted) startGalaxyJumpSchedulerV116(); });
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
   void audio.prepare();
   globalThis.__ATF_AUDIO_V77__ = audio;

@@ -177,7 +177,9 @@ export class XenoTrialsUiV96 {
       const walk = getEnemyImportAnimationV107(art);
       const attack = getEnemyImportAttackV109(art);
       const motionLabel = attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label;
-      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption>${portrait}<strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span>${motionLabel ? `<small>Aperçu fixe · ${motionLabel}</small>` : ''}</figure>`;
+      const desiredFacing = i ? -1 : 1;
+      const sourceFacing = art.sourceFacing === 1 ? 1 : -1;
+      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${f.label}</strong><span>${roleLabel[f.role]} · ${f.hp} PV</span>${motionLabel ? `<small>Aperçu fixe · ${motionLabel}</small>` : ''}</figure>`;
     }).join('<span class="xt-versus" aria-hidden="true">VS</span>');
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');

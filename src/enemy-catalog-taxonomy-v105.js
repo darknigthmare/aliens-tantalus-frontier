@@ -24,6 +24,7 @@ const LEGACY_SEEDS = Object.freeze({
   48: Object.freeze({ id: 'enemy-048-cult-host', biology: 'human', faction: UNKNOWN })
 });
 const ENGINEER_IDS = new Set(['pose-v95-user-ingineer-mother']);
+const AUTOMATON_IDS = new Set(['pose-v106-import-game-afe2-bulwark']);
 const AFE_SYNTH_IDS = new Set([
   'pose-v94-afe-synth-trooper', 'pose-v94-afe-synth-guard',
   'pose-v94-afe-synth-sniper', 'pose-v94-afe-synth-heavy'
@@ -72,13 +73,16 @@ export function getEnemyCatalogPolicyV105(entry = {}) {
   const legacyVariant = Boolean(seed?.cycle && entry.provenance === 'systemic-variant');
   const archived = legacyVariant && entry.modifier !== 'Armored';
   const engineerReference = ENGINEER_IDS.has(entry.id);
+  const automaton = AUTOMATON_IDS.has(entry.id)
+    || entry.mechanical === true && /combat.?automaton/i.test(entry.lineage || '');
   return Object.freeze({
     biology,
+    family: automaton ? 'automaton' : biology,
     faction: text(entry.faction) !== UNKNOWN ? text(entry.faction)
       : seed?.faction || (AFE_SYNTH_IDS.has(entry.id) ? 'Weyland-Yutani' : UNKNOWN),
-    personnel: PERSONNEL.has(biology),
-    role: text(entry.caste),
-    stage: biology === 'synthetic' ? 'manufactured-unit' : PERSONNEL.has(biology) ? 'adult' : null,
+    personnel: automaton || PERSONNEL.has(biology),
+    role: text(entry.combatRole || entry.caste),
+    stage: automaton || biology === 'synthetic' ? 'manufactured-unit' : PERSONNEL.has(biology) ? 'adult' : null,
     archived,
     status: archived ? 'legacy-generated-unverified' : legacyVariant ? 'project-equipment-variant'
       : engineerReference || entry.documentaryReferenceV105 ? 'user-reference-classification' : 'source-classification',

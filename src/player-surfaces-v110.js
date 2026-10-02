@@ -18,9 +18,17 @@ export function playerCatalogStatsV110(stats = {}) {
 
 // Presentation only: retain identity and Altered variants, not import-batch receipts.
 export function playerCatalogNameV110(name) {
-  return String(name || '').replace(/\s+—\s+Pack\s+\d+.*$/i, '')
-    .replace(/\s+—\s+Aliens: Fireteam Elite\s+—\s+adaptation de synthétique$/i, '')
-    .replace(/\s+—\s+(?:adaptation (?:2D|du projet)|design utilisateur).*$/i, '');
+  const original = String(name || '').trim();
+  const parts = original.split(/\s+—\s+/);
+  const receipt = /^(?:pack\s+\d+\b|lot\s+AlienTentalus\b|référence(?:\s+utilisateur)?(?:\s+\d+\b|$)|adaptation\b|design\s+utilisateur\b)/i;
+  // Match source-work segments, not every occurrence of "Alien" in an identity.
+  // A supplied descriptive label replaces an anonymous numbered import heading.
+  const sourceWork = /^(?:Aliens?(?:\s*(?::|\(\d{4}\)|$)|\s+vs\.?\s+Predator\b)|Prometheus(?:\s*\(\d{4}\))?$|(?:Fireteam Elite|Dark Descent|Colonial Marines|Primal Hunt)\b)/i;
+  const identity = parts.filter((part, index) => !receipt.test(part) && (index === 0 || !sourceWork.test(part)));
+  // An entirely anonymous reference must still have a recoverable label.
+  if (!identity.length) return original;
+  const label = identity.join(' — ');
+  return receipt.test(parts[0]) ? label.replace(/^./u, letter => letter.toUpperCase()) : label;
 }
 
 export function getCommandMissionsV110(save, campaigns, worldId = '') {

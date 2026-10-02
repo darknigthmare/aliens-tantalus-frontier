@@ -52,8 +52,18 @@ export function normalizeXenoTrialsProgressV96(value) {
 }
 
 export function getXenoTrialsUnlockCostV96(id) {
-  const index = XENO_TRIALS_FIGHTERS_V96.findIndex(f => f.id === id);
-  return index < 0 ? null : XENO_TRIALS_STARTERS_V96.includes(id) ? 0 : 100 + index * 20;
+  const fighter = XENO_TRIALS_FIGHTERS_V96.find(f => f.id === id);
+  if (!fighter) return null;
+  if (XENO_TRIALS_STARTERS_V96.includes(id)) return 0;
+  // Simulation prices reflect threat, never insertion order or canonical value.
+  const identity = `${fighter.id} ${fighter.profileId} ${fighter.label}`.toLowerCase();
+  if (/queen|reine/.test(identity)) return 1400;
+  if (/praetorian|prétorien|royal|crusher|bulwark/.test(identity)) return 900;
+  if (/drone/.test(identity)) return 100;
+  if (/runner|coureur/.test(identity)) return 120;
+  if (/warrior|guerrier/.test(identity)) return 200;
+  if (fighter.role === 'tank') return 600;
+  return fighter.hp >= 250 ? 450 : fighter.hp >= 180 ? 300 : 180;
 }
 
 export function unlockXenoTrialsFighterV96(value, id) {

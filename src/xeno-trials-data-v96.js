@@ -10,6 +10,7 @@ import { XENO_TRIALS_AFE2_V112 } from './enemy-afe2-adaptations-v112.js';
 import { XENO_TRIALS_AUTOMATONS_V112 } from './enemy-automaton-adaptations-v112.js';
 import { XENO_TRIALS_AFE2_V113 } from './enemy-afe2-adaptations-v113.js';
 import { XENO_TRIALS_RECONSTRUCTIONS_V113 } from './enemy-user-reconstructions-v113.js';
+import { XENO_TRIALS_AUTOMATONS_V116 } from './enemy-automaton-adaptations-v116.js';
 
 const ADAPTATIONS_V112 = Object.freeze([...XENO_TRIALS_AFE2_V112, ...XENO_TRIALS_AUTOMATONS_V112]);
 const ADAPTATIONS_V113 = Object.freeze([...XENO_TRIALS_AFE2_V113, ...XENO_TRIALS_RECONSTRUCTIONS_V113]);
@@ -201,6 +202,10 @@ export const XENO_TRIALS_FIGHTERS_V96 = Object.freeze([
     ...fighter(entry.id, entry.profileId, entry.label, entry.role, entry.hp, entry.speed, entry.power, entry.reach, entry.special),
     importRevision:113, referenceIdV100:entry.referenceIdV100 || null,
     alteredOf:entry.alteredOf || null
+  })),
+  ...XENO_TRIALS_AUTOMATONS_V116.map(entry => Object.freeze({
+    ...fighter(entry.id, entry.profileId, entry.label, entry.role, entry.hp, entry.speed, entry.power, entry.reach, entry.special),
+    importRevision: 116
   }))
 ]);
 const FIGHTERS = new Map(XENO_TRIALS_FIGHTERS_V96.map(entry => [entry.id, entry]));
@@ -235,7 +240,8 @@ export const XENO_TRIALS_FACTIONS_V96 = Object.freeze([
       ...XENO_TRIALS_SYNTHS_V110.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
       ...XENO_TRIALS_SYNTHS_V111.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
       ...ADAPTATIONS_V112.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
-      ...ADAPTATIONS_V113.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id)]), projectOriginal: true }),
+      ...ADAPTATIONS_V113.filter(entry => entry.factionId === 'rival-lab').map(entry => entry.id),
+      ...XENO_TRIALS_AUTOMATONS_V116.map(entry => entry.id)]), projectOriginal: true }),
   Object.freeze({ id: 'hive', label: 'Ruche / simulation hostile', description: 'Modèle de pression de ruche ; aucun dressage canonique revendiqué.', doctrine: 'balanced', color: '#ed717d',
     roster: Object.freeze(['warrior', 'grid', 'predalien', 'queen', 'ravager', 'boiler', 'burster', 'gorilla', 'ultramorph', 'albino-ravager', 'albino-burster', 'armored-red', 'acid-lurker', 'acid-ravager',
       'user-carrier', 'user-warrior-red', 'user-trex-king', 'user-trex-queen', 'user-big-xeno', 'user-pale-spined', 'user-raised-crest', 'user-blue-violet-biped', 'user-red-horned', 'cryo-lurker', 'cryo-ravager', 'cryo-ripper-queen', 'cryo-pale-hunter', 'cryo-salvage-brute', 'cryo-caravan-stalker', 'armored-caravan-stalker', 'acid-queen', 'acid-k-series', 'acid-ripper-queen',

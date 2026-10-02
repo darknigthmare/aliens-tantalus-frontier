@@ -25,6 +25,7 @@ import {
   resolveSpriteSheet
 } from './sprite-animation-runtime.js';
 import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { hubFarParallaxV116, drawHubFloorPerspectiveV116, drawHubContactShadowV116 } from './hub-depth-presentation-v116.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -307,6 +308,7 @@ export class HubGame {
     this.animationTime = 0;
     this.statusKey = '';
     this.reducedMotion = false;
+    this.depthPresentationV116 = true;
     this.jumpQueued = 0;
     this.coyoteTime = 0;
     this.roomChangePulse = 0;
@@ -320,6 +322,7 @@ export class HubGame {
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
       this.keys.add(event.code);
       if (event.repeat) return;
+      if (event.code === 'F7') { event.preventDefault(); this.setDepthPresentationV116(!this.depthPresentationV116); }
       if (event.code === 'Space') this.jumpQueued = 0.14;
       if (event.code === 'KeyE') this.interact();
       if (event.code === 'KeyW' || event.code === 'ArrowUp') this.useLift(-1);
@@ -391,6 +394,18 @@ export class HubGame {
   }
 
   setReducedMotion(enabled) { this.reducedMotion = Boolean(enabled); }
+  setDepthPresentationV116(enabled) { this.depthPresentationV116 = Boolean(enabled); this.draw(); }
+
+  // Shared with V51's overridden world renderer. Never invent a global walk
+  // plane for editor-authored floors or alter actor/collider coordinates.
+  drawDepthFloorV116(ctx) {
+    if (this.depthPresentationV116 && !this.editorPlaytest && this.useGlobalFloor !== false)
+      drawHubFloorPerspectiveV116(ctx, this.camera.x, { width: LOGICAL_WIDTH, height: LOGICAL_HEIGHT, floorY: FLOOR_Y });
+  }
+
+  drawDepthContactShadowV116(ctx, actor, floorY) {
+    drawHubContactShadowV116(ctx, actor, floorY, this.depthPresentationV116 && !this.editorPlaytest);
+  }
 
   setControl(control, active) {
     const codes = { left: 'KeyA', right: 'KeyD', jump: 'Space' };
@@ -740,6 +755,7 @@ export class HubGame {
     const activeDoor = this.doorStates.reduce((nearest, door) => !nearest || Math.abs(playerCenter - door.x) < Math.abs(playerCenter - nearest.x) ? door : nearest, null);
     return {
       running: this.running,
+      presentationV116: this.depthPresentationV116 ? 'layered-2.5d-fixed-walk-plane' : '2d',
       deck: this.state?.deck ?? 0,
       roomId: room.id,
       roomBackground: room.id === DROPSHIP_HANGAR_ART_V55.roomId || resolveHubRoomArtV56(room.id) ? null : room.background,
@@ -826,6 +842,7 @@ export class HubGame {
     ctx.fillRect(0, FLOOR_Y, WORLD_WIDTH, 4);
     ctx.fillStyle = 'rgba(2, 7, 6, .68)';
     for (let x = 12; x < WORLD_WIDTH; x += 48) ctx.fillRect(x, FLOOR_Y + 16, 30, 8);
+    this.drawDepthFloorV116(ctx);
 
     for (const room of deck.rooms) {
       this.drawRoomMarker(ctx, room);
@@ -833,6 +850,7 @@ export class HubGame {
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
     for (const npc of this.npcs) {
+      this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
       const image = this.npcSheets[npc.sheet] || this.crewSheet;
       const renderWidth = 82;
@@ -1007,13 +1025,14 @@ export class HubGame {
     if (!assetReady(image)) return;
     const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
     const target = getHubRoomLayerBounds(room, layer.renderBounds);
+    const drift = hubFarParallaxV116(this.camera?.x ?? room.xStart, room, this.depthPresentationV116 && !this.reducedMotion);
     ctx.save();
     ctx.beginPath();
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
       image, 0, 0, image.naturalWidth, image.naturalHeight,
-      target.x, target.y, target.w, target.h
+      target.x + drift, target.y, target.w, target.h
     );
     ctx.restore();
   }
@@ -1160,6 +1179,8 @@ export class HubGame {
   }
 
   drawPlayer(ctx) {
+    const shadowFloor = this.currentAnnexV71?.()?.world?.floorY ?? FLOOR_Y;
+    if (!this.ventActorV62?.ventTransit) this.drawDepthContactShadowV116(ctx, this.player, shadowFloor);
     const request = resolvePlayerAnimation(this.player, false);
     const sample = this.playerAnimationV81.sample('hub:player:echo9', request, this.animationTime, {
       emit: false,

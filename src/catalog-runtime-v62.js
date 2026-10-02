@@ -184,8 +184,8 @@ function weaponVisual(entry) {
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
     previewClips: freezeArray([]), visualMode: 'static-pose', animationStatus: 'missing',
     category: knownString(profile.category), renderWidth: profile.width, renderHeight: profile.height,
-    visualLabel: profile.release === 'v113' ? optionalString(profile.canonicalName) : null,
-    illustrationNote: profile.release === 'v113' ? optionalString(profile.fallbackReason) : null
+    visualLabel: ['v113', 'v116'].includes(profile.release) ? optionalString(profile.canonicalName) : null,
+    illustrationNote: ['v113', 'v116'].includes(profile.release) ? optionalString(profile.fallbackReason) : null
   });
   const idle = clipDescriptor(resolveWeaponVisualAnimationV63(entry));
   return selectVisualFields(profile, idle, {
@@ -293,6 +293,7 @@ const VISUAL_RESOLVERS = Object.freeze({
 });
 
 const catalogProvenance = (entry, visual) => freezeObject({
+  work: knownString(entry.work || entry.source),
   ...(entry.documentaryReferenceV105 ? { work: entry.source, encounterStatus: 'documentary-only',
     encounterNote: 'Original consultable ; aucune admission en campagne, Bioforge ou Xeno Trials.' } : {}),
   ...(getEnemyUserCampaignV88(entry.id) ? { work: entry.source, encounterStatus: entry.encounterStatus, encounterNote: entry.encounterNote } : {}),
@@ -407,8 +408,9 @@ const taxonomyFor = (kind, entry, visual) => {
   if (kind === 'enemies') {
     const policy = getEnemyCatalogPolicyV105(entry);
     return freezeObject({
-      family: policy.biology,
-      category: policy.biology === 'synthetic' ? 'synthetic-unit' : policy.biology === 'human' ? 'personnel' : 'organism',
+      family: policy.family,
+      category: policy.family === 'automaton' ? 'combat-automaton'
+        : policy.biology === 'synthetic' ? 'synthetic-unit' : policy.biology === 'human' ? 'personnel' : 'organism',
       // The source catalog does not make a formal species/subspecies claim.
       species: CATALOG_UNKNOWN_V62,
       subspecies: CATALOG_UNKNOWN_V62,
@@ -446,7 +448,7 @@ const hierarchySegmentsFor = (kind, taxonomy) => {
     ['category', taxonomy.category],
     ['type', taxonomy.type]
   ];
-  if (kind === 'enemies' && ['human', 'synthetic', 'engineer'].includes(taxonomy.family)) return [
+  if (kind === 'enemies' && ['human', 'synthetic', 'engineer', 'mala-kak', 'automaton'].includes(taxonomy.family)) return [
     ['family', taxonomy.family],
     ['stage', taxonomy.stage],
     ['role', taxonomy.role],
@@ -750,7 +752,7 @@ export function searchCatalogV62(query, options = {}) {
 
 export function getBiologicalRelationsV62(entryOrId) {
   const record = getCatalogEntryV62(entryOrId);
-  if (!record || record.catalog !== 'enemies') return freezeArray([]);
+  if (!record || record.catalog !== 'enemies' || record.catalogPolicyV105?.personnel) return freezeArray([]);
   const relations = BIOLOGICAL_RELATIONS_V62
     .filter((relation) => relation.fromId === record.id || relation.toId === record.id)
     .map((relation) => {
