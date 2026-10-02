@@ -87,7 +87,7 @@ export const ENEMY_COVERAGE_REQUESTS_V117 = freeze([
   dd('wy-commando', 'Weyland-Yutani Commando', 'human', 'pose-v106-import-game-dd-wy-commando', 'source-adaptation', 'Import Altered conservé ; pas de certification de modèle du jeu source.'),
   dd('wy-private-security', 'Weyland-Yutani private security', 'human'),
   dd('daniel-series', 'Synthetic — Daniel series', 'synthetic', 'pose-v106-import-game-dd-synthetic', 'source-adaptation', 'Dossier DD synthétique relié ; identification de série Daniel non vérifiée.'),
-  dd('cultist', 'Cultist', 'human'),
+  dd('cultist', 'Cultist', 'human', 'pose-v118-dd-darwin-era-cultist', 'source-adaptation', 'Adaptation du concept de production Darwin Era ; pose fixe, pas une certification du modèle final 1:1.'),
   dd('guardian', 'Guardian — Darwin Era', 'human', 'pose-v106-import-game-dd-guardian', 'source-adaptation', 'Famille actuelle humaine ; transformations et physiologie à documenter, pas une évolution xénomorphe inventée.'),
   dd('numinous', 'Numinous', 'human', null, 'missing', 'Sous-type Guardian du relevé communautaire, sans fusion de profils.'),
   row('afe2-additional', 'crawler-turret', 'Crawler Turret', 'unresolved', 'unresolved', null, 'Notes officielles du 25/08/2026 ; aucune équivalence Huntsman établie.'),

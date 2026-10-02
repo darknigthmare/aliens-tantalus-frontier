@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-adaptations-v117-shell-1';
+const CACHE = 'atf-v86-adaptations-v118-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,9 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/weapon-native-visuals-v118.js', '/src/enemy-import-animation-data-v118.js',
+  '/src/vehicle-native-visuals-v118.js',
+  '/src/enemy-source-adaptations-v118.js',
   '/src/weapon-native-visuals-v117.js', '/src/vehicle-native-visuals-v117.js',
   '/src/weapon-native-visuals-v116.js',
   '/src/enemy-automaton-adaptations-v116.js',

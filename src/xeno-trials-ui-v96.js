@@ -264,7 +264,9 @@ export class XenoTrialsUiV96 {
     this.unsavedResult = null; this.el('retry-save').hidden = true;
     const outcome = { player: 'VICTOIRE', opponent: 'DÉFAITE', draw: 'ÉGALITÉ' }[result.winner];
     this.el('result').textContent = `${outcome} · Résultat sauvegardé · +${transaction.receipt.credits} crédits de simulation · +${transaction.receipt.xp} XP`;
-    this.render(); return true;
+    this.render();
+    this.message('Évaluation terminée. Résultat sauvegardé. Préparez un autre duel pour poursuivre les évaluations.');
+    return true;
   }
   render() {
     const state = this.state(), running = this.isRunning();
@@ -302,6 +304,8 @@ export class XenoTrialsUiV96 {
       const row = document.createElement('p'); row.textContent = `${e.matchId} · ${e.playerId} / ${e.opponentId} · ${e.winner === 'abandoned' ? 'annulé' : { player: 'victoire', opponent: 'défaite', draw: 'égalité' }[e.winner]} · +${e.credits} crédits`;
       this.el('history').append(row);
     }
-    if (!running && state.pending) this.message('Duel sauvegardé en attente. Recommencez depuis la première manche ou annulez sans gain.');
+    // A terminal result awaiting its commit is not a resumable saved duel.
+    if (!running && this.unsavedResult) this.message('Évaluation terminée. Résultat en attente de sauvegarde. Réessayez la sauvegarde du résultat.');
+    else if (!running && state.pending) this.message('Duel sauvegardé en attente. Recommencez depuis la première manche ou annulez sans gain.');
   }
 }
