@@ -1,4 +1,5 @@
 import { VEHICLES } from './content-core-v50.js';
+import { getVehicleReferenceV120 } from './vehicle-reference-registry-v120.js';
 
 /** Hangar context is presentation only. It never changes the historic vehicle
  * IDs, access conditions, seats, actions or in-mission animation resolver. */
@@ -45,6 +46,7 @@ export function getVehicleShowroomV119(record) {
   const contextId = base.id === 'vehicle-032-atmospheric-processor-elevator' ? 'lift' : vehicle.family;
   const context = VEHICLE_SHOWROOM_CONTEXTS_V119[contextId] || VEHICLE_SHOWROOM_CONTEXTS_V119.unknown;
   const visual = record.visual;
+  const reference = getVehicleReferenceV120(vehicle);
   const familyReuse = visual?.identity?.status === 'authored-family' || visual?.catalogVariantMismatch === true;
   const animationAvailable = visual?.visualMode !== 'static-pose' && (visual?.idleClip?.clip?.frames?.length || 0) > 1;
   return Object.freeze({ vehicleId: vehicle.id, chassisId: base.id, chassisName: base.name, context,
@@ -52,7 +54,9 @@ export function getVehicleShowroomV119(record) {
     visualStatus: !visual ? 'missing-dedicated-art' : familyReuse ? 'authored-family' : 'available-adaptation',
     visualLabel: !visual ? 'VISUEL DÉDIÉ À DÉFINIR' : familyReuse ? 'PLAQUE DE FAMILLE · ÉQUIPEMENTS DE VARIANTE NON DÉDIÉS'
       : visual.visualMode === 'static-pose' ? 'VUE D’INSPECTION FIXE · ADAPTATION SUR RÉFÉRENCE' : 'PLAQUETTE DE CHÂSSIS · ANIMATION EXISTANTE',
-    sourceWork: record.canonFacts.source?.work || 'unknown', referenceStatus: visual?.identity?.referenceStatus || vehicle.referenceStatus || 'unknown',
+    sourceWork: record.canonFacts?.source?.work && record.canonFacts.source.work !== 'unknown' ? record.canonFacts.source.work : reference?.sourceWork || 'unknown',
+    referenceStatus: visual?.identity?.referenceStatus || vehicle.referenceStatus || 'unknown',
+    reference, controlMode: reference?.controlMode || 'unknown',
     canonExact: visual?.identity?.canonExact === true,
     geometry: vehicleShowroomGeometryV119(visual),
     seats: Object.freeze(vehicle.seats.map(seat => Object.freeze({ ...seat, actions: Object.freeze([...seat.actions]) }))),

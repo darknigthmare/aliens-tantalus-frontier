@@ -36,7 +36,9 @@ import { resolveNativeVehicleCatalogVisualV112 } from './vehicle-native-visuals-
 import { resolveNativeVehicleCatalogVisualV113 } from './vehicle-native-visuals-v113.js';
 import { resolveNativeVehicleCatalogVisualV117 } from './vehicle-native-visuals-v117.js';
 import { resolveNativeVehicleCatalogVisualV118 } from './vehicle-native-visuals-v118.js';
+import { resolveNativeVehicleCatalogVisualV120 } from './vehicle-native-visuals-v120.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
+import { resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v120.js';
 
 export const CATALOG_UNKNOWN_V62 = 'unknown';
 
@@ -187,8 +189,8 @@ function weaponVisual(entry) {
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
     previewClips: freezeArray([]), visualMode: 'static-pose', animationStatus: 'missing',
     category: knownString(profile.category), renderWidth: profile.width, renderHeight: profile.height,
-    visualLabel: ['v113', 'v116', 'v117', 'v118'].includes(profile.release) ? optionalString(profile.canonicalName) : null,
-    illustrationNote: ['v113', 'v116', 'v117', 'v118'].includes(profile.release) ? optionalString(profile.fallbackReason) : null
+    visualLabel: ['v113', 'v116', 'v117', 'v118', 'v120'].includes(profile.release) ? optionalString(profile.canonicalName) : null,
+    illustrationNote: ['v113', 'v116', 'v117', 'v118', 'v120'].includes(profile.release) ? optionalString(profile.fallbackReason) : null
   });
   const idle = clipDescriptor(resolveWeaponVisualAnimationV63(entry));
   return selectVisualFields(profile, idle, {
@@ -250,13 +252,13 @@ function enemyVisual(entry) {
 }
 
 function vehicleVisual(entry) {
-  const native = resolveNativeVehicleCatalogVisualV118(entry) || resolveNativeVehicleCatalogVisualV117(entry)
+  const native = resolveNativeVehicleCatalogVisualV120(entry) || resolveNativeVehicleCatalogVisualV118(entry) || resolveNativeVehicleCatalogVisualV117(entry)
     || resolveNativeVehicleCatalogVisualV113(entry) || resolveNativeVehicleCatalogVisualV112(entry);
   if (native) return freezeObject({ ...native,
     grid: freezeObject({ columns: 1, rows: 1, cellWidth: native.sourceWidth, cellHeight: native.sourceHeight }),
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
     previewClips: freezeArray([]),
-    illustrationNote: ['v113', 'v117', 'v118'].includes(native.release) ? optionalString(native.fallbackReason) : null
+    illustrationNote: ['v113', 'v117', 'v118', 'v120'].includes(native.release) ? optionalString(native.fallbackReason) : null
   });
   const v56Profile = resolveVehicleVisualProfileV56(entry);
   let profile = v56Profile || resolveVehicleVisualProfile(entry);
@@ -297,8 +299,11 @@ const VISUAL_RESOLVERS = Object.freeze({
 });
 
 const catalogProvenance = (entry, visual, kind) => freezeObject({
-  work: knownString((kind === 'weapons' ? resolveWeaponVisualProfileV63(entry)?.sourceWork
-    : kind === 'vehicles' ? (resolveNativeVehicleCatalogVisualV118(entry) || resolveNativeVehicleCatalogVisualV117(entry))?.sourceWork : null) || entry.work || entry.source),
+  // Faction labels (USCM, UPP, etc.) are not works of origin. Unresolved weapon
+  // identities retain an unknown work instead of inheriting a faction as proof.
+  work: knownString(kind === 'weapons'
+    ? resolveWeaponReferenceCoverageV120(entry)?.sourceWork || entry.work
+    : (kind === 'vehicles' ? (resolveNativeVehicleCatalogVisualV120(entry) || resolveNativeVehicleCatalogVisualV118(entry) || resolveNativeVehicleCatalogVisualV117(entry))?.sourceWork : null) || entry.work || entry.source),
   ...(entry.documentaryReferenceV105 ? { work: entry.source, encounterStatus: 'documentary-only',
     encounterNote: 'Original consultable ; aucune admission en campagne, Bioforge ou Xeno Trials.' } : {}),
   ...(getEnemyUserCampaignV88(entry.id) ? { work: entry.source, encounterStatus: entry.encounterStatus, encounterNote: entry.encounterNote } : {}),
@@ -315,7 +320,7 @@ const canonClaimsFor = (kind, entry, visual) => {
   const weaponProfile = kind === 'weapons' ? resolveWeaponVisualProfileV63(entry) : null;
   // A documented model name does not certify the generated illustration's
   // geometry. Keep these nominal facts even when the pixels are approximate.
-  const documentedWeaponIdentity = ['v117', 'v118'].includes(weaponProfile?.release)
+  const documentedWeaponIdentity = ['v117', 'v118', 'v120'].includes(weaponProfile?.release)
     && weaponProfile.identityVerified === true
     && ['PRODUCTION_REFERENCE_RECONSTRUCTION', 'LICENSED_REFERENCE_RECONSTRUCTION'].includes(weaponProfile.referenceStatus);
   if (kind === 'weapons' && (visual?.identity?.canonExact || documentedWeaponIdentity)) return freezeObject({
@@ -514,6 +519,7 @@ const buildRecord = (kind, entry) => {
     catalogNumber: catalogueNumber(entry),
     name: knownString(entry.name),
     taxonomy,
+    ...(kind === 'weapons' ? { weaponCoverage: resolveWeaponReferenceCoverageV120(entry) } : {}),
     ...(entry.visualRevision === 106 ? { visualReferenceV106: freezeObject({
       sourceCredit: entry.sourceCredit || null, referenceNote: entry.referenceNote || null
     }) } : {}),

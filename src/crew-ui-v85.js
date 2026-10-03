@@ -1,5 +1,7 @@
 import { APTITUDE_DEFINITIONS_V85, deriveRecruitIdentityV119, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { getPremiumPersonnelV119 } from './premium-personnel-v119.js';
+import { buildCrewConversationV120, renderCrewConversationV120 } from './crew-conversations-v120.js';
+import { CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const list = value => Array.isArray(value) ? value : [];
@@ -10,8 +12,10 @@ const profileOf = member => member.recruitV85 || (member.schema === 85 ? member 
 
 export function buildCrewUiModelV85(save, catalog = []) {
   const selected = new Set(list(save.strategy?.selectedCrewIds));
-  const members = list(save.crew).map(member => ({ ...resolveCrewDefinitionV85(member, catalog), selected: selected.has(member.id), candidate: false }));
+  const members = list(save.crew).map(member => resolveCrewDefinitionV85(member, catalog)).filter(Boolean)
+    .map(member => ({ ...member, selected: selected.has(member.id), candidate: false }));
   const candidates = list(save.recruitmentV85?.candidates).map(profile => ({ ...profile, recruitV85: profile, identityV119: deriveRecruitIdentityV119(profile), aptitudesV85: profile.aptitudes, gearV85: profile.gear, candidate: true, status: 'candidat' }));
+  for (const member of [...members, ...candidates]) member.conversationV120 = buildCrewConversationV120(member, { roster: members, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT] });
   const archives = getPremiumPersonnelV119(save);
   return { members, candidates, archives, active: members.filter(m => m.selected), reserve: members.filter(m => !m.selected),
     locked: Boolean(save.strategy?.currentOperation || (save.onboardingV84 && save.onboardingV84.phase !== 'complete')),
@@ -32,7 +36,7 @@ export class CrewUiV85 {
   }
   constructor({ root, catalog = [], itemCatalog = [], rules = {}, getOwner, onAction }) {
     Object.assign(this, { root, catalog, itemCatalog, rules, getOwner, onAction });
-    this.tab = 'active'; this.selectedId = null; this.compareId = ''; this.owner = null;
+    this.tab = 'active'; this.selectedId = null; this.compareId = ''; this.conversationTopicV120 = null; this.owner = null;
     this.document = root.ownerDocument;
     this.dialog = this.document.createElement('dialog');
     this.dialog.id = 'crew-dossier-v85'; this.dialog.className = 'crew-dossier-v85';
@@ -75,7 +79,7 @@ export class CrewUiV85 {
   }
   open(id) {
     if (!this.getMember(id)) return;
-    this.selectedId = id; this.compareId = ''; this.detailOwner = this.owner;
+    this.selectedId = id; this.compareId = ''; this.conversationTopicV120 = null; this.detailOwner = this.owner;
     this.previousFocus = this.document.activeElement;
     this.renderDetail(); if (!this.dialog.open) this.dialog.showModal();
     this.dialog.querySelector('[data-v85-close]')?.focus();
@@ -93,7 +97,7 @@ export class CrewUiV85 {
     const oldScroll = this.dialog.querySelector('.crew-dossier-body-v85')?.scrollTop || 0;
     const previousFocus = this.dialog.contains(this.document.activeElement) ? this.document.activeElement?.dataset : null;
     this.dialog.innerHTML = `<header><div><span class="eyebrow">ECHO-9 · DOSSIER INDIVIDUEL</span><h2 id="crew-dossier-title-v85">${esc(member.name)} ${member.callsign ? `« ${esc(member.callsign)} »` : ''}</h2><small>${esc(member.id)}</small></div><button type="button" class="button" data-v85-close>FERMER</button></header><div class="crew-dossier-body-v85"><p class="crew-note-v85">${profile ? 'Uniforme standard partagé. Portrait et apparence individuels non produits.' : 'Membre permanent. Les aptitudes sans dossier V85 utilisent un socle de simulation neutre, pas un passé inventé.'}</p><dl class="crew-biography-v85">${biography}</dl>${profile?.quote ? `<blockquote>${esc(profile.quote)}</blockquote>` : ''}
-      <section aria-labelledby="crew-stats-title-v85"><h3 id="crew-stats-title-v85">Aptitudes expliquées</h3><label class="crew-compare-v85">Comparer avec <select data-v85-compare><option value="">Aucune comparaison</option>${this.model.members.filter(other=>other.id!==member.id).map(other=>`<option value="${esc(other.id)}" ${other.id===this.compareId?'selected':''}>${esc(other.name)}</option>`).join('')}</select></label><p>Formation : +${amount(this.rules.trainingGain || 2)} · ${amount(this.rules.trainingHours || 4)} h de jeu · ${esc(costLabel(this.rules.trainingCost))}. Aucune spécialisation n'est interdite par le passé.</p><div class="crew-aptitudes-v85">${APTITUDE_DEFINITIONS_V85.map(a => {
+      ${renderCrewConversationV120(member.conversationV120, this.conversationTopicV120)}<section aria-labelledby="crew-stats-title-v85"><h3 id="crew-stats-title-v85">Aptitudes expliquées</h3><label class="crew-compare-v85">Comparer avec <select data-v85-compare><option value="">Aucune comparaison</option>${this.model.members.filter(other=>other.id!==member.id).map(other=>`<option value="${esc(other.id)}" ${other.id===this.compareId?'selected':''}>${esc(other.name)}</option>`).join('')}</select></label><p>Formation : +${amount(this.rules.trainingGain || 2)} · ${amount(this.rules.trainingHours || 4)} h de jeu · ${esc(costLabel(this.rules.trainingCost))}. Aucune spécialisation n'est interdite par le passé.</p><div class="crew-aptitudes-v85">${APTITUDE_DEFINITIONS_V85.map(a => {
         const value=aptitudeValue(member,a.id), delta=compare?value-aptitudeValue(compare,a.id):null, breakdown=profile?.breakdown?.[a.id];
         return `<article><div><strong>${esc(a.label)}</strong><b>${amount(value)}${delta!==null?` <small class="crew-delta-v85">(${delta>=0?'+':''}${amount(delta)})</small>`:''}</b></div><meter min="0" max="100" value="${amount(value)}" aria-label="${esc(a.label)}"></meter><p>${breakdown ? `Socle ${amount(breakdown.base)} · expériences ${amount(breakdown.experience)} · formation initiale ${amount(breakdown.formation)}. ${list(breakdown.explanations).map(esc).join(' ')}` : 'Socle neutre de simulation : 50.'}${value !== (profile?.aptitudes?.[a.id] ?? 50) ? ` Progression acquise : +${amount(value - (profile?.aptitudes?.[a.id] ?? 50))}.` : ''}</p><button type="button" class="button compact" data-v85-action="train" data-v85-id="${esc(member.id)}" data-v85-aptitude="${esc(a.id)}" ${disabled || value >= 100 ? 'disabled' : ''}>FORMER</button></article>`;
       }).join('')}</div></section>
@@ -101,7 +105,9 @@ export class CrewUiV85 {
       <section><h3>Depuis le Tantalus</h3><ul>${list(member.serviceHistoryV85).map(entry=>`<li>${esc(({success:'Mission réussie',failure:'Mission échouée',retreat:'Retour après retraite'}[entry.outcome] || entry.type))}${entry.operationId?` · ${esc(entry.operationId)}`:''}</li>`).join('') || '<li>Aucun événement de service enregistré dans ce système.</li>'}</ul><h3>Relations vécues</h3><ul>${list(member.relationsV85).map(entry=>`<li>${esc(this.getMember(entry.crewId)?.name || entry.crewId)} · ${amount(entry.sharedMissions ?? entry.missions)} mission(s) commune(s)</li>`).join('') || '<li>Aucune relation de campagne encore enregistrée.</li>'}</ul></section></div><footer><p class="crew-action-status-v85" role="status" aria-live="polite"></p>${member.candidate?`<button type="button" class="button primary" data-v85-action="recruit" data-v85-id="${esc(member.id)}" ${this.model.locked?'disabled':''}>RECRUTER · ${esc(costLabel(this.rules.recruitCost))}</button>`:''}</footer>`;
     this.dialog.querySelector('.crew-dossier-body-v85').scrollTop=oldScroll;
     if (this.dialog.open && !this.dialog.contains(this.document.activeElement)) {
-      const matching = previousFocus?.v85Action && [...this.dialog.querySelectorAll('[data-v85-action]')].find(node => !node.disabled && node.dataset.v85Action === previousFocus.v85Action && node.dataset.v85Id === previousFocus.v85Id && node.dataset.v85Aptitude === previousFocus.v85Aptitude && node.dataset.v85Item === previousFocus.v85Item);
+      const matching = previousFocus?.v120ConversationTopic
+        ? [...this.dialog.querySelectorAll('[data-v120-conversation-topic]')].find(node => node.dataset.v120ConversationTopic === previousFocus.v120ConversationTopic)
+        : previousFocus?.v85Action && [...this.dialog.querySelectorAll('[data-v85-action]')].find(node => !node.disabled && node.dataset.v85Action === previousFocus.v85Action && node.dataset.v85Id === previousFocus.v85Id && node.dataset.v85Aptitude === previousFocus.v85Aptitude && node.dataset.v85Item === previousFocus.v85Item);
       (matching || this.dialog.querySelector('[data-v85-close]'))?.focus({ preventScroll: true });
     }
   }
@@ -112,6 +118,14 @@ export class CrewUiV85 {
   }
   click(event) {
     const button=event.target.closest('button'); if (!button || button.disabled) return;
+    if (button.dataset.v120ConversationTopic) {
+      const member = this.getMember(this.selectedId);
+      if (!this.dialog.contains(button) || member?.archive || !member?.conversationV120?.topics.some(topic => topic.id === button.dataset.v120ConversationTopic)) return;
+      this.conversationTopicV120 = button.dataset.v120ConversationTopic;
+      this.renderDetail();
+      this.dialog.querySelector(`[data-v120-conversation-topic="${this.conversationTopicV120}"]`)?.focus({ preventScroll: true });
+      return;
+    }
     if (button.dataset.v85Close!==undefined) { this.close(); return; }
     if (button.dataset.v85Tab) { this.tab=button.dataset.v85Tab; this.render(this.save); this.root.querySelector(`[data-v85-tab="${this.tab}"]`)?.focus(); return; }
     if (button.dataset.v85Open) { this.open(button.dataset.v85Open); return; }

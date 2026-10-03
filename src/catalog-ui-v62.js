@@ -19,6 +19,7 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
+import { resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v120.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -833,6 +834,7 @@ export class CatalogWorkbenchV62 {
       caption.textContent = [record.visual.visualLabel, record.visual.illustrationNote].filter(Boolean).join(' — ');
       this.detail.append(caption);
     }
+    if (record.catalog === 'weapons') this.renderWeaponReferenceV120(record);
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id), section = this.renderSection('DÉCOUVERTE EN CAMPAGNE', 'discovery');
       section.dataset.discoveryStatus = discovery.status;
@@ -892,6 +894,27 @@ export class CatalogWorkbenchV62 {
 
     const actions = normalizeCatalogActionsV62(record.documentaryReferenceV105 ? [] : this.getActions(record));
     if (actions.length) this.detail.append(this.renderActions(record, actions, 'catalog-v62__detail-actions'));
+  }
+
+  renderWeaponReferenceV120(record) {
+    const coverage = record.weaponCoverage || resolveWeaponReferenceCoverageV120(record);
+    if (!coverage) return;
+    const geometry = coverage.geometry, reference = geometry.reference;
+    const section = this.renderSection('IDENTIFICATION DU MODÈLE', 'weapon-reference-v120');
+    section.dataset.weaponGeometry = geometry.baseId;
+    section.dataset.weaponReferenceStatus = reference.status;
+    section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', geometry.canonicalName));
+    section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', coverage.isFinishVariant
+      ? 'Cette finition partage le visuel du modèle de base ; ses réglages de jeu sont conservés.'
+      : geometry.primaryMedia.dedicatedNativePlate ? 'Illustration dédiée du modèle ; pose fixe d’inspection.'
+        : 'Atlas animé historique du modèle ; nouvelle illustration dédiée à compléter.'));
+    section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', reference.caveat));
+    if (reference.url && /^https:\/\//.test(reference.url)) {
+      const link = createElement(this.document, 'a', 'catalog-v62__reference-link', reference.label);
+      link.href = reference.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      section.append(link);
+    }
+    this.detail.append(section);
   }
 
   renderVehicleShowroomV119(record, controls) {

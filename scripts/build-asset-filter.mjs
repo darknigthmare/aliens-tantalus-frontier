@@ -27,6 +27,7 @@ import { WEAPON_NATIVE_PROFILES_V118 } from '../src/weapon-native-visuals-v118.j
 import { VEHICLE_NATIVE_POSES_V118 } from '../src/vehicle-native-visuals-v118.js';
 import { ENEMY_SOURCE_ADAPTATIONS_V118 } from '../src/enemy-source-adaptations-v118.js';
 import { publicReleasePathAdmissionV119, validatePlayerCostumeAdmissionsV119 } from './public-release-admissions-v119.mjs';
+import { publicReleasePathAdmissionV120 } from './public-release-admissions-v120.mjs';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -150,6 +151,10 @@ export function createBuildAssetFilter(projectRoot, {
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
     if (sourcePath === '') return true;
+    const v120Admission = publicReleasePathAdmissionV120(sourcePath, {
+      directory: ['assets/openai/equipment/v120-weapons', 'assets/openai/equipment/v120-vehicles'].includes(sourcePath)
+    });
+    if (v120Admission !== null) return v120Admission;
     const v119Admission = publicReleasePathAdmissionV119(sourcePath, {
       directory: ['src/vendor', 'assets/openai/sprites/player/costumes-v119', 'assets/openai/sprites/player/costumes-v119/nostromo-crew'].includes(sourcePath)
     });

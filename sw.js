@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-systems-v119-shell-1';
+const CACHE = 'atf-v86-equipment-conversations-v120-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -34,6 +34,8 @@ const CORE = [
   '/src/premium-personnel-v119.js',
   '/src/enemy-behavior-registry-v119.js', '/src/xeno-trials-ai-v119.js',
   '/src/hub-room-presentation-v119.js', '/src/vehicle-showroom-v119.js',
+  '/src/weapon-native-visuals-v120.js', '/src/weapon-reference-coverage-v120.js', '/src/vehicle-reference-registry-v120.js',
+  '/src/vehicle-native-visuals-v120.js', '/src/crew-conversations-v120.js',
   '/src/xeno-trials-modes-v119.js', '/src/xeno-trials-physical-scale-v119.js', '/src/xeno-trials-arena-layers-v119.js', '/xeno-trials-fullscreen-v119.css',
   '/src/cloud-auth-v119.js', '/src/cloud-save-v119.js', '/src/cloud-sync-v119.js', '/src/cloud-ui-v119.js',
   '/src/vendor/supabase-2.117.2.js',

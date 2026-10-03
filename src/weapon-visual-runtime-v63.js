@@ -16,6 +16,8 @@ import { WEAPON_NATIVE_ASSETS_V117, WEAPON_NATIVE_PROFILES_V117,
   resolveNativeWeaponProfileV117 } from './weapon-native-visuals-v117.js';
 import { WEAPON_NATIVE_ASSETS_V118, WEAPON_NATIVE_PROFILES_V118,
   resolveNativeWeaponProfileV118 } from './weapon-native-visuals-v118.js';
+import { WEAPON_NATIVE_ASSETS_V120, WEAPON_NATIVE_PROFILES_V120,
+  resolveNativeWeaponProfileV120 } from './weapon-native-visuals-v120.js';
 
 export const ASSO_400_HARPOON_PROFILE_V63 = Object.freeze({
   baseNumber: 24,
@@ -46,7 +48,8 @@ export const WEAPON_VISUAL_PROFILES_ALL_V63 = Object.freeze([
   ...WEAPON_VISUAL_PROFILES_ALL_V61,
   ...WEAPON_VISUAL_PROFILES_NEW_V63,
   ...WEAPON_NATIVE_PROFILES_V112, ...WEAPON_NATIVE_PROFILES_V113,
-  ...WEAPON_NATIVE_PROFILES_V116, ...WEAPON_NATIVE_PROFILES_V117, ...WEAPON_NATIVE_PROFILES_V118
+  ...WEAPON_NATIVE_PROFILES_V116, ...WEAPON_NATIVE_PROFILES_V117, ...WEAPON_NATIVE_PROFILES_V118,
+  ...WEAPON_NATIVE_PROFILES_V120
 ]);
 
 export const WEAPON_VISUAL_ASSETS_NEW_V63 = Object.freeze({
@@ -57,7 +60,8 @@ export const WEAPON_VISUAL_ASSETS_ALL_V63 = Object.freeze({
   ...WEAPON_VISUAL_ASSETS_ALL_V61,
   ...WEAPON_VISUAL_ASSETS_NEW_V63,
   ...WEAPON_NATIVE_ASSETS_V112, ...WEAPON_NATIVE_ASSETS_V113,
-  ...WEAPON_NATIVE_ASSETS_V116, ...WEAPON_NATIVE_ASSETS_V117, ...WEAPON_NATIVE_ASSETS_V118
+  ...WEAPON_NATIVE_ASSETS_V116, ...WEAPON_NATIVE_ASSETS_V117, ...WEAPON_NATIVE_ASSETS_V118,
+  ...WEAPON_NATIVE_ASSETS_V120
 });
 
 export const WEAPON_VISUAL_NEW_COUNT_V63 = WEAPON_VISUAL_PROFILES_NEW_V63.length;
@@ -70,7 +74,7 @@ const catalogNumber = (source = {}) => {
 
 export function resolveWeaponVisualProfileV63(source = {}) {
   // Distinct additions must resolve before modulo-40 historical families.
-  const native = resolveNativeWeaponProfileV118(source) || resolveNativeWeaponProfileV117(source) || resolveNativeWeaponProfileV116(source)
+  const native = resolveNativeWeaponProfileV120(source) || resolveNativeWeaponProfileV118(source) || resolveNativeWeaponProfileV117(source) || resolveNativeWeaponProfileV116(source)
     || resolveNativeWeaponProfileV113(source) || resolveNativeWeaponProfileV112(source);
   if (native) return native;
   const number = catalogNumber(source);
@@ -80,7 +84,16 @@ export function resolveWeaponVisualProfileV63(source = {}) {
   const exact = sheetId === ASSO_400_HARPOON_PROFILE_V63.sheetId
     || baseNumber === ASSO_400_HARPOON_PROFILE_V63.baseNumber
     || (!number && ['Harpoon Gun', 'ASSO-400 Harpoon Grappling Gun'].includes(baseName));
-  if (!exact) return resolveWeaponVisualProfileV61(source);
+  if (!exact) {
+    const historical = resolveWeaponVisualProfileV61(source);
+    if (!historical) return null;
+    // Older exact flags describe a registry match, not a measured comparison
+    // of generated pixels with the production prop. Preserve the legacy art,
+    // action clips and identity; do not present it as certified 1:1 geometry.
+    return Object.freeze({ ...historical, canonExact: false, approximate: true,
+      geometryStatus: 'legacy-not-revalidated',
+      fallbackReason: historical.fallbackReason || 'Atlas historique conservé ; géométrie et détails non certifiés 1:1.' });
+  }
   return Object.freeze({
     ...ASSO_400_HARPOON_PROFILE_V63,
     catalogNumber: number || ASSO_400_HARPOON_PROFILE_V63.baseNumber,

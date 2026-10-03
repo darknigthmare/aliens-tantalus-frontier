@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { validateContent, RELEASE } from '../src/content.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
 import { publicReleasePathAdmissionV119, verifyPublicAdmissionsV119 } from './public-release-admissions-v119.mjs';
+import { publicReleasePathAdmissionV120, verifyPublicAdmissionsV120 } from './public-release-admissions-v120.mjs';
 
 const ROOT_FILES = new Set([
   'command-v110.css', 'echo9-v110.css',
@@ -16,7 +17,7 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set(['audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
-  'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs']);
+  'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
@@ -149,6 +150,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const v120Admission = publicReleasePathAdmissionV120(path, { directory });
+  if (v120Admission !== null) return v120Admission;
   const v119Admission = publicReleasePathAdmissionV119(path, { directory });
   if (v119Admission !== null) return v119Admission;
   if (directory) {
@@ -196,6 +199,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');
   assert.equal(userReferenceJpgs, USER_REFERENCE_JPG_PATHS_V100.size, 'An approved original JPG is missing.');
   await verifyPublicAdmissionsV119(root, { strict: true });
+  await verifyPublicAdmissionsV120(root, { strict: true });
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 
