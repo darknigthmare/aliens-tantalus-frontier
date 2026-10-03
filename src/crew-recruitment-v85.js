@@ -289,6 +289,69 @@ export function resolveCrewDefinitionV85(member, catalog = []) {
     background: clone(recruit.background), aptitudes: clone(recruit.aptitudes), breakdown: clone(recruit.breakdown),
     recruitV85: recruit, visualProfileId: recruit.visualProfileId, artStatus: recruit.artStatus,
     canonStatus: recruit.canonStatus,
-    gearV85: Array.isArray(member.gearV85) ? clone(member.gearV85).slice(0, 32) : clone(recruit.gear)
+    gearV85: Array.isArray(member.gearV85) ? clone(member.gearV85).slice(0, 32) : clone(recruit.gear),
+    identityV119: deriveRecruitIdentityV119(recruit)
+  };
+}
+
+// V119 identities are derived views, not new required fields of the immutable V85
+// contract. Old imported dossiers and the four source examples stay byte-stable.
+const CAREERS_V119 = freeze({
+  'orbital-maintenance': [['Mécanicien de sas','Accès et réparation'],['Technicien de coque','Réparation de terrain'],['Maintenancier EVA','Sécurisation technique'],['Électricien orbital','Remise en service']],
+  'medical-evacuation': [['Secouriste de navette','Stabilisation'],['Auxiliaire de triage','Évacuation médicale'],['Convoyeur sanitaire','Protection des blessés'],['Assistant de poste médical','Soutien de proximité']],
+  'shipboard-security': [['Garde de coursive','Protection rapprochée'],['Escorte de passerelle','Défense de position'],['Contrôleur de sas','Filtrage des accès'],['Sentinelle embarquée','Couverture arrière']],
+  'convoy-scout': [['Éclaireur de convoi','Reconnaissance'],['Guide de piste','Repérage d’itinéraires'],['Observateur de route','Détection'],['Opérateur de balise','Sécurisation d’extraction']],
+  'precision-instruments': [['Calibrateur de capteurs','Observation technique'],['Technicien de métrologie','Identification'],['Maintenancier de laboratoire','Appui technique'],['Contrôleur d’instruments','Surveillance']],
+  'industrial-rescue': [['Sauveteur industriel','Stabilisation'],['Brancardier de chantier','Extraction'],['Secouriste de mine','Évacuation médicale'],['Assistant de secours lourd','Protection des blessés']],
+  'cargo-escort': [['Escorte de fret','Défense de position'],['Convoyeur de pièces','Protection rapprochée'],['Garde de soute','Couverture arrière'],['Contrôleur de cargaison','Sécurisation de zone']],
+  'field-survey': [['Topographe de frontière','Repérage d’itinéraires'],['Observateur de colonie','Détection'],['Cartographe de terrain','Reconnaissance'],['Opérateur de relevés','Sécurisation d’extraction']]
+});
+export const RECRUIT_CAREER_ARCHETYPES_V119 = CAREERS_V119;
+const TRAITS_V119 = freeze([
+  ['Méthodique','Vérifie un point de contrôle avant de confirmer le suivant.'],
+  ['Pragmatique','Formule un problème avec sa solution immédiatement disponible.'],
+  ['Protecteur','Demande une confirmation des autres membres avant de quitter une zone.'],
+  ['Observateur','Décrit d’abord les détails qui ne correspondent pas au plan.'],
+  ['Économe','Compte les consommables avant une nouvelle sortie.'],
+  ['Direct','Préfère des messages courts et des coordonnées précises.'],
+  ['Patient','Reformule une consigne si le canal radio est brouillé.'],
+  ['Solidaire','Ne considère pas une extraction terminée avant le dernier appel.']
+]);
+const EPISODES_V119 = freeze([
+  ['Le quart interrompu','Une alarme pendant un changement de quart lui a appris à ne jamais confondre relève annoncée et relève arrivée.'],
+  ['Le second itinéraire','Après la fermeture d’un passage connu, son équipe est rentrée par un trajet de secours préparé la veille.'],
+  ['Le manifeste incomplet','Un nom absent du manifeste l’a poussé à vérifier les personnes présentes avant de compter les caisses.'],
+  ['La liaison perdue','Une liaison radio intermittente a transformé une sortie ordinaire en retour guidé par des repères simples.'],
+  ['La pièce de rechange','Une pièce réservée à une urgence précédente a permis de finir un travail sans compromettre la relève.'],
+  ['La dernière navette','Un retard de quelques minutes a rendu indispensables des comptes rendus réguliers et une zone d’attente sûre.'],
+  ['Le rapport annoté','Un rapport trop général a été réécrit avec les anomalies observées, pour que la prochaine équipe puisse agir.'],
+  ['L’exercice utile','Une procédure jugée répétitive pendant la formation est devenue le seul point commun entre deux équipes isolées.']
+]);
+const REACTIONS_V119 = freeze({
+  acknowledge: ['Reçu. Je confirme après vérification.','Compris. Une étape à la fois.','Reçu. On garde le contact.','Coordonnées reçues. Je surveille les écarts.'],
+  contact: ['Contact signalé. Je vérifie le passage.','Contact. Gardez un itinéraire de retour.','Contact proche. Regroupement conseillé.','Contact repéré. Position transmise.'],
+  support: ['Outil prêt. Intervention au point indiqué.','Je peux intervenir avec ma dotation actuelle.','Soutien disponible. Gardez la zone accessible.','Je vérifie le besoin avant de consommer le matériel.'],
+  extraction: ['Sortie repérée. Dernière vérification du groupe.','Retour par l’itinéraire confirmé.','Extraction. Attendez les derniers appels.','Balise en vue. On confirme le compte.']
+});
+
+export function deriveRecruitIdentityV119(raw) {
+  const recruit = sanitizeRecruitProfileV85(raw);
+  if (!recruit) return null;
+  const salt = hash(`${recruit.id}:identity-v119`);
+  const careers = CAREERS_V119[recruit.background.activityId];
+  const [profession, tacticalRole] = careers[salt % careers.length];
+  const [trait, reaction] = TRAITS_V119[(salt >>> 3) % TRAITS_V119.length];
+  const [title, episode] = EPISODES_V119[(salt >>> 7) % EPISODES_V119.length];
+  const voiceIndex = (salt >>> 12) % 4;
+  return {
+    schema: 119, crewId: recruit.id, profession, tacticalRole,
+    traits: [{ id: `trait-${(salt >>> 3) % TRAITS_V119.length}`, label: trait, description: reaction, mechanicalBonus: false }],
+    shortStory: { title, text: `${recruit.background.activity} : ${episode}`, provenance: 'project-authored-fiction' },
+    habit: recruit.background.habit, personalObject: recruit.background.personalObject,
+    visualProfile: { id: recruit.visualProfileId, status: ART_STATUS, individualPortrait: null,
+      silhouette: 'Uniforme Echo-9 commun ; dotation fonctionnelle individuelle conservée.' },
+    radio: Object.fromEntries(Object.entries(REACTIONS_V119).map(([key, phrases]) => [key, `${recruit.callsign} : ${phrases[voiceIndex]}`])),
+    voiceStatus: 'authored-text-not-recorded-audio', unrestrictedTraining: true,
+    capabilityPolicy: 'actual-current-gear-and-aptitudes-only', canonStatus: CANON_STATUS
   };
 }

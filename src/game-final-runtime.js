@@ -1,4 +1,5 @@
 import { GameEngine as CompleteGameEngine } from './game-complete.js';
+import { getCostumeV119, canEquipCostumeV119 } from './franchise-costumes-v119.js';
 import { canSentryTargetV72, updateEnemySupportStatusesV72 } from './gameplay-support-v72.js';
 
 export * from './game-complete.js';
@@ -244,6 +245,14 @@ function inferFaction(palette, name) {
 
 export function buildCostumeRuntime(costume = null) {
   if (!costume) return Object.freeze({ active: false, id: null, armor: 0, mobility: 1, stealth: 0, faction: 'echo-9', provenance: 'none', visual: Object.freeze({ primary: '#92d6a6', accent: '#d7ead6' }), resistances: Object.freeze([]) });
+  const franchise = getCostumeV119(costume.id);
+  if (franchise || String(costume.id || '').startsWith('franchise-')) return Object.freeze({
+    active: Boolean(franchise && canEquipCostumeV119(franchise.id)), id: franchise?.id || null,
+    name: franchise?.name || '', body: 'human-a', armor: 0, mobility: 1, stealth: 0,
+    faction: 'echo-9', cosmeticOnly: true, visualStatus: franchise?.visualStatus || 'missing',
+    provenance: franchise?.provenance || 'unregistered-costume',
+    resistances: Object.freeze([]), visual: Object.freeze({ primary: '#92d6a6', accent: '#d7ead6' })
+  });
   const part = String(costume.part || 'field uniform');
   const palette = String(costume.palette || 'Tantalus green');
   const wear = String(costume.wear || 'field');
@@ -346,6 +355,7 @@ export class GameEngine extends CompleteGameEngine {
 
   applyCostumeRuntime() {
     if (!this.costumeRuntime.active || !this.player) return;
+    if (this.costumeRuntime.cosmeticOnly) { this.player.costumeId = this.costumeRuntime.id; return; }
     this.player.maxArmor = Math.max(this.player.maxArmor, 50 + this.costumeRuntime.armor);
     this.player.armor = clamp(this.player.armor + this.costumeRuntime.armor, 0, this.player.maxArmor);
     this.player.costumeId = this.costumeRuntime.id;
@@ -473,7 +483,10 @@ export class GameEngine extends CompleteGameEngine {
     const actors = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive);
     const distance = actors.length ? Math.min(...actors.map((actor) => entityDistance(actor.inVehicle && this.vehicle?.active ? this.vehicle : actor, enemy))) : Infinity;
     const wasAlert = enemy.alert;
-    const radius = this.stealthRuntime.detectionRadius * (enemy.isBoss ? 1.18 : enemy.behavior === 'stalker' ? 1.08 : 1);
+    const perception = enemy.behaviorProfileV119?.perception;
+    const biologicalLimit = perception ? Math.max(perception.proximity, perception.vision,
+      this.stealthRuntime.noise > 35 ? perception.noise : 0) : 920;
+    const radius = Math.min(biologicalLimit, this.stealthRuntime.detectionRadius * (enemy.isBoss ? 1.18 : enemy.behavior === 'stalker' ? 1.08 : 1));
     if (!wasAlert && distance <= radius) enemy.revealed = Math.max(enemy.revealed || 0, 0.12);
     if (enemy.jammedClock > 0) {
       enemy.alert = false;
@@ -777,7 +790,7 @@ export class GameEngine extends CompleteGameEngine {
 
   drawActor(ctx, actor) {
     super.drawActor(ctx, actor);
-    if (actor !== this.player || !this.costumeRuntime?.active || actor.inVehicle) return;
+    if (actor !== this.player || !this.costumeRuntime?.active || this.costumeRuntime.cosmeticOnly || actor.inVehicle) return;
     ctx.save();
     ctx.fillStyle = this.costumeRuntime.visual.primary;
     ctx.fillRect(actor.x + actor.w * 0.18, actor.y + actor.h * 0.42, actor.w * 0.64, 8);

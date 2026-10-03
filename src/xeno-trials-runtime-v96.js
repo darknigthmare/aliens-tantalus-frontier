@@ -3,10 +3,11 @@ import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, setXenoTrialsPausedV9
   getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
 import { createXenoPresentationV97, getXenoPresentationViewV97, advanceXenoPresentationV97 } from './xeno-trials-presentation-v97.js';
 import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
-import { getEnemyImportAnimationV107, requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
-  createEnemyImportMotionTrackerV107, isEnemyImportAnimationImageReadyV107 } from './enemy-import-animation-v107.js';
-import { getEnemyImportAttackV109, requestEnemyImportAttackV109, drawEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
-import { getXenoTrialsDisplayScaleV110, getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
+import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
+  createEnemyImportMotionTrackerV107 } from './enemy-import-animation-v107.js';
+import { requestEnemyImportAttackV109, drawEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
+import { getXenoTrialsDisplayScaleV110, getXenoTrialsRenderMetricsV110, createXenoTrialsCameraV119 } from './xeno-trials-scale-v110.js';
+import { drawXenoTrialsArenaLayersV119, drawXenoTrialsArenaOverlayV119 } from './xeno-trials-arena-layers-v119.js';
 import { getSynthTrialAttackV110, drawSynthConeV110 } from './synth-combat-v110.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
@@ -14,8 +15,7 @@ const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left'
 const ACTIONS = new Set(Object.values(KEY_ACTION));
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
-/** Legacy V105 physics/debug transform, preserved for historical consumers.
- * Live presentation uses V110's shared two-fighter camera below. */
+/** Historical API now returns physical world-space metrics, never camera zoom. */
 export function getXenoTrialsRenderMetricsV96(id, variant = null) {
   return getXenoTrialsRenderMetricsV105(id, variant);
 }
@@ -36,9 +36,12 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   if (!requestFrame || !cancelFrame) throw new Error('Xeno Trials requires animation-frame scheduling');
   const match = createXenoTrialsMatchV96({ ...options.config, introSeconds: 0, holdRoundTransition: true });
   const displayScale = getXenoTrialsDisplayScaleV110(match.fighters);
+  const camera = createXenoTrialsCameraV119(match.fighters);
+  let cameraView = camera.getState(), frameDelta = 0;
   let presentation = createXenoPresentationV97();
   const presentationView = () => getXenoPresentationViewV97(presentation);
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
+    cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
     stageVisual: !stage.backdrop ? 'procedural' : images.has(stage.backdrop) ? 'backdrop-ready' : loaded ? 'procedural-fallback' : 'loading' });
   const images = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
   const observedMovement = createEnemyImportMotionTrackerV107();
@@ -100,39 +103,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     context.strokeStyle = '#53606a'; context.strokeRect(x, y, width, 15);
   }
   function drawArena() {
-    context.fillStyle = stage.background; context.fillRect(0, 0, 1000, 560);
-    context.fillStyle = '#0a1019'; context.fillRect(0, 135, 1000, 280);
-    context.strokeStyle = stage.accent; context.globalAlpha = .28; context.lineWidth = 2;
-    for (let x = 45; x < 1000; x += 130) {
-      context.strokeRect(x, 136, 94, 276); context.beginPath(); context.moveTo(x, 272); context.lineTo(x + 94, 272); context.stroke();
-    }
-    context.globalAlpha = 1;
-    const backdrop = images.get(stage.backdrop);
-    if (backdrop?.naturalWidth > 0 && backdrop?.naturalHeight > 0) {
-      // Fit without stretching. The shared floor and collision plane stay unchanged.
-      const scale = Math.max(1000 / backdrop.naturalWidth, 450 / backdrop.naturalHeight);
-      const width = backdrop.naturalWidth * scale, height = backdrop.naturalHeight * scale;
-      context.drawImage(backdrop, (1000 - width) / 2, (450 - height) / 2, width, height);
-      context.fillStyle = '#06101940'; context.fillRect(0, 0, 1000, 450);
-    }
-    context.fillStyle = stage.floor; context.fillRect(0, 450, 1000, 110);
-    context.fillStyle = stage.accent; context.fillRect(0, 449, 1000, 3);
-    context.strokeStyle = '#5e6972'; context.globalAlpha = .2;
-    for (let x = -200; x < 1200; x += 90) { context.beginPath(); context.moveTo(x, 450); context.lineTo(x - 70, 560); context.stroke(); }
-    context.globalAlpha = 1;
-    text('WEYLAND-YUTANI  /  XENO TRIALS', 30, 128, 12, stage.accent);
-    const hasWalk = match.fighters.some(f => {
-      const animation = getEnemyImportAnimationV107(getXenoTrialsArtV96(f.id, f.variant));
-      return animation && isEnemyImportAnimationImageReadyV107(images.get(animation.path), animation);
-    });
-    const hasAttack = match.fighters.some(f => {
-      const animation = getEnemyImportAttackV109(getXenoTrialsArtV96(f.id, f.variant));
-      return animation && isEnemyImportAnimationImageReadyV107(images.get(animation.path), animation);
-    });
-    text(hasAttack ? 'JOE : MARCHE / FRAPPE LÉGÈRE ADAPTÉES • AUTRES ACTIONS FIXES'
-      : hasWalk ? 'MARCHE ADAPTÉE • AUTRES ACTIONS FIXES' : 'SIMULATION • ADAPTATION DU PROJET • POSES FIXES', 970, 535, 11, '#b6bcc5', 'right');
-    text(stage.label.toUpperCase(), 500, 482, 13, '#aebec7', 'center');
-    if (stage.backdrop && loaded && !backdrop) text('DÉCOR INDISPONIBLE · FOND PROCÉDURAL', 30, 513, 11, '#ddbf69');
+    drawXenoTrialsArenaLayersV119(context, stage, images, cameraView, match.tick);
   }
   function drawFighter(fighter) {
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
@@ -155,11 +126,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const attackDrawn = canShowAttack && drawEnemyImportAttackV109(context, art, images, {
       attack: fighter.attack, spec: XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind], reducedMotion,
       height, x: fighter.x, y: ground, facing: fighter.attack?.facing,
-      maxHorizontalExtent: XENO_TRIALS_ARENA_V96.left - 2
+      maxHorizontalExtent: null
     });
     const animated = attackDrawn || drawEnemyImportAnimationV107(context, art, images, {
       action: moving ? 'move' : 'idle', timeSeconds, height, x: fighter.x, y: ground, facing: fighter.facing,
-      maxHorizontalExtent: XENO_TRIALS_ARENA_V96.left - 2,
+      maxHorizontalExtent: null,
       reducedMotion
     });
     if (!animated) {
@@ -188,7 +159,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   }
   function render() {
     if (stopped) return;
+    cameraView = camera.update(match.fighters, frameDelta); frameDelta = 0;
+    canvas.setAttribute?.('data-xeno-camera-zoom-v119', String(cameraView.zoom));
     drawArena();
+    context.save(); context.translate(cameraView.translateX, cameraView.translateY); context.scale(cameraView.zoom, cameraView.zoom);
     for (const fighter of [...match.fighters].sort((a, b) => a.y - b.y)) drawFighter(fighter);
     // Feedback uses physical hitbox coordinates, not the independently scaled portrait.
     for (const fighter of match.fighters) {
@@ -211,7 +185,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.fillStyle = projectile.style === 'acid' ? '#c1f078' : '#a7dafa';
       context.beginPath(); context.ellipse(projectile.x, 450 - projectile.y, 13, 7, 0, 0, Math.PI * 2); context.fill();
     }
-    match.fighters.forEach((fighter, i) => {
+    context.restore();
+    drawXenoTrialsArenaOverlayV119(context, stage, cameraView, match.tick);
+    if (options.htmlHud !== true) match.fighters.forEach((fighter, i) => {
       const def = getXenoTrialsFighterV96(fighter.id), x = i === 0 ? 30 : 585;
       text(`${i === 0 ? 'VOUS' : 'ADVERSAIRE'} / ${def.label}`, i === 0 ? 30 : 970, 31, 17, '#e4e9eb', i === 0 ? 'left' : 'right', 385);
       bar(x, 44, 385, fighter.hp / def.hp, i === 0 ? '#6bd4c5' : '#ed858e', i === 1);
@@ -220,8 +196,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const wins = match.wins[fighter.side];
       for (let n = 0; n < match.config.roundsToWin; n++) { context.fillStyle = n < wins ? '#fae5a3' : '#424c58'; context.fillRect(i === 0 ? 426 + n * 15 : 559 - n * 15, 44, 10, 10); }
     });
-    text(`${Math.ceil(match.timeRemaining)}`, 500, 61, 32, '#eee3bd', 'center');
-    text(`MANCHE ${match.round}`, 500, 96, 12, '#b4c4d2', 'center');
+    if (options.htmlHud !== true) {
+      text(`${Math.ceil(match.timeRemaining)}`, 500, 61, 32, '#eee3bd', 'center');
+      text(`MANCHE ${match.round}`, 500, 96, 12, '#b4c4d2', 'center');
+    }
     const intro = presentationView();
     if (loaded && !match.paused && intro.fighterSlot !== null) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
@@ -230,7 +208,6 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR', human: 'HUMAIN' }[def.family];
       const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
       text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
-      context.strokeStyle = stage.accent; context.lineWidth = 3; context.strokeRect(fighter.x - 145, 245, 290, 210);
     } else if (loaded && !match.paused && ['countdown', 'fight'].includes(intro.phase)) {
       text(intro.countdown ? String(intro.countdown) : 'COMBAT', 500, 235, 54, '#efe8cb', 'center');
     }
@@ -251,11 +228,17 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     clearInputs(); setXenoTrialsPausedV96(match, false); previousTime = null; canvas.focus?.({ preventScroll: true }); notify(true); return true;
   }
   function keydown(event) {
+    if (event.defaultPrevented) return;
     const tag = String(event.target?.tagName || '').toLowerCase();
-    if (['input', 'select', 'textarea'].includes(tag) || event.target?.isContentEditable) return;
+    if (['input', 'select', 'textarea'].includes(tag) || event.target?.isContentEditable
+      || event.target?.closest?.('input, select, textarea, [contenteditable]:not([contenteditable="false"])')) return;
     if (['KeyP', 'Escape'].includes(event.code)) {
       event.preventDefault?.(); if (!event.repeat) match.paused ? resume() : pause(); return;
     }
+    // Native menu buttons keep Space/Enter activation. Combat control buttons
+    // have their own root handler; bubbling must never add a second jump/input.
+    if (['button', 'a', 'summary'].includes(tag)
+      || event.target?.closest?.('button, a[href], summary, [role="button"], [role="link"]')) return;
     if (KEY_ACTION[event.code]) {
       event.preventDefault?.();
       if (match.paused || presentationView().blocksSimulation) blockedKeys.add(event.code);
@@ -294,6 +277,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   function frame(timestamp) {
     if (stopped || !running) return;
     const dt = previousTime === null ? 0 : clamp((timestamp - previousTime) / 1000, 0, .25);
+    frameDelta = dt;
     previousTime = timestamp;
     const wasBlocking = presentationView().blocksSimulation, beforeRound = match.round;
     presentation = advanceXenoPresentationV97(presentation, dt * 1000, match.paused || doc?.hidden || !loaded);

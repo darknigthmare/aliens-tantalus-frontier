@@ -1,4 +1,5 @@
 import { WEAPONS_ADDITIONS_V116 } from './weapon-native-visuals-v116.js';
+import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 
 export const RELEASE = Object.freeze({
   name: 'ALIENS: TANTALUS FRONTIER',
@@ -266,7 +267,7 @@ const GENERATED_ENEMIES_V50 = Array.from({ length: 568 }, (_, index) => {
   const world = WORLDS[(index * 9 + cycle) % WORLDS.length];
   return {
     id: `enemy-${String(index + 1).padStart(3, '0')}-${slug(name)}`,
-    name, biology: seed[1], caste: seed[2], modifier,
+    name, biologicalBase: seed[0], biology: seed[1], caste: seed[2], modifier,
     health: base + (hash(name) % 190), damage: 4 + (hash(`${name}:damage`) % 48),
     speed: 0.65 + ((index * 17) % 170) / 100,
     armor: clamp((index * 23 + cycle * 7) % 101, 0, 100),
@@ -274,7 +275,7 @@ const GENERATED_ENEMIES_V50 = Array.from({ length: 568 }, (_, index) => {
     frequency: pick(['common', 'uncommon', 'rare', 'apex', 'scripted'], index),
     encounterWorldIds: [world.id, WORLDS[(index + 17) % WORLDS.length].id],
     habitats: [world.biomes[0], pick(['vents', 'hive', 'surface', 'reactor', 'water', 'ruins'], index)],
-    behavior: pick(['stalk', 'rush', 'flank', 'ambush', 'guard', 'control', 'siege', 'swarm'], index),
+    behavior: resolveEnemyBehaviorV119({ biologicalBase: seed[0], biology: seed[1], caste: seed[2], modifier }).runtimeBehavior,
     provenance: seed[2].startsWith('concept-') ? 'licensed-concept-adaptation' : index < enemySeeds.length ? 'licensed-reference' : 'systemic-variant',
     // Base051 is the project-authored Ceto fauna, not a cyclic terrestrial spawn.
     // Variants retain their separate unfinished contracts; no family-wide promotion.
@@ -358,7 +359,11 @@ export const ENEMY_HYBRIDS_V64 = Object.freeze([
   })
 ]);
 
-export const ENEMIES = Object.freeze([...GENERATED_ENEMIES_V50, ...ENEMY_HYBRIDS_V64]);
+export const ENEMIES = Object.freeze([...GENERATED_ENEMIES_V50, ...ENEMY_HYBRIDS_V64].map(entry => {
+  const behaviorProfileV119 = resolveEnemyBehaviorV119(entry);
+  return Object.freeze({ ...entry, behaviorProfileV119, behaviorStatus: behaviorProfileV119.behaviorStatus,
+    aiProfile: behaviorProfileV119.aiProfile });
+}));
 
 const vehicleSeeds = [
   ['M577 Armored Personnel Carrier', 'ground', 8], ['M577 Command APC', 'ground', 7],

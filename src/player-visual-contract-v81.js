@@ -165,9 +165,17 @@ export function drawEcho9FallbackV81(ctx, entity, { surface = 'mission', reason 
 }
 
 export function drawPlayerSpriteV81(ctx, options = {}) {
-  const validation = validatePlayerSpriteSampleV81(options);
+  let validation = validatePlayerSpriteSampleV81(options);
   if (!validation.ok) return drawEcho9FallbackV81(ctx, options.entity, { surface: options.surface, reason: validation.reason });
-  const { image } = options;
+  let image = options.image;
+  const costumeId = Object.hasOwn(options, 'costumeId') ? options.costumeId : options.entity?.costumeId;
+  if (costumeId) {
+    const costume = resolvePlayerCostumeSampleV119({ costumeId, imageStore: options.costumeImages,
+      sheetId: options.sheet?.id, column: options.sample?.column, row: options.sample?.row,
+      entity: options.entity, metrics: PLAYER_VISUAL_CONTRACT_V81.surfaces[options.surface || 'mission'] });
+    if (costume.ok) { validation = costume; image = costume.image; }
+    else validation = { ...validation, costumeId, costumeDegraded: costume.reason };
+  }
   const { source, sprite, flip } = validation;
   ctx.save?.();
   ctx.beginPath?.();
@@ -181,5 +189,7 @@ export function drawPlayerSpriteV81(ctx, options = {}) {
     ctx.drawImage?.(image, source.x, source.y, source.width, source.height, sprite.x, sprite.y, sprite.width, sprite.height);
   }
   ctx.restore?.();
-  return Object.freeze({ ...validation, drawn: true, fallback: false });
+  const { image: _privateImage, ...result } = validation;
+  return Object.freeze({ ...result, drawn: true, fallback: false });
 }
+import { resolvePlayerCostumeSampleV119 } from './player-costume-skins-v119.js';

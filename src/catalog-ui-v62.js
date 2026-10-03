@@ -18,6 +18,7 @@ import { getEnemyStaticPoseV96 } from './enemy-static-poses-v96.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
+import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -811,9 +812,11 @@ export class CatalogWorkbenchV62 {
     const header = createElement(this.document, 'header', 'catalog-v62__detail-header');
     const technical = this.developerModeV110 || record.catalog !== 'enemies';
     const animationControls = createElement(this.document, 'div');
-    const preview = record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(header, record, true)
-      : record.visual && this.animator.mount(header, record.visual, technical ? record.name : playerCatalogNameV110(record.name), { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
-    if (!preview) this.renderMissingMedia(header, record);
+    this.root.classList.toggle('catalog-v119__vehicle-workbench', this.catalogs.length === 1 && this.catalogs[0] === 'vehicles');
+    const preview = record.catalog === 'vehicles' ? this.renderVehicleShowroomV119(record, animationControls)
+      : record.documentaryReferenceV105 ? this.renderOriginalReferenceV105(header, record, true)
+        : record.visual && this.animator.mount(header, record.visual, technical ? record.name : playerCatalogNameV110(record.name), { detail: true, controlsTarget: animationControls, staticProfileId: record.id });
+    if (!preview && record.catalog !== 'vehicles') this.renderMissingMedia(header, record);
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', CATALOG_LABELS_V62[record.catalog]),
@@ -879,14 +882,90 @@ export class CatalogWorkbenchV62 {
       gameplaySection.append(gameplayData); this.detail.append(gameplaySection);
     }
     this.renderCombatBehaviorV89(record);
+    this.renderBehaviorProfileV119(record);
 
     if (technical) this.renderMediaSection(record);
     else if (record.visualReferenceV106?.sourceCredit) this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note', `Référence visuelle : ${record.visualReferenceV106.sourceCredit}`));
     this.renderBiologySection(record);
     this.renderSizeSection(record);
+    if (record.catalog === 'vehicles') this.renderVehicleStationsV119(record);
 
     const actions = normalizeCatalogActionsV62(record.documentaryReferenceV105 ? [] : this.getActions(record));
     if (actions.length) this.detail.append(this.renderActions(record, actions, 'catalog-v62__detail-actions'));
+  }
+
+  renderVehicleShowroomV119(record, controls) {
+    const model = getVehicleShowroomV119(record);
+    if (!model) return null;
+    const showroom = createElement(this.document, 'section', `catalog-v119__showroom catalog-v119__showroom--${model.context.id}`);
+    showroom.dataset.vehicleShowroom = record.id;
+    showroom.dataset.showroomContext = model.context.id;
+    showroom.dataset.visualStatus = model.visualStatus;
+    showroom.setAttribute('aria-label', `${record.name} — ${model.context.label}`);
+    const title = createElement(this.document, 'div', 'catalog-v119__showroom-top');
+    title.append(createElement(this.document, 'span', 'catalog-v62__eyebrow', model.context.label),
+      createElement(this.document, 'span', '', model.context.description));
+    showroom.append(title);
+    const scene = createElement(this.document, 'div', 'catalog-v119__showroom-scene');
+    // Decorative environment is behind the existing identity-resolved bitmap.
+    // There is no CSS vehicle motion or atlas made out of a single static pose.
+    const scenery = createElement(this.document, 'div', 'catalog-v119__showroom-scenery');
+    scenery.setAttribute('aria-hidden', 'true');
+    scenery.append(createElement(this.document, 'i', 'catalog-v119__showroom-structure'),
+      createElement(this.document, 'i', 'catalog-v119__showroom-ground'));
+    scene.append(scenery);
+    const visualHost = createElement(this.document, 'div', 'catalog-v119__showroom-visual');
+    const viewport = record.visual && this.animator.mount(visualHost, record.visual, record.name,
+      { detail: true, controlsTarget: controls, animate: model.animationAvailable });
+    if (viewport && model.geometry) {
+      viewport.style.aspectRatio = String(model.geometry.aspectRatio);
+      viewport.style.width = `min(96%, ${Math.round(280 * model.geometry.aspectRatio)}px)`;
+      viewport.style.flex = '0 1 auto';
+      viewport.style.height = 'auto';
+      const image = viewport.querySelector('img') || viewport.children[0];
+      if (model.geometry.cropped && image) {
+        image.style.width = `${model.geometry.widthPercent}%`;
+        image.style.height = `${model.geometry.heightPercent}%`;
+        image.style.transform = `translate(${model.geometry.translateXPercent}%, ${model.geometry.translateYPercent}%)`;
+        viewport.dataset.measuredCropV119 = 'true';
+      }
+    } else visualHost.append(createElement(this.document, 'p', 'catalog-v119__showroom-missing', 'VISUEL DÉDIÉ À DÉFINIR'));
+    scene.append(visualHost); showroom.append(scene);
+    const label = createElement(this.document, 'p', 'catalog-v119__showroom-status', model.visualLabel);
+    label.dataset.showroomVisualStatus = model.visualStatus;
+    showroom.append(label);
+    if (!model.canonExact && record.visual) showroom.append(createElement(this.document, 'p', 'catalog-v119__showroom-limit',
+      record.visual.identity?.fallbackReason || 'Adaptation visuelle du projet ; fidélité canonique 1:1 non certifiée.'));
+    this.detail.append(showroom);
+    return showroom;
+  }
+
+  renderVehicleStationsV119(record) {
+    const model = getVehicleShowroomV119(record);
+    if (!model) return;
+    const section = this.renderSection('POSTES D’ÉQUIPAGE', 'vehicle-stations');
+    const roles = { driver: 'Pilote / conducteur', gunner: 'Tireur', commander: 'Commandant', passenger: 'Passager' };
+    const actions = { drive: 'Conduire', boost: 'Accélérer', brake: 'Freiner', aim: 'Viser', fire: 'Tirer', reload: 'Recharger',
+      observe: 'Observer', support: 'Soutenir', disembark: 'Débarquer' };
+    const list = createElement(this.document, 'ol', 'catalog-v119__station-list');
+    for (const seat of model.seats) {
+      const row = createElement(this.document, 'li'); row.dataset.vehicleSeat = seat.id;
+      row.append(createElement(this.document, 'strong', '', roles[seat.role] || seat.role),
+        createElement(this.document, 'span', '', seat.actions.map(action => actions[action] || action).join(' · ')));
+      list.append(row);
+    }
+    section.append(list); this.detail.append(section);
+    const variants = this.renderSection('CHÂSSIS / CONFIGURATIONS', 'vehicle-configurations');
+    const parent = createElement(this.document, 'p', 'catalog-v62__fact-note', `Châssis : ${model.chassisName}`);
+    variants.append(parent);
+    const choices = createElement(this.document, 'div', 'catalog-v119__vehicle-variants');
+    for (const entry of model.variants) {
+      const button = createElement(this.document, 'button', 'button compact', entry.fit || entry.name);
+      button.type = 'button'; button.dataset.catalogRelationEntry = entry.id;
+      button.setAttribute('aria-pressed', String(entry.id === record.id));
+      choices.append(button);
+    }
+    variants.append(choices); this.detail.append(variants);
   }
 
   renderSection(title, kind = '') {
@@ -924,6 +1003,26 @@ export class CatalogWorkbenchV62 {
       else if (record.combatBehaviorV90) link.dataset.combatBehaviorSourceV90 = behavior.id;
       else if (record.combatBehaviorV89) link.dataset.combatBehaviorSourceV89 = behavior.id;
       section.append(link);
+    }
+    this.detail.append(section);
+  }
+
+  renderBehaviorProfileV119(record) {
+    const profile = record.catalog === 'enemies' ? record.behaviorProfileV119 : null;
+    if (!profile) return;
+    const section = this.renderSection('ÉVALUATION COMPORTEMENTALE', 'behavior-profile-v119');
+    section.dataset.behaviorStatus = profile.behaviorStatus;
+    section.append(createElement(this.document, 'p', 'catalog-v62__eyebrow', profile.label));
+    if (profile.behaviorStatus === 'to-define') section.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+      'Le dossier ne documente pas assez ce comportement. Le simulateur applique un contact prudent sans revendiquer une fidélité biologique.'));
+    else section.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
+      'Les distances, réactions et tactiques présentées sont une adaptation de gameplay, pas une certification canonique.'));
+    if (this.developerModeV110) {
+      const data = createElement(this.document, 'dl', 'catalog-v62__data-list');
+      appendDefinitionRows(this.document, data, { aiProfile: profile.aiProfile, behaviorStatus: profile.behaviorStatus,
+        locomotion: profile.locomotion, combat: profile.combat, specializedRuntime: profile.specializedRuntime || 'none',
+        sourceConfidence: profile.sourceConfidence }, { status: 'gameplay' });
+      section.append(data);
     }
     this.detail.append(section);
   }

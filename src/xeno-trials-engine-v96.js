@@ -2,6 +2,8 @@ import { getXenoTrialsFighterV96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V
 import { getSynthTrialAttackV110, synthConeHitsV110 } from './synth-combat-v110.js';
 import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105,
   resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
+import { createXenoTrialsBrainV119, stepXenoTrialsBrainV119 } from './xeno-trials-ai-v119.js';
+import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 
 export const XENO_TRIALS_STEP_V96 = 1 / 120;
 // Margins reserve the full native silhouettes (including tails) in either facing.
@@ -33,6 +35,7 @@ export function createXenoTrialsMatchV96(config = {}) {
   const playerId = getXenoTrialsFighterV96(config.playerId)?.id || 'warrior';
   const opponentId = getXenoTrialsFighterV96(config.opponentId)?.id || 'arachnoid';
   const seed = (Math.trunc(finite(config.seed, 1969)) >>> 0) || 1969;
+  const rulesV119 = normalizeXenoTrialsRulesV119(config.rulesV119);
   const playerVariants = getXenoTrialsFighterV96(playerId).variants, opponentVariants = getXenoTrialsFighterV96(opponentId).variants;
   const normalized = { playerId, opponentId,
     playerVariant: playerVariants.includes(config.playerVariant) ? config.playerVariant : playerVariants[0] || null,
@@ -40,15 +43,22 @@ export function createXenoTrialsMatchV96(config = {}) {
     factionId: XENO_TRIALS_FACTIONS_V96.find(entry => entry.id === config.factionId)?.id || 'hive',
     stageId: XENO_TRIALS_STAGES_V96.find(entry => entry.id === config.stageId)?.id || 'containment-deck',
     difficulty: ['easy', 'normal', 'hard'].includes(config.difficulty) ? config.difficulty : 'normal',
-    roundsToWin: clamp(Math.trunc(finite(config.roundsToWin, 2)), 1, 3), roundSeconds: clamp(finite(config.roundSeconds, 99), 15, 180), seed,
+    roundsToWin: clamp(Math.trunc(finite(config.roundsToWin, 2)), 1, 3), roundSeconds: rulesV119.timeLimitSeconds || clamp(finite(config.roundSeconds, 99), 15, 180), seed,
+    rulesV119,
+    ...(config.activityV119 && ['campaign', 'contracts', 'challenges', 'on-demand'].includes(config.activityV119.branch)
+      && typeof config.activityV119.id === 'string' ? { activityV119: { branch: config.activityV119.branch,
+        id: config.activityV119.id.slice(0, 64), ...(config.activityV119.branch === 'on-demand' ? { rules: rulesV119 } : {}) } } : {}),
     introSeconds: clamp(finite(config.introSeconds, .8), 0, 5),
     holdRoundTransition: config.holdRoundTransition === true,
     matchId: typeof config.matchId === 'string' && /^[a-zA-Z0-9_-]{1,96}$/.test(config.matchId) ? config.matchId : `trial-${seed}` };
-  return { version: 96, config: normalized, rng: seed, accumulator: 0, tick: 0, round: 1,
+  const match = { version: 96, config: normalized, rng: seed, accumulator: 0, tick: 0, round: 1,
     phase: normalized.introSeconds > 0 ? 'intro' : 'active', phaseTime: normalized.introSeconds, paused: false, timeRemaining: normalized.roundSeconds,
     wins: { player: 0, opponent: 0 }, roundWinner: null, roundReason: null, result: null,
     fighters: [makeFighter('player', playerId, config.playerVariant), makeFighter('opponent', opponentId, config.opponentVariant)],
-    projectiles: [], events: [], serial: 0, ai: { decisionIn: 0, input: emptyInput() } };
+    projectiles: [], events: [], serial: 0, ai: createXenoTrialsBrainV119() };
+  if (rulesV119.initialHp === 1) match.fighters.forEach(fighter => { fighter.hp = 1; });
+  resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], 1);
+  return match;
 }
 function event(match, type, extra = {}) {
   match.events.push({ id: ++match.serial, tick: match.tick, type, ...extra });
@@ -56,9 +66,11 @@ function event(match, type, extra = {}) {
 }
 function finishRound(match, reason) {
   const [a, b] = match.fighters;
-  const ratioA = a.hp / getXenoTrialsFighterV96(a.id).hp;
-  const ratioB = b.hp / getXenoTrialsFighterV96(b.id).hp;
-  const winner = Math.abs(ratioA - ratioB) < .00001 ? 'draw' : ratioA > ratioB ? 'player' : 'opponent';
+  const hpLimit = match.config.rulesV119?.initialHp;
+  const ratioA = a.hp / (hpLimit || getXenoTrialsFighterV96(a.id).hp);
+  const ratioB = b.hp / (hpLimit || getXenoTrialsFighterV96(b.id).hp);
+  const winner = reason === 'time' && match.config.rulesV119?.goal === 'survive' && a.hp > 0 ? 'player'
+    : Math.abs(ratioA - ratioB) < .00001 ? 'draw' : ratioA > ratioB ? 'player' : 'opponent';
   match.roundWinner = winner; match.roundReason = reason;
   if (winner !== 'draw') match.wins[winner]++;
   event(match, 'round-end', { winner, reason, round: match.round });
@@ -72,6 +84,7 @@ function finishRound(match, reason) {
     reason, rounds: match.round, wins: { ...match.wins }, playerId: a.id, opponentId: b.id,
     playerVariant: a.variant, opponentVariant: b.variant, factionId: match.config.factionId,
     stageId: match.config.stageId, difficulty: match.config.difficulty,
+    rulesV119: { ...match.config.rulesV119 }, ...(match.config.activityV119 ? { activityV119: { ...match.config.activityV119 } } : {}),
     playerStats: { ...a.stats }, opponentStats: { ...b.stats }, durationTicks: match.tick };
   event(match, 'match-end', { winner: finalWinner });
 }
@@ -80,8 +93,10 @@ export function nextXenoTrialsRoundV96(match) {
   const stats = match.fighters.map(f => f.stats);
   match.fighters = [makeFighter('player', match.config.playerId, match.config.playerVariant), makeFighter('opponent', match.config.opponentId, match.config.opponentVariant)];
   match.fighters.forEach((f, i) => { f.stats = stats[i]; });
+  if (match.config.rulesV119?.initialHp === 1) match.fighters.forEach(f => { f.hp = 1; });
+  resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], 1);
   match.round++; match.phase = match.config.introSeconds > 0 ? 'intro' : 'active'; match.phaseTime = match.config.introSeconds; match.timeRemaining = match.config.roundSeconds;
-  match.roundWinner = null; match.roundReason = null; match.projectiles = []; match.ai = { decisionIn: 0, input: emptyInput() };
+  match.roundWinner = null; match.roundReason = null; match.projectiles = []; match.ai = createXenoTrialsBrainV119();
   event(match, 'round-start', { round: match.round }); return true;
 }
 export function setXenoTrialsPausedV96(match, paused) {
@@ -90,36 +105,13 @@ export function setXenoTrialsPausedV96(match, paused) {
   match.paused = paused === true; match.accumulator = 0; return true;
 }
 function aiInput(match, dt) {
-  const [player, cpu] = match.fighters;
-  match.ai.decisionIn -= dt;
-  if (match.ai.decisionIn > 0) return match.ai.input;
-  const difficulty = match.config.difficulty;
-  match.ai.decisionIn = difficulty === 'easy' ? .38 : difficulty === 'hard' ? .14 : .24;
-  const doctrine = XENO_TRIALS_FACTIONS_V96.find(f => f.id === match.config.factionId).doctrine;
-  const direction = player.x > cpu.x ? 1 : -1, distance = getXenoTrialsBodyGapV105(cpu, player, direction);
-  const rangeUser = ['acid', 'pulse'].includes(getXenoTrialsFighterV96(cpu.id).special);
-  const cpuBody = getXenoTrialsBodyBoundsV105(cpu), playerBody = getXenoTrialsBodyBoundsV105(player);
-  const shotY = cpu.y + cpuBody.height * .55;
-  const rangedLane = shotY >= playerBody.bottom && shotY <= playerBody.top;
-  // A tall shooter must approach a low creature instead of waiting forever above its hitbox.
-  // Projectiles keep their fixed trajectory, so jumping can still evade them.
-  const target = doctrine === 'range' && rangeUser && rangedLane ? 240 : 20;
-  const next = emptyInput();
-  if (distance > target + 20) next[direction > 0 ? 'right' : 'left'] = true;
-  else if (distance < target - 45 && doctrine === 'range') next[direction > 0 ? 'left' : 'right'] = true;
-  if (player.attack && distance < 230 && cpu.y === 0 && rng(match) < (doctrine === 'guard' ? .85 : difficulty === 'easy' ? .25 : .6)) next.guard = true;
-  if (!next.guard && distance < (rangeUser ? 650 : 215) && rng(match) > (difficulty === 'easy' ? .35 : .1)) {
-    const roll = rng(match);
-    const action = roll < .3 && cpu.stamina >= 38 && cpu.specialCooldown <= 0 ? 'special' : roll < .58 ? 'heavy' : 'light';
-    // Alternate the press/release phases; held keys never retrigger attacks.
-    if (!match.ai.input[action]) next[action] = true;
-  }
-  if (doctrine === 'rush' && distance > 180 && rng(match) < .17) next.jump = true;
-  match.ai.input = next; return next;
+  return stepXenoTrialsBrainV119(match, dt, XENO_TRIALS_ATTACKS_V96, () => rng(match));
 }
 function fighterStep(match, fighter, enemy, controls, dt) {
   const definition = getXenoTrialsFighterV96(fighter.id);
   controls = { ...controls };
+  const rules = match.config.rulesV119;
+  if (rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0)) controls.special = false;
   for (const action of ACTIONS) {
     if (!controls[action]) fighter.rearmControls[action] = false;
     if (fighter.rearmControls[action]) controls[action] = false;
@@ -256,7 +248,7 @@ function fixedStep(match, playerControls, opponentControls, dt) {
       impacts.push({ from: owner, to: target, spec: projectile.spec, power: projectile.power, direction: projectile.direction }); projectile.life = 0;
     }
   }
-  match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > 0 && p.x < XENO_TRIALS_ARENA_V96.width);
+  match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > XENO_TRIALS_ARENA_V96.left - 200 && p.x < XENO_TRIALS_ARENA_V96.right + 200);
   for (const impact of impacts) applyImpact(match, impact);
   resolveXenoTrialsBodiesV105(a, b, impactOrder);
   match.timeRemaining = Math.max(0, match.timeRemaining - dt);

@@ -462,6 +462,9 @@ const descriptorByName = new Map(descriptors.map((descriptor) => [descriptor.cat
 const profileBySheetId = new Map(
   Object.values(VEHICLE_VISUAL_PROFILES_V56).map((profile) => [profile.sheetId, profile])
 );
+// Canonical chassis identity does not certify an authored atlas against the
+// source geometry. These six remaining legacy sheets have no 1:1 receipt.
+const uncertifiedCanonVisualBasesV119 = new Set([5, 10, 14, 16, 18, 19]);
 
 export function resolveVehicleVisualProfileV56(source = {}) {
   const id = typeof source?.id === 'string' ? source.id.trim() : '';
@@ -479,7 +482,8 @@ export function resolveVehicleVisualProfileV56(source = {}) {
     fit: descriptor?.fit || source.fit || 'Standard',
     identityStatus: exact ? (profile.referenceStatus === 'CANON_REFERENCE' ? 'exact' : profile.referenceStatus === 'PROJECT_ORIGINAL' ? 'project-original' : 'project-adaptation') : 'authored-family',
     identityVerified: exact,
-    canonExact: exact && profile.referenceStatus === 'CANON_REFERENCE',
+    canonExact: exact && profile.referenceStatus === 'CANON_REFERENCE'
+      && !uncertifiedCanonVisualBasesV119.has(profile.baseNumber),
     approximate: !exact,
     fallbackReason: exact
       ? null

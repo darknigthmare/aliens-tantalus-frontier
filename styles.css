@@ -1027,3 +1027,10 @@ button:disabled {
   .alpha-bravo-command-dock-v69 *,
   .alpha-bravo-targeting-v69 * { transition: none !important; animation: none !important; }
 }
+/* Account UI shares the game profile panel; cloud never gates local play. */
+.cloud-auth-v119 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:16px 0; }
+.cloud-auth-v119 label { display:grid; gap:6px; font-size:.75rem; letter-spacing:.08em; }
+.cloud-slot-v119 { padding:12px 0; border-top:1px solid #385443; display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.cloud-slot-v119 > span { width:100%; color:#afdfc0; font-size:.78rem; }
+.cloud-summary-v119 { width:100%; margin:2px 0; font-size:.72rem; opacity:.8; }
+@media(max-width:600px) { .cloud-auth-v119 { grid-template-columns:1fr; } }

@@ -959,6 +959,10 @@ export class GameEngine {
     if (updateEnemyBatchCombatV66(this, enemy, delta)) return;
     if (updateFacehuggerCombatV65(this, enemy, delta)) return;
     if (!enemy.alive) return;
+    const biologicalAI = enemy.behaviorProfileV119;
+    // Non-admitted egg variants remain biological structures, never humanoid
+    // attackers. The admitted V66 lifecycle above alone can release a parasite.
+    if (biologicalAI?.aiProfile === 'egg-cycle') { enemy.attacking = false; enemy.vx = 0; return; }
     enemy.attackClock -= delta;
     enemy.rangedClock -= delta;
     enemy.staggerClock = Math.max(0, enemy.staggerClock - delta);
@@ -980,7 +984,9 @@ export class GameEngine {
     const targetEntity = target.inVehicle && this.vehicle?.active ? this.vehicle : target;
     const distance = targetEntity.x - enemy.x + (enemy.royalScaleV72 ? (targetEntity.w - enemy.w) / 2 : 0);
     const verticalDistance = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
-    if (Math.abs(distance) < 620 || enemy.revealed > 0) enemy.alert = true;
+    const perception = biologicalAI?.perception;
+    const noiseHeard = this.stealthRuntime?.noise > 35 && Math.abs(distance) < (perception?.noise || 420);
+    if (Math.abs(distance) < (perception?.vision || 620) || noiseHeard || enemy.revealed > 0) enemy.alert = true;
     if (!enemy.alert) {
       if (v64Melee && enemy.pendingMelee) {
         this.cancelPendingEnemyMeleeV64(enemy, 'lost-target');
@@ -993,6 +999,15 @@ export class GameEngine {
     const ranged = !v64Melee && (enemy.behavior === 'spitter'
       || enemy.behavior === 'shooter'
       || enemy.isBoss);
+    enemy.aiStateV119 = ranged ? 'FIRING_LANE' : biologicalAI?.pursuit || 'direct-approach';
+    // Ordinary ranged fallback keeps a usable firing lane, without replacing
+    // special telegraphs, target locks, eggs, facehuggers or batch attack timing.
+    if (ranged && biologicalAI && enemy.staggerClock <= 0 && Math.abs(distance) < 110 && verticalDistance < 160) {
+      const previousX = enemy.x;
+      enemy.x -= enemy.facing * enemy.speed * .55 * delta;
+      this.resolveEnemyHorizontal(enemy, previousX);
+      enemy.aiStateV119 = 'REPOSITION';
+    }
     if (ranged && Math.abs(distance) < (enemy.isBoss ? 640 : 500) && Math.abs(distance) > 115 && verticalDistance < 180 && enemy.rangedClock <= 0) {
       this.spawnEnemyProjectile(enemy, targetEntity);
       enemy.rangedClock = enemy.isBoss ? 1.2 : enemy.behavior === 'spitter' ? 1.55 : 1.15;

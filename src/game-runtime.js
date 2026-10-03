@@ -5,6 +5,7 @@ import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { CREW } from './content-core-v50.js';
 import { resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
 import { sanitizeEcho9AppearanceV110 } from './echo9-personnel-v110.js';
+import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -50,8 +51,8 @@ export function buildWeaponRuntime(weapon = {}) {
 
 export function buildEnemyRuntime(enemy = {}, difficulty = 'standard') {
   const tuning = DIFFICULTIES[difficulty] || DIFFICULTIES.standard;
-  const behavior = String(enemy.behavior || 'stalk');
-  const behaviorMap = { stalk: 'stalker', rush: 'hunter', flank: 'hunter', ambush: 'pouncer', guard: 'bruiser', control: 'shooter', siege: 'bruiser', swarm: 'pouncer' };
+  const behaviorProfileV119 = resolveEnemyBehaviorV119(enemy);
+  const behavior = behaviorProfileV119.runtimeBehavior;
   const caste = String(enemy.caste || 'stalker');
   const acid = finite(enemy.acid, 0, 0, 100);
   const exactRuntimeBehavior = resolveExactEnemyRuntimeBehavior(enemy);
@@ -70,7 +71,8 @@ export function buildEnemyRuntime(enemy = {}, difficulty = 'standard') {
     encounterWorldIds: list(enemy.encounterWorldIds),
     habitats: list(enemy.habitats),
     sourceBehavior: behavior,
-    runtimeBehavior: exactRuntimeBehavior || (caste === 'royal' ? 'boss' : acid > 60 || /spitter|ranged/i.test(caste) ? 'spitter' : behaviorMap[behavior] || 'stalker'),
+    runtimeBehavior: exactRuntimeBehavior || behaviorProfileV119.runtimeBehavior,
+    behaviorProfileV119, behaviorStatus: behaviorProfileV119.behaviorStatus,
     provenance: String(enemy.provenance || 'runtime-default')
   });
 }
@@ -234,6 +236,8 @@ export class GameEngine extends MissionEngine {
     enemy.encounterWorldIds = runtime.encounterWorldIds;
     enemy.modifier = runtime.modifier;
     enemy.provenance = runtime.provenance;
+    enemy.behaviorProfileV119 = runtime.behaviorProfileV119;
+    enemy.behaviorStatus = runtime.behaviorStatus;
     return enemy;
   }
 

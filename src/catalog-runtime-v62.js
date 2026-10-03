@@ -36,6 +36,7 @@ import { resolveNativeVehicleCatalogVisualV112 } from './vehicle-native-visuals-
 import { resolveNativeVehicleCatalogVisualV113 } from './vehicle-native-visuals-v113.js';
 import { resolveNativeVehicleCatalogVisualV117 } from './vehicle-native-visuals-v117.js';
 import { resolveNativeVehicleCatalogVisualV118 } from './vehicle-native-visuals-v118.js';
+import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 
 export const CATALOG_UNKNOWN_V62 = 'unknown';
 
@@ -517,6 +518,8 @@ const buildRecord = (kind, entry) => {
       sourceCredit: entry.sourceCredit || null, referenceNote: entry.referenceNote || null
     }) } : {}),
     ...(kind === 'enemies' ? { catalogPolicyV105: getEnemyCatalogPolicyV105(entry) } : {}),
+    ...(kind === 'enemies' ? { behaviorProfileV119: resolveEnemyBehaviorV119(entry),
+      behaviorStatus: resolveEnemyBehaviorV119(entry).behaviorStatus } : {}),
     ...(engineerReferenceByProfileV105.has(entry.id) ? { sourceReferenceV105: engineerReferenceByProfileV105.get(entry.id) } : {}),
     ...(entry.documentaryReferenceV105 ? { documentaryReferenceV105: freezeObject({
       path: entry.path, sourceFile: entry.sourceFile, sourceSha256: entry.sourceSha256,

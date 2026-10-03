@@ -88,3 +88,6 @@ docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/a
 docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/scale-review.fragment.json -text whitespace=cr-at-eol
 docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/anchor-review.fragment.json -text whitespace=cr-at-eol
 docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/scale-review.fragment.json -text whitespace=cr-at-eol
+# V119 reviewed third-party distribution files are bound to their exact bytes.
+src/vendor/supabase-2.117.2.js -text
+src/vendor/supabase-LICENSE.txt -text

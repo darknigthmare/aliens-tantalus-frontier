@@ -1,5 +1,6 @@
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
+import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { resolveUserEquipmentLoadoutV95, loadUserEquipmentImagesV95, drawUserArmorV95, drawUserWeaponV95 } from './user-equipment-v95.js';
 import { attachCrewDeploymentV85, crewMovementV85, crewAimOffsetV85, crewSupportProfileV85,
   tickCrewRuntimeV85, stressCrewOnDamageV85, crewToolChargesV85, spendCrewToolV85,
@@ -2188,24 +2189,27 @@ export function withV52MissionRuntime(BaseEngine) {
       const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: actor });
       const entry = sample?.sheet || null;
       const image = entry ? this.images?.get(entry.imageKey) : null;
+      const costumeId = this.neuro?.active && actor === this.player ? null : actor.costumeId;
+      loadPlayerCostumeAssetsV119(this.images, costumeId);
       const render = drawPlayerSpriteV81(ctx, {
         sheet: entry,
         image,
         sample,
         pivot: entry ? SPRITE_PIVOTS[entry.pivot] : null,
         entity: actor,
-        surface: 'mission'
+        surface: 'mission', costumeId, costumeImages: this.images
       });
       const runtime = render.fallback ? null : buildSpriteHitboxRuntime(actor, entry);
       actor.spriteHitbox = runtime;
       actor.spritePivot = runtime?.pivot || render.pivot;
-      actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
-      if (!render.fallback) drawEcho9MarkingV110(ctx, actor);
+      actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing,
+        costumeId: render.costumeId || null, skinId: render.skinId || null, costumeDegraded: render.costumeDegraded || null };
+      if (!render.fallback && !render.skinId) drawEcho9MarkingV110(ctx, actor);
       if (actor.inCover) {
         ctx.strokeStyle = '#79c895';
         ctx.strokeRect(actor.x - 3, actor.y + 32, actor.w + 6, actor.h - 29);
       }
-      if (actor === this.player && this.costumeRuntime?.active) {
+      if (actor === this.player && this.costumeRuntime?.active && !this.costumeRuntime.cosmeticOnly) {
         ctx.fillStyle = this.costumeRuntime.visual.primary;
         ctx.globalAlpha = 0.34;
         ctx.fillRect(actor.x + 5, actor.y + 20, Math.max(8, actor.w - 10), 8);

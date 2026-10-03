@@ -11,6 +11,9 @@
     "audio:check": "node scripts/audio-scan-v77.mjs --check"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.2"
   }
 }

@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/alien-survival-v70.css">
   <link rel="stylesheet" href="/bioforge-v80.css">
   <link rel="stylesheet" href="/xeno-trials-v96.css">
+  <link rel="stylesheet" href="/xeno-trials-fullscreen-v119.css">
   <link rel="stylesheet" href="/player-onboarding-v84.css">
   <link rel="stylesheet" href="/crew-v85.css">
   <link rel="stylesheet" href="/echo9-v110.css">
@@ -272,6 +273,7 @@
               <div id="costume-list" class="catalog-grid compact-catalog"></div>
             </div>
           </div>
+          <section id="costume-archives-v119" class="costume-archives-v119" aria-label="Archives de tenues de la franchise"></section>
         </section>
 
         <section class="view" data-panel="editor">
@@ -284,7 +286,7 @@
           <div class="section-intro"><div><p class="eyebrow">SAUVEGARDE // ACCESSIBILITÉ // RUNTIME</p><h2>Système</h2></div></div>
           <article id="save-recovery-notice" class="panel" role="alert" hidden><h3>Sauvegarde protégée</h3><p id="save-recovery-message"></p><p>Le fichier original n’a pas été remplacé. Exportez ses données brutes, choisissez un autre profil ou importez une sauvegarde valide. Une nouvelle partie ne remplace ce profil qu’après confirmation dans le menu principal.</p></article>
           <div class="settings-grid">
-            <article class="panel"><header><h3>Profils</h3></header><div id="profile-list"></div></article>
+            <article class="panel"><header><h3>Profils</h3></header><div id="profile-list"></div><section id="cloud-profiles-v119" aria-label="Compte et synchronisation des profils"></section></article>
             <article class="panel"><header><h3>Expérience</h3></header><label>DIFFICULTÉ<select id="setting-difficulty"><option value="story">Histoire</option><option value="standard">Standard</option><option value="nightmare">Cauchemar</option></select></label><label>QUALITÉ<select id="setting-quality"><option value="low">Basse</option><option value="high">Haute</option></select></label><label>CONTRASTE<select id="setting-contrast"><option value="standard">Standard</option><option value="high">Renforcé</option></select></label><label>AIDE À LA VISÉE<select id="setting-aim-assist"><option value="off">Désactivée</option><option value="standard">Standard</option><option value="high">Forte</option></select></label><label>SECOUSSES CAMÉRA<input id="setting-screen-shake" type="range" min="0" max="1" step="0.05"></label><label><input id="setting-coop" type="checkbox"> Coop locale</label><label><input id="setting-motion" type="checkbox"> Réduire les mouvements</label><label><input id="setting-subtitles" type="checkbox"> Sous-titres</label><label>EFFETS AUDIO<input id="setting-effects" type="range" min="0" max="1" step="0.05"></label><label>MUSIQUE<input id="setting-music" type="range" min="0" max="1" step="0.05"></label></article>
             <article class="panel"><header><h3>Scène d’accueil</h3></header><label>VAISSEAU<select id="setting-title-ship-v87" aria-describedby="setting-title-ship-status-v87"></select></label><label>NOM SUR LA COQUE CONESTOGA<input id="setting-title-ship-name-v87" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="TANTALUS"></label><p id="setting-title-ship-status-v87" aria-live="polite">Présentation visuelle uniquement. Le nom modifiable est peint sur la coque Conestoga ; les autres modèles conservent leur identité.</p><button id="setting-title-preview-v87" class="button wide" type="button">VOIR L’ACCUEIL</button></article>
             <article class="panel"><header><h3>Données</h3></header><button id="save-export" class="button wide">EXPORTER LA SAUVEGARDE</button><label class="button wide file-button">IMPORTER UNE SAUVEGARDE<input id="save-import" type="file" accept="application/json"></label><button id="install-app" class="button wide" hidden>INSTALLER L’APPLICATION</button></article>
@@ -333,6 +335,7 @@
     </section>
   </div>
   <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <script defer src="/src/vendor/supabase-2.117.2.js"></script>
   <script type="module" src="/src/app.js"></script>
 </body>
 </html>

@@ -21,6 +21,7 @@ import { normalizeRefugeHubResumeV87, projectRefugeHubSaveV87 } from './refuge-s
 import { canAccessPortCounterV87, getShipPortSafetyCodeV87 } from './ship-port-state-v87.js';
 import { drawTiledMissionCropV87, MISSION_STRUCTURE_CROPS_V87 } from './mission-structure-art-v87.js';
 import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
+import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export * from './hub-v62-runtime.js';
@@ -1062,6 +1063,7 @@ export class HubGame extends HubGameV62 {
     ctx.save();
     ctx.translate(-this.annexCameraV71.x, 0);
     this.drawAnnexGeometryV71(ctx, annex);
+    this.drawDepthFloorV116(ctx);
     if (annex.id === 'animal-care') {
       drawShipAnimalHabitatV87(ctx, images.get('prop'), this.npcRoutineContextV62?.save);
     } else if (annex.id === SHIP_PORT_ANNEX_V87.id) {
@@ -1081,7 +1083,10 @@ export class HubGame extends HubGameV62 {
 
   drawAnnexLayerV71(ctx, image, cameraFactor, alpha) {
     if (!imageReady(image)) return;
-    const source = layerSourceRect(image, this.annexCameraV71.x, cameraFactor);
+    const presentation = getHubRoomPresentationV119(this.currentAnnexV71(), this.depthPresentationV116);
+    // Only distant art has parallax. Physical modules use the unchanged camera.
+    const factor = presentation?.presentationMode === '2.5d' && !this.reducedMotion ? cameraFactor : 1;
+    const source = layerSourceRect(image, this.annexCameraV71.x, factor);
     ctx.save();
     ctx.globalAlpha = alpha;
     ctx.drawImage(image, source.x, source.y, source.w, source.h, 0, 0, VIEW_WIDTH, VIEW_HEIGHT);

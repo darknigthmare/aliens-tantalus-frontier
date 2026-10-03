@@ -36,6 +36,7 @@ export function buildCrewDeploymentV85(member) {
       .reduce((sum, item) => sum + bounded(item.reserveMagazines, 0, 0, 12), 0) : 0;
   return {
     schema: 85, crewId: resolved.id, name: resolved.name, callsign: resolved.callsign,
+    identityV119: resolved.identityV119 ? copy(resolved.identityV119) : null,
     visualProfileId: member.recruitV85 ? CREW_STANDARD_VISUAL_V85 : null,
     artStatus: member.recruitV85 ? 'shared-standard-uniform-no-individual-portrait' : 'existing-named-crew-art',
     personalEquipment: Boolean(member.recruitV85 || Array.isArray(member.gearV85)),
@@ -60,6 +61,8 @@ export function attachCrewDeploymentV85(actor, member) {
   if (state.visualProfileId) actor.visualProfileId = state.visualProfileId;
   actor.callsign = state.callsign;
   actor.name = state.name;
+  // A role/voice profile is informative, not a specialty lock or free tool.
+  actor.tacticalRoleV119 = state.identityV119?.tacticalRole || null;
   if (!state.personalEquipment) return true;
   actor.armor = state.armor;
   actor.maxArmor = Math.max(60, state.armor);
@@ -79,6 +82,13 @@ export function crewToolChargesV85(actor, kind) {
   const state = actor?.crewV85;
   return state ? state.gear.filter(item => item.function === kind)
     .reduce((sum, item) => sum + (state.charges[item.instanceId] || 0), 0) : 0;
+}
+
+/** Deterministic radio text; no recorded voice, charge, buff or random event. */
+export function crewRadioMessageV119(actor, event = 'acknowledge') {
+  const identity = actor?.crewV85?.identityV119;
+  return identity && identity.crewId === actor?.crewV85?.crewId && Object.hasOwn(identity.radio, event)
+    ? identity.radio[event] : null;
 }
 
 export function spendCrewToolV85(actor, kind) {

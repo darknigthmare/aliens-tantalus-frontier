@@ -46,6 +46,8 @@ import {
   resolveSpriteSheet
 } from './sprite-animation-runtime.js';
 import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
+import { sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
 
 export const BIOFORGE_SEAL_SECONDS_V80 = 0.72;
 export const BIOFORGE_PRINT_INTERVAL_SECONDS_V80 = 0.46;
@@ -286,7 +288,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         climbing: false,
         crouching: false,
         inVehicle: false,
-        bioforgeOperatorV80: true
+        bioforgeOperatorV80: true,
+        costumeId: this.bioforgeCostumeIdV119 || null
       });
       this.coop = null;
       this.coopEnabled = false;
@@ -409,6 +412,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
 
     start(options = {}) {
       if (this.running) this.purgeBioforgeV80('runtime-restart');
+      this.bioforgeCostumeIdV119 = sanitizeCostumeSelectionV119(options.costumeId || options.costume?.id);
       const resumeEnvelope = options.resumeState || null;
       const embeddedRuntimeV81 = resumeEnvelope?.runtimeV81 || resumeEnvelope?.bioforge?.runtimeV81 || resumeEnvelope?.state?.runtimeV81 || null;
       this.bioforgeSeedV80 = Number.isFinite(Number(options.seed ?? resumeEnvelope?.seed ?? embeddedRuntimeV81?.seed)) ? Number(options.seed ?? resumeEnvelope?.seed ?? embeddedRuntimeV81?.seed) : 80;
@@ -1481,6 +1485,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     drawBioforgePlayerV80(ctx) {
       const actor = this.player;
       if (!actor) return;
+      loadPlayerCostumeAssetsV119(this.images, actor.costumeId);
       const request = resolvePlayerAnimation(actor, false);
       const sample = this.bioforgePlayerAnimationV81?.sample('bioforge:player:echo9', request, this.animationTime, { emit: false, physicalActor: actor });
       const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
@@ -1490,9 +1495,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         sample,
         pivot: SPRITE_PIVOTS[sheet?.pivot],
         entity: actor,
-        surface: 'bioforge'
+        surface: 'bioforge', costumeId: actor.costumeId, costumeImages: this.images
       });
-      actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
+      actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing,
+        costumeId: render.costumeId || null, skinId: render.skinId || null, costumeDegraded: render.costumeDegraded || null };
     }
 
     drawBioforgeForegroundV80(ctx) {

@@ -111,6 +111,7 @@ export class GameEngine extends V88ProductionEngine {
 
   applyCostumeRuntime() {
     if (!this.costumeRuntime?.active || !this.player) return;
+    if (this.costumeRuntime.cosmeticOnly) { this.player.costumeId = this.costumeRuntime.id; return; }
     this.player.maxArmor = 100 + this.costumeRuntime.armor;
     this.player.armor = clamp(this.player.armor + this.costumeRuntime.armor, 0, this.player.maxArmor);
     this.player.costumeId = this.costumeRuntime.id;

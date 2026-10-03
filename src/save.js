@@ -1,4 +1,5 @@
-import { CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { canEquipCostumeV119, sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
 import { normalizeInfestationChainV62 } from './infestation-chain-v62.js';
 import {
   migrateNpcDialogueHubStateV62,
@@ -50,6 +51,7 @@ import { createOpeningExerciseV89, normalizeOpeningExerciseV89 } from './opening
 import { createPortMeridienV90, normalizePortMeridienV90 } from './port-meridien-v90.js';
 import { createRecruitmentV85, sanitizeRecruitmentV85, sanitizeRecruitProfileV85, generateNextRecruitmentPoolV85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { sanitizeEcho9AppearanceV110 } from './echo9-personnel-v110.js';
+import { createPremiumPersonnelV119, sanitizePremiumPersonnelV119, syncPremiumPersonnelV119 } from './premium-personnel-v119.js';
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-state-v87.js';
 import { normalizeUserEquipmentV95, resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
@@ -283,6 +285,7 @@ export function createDefaultSave(profile = 1) {
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
     xenoTrialsV96: createXenoTrialsProgressV96(),
+    premiumPersonnelV119: createPremiumPersonnelV119(),
     enemyDiscoveryV88: sanitizeEnemyDiscoveryV88(),
     shipAnimalsV1: migrateShipAnimalStateV87(),
     shipPortV1: createShipPortStateV87(),
@@ -1287,7 +1290,7 @@ export function treatCrewMember(save, crewId) {
 
 export function applyCostume(save, costumeId) {
   if (ensureStrategy(save).currentOperation) throw new Error('Combinaison verrouillee pendant une operation.');
-  if (typeof costumeId !== 'string' || !costumeId) throw new Error('Combinaison invalide.');
+  if (!canEquipCostumeV119(costumeId, COSTUMES)) throw new Error('Combinaison invalide ou atlas joueur dédié absent.');
   save.player.costumeId = costumeId;
   addStrategyLog(save, { type: 'loadout', title: 'Combinaison appliquee', risk: 0, incident: false, result: costumeId + ' devient la tenue active.' });
   return costumeId;
@@ -1591,7 +1594,7 @@ export function resolveOperationDeployment(save, {
   const equipmentIds = stringList(operation.equipmentIds);
   const requestedVehicleId = typeof operation.vehicleId === 'string' ? operation.vehicleId : null;
   const vehicleId = resolveReadyVehicleIdV60(requestedVehicleId, ensureStrategy(save).inventory.vehicleIds, vehicleCatalog);
-  const costumeId = typeof operation.costumeId === 'string' ? operation.costumeId : null;
+  const costumeId = sanitizeCostumeSelectionV119(operation.costumeId, COSTUMES);
   const neuroProfileId = typeof operation.neuroProfileId === 'string' ? operation.neuroProfileId : null;
   const apexDossierId = typeof operation.apexDossierId === 'string' ? operation.apexDossierId : null;
   const crew = crewIds.map((id) => Array.isArray(operation.crewManifestV85)
@@ -1819,6 +1822,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     completedHour: save.clock.hour
   };
   recordCrewMissionV85(save, operation, resolvedSuccess, resolvedReason);
+  if (resolvedSuccess) syncPremiumPersonnelV119(save);
   if (save.openingV88?.phase === 'deployed') {
     const opening = advancePlayerOpeningV88(save.openingV88, 'resolve', { onboardingComplete: true, operationId: operation.id, success: resolvedSuccess });
     if (opening.ok) save.openingV88 = opening.state;
@@ -1865,6 +1869,7 @@ export function migrateSave(input, profile = 1) {
 
   const player = isRecord(source.player) ? source.player : {};
   Object.assign(migrated.player, player);
+  migrated.player.costumeId = sanitizeCostumeSelectionV119(player.costumeId, COSTUMES) || base.player.costumeId;
   for (const key of ['visualSheetId', 'spriteKey', 'visualForm', 'neuroVisualContract']) delete migrated.player[key];
   migrated.player.name = typeof player.name === 'string' ? player.name.slice(0, 80) : base.player.name;
   if (migrated.onboardingV84) {
@@ -2008,7 +2013,7 @@ export function migrateSave(input, profile = 1) {
         vehicleIds,
         VEHICLES
       ),
-      costumeId: typeof candidate.costumeId === 'string' ? candidate.costumeId.slice(0, 120) : null,
+      costumeId: sanitizeCostumeSelectionV119(candidate.costumeId, COSTUMES),
       userEquipmentV95: normalizeUserEquipmentV95(candidate.userEquipmentV95),
       neuroProfileId: typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
       apexDossierId: typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
@@ -2063,6 +2068,7 @@ export function migrateSave(input, profile = 1) {
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
   migrated.xenoTrialsV96 = normalizeXenoTrialsProgressV96(source.xenoTrialsV96);
+  migrated.premiumPersonnelV119 = sanitizePremiumPersonnelV119(source.premiumPersonnelV119, migrated);
   migrated.enemyDiscoveryV88 = sanitizeEnemyDiscoveryV88(source.enemyDiscoveryV88);
   migrated.shipAnimalsV1 = migrateShipAnimalStateV87(source.shipAnimalsV1);
   migrated.shipPortV1 = migrateShipPortStateV87(source.shipPortV1);
@@ -2291,5 +2297,16 @@ export class SaveSystem {
     const target = assertSaveProfileIdV78(profile);
     const parsed = parseImportedSaveV78(text);
     return this.writeCandidateV78(migrateSave(parsed, target), target, { replace: true });
+  }
+
+  importInactiveProfileV119(text, profile, expectedRaw) {
+    const target = assertSaveProfileIdV78(profile);
+    if (target === this.profile) throw new Error('Utilisez le remplacement de la timeline active.');
+    const parsed = parseImportedSaveV78(text);
+    const candidate = migrateSave(parsed, target);
+    if (this.storage.getItem(this.key(target)) !== expectedRaw) throw new Error('L’emplacement a changé pendant le transfert.');
+    this.storage.setItem(this.key(target), JSON.stringify(candidate));
+    // Deliberately leaves active data, profile and last-selected marker intact.
+    return candidate;
   }
 }

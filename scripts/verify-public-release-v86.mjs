@@ -4,6 +4,7 @@ import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { validateContent, RELEASE } from '../src/content.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
+import { publicReleasePathAdmissionV119, verifyPublicAdmissionsV119 } from './public-release-admissions-v119.mjs';
 
 const ROOT_FILES = new Set([
   'command-v110.css', 'echo9-v110.css',
@@ -12,10 +13,10 @@ const ROOT_FILES = new Set([
   'alien-survival-v70.css', 'bioforge-v80.css', 'catalog-v62.css', 'crew-v85.css', 'hub-level.css',
   'hub-stations-v61.css', 'mission-insertion-v62.css', 'placeables-v86.css', 'player-onboarding-v84.css',
   'runtime-level.css', 'sprite-gallery.css', 'styles-v50.css', 'styles.css', 'title-scene-v79.css', 'title-screen-v61.css',
-  'xeno-trials-v96.css', 'depth-lab-v97.html', 'depth-lab-v97.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
+  'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set(['audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
-  'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs']);
+  'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
@@ -148,6 +149,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const v119Admission = publicReleasePathAdmissionV119(path, { directory });
+  if (v119Admission !== null) return v119Admission;
   if (directory) {
     if (segments.length === 1) return ['src', 'scripts', 'assets'].includes(path);
     return segments[0] === 'assets' && segments.every(part => !part.startsWith('.') && !PRIVATE_FILENAME.test(part));
@@ -181,7 +184,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
-      if (ROOT_FILES.has(path) || /\.(?:js|mjs|json|css|html|md|webmanifest)$/i.test(path)) {
+      if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|json|css|html|md|webmanifest)$/i.test(path)) {
         const text = await readFile(join(directory, entry.name), 'utf8');
         assert.equal(isPublicDistributionTextV86(text), true, `Private source metadata in distribution: ${path}`);
       }
@@ -192,6 +195,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');
   assert.equal(userReferenceJpgs, USER_REFERENCE_JPG_PATHS_V100.size, 'An approved original JPG is missing.');
+  await verifyPublicAdmissionsV119(root, { strict: true });
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

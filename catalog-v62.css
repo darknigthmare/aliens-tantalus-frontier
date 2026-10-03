@@ -15,6 +15,41 @@
   box-shadow: 0 22px 70px rgba(0, 0, 0, .25);
 }
 
+/* V119: preserve the family tree and operational dossier; the contextual
+   inspection bay, not the configuration list, owns the dominant column. */
+.catalog-v62.catalog-v119__vehicle-workbench { grid-template-columns: minmax(180px, .62fr) minmax(245px, .82fr) minmax(430px, 1.8fr); }
+.catalog-v119__showroom { position: relative; border-bottom: 1px solid var(--catalog-v62-line); background: #070e10; }
+.catalog-v119__showroom-top { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; padding: 16px 18px; color: #92a99c; font: 10px/1.4 var(--mono, monospace); }
+.catalog-v119__showroom-scene { position: relative; display: grid; min-height: 330px; overflow: hidden; isolation: isolate; }
+.catalog-v119__showroom-scenery { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 10%, #36413b 0%, #101c1e 42%, #050b0e 85%); }
+.catalog-v119__showroom-structure { position: absolute; inset: 7% 8% 17%; border: 12px solid #263735; border-bottom: 0; box-shadow: inset 0 1px 0 #56736b, 0 0 0 2px #070d0e; background: repeating-linear-gradient(90deg, transparent 0 18%, #1b302d 18.2% 18.7%, transparent 19% 36%); }
+.catalog-v119__showroom-ground { position: absolute; inset: 75% 0 0; border-top: 2px solid #657e6a; background: repeating-linear-gradient(0deg, #1b2927 0 18%, #2a3933 19% 20%, #10201e 21% 34%); transform: perspective(280px) rotateX(28deg); transform-origin: top; }
+.catalog-v119__showroom-visual { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 300px; padding: 8px 16px 16px; }
+.catalog-v119__showroom .catalog-v62__sprite--detail { margin: 0; border: 0; background: transparent; overflow: hidden; }
+.catalog-v119__showroom-status, .catalog-v119__showroom-limit { margin: 0; padding: 10px 18px; color: #bad7c4; font: 700 10px/1.6 var(--mono, monospace); }
+.catalog-v119__showroom-limit { padding-top: 0; color: #9daaac; font-weight: 500; }
+.catalog-v119__showroom-missing { padding: 30px; border: 1px dashed #657e6a; color: #d0ae61; font: 700 12px/1.5 var(--mono, monospace); text-align: center; }
+.catalog-v119__showroom--exosuit .catalog-v119__showroom-structure { inset: 8% 34% 5%; border-width: 9px; border-bottom: 9px solid #263735; background: repeating-linear-gradient(0deg, #12211f 0 32px, #334640 33px 35px); }
+.catalog-v119__showroom--air .catalog-v119__showroom-structure { inset: 3% 6% 12%; border-top-width: 16px; background: linear-gradient(180deg, #081922, #21303b); }
+.catalog-v119__showroom--space .catalog-v119__showroom-scenery { background: radial-gradient(ellipse at 70% 128%, #839d9e 0 22%, #254950 23%, #0c1827 26%, #020610 55%); }
+.catalog-v119__showroom--space .catalog-v119__showroom-structure { border: 0; box-shadow: none; background: radial-gradient(circle at 12% 22%, #879aaa 0 1px, transparent 2px), radial-gradient(circle at 80% 12%, #677584 0 1px, transparent 2px), radial-gradient(circle at 43% 8%, #809397 0 1px, transparent 2px); }
+.catalog-v119__showroom--space .catalog-v119__showroom-ground { display: none; }
+.catalog-v119__showroom--maritime .catalog-v119__showroom-scenery { background: linear-gradient(180deg, #152b31 0 64%, #0b3b49 65%, #062632); }
+.catalog-v119__showroom--maritime .catalog-v119__showroom-ground { border-color: #7dc0cc; background: repeating-linear-gradient(0deg, #104a59 0 12px, #1e6170 13px 14px, #0d3a48 15px 30px); }
+.catalog-v119__showroom--submersible .catalog-v119__showroom-scenery { background: radial-gradient(ellipse at 50% -20%, #377686, #0b3442 50%, #020d1a); }
+.catalog-v119__showroom--submersible .catalog-v119__showroom-structure { border-color: #213f4b; background: repeating-linear-gradient(90deg, transparent 0 70px, #31526250 72px 78px, transparent 80px 160px); }
+.catalog-v119__showroom--submersible .catalog-v119__showroom-ground { display: none; }
+.catalog-v119__showroom--rail .catalog-v119__showroom-ground { background: linear-gradient(0deg, #1e2727 0 32%, #53675d 33% 37%, #0b1110 38% 42%, #1e2727 43% 66%, #53675d 67% 71%, #0b1110 72% 76%, #1e2727 77%); }
+.catalog-v119__showroom--lift .catalog-v119__showroom-structure { inset: -20% 25%; border: 12px solid #41554d; background: repeating-linear-gradient(0deg, #081313 0 54px, #293c33 55px 62px); }
+.catalog-v119__station-list { display: grid; gap: 7px; padding-left: 25px; font: 11px/1.5 var(--mono, monospace); }
+.catalog-v119__station-list li { padding: 8px; border-bottom: 1px solid var(--catalog-v62-line); }
+.catalog-v119__station-list span { display: block; color: var(--catalog-v62-muted); font-size: 10px; }
+.catalog-v119__vehicle-variants { display: flex; flex-wrap: wrap; gap: 6px; }
+.catalog-v119__vehicle-variants button[aria-pressed="true"] { border-color: var(--catalog-v62-green); color: var(--catalog-v62-green); }
+@media (max-width: 1200px) { .catalog-v62.catalog-v119__vehicle-workbench { grid-template-columns: minmax(165px, .55fr) minmax(210px, .7fr) minmax(320px, 1.4fr); } }
+@media (max-width: 920px) { .catalog-v62.catalog-v119__vehicle-workbench { grid-template-columns: minmax(150px, .6fr) minmax(230px, 1fr); } .catalog-v119__vehicle-workbench .catalog-v62__detail { grid-column: 1 / -1; max-height: none; } }
+@media (max-width: 600px) { .catalog-v62.catalog-v119__vehicle-workbench { grid-template-columns: 1fr; } .catalog-v119__showroom-scene { min-height: 290px; } .catalog-v119__vehicle-workbench .catalog-v62__detail { grid-column: auto; } }
+
 .catalog-v62__tree,
 .catalog-v62__results,
 .catalog-v62__detail {

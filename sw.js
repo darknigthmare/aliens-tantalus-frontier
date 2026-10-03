@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-adaptations-v118-shell-1';
+const CACHE = 'atf-v86-systems-v119-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,13 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/franchise-costumes-v119.js', '/src/player-costume-skins-v119.js', '/src/costume-ui-v119.js',
+  '/src/premium-personnel-v119.js',
+  '/src/enemy-behavior-registry-v119.js', '/src/xeno-trials-ai-v119.js',
+  '/src/hub-room-presentation-v119.js', '/src/vehicle-showroom-v119.js',
+  '/src/xeno-trials-modes-v119.js', '/src/xeno-trials-physical-scale-v119.js', '/src/xeno-trials-arena-layers-v119.js', '/xeno-trials-fullscreen-v119.css',
+  '/src/cloud-auth-v119.js', '/src/cloud-save-v119.js', '/src/cloud-sync-v119.js', '/src/cloud-ui-v119.js',
+  '/src/vendor/supabase-2.117.2.js',
   '/src/weapon-native-visuals-v118.js', '/src/enemy-import-animation-data-v118.js',
   '/src/vehicle-native-visuals-v118.js',
   '/src/enemy-source-adaptations-v118.js',
@@ -61,7 +68,6 @@ const CORE = [
   '/src/enemy-import-admissions-v103.js', '/src/enemy-user-imports-v103.js',
   '/src/user-pack-v100.js', '/src/user-reference-library-v100.js', '/src/user-reference-recovery-v100.js',
   '/src/enemy-physical-size-v100.js', '/user-reference-library-v100.css',
-  '/depth-lab-v97.html', '/depth-lab-v97.css', '/src/depth-lab-v97.js', '/src/depth-lab-model-v97.js',
   '/src/xeno-trials-presentation-v97.js', '/src/xeno-trials-selection-v97.js',
   '/src/enemy-dedicated-poses-v97.js', '/src/enemy-dedicated-batch-v97.js',
   '/src/enemy-dedicated-poses-v98.js', '/src/enemy-dedicated-batch-v98.js',

@@ -1,4 +1,5 @@
-import { APTITUDE_DEFINITIONS_V85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { APTITUDE_DEFINITIONS_V85, deriveRecruitIdentityV119, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { getPremiumPersonnelV119 } from './premium-personnel-v119.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const list = value => Array.isArray(value) ? value : [];
@@ -10,8 +11,9 @@ const profileOf = member => member.recruitV85 || (member.schema === 85 ? member 
 export function buildCrewUiModelV85(save, catalog = []) {
   const selected = new Set(list(save.strategy?.selectedCrewIds));
   const members = list(save.crew).map(member => ({ ...resolveCrewDefinitionV85(member, catalog), selected: selected.has(member.id), candidate: false }));
-  const candidates = list(save.recruitmentV85?.candidates).map(profile => ({ ...profile, recruitV85: profile, aptitudesV85: profile.aptitudes, gearV85: profile.gear, candidate: true, status: 'candidat' }));
-  return { members, candidates, active: members.filter(m => m.selected), reserve: members.filter(m => !m.selected),
+  const candidates = list(save.recruitmentV85?.candidates).map(profile => ({ ...profile, recruitV85: profile, identityV119: deriveRecruitIdentityV119(profile), aptitudesV85: profile.aptitudes, gearV85: profile.gear, candidate: true, status: 'candidat' }));
+  const archives = getPremiumPersonnelV119(save);
+  return { members, candidates, archives, active: members.filter(m => m.selected), reserve: members.filter(m => !m.selected),
     locked: Boolean(save.strategy?.currentOperation || (save.onboardingV84 && save.onboardingV84.phase !== 'complete')),
     hours: (Number(save.clock?.day || 1) - 1) * 24 + Number(save.clock?.hour || 0),
     lastOfferHour: Number(save.recruitmentV85?.lastOfferHour || 0), credits: Number(save.galaxy?.resources?.credits || 0) };
@@ -45,25 +47,31 @@ export class CrewUiV85 {
     this.dialog.addEventListener('close', () => { this.selectedId = null; if (this.previousFocus?.isConnected) this.previousFocus.focus(); else this.root.querySelector(`[data-v85-tab="${this.tab}"]`)?.focus(); });
   }
   close() { if (this.dialog.open) this.dialog.close(); this.selectedId = null; }
-  getMember(id) { return [...(this.model?.members || []), ...(this.model?.candidates || [])].find(m => m.id === id); }
+  getMember(id) { return [...(this.model?.members || []), ...(this.model?.candidates || []), ...(this.model?.archives || [])].find(m => m.id === id); }
   itemName(item) { return this.itemCatalog.find(entry => entry.id === item.catalogId)?.name || item.catalogId; }
   render(save) {
     this.model = buildCrewUiModelV85(save, this.catalog); this.owner = this.getOwner();
-    const groups = [['active','Équipe active'],['reserve','Réserve'],['candidates','Candidats']];
+    const groups = [['active','Équipe active'],['reserve','Réserve'],['candidates','Candidats'],['archives','Archives MIRE']];
     const current = this.model[this.tab] || [];
     const wait = Math.max(0, this.model.lastOfferHour + (this.rules.refreshHours || 24) - this.model.hours);
     this.root.innerHTML = `<div class="crew-tabs-v85" role="group" aria-label="Effectifs Echo-9">${groups.map(([id,label]) => `<button type="button" class="button ${this.tab === id ? 'primary' : ''}" data-v85-tab="${id}" aria-pressed="${this.tab === id}">${label} · ${this.model[id].length}</button>`).join('')}</div>
-      <p class="crew-note-v85">${this.tab === 'candidates' ? `Dossiers conservés entre les sessions. Affectation : ${esc(costLabel(this.rules.recruitCost))}. Les portraits individuels ne sont pas encore produits.` : 'État, dotation et historique restent conservés entre équipe active et réserve.'}</p>
+      <p class="crew-note-v85">${this.tab === 'archives' ? 'Identités historiques distinctes du personnel embarqué. Les reconstitutions réussies ouvrent les dossiers ; aucun personnage d’archive ne rejoint physiquement le Tantalus.' : this.tab === 'candidates' ? `Dossiers conservés entre les sessions. Affectation : ${esc(costLabel(this.rules.recruitCost))}. Les portraits individuels ne sont pas encore produits.` : 'État, dotation et historique restent conservés entre équipe active et réserve.'}</p>
       ${this.tab === 'candidates' ? `<div class="crew-offer-v85"><button type="button" class="button" data-v85-action="refresh" ${this.model.locked || wait > 0 ? 'disabled' : ''}>RELÈVE DES CANDIDATS</button><span>${wait > 0 ? `Nouvelle relève dans ${Math.ceil(wait)} h de jeu` : 'Prochaine relève disponible'} · ${esc(costLabel(this.rules.refreshCost))}</span></div>` : ''}
       <div class="crew-grid">${current.map(member => this.card(member)).join('') || '<p>Aucun dossier dans cette section.</p>'}</div>
       <p class="crew-action-status-v85" role="status" aria-live="polite"></p>`;
     if (this.dialog.open) { if (this.getMember(this.selectedId)) this.renderDetail(); else this.close(); }
   }
   card(member) {
+    if (member.archive) return this.archiveCardV119(member);
     const profile = profileOf(member);
     const ranked = [...APTITUDE_DEFINITIONS_V85].sort((a,b) => aptitudeValue(member,b.id) - aptitudeValue(member,a.id));
     const vitals = member.candidate ? '' : `<div class="crew-vitals-v85">${[['health','Santé'],['stress','Stress'],['fatigue','Fatigue']].map(([key,label]) => `<label>${label} <b>${amount(member[key])}%</b><meter min="0" max="100" value="${amount(member[key])}" aria-label="${label}"></meter></label>`).join('')}</div>`;
-    return `<article class="crew-card ${member.selected ? 'selected' : ''}" data-v85-member="${esc(member.id)}"><span class="eyebrow">${esc(member.candidate ? 'DOSSIER DE TRANSFERT' : member.role || 'MARINE')} · ${esc(member.status)}</span><h3>${esc(member.name)}${member.callsign ? ` <small>« ${esc(member.callsign)} »</small>` : ''}</h3><p>${esc(profile?.background?.summary || 'Personnel permanent du Tantalus. Aucun passé supplémentaire inventé.')}</p>${profile ? `<p class="crew-tradeoffs-v85">Points forts : ${ranked.slice(0,2).map(a => `${esc(a.label)} ${amount(aptitudeValue(member,a.id))}`).join(' · ')}<br>À développer : ${esc(ranked.at(-1).label)} ${amount(aptitudeValue(member,ranked.at(-1).id))}</p><p class="crew-gear-summary-v85">Dotation : ${list(member.gearV85).map(item => esc(this.itemName(item))).join(' · ')}</p>` : ''}${vitals}<div class="button-row"><button type="button" class="button compact" data-v85-open="${esc(member.id)}">DOSSIER</button>${member.candidate ? `<button type="button" class="button compact primary" data-v85-action="recruit" data-v85-id="${esc(member.id)}" ${this.model.locked || this.model.credits < Number(this.rules.recruitCost?.credits || 0) ? 'disabled' : ''}>RECRUTER</button>` : `<button type="button" class="button compact" data-v85-action="assign" data-v85-id="${esc(member.id)}" ${this.model.locked || (member.status !== 'active' && !member.selected) ? 'disabled' : ''}>${member.selected ? 'VERS RÉSERVE' : 'AFFECTER'}</button><button type="button" class="button compact" data-v85-action="treat" data-v85-id="${esc(member.id)}" ${this.model.locked || member.status === 'deceased' ? 'disabled' : ''}>SOIGNER</button>`}</div></article>`;
+    const identity = member.identityV119;
+    const identitySummary = identity ? `<div class="crew-identity-v119"><strong>${esc(identity.profession)}</strong><span>${esc(identity.tacticalRole)} · ${esc(identity.traits[0].label)}</span><p>${esc(identity.shortStory.title)} — ${esc(identity.shortStory.text)}</p></div>` : '';
+    return `<article class="crew-card ${member.selected ? 'selected' : ''}" data-v85-member="${esc(member.id)}"><span class="eyebrow">${esc(member.candidate ? 'DOSSIER DE TRANSFERT' : member.role || 'MARINE')} · ${esc(member.status)}</span><h3>${esc(member.name)}${member.callsign ? ` <small>« ${esc(member.callsign)} »</small>` : ''}</h3>${identitySummary}<p>${esc(profile?.background?.summary || 'Personnel permanent du Tantalus. Aucun passé supplémentaire inventé.')}</p>${profile ? `<p class="crew-tradeoffs-v85">Points forts : ${ranked.slice(0,2).map(a => `${esc(a.label)} ${amount(aptitudeValue(member,a.id))}`).join(' · ')}<br>À développer : ${esc(ranked.at(-1).label)} ${amount(aptitudeValue(member,ranked.at(-1).id))}</p><p class="crew-gear-summary-v85">Dotation : ${list(member.gearV85).map(item => esc(this.itemName(item))).join(' · ')}</p>` : ''}${vitals}<div class="button-row"><button type="button" class="button compact" data-v85-open="${esc(member.id)}">DOSSIER</button>${member.candidate ? `<button type="button" class="button compact primary" data-v85-action="recruit" data-v85-id="${esc(member.id)}" ${this.model.locked || this.model.credits < Number(this.rules.recruitCost?.credits || 0) ? 'disabled' : ''}>RECRUTER</button>` : `<button type="button" class="button compact" data-v85-action="assign" data-v85-id="${esc(member.id)}" ${this.model.locked || (member.status !== 'active' && !member.selected) ? 'disabled' : ''}>${member.selected ? 'VERS RÉSERVE' : 'AFFECTER'}</button><button type="button" class="button compact" data-v85-action="treat" data-v85-id="${esc(member.id)}" ${this.model.locked || member.status === 'deceased' ? 'disabled' : ''}>SOIGNER</button>`}</div></article>`;
+  }
+  archiveCardV119(member) {
+    return `<article class="crew-card crew-archive-v119 ${member.selected ? 'selected' : ''}" data-v119-archive="${esc(member.id)}"><span class="eyebrow">MIRE · ${esc(member.status)}</span><h3>${esc(member.name)}</h3><p>${esc(member.role)} · ${esc(member.specialty)}</p><p class="crew-archive-era-v119">${esc(member.era)}</p><p>${esc(member.conditionLabel)}</p><small>Portrait dédié à produire · dossier historique, non opérateur jouable</small><div class="button-row"><button type="button" class="button compact" data-v85-open="${esc(member.id)}">${member.unlocked ? 'CONSULTER LE DOSSIER' : 'CONDITION D’ACCÈS'}</button></div></article>`;
   }
   open(id) {
     if (!this.getMember(id)) return;
@@ -74,10 +82,13 @@ export class CrewUiV85 {
   }
   renderDetail() {
     const member = this.getMember(this.selectedId); if (!member) return;
+    if (member.archive) { this.renderArchiveDetailV119(member); return; }
     const profile = profileOf(member), compare = this.getMember(this.compareId);
     const disabled = this.model.locked || member.candidate || member.status === 'deceased';
     const biographyLabels = {origin:'Origine',activity:'Activité antérieure',formation:'Formation',assignment:'Affectation',event:'Événement',motivation:'Motivation',habit:'Habitude',attachment:'Attache',personalObject:'Objet personnel'};
-    const biography = profile ? Object.entries(biographyLabels).map(([key,label]) => `<div><dt>${label}</dt><dd>${esc(profile.background?.[key] || 'Non renseigné')}</dd></div>`).join('') : '<p>Biographie historique conservée. Aucun événement antérieur ajouté rétroactivement.</p>';
+    const identity = member.identityV119;
+    const identityBiography = identity ? `<div><dt>Métier</dt><dd>${esc(identity.profession)}</dd></div><div><dt>Rôle de terrain</dt><dd>${esc(identity.tacticalRole)} — selon la dotation actuelle, sans restriction de formation.</dd></div><div><dt>Trait</dt><dd>${esc(identity.traits[0].label)} : ${esc(identity.traits[0].description)} Aucun bonus statistique.</dd></div><div><dt>Histoire courte</dt><dd>${esc(identity.shortStory.title)} — ${esc(identity.shortStory.text)}</dd></div><div><dt>Appel radio</dt><dd>${esc(identity.radio.acknowledge)} Réaction textuelle du projet ; aucune voix enregistrée.</dd></div>` : '';
+    const biography = profile ? Object.entries(biographyLabels).map(([key,label]) => `<div><dt>${label}</dt><dd>${esc(profile.background?.[key] || 'Non renseigné')}</dd></div>`).join('') + identityBiography : '<p>Biographie historique conservée. Aucun événement antérieur ajouté rétroactivement.</p>';
     const gearTargets = this.model.members.filter(other => other.id !== member.id && other.status !== 'deceased');
     const oldScroll = this.dialog.querySelector('.crew-dossier-body-v85')?.scrollTop || 0;
     const previousFocus = this.dialog.contains(this.document.activeElement) ? this.document.activeElement?.dataset : null;
@@ -94,13 +105,21 @@ export class CrewUiV85 {
       (matching || this.dialog.querySelector('[data-v85-close]'))?.focus({ preventScroll: true });
     }
   }
+  renderArchiveDetailV119(member) {
+    const body = member.unlocked ? `<p>${esc(member.summary)}</p><dl class="crew-biography-v85"><div><dt>Rôle</dt><dd>${esc(member.role)}</dd></div><div><dt>Spécialité</dt><dd>${esc(member.specialty)}</dd></div><div><dt>Période</dt><dd>${esc(member.era)}</dd></div><div><dt>Sources rencontrées</dt><dd>${member.sourceWorks.map(esc).join(' · ')}</dd></div></dl><section><h3>Profil d’étude MIRE</h3><p>Valeurs de simulation proposées par le projet, pas des statistiques canoniques ni des bonus accordés au personnel.</p><div class="crew-archive-stats-v119">${APTITUDE_DEFINITIONS_V85.map(stat => `<span>${esc(stat.label)} <b>${amount(member.aptitudes[stat.id])}</b></span>`).join('')}</div></section><section><h3>Équipement documenté</h3><ul>${member.equipment.map(item => `<li>${esc(item.label)} — aucune dotation transférée à l’inventaire</li>`).join('')}</ul></section><section><h3>Trace de récupération</h3><ul>${member.evidence.map(item => `<li>${esc(item.source)} · ${esc(item.campaignId)} · reconstitution MIRE réussie</li>`).join('')}</ul></section><blockquote>${esc(member.radioReaction)}</blockquote><p>Réaction textuelle adaptée par le projet, pas une citation du film ou du jeu.</p><a href="${esc(member.reference.url)}" target="_blank" rel="noopener noreferrer">${esc(member.reference.title)}</a>` : `<p>${esc(member.conditionLabel)}</p><p>Le registre d’identités est visible, mais ce dossier détaillé n’a pas été récupéré dans cette sauvegarde.</p>`;
+    this.dialog.innerHTML = `<header><div><span class="eyebrow">MIRE · PERSONNEL D’ARCHIVE</span><h2 id="crew-dossier-title-v85">${esc(member.name)}</h2><small>${esc(member.status)}</small></div><button type="button" class="button" data-v85-close>FERMER</button></header><div class="crew-dossier-body-v85"><p class="crew-note-v85">${esc(member.chronology)}</p><div class="crew-archive-art-v119">PORTRAIT DÉDIÉ À PRODUIRE<span>Le sprite d’un autre membre n’est pas réutilisé. Aucun déploiement jouable disponible.</span></div>${body}</div><footer><p class="crew-action-status-v85" role="status" aria-live="polite"></p>${member.unlocked ? `<button type="button" class="button" data-v85-action="archive-select" data-v85-id="${esc(member.id)}" ${this.model.locked || member.selected ? 'disabled' : ''}>${member.selected ? 'DOSSIER SÉLECTIONNÉ' : 'CONSERVER CE DOSSIER SÉLECTIONNÉ'}</button>` : ''}</footer>`;
+    if (this.dialog.open && !this.dialog.contains(this.document.activeElement)) this.dialog.querySelector('[data-v85-close]')?.focus({ preventScroll: true });
+  }
   click(event) {
     const button=event.target.closest('button'); if (!button || button.disabled) return;
     if (button.dataset.v85Close!==undefined) { this.close(); return; }
     if (button.dataset.v85Tab) { this.tab=button.dataset.v85Tab; this.render(this.save); this.root.querySelector(`[data-v85-tab="${this.tab}"]`)?.focus(); return; }
     if (button.dataset.v85Open) { this.open(button.dataset.v85Open); return; }
     const action=button.dataset.v85Action; if (!action) return;
-    const id=button.dataset.v85Id, args=action==='refresh'?[]:action==='train'?[id,button.dataset.v85Aptitude]:action==='transfer'?[id,this.dialog.querySelector(`#${button.dataset.v85Target}`)?.value,button.dataset.v85Item]:[id];
+    const id=button.dataset.v85Id;
+    // Historical MIRE dossiers are documentary records, never roster actors.
+    if (this.getMember(id)?.archive && action !== 'archive-select') return;
+    const args=action==='refresh'?[]:action==='train'?[id,button.dataset.v85Aptitude]:action==='transfer'?[id,this.dialog.querySelector(`#${button.dataset.v85Target}`)?.value,button.dataset.v85Item]:[id];
     const inDialog=this.dialog.contains(button), owner=inDialog?this.detailOwner:this.owner;
     try { this.onAction(action,args,owner); const status=(inDialog?this.dialog:this.root).querySelector('.crew-action-status-v85'); if(status)status.textContent='Action enregistrée.'; if(!inDialog&&!this.root.contains(this.document.activeElement))this.root.querySelector(`[data-v85-tab="${this.tab}"]`)?.focus(); }
     catch(error) { const status=(inDialog?this.dialog:this.root).querySelector('.crew-action-status-v85'); if(status)status.textContent=error.message; }

@@ -12,9 +12,12 @@ import {
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
 import { Echo9UiV110 } from './echo9-ui-v110.js';
+import { selectPremiumDossierV119 } from './premium-personnel-v119.js';
+import { getAllCostumesV119, getCostumeV119 } from './franchise-costumes-v119.js';
+import { CostumeArchivesUiV119 } from './costume-ui-v119.js';
 import { getJumpReadinessV115, confirmJumpV115, prepareJumpV116, cancelJumpV116, getJumpProgressV116, isJumpChargingV116, getShipWorldIdV116 } from './galaxy-jump-v115.js';
 import { setEcho9MarkingV110 } from './echo9-personnel-v110.js';
-import { isDeveloperShortcutV110, resolvePlayerViewV110, getCommandMissionsV110, commandMetricsV110 } from './player-surfaces-v110.js';
+import { isLocalDeveloperEnvironmentV119, isDeveloperShortcutV110, resolvePlayerViewV110, getCommandMissionsV110, commandMetricsV110 } from './player-surfaces-v110.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
 import { isShipAnimalTerrariumAtlasReadyV87 } from './ship-animal-terrarium-art-v87.js';
@@ -76,6 +79,8 @@ import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
 import { BioforgeRuntimeV80 } from './bioforge-runtime-v80.js';
 import { BioforgeUiV80, buildBioforgeUiModelV80 } from './bioforge-ui-v80.js';
 import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
+import { CloudUiV119 } from './cloud-ui-v119.js';
+import { validateCloudPayloadV119 } from './cloud-save-v119.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
@@ -167,6 +172,24 @@ let crewUiV85 = null;
 let placeablesDockV86 = null;
 let lastMissionSaveFailureToastV86 = -Infinity;
 let developerModeV110 = false;
+let cloudUiV119 = null;
+
+function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
+  const checked = validateCloudPayloadV119(payload);
+  if (!ownsTimelineV84(owner) || saveSystem.storage.getItem(saveSystem.key(slot)) !== expectedRaw)
+    throw new Error('Le profil a changé : aucune sauvegarde distante appliquée.');
+  if (slot !== saveSystem.profile) {
+    saveSystem.importInactiveProfileV119(JSON.stringify(checked), slot, expectedRaw);
+    renderProfiles(); return;
+  }
+  // Validation precedes runtime invalidation; no delayed combat, dialogue,
+  // insertion or editor callback may write into the new cloud timeline.
+  discardProfileRuntimeV78();
+  saveSystem.import(JSON.stringify(checked), slot);
+  sessionStart = Date.now(); ensureAdvancedState(saveSystem.data);
+  activeWorld = WORLDS.find(world => world.id === saveSystem.data.worldId) || WORLDS[0];
+  applyRuntimeSettings(); renderAll(); showView('settings');
+}
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -444,7 +467,7 @@ function prepareBioforgeViewV80() {
       bioforgeRuntimeV80.prepare(state);
       bioforgeRuntimeV80.purgeBioforgeV80(state.recovery.reason || 'recovery-required');
     } else if (state?.activeSession && state.activeSession.phase !== 'return') {
-      bioforgeRuntimeV80.start({ resumeState: state });
+      bioforgeRuntimeV80.start({ resumeState: state, costumeId: saveSystem.data.player.costumeId });
     } else {
       bioforgeRuntimeV80.prepare(state);
     }
@@ -459,6 +482,7 @@ function startBioforgeFromTerminalV80(configuration) {
   if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84)
     return bioforgeCommandReceiptV87({ applied: false, reason: 'stale-bioforge-owner' });
   const result = bioforgeCommandReceiptV87(bioforgeRuntimeV80.start({
+    costumeId: saveSystem.data.player.costumeId,
     configuration,
     resumeState: saveSystem.data.bioforgeV80,
     seed: 80000 + Number(saveSystem.data.bioforgeV80?.serial || 0) + 1
@@ -681,6 +705,7 @@ function showView(name) {
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubOwnerV84 = currentOwnerV84();
+    hubEngine.playerCostumeIdV119 = saveSystem.data.player.costumeId;
     hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90 });
     if (hubEngine.isPortMeridienV90()) { byId('breadcrumb').textContent = 'PALISADE // PORT-MÉRIDIEN'; byId('view-title').textContent = 'Le quai des vivants'; }
   }
@@ -1038,7 +1063,7 @@ function renderClock() {
   const hours = Math.floor(hour);
   const minutes = Math.floor((hour % 1) * 60);
   byId('clock').textContent = `J${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-  byId('save-state').textContent = `Profil ${saveSystem.profile} · ${RELEASE.version} · ${number(saveSystem.data.statistics.campaigns)} opérations`;
+  byId('save-state').textContent = `Profil ${saveSystem.profile} · ${RELEASE.version} · ${number(saveSystem.data.statistics.campaigns)} opérations · ${cloudUiV119?.sync ? (cloudUiV119.sync.state(saveSystem.profile) === 'local' ? 'LOCAL' : cloudUiV119.sync.state(saveSystem.profile) === 'synced' ? 'SYNC OK' : cloudUiV119.sync.state(saveSystem.profile) === 'offline' ? 'HORS LIGNE' : cloudUiV119.sync.state(saveSystem.profile) === 'conflict' ? 'CONFLIT' : 'CLOUD À VÉRIFIER') : 'LOCAL'}`;
 }
 
 function renderCommand() {
@@ -1489,7 +1514,8 @@ function ensureCostumeFilterOptions(id, field) {
 function runCrewActionV85(action, args, owner) {
   if (standaloneContext || activeView !== 'crew') throw new Error('Ouvrez Echo-9 depuis votre campagne pour gérer le personnel.');
   const actions = { recruit: recruitCandidateV85, refresh: refreshRecruitmentV85, train: trainCrewAptitudeV85,
-    transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember, marking: setEcho9MarkingV110 };
+    transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember, marking: setEcho9MarkingV110,
+    'archive-select': (save, id) => { const result = selectPremiumDossierV119(save, id); if (!result.ok) throw new Error('Reconstitution MIRE réussie nécessaire.'); return result; } };
   const result = commitCrewTransactionV85({ saveSystem, owner, ownsOwner: ownsTimelineV84,
     action: actions[action], args, prepare: ensureAdvancedState,
     advanceTime: (candidate, hours) => advanceGalaxy(candidate, { hours, advanceClock: false }) });
@@ -1516,7 +1542,7 @@ function renderCrew() {
     palette: byId('costume-palette-filter').value,
     wear: byId('costume-wear-filter').value
   };
-  const activeCostume = COSTUMES.find((costume) => costume.id === saveSystem.data.player.costumeId) || COSTUMES[0];
+  const activeCostume = getCostumeV119(saveSystem.data.player.costumeId, COSTUMES) || COSTUMES[0];
   byId('costume-preview-name').textContent = activeCostume.name;
   byId('costume-preview-meta').textContent = `${activeCostume.body} · ${activeCostume.palette} · ${activeCostume.wear}`.toUpperCase();
   const term = byId('costume-search').value.trim().toLowerCase();
@@ -1616,6 +1642,7 @@ function renderMissionEquipment() {
   placeablesDockV86?.render();
 }
 
+let costumeArchivesUiV119 = null;
 function renderAll() {
   renderClock();
   renderCommand();
@@ -1628,6 +1655,8 @@ function renderAll() {
   renderEnemies();
   renderVehicles();
   renderCrew();
+  if (!costumeArchivesUiV119) costumeArchivesUiV119 = new CostumeArchivesUiV119({ root: byId('costume-archives-v119'), COSTUMES });
+  costumeArchivesUiV119.update(saveSystem.data, { operationLocked: Boolean(saveSystem.data.strategy.currentOperation) });
   renderHubStatus();
   renderEditorStatus();
   renderProfiles();
@@ -2078,7 +2107,7 @@ function launchCampaign(campaign = null) {
     weaponCatalog: WEAPONS,
     equipmentCatalog: EQUIPMENT,
     vehicleCatalog: VEHICLES,
-    costumeCatalog: COSTUMES,
+    costumeCatalog: getAllCostumesV119(COSTUMES),
     neuroProfileCatalog: NEURO_XENO_PROFILES,
     apexDossierCatalog: APEX_DOSSIERS
   });
@@ -2754,7 +2783,7 @@ function launchForgeMissionPlaytest(project) {
     weaponCatalog: WEAPONS,
     equipmentCatalog: EQUIPMENT,
     vehicleCatalog: VEHICLES,
-    costumeCatalog: COSTUMES,
+    costumeCatalog: getAllCostumesV119(COSTUMES),
     neuroProfileCatalog: NEURO_XENO_PROFILES,
     apexDossierCatalog: APEX_DOSSIERS
   });
@@ -2809,6 +2838,7 @@ function playtestEditor() {
     standaloneContext = 'forge-playtest';
     showView('hub');
     hubEngine.stop(false);
+    hubEngine.playerCostumeIdV119 = sandbox.player.costumeId;
     hubEngine.start(forgePlaytest.hubState, {
       editorProject: project,
       routineContextV62: getHubRoutineContextV62(sandbox)
@@ -2956,7 +2986,7 @@ function bind() {
     catch (error) { saveSystem.data.strategy.plannedCampaignId = previous; renderCommandMissionsV110(); toast(error.message); }
   };
   globalThis.addEventListener('keydown', event => {
-    if (!isDeveloperShortcutV110(event) || byId('app').hidden || standaloneContext) return;
+    if (!isLocalDeveloperEnvironmentV119(globalThis.location?.hostname) || !isDeveloperShortcutV110(event) || byId('app').hidden || standaloneContext) return;
     event.preventDefault();
     developerModeV110 = !developerModeV110;
     all('[data-developer-only-v110]').forEach(element => { element.hidden = !developerModeV110; });
@@ -3166,6 +3196,17 @@ async function boot() {
   setupAlphaBravoCommandDockV69();
   setupAlienSurvivalDockV70();
   bind();
+  cloudUiV119 = new CloudUiV119(byId('cloud-profiles-v119'), {
+    saveSystem, applyRemote: applyCloudProfileV119, getOwner: currentOwnerV84, ownsOwner: ownsTimelineV84,
+    onStatus: () => renderClock(),
+    onExternalLocalChange: key => {
+      if (key !== saveSystem.key() || saveSystem.recoveryNeeded) return;
+      discardProfileRuntimeV78();
+      saveSystem.recoveryNeeded = { profile: saveSystem.profile, status: 'unavailable', code: 'SAVE_EXTERNAL_CHANGE' };
+      showView('settings'); renderProfiles();
+      toast('Ce profil a changé dans un autre onglet. Rechargez-le avant de poursuivre.');
+    }
+  });
   applyRuntimeSettings();
   renderAll();
   startGalaxyJumpSchedulerV116();

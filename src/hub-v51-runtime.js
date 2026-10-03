@@ -52,6 +52,11 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const imageReady = (image) => Boolean(image?.complete && image.naturalWidth);
 
+// Enter must retain native activation while a hub menu/control owns focus.
+// Gameplay canvas (and legacy events without a DOM target) keep F/Enter fire.
+const isHubUiKeyTargetV119 = target => Boolean(target?.isContentEditable
+  || target?.closest?.('button, input, select, textarea, form, a[href], [role="button"], [contenteditable]:not([contenteditable="false"])'));
+
 function createImage(source) {
   const image = new Image();
   image.decoding = 'async';
@@ -383,7 +388,7 @@ export class HubGame extends HubGameV50 {
     this.traversalImages = new Map(Object.entries(HUB_TRAVERSAL_ART_FILES).map(([kind, source]) => [kind, createImage(source)]));
     this.v51Initialized = false;
     globalThis.addEventListener?.('keydown', (event) => {
-      if (!this.running || event.repeat) return;
+      if (!this.running || event.repeat || event.defaultPrevented || isHubUiKeyTargetV119(event.target)) return;
       if (event.code === 'KeyF' || event.code === 'Enter') {
         event.preventDefault?.();
         this.fire();

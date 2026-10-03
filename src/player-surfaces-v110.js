@@ -1,4 +1,8 @@
 // Developer visibility is session-only convenience, never an authentication boundary.
+export function isLocalDeveloperEnvironmentV119(hostname = '') {
+  return ['localhost', '127.0.0.1', '[::1]', '::1'].includes(String(hostname).toLowerCase());
+}
+
 export function isDeveloperShortcutV110(event) {
   const target = event?.target;
   return Boolean(event && !event.repeat && !event.isComposing && event.ctrlKey && event.altKey && event.shiftKey

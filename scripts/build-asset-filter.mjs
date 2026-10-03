@@ -26,6 +26,7 @@ import { VEHICLE_NATIVE_POSES_V117 } from '../src/vehicle-native-visuals-v117.js
 import { WEAPON_NATIVE_PROFILES_V118 } from '../src/weapon-native-visuals-v118.js';
 import { VEHICLE_NATIVE_POSES_V118 } from '../src/vehicle-native-visuals-v118.js';
 import { ENEMY_SOURCE_ADAPTATIONS_V118 } from '../src/enemy-source-adaptations-v118.js';
+import { publicReleasePathAdmissionV119, validatePlayerCostumeAdmissionsV119 } from './public-release-admissions-v119.mjs';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -56,6 +57,7 @@ export function createBuildAssetFilter(projectRoot, {
   readyV66Assets = V66_READY_ENEMY_PROFILE_ASSETS,
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
+  validatePlayerCostumeAdmissionsV119();
   const v118Folders = ['assets/openai/equipment/v118-weapons', 'assets/openai/equipment/v118-vehicles', 'assets/openai/sprites/animated-import-v118', 'assets/openai/sprites/static-game-v118'];
   const readyV118Paths = new Set([
     ...WEAPON_NATIVE_PROFILES_V118, ...Object.values(VEHICLE_NATIVE_POSES_V118), ...ENEMY_IMPORT_ANIMATIONS_V118, ...ENEMY_SOURCE_ADAPTATIONS_V118
@@ -147,6 +149,12 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath === '') return true;
+    const v119Admission = publicReleasePathAdmissionV119(sourcePath, {
+      directory: ['src/vendor', 'assets/openai/sprites/player/costumes-v119', 'assets/openai/sprites/player/costumes-v119/nostromo-crew'].includes(sourcePath)
+    });
+    if (v119Admission !== null) return v119Admission;
+    if (/^docs\/references\/(?:V119_|v119-)/i.test(sourcePath)) return false;
     if (v118Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV118Paths.has(sourcePath);
     if (/^assets\/openai\/(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v118(?:[^0-9]|$)/i.test(sourcePath)) return v118Folders.includes(sourcePath);
     if (/^docs\/references\/(?:V118_|v118-)/i.test(sourcePath)) return false;

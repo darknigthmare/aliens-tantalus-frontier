@@ -25,7 +25,9 @@ import {
   resolveSpriteSheet
 } from './sprite-animation-runtime.js';
 import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
-import { hubFarParallaxV116, drawHubFloorPerspectiveV116, drawHubContactShadowV116 } from './hub-depth-presentation-v116.js';
+import { hubFarParallaxV116, drawHubRoomDepthV119, drawHubContactShadowV116 } from './hub-depth-presentation-v116.js';
+import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
+import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -399,8 +401,12 @@ export class HubGame {
   // Shared with V51's overridden world renderer. Never invent a global walk
   // plane for editor-authored floors or alter actor/collider coordinates.
   drawDepthFloorV116(ctx) {
-    if (this.depthPresentationV116 && !this.editorPlaytest && this.useGlobalFloor !== false)
-      drawHubFloorPerspectiveV116(ctx, this.camera.x, { width: LOGICAL_WIDTH, height: LOGICAL_HEIGHT, floorY: FLOOR_Y });
+    if (!this.depthPresentationV116 || this.editorPlaytest || this.useGlobalFloor === false) return;
+    const annex = this.currentAnnexV71?.();
+    const rooms = annex ? [annex] : HUB_DECKS[this.state?.deck || 0].rooms;
+    const cameraX = annex ? this.annexCameraV71.x : this.camera.x;
+    for (const room of rooms) drawHubRoomDepthV119(ctx, cameraX, room,
+      { width: LOGICAL_WIDTH, height: LOGICAL_HEIGHT, floorY: FLOOR_Y });
   }
 
   drawDepthContactShadowV116(ctx, actor, floorY) {
@@ -756,6 +762,7 @@ export class HubGame {
     return {
       running: this.running,
       presentationV116: this.depthPresentationV116 ? 'layered-2.5d-fixed-walk-plane' : '2d',
+      roomPresentationV119: getHubRoomPresentationV119(this.currentAnnexV71?.() || room, this.depthPresentationV116),
       deck: this.state?.deck ?? 0,
       roomId: room.id,
       roomBackground: room.id === DROPSHIP_HANGAR_ART_V55.roomId || resolveHubRoomArtV56(room.id) ? null : room.background,
@@ -874,7 +881,7 @@ export class HubGame {
     ctx.fillStyle = room.index % 2 ? '#0a1111' : '#080e0f';
     ctx.fillRect(room.xStart, 0, roomWidth, FLOOR_Y);
     this.drawHubRoomFarV58(ctx, room);
-    if (modularRoom || modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage);
+    if (modularRoom || modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage, room);
     if (modularRoom) {
       this.drawModularRoomV56(ctx, room, 'back');
       this.drawHubRoomMidV58(ctx, room);
@@ -894,7 +901,7 @@ export class HubGame {
         ctx.drawImage(image, x, y, width, height);
         ctx.restore();
       }
-      if (!modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage);
+      if (!modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage, room);
     }
     const edgeShade = ctx.createLinearGradient(room.xStart, 0, room.xEnd, 0);
     edgeShade.addColorStop(0, 'rgba(0, 3, 4, .42)');
@@ -1055,7 +1062,7 @@ export class HubGame {
     ctx.restore();
   }
 
-  drawViewportParallax(ctx, viewport, image) {
+  drawViewportParallax(ctx, viewport, image, room = null) {
     if (!assetReady(image)) return;
     ctx.save();
     ctx.beginPath();
@@ -1067,7 +1074,9 @@ export class HubGame {
     const height = image.naturalHeight * scale;
     const width = image.naturalWidth * scale;
     const maxDrift = Math.max(0, width - viewport.w);
-    const drift = maxDrift ? (this.camera.x * 0.09) % maxDrift : 0;
+    const presentation = getHubRoomPresentationV119(room, this.depthPresentationV116);
+    const drift = maxDrift && !this.reducedMotion && presentation.presentationMode === '2.5d'
+      ? clamp((this.camera.x - (room?.xStart || 0)) * .09, 0, maxDrift) : maxDrift / 2;
     ctx.globalAlpha = 0.68;
     ctx.drawImage(image, viewport.x - drift, viewport.y - (height - viewport.h) / 2, width, height);
     ctx.globalAlpha = 1;
@@ -1179,6 +1188,7 @@ export class HubGame {
   }
 
   drawPlayer(ctx) {
+    loadPlayerCostumeAssetsV119(this.playerSheets, this.playerCostumeIdV119);
     const shadowFloor = this.currentAnnexV71?.()?.world?.floorY ?? FLOOR_Y;
     if (!this.ventActorV62?.ventTransit) this.drawDepthContactShadowV116(ctx, this.player, shadowFloor);
     const request = resolvePlayerAnimation(this.player, false);
@@ -1195,6 +1205,8 @@ export class HubGame {
       sample,
       pivot: SPRITE_PIVOTS[sheet?.pivot],
       entity: this.player,
+      costumeId: this.playerCostumeIdV119,
+      costumeImages: this.playerSheets,
       surface: 'hub'
     });
     this.player.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
