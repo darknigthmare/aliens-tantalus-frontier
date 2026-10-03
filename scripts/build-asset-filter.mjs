@@ -2,6 +2,20 @@ import { relative } from 'node:path';
 import { V65_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v65.js';
 import { V66_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v66.js';
 import { V81_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v81.js';
+import { ENEMY_SPRITE_REVISIONS_V92 } from '../src/enemy-sprite-revisions-v92.js';
+import { ENEMY_SPRITE_REVISIONS_V93 } from '../src/enemy-sprite-revisions-v93.js';
+import { ENEMY_ADDITIONAL_POSES_V94 } from '../src/enemy-additional-poses-v94.js';
+import { ENEMY_USER_CREATIONS_V95 } from '../src/enemy-user-creations-v95.js';
+import { USER_EQUIPMENT_ART_V95 } from '../src/user-equipment-art-v95.js';
+import { USER_REFERENCE_GALLERY_V95 } from '../src/user-reference-effects-v95.js';
+import { ENEMY_HISTORICAL_VARIANTS_V95 } from '../src/enemy-historical-variants-v95.js';
+import { ENEMY_DEDICATED_POSES_V96 } from '../src/enemy-dedicated-poses-v96.js';
+import { ENEMY_EXPANSION_ASSETS_V96 } from '../src/enemy-expansion-assets-v96.js';
+import { ENEMY_EXPANSION_QUEEN_V96 } from '../src/enemy-expansion-queen-v96.js';
+import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_DEDICATED_POSES_V98 } from '../src/enemy-dedicated-poses-v98.js';
+import { ENEMY_DEDICATED_POSES_V99 } from '../src/enemy-dedicated-poses-v99.js';
+import { USER_REFERENCE_LIBRARY_V100 } from '../src/user-reference-library-v100.js';
 import { ENEMY_IMPORT_ADMISSIONS_V103 } from '../src/enemy-import-admissions-v103.js';
 import { ENEMY_IMPORT_ADMISSIONS_V105 } from '../src/enemy-import-admissions-v105.js';
 import { ENEMY_IMPORT_ADMISSIONS_V106 } from '../src/enemy-import-admissions-v106.js';
@@ -28,15 +42,44 @@ import { VEHICLE_NATIVE_POSES_V118 } from '../src/vehicle-native-visuals-v118.js
 import { ENEMY_SOURCE_ADAPTATIONS_V118 } from '../src/enemy-source-adaptations-v118.js';
 import { publicReleasePathAdmissionV119, validatePlayerCostumeAdmissionsV119 } from './public-release-admissions-v119.mjs';
 import { publicReleasePathAdmissionV120 } from './public-release-admissions-v120.mjs';
+import { publicReleasePathAdmissionV121 } from './public-release-admissions-v121.mjs';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
   'assets/openai/sprites/static-import-v109',
   'assets/openai/sprites/static-game-v109',
+  'docs/references/v118-batch',
+  'docs/references/v117-batch',
+  'docs/references/v116-user',
+  'docs/references/v116-weapons',
+  'docs/references/v111-batch',
+  'docs/references/v110-batch',
+  'docs/references/v109-batch',
+  'docs/references/v108-batch',
   'assets/openai/sprites/static-import-v108',
   'assets/openai/sprites/static-game-v108',
+  'docs/references/v107-batch',
   'assets/openai/sprites/static-import-v107',
   'assets/openai/sprites/static-game-v107',
+  'docs/references/v106-batch',
+  'docs/references/v105-import-sprites',
+  'docs/references/v105-integration',
+  'docs/references/v104-import-sprites',
+  'docs/references/v103-import-sprites',
+  'docs/references/v100-user-pack',
+  'docs/references/v101-trials-roster',
+  'docs/references/v102-finalization',
+  // Source inventory, prompts, native candidates and measurements remain private.
+  'docs/references/v95-user-creatures',
+  'docs/references/v96-xeno-trials',
+  'docs/references/v97-batch-050',
+  'docs/references/v98-batch-050',
+  'docs/references/v99-batch-050',
+  'docs/V90_PORT_MERIDIEN_20260923.md',
+  'docs/V90_CATALOG_BEHAVIORS_20260923.md',
+  'docs/V90_NATIVE_CAMPAIGN_BEHAVIORS_20260923.md',
+  'docs/V88_OPENING_PROGRESS_20260923.md',
+  'docs/V89_OPENING_EXERCISE_20260923.md',
   'assets/openai/sprites/raw',
   'assets/openai/v65-enemy-profile-normalization-report.json',
   'assets/openai/sprites/normalized/equipment',
@@ -119,10 +162,13 @@ export function createBuildAssetFilter(projectRoot, {
     asset.reviewStatus === 'accepted-multi-pose-adaptation' && asset.action === 'light'
     && asset.posesVerified === true && asset.alphaVerified === true && asset.canonExact === false
     && /^[a-f0-9]{64}$/.test(asset.sha256 || '') && asset.frames.length === 4
-    && /^\/assets\/openai\/sprites\/animated-import-v109\/[a-z0-9-]+\.png$/.test(asset.path || ''))
-    .map(asset => asset.path.slice(1)));
+    && /^\/assets\/openai\/sprites\/animated-import-v109\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV108Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V108.map(asset => asset.path.slice(1)));
-  const readyV107Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V107.map(asset => asset.path.slice(1)));
+  const readyV107Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V107.filter(asset =>
+    asset.reviewStatus === 'accepted-multi-pose-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && /^\/assets\/openai\/sprites\/animated-import-v107\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV106Paths = new Set([...ENEMY_IMPORT_ADMISSIONS_V106, ...USER_SPECIMEN_ART_V106].filter(asset =>
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && /^\/assets\/openai\/sprites\/static-(?:import|game)-v106\/[a-z0-9-]+\.png$/.test(asset.path || '')
@@ -135,7 +181,38 @@ export function createBuildAssetFilter(projectRoot, {
     asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && asset.path === `/assets/openai/sprites/static-import-v103/${asset.slug}.png`
     && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
+  const originalV100Paths = new Set(USER_REFERENCE_LIBRARY_V100.filter(entry =>
+    entry.combatReady === false && /^[a-f0-9]{64}$/.test(entry.sourceSha256 || entry.sha256 || '')
+    && /^\/assets\/user\/(?:pack|recovery)-v100\/[a-z0-9-]+\.(?:jpg|webp)$/.test(entry.path || ''))
+    .map(entry => entry.path.slice(1)));
   const readyV65Paths = new Set(V65_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.path.replace(/^\//, '')));
+  const readyV99Paths = new Set(ENEMY_DEDICATED_POSES_V99.filter(asset => asset.batch === 'v99-050'
+    && asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && asset.path === `/assets/openai/sprites/static-enemy-v99/${asset.profileId}.png`).map(asset => asset.path.slice(1)));
+  const readyV98Paths = new Set(ENEMY_DEDICATED_POSES_V98.filter(asset => asset.batch === 'v98-050'
+    && asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && asset.path === `/assets/openai/sprites/static-enemy-v98/${asset.profileId}.png`).map(asset => asset.path.slice(1)));
+  const readyV97Paths = new Set(ENEMY_DEDICATED_POSES_V97.filter(asset => asset.batch === 'v97-050'
+    && asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && asset.path === `/assets/openai/sprites/static-enemy-v97/${asset.profileId}.png`).map(asset => asset.path.slice(1)));
+  const readyV96Paths = new Set([...ENEMY_DEDICATED_POSES_V96, ...ENEMY_EXPANSION_ASSETS_V96, ...ENEMY_EXPANSION_QUEEN_V96]
+    .filter(asset => asset.reviewStatus === 'accepted-static-adaptation'
+      && /^\/assets\/openai\/sprites\/static-enemy-v96\/[a-z0-9-]+\.png$/.test(asset.path || '')
+      && /^[a-f0-9]{64}$/.test(asset.sha256 || '') && asset.sourceWidth > 0 && asset.sourceHeight > 0)
+    .map(asset => asset.path.slice(1)));
+  const readyStaticPaths = new Set([...ENEMY_SPRITE_REVISIONS_V92, ...ENEMY_SPRITE_REVISIONS_V93, ...ENEMY_ADDITIONAL_POSES_V94]
+    .filter(asset => asset.reviewStatus === 'accepted-static-adaptation')
+    .map(asset => asset.path.slice(1)));
+  const readyV95Paths = new Set([
+    ...ENEMY_USER_CREATIONS_V95.filter(asset => asset.reviewStatus === 'accepted-static-adaptation')
+      .flatMap(asset => [asset, ...(asset.states || [])]),
+    ...USER_EQUIPMENT_ART_V95,
+    ...USER_REFERENCE_GALLERY_V95,
+    ...Object.values(ENEMY_HISTORICAL_VARIANTS_V95).flatMap(group => group.states)
+  ].filter(asset => asset.reviewStatus === 'accepted-static-adaptation'
+    && /^\/assets\/openai\/sprites\/(?:static-enemy|user-equipment)-v95\/[a-z0-9-]+\.png$/.test(asset.path || '')
+    && /^[a-f0-9]{64}$/.test(asset.sha256 || '') && asset.sourceWidth > 0 && asset.sourceHeight > 0)
+    .map(asset => asset.path.slice(1)));
   // Both explicit review and exact profile ownership are required. A similarly
   // named file, nested candidate or newly present atlas cannot enter dist.
   const readyV66Paths = new Set(readyV66Assets
@@ -150,14 +227,18 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    // fs.cp also visits the source root (relative path ''). This is a container,
+    // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    if (sourcePath === 'docs' || sourcePath.startsWith('docs/')) return false;
+    const v121Admission=publicReleasePathAdmissionV121(sourcePath,{directory:['assets/openai/equipment/v121-weapons','assets/openai/equipment/v121-root-weapons','assets/openai/equipment/v121-vehicles'].includes(sourcePath)});
+    if (v121Admission!==null) return v121Admission;
     const v120Admission = publicReleasePathAdmissionV120(sourcePath, {
       directory: ['assets/openai/equipment/v120-weapons', 'assets/openai/equipment/v120-vehicles'].includes(sourcePath)
     });
     if (v120Admission !== null) return v120Admission;
-    const v119Admission = publicReleasePathAdmissionV119(sourcePath, {
-      directory: ['src/vendor', 'assets/openai/sprites/player/costumes-v119', 'assets/openai/sprites/player/costumes-v119/nostromo-crew'].includes(sourcePath)
-    });
+    const v119Admission = publicReleasePathAdmissionV119(sourcePath, { directory: ['src/vendor',
+      'assets/openai/sprites/player/costumes-v119', 'assets/openai/sprites/player/costumes-v119/nostromo-crew'].includes(sourcePath) });
     if (v119Admission !== null) return v119Admission;
     if (/^docs\/references\/(?:V119_|v119-)/i.test(sourcePath)) return false;
     if (v118Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV118Paths.has(sourcePath);
@@ -170,8 +251,10 @@ export function createBuildAssetFilter(projectRoot, {
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v116(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === v116AutomatonFolder;
     if (sourcePath.startsWith(v116WeaponFolder + '/')) return readyV116WeaponPaths.has(sourcePath);
     if (/^assets\/openai\/equipment\/(?:[^/]+\/)*[^/]*v116(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === v116WeaponFolder;
+    if (/^docs\/references\/(?:V116_|v116-)/i.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v114/')) return readyV114Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v114(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/animated-import-v114';
+    if (/^docs\/references\/(?:V114_|v114-)/i.test(sourcePath)) return false;
     if (v113Folders.some(folder => sourcePath.startsWith(folder + '/'))) return readyV113Paths.has(sourcePath);
     if (/^assets\/(?:openai\/)?(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v113(?:[^0-9]|$)/i.test(sourcePath)) return v113Folders.includes(sourcePath);
     if (/^docs\/references\/(?:V113_|v113-)/i.test(sourcePath)) return false;
@@ -180,24 +263,36 @@ export function createBuildAssetFilter(projectRoot, {
     if (/^assets\/openai\/(?:sprites|equipment)\/(?:[^/]+\/)*[^/]*v112(?:[^0-9]|$)/i.test(sourcePath)) {
       return ['assets/openai/sprites/static-import-v112', 'assets/openai/sprites/static-game-v112', 'assets/openai/equipment/v112-equipment'].includes(sourcePath);
     }
+    if (/^docs\/references\/(?:V112_|v112-)/i.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/static-game-v111/')) return readyV111Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v111(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/static-game-v111';
+    if (/^docs\/references\/(?:V111_|v111-)/.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/static-game-v110/')) return readyV110Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v110(?:[^0-9]|$)/i.test(sourcePath)) return sourcePath === 'assets/openai/sprites/static-game-v110';
+    if (/^docs\/references\/(?:V110_|v110-)/.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v109/')) return readyV109Paths.has(sourcePath);
+    // Other V109 sprite folders remain private until explicitly admitted.
     if (/^assets\/openai\/sprites\/(?:[^/]+\/)*[^/]*v109(?:[^0-9]|$)/i.test(sourcePath)) {
       return sourcePath === 'assets/openai/sprites/animated-import-v109';
     }
+    if (/^docs\/references\/(?:V109_|v109-)/.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v108/')) return readyV108Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/animated-import-v107/')) return readyV107Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/static-(?:import|game)-v106\//.test(sourcePath)) return readyV106Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-import-v105/')) return readyV105Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-import-v103/')) return readyV103Paths.has(sourcePath);
-    if (sourcePath === 'docs' || sourcePath.startsWith('docs/')) return false;
+    if (/^assets\/user\/(?:pack|recovery)-v100\//.test(sourcePath)) return originalV100Paths.has(sourcePath);
+    if (sourcePath.startsWith('assets/openai/sprites/static-enemy-v99/')) return readyV99Paths.has(sourcePath);
+    if (sourcePath.startsWith('assets/openai/sprites/static-enemy-v98/')) return readyV98Paths.has(sourcePath);
+    if (sourcePath.startsWith('assets/openai/sprites/static-enemy-v97/')) return readyV97Paths.has(sourcePath);
+    if (/^assets\/openai\/sprites\/static-enemy-v96\//.test(sourcePath)) return readyV96Paths.has(sourcePath);
+    if (/^assets\/openai\/sprites\/(?:static-enemy|user-equipment)-v95\//.test(sourcePath)) return readyV95Paths.has(sourcePath);
+    if (/^assets\/openai\/sprites\/static-enemy-v(?:92|93|94)\//.test(sourcePath)) return readyStaticPaths.has(sourcePath);
+    if (/^docs\/references\/(?:V(?:89|90|91)_|v(?:89|90|91)-)/.test(sourcePath)) return false;
     // Production references also contain source-contact sheets, anchors and
     // full generation prompts. Reject their root before cp descends into it;
     // public provenance/version/validation reports outside this scope remain.
-    if (/^docs\/references\/(?:V(?:66|73|74|75|76|77|78|79|80|81|82|83|84|85|86)_|v(?:66|73|74|75|76|77|78|79|80|81|82|83|84|85|86)-)/.test(sourcePath)) return false;
+    if (/^docs\/references\/(?:V(?:66|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88)_|v(?:66|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88)-)/.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/normalized/enemy-profiles-v65/')) {
       return readyV65Paths.has(sourcePath);
     }

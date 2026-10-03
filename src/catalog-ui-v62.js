@@ -19,7 +19,7 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
-import { resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v120.js';
+import { resolveWeaponReferenceCoverageV121 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v121.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -845,7 +845,7 @@ export class CatalogWorkbenchV62 {
     }
     if (technical && record.visual?.visualMode === 'static-pose') this.detail.append(createElement(this.document, 'p', 'catalog-v62__fact-note',
       record.visual.usage === 'catalog-inspection-only'
-        ? 'Vue d’inspection fixe ; atlas animé conservé en mission'
+        ? 'Vue d’inspection fixe ; cette adaptation ne produit aucune animation'
         : `${importWalkV107(record.id) ? `Aperçu fixe du dossier · ${importWalkV107(record.id).label} · cycle de marche disponible en campagne, BIOFORGE et Trials${getEnemyImportAttackV109(getEnemyStaticPoseV96(record.id)) ? ' ; frappe légère uniquement dans Xeno Trials' : ''}` : 'Pose fixe native · animations manquantes'} · ${record.visual.historicalBehaviorPreserved ? 'comportement historique conservé' : record.combatBehavior ? 'comportement spécifique documenté et adapté' : 'comportement de campagne simplifié'} · adaptation du projet, fidélité canonique non certifiée.`));
     // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);

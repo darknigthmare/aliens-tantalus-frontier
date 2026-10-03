@@ -1,4 +1,7 @@
 import { WEAPONS_ADDITIONS_V116 } from './weapon-native-visuals-v116.js';
+import { ADMITTED_WEAPON_ADDITIONS_V121 } from './weapon-release-v121.js';
+import { VEHICLE_CATALOG_ADDITIONS_V121 } from './vehicle-catalog-additions-v121.js';
+import { REVIEWED_EQUIPMENT_V121 } from './equipment-release-v121.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 
 export const RELEASE = Object.freeze({
@@ -201,7 +204,7 @@ export const WEAPONS = Object.freeze([...Array.from({ length: 146 }, (_, index) 
     rarity: rarity(index), provenance: index < weaponSeeds.length ? 'licensed-reference' : 'gameplay-variant',
     tags: [seed[1], index % 3 === 0 ? 'acid-safe' : 'field', index % 5 === 0 ? 'heavy' : 'portable']
   };
-}), ...WEAPONS_ADDITIONS_V116]);
+}), ...WEAPONS_ADDITIONS_V116, ...ADMITTED_WEAPON_ADDITIONS_V121]);
 
 const equipmentSeeds = [
   'Motion Tracker', 'Access Tuner', 'Maintenance Jack', 'Cutting Torch', 'Flashlight', 'Medkit',
@@ -401,7 +404,7 @@ const vehicleSeeds = [
   ['Reef Hydrofoil', 'maritime', 5], ['Ripper Siege Loader', 'exosuit', 1]
 ];
 const vehicleFits = ['Standard', 'Recon', 'Assault', 'Rescue', 'Colonial', 'Frontier', 'Prototype', 'Apex'];
-export const VEHICLES = Object.freeze(Array.from({ length: 279 }, (_, index) => {
+const legacyVehiclesV50 = Array.from({ length: 279 }, (_, index) => {
   const seed = vehicleSeeds[index % vehicleSeeds.length];
   const reference = seed[4] || null;
   const fit = vehicleFits[Math.floor(index / vehicleSeeds.length) % vehicleFits.length];
@@ -429,7 +432,19 @@ export const VEHICLES = Object.freeze(Array.from({ length: 279 }, (_, index) => 
     actions: [...new Set(seats.flatMap((seat) => seat.actions))],
     provenance: index < vehicleSeeds.length ? 'licensed-reference' : 'frontier-fit'
   };
-}));
+});
+// Append distinct models only after independent byte review. The 279 historical
+// IDs and configurations remain unchanged; a static inspection is not an atlas.
+export const VEHICLES = Object.freeze([...legacyVehiclesV50,
+  ...VEHICLE_CATALOG_ADDITIONS_V121.filter(vehicle => {
+    const proof = {
+      280: ['m579-daisycutter-reference-native-v121.png','dd9bddc52691131bf7ba9b20b47c024d6ef7a18280544bc5d81a0f3e71b2d93e'],
+      281: ['audi-lunar-quattro-reference-native-v121.png','d82c4af0c7a164e7e904e61140148ca36c9a88e6e75cbe279b57c78c9fabb2cd']
+    }[vehicle.shortId];
+    return Boolean(proof && REVIEWED_EQUIPMENT_V121.some(file =>
+      file.path === `assets/openai/equipment/v121-vehicles/${proof[0]}` && file.sha256 === proof[1]));
+  })
+]);
 
 export const CREW = Object.freeze([
   ['Mara Vega', 'Commander', 'human', 'command'], ['Tamsin Velez', 'Sergeant', 'human', 'assault'],
@@ -526,10 +541,10 @@ export const CONTENT_COUNTS = Object.freeze({
 export const CONTENT_TARGETS = Object.freeze({
   worlds: 64,
   campaigns: 436,
-  weapons: 146 + WEAPONS_ADDITIONS_V116.length,
+  weapons: 146 + WEAPONS_ADDITIONS_V116.length + ADMITTED_WEAPON_ADDITIONS_V121.length,
   equipment: 106,
   enemies: 571,
-  vehicles: 279,
+  vehicles: VEHICLES.length,
   apexDossiers: 244,
   neuroXenoProfiles: 234,
   crew: 16,

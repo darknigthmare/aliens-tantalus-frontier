@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-equipment-conversations-v120-shell-1';
+const CACHE = 'atf-v86-equipment-cocoon-v121-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,11 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/apc-convoy-state-v121.js','/src/apc-convoy-runtime-v121.js',
+  '/src/c12-horde-state-v121.js','/src/c12-horde-runtime-v121.js',
+  '/src/equipment-release-v121.js','/src/weapon-release-v121.js','/src/weapon-native-visuals-v121.js',
+  '/src/weapon-catalog-additions-v121.js','/src/weapon-native-extra-v121.js','/src/weapon-reference-coverage-v121.js',
+  '/src/vehicle-native-visuals-v121.js','/src/vehicle-catalog-additions-v121.js','/src/black-cocoon-state-v121.js','/src/black-cocoon-runtime-v121.js',
   '/src/franchise-costumes-v119.js', '/src/player-costume-skins-v119.js', '/src/costume-ui-v119.js',
   '/src/premium-personnel-v119.js',
   '/src/enemy-behavior-registry-v119.js', '/src/xeno-trials-ai-v119.js',

@@ -4,7 +4,7 @@ const combatPointerBindingsV83 = new WeakMap();
 const down = (pad, index) => Boolean(pad.buttons?.[index]?.pressed || Number(pad.buttons?.[index]?.value) > 0.55);
 const axis = (pad, index) => Number.isFinite(pad.axes?.[index]) ? pad.axes[index] : 0;
 const controls = [
-  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF' },
+  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF', interact: 'KeyE' },
   { left: 'KeyJ', right: 'KeyL', up: 'KeyI', down: 'KeyK', fire: 'KeyO' }
 ];
 
@@ -61,7 +61,7 @@ export class MissionGamepadInputV77 {
       if (!active || slot.suppressed) this.release(index);
       else {
         actor.gamepadAimV83 = aimNeutral ? null : aim;
-        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13] || buttons[1], fire: buttons[7] };
+        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13] || buttons[1], fire: buttons[7], interact: buttons[3] };
         for (const [action, code] of Object.entries(controls[index])) this.engine.setHeldGameplayKeyV77(code, held[action], 'gamepad-' + index);
         if (edge(0)) actor.jumpBuffer = 0.14;
         for (const [button, method] of [[2, 'reload'], [3, 'interact'], [4, 'activateTracker'], [5, 'toggleVehicle'], [8, 'useMedkit']]) {

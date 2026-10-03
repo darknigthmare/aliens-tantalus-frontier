@@ -44,6 +44,9 @@ import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
+import { BLACK_COCOON_CAMPAIGN_V121, buildBlackCocoonLevelV121 } from './black-cocoon-runtime-v121.js';
+import { APC_CONVOY_CAMPAIGN_V121, buildApcConvoyLevelV121 } from './apc-convoy-runtime-v121.js';
+import { C12_HORDE_CAMPAIGN_V121, buildC12HordeLevelV121 } from './c12-horde-runtime-v121.js';
 import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-opening-v88.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
@@ -62,6 +65,7 @@ import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
 import { CATALOG_COUNTS_V62, CATALOG_RECORDS_V62 } from './catalog-runtime-v62.js';
+import { resolveWeaponReferenceCoverageV121, weaponCoverageReportV121 } from './weapon-reference-coverage-v121.js';
 import { getEnemyDiscoveryV88, recordEnemyDiscoveryV88 } from './enemy-discovery-v88.js';
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
@@ -139,6 +143,8 @@ const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
 let standaloneContext = null;
+// A rejected terminal balance never becomes a false victory or a paid retreat.
+let pendingResolutionV121 = null;
 let forgePlaytest = null;
 let activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
 let deferredInstall = null;
@@ -1308,10 +1314,12 @@ function renderOperationPlan() {
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const issuedVehicle = specialOperation?.issuedVehicleId
+  const soloOperationV121 = [BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id].includes(campaign.id);
+  const convoyOperationV121 = campaign.id === APC_CONVOY_CAMPAIGN_V121.id;
+  const issuedVehicle = convoyOperationV121 ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier') : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId)
     : null;
-  const vehicle = issuedVehicle || VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
+  const vehicle = issuedVehicle || (soloOperationV121 ? null : VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId));
   const operation = saveSystem.data.strategy.currentOperation;
   const recovery = getAlphaBravoStrategicRecoveryV69(saveSystem.data);
   const unavailableCrew = (recovery.unavailableCrewIds || []).map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
@@ -1332,10 +1340,13 @@ function renderOperationPlan() {
         : specialOperation?.id === 'alien-survival-systems'
           ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
           : '';
+  const soloNoticeV121 = soloOperationV121
+    ? `<div class="special-operation-notice"><span>INSERTION SOLO</span><b>${convoyOperationV121 ? 'M577 FOURNI · CONVOI À UN OPÉRATEUR' : 'INSERTION À PIED · AUCUN VÉHICULE'}</b><p>${campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? 'Captivité, récupération du matériel, sortie du complexe puis confinement à bord.' : convoyOperationV121 ? 'Conduite et tourelle du M577 imposé. La sélection générale de véhicule ne remplace pas le convoi.' : 'Survivre au sas C-12, tenir la défense puis rejoindre l’extraction.'} Aucun binôme physique déployé. Les bonus dépendent du bilan réel.</p></div>`
+    : '';
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
-    : '';
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
+    : soloNoticeV121;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
@@ -1442,6 +1453,16 @@ function setupCatalogsV62() {
 function renderArmory() {
   if (!armoryCatalogV62) return;
   const catalog = byId('armory-kind').value === 'equipment' ? 'equipment' : 'weapons';
+  const coverage = weaponCoverageReportV121(), filter = byId('armory-model-filter-v121');
+  byId('armory-count-v121').textContent = `${coverage.geometricFamilies} MODÈLES D’ARMES // ${coverage.finishVariants} FINITIONS // ${CATALOG_COUNTS_V62.equipment} ÉQUIPEMENTS`;
+  filter.hidden = catalog !== 'weapons';
+  armoryCatalogV62.setPredicate(record => {
+    if (catalog !== 'weapons' || filter.value === 'all') return true;
+    const reference = resolveWeaponReferenceCoverageV121(record.id);
+    if (filter.value === 'models') return reference && !reference.isFinishVariant;
+    if (filter.value === 'finishes') return reference?.isFinishVariant === true;
+    return reference?.dedicatedNativePlate === true && !reference.isFinishVariant;
+  });
   if (armoryCatalogV62.getSnapshot().catalogs[0] !== catalog) armoryCatalogV62.setCatalogs([catalog]);
   else armoryCatalogV62.refresh();
   let userPanel = byId('user-equipment-v95');
@@ -1496,6 +1517,8 @@ function renderEnemies() {
 }
 
 function renderVehicles() {
+  const chassis = VEHICLES.filter(entry => !entry.name.includes('—')).length;
+  byId('vehicle-count-v121').textContent = `${chassis} CHÂSSIS // ${VEHICLES.length} CONFIGURATIONS // RÔLES PAR SIÈGE`;
   vehicleCatalogV62?.refresh();
 }
 
@@ -1931,7 +1954,8 @@ function startMissionRuntimeV62(context) {
   engine.setCoop(saveSystem.data.settings.coop);
   missionOwnerV78 = { epoch: profileEpochV78, profile: saveSystem.profile, timeline: saveSystem.data.createdAt, operationId: saveSystem.data.strategy.currentOperation?.id };
   engine.start({
-    userCasteCampaignV88: !getSpecialOperationByCampaignIdV67(campaign.id),
+    userCasteCampaignV88: !getSpecialOperationByCampaignIdV67(campaign.id)
+      && ![BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id].includes(campaign.id),
     operationId: deployment.operation.id,
     seed: levelSeed.seed,
     world: { ...world, ...worldState },
@@ -1999,6 +2023,11 @@ function campaignObjectiveLabel(campaignId) {
 }
 
 function startMissionInsertionV62(context) {
+  // Captivity and an already crewed convoy have their own opening sequences.
+  if ([BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id].includes(context.campaign?.id)) {
+    startMissionRuntimeV62(context);
+    return;
+  }
   const operation = saveSystem.data.strategy.currentOperation;
   if (!operation) {
     startMissionRuntimeV62(context);
@@ -2115,11 +2144,15 @@ function launchCampaign(campaign = null) {
   const weapon = operationLoadout.weapon || WEAPONS[0];
   const equipment = operationLoadout.equipment;
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const vehicle = specialOperation?.issuedVehicleId
+  const vehicle = [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id].includes(campaign.id) ? null
+    : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
+    : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
     : operationLoadout.vehicle;
   const costume = operationLoadout.costume;
-  const missionLevel = buildMissionLevelV52({
+  const missionLevel = (campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? buildBlackCocoonLevelV121
+    : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? buildApcConvoyLevelV121
+    : campaign.id === C12_HORDE_CAMPAIGN_V121.id ? buildC12HordeLevelV121 : buildMissionLevelV52)({
     campaign,
     world: { ...world, ...worldState },
     levelSeeds: LEVEL_SEEDS,
@@ -2131,13 +2164,17 @@ function launchCampaign(campaign = null) {
     levelSeedId: levelSeed.id,
     missionTemplateId: missionLevel.templateId,
     missionLevelSignature: missionLevel.signature,
-    specialOperationId: specialOperation?.id || null,
-    issuedVehicleId: specialOperation?.issuedVehicleId || null
+    specialOperationId: campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? 'black-cocoon'
+      : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? 'apc-convoy'
+      : campaign.id === C12_HORDE_CAMPAIGN_V121.id ? 'c12-horde' : specialOperation?.id || null,
+    issuedVehicleId: campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? vehicle.id : specialOperation?.issuedVehicleId || null
   });
   Object.assign(saveSystem.data, { scene: 'mission', worldId: world.id, campaignId: campaign.id, levelSeedId: levelSeed.id });
   saveSystem.commit();
   byId('mission-title').textContent = campaign.name;
+  pendingResolutionV121 = null;
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
+  delete byId('mission-log').dataset.radioUntilV121;
   byId('mission-log').textContent = `MU/TH/UR · ${campaign.objective.toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
   showView('play');
   startMissionInsertionV62({
@@ -2152,24 +2189,40 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (!operation) return null;
   const campaign = CAMPAIGNS.find((entry) => entry.id === operation.campaignId);
   const world = WORLDS.find((entry) => entry.id === operation.worldId || entry.id === campaign?.worldId);
-  const outcome = resolveOperation(saveSystem.data, {
+  // Resolve off the live timeline. Failed storage cannot consume the active
+  // operation or pay its rewards in memory before the durable write succeeds.
+  const candidate = clone(saveSystem.data);
+  const outcome = resolveOperation(candidate, {
     success,
     kills: event.kills || 0,
     reason,
     rewards: event.rewards || null
   });
   const resolvedSuccess = outcome?.ok ? outcome.success !== false : false;
-  if (campaign && world && outcome?.ok) applyCampaignConsequence(saveSystem.data, campaign, world, { success: resolvedSuccess });
-  if (outcome?.ok) advanceGalaxy(saveSystem.data, { hours: resolvedSuccess ? 4 : 8, generateCrisis: true });
-  saveSystem.data.scene = 'hub';
-  saveSystem.commit();
+  if (!outcome?.ok) return outcome;
+  if (campaign && world) applyCampaignConsequence(candidate, campaign, world, { success: resolvedSuccess });
+  advanceGalaxy(candidate, { hours: resolvedSuccess ? 4 : 8, generateCrisis: true });
+  candidate.scene = 'hub';
+  saveSystem.commit(candidate);
   renderAll();
   return outcome;
+}
+
+// Textual comms only: no voice asset is implied. Keep mission instructions
+// readable over routine combat/checkpoint captions, but never over fatal alerts.
+function writeMissionRadioV121(event, log) {
+  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio'].includes(event?.type)) return false;
+  const text = String(event.text || '').trim();
+  if (!text) return false;
+  log.dataset.radioUntilV121 = String(Date.now() + Math.max(6000, captionReadingMillisecondsV84(text)));
+  log.textContent = `RADIO · ${text}`;
+  return true;
 }
 
 function handleForgePlaytestEvent(event) {
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (writeMissionRadioV121(event, log)) return;
   if (isAlphaBravoRuntimeEventV69(event)) {
     alphaBravoCommandDockV69?.refresh();
     log.textContent = alphaBravoEventLabelV69(event);
@@ -2216,6 +2269,9 @@ function handleGameEvent(event) {
   }
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (writeMissionRadioV121(event, log)) return;
+  const protectedRadioV121 = Number(log.dataset.radioUntilV121 || 0) > Date.now()
+    ? log.textContent : null;
   if (isAlphaBravoRuntimeEventV69(event)) {
     alphaBravoCommandDockV69?.refresh();
     if (event.type === 'fireteam-task-complete' && event.taskId) recordOperationFlag(saveSystem.data, `alpha-bravo-task-${event.taskId}`);
@@ -2234,6 +2290,7 @@ function handleGameEvent(event) {
     return;
   }
   if (event.type === 'caption') {
+    if (protectedRadioV121) return;
     if (saveSystem.data.settings.subtitles) {
       log.dataset.captionUntil = String(Date.now() + captionReadingMillisecondsV84(event.text || event.channel));
       log.textContent = `SOUS-TITRE · ${event.text || event.channel || ''}`;
@@ -2336,15 +2393,33 @@ function handleGameEvent(event) {
     // The V70 resolution validator compares the terminal payload with the
     // native checkpoint. Persist the exact extracted state before clearing the
     // active operation so forged or stale rewards remain fail-closed.
-    persistMissionResumeState();
-    saveSystem.commit();
-    const outcome = finalizeOperation(true, event);
-    log.textContent = outcome?.result || 'OBJECTIF ACCOMPLI · conséquences enregistrées.';
+    let outcome;
+    try {
+      persistMissionResumeState();
+      saveSystem.commit();
+      outcome = finalizeOperation(true, event);
+    } catch {
+      outcome = { ok: false, reason: 'save-write-failed' };
+    }
+    if (!outcome?.ok) {
+      pendingResolutionV121 = { event, operationId: saveSystem.data.strategy.currentOperation?.id };
+      byId('retreat-mission').textContent = 'RÉESSAYER LE BILAN';
+      log.textContent = `BILAN NON VALIDÉ · ${outcome?.reason || 'résolution indisponible'} · opération conservée ; aucune victoire confirmée.`;
+      toast('Bilan non validé. Réessayez son enregistrement ou rechargez le checkpoint conservé.');
+      return;
+    }
+    pendingResolutionV121 = null;
+    byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
+    log.textContent = outcome.result;
     toast(outcome?.success
       ? 'Victoire persistée : monde, équipage, économie et continuité mis à jour.'
       : outcome?.result || 'Résolution enregistrée : les conditions de victoire ne sont pas remplies.');
     return;
   }
+  if (protectedRadioV121 && !['player-down', 'mission-failed', 'objective-failed', 'neuro-failure',
+    'squad-down', 'squad-lost', 'mission-restarted', 'mission-complete'].includes(event.type)) {
+    log.textContent = protectedRadioV121;
+  } else if (protectedRadioV121) delete log.dataset.radioUntilV121;
   const persistentEvents = new Set([
     'checkpoint', 'power-restored', 'shortcut', 'archive-recovered', 'supply', 'resource',
     'player-down', 'mission-failed', 'objective-failed', 'neuro-failure', 'mission-restarted',
@@ -2714,6 +2789,10 @@ function handleHubAction(interaction) {
 }
 
 function retreatMission() {
+  if (pendingResolutionV121?.operationId === saveSystem.data.strategy.currentOperation?.id && pendingResolutionV121?.event) {
+    handleGameEvent(pendingResolutionV121.event);
+    return;
+  }
   if (standaloneContext === 'forge-playtest') {
     returnToForgeContext();
     return;
@@ -2729,6 +2808,7 @@ function retreatMission() {
   const outcome = finalizeOperation(false, {
     rewards: alphaBravoDoctrine ? { alphaBravoDoctrine } : null
   }, 'retreat');
+  if (!outcome?.ok) { toast(`Retraite non enregistrée : ${outcome?.reason || 'résolution indisponible'}.`); return; }
   engine.stop();
   alphaBravoCommandDockV69?.refresh({ active: false });
   alienSurvivalDockV70?.refresh({ active: false });
@@ -2787,7 +2867,9 @@ function launchForgeMissionPlaytest(project) {
     neuroProfileCatalog: NEURO_XENO_PROFILES,
     apexDossierCatalog: APEX_DOSSIERS
   });
-  const missionLevel = buildMissionLevelV52({ campaign, world: { ...world, ...worldState }, levelSeeds: LEVEL_SEEDS, variant: 0 });
+  const missionLevel = (campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? buildBlackCocoonLevelV121
+    : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? buildApcConvoyLevelV121
+    : campaign.id === C12_HORDE_CAMPAIGN_V121.id ? buildC12HordeLevelV121 : buildMissionLevelV52)({ campaign, world: { ...world, ...worldState }, levelSeeds: LEVEL_SEEDS, variant: 0 });
   Object.assign(deployment.operation, {
     levelSeedId: missionLevel.levelSeed.id,
     missionTemplateId: missionLevel.templateId,
@@ -2810,7 +2892,7 @@ function launchForgeMissionPlaytest(project) {
     weapon: operationLoadout.weapon || WEAPONS[0],
     equipment: operationLoadout.equipment,
     crew: operationLoadout.crew,
-    vehicle: operationLoadout.vehicle,
+    vehicle: [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id].includes(campaign.id) ? null : operationLoadout.vehicle,
     costume: operationLoadout.costume,
     userEquipmentV95: operationLoadout.userEquipmentV95,
     levelSeed: missionLevel.levelSeed,
@@ -2881,6 +2963,7 @@ function setupRuntimeControls() {
   all('[data-mission-key]').forEach((button) => bindHoldControl(button, engine, button.dataset.missionKey));
   all('[data-bioforge-key]').forEach((button) => bindHoldControl(button, bioforgeRuntimeV80, button.dataset.bioforgeKey));
   byId('mission-interact').onclick = () => engine.interact(engine.player);
+  bindHoldControl(byId('mission-interact'), engine, 'KeyE');
   byId('mission-tracker').onclick = () => engine.activateTracker(engine.player);
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
@@ -3080,6 +3163,7 @@ function bind() {
   })[id]()));
   byId('campaign-mode').onchange = renderCampaigns;
   byId('armory-kind').onchange = renderArmory;
+  byId('armory-model-filter-v121').onchange = renderArmory;
   ['costume-part-filter', 'costume-body-filter', 'costume-palette-filter', 'costume-wear-filter'].forEach((id) => {
     byId(id).onchange = renderCrew;
   });

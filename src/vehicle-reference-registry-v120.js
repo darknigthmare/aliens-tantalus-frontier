@@ -33,7 +33,11 @@ const referenceByBaseNumber = new Map([
   [19, filmNominal('Prometheus (2012)')]
 ]);
 const originals = new Set([20, 21, 22, 24, 31, 34, 35]);
-const baseEntries = VEHICLES.filter(entry => entry.fit === 'Standard');
+// V120 is a historical 279-configuration snapshot, not the current append-only
+// catalogue. Later distinct models are referenced by their own release registry.
+const historicalVehicles = VEHICLES.filter(entry => Number(entry.id.match(/^vehicle-(\d{3})-/)?.[1]) <= 279);
+const postSnapshotIds = new Set(VEHICLES.filter(entry => !historicalVehicles.includes(entry)).map(entry => entry.id));
+const baseEntries = historicalVehicles.filter(entry => entry.fit === 'Standard');
 const baseIdByName = new Map(baseEntries.map(entry => [entry.name, entry.id]));
 
 export const VEHICLE_CHASSIS_REFERENCES_V120 = freeze(Object.fromEntries(baseEntries.map(entry => {
@@ -52,7 +56,7 @@ export const VEHICLE_CHASSIS_REFERENCES_V120 = freeze(Object.fromEntries(baseEnt
   })];
 })));
 
-export const VEHICLE_REFERENCE_BINDINGS_V120 = freeze(Object.fromEntries(VEHICLES.map(entry => {
+export const VEHICLE_REFERENCE_BINDINGS_V120 = freeze(Object.fromEntries(historicalVehicles.map(entry => {
   const baseId = baseIdByName.get(entry.name.split(' — ')[0]);
   if (!baseId || !Object.hasOwn(VEHICLE_CHASSIS_REFERENCES_V120, baseId)) throw new Error(`Unbound vehicle chassis: ${entry.id}`);
   return [entry.id, freeze({ vehicleId: entry.id, chassisId: baseId, fit: entry.fit, isVariant: entry.fit !== 'Standard' })];
@@ -70,7 +74,7 @@ export function getVehicleReferenceV120(value) {
 /** Input records are the real runtime consumers. Distinct paths certify files,
  * not canon; native poses and old action atlases are counted separately. */
 export function vehicleReferenceCoverageV120(records = []) {
-  const vehicles = Array.isArray(records) ? records.filter(record => record?.catalog === 'vehicles') : [];
+  const vehicles = Array.isArray(records) ? records.filter(record => record?.catalog === 'vehicles' && !postSnapshotIds.has(record.id)) : [];
   const bound = vehicles.map(record => ({ record, reference: getVehicleReferenceV120(record) }));
   const chassis = new Map(bound.filter(row => row.reference).map(row => [row.reference.chassisId, row.reference]));
   return freeze({ configurations: vehicles.length, chassis: chassis.size,

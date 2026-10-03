@@ -24,6 +24,7 @@ import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { CETO_V75, isCetoV75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { findLargeMissionActorPlacementV72, isLargeMissionActorV72, largeMissionActorFitsV72 } from './mission-large-actor-placement-v72.js';
+import { APC_CONVOY_LIMITS_V121 } from './apc-convoy-state-v121.js';
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -344,6 +345,7 @@ export function withV52LevelRuntime(BaseEngine) {
   return class V52LevelRuntime extends BaseEngine {
     start(options = {}) {
       this.v52EnemyCatalog = asList(options.enemyCatalog);
+      this.missionLocalZoneIdV121 = null;
       const snapshot = super.start(options);
       if (options.missionLevel && !this.editorMode) {
         this.applyMissionLevelV52(options.missionLevel);
@@ -1453,12 +1455,19 @@ export function withV52LevelRuntime(BaseEngine) {
 
     refreshMissionLevelZone(initial) {
       const zone = zoneForPosition(this.missionLevelRuntime, this.player);
+      const local = this.missionLocalZoneV121();
+      // Keep the authored zone IDs for art and native saves. Only the player-facing
+      // location changes when a special operation replaces the template geometry.
+      if (local && !initial && local.id !== this.missionLocalZoneIdV121) {
+        this.missionLocalZoneIdV121 = local.id;
+        this.onEvent({ type: 'mission-zone', zoneId: local.id, name: local.label, biome: local.biome });
+      }
       if (!zone || zone.id === this.missionLevelVisualState.activeZoneId) return zone;
       this.missionLevelVisualState.previousZoneId = this.missionLevelVisualState.activeZoneId;
       this.missionLevelVisualState.activeZoneId = zone.id;
       this.missionLevelVisualState.zoneBlend = initial || this.accessibilityRuntime?.reducedMotion ? 1 : 0;
       this.missionLevelTelemetry.transitions += initial ? 0 : 1;
-      if (!initial) this.onEvent({ type: 'mission-zone', zoneId: zone.id, name: zone.label, biome: zone.biome });
+      if (!initial && !local) this.onEvent({ type: 'mission-zone', zoneId: zone.id, name: zone.label, biome: zone.biome });
       for (const event of this.missionLevelEvents.values()) if (event.trigger?.type === 'enter-zone' && event.trigger.zoneId === zone.id) this.triggerMissionLevelEvent(event.id, 'enter-zone');
       return zone;
     }
@@ -1857,10 +1866,105 @@ export function withV52LevelRuntime(BaseEngine) {
       this.drawForegroundPipes(ctx);
     }
 
+    missionLocalZoneV121() {
+      if (this.isApcConvoyV121?.()) return { id: 'apcv121-corridor', label: 'Corridor de feu · convoi M577', biome: 'industriel' };
+      if (this.isC12HordeV121?.()) {
+        const upper = Number(this.player?.y) + Number(this.player?.h) <= 395;
+        return { id: upper ? 'c12v121-walkway' : 'c12v121-floor',
+          label: upper ? 'Sas C-12 · passerelle' : 'Sas C-12 · voie basse', biome: 'industriel' };
+      }
+      if (this.isBlackCocoonV121?.()) return this.blackCocoonV121.boarded
+        ? { id: 'bc121-quarantine', label: 'Tantalus · quarantaine', biome: 'quarantaine' }
+        : { id: 'bc121-hive', label: 'Cocon noir · galerie colonisée', biome: 'ruche' };
+      return null;
+    }
+
+    missionNavigationMapV121() {
+      const zone = this.missionLocalZoneV121();
+      if (!zone) return null;
+      if (this.isApcConvoyV121?.()) return {
+        mode: 'distance', label: `CONVOI M577 · ${Math.round(this.apcConvoyV121.distance)}/${APC_CONVOY_LIMITS_V121.distance} M`,
+        length: APC_CONVOY_LIMITS_V121.distance, progress: clamp(Number(this.apcConvoyV121.distance) || 0, 0, APC_CONVOY_LIMITS_V121.distance),
+        // The vehicle faces left; this is a distance strip, not an invented road graph.
+        direction: -1, checkpoints: [...APC_CONVOY_LIMITS_V121.thresholds]
+      };
+      const width = Math.max(1, Number(this.missionLevelBounds?.width) || LOGICAL_WIDTH);
+      const height = Math.max(1, Number(this.missionLevelBounds?.height) || LOGICAL_HEIGHT);
+      const surfaces = asList(this.platforms).filter(entry => [entry.x, entry.y, entry.w].every(Number.isFinite) && entry.w > 0)
+        .map(entry => ({ id: entry.id, x: clamp(entry.x, 0, width), end: clamp(entry.x + entry.w, 0, width), y: entry.y }))
+        .filter(entry => entry.end > entry.x && entry.y >= 0 && entry.y <= height);
+      const ladders = asList(this.ladders).filter(entry => [entry.x, entry.top, entry.bottom].every(Number.isFinite)
+        && entry.x >= 0 && entry.x <= width && entry.top >= 0 && entry.bottom <= height && entry.bottom > entry.top)
+        .map(entry => ({ id: entry.id, x: entry.x, top: entry.top, bottom: entry.bottom }));
+      let goals = [];
+      if (this.isC12HordeV121?.() && !this.objective?.complete) {
+        const objective = this.objective;
+        if (objective) goals = [{ id: objective.id, x: objective.x + objective.w / 2, y: objective.y + objective.h }];
+      }
+      if (this.isBlackCocoonV121?.()) {
+        const state = this.blackCocoonV121;
+        const keys = { cocoon: ['cocoon'], equipment: ['equipment'], relay: ['relay'],
+          surface: state.route ? ['surface'] : ['industrial', 'cooling'], delta: ['delta'],
+          beacons: ['beacon1', 'beacon2'].filter((_, index) => !state.beacons[index]), hold: ['beacon2'],
+          board: ['ramp'], quarantine: [state.weaponsDeposited ? 'scanner' : 'deposit'], complete: [] }[state.phase] || [];
+        goals = keys.flatMap(key => {
+          const prop = this.blackCocoonPropsV121?.[key];
+          return prop ? [{ id: prop.id, x: prop.x, y: prop.groundY }] : [];
+        });
+      }
+      goals = goals.filter(entry => Number.isFinite(entry.x) && Number.isFinite(entry.y)
+        && entry.x >= 0 && entry.x <= width && entry.y >= 0 && entry.y <= height);
+      const foot = { x: Number(this.player?.x) + Number(this.player?.w) / 2, y: Number(this.player?.y) + Number(this.player?.h) };
+      const player = Number.isFinite(foot.x) && Number.isFinite(foot.y) ? foot : null;
+      const positions = [...surfaces.map(entry => entry.y), ...ladders.flatMap(entry => [entry.top, entry.bottom]),
+        ...goals.map(entry => entry.y), ...(player ? [player.y] : [])];
+      return { mode: 'local', label: `PLAN LOCAL · ${zone.label.toUpperCase()}`, width,
+        minY: Math.min(...positions, height) - 30, maxY: Math.max(...positions, 0) + 30, surfaces, ladders, goals, player };
+    }
+
+    drawMissionNavigationMapV121(ctx, map) {
+      const box = { x: 474, y: 18, w: 332, h: 66 };
+      ctx.save(); ctx.fillStyle = 'rgba(3, 10, 8, .9)'; ctx.fillRect(box.x, box.y, box.w, box.h);
+      ctx.strokeStyle = '#506d5b'; ctx.strokeRect(box.x + 0.5, box.y + 0.5, box.w, box.h);
+      ctx.font = 'bold 10px monospace'; ctx.fillStyle = '#b3cfc1'; ctx.fillText(map.label, box.x + 10, box.y + 14, box.w - 20);
+      ctx.setLineDash([]); ctx.lineWidth = 1;
+      const plot = { x: box.x + 14, y: box.y + 26, w: box.w - 28, h: box.h - 36 };
+      if (map.mode === 'distance') {
+        const pointX = distance => plot.x + plot.w * (1 - distance / map.length);
+        const y = plot.y + plot.h / 2;
+        ctx.strokeStyle = '#698474'; ctx.beginPath(); ctx.moveTo(plot.x, y); ctx.lineTo(plot.x + plot.w, y); ctx.stroke();
+        for (const distance of map.checkpoints) {
+          const x = pointX(distance); ctx.beginPath(); ctx.moveTo(x, y - 6); ctx.lineTo(x, y + 6); ctx.stroke();
+        }
+        ctx.fillStyle = '#a9e8b8'; ctx.fillRect(pointX(map.progress) - 3, y - 3, 6, 6);
+      } else {
+        const point = entry => ({ x: plot.x + clamp(entry.x / map.width, 0, 1) * plot.w,
+          y: plot.y + clamp((entry.y - map.minY) / Math.max(1, map.maxY - map.minY), 0, 1) * plot.h });
+        // Draw only loaded walkable surfaces and actual ladders: no template edges,
+        // no vent teleports, no inferred links across a gap or a locked ladder.
+        ctx.strokeStyle = '#698474';
+        for (const surface of map.surfaces) {
+          const a = point(surface), b = point({ x: surface.end, y: surface.y });
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        ctx.strokeStyle = '#6b8e7e';
+        for (const ladder of map.ladders) {
+          const a = point({ x: ladder.x, y: ladder.top }), b = point({ x: ladder.x, y: ladder.bottom });
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        ctx.fillStyle = '#e7c47e';
+        for (const goal of map.goals) { const p = point(goal); ctx.fillRect(p.x - 2, p.y - 2, 4, 4); }
+        if (map.player) { const p = point(map.player); ctx.fillStyle = '#a9e8b8'; ctx.fillRect(p.x - 3, p.y - 3, 6, 6); }
+      }
+      ctx.restore();
+    }
+
     drawHud(ctx) {
       super.drawHud(ctx);
       const plan = this.missionLevelRuntime;
-      const nodes = asList(plan?.graph?.nodes);
+      const localMap = this.missionNavigationMapV121();
+      if (localMap) this.drawMissionNavigationMapV121(ctx, localMap);
+      const nodes = localMap ? [] : asList(plan?.graph?.nodes);
       if (nodes.length) {
         const edges = asList(plan.graph?.edges);
         const minX = Math.min(...nodes.map((node) => node.x));

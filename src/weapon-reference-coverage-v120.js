@@ -61,6 +61,8 @@ const newReferenceByBase = new Map([
 ]);
 const originals = new Set([23, 34, 35, 36, 37, 38, 39, 40]);
 const numberOf = entry => Number(entry.id.match(/^weapon-(\d{3})-/)?.[1] || 0);
+// Immutable release scope: V121 additions and plates do not rewrite V120 proof.
+const catalogueV120=WEAPONS.filter(entry=>numberOf(entry)<=147);
 // Modulo is used only after membership in the real WEAPONS array is established;
 // arbitrary future IDs and wrong slugs can never gain a source or reviewed art.
 const baseOf = entry => {
@@ -68,7 +70,7 @@ const baseOf = entry => {
   return number === 147 ? 147 : ((number - 1) % 40) + 1;
 };
 const groups = new Map();
-for (const entry of WEAPONS) {
+for (const entry of catalogueV120) {
   const base = baseOf(entry);
   if (!groups.has(base)) groups.set(base, []);
   groups.get(base).push(entry);
@@ -103,11 +105,11 @@ const makeReference = (base, visual) => {
 
 export const WEAPON_GEOMETRY_COVERAGE_V120 = freeze([...groups.entries()].map(([baseNumber, entries]) => {
   const base = entries.find(entry => numberOf(entry) === baseNumber);
-  const visual = resolveNativeWeaponProfileV120(base) || resolveWeaponVisualProfileV63(base);
+  const visual = resolveNativeWeaponProfileV120(base) || resolveWeaponVisualProfileV63(base,{includeV121:false});
   // The append-only Volcan did not exist in V61. Passing 147 to that old
   // modulo resolver would falsely attach a Smart Disc atlas as its history.
   const historical = baseNumber === 147 ? null
-    : baseNumber === 24 ? resolveWeaponVisualProfileV63(base) : resolveWeaponVisualProfileV61(base);
+    : baseNumber === 24 ? resolveWeaponVisualProfileV63(base,{includeV121:false}) : resolveWeaponVisualProfileV61(base);
   const native = visual.visualMode === 'static-pose';
   return {
     baseNumber, baseId: base.id, name: base.name, canonicalName: visual.canonicalName || base.name,
@@ -143,7 +145,7 @@ export const WEAPON_GEOMETRY_COVERAGE_V120 = freeze([...groups.entries()].map(([
 }));
 
 const byBase = new Map(WEAPON_GEOMETRY_COVERAGE_V120.map(row => [row.baseNumber, row]));
-export const WEAPON_REFERENCE_COVERAGE_V120 = freeze(WEAPONS.map(entry => {
+export const WEAPON_REFERENCE_COVERAGE_V120 = freeze(catalogueV120.map(entry => {
   const geometry = byBase.get(baseOf(entry));
   return {
     id: entry.id, catalogNumber: numberOf(entry), name: entry.name, baseNumber: geometry.baseNumber,

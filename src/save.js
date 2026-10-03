@@ -57,6 +57,9 @@ import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-sta
 import { normalizeUserEquipmentV95, resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
 import { createXenoTrialsProgressV96, normalizeXenoTrialsProgressV96 } from './xeno-trials-progress-v96.js';
 import { sanitizeJumpStateV116, isJumpChargingV116 } from './galaxy-jump-v115.js';
+import { BLACK_COCOON_CAMPAIGN_V121, validateBlackCocoonStateV121 } from './black-cocoon-state-v121.js';
+import { APC_CONVOY_CAMPAIGN_V121, validateApcConvoyStateV121 } from './apc-convoy-state-v121.js';
+import { C12_HORDE_CAMPAIGN_V121, validateC12HordeStateV121 } from './c12-horde-state-v121.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -194,6 +197,7 @@ function createStrategyState() {
     unlockedResearchIds: [],
     currentOperation: null,
     lastOperation: null,
+    specialOperationResolutionSerialV121: 0,
     insertionReadReceipts: [],
     log: []
   };
@@ -667,6 +671,60 @@ const sanitizeMissionInsertionReadReceiptsV62 = (candidate) => Array.isArray(can
 function ensureStrategy(save) {
   if (!isRecord(save.strategy)) save.strategy = createStrategyState();
   return save.strategy;
+}
+
+const SPECIAL_OPERATION_REWARDS_V121 = Object.freeze([
+  { campaign: BLACK_COCOON_CAMPAIGN_V121, stateKey: 'blackCocoonV121', validate: validateBlackCocoonStateV121, credits: 550, maximumKills: 32 },
+  { campaign: APC_CONVOY_CAMPAIGN_V121, stateKey: 'apcConvoyV121', validate: validateApcConvoyStateV121, credits: 850, maximumKills: 64 },
+  { campaign: C12_HORDE_CAMPAIGN_V121, stateKey: 'c12HordeV121', validate: validateC12HordeStateV121, credits: 650, maximumKills: 72 }
+]);
+const specialOperationRewardDefinitionV121 = campaignId => SPECIAL_OPERATION_REWARDS_V121.find(entry => entry.campaign.id === campaignId);
+const resolutionSerialV121 = value => Number.isSafeInteger(value) && value >= 0 && value <= 999999999 ? value : 0;
+
+// The persisted terminal checkpoint is the sole payout authority. Event payloads
+// are assertions to compare, not another source of credits or strategic bonuses.
+function validateSpecialOperationRewardV121(operation, suppliedRewards) {
+  const definition = specialOperationRewardDefinitionV121(operation.campaignId);
+  if (!definition) return null;
+  const serial = operationSerialV85(operation.id);
+  const raw = operation.resumeState, identity = raw?.identity, special = raw?.specialOperation;
+  const checked = definition.validate(special?.[definition.stateKey]);
+  const state = checked.state, mission = raw?.mission, player = raw?.player;
+  const integer = (value, maximum) => Number.isInteger(value) && value >= 0 && value <= maximum;
+  if (!serial || resolutionSerialV121(serial) !== serial || operation.id !== `operation-${serial}-${definition.campaign.id}`
+    || operation.specialOperationId !== definition.campaign.specialOperationId
+    || raw?.schema !== 1 || identity?.campaignId !== operation.campaignId || identity?.worldId !== operation.worldId
+    || (operation.levelSeedId && identity.levelSeedId !== operation.levelSeedId)
+    || (operation.missionLevelSignature && raw.missionLevel?.signature !== operation.missionLevelSignature)
+    || special?.operationId !== definition.campaign.specialOperationId || special.deploymentOperationIdV121 !== operation.id || !checked.valid
+    || state?.phase !== 'complete' || !state.complete || !state.rewardClaimed || !isRecord(state.rewards)
+    || mission?.state !== 'complete' || player?.alive !== true || player?.downed !== false
+    || !integer(player?.kills, definition.maximumKills) || !integer(mission?.retries, 9999)
+    || !integer(mission?.casualties, 9999) || !Number.isFinite(mission?.elapsed) || mission.elapsed < 0 || mission.elapsed > 604800
+    || !integer(raw.inventory?.salvage, 999999) || !integer(raw.inventory?.intel, 999999)) {
+    return { valid: false, reason: 'special-operation-terminal-invalid' };
+  }
+  let credits = definition.credits;
+  if (definition.stateKey === 'blackCocoonV121') credits += player.kills * 12 + (state.power === 'battery' ? 80 : 0);
+  if (definition.stateKey === 'c12HordeV121') credits += state.cargoTaken ? 100 : 0;
+  if (definition.stateKey === 'apcConvoyV121') {
+    const vehicle = raw.vehicle;
+    if (vehicle?.id !== 'vehicle-001-m577-armored-personnel-carrier' || vehicle.active !== true
+      || vehicle.destroyed !== false || !Number.isFinite(vehicle.hull) || vehicle.hull <= 0 || vehicle.hull > 340
+      || state.rewards.hullRemaining !== Math.round(vehicle.hull)) return { valid: false, reason: 'special-operation-vehicle-invalid' };
+    credits += player.kills * 10 + Math.floor(vehicle.hull / 340 * 250);
+  }
+  const nativeRewards = {
+    ...state.rewards, credits, salvage: raw.inventory.salvage, intel: raw.inventory.intel,
+    retries: mission.retries, elapsedSeconds: Math.round(mission.elapsed), noCasualty: mission.casualties === 0
+  };
+  if (Object.entries(nativeRewards).some(([key, value]) => state.rewards[key] !== value || special[definition.stateKey].rewards[key] !== value)
+    || (suppliedRewards != null && (!isRecord(suppliedRewards)
+      || Object.entries(nativeRewards).some(([key, value]) => suppliedRewards[key] !== value)))) {
+    return { valid: false, reason: 'special-operation-reward-mismatch' };
+  }
+  return { valid: true, serial, kills: player.kills, rewards: nativeRewards,
+    strategicReward: { credits, alloy: nativeRewards.salvage, research: nativeRewards.intel } };
 }
 
 export function advanceStrategicClock(save, hours) {
@@ -1316,7 +1374,9 @@ export function getOperationBrief(save, campaign, world) {
   if (openingSupportV88.energy) fuel = Math.max(1, fuel - 2);
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
-  const reward = { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
+  const specialRewardV121 = specialOperationRewardDefinitionV121(campaign.id);
+  const reward = specialRewardV121 ? { credits: specialRewardV121.credits, research: 0, alloy: 0 }
+    : { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
   const minimumCrew = Math.max(1, Math.min(MAX_SQUAD_SIZE, Math.floor(Number(campaign.minimumCrew) || 1)));
   const crewReady = selectedCrew.length >= minimumCrew;
   return {
@@ -1459,6 +1519,11 @@ const sanitizeNativeOperationResumeState = (candidate, { operation = null } = {}
       operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
       alienSurvivalV70
     };
+  }
+  if (specialOperationRewardDefinitionV121(operation?.campaignId) && requestedSpecialOperation) {
+    if (requestedSpecialOperation.operationId !== operation.specialOperationId
+      || (requestedSpecialOperation.deploymentOperationIdV121 && requestedSpecialOperation.deploymentOperationIdV121 !== operation.id)) return null;
+    sanitized.specialOperation.deploymentOperationIdV121 = operation.id;
   }
   return sanitized;
 };
@@ -1719,6 +1784,27 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   const strategy = ensureStrategy(save);
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
+  const specialDefinitionV121 = specialOperationRewardDefinitionV121(operation.campaignId);
+  const isSpecialOperationV121 = Boolean(specialDefinitionV121);
+  const serialV121 = operationSerialV85(operation.id);
+  if (isSpecialOperationV121 && (!serialV121 || resolutionSerialV121(serialV121) !== serialV121)) {
+    return { ok: false, reason: 'special-operation-deployment-invalid' };
+  }
+  if (isSpecialOperationV121) {
+    const state = save.galaxy?.worldState?.[operation.worldId], resources = save.galaxy?.resources;
+    if (operation.worldId !== specialDefinitionV121.campaign.worldId || !WORLDS.some(world => world.id === operation.worldId)
+      || !isRecord(state) || ['stability', 'infestation', 'quarantine', 'colonyLevel'].some(key =>
+        !Number.isFinite(state[key]) || state[key] < 0 || state[key] > 100)
+      || !isRecord(resources) || ['credits', 'alloy', 'research', 'pathogen'].some(key =>
+        !Number.isFinite(resources[key]) || resources[key] < 0 || resources[key] > 999999999)) {
+      return { ok: false, reason: 'special-operation-world-invalid' };
+    }
+  }
+  if (isSpecialOperationV121 && serialV121 <= resolutionSerialV121(strategy.specialOperationResolutionSerialV121)) {
+    return { ok: false, reason: 'operation-already-resolved' };
+  }
+  const specialRewardV121 = isSpecialOperationV121 && success ? validateSpecialOperationRewardV121(operation, rewards) : null;
+  if (specialRewardV121 && !specialRewardV121.valid) return { ok: false, reason: specialRewardV121.reason };
   const isAlphaBravo = operation.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId;
   const isAlienSurvival = operation.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70;
   if (isAlphaBravo) {
@@ -1752,10 +1838,16 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     ? resolveSpecialOperationBonusV70(operation, rewards, alphaBravoCertification, alienSurvivalValidation)
     : {};
   let result = '';
+  let paidStrategicRewardV121 = null;
   if (resolvedSuccess) {
-    for (const [key, value] of Object.entries(operation.reward)) changeStrategicValue(save, key, value);
+    const strategicReward = specialRewardV121?.strategicReward || operation.reward;
+    const previousResourcesV121 = specialRewardV121
+      ? Object.fromEntries(Object.keys(strategicReward).map(key => [key, save.galaxy.resources[key]])) : null;
+    for (const [key, value] of Object.entries(strategicReward)) changeStrategicValue(save, key, value);
+    if (previousResourcesV121) paidStrategicRewardV121 = Object.fromEntries(Object.keys(strategicReward)
+      .map(key => [key, Math.round((save.galaxy.resources[key] - previousResourcesV121[key]) * 100) / 100]));
     for (const [key, value] of Object.entries(specialOperationBonus)) changeStrategicValue(save, key, value);
-    changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil(kills / 5)));
+    changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil((specialRewardV121?.kills ?? kills) / 5)));
     worldState.stability = clamp(worldState.stability + 8);
     worldState.infestation = clamp(worldState.infestation - (containment ? 11 : 7));
     worldState.quarantine = clamp(worldState.quarantine + (containment ? 8 : 4));
@@ -1769,7 +1861,10 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     });
     save.statistics.campaigns += 1;
     const bonusLabel = describeSpecialOperationBonusV70(operation, specialOperationBonus);
-    result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel;
+    const cappedRewardV121 = paidStrategicRewardV121 && Object.keys(strategicReward).some(key => paidStrategicRewardV121[key] < strategicReward[key]);
+    const nativeRewardLabel = specialRewardV121 ? ` Bilan vérifié : +${paidStrategicRewardV121.credits} crédits, +${paidStrategicRewardV121.alloy} alliage, +${paidStrategicRewardV121.research} recherche.`
+      + (cappedRewardV121 ? ' Plafond de stockage atteint ; bilan natif conservé.' : '') : '';
+    result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel + nativeRewardLabel;
   } else {
     worldState.stability = clamp(worldState.stability - (resolvedReason === 'retreat' ? 2 : 6));
     worldState.infestation = clamp(worldState.infestation + (resolvedReason === 'retreat' ? 2 : 7));
@@ -1812,6 +1907,10 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     : null;
   strategy.lastOperation = {
     ...structuredClone(operation),
+    ...(specialRewardV121 ? { reward: structuredClone(paidStrategicRewardV121),
+      missionRewardsV121: structuredClone(specialRewardV121.rewards),
+      expectedStrategicRewardV121: structuredClone(specialRewardV121.strategicReward),
+      strategicRewardV121: structuredClone(paidStrategicRewardV121) } : {}),
     success: resolvedSuccess,
     reason: resolvedReason,
     result,
@@ -1821,6 +1920,9 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     completedDay: save.clock.day,
     completedHour: save.clock.hour
   };
+  // A monotonic receipt survives bounded logs, imports and later operations.
+  // Failures are receipts too: a defeated run cannot later be replayed as a win.
+  if (isSpecialOperationV121) strategy.specialOperationResolutionSerialV121 = serialV121;
   recordCrewMissionV85(save, operation, resolvedSuccess, resolvedReason);
   if (resolvedSuccess) syncPremiumPersonnelV119(save);
   if (save.openingV88?.phase === 'deployed') {
@@ -1829,7 +1931,9 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   }
   strategy.currentOperation = null;
   addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !resolvedSuccess, result });
-  return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation };
+  return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation,
+    ...(specialRewardV121 ? { strategicRewardV121: structuredClone(paidStrategicRewardV121),
+      expectedStrategicRewardV121: structuredClone(specialRewardV121.strategicReward) } : {}) };
 }
 
 export function getStrategySnapshot(save) {
@@ -1847,6 +1951,7 @@ export function getStrategySnapshot(save) {
     unlockedResearchIds: strategy.unlockedResearchIds,
     currentOperation: strategy.currentOperation,
     lastOperation: strategy.lastOperation,
+    specialOperationResolutionSerialV121: resolutionSerialV121(strategy.specialOperationResolutionSerialV121),
     alphaBravoDoctrine,
     alienSurvivalSystems,
     log: strategy.log
@@ -1999,6 +2104,9 @@ export function migrateSave(input, profile = 1) {
       id: typeof candidate.id === 'string' ? candidate.id.slice(0, 180) : 'migrated-operation',
       campaignId: candidate.campaignId.slice(0, 120),
       worldId: candidate.worldId.slice(0, 120),
+      ...(typeof candidate.levelSeedId === 'string' ? { levelSeedId: candidate.levelSeedId.slice(0, 160) } : {}),
+      ...(typeof candidate.missionTemplateId === 'string' ? { missionTemplateId: candidate.missionTemplateId.slice(0, 160) } : {}),
+      ...(typeof candidate.missionLevelSignature === 'string' ? { missionLevelSignature: candidate.missionLevelSignature.slice(0, 180) } : {}),
       startedDay: Math.floor(numberBetween(candidate.startedDay, migrated.clock.day, 1, 100000)),
       startedHour: numberBetween(candidate.startedHour, migrated.clock.hour, 0, 24),
       risk: numberBetween(candidate.risk, 50, 0, 100),
@@ -2032,9 +2140,13 @@ export function migrateSave(input, profile = 1) {
     operation.resumeState = sanitizeOperationResumeState(candidate.resumeState, { operation });
     return operation;
   };
+  const resolvedSpecialSerialV121 = Math.max(resolutionSerialV121(strategy.specialOperationResolutionSerialV121),
+    specialOperationRewardDefinitionV121(strategy.lastOperation?.campaignId) ? resolutionSerialV121(operationSerialV85(strategy.lastOperation.id)) : 0);
   migrated.strategy = {
     serial: Math.max(Math.floor(numberBetween(strategy.serial, base.strategy.serial, 0, 999999999)),
+      resolvedSpecialSerialV121,
       ...migrated.crew.map((member) => member.lastServiceOperationSerialV85 || 0)),
+    specialOperationResolutionSerialV121: resolvedSpecialSerialV121,
     selectedCrewIds: selectedCrewIds.length ? selectedCrewIds : [...base.strategy.selectedCrewIds],
     inventory: { weaponIds, equipmentIds, vehicleIds },
     selectedVehicleId: resolveReadyVehicleIdV60(strategy.selectedVehicleId, vehicleIds, VEHICLES),
@@ -2049,7 +2161,12 @@ export function migrateSave(input, profile = 1) {
       success: Boolean(strategy.lastOperation.success),
       reason: typeof strategy.lastOperation.reason === 'string' ? strategy.lastOperation.reason.slice(0, 60) : 'migrated',
       result: typeof strategy.lastOperation.result === 'string' ? strategy.lastOperation.result.slice(0, 500) : '',
-      specialOperationBonus: sanitizeValues(strategy.lastOperation.specialOperationBonus)
+      specialOperationBonus: sanitizeValues(strategy.lastOperation.specialOperationBonus),
+      ...(specialOperationRewardDefinitionV121(strategy.lastOperation.campaignId) && isRecord(strategy.lastOperation.strategicRewardV121)
+        ? { strategicRewardV121: sanitizeValues(strategy.lastOperation.strategicRewardV121),
+          missionRewardsV121: sanitizeNativeResumeValue(strategy.lastOperation.missionRewardsV121),
+          ...(isRecord(strategy.lastOperation.expectedStrategicRewardV121)
+            ? { expectedStrategicRewardV121: sanitizeValues(strategy.lastOperation.expectedStrategicRewardV121) } : {}) } : {})
     } : null,
     log: Array.isArray(strategy.log) ? strategy.log.filter(isRecord).slice(0, 40).map((entry, index) => ({
       id: typeof entry.id === 'string' ? entry.id.slice(0, 180) : 'migrated-log-' + index,

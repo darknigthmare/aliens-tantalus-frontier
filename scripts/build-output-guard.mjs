@@ -5,6 +5,7 @@ import { dirname, isAbsolute, parse, relative, resolve, sep } from 'node:path';
 // One named, reproducible workspace output is permitted when the release
 // checkout's volume cannot hold dist. This is not an arbitrary temp root.
 export const PUBLIC_BUILD_OUTPUT_V116 = resolve(homedir(), 'Documents', 'Codex', 'atf-v116-public-build');
+export const PUBLIC_BUILD_OUTPUT_V121 = resolve(homedir(), 'Documents', 'Codex', 'atf-v121-public-build');
 
 const isInside = (candidate, parent) => {
   const path = relative(parent, candidate);
@@ -32,7 +33,7 @@ export function resolveSafeBuildOutput(projectRoot, requestedOutput = 'dist') {
   const output = resolve(root, requestedOutput);
   if (root === parse(root).root || output === root || output === parse(output).root
     || isInside(root, output)
-    || ![resolve(root, 'dist'), PUBLIC_BUILD_OUTPUT_V116].includes(output)) {
+    || ![resolve(root, 'dist'), PUBLIC_BUILD_OUTPUT_V116, PUBLIC_BUILD_OUTPUT_V121].includes(output)) {
     throw new Error(`Unsafe ATF_BUILD_OUTPUT: refusing to remove ${output}`);
   }
   // The source checkout and generated output both require clean ancestor
