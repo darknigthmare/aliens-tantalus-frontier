@@ -1,6 +1,7 @@
 import { WEAPONS } from './content-core-v50.js';
 import { WEAPON_GEOMETRY_COVERAGE_V120 } from './weapon-reference-coverage-v120.js';
 import { resolveAdmittedWeaponProfileV121 } from './weapon-release-v121.js';
+import { ADMITTED_WEAPON_ADDITIONS_V122 } from './weapon-release-v122.js';
 
 const freeze=value=>{
   if (!value || typeof value!=='object' || Object.isFrozen(value)) return value;
@@ -9,6 +10,10 @@ const freeze=value=>{
 const numberOf=entry=>Number(entry.id.match(/^weapon-(\d{3})-/)?.[1]||0);
 const historicById=new Map(WEAPON_GEOMETRY_COVERAGE_V120.flatMap(geometry=>geometry.catalogIds.map(id=>[id,geometry])));
 const geometryMap=new Map();
+// Keep the published V121 receipt at its exact scope. Only independently
+// admitted later IDs are excluded; an unknown addition still fails closed.
+const laterIds=new Set(ADMITTED_WEAPON_ADDITIONS_V122.map(entry=>entry.id));
+const baselineWeaponsV121=WEAPONS.filter(entry=>!laterIds.has(entry.id));
 const nativeGeometry=(entry,profile,historic)=>freeze({
   ...(historic||{}),baseNumber:profile.baseNumber,baseId:historic?.baseId||entry.id,
   name:historic?.name||entry.name,canonicalName:profile.canonicalName,
@@ -29,7 +34,7 @@ const nativeGeometry=(entry,profile,historic)=>freeze({
   note:profile.referenceCaveat||'Plaque fixe adaptée du design disponible ; animation dédiée, dimensions et fidélité 1:1 non certifiées.'
 });
 // Membership in WEAPONS is established first. No modulo assignment for new IDs.
-for (const entry of WEAPONS) {
+for (const entry of baselineWeaponsV121) {
   const historic=historicById.get(entry.id),profile=resolveAdmittedWeaponProfileV121(entry);
   const key=historic?.baseId||entry.id;
   if (geometryMap.has(key)) continue;
@@ -38,7 +43,7 @@ for (const entry of WEAPONS) {
   else throw new Error(`Unreviewed weapon catalogue addition: ${entry.id}`);
 }
 export const WEAPON_GEOMETRY_COVERAGE_V121=freeze([...geometryMap.values()]);
-export const WEAPON_REFERENCE_COVERAGE_V121=freeze(WEAPONS.map(entry=>{
+export const WEAPON_REFERENCE_COVERAGE_V121=freeze(baselineWeaponsV121.map(entry=>{
   const geometry=geometryMap.get(historicById.get(entry.id)?.baseId||entry.id);
   const isFinishVariant=entry.id!==geometry.baseId;
   return {id:entry.id,catalogNumber:numberOf(entry),name:entry.name,baseNumber:geometry.baseNumber,

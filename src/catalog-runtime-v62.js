@@ -38,9 +38,12 @@ import { resolveNativeVehicleCatalogVisualV117 } from './vehicle-native-visuals-
 import { resolveNativeVehicleCatalogVisualV118 } from './vehicle-native-visuals-v118.js';
 import { resolveNativeVehicleCatalogVisualV120 } from './vehicle-native-visuals-v120.js';
 import { resolveNativeVehicleCatalogVisualV121, getVehicleSourceCorrectionV121 } from './vehicle-native-visuals-v121.js';
+import { resolveNativeVehicleCatalogVisualV122 } from './vehicle-native-visuals-v122.js';
 import { isEquipmentAdmittedV121 } from './equipment-release-v121.js';
+import { isEquipmentAdmittedV122 } from './equipment-release-v122.js';
+import { getVehicleReferenceV122 } from './vehicle-reference-registry-v120.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
-import { resolveWeaponReferenceCoverageV121 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v121.js';
+import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 
 export const CATALOG_UNKNOWN_V62 = 'unknown';
 
@@ -193,8 +196,8 @@ function weaponVisual(entry) {
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
     previewClips: freezeArray([]), visualMode: 'static-pose', animationStatus: 'missing',
     category: knownString(profile.category), renderWidth: profile.width, renderHeight: profile.height,
-    visualLabel: ['v113', 'v116', 'v117', 'v118', 'v120', 'v121'].includes(profile.release) ? optionalString(profile.canonicalName) : null,
-    illustrationNote: ['v113', 'v116', 'v117', 'v118', 'v120', 'v121'].includes(profile.release) ? optionalString(profile.fallbackReason) : null
+    visualLabel: ['v113', 'v116', 'v117', 'v118', 'v120', 'v121', 'v122'].includes(profile.release) ? optionalString(profile.canonicalName) : null,
+    illustrationNote: ['v113', 'v116', 'v117', 'v118', 'v120', 'v121', 'v122'].includes(profile.release) ? optionalString(profile.fallbackReason) : null
   });
   const idle = clipDescriptor(resolveWeaponVisualAnimationV63(entry));
   return selectVisualFields(profile, idle, {
@@ -256,16 +259,21 @@ function enemyVisual(entry) {
 }
 
 function vehicleVisual(entry) {
+  const candidateV122 = resolveNativeVehicleCatalogVisualV122(entry);
   const candidateV121 = resolveNativeVehicleCatalogVisualV121(entry);
-  const native = (isEquipmentAdmittedV121(candidateV121) ? candidateV121 : null)
+  const native = (isEquipmentAdmittedV122(candidateV122) ? candidateV122 : null)
+    || (isEquipmentAdmittedV121(candidateV121) ? candidateV121 : null)
     || resolveNativeVehicleCatalogVisualV120(entry) || resolveNativeVehicleCatalogVisualV118(entry) || resolveNativeVehicleCatalogVisualV117(entry)
     || resolveNativeVehicleCatalogVisualV113(entry) || resolveNativeVehicleCatalogVisualV112(entry);
   if (native) return freezeObject({ ...native,
     grid: freezeObject({ columns: 1, rows: 1, cellWidth: native.sourceWidth, cellHeight: native.sourceHeight }),
     idleClip: freezeObject({ sheetId: null, clip: freezeObject({ id: 'static-pose', frames: freezeArray([0]), fps: 0, loop: false }) }),
     previewClips: freezeArray([]),
-    illustrationNote: ['v113', 'v117', 'v118', 'v120', 'v121'].includes(native.release) ? optionalString(native.fallbackReason) : null
+    illustrationNote: ['v113', 'v117', 'v118', 'v120', 'v121', 'v122'].includes(native.release) ? optionalString(native.fallbackReason) : null
   });
+  // A later source model without its own mission atlas must not inherit the
+  // generic ground-family M577 animation when an admission is withheld.
+  if (entry.missionAtlasStatus === 'not-created') return null;
   const v56Profile = resolveVehicleVisualProfileV56(entry);
   let profile = v56Profile || resolveVehicleVisualProfile(entry);
   const animation = v56Profile
@@ -309,7 +317,7 @@ const catalogProvenance = (entry, visual, kind) => freezeObject({
   // identities retain an unknown work instead of inheriting a faction as proof.
   work: knownString(kind === 'weapons'
     ? resolveWeaponReferenceCoverageV120(entry)?.sourceWork || entry.work
-    : (kind === 'vehicles' ? getVehicleSourceCorrectionV121(entry)?.sourceWork || visual?.sourceWork : null) || entry.work || entry.source),
+    : (kind === 'vehicles' ? getVehicleSourceCorrectionV121(entry)?.sourceWork || visual?.sourceWork || entry.sourceWork : null) || entry.work || entry.source),
   ...(entry.documentaryReferenceV105 ? { work: entry.source, encounterStatus: 'documentary-only',
     encounterNote: 'Original consultable ; aucune admission en campagne, Bioforge ou Xeno Trials.' } : {}),
   ...(getEnemyUserCampaignV88(entry.id) ? { work: entry.source, encounterStatus: entry.encounterStatus, encounterNote: entry.encounterNote } : {}),
@@ -326,7 +334,7 @@ const canonClaimsFor = (kind, entry, visual) => {
   const weaponProfile = kind === 'weapons' ? resolveWeaponVisualProfileV63(entry) : null;
   // A documented model name does not certify the generated illustration's
   // geometry. Keep these nominal facts even when the pixels are approximate.
-  const documentedWeaponIdentity = ['v117', 'v118', 'v120', 'v121'].includes(weaponProfile?.release)
+  const documentedWeaponIdentity = ['v117', 'v118', 'v120', 'v121', 'v122'].includes(weaponProfile?.release)
     && weaponProfile.identityVerified === true
     && ['PRODUCTION_REFERENCE_RECONSTRUCTION', 'LICENSED_REFERENCE_RECONSTRUCTION'].includes(weaponProfile.referenceStatus);
   if (kind === 'weapons' && (visual?.identity?.canonExact || documentedWeaponIdentity)) return freezeObject({
@@ -397,7 +405,11 @@ const gameplayStatsFor = (kind, entry) => {
       role: knownString(seat.role),
       actions: freezeArray(seat.actions || [])
     }))),
-    actions: freezeArray(entry.actions || [])
+    actions: freezeArray(entry.actions || []),
+    ...(entry.statsPolicy ? { statsPolicy: entry.statsPolicy, seatPolicy: entry.seatPolicy || null,
+      controlMode: entry.controlMode || null, animationStatus: entry.animationStatus || 'unknown',
+      missionAtlasStatus: entry.missionAtlasStatus || 'unknown',
+      physicalDimensionsMeters: entry.physicalDimensionsMeters ?? null } : {})
   });
 };
 
@@ -507,6 +519,7 @@ const recordSearchFields = (record, entry) => freezeArray([
   entry.lineage,
   entry.stage,
   entry.sourceFile,
+  entry.sourceWork,
   ...Object.values(record.sourceReferenceV105 || {}).filter(value => typeof value === 'string'),
   (entry.specializedBehaviorV95 || entry.specializedBehaviorV90 || entry.specializedBehaviorV89)?.label,
   ...(entry.tags || []),
@@ -526,6 +539,7 @@ const buildRecord = (kind, entry) => {
     name: knownString(entry.name),
     taxonomy,
     ...(kind === 'weapons' ? { weaponCoverage: resolveWeaponReferenceCoverageV120(entry) } : {}),
+    ...(kind === 'vehicles' && getVehicleReferenceV122(entry) ? { vehicleReferenceV122: getVehicleReferenceV122(entry) } : {}),
     ...(entry.visualRevision === 106 ? { visualReferenceV106: freezeObject({
       sourceCredit: entry.sourceCredit || null, referenceNote: entry.referenceNote || null
     }) } : {}),

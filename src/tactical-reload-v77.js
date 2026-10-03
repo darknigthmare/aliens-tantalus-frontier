@@ -1,3 +1,5 @@
+import { resolveWeaponMechanicsV122 } from './weapon-mechanics-weapons-v122.js';
+
 export const TACTICAL_RELOAD_SCHEMA_V77 = 1;
 export const TACTICAL_RELOAD_PRESENTATION_V77 = Object.freeze({
   dedicatedBranchAnimations: false,
@@ -42,7 +44,8 @@ export function getTacticalReloadProfileV77(weapon = 'sidearm') {
   if (['melee', 'tool', 'sentry'].includes(family) || /neuro-melee|wrist-blades|combat-knife|combi-stick/.test(name)) return null;
   let key = Object.hasOwn(TACTICAL_RELOAD_FAMILIES_V77, family) ? family
     : Object.hasOwn(TACTICAL_RELOAD_FAMILIES_V77, name.trim()) ? name.trim() : 'rifle';
-  if (/sidearm|pistol|revolver|magnum/.test(name)) key = 'sidearm';
+  if (resolveWeaponMechanicsV122(descriptor)) key = 'launcher';
+  else if (/sidearm|pistol|revolver|magnum/.test(name)) key = 'sidearm';
   else if (/shotgun/.test(name)) key = 'shotgun';
   else if (family === 'smart' || /smartgun/.test(name)) key = 'smartgun';
   else if (family === 'explosive' || /launcher|sadar|rpg/.test(name)) key = 'launcher';

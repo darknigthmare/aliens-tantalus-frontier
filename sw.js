@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-equipment-cocoon-v121-shell-1';
+const CACHE = 'atf-v86-native-relay-v122-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,10 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/archive-relay-state-v122.js','/src/archive-relay-runtime-v122.js','/src/archive-relay-ui-v122.js',
+  '/src/equipment-release-v122.js','/src/weapon-release-v122.js','/src/weapon-native-weapons-v122.js',
+  '/src/weapon-catalog-weapons-v122.js','/src/weapon-reference-coverage-v122.js','/src/weapon-mechanics-weapons-v122.js',
+  '/src/vehicle-native-visuals-v122.js','/src/vehicle-catalog-additions-v122.js','/src/enemy-import-animation-data-v122.js',
   '/src/apc-convoy-state-v121.js','/src/apc-convoy-runtime-v121.js',
   '/src/c12-horde-state-v121.js','/src/c12-horde-runtime-v121.js',
   '/src/equipment-release-v121.js','/src/weapon-release-v121.js','/src/weapon-native-visuals-v121.js',

@@ -2,6 +2,7 @@ import { GameEngine as FinalGameEngine } from './game-final-runtime.js';
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
 import { CombatCaptionDirectorV84 } from './combat-captions-v84.js';
+import { resolveWeaponMechanicsV122, FIREBALL_MECHANICS_V122 } from './weapon-mechanics-weapons-v122.js';
 
 export * from './game-final-runtime.js';
 
@@ -153,6 +154,10 @@ const FAMILY_RULES = Object.freeze({
 
 export function buildWeaponBallisticsRuntime(weapon = {}) {
   const family = String(weapon.family || 'ballistic').toLowerCase();
+  const exact = resolveWeaponMechanicsV122(weapon);
+  if (exact) return Object.freeze({ family: 'flame', penetration: 0, penetrationBudget: 0,
+    armorBypass: exact.armorBypass, maxHits: exact.maxHits, status: exact.status,
+    noise: exact.noise, splash: exact.splash, weaponId: exact.weaponId, impactMechanismV122: exact.mechanism });
   const rule = FAMILY_RULES[family] || FAMILY_RULES.ballistic;
   const penetration = clamp(Number(weapon.penetration) || 0, 0, 100);
   return Object.freeze({
@@ -346,10 +351,17 @@ export class GameEngine extends FinalGameEngine {
   }
 
   fire(player) {
+    const equipped = this.weaponProfile(player);
     const bulletStart = this.bullets?.length || 0;
     const fired = super.fire(player);
     if (!fired) return false;
-    const ballistics = player?.inVehicle ? { ...this.weaponBallistics, family: 'sentry', ...FAMILY_RULES.sentry, penetrationBudget: 90, penetration: 55 } : this.weaponBallistics;
+    const exactMechanics = !player?.inVehicle && resolveWeaponMechanicsV122({ id: equipped.weaponId });
+    // Respect the actual actor's equipment. In particular a crew member with a
+    // normal rifle must not inherit the selected player's Fireball mechanism.
+    const ordinary = this.weaponBallistics?.impactMechanismV122 && !exactMechanics
+      ? buildWeaponBallisticsRuntime(player?.crewV85?.weaponRuntime || { family: 'ballistic', penetration: equipped.penetration }) : this.weaponBallistics;
+    const ballistics = player?.inVehicle ? { ...ordinary, family: 'sentry', ...FAMILY_RULES.sentry, penetrationBudget: 90, penetration: 55 }
+      : exactMechanics ? buildWeaponBallisticsRuntime({ id: equipped.weaponId }) : ordinary;
     for (const bullet of this.bullets.slice(bulletStart)) {
       Object.assign(bullet, {
         family: ballistics.family,
@@ -362,6 +374,13 @@ export class GameEngine extends FinalGameEngine {
         hitCount: 0,
         hitEnemyIds: new Set()
       });
+      if (exactMechanics) {
+        const speed = Math.hypot(bullet.vx, bullet.vy || 0) || 1;
+        Object.assign(bullet, { weaponId: exactMechanics.weaponId, kind: 'fireball-gel-projectile',
+          impactMechanismV122: exactMechanics.mechanism, impactResolvedV122: false,
+          vx: bullet.vx / speed * exactMechanics.projectileSpeed, vy: (bullet.vy || 0) / speed * exactMechanics.projectileSpeed,
+          life: exactMechanics.projectileLife, gravityV122: exactMechanics.gravity, w: 12, h: 12 });
+      }
       this.applyAimAssist(bullet, player);
     }
     this.penetrationTelemetry.shots += 1;
@@ -417,6 +436,8 @@ export class GameEngine extends FinalGameEngine {
         if (collision.kind !== 'enemy') {
           bullet.x = collision.x;
           bullet.y = collision.y;
+          if (bullet.weaponId === FIREBALL_MECHANICS_V122.weaponId && bullet.impactMechanismV122 === FIREBALL_MECHANICS_V122.mechanism)
+            this.applyFireballImpactV122(bullet, null, collision);
           bullet.hit = true;
           break;
         }
@@ -432,6 +453,8 @@ export class GameEngine extends FinalGameEngine {
         bullet.hitEnemyIds.add(enemyKey);
         bullet.hitCount = (bullet.hitCount || 0) + 1;
         this.penetrationTelemetry.hits += 1;
+        if (bullet.weaponId === FIREBALL_MECHANICS_V122.weaponId && bullet.impactMechanismV122 === FIREBALL_MECHANICS_V122.mechanism
+          && this.applyFireballImpactV122(bullet, enemy, collision)) { bullet.hit = true; continue; }
         if (bullet.splash > 0) {
           const splashHitIds = new Set([enemyKey]);
           for (const secondary of this.enemies) {
@@ -448,11 +471,44 @@ export class GameEngine extends FinalGameEngine {
         if (bullet.remainingPenetration > 0 && bullet.hitCount < bullet.maxHits) this.penetrationTelemetry.passThroughs += 1;
         else bullet.hit = true;
       }
-      if (!bullet.hit) Object.assign(bullet, destination);
+      if (!bullet.hit) {
+        Object.assign(bullet, destination);
+        if (bullet.impactMechanismV122 === FIREBALL_MECHANICS_V122.mechanism && bullet.weaponId === FIREBALL_MECHANICS_V122.weaponId)
+          bullet.vy = (Number(bullet.vy) || 0) + FIREBALL_MECHANICS_V122.gravity * travelDelta;
+      }
     }
     this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0
       && Number.isFinite(bullet.x) && Number.isFinite(bullet.y)
       && bullet.x >= 0 && bullet.x + bullet.w <= bounds.width && bullet.y >= 0 && bullet.y + bullet.h <= bounds.height);
+  }
+
+  /** One impact only, including terrain. The gel coats affected contacts with
+   * the existing burn status; solid cover blocks secondary damage. No claim of
+   * source-exact particle animation or persistent terrain simulation is made. */
+  applyFireballImpactV122(bullet, directEnemy = null, collision = {}) {
+    if (bullet.weaponId !== FIREBALL_MECHANICS_V122.weaponId || bullet.impactMechanismV122 !== FIREBALL_MECHANICS_V122.mechanism) return false;
+    if (bullet.impactResolvedV122) return true;
+    bullet.impactResolvedV122 = true;
+    // The incident-side face is used rather than a point buried inside a wall.
+    const origin = { x: bullet.x + bullet.w / 2, y: bullet.y + bullet.h / 2, w: 0, h: 0 };
+    if (collision.normalX) origin.x = bullet.x + (collision.normalX < 0 ? bullet.w - 0.01 : 0.01);
+    if (collision.normalY) origin.y = bullet.y + (collision.normalY < 0 ? bullet.h - 0.01 : 0.01);
+    const seen = new Set(bullet.hitEnemyIds || []);
+    if (directEnemy) seen.add(directEnemy.id ?? directEnemy);
+    for (const enemy of this.enemies || []) {
+      const key = enemy.id ?? enemy;
+      if (!enemy.alive || seen.has(key)) continue;
+      const nearest = { x: clamp(origin.x, enemy.x, enemy.x + enemy.w), y: clamp(origin.y, enemy.y, enemy.y + enemy.h) };
+      const displacement = { x: nearest.x - origin.x, y: nearest.y - origin.y };
+      if (Math.hypot(displacement.x, displacement.y) > FIREBALL_MECHANICS_V122.splash
+        || firstProjectileObstacleV83(origin, displacement, { walls: this.walls, doors: this.doors, platforms: this.platforms })) continue;
+      seen.add(key);
+      this.applyEnemyDamage(enemy, bullet.damage * FIREBALL_MECHANICS_V122.splashDamageFactor, { ...bullet, kind: 'fireball-gel-impact' });
+      this.applyProjectileStatus(enemy, { ...bullet, status: 'burn' });
+    }
+    this.onEvent({ type: 'fireball-impact-v122', weaponId: bullet.weaponId, x: origin.x, y: origin.y,
+      surface: collision.kind || 'enemy', affected: seen.size });
+    return true;
   }
 
   applyProjectileStatus(enemy, bullet) {

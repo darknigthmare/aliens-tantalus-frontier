@@ -9,12 +9,13 @@ import { buildCampaignsWithSpecialOperationsV67 } from './special-operations-v67
 import { BLACK_COCOON_CAMPAIGN_V121 } from './black-cocoon-state-v121.js';
 import { APC_CONVOY_CAMPAIGN_V121 } from './apc-convoy-state-v121.js';
 import { C12_HORDE_CAMPAIGN_V121 } from './c12-horde-state-v121.js';
+import { ARCHIVE_RELAY_CAMPAIGN_V122 } from './archive-relay-state-v122.js';
 
 export * from './content-core-v50.js';
 
-export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121]);
+export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122]);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 443 });
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 444 });
 
 export function validateContent() {
   const core = validateCoreContent();

@@ -1,4 +1,5 @@
 import { VEHICLES } from './content-core-v50.js';
+import { VEHICLE_CATALOG_ADDITIONS_V122 } from './vehicle-catalog-additions-v122.js';
 
 /** Nominal references and actual authored chassis are separate. No artwork,
  * paint fit, book/model measurement or catalogue name certifies 1:1 geometry.
@@ -87,4 +88,28 @@ export function vehicleReferenceCoverageV120(records = []) {
     byProvenance: freeze(Object.fromEntries(['licensed-reference', 'project-original', 'project-adaptation'].map(kind => [kind, [...chassis.values()].filter(reference => reference.provenance === kind).length]))),
     unresolvedIds: freeze(bound.filter(row => !row.reference).map(row => row.record.id))
   });
+}
+
+// Additive V122 references: the historical V120 exports above remain 279 IDs.
+// A production concept verifies the intended work, not film-final geometry.
+export const VEHICLE_CHASSIS_REFERENCES_V122 = freeze(Object.fromEntries(
+  VEHICLE_CATALOG_ADDITIONS_V122.map(entry => [entry.id, freeze({
+    chassisId: entry.id, chassisName: entry.name, category: entry.family,
+    provenance: entry.provenance, referenceStatus: entry.referenceStatus,
+    sourceWork: entry.sourceWork,
+    references: freeze([source(entry.sourceWork, entry.sourceUrl, 'primary-production-designer', entry.referenceNote)]),
+    visualReferenceStatus: 'production-design-front-rear-reviewed-film-final-unattested',
+    canonExact: false, physicalDimensionsMeters: null,
+    controlMode: entry.controlMode, nameStatus: entry.nameStatus,
+    note: entry.referenceNote
+  })])
+));
+
+/** V122 append-only identity; never broadens the historical V120 bindings. */
+export function getVehicleReferenceV122(value) {
+  const id = typeof value === 'string' ? value : value && typeof value === 'object' && !Array.isArray(value)
+    ? value.id || value.catalogId || value.vehicleId : null;
+  if (typeof id !== 'string' || !Object.hasOwn(VEHICLE_CHASSIS_REFERENCES_V122, id)) return null;
+  return freeze({ ...VEHICLE_CHASSIS_REFERENCES_V122[id], vehicleId: id, fit: 'Standard',
+    isVariant: false, fitReferenceStatus: VEHICLE_CHASSIS_REFERENCES_V122[id].referenceStatus });
 }

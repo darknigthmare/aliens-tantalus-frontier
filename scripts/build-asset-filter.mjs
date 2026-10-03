@@ -43,6 +43,7 @@ import { ENEMY_SOURCE_ADAPTATIONS_V118 } from '../src/enemy-source-adaptations-v
 import { publicReleasePathAdmissionV119, validatePlayerCostumeAdmissionsV119 } from './public-release-admissions-v119.mjs';
 import { publicReleasePathAdmissionV120 } from './public-release-admissions-v120.mjs';
 import { publicReleasePathAdmissionV121 } from './public-release-admissions-v121.mjs';
+import { publicReleasePathAdmissionV122 } from './public-release-admissions-v122.mjs';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -230,6 +231,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const v122Admission=publicReleasePathAdmissionV122(sourcePath,{directory:['assets/openai/equipment/v122-weapons','assets/openai/equipment/v122-vehicles','assets/openai/sprites/animated-import-v122'].includes(sourcePath)});
+    if (v122Admission!==null) return v122Admission;
     if (sourcePath === 'docs' || sourcePath.startsWith('docs/')) return false;
     const v121Admission=publicReleasePathAdmissionV121(sourcePath,{directory:['assets/openai/equipment/v121-weapons','assets/openai/equipment/v121-root-weapons','assets/openai/equipment/v121-vehicles'].includes(sourcePath)});
     if (v121Admission!==null) return v121Admission;

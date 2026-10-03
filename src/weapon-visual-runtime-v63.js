@@ -19,6 +19,7 @@ import { WEAPON_NATIVE_ASSETS_V118, WEAPON_NATIVE_PROFILES_V118,
 import { WEAPON_NATIVE_ASSETS_V120, WEAPON_NATIVE_PROFILES_V120,
   resolveNativeWeaponProfileV120 } from './weapon-native-visuals-v120.js';
 import { ADMITTED_WEAPON_ASSETS_V121,ADMITTED_WEAPON_PROFILES_V121,resolveAdmittedWeaponProfileV121 } from './weapon-release-v121.js';
+import { ADMITTED_WEAPON_ASSETS_V122,ADMITTED_WEAPON_PROFILES_V122,resolveAdmittedWeaponProfileV122 } from './weapon-release-v122.js';
 
 export const ASSO_400_HARPOON_PROFILE_V63 = Object.freeze({
   baseNumber: 24,
@@ -50,7 +51,7 @@ export const WEAPON_VISUAL_PROFILES_ALL_V63 = Object.freeze([
   ...WEAPON_VISUAL_PROFILES_NEW_V63,
   ...WEAPON_NATIVE_PROFILES_V112, ...WEAPON_NATIVE_PROFILES_V113,
   ...WEAPON_NATIVE_PROFILES_V116, ...WEAPON_NATIVE_PROFILES_V117, ...WEAPON_NATIVE_PROFILES_V118,
-  ...WEAPON_NATIVE_PROFILES_V120,...ADMITTED_WEAPON_PROFILES_V121
+  ...WEAPON_NATIVE_PROFILES_V120,...ADMITTED_WEAPON_PROFILES_V121,...ADMITTED_WEAPON_PROFILES_V122
 ]);
 
 export const WEAPON_VISUAL_ASSETS_NEW_V63 = Object.freeze({
@@ -62,7 +63,7 @@ export const WEAPON_VISUAL_ASSETS_ALL_V63 = Object.freeze({
   ...WEAPON_VISUAL_ASSETS_NEW_V63,
   ...WEAPON_NATIVE_ASSETS_V112, ...WEAPON_NATIVE_ASSETS_V113,
   ...WEAPON_NATIVE_ASSETS_V116, ...WEAPON_NATIVE_ASSETS_V117, ...WEAPON_NATIVE_ASSETS_V118,
-  ...WEAPON_NATIVE_ASSETS_V120,...ADMITTED_WEAPON_ASSETS_V121
+  ...WEAPON_NATIVE_ASSETS_V120,...ADMITTED_WEAPON_ASSETS_V121,...ADMITTED_WEAPON_ASSETS_V122
 });
 
 export const WEAPON_VISUAL_NEW_COUNT_V63 = WEAPON_VISUAL_PROFILES_NEW_V63.length;
@@ -73,7 +74,8 @@ const catalogNumber = (source = {}) => {
   return match ? Number(match[1]) : 0;
 };
 
-export function resolveWeaponVisualProfileV63(source = {}, {includeV121=true}={}) {
+export function resolveWeaponVisualProfileV63(source = {}, {includeV121=true,includeV122=true}={}) {
+  if (includeV122) { const admitted=resolveAdmittedWeaponProfileV122(source);if (admitted) return admitted; }
   if (includeV121) { const admitted=resolveAdmittedWeaponProfileV121(source);if (admitted) return admitted; }
   // Distinct additions must resolve before modulo-40 historical families.
   const native = resolveNativeWeaponProfileV120(source) || resolveNativeWeaponProfileV118(source) || resolveNativeWeaponProfileV117(source) || resolveNativeWeaponProfileV116(source)
@@ -111,7 +113,7 @@ export function resolveWeaponVisualProfileV63(source = {}, {includeV121=true}={}
 
 export function resolveWeaponVisualAnimationV63(source = {}) {
   // New inspection art cannot displace an existing action/reload sequence.
-  const entry = resolveWeaponVisualProfileV63(source, {includeV121:false});
+  const entry = resolveWeaponVisualProfileV63(source, {includeV121:false,includeV122:false});
   if (!entry || entry.visualMode === 'static-pose') return null;
   const clipId = source.reloading ? 'reload'
     : source.firing || source.attacking || source.using ? 'action'

@@ -16,6 +16,7 @@ import { withUserCasteCampaignV88 } from './enemy-user-campaign-runtime-v88.js';
 import { withBlackCocoonRuntimeV121 } from './black-cocoon-runtime-v121.js';
 import { withApcConvoyRuntimeV121 } from './apc-convoy-runtime-v121.js';
 import { withC12HordeRuntimeV121 } from './c12-horde-runtime-v121.js';
+import { withArchiveRelayRuntimeV122 } from './archive-relay-runtime-v122.js';
 
 export * from './game-production-core.js';
 
@@ -28,6 +29,7 @@ const V70ProductionEngine = withAlienSurvivalRuntimeV70(V69ProductionEngine);
 const V86ProductionEngine = withPlaceablesRuntimeV86(V70ProductionEngine);
 const V88ProductionEngine = withUserCasteCampaignV88(V86ProductionEngine);
 const V121ProductionEngine = withC12HordeRuntimeV121(withApcConvoyRuntimeV121(withBlackCocoonRuntimeV121(V88ProductionEngine)));
+const V122ProductionEngine = withArchiveRelayRuntimeV122(V121ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -40,7 +42,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V121ProductionEngine {
+export class GameEngine extends V122ProductionEngine {
   start(options = {}) {
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });

@@ -6,6 +6,7 @@ import { CREW } from './content-core-v50.js';
 import { resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
 import { sanitizeEcho9AppearanceV110 } from './echo9-personnel-v110.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
+import { resolveWeaponMechanicsV122 } from './weapon-mechanics-weapons-v122.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -412,11 +413,14 @@ export class GameEngine extends MissionEngine {
     if (player?.crewV85?.personalEquipment && !player.userEquipmentV95?.weaponId && profile.mode !== 'apc-turret') {
       const weapon = player.crewV85.weaponRuntime;
       return weapon ? { ...profile, mode: 'rifle', ammo: player.ammo, damage: weapon.damage,
-        interval: 1 / weapon.fireRate, penetration: weapon.penetration, weaponId: weapon.id }
+        interval: 1 / weapon.fireRate, penetration: weapon.penetration, weaponId: weapon.id,
+        ...(resolveWeaponMechanicsV122(weapon) ? { projectileMechanismV122: resolveWeaponMechanicsV122(weapon).mechanism } : {}) }
         : { ...profile, ammo: 0, damage: 0, mode: 'unarmed' };
     }
     if (profile.mode !== 'rifle') return profile;
-    return { ...profile, damage: this.weaponRuntime.damage, interval: 1 / this.weaponRuntime.fireRate, penetration: this.weaponRuntime.penetration };
+    return { ...profile, damage: this.weaponRuntime.damage, interval: 1 / this.weaponRuntime.fireRate,
+      penetration: this.weaponRuntime.penetration, weaponId: this.weaponRuntime.id,
+      ...(resolveWeaponMechanicsV122(this.weaponRuntime) ? { projectileMechanismV122: resolveWeaponMechanicsV122(this.weaponRuntime).mechanism } : {}) };
   }
 
   reloadWeaponV77(actor) {

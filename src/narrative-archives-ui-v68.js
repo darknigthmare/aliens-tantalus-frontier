@@ -630,7 +630,7 @@ export class MissionArchiveOverlayV68 {
     return true;
   }
 
-  close({ restoreFocus = true } = {}) {
+  close({ restoreFocus = true, resume = true } = {}) {
     if (!this.openState) return false;
     this.active = false;
     this.root.hidden = this.previousRootState?.hidden ?? true;
@@ -643,7 +643,9 @@ export class MissionArchiveOverlayV68 {
       else state.element.removeAttribute?.('inert');
       state.element.inert = state.inertProperty;
     }
-    if (this.engine.running && this.previousPaused !== null && this.previousFocusLossVersionV72 === this.engine.focusLossVersionV72) this.engine.paused = this.previousPaused;
+    // Profile replacement/navigation revokes the old simulation. Restore DOM
+    // isolation without reactivating that engine, even for a single frame.
+    if (resume && this.engine.running && this.previousPaused !== null && this.previousFocusLossVersionV72 === this.engine.focusLossVersionV72) this.engine.paused = this.previousPaused;
     const focusTarget = this.previousFocus?.isConnected === false ? this.canvas : (this.previousFocus || this.canvas);
     this.previousPaused = null;
     this.previousBackgroundStates = [];

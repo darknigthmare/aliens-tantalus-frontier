@@ -19,7 +19,7 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
-import { resolveWeaponReferenceCoverageV121 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v121.js';
+import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 
 const importWalkV107 = id => {
   const art = getEnemyStaticPoseV96(id), walk = getEnemyImportAnimationV107(art), attack = getEnemyImportAttackV109(art);
@@ -39,6 +39,7 @@ const LABELS = Object.freeze({
   canonExact: 'Exactitude canon',
   cargo: 'Cargo',
   category: 'Catégorie',
+  controlMode: 'Commande',
   caste: 'Caste',
   charges: 'Charges',
   claims: 'Faits documentés',
@@ -62,12 +63,14 @@ const LABELS = Object.freeze({
   magazine: 'Chargeur',
   mass: 'Masse',
   penetration: 'Pénétration',
+  physicalDimensionsMeters: 'Dimensions attestées',
   provenance: 'Provenance',
   rarity: 'Rareté',
   referenceStatus: 'Statut référence',
   reload: 'Rechargement',
   role: 'Rôle de jeu',
   seats: 'Postes',
+  seatPolicy: 'Postes de simulation',
   source: 'Source',
   sourceCredit: 'Crédit de la référence',
   referenceNote: 'Limites de l’adaptation',
@@ -75,6 +78,8 @@ const LABELS = Object.freeze({
   species: 'Espèce',
   speed: 'Vitesse',
   stage: 'Stade',
+  statsPolicy: 'Paramètres de simulation',
+  missionAtlasStatus: 'Animations de mission',
   subspecies: 'Sous-espèce',
   tags: 'Marqueurs',
   type: 'Type',
@@ -102,6 +107,14 @@ const DISPLAY_VALUES_V89 = Object.freeze({
   'reference-guided-static-pose': 'Pose fixe revue sur référence ; fidélité 1:1 non certifiée',
   'openai-integrated-reference-guided': 'Générateur OpenAI intégré, références visuelles contrôlées',
   'sha256-dimensions-alpha-verified': 'Fichier, dimensions et transparence vérifiés ; fidélité canonique non certifiée',
+  'v121-original-project-tuning-not-source-statistics': 'Réglages Tantalus ; performances officielles non attestées',
+  'v122-original-project-tuning-not-source-statistics': 'Réglages Tantalus ; performances officielles non attestées',
+  'v121-simulation-crew-stations-not-source-certified-crew-count': 'Postes de simulation ; équipage officiel non attesté',
+  'v122-simulation-stations-not-source-certified-crew-count': 'Postes de simulation ; équipage officiel non attesté',
+  'uncrewed-remote-operation-no-human-seats': 'Téléopération ; aucun siège humain',
+  'teleoperated-uncrewed-rover': 'Rover téléopéré, sans pilote à bord',
+  'piloted-industrial-vehicle': 'Véhicule de chantier piloté',
+  'not-created': 'Aucun atlas d’action créé',
   missing: 'Manquantes',
   contextual: 'Contextuelle',
   stalk: 'Traque',
@@ -835,6 +848,7 @@ export class CatalogWorkbenchV62 {
       this.detail.append(caption);
     }
     if (record.catalog === 'weapons') this.renderWeaponReferenceV120(record);
+    if (record.catalog === 'vehicles') this.renderVehicleReferenceV122(record);
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id), section = this.renderSection('DÉCOUVERTE EN CAMPAGNE', 'discovery');
       section.dataset.discoveryStatus = discovery.status;
@@ -917,6 +931,30 @@ export class CatalogWorkbenchV62 {
     this.detail.append(section);
   }
 
+  renderVehicleReferenceV122(record) {
+    const reference = record?.catalog === 'vehicles' ? record.vehicleReferenceV122 : null;
+    if (!reference) return;
+    // Production drawings attest a design, not its final filmed geometry or
+    // official crew/performance. Keep these limits beside the player portrait.
+    const section = this.renderSection('RÉFÉRENCE DE PRODUCTION', 'vehicle-reference-v122');
+    section.dataset.vehicleReference = reference.chassisId;
+    section.append(createElement(this.document, 'p', 'catalog-v62__fact-note', `Concept de production — ${reference.sourceWork}`),
+      createElement(this.document, 'p', 'catalog-v62__fact-note', reference.note),
+      createElement(this.document, 'p', 'catalog-v62__fact-note',
+        'Paramètres de simulation : postes, coque, vitesse, blindage et capacité sont des réglages Tantalus, pas des mesures officielles.'),
+      createElement(this.document, 'p', 'catalog-v62__fact-note',
+        'Illustration fixe d’inspection ; aucun atlas d’action créé pour les missions. Fidélité canonique 1:1 non certifiée.'));
+    for (const source of reference.references || []) {
+      let url;
+      try { url = new URL(source.url); } catch { continue; }
+      if (url.protocol !== 'https:' || url.username || url.password) continue;
+      const link = createElement(this.document, 'a', 'catalog-v62__reference-link', `Conception de production — ${url.hostname}`);
+      link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
+      section.append(link);
+    }
+    this.detail.append(section);
+  }
+
   renderVehicleShowroomV119(record, controls) {
     const model = getVehicleShowroomV119(record);
     if (!model) return null;
@@ -967,7 +1005,8 @@ export class CatalogWorkbenchV62 {
     const model = getVehicleShowroomV119(record);
     if (!model) return;
     const section = this.renderSection('POSTES D’ÉQUIPAGE', 'vehicle-stations');
-    const roles = { driver: 'Pilote / conducteur', gunner: 'Tireur', commander: 'Commandant', passenger: 'Passager' };
+    const roles = { driver: 'Pilote / conducteur', gunner: 'Tireur', commander: 'Commandant', passenger: 'Passager',
+      operator: 'Opérateur de chantier' };
     const actions = { drive: 'Conduire', boost: 'Accélérer', brake: 'Freiner', aim: 'Viser', fire: 'Tirer', reload: 'Recharger',
       observe: 'Observer', support: 'Soutenir', disembark: 'Débarquer' };
     const list = createElement(this.document, 'ol', 'catalog-v119__station-list');

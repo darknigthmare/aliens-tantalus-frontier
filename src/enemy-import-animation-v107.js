@@ -1,6 +1,7 @@
 import { ENEMY_IMPORT_ANIMATION_DATA_V108 } from './enemy-import-animation-data-v108.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V114 } from './enemy-import-animation-data-v114.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V118 } from './enemy-import-animation-data-v118.js';
+import { ENEMY_IMPORT_ANIMATION_DATA_V122 } from './enemy-import-animation-data-v122.js';
 // Presentation only: authored atlas poses never change actors, collisions or damage.
 const freeze = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -15,7 +16,7 @@ export function createEnemyImportAnimationV107(input) {
   const fail = message => { throw new Error(`Invalid imported animation: ${message}`); };
   if (d.reviewStatus !== 'accepted-multi-pose-adaptation' || d.posesVerified !== true || d.alphaVerified !== true) fail('unreviewed');
   if (!/^pose-/.test(d.profileId || '') || !hash(d.sourcePoseSha256) || !hash(d.sha256)) fail('identity');
-  if (!/^\/assets\/openai\/sprites\/animated-import-v(?:10[78]|114|118)\/[a-z0-9-]+\.png$/.test(d.path || '')) fail('path');
+  if (!/^\/assets\/openai\/sprites\/animated-import-v(?:10[78]|114|118|122)\/[a-z0-9-]+\.png$/.test(d.path || '')) fail('path');
   if (![d.sourceWidth, d.sourceHeight].every(n => Number.isInteger(n) && n > 0) || !positive(d.referenceHeight)
     || ![-1, 1].includes(d.sourceFacing)) fail('geometry');
   if (!Array.isArray(d.frames) || d.frames.length < 2 || new Set(d.frames.map(f => f.id)).size !== d.frames.length) fail('frames');
@@ -59,7 +60,8 @@ export const ENEMY_IMPORT_ANIMATIONS_V107 = Object.freeze([createEnemyImportAnim
 export const ENEMY_IMPORT_ANIMATIONS_V108 = Object.freeze(ENEMY_IMPORT_ANIMATION_DATA_V108.map(createEnemyImportAnimationV107));
 export const ENEMY_IMPORT_ANIMATIONS_V114 = Object.freeze(ENEMY_IMPORT_ANIMATION_DATA_V114.map(createEnemyImportAnimationV107));
 export const ENEMY_IMPORT_ANIMATIONS_V118 = Object.freeze(ENEMY_IMPORT_ANIMATION_DATA_V118.map(createEnemyImportAnimationV107));
-const animations = Object.freeze([...ENEMY_IMPORT_ANIMATIONS_V107, ...ENEMY_IMPORT_ANIMATIONS_V108, ...ENEMY_IMPORT_ANIMATIONS_V114, ...ENEMY_IMPORT_ANIMATIONS_V118]);
+export const ENEMY_IMPORT_ANIMATIONS_V122 = Object.freeze(ENEMY_IMPORT_ANIMATION_DATA_V122.map(createEnemyImportAnimationV107));
+const animations = Object.freeze([...ENEMY_IMPORT_ANIMATIONS_V107, ...ENEMY_IMPORT_ANIMATIONS_V108, ...ENEMY_IMPORT_ANIMATIONS_V114, ...ENEMY_IMPORT_ANIMATIONS_V118, ...ENEMY_IMPORT_ANIMATIONS_V122]);
 
 export function getEnemyImportAnimationV107(definition) {
   return animations.find(d => d.profileId === definition?.id && d.sourcePoseSha256 === definition.sha256) || null;

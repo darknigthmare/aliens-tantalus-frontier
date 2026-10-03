@@ -1,4 +1,6 @@
 import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { ARCHIVE_RELAY_CAMPAIGN_V122, validateArchiveRelayStateV122,
+  ARCHIVE_RELAY_DOCUMENT_IDS_V122, createArchiveRelayArchiveV122, normalizeArchiveRelayArchiveV122 } from './archive-relay-state-v122.js';
 import { canEquipCostumeV119, sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
 import { normalizeInfestationChainV62 } from './infestation-chain-v62.js';
 import {
@@ -285,6 +287,7 @@ export function createDefaultSave(profile = 1) {
     },
     strategy: createStrategyState(),
     narrativeArchives: createNarrativeArchivesV68(),
+    archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -676,7 +679,8 @@ function ensureStrategy(save) {
 const SPECIAL_OPERATION_REWARDS_V121 = Object.freeze([
   { campaign: BLACK_COCOON_CAMPAIGN_V121, stateKey: 'blackCocoonV121', validate: validateBlackCocoonStateV121, credits: 550, maximumKills: 32 },
   { campaign: APC_CONVOY_CAMPAIGN_V121, stateKey: 'apcConvoyV121', validate: validateApcConvoyStateV121, credits: 850, maximumKills: 64 },
-  { campaign: C12_HORDE_CAMPAIGN_V121, stateKey: 'c12HordeV121', validate: validateC12HordeStateV121, credits: 650, maximumKills: 72 }
+  { campaign: C12_HORDE_CAMPAIGN_V121, stateKey: 'c12HordeV121', validate: validateC12HordeStateV121, credits: 650, maximumKills: 72 },
+  { campaign: ARCHIVE_RELAY_CAMPAIGN_V122, stateKey: 'archiveRelayV122', validate: validateArchiveRelayStateV122, credits: 500, research: 12, maximumKills: 0 }
 ]);
 const specialOperationRewardDefinitionV121 = campaignId => SPECIAL_OPERATION_REWARDS_V121.find(entry => entry.campaign.id === campaignId);
 const resolutionSerialV121 = value => Number.isSafeInteger(value) && value >= 0 && value <= 999999999 ? value : 0;
@@ -707,6 +711,10 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
   let credits = definition.credits;
   if (definition.stateKey === 'blackCocoonV121') credits += player.kills * 12 + (state.power === 'battery' ? 80 : 0);
   if (definition.stateKey === 'c12HordeV121') credits += state.cargoTaken ? 100 : 0;
+  if (definition.stateKey === 'archiveRelayV122' && (raw.inventory.salvage !== 0 || raw.inventory.intel !== 12
+    || special.archiveRelayExitProgressV122 !== 2 || state.verdict !== 'delayed-distress')) {
+    return { valid: false, reason: 'archive-relay-reward-invalid' };
+  }
   if (definition.stateKey === 'apcConvoyV121') {
     const vehicle = raw.vehicle;
     if (vehicle?.id !== 'vehicle-001-m577-armored-personnel-carrier' || vehicle.active !== true
@@ -1356,8 +1364,11 @@ export function applyCostume(save, costumeId) {
 
 export function getOperationBrief(save, campaign, world) {
   const strategy = ensureStrategy(save);
-  const deployableVehicleId = resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
-  const selectedCrew = save.crew.filter((member) => strategy.selectedCrewIds.includes(member.id) && member.status === 'active');
+  const deployableVehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
+    : resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
+  const availableCrew = save.crew.filter((member) => strategy.selectedCrewIds.includes(member.id) && member.status === 'active');
+  // QZ-18 is a solo deployment; undeployed members must not pay its fatigue cost.
+  const selectedCrew = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? availableCrew.slice(0, 1) : availableCrew;
   const state = save.galaxy.worldState[world.id] || world;
   const averageStress = selectedCrew.reduce((sum, member) => sum + member.stress, 0) / Math.max(1, selectedCrew.length);
   const averageFatigue = selectedCrew.reduce((sum, member) => sum + member.fatigue, 0) / Math.max(1, selectedCrew.length);
@@ -1375,7 +1386,7 @@ export function getOperationBrief(save, campaign, world) {
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
   const specialRewardV121 = specialOperationRewardDefinitionV121(campaign.id);
-  const reward = specialRewardV121 ? { credits: specialRewardV121.credits, research: 0, alloy: 0 }
+  const reward = specialRewardV121 ? { credits: specialRewardV121.credits, research: specialRewardV121.research || 0, alloy: 0 }
     : { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
   const minimumCrew = Math.max(1, Math.min(MAX_SQUAD_SIZE, Math.floor(Number(campaign.minimumCrew) || 1)));
   const crewReady = selectedCrew.length >= minimumCrew;
@@ -1409,13 +1420,18 @@ export function beginOperation(save, campaign, world) {
       const activeCrewCount = save.crew.filter((member) => operationCrewIds.has(member.id) && member.status === 'active').length;
       if (activeCrewCount < minimumCrew) throw new Error(`Escouade incomplete : ${minimumCrew} operateurs actifs requis.`);
     }
-    operation.vehicleId = resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
+    operation.vehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
+      : resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
     operation.costumeId ??= save.player.costumeId || null;
     // Legacy active operations retain their original standard dotation. A new
     // selection never retroactively replaces a frozen deployment manifest.
     operation.userEquipmentV95 = normalizeUserEquipmentV95(operation.userEquipmentV95);
-    operation.neuroProfileId ??= strategy.selectedNeuroProfileId || null;
-    operation.apexDossierId ??= strategy.selectedApexDossierId || null;
+    if (campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id) {
+      operation.neuroProfileId = null; operation.apexDossierId = null;
+    } else {
+      operation.neuroProfileId ??= strategy.selectedNeuroProfileId || null;
+      operation.apexDossierId ??= strategy.selectedApexDossierId || null;
+    }
     operation.difficulty ??= save.settings?.difficulty || save.difficulty || 'standard';
     operation.resumeState ??= null;
     operation.insertionState ??= null;
@@ -1450,11 +1466,11 @@ export function beginOperation(save, campaign, world) {
     playerIdentityV84: save.onboardingV84?.identity ? structuredClone(save.onboardingV84.identity) : null,
     weaponIds: [...save.player.weaponIds],
     equipmentIds: [...save.player.equipmentIds],
-    vehicleId: strategy.selectedVehicleId,
+    vehicleId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedVehicleId,
     costumeId: save.player.costumeId || null,
     userEquipmentV95: normalizeUserEquipmentV95(save.player.userEquipmentV95),
-    neuroProfileId: strategy.selectedNeuroProfileId || null,
-    apexDossierId: strategy.selectedApexDossierId || null,
+    neuroProfileId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedNeuroProfileId || null,
+    apexDossierId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedApexDossierId || null,
     difficulty: save.settings?.difficulty || save.difficulty || 'standard',
     resumeState: null,
     insertionState: null,
@@ -1658,7 +1674,8 @@ export function resolveOperationDeployment(save, {
   const weaponIds = stringList(operation.weaponIds);
   const equipmentIds = stringList(operation.equipmentIds);
   const requestedVehicleId = typeof operation.vehicleId === 'string' ? operation.vehicleId : null;
-  const vehicleId = resolveReadyVehicleIdV60(requestedVehicleId, ensureStrategy(save).inventory.vehicleIds, vehicleCatalog);
+  const vehicleId = operation.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
+    : resolveReadyVehicleIdV60(requestedVehicleId, ensureStrategy(save).inventory.vehicleIds, vehicleCatalog);
   const costumeId = sanitizeCostumeSelectionV119(operation.costumeId, COSTUMES);
   const neuroProfileId = typeof operation.neuroProfileId === 'string' ? operation.neuroProfileId : null;
   const apexDossierId = typeof operation.apexDossierId === 'string' ? operation.apexDossierId : null;
@@ -1847,9 +1864,11 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     if (previousResourcesV121) paidStrategicRewardV121 = Object.fromEntries(Object.keys(strategicReward)
       .map(key => [key, Math.round((save.galaxy.resources[key] - previousResourcesV121[key]) * 100) / 100]));
     for (const [key, value] of Object.entries(specialOperationBonus)) changeStrategicValue(save, key, value);
-    changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil((specialRewardV121?.kills ?? kills) / 5)));
+    const documentationOnlyV122 = operation.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id;
+    // A recovered text dossier is not a biological specimen or an extermination.
+    if (!documentationOnlyV122) changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil((specialRewardV121?.kills ?? kills) / 5)));
     worldState.stability = clamp(worldState.stability + 8);
-    worldState.infestation = clamp(worldState.infestation - (containment ? 11 : 7));
+    worldState.infestation = clamp(worldState.infestation - (documentationOnlyV122 ? 0 : containment ? 11 : 7));
     worldState.quarantine = clamp(worldState.quarantine + (containment ? 8 : 4));
     if (worldState.stability >= 70 && worldState.infestation <= 35) worldState.colonyLevel = Math.min(100, worldState.colonyLevel + 1);
     if (!save.galaxy.completedCampaignIds.includes(operation.campaignId)) save.galaxy.completedCampaignIds.push(operation.campaignId);
@@ -1864,7 +1883,11 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     const cappedRewardV121 = paidStrategicRewardV121 && Object.keys(strategicReward).some(key => paidStrategicRewardV121[key] < strategicReward[key]);
     const nativeRewardLabel = specialRewardV121 ? ` Bilan vérifié : +${paidStrategicRewardV121.credits} crédits, +${paidStrategicRewardV121.alloy} alliage, +${paidStrategicRewardV121.research} recherche.`
       + (cappedRewardV121 ? ' Plafond de stockage atteint ; bilan natif conservé.' : '') : '';
-    result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel + nativeRewardLabel;
+    result = 'Objectif accompli : stabilite +8, infestation -' + (documentationOnlyV122 ? 0 : containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel + nativeRewardLabel;
+    if (documentationOnlyV122) save.archiveRelayArchivesV122 = {
+      schema: 122, case: { id: 'qz18-last-relay', operationId: operation.id, verdict: 'delayed-distress',
+        documentIds: [...ARCHIVE_RELAY_DOCUMENT_IDS_V122], completedDay: save.clock.day, completedHour: save.clock.hour }
+    };
   } else {
     worldState.stability = clamp(worldState.stability - (resolvedReason === 'retreat' ? 2 : 6));
     worldState.infestation = clamp(worldState.infestation + (resolvedReason === 'retreat' ? 2 : 7));
@@ -2116,15 +2139,15 @@ export function migrateSave(input, profile = 1) {
       playerIdentityV84: candidate.playerIdentityV84?.schema === 84 ? validatePlayerIdentityV84(candidate.playerIdentityV84).identity : null,
       weaponIds: stringList(candidate.weaponIds).slice(0, 8),
       equipmentIds: stringList(candidate.equipmentIds).slice(0, 8),
-      vehicleId: resolveReadyVehicleIdV60(
+      vehicleId: candidate.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : resolveReadyVehicleIdV60(
         typeof candidate.vehicleId === 'string' ? candidate.vehicleId.slice(0, 120) : null,
         vehicleIds,
         VEHICLES
       ),
       costumeId: sanitizeCostumeSelectionV119(candidate.costumeId, COSTUMES),
       userEquipmentV95: normalizeUserEquipmentV95(candidate.userEquipmentV95),
-      neuroProfileId: typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
-      apexDossierId: typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
+      neuroProfileId: candidate.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
+      apexDossierId: candidate.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
       ...(typeof candidate.specialOperationId === 'string' && candidate.specialOperationId.trim()
         ? { specialOperationId: candidate.specialOperationId.trim().slice(0, 120) }
         : {}),
@@ -2181,6 +2204,7 @@ export function migrateSave(input, profile = 1) {
   };
 
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
+  migrated.archiveRelayArchivesV122 = normalizeArchiveRelayArchiveV122(source.archiveRelayArchivesV122);
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
