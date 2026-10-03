@@ -59,7 +59,7 @@ import { advancePortMeridienV90, normalizePortMeridienV90, getPortMeridienObject
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
-import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
+import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
 import { TitleSceneControllerV79 } from './title-scene-v79.js';
 import { getTitleSceneShipOptionsV87, sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
@@ -1384,9 +1384,12 @@ function procurementActionsV62(record) {
   }
   const vehicleGate = kind === 'vehicle' ? getVehicleDeploymentGateV60(item) : null;
   if (vehicleGate && !vehicleGate.ready) {
-    return [{
+    // Inspection-only vehicles remain purchasable, never selectable for combat.
+    // Historical canon blocks continue to prevent procurement as before.
+    if (owned || vehicleGate.status !== VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122) return [{
       id: 'visual-required',
-      label: 'CANON BLOQUÉ · PLAQUE EXACTE REQUISE',
+      label: vehicleGate.status === VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122
+        ? 'PILOTAGE BLOQUÉ · ATLAS REQUIS' : 'CANON BLOQUÉ · PLAQUE EXACTE REQUISE',
       disabled: true,
       title: vehicleGate.reason,
       className: 'is-blocked',
