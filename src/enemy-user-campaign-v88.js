@@ -38,7 +38,7 @@ const assignment = (d) => {
   if (/xenoborg|avp_extinction/.test(b)) return 'engineered';
   return 'crossover';
 };
-const caste = (d) => [103, 105, 106, 110, 111, 112, 113, 116, 118].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
+const caste = (d) => [103, 105, 106, 110, 111, 112, 113, 116, 118, 123].includes(d.visualRevision) ? d.caste : d.combatRole === 'idle' ? 'egg' : /chestburster|juvenile/.test(d.basename) ? 'juvenile'
   : /facehugger/.test(d.basename) ? 'parasite' : /queen_aliens|pathogen_queen/.test(d.basename) ? 'royal'
     : d.combatRole === 'ranged' ? 'ranged' : 'stalker';
 
@@ -80,9 +80,9 @@ export const ENEMY_USER_CAMPAIGN_V88 = Object.freeze(ENEMY_USER_CASTES_V87.map(d
   const behaviorV90 = USER_CASTE_BEHAVIORS_V90[d.basename];
   // Newly admitted V116 dossiers keep their unit name separate from their
   // appearances/reference work. Historical names and save IDs remain intact.
-  return Object.freeze({ ...d, name: [116, 118].includes(d.visualRevision) ? d.name : `${d.name} — ${d.work}`, source: d.work, caste: caste(d),
+  return Object.freeze({ ...d, name: [116, 118, 123].includes(d.visualRevision) ? d.name : `${d.name} — ${d.work}`, source: d.work, caste: caste(d),
     modifier: 'Standard', behavior: d.combatRole === 'ranged' ? 'control' : ['idle', 'defensive-melee'].includes(d.combatRole) ? 'guard' : 'stalk',
-    frequency: 'contextual', acid: 0, automaticEncounter: admitted, encounterGroup,
+    frequency: 'contextual', acid: d.visualRevision === 123 ? d.acid : 0, automaticEncounter: admitted, encounterGroup,
     ...(d.visualRevision === 110 ? { behaviorContractV110: SYNTH_CAMPAIGN_CONTRACTS_V110[d.synthBehaviorV110] } : {}),
     ...(getAutomatonCampaignContractV113(d) ? { behaviorContractV110:getAutomatonCampaignContractV113(d) } : {}),
     encounterWorldIds: Object.freeze(worlds.map(world => world.id)),

@@ -416,7 +416,8 @@ const gameplayStatsFor = (kind, entry) => {
 // A reviewed profile may declare its life stage separately from its combat
 // caste. Do not discard that explicit stage, or infer adulthood from a name
 // such as Queen / Engineer hybrid when no stage has actually been supplied.
-const enemyStage = (entry) => ['egg', 'parasite', 'juvenile', 'adult'].includes(entry.stage)
+const enemyStage = (entry) => entry.visualRevision === 123 && entry.stage === 'larval' ? 'larval'
+  : ['egg', 'parasite', 'juvenile', 'adult'].includes(entry.stage)
   ? entry.stage
   : ['egg', 'parasite', 'juvenile'].includes(entry.caste) ? entry.caste : CATALOG_UNKNOWN_V62;
 

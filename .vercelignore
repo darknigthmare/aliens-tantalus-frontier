@@ -161,10 +161,17 @@ docs/references/V86_*
 docs/references/V86_*/**
 docs/references/v86-*
 docs/references/v86-*/**
-# Public distribution never uploads private production material.
-docs
-docs/**
-tests
-tests/**
-README.md
-**/.tmp*
+docs/references/v112-*
+docs/references/v112-*/**
+docs/references/V112_*
+docs/references/V112_*/**
+docs/references/v113-*
+docs/references/v113-*/**
+docs/references/V113_*
+docs/references/V113_*/**
+docs/references/v123-*
+docs/references/v123-*/**
+docs/references/V123_*
+docs/references/V123_*/**
+scripts/import-drive-sprites-v123.mjs
+tests/browser-drive-v123.mjs

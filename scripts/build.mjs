@@ -4,10 +4,18 @@ import { RELEASE, validateContent } from '../src/content.js';
 import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { resolveSafeBuildOutput } from './build-output-guard.mjs';
 import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
-import { verifyPublicReleaseV86 } from './verify-public-release-v86.mjs';
+import { verifyPublicAdmissionsV119 } from './public-release-admissions-v119.mjs';
+import { verifyPublicAdmissionsV120 } from './public-release-admissions-v120.mjs';
+import { verifyPublicAdmissionsV121 } from './public-release-admissions-v121.mjs';
+import { verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs';
+import { verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const root = process.cwd();
-await verifyPublicReleaseV86(root);
+await verifyPublicAdmissionsV119(root);
+await verifyPublicAdmissionsV120(root);
+await verifyPublicAdmissionsV121(root);
+await verifyPublicAdmissionsV122(root);
+await verifyPublicAdmissionsV123(root);
 await writeAudioManifestV77(root);
 const assetFilter = createBuildAssetFilter(root);
 const output = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
@@ -19,8 +27,10 @@ await mkdir(output, { recursive: true });
 for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-gallery.css', 'hub-level.css', 'runtime-level.css', 'title-screen-v61.css', 'title-scene-v79.css', 'hub-stations-v61.css', 'catalog-v62.css', 'mission-insertion-v62.css', 'alien-survival-v70.css', 'bioforge-v80.css', 'player-onboarding-v84.css', 'crew-v85.css', 'placeables-v86.css', 'xeno-trials-v96.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
   await cp(join(root, path), join(output, path));
 }
-for (const directory of ['src', 'assets']) {
-  await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
+for (const directory of ['src', 'assets', 'docs']) {
+  try { await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter }); } catch (error) {
+    if (directory !== 'docs') throw error;
+  }
 }
 await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
 await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
@@ -51,7 +61,11 @@ const index = await readFile(join(output, 'index.html'), 'utf8');
 if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas') || !index.includes('bioforge-canvas-v80')) throw new Error('Built shell is incomplete.');
 await writeFile(join(output, 'build-info.json'), JSON.stringify({
   name: RELEASE.name, version: RELEASE.version, sourceVersion: RELEASE.sourceVersion,
-  builtAt: new Date().toISOString(), content: validation.counts, artProvider: 'OpenAI ImageGen'
+  builtAt: new Date().toISOString(), content: validation.counts, artProvider: 'OpenAI ImageGen and reviewed user-provided originals',
+  driveImportV123: await verifyPublicAdmissionsV123(output, { strict: true })
 }, null, 2));
-await verifyPublicReleaseV86(output, { built: true });
+await verifyPublicAdmissionsV119(output, { strict: true });
+await verifyPublicAdmissionsV120(output, { strict: true });
+await verifyPublicAdmissionsV121(output, { strict: true });
+await verifyPublicAdmissionsV122(output, { strict: true });
 console.log(`Built ${RELEASE.name} ${RELEASE.version} with ${Object.values(validation.counts).reduce((a, b) => a + b, 0)} catalog entries.`);

@@ -13,7 +13,9 @@ export function getXenoTrialsPhysicalScaleV119(id, variant = null) {
   const definition = getXenoTrialsFighterV96(id), art = getXenoTrialsArtV96(id, variant);
   const visual = getEnemyDisplayDimensionsV110(art);
   if (!definition || !visual) return null;
-  const referenceId = referenceIds[id] || art.legacyCounterpartId || art.alteredOf || definition.profileId;
+  const inheritedReference = definition.importRevision === 123
+    ? referenceIds[definition.tuningCounterpartFighterId] : null;
+  const referenceId = referenceIds[id] || inheritedReference || art.legacyCounterpartId || art.alteredOf || definition.profileId;
   const candidate = getEnemyPhysicalSizeV100(referenceId);
   const candidateHeight = candidate?.axis?.startsWith('vertical') && candidate.targetMeters > 0 ? candidate.targetMeters : null;
   const heightMeters = candidateHeight || visual.visibleHeight / 70;

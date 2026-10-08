@@ -44,11 +44,10 @@ import { publicReleasePathAdmissionV119, validatePlayerCostumeAdmissionsV119 } f
 import { publicReleasePathAdmissionV120 } from './public-release-admissions-v120.mjs';
 import { publicReleasePathAdmissionV121 } from './public-release-admissions-v121.mjs';
 import { publicReleasePathAdmissionV122 } from './public-release-admissions-v122.mjs';
+import { publicReleasePathAdmissionV123, PUBLIC_MEDIA_DIRECTORIES_V123 } from './public-release-admissions-v123.mjs';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
-  'assets/openai/sprites/static-import-v109',
-  'assets/openai/sprites/static-game-v109',
   'docs/references/v118-batch',
   'docs/references/v117-batch',
   'docs/references/v116-user',
@@ -160,9 +159,8 @@ export function createBuildAssetFilter(projectRoot, {
     && /^\/assets\/openai\/sprites\/static-game-v110\/[a-z0-9-]+\.png$/.test(asset.path || '')
     && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV109Paths = new Set(ENEMY_IMPORT_ATTACKS_V109.filter(asset =>
-    asset.reviewStatus === 'accepted-multi-pose-adaptation' && asset.action === 'light'
-    && asset.posesVerified === true && asset.alphaVerified === true && asset.canonExact === false
-    && /^[a-f0-9]{64}$/.test(asset.sha256 || '') && asset.frames.length === 4
+    asset.reviewStatus === 'accepted-multi-pose-adaptation' && asset.posesVerified === true && asset.alphaVerified === true
+    && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && /^\/assets\/openai\/sprites\/animated-import-v109\/[a-z0-9-]+\.png$/.test(asset.path || '')
     && asset.sourceWidth > 0 && asset.sourceHeight > 0).map(asset => asset.path.slice(1)));
   const readyV108Paths = new Set(ENEMY_IMPORT_ANIMATIONS_V108.map(asset => asset.path.slice(1)));
@@ -231,9 +229,10 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const v123Admission=publicReleasePathAdmissionV123(sourcePath,{directory:PUBLIC_MEDIA_DIRECTORIES_V123.includes(sourcePath)});
+    if (v123Admission!==null) return v123Admission;
     const v122Admission=publicReleasePathAdmissionV122(sourcePath,{directory:['assets/openai/equipment/v122-weapons','assets/openai/equipment/v122-vehicles','assets/openai/sprites/animated-import-v122'].includes(sourcePath)});
     if (v122Admission!==null) return v122Admission;
-    if (sourcePath === 'docs' || sourcePath.startsWith('docs/')) return false;
     const v121Admission=publicReleasePathAdmissionV121(sourcePath,{directory:['assets/openai/equipment/v121-weapons','assets/openai/equipment/v121-root-weapons','assets/openai/equipment/v121-vehicles'].includes(sourcePath)});
     if (v121Admission!==null) return v121Admission;
     const v120Admission = publicReleasePathAdmissionV120(sourcePath, {

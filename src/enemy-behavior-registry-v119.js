@@ -129,6 +129,10 @@ function compatibleIdentity(id, family, token = '') {
   return true;
 }
 function identify(entry, family) {
+  // Reviewed V123 cutouts without an authored weapon keep contact AI. The
+  // historical Combat Synthetic name must not supply a gun to its unarmed art.
+  if (entry.visualRevision === 123 && family === 'synthetic' && entry.combatRole === 'melee')
+    return { id: 'synth-melee', explicit: true };
   const legacyId = String(entry.profileId || entry.id || '');
   const legacySuffix = legacyId.match(/^enemy-\d{3}-(.+)$/)?.[1];
   const declaredBase = entry.biologicalBase || entry.name;

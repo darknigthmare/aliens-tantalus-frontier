@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-native-relay-v122-shell-1';
+const CACHE = 'atf-v86-drive-v123-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,8 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/enemy-drive-imports-v123.js',
+  '/src/personnel-drive-data-v123.js','/src/personnel-drive-visuals-v123.js','/src/personnel-drive-ui-v123.js',
   '/src/archive-relay-state-v122.js','/src/archive-relay-runtime-v122.js','/src/archive-relay-ui-v122.js',
   '/src/equipment-release-v122.js','/src/weapon-release-v122.js','/src/weapon-native-weapons-v122.js',
   '/src/weapon-catalog-weapons-v122.js','/src/weapon-reference-coverage-v122.js','/src/weapon-mechanics-weapons-v122.js',

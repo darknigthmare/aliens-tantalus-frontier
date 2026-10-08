@@ -1,4 +1,5 @@
 import { CAMPAIGNS } from './content-core-v50.js';
+import { getPersonnelDriveVisualsV123, getPersonnelDriveDocumentariesV123 } from './personnel-drive-visuals-v123.js';
 
 const freeze = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -103,12 +104,15 @@ export function syncPremiumPersonnelV119(save) {
 export function getPremiumPersonnelV119(save = {}, campaigns = CAMPAIGNS) {
   const profile = isObject(save) ? save : {};
   const state = sanitizePremiumPersonnelV119(profile.premiumPersonnelV119, profile, campaigns);
-  return PREMIUM_PERSONNEL_V119.map(entry => {
+  // A malformed save stays a locked legacy read model; documentary visibility
+  // is attached only to a valid profile and never repairs or writes that save.
+  return [...PREMIUM_PERSONNEL_V119.map(entry => {
     const evidence = evidenceFor(entry, profile, Array.isArray(campaigns) ? campaigns : []);
     return { ...clone(entry), archive: true, unlocked: evidence.length > 0, selected: entry.id === state.selectedDossierId,
-      evidence, status: evidence.length ? 'Dossier MIRE consultable' : 'Archive à récupérer',
+      evidence, driveVisualsV123: getPersonnelDriveVisualsV123(entry.id),
+      status: evidence.length ? 'Dossier MIRE consultable' : 'Archive à récupérer',
       conditionLabel: `Réussir une reconstitution MIRE : ${entry.unlock.sources.join(' ou ')}.` };
-  });
+  }), ...(isObject(save) ? getPersonnelDriveDocumentariesV123() : [])];
 }
 
 export function selectPremiumDossierV119(save, id) {

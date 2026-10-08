@@ -8,6 +8,7 @@ import { publicReleasePathAdmissionV119, verifyPublicAdmissionsV119 } from './pu
 import { publicReleasePathAdmissionV120, verifyPublicAdmissionsV120 } from './public-release-admissions-v120.mjs';
 import { publicReleasePathAdmissionV121, verifyPublicAdmissionsV121 } from './public-release-admissions-v121.mjs';
 import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs';
+import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const ROOT_FILES = new Set([
   'command-v110.css', 'echo9-v110.css',
@@ -18,7 +19,7 @@ const ROOT_FILES = new Set([
   'runtime-level.css', 'sprite-gallery.css', 'styles-v50.css', 'styles.css', 'title-scene-v79.css', 'title-screen-v61.css',
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
-const SCRIPT_FILES = new Set(['public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
+const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admissions-v123.mjs', 'public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
   'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming
@@ -152,6 +153,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const v123Admission = publicReleasePathAdmissionV123(path, { directory });
+  if (v123Admission !== null) return v123Admission;
   const v122Admission = publicReleasePathAdmissionV122(path, { directory });
   if (v122Admission !== null) return v122Admission;
   const v121Admission = publicReleasePathAdmissionV121(path, { directory });
@@ -208,6 +211,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicAdmissionsV120(root, { strict: true });
   await verifyPublicAdmissionsV121(root, { strict: true });
   await verifyPublicAdmissionsV122(root, { strict: true });
+  await verifyPublicAdmissionsV123(root, { strict: true });
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

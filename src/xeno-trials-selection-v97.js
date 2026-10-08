@@ -26,5 +26,5 @@ export function getXenoTrialsSelectionFamilyV119(fighter) {
   if (!fighter) return 'unknown';
   if (/predalien/.test(fighter.id)) return 'hybrid';
   if (/unclassified|flesh-experiment|renaissance/.test(fighter.id)) return 'unknown';
-  return ['xenomorph', 'pathogen', 'synthetic', 'human', 'engineer', 'fauna'].includes(fighter.family) ? fighter.family : 'unknown';
+  return ['xenomorph', 'pathogen', 'synthetic', 'human', 'engineer', 'fauna', 'hybrid'].includes(fighter.family) ? fighter.family : 'unknown';
 }
