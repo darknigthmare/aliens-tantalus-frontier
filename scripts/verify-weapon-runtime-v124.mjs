@@ -132,6 +132,103 @@ test('a pump ejects once after its 0.18-second cycle and its pending cycle freez
   assert.equal(engine.weaponEffectsV124.stats.acceptedShots, 1);
 });
 
+for (const ending of ['completed', 'cancelled']) test(`a pump cycle waits through ${ending} medical work and resumes from the current receiver`, () => {
+  const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+  assert.equal(engine.fire(actor), true); advance(engine, .04);
+  const ammo = actor.ammo, reserve = actor.ammoReserve;
+  actor.health = 30; assert.equal(engine.useMedkit(actor), true);
+  advance(engine, .4);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0, 'A holstered shotgun cannot eject while the operator treats a wound.');
+  assert.equal(engine.pendingWeaponCyclesV124.length, 1);
+  const remaining = engine.pendingWeaponCyclesV124[0].due - engine.animationTime;
+  assert.ok(remaining > .13 && remaining < .15, 'The unperformed part of the cycle is retained.');
+  engine.togglePause(); const paused = engine.weaponEffectsSnapshotV124(); advance(engine, .5);
+  assert.deepEqual(engine.weaponEffectsSnapshotV124(), paused); engine.togglePause();
+  if (ending === 'cancelled') assert.equal(engine.cancelFieldActionV124(actor), true);
+  else advance(engine, actor.fieldActionV124.duration - actor.fieldActionV124.elapsed + .001);
+  assert.equal(engine.isFieldActionBusyV124(actor), false);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  assert.equal(actor.ammo, ammo); assert.equal(actor.ammoReserve, reserve);
+  advance(engine, .05); assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  // The world can move or turn the actor while their previous shot is waiting.
+  // The cosmetic cycle must resolve the receiver anew, not reuse that shot's coordinates.
+  actor.x += 80; actor.facing = -1; actor.combatAimV83 = { x: -1, y: 0 };
+  const due = engine.pendingWeaponCyclesV124[0].due;
+  advance(engine, Math.max(0, due - engine.animationTime) + .000001);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+  assert.equal(engine.pendingWeaponCyclesV124.length, 0);
+  const body = engine.weaponEffectsV124.casings[0], muzzle = engine.resolvePlayerMuzzleV124(actor, actor.combatAimV83);
+  const portX = Number.isFinite(muzzle.ejectionX) ? muzzle.ejectionX : muzzle.pivotX - 5;
+  const portY = Number.isFinite(muzzle.ejectionY) ? muzzle.ejectionY : muzzle.pivotY - 3;
+  assert.ok(Math.abs(body.x - portX) < 1.01); assert.ok(Math.abs(body.y - portY) < 1.01);
+  assert.ok(body.vx > 0, 'A left-facing weapon ejects backwards to the right.');
+  advance(engine, .6);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+  assert.equal(engine.weaponEffectsV124.stats.acceptedShots, 1);
+  assert.equal(actor.ammo, ammo); assert.equal(actor.ammoReserve, reserve);
+});
+
+test('a pump cycle waits through tube reloading without inventing a detachable magazine', () => {
+  const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+  assert.equal(engine.fire(actor), true); advance(engine, .04);
+  assert.equal(engine.reload(actor), true);
+  advance(engine, actor.tacticalReload.profile.duration + .001);
+  assert.equal(actor.reloading, false); assert.equal(actor.ammo, actor.magazineSize);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  assert.equal(engine.weaponEffectsV124.stats.discardedMagazines, 0);
+  advance(engine, .2);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+  assert.equal(engine.weaponEffectsV124.stats.discardedMagazines, 0);
+});
+
+test('a pump cycle stays pending while installing equipment and resumes after cancellation', () => {
+  const sentry = EQUIPMENT.find(item => item.id === 'equipment-020-portable-sentry');
+  const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun', { equipment: [sentry] });
+  assert.equal(engine.fire(actor), true); advance(engine, .04);
+  assert.equal(engine.useEquipment(sentry.id, actor), true); assert.equal(engine.confirmPlaceableV86(actor), true);
+  advance(engine, .5);
+  assert.equal(engine.isPlaceableBusyV86(actor), true);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  assert.equal(engine.cancelPlaceableV86(actor), true);
+  advance(engine, .2);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+});
+
+test('pending pump effects are abandoned for unavailable actors, weapon changes and scene resets', () => {
+  const transitions = [
+    actor => { actor.alive = false; }, actor => { actor.downed = true; },
+    actor => { actor.inVehicle = true; }, actor => { actor.ventTransit = {}; },
+    actor => { actor.weaponMode = 'sidearm'; }
+  ];
+  for (const transition of transitions) {
+    const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+    assert.equal(engine.fire(actor), true); advance(engine, .04);
+    actor.health = 30; assert.equal(engine.useMedkit(actor), true); advance(engine, .3);
+    transition(actor); engine.advanceSceneWeaponEffectsV124(0);
+    assert.equal(engine.pendingWeaponCyclesV124.length, 0);
+    assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+    Object.assign(actor, { alive: true, downed: false, inVehicle: false, ventTransit: null, weaponMode: 'rifle' });
+    engine.cancelFieldActionV124(actor); advance(engine, .5);
+    assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0, 'Returning to an actor or weapon cannot replay its discarded event.');
+  }
+  const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+  assert.equal(engine.fire(actor), true); engine.resetSceneWeaponEffectsV124(); advance(engine, .4);
+  assert.equal(engine.pendingWeaponCyclesV124.length, 0); assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+});
+
+test('disabling local coop discards its pending pump cycle instead of ejecting from an absent operator', () => {
+  const { engine } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+  engine.setCoop(true);
+  const member = { ...CREW[1], gearV85: [{ instanceId: 'qa-bravo-pump', catalogId: 'weapon-007-m37a2-pump-shotgun', kind: 'weapon' }] };
+  assert.equal(attachCrewDeploymentV85(engine.coop, member), true);
+  assert.equal(engine.fire(engine.coop), true); advance(engine, .04);
+  engine.setCoop(false); advance(engine, .2);
+  assert.equal(engine.pendingWeaponCyclesV124.length, 0);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  engine.setCoop(true); advance(engine, .3);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+});
+
 test('empty magazine and cell reload debris occurs once despite pause, cancellation and restart', () => {
   const energy = WEAPONS.find(item => /^N79/.test(item.name)) || WEAPONS.find(item => item.family === 'energy');
   for (const [id, stat] of [['weapon-004-vp70-combat-pistol', 'discardedMagazines'], [energy.id, 'discardedCells']]) {

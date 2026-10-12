@@ -13,6 +13,37 @@
 .appearance-preview-v126 canvas { display: block; width: 100%; height: auto; border-radius: .5rem; background: rgba(3, 12, 11, .45); }
 .appearance-preview-v126 figcaption { margin-top: .5rem; font-weight: 600; }
 .appearance-preview-v126 p { margin: .35rem 0 0; font-size: .85rem; }
+.appearance-preview-v126 [data-appearance-preview-status-v126] {
+  display: grid;
+  align-items: center;
+  min-height: 3.5em;
+  line-height: 1.35;
+}
+.appearance-preview-animation-v127 {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: .65rem;
+  margin-top: .65rem;
+  text-align: left;
+  font-size: .85rem;
+}
+.appearance-preview-animation-v127 select {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: .55rem .45rem;
+  border: 1px solid rgba(143, 195, 156, .4);
+  border-radius: .35rem;
+  background: #101e20;
+  color: var(--text, #d8e7df);
+  color-scheme: dark;
+  font: inherit;
+}
+.appearance-preview-animation-v127 select:focus-visible {
+  outline: 2px solid var(--accent, #8fc39c);
+  outline-offset: 3px;
+}
 .appearance-preview-directions-v126 { display: flex; justify-content: center; gap: .4rem; margin-top: .65rem; }
 .appearance-status-v126 {
   margin: 1rem 0;

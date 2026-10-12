@@ -170,7 +170,7 @@ const nativeSeamPolygon = (bodyRig, anatomical) => {
  */
 export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   const selected=normalizePlayerAppearanceV126(appearance), slots=selected.slots;
-  const anatomical=PLAYER_MODULAR_RIG_ANCHORS_V126[bodyRig?.atlas]?.[bodyRig?.frame];
+  const anatomical=bodyRig?.modularAnchorsV127 || PLAYER_MODULAR_RIG_ANCHORS_V126[bodyRig?.atlas]?.[bodyRig?.frame];
   const reason=!bodyRig?.eligible ? bodyRig?.reason || 'body-rig-ineligible'
     : bodyRig.rigType!=='echo9' || !anatomical || !validPoint(bodyRig.shoulders?.near)
       || !validPoint(bodyRig.shoulders?.far) || !bodyRig.matrix ? 'modular-pose-unavailable' : null;
@@ -180,7 +180,7 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   const torsoPart=PLAYER_MODULAR_RIG_PARTS_V126.torso[slots.torso][anatomical.family];
   const torsoMatrix=compose(m,triangle(torsoPart.joints,{...sourceShoulders,waist:anatomical.waist}));
   const upright=anatomical.family==='upright', headPart=PLAYER_MODULAR_RIG_PARTS_V126.head[upright?'upright':'forward'];
-  const headMatrix=compose(m,attachment(headPart.neck,anatomical.neck,.255));
+  const headMatrix=compose(m,attachment(headPart.neck,anatomical.neck,.255,.255,finite(anatomical.headAngle)));
   const lean=Math.atan2(anatomical.neck.x-anatomical.waist.x,anatomical.waist.y-anatomical.neck.y);
   const layers=[];
   if(slots.back) {
@@ -280,19 +280,23 @@ function drawLayer(ctx,images,l) {
 export function drawPlayerModularRigV126(ctx,options={}) {
   const resolved=resolvePlayerModularRigV126(options),bodyRig=options.bodyRig;
   const hasWeapon=options.weaponPose!=null,hasCallback=typeof options.drawWeapon==='function';
-  const invalidWeapon=hasWeapon!==hasCallback || hasWeapon && options.weaponPose.visible===false;
+  const hasAction=options.handPose!=null;
+  const invalidWeapon=hasWeapon!==hasCallback || hasWeapon && options.weaponPose.visible===false
+    || hasAction && (hasWeapon || hasCallback);
   const reason=!resolved.eligible || !resolved.ready ? resolved.reason
     : !ctx?.drawImage || !ctx?.transform || !ctx?.clip ? 'canvas-unavailable'
-      : invalidWeapon?'weapon-pose-unavailable':null;
+      : invalidWeapon?'weapon-pose-unavailable'
+        : hasAction && (!validPoint(options.handPose.grip) || !validPoint(options.handPose.support))?'action-hands-unavailable':null;
   if(reason)return {...resolved,drawn:false,fallback:true,reason,fallbackReason:reason,effectiveSlots:null,layers:[]};
-  const weaponPose=hasWeapon?options.weaponPose:createPlayerNeutralPoseV126(bodyRig);
+  const weaponPose=hasAction?options.handPose:hasWeapon?options.weaponPose:createPlayerNeutralPoseV126(bodyRig);
   const arms=resolvePlayerArmPoseV125(bodyRig,weaponPose);
   if(!arms)return {...resolved,drawn:false,fallback:true,reason:'arm-pose-invalid',fallbackReason:'arm-pose-invalid',layers:[]};
   const layers=[];
   const draw=l=>{drawLayer(ctx,options.images,l);layers.push(l);};
   const drawArm=(side,kind)=>{
     const arm=arms[side],isHand=kind==='hand';
-    const type=isHand?(!hasWeapon || arm.service?'service':'grip'):kind;
+    const type=isHand?(hasAction?options.handPose.handKinds?.[side]==='grip'?'grip':'service'
+      :!hasWeapon || arm.service?'service':'grip'):kind;
     const p=resolved.armParts[side][type];
     const from=kind==='upper'?arm.shoulder:kind==='fore'?arm.elbow:arm.wrist;
     const to=kind==='upper'?arm.elbow:kind==='fore'?arm.wrist:arm.hand;
@@ -308,6 +312,12 @@ export function drawPlayerModularRigV126(ctx,options={}) {
     ctx.save();options.drawWeapon(ctx,weaponPose);ctx.restore();
     layers.push({id:'weapon',slot:'weapon',itemId:weaponPose.profile?.weaponId||null,
       imageKey:weaponPose.profile?.imageKey||null,part:'held-weapon',sourceRect:weaponPose.sourceRect||null});
+  }
+  // V127 action geometry supplies independent hand contacts and preflighted
+  // props. It never masquerades as a firearm pose or receives firing events.
+  if(hasAction && typeof options.drawActionProps==='function') {
+    ctx.save();options.drawActionProps(ctx);ctx.restore();
+    for(const prop of options.actionPropLayers || [])layers.push(prop);
   }
   drawArm('near','fore');drawArm('far','hand');drawArm('near','hand');
   ctx.restore();
