@@ -353,8 +353,10 @@ export class GameEngine extends FinalGameEngine {
   fire(player) {
     const equipped = this.weaponProfile(player);
     const bulletStart = this.bullets?.length || 0;
+    const previousShots = Number(player?.shots) || 0;
     const fired = super.fire(player);
     if (!fired) return false;
+    if (!(Number(player?.shots) > previousShots)) return fired;
     const exactMechanics = !player?.inVehicle && resolveWeaponMechanicsV122({ id: equipped.weaponId });
     // Respect the actual actor's equipment. In particular a crew member with a
     // normal rifle must not inherit the selected player's Fireball mechanism.

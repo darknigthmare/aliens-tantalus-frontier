@@ -1,4 +1,5 @@
 import { EQUIPMENT } from './content-core-v50.js';
+import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const list = value => Array.isArray(value) ? value : [];
@@ -192,13 +193,14 @@ export function capturePlaceablesStateV86(state) {
 const messages = Object.freeze({
   'invalid-instance': 'Objet posable inconnu.', 'not-carried': 'Cet objet n’est pas transporté.',
   'not-deployed': 'Cet objet n’est pas déployé.', 'invalid-actor': 'Aucun opérateur disponible.',
-  'actor-airborne': 'Pose impossible : rejoignez un sol stable.', 'actor-busy': 'Pose impossible depuis un véhicule ou une échelle.',
+  'actor-airborne': 'Pose impossible : rejoignez un sol stable.', 'actor-busy': 'Votre posture ne permet pas de manipuler cet objet.',
   'invalid-position': 'Position de pose invalide.', 'out-of-bounds': 'Pose hors des limites du niveau.',
   'too-far': 'Objet trop éloigné : portée maximale de 120 unités.', 'no-support': 'Toute la base doit reposer sur une surface stable.',
   'door-blocked': 'Laissez libre le passage de la porte, même ouverte.', 'ladder-blocked': 'Laissez libre l’accès à l’échelle.',
   'vent-blocked': 'Laissez libre l’accès au conduit.', 'lift-blocked': 'Laissez libre le trajet de l’ascenseur.',
   'objective-blocked': 'Laissez libre l’accès à cet objectif.', 'actor-blocked': 'Un personnage occupe cette position.',
   'obstacle-blocked': 'Un obstacle occupe cette position.', 'placeable-blocked': 'Un autre objet occupe cette position.',
+  'reach-blocked': 'Un obstacle sépare vos mains de l’emplacement.',
   'invalid-placement': 'Le placement doit être validé avant installation.', ok: ''
 });
 const result = (ok, code, extra = {}) => ({ ok, code, reason: messages[code] || messages['invalid-placement'], ...extra });
@@ -209,7 +211,8 @@ export function validatePlaceablePlacementV86({ instance, actor, x, y, facing, w
   if (!definition || instance.kind !== definition.kind) return result(false, 'invalid-instance');
   if (instance.status !== 'carried') return result(false, 'not-carried');
   if (!rectangle(actor) || actor.alive !== true || actor.downed) return result(false, 'invalid-actor');
-  if (actor.inVehicle || actor.climbing) return result(false, 'actor-busy');
+  if (actor.inVehicle || actor.climbing || actor.ventTransit || actor.grappledClock > 0 || actor.stunClock > 0
+    || actor.hazardKind === 'electrical' && actor.hazardClock > 0) return result(false, 'actor-busy');
   if (actor.grounded !== true) return result(false, 'actor-airborne');
   if (!finite(x) || !finite(y)) return result(false, 'invalid-position');
   const bounds = worldBounds(world.bounds);
@@ -242,6 +245,12 @@ export function validatePlaceablePlacementV86({ instance, actor, x, y, facing, w
     ['obstacle-blocked', [...list(world.walls), ...list(world.covers), ...list(world.obstacles), ...list(world.platforms)].filter(item => !item?.destroyed)]
   ];
   for (const [code, objects] of groups) if (list(objects).some(item => rectangle(item) && overlaps(box, item))) return result(false, code);
+  const from = { x: actor.x + actor.w / 2, y: actor.y + actor.h / 2, w: 0, h: 0 };
+  const motion = { x: box.x + box.w / 2 - from.x, y: box.y + box.h / 2 - from.y };
+  if (firstProjectileObstacleV83(from, motion, {
+    walls: [...list(world.walls), ...list(world.covers), ...list(world.obstacles), ...list(world.platforms)].filter(item => !item?.destroyed),
+    doors: list(world.doors), platforms: []
+  })) return result(false, 'reach-blocked');
   return result(true, 'ok', { x: box.x, y: box.y, facing: facing === -1 ? -1 : 1, supportSurface });
 }
 

@@ -4,8 +4,8 @@ const combatPointerBindingsV83 = new WeakMap();
 const down = (pad, index) => Boolean(pad.buttons?.[index]?.pressed || Number(pad.buttons?.[index]?.value) > 0.55);
 const axis = (pad, index) => Number.isFinite(pad.axes?.[index]) ? pad.axes[index] : 0;
 const controls = [
-  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF', interact: 'KeyE' },
-  { left: 'KeyJ', right: 'KeyL', up: 'KeyI', down: 'KeyK', fire: 'KeyO' }
+  { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', fire: 'KeyF', interact: 'KeyE', jump: 'Space' },
+  { left: 'KeyJ', right: 'KeyL', up: 'KeyI', down: 'KeyK', fire: 'KeyO', jump: 'KeyU' }
 ];
 
 /** Two stable player slots; a held/reconnected button cannot synthesize a fresh action. */
@@ -61,12 +61,15 @@ export class MissionGamepadInputV77 {
       if (!active || slot.suppressed) this.release(index);
       else {
         actor.gamepadAimV83 = aimNeutral ? null : aim;
-        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13] || buttons[1], fire: buttons[7], interact: buttons[3] };
+        actor.gamepadAimHeldV124 = buttons[6];
+        actor.gamepadCrouchV124 = buttons[1];
+        actor.gamepadMoveV124 = { x: buttons[14] || buttons[15] ? Number(buttons[15]) - Number(buttons[14]) : axis(pad, 0), y: axis(pad, 1) };
+        const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13], fire: buttons[7], interact: buttons[3], jump: buttons[0] };
         for (const [action, code] of Object.entries(controls[index])) this.engine.setHeldGameplayKeyV77(code, held[action], 'gamepad-' + index);
-        if (edge(0)) actor.jumpBuffer = 0.14;
         for (const [button, method] of [[2, 'reload'], [3, 'interact'], [4, 'activateTracker'], [5, 'toggleVehicle'], [8, 'useMedkit']]) {
           if (edge(button)) this.engine[method]?.(actor);
         }
+        if (edge(11)) this.engine.melee?.(actor);
       }
       slot.previous = buttons;
     }
@@ -75,7 +78,12 @@ export class MissionGamepadInputV77 {
   release(index) {
     for (const code of Object.values(controls[index])) this.engine.setHeldGameplayKeyV77(code, false, 'gamepad-' + index);
     const actor = index === 0 ? this.engine.player : this.engine.coop;
-    if (actor) actor.gamepadAimV83 = null;
+    if (actor) {
+      actor.gamepadAimV83 = null;
+      actor.gamepadAimHeldV124 = false;
+      actor.gamepadCrouchV124 = false;
+      actor.gamepadMoveV124 = null;
+    }
   }
 }
 
@@ -139,10 +147,19 @@ export function bindCombatPointerAimV83(canvas, engine, onStart) {
     actor.pointerAimV83 = Object.freeze({ x: worldX - shoulder.x, y: worldY - shoulder.y, source: 'pointer' });
     return actor.pointerAimV83;
   };
+  const updateButtons = (buttons) => {
+    if (!pointer) return;
+    const wasFiring = Boolean(pointer.buttons & 1);
+    pointer.buttons = buttons & 3;
+    if (!pointer.buttons) { clear(); return; }
+    const firing = Boolean(pointer.buttons & 1);
+    engine.setHeldGameplayKeyV77?.('KeyF', firing, 'pointer-v83');
+    if (firing && !wasFiring && typeof onStart === 'function') onStart();
+  };
   const start = (event) => {
     // A first finger may own a movement button outside the canvas. The aiming
     // finger need not be globally primary, but the canvas still owns one pointer.
-    if (disposed || event.isPrimary === false && event.pointerType !== 'touch' || event.button !== undefined && event.button !== 0
+    if (disposed || event.isPrimary === false && event.pointerType !== 'touch' || event.button !== undefined && ![0, 2].includes(event.button)
       || !Number.isFinite(event.clientX) || !Number.isFinite(event.clientY)) return;
     const id = Number.isInteger(event.pointerId) ? event.pointerId : 0;
     if (pointer && pointer.id !== id) return;
@@ -150,23 +167,35 @@ export function bindCombatPointerAimV83(canvas, engine, onStart) {
     if (!pointerGameplayAvailableV83(engine, engine.player)
       || typeof engine.canRouteGameplayKey === 'function' && !engine.canRouteGameplayKey(event)) return;
     owner = engine.player;
-    pointer = { id, clientX: event.clientX, clientY: event.clientY, type: event.pointerType || 'mouse', captured: false };
+    pointer = { id, clientX: event.clientX, clientY: event.clientY, type: event.pointerType || 'mouse', captured: false, buttons: 0 };
     try { canvas.setPointerCapture?.(id); pointer.captured = typeof canvas.setPointerCapture === 'function'; } catch {}
     if (refresh()) {
-      engine.setHeldGameplayKeyV77?.('KeyF', true, 'pointer-v83');
-      if (typeof onStart === 'function') onStart(event);
+      if (event.button === 2) event.preventDefault?.();
+      updateButtons(pointer.type === 'touch' ? 1 : event.buttons || (event.button === 2 ? 2 : 1));
     }
   };
   const move = (event) => {
     if (disposed || !pointer || event.pointerId !== pointer.id || event.isPrimary === false && pointer.type !== 'touch') return;
     const held = pointer.type === 'touch'
       ? (typeof canvas.hasPointerCapture === 'function' ? canvas.hasPointerCapture(pointer.id) : pointer.captured)
-      : Boolean(event.buttons & 1);
+      : Boolean(event.buttons & 3);
     if (!held) { clear(); return; }
     if (!Number.isFinite(event.clientX) || !Number.isFinite(event.clientY)) return;
     pointer.clientX = event.clientX;
     pointer.clientY = event.clientY;
     refresh();
+    if (pointer && pointer.type !== 'touch') updateButtons(event.buttons);
+  };
+  // Mouse chords emit mousedown/up as well as pointermove, but pointerdown only
+  // occurs for the first button. Keep RMB aim when LMB is released, and vice versa.
+  const chord = (event) => {
+    if (disposed || !pointer || pointer.type !== 'mouse') return;
+    if (!pointerGameplayAvailableV83(engine, owner)) { clear(); return; }
+    if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY)) {
+      pointer.clientX = event.clientX; pointer.clientY = event.clientY;
+    }
+    refresh();
+    updateButtons(event.buttons || 0);
   };
   const end = (event) => { if (!disposed && pointer && event.pointerId === pointer.id) clear(); };
   const onBlur = () => { if (!disposed) clear(); };
@@ -186,6 +215,9 @@ export function bindCombatPointerAimV83(canvas, engine, onStart) {
   }
   listen(globalThis, 'pointerup', end);
   listen(globalThis, 'pointercancel', end);
+  listen(canvas, 'mousedown', chord);
+  listen(globalThis, 'mouseup', chord);
+  listen(canvas, 'contextmenu', (event) => { if (pointer || pointerGameplayAvailableV83(engine, engine.player)) event.preventDefault?.(); });
   listen(globalThis, 'blur', onBlur);
   listen(globalThis.document, 'visibilitychange', onVisibility);
   listen(globalThis.document, 'focusin', onFocus);

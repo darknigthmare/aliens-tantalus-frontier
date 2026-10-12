@@ -1,4 +1,5 @@
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
+import { drawPlayerAimGuideV124 } from './player-control-v124.js';
 import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { resolveUserEquipmentLoadoutV95, loadUserEquipmentImagesV95, drawUserArmorV95, drawUserWeaponV95 } from './user-equipment-v95.js';
@@ -850,6 +851,7 @@ export function withV52MissionRuntime(BaseEngine) {
       if (personal && !actor.crewV85.weaponRuntime) return false;
       const previousWeapon = this.weaponRuntime;
       const previousBallistics = this.weaponBallistics;
+      const previousShots = Number(actor?.shots) || 0;
       let fired;
       try {
         if (personal) {
@@ -861,7 +863,7 @@ export function withV52MissionRuntime(BaseEngine) {
         this.weaponRuntime = previousWeapon;
         this.weaponBallistics = previousBallistics;
       }
-      if (fired && actor) {
+      if (fired && actor && Number(actor.shots) > previousShots) {
         actor.v52FireClock = actor.inVehicle ? 0.48 : 0.34;
         if (actor.inVehicle && this.vehicle) this.vehicle.v52TurretClock = 0.52;
       }
@@ -1714,8 +1716,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const muzzle = resolveCombatMuzzleV83(member, aim, { pivotX: pivot.x, pivotY: pivot.y, barrelLength: 22 });
       const shot = buildCombatShotVectorsV83(aim, { speed: explosive ? 700 : 850 })[0];
       const bullet = {
-        x: muzzle.x,
-        y: muzzle.y,
+        ...muzzle,
         w: explosive ? 16 : 12,
         h: explosive ? 8 : 4,
         vx: shot.vx,
@@ -2097,8 +2098,10 @@ export function withV52MissionRuntime(BaseEngine) {
           if (entity?.biology) this.animationTelemetry.fallbackFamilies.add(entity.biology);
           continue;
         }
-        const sample = this.spriteAnimation.sample(entityId, request, this.animationTime, { reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: entity });
+        const sample = this.spriteAnimation.sample(entityId, request, this.animationTime, { reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: entity,
+          physicalContext: String(this.missionLevelRuntime?.currentRoomId || this.activeRoomId || this.room || '') });
         if (!sample) continue;
+        if (entity === this.player || entity === this.coop) entity.playerPresentationV124 = sample.presentationV124 || null;
         entity.v52Animation = { sheetId: sample.sheet.id, clipId: sample.clip.id, frame: sample.frame, complete: sample.complete,
           ...(sample.motionV87 ? { motionV87: sample.motionV87 } : {}) };
         this.animationTelemetry.samples += 1;
@@ -2173,9 +2176,11 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     drawActor(ctx, actor) {
+      drawPlayerAimGuideV124(this, ctx, actor);
       const equipmentV95 = actor === this.player && !this.neuro?.active ? this.userEquipmentV95 : null;
       const armorV95 = equipmentV95?.armor;
-      if (armorV95 && drawUserArmorV95(ctx, actor, this.images?.get(armorV95.imageKey), armorV95)) {
+      if (armorV95 && drawUserArmorV95(ctx, actor, this.images?.get(armorV95.imageKey), armorV95,
+        { timeSeconds: this.animationTime, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) })) {
         // Human-sized collision stays independent of the static reference canvas.
         actor.spriteHitbox = null;
         const weaponV95 = equipmentV95.weapon;
@@ -2186,7 +2191,9 @@ export function withV52MissionRuntime(BaseEngine) {
       const isCoop = actor === this.coop;
       const request = resolveIdentitySafePlayerAnimationV57(actor, Boolean(this.neuro?.active && actor === this.player));
       const entityId = getAnimationEntityKeyV57(isCoop ? 'coop' : 'player', actor, isCoop ? 'secondary' : 'primary');
-      const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: actor });
+      const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: actor,
+        physicalContext: String(this.missionLevelRuntime?.currentRoomId || this.activeRoomId || this.room || '') });
+      actor.playerPresentationV124 = sample?.presentationV124 || null;
       const entry = sample?.sheet || null;
       const image = entry ? this.images?.get(entry.imageKey) : null;
       const costumeId = this.neuro?.active && actor === this.player ? null : actor.costumeId;
@@ -2197,7 +2204,8 @@ export function withV52MissionRuntime(BaseEngine) {
         sample,
         pivot: entry ? SPRITE_PIVOTS[entry.pivot] : null,
         entity: actor,
-        surface: 'mission', costumeId, costumeImages: this.images
+        surface: 'mission', costumeId, costumeImages: this.images,
+        timeSeconds: this.animationTime, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion)
       });
       const runtime = render.fallback ? null : buildSpriteHitboxRuntime(actor, entry);
       actor.spriteHitbox = runtime;

@@ -1,3 +1,5 @@
+import { getPlayerSourceCropV124, playerAtlasScaleV124 } from './player-presentation-v124.js';
+
 export const PLAYER_VISUAL_ASSETS_V81 = Object.freeze([
   Object.freeze({ sheetId: 'player.echo9-marine.locomotion', imageKey: 'playerLocomotion', path: '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png', sha256: 'f5b25ca6189d0a2891d1a6f60635417238d7dc52bfece7ae20a2cd9dffa21ca3' }),
   Object.freeze({ sheetId: 'player.echo9-marine.combat', imageKey: 'playerCombat', path: '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png', sha256: 'a0880c628fe8b4892bcbab525d7e56583f21b8e92229d75370a608ab0d370e55' }),
@@ -29,6 +31,32 @@ export const PLAYER_VISUAL_CONTRACT_V81 = Object.freeze({
     bioforge: Object.freeze({ height: 98, width: Math.round(98 * ECHO9_ASPECT) })
   })
 });
+
+/** Cell 3 is the reviewed, flash-free shouldered pose used at shot onset.
+ * Its visible barrel ends at source (194,96), relative to foot support
+ * (128,240). Use the same nonuniform cell scale and stature normalization as
+ * the renderer, instead of deriving a visual shoulder from the 42x92 hitbox.
+ * Other postures and dedicated/custom art retain their own existing anchors.
+ */
+export function getEcho9StandingMuzzleOptionsV124(actor, { surface = 'mission' } = {}) {
+  if (!actor || actor.alive === false || actor.downed || actor.inVehicle || actor.crouching
+    || actor.grounded === false || actor.climbing || actor.ventTransit || actor.reloading
+    // Saved uniforms such as costume-001 have no dedicated atlas and render
+    // Echo9. Only registered dedicated skins or an observed skin opt out.
+    || Math.abs(Number(actor.vx) || 0) > 12 || getPlayerCostumeSkinV119(actor.costumeId) || actor.playerVisualV81?.skinId
+    || actor.playerVisualV81?.fallback || actor.userEquipmentV95?.armorId || actor.userEquipmentV95?.weaponId
+    || actor.playerVisualV81?.sheetId && !ECHO9_SHEET_ID_SET.has(actor.playerVisualV81.sheetId)
+    || !['mission', 'bioforge'].includes(surface)) return null;
+  const { x, y, w, h } = actor;
+  if (![x, y, w, h].every(Number.isFinite) || w <= 0 || h <= 0) return null;
+  const metrics = PLAYER_VISUAL_CONTRACT_V81.surfaces[surface];
+  const scale = playerAtlasScaleV124('player.echo9-marine.combat');
+  return Object.freeze({
+    pivotX: x + w / 2,
+    pivotY: y + h + (96 - 240) * metrics.height / 256 * scale,
+    barrelLength: (194 - 128) * metrics.width / 256 * scale
+  });
+}
 
 export function normalizePlayerFacingV81(value) {
   return Number(value) < 0 ? -1 : 1;
@@ -177,19 +205,49 @@ export function drawPlayerSpriteV81(ctx, options = {}) {
     else validation = { ...validation, costumeId, costumeDegraded: costume.reason };
   }
   const { source, sprite, flip } = validation;
+  const presentation = options.sample?.presentationV124;
+  const sourceCrop = !validation.skinId ? getPlayerSourceCropV124(options.sheet?.id,
+    options.sample?.frame ?? options.sample?.row * 4 + options.sample?.column) : null;
+  const scaleX = sprite.width / source.width;
+  const scaleY = sprite.height / source.height;
+  const drawSource = sourceCrop ? { x: source.x + sourceCrop.x, y: source.y + sourceCrop.y,
+    width: sourceCrop.width, height: sourceCrop.height } : source;
+  const drawSprite = sourceCrop ? {
+    x: sprite.x + (flip ? source.width - sourceCrop.x - sourceCrop.width : sourceCrop.x) * scaleX,
+    y: sprite.y + (sourceCrop.y + 240 - sourceCrop.supportY) * scaleY,
+    width: sourceCrop.width * scaleX, height: sourceCrop.height * scaleY
+  } : sprite;
+  const transform = presentation?.transform || {};
+  const atlasScale = validation.skinId ? 1 : playerAtlasScaleV124(options.sheet?.id);
+  const crouchedBodyHeight = validation.skinId ? sprite.height * (1 - 16 / source.height)
+    : sprite.height * (options.sample?.frame === 12 ? 132 : 143) / 256;
+  const extensionY = Math.max(0, Math.min(32, Number(transform.extensionY) || 0));
+  const visualScaleY = Math.max(.8, Math.min(1.5, (Number(transform.scaleY) || 1)
+    + extensionY / Math.max(24, crouchedBodyHeight)));
+  const shearX = Math.max(-.05, Math.min(.05, Number(transform.shearX) || 0));
   ctx.save?.();
+  // Breathing, gait weight and cover rise share the physical foot support.
+  // Cropping is a sampling correction; it must never change collision geometry.
+  if (ctx.transform && validation.pivot && (atlasScale !== 1 || visualScaleY !== 1 || shearX !== 0)) {
+    ctx.translate?.(validation.pivot.x, validation.pivot.y);
+    ctx.transform(atlasScale, 0, shearX * atlasScale, visualScaleY * atlasScale, 0, 0);
+    ctx.translate?.(-validation.pivot.x, -validation.pivot.y);
+  }
   ctx.beginPath?.();
   ctx.rect?.(sprite.x, sprite.y, sprite.width, sprite.height);
   ctx.clip?.();
   if (flip) {
-    ctx.translate?.(sprite.x + sprite.width, sprite.y);
+    ctx.translate?.(drawSprite.x + drawSprite.width, drawSprite.y);
     ctx.scale?.(-1, 1);
-    ctx.drawImage?.(image, source.x, source.y, source.width, source.height, 0, 0, sprite.width, sprite.height);
+    ctx.drawImage?.(image, drawSource.x, drawSource.y, drawSource.width, drawSource.height, 0, 0, drawSprite.width, drawSprite.height);
   } else {
-    ctx.drawImage?.(image, source.x, source.y, source.width, source.height, sprite.x, sprite.y, sprite.width, sprite.height);
+    ctx.drawImage?.(image, drawSource.x, drawSource.y, drawSource.width, drawSource.height, drawSprite.x, drawSprite.y, drawSprite.width, drawSprite.height);
   }
   ctx.restore?.();
   const { image: _privateImage, ...result } = validation;
-  return Object.freeze({ ...result, drawn: true, fallback: false });
+  return Object.freeze({ ...result, drawn: true, fallback: false,
+    presentationV124: presentation ? Object.freeze({ ...presentation, visualScaleY, shearX, atlasScale }) : null,
+    samplingV124: sourceCrop ? Object.freeze({ source: Object.freeze(drawSource), sprite: Object.freeze(drawSprite),
+      supportY: sourceCrop.supportY, correctedSupport: true }) : null });
 }
-import { resolvePlayerCostumeSampleV119 } from './player-costume-skins-v119.js';
+import { getPlayerCostumeSkinV119, resolvePlayerCostumeSampleV119 } from './player-costume-skins-v119.js';
