@@ -12,6 +12,7 @@ import {
 } from '../src/save.js';
 import { CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES, COSTUMES } from '../src/content.js';
 import { USER_EQUIPMENT_V95 } from '../src/user-equipment-v95.js';
+import { resolvePlayerAppearancePreviewWeaponV127 } from '../src/player-appearance-loadout-v127.js';
 
 const clone = value => structuredClone(value);
 const parts = slot => PLAYER_APPEARANCE_ITEMS_V126.filter(item => item.slot === slot);
@@ -32,6 +33,64 @@ const withoutAppearance = save => {
   delete result.player.coopAppearanceV126;
   return result;
 };
+
+test('V127 armory weapon observation uses issued catalogue art and never mutates the profile', () => {
+  const save = createDefaultSave(), before = clone(save);
+  const expected = WEAPONS.find(weapon => weapon.id === save.player.weaponIds.at(-1));
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'player'), expected);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop'), expected);
+  assert.deepEqual(save, before);
+  save.player.weaponIds = ['missing-weapon'];
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save), null, 'No invented substitute for an unknown item.');
+});
+
+test('V127 preview follows personal J1 and J2 kits including an unarmed operator', () => {
+  const save = createDefaultSave();
+  const primary = WEAPONS.find(weapon => weapon.id === 'weapon-001-m41a-pulse-rifle');
+  const secondary = WEAPONS.find(weapon => weapon.id === 'weapon-007-m37a2-pump-shotgun');
+  save.crew[0].gearV85 = [{ instanceId: 'preview-j1-weapon', kind: 'weapon', catalogId: primary.id }];
+  save.crew[1].gearV85 = [{ instanceId: 'preview-j2-weapon', kind: 'weapon', catalogId: secondary.id }];
+  const before = clone(save);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'player').id, primary.id);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop').id, secondary.id);
+  assert.deepEqual(save, before);
+  save.crew[1].gearV85 = [];
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop'), null);
+  save.onboardingV84 = { identity: { id: 'player-echo9' } };
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save).id, save.player.weaponIds.at(-1),
+    'The independent commander does not borrow the first Marine’s personal rifle.');
+});
+
+test('V127 preview respects custom issued weapons while a personal J2 keeps their own kit', () => {
+  const save = createDefaultSave(), custom = USER_EQUIPMENT_V95.find(item => item.kind === 'weapon');
+  save.player.userEquipmentV95.weaponId = custom.id;
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save), custom);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop'), custom,
+    'A J2 without a personal kit uses the operation’s shared issued weapon.');
+  save.crew[1].gearV85 = [];
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop'), null);
+});
+
+test('V127 preview reads the frozen operation weapon and crew manifest after profile edits', () => {
+  const save = createDefaultSave();
+  const personalId = 'weapon-007-m37a2-pump-shotgun';
+  save.crew[1].gearV85 = [{ instanceId: 'preview-manifest-weapon', kind: 'weapon', catalogId: personalId }];
+  beginOperation(save, CAMPAIGNS[0], WORLDS.find(world => world.id === CAMPAIGNS[0].worldId) || WORLDS[0]);
+  const deployment = resolveOperationDeployment(save, catalogs);
+  const original = deployment.weapon.id;
+  save.player.weaponIds = [WEAPONS[0].id];
+  save.crew[1].gearV85 = [];
+  save.strategy.selectedCrewIds = [];
+  const before = clone(save);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save).id, original);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop').id, personalId);
+  assert.deepEqual(save, before, 'Reading the active manifest is presentation-only.');
+  save.strategy.currentOperation.crewManifestV85 = [];
+  save.crew[1].gearV85 = [{ instanceId: 'preview-new-live-weapon', kind: 'weapon', catalogId: personalId }];
+  assert.equal(resolveOperationDeployment(save, catalogs).crew.length, 0);
+  assert.equal(resolvePlayerAppearancePreviewWeaponV127(save, 'coop').id, original,
+    'An explicitly empty frozen manifest cannot borrow the current crew kit.');
+});
 
 test('appearance defaults are valid independent part selections, never shared mutable state', () => {
   const first = normalizePlayerAppearanceV126(), second = normalizePlayerAppearanceV126();

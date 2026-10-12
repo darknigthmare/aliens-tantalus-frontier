@@ -3,6 +3,7 @@ import { PLAYER_BODY_RIG_ASSETS_V125, resolvePlayerBodyRigV125 } from './player-
 import { PLAYER_MODULAR_RIG_ASSETS_V126, drawPlayerModularRigV126 } from './player-modular-rig-v126.js';
 import { WeaponImageCacheV125 } from './weapon-image-cache-v125.js';
 import { playerAppearanceStatusV126 } from './player-appearance-runtime-v126.js';
+import { resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-action-rig-v127.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 
@@ -16,6 +17,7 @@ export function prepareHubPlayerAppearanceV126(hub) {
   hub.player.appearanceV126 = normalizePlayerAppearanceV126(hub.playerAppearanceV126);
   hub.player.costumeId = hub.playerCostumeIdV119 || null;
   hub.player.playerAppearanceVisualV126 = null;
+  hub.player.playerActionVisualV127 = null;
   delete hub.player.weaponRigMotionV125;
   hub.playerAppearanceCacheV126 ||= new WeaponImageCacheV125({ imageStore: hub.playerSheets, maxImages: 12 });
   hub.playerAppearanceCacheV126.clear();
@@ -44,21 +46,32 @@ export function advanceHubPlayerAppearanceV126(hub) {
 
 export function drawHubPlayerAppearanceV126(hub, ctx, sample = null) {
   if (!hub.player) return null;
-  const bodyRig = resolvePlayerBodyRigV125(bodyOptions(hub, sample));
-  const render = drawPlayerModularRigV126(ctx, { bodyRig, appearance: hub.player.appearanceV126,
-    images: hub.playerSheets });
+  const options = bodyOptions(hub, sample);
+  let action = resolvePlayerActionRigV127(options);
+  if (action.eligible && hub.running) {
+    hub.playerAppearanceCacheV126?.retain([...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126, ...action.requiredAssets]);
+    action = resolvePlayerActionRigV127(options);
+  }
+  const bodyRig = action.eligible ? action.bodyRig : resolvePlayerBodyRigV125(options);
+  const render = action.eligible
+    ? drawPlayerActionRigV127(ctx, { actionRig: action, appearance: hub.player.appearanceV126, images: hub.playerSheets })
+    : drawPlayerModularRigV126(ctx, { bodyRig, appearance: hub.player.appearanceV126, images: hub.playerSheets });
   hub.player.playerAppearanceVisualV126 = playerAppearanceStatusV126({ actor: hub.player,
-    bodyRig, images: hub.playerSheets, render });
+    bodyRig, images: hub.playerSheets, render, actionRig: action });
+  hub.player.playerActionVisualV127 = hub.player.playerAppearanceVisualV126.action;
   return render.drawn ? render : null;
 }
 
 export function hubPlayerAppearanceSnapshotV126(hub) {
   const actor = hub.player;
-  const bodyRig = actor ? resolvePlayerBodyRigV125(bodyOptions(hub)) : null;
-  const status = playerAppearanceStatusV126({ actor, bodyRig, images: hub.playerSheets });
+  const options = bodyOptions(hub), action = resolvePlayerActionRigV127(options);
+  const bodyRig = action.eligible ? action.bodyRig : actor ? resolvePlayerBodyRigV125(options) : null;
+  const status = playerAppearanceStatusV126({ actor, bodyRig, images: hub.playerSheets, actionRig: action });
   const last = actor?.playerAppearanceVisualV126;
   const current = last && status.supported && status.ready && last.bodyFrame === status.bodyFrame
-    && last.bodyAtlas === status.bodyAtlas && JSON.stringify(last.selected) === JSON.stringify(status.selected);
+    && last.bodyAtlas === status.bodyAtlas && JSON.stringify(last.selected) === JSON.stringify(status.selected)
+    && last.action?.kind === status.action?.kind && last.action?.serial === status.action?.serial
+    && (!status.action || last.sampledAt === status.sampledAt);
   return { schema: 126, images: hub.playerAppearanceCacheV126?.snapshot() || null,
     selected: status.selected, visual: current ? { ...last, ready: status.ready } : status };
 }
@@ -68,5 +81,6 @@ export function releaseHubPlayerAppearanceV126(hub) {
   if (hub.player) {
     delete hub.player.weaponRigMotionV125;
     hub.player.playerAppearanceVisualV126 = null;
+    hub.player.playerActionVisualV127 = null;
   }
 }

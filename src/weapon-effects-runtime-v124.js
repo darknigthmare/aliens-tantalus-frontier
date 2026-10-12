@@ -117,7 +117,8 @@ export function withWeaponEffectsV124(Base) {
       if (profile.casing?.ejectOn === 'cycle') {
         if (this.pendingWeaponCyclesV124.length >= 64) this.pendingWeaponCyclesV124.shift();
         this.pendingWeaponCyclesV124.push({ actor, actorId: record.id, aim, muzzle, profile, shotSerial,
-          x: actor.x, y: actor.y, due: finite(this.animationTime) + Math.max(0, finite(profile.casing.delay, 0.18)) });
+          x: actor.x, y: actor.y, observedAt: finite(this.animationTime),
+          due: finite(this.animationTime) + Math.max(0, finite(profile.casing.delay, 0.18)) });
       }
       return true;
     }
@@ -239,7 +240,19 @@ export function withWeaponEffectsV124(Base) {
       this.pendingWeaponCyclesV124 = this.pendingWeaponCyclesV124.filter(event => {
         const actor = event.actor;
         if (actor.alive === false || actor.downed || actor.inVehicle || actor.ventTransit
+          || actor === this.coop && !this.coopEnabled
           || profileKey(getWeaponPresentationProfileV124(this.weaponDescriptorV124(actor))) !== profileKey(event.profile)) return false;
+        const elapsed = Math.max(0, now - event.observedAt);
+        event.observedAt = now;
+        // An accepted pump shot still owns one spent shell, but the operator
+        // cannot cycle a holstered receiver with their hands treating a wound,
+        // installing equipment or reloading. Preserve the remaining cycle time
+        // until they return to the weapon; do not invent another shot or flash.
+        if (this.isFieldActionBusyV124?.(actor) || this.isPlaceableBusyV86?.(actor)
+          || actor.climbing || actor.reloading || actor.toolUseClock > 0 || actor.interactionClock > 0 || actor.meleeClock > 0) {
+          event.due += elapsed;
+          return true;
+        }
         if (event.due > now + 1e-8) return true;
         // The pump follows the current carried receiver. Walking after a shot
         // cannot eject the spent shell from the actor's previous position.

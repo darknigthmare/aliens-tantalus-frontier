@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { createBioforgeV80 } from '../src/bioforge-session-v80.js';
-import { HubGame } from '../src/hub-opening-v88.js';
+import { HubGame, HUB_DECKS } from '../src/hub-opening-v88.js';
+import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, CREW, NEURO_XENO_PROFILES } from '../src/content.js';
 import { attachCrewDeploymentV85 } from '../src/crew-runtime-v85.js';
 import { resolveCombatAimV83 } from '../src/combat-aim-v83.js';
@@ -14,6 +15,7 @@ import { getCostumeV119 } from '../src/franchise-costumes-v119.js';
 import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126 } from '../src/player-appearance-v126.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_BODY_RIG_ASSETS_V125 } from '../src/player-body-rig-v125.js';
+import { PLAYER_ACTION_PROP_ASSETS_V127 } from '../src/player-action-rig-v127.js';
 
 // Actual production, Bioforge and hub runtimes own all gameplay. The observable
 // host substitutes browser APIs only; dimensions come from shipped PNG headers.
@@ -352,28 +354,191 @@ test('deferred or failed clothing images keep a complete fallback and retain sel
   }
 });
 
-test('real medical and sentry actions retain the selected pieces and restore them on completion', async () => {
+test('real medical, sentry installation and recovery keep the selected pieces throughout their transactions', async () => {
   const sentry = EQUIPMENT.find(item => item.id === 'equipment-020-portable-sentry'); assert.ok(sentry);
   const subject = fixture({ equipment: [sentry], playerAppearanceV126: alternate() });
   await readyAppearance(subject);
   subject.actor.health = 30;
   subject.key('keydown', 'KeyH'); subject.key('keyup', 'KeyH');
   assert.equal(subject.engine.isFieldActionBusyV124(subject.actor), true);
-  let action = drawActor(subject);
-  assert.equal(action.supported, false); assert.equal(action.reason, 'authored-action');
-  assert.deepEqual(action.selected, alternate());
-  assert.equal(subject.drawing.draws.filter(draw => modularPaths.has(draw.source)).length, 0);
+  const resources = combatState(subject.actor), kits = subject.engine.inventory.medkits;
+  let action = await readyAppearance(subject);
+  assert.equal(action.action.kind, 'medical'); assert.equal(action.action.phase, 'prepare');
+  assert.equal(action.action.props[0].itemId, 'tool.medkit'); assert.equal(action.action.firing, false);
+  assert.equal(subject.actor.heldWeaponVisualV125, null);
+  assert.equal(subject.engine.resolvePlayerWeaponPoseV125(subject.actor), null, 'The actual firing rig still rejects occupied hands.');
+  for (let frame = 0; frame < 12; frame++) drawActor(subject);
+  assert.deepEqual(combatState(subject.actor), resources, 'Rendering the kit never advances or commits its transaction.');
+  assert.equal(subject.engine.inventory.medkits, kits);
+  advance(subject.engine, 1.1); action = await readyAppearance(subject);
+  assert.equal(action.action.phase, 'work'); assert.equal(subject.actor.health, 30);
   advance(subject.engine, 2.3);
   assert.ok(subject.actor.health > 30); assert.equal(subject.engine.isFieldActionBusyV124(subject.actor), false);
-  await readyAppearance(subject);
+  assert.equal(subject.engine.inventory.medkits, kits - 1);
+  action = await readyAppearance(subject); assert.equal(action.action, null);
+  assert.equal(subject.actor.playerActionVisualV127, null);
   assert.equal(subject.engine.useEquipment(sentry.id, subject.actor), true);
   assert.equal(subject.engine.confirmPlaceableV86(subject.actor), true);
   assert.equal(subject.engine.isPlaceableBusyV86(subject.actor), true);
-  action = drawActor(subject); assert.equal(action.supported, false); assert.deepEqual(action.selected, alternate());
-  assert.equal(subject.drawing.draws.filter(draw => modularPaths.has(draw.source)).length, 0);
+  action = await readyAppearance(subject); assert.equal(action.action.kind, 'deploy');
+  assert.deepEqual(action.action.props, [], 'The world-owned sentry is not duplicated as an object in the hands.');
   advance(subject.engine, 2.6);
-  assert.equal(subject.engine.placeablesV86.instances[0].status, 'deployed');
+  const instance = subject.engine.placeablesV86.instances[0];
+  assert.equal(instance.status, 'deployed');
+  action = await readyAppearance(subject); assert.equal(action.action, null);
+  assert.equal(subject.engine.recoverPlaceableV86(instance.instanceId, subject.actor), true);
+  action = await readyAppearance(subject); assert.equal(action.action.kind, 'recover');
+  advance(subject.engine, 2.1);
+  assert.equal(instance.onGround, false);
+  action = await readyAppearance(subject); assert.equal(action.action, null);
+});
+
+test('J1 and J2 perform different modular actions independently and a pause freezes their phases', async () => {
+  const subject = fixture({ playerAppearanceV126: alternate(), coopAppearanceV126: bare() });
+  const { engine, actor } = subject;
+  engine.setCoop(true); await readyAppearance(subject); await readyAppearance(subject, engine.coop);
+  actor.health = 30;
+  assert.equal(engine.useMedkit(actor), true);
+  assert.equal(engine.activateTracker(engine.coop), true);
+  const primary = await readyAppearance(subject), secondary = await readyAppearance(subject, engine.coop);
+  assert.equal(primary.action.mode, 'medical'); assert.equal(secondary.action.mode, 'motion-tracker');
+  assert.notEqual(primary.action.props[0].imageKey, secondary.action.props[0].imageKey);
+  assert.deepEqual(primary.selected, alternate()); assert.deepEqual(secondary.selected, bare());
+  const cache = engine.playerAppearanceSnapshotV126().images;
+  assert.ok(cache.retained <= cache.limit && cache.loading === 0 && cache.failed === 0);
+  engine.togglePause(); const phases = [actor.fieldActionV124.elapsed, engine.coop.toolUseClock];
+  advance(engine, .7);
+  assert.deepEqual([actor.fieldActionV124.elapsed, engine.coop.toolUseClock], phases);
+  assert.deepEqual((await readyAppearance(subject)).action, primary.action);
+  assert.deepEqual((await readyAppearance(subject, engine.coop)).action, secondary.action);
+  engine.togglePause();
+  const kits = engine.inventory.medkits;
+  assert.equal(engine.cancelFieldActionV124(actor), true);
+  assert.equal((await readyAppearance(subject)).action, null);
+  assert.equal((await readyAppearance(subject, engine.coop)).action.mode, 'motion-tracker');
+  assert.equal(actor.health, 30); assert.equal(engine.inventory.medkits, kits);
+  advance(engine, .8);
+  assert.equal((await readyAppearance(subject, engine.coop)).action, null);
+});
+
+test('real field tools render their own implement without committing targets or resources during drawing', async () => {
+  const modes = [
+    ['Access Tuner', 'access-tuner', 'tool.access-tuner'],
+    ['Maintenance Jack', 'maintenance-jack', 'tool.maintenance-jack'],
+    ['Cutting Torch', 'cutting-torch', WEAPONS.find(item => item.name === 'Cutting Torch').id]
+  ];
+  for (const [name, mode, propId] of modes) {
+    const equipment = EQUIPMENT.find(item => item.name === name); assert.ok(equipment);
+    const subject = fixture({ equipment: [equipment], playerAppearanceV126: alternate() });
+    const { engine, actor } = subject;
+    await readyAppearance(subject);
+    const target = { id: `qa-${mode}`, x: actor.x + actor.w + 18, y: actor.y, w: 24, h: actor.h,
+      open: false, lockedBy: 'security', art: 'breakable' };
+    if (mode === 'access-tuner') engine.doors = [target];
+    if (mode === 'cutting-torch') engine.walls = [target];
+    assert.equal(engine.useEquipment(equipment.id, actor), true);
+    advance(engine, .5);
+    const transaction = combatState(actor), charges = engine.equipmentActions.get(equipment.id).remaining;
+    const beforeTarget = structuredClone(target);
+    const visual = await readyAppearance(subject);
+    assert.equal(visual.action.mode, mode); assert.equal(visual.action.props.length, 1);
+    assert.equal(visual.action.props[0].itemId, propId);
+    assert.ok(subject.drawing.draws.some(draw => draw.source === visual.action.props[0].path));
+    assert.ok(!visual.layers.some(layer => layer.slot === 'weapon'), 'The gun is stowed while the real implement is held.');
+    assert.equal(engine.resolvePlayerWeaponPoseV125(actor), null);
+    for (let count = 0; count < 8; count++) drawActor(subject);
+    assert.deepEqual(combatState(actor), transaction); assert.deepEqual(target, beforeTarget);
+    assert.equal(engine.equipmentActions.get(equipment.id).remaining, charges);
+    assert.equal(engine.cancelFieldActionV124(actor), true);
+    assert.equal((await readyAppearance(subject)).action, null);
+    assert.equal(engine.equipmentActions.get(equipment.id).remaining, charges);
+  }
+});
+
+test('movement, changed targets and an actual impact end field gestures without stale tools', async () => {
+  for (const ending of ['movement', 'target', 'impact']) {
+    const tuner = EQUIPMENT.find(item => item.name === 'Access Tuner');
+    const subject = fixture({ equipment: [tuner], playerAppearanceV126: alternate() });
+    const { engine, actor } = subject;
+    const door = { id: 'qa-access', x: actor.x + actor.w + 18, y: actor.y, w: 24, h: actor.h,
+      open: false, lockedBy: 'security' };
+    engine.doors = [door]; await readyAppearance(subject);
+    const charges = engine.equipmentActions.get(tuner.id).remaining;
+    assert.equal(engine.useEquipment(tuner.id, actor), true);
+    advance(engine, .25); assert.equal((await readyAppearance(subject)).action.mode, 'access-tuner');
+    if (ending === 'movement') { subject.key('keydown', 'KeyA'); advance(engine, .05); subject.key('keyup', 'KeyA'); }
+    if (ending === 'target') { engine.doors = []; advance(engine, .05); }
+    if (ending === 'impact') engine.damagePlayer(actor, 12);
+    assert.equal(engine.isFieldActionBusyV124(actor), false);
+    const visual = await readyAppearance(subject);
+    assert.ok(!visual.action || visual.action.mode === 'hurt');
+    assert.ok(!visual.layers.some(layer => layer.slot === 'action-prop'));
+    assert.equal(door.open, false); assert.equal(engine.equipmentActions.get(tuner.id).remaining, charges);
+    advance(engine, .6); assert.equal((await readyAppearance(subject)).action, null);
+  }
+});
+
+test('a missing active tool keeps the complete fallback and late loads cannot restore cancelled work', async () => {
+  const medkit = PLAYER_ACTION_PROP_ASSETS_V127.find(asset => asset.id === 'tool.medkit'); assert.ok(medkit);
+  const subject = fixture({ playerAppearanceV126: alternate() }, { holdImages: path => path === medkit.path });
+  const { engine, actor } = subject;
+  await readyAppearance(subject); actor.health = 30;
+  assert.equal(engine.useMedkit(actor), true);
+  const before = combatState(actor), kits = engine.inventory.medkits;
+  const visual = drawActor(subject);
+  assert.equal(visual.supported, true); assert.equal(visual.ready, false); assert.equal(visual.drawn, false);
+  assert.equal(visual.reason, 'action-images-unavailable');
+  assert.ok(subject.drawing.draws.length > 0, 'The existing complete actor remains visible.');
+  assert.equal(subject.drawing.draws.filter(draw => modularPaths.has(draw.source) || draw.source === medkit.path).length, 0,
+    'No part of an incomplete action is painted beneath the fallback.');
+  assert.deepEqual(combatState(actor), before); assert.equal(engine.inventory.medkits, kits);
+  engine.cancelFieldActionV124(actor);
+  subject.releaseImages(); await subject.flush();
+  assert.equal((await readyAppearance(subject)).action, null);
+  assert.equal(actor.health, 30); assert.equal(engine.inventory.medkits, kits);
+  engine.stop(); const requests = subject.requests.length;
+  await subject.flush(); assert.equal(subject.requests.length, requests);
+  assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
+});
+
+test('real contextual knife and rifle-bash keep the outfit and do not emit a projectile or spend ammunition', async () => {
+  for (const weaponMode of ['sidearm', 'rifle']) {
+    const subject = fixture({ playerAppearanceV126: alternate() }), { engine, actor } = subject;
+    actor.weaponMode = weaponMode; await readyAppearance(subject);
+    const target = engine.createEnemy(ENEMIES[0], 0, actor.x + 45, actor.y + actor.h, { boss: false, keyCarrier: false });
+    Object.assign(target, { x: actor.x + 48, y: actor.y, vx: 0, vy: 0, grounded: true });
+    engine.enemies = [target];
+    const ammo = actor.ammo, shots = actor.shots, bullets = engine.bullets.length;
+    assert.equal(engine.performContextualMelee(actor), true);
+    const visual = await readyAppearance(subject);
+    assert.equal(visual.action.mode, weaponMode === 'rifle' ? 'rifle-bash' : 'knife-attack');
+    assert.equal(visual.action.props.length, 1); assert.equal(visual.action.props[0].firing, false);
+    if (weaponMode === 'rifle') assert.equal(visual.action.props[0].itemId, engine.heldWeaponDescriptorV125(actor).id);
+    else assert.match(visual.action.props[0].itemId, /knife/);
+    const healthAfterHit = target.health;
+    for (let frame = 0; frame < 12; frame++) drawActor(subject);
+    assert.equal(target.health, healthAfterHit); assert.equal(actor.ammo, ammo); assert.equal(actor.shots, shots);
+    assert.equal(engine.bullets.length, bullets); assert.equal(engine.weaponEffectsV124.lights.length, 0);
+    engine.enemies = []; advance(engine, .6);
+    assert.equal((await readyAppearance(subject)).action, null);
+  }
+});
+
+test('an accepted shot interrupts cosmetic hurt and immediately returns to the aligned held weapon', async () => {
+  const subject = fixture({ playerAppearanceV126: alternate() }), { engine, actor } = subject;
   await readyAppearance(subject);
+  engine.damagePlayer(actor, 10);
+  assert.ok(actor.v52HurtClock > 0);
+  assert.equal((await readyAppearance(subject)).action.mode, 'hurt');
+  const health = actor.health, armor = actor.armor, ammo = actor.ammo;
+  assert.equal(engine.fire(actor), true, 'Existing gameplay permits a response shot during the cosmetic injury animation.');
+  assert.equal(actor.ammo, ammo - 1); assert.equal(actor.health, health); assert.equal(actor.armor, armor);
+  assert.equal(actor.v52HurtClock, 0, 'The accepted response owns the hands; it cannot fire from a holstered injury pose.');
+  const visual = await readyAppearance(subject);
+  assert.equal(visual.action, null); assert.ok(actor.heldWeaponVisualV125);
+  const bullet = engine.bullets.at(-1);
+  near(actor.heldWeaponVisualV125.muzzle.x, bullet.x, 'Response shot rendered muzzle x');
+  near(actor.heldWeaponVisualV125.muzzle.y, bullet.y, 'Response shot rendered muzzle y');
 });
 
 test('native costumes, custom armor and Neuro report unsupported composition without losing either loadout', async () => {
@@ -430,6 +595,30 @@ test('the real hub composes a neutral selected kit and only physical movement ad
   assert.deepEqual(hub.player.weaponRigMotionV125, motion, 'A paused hub does not advance clothing motion.');
   hub.stop(false); status = hub.getSnapshot().playerAppearanceV126;
   assert.equal(status.images.retained, 0); assert.equal(hub.player.playerAppearanceVisualV126, null);
+});
+
+test('a real hangar electrical contact keeps the modular outfit and preserves its gameplay stun', async () => {
+  const host = browserHost(), hub = new HubGame(host.canvas);
+  hub.playerAppearanceV126 = alternate(); hub.start(); await host.flush();
+  hub.state.deck = HUB_DECKS.findIndex(deck => deck.id === 'engineering');
+  assert.ok(hub.state.deck >= 0);
+  const room = HUB_DECKS[hub.state.deck].rooms.find(entry => entry.id === DROPSHIP_HANGAR_ART_V55.roomId);
+  const bounds = ELECTRICAL_HAZARD_ART_V55.collisionBounds;
+  hub.player.x = room.xStart + bounds.x + bounds.w / 2 - hub.player.w / 2;
+  hub.player.y = bounds.y + Math.min(12, bounds.h) - hub.player.h;
+  hub.hangarHazardCooldown = 0;
+  assert.equal(hub.applyHangarHazard(), true);
+  const health = hub.player.health, shock = hub.player.shockClock, velocity = hub.player.vy;
+  assert.ok(shock > 0 && health < hub.player.maxHealth);
+  host.drawing.reset(); hub.drawPlayer(host.drawing.ctx); host.drawing.assertBalanced();
+  const visual = hub.getSnapshot().playerAppearanceV126.visual;
+  assertComposed(host, visual, alternate(), 'Hangar shock');
+  assert.equal(visual.action.mode, 'hurt'); assert.equal(visual.action.props.length, 0);
+  for (let count = 0; count < 8; count++) hub.drawPlayer(host.drawing.ctx);
+  assert.equal(hub.player.health, health); assert.equal(hub.player.shockClock, shock); assert.equal(hub.player.vy, velocity);
+  hub.stop(false);
+  assert.equal(hub.player.playerActionVisualV127, null);
+  assert.equal(hub.getSnapshot().playerAppearanceV126.images.retained, 0);
 });
 
 test('Bioforge initializes and restores its own kit while keeping the accepted weapon origin aligned', async () => {

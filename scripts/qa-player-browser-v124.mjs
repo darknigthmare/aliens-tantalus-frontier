@@ -34,12 +34,12 @@ async function playwrightModule() {
   }
 }
 
-const report = { schema: 126, baseUrl, startedAt: new Date().toISOString(), status: 'running',
+const report = { schema: 127, baseUrl, startedAt: new Date().toISOString(), status: 'running',
   scenario: 'Production mission entered through Frontier Forge UI; isolated browser context.',
   checks: [], captures: [], pageErrors: [], requestFailures: [], weaponImageRequests: [], weaponImagePhases: [],
   appearanceImageRequests: [], appearanceImagePhases: [],
   limitations: ['No physical gamepad or mobile device is connected.',
-    'Cover, medical cancellation and deployable persistence are covered separately by the production runtime integration suite; the imported editor plan does not supply cover.'] };
+    'The imported editor plans do not supply cover; physical cover interactions are covered by the production runtime integration suite.'] };
 let browser, page;
 
 try {
@@ -79,7 +79,17 @@ try {
       weaponRig: engine.playerWeaponRigSnapshotV125?.() || null,
       appearance: engine.playerAppearanceSnapshotV126?.() || null,
       coop: engine.coopEnabled && engine.coop ? { x: engine.coop.x, y: engine.coop.y, facing: engine.coop.facing,
+        w: engine.coop.w, h: engine.coop.h, grounded: engine.coop.grounded, health: engine.coop.health, maxHealth: engine.coop.maxHealth,
+        ammo: engine.coop.ammo, ammoReserve: engine.coop.ammoReserve, shots: engine.coop.shots,
+        fieldAction: engine.coop.fieldActionV124, placeableAction: engine.coop.placeableActionV124,
+        action: engine.coop.playerActionVisualV127 || null,
         heldWeapon: engine.coop.heldWeaponVisualV125 || null, appearance: engine.coop.playerAppearanceVisualV126 || null } : null,
+      resources: { medkits: engine.inventory?.medkits, trackerEnergy: engine.tracker?.energy, trackerPulses: engine.tracker?.pulses,
+        equipment: [...(engine.equipmentActions?.values() || [])].map(item => ({ id: item.id, remaining: item.remaining, uses: item.uses })) },
+      placeables: engine.getPlaceablesSnapshotV86?.() || null,
+      enemies: (engine.enemies || []).map(enemy => ({ id: enemy.id, x: enemy.x, y: enemy.y, w: enemy.w, h: enemy.h,
+        alive: enemy.alive, health: enemy.health })),
+      pendingCycles: (engine.pendingWeaponCyclesV124 || []).map(event => ({ actorId: event.actorId, shotSerial: event.shotSerial, due: event.due })),
       effects: effects ? { ...engine.weaponEffectsSnapshotV124(),
         lights: effects.lights.map(light => ({ ...light, age: effects.time - light.bornAt })),
         casings: effects.casings.slice(-16).map(casing => ({ id: casing.id, weaponId: casing.weaponId,
@@ -90,11 +100,13 @@ try {
       keys: [...(engine.keys || [])], player: { x: actor.x, y: actor.y, vx: actor.vx, vy: actor.vy,
         w: actor.w, h: actor.h,
         grounded: actor.grounded, crouching: actor.crouching, aiming: actor.aimingV124, facing: actor.facing,
-        health: actor.health, ammo: actor.ammo, ammoReserve: actor.ammoReserve, shots: actor.shots,
+        health: actor.health, maxHealth: actor.maxHealth, ammo: actor.ammo, ammoReserve: actor.ammoReserve, shots: actor.shots,
         heldWeapon: actor.heldWeaponVisualV125 || null, aim: actor.combatAimV83,
         weaponMotion: actor.weaponRigMotionV125 ? { ...actor.weaponRigMotionV125 } : null,
         reloading: actor.reloading, movement: actor.movementV124, presentation: actor.playerPresentationV124,
-        fieldAction: actor.fieldActionV124, cover: actor.coverV124 ? { id: actor.coverV124.id, peeking: actor.coverV124.peeking } : null } };
+        fieldAction: actor.fieldActionV124, placeableAction: actor.placeableActionV124,
+        action: actor.playerActionVisualV127 || null, toolUseClock: actor.toolUseClock, meleeClock: actor.meleeClock,
+        cover: actor.coverV124 ? { id: actor.coverV124.id, peeking: actor.coverV124.peeking } : null } };
   };
   const snapshot = () => page.evaluate(readLiveState);
   const capture = async (filename, label) => {
@@ -109,6 +121,19 @@ try {
     return state;
   };
   const check = (label, evidence) => report.checks.push({ label, status: 'passed', evidence });
+  const captureActorDetail = async (filename, label, role = 'player') => {
+    const clip = await page.evaluate(role => {
+      const engine = globalThis.__ATF_GAME__, actor = engine[role], canvas = document.querySelector('#game-canvas');
+      const rect = canvas.getBoundingClientRect(), scaleX = rect.width / 1280, scaleY = rect.height / 720;
+      const x = Math.max(0, rect.left + (actor.x - engine.camera.x - 70) * scaleX);
+      const y = Math.max(0, rect.top + (actor.y - engine.camera.y - 35) * scaleY);
+      return { x, y, width: Math.min((actor.w + 140) * scaleX, innerWidth - x),
+        height: Math.min((actor.h + 65) * scaleY, innerHeight - y) };
+    }, role);
+    assert.ok(clip.width > 0 && clip.height > 0, 'The actor must be on screen for the detail capture.');
+    await page.screenshot({ path: join(output, filename), clip });
+    report.captures.push({ filename, label, method: 'Read-only browser screenshot cropped around the actual operator', role, state: await snapshot() });
+  };
   const checkAppearance = (state, expected, role = 'player', label = 'Modular appearance') => {
     const operator = state.appearance?.operators.find(entry => entry.role === role);
     assert.ok(operator, `${label}: the actual operator has an observable selection.`);
@@ -134,6 +159,16 @@ try {
     assert.ok(state.weaponRig.images.retained <= state.weaponRig.images.limit, `${label}: weapon cache remains bounded.`);
     checkAppearance(state, null, 'player', label);
     return pose;
+  };
+  const checkActionPose = (state, kind, role = 'player') => {
+    const actor = role === 'coop' ? state.coop : state.player;
+    const operator = checkAppearance(state, role === 'coop' ? coopAppearance : primaryAppearance, role, `${role} ${kind}`);
+    const action = actor.action || operator.visual.action;
+    assert.equal(action?.kind, kind, 'The frame must contain the action actually accepted by the simulation.');
+    assert.equal(action.firing, false); assert.equal(actor.heldWeapon, null, 'Working hands do not retain a second floating firearm.');
+    assert.ok(action.progress >= 0 && action.progress <= 1);
+    assert.ok(action.props.every(prop => prop.firing === false));
+    return action;
   };
   const imagePhase = (label, state) => {
     report.weaponImagePhases.push({ label, requestPhase,
@@ -299,6 +334,12 @@ try {
   await page.locator(`[data-procure-id="${selectedWeaponId}"]`).first().click();
   await page.locator(`[data-equip-id="${selectedWeaponId}"]`).first().click();
   await page.waitForFunction(id => [...document.querySelectorAll(`[data-equip-id="${id}"]`)].some(button => button.disabled), selectedWeaponId);
+  const selectedSentryId = 'equipment-020-portable-sentry';
+  await page.locator('#armory-kind').selectOption('equipment');
+  await page.locator('#armory-search').fill('Portable Sentry');
+  await page.locator(`[data-procure-id="${selectedSentryId}"]`).first().click();
+  await page.locator(`[data-equip-id="${selectedSentryId}"]`).first().click();
+  await page.waitForFunction(id => [...document.querySelectorAll(`[data-equip-id="${id}"]`)].some(button => button.disabled), selectedSentryId);
   imagePhase('Catalogue procurement and equipment selection; DOM requests are separate', await snapshot());
 
   // Each kit is equipped with real armory buttons. A separate owner tab and a
@@ -349,6 +390,34 @@ try {
   await capturePreview('17-appearance-j1-left.png', 'The same six equipped pieces mirrored by the actual preview control', 'player');
   assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
   check('The preview mirror control preserves the selected loadout', { selected: primaryAppearance, previewFacings: [1, -1] });
+
+  const readCampaignInventory = () => page.evaluate(() => {
+    const save = globalThis.__ATF_V51__.saveSystem.data;
+    return { resources: { ...save.galaxy.resources }, weaponIds: [...save.player.weaponIds], equipmentIds: [...save.player.equipmentIds],
+      ammo: { ...save.player.ammo }, appearance: save.player.appearanceV126, coopAppearance: save.player.coopAppearanceV126 };
+  });
+  const previewInventory = await readCampaignInventory();
+  const previewModes = ['idle', 'walk', 'crouch', 'aim', 'reload', 'medical', 'deploy', 'interact', 'melee'];
+  const previewEvidence = [];
+  for (const mode of previewModes) {
+    await panel.locator('#player-appearance-animation-v127').selectOption(mode);
+    await page.waitForFunction(mode => {
+      const canvas = document.querySelector('#player-appearance-preview-v126');
+      return canvas?.dataset.appearanceReadyV126 === 'true' && canvas.dataset.appearanceAnimationV127 === mode;
+    }, mode);
+    await page.waitForTimeout(mode === 'reload' ? 1000 : 250);
+    assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
+    if (mode === 'walk') {
+      const frame = await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png'));
+      await page.waitForTimeout(180);
+      assert.notEqual(await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png')), frame,
+        'The selected walk preview must animate actual canvas pixels.');
+    }
+    await capturePreview(`21-preview-${mode}.png`, `Actual animation selector: ${mode}, with the six selected J1 pieces`, 'player');
+    previewEvidence.push({ mode, facing: -1, ready: true });
+  }
+  assert.deepEqual(await readCampaignInventory(), previewInventory, 'Inspecting an animation cannot spend or replace campaign equipment.');
+  check('All nine animation preview modes draw the selected parts without altering campaign inventory', previewEvidence);
 
   await chooseOwner('coop');
   for (const [slot, itemId] of Object.entries(primaryAppearance.slots)) await choosePiece('coop', slot, itemId);
@@ -448,7 +517,171 @@ try {
   await page.locator('#retreat-mission').click();
   await page.locator('#editor-canvas').waitFor({ state: 'visible' });
   assert.equal((await snapshot()).running, false);
+
+  // The editor's hazard damages both real operators. This supplies a valid
+  // medical target without assigning health, action clocks or saved inventory.
+  const actionPlan = { schema: 2, kind: 'mission', size: [32, 18], tiles: [
+    ...Array.from({ length: 32 }, (_, column) => ({ position: `${column}:16`, type: 'floor' })),
+    { position: '2:15', type: 'spawn' }, { position: '30:15', type: 'objective' },
+    { position: '4:15', type: 'hazard' }
+  ] };
+  await page.locator('#editor-import').setInputFiles({ name: 'player-actions-v127-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(actionPlan)) });
+  requestPhase = 'third-forge-actions';
+  await page.locator('#editor-play').click();
+  await page.waitForFunction(() => {
+    const engine = globalThis.__ATF_GAME__;
+    return engine?.running && !engine.paused && engine.player.grounded && engine.coopEnabled
+      && engine.player.playerAppearanceVisualV126?.drawn && engine.coop.playerAppearanceVisualV126?.drawn;
+  }, null, { timeout: 45000 });
+  await canvas.focus();
+  const freezeAction = async (role, kind, filename, label, { freeze = true } = {}) => {
+    await page.waitForFunction(({ role, kind }) => {
+      const actor = globalThis.__ATF_GAME__?.[role];
+      return actor?.playerAppearanceVisualV126?.drawn && actor.playerActionVisualV127?.kind === kind;
+    }, { role, kind });
+    const live = await saveCanvasFrame(filename, label, await page.evaluate(readLiveState, true));
+    checkActionPose(live, kind, role);
+    // Combat can legitimately replace a short strike with a hurt pose while
+    // an additional screenshot is encoding. Its synchronous framebuffer and
+    // simulation snapshot above are the authoritative observation.
+    if (!freeze) return live;
+    await captureActorDetail(filename.replace('.png', '-detail.png'), `${label} — operator detail`, role);
+    await canvas.focus(); await page.keyboard.press('KeyP');
+    const frozen = await snapshot();
+    assert.equal(frozen.paused, true); const action = checkActionPose(frozen, kind, role);
+    await page.waitForTimeout(140);
+    const still = await snapshot();
+    assert.equal((role === 'coop' ? still.coop : still.player).action.elapsed, action.elapsed, 'Pause freezes the actual action pose.');
+    await canvas.focus(); await page.keyboard.press('KeyP');
+    return live;
+  };
+  const medicalEvidence = [];
+  for (const role of ['player', 'coop']) {
+    const initialActor = role === 'coop' ? (await snapshot()).coop : (await snapshot()).player;
+    const right = role === 'coop' ? 'KeyL' : 'KeyD', left = role === 'coop' ? 'KeyJ' : 'KeyA';
+    await canvas.focus(); await page.keyboard.down(right);
+    await page.waitForFunction(({ role, health }) => globalThis.__ATF_GAME__?.[role]?.health < health,
+      { role, health: initialActor.health }, { timeout: 10000 });
+    await page.keyboard.up(right); await page.keyboard.down(left);
+    await page.waitForFunction(role => {
+      const engine = globalThis.__ATF_GAME__, actor = engine[role];
+      return actor.x + actor.w < engine.hazards[0].x - 24;
+    }, role);
+    await page.keyboard.up(left);
+    await page.waitForFunction(role => {
+      const actor = globalThis.__ATF_GAME__[role];
+      return actor.grounded && !(actor.v52HurtClock > 0) && !(actor.shockClock > 0);
+    }, role);
+    const wounded = await snapshot(), woundedActor = role === 'coop' ? wounded.coop : wounded.player;
+    assert.ok(woundedActor.health < initialActor.health && woundedActor.health > 0);
+    await page.keyboard.press(role === 'coop' ? 'KeyG' : 'KeyH');
+    await page.waitForTimeout(280);
+    const working = await freezeAction(role, 'medical', `22-${role}-medical.png`, `${role}: selected modular outfit during actual medical work`);
+    assert.equal(working.resources.medkits, wounded.resources.medkits, 'Preparing medical work has not consumed a kit.');
+    await page.locator('[data-placeable-operator]').selectOption(role);
+    await page.locator('[data-placeable-action="cancel-field"]').click();
+    await page.waitForFunction(role => !globalThis.__ATF_GAME__[role].fieldActionV124, role);
+    const cancelled = await snapshot(), cancelledActor = role === 'coop' ? cancelled.coop : cancelled.player;
+    assert.equal(cancelledActor.health, woundedActor.health); assert.equal(cancelled.resources.medkits, wounded.resources.medkits);
+    assert.deepEqual(cancelled.resources.equipment, wounded.resources.equipment, 'Cancellation retains equipment charges.');
+    await canvas.focus(); await page.keyboard.press(role === 'coop' ? 'KeyG' : 'KeyH');
+    await page.waitForFunction(role => globalThis.__ATF_GAME__[role].fieldActionV124?.kind === 'medical', role);
+    await page.waitForFunction(role => !globalThis.__ATF_GAME__[role].fieldActionV124, role);
+    const completed = await snapshot(), healedActor = role === 'coop' ? completed.coop : completed.player;
+    assert.ok(healedActor.health > woundedActor.health); assert.equal(completed.resources.medkits, wounded.resources.medkits - 1);
+    assert.equal(healedActor.ammo, woundedActor.ammo); assert.equal(healedActor.ammoReserve, woundedActor.ammoReserve);
+    await page.waitForFunction(role => !globalThis.__ATF_GAME__[role].playerActionVisualV127
+      && globalThis.__ATF_GAME__[role].playerAppearanceVisualV126?.drawn, role);
+    medicalEvidence.push({ role, wounded: woundedActor.health, healed: healedActor.health,
+      medkitsBefore: wounded.resources.medkits, medkitsAfter: completed.resources.medkits,
+      action: (role === 'coop' ? working.coop : working.player).action });
+  }
+  check('Both real operators keep their six selected parts during medical work, cancellation and completion', medicalEvidence);
+
+  await canvas.focus(); const beforeTracker = await snapshot(); await page.keyboard.press('KeyQ');
+  const tracker = await freezeAction('player', 'motion-tracker', '23-tracker.png', 'The independent motion tracker is held by the selected modular arms');
+  assert.equal(tracker.resources.trackerPulses, beforeTracker.resources.trackerPulses + 1);
+  assert.equal(tracker.player.ammo, beforeTracker.player.ammo);
+  assert.ok(tracker.player.action.props.some(prop => prop.itemId === 'tool.motion-tracker'));
+  await page.waitForFunction(() => !(globalThis.__ATF_GAME__.player.toolUseClock > 0));
+  check('A real tracker command renders its own implement without spending firearm ammunition', tracker.player.action);
+
+  const beginSentry = async role => {
+    await page.locator('[data-placeable-operator]').selectOption(role);
+    await page.locator(`[data-use-equipment="${selectedSentryId}"]`).click();
+    const confirm = page.locator('[data-placeable-action="confirm"]');
+    // Following squad members stay behind their leader. Face the free side
+    // after stepping clear instead of attempting to install into the formation.
+    await canvas.focus(); await page.keyboard.down(role === 'coop' ? 'KeyL' : 'KeyD');
+    await page.waitForTimeout(55); await page.keyboard.up(role === 'coop' ? 'KeyL' : 'KeyD');
+    await page.waitForTimeout(240);
+    for (let attempt = 0; attempt < 8 && !await confirm.isEnabled(); attempt++) {
+      await canvas.focus(); await page.keyboard.down(role === 'coop' ? 'KeyJ' : 'KeyA');
+      await page.waitForTimeout(300); await page.keyboard.up(role === 'coop' ? 'KeyJ' : 'KeyA');
+      await page.keyboard.down(role === 'coop' ? 'KeyL' : 'KeyD');
+      await page.waitForTimeout(45); await page.keyboard.up(role === 'coop' ? 'KeyL' : 'KeyD');
+      await page.waitForTimeout(240);
+    }
+    assert.equal(await confirm.isEnabled(), true, 'An installation needs a physically clear location.');
+    const before = await snapshot();
+    await confirm.click();
+    return before;
+  };
+  const beforeDeployment = await beginSentry('player');
+  await page.waitForTimeout(250);
+  const deploying = await freezeAction('player', 'deploy', '24-j1-deploy.png', 'J1 kneels in the selected outfit to install the carried sentry');
+  await page.locator('[data-placeable-action="cancel"]').click();
+  await page.waitForFunction(() => !globalThis.__ATF_GAME__.player.placeableActionV124);
+  const cancelledDeployment = await snapshot();
+  assert.deepEqual(cancelledDeployment.placeables.instances, beforeDeployment.placeables.instances);
+  assert.deepEqual(cancelledDeployment.resources.equipment, beforeDeployment.resources.equipment);
+  assert.equal(cancelledDeployment.player.ammo, beforeDeployment.player.ammo);
+  check('Cancelling the real installation keeps its carried object, ammo and equipment charges intact', deploying.player.action);
+
+  const beforeCoopDeploy = await beginSentry('coop');
+  const deployedId = beforeCoopDeploy.placeables.previews[0].instanceId;
+  await page.waitForTimeout(250);
+  const coopDeploy = await freezeAction('coop', 'deploy', '25-j2-deploy.png', 'J2 independently installs the carried equipment in its own outfit');
+  await page.waitForFunction(id => globalThis.__ATF_GAME__.placeablesV86.instances.some(item => item.instanceId === id && item.status === 'deployed'), deployedId);
+  const deployedState = await snapshot(), deployed = deployedState.placeables.instances.find(item => item.instanceId === deployedId);
+  await page.locator('.placeable-nearby-v86 > summary').click();
+  await page.locator(`[data-placeable-recover="${deployedId}"]`).click();
+  const recovering = await freezeAction('coop', 'recover', '26-j2-recover.png', 'J2 folds the same real sentry while retaining the modular outfit');
+  await page.waitForFunction(id => globalThis.__ATF_GAME__.placeablesV86.instances.some(item => item.instanceId === id && item.status === 'carried'), deployedId);
+  const recoveredState = await snapshot(), recovered = recoveredState.placeables.instances.find(item => item.instanceId === deployedId);
+  assert.equal(recovered.ammo, deployed.ammo); assert.equal(recovered.health, deployed.health);
+  assert.equal(recoveredState.coop.ammo, beforeCoopDeploy.coop.ammo);
+  check('J2 installation and recovery preserve the physical sentry identity and its remaining resources',
+    { instanceId: deployedId, deployAction: coopDeploy.coop.action, recoverAction: recovering.coop.action, deployed, recovered });
+  imagePhase('Action scene after both operators used the modular renderer', recoveredState);
+  await page.locator('#retreat-mission').click();
+  await page.locator('#editor-canvas').waitFor({ state: 'visible' });
+
+  // A separate editor encounter provides a real melee target; the medical and
+  // equipment checks above remain free from enemy damage or friendly gunfire.
+  const meleePlan = { ...actionPlan, tiles: actionPlan.tiles.filter(tile => tile.type !== 'hazard')
+    .concat({ position: '2:14', type: 'enemy' }) };
+  await page.locator('#editor-import').setInputFiles({ name: 'player-melee-v127-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(meleePlan)) });
+  requestPhase = 'fourth-forge-melee';
+  await page.locator('#editor-play').click();
+  await page.waitForFunction(() => {
+    const engine = globalThis.__ATF_GAME__, actor = engine?.player;
+    return engine?.running && !engine.paused && !engine.enemyAtlasLoadingPausedV65 && actor.grounded
+      && engine.enemies.some(enemy => enemy.alive && Math.abs(enemy.x + enemy.w / 2 - actor.x - actor.w / 2) < 90
+        && Math.abs(enemy.y + enemy.h / 2 - actor.y - actor.h / 2) < 94);
+  }, null, { timeout: 20000 });
+  await canvas.focus(); const beforeMelee = await snapshot(); await page.keyboard.press('KeyF');
+  await page.waitForFunction(() => globalThis.__ATF_GAME__.player.meleeClock > 0);
+  const meleeKind = await page.evaluate(() => globalThis.__ATF_GAME__.player.meleeKind);
+  const melee = await freezeAction('player', meleeKind, '27-real-melee.png', 'A real contextual melee strike with the selected independent clothing', { freeze: false });
+  assert.equal(melee.player.ammo, beforeMelee.player.ammo); assert.equal(melee.player.shots, beforeMelee.player.shots);
+  assert.ok(melee.player.action.props.length > 0);
+  check('An accepted contextual melee attack uses the modular body and its own held implement without firearm ammo use', melee.player.action);
+  await page.locator('#retreat-mission').click();
+  await page.locator('#editor-canvas').waitFor({ state: 'visible' });
+  assert.equal((await snapshot()).running, false);
   assert.equal(report.pageErrors.length, 0, `Browser exceptions: ${report.pageErrors.join('; ')}`);
+  assert.equal(report.requestFailures.length, 0, `Failed requests: ${report.requestFailures.map(entry => entry.url).join('; ')}`);
   report.status = 'passed';
 } catch (error) {
   report.status = 'failed'; report.error = { message: error.message, stack: error.stack };

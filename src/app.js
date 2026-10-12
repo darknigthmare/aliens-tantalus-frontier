@@ -90,7 +90,8 @@ import { validateCloudPayloadV119 } from './cloud-save-v119.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
 import { equipPlayerAppearanceV126, resetPlayerAppearanceV126, normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { playerAppearancePanelHtmlV126 } from './player-appearance-ui-v126.js';
-import { createPlayerAppearancePreviewV126 } from './player-appearance-preview-v126.js';
+import { createPlayerAppearancePreviewV126, normalizePlayerAppearancePreviewAnimationV127 } from './player-appearance-preview-v126.js';
+import { resolvePlayerAppearancePreviewWeaponV127 } from './player-appearance-loadout-v127.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
@@ -163,6 +164,7 @@ let appearanceOwnerV126 = 'player';
 let appearancePreviewV126 = null;
 let appearancePreviewEpochV126 = 0;
 let appearancePreviewFacingV126 = 1;
+let appearancePreviewAnimationV127 = 'idle';
 let enemyCatalogV62 = null;
 let vehicleCatalogV62 = null;
 let missionInsertionUiV62 = null;
@@ -1494,6 +1496,14 @@ function renderPlayerAppearanceV126() {
     panel.className = 'panel';
     panel.setAttribute('aria-label', 'Tenue de terrain de J1 et J2');
     byId('armory-catalog-v62').insertAdjacentElement('afterend', panel);
+    panel.addEventListener('change', event => {
+      const select = event.target.closest('[data-appearance-animation-v127]');
+      if (!select || !panel.contains(select)) return;
+      const weaponDescriptor = resolvePlayerAppearancePreviewWeaponV127(saveSystem.data, appearanceOwnerV126);
+      appearancePreviewAnimationV127 = normalizePlayerAppearancePreviewAnimationV127(select.value, weaponDescriptor);
+      appearancePreviewAnimationV127 = appearancePreviewV126?.setAnimation(appearancePreviewAnimationV127) || appearancePreviewAnimationV127;
+      select.value = appearancePreviewAnimationV127;
+    });
     panel.addEventListener('click', event => {
       const button = event.target.closest('button');
       if (!button || button.disabled || !panel.contains(button)) return;
@@ -1532,7 +1542,10 @@ function renderPlayerAppearanceV126() {
         : `button[data-appearance-reset-v126="${owner}"]`)?.focus({ preventScroll: true });
     });
   }
-  panel.innerHTML = playerAppearancePanelHtmlV126(saveSystem.data, { owner: appearanceOwnerV126, facing: appearancePreviewFacingV126 });
+  const weaponDescriptor = resolvePlayerAppearancePreviewWeaponV127(saveSystem.data, appearanceOwnerV126);
+  appearancePreviewAnimationV127 = normalizePlayerAppearancePreviewAnimationV127(appearancePreviewAnimationV127, weaponDescriptor);
+  panel.innerHTML = playerAppearancePanelHtmlV126(saveSystem.data, { owner: appearanceOwnerV126,
+    facing: appearancePreviewFacingV126, animation: appearancePreviewAnimationV127, weaponDescriptor });
   if (activeView === 'armory' && !byId('app').hidden) {
     const canvas = byId('player-appearance-preview-v126');
     const status = panel.querySelector('[data-appearance-preview-status-v126]');
@@ -1541,12 +1554,12 @@ function renderPlayerAppearanceV126() {
     appearancePreviewV126 = createPlayerAppearancePreviewV126(canvas, {
       appearance: normalizePlayerAppearanceV126(saveSystem.data.player[appearanceOwnerV126 === 'coop' ? 'coopAppearanceV126' : 'appearanceV126']),
       reducedMotion: saveSystem.data.settings.reducedMotion === true,
+      animation: appearancePreviewAnimationV127, facing: appearancePreviewFacingV126, weaponDescriptor,
       onStatus: result => {
         if (epoch !== appearancePreviewEpochV126 || activeView !== 'armory' || byId('player-appearance-preview-v126') !== canvas) return;
         status.textContent = result?.message || (result?.ready ? 'Aperçu de la tenue préparée.' : 'Aperçu temporairement indisponible.');
       }
     });
-    appearancePreviewV126?.setFacing(appearancePreviewFacingV126);
   }
 }
 
