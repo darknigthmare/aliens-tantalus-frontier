@@ -2,6 +2,7 @@ import { HubGame as PhysicalHub } from './hub-v71-runtime.js';
 import { HubGame as PlayerRenderer } from './hub-game.js';
 import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js';
 import { PORT_WORLD_V90, PORT_POSTS_V90, normalizePortMeridienV90, portPhysicalContactV90, portTaskSecondsV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
+import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
 
 export const PORT_ASSETS_V90 = Object.freeze({
   far: '/assets/openai/metroidvania/colony-multiroute-far.png',
@@ -21,7 +22,8 @@ export function portGeometryV90(state) {
   return { id: 'port-meridien-quay', name: 'Le quai des vivants', parentRoomId: 'briefing',
     entranceLocalX: 112, entranceSide: 'west', entrance: { w: 90 }, world: PORT_WORLD_V90,
     platforms: [{ x: 0, y: 624, w: 2560, h: 96 }, { x: 1180, y: 432, w: 500, h: 24 }],
-    ladders: [{ x: 1210, w: 44, y: 432, top: 432, bottom: 624, h: 192 }],
+    // Rungs are drawn at 439 + 24n, four pixels high: contact one pixel inside.
+    ladders: [{ x: 1210, w: 44, y: 432, top: 432, bottom: 624, h: 192, rungSpacing: 24, firstRung: 8 }],
     colliders: [{ x: 420, y: 574, w: 100, h: 50 },
       ...(gateClosed(state) ? [{ x: 1824, y: 356, w: 82, h: 268 }] : [])] };
 }
@@ -148,6 +150,7 @@ export function withPortMeridienV90(Base) {
     getSnapshot() {
       if (!this.isPortMeridienV90()) return super.getSnapshot();
       return { running: this.running, x: this.player.x, y: this.player.y, health: this.player.health,
+        playerAppearanceV126: hubPlayerAppearanceSnapshotV126(this),
         roomId: 'port-meridien-quay', prompt: this.statusPrompt(), portMeridienV90: this.capturePortMeridienV90(),
         portAssetsReadyV90: [...(this.portImagesV90?.values() || [])].filter(ready).length };
     }

@@ -5,6 +5,9 @@ import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125, drawHeldWeaponV125 } from './held-weapon-renderer-v125.js';
 import { WeaponImageCacheV125, weaponImageReadyV125 } from './weapon-image-cache-v125.js';
 import { resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-action-rig-v127.js';
+import {
+  advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128
+} from './player-transit-rig-v128.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clone = value => value == null ? value : JSON.parse(JSON.stringify(value));
@@ -25,6 +28,15 @@ export const PLAYER_APPEARANCE_PREVIEW_MODES_V127 = Object.freeze([
   Object.freeze({ id: 'melee', label: 'Mêlée', fixedTime: .18, action: true })
 ]);
 
+export const PLAYER_APPEARANCE_PREVIEW_MODES_V128 = Object.freeze([
+  ...PLAYER_APPEARANCE_PREVIEW_MODES_V127,
+  Object.freeze({ id: 'climb-up', label: 'Montée à l’échelle', fixedTime: .55, transit: true }),
+  Object.freeze({ id: 'climb-down', label: 'Descente à l’échelle', fixedTime: .55, transit: true }),
+  Object.freeze({ id: 'downed', label: 'À terre', fixedTime: 1.2, transit: true }),
+  Object.freeze({ id: 'death', label: 'Chute au sol', fixedTime: .3, transit: true }),
+  Object.freeze({ id: 'revive', label: 'Relèvement', fixedTime: .35, transit: true })
+]);
+
 export function getPlayerAppearancePreviewModesV127(weaponDescriptor = null) {
   const profile = resolveHeldWeaponProfileV125(weaponDescriptor);
   return PLAYER_APPEARANCE_PREVIEW_MODES_V127.map(mode => ({ ...mode,
@@ -35,6 +47,17 @@ export function getPlayerAppearancePreviewModesV127(weaponDescriptor = null) {
 
 export function normalizePlayerAppearancePreviewAnimationV127(animation, weaponDescriptor = null) {
   return getPlayerAppearancePreviewModesV127(weaponDescriptor)
+    .find(mode => mode.id === animation && mode.available)?.id || 'idle';
+}
+
+export function getPlayerAppearancePreviewModesV128(weaponDescriptor = null) {
+  const previousModes = getPlayerAppearancePreviewModesV127(weaponDescriptor);
+  return PLAYER_APPEARANCE_PREVIEW_MODES_V128.map(mode => previousModes.find(previous => previous.id === mode.id)
+    || { ...mode, available: true, unavailableLabel: '' });
+}
+
+export function normalizePlayerAppearancePreviewAnimationV128(animation, weaponDescriptor = null) {
+  return getPlayerAppearancePreviewModesV128(weaponDescriptor)
     .find(mode => mode.id === animation && mode.available)?.id || 'idle';
 }
 
@@ -88,6 +111,60 @@ export function samplePlayerAppearancePreviewV127({ animation = 'idle', timeSeco
     reducedMotion: Boolean(reducedMotion) };
 }
 
+/** The preview observes presentation actors through the same pure transition
+ * function as the mission. An already fallen actor starts in a settled pose;
+ * collapse and revival come from observed changes. The ladder's supports
+ * depend on travelled world distance rather than on elapsed display time.
+ */
+export function samplePlayerAppearancePreviewV128(options = {}) {
+  const animation = normalizePlayerAppearancePreviewAnimationV128(options.animation, options.weaponDescriptor);
+  const mode = PLAYER_APPEARANCE_PREVIEW_MODES_V128.find(entry => entry.id === animation);
+  if (!mode.transit) return { ...samplePlayerAppearancePreviewV127({ ...options, animation }), transit: false };
+  const time = options.reducedMotion ? mode.fixedTime : Math.max(0, finite(options.timeSeconds));
+  const sample = samplePlayerAppearancePreviewV127({ ...options, animation: 'idle', timeSeconds: time });
+  const actor = sample.actor;
+  const context = 'appearance-preview-v128';
+  let ladder = null, transitState = null, sampledTime = time;
+  if (animation === 'climb-up' || animation === 'climb-down') {
+    // Four rung intervals produce a seamless repeat. The camera tracks the
+    // actor; the rung grid remains in world space and passes under the limbs.
+    const direction = animation === 'climb-up' ? -1 : 1;
+    const travelled = time * 44 % 88;
+    actor.y = direction * travelled;
+    actor.vy = direction * 44;
+    actor.grounded = false;
+    actor.climbing = true;
+    ladder = { id: 'appearance-ladder-v128', x: actor.x + actor.w / 2, top: -352, bottom: 440, w: 36 };
+    transitState = advancePlayerTransitStateV128(null, actor, sampledTime, { context, ladder });
+  } else if (animation === 'downed') {
+    Object.assign(actor, { alive: false, downed: true, bleedOut: 30, grounded: true });
+    transitState = advancePlayerTransitStateV128(null, actor, sampledTime, { context });
+  } else {
+    // There is time to inspect the settled pose before the next observed
+    // transition. Both events are genuine inputs to the pure observer.
+    sampledTime = .02 + time % 2.4;
+    const before = { ...actor };
+    if (animation === 'revive') Object.assign(before, { alive: false, downed: true, bleedOut: 30 });
+    transitState = advancePlayerTransitStateV128(null, before, 0, { context });
+    if (animation === 'death') Object.assign(actor, { alive: false, downed: false });
+    transitState = advancePlayerTransitStateV128(transitState, actor, .01, { context });
+    transitState = advancePlayerTransitStateV128(transitState, actor, sampledTime, { context });
+  }
+  return { ...sample, actor, animation, transit: true, action: false, profile: null,
+    timeSeconds: sampledTime, ladder, transitState };
+}
+
+function drawPreviewLadderV128(ctx, ladder) {
+  ctx.fillStyle = '#617370';
+  for (const x of [ladder.x - 18, ladder.x + 13]) ctx.fillRect(x, ladder.top, 5, ladder.bottom - ladder.top);
+  ctx.fillStyle = '#82938d';
+  // Match the actual mission contacts (top + 11 + 22n). Each rung has the same
+  // three-world-pixel thickness as the in-game support drawing.
+  for (let center = ladder.top + 11; center < ladder.bottom - 3; center += 22) {
+    ctx.fillRect(ladder.x - 13, center - 1, 26, 3);
+  }
+}
+
 /** The owning view disposes this preview before replacing/leaving the UI.
  * All image requests, completion listeners and the single RAF belong to this
  * instance. Disposing also settles `ready` if an image never completes.
@@ -106,13 +183,13 @@ export function createPlayerAppearancePreviewV126(canvas, {
   const baseAssets = [...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126,
     ...(profile?.portable ? [profile] : [])];
   let disposed = false, frame = null, lastFrame = -Infinity, ready = false, loadEpoch = 0, pendingLoad = null;
-  let currentAnimation = normalizePlayerAppearancePreviewAnimationV127(animation, weaponDescriptor);
+  let currentAnimation = normalizePlayerAppearancePreviewAnimationV128(animation, weaponDescriptor);
   let currentFacing = facingOf(facing), beganAt = now();
   let snapshot = { ready: false, reason: 'loading', animation: currentAnimation, facing: currentFacing };
   const width = canvas.width || 320, height = canvas.height || 360;
 
   function sampleAt(timestamp) {
-    return samplePlayerAppearancePreviewV127({ appearance: selected, animation: currentAnimation,
+    return samplePlayerAppearancePreviewV128({ appearance: selected, animation: currentAnimation,
       timeSeconds: Math.max(0, (finite(timestamp, beganAt) - beganAt) / 1000),
       weaponDescriptor, facing: currentFacing, reducedMotion });
   }
@@ -120,9 +197,17 @@ export function createPlayerAppearancePreviewV126(canvas, {
   function draw(timestamp = now()) {
     if (disposed) return false;
     const sample = sampleAt(timestamp), { actor } = sample;
+    const transitCandidate = sample.transit ? resolvePlayerTransitRigV128({ actor, appearance: selected, images,
+      surface: 'mission', timeSeconds: sample.timeSeconds, reducedMotion,
+      ladder: sample.ladder, transitState: sample.transitState }) : null;
+    // Once the observed recovery is over, keep its standing rest visible until
+    // the next cycle. An absent image or unsupported transit never takes this
+    // path: it still fails completely before drawing any selected body part.
+    const transitRig = sample.animation === 'revive' && transitCandidate?.reason === 'no-active-transit'
+      ? null : transitCandidate;
     const actionRig = sample.action ? resolvePlayerActionRigV127({ actor, images, surface: 'mission',
       timeSeconds: sample.timeSeconds, reducedMotion }) : null;
-    const bodyRig = actionRig?.bodyRig || resolvePlayerBodyRigV125({ actor, images, surface: 'mission',
+    const bodyRig = transitRig?.bodyRig || actionRig?.bodyRig || resolvePlayerBodyRigV125({ actor, images, surface: 'mission',
       timeSeconds: sample.timeSeconds, reducedMotion });
     const weaponImage = sample.profile ? images.get(sample.profile.imageKey) : null;
     const weaponReady = !sample.profile || weaponImageReadyV125(weaponImage, sample.profile);
@@ -136,16 +221,21 @@ export function createPlayerAppearancePreviewV126(canvas, {
       ctx.fillStyle = '#0c1719';
       ctx.fillRect(0, 0, width, height);
       const floor = height - 32;
-      ctx.strokeStyle = '#28423e';
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(24, floor + .5); ctx.lineTo(width - 24, floor + .5); ctx.stroke();
+      if (!sample.ladder) {
+        ctx.strokeStyle = '#28423e';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(24, floor + .5); ctx.lineTo(width - 24, floor + .5); ctx.stroke();
+      }
       // Fixed framing keeps all poses and control positions stable. Every
       // admitted long gun fits inside this body-relative stage in both views.
       const scale = Math.min((height - 72) / 125, (width - 72) / 150);
       ctx.translate(width / 2 - (actor.x + actor.w / 2) * scale,
         floor - (actor.y + actor.h) * scale);
       ctx.scale(scale, scale);
-      if (actionRig) {
+      if (sample.ladder) drawPreviewLadderV128(ctx, sample.ladder);
+      if (transitRig) {
+        render = drawPlayerTransitRigV128(ctx, { transitRig, appearance: selected, images });
+      } else if (actionRig) {
         render = drawPlayerActionRigV127(ctx, { actionRig, appearance: selected, images });
       } else if (weaponReady && (!sample.profile || weaponPose)) {
         render = drawPlayerModularRigV126(ctx, { bodyRig, appearance: selected, images,
@@ -164,6 +254,12 @@ export function createPlayerAppearancePreviewV126(canvas, {
       reloadPhase: weaponPose?.reloadPhase || null, reloadProgress: weaponPose?.reloadProgress || 0,
       actionKind: actionRig?.kind || null, actionPhase: actionRig?.phase || null,
       actionProgress: actionRig?.progress || 0,
+      transitKind: transitRig?.kind || null, transitPhase: transitRig?.phase || null,
+      transitProgress: transitRig?.progress || 0,
+      transitContacts: transitRig?.contacts || null,
+      previewActor: sample.transit ? { x: actor.x, y: actor.y, w: actor.w, h: actor.h,
+        alive: actor.alive, downed: Boolean(actor.downed), climbing: Boolean(actor.climbing) } : null,
+      previewLadder: sample.ladder,
       arms: render.arms ? { near: { hand: render.arms.near.hand, reachError: render.arms.near.reachError },
         far: { hand: render.arms.far.hand, reachError: render.arms.far.reachError } } : null,
       effectiveSlots: render.effectiveSlots || null, reducedMotion: Boolean(reducedMotion) };
@@ -172,7 +268,7 @@ export function createPlayerAppearancePreviewV126(canvas, {
 
   function report() {
     if (disposed) return;
-    const mode = PLAYER_APPEARANCE_PREVIEW_MODES_V127.find(entry => entry.id === currentAnimation);
+    const mode = PLAYER_APPEARANCE_PREVIEW_MODES_V128.find(entry => entry.id === currentAnimation);
     const unavailable = snapshot.reason === 'weapon-image-unavailable';
     const weaponName = mode.armed && profile ? ` · ${profile.name}` : '';
     onStatus({ ready: snapshot.ready, reason: snapshot.reason,
@@ -233,9 +329,12 @@ export function createPlayerAppearancePreviewV126(canvas, {
     if (frame !== null) globalThis.cancelAnimationFrame?.(frame);
     frame = null;
     const sample = sampleAt(beganAt);
+    const transitRig = sample.transit ? resolvePlayerTransitRigV128({ actor: sample.actor, appearance: selected,
+      surface: 'mission', timeSeconds: sample.timeSeconds, reducedMotion,
+      ladder: sample.ladder, transitState: sample.transitState }) : null;
     const actionRig = sample.action ? resolvePlayerActionRigV127({ actor: sample.actor, surface: 'mission',
       timeSeconds: sample.timeSeconds, reducedMotion }) : null;
-    const assets = [...new Map([...baseAssets, ...(actionRig?.requiredAssets || [])]
+    const assets = [...new Map([...baseAssets, ...(transitRig?.requiredAssets || []), ...(actionRig?.requiredAssets || [])]
       .map(asset => [asset.imageKey, asset])).values()];
     const retained = new Set(assets.map(asset => asset.imageKey));
     for (const asset of cache.snapshot().assets) if (!retained.has(asset.imageKey)) cache.release(asset.imageKey);
@@ -261,7 +360,7 @@ export function createPlayerAppearancePreviewV126(canvas, {
   return { ready: loaded,
     setAnimation(value) {
       if (disposed) return currentAnimation;
-      const normalized = normalizePlayerAppearancePreviewAnimationV127(value, weaponDescriptor);
+      const normalized = normalizePlayerAppearancePreviewAnimationV128(value, weaponDescriptor);
       if (normalized === currentAnimation) return currentAnimation;
       currentAnimation = normalized;
       beganAt = now();

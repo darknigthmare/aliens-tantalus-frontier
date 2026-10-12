@@ -90,7 +90,7 @@ import { validateCloudPayloadV119 } from './cloud-save-v119.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
 import { equipPlayerAppearanceV126, resetPlayerAppearanceV126, normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { playerAppearancePanelHtmlV126 } from './player-appearance-ui-v126.js';
-import { createPlayerAppearancePreviewV126, normalizePlayerAppearancePreviewAnimationV127 } from './player-appearance-preview-v126.js';
+import { createPlayerAppearancePreviewV126, normalizePlayerAppearancePreviewAnimationV128 } from './player-appearance-preview-v126.js';
 import { resolvePlayerAppearancePreviewWeaponV127 } from './player-appearance-loadout-v127.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
@@ -1500,7 +1500,7 @@ function renderPlayerAppearanceV126() {
       const select = event.target.closest('[data-appearance-animation-v127]');
       if (!select || !panel.contains(select)) return;
       const weaponDescriptor = resolvePlayerAppearancePreviewWeaponV127(saveSystem.data, appearanceOwnerV126);
-      appearancePreviewAnimationV127 = normalizePlayerAppearancePreviewAnimationV127(select.value, weaponDescriptor);
+      appearancePreviewAnimationV127 = normalizePlayerAppearancePreviewAnimationV128(select.value, weaponDescriptor);
       appearancePreviewAnimationV127 = appearancePreviewV126?.setAnimation(appearancePreviewAnimationV127) || appearancePreviewAnimationV127;
       select.value = appearancePreviewAnimationV127;
     });
@@ -1543,7 +1543,7 @@ function renderPlayerAppearanceV126() {
     });
   }
   const weaponDescriptor = resolvePlayerAppearancePreviewWeaponV127(saveSystem.data, appearanceOwnerV126);
-  appearancePreviewAnimationV127 = normalizePlayerAppearancePreviewAnimationV127(appearancePreviewAnimationV127, weaponDescriptor);
+  appearancePreviewAnimationV127 = normalizePlayerAppearancePreviewAnimationV128(appearancePreviewAnimationV127, weaponDescriptor);
   panel.innerHTML = playerAppearancePanelHtmlV126(saveSystem.data, { owner: appearanceOwnerV126,
     facing: appearancePreviewFacingV126, animation: appearancePreviewAnimationV127, weaponDescriptor });
   if (activeView === 'armory' && !byId('app').hidden) {

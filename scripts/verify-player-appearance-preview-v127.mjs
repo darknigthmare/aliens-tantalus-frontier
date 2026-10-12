@@ -9,7 +9,7 @@ import { normalizePlayerAppearanceV126 } from '../src/player-appearance-v126.js'
 import { playerAppearancePanelHtmlV126 } from '../src/player-appearance-ui-v126.js';
 import { resolveHeldWeaponProfileV125 } from '../src/held-weapon-profiles-v125.js';
 import {
-  PLAYER_APPEARANCE_PREVIEW_MODES_V127, getPlayerAppearancePreviewModesV127,
+  PLAYER_APPEARANCE_PREVIEW_MODES_V127, PLAYER_APPEARANCE_PREVIEW_MODES_V128, getPlayerAppearancePreviewModesV127,
   normalizePlayerAppearancePreviewAnimationV127, samplePlayerAppearancePreviewV127,
   createPlayerAppearancePreviewV126
 } from '../src/player-appearance-preview-v126.js';
@@ -154,7 +154,7 @@ test('the labelled native animation selector survives owner/facing changes and r
   assert.match(html, /<option value="medical" selected>Soins<\/option>/);
   assert.match(html, /data-appearance-facing-v126="-1" aria-pressed="true"/);
   const select = html.match(/<select[^>]*>([\s\S]*?)<\/select>/)[1];
-  assert.equal((select.match(/<option /g) || []).length, PLAYER_APPEARANCE_PREVIEW_MODES_V127.length);
+  assert.equal((select.match(/<option /g) || []).length, PLAYER_APPEARANCE_PREVIEW_MODES_V128.length);
   assert.doesNotMatch(select, / disabled/);
   assert.match(html, /data-appearance-reset-v126="coop" disabled/);
   const unarmed = playerAppearancePanelHtmlV126(save, { animation: 'reload', weaponDescriptor: null });
