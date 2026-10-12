@@ -141,6 +141,38 @@ check('ejection is deterministic, follows aim/facing and starts at the receiver'
   assert.ok(upward.casings[0].vy > body.vy, 'ejection retains the perpendicular/world-up component');
 });
 
+check('actual held receiver ports position cases, while the muzzle still positions its flash', () => {
+  const runtime = createWeaponEffectsV124();
+  const muzzle = Object.freeze({ x: 160, y: 55, pivotX: 80, pivotY: 110,
+    ejectionX: 109, ejectionY: 75, reloadX: 96, reloadY: 101 });
+  shot(runtime, { muzzle, aim: { x: Math.SQRT1_2, y: -Math.SQRT1_2 } });
+  approx(runtime.casings[0].x, muzzle.ejectionX, 1);
+  approx(runtime.casings[0].y, muzzle.ejectionY, 1);
+  approx(runtime.lights[0].x, muzzle.x); approx(runtime.lights[0].y, muzzle.y);
+  emitWeaponReloadEffectsV124(runtime, event({ muzzle, reloadSerial: 1, emptyReload: true }));
+  const magazine = runtime.casings.at(-1);
+  assert.equal(magazine.kind, 'magazine');
+  approx(magazine.x, muzzle.reloadX, 1); approx(magazine.y, muzzle.reloadY, 1);
+});
+
+check('a cycled hull uses the current receiver and revolver cases leave the cylinder service point', () => {
+  const runtime = createWeaponEffectsV124();
+  const pump = getWeaponPresentationProfileV124('pump-shotgun');
+  const muzzle = Object.freeze({ x: 300, y: 200, pivotX: 220, pivotY: 200,
+    ejectionX: 251, ejectionY: 195, reloadX: 232, reloadY: 218 });
+  shot(runtime, { profile: pump, muzzle });
+  const moved = { ...muzzle, ejectionX: 290, ejectionY: 170 };
+  emitWeaponCycleEffectsV124(runtime, event({ profile: pump, muzzle: moved, timeSeconds: .18 }));
+  approx(runtime.casings[0].x, moved.ejectionX, 1); approx(runtime.casings[0].y, moved.ejectionY, 1);
+  const revolver = getWeaponPresentationProfileV124('revolver');
+  const result = emitWeaponReloadEffectsV124(runtime, event({ profile: revolver, muzzle,
+    reloadSerial: 1, spentRounds: 2, emptyReload: false }));
+  assert.equal(result.casings, 2);
+  for (const casing of runtime.casings.slice(-2)) {
+    approx(casing.x, muzzle.reloadX, 1); approx(casing.y, muzzle.reloadY, 1);
+  }
+});
+
 check('a late-frame accepted shot is not aged through the preceding update tick', () => {
   const runtime = createWeaponEffectsV124({ timeSeconds: 4 });
   shot(runtime, { timeSeconds: 4.05 });

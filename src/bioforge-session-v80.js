@@ -2,6 +2,7 @@ import { V65_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v65.js';
 import { V66_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v66.js';
 import { BIOFORGE_WORLD_V80 } from './bioforge-level-v80.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { sanitizeBioforgePhysicalV87 } from './bioforge-physical-state-v87.js';
 import { ENEMY_DEDICATED_POSE_IDS_V99 as ENEMY_DEDICATED_POSE_IDS_V96, getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { ENEMY_STATIC_POSE_IDS_V96 as ENEMY_USER_CASTES_IDS_V87, getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
@@ -305,7 +306,9 @@ export function sanitizeBioforgeRuntimeV81(raw) {
     player: {
       x: Number.isFinite(x) ? Math.max(BIOFORGE_WORLD_V80.x, Math.min(BIOFORGE_WORLD_V80.width, x)) : 0,
       y: Number.isFinite(y) ? Math.max(BIOFORGE_WORLD_V80.ceilingY, Math.min(BIOFORGE_WORLD_V80.floorY, y)) : BIOFORGE_WORLD_V80.floorY,
-      facing: normalizePlayerFacingV81(raw.player.facing)
+      facing: normalizePlayerFacingV81(raw.player.facing),
+      ...(Object.hasOwn(raw.player, 'appearanceV126')
+        ? { appearanceV126: normalizePlayerAppearanceV126(raw.player.appearanceV126) } : {})
     },
     seed: Number.isFinite(seed) ? seed : 80,
     phaseClock: Number.isFinite(phaseClock) ? Math.max(0, phaseClock) : 0,

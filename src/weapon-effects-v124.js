@@ -96,8 +96,9 @@ function spawnDebris(runtime, input, specification, index = 0, mode = 'casing') 
   const ejection = mode === 'casing' ? 1 : .55;
   const backwards = 42 + random() * 52;
   const upwards = 118 + random() * 66;
-  const portX = pivotX + forward.x * 5;
-  const portY = pivotY + forward.y * 5 - (mode === 'casing' ? 3 : -7);
+  const servicePort = mode !== 'casing' || eventKind === 'reload';
+  const portX = finite(servicePort ? muzzle.reloadX : muzzle.ejectionX, pivotX + forward.x * 5);
+  const portY = finite(servicePort ? muzzle.reloadY : muzzle.ejectionY, pivotY + forward.y * 5 - (mode === 'casing' ? 3 : -7));
   const body = {
     id, sourceId: sourceKey(input), weaponId: String(profile.weaponId || ''), kind: mode,
     casingKind: specification.kind || mode, shape: drum ? 'drum' : mode === 'magazine' ? 'magazine' : mode === 'cell' ? 'cell' : specification.shape || 'cylinder',

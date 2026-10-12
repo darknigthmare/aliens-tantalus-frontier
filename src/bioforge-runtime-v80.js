@@ -9,7 +9,7 @@ import { captureBioforgePhysicalV87, restoreBioforgePlayerPhysicalV87, restoreBi
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
-import { integratePlayerVelocityV124, readPlayerControlsV124, playerMovementPresentationV124 } from './player-control-v124.js';
+import { integratePlayerVelocityV124, readPlayerControlsV124, playerMovementPresentationV124, drawPlayerAimGuideV124 } from './player-control-v124.js';
 import { BIOFORGE_ASSETS_V80 } from './bioforge-assets-v80.js';
 import {
   BIOFORGE_MAX_CONCURRENT_V80,
@@ -49,6 +49,7 @@ import {
 import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
+import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 
 export const BIOFORGE_SEAL_SECONDS_V80 = 0.72;
 export const BIOFORGE_PRINT_INTERVAL_SECONDS_V80 = 0.46;
@@ -186,6 +187,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.bioforgeTimersV80 = new Map();
       this.bioforgeTransferStageV80 = 0;
       this.bioforgePreparedV80 = false;
+      this.bioforgePresentationActiveV126 = false;
       this.bioforgeBlockedV87 = null;
       this.bioforgeSnapshotClockV87 = 0;
     }
@@ -256,7 +258,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         player: {
           x: this.player.x,
           y: this.player.y,
-          facing: normalizePlayerFacingV81(this.player.facing)
+          facing: normalizePlayerFacingV81(this.player.facing),
+          appearanceV126: normalizePlayerAppearanceV126(this.player.appearanceV126)
         }
       };
     }
@@ -271,6 +274,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     initializeBioforgeWorldV80() {
+      this.bioforgePresentationActiveV126 = true;
+      this.bioforgePresentationGenerationV126 = (this.bioforgePresentationGenerationV126 || 0) + 1;
       const level = this.bioforgeLevelV80 = createBioforgeLevelV80();
       const spawn = level.playerSpawn;
       this.world = null;
@@ -367,7 +372,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
           const image = new globalThis.Image();
           image.decoding = 'async';
           image.onload = () => {
-            if (!this.running) this.draw();
+            if (this.bioforgePresentationActiveV126 && !this.running) this.draw();
           };
           image.onerror = () => this.emitBioforgeV80({ type: 'bioforge-asset-error', assetId: entry.id || entry.key, src: entry.src });
           image.src = entry.src;
@@ -378,8 +383,14 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       return this.getBioforgeAssetReportV80();
     }
 
-    prepare(rawState = null, { assets, testMode } = {}) {
+    prepare(rawState = null, options = {}) {
+      const { assets, testMode } = options;
       if (this.running) this.stopBioforgeEngineOnlyV80();
+      // Preparation draws the operator before a session starts. Reset the
+      // presentation from the current profile here as well as in start(); a
+      // previous laboratory session must not lend its outfit to this preview.
+      this.configurePlayerAppearanceV126?.(options);
+      this.bioforgeCostumeIdV119 = sanitizeCostumeSelectionV119(options.costumeId || options.costume?.id);
       if (assets) this.bioforgeAssetsV80 = assets;
       if (testMode != null) this.bioforgeTestModeV80 = testMode === true;
       this.bioforgeRootV80 = rawState ? sanitizeBioforgeV80(rawState?.bioforge || rawState?.state || rawState) : createBioforgeV80();
@@ -389,6 +400,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.bioforgePreparedV80 = true;
       this.running = false;
       this.draw();
+      this.watchBioforgeAppearanceV126();
       this.emitBioforgeV80({
         type: 'bioforge-runtime-prepared',
         resumeAvailable: Boolean(this.bioforgeRootV80.activeSession),
@@ -413,8 +425,25 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       });
     }
 
+    watchBioforgeAppearanceV126() {
+      const generation = this.bioforgePresentationGenerationV126;
+      const refresh = () => {
+        if (this.bioforgePresentationActiveV126 && !this.running
+          && generation === this.bioforgePresentationGenerationV126) this.draw();
+      };
+      // Configuration is a static canvas. Observe cache-owned completions
+      // without replacing the loader's callbacks or starting a render loop.
+      for (const asset of this.weaponImageCacheV125?.snapshot().assets || []) {
+        const image = this.images?.get(asset.imageKey);
+        if (!image || image.complete) continue;
+        image.addEventListener?.('load', refresh, { once: true });
+        image.addEventListener?.('error', refresh, { once: true });
+      }
+    }
+
     start(options = {}) {
       if (this.running) this.purgeBioforgeV80('runtime-restart');
+      this.configurePlayerAppearanceV126?.(options);
       this.bioforgeCostumeIdV119 = sanitizeCostumeSelectionV119(options.costumeId || options.costume?.id);
       const resumeEnvelope = options.resumeState || null;
       const embeddedRuntimeV81 = resumeEnvelope?.runtimeV81 || resumeEnvelope?.bioforge?.runtimeV81 || resumeEnvelope?.state?.runtimeV81 || null;
@@ -488,6 +517,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         this.player.x = clamp(restoredPlayer.x, 0, this.bioforgeLevelV80.world.width - this.player.w);
         this.player.y = clamp(restoredPlayer.y, this.bioforgeLevelV80.world.ceilingY, this.bioforgeLevelV80.world.floorY - this.player.h);
         this.player.facing = normalizePlayerFacingV81(restoredPlayer.facing);
+        if (Object.hasOwn(restoredPlayer, 'appearanceV126')) {
+          this.player.appearanceV126 = normalizePlayerAppearanceV126(restoredPlayer.appearanceV126);
+        }
       }
       if (!this.rebuildBioforgeSpecimensV80(runtimeV81?.physicalV87)) {
         const purge = this.purgeBioforgeV80('invalid-specimen-resume');
@@ -512,6 +544,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
 
       this.running = true;
       this.paused = false;
+      this.preparePlayerWeaponAssetsV125?.();
       if (!this.player.alive && ['printing', 'combat', 'sealing'].includes(session.phase)) this.finishBioforgeV80('failed', 'operator-down');
       this.last = globalThis.performance?.now?.() || 0;
       const generation = this.loopGeneration = (this.loopGeneration || 0) + 1;
@@ -921,6 +954,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       actor.shots = Number(actor.shots || 0) + 1;
       const aim = this.resolvePlayerCombatAimV83?.(actor) || resolveCombatAimV83({ ...readKeyboardCombatAimV83(this.keys), facing: actor.facing });
       actor.facing = aim.facing;
+      this.beginPlayerWeaponShotV125?.(actor);
       const muzzle = this.resolvePlayerMuzzleV124?.(actor, aim) || resolveCombatMuzzleV83(actor, aim);
       const shot = buildCombatShotVectorsV83(aim)[0];
       this.bullets.push({
@@ -1119,11 +1153,16 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     stopBioforgeEngineOnlyV80() {
+      this.bioforgePresentationActiveV126 = false;
       this.running = false;
       this.paused = false;
       if (typeof super.stop === 'function') super.stop();
       else this.loopGeneration = (this.loopGeneration || 0) + 1;
       return true;
+    }
+
+    releasePlayerWeaponPresentationV125() {
+      if (!this.bioforgeFinalPresentationV126) super.releasePlayerWeaponPresentationV125?.();
     }
 
     purgeBioforgeV80(reason = 'manual-purge') {
@@ -1133,24 +1172,36 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         { now: this.bioforgeNowV80() }
       );
       this.bioforgeRootV80 = began.state;
-      const report = this.clearBioforgeRuntimeReferencesV80();
-      this.stopBioforgeEngineOnlyV80();
-      const completed = completeBioforgePurgeV80(
-        this.bioforgeRootV80,
-        report,
-        { now: this.bioforgeNowV80() }
-      );
-      this.bioforgeRootV80 = completed.state;
-      this.syncBioforgePhaseV80();
-      this.bioforgeLastPurgeV80 = Object.freeze({ reason, report: Object.freeze(report), began: Boolean(began?.applied), completed: Boolean(completed?.applied) });
-      this.updateBioforgeDoorVisualsV80(1, true);
-      if (began?.event) this.emitBioforgeV80(began.event);
-      if (completed?.event) this.emitBioforgeV80(completed.event);
-      this.emitBioforgeV80({ type: 'bioforge-runtime-purged', reason, ...report, completed: Boolean(completed?.applied) });
-      if (completed?.applied) this.emitBioforgeV80({ type: 'bioforge-return-ready', sessionId: this.bioforgeRootV80.activeSession?.id || null });
-      this.persistBioforgeV80(completed?.event || began?.event || { type: 'bioforge-runtime-purged', reason });
-      if (completed?.applied) this.draw();
-      return this.bioforgeLastPurgeV80;
+      const wasPresented = this.bioforgePresentationActiveV126 === true;
+      this.bioforgeFinalPresentationV126 = true;
+      try {
+        const report = this.clearBioforgeRuntimeReferencesV80();
+        // Stop gameplay before the checkpoint: cancel actions, release inputs
+        // and remove transient effects. Only the existing art survives until
+        // the last cleared frame; its cache is released in finally below.
+        this.stopBioforgeEngineOnlyV80();
+        this.bioforgePresentationActiveV126 = wasPresented;
+        const completed = completeBioforgePurgeV80(
+          this.bioforgeRootV80,
+          report,
+          { now: this.bioforgeNowV80() }
+        );
+        this.bioforgeRootV80 = completed.state;
+        this.syncBioforgePhaseV80();
+        this.bioforgeLastPurgeV80 = Object.freeze({ reason, report: Object.freeze(report), began: Boolean(began?.applied), completed: Boolean(completed?.applied) });
+        this.updateBioforgeDoorVisualsV80(1, true);
+        if (began?.event) this.emitBioforgeV80(began.event);
+        if (completed?.event) this.emitBioforgeV80(completed.event);
+        this.emitBioforgeV80({ type: 'bioforge-runtime-purged', reason, ...report, completed: Boolean(completed?.applied) });
+        if (completed?.applied) this.emitBioforgeV80({ type: 'bioforge-return-ready', sessionId: this.bioforgeRootV80.activeSession?.id || null });
+        this.persistBioforgeV80(completed?.event || began?.event || { type: 'bioforge-runtime-purged', reason });
+        if (completed?.applied) this.draw();
+        return this.bioforgeLastPurgeV80;
+      } finally {
+        this.bioforgeFinalPresentationV126 = false;
+        this.bioforgePresentationActiveV126 = false;
+        this.releasePlayerWeaponPresentationV125();
+      }
     }
 
     stop(options = {}) {
@@ -1332,7 +1383,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
 
     draw() {
       const ctx = this.ctx;
-      if (!ctx) return;
+      if (!ctx || this.bioforgePresentationActiveV126 === false) return;
       const scaleX = Number(this.canvas?.width || 1280) / BIOFORGE_VIEWPORT_V80.width;
       const scaleY = Number(this.canvas?.height || 720) / BIOFORGE_VIEWPORT_V80.height;
       ctx.save();
@@ -1505,8 +1556,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       loadPlayerCostumeAssetsV119(this.images, actor.costumeId);
       const request = resolvePlayerAnimation(actor, false);
       const sample = this.bioforgePlayerAnimationV81?.sample('bioforge:player:echo9', request, this.animationTime, { emit: false, physicalActor: actor });
+      actor.playerPresentationV124 = sample?.presentationV124 || null;
+      drawPlayerAimGuideV124(this, ctx, actor);
       const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
-      const render = drawPlayerSpriteV81(ctx, {
+      const render = this.drawPlayerWeaponRigV125?.(ctx, actor, { surface: 'bioforge', sample }) || drawPlayerSpriteV81(ctx, {
         sheet,
         image: this.images?.get(sheet?.imageKey),
         sample,

@@ -4,6 +4,9 @@ import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { WEAPON_VISUAL_ASSETS_ALL_V63 } from '../src/weapon-visual-runtime-v63.js';
+import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126 } from '../src/player-appearance-v126.js';
+import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 
 // Optional visual smoke test: use an existing Playwright/Chromium installation.
 // ATF_BASE_URL=https://preview.example ATF_PLAYER_QA_OUTPUT=/tmp/player-qa \
@@ -20,8 +23,9 @@ if (!outputRelative || !outputRelative.startsWith('..') && !isAbsolute(outputRel
 await mkdir(output, { recursive: true });
 
 async function playwrightModule() {
-  if (process.env.ATF_PLAYWRIGHT_MODULE) return import(pathToFileURL(resolve(process.env.ATF_PLAYWRIGHT_MODULE)).href);
-  try { return await import('playwright'); } catch (error) {
+  const exportsOf = module => module.chromium ? module : module.default;
+  if (process.env.ATF_PLAYWRIGHT_MODULE) return exportsOf(await import(pathToFileURL(resolve(process.env.ATF_PLAYWRIGHT_MODULE)).href));
+  try { return exportsOf(await import('playwright')); } catch (error) {
     if (process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES) {
       const require = createRequire(join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES, '__player_qa__.cjs'));
       return require('playwright');
@@ -30,9 +34,10 @@ async function playwrightModule() {
   }
 }
 
-const report = { schema: 124, baseUrl, startedAt: new Date().toISOString(), status: 'running',
+const report = { schema: 126, baseUrl, startedAt: new Date().toISOString(), status: 'running',
   scenario: 'Production mission entered through Frontier Forge UI; isolated browser context.',
-  checks: [], captures: [], pageErrors: [], requestFailures: [],
+  checks: [], captures: [], pageErrors: [], requestFailures: [], weaponImageRequests: [], weaponImagePhases: [],
+  appearanceImageRequests: [], appearanceImagePhases: [],
   limitations: ['No physical gamepad or mobile device is connected.',
     'Cover, medical cancellation and deployable persistence are covered separately by the production runtime integration suite; the imported editor plan does not supply cover.'] };
 let browser, page;
@@ -46,6 +51,21 @@ try {
   page.on('pageerror', error => report.pageErrors.push(error.message));
   page.on('requestfailed', request => report.requestFailures.push({ url: request.url(), failure: request.failure()?.errorText }));
   page.setDefaultTimeout(15000);
+  let requestPhase = 'boot';
+  const catalogueImagePaths = new Set(Object.values(WEAPON_VISUAL_ASSETS_ALL_V63));
+  const appearanceImagePaths = new Set(PLAYER_MODULAR_RIG_ASSETS_V126.map(asset => asset.path));
+  const network = await context.newCDPSession(page);
+  await network.send('Network.enable');
+  network.on('Network.requestWillBeSent', event => {
+    const path = new URL(event.request.url).pathname;
+    if (!catalogueImagePaths.has(path) && !appearanceImagePaths.has(path)) return;
+    const frames = event.initiator?.stack?.callFrames || [];
+    const entry = { phase: requestPhase, path, type: event.type,
+      initiator: event.initiator?.type, functions: frames.slice(0, 6).map(frame => ({ name: frame.functionName,
+        source: frame.url ? new URL(frame.url, baseUrl).pathname : null })) };
+    if (catalogueImagePaths.has(path)) report.weaponImageRequests.push(entry);
+    if (appearanceImagePaths.has(path)) report.appearanceImageRequests.push(entry);
+  });
 
   const readLiveState = (includeCanvas = false) => {
     const engine = globalThis.__ATF_GAME__, actor = engine?.player;
@@ -56,6 +76,10 @@ try {
       editorMode: engine.editorMode, phase: engine.mission?.state, elapsed: engine.animationTime,
       camera: { x: engine.camera?.x, y: engine.camera?.y },
       weapon: typeof descriptor === 'string' ? { id: descriptor } : { id: descriptor?.id, name: descriptor?.name },
+      weaponRig: engine.playerWeaponRigSnapshotV125?.() || null,
+      appearance: engine.playerAppearanceSnapshotV126?.() || null,
+      coop: engine.coopEnabled && engine.coop ? { x: engine.coop.x, y: engine.coop.y, facing: engine.coop.facing,
+        heldWeapon: engine.coop.heldWeaponVisualV125 || null, appearance: engine.coop.playerAppearanceVisualV126 || null } : null,
       effects: effects ? { ...engine.weaponEffectsSnapshotV124(),
         lights: effects.lights.map(light => ({ ...light, age: effects.time - light.bornAt })),
         casings: effects.casings.slice(-16).map(casing => ({ id: casing.id, weaponId: casing.weaponId,
@@ -67,6 +91,8 @@ try {
         w: actor.w, h: actor.h,
         grounded: actor.grounded, crouching: actor.crouching, aiming: actor.aimingV124, facing: actor.facing,
         health: actor.health, ammo: actor.ammo, ammoReserve: actor.ammoReserve, shots: actor.shots,
+        heldWeapon: actor.heldWeaponVisualV125 || null, aim: actor.combatAimV83,
+        weaponMotion: actor.weaponRigMotionV125 ? { ...actor.weaponRigMotionV125 } : null,
         reloading: actor.reloading, movement: actor.movementV124, presentation: actor.playerPresentationV124,
         fieldAction: actor.fieldActionV124, cover: actor.coverV124 ? { id: actor.coverV124.id, peeking: actor.coverV124.peeking } : null } };
   };
@@ -83,6 +109,38 @@ try {
     return state;
   };
   const check = (label, evidence) => report.checks.push({ label, status: 'passed', evidence });
+  const checkAppearance = (state, expected, role = 'player', label = 'Modular appearance') => {
+    const operator = state.appearance?.operators.find(entry => entry.role === role);
+    assert.ok(operator, `${label}: the actual operator has an observable selection.`);
+    assert.equal(operator.visual.supported, true, `${label}: the current pose supports separated parts.`);
+    assert.equal(operator.visual.ready, true, `${label}: required authored pages are ready.`);
+    assert.equal(operator.visual.drawn, true, `${label}: the actual frame used the modular composition.`);
+    assert.deepEqual(operator.visual.selected, operator.selected);
+    if (expected) assert.deepEqual(operator.selected, expected, `${label}: the UI-selected kit reached this operator.`);
+    for (const slot of PLAYER_APPEARANCE_SLOTS_V126) {
+      const layers = operator.visual.layers.filter(layer => layer.slot === slot.id), itemId = operator.selected.slots[slot.id];
+      if (itemId === null) assert.equal(layers.length, 0, `${label}: removed ${slot.id} has no rendered layer.`);
+      else assert.ok(layers.length && layers.every(layer => layer.itemId === itemId), `${label}: ${slot.id} uses its own equipped piece.`);
+    }
+    assert.ok(state.appearance.images.retained <= 12, `${label}: the scene image cache stays within its bound.`);
+    return operator;
+  };
+  const checkHeldPose = (state, label) => {
+    const pose = state.player.heldWeapon;
+    assert.ok(pose, `${label}: a real rendered held-weapon composition is required.`);
+    assert.equal(pose.weaponId, state.weapon.id, `${label}: the rendered weapon must match the actual operator's weapon.`);
+    assert.ok(Math.hypot(pose.nearHand.x - pose.grip.x, pose.nearHand.y - pose.grip.y) < 0.02, `${label}: hand remains on the grip.`);
+    assert.ok(pose.nearReachError < 0.02 && pose.farReachError < 0.02, `${label}: arm targets remain reachable.`);
+    assert.ok(state.weaponRig.images.retained <= state.weaponRig.images.limit, `${label}: weapon cache remains bounded.`);
+    checkAppearance(state, null, 'player', label);
+    return pose;
+  };
+  const imagePhase = (label, state) => {
+    report.weaponImagePhases.push({ label, requestPhase,
+      requests: report.weaponImageRequests.filter(entry => entry.phase === requestPhase), cache: state?.weaponRig?.images || null });
+    report.appearanceImagePhases.push({ label, requestPhase,
+      requests: report.appearanceImageRequests.filter(entry => entry.phase === requestPhase), cache: state?.appearance?.images || null });
+  };
 
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
   await page.locator('#title-start').waitFor({ state: 'visible', timeout: 45000 });
@@ -97,17 +155,22 @@ try {
     { position: '12:15', type: 'door' }, { position: '20:15', type: 'terminal' }
   ] };
   await page.locator('#editor-import').setInputFiles({ name: 'player-v124-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+  imagePhase('Before the first mission; armory catalogue has not been opened', await snapshot());
+  requestPhase = 'first-forge-playtest';
   await page.locator('#editor-play').click();
   await page.locator('#game-canvas').waitFor({ state: 'visible' });
   await page.waitForFunction(() => {
     const engine = globalThis.__ATF_GAME__;
-    return engine?.running && !engine.paused && !engine.enemyAtlasLoadingPausedV65 && !engine.userCasteLoadingV88 && engine.player?.grounded;
+    return engine?.running && !engine.paused && !engine.enemyAtlasLoadingPausedV65 && !engine.userCasteLoadingV88
+      && engine.player?.grounded && engine.player.heldWeaponVisualV125 && engine.player.playerAppearanceVisualV126?.drawn;
   }, null, { timeout: 45000 });
   const canvas = page.locator('#game-canvas');
   await canvas.focus(); await page.waitForTimeout(250);
   const initial = await snapshot(); assert.equal(initial.editorMode, true); assert.equal(initial.phase, 'active');
+  checkHeldPose(initial, 'Initial deployment');
   await capture('01-idle.png', 'Idle in a production Forge playtest');
   check('Production playtest launched through the editor UI', initial);
+  imagePhase('First active mission with its selected weapon', initial);
 
   await page.keyboard.down('KeyD'); await page.waitForTimeout(600);
   const running = await snapshot(); assert.ok(running.player.x > initial.player.x + 50);
@@ -122,6 +185,7 @@ try {
   const aimed = await snapshot();
   assert.equal(aimed.player.crouching, true); assert.equal(aimed.player.aiming, true);
   assert.equal(aimed.player.ammo, crouched.player.ammo); assert.ok(Math.abs(aimed.player.x - crouched.player.x) < 3);
+  checkHeldPose(aimed, 'Crouched aim');
   await capture('04-crouch-aim.png', 'Stationary crouched aim');
   await page.keyboard.up('KeyD'); await page.keyboard.up('ShiftLeft'); await page.keyboard.up('KeyZ');
   check('Shift aiming preserves crouch without movement or ammo use', aimed.player);
@@ -169,6 +233,9 @@ try {
   assert.ok(firing, 'A live muzzle flash must be captured, not inferred from past shot counters.');
   assert.ok(firing.player.shots > beforeAim.player.shots);
   assert.ok(firing.effects.counts.casings > 0);
+  const firingPose = checkHeldPose(firing, 'Live shot');
+  assert.ok(firing.effects.lights.some(light => Math.hypot(light.x - firingPose.muzzle.x, light.y - firingPose.muzzle.y) < 0.02),
+    'The live rendered flash must follow the actual carried muzzle.');
   await page.mouse.up({ button: 'left' });
   const shotsAfterRelease = (await snapshot()).player.shots;
   await page.waitForTimeout(300);
@@ -217,6 +284,170 @@ try {
   await page.locator('#editor-canvas').waitFor({ state: 'visible' });
   assert.equal((await snapshot()).running, false);
   check('Returning from the playtest stops the runtime', { editorVisible: true });
+
+  // Change the campaign loadout through the armory UI in this disposable local
+  // browser profile, then launch the same Forge plan again. Catalogue DOM image
+  // requests are kept in their own phase and never counted as gameplay decoding.
+  imagePhase('First playtest completed', groundedCasings);
+  requestPhase = 'armory-ui-selection';
+  await page.locator('#return-title').click();
+  await page.locator('#title-start').click();
+  await page.locator('#title-options').click();
+  await page.locator('#nav [data-view="armory"]').click();
+  await page.locator('#armory-search').fill('M37A2 Pump Shotgun');
+  const selectedWeaponId = 'weapon-007-m37a2-pump-shotgun';
+  await page.locator(`[data-procure-id="${selectedWeaponId}"]`).first().click();
+  await page.locator(`[data-equip-id="${selectedWeaponId}"]`).first().click();
+  await page.waitForFunction(id => [...document.querySelectorAll(`[data-equip-id="${id}"]`)].some(button => button.disabled), selectedWeaponId);
+  imagePhase('Catalogue procurement and equipment selection; DOM requests are separate', await snapshot());
+
+  // Each kit is equipped with real armory buttons. A separate owner tab and a
+  // page reload prove both independence and actual durable storage. The preview
+  // has its own image lifecycle; none of its requests count as gameplay loads.
+  requestPhase = 'armory-appearance-ui';
+  const primaryAppearance = normalizePlayerAppearanceV126({ schema: 126, slots: {
+    helmet: 'helmet-patrol-v126', mask: 'mask-rebreather-v126', torso: 'torso-utility-v126',
+    arms: 'arms-utility-v126', legs: 'legs-utility-v126', back: 'back-radio-v126'
+  } });
+  const coopAppearance = normalizePlayerAppearanceV126({ schema: 126, slots: {
+    helmet: null, mask: null, torso: 'torso-marine-v126',
+    arms: 'arms-marine-v126', legs: 'legs-utility-v126', back: null
+  } });
+  const panel = page.locator('#player-appearance-v126');
+  const readPanelSelection = async owner => {
+    const slots = await panel.locator(`[data-appearance-owner-v126="${owner}"][data-appearance-slot-v126][aria-pressed="true"]`)
+      .evaluateAll(buttons => buttons.map(button => [button.dataset.appearanceSlotV126, button.dataset.appearanceItemV126 || null]));
+    assert.equal(slots.length, 6, 'Exactly one UI choice is selected per appearance slot.');
+    return { schema: 126, slots: Object.fromEntries(slots) };
+  };
+  const chooseOwner = async owner => {
+    await panel.locator(`[data-appearance-owner-v126="${owner}"]:not([data-appearance-slot-v126])`).click();
+    await page.waitForFunction(() => document.querySelector('#player-appearance-preview-v126')?.dataset.appearanceReadyV126 === 'true');
+  };
+  const choosePiece = async (owner, slot, itemId) => {
+    const selector = `[data-appearance-owner-v126="${owner}"][data-appearance-slot-v126="${slot}"][data-appearance-item-v126="${itemId || ''}"]`;
+    await panel.locator(selector).click();
+    await page.waitForFunction(selector => document.querySelector(selector)?.getAttribute('aria-pressed') === 'true', selector);
+  };
+  const capturePreview = async (filename, label, owner) => {
+    await page.waitForFunction(() => document.querySelector('#player-appearance-preview-v126')?.dataset.appearanceReadyV126 === 'true');
+    const canvasPng = await page.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png'));
+    assert.ok(canvasPng.startsWith('data:image/png;base64,'));
+    await writeFile(join(output, filename), Buffer.from(canvasPng.split(',')[1], 'base64'));
+    const facing = Number(await panel.locator('[data-appearance-facing-v126][aria-pressed="true"]').getAttribute('data-appearance-facing-v126'));
+    report.captures.push({ filename, label, method: 'Read-only preview canvas framebuffer',
+      state: { owner, selected: await readPanelSelection(owner), facing, ready: true } });
+  };
+  await chooseOwner('player');
+  for (const [slot, itemId] of Object.entries(primaryAppearance.slots)) await choosePiece('player', slot, itemId);
+  assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
+  await panel.locator('[data-appearance-facing-v126="1"]').click();
+  await capturePreview('16-appearance-j1-right.png', 'J1 after six actual appearance selections, right-facing preview', 'player');
+  check('All six J1 appearance slots can be equipped through the actual armory UI', primaryAppearance);
+  await panel.locator('[data-appearance-facing-v126="-1"]').click();
+  assert.equal(await panel.locator('[data-appearance-facing-v126="-1"]').getAttribute('aria-pressed'), 'true');
+  await capturePreview('17-appearance-j1-left.png', 'The same six equipped pieces mirrored by the actual preview control', 'player');
+  assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
+  check('The preview mirror control preserves the selected loadout', { selected: primaryAppearance, previewFacings: [1, -1] });
+
+  await chooseOwner('coop');
+  for (const [slot, itemId] of Object.entries(primaryAppearance.slots)) await choosePiece('coop', slot, itemId);
+  for (const [slot, itemId] of Object.entries(coopAppearance.slots)) await choosePiece('coop', slot, itemId);
+  assert.deepEqual(await readPanelSelection('coop'), coopAppearance);
+  await panel.locator('[data-appearance-facing-v126="1"]').click();
+  await capturePreview('18-appearance-j2.png', 'J2 prepared separately, with head, mask and back options removed', 'coop');
+  await panel.screenshot({ path: join(output, '19-appearance-armory.png') });
+  report.captures.push({ filename: '19-appearance-armory.png', label: 'Real six-slot armory with J2 selected',
+    state: { owner: 'coop', selected: await readPanelSelection('coop') } });
+  await chooseOwner('player');
+  assert.deepEqual(await readPanelSelection('player'), primaryAppearance, 'J2 changes do not overwrite J1.');
+  check('All six J2 slots are independent and optional pieces can be removed without altering J1',
+    { player: primaryAppearance, coop: coopAppearance });
+  imagePhase('Actual appearance UI, its preview loads and separate owners', await snapshot());
+  await page.locator('#nav [data-view="settings"]').click();
+  await page.locator('#setting-coop').check();
+
+  requestPhase = 'appearance-refresh-ui';
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.locator('#title-start').waitFor({ state: 'visible', timeout: 45000 });
+  await page.locator('#title-start').click();
+  await page.locator('#title-options').click();
+  await page.locator('#nav [data-view="settings"]').click();
+  assert.equal(await page.locator('#setting-coop').isChecked(), true, 'Local coop activation survives storage and reload.');
+  await page.locator('#nav [data-view="armory"]').click();
+  await chooseOwner('player'); assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
+  await chooseOwner('coop'); assert.deepEqual(await readPanelSelection('coop'), coopAppearance);
+  check('Both appearance selections and coop activation survive a real page reload',
+    { player: primaryAppearance, coop: coopAppearance, coopEnabled: true });
+  imagePhase('Reloaded UI reads persisted selections before deployment', await snapshot());
+  await page.locator('#return-title').click();
+  await page.locator('#title-start').click();
+  await page.locator('#title-forge').click();
+  await page.locator('#editor-import').setInputFiles({ name: 'player-v126-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+  requestPhase = 'second-forge-playtest';
+  await page.locator('#editor-play').click();
+  await page.waitForFunction(id => {
+    const engine = globalThis.__ATF_GAME__;
+    return engine?.running && !engine.paused && engine.player?.grounded && engine.player.heldWeaponVisualV125?.weaponId === id
+      && engine.player.playerAppearanceVisualV126?.drawn && engine.coopEnabled && engine.coop?.playerAppearanceVisualV126?.drawn;
+  }, selectedWeaponId, { timeout: 45000 });
+  await canvas.focus(); await page.waitForTimeout(250);
+  const selected = await saveCanvasFrame('11-selected-shotgun.png', 'M37A2 selected through the armory and carried on the next real deployment', await page.evaluate(readLiveState, true));
+  assert.equal(selected.weapon.id, selectedWeaponId); checkHeldPose(selected, 'Selected shotgun');
+  checkAppearance(selected, primaryAppearance, 'player', 'J1 redeployment');
+  checkAppearance(selected, coopAppearance, 'coop', 'J2 redeployment');
+  assert.notEqual(selected.player.heldWeapon.path, initial.player.heldWeapon.path);
+  imagePhase('Second mission after the actual UI weapon change', selected);
+  check('Actual armory selection changes the held native image on the next deployment', { before: initial.weapon,
+    after: selected.weapon, beforePath: initial.player.heldWeapon.path, afterPath: selected.player.heldWeapon.path });
+  check('The next real Forge deployment renders both persisted six-slot kits on their own operators', selected.appearance);
+
+  const selectedRect = await canvas.boundingBox();
+  await page.mouse.move(selectedRect.x + selectedRect.width * 0.03, selectedRect.y + selectedRect.height * 0.4);
+  await page.mouse.down({ button: 'right' }); await page.waitForTimeout(180);
+  const mirrored = await saveCanvasFrame('12-shotgun-left-aim.png', 'Actual shotgun and both hands aim left', await page.evaluate(readLiveState, true));
+  const mirroredPose = checkHeldPose(mirrored, 'Left-facing shotgun');
+  assert.equal(mirrored.player.facing, -1); assert.ok(mirroredPose.muzzle.x < mirroredPose.grip.x);
+  await page.mouse.move(selectedRect.x + selectedRect.width * 0.77, selectedRect.y + selectedRect.height * 0.18);
+  await page.waitForTimeout(180);
+  const diagonal = await saveCanvasFrame('13-shotgun-diagonal.png', 'The held shotgun and articulated hands follow diagonal mouse aim', await page.evaluate(readLiveState, true));
+  checkHeldPose(diagonal, 'Diagonal shotgun'); assert.ok(diagonal.player.aim.y < -0.2);
+  await page.keyboard.down('KeyD'); await page.waitForTimeout(300);
+  const movingAim = await saveCanvasFrame('14-shotgun-moving-aim.png', 'Physical locomotion continues beneath the aimed gun and arms', await page.evaluate(readLiveState, true));
+  await page.keyboard.up('KeyD');
+  checkHeldPose(movingAim, 'Moving shotgun aim'); assert.ok(movingAim.player.x > diagonal.player.x + 10);
+  check('Left, diagonal and moving aim keep the equipped gun and both hand targets connected',
+    { mirrored: mirrored.player.heldWeapon, diagonal: diagonal.player.heldWeapon, moving: movingAim.player.heldWeapon });
+
+  await page.keyboard.down('KeyZ'); await page.waitForTimeout(140);
+  const customCrouch = await saveCanvasFrame('20-equipped-crouch-aim.png', 'Selected torso, arms, legs and optional gear remain composed in crouched aim', await page.evaluate(readLiveState, true));
+  assert.equal(customCrouch.player.crouching, true); checkHeldPose(customCrouch, 'Equipped crouched aim');
+  checkAppearance(customCrouch, primaryAppearance, 'player', 'Equipped crouched aim');
+  await page.keyboard.up('KeyZ'); await page.waitForTimeout(120);
+  check('The equipped parts remain composed and connected to the gun during crouched aim', customCrouch.appearance);
+
+  await page.mouse.down({ button: 'left' });
+  await page.waitForFunction(shots => globalThis.__ATF_GAME__?.player?.shots > shots, movingAim.player.shots);
+  await page.mouse.up({ button: 'left' }); await page.mouse.up({ button: 'right' });
+  await page.waitForTimeout(300); await page.keyboard.press('KeyR');
+  await page.waitForFunction(() => globalThis.__ATF_GAME__?.player?.reloading);
+  const reloadStart = await snapshot();
+  await page.keyboard.down('KeyD'); await page.waitForTimeout(260);
+  const movingReload = await saveCanvasFrame('15-shotgun-moving-reload.png', 'The actual timed reload moves its service hand while the operator walks', await page.evaluate(readLiveState, true));
+  await page.keyboard.up('KeyD');
+  const reloadPose = checkHeldPose(movingReload, 'Moving shotgun reload');
+  assert.equal(movingReload.player.reloading, true); assert.ok(reloadPose.reloadProgress > 0 && reloadPose.reloadProgress < 1);
+  assert.ok(movingReload.player.x > reloadStart.player.x + 10);
+  assert.ok(movingReload.player.weaponMotion.distance > reloadStart.player.weaponMotion.distance);
+  await page.waitForFunction(() => !globalThis.__ATF_GAME__?.player?.reloading);
+  const completedReload = await snapshot(); checkHeldPose(completedReload, 'Completed shotgun reload');
+  assert.ok(completedReload.player.ammo > movingReload.player.ammo);
+  check('Reload service-hand progress and ground locomotion share the live simulation clock',
+    { start: reloadStart.player, moving: movingReload.player, completed: completedReload.player });
+  imagePhase('Second mission completed; gameplay cache remains bounded', completedReload);
+  await page.locator('#retreat-mission').click();
+  await page.locator('#editor-canvas').waitFor({ state: 'visible' });
+  assert.equal((await snapshot()).running, false);
   assert.equal(report.pageErrors.length, 0, `Browser exceptions: ${report.pageErrors.join('; ')}`);
   report.status = 'passed';
 } catch (error) {
