@@ -18,6 +18,8 @@ import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
 import { CETO_V75, getCetoAnimationV75 } from './enemy-ceto-v75.js';
 import { enforcePlayerAnimationRequestV81, PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { PLAYER_AIR_POSES_V87, resolvePlayerAirClipV87, advancePlayerAirPresentationV87, applyPlayerAirPresentationV87 } from './player-airborne-presentation-v87.js';
+import { refinePlayerAnimationRequestV124, isPlayerAimingV124, advancePlayerPresentationV124,
+  playerAnimationStepV124, playerPresentationSummaryV124 } from './player-presentation-v124.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -127,20 +129,26 @@ export const SPRITE_CLIP_SETS = Object.freeze({
   'player-locomotion': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'body:breath' }] },
     { id: 'walk-run', frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:footstep-right' }, { frame: 6, type: 'audio:footstep-left' }] },
+    { id: 'backpedal', frames: [7, 6, 5, 4], fps: 9, loop: true, events: [{ frame: 4, type: 'audio:footstep-right' }, { frame: 6, type: 'audio:footstep-left' }] },
     { id: 'jump-fall', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 8, type: 'movement:takeoff' }, { frame: 10, type: 'movement:apex' }, { frame: 11, type: 'movement:land-ready' }] },
     // Legacy jump-fall remains inspectable, but runtime phases are physics-owned.
     // Reused poses only: no claim of new multi-frame or directional V87 art.
     ...Object.entries(PLAYER_AIR_POSES_V87).map(([id, frame]) => ({ id, frames: [frame], fps: 12, loop: true, events: [] })),
-    { id: 'crouch', frames: [12, 13], fps: 5, loop: true, events: [{ frame: 12, type: 'stance:crouch' }] },
+    { id: 'crouch', frames: [12], fps: 5, loop: false, events: [{ frame: 12, type: 'stance:crouch' }] },
+    { id: 'crouch-move', frames: [12, 13], fps: 5, loop: true, events: [{ frame: 12, type: 'audio:footstep-right' }, { frame: 13, type: 'audio:footstep-left' }] },
+    { id: 'crouch-aim', frames: [13], fps: 5, loop: true, events: [] },
     { id: 'climb', frames: [14, 15], fps: 8, loop: true, events: [{ frame: 15, type: 'movement:climb-contact' }] }
   ]),
   'player-combat': freezeList([
-    { id: 'aim-ready', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 1, type: 'weapon:aim-ready' }] },
-    { id: 'primary-fire', frames: [4, 5, 6, 7], fps: 13, loop: false, events: [{ frame: 4, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
+    { id: 'aim-ready', frames: [0, 1, 2, 3], fps: 12, loop: false, events: [{ frame: 1, type: 'weapon:aim-ready' }] },
+    // Cell 7 contains another baked muzzle flash, not a recovery pose. Each
+    // accepted shot restarts 4->5->6 instead of inventing a second discharge.
+    { id: 'primary-fire', frames: [4, 5, 6], fps: 13, loop: false, events: [{ frame: 4, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
     { id: 'reload', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'weapon:magazine-out' }, { frame: 10, type: 'weapon:magazine-in' }, { frame: 11, type: 'weapon:chamber' }] },
     // Living injuries must never advance into the fallen/corpse cells.
     { id: 'hurt', frames: [12, 13], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }] },
     { id: 'death', frames: [13, 14, 15], fps: 7, loop: false, events: [{ frame: 15, type: 'state:death-lock' }] },
+    { id: 'downed', frames: [14], fps: 1, loop: true, events: [] },
     // Retained for legacy sheet inspection; gameplay selects hurt or death explicitly.
     { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }] }
   ]),
@@ -562,25 +570,30 @@ function resolveEcho9MarineAnimationV81(actor = {}) {
     return { sheetId: 'player.echo9-marine.interaction', clipId: interactionClip };
   }
   if (actor.reloading) return resolveVerifiedPlayerCombat('reload');
-  if (Math.max(Number(actor.v52FireClock) || 0, Number(actor.fireClock) || 0) > 0) {
+  // fireClock also locks melee and interactions. Only the accepted-shot clock
+  // may request a firing pose when V52 is active.
+  const fireClock = Number.isFinite(actor.v52FireClock) ? actor.v52FireClock
+    : Number(actor.shots) > 0 ? Number(actor.fireClock) || 0 : 0;
+  if (fireClock > 0) {
     return resolveVerifiedPlayerCombat('primary-fire');
   }
   if (actor.climbing) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'climb' };
   if (actor.crouching) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'crouch' };
   if (!actor.grounded) return { sheetId: 'player.echo9-marine.locomotion', clipId: resolvePlayerAirClipV87(actor) };
   if (Math.abs(actor.vx || 0) > 12) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'walk-run' };
+  if (isPlayerAimingV124(actor)) return resolveVerifiedPlayerCombat('aim-ready');
   return { sheetId: 'player.echo9-marine.locomotion', clipId: 'idle' };
 }
 
 export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
-  const request = resolveEcho9MarineAnimationV81(actor);
+  const request = refinePlayerAnimationRequestV124(actor, resolveEcho9MarineAnimationV81(actor));
   return isExplicitXenomorphAnimationEntity(actor, neuroActive)
     ? { ...request, degraded: 'neuro-player-echo9-fallback-v81' }
     : request;
 }
 
 export function resolveNpcAnimation(actor = {}) {
-  if (hasCrewUniformV85(actor)) return { ...resolveEcho9MarineAnimationV81({ ...actor, fireClock: actor.v52FireClock || 0 }),
+  if (hasCrewUniformV85(actor)) return { ...refinePlayerAnimationRequestV124(actor, resolveEcho9MarineAnimationV81({ ...actor, fireClock: actor.v52FireClock || 0 })),
     visualProfileId: 'echo9-standard-v85', artStatus: 'shared-standard-uniform-no-individual-portrait' };
   const dedicatedV55 = resolveNpcMissionAnimationV55(actor);
   const allowedSheetIds = new Set([
@@ -800,15 +813,32 @@ export class SpriteAnimationController {
     this.onEvent = onEvent;
     this.states = new Map();
     this.playerAirStatesV87 = new Map();
+    this.playerPresentationStatesV124 = new Map();
+    this.playerPendingEventsV124 = new Map();
   }
 
   reset(entityId) {
-    if (entityId === undefined) { this.states.clear(); this.playerAirStatesV87.clear(); }
-    else { this.states.delete(String(entityId)); this.playerAirStatesV87.delete(String(entityId)); }
+    const maps = [this.states, this.playerAirStatesV87, this.playerPresentationStatesV124, this.playerPendingEventsV124];
+    if (entityId === undefined) maps.forEach(map => map.clear());
+    else maps.forEach(map => map.delete(String(entityId)));
   }
 
   sample(entityId, request, timeSeconds, { emit = true, reducedMotion = false, physicalActor = null, physicalContext = '' } = {}) {
     const key = String(entityId);
+    const now = Math.max(0, Number(timeSeconds) || 0);
+    const previousPresentation = this.playerPresentationStatesV124.get(key);
+    const playerActor = physicalActor && resolveSpriteSheet(request?.sheetId)?.family === 'player' ? physicalActor : null;
+    const continuousObservation = previousPresentation && previousPresentation.context === physicalContext
+      && now >= previousPresentation.time && now - previousPresentation.time <= .25;
+    const acceptedShot = playerActor && continuousObservation && Number(playerActor.shots) > previousPresentation.shots;
+    // Bioforge and legacy callers may have no V52 shot clock. An observed
+    // ammunition-owned serial still drives the short shot/recovery sequence.
+    const observedRecentShot = acceptedShot || continuousObservation && now >= previousPresentation.shotAt
+      && now - previousPresentation.shotAt < .16;
+    if (playerActor && observedRecentShot && ['idle', 'walk-run', 'backpedal', 'crouch', 'crouch-move', 'crouch-aim', 'rise', 'apex', 'fall', 'aim-ready'].includes(request?.clipId)) {
+      request = { sheetId: 'player.echo9-marine.combat', clipId: 'primary-fire' };
+    }
+    if (playerActor) request = refinePlayerAnimationRequestV124(playerActor, request);
     const airState = physicalActor && resolveSpriteSheet(request?.sheetId)?.family === 'player'
       ? advancePlayerAirPresentationV87(this.playerAirStatesV87.get(key), physicalActor, timeSeconds, physicalContext) : null;
     if (physicalActor) {
@@ -816,14 +846,21 @@ export class SpriteAnimationController {
       else this.playerAirStatesV87.delete(key);
     }
     request = applyPlayerAirPresentationV87(request, airState);
+    if (request?.sheetId === 'player.echo9-marine.locomotion' && ['backpedal', 'crouch-move', 'crouch-aim'].includes(request.clipId)
+      && airState && Object.hasOwn(PLAYER_AIR_POSES_V87, airState.phase)) {
+      request = { ...request, clipId: airState.phase, frame: PLAYER_AIR_POSES_V87[airState.phase] };
+    }
     const sheetEntry = resolveSpriteSheet(request?.sheetId);
     const clip = sheetEntry && resolveSpriteClip(sheetEntry.id, request?.clipId);
     if (!sheetEntry || !clip) return null;
+    const presentation = playerActor ? advancePlayerPresentationV124(previousPresentation, playerActor, request, now, { physicalContext, reducedMotion }) : null;
+    if (presentation) this.playerPresentationStatesV124.set(key, presentation);
+    else if (physicalActor) this.playerPresentationStatesV124.delete(key);
+    const playerStep = playerAnimationStepV124(presentation, clip);
     const signature = `${sheetEntry.id}:${clip.id}`;
     let state = this.states.get(key);
-    const now = Math.max(0, Number(timeSeconds) || 0);
-    if (!state || state.signature !== signature || now < state.startedAt) {
-      state = { signature, startedAt: now, lastStep: -1, loops: 0 };
+    if (!state || state.signature !== signature || now < state.lastTime || presentation?.restart || presentation?.reseeded) {
+      state = { signature, startedAt: now, lastStep: -1, lastEmittedStep: -1, lastTime: now, loops: 0 };
       this.states.set(key, state);
     }
     const elapsed = Math.max(0, now - state.startedAt);
@@ -831,30 +868,48 @@ export class SpriteAnimationController {
     // A combat/lifecycle clock can own a reviewed frame. Reject requests
     // outside the selected clip so an actor can never sample another action.
     const explicitFrameIndex = Number.isInteger(request?.frame) ? clip.frames.indexOf(request.frame) : -1;
-    const rawStep = explicitFrameIndex >= 0 ? explicitFrameIndex : Math.floor(elapsed * effectiveFps);
+    const rawStep = explicitFrameIndex >= 0 ? explicitFrameIndex : playerStep?.step ?? Math.floor(elapsed * effectiveFps);
     const lastIndex = clip.frames.length - 1;
     const step = clip.loop ? rawStep : Math.min(rawStep, lastIndex);
     const localIndex = clip.loop ? step % clip.frames.length : step;
     const frame = clip.frames[localIndex];
     const events = [];
-    if (emit && airState) for (const event of airState.events) {
-      const payload = Object.freeze({ entityId: key, sheetId: sheetEntry.id, clipId: clip.id, frame, event, loop: 0, source: 'physical-state-v87' });
-      events.push(payload); this.onEvent(payload);
+    if (presentation?.reseeded) this.playerPendingEventsV124.delete(key);
+    if (playerActor) {
+      const pending = this.playerPendingEventsV124.get(key) || [];
+      for (const event of airState?.events || []) pending.push(Object.freeze({ entityId: key, sheetId: sheetEntry.id,
+        clipId: clip.id, frame, event, loop: 0, source: 'physical-state-v87' }));
+      if (acceptedShot && !presentation?.reseeded) pending.push(Object.freeze({ entityId: key, sheetId: sheetEntry.id,
+        clipId: clip.id, frame, event: 'weapon:shot', loop: 0, source: 'accepted-shot-v124' }));
+      // A render-only hub can run indefinitely without an event consumer.
+      // Keep at most its recent transitions instead of retaining every jump.
+      if (pending.length) this.playerPendingEventsV124.set(key, pending.slice(-16));
+      if (emit) {
+        for (const payload of this.playerPendingEventsV124.get(key) || []) { events.push(payload); this.onEvent(payload); }
+        this.playerPendingEventsV124.delete(key);
+      }
     }
-    if (emit && step > state.lastStep) {
-      const maximumSteps = Math.min(step, state.lastStep + 64);
-      for (let absoluteStep = state.lastStep + 1; absoluteStep <= maximumSteps; absoluteStep += 1) {
+    if (emit && !playerStep?.suppressEvents && step > state.lastEmittedStep) {
+      const maximumSteps = Math.min(step, state.lastEmittedStep + 64);
+      for (let absoluteStep = state.lastEmittedStep + 1; absoluteStep <= maximumSteps; absoluteStep += 1) {
         const eventIndex = clip.loop ? ((absoluteStep % clip.frames.length) + clip.frames.length) % clip.frames.length : Math.min(absoluteStep, lastIndex);
         const eventFrame = clip.frames[eventIndex];
         if (!clip.loop && absoluteStep > lastIndex) continue;
         for (const event of clip.events) if (event.frame === eventFrame) {
+          // A baked flash or an initial resume sample cannot create a shot.
+          if (playerActor && event.type === 'weapon:shot') continue;
+          // A newly entered movement pose has not travelled a footstep yet.
+          if (presentation && absoluteStep === 0 && /audio:footstep|movement:climb-contact/.test(event.type)) continue;
           const payload = Object.freeze({ entityId: key, sheetId: sheetEntry.id, clipId: clip.id, frame: eventFrame, event: event.type, loop: Math.floor(Math.max(0, absoluteStep) / clip.frames.length) });
           events.push(payload);
           this.onEvent(payload);
         }
       }
     }
+    // Draw calls must not consume the next update's sound/action markers.
+    if (emit) state.lastEmittedStep = Math.max(state.lastEmittedStep, step);
     state.lastStep = Math.max(state.lastStep, step);
+    state.lastTime = now;
     state.loops = clip.loop ? Math.floor(step / clip.frames.length) : 0;
     return Object.freeze({
       entityId: key,
@@ -863,15 +918,17 @@ export class SpriteAnimationController {
       frame,
       column: frame % (sheetEntry.columns || SPRITE_GRID.columns),
       row: Math.floor(frame / (sheetEntry.columns || SPRITE_GRID.columns)),
-      complete: !clip.loop && rawStep >= lastIndex,
+      complete: playerStep?.complete ?? (!clip.loop && rawStep >= lastIndex),
       elapsed,
       motionV87: airState ? Object.freeze({ phase: airState.phase, events: airState.events, reseeded: airState.reseeded, reusedPose: true }) : null,
+      presentationV124: playerPresentationSummaryV124(presentation, clip.id),
       events: Object.freeze(events)
     });
   }
 
   snapshot() {
     return [...this.states.entries()].map(([entityId, state]) => Object.freeze({ entityId, signature: state.signature, lastStep: state.lastStep, loops: state.loops,
+      ...(this.playerPresentationStatesV124.has(entityId) ? { presentationV124: playerPresentationSummaryV124(this.playerPresentationStatesV124.get(entityId), state.signature.split(':').at(-1)) } : {}),
       ...(this.playerAirStatesV87.has(entityId) ? { motionV87: Object.freeze({ phase: this.playerAirStatesV87.get(entityId).phase, reusedPose: true }) } : {}) }));
   }
 }

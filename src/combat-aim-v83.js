@@ -100,7 +100,8 @@ export function resolveCombatMuzzleV83(actor = {}, aim = {}, options = {}) {
   const width = Math.max(0, finite(body.w, 42));
   const height = Math.max(0, finite(body.h, 92));
   const pivotX = finite(options.pivotX, finite(body.x) + width / 2);
-  const pivotY = finite(options.pivotY, finite(body.y) + height * (body.crouching ? 51 / 92 : 37 / 92));
+  const peekRise = body.coverV124?.peeking ? bounded(body.coverV124.peekRise, 0, 32, 0) : 0;
+  const pivotY = finite(options.pivotY, finite(body.y) + height * (body.crouching ? 51 / 92 : 37 / 92) - peekRise);
   const barrelLength = Math.max(0, finite(options.barrelLength, 24));
   const direction = unitDirection(aim, body.facing);
   return Object.freeze({

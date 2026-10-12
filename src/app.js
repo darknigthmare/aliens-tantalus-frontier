@@ -3023,6 +3023,7 @@ function setupRuntimeControls() {
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
+  byId('mission-melee-v124').onclick = () => engine.melee(engine.player);
   byId('mission-neuro-counter').onclick = () => engine.activateNeuroCountermeasure(engine.player);
   byId('bioforge-interact-v80').onclick = () => bioforgeRuntimeV80.interact(bioforgeRuntimeV80.player);
   byId('bioforge-reload-v80').onclick = () => bioforgeRuntimeV80.reload(bioforgeRuntimeV80.player);

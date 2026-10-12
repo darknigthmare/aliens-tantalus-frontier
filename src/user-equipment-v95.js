@@ -1,5 +1,6 @@
 import { USER_EQUIPMENT_ART_V95 } from './user-equipment-art-v95.js';
 import { resolveCombatAimV83, resolveCombatMuzzleV83 } from './combat-aim-v83.js';
+import { getStaticEquipmentPresentationV124 } from './player-presentation-v124.js';
 
 // These are project balance values, not canonical weapon/armour specifications.
 // The art manifest contains only real reviewed PNGs. No item exists before its
@@ -95,7 +96,9 @@ export function getUserWeaponTransformV95(actor, aim, weapon, armor = null) {
   const angle = Math.atan2(vector.y, vector.x) - sourceAngle;
   const defaultPivot = resolveCombatMuzzleV83(actor, vector, { barrelLength: 0 });
   const hand = getUserArmorTransformV95(actor, armor)?.hand;
-  const pivotX = hand?.x ?? defaultPivot.x, pivotY = hand?.y ?? defaultPivot.y;
+  const peekRise = actor.coverV124?.peeking ? Math.max(0, Math.min(32, finite(actor.coverV124.peekRise, 0))) : 0;
+  // Explicit hand pivots bypass the default combat shoulder; apply cover once.
+  const pivotX = hand?.x ?? defaultPivot.x, pivotY = hand ? hand.y - peekRise : defaultPivot.y;
   const barrelLength = Math.hypot(dx, dy);
   return { width, height, grip, angle, mirror, pivotX, pivotY, barrelLength,
     muzzle: resolveCombatMuzzleV83(actor, vector, { pivotX, pivotY, barrelLength }) };
@@ -107,32 +110,54 @@ export function resolveUserEquipmentMuzzleV95(actor, aim) {
   const transform = getUserWeaponTransformV95(actor, aim, weapon, armor);
   if (transform) return transform.muzzle;
   const hand = getUserArmorTransformV95(actor, armor)?.hand;
-  return hand ? resolveCombatMuzzleV83(actor, aim, { pivotX: hand.x, pivotY: hand.y, barrelLength: 24 }) : null;
+  const peekRise = actor.coverV124?.peeking ? Math.max(0, Math.min(32, finite(actor.coverV124.peekRise, 0))) : 0;
+  return hand ? resolveCombatMuzzleV83(actor, aim, { pivotX: hand.x, pivotY: hand.y - peekRise, barrelLength: 24 }) : null;
 }
 
-export function drawUserArmorV95(ctx, actor, image, armor) {
+export function drawUserArmorV95(ctx, actor, image, armor, options = {}) {
   if (!ready(image) || armor?.kind !== 'armor') return false;
   const t = getUserArmorTransformV95(actor, armor);
+  const presentation = getStaticEquipmentPresentationV124(actor, options.timeSeconds ?? actor.playerPresentationV124?.time ?? 0,
+    options.reducedMotion ?? actor.playerPresentationV124?.reducedMotion ?? false);
   ctx.save();
   if (actor.alive === false) ctx.globalAlpha *= 0.45;
+  if (ctx.transform) {
+    const footX = actor.x + actor.w / 2, footY = actor.y + actor.h;
+    ctx.translate(footX, footY);
+    ctx.transform(1, 0, presentation.shearX, presentation.scaleY, 0, 0);
+    ctx.translate(-footX, -footY);
+  }
   ctx.translate(t.x + (t.mirror ? t.width : 0), t.y);
   if (t.mirror) ctx.scale(-1, 1);
   ctx.drawImage(image, 0, 0, t.width, t.height);
   ctx.restore();
-  actor.playerVisualV95 = { schema: 95, itemId: armor.id, path: armor.path, visualMode: 'static-pose', animationStatus: 'missing', worn: true };
+  actor.playerVisualV95 = { schema: 95, itemId: armor.id, path: armor.path, visualMode: 'static-pose',
+    animationStatus: 'missing', presentationV124: presentation.animationStatus, worn: true };
   return true;
 }
 
 export function drawUserWeaponV95(ctx, actor, image, weapon, armor = null) {
-  if (!ready(image) || !actor?.alive || actor.inVehicle || weapon?.kind !== 'weapon') return false;
+  if (!ready(image) || !actor?.alive || actor.inVehicle || actor.ventTransit || actor.climbing || weapon?.kind !== 'weapon'
+    || Number(actor.toolUseClock) > 0 || Number(actor.interactionClock) > 0 || Number(actor.meleeClock) > 0) {
+    if (actor) actor.heldWeaponVisualV95 = null;
+    return false;
+  }
   const t = getUserWeaponTransformV95(actor, actor.combatAimV83, weapon, armor);
+  const reducedMotion = actor.playerPresentationV124?.reducedMotion === true;
+  const recoil = reducedMotion ? 0 : Math.max(0, Math.min(1, Number(actor.playerPresentationV124?.recoil) || 0));
+  const reload = actor.tacticalReload;
+  const reloadProgress = actor.reloading && reload?.completeAt > 0 ? Math.max(0, Math.min(1, reload.elapsed / reload.completeAt)) : 0;
+  const facing = Number(actor.facing) < 0 ? -1 : 1;
+  const reloadTilt = reducedMotion ? 0 : Math.sin(reloadProgress * Math.PI) * .24 * facing;
+  const aim = actor.combatAimV83 || { x: facing, y: 0 };
   ctx.save();
-  ctx.translate(t.pivotX, t.pivotY);
-  ctx.rotate(t.angle);
+  ctx.translate(t.pivotX - Number(aim.x || 0) * recoil * 2.5, t.pivotY - Number(aim.y || 0) * recoil * 2.5);
+  ctx.rotate(t.angle + reloadTilt - recoil * .018 * facing);
   if (t.mirror) ctx.scale(-1, 1);
   ctx.drawImage(image, -t.grip.x * t.width, -t.grip.y * t.height, t.width, t.height);
   ctx.restore();
-  actor.heldWeaponVisualV95 = { itemId: weapon.id, path: weapon.path, muzzle: { x: t.muzzle.x, y: t.muzzle.y }, animationStatus: 'missing' };
+  actor.heldWeaponVisualV95 = { itemId: weapon.id, path: weapon.path, muzzle: { x: t.muzzle.x, y: t.muzzle.y },
+    animationStatus: 'missing', presentationV124: 'aim-pivot-recoil-and-reload-response', recoil, reloadProgress };
   return true;
 }
 

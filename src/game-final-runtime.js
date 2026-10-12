@@ -211,7 +211,8 @@ export function buildEquipmentActionRuntime(item = {}, index = 0) {
   const utilityFallback = { recon: 'deep-scan', survival: 'protective-layer', engineering: 'field-repair', medical: 'medical', control: 'signal-jam', defense: 'containment-field' };
   const action = matched?.[1] || utilityFallback[utility] || 'field-support';
   const gradeScale = { Civilian: 0.85, Field: 1, Military: 1.2, Research: 1.35 }[item.grade] || 1;
-  const charges = clamp(Math.round(Number(item.charges) || 1), 0, 99);
+  const suppliedCharges = Number(item.charges);
+  const charges = clamp(Math.round(Number.isFinite(suppliedCharges) ? suppliedCharges : 1), 0, 99);
   return Object.freeze({
     id: String(item.id || `equipment-runtime-${index + 1}`),
     name,
@@ -440,14 +441,14 @@ export class GameEngine extends CompleteGameEngine {
   }
 
   updatePlayer(player, delta, controls) {
-    const beforeX = player?.x || 0;
-    super.updatePlayer(player, delta, controls);
-    if (!player?.alive || player.inVehicle) return;
+    if (!player) return;
     const slow = this.environmentStatus && this.animationTime < this.environmentStatus.slowUntil ? this.environmentStatus.slowFactor : 1;
     const mobility = player === this.player ? this.costumeRuntime?.mobility || 1 : 1;
-    const travelled = player.x - beforeX;
-    player.x = clamp(beforeX + travelled * mobility * slow, 0, WORLD_WIDTH - player.w);
-    player.vx *= mobility * slow;
+    // Apply speed modifiers to the target before integration and collisions.
+    // Multiplying the previous frame's velocity made costumes depend on FPS.
+    player.locomotionSpeedScaleV124 = clamp(mobility * slow, 0.05, 3);
+    super.updatePlayer(player, delta, controls);
+    if (!player?.alive || player.inVehicle) return;
     if (player === this.player) this.refreshStealth(player);
   }
 
@@ -457,7 +458,7 @@ export class GameEngine extends CompleteGameEngine {
     const crouchFactor = actor.crouching ? 0.34 : 1;
     const coverFactor = actor.inCover ? 0.55 : 1;
     const movement = clamp(Math.abs(actor.vx || 0) / 245, 0, 1.5);
-    const firing = this.animationTime < this.stealthRuntime.noiseBurstUntil || actor.actionClock > 0.08;
+    const firing = this.animationTime < this.stealthRuntime.noiseBurstUntil || actor.v52FireClock > 0.08;
     const stealthFactor = 1 - (this.costumeRuntime?.stealth || 0) / 140;
     const illumination = clamp(paletteLight + this.stealthRuntime.lightBoost, 0.12, 1);
     const visibility = clamp((28 + illumination * 62) * crouchFactor * coverFactor * stealthFactor + (firing ? 34 : 0), 3, 100);
@@ -468,12 +469,20 @@ export class GameEngine extends CompleteGameEngine {
   }
 
   fire(player) {
+    const shotsBefore = Number(player?.shots) || 0;
     const fired = super.fire(player);
     if (!fired || !this.stealthRuntime) return fired;
     if (player === this.player) {
       this.stealthRuntime.noiseBurstUntil = this.animationTime + 0.85;
       this.refreshStealth(player);
-      if (this.fieldEffects?.weaponBoostShots > 0) this.fieldEffects.weaponBoostShots -= 1;
+    }
+    // A fuel charge belongs to its operator. A dry trigger, contextual melee or
+    // a vehicle weapon cannot consume the charge prepared for a carried gun.
+    if (!player.inVehicle && (Number(player.shots) || 0) > shotsBefore) {
+      if (Number.isFinite(player.fieldWeaponBoostShotsV124)) {
+        player.fieldWeaponBoostShotsV124 = Math.max(0, player.fieldWeaponBoostShotsV124 - 1);
+        if (player === this.player && this.fieldEffects) this.fieldEffects.weaponBoostShots = player.fieldWeaponBoostShotsV124;
+      } else if (player === this.player && this.fieldEffects?.weaponBoostShots > 0) this.fieldEffects.weaponBoostShots -= 1;
     }
     return fired;
   }
@@ -598,7 +607,8 @@ export class GameEngine extends CompleteGameEngine {
   weaponProfile(player) {
     const profile = super.weaponProfile(player);
     if (profile.mode === 'apc-turret') return { ...profile, damage: profile.damage * (this.vehicle?.gunnerBonus || 1) };
-    if (player === this.player && this.fieldEffects?.weaponBoostShots > 0) return { ...profile, damage: profile.damage * 1.28, penetration: Math.min(100, (profile.penetration || 0) + 12) };
+    const boost = Number.isFinite(player?.fieldWeaponBoostShotsV124) ? player.fieldWeaponBoostShotsV124 : player === this.player ? this.fieldEffects?.weaponBoostShots || 0 : 0;
+    if (boost > 0) return { ...profile, damage: profile.damage * 1.28, penetration: Math.min(100, (profile.penetration || 0) + 12) };
     return profile;
   }
 
@@ -609,8 +619,10 @@ export class GameEngine extends CompleteGameEngine {
     if (!hazard) return;
     const contract = { ...hazardContract(hazard.kind, this.missionPlan.world.danger), ...hazard };
     const immuneVehicle = player.inVehicle && this.vehicleHandling.environmentalImmunity.includes(contract.kind);
-    const costumeProtected = !player.inVehicle && this.costumeRuntime?.resistances.includes(contract.kind);
-    const equipmentProtection = !player.inVehicle && this.fieldEffects.protection > 0;
+    const costumeProtected = player === this.player && !player.inVehicle && this.costumeRuntime?.resistances.includes(contract.kind);
+    const ownProtection = Number.isFinite(player.fieldProtectionV124);
+    const protection = ownProtection ? player.fieldProtectionV124 : player === this.player ? this.fieldEffects.protection : 0;
+    const equipmentProtection = !player.inVehicle && protection > 0;
     const reduction = immuneVehicle ? 0 : costumeProtected ? 0.35 : equipmentProtection ? 0.5 : 1;
     if (immuneVehicle) this.onEvent({ type: 'hazard-resisted', kind: contract.kind, source: 'vehicle', family: this.vehicleHandling.family });
     else if (player.inVehicle && contract.damage > 0) this.damageVehicle(contract.damage * reduction, contract.kind);
@@ -619,6 +631,12 @@ export class GameEngine extends CompleteGameEngine {
     if (contract.armorDrain && !player.inVehicle) player.armor = Math.max(0, player.armor - contract.armorDrain * reduction);
     if (contract.oxygenDrain && !player.inVehicle) this.environmentStatus.oxygen = Math.max(0, this.environmentStatus.oxygen - contract.oxygenDrain * reduction);
     if (contract.trackerDrain) this.tracker.energy = Math.max(0, this.tracker.energy - contract.trackerDrain * reduction);
+    if (equipmentProtection && !costumeProtected && !immuneVehicle && (contract.damage > 0 || contract.armorDrain > 0 || contract.oxygenDrain > 0 || contract.trackerDrain > 0)) {
+      if (ownProtection) {
+        player.fieldProtectionV124 = Math.max(0, player.fieldProtectionV124 - 1);
+        if (player === this.player) this.fieldEffects.protection = player.fieldProtectionV124;
+      } else this.fieldEffects.protection = Math.max(0, protection - 1);
+    }
     if (contract.slow) { this.environmentStatus.slowUntil = this.animationTime + 1.25; this.environmentStatus.slowFactor = 1 - contract.slow; }
     const impulse = Math.max(0, Number(contract.impulse ?? contract.knockback) || 0);
     if (impulse && !player.inVehicle) player.vy = -impulse;

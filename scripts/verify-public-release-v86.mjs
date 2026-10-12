@@ -20,7 +20,8 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admissions-v123.mjs', 'public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
-  'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs']);
+  'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs',
+  'verify-player-runtime-v124.mjs', 'verify-player-presentation-v124.mjs', 'verify-player-field-actions-v124.mjs', 'qa-player-browser-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.

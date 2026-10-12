@@ -17,6 +17,7 @@ import { withBlackCocoonRuntimeV121 } from './black-cocoon-runtime-v121.js';
 import { withApcConvoyRuntimeV121 } from './apc-convoy-runtime-v121.js';
 import { withC12HordeRuntimeV121 } from './c12-horde-runtime-v121.js';
 import { withArchiveRelayRuntimeV122 } from './archive-relay-runtime-v122.js';
+import { withPlayerFieldActionsV124 } from './player-field-actions-v124.js';
 
 export * from './game-production-core.js';
 
@@ -30,6 +31,7 @@ const V86ProductionEngine = withPlaceablesRuntimeV86(V70ProductionEngine);
 const V88ProductionEngine = withUserCasteCampaignV88(V86ProductionEngine);
 const V121ProductionEngine = withC12HordeRuntimeV121(withApcConvoyRuntimeV121(withBlackCocoonRuntimeV121(V88ProductionEngine)));
 const V122ProductionEngine = withArchiveRelayRuntimeV122(V121ProductionEngine);
+const V124ProductionEngine = withPlayerFieldActionsV124(V122ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -42,7 +44,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V122ProductionEngine {
+export class GameEngine extends V124ProductionEngine {
   start(options = {}) {
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });
@@ -68,23 +70,35 @@ export class GameEngine extends V122ProductionEngine {
     return { ...result, supportRestoredV72, tacticalReloadRestoredV77, placeablesRestoredV86 };
   }
 
-  canPerformGameplayAction(actor = this.player) {
+  canPerformGameplayAction(actor = this.player, { allowVent = false } = {}) {
     return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
-      && this.mission?.state === 'active' && actor?.alive
-      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor));
+      && this.mission?.state === 'active' && actor?.alive && !actor.downed && (allowVent || !actor.ventTransit)
+      && !(actor.hazardKind === 'electrical' && actor.hazardClock > 0)
+      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor));
   }
 
   // Guard the outermost runtime so keyboard, touch/UI and internal dispatch share the same contract.
   interact(actor = this.player) {
-    return this.canPerformGameplayAction(actor) ? super.interact(actor) : false;
+    return this.canPerformGameplayAction(actor, { allowVent: true }) ? super.interact(actor) : false;
   }
 
   fire(actor = this.player) {
-    return this.canPerformGameplayAction(actor) ? super.fire(actor) : false;
+    return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.toolUseClock > 0)
+      && !(actor.interactionClock > 0) ? super.fire(actor) : false;
+  }
+
+  melee(actor = this.player) {
+    if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.inVehicle || actor.reloading || actor.fireClock > 0
+      || actor.toolUseClock > 0 || actor.interactionClock > 0) return false;
+    if (this.neuro?.active && actor === this.player) return this.meleeAttack?.(actor) || false;
+    const accepted = this.performContextualMelee(actor);
+    if (accepted) this.refreshStealth?.(actor);
+    return accepted;
   }
 
   reload(actor = this.player) {
-    return this.canPerformGameplayAction(actor) ? super.reload(actor) : false;
+    return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.meleeClock > 0)
+      && !(actor.toolUseClock > 0) && !(actor.interactionClock > 0) ? super.reload(actor) : false;
   }
 
   useMedkit(actor = this.player) {
@@ -97,6 +111,7 @@ export class GameEngine extends V122ProductionEngine {
 
   toggleVehicle(actor = this.player) {
     if (!this.paused && this.running) this.cancelPlaceableV86(actor, 'vehicle');
+    if (!this.paused && this.running) this.cancelFieldActionV124(actor, 'vehicle');
     const changed = this.canPerformGameplayAction(actor) ? super.toggleVehicle(actor) : false;
     if (changed) cancelTacticalReloadV77(actor, 'vehicle');
     return changed;

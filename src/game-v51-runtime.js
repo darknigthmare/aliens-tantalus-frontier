@@ -39,6 +39,8 @@ import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { pressTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77, consumeTacticalReloadBonusV77, getTacticalReloadHudV77 } from './tactical-reload-v77.js';
 import { MissionGamepadInputV77 } from './mission-input-v77.js';
+import { integratePlayerVelocityV124, readPlayerControlsV124, findPlayerCoverV124,
+  resolvePlayerCoverV124, playerCoverProtectionV124, playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
 import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
@@ -340,6 +342,8 @@ export class GameEngine {
         return;
       }
       if (this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state !== 'active') return;
+      // After a pause/focus transfer, an OS repeat is not a new press.
+      if (event.repeat && !this.keys.has(event.code)) return;
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
       this.setHeldGameplayKeyV77(event.code, true, 'keyboard');
       if (event.repeat) return;
@@ -348,8 +352,6 @@ export class GameEngine {
       if (event.code === 'KeyE') this.interact(this.player);
       if (event.code === 'KeyR') this.reload(this.player);
       if (event.code === 'KeyH') this.useMedkit(this.player);
-      if (event.code === 'Space' && this.player) this.player.jumpBuffer = 0.14;
-      if (event.code === 'KeyU' && this.coop) this.coop.jumpBuffer = 0.14;
       if (event.code === 'KeyY') this.interact(this.coop);
       if (event.code === 'KeyT') this.reload(this.coop);
       if (event.code === 'KeyG') this.useMedkit(this.coop);
@@ -359,9 +361,18 @@ export class GameEngine {
     globalThis.document?.addEventListener?.('visibilitychange', () => {
       if (globalThis.document.hidden) this.suspendForFocusLoss();
     });
+    globalThis.document?.addEventListener?.('focusin', (event) => {
+      if (this.running && event.target !== this.canvas && !this.canRouteGameplayKey(event)) this.clearGameplayInput();
+    });
     bindCombatPointerAimV83(this.canvas, this, () => {
       this.audio?.unlock(); this.fire(this.player);
     });
+    this.canvas.addEventListener('pointerdown', (event) => {
+      if (event.button !== 1 || !this.running || !this.canRouteGameplayKey(event)) return;
+      event.preventDefault?.(); this.canvas.focus?.({ preventScroll: true });
+      this.melee?.(this.player);
+    });
+    this.canvas.addEventListener('auxclick', (event) => { if (event.button === 1 && this.running) event.preventDefault?.(); });
   }
 
   canRouteGameplayKey(event) {
@@ -381,16 +392,29 @@ export class GameEngine {
       actor.gamepadAimV83 = null;
       actor.pointerAimV83 = null;
       actor.combatAimV83 = null;
+      actor.aimingV124 = false;
+      actor.aimLockedV124 = false;
+      actor.aimLockCrouchV124 = false;
+      actor.gamepadMoveV124 = null;
+      actor.gamepadAimHeldV124 = false;
+      actor.gamepadCrouchV124 = false;
+      actor.coverV124 = null;
     }
   }
 
   setHeldGameplayKeyV77(code, active, source = 'keyboard') {
     if (!this.heldGameplayKeysV77) this.heldGameplayKeysV77 = new Map();
     const sources = this.heldGameplayKeysV77.get(code) || new Set();
+    const wasHeld = sources.size > 0;
     if (active) sources.add(source);
     else sources.delete(source);
     if (sources.size) { this.heldGameplayKeysV77.set(code, sources); this.keys.add(code); }
     else if (this.heldGameplayKeysV77.has(code) || source === 'keyboard') { this.heldGameplayKeysV77.delete(code); this.keys.delete(code); }
+    if (active && !wasHeld && (code === 'Space' || code === 'KeyU')) {
+      const actor = code === 'Space' ? this.player : this.coop;
+      if (actor?.alive && this.running && !this.paused && this.mission?.state === 'active'
+        && (actor !== this.coop || this.coopEnabled)) actor.jumpBuffer = 0.14;
+    }
   }
 
   suspendForFocusLoss() {
@@ -759,7 +783,7 @@ export class GameEngine {
   }
 
   updatePlayer(player, delta, controls) {
-    if (!player) return;
+    if (!player || !Number.isFinite(delta) || delta <= 0) return;
     const individualV85 = crewMovementV85(player);
     player.jumpBuffer = Math.max(0, player.jumpBuffer - delta);
     player.ladderDetachClock = Math.max(0, (Number(player.ladderDetachClock) || 0) - delta);
@@ -777,40 +801,34 @@ export class GameEngine {
       if (this.keys.has(controls.fire)) this.fire(player);
       return;
     }
-    const stunned = player.hazardKind === 'electrical' && player.hazardClock > 0;
-    const aimLocked = this.keys.has(player.coop ? 'ShiftRight' : 'ShiftLeft');
+    const inputV124 = readPlayerControlsV124(this, player, controls);
+    const { left, right, up, down, aimLocked } = inputV124;
+    const stunned = inputV124.incapacitated;
     if (aimLocked) player.vx = 0;
-    const left = !stunned && !aimLocked && (this.keys.has(controls.left) || (!player.coop && this.keys.has('ArrowLeft')));
-    const right = !stunned && !aimLocked && (this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight')));
-    const up = !stunned && !aimLocked && (this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp')));
-    const down = !stunned && !aimLocked && (this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown')));
     const climbDirection = Number(down) - Number(up);
     const ladder = player.ladderDetachClock > 0 ? null : this.nearestLadder(player, climbDirection);
     if (stunned) player.climbing = false;
     if (ladder && climbDirection) player.climbing = true;
     if (player.climbing && !ladder) player.climbing = false;
     if (!player.climbing) player.ladderId = null;
-    player.crouching = down && !player.climbing && player.grounded;
+    player.crouching = inputV124.crouch && !player.climbing && player.grounded;
     const grappleScale = player.grappledClock > 0 ? 0.42 : 1;
     const feet = { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
     const water = (this.hazards || []).find((hazard) => hazard.active && hazard.kind === 'flood' && overlap(feet, hazard));
     const waterScale = water ? clamp(Number(water.slow) || 0.45, 0.05, 1) : 1;
-    const speed = (player.crouching ? 105 : 245) * grappleScale * waterScale * individualV85.speed;
-    const targetVelocity = (Number(right) - Number(left)) * speed;
+    const speed = (player.crouching ? 105 : player.aimingV124 ? 155 : 245) * grappleScale * waterScale
+      * individualV85.speed * (player.locomotionSpeedScaleV124 || 1) * inputV124.magnitude;
+    const targetVelocity = inputV124.direction * speed;
     const response = (player.grounded ? 16 : 8) * individualV85.acceleration;
-    const previousVelocity = player.vx;
-    const blend = water ? -Math.expm1(-response * delta) : Math.min(1, delta * response);
-    player.vx += (targetVelocity - player.vx) * blend;
-    // Integrate the same velocity response over elapsed seconds while wading.
-    // Multiplying velocity once per rendered frame made faster screens slower.
-    const horizontalStep = water
-      ? targetVelocity * delta + (previousVelocity - targetVelocity) * blend / response
-      : player.vx * delta;
+    const motionV124 = integratePlayerVelocityV124(player.vx, targetVelocity, response, delta);
+    player.vx = motionV124.velocity;
+    let horizontalStep = motionV124.distance;
     if (!left && !right && Math.abs(player.vx) < 0.5) player.vx = 0;
-    if (player.vx) player.facing = Math.sign(player.vx);
+    if (player.vx && !player.aimingV124) player.facing = Math.sign(player.vx);
     if (player.climbing && ladder) {
       player.ladderId = ladder.id || null;
-      if (!aimLocked) player.x += (ladder.x - player.w / 2 - player.x) * Math.min(1, delta * 12);
+      if (!aimLocked) player.x += (ladder.x - player.w / 2 - player.x) * -Math.expm1(-delta * 12);
+      player.vx = 0; horizontalStep = 0;
       player.vy = climbDirection * 185 * individualV85.climb;
       player.y = clamp(player.y + player.vy * delta, ladder.top - player.h, ladder.bottom - player.h);
       player.grounded = false;
@@ -826,7 +844,7 @@ export class GameEngine {
           && player.x + player.w > platform.x + 4 && player.x < platform.x + platform.w - 4
         ));
       }
-      if (player.jumpBuffer > 0 || this.keys.has(controls.jump)) {
+      if (!stunned && player.jumpBuffer > 0) {
         player.climbing = false;
         player.ladderId = null;
         player.ladderDetachClock = 0.2;
@@ -837,22 +855,24 @@ export class GameEngine {
     } else {
       if (player.grounded) player.coyoteTime = 0.1;
       else player.coyoteTime = Math.max(0, player.coyoteTime - delta);
-      if (!stunned && (player.jumpBuffer > 0 || this.keys.has(controls.jump)) && player.coyoteTime > 0) {
+      if (!stunned && player.jumpBuffer > 0 && player.coyoteTime > 0) {
         player.vy = -665 * individualV85.jump;
         player.grounded = false;
         player.coyoteTime = 0;
         player.jumpBuffer = 0;
       }
-      player.vy += GRAVITY * delta;
       const previousBottom = player.y + player.h;
-      player.y += player.vy * delta;
+      player.y += player.vy * delta + GRAVITY * delta * delta / 2;
+      player.vy += GRAVITY * delta;
       player.grounded = false;
       this.resolveVertical(player, previousBottom);
     }
     const previousX = player.x;
     player.x = clamp(player.x + horizontalStep, 0, WORLD_WIDTH - player.w);
     this.resolveHorizontal(player, previousX);
-    player.inCover = Boolean(player.crouching && this.findCover(player));
+    this.resolvePlayerCombatAimV83(player);
+    this.refreshPlayerCoverV124(player, { fire: inputV124.fire });
+    player.movementV124 = playerMovementPresentationV124(player, inputV124);
     if (!stunned && this.keys.has(controls.fire)) this.fire(player);
     this.applyHazards(player);
     if (player.y > WORLD_HEIGHT + 100) {
@@ -1092,8 +1112,10 @@ export class GameEngine {
 
   spawnEnemyProjectile(enemy, target) {
     const direction = Math.sign(target.x - enemy.x) || enemy.facing;
+    const sourceX = enemy.x + enemy.w / 2;
+    const sourceY = enemy.y + enemy.h * 0.42;
     this.hostileProjectiles.push({
-      x: enemy.x + enemy.w / 2, y: enemy.y + enemy.h * 0.42, w: enemy.isBoss ? 24 : 14, h: enemy.isBoss ? 14 : 10,
+      x: sourceX, y: sourceY, sourceX, sourceY, w: enemy.isBoss ? 24 : 14, h: enemy.isBoss ? 14 : 10,
       vx: direction * (enemy.behavior === 'shooter' ? 520 : 340), damage: enemy.isBoss ? 22 : enemy.behavior === 'spitter' ? 16 : 13,
       life: 2.2, acid: enemy.behavior !== 'shooter', ownerId: enemy.id, hit: false
     });
@@ -1101,6 +1123,9 @@ export class GameEngine {
 
   updateHostileProjectiles(delta) {
     for (const projectile of this.hostileProjectiles) {
+      // Keep the launch side even after the projectile (or its shooter) moves.
+      projectile.sourceX = Number.isFinite(projectile.sourceX) ? projectile.sourceX : projectile.x;
+      projectile.sourceY = Number.isFinite(projectile.sourceY) ? projectile.sourceY : projectile.y;
       projectile.x += projectile.vx * delta;
       projectile.y += (Number(projectile.vy) || 0) * delta;
       projectile.life -= delta;
@@ -1113,7 +1138,11 @@ export class GameEngine {
       }
       for (const actor of [this.player, this.coopEnabled ? this.coop : null]) {
         if (projectile.hit || !actor?.alive || actor.inVehicle || !overlap(projectile, actor)) continue;
-        this.damagePlayer(actor, projectile.damage, { source: projectile.acid ? 'acid' : 'projectile' });
+        this.damagePlayer(actor, projectile.damage, {
+          source: projectile.acid ? 'acid' : 'projectile', attackKind: 'projectile',
+          sourceX: projectile.sourceX, sourceY: projectile.sourceY,
+          projectileV124: { vx: projectile.vx, vy: Number(projectile.vy) || 0 }
+        });
         projectile.hit = true;
       }
       if (projectile.hit) this.spawnImpact(projectile.x, projectile.y, projectile.acid ? '#a7c742' : '#e3b86c');
@@ -1172,8 +1201,16 @@ export class GameEngine {
   }
 
   findCover(entity) {
-    const center = entity.x + entity.w / 2;
-    return this.covers.find((cover) => !cover.destroyed && center > cover.x - 28 && center < cover.x + cover.w + 28 && entity.y + entity.h > cover.y + 12);
+    return findPlayerCoverV124(entity, this.covers);
+  }
+
+  refreshPlayerCoverV124(actor, { fire = false } = {}) {
+    if (!actor) return null;
+    actor.coverV124 = resolvePlayerCoverV124(actor, this.findCover(actor), actor.combatAimV83, {
+      fire, busy: Boolean(this.isPlaceableBusyV86?.(actor) || this.isFieldActionBusyV124?.(actor))
+    });
+    actor.inCover = Boolean(actor.coverV124 && !actor.coverV124.peeking);
+    return actor.coverV124;
   }
   getDoorRenderState(door, { open = door?.progress >= 0.82 } = {}) {
     const art = resolveMissionDoorArtV58({ ...door, open, progress: open ? 1 : 0 });
@@ -1251,6 +1288,7 @@ export class GameEngine {
       if (cover.destroyed || !overlap(entity, cover)) continue;
       if (entity.vx > 0 && previousX + entity.w <= cover.x + 7) entity.x = cover.x - entity.w;
       else if (entity.vx < 0 && previousX >= cover.x + cover.w - 7) entity.x = cover.x + cover.w;
+      entity.vx = 0;
     }
   }
 
@@ -1310,7 +1348,8 @@ export class GameEngine {
     const target = this.enemies
       .filter((enemy) => enemy.alive
         && Math.abs((enemy.x + enemy.w / 2) - playerCenterX) <= 92
-        && Math.abs((enemy.y + enemy.h / 2) - playerCenterY) <= 96)
+        && Math.abs((enemy.y + enemy.h / 2) - playerCenterY) <= 96
+        && this.enemyMeleePathClearV64(player, enemy))
       .sort((left, right) => distanceBetween(player, left) - distanceBetween(player, right))[0];
     if (!target) return false;
     player.facing = Math.sign((target.x + target.w / 2) - playerCenterX) || player.facing || 1;
@@ -1334,15 +1373,28 @@ export class GameEngine {
     const keyboard = readKeyboardCombatAimV83(this.keys, player === this.coop ? COMBAT_AIM_KEY_BINDINGS_V83.coop : COMBAT_AIM_KEY_BINDINGS_V83.player);
     const input = [player?.pointerAimV83, player?.gamepadAimV83].find((entry) => entry && Math.hypot(entry.x || 0, entry.y || 0) > 0.25) || keyboard;
     const aim = resolveCombatAimV83({ ...input, facing: player?.facing });
-    if (player) { player.combatAimV83 = aim; player.facing = aim.facing; }
+    if (player) {
+      player.combatAimV83 = aim;
+      player.facing = aim.facing;
+      player.aimingV124 = Boolean(player.pointerAimV83 || player.gamepadAimV83 || player.gamepadAimHeldV124
+        || this.keys.has(player.coop ? 'ShiftRight' : 'ShiftLeft'));
+    }
     return aim;
+  }
+
+  resolvePlayerMuzzleV124(player, aim) {
+    if (player?.inVehicle && this.vehicle) return resolveCombatMuzzleV83(player, aim,
+      { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 });
+    const muzzle = resolveUserEquipmentMuzzleV95(player, aim) || resolveCombatMuzzleV83(player, aim);
+    return constrainPlayerMuzzleV124(this, player, aim, muzzle);
   }
 
   fire(player) {
     if (!player?.alive || player.fireClock > 0 || player.reloading || this.paused || this.mission?.state !== 'active') return false;
     const aim = this.resolvePlayerCombatAimV83(player);
+    this.refreshPlayerCoverV124(player, { fire: true });
     // An explicit direction is a shot request, not permission to turn toward a nearby melee target.
-    if (!aim.active && this.performContextualMelee(player)) return true;
+    if (!aim.active && !player.aimingV124 && this.performContextualMelee(player)) return true;
     const profile = this.weaponProfile(player);
     if (profile.ammo <= 0) { this.reload(player); return false; }
     player.fireClock = profile.interval;
@@ -1352,8 +1404,7 @@ export class GameEngine {
     else player.ammo -= 1;
     const reloadBonus = profile.mode === 'apc-turret' ? 1 : consumeTacticalReloadBonusV77(player, this.reloadWeaponV77(player));
     const mounted = profile.mode === 'apc-turret';
-    const origin = (!mounted && resolveUserEquipmentMuzzleV95(player, aim)) || resolveCombatMuzzleV83(player, aim, mounted
-      ? { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 } : {});
+    const origin = this.resolvePlayerMuzzleV124(player, aim);
     const shot = buildCombatShotVectorsV83(aim, { speed: mounted ? 1100 : 890 })[0];
     this.bullets.push({
       ...origin, w: profile.mode === 'apc-turret' ? 26 : 18, h: profile.mode === 'apc-turret' ? 7 : 5,
@@ -1462,12 +1513,13 @@ export class GameEngine {
     for (let index = 0; index < 8; index += 1) this.particles.push({ x, y, vx: (index - 3.5) * 38, vy: -45 - (index % 3) * 28, life: 0.3 + index * 0.02, color });
   }
 
-  damagePlayer(player, amount, { bypassCover = false, source = 'enemy' } = {}) {
-    if (!player?.alive) return 0;
+  damagePlayer(player, amount, options = {}) {
+    const { source = 'enemy' } = options;
+    if (!player?.alive || !Number.isFinite(amount) || amount <= 0) return 0;
     if (player.inVehicle && this.vehicle?.active) return this.damageVehicle(amount, source);
-    const covered = player.inCover && !bypassCover;
-    const adjusted = covered ? amount * 0.35 : amount;
-    if (covered) player.damageBlocked += amount - adjusted;
+    const protection = playerCoverProtectionV124(player, this.findCover(player), options);
+    const adjusted = amount * (1 - protection);
+    player.damageBlocked += amount - adjusted;
     const absorbed = Math.min(player.armor, adjusted * 0.55);
     player.armor -= absorbed;
     const healthDamage = adjusted - absorbed;
