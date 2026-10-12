@@ -32,6 +32,32 @@ export const PLAYER_VISUAL_CONTRACT_V81 = Object.freeze({
   })
 });
 
+/** Cell 3 is the reviewed, flash-free shouldered pose used at shot onset.
+ * Its visible barrel ends at source (194,96), relative to foot support
+ * (128,240). Use the same nonuniform cell scale and stature normalization as
+ * the renderer, instead of deriving a visual shoulder from the 42x92 hitbox.
+ * Other postures and dedicated/custom art retain their own existing anchors.
+ */
+export function getEcho9StandingMuzzleOptionsV124(actor, { surface = 'mission' } = {}) {
+  if (!actor || actor.alive === false || actor.downed || actor.inVehicle || actor.crouching
+    || actor.grounded === false || actor.climbing || actor.ventTransit || actor.reloading
+    // Saved uniforms such as costume-001 have no dedicated atlas and render
+    // Echo9. Only registered dedicated skins or an observed skin opt out.
+    || Math.abs(Number(actor.vx) || 0) > 12 || getPlayerCostumeSkinV119(actor.costumeId) || actor.playerVisualV81?.skinId
+    || actor.playerVisualV81?.fallback || actor.userEquipmentV95?.armorId || actor.userEquipmentV95?.weaponId
+    || actor.playerVisualV81?.sheetId && !ECHO9_SHEET_ID_SET.has(actor.playerVisualV81.sheetId)
+    || !['mission', 'bioforge'].includes(surface)) return null;
+  const { x, y, w, h } = actor;
+  if (![x, y, w, h].every(Number.isFinite) || w <= 0 || h <= 0) return null;
+  const metrics = PLAYER_VISUAL_CONTRACT_V81.surfaces[surface];
+  const scale = playerAtlasScaleV124('player.echo9-marine.combat');
+  return Object.freeze({
+    pivotX: x + w / 2,
+    pivotY: y + h + (96 - 240) * metrics.height / 256 * scale,
+    barrelLength: (194 - 128) * metrics.width / 256 * scale
+  });
+}
+
 export function normalizePlayerFacingV81(value) {
   return Number(value) < 0 ? -1 : 1;
 }
@@ -224,4 +250,4 @@ export function drawPlayerSpriteV81(ctx, options = {}) {
     samplingV124: sourceCrop ? Object.freeze({ source: Object.freeze(drawSource), sprite: Object.freeze(drawSprite),
       supportY: sourceCrop.supportY, correctedSupport: true }) : null });
 }
-import { resolvePlayerCostumeSampleV119 } from './player-costume-skins-v119.js';
+import { getPlayerCostumeSkinV119, resolvePlayerCostumeSampleV119 } from './player-costume-skins-v119.js';

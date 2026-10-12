@@ -851,6 +851,7 @@ export function withV52MissionRuntime(BaseEngine) {
       if (personal && !actor.crewV85.weaponRuntime) return false;
       const previousWeapon = this.weaponRuntime;
       const previousBallistics = this.weaponBallistics;
+      const previousShots = Number(actor?.shots) || 0;
       let fired;
       try {
         if (personal) {
@@ -862,7 +863,7 @@ export function withV52MissionRuntime(BaseEngine) {
         this.weaponRuntime = previousWeapon;
         this.weaponBallistics = previousBallistics;
       }
-      if (fired && actor) {
+      if (fired && actor && Number(actor.shots) > previousShots) {
         actor.v52FireClock = actor.inVehicle ? 0.48 : 0.34;
         if (actor.inVehicle && this.vehicle) this.vehicle.v52TurretClock = 0.52;
       }
@@ -1715,8 +1716,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const muzzle = resolveCombatMuzzleV83(member, aim, { pivotX: pivot.x, pivotY: pivot.y, barrelLength: 22 });
       const shot = buildCombatShotVectorsV83(aim, { speed: explosive ? 700 : 850 })[0];
       const bullet = {
-        x: muzzle.x,
-        y: muzzle.y,
+        ...muzzle,
         w: explosive ? 16 : 12,
         h: explosive ? 8 : 4,
         vx: shot.vx,

@@ -141,9 +141,10 @@ export const SPRITE_CLIP_SETS = Object.freeze({
   ]),
   'player-combat': freezeList([
     { id: 'aim-ready', frames: [0, 1, 2, 3], fps: 12, loop: false, events: [{ frame: 1, type: 'weapon:aim-ready' }] },
-    // Cell 7 contains another baked muzzle flash, not a recovery pose. Each
-    // accepted shot restarts 4->5->6 instead of inventing a second discharge.
-    { id: 'primary-fire', frames: [4, 5, 6], fps: 13, loop: false, events: [{ frame: 4, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
+    // Cells 4 and 7 contain baked yellow flashes. Start from the existing
+    // flash-free shouldered pose, then retain recoil/recovery. Accepted-shot
+    // effects own the actual weapon light, color and lifetime independently.
+    { id: 'primary-fire', frames: [3, 5, 6], fps: 13, loop: false, events: [{ frame: 3, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
     { id: 'reload', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'weapon:magazine-out' }, { frame: 10, type: 'weapon:magazine-in' }, { frame: 11, type: 'weapon:chamber' }] },
     // Living injuries must never advance into the fallen/corpse cells.
     { id: 'hurt', frames: [12, 13], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }] },

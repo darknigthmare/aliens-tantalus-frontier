@@ -42,6 +42,7 @@ import { MissionGamepadInputV77 } from './mission-input-v77.js';
 import { integratePlayerVelocityV124, readPlayerControlsV124, findPlayerCoverV124,
   resolvePlayerCoverV124, playerCoverProtectionV124, playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
 import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
+import { getEcho9StandingMuzzleOptionsV124 } from './player-visual-contract-v81.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -1385,7 +1386,8 @@ export class GameEngine {
   resolvePlayerMuzzleV124(player, aim) {
     if (player?.inVehicle && this.vehicle) return resolveCombatMuzzleV83(player, aim,
       { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 });
-    const muzzle = resolveUserEquipmentMuzzleV95(player, aim) || resolveCombatMuzzleV83(player, aim);
+    const muzzle = resolveUserEquipmentMuzzleV95(player, aim) || resolveCombatMuzzleV83(player, aim,
+      getEcho9StandingMuzzleOptionsV124(player, { surface: this.bioforgeLevelV80 ? 'bioforge' : 'mission' }) || {});
     return constrainPlayerMuzzleV124(this, player, aim, muzzle);
   }
 
@@ -1831,6 +1833,10 @@ export class GameEngine {
     this.drawWorld(ctx);
     ctx.restore();
     this.drawForeground(ctx);
+    ctx.save();
+    ctx.translate(-this.camera.x, -this.camera.y);
+    this.drawSceneWeaponLightsV124?.(ctx);
+    ctx.restore();
     this.drawHud(ctx);
     if (this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state === 'failed' || this.mission?.state === 'complete') this.drawStateOverlay(ctx);
     ctx.restore();

@@ -472,7 +472,7 @@ export class GameEngine extends CompleteGameEngine {
     const shotsBefore = Number(player?.shots) || 0;
     const fired = super.fire(player);
     if (!fired || !this.stealthRuntime) return fired;
-    if (player === this.player) {
+    if (player === this.player && (Number(player.shots) || 0) > shotsBefore) {
       this.stealthRuntime.noiseBurstUntil = this.animationTime + 0.85;
       this.refreshStealth(player);
     }

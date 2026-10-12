@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { GameEngine } from '../src/game-production-runtime.js';
-import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT } from '../src/content.js';
+import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, NEURO_XENO_PROFILES } from '../src/content.js';
 import { getPlayerAimGuideV124 } from '../src/player-control-v124.js';
 import { firstProjectileObstacleV83 } from '../src/projectile-collision-v83.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
@@ -676,9 +676,29 @@ test('Bioforge fire shares the constrained muzzle used by presentation', () => {
   const { engine, actor } = makeBioforge();
   engine.bioforgeRootV80.activeSession.phase = 'combat';
   actor.facing = 1; actor.gamepadAimV83 = { x: 1, y: 0 };
-  engine.walls = [{ id: 'thin-bioforge-bulkhead', x: actor.x + actor.w + 1, y: actor.y - 20, w: 2, h: actor.h + 40 }];
-  const aim = engine.resolvePlayerCombatAimV83(actor), muzzle = engine.resolvePlayerMuzzleV124(actor, aim);
+  const aim = engine.resolvePlayerCombatAimV83(actor), freeMuzzle = engine.resolvePlayerMuzzleV124(actor, aim);
+  engine.walls = [{ id: 'thin-bioforge-bulkhead', x: freeMuzzle.x + 4, y: actor.y - 20, w: 2, h: actor.h + 40 }];
+  assert.equal(Boolean(engine.resolvePlayerMuzzleV124(actor, aim).obstructedV124), false);
+  // Bioforge renders a shorter weapon. Place the obstruction inside its real
+  // shoulder-to-barrel span instead of assuming a barrel beyond the hitbox.
+  engine.walls[0].x = (freeMuzzle.pivotX + freeMuzzle.x) / 2;
+  const muzzle = engine.resolvePlayerMuzzleV124(actor, aim);
   assert.ok(muzzle.obstructedV124);
   assert.equal(engine.fire(actor), true);
   assert.equal(engine.bullets.at(-1).x, muzzle.x); assert.equal(engine.bullets.at(-1).y, muzzle.y);
+});
+
+test('dedicated, contextual and Neuro melee never create gunfire presentation clocks', () => {
+  const neuroProfile = NEURO_XENO_PROFILES.find(profile => profile.playerClassCompatible); assert.ok(neuroProfile);
+  for (const action of ['dedicated', 'contextual', 'neuro']) {
+    const { engine, actor, events } = makeEngine(action === 'neuro' ? { neuroProfile } : {});
+    const target = engine.createEnemy(ENEMIES.find(enemy => enemy.id === 'enemy-005-warrior'), 0, actor.x + actor.w + 12, actor.y + actor.h);
+    engine.enemies = [target];
+    const health = target.health, ammo = actor.ammo;
+    assert.equal(action === 'dedicated' ? engine.melee(actor) : engine.fire(actor), true, `${action} must execute its real attack.`);
+    assert.ok(target.health < health, `${action} must actually damage the nearby target.`);
+    assert.ok(events.some(event => event.type === (action === 'neuro' ? 'neuro-attack' : 'melee')));
+    assert.equal(actor.shots, 0); assert.equal(actor.ammo, ammo); assert.equal(engine.bullets.length, 0);
+    assert.equal(Number(actor.v52FireClock) || 0, 0, `${action} must not impersonate an accepted gunshot.`);
+  }
 });

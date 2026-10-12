@@ -384,6 +384,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       if (testMode != null) this.bioforgeTestModeV80 = testMode === true;
       this.bioforgeRootV80 = rawState ? sanitizeBioforgeV80(rawState?.bioforge || rawState?.state || rawState) : createBioforgeV80();
       this.initializeBioforgeWorldV80();
+      this.weaponEffectsSeedV124 = this.bioforgeSeedV80;
+      this.resetSceneWeaponEffectsV124?.();
       this.bioforgePreparedV80 = true;
       this.running = false;
       this.draw();
@@ -796,6 +798,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       else if (phase === 'result' && this.bioforgePhaseClockV80 >= BIOFORGE_RESULT_SECONDS_V80) this.purgeBioforgeV80('session-complete');
       if (['printing', 'combat'].includes(this.bioforgeRootV80.activeSession?.phase)) this.updateBioforgeCombatV80(dt);
       this.updateBioforgeCameraV80(dt);
+      this.advanceSceneWeaponEffectsV124?.(dt);
       this.bioforgeSnapshotClockV87 += dt;
       if (this.bioforgeSnapshotClockV87 >= .5) {
         this.bioforgeSnapshotClockV87 = 0;
@@ -922,8 +925,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       const shot = buildCombatShotVectorsV83(aim)[0];
       this.bullets.push({
         id: `bioforge-shot-${actor.shots}`,
-        x: muzzle.x,
-        y: muzzle.y,
+        ...muzzle,
         w: 18,
         h: 5,
         vx: shot.vx,
@@ -936,6 +938,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         hit: false,
         bioforgeProjectileV80: true
       });
+      this.emitCommittedWeaponShotV124?.(actor, this.bullets[this.bullets.length - 1], this.weaponDescriptorV124?.(actor));
       this.audio?.shot?.();
       this.emitBioforgeV80({ type: 'bioforge-shot', sessionId: this.bioforgeRootV80.activeSession?.id });
       this.persistBioforgeV80({ type: 'bioforge-shot-committed' });
@@ -1345,6 +1348,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       ctx.translate(-Number(this.camera?.x || 0), 0);
       this.drawBioforgeActorsV80(ctx);
       this.drawBioforgePurgeV80(ctx);
+      this.drawSceneWeaponCasingsV124?.(ctx);
+      this.drawSceneWeaponLightsV124?.(ctx);
       ctx.restore();
       this.drawBioforgeHudV80(ctx);
       if (this.bioforgeUserPoseIssueV87) {

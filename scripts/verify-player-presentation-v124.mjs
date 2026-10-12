@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { SpriteAnimationController, resolvePlayerAnimation, resolveSpriteSheet, resolveSpriteClip, SPRITE_PIVOTS,
   SPRITE_CLIP_SETS } from '../src/sprite-animation-runtime.js';
-import { drawPlayerSpriteV81 } from '../src/player-visual-contract-v81.js';
+import { drawPlayerSpriteV81, getEcho9StandingMuzzleOptionsV124 } from '../src/player-visual-contract-v81.js';
+import { resolveCombatMuzzleV83 } from '../src/combat-aim-v83.js';
 import { getPlayerSourceCropV124, PLAYER_STANDING_HEIGHTS_V124, playerAtlasScaleV124 } from '../src/player-presentation-v124.js';
 import { PLAYER_COSTUME_ASSETS_V119 } from '../src/player-costume-skins-v119.js';
 import { USER_EQUIPMENT_V95, getUserWeaponTransformV95, drawUserArmorV95, drawUserWeaponV95 } from '../src/user-equipment-v95.js';
@@ -76,19 +77,20 @@ check('climb pose and contact markers stop when the ladder movement stops', () =
   assert.equal(moving.events.filter(e => e.event === 'movement:climb-contact').length, 1);
 });
 
-check('accepted automatic shots restart recoil without a neutral frame or duplicate flash', () => {
+check('accepted automatic shots start from a flash-free aim pose and retain recoil/recovery', () => {
   const a = actor(); const c = new SpriteAnimationController(); sample(c, a, 0);
   a.shots = 1; a.v52FireClock = .34;
-  const first = sample(c, a, .1); assert.equal(first.frame, 4);
+  const first = sample(c, a, .1); assert.equal(first.frame, 3);
+  assert.equal(first.presentationV124.recoil, 1);
   assert.equal(first.events.filter(e => e.event === 'weapon:shot').length, 1);
   a.v52FireClock = .25; assert.equal(sample(c, a, .19).frame, 5);
   a.shots = 2; a.v52FireClock = .34;
-  const second = sample(c, a, .2); assert.equal(second.frame, 4);
+  const second = sample(c, a, .2); assert.equal(second.frame, 3);
   assert.equal(second.events.filter(e => e.event === 'weapon:shot').length, 1);
   a.v52FireClock = .1;
   const settled = sample(c, a, .4); assert.equal(settled.frame, 6);
   assert.equal(settled.events.filter(e => e.event === 'weapon:shot').length, 0);
-  assert.deepEqual(resolveSpriteClip('player.echo9-marine.combat', 'primary-fire').frames, [4, 5, 6]);
+  assert.deepEqual(resolveSpriteClip('player.echo9-marine.combat', 'primary-fire').frames, [3, 5, 6]);
 });
 
 check('movement, crouch and flight keep physical posture during a shot', () => {
@@ -194,7 +196,7 @@ check('reduced motion keeps readable action progress while removing cosmetic mov
   const c = new SpriteAnimationController(); const a = actor(); sample(c, a, 0, { reducedMotion: true });
   a.shots = 1; a.v52FireClock = .34;
   const result = sample(c, a, .1, { reducedMotion: true });
-  assert.equal(result.frame, 4);
+  assert.equal(result.frame, 3);
   assert.equal(result.presentationV124.transform.shearX, 0);
   assert.equal(result.presentationV124.transform.scaleY, 1);
 });
@@ -245,6 +247,45 @@ check('dedicated costume rectangles are not treated as a generic 256px grid', ()
   assert.equal(result.skinId, 'player.nostromo-crew-v119');
   assert.equal(result.samplingV124, null);
   assert.notEqual(result.source.width, 256);
+});
+
+check('standing shot muzzle agrees with the rendered shouldered barrel in both scene scales and facings', () => {
+  for (const surface of ['mission', 'bioforge']) for (const facing of [-1, 1]) {
+    const a = actor({ facing });
+    const { result } = render(a, 'player.echo9-marine.combat', 3, { surface });
+    const muzzle = resolveCombatMuzzleV83(a, { x: facing, y: 0 }, getEcho9StandingMuzzleOptionsV124(a, { surface }));
+    const sourceX = facing < 0 ? 256 - 194 : 194;
+    const rawX = result.sprite.x + sourceX * result.sprite.width / 256;
+    const rawY = result.sprite.y + 96 * result.sprite.height / 256;
+    const scale = playerAtlasScaleV124('player.echo9-marine.combat');
+    approx(muzzle.x, result.pivot.x + (rawX - result.pivot.x) * scale);
+    approx(muzzle.y, result.pivot.y + (rawY - result.pivot.y) * scale);
+    if (surface === 'mission') assert.ok(a.y + 37 - muzzle.y > 24, 'the former physical-hitbox shoulder was below the visible barrel');
+    else assert.ok(Math.abs(a.y + 37 - muzzle.y) < 3, 'Bioforge must use its own 98px artwork scale');
+  }
+});
+
+check('standing muzzle calibration leaves other postures, unknown art, and custom anchors alone', () => {
+  for (const overrides of [{ vx: 13 }, { crouching: true }, { grounded: false }, { climbing: true },
+    { inVehicle: true }, { downed: true }, { reloading: true }, { costumeId: 'franchise-nostromo-crew' },
+    { playerVisualV81: { skinId: 'dedicated' } }, { playerVisualV81: { fallback: true } },
+    { playerVisualV81: { sheetId: 'player.future-art' } }, { userEquipmentV95: { armorId: 'custom' } },
+    { userEquipmentV95: { weaponId: 'custom' } }]) assert.equal(getEcho9StandingMuzzleOptionsV124(actor(overrides)), null);
+  assert.equal(getEcho9StandingMuzzleOptionsV124(actor(), { surface: 'hub' }), null);
+});
+
+check('a fresh-save costume-001 uniform keeps Echo9 muzzle calibration after the real renderer resolves it', () => {
+  const a = actor({ costumeId: 'costume-001' });
+  const expected = getEcho9StandingMuzzleOptionsV124(actor());
+  assert.deepEqual(getEcho9StandingMuzzleOptionsV124(a), expected, 'a saved appearance ID is not proof of a dedicated atlas');
+  const { result } = render(a, 'player.echo9-marine.combat', 3);
+  assert.equal(result.fallback, false, 'the actual Echo9 atlas remains available');
+  assert.equal(result.sheetId, 'player.echo9-marine.combat');
+  assert.ok(result.costumeDegraded);
+  assert.equal(result.skinId, undefined);
+  a.playerVisualV81 = { sheetId: result.sheetId, fallback: result.fallback, skinId: result.skinId || null,
+    costumeId: result.costumeId || null, costumeDegraded: result.costumeDegraded || null };
+  assert.deepEqual(getEcho9StandingMuzzleOptionsV124(a), expected);
 });
 
 check('optional equipment respects custom grip, one cover offset, and free hands for tools', () => {
