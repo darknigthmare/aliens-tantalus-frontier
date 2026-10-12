@@ -28,6 +28,9 @@ import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-c
 import { hubFarParallaxV116, drawHubRoomDepthV119, drawHubContactShadowV116 } from './hub-depth-presentation-v116.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
+import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
+  drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
+  releaseHubPlayerAppearanceV126 } from './player-appearance-hub-v126.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -349,6 +352,7 @@ export class HubGame {
     };
     this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck).map((door) => ({ ...door }));
     this.player = { x: this.state.positionX, y: FLOOR_Y - 92, w: 44, h: 92, vx: 0, vy: 0, grounded: true, facing: this.state.facing, health: 100, maxHealth: 100, alive: true, shockClock: 0, shockHits: 0 };
+    prepareHubPlayerAppearanceV126(this);
     this.playerAnimationV81.reset('hub:player:echo9');
     this.hangarHazardCooldown = 0;
     this.camera = { x: clamp(this.player.x - LOGICAL_WIDTH / 2, 0, WORLD_WIDTH - LOGICAL_WIDTH) };
@@ -368,6 +372,7 @@ export class HubGame {
   }
 
   stop(persist = true) {
+    releaseHubPlayerAppearanceV126(this);
     if (!this.running) return;
     if (persist) this.persist();
     this.running = false;
@@ -427,6 +432,7 @@ export class HubGame {
     const delta = Math.max(0, Math.min(0.034, (time - this.last) / 1000 || 0));
     this.last = time;
     this.update(delta);
+    advanceHubPlayerAppearanceV126(this);
     this.draw();
     requestAnimationFrame((next) => this.loop(next, token));
   }
@@ -761,6 +767,7 @@ export class HubGame {
     const activeDoor = this.doorStates.reduce((nearest, door) => !nearest || Math.abs(playerCenter - door.x) < Math.abs(playerCenter - nearest.x) ? door : nearest, null);
     return {
       running: this.running,
+      playerAppearanceV126: hubPlayerAppearanceSnapshotV126(this),
       presentationV116: this.depthPresentationV116 ? 'layered-2.5d-fixed-walk-plane' : '2d',
       roomPresentationV119: getHubRoomPresentationV119(this.currentAnnexV71?.() || room, this.depthPresentationV116),
       deck: this.state?.deck ?? 0,
@@ -1199,7 +1206,7 @@ export class HubGame {
       reducedMotion: Boolean(this.reducedMotion)
     });
     const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
-    const render = drawPlayerSpriteV81(ctx, {
+    const render = drawHubPlayerAppearanceV126(this, ctx, sample) || drawPlayerSpriteV81(ctx, {
       sheet,
       image: this.playerSheets.get(sheet?.imageKey) || this.playerSheet,
       sample,

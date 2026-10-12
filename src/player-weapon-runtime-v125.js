@@ -31,7 +31,7 @@ export function withPlayerWeaponRigV125(Base) {
       return surface || (this.bioforgeLevelV80 ? 'bioforge' : 'mission');
     }
 
-    preparePlayerWeaponAssetsV125() {
+    collectPlayerWeaponAssetsV125() {
       const assets = [];
       for (const actor of this.playerWeaponActorsV125()) {
         const body = resolvePlayerBodyRigV125({ actor, surface: this.playerWeaponSurfaceV125(),
@@ -40,7 +40,11 @@ export function withPlayerWeaponRigV125(Base) {
         if (body.eligible && profile?.portable) assets.push(...PLAYER_BODY_RIG_ASSETS_V125, profile);
       }
       if (!this.weaponPickup?.taken && this.weaponVisual?.path) assets.push(this.weaponVisual);
-      return this.weaponImageCacheV125?.retain(assets) || null;
+      return assets;
+    }
+
+    preparePlayerWeaponAssetsV125() {
+      return this.weaponImageCacheV125?.retain(this.collectPlayerWeaponAssetsV125()) || null;
     }
 
     resetPlayerWeaponRigV125() {
@@ -98,9 +102,13 @@ export function withPlayerWeaponRigV125(Base) {
 
     stop(...args) {
       const result = super.stop(...args);
+      this.releasePlayerWeaponPresentationV125();
+      return result;
+    }
+
+    releasePlayerWeaponPresentationV125() {
       this.weaponImageCacheV125?.clear();
       this.resetPlayerWeaponRigV125();
-      return result;
     }
 
     interact(actor = this.player) {
@@ -149,10 +157,14 @@ export function withPlayerWeaponRigV125(Base) {
       return { ...pose, bodyRig: rig.bodyRig, weaponImage: rig.weaponImage, surface: rig.surface };
     }
 
+    drawPlayerBodyCompositionV125(ctx, actor, options) {
+      return drawPlayerBodyRigV125(ctx, { actor, ...options });
+    }
+
     drawPlayerWeaponRigV125(ctx, actor = this.player, options = {}) {
       const pose = this.resolvePlayerWeaponPoseV125(actor, actor?.combatAimV83, options);
       if (!pose) { if (actor) actor.heldWeaponVisualV125 = null; return null; }
-      const render = drawPlayerBodyRigV125(ctx, { actor, ...options, images: this.images,
+      const render = this.drawPlayerBodyCompositionV125(ctx, actor, { ...options, images: this.images,
         bodyRig: pose.bodyRig, weaponPose: pose, drawWeapon: () => drawHeldWeaponV125(ctx, pose.weaponImage, pose) });
       if (!render.drawn) { actor.heldWeaponVisualV125 = null; return null; }
       actor.heldWeaponVisualV125 = { schema: 125, weaponId: pose.profile.weaponId, path: pose.path,

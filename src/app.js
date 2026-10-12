@@ -88,6 +88,9 @@ import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
 import { CloudUiV119 } from './cloud-ui-v119.js';
 import { validateCloudPayloadV119 } from './cloud-save-v119.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
+import { equipPlayerAppearanceV126, resetPlayerAppearanceV126, normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
+import { playerAppearancePanelHtmlV126 } from './player-appearance-ui-v126.js';
+import { createPlayerAppearancePreviewV126 } from './player-appearance-preview-v126.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { createUserReferenceLibraryV100 } from './user-reference-library-v100.js';
 import { createUserSpecimenBenchV106 } from './user-specimen-bench-v106.js';
@@ -156,6 +159,10 @@ let activeHubStation = null;
 let pendingHubInteraction = null;
 let pendingNpcConversationV62 = null;
 let armoryCatalogV62 = null;
+let appearanceOwnerV126 = 'player';
+let appearancePreviewV126 = null;
+let appearancePreviewEpochV126 = 0;
+let appearancePreviewFacingV126 = 1;
 let enemyCatalogV62 = null;
 let vehicleCatalogV62 = null;
 let missionInsertionUiV62 = null;
@@ -468,20 +475,29 @@ function handleBioforgeEventV80(event) {
   if (event?.type === 'bioforge-exit-locked') toast('BIOFORGE · sortie verrouillée tant que la purge n’est pas complète.');
 }
 
+function bioforgePlayerPresentationOptionsV126() {
+  return {
+    costumeId: saveSystem.data.player.costumeId,
+    playerAppearanceV126: normalizePlayerAppearanceV126(saveSystem.data.player.appearanceV126),
+    coopAppearanceV126: normalizePlayerAppearanceV126(saveSystem.data.player.coopAppearanceV126)
+  };
+}
+
 function prepareBioforgeViewV80() {
   bioforgeOwnerV84 = currentOwnerV84();
   const state = saveSystem.data.bioforgeV80;
+  const presentation = bioforgePlayerPresentationOptionsV126();
   try {
     if (state?.recovery?.purgeRequired) {
-      bioforgeRuntimeV80.prepare(state);
+      bioforgeRuntimeV80.prepare(state, presentation);
       bioforgeRuntimeV80.purgeBioforgeV80(state.recovery.reason || 'recovery-required');
     } else if (state?.activeSession && state.activeSession.phase !== 'return') {
-      bioforgeRuntimeV80.start({ resumeState: state, costumeId: saveSystem.data.player.costumeId });
+      bioforgeRuntimeV80.start({ resumeState: state, ...presentation });
     } else {
-      bioforgeRuntimeV80.prepare(state);
+      bioforgeRuntimeV80.prepare(state, presentation);
     }
   } catch (error) {
-    bioforgeRuntimeV80.prepare(state);
+    bioforgeRuntimeV80.prepare(state, presentation);
     toast(error.message);
   }
   renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80, resetDraft: true });
@@ -491,7 +507,7 @@ function startBioforgeFromTerminalV80(configuration) {
   if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84)
     return bioforgeCommandReceiptV87({ applied: false, reason: 'stale-bioforge-owner' });
   const result = bioforgeCommandReceiptV87(bioforgeRuntimeV80.start({
-    costumeId: saveSystem.data.player.costumeId,
+    ...bioforgePlayerPresentationOptionsV126(),
     configuration,
     resumeState: saveSystem.data.bioforgeV80,
     seed: 80000 + Number(saveSystem.data.bioforgeV80?.serial || 0) + 1
@@ -697,6 +713,7 @@ function showView(name) {
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
+  if (name !== 'armory') disposePlayerAppearancePreviewV126();
   if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
   if (activeView === 'bioforge' && name !== 'bioforge') {
     bioforgeRuntimeV80.stop({ reason: 'view-change' });
@@ -716,10 +733,12 @@ function showView(name) {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubOwnerV84 = currentOwnerV84();
     hubEngine.playerCostumeIdV119 = saveSystem.data.player.costumeId;
+    hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(saveSystem.data.player.appearanceV126);
     hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90 });
     if (hubEngine.isPortMeridienV90()) { byId('breadcrumb').textContent = 'PALISADE // PORT-MÉRIDIEN'; byId('view-title').textContent = 'Le quai des vivants'; }
   }
   if (name === 'bioforge') prepareBioforgeViewV80();
+  if (name === 'armory') renderPlayerAppearanceV126();
   if (name === 'xenotrials') { xenoTrialsOwnerV96 = currentOwnerV84(); xenoTrialsUiV96?.open(); }
   if (name === 'hub' || name === 'play' || name === 'bioforge') {
     const focusTarget = name === 'hub'
@@ -1050,6 +1069,7 @@ function openForgeContext() {
 }
 
 function showTitleScreen() {
+  disposePlayerAppearancePreviewV126();
   refugeControllerV87.close();
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
@@ -1458,6 +1478,78 @@ function setupCatalogsV62() {
   });
 }
 
+function disposePlayerAppearancePreviewV126() {
+  appearancePreviewEpochV126 += 1;
+  const preview = appearancePreviewV126;
+  appearancePreviewV126 = null;
+  preview?.dispose();
+}
+
+function renderPlayerAppearanceV126() {
+  disposePlayerAppearancePreviewV126();
+  let panel = byId('player-appearance-v126');
+  if (!panel) {
+    panel = document.createElement('section');
+    panel.id = 'player-appearance-v126';
+    panel.className = 'panel';
+    panel.setAttribute('aria-label', 'Tenue de terrain de J1 et J2');
+    byId('armory-catalog-v62').insertAdjacentElement('afterend', panel);
+    panel.addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (!button || button.disabled || !panel.contains(button)) return;
+      if (button.hasAttribute('data-appearance-facing-v126')) {
+        appearancePreviewFacingV126 = Number(button.dataset.appearanceFacingV126) < 0 ? -1 : 1;
+        appearancePreviewV126?.setFacing(appearancePreviewFacingV126);
+        for (const option of panel.querySelectorAll('[data-appearance-facing-v126]')) {
+          const selected = Number(option.dataset.appearanceFacingV126) === appearancePreviewFacingV126;
+          option.setAttribute('aria-pressed', String(selected));
+          option.classList.toggle('ghost', !selected);
+        }
+        return;
+      }
+      const owner = button.dataset.appearanceOwnerV126 || button.dataset.appearanceResetV126;
+      if (!['player', 'coop'].includes(owner)) return;
+      if (!button.hasAttribute('data-appearance-item-v126') && !button.hasAttribute('data-appearance-reset-v126')) {
+        appearanceOwnerV126 = owner;
+        renderPlayerAppearanceV126();
+        panel.querySelector(`button[data-appearance-owner-v126="${owner}"]:not([data-appearance-slot-v126])`)?.focus({ preventScroll: true });
+        return;
+      }
+      // SaveSystem publishes only after storage succeeds. Prepare a separate
+      // player record so a failed write cannot leave an unsaved choice active.
+      const candidate = { ...saveSystem.data, player: clone(saveSystem.data.player) };
+      try {
+        if (button.hasAttribute('data-appearance-reset-v126')) resetPlayerAppearanceV126(candidate, owner);
+        else equipPlayerAppearanceV126(candidate, { owner, slot: button.dataset.appearanceSlotV126,
+          itemId: button.dataset.appearanceItemV126 || null });
+        saveSystem.commit({ player: candidate.player });
+      } catch (error) { toast(error.message); return; }
+      const slot = button.dataset.appearanceSlotV126;
+      const itemId = button.dataset.appearanceItemV126;
+      renderPlayerAppearanceV126();
+      panel.querySelector(slot
+        ? `button[data-appearance-owner-v126="${owner}"][data-appearance-slot-v126="${slot}"][data-appearance-item-v126="${itemId}"]`
+        : `button[data-appearance-reset-v126="${owner}"]`)?.focus({ preventScroll: true });
+    });
+  }
+  panel.innerHTML = playerAppearancePanelHtmlV126(saveSystem.data, { owner: appearanceOwnerV126, facing: appearancePreviewFacingV126 });
+  if (activeView === 'armory' && !byId('app').hidden) {
+    const canvas = byId('player-appearance-preview-v126');
+    const status = panel.querySelector('[data-appearance-preview-status-v126]');
+    const epoch = appearancePreviewEpochV126;
+    status.textContent = 'Chargement de l’aperçu de la tenue…';
+    appearancePreviewV126 = createPlayerAppearancePreviewV126(canvas, {
+      appearance: normalizePlayerAppearanceV126(saveSystem.data.player[appearanceOwnerV126 === 'coop' ? 'coopAppearanceV126' : 'appearanceV126']),
+      reducedMotion: saveSystem.data.settings.reducedMotion === true,
+      onStatus: result => {
+        if (epoch !== appearancePreviewEpochV126 || activeView !== 'armory' || byId('player-appearance-preview-v126') !== canvas) return;
+        status.textContent = result?.message || (result?.ready ? 'Aperçu de la tenue préparée.' : 'Aperçu temporairement indisponible.');
+      }
+    });
+    appearancePreviewV126?.setFacing(appearancePreviewFacingV126);
+  }
+}
+
 function renderArmory() {
   if (!armoryCatalogV62) return;
   const catalog = byId('armory-kind').value === 'equipment' ? 'equipment' : 'weapons';
@@ -1494,6 +1586,7 @@ function renderArmory() {
   }
   userPanel.innerHTML = userEquipmentPanelHtmlV95(saveSystem.data);
   userPanel.hidden = !userPanel.innerHTML;
+  renderPlayerAppearanceV126();
 }
 
 function renderEnemies() {
@@ -2020,6 +2113,8 @@ function startMissionRuntimeV62(context) {
     costume,
     levelSeed,
     userEquipmentV95: operationLoadout.userEquipmentV95,
+    playerAppearanceV126: operationLoadout.playerAppearanceV126,
+    coopAppearanceV126: operationLoadout.coopAppearanceV126,
     missionLevel,
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
@@ -2950,6 +3045,8 @@ function launchForgeMissionPlaytest(project) {
     vehicle: [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id) ? null : operationLoadout.vehicle,
     costume: operationLoadout.costume,
     userEquipmentV95: operationLoadout.userEquipmentV95,
+    playerAppearanceV126: operationLoadout.playerAppearanceV126,
+    coopAppearanceV126: operationLoadout.coopAppearanceV126,
     levelSeed: missionLevel.levelSeed,
     missionLevel,
     apexDossier: operationLoadout.apexDossier,
@@ -2976,6 +3073,7 @@ function playtestEditor() {
     showView('hub');
     hubEngine.stop(false);
     hubEngine.playerCostumeIdV119 = sandbox.player.costumeId;
+    hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(sandbox.player.appearanceV126);
     hubEngine.start(forgePlaytest.hubState, {
       editorProject: project,
       routineContextV62: getHubRoutineContextV62(sandbox)
@@ -3310,6 +3408,7 @@ function bind() {
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; byId('install-app').hidden = false; });
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
+    disposePlayerAppearancePreviewV126();
     if (creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
     hubDialogueUiV76.destroy({ restoreFocus: false });
     audio.dispose();

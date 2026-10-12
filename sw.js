@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-player-v125-shell-3';
+const CACHE = 'atf-v86-player-v126-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -30,6 +30,9 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/player-appearance-v126.js', '/src/player-appearance-ui-v126.js', '/src/player-modular-rig-v126.js',
+  '/src/player-appearance-runtime-v126.js', '/src/player-appearance-hub-v126.js',
+  '/src/player-appearance-preview-v126.js', '/player-appearance-v126.css',
   '/src/player-body-rig-v125.js', '/src/held-weapon-profiles-v125.js', '/src/held-weapon-renderer-v125.js',
   '/src/player-weapon-runtime-v125.js', '/src/weapon-image-cache-v125.js',
   '/src/player-control-v124.js', '/src/player-presentation-v124.js', '/src/player-field-actions-v124.js',

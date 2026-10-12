@@ -57,6 +57,7 @@ import { createPremiumPersonnelV119, sanitizePremiumPersonnelV119, syncPremiumPe
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-state-v87.js';
 import { normalizeUserEquipmentV95, resolveUserEquipmentLoadoutV95 } from './user-equipment-v95.js';
+import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { createXenoTrialsProgressV96, normalizeXenoTrialsProgressV96 } from './xeno-trials-progress-v96.js';
 import { sanitizeJumpStateV116, isJumpChargingV116 } from './galaxy-jump-v115.js';
 import { BLACK_COCOON_CAMPAIGN_V121, validateBlackCocoonStateV121 } from './black-cocoon-state-v121.js';
@@ -235,6 +236,8 @@ export function createDefaultSave(profile = 1) {
       equipmentIds: ['equipment-001-motion-tracker', 'equipment-006-medkit'],
       costumeId: 'costume-001',
       userEquipmentV95: normalizeUserEquipmentV95(),
+      appearanceV126: normalizePlayerAppearanceV126(),
+      coopAppearanceV126: normalizePlayerAppearanceV126(),
       ammo: { primary: 420, secondary: 96, grenades: 4 }
     },
     crew: CREW.map((member) => ({
@@ -1426,6 +1429,8 @@ export function beginOperation(save, campaign, world) {
     // Legacy active operations retain their original standard dotation. A new
     // selection never retroactively replaces a frozen deployment manifest.
     operation.userEquipmentV95 = normalizeUserEquipmentV95(operation.userEquipmentV95);
+    operation.playerAppearanceV126 = normalizePlayerAppearanceV126(operation.playerAppearanceV126);
+    operation.coopAppearanceV126 = normalizePlayerAppearanceV126(operation.coopAppearanceV126);
     if (campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id) {
       operation.neuroProfileId = null; operation.apexDossierId = null;
     } else {
@@ -1469,6 +1474,8 @@ export function beginOperation(save, campaign, world) {
     vehicleId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedVehicleId,
     costumeId: save.player.costumeId || null,
     userEquipmentV95: normalizeUserEquipmentV95(save.player.userEquipmentV95),
+    playerAppearanceV126: normalizePlayerAppearanceV126(save.player.appearanceV126),
+    coopAppearanceV126: normalizePlayerAppearanceV126(save.player.coopAppearanceV126),
     neuroProfileId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedNeuroProfileId || null,
     apexDossierId: campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : strategy.selectedApexDossierId || null,
     difficulty: save.settings?.difficulty || save.difficulty || 'standard',
@@ -1522,6 +1529,10 @@ const sanitizeNativeOperationResumeState = (candidate, { operation = null } = {}
   const sanitized = sanitizeNativeResumeValue(candidate);
   if (!isRecord(sanitized) || Number(sanitized.schema) !== 1 || !isRecord(sanitized.identity)) return null;
   sanitized.schema = 1;
+  for (const role of ['player', 'coop']) {
+    if (isRecord(sanitized[role]) && isRecord(candidate[role]) && Object.hasOwn(candidate[role], 'appearanceV126'))
+      sanitized[role].appearanceV126 = normalizePlayerAppearanceV126(candidate[role].appearanceV126);
+  }
   if (Object.hasOwn(candidate, 'userCasteCampaignV88')) sanitized.userCasteCampaignV88 = sanitizeUserCasteCampaignV88(candidate.userCasteCampaignV88);
   const requestedSpecialOperation = isRecord(candidate.specialOperation) ? candidate.specialOperation : null;
   const requestsAlienSurvival = Boolean(requestedSpecialOperation
@@ -1555,6 +1566,8 @@ export function sanitizeOperationResumeState(candidate, options = {}) {
     ['ammo', 0, 0, 9999], ['ammoReserve', 0, 0, 99999], ['weapon', 'rifle', 0, 0],
     ['alive', true, 0, 0], ['downed', false, 0, 0], ['kills', 0, 0, 999999]
   ]);
+  if (player && Object.hasOwn(candidate.player, 'appearanceV126'))
+    player.appearanceV126 = normalizePlayerAppearanceV126(candidate.player.appearanceV126);
   const mission = sanitizeResumeEntity(candidate.mission, [
     ['elapsed', 0, 0, 999999], ['retries', 0, 0, 9999], ['casualties', 0, 0, 9999], ['phase', 'restore-power', 0, 0]
   ]);
@@ -1705,6 +1718,8 @@ export function resolveOperationDeployment(save, {
     weapons,
     weapon: userEquipmentV95.weapon || weapons.at(-1) || null,
     userEquipmentV95: userEquipmentV95.state,
+    playerAppearanceV126: normalizePlayerAppearanceV126(operation.playerAppearanceV126),
+    coopAppearanceV126: normalizePlayerAppearanceV126(operation.coopAppearanceV126),
     equipment,
     vehicle,
     costume,
@@ -2009,6 +2024,8 @@ export function migrateSave(input, profile = 1) {
   migrated.player.weaponIds = stringList(player.weaponIds, base.player.weaponIds);
   migrated.player.equipmentIds = stringList(player.equipmentIds, base.player.equipmentIds);
   migrated.player.userEquipmentV95 = normalizeUserEquipmentV95(player.userEquipmentV95);
+  migrated.player.appearanceV126 = normalizePlayerAppearanceV126(player.appearanceV126);
+  migrated.player.coopAppearanceV126 = normalizePlayerAppearanceV126(player.coopAppearanceV126);
   migrated.player.ammo = mergeNumbers(base.player.ammo, player.ammo, 0, 999999);
 
   const hub = isRecord(source.hub) ? source.hub : {};
@@ -2146,6 +2163,8 @@ export function migrateSave(input, profile = 1) {
       ),
       costumeId: sanitizeCostumeSelectionV119(candidate.costumeId, COSTUMES),
       userEquipmentV95: normalizeUserEquipmentV95(candidate.userEquipmentV95),
+      playerAppearanceV126: normalizePlayerAppearanceV126(candidate.playerAppearanceV126),
+      coopAppearanceV126: normalizePlayerAppearanceV126(candidate.coopAppearanceV126),
       neuroProfileId: candidate.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
       apexDossierId: candidate.campaignId === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null : typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
       ...(typeof candidate.specialOperationId === 'string' && candidate.specialOperationId.trim()

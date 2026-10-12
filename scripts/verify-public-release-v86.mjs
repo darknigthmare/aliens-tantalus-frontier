@@ -11,7 +11,7 @@ import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './pu
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const ROOT_FILES = new Set([
-  'command-v110.css', 'echo9-v110.css',
+  'command-v110.css', 'echo9-v110.css', 'player-appearance-v126.css',
   '.gitattributes', '.gitignore', '.vercelignore', 'LICENSE_NOTICE.md',
   'index.html', 'manifest.webmanifest', 'package.json', 'package-lock.json', 'sw.js', 'vercel.json',
   'alien-survival-v70.css', 'bioforge-v80.css', 'catalog-v62.css', 'crew-v85.css', 'hub-level.css',
@@ -23,6 +23,7 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs',
   'verify-player-runtime-v124.mjs', 'verify-player-presentation-v124.mjs', 'verify-player-field-actions-v124.mjs', 'qa-player-browser-v124.mjs',
   'verify-player-body-rig-v125.mjs', 'verify-player-weapon-rig-v125.mjs', 'verify-held-weapon-v125.mjs', 'verify-weapon-image-cache-v125.mjs',
+  'verify-player-appearance-v126.mjs', 'verify-player-appearance-runtime-v126.mjs', 'verify-player-modular-rig-v126.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming
