@@ -9,7 +9,7 @@ import { captureBioforgePhysicalV87, restoreBioforgePlayerPhysicalV87, restoreBi
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
-import { integratePlayerVelocityV124, readPlayerControlsV124, playerMovementPresentationV124 } from './player-control-v124.js';
+import { integratePlayerVelocityV124, readPlayerControlsV124, playerMovementPresentationV124, drawPlayerAimGuideV124 } from './player-control-v124.js';
 import { BIOFORGE_ASSETS_V80 } from './bioforge-assets-v80.js';
 import {
   BIOFORGE_MAX_CONCURRENT_V80,
@@ -921,6 +921,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       actor.shots = Number(actor.shots || 0) + 1;
       const aim = this.resolvePlayerCombatAimV83?.(actor) || resolveCombatAimV83({ ...readKeyboardCombatAimV83(this.keys), facing: actor.facing });
       actor.facing = aim.facing;
+      this.beginPlayerWeaponShotV125?.(actor);
       const muzzle = this.resolvePlayerMuzzleV124?.(actor, aim) || resolveCombatMuzzleV83(actor, aim);
       const shot = buildCombatShotVectorsV83(aim)[0];
       this.bullets.push({
@@ -1505,8 +1506,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       loadPlayerCostumeAssetsV119(this.images, actor.costumeId);
       const request = resolvePlayerAnimation(actor, false);
       const sample = this.bioforgePlayerAnimationV81?.sample('bioforge:player:echo9', request, this.animationTime, { emit: false, physicalActor: actor });
+      actor.playerPresentationV124 = sample?.presentationV124 || null;
+      drawPlayerAimGuideV124(this, ctx, actor);
       const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
-      const render = drawPlayerSpriteV81(ctx, {
+      const render = this.drawPlayerWeaponRigV125?.(ctx, actor, { surface: 'bioforge', sample }) || drawPlayerSpriteV81(ctx, {
         sheet,
         image: this.images?.get(sheet?.imageKey),
         sample,

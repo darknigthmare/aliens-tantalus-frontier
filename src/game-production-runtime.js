@@ -19,6 +19,7 @@ import { withC12HordeRuntimeV121 } from './c12-horde-runtime-v121.js';
 import { withArchiveRelayRuntimeV122 } from './archive-relay-runtime-v122.js';
 import { withPlayerFieldActionsV124 } from './player-field-actions-v124.js';
 import { withWeaponEffectsV124 } from './weapon-effects-runtime-v124.js';
+import { withPlayerWeaponRigV125 } from './player-weapon-runtime-v125.js';
 
 export * from './game-production-core.js';
 
@@ -33,6 +34,7 @@ const V88ProductionEngine = withUserCasteCampaignV88(V86ProductionEngine);
 const V121ProductionEngine = withC12HordeRuntimeV121(withApcConvoyRuntimeV121(withBlackCocoonRuntimeV121(V88ProductionEngine)));
 const V122ProductionEngine = withArchiveRelayRuntimeV122(V121ProductionEngine);
 const V124ProductionEngine = withWeaponEffectsV124(withPlayerFieldActionsV124(V122ProductionEngine));
+const V125ProductionEngine = withPlayerWeaponRigV125(V124ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -45,7 +47,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V124ProductionEngine {
+export class GameEngine extends V125ProductionEngine {
   start(options = {}) {
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });

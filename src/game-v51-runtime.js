@@ -43,6 +43,7 @@ import { integratePlayerVelocityV124, readPlayerControlsV124, findPlayerCoverV12
   resolvePlayerCoverV124, playerCoverProtectionV124, playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
 import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
 import { getEcho9StandingMuzzleOptionsV124 } from './player-visual-contract-v81.js';
+import { WeaponImageCacheV125 } from './weapon-image-cache-v125.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -174,7 +175,8 @@ const ENEMY_SPRITE_PATHS = new Set(Object.values(SPRITE_SHEETS)
   .filter((entry) => entry.family === 'enemy')
   .map((entry) => entry.path));
 const EAGER_ASSETS = Object.freeze(Object.fromEntries(
-  Object.entries(ASSETS).filter(([, source]) => !ENEMY_SPRITE_PATHS.has(source))
+  Object.entries(ASSETS).filter(([key, source]) => !ENEMY_SPRITE_PATHS.has(source)
+    && !Object.hasOwn(WEAPON_VISUAL_ASSETS_ALL_V63, key))
 ));
 
 const PLATFORM_LAYOUT = Object.freeze([
@@ -320,6 +322,7 @@ export class GameEngine {
     this.trackerPulse = 0;
     this.coopEnabled = false;
     this.images = new Map(Object.entries(EAGER_ASSETS).map(([name, source]) => [name, createImage(source)]));
+    this.weaponImageCacheV125 = new WeaponImageCacheV125({ imageStore: this.images });
     this.enemyAtlasLRUV65 = new EnemyAtlasLRUV65({ imageStore: this.images });
     this.fallbackBackground = createImage('/assets/openai/tantalus-base-environment.png');
     this.bind();
@@ -329,6 +332,10 @@ export class GameEngine {
     const sheet = typeof sheetOrId === 'string' ? resolveSpriteSheet(sheetOrId) : sheetOrId;
     if (!sheet || sheet.family !== 'enemy') return Promise.resolve(null);
     return this.enemyAtlasLRUV65.ensure(sheet);
+  }
+
+  ensureWeaponImageV125(profile) {
+    return this.weaponImageCacheV125.ensure(profile);
   }
 
   bind() {
@@ -1386,6 +1393,8 @@ export class GameEngine {
   resolvePlayerMuzzleV124(player, aim) {
     if (player?.inVehicle && this.vehicle) return resolveCombatMuzzleV83(player, aim,
       { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 });
+    const heldPose = this.resolvePlayerWeaponPoseV125?.(player, aim);
+    if (heldPose) return heldPose.muzzle;
     const muzzle = resolveUserEquipmentMuzzleV95(player, aim) || resolveCombatMuzzleV83(player, aim,
       getEcho9StandingMuzzleOptionsV124(player, { surface: this.bioforgeLevelV80 ? 'bioforge' : 'mission' }) || {});
     return constrainPlayerMuzzleV124(this, player, aim, muzzle);
@@ -1406,6 +1415,7 @@ export class GameEngine {
     else player.ammo -= 1;
     const reloadBonus = profile.mode === 'apc-turret' ? 1 : consumeTacticalReloadBonusV77(player, this.reloadWeaponV77(player));
     const mounted = profile.mode === 'apc-turret';
+    this.beginPlayerWeaponShotV125?.(player);
     const origin = this.resolvePlayerMuzzleV124(player, aim);
     const shot = buildCombatShotVectorsV83(aim, { speed: mounted ? 1100 : 890 })[0];
     this.bullets.push({
@@ -2181,6 +2191,7 @@ export class GameEngine {
   drawWeaponPickup(ctx) {
     if (this.weaponPickup.taken) return;
     const visual = this.weaponVisual || resolveWeaponVisualProfileV63(this.weapon);
+    if (visual?.path) this.ensureWeaponImageV125(visual);
     const image = this.images.get(visual?.imageKey || 'rifle');
     if (!ready(image)) return;
     if (visual?.visualMode === 'static-pose') {

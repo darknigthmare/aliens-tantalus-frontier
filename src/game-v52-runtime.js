@@ -443,7 +443,7 @@ export function withV52MissionRuntime(BaseEngine) {
       if (!this.enemyAtlasLRUV65) this.enemyAtlasLRUV65 = new EnemyAtlasLRUV65({ imageStore: this.images });
       if (typeof globalThis.Image !== 'function') return;
       for (const entry of Object.values(SPRITE_SHEETS)) {
-        if (entry.family === 'enemy') continue;
+        if (entry.family === 'enemy' || entry.family === 'weapon') continue;
         if (this.images.has(entry.imageKey)) continue;
         const image = new globalThis.Image();
         image.decoding = 'async';
@@ -2176,6 +2176,7 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     drawActor(ctx, actor) {
+      actor.heldWeaponVisualV125 = null;
       drawPlayerAimGuideV124(this, ctx, actor);
       const equipmentV95 = actor === this.player && !this.neuro?.active ? this.userEquipmentV95 : null;
       const armorV95 = equipmentV95?.armor;
@@ -2198,7 +2199,8 @@ export function withV52MissionRuntime(BaseEngine) {
       const image = entry ? this.images?.get(entry.imageKey) : null;
       const costumeId = this.neuro?.active && actor === this.player ? null : actor.costumeId;
       loadPlayerCostumeAssetsV119(this.images, costumeId);
-      const render = drawPlayerSpriteV81(ctx, {
+      const heldRenderV125 = this.drawPlayerWeaponRigV125?.(ctx, actor, { surface: 'mission', sample });
+      const render = heldRenderV125 || drawPlayerSpriteV81(ctx, {
         sheet: entry,
         image,
         sample,
@@ -2225,7 +2227,7 @@ export function withV52MissionRuntime(BaseEngine) {
         ctx.fillRect(actor.x + actor.w - 10, actor.y + 31, 5, 22);
         ctx.globalAlpha = 1;
       }
-      if (equipmentV95?.weapon) drawUserWeaponV95(ctx, actor, this.images?.get(equipmentV95.weapon.imageKey), equipmentV95.weapon);
+      if (!heldRenderV125 && equipmentV95?.weapon) drawUserWeaponV95(ctx, actor, this.images?.get(equipmentV95.weapon.imageKey), equipmentV95.weapon);
     }
 
     drawEnemy(ctx, enemy) {
