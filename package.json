@@ -7,7 +7,7 @@
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "check": "node scripts/verify-public-release-v86.mjs",
-    "test:player": "node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-presentation-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-body-rig-v125.mjs scripts/verify-player-weapon-rig-v125.mjs scripts/verify-player-appearance-v126.mjs scripts/verify-player-appearance-runtime-v126.mjs scripts/verify-player-modular-rig-v126.mjs scripts/verify-player-action-rig-v127.mjs scripts/verify-player-appearance-preview-v127.mjs",
+    "test:player": "node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-presentation-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-body-rig-v125.mjs scripts/verify-player-weapon-rig-v125.mjs scripts/verify-player-appearance-v126.mjs scripts/verify-player-appearance-runtime-v126.mjs scripts/verify-player-modular-rig-v126.mjs scripts/verify-player-action-rig-v127.mjs scripts/verify-player-appearance-preview-v127.mjs scripts/verify-player-transit-rig-v128.mjs scripts/verify-player-appearance-preview-v128.mjs scripts/verify-player-incapacitation-v128.mjs",
     "test:weapons": "node --test scripts/verify-weapon-presentation-profiles-v124.mjs scripts/verify-weapon-effects-v124.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-held-weapon-v125.mjs scripts/verify-weapon-image-cache-v125.mjs",
     "audio:scan": "node scripts/audio-scan-v77.mjs",
     "audio:check": "node scripts/audio-scan-v77.mjs --check"

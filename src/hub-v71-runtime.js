@@ -23,6 +23,7 @@ import { drawTiledMissionCropV87, MISSION_STRUCTURE_CROPS_V87 } from './mission-
 import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
 
 export * from './hub-v62-runtime.js';
 export * from './tantalus-hub-expansion-v71.js';
@@ -941,6 +942,9 @@ export class HubGame extends HubGameV62 {
     const assetReport = this.getAssetReport();
     return {
       ...baseSnapshot,
+      // The base deck snapshot uses the return pose; clothing and limb contacts
+      // must observe the restored physical position inside the active annex.
+      playerAppearanceV126: annex ? hubPlayerAppearanceSnapshotV126(this) : baseSnapshot.playerAppearanceV126,
       roomId: annex?.id || baseSnapshot.roomId,
       roomNameV71: annex?.name || null,
       x: Math.round(this.player?.x || 0),

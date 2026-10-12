@@ -7,6 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { WEAPON_VISUAL_ASSETS_ALL_V63 } from '../src/weapon-visual-runtime-v63.js';
 import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126 } from '../src/player-appearance-v126.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
+import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
 
 // Optional visual smoke test: use an existing Playwright/Chromium installation.
 // ATF_BASE_URL=https://preview.example ATF_PLAYER_QA_OUTPUT=/tmp/player-qa \
@@ -34,7 +35,7 @@ async function playwrightModule() {
   }
 }
 
-const report = { schema: 127, baseUrl, startedAt: new Date().toISOString(), status: 'running',
+const report = { schema: 128, baseUrl, startedAt: new Date().toISOString(), status: 'running',
   scenario: 'Production mission entered through Frontier Forge UI; isolated browser context.',
   checks: [], captures: [], pageErrors: [], requestFailures: [], weaponImageRequests: [], weaponImagePhases: [],
   appearanceImageRequests: [], appearanceImagePhases: [],
@@ -53,7 +54,7 @@ try {
   page.setDefaultTimeout(15000);
   let requestPhase = 'boot';
   const catalogueImagePaths = new Set(Object.values(WEAPON_VISUAL_ASSETS_ALL_V63));
-  const appearanceImagePaths = new Set(PLAYER_MODULAR_RIG_ASSETS_V126.map(asset => asset.path));
+  const appearanceImagePaths = new Set([...PLAYER_MODULAR_RIG_ASSETS_V126, ...PLAYER_TRANSIT_RIG_ASSETS_V128].map(asset => asset.path));
   const network = await context.newCDPSession(page);
   await network.send('Network.enable');
   network.on('Network.requestWillBeSent', event => {
@@ -79,6 +80,8 @@ try {
       weaponRig: engine.playerWeaponRigSnapshotV125?.() || null,
       appearance: engine.playerAppearanceSnapshotV126?.() || null,
       coop: engine.coopEnabled && engine.coop ? { x: engine.coop.x, y: engine.coop.y, facing: engine.coop.facing,
+        alive: engine.coop.alive, downed: engine.coop.downed, climbing: engine.coop.climbing,
+        transit: engine.coop.playerTransitVisualV128 || null,
         w: engine.coop.w, h: engine.coop.h, grounded: engine.coop.grounded, health: engine.coop.health, maxHealth: engine.coop.maxHealth,
         ammo: engine.coop.ammo, ammoReserve: engine.coop.ammoReserve, shots: engine.coop.shots,
         fieldAction: engine.coop.fieldActionV124, placeableAction: engine.coop.placeableActionV124,
@@ -98,6 +101,8 @@ try {
           bounces: casing.bounces, supportKind: casing.supportKind })) } : null,
       ...(includeCanvas ? { canvasPng: document.querySelector('#game-canvas').toDataURL('image/png') } : {}),
       keys: [...(engine.keys || [])], player: { x: actor.x, y: actor.y, vx: actor.vx, vy: actor.vy,
+        alive: actor.alive, downed: actor.downed, climbing: actor.climbing,
+        transit: actor.playerTransitVisualV128 || null,
         w: actor.w, h: actor.h,
         grounded: actor.grounded, crouching: actor.crouching, aiming: actor.aimingV124, facing: actor.facing,
         health: actor.health, maxHealth: actor.maxHealth, ammo: actor.ammo, ammoReserve: actor.ammoReserve, shots: actor.shots,
@@ -397,7 +402,8 @@ try {
       ammo: { ...save.player.ammo }, appearance: save.player.appearanceV126, coopAppearance: save.player.coopAppearanceV126 };
   });
   const previewInventory = await readCampaignInventory();
-  const previewModes = ['idle', 'walk', 'crouch', 'aim', 'reload', 'medical', 'deploy', 'interact', 'melee'];
+  const previewModes = ['idle', 'walk', 'crouch', 'aim', 'reload', 'medical', 'deploy', 'interact', 'melee',
+    'climb-up', 'climb-down', 'downed', 'death', 'revive'];
   const previewEvidence = [];
   for (const mode of previewModes) {
     await panel.locator('#player-appearance-animation-v127').selectOption(mode);
@@ -417,7 +423,7 @@ try {
     previewEvidence.push({ mode, facing: -1, ready: true });
   }
   assert.deepEqual(await readCampaignInventory(), previewInventory, 'Inspecting an animation cannot spend or replace campaign equipment.');
-  check('All nine animation preview modes draw the selected parts without altering campaign inventory', previewEvidence);
+  check('All fourteen animation preview modes draw the selected parts without altering campaign inventory', previewEvidence);
 
   await chooseOwner('coop');
   for (const [slot, itemId] of Object.entries(primaryAppearance.slots)) await choosePiece('coop', slot, itemId);
@@ -677,6 +683,102 @@ try {
   assert.equal(melee.player.ammo, beforeMelee.player.ammo); assert.equal(melee.player.shots, beforeMelee.player.shots);
   assert.ok(melee.player.action.props.length > 0);
   check('An accepted contextual melee attack uses the modular body and its own held implement without firearm ammo use', melee.player.action);
+  await page.locator('#retreat-mission').click();
+  await page.locator('#editor-canvas').waitFor({ state: 'visible' });
+
+  // Real ladder and hazard geometry supplied through the same public editor
+  // import. Every action below uses keyboard input; evaluations remain read-only.
+  const transitPlan = { ...actionPlan, tiles: actionPlan.tiles.filter(tile => tile.type !== 'hazard')
+    .concat({ position: '4:12', type: 'ladder' }, { position: '7:15', type: 'hazard' }) };
+  await page.locator('#editor-import').setInputFiles({ name: 'player-transit-v128-qa-stage.json', mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(transitPlan)) });
+  requestPhase = 'fifth-forge-transit';
+  await page.locator('#editor-play').click();
+  await page.waitForFunction(() => {
+    const engine = globalThis.__ATF_GAME__;
+    return engine?.running && !engine.paused && engine.coopEnabled && engine.player.grounded
+      && engine.player.playerAppearanceVisualV126?.drawn && engine.coop.playerAppearanceVisualV126?.drawn;
+  }, null, { timeout: 45000 });
+  const checkTransitPose = (state, kind, role = 'player') => {
+    const actor = role === 'coop' ? state.coop : state.player;
+    const operator = checkAppearance(state, role === 'coop' ? coopAppearance : primaryAppearance, role, `${role} ${kind}`);
+    assert.equal(actor.transit?.kind, kind); assert.equal(actor.transit.drawn, true);
+    assert.equal(actor.transit.firing, false); assert.equal(actor.heldWeapon, null);
+    const layers = operator.visual.layers.filter(layer => layer.slot === 'legs');
+    assert.equal(layers.length, 7); assert.ok(layers.every(layer => layer.imageKey === 'playerLegPartsV128'));
+    return actor.transit;
+  };
+  const walkTo = async (role, targetX) => {
+    const initialX = await page.evaluate(role => { const actor = globalThis.__ATF_GAME__[role]; return actor.x + actor.w / 2; }, role);
+    const right = targetX > initialX, key = role === 'coop' ? right ? 'KeyL' : 'KeyJ' : right ? 'KeyD' : 'KeyA';
+    await canvas.focus(); await page.keyboard.down(key);
+    await page.waitForFunction(({ role, targetX, right }) => {
+      const actor = globalThis.__ATF_GAME__[role], center = actor.x + actor.w / 2;
+      return right ? center >= targetX : center <= targetX;
+    }, { role, targetX, right });
+    await page.keyboard.up(key); await page.waitForTimeout(180);
+  };
+  const ladder = await page.evaluate(() => ({ ...globalThis.__ATF_GAME__.ladders[0] }));
+  const ladderEvidence = [];
+  for (const role of ['player', 'coop']) {
+    await walkTo(role, ladder.x - 10);
+    const up = role === 'coop' ? 'KeyI' : 'KeyW', down = role === 'coop' ? 'KeyK' : 'KeyS';
+    await canvas.focus(); await page.keyboard.down(up);
+    await page.waitForFunction(role => {
+      const actor = globalThis.__ATF_GAME__[role], ladder = globalThis.__ATF_GAME__.ladders[0];
+      return actor.climbing && actor.y + actor.h < ladder.bottom - 65
+        && actor.playerTransitVisualV128?.drawn;
+    }, role);
+    await page.keyboard.up(up); await page.waitForTimeout(100);
+    const climbing = await saveCanvasFrame(`28-${role}-ladder.png`, `${role}: real ladder with seven separate leg pieces`, await page.evaluate(readLiveState, true));
+    const hold = checkTransitPose(climbing, 'climb', role); assert.equal(hold.phase, 'holding');
+    assert.equal(hold.contacts.ladderId, ladder.id);
+    const planted = [...Object.values(hold.contacts.feet), ...Object.values(hold.contacts.hands)].filter(contact => contact.planted);
+    assert.ok(planted.length > 0);
+    for (const contact of planted) assert.ok(Math.abs(contact.point.y - ladder.top - 11 - contact.rungIndex * 22) < .02);
+    await page.waitForTimeout(180);
+    const still = checkTransitPose(await snapshot(), 'climb', role);
+    assert.deepEqual(still.contacts, hold.contacts, 'A stopped operator keeps the same real rung contacts.');
+    await captureActorDetail(`28-${role}-ladder-detail.png`, `${role}: articulated legs on the actual ladder`, role);
+    await canvas.focus(); await page.keyboard.down(down); await page.waitForTimeout(140);
+    const descending = await saveCanvasFrame(`29-${role}-ladder-down.png`, `${role}: actual descent`, await page.evaluate(readLiveState, true));
+    assert.equal(checkTransitPose(descending, 'climb', role).phase, 'descending');
+    await page.keyboard.up(down); await page.keyboard.press(role === 'coop' ? 'KeyU' : 'Space');
+    await page.waitForFunction(role => {
+      const actor = globalThis.__ATF_GAME__[role];
+      return !actor.climbing && actor.grounded && !actor.playerTransitVisualV128 && actor.playerAppearanceVisualV126?.drawn;
+    }, role);
+    checkAppearance(await snapshot(), role === 'coop' ? coopAppearance : primaryAppearance, role);
+    ladderEvidence.push({ role, ladder, holding: hold, descending: (role === 'coop' ? descending.coop : descending.player).transit });
+  }
+  check('Both operators climb, hold actual rungs, descend and leave the ladder with their chosen seven leg parts', ladderEvidence);
+
+  const hazard = await page.evaluate(() => ({ ...globalThis.__ATF_GAME__.hazards[0] }));
+  // The rescuer waits just outside the hazard, within the real rescue range.
+  await walkTo('coop', hazard.x - 60); await walkTo('player', hazard.x + 8);
+  await page.waitForFunction(() => {
+    const actor = globalThis.__ATF_GAME__.player;
+    return actor.downed && actor.grounded && actor.playerTransitVisualV128?.phase === 'settled';
+  }, null, { timeout: 45000 });
+  const downed = await saveCanvasFrame('30-real-downed.png', 'Actual hazard incapacitates J1; selected pieces rest on the collision floor', await page.evaluate(readLiveState, true));
+  const casualty = checkTransitPose(downed, 'downed');
+  assert.equal(casualty.contacts.floorY, downed.player.y + downed.player.h);
+  assert.equal(downed.player.alive, false); assert.equal(downed.coop.alive, true); assert.equal(downed.phase, 'active');
+  await canvas.focus(); await page.keyboard.press('KeyP'); const pausedCasualty = await snapshot();
+  await page.waitForTimeout(180);
+  assert.deepEqual((await snapshot()).player.transit, pausedCasualty.player.transit, 'Pause freezes the actual casualty pose.');
+  await page.keyboard.press('KeyP');
+  check('A real hazard produces a grounded modular casualty while the cooperative mission stays active', casualty);
+  await page.keyboard.press('KeyY');
+  await page.waitForFunction(() => globalThis.__ATF_GAME__.player.playerTransitVisualV128?.kind === 'revive');
+  const revived = await saveCanvasFrame('31-real-revive.png', 'J2 really revives J1; the same chosen pieces follow its rise', await page.evaluate(readLiveState, true));
+  checkTransitPose(revived, 'revive'); assert.equal(revived.player.alive, true); assert.equal(revived.player.downed, false);
+  assert.ok(revived.player.health > 0); assert.equal(revived.player.ammo, downed.player.ammo);
+  await walkTo('player', hazard.x - 90);
+  await page.waitForFunction(() => !globalThis.__ATF_GAME__.player.playerTransitVisualV128
+    && globalThis.__ATF_GAME__.player.playerAppearanceVisualV126?.drawn);
+  check('A keyboard rescue rises in the chosen kit and movement immediately restores ordinary locomotion', revived.player.transit);
+  imagePhase('V128 ladder, casualty and rescue keep the scene image cache bounded', await snapshot());
   await page.locator('#retreat-mission').click();
   await page.locator('#editor-canvas').waitFor({ state: 'visible' });
   assert.equal((await snapshot()).running, false);

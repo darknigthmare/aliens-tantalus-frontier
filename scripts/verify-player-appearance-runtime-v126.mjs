@@ -7,6 +7,7 @@ import { GameEngine } from '../src/game-production-runtime.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { createBioforgeV80 } from '../src/bioforge-session-v80.js';
 import { HubGame, HUB_DECKS } from '../src/hub-opening-v88.js';
+import { createPlayerOnboardingV84 } from '../src/player-onboarding-v84.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, CREW, NEURO_XENO_PROFILES } from '../src/content.js';
 import { attachCrewDeploymentV85 } from '../src/crew-runtime-v85.js';
@@ -16,6 +17,7 @@ import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126 } from '../
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_BODY_RIG_ASSETS_V125 } from '../src/player-body-rig-v125.js';
 import { PLAYER_ACTION_PROP_ASSETS_V127 } from '../src/player-action-rig-v127.js';
+import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
 
 // Actual production, Bioforge and hub runtimes own all gameplay. The observable
 // host substitutes browser APIs only; dimensions come from shipped PNG headers.
@@ -220,6 +222,151 @@ async function readyPose(subject, actor = subject.actor, aim = RIGHT, options = 
   assert.ok(pose, 'The production weapon/body pose is ready.');
   return pose;
 }
+
+function assertTransit(subject, visual, actor, kind) {
+  assertComposed(subject, visual, normalizePlayerAppearanceV126(actor.appearanceV126), `V128 ${kind}`);
+  assert.equal(visual.transit?.kind, kind);
+  assert.equal(visual.transit.drawn, true);
+  assert.equal(visual.transit.firing, false);
+  assert.equal(visual.action, null);
+  assert.equal(actor.heldWeaponVisualV125, null);
+  const legs = visual.layers.filter(layer => layer.slot === 'legs');
+  assert.equal(legs.length, 7, 'The pelvis, both thighs, shins and boots are independently rendered.');
+  assert.ok(legs.every(layer => layer.imageKey === PLAYER_TRANSIT_RIG_ASSETS_V128[0].imageKey));
+  assert.ok(subject.drawing.draws.some(draw => draw.source === PLAYER_TRANSIT_RIG_ASSETS_V128[0].path));
+  return visual.transit;
+}
+
+for (const role of ['player', 'coop']) test(`${role} wears its seven leg pieces on a real ladder, holds its rungs and exits through real input`, async () => {
+  const subject = fixture({ playerAppearanceV126: alternate(), coopAppearanceV126: bare() });
+  const { engine } = subject; engine.setCoop(true);
+  const actor = engine[role], up = role === 'player' ? 'KeyW' : 'KeyI', down = role === 'player' ? 'KeyS' : 'KeyK';
+  const ladder = { id: `qa-${role}-ladder`, x: actor.x + actor.w / 2, top: 500, bottom: 930, w: 32 };
+  engine.ladders = [ladder]; await readyAppearance(subject, actor);
+  subject.key('keydown', up); advance(engine, .45); subject.key('keyup', up);
+  assert.equal(actor.climbing, true); assert.ok(actor.y < 838);
+  const climbing = assertTransit(subject, await readyAppearance(subject, actor), actor, 'climb');
+  assert.equal(climbing.contacts.ladderId, ladder.id);
+  const planted = [...Object.values(climbing.contacts.feet), ...Object.values(climbing.contacts.hands)].filter(contact => contact.planted);
+  assert.ok(planted.length > 0, 'At least one reachable limb has a true ladder contact.');
+  for (const contact of planted) near(contact.point.y, ladder.top + 11 + contact.rungIndex * 22, 'A planted limb meets an actual rung');
+
+  advance(engine, .025); const holding = assertTransit(subject, drawActor(subject, actor), actor, 'climb');
+  assert.equal(holding.phase, 'holding');
+  const position = combatState(actor), state = structuredClone(actor.playerTransitStateV128);
+  for (let read = 0; read < 4; read++) { drawActor(subject, actor); operatorSnapshot(subject, actor); }
+  assert.deepEqual(combatState(actor), position); assert.deepEqual(actor.playerTransitStateV128, state);
+  advance(engine, .4);
+  const still = assertTransit(subject, drawActor(subject, actor), actor, 'climb');
+  assert.deepEqual(still.contacts, holding.contacts, 'Time alone cannot slide a hand or boot along a ladder.');
+  assert.deepEqual(still.legs, holding.legs);
+  subject.key('keydown', down); advance(engine, .16);
+  const descending = assertTransit(subject, drawActor(subject, actor), actor, 'climb');
+  assert.equal(descending.phase, 'descending'); subject.key('keyup', down);
+  subject.key('keydown', role === 'player' ? 'Space' : 'KeyU'); advance(engine, .03);
+  subject.key('keyup', role === 'player' ? 'Space' : 'KeyU');
+  assert.equal(actor.climbing, false); assert.equal(actor.grounded, false);
+  advance(engine, 1.2);
+  const normal = await readyAppearance(subject, actor);
+  assert.equal(normal.transit, null); assert.equal(actor.playerTransitVisualV128, null);
+});
+
+test('a real airborne casualty gains its modular grounded pose only after collision, and pause cannot advance the fall gesture', async () => {
+  const subject = fixture({ playerAppearanceV126: alternate() }), { engine, actor } = subject;
+  engine.setCoop(true); await readyAppearance(subject);
+  subject.key('keydown', 'Space'); advance(engine, .12); subject.key('keyup', 'Space');
+  engine.damagePlayer(actor, 10000, { bypassCover: true, source: 'qa-v128-impact' });
+  advance(engine, .04); assert.equal(actor.grounded, false);
+  assert.equal(engine.resolvePlayerAppearanceTransitV128(actor).reason, 'no-ground-support');
+  assert.equal(drawActor(subject).transit, null, 'An airborne casualty cannot claim a floor contact.');
+  for (let tick = 0; !actor.grounded && tick < 200; tick++) engine.update(1 / 120);
+  assert.equal(actor.y + actor.h, 930);
+  const landing = assertTransit(subject, await readyAppearance(subject), actor, 'downed');
+  assert.equal(landing.phase, 'settling'); assert.ok(landing.progress < 1);
+  advance(engine, .12); engine.togglePause();
+  const paused = drawActor(subject), state = structuredClone(actor.playerTransitStateV128), physical = combatState(actor);
+  advance(engine, 2); for (let read = 0; read < 4; read++) drawActor(subject);
+  assert.deepEqual(drawActor(subject).transit, paused.transit);
+  assert.deepEqual(actor.playerTransitStateV128, state); assert.deepEqual(combatState(actor), physical);
+  engine.togglePause(); advance(engine, .7);
+  const settled = assertTransit(subject, drawActor(subject), actor, 'downed');
+  assert.equal(settled.phase, 'settled'); assert.equal(settled.progress, 1);
+  assert.equal(settled.contacts.floorY, actor.y + actor.h);
+});
+
+test('real rescue rises in the selected kit and an accepted response shot immediately returns to its authoritative weapon', async () => {
+  for (const fireDuringRise of [false, true]) {
+    const subject = fixture({ playerAppearanceV126: alternate() }), { engine, actor } = subject;
+    engine.setCoop(true); await readyAppearance(subject);
+    engine.damagePlayer(actor, 10000, { bypassCover: true, source: 'qa-v128-impact' }); advance(engine, .6);
+    assertTransit(subject, await readyAppearance(subject), actor, 'downed');
+    assert.equal(engine.interact(engine.coop), true); advance(engine, .1);
+    const rising = assertTransit(subject, drawActor(subject), actor, 'revive');
+    assert.equal(rising.phase, 'rising'); assert.ok(rising.progress > 0 && rising.progress < 1);
+    const physical = combatState(actor), health = actor.health, ammo = actor.ammo, shots = actor.shots;
+    for (let read = 0; read < 3; read++) drawActor(subject);
+    assert.deepEqual(combatState(actor), physical, 'Drawing a rising operator cannot heal or move it.');
+    if (fireDuringRise) {
+      assert.equal(engine.fire(actor), true, 'A cosmetic rise cannot delay an otherwise legal response shot.');
+      const visual = await readyAppearance(subject), pose = actor.heldWeaponVisualV125;
+      assert.equal(visual.transit, null); assert.equal(actor.playerTransitVisualV128, null);
+      assert.ok(pose, 'An accepted shot has its actual firearm in hand in the same simulation instant.');
+      assert.equal(actor.ammo, ammo - 1); assert.equal(actor.shots, shots + 1);
+      const light = engine.weaponEffectsV124.lights.at(-1);
+      assert.ok(light); near(light.x, pose.muzzle.x, 'Response-shot flash X'); near(light.y, pose.muzzle.y, 'Response-shot flash Y');
+    } else {
+      advance(engine, .6);
+      const visual = await readyAppearance(subject); assert.equal(visual.transit, null);
+      assert.equal(actor.health, health); assert.equal(actor.ammo, ammo); assert.equal(actor.shots, shots);
+    }
+  }
+});
+
+test('resume initializes a grounded casualty already settled without replaying the old impact or losing its loadout', async () => {
+  const subject = fixture({ playerAppearanceV126: alternate(), coopAppearanceV126: bare() });
+  subject.engine.setCoop(true); await readyAppearance(subject);
+  subject.engine.damagePlayer(subject.actor, 10000, { bypassCover: true, source: 'qa-v128-impact' }); advance(subject.engine, .12);
+  const saved = subject.engine.captureResumeState();
+  assert.equal(Object.hasOwn(saved.player, 'playerTransitStateV128'), false, 'Presentation clocks do not enter the mission checkpoint.');
+  const restored = fixture({ ...subject.start, resumeState: saved });
+  assert.equal(restored.engine.lastResumeResult.applied, true); assert.equal(restored.actor.downed, true);
+  const initial = assertTransit(restored, await readyAppearance(restored), restored.actor, 'downed');
+  assert.equal(initial.phase, 'settled'); assert.equal(initial.progress, 1); assert.equal(initial.state.observed, false);
+  const snapshot = structuredClone(initial); drawActor(restored);
+  assert.deepEqual(drawActor(restored).transit, snapshot);
+  assert.deepEqual(restored.actor.appearanceV126, alternate());
+});
+
+test('a delayed segmented-leg atlas uses the complete fallback and cannot restore the old transit after exit or scene stop', async () => {
+  const asset = PLAYER_TRANSIT_RIG_ASSETS_V128[0];
+  for (const ending of ['exit', 'stop']) {
+    const subject = fixture({ playerAppearanceV126: alternate() }, { holdImages: path => path === asset.path });
+    const { engine, actor } = subject; await readyAppearance(subject);
+    engine.ladders = [{ id: 'qa-delayed-ladder', x: actor.x + actor.w / 2, top: 500, bottom: 930, w: 32 }];
+    subject.key('keydown', 'KeyW'); advance(engine, .4); subject.key('keyup', 'KeyW');
+    const waiting = drawActor(subject); assert.equal(waiting.supported, true); assert.equal(waiting.ready, false);
+    assert.equal(waiting.drawn, false); assert.equal(waiting.reason, 'transit-images-unavailable');
+    assert.equal(waiting.layers.length, 0);
+    assert.equal(subject.drawing.draws.some(draw => modularPaths.has(draw.source) || draw.source === asset.path), false,
+      'A missing limb atlas cannot paint a partial modular body over the native fallback.');
+    if (ending === 'exit') {
+      subject.key('keydown', 'Space'); advance(engine, .03); subject.key('keyup', 'Space'); advance(engine, 1.2);
+      assert.equal(actor.climbing, false);
+    } else engine.stop();
+    const requests = subject.requests.length;
+    subject.releaseImages(); await subject.flush();
+    if (ending === 'exit') {
+      const normal = await readyAppearance(subject); assert.equal(normal.transit, null);
+      assert.equal(actor.playerTransitVisualV128, null);
+      assert.equal(subject.drawing.draws.some(draw => draw.source === asset.path), false);
+    } else {
+      engine.draw(); await subject.flush();
+      assert.equal(subject.requests.length, requests);
+      assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
+      assert.equal(actor.playerTransitStateV128, undefined); assert.equal(actor.playerTransitVisualV128, null);
+    }
+  }
+});
 
 function combatState(actor) {
   return structuredClone(Object.fromEntries(['x', 'y', 'w', 'h', 'vx', 'vy', 'grounded', 'health', 'maxHealth',
@@ -595,6 +742,109 @@ test('the real hub composes a neutral selected kit and only physical movement ad
   assert.deepEqual(hub.player.weaponRigMotionV125, motion, 'A paused hub does not advance clothing motion.');
   hub.stop(false); status = hub.getSnapshot().playerAppearanceV126;
   assert.equal(status.images.retained, 0); assert.equal(hub.player.playerAppearanceVisualV126, null);
+});
+
+test('a real annex ladder uses its physical rectangle and drawn rungs without requiring a player ladder id', async () => {
+  const host = browserHost(), hub = new HubGame(host.canvas);
+  hub.playerAppearanceV126 = alternate(); hub.start();
+  assert.ok(hub.beginAnnexTransitionV71('logistics', 'enter'));
+  const frames = count => { for (let frame = 0; frame < count; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken); };
+  frames(30); await host.flush();
+  const annex = hub.currentAnnexV71(), actor = hub.player;
+  assert.equal(annex.id, 'logistics'); assert.equal(actor.climbing, false);
+  assert.equal(hub.getSnapshot().playerAppearanceV126.visual.transit, null);
+  const ladder = annex.ladders[0], axis = ladder.x + ladder.w / 2;
+  host.key('keydown', 'KeyD');
+  for (let frame = 0; frame < 240 && actor.x + actor.w / 2 < axis; frame++) frames(1);
+  host.key('keyup', 'KeyD');
+  assert.ok(Math.abs(actor.x + actor.w / 2 - axis) < ladder.w / 2, 'Walking reaches the authored ladder.');
+  const floorY = actor.y;
+  host.key('keydown', 'KeyW'); frames(20); host.key('keyup', 'KeyW'); await host.flush();
+  assert.equal(actor.climbing, true); assert.ok(actor.y < floorY);
+  assert.equal(actor.ladderId, undefined, 'Annex physics does not store a mission ladder identifier.');
+
+  host.drawing.reset(); hub.drawAnnexGeometryV71(host.drawing.ctx, annex);
+  const rungs = host.drawing.draws.filter(draw => draw.args.length === 8
+    && draw.args[4] === ladder.x + 7 && draw.args[6] === ladder.w - 14 && draw.args[7] === 4)
+    .map(draw => ({ x: draw.args[4], y: draw.args[5], w: draw.args[6], h: draw.args[7] }));
+  assert.ok(rungs.length > 0, 'The real annex renderer submits its authored ladder rungs.');
+  host.drawing.reset(); hub.drawPlayer(host.drawing.ctx); host.drawing.assertBalanced();
+  const visual = hub.getSnapshot().playerAppearanceV126.visual, climbing = visual.transit;
+  assertComposed(host, visual, alternate(), 'Annex ladder');
+  assert.equal(climbing?.kind, 'climb'); assert.equal(climbing.drawn, true);
+  assert.equal(climbing.contacts.ladderId, ladder.id); assert.equal(climbing.firing, false);
+  assert.equal(visual.layers.filter(layer => layer.slot === 'legs').length, 7);
+  const planted = [...Object.values(climbing.contacts.feet), ...Object.values(climbing.contacts.hands)]
+    .filter(contact => contact.planted);
+  assert.ok(planted.length > 0, 'A reachable hand or boot holds a real rung.');
+  for (const contact of planted) assert.ok(rungs.some(rung => contact.point.x >= rung.x
+    && contact.point.x <= rung.x + rung.w && contact.point.y >= rung.y && contact.point.y <= rung.y + rung.h),
+  'The planted contact lies inside a rung drawn at the annex rectangle, not at its left edge.');
+
+  frames(2); host.drawing.reset(); hub.drawPlayer(host.drawing.ctx);
+  const holding = hub.getSnapshot().playerAppearanceV126.visual.transit;
+  assert.equal(holding.phase, 'holding');
+  const state = structuredClone(actor.playerTransitStateV128), position = { x: actor.x, y: actor.y };
+  assert.equal(hub.pause(), true); frames(20);
+  hub.drawPlayer(host.drawing.ctx); hub.getSnapshot();
+  assert.deepEqual(actor.playerTransitStateV128, state); assert.deepEqual({ x: actor.x, y: actor.y }, position);
+  assert.deepEqual(hub.getSnapshot().playerAppearanceV126.visual.transit.contacts, holding.contacts);
+  assert.equal(hub.resume(), true);
+  host.key('keydown', 'KeyD'); frames(2); host.key('keyup', 'KeyD'); frames(60);
+  assert.equal(actor.climbing, false); assert.equal(actor.grounded, true);
+  host.drawing.reset(); hub.drawPlayer(host.drawing.ctx);
+  assert.equal(hub.getSnapshot().playerAppearanceV126.visual.transit, null);
+  hub.stop(false);
+  assert.equal(actor.playerTransitVisualV128, null);
+  assert.equal(hub.getSnapshot().playerAppearanceV126.images.retained, 0);
+});
+
+test('the real Port Meridien ladder keeps modular hands and boots on its own authored rung spacing', async () => {
+  const host = browserHost(), hub = new HubGame(host.canvas, { onAction: () => true });
+  hub.playerAppearanceV126 = alternate();
+  hub.start({}, {
+    onboardingV84: { ...createPlayerOnboardingV84({ name: 'Alex Ward', callsign: 'ECHO-9' }), phase: 'complete' },
+    openingV88: { schema: 88, phase: 'ready', freight: 'energy', qualificationId: 'm41a-qualification-v81:session-1:qualification' },
+    portMeridienV90: { schema: 90, phase: 'power', freight: 'energy', x: 1140, y: 532, facing: 1 }
+  });
+  assert.equal(hub.isPortMeridienV90(), true); await host.flush();
+  const annex = hub.currentAnnexV71(), actor = hub.player, ladder = annex.ladders[0];
+  const frames = count => { for (let frame = 0; frame < count; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken); };
+  host.key('keydown', 'KeyD');
+  for (let frame = 0; frame < 90 && actor.x + actor.w / 2 < ladder.x + ladder.w / 2; frame++) frames(1);
+  host.key('keyup', 'KeyD');
+  host.key('keydown', 'KeyW'); frames(20); host.key('keyup', 'KeyW'); await host.flush();
+  assert.equal(actor.climbing, true); assert.equal(actor.ladderId, undefined);
+  assert.ok(actor.y + actor.h < annex.world.floorY, 'Actual quay physics moves the operator up the ladder.');
+  host.drawing.reset(); hub.draw(); host.drawing.assertBalanced();
+  const rungs = host.drawing.draws.filter(draw => draw.image === hub.portImagesV90.get('ladder')
+    && draw.args.length === 8 && draw.args[7] === 4)
+    .map(draw => ({ x: draw.args[4], y: draw.args[5], w: draw.args[6], h: draw.args[7] }));
+  assert.ok(rungs.length > 1);
+  near(rungs[1].y - rungs[0].y, 24, 'The quay draws its own 24 px rung spacing');
+  const visual = actor.playerAppearanceVisualV126, climbing = visual.transit;
+  assertComposed(host, visual, alternate(), 'Port ladder');
+  assert.equal(climbing?.kind, 'climb'); assert.equal(climbing.drawn, true);
+  assert.equal(visual.layers.filter(layer => layer.slot === 'legs').length, 7);
+  const planted = [...Object.values(climbing.contacts.feet), ...Object.values(climbing.contacts.hands)]
+    .filter(contact => contact.planted);
+  assert.ok(planted.length > 0);
+  for (const contact of planted) assert.ok(rungs.some(rung => contact.point.x >= rung.x
+    && contact.point.x <= rung.x + rung.w && contact.point.y >= rung.y && contact.point.y <= rung.y + rung.h),
+  'A modular hand or boot plants inside a rung submitted by the real Port Meridien renderer.');
+  assert.ok(climbing.contacts.ladderId?.includes(annex.id), 'The anonymous physical ladder receives a stable local identity.');
+  assert.equal(hub.getSnapshot().playerAppearanceV126.visual.transit.contacts.ladderId, climbing.contacts.ladderId);
+  frames(2); host.drawing.reset(); hub.draw();
+  const holding = actor.playerAppearanceVisualV126.transit;
+  frames(15); host.drawing.reset(); hub.draw();
+  assert.deepEqual(actor.playerAppearanceVisualV126.transit.contacts, holding.contacts,
+    'Recreating the port geometry each frame cannot move a held rung or change its identity.');
+  host.key('keydown', 'KeyD'); frames(2); host.key('keyup', 'KeyD'); frames(60);
+  assert.equal(actor.climbing, false); assert.equal(actor.grounded, true);
+  assert.equal(actor.playerTransitVisualV128, null); assert.equal(hub.portStateV90.phase, 'power');
+  hub.stop(false);
+  assert.equal(actor.playerTransitVisualV128, null);
+  assert.equal(hub.getSnapshot().playerAppearanceV126.images.retained, 0);
 });
 
 test('a real hangar electrical contact keeps the modular outfit and preserves its gameplay stun', async () => {

@@ -246,10 +246,12 @@ export function withWeaponEffectsV124(Base) {
         event.observedAt = now;
         // An accepted pump shot still owns one spent shell, but the operator
         // cannot cycle a holstered receiver with their hands treating a wound,
-        // installing equipment or reloading. Preserve the remaining cycle time
+        // reacting to an impact, installing equipment or reloading. Electrical
+        // stun can outlast the hurt pose. Preserve the remaining cycle time
         // until they return to the weapon; do not invent another shot or flash.
         if (this.isFieldActionBusyV124?.(actor) || this.isPlaceableBusyV86?.(actor)
-          || actor.climbing || actor.reloading || actor.toolUseClock > 0 || actor.interactionClock > 0 || actor.meleeClock > 0) {
+          || actor.climbing || actor.reloading || actor.toolUseClock > 0 || actor.interactionClock > 0 || actor.meleeClock > 0
+          || actor.v52HurtClock > 0 || actor.shockClock > 0 || actor.hazardKind === 'electrical' && actor.hazardClock > 0) {
           event.due += elapsed;
           return true;
         }

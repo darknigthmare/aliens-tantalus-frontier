@@ -360,7 +360,13 @@ test('Neuro, climbing, vent travel and downed postures never receive a catalogue
   const subject = fixture(); await readyPose(subject);
   for (const status of [{ climbing: true }, { ventTransit: { active: true } }, { downed: true, bleedOut: 10 }]) {
     Object.assign(subject.actor, { climbing: false, ventTransit: null, downed: false, bleedOut: 0 }, status);
-    assert.ok(!subject.engine.drawPlayerWeaponRigV125(subject.drawing.ctx, subject.actor));
+    const render = subject.engine.drawPlayerWeaponRigV125(subject.drawing.ctx, subject.actor);
+    if (render) {
+      assert.equal(render.transitV128?.kind, 'downed', 'Only the new unarmed casualty composition may replace the native body.');
+      assert.equal(render.transitV128.firing, false);
+    }
+    assert.equal(subject.engine.resolvePlayerWeaponPoseV125(subject.actor, RIGHT), null);
+    assert.equal(subject.actor.heldWeaponVisualV125, null);
     assert.equal(heldDraws(subject).length, 0);
   }
   const neuroProfile = NEURO_XENO_PROFILES.find(item => item.playerClassCompatible); assert.ok(neuroProfile);

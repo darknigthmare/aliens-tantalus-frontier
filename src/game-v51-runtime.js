@@ -783,7 +783,7 @@ export class GameEngine {
       lift.y = lift.topY + (lift.baseY - lift.topY) * blend;
       const offset = lift.y - lift.previousY;
       for (const actor of [this.player, this.coop]) {
-        if (!actor?.alive || actor.inVehicle) continue;
+        if (!actor || actor.inVehicle || actor === this.coop && !this.coopEnabled) continue;
         const standing = actor.x + actor.w > lift.x && actor.x < lift.x + lift.w && Math.abs(actor.y + actor.h - lift.previousY) < 9;
         if (standing) { actor.y += offset; actor.grounded = true; }
       }
@@ -803,7 +803,23 @@ export class GameEngine {
     player.interactionClock = Math.max(0, Number(player.interactionClock) - delta || 0);
     player.grappledClock = Math.max(0, Number(player.grappledClock) - delta || 0);
     if (player.tacticalReload) this.advancePlayerReloadV77(player, delta);
-    if (!player.alive) { this.updateDowned(player, delta); return; }
+    if (!player.alive) {
+      // Incapacity removes control, not gravity. Use the same authored support
+      // collision as a living operator; a ladder is never a resting surface.
+      player.vx = 0;
+      if (player.climbing) player.vy = 0;
+      player.climbing = false;
+      player.ladderId = null;
+      player.jumpBuffer = 0;
+      player.coyoteTime = 0;
+      const previousBottom = player.y + player.h;
+      player.y += player.vy * delta + GRAVITY * delta * delta / 2;
+      player.vy += GRAVITY * delta;
+      player.grounded = false;
+      this.resolveVertical(player, previousBottom);
+      this.updateDowned(player, delta);
+      return;
+    }
     if (player.inVehicle) {
       this.updateVehicleDriver(player, delta, controls);
       if (this.keys.has(controls.fire)) this.fire(player);
@@ -1544,6 +1560,14 @@ export class GameEngine {
 
   downPlayer(player, source) {
     cancelTacticalReloadV77(player, 'incapacitated');
+    // Climbing velocity comes from held input. A real airborne impulse keeps
+    // its momentum, but an incapacitated climber releases the rung at once.
+    if (player.climbing) { player.vy = 0; player.grounded = false; }
+    player.climbing = false;
+    player.ladderId = null;
+    player.vx = 0;
+    player.jumpBuffer = 0;
+    player.coyoteTime = 0;
     player.health = 0;
     player.alive = false;
     player.downed = true;

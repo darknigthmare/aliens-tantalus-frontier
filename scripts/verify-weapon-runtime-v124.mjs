@@ -132,6 +132,60 @@ test('a pump ejects once after its 0.18-second cycle and its pending cycle freez
   assert.equal(engine.weaponEffectsV124.stats.acceptedShots, 1);
 });
 
+test('a pump waits through the actual impact reaction before cycling its current receiver', () => {
+  const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+  assert.equal(engine.fire(actor), true); advance(engine, .04);
+  const ammo = actor.ammo, reserve = actor.ammoReserve, health = actor.health + actor.armor;
+  engine.damagePlayer(actor, 12, { bypassCover: true, source: 'qa-impact' });
+  assert.ok(actor.health + actor.armor < health);
+  assert.equal(engine.resolvePlayerAppearanceActionV127(actor).mode, 'hurt');
+  advance(engine, .21);
+  assert.ok(actor.v52HurtClock > 0);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0, 'The hurt pose has no held shotgun to cycle.');
+  assert.equal(engine.pendingWeaponCyclesV124.length, 1);
+  const remaining = engine.pendingWeaponCyclesV124[0].due - engine.animationTime;
+  assert.ok(remaining > .13 && remaining < .15, 'An impact preserves the unperformed part of the pump cycle.');
+  advance(engine, .22);
+  assert.equal(actor.v52HurtClock, 0);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  actor.x += 70; actor.facing = -1; actor.combatAimV83 = { x: -1, y: 0 };
+  advance(engine, engine.pendingWeaponCyclesV124[0].due - engine.animationTime + .000001);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+  const body = engine.weaponEffectsV124.casings[0], muzzle = engine.resolvePlayerMuzzleV124(actor, actor.combatAimV83);
+  assert.ok(Math.abs(body.x - (Number.isFinite(muzzle.ejectionX) ? muzzle.ejectionX : muzzle.pivotX - 5)) < 1.01);
+  assert.ok(Math.abs(body.y - (Number.isFinite(muzzle.ejectionY) ? muzzle.ejectionY : muzzle.pivotY - 3)) < 1.01);
+  advance(engine, .5);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+  assert.equal(engine.weaponEffectsV124.stats.acceptedShots, 1);
+  assert.equal(actor.ammo, ammo); assert.equal(actor.ammoReserve, reserve);
+});
+
+test('a pump waits for the actual electrical stun after its shorter hurt animation ends', () => {
+  const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
+  assert.equal(engine.fire(actor), true); advance(engine, .04);
+  const ammo = actor.ammo, reserve = actor.ammoReserve;
+  const hazard = { id: 'qa-electrical-contact', kind: 'electrical', active: true,
+    x: actor.x, y: actor.y + actor.h - 10, w: actor.w, h: 10, damage: 12, stun: .9, impulse: 0 };
+  engine.hazards = [hazard]; engine.applyHazards(actor);
+  assert.equal(actor.hazardKind, 'electrical'); assert.equal(actor.hazardClock, .9);
+  const health = actor.health, armor = actor.armor;
+  hazard.active = false;
+  advance(engine, .5);
+  assert.equal(actor.v52HurtClock, 0); assert.ok(actor.hazardClock > 0);
+  assert.equal(engine.canPerformGameplayAction(actor), false);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0, 'An electrically stunned operator cannot complete a manual cycle.');
+  advance(engine, .405);
+  assert.equal(actor.hazardClock, 0);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 0);
+  advance(engine, .15);
+  assert.equal(engine.pendingWeaponCyclesV124.length, 0);
+  assert.equal(engine.weaponEffectsV124.stats.ejectedCasings, 1);
+  assert.equal(engine.weaponEffectsV124.stats.acceptedShots, 1);
+  assert.equal(engine.weaponEffectsV124.stats.emittedLights, 1);
+  assert.equal(actor.ammo, ammo); assert.equal(actor.ammoReserve, reserve);
+  assert.equal(actor.health, health); assert.equal(actor.armor, armor);
+});
+
 for (const ending of ['completed', 'cancelled']) test(`a pump cycle waits through ${ending} medical work and resumes from the current receiver`, () => {
   const { engine, actor } = weaponFixture('weapon-007-m37a2-pump-shotgun');
   assert.equal(engine.fire(actor), true); advance(engine, .04);

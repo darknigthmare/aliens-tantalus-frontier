@@ -106,6 +106,13 @@ export function withPlayerWeaponRigV125(Base) {
       return result;
     }
 
+    draw(...args) {
+      // A queued redraw cannot reacquire operator or pickup images after stop.
+      // Bioforge owns its separate static preparation renderer and lifecycle.
+      if (!this.running) return;
+      return super.draw(...args);
+    }
+
     releasePlayerWeaponPresentationV125() {
       this.weaponImageCacheV125?.clear();
       this.resetPlayerWeaponRigV125();

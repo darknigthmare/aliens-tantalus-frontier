@@ -153,6 +153,25 @@ function triangle(source, target) {
 const layer = (id,slot,itemId,asset,partName,definition,matrix,extra={}) => ({
   id,slot,itemId,imageKey:asset.imageKey,asset,part:partName,sourceRect:definition.source,matrix,...extra
 });
+// V128 supplies a complete, already solved lower body made from actual
+// separated pelvis/leg/boot art. This hook accepts no partial substitute and
+// does not change the original locomotion or firing geometry.
+function validLowerLayersV128(layers, itemId) {
+  return Array.isArray(layers) && layers.length === 7
+    && new Set(layers.map(entry => entry.id)).size === layers.length
+    && layers.every(entry => {
+      const source = entry?.sourceRect, asset = entry?.asset, matrix = entry?.matrix;
+      return entry?.slot === 'legs' && entry.itemId === itemId
+        && entry.imageKey === asset?.imageKey && source && asset && matrix
+        && [source.x, source.y, source.width, source.height,
+          asset.sourceWidth, asset.sourceHeight].every(Number.isFinite)
+        && source.x >= 0 && source.y >= 0 && source.width > 0 && source.height > 0
+        && source.x + source.width <= asset.sourceWidth
+        && source.y + source.height <= asset.sourceHeight
+        && ['a','b','c','d','e','f'].every(key => Number.isFinite(matrix[key]))
+        && Math.abs(matrix.a * matrix.d - matrix.b * matrix.c) > 1e-12;
+    });
+}
 // An eight-source-pixel seam overlap is hidden under the independent waistband.
 // It closes the real alpha edge of both tops without moving feet, shoulders,
 // resizing the torso or extending any native cut as far up as the old pack.
@@ -171,9 +190,12 @@ const nativeSeamPolygon = (bodyRig, anatomical) => {
 export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   const selected=normalizePlayerAppearanceV126(appearance), slots=selected.slots;
   const anatomical=bodyRig?.modularAnchorsV127 || PLAYER_MODULAR_RIG_ANCHORS_V126[bodyRig?.atlas]?.[bodyRig?.frame];
+  const lowerLayers=bodyRig?.modularLowerLayersV128?.[slots.legs];
   const reason=!bodyRig?.eligible ? bodyRig?.reason || 'body-rig-ineligible'
     : bodyRig.rigType!=='echo9' || !anatomical || !validPoint(bodyRig.shoulders?.near)
-      || !validPoint(bodyRig.shoulders?.far) || !bodyRig.matrix ? 'modular-pose-unavailable' : null;
+      || !validPoint(bodyRig.shoulders?.far) || !bodyRig.matrix ? 'modular-pose-unavailable'
+      : bodyRig.modularLowerLayersV128 && !validLowerLayersV128(lowerLayers,slots.legs)
+        ? 'modular-lower-body-unavailable' : null;
   if(reason) return freeze({schema:126,eligible:false,ready:false,reason,fallbackReason:reason,
     requestedSlots:slots,effectiveSlots:null,requiredAssets:[],layers:[],bodyRig});
   const m=bodyRig.matrix,sourceShoulders=bodyRig.sourceFrame.sourceShoulders;
@@ -189,8 +211,10 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
     layers.push(layer('back','back',slots.back,HEAD_BACK,'pack',p,
       compose(m,attachment(p.mount,anchor,.155,.24,lean))));
   }
-  const seam=nativeSeamPolygon(bodyRig,anatomical);
-  if(slots.legs==='legs-marine-v126') {
+  const seam=lowerLayers ? null : nativeSeamPolygon(bodyRig,anatomical);
+  if(lowerLayers) {
+    layers.push(...lowerLayers);
+  } else if(slots.legs==='legs-marine-v126') {
     const top=Math.min(...anatomical.cut.map(p=>p.y))-WAIST_OVERLAP,source=bodyRig.source;
     const crop={source:{x:source.x,y:top,width:source.width,height:bodyRig.sourceFrame.support.y-top+3}};
     layers.push(layer('legs','legs',slots.legs,bodyRig.asset,'native-lower-body',crop,m,
@@ -234,7 +258,8 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
     fallbackReason:missingAssets.length?'modular-images-unavailable':null,
     requestedSlots:slots,effectiveSlots:missingAssets.length?null:{...slots},requiredAssets,missingAssets,
     layers,bodyRig,armAsset,armParts,anatomical,
-    visualStatus:'adapted-separated-echo9-parts',sourceSeparation:'independent-parts-and-native-leg-cuts'});
+    visualStatus:'adapted-separated-echo9-parts',
+    sourceSeparation:lowerLayers?'independent-parts-and-segmented-legs':'independent-parts-and-native-leg-cuts'});
 }
 
 /** A genuinely empty pair of hands, with the same two-bone solver and lengths

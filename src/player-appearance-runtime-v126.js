@@ -4,6 +4,7 @@ import { PLAYER_MODULAR_RIG_ASSETS_V126, resolvePlayerModularRigV126,
   drawPlayerModularRigV126 } from './player-modular-rig-v126.js';
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { resolvePlayerActionStateV127, resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-action-rig-v127.js';
+import { advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128 } from './player-transit-rig-v128.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
@@ -16,24 +17,33 @@ const actionStatusV127 = (action, render) => !action?.eligible ? null : {
     path: prop.asset.path, grip: { ...prop.grip }, support: prop.support ? { ...prop.support } : null, firing: false })),
   target: action.target ? { ...action.target } : null
 };
+const transitStatusV128 = (transit, render) => !transit?.eligible ? null : {
+  schema: 128, kind: transit.kind, mode: transit.mode, phase: transit.phase,
+  progress: transit.progress, source: transit.source, firing: false,
+  drawn: Boolean(render?.drawn && render.transitV128),
+  state: transit.state, legs: transit.legs, contacts: transit.contacts
+};
 
 /** Selection is persistent, while readiness and the last rendered layers are
  * transient. Neither clothing nor image readiness owns combat geometry. */
 export function playerAppearanceStatusV126({ actor, appearance = actor?.appearanceV126,
-  bodyRig, images, render = null, actionRig = null } = {}) {
+  bodyRig, images, render = null, actionRig = null, transitRig = null } = {}) {
   const selected = normalizePlayerAppearanceV126(appearance);
   const modular = bodyRig?.eligible
     ? resolvePlayerModularRigV126({ bodyRig, appearance: selected, images }) : null;
   const supported = Boolean(bodyRig?.eligible && modular?.eligible);
-  const ready = supported && Boolean(modular?.ready) && (!actionRig?.eligible || actionRig.ready);
+  const ready = supported && Boolean(modular?.ready) && (!actionRig?.eligible || actionRig.ready)
+    && (!transitRig?.eligible || transitRig.ready);
   return { schema: 126, selected, supported, ready,
     drawn: Boolean(ready && render?.drawn && render.schema === 126),
     reason: !bodyRig?.eligible ? bodyRig?.reason || 'body-unavailable'
-      : !supported || !ready ? actionRig?.reason || modular?.reason || 'appearance-images-unavailable'
+      : !supported || !ready ? (transitRig?.eligible ? transitRig.reason : null)
+        || (actionRig?.eligible ? actionRig.reason : null) || modular?.reason || 'appearance-images-unavailable'
         : render && !render.drawn ? render.reason || 'appearance-not-drawn' : null,
     surface: bodyRig?.surface || null, bodyFrame: bodyRig?.frame ?? null,
     bodyAtlas: bodyRig?.atlas || null,
     action: actionStatusV127(actionRig, render), sampledAt: bodyRig?.timeSeconds ?? null,
+    transit: transitStatusV128(transitRig, render),
     layers: render?.schema === 126 && render.drawn ? render.layers || [] : [],
     visualStatus: render?.schema === 126 && render.drawn ? render.visualStatus : null };
 }
@@ -72,6 +82,30 @@ export function withPlayerAppearanceV126(Base) {
         neuroActive: Boolean(this.neuro?.active && actor === this.player) };
     }
 
+    playerAppearanceLadderV128(actor) {
+      const ladder = actor?.climbing && actor.ladderId
+        ? this.ladders?.find(candidate => candidate.id === actor.ladderId) : null;
+      return ladder ? { id: ladder.id, x: ladder.x, top: ladder.top, bottom: ladder.bottom, w: ladder.w } : null;
+    }
+
+    observePlayerTransitV128(actor) {
+      return advancePlayerTransitStateV128(actor?.playerTransitStateV128, actor, finite(this.animationTime), {
+        context: this.playerWeaponSurfaceV125(), ladder: this.playerAppearanceLadderV128(actor)
+      });
+    }
+
+    advancePlayerWeaponActorV125(actor) {
+      const motion = super.advancePlayerWeaponActorV125(actor);
+      if (actor) actor.playerTransitStateV128 = this.observePlayerTransitV128(actor);
+      return motion;
+    }
+
+    resolvePlayerAppearanceTransitV128(actor = this.player, options = {}) {
+      return resolvePlayerTransitRigV128({ ...this.playerAppearanceRigOptionsV127(actor, options),
+        appearance: actor?.appearanceV126, ladder: this.playerAppearanceLadderV128(actor),
+        transitState: this.observePlayerTransitV128(actor) });
+    }
+
     resolvePlayerAppearanceActionV127(actor = this.player, options = {}) {
       const fieldTask = this.fieldActionsV124?.get(actor);
       const placeableTask = this.placeableTasksV86?.get(String(actor?.crewId || actor?.operatorId || ''));
@@ -84,6 +118,8 @@ export function withPlayerAppearanceV126(Base) {
     }
 
     resolvePlayerAppearanceBodyV126(actor = this.player, options = {}) {
+      const transit = this.resolvePlayerAppearanceTransitV128(actor, options);
+      if (transit.eligible) return transit.bodyRig;
       const action = this.resolvePlayerAppearanceActionV127(actor, options);
       return action?.eligible ? action.bodyRig : resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor, options));
     }
@@ -104,6 +140,7 @@ export function withPlayerAppearanceV126(Base) {
     collectPlayerWeaponAssetsV125() {
       const assets = super.collectPlayerWeaponAssetsV125();
       for (const actor of this.playerWeaponActorsV125()) {
+        const transit = this.resolvePlayerAppearanceTransitV128(actor);
         const action = this.resolvePlayerAppearanceActionV127(actor);
         // An unarmed operator still has clothing. All operators share the same
         // three modular pages, so six slots do not create six loads per actor.
@@ -115,6 +152,7 @@ export function withPlayerAppearanceV126(Base) {
           if (weapon?.portable) assets.push(weapon);
         }
         if (action?.eligible) assets.push(...action.requiredAssets);
+        if (transit.eligible) assets.push(...transit.requiredAssets);
       }
       return [...new Map(assets.map(asset => [asset.imageKey, asset])).values()];
     }
@@ -129,6 +167,22 @@ export function withPlayerAppearanceV126(Base) {
     drawPlayerWeaponRigV125(ctx, actor = this.player, options = {}) {
       if (!actor || actor !== this.player && actor !== this.coop
         || actor === this.coop && !this.coopEnabled) return null;
+      const transit = this.resolvePlayerAppearanceTransitV128(actor, options);
+      if (transit.eligible) {
+        this.preparePlayerWeaponAssetsV125();
+        const readyTransit = this.resolvePlayerAppearanceTransitV128(actor, options);
+        const render = drawPlayerTransitRigV128(ctx, { transitRig: readyTransit,
+          appearance: actor.appearanceV126, images: this.images });
+        const status = playerAppearanceStatusV126({ actor, bodyRig: readyTransit.bodyRig,
+          images: this.images, render, transitRig: readyTransit });
+        actor.playerAppearanceVisualV126 = status;
+        actor.playerTransitVisualV128 = status.transit;
+        actor.playerActionVisualV127 = null;
+        actor.heldWeaponVisualV125 = null;
+        actor.heldWeaponVisualV95 = null;
+        return render.drawn ? render : null;
+      }
+      actor.playerTransitVisualV128 = null;
       const action = this.resolvePlayerAppearanceActionV127(actor, options);
       if (action.eligible) {
         this.preparePlayerWeaponAssetsV125();
@@ -180,6 +234,11 @@ export function withPlayerAppearanceV126(Base) {
         this[role].appearanceV126 = normalizePlayerAppearanceV126(rawState[role].appearanceV126);
         this[role].playerAppearanceVisualV126 = null;
       }
+      for (const actor of [this.player, this.coop].filter(Boolean)) {
+        delete actor.playerTransitStateV128;
+        actor.playerTransitVisualV128 = null;
+        actor.playerTransitStateV128 = this.observePlayerTransitV128(actor);
+      }
       this.preparePlayerWeaponAssetsV125();
       return result;
     }
@@ -189,21 +248,26 @@ export function withPlayerAppearanceV126(Base) {
       for (const actor of [this.player, this.coop].filter(Boolean)) {
         actor.playerAppearanceVisualV126 = null;
         actor.playerActionVisualV127 = null;
+        actor.playerTransitVisualV128 = null;
+        delete actor.playerTransitStateV128;
       }
     }
 
     playerAppearanceSnapshotV126() {
       return { schema: 126, images: this.weaponImageCacheV125?.snapshot() || null,
         operators: this.playerWeaponActorsV125().map(actor => {
+          const transit = this.resolvePlayerAppearanceTransitV128(actor);
           const action = this.resolvePlayerAppearanceActionV127(actor);
-          const bodyRig = action.eligible ? action.bodyRig : this.resolvePlayerAppearanceBodyV126(actor);
-          const status = playerAppearanceStatusV126({ actor, bodyRig, images: this.images, actionRig: action });
+          const bodyRig = transit.eligible ? transit.bodyRig : action.eligible ? action.bodyRig : this.resolvePlayerAppearanceBodyV126(actor);
+          const status = playerAppearanceStatusV126({ actor, bodyRig, images: this.images,
+            actionRig: transit.eligible ? null : action, transitRig: transit });
           const last = actor.playerAppearanceVisualV126;
           const same = last && last.supported && status.supported && status.ready
             && JSON.stringify(last.selected) === JSON.stringify(status.selected)
             && last.bodyFrame === status.bodyFrame && last.bodyAtlas === status.bodyAtlas
             && last.action?.kind === status.action?.kind && last.action?.serial === status.action?.serial
-            && (!status.action || last.sampledAt === status.sampledAt);
+            && last.transit?.kind === status.transit?.kind && last.transit?.phase === status.transit?.phase
+            && (!(status.action || status.transit) || last.sampledAt === status.sampledAt);
           return { id: actor.operatorId || actor.crewId || (actor === this.player ? 'player' : 'coop'),
             role: actor === this.player ? 'player' : 'coop', selected: status.selected,
             visual: same ? { ...last, ready: status.ready } : status };
