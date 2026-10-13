@@ -1,6 +1,8 @@
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { PLAYER_BODY_RIG_ASSETS_V125, resolvePlayerBodyRigV125 } from './player-body-rig-v125.js';
-import { PLAYER_MODULAR_RIG_ASSETS_V126, drawPlayerModularRigV126 } from './player-modular-rig-v126.js';
+import { resolvePlayerModularRigV126, drawPlayerModularRigV126 } from './player-modular-rig-v126.js';
+import { resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
+import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129, getPlayerColonialTorsoV129 } from './player-colonial-art-v129.js';
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125, drawHeldWeaponV125 } from './held-weapon-renderer-v125.js';
 import { WeaponImageCacheV125, weaponImageReadyV125 } from './weapon-image-cache-v125.js';
@@ -180,7 +182,10 @@ export function createPlayerAppearancePreviewV126(canvas, {
   const profile = resolveHeldWeaponProfileV125(weaponDescriptor);
   const images = new Map();
   const cache = new WeaponImageCacheV125({ imageStore: images, maxImages: 12 });
-  const baseAssets = [...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126,
+  // Keep only selected clothing. The two authored torso sides are kept warm
+  // together so turning the preview never flashes a missing costume frame.
+  const baseAssets = [...PLAYER_BODY_RIG_ASSETS_V125,
+    ...[-1,1].map(facing => getPlayerColonialTorsoV129(selected.slots.torso,facing)?.asset).filter(Boolean),
     ...(profile?.portable ? [profile] : [])];
   let disposed = false, frame = null, lastFrame = -Infinity, ready = false, loadEpoch = 0, pendingLoad = null;
   let currentAnimation = normalizePlayerAppearancePreviewAnimationV128(animation, weaponDescriptor);
@@ -194,21 +199,30 @@ export function createPlayerAppearancePreviewV126(canvas, {
       weaponDescriptor, facing: currentFacing, reducedMotion });
   }
 
+  function resolveSampleRigs(sample) {
+    const options = { actor: sample.actor, appearance: selected, images,
+      surface: 'mission', timeSeconds: sample.timeSeconds, reducedMotion };
+    const decorateBodyRigV129 = bodyRig => resolvePlayerLocomotionRigV129({
+      actor: sample.actor, bodyRig, appearance: selected, images,
+      legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129 }).bodyRig;
+    const transitCandidate = sample.transit ? resolvePlayerTransitRigV128({ ...options,
+      ladder: sample.ladder, transitState: sample.transitState,
+      legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129 }) : null;
+    const transitRig = sample.animation === 'revive' && transitCandidate?.reason === 'no-active-transit'
+      ? null : transitCandidate;
+    const actionRig = sample.action ? resolvePlayerActionRigV127({ ...options, decorateBodyRigV129 }) : null;
+    const bodyRig = transitRig?.bodyRig || actionRig?.bodyRig
+      || decorateBodyRigV129(resolvePlayerBodyRigV125(options));
+    return { transitRig, actionRig, bodyRig };
+  }
+
   function draw(timestamp = now()) {
     if (disposed) return false;
     const sample = sampleAt(timestamp), { actor } = sample;
-    const transitCandidate = sample.transit ? resolvePlayerTransitRigV128({ actor, appearance: selected, images,
-      surface: 'mission', timeSeconds: sample.timeSeconds, reducedMotion,
-      ladder: sample.ladder, transitState: sample.transitState }) : null;
     // Once the observed recovery is over, keep its standing rest visible until
     // the next cycle. An absent image or unsupported transit never takes this
     // path: it still fails completely before drawing any selected body part.
-    const transitRig = sample.animation === 'revive' && transitCandidate?.reason === 'no-active-transit'
-      ? null : transitCandidate;
-    const actionRig = sample.action ? resolvePlayerActionRigV127({ actor, images, surface: 'mission',
-      timeSeconds: sample.timeSeconds, reducedMotion }) : null;
-    const bodyRig = transitRig?.bodyRig || actionRig?.bodyRig || resolvePlayerBodyRigV125({ actor, images, surface: 'mission',
-      timeSeconds: sample.timeSeconds, reducedMotion });
+    const { transitRig, actionRig, bodyRig } = resolveSampleRigs(sample);
     const weaponImage = sample.profile ? images.get(sample.profile.imageKey) : null;
     const weaponReady = !sample.profile || weaponImageReadyV125(weaponImage, sample.profile);
     const weaponPose = sample.profile && weaponReady ? getHeldWeaponPoseV125({ actor,
@@ -257,6 +271,9 @@ export function createPlayerAppearancePreviewV126(canvas, {
       transitKind: transitRig?.kind || null, transitPhase: transitRig?.phase || null,
       transitProgress: transitRig?.progress || 0,
       transitContacts: transitRig?.contacts || null,
+      locomotion: bodyRig.locomotionV129 || null,
+      layers: drawn ? render.layers.map(layer => ({ id: layer.id, slot: layer.slot,
+        itemId: layer.itemId, imageKey: layer.imageKey, sourceRect: layer.sourceRect })) : [],
       previewActor: sample.transit ? { x: actor.x, y: actor.y, w: actor.w, h: actor.h,
         alive: actor.alive, downed: Boolean(actor.downed), climbing: Boolean(actor.climbing) } : null,
       previewLadder: sample.ladder,
@@ -329,12 +346,10 @@ export function createPlayerAppearancePreviewV126(canvas, {
     if (frame !== null) globalThis.cancelAnimationFrame?.(frame);
     frame = null;
     const sample = sampleAt(beganAt);
-    const transitRig = sample.transit ? resolvePlayerTransitRigV128({ actor: sample.actor, appearance: selected,
-      surface: 'mission', timeSeconds: sample.timeSeconds, reducedMotion,
-      ladder: sample.ladder, transitState: sample.transitState }) : null;
-    const actionRig = sample.action ? resolvePlayerActionRigV127({ actor: sample.actor, surface: 'mission',
-      timeSeconds: sample.timeSeconds, reducedMotion }) : null;
-    const assets = [...new Map([...baseAssets, ...(transitRig?.requiredAssets || []), ...(actionRig?.requiredAssets || [])]
+    const { transitRig, actionRig, bodyRig } = resolveSampleRigs(sample);
+    const modular = resolvePlayerModularRigV126({ bodyRig, appearance: selected, images });
+    const assets = [...new Map([...baseAssets, ...modular.requiredAssets,
+      ...(transitRig?.requiredAssets || []), ...(actionRig?.requiredAssets || [])]
       .map(asset => [asset.imageKey, asset])).values()];
     const retained = new Set(assets.map(asset => asset.imageKey));
     for (const asset of cache.snapshot().assets) if (!retained.has(asset.imageKey)) cache.release(asset.imageKey);

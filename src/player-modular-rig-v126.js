@@ -3,6 +3,9 @@ import {
   PLAYER_BODY_RIG_ASSETS_V125, PLAYER_ARM_PARTS_V125,
   playerBodyRigImageReadyV125, resolvePlayerArmPoseV125
 } from './player-body-rig-v125.js';
+import { getPlayerColonialTorsoV129, getPlayerColonialArmsV129,
+  getPlayerColonialHelmetV129, getPlayerColonialBackV129,
+  PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -194,22 +197,27 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   const reason=!bodyRig?.eligible ? bodyRig?.reason || 'body-rig-ineligible'
     : bodyRig.rigType!=='echo9' || !anatomical || !validPoint(bodyRig.shoulders?.near)
       || !validPoint(bodyRig.shoulders?.far) || !bodyRig.matrix ? 'modular-pose-unavailable'
-      : bodyRig.modularLowerLayersV128 && !validLowerLayersV128(lowerLayers,slots.legs)
+      : (bodyRig.modularLowerLayersV128 || PLAYER_COLONIAL_LEG_DEFINITIONS_V129[slots.legs])
+        && !validLowerLayersV128(lowerLayers,slots.legs)
         ? 'modular-lower-body-unavailable' : null;
   if(reason) return freeze({schema:126,eligible:false,ready:false,reason,fallbackReason:reason,
     requestedSlots:slots,effectiveSlots:null,requiredAssets:[],layers:[],bodyRig});
   const m=bodyRig.matrix,sourceShoulders=bodyRig.sourceFrame.sourceShoulders;
-  const torsoPart=PLAYER_MODULAR_RIG_PARTS_V126.torso[slots.torso][anatomical.family];
+  const colonialTorso=getPlayerColonialTorsoV129(slots.torso,bodyRig.facing,anatomical.family);
+  const torsoPart=colonialTorso?.part || PLAYER_MODULAR_RIG_PARTS_V126.torso[slots.torso][anatomical.family];
   const torsoMatrix=compose(m,triangle(torsoPart.joints,{...sourceShoulders,waist:anatomical.waist}));
   const upright=anatomical.family==='upright', headPart=PLAYER_MODULAR_RIG_PARTS_V126.head[upright?'upright':'forward'];
   const headMatrix=compose(m,attachment(headPart.neck,anatomical.neck,.255,.255,finite(anatomical.headAngle)));
   const lean=Math.atan2(anatomical.neck.x-anatomical.waist.x,anatomical.waist.y-anatomical.neck.y);
   const layers=[];
   if(slots.back) {
-    const p=PLAYER_MODULAR_RIG_PARTS_V126.back[slots.back];
+    const colonialBack=getPlayerColonialBackV129(slots.back,bodyRig.facing);
+    const p=colonialBack?.part || PLAYER_MODULAR_RIG_PARTS_V126.back[slots.back];
     const anchor=point(sourceShoulders.near.x-8,sourceShoulders.near.y-12);
-    layers.push(layer('back','back',slots.back,HEAD_BACK,'pack',p,
-      compose(m,attachment(p.mount,anchor,.155,.24,lean))));
+    layers.push(layer('back','back',slots.back,colonialBack?.asset || HEAD_BACK,
+      colonialBack?'film-back-attachment':'pack',p,
+      compose(m,attachment(p.mount,anchor,
+        (p.scaleX ?? .155)*(p.sourceFacing ?? 1),p.scaleY ?? .24,lean))));
   }
   const seam=lowerLayers ? null : nativeSeamPolygon(bodyRig,anatomical);
   if(lowerLayers) {
@@ -232,25 +240,28 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   }
   // Neck is behind the selected collar; no old head remains underneath it.
   layers.push(layer('bare-head','head',null,HEAD_BACK,upright?'bare-head-upright':'bare-head-forward',headPart,headMatrix));
-  layers.push(layer('torso','torso',slots.torso,UPPER,anatomical.family,torsoPart,torsoMatrix));
+  layers.push(layer('torso','torso',slots.torso,colonialTorso?.asset || UPPER,anatomical.family,torsoPart,torsoMatrix));
   if(slots.helmet) {
-    const p=PLAYER_MODULAR_RIG_PARTS_V126.helmet[slots.helmet];
-    layers.push(layer('helmet','helmet',slots.helmet,HEAD_BACK,'open-helmet',p,
-      compose(headMatrix,attachment(p.ear,headPart.ear,1,1,upright?0:.14))));
+    const colonialHelmet=getPlayerColonialHelmetV129(slots.helmet,bodyRig.facing);
+    const p=colonialHelmet?.part || PLAYER_MODULAR_RIG_PARTS_V126.helmet[slots.helmet];
+    layers.push(layer('helmet','helmet',slots.helmet,colonialHelmet?.asset || HEAD_BACK,'open-helmet',p,
+      compose(headMatrix,attachment(p.ear,headPart.ear,
+        (p.fitScale ?? 1)*(p.sourceFacing ?? 1),p.fitScale ?? 1,upright?0:.14))));
   }
   if(slots.mask) {
     const p=PLAYER_MODULAR_RIG_PARTS_V126.mask;
     layers.push(layer('mask','mask',slots.mask,HEAD_BACK,'respirator',p,
       compose(headMatrix,attachment(p.nose,headPart.nose,.62,.62,upright?0:.14))));
   }
-  if(slots.back) {
+  if(slots.back && PLAYER_MODULAR_RIG_PARTS_V126.straps[slots.back]) {
     const p=PLAYER_MODULAR_RIG_PARTS_V126.straps[slots.back];
     const anchor=point(sourceShoulders.far.x-4,sourceShoulders.far.y-16);
     layers.push(layer('back-strap','back',slots.back,HEAD_BACK,'front-strap',p,
       compose(m,attachment(p.mount,anchor,.055,.245,lean))));
   }
-  const armAsset=slots.arms==='arms-marine-v126'?MARINE_ARMS:UPPER;
-  const armParts=slots.arms==='arms-marine-v126'?PLAYER_ARM_PARTS_V125:PLAYER_MODULAR_RIG_PARTS_V126.arms;
+  const colonialArms=getPlayerColonialArmsV129(slots.arms);
+  const armAsset=colonialArms?.asset || (slots.arms==='arms-marine-v126'?MARINE_ARMS:UPPER);
+  const armParts=colonialArms?.parts || (slots.arms==='arms-marine-v126'?PLAYER_ARM_PARTS_V125:PLAYER_MODULAR_RIG_PARTS_V126.arms);
   const requiredAssets=[...new Map([...layers.map(l=>l.asset),armAsset].map(a=>[a.imageKey,a])).values()];
   const missingAssets=requiredAssets.filter(a=>!playerBodyRigImageReadyV125(imageFrom(images,a.imageKey),a));
   return freeze({schema:126,eligible:true,ready:missingAssets.length===0,
@@ -258,7 +269,8 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
     fallbackReason:missingAssets.length?'modular-images-unavailable':null,
     requestedSlots:slots,effectiveSlots:missingAssets.length?null:{...slots},requiredAssets,missingAssets,
     layers,bodyRig,armAsset,armParts,anatomical,
-    visualStatus:'adapted-separated-echo9-parts',
+    visualStatus:requiredAssets.some(asset=>asset.provenance==='film-reference-adaptation')
+      ?'film-reference-separated-costume':'adapted-separated-echo9-parts',
     sourceSeparation:lowerLayers?'independent-parts-and-segmented-legs':'independent-parts-and-native-leg-cuts'});
 }
 

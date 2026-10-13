@@ -177,8 +177,8 @@ function segmentMatrix(part, from, to, width, facing) {
   const c=wx*along*uy-wy*across*ux, d=wy*along*uy+wx*across*ux;
   return {a,b,c,d,e:from.x-a*part.proximal.x-c*part.proximal.y,f:from.y-b*part.proximal.x-d*part.proximal.y};
 }
-function legLayer(id, itemId, partName, part, matrix) {
-  return { id, slot:'legs', itemId, imageKey:LEG_ASSET.imageKey, asset:LEG_ASSET,
+function legLayer(id, itemId, partName, part, matrix, asset=LEG_ASSET) {
+  return { id, slot:'legs', itemId, imageKey:asset.imageKey, asset,
     part:partName, sourceRect:part.source, matrix, sourceSeparation:'independent-articulated-leg-part' };
 }
 
@@ -232,29 +232,48 @@ function bodyFrame(base,waist,angle,kind) {
     visualStatus:'adapted-separated-echo9-transit-rig'};
 }
 
-function lowerLayers(waist,hips,legs,s,facing,angle) {
+/** The same measured seven-piece attachment is shared by transit and ordinary
+ * locomotion. Additional outfits provide their own native pixels and measured
+ * anchors; the caller owns that catalogue, avoiding a costume/renderer cycle.
+ * An invalid or incomplete definition is omitted so the compositor can use its
+ * complete native fallback instead of producing half a pair of trousers. */
+export function buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,facing,
+  legDefinitions={}}={}) {
   const result={};
-  for(const [itemId,parts] of Object.entries(PLAYER_LEG_PARTS_V128)) {
+  const definitions={...Object.fromEntries(Object.entries(PLAYER_LEG_PARTS_V128)
+    .map(([itemId,parts])=>[itemId,{parts,asset:LEG_ASSET}])),...legDefinitions};
+  for(const [itemId,definition] of Object.entries(definitions)) {
+    const {parts,asset}=definition||{};
+    const measured=[parts?.pelvis,...['near','far'].flatMap(side=>
+      [parts?.[side]?.upper,parts?.[side]?.lower,parts?.[side]?.boot])];
+    if(!asset?.imageKey || ![asset.sourceWidth,asset.sourceHeight].every(n=>Number.isFinite(n)&&n>0)
+      || measured.some(part=>!part?.source || !(part.width>0)
+        || ![part.source.x,part.source.y,part.source.width,part.source.height].every(Number.isFinite))
+      || !['waist','near','far'].every(key=>validPoint(parts.pelvis[key]))
+      || ['near','far'].some(side=>['upper','lower','boot'].some(key=>
+        !validPoint(parts[side][key].proximal)||!validPoint(parts[side][key].distal)
+        || Math.hypot(parts[side][key].distal.x-parts[side][key].proximal.x,
+          parts[side][key].distal.y-parts[side][key].proximal.y)<1e-6)))continue;
     const layers=[];
     for(const side of ['far','near']) {
       const pose=legs[side],p=parts[side];
       layers.push(legLayer(`${side}-thigh`,itemId,`${side}-upper-leg`,p.upper,
-        segmentMatrix(p.upper,pose.hip,pose.knee,25*s,facing)));
+        segmentMatrix(p.upper,pose.hip,pose.knee,25*s,facing),asset));
       layers.push(legLayer(`${side}-shin`,itemId,`${side}-lower-leg`,p.lower,
-        segmentMatrix(p.lower,pose.knee,pose.ankle,20*s,facing)));
+        segmentMatrix(p.lower,pose.knee,pose.ankle,20*s,facing),asset));
       layers.push(legLayer(`${side}-boot`,itemId,`${side}-boot`,p.boot,
-        segmentMatrix(p.boot,pose.ankle,pose.sole,32*s,facing)));
+        segmentMatrix(p.boot,pose.ankle,pose.sole,32*s,facing),asset));
     }
     const p=parts.pelvis;
     // The pelvis overlaps the real round proximal ends of both thighs; the
     // selected torso owns the outer belt and is composited after these layers.
-    layers.push(legLayer('pelvis',itemId,'pelvis',p,triangle([p.waist,p.near,p.far],[waist,hips.near,hips.far])));
+    layers.push(legLayer('pelvis',itemId,'pelvis',p,triangle([p.waist,p.near,p.far],[waist,hips.near,hips.far]),asset));
     result[itemId]=layers;
   }
   return result;
 }
 
-function buildGeometry(base,actor,state,ladder,reducedMotion) {
+function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
   const s=base.scale,f=base.facing,F=actor.y+actor.h,center=actor.x+actor.w/2,kind=state.kind;
   const rungSpacing=ladderRungGrid(ladder).spacing;
   const p=smooth(state.progress),standing=kind==='revive'?p:1-p;
@@ -332,7 +351,7 @@ function buildGeometry(base,actor,state,ladder,reducedMotion) {
       contacts.hands[side]={point:solved.hand,planted:false,rungIndex:null,rungY:null,reachClamped:solved.reachClamped};
     }
   }
-  body.modularLowerLayersV128=lowerLayers(waist,hips,legs,s,f,angle);
+  body.modularLowerLayersV128=buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,facing:f,legDefinitions});
   const handPose={unarmed:true,visible:false,grip:hands.near,support:hands.far,serviceHand:hands.far,
     translation:point(0,0),handKinds:{near:kind==='climb'?'grip':'service',far:kind==='climb'?'grip':'service'}};
   return {bodyRig:body,handPose,legs,contacts};
@@ -341,7 +360,7 @@ function buildGeometry(base,actor,state,ladder,reducedMotion) {
 /** Complete render geometry, independently of image readiness. V125's weapon
  * admission is unchanged: these observations cannot fire, heal or revive. */
 export function resolvePlayerTransitRigV128({actor,appearance=actor?.appearanceV126,images=null,surface='mission',
-  timeSeconds=0,reducedMotion=false,sample=null,ladder=null,transitState=null,neuroActive=false}={}) {
+  timeSeconds=0,reducedMotion=false,sample=null,ladder=null,transitState=null,neuroActive=false,legDefinitions={}}={}) {
   let reason=identityRejection(actor,sample,surface,neuroActive);
   const current=activeKind(actor);
   const state=transitState?.schema===128 && (current===transitState.kind || !current && transitState.kind==='revive')
@@ -357,10 +376,10 @@ export function resolvePlayerTransitRigV128({actor,appearance=actor?.appearanceV
     v52HurtClock:0,shockClock:0,v52FireClock:0,weaponRigMotionV125:{distance:0,shotAt:-Infinity}};
   const base=resolvePlayerBodyRigV125({actor:observed,surface,images,timeSeconds:Math.max(0,finite(timeSeconds)),reducedMotion:true});
   if(!base.eligible)return freeze({schema:128,eligible:false,ready:false,reason:base.reason,state,requiredAssets:[],missingAssets:[],firing:false});
-  const geometry=buildGeometry(base,actor,state,ladder,reducedMotion);
+  const geometry=buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions);
   const selected=normalizePlayerAppearanceV126(appearance);
   const modular=resolvePlayerModularRigV126({bodyRig:geometry.bodyRig,appearance:selected,images});
-  const requiredAssets=[...new Map([...base.requiredAssets,...modular.requiredAssets,LEG_ASSET].map(a=>[a.imageKey,a])).values()];
+  const requiredAssets=[...new Map([...base.requiredAssets,...modular.requiredAssets].map(a=>[a.imageKey,a])).values()];
   const missingAssets=requiredAssets.filter(a=>!playerBodyRigImageReadyV125(imageFrom(images,a.imageKey),a));
   const ready=modular.eligible&&modular.ready&&missingAssets.length===0;
   return freeze({schema:128,eligible:modular.eligible,ready,reason:!modular.eligible?modular.reason:!ready?'transit-images-unavailable':null,

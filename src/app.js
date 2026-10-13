@@ -88,7 +88,10 @@ import { XenoTrialsUiV96 } from './xeno-trials-ui-v96.js';
 import { CloudUiV119 } from './cloud-ui-v119.js';
 import { validateCloudPayloadV119 } from './cloud-save-v119.js';
 import { equipUserEquipmentV95, unequipUserEquipmentV95, userEquipmentPanelHtmlV95 } from './user-equipment-v95.js';
-import { equipPlayerAppearanceV126, resetPlayerAppearanceV126, normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
+import {
+  equipPlayerAppearanceV126, equipPlayerAppearancePresetV129,
+  resetPlayerAppearanceV126, normalizePlayerAppearanceV126
+} from './player-appearance-v126.js';
 import { playerAppearancePanelHtmlV126 } from './player-appearance-ui-v126.js';
 import { createPlayerAppearancePreviewV126, normalizePlayerAppearancePreviewAnimationV128 } from './player-appearance-preview-v126.js';
 import { resolvePlayerAppearancePreviewWeaponV127 } from './player-appearance-loadout-v127.js';
@@ -1519,10 +1522,11 @@ function renderPlayerAppearanceV126() {
       }
       const owner = button.dataset.appearanceOwnerV126 || button.dataset.appearanceResetV126;
       if (!['player', 'coop'].includes(owner)) return;
-      if (!button.hasAttribute('data-appearance-item-v126') && !button.hasAttribute('data-appearance-reset-v126')) {
+      if (!button.hasAttribute('data-appearance-item-v126') && !button.hasAttribute('data-appearance-reset-v126')
+        && !button.hasAttribute('data-appearance-preset-v129')) {
         appearanceOwnerV126 = owner;
         renderPlayerAppearanceV126();
-        panel.querySelector(`button[data-appearance-owner-v126="${owner}"]:not([data-appearance-slot-v126])`)?.focus({ preventScroll: true });
+        panel.querySelector(`button[data-appearance-owner-v126="${owner}"]:not([data-appearance-slot-v126]):not([data-appearance-preset-v129])`)?.focus({ preventScroll: true });
         return;
       }
       // SaveSystem publishes only after storage succeeds. Prepare a separate
@@ -1530,16 +1534,21 @@ function renderPlayerAppearanceV126() {
       const candidate = { ...saveSystem.data, player: clone(saveSystem.data.player) };
       try {
         if (button.hasAttribute('data-appearance-reset-v126')) resetPlayerAppearanceV126(candidate, owner);
+        else if (button.hasAttribute('data-appearance-preset-v129')) equipPlayerAppearancePresetV129(candidate,
+          { owner, presetId: button.dataset.appearancePresetV129 });
         else equipPlayerAppearanceV126(candidate, { owner, slot: button.dataset.appearanceSlotV126,
           itemId: button.dataset.appearanceItemV126 || null });
         saveSystem.commit({ player: candidate.player });
       } catch (error) { toast(error.message); return; }
       const slot = button.dataset.appearanceSlotV126;
       const itemId = button.dataset.appearanceItemV126;
+      const presetId = button.dataset.appearancePresetV129;
       renderPlayerAppearanceV126();
-      panel.querySelector(slot
-        ? `button[data-appearance-owner-v126="${owner}"][data-appearance-slot-v126="${slot}"][data-appearance-item-v126="${itemId}"]`
-        : `button[data-appearance-reset-v126="${owner}"]`)?.focus({ preventScroll: true });
+      panel.querySelector(presetId
+        ? `button[data-appearance-owner-v126="${owner}"][data-appearance-preset-v129="${presetId}"]`
+        : slot
+          ? `button[data-appearance-owner-v126="${owner}"][data-appearance-slot-v126="${slot}"][data-appearance-item-v126="${itemId}"]`
+          : `button[data-appearance-reset-v126="${owner}"]`)?.focus({ preventScroll: true });
     });
   }
   const weaponDescriptor = resolvePlayerAppearancePreviewWeaponV127(saveSystem.data, appearanceOwnerV126);
@@ -1792,7 +1801,22 @@ function renderAll() {
   renderEnemies();
   renderVehicles();
   renderCrew();
-  if (!costumeArchivesUiV119) costumeArchivesUiV119 = new CostumeArchivesUiV119({ root: byId('costume-archives-v119'), COSTUMES });
+  if (!costumeArchivesUiV119) costumeArchivesUiV119 = new CostumeArchivesUiV119({ root: byId('costume-archives-v119'), COSTUMES,
+    onOpenAppearance: presetId => {
+      appearanceOwnerV126 = 'player';
+      showView('armory');
+      if (activeView !== 'armory') return;
+      const panel = byId('player-appearance-v126');
+      const button = panel?.querySelector(`[data-appearance-preset-v129="${presetId}"]`);
+      if (button && !button.disabled) button.focus({ preventScroll: true });
+      else {
+        const heading = panel?.querySelector('.appearance-presets-heading-v129 h4');
+        heading?.setAttribute('tabindex', '-1');
+        heading?.focus({ preventScroll: true });
+      }
+      panel?.scrollIntoView({ block: 'start', behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
+    }
+  });
   costumeArchivesUiV119.update(saveSystem.data, { operationLocked: Boolean(saveSystem.data.strategy.currentOperation) });
   renderHubStatus();
   renderEditorStatus();

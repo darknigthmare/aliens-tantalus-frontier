@@ -255,7 +255,7 @@ test('each reduced-motion transit is a stable inspectable pose and schedules no 
   }
 });
 
-test('a missing segmented-leg image fails the whole transit without damaging ordinary outfit inspection', async t => {
+test('a missing segmented-leg image rejects transit and ordinary poses before drawing any garment', async t => {
   const env = environment(t, { failure: source => /rig-v128/.test(source) }), stage = canvas();
   const preview = createPlayerAppearancePreviewV126(stage, { appearance: selectedAppearance(), animation: 'climb-up' });
   t.after(() => preview.dispose());
@@ -263,23 +263,32 @@ test('a missing segmented-leg image fails the whole transit without damaging ord
   assert.equal(stage.state.draws.length, 0);
   assert.equal(env.frames.size, 0);
   preview.setAnimation('idle'); await flush();
-  assert.equal(preview.getSnapshot().ready, true);
-  assert.equal(preview.getSnapshot().images.assets.some(asset => /rig-v128/.test(asset.path)), false);
-  assert.equal(env.frames.size, 1);
+  assert.equal(preview.getSnapshot().ready, false);
+  assert.equal(preview.getSnapshot().images.assets.some(asset => /rig-v128/.test(asset.path)), true,
+    'V129 uses the same separated legs for ordinary locomotion.');
+  assert.equal(stage.state.draws.length, 0, 'A missing leg page cannot leave an otherwise clothed half-body.');
+  assert.equal(env.frames.size, 0);
 });
 
 test('leaving a loading transit cannot restore its limbs, listeners or animation after a later selection', async t => {
   const env = environment(t, { pending: true }), stage = canvas(), statuses = [];
   const preview = createPlayerAppearancePreviewV126(stage, { appearance: selectedAppearance(), animation: 'death',
     onStatus: status => statuses.push(status) });
-  preview.setAnimation('climb-up'); preview.setAnimation('idle');
-  assert.equal(preview.getSnapshot().images.assets.some(asset => /rig-v128/.test(asset.path)), false);
+  const legImage = env.images.find(image => /rig-v128/.test(image.src));
+  assert.ok(legImage);
+  preview.setAnimation('climb-up'); preview.setAnimation('walk');
+  assert.equal(preview.getSnapshot().images.assets.some(asset => /rig-v128/.test(asset.path)), true);
+  assert.deepEqual(env.images.filter(image => /rig-v128/.test(image.src)), [legImage],
+    'Walking retains the same pending leg page instead of decoding it a second time.');
   for (const image of env.images) image.finish();
   await flush();
   assert.equal(await preview.ready, false);
-  assert.equal(preview.getSnapshot().animation, 'idle');
+  assert.equal(preview.getSnapshot().animation, 'walk');
   assert.equal(preview.getSnapshot().ready, true);
-  assert.equal(stage.state.draws.some(draw => /rig-v128/.test(draw.src)), false);
+  assert.equal(stage.state.draws.some(draw => /rig-v128/.test(draw.src)), true);
+  assert.equal(preview.getSnapshot().transitKind, null, 'Late transit completion cannot reinstall its old pose.');
+  assert.ok(preview.getSnapshot().previewLadder == null, 'The walking preview has no stale ladder.');
+  assert.equal(preview.getSnapshot().locomotion.mode, 'walk');
   assert.equal(statuses.filter(status => status.ready).length, 1);
   assert.equal(env.listeners, 0);
   assert.equal(env.frames.size, 1);
