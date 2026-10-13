@@ -5,9 +5,10 @@ import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { WEAPON_VISUAL_ASSETS_ALL_V63 } from '../src/weapon-visual-runtime-v63.js';
-import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126 } from '../src/player-appearance-v126.js';
+import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126, PLAYER_APPEARANCE_PRESETS_V129 } from '../src/player-appearance-v126.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
+import { PLAYER_COLONIAL_RIG_ASSETS_V129 } from '../src/player-colonial-art-v129.js';
 
 // Optional visual smoke test: use an existing Playwright/Chromium installation.
 // ATF_BASE_URL=https://preview.example ATF_PLAYER_QA_OUTPUT=/tmp/player-qa \
@@ -35,7 +36,7 @@ async function playwrightModule() {
   }
 }
 
-const report = { schema: 128, baseUrl, startedAt: new Date().toISOString(), status: 'running',
+const report = { schema: 129, baseUrl, startedAt: new Date().toISOString(), status: 'running',
   scenario: 'Production mission entered through Frontier Forge UI; isolated browser context.',
   checks: [], captures: [], pageErrors: [], requestFailures: [], weaponImageRequests: [], weaponImagePhases: [],
   appearanceImageRequests: [], appearanceImagePhases: [],
@@ -54,7 +55,8 @@ try {
   page.setDefaultTimeout(15000);
   let requestPhase = 'boot';
   const catalogueImagePaths = new Set(Object.values(WEAPON_VISUAL_ASSETS_ALL_V63));
-  const appearanceImagePaths = new Set([...PLAYER_MODULAR_RIG_ASSETS_V126, ...PLAYER_TRANSIT_RIG_ASSETS_V128].map(asset => asset.path));
+  const appearanceImagePaths = new Set([...PLAYER_MODULAR_RIG_ASSETS_V126, ...PLAYER_TRANSIT_RIG_ASSETS_V128,
+    ...PLAYER_COLONIAL_RIG_ASSETS_V129].map(asset => asset.path));
   const network = await context.newCDPSession(page);
   await network.send('Network.enable');
   network.on('Network.requestWillBeSent', event => {
@@ -152,7 +154,7 @@ try {
       if (itemId === null) assert.equal(layers.length, 0, `${label}: removed ${slot.id} has no rendered layer.`);
       else assert.ok(layers.length && layers.every(layer => layer.itemId === itemId), `${label}: ${slot.id} uses its own equipped piece.`);
     }
-    assert.ok(state.appearance.images.retained <= 12, `${label}: the scene image cache stays within its bound.`);
+    assert.ok(state.appearance.images.retained <= 16, `${label}: the scene image cache stays within its bound.`);
     return operator;
   };
   const checkHeldPose = (state, label) => {
@@ -351,11 +353,11 @@ try {
   // page reload prove both independence and actual durable storage. The preview
   // has its own image lifecycle; none of its requests count as gameplay loads.
   requestPhase = 'armory-appearance-ui';
-  const primaryAppearance = normalizePlayerAppearanceV126({ schema: 126, slots: {
+  let primaryAppearance = normalizePlayerAppearanceV126({ schema: 126, slots: {
     helmet: 'helmet-patrol-v126', mask: 'mask-rebreather-v126', torso: 'torso-utility-v126',
     arms: 'arms-utility-v126', legs: 'legs-utility-v126', back: 'back-radio-v126'
   } });
-  const coopAppearance = normalizePlayerAppearanceV126({ schema: 126, slots: {
+  let coopAppearance = normalizePlayerAppearanceV126({ schema: 126, slots: {
     helmet: null, mask: null, torso: 'torso-marine-v126',
     arms: 'arms-marine-v126', legs: 'legs-utility-v126', back: null
   } });
@@ -367,13 +369,24 @@ try {
     return { schema: 126, slots: Object.fromEntries(slots) };
   };
   const chooseOwner = async owner => {
-    await panel.locator(`[data-appearance-owner-v126="${owner}"]:not([data-appearance-slot-v126])`).click();
+    await panel.locator(`[data-appearance-owner-v126="${owner}"]:not([data-appearance-slot-v126]):not([data-appearance-preset-v129])`).click();
     await page.waitForFunction(() => document.querySelector('#player-appearance-preview-v126')?.dataset.appearanceReadyV126 === 'true');
   };
   const choosePiece = async (owner, slot, itemId) => {
     const selector = `[data-appearance-owner-v126="${owner}"][data-appearance-slot-v126="${slot}"][data-appearance-item-v126="${itemId || ''}"]`;
     await panel.locator(selector).click();
     await page.waitForFunction(selector => document.querySelector(selector)?.getAttribute('aria-pressed') === 'true', selector);
+  };
+  const choosePreset = async (owner, presetId) => {
+    const preset = PLAYER_APPEARANCE_PRESETS_V129.find(entry => entry.id === presetId);
+    assert.ok(preset, 'A real catalogue preset is required.');
+    const selector = `[data-appearance-owner-v126="${owner}"][data-appearance-preset-v129="${presetId}"]`;
+    await panel.locator(selector).click();
+    await page.waitForFunction(selector => document.querySelector(selector)?.getAttribute('aria-pressed') === 'true'
+      && document.querySelector('#player-appearance-preview-v126')?.dataset.appearanceReadyV126 === 'true', selector);
+    const expected = normalizePlayerAppearanceV126({ schema: 126, slots: preset.slots });
+    assert.deepEqual(await readPanelSelection(owner), expected);
+    return expected;
   };
   const capturePreview = async (filename, label, owner) => {
     await page.waitForFunction(() => document.querySelector('#player-appearance-preview-v126')?.dataset.appearanceReadyV126 === 'true');
@@ -401,6 +414,22 @@ try {
     return { resources: { ...save.galaxy.resources }, weaponIds: [...save.player.weaponIds], equipmentIds: [...save.player.equipmentIds],
       ammo: { ...save.player.ammo }, appearance: save.player.appearanceV126, coopAppearance: save.player.coopAppearanceV126 };
   });
+  const { appearance: priorAppearance, ...costumeInventory } = await readCampaignInventory();
+  const costumeEvidence = [];
+  await panel.locator('#player-appearance-animation-v127').selectOption('idle');
+  for (const preset of PLAYER_APPEARANCE_PRESETS_V129) {
+    const selected = await choosePreset('player', preset.id);
+    for (const facing of [1, -1]) {
+      await panel.locator(`[data-appearance-facing-v126="${facing}"]`).click();
+      await capturePreview(`32-${preset.id}-${facing > 0 ? 'right' : 'left'}.png`,
+        `Film-reference outfit selected through its actual armory button: ${preset.name || preset.label}, facing ${facing}`, 'player');
+    }
+    const { appearance: currentAppearance, ...afterCostume } = await readCampaignInventory();
+    assert.deepEqual(afterCostume, costumeInventory, 'A costume preset must preserve resources, weapons, equipment, ammo and J2.');
+    costumeEvidence.push({ presetId: preset.id, selected, facings: [1, -1], ready: true });
+  }
+  primaryAppearance = await choosePreset('player', 'uscm-hicks-v129');
+  check('All four film-reference costumes render in both orientations through the real armory without changing equipment', costumeEvidence);
   const previewInventory = await readCampaignInventory();
   const previewModes = ['idle', 'walk', 'crouch', 'aim', 'reload', 'medical', 'deploy', 'interact', 'melee',
     'climb-up', 'climb-down', 'downed', 'death', 'revive'];
@@ -437,6 +466,16 @@ try {
   await chooseOwner('player');
   assert.deepEqual(await readPanelSelection('player'), primaryAppearance, 'J2 changes do not overwrite J1.');
   check('All six J2 slots are independent and optional pieces can be removed without altering J1',
+    { player: primaryAppearance, coop: coopAppearance });
+  await chooseOwner('coop');
+  coopAppearance = await choosePreset('coop', 'uscm-smartgunner-v129');
+  await capturePreview('33-vasquez-j2.png', 'Vasquez smartgunner pieces assigned only to J2 through the real preset button', 'coop');
+  await panel.screenshot({ path: join(output, '34-colonial-armory.png') });
+  report.captures.push({ filename: '34-colonial-armory.png', label: 'Actual colonial costume armory with independent J1 Hicks and J2 Vasquez selections',
+    state: { player: primaryAppearance, coop: coopAppearance } });
+  await chooseOwner('player');
+  assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
+  check('J1 Hicks and J2 Vasquez remain independently equipped through the actual costume presets',
     { player: primaryAppearance, coop: coopAppearance });
   imagePhase('Actual appearance UI, its preview loads and separate owners', await snapshot());
   await page.locator('#nav [data-view="settings"]').click();
@@ -705,7 +744,9 @@ try {
     assert.equal(actor.transit?.kind, kind); assert.equal(actor.transit.drawn, true);
     assert.equal(actor.transit.firing, false); assert.equal(actor.heldWeapon, null);
     const layers = operator.visual.layers.filter(layer => layer.slot === 'legs');
-    assert.equal(layers.length, 7); assert.ok(layers.every(layer => layer.imageKey === 'playerLegPartsV128'));
+    assert.equal(layers.length, 7);
+    const legImageKey = operator.selected.slots.legs.endsWith('-v129') ? 'playerColonialLegsV129' : 'playerLegPartsV128';
+    assert.ok(layers.every(layer => layer.imageKey === legImageKey));
     return actor.transit;
   };
   const walkTo = async (role, targetX) => {

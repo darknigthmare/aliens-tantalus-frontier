@@ -3,7 +3,10 @@ import { test } from 'node:test';
 import {
   PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_SLOTS_V126,
   normalizePlayerAppearanceV126, equipPlayerAppearanceV126,
-  resetPlayerAppearanceV126, getPlayerAppearanceSelectionV126
+  resetPlayerAppearanceV126, getPlayerAppearanceSelectionV126,
+  PLAYER_APPEARANCE_PRESETS_V129, getPlayerAppearancePresetV129,
+  getPlayerAppearanceSelectedPresetV129, equipPlayerAppearancePresetV129,
+  getPlayerAppearanceItemV126
 } from '../src/player-appearance-v126.js';
 import { playerAppearanceUiModelV126, playerAppearancePanelHtmlV126 } from '../src/player-appearance-ui-v126.js';
 import {
@@ -13,6 +16,8 @@ import {
 import { CAMPAIGNS, WORLDS, CREW, WEAPONS, EQUIPMENT, VEHICLES, COSTUMES } from '../src/content.js';
 import { USER_EQUIPMENT_V95 } from '../src/user-equipment-v95.js';
 import { resolvePlayerAppearancePreviewWeaponV127 } from '../src/player-appearance-loadout-v127.js';
+import { getCostumeV119, canEquipCostumeV119 } from '../src/franchise-costumes-v119.js';
+import { buildCostumeArchivesModelV119, renderCostumeArchiveCardV119 } from '../src/costume-ui-v119.js';
 
 const clone = value => structuredClone(value);
 const parts = slot => PLAYER_APPEARANCE_ITEMS_V126.filter(item => item.slot === slot);
@@ -303,4 +308,260 @@ test('armory controls expose real owner/slot/item buttons, a labelled preview an
   const playerHtml = playerAppearancePanelHtmlV126(save);
   assert.doesNotMatch(playerHtml, /<img src=x/);
   assert.match(playerHtml, /&lt;img src=x onerror=bad&gt;/);
+});
+
+test('V129 keeps the exact V126 default and existing customized selections after migration', () => {
+  const original = { schema: 126, slots: {
+    helmet: 'helmet-marine-v126', mask: null, torso: 'torso-marine-v126',
+    arms: 'arms-marine-v126', legs: 'legs-marine-v126', back: 'back-field-pack-v126'
+  } };
+  const customized = { schema: 126, slots: {
+    helmet: 'helmet-patrol-v126', mask: 'mask-rebreather-v126', torso: 'torso-utility-v126',
+    arms: 'arms-utility-v126', legs: 'legs-utility-v126', back: null
+  } };
+  assert.deepEqual(normalizePlayerAppearanceV126(), original);
+  const save = createDefaultSave();
+  save.player.appearanceV126 = clone(customized);
+  save.player.coopAppearanceV126 = clone(original);
+  const restored = migrateSave(JSON.parse(JSON.stringify(save)));
+  assert.deepEqual(restored.player.appearanceV126, customized);
+  assert.deepEqual(restored.player.coopAppearanceV126, original);
+  assert.equal(getPlayerAppearanceSelectedPresetV129(original), null);
+  assert.equal(getPlayerAppearanceSelectedPresetV129(customized), null);
+});
+
+test('V129 film presets contain six reviewed cosmetic slot IDs and no inventory or identity override', () => {
+  const expected = ['uscm-infantry-v129', 'uscm-hicks-v129', 'uscm-hudson-v129', 'uscm-smartgunner-v129'];
+  assert.deepEqual(PLAYER_APPEARANCE_PRESETS_V129.map(preset => preset.id), expected);
+  const filmParts = PLAYER_APPEARANCE_ITEMS_V126.filter(part => part.collection === 'aliens-1986');
+  assert.equal(filmParts.length, 15);
+  const used = new Set();
+  for (const preset of PLAYER_APPEARANCE_PRESETS_V129) {
+    assert.equal(getPlayerAppearancePresetV129(preset.id), preset);
+    assert.deepEqual(Object.keys(preset.slots).sort(), ['arms', 'back', 'helmet', 'legs', 'mask', 'torso']);
+    assert.equal(preset.slots.mask, null);
+    assert.equal(preset.exact, false);
+    assert.equal(preset.provenance, 'film-reference-adaptation');
+    assert.equal(preset.cosmeticOnly, true);
+    assert.equal(preset.sourceWork, 'Aliens (1986)');
+    assert.equal(Object.hasOwn(preset, 'skinId'), false);
+    assert.equal(Object.hasOwn(preset, 'weaponId'), false);
+    assert.ok(Object.isFrozen(preset) && Object.isFrozen(preset.slots));
+    for (const [slot, id] of Object.entries(preset.slots)) {
+      if (id === null) continue;
+      const part = getPlayerAppearanceItemV126(id);
+      assert.equal(part.slot, slot);
+      assert.equal(part.cosmeticOnly, true);
+      assert.equal(part.exact, false);
+      assert.equal(part.provenance, 'film-reference-adaptation');
+      used.add(id);
+    }
+  }
+  assert.deepEqual([...used].sort(), filmParts.map(part => part.id).sort());
+  assert.equal(getPlayerAppearancePresetV129('__proto__'), null);
+});
+
+test('V129 applying a complete film outfit changes only the selected operator’s six slots', () => {
+  const save = createDefaultSave();
+  save.player.costumeId = 'franchise-nostromo-crew';
+  save.player.userEquipmentV95.armorId = USER_EQUIPMENT_V95.find(entry => entry.kind === 'armor').id;
+  save.player.appearanceV126.slots.mask = 'mask-rebreather-v126';
+  for (const owner of ['player', 'coop']) {
+    const ownField = owner === 'player' ? 'appearanceV126' : 'coopAppearanceV126';
+    const otherField = owner === 'player' ? 'coopAppearanceV126' : 'appearanceV126';
+    for (const preset of PLAYER_APPEARANCE_PRESETS_V129) {
+      const before = clone(save), result = equipPlayerAppearancePresetV129(save, { owner, presetId: preset.id });
+      const expected = clone(before);
+      expected.player[ownField] = { schema: 126, slots: clone(preset.slots) };
+      assert.deepEqual(save, expected, 'No weapons, charges, protection, character, currency or other profile fields change.');
+      assert.deepEqual(save.player[otherField], before.player[otherField]);
+      assert.equal(result.cosmeticOnly, true);
+      assert.equal(result.owner, owner);
+      result.appearance.slots.helmet = null;
+      assert.equal(save.player[ownField].slots.helmet, preset.slots.helmet, 'Caller mutations cannot alter the committed selection.');
+    }
+  }
+});
+
+test('V129 a film outfit remains editable one slot at a time and matching follows the actual selection', () => {
+  const save = createDefaultSave(), preset = getPlayerAppearancePresetV129('uscm-hicks-v129');
+  equipPlayerAppearancePresetV129(save, { presetId: preset.id });
+  for (const slot of PLAYER_APPEARANCE_SLOTS_V126) {
+    const original = preset.slots[slot.id];
+    const replacement = slot.id === 'mask' ? 'mask-rebreather-v126'
+      : slot.optional ? null : slot.defaultItemId;
+    equipPlayerAppearanceV126(save, { slot: slot.id, itemId: replacement });
+    const beforeRead = clone(save);
+    assert.equal(getPlayerAppearanceSelectedPresetV129(save.player.appearanceV126), null);
+    assert.equal(playerAppearanceUiModelV126(save).selectedPresetId, null);
+    assert.deepEqual(save, beforeRead, 'Matching is an observation, not a saved preset alias.');
+    for (const other of PLAYER_APPEARANCE_SLOTS_V126.filter(entry => entry.id !== slot.id))
+      assert.equal(save.player.appearanceV126.slots[other.id], preset.slots[other.id]);
+    equipPlayerAppearanceV126(save, { slot: slot.id, itemId: original });
+    assert.equal(getPlayerAppearanceSelectedPresetV129(save.player.appearanceV126).id, preset.id);
+  }
+  resetPlayerAppearanceV126(save);
+  assert.deepEqual(save.player.appearanceV126, normalizePlayerAppearanceV126());
+  assert.equal(getPlayerAppearanceSelectedPresetV129(save.player.appearanceV126), null);
+});
+
+test('V129 invalid preset requests reject before assigning any part', () => {
+  const save = createDefaultSave(), before = clone(save);
+  for (const request of [
+    undefined, {}, { presetId: 'helmet-hicks-v129' },
+    { presetId: '/assets/unreviewed.png' }, { presetId: '__proto__' },
+    { presetId: { id: 'uscm-hicks-v129' } },
+    { owner: '__proto__', presetId: 'uscm-hicks-v129' },
+    { owner: 'squad', presetId: 'uscm-hudson-v129' }
+  ]) {
+    assert.throws(() => equipPlayerAppearancePresetV129(save, request));
+    assert.deepEqual(save, before);
+  }
+  for (const malformed of [null, {}, { player: null }])
+    assert.throws(() => equipPlayerAppearancePresetV129(malformed, { presetId: 'uscm-hicks-v129' }), /Opérateur inconnu/);
+});
+
+test('V129 every preset observes the active-operation lock for J1 and J2 without touching the manifest', () => {
+  const save = createDefaultSave();
+  equipPlayerAppearancePresetV129(save, { presetId: 'uscm-hicks-v129' });
+  beginOperation(save, CAMPAIGNS[0], WORLDS[0]);
+  const before = clone(save);
+  for (const owner of ['player', 'coop']) {
+    for (const preset of PLAYER_APPEARANCE_PRESETS_V129) {
+      assert.throws(() => equipPlayerAppearancePresetV129(save, { owner, presetId: preset.id }), /verrouillée/);
+      assert.deepEqual(save, before);
+    }
+  }
+});
+
+test('V129 film selections survive migration, frozen deployment and native checkpoints for both operators', () => {
+  const save = createDefaultSave();
+  equipPlayerAppearancePresetV129(save, { presetId: 'uscm-hudson-v129' });
+  equipPlayerAppearancePresetV129(save, { owner: 'coop', presetId: 'uscm-smartgunner-v129' });
+  const j1 = clone(save.player.appearanceV126), j2 = clone(save.player.coopAppearanceV126);
+  beginOperation(save, CAMPAIGNS[0], WORLDS[0]);
+  save.player.appearanceV126 = normalizePlayerAppearanceV126();
+  save.player.coopAppearanceV126 = normalizePlayerAppearanceV126();
+  const restored = migrateSave(JSON.parse(JSON.stringify(save)));
+  const deployment = resolveOperationDeployment(restored, catalogs);
+  assert.deepEqual(deployment.playerAppearanceV126, j1);
+  assert.deepEqual(deployment.coopAppearanceV126, j2);
+  deployment.playerAppearanceV126.slots.back = null;
+  assert.deepEqual(restored.strategy.currentOperation.playerAppearanceV126, j1);
+  const resume = sanitizeOperationResumeState({ schema: 1, identity: { campaignId: CAMPAIGNS[0].id },
+    player: { health: 63, appearanceV126: j1 }, coop: { health: 48, appearanceV126: j2 } });
+  assert.deepEqual(resume.player.appearanceV126, j1);
+  assert.deepEqual(resume.coop.appearanceV126, j2);
+  assert.equal(resume.player.health, 63);
+  assert.equal(resume.coop.health, 48);
+});
+
+test('V129 a SaveSystem write failure cannot apply any part of the preset and a real reload preserves success', () => {
+  const records = new Map();
+  let rejectWrites = false;
+  const storage = { getItem: key => records.get(key) ?? null,
+    setItem: (key, value) => { if (rejectWrites) throw new Error('disk full'); records.set(key, value); } };
+  const saves = new SaveSystem(storage);
+  saves.load(1);
+  const before = clone(saves.data), candidate = { ...saves.data, player: clone(saves.data.player) };
+  equipPlayerAppearancePresetV129(candidate, { owner: 'coop', presetId: 'uscm-smartgunner-v129' });
+  rejectWrites = true;
+  assert.throws(() => saves.commit({ player: candidate.player }), /Sauvegarde impossible/);
+  assert.deepEqual(saves.data, before);
+  rejectWrites = false;
+  saves.commit({ player: candidate.player });
+  const loaded = new SaveSystem(storage);
+  loaded.load(1);
+  assert.deepEqual(loaded.data.player.coopAppearanceV126, candidate.player.coopAppearanceV126);
+  assert.deepEqual(loaded.data.player.appearanceV126, before.player.appearanceV126);
+  const loadedState = withoutAppearance(loaded.data), committedState = withoutAppearance(saves.data);
+  // SaveSystem timestamps a real load; the outfit must leave gameplay state intact.
+  delete loadedState.updatedAt;
+  delete committedState.updatedAt;
+  assert.deepEqual(loadedState, committedState);
+});
+
+test('V129 prepared presets remain distinct from effective dedicated costumes and J2 availability', () => {
+  const save = createDefaultSave();
+  equipPlayerAppearancePresetV129(save, { presetId: 'uscm-hicks-v129' });
+  equipPlayerAppearancePresetV129(save, { owner: 'coop', presetId: 'uscm-hudson-v129' });
+  save.player.costumeId = 'franchise-nostromo-crew';
+  save.settings.coop = false;
+  const before = clone(save), j1 = playerAppearanceUiModelV126(save), j2 = playerAppearanceUiModelV126(save, 'coop');
+  assert.equal(j1.selectedPresetId, 'uscm-hicks-v129');
+  assert.equal(j1.reason, 'dedicated-costume');
+  assert.equal(j1.effective, false);
+  assert.match(j1.status, /Choix conservés/);
+  assert.match(j1.status, /Combinaison d’équipage du Nostromo/);
+  assert.match(j1.status, /combinaison standard dans Echo-9/);
+  assert.equal(j2.selectedPresetId, 'uscm-hudson-v129');
+  assert.equal(j2.reason, 'coop-disabled');
+  assert.equal(j2.effective, false);
+  assert.deepEqual(save, before);
+});
+
+test('V129 armory exposes four native preset buttons, the exact selected preset and all editable slots', () => {
+  const save = createDefaultSave();
+  equipPlayerAppearancePresetV129(save, { owner: 'coop', presetId: 'uscm-smartgunner-v129' });
+  const html = playerAppearancePanelHtmlV126(save, { owner: 'coop' });
+  const buttons = [...html.matchAll(/<button\b[^>]*data-appearance-preset-v129="([^"]*)"[^>]*>/g)];
+  assert.equal(buttons.length, 4);
+  assert.match(html, /aria-labelledby="appearance-presets-title-coop-v129"/);
+  assert.match(html, /role="group" aria-label="Tenue complète de J2 · Opérateur coop"/);
+  assert.match(html, /data-appearance-preset-status-v129 role="status" aria-live="polite">Tenue complète préparée : Équipement Vasquez\./);
+  for (const button of buttons) {
+    assert.match(button[0], /type="button"/);
+    assert.match(button[0], /data-appearance-owner-v126="coop"/);
+    assert.match(button[0], new RegExp(`aria-pressed="${button[1] === 'uscm-smartgunner-v129'}"`));
+    assert.doesNotMatch(button[0], / disabled/);
+    assert.doesNotMatch(button[0], /data-appearance-item-v126/);
+  }
+  for (const slot of PLAYER_APPEARANCE_SLOTS_V126)
+    assert.match(html, new RegExp(`data-appearance-slot-v126="${slot.id}"`));
+  save.strategy.currentOperation = { id: 'active' };
+  const locked = playerAppearancePanelHtmlV126(save, { owner: 'coop' });
+  const lockedButtons = [...locked.matchAll(/<button\b[^>]*data-appearance-preset-v129="[^"]*"[^>]*>/g)];
+  assert.equal(lockedButtons.length, 4);
+  for (const [button] of lockedButtons) assert.match(button, / disabled/);
+  assert.doesNotMatch(locked, /fidèle 1:1|exactement identique/i);
+});
+
+test('V129 Hicks and Hudson archive cards open the correct modular outfit without admitting a dedicated costume', () => {
+  for (const [costumeId, presetId] of [
+    ['franchise-hicks-combat', 'uscm-hicks-v129'],
+    ['franchise-hudson-combat', 'uscm-hudson-v129']
+  ]) {
+    const costume = getCostumeV119(costumeId);
+    assert.equal(canEquipCostumeV119(costumeId, COSTUMES), false);
+    for (const locked of [false, true]) {
+      const html = renderCostumeArchiveCardV119(costume, { locked, COSTUMES,
+        getSkin: () => assert.fail('A modular navigation link must not request a dedicated costume atlas.') });
+      assert.match(html, /TENUE EN PIÈCES SÉPARÉES · ARMURERIE/);
+      const button = html.match(/<button\b[^>]*data-costume-appearance-v129="[^"]*"[^>]*>/)?.[0];
+      assert.ok(button);
+      assert.match(button, new RegExp(`data-costume-appearance-v129="${presetId}"`));
+      assert.match(button, /type="button"/);
+      assert.match(button, /aria-label="Préparer/);
+      assert.doesNotMatch(button, / disabled|data-costume-id/,
+        'Navigation remains available during an operation; the armory owns the mutation lock.');
+      assert.doesNotMatch(html, /NON ÉQUIPABLE · VISUEL ABSENT/);
+    }
+  }
+});
+
+test('V129 archive orientation leaves other documented outfits and the dedicated availability filter intact', () => {
+  const save = createDefaultSave(), before = clone(save);
+  const vasquez = renderCostumeArchiveCardV119(getCostumeV119('franchise-vasquez-bdu'), { COSTUMES });
+  assert.doesNotMatch(vasquez, /data-costume-appearance-v129/,
+    'Vasquez’s BDU archive outfit is not silently mapped to her separate smartgunner equipment.');
+  const nostromo = renderCostumeArchiveCardV119(getCostumeV119('franchise-nostromo-crew'), { COSTUMES, locked: true });
+  assert.match(nostromo, /data-costume-id="franchise-nostromo-crew"[^>]*disabled/);
+  assert.doesNotMatch(nostromo, /data-costume-appearance-v129/);
+  const ready = buildCostumeArchivesModelV119({ save, COSTUMES, filters: { availability: 'ready' } });
+  assert.ok(ready.entries.some(entry => entry.id === 'franchise-nostromo-crew'));
+  assert.ok(!ready.entries.some(entry => ['franchise-hicks-combat', 'franchise-hudson-combat'].includes(entry.id)));
+  const missing = buildCostumeArchivesModelV119({ save, COSTUMES, filters: { availability: 'missing', character: 'Hicks' } });
+  assert.equal(missing.entries.length, 1);
+  assert.equal(missing.entries[0].id, 'franchise-hicks-combat');
+  assert.deepEqual(save, before);
 });

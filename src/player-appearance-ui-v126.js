@@ -1,6 +1,6 @@
 import {
-  PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_SLOTS_V126,
-  getPlayerAppearanceSelectionV126
+  PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_SLOTS_V126, PLAYER_APPEARANCE_PRESETS_V129,
+  getPlayerAppearanceSelectionV126, getPlayerAppearanceSelectedPresetV129
 } from './player-appearance-v126.js';
 import { getCostumeV119 } from './franchise-costumes-v119.js';
 import { normalizeUserEquipmentV95 } from './user-equipment-v95.js';
@@ -18,6 +18,7 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g,
 export function playerAppearanceUiModelV126(save, owner = 'player') {
   const target = owner === 'coop' ? 'coop' : 'player';
   const state = getPlayerAppearanceSelectionV126(save, target);
+  const selectedPreset = getPlayerAppearanceSelectedPresetV129(state);
   const locked = Boolean(save?.strategy?.currentOperation);
   const costume = target === 'player' ? getCostumeV119(save?.player?.costumeId) : null;
   const customArmor = target === 'player' && normalizeUserEquipmentV95(save?.player?.userEquipmentV95).armorId;
@@ -28,11 +29,14 @@ export function playerAppearanceUiModelV126(save, owner = 'player') {
   const status = reason === 'custom-armor'
     ? 'Choix conservés. En mission, l’armure de référence complète reste portée ; déséquipez-la dans la dotation ci-dessous pour afficher cette tenue.'
     : reason === 'dedicated-costume'
-      ? `Choix conservés. La combinaison ${costume.name} garde son apparence complète. Choisissez une combinaison standard dans Équipage pour afficher cette tenue.`
+      ? `Choix conservés. Votre tenue « ${costume.name} » garde son apparence complète. Choisissez une combinaison standard dans Echo-9 pour afficher cette tenue.`
       : reason === 'coop-disabled'
         ? 'Tenue préparée pour J2. Elle sera portée lorsque la coop locale sera activée.'
         : 'Tenue sélectionnée pour les déplacements, la visée, les actions de terrain et les appuis à l’échelle ou au sol.';
   return { owner: target, ownerLabel, state, locked, effective: reason === null, reason, status,
+    selectedPresetId: selectedPreset?.id || null,
+    presets: PLAYER_APPEARANCE_PRESETS_V129.map(preset => ({ ...preset,
+      selected: preset.id === selectedPreset?.id })),
     slots: PLAYER_APPEARANCE_SLOTS_V126.map(slot => ({ ...slot, selectedItemId: state.slots[slot.id],
       choices: [
         ...(slot.optional ? [{ id: null, slot: slot.id, name: slot.emptyLabel, description: '' }] : []),
@@ -59,6 +63,11 @@ export function playerAppearancePanelHtmlV126(save, { owner = 'player', facing =
       </figure>
       <div class="appearance-status-v126" data-appearance-effective-v126="${model.effective}" data-appearance-reason-v126="${model.reason || ''}"><strong>${escapeHtml(model.ownerLabel)}</strong><p>${escapeHtml(model.status)}</p>${model.locked ? '<p>Opération active : les choix de J1 et J2 sont verrouillés jusqu’au retour.</p>' : ''}</div>
     </div>
+    <section class="appearance-presets-v129" aria-labelledby="appearance-presets-title-${model.owner}-v129">
+      <div class="appearance-presets-heading-v129"><h4 id="appearance-presets-title-${model.owner}-v129">Tenues d’Aliens (1986)</h4><p>Appliquez une tenue complète, puis ajustez chaque pièce.</p></div>
+      <div class="appearance-preset-choices-v129" role="group" aria-label="Tenue complète de ${escapeHtml(model.ownerLabel)}">${model.presets.map(preset => `<button type="button" class="button appearance-preset-v129 ${preset.selected ? '' : 'ghost'}" data-appearance-owner-v126="${model.owner}" data-appearance-preset-v129="${preset.id}" aria-pressed="${preset.selected}"${model.locked ? ' disabled' : ''}><strong>${escapeHtml(preset.name)}</strong><span>${escapeHtml(preset.description)}</span></button>`).join('')}</div>
+      <p class="appearance-preset-selection-v129" data-appearance-preset-status-v129 role="status" aria-live="polite">${model.selectedPresetId ? `Tenue complète préparée : ${escapeHtml(model.presets.find(preset => preset.selected).name)}.` : 'Tenue composée pièce par pièce.'}</p>
+    </section>
     <div class="appearance-slots-v126">${model.slots.map(slot => `<section class="appearance-slot-v126" aria-labelledby="appearance-title-${model.owner}-${slot.id}-v126"><h4 id="appearance-title-${model.owner}-${slot.id}-v126">${escapeHtml(slot.label)}</h4><div class="appearance-choices-v126" role="group" aria-label="${escapeHtml(slot.label)} — ${escapeHtml(model.ownerLabel)}">${slot.choices.map(choice => `<button type="button" class="button compact ${slot.selectedItemId === choice.id ? '' : 'ghost'}" data-appearance-owner-v126="${model.owner}" data-appearance-slot-v126="${slot.id}" data-appearance-item-v126="${choice.id || ''}" aria-pressed="${slot.selectedItemId === choice.id}"${choice.description ? ` title="${escapeHtml(choice.description)}"` : ''}${model.locked ? ' disabled' : ''}>${escapeHtml(choice.name)}</button>`).join('')}</div></section>`).join('')}</div>
     <div class="appearance-footer-v126"><p>Les tenues spéciales, le portage et les passages en véhicule ou en conduit gardent leur apparence dédiée ; vos choix sont conservés au retour.</p><button type="button" class="button compact ghost" data-appearance-reset-v126="${model.owner}"${model.locked ? ' disabled' : ''}>Rétablir la tenue Marine de ${model.owner === 'player' ? 'J1' : 'J2'}</button></div>`;
 }

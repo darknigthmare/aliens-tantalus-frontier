@@ -13,9 +13,13 @@ import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_ITEMS_V126 } from '../
 import { getHeldWeaponPoseV125, translateHeldWeaponPoseV125 } from '../src/held-weapon-renderer-v125.js';
 import { constrainPlayerMuzzleV124 } from '../src/player-control-v124.js';
 import { WEAPONS } from '../src/content-core-v50.js';
+import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
+import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
+import { resolvePlayerLocomotionRigV129 } from '../src/player-locomotion-rig-v129.js';
 
 const repository=fileURLToPath(new URL('../',import.meta.url));
-const assets=[...PLAYER_BODY_RIG_ASSETS_V125,...PLAYER_MODULAR_RIG_ASSETS_V126];
+const assets=[...PLAYER_BODY_RIG_ASSETS_V125,...PLAYER_MODULAR_RIG_ASSETS_V126,
+  ...PLAYER_TRANSIT_RIG_ASSETS_V128,...PLAYER_COLONIAL_RIG_ASSETS_V129];
 const images=new Map(assets.map(a=>[a.imageKey,{complete:true,naturalWidth:a.sourceWidth,naturalHeight:a.sourceHeight,src:a.path}]));
 const actor=patch=>({x:100,y:200,w:42,h:92,alive:true,grounded:true,facing:1,vx:0,vy:0,
   costumeId:'costume-001',weaponRigMotionV125:{distance:0,shotAt:-100,time:4},...patch});
@@ -94,11 +98,16 @@ test('every clothing selection is independent and preserves body geometry and fi
     const pose=getHeldWeaponPoseV125({actor:subject,descriptor:rifle,bodyRig,aim:{x:facing,y:0},timeSeconds:4});
     for(const item of PLAYER_APPEARANCE_ITEMS_V126){
       const appearance=normalizePlayerAppearanceV126();appearance.slots[item.slot]=item.id;
-      const r=resolvePlayerModularRigV126({bodyRig,appearance,images});
+      const selectedBody=PLAYER_COLONIAL_LEG_DEFINITIONS_V129[item.id]
+        ? resolvePlayerLocomotionRigV129({actor:subject,bodyRig,appearance,images,
+          legDefinitions:PLAYER_COLONIAL_LEG_DEFINITIONS_V129}).bodyRig : bodyRig;
+      const r=resolvePlayerModularRigV126({bodyRig:selectedBody,appearance,images});
       assert.equal(r.eligible,true);assert.equal(r.ready,true);assert.equal(r.effectiveSlots[item.slot],item.id);
-      assert.equal(r.bodyRig,bodyRig);assert.equal(JSON.stringify(bodyRig),before);
+      assert.equal(r.bodyRig,selectedBody);assert.equal(JSON.stringify(bodyRig),before);
+      assert.equal(r.bodyRig.matrix,bodyRig.matrix);assert.equal(r.bodyRig.shoulders,bodyRig.shoulders);
       assert.deepEqual(getHeldWeaponPoseV125({actor:subject,descriptor:rifle,bodyRig:r.bodyRig,aim:{x:facing,y:0},timeSeconds:4}),pose);
-      for(const l of r.layers){const s=l.sourceRect;assert.ok(s.x>=0&&s.y>=0&&s.x+s.width<=1254&&s.y+s.height<=1254);
+      for(const l of r.layers){const s=l.sourceRect;assert.ok(s.x>=0&&s.y>=0
+        &&s.x+s.width<=l.asset.sourceWidth&&s.y+s.height<=l.asset.sourceHeight);
         assert.ok(Object.values(l.matrix).every(Number.isFinite));}
     }
   }

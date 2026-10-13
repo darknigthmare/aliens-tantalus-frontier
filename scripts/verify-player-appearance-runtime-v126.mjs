@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { openSync, readSync, closeSync } from 'node:fs';
+import { openSync, readSync, closeSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GameEngine } from '../src/game-production-runtime.js';
@@ -13,11 +14,14 @@ import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, CREW, NEURO_XENO_PROFIL
 import { attachCrewDeploymentV85 } from '../src/crew-runtime-v85.js';
 import { resolveCombatAimV83 } from '../src/combat-aim-v83.js';
 import { getCostumeV119 } from '../src/franchise-costumes-v119.js';
-import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126 } from '../src/player-appearance-v126.js';
+import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126,
+  getPlayerAppearancePresetV129 } from '../src/player-appearance-v126.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_BODY_RIG_ASSETS_V125 } from '../src/player-body-rig-v125.js';
 import { PLAYER_ACTION_PROP_ASSETS_V127 } from '../src/player-action-rig-v127.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
+import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
+import { PLAYER_APPEARANCE_IMAGE_LIMIT_V129 } from '../src/player-appearance-runtime-v126.js';
 
 // Actual production, Bioforge and hub runtimes own all gameplay. The observable
 // host substitutes browser APIs only; dimensions come from shipped PNG headers.
@@ -152,8 +156,11 @@ const alternate = () => normalizePlayerAppearanceV126({ schema: 126, slots: {
 } });
 const bare = () => normalizePlayerAppearanceV126({ schema: 126,
   slots: { ...alternate().slots, helmet: null, mask: null, back: null } });
-const modularPaths = new Set(PLAYER_MODULAR_RIG_ASSETS_V126.map(asset => asset.path));
+const colonial = id => normalizePlayerAppearanceV126({ schema: 126, slots: getPlayerAppearancePresetV129(`uscm-${id}-v129`).slots });
+const modularPaths = new Set([...PLAYER_MODULAR_RIG_ASSETS_V126, ...PLAYER_TRANSIT_RIG_ASSETS_V128,
+  ...PLAYER_COLONIAL_RIG_ASSETS_V129].map(asset => asset.path));
 const oldBodyPaths = new Set(PLAYER_BODY_RIG_ASSETS_V125.filter(asset => asset.kind.startsWith('body-')).map(asset => asset.path));
+const legAsset = appearance => PLAYER_COLONIAL_LEG_DEFINITIONS_V129[appearance.slots.legs]?.asset || PLAYER_TRANSIT_RIG_ASSETS_V128[0];
 const point = value => value ? { x: value.x, y: value.y } : null;
 
 function operatorSnapshot(subject, actor = subject.actor) {
@@ -180,15 +187,12 @@ function assertComposed(subject, visual, expected, label = 'Appearance') {
   assert.equal(visual.ready, true, `${label}: the actual registered images are ready.`);
   assert.equal(visual.drawn, true, `${label}: the modular composition was drawn.`);
   assert.ok(subject.drawing.draws.some(draw => modularPaths.has(draw.source)), `${label}: new authored pixels are submitted.`);
-  for (const draw of subject.drawing.draws.filter(draw => oldBodyPaths.has(draw.source))) {
-    // Marine legs retain a reviewed anatomical crop of V125 below the waist.
-    // That exact crop is admitted; a second complete head/torso/body is not.
-    const matchingLeg = visual.layers.find(layer => layer.slot === 'legs' && layer.itemId === 'legs-marine-v126'
-      && PLAYER_BODY_RIG_ASSETS_V125.find(asset => asset.imageKey === layer.imageKey)?.path === draw.source
-      && draw.args.length === 8 && [layer.sourceRect?.x, layer.sourceRect?.y, layer.sourceRect?.width,
-        layer.sourceRect?.height].every((value, index) => value === draw.args[index]));
-    assert.ok(matchingLeg, `${label}: a V125 image may supply only the declared Marine leg crop.`);
-  }
+  assert.equal(subject.drawing.draws.filter(draw => oldBodyPaths.has(draw.source)).length, 0,
+    `${label}: independently articulated legs replace every complete V125 body crop.`);
+  const lower = visual.layers.filter(layer => layer.slot === 'legs');
+  assert.equal(lower.length, 7, `${label}: pelvis, thighs, shins and boots use seven independent parts.`);
+  assert.ok(lower.every(layer => layer.imageKey === legAsset(expected).imageKey),
+    `${label}: each lower limb comes from the selected garment's atlas.`);
   for (const slot of PLAYER_APPEARANCE_SLOTS_V126) {
     const itemId = expected.slots[slot.id];
     const layers = visual.layers.filter(layer => layer.slot === slot.id);
@@ -232,10 +236,104 @@ function assertTransit(subject, visual, actor, kind) {
   assert.equal(actor.heldWeaponVisualV125, null);
   const legs = visual.layers.filter(layer => layer.slot === 'legs');
   assert.equal(legs.length, 7, 'The pelvis, both thighs, shins and boots are independently rendered.');
-  assert.ok(legs.every(layer => layer.imageKey === PLAYER_TRANSIT_RIG_ASSETS_V128[0].imageKey));
-  assert.ok(subject.drawing.draws.some(draw => draw.source === PLAYER_TRANSIT_RIG_ASSETS_V128[0].path));
+  assert.ok(legs.every(layer => layer.imageKey === legAsset(actor.appearanceV126).imageKey));
+  assert.ok(subject.drawing.draws.some(draw => draw.source === legAsset(actor.appearanceV126).path));
   return visual.transit;
 }
+
+function assertLocomotion(subject, visual, actor = subject.actor) {
+  assertComposed(subject, visual, normalizePlayerAppearanceV126(actor.appearanceV126), 'V129 locomotion');
+  const locomotion = visual.locomotion;
+  assert.equal(locomotion?.schema, 129); assert.equal(locomotion.drawn, true);
+  assert.equal(visual.transit, null);
+  for (const contact of Object.values(locomotion.contacts.feet)) {
+    if (contact.planted) {
+      assert.equal(actor.grounded, true, 'Only actual physical grounding admits floor contact.');
+      near(contact.point.y, actor.y + actor.h, 'The rendered sole meets the resolved floor');
+    }
+  }
+  return locomotion;
+}
+
+test('the five colonial pages use their measured PNG dimensions and registered content hashes', () => {
+  assert.equal(PLAYER_COLONIAL_RIG_ASSETS_V129.length, 5);
+  for (const asset of PLAYER_COLONIAL_RIG_ASSETS_V129) {
+    assert.deepEqual(dimensions(asset.path), { width: asset.sourceWidth, height: asset.sourceHeight }, asset.imageKey);
+    assert.equal(createHash('sha256').update(readFileSync(resolve(repository, `.${asset.path}`))).digest('hex'), asset.sha256);
+  }
+});
+
+for (const role of ['player', 'coop']) test(`${role} colonial garments keep seven independent legs through physical movement, crouch, jump, landing and pause`, async () => {
+  const subject = fixture({ playerAppearanceV126: colonial('hicks'), coopAppearanceV126: colonial('smartgunner') });
+  const { engine } = subject; engine.setCoop(true);
+  const actor = engine[role], other = engine[role === 'player' ? 'coop' : 'player'];
+  const right = role === 'player' ? 'KeyD' : 'KeyL', crouch = role === 'player' ? 'KeyZ' : 'Comma';
+  const jump = role === 'player' ? 'Space' : 'KeyU';
+  await readyAppearance(subject, actor); await readyAppearance(subject, other);
+  advance(engine, 1 / 120);
+  const neutral = assertLocomotion(subject, drawActor(subject, actor), actor);
+  const x = actor.x, otherState = structuredClone(other.playerLocomotionStateV129);
+  subject.key('keydown', right); advance(engine, .24);
+  assert.ok(actor.x > x && actor.playerLocomotionStateV129.distance > 0);
+  assert.equal(actor.playerLocomotionStateV129.x, actor.x, 'The stored observation follows the actual post-collision position.');
+  assert.equal(operatorSnapshot(subject, actor).visual.drawn, false, 'A new physical phase cannot reuse a stale drawn status.');
+  const walking = assertLocomotion(subject, drawActor(subject, actor), actor);
+  assert.notEqual(walking.phase, neutral.phase);
+  assert.equal(other.playerLocomotionStateV129.distance, otherState.distance, 'The other operator gains no shared gait distance.');
+  const state = structuredClone(actor.playerLocomotionStateV129), before = combatState(actor);
+  for (let count = 0; count < 4; count++) { drawActor(subject, actor); operatorSnapshot(subject, actor); }
+  assert.deepEqual(actor.playerLocomotionStateV129, state); assert.deepEqual(combatState(actor), before);
+  engine.togglePause(); advance(engine, .4);
+  assert.deepEqual(actor.playerLocomotionStateV129, state);
+  assert.deepEqual(assertLocomotion(subject, drawActor(subject, actor), actor).contacts, walking.contacts);
+  engine.togglePause(); subject.key('keyup', right); advance(engine, .8);
+  const idle = assertLocomotion(subject, drawActor(subject, actor), actor);
+  assert.equal(idle.mode, 'idle'); assert.ok(Object.values(idle.contacts.feet).every(contact => contact.planted));
+
+  subject.key('keydown', crouch); subject.key('keydown', right); advance(engine, .2);
+  assert.equal(actor.crouching, true);
+  assert.equal(assertLocomotion(subject, drawActor(subject, actor), actor).mode, 'crouch-move');
+  subject.key('keyup', right); subject.key('keyup', crouch); advance(engine, .8);
+  subject.key('keydown', jump); advance(engine, .08); subject.key('keyup', jump);
+  assert.equal(actor.grounded, false);
+  const airborne = assertLocomotion(subject, drawActor(subject, actor), actor);
+  assert.equal(airborne.mode, 'airborne');
+  assert.ok(Object.values(airborne.contacts.feet).every(contact => !contact.planted));
+  advance(engine, 1.5);
+  assert.equal(actor.grounded, true);
+  assertLocomotion(subject, drawActor(subject, actor), actor);
+  const saved = engine.captureResumeState();
+  assert.equal(Object.hasOwn(saved[role], 'playerLocomotionStateV129'), false,
+    'Transient foot phases are not persisted into gameplay checkpoints.');
+  engine.stop();
+  for (const operator of [actor, other]) {
+    assert.equal(operator.playerLocomotionStateV129, undefined); assert.equal(operator.playerLocomotionVisualV129, null);
+  }
+  const restored = fixture({ ...subject.start, resumeState: saved });
+  assert.equal(restored.engine.lastResumeResult.applied, true);
+  await readyAppearance(restored, restored.engine[role]);
+  assert.equal(restored.engine[role].playerLocomotionStateV129.distance, 0);
+  assert.equal(restored.engine[role].playerLocomotionStateV129.hasWalked, false,
+    'Resuming initializes current contacts without replaying the previous walk.');
+  restored.engine.stop();
+});
+
+test('ordinary soles claim support only inside a real narrow platform, without changing the firing rig', async () => {
+  const subject = fixture({ playerAppearanceV126: colonial('infantry') });
+  const { engine, actor } = subject;
+  engine.platforms = [{ id: 'qa-narrow-platform', x: 185, y: 930, w: 20, h: 40 }];
+  advance(engine, 1 / 120); assert.equal(actor.grounded, true);
+  await readyAppearance(subject);
+  const pose = await readyPose(subject), decorated = engine.decoratePlayerAppearanceBodyV129(actor, pose.bodyRig);
+  for (const key of ['matrix', 'pivot', 'shoulders', 'neutralGrip', 'armLengths']) {
+    assert.equal(decorated[key], pose.bodyRig[key], `${key} retains the accepted body geometry by reference.`);
+  }
+  const visual = assertLocomotion(subject, drawActor(subject), actor);
+  const outside = Object.values(visual.contacts.feet).filter(contact => contact.point.x < 185 || contact.point.x > 205);
+  assert.ok(outside.length > 0, 'The actual body overhangs one platform edge in this fixture.');
+  assert.ok(outside.every(contact => !contact.planted), 'An overhanging boot cannot report a fictional floor contact.');
+  assert.deepEqual(geometry(await readyPose(subject)), geometry(pose));
+});
 
 for (const role of ['player', 'coop']) test(`${role} wears its seven leg pieces on a real ladder, holds its rungs and exits through real input`, async () => {
   const subject = fixture({ playerAppearanceV126: alternate(), coopAppearanceV126: bare() });
@@ -341,7 +439,9 @@ test('a delayed segmented-leg atlas uses the complete fallback and cannot restor
   const asset = PLAYER_TRANSIT_RIG_ASSETS_V128[0];
   for (const ending of ['exit', 'stop']) {
     const subject = fixture({ playerAppearanceV126: alternate() }, { holdImages: path => path === asset.path });
-    const { engine, actor } = subject; await readyAppearance(subject);
+    const { engine, actor } = subject; await subject.flush();
+    const ordinary = drawActor(subject);
+    assert.equal(ordinary.ready, false); assert.equal(ordinary.drawn, false);
     engine.ladders = [{ id: 'qa-delayed-ladder', x: actor.x + actor.w / 2, top: 500, bottom: 930, w: 32 }];
     subject.key('keydown', 'KeyW'); advance(engine, .4); subject.key('keyup', 'KeyW');
     const waiting = drawActor(subject); assert.equal(waiting.supported, true); assert.equal(waiting.ready, false);
@@ -358,12 +458,15 @@ test('a delayed segmented-leg atlas uses the complete fallback and cannot restor
     if (ending === 'exit') {
       const normal = await readyAppearance(subject); assert.equal(normal.transit, null);
       assert.equal(actor.playerTransitVisualV128, null);
-      assert.equal(subject.drawing.draws.some(draw => draw.source === asset.path), false);
+      assert.equal(normal.locomotion?.drawn, true);
+      assert.equal(subject.drawing.draws.some(draw => draw.source === asset.path), true,
+        'The loaded segments now belong to current ordinary locomotion, never the exited ladder.');
     } else {
       engine.draw(); await subject.flush();
       assert.equal(subject.requests.length, requests);
       assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
       assert.equal(actor.playerTransitStateV128, undefined); assert.equal(actor.playerTransitVisualV128, null);
+      assert.equal(actor.playerLocomotionStateV129, undefined); assert.equal(actor.playerLocomotionVisualV129, null);
     }
   }
 });
@@ -438,7 +541,7 @@ test('swapping cosmetic pieces during a real reload preserves resources, transac
   assert.equal(subject.actor.reloading, true);
   const before = combatState(subject.actor), pose = await readyPose(subject);
   assert.ok(pose.reloadProgress > 0 && pose.reloadProgress < 1);
-  for (const appearance of [standard(), bare(), alternate()]) {
+  for (const appearance of [standard(), bare(), alternate(), colonial('infantry'), colonial('hicks'), colonial('hudson'), colonial('smartgunner')]) {
     subject.actor.appearanceV126 = appearance;
     await readyAppearance(subject);
     assert.deepEqual(combatState(subject.actor), before, 'Appearance drawing cannot spend, refill or cancel a reload.');
@@ -458,7 +561,7 @@ test('separated clothes preserve mirrored and crouched IK and the actual accepte
     const aim = resolveCombatAimV83({ x: direction[0], y: direction[1], facing: direction[0] });
     Object.assign(subject.actor, stance, { aimingV124: true, facing: aim.facing, combatAimV83: aim, pointerAimV83: aim });
     let reference, emitted;
-    for (const appearance of [standard(), bare()]) {
+    for (const appearance of [standard(), bare(), colonial('hicks'), colonial('smartgunner')]) {
       subject.actor.appearanceV126 = appearance;
       const pose = await readyPose(subject, subject.actor, aim);
       await readyAppearance(subject);
@@ -721,32 +824,40 @@ test('an unarmed coop operator still wears their modular kit with no hidden or d
   assert.deepEqual(combatState(subject.engine.coop), before);
 });
 
-test('the real hub composes a neutral selected kit and only physical movement advances its gait', async () => {
+for (const appearance of [bare(), colonial('hudson')]) test(`the real hub moves ${appearance.slots.torso} only from physical displacement`, async () => {
   const host = browserHost(), hub = new HubGame(host.canvas);
-  hub.playerAppearanceV126 = bare(); hub.start(); await host.flush();
+  hub.playerAppearanceV126 = appearance; hub.start(); await host.flush();
   host.drawing.reset(); hub.drawPlayer(host.drawing.ctx); host.drawing.assertBalanced();
   let status = hub.getSnapshot().playerAppearanceV126;
-  assertComposed(host, status.visual, bare(), 'Hub');
+  assertComposed(host, status.visual, appearance, 'Hub');
   assert.equal(status.visual.surface, 'hub'); assert.ok(!hub.player.heldWeaponVisualV125);
-  assert.equal(status.images.retained, 6, 'The hub uses the same three modular and three body pages.');
+  assert.equal(status.images.assets.find(asset => asset.imageKey === legAsset(appearance).imageKey)?.state, 'ready');
+  assert.equal(status.images.assets.some(asset => asset.imageKey === PLAYER_MODULAR_RIG_ASSETS_V126[1].imageKey), false,
+    'The old whole lower-body page is unnecessary when the selected legs are articulated.');
   const x = hub.player.x;
   host.key('keydown', 'KeyD');
   for (let frame = 0; frame < 20; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken);
   host.key('keyup', 'KeyD');
   assert.ok(hub.player.x > x); assert.ok(hub.player.weaponRigMotionV125?.distance > 0);
   const motion = structuredClone(hub.player.weaponRigMotionV125);
+  const locomotion = structuredClone(hub.player.playerLocomotionStateV129);
+  assert.ok(locomotion.distance > 0); assert.equal(locomotion.x, hub.player.x);
   hub.drawPlayer(host.drawing.ctx); hub.drawPlayer(host.drawing.ctx);
   assert.deepEqual(hub.player.weaponRigMotionV125, motion, 'Drawing cannot advance the walking phase.');
+  assert.deepEqual(hub.player.playerLocomotionStateV129, locomotion);
+  assertLocomotion(host, hub.getSnapshot().playerAppearanceV126.visual, hub.player);
   assert.equal(hub.pause(), true);
   hub.loop(hub.last + 1000, hub.loopToken);
   assert.deepEqual(hub.player.weaponRigMotionV125, motion, 'A paused hub does not advance clothing motion.');
+  assert.deepEqual(hub.player.playerLocomotionStateV129, locomotion);
   hub.stop(false); status = hub.getSnapshot().playerAppearanceV126;
   assert.equal(status.images.retained, 0); assert.equal(hub.player.playerAppearanceVisualV126, null);
+  assert.equal(hub.player.playerLocomotionStateV129, undefined); assert.equal(hub.player.playerLocomotionVisualV129, null);
 });
 
 test('a real annex ladder uses its physical rectangle and drawn rungs without requiring a player ladder id', async () => {
   const host = browserHost(), hub = new HubGame(host.canvas);
-  hub.playerAppearanceV126 = alternate(); hub.start();
+  hub.playerAppearanceV126 = colonial('hicks'); hub.start();
   assert.ok(hub.beginAnnexTransitionV71('logistics', 'enter'));
   const frames = count => { for (let frame = 0; frame < count; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken); };
   frames(30); await host.flush();
@@ -770,7 +881,7 @@ test('a real annex ladder uses its physical rectangle and drawn rungs without re
   assert.ok(rungs.length > 0, 'The real annex renderer submits its authored ladder rungs.');
   host.drawing.reset(); hub.drawPlayer(host.drawing.ctx); host.drawing.assertBalanced();
   const visual = hub.getSnapshot().playerAppearanceV126.visual, climbing = visual.transit;
-  assertComposed(host, visual, alternate(), 'Annex ladder');
+  assertComposed(host, visual, colonial('hicks'), 'Annex ladder');
   assert.equal(climbing?.kind, 'climb'); assert.equal(climbing.drawn, true);
   assert.equal(climbing.contacts.ladderId, ladder.id); assert.equal(climbing.firing, false);
   assert.equal(visual.layers.filter(layer => layer.slot === 'legs').length, 7);
@@ -801,7 +912,7 @@ test('a real annex ladder uses its physical rectangle and drawn rungs without re
 
 test('the real Port Meridien ladder keeps modular hands and boots on its own authored rung spacing', async () => {
   const host = browserHost(), hub = new HubGame(host.canvas, { onAction: () => true });
-  hub.playerAppearanceV126 = alternate();
+  hub.playerAppearanceV126 = colonial('smartgunner');
   hub.start({}, {
     onboardingV84: { ...createPlayerOnboardingV84({ name: 'Alex Ward', callsign: 'ECHO-9' }), phase: 'complete' },
     openingV88: { schema: 88, phase: 'ready', freight: 'energy', qualificationId: 'm41a-qualification-v81:session-1:qualification' },
@@ -823,7 +934,7 @@ test('the real Port Meridien ladder keeps modular hands and boots on its own aut
   assert.ok(rungs.length > 1);
   near(rungs[1].y - rungs[0].y, 24, 'The quay draws its own 24 px rung spacing');
   const visual = actor.playerAppearanceVisualV126, climbing = visual.transit;
-  assertComposed(host, visual, alternate(), 'Port ladder');
+  assertComposed(host, visual, colonial('smartgunner'), 'Port ladder');
   assert.equal(climbing?.kind, 'climb'); assert.equal(climbing.drawn, true);
   assert.equal(visual.layers.filter(layer => layer.slot === 'legs').length, 7);
   const planted = [...Object.values(climbing.contacts.feet), ...Object.values(climbing.contacts.hands)]
@@ -873,16 +984,19 @@ test('a real hangar electrical contact keeps the modular outfit and preserves it
 
 test('Bioforge initializes and restores its own kit while keeping the accepted weapon origin aligned', async () => {
   const host = browserHost(), engine = new BioforgeRuntimeV80(host.canvas, { autoLoop: false });
-  const options = { profileId: 'enemy-004-drone-big-chap', quantity: 1, autoLoop: false, playerAppearanceV126: alternate() };
+  const options = { profileId: 'enemy-004-drone-big-chap', quantity: 1, autoLoop: false, playerAppearanceV126: colonial('infantry') };
   assert.equal(engine.start(options).started, true);
   const subject = { ...host, engine, actor: engine.player };
   const visual = await readyAppearance(subject); assert.equal(visual.surface, 'bioforge');
-  assert.deepEqual(engine.captureBioforgeRuntimeStateV81().player.appearanceV126, alternate());
+  assertLocomotion(subject, visual);
+  advance(engine, .025); assert.equal(engine.player.playerLocomotionStateV129?.schema, 129);
+  assert.deepEqual(engine.captureBioforgeRuntimeStateV81().player.appearanceV126, colonial('infantry'));
+  assert.equal(Object.hasOwn(engine.captureBioforgeRuntimeStateV81().player, 'playerLocomotionStateV129'), false);
   const resume = engine.captureBioforgeResumeStateV80();
   const resumedHost = browserHost(), resumed = new BioforgeRuntimeV80(resumedHost.canvas, { autoLoop: false });
   assert.equal(resumed.start({ ...options, playerAppearanceV126: bare(), resumeState: resume }).started, true);
   const restored = { ...resumedHost, engine: resumed, actor: resumed.player };
-  await readyAppearance(restored); assert.deepEqual(resumed.player.appearanceV126, alternate());
+  await readyAppearance(restored); assert.deepEqual(resumed.player.appearanceV126, colonial('infantry'));
   resumed.bioforgeRootV80.activeSession.phase = 'combat';
   resumed.player.gamepadAimV83 = { x: 1, y: 0 };
   assert.equal(resumed.fire(resumed.player), true);
@@ -976,19 +1090,21 @@ test('Bioforge stop releases both ready and pending pages and only a new prepara
   }
 });
 
-test('maximal J1/J2 kits share three pages, avoid repeated loads and release scene-owned images', async () => {
-  assert.equal(PLAYER_MODULAR_RIG_ASSETS_V126.length, 3);
+test('maximal legacy J1/J2 kits share selected pages, avoid repeated loads and release scene-owned images', async () => {
   const subject = fixture({ playerAppearanceV126: alternate(), coopAppearanceV126: standard() });
   subject.engine.setCoop(true);
   assert.equal(attachCrewDeploymentV85(subject.engine.coop, { ...CREW[1],
     gearV85: [{ instanceId: 'qa-v126-bravo-pistol', catalogId: 'weapon-003-m4a3-service-pistol', kind: 'weapon' }] }), true);
   await readyAppearance(subject); await readyAppearance(subject, subject.engine.coop);
   const cache = subject.engine.playerAppearanceSnapshotV126().images;
-  assert.equal(cache.limit, 12); assert.ok(cache.retained <= 12); assert.equal(cache.loading, 0); assert.equal(cache.failed, 0);
-  for (const asset of PLAYER_MODULAR_RIG_ASSETS_V126) {
+  assert.equal(cache.limit, PLAYER_APPEARANCE_IMAGE_LIMIT_V129); assert.ok(cache.retained <= cache.limit);
+  assert.equal(cache.loading, 0); assert.equal(cache.failed, 0);
+  for (const asset of [PLAYER_MODULAR_RIG_ASSETS_V126[0], PLAYER_MODULAR_RIG_ASSETS_V126[2], PLAYER_TRANSIT_RIG_ASSETS_V128[0]]) {
     assert.equal(cache.assets.find(entry => entry.imageKey === asset.imageKey)?.state, 'ready');
     assert.equal(subject.requests.filter(path => path === asset.path).length, 1, 'Operators share each scene-owned part page.');
   }
+  for (const asset of PLAYER_COLONIAL_RIG_ASSETS_V129) assert.equal(subject.requests.includes(asset.path), false,
+    'A legacy selection never fetches unselected colonial art.');
   const requested = subject.requests.length;
   for (let frame = 0; frame < 12; frame++) {
     subject.engine.preparePlayerWeaponAssetsV125(); drawActor(subject); drawActor(subject, subject.engine.coop);
@@ -997,4 +1113,42 @@ test('maximal J1/J2 kits share three pages, avoid repeated loads and release sce
   subject.engine.stop();
   assert.equal(subject.engine.playerAppearanceSnapshotV126().images.retained, 0);
   assert.equal(subject.actor.playerAppearanceVisualV126, null); assert.equal(subject.engine.coop.playerAppearanceVisualV126, null);
+});
+
+test('mixed colonial J1/J2 garments, opposite torso views and independent active tools fit the selected scene cache', async () => {
+  const primary = normalizePlayerAppearanceV126({ schema: 126, slots: { ...colonial('hicks').slots,
+    arms: 'arms-utility-v126', legs: 'legs-utility-v126', mask: 'mask-rebreather-v126' } });
+  const secondary = normalizePlayerAppearanceV126({ schema: 126, slots: { ...colonial('smartgunner').slots,
+    helmet: 'helmet-patrol-v126', torso: 'torso-hudson-v129', back: 'back-radio-v126' } });
+  const subject = fixture({ playerAppearanceV126: primary, coopAppearanceV126: secondary });
+  const { engine, actor } = subject; engine.setCoop(true); engine.coop.facing = -1;
+  assert.equal(attachCrewDeploymentV85(engine.coop, { ...CREW[1],
+    gearV85: [{ instanceId: 'qa-v129-bravo-pistol', catalogId: 'weapon-003-m4a3-service-pistol', kind: 'weapon' },
+      { instanceId: 'qa-v129-bravo-medkit', catalogId: 'equipment-006-medkit', kind: 'equipment' }] }), true);
+  await readyAppearance(subject); await readyAppearance(subject, engine.coop);
+  const carried = [engine.heldWeaponDescriptorV125(actor).id, engine.heldWeaponDescriptorV125(engine.coop).id];
+  actor.health = 30; engine.coop.health = 30;
+  assert.equal(engine.activateTracker(actor), true); assert.equal(engine.useMedkit(engine.coop), true);
+  const resources = [combatState(actor), combatState(engine.coop)], kits = engine.inventory.medkits;
+  const first = await readyAppearance(subject), second = await readyAppearance(subject, engine.coop);
+  assert.equal(first.action.mode, 'motion-tracker'); assert.equal(second.action.mode, 'medical');
+  assert.equal(first.locomotion?.drawn, true); assert.equal(second.locomotion?.drawn, true);
+  assert.deepEqual(first.selected, primary); assert.deepEqual(second.selected, secondary);
+  const cache = engine.playerAppearanceSnapshotV126().images, required = engine.collectPlayerWeaponAssetsV125();
+  assert.equal(cache.limit, PLAYER_APPEARANCE_IMAGE_LIMIT_V129);
+  assert.ok(required.length > 12, 'This admitted mixed loadout exercises more pages than the former cache capacity.');
+  assert.ok(cache.retained <= cache.limit && required.length <= cache.limit && !cache.loading && !cache.failed);
+  for (const asset of required) assert.ok(cache.assets.some(entry => entry.imageKey === asset.imageKey
+    && entry.pinned && entry.state === 'ready'), `${asset.imageKey} is retained for the actual selected graph.`);
+  for (const asset of PLAYER_COLONIAL_RIG_ASSETS_V129.filter(entry => entry.kind.startsWith('torso-'))) {
+    assert.equal(subject.requests.filter(path => path === asset.path).length, 1, 'Opposite views are shared and loaded once.');
+  }
+  assert.equal(subject.requests.includes(PLAYER_MODULAR_RIG_ASSETS_V126[1].path), false,
+    'Whole lower-body images are not preloaded alongside selected segmented legs.');
+  const requested = subject.requests.length;
+  for (let count = 0; count < 8; count++) { drawActor(subject); drawActor(subject, engine.coop); engine.playerAppearanceSnapshotV126(); }
+  assert.equal(subject.requests.length, requested);
+  assert.deepEqual([combatState(actor), combatState(engine.coop)], resources); assert.equal(engine.inventory.medkits, kits);
+  assert.deepEqual([engine.heldWeaponDescriptorV125(actor).id, engine.heldWeaponDescriptorV125(engine.coop).id], carried);
+  engine.stop(); assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
 });

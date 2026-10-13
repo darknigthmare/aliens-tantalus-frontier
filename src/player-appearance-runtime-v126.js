@@ -1,13 +1,40 @@
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { PLAYER_BODY_RIG_ASSETS_V125, resolvePlayerBodyRigV125 } from './player-body-rig-v125.js';
-import { PLAYER_MODULAR_RIG_ASSETS_V126, resolvePlayerModularRigV126,
+import { resolvePlayerModularRigV126,
   drawPlayerModularRigV126 } from './player-modular-rig-v126.js';
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { resolvePlayerActionStateV127, resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-action-rig-v127.js';
 import { advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128 } from './player-transit-rig-v128.js';
+import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
+import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
+const bodyAssetKeys = new Set(PLAYER_BODY_RIG_ASSETS_V125.map(asset => asset.imageKey));
+// Two independently dressed operators can share old and new pieces, opposite
+// facing torso pages, two carried weapons, a pickup and two active implements.
+export const PLAYER_APPEARANCE_IMAGE_LIMIT_V129 = 16;
+
+/** Only actual collision surfaces at the actor's resolved support plane may
+ * claim a planted sole. Adjacent platforms remain independent segments. */
+export function playerAppearanceGroundSupportV129(actor, surfaces = []) {
+  if (!actor || actor.grounded !== true) return [];
+  const floor = actor.y + actor.h;
+  return surfaces.filter(surface => [surface?.x, surface?.y, surface?.w].every(Number.isFinite)
+    && surface.w > 0 && Math.abs(surface.y - floor) < .01)
+    .map(surface => ({ left: surface.x, right: surface.x + surface.w, y: surface.y }));
+}
+
+export function playerAppearanceVisualIsCurrentV129(last, status) {
+  return Boolean(last?.supported && status.supported && status.ready
+    && JSON.stringify(last.selected) === JSON.stringify(status.selected)
+    && last.bodyFrame === status.bodyFrame && last.bodyAtlas === status.bodyAtlas
+    && last.action?.kind === status.action?.kind && last.action?.serial === status.action?.serial
+    && last.transit?.kind === status.transit?.kind && last.transit?.phase === status.transit?.phase
+    && last.locomotion?.mode === status.locomotion?.mode && last.locomotion?.phase === status.locomotion?.phase
+    && JSON.stringify(last.locomotion?.contacts) === JSON.stringify(status.locomotion?.contacts)
+    && (!(status.action || status.transit || status.locomotion) || last.sampledAt === status.sampledAt));
+}
 const actionStatusV127 = (action, render) => !action?.eligible ? null : {
   schema: 127, kind: action.kind, mode: action.mode, phase: action.phase,
   progress: action.progress, elapsed: action.elapsed, duration: action.duration,
@@ -44,6 +71,8 @@ export function playerAppearanceStatusV126({ actor, appearance = actor?.appearan
     bodyAtlas: bodyRig?.atlas || null,
     action: actionStatusV127(actionRig, render), sampledAt: bodyRig?.timeSeconds ?? null,
     transit: transitStatusV128(transitRig, render),
+    locomotion: bodyRig?.locomotionV129 ? { ...bodyRig.locomotionV129,
+      drawn: Boolean(ready && render?.schema === 126 && render.drawn) } : null,
     layers: render?.schema === 126 && render.drawn ? render.layers || [] : [],
     visualStatus: render?.schema === 126 && render.drawn ? render.visualStatus : null };
 }
@@ -90,20 +119,40 @@ export function withPlayerAppearanceV126(Base) {
 
     observePlayerTransitV128(actor) {
       return advancePlayerTransitStateV128(actor?.playerTransitStateV128, actor, finite(this.animationTime), {
-        context: this.playerWeaponSurfaceV125(), ladder: this.playerAppearanceLadderV128(actor)
+        context: this.playerAppearanceContextV129(), ladder: this.playerAppearanceLadderV128(actor)
       });
+    }
+
+    playerAppearanceContextV129() {
+      return `${this.playerWeaponSurfaceV125()}:${this.missionLevelRuntime?.currentRoomId || this.activeRoomId || this.room || ''}`;
+    }
+
+    observePlayerLocomotionV129(actor) {
+      return advancePlayerLocomotionStateV129(actor?.playerLocomotionStateV129, actor, finite(this.animationTime), {
+        context: this.playerAppearanceContextV129(), surface: this.playerWeaponSurfaceV125()
+      });
+    }
+
+    decoratePlayerAppearanceBodyV129(actor, bodyRig) {
+      return resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance: actor?.appearanceV126,
+        images: this.images, locomotionState: actor?.playerLocomotionStateV129,
+        legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
+        groundSupport: playerAppearanceGroundSupportV129(actor, this.platforms) }).bodyRig;
     }
 
     advancePlayerWeaponActorV125(actor) {
       const motion = super.advancePlayerWeaponActorV125(actor);
-      if (actor) actor.playerTransitStateV128 = this.observePlayerTransitV128(actor);
+      if (actor) {
+        actor.playerTransitStateV128 = this.observePlayerTransitV128(actor);
+        actor.playerLocomotionStateV129 = this.observePlayerLocomotionV129(actor);
+      }
       return motion;
     }
 
     resolvePlayerAppearanceTransitV128(actor = this.player, options = {}) {
       return resolvePlayerTransitRigV128({ ...this.playerAppearanceRigOptionsV127(actor, options),
         appearance: actor?.appearanceV126, ladder: this.playerAppearanceLadderV128(actor),
-        transitState: this.observePlayerTransitV128(actor) });
+        transitState: this.observePlayerTransitV128(actor), legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129 });
     }
 
     resolvePlayerAppearanceActionV127(actor = this.player, options = {}) {
@@ -114,14 +163,16 @@ export function withPlayerAppearanceV126(Base) {
         id: target.id || target.instanceId || null, x: target.x, y: target.y, w: target.w, h: target.h
       } : null;
       return resolvePlayerActionRigV127({ ...this.playerAppearanceRigOptionsV127(actor, options),
-        appearance: actor?.appearanceV126, weaponDescriptor: this.heldWeaponDescriptorV125(actor), actionTarget });
+        appearance: actor?.appearanceV126, weaponDescriptor: this.heldWeaponDescriptorV125(actor), actionTarget,
+        decorateBodyRigV129: bodyRig => this.decoratePlayerAppearanceBodyV129(actor, bodyRig) });
     }
 
     resolvePlayerAppearanceBodyV126(actor = this.player, options = {}) {
       const transit = this.resolvePlayerAppearanceTransitV128(actor, options);
       if (transit.eligible) return transit.bodyRig;
       const action = this.resolvePlayerAppearanceActionV127(actor, options);
-      return action?.eligible ? action.bodyRig : resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor, options));
+      return action?.eligible ? action.bodyRig : this.decoratePlayerAppearanceBodyV129(actor,
+        resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor, options)));
     }
 
     beginPlayerWeaponShotV125(actor) {
@@ -138,14 +189,17 @@ export function withPlayerAppearanceV126(Base) {
     }
 
     collectPlayerWeaponAssetsV125() {
-      const assets = super.collectPlayerWeaponAssetsV125();
+      // The base contributes the carried weapons and selected pickup. Body
+      // pages are retained below from each admitted pose and selected pieces.
+      const assets = super.collectPlayerWeaponAssetsV125().filter(asset => !bodyAssetKeys.has(asset.imageKey));
       for (const actor of this.playerWeaponActorsV125()) {
         const transit = this.resolvePlayerAppearanceTransitV128(actor);
-        const action = this.resolvePlayerAppearanceActionV127(actor);
-        // An unarmed operator still has clothing. All operators share the same
-        // three modular pages, so six slots do not create six loads per actor.
-        if (this.resolvePlayerAppearanceBodyV126(actor).eligible) {
-          assets.push(...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126);
+        const action = transit.eligible ? null : this.resolvePlayerAppearanceActionV127(actor);
+        const bodyRig = transit.eligible ? transit.bodyRig : action?.eligible ? action.bodyRig
+          : this.decoratePlayerAppearanceBodyV129(actor, resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor)));
+        if (bodyRig?.eligible) {
+          const modular = resolvePlayerModularRigV126({ bodyRig, appearance: actor.appearanceV126, images: this.images });
+          assets.push(...bodyRig.requiredAssets, ...modular.requiredAssets);
           // Keep the actual carried weapon warm while the hands work with a
           // tool. Returning to the weapon must not reload its sprite page.
           const weapon = resolveHeldWeaponProfileV125(this.heldWeaponDescriptorV125(actor));
@@ -157,10 +211,17 @@ export function withPlayerAppearanceV126(Base) {
       return [...new Map(assets.map(asset => [asset.imageKey, asset])).values()];
     }
 
+    preparePlayerWeaponAssetsV125() {
+      if (this.weaponImageCacheV125) this.weaponImageCacheV125.maxImages = PLAYER_APPEARANCE_IMAGE_LIMIT_V129;
+      return super.preparePlayerWeaponAssetsV125();
+    }
+
     drawPlayerBodyCompositionV125(ctx, actor, options) {
-      const render = drawPlayerModularRigV126(ctx, { ...options, appearance: actor.appearanceV126 });
+      const bodyRig = this.decoratePlayerAppearanceBodyV129(actor, options.bodyRig);
+      const render = drawPlayerModularRigV126(ctx, { ...options, bodyRig, appearance: actor.appearanceV126 });
       actor.playerAppearanceVisualV126 = playerAppearanceStatusV126({ actor,
-        bodyRig: options.bodyRig, images: this.images, render });
+        bodyRig, images: this.images, render });
+      actor.playerLocomotionVisualV129 = actor.playerAppearanceVisualV126.locomotion;
       return render.drawn ? render : super.drawPlayerBodyCompositionV125(ctx, actor, options);
     }
 
@@ -178,6 +239,7 @@ export function withPlayerAppearanceV126(Base) {
         actor.playerAppearanceVisualV126 = status;
         actor.playerTransitVisualV128 = status.transit;
         actor.playerActionVisualV127 = null;
+        actor.playerLocomotionVisualV129 = null;
         actor.heldWeaponVisualV125 = null;
         actor.heldWeaponVisualV95 = null;
         return render.drawn ? render : null;
@@ -193,6 +255,7 @@ export function withPlayerAppearanceV126(Base) {
           images: this.images, render, actionRig: readyAction });
         actor.playerAppearanceVisualV126 = status;
         actor.playerActionVisualV127 = status.action;
+        actor.playerLocomotionVisualV129 = status.locomotion;
         actor.heldWeaponVisualV125 = null;
         actor.heldWeaponVisualV95 = null;
         return render.drawn ? render : null;
@@ -200,6 +263,7 @@ export function withPlayerAppearanceV126(Base) {
       actor.playerActionVisualV127 = null;
       const bodyRig = this.resolvePlayerAppearanceBodyV126(actor, options);
       actor.playerAppearanceVisualV126 = playerAppearanceStatusV126({ actor, bodyRig, images: this.images });
+      actor.playerLocomotionVisualV129 = actor.playerAppearanceVisualV126.locomotion;
       const held = super.drawPlayerWeaponRigV125(ctx, actor, options);
       if (held) return held;
 
@@ -215,6 +279,7 @@ export function withPlayerAppearanceV126(Base) {
         appearance: actor.appearanceV126, images: this.images });
       actor.playerAppearanceVisualV126 = playerAppearanceStatusV126({ actor,
         bodyRig: readyBody, images: this.images, render });
+      actor.playerLocomotionVisualV129 = actor.playerAppearanceVisualV126.locomotion;
       actor.heldWeaponVisualV125 = null;
       return render.drawn ? render : null;
     }
@@ -236,8 +301,11 @@ export function withPlayerAppearanceV126(Base) {
       }
       for (const actor of [this.player, this.coop].filter(Boolean)) {
         delete actor.playerTransitStateV128;
+        delete actor.playerLocomotionStateV129;
         actor.playerTransitVisualV128 = null;
+        actor.playerLocomotionVisualV129 = null;
         actor.playerTransitStateV128 = this.observePlayerTransitV128(actor);
+        actor.playerLocomotionStateV129 = this.observePlayerLocomotionV129(actor);
       }
       this.preparePlayerWeaponAssetsV125();
       return result;
@@ -249,7 +317,9 @@ export function withPlayerAppearanceV126(Base) {
         actor.playerAppearanceVisualV126 = null;
         actor.playerActionVisualV127 = null;
         actor.playerTransitVisualV128 = null;
+        actor.playerLocomotionVisualV129 = null;
         delete actor.playerTransitStateV128;
+        delete actor.playerLocomotionStateV129;
       }
     }
 
@@ -262,12 +332,7 @@ export function withPlayerAppearanceV126(Base) {
           const status = playerAppearanceStatusV126({ actor, bodyRig, images: this.images,
             actionRig: transit.eligible ? null : action, transitRig: transit });
           const last = actor.playerAppearanceVisualV126;
-          const same = last && last.supported && status.supported && status.ready
-            && JSON.stringify(last.selected) === JSON.stringify(status.selected)
-            && last.bodyFrame === status.bodyFrame && last.bodyAtlas === status.bodyAtlas
-            && last.action?.kind === status.action?.kind && last.action?.serial === status.action?.serial
-            && last.transit?.kind === status.transit?.kind && last.transit?.phase === status.transit?.phase
-            && (!(status.action || status.transit) || last.sampledAt === status.sampledAt);
+          const same = playerAppearanceVisualIsCurrentV129(last, status);
           return { id: actor.operatorId || actor.crewId || (actor === this.player ? 'player' : 'coop'),
             role: actor === this.player ? 'player' : 'coop', selected: status.selected,
             visual: same ? { ...last, ready: status.ready } : status };

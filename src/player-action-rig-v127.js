@@ -313,7 +313,13 @@ export function resolvePlayerActionRigV127(options = {}) {
   const { actor, images, appearance = actor?.appearanceV126 } = options;
   const action = resolvePlayerActionStateV127(options);
   if (!action.eligible) return freeze({ ...action, ready: false, bodyRig: null, handPose: null, props: [], requiredAssets: [] });
-  const { bodyRig, observed } = actionBody(actor, action, options);
+  const constructed = actionBody(actor, action, options);
+  const observed = constructed.observed;
+  // A presentation decorator may replace the lower layers, while the action
+  // keeps its original shoulders, hand targets and implement contacts.
+  const bodyRig = typeof options.decorateBodyRigV129 === 'function' && constructed.bodyRig.eligible
+    ? options.decorateBodyRigV129(constructed.bodyRig, { actor: observed, action }) || constructed.bodyRig
+    : constructed.bodyRig;
   if (!bodyRig.eligible) return freeze({ ...action, eligible: false, ready: false, reason: bodyRig.reason,
     bodyRig, handPose: null, props: [], requiredAssets: [] });
   const gesture = actionHands(bodyRig, observed, action, options);
