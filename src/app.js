@@ -74,8 +74,14 @@ import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
 import {
-  SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V67, getSpecialOperationByCampaignIdV67
-} from './special-operations-v67.js';
+  SPECIAL_OPERATIONS_V131 as SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V131 as SPECIAL_OPERATION_COUNTS_V67,
+  getSpecialOperationByCampaignIdV131 as getSpecialOperationByCampaignIdV67, NEW_SPECIAL_CAMPAIGNS_V131, isSoloSpecialOperationV131
+} from './special-operations-v131.js';
+import { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } from './hive-missions-v131.js';
+import { MECHA_CAMPAIGNS_V131, buildMechaMissionV131 } from './mecha-missions-v131.js';
+import { ECOSYSTEM_CAMPAIGNS_V131, buildEcosystemMissionV131 } from './ecosystem-missions-v131.js';
+import { LEGACY_CAMPAIGNS_V131, buildLegacyMissionV131 } from './legacy-operations-v131.js';
+import { HiveCommandDockV131 } from './hive-command-ui-v131.js';
 import {
   getNarrativeInvestigationV68, markNarrativeCollectableReadV68, recordNarrativeDecisionV68
 } from './narrative-collectables-v68.js';
@@ -181,6 +187,7 @@ let missionArchiveOverlayV68 = null;
 let archiveRelayReaderV122 = null;
 let alphaBravoCommandDockV69 = null;
 let alienSurvivalDockV70 = null;
+let hiveCommandDockV131 = null;
 let bioforgeUiV80 = null;
 let xenoTrialsUiV96 = null;
 let xenoTrialsOwnerV96 = null;
@@ -715,6 +722,7 @@ function showView(name) {
   if (activeView === 'hub' && name === 'hub') Object.assign(saveSystem.data.hub, captureHubPoseV84());
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ resume: false, restoreFocus: false });
   if (name !== 'play' && archiveRelayReaderV122?.openState) archiveRelayReaderV122.close({ resume: false, restoreFocus: false });
+  if (name !== 'play') hiveCommandDockV131?.close({ restoreFocus: false });
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
@@ -1344,7 +1352,7 @@ function renderOperationPlan() {
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const soloOperationV121 = [BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id);
+  const soloOperationV121 = isSoloSpecialOperationV131(campaign.id);
   const convoyOperationV121 = campaign.id === APC_CONVOY_CAMPAIGN_V121.id;
   const issuedVehicle = convoyOperationV121 ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier') : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId)
@@ -1369,7 +1377,7 @@ function renderOperationPlan() {
         ? 'Quatre opérateurs · deux binômes physiques · ordres, pings, tâches réservées, stress et cohésion dynamiques.'
         : specialOperation?.id === 'alien-survival-systems'
           ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
-          : '';
+          : escapeHtml(campaign.description || campaign.summary || '');
   const soloNoticeV121 = soloOperationV121
     ? `<div class="special-operation-notice"><span>INSERTION SOLO</span><b>${convoyOperationV121 ? 'M577 FOURNI · CONVOI À UN OPÉRATEUR' : 'INSERTION À PIED · AUCUN VÉHICULE'}</b><p>${campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? 'Captivité, récupération du matériel, sortie du complexe puis confinement à bord.' : convoyOperationV121 ? 'Conduite et tourelle du M577 imposé. La sélection générale de véhicule ne remplace pas le convoi.' : campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? 'Enquête originale du Tantalus : PDA, relais électrique, six documents départementaux et confrontation. Aucune identité personnelle ne peut être déduite du badge seul.' : 'Survivre au sas C-12, tenir la défense puis rejoindre l’extraction.'} Aucun binôme physique déployé. Les bonus dépendent du bilan réel.</p></div>`
     : '';
@@ -1915,6 +1923,10 @@ function openArchiveRelayReaderV122(event) {
 
 function buildCampaignMissionLevelV122(options) {
   const id = options.campaign?.id;
+  if (HIVE_CAMPAIGNS_V131.some(c=>c.id===id)) return buildHiveMissionV131(options);
+  if (MECHA_CAMPAIGNS_V131.some(c=>c.id===id)) return buildMechaMissionV131(options);
+  if (ECOSYSTEM_CAMPAIGNS_V131.some(c=>c.id===id)) return buildEcosystemMissionV131(options);
+  if (LEGACY_CAMPAIGNS_V131.some(c=>c.id===id)) return buildLegacyMissionV131(options);
   const builder = id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? buildArchiveRelayLevelV122
     : id === BLACK_COCOON_CAMPAIGN_V121.id ? buildBlackCocoonLevelV121
       : id === APC_CONVOY_CAMPAIGN_V121.id ? buildApcConvoyLevelV121
@@ -1941,6 +1953,18 @@ function setupAlienSurvivalDockV70() {
   });
   alienSurvivalDockV70.startAutoRefresh({ frequencyHz: 8 });
   return alienSurvivalDockV70;
+}
+
+function openHiveCommandDockV131(event) {
+  if (activeView !== 'play' || !engine.isHiveMissionV131?.() || !engine.hiveCanActV131?.()
+    || event?.operationId !== engine.hiveV131?.operationId) return false;
+  const operation = saveSystem.data.strategy.currentOperation;
+  const owned = !standaloneContext && !saveSystem.recoveryNeeded && ownsTimelineV84(missionOwnerV78)
+    && missionOwnerV78.operationId === operation?.id && operation.campaignId === engine.campaign?.id;
+  const sandbox = standaloneContext === 'forge-playtest' && forgePlaytest?.campaignId === engine.campaign?.id;
+  if (!owned && !sandbox) return false;
+  hiveCommandDockV131 ||= new HiveCommandDockV131({ root: byId('mission-runtime-v62'), engine });
+  return hiveCommandDockV131.open();
 }
 
 function openNarrativeArchivesV68(entryId = '', { markRead = false } = {}) {
@@ -2208,7 +2232,7 @@ function campaignObjectiveLabel(campaignId) {
 
 function startMissionInsertionV62(context) {
   // These operations own their opening/objectives, not the generic squad insertion.
-  if ([BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(context.campaign?.id)) {
+  if (isSoloSpecialOperationV131(context.campaign?.id)) {
     startMissionRuntimeV62(context);
     return;
   }
@@ -2328,7 +2352,7 @@ function launchCampaign(campaign = null) {
   const weapon = operationLoadout.weapon || WEAPONS[0];
   const equipment = operationLoadout.equipment;
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const vehicle = [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id) ? null
+  const vehicle = [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
     : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
     : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
@@ -2394,7 +2418,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
 // Textual comms only: no voice asset is implied. Keep mission instructions
 // readable over routine combat/checkpoint captions, but never over fatal alerts.
 function writeMissionRadioV121(event, log) {
-  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio'].includes(event?.type)) return false;
+  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio',
+    'hive-radio-v131', 'ecosystem-radio-v131', 'legacy-operation-radio'].includes(event?.type)) return false;
   const text = String(event.text || '').trim();
   if (!text) return false;
   log.dataset.radioUntilV121 = String(Date.now() + Math.max(6000, captionReadingMillisecondsV84(text)));
@@ -2405,6 +2430,7 @@ function writeMissionRadioV121(event, log) {
 function handleForgePlaytestEvent(event) {
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (event.type === 'hive-control-open-v131') return openHiveCommandDockV131(event);
   if (event.type === 'archive-relay-open') return openArchiveRelayReaderV122(event);
   if (writeMissionRadioV121(event, log)) return;
   if (isAlphaBravoRuntimeEventV69(event)) {
@@ -2453,6 +2479,7 @@ function handleGameEvent(event) {
   }
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (event.type === 'hive-control-open-v131') return openHiveCommandDockV131(event);
   if (event.type === 'archive-relay-open') return openArchiveRelayReaderV122(event);
   if (writeMissionRadioV121(event, log)) return;
   const protectedRadioV121 = Number(log.dataset.radioUntilV121 || 0) > Date.now()

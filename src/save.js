@@ -63,6 +63,9 @@ import { sanitizeJumpStateV116, isJumpChargingV116 } from './galaxy-jump-v115.js
 import { BLACK_COCOON_CAMPAIGN_V121, validateBlackCocoonStateV121 } from './black-cocoon-state-v121.js';
 import { APC_CONVOY_CAMPAIGN_V121, validateApcConvoyStateV121 } from './apc-convoy-state-v121.js';
 import { C12_HORDE_CAMPAIGN_V121, validateC12HordeStateV121 } from './c12-horde-state-v121.js';
+import { validateApcCourseV131 } from './apc-course-v131.js';
+import { isSoloSpecialOperationV131 } from './special-operations-v131.js';
+import { operationCampaignV131, validateOperationCompletionV131 } from './operation-receipts-v131.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -706,7 +709,7 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
     || special?.operationId !== definition.campaign.specialOperationId || special.deploymentOperationIdV121 !== operation.id || !checked.valid
     || state?.phase !== 'complete' || !state.complete || !state.rewardClaimed || !isRecord(state.rewards)
     || mission?.state !== 'complete' || player?.alive !== true || player?.downed !== false
-    || !integer(player?.kills, definition.maximumKills) || !integer(mission?.retries, 9999)
+    || !integer(player?.kills, definition.stateKey === 'apcConvoyV121' && raw?.apcCourseV131 ? 1e7 : definition.maximumKills) || !integer(mission?.retries, 9999)
     || !integer(mission?.casualties, 9999) || !Number.isFinite(mission?.elapsed) || mission.elapsed < 0 || mission.elapsed > 604800
     || !integer(raw.inventory?.salvage, 999999) || !integer(raw.inventory?.intel, 999999)) {
     return { valid: false, reason: 'special-operation-terminal-invalid' };
@@ -723,7 +726,9 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
     if (vehicle?.id !== 'vehicle-001-m577-armored-personnel-carrier' || vehicle.active !== true
       || vehicle.destroyed !== false || !Number.isFinite(vehicle.hull) || vehicle.hull <= 0 || vehicle.hull > 340
       || state.rewards.hullRemaining !== Math.round(vehicle.hull)) return { valid: false, reason: 'special-operation-vehicle-invalid' };
-    credits += player.kills * 10 + Math.floor(vehicle.hull / 340 * 250);
+    credits = Math.min(10000, credits + player.kills * 10 + Math.floor(vehicle.hull / 340 * 250));
+    if (raw.apcCourseV131 && (!validateApcCourseV131(raw.apcCourseV131, state, raw.enemies).valid
+      || raw.apcCourseV131.kills !== player.kills)) return { valid: false, reason: 'apc-course-result-invalid' };
   }
   const nativeRewards = {
     ...state.rewards, credits, salvage: raw.inventory.salvage, intel: raw.inventory.intel,
@@ -735,6 +740,10 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
     return { valid: false, reason: 'special-operation-reward-mismatch' };
   }
   return { valid: true, serial, kills: player.kills, rewards: nativeRewards,
+    ...(definition.stateKey === 'apcConvoyV121' && raw.apcCourseV131 ? { course: {
+      mode: raw.apcCourseV131.mode, score: Math.floor(raw.apcCourseV131.score), laps: raw.apcCourseV131.lap,
+      distance: Math.round(raw.apcCourseV131.totalDistance), kills: raw.apcCourseV131.kills
+    } } : {}),
     strategicReward: { credits, alloy: nativeRewards.salvage, research: nativeRewards.intel } };
 }
 
@@ -1367,11 +1376,12 @@ export function applyCostume(save, costumeId) {
 
 export function getOperationBrief(save, campaign, world) {
   const strategy = ensureStrategy(save);
-  const deployableVehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
+  const deployableVehicleId = isSoloSpecialOperationV131(campaign.id) ? null
     : resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const availableCrew = save.crew.filter((member) => strategy.selectedCrewIds.includes(member.id) && member.status === 'active');
-  // QZ-18 is a solo deployment; undeployed members must not pay its fatigue cost.
-  const selectedCrew = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? availableCrew.slice(0, 1) : availableCrew;
+  // Solo operations freeze one operator; absent members keep their health,
+  // fatigue, resources and service history in the Tantalus.
+  const selectedCrew = isSoloSpecialOperationV131(campaign.id) ? availableCrew.slice(0, 1) : availableCrew;
   const state = save.galaxy.worldState[world.id] || world;
   const averageStress = selectedCrew.reduce((sum, member) => sum + member.stress, 0) / Math.max(1, selectedCrew.length);
   const averageFatigue = selectedCrew.reduce((sum, member) => sum + member.fatigue, 0) / Math.max(1, selectedCrew.length);
@@ -1551,6 +1561,10 @@ const sanitizeNativeOperationResumeState = (candidate, { operation = null } = {}
     if (requestedSpecialOperation.operationId !== operation.specialOperationId
       || (requestedSpecialOperation.deploymentOperationIdV121 && requestedSpecialOperation.deploymentOperationIdV121 !== operation.id)) return null;
     sanitized.specialOperation.deploymentOperationIdV121 = operation.id;
+  }
+  if (operationCampaignV131(operation?.campaignId)) {
+    if (candidate.operationReceiptV131?.deploymentId && candidate.operationReceiptV131.deploymentId!==operation.id) return null;
+    sanitized.operationReceiptV131={deploymentId:operation.id,campaignId:operation.campaignId};
   }
   return sanitized;
 };
@@ -1817,6 +1831,11 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
   const specialDefinitionV121 = specialOperationRewardDefinitionV121(operation.campaignId);
+  const chapterV131 = operationCampaignV131(operation.campaignId);
+  const completionV131 = chapterV131 && success ? validateOperationCompletionV131(operation,rewards) : null;
+  if (completionV131 && !completionV131.valid) return {ok:false,reason:completionV131.reason};
+  if (chapterV131 && operationSerialV85(operation.id)<=resolutionSerialV121(strategy.specialOperationResolutionSerialV131))
+    return {ok:false,reason:'operation-already-resolved'};
   const isSpecialOperationV121 = Boolean(specialDefinitionV121);
   const serialV121 = operationSerialV85(operation.id);
   if (isSpecialOperationV121 && (!serialV121 || resolutionSerialV121(serialV121) !== serialV121)) {
@@ -1872,7 +1891,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   let result = '';
   let paidStrategicRewardV121 = null;
   if (resolvedSuccess) {
-    const strategicReward = specialRewardV121?.strategicReward || operation.reward;
+    const strategicReward = specialRewardV121?.strategicReward || completionV131?.strategicReward || operation.reward;
     const previousResourcesV121 = specialRewardV121
       ? Object.fromEntries(Object.keys(strategicReward).map(key => [key, save.galaxy.resources[key]])) : null;
     for (const [key, value] of Object.entries(strategicReward)) changeStrategicValue(save, key, value);
@@ -1949,6 +1968,8 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       missionRewardsV121: structuredClone(specialRewardV121.rewards),
       expectedStrategicRewardV121: structuredClone(specialRewardV121.strategicReward),
       strategicRewardV121: structuredClone(paidStrategicRewardV121) } : {}),
+    ...(specialRewardV121?.course ? { apcCourseResultV131: structuredClone(specialRewardV121.course) } : {}),
+    ...(completionV131 ? { operationResultV131: structuredClone(completionV131.receipt) } : {}),
     success: resolvedSuccess,
     reason: resolvedReason,
     result,
@@ -1961,6 +1982,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   // A monotonic receipt survives bounded logs, imports and later operations.
   // Failures are receipts too: a defeated run cannot later be replayed as a win.
   if (isSpecialOperationV121) strategy.specialOperationResolutionSerialV121 = serialV121;
+  if (chapterV131) strategy.specialOperationResolutionSerialV131 = operationSerialV85(operation.id);
   recordCrewMissionV85(save, operation, resolvedSuccess, resolvedReason);
   if (resolvedSuccess) syncPremiumPersonnelV119(save);
   if (save.openingV88?.phase === 'deployed') {
@@ -2189,6 +2211,7 @@ export function migrateSave(input, profile = 1) {
       resolvedSpecialSerialV121,
       ...migrated.crew.map((member) => member.lastServiceOperationSerialV85 || 0)),
     specialOperationResolutionSerialV121: resolvedSpecialSerialV121,
+    specialOperationResolutionSerialV131: resolutionSerialV121(strategy.specialOperationResolutionSerialV131),
     selectedCrewIds: selectedCrewIds.length ? selectedCrewIds : [...base.strategy.selectedCrewIds],
     inventory: { weaponIds, equipmentIds, vehicleIds },
     selectedVehicleId: resolveReadyVehicleIdV60(strategy.selectedVehicleId, vehicleIds, VEHICLES),
@@ -2204,6 +2227,14 @@ export function migrateSave(input, profile = 1) {
       reason: typeof strategy.lastOperation.reason === 'string' ? strategy.lastOperation.reason.slice(0, 60) : 'migrated',
       result: typeof strategy.lastOperation.result === 'string' ? strategy.lastOperation.result.slice(0, 500) : '',
       specialOperationBonus: sanitizeValues(strategy.lastOperation.specialOperationBonus),
+      ...(operationCampaignV131(strategy.lastOperation.campaignId) && isRecord(strategy.lastOperation.operationResultV131)
+        ? {operationResultV131:sanitizeNativeResumeValue(strategy.lastOperation.operationResultV131)} : {}),
+      ...(strategy.lastOperation.campaignId === APC_CONVOY_CAMPAIGN_V121.id && isRecord(strategy.lastOperation.apcCourseResultV131)
+        ? { apcCourseResultV131: { mode: strategy.lastOperation.apcCourseResultV131.mode === 'endless' ? 'endless' : 'finite',
+          score: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.score, 0, 0, 1e10)),
+          laps: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.laps, 1, 1, 100000)),
+          distance: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.distance, 0, 0, 3.2e8)),
+          kills: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.kills, 0, 0, 1e7)) } } : {}),
       ...(specialOperationRewardDefinitionV121(strategy.lastOperation.campaignId) && isRecord(strategy.lastOperation.strategicRewardV121)
         ? { strategicRewardV121: sanitizeValues(strategy.lastOperation.strategicRewardV121),
           missionRewardsV121: sanitizeNativeResumeValue(strategy.lastOperation.missionRewardsV121),

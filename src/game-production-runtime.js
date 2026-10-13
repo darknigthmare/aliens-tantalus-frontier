@@ -26,6 +26,12 @@ import { withVerticalWorldV130 } from './vertical-world-v130.js';
 import { withDestructibleSceneryV130 } from './destructible-scenery-v130.js';
 import { withEnemyTacticsV130 } from './enemy-tactics-v130.js';
 import { withWeaponActionsV130 } from './weapon-actions-v130.js';
+import { withWeaponActionsV131 } from './weapon-actions-v131.js';
+import { withApcCourseV131 } from './apc-course-v131.js';
+import { withHiveMissionsV131 } from './hive-missions-v131.js';
+import { withMechaMissionsV131 } from './mecha-missions-v131.js';
+import { withEcosystemMissionsV131 } from './ecosystem-missions-v131.js';
+import { withLegacyMissionsV131 } from './legacy-operations-v131.js';
 
 export * from './game-production-core.js';
 
@@ -44,6 +50,8 @@ const V125ProductionEngine = withPlayerWeaponRigV125(V124ProductionEngine);
 const V126ProductionEngine = withPlayerAppearanceV126(V125ProductionEngine);
 const V130ProductionEngine = withDirectionalAimV130(withWeaponActionsV130(withEnemyTacticsV130(
   withDestructibleSceneryV130(withVerticalWorldV130(V126ProductionEngine)))));
+const V131ProductionEngine = withLegacyMissionsV131(withEcosystemMissionsV131(withMechaMissionsV131(
+  withHiveMissionsV131(withApcCourseV131(withWeaponActionsV131(V130ProductionEngine))))));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -56,7 +64,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V130ProductionEngine {
+export class GameEngine extends V131ProductionEngine {
   start(options = {}) {
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     const snapshot = super.start(options);
@@ -66,6 +74,7 @@ export class GameEngine extends V130ProductionEngine {
 
   captureResumeState() {
     const state = super.captureResumeState();
+    if (state.mission && this.mission?.rewards) state.mission.rewards = structuredClone(this.mission.rewards);
     for (const role of ['player', 'coop']) if (state[role]) state[role].tacticalReloadV77 = captureTacticalReloadV77(this[role]);
     return { ...state, gameplaySupportV72: captureGameplaySupportV72(this) };
   }
@@ -106,6 +115,10 @@ export class GameEngine extends V130ProductionEngine {
   }
 
   melee(actor = this.player) {
+    if (this.isMechaMissionV131?.() && actor?.inVehicle
+      || this.isHiveMissionV131?.() && actor === this.player && this.hiveV131?.possession) {
+      return this.canPerformGameplayAction(actor) ? super.melee(actor) : false;
+    }
     if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.inVehicle || actor.reloading || actor.fireClock > 0
       || actor.toolUseClock > 0 || actor.interactionClock > 0) return false;
     if (this.neuro?.active && actor === this.player) return this.meleeAttack?.(actor) || false;

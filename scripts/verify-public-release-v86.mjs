@@ -28,6 +28,10 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-player-transit-rig-v128.mjs', 'verify-player-appearance-preview-v128.mjs', 'verify-player-incapacitation-v128.mjs',
   'verify-player-locomotion-rig-v129.mjs', 'verify-player-colonial-art-v129.mjs', 'verify-player-appearance-preview-v129.mjs',
   'verify-enemy-tactics-v130.mjs', 'verify-destructible-scenery-v130.mjs', 'verify-vertical-world-v130.mjs', 'verify-weapon-actions-v130.mjs', 'qa-frontier-browser-v130.mjs',
+  'verify-weapon-actions-v131.mjs', 'verify-apc-course-v131.mjs', 'verify-hive-missions-v131.mjs',
+  'verify-mecha-missions-v131.mjs', 'verify-ecosystem-missions-v131.mjs', 'verify-legacy-operations-v131.mjs',
+  'verify-operations-integration-v131.mjs', 'qa-operations-browser-v131.mjs', 'verify-hive-command-ui-v131.mjs',
+  'verify-operation-receipts-v131.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming

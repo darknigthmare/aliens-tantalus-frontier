@@ -355,11 +355,15 @@ test('action admission preserves pause, incapacitation, reload, ladder, field-wo
   assert.equal(engine.bullets.at(-1).kind, 'apc-turret'); assert.equal(engine.weaponProjectilesV130.length, 0);
 });
 
-test('ordinary firearms and documented V122 Fireball retain their real accepted-shot mechanics', () => {
+test('ordinary firearms, M94 impact launcher and documented V122 Fireball retain their accepted-shot identities', () => {
   for (const name of ['M41A Pulse Rifle', 'M94 Impact Grenade', 'X1 Fireball']) {
     const subject = fixture(name), { engine, actor } = subject, ammo = actor.ammo;
     assert.equal(engine.fire(actor), true); assert.equal(actor.ammo, ammo - 1);
-    assert.equal(engine.weaponProjectilesV130.length, 0); assert.equal(engine.bullets.length, 1);
+    assert.equal(engine.weaponProjectilesV130.length, 0);
+    if (name === 'M94 Impact Grenade') {
+      assert.equal(engine.bullets.length, 0); assert.equal(engine.weaponProjectilesV131.length, 1);
+      assert.equal(engine.weaponProjectilesV131[0].kind, 'launcher');
+    } else assert.equal(engine.bullets.length, 1);
     if (name === 'X1 Fireball') {
       assert.equal(engine.bullets[0].impactMechanismV122, 'D17-gel-projectile-impact-explosion');
       assert.equal(Math.hypot(engine.bullets[0].vx, engine.bullets[0].vy), 480);
