@@ -220,6 +220,7 @@ function candidatePool(engine) {
 
 export function selectEnemyBatchTargetV66(engine, enemy) {
   const targets = candidatePool(engine).filter((target) => validEngineTarget(engine, target)
+    && engine.enemyTargetPerceivedV130?.(enemy, target) !== false
     && (!target.squadMember || !target.inVehicle));
   if (enemy.batchAttackV66) {
     return targets.find((target) => resolveEnemyMeleeTargetIdV64(target) === enemy.batchAttackV66.targetId) || null;

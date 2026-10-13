@@ -21,6 +21,11 @@ import { withPlayerFieldActionsV124 } from './player-field-actions-v124.js';
 import { withWeaponEffectsV124 } from './weapon-effects-runtime-v124.js';
 import { withPlayerWeaponRigV125 } from './player-weapon-runtime-v125.js';
 import { withPlayerAppearanceV126 } from './player-appearance-runtime-v126.js';
+import { withDirectionalAimV130 } from './directional-aim-v130.js';
+import { withVerticalWorldV130 } from './vertical-world-v130.js';
+import { withDestructibleSceneryV130 } from './destructible-scenery-v130.js';
+import { withEnemyTacticsV130 } from './enemy-tactics-v130.js';
+import { withWeaponActionsV130 } from './weapon-actions-v130.js';
 
 export * from './game-production-core.js';
 
@@ -37,6 +42,8 @@ const V122ProductionEngine = withArchiveRelayRuntimeV122(V121ProductionEngine);
 const V124ProductionEngine = withWeaponEffectsV124(withPlayerFieldActionsV124(V122ProductionEngine));
 const V125ProductionEngine = withPlayerWeaponRigV125(V124ProductionEngine);
 const V126ProductionEngine = withPlayerAppearanceV126(V125ProductionEngine);
+const V130ProductionEngine = withDirectionalAimV130(withWeaponActionsV130(withEnemyTacticsV130(
+  withDestructibleSceneryV130(withVerticalWorldV130(V126ProductionEngine)))));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -49,8 +56,9 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V126ProductionEngine {
+export class GameEngine extends V130ProductionEngine {
   start(options = {}) {
+    this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });
     return snapshot;
@@ -63,6 +71,11 @@ export class GameEngine extends V126ProductionEngine {
   }
 
   applyResumeState(rawState) {
+    const signature = this.expectedMissionSignatureV130 || this.missionLevelRuntime?.signature;
+    if (signature && rawState?.missionLevel?.signature && rawState.missionLevel.signature !== signature) {
+      return { applied: false, reason: 'level-signature-mismatch', missionLevelRestored: false };
+    }
+    rawState = this.migrateVerticalResumeV130?.(rawState) || rawState;
     const result = super.applyResumeState(rawState);
     if (!result?.applied) return result;
     const supportRestoredV72 = restoreGameplaySupportV72(this, rawState?.gameplaySupportV72);

@@ -137,7 +137,9 @@ export function withPlayerAppearanceV126(Base) {
       return resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance: actor?.appearanceV126,
         images: this.images, locomotionState: actor?.playerLocomotionStateV129,
         legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
-        groundSupport: playerAppearanceGroundSupportV129(actor, this.platforms) }).bodyRig;
+        groundSupport: playerAppearanceGroundSupportV129(actor,
+          [...(this.platforms || []), ...(this.walls || []), ...(this.covers || []),
+            ...(this.closedDoorColliders?.() || [])].filter(surface => !surface.destroyed)) }).bodyRig;
     }
 
     advancePlayerWeaponActorV125(actor) {

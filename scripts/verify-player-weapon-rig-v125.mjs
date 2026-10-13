@@ -236,6 +236,52 @@ test('deferred or broken images leave the new layer unavailable without changing
   }
 });
 
+test('loading or failed body and weapon PNGs never change the production guide or accepted-shot origin', async () => {
+  for (const pending of ['body', 'weapon']) for (const failed of [false, true]) {
+    const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }, { holdImages: true });
+    const { engine, actor } = subject;
+    const weaponPath = catalogueImage(ID.rifle);
+    const affected = image => pending === 'body' ? image.src.includes('/rig-v125/') : image.src === weaponPath;
+    // The standard scene is ready: only the optional held presentation is
+    // deferred or broken, so actual gameplay admission stays enabled.
+    for (const image of subject.images) if (!affected(image) || failed) image.finish(affected(image) && failed);
+    await subject.flush();
+    Object.assign(actor, { pointerAimV83: RIGHT, combatAimV83: RIGHT, aimingV124: true });
+    assert.equal(engine.resolvePlayerWeaponPoseV125(actor, RIGHT), null);
+    assert.equal(engine.drawPlayerWeaponRigV125(subject.drawing.ctx, actor), null);
+    assert.ok(getPlayerAimGuideV124(engine, actor));
+    assert.equal(engine.fire(actor), true, `${pending}/${failed}: the real shot is admitted without its PNGs.`);
+    const first = engine.bullets.at(-1);
+    const cold = engine.resolvePlayerMuzzleV124(actor, RIGHT);
+    const coldGuide = getPlayerAimGuideV124(engine, actor);
+    near(first.x, cold.x, 'Unavailable-image projectile x');
+    near(first.y, cold.y, 'Unavailable-image projectile y');
+
+    // Recover the same image requests without advancing time, actor posture or
+    // aim. Recoil is the same accepted-shot observation for both queries.
+    for (const image of subject.images) if (affected(image)) image.finish();
+    subject.releaseImages(); await subject.flush();
+    const warm = await readyPose(subject);
+    near(cold.x, warm.muzzle.x, 'Readiness-independent shot x');
+    near(cold.y, warm.muzzle.y, 'Readiness-independent shot y');
+    const warmGuide = getPlayerAimGuideV124(engine, actor);
+    near(warmGuide.x, coldGuide.x, 'Readiness-independent guide x');
+    near(warmGuide.y, coldGuide.y, 'Readiness-independent guide y');
+    near(warmGuide.endX, coldGuide.endX, 'Readiness-independent guide end x');
+    near(warmGuide.endY, coldGuide.endY, 'Readiness-independent guide end y');
+    actor.fireClock = 0;
+    assert.equal(engine.fire(actor), true);
+    const second = engine.bullets.at(-1);
+    near(second.x, first.x, 'Loading/ready accepted-shot x');
+    near(second.y, first.y, 'Loading/ready accepted-shot y');
+
+    const guideAfter = getPlayerAimGuideV124(engine, actor);
+    near(guideAfter.x, second.x, 'Ready guide uses the accepted shot x');
+    near(guideAfter.y, second.y, 'Ready guide uses the accepted shot y');
+    assert.equal(actor.ammo, actor.magazineSize - 2);
+  }
+});
+
 test('each operator uses their own issued weapon and unarmed crew receive no held gun', async () => {
   const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) });
   equipPickup(subject); subject.engine.setCoop(true);

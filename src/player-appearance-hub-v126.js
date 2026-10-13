@@ -7,7 +7,7 @@ import { playerAppearanceStatusV126, playerAppearanceVisualIsCurrentV129,
 import { resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-action-rig-v127.js';
 import { advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128 } from './player-transit-rig-v128.js';
 import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
-import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
+import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129, getPlayerColonialTorsoV129 } from './player-colonial-art-v129.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 
@@ -75,8 +75,12 @@ function resolveHubAppearance(hub, sample = null) {
 function retainHubAppearance(hub, { transit, action, bodyRig }) {
   const modular = bodyRig?.eligible
     ? resolvePlayerModularRigV126({ bodyRig, appearance: hub.player?.appearanceV126, images: hub.playerSheets }) : null;
+  // Both authored torso views belong to the selected outfit. Load them before
+  // the first turn so a cold opposite page cannot replace it with the old suit.
+  const torsoAssets = bodyRig?.eligible ? [-1, 1].map(facing =>
+    getPlayerColonialTorsoV129(hub.player?.appearanceV126?.slots?.torso, facing)?.asset).filter(Boolean) : [];
   return hub.playerAppearanceCacheV126?.retain([
-    ...(bodyRig?.requiredAssets || []), ...(modular?.requiredAssets || []),
+    ...(bodyRig?.requiredAssets || []), ...(modular?.requiredAssets || []), ...torsoAssets,
     ...(transit?.eligible ? transit.requiredAssets : action?.eligible ? action.requiredAssets : [])
   ]);
 }

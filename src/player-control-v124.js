@@ -83,8 +83,17 @@ export function playerCoverProtectionV124(actor, cover, options = {}) {
   const center = actor.x + actor.w / 2;
   const side = center <= cover.x + cover.w / 2 ? -1 : 1;
   if ((x - center) * -side <= 0) return 0;
-  const targetY = actor.y + actor.h * 0.7;
-  const contact = sweepProjectileAabbV83({ x, y, w: 0, h: 0 }, { x: center - x, y: targetY - y }, cover);
+  let displacement = { x: center - x, y: actor.y + actor.h * 0.7 - y };
+  const projectile = options.projectileV124;
+  if (projectile) {
+    // A known projectile must retain its actual flight direction. A ray aimed
+    // at the torso would turn an overhead horizontal shot into a covered one.
+    if (!Number.isFinite(projectile.vx) || !Number.isFinite(projectile.vy) || projectile.vx === 0) return 0;
+    const travel = (center - x) / projectile.vx;
+    if (!Number.isFinite(travel) || travel < 0) return 0;
+    displacement = { x: center - x, y: projectile.vy * travel };
+  }
+  const contact = sweepProjectileAabbV83({ x, y, w: 0, h: 0 }, displacement, cover);
   return contact ? 0.65 : 0;
 }
 

@@ -1014,10 +1014,12 @@ export class GameEngine {
     const v64MeleeState = advanceEnemyMeleeAttackV64(enemy, delta);
     const v64Melee = v64MeleeState.contract;
     const candidatePool = [this.player, this.coopEnabled ? this.coop : null].filter(Boolean);
-    const candidates = candidatePool.filter(isEnemyMeleeTargetValidV64);
+    const candidates = candidatePool.filter(isEnemyMeleeTargetValidV64)
+      .filter(actor => this.enemyTargetPerceivedV130?.(enemy, actor) !== false);
     let target = null;
     if (v64Melee && enemy.pendingMelee) {
-      target = candidatePool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId) || null;
+      target = candidatePool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId
+        && this.enemyTargetPerceivedV130?.(enemy, actor) !== false) || null;
       if (!isEnemyMeleeTargetValidV64(target)) {
         this.cancelPendingEnemyMeleeV64(enemy, 'target-invalid');
         return;
@@ -1409,7 +1411,7 @@ export class GameEngine {
   resolvePlayerMuzzleV124(player, aim) {
     if (player?.inVehicle && this.vehicle) return resolveCombatMuzzleV83(player, aim,
       { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 });
-    const heldPose = this.resolvePlayerWeaponPoseV125?.(player, aim);
+    const heldPose = this.resolvePlayerWeaponPoseV125?.(player, aim, { requireReady: false });
     if (heldPose) return heldPose.muzzle;
     const muzzle = resolveUserEquipmentMuzzleV95(player, aim) || resolveCombatMuzzleV83(player, aim,
       getEcho9StandingMuzzleOptionsV124(player, { surface: this.bioforgeLevelV80 ? 'bioforge' : 'mission' }) || {});
@@ -2468,7 +2470,8 @@ export class GameEngine {
     ctx.fillStyle = '#9be0ae'; ctx.font = 'bold 13px monospace';
     ctx.fillText(this.campaign?.name?.toUpperCase() || 'OPÉRATION TANTALUS', 34, 38);
     ctx.fillStyle = '#ccd9cc'; ctx.font = '12px monospace';
-    ctx.fillText(`PV ${Math.ceil(this.player.health)}  ARM ${Math.ceil(this.player.armor)}  MUN ${this.player.ammo}/${this.player.ammoReserve}`, 34, 60);
+    const weaponResource = this.weaponActionHudLabelV130?.(this.player) || `MUN ${this.player.ammo}/${this.player.ammoReserve}`;
+    ctx.fillText(`PV ${Math.ceil(this.player.health)}  ARM ${Math.ceil(this.player.armor)}  ${weaponResource}`, 34, 60);
     ctx.fillStyle = '#8ea898';
     ctx.fillText(`SECTEUR ${this.room + 1}/6 · ${this.phaseLabel()}`, 34, 81);
     ctx.fillText(`MÉD ${this.inventory.medkits} · RÉCUP ${this.inventory.salvage} · TRACK ${Math.round(this.tracker.energy)}%`, 34, 99);

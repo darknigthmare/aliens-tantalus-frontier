@@ -917,7 +917,8 @@ export function withV52MissionRuntime(BaseEngine) {
       // The legacy nearest-squad shortcut below skips that inner level layer.
       if (isEnemyBatchCombatV66(enemy)) return super.updateEnemy(enemy, delta);
       const squadPool = asList(this.squadActors);
-      const targetPool = [this.player, this.coopEnabled ? this.coop : null, ...squadPool].filter(Boolean);
+      const targetPool = [this.player, this.coopEnabled ? this.coop : null, ...squadPool].filter(Boolean)
+        .filter(actor => this.enemyTargetPerceivedV130?.(enemy, actor) !== false);
       let nearest = null;
       if (enemy?.pendingMelee) {
         nearest = targetPool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId) || null;
@@ -927,7 +928,8 @@ export function withV52MissionRuntime(BaseEngine) {
         }
       } else {
         const allies = this.activeSquadActors().filter((member) => isEnemyMeleeTargetValidV64(member) && !member.inVehicle);
-        const candidates = [this.player, this.coopEnabled ? this.coop : null, ...allies].filter(isEnemyMeleeTargetValidV64);
+        const candidates = [this.player, this.coopEnabled ? this.coop : null, ...allies].filter(isEnemyMeleeTargetValidV64)
+          .filter(actor => this.enemyTargetPerceivedV130?.(enemy, actor) !== false);
         if (!candidates.length) return super.updateEnemy(enemy, delta);
         nearest = candidates.reduce((best, actor) => Math.abs(actor.x - enemy.x) < Math.abs(best.x - enemy.x) ? actor : best, candidates[0]);
       }

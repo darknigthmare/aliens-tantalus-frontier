@@ -32,6 +32,46 @@ export const PLAYER_LOCOMOTION_PRESENTATION_V129 = freeze({
 });
 const C = PLAYER_LOCOMOTION_PRESENTATION_V129;
 
+// Integrate only the airborne part of a cycle. A change of stride must never
+// move a planted boot; its horizontal correction can disappear on the next
+// swing, including when the operator walks backwards or reverses direction.
+const swingIntegral = (cycles, duty) => Math.floor(cycles) * (1 - duty)
+  + Math.max(0, mod(cycles) - duty);
+function advanceGaitTransition(previous, cycles, distance) {
+  if (!previous?.gaitTransition) return null;
+  const profile = C[previous.gait], feet = {};
+  for (const side of ['near', 'far']) {
+    const entry = previous.gaitTransition.feet[side], phaseOffset = side === 'far' ? .5 : 0;
+    const swingTravel = entry.swingTravel + Math.abs(swingIntegral(cycles + phaseOffset, profile.duty)
+      - swingIntegral(previous.cycles + phaseOffset, profile.duty)) * previous.stride;
+    feet[side] = { ...entry, swingTravel, travel: entry.travel + distance };
+  }
+  return { feet };
+}
+
+function stepShape(state, side, scale, crouching, staticAction) {
+  const profile = C[crouching ? 'crouch' : state.gait];
+  const phase = mod(state.cycles + (side === 'far' ? .5 : 0));
+  const stride = profile.stride * scale, swinging = phase >= profile.duty;
+  const swing = swinging ? (phase - profile.duty) / (1 - profile.duty) : 0;
+  const hasStride = state.hasWalked && !staticAction;
+  const settle = state.moving ? 1 : 1 - smooth(state.settleProgress);
+  const entrance = smooth(state.entrance / (stride * .25));
+  let lift = hasStride && swinging ? Math.sin(Math.PI * swing) * profile.lift * scale * settle * entrance : 0;
+  let offset = !hasStride ? 0 : swinging
+    ? mix(-profile.duty / 2 * stride, profile.duty / 2 * stride, smooth(swing))
+    : (profile.duty / 2 - phase) * stride;
+  let angle = lift > 0 ? -.15 * Math.sin(Math.PI * swing) * settle * entrance : 0;
+  const correction = hasStride && state.gaitTransition?.feet[side];
+  if (correction) {
+    offset += correction.offset * (1 - smooth(correction.swingTravel / correction.swingSpan));
+    const weight = (1 - smooth(correction.travel / (stride * .25))) * settle;
+    lift = Math.max(0, lift + correction.lift * weight);
+    angle += correction.angle * weight;
+  }
+  return { phase, swing, lift, offset, angle, settle, swinging, hasStride };
+}
+
 function activeGait(actor) {
   if (actor?.crouching) return 'crouch';
   return actor?.movementV124?.gait === 'run' || Math.abs(finite(actor?.vx)) >= 265 ? 'run' : 'walk';
@@ -79,12 +119,47 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
   const settle = moved ? 0 : Math.min(C.settleDuration, (prior?.settle ?? C.settleDuration) + elapsed);
   const entrance = moved ? (prior?.settle >= C.settleDuration ? 0 : finite(prior?.entrance)) + Math.abs(dx)
     : finite(prior?.entrance);
-  return freeze({ schema: 129, context, surface, time: now, x: actor.x, y: actor.y, facing,
+  const next = { schema: 129, context, surface, time: now, x: actor.x, y: actor.y, facing,
     grounded: actor.grounded === true, crouching: Boolean(actor.crouching), gait,
     cycles, phase: mod(cycles), stride, distance, entrance,
     hasWalked: Boolean(prior?.hasWalked || moved), moving: moved,
     settle, settleProgress: clamp(settle / C.settleDuration),
-    source: 'observed-ground-displacement' });
+    source: 'observed-ground-displacement',
+    gaitTransition: prior && !postureChanged ? advanceGaitTransition(prior, cycles, moved ? Math.abs(dx) : 0) : null };
+  if (prior && gait !== prior.gait && !postureChanged) {
+    const oldCycles = prior.cycles + (moved ? dx / prior.stride : 0);
+    const continued = { ...next, gait: prior.gait, stride: prior.stride, cycles: oldCycles,
+      gaitTransition: advanceGaitTransition(prior, oldCycles, moved ? Math.abs(dx) : 0) };
+    const feet = {};
+    for (const side of ['near', 'far']) {
+      const old = stepShape(continued, side, scale, next.crouching, false);
+      const current = stepShape({ ...next, gaitTransition: null }, side, scale, next.crouching, false);
+      const direction = Math.sign(dx || actor.vx) || 1;
+      const remaining = current.swinging
+        ? direction > 0 ? 1 - current.phase : current.phase - profile.duty
+        : 1 - profile.duty;
+      feet[side] = { offset: old.offset - current.offset,
+        lift: (old.lift - current.lift) / (current.settle || 1),
+        angle: (old.angle - current.angle) / (current.settle || 1),
+        travel: 0, swingTravel: 0, swingSpan: Math.max(1e-6, remaining * stride) };
+    }
+    next.gaitTransition = { feet };
+  }
+  if (next.gaitTransition && prior && !prior.moving && moved && next.grounded && !postureChanged) {
+    // A stopped swing foot can already have settled onto the deck. If the
+    // first resumed step crosses its landing phase, keep that reached contact
+    // instead of spending the old transition correction under a planted boot.
+    for (const side of ['near', 'far']) {
+      const old = stepShape(prior, side, scale, next.crouching, false);
+      const current = stepShape(next, side, scale, next.crouching, false);
+      if (old.lift > 1e-7 || current.lift > 1e-7 || current.swinging) continue;
+      const native = stepShape({ ...next, gaitTransition: null }, side, scale, next.crouching, false);
+      next.gaitTransition.feet[side] = { ...next.gaitTransition.feet[side],
+        offset: old.offset - dx - native.offset, swingTravel: 0,
+        swingSpan: (1 - profile.duty) * stride };
+    }
+  }
+  return freeze(next);
 }
 
 function fallbackState(actor, bodyRig) {
@@ -121,19 +196,8 @@ function solveLeg(hip, foot, scale, facing) {
 
 function stepContact(actor, state, side, scale, facing, crouching, staticAction) {
   const floor = actor.y + actor.h, center = actor.x + actor.w / 2;
-  const profile = C[crouching ? 'crouch' : state.gait];
-  const phase = mod(state.cycles + (side === 'far' ? .5 : 0));
-  const stride = profile.stride * scale, swinging = phase >= profile.duty;
-  const swing = swinging ? (phase - profile.duty) / (1 - profile.duty) : 0;
-  const hasStride = state.hasWalked && !staticAction;
-  const settle = state.moving ? 1 : 1 - smooth(state.settleProgress);
-  const entrance = smooth(state.entrance / (stride * .25));
-  const lift = hasStride && swinging ? Math.sin(Math.PI * swing) * profile.lift * scale * settle * entrance : 0;
-  const offset = !hasStride ? 0 : swinging
-    ? mix(-profile.duty / 2 * stride, profile.duty / 2 * stride, smooth(swing))
-    : (profile.duty / 2 - phase) * stride;
+  const { phase, swing, lift, offset, angle, swinging, hasStride } = stepShape(state, side, scale, crouching, staticAction);
   const sole = point(center + facing * (side === 'near' ? 0 : 21) * scale + offset, floor - lift);
-  const angle = lift > 0 ? -.15 * Math.sin(Math.PI * swing) * settle * entrance : 0;
   return { point: sole, planted: lift < 1e-7 && (!state.moving || !swinging || !hasStride),
     phase, swing, lift, support: 'ground', ...footFromSole(sole, scale, facing, angle) };
 }
