@@ -2,7 +2,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, NEURO_XENO_PROFILES } from '../src/content.js';
-import { getPlayerAimGuideV124 } from '../src/player-control-v124.js';
+import { getPlayerAimGuideV124, resolvePlayerProjectileFootprintV124 } from '../src/player-control-v124.js';
+import { getHeldWeaponPoseV125 } from '../src/held-weapon-renderer-v125.js';
+import { resolvePlayerArmPoseV125 } from '../src/player-body-rig-v125.js';
+import { resolveWeaponMechanicsV122 } from '../src/weapon-mechanics-weapons-v122.js';
 import { firstProjectileObstacleV83 } from '../src/projectile-collision-v83.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { MISSION_VENT_NETWORKS_V62 } from '../src/vent-network-v62.js';
@@ -452,17 +455,67 @@ test('a low-cover peek lifts the real muzzle and the guide matches the actual sh
   assert.equal(actor.coverV124?.peeking, true);
   const guide = getPlayerAimGuideV124(engine, actor);
   assert.ok(guide); assert.ok(guide.y < engine.covers[0].y);
+  const pose = engine.resolvePlayerWeaponPoseV125(actor, actor.combatAimV83, { requireReady: false });
+  const withoutHandLift = getHeldWeaponPoseV125({ actor: { ...actor, coverV124: { ...actor.coverV124, peeking: false } },
+    descriptor: engine.heldWeaponDescriptorV125(actor), aim: actor.combatAimV83, bodyRig: pose.bodyRig,
+    timeSeconds: engine.animationTime });
+  assert.ok(pose.grip.y < withoutHandLift.grip.y);
+  assert.equal(pose.bodyRig.standingHeight, 96.5);assert.equal(pose.bodyRig.pivot.y, actor.y + actor.h);
+  assert.deepEqual(pose.translation, { x: 0, y: 0 }, 'A peek is anatomical hand motion, not obstruction or a teleported shot.');
+  const arms = resolvePlayerArmPoseV125(pose.bodyRig, pose);
+  for (const side of ['near', 'far']) {
+    assert.ok(arms[side].reachError < 1e-6);assert.equal(arms[side].shoulderShiftDistance, 0);
+  }
   assert.equal(engine.fire(actor), true);
   const shotGuide = getPlayerAimGuideV124(engine, actor);
   assert.ok(shotGuide); assert.ok(shotGuide.y < engine.covers[0].y);
   assert.equal(actor.coverV124?.peeking, true);
   const bullet = engine.bullets.at(-1);
   assert.equal(bullet.x, shotGuide.x); assert.equal(bullet.y, shotGuide.y);
+  assert.ok(bullet.y + bullet.h <= engine.covers[0].y, 'The whole actual bullet clears the cover, not just its point origin.');
   const impact = firstProjectileObstacleV83(bullet, { x: 170, y: 0 }, { walls: engine.covers, doors: [], platforms: [] });
   assert.equal(impact, null, 'A properly elevated shot must clear the same cargo used for cover.');
   actor.armor = 0;
   assert.equal(engine.damagePlayer(actor, 20, { attackKind: 'projectile', sourceX: 400, sourceY: 900 }), 20,
     'An exposed peek must not retain hidden damage reduction.');
+});
+
+test('the guide blocks a contact that misses its centre line but touches the actual native bullet bounds', () => {
+  const { engine, actor, key } = coverFixture();
+  key('keyup', 'KeyS');key('keydown', 'KeyZ');key('keydown', 'ShiftLeft');key('keydown', 'KeyD');tickActor(engine,.1);
+  const muzzle = engine.resolvePlayerMuzzleV124(actor, actor.combatAimV83);
+  engine.walls = [{ id:'low-edge',x:muzzle.x+70,y:muzzle.y+3,w:10,h:18 }];
+  const guide = getPlayerAimGuideV124(engine, actor);assert.equal(guide.blocked,true);
+  assert.ok(guide.endX < engine.walls[0].x);
+  assert.equal(engine.fire(actor),true);const bullet=engine.bullets.at(-1);
+  const footprint=resolvePlayerProjectileFootprintV124(engine,actor);
+  assert.equal(footprint.w,bullet.w);assert.equal(footprint.h,bullet.h);
+  const impact=firstProjectileObstacleV83(bullet,{x:170,y:0},{walls:engine.walls});
+  assert.equal(impact?.target.id,'low-edge');
+  assert.equal(firstProjectileObstacleV83({...bullet,w:0,h:0},{x:170,y:0},{walls:engine.walls}),null,
+    'A point-only guide would falsely advertise a clear shot.');
+});
+
+test('native, Fireball and centered V131 projectiles keep their real footprint during J1/J2 low-cover peeks', () => {
+  const weapons=[WEAPONS[0],WEAPONS.find(weapon=>resolveWeaponMechanicsV122(weapon)),
+    WEAPONS.find(weapon=>weapon.name==='M37A2 Pump Shotgun'),WEAPONS.find(weapon=>weapon.name==='M6B Rocket Launcher')];
+  assert.ok(weapons.every(Boolean));
+  for(const weapon of weapons)for(const coop of [false,true]){
+    const {engine,key}=makeEngine({weapon});if(coop)engine.setCoop(true);
+    const actor=coop?engine.coop:engine.player;Object.assign(actor,{x:160,y:838,grounded:true});
+    engine.covers=[{id:'cargo',x:202,y:872,w:96,h:58,health:100,destroyed:false}];
+    key('keydown',coop?'Comma':'KeyZ');key('keydown',coop?'ShiftRight':'ShiftLeft');key('keydown',coop?'KeyL':'KeyD');
+    tickActor(engine,.1,60,actor);assert.equal(actor.coverV124?.peeking,true);
+    const before=getPlayerAimGuideV124(engine,actor);assert.ok(before);
+    assert.equal(engine.fire(actor),true,weapon.name);
+    const projectile=engine.weaponProjectilesV131.at(-1)||engine.bullets.at(-1);assert.ok(projectile,weapon.name);
+    const footprint=resolvePlayerProjectileFootprintV124(engine,actor);
+    assert.equal(projectile.w,footprint.w);assert.equal(projectile.h,footprint.h);
+    const guide=getPlayerAimGuideV124(engine,actor);assert.ok(guide);
+    assert.ok(Math.abs(projectile.y-guide.y-footprint.offsetY)<1e-6,weapon.name);
+    assert.equal(firstProjectileObstacleV83(projectile,{x:170,y:0},{walls:engine.covers}),null,weapon.name);
+    assert.equal(actor.y+actor.h,930);assert.equal(actor.h,92);engine.stop();
+  }
 });
 
 test('a medical action blocks combat and commits exactly once after unpaused simulation time', () => {

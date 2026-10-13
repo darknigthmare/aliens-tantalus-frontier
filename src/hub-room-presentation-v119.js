@@ -9,6 +9,9 @@ const profile = (roomId, presentationMode, depthProfile, reason, farFactor = .02
   layers: Object.freeze(['far', 'architecture', 'gameplay', 'light', 'foreground']),
   perspectiveFloor: presentationMode === '2.5d',
   foreground: 'below-walk-rail-only',
+  horizonY: 360,
+  propPlane: 'rear-with-optional-one-way-top',
+  compositionPolicyV133: 'room-purpose-specific-rear-instrumentation',
   cameraProfile: Object.freeze({ farFactor: presentationMode === '2.5d' ? farFactor : 0,
     maximumDrift: presentationMode === '2.5d' ? 18 : 0, gameplayFactor: 1, interactionFactor: 1 }),
   referenceStatus: 'project-authored-presentation', canonStatus: 'project-adaptation'

@@ -6,6 +6,7 @@ import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveHubRoomArtV56 } from './hub-art-runtime-v56.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { resolveSpriteSheet } from './sprite-animation-runtime.js';
+import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 
 export const HUB_LOADER_COURSE_V132 = 'p5000-human-handling-v132';
 export const HUB_LOADER_VEHICLE_V132 = 'vehicle-007-p-5000-powered-work-loader';
@@ -359,6 +360,9 @@ export function withHubTrainingV132(Base) {
           const row = cached?.row ?? 1, width = 92, height = 128;
           const x = npc.x + npc.w / 2 - width / 2, y = npc.y + npc.h - height * (240 / 256);
           this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
+          const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing: npc.vx < 0 ? -1 : 1 },
+            sheet: sheet || { path: image.src?.replace(/^https?:\/\/[^/]+/, ''), sourceFacing: 1 }, column, row, surface: 'hub' });
+          if (drawHumanAtlasV133(ctx, image, human)) continue;
           ctx.save();
           if (npc.vx < 0) { ctx.translate(x + width, y); ctx.scale(-1, 1); }
           ctx.drawImage(image, column * image.naturalWidth / columns, row * image.naturalHeight / rows,

@@ -1,3 +1,4 @@
+import { sampleHumanGaitV133 } from './player-gait-v133.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
 
@@ -143,7 +144,7 @@ function rejection(actor, sample, surface, neuroActive) {
   return null;
 }
 
-function selectPose(actor, timeSeconds, reducedMotion) {
+function selectPose(actor, timeSeconds, reducedMotion, motion) {
   const speed = Math.abs(finite(actor.vx));
   const distance = Math.max(0, finite(actor.weaponRigMotionV125?.distance));
   const moving = speed > (actor.crouching ? 8 : 12);
@@ -157,18 +158,18 @@ function selectPose(actor, timeSeconds, reducedMotion) {
   if (actor.crouching && actor.coverV124?.peeking) {
     // The reviewed combat torso has flexed knees. A real pose change preserves
     // the head, chest and legs; scaling a crouch taller visibly stretched them.
-    return moving ? { atlas: 'locomotion', frame: 4 + Math.floor(distance / 86 * 4 + 1e-9) % 4,
+    return moving ? { atlas: 'locomotion', frame: 4 + Math.floor(motion.phase * 4 + 1e-9) % 4,
       gait: 'crouch-move', moving: true, peeking: true }
       : { atlas: 'combat', frame: 3, gait: 'crouch', moving: false, peeking: true };
   }
   if (actor.crouching) return { atlas: 'locomotion',
-    frame: moving ? 12 + (Math.floor(distance / 42 * 2 + 1e-9) % 2) : aiming ? 13 : 12,
+    frame: moving ? 12 + (Math.floor(motion.phase * 2 + 1e-9) % 2) : aiming ? 13 : 12,
     gait: moving ? 'crouch-move' : 'crouch', moving };
   if (moving) {
     const backwards = Math.sign(finite(actor.vx)) !== facingOf(actor);
-    const phase = Math.floor(distance / 86 * 4 + 1e-9) % 4;
-    return { atlas: 'locomotion', frame: 4 + (backwards ? (4 - phase) % 4 : phase),
-      gait: backwards ? 'backpedal' : actor.movementV124?.gait === 'run' || speed >= 265 ? 'run' : 'walk', moving: true };
+    const phase = Math.floor(motion.phase * 4 + 1e-9) % 4;
+    return { atlas: 'locomotion', frame: 4 + phase,
+      gait: backwards ? 'backpedal' : motion.gait, moving: true };
   }
   if (aiming || actor.reloading || acceptedShot || finite(actor.v52FireClock) > 0) return { atlas: 'combat', frame: 3, gait: 'idle', moving: false };
   return { atlas: 'locomotion', frame: reducedMotion ? 0 : Math.floor(timeSeconds * 2) % 4, gait: 'idle', moving: false };
@@ -184,32 +185,37 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
   const reason = rejection(actor, sample, surface, neuroActive);
   if (reason) return freeze({ schema: 125, rigType: 'echo9', surface, eligible: false, ready: false, reason });
   const now = Math.max(0, finite(timeSeconds));
-  const pose = selectPose(actor, now, reducedMotion);
+  const metrics = PLAYER_VISUAL_CONTRACT_V81.surfaces[surface];
+  const motion = sampleHumanGaitV133(actor, metrics.height / 256);
+  const pose = selectPose(actor, now, reducedMotion, motion);
   const descriptor = pose.atlas === 'combat' ? COMBAT : LOCOMOTION;
   const frame = PLAYER_BODY_RIG_FRAMES_V125[pose.atlas][pose.frame];
-  const metrics = PLAYER_VISUAL_CONTRACT_V81.surfaces[surface];
   const standingHeight = metrics.height * REFERENCE_HEIGHT / 256;
   const scale = metrics.height / 256;
   const scaleY = standingHeight / frame.standingHeight;
-  const scaleX = scaleY * metrics.width / metrics.height;
+  const scaleX = scaleY;
   const facing = facingOf(actor);
   const pivot = point(actor.x + actor.w / 2, actor.y + actor.h);
   const breath = !reducedMotion && pose.gait === 'idle' && !actor.reloading ? Math.sin(now * 2.2) * .0025 : 0;
   const peekRise = actor.crouching && actor.coverV124?.peeking ? clamp(actor.coverV124.peekRise, 0, 32) : 0;
   const nativePoseHeight = frame.alphaBounds[3] - frame.alphaBounds[1];
-  const vertical = scaleY * (1 + breath);
+  const vertical = scaleY * (1 + breath), horizontal = scaleX * (1 + breath);
+  const lean = !reducedMotion && motion.moving && !actor.reloading && !actor.aimingV124 ? motion.lean : 0;
+  const cosine = Math.cos(lean), sine = Math.sin(lean);
   const crouchFrame = PLAYER_BODY_RIG_FRAMES_V125.locomotion[pose.moving
-    ? 12 + Math.floor(Math.max(0, finite(actor.weaponRigMotionV125?.distance)) / 42 * 2 + 1e-9) % 2 : 13];
+    ? 12 + Math.floor(motion.phase * 2 + 1e-9) % 2 : 13];
   const crouchShoulderHeight = (crouchFrame.support.y - crouchFrame.sourceShoulders.near.y) * standingHeight / crouchFrame.standingHeight;
   const shoulderPeekRise = pose.peeking
     ? (frame.support.y - frame.sourceShoulders.near.y) * vertical - crouchShoulderHeight : 0;
-  const matrix = { a: facing * scaleX, b: 0, c: 0, d: vertical,
-    e: pivot.x - facing * scaleX * frame.support.x, f: pivot.y - vertical * frame.support.y };
-  const world = source => point(matrix.a * source.x + matrix.e, matrix.d * source.y + matrix.f);
+  const matrix = { a: facing * cosine * horizontal, b: facing * sine * horizontal, c: -sine * vertical, d: cosine * vertical };
+  matrix.e = pivot.x - matrix.a * frame.support.x - matrix.c * frame.support.y;
+  matrix.f = pivot.y - matrix.b * frame.support.x - matrix.d * frame.support.y;
+  const world = source => point(matrix.a * source.x + matrix.c * source.y + matrix.e, matrix.b * source.x + matrix.d * source.y + matrix.f);
   const shoulders = { near: world(frame.sourceShoulders.near), far: world(frame.sourceShoulders.far) };
   const source = frame.source;
   const topLeft = world(point(facing < 0 ? source.x + source.width : source.x, source.y));
-  const sprite = { x: topLeft.x, y: topLeft.y, width: source.width * scaleX, height: source.height * vertical };
+  const corners = [point(source.x, source.y), point(source.x + source.width, source.y), point(source.x, source.y + source.height), point(source.x + source.width, source.y + source.height)].map(world);
+  const sprite = { x: Math.min(...corners.map(p => p.x)), y: Math.min(...corners.map(p => p.y)), width: Math.max(...corners.map(p => p.x)) - Math.min(...corners.map(p => p.x)), height: Math.max(...corners.map(p => p.y)) - Math.min(...corners.map(p => p.y)) };
   const ready = playerBodyRigImageReadyV125(imageFrom(images, descriptor.imageKey), descriptor)
     && playerBodyRigImageReadyV125(imageFrom(images, ARMS.imageKey), ARMS);
   return freeze({ schema: 125, id: descriptor.id, sheetId: descriptor.id, rigType: 'echo9', exact: false,
@@ -220,7 +226,7 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
     neutralGrip: point(shoulders.near.x + facing * 30 * scale, shoulders.near.y + 11 * scale),
     pouch: point(pivot.x - facing * 12 * scale, pivot.y - standingHeight * (actor.crouching ? .29 : .49)),
     armLengths: { near: { upper: 31 * scale, fore: 33 * scale }, far: { upper: 31 * scale, fore: 33 * scale } },
-    scale, sourceScaleX: scaleX, sourceScaleY: vertical,
+    scale, sourceScaleX: horizontal, sourceScaleY: vertical, locomotionMotionV133: { ...motion, lean },
     standingHeight, bodyHeight: standingHeight, poseHeight: nativePoseHeight * vertical,
     gait: pose.gait, moving: pose.moving, crouching: Boolean(actor.crouching), timeSeconds: now, peekRise,
     stance: pose.peeking ? 'cover-peek' : actor.crouching ? 'crouched' : 'standing',
@@ -260,7 +266,7 @@ function handTarget(bodyRig, pose, side) {
   if (side === 'near') return pose.grip;
   if (validPoint(pose.support)) return pose.support;
   const shoulder = bodyRig.shoulders.far;
-  const sway = bodyRig.moving ? Math.sin(finite(bodyRig.timeSeconds) * 4) * 2 * bodyRig.scale : 0;
+  const sway = bodyRig.locomotionMotionV133?.moving ? Math.sin(bodyRig.locomotionMotionV133.cycles * Math.PI * 2) * .8 * bodyRig.scale : 0;
   return point(shoulder.x - bodyRig.facing * (10 * bodyRig.scale + sway),
     shoulder.y + 56 * bodyRig.scale);
 }
@@ -278,12 +284,15 @@ export function fitPlayerArmShoulderV125(bodyRig, weaponPose, side = 'near') {
   const target = handTarget(bodyRig, weaponPose, side);
   const dx = target.x - rest.x, dy = target.y - rest.y, distance = Math.hypot(dx, dy);
   const missing = Math.max(0, distance - lengths.upper - lengths.fore + 1e-6);
-  const translated = Math.hypot(finite(weaponPose.translation?.x), finite(weaponPose.translation?.y)) > 1e-7;
+  const translationDistance = Math.hypot(finite(weaponPose.translation?.x), finite(weaponPose.translation?.y));
+  const translated = translationDistance > 1e-7;
   const obstructed = translated || weaponPose.muzzle?.obstructedV124 === true || weaponPose.obstructedV124 === true;
   const socket = PLAYER_SHOULDER_SOCKETS_V125[bodyRig.atlas]?.[bodyRig.frame]?.[side];
   let amount = 0, limit = 0;
-  if (missing > 0 && obstructed && socket && distance > 0) {
-    // Five world pixels in mission, 3.31 in Bioforge, 4.32 in the hub.
+  if (obstructed && socket && distance > 0) {
+    // The reviewed reference permits five world pixels at its 148px cell.
+    // A smaller shared stature reduces that bound; opaque socket bounds can
+    // restrict it further for the actual movement direction.
     limit = 5 * bodyRig.scale / (148 / 256);
     const ux = dx / distance, uy = dy / distance;
     const { a, b, c, d } = bodyRig.matrix;
@@ -298,7 +307,12 @@ export function fitPlayerArmShoulderV125(bodyRig, weaponPose, side = 'near') {
     if (sourceY > 0) limit = Math.min(limit, (socket.bottom - source.y) / sourceY);
     if (sourceY < 0) limit = Math.min(limit, (socket.top - source.y) / sourceY);
     limit = Math.max(0, finite(limit));
-    amount = Math.min(limit, missing + .05 * bodyRig.scale);
+    // Retraction also changes the arm's posture inside its existing cap,
+    // even when the new native-width body still has enough reach. A small
+    // fraction of the actual gun displacement recentres that hidden joint;
+    // socket alpha bounds and the original bone lengths remain authoritative.
+    const posture = Math.min(bodyRig.scale, translationDistance * .06);
+    amount = Math.min(limit, missing + Math.max(.05 * bodyRig.scale, posture));
   }
   const shift = amount > 0 ? point(dx / distance * amount, dy / distance * amount) : point(0, 0);
   return freeze({ shoulder: point(rest.x + shift.x, rest.y + shift.y), restShoulder: point(rest.x, rest.y),

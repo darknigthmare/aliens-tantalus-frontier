@@ -1,3 +1,4 @@
+import { HUMAN_GAIT_PROFILES_V133, humanGaitKindV133, humanGaitStrideV133 } from './player-gait-v133.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { PLAYER_MODULAR_RIG_ANCHORS_V126, resolvePlayerModularRigV126 } from './player-modular-rig-v126.js';
 import { solvePlayerArmIKV125, playerBodyRigImageReadyV125 } from './player-body-rig-v125.js';
@@ -25,9 +26,9 @@ const freeze = value => {
  * surface contract. No option changes an actor's collision or firing rig. */
 export const PLAYER_LOCOMOTION_PRESENTATION_V129 = freeze({
   schema: 129, upperLeg: 44, lowerLeg: 43, settleDuration: .12,
-  walk: { stride: 108, duty: .58, lift: 17 },
-  run: { stride: 124, duty: .48, lift: 23 },
-  crouch: { stride: 40, duty: .68, lift: 7 },
+  walk: { stride: 176, ...HUMAN_GAIT_PROFILES_V133.walk },
+  run: { stride: 216, ...HUMAN_GAIT_PROFILES_V133.run },
+  crouch: { stride: 80, ...HUMAN_GAIT_PROFILES_V133.crouch },
   artStatus: 'independent-pelvis-thigh-shin-boot-parts'
 });
 const C = PLAYER_LOCOMOTION_PRESENTATION_V129;
@@ -44,7 +45,7 @@ function advanceGaitTransition(previous, cycles, distance) {
     const entry = previous.gaitTransition.feet[side], phaseOffset = side === 'far' ? .5 : 0;
     const swingTravel = entry.swingTravel + Math.abs(swingIntegral(cycles + phaseOffset, profile.duty)
       - swingIntegral(previous.cycles + phaseOffset, profile.duty)) * previous.stride;
-    feet[side] = { ...entry, swingTravel, travel: entry.travel + distance };
+    feet[side] = { ...entry, swingTravel: entry.swingSpan - swingTravel < 1e-6 ? Math.max(entry.swingSpan, swingTravel) : swingTravel, travel: entry.travel + distance };
   }
   return { feet };
 }
@@ -52,7 +53,7 @@ function advanceGaitTransition(previous, cycles, distance) {
 function stepShape(state, side, scale, crouching, staticAction) {
   const profile = C[crouching ? 'crouch' : state.gait];
   const phase = mod(state.cycles + (side === 'far' ? .5 : 0));
-  const stride = profile.stride * scale, swinging = phase >= profile.duty;
+  const stride = Number.isFinite(state.stride) && state.stride > 0 ? state.stride : profile.stride * scale, swinging = phase >= profile.duty;
   const swing = swinging ? (phase - profile.duty) / (1 - profile.duty) : 0;
   const hasStride = state.hasWalked && !staticAction;
   const settle = state.moving ? 1 : 1 - smooth(state.settleProgress);
@@ -69,13 +70,15 @@ function stepShape(state, side, scale, crouching, staticAction) {
     lift = Math.max(0, lift + correction.lift * weight);
     angle += correction.angle * weight;
   }
+  // A changing gait can leave a small ankle roll after the free foot has
+  // nearly touched down. Bound it by its real clearance so the heel/toe
+  // cannot penetrate the deck while the contact point remains truthful.
+  const rollLimit = Math.asin(clamp(lift / ((angle < 0 ? 19 : 14) * scale)));
+  angle = clamp(angle, -rollLimit, rollLimit);
   return { phase, swing, lift, offset, angle, settle, swinging, hasStride };
 }
 
-function activeGait(actor) {
-  if (actor?.crouching) return 'crouch';
-  return actor?.movementV124?.gait === 'run' || Math.abs(finite(actor?.vx)) >= 265 ? 'run' : 'walk';
-}
+const activeGait = humanGaitKindV133;
 function groundMotion(actor) {
   return actor?.alive !== false && !actor?.downed && actor?.grounded === true
     && !actor?.climbing && !actor?.inVehicle && !actor?.ventTransit && !actor?.vehicleAccessPhase
@@ -108,7 +111,7 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
   // not swap to another stride before the remaining boot has met the floor.
   const requested = groundMotion(actor);
   const gait = requested || !prior || Boolean(actor.crouching) !== prior.crouching ? desiredGait : prior.gait;
-  const profile = C[gait], stride = profile.stride * scale;
+  const profile = C[gait], stride = humanGaitStrideV133(actor, gait, scale);
   const dx = prior ? actor.x - prior.x : 0;
   const moved = requested && Math.abs(dx) > 1e-7;
   const postureChanged = prior && Boolean(actor.crouching) !== prior.crouching;
@@ -164,7 +167,7 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
 
 function fallbackState(actor, bodyRig) {
   const gait = bodyRig.crouching ? 'crouch' : activeGait(actor), profile = C[gait];
-  const stride = profile.stride * bodyRig.scale;
+  const stride = humanGaitStrideV133(actor, gait, bodyRig.scale);
   const distance = Math.max(0, finite(actor.weaponRigMotionV125?.distance));
   const moving = groundMotion(actor);
   // Existing V125 distances are also real simulation observations. They make
@@ -224,7 +227,8 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   const staticAction = Boolean(bodyRig.actionV127 && !bodyRig.moving);
   const state = locomotionState?.schema === 129 && Number.isFinite(locomotionState.cycles)
     && C[locomotionState.gait] ? locomotionState : fallbackState(actor, bodyRig);
-  const hipDrop = crouching ? 6 : grounded && bodyRig.moving ? 7 : 4;
+  const pelvisBob = grounded && state.moving && !crouching && !staticAction ? .6 * (1 - Math.cos(state.cycles * Math.PI * 4)) : 0;
+  const hipDrop = (crouching ? 6 : grounded && state.moving ? 6 : 4) + pelvisBob;
   const hips = { near: point(waist.x - f * 9 * s, waist.y + hipDrop * s),
     far: point(waist.x + f * 12 * s, waist.y + hipDrop * s) };
   const legs = {}, requestedFeet = {}, contacts = { floorY: grounded ? floor : null, feet: { near: null, far: null } };
@@ -255,7 +259,7 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       const dx = foot.ankle.x - hips[side].x;
       return foot.ankle.y - Math.sqrt(Math.max(0, reach * reach - dx * dx));
     }));
-    const pelvisY = Math.min(waist.y + 24 * s, supportY);
+    const pelvisY = Math.min(waist.y + 28 * s, supportY);
     hips.near.y = hips.far.y = pelvisY;
   }
   for (const side of ['near', 'far']) {
@@ -288,7 +292,10 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   const lower = buildPlayerArticulatedLowerLayersV128({ waist, hips, legs, scale: s, facing: f, legDefinitions });
   const detail = { schema: 129, mode: !grounded ? 'airborne' : staticAction ? bodyRig.stance
     : state.moving ? crouching ? 'crouch-move' : state.gait : state.settleProgress < 1 ? 'settling' : 'idle',
-    source: state.source, phase: mod(state.cycles), legs, contacts };
+    source: state.source, phase: mod(state.cycles), stride: state.stride,
+    presentationV133: { schema: 133, cadenceSource: 'supported-stature-and-world-distance',
+      stepsPerSecond: state.moving ? 2 * Math.abs(finite(actor.vx)) / state.stride : 0,
+      standingHeight: 193 * s, footLiftLimit: C[state.gait].lift * s, pelvisBob: pelvisBob * s }, legs, contacts };
   const decorated = { ...bodyRig, modularLowerLayersV128: lower, locomotionV129: detail };
   const modular = resolvePlayerModularRigV126({ bodyRig: decorated, appearance, images });
   const requiredAssets = modular.requiredAssets || [];

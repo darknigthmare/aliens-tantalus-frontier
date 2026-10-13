@@ -9,6 +9,9 @@ const visualLayer = (roomId, artKey, phase) => Object.freeze({
   asset: `/assets/openai/hub/layers/${artKey}-${phase === 'back' ? 'overhead' : 'foreground'}.png`,
   sourceSize: SOURCE_SIZE_V56,
   renderBounds: TARGET_BOUNDS_V56,
+  plane: phase === 'front' ? 'below-walk-rail' : 'rear-architecture',
+  actorSafe: true,
+  sourceStatus: 'existing-room-authored-layer',
   collidable: false
 });
 

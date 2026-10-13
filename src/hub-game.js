@@ -27,6 +27,8 @@ import {
 import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { hubFarParallaxV116, drawHubRoomDepthV119, drawHubContactShadowV116 } from './hub-depth-presentation-v116.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
+import { HUB_ROOM_NAVIGATION_V133, hubRearPropColliderV133 } from './hub-navigation-layout-v133.js';
+import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
   drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
@@ -97,18 +99,12 @@ const HUB_PROP_SOURCE_SIZES = Object.freeze({
   'life-support-scrubber': Object.freeze({ width: 226, height: 179 })
 });
 
-const GEOMETRY_TEMPLATES = Object.freeze([
-  Object.freeze([{ dx: 238, w: 76, h: 38, style: 0 }, { dx: 488, w: 112, h: 27, style: 1 }, { dx: 822, w: 58, h: 48, style: 2 }]),
-  Object.freeze([{ dx: 188, w: 92, h: 29, style: 1 }, { dx: 454, w: 64, h: 52, style: 2 }, { dx: 804, w: 104, h: 35, style: 0 }]),
-  Object.freeze([{ dx: 246, w: 58, h: 54, style: 2 }, { dx: 526, w: 96, h: 31, style: 0 }, { dx: 824, w: 72, h: 42, style: 1 }]),
-  Object.freeze([{ dx: 198, w: 108, h: 34, style: 0 }, { dx: 470, w: 72, h: 45, style: 2 }, { dx: 790, w: 86, h: 28, style: 1 }])
-]);
-
 const makeRoom = (id, name, action, description, index, npcRow, art, prop, geometryVariant, viewport, propHeight = 138) => {
   const xStart = index * ROOM_WIDTH;
   const profile = HUB_ROOM_PROFILES[id];
   const worldWidth = profile?.worldWidth || ROOM_WIDTH;
-  const propX = xStart + worldWidth * (id === 'briefing' ? 0.5 : id === 'armory' ? 0.54 : 0.7);
+  const navigation = HUB_ROOM_NAVIGATION_V133[id];
+  const propX = xStart + navigation.propX;
   const sourceSize = HUB_PROP_SOURCE_SIZES[prop] || { width: 1, height: 1 };
   const renderWidth = sourceSize.width * (propHeight / sourceSize.height);
   const propRenderBounds = Object.freeze({
@@ -118,7 +114,8 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     h: propHeight
   });
   const propCollisionBounds = profile?.propCollider ? Object.freeze({
-    ...(profile.propCollider.collisionMode ? { collisionMode: profile.propCollider.collisionMode } : {}),
+    collisionMode: navigation.collisionMode,
+    physicalPlane: navigation.propPlane,
     x: propX - Math.min(profile.propCollider.width, renderWidth) / 2,
     y: FLOOR_Y - Math.min(profile.propCollider.height, propHeight),
     w: Math.min(profile.propCollider.width, renderWidth),
@@ -144,7 +141,7 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     xEnd: xStart + worldWidth,
     x: propX,
     profile,
-    collisionSource: profileGeometry ? 'room-profile' : 'fallback',
+    collisionSource: 'authored-room-profile',
     background: `/assets/openai/hub/rooms/${art}.png`,
     prop: `/assets/openai/hub/props/${sourceSize.file || `${prop}.png`}`,
     propSourceBounds: sourceSize.sourceBounds || null,
@@ -153,13 +150,7 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     propInteractionBounds,
     propHeight,
     viewport: Object.freeze({ x: xStart + viewport.x, y: viewport.y, w: viewport.w, h: viewport.h }),
-    geometry: Object.freeze(profileGeometry || GEOMETRY_TEMPLATES[geometryVariant].map((item) => Object.freeze({
-      x: xStart + item.dx,
-      y: FLOOR_Y - item.h,
-      w: item.w,
-      h: item.h,
-      style: item.style
-    })))
+    geometry: Object.freeze(profileGeometry || [])
   });
 };
 
@@ -266,24 +257,24 @@ export function buildHubObstacleGeometryV87(deckIndex) {
       ? dropship.collisionSegments
       : [dropship.collisionBounds];
     for (const bounds of segments) {
-      geometry.push({
+      geometry.push(hubRearPropColliderV133({
         x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
         id: bounds.id || `${dropship.id}-collision`,
         roomId: hangar.id,
         role: bounds.role || 'dropship-hull',
         actorId: dropship.id,
         collisionOnly: true
-      });
+      }));
     }
   }
   const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
   if (vehicleBay) {
     const actor = resolveHubVehicleArtV58(vehicleBay.id).vehicle;
     const bounds = actor.collisionBounds;
-    geometry.push({
+    geometry.push(hubRearPropColliderV133({
       x: vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
       roomId: vehicleBay.id, role: 'vehicle-hull', actorId: actor.id, collisionOnly: true
-    });
+    }));
   }
   return geometry;
 }
@@ -863,17 +854,22 @@ export class HubGame {
       if (room.id !== DROPSHIP_HANGAR_ART_V55.roomId) this.drawInteractionProp(ctx, room);
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
+    for (const door of this.doorStates) if (door.lift) this.drawDoor(ctx, door);
     for (const npc of this.npcs) {
       this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
       const image = this.npcSheets[npc.sheet] || this.crewSheet;
+      const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing: npc.vx < 0 ? -1 : 1 },
+        sheet: { path: NPC_SPRITE_FILES[npc.sheet], sourceFacing: 1 }, column: frame, row: 1, surface: 'hub' });
+      npc.humanVisualV133 = human;
+      if (drawHumanAtlasV133(ctx, image, human)) continue;
       const renderWidth = 82;
       const renderHeight = 126;
       const renderY = npc.y + npc.h - renderHeight * (240 / 256);
       this.drawSheetCell(ctx, image, frame, 1, npc.x + npc.w / 2 - renderWidth / 2, renderY, renderWidth, renderHeight, npc.vx < 0, 4, 4);
     }
     this.drawPlayer(ctx);
-    for (const door of this.doorStates) this.drawDoor(ctx, door);
+    for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door);
     for (const room of deck.rooms) {
       if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
       else if (resolveHubRoomArtV56(room.id)) this.drawModularRoomV56(ctx, room, 'front');
@@ -1163,8 +1159,6 @@ export class HubGame {
     if (!assetReady(image)) return;
     const { x, y, w: width, h: height } = getHubDoorBounds(door);
     if (door.lift) {
-      ctx.fillStyle = 'rgba(2, 7, 8, .98)';
-      ctx.fillRect(x - 16, y - 28, width + 32, height + 36);
       ctx.strokeStyle = '#4b6658';
       ctx.strokeRect(x - 15.5, y - 27.5, width + 31, height + 35);
     }

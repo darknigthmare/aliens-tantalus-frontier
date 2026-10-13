@@ -1,6 +1,7 @@
 import { USER_EQUIPMENT_ART_V95 } from './user-equipment-art-v95.js';
 import { resolveCombatAimV83, resolveCombatMuzzleV83 } from './combat-aim-v83.js';
 import { getStaticEquipmentPresentationV124 } from './player-presentation-v124.js';
+import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
 
 // These are project balance values, not canonical weapon/armour specifications.
 // The art manifest contains only real reviewed PNGs. No item exists before its
@@ -71,7 +72,7 @@ function boundsOf(art) {
 export function getUserArmorTransformV95(actor, armor) {
   if (!actor || armor?.kind !== 'armor') return null;
   const b = boundsOf(armor);
-  const scale = actor.h / Math.max(1, b.bottom - b.top);
+  const scale = HUMAN_VISUAL_CONTRACT_V133.standingHeight / Math.max(1, b.bottom - b.top);
   const width = armor.sourceWidth * scale, height = armor.sourceHeight * scale;
   const mirror = (actor.facing < 0 ? -1 : 1) !== (facesLeft(armor) ? -1 : 1);
   const pivot = armor.pivot || { x: (b.left + b.right) / (2 * armor.sourceWidth), y: b.bottom / armor.sourceHeight };

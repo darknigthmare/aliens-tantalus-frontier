@@ -1,3 +1,4 @@
+import { PLAYER_VISUAL_CONTRACT_V81 } from '../src/player-visual-contract-v81.js';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
@@ -128,7 +129,7 @@ test('reload keeps distance-driven standing or crouched legs and cannot shrink t
         weaponRigMotionV125: { distance, shotAt: -100, time: 4 } });
       const loaded = rig(subject), normal = rig({ ...subject, reloading: false });
       assert.equal(loaded.atlas, 'locomotion'); assert.equal(loaded.frame, normal.frame);
-      frames.add(loaded.frame); near(loaded.standingHeight, 148 * 193 / 256);
+      frames.add(loaded.frame); near(loaded.standingHeight, PLAYER_VISUAL_CONTRACT_V81.surfaces.mission.height * 193 / 256);
     }
     assert.ok(frames.size > 1, 'Walking during a reload must visibly advance the legs.');
   }
@@ -210,7 +211,7 @@ test('a real tangent ceiling preserves heavy-weapon grip contact with a bounded 
     near(arms.near.hand.x, retracted.grip.x); near(arms.near.hand.y, retracted.grip.y);
     assert.equal(JSON.stringify({ body, retracted }), before, 'Fitting cannot mutate body, gun or projectile geometry.');
     assert.equal(resolvePlayerArmPoseV125(body, original).near.shoulderShiftDistance, 0, 'No protraction without the obstacle.');
-    const impossible = translateHeldWeaponPoseV125(retracted, 0, 40);
+    const impossible = translateHeldWeaponPoseV125(retracted, 0, body.shoulders.near.y + body.armLengths.near.upper + body.armLengths.near.fore + 40 - retracted.grip.y);
     const limited = resolvePlayerArmPoseV125(body, impossible).near;
     assert.equal(limited.shiftLimited, true); assert.ok(limited.reachError > 30);
     assert.ok(limited.shoulderShiftDistance <= 5, 'An impossible grip remains visibly reported, never concealed by stretching.');

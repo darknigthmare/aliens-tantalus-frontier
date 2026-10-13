@@ -51,6 +51,8 @@ import { ARCHIVE_RELAY_CAMPAIGN_V122, buildArchiveRelayLevelV122 } from './archi
 import { ArchiveRelayReaderV122, renderArchiveRelayArchiveV122 } from './archive-relay-ui-v122.js';
 import { HubGame as HubGameV88, HUB_DECKS, HUB_NPC_ROSTER } from './hub-opening-v88.js';
 import { withHubTrainingV132, validateHubLoaderReceiptV132 } from './hub-training-v132.js';
+import { bindHubControlV133 } from './hub-control-bindings-v133.js';
+import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.js';
 import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132 } from './save.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
@@ -160,6 +162,7 @@ forgeSaveSystem.load();
 const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
+const hubControlBindingsV133 = [];
 let standaloneContext = null;
 // A rejected terminal balance never becomes a false victory or a paid retreat.
 let pendingResolutionV121 = null;
@@ -224,7 +227,7 @@ function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
 }
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
-const HubGame = withHubTrainingV132(HubGameV88);
+const HubGame = withHubAuthoredCompositionV133(withHubTrainingV132(HubGameV88));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -636,9 +639,12 @@ function openHubStation(view) {
 }
 
 function openHubDialogue(interaction) {
-  const contract = HUB_STATION_DIALOGUES_V61[interaction?.roomId];
+  // Parent room contacts historically carry id; annex/opening contacts carry
+  // roomId. Both refer to the same physical room and station dialogue.
+  const roomId = interaction?.roomId || interaction?.id;
+  const contract = HUB_STATION_DIALOGUES_V61[roomId];
   if (!contract) return false;
-  pendingHubInteraction = { interaction, contract };
+  pendingHubInteraction = { interaction: { ...interaction, roomId }, contract };
   hubEngine.pause();
   byId('hub-dialogue-speaker').textContent = contract.speaker;
   byId('hub-dialogue-text').textContent = contract.text;
@@ -715,6 +721,7 @@ function setupXenoTrialsUiV96() {
 function showView(name) {
   name = resolvePlayerViewV110(name, developerModeV110);
   if (!VIEW_META[name]) return;
+  hubControlBindingsV133.forEach(binding => binding.clear());
   if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
   if (name !== 'settings') titleScreen.clearMenuReturnV89();
   refugeControllerV87.close();
@@ -2173,6 +2180,7 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  hubControlBindingsV133.forEach(binding => binding.clear());
   squadCommandDockV132?.close({ restoreFocus: false });
   if (missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ resume: false, restoreFocus: false });
   if (archiveRelayReaderV122?.openState) archiveRelayReaderV122.close({ resume: false, restoreFocus: false });
@@ -3073,17 +3081,29 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.action.startsWith('navigate:')) {
-    if (!openHubDialogue(interaction)) showView(interaction.action.split(':')[1]);
+    if (!openHubDialogue(interaction)) {
+      const view = interaction.action.split(':')[1];
+      if (!openHubStation(view)) showView(view);
+    }
     return;
   }
+  const serviceBeforeV133 = clone(saveSystem.data);
+  let servicedV133 = false;
   try {
-    if (applyHubService(interaction.action)) {
-      saveSystem.commit();
-      renderAll();
-      toast('Service physique exécuté et temps stratégique avancé.');
-    }
+    servicedV133 = applyHubService(interaction.action);
+    if (servicedV133) saveSystem.commit();
   } catch (error) {
-    toast(error.message);
+    saveSystem.data = serviceBeforeV133;
+    toast(error.message); return;
+  }
+  if (servicedV133) {
+    // Native interact() checkpoints its actor after this callback. Apply a
+    // committed treatment to that same actor before it persists, so its old
+    // health cannot overwrite the successfully saved medical service.
+    if (interaction.action === 'service:medical' && hubEngine.player)
+      hubEngine.player.health = Math.min(hubEngine.player.maxHealth || 100, saveSystem.data.hub.playerHealth);
+    renderAll();
+    toast('Service physique exécuté et temps stratégique avancé.');
   }
 }
 
@@ -3255,11 +3275,18 @@ function bindHoldControl(button, target, code) {
 
 function setupRuntimeControls() {
   all('[data-hub-control]').forEach((button) => {
-    const control = button.dataset.hubControl;
-    const activate = (event) => { event.preventDefault(); audio.unlock(); hubEngine.setControl(control, true); };
-    const release = (event) => { event.preventDefault(); hubEngine.setControl(control, false); };
-    button.addEventListener('pointerdown', activate);
-    ['pointerup', 'pointercancel', 'pointerleave'].forEach((name) => button.addEventListener(name, release));
+    hubControlBindingsV133.push(bindHubControlV133(button, {
+      canActivate: () => activeView === 'hub' && hubEngine.running && !creatorOwnerV84
+        && (ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest'),
+      activate: control => {
+        audio.unlock(); hubEngine.setControl(control, true);
+        // The canvas keydown handler calls useLift on W/S. Touch and focused
+        // buttons need the same command, while still holding the ladder key.
+        if (!hubEngine.hubTrainingV132?.active && ['up', 'down'].includes(control))
+          hubEngine.useLift(control === 'up' ? -1 : 1);
+      },
+      release: control => hubEngine.setControl(control, false)
+    }));
   });
   all('[data-mission-key]').forEach((button) => bindHoldControl(button, engine, button.dataset.missionKey));
   byId('hub-training-controls-v132').onclick = event => {

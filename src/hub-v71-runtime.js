@@ -14,7 +14,7 @@ import {
   createHubCommercialStateV87 as createHubCommercialStateV71
 } from './hub-annex-registry-v87.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, drawShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
-import { SHIP_PORT_ANNEX_V87, getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from './ship-port-room-v87.js';
+import { SHIP_PORT_ANNEX_V87, SHIP_PORT_TERMINAL_V87, getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from './ship-port-room-v87.js';
 import { SHIP_REFUGE_ANNEX_V87, getRefugeInteractionV87 } from './refuge-room-v87.js';
 import { drawRefugeLayerV87 } from './refuge-art-v87.js';
 import { normalizeRefugeHubResumeV87, projectRefugeHubSaveV87 } from './refuge-save-v87.js';
@@ -24,6 +24,7 @@ import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
+import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
 
 export * from './hub-v62-runtime.js';
 export * from './tantalus-hub-expansion-v71.js';
@@ -232,7 +233,7 @@ export class HubGame extends HubGameV62 {
     const colliders = this.annexSolidCollidersV71(annex);
     const safeAt = (x, y) => {
       const actor = { ...desired, x, y };
-      return !colliders.some((collider) => overlaps(actor, collider));
+      return !colliders.some((collider) => collider.collisionMode !== 'one-way-top' && overlaps(actor, collider));
     };
     if (!safeAt(desired.x, desired.y)) {
       const candidates = colliders
@@ -315,12 +316,13 @@ export class HubGame extends HubGameV62 {
       ));
     const support = platforms[0];
     const sideOffset = annex.entrance.w / 2 + 32;
-    const centerX = support
+    const authored = HUB_ANNEX_ENTRANCES_V133[annex.id];
+    const centerX = authored ? room.xStart + authored.centerX : support
       ? (annex.entranceSide === 'west'
           ? support.x + sideOffset
           : support.x + support.w - sideOffset)
       : room.xStart + (annex.entranceSide === 'west' ? 220 : HUB_WORLD.roomWidth - 220);
-    const bottom = support?.y || HUB_WORLD.floorY;
+    const bottom = authored?.bottom ?? support?.y ?? HUB_WORLD.floorY;
     const bounds = annex.parentDoorBounds ? { ...annex.parentDoorBounds } : {
       x: centerX - annex.entrance.w / 2,
       y: bottom - annex.entrance.h,
@@ -390,12 +392,26 @@ export class HubGame extends HubGameV62 {
     return this.nearestParentAnnexDoorV71() || super.nearestInteraction();
   }
 
+  prioritizedParentAnnexDoorV133() {
+    const door = this.nearestParentAnnexDoorV71();
+    if (!door) return null;
+    const port = getShipPortInteractionV87(this);
+    if (port?.action === 'ship-port:terminal') {
+      const center = this.player.x + this.player.w / 2;
+      const doorCenter = door.bounds.x + door.bounds.w / 2;
+      if (Math.abs(center - SHIP_PORT_TERMINAL_V87.centerX) < Math.abs(center - doorCenter)) return null;
+    }
+    return door;
+  }
+
   statusPrompt() {
     const transition = this.annexTransitionV71;
     if (transition) {
       const verb = transition.direction === 'enter' ? 'OUVERTURE DU SAS ANNEXE' : 'RETOUR AU HUB';
       return `${verb} · ${Math.round(transition.progress * 100)}%`;
     }
+    const parentDoor = this.prioritizedParentAnnexDoorV133();
+    if (parentDoor) return `E — ENTRER DANS ${parentDoor.annex.shortName}`;
     const companionInteraction = this.getCompanionInteractionV87?.();
     if (companionInteraction && !this.nearestAnnexExitV71()) return companionInteraction.prompt;
     const portInteraction = getShipPortInteractionV87(this);
@@ -421,6 +437,8 @@ export class HubGame extends HubGameV62 {
 
   interact() {
     if (!this.running || this.annexTransitionV71 || this.annexStateReadOnlyV87) return;
+    const parentDoor = this.prioritizedParentAnnexDoorV133();
+    if (parentDoor) { this.beginAnnexTransitionV71(parentDoor.annexId, 'enter'); return; }
     const companionInteraction = this.getCompanionInteractionV87?.();
     if (companionInteraction && !this.nearestAnnexExitV71()) { this.onAction(companionInteraction); return; }
     const portInteraction = getShipPortInteractionV87(this);
@@ -798,6 +816,7 @@ export class HubGame extends HubGameV62 {
 
   resolveAnnexHorizontalV71(annex, previousX) {
     for (const collider of this.annexSolidCollidersV71(annex)) {
+      if (collider.collisionMode === 'one-way-top') continue;
       if (!overlaps(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
         this.player.x = collider.x - this.player.w;
@@ -812,7 +831,8 @@ export class HubGame extends HubGameV62 {
     if (this.player.vy < 0) {
       const previousTop = previousBottom - this.player.h;
       const ceilings = this.annexSolidCollidersV71(annex).filter((collider) => (
-        this.player.x + this.player.w > collider.x && this.player.x < collider.x + collider.w
+        collider.collisionMode !== 'one-way-top'
+        && this.player.x + this.player.w > collider.x && this.player.x < collider.x + collider.w
         && previousTop >= collider.y + collider.h - 1 && this.player.y < collider.y + collider.h
       )).sort((left, right) => right.y + right.h - left.y - left.h);
       if (ceilings[0]) {
@@ -830,7 +850,8 @@ export class HubGame extends HubGameV62 {
       for (const surface of surfaces) {
         const horizontallySupported = this.player.x + this.player.w > surface.x
           && this.player.x < surface.x + surface.w;
-        if (!horizontallySupported || previousBottom > surface.y + 8 || this.player.y + this.player.h < surface.y) continue;
+        const tolerance = surface.collisionMode === 'one-way-top' ? 0.001 : 8;
+        if (!horizontallySupported || previousBottom > surface.y + tolerance || this.player.y + this.player.h < surface.y) continue;
         this.player.y = surface.y - this.player.h;
         this.player.vy = 0;
         this.player.grounded = true;
@@ -1109,6 +1130,7 @@ export class HubGame extends HubGameV62 {
     ctx.fillStyle = '#789080';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, 4);
     for (const platform of annex.platforms.filter((entry) => entry.role !== 'floor')) {
+      if (this.drawAnnexSteelPlatformV133?.(ctx, platform, annex)) continue;
       // The visible walking edge uses precisely the physical platform bounds.
       // Crop only the truss: the legacy railing has opaque white openings.
       if (imageReady(deckImage)) {
@@ -1135,6 +1157,7 @@ export class HubGame extends HubGameV62 {
       }
     }
     for (const ladder of annex.ladders) {
+      if (this.drawAnnexSteelLadderV133?.(ctx, ladder, annex)) continue;
       if (imageReady(ladderImage)) {
         // Assemble rails and one clean rung, leaving real transparency between
         // them instead of drawing the white-filled holes of the source sheet.

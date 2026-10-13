@@ -1,7 +1,7 @@
 const ROOM_WIDTH = 1280;
 const FLOOR_Y = 624;
 
-const defineRoomProfile = (sceneScale, floorRatio, colliderWidth, colliderHeight, collisionMode = null) => Object.freeze({
+const defineRoomProfile = (sceneScale, floorRatio, colliderWidth, colliderHeight, collisionMode = 'one-way-top') => Object.freeze({
   worldWidth: ROOM_WIDTH,
   sceneScale,
   floorRatio,

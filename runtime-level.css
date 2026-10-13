@@ -2,6 +2,40 @@
   --runtime-safe: max(12px, env(safe-area-inset-top));
 }
 
+/* Informational toasts contain no action. Keep ship and mission controls
+   operable while an import, checkpoint or service message is visible. */
+.toast-region, .toast { pointer-events: none; }
+
+@media (max-width: 560px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    height: auto;
+    min-height: 112px;
+    padding: 10px 12px;
+    gap: 8px 12px;
+  }
+  .topbar > div { min-width: 0; }
+  .topbar h1 { font-size: 14px; line-height: 1.35; overflow-wrap: anywhere; }
+  .topbar .icon-button { width: 44px; min-height: 44px; }
+  .topbar .top-metrics {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    gap: 8px;
+  }
+  .topbar .top-metrics button {
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px;
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+}
+
 .runtime-exit {
   position: absolute;
   z-index: 30;
@@ -81,6 +115,7 @@ html.mission-mode body {
   border: 0;
   border-top: 1px solid rgba(96, 124, 105, .48);
   background: rgba(3, 11, 8, .96);
+  pointer-events: none;
 }
 
 .mission-mode .play-view {
@@ -234,6 +269,21 @@ html.mission-mode body {
     overflow: visible;
   }
 
+  .hub-mode .hub-level-shell {
+    /* Centre the scene in the space between the header and the two control
+       rows/readout, including shorter portrait phones. */
+    top: clamp(80px, calc(50svh - 60px - 28.125vw), 360px);
+  }
+
+  .hub-mode .toast-region {
+    top: max(64px, calc(env(safe-area-inset-top) + 58px));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: auto;
+    left: max(12px, env(safe-area-inset-left));
+  }
+
+  .hub-mode .toast { max-width: none; }
+
   .mission-mode .alpha-bravo-command-dock-v69 {
     position: fixed;
     z-index: 34;
@@ -265,11 +315,14 @@ html.mission-mode body {
     position: fixed;
     z-index: 28;
     right: 0;
-    bottom: max(70px, calc(env(safe-area-inset-bottom) + 64px));
+    /* Two 48px control rows plus their gap and safe-area inset. The readout
+       must stay above both rows, including the qualification controls. */
+    bottom: max(126px, calc(env(safe-area-inset-bottom) + 126px));
     left: 0;
     min-height: 58px;
     padding: 8px 12px;
     background: rgba(3, 11, 8, .92);
+    box-sizing: border-box;
   }
 
   .hub-mode .hub-touch-controls {
@@ -321,6 +374,12 @@ html.mission-mode body {
 }
 
 @media (orientation: landscape) and (pointer: coarse), (orientation: landscape) and (max-width: 900px) {
+  .hub-mode .toast-region {
+    top: max(54px, calc(env(safe-area-inset-top) + 54px));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: auto;
+    max-width: min(360px, calc(100vw - 24px));
+  }
   .mission-mode .mission-touch-controls {
     display: grid;
     grid-template-columns: repeat(10, minmax(44px, 52px));

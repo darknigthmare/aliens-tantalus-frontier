@@ -1,5 +1,6 @@
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { drawPlayerAimGuideV124 } from './player-control-v124.js';
+import { resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
 import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { resolveUserEquipmentLoadoutV95, loadUserEquipmentImagesV95, drawUserArmorV95, drawUserWeaponV95 } from './user-equipment-v95.js';
@@ -2335,7 +2336,10 @@ export function withV52MissionRuntime(BaseEngine) {
       }
       const runtime = buildSpriteHitboxRuntime(entity, entry);
       if (!runtime) return false;
-      const { flip, sprite } = runtime;
+      const humanVisual = resolveHumanAtlasGeometryV133({ actor: entity, sheet: entry,
+        column: sample.column, row: sample.row, surface: this.bioforgeLevelV80 ? 'bioforge' : 'mission' });
+      const { flip, sprite } = humanVisual || runtime;
+      entity.humanVisualV133 = humanVisual;
       const sourceWidth = (image.naturalWidth || image.width) / entry.columns;
       const sourceHeight = (image.naturalHeight || image.height) / entry.rows;
       ctx.save();

@@ -1,3 +1,4 @@
+import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import {
   HubGame as HubGameV50,
   HUB_DECKS,
@@ -296,8 +297,10 @@ export const HUB_TRAVERSAL_PROFILES_V60 = Object.freeze({
   'dropship-hangar': traversalProfile('engineering-flightline',
     // The observation deck is the pedestrian maintenance route, above the
     // flightline and the live electrical arc. It joins the reactor balcony.
-    [platform('hangar-observation', 70, 360, 1210, 'catwalk')],
-    [ladder('hangar-observation-link', 160, 360, 624, 48)],
+    [platform('hangar-observation', 70, 360, 1210, 'catwalk'),
+      platform('hangar-maintenance-alcove-v133', 980, 440, 300, 'ledge')],
+    [ladder('hangar-observation-link', 160, 360, 624, 48),
+      ladder('hangar-maintenance-access-v133', 988, 440, 624, 44)],
     [vent('hangar-vent', 90, 302)],
     [occluder('hangar-cables', 'ceilingCables', 40, -16, 420, 124, 0.38)]),
   reactor: traversalProfile('engineering-reactor-ring',
@@ -879,6 +882,7 @@ export class HubGame extends HubGameV50 {
       if (room.id !== DROPSHIP_HANGAR_ART_V55.roomId) this.drawInteractionProp(ctx, room);
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
+    if (!this.editorPlaytest) for (const door of this.doorStates) if (door.lift) this.drawDoor(ctx, door);
     for (const npc of this.npcs) {
       this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
@@ -895,7 +899,7 @@ export class HubGame extends HubGameV50 {
       ctx.fillStyle = '#f4d477';
       ctx.fillRect(projectile.x, projectile.y, projectile.w, projectile.h);
     }
-    if (!this.editorPlaytest) for (const door of this.doorStates) this.drawDoor(ctx, door);
+    if (!this.editorPlaytest) for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door);
     for (const door of this.v51Doors) this.drawRuntimeDoor(ctx, door);
     this.drawTraversalOcclusions(ctx, 'front');
     if (!this.editorPlaytest) {
@@ -1024,7 +1028,10 @@ export class HubGame extends HubGameV50 {
     const x = enemy.x + enemy.w / 2 - renderWidth / 2;
     const y = enemy.y + enemy.h - renderHeight * (240 / 256);
     const sourceFacing = enemy.sourceFacing ?? HUB_CRISIS_SOURCE_FACING[enemy.kind] ?? -1;
-    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing !== sourceFacing, 4, 4);
+    const human = enemy.kind === 'synthetic' ? resolveHumanAtlasGeometryV133({ actor: enemy,
+      sheet: { path: CRISIS_SPRITES.synthetic, sourceFacing }, column: frame, row, surface: 'hub' }) : null;
+    if (human) enemy.humanVisualV133 = human;
+    if (!drawHumanAtlasV133(ctx, image, human)) this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing !== sourceFacing, 4, 4);
     ctx.fillStyle = '#b94f4b';
     ctx.fillRect(enemy.x, enemy.y - 8, enemy.w * Math.max(0, enemy.health / enemy.maxHealth), 3);
   }

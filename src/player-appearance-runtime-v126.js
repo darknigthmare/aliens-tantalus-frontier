@@ -69,6 +69,10 @@ export function playerAppearanceStatusV126({ actor, appearance = actor?.appearan
         : render && !render.drawn ? render.reason || 'appearance-not-drawn' : null,
     surface: bodyRig?.surface || null, bodyFrame: bodyRig?.frame ?? null,
     bodyAtlas: bodyRig?.atlas || null,
+    humanVisualV133: bodyRig?.eligible ? {
+      schema: 133, standingHeight: bodyRig.standingHeight, poseHeight: bodyRig.poseHeight,
+      pivot: { ...bodyRig.pivot }, scaleX: bodyRig.sourceScaleX, scaleY: bodyRig.sourceScaleY
+    } : null,
     action: actionStatusV127(actionRig, render), sampledAt: bodyRig?.timeSeconds ?? null,
     transit: transitStatusV128(transitRig, render),
     locomotion: bodyRig?.locomotionV129 ? { ...bodyRig.locomotionV129,

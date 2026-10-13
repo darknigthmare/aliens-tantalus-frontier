@@ -1,3 +1,5 @@
+import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
+
 // Art-only replacements for three EXISTING systemic variants. These definitions
 // never enter the appended-creature catalog, actor factory or AI registry.
 const makePose = (profileId, name, filename, width, height, bounds, sha256) => {
@@ -43,11 +45,14 @@ export function isEnemyDedicatedPoseReadyV96(image, pose) {
 export function drawEnemyDedicatedPoseV96(ctx, enemy, image) {
   const pose = getEnemyDedicatedPoseV96(enemy);
   if (!enemy?.alive || !isEnemyDedicatedPoseReadyV96(image, pose)) return false;
+  const human = resolveHumanPoseGeometryV133({ actor: enemy, definition: pose });
+  const { renderWidth, renderHeight, pivot } = human || pose;
+  enemy.humanVisualV133 = human;
   ctx.save();
   ctx.translate(enemy.x + enemy.w / 2, enemy.y + enemy.h);
   ctx.scale(enemy.facing === -1 ? -1 : 1, 1);
-  ctx.drawImage(image, -pose.pivot.x * pose.renderWidth, -pose.pivot.y * pose.renderHeight,
-    pose.renderWidth, pose.renderHeight);
+  ctx.drawImage(image, -pivot.x * renderWidth, -pivot.y * renderHeight,
+    renderWidth, renderHeight);
   ctx.restore();
   return true;
 }

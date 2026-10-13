@@ -178,7 +178,7 @@ test('walk/run transitions preserve both current trajectories and settle correct
       assert.deepEqual(rig(subject, { surface, locomotionState: changed }).legs, previous.legs);
       state = changed;
       let planted = 0;
-      for (let tick = 1; tick <= 180; tick++) {
+      for (let tick = 1; tick <= Math.ceil(changed.stride / .6) + 1; tick++) {
         subject = { ...subject, x: subject.x + direction * .6 };
         state = advancePlayerLocomotionStateV129(state, subject, .43 + tick / 120, { surface });
         const current = rig(subject, { surface, locomotionState: state });

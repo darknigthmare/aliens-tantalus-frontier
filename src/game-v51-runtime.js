@@ -40,10 +40,12 @@ import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { pressTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77, consumeTacticalReloadBonusV77, getTacticalReloadHudV77 } from './tactical-reload-v77.js';
 import { MissionGamepadInputV77 } from './mission-input-v77.js';
 import { integratePlayerVelocityV124, readPlayerControlsV124, findPlayerCoverV124,
-  resolvePlayerCoverV124, playerCoverProtectionV124, playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
+  resolvePlayerCoverV124, resolvePlayerProjectileFootprintV124, playerCoverProtectionV124,
+  playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
 import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
 import { getEcho9StandingMuzzleOptionsV124 } from './player-visual-contract-v81.js';
 import { WeaponImageCacheV125 } from './weapon-image-cache-v125.js';
+import { isHumanPoseV133, resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -1233,7 +1235,8 @@ export class GameEngine {
   refreshPlayerCoverV124(actor, { fire = false } = {}) {
     if (!actor) return null;
     actor.coverV124 = resolvePlayerCoverV124(actor, this.findCover(actor), actor.combatAimV83, {
-      fire, busy: Boolean(this.isPlaceableBusyV86?.(actor) || this.isFieldActionBusyV124?.(actor))
+      fire, busy: Boolean(this.isPlaceableBusyV86?.(actor) || this.isFieldActionBusyV124?.(actor)),
+      projectileFootprint: resolvePlayerProjectileFootprintV124(this, actor)
     });
     actor.inCover = Boolean(actor.coverV124 && !actor.coverV124.peeking);
     return actor.coverV124;
@@ -2363,8 +2366,16 @@ export class GameEngine {
         return;
       }
     }
-    const x = enemy.x + enemy.w / 2 - renderWidth / 2;
-    const y = enemy.y + enemy.h - renderHeight * (240 / CELL_SIZE);
+    const humanSheet = dedicatedEnemySheet || resolveSpriteSheet(sheetId)
+      || (isHumanPoseV133({ id: enemy.profileId }, enemy) ? {
+        path: enemy.biology === 'human' ? '/assets/openai/human-factions-animation-sheet.png'
+          : '/assets/openai/synthetic-android-animation-sheet.png', sourceFacing: 1
+      } : null);
+    const human = resolveHumanAtlasGeometryV133({ actor: enemy, sheet: humanSheet, column: frame, row });
+    enemy.humanVisualV133 = human;
+    if (human) { renderWidth = human.sprite.width; renderHeight = human.sprite.height; }
+    const x = human?.sprite.x ?? enemy.x + enemy.w / 2 - renderWidth / 2;
+    const y = human?.sprite.y ?? enemy.y + enemy.h - renderHeight * (240 / CELL_SIZE);
     ctx.save();
     if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
     if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }

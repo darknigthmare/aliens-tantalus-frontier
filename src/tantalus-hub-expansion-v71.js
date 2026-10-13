@@ -1,4 +1,5 @@
 import { HUB_ANNEX_ALPHA_BOUNDS_V72, fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
+import { hubRearPropColliderV133 } from './hub-navigation-layout-v133.js';
 
 export const HUB_COMMERCIAL_SCHEMA_V71 = 71;
 export const HUB_COMMERCIAL_OPERATION_ID_V71 = 'tantalus-hub-expansion';
@@ -132,8 +133,8 @@ function makeAnnex({
     makeBounds(`${id}-prop-beacon`, westEntrance ? 352 : 1512, 280, 75, 66, 'navigation', { collidable: false, asset: '/assets/openai/hub/props/sensor-console.png' })
   ];
   const colliders = [
-    { ...station.bounds, id: `${id}-collider-station` },
-    ...props.filter((prop) => prop.role === 'cargo' && prop.collidable).map((prop) => ({ ...prop, id: `${prop.id}-collider` })),
+    hubRearPropColliderV133({ ...station.bounds, id: `${id}-collider-station` }),
+    ...props.filter((prop) => prop.role === 'cargo' && prop.collidable).map((prop) => hubRearPropColliderV133({ ...prop, id: `${prop.id}-collider` })),
     // These structural ribs remain overhead collision geometry. Their lower
     // edge deliberately leaves a 112 px standing lane above the floor so an
     // annex can never become a decorative cul-de-sac between its entrance

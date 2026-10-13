@@ -16,17 +16,18 @@ export function hubFarParallaxV116(cameraX, room, enabled = true) {
     -presentation.cameraProfile.maximumDrift, presentation.cameraProfile.maximumDrift);
 }
 
-export function hubFloorPerspectiveV116(cameraX, { width = 1280, height = 720, floorY = 624 } = {}) {
+export function hubFloorPerspectiveV116(cameraX, { width = 1280, height = 720, floorY = 624, horizonX, horizonY = 360 } = {}) {
   const visibleStart = Math.floor(Math.max(0, cameraX) / 160) * 160 - 160;
-  const vanishingX = cameraX + width / 2;
+  const vanishingX = Number.isFinite(horizonX) ? horizonX : cameraX + width / 2;
   const nearY = Math.max(floorY, height);
   return {
-    walkY: floorY, nearY,
+    walkY: floorY, nearY, horizonX: vanishingX, horizonY,
     seams: Array.from({ length: Math.ceil(width / 160) + 4 }, (_, index) => {
       const x = visibleStart + index * 160;
-      return { farX: x, nearX: vanishingX + (x - vanishingX) * 1.28 };
+      const projection = (nearY - Math.min(horizonY, floorY - 80)) / (floorY - Math.min(horizonY, floorY - 80));
+      return { farX: x, nearX: vanishingX + (x - vanishingX) * projection };
     }),
-    crossRails: [floorY + 12, floorY + 34, floorY + 67].filter(y => y < nearY)
+    crossRails: [0.13, 0.36, 0.72].map(fraction => floorY + (nearY - floorY) * fraction).filter(y => y < nearY)
   };
 }
 
@@ -62,7 +63,8 @@ export function drawHubRoomDepthV119(ctx, cameraX, room, bounds = {}, enabled = 
   if (roomX + width <= cameraX || roomX >= cameraX + viewportWidth) return false;
   ctx.save();
   ctx.beginPath(); ctx.rect(roomX, floorY + 4, width, Math.max(0, height - floorY - 4)); ctx.clip();
-  drawHubFloorPerspectiveV116(ctx, cameraX, { width: viewportWidth, height, floorY });
+  drawHubFloorPerspectiveV116(ctx, cameraX, { width: viewportWidth, height, floorY,
+    horizonX: roomX + width / 2, horizonY: presentation.horizonY ?? 360 });
   const tint = ctx.createLinearGradient(0, floorY + 4, 0, height);
   tint.addColorStop(0, 'rgba(70, 104, 93, .04)'); tint.addColorStop(1, 'rgba(2, 8, 9, .26)');
   ctx.fillStyle = tint; ctx.fillRect(roomX, floorY + 4, width, height - floorY - 4);

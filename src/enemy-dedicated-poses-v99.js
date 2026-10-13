@@ -1,5 +1,6 @@
 import { ENEMY_DEDICATED_POSES_V98, isEnemyDedicatedPoseReadyV98 } from './enemy-dedicated-poses-v98.js';
 import { ENEMY_DEDICATED_BATCH_V99 } from './enemy-dedicated-batch-v99.js';
+import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
 
 const makePose = record => {
   const scale = record.targetOpaqueHeight / (record.alphaBounds[3] - record.alphaBounds[1]);
@@ -26,9 +27,12 @@ export const isEnemyDedicatedPoseReadyV99 = isEnemyDedicatedPoseReadyV98;
 export function drawEnemyDedicatedPoseV99(ctx, actor, image) {
   const pose = getEnemyDedicatedPoseV99(actor);
   if (!actor?.alive || !isEnemyDedicatedPoseReadyV99(image, pose)) return false;
+  const human = resolveHumanPoseGeometryV133({ actor, definition: pose });
+  const { renderWidth, renderHeight, pivot } = human || pose;
+  actor.humanVisualV133 = human;
   ctx.save(); ctx.translate(actor.x + actor.w / 2, actor.y + actor.h);
   ctx.scale((actor.facing === -1 ? -1 : 1) * pose.sourceFacing, 1);
-  ctx.drawImage(image, -pose.pivot.x * pose.renderWidth, -pose.pivot.y * pose.renderHeight, pose.renderWidth, pose.renderHeight);
+  ctx.drawImage(image, -pivot.x * renderWidth, -pivot.y * renderHeight, renderWidth, renderHeight);
   ctx.restore(); return true;
 }
 export function enemyDedicatedCatalogVisualV99(id) {

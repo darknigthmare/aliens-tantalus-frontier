@@ -1,4 +1,5 @@
 import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
+import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import {
   HubGame as HubGameV51,
   HUB_DECKS,
@@ -327,6 +328,8 @@ export class HubGame extends HubGameV51 {
     if (!request) return null;
     const sample = this.hubNpcAnimation.sample(npc.crewId, request, this.animationTime, {
       emit,
+      physicalActor: npc,
+      physicalContext: `hub:${this.state?.deck}:${this.currentAnnexV71?.()?.id || 'deck'}`,
       reducedMotion: Boolean(this.reducedMotion)
     });
     if (sample) npc.v52Animation = { sheetId: request.sheetId, clipId: request.clipId, frame: sample.frame, row: sample.row, column: sample.column };
@@ -340,7 +343,11 @@ export class HubGame extends HubGameV51 {
       const sample = this.sampleNpcAnimation(npc, { emit: true });
       if (sample) {
         const sampleImage = this.npcImagesBySheetId?.get(sample.sheet.id) || image;
-        const result = super.drawSheetCell(ctx, sampleImage, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
+        const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing: flip ? -1 : 1 },
+          sheet: sample.sheet, column: sample.column, row: sample.row, surface: 'hub' });
+        npc.humanVisualV133 = human;
+        const result = drawHumanAtlasV133(ctx, sampleImage, human)
+          || super.drawSheetCell(ctx, sampleImage, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
         const member = this.npcRoutineContextV62?.crew?.find(entry => entry.id === crewId);
         if (sampleImage?.complete && sampleImage.naturalWidth > 0) drawEcho9MarkingV110(ctx, npc, member?.appearanceV110);
         return result;
