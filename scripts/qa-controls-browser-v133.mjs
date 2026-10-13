@@ -56,6 +56,34 @@ function observed() {
 }
 const snapshot = () => page.evaluate(observed);
 const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1')));
+async function dialogueGeometry() {
+  return page.evaluate(() => {
+    const layer = document.querySelector('#hub-dialogue-layer'), panel = document.querySelector('#hub-dialogue'), focused = document.activeElement;
+    const bounds = element => {
+      const box = element.getBoundingClientRect(), style = getComputedStyle(element);
+      return { x: box.x, y: box.y, w: box.width, h: box.height, right: box.right, bottom: box.bottom,
+        scrollTop: element.scrollTop, scrollLeft: element.scrollLeft, scrollHeight: element.scrollHeight, clientHeight: element.clientHeight,
+        overflowX: style.overflowX, overflowY: style.overflowY, display: style.display, visibility: style.visibility, opacity: style.opacity };
+    };
+    const rect = panel.getBoundingClientRect(), focusRect = focused.getBoundingClientRect();
+    const inViewport = box => box.width > 0 && box.height > 0 && box.left >= -1 && box.top >= -1 && box.right <= innerWidth + 1 && box.bottom <= innerHeight + 1;
+    const focusHit = document.elementFromPoint(focusRect.x + focusRect.width / 2, focusRect.y + focusRect.height / 2);
+    const panelHit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+    return { viewport: { w: innerWidth, h: innerHeight }, selectors: { layer: '#hub-dialogue-layer', panel: '#hub-dialogue' },
+      layer: bounds(layer), panel: bounds(panel), focus: { id: focused.id, tag: focused.tagName, text: focused.textContent?.trim(), ...bounds(focused) },
+      page: { x: scrollX, y: scrollY, bodyScrollTop: document.body.scrollTop, rootScrollTop: document.documentElement.scrollTop },
+      panelInViewport: inViewport(rect), panelReceivesHit: !!panelHit && panel.contains(panelHit),
+      focusedActionVisible: focused.tagName === 'BUTTON' && panel.contains(focused) && !focused.disabled && inViewport(focusRect)
+        && focusRect.left >= rect.left - 1 && focusRect.top >= rect.top - 1 && focusRect.right <= rect.right + 1 && focusRect.bottom <= rect.bottom + 1
+        && (focusHit === focused || focused.contains(focusHit)),
+      layerHidden: layer.hidden, panelHidden: panel.hidden, panelAriaHidden: panel.getAttribute('aria-hidden') };
+  });
+}
+function visibleDialogue(geometry) {
+  return !geometry.layerHidden && !geometry.panelHidden && geometry.panelAriaHidden !== 'true'
+    && geometry.panel.display !== 'none' && geometry.panel.visibility === 'visible' && Number(geometry.panel.opacity) > 0
+    && geometry.panelInViewport && geometry.panelReceivesHit && geometry.focusedActionVisible;
+}
 async function writeReport() { await fs.writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2)); }
 async function capture(label, evidence = null, selector = null) {
   const filename = `${String(++captureSerial).padStart(2, '0')}-${label}.png`;
@@ -227,15 +255,32 @@ async function desktopJourney() {
   const npcX = initial.npcs[0]?.x + initial.npcs[0]?.w / 2; assert.ok(Number.isFinite(npcX));
   await walkTo(npcX); await canvasKey('KeyE');
   await page.locator('#hub-dialogue').waitFor({ state: 'visible' }); const dialogue = await snapshot();
-  await capture('dialogue-native-focus', dialogue);
-  check(!dialogue.running && dialogue.focus.inDialogue && dialogue.dialog.modal === 'true' && dialogue.dialog.backgroundInert,
-    'A real conversation pauses the hub, declares a modal and places focus inside it', dialogue);
+  const openedGeometry = await dialogueGeometry(); await capture('dialogue-native-focus', { ...dialogue, geometry: openedGeometry });
+  check(!dialogue.running && dialogue.focus.inDialogue && dialogue.dialog.modal === 'true' && dialogue.dialog.backgroundInert && visibleDialogue(openedGeometry),
+    'A real conversation pauses the hub and opens a visible modal with a reachable focused action', { dialogue, geometry: openedGeometry });
   let tabContained = true;
-  for (let n = 0; n < 8; n++) { await page.keyboard.press(n % 3 === 0 ? 'Shift+Tab' : 'Tab'); tabContained &&= (await snapshot()).focus.inDialogue; }
+  const tabGeometry = [];
+  for (let n = 0; n < 32; n++) {
+    await page.keyboard.press(n % 3 === 0 ? 'Shift+Tab' : 'Tab');
+    const geometry = await dialogueGeometry(); tabGeometry.push({ key: n % 3 === 0 ? 'Shift+Tab' : 'Tab', ...geometry });
+    tabContained &&= (await snapshot()).focus.inDialogue && visibleDialogue(geometry);
+  }
   await page.keyboard.down('KeyD'); await page.waitForTimeout(250); await page.keyboard.up('KeyD');
-  const paused = await snapshot(); await capture('dialogue-keyboard-contained', paused);
+  const paused = await snapshot(); await capture('dialogue-keyboard-contained', { ...paused, geometry: tabGeometry.at(-1) });
   check(tabContained && paused.time === dialogue.time && paused.player.x === dialogue.player.x,
-    'Dialogue Tab navigation stays inside and gameplay input cannot move the paused actor', paused);
+    'Thirty-two native Tab steps keep the modal and focused action visible while gameplay remains paused', { paused, tabGeometry });
+  await page.setViewportSize({ width: 320, height: 568 });
+  const portraitGeometry = await dialogueGeometry(); await capture('dialogue-portrait-320-open', { state: await snapshot(), geometry: portraitGeometry });
+  const portraitTabs = [];
+  for (let n = 0; n < 32; n++) {
+    await page.keyboard.press(n % 3 === 0 ? 'Shift+Tab' : 'Tab');
+    portraitTabs.push({ key: n % 3 === 0 ? 'Shift+Tab' : 'Tab', ...await dialogueGeometry() });
+  }
+  const portraitPaused = await snapshot(); await capture('dialogue-portrait-320-keyboard', { state: portraitPaused, geometry: portraitTabs.at(-1) });
+  check(visibleDialogue(portraitGeometry) && portraitTabs.every(visibleDialogue)
+    && portraitPaused.time === dialogue.time && portraitPaused.player.x === dialogue.player.x,
+    'At 320px the same real dialogue remains visible and every native Tab focus is reachable without advancing gameplay', { opened: portraitGeometry, portraitTabs });
+  await page.setViewportSize({ width: 1600, height: 1000 });
   await page.keyboard.press('Escape'); await page.waitForTimeout(150); const closed = await snapshot();
   await capture('escape-focus-return', closed);
   check(closed.running && closed.focus.id === 'hub-canvas' && closed.dialog.hidden && !closed.dialog.backgroundInert,
