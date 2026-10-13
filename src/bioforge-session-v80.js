@@ -6,6 +6,8 @@ import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { sanitizeBioforgePhysicalV87 } from './bioforge-physical-state-v87.js';
 import { ENEMY_DEDICATED_POSE_IDS_V99 as ENEMY_DEDICATED_POSE_IDS_V96, getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v99.js';
 import { ENEMY_STATIC_POSE_IDS_V96 as ENEMY_USER_CASTES_IDS_V87, getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
+import { BIOFORGE_ANIMATED_PROFILE_IDS_V132, getBioforgeAdmissionV132 } from './bioforge-admissions-v132.js';
+import { sanitizeBioforgeTacticsV132 } from './bioforge-tactics-state-v132.js';
 
 export const BIOFORGE_SCHEMA_V80 = 80;
 export const BIOFORGE_ROOT_KEY_V80 = 'bioforgeV80';
@@ -48,7 +50,8 @@ export const BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80 = Object.freeze([
   'enemy-050-korari-stalker',
   'enemy-055-albino-chestburster',
   ...ENEMY_DEDICATED_POSE_IDS_V96.filter(id => getEnemyDedicatedPoseV96(id)?.bioforgeEligible !== false),
-  ...ENEMY_USER_CASTES_IDS_V87
+  ...ENEMY_USER_CASTES_IDS_V87,
+  ...BIOFORGE_ANIMATED_PROFILE_IDS_V132
 ]);
 
 const PROFILE_COST_V80 = Object.freeze({
@@ -89,6 +92,8 @@ const READY_ASSET_BY_ID_V80 = new Map([
 
 function buildTerrestrialRosterV80() {
   return BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.map((profileId) => {
+    const animated = getBioforgeAdmissionV132(profileId);
+    if (animated) return animated;
     const dedicated = getEnemyDedicatedPoseV96(profileId);
     if (dedicated) return Object.freeze({ ...dedicated, terrestrial: true, habitat: 'terrestrial',
       dedicatedHistoricalPoseV96: true, behaviorStatus: 'historical-runtime-preserved' });
@@ -301,6 +306,8 @@ export function sanitizeBioforgeRuntimeV81(raw) {
   const y = Number(raw.player.y);
   const seed = Number(raw.seed);
   const phaseClock = Number(raw.phaseClock);
+  const physical = raw.physicalV87 !== undefined ? sanitizeBioforgePhysicalV87(raw.physicalV87) : null;
+  const tactics = raw.enemyTacticsV132 !== undefined ? sanitizeBioforgeTacticsV132(raw.enemyTacticsV132,physical) : null;
   return {
     schema: 81,
     player: {
@@ -313,8 +320,10 @@ export function sanitizeBioforgeRuntimeV81(raw) {
     seed: Number.isFinite(seed) ? seed : 80,
     phaseClock: Number.isFinite(phaseClock) ? Math.max(0, phaseClock) : 0,
     transferStage: integer(raw.transferStage, 0, 0, 3),
-    ...(raw.physicalV87 !== undefined ? { physicalV87: sanitizeBioforgePhysicalV87(raw.physicalV87) } : {}),
-    ...((raw.physicalInvalidV87 === true || (raw.physicalV87 !== undefined && !sanitizeBioforgePhysicalV87(raw.physicalV87)))
+    ...(raw.physicalV87 !== undefined ? { physicalV87: physical } : {}),
+    ...(raw.enemyTacticsV132 !== undefined ? { enemyTacticsV132: tactics } : {}),
+    ...((raw.physicalInvalidV87 === true || (raw.physicalV87 !== undefined && !physical)
+      || raw.enemyTacticsV132 !== undefined && !tactics)
       ? { physicalInvalidV87: true } : {})
   };
 }

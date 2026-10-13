@@ -302,6 +302,15 @@ html.mission-mode body {
 .mission-mode #mission-runtime-v62[hidden] ~ .mission-touch-controls { display: none; }
 
 @media (pointer: coarse), (max-width: 900px) {
+  .mission-mode .mission-touch-controls [data-mission-key="KeyZ"] {
+    padding-inline: 2px;
+    font-size: 12px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (pointer: coarse), (max-width: 900px) {
   .mission-mode .mission-touch-controls {
     position: fixed;
     z-index: 32;

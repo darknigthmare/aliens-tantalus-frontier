@@ -32,6 +32,14 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-mecha-missions-v131.mjs', 'verify-ecosystem-missions-v131.mjs', 'verify-legacy-operations-v131.mjs',
   'verify-operations-integration-v131.mjs', 'qa-operations-browser-v131.mjs', 'verify-hive-command-ui-v131.mjs',
   'verify-operation-receipts-v131.mjs',
+  'generate-audio-v132.mjs', 'verify-audio-score-v132.mjs', 'qa-audio-browser-v132.mjs',
+  'verify-squad-doctrine-v132.mjs', 'verify-placeables-extension-v132.mjs',
+  'verify-horde-director-v132.mjs', 'verify-narrative-evidence-v132.mjs',
+  'verify-hub-training-v132.mjs', 'verify-bioforge-admissions-v132.mjs',
+  'qa-squad-browser-v132.mjs', 'qa-hub-browser-v132.mjs',
+  'qa-placeables-browser-v132.mjs',
+  'qa-narrative-browser-v132.mjs',
+  'qa-horde-browser-v132.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming

@@ -32,6 +32,10 @@ import { withHiveMissionsV131 } from './hive-missions-v131.js';
 import { withMechaMissionsV131 } from './mecha-missions-v131.js';
 import { withEcosystemMissionsV131 } from './ecosystem-missions-v131.js';
 import { withLegacyMissionsV131 } from './legacy-operations-v131.js';
+import { withSquadDoctrineV132 } from './squad-doctrine-v132.js';
+import { withHordeDirectorV132 } from './horde-director-v132.js';
+import { withNarrativeEvidenceV132 } from './narrative-evidence-v132.js';
+import { withPlaceablesExtensionV132 } from './placeables-extension-v132.js';
 
 export * from './game-production-core.js';
 
@@ -52,6 +56,8 @@ const V130ProductionEngine = withDirectionalAimV130(withWeaponActionsV130(withEn
   withDestructibleSceneryV130(withVerticalWorldV130(V126ProductionEngine)))));
 const V131ProductionEngine = withLegacyMissionsV131(withEcosystemMissionsV131(withMechaMissionsV131(
   withHiveMissionsV131(withApcCourseV131(withWeaponActionsV131(V130ProductionEngine))))));
+const V132ProductionEngine = withNarrativeEvidenceV132(withHordeDirectorV132(
+  withSquadDoctrineV132(withPlaceablesExtensionV132(V131ProductionEngine))));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -64,7 +70,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V131ProductionEngine {
+export class GameEngine extends V132ProductionEngine {
   start(options = {}) {
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     const snapshot = super.start(options);
@@ -97,16 +103,17 @@ export class GameEngine extends V131ProductionEngine {
     return { ...result, supportRestoredV72, tacticalReloadRestoredV77, placeablesRestoredV86 };
   }
 
-  canPerformGameplayAction(actor = this.player, { allowVent = false } = {}) {
+  canPerformGameplayAction(actor = this.player, { allowVent = false, allowSquadTask = false } = {}) {
     return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
       && this.mission?.state === 'active' && actor?.alive && !actor.downed && (allowVent || !actor.ventTransit)
       && !(actor.hazardKind === 'electrical' && actor.hazardClock > 0)
-      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor));
+      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor)
+      && (allowSquadTask || !this.isSquadActionLockedV132?.(actor)));
   }
 
   // Guard the outermost runtime so keyboard, touch/UI and internal dispatch share the same contract.
   interact(actor = this.player) {
-    return this.canPerformGameplayAction(actor, { allowVent: true }) ? super.interact(actor) : false;
+    return this.canPerformGameplayAction(actor, { allowVent: true, allowSquadTask: true }) ? super.interact(actor) : false;
   }
 
   fire(actor = this.player) {

@@ -63,6 +63,8 @@ import { sanitizeJumpStateV116, isJumpChargingV116 } from './galaxy-jump-v115.js
 import { BLACK_COCOON_CAMPAIGN_V121, validateBlackCocoonStateV121 } from './black-cocoon-state-v121.js';
 import { APC_CONVOY_CAMPAIGN_V121, validateApcConvoyStateV121 } from './apc-convoy-state-v121.js';
 import { C12_HORDE_CAMPAIGN_V121, validateC12HordeStateV121 } from './c12-horde-state-v121.js';
+import { createNarrativeEvidenceV132, normalizeNarrativeEvidenceV132 } from './narrative-evidence-v132.js';
+import { normalizeHubTrainingV132, validateHubLoaderReceiptV132, createHubLoaderReceiptV132 } from './hub-training-v132.js';
 import { validateApcCourseV131 } from './apc-course-v131.js';
 import { isSoloSpecialOperationV131 } from './special-operations-v131.js';
 import { operationCampaignV131, validateOperationCompletionV131 } from './operation-receipts-v131.js';
@@ -79,6 +81,32 @@ export const LEGACY_KEYS = [
 ];
 
 export const MAX_SQUAD_SIZE = 4;
+
+export function getHubTrainingOperatorIdV132(save) {
+  return `${save.profile}:${save.createdAt}:${save.onboardingV84?.identity?.id || save.player?.operatorId || 'primary'}`.slice(0, 100);
+}
+
+export function normalizeHubLoaderQualificationV132(raw, operatorId) {
+  const proof = validateHubLoaderReceiptV132(raw?.receipt);
+  return proof.valid && proof.receipt.operatorId === operatorId && raw.serial === proof.receipt.serial
+    ? { schema: 132, serial: proof.receipt.serial, receipt: structuredClone(proof.receipt) }
+    : { schema: 132, serial: 0, receipt: null };
+}
+
+export function recordHubLoaderQualificationV132(save, receipt) {
+  const book = normalizeHubTrainingV132(save?.hub?.hubTrainingV132);
+  const operatorId = getHubTrainingOperatorIdV132(save);
+  const previous = normalizeHubLoaderQualificationV132(save?.hub?.loaderQualificationV132, operatorId);
+  if (previous.receipt?.id === receipt?.id) return { applied: false, reason: 'already-qualified' };
+  if (!book.pendingReceipt || receipt?.operatorId !== operatorId || receipt?.serial <= previous.serial)
+    return { applied: false, reason: 'qualification-not-issued' };
+  const proof = validateHubLoaderReceiptV132(receipt, book.pendingReceipt);
+  const actual = createHubLoaderReceiptV132(book.course);
+  if (!proof.valid || !actual || JSON.stringify(actual) !== JSON.stringify(proof.receipt))
+    return { applied: false, reason: 'qualification-proof-invalid' };
+  save.hub.loaderQualificationV132 = { schema: 132, serial: receipt.serial, receipt: structuredClone(proof.receipt) };
+  return { applied: true, receipt: structuredClone(proof.receipt) };
+}
 
 // V85 project balancing, not values imposed by the source conversation. Aptitude
 // and equipment budgets are independent; issued objects never unlock procurement.
@@ -272,7 +300,9 @@ export function createDefaultSave(profile = 1) {
       npcRoutineState: normalizeNpcRoutineStateV62(),
       commercialV71: createHubCommercialStateV71(),
       annexOperationsV71: createHubAnnexOperationsV71(),
-      pendingModuleActionV71: null
+      pendingModuleActionV71: null,
+      hubTrainingV132: normalizeHubTrainingV132(),
+      loaderQualificationV132: { schema: 132, serial: 0, receipt: null }
     },
     galaxy: {
       unlockedWorldIds: WORLDS.slice(0, 8).map((world) => world.id),
@@ -293,6 +323,7 @@ export function createDefaultSave(profile = 1) {
     },
     strategy: createStrategyState(),
     narrativeArchives: createNarrativeArchivesV68(),
+    narrativeEvidenceV132: createNarrativeEvidenceV132(),
     archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
@@ -2076,6 +2107,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.commercialV71 = sanitizeHubCommercialStateV71(commercialV71);
   migrated.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(hub.annexOperationsV71);
   migrated.hub.pendingModuleActionV71 = sanitizePendingModuleActionV71(hub.pendingModuleActionV71);
+  migrated.hub.hubTrainingV132 = normalizeHubTrainingV132(hub.hubTrainingV132);
   delete migrated.hub.hubCommercialV71;
   delete migrated.hub.hubExpansionV71;
 
@@ -2254,6 +2286,9 @@ export function migrateSave(input, profile = 1) {
   };
 
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
+  migrated.narrativeEvidenceV132 = normalizeNarrativeEvidenceV132(source.narrativeEvidenceV132, {
+    narrativeArchives: migrated.narrativeArchives, archiveRelayArchivesV122: source.archiveRelayArchivesV122
+  });
   migrated.archiveRelayArchivesV122 = normalizeArchiveRelayArchiveV122(source.archiveRelayArchivesV122);
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
@@ -2292,6 +2327,8 @@ export function migrateSave(input, profile = 1) {
   migrated.release = RELEASE.version;
   migrated.profile = Math.max(1, Math.min(3, Math.floor(Number(profile) || 1)));
   migrated.createdAt = numberBetween(source.createdAt, base.createdAt, 0);
+  migrated.hub.loaderQualificationV132 = normalizeHubLoaderQualificationV132(hub.loaderQualificationV132, getHubTrainingOperatorIdV132(migrated));
+  migrated.hub.hubTrainingV132.serial = Math.max(migrated.hub.hubTrainingV132.serial, migrated.hub.loaderQualificationV132.serial);
   migrated.updatedAt = Date.now();
   const previousVersion = typeof source.release === 'string' ? source.release : typeof source.version === 'string' ? source.version : null;
   migrated.migratedFrom = previousVersion || `schema-${Number.isFinite(Number(source.schema)) ? source.schema : 'legacy'}`;

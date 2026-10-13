@@ -151,6 +151,7 @@
         <section class="view active" data-panel="hub">
           <h1 class="sr-only">Niveau jouable de l’USS Tantalus</h1>
           <button id="exit-hub" class="button runtime-exit" type="button">QUITTER VERS COMMANDEMENT</button>
+          <div id="hub-training-controls-v132" class="button-row" role="group" aria-label="Commandes du pupitre" hidden></div>
           <div class="hub-level-heading"><div><p class="eyebrow">NIVEAU HUB // 4 PONTS // 16 SALLES + 10 ANNEXES // QUALIFICATION M41A V81</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
           <div class="hub-level-shell">
             <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus"></canvas>
@@ -296,7 +297,7 @@
 
         <section class="view play-view" data-panel="play">
           <h1 class="sr-only">Mission tactique — USS Tantalus</h1>
-          <div class="game-toolbar"><div><span class="eyebrow">OBJECTIFS & CONSÉQUENCES</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D · W/S · ESPACE · MAJ + DIRECTION : VISER · F : TIRER · E : INTERAGIR · Q/V/R/H/X · 1/2/3 GROUPES · C PING · B/N/M ORDRES</span><button id="retreat-mission" class="button danger-outline">BATTRE EN RETRAITE</button></div></div>
+          <div class="game-toolbar"><div><span class="eyebrow">OBJECTIFS & CONSÉQUENCES</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D · W/S · ESPACE · MAJ + DIRECTION : VISER · F : TIRER · E : INTERAGIR · Q/V/R/H/X · C : COMMANDES · P : PAUSE</span><button id="retreat-mission" class="button danger-outline">BATTRE EN RETRAITE</button></div></div>
           <section id="mission-insertion-v62" aria-label="Séquence d’insertion opérationnelle" hidden></section>
           <div id="mission-runtime-v62" class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable" aria-describedby="mission-aim-help-v83" title="Directions + F ; clic droit : viser ; clic gauche : tirer ; clic molette : corps à corps ; MAJ : visée fixe ; Z : accroupi ; stick droit/LT + RT"></canvas>
             <div id="alpha-bravo-targeting-v69" class="alpha-bravo-targeting-v69" role="region" aria-label="Choisir une destination tactique sur le terrain. Échap annule." aria-hidden="true" tabindex="-1" hidden><span>PLACER LE POINT TACTIQUE · ÉCHAP ANNULER</span></div>
@@ -313,6 +314,7 @@
             </div>
           </section>
           <div id="mission-equipment-controls" class="button-row equipment-controls"></div>
+          <button id="mission-squad-command-v132" class="button" type="button">COMMANDES · C</button>
           <div id="mission-log" class="mission-log" aria-live="polite">En attente du déploiement.</div>
         </section>
       </main>

@@ -144,7 +144,8 @@ export function withVerticalWorldV130(BaseEngine) {
       if (!activeActor(actor) || actor.downed || actor.climbing || this.keys?.has?.(actor.coop ? 'ShiftRight' : 'ShiftLeft')
         || actor.reloading || actor.meleeClock > 0 || actor.toolUseClock > 0 || actor.interactionClock > 0
         || this.isFieldActionBusyV124?.(actor) || this.isPlaceableBusyV86?.(actor)
-        || this.canPerformGameplayAction && !this.canPerformGameplayAction(actor)
+        || this.canPerformGameplayAction && !this.canPerformGameplayAction(actor,
+          { allowSquadTask: Boolean(this.isSquadCarrierV132?.(actor)) })
         || this.paused || !this.running || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88
         || this.mission?.state !== 'active') return false;
       const lift = this.liftAtActorV130(actor);

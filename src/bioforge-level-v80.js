@@ -1,5 +1,6 @@
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87 } from './enemy-static-poses-v96.js';
 import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v99.js';
+import { getBioforgeAdmissionV132 } from './bioforge-admissions-v132.js';
 
 export const BIOFORGE_LEVEL_SCHEMA_V80 = 80;
 
@@ -167,7 +168,7 @@ export function placeBioforgeSpecimenV80(specimen, index, level = AUTHORED_LEVEL
   const dedicated = getEnemyDedicatedPoseV97(specimen.profileId);
   // An admitted dedicated bitmap does not change its historical combat collider.
   // The runtime still rejects placements without a wide enough support or bounds.
-  const historicalBody = dedicated && dedicated.bioforgeEligible !== false
+  const historicalBody = (dedicated && dedicated.bioforgeEligible !== false || getBioforgeAdmissionV132(specimen.profileId))
     && Number.isFinite(specimen.w) && specimen.w > 0 && Number.isFinite(specimen.h) && specimen.h > 0;
   const w = supplied?.bodyWidth ?? (historicalBody ? specimen.w : clamp(specimen.w || specimen.width || 52, 18, 180));
   const h = supplied?.bodyHeight ?? (historicalBody ? specimen.h : clamp(specimen.h || specimen.height || 82, 18, 230));

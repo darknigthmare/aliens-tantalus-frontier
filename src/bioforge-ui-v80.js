@@ -6,6 +6,7 @@ import { getEnemyUserCampaignV88 } from './enemy-user-campaign-v88.js';
 import { createUserReferenceEffectsGalleryV95 } from './user-reference-effects-v95.js';
 import { getEnemyImportArtV103 } from './enemy-import-admissions-v103.js';
 import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
+import { getBioforgeCoverageV132 } from './bioforge-admissions-v132.js';
 import {
   BIOFORGE_TERRESTRIAL_ROSTER_V80,
   getBioforgeCapacityV87,
@@ -41,6 +42,7 @@ const PROFILE_LABELS_V80 = Object.freeze({
 
 export function getBioforgeProfileLabelV80(profileId) {
   const dedicated = getBioforgeRosterEntryV80(profileId);
+  if (dedicated?.animatedAdmissionV132) return `${dedicated.name} · atlas animé existant`;
   if (dedicated?.dedicatedHistoricalPoseV96) return `${dedicated.name} — variante systémique${['v97-050', 'v98-050', 'v99-050'].includes(dedicated.batch) ? ' · pose fixe' : ' blindée'}`;
   const supplied = getEnemyUserCasteV87(profileId);
   if (supplied) return `${supplied.name} — ${supplied.work}`;
@@ -93,6 +95,7 @@ export function buildBioforgeUiModelV80(raw, { population } = {}) {
       : 'SAS DISPONIBLE · COMPOSEZ UNE SESSION ISOLÉE';
   return Object.freeze({
     state, phase, phaseLabel: BIOFORGE_PHASE_LABELS_V80[phase], configuration, composition,
+    coverageV132: getBioforgeCoverageV132(BIOFORGE_TERRESTRIAL_ROSTER_V80),
     profile, profileId: profile?.profileId || null, profileLabel: getBioforgeProfileLabelV80(profile?.profileId),
     quantity, maximumQuantity: getBioforgeMaximumQuantityV80(profile?.profileId),
     totalLimit: TOTAL_LIMIT_V87, maxConcurrent: configuration.maxConcurrent,
@@ -430,7 +433,7 @@ export class BioforgeUiV80 {
     this.preview.alt = profile ? `${importedWalk ? `Aperçu fixe · ${importedWalk.label}` : supplied ? 'Pose fixe' : 'Plaque validée'} · ${getBioforgeProfileLabelV80(profile.profileId)}` : '';
     this.thumbnail.style.backgroundImage = source ? `url("${source}")` : 'none';
     this.thumbnail.dataset.atlasColumns = supplied ? '1' : '4';
-    this.thumbnail.dataset.atlasRows = supplied ? '1' : '8';
+    this.thumbnail.dataset.atlasRows = supplied ? '1' : String(profile?.rows || 8);
     this.thumbnail.dataset.atlasFrame = '0';
     frameImportThumbnailV103(this.document, this.thumbnail, profile);
     this.profileName.textContent = getBioforgeProfileLabelV80(profile?.profileId);
@@ -441,7 +444,7 @@ export class BioforgeUiV80 {
       : profile.specializedBehaviorV95?.runtimeScopes?.includes('bioforge')
         ? 'Pose fixe · animations manquantes · garde défensive adaptée'
         : 'Pose fixe · animations manquantes · comportement labo simplifié'
-      : 'APERÇU NON DÉFORMÉ'}${profile?.locomotion === 'aquatic' ? ' · bassin de confinement'
+      : profile?.animatedAdmissionV132 ? 'Atlas animé existant · combat du moteur · adaptation de laboratoire' : 'APERÇU NON DÉFORMÉ'}${profile?.locomotion === 'aquatic' ? ' · bassin de confinement'
       : profile?.locomotion === 'flying' ? ' · déplacement aérien 2D' : ''}${profile?.stateLabelV95 ? ` · ${profile.stateLabelV95}`
       : baseStateLabel ? importedWalk ? ` · Aperçu : ${baseStateLabel.toLocaleLowerCase('fr')}`
         : ` · ${baseStateLabel}${getEnemyStaticPoseStateOptionsV95(profile.profileId).length > 1 ? '' : ' (seul état visuel disponible)'}` : ''}`;
@@ -568,7 +571,7 @@ export class BioforgeUiV80 {
     this.purge.hidden = false;
     this.start.textContent = model.outcome || model.phase === 'return' ? 'NOUVELLE SESSION' : 'LANCER LE CYCLE';
     this.phase.textContent = model.phaseLabel;
-    this.status.textContent = model.status;
+    this.status.textContent = `${model.status} · ${model.coverageV132.label}`;
     this.metrics.textContent = model.state.activeSession
       ? `SESSION — TOTAL ${model.quantity}/48 · EN ATTENTE ${model.pending} · IMPRIMÉS ${model.printed} · VIVANTS ${model.activeCount}/${model.maxConcurrent} · BUDGET ACTIF ${model.activeCost}/12 · RÉSERVÉ ${model.reservedCount} / COÛT ${model.reservedCost} · ANNULÉS ${model.cancelled} · NEUTRALISÉS ${model.kills} · SESSIONS ${model.historyCount}`
       : `AUCUNE SESSION EN COURS · SESSIONS TERMINÉES ${model.historyCount}`;

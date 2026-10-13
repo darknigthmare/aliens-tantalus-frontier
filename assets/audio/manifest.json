@@ -3,37 +3,93 @@
   "tracks": {
     "sfx": {
       "shot": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/shot.wav",
+            "mime": "audio/wav",
+            "bytes": 21212,
+            "sha256": "6664b30f2522e662ade6a699472c1f4c507684aebabfde8598e364730dc22962"
+          }
+        ],
         "fallback": "synth"
       },
       "tracker": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/tracker.wav",
+            "mime": "audio/wav",
+            "bytes": 15920,
+            "sha256": "5d69d6ffb45f2fe768f7f4a5e74ae7964a91b930637a06b6097a5b02cea19430"
+          }
+        ],
         "fallback": "synth"
       },
       "hit": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/hit.wav",
+            "mime": "audio/wav",
+            "bytes": 28268,
+            "sha256": "2e993749808dbc788f98d3f757021769a61420ff69ae9ffd6b1d63f61ae37c3e"
+          }
+        ],
         "fallback": "synth"
       },
       "ui": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/ui.wav",
+            "mime": "audio/wav",
+            "bytes": 12392,
+            "sha256": "3422246de830acdb7d189bc4b7db55eaf4f01b4eb989faa860a00b4a43128652"
+          }
+        ],
         "fallback": "synth"
       },
       "alarm": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/sfx/alarm.wav",
+            "mime": "audio/wav",
+            "bytes": 105884,
+            "sha256": "e01a97bb72bb3011d8cde5650d8e7b50d4736e0e3df9fedf99bf891019d62601"
+          }
+        ],
         "fallback": "synth"
       }
     },
     "music": {
       "menu": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/music/menu.ogg",
+            "mime": "audio/ogg",
+            "bytes": 265318,
+            "sha256": "563bc7a70087c146fccd8c2bc33f193307eac695bcca747d38247fca387bb66f"
+          }
+        ],
         "fallback": "silence"
       },
       "hub": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/music/hub.ogg",
+            "mime": "audio/ogg",
+            "bytes": 262783,
+            "sha256": "db2655c13a2bb05942df9ec0664dff384cb952f6272320c0f071560d54bfe4e5"
+          }
+        ],
         "fallback": "silence"
       },
       "mission": {
-        "sources": [],
+        "sources": [
+          {
+            "path": "/assets/audio/music/mission.ogg",
+            "mime": "audio/ogg",
+            "bytes": 261569,
+            "sha256": "f956d3cb9bcca77f65b118de0b6ed2e2d182a576bb7d50708e354d8f5a12f3d6"
+          }
+        ],
         "fallback": "silence"
       }
     }

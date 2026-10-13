@@ -683,18 +683,87 @@ try {
   assert.equal(cancelledDeployment.player.ammo, beforeDeployment.player.ammo);
   check('Cancelling the real installation keeps its carried object, ammo and equipment charges intact', deploying.player.action);
 
+  // V132 gives each operator a personal bag. J2 acquires the exact physical
+  // unit by folding J1's actual installation instead of sharing J1's stock.
+  await page.locator('[data-placeable-operator]').selectOption('coop');
+  assert.equal(await page.locator(`[data-use-equipment="${selectedSentryId}"]`).isDisabled(), true,
+    'J2 cannot implicitly deploy a sentry from J1\'s personal bag.');
+  const beforeTransferDeploy = await beginSentry('player');
+  const transferredId = beforeTransferDeploy.placeables.previews[0].instanceId;
+  await page.waitForFunction(id => globalThis.__ATF_GAME__.placeablesV86.instances.some(item => item.instanceId === id && item.status === 'deployed'), transferredId);
+  const transferInstalledState = await snapshot();
+  const transferInstalled = transferInstalledState.placeables.instances.find(item => item.instanceId === transferredId);
+  assert.equal(transferInstalled.carrierCrewIdV132, 'player'); assert.equal(transferInstalled.sourceUseRecorded, true);
+  const sourceBeforeTransfer = beforeTransferDeploy.resources.equipment.find(item => item.id === selectedSentryId);
+  const sourceAfterTransferDeploy = transferInstalledState.resources.equipment.find(item => item.id === selectedSentryId);
+  assert.equal(sourceAfterTransferDeploy.remaining, sourceBeforeTransfer.remaining - 1);
+  assert.equal(sourceAfterTransferDeploy.uses, sourceBeforeTransfer.uses + 1);
+  const approachCenter = transferInstalled.x + transferInstalled.w / 2 - 100;
+  const coopCenter = transferInstalledState.coop.x + transferInstalledState.coop.w / 2;
+  if (Math.abs(coopCenter - approachCenter) > 5) {
+    const right = approachCenter > coopCenter, key = right ? 'KeyL' : 'KeyJ';
+    await canvas.focus(); await page.keyboard.down(key);
+    try {
+      await page.waitForFunction(({ x, right }) => {
+        const actor = globalThis.__ATF_GAME__.coop, center = actor.x + actor.w / 2;
+        return right ? center >= x : center <= x;
+      }, { x: approachCenter, right });
+    } finally { await page.keyboard.up(key); }
+  }
+  await page.waitForFunction(() => {
+    const actor = globalThis.__ATF_GAME__.coop;
+    return actor.grounded && !(actor.v52HurtClock > 0) && !(actor.shockClock > 0);
+  });
+  await page.locator('[data-placeable-operator]').selectOption('coop');
+  const transferRecoverButton = page.locator(`[data-placeable-recover="${transferredId}"]`);
+  if (!await transferRecoverButton.isVisible()) await page.locator('.placeable-nearby-v86 > summary').click();
+  await transferRecoverButton.click();
+  await page.waitForFunction(id => globalThis.__ATF_GAME__.placeablesV86.instances.some(item => item.instanceId === id && item.status === 'carried'), transferredId);
+  const transferredState = await snapshot(), transferred = transferredState.placeables.instances.find(item => item.instanceId === transferredId);
+  assert.equal(transferred.carrierCrewIdV132, 'coop'); assert.equal(transferred.sourceUseRecorded, true);
+  assert.equal(transferred.ammo, transferInstalled.ammo); assert.equal(transferred.health, transferInstalled.health);
+  assert.equal(transferredState.placeables.instances.length, beforeTransferDeploy.placeables.instances.length);
+  assert.equal(transferredState.placeables.instances.filter(item => item.instanceId === transferredId).length, 1);
+  assert.equal(transferredState.placeables.instances.filter(item => item.catalogId === selectedSentryId && item.status === 'carried' && item.carrierCrewIdV132 === 'coop').length, 1);
+  assert.deepEqual(transferredState.resources.equipment, transferInstalledState.resources.equipment);
+  for (const role of ['player', 'coop']) {
+    assert.equal(transferredState[role].ammo, transferInstalledState[role].ammo);
+    assert.equal(transferredState[role].ammoReserve, transferInstalledState[role].ammoReserve);
+  }
+  check('Physical recovery transfers the same sentry from J1 to J2 without duplicating ownership or resources',
+    { instanceId: transferredId, installed: transferInstalled, carried: transferred, source: sourceAfterTransferDeploy });
+
+  // Leave the recovery reach and the acid-side edge before preparing J2's
+  // installation. Its carried unit travels with it; no object is repositioned.
+  const clearCoopCenter = Math.max(transferredState.coop.w / 2 + 20,
+    Math.min(transferredState.player.x + transferredState.player.w / 2 - 220, transferInstalled.x - 180));
+  await canvas.focus(); await page.keyboard.down('KeyJ');
+  try {
+    await page.waitForFunction(x => {
+      const actor = globalThis.__ATF_GAME__.coop;
+      return actor.x + actor.w / 2 <= x;
+    }, clearCoopCenter);
+  } finally { await page.keyboard.up('KeyJ'); }
+  await page.waitForFunction(() => {
+    const actor = globalThis.__ATF_GAME__.coop;
+    return actor.alive && actor.grounded && !(actor.v52HurtClock > 0) && !(actor.shockClock > 0);
+  });
   const beforeCoopDeploy = await beginSentry('coop');
   const deployedId = beforeCoopDeploy.placeables.previews[0].instanceId;
+  assert.equal(deployedId, transferredId, 'J2 installs the physical sentry that it recovered from J1.');
   await page.waitForTimeout(250);
   const coopDeploy = await freezeAction('coop', 'deploy', '25-j2-deploy.png', 'J2 independently installs the carried equipment in its own outfit');
   await page.waitForFunction(id => globalThis.__ATF_GAME__.placeablesV86.instances.some(item => item.instanceId === id && item.status === 'deployed'), deployedId);
   const deployedState = await snapshot(), deployed = deployedState.placeables.instances.find(item => item.instanceId === deployedId);
-  await page.locator('.placeable-nearby-v86 > summary').click();
-  await page.locator(`[data-placeable-recover="${deployedId}"]`).click();
+  const recoverButton = page.locator(`[data-placeable-recover="${deployedId}"]`);
+  if (!await recoverButton.isVisible()) await page.locator('.placeable-nearby-v86 > summary').click();
+  await recoverButton.click();
   const recovering = await freezeAction('coop', 'recover', '26-j2-recover.png', 'J2 folds the same real sentry while retaining the modular outfit');
   await page.waitForFunction(id => globalThis.__ATF_GAME__.placeablesV86.instances.some(item => item.instanceId === id && item.status === 'carried'), deployedId);
   const recoveredState = await snapshot(), recovered = recoveredState.placeables.instances.find(item => item.instanceId === deployedId);
   assert.equal(recovered.ammo, deployed.ammo); assert.equal(recovered.health, deployed.health);
+  assert.equal(recovered.carrierCrewIdV132, 'coop'); assert.equal(recovered.sourceUseRecorded, true);
+  assert.deepEqual(recoveredState.resources.equipment, transferredState.resources.equipment, 'Reinstalling and folding the acquired unit do not consume another source charge.');
   assert.equal(recoveredState.coop.ammo, beforeCoopDeploy.coop.ammo);
   check('J2 installation and recovery preserve the physical sentry identity and its remaining resources',
     { instanceId: deployedId, deployAction: coopDeploy.coop.action, recoverAction: recovering.coop.action, deployed, recovered });
@@ -828,6 +897,15 @@ try {
   report.status = 'passed';
 } catch (error) {
   report.status = 'failed'; report.error = { message: error.message, stack: error.stack };
+  if (page && !page.isClosed()) report.failureState = await page.evaluate(() => {
+    const e = globalThis.__ATF_GAME__, p = e?.player;
+    return e && p ? { running: e.running, paused: e.paused, loading: Boolean(e.enemyAtlasLoadingPausedV65 || e.userCasteLoadingV88),
+      elapsed: e.animationTime, phase: e.mission?.state, keys: [...e.keys], focus: document.activeElement?.id,
+      player: { x: p.x, y: p.y, vx: p.vx, vy: p.vy, grounded: p.grounded, alive: p.alive, downed: p.downed,
+        health: p.health, aiming: p.aimingV124, movement: p.movementIntentV124 },
+      fieldAction: p.fieldActionV124 || null, placeables: e.getPlaceablesSnapshotV86?.() || null,
+      squad: e.getSquadDoctrineSnapshotV132?.() || null } : null;
+  }).catch(() => null);
   if (page && !page.isClosed()) await page.screenshot({ path: join(output, 'failure.png'), fullPage: true }).catch(() => {});
   process.exitCode = 1;
 } finally {

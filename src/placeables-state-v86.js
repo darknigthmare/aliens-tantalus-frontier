@@ -17,7 +17,11 @@ export const PLACEABLE_DEFINITIONS_V86 = Object.freeze(Object.fromEntries(Object
   sentry: { action: 'deploy-sentry', w: 72, h: 70, maxHealth: 100, maxAmmo: 150, range: 620, fireInterval: 0.2, coneHalfAngle: Math.PI / 3, installSeconds: 2.5, foldSeconds: 2 },
   'cryo-trap': { action: 'cryo-trap', w: 64, h: 34, maxHealth: 20, maxAmmo: 0, installSeconds: 1.5, foldSeconds: 1 },
   'shock-trap': { action: 'shock-trap', w: 64, h: 48, maxHealth: 30, maxAmmo: 0, installSeconds: 1.5, foldSeconds: 1 },
-  containment: { action: 'containment-field', w: 96, h: 84, maxHealth: 60, maxAmmo: 0, installSeconds: 2.5, foldSeconds: 2 }
+  containment: { action: 'containment-field', w: 96, h: 84, maxHealth: 60, maxAmmo: 0, installSeconds: 2.5, foldSeconds: 2 },
+  'ammo-cache': { action: 'ammo-resupply', w: 50, h: 42, maxHealth: 25, maxAmmo: 0, installSeconds: 1.3, foldSeconds: 1 },
+  battery: { action: 'power-transfer', w: 36, h: 46, maxHealth: 30, maxAmmo: 0, installSeconds: 1.5, foldSeconds: 1 },
+  jammer: { action: 'signal-jam', w: 58, h: 58, maxHealth: 40, maxAmmo: 0, range: 400, installSeconds: 1.8, foldSeconds: 1.2 },
+  beacon: { action: 'checkpoint-beacon', w: 46, h: 76, maxHealth: 35, maxAmmo: 0, installSeconds: 1.7, foldSeconds: 1.2 }
 }).map(([kind, definition]) => [kind, Object.freeze({ kind, ...definition })])));
 
 // Explicit authored IDs AND names: the catalogue's cycling utility is never authority.
@@ -40,18 +44,40 @@ export const PLACEABLE_CATALOG_V86 = Object.freeze(approved.flatMap(([catalogId,
     ? [Object.freeze({ catalogId, name, ...PLACEABLE_DEFINITIONS_V86[kind] })] : []));
 const catalog = new Map(PLACEABLE_CATALOG_V86.map(definition => [definition.catalogId, definition]));
 
-export function getPlaceableDefinitionV86(catalogId) { return catalog.get(catalogId) || null; }
+// These exact tools are admitted only by the V132 runtime. Standalone V86/V124
+// retains the original four families and immediate field-action semantics.
+export const PLACEABLE_EXTENSION_CATALOG_V132 = Object.freeze([
+  ['equipment-014-portable-battery', 'Portable Battery', 'battery'],
+  ['equipment-044-portable-battery-field', 'Portable Battery — Field', 'battery'],
+  ['equipment-074-portable-battery-military', 'Portable Battery — Military', 'battery'],
+  ['equipment-104-portable-battery-research', 'Portable Battery — Research', 'battery'],
+  ['equipment-021-ammo-satchel', 'Ammo Satchel', 'ammo-cache'],
+  ['equipment-051-ammo-satchel-field', 'Ammo Satchel — Field', 'ammo-cache'],
+  ['equipment-081-ammo-satchel-military', 'Ammo Satchel — Military', 'ammo-cache'],
+  ['equipment-023-signal-jammer', 'Signal Jammer', 'jammer'],
+  ['equipment-053-signal-jammer-field', 'Signal Jammer — Field', 'jammer'],
+  ['equipment-083-signal-jammer-military', 'Signal Jammer — Military', 'jammer'],
+  ['equipment-030-colony-beacon', 'Colony Beacon', 'beacon'],
+  ['equipment-060-colony-beacon-field', 'Colony Beacon — Field', 'beacon'],
+  ['equipment-090-colony-beacon-military', 'Colony Beacon — Military', 'beacon']
+].flatMap(([catalogId, name, kind]) => EQUIPMENT.some(item => item.id === catalogId && item.name === name)
+  ? [Object.freeze({ catalogId, name, ...PLACEABLE_DEFINITIONS_V86[kind] })] : []));
+const allCatalog = new Map([...PLACEABLE_CATALOG_V86, ...PLACEABLE_EXTENSION_CATALOG_V132].map(definition => [definition.catalogId, definition]));
+
+export function getPlaceableDefinitionV86(catalogId) { return allCatalog.get(catalogId) || null; }
 export function isPlaceableEquipmentV86(item) {
   const definition = catalog.get(typeof item === 'string' ? item : item?.id || item?.catalogId);
   return Boolean(definition && (typeof item === 'string' ||
     (item.name === undefined || item.name === definition.name) && (item.action === undefined || item.action === definition.action)));
 }
 
-function supplies(equipmentActions) {
+function supplies(equipmentActions, options = {}) {
   const items = equipmentActions instanceof Map ? [...equipmentActions.values()] : list(equipmentActions);
   const seen = new Set();
   let capacity = PLACEABLE_RULES_V86.maxInstances;
-  return items.filter(item => record(item) && isPlaceableEquipmentV86(item)).sort((a, b) => String(a.id || a.catalogId).localeCompare(String(b.id || b.catalogId))).flatMap(item => {
+  const admitted = options.extensionV132 ? allCatalog : catalog;
+  return items.filter(item => { const def = admitted.get(item?.id || item?.catalogId); return record(item) && def
+    && (item.name === undefined || item.name === def.name) && (item.action === undefined || item.action === def.action); }).sort((a, b) => String(a.id || a.catalogId).localeCompare(String(b.id || b.catalogId))).flatMap(item => {
     const catalogId = item.id || item.catalogId;
     if (seen.has(catalogId) || capacity <= 0) return [];
     seen.add(catalogId);
@@ -65,9 +91,10 @@ function supplies(equipmentActions) {
 }
 
 function freshInstance(source, ordinal) {
-  const definition = catalog.get(source.catalogId);
+  const definition = allCatalog.get(source.catalogId);
   const used = ordinal <= source.used;
-  const duration = definition.kind === 'containment' ? 8 + source.magnitude / 4 : 0;
+  const duration = definition.kind === 'containment' ? 8 + source.magnitude / 4 : definition.kind === 'jammer' ? 6 + source.magnitude / 2 : 0;
+  const resource = definition.kind === 'ammo-cache' ? Math.floor(source.magnitude * 2) : definition.kind === 'battery' ? source.magnitude : definition.kind === 'beacon' ? 1 : 0;
   const instanceId = `${source.catalogId}:${ordinal}`;
   return {
     instanceId, id: instanceId, catalogId: source.catalogId, kind: definition.kind, name: definition.name,
@@ -79,7 +106,9 @@ function freshInstance(source, ordinal) {
     damage: definition.kind === 'sentry' ? 8 + source.magnitude * 0.45 : definition.kind === 'shock-trap' ? source.magnitude : 0,
     slow: definition.kind === 'cryo-trap' ? 0.38 : definition.kind === 'shock-trap' ? 0.65 : 0.45,
     cooldown: 0, armed: !used && ['cryo-trap', 'shock-trap'].includes(definition.kind),
-    duration: used ? 0 : duration, maxDuration: duration, supportSurface: null, legacyV72: false
+    duration: used ? 0 : duration, maxDuration: duration, resourceRemainingV132: used ? 0 : resource, maxResourceV132: resource,
+    modeV132: definition.kind === 'containment' ? 'containment' : null, lockedV132: false,
+    carrierCrewIdV132: null, supportSurface: null, legacyV72: false
   };
 }
 
@@ -98,15 +127,20 @@ function surface(value) {
 
 function cleanInstance(template, saved, bounds) {
   if (!record(saved) || saved.instanceId !== template.instanceId || saved.catalogId !== template.catalogId || saved.kind !== template.kind || !statuses.has(saved.status)) return null;
-  const definition = catalog.get(template.catalogId);
+  const definition = allCatalog.get(template.catalogId);
   const legacyV72 = saved.legacyV72 === true;
   const maxAmmo = legacyV72 ? integer(saved.maxAmmo, 0, 0, definition.maxAmmo) : definition.maxAmmo;
-  const maxDuration = bound(template.maxDuration, 0, 0, 257.75);
+  const maxDuration = bound(template.maxDuration, 0, 0, 505.5);
   const health = bound(saved.health, 0, 0, definition.maxHealth);
   let status = health <= 0 ? 'destroyed' : saved.status;
   const armed = saved.armed === true;
   const duration = bound(saved.duration, 0, 0, maxDuration);
-  if (status === 'deployed' && ((['cryo-trap', 'shock-trap'].includes(template.kind) && !armed) || (template.kind === 'containment' && duration <= 0))) status = 'spent';
+  const modeV132 = definition.kind === 'containment' && saved.modeV132 === 'barrier' ? 'barrier' : definition.kind === 'containment' ? 'containment' : null;
+  const maxResourceV132 = bound(template.maxResourceV132, 0, 0, 1998);
+  const resourceRemainingV132 = bound(saved.resourceRemainingV132, 0, 0, maxResourceV132);
+  if (status === 'deployed' && ((['cryo-trap', 'shock-trap'].includes(template.kind) && !armed)
+    || (['containment', 'jammer'].includes(template.kind) && modeV132 !== 'barrier' && duration <= 0)
+    || (['ammo-cache', 'battery', 'beacon'].includes(template.kind) && resourceRemainingV132 <= 0))) status = 'spent';
   const supportSurface = surface(saved.supportSurface);
   return { instanceId: template.instanceId, id: template.instanceId, catalogId: template.catalogId, kind: definition.kind, name: definition.name,
     w: definition.w, h: definition.h, range: definition.range || 0, fireInterval: definition.fireInterval || 0,
@@ -117,13 +151,14 @@ function cleanInstance(template, saved, bounds) {
     ownerCrewId: safeId(saved.ownerCrewId), x: bound(saved.x, 0, bounds.x, bounds.x + Math.max(0, bounds.w - definition.w)),
     y: bound(saved.y, 0, bounds.y, bounds.y + Math.max(0, bounds.h - definition.h)), facing: saved.facing === -1 ? -1 : 1,
     cooldown: bound(saved.cooldown, 0, 0, 30), armed: ['carried', 'deployed'].includes(status) && armed,
-    duration, maxDuration, supportSurface, legacyV72 };
+    duration, maxDuration, resourceRemainingV132, maxResourceV132, modeV132,
+    lockedV132: modeV132 === 'barrier' && saved.lockedV132 === true, carrierCrewIdV132: safeId(saved.carrierCrewIdV132), supportSurface, legacyV72 };
 }
 
-function spent(template) { return { ...template, status: 'spent', sourceUseRecorded: true, onGround: false, ammo: 0, armed: false, duration: 0 }; }
+function spent(template) { return { ...template, status: 'spent', sourceUseRecorded: true, onGround: false, ammo: 0, armed: false, duration: 0, resourceRemainingV132: 0 }; }
 
 export function createPlaceablesStateV86(equipmentActions, options = {}) {
-  const issued = supplies(equipmentActions);
+  const issued = supplies(equipmentActions, options);
   const state = { schema: 86, sourceIssued: issued.map(({ catalogId, quantity }) => ({ catalogId, quantity })),
     instances: issued.flatMap(source => Array.from({ length: source.quantity }, (_, index) => freshInstance(source, index + 1))) };
   if (!options.legacyV72 && !list(options.legacyDeployables).length) return state;
@@ -153,7 +188,7 @@ export function createPlaceablesStateV86(equipmentActions, options = {}) {
 
 export function restorePlaceablesStateV86(raw, equipmentActions, options = {}) {
   if (raw === null || raw === undefined) return createPlaceablesStateV86(equipmentActions, { ...options, legacyV72: true });
-  const state = createPlaceablesStateV86(equipmentActions);
+  const state = createPlaceablesStateV86(equipmentActions, options);
   if (!record(raw) || raw.schema !== 86 || !Array.isArray(raw.instances)) {
     state.instances = state.instances.map(spent);
     return state;
@@ -175,12 +210,12 @@ export function restorePlaceablesStateV86(raw, equipmentActions, options = {}) {
 // them on resume: carried stays carried; deployed stays deployed, with no refund.
 export function capturePlaceablesStateV86(state) {
   if (!record(state) || state.schema !== 86) return null;
-  const sourceIssued = list(state.sourceIssued).filter(item => catalog.has(item?.catalogId)).slice(0, 12)
+  const sourceIssued = list(state.sourceIssued).filter(item => allCatalog.has(item?.catalogId)).slice(0, 64)
     .map(item => ({ catalogId: item.catalogId, quantity: integer(item.quantity, 0, 0, 64) }));
   const authorized = new Set(sourceIssued.flatMap(item => Array.from({ length: item.quantity }, (_, index) => `${item.catalogId}:${index + 1}`)));
   const seen = new Set();
   const instances = list(state.instances).slice(0, 64).flatMap(item => {
-    if (!authorized.has(item?.instanceId) || seen.has(item.instanceId) || !catalog.has(item.catalogId)) return [];
+    if (!authorized.has(item?.instanceId) || seen.has(item.instanceId) || !allCatalog.has(item.catalogId)) return [];
     seen.add(item.instanceId);
     const clean = cleanInstance(item, item, worldBounds());
     // Capture must not clip the coordinates to a guessed mission size.
@@ -207,7 +242,7 @@ const result = (ok, code, extra = {}) => ({ ok, code, reason: messages[code] || 
 const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
 export function validatePlaceablePlacementV86({ instance, actor, x, y, facing, world = {} } = {}) {
-  const definition = catalog.get(instance?.catalogId);
+  const definition = allCatalog.get(instance?.catalogId);
   if (!definition || instance.kind !== definition.kind) return result(false, 'invalid-instance');
   if (instance.status !== 'carried') return result(false, 'not-carried');
   if (!rectangle(actor) || actor.alive !== true || actor.downed) return result(false, 'invalid-actor');
@@ -256,7 +291,7 @@ export function validatePlaceablePlacementV86({ instance, actor, x, y, facing, w
 
 export function deployPlaceableV86(state, instanceId, placement, { ownerCrewId = null } = {}) {
   const instance = list(state?.instances).find(item => item.instanceId === instanceId);
-  if (state?.schema !== 86 || !instance || !catalog.has(instance.catalogId)) return result(false, 'invalid-instance');
+  if (state?.schema !== 86 || !instance || !allCatalog.has(instance.catalogId)) return result(false, 'invalid-instance');
   if (instance.status !== 'carried') return result(false, 'not-carried');
   if (placement?.ok !== true || !finite(placement.x) || !finite(placement.y) || !surface(placement.supportSurface)) return result(false, 'invalid-placement');
   const firstDeployment = !instance.sourceUseRecorded;
@@ -267,7 +302,7 @@ export function deployPlaceableV86(state, instanceId, placement, { ownerCrewId =
 
 export function recoverPlaceableV86(state, instanceId) {
   const instance = list(state?.instances).find(item => item.instanceId === instanceId);
-  if (state?.schema !== 86 || !instance || !catalog.has(instance.catalogId)) return result(false, 'invalid-instance');
+  if (state?.schema !== 86 || !instance || !allCatalog.has(instance.catalogId)) return result(false, 'invalid-instance');
   if (!['deployed', 'spent'].includes(instance.status) || !instance.onGround || !(instance.health > 0)) return result(false, 'not-deployed');
   instance.status = 'carried';
   instance.onGround = false;

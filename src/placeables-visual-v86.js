@@ -14,7 +14,15 @@ export const PLACEABLE_VISUAL_PROFILES_V86 = freeze([
   { kind: 'shock-trap', catalogId: 'equipment-026-electroshock-trap', label: 'Piège électrique', imageKey: 'equipmentV56:26', file: 'electroshock-trap-use-sheet.png', nativeFacing: 1, scale: 2 / 7, physicalSize: { w: 64, h: 48 }, limitedView: null,
     bounds: [[37,65,218,191],[16,47,240,209],[21,51,235,204],[21,69,234,186]], sha256: 'fbf65b65bdd8466467cfc9a9104425096d928258397d3d03051efb5b2e22f804' },
   { kind: 'containment', catalogId: 'equipment-028-portable-quarantine', label: 'Confinement portable', imageKey: 'equipmentV56:28', file: 'portable-quarantine-use-sheet.png', nativeFacing: 1, scale: 3 / 7, physicalSize: { w: 96, h: 84 }, limitedView: null,
-    bounds: [[16,72,240,183],[16,30,240,226],[16,69,240,187],[16,72,240,183]], sha256: 'cdf16032633ed1f603760b5f9557f842d5942b6059a1f77786743d19bfd7f95a' }
+    bounds: [[16,72,240,183],[16,30,240,226],[16,69,240,187],[16,72,240,183]], sha256: 'cdf16032633ed1f603760b5f9557f842d5942b6059a1f77786743d19bfd7f95a' },
+  { kind: 'battery', catalogId: 'equipment-014-portable-battery', label: 'Batterie portable', imageKey: 'equipmentV56:14', file: 'portable-battery-use-sheet.png', nativeFacing: 1, scale: 0.20, physicalSize: { w: 36, h: 46 }, limitedView: 'authored-three-quarter-inventory-view-not-orthographic',
+    bounds: [[25,47,230,209],[16,46,240,209],[26,46,229,209],[29,46,227,210]], sha256: '1f8f63beaee1066fbfc5dadb399adc1da980daf7898f77023042d74e705dc86e' },
+  { kind: 'ammo-cache', catalogId: 'equipment-021-ammo-satchel', label: 'Sac de munitions', imageKey: 'equipmentV56:21', file: 'ammo-satchel-use-sheet.png', nativeFacing: 1, scale: 0.22, physicalSize: { w: 50, h: 42 }, limitedView: 'authored-three-quarter-inventory-view-not-orthographic',
+    bounds: [[16,34,240,222],[16,36,240,220],[16,20,240,235],[16,35,240,221]], sha256: 'd583428b3f44adb2e880721f144639ff9f1d15be73a035dc8ac876c06037ec5e' },
+  { kind: 'jammer', catalogId: 'equipment-023-signal-jammer', label: 'Brouilleur de signal', imageKey: 'equipmentV56:23', file: 'signal-jammer-use-sheet.png', nativeFacing: 1, scale: 0.27, physicalSize: { w: 58, h: 58 }, limitedView: 'authored-three-quarter-inventory-view-not-orthographic',
+    bounds: [[27,42,229,214],[25,39,230,217],[26,16,229,240],[25,68,230,187]], sha256: '2e933e26088c176d536da630d5f70269cb6a7085b31b730584c325f2cad6f0e2' },
+  { kind: 'beacon', catalogId: 'equipment-030-colony-beacon', label: 'Balise de colonie', imageKey: 'equipmentV56:30', file: 'colony-beacon-use-sheet.png', nativeFacing: 1, scale: 0.34, physicalSize: { w: 46, h: 76 }, limitedView: 'authored-three-quarter-inventory-view-not-orthographic',
+    bounds: [[59,70,197,186],[28,35,227,221],[30,16,226,240],[62,75,194,181]], sha256: 'baa73647c8f7adf14e32fcd7d29d6d184af96b49abfa1767b2a99996b949712c' }
 ].map(profile => ({ ...profile, path: `/assets/openai/sprites/normalized/tools/${profile.file}`, width: 512, height: 512, cellSize: 256, anchorX: 128,
   contacts: profile.bounds.map(bounds => bounds[3]), artStatus: 'existing-project-art-no-new-animation-generated' })));
 
@@ -36,7 +44,9 @@ export function resolvePlaceableDrawSpecV86(item, { packed = false, preview = fa
   // The sentry's fourth cell is a folded case, not an empty deployed weapon.
   // Keep its legs deployed until a real recovery task finishes.
   else if (item.kind === 'sentry') frame = item.status === 'deployed' && item.firingClockV86 > 0 ? 2 : 1;
-  else if (item.kind === 'containment') frame = item.status === 'deployed' && item.duration > 0 ? 1 : 2;
+  else if (item.kind === 'containment') frame = item.modeV132 === 'barrier' || item.status === 'deployed' && item.duration > 0 ? 1 : 2;
+  else if (['ammo-cache', 'battery', 'beacon'].includes(item.kind)) frame = item.resourceRemainingV132 > 0 ? 1 : 3;
+  else if (item.kind === 'jammer') frame = item.duration > 0 ? 2 : 3;
   else frame = item.status === 'deployed' && item.armed !== false ? 1 : 3;
   const facing = item.facing < 0 ? -1 : 1;
   const flip = facing !== profile.nativeFacing;

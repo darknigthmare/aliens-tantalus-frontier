@@ -446,7 +446,8 @@ export class GameEngine extends CompleteGameEngine {
     const mobility = player === this.player ? this.costumeRuntime?.mobility || 1 : 1;
     // Apply speed modifiers to the target before integration and collisions.
     // Multiplying the previous frame's velocity made costumes depend on FPS.
-    player.locomotionSpeedScaleV124 = clamp(mobility * slow, 0.05, 3);
+    const squadCarry = this.squadCarrySpeedScaleV132?.(player) || 1;
+    player.locomotionSpeedScaleV124 = clamp(mobility * slow * squadCarry, 0.05, 3);
     super.updatePlayer(player, delta, controls);
     if (!player?.alive || player.inVehicle) return;
     if (player === this.player) this.refreshStealth(player);
