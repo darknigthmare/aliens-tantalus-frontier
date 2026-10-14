@@ -29,3 +29,6 @@
 @media(max-width:620px){.forge-tabs-v133>span{width:100%;margin-left:0}.forge-workbench-v133 [data-work-panel]{padding:9px}.forge-workbench-v133 .forge-work-row>label{flex:1 1 130px}.forge-workbench-v133 input[type=search]{width:100%}.forge-workbench-v133 button{min-height:42px}.forge-assembly-list-v133,.forge-project-list-v133{grid-template-columns:repeat(2,minmax(0,1fr))}.forge-room-graph-v133{grid-template-columns:1fr}.forge-workbench-v133 ol{columns:1}}
 /* In the Forge, the shell banner must not obscure the drawing toolbar while scrolling. */
 html.forge-mode:not(.hub-mode):not(.mission-mode) .topbar{position:relative;top:auto}
+
+/* The host shell gives filters a minimum width; keep them inside narrow Forge sidebars. */
+.forge-v130 .tool-panel input:not([type=checkbox]),.forge-v130 .tool-panel select{width:100%;min-width:0;max-width:100%}
