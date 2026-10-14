@@ -1,0 +1,31 @@
+.forge-workbench-v133{margin:12px 0;border:1px solid #355147;background:#101f19;color:#d6e7df;min-width:0}
+.forge-workbench-v133 *{box-sizing:border-box;min-width:0}
+.forge-workbench-v133 [hidden]{display:none!important}
+.forge-tabs-v133{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:9px;border-bottom:1px solid #355147}
+.forge-tabs-v133>span{margin-left:auto;color:#afc6b8;font:12px monospace}
+.forge-workbench-v133 [data-work-panel]{padding:12px}
+.forge-workbench-v133 .forge-work-row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.forge-workbench-v133 .forge-work-row label{display:flex;flex-direction:column;gap:5px;margin:0;font-size:12px}
+.forge-workbench-v133 .forge-work-row input[type=number]{width:82px}
+.forge-workbench-v133 input,.forge-workbench-v133 select{max-width:100%;min-width:0}
+.forge-workbench-v133 input[type=search]{width:215px}
+.forge-workbench-v133 button{min-height:38px}
+.forge-workbench-v133 button[aria-pressed=true]{background:#2d5040;border-color:#aae0bb}
+.forge-workbench-v133 .forge-work-file{max-width:240px;padding:5px;border:1px solid #355147}
+.forge-workbench-v133 .forge-work-file input{width:100%;font-size:11px}
+.forge-work-note{font-size:12px;line-height:1.65;color:#acc8b5;margin:10px 0}
+.forge-work-status-v133{min-height:1em;margin:0 12px 10px;font-size:12px;color:#b8edc8;line-height:1.5;overflow-wrap:anywhere}
+.forge-workbench-v133 .forge-work-status-v133[data-error=true]{color:#ffb3b3}
+.forge-assembly-list-v133,.forge-project-list-v133{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:7px;margin:12px 0;max-height:265px;overflow:auto}
+.forge-assembly-list-v133 button,.forge-project-list-v133 button{display:flex;flex-direction:column;gap:6px;padding:12px;overflow-wrap:anywhere}
+.forge-workbench-v133 small{color:#b0c7b8;font-size:11px;font-weight:400}
+.forge-room-graph-v133{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;max-height:400px;overflow:auto}
+.forge-room-graph-v133 article{padding:10px;background:#152b22;border:1px solid #406252;overflow-wrap:anywhere}
+.forge-room-graph-v133 article[data-reachable=false]{border-style:dashed;border-color:#d6ac70}
+.forge-room-graph-v133 article>button:first-child{width:100%;font-weight:700}
+.forge-room-graph-v133 article p{font-size:12px;line-height:1.5;color:#aec8b8}
+.forge-room-graph-v133 article>div{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.forge-workbench-v133 ol{columns:2;font-size:12px;color:#abc6b5;line-height:1.7;margin:8px 0}
+@media(max-width:620px){.forge-tabs-v133>span{width:100%;margin-left:0}.forge-workbench-v133 [data-work-panel]{padding:9px}.forge-workbench-v133 .forge-work-row>label{flex:1 1 130px}.forge-workbench-v133 input[type=search]{width:100%}.forge-workbench-v133 button{min-height:42px}.forge-assembly-list-v133,.forge-project-list-v133{grid-template-columns:repeat(2,minmax(0,1fr))}.forge-room-graph-v133{grid-template-columns:1fr}.forge-workbench-v133 ol{columns:1}}
+/* In the Forge, the shell banner must not obscure the drawing toolbar while scrolling. */
+html.forge-mode:not(.hub-mode):not(.mission-mode) .topbar{position:relative;top:auto}

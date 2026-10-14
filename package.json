@@ -11,7 +11,8 @@
     "test:weapons": "node --test scripts/verify-weapon-presentation-profiles-v124.mjs scripts/verify-weapon-effects-v124.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-held-weapon-v125.mjs scripts/verify-weapon-image-cache-v125.mjs",
     "audio:scan": "node scripts/audio-scan-v77.mjs",
     "audio:check": "node scripts/audio-scan-v77.mjs --check",
-    "test:forge": "node --test scripts/verify-forge-v130.mjs"
+    "test:forge": "node --test scripts/verify-forge-v130.mjs scripts/verify-forge-v133.mjs",
+    "test:forge:authoring": "node --test scripts/verify-forge-v133.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -50,6 +50,7 @@ jobs:
           set -o pipefail
           export CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           python scripts/verify-forge-browser-v130.py --output forge-ci-results/browser 2>&1 | tee forge-ci-results/browser.log
+          python scripts/verify-forge-browser-v133.py --output forge-ci-results/browser-v133 2>&1 | tee forge-ci-results/browser-v133.log
           if [ -f scripts/verify-forge-browser-v131.py ]; then
             python scripts/verify-forge-browser-v131.py --output forge-ci-results/browser-v131 2>&1 | tee forge-ci-results/browser-v131.log
           fi
