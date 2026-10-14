@@ -14,7 +14,7 @@ concurrency:
 jobs:
   forge:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -22,6 +22,7 @@ jobs:
           sparse-checkout: |
             src
             scripts
+            assets/openai/metroidvania/props
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
@@ -39,7 +40,20 @@ jobs:
           if [ -f scripts/verify-forge-native-v131.mjs ]; then
             node --test scripts/verify-forge-native-v131.mjs 2>&1 | tee forge-ci-results/native-tests.log
           fi
-      - name: Preserve reproducible code and test logs
+      - name: Chromium and Python browser tooling
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Real-browser HTTP and storage checks
+        shell: bash
+        run: |
+          set -o pipefail
+          export CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python scripts/verify-forge-browser-v130.py --output forge-ci-results/browser 2>&1 | tee forge-ci-results/browser.log
+          if [ -f scripts/verify-forge-browser-v131.py ]; then
+            python scripts/verify-forge-browser-v131.py --output forge-ci-results/browser-v131 2>&1 | tee forge-ci-results/browser-v131.log
+          fi
+      - name: Preserve reproducible code, native props and test logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -49,5 +63,10 @@ jobs:
             src
             scripts
             package.json
+            *.html
+            *.css
+            sw.js
+            manifest.webmanifest
+            assets/openai/metroidvania/props
             forge-ci-results
           if-no-files-found: error
