@@ -1,0 +1,51 @@
+/* Scoped to the native Forge view. No campaign HUD or title-screen overrides. */
+.forge-v130 { --ff-bg:#0c1715; --ff-panel:#14221e; --ff-line:#355147; --ff-ink:#d6e7df; --ff-muted:#a8beb3; --ff-accent:#a6e0bf; color:var(--ff-ink); }
+.forge-v130 * { box-sizing:border-box; }
+.forge-v130 .section-intro { gap:16px; flex-wrap:wrap; }
+.forge-v130 .section-intro h2 { font-size:clamp(1.5rem,2.4vw,2.6rem); letter-spacing:.035em; }
+.forge-v130 .editor-layout { display:grid; grid-template-columns:200px minmax(0,1fr) 300px; gap:12px; align-items:start; }
+.forge-v130 .forge-toolbar-v130 { grid-column:1/-1; display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding:12px; border:1px solid var(--ff-line); background:var(--ff-bg); }
+.forge-v130 .forge-tool-modes { display:flex; gap:4px; flex-wrap:wrap; margin-right:auto; }
+.forge-v130 button,.forge-v130 select,.forge-v130 input:not([type=checkbox]) { min-height:36px; font:inherit; font-size:12px; border:1px solid var(--ff-line); border-radius:3px; color:var(--ff-ink); background:#182b23; padding:7px 9px; }
+.forge-v130 button { cursor:pointer; text-align:left; line-height:1.35; }
+.forge-v130 button:hover { border-color:var(--ff-accent); background:#243d31; }
+.forge-v130 button[aria-pressed=true],.forge-v130 button.active { border-color:#b5ecd0; background:#2b503f; color:#f0fff6; }
+.forge-v130 button:disabled { opacity:.42; cursor:not-allowed; }
+.forge-v130 :focus-visible { outline:2px solid #edce83; outline-offset:3px; }
+.forge-v130 .forge-toolbar-v130 label { display:flex; align-items:center; gap:6px; margin:0; }
+.forge-v130 .forge-message-v130 { grid-column:1/-1; margin:0; min-height:1.2em; font-size:13px; color:#cde8d7; }
+.forge-v130 [data-error=true] { color:#ffb0b9; }
+.forge-v130 .tool-panel { background:var(--ff-bg); padding:12px; border:1px solid var(--ff-line); min-width:0; }
+.forge-v130 label { display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--ff-muted); margin:10px 0; }
+.forge-v130 label:has(input[type=checkbox]) { flex-direction:row; align-items:center; }
+.forge-v130 input[type=checkbox] { width:16px; height:16px; accent-color:#a6e0bf; }
+.forge-v130 .tool-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin:12px 0; }
+.forge-v130 [hidden] { display:none !important; }
+.forge-v130 .forge-layer-row { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:4px; margin:6px 0; font-size:11px; }
+.forge-v130 .forge-layer-row button { font-size:10px; padding:4px; min-height:30px; }
+.forge-v130 .editor-stage { position:sticky; top:12px; min-width:0; overflow:hidden; border:1px solid var(--ff-line); background:#080f12; }
+.forge-v130 #editor-canvas { display:block; width:100%; height:auto; aspect-ratio:16/9; max-width:none; cursor:crosshair; }
+.forge-v130 .forge-status-v130 { min-height:36px; padding:9px 12px; background:var(--ff-bg); border-top:1px solid var(--ff-line); color:#bad8c6; font:11px/1.5 ui-monospace,monospace; }
+.forge-v130 .forge-inspector-v130 { min-width:0; max-height:calc(100vh - 210px); overflow:auto; scrollbar-gutter:stable; border:1px solid var(--ff-line); background:var(--ff-bg); }
+.forge-v130 .forge-inspector-v130 section,.forge-v130 .forge-inspector-v130 details { padding:12px; border-bottom:1px solid var(--ff-line); }
+.forge-v130 .forge-inspector-v130 h3 { display:flex; justify-content:space-between; gap:8px; margin:0 0 10px; font:600 12px/1.5 ui-monospace,monospace; letter-spacing:.07em; color:var(--ff-accent); }
+.forge-v130 .forge-inspector-v130 h3 span { color:var(--ff-muted); }
+.forge-v130 .forge-row { display:flex; flex-wrap:wrap; gap:5px; align-items:end; }
+.forge-v130 .forge-row label { flex:1; min-width:60px; margin:7px 0; }
+.forge-v130 .forge-row label input { width:100%; min-width:0; }
+.forge-v130 .forge-note,.forge-v130 .hint,.forge-v130 .forge-save-v130 { font-size:11px; line-height:1.65; color:var(--ff-muted); margin:9px 0; }
+.forge-v130 .forge-save-v130[data-error=true] { color:#ffb0b9; font-weight:600; }
+.forge-v130 .forge-audit-v130,.forge-v130 .forge-outline-v130 { display:flex; flex-direction:column; gap:5px; max-height:240px; overflow:auto; margin:10px 0; }
+.forge-v130 .forge-audit-v130 button { font-size:11px; }
+.forge-v130 .forge-audit-v130 .forge-issue-error { border-left:3px solid #f49daa; }
+.forge-v130 .forge-audit-v130 .forge-issue-warning { border-left:3px solid #e4c478; }
+.forge-v130 .forge-links { font-size:12px; line-height:1.6; }
+.forge-v130 .forge-minimap-v130 { width:100%; height:auto; aspect-ratio:16/9; display:block; margin-top:12px; border:1px solid var(--ff-line); cursor:crosshair; }
+.forge-v130 summary { cursor:pointer; font-size:12px; color:var(--ff-accent); }
+.forge-v130 details p { font-size:12px; line-height:1.7; }
+.forge-v130.forge-expanded-v130 { position:fixed; inset:0; z-index:1500; padding:16px; overflow:auto; background:#09120f; }
+.forge-v130.forge-expanded-v130 .forge-inspector-v130 { max-height:calc(100vh - 180px); }
+@media(min-width:1500px) { .forge-v130 .editor-layout { grid-template-columns:220px minmax(0,1fr) 320px; } }
+@media(max-width:1100px) { .forge-v130 .editor-layout { grid-template-columns:170px minmax(0,1fr); } .forge-v130 .forge-inspector-v130 { grid-column:1/-1; max-height:none; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); } .forge-v130 .editor-stage { top:0; } }
+@media(max-width:620px) { .forge-v130 .editor-layout { display:flex; flex-direction:column; } .forge-v130 .editor-layout>* { width:100%; } .forge-v130 .forge-toolbar-v130 { order:0; padding:8px; } .forge-v130 .forge-message-v130 { order:1; } .forge-v130 .editor-stage { order:2; position:relative; } .forge-v130 .tool-panel { order:3; } .forge-v130 .forge-inspector-v130 { order:4; display:block; max-height:none!important; } .forge-v130 .tool-grid { grid-template-columns:repeat(3,1fr); } .forge-v130 .forge-layer-row { grid-template-columns:1fr 65px 65px; } .forge-v130 button { min-height:40px; } .forge-v130 .button-row { gap:4px; flex-wrap:wrap; } .forge-v130.forge-expanded-v130 { padding:8px; } }
+@media(prefers-reduced-motion:reduce) { .forge-v130 * { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }

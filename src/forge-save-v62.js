@@ -6,6 +6,7 @@
  * payload. Keeping the import marker in the Forge workspace makes the operation
  * idempotent even when a campaign profile is loaded several times.
  */
+import { parseProject, serializeProject } from './forge-model-v130.js';
 
 export const FORGE_SAVE_SCHEMA_V62 = 1;
 export const FORGE_SAVE_KEY_V62 = 'atf-v62-frontier-forge-workspace';
@@ -76,6 +77,11 @@ function validationForTiles(tiles) {
 /** Pure project sanitizer used for local saves, imports and legacy copies. */
 export function sanitizeForgeProjectV62(input, fallbackId = 'forge-project') {
   if (!isRecord(input)) return null;
+  // V130 extends the project, not the workspace namespace. Never silently flatten rooms.
+  let authored = null;
+  if (input.schema === 3) {
+    try { authored = serializeProject(parseProject(input)); } catch { return null; }
+  } else if (Number(input.schema) > 3) return null;
   const kind = FORGE_PROJECT_KINDS.has(input.kind) ? input.kind : 'mission';
   const size = sanitizeSize(input.size);
   const tiles = sanitizeTiles(input.tiles, size);
@@ -90,6 +96,7 @@ export function sanitizeForgeProjectV62(input, fallbackId = 'forge-project') {
     validation: validationForTiles(tiles),
     updatedAt: clampInteger(input.updatedAt, 0, 0, Number.MAX_SAFE_INTEGER)
   };
+  if (authored) Object.assign(project, authored, { id, name: project.name, updatedAt: project.updatedAt });
   if (isRecord(input.legacyOrigin)) {
     project.legacyOrigin = {
       profile: clampInteger(input.legacyOrigin.profile, 1, 1, 3),
@@ -239,26 +246,54 @@ function readCampaignProfiles(storage) {
   return profiles;
 }
 
+function validWorkspace(input) {
+  return isRecord(input) && input.schema === FORGE_SAVE_SCHEMA_V62
+    && Array.isArray(input.projects) && input.projects.length <= MAX_PROJECTS
+    && input.projects.every(project => sanitizeForgeProjectV62(project) !== null);
+}
+
 export class ForgeSaveSystemV62 {
-  constructor(storage = globalThis.localStorage, key = FORGE_SAVE_KEY_V62) {
-    this.storage = storage;
+  constructor(storage, key = FORGE_SAVE_KEY_V62) {
+    try { this.storage = storage === undefined ? globalThis.localStorage : storage; } catch { this.storage = null; }
     this.key = key;
     this.data = createDefaultForgeSaveV62();
+    this.expectedRawV130 = null;
+    this.recoveryNeededV130 = false;
+    this.lastWriteV130 = { persisted: false, reason: 'aucune écriture' };
+  }
+
+  statusV130(persisted, reason = '') {
+    this.lastWriteV130 = { persisted, reason };
+    if (typeof globalThis.CustomEvent === 'function') globalThis.dispatchEvent?.(new CustomEvent('atf:forge-save-status-v130', { detail: this.lastWriteV130 }));
   }
 
   load({ campaignSaves = null, now = Date.now() } = {}) {
     let stored = null;
-    try { stored = safeParse(this.storage?.getItem(this.key) || ''); } catch { stored = null; }
+    try { this.expectedRawV130 = this.storage?.getItem(this.key) ?? null; stored = safeParse(this.expectedRawV130 || ''); } catch { this.expectedRawV130 = null; }
+    this.recoveryNeededV130 = this.expectedRawV130 !== null && !validWorkspace(stored);
     const legacySources = campaignSaves || readCampaignProfiles(this.storage);
     const result = copyLegacyCampaignProjectsV62(stored, legacySources, now);
     this.data = result.save;
     this.commit(now);
-    return { ...result, save: this.data };
+    return { ...result, save: this.data, recoveryNeeded: this.recoveryNeededV130 };
   }
 
   commit(now = Date.now()) {
     this.data = sanitizeForgeSaveV62({ ...this.data, updatedAt: now }, now);
-    try { this.storage?.setItem(this.key, JSON.stringify(this.data)); } catch { /* in-memory fallback */ }
+    if (this.recoveryNeededV130) { this.statusV130(false, 'sauvegarde abîmée conservée, exportez votre copie'); return this.data; }
+    try {
+      if (typeof this.storage?.setItem !== 'function') throw new Error('stockage indisponible');
+      const current = this.storage.getItem(this.key);
+      if (current !== this.expectedRawV130) throw new Error('autre onglet détecté ; exportez votre copie puis rechargez');
+      const serialized = JSON.stringify(this.data);
+      // Best-effort previous valid snapshot; a quota failure must never erase the primary.
+      if (current && validWorkspace(safeParse(current))) {
+        try { this.storage.setItem(`${this.key}-backup-v130`, current); } catch { /* backup unavailable */ }
+      }
+      this.storage.setItem(this.key, serialized);
+      this.expectedRawV130 = serialized;
+      this.statusV130(true);
+    } catch (error) { this.statusV130(false, error.message || 'stockage indisponible'); }
     return this.data;
   }
 
@@ -267,7 +302,10 @@ export class ForgeSaveSystemV62 {
     if (!sanitized) throw new Error('Projet Frontier Forge invalide.');
     const index = this.data.projects.findIndex((entry) => entry.id === sanitized.id);
     if (index >= 0) this.data.projects[index] = sanitized;
-    else this.data.projects.push(sanitized);
+    else {
+      if (this.data.projects.length >= MAX_PROJECTS) throw new Error('Limite de 256 projets atteinte. Exportez un projet avant de poursuivre.');
+      this.data.projects.push(sanitized);
+    }
     this.data.activeProjectId = sanitized.id;
     return this.commit(now);
   }
@@ -291,11 +329,15 @@ export class ForgeSaveSystemV62 {
   }
 
   export() { return JSON.stringify(this.data, null, 2); }
+  exportRawV130() { return this.expectedRawV130; }
 
   import(text, now = Date.now()) {
     const parsed = safeParse(text);
-    if (!parsed) throw new Error('Fichier Frontier Forge invalide.');
+    if (!validWorkspace(parsed)) throw new Error('Fichier Frontier Forge invalide ; espace de travail conservé.');
+    // Explicit workspace import is the recovery boundary. Campaign keys remain read-only.
     this.data = sanitizeForgeSaveV62(parsed, now);
+    this.recoveryNeededV130 = false;
+    try { this.expectedRawV130 = this.storage?.getItem(this.key) ?? null; } catch { /* commit reports failure */ }
     return this.commit(now);
   }
 }
