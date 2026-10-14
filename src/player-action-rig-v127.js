@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { WEAPONS } from './content-core-v50.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
@@ -364,7 +365,7 @@ export function drawPlayerActionRigV127(ctx, { actionRig, appearance, images } =
     for (const prop of actionRig.props) {
       const { a, b, c, d, e, f } = prop.matrix, rect = prop.sourceRect;
       ctx.save(); ctx.transform(a, b, c, d, e, f);
-      ctx.drawImage(imageFrom(images, prop.imageKey), rect.x, rect.y, rect.width, rect.height,
+      ctx.drawImage(resolveSpriteDrawableV134(imageFrom(images, prop.imageKey)), rect.x, rect.y, rect.width, rect.height,
         rect.x, rect.y, rect.width, rect.height); ctx.restore();
     }
   };

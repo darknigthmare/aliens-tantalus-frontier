@@ -53,6 +53,8 @@ import { HubGame as HubGameV88, HUB_DECKS, HUB_NPC_ROSTER } from './hub-opening-
 import { withHubTrainingV132, validateHubLoaderReceiptV132 } from './hub-training-v132.js';
 import { bindHubControlV133 } from './hub-control-bindings-v133.js';
 import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.js';
+import { withHubRoomParallaxV134 } from './hub-room-parallax-v134.js';
+import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
 import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132 } from './save.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
@@ -227,7 +229,7 @@ function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
 }
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
-const HubGame = withHubAuthoredCompositionV133(withHubTrainingV132(HubGameV88));
+const HubGame = withHubRoomDressingV134(withHubRoomParallaxV134(withHubAuthoredCompositionV133(withHubTrainingV132(HubGameV88))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,

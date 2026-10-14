@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-tantalus-v133-shell-2';
+const CACHE = 'atf-v86-tantalus-v134-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -33,6 +33,9 @@ const CORE = [
   '/src/hub-control-bindings-v133.js', '/src/hub-navigation-layout-v133.js', '/src/human-visual-contract-v133.js',
   '/src/player-gait-v133.js', '/src/hub-authored-composition-v133.js',
   '/src/human-patrol-animation-v133.js',
+  '/src/hub-bulkhead-depth-v134.js', '/src/hub-room-parallax-v134.js',
+  '/src/hub-room-dressing-v134.js', '/src/hub-environment-atlas-v134.js', '/src/sprite-alpha-policy-v134.js',
+  '/assets/openai/hub/props/v134/rear-equipment-atlas.png',
   '/src/audio-score-v132.js', '/src/squad-doctrine-v132.js', '/src/squad-command-ui-v132.js', '/src/horde-director-v132.js',
   '/src/narrative-evidence-v132.js',
   '/src/placeables-extension-v132.js', '/src/bioforge-admissions-v132.js', '/src/bioforge-tactics-state-v132.js',

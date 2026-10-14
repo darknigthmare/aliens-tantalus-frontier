@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_ANNEX_MODULE_ART_V82, HUB_DECKS, HubGame as HubGameV71 } from './hub-v71-runtime.js';
 import {
   PROVING_GROUND_ASSETS_V81,
@@ -595,7 +596,7 @@ export class HubGame extends HubGameV71 {
     const consoleImage = this.provingGroundImagesV81.get(PROVING_GROUND_ASSETS_V81.console.runtimeId);
     const station = annex.station.bounds;
     const bounds = { x: station.x + 17, y: station.y + 34, w: 148, h: 148 };
-    if (imageReady(consoleImage)) ctx.drawImage(consoleImage, bounds.x, bounds.y, bounds.w, bounds.h);
+    if (imageReady(consoleImage)) ctx.drawImage(resolveSpriteDrawableV134(consoleImage), bounds.x, bounds.y, bounds.w, bounds.h);
     else super.drawAnnexPropLayerV71(ctx, annex, image);
     if (this.nearestAnnexStationV71()) {
       ctx.save();
@@ -623,11 +624,11 @@ export class HubGame extends HubGameV71 {
         const tileHeight = (source[3] - source[1]) * scale;
         for (let y = layout.ceilingY; y < supportBottom; y += tileHeight) {
           const height = Math.min(tileHeight, supportBottom - y);
-          ctx.drawImage(railImage, source[0], source[1], source[2] - source[0], height / scale, centerX - layout.railWidth / 2, y, layout.railWidth, height);
+          ctx.drawImage(resolveSpriteDrawableV134(railImage), source[0], source[1], source[2] - source[0], height / scale, centerX - layout.railWidth / 2, y, layout.railWidth, height);
         }
       }
       if (imageReady(bracketImage)) {
-        ctx.drawImage(bracketImage, bracketSource[0], bracketSource[1], bracketSource[2] - bracketSource[0], bracketSource[3] - bracketSource[1], centerX - layout.bracketWidth / 2, bracketY, layout.bracketWidth, bracketHeight);
+        ctx.drawImage(resolveSpriteDrawableV134(bracketImage), bracketSource[0], bracketSource[1], bracketSource[2] - bracketSource[0], bracketSource[3] - bracketSource[1], centerX - layout.bracketWidth / 2, bracketY, layout.bracketWidth, bracketHeight);
       }
     }
   }
@@ -652,7 +653,7 @@ export class HubGame extends HubGameV71 {
         const column = frame % atlas.columns;
         const row = Math.floor(frame / atlas.columns);
         ctx.drawImage(
-          image,
+          resolveSpriteDrawableV134(image),
           column * atlas.frameWidth,
           row * atlas.frameHeight,
           atlas.frameWidth,
@@ -698,7 +699,7 @@ export class HubGame extends HubGameV71 {
         const column = frame % atlas.columns;
         const row = Math.floor(frame / atlas.columns);
         ctx.drawImage(
-          image,
+          resolveSpriteDrawableV134(image),
           column * atlas.frameWidth,
           row * atlas.frameHeight,
           atlas.frameWidth,

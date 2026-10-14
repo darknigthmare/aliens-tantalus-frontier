@@ -7,7 +7,7 @@ import { HubGame as ProductionHub,HUB_DECKS } from '../src/hub-opening-v88.js';
 import { HUB_WORLD } from '../src/hub-game.js';
 import { HUB_ANNEX_BY_ID_V71 } from '../src/tantalus-hub-expansion-v71.js';
 import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
-import { getHubDoorBounds } from '../src/hub-profiles-v53.js';
+import { getHubBulkheadColliderV134 } from '../src/hub-bulkhead-depth-v134.js';
 import { withHubTrainingV132,HUB_LOADER_ROOM_V132,createHubLoaderTrainingV132,
   validateHubLoaderTrainingV132,normalizeHubTrainingV132,validateHubLoaderReceiptV132,hubSecurityRoutesValidV132 } from '../src/hub-training-v132.js';
 import { createDefaultSave,getHubTrainingOperatorIdV132,recordHubLoaderQualificationV132,migrateSave } from '../src/save.js';
@@ -120,12 +120,13 @@ test('security locks preserve a route from every room to a physical lift and can
   const subject=await fixture(null,'cctv');assert.equal(subject.hub.executeHubTrainingCommandV132('door-toggle','command:hub-west-bulkhead'),false);
   assert.equal(subject.hub.executeHubTrainingCommandV132('door-toggle','command:hub-central-bulkhead'),true);
   assert.equal(subject.hub.executeHubTrainingCommandV132('door-toggle','command:hub-central-bulkhead'),true);
-  const door=buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,0).find(door=>door.id==='command:hub-central-bulkhead'),bounds=getHubDoorBounds(door);
-  subject.hub.npcs.push({id:'occupied-door-fixture',x:bounds.x+10,y:532,w:44,h:92,alive:true});
+  const door=buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,0).find(door=>door.id==='command:hub-central-bulkhead'),bounds=getHubBulkheadColliderV134(door);
+  subject.hub.npcs.push({id:'occupied-door-fixture',x:bounds.x+2,y:532,w:44,h:92,alive:true});
   assert.equal(subject.hub.executeHubTrainingCommandV132('door-toggle','command:hub-central-bulkhead'),false);
   subject.hub.npcs.pop();assert.equal(subject.hub.executeHubTrainingCommandV132('door-toggle','command:hub-central-bulkhead'),true);
   subject.hub.deactivateAnnexV71(HUB_ANNEX_BY_ID_V71.cctv);Object.assign(subject.hub.player,{x:2400,y:532,vx:0,vy:0,grounded:true});
   motion(subject,'KeyD',3);assert.ok(subject.hub.player.x+44<=bounds.x+.01,'A closed remote lock remains a real walking collider');
+  assert.ok(Math.abs(subject.hub.player.x+44-bounds.x)<.01,'The locked leaf blocks at its drawn 16 px cross-section, not at the old bitmap edge');
   const normalized=normalizeHubTrainingV132({...subject.hub.hubTrainingV132,lockedDoorIds:['command:hub-west-bulkhead']});assert.deepEqual(normalized.lockedDoorIds,[]);
 });
 test('a rejected pending issuance never calls qualified or marks the receipt claimed',async()=>{

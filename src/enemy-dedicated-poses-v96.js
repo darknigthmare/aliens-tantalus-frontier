@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
 
 // Art-only replacements for three EXISTING systemic variants. These definitions
@@ -51,7 +52,7 @@ export function drawEnemyDedicatedPoseV96(ctx, enemy, image) {
   ctx.save();
   ctx.translate(enemy.x + enemy.w / 2, enemy.y + enemy.h);
   ctx.scale(enemy.facing === -1 ? -1 : 1, 1);
-  ctx.drawImage(image, -pivot.x * renderWidth, -pivot.y * renderHeight,
+  ctx.drawImage(resolveSpriteDrawableV134(image), -pivot.x * renderWidth, -pivot.y * renderHeight,
     renderWidth, renderHeight);
   ctx.restore();
   return true;

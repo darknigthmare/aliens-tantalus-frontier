@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { SHIP_MICA_TERRARIUM_GRAPH_V87 } from './ship-animal-terrarium-navigation-v87.js';
 
@@ -178,7 +179,7 @@ export function drawShipAnimalHabitatV87(ctx, image, save) {
   for (const entry of props) {
     if (entry.habitatId && !installed.has(entry.habitatId)) continue;
     const [x, y, right, bottom] = entry.source;
-    ctx.drawImage(image, x, y, right - x, bottom - y, entry.x, entry.y, entry.w, entry.h);
+    ctx.drawImage(resolveSpriteDrawableV134(image), x, y, right - x, bottom - y, entry.x, entry.y, entry.w, entry.h);
   }
   // These are labels for empty fitting positions, not silhouettes of animals.
   ctx.save();

@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { sampleHumanGaitV133 } from './player-gait-v133.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
@@ -356,7 +357,7 @@ function drawPart(ctx, image, descriptor, from, to, width, facing) {
   const source = descriptor.source;
   ctx.save();
   ctx.transform(a, b, c, d, e, f);
-  ctx.drawImage(image, source.x, source.y, source.width, source.height,
+  ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.width, source.height,
     source.x, source.y, source.width, source.height);
   ctx.restore();
 }
@@ -392,7 +393,7 @@ export function drawPlayerBodyRigV125(ctx, options = {}) {
   const { a, b, c, d, e, f } = bodyRig.matrix;
   const source = bodyRig.source;
   ctx.transform(a, b, c, d, e, f);
-  ctx.drawImage(bodyImage, source.x, source.y, source.width, source.height,
+  ctx.drawImage(resolveSpriteDrawableV134(bodyImage), source.x, source.y, source.width, source.height,
     source.x, source.y, source.width, source.height);
   ctx.restore();
   ctx.save();

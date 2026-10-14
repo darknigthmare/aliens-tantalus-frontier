@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V108 } from './enemy-import-animation-data-v108.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V114 } from './enemy-import-animation-data-v114.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V118 } from './enemy-import-animation-data-v118.js';
@@ -129,6 +130,6 @@ export function drawEnemyImportAnimationFrameV107(ctx, definition, image, animat
   const [sx, sy, sw, sh] = frame.rect;
   ctx.save(); ctx.translate(options.x, options.y);
   ctx.scale((options.facing === -1 ? -1 : 1) * animation.sourceFacing, 1);
-  ctx.drawImage(image, sx, sy, sw, sh, -frame.pivot.x * sw * scale, -frame.pivot.y * sh * scale, sw * scale, sh * scale);
+  ctx.drawImage(resolveSpriteDrawableV134(image), sx, sy, sw, sh, -frame.pivot.x * sw * scale, -frame.pivot.y * sh * scale, sw * scale, sh * scale);
   ctx.restore(); return true;
 }

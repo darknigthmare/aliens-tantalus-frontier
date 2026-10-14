@@ -1,7 +1,9 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from './hub-game.js';
 import { HUB_ANNEX_BY_ID_V71 } from './tantalus-hub-expansion-v71.js';
 import { buildHubTopologyV58, buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { getHubDoorBounds } from './hub-profiles-v53.js';
+import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveHubRoomArtV56 } from './hub-art-runtime-v56.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
@@ -276,14 +278,14 @@ export function withHubTrainingV132(Base) {
         const existing=book.lockedDoorIds.includes(value),next=existing?book.lockedDoorIds.filter(id=>id!==value):[...book.lockedDoorIds,value];
         if(!hubSecurityRoutesValidV132(next))return false;
         const deck=HUB_DECKS.find(deck=>value.startsWith(`${deck.id}:`)),door=deck&&buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,HUB_DECKS.indexOf(deck)).find(door=>door.id===value);
-        const bounds=door&&getHubDoorBounds(door),actors=[this.player,...(this.npcs||[])];
+        const bounds=door&&getHubBulkheadColliderV134(door),actors=[this.player,...(this.npcs||[])];
         if(!existing&&bounds&&deck?.id===HUB_DECKS[this.state.deck]?.id&&actors.some(actor=>actor.alive!==false&&overlap(actor,bounds)))return false;
         book.lockedDoorIds=next;this.enforceSecurityLocksV132();this.persist();this.onTrainingEventV132?.({action:'hub:security-lock-v132',doorId:value,locked:!existing});return true;
       }
       return false;
     }
     enforceSecurityLocksV132(){for(const door of this.doorStates||[])if(this.hubTrainingV132?.lockedDoorIds.includes(door.id)){
-      const bounds=getHubDoorBounds(door);if(![this.player,...(this.npcs||[])].filter(Boolean).some(actor=>actor.alive!==false&&overlap(actor,bounds)))door.progress=0;}}
+      const bounds=getHubBulkheadColliderV134(door);if(![this.player,...(this.npcs||[])].filter(Boolean).some(actor=>actor.alive!==false&&overlap(actor,bounds)))door.progress=0;}}
     persist(){if(!this.hubTrainingV132||!this.state||!this.player)return super.persist();
       const sink=this.onPersist,active=this.hubTrainingV132.active,pose={x:this.player.x,y:this.player.y},parent=this.hubTrainingV132.course?.returnPose,snapshot=clone(this.hubTrainingV132);
       this.onPersist=patch=>sink({...patch,hubTrainingV132:snapshot});
@@ -319,7 +321,7 @@ export function withHubTrainingV132(Base) {
       const image=this.trainingImageV132;
       if(image?.complete&&image.naturalWidth){const frame=state.mounted&&(this.keys.has('KeyA')||this.keys.has('KeyD'))?4+Math.floor(this.animationTime*8)%4:state.heldId?8+Math.floor(this.animationTime*5)%4:Math.floor(this.animationTime*4)%4;
         const sheet=resolveSpriteSheet('vehicle.p5000-powered-work-loader.action');
-        ctx.drawImage(image,frame%sheet.columns*sheet.cellWidth,Math.floor(frame/sheet.columns)*sheet.cellHeight,sheet.cellWidth,sheet.cellHeight,
+        ctx.drawImage(resolveSpriteDrawableV134(image),frame%sheet.columns*sheet.cellWidth,Math.floor(frame/sheet.columns)*sheet.cellHeight,sheet.cellWidth,sheet.cellHeight,
           state.loader.x+38-75,624-180,150,192);}
       ctx.strokeStyle='#c6b477';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(state.loader.x+38,570);ctx.lineTo(state.loader.x+110,595-state.loader.lift);
       ctx.lineTo(state.loader.x+165,595-state.loader.lift);ctx.stroke();
@@ -348,6 +350,10 @@ export function withHubTrainingV132(Base) {
         if (obstacle.roomId === room.id) this.drawObstacle(ctx, obstacle);
       }
       if (currentDeck) {
+        for (const door of this.doorStates || []) {
+          const bounds = getHubDoorBounds(door);
+          if (!door.lift && bounds.x + bounds.w > room.xStart && bounds.x < room.xEnd) this.drawDoor(ctx, door, 'back');
+        }
         for (const npc of this.npcs || []) {
           if (npc.alive === false || npc.x + npc.w <= room.xStart || npc.x >= room.xEnd) continue;
           // Observe the last physical sprite sample. A camera never advances
@@ -365,7 +371,7 @@ export function withHubTrainingV132(Base) {
           if (drawHumanAtlasV133(ctx, image, human)) continue;
           ctx.save();
           if (npc.vx < 0) { ctx.translate(x + width, y); ctx.scale(-1, 1); }
-          ctx.drawImage(image, column * image.naturalWidth / columns, row * image.naturalHeight / rows,
+          ctx.drawImage(resolveSpriteDrawableV134(image), column * image.naturalWidth / columns, row * image.naturalHeight / rows,
             image.naturalWidth / columns, image.naturalHeight / rows,
             npc.vx < 0 ? 0 : x, npc.vx < 0 ? 0 : y, width, height);
           ctx.restore();

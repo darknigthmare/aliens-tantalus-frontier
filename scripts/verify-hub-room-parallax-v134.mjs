@@ -1,0 +1,124 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {HUB_DECKS} from '../src/hub-game.js';
+import {HUB_ANNEXES_V87} from '../src/hub-annex-registry-v87.js';
+import {HUB_ROOM_PARALLAX_V134,getHubRoomParallaxPlanV134,getHubNativeWallTilesV134,getHubRearEquipmentLayoutV134,drawHubRoomParallaxV134,withHubRoomParallaxV134} from '../src/hub-room-parallax-v134.js';
+import {HUB_ENVIRONMENT_ATLAS_V134} from '../src/hub-environment-atlas-v134.js';
+
+const root=fileURLToPath(new URL('../',import.meta.url));
+function dimensions(path){const b=readFileSync(root+path.replace(/^\//,''));
+  if(b.subarray(1,4).toString()==='PNG')return[b.readUInt32BE(16),b.readUInt32BE(20)];
+  assert.equal(b.subarray(0,4).toString(),'RIFF');
+  for(let offset=12;offset+8<b.length;){const kind=b.subarray(offset,offset+4).toString(),n=b.readUInt32LE(offset+4),start=offset+8;
+    if(kind==='VP8X')return[b.readUIntLE(start+4,3)+1,b.readUIntLE(start+7,3)+1];
+    if(kind==='VP8 ')return[b.readUInt16LE(start+6)&0x3fff,b.readUInt16LE(start+8)&0x3fff];
+    if(kind==='VP8L'){const packed=b.readUInt32LE(start+1);return[(packed&0x3fff)+1,((packed>>>14)&0x3fff)+1];}
+    offset=start+n+(n%2);}
+  throw Error('Unrecognized native image header: '+path);
+}
+function image(path){const[naturalWidth,naturalHeight]=dimensions(path);return{complete:true,naturalWidth,naturalHeight,src:path};}
+const rooms=[...HUB_DECKS.flatMap(d=>d.rooms),...HUB_ANNEXES_V87.map(a=>({...a,xStart:0}))];
+function host(){let depth=0;const images=[],clips=[],draws=[];const ctx=new Proxy({
+  save(){depth++;},restore(){assert.ok(depth>0);depth--;},rect(...r){clips.push(r);},drawImage(asset,...r){images.push({asset:asset.src,r});},
+  fillRect(...r){draws.push(r);},createLinearGradient:()=>({addColorStop(){}})
+},{get:(object,key)=>key in object?object[key]:()=>{}});return{ctx,images,clips,draws,balanced:()=>assert.equal(depth,0)};}
+
+test('all 16 ship rooms and 13 annexes have an explicit visual-only projection',()=>{
+ assert.equal(rooms.length,29);assert.equal(Object.keys(HUB_ROOM_PARALLAX_V134).length,29);
+ assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2.5d').length,12);
+ assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2d').length,17);
+ for(const room of rooms){const p=getHubRoomParallaxPlanV134(room,room.xStart);assert.ok(p,room.id);
+   assert.equal(p.gameplayPlane,'2d');assert.equal(p.collidable,false);assert.equal(p.bounds.x,room.xStart);
+   assert.equal(p.bounds.w,room.profile?.worldWidth||room.world.width);assert.ok(p.bounds.y+p.bounds.h<624);
+   assert.ok(p.layers.every(layer=>layer.collidable===false));}
+});
+
+test('real native wall headers preserve aspect, cap scale, and completely cover each room for either camera direction',()=>{
+ for(const room of rooms){const source=HUB_ROOM_PARALLAX_V134[room.id].nativeSource||room.art.far,asset=image(source);
+   for(const drift of [-72,0,72]){const bounds=getHubRoomParallaxPlanV134(room).bounds,tiles=getHubNativeWallTilesV134(asset,bounds,drift);
+     assert.ok(tiles.length,room.id);let area=0;
+     for(const tile of tiles){const s=tile.source,t=tile.target;
+       assert.ok(s.x>=-1e-6&&s.y>=0&&s.x+s.w<=asset.naturalWidth+1e-6&&s.y+s.h<=asset.naturalHeight+1e-6);
+       assert.ok(t.x>=bounds.x&&t.x+t.w<=bounds.x+bounds.w+1e-6&&t.y>=bounds.y&&t.y+t.h<=bounds.y+bounds.h+1e-6);
+       assert.ok(Math.abs(t.w/s.w-t.h/s.h)<1e-10,room.id+' distorts native aspect');
+       assert.ok(t.w/s.w<=1+1e-10,room.id+' upscales native texture');area+=t.w*t.h;}
+     assert.ok(Math.abs(area-bounds.w*bounds.h)<1e-6,room.id+' has a gap or overlapping tile');}
+ }
+});
+
+test('the three reviewed depth planes move differently in real screen coordinates and reset their origin for every room',()=>{
+ for(const room of rooms.filter(r=>HUB_ROOM_PARALLAX_V134[r.id].presentationMode==='2.5d')){
+   const center=room.xStart+(room.profile?.worldWidth||room.world.width)/2-640;
+   const a=getHubRoomParallaxPlanV134(room,center),b=getHubRoomParallaxPlanV134(room,center+300);
+   const delta=b.layers.map((plane,i)=>plane.drift-a.layers[i].drift);
+   assert.ok(delta[0]>delta[1]&&delta[1]>delta[2]&&delta[2]>0,room.id);
+   const screenDelta=delta.map(value=>value-300);assert.ok(screenDelta.every(value=>value>-300&&value<0));
+   const translated=getHubRoomParallaxPlanV134({...room,xStart:room.xStart+90000},center+90300);
+   assert.deepEqual(translated.layers,b.layers);assert.equal(translated.bounds.x-b.bounds.x,90000);
+ }
+});
+
+test('compact rooms, reduced motion and disabled visual depth keep a stationary orthographic projection',()=>{
+ for(const room of rooms){for(const options of [{reducedMotion:true},{enabled:false},...(HUB_ROOM_PARALLAX_V134[room.id].presentationMode==='2d'?[{}]:[])]){
+   const first=getHubRoomParallaxPlanV134(room,-999999,options),second=getHubRoomParallaxPlanV134(room,999999,options);
+   assert.deepEqual(first.layers,second.layers);assert.ok(first.layers.every(layer=>layer.drift===0&&layer.factor===0));}}
+});
+
+test('renderer clips native pixels and all architecture to the local rear plane, leaves inputs unchanged and balances Canvas state',()=>{
+ for(const room of rooms){const before=structuredClone(room),source=HUB_ROOM_PARALLAX_V134[room.id].nativeSource||room.art.far,asset=image(source),browser=host();
+   const model=drawHubRoomParallaxV134(browser.ctx,room,asset,room.xStart+340);browser.balanced();
+   assert.deepEqual(room,before);assert.equal(model.nativeReady,true);
+   assert.deepEqual(browser.clips[0],[model.bounds.x,model.bounds.y,model.bounds.w,model.bounds.h]);
+   for(const call of browser.images){assert.equal(call.r.length,8);assert.ok(Math.abs(call.r[6]/call.r[2]-call.r[7]/call.r[3])<1e-10);}
+ }
+});
+
+test('wrapper routes annex backgrounds before existing physical geometry and retains an untouched save/snapshot',()=>{
+ const annex=HUB_ANNEXES_V87.find(a=>a.id==='logistics'),wall=image(annex.art.far),browser=host(),order=[];
+ class Base{constructor(){this.depthPresentationV116=true;this.annexCameraV71={x:300};this.state={save:{stocks:17}};}
+   ensureAnnexAssetsV71(){return new Map([['far',wall]]);}drawAnnexGeometryV71(ctx,a){assert.equal(a,annex);order.push('physical');return 'native-geometry';}
+   drawAnnexLayerV71(){return 'old-layer';}drawHubRoomFarV58(){return 'old-room';}currentAnnexV71(){return annex;}isAnnexActiveV71(){return true;}
+   getSnapshot(){return{save:structuredClone(this.state.save)};}}
+ const Subject=withHubRoomParallaxV134(Base),subject=new Subject(),before=structuredClone(subject.state);
+ assert.equal(subject.drawAnnexGeometryV71(browser.ctx,annex),'native-geometry');browser.balanced();assert.equal(order.length,1);
+ assert.deepEqual(subject.state,before);assert.equal(subject.getSnapshot().hubRoomParallaxV134.current.id,'logistics');
+ assert.equal(subject.drawAnnexLayerV71(browser.ctx,wall,.18,1),false);
+ subject.editorPlaytest=true;assert.equal(subject.drawAnnexLayerV71(browser.ctx,wall,.18,1),'old-layer');
+ assert.equal(subject.drawHubRoomFarV58(browser.ctx,HUB_DECKS[0].rooms[0]),'old-room');
+});
+
+test('missing or invalid native sources leave the structural fallback usable without stretching another room',()=>{
+ const room=HUB_DECKS[0].rooms[0],browser=host();for(const source of [null,{complete:false,naturalWidth:1774,naturalHeight:887},{complete:true,naturalWidth:0,naturalHeight:887}]){
+   const model=drawHubRoomParallaxV134(browser.ctx,room,source,0);assert.equal(model.nativeReady,false);assert.equal(model.asset,null);browser.balanced();}
+ assert.equal(drawHubRoomParallaxV134(browser.ctx,{id:'unreviewed'},image(HUB_ROOM_PARALLAX_V134.bridge.nativeSource)),null);
+});
+
+test('CCTV renders the observed compartment at its own camera and restores the surrounding render context',()=>{
+ const room=HUB_DECKS[3].rooms.find(r=>r.id==='dropship-hangar'),wall=image(HUB_ROOM_PARALLAX_V134[room.id].nativeSource),browser=host();
+ class Base{
+   constructor(){this.camera={x:17};this.player={x:940,y:532};this.depthPresentationV116=true;this.roomLayerImages=new Map([[wall.src,wall]]);}
+   hubTrainingContactV132(id){return id==='cctv';}getHubTrainingCommandsV132(){return{selectedFeed:{deckIndex:3,id:room.id}};}
+   drawSecurityFeedV132(){this.drawHubRoomFarV58(browser.ctx,room);return 'native-feed';}
+ }
+ const Subject=withHubRoomParallaxV134(Base),subject=new Subject(),physical=structuredClone({camera:subject.camera,player:subject.player});
+ subject.hubParallaxCameraOverrideV134=913;
+ assert.equal(subject.drawSecurityFeedV132(),'native-feed');browser.balanced();
+ assert.equal(subject.hubParallaxCameraOverrideV134,913);assert.deepEqual({camera:subject.camera,player:subject.player},physical);
+ const model=subject.hubParallaxModelsV134.get('room:dropship-hangar');assert.equal(model.localEye,0);assert.ok(model.layers.every(layer=>layer.drift===0));
+});
+
+test('original equipment atlas creates only one or two rear bays at native aspect and never inflates a panel to room width',()=>{
+ const atlas=image(HUB_ENVIRONMENT_ATLAS_V134.asset);assert.equal(atlas.naturalWidth,HUB_ENVIRONMENT_ATLAS_V134.width);assert.equal(atlas.naturalHeight,HUB_ENVIRONMENT_ATLAS_V134.height);
+ for(const room of rooms){const model=getHubRoomParallaxPlanV134(room,room.xStart+600),panels=getHubRearEquipmentLayoutV134(room,model,atlas);
+   assert.equal(panels.length,model.bounds.w>=1920?2:1,room.id);
+   for(const panel of panels){const s=panel.source,t=panel.target;
+     assert.ok(s.x>=0&&s.y>=0&&s.x+s.w<=atlas.naturalWidth&&s.y+s.h<=atlas.naturalHeight);
+     assert.ok(Math.abs(t.w/s.w-t.h/s.h)<1e-10);assert.ok(t.w/s.w<=1);assert.ok(t.w<=650&&t.h<350);
+     assert.equal(t.y+t.h,model.bounds.y+model.bounds.h);assert.ok(t.x>=model.bounds.x&&t.x+t.w<=model.bounds.x+model.bounds.w);
+     assert.equal(panel.collidable,false);assert.equal(panel.interactive,false);assert.equal(panel.exact,false);}
+ }
+ const room={id:'proving-ground',xStart:0,world:{width:2600,floorY:624}},model=getHubRoomParallaxPlanV134(room,1200,{clip:{x:0,y:132,w:2600,h:238}});
+ for(const panel of getHubRearEquipmentLayoutV134(room,model,atlas)){assert.ok(panel.target.y>=156);assert.equal(panel.target.y+panel.target.h,370);}
+});

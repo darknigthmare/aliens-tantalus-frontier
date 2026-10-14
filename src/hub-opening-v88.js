@@ -1,7 +1,8 @@
 import { HubGame as PreviousHub, HUB_DECKS } from './hub-onboarding-v84.js';
 import { normalizePlayerOpeningV88, OPENING_POSTS_V88, OPENING_RELAY_SECONDS_V88 } from './player-opening-v88.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
-import { HUB_WORLD, getHubDoorBounds } from './hub-game.js';
+import { HUB_WORLD } from './hub-game.js';
+import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { normalizeRefugeHubResumeV87 } from './refuge-save-v87.js';
 import { withOpeningExerciseV89 } from './hub-opening-exercise-v89.js';
 import { withPortMeridienV90 } from './hub-port-meridien-v90.js';
@@ -17,7 +18,7 @@ export function resolveHubResumeHeightV88(hub, value) {
   if (value < 0 || value + actor.h > HUB_WORLD.floorY) return null;
   const solids = [...(hub.obstacles || []), ...(hub.v51Walls || []), ...(hub.v51Vents || []),
     ...(hub.v51Doors || []).filter(door => door.progress < .82),
-    ...(hub.doorStates || []).filter(door => !door.lift && door.blocking !== false && door.progress < .82).map(getHubDoorBounds)];
+    ...(hub.doorStates || []).filter(door => !door.lift && door.blocking !== false && door.progress < .82).map(door => getHubBulkheadColliderV134(door))];
   if (solids.some(item => item.collisionMode !== 'one-way-top' && overlaps(actor, item))) return null;
   const support = [...(hub.v51Platforms || []), ...(hub.obstacles || []), ...(hub.v51Walls || []),
     { x: 0, w: HUB_WORLD.width, y: HUB_WORLD.floorY }].find(item =>

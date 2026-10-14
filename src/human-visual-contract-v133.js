@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 /** Shared presentation contract. World pixels measure the opaque neutral human,
  * not the transparent bitmap. Collision, health and authored species stay native.
  * Alpha bounds below are measured from the shipped RGBA art at alpha > 32.
@@ -130,7 +131,7 @@ export function drawHumanAtlasV133(ctx, image, geometry) {
   ctx.save();
   ctx.translate(sprite.x + (geometry.flip ? sprite.width : 0), sprite.y);
   if (geometry.flip) ctx.scale(-1, 1);
-  ctx.drawImage(image, source.x, source.y, source.width, source.height, 0, 0, sprite.width, sprite.height);
+  ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.width, source.height, 0, 0, sprite.width, sprite.height);
   ctx.restore();
   return true;
 }

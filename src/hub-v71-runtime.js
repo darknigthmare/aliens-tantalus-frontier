@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import {
   HUB_DECKS,
   HUB_WORLD,
@@ -1114,7 +1115,7 @@ export class HubGame extends HubGameV62 {
     const source = layerSourceRect(image, this.annexCameraV71.x, factor);
     ctx.save();
     ctx.globalAlpha = alpha;
-    ctx.drawImage(image, source.x, source.y, source.w, source.h, 0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+    ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, 0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     ctx.restore();
   }
 
@@ -1139,7 +1140,7 @@ export class HubGame extends HubGameV62 {
         const tileWidth = (source[2] - source[0]) * scale;
         for (let x = platform.x; x < platform.x + platform.w; x += tileWidth) {
           const width = Math.min(tileWidth, platform.x + platform.w - x);
-          ctx.drawImage(deckImage, source[0], source[1], width / scale, source[3] - source[1], x, platform.y, width, platform.h);
+          ctx.drawImage(resolveSpriteDrawableV134(deckImage), source[0], source[1], width / scale, source[3] - source[1], x, platform.y, width, platform.h);
         }
       } else {
         ctx.fillStyle = '#273832';
@@ -1152,7 +1153,7 @@ export class HubGame extends HubGameV62 {
         const source = moduleArt.crops.ladderLeft;
         const postTop = platform.y + platform.h;
         for (const x of [platform.x + 14, platform.x + platform.w - 23]) {
-          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], x, postTop, 9, annex.world.floorY - postTop);
+          ctx.drawImage(resolveSpriteDrawableV134(ladderImage), source[0], source[1], source[2] - source[0], source[3] - source[1], x, postTop, 9, annex.world.floorY - postTop);
         }
       }
     }
@@ -1162,11 +1163,11 @@ export class HubGame extends HubGameV62 {
         // Assemble rails and one clean rung, leaving real transparency between
         // them instead of drawing the white-filled holes of the source sheet.
         for (const [source, x] of [[moduleArt.crops.ladderLeft, ladder.x], [moduleArt.crops.ladderRight, ladder.x + ladder.w - 7]]) {
-          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], x, ladder.top, 7, ladder.bottom - ladder.top);
+          ctx.drawImage(resolveSpriteDrawableV134(ladderImage), source[0], source[1], source[2] - source[0], source[3] - source[1], x, ladder.top, 7, ladder.bottom - ladder.top);
         }
         const source = moduleArt.crops.ladderRung;
         for (let y = ladder.top + 10; y < ladder.bottom - 4; y += 22) {
-          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], ladder.x + 7, y, ladder.w - 14, 4);
+          ctx.drawImage(resolveSpriteDrawableV134(ladderImage), source[0], source[1], source[2] - source[0], source[3] - source[1], ladder.x + 7, y, ladder.w - 14, 4);
         }
         continue;
       }
@@ -1198,7 +1199,7 @@ export class HubGame extends HubGameV62 {
   drawCroppedBitmapV72(ctx, image, source, target) {
     if (!imageReady(image)) return;
     const fitted = fitHubBitmapV72(source, target);
-    ctx.drawImage(image, source[0], source[1], source[2] - source[0], source[3] - source[1], fitted.x, fitted.y, fitted.w, fitted.h);
+    ctx.drawImage(resolveSpriteDrawableV134(image), source[0], source[1], source[2] - source[0], source[3] - source[1], fitted.x, fitted.y, fitted.w, fitted.h);
   }
 
   drawAnnexModularPropsV72(ctx, annex) {
@@ -1233,9 +1234,9 @@ export class HubGame extends HubGameV62 {
       const shaftHeight = (shaft[3] - shaft[1]) * scale;
       for (let y = 0; y < collider.y; y += shaftHeight) {
         const height = Math.min(shaftHeight, collider.y - y);
-        ctx.drawImage(pipe, shaft[0], shaft[1], shaft[2] - shaft[0], height / scale, collider.x + (collider.w - shaftWidth) / 2, y, shaftWidth, height);
+        ctx.drawImage(resolveSpriteDrawableV134(pipe), shaft[0], shaft[1], shaft[2] - shaft[0], height / scale, collider.x + (collider.w - shaftWidth) / 2, y, shaftWidth, height);
       }
-      ctx.drawImage(pipe, body[0], body[1], body[2] - body[0], body[3] - body[1], x, collider.y, width, collider.h);
+      ctx.drawImage(resolveSpriteDrawableV134(pipe), body[0], body[1], body[2] - body[0], body[3] - body[1], x, collider.y, width, collider.h);
     }
     if (annex.id === 'proving-ground') {
       const ceiling = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.provingCeiling);
@@ -1247,7 +1248,7 @@ export class HubGame extends HubGameV62 {
         const tileWidth = (solid[2] - solid[0]) * scale;
         for (let x = 0; x < annex.world.width; x += tileWidth) {
           const width = Math.min(tileWidth, annex.world.width - x);
-          ctx.drawImage(ceiling, solid[0], 0, width / scale, ceiling.naturalHeight, x, -solid[1] * scale, width, height);
+          ctx.drawImage(resolveSpriteDrawableV134(ceiling), solid[0], 0, width / scale, ceiling.naturalHeight, x, -solid[1] * scale, width, height);
         }
       }
     }
@@ -1274,10 +1275,10 @@ export class HubGame extends HubGameV62 {
       if (source && preserveAspect) {
         const width = source[2] - source[0], height = source[3] - source[1];
         const scale = Math.min(bounds.w / width, bounds.h / height);
-        ctx.drawImage(image, source[0], source[1], width, height,
+        ctx.drawImage(resolveSpriteDrawableV134(image), source[0], source[1], width, height,
           bounds.x + (bounds.w - width * scale) / 2, bounds.y + bounds.h - height * scale, width * scale, height * scale);
       } else if (source) this.drawCroppedBitmapV72(ctx, image, source, bounds);
-      else ctx.drawImage(image, bounds.x, bounds.y, bounds.w, bounds.h);
+      else ctx.drawImage(resolveSpriteDrawableV134(image), bounds.x, bounds.y, bounds.w, bounds.h);
     }
     else {
       ctx.fillStyle = '#17241f';

@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import {
   PLAYER_BODY_RIG_ASSETS_V125, PLAYER_ARM_PARTS_V125,
@@ -306,7 +307,7 @@ function drawLayer(ctx,images,l) {
   }
   const {a,b,c,d,e,f}=l.matrix,s=l.sourceRect;
   ctx.transform(a,b,c,d,e,f);
-  ctx.drawImage(imageFrom(images,l.imageKey),s.x,s.y,s.width,s.height,s.x,s.y,s.width,s.height);
+  ctx.drawImage(resolveSpriteDrawableV134(imageFrom(images, l.imageKey)),s.x,s.y,s.width,s.height,s.x,s.y,s.width,s.height);
   ctx.restore();
 }
 

@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { ENEMY_DEDICATED_POSES_V98, isEnemyDedicatedPoseReadyV98 } from './enemy-dedicated-poses-v98.js';
 import { ENEMY_DEDICATED_BATCH_V99 } from './enemy-dedicated-batch-v99.js';
 import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
@@ -32,7 +33,7 @@ export function drawEnemyDedicatedPoseV99(ctx, actor, image) {
   actor.humanVisualV133 = human;
   ctx.save(); ctx.translate(actor.x + actor.w / 2, actor.y + actor.h);
   ctx.scale((actor.facing === -1 ? -1 : 1) * pose.sourceFacing, 1);
-  ctx.drawImage(image, -pivot.x * renderWidth, -pivot.y * renderHeight, renderWidth, renderHeight);
+  ctx.drawImage(resolveSpriteDrawableV134(image), -pivot.x * renderWidth, -pivot.y * renderHeight, renderWidth, renderHeight);
   ctx.restore(); return true;
 }
 export function enemyDedicatedCatalogVisualV99(id) {

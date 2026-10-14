@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getPlayerSourceCropV124, playerAtlasScaleV124 } from './player-presentation-v124.js';
 import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
 
@@ -241,9 +242,9 @@ export function drawPlayerSpriteV81(ctx, options = {}) {
   if (flip) {
     ctx.translate?.(drawSprite.x + drawSprite.width, drawSprite.y);
     ctx.scale?.(-1, 1);
-    ctx.drawImage?.(image, drawSource.x, drawSource.y, drawSource.width, drawSource.height, 0, 0, drawSprite.width, drawSprite.height);
+    ctx.drawImage?.(resolveSpriteDrawableV134(image), drawSource.x, drawSource.y, drawSource.width, drawSource.height, 0, 0, drawSprite.width, drawSprite.height);
   } else {
-    ctx.drawImage?.(image, drawSource.x, drawSource.y, drawSource.width, drawSource.height, drawSprite.x, drawSprite.y, drawSprite.width, drawSprite.height);
+    ctx.drawImage?.(resolveSpriteDrawableV134(image), drawSource.x, drawSource.y, drawSource.width, drawSource.height, drawSprite.x, drawSprite.y, drawSprite.width, drawSprite.height);
   }
   ctx.restore?.();
   const { image: _privateImage, ...result } = validation;

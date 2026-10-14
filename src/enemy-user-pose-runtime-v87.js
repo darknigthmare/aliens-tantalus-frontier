@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, getEnemyStaticPoseRangedBehaviorV96 as getEnemyStaticPoseRangedBehaviorV95, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
 import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
@@ -149,7 +150,7 @@ export function drawUserCastePoseV87(ctx, enemy, image, options = {}) {
   ctx.translate(enemy.x + enemy.w / 2, enemy.y + enemy.h * (definition.groundContact === false ? .5 : 1));
   // Preserve each PNG's native orientation; its full canvas and pivot stay intact.
   ctx.scale((enemy.facing === -1 ? -1 : 1) * (definition.sourceFacing === -1 ? -1 : 1), 1);
-  ctx.drawImage(image, -pivot.x * w, -pivot.y * h, w, h);
+  ctx.drawImage(resolveSpriteDrawableV134(image), -pivot.x * w, -pivot.y * h, w, h);
   ctx.restore();
   return true;
 }

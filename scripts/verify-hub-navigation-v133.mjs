@@ -11,6 +11,7 @@ import {withHubTrainingV132} from '../src/hub-training-v132.js';
 import {HUB_ROOM_NAVIGATION_V133,validateHubWalkingLaneV133} from '../src/hub-navigation-layout-v133.js';
 import {ELECTRICAL_HAZARD_ART_V55} from '../src/hub-art-runtime-v55.js';
 import {getHubDoorBounds} from '../src/hub-profiles-v53.js';
+import {getHubBulkheadColliderV134} from '../src/hub-bulkhead-depth-v134.js';
 import {createDefaultSave} from '../src/save.js';
 import {requestShipPortDockV87,stepShipPortV87,SHIP_PORT_DEFINITION_V87} from '../src/ship-port-state-v87.js';
 const Engine=withHubTrainingV132(ProductionHub),root=fileURLToPath(new URL('../',import.meta.url));
@@ -104,9 +105,10 @@ test('commercial annex doors are reachable on foot and their station/cargo remai
 test('closed security bulkheads still block movement while an occupied rear prop checkpoint resumes safely',async()=>{
  const subject=await fixture(0,2350,{deck:0,roomId:'briefing',positionX:2350,positionY:532,visited:['briefing'],
   hubTrainingV132:{schema:132,serial:0,active:false,course:null,cameraIndex:0,lockedDoorIds:['command:hub-central-bulkhead'],pendingReceipt:null,claimedReceiptIds:[]}});
- const door=subject.hub.doorStates.find(door=>door.id==='command:hub-central-bulkhead'),bounds=getHubDoorBounds(door);
+ const door=subject.hub.doorStates.find(door=>door.id==='command:hub-central-bulkhead'),bounds=getHubBulkheadColliderV134(door);
  subject.key('keydown','KeyD');advance(subject,3);subject.key('keyup','KeyD');
  assert.ok(subject.hub.player.x+44<=bounds.x+.01);
+ assert.ok(Math.abs(subject.hub.player.x+44-bounds.x)<.01);
  const resume=await fixture(0,850,{deck:0,roomId:'bridge',positionX:850,positionY:532,visited:['bridge']});
  assert.equal(resume.hub.player.y,532);walk(resume,1010);assert.equal(resume.hub.player.y,532);
 });

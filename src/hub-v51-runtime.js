@@ -1,4 +1,6 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
+import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import {
   HubGame as HubGameV50,
   HUB_DECKS,
@@ -634,7 +636,7 @@ export class HubGame extends HubGameV50 {
     if (!this.editorPlaytest) {
       for (const door of this.doorStates) {
         if (door.blocking === false || door.lift) continue;
-        if (door.progress < 0.82) colliders.push(getHubDoorBounds(door));
+        if (door.progress < 0.82) colliders.push(getHubBulkheadColliderV134(door));
       }
     }
     for (const door of this.v51Doors) if (door.progress < 0.82) colliders.push(door);
@@ -883,6 +885,7 @@ export class HubGame extends HubGameV50 {
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
     if (!this.editorPlaytest) for (const door of this.doorStates) if (door.lift) this.drawDoor(ctx, door);
+    if (!this.editorPlaytest) for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door, 'back');
     for (const npc of this.npcs) {
       this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
@@ -968,7 +971,7 @@ export class HubGame extends HubGameV50 {
     ctx.clip();
     for (let x = platform.x; x < platform.x + platform.w + unitWidth; x += Math.max(24, unitWidth - 8)) {
       ctx.drawImage(
-        image,
+        resolveSpriteDrawableV134(image),
         crop.x, crop.y, crop.w, crop.h,
         x, renderY, unitWidth, renderHeight
       );
@@ -989,7 +992,7 @@ export class HubGame extends HubGameV50 {
     ctx.clip();
     for (let y = ladder.top; y < ladder.bottom + unitHeight; y += Math.max(18, unitHeight - 8)) {
       ctx.drawImage(
-        image, 0, 0, image.naturalWidth, cropHeight,
+        resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, cropHeight,
         ladder.x - width / 2, y, width, unitHeight
       );
     }
@@ -999,7 +1002,7 @@ export class HubGame extends HubGameV50 {
   drawTraversalVent(ctx, vent) {
     const image = this.traversalImages.get('vent');
     if (!imageReady(image)) return;
-    ctx.drawImage(image, vent.x, vent.y, vent.w, vent.h);
+    ctx.drawImage(resolveSpriteDrawableV134(image), vent.x, vent.y, vent.w, vent.h);
   }
 
   drawTraversalOcclusions(ctx, phase = 'front') {
@@ -1013,7 +1016,7 @@ export class HubGame extends HubGameV50 {
       ctx.clip();
       ctx.globalAlpha = clamp(occlusion.alpha, 0, 1);
       for (let x = occlusion.x; x < occlusion.x + occlusion.w + unitWidth; x += Math.max(28, unitWidth - 8)) {
-        ctx.drawImage(image, x, occlusion.y, unitWidth, occlusion.h);
+        ctx.drawImage(resolveSpriteDrawableV134(image), x, occlusion.y, unitWidth, occlusion.h);
       }
       ctx.restore();
     }

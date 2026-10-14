@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_DOOR_PROFILES, HUB_ROOM_PROFILES, getHubDoorBounds } from './hub-profiles-v53.js';
 import {
   DROPSHIP_HANGAR_ART_V55,
@@ -29,6 +30,7 @@ import { hubFarParallaxV116, drawHubRoomDepthV119, drawHubContactShadowV116 } fr
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { HUB_ROOM_NAVIGATION_V133, hubRearPropColliderV133 } from './hub-navigation-layout-v133.js';
 import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
+import { drawHubBulkheadDepthV134, hubBulkheadDepthGeometryV134, getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
   drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
@@ -533,7 +535,7 @@ export class HubGame {
   resolveHorizontal(previousX) {
     for (const door of this.doorStates) {
       if (door.blocking === false || door.lift) continue;
-      const collider = getHubDoorBounds(door);
+      const collider = getHubBulkheadColliderV134(door);
       if (door.progress >= 0.82 || !overlap(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
         this.player.x = collider.x - this.player.w;
@@ -779,6 +781,9 @@ export class HubGame {
       activeDoorId: activeDoor?.id || null,
       activeLiftShaftId: this.nearestLift()?.shaftId || null,
       doorNetworkCount: this.doorStates.length,
+      hubBulkheadDepthV134: { source: 'original-vector-architecture', gameplayPlane: '2d',
+        doors: this.currentAnnexV71?.() || this.editorPlaytest ? []
+          : this.doorStates.filter(door => !door.lift).map(door => this.bulkheadDrawnV134?.get(door.id)).filter(Boolean) },
       roomAssetsReady: assetReport.roomAssetsReady,
       roomLayerAssetsReady: assetReport.roomLayerAssetsReady,
       parallaxAssetsReady: assetReport.parallaxAssetsReady,
@@ -825,7 +830,7 @@ export class HubGame {
       const width = image.naturalWidth * (height / image.naturalHeight);
       const offset = -((this.camera.x * 0.14) % width);
       ctx.globalAlpha = 0.78;
-      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, 0, width, height);
+      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(resolveSpriteDrawableV134(image), x, 0, width, height);
       ctx.globalAlpha = 1;
     }
     const shade = ctx.createLinearGradient(0, 0, 0, LOGICAL_HEIGHT);
@@ -855,6 +860,7 @@ export class HubGame {
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
     for (const door of this.doorStates) if (door.lift) this.drawDoor(ctx, door);
+    for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door, 'back');
     for (const npc of this.npcs) {
       this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
@@ -901,7 +907,7 @@ export class HubGame {
         ctx.beginPath();
         ctx.rect(room.xStart, 0, roomWidth, FLOOR_Y);
         ctx.clip();
-        ctx.drawImage(image, x, y, width, height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), x, y, width, height);
         ctx.restore();
       }
       if (!modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage, room);
@@ -958,7 +964,7 @@ export class HubGame {
       ctx.shadowBlur = this.reducedMotion ? 8 : 9 + Math.sin(this.animationTime * 4) * 3;
     }
     ctx.drawImage(
-      image,
+      resolveSpriteDrawableV134(image),
       cellX + source.x, cellY + source.y, source.w, source.h,
       targetX, target.y, target.w, target.h
     );
@@ -995,13 +1001,13 @@ export class HubGame {
         const cellX = entry.sourceCell.column * entry.sheet.cellWidth;
         const cellY = entry.sourceCell.row * entry.sheet.cellHeight;
         ctx.drawImage(
-          image,
+          resolveSpriteDrawableV134(image),
           cellX + source.x, cellY + source.y, source.w, source.h,
           targetX, target.y, target.w, target.h
         );
       } else {
         const source = entry.sourceCrop;
-        ctx.drawImage(image, source.x, source.y, source.w, source.h, targetX, target.y, target.w, target.h);
+        ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, targetX, target.y, target.w, target.h);
       }
       ctx.restore();
     }
@@ -1022,7 +1028,7 @@ export class HubGame {
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
-      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight,
       target.x, target.y, target.w, target.h
     );
     ctx.restore();
@@ -1041,7 +1047,7 @@ export class HubGame {
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
-      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight,
       target.x + drift, target.y, target.w, target.h
     );
     ctx.restore();
@@ -1059,7 +1065,7 @@ export class HubGame {
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
-      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight,
       target.x, target.y, target.w, target.h
     );
     ctx.restore();
@@ -1081,7 +1087,7 @@ export class HubGame {
     const drift = maxDrift && !this.reducedMotion && presentation.presentationMode === '2.5d'
       ? clamp((this.camera.x - (room?.xStart || 0)) * .09, 0, maxDrift) : maxDrift / 2;
     ctx.globalAlpha = 0.68;
-    ctx.drawImage(image, viewport.x - drift, viewport.y - (height - viewport.h) / 2, width, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), viewport.x - drift, viewport.y - (height - viewport.h) / 2, width, height);
     ctx.globalAlpha = 1;
     const glass = ctx.createLinearGradient(viewport.x, viewport.y, viewport.x, viewport.y + viewport.h);
     glass.addColorStop(0, 'rgba(139, 200, 203, .16)');
@@ -1127,8 +1133,8 @@ export class HubGame {
       const width = bounds.w;
       if (room.propSourceBounds) {
         const [left, top, right, bottom] = room.propSourceBounds;
-        ctx.drawImage(image, left, top, right - left, bottom - top, room.x - width / 2, FLOOR_Y - height, width, height);
-      } else ctx.drawImage(image, room.x - width / 2, FLOOR_Y - height, width, height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), left, top, right - left, bottom - top, room.x - width / 2, FLOOR_Y - height, width, height);
+      } else ctx.drawImage(resolveSpriteDrawableV134(image), room.x - width / 2, FLOOR_Y - height, width, height);
     }
     ctx.fillStyle = active ? '#9be1ad' : '#d0a952';
     ctx.fillRect(room.x - 3, bounds.y - 14, 6, 6);
@@ -1146,14 +1152,24 @@ export class HubGame {
       const scale = Math.min((obstacle.w + 10) / image.naturalWidth, (obstacle.h + 10) / image.naturalHeight);
       const width = image.naturalWidth * scale;
       const height = image.naturalHeight * scale;
-      ctx.drawImage(image, obstacle.x + (obstacle.w - width) / 2, FLOOR_Y - height, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), obstacle.x + (obstacle.w - width) / 2, FLOOR_Y - height, width, height);
     } else {
       ctx.fillStyle = '#2b3732';
       ctx.fillRect(obstacle.x, obstacle.y, obstacle.w, obstacle.h);
     }
   }
 
-  drawDoor(ctx, door) {
+  drawDoor(ctx, door, phase = 'front') {
+    if (!door.lift && drawHubBulkheadDepthV134(ctx, door, { phase,
+      playerCenterX: this.player ? this.player.x + this.player.w / 2 : null })) {
+      this.bulkheadDrawnV134 ||= new Map();
+      const previous = this.bulkheadDrawnV134.get(door.id), phases = phase === 'back' ? [] : previous?.drawnPhases || [];
+      const geometry = hubBulkheadDepthGeometryV134(door), cameraX = this.camera?.x || 0;
+      this.bulkheadDrawnV134.set(door.id, { ...geometry, cameraX,
+        onScreen: geometry.bounds.x + geometry.bounds.w > cameraX && geometry.bounds.x < cameraX + LOGICAL_WIDTH,
+        drawnPhases: [...new Set([...phases, phase])] });
+      return;
+    }
     const source = door.lift ? '/assets/openai/hub/props/lift-door.png' : '/assets/openai/hub/props/bulkhead-door.png';
     const image = this.propImages.get(source);
     if (!assetReady(image)) return;
@@ -1167,8 +1183,8 @@ export class HubGame {
     const slide = door.progress * halfTarget * 0.78;
     ctx.save();
     ctx.globalAlpha = 0.98;
-    ctx.drawImage(image, 0, 0, halfSource, image.naturalHeight, x - slide, y, halfTarget, height);
-    ctx.drawImage(image, halfSource, 0, halfSource, image.naturalHeight, x + halfTarget + slide, y, halfTarget, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, halfSource, image.naturalHeight, x - slide, y, halfTarget, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), halfSource, 0, halfSource, image.naturalHeight, x + halfTarget + slide, y, halfTarget, height);
     ctx.restore();
     ctx.fillStyle = door.progress > 0.5 ? '#89d99f' : '#d15a4d';
     ctx.fillRect(door.x - 3, y + 14, 6, 9);
@@ -1221,9 +1237,9 @@ export class HubGame {
     if (flip) {
       ctx.translate(x + width, y);
       ctx.scale(-1, 1);
-      ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
     } else {
-      ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
     }
     ctx.restore();
   }

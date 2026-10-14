@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { drawPlayerAimGuideV124 } from './player-control-v124.js';
 import { resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
@@ -2346,8 +2347,8 @@ export function withV52MissionRuntime(BaseEngine) {
       if (flip) {
         ctx.translate(sprite.x + sprite.width, sprite.y);
         ctx.scale(-1, 1);
-        ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, 0, 0, sprite.width, sprite.height);
-      } else ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, sprite.x, sprite.y, sprite.width, sprite.height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, 0, 0, sprite.width, sprite.height);
+      } else ctx.drawImage(resolveSpriteDrawableV134(image), sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, sprite.x, sprite.y, sprite.width, sprite.height);
       ctx.restore();
       entity.spriteHitbox = runtime;
       entity.spritePivot = runtime.pivot;

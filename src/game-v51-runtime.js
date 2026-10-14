@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, COMBAT_AIM_KEY_BINDINGS_V83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { bindCombatPointerAimV83, refreshCombatPointerAimV83 } from './mission-input-v77.js';
 import { crewMovementV85 } from './crew-runtime-v85.js';
@@ -1888,7 +1889,7 @@ export class GameEngine {
     const offsetX = -((this.camera.x * factorX) % width);
     const offsetY = -this.camera.y * factorY - (height - LOGICAL_HEIGHT) * 0.5 + yOffset;
     ctx.globalAlpha = alpha;
-    for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, offsetY, width, height);
+    for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(resolveSpriteDrawableV134(image), x, offsetY, width, height);
     ctx.globalAlpha = 1;
   }
 
@@ -1907,7 +1908,7 @@ export class GameEngine {
     ctx.save();
     ctx.globalAlpha = alpha;
     for (let x = offset - spacing; x < LOGICAL_WIDTH + spacing; x += spacing) {
-      ctx.drawImage(image, x, y, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), x, y, width, height);
       draws += 1;
     }
     ctx.restore();
@@ -2079,7 +2080,7 @@ export class GameEngine {
     const height = maxHeight;
     const naturalWidth = image.naturalWidth * (height / image.naturalHeight);
     const width = Math.min(fallbackWidth || naturalWidth, naturalWidth);
-    ctx.drawImage(image, x + ((fallbackWidth || width) - width) / 2, baseline - height, width, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), x + ((fallbackWidth || width) - width) / 2, baseline - height, width, height);
   }
 
   drawAtlasFrame(ctx, descriptor, frame, x, y, width, height) {
@@ -2093,7 +2094,7 @@ export class GameEngine {
     const column = safeFrame % columns;
     const row = Math.floor(safeFrame / columns);
     ctx.drawImage(
-      image,
+      resolveSpriteDrawableV134(image),
       column * cellWidth, row * cellHeight, cellWidth, cellHeight,
       x, y, width, height
     );
@@ -2115,7 +2116,7 @@ export class GameEngine {
       for (let x = hazard.x; x < hazard.x + hazard.w; x += 256) {
         if (band && ready(image) && image.naturalWidth === 1024 && image.naturalHeight === 512) {
           const inset = profile.cetoHorizontalInset;
-          ctx.drawImage(image, (safeFrame % 4) * 256 + inset, Math.floor(safeFrame / 4) * 256 + band[0],
+          ctx.drawImage(resolveSpriteDrawableV134(image), (safeFrame % 4) * 256 + inset, Math.floor(safeFrame / 4) * 256 + band[0],
             256 - 2 * inset, band[1] - band[0], x, hazard.y, 256, hazard.h);
         } else this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
         this.drawAtlasFrame(ctx, profile.accent, frame, x, hazard.y - 10, 256, 48);
@@ -2140,7 +2141,7 @@ export class GameEngine {
     }
     const electrical = hazard.kind === 'electrical';
     const image = this.images.get(electrical ? 'electricalArc' : 'acid');
-    if (ready(image)) ctx.drawImage(image, hazard.x, hazard.y - 22, hazard.w, hazard.h + 34);
+    if (ready(image)) ctx.drawImage(resolveSpriteDrawableV134(image), hazard.x, hazard.y - 22, hazard.w, hazard.h + 34);
     else { ctx.fillStyle = electrical ? '#65bddd' : '#7e9b37'; ctx.fillRect(hazard.x, hazard.y, hazard.w, hazard.h); }
   }
 
@@ -2158,7 +2159,7 @@ export class GameEngine {
     if (!vacuum || !ready(image)) return 0;
     ctx.save();
     ctx.globalAlpha = this.reducedMotion ? 0.34 : 0.42 + Math.sin(this.animationTime * 2.4) * 0.08;
-    ctx.drawImage(image, 0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+    ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
     ctx.restore();
     return 1;
   }
@@ -2210,7 +2211,7 @@ export class GameEngine {
   drawDoor(ctx, door) {
     const { image, open, source, x, y, w: width, h: height } = this.getDoorRenderState(door);
     ctx.globalAlpha = open ? 0.82 : 1;
-    if (ready(image)) ctx.drawImage(image, source.x, source.y, source.w, source.h, x, y, width, height);
+    if (ready(image)) ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, x, y, width, height);
     else { ctx.fillStyle = '#353c38'; ctx.fillRect(x, y, width, height); }
     ctx.globalAlpha = 1;
     ctx.fillStyle = this.doorRequirement(door) ? '#d04f47' : door.open ? '#83d99e' : '#d6ac59';
@@ -2418,7 +2419,7 @@ export class GameEngine {
     if (ready(image)) {
       const height = this.objective.complete ? 92 : 86;
       const width = image.naturalWidth * (height / image.naturalHeight);
-      ctx.drawImage(image, this.objective.x - width / 2, this.objective.y + this.objective.h - height, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), this.objective.x - width / 2, this.objective.y + this.objective.h - height, width, height);
     }
     ctx.fillStyle = this.objective.complete ? '#79d69a' : '#d5b562';
     ctx.beginPath(); ctx.arc(this.objective.x, this.objective.y - 14, 5 + Math.sin(this.animationTime * 4) * 2, 0, Math.PI * 2); ctx.fill();
@@ -2431,8 +2432,8 @@ export class GameEngine {
     ctx.save();
     if (flip) {
       ctx.translate(x + width, y); ctx.scale(-1, 1);
-      ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
-    } else ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
+    } else ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
     ctx.restore();
   }
 
@@ -2444,7 +2445,7 @@ export class GameEngine {
       const offset = -((this.camera.x * 1.12) % width);
       ctx.save();
       ctx.globalAlpha = 0.3;
-      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
+      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(resolveSpriteDrawableV134(image), x, LOGICAL_HEIGHT - height, width, height);
       ctx.restore();
     }
     this.drawHazardForegroundOverlays(ctx);

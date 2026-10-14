@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { resolveHubRoomArtV56 } from './hub-art-runtime-v56.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { HUB_LOADER_ROOM_V132 } from './hub-training-v132.js';
@@ -55,7 +56,7 @@ export function drawHubAuthoredLayerV133(ctx, image, entry, room, phase = entry?
   if (!ctx || !ready(image) || !entry?.renderBounds) return false;
   const target = hubAuthoredLayerBoundsV133(room, entry.renderBounds), floor = roomFloor(room), x = finite(room?.xStart), width = roomWidth(room);
   ctx.save(); ctx.beginPath(); ctx.rect(x, phase === 'front' ? floor + 4 : 0, width, phase === 'front' ? Math.max(0, 720 - floor - 4) : 720); ctx.clip();
-  ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, target.x, target.y, target.w, target.h);
+  ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight, target.x, target.y, target.w, target.h);
   ctx.restore(); return true;
 }
 
@@ -214,6 +215,9 @@ export function withHubAuthoredCompositionV133(Base) {
   if (Base.hubAuthoredCompositionV133) return Base;
   return class HubAuthoredCompositionV133 extends Base {
     static hubAuthoredCompositionV133 = true;
+    drawHubRoomPurposeV133(ctx, room, options) {
+      return drawHubRoomPurposeV133(ctx, room, options);
+    }
     drawTraversalPlatform(ctx, platform) {
       if(this.editorPlaytest)return super.drawTraversalPlatform(ctx,platform);
       return drawHubSteelPlatformV133(ctx,platform);
@@ -260,7 +264,7 @@ export function withHubAuthoredCompositionV133(Base) {
         const source=entry.kind==='vehicle-sprite'?{...entry.sourceOpaqueBounds,
           x:entry.sourceOpaqueBounds.x+entry.sourceCell.column*entry.sheet.cellWidth,
           y:entry.sourceOpaqueBounds.y+entry.sourceCell.row*entry.sheet.cellHeight}:entry.sourceCrop;
-        ctx.drawImage(image,source.x,source.y,source.w,source.h,room.xStart+target.x,target.y,target.w,target.h);ctx.restore();
+        ctx.drawImage(resolveSpriteDrawableV134(image),source.x,source.y,source.w,source.h,room.xStart+target.x,target.y,target.w,target.h);ctx.restore();
       }
       ctx.restore();return true;
     }
@@ -272,7 +276,7 @@ export function withHubAuthoredCompositionV133(Base) {
     }
     drawRoomModule(ctx, room, farImage) {
       const result = super.drawRoomModule(ctx, room, farImage);
-      if (!this.editorPlaytest) drawHubRoomPurposeV133(ctx, room);
+      if (!this.editorPlaytest) this.drawHubRoomPurposeV133(ctx, room);
       return result;
     }
     drawAnnexForegroundV72(ctx, annex, image) {
@@ -281,7 +285,7 @@ export function withHubAuthoredCompositionV133(Base) {
       const result=super.drawAnnexForegroundV72(ctx,annex,image);ctx.restore();return result;
     }
     drawAnnexGeometryV71(ctx, annex) {
-      if (!this.editorPlaytest) drawHubRoomPurposeV133(ctx, { ...annex, xStart: 0 });
+      if (!this.editorPlaytest) this.drawHubRoomPurposeV133(ctx, { ...annex, xStart: 0 });
       return super.drawAnnexGeometryV71(ctx, annex);
     }
     draw() {
@@ -295,7 +299,7 @@ export function withHubAuthoredCompositionV133(Base) {
       ctx.save();ctx.beginPath();ctx.rect(camera,132,1280,238);ctx.clip();
       const wall=this.annexModularImagesV72?.get('/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp');
       if(ready(wall)) {const scale=1280/wall.naturalWidth;ctx.drawImage(wall,camera,132,1280,wall.naturalHeight*scale);}
-      drawHubRoomPurposeV133(ctx,{id:'proving-ground',xStart:camera,profile:{worldWidth:1280},world:{floorY:624}},{top:148});
+      this.drawHubRoomPurposeV133(ctx,{id:'proving-ground',xStart:camera,profile:{worldWidth:1280},world:{floorY:624}},{top:148});
       ctx.restore();
       // Detail the three actual beams and freight cases at their physical
       // bounds. These original steel ribs do not create another obstacle.
