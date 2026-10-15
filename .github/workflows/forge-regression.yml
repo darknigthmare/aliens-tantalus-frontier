@@ -34,12 +34,14 @@ jobs:
           mkdir -p forge-ci-results
           node --version | tee forge-ci-results/node-version.txt
           npm run test:forge 2>&1 | tee forge-ci-results/forge-tests.log
-      - name: Native production engine
+      - name: Native production engine (when included)
         shell: bash
         run: |
           set -o pipefail
           if [ -f scripts/verify-forge-native-v131.mjs ]; then
             node --test scripts/verify-forge-native-v131.mjs 2>&1 | tee forge-ci-results/native-tests.log
+          else
+            echo 'Not included: V131/V132 native adapters are not published on this branch.' | tee forge-ci-results/native-tests.log
           fi
       - name: Chromium and Python browser tooling
         run: |
@@ -53,6 +55,7 @@ jobs:
           python scripts/verify-forge-browser-v130.py --output forge-ci-results/browser 2>&1 | tee forge-ci-results/browser.log
           python scripts/verify-forge-browser-v133.py --output forge-ci-results/browser-v133 2>&1 | tee forge-ci-results/browser-v133.log
           python scripts/verify-forge-browser-v134.py --output forge-ci-results/browser-v134 2>&1 | tee forge-ci-results/browser-v134.log
+          python scripts/verify-forge-browser-v135.py --output forge-ci-results/browser-v135 2>&1 | tee forge-ci-results/browser-v135.log
           if [ -f scripts/verify-forge-browser-v131.py ]; then
             python scripts/verify-forge-browser-v131.py --output forge-ci-results/browser-v131 2>&1 | tee forge-ci-results/browser-v131.log
           fi

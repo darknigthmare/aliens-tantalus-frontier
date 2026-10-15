@@ -34,7 +34,8 @@ def build_offline_html(root: Path) -> str:
     styles = ''.join(f'<style id="{id}">{(root / path).read_text()}</style>' for id, path in [
         ('forge-styles-v130', 'src/forge-editor-v130.css'),
         ('forge-styles-v133', 'src/forge-workbench-v133.css'),
-        ('forge-styles-v134', 'src/forge-navigator-v134.css')
+        ('forge-styles-v134', 'src/forge-navigator-v134.css'),
+        ('forge-styles-v135', 'src/forge-construction-v135.css')
     ] if (root / path).is_file())
     return html + styles + '<script type="importmap">' + json.dumps({'imports': imports}) + '</script><script type="module">' + script + '</script>'
 

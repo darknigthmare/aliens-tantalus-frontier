@@ -64,7 +64,7 @@ export class ForgeWorkspaceV133 {
     const next = new ForgeModel(project), revision = this.editor.model.revision + 1;
     this.editor.cancelGesture(); this.editor.model = next; next.revision = revision;
     this.id = project.id; this.epoch++; this.editor.selection.clear(); this.editor.cursor = null;
-    this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh(); this.editor.navigatorV134?.refresh();
+    this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh(); this.editor.navigatorV134?.refresh(); this.editor.constructionV135?.refresh();
     // History belongs to the document. Never undo a switch into another project.
   }
   commitCandidate(candidate, activeId) {

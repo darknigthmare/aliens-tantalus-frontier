@@ -67,7 +67,7 @@ export function mountForgeNavigatorV134(editor) {
     const data=diagramForgeV134(editor.model.data), canvas=output('diagram');
     canvas.style.width=`${data.width}px`;canvas.style.height=`${data.height}px`;
     canvas.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="${data.width}" height="${data.height}" aria-hidden="true" focusable="false"><defs><marker id="forge-arrow-v134" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"/></marker></defs>${data.edges.map(edge=>`<path class="forge-edge-v134" d="${edge.d}" marker-end="url(#forge-arrow-v134)" ${edge.both?'marker-start="url(#forge-arrow-v134)"':''}/>`).join('')}</svg>` + data.nodes.map(n=>button('open-room',`<strong>${escape(n.name)}</strong><small>${n.blocks} blocs · ${n.reachable?'accessible':'non reliée'}</small>`,`class="forge-node-v134" data-room="${escape(n.id)}" data-reachable="${n.reachable}" aria-pressed="${n.active}" style="left:${n.x}px;top:${n.y}px;width:${n.w}px;height:${n.h}px"`)).join('');
-    output('graph-note').textContent=`${data.nodes.length} salle(s) · ${editor.model.data.links.length} liaison(s)${data.omittedEdges?' · affichage limité à 160 tracés ; la liste détaillée conserve les autres liaisons':''}`;
+    output('graph-note').textContent=`${data.nodes.length} salle(s) · ${editor.model.data.links.length} liaison(s)${data.omittedEdges?' · affichage limité à 160 tracés ; la liste détaillée conserve les autres liaisons':''}${data.invalidEdges?` · ${data.invalidEdges} liaison(s) temporairement invalide(s), non tracée(s)`:''}`;
   }
   function focusSelection() {
     const cells=editor.selected();if(!cells.length)throw new Error('Sélectionnez des blocs à cadrer.');

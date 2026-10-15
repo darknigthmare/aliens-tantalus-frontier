@@ -149,9 +149,12 @@ export function labelForgeCellsV134(model, ids, prefix, start = 1, access = {}) 
 
 /** Logical BFS layout. Not geographical coordinates and not a physics reachability proof. */
 export function diagramForgeV134(project) {
-  const distance = new Map([[project.activeRoomId, 0]]), queue = [project.activeRoomId], adjacency = new Map();
+  const start = project.rooms.some(r => r.id === project.activeRoomId) ? project.activeRoomId : project.rooms[0]?.id;
+  const distance = new Map(start ? [[start, 0]] : []), queue = start ? [start] : [], adjacency = new Map();
   for (const r of project.rooms) adjacency.set(r.id, []);
-  for (const link of project.links) {
+  // Rendering may observe a transient draft before validation; never crash on a removed endpoint.
+  const validLinks = project.links.filter(link => adjacency.has(link.from?.roomId) && adjacency.has(link.to?.roomId));
+  for (const link of validLinks) {
     adjacency.get(link.from.roomId).push(link.to.roomId);
     if (link.bidirectional) adjacency.get(link.to.roomId).push(link.from.roomId);
   }
@@ -165,7 +168,7 @@ export function diagramForgeV134(project) {
       active: room.id === project.activeRoomId, reachable: distance.has(room.id), blocks: room.cells.length };
   });
   const byId = new Map(nodes.map(n => [n.id, n]));
-  const edges = project.links.slice(0, 160).map(link => {
+  const edges = validLinks.slice(0, 160).map(link => {
     const from = byId.get(link.from.roomId), to = byId.get(link.to.roomId);
     const sameColumn = from.x === to.x;
     const x1 = from.x + from.w + 5, y1 = from.y + from.h / 2;
@@ -173,6 +176,6 @@ export function diagramForgeV134(project) {
     const bend = sameColumn ? x1 + 22 : (x1 + x2) / 2;
     return { id: link.id, from: link.from.roomId, to: link.to.roomId, both: link.bidirectional, d: `M ${x1} ${y1} C ${bend} ${y1}, ${bend} ${y2}, ${x2} ${y2}` };
   });
-  return { nodes, edges, omittedEdges: project.links.length - edges.length,
+  return { nodes, edges, omittedEdges: validLinks.length - edges.length, invalidEdges: project.links.length - validLinks.length,
     width: Math.max(280, ...nodes.map(n => n.x + n.w + 40)), height: Math.max(140, ...nodes.map(n => n.y + n.h + 24)) };
 }

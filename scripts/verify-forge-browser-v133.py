@@ -50,7 +50,7 @@ def main():
                 box = page.locator('#editor-canvas').bounding_box(); m = page.evaluate('forgeEditor.matrix()')
                 return box['x'] + (m['x']+(x+.5)*m['scale']) / 1280 * box['width'], box['y'] + (m['y']+(y+.5)*m['scale']) / 720 * box['height']
             page.evaluate("localStorage.setItem('atf-v47-profile-1','unaltered-campaign')")
-            check('four historical tabs and the V134 explorer are present', page.locator('.forge-tabs-v133 [data-tab]').count() == 5)
+            check('four historical tabs and the V134 explorer are present', {'tools','assemblies','projects','graph','explorer'}.issubset(set(page.locator('.forge-tabs-v133 [data-tab]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.tab)'))) )
             tab('assemblies')
             check('ten original assembly modules are available', act('assembly-choose').count() == 10)
             page.click('[data-assembly="builtin-terminal"]'); act('stamp').click()

@@ -3,6 +3,7 @@ import { LAYERS, inside, ForgeModel } from './forge-model-v130.js';
 import { ForgeWorkspaceV133, getForgeStoreV133 } from './forge-save-v62.js';
 import { mountForgeWorkbenchV133 } from './forge-workbench-v133.js';
 import { mountForgeNavigatorV134 } from './forge-navigator-v134.js';
+import { mountForgeConstructionV135 } from './forge-construction-v135.js';
 export { TILE_TYPES };
 /** Additive authoring controller; the native level compiler is unchanged. */
 export class LevelEditor extends BaseEditor {
@@ -13,13 +14,14 @@ export class LevelEditor extends BaseEditor {
     if(store)this.workspaceV133=new ForgeWorkspaceV133(this,store);
     this.workbenchV133=mountForgeWorkbenchV133(this,store);
     this.navigatorV134=mountForgeNavigatorV134(this);
+    this.constructionV135=mountForgeConstructionV135(this);
   }
   serialize() { const project=super.serialize();return this.workspaceV133?{...project,forgeProjectIdV133:this.workspaceV133.id,forgeProjectNameV133:this.model.data.name}:project; }
-  notify() { super.notify();this.workbenchV133?.refresh();this.navigatorV134?.refresh(); }
+  notify() { super.notify();this.workbenchV133?.refresh();this.navigatorV134?.refresh();this.constructionV135?.refresh(); }
   load(project) {
     const stored=this.workspaceV133?.store.data.projects.find(p=>p.id===this.workspaceV133.id);
     if(stored&&project===stored&&this.model.revision===0&&this.room.cells.length===0)return this.loadInitialProject(project);
-    const result=super.load(project);this.workbenchV133?.refresh();this.navigatorV134?.refresh();return result; }
+    const result=super.load(project);this.workbenchV133?.refresh();this.navigatorV134?.refresh();this.constructionV135?.refresh();return result; }
   /** Boot/reopen is not an import command: never create an undo path to the previous document. */
   loadInitialProject(project) {
     if (this.workspaceV133) this.workspaceV133.adopt(project);
@@ -27,7 +29,7 @@ export class LevelEditor extends BaseEditor {
       const next = new ForgeModel(project);
       this.cancelGesture(); this.model = next; this.selection.clear(); this.cursor = null; this.fit();
     }
-    this.ui?.refresh(); this.workbenchV133?.refresh(); this.navigatorV134?.refresh();
+    this.ui?.refresh(); this.workbenchV133?.refresh(); this.navigatorV134?.refresh();this.constructionV135?.refresh();
     return true;
   }
   setTool(tool) { this.workbenchV133?.cancelStamp();super.setTool(tool);this.workbenchV133?.refresh(); }
@@ -35,7 +37,7 @@ export class LevelEditor extends BaseEditor {
     const ids=this.room.cells.filter(cell=>(this.selectionScopeV133==='visible'||cell.layer===this.layer)&&this.visible.has(cell.layer)&&inside(cell,rect)).map(c=>c.id);
     if(operation==='replace')this.selection=new Set(ids);
     else for(const id of ids)operation==='add'?this.selection.add(id):this.selection.delete(id);
-    this.draw();this.ui?.refreshInspector();this.workbenchV133?.refresh();this.navigatorV134?.refresh();
+    this.draw();this.ui?.refreshInspector();this.workbenchV133?.refresh();this.navigatorV134?.refresh();this.constructionV135?.refresh();
   }
   pointerDown(event) {
     if(this.workbenchV133?.pointerDown(event))return;
@@ -63,7 +65,7 @@ export class LevelEditor extends BaseEditor {
     }
     super.pointerUp(event);
   }
-  keyDown(event) { if(this.navigatorV134?.keyDown(event))return;if(this.workbenchV133?.keyDown(event))return;super.keyDown(event);this.workbenchV133?.refresh(); }
+  keyDown(event) { if(this.constructionV135?.keyDown(event))return;if(this.navigatorV134?.keyDown(event))return;if(this.workbenchV133?.keyDown(event))return;super.keyDown(event);this.workbenchV133?.refresh(); }
   draw() { super.draw();this.workbenchV133?.draw();this.navigatorV134?.draw(); }
-  destroy() { this.navigatorV134?.destroy();this.workbenchV133?.destroy();super.destroy(); }
+  destroy() { this.constructionV135?.destroy();this.navigatorV134?.destroy();this.workbenchV133?.destroy();super.destroy(); }
 }

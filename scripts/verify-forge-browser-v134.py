@@ -51,7 +51,7 @@ def main():
             field=lambda n:page.locator(f'[data-nav-field="{n}"]')
             tab=lambda t:page.locator(f'[data-work-action="tab"][data-tab="{t}"]').click()
             page.evaluate("localStorage.setItem('atf-v47-profile-1','campaign-sentinel');forgeEditor.edit('fixture layout',()=>{for(const [x,y] of [[2,2],[2,3],[10,5],[20,8]])forgeEditor.model.paint(x,y,'wall','structure')})")
-            check('V134 explorer is mounted beside historical workshops',page.locator('.forge-tabs-v133 [data-tab]').count()==5)
+            check('V134 explorer is mounted beside historical workshops',{'tools','assemblies','projects','graph','explorer'}.issubset(set(page.locator('.forge-tabs-v133 [data-tab]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.tab)'))) )
             check('default namespace is isolated from old releases',page.evaluate("forgeStore.key==='atf-frontier-forge-workspace-v134'&&localStorage.getItem('atf-v62-frontier-forge-workspace')===null"))
             page.click('[data-work-action="select-all"]')
             page.locator('.forge-layout-v134 summary').click()
