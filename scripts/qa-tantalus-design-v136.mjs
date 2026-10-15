@@ -121,7 +121,7 @@ async function walkTo(x, sprint = false) {
   finally { await page.keyboard.up(key); if (sprint) await page.keyboard.up('ShiftLeft'); }
   await page.waitForTimeout(250); const after = await snapshot(); safe(after); assert.ok(Math.abs(after.player.x - x) < 55); return after;
 }
-async function visitAnnex(id) {
+async function visitAnnex(id, atStation = null) {
   const annex = HUB_ANNEXES_V87.find(a => a.id === id);
   const bounds = await page.evaluate(id => ({ ...globalThis.__ATF_HUB__.getParentAnnexDoorV71(id).bounds }), id);
   await walkTo(bounds.x + bounds.w / 2 - 22); await capture(`${id}-entrance`); await page.keyboard.press('KeyE');
@@ -129,6 +129,7 @@ async function visitAnnex(id) {
   const station = getHubInteractionPropBoundsV136(annex);
   await walkTo(station.x + station.w + 8); const inside = await capture(`${id}-station`);
   assert.equal(inside.annex, id); assert.equal(inside.station, id);
+  if (atStation) await atStation(inside);
   const exitX = annex.entranceLocalX + (annex.entranceSide === 'west' ? annex.entrance.w / 2 + 16 : -annex.entrance.w / 2 - 60);
   await walkTo(exitX); await page.keyboard.press('KeyE');
   await page.waitForFunction(() => !globalThis.__ATF_HUB__.currentAnnexV71?.() && !globalThis.__ATF_HUB__.annexTransitionV71, null, { timeout: 12000 });
@@ -163,6 +164,24 @@ async function compositionJourney() {
     check(`${id}: actual furniture leaves access reservations clear, portals retain source aspect, and the vehicle silhouette stays separate.`, composition);
     check(`${id}: physical camera travel observes the integrated architecture and room furnishing.`, { start, end });
   }
+  await importIdle(fixture('armory', 180));
+  const proving = await visitAnnex('proving-ground', async inside => {
+    const console = inside.presentation.provingGroundConsoleV136;
+    assert.equal(console?.painted, true, 'The special V81 console must actually be drawn.');
+    const { bounds: b, stationBounds: socket, floorY, sourceOpaqueBounds: source } = console;
+    assert.ok([b.x, b.y, b.w, b.h, ...source].every(Number.isFinite));
+    assert.ok(Math.abs(b.w / b.h - (source[2] - source[0]) / (source[3] - source[1])) < 1e-8);
+    assert.ok(Math.abs(b.y + b.h - floorY) < 1e-8, 'The visible console foot must meet the actual floor.');
+    assert.ok(b.x >= socket.x - 1e-8 && b.x + b.w <= socket.x + socket.w + 1e-8);
+    assert.ok(b.y >= socket.y - 1e-8 && b.y + b.h <= socket.y + socket.h + 1e-8);
+    check('The active Proving Ground console uses its measured opaque source, preserves aspect and fits completely above the floor.', console);
+    await page.keyboard.press('KeyE');
+    await page.waitForFunction(() => globalThis.__ATF_HUB__.provingGroundStateV81.phase === 'armed');
+    const armed = await capture('proving-ground-console-armed');
+    assert.equal(armed.presentation.provingGroundConsoleV136.painted, true); safe(armed);
+    check('The physically reached console arms its real range session through native E input.', armed);
+  });
+  check('The Proving Ground entrance and newly sized station remain reachable with a real physical return to the armory.', proving);
   report.journeys.push({ id: 2, perspective: 'composition-scale-and-sightlines', status: 'passed' }); await ctx.close();
 }
 async function motionSamples(key, count = 28) {
