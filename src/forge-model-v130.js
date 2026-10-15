@@ -1,3 +1,4 @@
+import { parseForgeDecorationV141 } from './forge-decoration-v141.js';
 /** Frontier Forge V130. Pure authoring data; never imports a campaign store. */
 export const TILE_TYPES = Object.freeze(['floor','platform','wall','door','vent','ladder','lift','spawn','objective','enemy','vehicle','terminal','hazard']);
 export const LAYERS = Object.freeze(['background','structure','gameplay','foreground']);
@@ -45,7 +46,8 @@ export function parseProject(input) {
       if (!integer(cell.x,0,raw.size[0]-1) || !integer(cell.y,0,raw.size[1]-1)) fail('Un bloc dépasse les limites de sa salle.');
       if (occupied.has(keyOf(cell))) fail('Deux blocs occupent la même case du même calque.');
       cellIds.add(cell.id); occupied.add(keyOf(cell));
-      return {id:cell.id,x:cell.x,y:cell.y,type:cell.type,layer:cell.layer,label:text(cell.label),locked:cell.locked === true};
+      const decoration=parseForgeDecorationV141(cell.decoration,cell.layer);
+      return {id:cell.id,x:cell.x,y:cell.y,type:cell.type,layer:cell.layer,label:text(cell.label),locked:cell.locked === true,...(decoration?{decoration}:{})};
     });
     return {id:raw.id,name:text(raw.name,'Secteur sans nom'),size:[...raw.size],cells};
   });
@@ -117,12 +119,11 @@ export function validateProject(project, roomId=project.activeRoomId) {
       }
       for(const cell of physical.filter(cell=>cell.type==='objective')) if(!seen.has(`${cell.x}:${cell.y}`)) add('error','sealed-objective','Objectif dans un volume fermé depuis l’insertion (contrôle de grille).',room,cell);
     }
-    if(room.cells.some(decorative)) add('warning','decor-preview','Les calques décoratifs sont conservés et visibles dans l’éditeur, pas dans le playtest natif.',room);
   }
   const reached=new Set([roomId]); let changed=true;
   while(changed) {changed=false;for(const link of project.links){ if(reached.has(link.from.roomId)&&!reached.has(link.to.roomId)){reached.add(link.to.roomId);changed=true;} if(link.bidirectional&&reached.has(link.to.roomId)&&!reached.has(link.from.roomId)){reached.add(link.from.roomId);changed=true;} }}
   for(const room of project.rooms) if(!reached.has(room.id)) add('warning','disconnected-room','Salle non reliée depuis la salle active.',room);
-  if(project.links.length) add('warning','links-authoring','Les liaisons sont des données d’édition. Le playtest natif teste uniquement la salle active.',projectRoom(project));
+  if(project.links.length) add('warning','links-authoring','Les liaisons décrivent les passages entre salles ; vérifiez leurs accès et le sens de circulation avant de tester le parcours.',projectRoom(project));
   const activeIssues=issues.filter(issue=>issue.roomId===roomId);
   const errors=activeIssues.filter(issue=>issue.severity==='error').map(issue=>issue.message);
   return {ok:errors.length===0,errors,warnings:activeIssues.filter(issue=>issue.severity==='warning').map(issue=>issue.message),counts:activeCounts,issues,scope:'active-room',navigation:'sealed-volumes-only'};

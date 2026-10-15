@@ -7,6 +7,7 @@ import { normalizeUserEquipmentV95 } from './user-equipment-v95.js';
 import {
   getPlayerAppearancePreviewModesV128, normalizePlayerAppearancePreviewAnimationV128
 } from './player-appearance-preview-v126.js';
+import { getPlayerWardrobeModelV135 } from './player-wardrobe-v135.js';
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g,
   character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
@@ -34,6 +35,8 @@ export function playerAppearanceUiModelV126(save, owner = 'player') {
         ? 'Tenue préparée pour J2. Elle sera portée lorsque la coop locale sera activée.'
         : 'Tenue sélectionnée pour les déplacements, la visée, les actions de terrain et les appuis à l’échelle ou au sol.';
   return { owner: target, ownerLabel, state, locked, effective: reason === null, reason, status,
+    wardrobe: getPlayerWardrobeModelV135(save, target),
+    wardrobeLocked: locked || Boolean(save?.needsPlayerCreationV84 || save?.onboardingV84 && save.onboardingV84.phase !== 'complete'),
     selectedPresetId: selectedPreset?.id || null,
     presets: PLAYER_APPEARANCE_PRESETS_V129.map(preset => ({ ...preset,
       selected: preset.id === selectedPreset?.id })),
@@ -69,5 +72,27 @@ export function playerAppearancePanelHtmlV126(save, { owner = 'player', facing =
       <p class="appearance-preset-selection-v129" data-appearance-preset-status-v129 role="status" aria-live="polite">${model.selectedPresetId ? `Tenue complète préparée : ${escapeHtml(model.presets.find(preset => preset.selected).name)}.` : 'Tenue composée pièce par pièce.'}</p>
     </section>
     <div class="appearance-slots-v126">${model.slots.map(slot => `<section class="appearance-slot-v126" aria-labelledby="appearance-title-${model.owner}-${slot.id}-v126"><h4 id="appearance-title-${model.owner}-${slot.id}-v126">${escapeHtml(slot.label)}</h4><div class="appearance-choices-v126" role="group" aria-label="${escapeHtml(slot.label)} — ${escapeHtml(model.ownerLabel)}">${slot.choices.map(choice => `<button type="button" class="button compact ${slot.selectedItemId === choice.id ? '' : 'ghost'}" data-appearance-owner-v126="${model.owner}" data-appearance-slot-v126="${slot.id}" data-appearance-item-v126="${choice.id || ''}" aria-pressed="${slot.selectedItemId === choice.id}"${choice.description ? ` title="${escapeHtml(choice.description)}"` : ''}${model.locked ? ' disabled' : ''}>${escapeHtml(choice.name)}</button>`).join('')}</div></section>`).join('')}</div>
+    <section class="appearance-wardrobe-v135" data-wardrobe-v135="${model.owner}" aria-labelledby="appearance-wardrobe-title-${model.owner}-v135">
+      <h4 id="appearance-wardrobe-title-${model.owner}-v135">Mes tenues personnelles · ${model.owner === 'player' ? 'J1' : 'J2'}</h4>
+      <p>Conservez quatre compositions de vos six pièces. Rappelez une tenue complète ou choisissez ses pièces pour les mêler à la tenue préparée. Enregistrer remplace le contenu du casier choisi.</p>
+      <div class="appearance-wardrobe-grid-v135">${model.wardrobe.map(outfit => `<article class="appearance-wardrobe-outfit-v135" data-wardrobe-cabinet-v135="${outfit.slot}">
+        <label for="appearance-wardrobe-name-${model.owner}-${outfit.slot}-v135">Casier ${outfit.slot}<input type="text" id="appearance-wardrobe-name-${model.owner}-${outfit.slot}-v135" data-wardrobe-name-v135="${outfit.slot}" maxlength="40" value="${escapeHtml(outfit.name)}" placeholder="Nom de votre tenue"${model.wardrobeLocked ? ' disabled' : ''}></label>
+        <p>${outfit.selected ? 'Cette composition est préparée.' : outfit.occupied ? 'Tenue conservée dans ce casier.' : 'Casier vide.'}</p>
+        ${outfit.occupied ? `<details class="appearance-wardrobe-parts-v140" data-wardrobe-detail-v140="${outfit.slot}">
+          <summary>Voir et choisir les pièces de cette tenue</summary>
+          <fieldset aria-describedby="appearance-wardrobe-help-${model.owner}-${outfit.slot}-v140"${model.wardrobeLocked ? ' disabled' : ''}>
+            <legend>Pièces à rappeler du casier ${outfit.slot} de ${model.owner === 'player' ? 'J1' : 'J2'}</legend>
+            <p id="appearance-wardrobe-help-${model.owner}-${outfit.slot}-v140">Cochez les pièces à reprendre. Les autres emplacements gardent leur choix actuel ; les options sans casque, masque ou paquetage sont aussi rappelées.</p>
+            ${outfit.parts.map(part => `<label><input type="checkbox" data-wardrobe-parts-v140="${outfit.slot}" value="${part.id}"><span>${escapeHtml(part.label)} : ${escapeHtml(part.name)}${part.selected ? ' · déjà préparé' : ''}</span></label>`).join('')}
+            <button type="button" class="button compact ghost" data-wardrobe-action-v135="equip-parts" data-wardrobe-owner-v135="${model.owner}" data-wardrobe-slot-v135="${outfit.slot}" aria-label="Rappeler les pièces cochées du casier ${outfit.slot} de ${model.owner === 'player' ? 'J1' : 'J2'}"${model.wardrobeLocked ? ' disabled' : ''}>Rappeler les pièces cochées</button>
+          </fieldset>
+        </details>` : ''}
+        <div class="button-row"><button type="button" class="button compact" data-wardrobe-action-v135="save" data-wardrobe-owner-v135="${model.owner}" data-wardrobe-slot-v135="${outfit.slot}" aria-label="Enregistrer la tenue préparée dans le casier ${outfit.slot} de ${model.owner === 'player' ? 'J1' : 'J2'}"${model.wardrobeLocked ? ' disabled' : ''}>Enregistrer</button>
+        <button type="button" class="button compact ghost" data-wardrobe-action-v135="equip" data-wardrobe-owner-v135="${model.owner}" data-wardrobe-slot-v135="${outfit.slot}" aria-label="Rappeler la tenue du casier ${outfit.slot} de ${model.owner === 'player' ? 'J1' : 'J2'}"${model.wardrobeLocked || !outfit.occupied ? ' disabled' : ''}>Rappeler</button>
+        <button type="button" class="button compact ghost" data-wardrobe-action-v135="delete" data-wardrobe-owner-v135="${model.owner}" data-wardrobe-slot-v135="${outfit.slot}" aria-label="Vider le casier ${outfit.slot} de ${model.owner === 'player' ? 'J1' : 'J2'}"${model.wardrobeLocked || !outfit.occupied ? ' disabled' : ''}>Vider</button></div>
+      </article>`).join('')}</div>
+      <button type="button" class="button compact ghost" data-wardrobe-action-v135="copy" data-wardrobe-owner-v135="${model.owner}" data-wardrobe-from-v135="${model.owner === 'player' ? 'coop' : 'player'}"${model.wardrobeLocked ? ' disabled' : ''}>Copier la tenue préparée de ${model.owner === 'player' ? 'J2 vers J1' : 'J1 vers J2'}</button>
+      <p data-wardrobe-status-v135 role="status" aria-live="polite"></p>
+    </section>
     <div class="appearance-footer-v126"><p>Les tenues spéciales, le portage et les passages en véhicule ou en conduit gardent leur apparence dédiée ; vos choix sont conservés au retour.</p><button type="button" class="button compact ghost" data-appearance-reset-v126="${model.owner}"${model.locked ? ' disabled' : ''}>Rétablir la tenue Marine de ${model.owner === 'player' ? 'J1' : 'J2'}</button></div>`;
 }

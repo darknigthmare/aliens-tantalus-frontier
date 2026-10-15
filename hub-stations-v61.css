@@ -40,7 +40,8 @@ html.station-mode::after {
   display: grid;
   align-items: end;
   justify-items: center;
-  overflow: hidden;
+  /* The viewport veil must not scroll when focus reveals a dialogue action. */
+  overflow: clip;
   padding: clamp(18px, 4vh, 40px) clamp(18px, 5vw, 72px) max(40px, env(safe-area-inset-bottom));
 }
 

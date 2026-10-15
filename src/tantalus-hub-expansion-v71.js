@@ -1,4 +1,6 @@
 import { HUB_ANNEX_ALPHA_BOUNDS_V72, fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
+import { hubRearPropColliderV133 } from './hub-navigation-layout-v133.js';
+import { getHubPropHeightV136 } from './hub-prop-placements-v136.js';
 
 export const HUB_COMMERCIAL_SCHEMA_V71 = 71;
 export const HUB_COMMERCIAL_OPERATION_ID_V71 = 'tantalus-hub-expansion';
@@ -106,7 +108,10 @@ function makeAnnex({
   const catwalkX = westEntrance ? 760 : 740;
   const ladderX = westEntrance ? catwalkX + 72 : catwalkX + 348;
   const alphaBounds = HUB_ANNEX_ALPHA_BOUNDS_V72[id];
-  const stationBody = fitHubBitmapV72(alphaBounds.prop, { x: stationX, y: 442, w: 276, h: 182 });
+  // Human-scale service equipment shares this box across the rendered bitmap,
+  // physical top, prompt and station action. Keep the historical socket centre.
+  const stationHeight = getHubPropHeightV136(id, 108);
+  const stationBody = fitHubBitmapV72(alphaBounds.prop, { x: stationX, y: HUB_ANNEX_WORLD_V71.floorY - stationHeight, w: 276, h: stationHeight });
   // Cargo lives in the dead-end service alcove behind the station. Keeping
   // these physical props off the catwalk preserves a clear ladder-to-deck
   // route in every annex, including the Proving Ground firing position.
@@ -132,8 +137,8 @@ function makeAnnex({
     makeBounds(`${id}-prop-beacon`, westEntrance ? 352 : 1512, 280, 75, 66, 'navigation', { collidable: false, asset: '/assets/openai/hub/props/sensor-console.png' })
   ];
   const colliders = [
-    { ...station.bounds, id: `${id}-collider-station` },
-    ...props.filter((prop) => prop.role === 'cargo' && prop.collidable).map((prop) => ({ ...prop, id: `${prop.id}-collider` })),
+    hubRearPropColliderV133({ ...station.bounds, id: `${id}-collider-station` }),
+    ...props.filter((prop) => prop.role === 'cargo' && prop.collidable).map((prop) => hubRearPropColliderV133({ ...prop, id: `${prop.id}-collider` })),
     // These structural ribs remain overhead collision geometry. Their lower
     // edge deliberately leaves a 112 px standing lane above the floor so an
     // annex can never become a decorative cul-de-sac between its entrance

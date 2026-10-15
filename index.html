@@ -146,12 +146,15 @@
         <section class="view" data-panel="archives">
           <div class="section-intro"><div><p class="eyebrow">MU/TH/UR // PREUVES PHYSIQUEMENT RÉCUPÉRÉES</p><h2>Archives de mission</h2><p>Consultez les documents trouvés sur le terrain et confrontez uniquement les déclarations dont les sources ont été récupérées.</p></div></div>
           <div id="narrative-archives-v68"></div>
+          <section id="field-media-archives-v135" class="panel" aria-label="Photographies de terrain"></section>
         </section>
 
         <section class="view active" data-panel="hub">
           <h1 class="sr-only">Niveau jouable de l’USS Tantalus</h1>
           <button id="exit-hub" class="button runtime-exit" type="button">QUITTER VERS COMMANDEMENT</button>
-          <div class="hub-level-heading"><div><p class="eyebrow">NIVEAU HUB // 4 PONTS // 16 SALLES + 10 ANNEXES // QUALIFICATION M41A V81</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
+          <button class="button field-media-capture-v135" type="button" data-field-media-capture-v135>PHOTOGRAPHIER</button>
+          <div id="hub-training-controls-v132" class="button-row" role="group" aria-label="Commandes du pupitre" hidden></div>
+          <div class="hub-level-heading"><div><p class="eyebrow">4 PONTS // 16 SALLES // 13 ANNEXES</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
           <div class="hub-level-shell">
             <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus"></canvas>
             <div class="hub-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles du hub">
@@ -296,7 +299,7 @@
 
         <section class="view play-view" data-panel="play">
           <h1 class="sr-only">Mission tactique — USS Tantalus</h1>
-          <div class="game-toolbar"><div><span class="eyebrow">RUNTIME PRODUCTION // OBJECTIFS & CONSÉQUENCES</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D · W/S · ESPACE · E/F · Q/V/R/H/X · 1/2/3 GROUPES · C PING · B/N/M ORDRES</span><button id="retreat-mission" class="button danger-outline">BATTRE EN RETRAITE</button></div></div>
+          <div class="game-toolbar"><div><span class="eyebrow">OBJECTIFS & CONSÉQUENCES</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D · W/S · ESPACE · MAJ + DIRECTION : VISER · F : TIRER · E : INTERAGIR · Q/V/R/H/X · C : COMMANDES · P : PAUSE</span><button id="retreat-mission" class="button danger-outline">BATTRE EN RETRAITE</button></div></div>
           <section id="mission-insertion-v62" aria-label="Séquence d’insertion opérationnelle" hidden></section>
           <div id="mission-runtime-v62" class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable" aria-describedby="mission-aim-help-v83" title="Directions + F ; clic droit : viser ; clic gauche : tirer ; clic molette : corps à corps ; MAJ : visée fixe ; Z : accroupi ; stick droit/LT + RT"></canvas>
             <div id="alpha-bravo-targeting-v69" class="alpha-bravo-targeting-v69" role="region" aria-label="Choisir une destination tactique sur le terrain. Échap annule." aria-hidden="true" tabindex="-1" hidden><span>PLACER LE POINT TACTIQUE · ÉCHAP ANNULER</span></div>
@@ -304,7 +307,8 @@
             <section id="alien-survival-dock-v70" class="alien-survival-dock-v70" aria-label="Systèmes de survie physiques du secteur" aria-hidden="true" hidden></section>
           </div>
           <div class="mission-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles de mission"><button data-mission-key="KeyA" aria-label="Aller à gauche">←</button><button data-mission-key="KeyD" aria-label="Aller à droite">→</button><button data-mission-key="KeyW" aria-label="Monter une échelle">↑</button><button data-mission-key="KeyS" aria-label="Descendre une échelle">↓</button><button data-mission-key="Space" aria-label="Sauter">SAUT</button><button data-mission-key="KeyZ" aria-label="Rester accroupi ou à couvert">COUVERT</button><button data-mission-key="ShiftLeft" aria-label="Viser sur place">VISER</button><button data-mission-key="KeyF" aria-label="Tirer">F</button><button id="mission-melee-v124" aria-label="Attaquer au corps à corps">CQC</button><button id="mission-interact">E</button><button id="mission-tracker">Q</button><button id="mission-vehicle">V</button><button id="mission-reload">R</button><button id="mission-medkit">H</button><button id="mission-neuro-counter" title="Contre-impulsion Neuro">X</button></div>
-          <p id="mission-aim-help-v83" class="sr-only">Visée huit directions : directions + F. Clic droit maintenu : viser et marcher en gardant la cible. Clic gauche : tirer. Clic molette : corps à corps. MAJ gauche : viser sur place en conservant sa posture. Z : rester accroupi sans prendre l’échelle. À couvert bas, viser vers l’obstacle expose le haut du corps pour tirer ; relâcher la visée remet à couvert. Toucher maintenu sur le terrain : viser et tirer. Manette : stick gauche progressif, stick droit pour viser, LT pour épauler, RT pour tirer, B pour s’accroupir, R3 pour le corps à corps. J2 : J/L/I/K + O ; MAJ droite : viser sur place ; touche virgule : s’accroupir.</p>
+          <p id="mission-aim-help-v83" class="mission-aim-help-v130"><kbd>MAJ gauche</kbd> maintenue : visez avec A/D/W/S ou les flèches dans huit directions. L’angle reste sélectionné jusqu’au relâchement de MAJ ; <kbd>F</kbd> tire. <kbd>E</kbd> interagit avec les portes et les ascenseurs. <kbd>Z</kbd> reste accroupi sans prendre l’échelle.</p>
+          <p class="sr-only">Clic droit maintenu : viser et marcher en gardant la cible. Clic gauche : tirer. Clic molette : corps à corps. À couvert bas, viser vers l’obstacle expose le haut du corps pour tirer ; relâcher la visée remet à couvert. Toucher maintenu sur le terrain : viser et tirer. Manette : stick gauche progressif, stick droit pour viser, LT pour épauler, RT pour tirer, B pour s’accroupir, R3 pour le corps à corps. J2 : J/L/I/K + O ; MAJ droite maintenue : viser sur place et conserver l’angle ; touche virgule : s’accroupir.</p>
           <section id="mission-archives-overlay-v68" class="mission-archives-overlay-v68" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mission-archives-title-v68" hidden>
             <div class="mission-archives-dialog-v68">
               <header><div><p class="eyebrow">TERMINAL TERRAIN // MISSION EN PAUSE</p><h2 id="mission-archives-title-v68">Archive récupérée</h2></div><button id="close-mission-archives-v68" class="button primary" type="button">FERMER ET REPRENDRE</button></header>
@@ -312,6 +316,8 @@
             </div>
           </section>
           <div id="mission-equipment-controls" class="button-row equipment-controls"></div>
+          <button class="button field-media-capture-v135" type="button" data-field-media-capture-v135>PHOTOGRAPHIER</button>
+          <button id="mission-squad-command-v132" class="button" type="button">COMMANDES · C</button>
           <div id="mission-log" class="mission-log" aria-live="polite">En attente du déploiement.</div>
         </section>
       </main>

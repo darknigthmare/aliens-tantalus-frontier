@@ -1,4 +1,6 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getPlayerSourceCropV124, playerAtlasScaleV124 } from './player-presentation-v124.js';
+import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
 
 export const PLAYER_VISUAL_ASSETS_V81 = Object.freeze([
   Object.freeze({ sheetId: 'player.echo9-marine.locomotion', imageKey: 'playerLocomotion', path: '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png', sha256: 'f5b25ca6189d0a2891d1a6f60635417238d7dc52bfece7ae20a2cd9dffa21ca3' }),
@@ -10,7 +12,6 @@ export const PLAYER_VISUAL_ASSETS_V81 = Object.freeze([
 const ECHO9_SHEET_IDS = Object.freeze(PLAYER_VISUAL_ASSETS_V81.map((asset) => asset.sheetId));
 
 const ECHO9_SHEET_ID_SET = new Set(ECHO9_SHEET_IDS);
-const ECHO9_ASPECT = 110 / 148;
 
 export const PLAYER_VISUAL_CONTRACT_V81 = Object.freeze({
   schema: 81,
@@ -26,9 +27,9 @@ export const PLAYER_VISUAL_CONTRACT_V81 = Object.freeze({
   source: Object.freeze({ width: 1024, height: 1024, columns: 4, rows: 4, cellWidth: 256, cellHeight: 256, guard: 16 }),
   pivot: Object.freeze({ id: 'humanoid-feet', kind: 'feet', x: 128, y: 240 }),
   surfaces: Object.freeze({
-    mission: Object.freeze({ height: 148, width: 110 }),
-    hub: Object.freeze({ height: 128, width: Math.round(128 * ECHO9_ASPECT) }),
-    bioforge: Object.freeze({ height: 98, width: Math.round(98 * ECHO9_ASPECT) })
+    mission: Object.freeze({ height: HUMAN_VISUAL_CONTRACT_V133.playerCellHeight, width: HUMAN_VISUAL_CONTRACT_V133.playerCellWidth }),
+    hub: Object.freeze({ height: HUMAN_VISUAL_CONTRACT_V133.playerCellHeight, width: HUMAN_VISUAL_CONTRACT_V133.playerCellWidth }),
+    bioforge: Object.freeze({ height: HUMAN_VISUAL_CONTRACT_V133.playerCellHeight, width: HUMAN_VISUAL_CONTRACT_V133.playerCellWidth })
   })
 });
 
@@ -171,15 +172,17 @@ export function drawEcho9FallbackV81(ctx, entity, { surface = 'mission', reason 
   ctx.save?.();
   ctx.translate?.(x + (facing < 0 ? metrics.width : 0), y);
   ctx.scale?.(facing < 0 ? -1 : 1, 1);
+  const visibleHeight = HUMAN_VISUAL_CONTRACT_V133.standingHeight;
+  const top = metrics.height * (PLAYER_VISUAL_CONTRACT_V81.pivot.y / PLAYER_VISUAL_CONTRACT_V81.source.cellHeight) - visibleHeight;
   ctx.fillStyle = '#26372f';
-  ctx.fillRect?.(metrics.width * 0.32, metrics.height * 0.18, metrics.width * 0.36, metrics.height * 0.55);
+  ctx.fillRect?.(metrics.width * 0.32, top + visibleHeight * 0.24, metrics.width * 0.36, visibleHeight * 0.49);
   ctx.fillStyle = '#95b596';
-  ctx.fillRect?.(metrics.width * 0.36, metrics.height * 0.08, metrics.width * 0.28, metrics.height * 0.22);
+  ctx.fillRect?.(metrics.width * 0.36, top, metrics.width * 0.28, visibleHeight * 0.22);
   ctx.fillStyle = '#b8c5bd';
-  ctx.fillRect?.(metrics.width * 0.58, metrics.height * 0.42, metrics.width * 0.36, Math.max(3, metrics.height * 0.06));
+  ctx.fillRect?.(metrics.width * 0.58, top + visibleHeight * 0.45, metrics.width * 0.36, Math.max(3, visibleHeight * 0.06));
   ctx.fillStyle = '#1c2924';
-  ctx.fillRect?.(metrics.width * 0.31, metrics.height * 0.7, metrics.width * 0.15, metrics.height * 0.25);
-  ctx.fillRect?.(metrics.width * 0.54, metrics.height * 0.7, metrics.width * 0.15, metrics.height * 0.25);
+  ctx.fillRect?.(metrics.width * 0.31, top + visibleHeight * 0.72, metrics.width * 0.15, visibleHeight * 0.28);
+  ctx.fillRect?.(metrics.width * 0.54, top + visibleHeight * 0.72, metrics.width * 0.15, visibleHeight * 0.28);
   ctx.restore?.();
   return Object.freeze({
     drawn: true,
@@ -239,9 +242,9 @@ export function drawPlayerSpriteV81(ctx, options = {}) {
   if (flip) {
     ctx.translate?.(drawSprite.x + drawSprite.width, drawSprite.y);
     ctx.scale?.(-1, 1);
-    ctx.drawImage?.(image, drawSource.x, drawSource.y, drawSource.width, drawSource.height, 0, 0, drawSprite.width, drawSprite.height);
+    ctx.drawImage?.(resolveSpriteDrawableV134(image), drawSource.x, drawSource.y, drawSource.width, drawSource.height, 0, 0, drawSprite.width, drawSprite.height);
   } else {
-    ctx.drawImage?.(image, drawSource.x, drawSource.y, drawSource.width, drawSource.height, drawSprite.x, drawSprite.y, drawSprite.width, drawSprite.height);
+    ctx.drawImage?.(resolveSpriteDrawableV134(image), drawSource.x, drawSource.y, drawSource.width, drawSource.height, drawSprite.x, drawSprite.y, drawSprite.width, drawSprite.height);
   }
   ctx.restore?.();
   const { image: _privateImage, ...result } = validation;

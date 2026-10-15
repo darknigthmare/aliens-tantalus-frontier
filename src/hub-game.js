@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_DOOR_PROFILES, HUB_ROOM_PROFILES, getHubDoorBounds } from './hub-profiles-v53.js';
 import {
   DROPSHIP_HANGAR_ART_V55,
@@ -27,7 +28,12 @@ import {
 import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { hubFarParallaxV116, drawHubRoomDepthV119, drawHubContactShadowV116 } from './hub-depth-presentation-v116.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
+import { HUB_ROOM_NAVIGATION_V133, hubRearPropColliderV133 } from './hub-navigation-layout-v133.js';
+import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
+import { drawHubBulkheadDepthV134, hubBulkheadDepthGeometryV134, getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
+import { getHubPropHeightV136, getHubVehiclePlacementV136, getHubNativePropPlacementV139 } from './hub-prop-placements-v136.js';
+import { HUB_FURNITURE_ATLAS_V139 } from './hub-furniture-atlas-v139.js';
 import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
   drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
   releaseHubPlayerAppearanceV126 } from './player-appearance-hub-v126.js';
@@ -97,36 +103,29 @@ const HUB_PROP_SOURCE_SIZES = Object.freeze({
   'life-support-scrubber': Object.freeze({ width: 226, height: 179 })
 });
 
-const GEOMETRY_TEMPLATES = Object.freeze([
-  Object.freeze([{ dx: 238, w: 76, h: 38, style: 0 }, { dx: 488, w: 112, h: 27, style: 1 }, { dx: 822, w: 58, h: 48, style: 2 }]),
-  Object.freeze([{ dx: 188, w: 92, h: 29, style: 1 }, { dx: 454, w: 64, h: 52, style: 2 }, { dx: 804, w: 104, h: 35, style: 0 }]),
-  Object.freeze([{ dx: 246, w: 58, h: 54, style: 2 }, { dx: 526, w: 96, h: 31, style: 0 }, { dx: 824, w: 72, h: 42, style: 1 }]),
-  Object.freeze([{ dx: 198, w: 108, h: 34, style: 0 }, { dx: 470, w: 72, h: 45, style: 2 }, { dx: 790, w: 86, h: 28, style: 1 }])
-]);
-
 const makeRoom = (id, name, action, description, index, npcRow, art, prop, geometryVariant, viewport, propHeight = 138) => {
+  propHeight = getHubPropHeightV136(id, propHeight);
   const xStart = index * ROOM_WIDTH;
   const profile = HUB_ROOM_PROFILES[id];
   const worldWidth = profile?.worldWidth || ROOM_WIDTH;
-  const propX = xStart + worldWidth * (id === 'briefing' ? 0.5 : id === 'armory' ? 0.54 : 0.7);
+  const navigation = HUB_ROOM_NAVIGATION_V133[id];
   const sourceSize = HUB_PROP_SOURCE_SIZES[prop] || { width: 1, height: 1 };
-  const renderWidth = sourceSize.width * (propHeight / sourceSize.height);
-  const propRenderBounds = Object.freeze({
-    x: propX - renderWidth / 2,
-    y: FLOOR_Y - propHeight,
-    w: renderWidth,
-    h: propHeight
-  });
-  const propCollisionBounds = profile?.propCollider ? Object.freeze({
-    ...(profile.propCollider.collisionMode ? { collisionMode: profile.propCollider.collisionMode } : {}),
-    x: propX - Math.min(profile.propCollider.width, renderWidth) / 2,
-    y: FLOOR_Y - Math.min(profile.propCollider.height, propHeight),
-    w: Math.min(profile.propCollider.width, renderWidth),
-    h: Math.min(profile.propCollider.height, propHeight)
-  }) : null;
-  const interactionWidth = Math.max(renderWidth, propCollisionBounds?.w || 0) + 96;
-  const propInteractionBounds = Object.freeze({ x: propX - interactionWidth / 2, y: FLOOR_Y - propHeight - 32, w: interactionWidth, h: propHeight + 64 });
-  const profileGeometry = profile?.authoredCollision && profile.propCollider
+  const originalAsset = `/assets/openai/hub/props/${sourceSize.file || `${prop}.png`}`;
+  let placement = getHubNativePropPlacementV139({ id, xStart, centerX: navigation.propX,
+    walkY: FLOOR_Y, asset: originalAsset, sourceSize, sourceBounds: sourceSize.sourceBounds || null,
+    renderHeight: propHeight, collider: profile?.propCollider || null });
+  if (!placement) throw new Error(`Missing native furniture placement: ${id}`);
+  if (placement.visible === false && id === 'vehicle-bay') {
+    const actor = resolveHubVehicleArtV58(id)?.vehicle;
+    const vehicle = getHubVehiclePlacementV136({ id, xStart }, actor);
+    if (!vehicle) throw new Error('Missing native vehicle inspection placement.');
+    placement = { ...placement, inspectionX: vehicle.renderBounds.x + vehicle.renderBounds.w / 2,
+      inspectionSource: actor.id };
+  }
+  const propRenderBounds = Object.freeze({ ...placement.renderBounds });
+  const propCollisionBounds = placement.colliders[0] ? Object.freeze({ ...placement.colliders[0] }) : null;
+  const propInteractionBounds = placement.interactionBounds ? Object.freeze({ ...placement.interactionBounds }) : null;
+  const profileGeometry = profile?.authoredCollision && propCollisionBounds
     ? [Object.freeze({
         ...propCollisionBounds,
         role: 'interaction-prop',
@@ -142,28 +141,25 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     npcRow,
     xStart,
     xEnd: xStart + worldWidth,
-    x: propX,
+    x: placement.inspectionX,
     profile,
-    collisionSource: profileGeometry ? 'room-profile' : 'fallback',
+    collisionSource: 'authored-room-profile',
     background: `/assets/openai/hub/rooms/${art}.png`,
-    prop: `/assets/openai/hub/props/${sourceSize.file || `${prop}.png`}`,
-    propSourceBounds: sourceSize.sourceBounds || null,
+    prop: placement.asset,
+    propSourceBounds: Object.freeze([placement.source.x, placement.source.y,
+      placement.source.x + placement.source.w, placement.source.y + placement.source.h]),
+    propPlacementV139: placement,
     propRenderBounds,
     propCollisionBounds,
     propInteractionBounds,
-    propHeight,
+    propHeight: propRenderBounds.h,
     viewport: Object.freeze({ x: xStart + viewport.x, y: viewport.y, w: viewport.w, h: viewport.h }),
-    geometry: Object.freeze(profileGeometry || GEOMETRY_TEMPLATES[geometryVariant].map((item) => Object.freeze({
-      x: xStart + item.dx,
-      y: FLOOR_Y - item.h,
-      w: item.w,
-      h: item.h,
-      style: item.style
-    })))
+    geometry: Object.freeze(profileGeometry || [])
   });
 };
 
 export const HUB_MODULAR_PROP_FILES = Object.freeze([
+  HUB_FURNITURE_ATLAS_V139.asset,
   '/assets/openai/hub/props/bulkhead-door.png',
   '/assets/openai/hub/props/lift-door.png',
   '/assets/openai/hub/props/bridge-terminal.png',
@@ -262,28 +258,30 @@ export function buildHubObstacleGeometryV87(deckIndex) {
   const hangar = deck.rooms.find((room) => room.id === DROPSHIP_HANGAR_ART_V55.roomId);
   if (hangar) {
     const dropship = DROPSHIP_HANGAR_ART_V55.dropship;
-    const segments = dropship.collisionSegments?.length
+    const placement = getHubVehiclePlacementV136(hangar, dropship);
+    const segments = placement?.collisionSegments?.length ? placement.collisionSegments : dropship.collisionSegments?.length
       ? dropship.collisionSegments
       : [dropship.collisionBounds];
     for (const bounds of segments) {
-      geometry.push({
-        x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+      geometry.push(hubRearPropColliderV133({
+        x: placement ? bounds.x : hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
         id: bounds.id || `${dropship.id}-collision`,
         roomId: hangar.id,
         role: bounds.role || 'dropship-hull',
         actorId: dropship.id,
         collisionOnly: true
-      });
+      }));
     }
   }
   const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
   if (vehicleBay) {
     const actor = resolveHubVehicleArtV58(vehicleBay.id).vehicle;
-    const bounds = actor.collisionBounds;
-    geometry.push({
-      x: vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+    const placement = getHubVehiclePlacementV136(vehicleBay, actor);
+    const bounds = placement?.collisionBounds || actor.collisionBounds;
+    geometry.push(hubRearPropColliderV133({
+      x: placement ? bounds.x : vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
       roomId: vehicleBay.id, role: 'vehicle-hull', actorId: actor.id, collisionOnly: true
-    });
+    }));
   }
   return geometry;
 }
@@ -406,7 +404,7 @@ export class HubGame {
   // Shared with V51's overridden world renderer. Never invent a global walk
   // plane for editor-authored floors or alter actor/collider coordinates.
   drawDepthFloorV116(ctx) {
-    if (!this.depthPresentationV116 || this.editorPlaytest || this.useGlobalFloor === false) return;
+    if (this.editorPlaytest || this.useGlobalFloor === false) return;
     const annex = this.currentAnnexV71?.();
     const rooms = annex ? [annex] : HUB_DECKS[this.state?.deck || 0].rooms;
     const cameraX = annex ? this.annexCameraV71.x : this.camera.x;
@@ -415,7 +413,7 @@ export class HubGame {
   }
 
   drawDepthContactShadowV116(ctx, actor, floorY) {
-    drawHubContactShadowV116(ctx, actor, floorY, this.depthPresentationV116 && !this.editorPlaytest);
+    return drawHubContactShadowV116(ctx, actor, floorY, !this.editorPlaytest);
   }
 
   setControl(control, active) {
@@ -542,7 +540,7 @@ export class HubGame {
   resolveHorizontal(previousX) {
     for (const door of this.doorStates) {
       if (door.blocking === false || door.lift) continue;
-      const collider = getHubDoorBounds(door);
+      const collider = getHubBulkheadColliderV134(door);
       if (door.progress >= 0.82 || !overlap(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
         this.player.x = collider.x - this.player.w;
@@ -607,7 +605,8 @@ export class HubGame {
     if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) {
       for (const actor of [DROPSHIP_HANGAR_ART_V55.controlBooth, DROPSHIP_HANGAR_ART_V55.dropship]) {
         const bounds = actor.interactionBounds;
-        const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+        const worldBounds = getHubVehiclePlacementV136(room, actor)?.interactionBounds
+          || { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
         if (!overlap(this.player, worldBounds)) continue;
         return {
           id: actor.id,
@@ -626,7 +625,8 @@ export class HubGame {
     if (vehicleContract) {
       const actor = vehicleContract.vehicle;
       const bounds = actor.interactionBounds;
-      const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+      const worldBounds = getHubVehiclePlacementV136(room, actor)?.interactionBounds
+        || { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
       if (overlap(this.player, worldBounds)) {
         return {
           id: actor.id,
@@ -765,10 +765,15 @@ export class HubGame {
     const assetReport = this.getAssetReport();
     const playerCenter = (this.player?.x || 0) + (this.player?.w || 0) / 2;
     const activeDoor = this.doorStates.reduce((nearest, door) => !nearest || Math.abs(playerCenter - door.x) < Math.abs(playerCenter - nearest.x) ? door : nearest, null);
+    const nativePaints = this.editorPlaytest || this.currentAnnexV71?.() || this.hubTrainingV132?.active ? []
+      : [...(this.hubPropPlacementsRenderedV139?.values() || [])];
     return {
       running: this.running,
       playerAppearanceV126: hubPlayerAppearanceSnapshotV126(this),
-      presentationV116: this.depthPresentationV116 ? 'layered-2.5d-fixed-walk-plane' : '2d',
+      playerSupportV139: this.player?.supportShadowV139 ? { ...this.player.supportShadowV139 } : null,
+      hubPropPlacementV139: { current: structuredClone(nativePaints.find(entry => entry.roomId === room.id) || null),
+        rendered: structuredClone(nativePaints), sourceStatus: 'actual-native-prop-paint-calls' },
+      presentationV116: getHubRoomPresentationV119(this.currentAnnexV71?.() || room).presentationMode,
       roomPresentationV119: getHubRoomPresentationV119(this.currentAnnexV71?.() || room, this.depthPresentationV116),
       deck: this.state?.deck ?? 0,
       roomId: room.id,
@@ -788,6 +793,9 @@ export class HubGame {
       activeDoorId: activeDoor?.id || null,
       activeLiftShaftId: this.nearestLift()?.shaftId || null,
       doorNetworkCount: this.doorStates.length,
+      hubBulkheadDepthV134: { source: 'original-vector-architecture', gameplayPlane: '2d',
+        doors: this.currentAnnexV71?.() || this.editorPlaytest ? []
+          : this.doorStates.filter(door => !door.lift).map(door => this.bulkheadDrawnV134?.get(door.id)).filter(Boolean) },
       roomAssetsReady: assetReport.roomAssetsReady,
       roomLayerAssetsReady: assetReport.roomLayerAssetsReady,
       parallaxAssetsReady: assetReport.parallaxAssetsReady,
@@ -807,6 +815,7 @@ export class HubGame {
 
   draw() {
     if (!this.player) return;
+    this.hubPropPlacementsRenderedV139 = new Map();
     const ctx = this.ctx;
     ctx.save();
     ctx.clearRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
@@ -834,7 +843,7 @@ export class HubGame {
       const width = image.naturalWidth * (height / image.naturalHeight);
       const offset = -((this.camera.x * 0.14) % width);
       ctx.globalAlpha = 0.78;
-      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, 0, width, height);
+      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(resolveSpriteDrawableV134(image), x, 0, width, height);
       ctx.globalAlpha = 1;
     }
     const shade = ctx.createLinearGradient(0, 0, 0, LOGICAL_HEIGHT);
@@ -863,17 +872,23 @@ export class HubGame {
       if (room.id !== DROPSHIP_HANGAR_ART_V55.roomId) this.drawInteractionProp(ctx, room);
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
+    for (const door of this.doorStates) if (door.lift) this.drawDoor(ctx, door);
+    for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door, 'back');
     for (const npc of this.npcs) {
       this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
       const image = this.npcSheets[npc.sheet] || this.crewSheet;
+      const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing: npc.vx < 0 ? -1 : 1 },
+        sheet: { path: NPC_SPRITE_FILES[npc.sheet], sourceFacing: 1 }, column: frame, row: 1, surface: 'hub' });
+      npc.humanVisualV133 = human;
+      if (drawHumanAtlasV133(ctx, image, human)) continue;
       const renderWidth = 82;
       const renderHeight = 126;
       const renderY = npc.y + npc.h - renderHeight * (240 / 256);
       this.drawSheetCell(ctx, image, frame, 1, npc.x + npc.w / 2 - renderWidth / 2, renderY, renderWidth, renderHeight, npc.vx < 0, 4, 4);
     }
     this.drawPlayer(ctx);
-    for (const door of this.doorStates) this.drawDoor(ctx, door);
+    for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door);
     for (const room of deck.rooms) {
       if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
       else if (resolveHubRoomArtV56(room.id)) this.drawModularRoomV56(ctx, room, 'front');
@@ -905,7 +920,7 @@ export class HubGame {
         ctx.beginPath();
         ctx.rect(room.xStart, 0, roomWidth, FLOOR_Y);
         ctx.clip();
-        ctx.drawImage(image, x, y, width, height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), x, y, width, height);
         ctx.restore();
       }
       if (!modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage, room);
@@ -962,7 +977,7 @@ export class HubGame {
       ctx.shadowBlur = this.reducedMotion ? 8 : 9 + Math.sin(this.animationTime * 4) * 3;
     }
     ctx.drawImage(
-      image,
+      resolveSpriteDrawableV134(image),
       cellX + source.x, cellY + source.y, source.w, source.h,
       targetX, target.y, target.w, target.h
     );
@@ -999,13 +1014,13 @@ export class HubGame {
         const cellX = entry.sourceCell.column * entry.sheet.cellWidth;
         const cellY = entry.sourceCell.row * entry.sheet.cellHeight;
         ctx.drawImage(
-          image,
+          resolveSpriteDrawableV134(image),
           cellX + source.x, cellY + source.y, source.w, source.h,
           targetX, target.y, target.w, target.h
         );
       } else {
         const source = entry.sourceCrop;
-        ctx.drawImage(image, source.x, source.y, source.w, source.h, targetX, target.y, target.w, target.h);
+        ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, targetX, target.y, target.w, target.h);
       }
       ctx.restore();
     }
@@ -1026,7 +1041,7 @@ export class HubGame {
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
-      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight,
       target.x, target.y, target.w, target.h
     );
     ctx.restore();
@@ -1045,7 +1060,7 @@ export class HubGame {
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
-      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight,
       target.x + drift, target.y, target.w, target.h
     );
     ctx.restore();
@@ -1063,7 +1078,7 @@ export class HubGame {
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
-      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, image.naturalHeight,
       target.x, target.y, target.w, target.h
     );
     ctx.restore();
@@ -1085,7 +1100,7 @@ export class HubGame {
     const drift = maxDrift && !this.reducedMotion && presentation.presentationMode === '2.5d'
       ? clamp((this.camera.x - (room?.xStart || 0)) * .09, 0, maxDrift) : maxDrift / 2;
     ctx.globalAlpha = 0.68;
-    ctx.drawImage(image, viewport.x - drift, viewport.y - (height - viewport.h) / 2, width, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), viewport.x - drift, viewport.y - (height - viewport.h) / 2, width, height);
     ctx.globalAlpha = 1;
     const glass = ctx.createLinearGradient(viewport.x, viewport.y, viewport.x, viewport.y + viewport.h);
     glass.addColorStop(0, 'rgba(139, 200, 203, .16)');
@@ -1115,6 +1130,15 @@ export class HubGame {
   }
 
   drawInteractionProp(ctx, room) {
+    if (room.propPlacementV139?.visible === false) {
+      this.hubPropPlacementsRenderedV139 ||= new Map();
+      this.hubPropPlacementsRenderedV139.set(room.id, {
+        ...structuredClone(room.propPlacementV139), painted: false,
+        omittedReason: room.propPlacementV139.omittedReason,
+        target: null, frameTime: this.animationTime
+      });
+      return;
+    }
     const image = this.propImages.get(room.prop);
     const active = this.nearestInteraction()?.id === room.id;
     const pulse = this.reducedMotion ? 0.45 : 0.45 + Math.sin(this.animationTime * 4) * 0.15;
@@ -1131,8 +1155,17 @@ export class HubGame {
       const width = bounds.w;
       if (room.propSourceBounds) {
         const [left, top, right, bottom] = room.propSourceBounds;
-        ctx.drawImage(image, left, top, right - left, bottom - top, room.x - width / 2, FLOOR_Y - height, width, height);
-      } else ctx.drawImage(image, room.x - width / 2, FLOOR_Y - height, width, height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), left, top, right - left, bottom - top, bounds.x, bounds.y, width, height);
+      } else ctx.drawImage(resolveSpriteDrawableV134(image), bounds.x, bounds.y, width, height);
+    }
+    if (room.propPlacementV139) {
+      this.hubPropPlacementsRenderedV139 ||= new Map();
+      this.hubPropPlacementsRenderedV139.set(room.id, {
+        ...structuredClone(room.propPlacementV139), painted: assetReady(image),
+        omittedReason: assetReady(image) ? null : 'native-prop-image-not-ready',
+        image: { asset: room.prop, width: image?.naturalWidth || 0, height: image?.naturalHeight || 0 },
+        source: { ...room.propPlacementV139.source }, target: { ...bounds }, frameTime: this.animationTime
+      });
     }
     ctx.fillStyle = active ? '#9be1ad' : '#d0a952';
     ctx.fillRect(room.x - 3, bounds.y - 14, 6, 6);
@@ -1150,21 +1183,31 @@ export class HubGame {
       const scale = Math.min((obstacle.w + 10) / image.naturalWidth, (obstacle.h + 10) / image.naturalHeight);
       const width = image.naturalWidth * scale;
       const height = image.naturalHeight * scale;
-      ctx.drawImage(image, obstacle.x + (obstacle.w - width) / 2, FLOOR_Y - height, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), obstacle.x + (obstacle.w - width) / 2, FLOOR_Y - height, width, height);
     } else {
       ctx.fillStyle = '#2b3732';
       ctx.fillRect(obstacle.x, obstacle.y, obstacle.w, obstacle.h);
     }
   }
 
-  drawDoor(ctx, door) {
+  drawDoor(ctx, door, phase = 'front') {
+    const presentationMode = getHubRoomPresentationV119(door.roomId || this.currentRoom()).presentationMode;
+    if (!door.lift && drawHubBulkheadDepthV134(ctx, door, { phase,
+      presentationMode,
+      playerCenterX: this.player ? this.player.x + this.player.w / 2 : null })) {
+      this.bulkheadDrawnV134 ||= new Map();
+      const previous = this.bulkheadDrawnV134.get(door.id), phases = phase === 'back' ? [] : previous?.drawnPhases || [];
+      const geometry = hubBulkheadDepthGeometryV134(door, { presentationMode }), cameraX = this.camera?.x || 0;
+      this.bulkheadDrawnV134.set(door.id, { ...geometry, cameraX,
+        onScreen: geometry.bounds.x + geometry.bounds.w > cameraX && geometry.bounds.x < cameraX + LOGICAL_WIDTH,
+        drawnPhases: [...new Set([...phases, phase])] });
+      return;
+    }
     const source = door.lift ? '/assets/openai/hub/props/lift-door.png' : '/assets/openai/hub/props/bulkhead-door.png';
     const image = this.propImages.get(source);
     if (!assetReady(image)) return;
     const { x, y, w: width, h: height } = getHubDoorBounds(door);
     if (door.lift) {
-      ctx.fillStyle = 'rgba(2, 7, 8, .98)';
-      ctx.fillRect(x - 16, y - 28, width + 32, height + 36);
       ctx.strokeStyle = '#4b6658';
       ctx.strokeRect(x - 15.5, y - 27.5, width + 31, height + 35);
     }
@@ -1173,8 +1216,8 @@ export class HubGame {
     const slide = door.progress * halfTarget * 0.78;
     ctx.save();
     ctx.globalAlpha = 0.98;
-    ctx.drawImage(image, 0, 0, halfSource, image.naturalHeight, x - slide, y, halfTarget, height);
-    ctx.drawImage(image, halfSource, 0, halfSource, image.naturalHeight, x + halfTarget + slide, y, halfTarget, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, halfSource, image.naturalHeight, x - slide, y, halfTarget, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), halfSource, 0, halfSource, image.naturalHeight, x + halfTarget + slide, y, halfTarget, height);
     ctx.restore();
     ctx.fillStyle = door.progress > 0.5 ? '#89d99f' : '#d15a4d';
     ctx.fillRect(door.x - 3, y + 14, 6, 9);
@@ -1196,8 +1239,15 @@ export class HubGame {
 
   drawPlayer(ctx) {
     loadPlayerCostumeAssetsV119(this.playerSheets, this.playerCostumeIdV119);
-    const shadowFloor = this.currentAnnexV71?.()?.world?.floorY ?? FLOOR_Y;
-    if (!this.ventActorV62?.ventTransit) this.drawDepthContactShadowV116(ctx, this.player, shadowFloor);
+    const shadowSupport = this.player.y + this.player.h;
+    const shadow = !this.ventActorV62?.ventTransit
+      ? this.drawDepthContactShadowV116(ctx, this.player, shadowSupport) : null;
+    this.player.supportShadowV139 = shadow
+      ? { ...shadow, drawn: true, contactY: shadow.supportY, frameTime: this.animationTime }
+      : { schema: 139, drawn: false, contactY: null, frameTime: this.animationTime,
+        omittedReason: this.ventActorV62?.ventTransit || this.player.ventTransit ? 'duct-transit'
+          : this.player.climbing ? 'ladder-contact' : this.player.grounded === false ? 'airborne'
+          : this.player.inVehicle ? 'vehicle-mounted' : 'presentation-disabled' };
     const request = resolvePlayerAnimation(this.player, false);
     const sample = this.playerAnimationV81.sample('hub:player:echo9', request, this.animationTime, {
       emit: false,
@@ -1227,9 +1277,9 @@ export class HubGame {
     if (flip) {
       ctx.translate(x + width, y);
       ctx.scale(-1, 1);
-      ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
     } else {
-      ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
     }
     ctx.restore();
   }

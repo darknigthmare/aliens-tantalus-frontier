@@ -1,42 +1,80 @@
 /** Admission and geometry inspection for the shipped ACTIVE-ROOM playtest only.
  * This module does not implement room travel, project scripts or scene storage.
  */
-import { parseProject, projectRoom, nativeTiles, validateProject, decorative, clone } from './forge-model-v130.js';
+import { parseProject, projectRoom, nativeTiles, validateProject, decorative } from './forge-model-v130.js';
+import { compileEditorGridV136, editorMissionSpawnV136, constrainEditorRectV136,
+  EDITOR_MISSION_WORLD_V136 } from './editor-spatial-v136.js';
+import { compileShipProject, HUB_WORLD } from './hub-v51-runtime.js';
 
 export const FORGE_TEST_BOUNDS_V136 = Object.freeze({
-  mission: Object.freeze({ width: 6200, height: 1080, actorWidth: 42, actorHeight: 92 }),
-  ship: Object.freeze({ width: 5120, height: 720, actorWidth: 44, actorHeight: 92 })
+  mission: EDITOR_MISSION_WORLD_V136,
+  ship: Object.freeze({ width: HUB_WORLD.width, height: 720, actorWidth: 44, actorHeight: 92 })
 });
 const overlap = (a,b) => a.x < b.x+b.w-.01 && a.x+a.w > b.x+.01 && a.y < b.y+b.h-.01 && a.y+a.h > b.y+.01;
 
-/** Mirrors the geometry rules used by the two published native compilers. Not pathfinding. */
+function missionGeometry(project, cells, bounds) {
+  const grid = compileEditorGridV136(project), { tileWidth: cw, tileHeight: ch } = grid;
+  const source = new Map(cells.map(cell => [`${cell.x}:${cell.y}`, cell]));
+  return grid.tiles.flatMap(tile => {
+    const cell = source.get(tile.position);
+    let box = { id: cell.id, cellId: cell.id, type: tile.type, x: tile.x, y: tile.y, w: cw, h: ch };
+    if (tile.type === 'floor') box = { ...box, w: cw + 1, h: Math.max(24, ch) };
+    else if (tile.type === 'platform') box = { ...box, w: cw + 1, y: tile.y + ch * .5, h: 24 };
+    else if (tile.type === 'lift') box = { ...box, h: 24, dynamic: true };
+    else if (tile.type === 'door') {
+      const h = Math.max(132, ch * 2.6);
+      box = constrainEditorRectV136({ ...box, x: tile.x + cw * .34,
+        y: tile.y + ch - h, w: Math.max(48, cw * .32), h }, grid);
+    } else if (tile.type === 'hazard') box = { ...box, y: tile.y + ch * .65, h: ch * .35 };
+    else if (tile.type === 'spawn') {
+      if (tile !== grid.tiles.find(entry => entry.type === 'spawn')) return [];
+      box = { ...box, ...editorMissionSpawnV136(grid), w: bounds.actorWidth, h: bounds.actorHeight };
+    } else if (tile.type !== 'wall') return [];
+    return [box];
+  });
+}
+
+function shipGeometry(project, cells, bounds) {
+  const compiled = compileShipProject(project), geometry = [];
+  for (const [group, type] of [['floors', 'floor'], ['platforms', 'platform'], ['walls', 'wall'],
+    ['doors', 'door'], ['hazards', 'hazard']]) {
+    const sources = cells.filter(cell => cell.type === type);
+    for (const [index, box] of compiled[group].entries()) {
+      const cell = sources[index];
+      geometry.push({ ...box, id: cell.id, cellId: cell.id, type });
+    }
+  }
+  const spawn = cells.find(cell => cell.type === 'spawn');
+  if (spawn && compiled.spawn) geometry.push({ id: spawn.id, cellId: spawn.id, type: 'spawn',
+    ...compiled.spawn, w: bounds.actorWidth, h: bounds.actorHeight });
+  for (const lift of compiled.lifts) {
+    const cell = cells.find(cell => cell.type === 'lift' && cell.x === Math.round(lift.x / compiled.grid.cellWidth - .5)
+      && cell.y === Math.round(lift.top / compiled.grid.cellHeight));
+    geometry.push({ id: cell.id, cellId: cell.id, type: 'lift', x: lift.x - lift.w / 2,
+      y: lift.top, w: lift.w, h: lift.bottom - lift.top, dynamic: false });
+  }
+  return geometry;
+}
+
+/** Uses the production grid/spawn helpers and the actual ship compiler.
+ * Checks physical clearance of the active room, not pathfinding. */
 export function inspectForgePlaytestV136(input) {
-  const project = parseProject(input), room = projectRoom(project), kind = project.kind;
-  const bounds = FORGE_TEST_BOUNDS_V136[kind], cw = bounds.width/room.size[0], ch = bounds.height/room.size[1];
+  const project = parseProject(input);
+  return inspectForgeRoomPhysicsV141(project, project.activeRoomId, validateProject(project));
+}
+
+/** Internal physics inspection for an already parsed document. The journey
+ * admission parses once and shares grid diagnostics across reachable rooms. */
+export function inspectForgeRoomPhysicsV141(project, roomId = project.activeRoomId, validation = validateProject(project)) {
+  const room = project.rooms.find(entry => entry.id === roomId), kind = project.kind;
+  if (!room) throw new TypeError('Salle Forge introuvable pour le contrôle physique.');
+  const bounds = FORGE_TEST_BOUNDS_V136[kind];
   const cells = room.cells.filter(c => !decorative(c));
-  const issues = validateProject(project).issues.filter(i => i.roomId === room.id && !['decor-preview','links-authoring'].includes(i.code));
+  const issues = validation.issues.filter(i => i.roomId === room.id && !['decor-preview','links-authoring'].includes(i.code));
   const add = (severity,code,message,cell=null) => issues.push({severity,code,message,roomId:room.id,cellId:cell?.id||null,x:cell?.x??null,y:cell?.y??null});
   const ofType = type => cells.filter(c => c.type === type), counts = Object.fromEntries(['floor','platform','wall','door','ladder','lift','vent','spawn','objective','terminal','enemy','vehicle','hazard'].map(t=>[t,ofType(t).length]));
-  const geometry = [];
-  for (const c of cells) {
-    let box = {id:c.id,cellId:c.id,type:c.type,x:c.x*cw,y:c.y*ch,w:cw,h:ch};
-    if(kind==='mission'&&['floor','platform'].includes(c.type))box.w=cw+1;
-    if(c.type==='floor'&&kind==='mission')box.h=Math.max(24,ch);
-    if(c.type==='platform') {box.h=kind==='mission'?24:Math.max(14,ch*.28);if(kind==='mission')box.y+=ch*.5;}
-    if(c.type==='lift') { box.h=kind==='mission'?24:ch; box.dynamic=true; }
-    if(c.type==='door') {
-      box.h=kind==='mission'?Math.max(132,ch*2.6):Math.max(116,ch*2.5);
-      box.w=kind==='mission'?Math.max(48,cw*.32):Math.min(68,cw*.44);
-      box.x=c.x*cw+(kind==='mission'?cw*.34:cw/2-box.w/2);box.y=(c.y+1)*ch-box.h;
-    }
-    if(c.type==='hazard') {box.y+=ch*(kind==='mission'?.65:.58);box.h=ch*(kind==='mission'?.35:.42);}
-    if(c.type==='spawn') {
-      box.w=bounds.actorWidth;box.h=bounds.actorHeight;
-      box.x=c.x*cw+(kind==='mission'?cw*.35:cw/2-22);
-      box.y=(c.y+1)*ch-box.h;
-    }
-    if(['floor','platform','wall','door','hazard','spawn','lift'].includes(c.type))geometry.push(box);
-  }
+  const projection = { schema: 2, kind, size: [...room.size], tiles: nativeTiles(room) };
+  const geometry = kind === 'mission' ? missionGeometry(projection, cells, bounds) : shipGeometry(projection, cells, bounds);
   const solids=geometry.filter(g=>['floor','platform','wall','door'].includes(g.type));
   const platforms=geometry.filter(g=>['floor','platform'].includes(g.type));
   for(const spawn of geometry.filter(g=>g.type==='spawn')) {
@@ -51,9 +89,7 @@ export function inspectForgePlaytestV136(input) {
     if(supported<spawn.x+spawn.w-.01)add('error','native-spawn-support','Le pied du Marine n’est pas entièrement supporté par une surface fixe.',cell);
   }
   if(kind==='mission') {
-    if(room.size[0]>64||room.size[1]>36)add('error','native-grid-capacity','Mission : le compilateur publié est limité à 64 × 36. Un plan plus grand serait tronqué ou remplacé par le niveau par défaut.');
-    add('warning','native-reference-scenario','Mission : le moteur publié conserve des conditions du scénario de référence. Ce contrôle ne garantit pas que son objectif soit terminable.');
-    if(counts.ladder)add('warning','native-ladder-extension','Les marqueurs d’échelle Mission s’étendent sur quatre cases dans le moteur publié ; vérifier les raccords en jeu.');
+    if(counts.ladder)add('warning','native-ladder-extension','Les marqueurs d’échelle Mission s’étendent sur quatre cases, dans les limites du niveau ; vérifier les raccords en jeu.');
     if(counts.objective>1)add('error','native-objective-capacity','Mission : le moteur utilise un seul objectif par salle. Les objectifs supplémentaires seraient ignorés.');
     if(counts.terminal>2)add('error','native-terminal-capacity','Mission : deux terminaux maximum (alimentation puis archive). Les suivants ne sont pas compilés.');
     if(counts.vehicle>1)add('error','native-vehicle-capacity','Mission : un seul véhicule est pris en charge par salle.');

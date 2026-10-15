@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { WEAPONS } from './content-core-v50.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
@@ -97,7 +98,8 @@ export function resolvePlayerActionStateV127({ actor, sample = null, surface = '
     elapsed = duration * clockProgress(sample, 'hurt', Math.max(finite(actor.v52HurtClock), finite(actor.shockClock)), duration);
   } else if (finite(actor.meleeClock) > 0) {
     mode = actor.meleeKind === 'rifle-bash' ? 'rifle-bash' : actor.meleeKind === 'defense'
-      || actor.meleeKind === 'melee-defense' ? 'melee-defense' : actor.meleeKind === 'knife-attack' ? 'knife-attack' : null;
+      || actor.meleeKind === 'melee-defense' ? 'melee-defense' : actor.meleeKind === 'knife-attack' ? 'knife-attack'
+        : actor.meleeKind === 'throw-grenade' ? 'throw-grenade' : null;
     if (!mode) return freeze({ schema: 127, eligible: false, reason: 'unsupported-melee-action' });
     kind = mode; source = 'melee-clock'; duration = mode === 'rifle-bash' ? .48 : .42;
     elapsed = duration * clockProgress(sample, mode, actor.meleeClock, duration);
@@ -125,7 +127,7 @@ export function resolvePlayerActionStateV127({ actor, sample = null, surface = '
   } else return freeze({ schema: 127, eligible: false, reason: 'no-active-action' });
   // Airborne hurt/melee preserve their airborne legs. Stable field work must
   // never draw a kneeling operator suspended over a ladder or ledge.
-  if (actor.grounded === false && !['hurt', 'knife-attack', 'rifle-bash', 'melee-defense'].includes(mode)) {
+  if (actor.grounded === false && !['hurt', 'knife-attack', 'rifle-bash', 'melee-defense', 'throw-grenade'].includes(mode)) {
     return freeze({ schema: 127, eligible: false, reason: 'unstable-field-action' });
   }
   const progress = clamp(elapsed / duration);
@@ -142,7 +144,7 @@ function poseActor(actor, action) {
     shockClock: 0, fieldActionV124: null, placeableActionV124: null, v52FireClock: 0,
     reloading: false, tacticalReload: null, aiming: true, aimingV124: true, coverV124: null,
     crouching: action.groundedPose || Boolean(actor.crouching),
-    vx: ['hurt', 'knife-attack', 'rifle-bash', 'melee-defense'].includes(action.mode) ? finite(actor.vx) : 0,
+    vx: ['hurt', 'knife-attack', 'rifle-bash', 'melee-defense', 'throw-grenade'].includes(action.mode) ? finite(actor.vx) : 0,
     weaponRigMotionV125: { ...(actor.weaponRigMotionV125 || {}), shotAt: -Infinity } };
 }
 
@@ -237,19 +239,32 @@ function actionHands(rig, observed, action, options) {
       local('near', 18, 37), .34 / 222, .24 + (options.reducedMotion ? 0 : .12 * cycle) * envelope, rig);
     props = [prop]; near = prop.grip; far = prop.support; nearKind = farKind = 'grip';
   } else if (mode === 'cutting-torch') {
-    const prop = makeProp(TORCH, { x: 0, y: 0, width: TORCH.sourceWidth, height: TORCH.sourceHeight },
+    const equipped = resolveHeldWeaponProfileV125(options.weaponDescriptor);
+    const torch = equipped?.type === 'tool' && equipped.canonicalName === TORCH.canonicalName ? equipped : TORCH;
+    const prop = makeProp(torch, { x: 0, y: 0, width: torch.sourceWidth, height: torch.sourceHeight },
       // The V125 generic support pivot falls in transparent space below this
       // bent nozzle. The active tool hand holds the measured regulator body.
-      sourcePixel(TORCH, TORCH.gripPivot), point(635, 456), local('near', 23, 18),
-      TORCH.sizeRatio / (TORCH.alphaBounds[2] - TORCH.alphaBounds[0]), -.06 + cycle * .025 * envelope, rig);
+      sourcePixel(torch, torch.gripPivot), point(635, 456), local('near', 23, 18),
+      torch.sizeRatio / (torch.alphaBounds[2] - torch.alphaBounds[0]), -.06 + cycle * .025 * envelope, rig);
     props = [prop]; near = prop.grip; far = prop.support; nearKind = farKind = 'grip';
   } else if (mode === 'knife-attack') {
     const strike = p < .24 ? smooth(p / .24) * -.22 : p < .60 ? smooth((p - .24) / .36) : 1 - smooth((p - .60) / .40);
     const angle = -.90 + 1.05 * Math.max(0, strike);
-    const prop = makeProp(KNIFE, { x: 0, y: 0, width: KNIFE.sourceWidth, height: KNIFE.sourceHeight },
-      sourcePixel(KNIFE, KNIFE.gripPivot), null, local('near', 20 + 35 * strike, 8 + 2 * strike),
-      KNIFE.sizeRatio / (KNIFE.alphaBounds[2] - KNIFE.alphaBounds[0]), angle, rig);
-    props = [prop]; near = prop.grip; nearKind = 'grip'; far = local('far', 8, 22);
+    const equipped = resolveHeldWeaponProfileV125(options.weaponDescriptor);
+    const implement = equipped?.portable && equipped.type === 'melee' ? equipped : KNIFE;
+    const length = implement.sizeAxis === 'height' ? implement.alphaBounds[3] - implement.alphaBounds[1]
+      : implement.alphaBounds[2] - implement.alphaBounds[0];
+    const prop = makeProp(implement, { x: 0, y: 0, width: implement.sourceWidth, height: implement.sourceHeight },
+      sourcePixel(implement, implement.gripPivot), implement.supportPivot ? sourcePixel(implement, implement.supportPivot) : null,
+      local('near', 20 + 35 * strike, 8 + 2 * strike), implement.sizeRatio / length, angle, rig);
+    props = [prop]; near = prop.grip; nearKind = 'grip';
+    far = prop.support || local('far', 8, 22); if (prop.support) farKind = 'grip';
+  } else if (mode === 'throw-grenade') {
+    // The simulation has already released the actual grenade/disc. Draw only
+    // the follow-through; keeping its source image in this hand would duplicate
+    // the projectile now moving through the world.
+    near = local('near', 36 - 18 * p, -5 + 32 * p);
+    far = local('far', 5, 25);
   } else if (mode === 'rifle-bash') {
     const profile = resolveHeldWeaponProfileV125(options.weaponDescriptor);
     if (!profile?.portable || ['throwable', 'melee', 'tool', 'bow'].includes(profile.type)) reason = 'bash-weapon-unavailable';
@@ -350,7 +365,7 @@ export function drawPlayerActionRigV127(ctx, { actionRig, appearance, images } =
     for (const prop of actionRig.props) {
       const { a, b, c, d, e, f } = prop.matrix, rect = prop.sourceRect;
       ctx.save(); ctx.transform(a, b, c, d, e, f);
-      ctx.drawImage(imageFrom(images, prop.imageKey), rect.x, rect.y, rect.width, rect.height,
+      ctx.drawImage(resolveSpriteDrawableV134(imageFrom(images, prop.imageKey)), rect.x, rect.y, rect.width, rect.height,
         rect.x, rect.y, rect.width, rect.height); ctx.restore();
     }
   };

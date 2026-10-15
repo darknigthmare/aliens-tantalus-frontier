@@ -156,6 +156,78 @@ test('every declared stance foot stays at the same world contact while the opera
   assert.ok(plantedPairs > 3500);
 });
 
+test('walk/run transitions preserve both current trajectories and settle corrections only during actual movement', () => {
+  for (const surface of ['mission', 'hub', 'bioforge']) for (const facing of [-1, 1])
+    for (const direction of [-1, 1]) for (const [from, to] of [[200, 300], [300, 200]]) {
+      let subject = actor({ vx: direction * from, facing });
+      let state = advancePlayerLocomotionStateV129(null, subject, 0, { surface });
+      for (let tick = 1; tick <= 50; tick++) {
+        subject = { ...subject, x: subject.x + direction * .6 };
+        state = advancePlayerLocomotionStateV129(state, subject, tick / 120, { surface });
+      }
+      const continuedActor = { ...subject, x: subject.x + direction * .3 };
+      const continued = advancePlayerLocomotionStateV129(state, continuedActor, .43, { surface });
+      subject = { ...continuedActor, vx: direction * to };
+      const changed = advancePlayerLocomotionStateV129(state, subject, .43, { surface });
+      assert.notEqual(changed.gait, continued.gait);
+      const expected = rig(subject, { surface, locomotionState: continued });
+      let previous = rig(subject, { surface, locomotionState: changed });
+      for (const side of ['near', 'far']) samePoint(previous.legs[side].sole, expected.legs[side].sole,
+        `${surface}/${facing}/${direction}/${from}/${side}: switching speed cannot remap the current foot`);
+      assert.equal(advancePlayerLocomotionStateV129(changed, subject, .43, { surface }), changed);
+      assert.deepEqual(rig(subject, { surface, locomotionState: changed }).legs, previous.legs);
+      state = changed;
+      let planted = 0;
+      const cycleTicks = Math.ceil(changed.stride / .6);
+      // Observe two cycles with the shorter natural running stance, retaining
+      // the same exact-contact sample threshold and the one-cycle deadline.
+      for (let tick = 1; tick <= cycleTicks * 2 + 1; tick++) {
+        subject = { ...subject, x: subject.x + direction * .6 };
+        state = advancePlayerLocomotionStateV129(state, subject, .43 + tick / 120, { surface });
+        const current = rig(subject, { surface, locomotionState: state });
+        for (const side of ['near', 'far']) if (current.contacts.feet[side].planted && previous.contacts.feet[side].planted) {
+          samePoint(current.legs[side].sole, previous.legs[side].sole,
+            `${surface}/${facing}/${direction}/${from}/${tick}/${side}: a planted boot cannot slide`);
+          planted++;
+        }
+        if (tick === cycleTicks) for (const entry of Object.values(state.gaitTransition.feet)) {
+          assert.ok(entry.swingTravel >= entry.swingSpan, 'The first complete stride absorbs horizontal correction.');
+          assert.ok(entry.travel >= state.stride * .25, 'Vertical correction ends within its first short travel window.');
+        }
+        previous = current;
+      }
+      assert.ok(planted > 100);
+      for (const entry of Object.values(state.gaitTransition.feet)) {
+        assert.ok(entry.swingTravel >= entry.swingSpan, 'A complete stride absorbs the horizontal correction.');
+        assert.ok(entry.travel >= state.stride * .25, 'The free foot completes its short vertical transition.');
+      }
+    }
+});
+
+test('changing speed at a stopped swing boundary cannot slide the landed boot when movement resumes', () => {
+  for (const direction of [-1, 1]) for (const ticks of [18, 19, 78]) {
+    let subject = actor({ vx: direction * 300 });
+    let state = advancePlayerLocomotionStateV129(null, subject, 0);
+    for (let tick = 1; tick <= ticks; tick++) {
+      subject = { ...subject, x: subject.x + direction * .6 };
+      state = advancePlayerLocomotionStateV129(state, subject, tick / 120);
+    }
+    const expected = rig(subject, { locomotionState: advancePlayerLocomotionStateV129(state, subject, 2) });
+    subject = { ...subject, vx: direction * 200 };
+    state = advancePlayerLocomotionStateV129(state, subject, 2);
+    const stopped = rig(subject, { locomotionState: state });
+    for (const side of ['near', 'far']) samePoint(stopped.legs[side].sole, expected.legs[side].sole);
+    subject = { ...subject, x: subject.x + direction * .6 };
+    state = advancePlayerLocomotionStateV129(state, subject, 2 + 1 / 120);
+    const resumed = rig(subject, { locomotionState: state });
+    for (const side of ['near', 'far']) if (stopped.contacts.feet[side].planted && resumed.contacts.feet[side].planted) {
+      samePoint(resumed.legs[side].sole, stopped.legs[side].sole);
+    }
+    const crouching = advancePlayerLocomotionStateV129(state, { ...subject, crouching: true }, 2.02);
+    assert.equal(crouching.gaitTransition, null, 'Changing posture discards the unrelated stride transition.');
+  }
+});
+
 test('all ground phases retain constant anatomical lengths and clear the floor in every surface', () => {
   for (const surface of ['mission', 'hub', 'bioforge']) for (const facing of [-1, 1])
     for (const crouching of [false, true]) for (const vx of [-300, -200, 0, 200, 300]) for (let d = 0; d < 100; d += 3.1) {

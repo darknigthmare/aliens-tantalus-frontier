@@ -50,6 +50,8 @@ import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-c
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
+import { getBioforgeAdmissionV132, getBioforgeAdmissionForSheetV132, isBioforgeAdmissionImageReadyV132 } from './bioforge-admissions-v132.js';
+import { captureBioforgeTacticsV132, restoreBioforgeTacticsV132 } from './bioforge-tactics-state-v132.js';
 
 export const BIOFORGE_SEAL_SECONDS_V80 = 0.72;
 export const BIOFORGE_PRINT_INTERVAL_SECONDS_V80 = 0.46;
@@ -218,6 +220,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
           this.bioforgePhaseClockV80 = saved?.phaseClock || 0;
           this.bioforgeTransferStageV80 = saved?.transferStage || 0;
           this.rebuildBioforgeSpecimensV80(saved?.physicalV87);
+          if(saved?.enemyTacticsV132) restoreBioforgeTacticsV132(this,saved.enemyTacticsV132,saved.physicalV87);
           if (saved?.physicalV87) restoreBioforgePlayerPhysicalV87(this.player, saved.physicalV87.player);
           this.bullets = [];
           this.hostileProjectiles = [];
@@ -248,13 +251,15 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     captureBioforgeRuntimeStateV81() {
       if (!this.player) return null;
       const physicalV87 = captureBioforgePhysicalV87(this);
+      const enemyTacticsV132 = captureBioforgeTacticsV132(this,physicalV87);
       return {
         schema: 81,
         seed: this.bioforgeSeedV80,
         phaseClock: this.bioforgePhaseClockV80,
         transferStage: this.bioforgeTransferStageV80,
         physicalV87,
-        ...(physicalV87 ? {} : { physicalInvalidV87: true }),
+        enemyTacticsV132,
+        ...(physicalV87 && enemyTacticsV132 ? {} : { physicalInvalidV87: true }),
         player: {
           x: this.player.x,
           y: this.player.y,
@@ -311,6 +316,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         { x: arena.x + arena.w, y: arena.y, w: 24, h: arena.h }
       ];
       this.missionLevelRuntime = null;
+      this.enemyTacticsV130 = {schema:130,time:0,noiseSerial:0,noises:[],entries:0,transitions:0};
+      this.rearEntrancesV130 = [];
       this.missionLevelBounds = { width: level.world.width, height: level.world.height };
       this.inventory = { medkits: 3, salvage: 0, securityKeys: 0 };
       this.accessibilityRuntime ||= { screenShake: 0, subtitles: false, reducedMotion: false };
@@ -525,6 +532,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         const purge = this.purgeBioforgeV80('invalid-specimen-resume');
         return { ...this.getBioforgeSnapshotV80(), started: false, purge };
       }
+      if(runtimeV81?.enemyTacticsV132 && !restoreBioforgeTacticsV132(this,runtimeV81.enemyTacticsV132,runtimeV81.physicalV87)) {
+        const purge=this.purgeBioforgeV80('invalid-tactics-resume');
+        return {...this.getBioforgeSnapshotV80(),started:false,purge};
+      }
       if (runtimeV81?.physicalV87 && !restoreBioforgePlayerPhysicalV87(this.player, runtimeV81.physicalV87.player)) {
         const purge = this.purgeBioforgeV80('invalid-player-resume');
         return { ...this.getBioforgeSnapshotV80(), started: false, purge };
@@ -679,6 +690,15 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       if (!roster || (!source && !supplied)) return null;
       const actor = supplied ? createUserCasteActorV87(entry, this.bioforgeLevelV80.world.floorY)
         : this.createEnemy(source, entry.index || 0, 0, this.bioforgeLevelV80.world.floorY, { boss: false, keyCarrier: false });
+      const admission = getBioforgeAdmissionV132(entry.profileId);
+      if (admission) {
+        // Use the already-authored atlas collision in world units. The frame
+        // scale and feet anchor are unchanged; no royal body is clamped down.
+        actor.w = admission.bodyWidth; actor.h = admission.bodyHeight;
+        actor.y = this.bioforgeLevelV80.world.floorY - actor.h;
+        actor.groundY = this.bioforgeLevelV80.world.floorY;
+        actor.spriteHitbox = null;
+      }
       if (supplied?.locomotion === 'aquatic') {
         const bounds = this.bioforgeLevelV80.arenaBounds, floor = this.bioforgeLevelV80.world.floorY;
         this.userPoseAquaticHabitatsV95 = [{ id: 'bioforge-contained-water-v95', kind: 'water', active: true,
@@ -760,6 +780,15 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       const nextQueuedV95 = session?.queue.find(entry => entry.status === 'queued');
       const nextPose = session?.phase === 'printing'
         ? getEnemyDedicatedPoseV96(nextQueuedV95?.profileId) || getEnemyUserCasteV87(nextQueuedV95?.profileId, nextQueuedV95?.visualStateV95) : null;
+      const admission = session?.phase === 'printing' && getBioforgeAdmissionV132(nextQueuedV95?.profileId);
+      const nextAtlas = admission && resolveSpriteSheet(admission.sheetId);
+      if (nextAtlas && !isBioforgeAdmissionImageReadyV132(this.images.get(nextAtlas.imageKey), admission)) {
+        void this.ensureEnemyAtlas(nextAtlas);
+        const reason = this.images.get(nextAtlas.imageKey)?.naturalWidth > 0 ? 'atlas-invalid-dimensions-v132' : 'user-pose-loading';
+        this.bioforgeUserPoseIssueV87 = reason;
+        this.bioforgeBlockedV87 = reason;
+        return { applied: false, reason, state: this.bioforgeRootV80, session };
+      }
       if (nextPose && !isUserCasteImageReadyV87(this.images.get(nextPose.imageKey), nextPose)) {
         void this.ensureEnemyAtlas(nextPose);
         const reason = this.getUserPoseIssueV87(nextPose);
@@ -820,6 +849,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.bioforgeUpdatingV87 = true;
       try {
       this.animationTime += dt;
+      this.enemyTacticsV130.time += dt;
+      for(const noise of this.enemyTacticsV130.noises)noise.remaining=Math.max(0,noise.remaining-dt);
+      this.enemyTacticsV130.noises=this.enemyTacticsV130.noises.filter(noise=>noise.remaining>0);
       this.mission.elapsed += dt;
       this.bioforgePhaseClockV80 += dt;
       this.queueJump = Math.max(0, Number(this.queueJump || 0) - dt);
@@ -928,6 +960,13 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       return (this.doors || []).filter(door => !door.open).map(({ id, x, y, w, h }) => ({ id, x, y, w, h }));
     }
 
+    getDoorRenderState(door,options={}) {
+      const visual=super.getDoorRenderState?.(door,options)||{};
+      // Awareness and physical combat share the lab's authored 40px bulkhead.
+      // The mission atlas scale must not turn it into an invisible 554px wall.
+      return {...visual,x:door.x,y:door.y,w:door.w,h:door.h};
+    }
+
     resolveBioforgeVerticalV80(actor, previousBottom) {
       for (const platform of this.platforms || []) {
         const horizontal = actor.x + actor.w > platform.x + 3 && actor.x < platform.x + platform.w - 3;
@@ -973,6 +1012,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         bioforgeProjectileV80: true
       });
       this.emitCommittedWeaponShotV124?.(actor, this.bullets[this.bullets.length - 1], this.weaponDescriptorV124?.(actor));
+      this.emitEnemyNoiseV130?.(actor,780,'gunshot');
       this.audio?.shot?.();
       this.emitBioforgeV80({ type: 'bioforge-shot', sessionId: this.bioforgeRootV80.activeSession?.id });
       this.persistBioforgeV80({ type: 'bioforge-shot-committed' });
@@ -1359,7 +1399,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       const session = this.bioforgeRootV80?.activeSession;
       if (['sealing', 'printing'].includes(session?.phase)) {
         const queued = session.queue.find(entry => entry.status === 'queued');
-        const next = getEnemyDedicatedPoseV96(queued?.profileId) || getEnemyUserCasteV87(queued?.profileId, queued?.visualStateV95);
+        const next = getEnemyDedicatedPoseV96(queued?.profileId) || getEnemyUserCasteV87(queued?.profileId, queued?.visualStateV95)
+          || resolveSpriteSheet(getBioforgeAdmissionV132(queued?.profileId)?.sheetId);
         if (next) imported.push(next);
       }
       return [...new Map([...sheets, ...imported].map(sheet => [sheet.imageKey, sheet])).values()];
@@ -1376,9 +1417,14 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       super.refreshEnemyAtlasAvailabilityV65();
       const missing = this.getVisibleEnemyAtlasSheetsV65().find(sheet =>
         sheet.visualMode === 'static-pose' && !isUserCasteImageReadyV87(this.images.get(sheet.imageKey), sheet));
-      this.bioforgeUserPoseIssueV87 = missing ? this.getUserPoseIssueV87(missing) : null;
+      const atlas = this.getVisibleEnemyAtlasSheetsV65().find(sheet => {
+        const admitted = getBioforgeAdmissionForSheetV132(sheet);
+        return admitted && !isBioforgeAdmissionImageReadyV132(this.images.get(sheet.imageKey), admitted);
+      });
+      this.bioforgeUserPoseIssueV87 = missing ? this.getUserPoseIssueV87(missing)
+        : atlas ? this.images.get(atlas.imageKey)?.naturalWidth > 0 ? 'atlas-invalid-dimensions-v132' : 'user-pose-loading' : null;
       // Incomplete or malformed assets never produce invisible combat.
-      if (missing) this.enemyAtlasLoadingPausedV65 = true;
+      if (missing || atlas) this.enemyAtlasLoadingPausedV65 = true;
     }
 
     draw() {
@@ -1410,7 +1456,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         ctx.font = '16px monospace';
         ctx.fillText(this.bioforgeUserPoseIssueV87 === 'user-pose-loading'
           ? 'CHARGEMENT DE LA POSE FOURNIE · SIMULATION EN ATTENTE'
-          : 'POSE INDISPONIBLE OU INVALIDE · RÉESSAYER EN LIGNE OU PURGER', 36, 121);
+          : 'IMAGE DU SPÉCIMEN INDISPONIBLE OU INVALIDE · RÉESSAYER EN LIGNE OU PURGER', 36, 121);
       }
       ctx.restore();
     }

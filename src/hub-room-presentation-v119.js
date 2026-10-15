@@ -3,16 +3,25 @@
  * A room without a reviewed profile stays orthographic rather than silently
  * acquiring depth. Layers name existing renderer responsibilities, not assets
  * claimed to have been created. */
-const profile = (roomId, presentationMode, depthProfile, reason, farFactor = .025) => Object.freeze({
-  roomId, presentationMode, depthProfile, reason,
+import { getHubRoomProjectionV139 } from './hub-room-projection-v139.js';
+const profile = (roomId, legacyPresentationMode, depthProfile, legacyReason, farFactor = .025) => {
+  const projectionV139 = getHubRoomProjectionV139(roomId);
+  const presentationMode = projectionV139.mode;
+  return Object.freeze({
+  roomId, presentationMode, depthProfile,
+  projectionV139, legacyPresentationMode, legacyReason,
   gameplayPlane: '2d', coordinatePolicy: 'preserve-existing',
   layers: Object.freeze(['far', 'architecture', 'gameplay', 'light', 'foreground']),
   perspectiveFloor: presentationMode === '2.5d',
   foreground: 'below-walk-rail-only',
+  horizonY: null,
+  propPlane: 'rear-with-optional-one-way-top',
+  compositionPolicyV133: 'room-purpose-specific-rear-instrumentation',
   cameraProfile: Object.freeze({ farFactor: presentationMode === '2.5d' ? farFactor : 0,
     maximumDrift: presentationMode === '2.5d' ? 18 : 0, gameplayFactor: 1, interactionFactor: 1 }),
-  referenceStatus: 'project-authored-presentation', canonStatus: 'project-adaptation'
-});
+  referenceStatus: 'project-authored-presentation', canonStatus: 'project-adaptation',
+  reason: projectionV139.reason,
+}); };
 const reviewed = [
   profile('bridge', '2.5d', 'command-observation', 'Grande passerelle : baie lointaine et plateforme de commande.', .022),
   profile('briefing', '2.5d', 'command-planning', 'Architecture profonde derrière la table ; interaction sur le plan historique.', .018),
@@ -42,7 +51,13 @@ const reviewed = [
   profile('bioforge', '2d', 'isolated-access', 'Sas d’accès technique, pas une conversion du niveau BIOFORGE.'),
   profile('animal-care', '2d', 'orthographic-animal-care', 'Logements, animaux et interactions au sol doivent rester visibles.'),
   profile('frontier-civil-counter', '2d', 'orthographic-civil-counter', 'Comptoir civil modulaire avec objets physiques rapprochés.'),
-  profile('personal-refuge', '2d', 'authored-refuge', 'Composition dédiée du refuge et stations personnelles conservées.')
+  profile('personal-refuge', '2d', 'authored-refuge', 'Composition dédiée du refuge et stations personnelles conservées.'),
+  profile('flight-control-cockpit', '2.5d', 'flight-control-observation', 'Cockpit : hublots de coque et conduite au premier plan.', .020),
+  profile('galley-service', '2d', 'compact-food-preparation', 'Cuisine de bord : préparation et rangement sur le mur de service.'),
+  profile('sanitary-bay', '2d', 'compact-crew-hygiene', 'Sanitaires compacts : appareils et rangements frontaux.'),
+  profile('engine-room', '2.5d', 'mechanical-drive-room', 'Groupes mécaniques derrière une vraie coursive de maintenance.', .021),
+  profile('water-recycling', '2d', 'compact-water-treatment', 'Filtration de l’eau et vannes sur un circuit frontal lisible.'),
+  profile('maintenance-spine', '2.5d', 'longitudinal-service-spine', 'Coursive technique traversante : distribution en fond et plateforme physique distincte.', .018)
 ];
 export const HUB_ROOM_PRESENTATIONS_V119 = Object.freeze(Object.fromEntries(reviewed.map(row => [row.roomId, row])));
 export const HUB_ROOM_PRESENTATION_IDS_V119 = Object.freeze(reviewed.map(row => row.roomId));
@@ -51,7 +66,9 @@ export function getHubRoomPresentationV119(room, enabled = true) {
   const id = typeof room === 'string' ? room : room?.id;
   const entry = HUB_ROOM_PRESENTATIONS_V119[id] || profile(id || 'unknown', '2d', 'unreviewed', 'Présentation de cette salle à définir.');
   if (enabled) return entry;
-  return Object.freeze({ ...entry, presentationMode: '2d', perspectiveFloor: false,
+  // F7 reduces background motion; it cannot change half of a compartment's
+  // projection while its furniture, doors and collision supports stay fixed.
+  return Object.freeze({ ...entry, backgroundMotionEnabled: false,
     cameraProfile: Object.freeze({ ...entry.cameraProfile, farFactor: 0, maximumDrift: 0 }) });
 }
 

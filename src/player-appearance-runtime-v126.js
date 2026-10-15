@@ -69,6 +69,10 @@ export function playerAppearanceStatusV126({ actor, appearance = actor?.appearan
         : render && !render.drawn ? render.reason || 'appearance-not-drawn' : null,
     surface: bodyRig?.surface || null, bodyFrame: bodyRig?.frame ?? null,
     bodyAtlas: bodyRig?.atlas || null,
+    humanVisualV133: bodyRig?.eligible ? {
+      schema: 133, standingHeight: bodyRig.standingHeight, poseHeight: bodyRig.poseHeight,
+      pivot: { ...bodyRig.pivot }, scaleX: bodyRig.sourceScaleX, scaleY: bodyRig.sourceScaleY
+    } : null,
     action: actionStatusV127(actionRig, render), sampledAt: bodyRig?.timeSeconds ?? null,
     transit: transitStatusV128(transitRig, render),
     locomotion: bodyRig?.locomotionV129 ? { ...bodyRig.locomotionV129,
@@ -137,7 +141,9 @@ export function withPlayerAppearanceV126(Base) {
       return resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance: actor?.appearanceV126,
         images: this.images, locomotionState: actor?.playerLocomotionStateV129,
         legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
-        groundSupport: playerAppearanceGroundSupportV129(actor, this.platforms) }).bodyRig;
+        groundSupport: playerAppearanceGroundSupportV129(actor,
+          [...(this.platforms || []), ...(this.walls || []), ...(this.covers || []),
+            ...(this.closedDoorColliders?.() || [])].filter(surface => !surface.destroyed)) }).bodyRig;
     }
 
     advancePlayerWeaponActorV125(actor) {

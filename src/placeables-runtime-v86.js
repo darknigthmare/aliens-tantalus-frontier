@@ -6,7 +6,7 @@ import { sweepProjectileAabbV83, firstProjectileObstacleV83 } from './projectile
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 
 const list = value => Array.isArray(value) ? value : [];
-const actorId = actor => String(actor?.crewId || actor?.operatorId || '');
+const actorId = actor => String(actor?.crewId || actor?.operatorId || (actor ? actor.coop ? 'coop' : 'player' : ''));
 const center = box => ({ x: box.x + box.w / 2, y: box.y + box.h / 2 });
 const overlaps = (a, b) => a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const distance = (a, b) => { const p = center(a), q = center(b); return Math.hypot(p.x - q.x, p.y - q.y); };
@@ -32,8 +32,8 @@ export function withPlaceablesRuntimeV86(Base) {
       this.placeableAttackTasksV86 = new Map();
       this.placeableActionSerialV124 = 0;
       const result = super.start(options);
-      const migration = { legacyDeployables: list(this.supportDeployments), legacyV72: options.resumeState?.gameplaySupportV72,
-        bounds: this.missionLevelBounds };
+      const migration = { legacyDeployables: list(this.supportDeployments), legacyV72: this.lastResumeResult?.applied === true ? options.resumeState?.gameplaySupportV72 : null,
+        bounds: this.missionLevelBounds, ...this.placeablesStateOptionsV86() };
       const raw = this.pendingPlaceablesResumeV86;
       this.placeablesV86 = raw
         ? restorePlaceablesStateV86(raw, this.equipmentActions, migration)
@@ -45,8 +45,16 @@ export function withPlaceablesRuntimeV86(Base) {
     }
 
     removeLegacyPlaceableProjectionsV86() {
-      this.supportDeployments = list(this.supportDeployments).filter(item => !knownCatalog(String(item.id || '').split(':')[0]));
+      this.supportDeployments = list(this.supportDeployments).filter(item => !this.isPlaceableEquipmentAdmittedV86(String(item.id || '').split(':')[0]));
     }
+
+    placeablesStateOptionsV86() { return {}; }
+    isPlaceableEquipmentAdmittedV86(id) { return knownCatalog(id); }
+    canCarryPlaceableV86() { return true; }
+    canCommitPlaceableSourceV86() { return true; }
+    onPlaceableCommittedV86() {}
+    isPlaceableGameplayEnemyV86(enemy) { return Boolean(enemy?.alive && !enemy.dormant && !enemy.ventTransit
+      && (!enemy.rearEntryV130 || enemy.rearEntryV130.phase === 'active') && (!enemy.plane || ['gameplay', 'playable'].includes(enemy.plane))); }
 
     placeableActorsV86() {
       return [this.player, this.coopEnabled ? this.coop : null, ...(this.activeSquadActors?.() || [])].filter(actor => actor?.alive);
@@ -82,11 +90,11 @@ export function withPlaceablesRuntimeV86(Base) {
     }
 
     useEquipment(catalogId, actor = this.player) {
-      if (!knownCatalog(catalogId)) return super.useEquipment(catalogId, actor);
+      if (!this.isPlaceableEquipmentAdmittedV86(catalogId)) return super.useEquipment(catalogId, actor);
       if (!this.canManipulatePlaceableV86(actor) || this.isPlaceableBusyV86(actor)) return false;
       const reserved = new Set([...this.placeablePreviewsV86.values(), ...this.placeableTasksV86.values()].map(item => item.instanceId));
       const existing = this.placeablePreviewsV86.get(actorId(actor));
-      const instance = this.placeablesV86?.instances.find(item => item.catalogId === catalogId && item.status === 'carried'
+      const instance = this.placeablesV86?.instances.find(item => item.catalogId === catalogId && item.status === 'carried' && this.canCarryPlaceableV86(item, actor)
         && (!reserved.has(item.instanceId) || item.instanceId === existing?.instanceId));
       if (!instance) return false;
       this.placeablePreviewsV86.set(actorId(actor), { instanceId: instance.instanceId, actorCrewId: actorId(actor), catalogId, kind: instance.kind });
@@ -98,7 +106,7 @@ export function withPlaceablesRuntimeV86(Base) {
     refreshPlaceablePreviewV86(actor) {
       const preview = this.placeablePreviewsV86?.get(actorId(actor));
       const instance = preview && this.placeableInstanceV86(preview.instanceId);
-      if (!instance || instance.status !== 'carried') return null;
+      if (!instance || instance.status !== 'carried' || !this.canCarryPlaceableV86(instance, actor)) return null;
       const facing = actor.facing < 0 ? -1 : 1;
       const x = facing > 0 ? actor.x + actor.w + 18 : actor.x - instance.w - 18;
       const y = actor.y + actor.h - instance.h;
@@ -140,7 +148,7 @@ export function withPlaceablesRuntimeV86(Base) {
       const instance = this.placeableInstanceV86(instanceId);
       if (!this.canManipulatePlaceableV86(actor) || actor.grounded !== true || this.isPlaceableBusyV86(actor) || !live(instance) || distance(actor, instance) > 140) return false;
       if ([...this.placeableTasksV86.values()].some(task => task.instanceId === instanceId)) return false;
-      if (!this.placeableLineClearV86(center(actor), center(instance))) return false;
+      if (!this.placeableLineClearV86(center(actor), center(instance), { ignoreInstanceId: instanceId })) return false;
       this.placeablePreviewsV86.delete(actorId(actor));
       this.placeableTasksV86.set(actorId(actor), { instanceId, catalogId: instance.catalogId, kind: instance.kind, type: 'recover',
         actorCrewId: actorId(actor), serial: ++this.placeableActionSerialV124, elapsed: 0, duration: getPlaceableDefinitionV86(instance.catalogId).foldSeconds, x: instance.x, y: instance.y,
@@ -174,7 +182,8 @@ export function withPlaceablesRuntimeV86(Base) {
         if (Math.hypot(actor.x - task.startedX, actor.y - task.startedY) > 12) { cancel('movement'); continue; }
         const placement = task.type === 'deploy'
           ? validatePlaceablePlacementV86({ instance, actor, x: task.x, y: task.y, facing: task.facing, world: this.placeableWorldV86() }) : null;
-        if (task.type === 'deploy' ? !placement.ok : !live(instance) || distance(actor, instance) > 140 || !this.placeableLineClearV86(center(actor), center(instance))) { cancel(placement?.reason || 'target-unavailable'); continue; }
+        if (task.type === 'deploy' ? !placement.ok || !this.canCarryPlaceableV86(instance, actor) || !this.canCommitPlaceableSourceV86(instance, actor)
+          : !live(instance) || distance(actor, instance) > 140 || !this.placeableLineClearV86(center(actor), center(instance), { ignoreInstanceId: instance.instanceId })) { cancel(placement?.reason || 'target-unavailable'); continue; }
         actor.vx = 0;
         task.elapsed = Math.min(task.duration, task.elapsed + Math.max(0, delta));
         actor.placeableActionV124 = { kind: task.type, serial: task.serial, elapsed: task.elapsed, duration: task.duration, progress: task.elapsed / task.duration };
@@ -190,6 +199,7 @@ export function withPlaceablesRuntimeV86(Base) {
           const equipment = this.equipmentActions.get(instance.catalogId);
           if (equipment) { equipment.remaining = Math.max(0, equipment.remaining - 1); equipment.uses += 1; }
         }
+        this.onPlaceableCommittedV86(instance, actor, task.type, result);
         this.onEvent?.({ type: task.type === 'deploy' ? 'placeable-deployed' : 'placeable-recovered', instanceId: task.instanceId,
           catalogId: instance.catalogId, crewId: id, health: instance.health, ammo: instance.ammo,
           message: task.type === 'deploy' ? `${instance.name} installé.` : `${instance.name} récupéré sans réparation ni recharge.` });
@@ -210,33 +220,33 @@ export function withPlaceablesRuntimeV86(Base) {
         // fold resumes the same object without refilling or rearming it.
         if (folding.has(instance.instanceId)) continue;
         if (instance.kind === 'sentry') this.updatePlaceableSentryV86(instance, delta);
-        else if (instance.kind === 'containment') {
+        else if (instance.kind === 'containment' && instance.modeV132 !== 'barrier') {
           if (instance.status === 'spent') continue;
           instance.duration = Math.max(0, (instance.duration || 0) - delta);
-          for (const enemy of list(this.enemies).filter(enemy => enemy.alive && !enemy.dormant && !enemy.ventTransit && overlaps(enemy, instance)
+          for (const enemy of list(this.enemies).filter(enemy => this.isPlaceableGameplayEnemyV86(enemy) && overlaps(enemy, instance)
             && this.placeableLineClearV86(center(instance), center(enemy)))) {
             enemy.supportSlowFactorV72 = Math.min(enemy.supportSlowClockV72 > 0 ? enemy.supportSlowFactorV72 || 1 : 1, 0.45);
             enemy.supportSlowClockV72 = Math.max(enemy.supportSlowClockV72 || 0, 0.12);
           }
           if (instance.duration <= 0) { instance.status = 'spent'; this.onEvent?.({ type: 'placeable-spent', instanceId: instance.instanceId, catalogId: instance.catalogId, message: `${instance.name} épuisé ; le boîtier reste au sol.` }); }
         } else if (instance.armed && instance.status !== 'spent') {
-          const enemy = list(this.enemies).find(enemy => enemy.alive && !enemy.dormant && !enemy.ventTransit && overlaps(enemy, instance)
+          const enemy = list(this.enemies).find(enemy => this.isPlaceableGameplayEnemyV86(enemy) && overlaps(enemy, instance)
             && this.placeableLineClearV86(center(instance), center(enemy)));
           if (!enemy) continue;
+          instance.armed = false; instance.status = 'spent';
           if (instance.damage > 0) this.applyEnemyDamage(enemy, instance.damage, { owner: this.placeableActorV86(instance.ownerCrewId), ownerCrewId: instance.ownerCrewId, kind: instance.kind });
           enemy.supportSlowFactorV72 = Math.min(enemy.supportSlowClockV72 > 0 ? enemy.supportSlowFactorV72 || 1 : 1, instance.kind === 'cryo-trap' ? 0.38 : 0.65);
           enemy.supportSlowClockV72 = Math.max(enemy.supportSlowClockV72 || 0, instance.kind === 'cryo-trap' ? 6 : 3);
           enemy.staggerClock = Math.max(enemy.staggerClock || 0, 1.5);
-          instance.armed = false; instance.status = 'spent';
           this.onEvent?.({ type: 'placeable-spent', instanceId: instance.instanceId, catalogId: instance.catalogId, targetId: enemy.id, message: `${instance.name} déclenché ; aucune recharge automatique.` });
         }
       }
     }
 
-    placeableLineClearV86(from, to) {
+    placeableLineClearV86(from, to, { ignoreInstanceId = null } = {}) {
       return !firstProjectileObstacleV83({ ...from, w: 0, h: 0 }, { x: to.x - from.x, y: to.y - from.y }, {
         // A one-way walking platform remains opaque for targeting and hand reach from either side.
-        walls: [...list(this.walls), ...list(this.covers), ...list(this.platforms)].filter(item => !item.destroyed),
+        walls: [...list(this.walls), ...list(this.covers), ...list(this.platforms)].filter(item => !item.destroyed && (!ignoreInstanceId || item.placeableInstanceIdV132 !== ignoreInstanceId)),
         doors: list(this.doors), platforms: [] });
     }
 
@@ -244,7 +254,7 @@ export function withPlaceablesRuntimeV86(Base) {
       instance.cooldown = instance.cooldown > 0 ? instance.cooldown - Math.max(0, delta) : 0;
       if (!(instance.ammo > 0) || instance.cooldown > 1e-8) { instance.cooldown = Math.max(0, instance.cooldown); return; }
       const muzzle = { x: instance.x + instance.w * (instance.facing < 0 ? 0.12 : 0.88), y: instance.y + instance.h * 0.24 };
-      const target = list(this.enemies).filter(enemy => enemy.alive && !enemy.dormant && !enemy.ventTransit).map(enemy => {
+      const target = list(this.enemies).filter(enemy => this.isPlaceableGameplayEnemyV86(enemy)).map(enemy => {
         const point = center(enemy), dx = point.x - muzzle.x, dy = point.y - muzzle.y;
         const angle = Math.atan2(dy, dx), offset = Math.atan2(Math.sin(angle - (instance.facing < 0 ? Math.PI : 0)), Math.cos(angle - (instance.facing < 0 ? Math.PI : 0)));
         return { enemy, point, angle, offset, distance: Math.hypot(dx, dy) };
@@ -318,17 +328,22 @@ export function withPlaceablesRuntimeV86(Base) {
     }
 
     updateEnemy(enemy, delta) {
-      if (!this.placeablesV86 || !enemy?.alive || enemy.dormant || enemy.ventTransit || enemy.behavior === 'egg' || /ovomorph|facehugger|ceto/i.test(enemy.visualSheetId || '')) {
+      return this.updateEnemyPlaceableAttackV86(enemy, delta) ? undefined : super.updateEnemy(enemy, delta);
+    }
+
+    updateEnemyPlaceableAttackV86(enemy, delta, predicate = () => true) {
+      if (!this.placeablesV86 || !this.isPlaceableGameplayEnemyV86(enemy) || enemy.behavior === 'egg' || /ovomorph|facehugger|ceto/i.test(enemy.visualSheetId || '')) {
         if (this.placeableAttackTasksV86?.delete(enemy?.id) && enemy) enemy.attacking = false;
-        return super.updateEnemy(enemy, delta);
+        return false;
       }
       const current = this.placeableAttackTasksV86.get(enemy.id);
-      const target = current ? this.placeableInstanceV86(current.instanceId) : list(this.placeablesV86.instances).filter(live)
-        .filter(item => distance(enemy, item) < Math.max(64, enemy.w / 2 + item.w / 2 + 24) && this.placeableLineClearV86(center(enemy), center(item)))
+      if (current && !predicate(this.placeableInstanceV86(current.instanceId))) return false;
+      const target = current ? this.placeableInstanceV86(current.instanceId) : list(this.placeablesV86.instances).filter(live).filter(predicate)
+        .filter(item => distance(enemy, item) < Math.max(64, enemy.w / 2 + item.w / 2 + 24) && this.placeableLineClearV86(center(enemy), center(item), { ignoreInstanceId: item.instanceId }))
         .sort((a, b) => distance(enemy, a) - distance(enemy, b))[0];
       const incapacitated = ['staggerClock', 'hurtClock', 'jammedClock', 'v52HurtClock', 'stunClock'].some(key => Number(enemy[key]) > 0);
       if (!target || !live(target) || incapacitated || distance(enemy, target) > Math.max(64, enemy.w / 2 + target.w / 2 + 30)
-        || !this.placeableLineClearV86(center(enemy), center(target))) {
+        || !this.placeableLineClearV86(center(enemy), center(target), { ignoreInstanceId: target.instanceId })) {
         if (this.placeableAttackTasksV86.delete(enemy.id)) {
           enemy.attacking = false;
           // An interrupted object windup cannot turn into an immediate legacy hit against a Marine in the same frame.
@@ -336,13 +351,12 @@ export function withPlaceablesRuntimeV86(Base) {
           enemy.attackClock = Math.max(enemy.attackClock || 0, recovery);
           enemy.rangedClock = Math.max(enemy.rangedClock || 0, recovery);
         }
-        const result = super.updateEnemy(enemy, delta);
         if (current && incapacitated) enemy.attacking = false;
-        return result;
+        return false;
       }
       // A distinct, telegraphed object strike. Do not impersonate a Marine or
       // interrupt a currently committed character attack to redirect its impact.
-      if (!current && (enemy.pendingMelee || enemy.batchAttackV66 || enemy.attacking || enemy.attackClock > 0)) return super.updateEnemy(enemy, delta);
+      if (!current && (enemy.pendingMelee || enemy.batchAttackV66 || enemy.attacking || enemy.attackClock > 0)) return false;
       const attack = current || { instanceId: target.instanceId, elapsed: 0, duration: 0.35 };
       if (!current) { this.placeableAttackTasksV86.set(enemy.id, attack); this.onEvent?.({ type: 'placeable-attack-started', instanceId: target.instanceId, enemyId: enemy.id, duration: attack.duration }); }
       enemy.facing = Math.sign(center(target).x - center(enemy).x) || enemy.facing || 1;
@@ -351,6 +365,7 @@ export function withPlaceablesRuntimeV86(Base) {
         this.damagePlaceableV86(target.instanceId, Math.max(1, Number(enemy.damage) || 1), { enemyId: enemy.id });
         this.placeableAttackTasksV86.delete(enemy.id); enemy.attacking = false; enemy.attackClock = Math.max(enemy.attackClock || 0, 0.82);
       }
+      return true;
     }
 
     damagePlayer(actor, amount, options) {
@@ -385,7 +400,7 @@ export function withPlaceablesRuntimeV86(Base) {
       for (const actor of [this.player, this.coop, ...this.placeableActorsV86()].filter(Boolean)) actor.placeableActionV124 = null;
       if (this.placeablesStartingV86 || !this.placeablesV86) this.pendingPlaceablesResumeV86 = raw?.placeablesV86 || null;
       else {
-        this.placeablesV86 = restorePlaceablesStateV86(raw?.placeablesV86, this.equipmentActions, { legacyDeployables: raw?.gameplaySupportV72?.deployments, legacyV72: raw?.gameplaySupportV72, bounds: this.missionLevelBounds });
+        this.placeablesV86 = restorePlaceablesStateV86(raw?.placeablesV86, this.equipmentActions, { legacyDeployables: raw?.gameplaySupportV72?.deployments, legacyV72: raw?.gameplaySupportV72, bounds: this.missionLevelBounds, ...this.placeablesStateOptionsV86() });
         this.placeableTasksV86.clear(); this.placeablePreviewsV86.clear(); this.placeableAttackTasksV86.clear();
         this.removeLegacyPlaceableProjectionsV86();
       }

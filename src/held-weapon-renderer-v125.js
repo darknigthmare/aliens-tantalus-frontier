@@ -1,4 +1,5 @@
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
+import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, value));
@@ -13,7 +14,8 @@ const sourcePoint = (profile, pivot) => pivot ? point(pivot.x * profile.sourceWi
 const atPivot = (profile, matrix, pivot) => pivot ? transform(matrix, sourcePoint(profile, pivot)) : null;
 
 export const HELD_WEAPON_SURFACE_HEIGHTS_V125 = Object.freeze({
-  mission: 148 * 193 / 256, hub: 128 * 193 / 256, bioforge: 98 * 193 / 256
+  mission: HUMAN_VISUAL_CONTRACT_V133.standingHeight, hub: HUMAN_VISUAL_CONTRACT_V133.standingHeight,
+  bioforge: HUMAN_VISUAL_CONTRACT_V133.standingHeight
 });
 
 function unitAim(aim, actor) {
@@ -38,6 +40,11 @@ function bodyGeometry(actor, rig, surface) {
     : point(shoulder.x - facing * standingHeight * .055, shoulder.y + standingHeight * .01);
   return {
     standingHeight, shoulder, farShoulder,
+    // The admitted peek torso already raises its real shoulders. Complete the
+    // requested elevation with the hands inside their anatomical reach; do not
+    // stretch a body, move its feet or teleport a projectile above its barrel.
+    peekLift: validPoint(rig?.shoulders?.near) && actor.coverV124?.peeking
+      ? Math.max(0, peek - Math.max(0, finite(rig.shoulderPeekRise))) : 0,
     neutralGrip: validPoint(rig?.neutralGrip) ? rig.neutralGrip
       : point(shoulder.x + facing * standingHeight * .11, shoulder.y + standingHeight * .13),
     pouch: validPoint(rig?.pouch) ? rig.pouch
@@ -156,6 +163,7 @@ export function getHeldWeaponPoseV125({ actor, descriptor, aim, bodyRig = null, 
   const handY = geometry.neutralGrip.y - geometry.shoulder.y;
   let grip = point(geometry.shoulder.x + Math.cos(aimTurn) * handX - Math.sin(aimTurn) * handY,
     geometry.shoulder.y + Math.sin(aimTurn) * handX + Math.cos(aimTurn) * handY);
+  grip.y -= geometry.peekLift;
 
   const motion = actor.weaponRigMotionV125;
   const sameShotWeapon = motion && (!motion.weaponId || [profile.weaponId, profile.fallbackFor].includes(motion.weaponId));

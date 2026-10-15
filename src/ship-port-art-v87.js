@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 const ROOT = '/assets/openai/ship-animals/v87';
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -78,7 +79,7 @@ export function drawPortVendorV87(ctx, image, options = {}) {
   try {
     ctx.translate(options.x, options.feetY);
     ctx.scale((options.facing ?? 1) === PORT_ART_V87.vendor.sourceFacing ? 1 : -1, 1);
-    ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h,
+    ctx.drawImage(resolveSpriteDrawableV134(image), frame.x, frame.y, frame.w, frame.h,
       -frame.pivotX * scale, -frame.pivotY * scale, frame.w * scale, frame.h * scale);
   } finally { ctx.restore(); }
   return true;
@@ -105,6 +106,6 @@ export function drawPortPropV87(ctx, image, kind, bounds) {
   const target = getPortPropBoundsV87(kind, bounds);
   if (!target) return false;
   const [x,y,right,bottom] = PORT_PROP_RECTS_V87[kind];
-  ctx.drawImage(image, x, y, right - x, bottom - y, target.x, target.y, target.w, target.h);
+  ctx.drawImage(resolveSpriteDrawableV134(image), x, y, right - x, bottom - y, target.x, target.y, target.w, target.h);
   return true;
 }

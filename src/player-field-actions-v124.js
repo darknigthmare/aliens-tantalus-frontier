@@ -1,6 +1,7 @@
 import { isPlaceableEquipmentV86 } from './placeables-state-v86.js';
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
+import { PLAYER_CONTROLS_V124 } from './player-control-v124.js';
 
 const list = value => Array.isArray(value) ? value : [];
 const number = value => Number.isFinite(Number(value)) ? Number(value) : 0;
@@ -111,11 +112,16 @@ function effectAvailable(engine, kind, actor, magnitude) {
 }
 
 function movementRequested(engine, actor, controls = {}) {
-  const keys = actor.coop ? ['KeyJ', 'KeyL', 'KeyI', 'KeyU'] : ['KeyA', 'KeyD', 'KeyW', 'Space', 'ArrowLeft', 'ArrowRight', 'ArrowUp'];
-  keys.push(controls.left, controls.right, controls.up, controls.jump);
+  const held = key => key && engine.keys?.has(key);
+  if ([controls.jump, actor.coop ? 'KeyU' : 'Space'].some(held)) return true;
+  // Shift reserves directional input for aiming on the spot, while jumping
+  // still moves the operator and interrupts a manipulation.
+  if (held(PLAYER_CONTROLS_V124[actor.coop ? 'coop' : 'player'].aim)) return false;
+  const keys = actor.coop ? ['KeyJ', 'KeyL', 'KeyI'] : ['KeyA', 'KeyD', 'KeyW', 'ArrowLeft', 'ArrowRight', 'ArrowUp'];
+  keys.push(controls.left, controls.right, controls.up);
   // Holding an existing crouch is a stable working stance.
   if (!actor.crouching) keys.push(controls.down, actor.coop ? 'KeyK' : 'KeyS', actor.coop ? null : 'ArrowDown');
-  return keys.filter(Boolean).some(key => engine.keys?.has(key));
+  return keys.some(held);
 }
 
 export function withPlayerFieldActionsV124(Base) {

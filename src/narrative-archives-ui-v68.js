@@ -1,4 +1,5 @@
 import { QZ17_COLLECTABLES_SHEET_V68, resolveQz17CollectableCellV68 } from './narrative-collectables-visuals-v68.js';
+import { resolveNarrativeMediaPlaybackV132 } from './narrative-evidence-v132.js';
 
 const asArray = (value) => Array.isArray(value) ? value : [];
 const asText = (value, fallback = '') => {
@@ -25,7 +26,8 @@ const mediaLabels = Object.freeze({
   'black-box': 'BOÎTE NOIRE',
   seal: 'SCELLÉ CARGO',
   'cargo-seal': 'SCELLÉ CARGO',
-  image: 'IMAGE'
+  image: 'IMAGE',
+  specimen: 'PRÉLÈVEMENT'
 });
 
 function element(documentRef, tagName, options = {}) {
@@ -93,6 +95,11 @@ function normalizeEntry(raw, index, discoveredIds, readIds) {
     }) : null,
     discovered,
     read: explicitlyRead === undefined ? readIds.has(id) : Boolean(explicitlyRead),
+    media: discovered ? resolveNarrativeMediaPlaybackV132(record.media) : null,
+    pendingMedia: discovered && record.media && !resolveNarrativeMediaPlaybackV132(record.media) ? {
+      title: asText(record.media.title), description: asText(record.media.description)
+    } : null,
+    provenance: asText(record.provenance),
     claims: []
   };
   entry.claims = asArray(record.claims).map((claim, claimIndex) => normalizeClaim(claim, entry, claimIndex));
@@ -193,7 +200,8 @@ export function normalizeNarrativeArchivesUiStateV68(rawState = {}) {
       unlockFlag,
       available,
       applied,
-      lockedByChoice
+      lockedByChoice,
+      reason: asText(decision.reason), journalOnly: Boolean(decision.journalOnly || state.schema === 132 && !unlockFlag)
     });
   });
   return Object.freeze({
@@ -202,6 +210,12 @@ export function normalizeNarrativeArchivesUiStateV68(rawState = {}) {
     qualifications: Object.freeze(qualifications),
     decisions: Object.freeze(decisions),
     unreadCount: entries.filter((entry) => !entry.read).length,
+    chains: Object.freeze(asArray(state.chains).map(chain => Object.freeze({ id: identifier(chain.id), title: asText(chain.title),
+      total: asArray(chain.requirements).length, collected: Number(chain.collected) || 0, read: Number(chain.read) || 0,
+      complete: chain.complete === true, hint: asText(chain.hint) }))),
+    journal: Object.freeze(asArray(state.journal).map(entry => Object.freeze({ id: identifier(entry.id), kind: asText(entry.kind),
+      target: identifier(entry.target), label: asText(entry.label) })).filter(entry => entry.label)),
+    mediaNotice: asText(state.mediaCoverage?.notice),
     unlockedFlags: Object.freeze([...unlockedFlags])
   });
 }
@@ -213,7 +227,7 @@ export function createOpenArchivesEventV68(entryId = '') {
 }
 
 export class NarrativeArchivesUiV68 {
-  constructor({ root, getState, onMarkRead, onDecision, idPrefix = '', focusFallback = null, documentRef = root?.ownerDocument || globalThis.document } = {}) {
+  constructor({ root, getState, onMarkRead, onDecision, onMediaPlayed, idPrefix = '', focusFallback = null, documentRef = root?.ownerDocument || globalThis.document } = {}) {
     if (!root || !documentRef) throw new TypeError('NarrativeArchivesUiV68 requiert un élément racine.');
     if (typeof getState !== 'function') throw new TypeError('NarrativeArchivesUiV68 requiert getState.');
     this.root = root;
@@ -222,6 +236,8 @@ export class NarrativeArchivesUiV68 {
     this.getState = getState;
     this.onMarkRead = typeof onMarkRead === 'function' ? onMarkRead : () => null;
     this.onDecision = typeof onDecision === 'function' ? onDecision : () => null;
+    this.onMediaPlayed = typeof onMediaPlayed === 'function' ? onMediaPlayed : () => null;
+    this.replayV132 = null;
     this.focusFallback = focusFallback;
     this.selectedId = '';
     this.query = '';
@@ -241,6 +257,7 @@ export class NarrativeArchivesUiV68 {
   }
 
   destroy() {
+    this.replayV132?.destroy(); this.replayV132 = null;
     this.root.removeEventListener('click', this.boundClick);
     this.root.removeEventListener('input', this.boundInput);
     this.root.removeEventListener('change', this.boundChange);
@@ -312,13 +329,13 @@ export class NarrativeArchivesUiV68 {
   async runAction(kind, id, callback) {
     if (this.pendingAction) return null;
     this.pendingAction = `${kind}:${id}`;
-    this.lastStatus = kind === 'read' ? 'Ouverture du dossier…' : 'Analyse des preuves…';
+    this.lastStatus = kind === 'read' ? 'Ouverture du dossier…' : kind === 'media' ? 'Lecture de la séquence conservée…' : 'Analyse des preuves…';
     this.render();
     try {
       const result = await callback(id);
       const rejected = result === false || result?.applied === false || result?.ok === false;
       const fallback = rejected ? 'Action non appliquée.' : result === null || result === undefined
-        ? 'Aucune modification confirmée.' : kind === 'read' ? 'Dossier marqué comme lu.' : 'Conclusion enregistrée.';
+        ? 'Aucune modification confirmée.' : kind === 'read' ? 'Dossier marqué comme lu.' : kind === 'media' ? 'Séquence visionnée.' : 'Conclusion enregistrée.';
       this.lastStatus = asText(result?.message || (typeof result?.result === 'string' ? result.result : ''), fallback);
       return result;
     } catch (error) {
@@ -357,6 +374,7 @@ export class NarrativeArchivesUiV68 {
   }
 
   handleChange(event) {
+    if (!event.target?.matches?.('[data-archive-type], [data-archive-unread]')) return;
     if (event.target?.matches?.('[data-archive-type]')) this.type = asText(event.target.value, 'all');
     if (event.target?.matches?.('[data-archive-unread]')) this.unreadOnly = Boolean(event.target.checked);
     this.render();
@@ -376,6 +394,8 @@ export class NarrativeArchivesUiV68 {
   }
 
   render() {
+    const previousReplay = this.replayV132 && { id: this.replayV132.media.id, time: this.replayV132.time, playing: this.replayV132.playing };
+    this.replayV132?.destroy(); this.replayV132 = null;
     const focusState = this.captureFocus();
     const state = this.state();
     const filtered = this.filteredEntries(state);
@@ -419,7 +439,7 @@ export class NarrativeArchivesUiV68 {
     const layout = element(this.document, 'div', { className: 'archives-layout-v68' });
     const list = element(this.document, 'nav', { className: 'archives-list-v68', attributes: { 'aria-label': 'Dossiers récupérés' } });
     if (!filtered.length) {
-      list.append(element(this.document, 'p', { className: 'archives-empty-v68', text: state.entries.length ? 'Aucun dossier ne correspond aux filtres.' : 'Aucune archive récupérée. Explorez QZ-17 pour alimenter ce terminal.' }));
+      list.append(element(this.document, 'p', { className: 'archives-empty-v68', text: state.entries.length ? 'Aucun dossier ne correspond aux filtres.' : 'Aucune archive récupérée. Explorez les missions et leurs postes pour alimenter ce terminal.' }));
     }
     for (const entry of filtered) {
       const button = element(this.document, 'button', {
@@ -446,6 +466,7 @@ export class NarrativeArchivesUiV68 {
     } else {
       const meta = [selected.typeLabel, selected.source, selected.location, selected.timestamp].filter(Boolean).join(' · ');
       detail.append(element(this.document, 'p', { className: 'eyebrow', text: meta }), element(this.document, 'h3', { text: selected.title }));
+      if (selected.provenance) detail.append(element(this.document, 'p', { className: 'archive-provenance-v132', text: 'Dossier original du Tantalus.' }));
       if (selected.atlasVisual) {
         const visual = element(this.document, 'div', {
           className: 'archive-evidence-visual-v68',
@@ -459,6 +480,18 @@ export class NarrativeArchivesUiV68 {
         detail.append(element(this.document, 'img', { className: 'archive-image-v68', attributes: { src: selected.imagePath, alt: selected.imageAlt, loading: 'lazy', decoding: 'async' } }));
       }
       detail.append(element(this.document, 'p', { className: 'archive-lead-v68', text: selected.summary }));
+      if (selected.media) {
+        const replay = element(this.document, 'section', { className: 'archive-replay-v132', attributes: { 'aria-label': selected.media.title } });
+        detail.append(replay);
+        this.replayV132 = new NarrativeEvidenceReplayV132({ root: replay, media: selected.media,
+          idPrefix: this.domId(`replay-${selected.id}`), onPlayed: id => this.runAction('media', id, this.onMediaPlayed) });
+        if (previousReplay?.id === selected.media.id) {
+          this.replayV132.time = Math.min(previousReplay.time, this.replayV132.capture.duration);
+          this.replayV132.draw(); this.replayV132.pause();
+          if (previousReplay.playing) this.replayV132.play();
+        }
+      } else if (selected.pendingMedia) detail.append(element(this.document, 'p', { className: 'archive-media-pending-v132',
+        text: 'Relevé de déplacement en attente : reprendre le terrain pour laisser la boîte noire conserver deux observations réelles. Aucun audio ou film historique n’est joint.' }));
       for (const paragraph of selected.body.split(/\n{2,}/u).map((value) => value.trim()).filter(Boolean)) detail.append(element(this.document, 'p', { text: paragraph }));
       if (selected.claims.length) {
         const claimsHeading = element(this.document, 'h4', { text: 'DÉCLARATIONS INDEXÉES' });
@@ -492,6 +525,18 @@ export class NarrativeArchivesUiV68 {
       comparisons.append(article);
     }
     investigation.append(comparisons);
+    if (state.chains.length) {
+      const chainSection = element(this.document, 'section', { className: 'archive-chains-v132', attributes: { 'aria-label': 'Enquêtes liées entre les missions' } });
+      chainSection.append(element(this.document, 'h4', { text: 'ENQUÊTES ENTRE LES MISSIONS' }));
+      for (const chain of state.chains) {
+        const card = element(this.document, 'article', { className: 'archive-comparison-v68' });
+        card.append(element(this.document, 'strong', { text: chain.title }),
+          element(this.document, 'p', { text: `${chain.collected}/${chain.total} preuves · ${chain.read}/${chain.total} lues${chain.complete ? ' · Conclusion conservée' : ''}` }),
+          element(this.document, 'p', { text: chain.hint }));
+        chainSection.append(card);
+      }
+      investigation.append(chainSection);
+    }
     if (state.qualifications.length) {
       const qualificationsHeadingId = this.domId('qualifications');
       const qualifications = element(this.document, 'section', { className: 'archive-qualifications-v68', attributes: { 'aria-labelledby': qualificationsHeadingId } });
@@ -517,7 +562,9 @@ export class NarrativeArchivesUiV68 {
       card.append(element(this.document, 'strong', { text: decision.label }), element(this.document, 'p', { text: decision.description }));
       const button = element(this.document, 'button', {
         className: `button${decision.applied ? '' : ' primary'}`,
-        text: decision.applied ? 'ROUTE DÉJÀ DÉBLOQUÉE' : decision.lockedByChoice ? 'CHOIX EXCLU PAR LA DÉCISION' : decision.available ? 'CONFIRMER LA CONFRONTATION' : `PREUVES MANQUANTES · ${decision.missingRequirements.length}`,
+        text: decision.applied ? decision.journalOnly ? 'CONCLUSION CONSERVÉE' : 'ROUTE DÉJÀ DÉBLOQUÉE'
+          : decision.lockedByChoice ? 'CHOIX EXCLU PAR LA DÉCISION' : decision.available ? 'CONFIRMER LA CONFRONTATION'
+            : decision.reason || `PREUVES MANQUANTES · ${decision.missingRequirements.length}`,
         attributes: { type: 'button', 'data-archive-decision': decision.id, disabled: decision.applied || decision.lockedByChoice || !decision.available || Boolean(this.pendingAction), 'aria-describedby': decisionDescriptionId }
       });
       button.disabled = decision.applied || decision.lockedByChoice || !decision.available || Boolean(this.pendingAction);
@@ -526,9 +573,110 @@ export class NarrativeArchivesUiV68 {
       actions.append(card);
     }
     investigation.append(actions);
+    if (state.journal.length) {
+      const journal = element(this.document, 'details', { className: 'archive-journal-v132' });
+      journal.append(element(this.document, 'summary', { text: `JOURNAL PERSISTANT · ${state.journal.length} ÉTAPES` }));
+      const events = element(this.document, 'ol');
+      const labels = { evidence: 'Récupéré', read: 'Lu', conclusion: 'Conclusion', played: 'Séquence visionnée' };
+      for (const entry of state.journal) events.append(element(this.document, 'li', { text: `${labels[entry.kind] || 'Étape'} · ${entry.label}` }));
+      journal.append(events); investigation.append(journal);
+    }
+    if (state.mediaNotice) investigation.append(element(this.document, 'p', { className: 'archive-media-notice-v132', text: state.mediaNotice }));
     const status = element(this.document, 'p', { className: 'archive-status-v68 sr-only', text: this.lastStatus, attributes: { role: 'status', 'aria-live': 'polite' } });
     this.root.replaceChildren(toolbar, layout, investigation, status);
     this.restoreFocus(focusState);
+  }
+}
+
+/** Playback of actual deployment telemetry, with a seekable visual trace and
+ * the same observations in text. This is not an audio/video-file substitute. */
+export class NarrativeEvidenceReplayV132 {
+  constructor({ root, media, onPlayed = () => {}, idPrefix = 'narrative-replay-v132' } = {}) {
+    this.root = root; this.document = root.ownerDocument; this.media = resolveNarrativeMediaPlaybackV132(media);
+    if (!this.media) throw new TypeError('La séquence de boîte noire doit contenir des observations réelles valides.');
+    this.capture = this.media.capture; this.onPlayed = onPlayed; this.time = 0; this.playing = false; this.destroyed = false;
+    this.root.style.display = 'grid'; this.root.style.gap = '.5rem'; this.root.style.margin = '1rem 0';
+    this.canvas = element(this.document, 'canvas', { attributes: { width: '640', height: '240', role: 'img',
+      'aria-label': 'Trajet enregistré : opérateur en vert, second opérateur en bleu, contacts visibles en orange.' } });
+    this.canvas.width = 640; this.canvas.height = 240; this.canvas.style.width = '100%'; this.canvas.style.maxWidth = '640px';
+    const controls = element(this.document, 'div', { attributes: { role: 'group', 'aria-label': 'Lecture de la boîte noire' } });
+    controls.style.display = 'flex'; controls.style.flexWrap = 'wrap'; controls.style.gap = '.5rem'; controls.style.alignItems = 'center';
+    this.playButton = element(this.document, 'button', { className: 'button', text: 'Lire la séquence', attributes: { type: 'button',
+      id: `${idPrefix}-play`, 'data-archive-media-play': this.media.id, 'aria-pressed': 'false' } });
+    this.playButton.style.minHeight = '44px';
+    const seekLabel = element(this.document, 'label', { text: 'Position de lecture ', attributes: { for: `${idPrefix}-seek` } });
+    this.seek = element(this.document, 'input', { attributes: { type: 'range', min: '0', max: String(this.capture.duration), step: '.01',
+      value: '0', id: `${idPrefix}-seek`, 'data-archive-media-seek': this.media.id } });
+    this.seek.style.minHeight = '44px'; seekLabel.append(this.seek); controls.append(this.playButton, seekLabel);
+    this.positionText = element(this.document, 'p', { attributes: { 'data-archive-media-position': this.media.id } });
+    this.root.append(element(this.document, 'h4', { text: this.media.title }),
+      element(this.document, 'p', { text: this.media.description }), this.canvas, controls, this.positionText);
+    this.context = this.canvas.getContext?.('2d');
+    const view = this.document.defaultView || globalThis;
+    this.requestFrame = view.requestAnimationFrame?.bind(view) || (callback => setTimeout(() => callback(Date.now()), 16));
+    this.cancelFrame = view.cancelAnimationFrame?.bind(view) || clearTimeout;
+    this.boundPlay = () => this.playing ? this.pause() : this.play();
+    this.boundSeek = () => { this.pause(); this.time = Math.max(0, Math.min(this.capture.duration, Number(this.seek.value) || 0)); this.draw(); };
+    this.playButton.addEventListener('click', this.boundPlay); this.seek.addEventListener('input', this.boundSeek);
+    this.draw();
+  }
+
+  draw() {
+    const capture = this.capture, t = capture.frames[0].t + this.time;
+    const frame = capture.frames.filter(item => item.t <= t + 1e-8).at(-1) || capture.frames[0];
+    const operator = frame.actors.find(actor => actor.role === 'operator');
+    this.seek.value = String(this.time);
+    this.positionText.textContent = `${this.time.toFixed(2)} / ${capture.duration.toFixed(2)} s · Opérateur (${Math.round(operator.x)}, ${Math.round(operator.y)}) · ${frame.actors.length - 1} contact(s) enregistré(s).`;
+    this.seek.setAttribute('aria-valuetext', this.positionText.textContent);
+    const ctx = this.context; if (!ctx) return;
+    const all = capture.frames.flatMap(item => item.actors.filter(actor => actor.role === 'operator'));
+    const left = Math.max(0, Math.min(...all.map(actor => actor.x)) - 160), right = Math.min(capture.width, Math.max(...all.map(actor => actor.x + actor.w)) + 160);
+    const top = Math.max(0, Math.min(...all.map(actor => actor.y)) - 110), bottom = Math.min(capture.height, Math.max(...all.map(actor => actor.y + actor.h)) + 80);
+    const scale = Math.min(620 / Math.max(1, right - left), 220 / Math.max(1, bottom - top));
+    ctx.fillStyle = '#0d1d21'; ctx.fillRect(0, 0, 640, 240);
+    ctx.save(); ctx.translate(10, 10); ctx.scale(scale, scale); ctx.translate(-left, -top);
+    ctx.fillStyle = '#465c55';
+    for (const surface of capture.surfaces) ctx.fillRect(surface.x, surface.y, surface.w, surface.h);
+    ctx.strokeStyle = '#719b7d'; ctx.lineWidth = 1 / scale; ctx.beginPath();
+    for (const [index, observation] of capture.frames.entries()) {
+      const subject = observation.actors.find(actor => actor.role === 'operator');
+      ctx[index ? 'lineTo' : 'moveTo'](subject.x + subject.w / 2, subject.y + subject.h / 2);
+    }
+    ctx.stroke();
+    for (const actor of frame.actors) {
+      ctx.fillStyle = actor.role === 'operator' ? '#b5eda3' : actor.role === 'coop' ? '#82bddf' : '#daab72';
+      ctx.fillRect(actor.x, actor.y, actor.w, actor.h);
+    }
+    ctx.restore();
+  }
+
+  play() {
+    if (this.destroyed || this.playing) return;
+    if (this.time >= this.capture.duration) this.time = 0;
+    this.playing = true; this.lastFrame = null;
+    this.playButton.textContent = 'Suspendre la lecture'; this.playButton.setAttribute('aria-pressed', 'true');
+    const advance = now => {
+      if (!this.playing || this.destroyed) return;
+      if (this.document.hidden || this.root.isConnected === false || this.root.getClientRects?.().length === 0) { this.pause(); return; }
+      if (this.lastFrame !== null) this.time = Math.min(this.capture.duration, this.time + Math.max(0, now - this.lastFrame) / 1000);
+      this.lastFrame = now; this.draw();
+      if (this.time >= this.capture.duration) {
+        this.pause(); this.playButton.textContent = 'Relire la séquence'; this.onPlayed(this.media.id); return;
+      }
+      this.frame = this.requestFrame(advance);
+    };
+    this.frame = this.requestFrame(advance);
+  }
+
+  pause() {
+    this.playing = false; if (this.frame !== undefined) this.cancelFrame(this.frame); this.frame = undefined;
+    this.playButton.textContent = this.time >= this.capture.duration ? 'Relire la séquence' : 'Lire la séquence';
+    this.playButton.setAttribute('aria-pressed', 'false');
+  }
+
+  destroy() {
+    if (this.destroyed) return; this.pause(); this.destroyed = true;
+    this.playButton.removeEventListener('click', this.boundPlay); this.seek.removeEventListener('input', this.boundSeek);
   }
 }
 
@@ -632,6 +780,7 @@ export class MissionArchiveOverlayV68 {
 
   close({ restoreFocus = true, resume = true } = {}) {
     if (!this.openState) return false;
+    this.reader.replayV132?.pause();
     this.active = false;
     this.root.hidden = this.previousRootState?.hidden ?? true;
     if (this.previousRootState?.ariaHidden === null || this.previousRootState?.ariaHidden === undefined) this.root.removeAttribute?.('aria-hidden');

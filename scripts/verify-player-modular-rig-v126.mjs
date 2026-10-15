@@ -14,12 +14,13 @@ import { getHeldWeaponPoseV125, translateHeldWeaponPoseV125 } from '../src/held-
 import { constrainPlayerMuzzleV124 } from '../src/player-control-v124.js';
 import { WEAPONS } from '../src/content-core-v50.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
+import { PLAYER_COLONIAL_RIG_ASSETS_V141 } from '../src/player-colonial-art-v141.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
 import { resolvePlayerLocomotionRigV129 } from '../src/player-locomotion-rig-v129.js';
 
 const repository=fileURLToPath(new URL('../',import.meta.url));
 const assets=[...PLAYER_BODY_RIG_ASSETS_V125,...PLAYER_MODULAR_RIG_ASSETS_V126,
-  ...PLAYER_TRANSIT_RIG_ASSETS_V128,...PLAYER_COLONIAL_RIG_ASSETS_V129];
+  ...PLAYER_TRANSIT_RIG_ASSETS_V128,...PLAYER_COLONIAL_RIG_ASSETS_V129,...PLAYER_COLONIAL_RIG_ASSETS_V141];
 const images=new Map(assets.map(a=>[a.imageKey,{complete:true,naturalWidth:a.sourceWidth,naturalHeight:a.sourceHeight,src:a.path}]));
 const actor=patch=>({x:100,y:200,w:42,h:92,alive:true,grounded:true,facing:1,vx:0,vy:0,
   costumeId:'costume-001',weaponRigMotionV125:{distance:0,shotAt:-100,time:4},...patch});

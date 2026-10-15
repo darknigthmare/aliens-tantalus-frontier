@@ -127,7 +127,7 @@ export function withPlayerWeaponRigV125(Base) {
       return result;
     }
 
-    resolvePlayerWeaponRigV125(actor = this.player, { surface, sample = null } = {}) {
+    resolvePlayerWeaponRigV125(actor = this.player, { surface, sample = null, requireReady = true } = {}) {
       if (!actor || actor !== this.player && actor !== this.coop || actor === this.coop && !this.coopEnabled) return null;
       const descriptor = this.heldWeaponDescriptorV125(actor);
       const profile = resolveHeldWeaponProfileV125(descriptor);
@@ -140,7 +140,9 @@ export function withPlayerWeaponRigV125(Base) {
       this.preparePlayerWeaponAssetsV125();
       const image = this.ensureWeaponImageV125(profile);
       const bodyRig = resolvePlayerBodyRigV125(options);
-      if (!bodyRig.ready || !weaponImageReadyV125(image, profile)) return null;
+      // Image readiness gates drawing only. The admitted body's measured
+      // geometry still owns a shot while its PNGs are loading or unavailable.
+      if (requireReady && (!bodyRig.ready || !weaponImageReadyV125(image, profile))) return null;
       return { ...bodyRig, bodyRig, descriptor, profile, weaponImage: image };
     }
 
@@ -169,7 +171,7 @@ export function withPlayerWeaponRigV125(Base) {
     }
 
     drawPlayerWeaponRigV125(ctx, actor = this.player, options = {}) {
-      const pose = this.resolvePlayerWeaponPoseV125(actor, actor?.combatAimV83, options);
+      const pose = this.resolvePlayerWeaponPoseV125(actor, actor?.combatAimV83, { ...options, requireReady: true });
       if (!pose) { if (actor) actor.heldWeaponVisualV125 = null; return null; }
       const render = this.drawPlayerBodyCompositionV125(ctx, actor, { ...options, images: this.images,
         bodyRig: pose.bodyRig, weaponPose: pose, drawWeapon: () => drawHeldWeaponV125(ctx, pose.weaponImage, pose) });

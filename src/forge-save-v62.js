@@ -65,6 +65,9 @@ export class ForgeWorkspaceV133 {
     this.editor.cancelGesture(); this.editor.model = next; next.revision = revision;
     this.id = project.id; this.epoch++; this.editor.selection.clear(); this.editor.cursor = null;
     this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh(); this.editor.navigatorV134?.refresh(); this.editor.constructionV135?.refresh();this.editor.controlV136?.refresh();
+    // Adoption changes the current document without creating an edit/save. The
+    // application still needs to refresh launch/validation buttons for that file.
+    this.editor.onDocumentChangeV140?.();
     // History belongs to the document. Never undo a switch into another project.
   }
   commitCandidate(candidate, activeId) {

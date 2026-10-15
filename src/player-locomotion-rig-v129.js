@@ -1,7 +1,10 @@
+import { HUMAN_GAIT_PROFILES_V133, humanGaitKindV133, humanGaitProfileV136, humanGaitStrideV133 } from './player-gait-v133.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { PLAYER_MODULAR_RIG_ANCHORS_V126, resolvePlayerModularRigV126 } from './player-modular-rig-v126.js';
 import { solvePlayerArmIKV125, playerBodyRigImageReadyV125 } from './player-body-rig-v125.js';
 import { buildPlayerArticulatedLowerLayersV128 } from './player-transit-rig-v128.js';
+import { HUMAN_LEG_DIMENSIONS_V136, HUMAN_PELVIS_HEIGHT_V136, humanFootSwingV136, humanMotionEnvelopeV136,
+  smoothHumanStepV136 } from './human-motion-v136.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, finite(value, low)));
@@ -24,22 +27,78 @@ const freeze = value => {
  * and bone lengths are canonical Echo9 pixels and scale with its existing
  * surface contract. No option changes an actor's collision or firing rig. */
 export const PLAYER_LOCOMOTION_PRESENTATION_V129 = freeze({
-  schema: 129, upperLeg: 44, lowerLeg: 43, settleDuration: .12,
-  walk: { stride: 108, duty: .58, lift: 17 },
-  run: { stride: 124, duty: .48, lift: 23 },
-  crouch: { stride: 40, duty: .68, lift: 7 },
+  schema: 129, ...HUMAN_LEG_DIMENSIONS_V136, settleDuration: .12,
+  walk: { stride: 176, ...HUMAN_GAIT_PROFILES_V133.walk },
+  run: { stride: 216, ...HUMAN_GAIT_PROFILES_V133.run },
+  crouch: { stride: 80, ...HUMAN_GAIT_PROFILES_V133.crouch },
   artStatus: 'independent-pelvis-thigh-shin-boot-parts'
 });
 const C = PLAYER_LOCOMOTION_PRESENTATION_V129;
 
-function activeGait(actor) {
-  if (actor?.crouching) return 'crouch';
-  return actor?.movementV124?.gait === 'run' || Math.abs(finite(actor?.vx)) >= 265 ? 'run' : 'walk';
+// Integrate only the airborne part of a cycle. A change of stride must never
+// move a planted boot; its horizontal correction can disappear on the next
+// swing, including when the operator walks backwards or reverses direction.
+const swingIntegral = (cycles, duty) => Math.floor(cycles) * (1 - duty)
+  + Math.max(0, mod(cycles) - duty);
+function advanceGaitTransition(previous, cycles, distance) {
+  if (!previous?.gaitTransition) return null;
+  const profile = { ...C[previous.gait], duty: previous.duty ?? C[previous.gait].duty }, feet = {};
+  for (const side of ['near', 'far']) {
+    const entry = previous.gaitTransition.feet[side], phaseOffset = side === 'far' ? .5 : 0;
+    const swingTravel = entry.swingTravel + Math.abs(swingIntegral(cycles + phaseOffset, profile.duty)
+      - swingIntegral(previous.cycles + phaseOffset, profile.duty)) * previous.stride;
+    feet[side] = { ...entry, swingTravel: entry.swingSpan - swingTravel < 1e-6 ? Math.max(entry.swingSpan, swingTravel) : swingTravel, travel: entry.travel + distance };
+  }
+  return { feet };
 }
+
+function stepShape(state, side, scale, crouching, staticAction) {
+  const named = C[crouching ? 'crouch' : state.gait];
+  const profile = { ...named, duty: state.duty ?? named.duty, lift: state.footLift ?? named.lift };
+  const phase = mod(state.cycles + (side === 'far' ? .5 : 0));
+  const stride = Number.isFinite(state.stride) && state.stride > 0 ? state.stride : profile.stride * scale, swinging = phase >= profile.duty;
+  const swing = swinging ? (phase - profile.duty) / (1 - profile.duty) : 0;
+  const hasStride = state.hasWalked && !staticAction;
+  const settle = state.moving ? 1 : 1 - smoothHumanStepV136(state.settleProgress);
+  const entrance = smoothHumanStepV136(state.entrance / (stride * .25));
+  const freeFoot = humanFootSwingV136(swing, profile.duty, stride);
+  // World contact phase runs backwards when travelling left. Its asymmetric
+  // toe-clearance arc must follow the travelled direction, while horizontal
+  // targets retain their exact world-space contact trajectory.
+  const recovery = (state.direction ?? state.facing ?? 1) < 0
+    ? humanFootSwingV136(1-swing, profile.duty, stride) : freeFoot;
+  let lift = hasStride && swinging ? recovery.liftWeight * profile.lift * scale * settle * entrance : 0;
+  let offset = !hasStride ? 0 : swinging
+    ? freeFoot.offset
+    : (profile.duty / 2 - phase) * stride;
+  let angle = lift > 0 ? -.15 * recovery.rollWeight * settle * entrance : 0;
+  const correction = hasStride && state.gaitTransition?.feet[side];
+  if (correction) {
+    offset += correction.offset * (1 - smooth(correction.swingTravel / correction.swingSpan));
+    const weight = (1 - smooth(correction.travel / (stride * .25))) * settle;
+    lift = Math.max(0, lift + correction.lift * weight);
+    angle += correction.angle * weight;
+  }
+  if (hasStride && Number.isFinite(state.stopOffsets?.[side])) offset = state.stopOffsets[side];
+  // During a speed blend an inherited clearance and the new free-foot arc
+  // overlap. They cannot add two separate knee lifts to the same real boot.
+  lift = clamp(lift, 0, C.run.lift * scale);
+  // A changing gait can leave a small ankle roll after the free foot has
+  // nearly touched down. Bound it by its real clearance so the heel/toe
+  // cannot penetrate the deck while the contact point remains truthful.
+  const rollLimit = Math.asin(clamp(lift / ((angle < 0 ? 19 : 14) * scale)));
+  angle = clamp(angle, -rollLimit, rollLimit);
+  return { phase, swing, lift, offset, angle, settle, swinging, hasStride };
+}
+
+const activeGait = humanGaitKindV133;
 function groundMotion(actor) {
   return actor?.alive !== false && !actor?.downed && actor?.grounded === true
     && !actor?.climbing && !actor?.inVehicle && !actor?.ventTransit && !actor?.vehicleAccessPhase
-    && Math.abs(finite(actor?.vx)) > (actor?.crouching ? 8 : 12);
+    // Keep observing the last real centimeters of acceleration/deceleration.
+    // The upper atlas may stay neutral below its pose threshold, but freezing
+    // this contact phase at 12px/s made planted boots slide with the actor.
+    && Math.abs(finite(actor?.vx)) > 1e-6;
 }
 function validActor(actor) {
   return actor && [actor.x, actor.y, actor.w, actor.h].every(Number.isFinite)
@@ -68,35 +127,94 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
   // not swap to another stride before the remaining boot has met the floor.
   const requested = groundMotion(actor);
   const gait = requested || !prior || Boolean(actor.crouching) !== prior.crouching ? desiredGait : prior.gait;
-  const profile = C[gait], stride = profile.stride * scale;
+  const profile = !requested && prior && Boolean(actor.crouching) === prior.crouching
+    ? { ...C[gait], duty: prior.duty ?? C[gait].duty, lift: prior.footLift ?? C[gait].lift }
+    : humanGaitProfileV136(actor, gait);
+  const stride = !requested && prior && Boolean(actor.crouching) === prior.crouching
+    ? prior.stride : humanGaitStrideV133(actor, gait, scale);
   const dx = prior ? actor.x - prior.x : 0;
   const moved = requested && Math.abs(dx) > 1e-7;
+  const striding = moved && Math.abs(finite(actor.vx)) > (actor.crouching ? 6 : 8);
   const postureChanged = prior && Boolean(actor.crouching) !== prior.crouching;
+  // Support occupies [0,duty] in either direction. Keep its centre aligned
+  // while acceleration shortens support; otherwise the first left step holds
+  // its old boot for an extra half of the removed duty and overextends the
+  // other leg. The transition below preserves the existing world contacts.
+  const supportShift = prior && striding ? (profile.duty - (prior.duty ?? C[prior.gait].duty)) / 2 : 0;
   const cycles = !prior || postureChanged ? profile.duty / 2
-    : prior.cycles + (moved ? dx / stride : 0);
+    : prior.cycles + (striding ? dx / stride : 0) + supportShift;
   const distance = (prior?.distance || 0) + (moved ? Math.abs(dx) : 0);
   const elapsed = Math.max(0, now - (prior?.time ?? now));
-  const settle = moved ? 0 : Math.min(C.settleDuration, (prior?.settle ?? C.settleDuration) + elapsed);
-  const entrance = moved ? (prior?.settle >= C.settleDuration ? 0 : finite(prior?.entrance)) + Math.abs(dx)
+  const settle = striding ? 0 : Math.min(C.settleDuration, (prior?.settle ?? C.settleDuration) + elapsed);
+  const entrance = striding ? (prior?.settle >= C.settleDuration ? 0 : finite(prior?.entrance)) + Math.abs(dx)
     : finite(prior?.entrance);
-  return freeze({ schema: 129, context, surface, time: now, x: actor.x, y: actor.y, facing,
+  const next = { schema: 129, context, surface, time: now, x: actor.x, y: actor.y, facing,
+    direction: Math.sign(dx || finite(actor.vx)) || prior?.direction || facing,
     grounded: actor.grounded === true, crouching: Boolean(actor.crouching), gait,
-    cycles, phase: mod(cycles), stride, distance, entrance,
-    hasWalked: Boolean(prior?.hasWalked || moved), moving: moved,
+    cycles, phase: mod(cycles), stride, duty: profile.duty, footLift: profile.lift, distance, entrance,
+    hasWalked: Boolean(prior?.hasWalked || moved), moving: striding, stopOffsets: null,
     settle, settleProgress: clamp(settle / C.settleDuration),
-    source: 'observed-ground-displacement' });
+    source: 'observed-ground-displacement',
+    gaitTransition: prior && !postureChanged ? advanceGaitTransition(prior, cycles, moved ? Math.abs(dx) : 0) : null };
+  if (prior?.hasWalked && !striding && !postureChanged) {
+    // The simulation's exponential braking has a long subpixel tail. Lower
+    // the free boot promptly, while retaining each reached world contact and
+    // still observing that final physical displacement. Platforms with zero
+    // self velocity carry the whole contact frame instead of spending steps.
+    next.stopOffsets = Object.fromEntries(['near', 'far'].map(side => [side,
+      (prior.stopOffsets?.[side] ?? stepShape(prior, side, scale, prior.crouching, false).offset)
+        - (moved ? dx : 0)]));
+  }
+  if (prior && !postureChanged && (gait !== prior.gait || Math.abs(stride - prior.stride) > 1e-7
+    || Math.abs(profile.duty - (prior.duty ?? C[prior.gait].duty)) > 1e-7 || prior.stopOffsets && striding)) {
+    const oldCycles = prior.cycles + (moved ? dx / prior.stride : 0);
+    const continued = { ...next, gait: prior.gait, stride: prior.stride,
+      duty: prior.duty ?? C[prior.gait].duty, footLift: prior.footLift ?? C[prior.gait].lift, cycles: oldCycles,
+      stopOffsets: prior.stopOffsets ? Object.fromEntries(Object.entries(prior.stopOffsets).map(([side, offset]) => [side, offset - (moved ? dx : 0)])) : null,
+      gaitTransition: advanceGaitTransition(prior, oldCycles, moved ? Math.abs(dx) : 0) };
+    const feet = {};
+    for (const side of ['near', 'far']) {
+      const old = stepShape(continued, side, scale, next.crouching, false);
+      const current = stepShape({ ...next, gaitTransition: null }, side, scale, next.crouching, false);
+      const direction = Math.sign(dx || actor.vx) || 1;
+      const remaining = current.swinging
+        ? direction > 0 ? 1 - current.phase : current.phase - profile.duty
+        : 1 - profile.duty;
+      feet[side] = { offset: old.offset - current.offset,
+        lift: (old.lift - current.lift) / (current.settle || 1),
+        angle: (old.angle - current.angle) / (current.settle || 1),
+        travel: 0, swingTravel: 0, swingSpan: Math.max(1e-6, remaining * stride) };
+    }
+    next.gaitTransition = { feet };
+  }
+  if (next.gaitTransition && prior && !prior.moving && moved && next.grounded && !postureChanged) {
+    // A stopped swing foot can already have settled onto the deck. If the
+    // first resumed step crosses its landing phase, keep that reached contact
+    // instead of spending the old transition correction under a planted boot.
+    for (const side of ['near', 'far']) {
+      const old = stepShape(prior, side, scale, next.crouching, false);
+      const current = stepShape(next, side, scale, next.crouching, false);
+      if (old.lift > 1e-7 || current.lift > 1e-7 || current.swinging) continue;
+      const native = stepShape({ ...next, gaitTransition: null }, side, scale, next.crouching, false);
+      next.gaitTransition.feet[side] = { ...next.gaitTransition.feet[side],
+        offset: old.offset - dx - native.offset, swingTravel: 0,
+        swingSpan: (1 - profile.duty) * stride };
+    }
+  }
+  return freeze(next);
 }
 
 function fallbackState(actor, bodyRig) {
-  const gait = bodyRig.crouching ? 'crouch' : activeGait(actor), profile = C[gait];
-  const stride = profile.stride * bodyRig.scale;
+  const gait = bodyRig.crouching ? 'crouch' : activeGait(actor), profile = humanGaitProfileV136(actor, gait);
+  const stride = humanGaitStrideV133(actor, gait, bodyRig.scale);
   const distance = Math.max(0, finite(actor.weaponRigMotionV125?.distance));
   const moving = groundMotion(actor);
   // Existing V125 distances are also real simulation observations. They make
   // the decorator usable in a one-shot preview without requiring a draw-time
   // clock, a second actor or a new mutable animation object.
   const cycles = profile.duty / 2 + (moving ? distance * Math.sign(actor.vx) / stride : 0);
-  return { schema: 129, gait, cycles, phase: mod(cycles), stride, distance,
+  return { schema: 129, gait, cycles, phase: mod(cycles), stride, duty: profile.duty, footLift: profile.lift, distance,
+    direction: Math.sign(finite(actor.vx)) || bodyRig.facing,
     entrance: distance, hasWalked: moving && distance > 0, moving,
     settle: moving ? 0 : C.settleDuration, settleProgress: moving ? 0 : 1,
     source: 'recorded-ground-distance' };
@@ -121,19 +239,8 @@ function solveLeg(hip, foot, scale, facing) {
 
 function stepContact(actor, state, side, scale, facing, crouching, staticAction) {
   const floor = actor.y + actor.h, center = actor.x + actor.w / 2;
-  const profile = C[crouching ? 'crouch' : state.gait];
-  const phase = mod(state.cycles + (side === 'far' ? .5 : 0));
-  const stride = profile.stride * scale, swinging = phase >= profile.duty;
-  const swing = swinging ? (phase - profile.duty) / (1 - profile.duty) : 0;
-  const hasStride = state.hasWalked && !staticAction;
-  const settle = state.moving ? 1 : 1 - smooth(state.settleProgress);
-  const entrance = smooth(state.entrance / (stride * .25));
-  const lift = hasStride && swinging ? Math.sin(Math.PI * swing) * profile.lift * scale * settle * entrance : 0;
-  const offset = !hasStride ? 0 : swinging
-    ? mix(-profile.duty / 2 * stride, profile.duty / 2 * stride, smooth(swing))
-    : (profile.duty / 2 - phase) * stride;
+  const { phase, swing, lift, offset, angle, swinging, hasStride } = stepShape(state, side, scale, crouching, staticAction);
   const sole = point(center + facing * (side === 'near' ? 0 : 21) * scale + offset, floor - lift);
-  const angle = lift > 0 ? -.15 * Math.sin(Math.PI * swing) * settle * entrance : 0;
   return { point: sole, planted: lift < 1e-7 && (!state.moving || !swinging || !hasStride),
     phase, swing, lift, support: 'ground', ...footFromSole(sole, scale, facing, angle) };
 }
@@ -160,9 +267,20 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   const staticAction = Boolean(bodyRig.actionV127 && !bodyRig.moving);
   const state = locomotionState?.schema === 129 && Number.isFinite(locomotionState.cycles)
     && C[locomotionState.gait] ? locomotionState : fallbackState(actor, bodyRig);
-  const hipDrop = crouching ? 6 : grounded && bodyRig.moving ? 7 : 4;
+  const motionEnvelope = humanMotionEnvelopeV136(state, state.stride);
+  const pelvisBob = grounded && !crouching && !staticAction ? .35 * (1 - Math.cos(state.cycles * Math.PI * 4)) * motionEnvelope : 0;
+  const hipDrop = (crouching ? 6 : grounded && state.moving ? 6 : 4) + pelvisBob;
   const hips = { near: point(waist.x - f * 9 * s, waist.y + hipDrop * s),
     far: point(waist.x + f * 12 * s, waist.y + hipDrop * s) };
+  if (grounded && !staticAction) {
+    // Keep the articulated skeleton over its physical foot axis; the pelvis
+    // panel still connects to the actual authored belt above it. Anatomical
+    // support below can lower these hips only as far as real leg reach needs.
+    const center = actor.x + actor.w / 2;
+    const height = crouching ? HUMAN_PELVIS_HEIGHT_V136.crouching : HUMAN_PELVIS_HEIGHT_V136.standing;
+    hips.near = point(center - f * 9 * s, floor - height * s + pelvisBob * s);
+    hips.far = point(center + f * 12 * s, hips.near.y);
+  }
   const legs = {}, requestedFeet = {}, contacts = { floorY: grounded ? floor : null, feet: { near: null, far: null } };
   for (const side of ['near', 'far']) {
     let foot, contact;
@@ -182,6 +300,12 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
     requestedFeet[side] = { foot, contact };
   }
   if (grounded) {
+    if (!crouching && !staticAction && state.hasWalked) {
+      const meanReach = ['near', 'far'].reduce((sum, side) =>
+        sum + requestedFeet[side].foot.ankle.x - hips[side].x, 0) / 2;
+      const transfer = 6 * s * Math.tanh(meanReach / (6 * s)) * motionEnvelope;
+      hips.near.x += transfer; hips.far.x += transfer;
+    }
     // Stopping midway through a wide stride retains both actual contacts.
     // Settle the hidden pelvis within the belt instead of pulling either
     // boot off the deck or moving the accepted-shot torso above it.
@@ -191,7 +315,7 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       const dx = foot.ankle.x - hips[side].x;
       return foot.ankle.y - Math.sqrt(Math.max(0, reach * reach - dx * dx));
     }));
-    const pelvisY = Math.min(waist.y + 24 * s, supportY);
+    const pelvisY = grounded && !staticAction ? supportY : Math.min(waist.y + 28 * s, supportY);
     hips.near.y = hips.far.y = pelvisY;
   }
   for (const side of ['near', 'far']) {
@@ -222,10 +346,27 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       clearanceAdjusted };
   }
   const lower = buildPlayerArticulatedLowerLayersV128({ waist, hips, legs, scale: s, facing: f, legDefinitions });
+  const relaxedTravel = grounded && !crouching && bodyRig.moving && bodyRig.atlas === 'locomotion'
+    && !bodyRig.actionV127 && !actor.aimingV124 && !actor.aiming && !actor.reloading;
+  // The authored combat-ready walk neck sits 25 source pixels ahead of the
+  // belt (about twenty degrees). Ordinary travel uses the existing upright
+  // head and torso parts with a neutral six-pixel neck lead. Shoulder targets,
+  // the real belt and all combat affines remain the selected body's values.
+  const travelAnchors = relaxedTravel ? { ...anatomical, family: 'upright',
+    neck: point(anatomical.waist.x + 6, anatomical.neck.y) } : null;
   const detail = { schema: 129, mode: !grounded ? 'airborne' : staticAction ? bodyRig.stance
     : state.moving ? crouching ? 'crouch-move' : state.gait : state.settleProgress < 1 ? 'settling' : 'idle',
-    source: state.source, phase: mod(state.cycles), legs, contacts };
-  const decorated = { ...bodyRig, modularLowerLayersV128: lower, locomotionV129: detail };
+    source: state.source, phase: mod(state.cycles), stride: state.stride,
+    presentationV133: { schema: 133, cadenceSource: 'supported-stature-and-world-distance',
+      stepsPerSecond: state.moving ? 2 * Math.abs(finite(actor.vx)) / state.stride : 0,
+      standingHeight: 193 * s, footLiftLimit: (state.gaitTransition ? C.run.lift : state.footLift ?? C[state.gait].lift) * s, pelvisBob: pelvisBob * s },
+    presentationV136: { schema: 136, swing: 'world-space-contact-velocity-ramp', lift: 'zero-contact-velocity-and-acceleration',
+      pelvis: grounded && !staticAction ? 'continuous-physical-foot-axis' : 'authored-action', motionEnvelope,
+      upperPosture: relaxedTravel ? 'upright-travel' : 'authored-action',
+      duty: state.duty ?? C[state.gait].duty,
+      flight: grounded && !Object.values(contacts.feet).some(foot => foot.planted) }, legs, contacts };
+  const decorated = { ...bodyRig, ...(travelAnchors ? { modularAnchorsV127: travelAnchors } : {}),
+    modularLowerLayersV128: lower, locomotionV129: detail };
   const modular = resolvePlayerModularRigV126({ bodyRig: decorated, appearance, images });
   const requiredAssets = modular.requiredAssets || [];
   const missingAssets = requiredAssets.filter(asset => !playerBodyRigImageReadyV125(imageFrom(images, asset.imageKey), asset));

@@ -1034,3 +1034,5 @@ button:disabled {
 .cloud-slot-v119 > span { width:100%; color:#afdfc0; font-size:.78rem; }
 .cloud-summary-v119 { width:100%; margin:2px 0; font-size:.72rem; opacity:.8; }
 @media(max-width:600px) { .cloud-auth-v119 { grid-template-columns:1fr; } }
+.mission-aim-help-v130 { margin: 10px 0 18px; color: #b7ccb9; font-size: .78rem; line-height: 1.7; }
+.mission-aim-help-v130 kbd { padding: 2px 6px; border: 1px solid #46624e; border-radius: 3px; background: #17241c; color: #e4f4e8; font: inherit; white-space: nowrap; }

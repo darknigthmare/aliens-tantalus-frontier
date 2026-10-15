@@ -7,3 +7,8 @@ Les images rangées sous `assets/openai/` sont générées avec OpenAI pour ce p
 
 La v49 utilise dans le hub 36 assets runtime distincts : 16 salles, 4 couches lointaines et 16 props PNG indépendants. Les quatre panoramas v48 restent présents comme masters legacy et éléments de provenance, mais ne sont plus chargés par le runtime v49.
 Les références officielles ne sont pas redistribuées comme fichiers sources dans le dépôt.
+
+Les huit fichiers de `assets/audio/` sont des compositions et effets originaux
+créés pour ce projet par synthèse hors ligne. Ils n'utilisent aucun échantillon
+de film, de jeu ou de bibliothèque commerciale. La partition et le générateur
+sont fournis dans `src/audio-score-v132.js` et `scripts/generate-audio-v132.mjs`.

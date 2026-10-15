@@ -8,6 +8,8 @@ import { GameEngine } from '../src/game-production-runtime.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { createBioforgeV80 } from '../src/bioforge-session-v80.js';
 import { HubGame, HUB_DECKS } from '../src/hub-opening-v88.js';
+import { HUB_ANNEX_BY_ID_V137 } from '../src/hub-annex-registry-v137.js';
+import { HUB_ANNEX_ENTRANCES_V133 } from '../src/hub-navigation-layout-v133.js';
 import { createPlayerOnboardingV84 } from '../src/player-onboarding-v84.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, CREW, NEURO_XENO_PROFILES } from '../src/content.js';
@@ -825,8 +827,25 @@ test('an unarmed coop operator still wears their modular kit with no hidden or d
 });
 
 for (const appearance of [bare(), colonial('hudson')]) test(`the real hub moves ${appearance.slots.torso} only from physical displacement`, async () => {
-  const host = browserHost(), hub = new HubGame(host.canvas);
+  const torsoAssets = PLAYER_COLONIAL_RIG_ASSETS_V129.filter(asset => asset.kind.startsWith('torso-'));
+  const leftTorso = torsoAssets.find(asset => asset.kind === 'torso-left');
+  const host = browserHost({ holdImages: source => source === leftTorso.path });
+  const hub = new HubGame(host.canvas);
   hub.playerAppearanceV126 = appearance; hub.start(); await host.flush();
+  if (appearance.slots.torso.endsWith('-v129')) {
+    const cache = hub.getSnapshot().playerAppearanceV126.images;
+    for (const asset of torsoAssets) {
+      assert.equal(host.requests.filter(source => source === asset.path).length, 1,
+        'Both selected torso views are requested before the first turn.');
+      assert.equal(cache.assets.find(entry => entry.imageKey === asset.imageKey)?.pinned, true);
+    }
+    assert.equal(cache.assets.find(entry => entry.imageKey === leftTorso.imageKey)?.state, 'loading');
+    assert.ok(cache.retained <= cache.limit);
+  } else {
+    for (const asset of PLAYER_COLONIAL_RIG_ASSETS_V129) assert.equal(host.requests.includes(asset.path), false,
+      'A standard outfit does not preload any Colonial Marine page.');
+  }
+  host.releaseImages(); await host.flush();
   host.drawing.reset(); hub.drawPlayer(host.drawing.ctx); host.drawing.assertBalanced();
   let status = hub.getSnapshot().playerAppearanceV126;
   assertComposed(host, status.visual, appearance, 'Hub');
@@ -834,6 +853,12 @@ for (const appearance of [bare(), colonial('hudson')]) test(`the real hub moves 
   assert.equal(status.images.assets.find(asset => asset.imageKey === legAsset(appearance).imageKey)?.state, 'ready');
   assert.equal(status.images.assets.some(asset => asset.imageKey === PLAYER_MODULAR_RIG_ASSETS_V126[1].imageKey), false,
     'The old whole lower-body page is unnecessary when the selected legs are articulated.');
+  const requested = host.requests.length;
+  host.key('keydown', 'KeyA'); hub.loop(hub.last + 1000 / 60, hub.loopToken); host.key('keyup', 'KeyA');
+  assert.equal(hub.player.facing, -1);
+  assertComposed(host, hub.getSnapshot().playerAppearanceV126.visual, appearance, 'Hub first turn');
+  assert.equal(hub.player.playerVisualV81.sheetId, 'player.echo9-marine.modular-v126.locomotion');
+  assert.equal(host.requests.length, requested, 'The first opposite-facing turn needs no new image request.');
   const x = hub.player.x;
   host.key('keydown', 'KeyD');
   for (let frame = 0; frame < 20; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken);
@@ -857,8 +882,14 @@ for (const appearance of [bare(), colonial('hudson')]) test(`the real hub moves 
 
 test('a real annex ladder uses its physical rectangle and drawn rungs without requiring a player ladder id', async () => {
   const host = browserHost(), hub = new HubGame(host.canvas);
-  hub.playerAppearanceV126 = colonial('hicks'); hub.start();
-  assert.ok(hub.beginAnnexTransitionV71('logistics', 'enter'));
+  const destination = HUB_ANNEX_BY_ID_V137.logistics;
+  const deck = HUB_DECKS.findIndex(entry => entry.id === destination.parentDeck);
+  const parentRoom = HUB_DECKS[deck].rooms.find(room => room.id === destination.parentRoomId);
+  const socket = HUB_ANNEX_ENTRANCES_V133[destination.id];
+  hub.playerAppearanceV126 = colonial('hicks');
+  hub.start({ deck, roomId: parentRoom.id, positionX: parentRoom.xStart + socket.centerX - 22, positionY: socket.bottom - 92 });
+  assert.equal(hub.nearestParentAnnexDoorV71()?.annexId, destination.id, 'The actor starts at the actual parent entrance.');
+  assert.ok(hub.beginAnnexTransitionV71(destination.id, 'enter'));
   const frames = count => { for (let frame = 0; frame < count; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken); };
   frames(30); await host.flush();
   const annex = hub.currentAnnexV71(), actor = hub.player;

@@ -1,5 +1,5 @@
 """Actual app module graph and controls, offline host/memory storage/partial image substitutes.
-Native gameplay methods are not replaced. Actors are positioned near fixtures before real E presses.
+Native gameplay methods are not replaced. The player reaches fixtures through real keyboard input.
 """
 import importlib.util,json,os
 from pathlib import Path
@@ -29,7 +29,9 @@ def main():
             page.click('#editor-play');page.wait_for_function('__ATF_V51__.engine.running && __ATF_V51__.engine.editorMode')
             check('actual app enters native authored Mission',page.evaluate('__ATF_V61__.standaloneContext')=='forge-playtest')
             check('all active cells are compiled in actual app',page.evaluate('__ATF_V51__.engine.editorTileCount')==35)
-            page.evaluate("{const e=__ATF_V51__.engine,n=e.powerNode;Object.assign(e.player,{x:n.x,y:n.y+n.h-e.player.h,vx:0,vy:0,grounded:true});e.canvas.focus()}")
+            page.locator('#game-canvas').focus();page.keyboard.down('KeyD')
+            try:page.wait_for_function('Math.abs(__ATF_V51__.engine.player.x-__ATF_V51__.engine.powerNode.x)<100',timeout=20000)
+            finally:page.keyboard.up('KeyD')
             page.keyboard.press('KeyE');page.wait_for_function('__ATF_V51__.engine.powerNode.active')
             check('real E activates the authored power terminal',page.evaluate('__ATF_V51__.engine.powerNode.active'))
             check('native interaction leaves campaign unchanged',page.evaluate('JSON.stringify(shellApp.saveSystem.data)')==campaign)
@@ -37,7 +39,9 @@ def main():
             check('Escape returns from Mission to the same authored project',page.evaluate('JSON.stringify(__ATF_V51__.editor.model.data)')==before)
             check('returned Mission is stopped',not page.evaluate('__ATF_V51__.engine.running'))
             page.evaluate('{const ed=__ATF_V51__.editor;ed.edit("large grid",()=>ed.model.resize(128,72));}')
-            page.click('#editor-play');check('actual app refuses grid beyond published Mission capacity',page.evaluate('__ATF_V61__.standaloneContext')=='forge' and page.locator('.forge-control-v136').is_visible())
+            page.click('#editor-play');page.wait_for_function('__ATF_V51__.engine.running && __ATF_V51__.engine.editorMode')
+            check('actual app accepts the published 128 by 72 Mission grid',page.evaluate('__ATF_V61__.standaloneContext')=='forge-playtest' and page.evaluate('__ATF_V51__.engine.editorGridV136.columns===128 && __ATF_V51__.engine.editorGridV136.rows===72'))
+            page.keyboard.press('Escape');page.wait_for_function('__ATF_V61__.standaloneContext==="forge"')
             page.click('#editor-undo')
             page.select_option('#editor-mode','ship');page.click('#editor-play');page.wait_for_function('__ATF_V51__.hubEngine.editorPlaytest')
             check('actual app starts native Ship playtest',page.evaluate('__ATF_V61__.standaloneContext')=='forge-playtest')

@@ -28,13 +28,16 @@ const HANGAR_CONTROL_BOOTH_V61 = Object.freeze({
   asset: '/assets/openai/hub/props/hangar-control-booth-v61.png',
   sourceSize: Object.freeze({ width: 1024, height: 512 }),
   sourceCrop: rect(0, 0, 1024, 512),
-  renderBounds: rect(908, 176, 340, 170),
-  anchor: point(1078, 346, 'bottom-center'),
+  // Keep this rear-wall station below the ceiling beam while raising its
+  // associated observation route. The native 2:1 crop remains isotropic;
+  // its opaque top starts at y186.22 and its anchor ends above the deck316.
+  renderBounds: rect(948, 172, 260, 130),
+  anchor: point(1078, 302, 'bottom-center'),
   collidable: false,
   action: 'navigate:operations',
   description: 'Ouvrir le contrôle de vol et la table tactique du hangar.',
   interactionPriority: 110,
-  interactionBounds: rect(930, 326, 286, 298)
+  interactionBounds: rect(930, 282, 286, 342)
 });
 
 const UD4L_DROPSHIP_V55 = Object.freeze({
@@ -68,9 +71,11 @@ export const ELECTRICAL_HAZARD_ART_V55 = Object.freeze({
   asset: '/assets/openai/metroidvania/props/electrical-arc-hazard.png',
   sourceSize: Object.freeze({ width: 1774, height: 887 }),
   sourceCrop: rect(120, 377, 1536, 364),
-  renderBounds: rect(980, 553, 300, 71),
-  anchor: point(1130, 624, 'bottom-center'),
-  collisionBounds: rect(1040, 550, 236, 74),
+  renderBounds: rect(980, 369, 300, 71),
+  anchor: point(1130, 440, 'bottom-center'),
+  collisionBounds: rect(1040, 366, 236, 74),
+  plane: 'maintenance-alcove',
+  supportY: 440,
   damage: 22,
   stunSeconds: 1.25,
   damageIntervalSeconds: 0.75,

@@ -1,5 +1,7 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { drawPlayerAimGuideV124 } from './player-control-v124.js';
+import { resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
 import { drawEcho9MarkingV110 } from './echo9-personnel-v110.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { resolveUserEquipmentLoadoutV95, loadUserEquipmentImagesV95, drawUserArmorV95, drawUserWeaponV95 } from './user-equipment-v95.js';
@@ -917,7 +919,8 @@ export function withV52MissionRuntime(BaseEngine) {
       // The legacy nearest-squad shortcut below skips that inner level layer.
       if (isEnemyBatchCombatV66(enemy)) return super.updateEnemy(enemy, delta);
       const squadPool = asList(this.squadActors);
-      const targetPool = [this.player, this.coopEnabled ? this.coop : null, ...squadPool].filter(Boolean);
+      const targetPool = [this.player, this.coopEnabled ? this.coop : null, ...squadPool].filter(Boolean)
+        .filter(actor => this.enemyTargetPerceivedV130?.(enemy, actor) !== false);
       let nearest = null;
       if (enemy?.pendingMelee) {
         nearest = targetPool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId) || null;
@@ -927,7 +930,8 @@ export function withV52MissionRuntime(BaseEngine) {
         }
       } else {
         const allies = this.activeSquadActors().filter((member) => isEnemyMeleeTargetValidV64(member) && !member.inVehicle);
-        const candidates = [this.player, this.coopEnabled ? this.coop : null, ...allies].filter(isEnemyMeleeTargetValidV64);
+        const candidates = [this.player, this.coopEnabled ? this.coop : null, ...allies].filter(isEnemyMeleeTargetValidV64)
+          .filter(actor => this.enemyTargetPerceivedV130?.(enemy, actor) !== false);
         if (!candidates.length) return super.updateEnemy(enemy, delta);
         nearest = candidates.reduce((best, actor) => Math.abs(actor.x - enemy.x) < Math.abs(best.x - enemy.x) ? actor : best, candidates[0]);
       }
@@ -2237,7 +2241,12 @@ export function withV52MissionRuntime(BaseEngine) {
         this.animationTelemetry?.fallbackFamilies?.add(enemy.biology || 'unknown');
         return super.drawEnemy(ctx, enemy);
       }
-      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy', enemy, 'hostile'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy', enemy, 'hostile'), request, this.animationTime, {
+        emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: enemy,
+        physicalContext: this.bioforgeLevelV80 ? 'bioforge' : 'mission',
+        movementEnabled: !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+          && (this.bioforgeLevelV80 ? ['printing', 'combat'].includes(this.bioforgeRootV80?.activeSession?.phase) : this.mission?.state === 'active')
+      });
       ctx.save();
       if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
       if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }
@@ -2333,15 +2342,18 @@ export function withV52MissionRuntime(BaseEngine) {
       }
       const runtime = buildSpriteHitboxRuntime(entity, entry);
       if (!runtime) return false;
-      const { flip, sprite } = runtime;
+      const humanVisual = resolveHumanAtlasGeometryV133({ actor: entity, sheet: entry,
+        column: sample.column, row: sample.row, surface: this.bioforgeLevelV80 ? 'bioforge' : 'mission' });
+      const { flip, sprite } = humanVisual || runtime;
+      entity.humanVisualV133 = humanVisual;
       const sourceWidth = (image.naturalWidth || image.width) / entry.columns;
       const sourceHeight = (image.naturalHeight || image.height) / entry.rows;
       ctx.save();
       if (flip) {
         ctx.translate(sprite.x + sprite.width, sprite.y);
         ctx.scale(-1, 1);
-        ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, 0, 0, sprite.width, sprite.height);
-      } else ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, sprite.x, sprite.y, sprite.width, sprite.height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, 0, 0, sprite.width, sprite.height);
+      } else ctx.drawImage(resolveSpriteDrawableV134(image), sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, sprite.x, sprite.y, sprite.width, sprite.height);
       ctx.restore();
       entity.spriteHitbox = runtime;
       entity.spritePivot = runtime.pivot;

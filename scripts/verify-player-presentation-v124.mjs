@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { SpriteAnimationController, resolvePlayerAnimation, resolveSpriteSheet, resolveSpriteClip, SPRITE_PIVOTS,
   SPRITE_CLIP_SETS } from '../src/sprite-animation-runtime.js';
-import { drawPlayerSpriteV81, getEcho9StandingMuzzleOptionsV124 } from '../src/player-visual-contract-v81.js';
+import { PLAYER_VISUAL_CONTRACT_V81, drawPlayerSpriteV81, getEcho9StandingMuzzleOptionsV124 } from '../src/player-visual-contract-v81.js';
 import { resolveCombatMuzzleV83 } from '../src/combat-aim-v83.js';
 import { getPlayerSourceCropV124, PLAYER_STANDING_HEIGHTS_V124, playerAtlasScaleV124 } from '../src/player-presentation-v124.js';
 import { PLAYER_COSTUME_ASSETS_V119 } from '../src/player-costume-skins-v119.js';
@@ -260,8 +260,9 @@ check('standing shot muzzle agrees with the rendered shouldered barrel in both s
     const scale = playerAtlasScaleV124('player.echo9-marine.combat');
     approx(muzzle.x, result.pivot.x + (rawX - result.pivot.x) * scale);
     approx(muzzle.y, result.pivot.y + (rawY - result.pivot.y) * scale);
-    if (surface === 'mission') assert.ok(a.y + 37 - muzzle.y > 24, 'the former physical-hitbox shoulder was below the visible barrel');
-    else assert.ok(Math.abs(a.y + 37 - muzzle.y) < 3, 'Bioforge must use its own 98px artwork scale');
+    assert.deepEqual(PLAYER_VISUAL_CONTRACT_V81.surfaces[surface], PLAYER_VISUAL_CONTRACT_V81.surfaces.hub,
+      'V133 uses one human stature in every world surface.');
+    approx(result.pivot.y - muzzle.y, (240 - 96) * PLAYER_VISUAL_CONTRACT_V81.surfaces[surface].height / 256 * scale);
   }
 });
 

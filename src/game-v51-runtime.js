@@ -1,3 +1,7 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { advanceEnemyDistanceGaitV141, isEnemyDistanceGaitV141, canEnemyDistanceGaitMoveV141,
+  enemyDistanceGaitFrameV141 } from './enemy-distance-gait-v141.js';
+import { compileEditorGridV136, constrainEditorRectV136, editorMissionSpawnV136 } from './editor-spatial-v136.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, COMBAT_AIM_KEY_BINDINGS_V83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { bindCombatPointerAimV83, refreshCombatPointerAimV83 } from './mission-input-v77.js';
 import { crewMovementV85 } from './crew-runtime-v85.js';
@@ -40,10 +44,12 @@ import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { pressTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77, consumeTacticalReloadBonusV77, getTacticalReloadHudV77 } from './tactical-reload-v77.js';
 import { MissionGamepadInputV77 } from './mission-input-v77.js';
 import { integratePlayerVelocityV124, readPlayerControlsV124, findPlayerCoverV124,
-  resolvePlayerCoverV124, playerCoverProtectionV124, playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
+  resolvePlayerCoverV124, resolvePlayerProjectileFootprintV124, playerCoverProtectionV124,
+  playerMovementPresentationV124, constrainPlayerMuzzleV124 } from './player-control-v124.js';
 import { drawNativeWeaponV112 } from './weapon-native-visuals-v112.js';
 import { getEcho9StandingMuzzleOptionsV124 } from './player-visual-contract-v81.js';
 import { WeaponImageCacheV125 } from './weapon-image-cache-v125.js';
+import { isHumanPoseV133, resolveHumanAtlasGeometryV133 } from './human-visual-contract-v133.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -299,11 +305,6 @@ function selectBossEnemyProfile(catalog = []) {
   }, null)?.source || null;
 }
 
-function parseEditorPosition(position) {
-  const [column, row] = String(position || '').split(':').map(Number);
-  return Number.isInteger(column) && Number.isInteger(row) ? { column, row } : null;
-}
-
 export class GameEngine {
   constructor(canvas, { audio, onEvent = () => {} } = {}) {
     this.canvas = canvas;
@@ -495,6 +496,8 @@ export class GameEngine {
     this.editorTileCounts = {};
     this.editorTileCount = 0;
     this.editorProjectKind = null;
+    this.editorSpawn = null;
+    this.editorGridV136 = null;
     if (editorProject?.kind === 'mission' && Array.isArray(editorProject.tiles) && editorProject.tiles.length) {
       this.applyEditorProject(editorProject, enemyCatalog);
     }
@@ -643,19 +646,12 @@ export class GameEngine {
   }
 
   applyEditorProject(project, enemyCatalog) {
-    const [colsRaw, rowsRaw] = Array.isArray(project.size) ? project.size : [32, 18];
-    const cols = clamp(Number(colsRaw) || 32, 4, 64);
-    const rows = clamp(Number(rowsRaw) || 18, 4, 36);
-    const tileWidth = WORLD_WIDTH / cols;
-    const tileHeight = WORLD_HEIGHT / rows;
-    const tiles = project.tiles.flatMap((tile) => {
-      const position = parseEditorPosition(tile.position);
-      if (!position || !EDITOR_TILE_TYPES.has(tile.type) || position.column < 0 || position.column >= cols || position.row < 0 || position.row >= rows) return [];
-      return [{ ...tile, ...position, x: position.column * tileWidth, y: position.row * tileHeight }];
-    });
+    const grid = compileEditorGridV136(project);
+    const { tileWidth, tileHeight, tiles } = grid;
     if (!tiles.length) return;
     this.editorMode = true;
     this.editorProjectKind = project.kind;
+    this.editorGridV136 = { columns: grid.columns, rows: grid.rows, tileWidth, tileHeight };
     this.editorTileCount = tiles.length;
     this.editorTileCounts = Object.fromEntries([...EDITOR_TILE_TYPES].map((type) => [type, tiles.filter((tile) => tile.type === type).length]));
     const byType = (type) => tiles.filter((tile) => tile.type === type);
@@ -666,11 +662,11 @@ export class GameEngine {
     this.walls = byType('wall').map((tile, index) => ({ id: `editor-wall-${index}`, x: tile.x, y: tile.y, w: tileWidth, h: tileHeight, art: 'breakable' }));
     this.doors = byType('door').map((tile, index) => {
       const height = Math.max(132, tileHeight * 2.6);
-      return { id: `editor-door-${index}`, x: tile.x + tileWidth * 0.34, y: tile.y + tileHeight - height, w: Math.max(48, tileWidth * 0.32), h: height, open: false, progress: 0 };
+      return constrainEditorRectV136({ id: `editor-door-${index}`, x: tile.x + tileWidth * 0.34, y: tile.y + tileHeight - height, w: Math.max(48, tileWidth * 0.32), h: height, open: false, progress: 0 });
     });
-    this.ladders = byType('ladder').map((tile, index) => ({ id: `editor-ladder-${index}`, x: tile.x + tileWidth * 0.5, top: tile.y, bottom: Math.min(WORLD_HEIGHT - 20, tile.y + tileHeight * 4), w: 52 }));
+    this.ladders = byType('ladder').map((tile, index) => ({ id: `editor-ladder-${index}`, x: clamp(tile.x + tileWidth * 0.5, 26, WORLD_WIDTH - 26), top: tile.y, bottom: Math.min(WORLD_HEIGHT, tile.y + tileHeight * 4), w: 52 }));
     this.lifts = byType('lift').map((tile, index) => ({
-      id: `editor-lift-${index}`, kind: 'lift', x: tile.x, y: tile.y, baseY: tile.y, topY: Math.max(80, tile.y - tileHeight * 4),
+      id: `editor-lift-${index}`, kind: 'lift', x: tile.x, y: tile.y, baseY: tile.y, topY: Math.max(0, tile.y - tileHeight * 4),
       w: tileWidth, h: 24, art: 'drop', phase: index * 0.9, previousY: tile.y
     }));
     this.platforms.push(...this.lifts);
@@ -679,27 +675,27 @@ export class GameEngine {
       const target = vents[(index + 1) % vents.length];
       return {
         id: `editor-vent-${index}`, x: tile.x + tileWidth * 0.25, y: tile.y, w: tileWidth * 0.5, h: tileHeight,
-        open: false, requiresTool: false, targetX: target ? target.x + tileWidth * 0.25 : clamp(tile.x + tileWidth * 3, 0, WORLD_WIDTH - 80),
-        targetY: target ? target.y - this.player.h : clamp(tile.y - this.player.h, 0, WORLD_HEIGHT - this.player.h)
+        open: false, requiresTool: false, targetX: clamp(target ? target.x + tileWidth * 0.25 : tile.x + tileWidth * 3, 0, WORLD_WIDTH - this.player.w),
+        targetY: clamp((target?.y ?? tile.y) - this.player.h, 0, WORLD_HEIGHT - this.player.h)
       };
     });
     this.ventShortcut = this.vents[0] || { x: -1000, y: -1000, w: 0, h: 0, open: false };
-    const spawns = byType('spawn');
-    if (spawns[0]) this.editorSpawn = { x: spawns[0].x + tileWidth * 0.35, y: Math.max(0, spawns[0].y + tileHeight - this.player.h) };
+    this.editorSpawn = editorMissionSpawnV136(grid, this.player);
     const objectives = byType('objective');
-    if (objectives[0]) this.objective = { id: 'editor-objective', x: objectives[0].x + tileWidth * 0.35, y: objectives[0].y, w: Math.max(52, tileWidth * 0.3), h: tileHeight, complete: false };
+    if (objectives[0]) this.objective = constrainEditorRectV136({ id: 'editor-objective', x: objectives[0].x + tileWidth * 0.35, y: objectives[0].y, w: Math.max(52, tileWidth * 0.3), h: tileHeight, complete: false });
     const enemyTiles = byType('enemy');
     const catalog = enemyCatalog.length ? enemyCatalog : [{ name: 'Xenomorph Warrior', biology: 'xenomorph', health: 80, damage: 12, speed: 1.2 }];
     this.enemies = enemyTiles.map((tile, index) => {
       const source = catalog[index % catalog.length];
       const boss = source.caste === 'royal' || /queen|reine/i.test(source.name || '');
-      return this.createEnemy(source, index, tile.x + tileWidth * 0.35, tile.y + tileHeight, { boss, keyCarrier: index === 0 && enemyTiles.length > 2 });
+      const enemy = this.createEnemy(source, index, tile.x + tileWidth * 0.35, tile.y + tileHeight, { boss, keyCarrier: index === 0 && enemyTiles.length > 2 });
+      return constrainEditorRectV136(enemy);
     });
     const vehicles = byType('vehicle');
-    this.vehicle = vehicles[0] ? this.createVehicle(vehicles[0].x, Math.max(0, vehicles[0].y + tileHeight - 104)) : { ...this.createVehicle(-1000, FLOOR_Y - 104), active: false };
+    this.vehicle = vehicles[0] ? constrainEditorRectV136(this.createVehicle(vehicles[0].x, Math.max(0, vehicles[0].y + tileHeight - 104))) : { ...this.createVehicle(-1000, FLOOR_Y - 104), active: false };
     const terminals = byType('terminal');
-    this.powerNode = terminals[0] ? { id: 'editor-power', x: terminals[0].x + tileWidth * 0.4, y: terminals[0].y, w: 52, h: tileHeight, active: false } : null;
-    this.archiveTerminal = terminals[1] ? { id: 'editor-archive', x: terminals[1].x + tileWidth * 0.4, y: terminals[1].y, w: 58, h: tileHeight, recovered: false } : null;
+    this.powerNode = terminals[0] ? constrainEditorRectV136({ id: 'editor-power', x: terminals[0].x + tileWidth * 0.4, y: terminals[0].y, w: 52, h: tileHeight, active: false }) : null;
+    this.archiveTerminal = terminals[1] ? constrainEditorRectV136({ id: 'editor-archive', x: terminals[1].x + tileWidth * 0.4, y: terminals[1].y, w: 58, h: tileHeight, recovered: false }) : null;
     this.hazards = byType('hazard').map((tile, index) => ({ id: `editor-hazard-${index}`, x: tile.x, y: tile.y + tileHeight * 0.65, w: tileWidth, h: tileHeight * 0.35, damage: 16, active: true }));
     this.covers = [];
     this.toolPickup.taken = this.vents.every((vent) => !vent.requiresTool);
@@ -1014,10 +1010,12 @@ export class GameEngine {
     const v64MeleeState = advanceEnemyMeleeAttackV64(enemy, delta);
     const v64Melee = v64MeleeState.contract;
     const candidatePool = [this.player, this.coopEnabled ? this.coop : null].filter(Boolean);
-    const candidates = candidatePool.filter(isEnemyMeleeTargetValidV64);
+    const candidates = candidatePool.filter(isEnemyMeleeTargetValidV64)
+      .filter(actor => this.enemyTargetPerceivedV130?.(enemy, actor) !== false);
     let target = null;
     if (v64Melee && enemy.pendingMelee) {
-      target = candidatePool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId) || null;
+      target = candidatePool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId
+        && this.enemyTargetPerceivedV130?.(enemy, actor) !== false) || null;
       if (!isEnemyMeleeTargetValidV64(target)) {
         this.cancelPendingEnemyMeleeV64(enemy, 'target-invalid');
         return;
@@ -1231,7 +1229,8 @@ export class GameEngine {
   refreshPlayerCoverV124(actor, { fire = false } = {}) {
     if (!actor) return null;
     actor.coverV124 = resolvePlayerCoverV124(actor, this.findCover(actor), actor.combatAimV83, {
-      fire, busy: Boolean(this.isPlaceableBusyV86?.(actor) || this.isFieldActionBusyV124?.(actor))
+      fire, busy: Boolean(this.isPlaceableBusyV86?.(actor) || this.isFieldActionBusyV124?.(actor)),
+      projectileFootprint: resolvePlayerProjectileFootprintV124(this, actor)
     });
     actor.inCover = Boolean(actor.coverV124 && !actor.coverV124.peeking);
     return actor.coverV124;
@@ -1409,7 +1408,7 @@ export class GameEngine {
   resolvePlayerMuzzleV124(player, aim) {
     if (player?.inVehicle && this.vehicle) return resolveCombatMuzzleV83(player, aim,
       { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 });
-    const heldPose = this.resolvePlayerWeaponPoseV125?.(player, aim);
+    const heldPose = this.resolvePlayerWeaponPoseV125?.(player, aim, { requireReady: false });
     if (heldPose) return heldPose.muzzle;
     const muzzle = resolveUserEquipmentMuzzleV95(player, aim) || resolveCombatMuzzleV83(player, aim,
       getEcho9StandingMuzzleOptionsV124(player, { surface: this.bioforgeLevelV80 ? 'bioforge' : 'mission' }) || {});
@@ -1883,7 +1882,7 @@ export class GameEngine {
     const offsetX = -((this.camera.x * factorX) % width);
     const offsetY = -this.camera.y * factorY - (height - LOGICAL_HEIGHT) * 0.5 + yOffset;
     ctx.globalAlpha = alpha;
-    for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, offsetY, width, height);
+    for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(resolveSpriteDrawableV134(image), x, offsetY, width, height);
     ctx.globalAlpha = 1;
   }
 
@@ -1902,7 +1901,7 @@ export class GameEngine {
     ctx.save();
     ctx.globalAlpha = alpha;
     for (let x = offset - spacing; x < LOGICAL_WIDTH + spacing; x += spacing) {
-      ctx.drawImage(image, x, y, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), x, y, width, height);
       draws += 1;
     }
     ctx.restore();
@@ -2074,7 +2073,7 @@ export class GameEngine {
     const height = maxHeight;
     const naturalWidth = image.naturalWidth * (height / image.naturalHeight);
     const width = Math.min(fallbackWidth || naturalWidth, naturalWidth);
-    ctx.drawImage(image, x + ((fallbackWidth || width) - width) / 2, baseline - height, width, height);
+    ctx.drawImage(resolveSpriteDrawableV134(image), x + ((fallbackWidth || width) - width) / 2, baseline - height, width, height);
   }
 
   drawAtlasFrame(ctx, descriptor, frame, x, y, width, height) {
@@ -2088,7 +2087,7 @@ export class GameEngine {
     const column = safeFrame % columns;
     const row = Math.floor(safeFrame / columns);
     ctx.drawImage(
-      image,
+      resolveSpriteDrawableV134(image),
       column * cellWidth, row * cellHeight, cellWidth, cellHeight,
       x, y, width, height
     );
@@ -2110,7 +2109,7 @@ export class GameEngine {
       for (let x = hazard.x; x < hazard.x + hazard.w; x += 256) {
         if (band && ready(image) && image.naturalWidth === 1024 && image.naturalHeight === 512) {
           const inset = profile.cetoHorizontalInset;
-          ctx.drawImage(image, (safeFrame % 4) * 256 + inset, Math.floor(safeFrame / 4) * 256 + band[0],
+          ctx.drawImage(resolveSpriteDrawableV134(image), (safeFrame % 4) * 256 + inset, Math.floor(safeFrame / 4) * 256 + band[0],
             256 - 2 * inset, band[1] - band[0], x, hazard.y, 256, hazard.h);
         } else this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
         this.drawAtlasFrame(ctx, profile.accent, frame, x, hazard.y - 10, 256, 48);
@@ -2135,7 +2134,7 @@ export class GameEngine {
     }
     const electrical = hazard.kind === 'electrical';
     const image = this.images.get(electrical ? 'electricalArc' : 'acid');
-    if (ready(image)) ctx.drawImage(image, hazard.x, hazard.y - 22, hazard.w, hazard.h + 34);
+    if (ready(image)) ctx.drawImage(resolveSpriteDrawableV134(image), hazard.x, hazard.y - 22, hazard.w, hazard.h + 34);
     else { ctx.fillStyle = electrical ? '#65bddd' : '#7e9b37'; ctx.fillRect(hazard.x, hazard.y, hazard.w, hazard.h); }
   }
 
@@ -2153,7 +2152,7 @@ export class GameEngine {
     if (!vacuum || !ready(image)) return 0;
     ctx.save();
     ctx.globalAlpha = this.reducedMotion ? 0.34 : 0.42 + Math.sin(this.animationTime * 2.4) * 0.08;
-    ctx.drawImage(image, 0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+    ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
     ctx.restore();
     return 1;
   }
@@ -2205,7 +2204,7 @@ export class GameEngine {
   drawDoor(ctx, door) {
     const { image, open, source, x, y, w: width, h: height } = this.getDoorRenderState(door);
     ctx.globalAlpha = open ? 0.82 : 1;
-    if (ready(image)) ctx.drawImage(image, source.x, source.y, source.w, source.h, x, y, width, height);
+    if (ready(image)) ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, x, y, width, height);
     else { ctx.fillStyle = '#353c38'; ctx.fillRect(x, y, width, height); }
     ctx.globalAlpha = 1;
     ctx.fillStyle = this.doorRequirement(door) ? '#d04f47' : door.open ? '#83d99e' : '#d6ac59';
@@ -2361,8 +2360,32 @@ export class GameEngine {
         return;
       }
     }
-    const x = enemy.x + enemy.w / 2 - renderWidth / 2;
-    const y = enemy.y + enemy.h - renderHeight * (240 / CELL_SIZE);
+    const humanSheet = dedicatedEnemySheet || resolveSpriteSheet(sheetId)
+      || (isHumanPoseV133({ id: enemy.profileId }, enemy) ? {
+        path: enemy.biology === 'human' ? '/assets/openai/human-factions-animation-sheet.png'
+          : '/assets/openai/synthetic-android-animation-sheet.png', sourceFacing: 1
+      } : null);
+    // Historical faction sheets have no SpriteAnimationController request.
+    // Spend their walking cells with the same measured world stride as Joe;
+    // combat, injury and corpse cells retain their original clocks and rows.
+    if (isEnemyDistanceGaitV141(enemy)) {
+      this.enemyFallbackGaitV141 ||= new WeakMap();
+      const gait = advanceEnemyDistanceGaitV141(this.enemyFallbackGaitV141.get(enemy), enemy, this.animationTime, {
+        context: this.bioforgeLevelV80 ? 'bioforge' : 'mission', reducedMotion: this.reducedMotion || this.accessibilityRuntime?.reducedMotion,
+        movementEnabled: !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+          && (this.bioforgeLevelV80 ? ['printing', 'combat'].includes(this.bioforgeRootV80?.activeSession?.phase) : this.mission?.state === 'active')
+      });
+      if (gait) this.enemyFallbackGaitV141.set(enemy, gait);
+      if (gait && canEnemyDistanceGaitMoveV141(enemy)) {
+        frame = enemyDistanceGaitFrameV141(gait, 4);
+        if (dedicatedEnemySheet?.clipSet === 'enemy-action-v56') row = gait.moving ? 1 : 0;
+      }
+    }
+    const human = resolveHumanAtlasGeometryV133({ actor: enemy, sheet: humanSheet, column: frame, row });
+    enemy.humanVisualV133 = human;
+    if (human) { renderWidth = human.sprite.width; renderHeight = human.sprite.height; }
+    const x = human?.sprite.x ?? enemy.x + enemy.w / 2 - renderWidth / 2;
+    const y = human?.sprite.y ?? enemy.y + enemy.h - renderHeight * (240 / CELL_SIZE);
     ctx.save();
     if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
     if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }
@@ -2405,7 +2428,7 @@ export class GameEngine {
     if (ready(image)) {
       const height = this.objective.complete ? 92 : 86;
       const width = image.naturalWidth * (height / image.naturalHeight);
-      ctx.drawImage(image, this.objective.x - width / 2, this.objective.y + this.objective.h - height, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), this.objective.x - width / 2, this.objective.y + this.objective.h - height, width, height);
     }
     ctx.fillStyle = this.objective.complete ? '#79d69a' : '#d5b562';
     ctx.beginPath(); ctx.arc(this.objective.x, this.objective.y - 14, 5 + Math.sin(this.animationTime * 4) * 2, 0, Math.PI * 2); ctx.fill();
@@ -2418,8 +2441,8 @@ export class GameEngine {
     ctx.save();
     if (flip) {
       ctx.translate(x + width, y); ctx.scale(-1, 1);
-      ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
-    } else ctx.drawImage(image, column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, 0, 0, width, height);
+    } else ctx.drawImage(resolveSpriteDrawableV134(image), column * cellWidth, row * cellHeight, cellWidth, cellHeight, x, y, width, height);
     ctx.restore();
   }
 
@@ -2431,7 +2454,7 @@ export class GameEngine {
       const offset = -((this.camera.x * 1.12) % width);
       ctx.save();
       ctx.globalAlpha = 0.3;
-      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
+      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(resolveSpriteDrawableV134(image), x, LOGICAL_HEIGHT - height, width, height);
       ctx.restore();
     }
     this.drawHazardForegroundOverlays(ctx);
@@ -2468,7 +2491,8 @@ export class GameEngine {
     ctx.fillStyle = '#9be0ae'; ctx.font = 'bold 13px monospace';
     ctx.fillText(this.campaign?.name?.toUpperCase() || 'OPÉRATION TANTALUS', 34, 38);
     ctx.fillStyle = '#ccd9cc'; ctx.font = '12px monospace';
-    ctx.fillText(`PV ${Math.ceil(this.player.health)}  ARM ${Math.ceil(this.player.armor)}  MUN ${this.player.ammo}/${this.player.ammoReserve}`, 34, 60);
+    const weaponResource = this.weaponActionHudLabelV130?.(this.player) || `MUN ${this.player.ammo}/${this.player.ammoReserve}`;
+    ctx.fillText(`PV ${Math.ceil(this.player.health)}  ARM ${Math.ceil(this.player.armor)}  ${weaponResource}`, 34, 60);
     ctx.fillStyle = '#8ea898';
     ctx.fillText(`SECTEUR ${this.room + 1}/6 · ${this.phaseLabel()}`, 34, 81);
     ctx.fillText(`MÉD ${this.inventory.medkits} · RÉCUP ${this.inventory.salvage} · TRACK ${Math.round(this.tracker.energy)}%`, 34, 99);
@@ -2593,6 +2617,7 @@ export class GameEngine {
       editorMode: this.editorMode,
       editorTileCount: this.editorTileCount,
       editorTileCounts: { ...this.editorTileCounts },
+      editorGridV136: this.editorGridV136 ? { ...this.editorGridV136 } : null,
       assets
     };
   }

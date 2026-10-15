@@ -1,7 +1,9 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V108 } from './enemy-import-animation-data-v108.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V114 } from './enemy-import-animation-data-v114.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V118 } from './enemy-import-animation-data-v118.js';
 import { ENEMY_IMPORT_ANIMATION_DATA_V122 } from './enemy-import-animation-data-v122.js';
+import { enemyDistanceGaitFrameV141 } from './enemy-distance-gait-v141.js';
 // Presentation only: authored atlas poses never change actors, collisions or damage.
 const freeze = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); }
@@ -111,7 +113,10 @@ export function createEnemyImportMotionTrackerV107() {
 /** Draw actual atlas frames at constant stature, never stretch/warp the fixed PNG. */
 export function drawEnemyImportAnimationV107(ctx, definition, images, options = {}) {
   const animation = getEnemyImportAnimationV107(definition);
-  const frame = getEnemyImportAnimationFrameV107(animation, options.action, options.timeSeconds, options.reducedMotion);
+  const clip = animation?.clips?.[options.action];
+  const gait = options.distanceGaitV141;
+  const frame = gait && clip ? animation.frames.find(frame => frame.id === clip.frames[enemyDistanceGaitFrameV141(gait, clip.frames.length)])
+    : getEnemyImportAnimationFrameV107(animation, options.action, options.timeSeconds, options.reducedMotion);
   const image = animation && images?.get(animation.path);
   if (!frame || !isEnemyImportAnimationImageReadyV107(image, animation)) return false;
   return drawEnemyImportAnimationFrameV107(ctx, definition, image, animation, frame, options);
@@ -129,6 +134,6 @@ export function drawEnemyImportAnimationFrameV107(ctx, definition, image, animat
   const [sx, sy, sw, sh] = frame.rect;
   ctx.save(); ctx.translate(options.x, options.y);
   ctx.scale((options.facing === -1 ? -1 : 1) * animation.sourceFacing, 1);
-  ctx.drawImage(image, sx, sy, sw, sh, -frame.pivot.x * sw * scale, -frame.pivot.y * sh * scale, sw * scale, sh * scale);
+  ctx.drawImage(resolveSpriteDrawableV134(image), sx, sy, sw, sh, -frame.pivot.x * sw * scale, -frame.pivot.y * sh * scale, sw * scale, sh * scale);
   ctx.restore(); return true;
 }

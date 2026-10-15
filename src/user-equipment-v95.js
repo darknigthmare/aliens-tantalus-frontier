@@ -1,6 +1,8 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { USER_EQUIPMENT_ART_V95 } from './user-equipment-art-v95.js';
 import { resolveCombatAimV83, resolveCombatMuzzleV83 } from './combat-aim-v83.js';
 import { getStaticEquipmentPresentationV124 } from './player-presentation-v124.js';
+import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
 
 // These are project balance values, not canonical weapon/armour specifications.
 // The art manifest contains only real reviewed PNGs. No item exists before its
@@ -71,7 +73,7 @@ function boundsOf(art) {
 export function getUserArmorTransformV95(actor, armor) {
   if (!actor || armor?.kind !== 'armor') return null;
   const b = boundsOf(armor);
-  const scale = actor.h / Math.max(1, b.bottom - b.top);
+  const scale = HUMAN_VISUAL_CONTRACT_V133.standingHeight / Math.max(1, b.bottom - b.top);
   const width = armor.sourceWidth * scale, height = armor.sourceHeight * scale;
   const mirror = (actor.facing < 0 ? -1 : 1) !== (facesLeft(armor) ? -1 : 1);
   const pivot = armor.pivot || { x: (b.left + b.right) / (2 * armor.sourceWidth), y: b.bottom / armor.sourceHeight };
@@ -129,7 +131,7 @@ export function drawUserArmorV95(ctx, actor, image, armor, options = {}) {
   }
   ctx.translate(t.x + (t.mirror ? t.width : 0), t.y);
   if (t.mirror) ctx.scale(-1, 1);
-  ctx.drawImage(image, 0, 0, t.width, t.height);
+  ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, t.width, t.height);
   ctx.restore();
   actor.playerVisualV95 = { schema: 95, itemId: armor.id, path: armor.path, visualMode: 'static-pose',
     animationStatus: 'missing', presentationV124: presentation.animationStatus, worn: true };
@@ -154,7 +156,7 @@ export function drawUserWeaponV95(ctx, actor, image, weapon, armor = null) {
   ctx.translate(t.pivotX - Number(aim.x || 0) * recoil * 2.5, t.pivotY - Number(aim.y || 0) * recoil * 2.5);
   ctx.rotate(t.angle + reloadTilt - recoil * .018 * facing);
   if (t.mirror) ctx.scale(-1, 1);
-  ctx.drawImage(image, -t.grip.x * t.width, -t.grip.y * t.height, t.width, t.height);
+  ctx.drawImage(resolveSpriteDrawableV134(image), -t.grip.x * t.width, -t.grip.y * t.height, t.width, t.height);
   ctx.restore();
   actor.heldWeaponVisualV95 = { itemId: weapon.id, path: weapon.path, muzzle: { x: t.muzzle.x, y: t.muzzle.y },
     animationStatus: 'missing', presentationV124: 'aim-pivot-recoil-and-reload-response', recoil, reloadProgress };

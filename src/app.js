@@ -28,6 +28,11 @@ import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
+import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
+import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
+import { mountFieldMediaUiV135 } from './field-media-ui-v135.js';
+import { savePlayerWardrobeOutfitV135, equipPlayerWardrobeOutfitV135, deletePlayerWardrobeOutfitV135,
+  copyPlayerAppearanceV135, equipPlayerWardrobePartsV140 } from './player-wardrobe-v135.js';
 import {
   ensureAdvancedState, getShipModuleEffects, getModuleQuote, installShipModule, repairShipModule,
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
@@ -49,7 +54,20 @@ import { APC_CONVOY_CAMPAIGN_V121, buildApcConvoyLevelV121 } from './apc-convoy-
 import { C12_HORDE_CAMPAIGN_V121, buildC12HordeLevelV121 } from './c12-horde-runtime-v121.js';
 import { ARCHIVE_RELAY_CAMPAIGN_V122, buildArchiveRelayLevelV122 } from './archive-relay-runtime-v122.js';
 import { ArchiveRelayReaderV122, renderArchiveRelayArchiveV122 } from './archive-relay-ui-v122.js';
-import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-opening-v88.js';
+import { HubGame as HubGameV88, HUB_DECKS, HUB_NPC_ROSTER } from './hub-opening-v88.js';
+import { withHubTrainingV132, validateHubLoaderReceiptV132 } from './hub-training-v132.js';
+import { bindHubControlV133 } from './hub-control-bindings-v133.js';
+import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.js';
+import { withHubRoomParallaxV134 } from './hub-room-parallax-v134.js';
+import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
+import { withHubNpcLifeV136 } from './npc-life-v136.js';
+import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
+import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
+import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
+import { withHubCirculationV137 } from './hub-circulation-v137.js';
+import { withHubRoomIdentityV137 } from './hub-room-identity-v137.js';
+import { withHubDestinationSignsV138 } from './hub-destination-signage-runtime-v138.js';
+import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132 } from './save.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
 import { advancePlayerOnboardingV84, ONBOARDING_DIALOGUES_V84, getPlayerOnboardingObjectiveV84 } from './player-onboarding-v84.js';
@@ -57,6 +75,10 @@ import { advancePlayerOpeningV88, getPlayerOpeningObjectiveV88, OPENING_SIGNAL_V
 import { advanceOpeningExerciseV89, getOpeningExerciseObjectiveV89 } from './opening-exercise-v89.js';
 import { advancePortMeridienV90, normalizePortMeridienV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
+import { admittedForgeJourneyV141 } from './forge-journey-admission-v141.js';
+import { withForgeShipRuntimeV141 } from './forge-ship-runtime-v141.js';
+import { withForgeDecorationV141 } from './forge-decoration-v141.js';
+import { buildForgeMissionSandboxV140 } from './forge-sandbox-v140.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
@@ -74,11 +96,18 @@ import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
 import {
-  SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V67, getSpecialOperationByCampaignIdV67
-} from './special-operations-v67.js';
-import {
-  getNarrativeInvestigationV68, markNarrativeCollectableReadV68, recordNarrativeDecisionV68
-} from './narrative-collectables-v68.js';
+  SPECIAL_OPERATIONS_V131 as SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V131 as SPECIAL_OPERATION_COUNTS_V67,
+  getSpecialOperationByCampaignIdV131 as getSpecialOperationByCampaignIdV67, NEW_SPECIAL_CAMPAIGNS_V131, isSoloSpecialOperationV131
+} from './special-operations-v131.js';
+import { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } from './hive-missions-v131.js';
+import { MECHA_CAMPAIGNS_V131, buildMechaMissionV131 } from './mecha-missions-v131.js';
+import { ECOSYSTEM_CAMPAIGNS_V131, buildEcosystemMissionV131 } from './ecosystem-missions-v131.js';
+import { LEGACY_CAMPAIGNS_V131, buildLegacyMissionV131 } from './legacy-operations-v131.js';
+import { HiveCommandDockV131 } from './hive-command-ui-v131.js';
+import { SquadCommandDockV132 } from './squad-command-ui-v132.js';
+import { getNarrativeEvidenceModelV132, markNarrativeEvidenceReadV132,
+  recordNarrativeEvidenceDecisionV132, markNarrativeMediaPlayedV132 } from './narrative-evidence-v132.js';
+import { getNarrativeInvestigationV68 } from './narrative-collectables-v68.js';
 import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
 import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
 import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
@@ -151,6 +180,7 @@ forgeSaveSystem.load();
 const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
+const hubControlBindingsV133 = [];
 let standaloneContext = null;
 // A rejected terminal balance never becomes a false victory or a paid retreat.
 let pendingResolutionV121 = null;
@@ -181,6 +211,8 @@ let missionArchiveOverlayV68 = null;
 let archiveRelayReaderV122 = null;
 let alphaBravoCommandDockV69 = null;
 let alienSurvivalDockV70 = null;
+let hiveCommandDockV131 = null;
+let squadCommandDockV132 = null;
 let bioforgeUiV80 = null;
 let xenoTrialsUiV96 = null;
 let xenoTrialsOwnerV96 = null;
@@ -213,10 +245,18 @@ function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
 }
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
+const NativeHubGame = [
+  withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
+  withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
+  withHubNpcLifeV136, withHubCirculationV137, withHubRoomIdentityV137,
+  withHubDestinationSignsV138
+].reduce((Game, decorate) => decorate(Game), HubGameV88);
+const HubGame = withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
   onPersist: persistHub,
+  onTrainingEventV132: handleHubTrainingEventV132,
   onStatus: renderHubStatus
 });
 const bioforgeRuntimeV80 = new BioforgeRuntimeV80(byId('bioforge-canvas-v80'), {
@@ -623,9 +663,12 @@ function openHubStation(view) {
 }
 
 function openHubDialogue(interaction) {
-  const contract = HUB_STATION_DIALOGUES_V61[interaction?.roomId];
+  // Parent room contacts historically carry id; annex/opening contacts carry
+  // roomId. Both refer to the same physical room and station dialogue.
+  const roomId = interaction?.roomId || interaction?.id;
+  const contract = HUB_STATION_DIALOGUES_V61[roomId];
   if (!contract) return false;
-  pendingHubInteraction = { interaction, contract };
+  pendingHubInteraction = { interaction: { ...interaction, roomId }, contract };
   hubEngine.pause();
   byId('hub-dialogue-speaker').textContent = contract.speaker;
   byId('hub-dialogue-text').textContent = contract.text;
@@ -651,7 +694,7 @@ function openNpcDialogueV62(interaction) {
   });
   if (!conversation) return false;
   pendingNpcConversationV62 = conversation;
-  pendingHubInteraction = { interaction, conversation, npc: true };
+  pendingHubInteraction = { interaction, conversation, npc: true, owner: currentOwnerV84() };
   hubEngine.pause();
   byId('hub-dialogue-speaker').textContent = `${conversation.identity.name} · ${conversation.identity.role}`;
   byId('hub-dialogue-text').textContent = conversation.lines.map((line) => line.text).join(' ');
@@ -671,16 +714,21 @@ function openNpcDialogueV62(interaction) {
 
 function chooseNpcDialogueV62(choiceId) {
   if (!pendingNpcConversationV62) return false;
+  if (!ownsTimelineV84(pendingHubInteraction?.owner) || !ownsTimelineV84(hubOwnerV84)
+    || activeView !== 'hub' || standaloneContext || saveSystem.recoveryNeeded) {
+    throw new Error('Le profil a changé. Rouvrez cet échange depuis le Tantalus.');
+  }
   const result = applyNpcDialogueChoiceV62(saveSystem.data.hub, pendingNpcConversationV62, choiceId);
   if (!result.applied) {
     toast(result.blockedReason || 'Cette réponse n’est plus disponible.');
     return false;
   }
-  saveSystem.data.hub.dialogueMemory = clone(result.persistence.dialogueMemory);
-  saveSystem.data.hub.npcRoutineState = clone(result.persistence.npcRoutineState);
-  hubEngine.npcRoutineStateV62 = clone(result.persistence.npcRoutineState);
+  // Store the complete candidate before publishing memory, rapport or response.
+  // A failed write leaves both the live save and the actor context untouched.
+  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub),
+    dialogueMemory: clone(result.persistence.dialogueMemory), npcRoutineState: clone(result.persistence.npcRoutineState) } });
+  hubEngine.npcRoutineStateV62 = clone(saveSystem.data.hub.npcRoutineState);
   hubEngine.setNpcRoutineContextV62(getHubRoutineContextV62(), { persist: false, rebuild: true });
-  saveSystem.commit();
   byId('hub-dialogue-text').textContent = result.response;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
@@ -702,6 +750,7 @@ function setupXenoTrialsUiV96() {
 function showView(name) {
   name = resolvePlayerViewV110(name, developerModeV110);
   if (!VIEW_META[name]) return;
+  hubControlBindingsV133.forEach(binding => binding.clear());
   if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
   if (name !== 'settings') titleScreen.clearMenuReturnV89();
   refugeControllerV87.close();
@@ -715,6 +764,8 @@ function showView(name) {
   if (activeView === 'hub' && name === 'hub') Object.assign(saveSystem.data.hub, captureHubPoseV84());
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ resume: false, restoreFocus: false });
   if (name !== 'play' && archiveRelayReaderV122?.openState) archiveRelayReaderV122.close({ resume: false, restoreFocus: false });
+  if (name !== 'play') hiveCommandDockV131?.close({ restoreFocus: false });
+  if (name !== 'play') squadCommandDockV132?.close({ restoreFocus: false });
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
@@ -739,7 +790,8 @@ function showView(name) {
     hubOwnerV84 = currentOwnerV84();
     hubEngine.playerCostumeIdV119 = saveSystem.data.player.costumeId;
     hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(saveSystem.data.player.appearanceV126);
-    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90 });
+    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90,
+      trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data) });
     if (hubEngine.isPortMeridienV90()) { byId('breadcrumb').textContent = 'PALISADE // PORT-MÉRIDIEN'; byId('view-title').textContent = 'Le quai des vivants'; }
   }
   if (name === 'bioforge') prepareBioforgeViewV80();
@@ -760,6 +812,7 @@ function showView(name) {
     heading.focus({ preventScroll: true });
   }
   globalThis.scrollTo?.({ top: 0, behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
+  fieldMediaUiV135?.refresh();
 }
 
 function getHubRoutineContextV62(source = saveSystem.data) {
@@ -812,7 +865,7 @@ function captureHubPoseV84() {
   if (hubEngine.isPortMeridienV90?.()) return {}; // Ground coordinates must never overwrite the ship return pose.
   const annex = hubEngine.currentAnnexV71();
   if (annex) return projectRefugeHubSaveV87({
-    deck: hubEngine.state.deck, roomId: annex.parentRoomId,
+    deck: hubEngine.state.deck, roomId: hubEngine.hubCommercialStateV71.returnContext?.roomId || annex.parentRoomId,
     positionX: Math.round(hubEngine.hubCommercialStateV71.returnContext?.x ?? saveSystem.data.hub.positionX),
     positionY: Math.round(hubEngine.annexReturnPoseV71?.y ?? hubEngine.restoreReturnPoseV71(annex).y),
     facing: hubEngine.hubCommercialStateV71.returnContext?.facing ?? hubEngine.player.facing,
@@ -1344,7 +1397,7 @@ function renderOperationPlan() {
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const soloOperationV121 = [BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id);
+  const soloOperationV121 = isSoloSpecialOperationV131(campaign.id);
   const convoyOperationV121 = campaign.id === APC_CONVOY_CAMPAIGN_V121.id;
   const issuedVehicle = convoyOperationV121 ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier') : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId)
@@ -1369,7 +1422,7 @@ function renderOperationPlan() {
         ? 'Quatre opérateurs · deux binômes physiques · ordres, pings, tâches réservées, stress et cohésion dynamiques.'
         : specialOperation?.id === 'alien-survival-systems'
           ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
-          : '';
+          : escapeHtml(campaign.description || campaign.summary || '');
   const soloNoticeV121 = soloOperationV121
     ? `<div class="special-operation-notice"><span>INSERTION SOLO</span><b>${convoyOperationV121 ? 'M577 FOURNI · CONVOI À UN OPÉRATEUR' : 'INSERTION À PIED · AUCUN VÉHICULE'}</b><p>${campaign.id === BLACK_COCOON_CAMPAIGN_V121.id ? 'Captivité, récupération du matériel, sortie du complexe puis confinement à bord.' : convoyOperationV121 ? 'Conduite et tourelle du M577 imposé. La sélection générale de véhicule ne remplace pas le convoi.' : campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? 'Enquête originale du Tantalus : PDA, relais électrique, six documents départementaux et confrontation. Aucune identité personnelle ne peut être déduite du badge seul.' : 'Survivre au sas C-12, tenir la défense puis rejoindre l’extraction.'} Aucun binôme physique déployé. Les bonus dépendent du bilan réel.</p></div>`
     : '';
@@ -1510,6 +1563,43 @@ function renderPlayerAppearanceV126() {
     panel.addEventListener('click', event => {
       const button = event.target.closest('button');
       if (!button || button.disabled || !panel.contains(button)) return;
+      if (button.dataset.wardrobeActionV135) {
+        const owner = button.dataset.wardrobeOwnerV135, action = button.dataset.wardrobeActionV135;
+        if (!['player', 'coop'].includes(owner) || standaloneContext || saveSystem.recoveryNeeded || activeView !== 'armory') return;
+        const timeline = currentOwnerV84(), candidate = { ...saveSystem.data, player: clone(saveSystem.data.player) };
+        const slot = Number(button.dataset.wardrobeSlotV135);
+        try {
+          if (action === 'copy') copyPlayerAppearanceV135(candidate, { fromOwner: button.dataset.wardrobeFromV135, toOwner: owner });
+          else if (action === 'save') savePlayerWardrobeOutfitV135(candidate, { owner, slot,
+            name: panel.querySelector(`[data-wardrobe-name-v135="${slot}"]`)?.value || '' });
+          else if (action === 'equip') equipPlayerWardrobeOutfitV135(candidate, { owner, slot });
+          else if (action === 'equip-parts') equipPlayerWardrobePartsV140(candidate, { owner, slot,
+            parts: [...panel.querySelectorAll(`[data-wardrobe-parts-v140="${slot}"]:checked`)].map(input => input.value) });
+          else if (action === 'delete') deletePlayerWardrobeOutfitV135(candidate, { owner, slot });
+          else throw new Error('Action de vestiaire inconnue.');
+          if (!ownsTimelineV84(timeline)) throw new Error('Le profil a changé. Rouvrez le vestiaire.');
+          saveSystem.commit({ player: candidate.player });
+        } catch (error) {
+          const status = panel.querySelector('[data-wardrobe-status-v135]');
+          if (status) status.textContent = error.message;
+          toast(error.message); return;
+        }
+        renderPlayerAppearanceV126();
+        const controls = [...panel.querySelectorAll('[data-wardrobe-action-v135]')];
+        const focusTarget = controls.find(control => !control.disabled && control.dataset.wardrobeActionV135 === action
+          && control.dataset.wardrobeOwnerV135 === owner && (action === 'copy' || Number(control.dataset.wardrobeSlotV135) === slot))
+          || controls.find(control => !control.disabled && control.dataset.wardrobeActionV135 === 'save' && Number(control.dataset.wardrobeSlotV135) === slot);
+        if (action === 'equip-parts') {
+          const details = panel.querySelector(`[data-wardrobe-detail-v140="${slot}"]`);
+          if (details) details.open = true;
+        }
+        focusTarget?.focus({ preventScroll: true });
+        const message = action === 'delete' ? 'Casier de tenue libéré.' : action === 'save' ? 'Tenue enregistrée dans votre casier.'
+          : action === 'equip-parts' ? 'Pièces cochées préparées.' : 'Tenue préparée.';
+        panel.querySelector('[data-wardrobe-status-v135]').textContent = message;
+        toast(message);
+        return;
+      }
       if (button.hasAttribute('data-appearance-facing-v126')) {
         appearancePreviewFacingV126 = Number(button.dataset.appearanceFacingV126) < 0 ? -1 : 1;
         appearancePreviewV126?.setFacing(appearancePreviewFacingV126);
@@ -1660,6 +1750,9 @@ function ensureCostumeFilterOptions(id, field) {
 function runCrewActionV85(action, args, owner) {
   if (standaloneContext || activeView !== 'crew') throw new Error('Ouvrez Echo-9 depuis votre campagne pour gérer le personnel.');
   const actions = { recruit: recruitCandidateV85, refresh: refreshRecruitmentV85, train: trainCrewAptitudeV85,
+    conversation: (save, crewId, topicId) => rememberCrewConversationTopicV135(save, crewId, topicId, {
+      catalog: CREW, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT]
+    }),
     transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember, marking: setEcho9MarkingV110,
     'archive-select': (save, id) => { const result = selectPremiumDossierV119(save, id); if (!result.ok) throw new Error('Reconstitution MIRE réussie nécessaire.'); return result; } };
   const result = commitCrewTransactionV85({ saveSystem, owner, ownsOwner: ownsTimelineV84,
@@ -1711,16 +1804,28 @@ function renderHubStatus(status = lastHubStatus) {
   const room = status?.roomName || HUB_DECKS[deck]?.rooms.find((entry) => entry.id === saveSystem.data.hub.roomId)?.name || saveSystem.data.hub.roomId;
   byId('hub-deck-label').textContent = status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`;
   byId('hub-room-label').textContent = room;
-  const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
-  const openingObjectiveV88 = getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-  byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
-  if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${openingObjectiveV88.text} · A/D marcher · W/S ascenseur · E utiliser`;
-  const exerciseObjectiveV89 = getOpeningExerciseObjectiveV89(saveSystem.data.openingExerciseV89, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-  if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = exerciseObjectiveV89.text;
-  const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-  if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
-  byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
-  byId('exit-hub').textContent = hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
+  if (standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship') {
+    const session = hubEngine.forgeSessionV141;
+    const required = session ? session.project.rooms.filter(entry => session.reachableRoomIds.includes(entry.id))
+      .reduce((sum, entry) => sum + entry.cells.filter(cell => cell.type === 'objective'
+        && !['background', 'foreground'].includes(cell.layer)).length, 0) : 0;
+    byId('hub-deck-label').textContent = 'PARCOURS FRONTIER FORGE';
+    byId('hub-onboarding-objective-v84').textContent = session?.complete ? 'PARCOURS TERMINÉ · Retour Frontier Forge pour modifier le projet.'
+      : `OBJECTIFS ${session?.completedObjectives.length || 0}/${required} · A/D marcher · W/S grimper · E utiliser`;
+    byId('hub-onboarding-objective-v84').hidden = false;
+  } else {
+    const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
+    const openingObjectiveV88 = getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+    byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
+    if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${openingObjectiveV88.text} · A/D marcher · W/S ascenseur · E utiliser`;
+    const exerciseObjectiveV89 = getOpeningExerciseObjectiveV89(saveSystem.data.openingExerciseV89, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+    if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = exerciseObjectiveV89.text;
+    const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+    if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
+    byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
+  }
+  byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? 'RETOUR FRONTIER FORGE'
+    : hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
   const provingGroundActiveV81 = Boolean(
     status?.provingGroundActiveV81
     || status?.activeAnnexId === 'proving-ground'
@@ -1728,27 +1833,51 @@ function renderHubStatus(status = lastHubStatus) {
   );
   const provingPhaseV81 = String(status?.provingGroundPhaseV81 || 'idle').toUpperCase();
   const provingScoreV81 = Math.max(0, Number(status?.provingGroundScoreV81) || 0);
+  const forgeShipSessionV141 = standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' ? hubEngine.forgeSessionV141 : null;
   const provingAmmoV81 = `${Math.max(0, Number(status?.provingGroundMagazineV81) || 0)}/${Math.max(0, Number(status?.provingGroundReserveV81) || 0)}`;
   byId('hub-prompt').textContent = status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser';
-  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? 'QUALIF M41A' : 'NIVEAU'} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : `${status?.route?.nodeCount || 26} ZONES`}</b></span>`;
+  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? 'QUALIF M41A' : 'NIVEAU'} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? `${forgeShipSessionV141.reachableRoomIds.length} SALLES` : `${status?.route?.nodeCount || 26} ZONES`}</b></span>`;
   const hubView = document.querySelector('.view[data-panel="hub"]');
   if (hubView) hubView.dataset.provingGroundActiveV81 = String(provingGroundActiveV81);
   all('[data-proving-ground-control-v81]').forEach((button) => {
     button.hidden = !provingGroundActiveV81;
     button.disabled = !provingGroundActiveV81;
   });
+  renderHubTrainingControlsV132();
+}
+
+function renderHubTrainingControlsV132() {
+  const root = byId('hub-training-controls-v132');
+  const model = activeView === 'hub' ? hubEngine.getHubTrainingCommandsV132?.() : null;
+  root.hidden = !model?.context;
+  if (!model?.context) return;
+  const rooms = HUB_DECKS.flatMap(deck => deck.rooms);
+  const html = model.commands.map(command => {
+    const door = command.id === 'door-toggle' ? model.doors.find(door => door.id === command.value) : null;
+    const roomName = id => rooms.find(room => room.id === id)?.name || id;
+    const label = door ? `${door.locked ? 'Ouvrir' : 'Verrouiller'} ${roomName(door.from)} ↔ ${roomName(door.to)}` : command.label;
+    return `<button class="button compact" type="button" data-hub-training-command-v132="${escapeHtml(command.id)}" data-hub-training-value-v132="${escapeHtml(command.value || '')}"${command.enabled === false ? ' disabled' : ''}>${escapeHtml(label)}</button>`;
+  }).join('');
+  if (root.innerHTML !== html) root.innerHTML = html;
 }
 
 function renderEditorStatus() {
   if (!editor) return;
   const snapshot = editor.getSnapshot();
   const validation = snapshot.validation;
-  byId('editor-validation').innerHTML = validation.ok
-    ? `<span class="chip success">PLAN VALIDE</span><p>${snapshot.tiles.length} blocs · ${snapshot.kind} · prêt pour playtest isolé · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
-    : `<span class="chip danger">PLAN INCOMPLET</span><p>${validation.errors.map(escapeHtml).join(' ')}</p>`;
+  const nativeAudit = editor.controlV136?.getReport();
+  const ready = nativeAudit ? nativeAudit.ok : validation.ok;
+  const errors = nativeAudit ? nativeAudit.errors : validation.errors;
+  byId('editor-mode').value = snapshot.kind;
+  byId('editor-validation').innerHTML = ready
+    ? `<span class="chip success">PARCOURS PRÊT</span><p>${snapshot.tiles.length} blocs dans cette salle · ${nativeAudit?.reachableRoomIds?.length || 1} salle(s) accessible(s) · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
+    : `<span class="chip danger">PLAN À CORRIGER</span><p>${errors.map(escapeHtml).join(' ')}</p>`;
+  if ((forgeSaveSystem.lastWriteV130 || forgeSaveSystem.lastPersistenceV135)?.persisted === false) {
+    byId('editor-validation').insertAdjacentHTML('beforeend', '<p role="status">Stockage local indisponible : modifications conservées en mémoire uniquement. Exportez le plan avant de fermer cette page.</p>');
+  }
   byId('editor-undo').disabled = !snapshot.canUndo;
   byId('editor-redo').disabled = !snapshot.canRedo;
-  byId('editor-play').disabled = !validation.ok;
+  byId('editor-play').disabled = !ready;
 }
 
 function renderProfiles() {
@@ -1786,9 +1915,59 @@ function renderProfiles() {
 
 function renderMissionEquipment() {
   placeablesDockV86?.render();
+  byId('mission-squad-command-v132').hidden = !engine.isHiveMissionV131?.() && !engine.getSquadCommandModelV132?.();
 }
 
 let costumeArchivesUiV119 = null;
+let fieldMediaUiV135 = null;
+function fieldMediaOwnerV135() {
+  return { ...currentOwnerV84(), createdAt: saveSystem.data.createdAt, identityId: getHubTrainingOperatorIdV132(saveSystem.data) };
+}
+function canCaptureFieldMediaV135() {
+  if (standaloneContext || creatorOwnerV84 || saveSystem.recoveryNeeded) return false;
+  if (activeView === 'hub') return ownsTimelineV84(hubOwnerV84) && hubEngine.running;
+  return activeView === 'play' && ownsTimelineV84(missionOwnerV78) && engine.running
+    && !engine.enemyAtlasLoadingPausedV65 && !engine.userCasteLoadingV88;
+}
+async function captureFieldFrameV135() {
+  if (!canCaptureFieldMediaV135()) throw new Error('Rejoignez le Tantalus ou une mission en cours pour photographier le terrain.');
+  const owner = fieldMediaOwnerV135(), hub = activeView === 'hub';
+  const canvas = byId(hub ? 'hub-canvas' : 'game-canvas');
+  if (!canvas?.width || !canvas?.height || !canvas.getClientRects().length) throw new Error('L’image du terrain n’est pas disponible.');
+  const frame = { width: canvas.width, height: canvas.height, scene: hub ? 'hub' : 'mission',
+    location: hub ? byId('hub-room-label').textContent : engine.level?.name || engine.campaign?.name || 'Terrain de mission',
+    worldId: saveSystem.data.worldId, capturedAt: Date.now() };
+  // toBlob snapshots the displayed canvas now; asynchronous encoding never
+  // redraws the scene or advances actors to manufacture an observation.
+  const blob = await new Promise((resolve, reject) => {
+    try { canvas.toBlob(value => value ? resolve(value) : reject(new Error('La photographie n’a pas pu être encodée.')), 'image/png'); }
+    catch (error) { reject(error); }
+  });
+  if (!ownsTimelineV84(owner) || !canCaptureFieldMediaV135()) throw new Error('Le profil ou le terrain a changé pendant la capture.');
+  return { ...frame, blob };
+}
+function setupFieldMediaV135() {
+  if (fieldMediaUiV135) return fieldMediaUiV135;
+  const repository = createFieldMediaRepositoryV135({ isOwnerCurrent: owner => ownsTimelineV84(owner)
+    && !standaloneContext && !saveSystem.recoveryNeeded });
+  fieldMediaUiV135 = mountFieldMediaUiV135(byId('field-media-archives-v135'), {
+    repository, getOwner: fieldMediaOwnerV135, captureFrame: captureFieldFrameV135, canCapture: canCaptureFieldMediaV135,
+    onBusyChange: busy => all('[data-field-media-capture-v135]').forEach(button => { button.disabled = busy; })
+  });
+  all('[data-field-media-capture-v135]').forEach(button => {
+    button.addEventListener('click', async () => {
+      if (button.disabled) return;
+      button.disabled = true;
+      try {
+        const result = await fieldMediaUiV135.capture();
+        if (result !== false) toast('Photographie conservée dans les Archives de ce profil.');
+        else if (fieldMediaUiV135.status.error) toast(fieldMediaUiV135.status.message);
+      } catch (error) { toast(error.message); }
+      finally { button.disabled = false; }
+    });
+  });
+  return fieldMediaUiV135;
+}
 function renderAll() {
   renderClock();
   renderCommand();
@@ -1824,6 +2003,7 @@ function renderAll() {
   renderBioforgeUiV87();
   narrativeArchivesUiV68?.render();
   missionNarrativeArchivesUiV68?.render();
+  fieldMediaUiV135?.refresh();
   renderArchiveRelayArchivesV122();
 }
 
@@ -1839,24 +2019,33 @@ function archiveResultMessageV68(result, action) {
   return 'Les preuves nécessaires ne sont pas encore toutes récupérées.';
 }
 
+function commitNarrativeMutationV132(mutation) {
+  const before = { narrativeArchives: clone(saveSystem.data.narrativeArchives),
+    narrativeEvidenceV132: clone(saveSystem.data.narrativeEvidenceV132) };
+  try {
+    const result = mutation();
+    if (result.applied) saveSystem.commit();
+    return result;
+  } catch (error) { Object.assign(saveSystem.data, before); throw error; }
+}
+
 function narrativeArchivesUiOptionsV68(root, { focusFallback = null } = {}) {
   return {
     root,
     focusFallback,
-    getState: () => getNarrativeInvestigationV68(saveSystem.data),
+    getState: () => getNarrativeEvidenceModelV132(saveSystem.data),
     onMarkRead: (collectableId) => {
-      const result = markNarrativeCollectableReadV68(saveSystem.data, collectableId);
-      if (result.applied) saveSystem.commit();
+      const result = commitNarrativeMutationV132(() => markNarrativeEvidenceReadV132(saveSystem.data, collectableId));
       return { ...result, message: archiveResultMessageV68(result, 'read') };
     },
     onDecision: (optionId) => {
-      const result = recordNarrativeDecisionV68(saveSystem.data, optionId);
+      const result = commitNarrativeMutationV132(() => recordNarrativeEvidenceDecisionV132(saveSystem.data, optionId));
       if (result.applied) {
-        saveSystem.commit();
         engine.setNarrativeArchivesV68?.(saveSystem.data.narrativeArchives);
       }
-      return { ...result, message: archiveResultMessageV68(result, 'decision') };
-    }
+      return { ...result, message: result.message || archiveResultMessageV68(result, 'decision') };
+    },
+    onMediaPlayed: mediaId => commitNarrativeMutationV132(() => markNarrativeMediaPlayedV132(saveSystem.data, mediaId))
   };
 }
 
@@ -1915,6 +2104,10 @@ function openArchiveRelayReaderV122(event) {
 
 function buildCampaignMissionLevelV122(options) {
   const id = options.campaign?.id;
+  if (HIVE_CAMPAIGNS_V131.some(c=>c.id===id)) return buildHiveMissionV131(options);
+  if (MECHA_CAMPAIGNS_V131.some(c=>c.id===id)) return buildMechaMissionV131(options);
+  if (ECOSYSTEM_CAMPAIGNS_V131.some(c=>c.id===id)) return buildEcosystemMissionV131(options);
+  if (LEGACY_CAMPAIGNS_V131.some(c=>c.id===id)) return buildLegacyMissionV131(options);
   const builder = id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? buildArchiveRelayLevelV122
     : id === BLACK_COCOON_CAMPAIGN_V121.id ? buildBlackCocoonLevelV121
       : id === APC_CONVOY_CAMPAIGN_V121.id ? buildApcConvoyLevelV121
@@ -1943,7 +2136,31 @@ function setupAlienSurvivalDockV70() {
   return alienSurvivalDockV70;
 }
 
+function openHiveCommandDockV131(event) {
+  if (activeView !== 'play' || !engine.isHiveMissionV131?.() || !engine.hiveCanActV131?.()
+    || event?.operationId !== engine.hiveV131?.operationId) return false;
+  const operation = saveSystem.data.strategy.currentOperation;
+  const owned = !standaloneContext && !saveSystem.recoveryNeeded && ownsTimelineV84(missionOwnerV78)
+    && missionOwnerV78.operationId === operation?.id && operation.campaignId === engine.campaign?.id;
+  const sandbox = standaloneContext === 'forge-playtest' && forgePlaytest?.campaignId === engine.campaign?.id;
+  if (!owned && !sandbox) return false;
+  hiveCommandDockV131 ||= new HiveCommandDockV131({ root: byId('mission-runtime-v62'), engine });
+  return hiveCommandDockV131.open();
+}
+
+function openSquadCommandDockV132() {
+  if (activeView !== 'play' || !engine.getSquadCommandModelV132?.()) return false;
+  const operation = saveSystem.data.strategy.currentOperation;
+  const owned = !standaloneContext && !saveSystem.recoveryNeeded && ownsTimelineV84(missionOwnerV78)
+    && missionOwnerV78.operationId === operation?.id && operation.campaignId === engine.campaign?.id;
+  const sandbox = standaloneContext === 'forge-playtest' && forgePlaytest?.campaignId === engine.campaign?.id;
+  if (!owned && !sandbox) return false;
+  squadCommandDockV132 ||= new SquadCommandDockV132({ root: byId('mission-runtime-v62'), engine });
+  return squadCommandDockV132.open();
+}
+
 function openNarrativeArchivesV68(entryId = '', { markRead = false } = {}) {
+  squadCommandDockV132?.close({ restoreFocus: false });
   showView('archives');
   setupNarrativeArchivesUiV68().open(entryId, { markRead });
 }
@@ -2103,6 +2320,8 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  hubControlBindingsV133.forEach(binding => binding.clear());
+  squadCommandDockV132?.close({ restoreFocus: false });
   if (missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ resume: false, restoreFocus: false });
   if (archiveRelayReaderV122?.openState) archiveRelayReaderV122.close({ resume: false, restoreFocus: false });
   refugeControllerV87.close();
@@ -2208,7 +2427,7 @@ function campaignObjectiveLabel(campaignId) {
 
 function startMissionInsertionV62(context) {
   // These operations own their opening/objectives, not the generic squad insertion.
-  if ([BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(context.campaign?.id)) {
+  if (isSoloSpecialOperationV131(context.campaign?.id)) {
     startMissionRuntimeV62(context);
     return;
   }
@@ -2328,7 +2547,7 @@ function launchCampaign(campaign = null) {
   const weapon = operationLoadout.weapon || WEAPONS[0];
   const equipment = operationLoadout.equipment;
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const vehicle = [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id) ? null
+  const vehicle = [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
     : campaign.id === APC_CONVOY_CAMPAIGN_V121.id ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
     : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
@@ -2394,7 +2613,8 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
 // Textual comms only: no voice asset is implied. Keep mission instructions
 // readable over routine combat/checkpoint captions, but never over fatal alerts.
 function writeMissionRadioV121(event, log) {
-  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio'].includes(event?.type)) return false;
+  if (!['black-cocoon-radio', 'apc-convoy-radio', 'c12-horde-radio', 'archive-relay-radio',
+    'hive-radio-v131', 'ecosystem-radio-v131', 'legacy-operation-radio'].includes(event?.type)) return false;
   const text = String(event.text || '').trim();
   if (!text) return false;
   log.dataset.radioUntilV121 = String(Date.now() + Math.max(6000, captionReadingMillisecondsV84(text)));
@@ -2405,6 +2625,8 @@ function writeMissionRadioV121(event, log) {
 function handleForgePlaytestEvent(event) {
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (event.type === 'squad-command-open-v132') return openSquadCommandDockV132();
+  if (event.type === 'hive-control-open-v131') return openHiveCommandDockV131(event);
   if (event.type === 'archive-relay-open') return openArchiveRelayReaderV122(event);
   if (writeMissionRadioV121(event, log)) return;
   if (isAlphaBravoRuntimeEventV69(event)) {
@@ -2453,6 +2675,8 @@ function handleGameEvent(event) {
   }
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (event.type === 'squad-command-open-v132') return openSquadCommandDockV132();
+  if (event.type === 'hive-control-open-v131') return openHiveCommandDockV131(event);
   if (event.type === 'archive-relay-open') return openArchiveRelayReaderV122(event);
   if (writeMissionRadioV121(event, log)) return;
   const protectedRadioV121 = Number(log.dataset.radioUntilV121 || 0) > Date.now()
@@ -2614,7 +2838,11 @@ function handleGameEvent(event) {
     'equipment-used', 'placeable-deployed', 'placeable-recovered', 'placeable-destroyed', 'placeable-spent', 'objective-action', 'mission-zone', 'mission-level-event',
     'squad-action', 'squad-down', 'squad-revived', 'squad-lost',
     'mission-timer-started', 'mission-timer-complete',
-    'narrative-collectable-discovered', 'narrative-route-unlocked'
+    'narrative-collectable-discovered', 'narrative-route-unlocked', 'narrative-evidence-updated-v132',
+    'squad-command-v132', 'squad-resource-transferred-v132', 'squad-task-reserved-v132',
+    'squad-task-cancelled-v132', 'squad-carry-started-v132', 'squad-carry-dropped-v132',
+    'horde-warning-v132', 'horde-delivery-v132',
+    'placeable-manipulated', 'placeable-task-started', 'placeable-task-cancelled'
   ]);
   const survivalPersistenceDue = ALIEN_SURVIVAL_PERSISTENT_EVENTS_V70.has(event.type)
     && (event.type !== 'alien-survival-self-destruct-tick'
@@ -2640,6 +2868,37 @@ function handleGameEvent(event) {
       return false;
     }
   }
+}
+
+function handleHubTrainingEventV132(event) {
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || creatorOwnerV84 || standaloneContext
+    || hubEngine.annexStateReadOnlyV87 || saveSystem.recoveryNeeded) return false;
+  try {
+    if (event.action === 'hub:loader-training-issued-v132') {
+      const book = hubEngine.hubTrainingSnapshotV132();
+      delete book.commands;
+      const proof = validateHubLoaderReceiptV132(event.receipt, book.pendingReceipt);
+      if (!book.pendingReceipt || !proof.valid || event.receipt.operatorId !== getHubTrainingOperatorIdV132(saveSystem.data)) return false;
+      persistHub({ hubTrainingV132: book });
+      return true;
+    }
+    if (event.action === 'hub:loader-training-qualified-v132') {
+      const previous = clone(saveSystem.data.hub.loaderQualificationV132);
+      const result = recordHubLoaderQualificationV132(saveSystem.data, event.receipt);
+      if (!result.applied) return result.reason === 'already-qualified';
+      try { saveSystem.commit(); }
+      catch (error) { saveSystem.data.hub.loaderQualificationV132 = previous; throw error; }
+      toast('Qualification P-5000 humain enregistrée : trois charges placées, véhicule garé et opérateur débarqué.');
+      return true;
+    }
+    if (event.action === 'hub:mire-replay-v132') {
+      if (!hubEngine.hubTrainingContactV132('mire-archives') || saveSystem.data.strategy.currentOperation) return false;
+      const campaign = CAMPAIGNS.find(campaign => campaign.id === event.campaignId);
+      return Boolean(campaign && launchCampaign(campaign));
+    }
+    renderHubTrainingControlsV132();
+    return true;
+  } catch (error) { toast(error.message); return false; }
 }
 
 function persistHub(patch) {
@@ -2936,6 +3195,14 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:annex-station') {
+    if (interaction.action === 'service:ship-inspection-v137' && interaction.effect?.kind === 'ship-inspection') {
+      const readout = getHubShipStationReadoutV137(interaction.annexId);
+      if (!readout || readout.inspectionId !== interaction.stationId) return false;
+      const status = byId('hub-status');
+      if (status) status.textContent = `${readout.title.toUpperCase()} · ${readout.message}`;
+      toast(readout.message);
+      return true;
+    }
     return resolveAnnexStationV71(interaction);
   }
   if (interaction.action.startsWith('hub:vent-')) {
@@ -2962,27 +3229,39 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.action.startsWith('navigate:')) {
-    if (!openHubDialogue(interaction)) showView(interaction.action.split(':')[1]);
+    if (!openHubDialogue(interaction)) {
+      const view = interaction.action.split(':')[1];
+      if (!openHubStation(view)) showView(view);
+    }
     return;
   }
+  const serviceBeforeV133 = clone(saveSystem.data);
+  let servicedV133 = false;
   try {
-    if (applyHubService(interaction.action)) {
-      saveSystem.commit();
-      renderAll();
-      toast('Service physique exécuté et temps stratégique avancé.');
-    }
+    servicedV133 = applyHubService(interaction.action);
+    if (servicedV133) saveSystem.commit();
   } catch (error) {
-    toast(error.message);
+    saveSystem.data = serviceBeforeV133;
+    toast(error.message); return;
+  }
+  if (servicedV133) {
+    // Native interact() checkpoints its actor after this callback. Apply a
+    // committed treatment to that same actor before it persists, so its old
+    // health cannot overwrite the successfully saved medical service.
+    if (interaction.action === 'service:medical' && hubEngine.player)
+      hubEngine.player.health = Math.min(hubEngine.player.maxHealth || 100, saveSystem.data.hub.playerHealth);
+    renderAll();
+    toast('Service physique exécuté et temps stratégique avancé.');
   }
 }
 
 function retreatMission() {
-  if (pendingResolutionV121?.operationId === saveSystem.data.strategy.currentOperation?.id && pendingResolutionV121?.event) {
-    handleGameEvent(pendingResolutionV121.event);
-    return;
-  }
   if (standaloneContext === 'forge-playtest') {
     returnToForgeContext();
+    return;
+  }
+  if (pendingResolutionV121?.operationId === saveSystem.data.strategy.currentOperation?.id && pendingResolutionV121?.event) {
+    handleGameEvent(pendingResolutionV121.event);
     return;
   }
   if (!saveSystem.data.strategy.currentOperation) { engine.stop(); showView('hub'); return; }
@@ -3037,15 +3316,13 @@ function returnToForgeContext() {
 }
 
 function launchForgeMissionPlaytest(project) {
-  const sandbox = clone(saveSystem.data);
-  sandbox.strategy.currentOperation = null;
-  sandbox.strategy.lastOperation = null;
-  const campaign = CAMPAIGNS.find((entry) => entry.id === sandbox.strategy.plannedCampaignId)
-    || CAMPAIGNS.find((entry) => sandbox.galaxy.unlockedWorldIds.includes(entry.worldId));
+  const source = saveSystem.data;
+  const campaign = CAMPAIGNS.find((entry) => entry.id === source.strategy.plannedCampaignId)
+    || CAMPAIGNS.find((entry) => source.galaxy.unlockedWorldIds.includes(entry.worldId)) || CAMPAIGNS[0];
   if (!campaign) throw new Error('Aucune campagne de référence disponible pour le playtest.');
   const world = WORLDS.find((entry) => entry.id === campaign.worldId) || WORLDS[0];
+  const { sandbox, deployment } = buildForgeMissionSandboxV140(source, { campaign, world });
   const worldState = sandbox.galaxy.worldState[world.id];
-  const deployment = beginOperation(sandbox, campaign, world);
   const operationLoadout = resolveOperationDeployment(sandbox, {
     crewCatalog: CREW,
     weaponCatalog: WEAPONS,
@@ -3063,12 +3340,12 @@ function launchForgeMissionPlaytest(project) {
     context: 'forge-playtest',
     specialOperationId: campaign.specialOperationId || null
   });
-  forgePlaytest = { kind: 'mission', project: clone(project), sandbox, campaignId: campaign.id };
+  forgePlaytest = { kind: 'mission', project: clone(project), sandbox, campaignId: 'forge-authored-v136' };
   standaloneContext = 'forge-playtest';
   showView('play');
   byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
   byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
-  byId('mission-title').textContent = `${campaign.name} · PLAYTEST FORGE`;
+  byId('mission-title').textContent = `PLAYTEST FORGE · ${project.size[0]} × ${project.size[1]}`;
   byId('mission-log').textContent = 'BAC À SABLE FORGE · progression, journal et sauvegarde campagne verrouillés.';
   engine.setCoop(Boolean(sandbox.settings.coop));
   engine.start({
@@ -3091,6 +3368,7 @@ function launchForgeMissionPlaytest(project) {
     difficulty: operationLoadout.difficulty,
     accessibility: clone(sandbox.settings),
     editorProject: project,
+    forgeJourneyV141: true,
     strategicBriefing: deployment.operation,
     resumeState: null
   });
@@ -3100,9 +3378,13 @@ function launchForgeMissionPlaytest(project) {
 }
 
 function playtestEditor() {
-  const project = editor.serialize();
-  if (!project.validation.ok) { toast(project.validation.errors.join(' ')); return; }
-  forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`, name: `Frontier Forge ${title(project.kind)}` });
+  let project;
+  try {
+    const authored = editor.serialize();
+    project = { ...authored, ...admittedForgeJourneyV141(authored) };
+  } catch (error) { toast(error.message); return; }
+  forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`,
+    name: project.name || `Frontier Forge ${title(project.kind)}` });
   if (project.kind === 'ship') {
     const sandbox = clone(saveSystem.data);
     forgePlaytest = { kind: 'ship', project: clone(project), sandbox, hubState: clone(sandbox.hub) };
@@ -3113,6 +3395,7 @@ function playtestEditor() {
     hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(sandbox.player.appearanceV126);
     hubEngine.start(forgePlaytest.hubState, {
       editorProject: project,
+      forgeJourneyV141: true,
       routineContextV62: getHubRoutineContextV62(sandbox)
     });
     byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
@@ -3124,14 +3407,15 @@ function playtestEditor() {
 function setupEditor() {
   editor = new LevelEditor(byId('editor-canvas'), (project) => {
     const active = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
-    const id = active?.kind === project.kind ? active.id : `local-forge-${project.kind}`;
-    const record = { ...project, id, name: `Frontier Forge ${title(project.kind)}`, updatedAt: Date.now() };
+    const id = active?.id || `local-forge-${project.kind}`;
+    const record = { ...project, id, name: project.name || active?.name || `Frontier Forge ${title(project.kind)}`, updatedAt: Date.now() };
     forgeSaveSystem.upsert(record);
     renderEditorStatus();
-  });
+  }, { onDocumentChange: renderEditorStatus });
   byId('editor-tools').innerHTML = TILE_TYPES.map((tool, index) => `<button class="tool-button ${index ? '' : 'active'}" data-editor-tool="${tool}">${title(tool)}</button>`).join('');
   const saved = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
-  if (saved) editor.load(saved);
+  if (saved) editor.loadInitialProject(saved);
+  byId('editor-play').textContent = 'TESTER LE PARCOURS';
   renderEditorStatus();
 }
 
@@ -3144,13 +3428,30 @@ function bindHoldControl(button, target, code) {
 
 function setupRuntimeControls() {
   all('[data-hub-control]').forEach((button) => {
-    const control = button.dataset.hubControl;
-    const activate = (event) => { event.preventDefault(); audio.unlock(); hubEngine.setControl(control, true); };
-    const release = (event) => { event.preventDefault(); hubEngine.setControl(control, false); };
-    button.addEventListener('pointerdown', activate);
-    ['pointerup', 'pointercancel', 'pointerleave'].forEach((name) => button.addEventListener(name, release));
+    hubControlBindingsV133.push(bindHubControlV133(button, {
+      canActivate: () => activeView === 'hub' && hubEngine.running && !creatorOwnerV84
+        && (ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest'),
+      activate: control => {
+        audio.unlock(); hubEngine.setControl(control, true);
+        // The canvas keydown handler calls useLift on W/S. Touch and focused
+        // buttons need the same command, while still holding the ladder key.
+        if (!hubEngine.hubTrainingV132?.active && ['up', 'down'].includes(control))
+          hubEngine.useLift(control === 'up' ? -1 : 1);
+      },
+      release: control => hubEngine.setControl(control, false)
+    }));
   });
   all('[data-mission-key]').forEach((button) => bindHoldControl(button, engine, button.dataset.missionKey));
+  byId('hub-training-controls-v132').onclick = event => {
+    const button = event.target.closest('[data-hub-training-command-v132]');
+    if (!button || button.disabled || !ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || standaloneContext) return;
+    audio.unlock();
+    try {
+      hubEngine.executeHubTrainingCommandV132(button.dataset.hubTrainingCommandV132, button.dataset.hubTrainingValueV132 || null);
+      renderHubTrainingControlsV132();
+      hubEngine.canvas.focus({ preventScroll: true });
+    } catch (error) { toast(error.message); }
+  };
   all('[data-bioforge-key]').forEach((button) => bindHoldControl(button, bioforgeRuntimeV80, button.dataset.bioforgeKey));
   byId('mission-interact').onclick = () => engine.interact(engine.player);
   bindHoldControl(byId('mission-interact'), engine, 'KeyE');
@@ -3160,6 +3461,16 @@ function setupRuntimeControls() {
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
   byId('mission-melee-v124').onclick = () => engine.melee(engine.player);
   byId('mission-neuro-counter').onclick = () => engine.activateNeuroCountermeasure(engine.player);
+  byId('mission-squad-command-v132').onclick = () => {
+    audio.unlock();
+    if (engine.isHiveMissionV131?.()) engine.openHiveCommandV131?.();
+    else engine.openSquadCommandV132?.();
+  };
+  globalThis.addEventListener('keydown', event => {
+    if (event.code !== 'KeyC' || event.repeat || event.ctrlKey || event.metaKey || event.altKey
+      || event.isComposing || activeView !== 'play' || event.target?.closest?.('input,select,textarea,[contenteditable],button')) return;
+    if (engine.getSquadCommandModelV132?.() && engine.openSquadCommandV132()) event.preventDefault();
+  });
   byId('bioforge-interact-v80').onclick = () => bioforgeRuntimeV80.interact(bioforgeRuntimeV80.player);
   byId('bioforge-reload-v80').onclick = () => bioforgeRuntimeV80.reload(bioforgeRuntimeV80.player);
   byId('bioforge-medkit-v80').onclick = () => bioforgeRuntimeV80.useMedkit(bioforgeRuntimeV80.player);
@@ -3302,7 +3613,10 @@ function bind() {
   };
   byId('hub-dialogue-choices').onclick = (event) => {
     const choiceId = event.target.closest('[data-npc-dialogue-choice]')?.dataset.npcDialogueChoice;
-    if (choiceId) chooseNpcDialogueV62(choiceId);
+    if (choiceId) {
+      try { chooseNpcDialogueV62(choiceId); }
+      catch (error) { toast(error.message); }
+    }
   };
   all('[data-close-hub-station]').forEach((button) => {
     button.onclick = () => closeHubStation();
@@ -3381,10 +3695,20 @@ function bind() {
   byId('editor-clear').onclick = () => editor.clear();
   byId('editor-undo').onclick = () => editor.undo();
   byId('editor-redo').onclick = () => editor.redo();
-  byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
+  byId('editor-validate').onclick = () => {
+    renderEditorStatus();
+    const audit = editor.controlV136?.getReport() || editor.validate();
+    toast(audit.ok ? 'Parcours prêt à tester.' : audit.errors.join(' '));
+  };
   byId('editor-play').onclick = playtestEditor;
   byId('editor-export').onclick = () => download(`atf-v62-forge-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
-  byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
+  byId('editor-import').onchange = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try { editor.load(JSON.parse(await file.text())); renderEditorStatus(); toast('Plan importé.'); }
+    catch (error) { toast(error.message); }
+    finally { event.target.value = ''; }
+  };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],
     'setting-quality': ['quality', (element) => element.value],
@@ -3471,6 +3795,7 @@ async function boot() {
   setupRuntimeControls();
   setupCatalogsV62();
   setupNarrativeArchivesUiV68();
+  setupFieldMediaV135();
   setupMissionArchiveOverlayV68();
   setupAlphaBravoCommandDockV69();
   setupAlienSurvivalDockV70();

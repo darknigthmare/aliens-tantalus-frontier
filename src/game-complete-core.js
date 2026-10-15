@@ -1,4 +1,5 @@
 import { GameEngine as CatalogGameEngine } from './game-runtime.js';
+import { buildForgeObjectiveV136 } from './editor-spatial-v136.js';
 
 export * from './game-runtime.js';
 
@@ -72,7 +73,7 @@ export class GameEngine extends CatalogGameEngine {
 
   configureObjectiveRuntime() {
     const plan = this.missionPlan;
-    this.objectiveRuntime = buildObjectiveRuntime(plan.campaign.objective || plan.level.objective, {
+    this.objectiveRuntime = this.editorMode ? buildForgeObjectiveV136(this) : buildObjectiveRuntime(plan.campaign.objective || plan.level.objective, {
       mode: plan.campaign.mode,
       routes: plan.level.routes || plan.campaign.routes,
       enemyCount: this.enemies.length,
@@ -344,6 +345,7 @@ export class GameEngine extends CatalogGameEngine {
       canon: this.missionPlan.campaign.canon,
       source: this.missionPlan.campaign.source
     };
+    if (this.editorMode) Object.assign(rewards, { credits: 0, salvage: 0, intel: 0, apex: 0, cargo: 0, scope: 'forge-playtest' });
     this.mission.rewards = rewards;
     this.onEvent({ type: 'mission-complete', kills, rewards, objectiveId: this.objectiveRuntime.id, extractedBy: actor?.coop ? 'coop' : 'primary' });
     return true;
@@ -380,7 +382,7 @@ export class GameEngine extends CatalogGameEngine {
       rescue: 'RÉCUPÉRER LES SURVIVANTS', restore: 'RÉTABLIR L’ATMOSPHÈRE', seal: 'SCELLER LA RUCHE', 'recover-data': 'RÉCUPÉRER LA BOÎTE NOIRE',
       escort: 'ESCORTER LE CONVOI', purge: 'PURGER LE RÉACTEUR', board: 'OUVRIR LES SAS D’ABORDAGE', hold: 'TENIR L’EXTRACTION', track: 'PISTER L’APEX',
       'recover-synthetic': 'RÉCUPÉRER LE SYNTHÉTIQUE', capture: 'CAPTURER LE SPÉCIMEN', 'destroy-relay': 'DÉTRUIRE LE RELAIS', defend: 'DÉFENDRE LA COLONIE',
-      navigate: 'CARTOGRAPHIER LES CONDUITS', 'secure-vehicle': 'SÉCURISER LE POWER LOADER', escape: 'ÉCHAPPER À LA QUARANTAINE', secure: 'SÉCURISER LA FRONTIÈRE'
+      navigate: 'CARTOGRAPHIER LES CONDUITS', 'secure-vehicle': 'SÉCURISER LE POWER LOADER', escape: 'ÉCHAPPER À LA QUARANTAINE', secure: 'SÉCURISER LA FRONTIÈRE', forge: 'REJOINDRE L’OBJECTIF DU PLAN'
     };
     return labels[this.objectiveRuntime.action] || super.phaseLabel();
   }

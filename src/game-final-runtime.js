@@ -372,10 +372,11 @@ export class GameEngine extends CompleteGameEngine {
       signature: `forge:${level.id}:${this.editorTileCount}`,
       seed: level.seed,
       source: 'frontier-forge',
-      widthCells: level.width,
-      heightCells: level.height,
-      horizontalMeters: level.width * 48,
-      verticalMeters: level.height * 18,
+      widthCells: this.editorGridV136?.columns || level.width,
+      heightCells: this.editorGridV136?.rows || level.height,
+      horizontalMeters: (this.editorGridV136?.columns || level.width) * 48,
+      verticalMeters: (this.editorGridV136?.rows || level.height) * 18,
+      physicalWorld: Object.freeze({ width: WORLD_WIDTH, height: 1080 }),
       routes: level.routes,
       maxTier: Math.max(1, this.ladders.length),
       routeSpan: WORLD_WIDTH,
@@ -446,7 +447,8 @@ export class GameEngine extends CompleteGameEngine {
     const mobility = player === this.player ? this.costumeRuntime?.mobility || 1 : 1;
     // Apply speed modifiers to the target before integration and collisions.
     // Multiplying the previous frame's velocity made costumes depend on FPS.
-    player.locomotionSpeedScaleV124 = clamp(mobility * slow, 0.05, 3);
+    const squadCarry = this.squadCarrySpeedScaleV132?.(player) || 1;
+    player.locomotionSpeedScaleV124 = clamp(mobility * slow * squadCarry, 0.05, 3);
     super.updatePlayer(player, delta, controls);
     if (!player?.alive || player.inVehicle) return;
     if (player === this.player) this.refreshStealth(player);

@@ -1,5 +1,6 @@
 import { firstProjectileObstacleV83, sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { resolveCombatMuzzleV83 } from './combat-aim-v83.js';
+import { resolveWeaponMechanicsV122 } from './weapon-mechanics-weapons-v122.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -62,15 +63,39 @@ export function findPlayerCoverV124(actor, covers = []) {
   }).sort((a, b) => Math.abs(centerX - a.x - a.w / 2) - Math.abs(centerX - b.x - b.w / 2))[0] || null;
 }
 
-export function resolvePlayerCoverV124(actor, cover, aim = {}, { fire = false, busy = false } = {}) {
+export function resolvePlayerProjectileFootprintV124(engine, actor) {
+  const explicit = engine?.weaponActionProfileV131?.(actor);
+  if (explicit) {
+    if (['stream', 'laser'].includes(explicit.kind)) return { w: 1, h: 1, offsetX: 0, offsetY: 0 };
+    const w = ['rocket', 'launcher', 'plasma', 'fluid', 'electric'].includes(explicit.kind) ? 10 : 14;
+    const h = w === 10 ? 10 : 3;
+    return { w, h, offsetX: -w / 2, offsetY: -h / 2 };
+  }
+  const contact = engine?.weaponActionProfileV130?.(actor);
+  if (contact) {
+    const size = Number(contact.size) || 1;
+    return { w: size, h: size, offsetX: 0, offsetY: 0 };
+  }
+  const descriptor = engine?.weaponDescriptorV124?.(actor);
+  if (resolveWeaponMechanicsV122(descriptor)) return { w: 12, h: 12, offsetX: 0, offsetY: 0 };
+  const mounted = actor?.inVehicle && engine?.vehicle?.occupied;
+  return { w: mounted ? 26 : 18, h: mounted ? 7 : 5, offsetX: 0, offsetY: 0 };
+}
+
+export function resolvePlayerCoverV124(actor, cover, aim = {}, { fire = false, busy = false,
+  projectileFootprint = null } = {}) {
   if (!cover || !actor.crouching || !actor.grounded || actor.climbing || actor.inVehicle || actor.ventTransit || actor.downed) return null;
   const side = actor.x + actor.w / 2 <= cover.x + cover.w / 2 ? -1 : 1;
   const low = cover.h <= actor.h * 0.72;
   const toward = finite(aim.x, actor.facing) * -side > 0.2 || finite(aim.y) < -0.2;
   const peeking = low && toward && !busy && !actor.reloading && (actor.aimingV124 || fire);
   const shoulderY = actor.y + actor.h * 51 / 92;
+  // The collision API owns top-left AABBs. A native bullet extends below its
+  // muzzle, while V131's centered projectiles extend by half their height.
+  const belowMuzzle = projectileFootprint ? Math.max(0, finite(projectileFootprint.offsetY) + finite(projectileFootprint.h)) : 5;
+  const clearance = Math.max(9, belowMuzzle + 3);
   return { id: cover.id || null, x: cover.x, y: cover.y, w: cover.w, h: cover.h, side,
-    low, peeking, peekRise: peeking ? clamp(shoulderY - (cover.y - 9), 0, 32) : 0 };
+    low, peeking, peekRise: peeking ? clamp(shoulderY - (cover.y - clearance), 0, 32) : 0 };
 }
 
 /** Protection requires a known shot travelling through the obstacle. Contact,
@@ -83,8 +108,17 @@ export function playerCoverProtectionV124(actor, cover, options = {}) {
   const center = actor.x + actor.w / 2;
   const side = center <= cover.x + cover.w / 2 ? -1 : 1;
   if ((x - center) * -side <= 0) return 0;
-  const targetY = actor.y + actor.h * 0.7;
-  const contact = sweepProjectileAabbV83({ x, y, w: 0, h: 0 }, { x: center - x, y: targetY - y }, cover);
+  let displacement = { x: center - x, y: actor.y + actor.h * 0.7 - y };
+  const projectile = options.projectileV124;
+  if (projectile) {
+    // A known projectile must retain its actual flight direction. A ray aimed
+    // at the torso would turn an overhead horizontal shot into a covered one.
+    if (!Number.isFinite(projectile.vx) || !Number.isFinite(projectile.vy) || projectile.vx === 0) return 0;
+    const travel = (center - x) / projectile.vx;
+    if (!Number.isFinite(travel) || travel < 0) return 0;
+    displacement = { x: center - x, y: projectile.vy * travel };
+  }
+  const contact = sweepProjectileAabbV83({ x, y, w: 0, h: 0 }, displacement, cover);
   return contact ? 0.65 : 0;
 }
 
@@ -118,7 +152,9 @@ export function getPlayerAimGuideV124(engine, actor) {
   const range = 230;
   const world = { walls: [...(engine.walls || []), ...(engine.covers || [])],
     doors: engine.closedDoorColliders?.() || engine.doors || [], platforms: engine.platforms || [] };
-  const contact = firstProjectileObstacleV83({ x: muzzle.x, y: muzzle.y, w: 2, h: 2 }, { x: aim.x * range, y: aim.y * range }, world);
+  const footprint = resolvePlayerProjectileFootprintV124(engine, actor);
+  const contact = firstProjectileObstacleV83({ x: muzzle.x + footprint.offsetX, y: muzzle.y + footprint.offsetY,
+    w: footprint.w, h: footprint.h }, { x: aim.x * range, y: aim.y * range }, world);
   const travel = muzzle.obstructedV124 ? 0 : contact ? Math.max(0, contact.t * range - 3) : range;
   return { x: muzzle.x, y: muzzle.y, endX: muzzle.x + aim.x * travel, endY: muzzle.y + aim.y * travel,
     blocked: Boolean(contact || muzzle.obstructedV124), peeking: Boolean(actor.coverV124?.peeking) };

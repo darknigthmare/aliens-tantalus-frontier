@@ -1,3 +1,6 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
+import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import {
   HubGame as HubGameV50,
   HUB_DECKS,
@@ -10,6 +13,9 @@ import {
 } from './hub-game.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { resolveHubServiceProfileV139 } from './hub-service-geometry-v139.js';
+import { constrainEditorRectV136 } from './editor-spatial-v136.js';
+import { normalizeEditorProjectV135 } from './editor-authoring-v135.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -65,10 +71,12 @@ function createImage(source) {
 }
 
 function parsePosition(position) {
-  if (Array.isArray(position) && position.length >= 2) return position.slice(0, 2).map(Number);
-  if (typeof position !== 'string') return null;
-  const parts = position.split(':').map(Number);
-  return parts.length === 2 && parts.every(Number.isFinite) ? parts : null;
+  const parts = Array.isArray(position) && position.length >= 2 ? position.slice(0, 2)
+    : typeof position === 'string' ? position.split(':') : [];
+  if (parts.length !== 2 || !parts.every(value => typeof value === 'number'
+    || typeof value === 'string' && value.trim().length > 0)) return null;
+  const parsed = Array.from(parts, Number);
+  return parsed.every(Number.isFinite) ? parsed : null;
 }
 
 function verticalRuns(tiles, type, cellWidth, cellHeight) {
@@ -106,10 +114,22 @@ function verticalRuns(tiles, type, cellWidth, cellHeight) {
  * consommable. La fonction est pure pour pouvoir valider un plan avant playtest.
  */
 export function compileShipProject(project) {
-  if (!project || project.kind !== 'ship' || !Array.isArray(project.tiles)) return null;
+  if (!project || project.kind !== 'ship') return null;
+  if (project.schema === 3) {
+    // Rooms own schema-3 content. Never trust a stale or forged legacy preview.
+    const normalized = normalizeEditorProjectV135(project);
+    project = { ...project, size: normalized.size,
+      tiles: normalized.tiles.map(([position, type]) => ({ position, type })) };
+  }
+  if (!Array.isArray(project.tiles)) return null;
   const rawSize = Array.isArray(project.size) ? project.size : [32, 18];
-  const cols = clamp(Math.floor(Number(rawSize[0])) || 32, 4, 128);
-  const rows = clamp(Math.floor(Number(rawSize[1])) || 18, 4, 72);
+  const dimension = (value, fallback, maximum) => {
+    const parsed = typeof value === 'number' || typeof value === 'string' ? Number(value) : NaN;
+    return clamp(Math.floor(Number.isFinite(parsed) ? parsed : 0) || fallback, 4, maximum);
+  };
+  const cols = dimension(rawSize[0], 32, 128), rows = dimension(rawSize[1], 18, 72);
+  const world = { width: HUB_WORLD.width, height: VIEW_HEIGHT };
+  const constrain = bounds => constrainEditorRectV136(bounds, world);
   const cellWidth = HUB_WORLD.width / cols;
   const cellHeight = VIEW_HEIGHT / rows;
   const tiles = project.tiles.flatMap((tile, index) => {
@@ -121,7 +141,7 @@ export function compileShipProject(project) {
     return [{ ...tile, index, type, col, row }];
   });
   const byType = (type) => tiles.filter((tile) => tile.type === type);
-  const rect = (tile, height = cellHeight, yOffset = 0) => ({
+  const rect = (tile, height = cellHeight, yOffset = 0) => constrain({
     x: tile.col * cellWidth,
     y: tile.row * cellHeight + yOffset,
     w: cellWidth,
@@ -137,14 +157,14 @@ export function compileShipProject(project) {
   const walls = byType('wall').map((tile) => rect(tile));
   const doors = byType('door').map((tile, index) => {
     const height = Math.max(116, cellHeight * 2.5);
-    return {
+    return constrain({
       id: `editor-door-${index + 1}`,
       x: tile.col * cellWidth + cellWidth / 2 - Math.min(34, cellWidth * 0.22),
       y: (tile.row + 1) * cellHeight - height,
       w: Math.min(68, cellWidth * 0.44), h: height, open: false, progress: 0
-    };
+    });
   });
-  const vents = byType('vent').map((tile, index) => ({
+  const vents = byType('vent').map((tile, index) => constrain({
     id: `editor-vent-${index + 1}`,
     x: tile.col * cellWidth,
     y: tile.row * cellHeight + cellHeight * 0.36,
@@ -156,11 +176,14 @@ export function compileShipProject(project) {
   const lifts = verticalRuns(tiles, 'lift', cellWidth, cellHeight);
   const spawnTile = byType('spawn')[0];
   const fallbackFloor = floors.slice().sort((a, b) => a.y - b.y)[0];
-  const spawn = spawnTile ? {
+  const rawSpawn = spawnTile ? {
     x: spawnTile.col * cellWidth + cellWidth / 2 - 22,
     y: (spawnTile.row + 1) * cellHeight - PLAYER_HEIGHT
   } : fallbackFloor ? { x: fallbackFloor.x + 40, y: fallbackFloor.y - PLAYER_HEIGHT } : null;
-  const objectives = byType('objective').map((tile, index) => ({
+  // Match the hub's actual 44×92 actor and its horizontal movement margin.
+  const spawnBounds = rawSpawn ? constrain({ ...rawSpawn, w: 44, h: PLAYER_HEIGHT }) : null;
+  const spawn = spawnBounds ? { x: clamp(spawnBounds.x, 24, world.width - spawnBounds.w - 24), y: spawnBounds.y } : null;
+  const objectives = byType('objective').map((tile, index) => constrain({
     id: `editor-objective-${index + 1}`,
     x: tile.col * cellWidth + cellWidth * 0.25,
     y: tile.row * cellHeight,
@@ -173,14 +196,15 @@ export function compileShipProject(project) {
     const requested = String(tile.enemyType || tile.variant || '').toLowerCase();
     const kind = enemyKinds.includes(requested) ? requested : enemyKinds[index % enemyKinds.length];
     const dimensions = kind === 'synthetic' ? [42, 88] : kind === 'pathogen' ? [50, 72] : [52, 76];
-    return {
+    const bounds = constrain({
       id: `editor-enemy-${index + 1}`, kind,
       x: tile.col * cellWidth + cellWidth / 2 - dimensions[0] / 2,
       y: (tile.row + 1) * cellHeight - dimensions[1],
       w: dimensions[0], h: dimensions[1]
-    };
+    });
+    return { ...bounds, x: clamp(bounds.x, 10, world.width - bounds.w - 10) };
   });
-  const terminals = byType('terminal').map((tile, index) => ({
+  const terminals = byType('terminal').map((tile, index) => constrain({
     id: `editor-terminal-${index + 1}`,
     x: tile.col * cellWidth + cellWidth * 0.2,
     y: tile.row * cellHeight,
@@ -188,7 +212,7 @@ export function compileShipProject(project) {
     h: cellHeight,
     activated: false
   }));
-  const hazards = byType('hazard').map((tile, index) => ({
+  const hazards = byType('hazard').map((tile, index) => constrain({
     id: `editor-hazard-${index + 1}`,
     x: tile.col * cellWidth,
     y: tile.row * cellHeight + cellHeight * 0.58,
@@ -296,8 +320,10 @@ export const HUB_TRAVERSAL_PROFILES_V60 = Object.freeze({
   'dropship-hangar': traversalProfile('engineering-flightline',
     // The observation deck is the pedestrian maintenance route, above the
     // flightline and the live electrical arc. It joins the reactor balcony.
-    [platform('hangar-observation', 70, 360, 1210, 'catwalk')],
-    [ladder('hangar-observation-link', 160, 360, 624, 48)],
+    [platform('hangar-observation', 70, 360, 1210, 'catwalk'),
+      platform('hangar-maintenance-alcove-v133', 980, 440, 300, 'ledge')],
+    [ladder('hangar-observation-link', 160, 360, 624, 48),
+      ladder('hangar-maintenance-access-v133', 988, 440, 624, 44)],
     [vent('hangar-vent', 90, 302)],
     [occluder('hangar-cables', 'ceilingCables', 40, -16, 420, 124, 0.38)]),
   reactor: traversalProfile('engineering-reactor-ring',
@@ -330,7 +356,7 @@ function fallbackTraversal(deck) {
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
     const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
-    const profile = HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge;
+    const profile = resolveHubServiceProfileV139(HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge);
     archetypes.push(profile.archetype);
     platforms.push(...profile.platforms.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
     ladders.push(...profile.ladders.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
@@ -340,7 +366,7 @@ function fallbackTraversal(deck) {
   return {
     platforms, ladders, vents, occluders, archetypes,
     route: {
-      id: `deck-${deck + 1}-vertical-route`, source: 'authored-v60',
+      id: `deck-${deck + 1}-vertical-route`, source: 'authored-functional-service-v139',
       nodeCount: platforms.length + 4,
       verticalLinks: ladders.length,
       crawlLinks: vents.length,
@@ -526,6 +552,19 @@ export class HubGame extends HubGameV50 {
     return entity ? this.v51Vents.find((vent) => overlap(entity, vent)) || null : null;
   }
 
+  nearbyCrawlVentV138(entity = this.player) {
+    if (!entity?.grounded || entity.climbing) return null;
+    let closest = null, closestGap = Infinity;
+    for (const vent of this.v51Vents) {
+      if (entity.y >= vent.y + vent.h || entity.y + entity.h <= vent.y) continue;
+      const gap = Math.max(vent.x - entity.x - entity.w, entity.x - vent.x - vent.w, 0);
+      // Hint before the standing collider stops the body at its exact edge.
+      // Keep nearestVent() strict: E must still require native hatch contact.
+      if (gap <= 64 && gap < closestGap) { closest = vent; closestGap = gap; }
+    }
+    return closest;
+  }
+
   nearestLift() {
     if (this.editorPlaytest || this.nearestTraversalLadder()) return undefined;
     return super.nearestLift();
@@ -556,8 +595,17 @@ export class HubGame extends HubGameV50 {
     const down = !controlsLocked && (this.keys.has('KeyS') || this.keys.has('ArrowDown'));
     const ladder = this.nearestTraversalLadder();
     if (this.player.alive) {
-      if (ladder && (up || down)) this.player.climbing = true;
-      if (this.player.climbing && !ladder) this.player.climbing = false;
+      const atLadderTop = ladder && this.player.y <= ladder.top - this.player.h + .001;
+      const atLadderBottom = ladder && this.player.y >= ladder.bottom - this.player.h - .001;
+      const horizontalExit = (left || right) && !up && !down;
+      const beyondEndpoint = atLadderTop && up || atLadderBottom && down;
+      if (ladder && (up || down) && !beyondEndpoint && !horizontalExit) this.player.climbing = true;
+      if (this.player.climbing && (!ladder || beyondEndpoint || horizontalExit)) {
+        this.player.climbing = false;
+        // Endpoint contact ends the ladder drive; gravity and the real support
+        // resolver take over without retaining an unintended climbing impulse.
+        if (beyondEndpoint) this.player.vy = 0;
+      }
       this.player.crouching = !controlsLocked && this.keys.has('KeyC') && this.player.grounded && !this.player.climbing;
       const sprinting = this.keys.has('ShiftLeft') || this.keys.has('ShiftRight');
       const speed = this.player.crouching ? 105 : sprinting ? 370 : 270;
@@ -568,7 +616,7 @@ export class HubGame extends HubGameV50 {
       if (this.player.climbing && ladder) {
         this.player.x += (ladder.x - this.player.w / 2 - this.player.x) * Math.min(1, delta * 12);
         this.player.vy = (Number(down) - Number(up)) * 185;
-        this.player.y = clamp(this.player.y + this.player.vy * delta, ladder.top - this.player.h + 10, ladder.bottom - this.player.h);
+        this.player.y = clamp(this.player.y + this.player.vy * delta, ladder.top - this.player.h, ladder.bottom - this.player.h);
         this.player.grounded = false;
         if (this.jumpQueued > 0) {
           this.player.climbing = false;
@@ -599,6 +647,7 @@ export class HubGame extends HubGameV50 {
     }
 
     for (const npc of this.npcs) {
+      if (typeof this.stepHubNpcLifeV136 === 'function') { this.stepHubNpcLifeV136(npc, delta); continue; }
       npc.x += npc.vx * delta;
       if (npc.x <= npc.min || npc.x >= npc.max) { npc.x = clamp(npc.x, npc.min, npc.max); npc.vx *= -1; }
     }
@@ -631,7 +680,7 @@ export class HubGame extends HubGameV50 {
     if (!this.editorPlaytest) {
       for (const door of this.doorStates) {
         if (door.blocking === false || door.lift) continue;
-        if (door.progress < 0.82) colliders.push(getHubDoorBounds(door));
+        if (door.progress < 0.82) colliders.push(getHubBulkheadColliderV134(door));
       }
     }
     for (const door of this.v51Doors) if (door.progress < 0.82) colliders.push(door);
@@ -789,7 +838,7 @@ export class HubGame extends HubGameV50 {
     const door = this.v51Doors.find((entry) => Math.abs(this.player.x - entry.x) < 112);
     if (door) return 'E — ACTIONNER LE SAS';
     if (this.nearestTraversalLadder()) return 'W / S — GRIMPER · ESPACE — SAUTER';
-    if (this.nearestVent()) return 'C — RAMper DANS LE CONDUIT';
+    if (this.nearbyCrawlVentV138()) return 'C — MAINTENIR POUR RAMPER SOUS LA GRILLE';
     return '';
   }
 
@@ -879,6 +928,8 @@ export class HubGame extends HubGameV50 {
       if (room.id !== DROPSHIP_HANGAR_ART_V55.roomId) this.drawInteractionProp(ctx, room);
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
+    if (!this.editorPlaytest) for (const door of this.doorStates) if (door.lift) this.drawDoor(ctx, door);
+    if (!this.editorPlaytest) for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door, 'back');
     for (const npc of this.npcs) {
       this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
@@ -895,7 +946,7 @@ export class HubGame extends HubGameV50 {
       ctx.fillStyle = '#f4d477';
       ctx.fillRect(projectile.x, projectile.y, projectile.w, projectile.h);
     }
-    if (!this.editorPlaytest) for (const door of this.doorStates) this.drawDoor(ctx, door);
+    if (!this.editorPlaytest) for (const door of this.doorStates) if (!door.lift) this.drawDoor(ctx, door);
     for (const door of this.v51Doors) this.drawRuntimeDoor(ctx, door);
     this.drawTraversalOcclusions(ctx, 'front');
     if (!this.editorPlaytest) {
@@ -964,7 +1015,7 @@ export class HubGame extends HubGameV50 {
     ctx.clip();
     for (let x = platform.x; x < platform.x + platform.w + unitWidth; x += Math.max(24, unitWidth - 8)) {
       ctx.drawImage(
-        image,
+        resolveSpriteDrawableV134(image),
         crop.x, crop.y, crop.w, crop.h,
         x, renderY, unitWidth, renderHeight
       );
@@ -985,7 +1036,7 @@ export class HubGame extends HubGameV50 {
     ctx.clip();
     for (let y = ladder.top; y < ladder.bottom + unitHeight; y += Math.max(18, unitHeight - 8)) {
       ctx.drawImage(
-        image, 0, 0, image.naturalWidth, cropHeight,
+        resolveSpriteDrawableV134(image), 0, 0, image.naturalWidth, cropHeight,
         ladder.x - width / 2, y, width, unitHeight
       );
     }
@@ -995,7 +1046,7 @@ export class HubGame extends HubGameV50 {
   drawTraversalVent(ctx, vent) {
     const image = this.traversalImages.get('vent');
     if (!imageReady(image)) return;
-    ctx.drawImage(image, vent.x, vent.y, vent.w, vent.h);
+    ctx.drawImage(resolveSpriteDrawableV134(image), vent.x, vent.y, vent.w, vent.h);
   }
 
   drawTraversalOcclusions(ctx, phase = 'front') {
@@ -1009,7 +1060,7 @@ export class HubGame extends HubGameV50 {
       ctx.clip();
       ctx.globalAlpha = clamp(occlusion.alpha, 0, 1);
       for (let x = occlusion.x; x < occlusion.x + occlusion.w + unitWidth; x += Math.max(28, unitWidth - 8)) {
-        ctx.drawImage(image, x, occlusion.y, unitWidth, occlusion.h);
+        ctx.drawImage(resolveSpriteDrawableV134(image), x, occlusion.y, unitWidth, occlusion.h);
       }
       ctx.restore();
     }
@@ -1024,7 +1075,10 @@ export class HubGame extends HubGameV50 {
     const x = enemy.x + enemy.w / 2 - renderWidth / 2;
     const y = enemy.y + enemy.h - renderHeight * (240 / 256);
     const sourceFacing = enemy.sourceFacing ?? HUB_CRISIS_SOURCE_FACING[enemy.kind] ?? -1;
-    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing !== sourceFacing, 4, 4);
+    const human = enemy.kind === 'synthetic' ? resolveHumanAtlasGeometryV133({ actor: enemy,
+      sheet: { path: CRISIS_SPRITES.synthetic, sourceFacing }, column: frame, row, surface: 'hub' }) : null;
+    if (human) enemy.humanVisualV133 = human;
+    if (!drawHumanAtlasV133(ctx, image, human)) this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing !== sourceFacing, 4, 4);
     ctx.fillStyle = '#b94f4b';
     ctx.fillRect(enemy.x, enemy.y - 8, enemy.w * Math.max(0, enemy.health / enemy.maxHealth), 3);
   }
@@ -1039,13 +1093,12 @@ export class HubGame extends HubGameV50 {
 
   drawPlayer(ctx) {
     if (this.player?.crouching) {
-      const grounded = this.player.grounded;
-      this.player.grounded = true;
       const vx = this.player.vx;
       this.player.vx = 0;
-      super.drawPlayer(ctx);
-      this.player.vx = vx;
-      this.player.grounded = grounded;
+      // Pose selection must not invent a physical support while crouching in
+      // the air. Contact shadows and the body rig observe the real grounding.
+      try { super.drawPlayer(ctx); }
+      finally { this.player.vx = vx; }
       return;
     }
     super.drawPlayer(ctx);

@@ -8,6 +8,8 @@ import { resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-ac
 import { advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128 } from './player-transit-rig-v128.js';
 import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
 import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
+import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
+import { getHubLadderMountV139 } from './hub-support-planes-v139.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 
@@ -52,10 +54,13 @@ function hubTransitOptions(hub, sample = null) {
       && actor.y + actor.h >= entry.top - 18 && actor.y <= entry.bottom + 18;
   }) : actor?.climbing ? hub.nearestTraversalLadder?.(actor)
     || hub.ladders?.find(entry => entry.id === actor.ladderId) : null;
+  const mount = source && hub.constructor?.hubSpatialDesignV136 && !hub.editorPlaytest
+    ? getHubLadderMountV139(source, { centered: !annex }) : null;
   const ladder = source ? {
     id: source.id || (annex ? `${annex.id}:ladder:${source.x}:${source.top}:${source.bottom}:${source.w}` : null),
     x: source.x + (annex ? source.w / 2 : 0), top: source.top, bottom: source.bottom, w: source.w,
-    rungSpacing: source.rungSpacing, firstRung: source.firstRung } : null;
+    rungSpacing: mount?.rungSpacing ?? source.rungSpacing, firstRung: mount?.firstRung ?? source.firstRung,
+    ...(mount ? { rungTop: mount.rungTop, rungBottom: mount.rungBottom } : {}) } : null;
   return { ...bodyOptions(hub, sample), appearance: actor?.appearanceV126, ladder,
     legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
     transitState: advancePlayerTransitStateV128(actor?.playerTransitStateV128, actor,
@@ -75,8 +80,12 @@ function resolveHubAppearance(hub, sample = null) {
 function retainHubAppearance(hub, { transit, action, bodyRig }) {
   const modular = bodyRig?.eligible
     ? resolvePlayerModularRigV126({ bodyRig, appearance: hub.player?.appearanceV126, images: hub.playerSheets }) : null;
+  // Both authored torso views belong to the selected outfit. Load them before
+  // the first turn so a cold opposite page cannot replace it with the old suit.
+  const torsoAssets = bodyRig?.eligible ? [-1, 1].map(facing =>
+    getPlayerColonialTorsoWithVariantsV141(hub.player?.appearanceV126?.slots?.torso, facing)?.asset).filter(Boolean) : [];
   return hub.playerAppearanceCacheV126?.retain([
-    ...(bodyRig?.requiredAssets || []), ...(modular?.requiredAssets || []),
+    ...(bodyRig?.requiredAssets || []), ...(modular?.requiredAssets || []), ...torsoAssets,
     ...(transit?.eligible ? transit.requiredAssets : action?.eligible ? action.requiredAssets : [])
   ]);
 }

@@ -1,5 +1,10 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, getEnemyStaticPoseRangedBehaviorV96 as getEnemyStaticPoseRangedBehaviorV95, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
 import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
+import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
+import { createEnemyDistanceGaitTrackerV141 } from './enemy-distance-gait-v141.js';
+
+const observeEnemyGaitV141 = createEnemyDistanceGaitTrackerV141();
 
 const clampV95 = (value, low, high) => Math.max(low, Math.min(high, value));
 const overlapV95 = (a, b) => a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -40,6 +45,8 @@ export function resolveDefenderGuardDamageV95(enemy, damage, source = {}) {
 export function getUserPoseVisibleBoundsV95(enemy, facing = enemy?.facing) {
   const d = getEnemyUserCasteV87(enemy?.profileId, enemy?.visualStateV95);
   if (!d) return { x: enemy.x, y: enemy.y, w: enemy.w, h: enemy.h };
+  const human = resolveHumanPoseGeometryV133({ actor: { ...enemy, facing }, definition: d });
+  if (human) return { x: human.visible.x, y: human.visible.y, w: human.visible.width, h: human.visible.height };
   const [left, top, right, bottom] = d.alphaBounds || [0, 0, d.sourceWidth, d.sourceHeight];
   const scale = (facing === -1 ? -1 : 1) * (d.sourceFacing === -1 ? -1 : 1);
   const x1 = (left / d.sourceWidth - d.pivot.x) * d.renderWidth * scale;
@@ -128,22 +135,31 @@ export function isUserCasteImageReadyV87(image, definition) {
 export function drawUserCastePoseV87(ctx, enemy, image, options = {}) {
   const definition = getEnemyUserCasteV87(enemy?.profileId, enemy?.visualStateV95);
   if (!definition || !enemy.alive || !isUserCasteImageReadyV87(image, definition)) return false;
+  const human = resolveHumanPoseGeometryV133({ actor: enemy, definition });
+  enemy.humanVisualV133 = human;
   requestEnemyImportAnimationV107(options.imageStore, definition);
-  const moving = options.movementEnabled !== false && Math.abs(Number(enemy.vx) || 0) > 1 && Math.abs(Number(enemy.vy) || 0) <= 1
+  const distanceGait = human ? observeEnemyGaitV141(enemy, options.timeSeconds, {
+    context: definition.id, movementEnabled: options.movementEnabled, reducedMotion: options.reducedMotion
+  }) : null;
+  // A first draw may use the walk atlas's neutral cell before any displacement
+  // has been observed. Only the distance state can advance its actual frame.
+  const moving = distanceGait ? distanceGait.enabled && Math.abs(Number(enemy.vx) || 0) > 1 : options.movementEnabled !== false && Math.abs(Number(enemy.vx) || 0) > 1 && Math.abs(Number(enemy.vy) || 0) <= 1
     && enemy.grounded !== false && !enemy.dormant && !enemy.ventTransit && !enemy.attacking && !enemy.pendingMelee
     && !['attackAnimationClock', 'attackWindupClock', 'staggerClock', 'hurtClock', 'v52HurtClock'].some(key => Number(enemy[key]) > 0);
   if (drawEnemyImportAnimationV107(ctx, definition, options.imageStore, {
     action: moving ? 'move' : 'idle', timeSeconds: options.timeSeconds, reducedMotion: options.reducedMotion,
+    distanceGaitV141: distanceGait,
+    ...(human ? { height: human.renderHeight } : {}),
     x: enemy.x + enemy.w / 2, y: enemy.y + enemy.h * (definition.groundContact === false ? .5 : 1), facing: enemy.facing
   })) return true;
-  const { renderWidth: w, renderHeight: h, pivot } = definition;
+  const { renderWidth: w, renderHeight: h, pivot } = human || definition;
   ctx.save();
   // Explicit non-contact art uses its measured body-centre pivot. Historical
   // foot/keel pivots keep their unchanged lower-body anchor.
   ctx.translate(enemy.x + enemy.w / 2, enemy.y + enemy.h * (definition.groundContact === false ? .5 : 1));
   // Preserve each PNG's native orientation; its full canvas and pivot stay intact.
   ctx.scale((enemy.facing === -1 ? -1 : 1) * (definition.sourceFacing === -1 ? -1 : 1), 1);
-  ctx.drawImage(image, -pivot.x * w, -pivot.y * h, w, h);
+  ctx.drawImage(resolveSpriteDrawableV134(image), -pivot.x * w, -pivot.y * h, w, h);
   ctx.restore();
   return true;
 }

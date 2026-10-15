@@ -2,7 +2,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, NEURO_XENO_PROFILES } from '../src/content.js';
-import { getPlayerAimGuideV124 } from '../src/player-control-v124.js';
+import { getPlayerAimGuideV124, resolvePlayerProjectileFootprintV124 } from '../src/player-control-v124.js';
+import { getHeldWeaponPoseV125 } from '../src/held-weapon-renderer-v125.js';
+import { resolvePlayerArmPoseV125 } from '../src/player-body-rig-v125.js';
+import { resolveWeaponMechanicsV122 } from '../src/weapon-mechanics-weapons-v122.js';
 import { firstProjectileObstacleV83 } from '../src/projectile-collision-v83.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { MISSION_VENT_NETWORKS_V62 } from '../src/vent-network-v62.js';
@@ -236,6 +239,22 @@ test('cover protects from a frontal ray only, not a shot arriving from behind', 
   assert.equal(samples[1], 20, 'Cover on the opposite side must not mitigate a rear shot.');
 });
 
+test('cover checks a known projectile trajectory instead of an invented ray to the torso', () => {
+  for (const [projectileV124, expected] of [
+    [{ vx: -520, vy: 0 }, 20],
+    [{ vx: -520, vy: 140 }, 7],
+    [{ vx: 520, vy: 140 }, 20],
+    [{ vx: 0, vy: 140 }, 20],
+    [{ vx: -520, vy: NaN }, 20]
+  ]) {
+    const { engine, actor } = coverFixture(); actor.armor = 0;
+    const damage = engine.damagePlayer(actor, 20, { source: 'projectile', attackKind: 'projectile',
+      sourceX: 400, sourceY: 842, projectileV124 });
+    assert.ok(Math.abs(damage - expected) < 1e-8,
+      `Wrong mitigation for velocity ${projectileV124.vx}, ${projectileV124.vy}: ${damage}.`);
+  }
+});
+
 test('cover never grants automatic mitigation for melee or unknown damage origin', () => {
   for (const options of [{ source: 'melee' }, { source: 'enemy' }, { source: 'explosion' }]) {
     const { engine, actor } = coverFixture(); actor.armor = 0;
@@ -436,14 +455,67 @@ test('a low-cover peek lifts the real muzzle and the guide matches the actual sh
   assert.equal(actor.coverV124?.peeking, true);
   const guide = getPlayerAimGuideV124(engine, actor);
   assert.ok(guide); assert.ok(guide.y < engine.covers[0].y);
+  const pose = engine.resolvePlayerWeaponPoseV125(actor, actor.combatAimV83, { requireReady: false });
+  const withoutHandLift = getHeldWeaponPoseV125({ actor: { ...actor, coverV124: { ...actor.coverV124, peeking: false } },
+    descriptor: engine.heldWeaponDescriptorV125(actor), aim: actor.combatAimV83, bodyRig: pose.bodyRig,
+    timeSeconds: engine.animationTime });
+  assert.ok(pose.grip.y < withoutHandLift.grip.y);
+  assert.equal(pose.bodyRig.standingHeight, 96.5);assert.equal(pose.bodyRig.pivot.y, actor.y + actor.h);
+  assert.deepEqual(pose.translation, { x: 0, y: 0 }, 'A peek is anatomical hand motion, not obstruction or a teleported shot.');
+  const arms = resolvePlayerArmPoseV125(pose.bodyRig, pose);
+  for (const side of ['near', 'far']) {
+    assert.ok(arms[side].reachError < 1e-6);assert.equal(arms[side].shoulderShiftDistance, 0);
+  }
   assert.equal(engine.fire(actor), true);
+  const shotGuide = getPlayerAimGuideV124(engine, actor);
+  assert.ok(shotGuide); assert.ok(shotGuide.y < engine.covers[0].y);
+  assert.equal(actor.coverV124?.peeking, true);
   const bullet = engine.bullets.at(-1);
-  assert.equal(bullet.x, guide.x); assert.equal(bullet.y, guide.y);
+  assert.equal(bullet.x, shotGuide.x); assert.equal(bullet.y, shotGuide.y);
+  assert.ok(bullet.y + bullet.h <= engine.covers[0].y, 'The whole actual bullet clears the cover, not just its point origin.');
   const impact = firstProjectileObstacleV83(bullet, { x: 170, y: 0 }, { walls: engine.covers, doors: [], platforms: [] });
   assert.equal(impact, null, 'A properly elevated shot must clear the same cargo used for cover.');
   actor.armor = 0;
   assert.equal(engine.damagePlayer(actor, 20, { attackKind: 'projectile', sourceX: 400, sourceY: 900 }), 20,
     'An exposed peek must not retain hidden damage reduction.');
+});
+
+test('the guide blocks a contact that misses its centre line but touches the actual native bullet bounds', () => {
+  const { engine, actor, key } = coverFixture();
+  key('keyup', 'KeyS');key('keydown', 'KeyZ');key('keydown', 'ShiftLeft');key('keydown', 'KeyD');tickActor(engine,.1);
+  const muzzle = engine.resolvePlayerMuzzleV124(actor, actor.combatAimV83);
+  engine.walls = [{ id:'low-edge',x:muzzle.x+70,y:muzzle.y+3,w:10,h:18 }];
+  const guide = getPlayerAimGuideV124(engine, actor);assert.equal(guide.blocked,true);
+  assert.ok(guide.endX < engine.walls[0].x);
+  assert.equal(engine.fire(actor),true);const bullet=engine.bullets.at(-1);
+  const footprint=resolvePlayerProjectileFootprintV124(engine,actor);
+  assert.equal(footprint.w,bullet.w);assert.equal(footprint.h,bullet.h);
+  const impact=firstProjectileObstacleV83(bullet,{x:170,y:0},{walls:engine.walls});
+  assert.equal(impact?.target.id,'low-edge');
+  assert.equal(firstProjectileObstacleV83({...bullet,w:0,h:0},{x:170,y:0},{walls:engine.walls}),null,
+    'A point-only guide would falsely advertise a clear shot.');
+});
+
+test('native, Fireball and centered V131 projectiles keep their real footprint during J1/J2 low-cover peeks', () => {
+  const weapons=[WEAPONS[0],WEAPONS.find(weapon=>resolveWeaponMechanicsV122(weapon)),
+    WEAPONS.find(weapon=>weapon.name==='M37A2 Pump Shotgun'),WEAPONS.find(weapon=>weapon.name==='M6B Rocket Launcher')];
+  assert.ok(weapons.every(Boolean));
+  for(const weapon of weapons)for(const coop of [false,true]){
+    const {engine,key}=makeEngine({weapon});if(coop)engine.setCoop(true);
+    const actor=coop?engine.coop:engine.player;Object.assign(actor,{x:160,y:838,grounded:true});
+    engine.covers=[{id:'cargo',x:202,y:872,w:96,h:58,health:100,destroyed:false}];
+    key('keydown',coop?'Comma':'KeyZ');key('keydown',coop?'ShiftRight':'ShiftLeft');key('keydown',coop?'KeyL':'KeyD');
+    tickActor(engine,.1,60,actor);assert.equal(actor.coverV124?.peeking,true);
+    const before=getPlayerAimGuideV124(engine,actor);assert.ok(before);
+    assert.equal(engine.fire(actor),true,weapon.name);
+    const projectile=engine.weaponProjectilesV131.at(-1)||engine.bullets.at(-1);assert.ok(projectile,weapon.name);
+    const footprint=resolvePlayerProjectileFootprintV124(engine,actor);
+    assert.equal(projectile.w,footprint.w);assert.equal(projectile.h,footprint.h);
+    const guide=getPlayerAimGuideV124(engine,actor);assert.ok(guide);
+    assert.ok(Math.abs(projectile.y-guide.y-footprint.offsetY)<1e-6,weapon.name);
+    assert.equal(firstProjectileObstacleV83(projectile,{x:170,y:0},{walls:engine.covers}),null,weapon.name);
+    assert.equal(actor.y+actor.h,930);assert.equal(actor.h,92);engine.stop();
+  }
 });
 
 test('a medical action blocks combat and commits exactly once after unpaused simulation time', () => {
@@ -471,6 +543,45 @@ test('movement or damage interrupts a medical action without spending its reserv
     tickActor(engine, 1 / 60);
     assert.equal(actor.fieldActionV124, null); assert.equal(engine.inventory.medkits, 1);
     assert.ok(actor.health <= 30);
+  }
+});
+
+test('stationary directional aiming preserves medical work for either local operator', () => {
+  for (const coop of [false, true]) {
+    const { engine, key, events } = makeEngine(); engine.setCoop(coop);
+    const actor = coop ? engine.coop : engine.player;
+    actor.health = 30; engine.inventory.medkits = 1;
+    key('keydown', coop ? 'ShiftRight' : 'ShiftLeft'); key('keydown', coop ? 'KeyL' : 'KeyD');
+    tickActor(engine, 0.1, 60, actor);
+    const origin = { x: actor.x, y: actor.y };
+    assert.equal(engine.useMedkit(actor), true);
+    tickActor(engine, 2.3, 60, actor);
+    assert.deepEqual({ x: actor.x, y: actor.y }, origin);
+    assert.equal(actor.health, 78); assert.equal(engine.inventory.medkits, 0);
+    assert.equal(actor.fieldActionV124, null);
+    assert.ok(!events.some(event => event.type === 'field-action-cancelled'));
+  }
+});
+
+test('releasing stationary aim or pressing jump still interrupts medical work for either operator', () => {
+  for (const coop of [false, true]) for (const action of ['move', 'jump']) {
+    const { engine, key, events } = makeEngine(); engine.setCoop(coop);
+    const actor = coop ? engine.coop : engine.player;
+    actor.health = 30; engine.inventory.medkits = 1;
+    const aimKey = coop ? 'ShiftRight' : 'ShiftLeft';
+    key('keydown', aimKey); key('keydown', coop ? 'KeyL' : 'KeyD');
+    tickActor(engine, 0.1, 60, actor);
+    assert.equal(engine.useMedkit(actor), true);
+    tickActor(engine, 0.5, 60, actor);
+    assert.equal(engine.isFieldActionBusyV124(actor), true);
+    const origin = { x: actor.x, y: actor.y };
+    if (action === 'move') key('keyup', aimKey);
+    else key('keydown', coop ? 'KeyU' : 'Space');
+    tickActor(engine, 1 / 60, 60, actor);
+    assert.equal(actor.fieldActionV124, null); assert.equal(engine.inventory.medkits, 1); assert.equal(actor.health, 30);
+    assert.ok(events.some(event => event.type === 'field-action-cancelled' && event.reason === 'movement'));
+    if (action === 'move') assert.ok(actor.x > origin.x);
+    else assert.ok(actor.y < origin.y && actor.vy < 0);
   }
 });
 
@@ -588,7 +699,7 @@ test('pausing an installation preserves its timer and a pending save records car
   assert.equal(engine.placeablesV86.instances[0].status, 'deployed');
 });
 
-test('actual hostile projectiles retain launch origin and only frontal cover mitigates', () => {
+test('actual overhead hostile projectiles retain launch origin and clear frontal cover', () => {
   for (const front of [true, false]) {
     const { engine, actor } = coverFixture(); actor.armor = 0;
     const before = actor.health;
@@ -600,7 +711,7 @@ test('actual hostile projectiles retain launch origin and only frontal cover mit
     for (let frame = 0; frame < 60 && engine.hostileProjectiles.length; frame++) engine.updateHostileProjectiles(1 / 60);
     assert.equal(engine.hostileProjectiles.length, 0);
     assert.equal(shot.sourceX, sourceX); assert.equal(shot.sourceY, 842);
-    assert.ok(Math.abs(before - actor.health - (front ? 13 * 0.35 : 13)) < 1e-8,
+    assert.ok(Math.abs(before - actor.health - 13) < 1e-8,
       `Wrong incoming damage from ${front ? 'front' : 'rear'}: ${before - actor.health}.`);
   }
 });
@@ -610,10 +721,12 @@ test('a thin wall stops the real muzzle and the shot drawn by the aim guide', ()
   engine.walls = [{ id: 'thin-bulkhead', x: 209, y: 700, w: 4, h: 230 }];
   key('keydown', 'ShiftLeft'); key('keydown', 'KeyD'); tickActor(engine, 0.05);
   const guide = getPlayerAimGuideV124(engine, actor);
-  assert.ok(guide); assert.ok(guide.x < engine.walls[0].x);
+  assert.ok(guide?.blocked); assert.ok(guide.x < engine.walls[0].x);
   assert.equal(engine.fire(actor), true);
+  const shotGuide = getPlayerAimGuideV124(engine, actor);
+  assert.ok(shotGuide?.blocked); assert.ok(shotGuide.x < engine.walls[0].x);
   const shot = engine.bullets.at(-1);
-  assert.equal(shot.x, guide.x); assert.equal(shot.y, guide.y);
+  assert.equal(shot.x, shotGuide.x); assert.equal(shot.y, shotGuide.y);
   engine.updateBullets(1 / 60);
   assert.ok(shot.hit || !engine.bullets.includes(shot), 'The round must hit the wall, not spawn behind it.');
 });
@@ -685,7 +798,9 @@ test('Bioforge fire shares the constrained muzzle used by presentation', () => {
   const muzzle = engine.resolvePlayerMuzzleV124(actor, aim);
   assert.ok(muzzle.obstructedV124);
   assert.equal(engine.fire(actor), true);
-  assert.equal(engine.bullets.at(-1).x, muzzle.x); assert.equal(engine.bullets.at(-1).y, muzzle.y);
+  const shotMuzzle = engine.resolvePlayerMuzzleV124(actor, aim);
+  assert.ok(shotMuzzle.obstructedV124);
+  assert.equal(engine.bullets.at(-1).x, shotMuzzle.x); assert.equal(engine.bullets.at(-1).y, shotMuzzle.y);
 });
 
 test('dedicated, contextual and Neuro melee never create gunfire presentation clocks', () => {
@@ -700,5 +815,55 @@ test('dedicated, contextual and Neuro melee never create gunfire presentation cl
     assert.ok(events.some(event => event.type === (action === 'neuro' ? 'neuro-attack' : 'melee')));
     assert.equal(actor.shots, 0); assert.equal(actor.ammo, ammo); assert.equal(engine.bullets.length, 0);
     assert.equal(Number(actor.v52FireClock) || 0, 0, `${action} must not impersonate an accepted gunshot.`);
+  }
+});
+
+test('held directional aim keeps all eight selected octants without moving either operator', () => {
+  const octants = [
+    ['right', ['right']], ['down-right', ['down', 'right']], ['down', ['down']],
+    ['down-left', ['down', 'left']], ['left', ['left']], ['up-left', ['up', 'left']],
+    ['up', ['up']], ['up-right', ['up', 'right']]
+  ];
+  for (const role of ['player', 'coop']) for (const [direction, inputs] of octants) {
+    const { engine, key } = makeEngine();
+    engine.setCoop(true);
+    const actor = engine[role], controls = role === 'coop' ? COOP_CONTROLS : PLAYER_CONTROLS;
+    const hold = role === 'coop' ? 'ShiftRight' : 'ShiftLeft', x = actor.x, y = actor.y;
+    key('keydown', hold);
+    for (const input of inputs) key('keydown', controls[input]);
+    tickActor(engine, .05, 60, actor);
+    assert.equal(actor.combatAimV83.direction, direction);
+    for (const input of inputs) key('keyup', controls[input]);
+    tickActor(engine, .08, 60, actor);
+    assert.equal(actor.combatAimV83.direction, direction, `${role}: ${direction} survives neutral direction keys.`);
+    assert.equal(actor.combatAimV83.latchedV130, true);
+    assert.equal(actor.x, x); assert.equal(actor.y, y); assert.equal(actor.climbing, false);
+    assert.equal(actor.crouching, false, 'Down aims rather than changing the standing posture.');
+    const aim = actor.combatAimV83;
+    assert.equal(engine.fire(actor), true);
+    const shot = engine.bullets.at(-1), length = Math.hypot(shot.vx, shot.vy);
+    assert.ok(Math.abs(shot.vx / length - aim.x) < 1e-9);
+    assert.ok(Math.abs(shot.vy / length - aim.y) < 1e-9);
+    key('keyup', hold); key('keydown', controls.right);
+    tickActor(engine, .15, 60, actor);
+    assert.equal(actor.combatAimV83.direction, 'right');
+    assert.ok(actor.x > x, 'Releasing the held aim key restores movement.');
+    assert.equal(actor.combatAimV83.latchedV130, undefined);
+    engine.stop();
+  }
+});
+
+test('pause and input loss discard the remembered keyboard angle', () => {
+  for (const clear of ['pause', 'blur']) {
+    const { engine, key, windowEvents } = makeEngine();
+    key('keydown', 'ShiftLeft'); key('keydown', 'KeyW');
+    tickActor(engine, .03); key('keyup', 'KeyW'); tickActor(engine, .03);
+    assert.equal(engine.player.combatAimV83.direction, 'up');
+    if (clear === 'pause') { engine.togglePause(); engine.togglePause(); }
+    else windowEvents.dispatchEvent(new Event('blur'));
+    key('keydown', 'ShiftLeft'); tickActor(engine, .03);
+    assert.equal(engine.player.combatAimV83.direction, 'right');
+    assert.equal(engine.player.combatAimV83.latchedV130, undefined);
+    engine.stop();
   }
 });

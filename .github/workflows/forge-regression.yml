@@ -4,6 +4,8 @@ on:
     paths:
       - 'src/**'
       - 'scripts/**'
+      - 'assets/openai/metroidvania/props/**'
+      - 'assets/openai/hub/props/v139/**'
       - 'package.json'
       - 'sw.js'
       - '.github/workflows/forge-regression.yml'
@@ -16,6 +18,8 @@ jobs:
   forge:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -24,6 +28,7 @@ jobs:
             src
             scripts
             assets/openai/metroidvania/props
+            assets/openai/hub/props/v139
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
@@ -54,6 +59,7 @@ jobs:
           python scripts/verify-forge-browser-v134.py --output forge-ci-results/browser-v134 2>&1 | tee forge-ci-results/browser-v134.log
           python scripts/verify-forge-browser-v135.py --output forge-ci-results/browser-v135 2>&1 | tee forge-ci-results/browser-v135.log
           python scripts/verify-forge-browser-v136.py --output forge-ci-results/browser-v136 2>&1 | tee forge-ci-results/browser-v136.log
+          python scripts/verify-forge-browser-journey-v141.py --output forge-ci-results/browser-journey-v141 2>&1 | tee forge-ci-results/browser-journey-v141.log
       - name: Preserve reproducible code, native props and test logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -69,5 +75,6 @@ jobs:
             sw.js
             manifest.webmanifest
             assets/openai/metroidvania/props
+            assets/openai/hub/props/v139
             forge-ci-results
           if-no-files-found: error

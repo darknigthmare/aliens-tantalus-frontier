@@ -21,6 +21,24 @@ import { withPlayerFieldActionsV124 } from './player-field-actions-v124.js';
 import { withWeaponEffectsV124 } from './weapon-effects-runtime-v124.js';
 import { withPlayerWeaponRigV125 } from './player-weapon-runtime-v125.js';
 import { withPlayerAppearanceV126 } from './player-appearance-runtime-v126.js';
+import { withDirectionalAimV130 } from './directional-aim-v130.js';
+import { withVerticalWorldV130 } from './vertical-world-v130.js';
+import { withDestructibleSceneryV130 } from './destructible-scenery-v130.js';
+import { withEnemyTacticsV130 } from './enemy-tactics-v130.js';
+import { withWeaponActionsV130 } from './weapon-actions-v130.js';
+import { withWeaponActionsV131 } from './weapon-actions-v131.js';
+import { withApcCourseV131 } from './apc-course-v131.js';
+import { withHiveMissionsV131 } from './hive-missions-v131.js';
+import { withMechaMissionsV131 } from './mecha-missions-v131.js';
+import { withEcosystemMissionsV131 } from './ecosystem-missions-v131.js';
+import { withLegacyMissionsV131 } from './legacy-operations-v131.js';
+import { withSquadDoctrineV132 } from './squad-doctrine-v132.js';
+import { withHordeDirectorV132 } from './horde-director-v132.js';
+import { withNarrativeEvidenceV132 } from './narrative-evidence-v132.js';
+import { withPlaceablesExtensionV132 } from './placeables-extension-v132.js';
+import { isolateForgeMissionOptionsV136 } from './editor-spatial-v136.js';
+import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
+import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 
 export * from './game-production-core.js';
 
@@ -37,6 +55,12 @@ const V122ProductionEngine = withArchiveRelayRuntimeV122(V121ProductionEngine);
 const V124ProductionEngine = withWeaponEffectsV124(withPlayerFieldActionsV124(V122ProductionEngine));
 const V125ProductionEngine = withPlayerWeaponRigV125(V124ProductionEngine);
 const V126ProductionEngine = withPlayerAppearanceV126(V125ProductionEngine);
+const V130ProductionEngine = withDirectionalAimV130(withWeaponActionsV130(withEnemyTacticsV130(
+  withDestructibleSceneryV130(withVerticalWorldV130(V126ProductionEngine)))));
+const V131ProductionEngine = withLegacyMissionsV131(withEcosystemMissionsV131(withMechaMissionsV131(
+  withHiveMissionsV131(withApcCourseV131(withWeaponActionsV131(V130ProductionEngine))))));
+const V132ProductionEngine = withNarrativeEvidenceV132(withHordeDirectorV132(
+  withSquadDoctrineV132(withPlaceablesExtensionV132(V131ProductionEngine))));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -49,8 +73,10 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V126ProductionEngine {
+export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV141(V132ProductionEngine)) {
   start(options = {}) {
+    options = isolateForgeMissionOptionsV136(options);
+    this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });
     return snapshot;
@@ -58,11 +84,17 @@ export class GameEngine extends V126ProductionEngine {
 
   captureResumeState() {
     const state = super.captureResumeState();
+    if (state.mission && this.mission?.rewards) state.mission.rewards = structuredClone(this.mission.rewards);
     for (const role of ['player', 'coop']) if (state[role]) state[role].tacticalReloadV77 = captureTacticalReloadV77(this[role]);
     return { ...state, gameplaySupportV72: captureGameplaySupportV72(this) };
   }
 
   applyResumeState(rawState) {
+    const signature = this.expectedMissionSignatureV130 || this.missionLevelRuntime?.signature;
+    if (signature && rawState?.missionLevel?.signature && rawState.missionLevel.signature !== signature) {
+      return { applied: false, reason: 'level-signature-mismatch', missionLevelRestored: false };
+    }
+    rawState = this.migrateVerticalResumeV130?.(rawState) || rawState;
     const result = super.applyResumeState(rawState);
     if (!result?.applied) return result;
     const supportRestoredV72 = restoreGameplaySupportV72(this, rawState?.gameplaySupportV72);
@@ -75,16 +107,17 @@ export class GameEngine extends V126ProductionEngine {
     return { ...result, supportRestoredV72, tacticalReloadRestoredV77, placeablesRestoredV86 };
   }
 
-  canPerformGameplayAction(actor = this.player, { allowVent = false } = {}) {
+  canPerformGameplayAction(actor = this.player, { allowVent = false, allowSquadTask = false } = {}) {
     return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
       && this.mission?.state === 'active' && actor?.alive && !actor.downed && (allowVent || !actor.ventTransit)
       && !(actor.hazardKind === 'electrical' && actor.hazardClock > 0)
-      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor));
+      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor)
+      && (allowSquadTask || !this.isSquadActionLockedV132?.(actor)));
   }
 
   // Guard the outermost runtime so keyboard, touch/UI and internal dispatch share the same contract.
   interact(actor = this.player) {
-    return this.canPerformGameplayAction(actor, { allowVent: true }) ? super.interact(actor) : false;
+    return this.canPerformGameplayAction(actor, { allowVent: true, allowSquadTask: true }) ? super.interact(actor) : false;
   }
 
   fire(actor = this.player) {
@@ -93,6 +126,10 @@ export class GameEngine extends V126ProductionEngine {
   }
 
   melee(actor = this.player) {
+    if (this.isMechaMissionV131?.() && actor?.inVehicle
+      || this.isHiveMissionV131?.() && actor === this.player && this.hiveV131?.possession) {
+      return this.canPerformGameplayAction(actor) ? super.melee(actor) : false;
+    }
     if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.inVehicle || actor.reloading || actor.fireClock > 0
       || actor.toolUseClock > 0 || actor.interactionClock > 0) return false;
     if (this.neuro?.active && actor === this.player) return this.meleeAttack?.(actor) || false;

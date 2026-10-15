@@ -27,8 +27,80 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-player-action-rig-v127.mjs', 'verify-player-appearance-preview-v127.mjs',
   'verify-player-transit-rig-v128.mjs', 'verify-player-appearance-preview-v128.mjs', 'verify-player-incapacitation-v128.mjs',
   'verify-player-locomotion-rig-v129.mjs', 'verify-player-colonial-art-v129.mjs', 'verify-player-appearance-preview-v129.mjs',
+  'verify-enemy-tactics-v130.mjs', 'verify-destructible-scenery-v130.mjs', 'verify-vertical-world-v130.mjs', 'verify-weapon-actions-v130.mjs', 'qa-frontier-browser-v130.mjs',
+  'verify-weapon-actions-v131.mjs', 'verify-apc-course-v131.mjs', 'verify-hive-missions-v131.mjs',
+  'verify-mecha-missions-v131.mjs', 'verify-ecosystem-missions-v131.mjs', 'verify-legacy-operations-v131.mjs',
+  'verify-operations-integration-v131.mjs', 'qa-operations-browser-v131.mjs', 'verify-hive-command-ui-v131.mjs',
+  'verify-operation-receipts-v131.mjs',
+  'generate-audio-v132.mjs', 'verify-audio-score-v132.mjs', 'qa-audio-browser-v132.mjs',
+  'verify-squad-doctrine-v132.mjs', 'verify-placeables-extension-v132.mjs',
+  'verify-horde-director-v132.mjs', 'verify-narrative-evidence-v132.mjs',
+  'verify-hub-training-v132.mjs', 'verify-bioforge-admissions-v132.mjs',
+  'qa-squad-browser-v132.mjs', 'qa-hub-browser-v132.mjs',
+  'qa-placeables-browser-v132.mjs',
+  'qa-narrative-browser-v132.mjs',
+  'qa-horde-browser-v132.mjs',
+  'verify-hub-control-bindings-v133.mjs', 'verify-hub-navigation-v133.mjs',
+  'qa-hub-navigation-v133.mjs', 'qa-controls-browser-v133.mjs', 'qa-human-locomotion-v133.mjs',
+  'verify-human-visual-contract-v133.mjs',
+  'verify-human-patrol-animation-v133.mjs',
+  'verify-human-gait-v133.mjs', 'qa-human-visual-browser-v133.mjs',
+  'verify-hub-authored-composition-v133.mjs', 'qa-hub-interactions-browser-v133.mjs',
+  'verify-hub-bulkhead-depth-v134.mjs', 'verify-hub-room-parallax-v134.mjs',
+  'verify-hub-room-dressing-v134.mjs', 'verify-sprite-alpha-policy-v134.mjs', 'verify-hub-environment-atlas-v134.mjs',
+  'qa-hub-presentation-v134.mjs', 'qa-hub-room-parallax-v134.mjs',
+  'verify-jeri-surface-motion-v135.mjs', 'qa-jeri-surface-browser-v135.mjs',
+  'verify-crew-conversation-memory-v135.mjs', 'verify-field-media-v135.mjs',
+  'verify-npc-dialogue-causality-v135.mjs', 'qa-continuation-browser-v135.mjs',
+  'verify-editor-authoring-v135.mjs', 'verify-player-wardrobe-v135.mjs', 'qa-authoring-browser-v135.mjs',
+  'verify-hub-spatial-design-v136.mjs', 'verify-hub-room-life-v136.mjs', 'verify-hub-prop-atlas-v136.mjs',
+  'verify-human-motion-v136.mjs', 'verify-npc-life-v136.mjs', 'verify-editor-spatial-v136.mjs',
+  'qa-tantalus-design-v136.mjs', 'qa-npc-life-v136.mjs', 'qa-editor-spatial-browser-v136.mjs',
+  'verify-hub-ship-layout-v137.mjs', 'verify-hub-circulation-v137.mjs',
+  'verify-hub-room-furnishing-v137.mjs', 'verify-hub-room-identity-v137.mjs', 'qa-tantalus-ship-v137.mjs',
+  'verify-hub-service-routes-v138.mjs', 'verify-hub-crawl-hint-v138.mjs',
+  'verify-hub-interior-wall-atlas-v138.mjs', 'verify-hub-compartment-shell-v138.mjs',
+  'verify-hub-destination-signage-v138.mjs', 'verify-hub-annex-fixtures-v138.mjs',
+  'verify-hub-critical-furnishing-v138.mjs', 'qa-tantalus-level-v138.mjs',
+  'verify-human-natural-gait-v139.mjs',
+  'verify-hub-dropship-hangar-v139.mjs',
+  'verify-hub-whole-room-projection-v139.mjs', 'verify-hub-workstation-details-v139.mjs',
+  'verify-hub-annex-runtime-geometry-v139.mjs',
+  'verify-player-climb-contacts-v139.mjs', 'verify-hub-support-planes-v139.mjs',
+  'verify-hub-native-prop-placement-v139.mjs', 'verify-hub-annex-storage-v139.mjs',
+  'verify-hub-support-contact-v139.mjs', 'verify-hub-furniture-atlases-v139.mjs', 'qa-tantalus-perspective-v139.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
+// Development tools recovered from the published Forge branch stay in Git.
+// They are never admitted in a built distribution, nor copied by the builder.
+const FORGE_TOOLING_V140 = new Set([
+  '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
+  'docs', 'docs/forge', 'docs/forge/QA-V130.md', 'docs/forge/README-V130.md',
+  'docs/forge/V133-AUTHORING.md', 'docs/forge/V134-NAVIGATION.md',
+  'docs/forge/V135-CONSTRUCTION.md', 'docs/forge/V136-CONTROLE-ET-VERSIONS.md',
+  'scripts/fixtures', 'scripts/fixtures/forge-v130.html'
+]);
+const FORGE_STYLES_V140 = new Set([
+  'src/forge-editor-v130.css', 'src/forge-workbench-v133.css',
+  'src/forge-navigator-v134.css', 'src/forge-construction-v135.css', 'src/forge-control-v136.css'
+]);
+for (const file of [
+  'forge-native-host-v136.mjs', 'editor-native-host-v140.mjs', 'forge-offline-harness-v130.py',
+  'verify-forge-v130.mjs', 'verify-forge-v133.mjs', 'verify-forge-v134.mjs',
+  'verify-forge-v135.mjs', 'verify-forge-v136.mjs', 'verify-forge-native-v136.mjs',
+  'verify-forge-browser-v130.py', 'verify-forge-browser-v133.py', 'verify-forge-browser-v134.py',
+  'verify-forge-browser-v135.py', 'verify-forge-browser-v136.py',
+  'verify-forge-shell-v134.py', 'verify-forge-shell-v135.py', 'verify-forge-shell-v136.py',
+  'verify-editor-modules-v140.mjs', 'verify-editor-ship-bounds-v140.mjs',
+  'verify-enemy-patrol-v140.mjs', 'verify-npc-spacing-v140.mjs',
+  'verify-player-wardrobe-parts-v140.mjs', 'verify-forge-native-v140.mjs',
+  'verify-forge-release-v140.mjs', 'verify-forge-sandbox-v140.mjs',
+  'qa-enemy-patrol-browser-v140.mjs', 'qa-wardrobe-parts-browser-v140.mjs',
+  'verify-forge-journey-v141.mjs', 'verify-forge-admission-v141.mjs',
+  'verify-forge-mission-v141.mjs', 'verify-forge-ship-v141.mjs', 'verify-forge-decoration-v141.mjs',
+  'verify-enemy-distance-gait-v141.mjs', 'verify-hub-annex-npc-life-v141.mjs',
+  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py'
+]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
 const USER_REFERENCE_JPG_PATHS_V100 = new Set([
@@ -158,6 +230,8 @@ const PRIVATE_TEXT = [
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (!built && FORGE_TOOLING_V140.has(path)) return true;
+  if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
   const v123Admission = publicReleasePathAdmissionV123(path, { directory });
@@ -170,6 +244,10 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (v120Admission !== null) return v120Admission;
   const v119Admission = publicReleasePathAdmissionV119(path, { directory });
   if (v119Admission !== null) return v119Admission;
+  // V141 adds one reviewed original torso atlas, not an open candidate folder.
+  if (path === 'assets/openai/sprites/player/v141') return directory;
+  if (path.startsWith('assets/openai/sprites/player/v141/')) return !directory
+    && path === 'assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png';
   if (directory) {
     if (segments.length === 1) return ['src', 'scripts', 'assets'].includes(path);
     return segments[0] === 'assets' && segments.every(part => !part.startsWith('.') && !PRIVATE_FILENAME.test(part));

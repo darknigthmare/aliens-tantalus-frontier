@@ -1,5 +1,6 @@
 import { ForgeModel, TILE_TYPES, DEFAULT_LAYER, LAYERS, clone, decorative, lineCells, rectangle, inside, serializeProject, nativeTiles, validateProject } from './forge-model-v130.js';
 import { mountForgeUI } from './forge-ui-v130.js';
+import { forgeDecorationPlanV141, drawForgeDecorationPlanV141 } from './forge-decoration-v141.js';
 export { TILE_TYPES } from './forge-model-v130.js';
 
 const colors={floor:'#789486',platform:'#96b6a1',wall:'#425951',door:'#ecc677',vent:'#70a8b9',ladder:'#cb9e66',lift:'#b194ce',spawn:'#86efbb',objective:'#ffde7b',enemy:'#ed7983',vehicle:'#8fb6e1',terminal:'#69dacc',hazard:'#fa9d63'};
@@ -144,9 +145,20 @@ export class LevelEditor {
     ctx.clearRect(0,0,w,h);ctx.fillStyle='#080f12';ctx.fillRect(0,0,w,h);
     ctx.save();ctx.translate(m.x,m.y);ctx.fillStyle=this.shipMode?'#102329':'#10221e';ctx.fillRect(0,0,this.cols*s,this.rows*s);
     ctx.beginPath();ctx.rect(0,0,this.cols*s,this.rows*s);ctx.clip();
-    for(const layer of LAYERS.filter(layer=>this.visible.has(layer)))for(const cell of this.room.cells.filter(cell=>cell.layer===layer)){
+    for(const layer of LAYERS.filter(layer=>this.visible.has(layer))){
+      if(['background','foreground'].includes(layer)){
+        const room=this.gesture?.mode==='move'?{...this.room,cells:this.room.cells.map(cell=>this.selection.has(cell.id)?{...cell,x:cell.x+this.gesture.dx,y:cell.y+this.gesture.dy}:cell)}:this.room;
+        drawForgeDecorationPlanV141(ctx,this,forgeDecorationPlanV141(room,{width:this.cols*s,height:this.rows*s},{phase:layer,reducedMotion:true,unitScale:s*this.rows/(this.shipMode?720:1080)}));
+      }
+      for(const cell of this.room.cells.filter(cell=>cell.layer===layer)){
       let dx=0,dy=0;if(this.gesture?.mode==='move'&&this.selection.has(cell.id)){dx=this.gesture.dx;dy=this.gesture.dy;}
       const x=(cell.x+dx)*s,y=(cell.y+dy)*s;if(x+s<-m.x||y+s<-m.y||x>w-m.x||y>h-m.y)continue;
+      if(decorative(cell)){
+        ctx.strokeStyle=this.selection.has(cell.id)?'#fff3ba':'#69877a';ctx.lineWidth=this.selection.has(cell.id)?2:1;
+        ctx.strokeRect(x+1,y+1,s-2,s-2);
+        if(cell.locked){ctx.fillStyle='#fff';ctx.fillRect(x+s*.78,y+s*.1,Math.max(2,s*.12),Math.max(2,s*.12));}
+        continue;
+      }
       ctx.globalAlpha=decorative(cell)?.38:1;ctx.fillStyle=colors[cell.type];
       ctx.fillRect(x+1,y+1,Math.max(1,s-2),Math.max(1,cell.type==='platform'?s*.28-1:s-2));
       ctx.strokeStyle='#081510';ctx.lineWidth=Math.max(1,s*.04);
@@ -156,6 +168,7 @@ export class LevelEditor {
       ctx.globalAlpha=1;
       if(cell.locked){ctx.fillStyle='#fff';ctx.fillRect(x+s*.78,y+s*.1,Math.max(2,s*.12),Math.max(2,s*.12));}
       if(this.selection.has(cell.id)){ctx.strokeStyle='#fff3ba';ctx.lineWidth=2;ctx.strokeRect(x+1,y+1,s-2,s-2);}
+      }
     }
     if(this.grid&&s>=8){ctx.globalAlpha=.2;ctx.strokeStyle='#9ad4bd';ctx.lineWidth=1;ctx.beginPath();for(let x=0;x<=this.cols;x++){ctx.moveTo(x*s,0);ctx.lineTo(x*s,this.rows*s);}for(let y=0;y<=this.rows;y++){ctx.moveTo(0,y*s);ctx.lineTo(this.cols*s,y*s);}ctx.stroke();ctx.globalAlpha=1;}
     if(this.gesture&&['select','rect','line'].includes(this.gesture.mode)){

@@ -10,6 +10,7 @@ export { TILE_TYPES };
 export class LevelEditor extends BaseEditor {
   constructor(canvas, onChange=()=>{}, options={}) {
     super(canvas,onChange);
+    this.onDocumentChangeV140 = typeof options.onDocumentChange === 'function' ? options.onDocumentChange : null;
     this.selectionScopeV133='active';
     const store=options.store || (canvas.ownerDocument ? getForgeStoreV133() : null);
     if(store)this.workspaceV133=new ForgeWorkspaceV133(this,store);

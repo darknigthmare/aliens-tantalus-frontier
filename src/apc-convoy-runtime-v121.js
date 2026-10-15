@@ -271,7 +271,7 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       if (!this.isApcConvoyV121()) return super.completeMission(actor);
       const state = this.apcConvoyV121;
       if (!this.canApcConvoyActV121(actor) || state.complete || state.rewardClaimed || this.missingApcConvoyRequirementV121()) return false;
-      const rewards = { credits: 850 + actor.kills * 10 + Math.floor(this.vehicle.hull / 340 * 250), salvage: this.inventory.salvage,
+      const rewards = { credits: Math.min(10000, 850 + actor.kills * 10 + Math.floor(this.vehicle.hull / 340 * 250)), salvage: this.inventory.salvage,
         intel: this.inventory.intel, retries: this.mission.retries, elapsedSeconds: Math.round(this.mission.elapsed),
         noCasualty: this.mission.casualties === 0, vehicleRecovered: true, hullRemaining: Math.round(this.vehicle.hull), operationId: APC_CONVOY_OPERATION_V121 };
       state.complete = true; state.rewardClaimed = true; state.rewards = rewards; this.syncApcConvoyWorldV121();

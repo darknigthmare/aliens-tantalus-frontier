@@ -1,9 +1,10 @@
 import { SHIP_REFUGE_ANNEX_V87 } from './refuge-room-v87.js';
+import { HUB_ANNEX_REGISTRY_VERSION_V137 } from './hub-annex-registry-v137.js';
 
 const aliases = ['hubCommercialV71', 'hubExpansionV71', 'commercialV71'];
 const record = value => Boolean(value && typeof value === 'object' && !Array.isArray(value));
 const finite = value => typeof value === 'number' && Number.isFinite(value);
-const future = state => Number(state?.schema) > 71 || Number(state?.registryVersion) > 87;
+const future = state => Number(state?.schema) > 71 || Number(state?.registryVersion) > HUB_ANNEX_REGISTRY_VERSION_V137;
 
 /**
  * Serialize a visit as its parent-door return pose. This is a save-boundary

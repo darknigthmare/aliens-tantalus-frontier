@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import {
   HUB_DECKS,
   HUB_WORLD,
@@ -7,14 +8,18 @@ import {
   HUB_ANNEX_WORLD_V71,
 } from './tantalus-hub-expansion-v71.js';
 import {
-  HUB_ANNEX_BY_ID_V87 as HUB_ANNEX_BY_ID_V71,
-  HUB_ANNEXES_V87 as HUB_ANNEXES_V71,
-  buildHubRuntimeGraphV87 as buildHubCommercialGraphV71,
-  applyHubAnnexStationV87 as applyHubAnnexStationV71,
-  createHubCommercialStateV87 as createHubCommercialStateV71
-} from './hub-annex-registry-v87.js';
+  HUB_ANNEX_REGISTRY_VERSION_V137,
+  HUB_ANNEX_BY_ID_V137 as HUB_ANNEX_BY_ID_V71,
+  HUB_ANNEXES_V137 as HUB_ANNEXES_V71,
+  buildHubRuntimeGraphV137 as buildHubCommercialGraphV71,
+  applyHubAnnexStationV137 as applyHubAnnexStationV71,
+  createHubCommercialStateV137 as createHubCommercialStateV71
+} from './hub-annex-registry-v137.js';
+import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionV137,
+  getHubShipConnectionsForRoomV137, getHubShipConnectionsForSpaceV137 } from './hub-ship-layout-v137.js';
+import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, drawShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
-import { SHIP_PORT_ANNEX_V87, getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from './ship-port-room-v87.js';
+import { SHIP_PORT_ANNEX_V87, SHIP_PORT_TERMINAL_V87, getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from './ship-port-room-v87.js';
 import { SHIP_REFUGE_ANNEX_V87, getRefugeInteractionV87 } from './refuge-room-v87.js';
 import { drawRefugeLayerV87 } from './refuge-art-v87.js';
 import { normalizeRefugeHubResumeV87, projectRefugeHubSaveV87 } from './refuge-save-v87.js';
@@ -24,6 +29,10 @@ import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
+import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
+import { HUB_ANNEX_MODULE_ART_V82, getHubAnnexFixturePlanV138, drawHubAnnexFixturesV138, getHubAnnexFixtureAssetsV139 } from './hub-annex-fixtures-v138.js';
+import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
+export { HUB_ANNEX_MODULE_ART_V82 } from './hub-annex-fixtures-v138.js';
 
 export * from './hub-v62-runtime.js';
 export * from './tantalus-hub-expansion-v71.js';
@@ -32,29 +41,6 @@ export const HUB_ANNEX_RUNTIME_SCHEMA_V71 = 71;
 export const HUB_ANNEX_STATE_KEY_V71 = 'hubCommercialV71';
 export const HUB_ANNEX_TRANSITION_SECONDS_V71 = 0.42;
 export const HUB_ANNEX_ART_ROLES_V71 = Object.freeze(['far', 'mid', 'prop', 'foreground', 'door']);
-
-// These small source regions are separate authored pieces inside legacy PNGs.
-// Their surrounding sheets contain detached bases or opaque white openings;
-// drawing the whole sheet would put those defects directly in the walking lane.
-export const HUB_ANNEX_MODULE_ART_V82 = Object.freeze({
-  floor: '/assets/openai/metroidvania/props/floor-segment.png',
-  catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
-  ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
-  pipe: '/assets/openai/metroidvania/props/maintenance-pipe.png',
-  provingWall: '/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp',
-  provingCeiling: '/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png',
-  crops: Object.freeze({
-    catwalkDeck: Object.freeze([40, 43, 228, 70]),
-    ladderLeft: Object.freeze([53, 4, 62, 172]),
-    ladderRight: Object.freeze([100, 4, 109, 172]),
-    ladderRung: Object.freeze([62, 36, 100, 40]),
-    pipeBody: Object.freeze([43, 4, 107, 178]),
-    pipeShaft: Object.freeze([49, 34, 99, 120]),
-    ceilingRaceway: Object.freeze([4, 4, 186, 29]),
-    wallScreen: Object.freeze([25, 8, 183, 99]),
-    provingCeilingSolid: Object.freeze([11, 141, 1528, 283])
-  })
-});
 
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
@@ -82,7 +68,7 @@ function createImage(source) {
 }
 
 function annexFromState(state) {
-  return HUB_ANNEX_BY_ID_V71[state?.activeAnnexId] || null;
+  return getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V71[state?.activeAnnexId] || null);
 }
 
 function expanded(bounds, horizontal = INTERACTION_MARGIN, vertical = 28) {
@@ -116,7 +102,7 @@ function layerSourceRect(image, cameraX, factor = 1) {
 
 function mutableCommercialState(rawState) {
   const normalized = createHubCommercialStateV71(rawState);
-  return clone(normalized.registryVersion === 87 && normalized.schema === 71
+  return clone(normalized.registryVersion === HUB_ANNEX_REGISTRY_VERSION_V137 && normalized.schema === 71
     ? normalized : createHubCommercialStateV71());
 }
 
@@ -150,12 +136,16 @@ export class HubGame extends HubGameV62 {
     hubState = normalizeRefugeHubResumeV87(hubState);
     this.refugeMovementLockedV87 = false;
     const sourceRegistry = hubState[HUB_ANNEX_STATE_KEY_V71] || hubState.hubExpansionV71 || hubState.commercialV71;
-    this.annexStateReadOnlyV87 = Number(sourceRegistry?.schema) > 71 || Number(sourceRegistry?.registryVersion) > 87;
+    this.annexStateReadOnlyV87 = Number(sourceRegistry?.schema) > 71 || Number(sourceRegistry?.registryVersion) > HUB_ANNEX_REGISTRY_VERSION_V137;
     const restored = mutableCommercialState(
       hubState[HUB_ANNEX_STATE_KEY_V71]
       || hubState.hubExpansionV71
       || hubState.commercialV71
     );
+    if (HUB_SHIP_SPACE_BY_ID_V137[restored.activeAnnexId]) {
+      const context = restored.returnContext, deck = HUB_DECKS.findIndex(entry => entry.id === context?.deckId);
+      if (deck >= 0) hubState = { ...hubState, deck, roomId: context.roomId, positionX: context.x };
+    }
     this.startingV71 = true;
     this.annexTransitionV71 = null;
     this.annexReturnPoseV71 = null;
@@ -232,7 +222,7 @@ export class HubGame extends HubGameV62 {
     const colliders = this.annexSolidCollidersV71(annex);
     const safeAt = (x, y) => {
       const actor = { ...desired, x, y };
-      return !colliders.some((collider) => overlaps(actor, collider));
+      return !colliders.some((collider) => collider.collisionMode !== 'one-way-top' && overlaps(actor, collider));
     };
     if (!safeAt(desired.x, desired.y)) {
       const candidates = colliders
@@ -278,18 +268,22 @@ export class HubGame extends HubGameV62 {
   }
 
   ensureAnnexAssetsV71(annexId) {
-    const annex = HUB_ANNEX_BY_ID_V71[annexId];
+    const annex = getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V71[annexId]);
     if (!annex) return null;
-    if (!this.annexImagesV71.has(annex.id)) {
-      this.annexImagesV71.set(annex.id, new Map((annex.artRoles || HUB_ANNEX_ART_ROLES_V71).map((role) => [
-        role,
-        createImage(annex.art[role])
-      ])));
+    if (!this.annexImagesV71.has(annex.id)) this.annexImagesV71.set(annex.id, new Map());
+    this.annexArtSourcesV139 ||= new Map();
+    if (!this.annexArtSourcesV139.has(annex.id)) this.annexArtSourcesV139.set(annex.id, new Map());
+    const group = this.annexImagesV71.get(annex.id), sources = this.annexArtSourcesV139.get(annex.id);
+    for (const role of annex.artRoles || HUB_ANNEX_ART_ROLES_V71) {
+      const source = annex.art[role];
+      if (sources.get(role) !== source || !group.has(role)) {
+        group.set(role, createImage(source)); sources.set(role, source);
+      }
     }
     const provingAssets = annex.id === 'proving-ground'
       ? [HUB_ANNEX_MODULE_ART_V82.provingWall, HUB_ANNEX_MODULE_ART_V82.provingCeiling]
       : ['animal-care', SHIP_PORT_ANNEX_V87.id, SHIP_REFUGE_ANNEX_V87.id].includes(annex.id) ? [HUB_ANNEX_MODULE_ART_V82.floor] : [];
-    for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets].filter(Boolean)) {
+    for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets, ...getHubAnnexFixtureAssetsV139(annex)].filter(Boolean)) {
       if (!this.annexModularImagesV72.has(asset)) this.annexModularImagesV72.set(asset, createImage(asset));
     }
     return this.annexImagesV71.get(annex.id);
@@ -300,13 +294,26 @@ export class HubGame extends HubGameV62 {
   }
 
   annexForParentRoomV71(roomId = this.state?.roomId) {
-    return HUB_ANNEXES_V71.find((annex) => annex.parentRoomId === roomId) || null;
+    const extra = getHubShipConnectionsForRoomV137(roomId, HUB_DECKS[this.state?.deck]?.id)[0];
+    return HUB_ANNEXES_V71.find((annex) => annex.parentRoomId === roomId) || (extra && HUB_ANNEX_BY_ID_V71[extra.spaceId]) || null;
   }
 
-  getParentAnnexDoorV71(annexId = null) {
+  parentAnnexesForRoomV137(roomId = this.currentRoom()?.id) {
+    const extras = new Set(getHubShipConnectionsForRoomV137(roomId, HUB_DECKS[this.state?.deck]?.id).map(connection => connection.spaceId));
+    return HUB_ANNEXES_V71.filter(annex => annex.parentRoomId === roomId || extras.has(annex.id));
+  }
+
+  getParentAnnexDoorV71(annexId = null, endpointId = null) {
     const annex = annexId ? HUB_ANNEX_BY_ID_V71[annexId] : this.annexForParentRoomV71();
-    if (!annex || !this.state || HUB_DECKS[this.state.deck]?.id !== annex.parentDeck) return null;
-    const room = HUB_DECKS[this.state.deck].rooms.find((entry) => entry.id === annex.parentRoomId);
+    if (!annex || !this.state) return null;
+    const connections = getHubShipConnectionsForSpaceV137(annex.id);
+    const preferred = getHubShipConnectionV137(endpointId || (this.isAnnexActiveV71() ? this.hubCommercialStateV71.returnContext?.endpointId : null));
+    const connection = preferred?.spaceId === annex.id ? preferred
+      : connections.find(entry => entry.parentDeck === HUB_DECKS[this.state.deck]?.id && entry.parentRoomId === this.currentRoom()?.id)
+        || connections.find(entry => entry.parentDeck === HUB_DECKS[this.state.deck]?.id);
+    const parentDeck = connection?.parentDeck || annex.parentDeck, parentRoomId = connection?.parentRoomId || annex.parentRoomId;
+    if (HUB_DECKS[this.state.deck]?.id !== parentDeck) return null;
+    const room = HUB_DECKS[this.state.deck].rooms.find((entry) => entry.id === parentRoomId);
     if (!room) return null;
     const platforms = (this.v51Platforms || [])
       .filter((platform) => platform.roomId === room.id && platform.w >= annex.entrance.w + 64)
@@ -315,13 +322,14 @@ export class HubGame extends HubGameV62 {
       ));
     const support = platforms[0];
     const sideOffset = annex.entrance.w / 2 + 32;
-    const centerX = support
+    const authored = HUB_ANNEX_ENTRANCES_V133[annex.id];
+    const centerX = authored ? room.xStart + authored.centerX : support
       ? (annex.entranceSide === 'west'
           ? support.x + sideOffset
           : support.x + support.w - sideOffset)
       : room.xStart + (annex.entranceSide === 'west' ? 220 : HUB_WORLD.roomWidth - 220);
-    const bottom = support?.y || HUB_WORLD.floorY;
-    const bounds = annex.parentDoorBounds ? { ...annex.parentDoorBounds } : {
+    const bottom = authored?.bottom ?? support?.y ?? HUB_WORLD.floorY;
+    const bounds = connection ? { ...connection.parentDoorBounds } : annex.parentDoorBounds ? { ...annex.parentDoorBounds } : {
       x: centerX - annex.entrance.w / 2,
       y: bottom - annex.entrance.h,
       w: annex.entrance.w,
@@ -334,7 +342,8 @@ export class HubGame extends HubGameV62 {
       interactionPriority: 130,
       annexId: annex.id,
       roomId: room.id,
-      deckId: annex.parentDeck,
+      deckId: parentDeck,
+      endpointId: connection?.id || null,
       annex,
       bounds,
       interactionBounds: expanded(bounds, 42, 18),
@@ -344,7 +353,7 @@ export class HubGame extends HubGameV62 {
 
   nearestParentAnnexDoorV71() {
     if (this.startingV71 || this.editorPlaytest || this.isAnnexActiveV71() || this.isVentActiveV62()) return null;
-    return HUB_ANNEXES_V71.filter(annex => annex.parentRoomId === this.currentRoom()?.id)
+    return this.parentAnnexesForRoomV137()
       .map(annex => this.getParentAnnexDoorV71(annex.id))
       .filter(door => door && overlaps(this.player, door.interactionBounds))
       .sort((a, b) => horizontalGap(this.player, a.bounds) - horizontalGap(this.player, b.bounds))[0] || null;
@@ -353,6 +362,8 @@ export class HubGame extends HubGameV62 {
   annexExitDoorV71() {
     const annex = this.currentAnnexV71();
     if (!annex) return null;
+    const connections = getHubShipConnectionsForSpaceV137(annex.id);
+    if (connections.length) return this.annexExitDoorsV137().sort((a, b) => horizontalGap(this.player, a.bounds) - horizontalGap(this.player, b.bounds))[0];
     const bounds = {
       x: annex.entranceLocalX - annex.entrance.w / 2,
       y: annex.entrance.y,
@@ -368,9 +379,23 @@ export class HubGame extends HubGameV62 {
     };
   }
 
+  annexExitDoorsV137() {
+    const annex = this.currentAnnexV71();
+    if (!annex) return [];
+    const connections = getHubShipConnectionsForSpaceV137(annex.id);
+    if (!connections.length) return [this.annexExitDoorV71()];
+    return connections.map(connection => {
+      const parentRoomName = HUB_DECKS.flatMap(deck => deck.rooms).find(room => room.id === connection.parentRoomId)?.name || connection.parentRoomId;
+      return { id: `${connection.id}-annex-door`, annexId: annex.id,
+        endpointId: connection.id, bounds: { ...connection.annexDoorBounds },
+        interactionBounds: expanded(connection.annexDoorBounds, 42, 18),
+        parentRoomId: connection.parentRoomId, parentRoomName, description: `Retour vers ${parentRoomName}` };
+    });
+  }
+
   nearestAnnexExitV71() {
-    const door = this.annexExitDoorV71();
-    return door && overlaps(this.player, door.interactionBounds) ? door : null;
+    return this.annexExitDoorsV137().filter(door => overlaps(this.player, door.interactionBounds))
+      .sort((a, b) => horizontalGap(this.player, a.bounds) - horizontalGap(this.player, b.bounds))[0] || null;
   }
 
   nearestAnnexStationV71() {
@@ -390,19 +415,36 @@ export class HubGame extends HubGameV62 {
     return this.nearestParentAnnexDoorV71() || super.nearestInteraction();
   }
 
+  prioritizedParentAnnexDoorV133() {
+    const door = this.nearestParentAnnexDoorV71();
+    if (!door) return null;
+    const port = getShipPortInteractionV87(this);
+    if (port?.action === 'ship-port:terminal') {
+      const center = this.player.x + this.player.w / 2;
+      const doorCenter = door.bounds.x + door.bounds.w / 2;
+      if (Math.abs(center - SHIP_PORT_TERMINAL_V87.centerX) < Math.abs(center - doorCenter)) return null;
+    }
+    return door;
+  }
+
   statusPrompt() {
     const transition = this.annexTransitionV71;
     if (transition) {
       const verb = transition.direction === 'enter' ? 'OUVERTURE DU SAS ANNEXE' : 'RETOUR AU HUB';
       return `${verb} · ${Math.round(transition.progress * 100)}%`;
     }
+    const parentDoor = this.prioritizedParentAnnexDoorV133();
+    if (parentDoor) return `E — ENTRER DANS ${parentDoor.annex.shortName}`;
     const companionInteraction = this.getCompanionInteractionV87?.();
     if (companionInteraction && !this.nearestAnnexExitV71()) return companionInteraction.prompt;
     const portInteraction = getShipPortInteractionV87(this);
     if (portInteraction && !this.nearestAnnexExitV71()) return portInteraction.prompt;
     if (this.isAnnexActiveV71()) {
       const annex = this.currentAnnexV71();
-      if (this.nearestAnnexExitV71()) return `E — SORTIR VERS ${annex.parentRoomId.toUpperCase()}`;
+      const exit = this.nearestAnnexExitV71();
+      if (exit) return `E — SORTIR VERS ${(exit.parentRoomName || exit.parentRoomId || annex.parentRoomId).toUpperCase()}`;
+      const annexNpc = this.nearestAnnexNpcV141?.();
+      if (annexNpc) return `E — ${annexNpc.interaction.label} · ${annexNpc.name}`;
       if (this.isRefugeActiveV87()) return this.refugeMovementLockedV87
         ? 'CONTEMPLATION · E / ÉCHAP / DÉPLACEMENT — REPRENDRE LA MARCHE'
         : getRefugeInteractionV87(this)?.prompt || 'REFUGE · ESPACE PERSONNEL · A / D — MARCHER · E — INTERAGIR';
@@ -411,7 +453,10 @@ export class HubGame extends HubGameV62 {
         return interaction?.prompt || 'ACCUEIL ANIMALIER · ÉQUIPEZ LES LOGEMENTS AU SOL · E — UTILISER';
       }
       const station = this.nearestAnnexStationV71();
-      if (station) return `E — ${station.description.toUpperCase()}`;
+      if (station) {
+        const inspections = HUB_SHIP_SPACE_BY_ID_V137[annex.id] ? this.hubCommercialStateV71.stationUses[annex.id] || 0 : 0;
+        return `E — ${station.description.toUpperCase()}${inspections ? ` · CONTRÔLES : ${inspections}` : ''}`;
+      }
       return 'A / D — MARCHER · MAJ — COURIR · ESPACE — SAUTER · E — UTILISER';
     }
     const annexDoor = this.nearestParentAnnexDoorV71();
@@ -421,6 +466,8 @@ export class HubGame extends HubGameV62 {
 
   interact() {
     if (!this.running || this.annexTransitionV71 || this.annexStateReadOnlyV87) return;
+    const parentDoor = this.prioritizedParentAnnexDoorV133();
+    if (parentDoor) { this.beginAnnexTransitionV71(parentDoor.annexId, 'enter'); return; }
     const companionInteraction = this.getCompanionInteractionV87?.();
     if (companionInteraction && !this.nearestAnnexExitV71()) { this.onAction(companionInteraction); return; }
     const portInteraction = getShipPortInteractionV87(this);
@@ -430,6 +477,8 @@ export class HubGame extends HubGameV62 {
         this.beginAnnexTransitionV71(this.currentAnnexV71().id, 'exit');
         return;
       }
+      const annexNpc = this.nearestAnnexNpcV141?.();
+      if (annexNpc) { this.interactWithAnnexNpcV141(annexNpc); return; }
       if (this.isRefugeActiveV87()) {
         const interaction = this.refugeMovementLockedV87 ? { action: 'refuge:contemplate' } : getRefugeInteractionV87(this);
         if (interaction) this.onAction(interaction);
@@ -464,12 +513,14 @@ export class HubGame extends HubGameV62 {
     if (direction === 'exit' && this.currentAnnexV71()?.id !== annex.id) return null;
     if (direction === 'enter') {
       const door = this.getParentAnnexDoorV71(annex.id);
+      if (!door) return null;
       this.annexReturnPoseV71 = {
         x: this.player.x,
         y: this.player.y,
         facing: this.player.facing,
         cameraX: this.camera.x,
-        door
+        door,
+        endpointId: door.endpointId
       };
     }
     this.ensureAnnexAssetsV71(annex.id);
@@ -481,7 +532,8 @@ export class HubGame extends HubGameV62 {
       direction,
       elapsed: 0,
       duration: this.reducedMotion ? 0.12 : HUB_ANNEX_TRANSITION_SECONDS_V71,
-      progress: 0
+      progress: 0,
+      endpointId: direction === 'enter' ? this.annexReturnPoseV71?.endpointId || null : this.nearestAnnexExitV71()?.endpointId || null
     };
     this.statusKey = '';
     this.audio?.ui?.();
@@ -510,6 +562,10 @@ export class HubGame extends HubGameV62 {
   }
 
   activateAnnexV71(annex) {
+    const connection = getHubShipConnectionV137(this.annexTransitionV71?.endpointId || this.annexReturnPoseV71?.endpointId);
+    const entranceSide = connection?.entranceSide || annex.entranceSide;
+    const entranceLocalX = connection?.entranceLocalX ?? annex.entranceLocalX;
+    const entranceStandingY = connection ? connection.annexDoorBounds.y + connection.annexDoorBounds.h : annex.world.floorY;
     const state = clone(this.hubCommercialStateV71);
     state.revision = Math.min(999999, Number(state.revision || 0) + 1);
     const annexState = state.annexes[annex.id];
@@ -517,48 +573,70 @@ export class HubGame extends HubGameV62 {
     annexState.visitCount = Math.min(999999, Number(annexState.visitCount || 0) + 1);
     annexState.lastVisitedAt = state.revision;
     state.activeAnnexId = annex.id;
-    const spawnX = annex.entranceSide === 'west'
-      ? annex.entranceLocalX + annex.entrance.w / 2 + 30
-      : annex.entranceLocalX - annex.entrance.w / 2 - this.player.w - 30;
+    const spawnX = entranceSide === 'west'
+      ? entranceLocalX + annex.entrance.w / 2 + 30
+      : entranceLocalX - annex.entrance.w / 2 - this.player.w - 30;
     state.annexPositionX = Math.round(spawnX);
-    state.annexPositionY = annex.world.floorY - this.player.h;
+    state.annexPositionY = entranceStandingY - this.player.h;
     state.annexClimbing = false;
     state.returnContext = {
-      deckId: annex.parentDeck,
-      roomId: annex.parentRoomId,
+      deckId: connection?.parentDeck || annex.parentDeck,
+      roomId: connection?.parentRoomId || annex.parentRoomId,
       x: Math.round(this.annexReturnPoseV71?.x ?? this.player.x),
-      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing)
+      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing),
+      ...(connection ? { endpointId: connection.id } : {})
     };
+    state.activeConnectionIdV137 = connection?.id || null;
     state.lastAnnexId = annex.id;
     this.hubCommercialStateV71 = mutableCommercialState(state);
     Object.assign(this.player, {
       x: clamp(spawnX, 24, annex.world.width - this.player.w - 24),
-      y: annex.world.floorY - this.player.h,
+      y: entranceStandingY - this.player.h,
       vx: 0,
       vy: 0,
       grounded: true,
       crouching: false,
       climbing: false,
-      facing: annex.entranceSide === 'west' ? 1 : -1
+      facing: entranceSide === 'west' ? 1 : -1
     });
     this.annexCameraV71.x = clamp(this.player.x - VIEW_WIDTH / 2, 0, annex.world.width - VIEW_WIDTH);
     this.onAction({
       type: 'hub:annex-transition',
       action: 'hub:annex-enter-complete',
       annexId: annex.id,
-      parentRoomId: annex.parentRoomId,
+      parentRoomId: connection?.parentRoomId || annex.parentRoomId,
       noMenu: true
     });
   }
 
   deactivateAnnexV71(annex) {
     const state = clone(this.hubCommercialStateV71);
-    const pose = this.annexReturnPoseV71 || this.restoreReturnPoseV71(annex, state.returnContext);
+    const connection = getHubShipConnectionV137(this.annexTransitionV71?.endpointId || state.returnContext?.endpointId);
+    if (connection) {
+      const deck = HUB_DECKS.findIndex(entry => entry.id === connection.parentDeck);
+      if (deck !== this.state.deck) {
+        this.state.deck = deck;
+        this.state.roomId = connection.parentRoomId;
+        this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck).map(door => ({ ...door }));
+        this.npcs = this.createNpcs(deck);
+        this.obstacles = this.createObstacles(deck);
+        this.configureTraversal();
+        const alert = [...(this.npcRoutineResolutionsV62?.values() || [])].some(resolution => resolution.alert);
+        this.setNpcCrisisAlert?.(Boolean(this.crisis?.active || alert));
+      }
+      this.state.roomId = connection.parentRoomId;
+      if (!this.state.visited.includes(connection.parentRoomId)) this.state.visited.push(connection.parentRoomId);
+    }
+    const sameEndpoint = !connection || connection.id === this.annexReturnPoseV71?.endpointId;
+    const context = connection && !sameEndpoint ? { endpointId: connection.id, x: connection.parentDoorBounds.x + connection.parentDoorBounds.w / 2 - this.player.w / 2,
+      facing: connection.entranceSide === 'east' ? -1 : 1 } : state.returnContext;
+    const pose = sameEndpoint && this.annexReturnPoseV71 || this.restoreReturnPoseV71(annex, context);
     state.activeAnnexId = null;
     state.annexPositionX = null;
     state.annexPositionY = null;
     state.annexClimbing = false;
     state.returnContext = null;
+    state.activeConnectionIdV137 = null;
     state.lastAnnexId = annex.id;
     this.hubCommercialStateV71 = mutableCommercialState(state);
     Object.assign(this.player, {
@@ -579,13 +657,14 @@ export class HubGame extends HubGameV62 {
       type: 'hub:annex-transition',
       action: 'hub:annex-exit-complete',
       annexId: annex.id,
-      parentRoomId: annex.parentRoomId,
+      parentRoomId: connection?.parentRoomId || annex.parentRoomId,
       noMenu: true
     });
   }
 
   restoreReturnPoseV71(annex, returnContext = null) {
-    const door = this.getParentAnnexDoorV71(annex.id);
+    const connection = getHubShipConnectionV137(returnContext?.endpointId);
+    const door = this.getParentAnnexDoorV71(annex.id, connection?.id);
     const x = Number.isFinite(Number(returnContext?.x))
       ? Number(returnContext.x)
       : door?.bounds.x || 180;
@@ -596,7 +675,8 @@ export class HubGame extends HubGameV62 {
         ? returnContext.facing
         : annex.entranceSide === 'west' ? -1 : 1,
       cameraX: clamp(x - VIEW_WIDTH / 2, 0, HUB_WORLD.width - VIEW_WIDTH),
-      door
+      door,
+      endpointId: connection?.id || null
     };
   }
 
@@ -608,6 +688,7 @@ export class HubGame extends HubGameV62 {
     const visitCount = this.hubCommercialStateV71.annexes[annex.id].visitCount;
     const lastVisitedAt = this.hubCommercialStateV71.annexes[annex.id].lastVisitedAt;
     const contractReceipt = applyHubAnnexStationV71(this.hubCommercialStateV71, annex.id);
+    if (!contractReceipt.applied) return clone(contractReceipt);
     const proposedState = clone(contractReceipt.state);
     proposedState.annexes[annex.id].visitCount = visitCount;
     proposedState.annexes[annex.id].lastVisitedAt = lastVisitedAt;
@@ -616,10 +697,11 @@ export class HubGame extends HubGameV62 {
     proposedState.annexPositionY = Math.round(this.player.y);
     proposedState.annexClimbing = Boolean(this.player.climbing);
     proposedState.returnContext = {
-      deckId: annex.parentDeck,
-      roomId: annex.parentRoomId,
+      deckId: this.hubCommercialStateV71.returnContext?.deckId || annex.parentDeck,
+      roomId: this.hubCommercialStateV71.returnContext?.roomId || annex.parentRoomId,
       x: Math.round(this.annexReturnPoseV71?.x ?? this.state.positionX),
-      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing)
+      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing),
+      ...(this.hubCommercialStateV71.returnContext?.endpointId ? { endpointId: this.hubCommercialStateV71.returnContext.endpointId } : {})
     };
     const actionResult = this.onAction({
       type: 'hub:annex-station',
@@ -701,6 +783,8 @@ export class HubGame extends HubGameV62 {
       this.player.vx = 0; this.player.vy = 0; this.emitStatus(); return;
     }
     this.updateAnnexPhysicsV71(elapsed);
+    this.tickParentNpcLifeV136?.(elapsed);
+    this.tickAnnexNpcLifeV141?.(elapsed);
   }
 
   updateAnnexPhysicsV71(delta) {
@@ -798,6 +882,7 @@ export class HubGame extends HubGameV62 {
 
   resolveAnnexHorizontalV71(annex, previousX) {
     for (const collider of this.annexSolidCollidersV71(annex)) {
+      if (collider.collisionMode === 'one-way-top') continue;
       if (!overlaps(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
         this.player.x = collider.x - this.player.w;
@@ -812,7 +897,8 @@ export class HubGame extends HubGameV62 {
     if (this.player.vy < 0) {
       const previousTop = previousBottom - this.player.h;
       const ceilings = this.annexSolidCollidersV71(annex).filter((collider) => (
-        this.player.x + this.player.w > collider.x && this.player.x < collider.x + collider.w
+        collider.collisionMode !== 'one-way-top'
+        && this.player.x + this.player.w > collider.x && this.player.x < collider.x + collider.w
         && previousTop >= collider.y + collider.h - 1 && this.player.y < collider.y + collider.h
       )).sort((left, right) => right.y + right.h - left.y - left.h);
       if (ceilings[0]) {
@@ -830,7 +916,8 @@ export class HubGame extends HubGameV62 {
       for (const surface of surfaces) {
         const horizontallySupported = this.player.x + this.player.w > surface.x
           && this.player.x < surface.x + surface.w;
-        if (!horizontallySupported || previousBottom > surface.y + 8 || this.player.y + this.player.h < surface.y) continue;
+        const tolerance = surface.collisionMode === 'one-way-top' ? 0.001 : 8;
+        if (!horizontallySupported || previousBottom > surface.y + tolerance || this.player.y + this.player.h < surface.y) continue;
         this.player.y = surface.y - this.player.h;
         this.player.vy = 0;
         this.player.grounded = true;
@@ -954,6 +1041,8 @@ export class HubGame extends HubGameV62 {
       hubCommercialGraphConnectionCountV71: this.hubCommercialGraphV71.edges.length,
       activeAnnexV71: Boolean(annex),
       activeAnnexIdV71: annex?.id || null,
+      hubAnnexNativePlacementV139: annex && this.annexNativePlacementRenderedV139?.roomId === annex.id
+        ? clone(this.annexNativePlacementRenderedV139) : null,
       refugeV87: this.isRefugeActiveV87() ? this.getRefugeSnapshotV87?.() || { active: true } : null,
       annexTransitionV71: this.annexTransitionV71 ? clone(this.annexTransitionV71) : null,
       hubCommercialV71: clone(this.hubCommercialStateV71),
@@ -970,7 +1059,7 @@ export class HubGame extends HubGameV62 {
   drawTraversal(ctx) {
     super.drawTraversal(ctx);
     if (this.startingV71 || this.editorPlaytest || this.isAnnexActiveV71()) return;
-    for (const annex of HUB_ANNEXES_V71.filter(entry => entry.parentRoomId === this.currentRoom()?.id)) {
+    for (const annex of this.parentAnnexesForRoomV137()) {
       const door = this.getParentAnnexDoorV71(annex.id);
       if (!door) continue;
       const images = this.ensureAnnexAssetsV71(door.annexId);
@@ -1005,10 +1094,17 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(`USS TANTALUS // ${deck.shortName}`, 36, 41);
     ctx.fillStyle = '#d3ddd5';
     ctx.font = '700 15px ui-monospace, monospace';
-    ctx.fillText(room.name.toUpperCase(), 36, 65);
+    let title = room.name.toUpperCase();
+    if (ctx.measureText(title).width > 410) {
+      while (title.length > 1 && ctx.measureText(`${title}…`).width > 410) title = title.slice(0, -1);
+      title += '…';
+    }
+    ctx.fillText(title, 36, 65);
     ctx.fillStyle = '#9cc9aa';
     ctx.font = '700 12px ui-monospace, monospace';
-    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats} · HUB 16 + ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, 300, 65);
+    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats}`, 466, 41);
+    ctx.font = '700 11px ui-monospace, monospace';
+    ctx.fillText(`16 SALLES · ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, 466, 65);
     this.drawSinglePromptV71(ctx, prompt);
   }
 
@@ -1026,6 +1122,7 @@ export class HubGame extends HubGameV62 {
   drawAnnexV71() {
     const annex = this.currentAnnexV71();
     if (!annex) return;
+    this.annexNativePlacementRenderedV139 = null;
     const ctx = this.ctx;
     const images = this.ensureAnnexAssetsV71(annex.id);
     ctx.save();
@@ -1039,6 +1136,7 @@ export class HubGame extends HubGameV62 {
       ctx.save(); ctx.translate(-this.annexCameraV71.x, 0);
       this.drawAnnexGeometryV71(ctx, annex);
       drawRefugeLayerV87(ctx, images, { ...presentation, layer: 'decor' });
+      this.drawHubWorkstationSurfaceDetailsV139?.(ctx, { ...annex, xStart: 0 });
       this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds,
         this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door, true);
       this.drawPlayer(ctx);
@@ -1047,7 +1145,7 @@ export class HubGame extends HubGameV62 {
     }
     if (['animal-care', SHIP_PORT_ANNEX_V87.id].includes(annex.id)) {
       const wall = images.get('far');
-      if (imageReady(wall)) {
+      if (!this.drawHubCompartmentBaseV138?.(ctx, annex, { cameraX: this.annexCameraV71.x }) && imageReady(wall)) {
         // World-anchored wall modules, not a stretched painting of a whole room.
         const scale = annex.world.floorY / wall.naturalHeight;
         const tileWidth = wall.naturalWidth * scale;
@@ -1076,13 +1174,28 @@ export class HubGame extends HubGameV62 {
       this.drawAnnexModularPropsV72(ctx, annex);
       this.drawAnnexPropLayerV71(ctx, annex, images.get('prop'));
     }
-    this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds, this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door);
+    this.drawHubWorkstationSurfaceDetailsV139?.(ctx, { ...annex, xStart: 0 });
+    const nearbyExit = this.nearestAnnexExitV71();
+    for (const exit of this.annexExitDoorsV137()) {
+      this.drawDoorBitmapV71(ctx, images.get('door'), exit.bounds, nearbyExit?.id === exit.id ? 1 : 0, annex.art.alphaBounds.door);
+      this.drawAnnexExitLabelV137(ctx, annex, exit);
+    }
+    this.drawAnnexNpcsV141?.(ctx);
     this.drawPlayer(ctx);
     this.drawAnnexForegroundV72(ctx, annex, images.get('foreground'));
     ctx.restore();
     this.drawAnnexLightingV71(ctx);
     this.drawAnnexHudV71(ctx);
     ctx.restore();
+  }
+
+  drawAnnexExitLabelV137(ctx, annex, exit) {
+    if (!HUB_SHIP_SPACE_BY_ID_V137[annex.id] || this.hasRenderedHubServiceSignV137?.(exit.endpointId)
+      || this.hasRenderedHubDestinationSignV138?.(exit.endpointId)) return false;
+    const parent = HUB_DECKS.flatMap(deck => deck.rooms).find(room => room.id === exit.parentRoomId);
+    ctx.fillStyle = '#a9bfb3'; ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center';
+    ctx.fillText(parent?.name?.toUpperCase() || exit.parentRoomId.toUpperCase(), exit.bounds.x + exit.bounds.w / 2, exit.bounds.y - 10);
+    ctx.textAlign = 'left'; return true;
   }
 
   drawAnnexLayerV71(ctx, image, cameraFactor, alpha) {
@@ -1093,7 +1206,7 @@ export class HubGame extends HubGameV62 {
     const source = layerSourceRect(image, this.annexCameraV71.x, factor);
     ctx.save();
     ctx.globalAlpha = alpha;
-    ctx.drawImage(image, source.x, source.y, source.w, source.h, 0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+    ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.w, source.h, 0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     ctx.restore();
   }
 
@@ -1109,6 +1222,7 @@ export class HubGame extends HubGameV62 {
     ctx.fillStyle = '#789080';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, 4);
     for (const platform of annex.platforms.filter((entry) => entry.role !== 'floor')) {
+      if (this.drawAnnexSteelPlatformV133?.(ctx, platform, annex)) continue;
       // The visible walking edge uses precisely the physical platform bounds.
       // Crop only the truss: the legacy railing has opaque white openings.
       if (imageReady(deckImage)) {
@@ -1117,7 +1231,7 @@ export class HubGame extends HubGameV62 {
         const tileWidth = (source[2] - source[0]) * scale;
         for (let x = platform.x; x < platform.x + platform.w; x += tileWidth) {
           const width = Math.min(tileWidth, platform.x + platform.w - x);
-          ctx.drawImage(deckImage, source[0], source[1], width / scale, source[3] - source[1], x, platform.y, width, platform.h);
+          ctx.drawImage(resolveSpriteDrawableV134(deckImage), source[0], source[1], width / scale, source[3] - source[1], x, platform.y, width, platform.h);
         }
       } else {
         ctx.fillStyle = '#273832';
@@ -1130,20 +1244,21 @@ export class HubGame extends HubGameV62 {
         const source = moduleArt.crops.ladderLeft;
         const postTop = platform.y + platform.h;
         for (const x of [platform.x + 14, platform.x + platform.w - 23]) {
-          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], x, postTop, 9, annex.world.floorY - postTop);
+          ctx.drawImage(resolveSpriteDrawableV134(ladderImage), source[0], source[1], source[2] - source[0], source[3] - source[1], x, postTop, 9, annex.world.floorY - postTop);
         }
       }
     }
     for (const ladder of annex.ladders) {
+      if (this.drawAnnexSteelLadderV133?.(ctx, ladder, annex)) continue;
       if (imageReady(ladderImage)) {
         // Assemble rails and one clean rung, leaving real transparency between
         // them instead of drawing the white-filled holes of the source sheet.
         for (const [source, x] of [[moduleArt.crops.ladderLeft, ladder.x], [moduleArt.crops.ladderRight, ladder.x + ladder.w - 7]]) {
-          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], x, ladder.top, 7, ladder.bottom - ladder.top);
+          ctx.drawImage(resolveSpriteDrawableV134(ladderImage), source[0], source[1], source[2] - source[0], source[3] - source[1], x, ladder.top, 7, ladder.bottom - ladder.top);
         }
         const source = moduleArt.crops.ladderRung;
         for (let y = ladder.top + 10; y < ladder.bottom - 4; y += 22) {
-          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], ladder.x + 7, y, ladder.w - 14, 4);
+          ctx.drawImage(resolveSpriteDrawableV134(ladderImage), source[0], source[1], source[2] - source[0], source[3] - source[1], ladder.x + 7, y, ladder.w - 14, 4);
         }
         continue;
       }
@@ -1161,8 +1276,20 @@ export class HubGame extends HubGameV62 {
   }
 
   drawAnnexPropLayerV71(ctx, annex, image) {
-    if (!imageReady(image)) return;
-    this.drawCroppedBitmapV72(ctx, image, annex.art.alphaBounds.prop, annex.station.bounds);
+    const source = annex.art.alphaBounds.prop;
+    const fitted = fitHubBitmapV72(source, annex.station.bounds);
+    const painted = imageReady(image);
+    if (painted) this.drawCroppedBitmapV72(ctx, image, source, annex.station.bounds);
+    this.annexNativePlacementRenderedV139 = {
+      schema: 139, roomId: annex.id, painted,
+      omittedReason: painted ? null : 'native-image-not-ready',
+      asset: annex.art.prop, image: { width: image?.naturalWidth || 0, height: image?.naturalHeight || 0 },
+      source: { x: source[0], y: source[1], w: source[2] - source[0], h: source[3] - source[1] },
+      target: { ...fitted }, stationBounds: { ...annex.station.bounds },
+      placement: clone(annex.propPlacementV139 || null),
+      layout: clone(annex.annexRuntimeGeometryV139 || null), frameTime: this.animationTime
+    };
+    if (!painted) return;
     if (this.nearestAnnexStationV71()) {
       ctx.save();
       ctx.strokeStyle = '#d9ca79';
@@ -1175,45 +1302,13 @@ export class HubGame extends HubGameV62 {
   drawCroppedBitmapV72(ctx, image, source, target) {
     if (!imageReady(image)) return;
     const fitted = fitHubBitmapV72(source, target);
-    ctx.drawImage(image, source[0], source[1], source[2] - source[0], source[3] - source[1], fitted.x, fitted.y, fitted.w, fitted.h);
+    ctx.drawImage(resolveSpriteDrawableV134(image), source[0], source[1], source[2] - source[0], source[3] - source[1], fitted.x, fitted.y, fitted.w, fitted.h);
   }
 
   drawAnnexModularPropsV72(ctx, annex) {
-    for (const prop of annex.props.filter((entry) => entry.asset)) {
-      const image = this.annexModularImagesV72.get(prop.asset);
-      if (!imageReady(image)) continue;
-      if (prop.role === 'ceiling-service') {
-        if (annex.id === 'proving-ground') continue;
-        const source = HUB_ANNEX_MODULE_ART_V82.crops.ceilingRaceway;
-        const height = prop.w * (source[3] - source[1]) / (source[2] - source[0]);
-        this.drawCroppedBitmapV72(ctx, image, source, { ...prop, h: height });
-      } else if (prop.role === 'wall-service' || prop.role === 'navigation') {
-        // This source is a floor console. Only its detachable display belongs
-        // on a wall; the keyboard and floor plinth must not hang in mid-air.
-        const source = HUB_ANNEX_MODULE_ART_V82.crops.wallScreen;
-        const height = prop.w * (source[3] - source[1]) / (source[2] - source[0]);
-        this.drawCroppedBitmapV72(ctx, image, source, { ...prop, h: height });
-      } else {
-        this.drawCroppedBitmapV72(ctx, image, [0, 0, image.naturalWidth, image.naturalHeight], prop);
-      }
-    }
-    const pipe = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.pipe);
-    for (const collider of annex.colliders.filter((entry) => imageReady(pipe) && entry.role === 'structure')) {
-      const body = HUB_ANNEX_MODULE_ART_V82.crops.pipeBody;
-      const scale = collider.h / (body[3] - body[1]);
-      const width = (body[2] - body[0]) * scale;
-      const x = collider.x + (collider.w - width) / 2;
-      // Extend the shaft up to the ceiling. The collidable lower fitting is
-      // visually supported and its secondary loose base is never sampled.
-      const shaft = HUB_ANNEX_MODULE_ART_V82.crops.pipeShaft;
-      const shaftWidth = (shaft[2] - shaft[0]) * scale;
-      const shaftHeight = (shaft[3] - shaft[1]) * scale;
-      for (let y = 0; y < collider.y; y += shaftHeight) {
-        const height = Math.min(shaftHeight, collider.y - y);
-        ctx.drawImage(pipe, shaft[0], shaft[1], shaft[2] - shaft[0], height / scale, collider.x + (collider.w - shaftWidth) / 2, y, shaftWidth, height);
-      }
-      ctx.drawImage(pipe, body[0], body[1], body[2] - body[0], body[3] - body[1], x, collider.y, width, collider.h);
-    }
+    const report = drawHubAnnexFixturesV138(ctx, annex, { images: this.annexModularImagesV72 });
+    this.annexFixturesRenderedV138 ||= new Map();
+    if (report) this.annexFixturesRenderedV138.set(annex.id, report);
     if (annex.id === 'proving-ground') {
       const ceiling = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.provingCeiling);
       if (imageReady(ceiling)) {
@@ -1224,13 +1319,16 @@ export class HubGame extends HubGameV62 {
         const tileWidth = (solid[2] - solid[0]) * scale;
         for (let x = 0; x < annex.world.width; x += tileWidth) {
           const width = Math.min(tileWidth, annex.world.width - x);
-          ctx.drawImage(ceiling, solid[0], 0, width / scale, ceiling.naturalHeight, x, -solid[1] * scale, width, height);
+          ctx.drawImage(resolveSpriteDrawableV134(ceiling), solid[0], 0, width / scale, ceiling.naturalHeight, x, -solid[1] * scale, width, height);
         }
       }
     }
   }
 
   drawAnnexForegroundV72(ctx, annex, image) {
+    // The former floor clip retained only a detached machinery plinth at
+    // y628..656. Keep native cargo and the real floor; omit that ghost base.
+    if (getHubAnnexFixturePlanV138(annex)?.legacyForeground?.omitted) return false;
     if (!imageReady(image)) return;
     const bounds = { x: annex.entranceSide === 'west' ? 1620 : 48, y: 444, w: 240, h: 212 };
     ctx.save();
@@ -1251,10 +1349,10 @@ export class HubGame extends HubGameV62 {
       if (source && preserveAspect) {
         const width = source[2] - source[0], height = source[3] - source[1];
         const scale = Math.min(bounds.w / width, bounds.h / height);
-        ctx.drawImage(image, source[0], source[1], width, height,
+        ctx.drawImage(resolveSpriteDrawableV134(image), source[0], source[1], width, height,
           bounds.x + (bounds.w - width * scale) / 2, bounds.y + bounds.h - height * scale, width * scale, height * scale);
       } else if (source) this.drawCroppedBitmapV72(ctx, image, source, bounds);
-      else ctx.drawImage(image, bounds.x, bounds.y, bounds.w, bounds.h);
+      else ctx.drawImage(resolveSpriteDrawableV134(image), bounds.x, bounds.y, bounds.w, bounds.h);
     }
     else {
       ctx.fillStyle = '#17241f';
@@ -1294,6 +1392,8 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(fitted !== null ? `LOGEMENTS ÉQUIPÉS ${fitted}/${habitats.length}`
       : annex.id === SHIP_PORT_ANNEX_V87.id ? 'COMPTOIR CIVIL · AMARRÉ'
       : this.isRefugeActiveV87() ? 'ESPACE PERSONNEL · SANS COMBAT'
+      : annex.navigationKind === 'ship-service-compartment-v137'
+        ? annexState.station.activated ? 'INSPECTION CONSIGNÉE' : 'INSPECTION À EFFECTUER'
       : annexState.station.activated ? 'STATION CALIBRÉE' : 'STATION À CALIBRER', 492, 67);
     this.drawSinglePromptV71(ctx, this.statusPrompt());
   }

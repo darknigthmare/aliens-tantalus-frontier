@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 const ROOT = '/assets/openai/refuge/v87';
 const finite = value => typeof value === 'number' && Number.isFinite(value);
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
@@ -91,7 +92,7 @@ export function drawRefugePropV87(ctx,image,kind,bounds) {
   const target = getRefugePropBoundsV87(kind,bounds);
   if (!target || typeof ctx?.drawImage !== 'function' || !isRefugeArtReadyV87('prop',image)) return false;
   const [l,t,r,b] = REFUGE_PROP_RECTS_V87[kind];
-  ctx.drawImage(image,l,t,r-l,b-t,target.x,target.y,target.w,target.h); return true;
+  ctx.drawImage(resolveSpriteDrawableV134(image),l,t,r-l,b-t,target.x,target.y,target.w,target.h); return true;
 }
 export function resolveRefugeHologramFrameV87({ time = 0, greetingRemaining = 0, reducedMotion = false } = {}) {
   if (![time,greetingRemaining].every(finite) || time < 0 || greetingRemaining < 0 || time > Number.MAX_SAFE_INTEGER/4
@@ -115,7 +116,7 @@ export function drawRefugeHologramV87(ctx,image,options = {}) {
   const f = sample.frame, scale = REFUGE_ART_V87.hologram.worldScale;
   ctx.save();
   try { ctx.translate(x,y); ctx.globalAlpha = .85;
-    ctx.drawImage(image,f.x,f.y,f.w,f.h,-f.pivotX*scale,-f.pivotY*scale,f.w*scale,f.h*scale);
+    ctx.drawImage(resolveSpriteDrawableV134(image),f.x,f.y,f.w,f.h,-f.pivotX*scale,-f.pivotY*scale,f.w*scale,f.h*scale);
   } finally { ctx.restore(); }
   return true;
 }
@@ -128,14 +129,14 @@ export function getRefugeApertureV87(kind,bounds) {
 function cover(ctx,image,box,offset = 0) {
   const scale = Math.max(box.w/image.naturalWidth,box.h/image.naturalHeight);
   const w = image.naturalWidth*scale, h = image.naturalHeight*scale;
-  ctx.drawImage(image,0,0,image.naturalWidth,image.naturalHeight,box.x+(box.w-w)/2+offset,box.y+(box.h-h)/2,w,h);
+  ctx.drawImage(resolveSpriteDrawableV134(image),0,0,image.naturalWidth,image.naturalHeight,box.x+(box.w-w)/2+offset,box.y+(box.h-h)/2,w,h);
 }
 function tiledBitmap(ctx,image,{ source,scale,area }) {
   const [sx,sy,right,bottom] = source, tileW = (right-sx)*scale, tileH = (bottom-sy)*scale;
   for (let y = area.y; y < area.y+area.h-.001; y += tileH) for (let x = area.x; x < area.x+area.w-.001; x += tileW) {
     const w = Math.min(tileW,area.x+area.w-x), h = Math.min(tileH,area.y+area.h-y);
     // Crop partial edge tiles in source space instead of stretching the panel.
-    ctx.drawImage(image,sx,sy,w/scale,h/scale,x,y,w,h);
+    ctx.drawImage(resolveSpriteDrawableV134(image),sx,sy,w/scale,h/scale,x,y,w,h);
   }
 }
 function localPhotoReady(image) {

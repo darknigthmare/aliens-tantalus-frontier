@@ -1,3 +1,4 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HubGame as PhysicalHub } from './hub-v71-runtime.js';
 import { HubGame as PlayerRenderer } from './hub-game.js';
 import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js';
@@ -158,7 +159,7 @@ export function withPortMeridienV90(Base) {
       if (!this.isPortMeridienV90()) return super.draw();
       if (!this.ctx || !this.player) return;
       const ctx = this.ctx, state = this.portStateV90, camera = this.annexCameraV71.x;
-      const bitmap = (key, x, y, w, h) => { const image = this.portImagesV90?.get(key); if (ready(image)) ctx.drawImage(image, x, y, w, h); };
+      const bitmap = (key, x, y, w, h) => { const image = this.portImagesV90?.get(key); if (ready(image)) ctx.drawImage(resolveSpriteDrawableV134(image), x, y, w, h); };
       ctx.save(); ctx.clearRect(0, 0, 1280, 720); ctx.fillStyle = '#071015'; ctx.fillRect(0, 0, 1280, 720);
       for (let x = -camera * .2; x < 1280; x += 1536) bitmap('far', x, 0, 1536, 720);
       ctx.save(); ctx.translate(-camera, 0);
@@ -189,9 +190,9 @@ export function withPortMeridienV90(Base) {
         const door = this.portImagesV90?.get('door');
         if (ready(door)) {
           const w = door.naturalWidth, h = door.naturalHeight;
-          ctx.drawImage(door, 0, 0, w * .16, h, 1810, 356, 17, 268);
-          ctx.drawImage(door, w * .84, 0, w * .16, h, 1901, 356, 17, 268);
-          ctx.drawImage(door, 0, 0, w, h * .12, 1810, 356, 108, 32);
+          ctx.drawImage(resolveSpriteDrawableV134(door), 0, 0, w * .16, h, 1810, 356, 17, 268);
+          ctx.drawImage(resolveSpriteDrawableV134(door), w * .84, 0, w * .16, h, 1901, 356, 17, 268);
+          ctx.drawImage(resolveSpriteDrawableV134(door), 0, 0, w, h * .12, 1810, 356, 108, 32);
         }
       }
       ctx.fillStyle = gateClosed(state) ? '#d7a060' : '#87e6be'; ctx.fillRect(1818, 336, 92, 8);

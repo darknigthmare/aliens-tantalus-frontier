@@ -38,7 +38,7 @@ export function mountForgeConstructionV135(editor) {
     <div data-build-report class="forge-build-report-v135"></div>
     <details><summary>Recettes reproductibles et limites</summary><div class="forge-work-row">${button('recipe-export', 'Exporter la recette')}<label>Importer une recette<input type="file" data-build-import accept=".json,application/json"></label></div>
     <p class="forge-work-note">La recette mémorise les paramètres, pas le projet. Son import ne construit rien. À version et paramètres identiques, le plan généré est identique.</p>
-    <p class="forge-work-note">Plans de blocs originaux, pas reproductions d’un lieu de film. Les repères de décor restent symboliques sur le moteur publié. Les liaisons de sas sont des données d’édition ; le test natif publié ne traverse pas encore les salles. Les étages sont des plateformes dans la même salle. Le contrôle de dégagement ne simule pas les sauts.</p>
+    <p class="forge-work-note">Les plans créent des blocs modifiables. Les calques décoratifs utilisent les ressources locales choisies dans l’inspecteur, sans collision. Les sas reliés se traversent avec E pendant le test du parcours. Les étages sont des plateformes dans la même salle. Vérifiez les dégagements dans Contrôle & versions ; les sauts ne sont pas simulés.</p>
     <p class="forge-work-note">Remplacer une salle conserve un sas relié seulement si sa nouvelle position est identique. Un bloc verrouillé ou un calque masqué concerné interdit l’opération. Exportez votre projet avant une reconstruction importante.</p></details></div></div>
     <p data-build-status class="forge-build-status-v135" role="status" aria-live="polite"></p>`;
   work.append(root);

@@ -1,4 +1,6 @@
-import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
+import { normalizeCrewConversationMemoryV135 } from './crew-conversation-memory-v135.js';
+import { normalizePlayerWardrobeV135 } from './player-wardrobe-v135.js';
 import { ARCHIVE_RELAY_CAMPAIGN_V122, validateArchiveRelayStateV122,
   ARCHIVE_RELAY_DOCUMENT_IDS_V122, createArchiveRelayArchiveV122, normalizeArchiveRelayArchiveV122 } from './archive-relay-state-v122.js';
 import { canEquipCostumeV119, sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
@@ -30,10 +32,10 @@ import {
   HUB_COMMERCIAL_SCHEMA_V71,
 } from './tantalus-hub-expansion-v71.js';
 import {
-  HUB_ANNEX_BY_ID_V87 as HUB_ANNEX_BY_ID_V71,
-  createHubCommercialStateV87 as createHubCommercialStateV71,
-  sanitizeHubCommercialStateV87 as sanitizeHubCommercialStateV71
-} from './hub-annex-registry-v87.js';
+  HUB_ANNEX_BY_ID_V137 as HUB_ANNEX_BY_ID_V71,
+  createHubCommercialStateV137 as createHubCommercialStateV71,
+  sanitizeHubCommercialStateV137 as sanitizeHubCommercialStateV71
+} from './hub-annex-registry-v137.js';
 import {
   createHubAnnexOperationsV71,
   sanitizeHubAnnexOperationsV71,
@@ -63,6 +65,11 @@ import { sanitizeJumpStateV116, isJumpChargingV116 } from './galaxy-jump-v115.js
 import { BLACK_COCOON_CAMPAIGN_V121, validateBlackCocoonStateV121 } from './black-cocoon-state-v121.js';
 import { APC_CONVOY_CAMPAIGN_V121, validateApcConvoyStateV121 } from './apc-convoy-state-v121.js';
 import { C12_HORDE_CAMPAIGN_V121, validateC12HordeStateV121 } from './c12-horde-state-v121.js';
+import { createNarrativeEvidenceV132, normalizeNarrativeEvidenceV132 } from './narrative-evidence-v132.js';
+import { normalizeHubTrainingV132, validateHubLoaderReceiptV132, createHubLoaderReceiptV132 } from './hub-training-v132.js';
+import { validateApcCourseV131 } from './apc-course-v131.js';
+import { isSoloSpecialOperationV131 } from './special-operations-v131.js';
+import { operationCampaignV131, validateOperationCompletionV131 } from './operation-receipts-v131.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -76,6 +83,32 @@ export const LEGACY_KEYS = [
 ];
 
 export const MAX_SQUAD_SIZE = 4;
+
+export function getHubTrainingOperatorIdV132(save) {
+  return `${save.profile}:${save.createdAt}:${save.onboardingV84?.identity?.id || save.player?.operatorId || 'primary'}`.slice(0, 100);
+}
+
+export function normalizeHubLoaderQualificationV132(raw, operatorId) {
+  const proof = validateHubLoaderReceiptV132(raw?.receipt);
+  return proof.valid && proof.receipt.operatorId === operatorId && raw.serial === proof.receipt.serial
+    ? { schema: 132, serial: proof.receipt.serial, receipt: structuredClone(proof.receipt) }
+    : { schema: 132, serial: 0, receipt: null };
+}
+
+export function recordHubLoaderQualificationV132(save, receipt) {
+  const book = normalizeHubTrainingV132(save?.hub?.hubTrainingV132);
+  const operatorId = getHubTrainingOperatorIdV132(save);
+  const previous = normalizeHubLoaderQualificationV132(save?.hub?.loaderQualificationV132, operatorId);
+  if (previous.receipt?.id === receipt?.id) return { applied: false, reason: 'already-qualified' };
+  if (!book.pendingReceipt || receipt?.operatorId !== operatorId || receipt?.serial <= previous.serial)
+    return { applied: false, reason: 'qualification-not-issued' };
+  const proof = validateHubLoaderReceiptV132(receipt, book.pendingReceipt);
+  const actual = createHubLoaderReceiptV132(book.course);
+  if (!proof.valid || !actual || JSON.stringify(actual) !== JSON.stringify(proof.receipt))
+    return { applied: false, reason: 'qualification-proof-invalid' };
+  save.hub.loaderQualificationV132 = { schema: 132, serial: receipt.serial, receipt: structuredClone(proof.receipt) };
+  return { applied: true, receipt: structuredClone(proof.receipt) };
+}
 
 // V85 project balancing, not values imposed by the source conversation. Aptitude
 // and equipment budgets are independent; issued objects never unlock procurement.
@@ -214,6 +247,7 @@ export function createDefaultSave(profile = 1) {
     createdAt: Date.now(),
     updatedAt: Date.now(),
     clock: { day: 1, hour: 6 },
+    crewConversationMemoryV135: { schema: 135, entries: [] },
     recruitmentV85: { ...createRecruitmentV85(Math.imul(Number(profile) || 1, 2654435761) >>> 0), lastOfferHour: 6 },
     scene: 'title',
     worldId: WORLDS[0].id,
@@ -227,6 +261,7 @@ export function createDefaultSave(profile = 1) {
     needsPlayerCreationV84: true,
     presentation: { titleScene: sanitizeTitleScenePresentationV79() },
     player: {
+      wardrobeV135: normalizePlayerWardrobeV135(),
       name: 'Mara Vega',
       classId: 'commander',
       health: 100,
@@ -269,7 +304,9 @@ export function createDefaultSave(profile = 1) {
       npcRoutineState: normalizeNpcRoutineStateV62(),
       commercialV71: createHubCommercialStateV71(),
       annexOperationsV71: createHubAnnexOperationsV71(),
-      pendingModuleActionV71: null
+      pendingModuleActionV71: null,
+      hubTrainingV132: normalizeHubTrainingV132(),
+      loaderQualificationV132: { schema: 132, serial: 0, receipt: null }
     },
     galaxy: {
       unlockedWorldIds: WORLDS.slice(0, 8).map((world) => world.id),
@@ -290,6 +327,7 @@ export function createDefaultSave(profile = 1) {
     },
     strategy: createStrategyState(),
     narrativeArchives: createNarrativeArchivesV68(),
+    narrativeEvidenceV132: createNarrativeEvidenceV132(),
     archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
@@ -706,7 +744,7 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
     || special?.operationId !== definition.campaign.specialOperationId || special.deploymentOperationIdV121 !== operation.id || !checked.valid
     || state?.phase !== 'complete' || !state.complete || !state.rewardClaimed || !isRecord(state.rewards)
     || mission?.state !== 'complete' || player?.alive !== true || player?.downed !== false
-    || !integer(player?.kills, definition.maximumKills) || !integer(mission?.retries, 9999)
+    || !integer(player?.kills, definition.stateKey === 'apcConvoyV121' && raw?.apcCourseV131 ? 1e7 : definition.maximumKills) || !integer(mission?.retries, 9999)
     || !integer(mission?.casualties, 9999) || !Number.isFinite(mission?.elapsed) || mission.elapsed < 0 || mission.elapsed > 604800
     || !integer(raw.inventory?.salvage, 999999) || !integer(raw.inventory?.intel, 999999)) {
     return { valid: false, reason: 'special-operation-terminal-invalid' };
@@ -723,7 +761,9 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
     if (vehicle?.id !== 'vehicle-001-m577-armored-personnel-carrier' || vehicle.active !== true
       || vehicle.destroyed !== false || !Number.isFinite(vehicle.hull) || vehicle.hull <= 0 || vehicle.hull > 340
       || state.rewards.hullRemaining !== Math.round(vehicle.hull)) return { valid: false, reason: 'special-operation-vehicle-invalid' };
-    credits += player.kills * 10 + Math.floor(vehicle.hull / 340 * 250);
+    credits = Math.min(10000, credits + player.kills * 10 + Math.floor(vehicle.hull / 340 * 250));
+    if (raw.apcCourseV131 && (!validateApcCourseV131(raw.apcCourseV131, state, raw.enemies).valid
+      || raw.apcCourseV131.kills !== player.kills)) return { valid: false, reason: 'apc-course-result-invalid' };
   }
   const nativeRewards = {
     ...state.rewards, credits, salvage: raw.inventory.salvage, intel: raw.inventory.intel,
@@ -735,6 +775,10 @@ function validateSpecialOperationRewardV121(operation, suppliedRewards) {
     return { valid: false, reason: 'special-operation-reward-mismatch' };
   }
   return { valid: true, serial, kills: player.kills, rewards: nativeRewards,
+    ...(definition.stateKey === 'apcConvoyV121' && raw.apcCourseV131 ? { course: {
+      mode: raw.apcCourseV131.mode, score: Math.floor(raw.apcCourseV131.score), laps: raw.apcCourseV131.lap,
+      distance: Math.round(raw.apcCourseV131.totalDistance), kills: raw.apcCourseV131.kills
+    } } : {}),
     strategicReward: { credits, alloy: nativeRewards.salvage, research: nativeRewards.intel } };
 }
 
@@ -1367,11 +1411,12 @@ export function applyCostume(save, costumeId) {
 
 export function getOperationBrief(save, campaign, world) {
   const strategy = ensureStrategy(save);
-  const deployableVehicleId = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? null
+  const deployableVehicleId = isSoloSpecialOperationV131(campaign.id) ? null
     : resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const availableCrew = save.crew.filter((member) => strategy.selectedCrewIds.includes(member.id) && member.status === 'active');
-  // QZ-18 is a solo deployment; undeployed members must not pay its fatigue cost.
-  const selectedCrew = campaign.id === ARCHIVE_RELAY_CAMPAIGN_V122.id ? availableCrew.slice(0, 1) : availableCrew;
+  // Solo operations freeze one operator; absent members keep their health,
+  // fatigue, resources and service history in the Tantalus.
+  const selectedCrew = isSoloSpecialOperationV131(campaign.id) ? availableCrew.slice(0, 1) : availableCrew;
   const state = save.galaxy.worldState[world.id] || world;
   const averageStress = selectedCrew.reduce((sum, member) => sum + member.stress, 0) / Math.max(1, selectedCrew.length);
   const averageFatigue = selectedCrew.reduce((sum, member) => sum + member.fatigue, 0) / Math.max(1, selectedCrew.length);
@@ -1551,6 +1596,10 @@ const sanitizeNativeOperationResumeState = (candidate, { operation = null } = {}
     if (requestedSpecialOperation.operationId !== operation.specialOperationId
       || (requestedSpecialOperation.deploymentOperationIdV121 && requestedSpecialOperation.deploymentOperationIdV121 !== operation.id)) return null;
     sanitized.specialOperation.deploymentOperationIdV121 = operation.id;
+  }
+  if (operationCampaignV131(operation?.campaignId)) {
+    if (candidate.operationReceiptV131?.deploymentId && candidate.operationReceiptV131.deploymentId!==operation.id) return null;
+    sanitized.operationReceiptV131={deploymentId:operation.id,campaignId:operation.campaignId};
   }
   return sanitized;
 };
@@ -1817,6 +1866,11 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
   const specialDefinitionV121 = specialOperationRewardDefinitionV121(operation.campaignId);
+  const chapterV131 = operationCampaignV131(operation.campaignId);
+  const completionV131 = chapterV131 && success ? validateOperationCompletionV131(operation,rewards) : null;
+  if (completionV131 && !completionV131.valid) return {ok:false,reason:completionV131.reason};
+  if (chapterV131 && operationSerialV85(operation.id)<=resolutionSerialV121(strategy.specialOperationResolutionSerialV131))
+    return {ok:false,reason:'operation-already-resolved'};
   const isSpecialOperationV121 = Boolean(specialDefinitionV121);
   const serialV121 = operationSerialV85(operation.id);
   if (isSpecialOperationV121 && (!serialV121 || resolutionSerialV121(serialV121) !== serialV121)) {
@@ -1872,7 +1926,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   let result = '';
   let paidStrategicRewardV121 = null;
   if (resolvedSuccess) {
-    const strategicReward = specialRewardV121?.strategicReward || operation.reward;
+    const strategicReward = specialRewardV121?.strategicReward || completionV131?.strategicReward || operation.reward;
     const previousResourcesV121 = specialRewardV121
       ? Object.fromEntries(Object.keys(strategicReward).map(key => [key, save.galaxy.resources[key]])) : null;
     for (const [key, value] of Object.entries(strategicReward)) changeStrategicValue(save, key, value);
@@ -1949,6 +2003,8 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       missionRewardsV121: structuredClone(specialRewardV121.rewards),
       expectedStrategicRewardV121: structuredClone(specialRewardV121.strategicReward),
       strategicRewardV121: structuredClone(paidStrategicRewardV121) } : {}),
+    ...(specialRewardV121?.course ? { apcCourseResultV131: structuredClone(specialRewardV121.course) } : {}),
+    ...(completionV131 ? { operationResultV131: structuredClone(completionV131.receipt) } : {}),
     success: resolvedSuccess,
     reason: resolvedReason,
     result,
@@ -1961,6 +2017,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   // A monotonic receipt survives bounded logs, imports and later operations.
   // Failures are receipts too: a defeated run cannot later be replayed as a win.
   if (isSpecialOperationV121) strategy.specialOperationResolutionSerialV121 = serialV121;
+  if (chapterV131) strategy.specialOperationResolutionSerialV131 = operationSerialV85(operation.id);
   recordCrewMissionV85(save, operation, resolvedSuccess, resolvedReason);
   if (resolvedSuccess) syncPremiumPersonnelV119(save);
   if (save.openingV88?.phase === 'deployed') {
@@ -2054,6 +2111,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.commercialV71 = sanitizeHubCommercialStateV71(commercialV71);
   migrated.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(hub.annexOperationsV71);
   migrated.hub.pendingModuleActionV71 = sanitizePendingModuleActionV71(hub.pendingModuleActionV71);
+  migrated.hub.hubTrainingV132 = normalizeHubTrainingV132(hub.hubTrainingV132);
   delete migrated.hub.hubCommercialV71;
   delete migrated.hub.hubExpansionV71;
 
@@ -2127,6 +2185,9 @@ export function migrateSave(input, profile = 1) {
     ? recruitmentForCrewV85(source.recruitmentV85, migrated.crew)
     : { ...base.recruitmentV85, lastOfferHour: recruitmentClockV85(migrated) };
   migrated.recruitmentV85.candidates = migrated.recruitmentV85.candidates.filter((profile) => !seenCrewIdsV85.has(profile.id));
+  migrated.crewConversationMemoryV135 = normalizeCrewConversationMemoryV135(source.crewConversationMemoryV135, {
+    crew: migrated.crew, catalog: CREW, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT], clock: migrated.clock
+  });
 
   const strategy = isRecord(source.strategy) ? source.strategy : {};
   const inventory = isRecord(strategy.inventory) ? strategy.inventory : {};
@@ -2189,6 +2250,7 @@ export function migrateSave(input, profile = 1) {
       resolvedSpecialSerialV121,
       ...migrated.crew.map((member) => member.lastServiceOperationSerialV85 || 0)),
     specialOperationResolutionSerialV121: resolvedSpecialSerialV121,
+    specialOperationResolutionSerialV131: resolutionSerialV121(strategy.specialOperationResolutionSerialV131),
     selectedCrewIds: selectedCrewIds.length ? selectedCrewIds : [...base.strategy.selectedCrewIds],
     inventory: { weaponIds, equipmentIds, vehicleIds },
     selectedVehicleId: resolveReadyVehicleIdV60(strategy.selectedVehicleId, vehicleIds, VEHICLES),
@@ -2204,6 +2266,14 @@ export function migrateSave(input, profile = 1) {
       reason: typeof strategy.lastOperation.reason === 'string' ? strategy.lastOperation.reason.slice(0, 60) : 'migrated',
       result: typeof strategy.lastOperation.result === 'string' ? strategy.lastOperation.result.slice(0, 500) : '',
       specialOperationBonus: sanitizeValues(strategy.lastOperation.specialOperationBonus),
+      ...(operationCampaignV131(strategy.lastOperation.campaignId) && isRecord(strategy.lastOperation.operationResultV131)
+        ? {operationResultV131:sanitizeNativeResumeValue(strategy.lastOperation.operationResultV131)} : {}),
+      ...(strategy.lastOperation.campaignId === APC_CONVOY_CAMPAIGN_V121.id && isRecord(strategy.lastOperation.apcCourseResultV131)
+        ? { apcCourseResultV131: { mode: strategy.lastOperation.apcCourseResultV131.mode === 'endless' ? 'endless' : 'finite',
+          score: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.score, 0, 0, 1e10)),
+          laps: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.laps, 1, 1, 100000)),
+          distance: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.distance, 0, 0, 3.2e8)),
+          kills: Math.floor(numberBetween(strategy.lastOperation.apcCourseResultV131.kills, 0, 0, 1e7)) } } : {}),
       ...(specialOperationRewardDefinitionV121(strategy.lastOperation.campaignId) && isRecord(strategy.lastOperation.strategicRewardV121)
         ? { strategicRewardV121: sanitizeValues(strategy.lastOperation.strategicRewardV121),
           missionRewardsV121: sanitizeNativeResumeValue(strategy.lastOperation.missionRewardsV121),
@@ -2223,6 +2293,9 @@ export function migrateSave(input, profile = 1) {
   };
 
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
+  migrated.narrativeEvidenceV132 = normalizeNarrativeEvidenceV132(source.narrativeEvidenceV132, {
+    narrativeArchives: migrated.narrativeArchives, archiveRelayArchivesV122: source.archiveRelayArchivesV122
+  });
   migrated.archiveRelayArchivesV122 = normalizeArchiveRelayArchiveV122(source.archiveRelayArchivesV122);
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
@@ -2261,6 +2334,9 @@ export function migrateSave(input, profile = 1) {
   migrated.release = RELEASE.version;
   migrated.profile = Math.max(1, Math.min(3, Math.floor(Number(profile) || 1)));
   migrated.createdAt = numberBetween(source.createdAt, base.createdAt, 0);
+  migrated.hub.loaderQualificationV132 = normalizeHubLoaderQualificationV132(hub.loaderQualificationV132, getHubTrainingOperatorIdV132(migrated));
+  migrated.player.wardrobeV135 = normalizePlayerWardrobeV135(source.player?.wardrobeV135);
+  migrated.hub.hubTrainingV132.serial = Math.max(migrated.hub.hubTrainingV132.serial, migrated.hub.loaderQualificationV132.serial);
   migrated.updatedAt = Date.now();
   const previousVersion = typeof source.release === 'string' ? source.release : typeof source.version === 'string' ? source.version : null;
   migrated.migratedFrom = previousVersion || `schema-${Number.isFinite(Number(source.schema)) ? source.schema : 'legacy'}`;

@@ -1,3 +1,5 @@
+import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
 import { HUB_ANNEX_MODULE_ART_V82, HUB_DECKS, HubGame as HubGameV71 } from './hub-v71-runtime.js';
 import {
   PROVING_GROUND_ASSETS_V81,
@@ -31,6 +33,10 @@ export * from './proving-ground-session-v81.js';
 export * from './tantalus-proving-ground-v81.js';
 
 export const HUB_PROVING_GROUND_RUNTIME_SCHEMA_V81 = 81;
+
+// Measured alpha >= 16 in the unchanged 1024px console PNG. Crop transparent
+// padding so the visible foot, rather than the image square, meets its support.
+export const PROVING_GROUND_CONSOLE_SOURCE_V136 = Object.freeze([241,71,782,991]);
 
 export const PROVING_GROUND_TARGET_SUPPORT_V82 = Object.freeze({
   ceilingY: 64,
@@ -545,6 +551,7 @@ export class HubGame extends HubGameV71 {
       provingProjectileCountV81: this.provingProjectilesV81.length,
       provingImpactCountV81: this.provingImpactsV81.length,
       provingAimV81: this.currentProvingAimV81(),
+      provingGroundConsoleV136: this.isProvingGroundActiveV81() ? clone(this.provingGroundConsoleRenderedV136 || null) : null,
       provingGroundAssetsReadyV81: this.getAssetReport().provingGroundAssetsReadyV81
     };
   }
@@ -587,6 +594,17 @@ export class HubGame extends HubGameV71 {
   }
 
   drawAnnexPropLayerV71(ctx, annex, image) {
+    if (annex?.id === PROVING_GROUND_ANNEX_ID_V81 && annex.propPlacementV139) {
+      super.drawAnnexPropLayerV71(ctx, annex, image);
+      const actual = this.annexNativePlacementRenderedV139;
+      this.provingGroundConsoleRenderedV136 = actual?.painted ? {
+        bounds: { ...actual.target }, sourceOpaqueBounds: [actual.source.x, actual.source.y,
+          actual.source.x + actual.source.w, actual.source.y + actual.source.h],
+        stationBounds: { ...annex.station.bounds }, floorY: annex.world.floorY,
+        asset: annex.propPlacementV139.asset, alphaThreshold: 16, footAlphaThreshold: 192, painted: true
+      } : null;
+      return;
+    }
     if (annex?.id !== PROVING_GROUND_ANNEX_ID_V81) {
       super.drawAnnexPropLayerV71(ctx, annex, image);
       return;
@@ -594,9 +612,16 @@ export class HubGame extends HubGameV71 {
     this.ensureProvingGroundAssetsV81();
     const consoleImage = this.provingGroundImagesV81.get(PROVING_GROUND_ASSETS_V81.console.runtimeId);
     const station = annex.station.bounds;
-    const bounds = { x: station.x + 17, y: station.y + 34, w: 148, h: 148 };
-    if (imageReady(consoleImage)) ctx.drawImage(consoleImage, bounds.x, bounds.y, bounds.w, bounds.h);
-    else super.drawAnnexPropLayerV71(ctx, annex, image);
+    if (!imageReady(consoleImage)) {
+      this.provingGroundConsoleRenderedV136 = null;
+      return super.drawAnnexPropLayerV71(ctx, annex, image);
+    }
+    const source = PROVING_GROUND_CONSOLE_SOURCE_V136;
+    const bounds = fitHubBitmapV72(source, station);
+    ctx.drawImage(resolveSpriteDrawableV134(consoleImage),source[0],source[1],source[2]-source[0],source[3]-source[1],bounds.x,bounds.y,bounds.w,bounds.h);
+    this.provingGroundConsoleRenderedV136 = { bounds, sourceOpaqueBounds: [...source],
+      stationBounds: { x:station.x,y:station.y,w:station.w,h:station.h }, floorY:annex.world.floorY,
+      asset:PROVING_GROUND_ASSETS_V81.console.src, alphaThreshold:16, painted:true };
     if (this.nearestAnnexStationV71()) {
       ctx.save();
       ctx.strokeStyle = '#d9ca79';
@@ -623,11 +648,11 @@ export class HubGame extends HubGameV71 {
         const tileHeight = (source[3] - source[1]) * scale;
         for (let y = layout.ceilingY; y < supportBottom; y += tileHeight) {
           const height = Math.min(tileHeight, supportBottom - y);
-          ctx.drawImage(railImage, source[0], source[1], source[2] - source[0], height / scale, centerX - layout.railWidth / 2, y, layout.railWidth, height);
+          ctx.drawImage(resolveSpriteDrawableV134(railImage), source[0], source[1], source[2] - source[0], height / scale, centerX - layout.railWidth / 2, y, layout.railWidth, height);
         }
       }
       if (imageReady(bracketImage)) {
-        ctx.drawImage(bracketImage, bracketSource[0], bracketSource[1], bracketSource[2] - bracketSource[0], bracketSource[3] - bracketSource[1], centerX - layout.bracketWidth / 2, bracketY, layout.bracketWidth, bracketHeight);
+        ctx.drawImage(resolveSpriteDrawableV134(bracketImage), bracketSource[0], bracketSource[1], bracketSource[2] - bracketSource[0], bracketSource[3] - bracketSource[1], centerX - layout.bracketWidth / 2, bracketY, layout.bracketWidth, bracketHeight);
       }
     }
   }
@@ -652,7 +677,7 @@ export class HubGame extends HubGameV71 {
         const column = frame % atlas.columns;
         const row = Math.floor(frame / atlas.columns);
         ctx.drawImage(
-          image,
+          resolveSpriteDrawableV134(image),
           column * atlas.frameWidth,
           row * atlas.frameHeight,
           atlas.frameWidth,
@@ -698,7 +723,7 @@ export class HubGame extends HubGameV71 {
         const column = frame % atlas.columns;
         const row = Math.floor(frame / atlas.columns);
         ctx.drawImage(
-          image,
+          resolveSpriteDrawableV134(image),
           column * atlas.frameWidth,
           row * atlas.frameHeight,
           atlas.frameWidth,
