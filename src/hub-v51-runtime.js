@@ -13,6 +13,7 @@ import {
 } from './hub-game.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { resolveHubServiceProfileV137 } from './hub-service-geometry-v137.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -335,7 +336,7 @@ function fallbackTraversal(deck) {
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
     const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
-    const profile = HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge;
+    const profile = resolveHubServiceProfileV137(HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge);
     archetypes.push(profile.archetype);
     platforms.push(...profile.platforms.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
     ladders.push(...profile.ladders.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
@@ -345,7 +346,7 @@ function fallbackTraversal(deck) {
   return {
     platforms, ladders, vents, occluders, archetypes,
     route: {
-      id: `deck-${deck + 1}-vertical-route`, source: 'authored-v60',
+      id: `deck-${deck + 1}-vertical-route`, source: 'authored-service-clearance-v137',
       nodeCount: platforms.length + 4,
       verticalLinks: ladders.length,
       crawlLinks: vents.length,
@@ -561,8 +562,12 @@ export class HubGame extends HubGameV50 {
     const down = !controlsLocked && (this.keys.has('KeyS') || this.keys.has('ArrowDown'));
     const ladder = this.nearestTraversalLadder();
     if (this.player.alive) {
-      if (ladder && (up || down)) this.player.climbing = true;
-      if (this.player.climbing && !ladder) this.player.climbing = false;
+      const atLadderTop = ladder && this.player.y <= ladder.top - this.player.h + .001;
+      const atLadderBottom = ladder && this.player.y >= ladder.bottom - this.player.h - .001;
+      const horizontalExit = (left || right) && !up && !down;
+      const beyondEndpoint = atLadderTop && up || atLadderBottom && down;
+      if (ladder && (up || down) && !beyondEndpoint && !horizontalExit) this.player.climbing = true;
+      if (this.player.climbing && (!ladder || beyondEndpoint || horizontalExit)) this.player.climbing = false;
       this.player.crouching = !controlsLocked && this.keys.has('KeyC') && this.player.grounded && !this.player.climbing;
       const sprinting = this.keys.has('ShiftLeft') || this.keys.has('ShiftRight');
       const speed = this.player.crouching ? 105 : sprinting ? 370 : 270;
@@ -573,7 +578,7 @@ export class HubGame extends HubGameV50 {
       if (this.player.climbing && ladder) {
         this.player.x += (ladder.x - this.player.w / 2 - this.player.x) * Math.min(1, delta * 12);
         this.player.vy = (Number(down) - Number(up)) * 185;
-        this.player.y = clamp(this.player.y + this.player.vy * delta, ladder.top - this.player.h + 10, ladder.bottom - this.player.h);
+        this.player.y = clamp(this.player.y + this.player.vy * delta, ladder.top - this.player.h, ladder.bottom - this.player.h);
         this.player.grounded = false;
         if (this.jumpQueued > 0) {
           this.player.climbing = false;

@@ -28,13 +28,16 @@ const HANGAR_CONTROL_BOOTH_V61 = Object.freeze({
   asset: '/assets/openai/hub/props/hangar-control-booth-v61.png',
   sourceSize: Object.freeze({ width: 1024, height: 512 }),
   sourceCrop: rect(0, 0, 1024, 512),
-  renderBounds: rect(908, 176, 340, 170),
-  anchor: point(1078, 346, 'bottom-center'),
+  // Keep this rear-wall station below the ceiling beam while raising its
+  // associated observation route. The native 2:1 crop remains isotropic;
+  // its opaque top starts at y186.22 and its anchor ends above the deck316.
+  renderBounds: rect(948, 172, 260, 130),
+  anchor: point(1078, 302, 'bottom-center'),
   collidable: false,
   action: 'navigate:operations',
   description: 'Ouvrir le contrôle de vol et la table tactique du hangar.',
   interactionPriority: 110,
-  interactionBounds: rect(930, 326, 286, 298)
+  interactionBounds: rect(930, 282, 286, 342)
 });
 
 const UD4L_DROPSHIP_V55 = Object.freeze({

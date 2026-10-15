@@ -8,6 +8,8 @@ import { GameEngine } from '../src/game-production-runtime.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { createBioforgeV80 } from '../src/bioforge-session-v80.js';
 import { HubGame, HUB_DECKS } from '../src/hub-opening-v88.js';
+import { HUB_ANNEX_BY_ID_V137 } from '../src/hub-annex-registry-v137.js';
+import { HUB_ANNEX_ENTRANCES_V133 } from '../src/hub-navigation-layout-v133.js';
 import { createPlayerOnboardingV84 } from '../src/player-onboarding-v84.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { WORLDS, CAMPAIGNS, WEAPONS, ENEMIES, EQUIPMENT, CREW, NEURO_XENO_PROFILES } from '../src/content.js';
@@ -880,8 +882,14 @@ for (const appearance of [bare(), colonial('hudson')]) test(`the real hub moves 
 
 test('a real annex ladder uses its physical rectangle and drawn rungs without requiring a player ladder id', async () => {
   const host = browserHost(), hub = new HubGame(host.canvas);
-  hub.playerAppearanceV126 = colonial('hicks'); hub.start();
-  assert.ok(hub.beginAnnexTransitionV71('logistics', 'enter'));
+  const destination = HUB_ANNEX_BY_ID_V137.logistics;
+  const deck = HUB_DECKS.findIndex(entry => entry.id === destination.parentDeck);
+  const parentRoom = HUB_DECKS[deck].rooms.find(room => room.id === destination.parentRoomId);
+  const socket = HUB_ANNEX_ENTRANCES_V133[destination.id];
+  hub.playerAppearanceV126 = colonial('hicks');
+  hub.start({ deck, roomId: parentRoom.id, positionX: parentRoom.xStart + socket.centerX - 22, positionY: socket.bottom - 92 });
+  assert.equal(hub.nearestParentAnnexDoorV71()?.annexId, destination.id, 'The actor starts at the actual parent entrance.');
+  assert.ok(hub.beginAnnexTransitionV71(destination.id, 'enter'));
   const frames = count => { for (let frame = 0; frame < count; frame++) hub.loop(hub.last + 1000 / 60, hub.loopToken); };
   frames(30); await host.flush();
   const annex = hub.currentAnnexV71(), actor = hub.player;

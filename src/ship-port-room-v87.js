@@ -52,6 +52,26 @@ export const SHIP_PORT_PENS_V87 = freeze({
   'offer-tic-tac': { species: 'rat', bounds: { x: 2305, y: 500, w: 230, h: 124 } }
 });
 
+// Renderer and rear-wall composition share these exact occupied bounds.
+// They are signs only, with no station, collision or interaction footprint.
+export const SHIP_PORT_SERVICE_SIGNS_V137 = freeze([
+  { id: 'port-companions-service-sign', bounds: { x: 382, y: 244, w: 360, h: 68 },
+    title: 'COMPAGNONS DE LA FRONTIÈRE', subtitle: 'RELAIS CIVIL MOBILE',
+    services: 'ACCUEIL · DOSSIERS · TRANSPORT ACCOMPAGNÉ' },
+  { id: 'port-shelter-service-sign', bounds: { x: 1910, y: 244, w: 390, h: 68 },
+    title: 'REFUGE COLONIAL', subtitle: 'COMPTOIR D’ADOPTION',
+    services: 'DUOS LIÉS · TRANSPORT ENSEMBLE' }
+]);
+
+// Fixed fittings use the measured atlas aspect ratio. The same real extents
+// reserve their wall space and draw their sprite, including its hanging lamps.
+export const SHIP_PORT_LIGHT_FITTINGS_V137 = freeze([
+  { id: 'port-counter-light-fitting', kind: 'lamp',
+    bounds: getPortPropBoundsV87('lamp', { x: 425, width: 310, bottom: 480 }) },
+  { id: 'port-meeting-light-fitting', kind: 'lamp',
+    bounds: getPortPropBoundsV87('lamp', { x: 1250, width: 310, bottom: 480 }) }
+]);
+
 export const SHIP_PORT_TERMINAL_V87 = freeze({
   ...getPortPropBoundsV87('terminal', { x: 0, width: 36, bottom: 624 }), centerX: 18
 });
@@ -94,8 +114,8 @@ export function drawShipPortRoomV87(ctx, images, save, time = 0, reducedMotion =
   drawPortPropV87(ctx, props, 'counter', { x: 480, width: 165, bottom: 624 });
   drawPortPropV87(ctx, props, 'shelf', { x: 1825, width: 90, bottom: 624 });
   drawPortPropV87(ctx, props, 'terminal', { x: 1947, width: 36, bottom: 624 });
-  drawPortPropV87(ctx, props, 'lamp', { x: 425, width: 310, bottom: 480 });
-  drawPortPropV87(ctx, props, 'lamp', { x: 1250, width: 310, bottom: 480 });
+  for (const fitting of SHIP_PORT_LIGHT_FITTINGS_V137)
+    drawPortPropV87(ctx, props, fitting.kind, fitting.bounds);
   drawPortVendorV87(ctx, images?.get('vendor'), { x: 668, feetY: 624, facing: -1, time, reducedMotion });
   const drawnOffers = new Set();
   for (const meeting of SHIP_PORT_MEETINGS_V87) {
@@ -123,11 +143,22 @@ export function drawShipPortRoomV87(ctx, images, save, time = 0, reducedMotion =
     }
   }
   for (const pen of Object.values(SHIP_PORT_PENS_V87)) drawClosedShipAnimalPenV87(ctx, images?.get('enclosure'), { ...pen, layer: 'front' });
-  ctx.save(); ctx.font = '12px ui-monospace, monospace'; ctx.fillStyle = '#d0d8c7';
-  ctx.fillText('COMPAGNONS DE LA FRONTIÈRE · RELAIS CIVIL MOBILE', 360, 410);
-  ctx.fillText('ACCUEIL · DOSSIERS · TRANSPORT ACCOMPAGNÉ', 360, 430);
-  ctx.fillText('REFUGE COLONIAL · COMPTOIR D’ADOPTION', 1930, 410);
-  ctx.fillText('DUOS LIÉS · TRANSPORT ENSEMBLE', 1930, 430); ctx.restore();
+  // Service signs occupy the clear upper wall, above the equipment and lamps.
+  // Their own backing keeps text readable over both windows and wall panels.
+  ctx.save(); ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+  for (const sign of SHIP_PORT_SERVICE_SIGNS_V137) {
+    const { x, y, w, h } = sign.bounds;
+    ctx.fillStyle = '#132125'; ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = '#6b7e76'; ctx.lineWidth = 1; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1);
+    ctx.fillStyle = '#b6ad81'; ctx.fillRect(x + 1, y + 1, 3, h - 2);
+    ctx.font = 'bold 13px ui-monospace, monospace'; ctx.fillStyle = '#e0e8da';
+    ctx.fillText(sign.title, x + 16, y + 20);
+    ctx.font = '11px ui-monospace, monospace'; ctx.fillStyle = '#c3d5c5';
+    ctx.fillText(sign.subtitle, x + 16, y + 38);
+    ctx.font = '10px ui-monospace, monospace'; ctx.fillStyle = '#b7c7c1';
+    ctx.fillText(sign.services, x + 16, y + 56);
+  }
+  ctx.restore();
 }
 
 export function drawShipPortTerminalV87(ctx, image, save) {

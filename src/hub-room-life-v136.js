@@ -4,6 +4,8 @@ import { getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { resolveHubVehicleArtV58 } from './hub-art-runtime-v58.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_PROP_ATLAS_V136, getHubPropAtlasCellV136 } from './hub-prop-atlas-v136.js';
+import { HUB_FURNISHING_ATLAS_V137 } from './hub-furnishing-atlas-v137.js';
+import { HUB_ROOM_FURNISHING_V137, enrichHubRoomCompositionV137, drawHubFurnishingMountsV137 } from './hub-room-furnishing-v137.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -83,7 +85,7 @@ function wallTop(kind,height,plan) {
 
 export function getHubRoomLifePlanV136(room,options={}) {
   const definition=HUB_ROOM_LIFE_V136[room?.id],original=HUB_ROOM_DRESSING_V134[room?.id];
-  if(!definition||!original)return null;
+  if(!definition||!original)return enrichHubRoomCompositionV137(room,null,options);
   // The background pass precedes drawTraversal: decks remain in front of wall
   // equipment. Reserve entrances and climbing corridors, rather than deleting
   // all scenery from behind a long, transparent maintenance deck.
@@ -117,10 +119,10 @@ export function getHubRoomLifePlanV136(room,options={}) {
       perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
     if(accept(entry))items.push(entry);
   }
-  return {schema:136,roomId:room.id,task:definition.task,theme:definition.theme,accent:original.accent,
+  return enrichHubRoomCompositionV137(room,{schema:136,roomId:room.id,task:definition.task,theme:definition.theme,accent:original.accent,
     start,width:spatial.bounds.w,floorY:spatial.planes.walkY,top:spatial.planes.ceilingY,
     items,supplies,spatial,sourceStatus:'existing-equipment-rescaled-and-original-small-supplies',
-    collidable:false,interactive:false,gameplayPlane:'2d'};
+    collidable:false,interactive:false,gameplayPlane:'2d'},options);
 }
 
 export function getHubRoomLifeMotionV136(time=0,{reducedMotion=false}={}) {
@@ -154,14 +156,19 @@ function drawFixtureDetails(ctx,composition,motion) {
 export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMotion=false,...options}={}) {
   const composition=getHubRoomLifePlanV136(room,options);
   if(!ctx||!composition)return null;
+  drawHubFurnishingMountsV137(ctx,composition);
   const rendered=drawHubRoomDressingV134(ctx,room,{images,composition});
+  const paintedRoles=new Set(rendered.items.map(entry=>entry.role));
   ctx.save();ctx.beginPath();ctx.rect(composition.start+112,composition.top,composition.width-224,composition.floorY-composition.top-4);ctx.clip();
   const motion=getHubRoomLifeMotionV136(time,{reducedMotion});drawFixtureDetails(ctx,composition,motion);ctx.restore();
-  return {schema:136,roomId:room.id,task:composition.task,theme:composition.theme,
+  return {schema:composition.schema,roomId:room.id,task:composition.task,theme:composition.theme,
     planes:{...composition.spatial.planes},projection:{...composition.spatial.projection},
     items:rendered.items.map(entry=>({...entry,motif:composition.task})),supplies:composition.supplies.map(entry=>({role:entry.role,cell:entry.cell,bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h}})),
     reservations:structuredClone(composition.spatial.reservations),preservedCriticalSpaces:true,
-    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus};
+    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,
+    furnishingV137:composition.furnishingV137?{...structuredClone(composition.furnishingV137),
+      paintedRoles:composition.furnishingV137.added.filter(entry=>paintedRoles.has(entry.role)).map(entry=>entry.role),
+      pendingImageRoles:composition.furnishingV137.added.filter(entry=>!paintedRoles.has(entry.role)).map(entry=>entry.role)}:null};
 }
 
 export function withHubRoomLifeV136(Base) {
@@ -185,8 +192,9 @@ export function withHubRoomLifeV136(Base) {
       if(!this.hubLifeImagesV136){
         this.hubLifeImagesV136=new Map(this.propImages||[]);
         if(typeof globalThis.Image==='function'){
-          const image=new Image();image.decoding='async';image.src=HUB_SERVICE_PROP_ATLAS_V136.asset;
-          this.hubLifeImagesV136.set(HUB_SERVICE_PROP_ATLAS_V136.asset,image);
+          for(const asset of [HUB_SERVICE_PROP_ATLAS_V136.asset,HUB_FURNISHING_ATLAS_V137.asset]){
+            const image=new Image();image.decoding='async';image.src=asset;this.hubLifeImagesV136.set(asset,image);
+          }
         }
       }
       return this.hubLifeImagesV136;
@@ -202,10 +210,10 @@ export function withHubRoomLifeV136(Base) {
     }
     getSnapshot(){
       const current=this.currentAnnexV71?.()||this.currentRoom?.(),rendered=this.editorPlaytest?[]:structuredClone([...this.hubRoomLifeRenderedV136?.values()||[]]);
-      return {...super.getSnapshot(),hubRoomLifeV136:{active:!this.editorPlaytest,rooms:Object.keys(HUB_ROOM_LIFE_V136).length,
+      return {...super.getSnapshot(),hubRoomLifeV136:{active:!this.editorPlaytest,rooms:Object.keys(HUB_ROOM_FURNISHING_V137).length,
         current:rendered.find(entry=>entry.roomId===current?.id)||null,rendered,
         vehicles:this.editorPlaytest?[]:structuredClone([...this.hubVehiclesRenderedV136?.values()||[]]),
-        sourceStatus:'original-small-equipment-and-existing-native-props',collidable:false,interactive:false}};
+        sourceStatus:'authored-task-groups-and-original-separated-ship-furnishings',collidable:false,interactive:false}};
     }
   };
 }

@@ -45,7 +45,13 @@ const reviewed = [
   profile('bioforge', '2d', 'isolated-access', 'Sas d’accès technique, pas une conversion du niveau BIOFORGE.'),
   profile('animal-care', '2d', 'orthographic-animal-care', 'Logements, animaux et interactions au sol doivent rester visibles.'),
   profile('frontier-civil-counter', '2d', 'orthographic-civil-counter', 'Comptoir civil modulaire avec objets physiques rapprochés.'),
-  profile('personal-refuge', '2d', 'authored-refuge', 'Composition dédiée du refuge et stations personnelles conservées.')
+  profile('personal-refuge', '2d', 'authored-refuge', 'Composition dédiée du refuge et stations personnelles conservées.'),
+  profile('flight-control-cockpit', '2.5d', 'flight-control-observation', 'Cockpit : hublots de coque et conduite au premier plan.', .020),
+  profile('galley-service', '2d', 'compact-food-preparation', 'Cuisine de bord : préparation et rangement sur le mur de service.'),
+  profile('sanitary-bay', '2d', 'compact-crew-hygiene', 'Sanitaires compacts : appareils et rangements frontaux.'),
+  profile('engine-room', '2.5d', 'mechanical-drive-room', 'Groupes mécaniques derrière une vraie coursive de maintenance.', .021),
+  profile('water-recycling', '2d', 'compact-water-treatment', 'Filtration de l’eau et vannes sur un circuit frontal lisible.'),
+  profile('maintenance-spine', '2.5d', 'longitudinal-service-spine', 'Coursive technique traversante : distribution en fond et plateforme physique distincte.', .018)
 ];
 export const HUB_ROOM_PRESENTATIONS_V119 = Object.freeze(Object.fromEntries(reviewed.map(row => [row.roomId, row])));
 export const HUB_ROOM_PRESENTATION_IDS_V119 = Object.freeze(reviewed.map(row => row.roomId));

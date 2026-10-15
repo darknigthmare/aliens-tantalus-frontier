@@ -29,7 +29,9 @@
     "test:coherence": "node --test scripts/verify-hub-spatial-design-v136.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-hub-prop-atlas-v136.mjs scripts/verify-human-motion-v136.mjs scripts/verify-npc-life-v136.mjs scripts/verify-editor-spatial-v136.mjs",
     "qa:tantalus:design": "node scripts/qa-tantalus-design-v136.mjs",
     "qa:tantalus:npcs": "node scripts/qa-npc-life-v136.mjs",
-    "qa:editor:spatial": "node scripts/qa-editor-spatial-browser-v136.mjs"
+    "qa:editor:spatial": "node scripts/qa-editor-spatial-browser-v136.mjs",
+    "test:ship": "node --test scripts/verify-hub-ship-layout-v137.mjs scripts/verify-hub-circulation-v137.mjs scripts/verify-hub-room-furnishing-v137.mjs scripts/verify-hub-room-identity-v137.mjs",
+    "qa:tantalus:ship": "node scripts/qa-tantalus-ship-v137.mjs"
   },
   "engines": {
     "node": ">=22"

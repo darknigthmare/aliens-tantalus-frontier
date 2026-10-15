@@ -173,6 +173,15 @@ export function getShipAnimalRoomInteractionV87(hub, save) {
 }
 
 const imageReady = image => image?.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
+const fittingLabelLinesV87 = (ctx, label, maxWidth) => {
+  const lines = [];
+  for (const word of label.toUpperCase().split(' ')) {
+    const previous = lines.at(-1);
+    if (previous && ctx.measureText(previous + ' ' + word).width <= maxWidth) lines[lines.length - 1] += ' ' + word;
+    else lines.push(word);
+  }
+  return lines;
+};
 export function drawShipAnimalHabitatV87(ctx, image, save) {
   if (!imageReady(image)) return false;
   const installed = new Set(getShipAnimalHabitatsV87(save).filter(entry => entry.installed).map(entry => entry.id));
@@ -181,11 +190,25 @@ export function drawShipAnimalHabitatV87(ctx, image, save) {
     const [x, y, right, bottom] = entry.source;
     ctx.drawImage(resolveSpriteDrawableV134(image), x, y, right - x, bottom - y, entry.x, entry.y, entry.w, entry.h);
   }
-  // These are labels for empty fitting positions, not silhouettes of animals.
+  // Small wall-mounted fitting plaques leave the floor and animal silhouettes
+  // clear. A bounded title prevents the adjacent rabbit/dog positions merging.
   ctx.save();
-  ctx.font = '11px ui-monospace, monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#a4b9b9';
+  ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
   for (const habitat of getShipAnimalHabitatsV87(save)) {
-    if (!habitat.installed) ctx.fillText(habitat.label.toUpperCase() + ' · À ÉQUIPER', habitat.installX, 608);
+    if (habitat.installed) continue;
+    // Keep the last plaque beside, rather than over, the permanent hygiene
+    // cabinet. This offset changes signage only, never the installation point.
+    const centerX = habitat.type === 'terrarium' ? habitat.installX + 48 : habitat.installX;
+    const left = centerX - 66, top = 492;
+    ctx.fillStyle = '#122226'; ctx.fillRect(left, top, 132, 52);
+    ctx.strokeStyle = '#607c7d'; ctx.lineWidth = 1; ctx.strokeRect(left + .5, top + .5, 131, 51);
+    ctx.fillStyle = '#93b1a8'; ctx.fillRect(left + 9, top + 7, 3, 3); ctx.fillRect(left + 120, top + 7, 3, 3);
+    const lines = fittingLabelLinesV87(ctx, habitat.label, 108);
+    ctx.fillStyle = '#d4e0d8';
+    for (let index = 0; index < lines.length; index += 1)
+      ctx.fillText(lines[index], centerX, top + (lines.length === 1 ? 22 : 16) + index * 12);
+    ctx.fillStyle = '#d0c591'; ctx.fillText('À ÉQUIPER', centerX, top + 43);
   }
   ctx.restore();
   return true;

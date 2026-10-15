@@ -8,12 +8,16 @@ import {
   HUB_ANNEX_WORLD_V71,
 } from './tantalus-hub-expansion-v71.js';
 import {
-  HUB_ANNEX_BY_ID_V87 as HUB_ANNEX_BY_ID_V71,
-  HUB_ANNEXES_V87 as HUB_ANNEXES_V71,
-  buildHubRuntimeGraphV87 as buildHubCommercialGraphV71,
-  applyHubAnnexStationV87 as applyHubAnnexStationV71,
-  createHubCommercialStateV87 as createHubCommercialStateV71
-} from './hub-annex-registry-v87.js';
+  HUB_ANNEX_REGISTRY_VERSION_V137,
+  HUB_ANNEX_BY_ID_V137 as HUB_ANNEX_BY_ID_V71,
+  HUB_ANNEXES_V137 as HUB_ANNEXES_V71,
+  buildHubRuntimeGraphV137 as buildHubCommercialGraphV71,
+  applyHubAnnexStationV137 as applyHubAnnexStationV71,
+  createHubCommercialStateV137 as createHubCommercialStateV71
+} from './hub-annex-registry-v137.js';
+import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionV137,
+  getHubShipConnectionsForRoomV137, getHubShipConnectionsForSpaceV137 } from './hub-ship-layout-v137.js';
+import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, drawShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { SHIP_PORT_ANNEX_V87, SHIP_PORT_TERMINAL_V87, getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from './ship-port-room-v87.js';
 import { SHIP_REFUGE_ANNEX_V87, getRefugeInteractionV87 } from './refuge-room-v87.js';
@@ -118,7 +122,7 @@ function layerSourceRect(image, cameraX, factor = 1) {
 
 function mutableCommercialState(rawState) {
   const normalized = createHubCommercialStateV71(rawState);
-  return clone(normalized.registryVersion === 87 && normalized.schema === 71
+  return clone(normalized.registryVersion === HUB_ANNEX_REGISTRY_VERSION_V137 && normalized.schema === 71
     ? normalized : createHubCommercialStateV71());
 }
 
@@ -152,12 +156,16 @@ export class HubGame extends HubGameV62 {
     hubState = normalizeRefugeHubResumeV87(hubState);
     this.refugeMovementLockedV87 = false;
     const sourceRegistry = hubState[HUB_ANNEX_STATE_KEY_V71] || hubState.hubExpansionV71 || hubState.commercialV71;
-    this.annexStateReadOnlyV87 = Number(sourceRegistry?.schema) > 71 || Number(sourceRegistry?.registryVersion) > 87;
+    this.annexStateReadOnlyV87 = Number(sourceRegistry?.schema) > 71 || Number(sourceRegistry?.registryVersion) > HUB_ANNEX_REGISTRY_VERSION_V137;
     const restored = mutableCommercialState(
       hubState[HUB_ANNEX_STATE_KEY_V71]
       || hubState.hubExpansionV71
       || hubState.commercialV71
     );
+    if (HUB_SHIP_SPACE_BY_ID_V137[restored.activeAnnexId]) {
+      const context = restored.returnContext, deck = HUB_DECKS.findIndex(entry => entry.id === context?.deckId);
+      if (deck >= 0) hubState = { ...hubState, deck, roomId: context.roomId, positionX: context.x };
+    }
     this.startingV71 = true;
     this.annexTransitionV71 = null;
     this.annexReturnPoseV71 = null;
@@ -302,13 +310,26 @@ export class HubGame extends HubGameV62 {
   }
 
   annexForParentRoomV71(roomId = this.state?.roomId) {
-    return HUB_ANNEXES_V71.find((annex) => annex.parentRoomId === roomId) || null;
+    const extra = getHubShipConnectionsForRoomV137(roomId, HUB_DECKS[this.state?.deck]?.id)[0];
+    return HUB_ANNEXES_V71.find((annex) => annex.parentRoomId === roomId) || (extra && HUB_ANNEX_BY_ID_V71[extra.spaceId]) || null;
   }
 
-  getParentAnnexDoorV71(annexId = null) {
+  parentAnnexesForRoomV137(roomId = this.currentRoom()?.id) {
+    const extras = new Set(getHubShipConnectionsForRoomV137(roomId, HUB_DECKS[this.state?.deck]?.id).map(connection => connection.spaceId));
+    return HUB_ANNEXES_V71.filter(annex => annex.parentRoomId === roomId || extras.has(annex.id));
+  }
+
+  getParentAnnexDoorV71(annexId = null, endpointId = null) {
     const annex = annexId ? HUB_ANNEX_BY_ID_V71[annexId] : this.annexForParentRoomV71();
-    if (!annex || !this.state || HUB_DECKS[this.state.deck]?.id !== annex.parentDeck) return null;
-    const room = HUB_DECKS[this.state.deck].rooms.find((entry) => entry.id === annex.parentRoomId);
+    if (!annex || !this.state) return null;
+    const connections = getHubShipConnectionsForSpaceV137(annex.id);
+    const preferred = getHubShipConnectionV137(endpointId || (this.isAnnexActiveV71() ? this.hubCommercialStateV71.returnContext?.endpointId : null));
+    const connection = preferred?.spaceId === annex.id ? preferred
+      : connections.find(entry => entry.parentDeck === HUB_DECKS[this.state.deck]?.id && entry.parentRoomId === this.currentRoom()?.id)
+        || connections.find(entry => entry.parentDeck === HUB_DECKS[this.state.deck]?.id);
+    const parentDeck = connection?.parentDeck || annex.parentDeck, parentRoomId = connection?.parentRoomId || annex.parentRoomId;
+    if (HUB_DECKS[this.state.deck]?.id !== parentDeck) return null;
+    const room = HUB_DECKS[this.state.deck].rooms.find((entry) => entry.id === parentRoomId);
     if (!room) return null;
     const platforms = (this.v51Platforms || [])
       .filter((platform) => platform.roomId === room.id && platform.w >= annex.entrance.w + 64)
@@ -324,7 +345,7 @@ export class HubGame extends HubGameV62 {
           : support.x + support.w - sideOffset)
       : room.xStart + (annex.entranceSide === 'west' ? 220 : HUB_WORLD.roomWidth - 220);
     const bottom = authored?.bottom ?? support?.y ?? HUB_WORLD.floorY;
-    const bounds = annex.parentDoorBounds ? { ...annex.parentDoorBounds } : {
+    const bounds = connection ? { ...connection.parentDoorBounds } : annex.parentDoorBounds ? { ...annex.parentDoorBounds } : {
       x: centerX - annex.entrance.w / 2,
       y: bottom - annex.entrance.h,
       w: annex.entrance.w,
@@ -337,7 +358,8 @@ export class HubGame extends HubGameV62 {
       interactionPriority: 130,
       annexId: annex.id,
       roomId: room.id,
-      deckId: annex.parentDeck,
+      deckId: parentDeck,
+      endpointId: connection?.id || null,
       annex,
       bounds,
       interactionBounds: expanded(bounds, 42, 18),
@@ -347,7 +369,7 @@ export class HubGame extends HubGameV62 {
 
   nearestParentAnnexDoorV71() {
     if (this.startingV71 || this.editorPlaytest || this.isAnnexActiveV71() || this.isVentActiveV62()) return null;
-    return HUB_ANNEXES_V71.filter(annex => annex.parentRoomId === this.currentRoom()?.id)
+    return this.parentAnnexesForRoomV137()
       .map(annex => this.getParentAnnexDoorV71(annex.id))
       .filter(door => door && overlaps(this.player, door.interactionBounds))
       .sort((a, b) => horizontalGap(this.player, a.bounds) - horizontalGap(this.player, b.bounds))[0] || null;
@@ -356,6 +378,8 @@ export class HubGame extends HubGameV62 {
   annexExitDoorV71() {
     const annex = this.currentAnnexV71();
     if (!annex) return null;
+    const connections = getHubShipConnectionsForSpaceV137(annex.id);
+    if (connections.length) return this.annexExitDoorsV137().sort((a, b) => horizontalGap(this.player, a.bounds) - horizontalGap(this.player, b.bounds))[0];
     const bounds = {
       x: annex.entranceLocalX - annex.entrance.w / 2,
       y: annex.entrance.y,
@@ -371,9 +395,23 @@ export class HubGame extends HubGameV62 {
     };
   }
 
+  annexExitDoorsV137() {
+    const annex = this.currentAnnexV71();
+    if (!annex) return [];
+    const connections = getHubShipConnectionsForSpaceV137(annex.id);
+    if (!connections.length) return [this.annexExitDoorV71()];
+    return connections.map(connection => {
+      const parentRoomName = HUB_DECKS.flatMap(deck => deck.rooms).find(room => room.id === connection.parentRoomId)?.name || connection.parentRoomId;
+      return { id: `${connection.id}-annex-door`, annexId: annex.id,
+        endpointId: connection.id, bounds: { ...connection.annexDoorBounds },
+        interactionBounds: expanded(connection.annexDoorBounds, 42, 18),
+        parentRoomId: connection.parentRoomId, parentRoomName, description: `Retour vers ${parentRoomName}` };
+    });
+  }
+
   nearestAnnexExitV71() {
-    const door = this.annexExitDoorV71();
-    return door && overlaps(this.player, door.interactionBounds) ? door : null;
+    return this.annexExitDoorsV137().filter(door => overlaps(this.player, door.interactionBounds))
+      .sort((a, b) => horizontalGap(this.player, a.bounds) - horizontalGap(this.player, b.bounds))[0] || null;
   }
 
   nearestAnnexStationV71() {
@@ -419,7 +457,8 @@ export class HubGame extends HubGameV62 {
     if (portInteraction && !this.nearestAnnexExitV71()) return portInteraction.prompt;
     if (this.isAnnexActiveV71()) {
       const annex = this.currentAnnexV71();
-      if (this.nearestAnnexExitV71()) return `E — SORTIR VERS ${annex.parentRoomId.toUpperCase()}`;
+      const exit = this.nearestAnnexExitV71();
+      if (exit) return `E — SORTIR VERS ${(exit.parentRoomName || exit.parentRoomId || annex.parentRoomId).toUpperCase()}`;
       if (this.isRefugeActiveV87()) return this.refugeMovementLockedV87
         ? 'CONTEMPLATION · E / ÉCHAP / DÉPLACEMENT — REPRENDRE LA MARCHE'
         : getRefugeInteractionV87(this)?.prompt || 'REFUGE · ESPACE PERSONNEL · A / D — MARCHER · E — INTERAGIR';
@@ -428,7 +467,10 @@ export class HubGame extends HubGameV62 {
         return interaction?.prompt || 'ACCUEIL ANIMALIER · ÉQUIPEZ LES LOGEMENTS AU SOL · E — UTILISER';
       }
       const station = this.nearestAnnexStationV71();
-      if (station) return `E — ${station.description.toUpperCase()}`;
+      if (station) {
+        const inspections = HUB_SHIP_SPACE_BY_ID_V137[annex.id] ? this.hubCommercialStateV71.stationUses[annex.id] || 0 : 0;
+        return `E — ${station.description.toUpperCase()}${inspections ? ` · CONTRÔLES : ${inspections}` : ''}`;
+      }
       return 'A / D — MARCHER · MAJ — COURIR · ESPACE — SAUTER · E — UTILISER';
     }
     const annexDoor = this.nearestParentAnnexDoorV71();
@@ -483,12 +525,14 @@ export class HubGame extends HubGameV62 {
     if (direction === 'exit' && this.currentAnnexV71()?.id !== annex.id) return null;
     if (direction === 'enter') {
       const door = this.getParentAnnexDoorV71(annex.id);
+      if (!door) return null;
       this.annexReturnPoseV71 = {
         x: this.player.x,
         y: this.player.y,
         facing: this.player.facing,
         cameraX: this.camera.x,
-        door
+        door,
+        endpointId: door.endpointId
       };
     }
     this.ensureAnnexAssetsV71(annex.id);
@@ -500,7 +544,8 @@ export class HubGame extends HubGameV62 {
       direction,
       elapsed: 0,
       duration: this.reducedMotion ? 0.12 : HUB_ANNEX_TRANSITION_SECONDS_V71,
-      progress: 0
+      progress: 0,
+      endpointId: direction === 'enter' ? this.annexReturnPoseV71?.endpointId || null : this.nearestAnnexExitV71()?.endpointId || null
     };
     this.statusKey = '';
     this.audio?.ui?.();
@@ -529,6 +574,9 @@ export class HubGame extends HubGameV62 {
   }
 
   activateAnnexV71(annex) {
+    const connection = getHubShipConnectionV137(this.annexTransitionV71?.endpointId || this.annexReturnPoseV71?.endpointId);
+    const entranceSide = connection?.entranceSide || annex.entranceSide;
+    const entranceLocalX = connection?.entranceLocalX ?? annex.entranceLocalX;
     const state = clone(this.hubCommercialStateV71);
     state.revision = Math.min(999999, Number(state.revision || 0) + 1);
     const annexState = state.annexes[annex.id];
@@ -536,18 +584,20 @@ export class HubGame extends HubGameV62 {
     annexState.visitCount = Math.min(999999, Number(annexState.visitCount || 0) + 1);
     annexState.lastVisitedAt = state.revision;
     state.activeAnnexId = annex.id;
-    const spawnX = annex.entranceSide === 'west'
-      ? annex.entranceLocalX + annex.entrance.w / 2 + 30
-      : annex.entranceLocalX - annex.entrance.w / 2 - this.player.w - 30;
+    const spawnX = entranceSide === 'west'
+      ? entranceLocalX + annex.entrance.w / 2 + 30
+      : entranceLocalX - annex.entrance.w / 2 - this.player.w - 30;
     state.annexPositionX = Math.round(spawnX);
     state.annexPositionY = annex.world.floorY - this.player.h;
     state.annexClimbing = false;
     state.returnContext = {
-      deckId: annex.parentDeck,
-      roomId: annex.parentRoomId,
+      deckId: connection?.parentDeck || annex.parentDeck,
+      roomId: connection?.parentRoomId || annex.parentRoomId,
       x: Math.round(this.annexReturnPoseV71?.x ?? this.player.x),
-      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing)
+      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing),
+      ...(connection ? { endpointId: connection.id } : {})
     };
+    state.activeConnectionIdV137 = connection?.id || null;
     state.lastAnnexId = annex.id;
     this.hubCommercialStateV71 = mutableCommercialState(state);
     Object.assign(this.player, {
@@ -558,26 +608,46 @@ export class HubGame extends HubGameV62 {
       grounded: true,
       crouching: false,
       climbing: false,
-      facing: annex.entranceSide === 'west' ? 1 : -1
+      facing: entranceSide === 'west' ? 1 : -1
     });
     this.annexCameraV71.x = clamp(this.player.x - VIEW_WIDTH / 2, 0, annex.world.width - VIEW_WIDTH);
     this.onAction({
       type: 'hub:annex-transition',
       action: 'hub:annex-enter-complete',
       annexId: annex.id,
-      parentRoomId: annex.parentRoomId,
+      parentRoomId: connection?.parentRoomId || annex.parentRoomId,
       noMenu: true
     });
   }
 
   deactivateAnnexV71(annex) {
     const state = clone(this.hubCommercialStateV71);
-    const pose = this.annexReturnPoseV71 || this.restoreReturnPoseV71(annex, state.returnContext);
+    const connection = getHubShipConnectionV137(this.annexTransitionV71?.endpointId || state.returnContext?.endpointId);
+    if (connection) {
+      const deck = HUB_DECKS.findIndex(entry => entry.id === connection.parentDeck);
+      if (deck !== this.state.deck) {
+        this.state.deck = deck;
+        this.state.roomId = connection.parentRoomId;
+        this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck).map(door => ({ ...door }));
+        this.npcs = this.createNpcs(deck);
+        this.obstacles = this.createObstacles(deck);
+        this.configureTraversal();
+        const alert = [...(this.npcRoutineResolutionsV62?.values() || [])].some(resolution => resolution.alert);
+        this.setNpcCrisisAlert?.(Boolean(this.crisis?.active || alert));
+      }
+      this.state.roomId = connection.parentRoomId;
+      if (!this.state.visited.includes(connection.parentRoomId)) this.state.visited.push(connection.parentRoomId);
+    }
+    const sameEndpoint = !connection || connection.id === this.annexReturnPoseV71?.endpointId;
+    const context = connection && !sameEndpoint ? { endpointId: connection.id, x: connection.parentDoorBounds.x + connection.parentDoorBounds.w / 2 - this.player.w / 2,
+      facing: connection.entranceSide === 'east' ? -1 : 1 } : state.returnContext;
+    const pose = sameEndpoint && this.annexReturnPoseV71 || this.restoreReturnPoseV71(annex, context);
     state.activeAnnexId = null;
     state.annexPositionX = null;
     state.annexPositionY = null;
     state.annexClimbing = false;
     state.returnContext = null;
+    state.activeConnectionIdV137 = null;
     state.lastAnnexId = annex.id;
     this.hubCommercialStateV71 = mutableCommercialState(state);
     Object.assign(this.player, {
@@ -598,13 +668,14 @@ export class HubGame extends HubGameV62 {
       type: 'hub:annex-transition',
       action: 'hub:annex-exit-complete',
       annexId: annex.id,
-      parentRoomId: annex.parentRoomId,
+      parentRoomId: connection?.parentRoomId || annex.parentRoomId,
       noMenu: true
     });
   }
 
   restoreReturnPoseV71(annex, returnContext = null) {
-    const door = this.getParentAnnexDoorV71(annex.id);
+    const connection = getHubShipConnectionV137(returnContext?.endpointId);
+    const door = this.getParentAnnexDoorV71(annex.id, connection?.id);
     const x = Number.isFinite(Number(returnContext?.x))
       ? Number(returnContext.x)
       : door?.bounds.x || 180;
@@ -615,7 +686,8 @@ export class HubGame extends HubGameV62 {
         ? returnContext.facing
         : annex.entranceSide === 'west' ? -1 : 1,
       cameraX: clamp(x - VIEW_WIDTH / 2, 0, HUB_WORLD.width - VIEW_WIDTH),
-      door
+      door,
+      endpointId: connection?.id || null
     };
   }
 
@@ -627,6 +699,7 @@ export class HubGame extends HubGameV62 {
     const visitCount = this.hubCommercialStateV71.annexes[annex.id].visitCount;
     const lastVisitedAt = this.hubCommercialStateV71.annexes[annex.id].lastVisitedAt;
     const contractReceipt = applyHubAnnexStationV71(this.hubCommercialStateV71, annex.id);
+    if (!contractReceipt.applied) return clone(contractReceipt);
     const proposedState = clone(contractReceipt.state);
     proposedState.annexes[annex.id].visitCount = visitCount;
     proposedState.annexes[annex.id].lastVisitedAt = lastVisitedAt;
@@ -635,10 +708,11 @@ export class HubGame extends HubGameV62 {
     proposedState.annexPositionY = Math.round(this.player.y);
     proposedState.annexClimbing = Boolean(this.player.climbing);
     proposedState.returnContext = {
-      deckId: annex.parentDeck,
-      roomId: annex.parentRoomId,
+      deckId: this.hubCommercialStateV71.returnContext?.deckId || annex.parentDeck,
+      roomId: this.hubCommercialStateV71.returnContext?.roomId || annex.parentRoomId,
       x: Math.round(this.annexReturnPoseV71?.x ?? this.state.positionX),
-      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing)
+      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing),
+      ...(this.hubCommercialStateV71.returnContext?.endpointId ? { endpointId: this.hubCommercialStateV71.returnContext.endpointId } : {})
     };
     const actionResult = this.onAction({
       type: 'hub:annex-station',
@@ -993,7 +1067,7 @@ export class HubGame extends HubGameV62 {
   drawTraversal(ctx) {
     super.drawTraversal(ctx);
     if (this.startingV71 || this.editorPlaytest || this.isAnnexActiveV71()) return;
-    for (const annex of HUB_ANNEXES_V71.filter(entry => entry.parentRoomId === this.currentRoom()?.id)) {
+    for (const annex of this.parentAnnexesForRoomV137()) {
       const door = this.getParentAnnexDoorV71(annex.id);
       if (!door) continue;
       const images = this.ensureAnnexAssetsV71(door.annexId);
@@ -1106,13 +1180,25 @@ export class HubGame extends HubGameV62 {
       this.drawAnnexModularPropsV72(ctx, annex);
       this.drawAnnexPropLayerV71(ctx, annex, images.get('prop'));
     }
-    this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds, this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door);
+    const nearbyExit = this.nearestAnnexExitV71();
+    for (const exit of this.annexExitDoorsV137()) {
+      this.drawDoorBitmapV71(ctx, images.get('door'), exit.bounds, nearbyExit?.id === exit.id ? 1 : 0, annex.art.alphaBounds.door);
+      this.drawAnnexExitLabelV137(ctx, annex, exit);
+    }
     this.drawPlayer(ctx);
     this.drawAnnexForegroundV72(ctx, annex, images.get('foreground'));
     ctx.restore();
     this.drawAnnexLightingV71(ctx);
     this.drawAnnexHudV71(ctx);
     ctx.restore();
+  }
+
+  drawAnnexExitLabelV137(ctx, annex, exit) {
+    if (!HUB_SHIP_SPACE_BY_ID_V137[annex.id] || this.hasRenderedHubServiceSignV137?.(exit.endpointId)) return false;
+    const parent = HUB_DECKS.flatMap(deck => deck.rooms).find(room => room.id === exit.parentRoomId);
+    ctx.fillStyle = '#a9bfb3'; ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center';
+    ctx.fillText(parent?.name?.toUpperCase() || exit.parentRoomId.toUpperCase(), exit.bounds.x + exit.bounds.w / 2, exit.bounds.y - 10);
+    ctx.textAlign = 'left'; return true;
   }
 
   drawAnnexLayerV71(ctx, image, cameraFactor, alpha) {

@@ -134,7 +134,9 @@ test('compact rear equipment keeps native aspect, clear dynamic drift envelopes 
     for (const panel of getHubRearEquipmentLayoutV134(room, model, atlas, options)) {
       const t = panel.target; assert.ok(t.h <= 112 + 1e-7 && t.w <= 300 + 1e-7);
       assert.ok(Math.abs(t.w / panel.source.w - t.h / panel.source.h) < 1e-10);
-      assert.ok(hubSpatialPlacementClearV136({ ...t, x: t.x - 40, w: t.w + 80 }, spatial), room.id);
+      const envelope = panel.driftEnvelope;
+      assert.ok(hubSpatialPlacementClearV136(envelope, spatial), room.id);
+      assert.ok(t.x >= envelope.x - 1e-8 && t.x + t.w <= envelope.x + envelope.w + 1e-8, room.id);
       assert.ok(t.y + t.h < 500); rendered++;
     }
   }

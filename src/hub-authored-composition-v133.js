@@ -36,7 +36,13 @@ const roles = [
   ['bioforge', 'ACCÈS BIOFORGE', 'Sas de recherche biologique', 'biological', '#b0bf8e'],
   ['animal-care', 'SOINS ANIMALIERS', 'Suivi et logement des spécimens', 'animal-care', '#a5be9b'],
   ['frontier-civil-counter', 'COMPTOIR CIVIL', 'Accueil des contrats civils', 'civil', '#c6baa0'],
-  ['personal-refuge', 'REFUGE', 'Repos et équipement personnel', 'refuge', '#aebdae']
+  ['personal-refuge', 'REFUGE', 'Repos et équipement personnel', 'refuge', '#aebdae'],
+  ['flight-control-cockpit', 'COCKPIT DE CONDUITE', 'Conduite et contrôle de la trajectoire', 'navigation', '#8db9c6'],
+  ['galley-service', 'CUISINE DE BORD', 'Préparation et lavage alimentaires', 'social', '#c4b58e'],
+  ['sanitary-bay', 'SANITAIRES', 'Hygiène, douches et linge de bord', 'habitat', '#a7c5bd'],
+  ['engine-room', 'SALLE DES MACHINES', 'Pompes, transmission et maintenance', 'maintenance', '#b7b38c'],
+  ['water-recycling', 'TRAITEMENT DE L’EAU', 'Filtration, recyclage et vannes', 'life-support', '#8fbbb4'],
+  ['maintenance-spine', 'COURSIVE TECHNIQUE', 'Liaison capteurs–atelier et réseaux', 'maintenance', '#a4b6a1']
 ];
 export const HUB_AUTHORED_COMPOSITIONS_V133 = Object.freeze(Object.fromEntries(roles.map(([id, title, purpose, motif, accent]) => [id,
   Object.freeze({ id, title, purpose, motif, accent, plane: 'rear', collidable: false,

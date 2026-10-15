@@ -2,8 +2,10 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {HUB_DECKS} from '../src/hub-game.js';
-import {HUB_ANNEXES_V87} from '../src/hub-annex-registry-v87.js';
+import {HUB_DECKS,HUB_WORLD} from '../src/hub-game.js';
+import {buildHubTraversalGeometryV87} from '../src/hub-v51-runtime.js';
+import {buildHubDoorNetworkV58} from '../src/topology-coherence-v58.js';
+import {HUB_ANNEXES_V137} from '../src/hub-annex-registry-v137.js';
 import {HUB_ROOM_PARALLAX_V134,getHubRoomParallaxPlanV134,getHubNativeWallTilesV134,getHubRearEquipmentLayoutV134,drawHubRoomParallaxV134,withHubRoomParallaxV134} from '../src/hub-room-parallax-v134.js';
 import {HUB_ENVIRONMENT_ATLAS_V134} from '../src/hub-environment-atlas-v134.js';
 
@@ -19,16 +21,16 @@ function dimensions(path){const b=readFileSync(root+path.replace(/^\//,''));
   throw Error('Unrecognized native image header: '+path);
 }
 function image(path){const[naturalWidth,naturalHeight]=dimensions(path);return{complete:true,naturalWidth,naturalHeight,src:path};}
-const rooms=[...HUB_DECKS.flatMap(d=>d.rooms),...HUB_ANNEXES_V87.map(a=>({...a,xStart:0}))];
+const rooms=[...HUB_DECKS.flatMap(d=>d.rooms),...HUB_ANNEXES_V137.map(a=>({...a,xStart:0}))];
 function host(){let depth=0;const images=[],clips=[],draws=[];const ctx=new Proxy({
   save(){depth++;},restore(){assert.ok(depth>0);depth--;},rect(...r){clips.push(r);},drawImage(asset,...r){images.push({asset:asset.src,r});},
   fillRect(...r){draws.push(r);},createLinearGradient:()=>({addColorStop(){}})
 },{get:(object,key)=>key in object?object[key]:()=>{}});return{ctx,images,clips,draws,balanced:()=>assert.equal(depth,0)};}
 
-test('all 16 ship rooms and 13 annexes have an explicit visual-only projection',()=>{
- assert.equal(rooms.length,29);assert.equal(Object.keys(HUB_ROOM_PARALLAX_V134).length,29);
- assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2.5d').length,12);
- assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2d').length,17);
+test('all 16 ship rooms and 19 annexes have an explicit visual-only projection',()=>{
+ assert.equal(rooms.length,35);assert.equal(Object.keys(HUB_ROOM_PARALLAX_V134).length,35);
+ assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2.5d').length,15);
+ assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2d').length,20);
  for(const room of rooms){const p=getHubRoomParallaxPlanV134(room,room.xStart);assert.ok(p,room.id);
    assert.equal(p.gameplayPlane,'2d');assert.equal(p.collidable,false);assert.equal(p.bounds.x,room.xStart);
    assert.equal(p.bounds.w,room.profile?.worldWidth||room.world.width);assert.ok(p.bounds.y+p.bounds.h<624);
@@ -76,7 +78,7 @@ test('renderer clips native pixels and all architecture to the local rear plane,
 });
 
 test('wrapper routes annex backgrounds before existing physical geometry and retains an untouched save/snapshot',()=>{
- const annex=HUB_ANNEXES_V87.find(a=>a.id==='logistics'),wall=image(annex.art.far),browser=host(),order=[];
+ const annex=HUB_ANNEXES_V137.find(a=>a.id==='logistics'),wall=image(annex.art.far),browser=host(),order=[];
  class Base{constructor(){this.depthPresentationV116=true;this.annexCameraV71={x:300};this.state={save:{stocks:17}};}
    ensureAnnexAssetsV71(){return new Map([['far',wall]]);}drawAnnexGeometryV71(ctx,a){assert.equal(a,annex);order.push('physical');return 'native-geometry';}
    drawAnnexLayerV71(){return 'old-layer';}drawHubRoomFarV58(){return 'old-room';}currentAnnexV71(){return annex;}isAnnexActiveV71(){return true;}
@@ -122,4 +124,32 @@ test('original equipment atlas occupies only available wall bays at human scale 
  }
  const room={id:'proving-ground',xStart:0,world:{width:2600,floorY:624}},model=getHubRoomParallaxPlanV134(room,1200,{clip:{x:0,y:132,w:2600,h:238}});
  for(const panel of getHubRearEquipmentLayoutV134(room,model,atlas)){assert.ok(panel.target.y>=156);assert.equal(panel.target.y+panel.target.h,360);}
+});
+
+test('mounted equipment keeps its physical wall socket across the full camera range and reduced-motion settings',()=>{
+ const atlas=image(HUB_ENVIRONMENT_ATLAS_V134.asset);
+ let reactorChecked=false;
+ for(const room of rooms){
+   const deck=HUB_DECKS.findIndex(entry=>entry.rooms.some(candidate=>candidate.id===room.id));
+   const geometry=deck<0?room:buildHubTraversalGeometryV87(deck);
+   const nativeOptions={ladders:geometry.ladders,platforms:geometry.platforms,
+     doors:deck<0?[]:buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck)};
+   const center=(room.xStart||0)+(room.world?.width||1280)/2-640;
+   for(const options of [nativeOptions,{ladders:geometry.ladders,platforms:geometry.platforms}]){
+   let mounts;
+   for(const delta of [-10000,-640,-160,0,160,640,10000])for(const reducedMotion of [false,true]){
+     const model=getHubRoomParallaxPlanV134(room,center+delta,{reducedMotion});
+     const panels=getHubRearEquipmentLayoutV134(room,model,atlas,options);
+     const current=panels.map(panel=>({source:panel.source,socket:panel.socketBounds,envelope:panel.driftEnvelope,mirrored:panel.mirrored}));
+     if(mounts)assert.deepEqual(current,mounts,`${room.id}: the camera must not select another wall bay`);
+     else mounts=current;
+     for(const panel of panels){const target=panel.target,envelope=panel.driftEnvelope;
+       assert.ok(target.x>=envelope.x-1e-8&&target.x+target.w<=envelope.x+envelope.w+1e-8,room.id);
+       assert.ok(Math.abs(target.x-panel.socketBounds.x-model.layers[1].drift)<1e-8,room.id);
+     }
+     if(room.id==='reactor'&&!options.doors){assert.ok(panels.length>0,'The regression must exercise actual mounted reactor equipment');reactorChecked=true;}
+   }
+   }
+ }
+ assert.equal(reactorChecked,true);
 });

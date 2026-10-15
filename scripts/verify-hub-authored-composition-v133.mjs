@@ -62,7 +62,7 @@ test('production composition supplies distinct purpose instrumentation to all si
   assert.deepEqual(subject.save.galaxy.resources,before.stock);assert.deepEqual(subject.save.crew,before.crew);assert.equal(subject.events.length,before.events);
   const rejected=Object.entries(HUB_TRAVERSAL_ART_FILES).filter(([id])=>id!=='vent').map(([,path])=>path);
   assert.ok(!subject.images.some(image=>rejected.includes(image.source)||image.source?.endsWith('-overhead.png')),room.id);
-  assert.equal(subject.hub.getSnapshot().hubAuthoredCompositionV133.rooms,29);
+  assert.equal(subject.hub.getSnapshot().hubAuthoredCompositionV133.rooms,35);
  }
 });
 test('all thirteen physical annexes render their purpose without changing stations, platforms or commercial state',async()=>{

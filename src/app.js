@@ -64,6 +64,9 @@ import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
 import { withHubNpcLifeV136 } from './npc-life-v136.js';
 import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
 import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
+import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
+import { withHubCirculationV137 } from './hub-circulation-v137.js';
+import { withHubRoomIdentityV137 } from './hub-room-identity-v137.js';
 import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132 } from './save.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
@@ -238,7 +241,11 @@ function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
 }
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
-const HubGame = withHubNpcLifeV136(withHubRoomLifeV136(withHubRoomDressingV134(withHubSpatialDesignV136(withHubRoomParallaxV134(withHubAuthoredCompositionV133(withHubTrainingV132(HubGameV88)))))));
+const HubGame = [
+  withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
+  withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
+  withHubNpcLifeV136, withHubCirculationV137, withHubRoomIdentityV137
+].reduce((Game, decorate) => decorate(Game), HubGameV88);
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -852,7 +859,7 @@ function captureHubPoseV84() {
   if (hubEngine.isPortMeridienV90?.()) return {}; // Ground coordinates must never overwrite the ship return pose.
   const annex = hubEngine.currentAnnexV71();
   if (annex) return projectRefugeHubSaveV87({
-    deck: hubEngine.state.deck, roomId: annex.parentRoomId,
+    deck: hubEngine.state.deck, roomId: hubEngine.hubCommercialStateV71.returnContext?.roomId || annex.parentRoomId,
     positionX: Math.round(hubEngine.hubCommercialStateV71.returnContext?.x ?? saveSystem.data.hub.positionX),
     positionY: Math.round(hubEngine.annexReturnPoseV71?.y ?? hubEngine.restoreReturnPoseV71(annex).y),
     facing: hubEngine.hubCommercialStateV71.returnContext?.facing ?? hubEngine.player.facing,
@@ -3159,6 +3166,14 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:annex-station') {
+    if (interaction.action === 'service:ship-inspection-v137' && interaction.effect?.kind === 'ship-inspection') {
+      const readout = getHubShipStationReadoutV137(interaction.annexId);
+      if (!readout || readout.inspectionId !== interaction.stationId) return false;
+      const status = byId('hub-status');
+      if (status) status.textContent = `${readout.title.toUpperCase()} · ${readout.message}`;
+      toast(readout.message);
+      return true;
+    }
     return resolveAnnexStationV71(interaction);
   }
   if (interaction.action.startsWith('hub:vent-')) {

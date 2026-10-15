@@ -5,6 +5,7 @@ import { HUB_DECKS } from './hub-game.js';
 import { HUB_ENVIRONMENT_ATLAS_V134, getHubEnvironmentPanelV134 } from './hub-environment-atlas-v134.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getHubSpatialPlanV136, hubSpatialPlacementClearV136 } from './hub-spatial-design-v136.js';
+import { getHubRoomIdentityReservationsV137 } from './hub-room-identity-v137.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -119,18 +120,21 @@ export function getHubRearEquipmentLayoutV134(room, model, atlasImage, options =
   const baseScale=Math.min(1,300/source.w,112/source.h,(b.h-28)/source.h);
   const rearFootY=Math.min(b.y+b.h-10,room.id==='personal-refuge'?500:426);
   const spatial=getHubSpatialPlanV136(room,options), chosen=[];
+  const identityReservations=getHubRoomIdentityReservationsV137(room,options);
+  const coversIdentity=target=>identityReservations.some(b=>target.x<b.x+b.w&&target.x+target.w>b.x&&target.y<b.y+b.h&&target.y+target.h>b.y);
   const preferred=maximum===2?[.25,.75,.42,.58,.16,.84]:[.55,.3,.74,.43,.2,.82];
   const candidates=[...preferred,...Array.from({length:13},(_,index)=>.2+index*.05)];
   for(const fraction of candidates){
     if(chosen.length>=maximum)break;
     const index=chosen.length,scale=baseScale*(index===1?.92:1),w=source.w*scale,h=source.h*scale;
-    const target={x:b.x+b.w*fraction-w/2+model.layers[1].drift,y:rearFootY-h,w,h};
+    const socketBounds={x:b.x+b.w*fraction-w/2,y:rearFootY-h,w,h};
+    const target={...socketBounds,x:socketBounds.x+model.layers[1].drift};
     // Reserve the entire drift envelope: a cabinet may not slide through a
     // viewport, ladder, portal or neighbouring bay as the camera moves.
-    const envelope={...target,x:target.x-40,w:target.w+80};
-    if(!hubSpatialPlacementClearV136(envelope,spatial)||chosen.some(p=>target.x<p.target.x+p.target.w+24&&target.x+target.w>p.target.x-24))continue;
+    const envelope={...socketBounds,x:socketBounds.x-40,w:socketBounds.w+80};
+    if(!hubSpatialPlacementClearV136(envelope,spatial)||coversIdentity(envelope)||chosen.some(p=>target.x<p.target.x+p.target.w+24&&target.x+target.w>p.target.x-24))continue;
     chosen.push({ id:panel.id,asset:HUB_ENVIRONMENT_ATLAS_V134.asset,source:{...source},
-    target,scaleX:scale,scaleY:scale,
+    target,socketBounds,driftEnvelope:envelope,scaleX:scale,scaleY:scale,
     // The generated art contains no room labels or textual UI. Mirroring only
     // the second equipment bay varies pipe/rack silhouettes without touching
     // actual doors, interactable props, characters, or the room's signage.
@@ -212,6 +216,7 @@ export function withHubRoomParallaxV134(Base) {
           {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,clip,atlasImage:this.getHubEnvironmentAtlasImageV134(),
             ladders:annex.ladders,platforms:annex.platforms}), 'annex');
         this.drawHubSpatialRearV136?.(ctx,room);
+        this.drawHubRoomIdentityV137?.(ctx,room,{ladders:annex.ladders,platforms:annex.platforms});
       }
       return super.drawAnnexGeometryV71(ctx,annex);
     }

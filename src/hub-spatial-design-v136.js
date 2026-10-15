@@ -1,5 +1,6 @@
 import { HUB_DECKS } from './hub-game.js';
-import { HUB_ANNEXES_V87 } from './hub-annex-registry-v87.js';
+import { HUB_ANNEXES_V137 } from './hub-annex-registry-v137.js';
+import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionsForRoomV137, getHubShipConnectionsForSpaceV137 } from './hub-ship-layout-v137.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
@@ -56,12 +57,14 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platform
     x: door.x - (door.lift ? 92 : 80), y: floorY - (door.lift ? 198 : 270),
     w: door.lift ? 184 : 160, h: door.lift ? 214 : 286
   }, door.lift ? 'lift-entrance' : 'transverse-bulkhead', 8);
-  for (const annex of HUB_ANNEXES_V87.filter(a => a.parentRoomId === room.id)) {
+  for (const annex of HUB_ANNEXES_V137.filter(a => a.parentRoomId === room.id && !HUB_SHIP_SPACE_BY_ID_V137[a.id])) {
     const entry = HUB_ANNEX_ENTRANCES_V133[annex.id];
     const bounds = annex.parentDoorBounds || entry && { x: x + entry.centerX - annex.entrance.w / 2,
       y: entry.bottom - annex.entrance.h, w: annex.entrance.w, h: annex.entrance.h };
     reserve(bounds, 'annex-entrance', 22);
   }
+  for (const connection of getHubShipConnectionsForRoomV137(room.id)) reserve(connection.parentDoorBounds, 'ship-service-entrance', 22);
+  for (const connection of getHubShipConnectionsForSpaceV137(room.id)) reserve(connection.annexDoorBounds, 'ship-service-return', 22);
   if (room.entrance) reserve({ ...room.entrance, x: x + room.entranceLocalX - room.entrance.w / 2 }, 'return-entrance', 22);
   for (const ladder of ladders) {
     const width = finite(ladder.w, 52), left = ladder.x - (ladder.centered === false || room.world ? 0 : width / 2);

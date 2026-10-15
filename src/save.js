@@ -32,10 +32,10 @@ import {
   HUB_COMMERCIAL_SCHEMA_V71,
 } from './tantalus-hub-expansion-v71.js';
 import {
-  HUB_ANNEX_BY_ID_V87 as HUB_ANNEX_BY_ID_V71,
-  createHubCommercialStateV87 as createHubCommercialStateV71,
-  sanitizeHubCommercialStateV87 as sanitizeHubCommercialStateV71
-} from './hub-annex-registry-v87.js';
+  HUB_ANNEX_BY_ID_V137 as HUB_ANNEX_BY_ID_V71,
+  createHubCommercialStateV137 as createHubCommercialStateV71,
+  sanitizeHubCommercialStateV137 as sanitizeHubCommercialStateV71
+} from './hub-annex-registry-v137.js';
 import {
   createHubAnnexOperationsV71,
   sanitizeHubAnnexOperationsV71,

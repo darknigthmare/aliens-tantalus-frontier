@@ -9,6 +9,10 @@ import { createDefaultSave } from '../src/save.js';
 import { HUB_DECKS } from '../src/hub-game.js';
 import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
 import { getHubInteractionPropBoundsV136 } from '../src/hub-prop-placements-v136.js';
+import { HUB_PROP_ATLAS_V136 } from '../src/hub-prop-atlas-v136.js';
+import { HUB_FURNISHING_ATLAS_V137 } from '../src/hub-furnishing-atlas-v137.js';
+
+const FURNISHING_IMAGE_SOURCES_V137 = Object.freeze([HUB_PROP_ATLAS_V136.asset, HUB_FURNISHING_ATLAS_V137.asset]);
 
 // Four distinct browser journeys exercise navigation, authored composition,
 // human animation, and touch/reflow. They are automated perspectives, not four
@@ -94,7 +98,9 @@ function inspectComposition(state) {
   assert.ok(architecture?.active && life?.active);
   assert.equal(architecture.gameplayPlane, '2d'); assert.equal(architecture.current.planes.walkY, 624);
   assert.equal(life.current.roomId, state.annex || state.room); assert.ok(life.current.items.length >= 2);
-  assert.ok(life.current.items.some(item => item.source === '/assets/openai/hub/props/v136/service-prop-atlas.png'), 'An original supply prop must actually be drawn.');
+  assert.ok(life.current.items.some(item => FURNISHING_IMAGE_SOURCES_V137.includes(item.source)), 'An original V136 or V137 furnishing image must actually be drawn.');
+  assert.deepEqual(life.current.furnishingV137?.pendingImageRoles, [], 'Every assigned furnishing image must finish painting.');
+  assert.ok(life.current.furnishingV137.paintedRoles.length > 0, 'At least one new furnishing role must actually paint.');
   for (const item of life.current.items) {
     assert.ok(Object.values(item.bounds).every(Number.isFinite)); assert.ok(item.bounds.w > 0 && item.bounds.h > 0);
     assert.equal(item.collidable, false); assert.equal(item.interactive, false); assert.equal(item.plane, 'rear');
@@ -155,7 +161,11 @@ async function compositionJourney() {
   const ctx = await context();
   for (const id of ['vehicle-bay', 'dropship-hangar', 'medical', 'mess', 'combat-information']) {
     await importIdle(fixture(id, 280));
-    await page.waitForFunction(() => globalThis.__ATF_HUB__?.getSnapshot().hubRoomLifeV136?.current?.items.some(item => item.source === '/assets/openai/hub/props/v136/service-prop-atlas.png'));
+    await page.waitForFunction(sources => {
+      const current = globalThis.__ATF_HUB__?.getSnapshot().hubRoomLifeV136?.current;
+      return current?.items.some(item => sources.includes(item.source))
+        && current.furnishingV137?.pendingImageRoles.length === 0 && current.furnishingV137.paintedRoles.length > 0;
+    }, FURNISHING_IMAGE_SOURCES_V137);
     const start = await capture(`composition-${id}-start`); safe(start);
     const room = HUB_DECKS[start.deck].rooms.find(r => r.id === id);
     await walkTo(room.xStart + 950); const end = await capture(`composition-${id}-end`); assert.equal(end.room, id);

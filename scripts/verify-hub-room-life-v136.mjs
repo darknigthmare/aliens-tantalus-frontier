@@ -8,6 +8,7 @@ import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
 import { resolveHubVehicleArtV58 } from '../src/hub-art-runtime-v58.js';
 import { DROPSHIP_HANGAR_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { HUB_PROP_ATLAS_V136 } from '../src/hub-prop-atlas-v136.js';
+import { HUB_FURNISHING_ATLAS_V137 } from '../src/hub-furnishing-atlas-v137.js';
 import { fitHubPropBoundsV136,getHubPropHeightV136,getHubInteractionPropBoundsV136,
   mapHubPropColliderV136,getHubVehiclePlacementV136 } from '../src/hub-prop-placements-v136.js';
 import { HUB_ROOM_LIFE_V136,getHubRoomLifePlanV136,getHubRoomLifeMotionV136,
@@ -38,7 +39,8 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
   for(const room of rooms){
     const options=optionsFor(room),plan=getHubRoomLifePlanV136(room,options);
     assert.deepEqual(getHubRoomLifePlanV136(room,options),plan);
-    assert.ok(plan.items.length>=(room.id==='dropship-hangar'?3:4),room.id);assert.ok(plan.supplies.length>=1,room.id);
+    assert.ok(plan.items.length>=(room.id==='dropship-hangar'?3:4),room.id);
+    assert.ok(plan.items.some(item=>item.asset===HUB_PROP_ATLAS_V136.asset||item.asset===HUB_FURNISHING_ATLAS_V137.asset),room.id);
     total+=plan.items.length;
     for(const entry of plan.items){
       assert.ok(entry.w>0&&entry.h>0&&entry.h<=112,room.id);
@@ -46,7 +48,9 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
       assert.equal(entry.projectionDxPerY,19/12);
       assert.ok(!plan.spatial.reservations.some(r=>overlap(entry,r)),`${room.id}:${entry.kind} occupies a critical socket`);
       if(entry.support==='rear-floor')near(entry.y+entry.h,plan.spatial.planes.rearServiceY);
-      if(entry.cell){usedCells.add(entry.cell);assert.ok(entry.w<=84,`${room.id} enlarges the small atlas`);
+      if(entry.cell){
+        if(entry.asset===HUB_PROP_ATLAS_V136.asset){usedCells.add(entry.cell);assert.ok(entry.w<=84,`${room.id} enlarges the small atlas`);}
+        else{const cell=HUB_FURNISHING_ATLAS_V137.cells[entry.cell];assert.ok(cell,entry.cell);assert.ok(entry.w<=cell.maximumWidth,`${room.id} enlarges the furnishing`);}
         near(entry.w/entry.h,entry.source.w/entry.source.h);}
     }
     for(let a=0;a<plan.items.length;a++)for(let b=a+1;b<plan.items.length;b++)assert.ok(!overlap(plan.items[a],plan.items[b]),room.id);
@@ -125,19 +129,21 @@ test('generic bounds mapping preserves inset supports and rejects impossible pro
   assert.equal(getHubVehiclePlacementV136({},{}),null);
 });
 
-test('actual rendering crops the admitted atlas, reports painted equipment and leaves the scene untouched',()=>{
-  const atlas={complete:true,naturalWidth:HUB_PROP_ATLAS_V136.width,naturalHeight:HUB_PROP_ATLAS_V136.height},images=new Map([[HUB_PROP_ATLAS_V136.asset,atlas]]);
+test('actual rendering crops both admitted atlases, reports painted equipment and leaves the scene untouched',()=>{
+  const atlas={complete:true,naturalWidth:HUB_PROP_ATLAS_V136.width,naturalHeight:HUB_PROP_ATLAS_V136.height},
+    furnishingAtlas={complete:true,naturalWidth:HUB_FURNISHING_ATLAS_V137.width,naturalHeight:HUB_FURNISHING_ATLAS_V137.height},
+    images=new Map([[HUB_PROP_ATLAS_V136.asset,atlas],[HUB_FURNISHING_ATLAS_V137.asset,furnishingAtlas]]);
   let imagesDrawn=0;
   for(const room of rooms){
     const subject=renderer(),before=structuredClone(room),report=drawHubRoomLifeV136(subject.ctx,room,{...optionsFor(room),images,time:17});
-    const atlasPaints=subject.calls.filter(c=>c[0]==='image'&&c[1]===atlas);imagesDrawn+=atlasPaints.length;
+    const atlasPaints=subject.calls.filter(c=>c[0]==='image'&&(c[1]===atlas||c[1]===furnishingAtlas));imagesDrawn+=atlasPaints.length;
     assert.ok(atlasPaints.length>=1,room.id);
     for(const call of atlasPaints){
       assert.equal(call.length,10);const [sx,sy,sw,sh,x,y,w,h]=call.slice(2);
       assert.ok(sx>=0&&sy>=0&&sx+sw<=atlas.naturalWidth&&sy+sh<=atlas.naturalHeight);
       near(w/h,sw/sh);assert.ok([x,y,w,h].every(Number.isFinite));
     }
-    assert.equal(report.items.filter(i=>i.source===HUB_PROP_ATLAS_V136.asset).length,atlasPaints.length);
+    assert.equal(report.items.filter(i=>[HUB_PROP_ATLAS_V136.asset,HUB_FURNISHING_ATLAS_V137.asset].includes(i.source)).length,atlasPaints.length);
     for(const item of report.items){assert.ok(item.motif);assert.equal(item.anchor.y,item.bounds.y+item.bounds.h);}
     assert.deepEqual(room,before);subject.balanced();
   }

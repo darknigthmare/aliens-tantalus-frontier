@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { auditWeaponPngV120 } from './audit-weapon-png-v120.mjs';
-import { HUB_ENVIRONMENT_ATLAS_V134, getHubEnvironmentPanelV134 } from '../src/hub-environment-atlas-v134.js';
+import { HUB_ENVIRONMENT_ATLAS_V134, HUB_ENVIRONMENT_ROOM_THEMES_V134, getHubEnvironmentPanelV134 } from '../src/hub-environment-atlas-v134.js';
 import { HUB_AUTHORED_COMPOSITIONS_V133 } from '../src/hub-authored-composition-v133.js';
 
 const atlas = HUB_ENVIRONMENT_ATLAS_V134;
@@ -28,11 +28,15 @@ test('the four source crops retain every visible equipment pixel without neighbo
   for (const count of coverage) assert.ok(count > 200000, 'Each panel must contain a complete equipment bay.');
 });
 
-test('all reviewed rooms resolve physical rear equipment while unknown rooms stay unadmitted', () => {
-  for (const id of Object.keys(HUB_AUTHORED_COMPOSITIONS_V133)) {
+test('reviewed historical equipment themes resolve their panels while unassigned rooms stay unadmitted', () => {
+  assert.equal(Object.keys(HUB_ENVIRONMENT_ROOM_THEMES_V134).length, 29);
+  for (const id of Object.keys(HUB_ENVIRONMENT_ROOM_THEMES_V134)) {
+    assert.ok(HUB_AUTHORED_COMPOSITIONS_V133[id], id);
     const p = getHubEnvironmentPanelV134(id);
     assert.ok(p, id); assert.equal(p.plane, 'rear-equipment');
     assert.equal(p.collidable, false); assert.equal(p.interactive, false);
   }
+  for (const id of Object.keys(HUB_AUTHORED_COMPOSITIONS_V133).filter(id => !Object.hasOwn(HUB_ENVIRONMENT_ROOM_THEMES_V134, id)))
+    assert.equal(getHubEnvironmentPanelV134(id), null, `${id}: dedicated furnishings must not silently acquire a historical equipment bay`);
   assert.equal(getHubEnvironmentPanelV134('unknown'), null);
 });
