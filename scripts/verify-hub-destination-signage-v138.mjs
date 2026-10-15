@@ -6,6 +6,7 @@ import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
 import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { HubGame } from '../src/hub-opening-v88.js';
 import { getHubRecessedPortalV136 } from '../src/hub-spatial-design-v136.js';
+import { getHubDoorFaceV142 } from '../src/hub-door-passage-v142.js';
 import { getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { HUB_DESTINATION_CONNECTIONS_V138, getHubDoorDestinationDescriptorsV138,
   getHubDestinationSignPlansV138, getHubDestinationSignReservationsV138 } from '../src/hub-destination-signage-v138.js';
@@ -47,7 +48,12 @@ test('thirty-eight new plaques use the actual rendered portal top and delegate t
   assert.equal(getHubDoorDestinationDescriptorsV138(rooms.find(room => room.id === 'maintenance-spine')).filter(d => d.delegatedToV137).length, 2);
   assert.deepEqual(getHubDestinationSignPlansV138(rooms[0]), [], 'An unknown renderer target must never be guessed.');
   for (const room of rooms) for (const sign of plans(room)) {
-    assert.deepEqual(sign.portalTarget, getHubRecessedPortalV136(sign.socket).target);
+    const connection = HUB_DESTINATION_CONNECTIONS_V138.find(entry => entry.id === sign.connectionId);
+    const annex = HUB_ANNEXES_V137.find(entry => entry.id === connection.spaceId);
+    const expected = sign.connectionId === 'personal-refuge'
+      ? getHubDoorFaceV142(sign.socket, sign.face === 'parent' ? connection.annexSocket : connection.parentSocket, annex.art.alphaBounds.door).target
+      : getHubRecessedPortalV136(sign.socket).target;
+    assert.deepEqual(sign.portalTarget, expected);
     assert.equal(sign.interactive, false); assert.equal(sign.collidable, false); assert.equal(sign.cameraFactor, 1);
     assert.equal(sign.projection, 'orthographic-wall-plaque');
     const reserve = getHubDestinationSignReservationsV138(room, options).find(entry => entry.sourceId === sign.id);
@@ -71,7 +77,7 @@ test('destination frames stay clear of actual vents, ladder rails and traversal 
   assert.equal(checked, 38);
 });
 
-test('the upper sanitary sign clears the room header and the two crowded lower doors mount on their real structural fascia', () => {
+test('the sanitary and relocated REFUGE signs clear their actual portals while the arrival sign stays on its real structural fascia', () => {
   const quarters = HUB_DECKS[1].rooms[0], signs = plans(quarters);
   assert.equal(signs.length, 3);
   const sanitary = signs.find(sign => sign.destinationId === 'sanitary-bay');
@@ -79,7 +85,10 @@ test('the upper sanitary sign clears the room header and the two crowded lower d
   assert.equal(overlap(sanitary.frame, { x: 506, y: 186, w: 268, h: 48 }), false);
   const refuge = signs.find(sign => sign.destinationId === 'personal-refuge');
   const hangar = HUB_DECKS[3].rooms[0], arrival = plans(hangar).find(sign => sign.destinationId === 'arrival-airlock');
-  for (const sign of [refuge, arrival]) {
+  assert.equal(refuge.mount.kind, 'rear-wall-above-portal');
+  assert.ok(refuge.bounds.x >= 1150 && refuge.bounds.x + refuge.bounds.w <= 1268);
+  assert.ok(refuge.frame.y + refuge.frame.h < refuge.portalTarget.y);
+  for (const sign of [arrival]) {
     assert.equal(sign.mount.kind, 'native-landing-fascia');
     const deck = sign === refuge ? 1 : 3, surface = buildHubTraversalGeometryV87(deck).platforms.find(p => p.id === sign.mount.platformId);
     assert.ok(sign.bounds.x >= surface.x && sign.bounds.x + sign.bounds.w <= surface.x + surface.w);

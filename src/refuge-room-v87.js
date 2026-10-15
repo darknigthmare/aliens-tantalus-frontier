@@ -13,9 +13,10 @@ const portrait = REFUGE_PROPS_LAYOUT_V87.find(prop => prop.kind === 'portrait');
 export const SHIP_REFUGE_ANNEX_V87 = freeze({
   id: 'personal-refuge', name: 'REFUGE', shortName: 'REFUGE', kind: 'physical-annex', navigationKind: 'personal-refuge-annex',
   parentDeck: 'habitat', parentRoomId: 'crew-quarters', entranceSide: 'west', entranceLocalX: 144,
-  // Clear ground lane between the floor ladder x210 and the animal-care door
-  // x645..763. The quarters bunk collider x809..983 is not touched or disabled.
-  parentDoorBounds: { x: 380, y: 520, w: 118, h: 104 },
+  // The native frame stands in the clear east bay after the bedside stool
+  // (ends1142), before the transverse section (starts1272). The low catwalk
+  // at500..520 no longer crosses its full human-height visible frame.
+  parentDoorBounds: { x: 1150, y: 520, w: 118, h: 104 },
   entrance: { id: 'personal-refuge-door', x: 144, y: 520, w: 118, h: 104, bidirectional: true },
   world: { width: 1920, height: 720, floorY: 624, floorHeight: 96, playerClearanceWidth: 112, playerClearanceHeight: 104 },
   station: { id: 'refuge-portrait-station', label: 'Portrait personnel', action: 'refuge:portrait',

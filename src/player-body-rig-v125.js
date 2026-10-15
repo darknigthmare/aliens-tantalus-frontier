@@ -68,7 +68,17 @@ const combatShoulders = [
   [103,1086,141,1073], [450,1094,488,1100], null, null
 ];
 
-function measuredFrames(bounds, shoulders, standingHeight) {
+// Register the body on its measured belt, independently of each source cell's
+// nominal centre and of its swinging boot pixels. The old nominal centre was
+// 16.75 source pixels to the right of the neutral belt: at native game size it
+// put the resting thorax ~6.4px beside the solved legs. Aim and accepted-shot
+// resolution use this same registration, so the real projectile follows the
+// rendered weapon when the whole upper body is recentered.
+export const PLAYER_BODY_LATERAL_SUPPORTS_V142 = freeze({
+  locomotion:[140,454,768,1082,151,464,778,1091,136,449,753,1075,128,448],
+  combat:{3:1076}
+});
+function measuredFrames(bounds, shoulders, standingHeight, lateralSupports) {
   return bounds.map(([left, top, right, bottom], index) => {
     const guard = 4;
     const x = Math.max(0, left - guard), y = Math.max(0, top - guard);
@@ -76,17 +86,16 @@ function measuredFrames(bounds, shoulders, standingHeight) {
       height: Math.min(NATIVE_SIZE, bottom + guard) - y };
     const joint = shoulders[index];
     return freeze({ index, alphaBounds: [left, top, right, bottom], source,
-      // Keep the reference cell's lateral support axis. Following the mean
-      // pixels of a swinging boot would shift the torso by 20px every stride.
-      support: { x: (index % 4 + .5) * NATIVE_SIZE / 4, y: bottom },
+      support: { x: finite(lateralSupports?.[index],(index % 4 + .5) * NATIVE_SIZE / 4), y: bottom },
       sourceShoulders: joint ? { near: point(joint[0], joint[1]), far: point(joint[2], joint[3]) } : null,
-      standingHeight, eligible: Boolean(joint), supportMethod: 'native-bottom-and-reference-cell-axis' });
+      standingHeight, eligible: Boolean(joint), supportMethod: Number.isFinite(lateralSupports?.[index])
+        ? 'native-bottom-and-measured-belt-axis' : 'native-bottom-and-reference-cell-axis' });
   });
 }
 
 export const PLAYER_BODY_RIG_FRAMES_V125 = freeze({
-  locomotion: measuredFrames(locomotionBounds, locomotionShoulders, 252),
-  combat: measuredFrames(combatBounds, combatShoulders, 248)
+  locomotion: measuredFrames(locomotionBounds, locomotionShoulders, 252,PLAYER_BODY_LATERAL_SUPPORTS_V142.locomotion),
+  combat: measuredFrames(combatBounds, combatShoulders, 248,PLAYER_BODY_LATERAL_SUPPORTS_V142.combat)
 });
 
 const part = (bounds, proximal, distal) => {

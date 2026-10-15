@@ -242,7 +242,15 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   }
   // Neck is behind the selected collar; no old head remains underneath it.
   layers.push(layer('bare-head','head',null,HEAD_BACK,upright?'bare-head-upright':'bare-head-forward',headPart,headMatrix));
-  layers.push(layer('torso','torso',slots.torso,colonialTorso?.asset || UPPER,anatomical.family,torsoPart,torsoMatrix));
+  const belt=bodyRig.modularBeltV142;
+  // Separate the jacket at the actual trouser belt. The original full-body
+  // atlas's lower seam is below the femoral heads; leaving that old jacket
+  // tail over the new segmented legs buried their upper ends in the abdomen.
+  const beltClip=validPoint(belt) ? {clipPolygon:[point(belt.x-512, belt.y-512),
+    point(belt.x+512,belt.y-512),point(belt.x+512,belt.y+3*bodyRig.scale),
+    point(belt.x-512,belt.y+3*bodyRig.scale)],clipMatrix:{a:1,b:0,c:0,d:1,e:0,f:0},
+    sourceSeparation:'jacket-above-articulated-belt'} : {};
+  layers.push(layer('torso','torso',slots.torso,colonialTorso?.asset || UPPER,anatomical.family,torsoPart,torsoMatrix,beltClip));
   if(slots.helmet) {
     const colonialHelmet=getPlayerColonialHelmetV129(slots.helmet,bodyRig.facing);
     const p=colonialHelmet?.part || PLAYER_MODULAR_RIG_PARTS_V126.helmet[slots.helmet];

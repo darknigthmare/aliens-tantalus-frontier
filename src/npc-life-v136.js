@@ -5,6 +5,7 @@ import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visua
 import { getHubInteractionPropBoundsV136 } from './hub-prop-placements-v136.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141 } from './hub-annex-npc-life-v141.js';
 import { buildHubNpcInteractionEvent } from './hub-v52-runtime.js';
+import { getHubDoorDestinationDescriptorsV138 } from './hub-destination-signage-v138.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, finite(value, low)));
@@ -15,6 +16,14 @@ const blockedVertically = (actor, box) => box && box.collisionMode !== 'one-way-
   && [box.x, box.y, box.w, box.h].every(Number.isFinite) && box.w > 0 && box.h > 0
   && actor.y + actor.h > box.y + .001 && actor.y < box.y + box.h - .001;
 const NPC_STANDING_GAP = 12;
+
+// Rear-wall passages are walking bays, not idle work stations. Reserve their
+// real sockets when a cohort is built; moving crew may still cross them using
+// the ordinary physical controller and the door still checks live occupancy.
+const parentDoorBays = room => getHubDoorDestinationDescriptorsV138(room)
+  .filter(door => door.face === 'parent').map(door => door.socket);
+const clearsDoorBays = (actor, x, bays) => bays.every(box => !blockedVertically(actor, box)
+  || x + actor.w + NPC_STANDING_GAP <= box.x || x >= box.x + box.w + NPC_STANDING_GAP);
 
 function standingPeers(actor, peers) {
   const identity = actor.crewId || actor.id;
@@ -60,9 +69,11 @@ export function npcWorkAnchorV136(actor, room) {
   if (!box || ![box.x, box.w, room.xStart, room.xEnd].every(Number.isFinite)
     || actor.routinePhaseV62 !== 'work' || actor.mobile || room.id !== actor.roomId) return null;
   const middle = actor.x + actor.w / 2;
+  const doorBays = parentDoorBays(room);
   const candidates = [box.x - actor.w - 16, box.x + box.w + 16]
     .filter(x => x >= room.xStart + 96 && x + actor.w <= room.xEnd - 96
-      && Math.abs(x - actor.x) >= 28 && Math.abs(x - actor.x) <= 240)
+      && Math.abs(x - actor.x) >= 28 && Math.abs(x - actor.x) <= 240
+      && clearsDoorBays(actor, x, doorBays))
     .sort((a, b) => Math.abs(a + actor.w / 2 - middle) - Math.abs(b + actor.w / 2 - middle));
   return candidates[0] ?? null;
 }
@@ -75,7 +86,9 @@ export function spreadNpcStationSpawnsV136(npcs, rooms = []) {
     const npc = { ...source }, room = rooms.find(entry => entry.id === npc.roomId);
     if (!npc.mobile && room && Number.isFinite(npc.x)) {
       const low = room.xStart + 96, high = room.xEnd - npc.w - 96;
-      const free = x => !placed.some(peer => peer.roomId === npc.roomId && Math.abs(peer.y - npc.y) < 16
+      const doorBays = parentDoorBays(room);
+      const free = x => clearsDoorBays(npc, x, doorBays)
+        && !placed.some(peer => peer.roomId === npc.roomId && Math.abs(peer.y - npc.y) < 16
         && x < peer.x + peer.w + 14 && x + npc.w + 14 > peer.x);
       const base = clamp(npc.x, low, high);
       for (let offset = 0; offset <= room.xEnd - room.xStart; offset += 58) {

@@ -3,7 +3,6 @@ import { HUB_ANNEXES_V137 } from './hub-annex-registry-v137.js';
 import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionsForRoomV137, getHubShipConnectionsForSpaceV137 } from './hub-ship-layout-v137.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
-import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getHubInteractionPropBoundsV136, getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { resolveHubVehicleArtV58 } from './hub-art-runtime-v58.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
@@ -12,6 +11,7 @@ import { getHubDestinationSignReservationsV138 } from './hub-destination-signage
 import { getHubRoomPlaqueBoundsV134 } from './hub-room-dressing-v134.js';
 import { getHubSupportPlanesV139, getHubLadderMountV139 } from './hub-support-planes-v139.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
+import { drawHubElevatorDoorV142 } from './hub-elevator-interior-v142.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -196,9 +196,11 @@ export function getHubRecessedPortalV136(bounds, { maximumHeight = 156 } = {}) {
 
 function drawPortalSurround(ctx, model, active) {
   const b = model.target;
-  ctx.fillStyle = '#15272a'; ctx.fillRect(b.x - 7, b.y - 10, b.w + 14, b.h + 10);
-  ctx.strokeStyle = '#51696a'; ctx.lineWidth = 2; ctx.strokeRect(b.x - 6, b.y - 9, b.w + 12, b.h + 9);
-  ctx.fillStyle = '#0a1a1e'; ctx.fillRect(b.x - 2, b.y - 2, b.w + 4, b.h + 2);
+  // Slender fixings leave the native wall visible around the cutout. A full
+  // blue socket-sized plate made every transparent door look like a UI card.
+  ctx.fillStyle = '#41483e';
+  ctx.fillRect(b.x - 3, b.y + 12, 2, b.h - 12);
+  ctx.fillRect(b.x + b.w + 1, b.y + 12, 2, b.h - 12);
   ctx.fillStyle = active ? '#8db6a2' : '#657c76'; ctx.fillRect(b.x + 9, b.y - 6, Math.min(42, b.w - 18), 2);
   ctx.fillStyle = '#4a5e5b'; ctx.fillRect(b.x - 8, b.y + b.h - 1, b.w + 16, 3);
 }
@@ -257,6 +259,11 @@ export function withHubSpatialDesignV136(Base) {
     }
     drawDoorBitmapV71(ctx, image, bounds, active = 0, source = null) {
       if (this.editorPlaytest) return super.drawDoorBitmapV71(ctx, image, bounds, active, source, true);
+      const passage = this.drawHubPassageDoorV142?.(ctx, image, bounds, active, source);
+      if (passage) {
+        this.hubSpatialPortalsV136 ||= new Map(); this.hubSpatialPortalsV136.set(`${bounds.x}:${bounds.y}`, passage);
+        return true;
+      }
       const portal = getHubRecessedPortalV136(bounds);
       if (!portal) return super.drawDoorBitmapV71(ctx, image, bounds, active, source, true);
       ctx.save(); drawPortalSurround(ctx, portal, active);
@@ -271,13 +278,9 @@ export function withHubSpatialDesignV136(Base) {
       if (!ready(image)) return super.drawDoor(ctx, door, phase);
       const floor = 624, height = 156, width = height * image.naturalWidth / image.naturalHeight;
       const portal = getHubRecessedPortalV136({ x: door.x - width / 2, y: floor - height, w: width, h: height });
-      const b = portal.target, progress = Math.max(0, Math.min(1, finite(door.progress))), half = b.w / 2;
-      ctx.save(); drawPortalSurround(ctx, portal, progress > .5);
-      ctx.save(); ctx.beginPath(); ctx.rect(b.x, b.y, b.w, b.h); ctx.clip();
-      const drawable = resolveSpriteDrawableV134(image), sourceHalf = image.naturalWidth / 2, slide = progress * half;
-      ctx.drawImage(drawable, 0, 0, sourceHalf, image.naturalHeight, b.x - slide, b.y, half, b.h);
-      ctx.drawImage(drawable, sourceHalf, 0, sourceHalf, image.naturalHeight, b.x + half + slide, b.y, half, b.h);
-      ctx.restore();
+      const b = portal.target, progress = Math.max(0, Math.min(1, finite(door.progress)));
+      ctx.save();
+      const interior = drawHubElevatorDoorV142(ctx, image, b, progress);
       const playerX = this.player ? this.player.x + this.player.w / 2 : Number.NaN;
       if (Math.abs(playerX - door.x) < 520 && door.shaftLabel) {
         ctx.font = '700 10px ui-monospace, monospace';
@@ -286,7 +289,7 @@ export function withHubSpatialDesignV136(Base) {
         ctx.fillRect(door.x - textWidth / 2, b.y - 30, textWidth, 18);
         ctx.fillStyle = '#b7d1be'; ctx.textAlign = 'center'; ctx.fillText(door.shaftLabel, door.x, b.y - 17); ctx.textAlign = 'left';
       }
-      ctx.restore(); this.hubSpatialLiftsV136 ||= new Map(); this.hubSpatialLiftsV136.set(door.id, { ...portal, progress });
+      ctx.restore(); this.hubSpatialLiftsV136 ||= new Map(); this.hubSpatialLiftsV136.set(door.id, { ...portal, progress, interior });
       return true;
     }
     getSnapshot() {

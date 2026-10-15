@@ -11,6 +11,7 @@ import { getHubFurnishingFootSourceV139, getHubFurnishingPlacementBoundsV139 } f
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 import { reviseHubAnnexFurnishingsV139 } from './hub-furnishing-annex-revisions-v139.js';
 import { getHubClinicalBayReservationsV139 } from './hub-clinical-bay-v139.js';
+import { extendHubRoomFurnishingsV142 } from './hub-room-composition-v142.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -28,7 +29,7 @@ const group = (task,items,replaceKinds=[]) => ({task,items,replaceKinds});
 /** Local sockets describe a job, never a seeded scatter. Large silhouettes
  * belong to their native station. This layer supplies small related storage,
  * work surfaces and service fittings behind the standing walking plane. */
-export const HUB_ROOM_FURNISHING_V137 = freeze({
+export const HUB_ROOM_FURNISHING_V137 = freeze(extendHubRoomFurnishingsV142({
   bridge: group('watch-seat-and-reference',[
     furnishing('seat-side',1027,40,'watch-officer-seat',{atlas:139}),wall('emergency-cabinet',1110,535,44,'bridge-fire-safety')
   ],['chair','chart-cart','case']),
@@ -45,7 +46,7 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
   ],['cable-run']), // The existing stasis manifold and reachable kit replace the loose line fragment.
   'crew-quarters': group('bolted-berth-and-personal-storage',[
     {...wall('crew-berth',440,376,154,'upper-crew-berth'),mountKindV139:'cantilever-berth'},
-    wall('emergency-cabinet',1100,535,38,'quarters-fire-safety'),equipment('stool',1128,28,32,'crew-bedside-table')
+    wall('emergency-cabinet',1100,520,38,'quarters-fire-safety'),equipment('stool',1100,28,32,'crew-bedside-table')
   ],['shelf','stool']),
   mess: group('galley-return-and-shared-dining',[
     furnishing('galley-unit',565,166,'galley-return-counter'),furnishing('food-refrigerator',930,78,'chilled-drink-storage')
@@ -164,7 +165,7 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
     wall('service-conduits',2110,290,220,'maintenance-east-feed'),wall('tool-board',2175,465,72,'maintenance-east-tools',136),
     wall('emergency-cabinet',620,535,42,'maintenance-west-emergency-kit'),wall('emergency-cabinet',2240,535,42,'maintenance-east-emergency-kit')
   ])
-});
+}));
 
 /** Reserve the complete camera drift, not only the current screenshot. A small
  * cabinet must never be pasted onto the monitors/pipes of a rear equipment bay. */
@@ -201,8 +202,14 @@ function materialize(definition,spatial) {
       w:definition.width,h:definition.height,contactYV139:spatial.planes.rearServiceY,cleanSurfaceV139:!!definition.cleanSurfaceV139};
   }
   if(definition.mountKindV139==='cantilever-berth')entry.mountBoundsV139={x:entry.x,y:entry.y-6,w:entry.w,h:entry.h+24};
+  if(definition.mountKindV142==='floor-pedestal-console'){
+    entry.mountBoundsV139={x:entry.x,y:entry.y,w:entry.w,h:spatial.planes.rearServiceY-entry.y};
+    entry.consoleSupportV142={kind:'floor-pedestal',footY:spatial.planes.rearServiceY,
+      panelBottomY:entry.y+entry.h,projection:'strict-side-elevation'};
+  }
   return {...entry,role:definition.role,support,plane:'rear',collidable:false,interactive:false,
     mirroredV139:!!definition.mirroredV139,mountKindV139:definition.mountKindV139||null,
+    ...(definition.mountKindV142?{mountKindV142:definition.mountKindV142}:{}),
     furnishingV137:true,perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
 }
 
@@ -269,7 +276,8 @@ export function enrichHubRoomCompositionV137(room, basePlan=null, options={}) {
     accent:basePlan?.accent||'#97aaa0',start:plan.bounds.x,width:plan.bounds.w,
     floorY:plan.planes.walkY,top:plan.planes.ceilingY,items,supplies,spatial:plan,legacyOmissionsV138,
     furnishingV137:{task:definition.task,added:added.map(item=>({role:item.role,cell:item.cell||null,
-      bounds:{x:item.x,y:item.y,w:item.w,h:item.h},support:item.support})),rejected,
+      bounds:{x:item.x,y:item.y,w:item.w,h:item.h},support:item.support,
+      ...(item.consoleSupportV142?{consoleSupportV142:{...item.consoleSupportV142},mountBoundsV139:{...item.mountBoundsV139}}:{})})),rejected,
       rearEquipmentReservations:equipmentReservations,structuralReservations,links,authored:true},
     collidable:false,interactive:false,gameplayPlane:'2d',sourceStatus:'authored-task-groups-and-original-separated-ship-furnishings'};
 }
@@ -305,6 +313,14 @@ export function drawHubFurnishingMountsV137(ctx,composition) {
         ctx.strokeStyle='#708881';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(bx,y+h+17);ctx.lineTo(bx+17,y+h-1);ctx.stroke();
       }
       ctx.fillStyle='#405c60';ctx.fillRect(x+5,y+h-3,w-10,5);
+    }else if(entry.consoleSupportV142?.kind==='floor-pedestal'){
+      const footY=entry.consoleSupportV142.footY,panelBottomY=entry.consoleSupportV142.panelBottomY;
+      const columnW=Math.max(12,Math.min(28,w*.38)),columnX=x+(w-columnW)/2;
+      ctx.fillStyle='#172b2e';ctx.fillRect(columnX,panelBottomY-1,columnW,Math.max(0,footY-panelBottomY+1));
+      ctx.fillStyle='#58716d';ctx.fillRect(columnX+1,panelBottomY,columnW-2,Math.max(0,footY-panelBottomY-5));
+      ctx.fillStyle='#2c4446';ctx.fillRect(columnX+4,panelBottomY+2,Math.max(1,columnW-8),Math.max(0,footY-panelBottomY-9));
+      ctx.fillStyle='#263d40';ctx.fillRect(x+6,footY-5,w-12,5);
+      ctx.fillStyle='#82918a';ctx.fillRect(x+7,footY-5,w-14,1);
     }else{
       ctx.fillStyle='#172d31';ctx.fillRect(x+3,y+h-2,w-6,4);
       ctx.fillStyle='#536a66';ctx.fillRect(x+5,y+h-1,w-10,1);

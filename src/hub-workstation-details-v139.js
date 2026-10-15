@@ -12,9 +12,9 @@ const profile=(purpose,slots=[],reason=null)=>({purpose,slots,reason,interactive
  * omits its detail explicitly; another empty wall is never invented as a host.
  * The three already busy flight/range/through-route spaces keep their access. */
 export const HUB_WORKSTATION_DETAILS_V139=freeze({
-  bridge:profile('navigation-watch',[slot('document-binders','native-service',.78)]),
+  bridge:profile('navigation-watch',[slot('document-binders','bridge-watch-reference-counter',.2)]),
   briefing:profile('briefing-reference',[slot('document-binders','native-service',.3)]),
-  'combat-information':profile('watch-handover',[slot('document-binders','native-service',.82)]),
+  'combat-information':profile('watch-handover',[slot('document-binders','tactical-watch-reference-counter',.82)]),
   'cryo-bay':profile('capsule-linen',[slot('folded-linen','stasis-clean-linen-cart')]),
   'crew-quarters':profile('personal-reading',[slot('book-and-mug','crew-bedside-table')]),
   mess:profile('shared-meal',[slot('meal-tray','native-service',.24),slot('meal-tray','native-service',.72)]),
@@ -27,7 +27,7 @@ export const HUB_WORKSTATION_DETAILS_V139=freeze({
   'dropship-hangar':profile('clear-boarding-bay',[],'Flight support remains on the existing gantry, outside the aircraft silhouette.'),
   reactor:profile('electrical-isolation',[slot('spare-fittings-tray','reactor-service-chest')]),
   'life-support':profile('filter-replacement',[slot('filter-cartridges','air-filter-service-counter')]),
-  'sensor-array':profile('signal-calibration',[slot('electronic-test-meter','native-service',.78)]),
+  'sensor-array':profile('signal-calibration',[slot('electronic-test-meter','array-calibration-counter',.78)]),
   'arrival-airlock':profile('clean-return',[slot('folded-linen','arrival-equipment-bench')]),
   logistics:profile('freight-handling',[slot('spare-fittings-tray','freight-packing-counter')]),
   'mire-archives':profile('physical-evidence',[slot('document-binders','evidence-sorting-cart')]),

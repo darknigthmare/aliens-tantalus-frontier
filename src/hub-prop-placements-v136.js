@@ -2,6 +2,7 @@ import { getHubSupportPlanesV139 } from './hub-support-planes-v139.js';
 import { HUB_FURNITURE_ATLAS_V139, getHubFurnitureCellV139 } from './hub-furniture-atlas-v139.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 import { getHubDropshipHangarPlacementV139 } from './hub-dropship-hangar-art-v139.js';
+import { getHubConsoleStationCellV142 } from './hub-console-stations-v142.js';
 
 /** One physical size contract for the ship's existing equipment. The reference
  * is the 96.5px standing human; source images keep one uniform scale. Coordinates
@@ -116,7 +117,7 @@ export function getHubNativePropPlacementV139({id,xStart=0,centerX,walkY=624,ass
   // Every native prop follows the projection selected for its whole room.
   // A frontal bitmap is never silently admitted as an oblique alternative.
   const family=furnitureFamily[id],cellId=family?`${family}-${view==='strict-side'?'side':'oblique'}`:null;
-  const cell=artCell===undefined?(cellId&&getHubFurnitureCellV139(cellId)):artCell;
+  const cell=artCell===undefined?(getHubConsoleStationCellV142(id)||(cellId&&getHubFurnitureCellV139(cellId))):artCell;
   const measured=HUB_NATIVE_PROP_SOURCES_V139[id]||{};
   const source=cell?.source?{...cell.source}:Array.isArray(sourceBounds)?sourceRect(sourceBounds):
     measured.crop?sourceRect(measured.crop):{x:0,y:0,w:sourceSize.width,h:sourceSize.height};
@@ -137,8 +138,9 @@ export function getHubNativePropPlacementV139({id,xStart=0,centerX,walkY=624,ass
     scale=measured.interiorHeight/capacitySource.h;sizing={criterion:'standing-clear-interior',target:measured.interiorHeight};
   }else if(bounds(capacitySource)&&measured.capacity==='lying-adult'){
     scale=measured.interiorLength/capacitySource.w;sizing={criterion:'lying-clear-interior',target:measured.interiorLength};
-  }else if(bounds(surfaceSource)&&measured.workHeight&&footSourceY>surfaceSource.y){
-    scale=measured.workHeight/(footSourceY-surfaceSource.y);sizing={criterion:'useful-worktop-height',target:measured.workHeight};
+  }else if(bounds(surfaceSource)&&(cell?.workHeight||measured.workHeight)&&footSourceY>surfaceSource.y){
+    const workHeight=cell?.workHeight||measured.workHeight;
+    scale=workHeight/(footSourceY-surfaceSource.y);sizing={criterion:'useful-worktop-height',target:workHeight};
   }
   if(!(scale>0&&Number.isFinite(scale)))return null;
   const localCenter=finite(HUB_NATIVE_PROP_SOCKETS_V139[id],finite(centerX,640));
@@ -147,7 +149,7 @@ export function getHubNativePropPlacementV139({id,xStart=0,centerX,walkY=624,ass
   const usefulBounds=projectHubNativePartV139(surfaceSource,sourceExtent,renderBounds);
   const inspectionX=usefulBounds?usefulBounds.x+usefulBounds.w/2:worldCenter;
   const usefulSurface=usefulBounds?{id:`${id}-useful-surface`,kind:id==='medical'?'mattress':
-    ['bridge','combat-information','sensor-array'].includes(id)?'console':'worktop',bounds:usefulBounds,
+    ['bridge','combat-information','sensor-array','science-lab'].includes(id)?'console':'worktop',bounds:usefulBounds,
     supportY:usefulBounds.y,side:id==='medical'?'visible-long-side':'visible-front',
     source:{...surfaceSource},occupied:measured.occupied&&!cell?[{...usefulBounds}]:
       (cell?.occupiedSource||[]).map(part=>projectHubNativePartV139(part,sourceExtent,renderBounds)).filter(Boolean)}:null;
@@ -177,7 +179,8 @@ export function getHubNativePropPlacementV139({id,xStart=0,centerX,walkY=624,ass
     view,artProjection,supportPlanes:planes,
     opaqueFoot:{x0:renderBounds.x,x1:renderBounds.x+renderBounds.w,y:planes.rearServiceY,sourceY:footSourceY},
     tableHeight:usefulSurface?planes.rearServiceY-usefulSurface.supportY:null,sizing:{...sizing,scale},
-    sourceStatus:cell?'original-separated-furniture':'measured-original-native-crop',
+    sourceStatus:cell?(cell.sourceStatus||'original-separated-furniture'):'measured-original-native-crop',
+    ...(cell?.stationSupportV142?{stationSupportV142:cell.stationSupportV142,sourceCellIdV142:cell.sourceCellId}:{}),
     artReady,capacity:measured.capacity||null,
     functionalRole:id==='briefing'?'tactical-standing-planning-table':id==='medical'?'clinical-treatment-bed':
       id==='mess'?'shared-dining-table':id==='workshop'?'repair-workbench':`${id}-service-station`};
