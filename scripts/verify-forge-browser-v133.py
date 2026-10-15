@@ -24,9 +24,11 @@ def main():
     html = host.build_offline_html(ROOT) if args.offline else None
     class Handler(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *_): pass
-    server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Handler, directory=str(ROOT)))
-    threading.Thread(target=server.serve_forever, daemon=True).start()
-    url = f'http://127.0.0.1:{server.server_port}/scripts/fixtures/forge-v130.html'
+    server = None; url = ''
+    if not args.offline:
+        server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Handler, directory=str(ROOT)))
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        url = f'http://127.0.0.1:{server.server_port}/scripts/fixtures/forge-v130.html'
     results = []; errors = []
     def check(name, passed):
         results.append({'name': name, 'passed': bool(passed)})
@@ -48,7 +50,7 @@ def main():
                 box = page.locator('#editor-canvas').bounding_box(); m = page.evaluate('forgeEditor.matrix()')
                 return box['x'] + (m['x']+(x+.5)*m['scale']) / 1280 * box['width'], box['y'] + (m['y']+(y+.5)*m['scale']) / 720 * box['height']
             page.evaluate("localStorage.setItem('atf-v47-profile-1','unaltered-campaign')")
-            check('four editor workbench tabs are present', page.locator('.forge-tabs-v133 [data-tab]').count() == 4)
+            check('four historical tabs and the V134 explorer are present', page.locator('.forge-tabs-v133 [data-tab]').count() == 5)
             tab('assemblies')
             check('ten original assembly modules are available', act('assembly-choose').count() == 10)
             page.click('[data-assembly="builtin-terminal"]'); act('stamp').click()
@@ -140,6 +142,7 @@ def main():
             check('PNG export produces a real image file', file.read_bytes().startswith(b'\x89PNG'))
             records = page.evaluate('localStorage.dump()') if args.offline else None
             load(page, records) if args.offline else page.reload()
+            page.wait_for_function('!!window.forgeEditor?.workbenchV133')
             page.wait_for_function('!!forgeEditor.workspaceV133')
             check('workspace projects survive fixture reload', page.evaluate('forgeStore.data.projects.length') == 6)
             check('personal assemblies survive fixture reload', page.evaluate('forgeEditor.workbenchV133.library.data.entries.length') == 2)
@@ -153,7 +156,7 @@ def main():
             check('no uncaught browser errors',not errors)
             browser.close()
     finally:
-        server.shutdown();server.server_close()
+        if server: server.shutdown();server.server_close()
         (out/'results.json').write_text(json.dumps({'scope':'offline-native-modules-memory-storage' if args.offline else 'http-native-storage','checks':len(results),'results':results,'errors':errors},indent=2,ensure_ascii=False))
     print(json.dumps({'passed':len(results),'output':str(out)}))
 if __name__=='__main__': main()

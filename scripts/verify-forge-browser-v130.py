@@ -19,9 +19,11 @@ root=Path(__file__).resolve().parents[1]
 out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
 class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self,*_): pass
-server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(root)))
-thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
-url=f'http://127.0.0.1:{server.server_port}/scripts/fixtures/forge-v130.html'
+server=None;url=''
+if not args.offline:
+    server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(root)))
+    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+    url=f'http://127.0.0.1:{server.server_port}/scripts/fixtures/forge-v130.html'
 results=[]
 if args.offline:
     from importlib.util import spec_from_file_location,module_from_spec
@@ -115,6 +117,6 @@ try:
         check('no uncaught browser errors',not errors)
         browser.close()
 finally:
-    server.shutdown();server.server_close()
+    if server: server.shutdown();server.server_close()
     (out/'browser-results.json').write_text(json.dumps({'checks':len(results),'mode':'offline-memory-storage' if args.offline else 'http-native-storage','results':results},ensure_ascii=False,indent=2))
 print(json.dumps({'checks':len(results),'passed':sum(r['passed'] for r in results),'output':str(out)},ensure_ascii=False))

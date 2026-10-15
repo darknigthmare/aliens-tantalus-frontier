@@ -1,11 +1,39 @@
-/** V133 authoring workspace. Keeps the V62 namespace and legacy import contract. */
-import { ForgeSaveSystemV62 as BaseStore, sanitizeForgeProjectV62, sanitizeForgeSaveV62 } from './forge-save-v62-base.js';
+/** V133 workspace controls with a V134 default namespace and non-destructive legacy copying. */
+import { ForgeSaveSystemV62 as BaseStore, sanitizeForgeProjectV62, sanitizeForgeSaveV62, FORGE_SAVE_KEY_V62 as FORGE_LEGACY_SAVE_KEY_V62 } from './forge-save-v62-base.js';
 import { ForgeModel, parseProject, clone } from './forge-model-v130.js';
 export * from './forge-save-v62-base.js';
+export const FORGE_SAVE_KEY_V134 = 'atf-frontier-forge-workspace-v134';
+// Existing callers importing the default key must follow the default store.
+export const FORGE_SAVE_KEY_V62 = FORGE_SAVE_KEY_V134;
+export { FORGE_LEGACY_SAVE_KEY_V62 };
 let activeForgeStoreV133 = null;
 export function getForgeStoreV133() { return activeForgeStoreV133; }
 export class ForgeSaveSystemV62 extends BaseStore {
-  constructor(...args) { super(...args); activeForgeStoreV133 = this; }
+  constructor(storage, key = FORGE_SAVE_KEY_V134) { super(storage, key); activeForgeStoreV133 = this; }
+  load(options = {}) {
+    this.legacyRawV134 = undefined;
+    // New durable namespace is never written by older Forge releases. Copy, never move.
+    if (this.key === FORGE_SAVE_KEY_V134) {
+      let current, legacy;
+      try { current = this.storage?.getItem(this.key) ?? null; legacy = this.storage?.getItem(FORGE_LEGACY_SAVE_KEY_V62) ?? null; }
+      catch { return super.load(options); }
+      if (current === null && legacy !== null) {
+        this.expectedRawV130 = null;
+        try { this.data = readWorkspaceV133(legacy); }
+        catch (error) {
+          this.recoveryNeededV130 = true; this.legacyRawV134 = legacy;
+          this.statusV130(false, `Ancien espace conservé : ${error.message}`);
+          return { save: this.data, recoveryNeeded: true, migratedV134: false, imported: 0 };
+        }
+        this.recoveryNeededV130 = false;
+        this.commit(options.now ?? Date.now());
+        return { save: this.data, recoveryNeeded: false, migratedV134: this.lastWriteV130.persisted, imported: 0 };
+      }
+    }
+    return super.load(options);
+  }
+  import(text, now) { const result=super.import(text, now); this.legacyRawV134=undefined; return result; }
+  exportRawV130() { return this.legacyRawV134 ?? super.exportRawV130(); }
   upsert(project, now = Date.now()) {
     // app.js V130 used to replace names and choose a different ID on mode changes.
     // These transient hints are produced by the editor, stripped by the sanitizer,
@@ -36,7 +64,7 @@ export class ForgeWorkspaceV133 {
     const next = new ForgeModel(project), revision = this.editor.model.revision + 1;
     this.editor.cancelGesture(); this.editor.model = next; next.revision = revision;
     this.id = project.id; this.epoch++; this.editor.selection.clear(); this.editor.cursor = null;
-    this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh();
+    this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh(); this.editor.navigatorV134?.refresh();
     // History belongs to the document. Never undo a switch into another project.
   }
   commitCandidate(candidate, activeId) {

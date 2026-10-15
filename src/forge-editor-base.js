@@ -1,4 +1,4 @@
-import { ForgeModel, TILE_TYPES, DEFAULT_LAYER, LAYERS, clone, decorative, lineCells, rectangle, inside, serializeProject, validateProject } from './forge-model-v130.js';
+import { ForgeModel, TILE_TYPES, DEFAULT_LAYER, LAYERS, clone, decorative, lineCells, rectangle, inside, serializeProject, nativeTiles, validateProject } from './forge-model-v130.js';
 import { mountForgeUI } from './forge-ui-v130.js';
 export { TILE_TYPES } from './forge-model-v130.js';
 
@@ -44,15 +44,21 @@ export class LevelEditor {
   mutate(callback){return this.edit('Modifier le plan',callback);}
   edit(label,callback){this.cancelGesture();try{const changed=this.model.transaction(label,callback);if(changed)this.notify();else{this.ui?.refresh();this.draw();}return changed;}catch(error){this.report(error);throw error;}}
   notify(){
-    this.selection=new Set([...this.selection].filter(id=>this.room.cells.some(cell=>cell.id===id)));
+    const ids=new Set(this.room.cells.map(cell=>cell.id));
+    this.selection=new Set([...this.selection].filter(id=>ids.has(id)));
     this.draw();this.ui?.refresh();
     try{this.onChange(this.serialize());}catch(error){this.report(new Error(`Enregistrement impossible : ${error.message}. Exportez votre plan.`));}
   }
   clear(){return this.edit('Effacer le calque',()=>this.model.deleteCells(this.room.cells.filter(cell=>cell.layer===this.layer&&!this.lockedLayers.has(cell.layer)).map(cell=>cell.id)));}
   undo(){this.cancelGesture();const changed=this.model.undo();if(changed){this.selection.clear();this.notify();}return changed;}
   redo(){this.cancelGesture();const changed=this.model.redo();if(changed){this.selection.clear();this.notify();}return changed;}
-  validate(){return validateProject(this.model.data);}
-  serialize(){return serializeProject(this.model.data);}
+  validate(){
+    const data=this.model.data;
+    if(this.model.pending)return validateProject(data);
+    if(this.validationCacheV134?.data!==data)this.validationCacheV134={data,value:validateProject(data)};
+    return clone(this.validationCacheV134.value);
+  }
+  serialize(){return {...clone(this.model.data),size:[...this.room.size],tiles:nativeTiles(this.room),validation:this.validate()};}
   getSnapshot(){return {...this.serialize(),tool:this.tool,layer:this.layer,mode:this.mode,canUndo:this.history.length>0,canRedo:this.future.length>0,selection:[...this.selection],viewport:{...this.viewport}};}
   load(project){this.cancelGesture();const changed=this.model.load(project);this.selection.clear();this.fit();if(changed)this.notify();return changed;}
   setRoom(id){if(id===this.room.id)return;if(!this.model.data.rooms.some(room=>room.id===id))throw new Error('Salle inconnue.');this.edit('Changer de salle',()=>{this.model.data.activeRoomId=id;});this.selection.clear();this.fit();}
