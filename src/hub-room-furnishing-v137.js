@@ -4,6 +4,8 @@ import { HUB_ENVIRONMENT_ATLAS_V134 } from './hub-environment-atlas-v134.js';
 import { HUB_PROP_ATLAS_V136, getHubPropAtlasCellV136 } from './hub-prop-atlas-v136.js';
 import { HUB_FURNISHING_ATLAS_V137, getHubFurnishingCellV137 } from './hub-furnishing-atlas-v137.js';
 import { getHubRoomIdentityReservationsV137 } from './hub-room-identity-v137.js';
+import { getHubCirculationSolidReservationsV138 } from './hub-circulation-v137.js';
+import { HUB_FURNISHING_CRITICAL_OVERRIDES_V138 } from './hub-furnishing-critical-v138.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -23,20 +25,20 @@ const group = (task,items,replaceKinds=[]) => ({task,items,replaceKinds});
  * work surfaces and service fittings behind the standing walking plane. */
 export const HUB_ROOM_FURNISHING_V137 = freeze({
   bridge: group('watch-seat-and-reference',[
-    furnishing('cockpit-seat',350,72,'watch-officer-seat'),wall('emergency-cabinet',1080,470,44,'bridge-fire-safety')
+    furnishing('cockpit-seat',350,72,'watch-officer-seat'),wall('emergency-cabinet',1020,535,44,'bridge-fire-safety')
   ],['chair','chart-cart']),
   briefing: group('meeting-material-and-seating',[
-    equipment('chair',950,30,50,'meeting-visitor-seat'),wall('emergency-cabinet',950,450,40,'briefing-fire-safety')
+    equipment('chair',950,30,50,'meeting-visitor-seat'),wall('emergency-cabinet',900,535,40,'briefing-fire-safety')
   ]),
   'combat-information': group('signal-service-and-watch-safety',[
-    equipment('radio-rack',550,58,106,'signal-spare-receiver'),wall('emergency-cabinet',1080,478,40,'signal-fire-safety')
-  ]),
+    equipment('radio-rack',550,58,106,'signal-spare-receiver'),wall('emergency-cabinet',490,535,40,'signal-fire-safety')
+  ],['handset']), // The native radio console replaces the handset behind its deck bracket.
   'cryo-bay': group('stasis-service-and-emergency-oxygen',[
-    equipment('cylinder',550,22,76,'stasis-oxygen-reserve'),wall('emergency-cabinet',920,460,40,'stasis-emergency-kit')
-  ]),
+    equipment('cylinder',550,22,76,'stasis-oxygen-reserve'),wall('emergency-cabinet',650,535,40,'stasis-emergency-kit')
+  ],['cable-run']), // The existing stasis manifold and reachable kit replace the loose line fragment.
   'crew-quarters': group('bolted-berth-and-personal-storage',[
-    wall('crew-berth',440,376,152,'upper-crew-berth'),wall('emergency-cabinet',300,470,38,'quarters-fire-safety')
-  ]),
+    wall('crew-berth',440,376,152,'upper-crew-berth'),wall('emergency-cabinet',1100,535,38,'quarters-fire-safety')
+  ],['shelf']),
   mess: group('galley-return-and-shared-dining',[
     furnishing('galley-unit',565,166,'galley-return-counter'),furnishing('food-refrigerator',930,78,'chilled-drink-storage')
   ],['galley','chair']),
@@ -53,61 +55,61 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
     equipment('medical-cabinet',500,58,106,'sealed-clean-storage'),wall('emergency-cabinet',1090,475,40,'containment-emergency-kit')
   ]),
   armory: group('secure-issue-and-inspection',[
-    equipment('tool-chest',600,70,62,'armorer-service-chest'),wall('emergency-cabinet',950,470,40,'armory-fire-safety')
+    equipment('tool-chest',600,70,62,'armorer-service-chest'),wall('emergency-cabinet',950,535,40,'armory-fire-safety')
   ]),
   workshop: group('bench-stock-and-safe-repair',[
-    equipment('tool-chest',545,68,62,'shop-service-chest'),wall('emergency-cabinet',785,462,40,'shop-fire-safety')
-  ],['cylinder','cable-spool']),
+    equipment('tool-chest',575,68,62,'shop-service-chest'),wall('emergency-cabinet',710,535,40,'shop-fire-safety')
+  ],['cylinder','cable-spool','parts-bin']),
   'vehicle-bay': group('inspection-supplies-outside-vehicle-bay',[
-    wall('emergency-cabinet',1090,350,40,'vehicle-fire-safety'),wall('service-conduits',600,250,146,'vehicle-service-feed')
+    wall('emergency-cabinet',925,390,40,'vehicle-fire-safety'),wall('service-conduits',600,250,146,'vehicle-service-feed')
   ]),
   'dropship-hangar': group('flight-safety-outside-aircraft-silhouette',[
-    wall('emergency-cabinet',900,250,40,'hangar-fire-safety')
+    wall('emergency-cabinet',900,248,40,'hangar-fire-safety')
   ]),
   reactor: group('electrical-isolation-and-mechanical-feed',[
-    wall('service-conduits',1020,275,170,'power-service-feed'),wall('emergency-cabinet',650,470,40,'electrical-fire-safety')
+    wall('service-conduits',1020,275,170,'power-service-feed'),wall('emergency-cabinet',300,535,40,'electrical-fire-safety')
   ]),
   'life-support': group('air-treatment-and-replaceable-filters',[
-    wall('service-conduits',1060,300,146,'air-treatment-feed'),wall('emergency-cabinet',530,478,40,'air-service-emergency-kit')
+    wall('service-conduits',1060,300,146,'air-treatment-feed'),wall('emergency-cabinet',530,535,40,'air-service-emergency-kit')
   ]),
   'sensor-array': group('array-service-and-signal-spares',[
     wall('service-conduits',1030,265,146,'array-service-feed'),equipment('radio-rack',310,54,106,'array-spare-receiver')
   ],['case']),
   'arrival-airlock': group('clean-arrival-and-emergency-support',[
-    wall('emergency-cabinet',350,470,42,'airlock-fire-safety'),equipment('bench',900,86,36,'arrival-equipment-bench')
+    wall('emergency-cabinet',400,535,42,'airlock-fire-safety'),equipment('bench',900,86,36,'arrival-equipment-bench')
   ]),
   logistics: group('classified-freight-and-handling-support',[
-    equipment('cargo-rack',1000,102,108,'classified-spare-freight'),wall('emergency-cabinet',700,470,42,'freight-fire-safety')
+    equipment('cargo-rack',690,102,108,'classified-spare-freight'),wall('emergency-cabinet',1280,535,42,'freight-fire-safety')
   ]),
   'mire-archives': group('evidence-handling-and-reading-support',[
-    equipment('chart-cart',680,62,46,'evidence-sorting-cart'),wall('emergency-cabinet',1600,470,42,'archive-fire-safety')
+    equipment('chart-cart',680,62,46,'evidence-sorting-cart'),wall('emergency-cabinet',1270,535,42,'archive-fire-safety')
   ],['case']),
   'synthetic-bay': group('component-cleaning-and-repair-stock',[
-    wall('emergency-cabinet',1560,470,42,'synthetic-fire-safety'),wall('service-conduits',1700,450,146,'synthetic-service-feed')
-  ]),
+    wall('emergency-cabinet',1530,535,42,'synthetic-fire-safety'),wall('service-conduits',1420,444,146,'synthetic-service-feed')
+  ],['tool-board']),
   cctv: group('security-watch-and-recording-backup',[
-    equipment('archive-rack',1250,70,108,'security-recording-backup'),wall('emergency-cabinet',1760,470,42,'security-fire-safety')
+    equipment('archive-rack',1250,70,108,'security-recording-backup'),wall('emergency-cabinet',1050,535,42,'security-fire-safety')
   ]),
   'proving-ground': group('range-safety-and-protective-stock',[
-    wall('emergency-cabinet',1600,465,42,'range-emergency-kit')
+    wall('emergency-cabinet',1600,535,42,'range-emergency-kit')
   ]),
   morgue: group('forensic-preparation-and-clean-return',[
-    equipment('medical-cabinet',750,58,106,'forensic-clean-storage'),wall('emergency-cabinet',1400,470,42,'forensic-emergency-kit')
+    equipment('medical-cabinet',700,58,106,'forensic-clean-storage'),wall('emergency-cabinet',1480,535,42,'forensic-emergency-kit')
   ]),
   'escape-pods': group('evacuation-readiness-and-reserves',[
-    wall('emergency-cabinet',1700,470,44,'evacuation-emergency-kit'),equipment('bench',1100,80,36,'evacuation-ready-bench')
+    wall('emergency-cabinet',1530,535,44,'evacuation-emergency-kit'),equipment('bench',1100,80,36,'evacuation-ready-bench')
   ]),
   durandal: group('processor-cooling-and-safe-isolation',[
-    wall('service-conduits',1250,260,160,'computer-cooling-feed'),wall('emergency-cabinet',1600,470,42,'computer-fire-safety')
+    wall('service-conduits',1020,260,160,'computer-cooling-feed'),wall('emergency-cabinet',1545,535,42,'computer-fire-safety')
   ]),
   bioforge: group('clean-entry-and-isolation-support',[
-    wall('emergency-cabinet',1450,470,42,'biological-emergency-kit')
+    wall('emergency-cabinet',1470,535,42,'biological-emergency-kit')
   ]),
   'animal-care': group('habitat-hygiene-and-emergency-stock',[
     wall('emergency-cabinet',1520,470,38,'habitat-emergency-kit')
   ]),
   'frontier-civil-counter': group('waiting-comfort-and-emergency-access',[
-    wall('emergency-cabinet',2330,470,42,'port-fire-safety'),wall('service-conduits',2350,350,146,'port-service-feed')
+    wall('emergency-cabinet',2330,535,42,'port-fire-safety'),wall('service-conduits',2350,350,146,'port-service-feed')
   ]),
   'personal-refuge': group('private-rest-and-reading',[
     wall('crew-berth',1350,450,152,'private-bolted-berth')
@@ -116,35 +118,35 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
     equipment('radio-rack',350,60,106,'flight-spare-receiver'),equipment('chart-cart',560,62,46,'flight-checklist-cart'),
     equipment('capsule-readout',1005,84,50,'pilot-forward-instrument-console',{y:530,support:'rear-wall'}),
     wall('data-cabinet',350,405,80,'flight-instrument-records',136),
-    wall('service-conduits',900,290,170,'flight-instrument-feed'),wall('emergency-cabinet',1050,340,42,'cockpit-fire-safety')
+    wall('service-conduits',900,290,170,'flight-instrument-feed'),wall('emergency-cabinet',1110,535,42,'cockpit-fire-safety')
   ]),
   'galley-service': group('cold-storage-cleaning-and-preparation',[
     furnishing('food-refrigerator',550,88,'galley-cold-storage'),equipment('parts-bin',330,84,64,'dry-food-locker'),
-    wall('galley-rack',530,390,84,'galley-clean-tableware',136),wall('galley-rack',900,405,84,'galley-preparation-supplies',136),
-    equipment('bin',1090,28,42,'galley-sorted-waste'),wall('emergency-cabinet',1090,455,42,'galley-fire-safety')
+    wall('galley-rack',700,475,84,'galley-clean-tableware',136),wall('galley-rack',1060,470,84,'galley-preparation-supplies',136),
+    equipment('bin',1090,28,42,'galley-sorted-waste'),wall('emergency-cabinet',1050,535,42,'galley-fire-safety')
   ]),
   'sanitary-bay': group('clean-linen-lockers-and-wet-service',[
     equipment('locker',370,54,106,'sanitary-personal-locker-west'),equipment('locker',500,54,106,'sanitary-personal-locker-east'),
-    equipment('bin',630,30,42,'used-linen-hamper'),wall('sterile-cabinet',500,405,80,'sanitary-clean-linen',136),
-    wall('service-conduits',910,300,170,'sanitary-water-feed'),wall('emergency-cabinet',1100,465,42,'sanitary-emergency-kit')
+    equipment('bin',630,30,42,'used-linen-hamper'),wall('sterile-cabinet',650,470,80,'sanitary-clean-linen',136),
+    wall('service-conduits',910,300,170,'sanitary-water-feed'),wall('emergency-cabinet',1100,535,42,'sanitary-emergency-kit')
   ]),
   'engine-room': group('mechanical-drive-service-and-isolation',[
     equipment('electrical-cabinet',330,70,112,'engine-drive-controller'),equipment('tool-chest',850,72,62,'engine-service-chest'),
     equipment('parts-bin',1270,86,64,'engine-spare-fittings'),equipment('cylinder',1760,24,76,'engine-service-cylinder'),
     wall('service-conduits',650,450,220,'engine-inlet-feed'),wall('service-conduits',1370,290,220,'engine-return-feed'),
-    wall('tool-board',1380,475,72,'engine-service-tools',136),wall('emergency-cabinet',1740,445,42,'engine-fire-safety')
+    wall('tool-board',1350,490,72,'engine-service-tools',136),wall('emergency-cabinet',1720,535,42,'engine-fire-safety')
   ]),
   'water-recycling': group('filter-service-clean-spares-and-flow-control',[
     equipment('cylinder',350,24,76,'water-service-reservoir'),equipment('cylinder',430,24,76,'water-clean-reservoir'),
-    equipment('tool-chest',590,68,62,'water-service-chest'),wall('sterile-cabinet',500,405,80,'water-clean-filter-stock',136),
-    wall('service-conduits',900,447,146,'water-return-feed'),wall('emergency-cabinet',1100,465,42,'water-emergency-kit')
+    equipment('tool-chest',590,68,62,'water-service-chest'),wall('sterile-cabinet',500,470,80,'water-clean-filter-stock',136),
+    wall('service-conduits',900,447,146,'water-return-feed'),wall('emergency-cabinet',1100,535,42,'water-emergency-kit')
   ]),
   'maintenance-spine': group('through-route-distribution-and-service-stock',[
     equipment('tool-chest',380,70,62,'maintenance-west-service-chest'),equipment('parts-bin',1100,76,64,'maintenance-central-spares'),
     equipment('electrical-cabinet',1960,68,112,'maintenance-distribution-cabinet'),equipment('cable-spool',2130,42,42,'maintenance-cable-reserve'),
     wall('service-conduits',390,290,220,'maintenance-west-feed'),wall('service-conduits',1120,290,220,'maintenance-center-feed'),
-    wall('service-conduits',2110,290,220,'maintenance-east-feed'),wall('tool-board',2110,435,72,'maintenance-east-tools',136),
-    wall('emergency-cabinet',620,465,42,'maintenance-west-emergency-kit'),wall('emergency-cabinet',2240,465,42,'maintenance-east-emergency-kit')
+    wall('service-conduits',2110,290,220,'maintenance-east-feed'),wall('tool-board',2175,465,72,'maintenance-east-tools',136),
+    wall('emergency-cabinet',620,535,42,'maintenance-west-emergency-kit'),wall('emergency-cabinet',2240,535,42,'maintenance-east-emergency-kit')
   ])
 });
 
@@ -178,17 +180,44 @@ function materialize(definition,spatial) {
     furnishingV137:true,perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
 }
 
+/** Open rails may occlude a rear-wall fitting; a solid deck or wall console
+ * cannot pass through it. Reserve both depth settings from the actual renderer. */
+export function getHubFurnishingStructuralReservationsV138(room,options={}){
+  const result=[],seen=new Set();
+  for(const platform of options.platforms||room.platforms||[]){
+    if(!room.world&&platform.roomId!==room.id)continue;
+    for(const depthEnabled of [true,false])for(const bounds of getHubCirculationSolidReservationsV138(platform,{
+      room,ladders:options.ladders||room.ladders||[],vents:options.vents||[],
+      platforms:options.platforms||room.platforms||[],centeredLadders:!room.world,depthEnabled
+    })){
+      const key=[bounds.x,bounds.y,bounds.w,bounds.h,bounds.role].join(':');
+      if(!seen.has(key)){seen.add(key);result.push(bounds);}
+    }
+  }
+  return result;
+}
+
 export function enrichHubRoomCompositionV137(room, basePlan=null, options={}) {
-  const definition=HUB_ROOM_FURNISHING_V137[room?.id];
+  // The explicit override is also used by authoring review to evaluate a
+  // complete proposed group against the live native geometry before saving it.
+  const originalDefinition=HUB_ROOM_FURNISHING_V137[room?.id];
+  const definition=originalDefinition&&{...originalDefinition,...HUB_FURNISHING_CRITICAL_OVERRIDES_V138[room?.id],...options.furnishingDefinition};
   if(!definition)return basePlan;
   const spatial=getHubSpatialPlanV136(room,{...options,platforms:[]});
   if(!spatial)return basePlan;
   const equipmentReservations=getHubRearEquipmentReservationsV137(room,options);
   const identityReservations=getHubRoomIdentityReservationsV137(room,options);
-  const plan={...spatial,reservations:[...spatial.reservations,...equipmentReservations,...identityReservations]};
-  const items=(basePlan?.items||[]).filter(item=>!definition.replaceKinds.includes(item.kind)
-    &&!equipmentReservations.some(reservation=>overlap(item,reservation))
-    &&hubSpatialPlacementClearV136(item,plan,{margin:3}));
+  const structuralReservations=getHubFurnishingStructuralReservationsV138(room,options);
+  const plan={...spatial,reservations:[...spatial.reservations,...equipmentReservations,...identityReservations,...structuralReservations]};
+  const legacyOmissionsV138=[...basePlan?.legacyOmissionsV138||[]];
+  const items=(basePlan?.items||[]).filter(item=>{
+    const replaced=definition.replaceKinds.includes(item.kind);
+    const accepted=!replaced&&hubSpatialPlacementClearV136(item,plan,{margin:3});
+    if(!accepted)legacyOmissionsV138.push({kind:item.kind,role:item.role,
+      bounds:{x:item.x,y:item.y,w:item.w,h:item.h},reason:replaced?'replaced-by-reviewed-functional-group':'native-or-architectural-clearance',
+      task:definition.task,reservations:plan.reservations.filter(reservation=>overlap(item,reservation)).map(reservation=>reservation.role)});
+    return accepted;
+  });
   const added=[],rejected=[];
   for(const source of definition.items){
     const entry=materialize(source,plan);
@@ -210,10 +239,10 @@ export function enrichHubRoomCompositionV137(room, basePlan=null, options={}) {
   }
   return {...basePlan,schema:137,roomId:room.id,task:definition.task,theme:basePlan?.theme||room.theme||'industrial',
     accent:basePlan?.accent||'#97aaa0',start:plan.bounds.x,width:plan.bounds.w,
-    floorY:plan.planes.walkY,top:plan.planes.ceilingY,items,supplies,spatial:plan,
+    floorY:plan.planes.walkY,top:plan.planes.ceilingY,items,supplies,spatial:plan,legacyOmissionsV138,
     furnishingV137:{task:definition.task,added:added.map(item=>({role:item.role,cell:item.cell||null,
       bounds:{x:item.x,y:item.y,w:item.w,h:item.h},support:item.support})),rejected,
-      rearEquipmentReservations:equipmentReservations,links,authored:true},
+      rearEquipmentReservations:equipmentReservations,structuralReservations,links,authored:true},
     collidable:false,interactive:false,gameplayPlane:'2d',sourceStatus:'authored-task-groups-and-original-separated-ship-furnishings'};
 }
 

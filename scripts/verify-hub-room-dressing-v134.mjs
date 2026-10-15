@@ -4,9 +4,12 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { HUB_DECKS, HUB_WORLD } from '../src/hub-game.js';
 import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
+import { HUB_ANNEXES_V137 } from '../src/hub-annex-registry-v137.js';
+import { REFUGE_PROPS_LAYOUT_V87 } from '../src/refuge-art-v87.js';
+import { getHubSpatialPlanV136 } from '../src/hub-spatial-design-v136.js';
 import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
-import { HUB_ROOM_DRESSING_V134, resolveHubRoomDressingV134, drawHubRoomDressingV134, drawHubRoomPlaqueV134,
+import { HUB_ROOM_DRESSING_V134, resolveHubRoomDressingV134, drawHubRoomDressingV134, drawHubRoomPlaqueV134, getHubRoomPlaqueBoundsV134,
   withHubRoomDressingV134 } from '../src/hub-room-dressing-v134.js';
 
 const intersects = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -32,7 +35,7 @@ test('all production rooms receive task-specific passive equipment, while their 
     const before = structuredClone(room), composition = resolveHubRoomDressingV134(room,optionsFor(room));
     assert.ok(composition.items.length >= 4, `${room.id} has too little usable equipment`);
     assert.ok(new Set(composition.items.map(entry => entry.role)).size >= 2, room.id);
-    const plaque={x:(room.xStart || 0)+composition.width/2-130,y:room.id==='personal-refuge'?336:190,w:260,h:40};
+    const plaque=getHubRoomPlaqueBoundsV134(room);
     for (const entry of composition.items) {
       assert.equal(entry.collidable,false);assert.equal(entry.interactive,false);assert.equal(entry.plane,'rear');
       assert.ok(entry.x >= (room.xStart || 0) + 128 && entry.x + entry.w <= (room.xStart || 0) + composition.width - 128, room.id);
@@ -100,6 +103,33 @@ test('room identification is a small mounted nameplate rather than a giant diagn
   }
   const subject=renderer(), report=drawHubRoomPlaqueV134(subject.ctx,{id:'proving-ground',xStart:900,world:{width:1280,floorY:624}},{top:148});
   assert.equal(report.bounds.y,148);assert.ok(report.bounds.y+report.bounds.h<370);subject.balanced();
+});
+
+test('the refuge plaque occupies the clear bay beside both actual observation frames while 34 other plaques retain their exact bounds', () => {
+  const currentRooms = [...HUB_DECKS.flatMap(deck => deck.rooms), ...HUB_ANNEXES_V137];
+  assert.equal(currentRooms.length,35);
+  for(const room of currentRooms){
+    const before=structuredClone(room), subject=renderer(), bounds=getHubRoomPlaqueBoundsV134(room);
+    const report=drawHubRoomPlaqueV134(subject.ctx,room);
+    assert.deepEqual(report.bounds,bounds);
+    assert.ok(subject.calls.some(call=>call[0]==='fill'&&call.slice(1).every((value,index)=>value===[bounds.x,bounds.y,bounds.w,bounds.h][index])));
+    assert.deepEqual(getHubSpatialPlanV136(room).reservations.find(row=>row.role==='room-sign'),
+      {x:bounds.x-4,y:bounds.y-4,w:bounds.w+8,h:bounds.h+8,role:'room-sign'});
+    if(room.id==='personal-refuge'){
+      assert.deepEqual(bounds,{x:675,y:336,w:260,h:40});
+      const portholes=REFUGE_PROPS_LAYOUT_V87.filter(prop=>prop.kind==='porthole');assert.equal(portholes.length,2);
+      for(const frame of portholes)assert.ok(!intersects(bounds,frame),'The native observation frame covers the room plaque');
+      assert.equal(Math.min(...portholes.map(frame=>frame.x))-bounds.x-bounds.w,40);
+      assert.ok(resolveHubRoomDressingV134(room).reserved.some(row=>row.x===bounds.x-4&&row.y===bounds.y-4&&row.w===bounds.w+8&&row.h===bounds.h+8));
+    }else{
+      const width=room.profile?.worldWidth||room.world?.width||1280;
+      assert.deepEqual(bounds,{x:(room.xStart||0)+width/2-130,y:190,w:260,h:40},room.id);
+    }
+    const shifted=getHubRoomPlaqueBoundsV134({...room,xStart:(room.xStart||0)+8000});
+    assert.deepEqual({...shifted,x:shifted.x-8000},bounds);
+    assert.equal(getHubRoomPlaqueBoundsV134(room,{top:148}).y,148);
+    assert.deepEqual(room,before);subject.balanced();
+  }
 });
 
 test('dressing composes after native background rendering, leaves editor previews untouched and returns detached evidence', () => {

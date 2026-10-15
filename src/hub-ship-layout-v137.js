@@ -1,5 +1,6 @@
 import { HUB_PROP_ATLAS_V136, getHubPropAtlasCellV136 } from './hub-prop-atlas-v136.js';
 import { HUB_FURNISHING_ATLAS_V137, getHubFurnishingCellV137 } from './hub-furnishing-atlas-v137.js';
+import { HUB_MAINTENANCE_EAST_LANDING_V138 } from './hub-maintenance-landing-v138.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -15,11 +16,11 @@ export const HUB_SHIP_PARENT_LANDINGS_V137 = freeze({
   'sanitary-bay': { platformId: 'quarters-high', roomId: 'crew-quarters', centerX: 850, bottom: 376 }
 });
 
-const socket = (spaceId, parentDeck, parentRoomId, roomIndex, centerX, bottom = 624, height = 192, entranceSide = 'west', localX = 144) => ({
+const socket = (spaceId, parentDeck, parentRoomId, roomIndex, centerX, bottom = 624, height = 192, entranceSide = 'west', localX = 144, annexStandingY = 624) => ({
   id: `${spaceId}:${entranceSide === 'east' ? 'workshop' : 'primary'}`, spaceId,
   parentDeck, parentRoomId, entranceSide, entranceLocalX: localX,
   parentDoorBounds: { x: roomIndex * 1280 + centerX - 59, y: bottom - height, w: 118, h: height },
-  annexDoorBounds: { x: localX - 59, y: 432, w: 118, h: 192 },
+  annexDoorBounds: { x: localX - 59, y: annexStandingY - 192, w: 118, h: 192 },
   standingY: bottom
 });
 
@@ -31,7 +32,8 @@ export const HUB_SHIP_CONNECTIONS_V137 = freeze([
   socket('engine-room', 'engineering', 'reactor', 1, 420),
   socket('water-recycling', 'engineering', 'life-support', 2, 740),
   socket('maintenance-spine', 'engineering', 'sensor-array', 3, 430),
-  socket('maintenance-spine', 'industrial', 'workshop', 2, 1080, 624, 192, 'east', 2416)
+  socket('maintenance-spine', 'industrial', 'workshop', 2, 1080, 624, 192, 'east',
+    HUB_MAINTENANCE_EAST_LANDING_V138.doorCenterX, HUB_MAINTENANCE_EAST_LANDING_V138.top)
 ]);
 
 export function getHubShipConnectionV137(endpointId) {
@@ -74,10 +76,11 @@ function makeSpace([id, name, shortName, width, theme, wall, hero, stationCenter
   const platforms = [{ id: `${id}-floor`, x: 0, y: 624, w: width, h: 96, role: 'floor' }];
   const ladders = [];
   if (id === 'engine-room' || id === 'maintenance-spine') {
-    const x = id === 'engine-room' ? 960 : 760, w = id === 'engine-room' ? 640 : 1040, y = 426;
+    const landing = HUB_MAINTENANCE_EAST_LANDING_V138;
+    const x = id === 'engine-room' ? 960 : landing.x, w = id === 'engine-room' ? 640 : landing.endX - landing.x, y = landing.top;
     platforms.push({ id: `${id}-service-deck`, x, y, w, h: 20, role: 'catwalk' });
     ladders.push({ id: `${id}-service-ladder-west`, x: x + 60, y, w: 44, h: 624 - y, top: y, bottom: 624, role: 'ladder' });
-    if (id === 'maintenance-spine') ladders.push({ id: `${id}-service-ladder-east`, x: x + w - 104, y, w: 44, h: 624 - y, top: y, bottom: 624, role: 'ladder' });
+    if (id === 'maintenance-spine') ladders.push({ id: `${id}-service-ladder-east`, x: landing.ladderXs[1], y, w: 44, h: 624 - y, top: y, bottom: 624, role: 'ladder' });
   }
   return {
     id, name, shortName, kind: 'physical-annex', navigationKind: 'ship-service-compartment-v137',
@@ -90,6 +93,7 @@ function makeSpace([id, name, shortName, width, theme, wall, hero, stationCenter
       support: id === 'maintenance-spine' ? 'rear-wall' : 'floor', bounds },
     action: 'service:ship-inspection-v137', description: message, scope: 'walkable-ship-service-compartment',
     connectionIds: getHubShipConnectionsForSpaceV137(id).map(entry => entry.id), theme,
+    ...(id === 'maintenance-spine' ? { layoutVersion: HUB_MAINTENANCE_EAST_LANDING_V138.layoutVersion } : {}),
     implementedFeatures: ['physical-entry-and-return', 'local-inspection-record'], deferredFeatures: [],
     normalHubCreaturesVisible: false, isolatedLevelTarget: null,
     platforms, ladders, colliders: [], props: [{ ...bounds, id: `${id}-inspection-prop`, role: 'inspection', collidable: false, artRole: 'prop' }],

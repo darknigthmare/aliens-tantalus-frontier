@@ -10,6 +10,7 @@ import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { HUB_PROP_ATLAS_V136 } from '../src/hub-prop-atlas-v136.js';
 import { HUB_FURNISHING_ATLAS_V137 as atlas,getHubFurnishingCellV137 } from '../src/hub-furnishing-atlas-v137.js';
 import { HUB_ROOM_FURNISHING_V137,enrichHubRoomCompositionV137,drawHubFurnishingMountsV137 } from '../src/hub-room-furnishing-v137.js';
+import { HUB_FURNISHING_CRITICAL_OVERRIDES_V138 } from '../src/hub-furnishing-critical-v138.js';
 import { getHubRoomLifePlanV136,drawHubRoomLifeV136 } from '../src/hub-room-life-v136.js';
 import { getHubRoomParallaxPlanV134,getHubRearEquipmentLayoutV134 } from '../src/hub-room-parallax-v134.js';
 import { HUB_ENVIRONMENT_ATLAS_V134 } from '../src/hub-environment-atlas-v134.js';
@@ -63,12 +64,14 @@ test('functional sizes use the source object and a standing human rather than a 
 
 test('all 35 compartments accept their authored functional groups with no hidden rejected sockets or blocked routes',()=>{
   assert.deepEqual(Object.keys(HUB_ROOM_FURNISHING_V137).sort(),rooms.map(room=>room.id).sort());
-  let count=0,added=0;
+  let count=0,added=0,authored=0;
   for(const room of rooms){
     const options=optionsFor(room),plan=getHubRoomLifePlanV136(room,options);
     assert.deepEqual(getHubRoomLifePlanV136(room,options),plan);assert.equal(plan.schema,137);
     assert.deepEqual(plan.furnishingV137.rejected,[],room.id);
-    assert.equal(plan.furnishingV137.added.length,HUB_ROOM_FURNISHING_V137[room.id].items.length,room.id);
+    const definition=HUB_FURNISHING_CRITICAL_OVERRIDES_V138[room.id]||HUB_ROOM_FURNISHING_V137[room.id];
+    assert.equal(plan.furnishingV137.added.length,definition.items.length,room.id);
+    authored+=definition.items.length;
     assert.ok(plan.furnishingV137.added.length>=1,room.id);count+=plan.items.length;added+=plan.furnishingV137.added.length;
     for(const item of plan.items){
       assert.equal(item.collidable,false);assert.equal(item.interactive,false);assert.equal(item.plane,'rear');
@@ -80,20 +83,23 @@ test('all 35 compartments accept their authored functional groups with no hidden
     }
     for(let i=0;i<plan.items.length;i++)for(let j=i+1;j<plan.items.length;j++)assert.ok(!overlap(plan.items[i],plan.items[j]),`${room.id}: ${plan.items[i].role}/${plan.items[j].role}`);
   }
-  assert.ok(count>=240&&count<=330,`Reviewed equipment density: ${count}`);assert.ok(added>=90);
+  assert.equal(added,authored);assert.ok(count>=added);
   assert.deepEqual(rooms,original);
 });
 
 test('medical, crew berths and mess contain the corrected real support groups',()=>{
   const find=id=>{const room=rooms.find(room=>room.id===id);return getHubRoomLifePlanV136(room,optionsFor(room));};
   const medical=find('medical'),quarters=find('crew-quarters'),mess=find('mess');
-  for(const role of ['bedside-sterile-cabinet','bedside-preparation-supply','clinical-emergency-kit'])assert.ok(medical.items.some(item=>item.role===role));
+  for(const role of ['bedside-sterile-cabinet','upper-sterile-preparation-supply','clinical-emergency-kit'])assert.ok(medical.items.some(item=>item.role===role));
   assert.ok(medical.items.some(item=>item.cell==='medical-trolley'&&item.support==='rear-floor'));
-  const cabinet=medical.items.find(item=>item.role==='bedside-sterile-cabinet'),supply=medical.items.find(item=>item.role==='bedside-preparation-supply');
-  assert.ok(Math.abs(cabinet.x+cabinet.w/2-supply.x-supply.w/2)<=12);assert.ok(supply.y+supply.h<cabinet.y);
+  const cabinet=medical.items.find(item=>item.role==='bedside-sterile-cabinet'),supply=medical.items.find(item=>item.role==='upper-sterile-preparation-supply');
+  assert.ok(supply.y+supply.h<376-8,'Sterile stock is above the actual upper landing');
+  assert.ok(cabinet.x>rooms.find(room=>room.id==='medical').propRenderBounds.x,'Cabinet belongs beside the bed');
   const berth=quarters.items.find(item=>item.role==='upper-crew-berth');
   assert.equal(berth.cell,'crew-berth');assert.equal(berth.support,'rear-wall');assert.ok(berth.y+berth.h<498,'Mounted berth remains above the original refuge door');
-  assert.ok(mess.items.some(item=>item.role==='galley-return-counter'&&item.cell==='galley-unit'));
+  assert.ok(mess.items.some(item=>item.role==='mess-tray-return-bench'&&item.kind==='bench'));
+  assert.ok(mess.items.some(item=>item.role==='mess-tray-return-stock'&&item.cell==='galley-rack'));
+  assert.ok(!mess.items.some(item=>item.cell==='galley-unit'),'Cooking belongs in the separate galley-service compartment');
   assert.ok(mess.items.some(item=>item.role==='chilled-drink-storage'&&item.cell==='food-refrigerator'));
   assert.ok(!mess.items.some(item=>item.kind==='galley'),'Old counter must not remain behind the new kitchen entrance');
 });
@@ -139,10 +145,11 @@ test('render evidence reports actual loaded crops and mounted supports without c
   const native={complete:true,naturalWidth:HUB_PROP_ATLAS_V136.width,naturalHeight:HUB_PROP_ATLAS_V136.height},
     originalAtlas={complete:true,naturalWidth:atlas.width,naturalHeight:atlas.height},
     images=new Map([[HUB_PROP_ATLAS_V136.asset,native],[atlas.asset,originalAtlas]]);
-  let atlasDraws=0;
+  let atlasDraws=0,expectedAtlasDraws=0;
   for(const room of rooms){
     const before=structuredClone(room),subject=canvas(),report=drawHubRoomLifeV136(subject.ctx,room,{...optionsFor(room),images});
     const painted=subject.calls.filter(call=>call[0]==='image'&&call[1]===originalAtlas);atlasDraws+=painted.length;
+    expectedAtlasDraws+=getHubRoomLifePlanV136(room,optionsFor(room)).items.filter(item=>item.asset===atlas.asset).length;
     assert.deepEqual(report.furnishingV137.pendingImageRoles,[],room.id);
     assert.equal(report.furnishingV137.paintedRoles.length,report.furnishingV137.added.length,room.id);
     assert.equal(report.items.filter(item=>item.source===atlas.asset).length,painted.length,room.id);
@@ -150,7 +157,7 @@ test('render evidence reports actual loaded crops and mounted supports without c
     assert.equal(subject.calls.filter(call=>call[0]==='save').length,subject.calls.filter(call=>call[0]==='restore').length);
     assert.deepEqual(room,before);
   }
-  assert.ok(atlasDraws>=50);assert.deepEqual(rooms,original);
+  assert.equal(atlasDraws,expectedAtlasDraws);assert.ok(atlasDraws>0);assert.deepEqual(rooms,original);
   const unloadedRoom=HUB_SHIP_SPACES_V137.find(room=>room.id==='galley-service'),unloaded=drawHubRoomLifeV136(canvas().ctx,unloadedRoom,optionsFor(unloadedRoom));
   assert.ok(unloaded.furnishingV137.pendingImageRoles.length>0);
   assert.ok(!unloaded.items.some(item=>item.source===atlas.asset),'An unloaded image must not be reported as painted');

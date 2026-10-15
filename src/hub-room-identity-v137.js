@@ -1,6 +1,7 @@
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { getHubShipConnectionsForSpaceV137 } from './hub-ship-layout-v137.js';
 import { SHIP_PORT_SERVICE_SIGNS_V137, SHIP_PORT_LIGHT_FITTINGS_V137 } from './ship-port-room-v87.js';
+import { getHubAnnexFixturePlanV138 } from './hub-annex-fixtures-v138.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -69,9 +70,11 @@ export function getHubRoomServiceRoutePlanV137(room) {
       support:'rear-wall-above-service-portal',transition:'native-service-deck-transition',interactive:false,collidable:false};
   }).filter(Boolean);
   const east=getHubShipConnectionsForSpaceV137(room.id).find(connection=>connection.entranceSide==='east');
-  const closedServiceRisers=east?[{id:'maintenance-east-closed-riser',
-    bounds:{x:start+east.annexDoorBounds.x+east.annexDoorBounds.w+49,y:254,w:22,h:floor-58-254},
-    returnBounds:{x:start+east.annexDoorBounds.x+east.annexDoorBounds.w+19,y:254,w:52,h:22},
+  const eastSign=east&&routeSigns.find(sign=>sign.endpointId===east.id);
+  const riserTop=eastSign?Math.max(186,eastSign.frame.y+eastSign.frame.h+12):floor-58;
+  const closedServiceRisers=east&&riserTop<floor-58?[{id:'maintenance-east-closed-riser',
+    bounds:{x:start+east.annexDoorBounds.x+east.annexDoorBounds.w+49,y:riserTop,w:22,h:floor-58-riserTop},
+    returnBounds:{x:start+east.annexDoorBounds.x+east.annexDoorBounds.w+19,y:riserTop,w:52,h:22},
     support:'rear-wall-to-service-plinth',closed:true,interactive:false,collidable:false}]:[];
   return {routeSigns,closedServiceRisers};
 }
@@ -102,7 +105,8 @@ function localObstacles(room,options) {
   reserve(room.station?.bounds);reserve(room.propRenderBounds);
   for(const plaque of getHubRoomServicePlaqueBoundsV137(room))reserve(plaque);
   for(const fitting of getHubRoomFixedServiceFittingBoundsV137(room))reserve(fitting);
-  for(const p of room.props||[])reserve(p);
+  const fixtures=getHubAnnexFixturePlanV138(room);
+  for(const bounds of fixtures?.reservations||[])reserve(bounds);
   const entrance=room.entrance;
   if(entrance)reserve({x:start+room.entranceLocalX-entrance.w/2,y:entrance.y,w:entrance.w,h:entrance.h});
   for(const ladder of options.ladders||room.ladders||[]){

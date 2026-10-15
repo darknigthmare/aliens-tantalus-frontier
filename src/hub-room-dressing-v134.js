@@ -2,6 +2,7 @@ import { HUB_ANNEXES_V87 } from './hub-annex-registry-v87.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
 import { HUB_AUTHORED_COMPOSITIONS_V133 } from './hub-authored-composition-v133.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { REFUGE_PROPS_LAYOUT_V87 } from './refuge-art-v87.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -161,7 +162,7 @@ export function resolveHubRoomDressingV134(room, { doors = [], ladders = [] } = 
   const start = finite(room.xStart), width = finite(room.profile?.worldWidth || room.world?.width, 1280), floorY = finite(room.world?.floorY, 624);
   const local = bounds => ({ ...bounds, x: bounds.x - start });
   const expanded = (bounds, margin = 20) => ({ x: bounds.x - margin, y: bounds.y - margin, w: bounds.w + margin * 2, h: bounds.h + margin * 2 });
-  const reserve = [expanded({ x: width / 2 - 130, y: room.id === 'personal-refuge' ? 336 : 190, w: 260, h: 40 }, 4)];
+  const reserve = [expanded(local(getHubRoomPlaqueBoundsV134(room)), 4)];
   if (room.propRenderBounds) reserve.push(expanded(local(room.propRenderBounds), 18));
   if (room.station?.bounds) reserve.push(expanded(room.station.bounds, 22));
   if (room.viewport) reserve.push(expanded(local(room.viewport), 4));
@@ -188,11 +189,20 @@ export function resolveHubRoomDressingV134(room, { doors = [], ladders = [] } = 
 
 /** A ship nameplate replaces the old oversized generic diagnostic screen.
  * The room's physical equipment now describes its purpose at human scale. */
+export function getHubRoomPlaqueBoundsV134(room, { top } = {}) {
+  const width = finite(room.profile?.worldWidth || room.world?.width, 1280), start = finite(room.xStart);
+  // The refuge's real observation frames are drawn after this wall plaque.
+  // Mount it in the bay to their left, with a measured gap to the first frame.
+  const left = room.id === 'personal-refuge'
+    ? Math.min(...REFUGE_PROPS_LAYOUT_V87.filter(prop => prop.kind === 'porthole').map(prop => prop.x)) - 40 - 260
+    : width / 2 - 130;
+  return { x: start + left, y: finite(top, room.id === 'personal-refuge' ? 336 : 190), w: 260, h: 40 };
+}
+
 export function drawHubRoomPlaqueV134(ctx, room, { top } = {}) {
   const composition = HUB_AUTHORED_COMPOSITIONS_V133[room?.id];
   if (!ctx || !composition) return false;
-  const width = finite(room.profile?.worldWidth || room.world?.width, 1280), start = finite(room.xStart);
-  const bounds = { x: start + width / 2 - 130, y: finite(top, room.id === 'personal-refuge' ? 336 : 190), w: 260, h: 40 };
+  const bounds = getHubRoomPlaqueBoundsV134(room, { top });
   ctx.save();ctx.fillStyle='#203537';ctx.fillRect(bounds.x,bounds.y,bounds.w,bounds.h);
   ctx.fillStyle='#59706e';ctx.fillRect(bounds.x,bounds.y,bounds.w,2);ctx.fillStyle='#0f2226';ctx.fillRect(bounds.x,bounds.y+37,bounds.w,3);
   ctx.fillStyle=composition.accent;ctx.font='bold 12px monospace';ctx.textAlign='left';ctx.fillText(composition.title,bounds.x+12,bounds.y+16,236);

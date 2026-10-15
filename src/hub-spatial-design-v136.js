@@ -7,6 +7,9 @@ import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getHubInteractionPropBoundsV136, getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { resolveHubVehicleArtV58 } from './hub-art-runtime-v58.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
+import { getHubAnnexFixturePlanV138 } from './hub-annex-fixtures-v138.js';
+import { getHubDestinationSignReservationsV138 } from './hub-destination-signage-v138.js';
+import { getHubRoomPlaqueBoundsV134 } from './hub-room-dressing-v134.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -35,7 +38,7 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platform
   const reservations = [
     { x, y: ceilingY, w: 128, h: floorY - ceilingY, role: 'west-transition' },
     { x: x + width - 128, y: ceilingY, w: 128, h: floorY - ceilingY, role: 'east-transition' },
-    { x: x + width / 2 - 134, y: room.id === 'personal-refuge' ? 330 : 186, w: 268, h: 48, role: 'room-sign' }
+    { ...expanded(getHubRoomPlaqueBoundsV134(room), 4), role: 'room-sign' }
   ];
   reserve(propBounds || getHubInteractionPropBoundsV136(room), 'native-service', 22);
   reserve(room.viewport, 'viewport', 8);
@@ -52,7 +55,9 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platform
       reserve({ ...actor.renderBounds, x: x + actor.renderBounds.x }, role, 12);
     }
   }
-  for (const prop of room.props || []) if (prop.asset) reserve(prop, 'native-equipment', 18);
+  // Reserve exactly what the native renderer paints, including the overhead
+  // shaft that is deliberately larger than its lower collision fitting.
+  for (const fixture of getHubAnnexFixturePlanV138(room)?.reservations || []) reserve(fixture, fixture.role, 8);
   for (const door of doors) if (door.x >= x - 100 && door.x <= x + width + 100) reserve({
     x: door.x - (door.lift ? 92 : 80), y: floorY - (door.lift ? 198 : 270),
     w: door.lift ? 184 : 160, h: door.lift ? 214 : 286
@@ -66,6 +71,9 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platform
   for (const connection of getHubShipConnectionsForRoomV137(room.id)) reserve(connection.parentDoorBounds, 'ship-service-entrance', 22);
   for (const connection of getHubShipConnectionsForSpaceV137(room.id)) reserve(connection.annexDoorBounds, 'ship-service-return', 22);
   if (room.entrance) reserve({ ...room.entrance, x: x + room.entranceLocalX - room.entrance.w / 2 }, 'return-entrance', 22);
+  for (const sign of getHubDestinationSignReservationsV138(room, {
+    portalTargetForBounds: bounds => getHubRecessedPortalV136(bounds)?.target
+  })) reserve(sign, 'destination-sign', 0);
   for (const ladder of ladders) {
     const width = finite(ladder.w, 52), left = ladder.x - (ladder.centered === false || room.world ? 0 : width / 2);
     if (left + width < x || left > x + (room.profile?.worldWidth ?? room.world?.width ?? 1280)) continue;

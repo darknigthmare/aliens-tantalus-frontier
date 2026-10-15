@@ -8,6 +8,7 @@ import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
 import { HUB_TRAVERSAL_PROFILES_V60, buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { HUB_SHIP_SPACES_V137, HUB_SHIP_PARENT_LANDINGS_V137, getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { HUB_SERVICE_STANDARD_V137, resolveHubServiceProfileV137 } from '../src/hub-service-geometry-v137.js';
+import { HUB_RETIRED_SERVICE_LANDINGS_V138, HUB_MEDICAL_SERVICE_APPROACH_V138 as medicalApproach } from '../src/hub-service-geometry-v138.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { HUB_CIRCULATION_STANDARD_V137, getHubCirculationPlanV137,
   drawHubCirculationV137, withHubCirculationV137, getHubServiceConduitPlanV137,
@@ -44,7 +45,9 @@ test('all existing standing routes leave 104 pixels below decks, including the f
       }
     }
   }
-  assert.ok(overlappingPairs >= 16);
+  // The removed CIC side landing was the sixteenth overlapping pair.
+  // Every remaining pair still receives the full clearance assertion above.
+  assert.equal(overlappingPairs, 15);
   const engineering = buildHubTraversalGeometryV87(3);
   const high = engineering.platforms.find(surface => surface.id === 'hangar-observation');
   const low = engineering.platforms.find(surface => surface.id === 'hangar-maintenance-alcove-v133');
@@ -72,7 +75,7 @@ test('landing height changes move real ladders and vent apertures together and p
   }
 });
 
-test('service re-spacing preserves historical profiles and every horizontal support, hatch and ladder identity', () => {
+test('service re-spacing preserves historical profiles, retained supports and all hatch identities while retiring the three named V138 dead ends', () => {
   const before = structuredClone(HUB_TRAVERSAL_PROFILES_V60);
   for (let deck = 0; deck < HUB_DECKS.length; deck++) {
     const geometry = buildHubTraversalGeometryV87(deck);
@@ -80,7 +83,14 @@ test('service re-spacing preserves historical profiles and every horizontal supp
       const profile = HUB_TRAVERSAL_PROFILES_V60[room.id];
       for (const bucket of ['platforms', 'ladders', 'vents']) for (const original of profile[bucket]) {
         const actual = geometry[bucket].find(entry => entry.id === original.id);
-        assert.ok(actual, original.id); assert.equal(actual.x, original.x + room.xStart); assert.equal(actual.w, original.w);
+        const retired = HUB_RETIRED_SERVICE_LANDINGS_V138.some(entry => bucket === 'platforms'
+          ? entry.platformId === original.id : bucket === 'ladders' && entry.ladderId === original.id);
+        if (retired) { assert.equal(actual, undefined, original.id + ' must be retired with its access'); continue; }
+        const medicalSurface = bucket === 'platforms' && medicalApproach.surfaces[original.id];
+        const medicalLadder = bucket === 'ladders' && original.id === medicalApproach.ladderId;
+        assert.ok(actual, original.id);
+        assert.equal(actual.x, (medicalLadder ? medicalApproach.ladderX : medicalSurface?.x ?? original.x) + room.xStart);
+        assert.equal(actual.w, medicalSurface?.w ?? original.w);
         if (bucket === 'platforms') assert.equal(actual.h, original.h);
         if (bucket === 'vents') assert.equal(actual.h, original.h);
       }

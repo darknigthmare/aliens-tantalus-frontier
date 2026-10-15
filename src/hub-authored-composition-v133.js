@@ -118,16 +118,16 @@ export function drawHubSteelLadderV133(ctx, ladder, { centered = true } = {}) {
   ctx.restore();return true;
 }
 
-export function drawHubSteelServicesV133(ctx, occlusion, { floorY = 624 } = {}) {
+export function drawHubSteelServicesV133(ctx, occlusion, { floorY = 624, ceilingY = 186, beamHeight = 54 } = {}) {
   if(!ctx||!occlusion)return false;
   ctx.save();ctx.strokeStyle='#31494b';ctx.lineWidth=5;
   const {x,w}=occlusion;
   if(occlusion.art==='ceilingCables') {
-    // Orthographic conduits and brackets mounted to the rear ceiling beam.
-    // They retain transparent gaps and cannot cover the human walk rail.
-    const y=Math.max(72,Math.min(116,occlusion.y+occlusion.h-20));
+    // The ship's ceiling starts at186 and its cutaway beam occupies132..186.
+    // Legacy bitmap padding must not place a cable above that real structure.
+    const beamTop=finite(ceilingY,186)-Math.max(38,finite(beamHeight,54)),y=beamTop+12;
     for(let row=0;row<3;row++)line(ctx,[[x,y+row*9],[x+w,y+row*9]]);
-    ctx.fillStyle='#536a6a';for(let xx=x+14;xx<x+w;xx+=92){ctx.fillRect(xx,y-12,6,38);ctx.fillRect(xx-5,y-14,16,4);}
+    ctx.fillStyle='#536a6a';for(let xx=x+14;xx<x+w;xx+=92){ctx.fillRect(xx,beamTop,6,38);ctx.fillRect(xx-5,beamTop,16,4);}
   } else if(occlusion.art==='foregroundPipes') {
     ctx.beginPath();ctx.rect(x,floorY+4,w,Math.max(0,720-floorY-4));ctx.clip();
     for(let row=0;row<3;row++)line(ctx,[[x,floorY+22+row*18],[x+w,floorY+22+row*18]]);

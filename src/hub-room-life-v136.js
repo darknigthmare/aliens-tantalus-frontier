@@ -22,10 +22,10 @@ const room = (task,theme,supplies) => ({task,theme,supplies});
 /** Each compact module has an authored task and wall socket. These are small
  * secondary supplies beside the actual service, never another fake console. */
 export const HUB_ROOM_LIFE_V136 = freeze({
-  bridge: room('watch-reference-and-navigation-spares','command',[pack('personal',270,392,106,'watch-reference'),pack('records',1042,396,108,'navigation-records')]),
-  briefing: room('briefing-material-and-crew-notes','command',[pack('records',880,282,120,'briefing-folders'),pack('personal',560,300,90,'meeting-supplies')]),
+  bridge: room('watch-reference-and-navigation-spares','command',[pack('personal',270,392,106,'watch-reference'),pack('records',1042,450,108,'navigation-records')]),
+  briefing: room('briefing-material-and-crew-notes','command',[pack('records',880,240,120,'briefing-folders'),pack('personal',560,250,90,'meeting-supplies')]),
   'combat-information': room('radio-service-and-signal-records','command',[pack('maintenance',1040,390,112,'radio-spares'),pack('records',650,328,96,'watch-records')]),
-  'cryo-bay': room('stasis-monitoring-and-sterile-supply','clinical',[pack('sterile',780,358,116,'capsule-supplies'),pack('maintenance',1030,350,90,'stasis-service-kit')]),
+  'cryo-bay': room('stasis-monitoring-and-sterile-supply','clinical',[pack('sterile',780,300,116,'capsule-supplies'),pack('maintenance',870,300,90,'stasis-service-kit')]),
   'crew-quarters': room('personal-effects-and-berth-maintenance','habitat',[pack('personal',200,388,126,'personal-effects'),pack('personal',1070,390,104,'berth-effects')]),
   mess: room('meal-preparation-and-shared-tableware','habitat',[pack('galley',250,390,130,'clean-tableware'),pack('galley',940,376,118,'drink-supplies')]),
   medical: room('sterile-storage-and-bedside-care','clinical',[pack('sterile',600,394,126,'sterile-consumables'),pack('sterile',1050,378,114,'bedside-supplies')]),
@@ -34,20 +34,20 @@ export const HUB_ROOM_LIFE_V136 = freeze({
   armory: room('armorer-tools-and-issue-records','industrial',[pack('maintenance',760,286,122,'armorer-tools'),pack('records',1000,320,104,'issue-records')]),
   workshop: room('repair-tools-and-bench-stock','industrial',[pack('maintenance',220,378,122,'repair-tools'),pack('maintenance',1060,394,108,'bench-stock')]),
   'vehicle-bay': room('vehicle-service-and-inspection-stock','industrial',[pack('maintenance',630,302,128,'inspection-tools'),pack('maintenance',1050,368,102,'vehicle-service-stock')]),
-  'dropship-hangar': room('flight-support-and-safety-stock','industrial',[pack('maintenance',262,244,110,'ground-support-kit'),
-    pack('records',710,244,80,'flight-checklists'),pack('maintenance',830,244,72,'gantry-service-tools')]),
+  'dropship-hangar': room('flight-support-and-safety-stock','industrial',[pack('maintenance',262,236,110,'ground-support-kit'),
+    pack('records',710,236,80,'flight-checklists'),pack('maintenance',830,236,72,'gantry-service-tools')]),
   reactor: room('electrical-isolation-and-spare-fittings','industrial',[pack('maintenance',670,300,122,'isolation-tools'),pack('maintenance',1050,332,106,'reactor-fittings')]),
   'life-support': room('air-treatment-and-filter-service','industrial',[pack('maintenance',710,378,126,'filter-service-kit'),pack('sterile',1060,380,100,'air-circuit-supplies')]),
   'sensor-array': room('array-calibration-and-signal-records','command',[pack('maintenance',710,308,116,'calibration-tools'),pack('records',1060,340,106,'signal-records')]),
   'arrival-airlock': room('returning-crew-and-contamination-check','clinical',[pack('sterile',690,382,120,'decontamination-supply'),pack('personal',1530,378,112,'arrival-supplies')]),
-  logistics: room('classified-freight-and-packing-materials','industrial',[pack('maintenance',540,378,124,'packing-tools'),pack('records',1190,370,118,'freight-manifests'),pack('maintenance',1760,398,100,'handling-supplies')]),
-  'mire-archives': room('evidence-sorting-and-physical-records','command',[pack('records',730,382,132,'evidence-reference'),pack('records',1430,390,126,'physical-records')]),
-  'synthetic-bay': room('diagnostic-tools-and-clean-components','clinical',[pack('maintenance',630,382,126,'diagnostic-tools'),pack('sterile',1740,380,108,'clean-components')]),
-  cctv: room('watch-records-and-camera-service','command',[pack('records',650,380,124,'watch-records'),pack('maintenance',1700,384,112,'camera-spares')]),
-  'proving-ground': room('range-safety-and-protective-equipment','industrial',[pack('maintenance',650,382,122,'safety-equipment'),pack('records',1380,380,112,'range-checklists')]),
-  morgue: room('forensic-consumables-and-identification-records','clinical',[pack('sterile',730,376,128,'forensic-consumables'),pack('records',1700,382,114,'identification-records')]),
-  'escape-pods': room('evacuation-checks-and-emergency-supply','industrial',[pack('sterile',640,380,126,'emergency-consumables'),pack('records',1710,386,116,'evacuation-checklists')]),
-  durandal: room('computer-service-and-diagnostic-records','command',[pack('maintenance',660,376,124,'computer-service-kit'),pack('records',1720,380,112,'diagnostic-records')]),
+  logistics: room('classified-freight-and-packing-materials','industrial',[pack('maintenance',340,535,124,'packing-tools'),pack('records',1140,370,118,'freight-manifests'),pack('maintenance',1060,535,100,'handling-supplies')]),
+  'mire-archives': room('evidence-sorting-and-physical-records','command',[pack('records',810,384,132,'evidence-reference'),pack('records',1618,535,126,'physical-records')]),
+  'synthetic-bay': room('diagnostic-tools-and-clean-components','clinical',[pack('maintenance',750,535,126,'diagnostic-tools'),pack('sterile',1210,535,108,'clean-components')]),
+  cctv: room('watch-records-and-camera-service','command',[pack('records',1100,350,124,'watch-records'),pack('maintenance',1640,380,112,'camera-spares')]),
+  'proving-ground': room('range-safety-and-protective-equipment','industrial',[pack('maintenance',650,382,122,'safety-equipment'),pack('records',1500,465,112,'range-checklists')]),
+  morgue: room('forensic-consumables-and-identification-records','clinical',[pack('sterile',730,376,128,'forensic-consumables'),pack('records',850,376,114,'identification-records')]),
+  'escape-pods': room('evacuation-checks-and-emergency-supply','industrial',[pack('sterile',575,535,126,'emergency-consumables'),pack('records',1710,386,116,'evacuation-checklists')]),
+  durandal: room('computer-service-and-diagnostic-records','command',[pack('maintenance',1100,350,124,'computer-service-kit'),pack('records',1650,380,112,'diagnostic-records')]),
   bioforge: room('specimen-preparation-and-sterile-entry','clinical',[pack('sterile',740,376,126,'sterile-entry-supply'),pack('sterile',1730,388,108,'specimen-consumables')]),
   'animal-care': room('habitat-hygiene-and-feed-preparation','habitat',[pack('galley',230,390,118,'feed-preparation'),pack('sterile',1320,392,108,'habitat-hygiene')]),
   'frontier-civil-counter': room('port-records-and-waiting-area','habitat',[pack('records',1070,382,122,'port-records'),pack('galley',2170,398,114,'waiting-area-supply')]),
@@ -70,6 +70,15 @@ const heightCaps = freeze({locker:106,'medical-cabinet':106,'equipment-rack':106
   'filter-panel':76,valves:86,'capsule-readout':42,handset:44,'medical-sign':38,'warning-sign':42,
   clock:28,chronometers:36,vent:25,lamp:12,'cable-run':20});
 
+// Explicit adjustments to existing fittings after native pipes and actual deck
+// consoles gained shared silhouettes. They retain the original kind/material.
+export const HUB_LEGACY_FIXTURE_PLACEMENTS_V138=freeze({
+  'life-support':[{kind:'cylinder',sourceX:166,x:150},{kind:'filter-stack',x:400,height:70}],
+  'arrival-airlock':[{kind:'vent',role:'airlock-controls',x:1540}],
+  'proving-ground':[{kind:'tool-board',role:'range-protection-stock',x:1280}],
+  bioforge:[{kind:'vent',role:'biological-services',x:1550}]
+});
+
 function wallTop(kind,height,plan) {
   const {ceilingY,walkY}=plan.planes;
   if(kind==='vent')return ceilingY+22;
@@ -89,10 +98,14 @@ export function getHubRoomLifePlanV136(room,options={}) {
   // The background pass precedes drawTraversal: decks remain in front of wall
   // equipment. Reserve entrances and climbing corridors, rather than deleting
   // all scenery from behind a long, transparent maintenance deck.
-  const spatial=getHubSpatialPlanV136(room,{...options,platforms:[]}),start=spatial.bounds.x,items=[];
+  const spatial=getHubSpatialPlanV136(room,{...options,platforms:[]}),start=spatial.bounds.x,items=[],legacyOmissionsV138=[];
   const accept=entry=>hubSpatialPlacementClearV136(entry,spatial,{margin:3})&&!items.some(existing=>overlap(existing,entry));
+  const recordOmission=entry=>legacyOmissionsV138.push({kind:entry.kind,role:entry.role,
+    bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h},reason:'native-clearance-or-existing-task-equipment',
+    reservations:spatial.reservations.filter(reservation=>overlap(entry,reservation)).map(reservation=>reservation.role)});
   const supplies=[];
-  for(const supply of definition.supplies){
+  for(const originalSupply of definition.supplies){
+    const supply={...originalSupply,...options.legacySupplyOverrides?.[originalSupply.role]};
     const cell=getHubPropAtlasCellV136(supplyCells[supply.cell]);
     if(!cell)continue;
     const width=Math.min(supply.w,cell.width),height=width*cell.source.h/cell.source.w;
@@ -101,7 +114,7 @@ export function getHubRoomLifePlanV136(room,options={}) {
       support:'rear-wall',plane:'rear',collidable:false,interactive:false,
       asset:HUB_SERVICE_PROP_ATLAS_V136.asset,source:{...cell.source},
       perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
-    if(accept(entry)){items.push(entry);supplies.push(entry);}
+    if(accept(entry)){items.push(entry);supplies.push(entry);}else recordOmission(entry);
   }
   for(const source of original.items){
     if(source.kind==='medical-cart'){
@@ -109,19 +122,21 @@ export function getHubRoomLifePlanV136(room,options={}) {
         asset:HUB_SERVICE_PROP_ATLAS_V136.asset,source:{...cell.source},w:cell.width,h:cell.height,
         x:start+finite(trolleySockets[room.id],source.x+source.w/2)-cell.width/2,y:spatial.planes.rearServiceY-cell.height,
         perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
-      if(accept(entry))items.push(entry);
+      if(accept(entry))items.push(entry);else recordOmission(entry);
       continue;
     }
-    const height=source.kind==='bitmap'?Math.min(source.h,106):Math.min(source.h,heightCaps[source.kind]||source.h);
+    const adjusted=HUB_LEGACY_FIXTURE_PLACEMENTS_V138[room.id]?.find(entry=>entry.kind===source.kind
+      &&(!entry.role||entry.role===source.role)&&(entry.sourceX==null||entry.sourceX===source.x));
+    const height=adjusted?.height??(source.kind==='bitmap'?Math.min(source.h,106):Math.min(source.h,heightCaps[source.kind]||source.h));
     const scale=height/source.h,width=source.w*scale;
-    const entry={...source,x:start+source.x+(source.w-width)/2,w:width,h:height,
+    const entry={...source,x:start+(adjusted?.x??source.x+source.w/2)-width/2,w:width,h:height,
       y:source.support==='rear-floor'?spatial.planes.rearServiceY-height:wallTop(source.kind,height,spatial),
       perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
-    if(accept(entry))items.push(entry);
+    if(accept(entry))items.push(entry);else recordOmission(entry);
   }
   return enrichHubRoomCompositionV137(room,{schema:136,roomId:room.id,task:definition.task,theme:definition.theme,accent:original.accent,
     start,width:spatial.bounds.w,floorY:spatial.planes.walkY,top:spatial.planes.ceilingY,
-    items,supplies,spatial,sourceStatus:'existing-equipment-rescaled-and-original-small-supplies',
+    items,supplies,spatial,legacyOmissionsV138,sourceStatus:'existing-equipment-rescaled-and-original-small-supplies',
     collidable:false,interactive:false,gameplayPlane:'2d'},options);
 }
 
@@ -165,6 +180,7 @@ export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMot
     planes:{...composition.spatial.planes},projection:{...composition.spatial.projection},
     items:rendered.items.map(entry=>({...entry,motif:composition.task})),supplies:composition.supplies.map(entry=>({role:entry.role,cell:entry.cell,bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h}})),
     reservations:structuredClone(composition.spatial.reservations),preservedCriticalSpaces:true,
+    legacyOmissionsV138:structuredClone(composition.legacyOmissionsV138),
     collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,
     furnishingV137:composition.furnishingV137?{...structuredClone(composition.furnishingV137),
       paintedRoles:composition.furnishingV137.added.filter(entry=>paintedRoles.has(entry.role)).map(entry=>entry.role),
@@ -213,6 +229,7 @@ export function withHubRoomLifeV136(Base) {
       return {...super.getSnapshot(),hubRoomLifeV136:{active:!this.editorPlaytest,rooms:Object.keys(HUB_ROOM_FURNISHING_V137).length,
         current:rendered.find(entry=>entry.roomId===current?.id)||null,rendered,
         vehicles:this.editorPlaytest?[]:structuredClone([...this.hubVehiclesRenderedV136?.values()||[]]),
+        nativeFixtures:this.editorPlaytest?[]:structuredClone([...this.annexFixturesRenderedV138?.values()||[]]),
         sourceStatus:'authored-task-groups-and-original-separated-ship-furnishings',collidable:false,interactive:false}};
     }
   };

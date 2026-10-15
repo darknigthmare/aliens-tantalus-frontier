@@ -31,7 +31,9 @@
     "qa:tantalus:npcs": "node scripts/qa-npc-life-v136.mjs",
     "qa:editor:spatial": "node scripts/qa-editor-spatial-browser-v136.mjs",
     "test:ship": "node --test scripts/verify-hub-ship-layout-v137.mjs scripts/verify-hub-circulation-v137.mjs scripts/verify-hub-room-furnishing-v137.mjs scripts/verify-hub-room-identity-v137.mjs",
-    "qa:tantalus:ship": "node scripts/qa-tantalus-ship-v137.mjs"
+    "qa:tantalus:ship": "node scripts/qa-tantalus-ship-v137.mjs",
+    "test:level": "node --test scripts/verify-hub-service-routes-v138.mjs scripts/verify-hub-crawl-hint-v138.mjs scripts/verify-hub-interior-wall-atlas-v138.mjs scripts/verify-hub-compartment-shell-v138.mjs scripts/verify-hub-destination-signage-v138.mjs scripts/verify-hub-annex-fixtures-v138.mjs scripts/verify-hub-critical-furnishing-v138.mjs",
+    "qa:tantalus:level": "node scripts/qa-tantalus-level-v138.mjs"
   },
   "engines": {
     "node": ">=22"

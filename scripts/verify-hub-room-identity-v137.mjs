@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import { HUB_DECKS } from '../src/hub-game.js';
 import { HUB_ANNEXES_V137 } from '../src/hub-annex-registry-v137.js';
 import { getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
+import { getHubAnnexFixturePlanV138 } from '../src/hub-annex-fixtures-v138.js';
 import { enrichHubRoomCompositionV137, getHubRearEquipmentReservationsV137 } from '../src/hub-room-furnishing-v137.js';
 import { SHIP_PORT_SERVICE_SIGNS_V137, SHIP_PORT_LIGHT_FITTINGS_V137 } from '../src/ship-port-room-v87.js';
 import { HUB_ROOM_PRESENTATION_IDS_V119, getHubRoomPresentationV119 } from '../src/hub-room-presentation-v119.js';
@@ -119,7 +120,7 @@ test('maintenance labels and closed service riser reserve their exact silhouette
   assert.equal(reservations.filter(row=>row.role==='service-destination-sign').length,2);
   assert.equal(route.closedServiceRisers.length,1);assert.equal(reservations.filter(row=>row.role==='closed-service-riser').length,2);
   for(const sign of route.routeSigns)for(const item of composition.items)assert.ok(!overlap(sign.frame,item),'Sign covers '+item.role);
-  const riser=route.closedServiceRisers[0];assert.equal(riser.closed,true);assert.equal(riser.interactive,false);assert.equal(riser.collidable,false);
+  const riser=route.closedServiceRisers[0];assert.ok(riser.returnBounds.y>=route.routeSigns[1].frame.y+route.routeSigns[1].frame.h+12);assert.equal(riser.bounds.y,riser.returnBounds.y);assert.equal(riser.closed,true);assert.equal(riser.interactive,false);assert.equal(riser.collidable,false);
   assert.equal(riser.bounds.y+riser.bounds.h,566,'Closed riser is unsupported above the service plinth');
   for(const bounds of [riser.bounds,riser.returnBounds]){
     assert.ok(bounds.x>route.routeSigns[1].bounds.x&&bounds.x+bounds.w<room.world.width);
@@ -175,4 +176,14 @@ test('civil reception identity and furnishings reserve both real service plaques
   }
   const shifted=getHubRoomServicePlaqueBoundsV137({...room,xStart:8000});
   assert.deepEqual(shifted.map(row=>row.x-8000),plaques.map(row=>row.x));
+});
+
+
+test('annex identity reserves real visible fixture silhouettes and disregards explicitly omitted generic radars',()=>{
+  for(const annex of HUB_ANNEXES_V137){const room={...annex,xStart:0},model=getHubRoomIdentityPlanV137(room),fixtures=getHubAnnexFixturePlanV138(room);
+    if(model.bounds)for(const reservation of fixtures.reservations)assert.ok(!overlap(model.frame,reservation),room.id+' identity covers actual fixture '+reservation.sourceId);
+  }
+  const room={...HUB_ANNEXES_V137.find(row=>row.id==='mire-archives'),xStart:0},before=getHubRoomIdentityPlanV137(room);
+  const omitted={id:'nonfunctional-old-radar',role:'navigation',asset:'/assets/openai/hub/props/sensor-console.png',x:0,y:240,w:1920,h:200};
+  const after=getHubRoomIdentityPlanV137({...room,props:[...room.props,omitted]});assert.deepEqual(after.bounds,before.bounds,'An omitted radar still consumed the real wall socket');
 });

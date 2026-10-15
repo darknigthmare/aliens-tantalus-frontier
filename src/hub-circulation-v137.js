@@ -1,5 +1,5 @@
 import { HUB_DECKS } from './hub-game.js';
-import { HUB_SPATIAL_SECTION_V136 } from './hub-spatial-design-v136.js';
+import { HUB_SPATIAL_SECTION_V136, getHubSpatialPlanV136 } from './hub-spatial-design-v136.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { HUB_SHIP_CONNECTIONS_V137 } from './hub-ship-layout-v137.js';
 import { drawHubSteelServicesV133 } from './hub-authored-composition-v133.js';
@@ -45,13 +45,19 @@ export function getHubServiceConduitPlanV137(occlusion, portals = [], { floorY =
       protectedBounds.w = right - protectedBounds.x; protectedBounds.h = bottom - protectedBounds.y;
     }
     const bypassX = protectedBounds.x + protectedBounds.w + clearance + index * 12, turnY = protectedBounds.y - clearance - index * 5;
-    if (turnY <= top + 2) return null;
-    return { points: [[x, top], [x, turnY], [bypassX, turnY], [bypassX, bottom - 12], [endX, bottom - 12]],
+    const points = turnY <= top + 2
+      // A destination plaque may use the narrow band above its doorway.
+      // Take the whole drop from a clear ceiling socket instead of bending
+      // a foreground pipe across that plaque to retain its old upper anchor.
+      ? [[bypassX, top], [bypassX, bottom - 12], [endX, bottom - 12]]
+      : [[x, top], [x, turnY], [bypassX, turnY], [bypassX, bottom - 12], [endX, bottom - 12]];
+    return { points,
       bypassedPortal: { ...portal }, protectedBounds, clearance };
   });
   if (conduits.some(conduit => !conduit) || !conduits.some(conduit => conduit.bypassedPortal)) return null;
+  const startXs = conduits.map(conduit => conduit.points[0][0]);
   return { id: occlusion.id, conduits, wallMounts: [
-    { x: occlusion.x + 10, y: top + 4, w: 52, h: 6 },
+    { x: Math.min(...startXs) - 10, y: top + 4, w: Math.max(...startXs) - Math.min(...startXs) + 20, h: 6 },
     { x: endX - 10, y: bottom - 22, w: 6, h: 24 }
   ], collidable: false, geometryPreserved: true, source: 'native-doorway-clearance' };
 }
@@ -137,6 +143,34 @@ export function getHubCirculationPlanV137(platform, {
   };
 }
 
+/** Furnishings reserve the solid steel actually drawn by this renderer, not
+ * the open air inside its rear railing. These rectangles include the top
+ * depth face and bolted consoles, clipped to the same room cutaway. */
+export function getHubCirculationSolidReservationsV138(platform, options = {}) {
+  const plan = getHubCirculationPlanV137(platform, options);
+  if (!plan) return [];
+  const reservation = (bounds, role, polygon = null) => {
+    const room = plan.roomBounds;
+    const left = room ? Math.max(bounds.x, room.x) : bounds.x;
+    const right = room ? Math.min(bounds.x + bounds.w, room.x + room.w) : bounds.x + bounds.w;
+    return { ...bounds, x: left, w: Math.max(0, right - left), role, sourceId: plan.id,
+      ...(polygon ? { polygon: polygon.map(point => [...point]) } : {}), plane: plan.plane,
+      collidable: false, interactive: false, source: 'native-circulation-renderer' };
+  };
+  const points = plan.topSurface, minX = Math.min(...points.map(point => point[0])), maxX = Math.max(...points.map(point => point[0]));
+  const minY = Math.min(...points.map(point => point[1])), maxY = Math.max(...points.map(point => point[1]));
+  return [reservation(plan.sourceBounds, 'native-deck-face'),
+    reservation({ x: minX, y: minY, w: maxX - minX, h: maxY - minY }, 'native-deck-top', points),
+    ...plan.supports.map(support => {
+      const x = support.x + plan.depthDx;
+      // Triangle reaches x+14; the bolted wall plate reaches x-9 and
+      // three pixels below the diagonal's endpoint, exactly as drawn below.
+      return reservation({ x: x - 9, y: support.top - 2, w: 23, h: support.bottom - support.top + 5 }, 'native-deck-console',
+        [[x - 6, support.top - 2], [x + 14, support.top - 2], [x - 6, support.bottom]]);
+    })
+  ].filter(bounds => bounds.w > 0 && bounds.h > 0);
+}
+
 export function drawHubCirculationV137(ctx, platform, options = {}) {
   const plan = getHubCirculationPlanV137(platform, options);
   if (!ctx || !plan) return null;
@@ -207,7 +241,11 @@ export function withHubCirculationV137(Base) {
       const deckId = HUB_DECKS[this.state?.deck || 0].id;
       const portals = HUB_SHIP_CONNECTIONS_V137.filter(connection => connection.parentDeck === deckId).map(connection => connection.parentDoorBounds);
       for (const occlusion of (this.v51Occluders || []).filter(entry => entry.phase === phase)) {
-        if (!drawHubServiceConduitsV137(ctx, occlusion, portals, { clearanceBounds: this.v51Vents || [] })) drawHubSteelServicesV133(ctx, occlusion);
+        const room = HUB_DECKS[this.state?.deck || 0].rooms.find(room => occlusion.x >= room.xStart && occlusion.x < room.xEnd);
+        const signs = occlusion.art === 'maintenancePipe' && room ? getHubSpatialPlanV136(room, {
+          doors: this.doorStates || [], ladders: this.v51Ladders || [], platforms: this.v51Platforms || []
+        }).reservations.filter(reservation => reservation.role === 'destination-sign') : [];
+        if (!drawHubServiceConduitsV137(ctx, occlusion, portals, { clearanceBounds: [...this.v51Vents || [], ...signs] })) drawHubSteelServicesV133(ctx, occlusion);
       }
     }
   };

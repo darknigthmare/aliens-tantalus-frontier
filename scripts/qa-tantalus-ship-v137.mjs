@@ -43,12 +43,12 @@ function observe() {
   const snap = h.getSnapshot(), annex = h.currentAnnexV71?.();
   return { running: h.running, deck: h.state.deck, room: h.currentRoom()?.id, annex: annex?.id || null,
     transition: h.annexTransitionV71?.direction || null, time: h.animationTime,
-    player: Object.fromEntries(['x', 'y', 'w', 'h', 'vx', 'vy', 'grounded', 'climbing', 'health', 'shockHits', 'facing'].map(key => [key, h.player[key]])),
+    player: Object.fromEntries(['x', 'y', 'w', 'h', 'vx', 'vy', 'grounded', 'climbing', 'crouching', 'health', 'shockHits', 'facing'].map(key => [key, h.player[key]])),
     camera: { ...(annex ? h.annexCameraV71 : h.camera) }, keys: [...h.keys], prompt: h.statusPrompt(),
     station: h.nearestAnnexStationV71?.()?.annexId || null, exit: h.nearestAnnexExitV71?.() || null,
     ladders: (annex?.ladders || h.v51Ladders || []).map(a => ({ ...a })),
     platforms: (annex?.platforms || h.v51Platforms || []).map(a => ({ ...a })),
-    presentation: Object.fromEntries(Object.entries(snap).filter(([key]) => /134|136|137|Commercial|stationUses|visitedAnnex/.test(key))) };
+    presentation: Object.fromEntries(Object.entries(snap).filter(([key]) => /134|136|137|138|Commercial|stationUses|visitedAnnex/.test(key))) };
 }
 const state = () => page.evaluate(observe);
 const check = (label, evidence) => report.checks.push({ label, evidence });
@@ -79,8 +79,10 @@ async function importParent(save) {
   const s = await state(); assert.equal(s.annex, null); safe(s); return s;
 }
 async function capture(label) {
-  await page.waitForFunction(() => { const life = globalThis.__ATF_HUB__?.getSnapshot()?.hubRoomLifeV136?.current;
-    return life?.furnishingV137 && life.furnishingV137.pendingImageRoles.length === 0; });
+  await page.waitForFunction(() => { const snapshot = globalThis.__ATF_HUB__?.getSnapshot(), life = snapshot?.hubRoomLifeV136?.current;
+    const shell = snapshot?.hubCompartmentShellV138?.current;
+    return life?.furnishingV137 && life.furnishingV137.pendingImageRoles.length === 0 &&
+      (!shell || !['original-wall-material', 'preserve-authored-refuge-apertures'].includes(shell.sourcePolicy) || shell.nativeReady === true); });
   const file = `${String(++serial).padStart(2, '0')}-${label}.png`;
   const bytes = await page.locator('#hub-canvas').screenshot({ path: join(output, file) });
   const s = await state(); report.captures.push({ label, file, sha256: hash(bytes), state: s }); return s;
@@ -113,7 +115,7 @@ async function reachParent(connection) {
   const atDoor = await capture(`${connection.spaceId}-parent-door`); assert.equal(atDoor.room, connection.parentRoomId);
   await page.keyboard.press('KeyE');
   await page.waitForFunction(id => { const h = globalThis.__ATF_HUB__; return h?.currentAnnexV71?.()?.id === id && !h.annexTransitionV71; }, connection.spaceId, { timeout: 12000 });
-  safe(await state()); return atDoor;
+  safe(await state(), connection.annexDoorBounds.y + connection.annexDoorBounds.h); return atDoor;
 }
 function inspectionCount(s, id) { return s.presentation.hubCommercialV71?.annexes?.[id]?.station?.activationCount ?? s.presentation.stationUsesV71?.[id] ?? null; }
 async function inspectStation(space) {
@@ -132,9 +134,22 @@ async function inspectStation(space) {
   for (const tile of parallax.nativeTiles) assert.ok(Math.abs(tile.scaleX - tile.scaleY) < 1e-9);
   check(`${space.name}: the actual scene paints every new furnishing image and retains three uniformly scaled background planes.`, { life, parallax }); return after;
 }
+async function reachAnnexStandingPlane(footY, destinationX) {
+  const current = await state(), currentFoot = current.player.y + current.player.h;
+  if (Math.abs(currentFoot - footY) < .15) return current;
+  assert.ok(current.annex, 'Standing-plane transfers must use actual annex ladders.');
+  const candidates = current.ladders.filter(ladder => Math.abs(ladder.top - Math.min(currentFoot, footY)) < .15
+    && Math.abs(ladder.bottom - Math.max(currentFoot, footY)) < .15);
+  assert.ok(candidates.length > 0, `No real ladder links feet${currentFoot} to feet${footY}.`);
+  const center = ladder => ladder.x + ladder.w / 2 - current.player.w / 2;
+  candidates.sort((a, b) => Math.abs(center(a) - current.player.x) + Math.abs(center(a) - destinationX)
+    - Math.abs(center(b) - current.player.x) - Math.abs(center(b) - destinationX));
+  await walkTo(center(candidates[0]), currentFoot); return climbTo(footY, footY < currentFoot);
+}
 async function leaveAt(connection) {
   const x = connection.entranceLocalX + (connection.entranceSide === 'west' ? connection.annexDoorBounds.w / 2 + 16 : -connection.annexDoorBounds.w / 2 - 60);
-  await walkTo(x); await capture(`${connection.spaceId}-${connection.entranceSide}-exit-approach`); await page.keyboard.press('KeyE');
+  const annexFootY = connection.annexDoorBounds.y + connection.annexDoorBounds.h;
+  await reachAnnexStandingPlane(annexFootY, x); await walkTo(x, annexFootY); await capture(`${connection.spaceId}-${connection.entranceSide}-exit-approach`); await page.keyboard.press('KeyE');
   await page.waitForFunction(() => { const h = globalThis.__ATF_HUB__; return !h.currentAnnexV71?.() && !h.annexTransitionV71; }, null, { timeout: 12000 });
   const after = await capture(`${connection.spaceId}-returned-${connection.parentRoomId}`);
   const deck = HUB_DECKS.findIndex(d => d.id === connection.parentDeck);
@@ -200,6 +215,7 @@ async function maintenanceJourney() {
   // Return without a new fixture: workshop → far door → corridor → sensor.
   await walkTo(east.parentDoorBounds.x + east.parentDoorBounds.w / 2 - 22); await page.keyboard.press('KeyE');
   await page.waitForFunction(id => { const h = globalThis.__ATF_HUB__; return h.currentAnnexV71?.()?.id === id && !h.annexTransitionV71; }, space.id, { timeout: 12000 });
+  await reachAnnexStandingPlane(space.world.floorY, 1280);
   await walkTo(1280); const opposite = await capture('maintenance-east-to-west-midpoint');
   const reverseResume = await persistAndReload(opposite, east.id); const sensor = await leaveAt(west);
   check('The continuous return route enters from workshop, survives reload with its eastern endpoint and returns to sensors.', { opposite, reverseResume, sensor });

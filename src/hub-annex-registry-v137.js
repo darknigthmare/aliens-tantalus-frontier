@@ -34,7 +34,7 @@ function spawnFor(space, connection = getHubShipConnectionsForSpaceV137(space.id
   return { x: connection.entranceSide === 'east'
     ? connection.entranceLocalX - space.entrance.w / 2 - 44 - 30
     : connection.entranceLocalX + space.entrance.w / 2 + 30,
-  y: space.world.floorY - 92, w: 44, h: 92 };
+  y: connection.annexDoorBounds.y + connection.annexDoorBounds.h - 92, w: 44, h: 92 };
 }
 
 export function validateHubAnnexGeometryV137(annex) {
@@ -67,6 +67,8 @@ export function validateHubAnnexGeometryV137(annex) {
     const spawn = spawnFor(annex, connection);
     if (!inWorld(spawn, world) || list(annex.colliders).some(collider => overlap(spawn, collider))
       || list(annex.platforms).some(surface => surface.role !== 'floor' && overlap(spawn, surface))) errors.push('blocked-connection-spawn');
+    if (!list(annex.platforms).some(surface => surface.y === spawn.y + spawn.h
+      && spawn.x >= surface.x && spawn.x + spawn.w <= surface.x + surface.w)) errors.push('unsupported-connection-spawn');
   }
   const standingLane = { x: 24, y: world.floorY - 92, w: world.width - 48, h: 92 };
   if (list(annex.colliders).some(collider => collider.collisionMode !== 'one-way-top' && overlap(standingLane, collider))) errors.push('blocked-standing-lane');

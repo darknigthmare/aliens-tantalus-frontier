@@ -8,6 +8,7 @@ import { HUB_ANNEXES_V137, HUB_ANNEX_BY_ID_V137, createHubCommercialStateV137, a
   validateHubAnnexGeometryV137, buildHubRuntimeGraphV137 } from '../src/hub-annex-registry-v137.js';
 import { HUB_SHIP_SPACES_V137, HUB_SHIP_CONNECTIONS_V137, HUB_SHIP_PARENT_LANDINGS_V137,
   getHubShipConnectionsForSpaceV137, getHubShipConnectionV137 } from '../src/hub-ship-layout-v137.js';
+import { HUB_MAINTENANCE_EAST_LANDING_V138 } from '../src/hub-maintenance-landing-v138.js';
 import { HUB_FURNISHING_ATLAS_V137, getHubFurnishingCellV137 } from '../src/hub-furnishing-atlas-v137.js';
 import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from '../src/hub-game.js';
 import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
@@ -74,6 +75,18 @@ function enter(subject, spaceId) {
   assert.equal(subject.hub.nearestParentAnnexDoorV71()?.annexId, spaceId); tap(subject, 'KeyE'); advance(subject, .5);
   assert.equal(subject.hub.currentAnnexV71()?.id, spaceId);
 }
+function reachMaintenanceExit(subject, connection) {
+  const desiredFootY = connection.annexDoorBounds.y + connection.annexDoorBounds.h;
+  if (Math.abs(subject.hub.player.y + subject.hub.player.h - desiredFootY) > 1) {
+    const ladders = subject.hub.currentAnnexV71().ladders;
+    const ladder = desiredFootY < 624 ? ladders.at(-1) : ladders[0];
+    walk(subject, ladder.x + ladder.w / 2 - subject.hub.player.w / 2);
+    const direction = desiredFootY < 624 ? 'KeyW' : 'KeyS';
+    subject.key('keydown', direction); advance(subject, 1.1); subject.key('keyup', direction);
+  }
+  walk(subject, connection.entranceLocalX - 22);
+  assert.equal(subject.hub.player.y + subject.hub.player.h, desiredFootY);
+}
 
 test('the historical thirteen annex objects remain canonical while the connected ship grows to thirty-five places', () => {
   assert.equal(HUB_ANNEXES_V87.length, 13); assert.equal(HUB_ANNEXES_V137.length, 19);
@@ -96,6 +109,17 @@ test('compact service rooms retain the requested widths and every doorway has a 
     assert.ok(space.platforms.filter(p => p.role !== 'floor').every(p => !overlap(standing, p)));
     assert.ok(space.colliders.every(p => p.collisionMode === 'one-way-top' || !overlap(standing, p)));
   }
+});
+
+test('the workshop endpoint stands on the shared real upper landing while the sensor endpoint remains on the lower floor', () => {
+  const annex = HUB_ANNEX_BY_ID_V137['maintenance-spine'], landing = HUB_MAINTENANCE_EAST_LANDING_V138;
+  const platform = annex.platforms.find(surface => surface.role === 'catwalk');
+  assert.equal(platform.x, landing.x); assert.equal(platform.x + platform.w, landing.endX); assert.equal(platform.y, landing.top);
+  assert.deepEqual(annex.ladders.map(ladder => ladder.x), [...landing.ladderXs]);
+  const west = getHubShipConnectionV137('maintenance-spine:primary'), east = getHubShipConnectionV137('maintenance-spine:workshop');
+  assert.equal(west.annexDoorBounds.y + west.annexDoorBounds.h, 624);
+  assert.equal(east.annexDoorBounds.y + east.annexDoorBounds.h, landing.top);
+  assert.ok(east.annexDoorBounds.x >= platform.x && east.annexDoorBounds.x + east.annexDoorBounds.w <= platform.x + platform.w);
 });
 
 test('new entry sockets fit real parent rooms and the sanitary entrance stands on the shared authored upper landing', () => {
@@ -212,13 +236,18 @@ test('all six native doors support keyboard entry, walking to the actual station
 test('the native maintenance corridor connects both decks and rebuilds real geometry in each direction after a persisted mid-route reload', async () => {
   for (const endpointId of ['maintenance-spine:primary', 'maintenance-spine:workshop']) {
     const entry = getHubShipConnectionV137(endpointId), exit = getHubShipConnectionsForSpaceV137('maintenance-spine').find(c => c.id !== entry.id);
-    let subject = await fixture(entry); enter(subject, 'maintenance-spine'); walk(subject, 1280);
+    let subject = await fixture(entry); enter(subject, 'maintenance-spine');
+    assert.equal(subject.hub.player.x, entry.entranceSide === 'east' ? 2283 : 233);
+    assert.equal(subject.hub.player.y + subject.hub.player.h, entry.annexDoorBounds.y + entry.annexDoorBounds.h);
+    walk(subject, 1280);
     subject.hub.persist(); const patch = clone(subject.patches.at(-1));
     assert.equal(patch.hubCommercialV71.returnContext.endpointId, entry.id); assert.equal(patch.hubCommercialV71.activeConnectionIdV137, entry.id);
-    const savedX = patch.hubCommercialV71.annexPositionX; subject.hub.stop(false); subject = await fixture(entry, patch);
+    const savedX = patch.hubCommercialV71.annexPositionX, savedY = patch.hubCommercialV71.annexPositionY;
+    subject.hub.stop(false); subject = await fixture(entry, patch);
     assert.equal(subject.hub.currentAnnexV71()?.id, 'maintenance-spine'); assert.equal(Math.round(subject.hub.player.x), savedX);
+    assert.equal(Math.round(subject.hub.player.y), savedY);
     assert.equal(subject.hub.hubCommercialStateV71.returnContext.endpointId, entry.id);
-    walk(subject, exit.entranceLocalX - 22); assert.equal(subject.hub.nearestAnnexExitV71()?.endpointId, exit.id);
+    reachMaintenanceExit(subject, exit); assert.equal(subject.hub.nearestAnnexExitV71()?.endpointId, exit.id);
     tap(subject, 'KeyE'); advance(subject, .5);
     const deck = HUB_DECKS.findIndex(d => d.id === exit.parentDeck);
     assert.equal(subject.hub.isAnnexActiveV71(), false); assert.equal(subject.hub.state.deck, deck); assert.equal(subject.hub.currentRoom().id, exit.parentRoomId);
@@ -228,6 +257,27 @@ test('the native maintenance corridor connects both decks and rebuilds real geom
     assert.equal(subject.hub.getSnapshot().hubCommercialV71.activeConnectionIdV137, null);
     // The opposite endpoint remains usable immediately; this is a loop, not an exit-only scripted transfer.
     enter(subject, 'maintenance-spine'); assert.equal(subject.hub.hubCommercialStateV71.returnContext.endpointId, exit.id);
+    assert.equal(subject.hub.player.y + subject.hub.player.h, exit.annexDoorBounds.y + exit.annexDoorBounds.h);
+    subject.hub.stop(false); subject.balanced();
+  }
+});
+
+test('V137 floor checkpoints stay on their lower route and can reach either real exit after the east landing is raised', async () => {
+  const origin = getHubShipConnectionV137('maintenance-spine:workshop');
+  for (const exit of getHubShipConnectionsForSpaceV137('maintenance-spine')) {
+    const commercial = createHubCommercialStateV137();
+    Object.assign(commercial, { activeAnnexId: 'maintenance-spine', lastAnnexId: 'maintenance-spine', annexPositionX: 2283,
+      annexPositionY: 532, annexClimbing: false, activeConnectionIdV137: origin.id,
+      returnContext: { endpointId: origin.id, deckId: origin.parentDeck, roomId: origin.parentRoomId, x: origin.parentDoorBounds.x + 37, facing: -1 } });
+    Object.assign(commercial.annexes['maintenance-spine'], { visited: true, visitCount: 1, lastVisitedAt: 1 });
+    const subject = await fixture(origin, { deck: 2, roomId: 'workshop', positionX: origin.parentDoorBounds.x + 37,
+      positionY: 532, commercialV71: commercial });
+    assert.equal(subject.hub.player.x, 2283); assert.equal(subject.hub.player.y, 532, 'An older checkpoint must not be lifted to the new mezzanine.');
+    assert.equal(subject.hub.nearestAnnexExitV71(), null, 'The upper portal cannot be used from the floor underneath it.');
+    reachMaintenanceExit(subject, exit); assert.equal(subject.hub.nearestAnnexExitV71()?.endpointId, exit.id);
+    tap(subject, 'KeyE'); advance(subject, .5); assert.equal(subject.hub.isAnnexActiveV71(), false);
+    assert.equal(subject.hub.state.deck, HUB_DECKS.findIndex(deck => deck.id === exit.parentDeck));
+    assert.equal(subject.hub.player.y + subject.hub.player.h, 624);
     subject.hub.stop(false); subject.balanced();
   }
 });

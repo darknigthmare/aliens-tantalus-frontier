@@ -6,6 +6,8 @@ import { HUB_ENVIRONMENT_ATLAS_V134, getHubEnvironmentPanelV134 } from './hub-en
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getHubSpatialPlanV136, hubSpatialPlacementClearV136 } from './hub-spatial-design-v136.js';
 import { getHubRoomIdentityReservationsV137 } from './hub-room-identity-v137.js';
+import { HUB_INTERIOR_WALL_ATLAS_V138 } from './hub-interior-wall-atlas-v138.js';
+import { HUB_COMPARTMENT_SHELLS_V138, drawHubCompartmentShellV138, drawHubCompartmentBaseV138 } from './hub-compartment-shell-v138.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -150,14 +152,19 @@ export function drawHubRoomParallaxV134(ctx, room, image, cameraX = 0, options =
   if (!model || !ctx) return null;
   const b = model.bounds, accent = HUB_AUTHORED_COMPOSITIONS_V133[room.id].accent;
   ctx.save(); ctx.beginPath(); ctx.rect(b.x,b.y,b.w,b.h); ctx.clip();
-  ctx.fillStyle = '#0b181c'; ctx.fillRect(b.x,b.y,b.w,b.h);
-  model.nativeTiles = getHubNativeWallTilesV134(image,b,model.layers[0].drift,options);
-  model.asset = ready(image) ? String(image.currentSrc || image.src || '') : null;
-  model.nativeReady = model.nativeTiles.length > 0;
-  ctx.globalAlpha = model.layers[0].opacity;
-  for (const {source:s,target:t} of model.nativeTiles) ctx.drawImage(image,s.x,s.y,s.w,s.h,t.x,t.y,t.w,t.h);
-  ctx.globalAlpha = 1;
-  drawRearShell(ctx,model,accent);
+  const shell=options.wallAtlasImage||room.id==='personal-refuge'
+    ? drawHubCompartmentShellV138(ctx,room,options.wallAtlasImage,cameraX,{...options,clip:b,layers:model.layers,originalWallImage:image}) : null;
+  if(shell?.handled){
+    model.nativeTiles=shell.nativeTiles;model.asset=shell.asset;model.nativeReady=shell.nativeReady;model.layers=shell.layers;
+  }else{
+    ctx.fillStyle='#0b181c';ctx.fillRect(b.x,b.y,b.w,b.h);
+    model.nativeTiles=getHubNativeWallTilesV134(image,b,model.layers[0].drift,options);
+    model.asset=ready(image)?String(image.currentSrc||image.src||''):null;model.nativeReady=model.nativeTiles.length>0;
+    ctx.globalAlpha=model.layers[0].opacity;
+    for(const {source:s,target:t}of model.nativeTiles)ctx.drawImage(image,s.x,s.y,s.w,s.h,t.x,t.y,t.w,t.h);
+    ctx.globalAlpha=1;drawRearShell(ctx,model,accent);
+  }
+  model.compartmentShellV138=shell?{...shell,nativeTiles:model.nativeTiles,nativeReady:model.nativeReady,asset:model.asset}:null;
   model.equipmentPanels=getHubRearEquipmentLayoutV134(room,model,options.atlasImage,options);
   for(const {source:s,target:t,mirrored} of model.equipmentPanels){
     const drawable=resolveSpriteDrawableV134(options.atlasImage);
@@ -167,10 +174,10 @@ export function drawHubRoomParallaxV134(ctx, room, image, cameraX = 0, options =
     ctx.strokeStyle='#344b4e';ctx.lineWidth=2;ctx.strokeRect(t.x-3,t.y-3,t.w+6,t.h+6);
     ctx.fillStyle='#5a6e6b';for(const x of [t.x+10,t.x+t.w-14])ctx.fillRect(x,t.y+t.h+2,4,6);
   }
-  drawNearServices(ctx,model,accent);
+  if(!shell?.handled)drawNearServices(ctx,model,accent);
   const shade = ctx.createLinearGradient(0,b.y,0,b.y+b.h);
   shade.addColorStop(0,'rgba(3,12,16,.08)'); shade.addColorStop(.58,'rgba(3,12,16,.02)'); shade.addColorStop(1,'rgba(4,14,18,.46)');
-  ctx.fillStyle = shade; ctx.fillRect(b.x,b.y,b.w,b.h);
+  ctx.fillStyle=shade;for(const region of shell?.paintRegions||[b])ctx.fillRect(region.x,region.y,region.w,region.h);
   ctx.restore(); return model;
 }
 
@@ -191,12 +198,22 @@ export function withHubRoomParallaxV134(Base) {
       }
       return this.hubEnvironmentAtlasImageV134 || null;
     }
+    getHubCompartmentWallAtlasImageV138() {
+      if(!this.hubCompartmentWallAtlasImageV138&&typeof globalThis.Image==='function'){
+        const image=new Image();image.decoding='async';image.src=HUB_INTERIOR_WALL_ATLAS_V138.asset;
+        this.hubCompartmentWallAtlasImageV138=image;
+      }
+      return this.hubCompartmentWallAtlasImageV138||null;
+    }
+    drawHubCompartmentBaseV138(ctx,room,{cameraX=0}={}) {
+      return this.editorPlaytest?false:drawHubCompartmentBaseV138(ctx,room,cameraX);
+    }
     drawHubRoomFarV58(ctx,room) {
       if (this.editorPlaytest) return super.drawHubRoomFarV58(ctx,room);
       const layer = resolveHubRoomFarArtV58(room.id);
       if (!layer) return super.drawHubRoomFarV58(ctx,room);
       return this.recordHubParallaxV134(drawHubRoomParallaxV134(ctx,room,this.roomLayerImages?.get(layer.asset),this.hubParallaxCameraOverrideV134 ?? this.camera?.x,
-        {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,atlasImage:this.getHubEnvironmentAtlasImageV134(),
+        {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,atlasImage:this.getHubEnvironmentAtlasImageV134(),wallAtlasImage:this.getHubCompartmentWallAtlasImageV138(),
           doors:this.doorStates,ladders:this.v51Ladders,platforms:this.v51Platforms}), 'room');
     }
     drawAnnexLayerV71(ctx,image,factor,alpha) {
@@ -213,7 +230,7 @@ export function withHubRoomParallaxV134(Base) {
         // overhead remains stationary; only its rear wall is refined here.
         const clip = annex.id === 'personal-refuge' ? {x:0,y:334,w:annex.world.width,h:270} : null;
         this.recordHubParallaxV134(drawHubRoomParallaxV134(ctx,room,wall,this.annexCameraV71?.x,
-          {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,clip,atlasImage:this.getHubEnvironmentAtlasImageV134(),
+          {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,clip,atlasImage:this.getHubEnvironmentAtlasImageV134(),wallAtlasImage:this.getHubCompartmentWallAtlasImageV138(),
             ladders:annex.ladders,platforms:annex.platforms}), 'annex');
         this.drawHubSpatialRearV136?.(ctx,room);
         this.drawHubRoomIdentityV137?.(ctx,room,{ladders:annex.ladders,platforms:annex.platforms});
@@ -240,7 +257,7 @@ export function withHubRoomParallaxV134(Base) {
         const room={id:'proving-ground',xStart:0,world:{width:2600,floorY:624}};
         const wall=this.annexModularImagesV72?.get('/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp');
         this.recordHubParallaxV134(drawHubRoomParallaxV134(ctx,room,wall,camera,{enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,
-          clip:{x:0,y:132,w:2600,h:238},atlasImage:this.getHubEnvironmentAtlasImageV134()}),'loader-training');
+          clip:{x:0,y:132,w:2600,h:238},atlasImage:this.getHubEnvironmentAtlasImageV134(),wallAtlasImage:this.getHubCompartmentWallAtlasImageV138()}),'loader-training');
         // Keep the original course label above its maximum physical load y386.
         const purposeRoom={...room,xStart:camera,profile:{worldWidth:1280}};
         if(typeof this.drawHubRoomPurposeV133==='function')this.drawHubRoomPurposeV133(ctx,purposeRoom,{top:148});
@@ -254,7 +271,8 @@ export function withHubRoomParallaxV134(Base) {
       const context=this.hubTrainingV132?.active?'loader-training':this.isAnnexActiveV71?.()?'annex':'room';
       const id=context==='loader-training'?'proving-ground':current?.id;
       const model=this.hubParallaxModelsV134?.get(`${context}:${id}`) || null;
-      return {...snapshot,hubRoomParallaxV134:{active:!this.editorPlaytest,reviewedRooms:Object.keys(HUB_ROOM_PARALLAX_V134).length,
+      return {...snapshot,hubCompartmentShellV138:{active:!this.editorPlaytest,reviewedRooms:Object.keys(HUB_COMPARTMENT_SHELLS_V138).length,
+        current:model?.compartmentShellV138||null,gameplayPlane:'2d',sourceStatus:'original-wall-materials-preserved-flight-envelopes-and-refuge-apertures'},hubRoomParallaxV134:{active:!this.editorPlaytest,reviewedRooms:Object.keys(HUB_ROOM_PARALLAX_V134).length,
         layeredRooms:Object.values(HUB_ROOM_PARALLAX_V134).filter(row=>row.presentationMode==='2.5d').length,
         orthographicRooms:Object.values(HUB_ROOM_PARALLAX_V134).filter(row=>row.presentationMode==='2d').length,
         current:model,gameplayPlane:'2d',coordinates:'preserved',sourceStatus:'existing-native-wall-and-original-generated-rear-equipment'}};

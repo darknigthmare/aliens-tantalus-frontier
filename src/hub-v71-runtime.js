@@ -30,6 +30,8 @@ import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
+import { HUB_ANNEX_MODULE_ART_V82, getHubAnnexFixturePlanV138, drawHubAnnexFixturesV138 } from './hub-annex-fixtures-v138.js';
+export { HUB_ANNEX_MODULE_ART_V82 } from './hub-annex-fixtures-v138.js';
 
 export * from './hub-v62-runtime.js';
 export * from './tantalus-hub-expansion-v71.js';
@@ -38,29 +40,6 @@ export const HUB_ANNEX_RUNTIME_SCHEMA_V71 = 71;
 export const HUB_ANNEX_STATE_KEY_V71 = 'hubCommercialV71';
 export const HUB_ANNEX_TRANSITION_SECONDS_V71 = 0.42;
 export const HUB_ANNEX_ART_ROLES_V71 = Object.freeze(['far', 'mid', 'prop', 'foreground', 'door']);
-
-// These small source regions are separate authored pieces inside legacy PNGs.
-// Their surrounding sheets contain detached bases or opaque white openings;
-// drawing the whole sheet would put those defects directly in the walking lane.
-export const HUB_ANNEX_MODULE_ART_V82 = Object.freeze({
-  floor: '/assets/openai/metroidvania/props/floor-segment.png',
-  catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
-  ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
-  pipe: '/assets/openai/metroidvania/props/maintenance-pipe.png',
-  provingWall: '/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp',
-  provingCeiling: '/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png',
-  crops: Object.freeze({
-    catwalkDeck: Object.freeze([40, 43, 228, 70]),
-    ladderLeft: Object.freeze([53, 4, 62, 172]),
-    ladderRight: Object.freeze([100, 4, 109, 172]),
-    ladderRung: Object.freeze([62, 36, 100, 40]),
-    pipeBody: Object.freeze([43, 4, 107, 178]),
-    pipeShaft: Object.freeze([49, 34, 99, 120]),
-    ceilingRaceway: Object.freeze([4, 4, 186, 29]),
-    wallScreen: Object.freeze([25, 8, 183, 99]),
-    provingCeilingSolid: Object.freeze([11, 141, 1528, 283])
-  })
-});
 
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
@@ -577,6 +556,7 @@ export class HubGame extends HubGameV62 {
     const connection = getHubShipConnectionV137(this.annexTransitionV71?.endpointId || this.annexReturnPoseV71?.endpointId);
     const entranceSide = connection?.entranceSide || annex.entranceSide;
     const entranceLocalX = connection?.entranceLocalX ?? annex.entranceLocalX;
+    const entranceStandingY = connection ? connection.annexDoorBounds.y + connection.annexDoorBounds.h : annex.world.floorY;
     const state = clone(this.hubCommercialStateV71);
     state.revision = Math.min(999999, Number(state.revision || 0) + 1);
     const annexState = state.annexes[annex.id];
@@ -588,7 +568,7 @@ export class HubGame extends HubGameV62 {
       ? entranceLocalX + annex.entrance.w / 2 + 30
       : entranceLocalX - annex.entrance.w / 2 - this.player.w - 30;
     state.annexPositionX = Math.round(spawnX);
-    state.annexPositionY = annex.world.floorY - this.player.h;
+    state.annexPositionY = entranceStandingY - this.player.h;
     state.annexClimbing = false;
     state.returnContext = {
       deckId: connection?.parentDeck || annex.parentDeck,
@@ -602,7 +582,7 @@ export class HubGame extends HubGameV62 {
     this.hubCommercialStateV71 = mutableCommercialState(state);
     Object.assign(this.player, {
       x: clamp(spawnX, 24, annex.world.width - this.player.w - 24),
-      y: annex.world.floorY - this.player.h,
+      y: entranceStandingY - this.player.h,
       vx: 0,
       vy: 0,
       grounded: true,
@@ -1151,7 +1131,7 @@ export class HubGame extends HubGameV62 {
     }
     if (['animal-care', SHIP_PORT_ANNEX_V87.id].includes(annex.id)) {
       const wall = images.get('far');
-      if (imageReady(wall)) {
+      if (!this.drawHubCompartmentBaseV138?.(ctx, annex, { cameraX: this.annexCameraV71.x }) && imageReady(wall)) {
         // World-anchored wall modules, not a stretched painting of a whole room.
         const scale = annex.world.floorY / wall.naturalHeight;
         const tileWidth = wall.naturalWidth * scale;
@@ -1194,7 +1174,8 @@ export class HubGame extends HubGameV62 {
   }
 
   drawAnnexExitLabelV137(ctx, annex, exit) {
-    if (!HUB_SHIP_SPACE_BY_ID_V137[annex.id] || this.hasRenderedHubServiceSignV137?.(exit.endpointId)) return false;
+    if (!HUB_SHIP_SPACE_BY_ID_V137[annex.id] || this.hasRenderedHubServiceSignV137?.(exit.endpointId)
+      || this.hasRenderedHubDestinationSignV138?.(exit.endpointId)) return false;
     const parent = HUB_DECKS.flatMap(deck => deck.rooms).find(room => room.id === exit.parentRoomId);
     ctx.fillStyle = '#a9bfb3'; ctx.font = '10px ui-monospace, monospace'; ctx.textAlign = 'center';
     ctx.fillText(parent?.name?.toUpperCase() || exit.parentRoomId.toUpperCase(), exit.bounds.x + exit.bounds.w / 2, exit.bounds.y - 10);
@@ -1297,41 +1278,9 @@ export class HubGame extends HubGameV62 {
   }
 
   drawAnnexModularPropsV72(ctx, annex) {
-    for (const prop of annex.props.filter((entry) => entry.asset)) {
-      const image = this.annexModularImagesV72.get(prop.asset);
-      if (!imageReady(image)) continue;
-      if (prop.role === 'ceiling-service') {
-        if (annex.id === 'proving-ground') continue;
-        const source = HUB_ANNEX_MODULE_ART_V82.crops.ceilingRaceway;
-        const height = prop.w * (source[3] - source[1]) / (source[2] - source[0]);
-        this.drawCroppedBitmapV72(ctx, image, source, { ...prop, h: height });
-      } else if (prop.role === 'wall-service' || prop.role === 'navigation') {
-        // This source is a floor console. Only its detachable display belongs
-        // on a wall; the keyboard and floor plinth must not hang in mid-air.
-        const source = HUB_ANNEX_MODULE_ART_V82.crops.wallScreen;
-        const height = prop.w * (source[3] - source[1]) / (source[2] - source[0]);
-        this.drawCroppedBitmapV72(ctx, image, source, { ...prop, h: height });
-      } else {
-        this.drawCroppedBitmapV72(ctx, image, [0, 0, image.naturalWidth, image.naturalHeight], prop);
-      }
-    }
-    const pipe = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.pipe);
-    for (const collider of annex.colliders.filter((entry) => imageReady(pipe) && entry.role === 'structure')) {
-      const body = HUB_ANNEX_MODULE_ART_V82.crops.pipeBody;
-      const scale = collider.h / (body[3] - body[1]);
-      const width = (body[2] - body[0]) * scale;
-      const x = collider.x + (collider.w - width) / 2;
-      // Extend the shaft up to the ceiling. The collidable lower fitting is
-      // visually supported and its secondary loose base is never sampled.
-      const shaft = HUB_ANNEX_MODULE_ART_V82.crops.pipeShaft;
-      const shaftWidth = (shaft[2] - shaft[0]) * scale;
-      const shaftHeight = (shaft[3] - shaft[1]) * scale;
-      for (let y = 0; y < collider.y; y += shaftHeight) {
-        const height = Math.min(shaftHeight, collider.y - y);
-        ctx.drawImage(resolveSpriteDrawableV134(pipe), shaft[0], shaft[1], shaft[2] - shaft[0], height / scale, collider.x + (collider.w - shaftWidth) / 2, y, shaftWidth, height);
-      }
-      ctx.drawImage(resolveSpriteDrawableV134(pipe), body[0], body[1], body[2] - body[0], body[3] - body[1], x, collider.y, width, collider.h);
-    }
+    const report = drawHubAnnexFixturesV138(ctx, annex, { images: this.annexModularImagesV72 });
+    this.annexFixturesRenderedV138 ||= new Map();
+    if (report) this.annexFixturesRenderedV138.set(annex.id, report);
     if (annex.id === 'proving-ground') {
       const ceiling = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.provingCeiling);
       if (imageReady(ceiling)) {
@@ -1349,6 +1298,9 @@ export class HubGame extends HubGameV62 {
   }
 
   drawAnnexForegroundV72(ctx, annex, image) {
+    // The former floor clip retained only a detached machinery plinth at
+    // y628..656. Keep native cargo and the real floor; omit that ghost base.
+    if (getHubAnnexFixturePlanV138(annex)?.legacyForeground?.omitted) return false;
     if (!imageReady(image)) return;
     const bounds = { x: annex.entranceSide === 'west' ? 1620 : 48, y: 444, w: 240, h: 212 };
     ctx.save();

@@ -13,7 +13,7 @@ import {
 } from './hub-game.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
-import { resolveHubServiceProfileV137 } from './hub-service-geometry-v137.js';
+import { resolveHubServiceProfileV138 } from './hub-service-geometry-v138.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -336,7 +336,7 @@ function fallbackTraversal(deck) {
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
     const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
-    const profile = resolveHubServiceProfileV137(HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge);
+    const profile = resolveHubServiceProfileV138(HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge);
     archetypes.push(profile.archetype);
     platforms.push(...profile.platforms.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
     ladders.push(...profile.ladders.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
@@ -346,7 +346,7 @@ function fallbackTraversal(deck) {
   return {
     platforms, ladders, vents, occluders, archetypes,
     route: {
-      id: `deck-${deck + 1}-vertical-route`, source: 'authored-service-clearance-v137',
+      id: `deck-${deck + 1}-vertical-route`, source: 'authored-functional-service-v138',
       nodeCount: platforms.length + 4,
       verticalLinks: ladders.length,
       crawlLinks: vents.length,
@@ -530,6 +530,19 @@ export class HubGame extends HubGameV50 {
 
   nearestVent(entity = this.player) {
     return entity ? this.v51Vents.find((vent) => overlap(entity, vent)) || null : null;
+  }
+
+  nearbyCrawlVentV138(entity = this.player) {
+    if (!entity?.grounded || entity.climbing) return null;
+    let closest = null, closestGap = Infinity;
+    for (const vent of this.v51Vents) {
+      if (entity.y >= vent.y + vent.h || entity.y + entity.h <= vent.y) continue;
+      const gap = Math.max(vent.x - entity.x - entity.w, entity.x - vent.x - vent.w, 0);
+      // Hint before the standing collider stops the body at its exact edge.
+      // Keep nearestVent() strict: E must still require native hatch contact.
+      if (gap <= 64 && gap < closestGap) { closest = vent; closestGap = gap; }
+    }
+    return closest;
   }
 
   nearestLift() {
@@ -800,7 +813,7 @@ export class HubGame extends HubGameV50 {
     const door = this.v51Doors.find((entry) => Math.abs(this.player.x - entry.x) < 112);
     if (door) return 'E — ACTIONNER LE SAS';
     if (this.nearestTraversalLadder()) return 'W / S — GRIMPER · ESPACE — SAUTER';
-    if (this.nearestVent()) return 'C — RAMper DANS LE CONDUIT';
+    if (this.nearbyCrawlVentV138()) return 'C — MAINTENIR POUR RAMPER SOUS LA GRILLE';
     return '';
   }
 
