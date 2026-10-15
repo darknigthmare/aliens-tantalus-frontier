@@ -1,4 +1,5 @@
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { compileEditorGridV136, constrainEditorRectV136, editorMissionSpawnV136 } from './editor-spatial-v136.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, COMBAT_AIM_KEY_BINDINGS_V83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { bindCombatPointerAimV83, refreshCombatPointerAimV83 } from './mission-input-v77.js';
 import { crewMovementV85 } from './crew-runtime-v85.js';
@@ -302,11 +303,6 @@ function selectBossEnemyProfile(catalog = []) {
   }, null)?.source || null;
 }
 
-function parseEditorPosition(position) {
-  const [column, row] = String(position || '').split(':').map(Number);
-  return Number.isInteger(column) && Number.isInteger(row) ? { column, row } : null;
-}
-
 export class GameEngine {
   constructor(canvas, { audio, onEvent = () => {} } = {}) {
     this.canvas = canvas;
@@ -498,6 +494,8 @@ export class GameEngine {
     this.editorTileCounts = {};
     this.editorTileCount = 0;
     this.editorProjectKind = null;
+    this.editorSpawn = null;
+    this.editorGridV136 = null;
     if (editorProject?.kind === 'mission' && Array.isArray(editorProject.tiles) && editorProject.tiles.length) {
       this.applyEditorProject(editorProject, enemyCatalog);
     }
@@ -646,19 +644,12 @@ export class GameEngine {
   }
 
   applyEditorProject(project, enemyCatalog) {
-    const [colsRaw, rowsRaw] = Array.isArray(project.size) ? project.size : [32, 18];
-    const cols = clamp(Number(colsRaw) || 32, 4, 64);
-    const rows = clamp(Number(rowsRaw) || 18, 4, 36);
-    const tileWidth = WORLD_WIDTH / cols;
-    const tileHeight = WORLD_HEIGHT / rows;
-    const tiles = project.tiles.flatMap((tile) => {
-      const position = parseEditorPosition(tile.position);
-      if (!position || !EDITOR_TILE_TYPES.has(tile.type) || position.column < 0 || position.column >= cols || position.row < 0 || position.row >= rows) return [];
-      return [{ ...tile, ...position, x: position.column * tileWidth, y: position.row * tileHeight }];
-    });
+    const grid = compileEditorGridV136(project);
+    const { tileWidth, tileHeight, tiles } = grid;
     if (!tiles.length) return;
     this.editorMode = true;
     this.editorProjectKind = project.kind;
+    this.editorGridV136 = { columns: grid.columns, rows: grid.rows, tileWidth, tileHeight };
     this.editorTileCount = tiles.length;
     this.editorTileCounts = Object.fromEntries([...EDITOR_TILE_TYPES].map((type) => [type, tiles.filter((tile) => tile.type === type).length]));
     const byType = (type) => tiles.filter((tile) => tile.type === type);
@@ -669,11 +660,11 @@ export class GameEngine {
     this.walls = byType('wall').map((tile, index) => ({ id: `editor-wall-${index}`, x: tile.x, y: tile.y, w: tileWidth, h: tileHeight, art: 'breakable' }));
     this.doors = byType('door').map((tile, index) => {
       const height = Math.max(132, tileHeight * 2.6);
-      return { id: `editor-door-${index}`, x: tile.x + tileWidth * 0.34, y: tile.y + tileHeight - height, w: Math.max(48, tileWidth * 0.32), h: height, open: false, progress: 0 };
+      return constrainEditorRectV136({ id: `editor-door-${index}`, x: tile.x + tileWidth * 0.34, y: tile.y + tileHeight - height, w: Math.max(48, tileWidth * 0.32), h: height, open: false, progress: 0 });
     });
-    this.ladders = byType('ladder').map((tile, index) => ({ id: `editor-ladder-${index}`, x: tile.x + tileWidth * 0.5, top: tile.y, bottom: Math.min(WORLD_HEIGHT - 20, tile.y + tileHeight * 4), w: 52 }));
+    this.ladders = byType('ladder').map((tile, index) => ({ id: `editor-ladder-${index}`, x: clamp(tile.x + tileWidth * 0.5, 26, WORLD_WIDTH - 26), top: tile.y, bottom: Math.min(WORLD_HEIGHT, tile.y + tileHeight * 4), w: 52 }));
     this.lifts = byType('lift').map((tile, index) => ({
-      id: `editor-lift-${index}`, kind: 'lift', x: tile.x, y: tile.y, baseY: tile.y, topY: Math.max(80, tile.y - tileHeight * 4),
+      id: `editor-lift-${index}`, kind: 'lift', x: tile.x, y: tile.y, baseY: tile.y, topY: Math.max(0, tile.y - tileHeight * 4),
       w: tileWidth, h: 24, art: 'drop', phase: index * 0.9, previousY: tile.y
     }));
     this.platforms.push(...this.lifts);
@@ -682,27 +673,27 @@ export class GameEngine {
       const target = vents[(index + 1) % vents.length];
       return {
         id: `editor-vent-${index}`, x: tile.x + tileWidth * 0.25, y: tile.y, w: tileWidth * 0.5, h: tileHeight,
-        open: false, requiresTool: false, targetX: target ? target.x + tileWidth * 0.25 : clamp(tile.x + tileWidth * 3, 0, WORLD_WIDTH - 80),
-        targetY: target ? target.y - this.player.h : clamp(tile.y - this.player.h, 0, WORLD_HEIGHT - this.player.h)
+        open: false, requiresTool: false, targetX: clamp(target ? target.x + tileWidth * 0.25 : tile.x + tileWidth * 3, 0, WORLD_WIDTH - this.player.w),
+        targetY: clamp((target?.y ?? tile.y) - this.player.h, 0, WORLD_HEIGHT - this.player.h)
       };
     });
     this.ventShortcut = this.vents[0] || { x: -1000, y: -1000, w: 0, h: 0, open: false };
-    const spawns = byType('spawn');
-    if (spawns[0]) this.editorSpawn = { x: spawns[0].x + tileWidth * 0.35, y: Math.max(0, spawns[0].y + tileHeight - this.player.h) };
+    this.editorSpawn = editorMissionSpawnV136(grid, this.player);
     const objectives = byType('objective');
-    if (objectives[0]) this.objective = { id: 'editor-objective', x: objectives[0].x + tileWidth * 0.35, y: objectives[0].y, w: Math.max(52, tileWidth * 0.3), h: tileHeight, complete: false };
+    if (objectives[0]) this.objective = constrainEditorRectV136({ id: 'editor-objective', x: objectives[0].x + tileWidth * 0.35, y: objectives[0].y, w: Math.max(52, tileWidth * 0.3), h: tileHeight, complete: false });
     const enemyTiles = byType('enemy');
     const catalog = enemyCatalog.length ? enemyCatalog : [{ name: 'Xenomorph Warrior', biology: 'xenomorph', health: 80, damage: 12, speed: 1.2 }];
     this.enemies = enemyTiles.map((tile, index) => {
       const source = catalog[index % catalog.length];
       const boss = source.caste === 'royal' || /queen|reine/i.test(source.name || '');
-      return this.createEnemy(source, index, tile.x + tileWidth * 0.35, tile.y + tileHeight, { boss, keyCarrier: index === 0 && enemyTiles.length > 2 });
+      const enemy = this.createEnemy(source, index, tile.x + tileWidth * 0.35, tile.y + tileHeight, { boss, keyCarrier: index === 0 && enemyTiles.length > 2 });
+      return constrainEditorRectV136(enemy);
     });
     const vehicles = byType('vehicle');
-    this.vehicle = vehicles[0] ? this.createVehicle(vehicles[0].x, Math.max(0, vehicles[0].y + tileHeight - 104)) : { ...this.createVehicle(-1000, FLOOR_Y - 104), active: false };
+    this.vehicle = vehicles[0] ? constrainEditorRectV136(this.createVehicle(vehicles[0].x, Math.max(0, vehicles[0].y + tileHeight - 104))) : { ...this.createVehicle(-1000, FLOOR_Y - 104), active: false };
     const terminals = byType('terminal');
-    this.powerNode = terminals[0] ? { id: 'editor-power', x: terminals[0].x + tileWidth * 0.4, y: terminals[0].y, w: 52, h: tileHeight, active: false } : null;
-    this.archiveTerminal = terminals[1] ? { id: 'editor-archive', x: terminals[1].x + tileWidth * 0.4, y: terminals[1].y, w: 58, h: tileHeight, recovered: false } : null;
+    this.powerNode = terminals[0] ? constrainEditorRectV136({ id: 'editor-power', x: terminals[0].x + tileWidth * 0.4, y: terminals[0].y, w: 52, h: tileHeight, active: false }) : null;
+    this.archiveTerminal = terminals[1] ? constrainEditorRectV136({ id: 'editor-archive', x: terminals[1].x + tileWidth * 0.4, y: terminals[1].y, w: 58, h: tileHeight, recovered: false }) : null;
     this.hazards = byType('hazard').map((tile, index) => ({ id: `editor-hazard-${index}`, x: tile.x, y: tile.y + tileHeight * 0.65, w: tileWidth, h: tileHeight * 0.35, damage: 16, active: true }));
     this.covers = [];
     this.toolPickup.taken = this.vents.every((vent) => !vent.requiresTool);
@@ -2608,6 +2599,7 @@ export class GameEngine {
       editorMode: this.editorMode,
       editorTileCount: this.editorTileCount,
       editorTileCounts: { ...this.editorTileCounts },
+      editorGridV136: this.editorGridV136 ? { ...this.editorGridV136 } : null,
       assets
     };
   }

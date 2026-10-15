@@ -323,13 +323,14 @@ export class HubGame extends HubGameV51 {
     return resolveNpcAnimation(npc.alerted && npc.alertClock <= 0 ? { ...npc, alertClock: 1 } : npc);
   }
 
-  sampleNpcAnimation(npc, { emit = false } = {}) {
+  sampleNpcAnimation(npc, { emit = false, discardEvents = false } = {}) {
     const request = this.npcAnimationRequest(npc);
     if (!request) return null;
     const sample = this.hubNpcAnimation.sample(npc.crewId, request, this.animationTime, {
       emit,
+      discardEvents,
       physicalActor: npc,
-      physicalContext: `hub:${this.state?.deck}:${this.currentAnnexV71?.()?.id || 'deck'}`,
+      physicalContext: npc.lifeV136 ? `hub:${this.state?.deck}:crew` : `hub:${this.state?.deck}:${this.currentAnnexV71?.()?.id || 'deck'}`,
       reducedMotion: Boolean(this.reducedMotion)
     });
     if (sample) npc.v52Animation = { sheetId: request.sheetId, clipId: request.clipId, frame: sample.frame, row: sample.row, column: sample.column };
@@ -343,10 +344,11 @@ export class HubGame extends HubGameV51 {
       const sample = this.sampleNpcAnimation(npc, { emit: true });
       if (sample) {
         const sampleImage = this.npcImagesBySheetId?.get(sample.sheet.id) || image;
-        const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing: flip ? -1 : 1 },
+        const facing = npc.lifeV136 ? npc.facing : flip ? -1 : 1;
+        const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing },
           sheet: sample.sheet, column: sample.column, row: sample.row, surface: 'hub' });
         npc.humanVisualV133 = human;
-        const result = drawHumanAtlasV133(ctx, sampleImage, human)
+        const result = this.drawNpcLifeV136?.(ctx, sampleImage, npc, sample, human) || drawHumanAtlasV133(ctx, sampleImage, human)
           || super.drawSheetCell(ctx, sampleImage, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
         const member = this.npcRoutineContextV62?.crew?.find(entry => entry.id === crewId);
         if (sampleImage?.complete && sampleImage.naturalWidth > 0) drawEcho9MarkingV110(ctx, npc, member?.appearanceV110);

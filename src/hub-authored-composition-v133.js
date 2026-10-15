@@ -251,20 +251,20 @@ export function withHubAuthoredCompositionV133(Base) {
         ctx.save();ctx.beginPath();ctx.rect(room.xStart,roomFloor(room)+4,roomWidth(room),720-roomFloor(room)-4);ctx.clip();
         const result=super.drawModularHangar(ctx,room,phase);ctx.restore();return result;
       }
-      drawHubRearShellV133(ctx,room);
+      if(!this.drawHubSpatialRearV136?.(ctx,room))drawHubRearShellV133(ctx,room);
       // Dedicated booth, dropship and dangerous arc retain their native exact
       // sources and bounds. Only the fringed, non-colliding overhead is replaced.
       ctx.save();ctx.beginPath();ctx.rect(room.xStart,0,roomWidth(room),720);ctx.clip();
       for(const entry of DROPSHIP_HANGAR_ART_V55.renderStack) {
         if(entry.phase!=='back'||entry.kind==='visual-layer'||!entry.asset)continue;
         const image=this.hubArtImages.get(entry.asset);if(!ready(image))continue;
-        const target=entry.renderBounds;ctx.save();
+        const target=this.getHubActorRenderBoundsV136?.(entry,room)||{...entry.renderBounds,x:room.xStart+entry.renderBounds.x};ctx.save();
         if(entry.kind==='station-prop'&&this.nearestInteraction()?.id===entry.id){ctx.shadowColor='rgba(226,203,121,.62)';ctx.shadowBlur=8;}
         if(entry.kind==='electrical')ctx.globalAlpha=this.reducedMotion?.78:Math.max(.38,Math.min(.94,.64+Math.sin(this.animationTime*13)*.22));
         const source=entry.kind==='vehicle-sprite'?{...entry.sourceOpaqueBounds,
           x:entry.sourceOpaqueBounds.x+entry.sourceCell.column*entry.sheet.cellWidth,
           y:entry.sourceOpaqueBounds.y+entry.sourceCell.row*entry.sheet.cellHeight}:entry.sourceCrop;
-        ctx.drawImage(resolveSpriteDrawableV134(image),source.x,source.y,source.w,source.h,room.xStart+target.x,target.y,target.w,target.h);ctx.restore();
+        ctx.drawImage(resolveSpriteDrawableV134(image),source.x,source.y,source.w,source.h,target.x,target.y,target.w,target.h);ctx.restore();
       }
       ctx.restore();return true;
     }

@@ -720,6 +720,7 @@ export class HubGame extends HubGameV62 {
       this.player.vx = 0; this.player.vy = 0; this.emitStatus(); return;
     }
     this.updateAnnexPhysicsV71(elapsed);
+    this.tickParentNpcLifeV136?.(elapsed);
   }
 
   updateAnnexPhysicsV71(delta) {
@@ -1027,10 +1028,17 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(`USS TANTALUS // ${deck.shortName}`, 36, 41);
     ctx.fillStyle = '#d3ddd5';
     ctx.font = '700 15px ui-monospace, monospace';
-    ctx.fillText(room.name.toUpperCase(), 36, 65);
+    let title = room.name.toUpperCase();
+    if (ctx.measureText(title).width > 410) {
+      while (title.length > 1 && ctx.measureText(`${title}…`).width > 410) title = title.slice(0, -1);
+      title += '…';
+    }
+    ctx.fillText(title, 36, 65);
     ctx.fillStyle = '#9cc9aa';
     ctx.font = '700 12px ui-monospace, monospace';
-    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats} · HUB 16 + ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, 300, 65);
+    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats}`, 466, 41);
+    ctx.font = '700 11px ui-monospace, monospace';
+    ctx.fillText(`16 SALLES · ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, 466, 65);
     this.drawSinglePromptV71(ctx, prompt);
   }
 

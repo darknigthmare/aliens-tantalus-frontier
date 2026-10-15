@@ -10,7 +10,7 @@ export function advanceHumanPatrolAnimationV133(previous, actor, clip, timeSecon
   if (!actor || !clip?.loop || !['walk', 'run', 'move', 'walk-run'].includes(clip.id)
     || !Number.isFinite(actor.x) || !Number.isFinite(actor.y)) return null;
   const time = Math.max(0, finite(timeSeconds)), speed = Math.abs(finite(actor.vx));
-  const moving = speed > 8 && actor.alive !== false && !actor.downed && actor.grounded !== false
+  const moving = speed > .1 && actor.alive !== false && !actor.downed && actor.grounded !== false
     && !actor.climbing && !actor.inVehicle && !actor.ventTransit;
   const signature = `${context}:${clip.id}:${clip.frames.length}`;
   const prior = previous?.signature === signature && time >= previous.time
@@ -23,7 +23,7 @@ export function advanceHumanPatrolAnimationV133(previous, actor, clip, timeSecon
   const distance = (prior && (!moving || physical) ? prior.distance : 0) + (physical ? Math.abs(dx) : 0);
   return Object.freeze({ schema: 133, signature, context, time, x: actor.x, y: actor.y,
     distance, stride, moving, reseeded: !prior || moving && !physical,
-    step: reducedMotion ? 0 : Math.floor(distance / stride * clip.frames.length + 1e-9),
+    step: Math.floor(distance / stride * clip.frames.length + 1e-9),
     suppressEvents: !moving || !physical || reducedMotion,
     stepsPerSecond: moving ? speed * 2 / stride : 0 });
 }

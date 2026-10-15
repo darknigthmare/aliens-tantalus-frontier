@@ -1,5 +1,6 @@
 import { EDITOR_TILE_TYPES_V135, EDITOR_BRUSH_MODES_V135, assertEditorDimensionsV135, normalizeEditorProjectV135,
   editorLineCellsV135, editorRectangleCellsV135, editorFloodCellsV135 } from './editor-authoring-v135.js';
+import { analyzeEditorSpatialV136 } from './editor-spatial-v136.js';
 const TILE_TYPES = EDITOR_TILE_TYPES_V135;
 
 export class LevelEditor {
@@ -8,6 +9,7 @@ export class LevelEditor {
     this.cols = 32; this.rows = 18; this.tool = 'floor'; this.brushMode = 'paint'; this.tiles = new Map();
     this.dragging = false; this.lastPaintKey = null; this.history = []; this.future = []; this.shipMode = false;
     this.strokeV135 = null; this.listenersV135 = new Set(); this.keyboardCellV135 = [0, 0];
+    this.showSpatialV136 = false;
     this.bind(); this.draw();
   }
 
@@ -118,7 +120,10 @@ export class LevelEditor {
     if (!(counts.floor || counts.platform)) errors.push('Au moins un sol ou une plateforme est requis.');
     return { ok: errors.length === 0, errors, counts };
   }
-  getSnapshot() { return { ...this.serialize(), tool: this.tool, brushMode: this.brushMode, cursor: [...this.keyboardCellV135], canUndo: this.history.length > 0, canRedo: this.future.length > 0 }; }
+  getSpatialReportV136() { return analyzeEditorSpatialV136({ kind: this.shipMode ? 'ship' : 'mission', size: [this.cols, this.rows], tiles: [...this.tiles].map(([position, type]) => ({ position, type })) }); }
+  setSpatialOverlayV136(enabled) { this.showSpatialV136 = Boolean(enabled); this.draw(); this.notifyUiV135(); }
+  getSnapshot() { return { ...this.serialize(), tool: this.tool, brushMode: this.brushMode, cursor: [...this.keyboardCellV135], canUndo: this.history.length > 0, canRedo: this.future.length > 0,
+    spatialV136: { ...this.getSpatialReportV136(), visible: this.showSpatialV136 } }; }
   serialize() { return { schema: 2, kind: this.shipMode ? 'ship' : 'mission', size: [this.cols, this.rows], tiles: [...this.tiles].map(([position, type]) => ({ position, type })), validation: this.validate() }; }
   load(project) {
     const normalized = normalizeEditorProjectV135(project);
@@ -134,6 +139,17 @@ export class LevelEditor {
     for (const [key, type] of this.tiles) {
       const [x, y] = key.split(':').map(Number); ctx.fillStyle = colors[type] || '#fff'; ctx.fillRect(x * cw + 1, y * ch + 1, Math.max(1, cw - 2), Math.max(1, ch - 2));
       if (cw >= 16 && ch >= 16) { ctx.fillStyle = '#07100c'; ctx.font = '12px monospace'; ctx.fillText(type[0].toUpperCase(), x * cw + cw * .36, y * ch + ch * .66); }
+    }
+    if (this.showSpatialV136 && !this.shipMode) {
+      const report = this.getSpatialReportV136(), scaleX = w / report.worldWidth, scaleY = h / report.worldHeight;
+      ctx.save(); ctx.lineWidth = 2;
+      for (const footprint of report.footprints) {
+        ctx.strokeStyle = footprint.type === 'spawn' ? '#b1f6e4' : footprint.type === 'objective' ? '#fff0a6' : '#d5b6ff';
+        ctx.strokeRect(footprint.x * scaleX, footprint.y * scaleY, footprint.w * scaleX, footprint.h * scaleY);
+      }
+      ctx.strokeStyle = '#ffb69c';
+      for (const issue of report.issues) ctx.strokeRect(issue.column * cw + 1, issue.row * ch + 1, Math.max(1, cw - 2), Math.max(1, ch - 2));
+      ctx.restore();
     }
     if (globalThis.document?.activeElement === this.canvas) {
       ctx.strokeStyle = '#f5e998'; ctx.lineWidth = 2; ctx.strokeRect(this.keyboardCellV135[0] * cw + 1, this.keyboardCellV135[1] * ch + 1, Math.max(1, cw - 2), Math.max(1, ch - 2));

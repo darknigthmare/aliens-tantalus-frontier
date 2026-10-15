@@ -23,20 +23,31 @@ export function mountEditorAuthoringUiV135(editor, { parent = editor.canvas.pare
   const columnsLabel = element(documentRef, 'label', 'Colonnes '), rowsLabel = element(documentRef, 'label', 'Lignes ');
   const columns = element(documentRef, 'input', undefined, { type: 'number', min: 8, max: 128, step: 1, inputmode: 'numeric', required: '', 'data-editor-columns-v135': '', 'aria-label': 'Nombre de colonnes' });
   const rows = element(documentRef, 'input', undefined, { type: 'number', min: 8, max: 72, step: 1, inputmode: 'numeric', required: '', 'data-editor-rows-v135': '', 'aria-label': 'Nombre de lignes' });
-  columns.style.width = rows.style.width = '6rem'; columnsLabel.append(columns); rowsLabel.append(rows);
+  columns.style.cssText = rows.style.cssText = 'width:6rem;min-width:0;max-width:100%'; columnsLabel.append(columns); rowsLabel.append(rows);
   const resize = element(documentRef, 'button', 'Appliquer les dimensions', { type: 'submit', class: 'button compact', 'data-editor-resize-v135': '' });
   const cropLabel = element(documentRef, 'label'); cropLabel.style.cssText = 'display:flex;align-items:center;gap:.5rem;min-height:44px';
   const crop = element(documentRef, 'input', undefined, { type: 'checkbox', 'data-editor-crop-v135': '' });
-  crop.style.cssText = 'width:1.25rem;height:1.25rem;min-height:0;flex:0 0 auto';
+  crop.style.cssText = 'width:1.25rem;height:1.25rem;min-width:0;min-height:0;padding:0;flex:0 0 auto';
   cropLabel.append(crop, element(documentRef, 'span', 'Autoriser la suppression des tuiles hors du nouveau cadre'));
   dimensions.append(columnsLabel, rowsLabel, resize, cropLabel);
   const status = element(documentRef, 'p', '', { role: 'status', 'aria-live': 'polite', 'data-editor-authoring-status-v135': '' });
+  const spatial = element(documentRef, 'details', undefined, { 'data-editor-spatial-v136': '' });
+  const spatialTitle = element(documentRef, 'summary', 'Dégagement et volumes physiques');
+  spatialTitle.style.minHeight = '44px';
+  const spatialToggleLabel = element(documentRef, 'label'); spatialToggleLabel.style.cssText = 'display:flex;align-items:center;gap:.5rem;min-height:44px';
+  const spatialToggle = element(documentRef, 'input', undefined, { type: 'checkbox', 'data-editor-spatial-overlay-v136': '' });
+  spatialToggle.style.cssText = 'width:1.25rem;height:1.25rem;min-width:0;min-height:0;padding:0;flex:0 0 auto';
+  spatialToggleLabel.append(spatialToggle, element(documentRef, 'span', 'Afficher les silhouettes et encombrements réels'));
+  const spatialNote = element(documentRef, 'p', '', { 'data-editor-spatial-note-v136': '' });
+  const spatialIssues = element(documentRef, 'ul', undefined, { 'data-editor-spatial-issues-v136': '', 'aria-label': 'Points à vérifier dans le plan' });
+  spatial.append(spatialTitle, spatialToggleLabel, spatialNote, spatialIssues);
+  spatialToggle.addEventListener('change', () => editor.setSpatialOverlayV136(spatialToggle.checked));
   const help = element(documentRef, 'p', 'Un tracé = une annulation. Maj ou clic droit : gommer. Clavier sur la grille : flèches, Entrée/Espace pour poser, Suppr pour gommer, Ctrl/Cmd+Z pour annuler. Le playtest vérifie les déplacements réels.');
   help.className = 'hint';
   const helpId = `${editor.canvas.id || 'editor'}-authoring-help-v135`; help.id = helpId;
   const previousDescription = editor.canvas.getAttribute('aria-describedby') || '';
   editor.canvas.setAttribute('aria-describedby', `${previousDescription} ${helpId}`.trim());
-  root.append(tools, dimensions, status, help); parent.insertBefore(root, editor.canvas);
+  root.append(tools, dimensions, status, spatial, help); parent.insertBefore(root, editor.canvas);
   let destroyed = false, message = '';
   const refresh = () => {
     if (destroyed) return;
@@ -47,6 +58,12 @@ export function mountEditorAuthoringUiV135(editor, { parent = editor.canvas.pare
     const persistence = getPersistenceStatus();
     const storage = persistence?.persisted === false ? ' · stockage local indisponible : exportez votre plan avant de quitter.' : '';
     status.textContent = `${message || `${snapshot.size[0]} × ${snapshot.size[1]} · ${snapshot.tiles.length} tuiles · ${MODES[snapshot.brushMode]}`} · curseur ${snapshot.cursor[0] + 1}, ${snapshot.cursor[1] + 1}${storage}`;
+    const review = snapshot.spatialV136;
+    spatialTitle.textContent = `Dégagement et volumes physiques${review.supported ? ` · ${review.issues.length} point(s) à vérifier` : ''}`;
+    spatialToggle.disabled = !review.supported; spatialToggle.checked = review.visible;
+    spatialNote.textContent = review.note;
+    spatialIssues.replaceChildren(...review.issues.slice(0, 8).map(issue => element(documentRef, 'li', `Colonne ${issue.column + 1}, ligne ${issue.row + 1} : ${issue.message}`)));
+    if (review.issues.length > 8) spatialIssues.append(element(documentRef, 'li', `${review.issues.length - 8} autre(s) point(s) signalé(s) sur la grille.`));
   };
   const unsubscribe = editor.subscribe(() => { message = ''; refresh(); });
   dimensions.addEventListener('submit', event => {

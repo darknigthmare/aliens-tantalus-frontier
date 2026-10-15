@@ -32,7 +32,9 @@ export const HUB_ROOM_NAVIGATION_V133 = freeze({
 // bulkhead at x0/1280, the room station and either shared lift shaft.
 // The three later residential/port annexes retain their authored sockets.
 export const HUB_ANNEX_ENTRANCES_V133 = freeze({
-  'arrival-airlock': { centerX: 760, bottom: 624 },
+  // The landing craft now occupies its measured parking bay x150–870.
+  // One shared socket moves the actual door, prompt and return pose together.
+  'arrival-airlock': { centerX: 1040, bottom: 624 },
   logistics: { centerX: 360, bottom: 624 },
   'mire-archives': { centerX: 300, bottom: 624 },
   'synthetic-bay': { centerX: 360, bottom: 624 },

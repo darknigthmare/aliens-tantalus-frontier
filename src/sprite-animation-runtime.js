@@ -826,7 +826,7 @@ export class SpriteAnimationController {
     else maps.forEach(map => map.delete(String(entityId)));
   }
 
-  sample(entityId, request, timeSeconds, { emit = true, reducedMotion = false, physicalActor = null, physicalContext = '' } = {}) {
+  sample(entityId, request, timeSeconds, { emit = true, discardEvents = false, reducedMotion = false, physicalActor = null, physicalContext = '' } = {}) {
     const key = String(entityId);
     const now = Math.max(0, Number(timeSeconds) || 0);
     const previousPresentation = this.playerPresentationStatesV124.get(key);
@@ -892,12 +892,12 @@ export class SpriteAnimationController {
       // A render-only hub can run indefinitely without an event consumer.
       // Keep at most its recent transitions instead of retaining every jump.
       if (pending.length) this.playerPendingEventsV124.set(key, pending.slice(-16));
-      if (emit) {
-        for (const payload of this.playerPendingEventsV124.get(key) || []) { events.push(payload); this.onEvent(payload); }
+      if (emit || discardEvents) {
+        if (!discardEvents) for (const payload of this.playerPendingEventsV124.get(key) || []) { events.push(payload); this.onEvent(payload); }
         this.playerPendingEventsV124.delete(key);
       }
     }
-    if (emit && !playerStep?.suppressEvents && !humanStep?.suppressEvents && step > state.lastEmittedStep) {
+    if (emit && !discardEvents && !playerStep?.suppressEvents && !humanStep?.suppressEvents && step > state.lastEmittedStep) {
       const maximumSteps = Math.min(step, state.lastEmittedStep + 64);
       for (let absoluteStep = state.lastEmittedStep + 1; absoluteStep <= maximumSteps; absoluteStep += 1) {
         const eventIndex = clip.loop ? ((absoluteStep % clip.frames.length) + clip.frames.length) % clip.frames.length : Math.min(absoluteStep, lastIndex);
@@ -914,8 +914,10 @@ export class SpriteAnimationController {
         }
       }
     }
-    // Draw calls must not consume the next update's sound/action markers.
-    if (emit) state.lastEmittedStep = Math.max(state.lastEmittedStep, step);
+    // Ordinary draw samples leave events available. An explicit silent
+    // simulation tick discards its markers so returning on screen cannot
+    // replay the entire off-screen interval as an audio burst.
+    if (emit || discardEvents) state.lastEmittedStep = Math.max(state.lastEmittedStep, step);
     state.lastStep = Math.max(state.lastStep, step);
     state.lastTime = now;
     state.loops = clip.loop ? Math.floor(step / clip.frames.length) : 0;

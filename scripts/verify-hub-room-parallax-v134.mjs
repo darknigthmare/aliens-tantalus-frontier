@@ -109,16 +109,17 @@ test('CCTV renders the observed compartment at its own camera and restores the s
  const model=subject.hubParallaxModelsV134.get('room:dropship-hangar');assert.equal(model.localEye,0);assert.ok(model.layers.every(layer=>layer.drift===0));
 });
 
-test('original equipment atlas creates only one or two rear bays at native aspect and never inflates a panel to room width',()=>{
+test('original equipment atlas occupies only available wall bays at human scale and native aspect',()=>{
  const atlas=image(HUB_ENVIRONMENT_ATLAS_V134.asset);assert.equal(atlas.naturalWidth,HUB_ENVIRONMENT_ATLAS_V134.width);assert.equal(atlas.naturalHeight,HUB_ENVIRONMENT_ATLAS_V134.height);
  for(const room of rooms){const model=getHubRoomParallaxPlanV134(room,room.xStart+600),panels=getHubRearEquipmentLayoutV134(room,model,atlas);
-   assert.equal(panels.length,model.bounds.w>=1920?2:1,room.id);
+   assert.ok(panels.length<=(model.bounds.w>=1920?2:1),room.id);
    for(const panel of panels){const s=panel.source,t=panel.target;
      assert.ok(s.x>=0&&s.y>=0&&s.x+s.w<=atlas.naturalWidth&&s.y+s.h<=atlas.naturalHeight);
-     assert.ok(Math.abs(t.w/s.w-t.h/s.h)<1e-10);assert.ok(t.w/s.w<=1);assert.ok(t.w<=650&&t.h<350);
-     assert.equal(t.y+t.h,model.bounds.y+model.bounds.h);assert.ok(t.x>=model.bounds.x&&t.x+t.w<=model.bounds.x+model.bounds.w);
+     assert.ok(Math.abs(t.w/s.w-t.h/s.h)<1e-10);assert.ok(t.w/s.w<=1);assert.ok(t.w<=300+1e-7&&t.h<=112+1e-7);
+     assert.ok(t.y+t.h<=426);assert.ok(t.x>=model.bounds.x&&t.x+t.w<=model.bounds.x+model.bounds.w);
+     assert.equal(panel.support,'wall-mounted-bay');
      assert.equal(panel.collidable,false);assert.equal(panel.interactive,false);assert.equal(panel.exact,false);}
  }
  const room={id:'proving-ground',xStart:0,world:{width:2600,floorY:624}},model=getHubRoomParallaxPlanV134(room,1200,{clip:{x:0,y:132,w:2600,h:238}});
- for(const panel of getHubRearEquipmentLayoutV134(room,model,atlas)){assert.ok(panel.target.y>=156);assert.equal(panel.target.y+panel.target.h,370);}
+ for(const panel of getHubRearEquipmentLayoutV134(room,model,atlas)){assert.ok(panel.target.y>=156);assert.equal(panel.target.y+panel.target.h,360);}
 });

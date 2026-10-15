@@ -36,6 +36,7 @@ import { withSquadDoctrineV132 } from './squad-doctrine-v132.js';
 import { withHordeDirectorV132 } from './horde-director-v132.js';
 import { withNarrativeEvidenceV132 } from './narrative-evidence-v132.js';
 import { withPlaceablesExtensionV132 } from './placeables-extension-v132.js';
+import { isolateForgeMissionOptionsV136 } from './editor-spatial-v136.js';
 
 export * from './game-production-core.js';
 
@@ -72,6 +73,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
 
 export class GameEngine extends V132ProductionEngine {
   start(options = {}) {
+    options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });

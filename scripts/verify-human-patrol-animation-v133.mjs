@@ -60,14 +60,16 @@ test('work and injury remain on their own action clocks and non-human machines r
   const machine = controller.sample('loader', vehicle, .2, { physicalActor: a });
   assert.equal(machine.humanPatrolV133, null); assert.ok(machine.frame !== machine.clip.frames[0]);
 });
-test('reduced motion preserves travel observations with a stable pose and no step events', () => {
+test('reduced motion keeps distance-owned walking cells and suppresses passive step events', () => {
   const events = [], controller = new SpriteAnimationController({ onEvent: e => events.push(e) }), a = actor();
   const options = { physicalActor: a, reducedMotion: true };
   controller.sample('mara', walk, 0, options);
+  const frames = new Set();
   for (let frame = 1; frame <= 120; frame++) {
     a.x += a.vx / 60; const sample = controller.sample('mara', walk, frame / 60, options);
-    assert.equal(sample.frame, clip.frames[0]);
+    frames.add(sample.frame);
   }
+  assert.equal(frames.size, 4, 'Freezing the feet while the actor travels would cause sliding.');
   assert.deepEqual(events, []); near(controller.humanPatrolStatesV133.get('mara').distance, 44);
 });
 test('controller reset drops the old actor and each crew member retains its own gait', () => {

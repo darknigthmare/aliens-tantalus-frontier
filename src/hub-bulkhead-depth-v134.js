@@ -22,13 +22,18 @@ export function hubBulkheadDepthGeometryV134(door, { floorY = 624, ceilingY = 13
   const rear = { x: center - 38, floorY: floor - 24 }, near = { x: center + 19, floorY: floor + 12 };
   const progress = clamp(door.progress), clearance = clamp(progress / .82), leafHeight = height * (1 - clearance);
   const top = Math.min(finite(ceilingY, 132), floor - height - 48), rearTop = rear.floorY - height, nearTop = near.floorY - height;
+  // The ship is shown as a cutaway. Only the short lintel above the actual
+  // opening is solid; drawing the entire section up to the ceiling made a
+  // narrow transverse wall read as a five-person-high freestanding cabinet.
+  const lintelTop = Math.max(top, rearTop - 54);
   return {
     id: door.id, centerX: center, floorY: floor, ceilingY: top,
     height, rear: { ...rear, topY: rearTop }, near: { ...near, topY: nearTop },
     progress, clearance, leafHeight, collisionBounds: getHubBulkheadColliderV134(door, { floorY: floor }),
     bounds: { x: rear.x - 16, y: top, w: near.x - rear.x + 30, h: near.floorY + 12 - top },
     opening: [[rear.x, rearTop], [near.x, nearTop], [near.x, near.floorY], [rear.x, rear.floorY]],
-    slabPolygon: [[rear.x - 16, top], [near.x + 14, top], [near.x + 14, nearTop - 12], [rear.x - 16, rearTop - 12]],
+    lintelTop, upperSection: 'open-cutaway-with-rear-ties',
+    slabPolygon: [[rear.x - 16, lintelTop], [near.x + 14, lintelTop + 36], [near.x + 14, nearTop - 12], [rear.x - 16, rearTop - 12]],
     headerPolygon: [[rear.x - 16, rearTop - 12], [rear.x, rearTop - 16], [near.x + 14, nearTop - 12], [near.x, nearTop]],
     thresholdPolygon: [[rear.x - 16, rear.floorY], [rear.x, rear.floorY - 2], [near.x + 14, near.floorY], [near.x, near.floorY + 2]],
     leafPolygon: [[rear.x, rearTop], [near.x, nearTop], [near.x, nearTop + leafHeight], [rear.x, rearTop + leafHeight]],
@@ -57,13 +62,16 @@ export function drawHubBulkheadDepthV134(ctx, door, { phase = 'front', playerCen
   const { rear, near, height, collisionBounds, leafHeight, centerX, progress } = geometry;
   ctx.save(); ctx.lineWidth = 1;
   if (phase === 'back' || phase === 'all') {
-    // A structural section joins the existing overhead beam. Its narrow face
-    // gives the boundary real thickness without inserting an opaque rear wall.
+    // Two slender rear ties connect the lintel to the overhead beam. The open
+    // section between them keeps neighbouring wall bays readable in cutaway.
+    ctx.fillStyle = '#23383c';
+    ctx.fillRect(rear.x - 13, geometry.ceilingY + 46, 5, Math.max(0, geometry.lintelTop - geometry.ceilingY - 46));
+    ctx.fillRect(near.x + 5, geometry.ceilingY + 46, 5, Math.max(0, geometry.lintelTop + 36 - geometry.ceilingY - 46));
     polygon(ctx, geometry.slabPolygon, '#1e3033', '#526a6c');
-    edge(ctx, [[rear.x - 9, geometry.ceilingY + 10], [near.x + 7, geometry.ceilingY + 10],
+    edge(ctx, [[rear.x - 9, geometry.lintelTop + 8], [near.x + 7, geometry.lintelTop + 44],
       [near.x + 7, near.topY - 20], [rear.x - 9, rear.topY - 20]], '#3b5357', 3);
-    for (let y = geometry.ceilingY + 32; y < rear.topY - 24; y += 44) {
-      edge(ctx, [[rear.x - 9, y], [near.x + 7, y + 8]], '#0f2125', 2);
+    for (let y = geometry.lintelTop + 20; y < rear.topY - 24; y += 22) {
+      edge(ctx, [[rear.x - 9, y], [near.x + 7, y + 36]], '#0f2125', 2);
       ctx.fillStyle = '#688180'; ctx.fillRect(rear.x - 10, y + 4, 3, 3);
     }
     // Far vertical jamb and reveal are behind the actor, not painted over it.

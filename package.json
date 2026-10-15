@@ -25,7 +25,11 @@
     "test:continuation": "node --test scripts/verify-jeri-surface-motion-v135.mjs scripts/verify-crew-conversation-memory-v135.mjs scripts/verify-field-media-v135.mjs scripts/verify-npc-dialogue-causality-v135.mjs scripts/verify-editor-authoring-v135.mjs scripts/verify-player-wardrobe-v135.mjs",
     "qa:continuation": "node scripts/qa-continuation-browser-v135.mjs",
     "qa:jeri": "node scripts/qa-jeri-surface-browser-v135.mjs",
-    "qa:authoring": "node scripts/qa-authoring-browser-v135.mjs"
+    "qa:authoring": "node scripts/qa-authoring-browser-v135.mjs",
+    "test:coherence": "node --test scripts/verify-hub-spatial-design-v136.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-hub-prop-atlas-v136.mjs scripts/verify-human-motion-v136.mjs scripts/verify-npc-life-v136.mjs scripts/verify-editor-spatial-v136.mjs",
+    "qa:tantalus:design": "node scripts/qa-tantalus-design-v136.mjs",
+    "qa:tantalus:npcs": "node scripts/qa-npc-life-v136.mjs",
+    "qa:editor:spatial": "node scripts/qa-editor-spatial-browser-v136.mjs"
   },
   "engines": {
     "node": ">=22"

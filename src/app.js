@@ -61,6 +61,9 @@ import { bindHubControlV133 } from './hub-control-bindings-v133.js';
 import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.js';
 import { withHubRoomParallaxV134 } from './hub-room-parallax-v134.js';
 import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
+import { withHubNpcLifeV136 } from './npc-life-v136.js';
+import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
+import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
 import { getHubTrainingOperatorIdV132, recordHubLoaderQualificationV132 } from './save.js';
 import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
 import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
@@ -235,7 +238,7 @@ function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
 }
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
-const HubGame = withHubRoomDressingV134(withHubRoomParallaxV134(withHubAuthoredCompositionV133(withHubTrainingV132(HubGameV88))));
+const HubGame = withHubNpcLifeV136(withHubRoomLifeV136(withHubRoomDressingV134(withHubSpatialDesignV136(withHubRoomParallaxV134(withHubAuthoredCompositionV133(withHubTrainingV132(HubGameV88)))))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -3295,12 +3298,12 @@ function launchForgeMissionPlaytest(project) {
     context: 'forge-playtest',
     specialOperationId: campaign.specialOperationId || null
   });
-  forgePlaytest = { kind: 'mission', project: clone(project), sandbox, campaignId: campaign.id };
+  forgePlaytest = { kind: 'mission', project: clone(project), sandbox, campaignId: 'forge-authored-v136' };
   standaloneContext = 'forge-playtest';
   showView('play');
   byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
   byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
-  byId('mission-title').textContent = `${campaign.name} · PLAYTEST FORGE`;
+  byId('mission-title').textContent = `PLAYTEST FORGE · ${project.size[0]} × ${project.size[1]}`;
   byId('mission-log').textContent = 'BAC À SABLE FORGE · progression, journal et sauvegarde campagne verrouillés.';
   engine.setCoop(Boolean(sandbox.settings.coop));
   engine.start({

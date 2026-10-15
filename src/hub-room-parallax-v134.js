@@ -4,6 +4,7 @@ import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { HUB_DECKS } from './hub-game.js';
 import { HUB_ENVIRONMENT_ATLAS_V134, getHubEnvironmentPanelV134 } from './hub-environment-atlas-v134.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { getHubSpatialPlanV136, hubSpatialPlacementClearV136 } from './hub-spatial-design-v136.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -108,21 +109,36 @@ function drawNearServices(ctx, model, accent) {
   ctx.restore();
 }
 
-export function getHubRearEquipmentLayoutV134(room, model, atlasImage) {
+export function getHubRearEquipmentLayoutV134(room, model, atlasImage, options = {}) {
   const panel=getHubEnvironmentPanelV134(room);
   if(!panel || !ready(atlasImage) || atlasImage.naturalWidth!==HUB_ENVIRONMENT_ATLAS_V134.width || atlasImage.naturalHeight!==HUB_ENVIRONMENT_ATLAS_V134.height)return [];
-  const b=model.bounds, source=panel.source, count=b.w>=1920?2:1;
-  const desiredWidth=count===1?640:Math.min(650,b.w*.32);
-  const baseScale=Math.min(1,desiredWidth/source.w,(b.h-24)/source.h), rearFootY=b.y+b.h;
-  const centers=count===1?[b.x+b.w*.5]:[b.x+b.w*.25,b.x+b.w*.75];
-  return centers.map((center,index)=>{const scale=baseScale*(index===1?.88:1),w=source.w*scale,h=source.h*scale;return{ id:panel.id,asset:HUB_ENVIRONMENT_ATLAS_V134.asset,source:{...source},
-    target:{x:center-w/2+model.layers[1].drift,y:rearFootY-h,w,h},scaleX:scale,scaleY:scale,
+  const b=model.bounds, source=panel.source, maximum=b.w>=1920?2:1;
+  // These source panels are equipment fronts, not a whole extra room. Keep
+  // their cabinet height close to one Marine, then mount them on a wall bay
+  // above the human lane instead of doubling the interactive station below.
+  const baseScale=Math.min(1,300/source.w,112/source.h,(b.h-28)/source.h);
+  const rearFootY=Math.min(b.y+b.h-10,room.id==='personal-refuge'?500:426);
+  const spatial=getHubSpatialPlanV136(room,options), chosen=[];
+  const preferred=maximum===2?[.25,.75,.42,.58,.16,.84]:[.55,.3,.74,.43,.2,.82];
+  const candidates=[...preferred,...Array.from({length:13},(_,index)=>.2+index*.05)];
+  for(const fraction of candidates){
+    if(chosen.length>=maximum)break;
+    const index=chosen.length,scale=baseScale*(index===1?.92:1),w=source.w*scale,h=source.h*scale;
+    const target={x:b.x+b.w*fraction-w/2+model.layers[1].drift,y:rearFootY-h,w,h};
+    // Reserve the entire drift envelope: a cabinet may not slide through a
+    // viewport, ladder, portal or neighbouring bay as the camera moves.
+    const envelope={...target,x:target.x-40,w:target.w+80};
+    if(!hubSpatialPlacementClearV136(envelope,spatial)||chosen.some(p=>target.x<p.target.x+p.target.w+24&&target.x+target.w>p.target.x-24))continue;
+    chosen.push({ id:panel.id,asset:HUB_ENVIRONMENT_ATLAS_V134.asset,source:{...source},
+    target,scaleX:scale,scaleY:scale,
     // The generated art contains no room labels or textual UI. Mirroring only
     // the second equipment bay varies pipe/rack silhouettes without touching
     // actual doors, interactable props, characters, or the room's signage.
     mirrored:index===1,
     nativeWidth:HUB_ENVIRONMENT_ATLAS_V134.width,nativeHeight:HUB_ENVIRONMENT_ATLAS_V134.height,
-    plane:'rear-equipment',collidable:false,interactive:false,exact:false,sourceStatus:HUB_ENVIRONMENT_ATLAS_V134.sourceStatus};});
+    plane:'rear-equipment',support:'wall-mounted-bay',collidable:false,interactive:false,exact:false,sourceStatus:HUB_ENVIRONMENT_ATLAS_V134.sourceStatus});
+  }
+  return chosen;
 }
 
 export function drawHubRoomParallaxV134(ctx, room, image, cameraX = 0, options = {}) {
@@ -138,11 +154,14 @@ export function drawHubRoomParallaxV134(ctx, room, image, cameraX = 0, options =
   for (const {source:s,target:t} of model.nativeTiles) ctx.drawImage(image,s.x,s.y,s.w,s.h,t.x,t.y,t.w,t.h);
   ctx.globalAlpha = 1;
   drawRearShell(ctx,model,accent);
-  model.equipmentPanels=getHubRearEquipmentLayoutV134(room,model,options.atlasImage);
+  model.equipmentPanels=getHubRearEquipmentLayoutV134(room,model,options.atlasImage,options);
   for(const {source:s,target:t,mirrored} of model.equipmentPanels){
     const drawable=resolveSpriteDrawableV134(options.atlasImage);
     if(mirrored){ctx.save();ctx.translate(t.x+t.w,t.y);ctx.scale(-1,1);ctx.drawImage(drawable,s.x,s.y,s.w,s.h,0,0,t.w,t.h);ctx.restore();}
     else ctx.drawImage(drawable,s.x,s.y,s.w,s.h,t.x,t.y,t.w,t.h);
+    // A shallow socket and two fastening feet make the wall mounting explicit.
+    ctx.strokeStyle='#344b4e';ctx.lineWidth=2;ctx.strokeRect(t.x-3,t.y-3,t.w+6,t.h+6);
+    ctx.fillStyle='#5a6e6b';for(const x of [t.x+10,t.x+t.w-14])ctx.fillRect(x,t.y+t.h+2,4,6);
   }
   drawNearServices(ctx,model,accent);
   const shade = ctx.createLinearGradient(0,b.y,0,b.y+b.h);
@@ -173,7 +192,8 @@ export function withHubRoomParallaxV134(Base) {
       const layer = resolveHubRoomFarArtV58(room.id);
       if (!layer) return super.drawHubRoomFarV58(ctx,room);
       return this.recordHubParallaxV134(drawHubRoomParallaxV134(ctx,room,this.roomLayerImages?.get(layer.asset),this.hubParallaxCameraOverrideV134 ?? this.camera?.x,
-        {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,atlasImage:this.getHubEnvironmentAtlasImageV134()}), 'room');
+        {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,atlasImage:this.getHubEnvironmentAtlasImageV134(),
+          doors:this.doorStates,ladders:this.v51Ladders,platforms:this.v51Platforms}), 'room');
     }
     drawAnnexLayerV71(ctx,image,factor,alpha) {
       if (this.editorPlaytest) return super.drawAnnexLayerV71(ctx,image,factor,alpha);
@@ -189,7 +209,9 @@ export function withHubRoomParallaxV134(Base) {
         // overhead remains stationary; only its rear wall is refined here.
         const clip = annex.id === 'personal-refuge' ? {x:0,y:334,w:annex.world.width,h:270} : null;
         this.recordHubParallaxV134(drawHubRoomParallaxV134(ctx,room,wall,this.annexCameraV71?.x,
-          {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,clip,atlasImage:this.getHubEnvironmentAtlasImageV134()}), 'annex');
+          {enabled:this.depthPresentationV116,reducedMotion:this.reducedMotion,clip,atlasImage:this.getHubEnvironmentAtlasImageV134(),
+            ladders:annex.ladders,platforms:annex.platforms}), 'annex');
+        this.drawHubSpatialRearV136?.(ctx,room);
       }
       return super.drawAnnexGeometryV71(ctx,annex);
     }

@@ -52,7 +52,7 @@ function beginCarry(engine, helperId = null) {
 test('transverse doctrine activates on a real standard briefing and excludes special/editor/neuro scenarios', () => {
   const { engine } = make(); assert.equal(engine.getSquadCommandModelV132().schema, 132); assert.equal(engine.squadDoctrineV132.roster.length, 3);
   assert.deepEqual(Object.values(engine.squadDoctrineV132.assignments), ['alpha', 'alpha', 'bravo']); engine.stop();
-  for (const overrides of [{ campaign: { ...CAMPAIGNS[0], id: 'special-custom-test' } }, { squadDoctrineV132: false }, { neuroProfile: { id: 'test' } }, { editorProject: { kind: 'mission', objects: [] } }]) {
+  for (const overrides of [{ campaign: { ...CAMPAIGNS[0], id: 'special-custom-test' } }, { squadDoctrineV132: false }, { neuroProfile: { id: 'test' } }, { editorProject: { schema: 2, kind: 'mission', size: [32, 18], tiles: [] } }]) {
     const { engine } = make(overrides); assert.equal(engine.getSquadCommandModelV132(), null); engine.stop();
   }
 });

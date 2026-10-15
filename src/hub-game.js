@@ -32,6 +32,7 @@ import { HUB_ROOM_NAVIGATION_V133, hubRearPropColliderV133 } from './hub-navigat
 import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { drawHubBulkheadDepthV134, hubBulkheadDepthGeometryV134, getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
+import { getHubPropHeightV136, getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
   drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
   releaseHubPlayerAppearanceV126 } from './player-appearance-hub-v126.js';
@@ -102,6 +103,7 @@ const HUB_PROP_SOURCE_SIZES = Object.freeze({
 });
 
 const makeRoom = (id, name, action, description, index, npcRow, art, prop, geometryVariant, viewport, propHeight = 138) => {
+  propHeight = getHubPropHeightV136(id, propHeight);
   const xStart = index * ROOM_WIDTH;
   const profile = HUB_ROOM_PROFILES[id];
   const worldWidth = profile?.worldWidth || ROOM_WIDTH;
@@ -255,12 +257,13 @@ export function buildHubObstacleGeometryV87(deckIndex) {
   const hangar = deck.rooms.find((room) => room.id === DROPSHIP_HANGAR_ART_V55.roomId);
   if (hangar) {
     const dropship = DROPSHIP_HANGAR_ART_V55.dropship;
-    const segments = dropship.collisionSegments?.length
+    const placement = getHubVehiclePlacementV136(hangar, dropship);
+    const segments = placement?.collisionSegments?.length ? placement.collisionSegments : dropship.collisionSegments?.length
       ? dropship.collisionSegments
       : [dropship.collisionBounds];
     for (const bounds of segments) {
       geometry.push(hubRearPropColliderV133({
-        x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+        x: placement ? bounds.x : hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
         id: bounds.id || `${dropship.id}-collision`,
         roomId: hangar.id,
         role: bounds.role || 'dropship-hull',
@@ -272,9 +275,10 @@ export function buildHubObstacleGeometryV87(deckIndex) {
   const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
   if (vehicleBay) {
     const actor = resolveHubVehicleArtV58(vehicleBay.id).vehicle;
-    const bounds = actor.collisionBounds;
+    const placement = getHubVehiclePlacementV136(vehicleBay, actor);
+    const bounds = placement?.collisionBounds || actor.collisionBounds;
     geometry.push(hubRearPropColliderV133({
-      x: vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+      x: placement ? bounds.x : vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
       roomId: vehicleBay.id, role: 'vehicle-hull', actorId: actor.id, collisionOnly: true
     }));
   }
@@ -600,7 +604,8 @@ export class HubGame {
     if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) {
       for (const actor of [DROPSHIP_HANGAR_ART_V55.controlBooth, DROPSHIP_HANGAR_ART_V55.dropship]) {
         const bounds = actor.interactionBounds;
-        const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+        const worldBounds = getHubVehiclePlacementV136(room, actor)?.interactionBounds
+          || { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
         if (!overlap(this.player, worldBounds)) continue;
         return {
           id: actor.id,
@@ -619,7 +624,8 @@ export class HubGame {
     if (vehicleContract) {
       const actor = vehicleContract.vehicle;
       const bounds = actor.interactionBounds;
-      const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+      const worldBounds = getHubVehiclePlacementV136(room, actor)?.interactionBounds
+        || { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
       if (overlap(this.player, worldBounds)) {
         return {
           id: actor.id,
@@ -1133,8 +1139,8 @@ export class HubGame {
       const width = bounds.w;
       if (room.propSourceBounds) {
         const [left, top, right, bottom] = room.propSourceBounds;
-        ctx.drawImage(resolveSpriteDrawableV134(image), left, top, right - left, bottom - top, room.x - width / 2, FLOOR_Y - height, width, height);
-      } else ctx.drawImage(resolveSpriteDrawableV134(image), room.x - width / 2, FLOOR_Y - height, width, height);
+        ctx.drawImage(resolveSpriteDrawableV134(image), left, top, right - left, bottom - top, bounds.x, bounds.y, width, height);
+      } else ctx.drawImage(resolveSpriteDrawableV134(image), bounds.x, bounds.y, width, height);
     }
     ctx.fillStyle = active ? '#9be1ad' : '#d0a952';
     ctx.fillRect(room.x - 3, bounds.y - 14, 6, 6);

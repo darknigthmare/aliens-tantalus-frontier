@@ -366,14 +366,15 @@ export function withHubTrainingV132(Base) {
           const row = cached?.row ?? 1, width = 92, height = 128;
           const x = npc.x + npc.w / 2 - width / 2, y = npc.y + npc.h - height * (240 / 256);
           this.drawDepthContactShadowV116(ctx, npc, npc.y + npc.h);
-          const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing: npc.vx < 0 ? -1 : 1 },
+          const facing = npc.lifeV136 ? npc.facing : npc.vx < 0 ? -1 : 1;
+          const human = resolveHumanAtlasGeometryV133({ actor: { ...npc, facing },
             sheet: sheet || { path: image.src?.replace(/^https?:\/\/[^/]+/, ''), sourceFacing: 1 }, column, row, surface: 'hub' });
           if (drawHumanAtlasV133(ctx, image, human)) continue;
           ctx.save();
-          if (npc.vx < 0) { ctx.translate(x + width, y); ctx.scale(-1, 1); }
+          if (facing < 0) { ctx.translate(x + width, y); ctx.scale(-1, 1); }
           ctx.drawImage(resolveSpriteDrawableV134(image), column * image.naturalWidth / columns, row * image.naturalHeight / rows,
             image.naturalWidth / columns, image.naturalHeight / rows,
-            npc.vx < 0 ? 0 : x, npc.vx < 0 ? 0 : y, width, height);
+            facing < 0 ? 0 : x, facing < 0 ? 0 : y, width, height);
           ctx.restore();
         }
         for (const door of this.doorStates || []) {

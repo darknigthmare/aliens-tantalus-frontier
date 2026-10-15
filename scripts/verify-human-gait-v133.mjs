@@ -25,7 +25,7 @@ function observed({ speed=245,rate=60,seconds=1,patch={},surface='mission' }={})
 test('ordinary movement has a supported human stride and a bounded 3–5 step cadence without changing velocity',()=>{
   for(const surface of ['mission','hub','bioforge']) for(const speed of [155,245,270]) {
     const {subject,state,frames}=observed({speed,surface}); const last=frames.at(-1);
-    assert.equal(subject.vx,speed); assert.ok(state.stride>=90 && state.stride<=112);
+    assert.equal(subject.vx,speed); assert.ok(state.stride>=77 && state.stride<=139);
     assert.ok(last.presentationV133.stepsPerSecond>=3 && last.presentationV133.stepsPerSecond<5);
     assert.equal(state.gait,speed<235?'walk':'run'); close(last.presentationV133.standingHeight,96.5);
     assert.ok(last.presentationV133.footLiftLimit<=6);
@@ -40,11 +40,16 @@ test('the same travelled distance preserves phase, rigid stature and foot placem
     }
   }
 });
-test('walking retains a real planted support through every ground phase and never clips either boot under the floor',()=>{
-  for(const patch of [{},{facing:-1},{crouching:true}]) {
-    const {frames}=observed({seconds:2,patch}); let verified=0;
+test('walking retains support while running has brief bounded flight, and neither boot clips the floor',()=>{
+  for(const speed of [155,245,270]) for(const patch of [{},{facing:-1},{crouching:true}]) {
+    const {frames}=observed({speed,seconds:2,patch}); let verified=0;
     frames.forEach((frame,index)=>{
-      assert.ok(Object.values(frame.contacts.feet).some(foot=>foot.planted), 'Ground locomotion needs at least one supporting foot.');
+      const supported=Object.values(frame.contacts.feet).some(foot=>foot.planted);
+      if(frame.presentationV136.duty>=.5) assert.ok(supported,'Walking and crouching need continuous support.');
+      else if(!supported) {
+        assert.equal(frame.presentationV136.flight,true);
+        assert.ok(Math.min(...Object.values(frame.contacts.feet).map(foot=>foot.lift))<=3,'Running flight stays close to the physical deck.');
+      }
       for(const side of ['near','far']) {
         const leg=frame.legs[side], previous=frames[index-1]; assert.equal(leg.reachClamped,false);
         assert.ok(leg.heel.y<=292+1e-6 && leg.toe.y<=292+1e-6, 'The actual boot ends stay above the collision plane.');
@@ -52,7 +57,7 @@ test('walking retains a real planted support through every ground phase and neve
           close(leg.sole.x,previous.legs[side].sole.x); close(leg.sole.y,previous.legs[side].sole.y); verified++;
         }
       }
-    }); assert.ok(verified>80);
+    }); assert.ok(verified>50,'Two real seconds retain enough consecutive measured contacts, including the shorter running support duty.');
   }
 });
 test('upper-body motion keeps native proportions, a fixed physical foot pivot and restrained lean',()=>{
@@ -89,7 +94,7 @@ test('gait tuning never borrows a human rig for custom bodies, costumes, or dedi
     const subject=actor(patch),body=resolvePlayerBodyRigV125({actor:subject,images}),rig=resolvePlayerLocomotionRigV129({actor:subject,bodyRig:body,images});
     assert.equal(rig.eligible,false);
   }
-  assert.equal(humanGaitKindV133(actor({vx:155})),'walk'); close(humanGaitStrideV133(actor(),'run',.5),110.4);
+  assert.equal(humanGaitKindV133(actor({vx:155})),'walk'); close(humanGaitStrideV133(actor({vx:270}),'run',.5),138);
   const frozen=Object.freeze(actor()); assert.ok(Number.isFinite(sampleHumanGaitV133(frozen,.5).cycles)); assert.equal(frozen.x,100);
 });
 

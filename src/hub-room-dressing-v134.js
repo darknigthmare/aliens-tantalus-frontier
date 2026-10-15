@@ -208,11 +208,12 @@ function path(ctx, points, fill) {
 function body(ctx, w, h, color = '#34494b', depth = 7) {
   // A shallow top and side join the orthographic facade. They project only
   // into the rear service lane, never across the human silhouette.
-  path(ctx, [[0, depth], [depth, 0], [w, 0], [w - depth, depth]], '#536265');
-  ctx.fillStyle = color; ctx.fillRect(0, depth, w - depth, h - depth);
-  path(ctx, [[w - depth, depth], [w, 0], [w, h - depth], [w - depth, h]], '#202f32');
-  ctx.fillStyle = '#708080'; ctx.fillRect(2, depth + 1, w - depth - 3, 2);
-  ctx.fillStyle = '#182629'; ctx.fillRect(3, h - 7, w - depth - 6, 7);
+  const dx = Math.min(w * .23, depth * 19 / 12), dy = Math.min(h * .23, depth);
+  path(ctx, [[0, dy], [dx, 0], [w, 0], [w - dx, dy]], '#536265');
+  ctx.fillStyle = color; ctx.fillRect(0, dy, w - dx, h - dy);
+  path(ctx, [[w - dx, dy], [w, 0], [w, h - dy], [w - dx, h]], '#202f32');
+  ctx.fillStyle = '#708080'; ctx.fillRect(2, dy + 1, w - dx - 3, 2);
+  ctx.fillStyle = '#182629'; ctx.fillRect(3, h - 7, w - dx - 6, 7);
 }
 function slats(ctx, x, y, w, h, count = 6) {
   ctx.fillStyle = '#132226'; ctx.fillRect(x, y, w, h);
@@ -323,8 +324,8 @@ function drawEquipment(ctx, entry, accent) {
   }
 }
 
-export function drawHubRoomDressingV134(ctx, room, { images = new Map(), resolveDrawable = resolveSpriteDrawableV134, doors, ladders } = {}) {
-  const composition = resolveHubRoomDressingV134(room, { doors, ladders });
+export function drawHubRoomDressingV134(ctx, room, { images = new Map(), resolveDrawable = resolveSpriteDrawableV134, doors, ladders, composition: authoredComposition = null } = {}) {
+  const composition = authoredComposition || resolveHubRoomDressingV134(room, { doors, ladders });
   if (!ctx || !composition) return false;
   ctx.save();ctx.beginPath();ctx.rect(composition.start + 112, composition.top, composition.width - 224, composition.floorY - composition.top - 4);ctx.clip();
   const rendered = [];
@@ -332,7 +333,10 @@ export function drawHubRoomDressingV134(ctx, room, { images = new Map(), resolve
     const image = entry.asset && images.get(entry.asset);
     if (entry.kind === 'bitmap') {
       if (!(image?.complete && image.naturalWidth > 0)) continue;
-      ctx.drawImage(resolveDrawable(image), entry.x, entry.y, entry.w, entry.h);
+      if (entry.source) {
+        const s = entry.source;
+        ctx.drawImage(resolveDrawable(image), s.x, s.y, s.w, s.h, entry.x, entry.y, entry.w, entry.h);
+      } else ctx.drawImage(resolveDrawable(image), entry.x, entry.y, entry.w, entry.h);
       rendered.push(entry);
       continue;
     }
@@ -364,7 +368,7 @@ export function withHubRoomDressingV134(Base) {
       const result = super.drawRoomModule(ctx, room, farImage);
       if (!this.editorPlaytest) {
         this.roomDressingRenderedV134 ||= new Map();
-        this.roomDressingRenderedV134.set(room.id, drawHubRoomDressingV134(ctx, room,
+        this.roomDressingRenderedV134.set(room.id, this.drawHubRoomDressingV136?.(ctx, room) || drawHubRoomDressingV134(ctx, room,
           { images: this.propImages, doors: this.doorStates, ladders: this.v51Ladders }));
       }
       return result;
@@ -373,7 +377,8 @@ export function withHubRoomDressingV134(Base) {
       const result = super.drawAnnexGeometryV71(ctx, annex);
       if (!this.editorPlaytest) {
         this.roomDressingRenderedV134 ||= new Map();
-        this.roomDressingRenderedV134.set(annex.id, drawHubRoomDressingV134(ctx, { ...annex, xStart: 0 },
+        const room={ ...annex, xStart: 0 };
+        this.roomDressingRenderedV134.set(annex.id, this.drawHubRoomDressingV136?.(ctx, room) || drawHubRoomDressingV134(ctx, room,
           { images: this.propImages, ladders: annex.ladders }));
       }
       return result;

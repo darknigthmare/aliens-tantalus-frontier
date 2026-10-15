@@ -53,6 +53,9 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-crew-conversation-memory-v135.mjs', 'verify-field-media-v135.mjs',
   'verify-npc-dialogue-causality-v135.mjs', 'qa-continuation-browser-v135.mjs',
   'verify-editor-authoring-v135.mjs', 'verify-player-wardrobe-v135.mjs', 'qa-authoring-browser-v135.mjs',
+  'verify-hub-spatial-design-v136.mjs', 'verify-hub-room-life-v136.mjs', 'verify-hub-prop-atlas-v136.mjs',
+  'verify-human-motion-v136.mjs', 'verify-npc-life-v136.mjs', 'verify-editor-spatial-v136.mjs',
+  'qa-tantalus-design-v136.mjs', 'qa-npc-life-v136.mjs', 'qa-editor-spatial-browser-v136.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming

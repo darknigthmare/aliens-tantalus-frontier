@@ -604,6 +604,7 @@ export class HubGame extends HubGameV50 {
     }
 
     for (const npc of this.npcs) {
+      if (typeof this.stepHubNpcLifeV136 === 'function') { this.stepHubNpcLifeV136(npc, delta); continue; }
       npc.x += npc.vx * delta;
       if (npc.x <= npc.min || npc.x >= npc.max) { npc.x = clamp(npc.x, npc.min, npc.max); npc.vx *= -1; }
     }

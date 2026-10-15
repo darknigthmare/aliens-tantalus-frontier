@@ -1,3 +1,4 @@
+import { HUMAN_LEG_DIMENSIONS_V136 } from './human-motion-v136.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
@@ -73,7 +74,7 @@ export const PLAYER_LEG_PARTS_V128 = freeze({
 
 export const PLAYER_TRANSIT_PRESENTATION_V128 = freeze({
   schema: 128, downDuration: .42, deathDuration: .48, reviveDuration: .48,
-  rungSpacing: 22, firstRung: 11, upperLeg: 44, lowerLeg: 43,
+  rungSpacing: 22, firstRung: 11, ...HUMAN_LEG_DIMENSIONS_V136,
   artStatus: 'separated-pieces-with-constant-length-leg-ik'
 });
 const C = PLAYER_TRANSIT_PRESENTATION_V128;
@@ -304,7 +305,8 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
         const standAnkle=point(center+f*(side==='near'?5:-9)*s,F-11*s);
         if(kind==='death') {
           const dy=(F-11*s-hip.y)/s;
-          const reach=Math.sqrt(Math.max(0,86*86-dy*dy));
+          const length=C.upperLeg+C.lowerLeg-1;
+          const reach=Math.sqrt(Math.max(0,length*length-dy*dy));
           const final=point(hip.x-f*reach*s,F-11*s);
           foot=footFromAnkle(mixPoint(kneelAnkle,final,p),s,f);
         } else foot=footFromAnkle(mixPoint(kneelAnkle,standAnkle,standing),s,f);
