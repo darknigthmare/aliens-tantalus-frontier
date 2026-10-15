@@ -8,6 +8,13 @@ import { getHubRoomLifePlanV136 } from '../src/hub-room-life-v136.js';
 import { getHubFurnishingPlacementBoundsV139 } from '../src/hub-furnishing-contact-v139.js';
 import { HUB_ROOM_COMPOSITION_ADDITIONS_V142, extendHubRoomFurnishingsV142 } from '../src/hub-room-composition-v142.js';
 import { HUB_ANNEX_NPC_DUTIES_V141, getAnnexNpcPlacementV141 } from '../src/hub-annex-npc-life-v141.js';
+import { getShipPortVisitorFixtureBoundsV142, SHIP_PORT_MEETINGS_V87, SHIP_PORT_PENS_V87, SHIP_PORT_TERRARIUM_BOUNDS_V142 } from '../src/ship-port-room-v87.js';
+import { createDefaultSave } from '../src/save.js';
+import { SHIP_ANIMAL_HABITATS_V87, getShipAnimalFittingPlaqueBoundsV142, getShipAnimalHabitatsV87,
+  installShipAnimalHabitatV87, drawShipAnimalHabitatV87 } from '../src/ship-animal-habitat-v87.js';
+import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87, drawShipAnimalEnclosuresV87 } from '../src/ship-animal-enclosure-art-v87.js';
+import { SHIP_ANIMAL_TERRARIUM_ASSET_V87, drawShipAnimalTerrariumV87 } from '../src/ship-animal-terrarium-art-v87.js';
+
 
 const rooms = [...HUB_DECKS.flatMap(deck => deck.rooms), ...HUB_ANNEXES_V137];
 const overlap = (a, b) => a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y;
@@ -109,6 +116,40 @@ test('the bedside group clears the relocated refuge portal with its real approac
   const handleY=cabinet.y+cabinet.h/2;assert.ok(handleY>=plan.floorY-96.5&&handleY<=plan.floorY-36);
 });
 
+test('every civil furnishing and supported detail clears the actual visitor pens, terrarium, labels and vendor gestures', () => {
+  const plan=plans.get('frontier-civil-counter'),fixtures=getShipPortVisitorFixtureBoundsV142();
+  const bodies=fixtures.filter(fixture=>fixture.role==='civil-meeting-fixture');
+  assert.equal(bodies.length,new Set(SHIP_PORT_MEETINGS_V87.map(meeting=>meeting.offerId)).size);
+  for(const [offerId,pen] of Object.entries(SHIP_PORT_PENS_V87)){
+    const body=bodies.find(fixture=>fixture.offerId===offerId);assert.ok(body);
+    for(const key of ['x','y','w','h'])assert.equal(body[key],pen.bounds[key]);
+  }
+  const terrarium=bodies.find(body=>body.offerId==='offer-animal-mica');
+  for(const key of ['x','y','w','h'])assert.equal(terrarium[key],SHIP_PORT_TERRARIUM_BOUNDS_V142[key]);
+  assert.ok(fixtures.some(fixture=>fixture.role==='civil-vendor-gesture-envelope'));
+  for(const item of plan.items)for(const fixture of fixtures)assert.ok(!overlap(item,fixture), `${item.role}:${item.kind} is concealed by ${fixture.id}`);
+  for(const detail of plan.workstationDetailsV139.items)for(const fixture of fixtures)assert.ok(!overlap(detail.target,fixture), `${detail.role} is concealed by ${fixture.id}`);
+  const forms=plan.items.find(item=>item.role==='civil-public-form-counter'),seat=plan.items.find(item=>item.role==='civil-public-form-seat');
+  const bin=plan.items.find(item=>item.role==='port-reception'&&item.kind==='bin');
+  assert.ok(forms.x>=225+3,'The full form desk clears the real return portal and its approach.');
+  assert.ok(forms.x+forms.w<seat.x&&seat.x+seat.w<bin.x,'Desk, seat and bin form a readable separate group.');
+  assert.ok(plan.items.some(item=>item.role==='civil-records-counter'));
+  assert.deepEqual(plan.furnishingV137.rejected,[]);assert.deepEqual(plan.workstationDetailsV139.omitted,[]);
+});
+
+test('exactly four former civilian fillers are explicitly omitted where the native encounter fixtures already occupy their bays', () => {
+  const plan=plans.get('frontier-civil-counter');
+  const expected=['civilian-waiting:bench','civilian-waiting:case','east-shelter-services:bench','east-shelter-services:locker'].sort();
+  const omissions=plan.legacyOmissionsV138.filter(item=>item.reservations.includes('civil-meeting-fixture'));
+  assert.deepEqual(omissions.map(item=>`${item.role}:${item.kind}`).sort(),expected);
+  for(const omission of omissions){
+    assert.equal(omission.reason,'native-clearance-or-existing-task-equipment');
+    assert.ok(!plan.items.some(item=>item.role===omission.role&&item.kind===omission.kind));
+    assert.ok(getShipPortVisitorFixtureBoundsV142().some(fixture=>fixture.role==='civil-meeting-fixture'&&overlap(omission.bounds,fixture)));
+  }
+  assert.equal(plan.items.length,9);assert.equal(plan.furnishingV137.added.length,6);
+});
+
 test('the cockpit wall pair serves the existing checklist cart and leaves the pilot approach at adult head height clear', () => {
   const plan=plans.get('flight-control-cockpit');
   const manual=plan.items.find(item=>item.role==='flight-checklist-manual-stock');
@@ -118,6 +159,45 @@ test('the cockpit wall pair serves the existing checklist cart and leaves the pi
   assert.ok(Math.abs(manual.x+manual.w/2-cart.x-cart.w/2)<1e-8, 'Manuals sit directly above the existing checklist cart.');
   assert.ok(manual.y+manual.h<cart.y);assert.ok(manual.y+manual.h/2>=plan.floorY-96.5, 'The actual manual shelf is within the standing adult reach band.');
   assert.ok(clock.y+clock.h<plan.floorY-96.5, 'The distant time display stays above every standing crew silhouette.');
+});
+
+test('all animal-care furniture clears the actual drawn plaques and all installed habitat equipment in both legitimate fixture states', () => {
+  let installed=createDefaultSave();
+  for(const habitat of SHIP_ANIMAL_HABITATS_V87){
+    const result=installShipAnimalHabitatV87(installed,habitat.id,{roomId:'animal-care',artReady:true,playerX:habitat.installX,feetY:624,playerAlive:true,paused:false});
+    assert.equal(result.ok,true,habitat.id);installed=result.save;
+  }
+  assert.ok(getShipAnimalHabitatsV87(installed).every(habitat=>habitat.installed));
+  const plan=plans.get('animal-care');
+  for(const [name,save] of [['uninstalled',createDefaultSave()],['installed',installed]]){
+    const rectangles=[],plaques=[];
+    const ctx=new Proxy({save(){},restore(){},drawImage(...args){const [x,y,w,h]=args.slice(-4);rectangles.push({x,y,w,h});},
+      fillRect(x,y,w,h){if(w===132&&h===52){const bounds={x,y,w,h};rectangles.push(bounds);plaques.push(bounds);}},measureText(text){return{width:text.length*6};}},
+      {get:(object,key)=>key in object?object[key]:()=>{}});
+    assert.equal(drawShipAnimalHabitatV87(ctx,{complete:true,naturalWidth:1536,naturalHeight:1024},save),true);
+    if(name==='installed')for(const layer of ['back','front']){
+      const image=asset=>({complete:true,naturalWidth:1536,naturalHeight:1024,src:asset,currentSrc:asset});
+      assert.equal(drawShipAnimalEnclosuresV87(ctx,image(SHIP_ANIMAL_ENCLOSURE_ASSET_V87),save,layer),true);
+      assert.equal(drawShipAnimalTerrariumV87(ctx,image(SHIP_ANIMAL_TERRARIUM_ASSET_V87),save,layer),true);
+    }
+    assert.equal(plaques.length,name==='uninstalled'?6:0);
+    if(name==='uninstalled')assert.deepEqual(plaques,SHIP_ANIMAL_HABITATS_V87.map(habitat=>{const{x,y,w,h}=getShipAnimalFittingPlaqueBoundsV142(habitat);return{x,y,w,h};}));
+    for(const item of plan.items)for(const bounds of rectangles)assert.ok(!overlap(item,bounds),`${name}:${item.role} hidden by actual native draw`);
+    for(const detail of plan.workstationDetailsV139.items)for(const bounds of rectangles)assert.ok(!overlap(detail.target,bounds),`${name}:${detail.role} hidden by actual native draw`);
+  }
+  assert.equal(plan.items.length,8);assert.deepEqual(plan.furnishingV137.rejected,[]);assert.deepEqual(plan.workstationDetailsV139.omitted,[]);
+});
+
+test('the animal-care basin and preparation top remain practical individual fixtures with measured supports', () => {
+  const plan=plans.get('animal-care'),counter=plan.items.find(item=>item.role==='habitat-clean-preparation');
+  const basin=plan.items.find(item=>item.role==='habitat-handwash'),kit=plan.items.find(item=>item.role==='habitat-emergency-kit');
+  const soap=plan.workstationDetailsV139.items.find(item=>item.cell==='soap-towel-set');
+  assert.equal(counter.w,40);assert.equal(counter.h,46);assert.equal(counter.contactYV139,624);
+  assert.equal(basin.w,38);assert.ok(basin.usefulSurfaceV139.bounds.w>=30);
+  assert.ok(Math.abs(basin.usefulSurfaceV139.supportY-(624-41))<1e-8);
+  assert.equal(soap.hostRole,counter.role);assert.ok(Math.abs(soap.contactY-counter.y)<1e-8);
+  assert.ok(counter.w>=44*.85,'The individual preparation top is not a miniature prop.');
+  const handleY=kit.y+kit.h/2;assert.ok(handleY>=624-96.5&&handleY<=624-36);
 });
 
 test('composition extension is deterministic, does not mutate input and leaves unrelated rooms untouched', () => {

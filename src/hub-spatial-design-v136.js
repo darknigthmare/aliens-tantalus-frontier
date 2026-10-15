@@ -11,6 +11,10 @@ import { getHubDestinationSignReservationsV138 } from './hub-destination-signage
 import { getHubRoomPlaqueBoundsV134 } from './hub-room-dressing-v134.js';
 import { getHubSupportPlanesV139, getHubLadderMountV139 } from './hub-support-planes-v139.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
+import { getShipPortVisitorFixtureBoundsV142 } from './ship-port-room-v87.js';
+import { SHIP_ANIMAL_HABITATS_V87, getShipAnimalFittingPlaqueBoundsV142 } from './ship-animal-habitat-v87.js';
+import { SHIP_ANIMAL_ENCLOSURE_PLACEMENTS_V87 } from './ship-animal-enclosure-art-v87.js';
+import { SHIP_ANIMAL_TERRARIUM_PLACEMENT_V87 } from './ship-animal-terrarium-art-v87.js';
 import { drawHubElevatorDoorV142 } from './hub-elevator-interior-v142.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
@@ -46,6 +50,15 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], vents = 
   ];
   reserve(propBounds || getHubInteractionPropBoundsV136(room), 'native-service', 22);
   reserve(room.viewport, 'viewport', 8);
+  if(room.id==='frontier-civil-counter')for(const fixture of getShipPortVisitorFixtureBoundsV142())
+    reserve({...fixture,x:x+fixture.x},fixture.role,8);
+  if(room.id==='animal-care'){
+    for(const habitat of SHIP_ANIMAL_HABITATS_V87){
+      const b=getShipAnimalFittingPlaqueBoundsV142(habitat);reserve({...b,x:x+b.x},'habitat-fitting-plaque',8);
+    }
+    for(const installation of [...SHIP_ANIMAL_ENCLOSURE_PLACEMENTS_V87,SHIP_ANIMAL_TERRARIUM_PLACEMENT_V87])
+      reserve({...installation.bounds,x:x+installation.bounds.x},'installed-habitat-fixture',8);
+  }
   // These silhouettes are native functional actors, drawn before the passive
   // dressing pass. Reserve their real current render bounds so a loose case
   // or a wall kit cannot be painted over the parked hull, control booth or

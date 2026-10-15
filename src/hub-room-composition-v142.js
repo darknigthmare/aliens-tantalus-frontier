@@ -63,13 +63,13 @@ export const HUB_ROOM_COMPOSITION_ADDITIONS_V142 = freeze({
     counter(1204, 60, 'archive-classification-counter')
   ]),
   'animal-care': group('feed-preparation-and-separate-hygiene-stock', [
-    wall('galley-rack', 720, 500, 80, 'habitat-feed-preparation-stock'),
+    wall('galley-rack', 480, 500, 80, 'habitat-feed-preparation-stock'),
     wall('sterile-cabinet', 820, 500, 72, 'habitat-clean-hygiene-stock')
   ]),
   'frontier-civil-counter': group('public-form-completion-before-service-queue', [
-    counter(760, 112, 'civil-public-form-counter'),
-    floor('seat-side', 854, 40, 'civil-public-form-seat'),
-    wall('data-cabinet', 760, 500, 80, 'civil-public-form-stock')
+    counter(286, 112, 'civil-public-form-counter'),
+    floor('seat-side', 380, 40, 'civil-public-form-seat'),
+    wall('data-cabinet', 286, 500, 80, 'civil-public-form-stock')
   ]),
   'flight-control-cockpit': group('navigation-time-reference-and-checklist-stock-above-record-cart', [
     { kind: 'chronometers', x: 700, y: 420, width: 110, height: 42,
@@ -91,4 +91,12 @@ export function extendHubRoomFurnishingsV142(definitions) {
     return [id, addition ? { ...definition, items: [...definition.items, ...addition.items],
       functionalAdditionV142: addition.purpose } : definition];
   }));
+}
+
+/** The existing small reception bin accompanies the form desk. It remains
+ * outside both the door approach and the vendor's actual gesture envelope. */
+export function reviewHubLegacyFurnishingsV142(room, items, start=0) {
+  if(room?.id!=='frontier-civil-counter')return items;
+  return items.map(item=>item.role==='port-reception'&&item.kind==='bin'
+    ?{...item,x:start+420-item.w/2}:item);
 }

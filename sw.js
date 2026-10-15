@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-tantalus-forge-v142-1';
+const CACHE = 'atf-v86-tantalus-forge-v142-2';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',

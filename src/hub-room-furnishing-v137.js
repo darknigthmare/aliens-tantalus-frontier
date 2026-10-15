@@ -11,7 +11,7 @@ import { getHubFurnishingFootSourceV139, getHubFurnishingPlacementBoundsV139 } f
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 import { reviseHubAnnexFurnishingsV139 } from './hub-furnishing-annex-revisions-v139.js';
 import { getHubClinicalBayReservationsV139 } from './hub-clinical-bay-v139.js';
-import { extendHubRoomFurnishingsV142 } from './hub-room-composition-v142.js';
+import { extendHubRoomFurnishingsV142, reviewHubLegacyFurnishingsV142 } from './hub-room-composition-v142.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -117,13 +117,13 @@ export const HUB_ROOM_FURNISHING_V137 = freeze(extendHubRoomFurnishingsV142({
     wall('emergency-cabinet',1470,535,42,'biological-emergency-kit')
   ]),
   'animal-care': group('habitat-hygiene-and-emergency-stock',[
-    wall('emergency-cabinet',1520,470,38,'habitat-emergency-kit'),
-    equipment('work-counter',1000,74,46,'habitat-clean-preparation'),
-    {...furnishing('wall-handwash',1070,40,'habitat-handwash',{support:'rear-wall',atlas:139}),workSurfaceHeightV139:52}
+    wall('emergency-cabinet',1234,555,36,'habitat-emergency-kit'),
+    equipment('work-counter',848,40,46,'habitat-clean-preparation'),
+    {...furnishing('wall-handwash',750,38,'habitat-handwash',{support:'rear-wall',atlas:139}),workSurfaceHeightV139:41}
   ]),
   'frontier-civil-counter': group('waiting-comfort-and-emergency-access',[
-    wall('emergency-cabinet',2330,535,42,'port-fire-safety'),wall('service-conduits',2350,350,146,'port-service-feed'),
-    equipment('work-counter',1570,80,46,'civil-records-counter')
+    wall('emergency-cabinet',1140,535,42,'port-fire-safety'),wall('service-conduits',2350,350,146,'port-service-feed'),
+    equipment('work-counter',1269,80,46,'civil-records-counter')
   ]),
   'personal-refuge': group('private-rest-and-reading',[
     {...wall('crew-berth',1350,450,154,'private-bolted-berth'),mountKindV139:'cantilever-berth'},
@@ -245,7 +245,7 @@ export function enrichHubRoomCompositionV137(room, basePlan=null, options={}) {
   const structuralReservations=getHubFurnishingStructuralReservationsV138(room,options);
   const plan={...spatial,reservations:[...spatial.reservations,...equipmentReservations,...identityReservations,...structuralReservations,...getHubClinicalBayReservationsV139(room)]};
   const legacyOmissionsV138=[...basePlan?.legacyOmissionsV138||[]];
-  const items=(basePlan?.items||[]).filter(item=>{
+  const items=reviewHubLegacyFurnishingsV142(room,basePlan?.items||[],spatial.bounds.x).filter(item=>{
     const replaced=definition.replaceKinds.includes(item.kind);
     const accepted=!replaced&&hubSpatialPlacementClearV136(getHubFurnishingPlacementBoundsV139(item),plan,{margin:3});
     if(!accepted)legacyOmissionsV138.push({kind:item.kind,role:item.role,
