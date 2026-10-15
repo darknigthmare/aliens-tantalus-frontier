@@ -494,3 +494,13 @@ html.mission-mode body {
 
 /* A later responsive rule must never undo the player's subtitle preference. */
 html.mission-mode[data-subtitles='off'] .play-view > .mission-log { display: none; }
+
+.field-media-capture-v135 {
+  position: absolute;
+  z-index: 25;
+  top: calc(var(--runtime-safe) + 52px);
+  right: max(12px, env(safe-area-inset-right));
+  min-height: 44px;
+  max-width: calc(100% - 24px);
+  background: #071712ed;
+}

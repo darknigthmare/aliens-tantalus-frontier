@@ -258,7 +258,14 @@ export class ForgeSaveSystemV62 {
 
   commit(now = Date.now()) {
     this.data = sanitizeForgeSaveV62({ ...this.data, updatedAt: now }, now);
-    try { this.storage?.setItem(this.key, JSON.stringify(this.data)); } catch { /* in-memory fallback */ }
+    try {
+      if (typeof this.storage?.setItem !== 'function') throw new Error('Stockage indisponible.');
+      this.storage.setItem(this.key, JSON.stringify(this.data));
+      this.lastPersistenceV135 = { persisted: true, code: null };
+    } catch (error) {
+      // Export remains available when authoring falls back to memory.
+      this.lastPersistenceV135 = { persisted: false, code: error?.name === 'QuotaExceededError' ? 'FORGE_STORAGE_FULL' : 'FORGE_STORAGE_UNAVAILABLE' };
+    }
     return this.data;
   }
 

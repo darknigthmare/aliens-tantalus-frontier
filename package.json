@@ -21,7 +21,11 @@
     "audio:scan": "node scripts/audio-scan-v77.mjs",
     "audio:check": "node scripts/audio-scan-v77.mjs --check",
     "qa:tantalus:presentation": "node scripts/qa-hub-presentation-v134.mjs",
-    "qa:tantalus:parallax": "node scripts/qa-hub-room-parallax-v134.mjs"
+    "qa:tantalus:parallax": "node scripts/qa-hub-room-parallax-v134.mjs",
+    "test:continuation": "node --test scripts/verify-jeri-surface-motion-v135.mjs scripts/verify-crew-conversation-memory-v135.mjs scripts/verify-field-media-v135.mjs scripts/verify-npc-dialogue-causality-v135.mjs scripts/verify-editor-authoring-v135.mjs scripts/verify-player-wardrobe-v135.mjs",
+    "qa:continuation": "node scripts/qa-continuation-browser-v135.mjs",
+    "qa:jeri": "node scripts/qa-jeri-surface-browser-v135.mjs",
+    "qa:authoring": "node scripts/qa-authoring-browser-v135.mjs"
   },
   "engines": {
     "node": ">=22"

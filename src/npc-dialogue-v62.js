@@ -4,6 +4,11 @@ import { HUB_NPC_ROSTER } from './hub-v52-runtime.js';
 export const NPC_DIALOGUE_SCHEMA_V62 = 62;
 export const NPC_ROUTINE_PHASES_V62 = Object.freeze(['station', 'route', 'work', 'break', 'alert']);
 export const NPC_TRUST_LEVELS_V62 = Object.freeze(['fragile', 'prudent', 'operationnel', 'solide']);
+export const NPC_RAPPORT_RULES_V135 = Object.freeze({ schema: 135, renewAfterHours: 8, maxFacts: 64 });
+
+const RAPPORT_CHOICES_V135 = new Set(['request-candid-assessment', 'acknowledge-welfare',
+  'review-mission', 'confirm-alert-role', 'request-infestation-evidence']);
+const MAX_DIALOGUE_HOUR_V135 = 4800000;
 
 const MAX_COUNT = 999999;
 const MAX_HISTORY = 64;
@@ -256,13 +261,42 @@ function normalizeTopics(value) {
     .map(([key, count]) => [key, integer(count)]));
 }
 
+function dialogueHourV135(value) {
+  return Number.isFinite(value?.day) && value.day >= 1 && value.day <= 200000
+    && Number.isFinite(value?.hour) && value.hour >= 0 && value.hour < 24
+    ? Math.round(((value.day - 1) * 24 + value.hour) * 100) / 100 : null;
+}
+
+function normalizeRapportBenefitsV135(value, memory) {
+  const legacyHour = dialogueHourV135({ day: memory.lastDay, hour: memory.lastHour });
+  if (!isRecord(value) || value.schema !== 135) {
+    return { schema: 135, highWaterHour: legacyHour ?? -1,
+      facts: legacyHour !== null && RAPPORT_CHOICES_V135.has(memory.lastChoiceId)
+        ? [{ choiceId: memory.lastChoiceId, signature: 'legacy', grantedAt: legacyHour }] : [] };
+  }
+  const highWaterHour = typeof value.highWaterHour === 'number' && Number.isFinite(value.highWaterHour)
+    && value.highWaterHour >= -1 && value.highWaterHour <= MAX_DIALOGUE_HOUR_V135
+    ? Math.max(value.highWaterHour, legacyHour ?? -1) : legacyHour ?? -1;
+  const facts = new Map();
+  for (const fact of (Array.isArray(value.facts) ? value.facts : []).slice(-NPC_RAPPORT_RULES_V135.maxFacts)) {
+    if (!isRecord(fact) || !RAPPORT_CHOICES_V135.has(fact.choiceId)
+      || typeof fact.signature !== 'string' || !/^(?:legacy|v135:[a-z0-9]{1,16})$/.test(fact.signature)
+      || typeof fact.grantedAt !== 'number' || !Number.isFinite(fact.grantedAt)
+      || fact.grantedAt < 0 || fact.grantedAt > highWaterHour) continue;
+    const key = `${fact.choiceId}:${fact.signature}`, previous = facts.get(key);
+    if (!previous || previous.grantedAt < fact.grantedAt) facts.set(key,
+      { choiceId: fact.choiceId, signature: fact.signature, grantedAt: fact.grantedAt });
+  }
+  return { schema: 135, highWaterHour, facts: [...facts.values()] };
+}
+
 function normalizeMemoryEntry(value = {}, legacy = null) {
   const source = isRecord(value) ? value : {};
   const legacyCount = integer(legacy?.count);
   const conversations = Math.max(integer(source.conversations), legacyCount);
   const topics = normalizeTopics(source.topics);
   if (!Object.keys(topics).length && legacyCount > 0) topics.legacyInteraction = legacyCount;
-  return {
+  const entry = {
     conversations,
     rapport: integer(source.rapport, 0, -50, 50),
     topics,
@@ -274,6 +308,8 @@ function normalizeMemoryEntry(value = {}, legacy = null) {
     lastHour: number(source.lastHour, 0, 0, 24),
     handledConversationIds: stringList(source.handledConversationIds, MAX_HISTORY)
   };
+  entry.rapportBenefitsV135 = normalizeRapportBenefitsV135(source.rapportBenefitsV135, entry);
+  return entry;
 }
 
 export function normalizeDialogueMemoryV62(value, legacyInteractions = {}) {
@@ -803,6 +839,64 @@ function buildChoices(identity, snapshot) {
   return choices;
 }
 
+// Only recorded service and meaningful welfare bands can change a benefit
+// fact. Conversation count, rapport, routine animation and wall time cannot.
+function rapportFactsV135(crewId, snapshot, context = {}) {
+  const crew = resolveCrewState(crewId, context);
+  const operation = isRecord(context.operation) ? context.operation : context.save?.strategy?.currentOperation;
+  const service = (Array.isArray(crew.serviceHistoryV85) ? crew.serviceHistoryV85 : []).slice(-64)
+    .filter(entry => isRecord(entry) && entry.schema === 85 && entry.type === 'mission'
+      && /^operation-[1-9]\d{0,8}-/.test(text(entry.operationId))
+      && ['success', 'failure', 'retreat'].includes(entry.outcome)).at(-1);
+  const mission = [snapshot.crew.missions, snapshot.crew.missionAssigned ? text(operation?.id) : '',
+    service ? [text(service.operationId), service.outcome] : null];
+  const injuries = (Array.isArray(crew.injuries) ? crew.injuries : []).slice(-32).map(entry =>
+    typeof entry === 'string' ? entry.slice(0, 80) : isRecord(entry)
+      ? [text(entry.id), text(entry.type), text(entry.operationId), Math.floor(number(entry.severity, 0) / 20)] : null);
+  const welfare = [snapshot.crew.status, Math.floor(Math.min(99, snapshot.crew.health) / 20),
+    snapshot.crew.stress >= 65 ? Math.floor((snapshot.crew.stress - 65) / 15) : -1,
+    snapshot.crew.injuryCount, injuries, mission];
+  const crisis = [snapshot.crisis.active, snapshot.crisis.id, snapshot.crisis.kind, snapshot.crisis.roomId];
+  const infestation = [snapshot.infestation.active, snapshot.infestation.stage,
+    Math.floor(snapshot.infestation.certainty / 20), snapshot.infestation.sourceType];
+  const facts = {
+    'request-candid-assessment': [welfare, mission, crisis, infestation],
+    'acknowledge-welfare': welfare,
+    'review-mission': mission,
+    'confirm-alert-role': crisis,
+    'request-infestation-evidence': infestation
+  };
+  return Object.fromEntries(Object.entries(facts).map(([choiceId, fact]) =>
+    [choiceId, `v135:${stableHash(JSON.stringify(fact))}`]));
+}
+
+function applyRapportBenefitV135(previous, conversation, choiceId, requestedDelta) {
+  const state = normalizeRapportBenefitsV135(previous.rapportBenefitsV135, previous);
+  const now = dialogueHourV135(conversation.context);
+  if (now === null) return { state, delta: 0, reason: 'invalid-game-clock' };
+  const rewind = now < state.highWaterHour;
+  state.highWaterHour = Math.max(state.highWaterHour, now);
+  if (requestedDelta <= 0) return { state, delta: 0, reason: 'no-benefit' };
+  if (rewind) return { state, delta: 0, reason: 'game-clock-before-receipt' };
+  const signature = conversation.rapportFactsV135?.[choiceId];
+  if (typeof signature !== 'string' || !/^v135:[a-z0-9]{1,16}$/.test(signature)) {
+    return { state, delta: 0, reason: 'missing-context-fact' };
+  }
+  const index = state.facts.findIndex(fact => fact.choiceId === choiceId
+    && (fact.signature === signature || fact.signature === 'legacy'));
+  const prior = state.facts[index];
+  if (prior && now - prior.grantedAt < NPC_RAPPORT_RULES_V135.renewAfterHours) {
+    // Old saves know the last choice/time but not its semantic fingerprint.
+    // Establish that baseline without granting another benefit on migration.
+    if (prior.signature === 'legacy') state.facts[index] = { ...prior, signature };
+    return { state, delta: 0, reason: 'same-fact-in-current-shift' };
+  }
+  if (prior) state.facts.splice(index, 1);
+  state.facts.push({ choiceId, signature, grantedAt: now });
+  state.facts = state.facts.slice(-NPC_RAPPORT_RULES_V135.maxFacts);
+  return { state, delta: requestedDelta, reason: prior ? 'later-shift' : 'new-context-fact' };
+}
+
 export function beginNpcConversationV62(crewId, context = {}) {
   const identity = IDENTITY_BY_ID.get(crewId);
   if (!identity) return null;
@@ -826,6 +920,7 @@ export function beginNpcConversationV62(crewId, context = {}) {
     identity,
     contextKind: kind,
     context: snapshot,
+    rapportFactsV135: rapportFactsV135(crewId, snapshot, context),
     routine,
     lines,
     choices,
@@ -864,12 +959,15 @@ export function applyNpcDialogueChoiceV62(hubState, conversation, choiceId) {
   }
 
   const topic = /^[a-z0-9-]{1,48}$/.test(choiceRecord.topic) ? choiceRecord.topic : 'status';
+  const benefit = applyRapportBenefitV135(previous, conversation, choiceId, effect.rapportDelta);
+  const nextRapport = clamp(previous.rapport + benefit.delta, -50, 50);
   const sequence = ledger.sequence + 1;
   ledger.sequence = sequence;
   ledger.entries[identity.crewId] = {
     ...previous,
     conversations: previous.conversations + 1,
-    rapport: clamp(previous.rapport + effect.rapportDelta, -50, 50),
+    rapport: nextRapport,
+    rapportBenefitsV135: benefit.state,
     topics: { ...previous.topics, [topic]: integer(previous.topics[topic]) + 1 },
     flags: effect.flag ? stringList([...previous.flags, effect.flag], 32) : previous.flags,
     lastTopic: topic,
@@ -897,7 +995,8 @@ export function applyNpcDialogueChoiceV62(hubState, conversation, choiceId) {
     response: choiceRecord.response,
     effectSummary: {
       targets: ['hub.dialogueMemory', 'hub.npcRoutineState'],
-      rapportDelta: effect.rapportDelta,
+      rapportDelta: nextRapport - previous.rapport,
+      rapportReasonV135: benefit.reason,
       topic,
       flag: effect.flag,
       alertAcknowledged: effect.routineAlert

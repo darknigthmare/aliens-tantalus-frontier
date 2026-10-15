@@ -28,6 +28,12 @@ import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
+import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
+import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
+import { mountFieldMediaUiV135 } from './field-media-ui-v135.js';
+import { mountEditorAuthoringUiV135 } from './editor-authoring-ui-v135.js';
+import { savePlayerWardrobeOutfitV135, equipPlayerWardrobeOutfitV135, deletePlayerWardrobeOutfitV135,
+  copyPlayerAppearanceV135 } from './player-wardrobe-v135.js';
 import {
   ensureAdvancedState, getShipModuleEffects, getModuleQuote, installShipModule, repairShipModule,
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
@@ -672,7 +678,7 @@ function openNpcDialogueV62(interaction) {
   });
   if (!conversation) return false;
   pendingNpcConversationV62 = conversation;
-  pendingHubInteraction = { interaction, conversation, npc: true };
+  pendingHubInteraction = { interaction, conversation, npc: true, owner: currentOwnerV84() };
   hubEngine.pause();
   byId('hub-dialogue-speaker').textContent = `${conversation.identity.name} · ${conversation.identity.role}`;
   byId('hub-dialogue-text').textContent = conversation.lines.map((line) => line.text).join(' ');
@@ -692,16 +698,21 @@ function openNpcDialogueV62(interaction) {
 
 function chooseNpcDialogueV62(choiceId) {
   if (!pendingNpcConversationV62) return false;
+  if (!ownsTimelineV84(pendingHubInteraction?.owner) || !ownsTimelineV84(hubOwnerV84)
+    || activeView !== 'hub' || standaloneContext || saveSystem.recoveryNeeded) {
+    throw new Error('Le profil a changé. Rouvrez cet échange depuis le Tantalus.');
+  }
   const result = applyNpcDialogueChoiceV62(saveSystem.data.hub, pendingNpcConversationV62, choiceId);
   if (!result.applied) {
     toast(result.blockedReason || 'Cette réponse n’est plus disponible.');
     return false;
   }
-  saveSystem.data.hub.dialogueMemory = clone(result.persistence.dialogueMemory);
-  saveSystem.data.hub.npcRoutineState = clone(result.persistence.npcRoutineState);
-  hubEngine.npcRoutineStateV62 = clone(result.persistence.npcRoutineState);
+  // Store the complete candidate before publishing memory, rapport or response.
+  // A failed write leaves both the live save and the actor context untouched.
+  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub),
+    dialogueMemory: clone(result.persistence.dialogueMemory), npcRoutineState: clone(result.persistence.npcRoutineState) } });
+  hubEngine.npcRoutineStateV62 = clone(saveSystem.data.hub.npcRoutineState);
   hubEngine.setNpcRoutineContextV62(getHubRoutineContextV62(), { persist: false, rebuild: true });
-  saveSystem.commit();
   byId('hub-dialogue-text').textContent = result.response;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
@@ -785,6 +796,7 @@ function showView(name) {
     heading.focus({ preventScroll: true });
   }
   globalThis.scrollTo?.({ top: 0, behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
+  fieldMediaUiV135?.refresh();
 }
 
 function getHubRoutineContextV62(source = saveSystem.data) {
@@ -1535,6 +1547,36 @@ function renderPlayerAppearanceV126() {
     panel.addEventListener('click', event => {
       const button = event.target.closest('button');
       if (!button || button.disabled || !panel.contains(button)) return;
+      if (button.dataset.wardrobeActionV135) {
+        const owner = button.dataset.wardrobeOwnerV135, action = button.dataset.wardrobeActionV135;
+        if (!['player', 'coop'].includes(owner) || standaloneContext || saveSystem.recoveryNeeded || activeView !== 'armory') return;
+        const timeline = currentOwnerV84(), candidate = { ...saveSystem.data, player: clone(saveSystem.data.player) };
+        const slot = Number(button.dataset.wardrobeSlotV135);
+        try {
+          if (action === 'copy') copyPlayerAppearanceV135(candidate, { fromOwner: button.dataset.wardrobeFromV135, toOwner: owner });
+          else if (action === 'save') savePlayerWardrobeOutfitV135(candidate, { owner, slot,
+            name: panel.querySelector(`[data-wardrobe-name-v135="${slot}"]`)?.value || '' });
+          else if (action === 'equip') equipPlayerWardrobeOutfitV135(candidate, { owner, slot });
+          else if (action === 'delete') deletePlayerWardrobeOutfitV135(candidate, { owner, slot });
+          else throw new Error('Action de vestiaire inconnue.');
+          if (!ownsTimelineV84(timeline)) throw new Error('Le profil a changé. Rouvrez le vestiaire.');
+          saveSystem.commit({ player: candidate.player });
+        } catch (error) {
+          const status = panel.querySelector('[data-wardrobe-status-v135]');
+          if (status) status.textContent = error.message;
+          toast(error.message); return;
+        }
+        renderPlayerAppearanceV126();
+        const controls = [...panel.querySelectorAll('[data-wardrobe-action-v135]')];
+        const focusTarget = controls.find(control => !control.disabled && control.dataset.wardrobeActionV135 === action
+          && control.dataset.wardrobeOwnerV135 === owner && (action === 'copy' || Number(control.dataset.wardrobeSlotV135) === slot))
+          || controls.find(control => !control.disabled && control.dataset.wardrobeActionV135 === 'save' && Number(control.dataset.wardrobeSlotV135) === slot);
+        focusTarget?.focus({ preventScroll: true });
+        const message = action === 'delete' ? 'Casier de tenue libéré.' : action === 'save' ? 'Tenue enregistrée dans votre casier.' : 'Tenue préparée.';
+        panel.querySelector('[data-wardrobe-status-v135]').textContent = message;
+        toast(message);
+        return;
+      }
       if (button.hasAttribute('data-appearance-facing-v126')) {
         appearancePreviewFacingV126 = Number(button.dataset.appearanceFacingV126) < 0 ? -1 : 1;
         appearancePreviewV126?.setFacing(appearancePreviewFacingV126);
@@ -1685,6 +1727,9 @@ function ensureCostumeFilterOptions(id, field) {
 function runCrewActionV85(action, args, owner) {
   if (standaloneContext || activeView !== 'crew') throw new Error('Ouvrez Echo-9 depuis votre campagne pour gérer le personnel.');
   const actions = { recruit: recruitCandidateV85, refresh: refreshRecruitmentV85, train: trainCrewAptitudeV85,
+    conversation: (save, crewId, topicId) => rememberCrewConversationTopicV135(save, crewId, topicId, {
+      catalog: CREW, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT]
+    }),
     transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember, marking: setEcho9MarkingV110,
     'archive-select': (save, id) => { const result = selectPremiumDossierV119(save, id); if (!result.ok) throw new Error('Reconstitution MIRE réussie nécessaire.'); return result; } };
   const result = commitCrewTransactionV85({ saveSystem, owner, ownsOwner: ownsTimelineV84,
@@ -1784,9 +1829,13 @@ function renderEditorStatus() {
   if (!editor) return;
   const snapshot = editor.getSnapshot();
   const validation = snapshot.validation;
+  byId('editor-mode').value = snapshot.kind;
   byId('editor-validation').innerHTML = validation.ok
     ? `<span class="chip success">PLAN VALIDE</span><p>${snapshot.tiles.length} blocs · ${snapshot.kind} · prêt pour playtest isolé · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
     : `<span class="chip danger">PLAN INCOMPLET</span><p>${validation.errors.map(escapeHtml).join(' ')}</p>`;
+  if (forgeSaveSystem.lastPersistenceV135?.persisted === false) {
+    byId('editor-validation').insertAdjacentHTML('beforeend', '<p role="status">Stockage local indisponible : modifications conservées en mémoire uniquement. Exportez le plan avant de fermer cette page.</p>');
+  }
   byId('editor-undo').disabled = !snapshot.canUndo;
   byId('editor-redo').disabled = !snapshot.canRedo;
   byId('editor-play').disabled = !validation.ok;
@@ -1831,6 +1880,55 @@ function renderMissionEquipment() {
 }
 
 let costumeArchivesUiV119 = null;
+let fieldMediaUiV135 = null;
+function fieldMediaOwnerV135() {
+  return { ...currentOwnerV84(), createdAt: saveSystem.data.createdAt, identityId: getHubTrainingOperatorIdV132(saveSystem.data) };
+}
+function canCaptureFieldMediaV135() {
+  if (standaloneContext || creatorOwnerV84 || saveSystem.recoveryNeeded) return false;
+  if (activeView === 'hub') return ownsTimelineV84(hubOwnerV84) && hubEngine.running;
+  return activeView === 'play' && ownsTimelineV84(missionOwnerV78) && engine.running
+    && !engine.enemyAtlasLoadingPausedV65 && !engine.userCasteLoadingV88;
+}
+async function captureFieldFrameV135() {
+  if (!canCaptureFieldMediaV135()) throw new Error('Rejoignez le Tantalus ou une mission en cours pour photographier le terrain.');
+  const owner = fieldMediaOwnerV135(), hub = activeView === 'hub';
+  const canvas = byId(hub ? 'hub-canvas' : 'game-canvas');
+  if (!canvas?.width || !canvas?.height || !canvas.getClientRects().length) throw new Error('L’image du terrain n’est pas disponible.');
+  const frame = { width: canvas.width, height: canvas.height, scene: hub ? 'hub' : 'mission',
+    location: hub ? byId('hub-room-label').textContent : engine.level?.name || engine.campaign?.name || 'Terrain de mission',
+    worldId: saveSystem.data.worldId, capturedAt: Date.now() };
+  // toBlob snapshots the displayed canvas now; asynchronous encoding never
+  // redraws the scene or advances actors to manufacture an observation.
+  const blob = await new Promise((resolve, reject) => {
+    try { canvas.toBlob(value => value ? resolve(value) : reject(new Error('La photographie n’a pas pu être encodée.')), 'image/png'); }
+    catch (error) { reject(error); }
+  });
+  if (!ownsTimelineV84(owner) || !canCaptureFieldMediaV135()) throw new Error('Le profil ou le terrain a changé pendant la capture.');
+  return { ...frame, blob };
+}
+function setupFieldMediaV135() {
+  if (fieldMediaUiV135) return fieldMediaUiV135;
+  const repository = createFieldMediaRepositoryV135({ isOwnerCurrent: owner => ownsTimelineV84(owner)
+    && !standaloneContext && !saveSystem.recoveryNeeded });
+  fieldMediaUiV135 = mountFieldMediaUiV135(byId('field-media-archives-v135'), {
+    repository, getOwner: fieldMediaOwnerV135, captureFrame: captureFieldFrameV135, canCapture: canCaptureFieldMediaV135,
+    onBusyChange: busy => all('[data-field-media-capture-v135]').forEach(button => { button.disabled = busy; })
+  });
+  all('[data-field-media-capture-v135]').forEach(button => {
+    button.addEventListener('click', async () => {
+      if (button.disabled) return;
+      button.disabled = true;
+      try {
+        const result = await fieldMediaUiV135.capture();
+        if (result !== false) toast('Photographie conservée dans les Archives de ce profil.');
+        else if (fieldMediaUiV135.status.error) toast(fieldMediaUiV135.status.message);
+      } catch (error) { toast(error.message); }
+      finally { button.disabled = false; }
+    });
+  });
+  return fieldMediaUiV135;
+}
 function renderAll() {
   renderClock();
   renderCommand();
@@ -1866,6 +1964,7 @@ function renderAll() {
   renderBioforgeUiV87();
   narrativeArchivesUiV68?.render();
   missionNarrativeArchivesUiV68?.render();
+  fieldMediaUiV135?.refresh();
   renderArchiveRelayArchivesV122();
 }
 
@@ -3265,6 +3364,7 @@ function setupEditor() {
   byId('editor-tools').innerHTML = TILE_TYPES.map((tool, index) => `<button class="tool-button ${index ? '' : 'active'}" data-editor-tool="${tool}">${title(tool)}</button>`).join('');
   const saved = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
   if (saved) editor.load(saved);
+  mountEditorAuthoringUiV135(editor, { getPersistenceStatus: () => forgeSaveSystem.lastPersistenceV135 });
   renderEditorStatus();
 }
 
@@ -3462,7 +3562,10 @@ function bind() {
   };
   byId('hub-dialogue-choices').onclick = (event) => {
     const choiceId = event.target.closest('[data-npc-dialogue-choice]')?.dataset.npcDialogueChoice;
-    if (choiceId) chooseNpcDialogueV62(choiceId);
+    if (choiceId) {
+      try { chooseNpcDialogueV62(choiceId); }
+      catch (error) { toast(error.message); }
+    }
   };
   all('[data-close-hub-station]').forEach((button) => {
     button.onclick = () => closeHubStation();
@@ -3544,7 +3647,13 @@ function bind() {
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
   byId('editor-export').onclick = () => download(`atf-v62-forge-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
-  byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
+  byId('editor-import').onchange = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try { editor.load(JSON.parse(await file.text())); renderEditorStatus(); toast('Plan importé.'); }
+    catch (error) { toast(error.message); }
+    finally { event.target.value = ''; }
+  };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],
     'setting-quality': ['quality', (element) => element.value],
@@ -3631,6 +3740,7 @@ async function boot() {
   setupRuntimeControls();
   setupCatalogsV62();
   setupNarrativeArchivesUiV68();
+  setupFieldMediaV135();
   setupMissionArchiveOverlayV68();
   setupAlphaBravoCommandDockV69();
   setupAlienSurvivalDockV70();

@@ -1,3 +1,5 @@
+import { createJeriSurfaceStateV135, buildJeriSurfaceSceneV135, findJeriSurfaceV135,
+  validateJeriSurfaceStateV135, attachJeriSurfaceV135, releaseJeriSurfaceV135, stepJeriSurfaceV135, jeriSurfaceContactsV135 } from './jeri-surface-motion-v135.js';
 import { ENEMIES, LEVEL_SEEDS } from './content-core-v50.js';
 import { buildMissionLevelV52, validateMissionPhysicalTopologyV57, validateMissionTopologyV52 } from './mission-levels-v52.js';
 import { computeMissionLayerCoverCropV62 } from './game-v52-level-runtime.js';
@@ -18,7 +20,7 @@ export const HIVE_CAMPAIGNS_V131 = Object.freeze([
   description: `${campaign.summary} Missions originales du Tantalus ; les personnages n’ont pas encore de planches dédiées.` })));
 
 export const HIVE_ART_DEBT_V131 = Object.freeze({
-  'jeri-false-son': Object.freeze(['JERI segmenté et locomotion mur/plafond', 'SAINT trois phases', 'inspection royale dédiée']),
+  'jeri-false-son': Object.freeze(['JERI segmenté et animations mur/plafond dédiées', 'SAINT trois phases', 'inspection royale dédiée']),
   'atax-false-queen': Object.freeze(['armure REGINA mécanique', 'castes Kenner absentes de l’arsenal animé actuel']),
   'eloise-uncrowned-queen': Object.freeze(['Éloïse animée (portrait statique disponible)', 'HUSH-6', 'Premier-Né dédié', 'Chasseur de Mères'])
 });
@@ -143,6 +145,7 @@ export function withHiveMissionsV131(BaseEngine) {
       this.hiveV131 = null; this.hiveActorsV131 = []; this.hiveCheckpointV131 = null; this.hiveMenuV131 = false;
       this.hiveManifestV131 = null; this.hiveIdentityV131 = null; this.hiveBasePlatformsV131 = []; this.hiveBaseWallsV131 = [];
       this.hiveHeldKeysV131 = new Set(); this.hiveChannelActorV131 = null;
+      this.jeriSurfaceV135 = createJeriSurfaceStateV135(); this.jeriGeometryV135 = null;
       if (!this.hiveActiveV131) return super.start(options);
       const manifest = options.missionLevel?.hiveMissionV131;
       if (!manifest || manifest.schema !== 131 || manifest.campaignId !== options.campaign.id) throw new Error('Hive missions require buildHiveMissionV131.');
@@ -165,8 +168,61 @@ export function withHiveMissionsV131(BaseEngine) {
         && !this.isFieldActionBusyV124?.(actor) && !this.isPlaceableBusyV86?.(actor));
     }
 
+    isJeriSurfaceAttachedV135() { return this.isHiveMissionV131() && this.hiveV131.operationId === 'jeri-false-son' && this.jeriSurfaceV135?.mode === 'attached'; }
+    jeriSurfaceSceneV135(state = this.hiveV131) {
+      return buildJeriSurfaceSceneV135(this.jeriGeometryV135, state, this.hiveManifestV131?.stations);
+    }
+    applyJeriSurfaceMotionV135(result) {
+      this.jeriSurfaceV135 = result.state;
+      const actor = this.player;
+      for (const key of ['x', 'y', 'vx', 'vy']) if (Number.isFinite(result.actor?.[key])) actor[key] = result.actor[key];
+      actor.climbing = this.isJeriSurfaceAttachedV135(); actor.grounded = false;
+      if (actor.climbing && result.state.face !== 'underside') actor.facing = result.state.face === 'left' ? 1 : -1;
+      actor.ladderId = actor.climbing ? `jeri-surface:${result.state.surfaceId}` : null;
+      actor.ladderDetachClock = .2; actor.jumpBuffer = 0; actor.coyoteTime = 0;
+      actor.crouching = false; actor.inCover = false; actor.coverSource = null;
+    }
+    toggleVehicle(actor = this.player) {
+      if (!this.isHiveMissionV131() || this.hiveV131.operationId !== 'jeri-false-son') return super.toggleVehicle(actor);
+      if (!this.hiveCanActV131(actor) || this.hiveV131.possession || this.hiveV131.segments.head <= 0 || this.hiveV131.segments.legs <= 0) return false;
+      const result = this.isJeriSurfaceAttachedV135() ? releaseJeriSurfaceV135(actor, this.jeriSurfaceV135)
+        : attachJeriSurfaceV135(actor, this.jeriSurfaceV135, this.jeriSurfaceSceneV135());
+      if (!result.changed && !result.released) return this.locked('V : SE RAPPROCHER D’UN MUR OU D’UN DESSOUS DE PASSERELLE');
+      this.hiveV131.channel = null; this.hiveV131.channelProgress = 0;
+      this.applyJeriSurfaceMotionV135(result);
+      this.onEvent?.({ type: 'jeri-surface-v135', attached: result.state.mode === 'attached', face: result.state.face });
+      return true;
+    }
+    updateJeriSurfacePlayerV135(actor, delta, controls, mobility) {
+      const scene = this.jeriSurfaceSceneV135();
+      if (!this.isJeriSurfaceAttachedV135()) {
+        this.jeriSurfaceV135 = stepJeriSurfaceV135(actor, this.jeriSurfaceV135, scene, {}, delta).state;
+        return false;
+      }
+      const held = code => this.keys.has(code);
+      const input = { horizontal: Number(held(controls.right) || held('ArrowRight')) - Number(held(controls.left) || held('ArrowLeft')),
+        vertical: Number(held(controls.down) || held('ArrowDown')) - Number(held(controls.up) || held('ArrowUp')),
+        jump: actor.jumpBuffer > 0 };
+      if (input.jump || !ACTIVE(actor) || this.hiveV131.segments.legs <= 0) {
+        this.applyJeriSurfaceMotionV135(releaseJeriSurfaceV135(actor, this.jeriSurfaceV135, input.jump)); return true;
+      }
+      const checked = validateJeriSurfaceStateV135(this.jeriSurfaceV135, actor, scene);
+      if (!checked.valid) { this.applyJeriSurfaceMotionV135(releaseJeriSurfaceV135(actor, this.jeriSurfaceV135)); return true; }
+      const pose = { x: actor.x, y: actor.y }, keys = this.keys;
+      // Native update still owns cooldowns, reloads and damage. Adhesion adds a
+      // contact constraint around its gravity step; it cannot advance a station.
+      this.keys = new Set(); actor.vx = actor.vy = 0; actor.climbing = false; actor.ladderDetachClock = delta + .2;
+      try { super.updatePlayer(actor, delta, controls); } finally { this.keys = keys; }
+      if (!ACTIVE(actor) || this.mission.state !== 'active') return true;
+      Object.assign(actor, pose);
+      if (this.jeriSurfaceV135.face === 'underside' && input.horizontal) actor.facing = -Math.sign(input.horizontal);
+      this.applyJeriSurfaceMotionV135(stepJeriSurfaceV135(actor, this.jeriSurfaceV135, scene, input, delta, mobility));
+      return true;
+    }
+
     configureHiveMissionV131(plan) {
       const config = plan.hiveMissionV131;
+      this.jeriGeometryV135 = { ...clone(plan.geometry), ...plan.dimensions };
       this.platforms = plan.geometry.platforms.map(surface => ({ ...surface }));
       this.hiveBasePlatformsV131 = this.platforms.map(surface => ({ ...surface }));
       this.ladders = plan.geometry.ladders.map(ladder => ({ ...ladder, x: ladder.x + ladder.w / 2, top: ladder.y, bottom: ladder.y + ladder.h - 22 }));
@@ -248,7 +304,7 @@ export function withHiveMissionsV131(BaseEngine) {
     }
 
     beginHiveChannelV131(station, action = station.id) {
-      if (!this.hiveCanActV131() || this.hiveV131.possession || !near(this.player, station)) return false;
+      if (!this.hiveCanActV131() || this.isJeriSurfaceAttachedV135() || this.hiveV131.possession || !near(this.player, station)) return false;
       if (this.hiveV131.channel !== action) this.hiveV131.channelProgress = 0;
       this.hiveV131.channel = action; this.hiveChannelActorV131 = this.player; return true;
     }
@@ -256,6 +312,7 @@ export function withHiveMissionsV131(BaseEngine) {
     interact(actor = this.player) {
       if (!this.isHiveMissionV131()) return super.interact(actor);
       if (!this.hiveCanActV131(actor)) return false;
+      if (this.isJeriSurfaceAttachedV135()) return this.locked('V OU SAUT : SE DÉTACHER AVANT UNE INTERACTION');
       if (this.hiveV131.possession) return this.releaseHivePossessionV131('operator');
       const state = this.hiveV131, station = this.hiveManifestV131.stations.filter(candidate => near(actor, candidate)
         && !(candidate.charge && state.spentCapsules.includes(candidate.id)))
@@ -474,7 +531,7 @@ export function withHiveMissionsV131(BaseEngine) {
       const state = this.hiveV131; if (!state.channel) return;
       const station = this.hiveManifestV131.stations.find(candidate => candidate.id === state.channel.split(':')[0]);
       const held = this.keys.has('KeyE') || state.channel.endsWith(':sever') && this.keys.has('Digit5');
-      if (!held || !near(this.player, station) || this.hiveV131.possession || !this.hiveCanActV131()) {
+      if (!held || this.isJeriSurfaceAttachedV135() || !near(this.player, station) || this.hiveV131.possession || !this.hiveCanActV131()) {
         state.channel = null; state.channelProgress = 0; return;
       }
       state.channelProgress = Math.min(station.duration || 3, state.channelProgress + delta);
@@ -489,6 +546,7 @@ export function withHiveMissionsV131(BaseEngine) {
         const originalCostume = this.costumeRuntime;
         const mobility = this.hiveV131.operationId === 'jeri-false-son' && this.hiveV131.segments.legs < 35
           ? 0.55 + this.hiveV131.segments.legs / 35 * 0.45 : 1;
+        if (this.hiveV131.operationId === 'jeri-false-son' && this.updateJeriSurfacePlayerV135(actor, delta, controls, mobility)) return;
         if (mobility < 1) this.costumeRuntime = { ...originalCostume, mobility: (originalCostume?.mobility || 1) * mobility };
         try { return super.updatePlayer(actor, delta, controls); } finally { this.costumeRuntime = originalCostume; }
       }
@@ -727,6 +785,7 @@ export function withHiveMissionsV131(BaseEngine) {
     }
     missingHiveExtractionV131({ ignoreHold = false } = {}) {
       const state = this.hiveV131;
+      if (this.isJeriSurfaceAttachedV135()) return 'SE DÉTACHER AVANT L’EXTRACTION';
       if (!state?.bossDefeated) return 'MENACE DE LA CHAMBRE ENCORE ACTIVE';
       if (state.operationId === 'jeri-false-son' && !state.finalInspection) return 'INSPECTION ROYALE REQUISE';
       if (state.operationId === 'atax-false-queen' && state.arteries.length !== 3) return 'TROIS ARTÈRES REQUISES';
@@ -765,7 +824,8 @@ export function withHiveMissionsV131(BaseEngine) {
     failMission(reason) {
       if (this.isHiveMissionV131() && this.hiveV131 && this.mission?.state === 'active') {
         this.hiveV131.failed = true; this.hiveV131.failReason = String(reason).slice(0, 160);
-        this.releaseHivePossessionV131('mission-failed'); this.hiveV131.channel = null; this.hiveV131.channelProgress = 0;
+        this.releaseHivePossessionV131('mission-failed');
+        if (this.isJeriSurfaceAttachedV135()) this.applyJeriSurfaceMotionV135(releaseJeriSurfaceV135(this.player, this.jeriSurfaceV135)); this.hiveV131.channel = null; this.hiveV131.channelProgress = 0;
       }
       const result = super.failMission(reason); if (this.isHiveMissionV131()) this.syncHiveMissionV131(); return result;
     }
@@ -779,7 +839,7 @@ export function withHiveMissionsV131(BaseEngine) {
     captureResumeState() {
       const base = super.captureResumeState(); if (!this.isHiveMissionV131()) return base;
       return { ...base, hiveMissionV131: { schema: 131, signature: this.missionLevelRuntime.signature,
-        state: clone(this.hiveV131), actors: this.captureHiveActorsV131(),
+        state: clone(this.hiveV131), jeriSurfaceV135: clone(this.jeriSurfaceV135), actors: this.captureHiveActorsV131(),
         combat: this.enemies.map(enemy => ({ id: enemy.id, provoked: enemy.hiveProvokedV131 || 0, strike: enemy.hiveStrikeV131 ? clone(enemy.hiveStrikeV131) : null })),
         checkpoint: this.hiveCheckpointV131 ? clone(this.hiveCheckpointV131) : null } };
     }
@@ -817,6 +877,13 @@ export function withHiveMissionsV131(BaseEngine) {
         || check.state.complete && (raw.player?.alive !== true || raw.player?.downed !== false)
         || check.state.possession && !actors.some(actor => actor.id === check.state.possession.actorId && actor.alive && actor.recruited && actor.loyalty >= 45))
         return { valid: false, reason: 'hive-resume-inconsistent' };
+      if (check.state.operationId === 'jeri-false-son') {
+        const surface = validateJeriSurfaceStateV135(own.jeriSurfaceV135, { ...raw.player, w: this.player.w, h: this.player.h }, this.jeriSurfaceSceneV135(check.state),
+          { terminal: check.state.complete || check.state.failed });
+        if (!surface.valid || surface.state.mode === 'attached' && (raw.player?.alive !== true || raw.player?.downed !== false || check.state.segments.legs <= 0 || check.state.segments.head <= 0 || check.state.possession))
+          return { valid: false, reason: surface.reason || 'jeri-surface-body-v135' };
+        check.jeriSurfaceV135 = surface.state;
+      } else if (own.jeriSurfaceV135?.mode === 'attached') return { valid: false, reason: 'jeri-surface-operation-v135' };
       return check;
     }
     applyResumeState(raw) {
@@ -835,6 +902,9 @@ export function withHiveMissionsV131(BaseEngine) {
         const enemy = this.enemies.find(candidate => candidate.id === combat.id);
         enemy.hiveProvokedV131 = combat.provoked; enemy.hiveStrikeV131 = combat.strike ? clone(combat.strike) : null;
       }
+      this.jeriSurfaceV135 = checked.jeriSurfaceV135 || createJeriSurfaceStateV135();
+      if (this.isJeriSurfaceAttachedV135()) this.applyJeriSurfaceMotionV135({ actor: { ...this.player, vx: 0, vy: 0 }, state: this.jeriSurfaceV135 });
+      else { this.player.climbing = false; this.player.ladderId = null; }
       const checkpoint = raw.hiveMissionV131.checkpoint;
       if (checkpoint && this.validateHiveResumeV131(checkpoint).valid) this.hiveCheckpointV131 = clone(checkpoint);
       this.hiveHeldKeysV131.clear(); this.hiveMenuV131 = false; this.syncHiveMissionV131(); return { ...result, hiveRestoredV131: true };
@@ -854,16 +924,18 @@ export function withHiveMissionsV131(BaseEngine) {
     objectiveProgressText() { return this.isHiveMissionV131() ? hiveDossierV131(this.hiveV131).instruction : super.objectiveProgressText(); }
     getInteractionPrompt() {
       if (!this.isHiveMissionV131()) return super.getInteractionPrompt();
+      if (this.isJeriSurfaceAttachedV135()) return `${this.jeriSurfaceV135.face === 'underside' ? 'A/D · PLAFOND' : 'W/S · MUR'} / V OU SAUT · DÉTACHER / E APRÈS DÉTACHEMENT`;
       const station = this.hiveManifestV131.stations.find(candidate => near(this.player, candidate)
         && !(candidate.charge && this.hiveV131.spentCapsules.includes(candidate.id)));
       if (this.hiveV131.possession) return 'B · REVENIR AU CORPS D’ORIGINE / F · GRIFFE';
       if (station) return `E · ${station.label}${station.duration ? ` · ${this.hiveV131.channelProgress.toFixed(1)}/${station.duration} S` : ''}`;
       const recruit = this.hiveActorsV131.find(actor => !actor.hiveRecruitedV131 && ACTIVE(actor) && Math.hypot(center(actor) - center(this.player), feet(actor) - feet(this.player)) < 110);
-      return recruit ? 'E · RECRUTER · 12 CHARGE' : 'C · INTERFACE RUCHE / N · RECRUE / B · CONTRÔLE';
+      return recruit ? 'E · RECRUTER · 12 CHARGE' : this.hiveV131.operationId === 'jeri-false-son'
+        ? `V · ${findJeriSurfaceV135(this.player, this.jeriSurfaceSceneV135()) ? 'S’ACCROCHER' : 'MUR / DESSOUS DE PASSERELLE À PROXIMITÉ'} / C · PROFILS` : 'C · INTERFACE RUCHE / N · RECRUE / B · CONTRÔLE';
     }
     getSnapshot() {
       return { ...super.getSnapshot(), ...(this.isHiveMissionV131() ? { hiveMissionV131: {
-        ...clone(this.hiveV131), actors: this.captureHiveActorsV131(), dossier: hiveDossierV131(this.hiveV131),
+        ...clone(this.hiveV131), jeriSurfaceV135: { ...clone(this.jeriSurfaceV135), contacts: jeriSurfaceContactsV135(this.player, this.jeriSurfaceV135) }, actors: this.captureHiveActorsV131(), dossier: hiveDossierV131(this.hiveV131),
         identity: this.hiveIdentityV131, topology: this.hiveV131.operationId === 'eloise-uncrowned-queen'
           ? this.hiveV131.pylons.filter(value => value !== 'sealed').length >= 3 ? 'organic'
             : this.hiveV131.pylons.filter(value => value !== 'sealed').length ? 'contested' : 'corporate' : 'hive',
@@ -892,6 +964,33 @@ export function withHiveMissionsV131(BaseEngine) {
       if (image?.complete && image.naturalWidth > 0) this.drawMissionLevelCover(ctx, image, 1.12, 0.12, 1, 0);
       this.drawHazardForegroundOverlays(ctx);
     }
+    playerAppearanceLadderV128(actor) {
+      if (actor !== this.player || !this.isJeriSurfaceAttachedV135()) return super.playerAppearanceLadderV128(actor);
+      const surface = this.jeriSurfaceSceneV135().solids.find(rect => rect.id === this.jeriSurfaceV135.surfaceId);
+      if (!surface) return null;
+      // The existing articulated rig accepts contact grids. A one-pixel grid
+      // models continuous wall grip; it creates no ladder or world collider.
+      return { id: actor.ladderId, x: this.jeriSurfaceV135.face === 'underside' ? center(actor)
+        : this.jeriSurfaceV135.face === 'left' ? surface.x : surface.x + surface.w,
+        top: this.jeriSurfaceV135.face === 'underside' ? actor.y - 1 : surface.y,
+        bottom: this.jeriSurfaceV135.face === 'underside' ? feet(actor) + 2 : surface.y + surface.h,
+        w: actor.w, rungSpacing: 1, firstRung: 1, physicalSurfaceIdV135: surface.id };
+    }
+    drawActor(ctx, actor) {
+      if (actor !== this.player || !this.isJeriSurfaceAttachedV135()) return super.drawActor(ctx, actor);
+      ctx.save();
+      if (this.jeriSurfaceV135.face === 'underside') {
+        ctx.translate(actor.x + actor.w / 2, actor.y + actor.h / 2); ctx.rotate(Math.PI);
+        ctx.translate(-actor.x - actor.w / 2, -actor.y - actor.h / 2);
+      }
+      // Existing ladder pose is an interface adaptation, not dedicated Jeri art.
+      super.drawActor(ctx, actor); ctx.restore();
+      ctx.save(); ctx.strokeStyle = '#98e5bd'; ctx.lineWidth = 2;
+      for (const contact of jeriSurfaceContactsV135(actor, this.jeriSurfaceV135)) {
+        ctx.beginPath(); ctx.arc(contact.x, contact.y, 4, 0, Math.PI * 2); ctx.stroke();
+      }
+      ctx.restore();
+    }
     drawWorld(ctx) {
       super.drawWorld(ctx); if (!this.isHiveMissionV131()) return;
       for (const actor of this.hiveActorsV131.filter(candidate => candidate.alive)) {
@@ -915,14 +1014,15 @@ export function withHiveMissionsV131(BaseEngine) {
     drawHud(ctx) {
       super.drawHud(ctx); if (!this.isHiveMissionV131()) return;
       const state = this.hiveV131;
-      ctx.save(); ctx.fillStyle = 'rgba(4,13,16,.88)'; ctx.fillRect(880, 230, 375, 95);
+      ctx.save(); ctx.fillStyle = 'rgba(4,13,16,.88)'; ctx.fillRect(880, 230, 375, state.operationId === 'jeri-false-son' ? 117 : 95);
       ctx.fillStyle = '#a3d8c2'; ctx.font = '12px monospace'; ctx.textAlign = 'left';
       ctx.fillText(`CHARGE ${Math.floor(state.charge)} · ${state.operationId === 'jeri-false-son' ? `DISSONANCE ${Math.floor(state.dissonance)}`
         : state.operationId === 'atax-false-queen' ? `INSTINCT ${Math.floor(state.royalInstinct)}` : `CHŒUR ${Math.floor(state.choir)} / DOULEUR ${Math.floor(state.pain)}`}`, 893, 251);
       ctx.fillText(state.operationId === 'jeri-false-son' ? `PROFIL ${HIVE_PROFILES_V131.find(profile => profile.id === state.profile)?.label.toUpperCase()} · T${Math.floor(state.segments.head)} C${Math.floor(state.segments.torso)} J${Math.floor(state.segments.legs)}`
         : `RECRUES ${state.recruitedIds.length} · ${state.possession ? 'CONTRÔLE ACTIF' : 'CORPS D’ORIGINE'}`, 893, 273);
-      ctx.fillText('C INTERFACE · N RECRUE · B CONTRÔLE', 893, 296);
-      ctx.fillText('ART DÉDIÉ INCOMPLET · ADAPTATION TANTALUS', 893, 315); ctx.restore();
+      ctx.fillText(state.operationId === 'jeri-false-son' ? 'V ACCROCHER / LÂCHER · SAUT DÉTACHER' : 'C INTERFACE · N RECRUE · B CONTRÔLE', 893, 296);
+      if (state.operationId === 'jeri-false-son') ctx.fillText('W/S MUR · A/D PLAFOND · C PROFILS', 893, 317);
+      ctx.fillText('ART DÉDIÉ INCOMPLET · ADAPTATION TANTALUS', 893, state.operationId === 'jeri-false-son' ? 338 : 315); ctx.restore();
     }
   };
 }

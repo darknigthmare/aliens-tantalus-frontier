@@ -1,6 +1,7 @@
 import { APTITUDE_DEFINITIONS_V85, deriveRecruitIdentityV119, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { getPremiumPersonnelV119 } from './premium-personnel-v119.js';
-import { buildCrewConversationV120, renderCrewConversationV120 } from './crew-conversations-v120.js';
+import { buildCrewConversationV120, selectCrewConversationTopicV120 } from './crew-conversations-v120.js';
+import { getCrewConversationRecallV135, normalizeCrewConversationMemoryV135, renderCrewConversationWithMemoryV135 } from './crew-conversation-memory-v135.js';
 import { renderPersonnelDriveGalleryV123 } from './personnel-drive-ui-v123.js';
 import { CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
 
@@ -16,11 +17,13 @@ export function buildCrewUiModelV85(save, catalog = []) {
   const members = list(save.crew).map(member => resolveCrewDefinitionV85(member, catalog)).filter(Boolean)
     .map(member => ({ ...member, selected: selected.has(member.id), candidate: false }));
   const candidates = list(save.recruitmentV85?.candidates).map(profile => ({ ...profile, recruitV85: profile, identityV119: deriveRecruitIdentityV119(profile), aptitudesV85: profile.aptitudes, gearV85: profile.gear, candidate: true, status: 'candidat' }));
+  const memory = normalizeCrewConversationMemoryV135(save.crewConversationMemoryV135, { crew: save.crew, catalog, clock: save.clock });
   for (const member of [...members, ...candidates]) member.conversationV120 = buildCrewConversationV120(member, { roster: members, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT] });
   const archives = getPremiumPersonnelV119(save);
   return { members, candidates, archives, active: members.filter(m => m.selected), reserve: members.filter(m => !m.selected),
     locked: Boolean(save.strategy?.currentOperation || (save.onboardingV84 && save.onboardingV84.phase !== 'complete')),
     hours: (Number(save.clock?.day || 1) - 1) * 24 + Number(save.clock?.hour || 0),
+    conversationMemoryV135: memory, clock: save.clock,
     lastOfferHour: Number(save.recruitmentV85?.lastOfferHour || 0), credits: Number(save.galaxy?.resources?.credits || 0) };
 }
 
@@ -51,7 +54,7 @@ export class CrewUiV85 {
     });
     this.dialog.addEventListener('close', () => { this.selectedId = null; if (this.previousFocus?.isConnected) this.previousFocus.focus(); else this.root.querySelector(`[data-v85-tab="${this.tab}"]`)?.focus(); });
   }
-  close() { if (this.dialog.open) this.dialog.close(); this.selectedId = null; }
+  close() { this.conversationPendingV135 = null; if (this.dialog.open) this.dialog.close(); this.selectedId = null; }
   getMember(id) { return [...(this.model?.members || []), ...(this.model?.candidates || []), ...(this.model?.archives || [])].find(m => m.id === id); }
   itemName(item) { return this.itemCatalog.find(entry => entry.id === item.catalogId)?.name || item.catalogId; }
   render(save) {
@@ -82,6 +85,7 @@ export class CrewUiV85 {
   open(id) {
     if (!this.getMember(id)) return;
     this.selectedId = id; this.compareId = ''; this.conversationTopicV120 = null; this.detailOwner = this.owner;
+    this.conversationPendingV135 = null; this.conversationVisitV135 = null; this.conversationStatusV135 = '';
     this.previousFocus = this.document.activeElement;
     this.renderDetail(); if (!this.dialog.open) this.dialog.showModal();
     this.dialog.querySelector('[data-v85-close]')?.focus();
@@ -98,8 +102,12 @@ export class CrewUiV85 {
     const gearTargets = this.model.members.filter(other => other.id !== member.id && other.status !== 'deceased');
     const oldScroll = this.dialog.querySelector('.crew-dossier-body-v85')?.scrollTop || 0;
     const previousFocus = this.dialog.contains(this.document.activeElement) ? this.document.activeElement?.dataset : null;
+    const conversationTopic = selectCrewConversationTopicV120(member.conversationV120, this.conversationTopicV120);
+    const recall = getCrewConversationRecallV135(this.model.conversationMemoryV135, member, conversationTopic, { roster: this.model.members, clock: this.model.clock });
+    const showConversationAnswer = this.conversationVisitV135?.crewId === member.id && this.conversationVisitV135.topicId === conversationTopic?.id
+      && this.conversationVisitV135.contextKey === recall?.contextKey && this.conversationVisitV135.kind !== 'unchanged';
     this.dialog.innerHTML = `<header><div><span class="eyebrow">ECHO-9 · DOSSIER INDIVIDUEL</span><h2 id="crew-dossier-title-v85">${esc(member.name)} ${member.callsign ? `« ${esc(member.callsign)} »` : ''}</h2><small>${esc(member.id)}</small></div><button type="button" class="button" data-v85-close>FERMER</button></header><div class="crew-dossier-body-v85"><p class="crew-note-v85">${profile ? 'Uniforme standard partagé. Portrait et apparence individuels non produits.' : 'Membre permanent. Les aptitudes sans dossier V85 utilisent un socle de simulation neutre, pas un passé inventé.'}</p><dl class="crew-biography-v85">${biography}</dl>${profile?.quote ? `<blockquote>${esc(profile.quote)}</blockquote>` : ''}
-      ${renderCrewConversationV120(member.conversationV120, this.conversationTopicV120)}<section aria-labelledby="crew-stats-title-v85"><h3 id="crew-stats-title-v85">Aptitudes expliquées</h3><label class="crew-compare-v85">Comparer avec <select data-v85-compare><option value="">Aucune comparaison</option>${this.model.members.filter(other=>other.id!==member.id).map(other=>`<option value="${esc(other.id)}" ${other.id===this.compareId?'selected':''}>${esc(other.name)}</option>`).join('')}</select></label><p>Formation : +${amount(this.rules.trainingGain || 2)} · ${amount(this.rules.trainingHours || 4)} h de jeu · ${esc(costLabel(this.rules.trainingCost))}. Aucune spécialisation n'est interdite par le passé.</p><div class="crew-aptitudes-v85">${APTITUDE_DEFINITIONS_V85.map(a => {
+      ${renderCrewConversationWithMemoryV135(member.conversationV120, this.conversationTopicV120, recall, { showAnswer: showConversationAnswer, status: this.conversationStatusV135 || '' })}<section aria-labelledby="crew-stats-title-v85"><h3 id="crew-stats-title-v85">Aptitudes expliquées</h3><label class="crew-compare-v85">Comparer avec <select data-v85-compare><option value="">Aucune comparaison</option>${this.model.members.filter(other=>other.id!==member.id).map(other=>`<option value="${esc(other.id)}" ${other.id===this.compareId?'selected':''}>${esc(other.name)}</option>`).join('')}</select></label><p>Formation : +${amount(this.rules.trainingGain || 2)} · ${amount(this.rules.trainingHours || 4)} h de jeu · ${esc(costLabel(this.rules.trainingCost))}. Aucune spécialisation n'est interdite par le passé.</p><div class="crew-aptitudes-v85">${APTITUDE_DEFINITIONS_V85.map(a => {
         const value=aptitudeValue(member,a.id), delta=compare?value-aptitudeValue(compare,a.id):null, breakdown=profile?.breakdown?.[a.id];
         return `<article><div><strong>${esc(a.label)}</strong><b>${amount(value)}${delta!==null?` <small class="crew-delta-v85">(${delta>=0?'+':''}${amount(delta)})</small>`:''}</b></div><meter min="0" max="100" value="${amount(value)}" aria-label="${esc(a.label)}"></meter><p>${breakdown ? `Socle ${amount(breakdown.base)} · expériences ${amount(breakdown.experience)} · formation initiale ${amount(breakdown.formation)}. ${list(breakdown.explanations).map(esc).join(' ')}` : 'Socle neutre de simulation : 50.'}${value !== (profile?.aptitudes?.[a.id] ?? 50) ? ` Progression acquise : +${amount(value - (profile?.aptitudes?.[a.id] ?? 50))}.` : ''}</p><button type="button" class="button compact" data-v85-action="train" data-v85-id="${esc(member.id)}" data-v85-aptitude="${esc(a.id)}" ${disabled || value >= 100 ? 'disabled' : ''}>FORMER</button></article>`;
       }).join('')}</div></section>
@@ -128,9 +136,7 @@ export class CrewUiV85 {
     if (button.dataset.v120ConversationTopic) {
       const member = this.getMember(this.selectedId);
       if (!this.dialog.contains(button) || member?.archive || !member?.conversationV120?.topics.some(topic => topic.id === button.dataset.v120ConversationTopic)) return;
-      this.conversationTopicV120 = button.dataset.v120ConversationTopic;
-      this.renderDetail();
-      this.dialog.querySelector(`[data-v120-conversation-topic="${this.conversationTopicV120}"]`)?.focus({ preventScroll: true });
+      void this.visitConversationTopicV135(button.dataset.v120ConversationTopic);
       return;
     }
     if (button.dataset.v85Close!==undefined) { this.close(); return; }
@@ -146,5 +152,49 @@ export class CrewUiV85 {
     try { this.onAction(action,args,owner); const status=(inDialog?this.dialog:this.root).querySelector('.crew-action-status-v85'); if(status)status.textContent='Action enregistrée.'; if(!inDialog&&!this.root.contains(this.document.activeElement))this.root.querySelector(`[data-v85-tab="${this.tab}"]`)?.focus(); }
     catch(error) { const status=(inDialog?this.dialog:this.root).querySelector('.crew-action-status-v85'); if(status)status.textContent=error.message; }
   }
+  async visitConversationTopicV135(topicId) {
+    const member = this.getMember(this.selectedId);
+    if (!member?.conversationV120?.topics.some(topic => topic.id === topicId) || this.conversationPendingV135) return;
+    this.conversationTopicV120 = topicId; this.conversationVisitV135 = null; this.conversationStatusV135 = '';
+    if (member.conversationV120.mode !== 'service' || this.model.locked) {
+      if (this.model.locked && member.conversationV120.mode === 'service') this.conversationStatusV135 = 'Consultation disponible ; carnet de liaison modifiable après le retour à bord.';
+      this.renderDetail(); this.focusConversationTopicV135(topicId); return;
+    }
+    const owner = this.detailOwner, pending = { crewId: member.id, topicId, owner };
+    this.conversationPendingV135 = pending; this.conversationStatusV135 = 'Enregistrement de cet échange…';
+    this.renderDetail(); this.focusConversationTopicV135(topicId);
+    const stillOwned = () => this.conversationPendingV135 === pending && this.dialog.open && this.selectedId === member.id
+      && sameConversationOwnerV135(owner, this.detailOwner) && sameConversationOwnerV135(owner, this.getOwner());
+    try {
+      const result = await this.onAction('conversation', [member.id, topicId], owner);
+      if (!stillOwned()) return;
+      if (!result?.ok) throw new Error('L’échange n’a pas pu être enregistré.');
+      // Refresh the view only from committed state supplied by the application.
+      this.model = buildCrewUiModelV85(this.save, this.catalog);
+      const committed = this.model.conversationMemoryV135.entries.find(entry => entry.crewId === member.id && entry.topicId === topicId);
+      if (result.crewId !== member.id || result.topicId !== topicId || !committed || committed.contextKey !== result.contextKey) {
+        throw new Error('L’échange n’a pas été confirmé par la sauvegarde.');
+      }
+      this.conversationVisitV135 = result;
+      this.conversationStatusV135 = result.changed ? 'Échange mémorisé dans votre carnet de liaison.' : 'Sujet déjà mémorisé ; aucun nouvel événement ajouté.';
+    } catch (error) {
+      if (!stillOwned()) return;
+      this.conversationStatusV135 = error?.message || 'L’échange n’a pas pu être enregistré.';
+    } finally {
+      if (this.conversationPendingV135 === pending) {
+        this.conversationPendingV135 = null;
+        if (sameConversationOwnerV135(owner, this.getOwner()) && this.dialog.open && this.selectedId === member.id) {
+          this.renderDetail(); this.focusConversationTopicV135(topicId);
+        }
+      }
+    }
+  }
+  focusConversationTopicV135(topicId) {
+    [...this.dialog.querySelectorAll('[data-v120-conversation-topic]')].find(button => button.dataset.v120ConversationTopic === topicId)?.focus({ preventScroll: true });
+  }
   update(save) { this.save=save; this.render(save); }
 }
+
+const sameConversationOwnerV135 = (left, right) => left === right || Boolean(left && right
+  && left.profile !== undefined && left.epoch !== undefined && left.timeline !== undefined
+  && left.profile === right.profile && left.epoch === right.epoch && left.timeline === right.timeline);

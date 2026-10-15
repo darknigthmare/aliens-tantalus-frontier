@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-tantalus-v134-shell-1';
+const CACHE = 'atf-v86-tantalus-v135-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -40,6 +40,9 @@ const CORE = [
   '/src/narrative-evidence-v132.js',
   '/src/placeables-extension-v132.js', '/src/bioforge-admissions-v132.js', '/src/bioforge-tactics-state-v132.js',
   '/src/hub-training-v132.js',
+  '/src/jeri-surface-motion-v135.js', '/src/crew-conversation-memory-v135.js',
+  '/src/field-media-v135.js', '/src/field-media-ui-v135.js',
+  '/src/editor-authoring-v135.js', '/src/editor-authoring-ui-v135.js', '/src/player-wardrobe-v135.js',
   '/src/weapon-actions-v131.js', '/src/apc-course-v131.js', '/src/special-operations-v131.js', '/src/operation-receipts-v131.js',
   '/src/hive-control-v131.js', '/src/hive-missions-v131.js', '/src/hive-command-ui-v131.js',
   '/src/mecha-systems-v131.js', '/src/mecha-missions-v131.js',

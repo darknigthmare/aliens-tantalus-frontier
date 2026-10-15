@@ -1,4 +1,6 @@
-import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
+import { normalizeCrewConversationMemoryV135 } from './crew-conversation-memory-v135.js';
+import { normalizePlayerWardrobeV135 } from './player-wardrobe-v135.js';
 import { ARCHIVE_RELAY_CAMPAIGN_V122, validateArchiveRelayStateV122,
   ARCHIVE_RELAY_DOCUMENT_IDS_V122, createArchiveRelayArchiveV122, normalizeArchiveRelayArchiveV122 } from './archive-relay-state-v122.js';
 import { canEquipCostumeV119, sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
@@ -245,6 +247,7 @@ export function createDefaultSave(profile = 1) {
     createdAt: Date.now(),
     updatedAt: Date.now(),
     clock: { day: 1, hour: 6 },
+    crewConversationMemoryV135: { schema: 135, entries: [] },
     recruitmentV85: { ...createRecruitmentV85(Math.imul(Number(profile) || 1, 2654435761) >>> 0), lastOfferHour: 6 },
     scene: 'title',
     worldId: WORLDS[0].id,
@@ -258,6 +261,7 @@ export function createDefaultSave(profile = 1) {
     needsPlayerCreationV84: true,
     presentation: { titleScene: sanitizeTitleScenePresentationV79() },
     player: {
+      wardrobeV135: normalizePlayerWardrobeV135(),
       name: 'Mara Vega',
       classId: 'commander',
       health: 100,
@@ -2181,6 +2185,9 @@ export function migrateSave(input, profile = 1) {
     ? recruitmentForCrewV85(source.recruitmentV85, migrated.crew)
     : { ...base.recruitmentV85, lastOfferHour: recruitmentClockV85(migrated) };
   migrated.recruitmentV85.candidates = migrated.recruitmentV85.candidates.filter((profile) => !seenCrewIdsV85.has(profile.id));
+  migrated.crewConversationMemoryV135 = normalizeCrewConversationMemoryV135(source.crewConversationMemoryV135, {
+    crew: migrated.crew, catalog: CREW, campaignCatalog: CAMPAIGNS, equipmentCatalog: [...WEAPONS, ...EQUIPMENT], clock: migrated.clock
+  });
 
   const strategy = isRecord(source.strategy) ? source.strategy : {};
   const inventory = isRecord(strategy.inventory) ? strategy.inventory : {};
@@ -2328,6 +2335,7 @@ export function migrateSave(input, profile = 1) {
   migrated.profile = Math.max(1, Math.min(3, Math.floor(Number(profile) || 1)));
   migrated.createdAt = numberBetween(source.createdAt, base.createdAt, 0);
   migrated.hub.loaderQualificationV132 = normalizeHubLoaderQualificationV132(hub.loaderQualificationV132, getHubTrainingOperatorIdV132(migrated));
+  migrated.player.wardrobeV135 = normalizePlayerWardrobeV135(source.player?.wardrobeV135);
   migrated.hub.hubTrainingV132.serial = Math.max(migrated.hub.hubTrainingV132.serial, migrated.hub.loaderQualificationV132.serial);
   migrated.updatedAt = Date.now();
   const previousVersion = typeof source.release === 'string' ? source.release : typeof source.version === 'string' ? source.version : null;

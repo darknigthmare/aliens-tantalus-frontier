@@ -101,3 +101,13 @@
   .appearance-footer-v126 { flex-direction: column; }
   .appearance-slot-v126 { padding: .8rem; }
 }
+.appearance-wardrobe-v135{display:grid;gap:.8rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--border, #33424b)}
+.appearance-wardrobe-v135 h4,.appearance-wardrobe-v135 p{margin:0}
+.appearance-wardrobe-grid-v135{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.appearance-wardrobe-outfit-v135{display:grid;gap:.65rem;min-width:0;padding:.85rem;border:1px solid var(--border, #33424b);border-radius:.6rem;background:rgba(5,14,20,.45)}
+.appearance-wardrobe-outfit-v135 label{display:grid;gap:.4rem;font-size:.85rem}
+.appearance-wardrobe-outfit-v135 input{box-sizing:border-box;width:100%;min-width:0}
+.appearance-wardrobe-outfit-v135 p{font-size:.8rem;color:var(--muted, #a6b5bb)}
+.appearance-wardrobe-outfit-v135 .button-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.appearance-wardrobe-v135>[data-wardrobe-action-v135="copy"]{justify-self:start;white-space:normal;text-align:left}
+@media(max-width:600px){.appearance-wardrobe-grid-v135{grid-template-columns:1fr}.appearance-wardrobe-outfit-v135 .button{min-height:44px}}

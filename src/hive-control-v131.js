@@ -149,7 +149,7 @@ export function hiveDossierV131(state) {
   const phase = hivePhaseV131(state);
   const text = {
     commission: 'E au pupitre d’entrée : initialiser l’interface. Les ressources de terrain sont finies.',
-    infiltrate: '1–5 : profil Jeri. E aux inspections : Ouvrier au premier sas, Nourrice au second.',
+    infiltrate: 'E : inspections Ouvrier puis Nourrice. V : adhérence.',
     rescue: 'Rejoindre le cocon sur la passerelle. Maintenir E 3 s avant la fin de l’implantation.',
     saint: 'Combattre SAINT. Après chaque phase, maintenir E 2 s au relais du boss pour exposer son segment.',
     'queen-inspection': '4 : Écho royal. E à la dernière inspection, après le sauvetage et SAINT.',

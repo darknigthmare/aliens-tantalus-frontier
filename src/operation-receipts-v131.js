@@ -2,6 +2,7 @@ import { WORLDS, LEVEL_SEEDS } from './content-core-v50.js';
 import { NEW_SPECIAL_CAMPAIGNS_V131 } from './special-operations-v131.js';
 import { buildHiveMissionV131 } from './hive-missions-v131.js';
 import { validateHiveControlV131 } from './hive-control-v131.js';
+import { buildJeriSurfaceSceneV135, validateJeriSurfaceStateV135 } from './jeri-surface-motion-v135.js';
 import { buildMechaMissionV131, validateMechaMissionStateV131 } from './mecha-missions-v131.js';
 import { SAURIA_CASTES_V131, validateEcosystemStateV131 } from './ecosystem-systems-v131.js';
 import { buildEcosystemMissionV131 } from './ecosystem-missions-v131.js';
@@ -133,8 +134,14 @@ export function validateOperationCompletionV131(operation,suppliedRewards=null) 
     return {valid:false,reason:'operation-terminal-identity-v131'};
   let checked,state,manifest;
   if(raw.hiveMissionV131) {
-    manifest=buildHiveMissionV131({campaign,world:WORLDS.find(w=>w.id===campaign.worldId)}).hiveMissionV131;
+    const plan=buildHiveMissionV131({campaign,world:WORLDS.find(w=>w.id===campaign.worldId)});
+    manifest=plan.hiveMissionV131;
     checked=validateHiveControlV131(raw.hiveMissionV131.state,manifest);state=checked.state;
+    const surface=raw.hiveMissionV131.jeriSurfaceV135;
+    if (surface !== undefined && (state?.operationId !== 'jeri-false-son' && surface?.mode === 'attached'
+      || !validateJeriSurfaceStateV135(surface,{...raw.player,w:42,h:92},
+        buildJeriSurfaceSceneV135({...plan.geometry,...plan.dimensions},state,manifest.stations),{terminal:true}).valid))
+      return {valid:false,reason:'operation-jeri-surface-v135'};
   } else if(raw.specialOperation?.mechaV131) {
     checked=validateMechaMissionStateV131(raw.specialOperation.mechaV131);state=checked.state;
   } else if(raw.specialOperation?.ecosystemV131) {
