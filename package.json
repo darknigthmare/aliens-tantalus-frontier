@@ -10,7 +10,10 @@
     "test:player": "node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-presentation-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-body-rig-v125.mjs scripts/verify-player-weapon-rig-v125.mjs scripts/verify-player-appearance-v126.mjs scripts/verify-player-appearance-runtime-v126.mjs scripts/verify-player-modular-rig-v126.mjs scripts/verify-player-action-rig-v127.mjs scripts/verify-player-appearance-preview-v127.mjs scripts/verify-player-transit-rig-v128.mjs scripts/verify-player-appearance-preview-v128.mjs scripts/verify-player-incapacitation-v128.mjs scripts/verify-player-locomotion-rig-v129.mjs scripts/verify-player-colonial-art-v129.mjs scripts/verify-player-appearance-preview-v129.mjs",
     "test:weapons": "node --test scripts/verify-weapon-presentation-profiles-v124.mjs scripts/verify-weapon-effects-v124.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-held-weapon-v125.mjs scripts/verify-weapon-image-cache-v125.mjs",
     "audio:scan": "node scripts/audio-scan-v77.mjs",
-    "audio:check": "node scripts/audio-scan-v77.mjs --check"
+    "audio:check": "node scripts/audio-scan-v77.mjs --check",
+    "test:forge": "node --test scripts/verify-forge-v130.mjs scripts/verify-forge-v133.mjs scripts/verify-forge-v134.mjs scripts/verify-forge-v135.mjs scripts/verify-forge-v136.mjs",
+    "test:forge:authoring": "node --test scripts/verify-forge-v133.mjs scripts/verify-forge-v134.mjs scripts/verify-forge-v135.mjs",
+    "test:forge:native": "node --test scripts/verify-forge-native-v136.mjs"
   },
   "engines": {
     "node": ">=22"
