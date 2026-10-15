@@ -34,15 +34,12 @@ jobs:
           mkdir -p forge-ci-results
           node --version | tee forge-ci-results/node-version.txt
           npm run test:forge 2>&1 | tee forge-ci-results/forge-tests.log
-      - name: Native production engine (when included)
+      - name: Published native contract and targeted gameplay regressions
         shell: bash
         run: |
           set -o pipefail
-          if [ -f scripts/verify-forge-native-v131.mjs ]; then
-            node --test scripts/verify-forge-native-v131.mjs 2>&1 | tee forge-ci-results/native-tests.log
-          else
-            echo 'Not included: V131/V132 native adapters are not published on this branch.' | tee forge-ci-results/native-tests.log
-          fi
+          npm run test:forge:native 2>&1 | tee forge-ci-results/native-tests.log
+          node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-incapacitation-v128.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-weapon-effects-v124.mjs 2>&1 | tee forge-ci-results/gameplay-regressions.log
       - name: Chromium and Python browser tooling
         run: |
           python -m pip install playwright==1.57.0
@@ -56,9 +53,7 @@ jobs:
           python scripts/verify-forge-browser-v133.py --output forge-ci-results/browser-v133 2>&1 | tee forge-ci-results/browser-v133.log
           python scripts/verify-forge-browser-v134.py --output forge-ci-results/browser-v134 2>&1 | tee forge-ci-results/browser-v134.log
           python scripts/verify-forge-browser-v135.py --output forge-ci-results/browser-v135 2>&1 | tee forge-ci-results/browser-v135.log
-          if [ -f scripts/verify-forge-browser-v131.py ]; then
-            python scripts/verify-forge-browser-v131.py --output forge-ci-results/browser-v131 2>&1 | tee forge-ci-results/browser-v131.log
-          fi
+          python scripts/verify-forge-browser-v136.py --output forge-ci-results/browser-v136 2>&1 | tee forge-ci-results/browser-v136.log
       - name: Preserve reproducible code, native props and test logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -285,13 +285,19 @@ export class ForgeSaveSystemV62 {
       if (typeof this.storage?.setItem !== 'function') throw new Error('stockage indisponible');
       const current = this.storage.getItem(this.key);
       if (current !== this.expectedRawV130) throw new Error('autre onglet détecté ; exportez votre copie puis rechargez');
+      const comparable = value => JSON.stringify({ ...value, updatedAt: 0,
+        projects: value.projects.map(project => ({ ...project, updatedAt: 0 })) });
+      const previous = safeParse(current || '');
+      if (previous && validWorkspace(previous) && comparable(previous) === comparable(this.data)) {
+        this.data = previous; this.statusV130(true); return this.data;
+      }
       const serialized = JSON.stringify(this.data);
-      // Best-effort previous valid snapshot; a quota failure must never erase the primary.
+      this.storage.setItem(this.key, serialized);
+      this.expectedRawV130 = serialized;
+      // Save backup only after the primary succeeds; a failed save preserves BOTH old records.
       if (current && validWorkspace(safeParse(current))) {
         try { this.storage.setItem(`${this.key}-backup-v130`, current); } catch { /* backup unavailable */ }
       }
-      this.storage.setItem(this.key, serialized);
-      this.expectedRawV130 = serialized;
       this.statusV130(true);
     } catch (error) { this.statusV130(false, error.message || 'stockage indisponible'); }
     return this.data;

@@ -71,7 +71,7 @@ export class LevelEditor {
   flip(axis){const cells=this.selected();if(!cells.length)return;this.assertSelectionEditable();const values=cells.map(cell=>cell[axis]),sum=Math.min(...values)+Math.max(...values);return this.edit('Symétrie de la sélection',()=>this.model.transform([...this.selection],cell=>({[axis]:sum-cell[axis]})));}
   removeSelection(){this.assertSelectionEditable();return this.edit('Supprimer la sélection',()=>this.model.deleteCells([...this.selection]));}
   pointerDown(event){
-    if(this.disposed||this.gesture||![0,1,2].includes(event.button))return;
+    if(this.disposed||this.gesture||event.isPrimary===false||![0,1,2].includes(event.button))return;
     const p=this.point(event),screen=this.canvasPoint(event);if(!screen)return;
     const pan=this.mode==='pan'||event.button===1||event.altKey;if(!pan&&!p)return;
     event.preventDefault();this.canvas.focus({preventScroll:true});
@@ -126,7 +126,7 @@ export class LevelEditor {
       if(key==='escape'){if(!this.cancelGesture()&&!this.selection.size)return;this.selection.clear();this.draw();this.ui?.refreshInspector();}
       else if(modifier&&key==='z')event.shiftKey?this.redo():this.undo();
       else if(modifier&&key==='y')this.redo();
-      else if(modifier&&key==='s')this.notify();
+      else if(modifier&&key==='s'){this.cancelGesture();this.notify();}
       else if(modifier&&key==='c')this.copy();
       else if(modifier&&key==='v')this.paste();
       else if(modifier&&key==='a')this.selectRect({x:0,y:0,w:this.cols,h:this.rows});
@@ -134,7 +134,7 @@ export class LevelEditor {
       else if(['arrowleft','arrowright','arrowup','arrowdown'].includes(key)){const step=event.shiftKey?10:1;this.move((key==='arrowright'?1:key==='arrowleft'?-1:0)*step,(key==='arrowdown'?1:key==='arrowup'?-1:0)*step);}
       else if(key==='0')this.fit();
       else if(key==='g'){this.grid=!this.grid;this.draw();}
-      else if(!modifier&&['b','l','r','f','v','i','p'].includes(key)){this.mode={b:'brush',l:'line',r:'rect',f:'fill',v:'select',i:'pick',p:'pan'}[key];this.ui?.refresh();}
+      else if(!modifier&&['b','l','r','f','v','i','p'].includes(key)){this.cancelGesture();this.mode={b:'brush',l:'line',r:'rect',f:'fill',v:'select',i:'pick',p:'pan'}[key];this.ui?.refresh();}
       else handled=false;
     }catch(error){this.report(error);}
     if(handled){event.preventDefault();event.stopPropagation();}
@@ -148,11 +148,10 @@ export class LevelEditor {
       let dx=0,dy=0;if(this.gesture?.mode==='move'&&this.selection.has(cell.id)){dx=this.gesture.dx;dy=this.gesture.dy;}
       const x=(cell.x+dx)*s,y=(cell.y+dy)*s;if(x+s<-m.x||y+s<-m.y||x>w-m.x||y>h-m.y)continue;
       ctx.globalAlpha=decorative(cell)?.38:1;ctx.fillStyle=colors[cell.type];
-      ctx.fillRect(x+1,y+1,Math.max(1,s-2),Math.max(1,s-2));
+      ctx.fillRect(x+1,y+1,Math.max(1,s-2),Math.max(1,cell.type==='platform'?s*.28-1:s-2));
       ctx.strokeStyle='#081510';ctx.lineWidth=Math.max(1,s*.04);
       if(cell.type==='ladder'){for(let k=1;k<4;k++){ctx.beginPath();ctx.moveTo(x+s*.22,y+s*k/4);ctx.lineTo(x+s*.78,y+s*k/4);ctx.stroke();}}
       else if(cell.type==='door'){ctx.strokeRect(x+s*.2,y+s*.12,s*.6,s*.78);ctx.beginPath();ctx.moveTo(x+s*.5,y+s*.12);ctx.lineTo(x+s*.5,y+s*.9);ctx.stroke();}
-      else if(cell.type==='platform')ctx.clearRect(x+1,y+s*.28,s-2,s*.65);
       else if(s>=16){ctx.fillStyle='#081510';ctx.font=`bold ${Math.max(10,Math.min(19,s*.44))}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText({spawn:'S',objective:'O',enemy:'X',vehicle:'V',terminal:'T',hazard:'!',floor:'═',wall:'▥',vent:'≋',lift:'↕'}[cell.type]||'',x+s/2,y+s/2);}
       ctx.globalAlpha=1;
       if(cell.locked){ctx.fillStyle='#fff';ctx.fillRect(x+s*.78,y+s*.1,Math.max(2,s*.12),Math.max(2,s*.12));}

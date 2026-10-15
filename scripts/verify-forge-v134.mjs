@@ -84,7 +84,7 @@ test('validation cache cannot leak mutable diagnostics to callers',()=>{const ed
 test('serialization remains fresh after changing rooms',()=>{const ed=new LevelEditor(new Canvas());ed.loadInitialProject(record(linked()));ed.setRoom('room-1');assert.equal(ed.serialize().activeRoomId,'room-1');assert.equal(ed.serialize().tiles[0].position,'3:3');ed.destroy();});
 test('startup still supplies the saved object to the guarded load method',async()=>{for(const [file,pattern] of [['src/app.js',/if \(saved\) editor\.load\(saved\)/],['scripts/fixtures/forge-v130.html',/if\(saved\)ed\.load\(saved\)/]])assert.match(await readFile(new URL('../'+file,import.meta.url),'utf8'),pattern);});
 test('service worker contains every local module and stylesheet in Forge closure',async()=>{
- const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');assert.match(sw,/forge-v134-shell/);
+ const sw=await readFile(new URL('../sw.js',import.meta.url),'utf8');assert.ok(Number(/forge-v(\d+)-shell/.exec(sw)?.[1])>=134,'Forge cache version must be at least V134');
  const pending=['src/editor.js','src/forge-save-v62.js'],seen=new Set();
  while(pending.length){const file=pending.pop();if(seen.has(file))continue;seen.add(file);const code=await readFile(new URL('../'+file,import.meta.url),'utf8');assert.ok(sw.includes(`'/${file}'`),`not precached: ${file}`);for(const match of code.matchAll(/(?:from\s+|import\s+)['"]\.\/([^'"]+)['"]/g))pending.push('src/'+match[1]);}
  for(const file of ['forge-editor-v130.css','forge-workbench-v133.css','forge-navigator-v134.css'])assert.ok(sw.includes(`'/src/${file}'`));

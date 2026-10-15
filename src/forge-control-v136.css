@@ -1,0 +1,12 @@
+.forge-control-v136{min-width:0;color:#dceadf}.forge-control-v136 *{box-sizing:border-box;min-width:0}
+.forge-control-v136 h3{font:600 14px ui-monospace,monospace;color:#afe2bc;margin:8px 0 12px}
+.forge-control-v136 [data-control-status]{font:12px/1.65 ui-monospace,monospace;color:#b7d1bf}
+.forge-control-v136 [data-control-preview]{display:block;width:100%;height:auto;background:#091410;border:1px solid #3d5b49;margin:12px 0}
+.forge-control-issues-v136{display:flex;flex-direction:column;gap:7px;max-height:300px;overflow:auto;margin:12px 0}
+.forge-control-v136 .forge-control-issues-v136 button{text-align:left;font-size:12px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+.forge-control-v136 .forge-control-error-v136{border-left:4px solid #ec9398}.forge-control-v136 .forge-control-warning-v136{border-left:4px solid #dec580}
+.forge-versions-v136{border-top:1px solid #3d5b49;margin-top:20px;padding-top:16px}.forge-control-v136 .forge-work-row{margin:12px 0;gap:8px}
+.forge-control-v136 label{flex:1 1 220px}.forge-control-v136 input,.forge-control-v136 select{width:100%;max-width:100%}
+.forge-control-v136 button{min-height:40px}.forge-control-diff-v136{padding:12px;background:#172a21;line-height:1.7;font-size:13px;overflow-wrap:anywhere}
+.forge-control-v136 [data-error=true]{color:#ffc2c5}
+@media(max-width:620px){.forge-control-v136 label{flex-basis:100%}.forge-control-v136 .forge-work-row>button{flex:1 1 130px}.forge-control-v136 [data-control-preview]{min-height:90px}}

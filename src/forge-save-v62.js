@@ -64,7 +64,7 @@ export class ForgeWorkspaceV133 {
     const next = new ForgeModel(project), revision = this.editor.model.revision + 1;
     this.editor.cancelGesture(); this.editor.model = next; next.revision = revision;
     this.id = project.id; this.epoch++; this.editor.selection.clear(); this.editor.cursor = null;
-    this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh(); this.editor.navigatorV134?.refresh(); this.editor.constructionV135?.refresh();
+    this.editor.mode = 'brush'; this.editor.workbenchV133?.cancelStamp(); this.editor.fit(); this.editor.ui?.refresh(); this.editor.workbenchV133?.refresh(); this.editor.navigatorV134?.refresh(); this.editor.constructionV135?.refresh();this.editor.controlV136?.refresh();
     // History belongs to the document. Never undo a switch into another project.
   }
   commitCandidate(candidate, activeId) {
@@ -72,7 +72,7 @@ export class ForgeWorkspaceV133 {
     checked.activeProjectId = activeId;
     this.store.data = checked;
     this.store.commit();
-    if(!this.store.lastWriteV130.persisted) { this.store.data = old; fail(`Opération non enregistrée : ${this.store.lastWriteV130.reason}. Projet actuel conservé.`); }
+    if(!this.store.lastWriteV130.persisted) { this.store.data = old; fail(`Opération non enregistrée : ${this.store.lastWriteV130.reason}. Projet actuel conservé. Exportez votre travail avant de quitter.`); }
     this.adopt(checked.projects.find(p => p.id === activeId));
   }
   open(id) {

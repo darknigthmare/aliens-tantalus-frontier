@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-forge-v134-shell-2-v135';
+const CACHE = 'atf-v86-forge-v136-shell-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -42,6 +42,7 @@ const CORE = [
   '/src/forge-editor-v130.css',
   '/src/forge-workbench-v133.css',
   '/src/forge-navigator-v134.css',
+  '/src/forge-playtest-v136.js', '/src/forge-versions-v136.js', '/src/forge-control-v136.js', '/src/forge-control-v136.css',
   '/src/forge-blueprints-v135.js',
   '/src/forge-construction-v135.js',
   '/src/forge-construction-v135.css',

@@ -202,7 +202,7 @@ export class ForgeModel {
     for(const original of clipboard.cells){const cell={...clone(original),x:x+original.x,y:y+original.y,id:this.cellId(),locked:false};if(cell.x<0||cell.y<0||cell.x>=this.room.size[0]||cell.y>=this.room.size[1]||occupied.has(keyOf(cell)))fail('Collage refusé : limites ou destination occupée.');occupied.add(keyOf(cell));this.room.cells.push(cell);inserted.push(cell.id);}
     this.cellCache=null;return inserted;
   }
-  deleteCells(ids){const removed=this.room.cells.filter(cell=>ids.includes(cell.id)&&!cell.locked).map(cell=>cell.id);this.room.cells=this.room.cells.filter(cell=>!removed.includes(cell.id));this.removeLinks(removed);this.cellCache=null;}
+  deleteCells(ids){const wanted=new Set(ids),removed=new Set(this.room.cells.filter(cell=>wanted.has(cell.id)&&!cell.locked).map(cell=>cell.id));this.room.cells=this.room.cells.filter(cell=>!removed.has(cell.id));this.removeLinks([...removed]);this.cellCache=null;}
   resize(width,height,{crop=false}={}){
     if(!integer(width,8,LIMITS.columns)||!integer(height,8,LIMITS.rows))fail('Dimensions invalides.');
     const removed=this.room.cells.filter(cell=>cell.x>=width||cell.y>=height);
