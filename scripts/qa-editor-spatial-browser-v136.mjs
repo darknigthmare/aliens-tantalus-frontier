@@ -1,129 +1,211 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createDefaultSave } from '../src/save.js';
+import { ForgeModel } from '../src/forge-model-v130.js';
 
-// Ordinary idle save and authored project use their actual file inputs. All
-// movement/erasure uses visible controls; evaluations only read live snapshots.
+/** Native Forge regression shared with authoring QA. Inputs change the app; evaluations only read. */
+export async function runEditorSpatialQaV136(options = {}) {
 const repository = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const output = resolve(process.env.ATF_EDITOR_SPATIAL_QA_OUTPUT || join(tmpdir(), `atf-editor-spatial-v136-${Date.now()}`));
+const output = resolve(options.output || process.env.ATF_EDITOR_SPATIAL_QA_OUTPUT || join(tmpdir(), `atf-editor-native-v140-${Date.now()}`));
 const rel = relative(repository, output);
-if (!rel || !rel.startsWith('..') && !isAbsolute(rel)) throw Error('QA evidence must stay outside the public checkout.');
-const report = { status: 'running', startedAt: new Date().toISOString(), checks: [], pageErrors: [], requestFailures: [],
-  method: 'Idle save and 128×72 mission imported through native file inputs; native clearance toggle, Shift erasure, export, movement to the right edge, return and reload. Runtime observations read only.' };
-let browser, page;
+if (!rel || !rel.startsWith('..') && !isAbsolute(rel)) throw Error('QA evidence must remain outside the checkout.');
+let pw;
+if (process.env.ATF_PLAYWRIGHT_MODULE) pw = await import(pathToFileURL(resolve(process.env.ATF_PLAYWRIGHT_MODULE)).href);
+else { try { pw = await import('playwright'); } catch (error) {
+  if (!process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES) throw Error('Existing Playwright required.', { cause: error });
+  pw = createRequire(join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES, '__qa_editor_native_v140__.cjs'))('playwright');
+} }
+const { chromium } = pw.chromium ? pw : pw.default;
+const report = { status: 'running', startedAt: new Date().toISOString(), checks: [], pageErrors: [], requestFailures: [], method: 'Production app, native file inputs/downloads, real pointer/keyboard/touch, library controls, Mission and Ship playtests. Evaluations only observe.' };
 const check = (label, evidence) => report.checks.push({ label, evidence });
+let browser, page, acceptDialogs = true;
 const editor = () => page.evaluate(() => globalThis.__ATF_V51__?.editor?.getSnapshot());
-const runtime = () => page.evaluate(() => {
-  const e = globalThis.__ATF_GAME__;
-  return e ? { player: { x: e.player.x, y: e.player.y, w: e.player.w, h: e.player.h, health: e.player.health, grounded: e.player.grounded },
-    grid: e.getSnapshot().editorGridV136, tileCount: e.editorTileCount, camera: { ...e.camera }, objective: { ...e.objective }, paused: e.paused,
-    checkpoint: { ...e.checkpoint }, resume: e.captureResumeState(), campaign: { id: e.campaign?.id, name: e.campaign?.name },
-    missionState: e.mission?.state, rewards: e.mission?.rewards, objectiveRuntime: e.objectiveRuntime,
-    objectiveNodes: e.objectiveNodes?.map(node => ({ id: node.id, kind: node.kind })) } : null;
-});
-const saved = () => page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1') || 'null'));
-async function importProject(project) {
-  await page.locator('#editor-import').setInputFiles({ name: 'far-corner-128x72.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(project)) });
-  await page.getByText('Plan importé.', { exact: true }).waitFor();
+const authored = () => page.evaluate(() => structuredClone(globalThis.__ATF_V51__.editor.model.data));
+const audit = () => page.evaluate(() => globalThis.__ATF_V51__?.editor?.controlV136?.getReport());
+const campaign = () => page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1')));
+const mission = () => page.evaluate(() => { const e = globalThis.__ATF_GAME__; return { player: { x: e.player.x, y: e.player.y, w: e.player.w, h: e.player.h, alive: e.player.alive, grounded: e.player.grounded }, grid: e.editorGridV136, tileCount: e.editorTileCount, objective: { ...e.objective }, state: e.mission.state, rewards: e.mission.rewards }; });
+const ship = () => page.evaluate(() => { const e = globalThis.__ATF_HUB__; return { player: { x: e.player.x, y: e.player.y, w: e.player.w, h: e.player.h, grounded: e.player.grounded }, editorPlaytest: e.editorPlaytest, objectives: e.v51Objectives.map(o => ({ ...o })), grid: e.compiledProject?.grid, running: e.running }; });
+const tile = (x, y, type) => ({ position: `${x}:${y}`, type });
+function twoRoomMission() {
+  const m = new ForgeModel({ schema: 2, kind: 'mission', name: 'V140 deux secteurs', size: [128, 72], tiles: [...Array.from({ length: 128 }, (_, x) => tile(x, 70, 'floor')), tile(118, 69, 'spawn'), tile(126, 69, 'objective'), tile(110, 69, 'door')] });
+  m.transaction('Fixture authored document', () => { m.paint(1, 1, 'wall', 'background'); m.paint(1, 1, 'wall', 'foreground'); const door = m.room.cells.find(c => c.type === 'door').id; m.addRoom({ duplicate: true }); const second = m.room.cells.find(c => c.type === 'door').id; m.link(second, 'room-1', door); m.data.activeRoomId = 'room-1'; });
+  return m.data;
 }
-async function main() {
-  await fs.mkdir(output, { recursive: true });
-  let pw;
-  if (process.env.ATF_PLAYWRIGHT_MODULE) pw = await import(pathToFileURL(resolve(process.env.ATF_PLAYWRIGHT_MODULE)).href);
-  else { try { pw = await import('playwright'); } catch {
-    if (!process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES) throw Error('Existing Playwright required.');
-    pw = createRequire(join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES, '__editor_spatial_qa__.cjs'))('playwright');
-  } }
-  const { chromium } = pw.chromium ? pw : pw.default;
-  browser = await chromium.launch({ headless: true, ...(process.env.ATF_CHROMIUM_EXECUTABLE ? { executablePath: process.env.ATF_CHROMIUM_EXECUTABLE } : {}) });
-  const context = await browser.newContext({ viewport: { width: 1600, height: 1000 }, serviceWorkers: 'block', acceptDownloads: true });
-  page = await context.newPage(); page.setDefaultTimeout(30000);
+async function openPage(context) {
+  page = await context.newPage(); page.setDefaultTimeout(30000); page.on('dialog', dialog => acceptDialogs ? dialog.accept() : dialog.dismiss());
   page.on('pageerror', error => report.pageErrors.push(error.message));
   page.on('requestfailed', request => report.requestFailures.push({ url: request.url(), error: request.failure()?.errorText }));
+}
+async function enterForge() {
   await page.goto(process.env.ATF_BASE_URL || 'http://127.0.0.1:4173', { waitUntil: 'domcontentloaded' });
   await page.locator('#title-start').click({ timeout: 45000 }); await page.locator('#title-options').click();
-  const fixture = createDefaultSave(); fixture.needsPlayerCreationV84 = false; fixture.scene = 'command';
-  await page.locator('#save-import').setInputFiles({ name: 'editor-idle-profile.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(fixture)) });
-  await page.getByText('Sauvegarde importée et migrée.', { exact: true }).waitFor(); const beforeProfile = await saved();
-  await page.locator('#return-title').click();
-  if (await page.locator('#title-start').isVisible()) await page.locator('#title-start').click();
+  const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.scene = 'command';
+  await page.locator('#save-import').setInputFiles({ name: 'idle.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(save)) });
+  await page.getByText('Sauvegarde importée et migrée.', { exact: true }).waitFor();
+  await page.locator('#return-title').click(); if (await page.locator('#title-start').isVisible()) await page.locator('#title-start').click();
   await page.locator('#title-forge').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' });
-  const project = { schema: 2, kind: 'mission', size: [128, 72], tiles: [
-    ...Array.from({ length: 128 }, (_, x) => ({ position: `${x}:70`, type: 'floor' })),
-    { position: '118:69', type: 'spawn' }, { position: '126:69', type: 'objective' }, { position: '118:65', type: 'wall' }
-  ] };
-  await importProject(project); let snapshot = await editor();
-  assert.deepEqual(snapshot.size, [128, 72]); assert.ok(snapshot.spatialV136.issues.some(issue => issue.code === 'spawn-obstructed'));
-  await page.locator('[data-editor-spatial-v136] summary').click();
-  await page.locator('[data-editor-spatial-overlay-v136]').check();
-  assert.match(await page.locator('[data-editor-spatial-issues-v136]').textContent(), /Départ encombré/);
-  const footprint = (await editor()).spatialV136.footprints.find(entry => entry.type === 'spawn');
-  assert.deepEqual([footprint.w, footprint.h, footprint.y + footprint.h], [42, 92, 1050]);
-  check('Actual maximum-grid project import shows a wall obstructing the full-height spawn silhouette and exposes native physical-volume overlay', { size: snapshot.size, footprint });
-  await page.screenshot({ path: join(output, '01-clearance-review.png'), fullPage: true });
-  const canvas = page.locator('#editor-canvas'); await canvas.scrollIntoViewIfNeeded(); const box = await canvas.boundingBox();
-  await page.keyboard.down('Shift');
-  try { await page.mouse.click(box.x + 118.5 / 128 * box.width, box.y + 65.5 / 72 * box.height); } finally { await page.keyboard.up('Shift'); }
-  snapshot = await editor(); assert.deepEqual(snapshot.spatialV136.issues, []); assert.equal(snapshot.tiles.length, 130);
-  assert.match(await page.locator('[data-editor-spatial-v136] summary').textContent(), /0 point/);
-  check('Native Shift erasure frees the actual insertion clearance and immediately updates the review without blocking intentional level design', { tileCount: snapshot.tiles.length, issues: snapshot.spatialV136.issues });
-  const downloadPromise = page.waitForEvent('download'); await page.locator('#editor-export').click(); const download = await downloadPromise;
-  const exportPath = join(output, 'exported-128x72.json'); await download.saveAs(exportPath); const exported = JSON.parse(await fs.readFile(exportPath, 'utf8'));
-  assert.deepEqual(exported.size, [128, 72]); assert.equal(exported.tiles.length, 130); assert.equal(Object.hasOwn(exported, 'spatialV136'), false);
-  check('Native export preserves all 128 columns and 72 rows while review visibility remains a local viewing choice', { path: exportPath, tiles: exported.tiles.length });
-  await page.locator('#editor-play').click(); await page.locator('#game-canvas').waitFor({ state: 'visible' });
-  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused && !e.enemyAtlasLoadingPausedV65 && !e.userCasteLoadingV88 && e.player?.grounded; }, null, { timeout: 45000 });
-  const insertion = await runtime();
-  assert.deepEqual(insertion.grid, { columns: 128, rows: 72, tileWidth: 48.4375, tileHeight: 15 });
-  assert.equal(insertion.tileCount, 130); assert.ok(insertion.player.x > 5600 && insertion.player.y > 900); assert.ok(insertion.objective.x > 6100);
-  assert.equal(Math.round(insertion.player.y + insertion.player.h), 1050);
-  assert.equal(insertion.campaign.id, 'forge-authored-v136'); assert.equal(insertion.campaign.name, 'PLAYTEST FORGE');
-  assert.equal(insertion.objectiveRuntime.id, 'forge-authored-objective-v136'); assert.deepEqual(insertion.objectiveNodes, []);
-  check('Production playtest retains far-right/far-bottom geometry and inserts at the real authored tile beyond both former limits', insertion);
-  await page.locator('#game-canvas').focus(); await page.keyboard.down('KeyD');
-  try { await page.waitForTimeout(2200); } finally { await page.keyboard.up('KeyD'); }
-  const edge = await runtime(); assert.ok(edge.player.x > insertion.player.x + 250); assert.ok(edge.player.x + edge.player.w <= 6200.01);
-  assert.ok(edge.player.health > 0); assert.equal(Math.round(edge.player.y + edge.player.h), 1050);
-  assert.ok(edge.camera.x > 4910 && edge.camera.x <= 4920.01); assert.ok(edge.camera.y > 359 && edge.camera.y <= 360.01);
-  assert.ok(edge.checkpoint.x > 5600 && edge.checkpoint.y > 900);
-  check('Real keyboard walking reaches the right world edge over the bottom authored floor; camera and checkpoint remain within the same physical world', edge);
-  await page.screenshot({ path: join(output, '02-far-right-playtest.png'), fullPage: true });
-  await page.keyboard.press('KeyP'); const paused = await runtime(); assert.equal(paused.paused, true);
-  await page.waitForTimeout(150); const still = await runtime(); assert.equal(still.player.x, paused.player.x); assert.equal(still.player.y, paused.player.y);
-  await page.keyboard.press('KeyP'); assert.equal((await runtime()).paused, false);
-  check('Actual pause/resume freezes and restores the far-corner operator without moving the authored scene', { paused: paused.player, afterPause: still.player });
-  await page.keyboard.press('KeyE');
-  await page.waitForFunction(() => globalThis.__ATF_GAME__?.mission?.state === 'complete');
-  const complete = await runtime(); assert.equal(complete.objective.complete, true);
-  for (const key of ['credits', 'salvage', 'intel', 'apex', 'cargo']) assert.equal(complete.rewards[key], 0);
-  assert.match(await page.locator('#mission-log').textContent(), /PLAYTEST TERMINÉ/);
-  check('Native E interaction completes the actual authored objective without reference-campaign survivors or reward issuance', { objective: complete.objectiveRuntime.id, rewards: complete.rewards });
-  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' });
-  assert.deepEqual((await editor()).tiles, exported.tiles);
-  const afterProfile = await saved();
-  for (const key of ['statistics', 'clock', 'crew']) assert.deepEqual(afterProfile[key], beforeProfile[key]);
-  assert.deepEqual(afterProfile.strategy.currentOperation, beforeProfile.strategy.currentOperation); assert.deepEqual(afterProfile.galaxy.resources, beforeProfile.galaxy.resources);
-  check('Returning from the actual playtest preserves the whole project and cannot issue campaign results, time or resources', { tiles: exported.tiles.length });
-  await page.reload({ waitUntil: 'domcontentloaded' }); await page.locator('#title-start').click({ timeout: 45000 }); await page.locator('#title-forge').click();
-  await page.locator('#editor-canvas').waitFor({ state: 'visible' }); snapshot = await editor();
-  assert.deepEqual(snapshot.size, [128, 72]); assert.deepEqual(snapshot.tiles, exported.tiles); assert.deepEqual(snapshot.spatialV136.issues, []);
-  check('Actual browser reload restores the maximum-grid workspace with its far-corner spawn/objective and corrected clearance', { size: snapshot.size, tiles: snapshot.tiles.length });
-  await page.setViewportSize({ width: 390, height: 844 }); await page.locator('[data-editor-spatial-v136] summary').click();
-  const mobile = await page.locator('[data-editor-spatial-v136]').boundingBox(); assert.ok(mobile.x >= -1 && mobile.x + mobile.width <= 391);
-  const checkbox = await page.locator('[data-editor-spatial-overlay-v136]').boundingBox(); assert.ok(checkbox.width >= 16 && checkbox.width <= 24);
-  for (const selector of ['[data-editor-columns-v135]', '[data-editor-rows-v135]']) {
-    const bounds = await page.locator(selector).boundingBox(); assert.ok(bounds.width <= 100 && bounds.x >= -1 && bounds.x + bounds.width <= 391);
-  }
-  await page.screenshot({ path: join(output, '03-mobile-clearance.png'), fullPage: true });
-  check('Clearance and overlay controls remain within a 390px viewport', mobile);
-  assert.deepEqual(report.pageErrors, []); assert.deepEqual(report.requestFailures, []); report.status = 'passed';
+  await page.waitForFunction(() => Boolean(globalThis.__ATF_V51__?.editor?.workspaceV133));
 }
-await main().catch(async error => { report.status = 'failed'; report.error = { message: error.message, stack: error.stack }; process.exitCode = 1;
-  if (page) { report.lastEditor = await editor().catch(() => null); report.lastRuntime = await runtime().catch(() => null); await page.screenshot({ path: join(output, 'failure.png'), fullPage: true }).catch(() => {}); }
-}).finally(async () => { report.finishedAt = new Date().toISOString(); await fs.mkdir(output, { recursive: true });
-  await fs.writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2)); await browser?.close();
-  console.log(JSON.stringify({ status: report.status, checks: report.checks.length, error: report.error?.message, report: join(output, 'report.json') })); });
+async function importProject(project) {
+  await page.locator('#editor-import').setInputFiles({ name: 'authored-level.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(project)) });
+  await page.waitForFunction(() => document.querySelector('#editor-import').value === '');
+  assert.match(await page.locator('.forge-message-v130').textContent(), /Projet importé/);
+}
+async function point(x, y) {
+  const canvas = page.locator('#editor-canvas'); await canvas.scrollIntoViewIfNeeded();
+  const projection = await page.evaluate(() => { const e = globalThis.__ATF_V51__.editor; return { matrix: e.matrix(), width: e.canvas.width, height: e.canvas.height }; });
+  const box = await canvas.boundingBox(), m = projection.matrix;
+  return { x: box.x + (m.x + (x + .5) * m.scale) / projection.width * box.width, y: box.y + (m.y + (y + .5) * m.scale) / projection.height * box.height };
+}
+async function clickCell(x, y) { const p = await point(x, y); await page.mouse.click(p.x, p.y); }
+async function exportDocument(name) {
+  const downloading = page.waitForEvent('download'); await page.locator('#editor-export').click(); const download = await downloading;
+  const path = join(output, name); await download.saveAs(path); return JSON.parse(await fs.readFile(path, 'utf8'));
+}
+async function tab(name) { await page.locator(`[data-work-action="tab"][data-tab="${name}"]`).click(); }
+async function verifyDrawing() {
+  const beforeProfile = await campaign();
+  await importProject({ schema: 2, kind: 'mission', name: 'Atelier de dessin V140', size: [48, 24], tiles: [...Array.from({ length: 48 }, (_, x) => tile(x, 22, 'floor')), tile(2, 21, 'spawn'), tile(46, 21, 'objective')] });
+  assert.deepEqual((await editor()).size, [48, 24]); assert.equal((await audit()).ok, true);
+  check('Native legacy import preserves the 48×24 room and its authored insertion, objective and floor', { size: [48, 24] });
+  const choose = async type => page.locator(`[data-editor-tool="${type}"]`).click();
+  const mode = async name => page.locator(`[data-forge-action="mode"][data-mode="${name}"]`).click();
+  const stroke = async (from, to) => { const a = await point(...from), b = await point(...to); await page.mouse.move(a.x, a.y); await page.mouse.down(); try { await page.mouse.move(b.x, b.y); } finally { await page.mouse.up(); } };
+  const counts = async () => (await editor()).validation.counts;
+  await choose('platform'); await stroke([8, 10], [14, 10]); assert.equal((await counts()).platform, 7);
+  await page.locator('#editor-undo').click(); assert.equal((await counts()).platform, 0); await page.locator('#editor-redo').click(); assert.equal((await counts()).platform, 7);
+  check('A sparse native pointer stroke interpolates seven platforms and uses one whole-stroke Undo/Redo', { platforms: 7 });
+  await choose('wall'); await mode('rect'); await stroke([20, 8], [22, 10]); assert.equal((await counts()).wall, 9);
+  await choose('hazard'); await page.locator('[data-forge-field="layer"]').selectOption('structure'); await mode('fill'); await clickCell(21, 9);
+  assert.equal((await counts()).hazard, 9); assert.equal((await counts()).floor, 48);
+  await page.locator('#editor-undo').click(); assert.equal((await counts()).wall, 9); await page.locator('#editor-redo').click();
+  check('Filled rectangle and same-layer flood replace the nine connected walls while preserving the 48 floor cells', { hazards: 9, floors: 48 });
+  await choose('platform'); await page.keyboard.down('Shift'); try { await stroke([8, 10], [14, 10]); } finally { await page.keyboard.up('Shift'); }
+  assert.equal((await counts()).platform, 0); await page.locator('#editor-undo').click(); assert.equal((await counts()).platform, 7);
+  check('Native Shift erasure removes the full stroke and one Undo restores every platform', { restored: 7 });
+  const dimensions = async (w, h) => { await page.locator('[data-forge-field="width"]').fill(String(w)); await page.locator('[data-forge-field="height"]').fill(String(h)); await page.locator('[data-forge-action="resize"]').click(); };
+  await dimensions(56, 28); assert.deepEqual((await editor()).size, [56, 28]); await page.locator('#editor-undo').click(); assert.deepEqual((await editor()).size, [48, 24]); await page.locator('#editor-redo').click();
+  const expanded = await authored(); acceptDialogs = false; await dimensions(16, 16); acceptDialogs = true; assert.deepEqual(await authored(), expanded);
+  await dimensions(16, 16); assert.deepEqual((await editor()).size, [16, 16]); assert.equal((await editor()).validation.ok, false);
+  await page.locator('#editor-undo').click(); assert.deepEqual(await authored(), expanded);
+  check('Native crop confirmation can be declined; accepting it is one undoable change of dimensions and all cropped cells', { expanded: [56, 28], crop: [16, 16] });
+  await choose('terminal'); await clickCell(4, 10); await mode('select'); await clickCell(4, 10); await page.keyboard.press('ArrowRight');
+  assert.ok((await editor()).tiles.some(c => c.position === '5:10' && c.type === 'terminal'));
+  await page.keyboard.press('Delete'); assert.equal((await counts()).terminal, 0); await page.keyboard.press('Control+z'); assert.equal((await counts()).terminal, 1);
+  check('Actual keyboard selection, arrow movement, Delete and Ctrl+Z edit a terminal without firing game controls', { position: '5:10' });
+  const beforeInvalid = await authored(), history = await page.evaluate(() => globalThis.__ATF_V51__.editor.history.length);
+  await page.locator('#editor-import').setInputFiles({ name: 'invalid.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ schema: 2, size: [48, 24], tiles: [tile(999, 999, 'wall')] })) });
+  await page.waitForFunction(() => document.querySelector('.forge-message-v130')?.dataset.error === 'true');
+  assert.deepEqual(await authored(), beforeInvalid); assert.equal(await page.evaluate(() => globalThis.__ATF_V51__.editor.history.length), history);
+  check('Invalid native file import retains the complete authored document and history', { cells: beforeInvalid.rooms[0].cells.length });
+  const exported = await exportDocument('drawn-56x28.json'); assert.deepEqual(exported, beforeInvalid); assert.deepEqual(exported.rooms[0].size, [56, 28]);
+  check('The native export downloads the full schema3 document with exact edited cells and custom dimensions', { rooms: exported.rooms.length, cells: exported.rooms[0].cells.length });
+  await page.screenshot({ path: join(output, '01-native-authoring.png'), fullPage: true }); await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true); await page.screenshot({ path: join(output, '02-native-authoring-mobile.png'), fullPage: true });
+  check('Native construction controls fit the 390px viewport', { width: 390 }); await page.setViewportSize({ width: 1680, height: 1100 });
+  await page.locator('#editor-play').click(); await page.locator('#game-canvas').waitFor({ state: 'visible' });
+  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && e.player.grounded && !e.enemyAtlasLoadingPausedV65; }, null, { timeout: 45000 });
+  const start = await mission(); await page.locator('#game-canvas').focus(); await page.keyboard.down('KeyD'); try { await page.waitForTimeout(220); } finally { await page.keyboard.up('KeyD'); }
+  const walked = await mission(); assert.ok(walked.player.x > start.player.x + 2); assert.ok(walked.player.alive);
+  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), exported);
+  const after = await campaign(); for (const key of ['statistics', 'clock', 'crew']) assert.deepEqual(after[key], beforeProfile[key]); assert.deepEqual(after.galaxy.resources, beforeProfile.galaxy.resources);
+  check('The edited custom-size room compiles and accepts real keyboard movement; return preserves the document and campaign state', { insertion: start.player, walked: walked.player });
+  await page.reload({ waitUntil: 'domcontentloaded' }); await page.locator('#title-start').click({ timeout: 45000 }); await page.locator('#title-forge').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), exported);
+  check('Actual reload reopens the entire edited custom-dimension project', { size: [56, 28], cells: exported.rooms[0].cells.length });
+}
+try {
+  await fs.mkdir(output, { recursive: true }); browser = await chromium.launch({ headless: true, ...(process.env.ATF_CHROMIUM_EXECUTABLE ? { executablePath: process.env.ATF_CHROMIUM_EXECUTABLE } : {}) });
+  const context = await browser.newContext({ viewport: { width: 1680, height: 1100 }, serviceWorkers: 'block', acceptDownloads: true }); await openPage(context); await enterForge();
+  if (options.authoringOnly) await verifyDrawing();
+  else {
+  const beforeCampaign = await campaign(); await importProject(twoRoomMission());
+  let snapshot = await editor(), document = await authored(), review = await audit();
+  assert.equal(snapshot.schema, 3); assert.equal(document.rooms.length, 2); assert.equal(document.links.length, 1); assert.deepEqual(review.grid, [128, 72]); assert.equal(review.ok, true);
+  assert.equal(review.issues.some(i => i.code === 'native-grid-capacity' || i.code === 'native-reference-scenario'), false);
+  assert.equal(await page.locator('#editor-play').isEnabled(), true);
+  check('Native import opens both rooms, four layers and a door link; 128×72 admission matches the isolated mission compiler', { rooms: document.rooms.length, links: document.links.length, audit: { ok: review.ok, grid: review.grid, bounds: review.bounds } });
+  await page.locator('[data-work-field="scope"]').selectOption('visible'); await page.locator('[data-forge-action="mode"][data-mode="select"]').click();
+  await clickCell(1, 1); assert.equal((await editor()).selection.length, 2);
+  await page.keyboard.press('ArrowRight'); document = await authored(); assert.equal(document.rooms[0].cells.filter(c => ['background', 'foreground'].includes(c.layer) && c.x === 2 && c.y === 1).length, 2);
+  await page.keyboard.press('Control+z'); assert.equal((await authored()).rooms[0].cells.filter(c => ['background', 'foreground'].includes(c.layer) && c.x === 1).length, 2);
+  await page.keyboard.press('Control+y');
+  check('Real visible-layer selection and keyboard transform move both decorative layers; one native Undo/Redo restores the full group', { selected: 2 });
+  const missionId = (await editor()).forgeProjectIdV133;
+  await tab('projects'); await page.locator('[data-work-field="project-name"]').fill('Vide contrôle V140'); await page.locator('[data-work-action="project-create"]').click();
+  assert.equal(await page.locator('#editor-play').isEnabled(), false);
+  await page.locator(`[data-work-action="project-open"][data-project="${missionId}"]`).click();
+  assert.equal(await page.locator('#editor-play').isEnabled(), true); assert.equal((await authored()).rooms.length, 2);
+  check('Opening a valid library project from an empty document immediately refreshes the real launch button without a fake edit', { projectId: missionId });
+  const exported = await exportDocument('mission-two-rooms.json'); assert.equal(exported.rooms.length, 2); assert.equal(exported.links.length, 1); assert.equal(Object.hasOwn(exported, 'tiles'), false);
+  await page.locator('#editor-play').click(); await page.locator('#game-canvas').waitFor({ state: 'visible' });
+  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused && e.player.grounded && !e.enemyAtlasLoadingPausedV65; }, null, { timeout: 45000 });
+  const insertion = await mission(); assert.deepEqual(insertion.grid, { columns: 128, rows: 72, tileWidth: 48.4375, tileHeight: 15 }); assert.ok(insertion.player.x > 5600); assert.equal(insertion.tileCount, 131);
+  await page.locator('#game-canvas').focus(); await page.keyboard.down('KeyD');
+  try { await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e.player.x >= e.objective.x - 30; }, null, { timeout: 15000 }); } finally { await page.keyboard.up('KeyD'); }
+  await page.keyboard.press('KeyE'); await page.waitForFunction(() => globalThis.__ATF_GAME__.mission.state === 'complete'); const complete = await mission();
+  for (const key of ['credits', 'salvage', 'intel', 'apex', 'cargo']) assert.equal(complete.rewards[key], 0);
+  check('Production Mission playtest uses the active large room and reaches extraction through actual D/E input', { insertion, completion: complete });
+  await page.screenshot({ path: join(output, '01-mission-playtest.png'), fullPage: true });
+  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), exported);
+  await tab('projects'); await page.locator('[data-work-field="project-name"]').fill('Vaisseau V140'); await page.locator('[data-work-field="project-kind"]').selectOption('ship'); await page.locator('[data-work-action="project-create"]').click();
+  const shipProject = { schema: 2, kind: 'ship', size: [128, 72], tiles: [...Array.from({ length: 128 }, (_, x) => tile(x, 70, 'floor')), tile(0, 69, 'spawn'), tile(10, 69, 'objective')] };
+  await importProject(shipProject); review = await audit(); assert.equal(review.ok, true); assert.deepEqual(review.grid, [128, 72]);
+  const shipExported = await exportDocument('ship-128x72.json');
+  await page.locator('#editor-play').click(); await page.locator('#hub-canvas').waitFor({ state: 'visible' });
+  await page.waitForFunction(() => globalThis.__ATF_HUB__?.running && globalThis.__ATF_HUB__.editorPlaytest);
+  const shipInsertion = await ship(); assert.equal(shipInsertion.player.x, 24); assert.equal(shipInsertion.player.y, 608); assert.equal(shipInsertion.player.h, 92);
+  await page.waitForTimeout(180); const idle = await ship(); assert.equal(idle.player.x, 24); assert.equal(idle.player.y, 608);
+  await page.locator('#hub-canvas').focus(); await page.keyboard.down('KeyD');
+  try { await page.waitForFunction(() => globalThis.__ATF_HUB__.v51Objectives.some(o => o.complete), null, { timeout: 15000 }); } finally { await page.keyboard.up('KeyD'); }
+  const shipReached = await ship(); assert.ok(shipReached.player.x > shipInsertion.player.x + 300); assert.equal(Math.round(shipReached.player.y + shipReached.player.h), 700);
+  check('Native 128×72 Ship admission inserts at bounded x24/y608, stays stable through idle updates, and physically walks to objective', { insertion: shipInsertion, idle, reached: shipReached });
+  await page.screenshot({ path: join(output, '02-ship-playtest.png'), fullPage: true });
+  await page.locator('#exit-hub').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), shipExported);
+  const afterCampaign = await campaign(); for (const key of ['statistics', 'clock', 'crew', 'hub']) assert.deepEqual(afterCampaign[key], beforeCampaign[key]); assert.deepEqual(afterCampaign.galaxy.resources, beforeCampaign.galaxy.resources); assert.deepEqual(afterCampaign.strategy.currentOperation, beforeCampaign.strategy.currentOperation);
+  await tab('projects'); await page.locator(`[data-work-action="project-open"][data-project="${missionId}"]`).click(); assert.deepEqual(await authored(), exported);
+  await page.reload({ waitUntil: 'domcontentloaded' }); await page.locator('#title-start').click({ timeout: 45000 }); await page.locator('#title-forge').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), exported);
+  check('Both sandbox returns preserve campaign bytes and authored documents; library open and actual reload retain rooms, links and decorative layers', { rooms: exported.rooms.length, links: exported.links.length });
+  const mobile = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 1, serviceWorkers: 'block' }); await openPage(mobile); await enterForge();
+  await importProject({ schema: 2, kind: 'mission', size: [8, 8], tiles: [...Array.from({ length: 6 }, (_, x) => tile(x, 5, 'floor')), tile(1, 4, 'spawn'), tile(4, 4, 'objective')] });
+  const cdp = await mobile.newCDPSession(page);
+  const touch = (type, p) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x: p.x, y: p.y, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
+  // Use one touch session, a nonzero contact force and human gesture timing.
+  // Mixing Playwright taps with raw CDP drags suppresses later clicks in Chromium.
+  const tapControl = async selector => {
+    const node = page.locator(selector); await node.scrollIntoViewIfNeeded(); await page.waitForTimeout(300); const b = await node.boundingBox();
+    await touch('touchStart', { x: b.x + b.width / 2, y: b.y + b.height / 2 }); await page.waitForTimeout(100);
+    await touch('touchEnd'); await page.waitForTimeout(500);
+  };
+  await tapControl('[data-forge-action="mode"][data-mode="brush"]'); const touchStart = await point(0, 2), touchEnd = await point(3, 2);
+  await touch('touchStart', touchStart); await page.waitForTimeout(100); await touch('touchMove', touchEnd); await page.waitForTimeout(100);
+  await touch('touchEnd'); await page.waitForTimeout(500);
+  await page.waitForFunction(() => globalThis.__ATF_V51__.editor.room.cells.filter(c => c.y === 2 && c.type === 'floor').length === 4);
+  snapshot = await editor(); assert.equal(snapshot.tiles.length, 12); assert.equal(snapshot.canUndo, true);
+  await tapControl('#editor-undo');
+  await page.waitForFunction(() => globalThis.__ATF_V51__.editor.room.cells.length === 8);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+  await page.screenshot({ path: join(output, '03-touch-native-forge.png'), fullPage: true });
+  check('Real touch brush gesture interpolates four tiles at 390px; native touch Undo removes the whole stroke', { tilesAfterGesture: 12, tilesAfterUndo: (await editor()).tiles.length });
+  }
+  assert.deepEqual(report.pageErrors, []); assert.deepEqual(report.requestFailures, []); report.status = 'passed';
+} catch (error) {
+  report.status = 'failed'; report.error = { message: error.message, stack: error.stack };
+  report.editor = await editor().catch(() => null); report.audit = await audit().catch(() => null); report.mission = await mission().catch(() => null); report.ship = await ship().catch(() => null);
+  await page?.screenshot({ path: join(output, 'failure.png'), fullPage: true }).catch(() => {});
+} finally {
+  report.finishedAt = new Date().toISOString(); await fs.writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2)); await browser?.close();
+
+}
+
+return report;
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const report = await runEditorSpatialQaV136();
+  console.log(JSON.stringify({ status: report.status, checks: report.checks.length, error: report.error?.message }));
+  if (report.status !== 'passed') process.exitCode = 1;
+}

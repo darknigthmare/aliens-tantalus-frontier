@@ -150,7 +150,7 @@ async function main() {
     { position: '2:21', type: 'spawn' }, { position: '46:21', type: 'objective' }
   ] };
   await page.locator('#editor-import').setInputFiles({ name: 'wardrobe-v140-observation-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(project)) });
-  await page.getByText('Plan importé.', { exact: true }).waitFor(); await page.locator('#editor-play').click();
+  await page.getByText(/^(?:Plan importé\.|Projet importé\. Toutes les salles et liaisons ont été vérifiées\.)$/).waitFor(); await page.locator('#editor-play').click();
   await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused && e.player?.grounded && e.player.playerAppearanceVisualV126?.drawn && e.coopEnabled && e.coop?.playerAppearanceVisualV126?.drawn; }, null, { timeout: 45000 });
   const deployed = await captureRuntime('04-native-two-operator-runtime.png'); certify(deployed.player, expectedPlayer); certify(deployed.coop, expectedCoop);
   check('The real Forge deployment draws each persisted mixture, correct absent layers and the unchanged human stature and rigid leg lengths', deployed);

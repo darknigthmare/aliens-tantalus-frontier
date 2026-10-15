@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createDefaultSave } from '../src/save.js';
+import { runEditorSpatialQaV136 } from './qa-editor-spatial-browser-v136.mjs';
 
 // The only fixture is an ordinary idle profile imported through its real file
 // picker and a visible Forge project import. All edits, outfit changes and
@@ -81,82 +82,11 @@ async function verifyWardrobe() {
   check('The personal-cabinet controls stay inside the 390px mobile viewport', bounds);
   await page.setViewportSize({ width: 1600, height: 1000 });
 }
-async function selectTool(tool) { await page.locator(`[data-editor-tool="${tool}"]`).click(); }
-async function brush(mode) { await page.locator(`[data-editor-brush-v135="${mode}"]`).click(); }
-async function cellPoint(x, y) {
-  const snapshot = await editor(), canvas = page.locator('#editor-canvas'); await canvas.scrollIntoViewIfNeeded(); const box = await canvas.boundingBox();
-  return { x: box.x + (x + .5) * box.width / snapshot.size[0], y: box.y + (y + .5) * box.height / snapshot.size[1] };
-}
-async function stroke(from, to) {
-  const start = await cellPoint(...from), end = await cellPoint(...to); await page.mouse.move(start.x, start.y); await page.mouse.down();
-  try { await page.mouse.move(end.x, end.y, { steps: 1 }); } finally { await page.mouse.up(); }
-}
-async function clickCell(x, y) { const point = await cellPoint(x, y); await page.mouse.click(point.x, point.y); }
-async function dimensions(columns, rows, crop = false) {
-  await page.locator('[data-editor-columns-v135]').fill(String(columns)); await page.locator('[data-editor-rows-v135]').fill(String(rows));
-  await page.locator('[data-editor-crop-v135]').setChecked(crop); await page.locator('[data-editor-resize-v135]').click();
-}
 async function verifyForge() {
-  const profileBefore = await saved(); await page.locator('#return-title').click();
-  if (await page.locator('#title-start').isVisible()) await page.locator('#title-start').click();
-  await page.locator('#title-forge').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' });
-  const project = { schema: 2, kind: 'mission', size: [48, 24], tiles: [
-    ...Array.from({ length: 48 }, (_, x) => ({ position: `${x}:22`, type: 'floor' })),
-    { position: '2:21', type: 'spawn' }, { position: '46:21', type: 'objective' }
-  ] };
-  await page.locator('#editor-import').setInputFiles({ name: 'authoring-48x24-idle-mission.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(project)) });
-  await page.getByText('Plan importé.', { exact: true }).waitFor(); let snapshot = await editor(); assert.deepEqual(snapshot.size, [48, 24]); assert.equal(snapshot.validation.ok, true);
-  assert.equal(await page.locator('[data-editor-columns-v135]').inputValue(), '48'); assert.equal(await page.locator('[data-editor-rows-v135]').inputValue(), '24');
-  check('A native Forge file import preserves the actual 48×24 project dimensions and validated floor, spawn and objective', { size: snapshot.size, tiles: snapshot.tiles.length });
-  await selectTool('platform'); await brush('paint'); await stroke([8, 10], [14, 10]);
-  snapshot = await editor(); for (let x = 8; x <= 14; x++) assert.equal(tiles(snapshot).get(`${x}:10`), 'platform');
-  await page.locator('#editor-undo').click(); for (let x = 8; x <= 14; x++) assert.equal(tiles(await editor()).has(`${x}:10`), false);
-  await page.locator('#editor-redo').click(); for (let x = 8; x <= 14; x++) assert.equal(tiles(await editor()).get(`${x}:10`), 'platform');
-  check('A sparse real pointer stroke paints all seven intervening cells and one Undo/Redo removes and restores the entire gesture', { from: [8, 10], to: [14, 10], cells: 7 });
-  await selectTool('wall'); await brush('rectangle'); await stroke([20, 8], [22, 10]);
-  snapshot = await editor(); for (let y = 8; y <= 10; y++) for (let x = 20; x <= 22; x++) assert.equal(tiles(snapshot).get(`${x}:${y}`), 'wall');
-  await selectTool('hazard'); await brush('fill'); await clickCell(21, 9);
-  snapshot = await editor(); assert.equal(snapshot.tiles.filter(tile => tile.type === 'hazard').length, 9); assert.equal(snapshot.validation.counts.floor, 48);
-  await page.locator('#editor-undo').click(); assert.equal((await editor()).validation.counts.wall, 9); await page.locator('#editor-redo').click();
-  check('The filled rectangle contains nine cells; native flood fill replaces only its connected type and a single Undo restores it', { hazardCells: 9, preservedFloorCells: 48 });
-  await brush('erase'); await stroke([8, 10], [14, 10]); assert.equal((await editor()).validation.counts.platform, 0);
-  await page.locator('#editor-undo').click(); assert.equal((await editor()).validation.counts.platform, 7);
-  check('The real eraser gesture removes the whole continuous stroke and one Undo restores it', { restoredCells: 7 });
-  await dimensions(56, 28); assert.deepEqual((await editor()).size, [56, 28]);
-  await page.locator('#editor-undo').click(); assert.deepEqual((await editor()).size, [48, 24]); await page.locator('#editor-redo').click();
-  const expanded = await editor(); await dimensions(16, 16); assert.deepEqual((await editor()).size, [56, 28]); assert.deepEqual((await editor()).tiles, expanded.tiles);
-  await page.locator('[data-editor-authoring-status-v135]').filter({ hasText: /coupées|rognage/ }).waitFor();
-  await dimensions(16, 16, true); assert.deepEqual((await editor()).size, [16, 16]); assert.equal((await editor()).validation.ok, false);
-  await page.locator('#editor-undo').click(); assert.deepEqual((await editor()).size, [56, 28]); assert.deepEqual((await editor()).tiles, expanded.tiles);
-  check('Resizing preserves content; destructive shrinking requires the real explicit crop checkbox and one Undo restores dimensions plus every removed tile', { expanded: [56, 28], cropped: [16, 16] });
-  await brush('paint'); await selectTool('terminal'); await page.locator('#editor-canvas').focus();
-  const cursor = (await editor()).cursor; await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter');
-  const key = `${cursor[0] + 1}:${cursor[1]}`; assert.equal(tiles(await editor()).get(key), 'terminal');
-  await page.keyboard.press('Delete'); assert.equal(tiles(await editor()).has(key), false); await page.keyboard.press('Control+z'); assert.equal(tiles(await editor()).get(key), 'terminal');
-  check('The focused grid supports native arrow movement, Enter, Delete and Ctrl+Z without triggering game controls', { key });
-  const beforeInvalid = await editor();
-  await page.locator('#editor-import').setInputFiles({ name: 'invalid-authoring-plan.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ ...project, tiles: [{ position: '999:999', type: 'floor' }] })) });
-  await page.getByText(/dépasse les dimensions|tuile invalide/).last().waitFor(); assert.deepEqual(await editor(), beforeInvalid);
-  check('A rejected native project import leaves the complete current project, dimensions and edit history unchanged', { size: beforeInvalid.size, tiles: beforeInvalid.tiles.length });
-  const download = page.waitForEvent('download'); await page.locator('#editor-export').click(); const file = await download, path = join(output, 'exported-56x28-forge.json'); await file.saveAs(path);
-  const exported = JSON.parse(await fs.readFile(path, 'utf8')); assert.deepEqual(exported.size, [56, 28]); assert.deepEqual(exported.tiles, beforeInvalid.tiles);
-  check('The real Export button downloads the exact edited project and preserved custom dimensions', { path, size: exported.size, tiles: exported.tiles.length });
-  await page.screenshot({ path: join(output, '03-forge-authoring.png'), fullPage: true });
-  await page.setViewportSize({ width: 390, height: 844 });
-  const bounds = await page.locator('[data-editor-authoring-v135]').boundingBox(); assert.ok(bounds.x >= -1 && bounds.x + bounds.width <= 391);
-  await page.screenshot({ path: join(output, '04-mobile-forge.png'), fullPage: true }); check('Construction controls fit the 390px mobile viewport', bounds);
-  await page.setViewportSize({ width: 1600, height: 1000 });
-  await page.locator('#editor-play').click(); await page.locator('#game-canvas').waitFor({ state: 'visible' });
-  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused && !e.enemyAtlasLoadingPausedV65 && !e.userCasteLoadingV88 && e.player?.grounded; }, null, { timeout: 45000 });
-  const beforeMove = await page.evaluate(() => { const e = globalThis.__ATF_GAME__; return { x: e.player.x, health: e.player.health, campaign: e.campaign?.id }; });
-  await page.locator('#game-canvas').focus(); await page.keyboard.down('KeyD'); await page.waitForTimeout(180); await page.keyboard.up('KeyD');
-  const afterMove = await page.evaluate(() => ({ x: globalThis.__ATF_GAME__.player.x, health: globalThis.__ATF_GAME__.player.health })); assert.ok(afterMove.x > beforeMove.x + 2); assert.ok(afterMove.health > 0);
-  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual((await editor()).size, [56, 28]); assert.deepEqual((await editor()).tiles, exported.tiles);
-  const afterPlaytest = await saved(); assert.deepEqual(afterPlaytest.statistics, profileBefore.statistics); assert.deepEqual(afterPlaytest.strategy.currentOperation, profileBefore.strategy.currentOperation); assert.deepEqual(afterPlaytest.galaxy.resources, profileBefore.galaxy.resources); assert.deepEqual(afterPlaytest.clock, profileBefore.clock);
-  check('The edited custom-size level compiles into a real playable scene, accepts actual movement, then returns to the same project without campaign results or rewards', { beforeMove, afterMove });
-  await page.reload({ waitUntil: 'domcontentloaded' }); await page.locator('#title-start').click({ timeout: 45000 }); await page.locator('#title-forge').click();
-  await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual((await editor()).size, [56, 28]); assert.deepEqual((await editor()).tiles, exported.tiles);
-  check('An actual browser reload reopens the persisted custom-dimension Forge workspace', { size: [56, 28], tiles: exported.tiles.length });
+  const native = await runEditorSpatialQaV136({ output: join(output, 'forge'), authoringOnly: true });
+  report.checks.push(...native.checks);
+  report.pageErrors.push(...native.pageErrors); report.requestFailures.push(...native.requestFailures);
+  assert.equal(native.status, 'passed', native.error?.message);
 }
 async function main() {
   await fs.mkdir(output, { recursive: true }); const module = await playwright(), { chromium } = module.chromium ? module : module.default;

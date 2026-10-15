@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-tantalus-v139-support-1';
+const CACHE = 'atf-v86-tantalus-forge-v140-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -42,7 +42,8 @@ const CORE = [
   '/src/hub-training-v132.js',
   '/src/jeri-surface-motion-v135.js', '/src/crew-conversation-memory-v135.js',
   '/src/field-media-v135.js', '/src/field-media-ui-v135.js',
-  '/src/editor-authoring-v135.js', '/src/editor-authoring-ui-v135.js', '/src/player-wardrobe-v135.js',
+  '/src/editor-authoring-v135.js', '/src/player-wardrobe-v135.js',
+  '/src/enemy-patrol-v140.js', '/src/forge-sandbox-v140.js',
   '/src/hub-spatial-design-v136.js', '/src/hub-prop-placements-v136.js', '/src/hub-room-life-v136.js',
   '/src/hub-prop-atlas-v136.js', '/src/human-motion-v136.js', '/src/npc-life-v136.js', '/src/editor-spatial-v136.js',
   '/assets/openai/hub/props/v136/service-prop-atlas.png',
@@ -72,6 +73,23 @@ const CORE = [
   '/src/legacy-operation-state-v131.js', '/src/legacy-operations-v131.js',
   '/src/directional-aim-v130.js', '/src/vertical-world-v130.js', '/src/vertical-levels-v130.js',
   '/src/destructible-scenery-v130.js', '/src/enemy-tactics-v130.js', '/src/weapon-actions-v130.js',
+  // Complete Forge import closure for cold/offline entry, including CSS.
+  '/src/forge-editor-base.js',
+  '/src/forge-model-v130.js',
+  '/src/forge-ui-v130.js',
+  '/src/forge-save-v62-base.js',
+  '/src/forge-workbench-v133.js',
+  '/src/forge-authoring-v133.js',
+  '/src/forge-layout-v134.js',
+  '/src/forge-navigator-v134.js',
+  '/src/forge-editor-v130.css',
+  '/src/forge-workbench-v133.css',
+  '/src/forge-navigator-v134.css',
+  '/src/forge-playtest-v136.js', '/src/forge-versions-v136.js', '/src/forge-control-v136.js', '/src/forge-control-v136.css',
+  '/src/forge-blueprints-v135.js',
+  '/src/forge-construction-v135.js',
+  '/src/forge-construction-v135.css',
+
   '/src/player-colonial-art-v129.js', '/src/player-locomotion-rig-v129.js',
   '/src/player-transit-rig-v128.js',
   '/src/player-action-rig-v127.js', '/src/player-appearance-loadout-v127.js',

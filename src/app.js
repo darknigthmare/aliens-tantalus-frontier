@@ -31,7 +31,6 @@ import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import { rememberCrewConversationTopicV135 } from './crew-conversation-memory-v135.js';
 import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
 import { mountFieldMediaUiV135 } from './field-media-ui-v135.js';
-import { mountEditorAuthoringUiV135 } from './editor-authoring-ui-v135.js';
 import { savePlayerWardrobeOutfitV135, equipPlayerWardrobeOutfitV135, deletePlayerWardrobeOutfitV135,
   copyPlayerAppearanceV135, equipPlayerWardrobePartsV140 } from './player-wardrobe-v135.js';
 import {
@@ -76,6 +75,8 @@ import { advancePlayerOpeningV88, getPlayerOpeningObjectiveV88, OPENING_SIGNAL_V
 import { advanceOpeningExerciseV89, getOpeningExerciseObjectiveV89 } from './opening-exercise-v89.js';
 import { advancePortMeridienV90, normalizePortMeridienV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
+import { admittedForgeProjectV136 } from './forge-playtest-v136.js';
+import { buildForgeMissionSandboxV140 } from './forge-sandbox-v140.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
@@ -1809,7 +1810,8 @@ function renderHubStatus(status = lastHubStatus) {
   const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
   if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
   byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
-  byId('exit-hub').textContent = hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
+  byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? 'RETOUR FRONTIER FORGE'
+    : hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
   const provingGroundActiveV81 = Boolean(
     status?.provingGroundActiveV81
     || status?.activeAnnexId === 'proving-ground'
@@ -1848,16 +1850,19 @@ function renderEditorStatus() {
   if (!editor) return;
   const snapshot = editor.getSnapshot();
   const validation = snapshot.validation;
+  const nativeAudit = editor.controlV136?.getReport();
+  const ready = validation.ok && (nativeAudit?.ok ?? true);
+  const errors = [...new Set([...validation.errors, ...(nativeAudit?.errors || [])])];
   byId('editor-mode').value = snapshot.kind;
-  byId('editor-validation').innerHTML = validation.ok
+  byId('editor-validation').innerHTML = ready
     ? `<span class="chip success">PLAN VALIDE</span><p>${snapshot.tiles.length} blocs · ${snapshot.kind} · prêt pour playtest isolé · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
-    : `<span class="chip danger">PLAN INCOMPLET</span><p>${validation.errors.map(escapeHtml).join(' ')}</p>`;
-  if (forgeSaveSystem.lastPersistenceV135?.persisted === false) {
+    : `<span class="chip danger">PLAN À CORRIGER</span><p>${errors.map(escapeHtml).join(' ')}</p>`;
+  if ((forgeSaveSystem.lastWriteV130 || forgeSaveSystem.lastPersistenceV135)?.persisted === false) {
     byId('editor-validation').insertAdjacentHTML('beforeend', '<p role="status">Stockage local indisponible : modifications conservées en mémoire uniquement. Exportez le plan avant de fermer cette page.</p>');
   }
   byId('editor-undo').disabled = !snapshot.canUndo;
   byId('editor-redo').disabled = !snapshot.canRedo;
-  byId('editor-play').disabled = !validation.ok;
+  byId('editor-play').disabled = !ready;
 }
 
 function renderProfiles() {
@@ -3236,12 +3241,12 @@ function handleHubAction(interaction) {
 }
 
 function retreatMission() {
-  if (pendingResolutionV121?.operationId === saveSystem.data.strategy.currentOperation?.id && pendingResolutionV121?.event) {
-    handleGameEvent(pendingResolutionV121.event);
-    return;
-  }
   if (standaloneContext === 'forge-playtest') {
     returnToForgeContext();
+    return;
+  }
+  if (pendingResolutionV121?.operationId === saveSystem.data.strategy.currentOperation?.id && pendingResolutionV121?.event) {
+    handleGameEvent(pendingResolutionV121.event);
     return;
   }
   if (!saveSystem.data.strategy.currentOperation) { engine.stop(); showView('hub'); return; }
@@ -3296,15 +3301,13 @@ function returnToForgeContext() {
 }
 
 function launchForgeMissionPlaytest(project) {
-  const sandbox = clone(saveSystem.data);
-  sandbox.strategy.currentOperation = null;
-  sandbox.strategy.lastOperation = null;
-  const campaign = CAMPAIGNS.find((entry) => entry.id === sandbox.strategy.plannedCampaignId)
-    || CAMPAIGNS.find((entry) => sandbox.galaxy.unlockedWorldIds.includes(entry.worldId));
+  const source = saveSystem.data;
+  const campaign = CAMPAIGNS.find((entry) => entry.id === source.strategy.plannedCampaignId)
+    || CAMPAIGNS.find((entry) => source.galaxy.unlockedWorldIds.includes(entry.worldId)) || CAMPAIGNS[0];
   if (!campaign) throw new Error('Aucune campagne de référence disponible pour le playtest.');
   const world = WORLDS.find((entry) => entry.id === campaign.worldId) || WORLDS[0];
+  const { sandbox, deployment } = buildForgeMissionSandboxV140(source, { campaign, world });
   const worldState = sandbox.galaxy.worldState[world.id];
-  const deployment = beginOperation(sandbox, campaign, world);
   const operationLoadout = resolveOperationDeployment(sandbox, {
     crewCatalog: CREW,
     weaponCatalog: WEAPONS,
@@ -3359,8 +3362,11 @@ function launchForgeMissionPlaytest(project) {
 }
 
 function playtestEditor() {
-  const project = editor.serialize();
-  if (!project.validation.ok) { toast(project.validation.errors.join(' ')); return; }
+  let project;
+  try {
+    const authored = editor.serialize();
+    project = { ...authored, ...admittedForgeProjectV136(authored) };
+  } catch (error) { toast(error.message); return; }
   forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`, name: `Frontier Forge ${title(project.kind)}` });
   if (project.kind === 'ship') {
     const sandbox = clone(saveSystem.data);
@@ -3387,11 +3393,10 @@ function setupEditor() {
     const record = { ...project, id, name: `Frontier Forge ${title(project.kind)}`, updatedAt: Date.now() };
     forgeSaveSystem.upsert(record);
     renderEditorStatus();
-  });
+  }, { onDocumentChange: renderEditorStatus });
   byId('editor-tools').innerHTML = TILE_TYPES.map((tool, index) => `<button class="tool-button ${index ? '' : 'active'}" data-editor-tool="${tool}">${title(tool)}</button>`).join('');
   const saved = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
-  if (saved) editor.load(saved);
-  mountEditorAuthoringUiV135(editor, { getPersistenceStatus: () => forgeSaveSystem.lastPersistenceV135 });
+  if (saved) editor.loadInitialProject(saved);
   renderEditorStatus();
 }
 

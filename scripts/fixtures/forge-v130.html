@@ -1,0 +1,24 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Frontier Forge — harnais QA V130</title><style>body{margin:0;padding:20px;background:#0b100e;color:#dce9e1;font-family:Arial,sans-serif}.section-intro,.button-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.eyebrow{font-size:12px;color:#9abdac}.button-row{flex-wrap:wrap}h2{margin:8px 0}.file-button input{max-width:170px}button{font-family:inherit} .view{display:block} #editor-validation{font-size:12px;padding:8px 0}.forge-fixture-banner{font-size:12px;color:#93ad9e;margin:0 0 12px} @media(max-width:620px){body{padding:8px}.section-intro{display:block}}</style>
+<p class="forge-fixture-banner">HARNAIS QA · Canvas et sauvegarde Forge réels ; moteur de campagne non chargé.</p>
+<section class="view active" data-panel="editor">
+  <div class="section-intro"><div><p class="eyebrow">FORGE // MISSION & VAISSEAU</p><h2>Éditeur bloc/écran</h2></div><div class="button-row"><button id="editor-undo" class="button">ANNULER</button><button id="editor-redo" class="button">RÉTABLIR</button><button id="editor-validate" class="button">VALIDER</button><button id="editor-export" class="button">EXPORTER</button><label class="button file-button">IMPORTER<input id="editor-import" type="file" accept="application/json"></label><button id="editor-play" class="button primary">PLAYTEST</button></div></div>
+  <div id="editor-validation" class="editor-validation"></div>
+  <div class="editor-layout"><aside class="panel tool-panel"><label>MODE<select id="editor-mode"><option value="mission">Mission</option><option value="ship">Intérieur USS Tantalus</option></select></label><div id="editor-tools" class="tool-grid"></div><button id="editor-clear" class="button danger-outline">EFFACER LE PLAN</button><p class="hint">Le playtest compile chaque bloc en collision, objectif, menace, terminal, véhicule ou route.</p></aside><div class="editor-stage"><canvas id="editor-canvas" width="1280" height="720" aria-label="Grille Frontier Forge"></canvas></div></div>
+</section>
+<script type="module">
+import {LevelEditor,TILE_TYPES} from '../../src/editor.js';
+import {ForgeSaveSystemV62} from '../../src/forge-save-v62.js';
+const store=new ForgeSaveSystemV62();store.load();let ed;let changes=0;
+const status=()=>{document.querySelector('#editor-validation').textContent=ed.validate().ok?'SALLE PRÊTE AU TEST':ed.validate().errors.join(' ');document.querySelector('#editor-undo').disabled=!ed.history.length;document.querySelector('#editor-redo').disabled=!ed.future.length;};
+ed=new LevelEditor(document.querySelector('#editor-canvas'),project=>{changes++;store.upsert({...project,id:'fixture-project'});status();});
+document.querySelector('#editor-tools').innerHTML=TILE_TYPES.map(tool=>`<button data-editor-tool="${tool}">${tool}</button>`).join('');
+document.addEventListener('click',event=>{const tool=event.target.closest('[data-editor-tool]')?.dataset.editorTool;if(tool)ed.setTool(tool);});
+document.querySelector('#editor-undo').onclick=()=>ed.undo();document.querySelector('#editor-redo').onclick=()=>ed.redo();
+document.querySelector('#editor-clear').onclick=()=>ed.clear();document.querySelector('#editor-mode').onchange=e=>ed.setShipMode(e.target.value==='ship');
+document.querySelector('#editor-import').onchange=()=>{window.legacyImportCalled=true;};
+document.querySelector('#editor-export').onclick=()=>{window.legacyExportCalled=true;};
+document.querySelector('#editor-play').onclick=()=>{window.nativeTestProjection=ed.serialize();};
+document.querySelector('#editor-validate').onclick=status;
+const saved=store.data.projects.find(p=>p.id===store.data.activeProjectId);if(saved)ed.load(saved);status();
+window.forgeEditor=ed;window.forgeStore=store;window.getChangeCount=()=>changes;
+</script></html>

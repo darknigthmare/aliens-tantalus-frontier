@@ -1,0 +1,24 @@
+.forge-layout-v134{margin-top:14px;border-top:1px solid #385749;padding:12px 0 0}
+.forge-layout-v134 summary{padding:4px 0 10px;font-size:13px;color:#bde1cd}
+.forge-layout-v134 output{display:block;font:12px/1.5 ui-monospace,monospace;margin:10px 0;color:#e4cf95}
+.forge-explorer-list-v134{margin:12px 0;max-height:360px;overflow:auto;border:1px solid #355147;border-radius:4px;scrollbar-gutter:stable}
+.forge-explorer-row-v134{display:flex;gap:10px;align-items:center;padding:6px 10px;border-bottom:1px solid #263e33}
+.forge-explorer-row-v134:last-child{border:0}
+.forge-explorer-row-v134 input{flex:none!important;min-width:18px!important;width:18px;height:18px}
+.forge-explorer-row-v134 button{flex:1;display:flex;flex-direction:column;gap:5px;text-align:left;overflow-wrap:anywhere}
+.forge-workbench-v133 [data-nav-page]{font:12px/1.5 ui-monospace,monospace;padding:8px;color:#cce2d4}
+.forge-nav-status-v134{font:12px/1.6 ui-monospace,monospace;color:#bce9ca;padding:0 12px;overflow-wrap:anywhere}
+.forge-nav-status-v134:empty{display:none}
+.forge-nav-status-v134[data-error=true]{color:#ffb7b7}
+.forge-diagram-v134{min-width:0;margin-bottom:14px}
+.forge-diagram-scroll-v134{max-height:360px;overflow:auto;background:#091710;border:1px solid #375e48;border-radius:4px}
+.forge-workbench-v133 [data-nav-diagram]{position:relative;min-width:280px}
+[data-nav-diagram]>svg{position:absolute;inset:0;pointer-events:none}
+[data-nav-diagram] marker path{fill:#8cc2a1}
+[data-nav-diagram] .forge-edge-v134{fill:none;stroke:#8cc2a1;stroke-width:2}
+.forge-workbench-v133 .forge-node-v134{position:absolute;display:flex;flex-direction:column;justify-content:center;gap:7px;padding:12px;background:#142c20;border:1px solid #56795e;overflow:hidden}
+.forge-workbench-v133 .forge-node-v134 strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;font-size:13px}
+.forge-workbench-v133 .forge-node-v134[data-reachable=false]{border-style:dashed;border-color:#bd9c68;background:#29271b}
+.forge-workbench-v133 .forge-node-v134[aria-pressed=true]{border:2px solid #b1e5c3;background:#234931}
+.forge-workbench-v133 .forge-node-v134:focus-visible{outline:3px solid #f1d595;outline-offset:3px}
+@media(max-width:620px){.forge-explorer-row-v134{gap:5px;padding:4px}.forge-diagram-scroll-v134{max-height:290px}.forge-layout-v134 .forge-work-row>label{flex:1 1 145px}.forge-workbench-v133 [data-nav-page]{width:100%;padding-left:0}}

@@ -7,8 +7,11 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 export function isolateForgeMissionOptionsV136(options = {}) {
   if (options.editorProject?.kind !== 'mission') return options;
   const normalized = normalizeEditorProjectV135(options.editorProject);
+  const editorProject = options.editorProject.schema === 3
+    ? { ...options.editorProject, size: [...normalized.size], tiles: normalized.tiles.map(([position, type]) => ({ position, type })) }
+    : options.editorProject;
   const objective = 'Atteindre l’objectif du plan Forge';
-  return { ...options,
+  return { ...options, editorProject,
     campaign: { ...options.campaign, id: 'forge-authored-v136', name: 'PLAYTEST FORGE', mode: 'FORGE', objective,
       pairId: null, specialOperationId: null, canon: 'project-authoring', source: 'Frontier Forge' },
     levelSeed: { ...options.levelSeed, id: 'forge-authored-level-v136', name: 'Plan Forge', objective, hazards: [],

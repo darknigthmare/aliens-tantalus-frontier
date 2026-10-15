@@ -6,6 +6,8 @@ import { LevelEditor } from '../src/editor.js';
 import { ForgeSaveSystemV62 } from '../src/forge-save-v62.js';
 import { compileEditorGridV136, constrainEditorRectV136, analyzeEditorSpatialV136, isolateForgeMissionOptionsV136 } from '../src/editor-spatial-v136.js';
 import { buildObjectiveRuntime } from '../src/game-complete-core.js';
+import { editorHostV140 } from './editor-native-host-v140.mjs';
+import { inspectForgePlaytestV136 } from '../src/forge-playtest-v136.js';
 
 const tile = (column, row, type) => ({ position: `${column}:${row}`, type });
 const project = (tiles, size = [128, 72]) => ({ schema: 2, kind: 'mission', size, tiles });
@@ -162,13 +164,14 @@ test('review identifies only the markers the mission actually consumes and does 
 });
 
 test('preview follows resize/undo without modifying the authored file, undo stack or campaign data', t => {
-  const editor = new LevelEditor(host()); t.after(() => editor.destroy()); editor.load(lane());
+  const { editor, paint } = editorHostV140(t); editor.load(lane());
   const exported = editor.serialize(), history = structuredClone(editor.history);
-  editor.setSpatialOverlayV136(true);
-  assert.equal(editor.getSnapshot().spatialV136.visible, true); assert.deepEqual(editor.serialize(), exported); assert.deepEqual(editor.history, history);
-  editor.setTool('wall'); editor.paintCellV135(118, 65);
-  assert.ok(editor.getSnapshot().spatialV136.issues.some(issue => issue.code === 'spawn-obstructed'));
-  editor.undo(); assert.deepEqual(editor.getSnapshot().spatialV136.issues, []);
+  const reviewed = inspectForgePlaytestV136(editor.model.data);
+  assert.equal(reviewed.geometry.find(entry => entry.type === 'spawn').h, 92);
+  assert.deepEqual(editor.serialize(), exported); assert.deepEqual(editor.history, history);
+  paint(118, 65, 'wall', 'structure');
+  assert.ok(inspectForgePlaytestV136(editor.model.data).issues.some(issue => issue.code === 'native-spawn-blocked'));
+  editor.undo(); assert.equal(inspectForgePlaytestV136(editor.model.data).issues.some(issue => issue.code === 'native-spawn-blocked'), false);
 });
 
 test('invalid dimensions and physical object sizes fail before a misleading grid can be produced', () => {

@@ -85,7 +85,7 @@ const FORGE_STYLES_V140 = new Set([
   'src/forge-navigator-v134.css', 'src/forge-construction-v135.css', 'src/forge-control-v136.css'
 ]);
 for (const file of [
-  'forge-native-host-v136.mjs', 'forge-offline-harness-v130.py',
+  'forge-native-host-v136.mjs', 'editor-native-host-v140.mjs', 'forge-offline-harness-v130.py',
   'verify-forge-v130.mjs', 'verify-forge-v133.mjs', 'verify-forge-v134.mjs',
   'verify-forge-v135.mjs', 'verify-forge-v136.mjs', 'verify-forge-native-v136.mjs',
   'verify-forge-browser-v130.py', 'verify-forge-browser-v133.py', 'verify-forge-browser-v134.py',
@@ -94,6 +94,7 @@ for (const file of [
   'verify-editor-modules-v140.mjs', 'verify-editor-ship-bounds-v140.mjs',
   'verify-enemy-patrol-v140.mjs', 'verify-npc-spacing-v140.mjs',
   'verify-player-wardrobe-parts-v140.mjs', 'verify-forge-native-v140.mjs',
+  'verify-forge-release-v140.mjs', 'verify-forge-sandbox-v140.mjs',
   'qa-enemy-patrol-browser-v140.mjs', 'qa-wardrobe-parts-browser-v140.mjs'
 ]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming

@@ -14,6 +14,8 @@ import {
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { resolveHubServiceProfileV139 } from './hub-service-geometry-v139.js';
+import { constrainEditorRectV136 } from './editor-spatial-v136.js';
+import { normalizeEditorProjectV135 } from './editor-authoring-v135.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -69,10 +71,12 @@ function createImage(source) {
 }
 
 function parsePosition(position) {
-  if (Array.isArray(position) && position.length >= 2) return position.slice(0, 2).map(Number);
-  if (typeof position !== 'string') return null;
-  const parts = position.split(':').map(Number);
-  return parts.length === 2 && parts.every(Number.isFinite) ? parts : null;
+  const parts = Array.isArray(position) && position.length >= 2 ? position.slice(0, 2)
+    : typeof position === 'string' ? position.split(':') : [];
+  if (parts.length !== 2 || !parts.every(value => typeof value === 'number'
+    || typeof value === 'string' && value.trim().length > 0)) return null;
+  const parsed = Array.from(parts, Number);
+  return parsed.every(Number.isFinite) ? parsed : null;
 }
 
 function verticalRuns(tiles, type, cellWidth, cellHeight) {
@@ -110,10 +114,22 @@ function verticalRuns(tiles, type, cellWidth, cellHeight) {
  * consommable. La fonction est pure pour pouvoir valider un plan avant playtest.
  */
 export function compileShipProject(project) {
-  if (!project || project.kind !== 'ship' || !Array.isArray(project.tiles)) return null;
+  if (!project || project.kind !== 'ship') return null;
+  if (project.schema === 3) {
+    // Rooms own schema-3 content. Never trust a stale or forged legacy preview.
+    const normalized = normalizeEditorProjectV135(project);
+    project = { ...project, size: normalized.size,
+      tiles: normalized.tiles.map(([position, type]) => ({ position, type })) };
+  }
+  if (!Array.isArray(project.tiles)) return null;
   const rawSize = Array.isArray(project.size) ? project.size : [32, 18];
-  const cols = clamp(Math.floor(Number(rawSize[0])) || 32, 4, 128);
-  const rows = clamp(Math.floor(Number(rawSize[1])) || 18, 4, 72);
+  const dimension = (value, fallback, maximum) => {
+    const parsed = typeof value === 'number' || typeof value === 'string' ? Number(value) : NaN;
+    return clamp(Math.floor(Number.isFinite(parsed) ? parsed : 0) || fallback, 4, maximum);
+  };
+  const cols = dimension(rawSize[0], 32, 128), rows = dimension(rawSize[1], 18, 72);
+  const world = { width: HUB_WORLD.width, height: VIEW_HEIGHT };
+  const constrain = bounds => constrainEditorRectV136(bounds, world);
   const cellWidth = HUB_WORLD.width / cols;
   const cellHeight = VIEW_HEIGHT / rows;
   const tiles = project.tiles.flatMap((tile, index) => {
@@ -125,7 +141,7 @@ export function compileShipProject(project) {
     return [{ ...tile, index, type, col, row }];
   });
   const byType = (type) => tiles.filter((tile) => tile.type === type);
-  const rect = (tile, height = cellHeight, yOffset = 0) => ({
+  const rect = (tile, height = cellHeight, yOffset = 0) => constrain({
     x: tile.col * cellWidth,
     y: tile.row * cellHeight + yOffset,
     w: cellWidth,
@@ -141,14 +157,14 @@ export function compileShipProject(project) {
   const walls = byType('wall').map((tile) => rect(tile));
   const doors = byType('door').map((tile, index) => {
     const height = Math.max(116, cellHeight * 2.5);
-    return {
+    return constrain({
       id: `editor-door-${index + 1}`,
       x: tile.col * cellWidth + cellWidth / 2 - Math.min(34, cellWidth * 0.22),
       y: (tile.row + 1) * cellHeight - height,
       w: Math.min(68, cellWidth * 0.44), h: height, open: false, progress: 0
-    };
+    });
   });
-  const vents = byType('vent').map((tile, index) => ({
+  const vents = byType('vent').map((tile, index) => constrain({
     id: `editor-vent-${index + 1}`,
     x: tile.col * cellWidth,
     y: tile.row * cellHeight + cellHeight * 0.36,
@@ -160,11 +176,14 @@ export function compileShipProject(project) {
   const lifts = verticalRuns(tiles, 'lift', cellWidth, cellHeight);
   const spawnTile = byType('spawn')[0];
   const fallbackFloor = floors.slice().sort((a, b) => a.y - b.y)[0];
-  const spawn = spawnTile ? {
+  const rawSpawn = spawnTile ? {
     x: spawnTile.col * cellWidth + cellWidth / 2 - 22,
     y: (spawnTile.row + 1) * cellHeight - PLAYER_HEIGHT
   } : fallbackFloor ? { x: fallbackFloor.x + 40, y: fallbackFloor.y - PLAYER_HEIGHT } : null;
-  const objectives = byType('objective').map((tile, index) => ({
+  // Match the hub's actual 44×92 actor and its horizontal movement margin.
+  const spawnBounds = rawSpawn ? constrain({ ...rawSpawn, w: 44, h: PLAYER_HEIGHT }) : null;
+  const spawn = spawnBounds ? { x: clamp(spawnBounds.x, 24, world.width - spawnBounds.w - 24), y: spawnBounds.y } : null;
+  const objectives = byType('objective').map((tile, index) => constrain({
     id: `editor-objective-${index + 1}`,
     x: tile.col * cellWidth + cellWidth * 0.25,
     y: tile.row * cellHeight,
@@ -177,14 +196,15 @@ export function compileShipProject(project) {
     const requested = String(tile.enemyType || tile.variant || '').toLowerCase();
     const kind = enemyKinds.includes(requested) ? requested : enemyKinds[index % enemyKinds.length];
     const dimensions = kind === 'synthetic' ? [42, 88] : kind === 'pathogen' ? [50, 72] : [52, 76];
-    return {
+    const bounds = constrain({
       id: `editor-enemy-${index + 1}`, kind,
       x: tile.col * cellWidth + cellWidth / 2 - dimensions[0] / 2,
       y: (tile.row + 1) * cellHeight - dimensions[1],
       w: dimensions[0], h: dimensions[1]
-    };
+    });
+    return { ...bounds, x: clamp(bounds.x, 10, world.width - bounds.w - 10) };
   });
-  const terminals = byType('terminal').map((tile, index) => ({
+  const terminals = byType('terminal').map((tile, index) => constrain({
     id: `editor-terminal-${index + 1}`,
     x: tile.col * cellWidth + cellWidth * 0.2,
     y: tile.row * cellHeight,
@@ -192,7 +212,7 @@ export function compileShipProject(project) {
     h: cellHeight,
     activated: false
   }));
-  const hazards = byType('hazard').map((tile, index) => ({
+  const hazards = byType('hazard').map((tile, index) => constrain({
     id: `editor-hazard-${index + 1}`,
     x: tile.col * cellWidth,
     y: tile.row * cellHeight + cellHeight * 0.58,

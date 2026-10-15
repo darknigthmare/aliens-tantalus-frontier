@@ -1,5 +1,7 @@
+import { parseProject, projectRoom, nativeTiles } from './forge-model-v130.js';
+
 export const EDITOR_TILE_TYPES_V135 = Object.freeze(['floor', 'platform', 'wall', 'door', 'vent', 'ladder', 'lift', 'spawn', 'objective', 'enemy', 'vehicle', 'terminal', 'hazard']);
-export const EDITOR_BRUSH_MODES_V135 = Object.freeze(['paint', 'erase', 'rectangle', 'fill', 'select']);
+export const EDITOR_BRUSH_MODES_V135 = Object.freeze(['paint', 'erase', 'rectangle', 'fill']);
 export const EDITOR_LIMITS_V135 = Object.freeze({ minColumns: 8, maxColumns: 128, minRows: 8, maxRows: 72, tiles: 9216 });
 const tileTypes = new Set(EDITOR_TILE_TYPES_V135);
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -11,8 +13,14 @@ export function assertEditorDimensionsV135(columns, rows) {
   return [columns, rows];
 }
 
-/** Validate before altering a live workspace. The existing Forge schema stays 2. */
+/** Validate before runtime mutation; preserve legacy grids and project documents. */
 export function normalizeEditorProjectV135(project) {
+  // Schema 3 is an authoring document. Rebuild only the active room's runtime
+  // projection; never trust imported transient tiles or flatten the saved file.
+  if (record(project) && project.schema === 3) {
+    const authored = parseProject(project), room = projectRoom(authored);
+    return normalizeEditorProjectV135({ schema: 2, kind: authored.kind, size: room.size, tiles: nativeTiles(room) });
+  }
   if (!record(project) || !Array.isArray(project.tiles) || project.tiles.length > EDITOR_LIMITS_V135.tiles
     || project.schema !== undefined && ![1, 2].includes(project.schema)
     || project.kind !== undefined && !['mission', 'ship'].includes(project.kind)) throw new Error('Projet éditeur invalide ou format non pris en charge.');

@@ -1,0 +1,21 @@
+.forge-build-grid-v135{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px;align-items:start}
+.forge-build-grid-v135>*{min-width:0}
+.forge-build-grid-v135 h3{font:600 12px/1.6 ui-monospace,monospace;letter-spacing:.08em;color:#b4dfc6;margin:0 0 12px}
+.forge-build-settings-v135{background:#11271e;border:1px solid #365448;padding:14px}
+.forge-build-settings-v135 label{display:flex;flex-direction:column;gap:5px;margin:9px 0;font-size:12px}
+.forge-build-settings-v135 input:not([type=checkbox]),.forge-build-settings-v135 select{width:100%;max-width:100%;min-width:0}
+.forge-build-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.forge-build-settings-v135 .forge-build-check{flex-direction:row;align-items:center;line-height:1.5}
+.forge-build-check input{flex-shrink:0}
+.forge-build-preview-v135 header{display:flex;gap:12px;flex-wrap:wrap;align-items:baseline;justify-content:space-between}
+.forge-build-preview-v135 [data-build-validity]{color:#b5d2c0;font:12px monospace}
+.forge-build-preview-v135 canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#09120f;border:1px solid #456a56;margin-bottom:12px}
+.forge-build-preview-v135 details{padding:12px;background:#14231d;border:1px solid #355346;margin-top:12px}
+.forge-build-preview-v135 details>summary{cursor:pointer;font-size:13px;color:#c5dfd0}
+.forge-build-report-v135{font-size:12px;line-height:1.65;color:#c0d6c9}
+.forge-build-report-v135>div{display:flex;flex-wrap:wrap;gap:8px}
+.forge-build-report-v135 span{padding:4px 8px;background:#1a3528;border:1px solid #355646}
+.forge-build-status-v135{font-size:13px;line-height:1.6;margin:14px 0 0;color:#b7e5c8;min-height:1.6em;overflow-wrap:anywhere}
+.forge-build-status-v135[data-error=true]{color:#ffb4b9}
+@media(max-width:900px){.forge-build-grid-v135{grid-template-columns:220px minmax(0,1fr);gap:10px}.forge-build-settings-v135{padding:10px}}
+@media(max-width:620px){.forge-build-grid-v135{grid-template-columns:1fr}.forge-build-settings-v135{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.forge-build-settings-v135 h3,.forge-build-settings-v135>p,.forge-build-settings-v135>.forge-build-pair{grid-column:1/-1}.forge-build-preview-v135 details input{max-width:100%}}
