@@ -30,7 +30,8 @@ import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
-import { HUB_ANNEX_MODULE_ART_V82, getHubAnnexFixturePlanV138, drawHubAnnexFixturesV138 } from './hub-annex-fixtures-v138.js';
+import { HUB_ANNEX_MODULE_ART_V82, getHubAnnexFixturePlanV138, drawHubAnnexFixturesV138, getHubAnnexFixtureAssetsV139 } from './hub-annex-fixtures-v138.js';
+import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 export { HUB_ANNEX_MODULE_ART_V82 } from './hub-annex-fixtures-v138.js';
 
 export * from './hub-v62-runtime.js';
@@ -67,7 +68,7 @@ function createImage(source) {
 }
 
 function annexFromState(state) {
-  return HUB_ANNEX_BY_ID_V71[state?.activeAnnexId] || null;
+  return getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V71[state?.activeAnnexId] || null);
 }
 
 function expanded(bounds, horizontal = INTERACTION_MARGIN, vertical = 28) {
@@ -267,18 +268,22 @@ export class HubGame extends HubGameV62 {
   }
 
   ensureAnnexAssetsV71(annexId) {
-    const annex = HUB_ANNEX_BY_ID_V71[annexId];
+    const annex = getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V71[annexId]);
     if (!annex) return null;
-    if (!this.annexImagesV71.has(annex.id)) {
-      this.annexImagesV71.set(annex.id, new Map((annex.artRoles || HUB_ANNEX_ART_ROLES_V71).map((role) => [
-        role,
-        createImage(annex.art[role])
-      ])));
+    if (!this.annexImagesV71.has(annex.id)) this.annexImagesV71.set(annex.id, new Map());
+    this.annexArtSourcesV139 ||= new Map();
+    if (!this.annexArtSourcesV139.has(annex.id)) this.annexArtSourcesV139.set(annex.id, new Map());
+    const group = this.annexImagesV71.get(annex.id), sources = this.annexArtSourcesV139.get(annex.id);
+    for (const role of annex.artRoles || HUB_ANNEX_ART_ROLES_V71) {
+      const source = annex.art[role];
+      if (sources.get(role) !== source || !group.has(role)) {
+        group.set(role, createImage(source)); sources.set(role, source);
+      }
     }
     const provingAssets = annex.id === 'proving-ground'
       ? [HUB_ANNEX_MODULE_ART_V82.provingWall, HUB_ANNEX_MODULE_ART_V82.provingCeiling]
       : ['animal-care', SHIP_PORT_ANNEX_V87.id, SHIP_REFUGE_ANNEX_V87.id].includes(annex.id) ? [HUB_ANNEX_MODULE_ART_V82.floor] : [];
-    for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets].filter(Boolean)) {
+    for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets, ...getHubAnnexFixtureAssetsV139(annex)].filter(Boolean)) {
       if (!this.annexModularImagesV72.has(asset)) this.annexModularImagesV72.set(asset, createImage(asset));
     }
     return this.annexImagesV71.get(annex.id);
@@ -1031,6 +1036,8 @@ export class HubGame extends HubGameV62 {
       hubCommercialGraphConnectionCountV71: this.hubCommercialGraphV71.edges.length,
       activeAnnexV71: Boolean(annex),
       activeAnnexIdV71: annex?.id || null,
+      hubAnnexNativePlacementV139: annex && this.annexNativePlacementRenderedV139?.roomId === annex.id
+        ? clone(this.annexNativePlacementRenderedV139) : null,
       refugeV87: this.isRefugeActiveV87() ? this.getRefugeSnapshotV87?.() || { active: true } : null,
       annexTransitionV71: this.annexTransitionV71 ? clone(this.annexTransitionV71) : null,
       hubCommercialV71: clone(this.hubCommercialStateV71),
@@ -1110,6 +1117,7 @@ export class HubGame extends HubGameV62 {
   drawAnnexV71() {
     const annex = this.currentAnnexV71();
     if (!annex) return;
+    this.annexNativePlacementRenderedV139 = null;
     const ctx = this.ctx;
     const images = this.ensureAnnexAssetsV71(annex.id);
     ctx.save();
@@ -1123,6 +1131,7 @@ export class HubGame extends HubGameV62 {
       ctx.save(); ctx.translate(-this.annexCameraV71.x, 0);
       this.drawAnnexGeometryV71(ctx, annex);
       drawRefugeLayerV87(ctx, images, { ...presentation, layer: 'decor' });
+      this.drawHubWorkstationSurfaceDetailsV139?.(ctx, { ...annex, xStart: 0 });
       this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds,
         this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door, true);
       this.drawPlayer(ctx);
@@ -1160,6 +1169,7 @@ export class HubGame extends HubGameV62 {
       this.drawAnnexModularPropsV72(ctx, annex);
       this.drawAnnexPropLayerV71(ctx, annex, images.get('prop'));
     }
+    this.drawHubWorkstationSurfaceDetailsV139?.(ctx, { ...annex, xStart: 0 });
     const nearbyExit = this.nearestAnnexExitV71();
     for (const exit of this.annexExitDoorsV137()) {
       this.drawDoorBitmapV71(ctx, images.get('door'), exit.bounds, nearbyExit?.id === exit.id ? 1 : 0, annex.art.alphaBounds.door);
@@ -1260,8 +1270,20 @@ export class HubGame extends HubGameV62 {
   }
 
   drawAnnexPropLayerV71(ctx, annex, image) {
-    if (!imageReady(image)) return;
-    this.drawCroppedBitmapV72(ctx, image, annex.art.alphaBounds.prop, annex.station.bounds);
+    const source = annex.art.alphaBounds.prop;
+    const fitted = fitHubBitmapV72(source, annex.station.bounds);
+    const painted = imageReady(image);
+    if (painted) this.drawCroppedBitmapV72(ctx, image, source, annex.station.bounds);
+    this.annexNativePlacementRenderedV139 = {
+      schema: 139, roomId: annex.id, painted,
+      omittedReason: painted ? null : 'native-image-not-ready',
+      asset: annex.art.prop, image: { width: image?.naturalWidth || 0, height: image?.naturalHeight || 0 },
+      source: { x: source[0], y: source[1], w: source[2] - source[0], h: source[3] - source[1] },
+      target: { ...fitted }, stationBounds: { ...annex.station.bounds },
+      placement: clone(annex.propPlacementV139 || null),
+      layout: clone(annex.annexRuntimeGeometryV139 || null), frameTime: this.animationTime
+    };
+    if (!painted) return;
     if (this.nearestAnnexStationV71()) {
       ctx.save();
       ctx.strokeStyle = '#d9ca79';
@@ -1364,6 +1386,8 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(fitted !== null ? `LOGEMENTS ÉQUIPÉS ${fitted}/${habitats.length}`
       : annex.id === SHIP_PORT_ANNEX_V87.id ? 'COMPTOIR CIVIL · AMARRÉ'
       : this.isRefugeActiveV87() ? 'ESPACE PERSONNEL · SANS COMBAT'
+      : annex.navigationKind === 'ship-service-compartment-v137'
+        ? annexState.station.activated ? 'INSPECTION CONSIGNÉE' : 'INSPECTION À EFFECTUER'
       : annexState.station.activated ? 'STATION CALIBRÉE' : 'STATION À CALIBRER', 492, 67);
     this.drawSinglePromptV71(ctx, this.statusPrompt());
   }

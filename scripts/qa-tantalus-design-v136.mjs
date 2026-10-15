@@ -3,16 +3,17 @@ import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
-import { isAbsolute, join, relative, resolve } from 'node:path';
+import { isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createDefaultSave } from '../src/save.js';
 import { HUB_DECKS } from '../src/hub-game.js';
 import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
-import { getHubInteractionPropBoundsV136 } from '../src/hub-prop-placements-v136.js';
 import { HUB_PROP_ATLAS_V136 } from '../src/hub-prop-atlas-v136.js';
 import { HUB_FURNISHING_ATLAS_V137 } from '../src/hub-furnishing-atlas-v137.js';
 
 const FURNISHING_IMAGE_SOURCES_V137 = Object.freeze([HUB_PROP_ATLAS_V136.asset, HUB_FURNISHING_ATLAS_V137.asset]);
+
+import { HUB_DROPSHIP_HANGAR_ART_V139 } from '../src/hub-dropship-hangar-art-v139.js';
 
 // Four distinct browser journeys exercise navigation, authored composition,
 // human animation, and touch/reflow. They are automated perspectives, not four
@@ -21,7 +22,7 @@ const FURNISHING_IMAGE_SOURCES_V137 = Object.freeze([HUB_PROP_ATLAS_V136.asset, 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = resolve(process.env.ATF_DESIGN_QA_OUTPUT || join(tmpdir(), `atf-tantalus-design-v136-${Date.now()}`));
 const rel = relative(root, output);
-if (!rel || !rel.startsWith('..') && !isAbsolute(rel)) throw Error('QA evidence must remain outside the checkout.');
+if (!rel || rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel)) throw Error('QA evidence must remain outside the checkout.');
 const base = process.env.ATF_BASE_URL || 'http://127.0.0.1:4173';
 const scope = process.env.ATF_DESIGN_QA_SCOPE || 'all';
 const report = { status: 'running', startedAt: new Date().toISOString(), scope,
@@ -37,10 +38,28 @@ async function playwright() {
     throw Error('Existing Playwright installation required.', { cause: error });
   }
 }
+let manifestSequence = 0;
 async function sourceManifest() {
-  const files = (await fs.readdir(join(root, 'src'), { recursive: true })).filter(path => path.endsWith('.js')).map(path => `src/${path}`);
-  files.push('index.html', 'runtime-level.css', 'sw.js');
-  return Object.fromEntries(await Promise.all(files.sort().map(async path => [path, createHash('sha256').update(await fs.readFile(join(root, path))).digest('hex')])));
+  const sources = (await fs.readdir(join(root, 'src'), { recursive: true })).filter(path => path.endsWith('.js')).map(path => `src/${path}`);
+  const assets = (await fs.readdir(join(root, 'assets'), { recursive: true, withFileTypes: true }))
+    .filter(entry => entry.isFile()).map(entry => relative(root, join(entry.parentPath, entry.name)));
+  const files = [...new Set([...sources, ...assets, 'index.html', 'runtime-level.css', 'sw.js'])].sort();
+  const manifest = {};
+  const scriptSha256 = createHash('sha256').update(await fs.readFile(fileURLToPath(import.meta.url))).digest('hex');
+  if (manifestSequence === 0) report.scriptSha256 = scriptSha256;
+  else assert.equal(scriptSha256, report.scriptSha256, 'The actual QA recipe changed during execution.');
+  report.sourceManifestFormat = 'relative-path-sha256-map-v1';
+  report.sourceManifestFiles = { start: 'source-manifest-start.json', end: 'source-manifest-end.json' };
+  // Hash sequentially: the original asset collection is about 1.5 GB; evidence
+  // must cover it without retaining the entire collection in process memory.
+  for (const path of files) manifest[path] = createHash('sha256').update(await fs.readFile(join(root, path))).digest('hex');
+  for (const name of ['furniture-atlas.png', 'service-front-atlas.png', 'ship-front-atlas.png', 'surface-details-atlas.png', 'annex-stations-front-atlas.png', 'dropship-hangar-side.png'])
+    assert.ok(manifest[`assets/openai/hub/props/v139/${name}`], `Required V139 original asset missing: ${name}`);
+  report.sourceFiles = files.length;
+  report.sourceAssetFiles = assets.length;
+  report.v139AssetFiles = assets.filter(path => path.startsWith('assets/openai/hub/props/v139/')).sort();
+  await fs.writeFile(join(output, `source-manifest-${++manifestSequence === 1 ? 'start' : 'end'}.json`), JSON.stringify(manifest, null, 2));
+  return manifest;
 }
 function observed() {
   const h = globalThis.__ATF_HUB__;
@@ -54,7 +73,7 @@ function observed() {
     player: read(h.player), camera: { ...h.camera }, keys: [...h.keys], prompt: h.statusPrompt(),
     lift: h.nearestLift?.()?.shaftId || null, station: h.nearestAnnexStationV71?.()?.annexId || null,
     npcs: h.npcs.map(a => ({ id: a.crewId || a.id, ...read(a), life: a.lifeV136 || null })),
-    presentation: Object.fromEntries(Object.entries(snapshot).filter(([key]) => /136|134/.test(key))) };
+    presentation: Object.fromEntries(Object.entries(snapshot).filter(([key]) => /134|136|137|138|139/.test(key))) };
 }
 const snapshot = () => page.evaluate(observed);
 function fixture(roomId = 'bridge', offset = 620) {
@@ -84,10 +103,66 @@ async function importIdle(save) {
   await page.waitForFunction(() => { const h = globalThis.__ATF_HUB__; return h?.running && h.player?.grounded && h.player.playerAppearanceVisualV126?.drawn; });
   await page.locator('#hub-canvas').focus(); await page.waitForTimeout(300); return snapshot();
 }
+async function inspectDropship(label) {
+  const inHangar = await page.evaluate(() => {
+    const h = globalThis.__ATF_HUB__;
+    return !h.currentAnnexV71?.() && h.currentRoom()?.id === 'dropship-hangar';
+  });
+  if (!inHangar) return null;
+  const art = HUB_DROPSHIP_HANGAR_ART_V139;
+  await page.waitForFunction(({ actorId, asset }) => {
+    const h = globalThis.__ATF_HUB__, image = h.hubLifeImagesV136?.get(asset);
+    return h.getSnapshot().hubRoomLifeV136?.vehicles.some(vehicle => vehicle.actorId === actorId && vehicle.asset === asset)
+      && image?.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
+  }, { actorId: art.actorId, asset: art.asset });
+  const proof = await page.evaluate(art => {
+    const h = globalThis.__ATF_HUB__, image = h.hubLifeImagesV136.get(art.asset);
+    const placement = h.getSnapshot().hubRoomLifeV136.vehicles.find(vehicle => vehicle.actorId === art.actorId);
+    const canvas = document.createElement('canvas'); canvas.width = art.source.w; canvas.height = art.source.h;
+    const context = canvas.getContext('2d', { willReadFrequently: true });
+    context.drawImage(image, art.source.x, art.source.y, art.source.w, art.source.h, 0, 0, art.source.w, art.source.h);
+    const pixels = context.getImageData(0, 0, art.source.w, art.source.h).data;
+    const measuredSupports = art.landingSupports.map(support => {
+      let last = -1, lastRowOpaquePixels = 0;
+      for (let y = 0; y < art.source.h; y++) {
+        let count = 0;
+        for (let x = support.x0; x < support.x1; x++) if (pixels[(y * art.source.w + x) * 4 + 3] >= 192) count++;
+        if (count) { last = y; lastRowOpaquePixels = count; }
+      }
+      return { id: support.id, alphaThreshold: 192, footSourceY: last + 1, lastRowOpaquePixels };
+    });
+    return { placement, image: { src: image.src, width: image.naturalWidth, height: image.naturalHeight, complete: image.complete }, measuredSupports };
+  }, art);
+  const sourceSha256 = createHash('sha256').update(await fs.readFile(join(root, art.asset.slice(1)))).digest('hex');
+  assert.equal(sourceSha256, art.sha256); assert.equal(art.admitted, true);
+  assert.equal(new URL(proof.image.src).pathname, art.asset);
+  assert.equal(proof.image.complete, true); assert.equal(proof.image.width, art.width); assert.equal(proof.image.height, art.height);
+  const p = proof.placement;
+  assert.equal(p.asset, art.asset); assert.equal(p.actorId, art.actorId); assert.equal(p.view, 'strict-side');
+  assert.equal(p.projection, 'strict-side-elevation'); assert.deepEqual(p.source, art.source);
+  const scale = p.renderBounds.w / p.source.w;
+  assert.equal(p.renderBounds.w, 720); assert.ok(Math.abs(scale - p.renderBounds.h / p.source.h) < 1e-8);
+  assert.ok(Math.abs(scale - p.scaleX) < 1e-8); assert.ok(Math.abs(scale - p.scaleY) < 1e-8);
+  assert.equal(p.supportY, 624); assert.equal(p.opaqueFoot.y, 624); assert.equal(p.landingSupports.length, 2);
+  for (const measured of proof.measuredSupports) {
+    const declared = art.landingSupports.find(support => support.id === measured.id);
+    const painted = p.landingSupports.find(support => support.id === measured.id);
+    assert.ok(declared && painted); assert.ok(measured.lastRowOpaquePixels > 0);
+    assert.equal(measured.footSourceY, declared.footSourceY);
+    assert.equal(measured.lastRowOpaquePixels, declared.lastRowOpaquePixels);
+    assert.equal(painted.y, 624);
+    assert.ok(Math.abs(p.renderBounds.y + measured.footSourceY * scale - painted.y) < 1e-8);
+    assert.ok(Math.abs(painted.x0 - p.renderBounds.x - declared.x0 * scale) < 1e-8);
+    assert.ok(Math.abs(painted.x1 - p.renderBounds.x - declared.x1 * scale) < 1e-8);
+  }
+  const evidence = { label, sourceSha256, ...proof };
+  (report.dropshipEvidence ||= []).push(evidence); return evidence;
+}
 async function capture(label, wholePage = false) {
+  const dropship = await inspectDropship(label);
   const file = `${String(++serial).padStart(2, '0')}-${label}.png`;
   const bytes = await (wholePage ? page : page.locator('#hub-canvas')).screenshot({ path: join(output, file), ...(wholePage ? { fullPage: true } : {}) });
-  const item = { file, label, sha256: createHash('sha256').update(bytes).digest('hex'), state: await snapshot() };
+  const item = { file, label, dropship, sha256: createHash('sha256').update(bytes).digest('hex'), state: await snapshot() };
   report.captures.push(item); return item.state;
 }
 function check(label, evidence) { report.checks.push({ label, evidence }); }
@@ -98,7 +173,7 @@ function inspectComposition(state) {
   assert.ok(architecture?.active && life?.active);
   assert.equal(architecture.gameplayPlane, '2d'); assert.equal(architecture.current.planes.walkY, 624);
   assert.equal(life.current.roomId, state.annex || state.room); assert.ok(life.current.items.length >= 2);
-  assert.ok(life.current.items.some(item => FURNISHING_IMAGE_SOURCES_V137.includes(item.source)), 'An original V136 or V137 furnishing image must actually be drawn.');
+  assert.ok(life.current.items.some(item => FURNISHING_IMAGE_SOURCES_V137.includes(item.source)), 'An original admitted furnishing image must actually be drawn.');
   assert.deepEqual(life.current.furnishingV137?.pendingImageRoles, [], 'Every assigned furnishing image must finish painting.');
   assert.ok(life.current.furnishingV137.paintedRoles.length > 0, 'At least one new furnishing role must actually paint.');
   for (const item of life.current.items) {
@@ -132,7 +207,7 @@ async function visitAnnex(id, atStation = null) {
   const bounds = await page.evaluate(id => ({ ...globalThis.__ATF_HUB__.getParentAnnexDoorV71(id).bounds }), id);
   await walkTo(bounds.x + bounds.w / 2 - 22); await capture(`${id}-entrance`); await page.keyboard.press('KeyE');
   await page.waitForFunction(id => globalThis.__ATF_HUB__.currentAnnexV71?.()?.id === id && !globalThis.__ATF_HUB__.annexTransitionV71, id, { timeout: 12000 });
-  const station = getHubInteractionPropBoundsV136(annex);
+  const station = await page.evaluate(() => structuredClone(globalThis.__ATF_HUB__.currentAnnexV71().station.bounds));
   await walkTo(station.x + station.w + 8); const inside = await capture(`${id}-station`);
   assert.equal(inside.annex, id); assert.equal(inside.station, id);
   if (atStation) await atStation(inside);
@@ -178,13 +253,21 @@ async function compositionJourney() {
   const proving = await visitAnnex('proving-ground', async inside => {
     const console = inside.presentation.provingGroundConsoleV136;
     assert.equal(console?.painted, true, 'The special V81 console must actually be drawn.');
+    const native = inside.presentation.hubAnnexNativePlacementV139, placement = native?.placement;
+    assert.equal(native?.painted, true); assert.equal(native.roomId, 'proving-ground');
+    assert.equal(placement?.view, 'strict-side'); assert.equal(native.asset, placement.asset);
+    assert.deepEqual(console.bounds, native.target); assert.deepEqual(console.stationBounds, native.stationBounds);
     const { bounds: b, stationBounds: socket, floorY, sourceOpaqueBounds: source } = console;
     assert.ok([b.x, b.y, b.w, b.h, ...source].every(Number.isFinite));
     assert.ok(Math.abs(b.w / b.h - (source[2] - source[0]) / (source[3] - source[1])) < 1e-8);
-    assert.ok(Math.abs(b.y + b.h - floorY) < 1e-8, 'The visible console foot must meet the actual floor.');
+    const scale = native.target.w / native.source.w;
+    assert.ok(Math.abs(scale - native.target.h / native.source.h) < 1e-8);
+    assert.ok(Math.abs(native.target.y + placement.footSourceY * scale - placement.supportY) < 1e-8,
+      'The measured opaque console foot must meet its actual support.');
+    assert.equal(placement.opaqueFoot.y, floorY);
     assert.ok(b.x >= socket.x - 1e-8 && b.x + b.w <= socket.x + socket.w + 1e-8);
     assert.ok(b.y >= socket.y - 1e-8 && b.y + b.h <= socket.y + socket.h + 1e-8);
-    check('The active Proving Ground console uses its measured opaque source, preserves aspect and fits completely above the floor.', console);
+    check('The active Proving Ground console preserves source aspect and places its measured opaque foot on the real floor, retaining its original transparent crop fringe.', { console, native });
     await page.keyboard.press('KeyE');
     await page.waitForFunction(() => globalThis.__ATF_HUB__.provingGroundStateV81.phase === 'armed');
     const armed = await capture('proving-ground-console-armed');
@@ -268,6 +351,7 @@ async function main() {
   assert.ok(report.journeys.length > 0, 'Unknown QA scope.');
   const after = await sourceManifest(); report.sourceChangedFiles = Object.keys(after).filter(path => before[path] !== after[path]);
   report.sourceSignatureAtEnd = createHash('sha256').update(JSON.stringify(after)).digest('hex'); assert.deepEqual(report.sourceChangedFiles, []);
+  assert.equal(report.sourceSignatureAtStart, report.sourceSignatureAtEnd);
   assert.deepEqual(report.pageErrors, []); assert.deepEqual(report.requestFailures, []); report.status = 'passed';
 }
 await main().catch(async error => { report.status = 'failed'; report.error = { message: error.message, stack: error.stack }; process.exitCode = 1;

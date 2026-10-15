@@ -155,7 +155,7 @@ export function getHubRoomIdentityPlanV137(room,cameraX=0,options={}) {
   }
   if(!bounds)return {...definition,...routes,roomId:room.id,bounds:null,omitted:'no-clear-rear-wall-socket',sourceStatus:'original-project-wall-fixtures'};
   const presentation=getHubRoomPresentationV119(room,options.enabled!==false);
-  const active=definition.type==='exterior'&&presentation.presentationMode==='2.5d'&&!options.reducedMotion;
+  const active=options.enabled!==false&&definition.type==='exterior'&&presentation.presentationMode==='2.5d'&&!options.reducedMotion;
   const eye=finite(cameraX)+640-(start+width/2),drift=active?clamp(eye*.018,-14,14):0;
   return {...definition,...routes,cockpitObservation,roomId:room.id,bounds,frame:{x:bounds.x-5,y:bounds.y-5,w:bounds.w+10,h:bounds.h+10},
     projection:'orthographic-wall-mount',roomPresentationMode:presentation.presentationMode,

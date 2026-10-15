@@ -10,6 +10,8 @@ import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { getHubAnnexFixturePlanV138 } from './hub-annex-fixtures-v138.js';
 import { getHubDestinationSignReservationsV138 } from './hub-destination-signage-v138.js';
 import { getHubRoomPlaqueBoundsV134 } from './hub-room-dressing-v134.js';
+import { getHubSupportPlanesV139, getHubLadderMountV139 } from './hub-support-planes-v139.js';
+import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -27,13 +29,15 @@ export const HUB_SPATIAL_SECTION_V136 = Object.freeze({
   entryClearance: 128, gameplayPlane: '2d', collisionPolicy: 'native-geometry'
 });
 
-export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platforms = [], propBounds = null } = {}) {
+export function getHubSpatialPlanV136(room, { doors = [], ladders = [], vents = [], platforms = [], propBounds = null, depthEnabled = true } = {}) {
+  room = getHubAnnexRuntimeGeometryV139(room);
   if (!room?.id) return null;
   const x = finite(room.xStart), width = finite(room.profile?.worldWidth ?? room.world?.width, 1280);
-  const floorY = finite(room.world?.floorY, 624), delta = floorY - 624;
+  const support = getHubSupportPlanesV139(room, { depthEnabled });
+  const floorY = support.walkY, delta = floorY - 624;
   if (!(width > 0)) return null;
   const ceilingY = room.id === 'personal-refuge' ? 334 : 186;
-  const planes = { walkY: floorY, rearServiceY: 600 + delta, rearWallBaseY: 566 + delta, ceilingY };
+  const planes = { walkY: floorY, rearServiceY: support.rearServiceY, rearWallBaseY: 566 + delta, ceilingY };
   const reserve = (bounds, role, margin = 14) => validBounds(bounds) && reservations.push({ ...expanded(bounds, margin), role });
   const reservations = [
     { x, y: ceilingY, w: 128, h: floorY - ceilingY, role: 'west-transition' },
@@ -75,14 +79,24 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platform
     portalTargetForBounds: bounds => getHubRecessedPortalV136(bounds)?.target
   })) reserve(sign, 'destination-sign', 0);
   for (const ladder of ladders) {
-    const width = finite(ladder.w, 52), left = ladder.x - (ladder.centered === false || room.world ? 0 : width / 2);
-    if (left + width < x || left > x + (room.profile?.worldWidth ?? room.world?.width ?? 1280)) continue;
-    reserve({ x: left, y: ladder.top, w: width, h: ladder.bottom - ladder.top }, 'ladder-clearance', 20);
+    const mount = getHubLadderMountV139(ladder, { centered: !(ladder.centered === false || room.world) });
+    if (!mount || mount.visualBounds.x + mount.visualBounds.w < x || mount.visualBounds.x > x + width) continue;
+    reserve(mount.visualBounds, 'ladder-clearance', 20);
+  }
+  // Native hatches render after the wall furnishings. Keep their complete
+  // graphic rectangle and the existing 64px crawl approach free of wall stock.
+  // These are scenery exclusions; the vent collider and interaction stay native.
+  for (const vent of vents) {
+    if (!validBounds(vent) || vent.roomId && vent.roomId !== room.id
+      || vent.x + vent.w < x || vent.x > x + width) continue;
+    reserve(vent, 'native-vent', 8);
+    reserve({ x: vent.x - 64, y: vent.y, w: vent.w + 128, h: vent.h }, 'vent-approach', 0);
   }
   for (const platform of platforms) if (platform.type !== 'floor' && platform.role !== 'floor') reserve(platform, 'maintenance-deck', 8);
-  const presentation = getHubRoomPresentationV119(room);
+  const presentation = getHubRoomPresentationV119(room, depthEnabled);
   return { id: room.id, bounds: { x, y: ceilingY, w: width, h: floorY - ceilingY }, planes,
-    presentationMode: presentation.presentationMode, projection: { kind: 'parallel-oblique', dxPerY: 19 / 12 },
+    presentationMode: presentation.presentationMode, projection: {
+      kind: support.projectionDxPerY ? 'parallel-oblique' : 'orthographic', dxPerY: support.projectionDxPerY },
     floorMode: presentation.presentationMode === '2.5d' ? 'parallel-oblique' : 'orthographic',
     reservations, serviceAnchors: Array.from({ length: Math.max(0, Math.floor((width - 256) / 192)) }, (_, index) => ({
       x: x + 176 + index * 192, y: planes.rearServiceY, plane: 'rear-service', collidable: false
@@ -92,7 +106,10 @@ export function getHubSpatialPlanV136(room, { doors = [], ladders = [], platform
 export function hubSpatialPlacementClearV136(bounds, plan, { margin = 0 } = {}) {
   if (!validBounds(bounds) || !plan?.bounds || !Array.isArray(plan.reservations)) return false;
   const b = expanded(bounds, Math.max(0, finite(margin))), p = plan.bounds;
-  return b.x >= p.x && b.x + b.w <= p.x + p.w && b.y >= p.y && b.y + b.h <= plan.planes.walkY
+  // A clearance envelope is space around a fitting, not an extra foot below
+  // its floor. Keep real feet on the support; retain the full margin against
+  // doors, access corridors and neighbouring reserved equipment.
+  return bounds.x >= p.x && bounds.x + bounds.w <= p.x + p.w && bounds.y >= p.y && bounds.y + bounds.h <= plan.planes.walkY
     && !plan.reservations.some(reservation => overlap(b, reservation));
 }
 
@@ -103,7 +120,9 @@ export function getHubSpatialFloorV136(room, { height = 720, enabled = true } = 
   const plan = getHubSpatialPlanV136(room);
   if (!plan) return null;
   const { x, w } = plan.bounds, y = plan.planes.walkY, bottom = Math.max(y, finite(height, 720));
-  const factor = enabled && plan.floorMode === 'parallel-oblique' ? plan.projection.dxPerY : 0;
+  // F7 controls background motion, never a partial projection conversion of
+  // a room whose props, actors, portals and physical supports stay authored.
+  const factor = plan.floorMode === 'parallel-oblique' ? plan.projection.dxPerY : 0;
   const shift = (bottom - y) * factor;
   return { roomId: plan.id, bounds: { x, y: y + 4, w, h: Math.max(0, bottom - y - 4) },
     mode: factor ? 'parallel-oblique' : 'orthographic', dxPerY: factor, walkY: y, bottom,
@@ -185,22 +204,22 @@ function drawPortalSurround(ctx, model, active) {
 }
 
 export function drawHubSpatialLadderV136(ctx, ladder, { centered = true } = {}) {
-  if (!ctx || !(ladder?.bottom > ladder?.top)) return false;
-  const width = Math.max(42, Math.min(52, finite(ladder.w, 52))), left = ladder.x - (centered ? width / 2 : 0);
-  const height = ladder.bottom - ladder.top;
+  const mount = getHubLadderMountV139(ladder, { centered });
+  if (!ctx || !mount) return false;
+  const { width, left, railTop, railBottom } = mount, height = railBottom - railTop;
   ctx.save();
   // The two rails have a narrow return face; rungs sit between their inner
   // edges rather than forming a bright barcode pasted over the whole wall.
   for (const x of [left, left + width - 6]) {
-    ctx.fillStyle = '#243b3e'; ctx.fillRect(x, ladder.top, 6, height);
-    ctx.fillStyle = '#617b7b'; ctx.fillRect(x + 1, ladder.top, 2, height);
-    ctx.fillStyle = '#0c2025'; ctx.fillRect(x + 5, ladder.top, 2, height);
-    for (const y of [ladder.top + 4, ladder.bottom - 13]) {
+    ctx.fillStyle = '#243b3e'; ctx.fillRect(x, railTop, 6, height);
+    ctx.fillStyle = '#617b7b'; ctx.fillRect(x + 1, railTop, 2, height);
+    ctx.fillStyle = '#0c2025'; ctx.fillRect(x + 5, railTop, 2, height);
+    for (const y of [railTop + 4, ladder.top + 4, railBottom - 13]) {
       ctx.fillStyle = '#354f52'; ctx.fillRect(x - 5, y, 15, 8);
       ctx.fillStyle = '#91a09b'; ctx.fillRect(x + 2, y + 3, 2, 2);
     }
   }
-  for (let y = ladder.top + 13; y < ladder.bottom - 5; y += 23) {
+  for (const { y } of mount.rungs) {
     ctx.fillStyle = '#182f34'; ctx.fillRect(left + 6, y + 3, width - 12, 3);
     ctx.fillStyle = '#657f7d'; ctx.fillRect(left + 6, y, width - 12, 3);
     ctx.fillStyle = '#99aba1'; ctx.fillRect(left + 8, y, width - 16, 1);
@@ -274,7 +293,8 @@ export function withHubSpatialDesignV136(Base) {
       const snapshot = super.getSnapshot(), room = this.currentAnnexV71?.() || this.currentRoom?.();
       const plan = room ? getHubSpatialPlanV136(room.world ? { ...room, xStart: 0 } : room, {
         doors: this.currentAnnexV71?.() ? [] : this.doorStates,
-        ladders: room.ladders || this.v51Ladders, platforms: room.platforms || this.v51Platforms
+        ladders: room.ladders || this.v51Ladders, vents: room.world ? room.vents || [] : this.v51Vents || [],
+        platforms: room.platforms || this.v51Platforms
       }) : null;
       return { ...snapshot, hubSpatialDesignV136: { active: !this.editorPlaytest, current: plan,
         floor: this.hubSpatialFloorsV136?.get(room?.id) || null,

@@ -83,13 +83,13 @@ test('all thirteen physical annexes render their purpose without changing statio
   assert.deepEqual(subject.save.galaxy.resources,stock);assert.deepEqual(subject.save.crew,crew);
  }
 });
-test('front room layers preserve source projection while clipping entirely below the real walk rail',()=>{
+test('V139 retires the clipped legacy foreground bitmap and retains only a narrow architectural floor rim',()=>{
  const subject=host(),room={xStart:1280,profile:{worldWidth:1280,sceneScale:1,floorRatio:.82},world:{floorY:624}};
  const image={complete:true,naturalWidth:1800,naturalHeight:1000},entry={phase:'front',renderBounds:{x:0,y:0,w:1280,h:640}};
  drawHubAuthoredLayerV133(subject.ctx,image,entry,room);
- assert.deepEqual(subject.rects.find(entry=>entry.kind==='clip').bounds,[1280,628,1280,92]);
- assert.deepEqual(subject.images[0].bounds.slice(0,4),[0,0,1800,1000]);
- assert.equal(subject.images[0].bounds[7],640);subject.balanced();
+ assert.deepEqual(subject.rects.find(entry=>entry.kind==='clip').bounds,[1280,706,1280,14]);
+ assert.equal(subject.images.length,0,'No detached ladder or machinery pixels survive the old floor clip');
+ assert.ok(subject.rects.filter(entry=>entry.kind==='fill').every(entry=>entry.bounds[1]>=706));subject.balanced();
 });
 test('original steel aligns deck edges, supporting rear posts and ladder rungs with actual traversal bounds',()=>{
  const subject=host(),platform={x:100,y:460,w:300,h:18},ladder={x:180,w:52,top:460,bottom:624},before=structuredClone({platform,ladder});
@@ -99,9 +99,14 @@ test('original steel aligns deck edges, supporting rear posts and ladder rungs w
  assert.ok(subject.rects.some(entry=>entry.kind==='fill'&&entry.bounds.join(',')==='160,470,40,4'));
  assert.equal(subject.images.length,0);assert.deepEqual({platform,ladder},before);subject.balanced();
 });
-test('services have real transparent gaps and the forward conduits remain below the actor rail',()=>{
- const subject=host();drawHubSteelServicesV133(subject.ctx,{x:0,y:506,w:320,h:192,art:'foregroundPipes'});
- assert.deepEqual(subject.rects.find(entry=>entry.kind==='clip').bounds,[0,628,320,92]);
+test('closed underfloor service covers stay within floor+8..+24 and ceiling services keep their authored beam',()=>{
+ const subject=host(),occlusion={x:0,y:506,w:320,h:192,art:'foregroundPipes'},before=structuredClone(occlusion);
+ drawHubSteelServicesV133(subject.ctx,occlusion);
+ assert.deepEqual(subject.rects.find(entry=>entry.kind==='clip').bounds,[0,632,320,16]);
+ const cover=subject.rects.filter(entry=>entry.kind==='fill');
+ assert.deepEqual(cover.map(entry=>entry.bounds),[[0,632,320,16],[0,632,320,2],[0,645,320,3]]);
+ assert.ok(cover.every(entry=>entry.bounds[1]>=632&&entry.bounds[1]+entry.bounds[3]<=648));
+ assert.deepEqual(occlusion,before);
  drawHubSteelServicesV133(subject.ctx,{x:60,y:-12,w:520,h:126,art:'ceilingCables'});
  assert.equal(subject.images.length,0);subject.balanced();
 });

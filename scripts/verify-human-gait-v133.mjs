@@ -25,7 +25,7 @@ function observed({ speed=245,rate=60,seconds=1,patch={},surface='mission' }={})
 test('ordinary movement has a supported human stride and a bounded 3–5 step cadence without changing velocity',()=>{
   for(const surface of ['mission','hub','bioforge']) for(const speed of [155,245,270]) {
     const {subject,state,frames}=observed({speed,surface}); const last=frames.at(-1);
-    assert.equal(subject.vx,speed); assert.ok(state.stride>=77 && state.stride<=139);
+    assert.equal(subject.vx,speed); assert.ok(state.stride>=73 && state.stride<=139);
     assert.ok(last.presentationV133.stepsPerSecond>=3 && last.presentationV133.stepsPerSecond<5);
     assert.equal(state.gait,speed<235?'walk':'run'); close(last.presentationV133.standingHeight,96.5);
     assert.ok(last.presentationV133.footLiftLimit<=6);

@@ -57,8 +57,17 @@ test('all sixteen authored room props and parked hulls leave the human walking l
   const geometry=buildHubObstacleGeometryV87(deck);
   assert.equal(validateHubWalkingLaneV133(geometry,{maximumX:HUB_WORLD.width-24}).valid,true);
   for(const room of HUB_DECKS[deck].rooms){assert.equal(room.collisionSource,'authored-room-profile');
+   if(room.propPlacementV139?.visible===false){
+    assert.ok(['vehicle-bay','dropship-hangar'].includes(room.id));
+    assert.equal(room.propCollisionBounds,null);assert.equal(room.propInteractionBounds,null);
+    assert.equal(room.geometry.length,0,'An omitted duplicate hoist cannot leave a phantom physical support');
+    continue;
+   }
    assert.equal(room.propCollisionBounds.collisionMode,'one-way-top');assert.equal(room.propCollisionBounds.physicalPlane,'rear');
-   assert.equal(room.propRenderBounds.x+room.propRenderBounds.w/2,room.x);
+   assert.equal(room.propPlacementV139.inspectionX,room.x);
+   const surface=room.propPlacementV139.usefulSurface?.bounds;
+   if(surface)assert.ok(Math.abs(room.x-(surface.x+surface.w/2))<1e-8,'Inspection follows the actual useful surface');
+   assert.ok(room.x>=room.propRenderBounds.x&&room.x<=room.propRenderBounds.x+room.propRenderBounds.w);
    assert.ok(room.geometry.length>0);
   }
  }

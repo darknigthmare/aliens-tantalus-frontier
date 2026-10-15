@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-tantalus-v138-shell-1';
+const CACHE = 'atf-v86-tantalus-v139-support-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -55,6 +55,16 @@ const CORE = [
   '/src/hub-destination-signage-v138.js', '/src/hub-destination-signage-runtime-v138.js',
   '/src/hub-interior-wall-atlas-v138.js', '/src/hub-compartment-shell-v138.js',
   '/assets/openai/hub/layers/v138/interior-wall-atlas.png',
+  '/src/hub-annex-station-atlas-v139.js',
+  '/src/hub-dropship-hangar-art-v139.js', '/assets/openai/hub/props/v139/dropship-hangar-side.png',
+  '/src/hub-clinical-bay-v139.js',
+  '/src/hub-room-projection-v139.js', '/src/hub-furnishing-annex-revisions-v139.js',
+  '/src/hub-support-planes-v139.js', '/src/hub-service-geometry-v139.js',
+  '/src/hub-annex-runtime-geometry-v139.js', '/src/hub-furnishing-contact-v139.js',
+  '/src/hub-furniture-atlas-v139.js', '/src/hub-surface-details-atlas-v139.js', '/src/hub-workstation-details-v139.js',
+  '/assets/openai/hub/props/v139/annex-stations-front-atlas.png',
+  '/assets/openai/hub/props/v139/service-front-atlas.png', '/assets/openai/hub/props/v139/ship-front-atlas.png',
+  '/assets/openai/hub/props/v139/furniture-atlas.png', '/assets/openai/hub/props/v139/surface-details-atlas.png',
   '/src/weapon-actions-v131.js', '/src/apc-course-v131.js', '/src/special-operations-v131.js', '/src/operation-receipts-v131.js',
   '/src/hive-control-v131.js', '/src/hive-missions-v131.js', '/src/hive-command-ui-v131.js',
   '/src/mecha-systems-v131.js', '/src/mecha-missions-v131.js',

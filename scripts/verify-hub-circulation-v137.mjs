@@ -9,6 +9,7 @@ import { HUB_TRAVERSAL_PROFILES_V60, buildHubTraversalGeometryV87 } from '../src
 import { HUB_SHIP_SPACES_V137, HUB_SHIP_PARENT_LANDINGS_V137, getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { HUB_SERVICE_STANDARD_V137, resolveHubServiceProfileV137 } from '../src/hub-service-geometry-v137.js';
 import { HUB_RETIRED_SERVICE_LANDINGS_V138, HUB_MEDICAL_SERVICE_APPROACH_V138 as medicalApproach } from '../src/hub-service-geometry-v138.js';
+import { HUB_SERVICE_APPROACHES_V139 } from '../src/hub-service-geometry-v139.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { HUB_CIRCULATION_STANDARD_V137, getHubCirculationPlanV137,
   drawHubCirculationV137, withHubCirculationV137, getHubServiceConduitPlanV137,
@@ -88,8 +89,9 @@ test('service re-spacing preserves historical profiles, retained supports and al
         if (retired) { assert.equal(actual, undefined, original.id + ' must be retired with its access'); continue; }
         const medicalSurface = bucket === 'platforms' && medicalApproach.surfaces[original.id];
         const medicalLadder = bucket === 'ladders' && original.id === medicalApproach.ladderId;
+        const rearAccess = bucket === 'ladders' && HUB_SERVICE_APPROACHES_V139.find(entry => entry.ladderId === original.id);
         assert.ok(actual, original.id);
-        assert.equal(actual.x, (medicalLadder ? medicalApproach.ladderX : medicalSurface?.x ?? original.x) + room.xStart);
+        assert.equal(actual.x, (medicalLadder ? medicalApproach.ladderX : rearAccess ? rearAccess.ladderX : medicalSurface?.x ?? original.x) + room.xStart);
         assert.equal(actual.w, medicalSurface?.w ?? original.w);
         if (bucket === 'platforms') assert.equal(actual.h, original.h);
         if (bucket === 'vents') assert.equal(actual.h, original.h);
@@ -158,14 +160,18 @@ test('painted destinations identify real supported vents or the physically joine
   assert.deepEqual(noDestination.destinations, []);
 });
 
-test('compact rooms and the depth-off setting retain their orthographic section while large ship bays share the door projection', () => {
+test('whole frontal rooms retain their orthographic section while only the maintenance corridor uses the approved depth projection', () => {
   const platform = { id: 'deck', x: 200, y: 400, w: 400, h: 20 };
   const bridge = getHubCirculationPlanV137(platform, { room: HUB_DECKS[0].rooms[0] });
   const medical = getHubCirculationPlanV137(platform, { room: HUB_DECKS[1].rooms[2] });
-  const disabled = getHubCirculationPlanV137(platform, { room: HUB_DECKS[0].rooms[0], depthEnabled: false });
-  near(bridge.depthDx / bridge.depthY, 19 / 12); assert.equal(bridge.presentationMode, '2.5d');
+  const maintenance=HUB_SHIP_SPACES_V137.find(room=>room.id==='maintenance-spine');
+  const oblique=getHubCirculationPlanV137(platform,{room:maintenance});
+  const disabled = getHubCirculationPlanV137(platform, { room: maintenance, depthEnabled: false });
+  assert.equal(bridge.depthDx,0);assert.equal(bridge.presentationMode,'2d');
+  near(oblique.depthDx / oblique.depthY, 19 / 12); assert.equal(oblique.presentationMode, '2.5d');
   assert.equal(medical.depthDx, 0); assert.equal(medical.presentationMode, '2d');
-  assert.equal(disabled.depthDx, 0); assert.equal(disabled.presentationMode, '2d');
+  assert.equal(disabled.depthDx, oblique.depthDx);assert.equal(disabled.depthY,oblique.depthY);
+  assert.equal(disabled.presentationMode,'2.5d','F7 cannot flatten only the navigation of a depth room');
 });
 
 test('rendered circulation aligns the native foot rail, shares the room depth vector, preserves caller state and leaves ladder apertures visible', () => {
@@ -173,13 +179,15 @@ test('rendered circulation aligns the native foot rail, shares the room depth ve
   const platform = geometry.platforms.find(surface => surface.id === 'bridge-low');
   const before = structuredClone({ geometry, room }), subject = canvas();
   const plan = drawHubCirculationV137(subject.ctx, platform, { ...geometry, room });
-  assert.equal(plan.footY, platform.y); near(plan.depthDx / plan.depthY, 19 / 12);
+  assert.equal(plan.footY, platform.y); assert.equal(plan.depthDx,0);assert.equal(plan.depthY,0);
   const frontEdge = subject.fills.find(fill => fill.color === '#7b918f');
-  assert.equal(frontEdge.bounds[1], platform.y); assert.equal(frontEdge.bounds[2], platform.w);
+  // V139 keeps the native line as the back edge and splits the front lip at
+  // the real ladder bay rather than painting one solid bar over its access.
+  assert.deepEqual(frontEdge.bounds, [plan.frontFaces[0].x, platform.y + plan.depthY, plan.frontFaces[0].w, 2]);
   assert.ok(subject.fills.every(fill => fill.bounds[3] <= 34));
   for (const stroke of subject.strokes.filter(stroke => stroke.color === '#3c565a')) {
-    const left = Math.min(...stroke.path.map(point => point[0])) - plan.depthDx;
-    const right = Math.max(...stroke.path.map(point => point[0])) - plan.depthDx;
+    const left = Math.min(...stroke.path.map(point => point[0]));
+    const right = Math.max(...stroke.path.map(point => point[0]));
     assert.ok(plan.openings.every(opening => right <= opening.left || left >= opening.right));
   }
   assert.deepEqual({ geometry, room }, before); subject.balanced();

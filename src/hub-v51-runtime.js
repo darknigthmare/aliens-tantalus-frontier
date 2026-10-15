@@ -13,7 +13,7 @@ import {
 } from './hub-game.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
-import { resolveHubServiceProfileV138 } from './hub-service-geometry-v138.js';
+import { resolveHubServiceProfileV139 } from './hub-service-geometry-v139.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -336,7 +336,7 @@ function fallbackTraversal(deck) {
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
     const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
-    const profile = resolveHubServiceProfileV138(HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge);
+    const profile = resolveHubServiceProfileV139(HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge);
     archetypes.push(profile.archetype);
     platforms.push(...profile.platforms.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
     ladders.push(...profile.ladders.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
@@ -346,7 +346,7 @@ function fallbackTraversal(deck) {
   return {
     platforms, ladders, vents, occluders, archetypes,
     route: {
-      id: `deck-${deck + 1}-vertical-route`, source: 'authored-functional-service-v138',
+      id: `deck-${deck + 1}-vertical-route`, source: 'authored-functional-service-v139',
       nodeCount: platforms.length + 4,
       verticalLinks: ladders.length,
       crawlLinks: vents.length,
@@ -580,7 +580,12 @@ export class HubGame extends HubGameV50 {
       const horizontalExit = (left || right) && !up && !down;
       const beyondEndpoint = atLadderTop && up || atLadderBottom && down;
       if (ladder && (up || down) && !beyondEndpoint && !horizontalExit) this.player.climbing = true;
-      if (this.player.climbing && (!ladder || beyondEndpoint || horizontalExit)) this.player.climbing = false;
+      if (this.player.climbing && (!ladder || beyondEndpoint || horizontalExit)) {
+        this.player.climbing = false;
+        // Endpoint contact ends the ladder drive; gravity and the real support
+        // resolver take over without retaining an unintended climbing impulse.
+        if (beyondEndpoint) this.player.vy = 0;
+      }
       this.player.crouching = !controlsLocked && this.keys.has('KeyC') && this.player.grounded && !this.player.climbing;
       const sprinting = this.keys.has('ShiftLeft') || this.keys.has('ShiftRight');
       const speed = this.player.crouching ? 105 : sprinting ? 370 : 270;
@@ -1068,13 +1073,12 @@ export class HubGame extends HubGameV50 {
 
   drawPlayer(ctx) {
     if (this.player?.crouching) {
-      const grounded = this.player.grounded;
-      this.player.grounded = true;
       const vx = this.player.vx;
       this.player.vx = 0;
-      super.drawPlayer(ctx);
-      this.player.vx = vx;
-      this.player.grounded = grounded;
+      // Pose selection must not invent a physical support while crouching in
+      // the air. Contact shadows and the body rig observe the real grounding.
+      try { super.drawPlayer(ctx); }
+      finally { this.player.vx = vx; }
       return;
     }
     super.drawPlayer(ctx);

@@ -19,11 +19,17 @@ export function advanceHumanPatrolAnimationV133(previous, actor, clip, timeSecon
   const physical = prior && moving && Math.abs(dx) <= Math.max(8, speed * (time - prior.time) * 2 + 4)
     && dx * finite(actor.vx) >= 0;
   const stature = Math.min(96.5, Math.max(24, finite(actor.h, 92)));
-  const stride = stature * (speed >= 235 || clip.id === 'run' ? 1.2 : clamp(.32 + speed / 300, .4, 1.02));
+  const stride = stature * (speed >= 235 || clip.id === 'run' ? 1.5 : clamp(.42 + speed / 350, .44, .8));
   const distance = (prior && (!moving || physical) ? prior.distance : 0) + (physical ? Math.abs(dx) : 0);
+  // A changing patrol speed must not redivide all its historical distance by
+  // a new stride and jump backwards through the atlas. Only new world travel
+  // spends phase; trapezoidal stride integration also keeps smooth ramps stable.
+  const continued = prior && (!moving || physical);
+  const previousCycles = continued ? finite(prior.cycles, prior.distance / prior.stride) : 0;
+  const cycles = previousCycles + (physical ? Math.abs(dx) * .5 * (1 / stride + 1 / prior.stride) : 0);
   return Object.freeze({ schema: 133, signature, context, time, x: actor.x, y: actor.y,
-    distance, stride, moving, reseeded: !prior || moving && !physical,
-    step: Math.floor(distance / stride * clip.frames.length + 1e-9),
+    distance, stride, cycles, moving, reseeded: !prior || moving && !physical,
+    step: Math.floor(cycles * clip.frames.length + 1e-9),
     suppressEvents: !moving || !physical || reducedMotion,
     stepsPerSecond: moving ? speed * 2 / stride : 0 });
 }

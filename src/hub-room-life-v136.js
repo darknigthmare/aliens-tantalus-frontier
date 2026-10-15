@@ -6,6 +6,15 @@ import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_PROP_ATLAS_V136, getHubPropAtlasCellV136 } from './hub-prop-atlas-v136.js';
 import { HUB_FURNISHING_ATLAS_V137 } from './hub-furnishing-atlas-v137.js';
 import { HUB_ROOM_FURNISHING_V137, enrichHubRoomCompositionV137, drawHubFurnishingMountsV137 } from './hub-room-furnishing-v137.js';
+import { HUB_FURNITURE_ATLAS_V139 } from './hub-furniture-atlas-v139.js';
+import { HUB_SURFACE_DETAILS_ATLAS_V139 } from './hub-surface-details-atlas-v139.js';
+import { HUB_FURNISHING_CONTACTS_V139, getHubFurnishingFootSourceV139, getHubFurnishingPlacementBoundsV139 } from './hub-furnishing-contact-v139.js';
+import { getHubWorkstationDetailPlanV139, drawHubWorkstationDetailsV139 } from './hub-workstation-details-v139.js';
+import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
+import { getHubClinicalBayPlanV139, drawHubClinicalBayV139 } from './hub-clinical-bay-v139.js';
+import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
+import { drawHubRearShellV133 } from './hub-authored-composition-v133.js';
+import { HUB_DROPSHIP_HANGAR_ART_V139 } from './hub-dropship-hangar-art-v139.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -25,7 +34,7 @@ export const HUB_ROOM_LIFE_V136 = freeze({
   bridge: room('watch-reference-and-navigation-spares','command',[pack('personal',270,392,106,'watch-reference'),pack('records',1042,450,108,'navigation-records')]),
   briefing: room('briefing-material-and-crew-notes','command',[pack('records',880,240,120,'briefing-folders'),pack('personal',560,250,90,'meeting-supplies')]),
   'combat-information': room('radio-service-and-signal-records','command',[pack('maintenance',1040,390,112,'radio-spares'),pack('records',650,328,96,'watch-records')]),
-  'cryo-bay': room('stasis-monitoring-and-sterile-supply','clinical',[pack('sterile',780,300,116,'capsule-supplies'),pack('maintenance',870,300,90,'stasis-service-kit')]),
+  'cryo-bay': room('stasis-monitoring-and-sterile-supply','clinical',[pack('sterile',780,240,116,'capsule-supplies'),pack('maintenance',870,240,90,'stasis-service-kit')]),
   'crew-quarters': room('personal-effects-and-berth-maintenance','habitat',[pack('personal',200,388,126,'personal-effects'),pack('personal',1070,390,104,'berth-effects')]),
   mess: room('meal-preparation-and-shared-tableware','habitat',[pack('galley',250,390,130,'clean-tableware'),pack('galley',940,376,118,'drink-supplies')]),
   medical: room('sterile-storage-and-bedside-care','clinical',[pack('sterile',600,394,126,'sterile-consumables'),pack('sterile',1050,378,114,'bedside-supplies')]),
@@ -34,8 +43,8 @@ export const HUB_ROOM_LIFE_V136 = freeze({
   armory: room('armorer-tools-and-issue-records','industrial',[pack('maintenance',760,286,122,'armorer-tools'),pack('records',1000,320,104,'issue-records')]),
   workshop: room('repair-tools-and-bench-stock','industrial',[pack('maintenance',220,378,122,'repair-tools'),pack('maintenance',1060,394,108,'bench-stock')]),
   'vehicle-bay': room('vehicle-service-and-inspection-stock','industrial',[pack('maintenance',630,302,128,'inspection-tools'),pack('maintenance',1050,368,102,'vehicle-service-stock')]),
-  'dropship-hangar': room('flight-support-and-safety-stock','industrial',[pack('maintenance',262,236,110,'ground-support-kit'),
-    pack('records',710,236,80,'flight-checklists'),pack('maintenance',830,236,72,'gantry-service-tools')]),
+  'dropship-hangar': room('flight-support-and-safety-stock','industrial',[pack('maintenance',666,240,110,'ground-support-kit'),
+    pack('records',750,240,80,'flight-checklists'),pack('maintenance',830,240,72,'gantry-service-tools')]),
   reactor: room('electrical-isolation-and-spare-fittings','industrial',[pack('maintenance',670,300,122,'isolation-tools'),pack('maintenance',1050,332,106,'reactor-fittings')]),
   'life-support': room('air-treatment-and-filter-service','industrial',[pack('maintenance',710,378,126,'filter-service-kit'),pack('sterile',1060,380,100,'air-circuit-supplies')]),
   'sensor-array': room('array-calibration-and-signal-records','command',[pack('maintenance',710,308,116,'calibration-tools'),pack('records',1060,340,106,'signal-records')]),
@@ -73,6 +82,7 @@ const heightCaps = freeze({locker:106,'medical-cabinet':106,'equipment-rack':106
 // Explicit adjustments to existing fittings after native pipes and actual deck
 // consoles gained shared silhouettes. They retain the original kind/material.
 export const HUB_LEGACY_FIXTURE_PLACEMENTS_V138=freeze({
+  'combat-information':[{kind:'chronometers',role:'tactical-reference',y:258}],
   'life-support':[{kind:'cylinder',sourceX:166,x:150},{kind:'filter-stack',x:400,height:70}],
   'arrival-airlock':[{kind:'vent',role:'airlock-controls',x:1540}],
   'proving-ground':[{kind:'tool-board',role:'range-protection-stock',x:1280}],
@@ -93,13 +103,15 @@ function wallTop(kind,height,plan) {
 }
 
 export function getHubRoomLifePlanV136(room,options={}) {
+  room=getHubAnnexRuntimeGeometryV139(room);
   const definition=HUB_ROOM_LIFE_V136[room?.id],original=HUB_ROOM_DRESSING_V134[room?.id];
-  if(!definition||!original)return enrichHubRoomCompositionV137(room,null,options);
+  const complete=composition=>composition&&({...composition,workstationDetailsV139:getHubWorkstationDetailPlanV139(room,composition),clinicalBayV139:getHubClinicalBayPlanV139(room,composition)});
+  if(!definition||!original)return complete(enrichHubRoomCompositionV137(room,null,options));
   // The background pass precedes drawTraversal: decks remain in front of wall
   // equipment. Reserve entrances and climbing corridors, rather than deleting
   // all scenery from behind a long, transparent maintenance deck.
   const spatial=getHubSpatialPlanV136(room,{...options,platforms:[]}),start=spatial.bounds.x,items=[],legacyOmissionsV138=[];
-  const accept=entry=>hubSpatialPlacementClearV136(entry,spatial,{margin:3})&&!items.some(existing=>overlap(existing,entry));
+  const accept=entry=>hubSpatialPlacementClearV136(getHubFurnishingPlacementBoundsV139(entry),spatial,{margin:3})&&!items.some(existing=>overlap(existing,entry));
   const recordOmission=entry=>legacyOmissionsV138.push({kind:entry.kind,role:entry.role,
     bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h},reason:'native-clearance-or-existing-task-equipment',
     reservations:spatial.reservations.filter(reservation=>overlap(entry,reservation)).map(reservation=>reservation.role)});
@@ -118,26 +130,32 @@ export function getHubRoomLifePlanV136(room,options={}) {
   }
   for(const source of original.items){
     if(source.kind==='medical-cart'){
+      const footSourceY=getHubFurnishingFootSourceV139(136,getHubPropAtlasCellV136('medical-trolley'));
       const cell=getHubPropAtlasCellV136('medical-trolley'),entry={...source,kind:'bitmap',cell:cell.id,
         asset:HUB_SERVICE_PROP_ATLAS_V136.asset,source:{...cell.source},w:cell.width,h:cell.height,
-        x:start+finite(trolleySockets[room.id],source.x+source.w/2)-cell.width/2,y:spatial.planes.rearServiceY-cell.height,
+        x:start+finite(trolleySockets[room.id],source.x+source.w/2)-cell.width/2,y:spatial.planes.rearServiceY-footSourceY*cell.width/cell.source.w,
+        footSourceYV139:footSourceY,contactYV139:spatial.planes.rearServiceY,
         perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
       if(accept(entry))items.push(entry);else recordOmission(entry);
       continue;
     }
     const adjusted=HUB_LEGACY_FIXTURE_PLACEMENTS_V138[room.id]?.find(entry=>entry.kind===source.kind
       &&(!entry.role||entry.role===source.role)&&(entry.sourceX==null||entry.sourceX===source.x));
-    const height=adjusted?.height??(source.kind==='bitmap'?Math.min(source.h,106):Math.min(source.h,heightCaps[source.kind]||source.h));
+    const nativeContact=source.kind==='bitmap'&&HUB_FURNISHING_CONTACTS_V139.assets[source.asset];
+    const height=adjusted?.height??(nativeContact?nativeContact.sourceHeight*nativeContact.capacityScale:
+      source.kind==='bitmap'?Math.min(source.h,106):Math.min(source.h,heightCaps[source.kind]||source.h));
     const scale=height/source.h,width=source.w*scale;
     const entry={...source,x:start+(adjusted?.x??source.x+source.w/2)-width/2,w:width,h:height,
-      y:source.support==='rear-floor'?spatial.planes.rearServiceY-height:wallTop(source.kind,height,spatial),
+      y:source.support==='rear-floor'?spatial.planes.rearServiceY-(nativeContact?nativeContact.footSourceY*height/nativeContact.sourceHeight:height):adjusted?.y??wallTop(source.kind,height,spatial),
+      ...(source.support==='rear-floor'?{contactYV139:spatial.planes.rearServiceY,
+        ...(nativeContact?{footSourceYV139:nativeContact.footSourceY,nativeSourceHeightV139:nativeContact.sourceHeight}:{} )}:{}),
       perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
     if(accept(entry))items.push(entry);else recordOmission(entry);
   }
-  return enrichHubRoomCompositionV137(room,{schema:136,roomId:room.id,task:definition.task,theme:definition.theme,accent:original.accent,
+  return complete(enrichHubRoomCompositionV137(room,{schema:136,roomId:room.id,task:definition.task,theme:definition.theme,accent:original.accent,
     start,width:spatial.bounds.w,floorY:spatial.planes.walkY,top:spatial.planes.ceilingY,
     items,supplies,spatial,legacyOmissionsV138,sourceStatus:'existing-equipment-rescaled-and-original-small-supplies',
-    collidable:false,interactive:false,gameplayPlane:'2d'},options);
+    collidable:false,interactive:false,gameplayPlane:'2d'},options));
 }
 
 export function getHubRoomLifeMotionV136(time=0,{reducedMotion=false}={}) {
@@ -171,17 +189,23 @@ function drawFixtureDetails(ctx,composition,motion) {
 export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMotion=false,...options}={}) {
   const composition=getHubRoomLifePlanV136(room,options);
   if(!ctx||!composition)return null;
+  const clinicalBay=drawHubClinicalBayV139(ctx,composition.clinicalBayV139);
   drawHubFurnishingMountsV137(ctx,composition);
   const rendered=drawHubRoomDressingV134(ctx,room,{images,composition});
   const paintedRoles=new Set(rendered.items.map(entry=>entry.role));
-  ctx.save();ctx.beginPath();ctx.rect(composition.start+112,composition.top,composition.width-224,composition.floorY-composition.top-4);ctx.clip();
+  const detailPlan={...composition.workstationDetailsV139,items:composition.workstationDetailsV139.items.filter(item=>item.hostType==='native'||paintedRoles.has(item.hostRole))};
+  const surfaceDetails=drawHubWorkstationDetailsV139(ctx,detailPlan,{images,hostType:'furnishing'});
+  const missingHostDetails=composition.workstationDetailsV139.items.filter(item=>item.hostType==='furnishing'&&!paintedRoles.has(item.hostRole)).map(item=>item.role);
+  ctx.save();ctx.beginPath();ctx.rect(composition.start+112,composition.top,composition.width-224,composition.floorY-composition.top);ctx.clip();
   const motion=getHubRoomLifeMotionV136(time,{reducedMotion});drawFixtureDetails(ctx,composition,motion);ctx.restore();
   return {schema:composition.schema,roomId:room.id,task:composition.task,theme:composition.theme,
     planes:{...composition.spatial.planes},projection:{...composition.spatial.projection},
     items:rendered.items.map(entry=>({...entry,motif:composition.task})),supplies:composition.supplies.map(entry=>({role:entry.role,cell:entry.cell,bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h}})),
     reservations:structuredClone(composition.spatial.reservations),preservedCriticalSpaces:true,
     legacyOmissionsV138:structuredClone(composition.legacyOmissionsV138),
-    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,
+    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,clinicalBayV139:clinicalBay,
+    workstationDetailsV139:{plan:composition.workstationDetailsV139,surfaces:composition.workstationDetailsV139.surfaces,
+      omitted:composition.workstationDetailsV139.omitted,painted:surfaceDetails?.painted||[],pending:[...surfaceDetails?.pending||[],...missingHostDetails]},
     furnishingV137:composition.furnishingV137?{...structuredClone(composition.furnishingV137),
       paintedRoles:composition.furnishingV137.added.filter(entry=>paintedRoles.has(entry.role)).map(entry=>entry.role),
       pendingImageRoles:composition.furnishingV137.added.filter(entry=>!paintedRoles.has(entry.role)).map(entry=>entry.role)}:null};
@@ -192,6 +216,26 @@ export function withHubRoomLifeV136(Base) {
   return class HubRoomLifeV136 extends Base{
     static hubRoomLifeV136=true;
     getHubActorRenderBoundsV136(actor,room){return getHubVehiclePlacementV136(room,actor)?.renderBounds||null;}
+    drawModularHangar(ctx,room,phase){
+      if(this.editorPlaytest||room?.id!==HUB_DROPSHIP_HANGAR_ART_V139.roomId||phase!=='back')return super.drawModularHangar(ctx,room,phase);
+      if(!this.drawHubSpatialRearV136?.(ctx,room))drawHubRearShellV133(ctx,room);
+      ctx.save();ctx.beginPath();ctx.rect(room.xStart,0,room.profile?.worldWidth||1280,720);ctx.clip();
+      for(const entry of DROPSHIP_HANGAR_ART_V55.renderStack){
+        if(entry.phase!=='back'||entry.kind==='visual-layer'||!entry.asset)continue;
+        const dropship=entry.id===HUB_DROPSHIP_HANGAR_ART_V139.actorId;
+        const placement=dropship?getHubVehiclePlacementV136(room,entry):null;
+        const image=dropship?this.ensureHubLifeAssetsV136().get(placement.asset):this.hubArtImages?.get(entry.asset);
+        if(!ready(image))continue;
+        const target=placement?.renderBounds||{...entry.renderBounds,x:room.xStart+entry.renderBounds.x};
+        const source=dropship?placement.source:entry.sourceCrop;
+        ctx.save();
+        if(entry.kind==='station-prop'&&this.nearestInteraction()?.id===entry.id){ctx.shadowColor='rgba(226,203,121,.62)';ctx.shadowBlur=8;}
+        if(entry.kind==='electrical')ctx.globalAlpha=this.reducedMotion?.78:Math.max(.38,Math.min(.94,.64+Math.sin(this.animationTime*13)*.22));
+        ctx.drawImage(resolveSpriteDrawableV134(image),source.x,source.y,source.w,source.h,target.x,target.y,target.w,target.h);ctx.restore();
+        if(dropship){this.hubVehiclesRenderedV136||=new Map();this.hubVehiclesRenderedV136.set(entry.id,placement);}
+      }
+      ctx.restore();return true;
+    }
     drawVehicleBayActorV58(ctx,room){
       if(this.editorPlaytest)return super.drawVehicleBayActorV58(ctx,room);
       const actor=resolveHubVehicleArtV58(room.id)?.vehicle,placement=getHubVehiclePlacementV136(room,actor);
@@ -208,7 +252,7 @@ export function withHubRoomLifeV136(Base) {
       if(!this.hubLifeImagesV136){
         this.hubLifeImagesV136=new Map(this.propImages||[]);
         if(typeof globalThis.Image==='function'){
-          for(const asset of [HUB_SERVICE_PROP_ATLAS_V136.asset,HUB_FURNISHING_ATLAS_V137.asset]){
+          for(const asset of [HUB_SERVICE_PROP_ATLAS_V136.asset,HUB_FURNISHING_ATLAS_V137.asset,HUB_FURNITURE_ATLAS_V139.asset,HUB_SURFACE_DETAILS_ATLAS_V139.asset,HUB_DROPSHIP_HANGAR_ART_V139.asset]){
             const image=new Image();image.decoding='async';image.src=asset;this.hubLifeImagesV136.set(asset,image);
           }
         }
@@ -219,17 +263,38 @@ export function withHubRoomLifeV136(Base) {
       if(this.editorPlaytest)return null;
       const options={images:this.ensureHubLifeAssetsV136(),time:this.animationTime,reducedMotion:this.reducedMotion,
         doors:room.world?[]:this.doorStates||[],ladders:room.world?room.ladders||[]:this.v51Ladders||[],
+        vents:room.world?room.vents||[]:this.v51Vents||[],
         platforms:room.world?room.platforms||[]:(this.v51Platforms||[]).filter(p=>p.x<room.xEnd&&p.x+p.w>room.xStart)};
       const report=drawHubRoomLifeV136(ctx,room,options);
-      if(report){this.hubRoomLifeRenderedV136||=new Map();this.hubRoomLifeRenderedV136.set(room.id,report);}
+      if(report){this.hubRoomLifeRenderedV136||=new Map();this.hubRoomLifeRenderedV136.set(room.id,report);
+        this.hubWorkstationDetailPlansV139||=new Map();this.hubWorkstationDetailPlansV139.set(room.id,report.workstationDetailsV139.plan);}
       return report;
     }
+    drawInteractionProp(ctx,room){
+      const result=super.drawInteractionProp(ctx,room);
+      if(!this.editorPlaytest)this.drawHubWorkstationSurfaceDetailsV139(ctx,room);
+      return result;
+    }
+    drawHubWorkstationSurfaceDetailsV139(ctx,room){
+      if(this.editorPlaytest||!room?.id)return null;
+      const plan=this.hubWorkstationDetailPlansV139?.get(room.id);if(!plan)return null;
+      const asset=room.propPlacementV139?.asset||room.prop;
+      const hostImage=room.world?this.ensureAnnexAssetsV71?.(room.id)?.get('prop'):this.propImages?.get(asset);
+      const report=ready(hostImage)?drawHubWorkstationDetailsV139(ctx,plan,{images:this.ensureHubLifeAssetsV136(),hostType:'native'}):
+        {schema:139,roomId:room.id,painted:[],pending:plan.items.filter(item=>item.hostType==='native').map(item=>item.role),hostReady:false};
+      this.hubNativeWorkstationDetailsV139||=new Map();this.hubNativeWorkstationDetailsV139.set(room.id,report);return report;
+    }
     getSnapshot(){
-      const current=this.currentAnnexV71?.()||this.currentRoom?.(),rendered=this.editorPlaytest?[]:structuredClone([...this.hubRoomLifeRenderedV136?.values()||[]]);
+      const current=this.currentAnnexV71?.()||this.currentRoom?.(),rendered=this.editorPlaytest?[]:structuredClone([...this.hubRoomLifeRenderedV136?.values()||[]].map(entry=>{
+        const native=this.hubNativeWorkstationDetailsV139?.get(entry.roomId),details=entry.workstationDetailsV139;
+        return{...entry,workstationDetailsV139:details&&{...details,
+          painted:[...details.painted,...native?.painted||[]],pending:[...details.pending,...native?.pending||[]]}};
+      }));
       return {...super.getSnapshot(),hubRoomLifeV136:{active:!this.editorPlaytest,rooms:Object.keys(HUB_ROOM_FURNISHING_V137).length,
         current:rendered.find(entry=>entry.roomId===current?.id)||null,rendered,
         vehicles:this.editorPlaytest?[]:structuredClone([...this.hubVehiclesRenderedV136?.values()||[]]),
         nativeFixtures:this.editorPlaytest?[]:structuredClone([...this.annexFixturesRenderedV138?.values()||[]]),
+        nativeSurfaceDetailsV139:this.editorPlaytest?[]:structuredClone([...this.hubNativeWorkstationDetailsV139?.values()||[]]),
         sourceStatus:'authored-task-groups-and-original-separated-ship-furnishings',collidable:false,interactive:false}};
     }
   };

@@ -8,6 +8,8 @@ import {buildHubDoorNetworkV58} from '../src/topology-coherence-v58.js';
 import {HUB_ANNEXES_V137} from '../src/hub-annex-registry-v137.js';
 import {HUB_ROOM_PARALLAX_V134,getHubRoomParallaxPlanV134,getHubNativeWallTilesV134,getHubRearEquipmentLayoutV134,drawHubRoomParallaxV134,withHubRoomParallaxV134} from '../src/hub-room-parallax-v134.js';
 import {HUB_ENVIRONMENT_ATLAS_V134} from '../src/hub-environment-atlas-v134.js';
+import {getHubRoomProjectionV139} from '../src/hub-room-projection-v139.js';
+import {getHubSupportPlanesV139} from '../src/hub-support-planes-v139.js';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 function dimensions(path){const b=readFileSync(root+path.replace(/^\//,''));
@@ -27,10 +29,10 @@ function host(){let depth=0;const images=[],clips=[],draws=[];const ctx=new Prox
   fillRect(...r){draws.push(r);},createLinearGradient:()=>({addColorStop(){}})
 },{get:(object,key)=>key in object?object[key]:()=>{}});return{ctx,images,clips,draws,balanced:()=>assert.equal(depth,0)};}
 
-test('all 16 ship rooms and 19 annexes have an explicit visual-only projection',()=>{
+test('all 35 whole compartments use 34 frontal projections and only the authored maintenance spine uses parallel depth',()=>{
  assert.equal(rooms.length,35);assert.equal(Object.keys(HUB_ROOM_PARALLAX_V134).length,35);
- assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2.5d').length,15);
- assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2d').length,20);
+ assert.deepEqual(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2.5d').map(c=>c.roomId||c.id),['maintenance-spine']);
+ assert.equal(Object.values(HUB_ROOM_PARALLAX_V134).filter(c=>c.presentationMode==='2d').length,34);
  for(const room of rooms){const p=getHubRoomParallaxPlanV134(room,room.xStart);assert.ok(p,room.id);
    assert.equal(p.gameplayPlane,'2d');assert.equal(p.collidable,false);assert.equal(p.bounds.x,room.xStart);
    assert.equal(p.bounds.w,room.profile?.worldWidth||room.world.width);assert.ok(p.bounds.y+p.bounds.h<624);
@@ -62,10 +64,15 @@ test('the three reviewed depth planes move differently in real screen coordinate
  }
 });
 
-test('compact rooms, reduced motion and disabled visual depth keep a stationary orthographic projection',()=>{
+test('F7 and reduced motion stop parallax while preserving the entire compartment projection and every physical position',()=>{
  for(const room of rooms){for(const options of [{reducedMotion:true},{enabled:false},...(HUB_ROOM_PARALLAX_V134[room.id].presentationMode==='2d'?[{}]:[])]){
    const first=getHubRoomParallaxPlanV134(room,-999999,options),second=getHubRoomParallaxPlanV134(room,999999,options);
-   assert.deepEqual(first.layers,second.layers);assert.ok(first.layers.every(layer=>layer.drift===0&&layer.factor===0));}}
+   const active=getHubRoomParallaxPlanV134(room,999999),geometry=structuredClone({station:room.station,colliders:room.colliders,ladders:room.ladders,platforms:room.platforms});
+   assert.deepEqual(first.layers,second.layers);assert.ok(first.layers.every(layer=>layer.drift===0&&layer.factor===0));
+   assert.equal(first.presentationMode,active.presentationMode);assert.equal(first.presentationMode,getHubRoomProjectionV139(room).mode);
+   assert.deepEqual(first.bounds,active.bounds);assert.equal(first.gameplayPlane,active.gameplayPlane);
+   assert.deepEqual(getHubSupportPlanesV139(room,{depthEnabled:false}),getHubSupportPlanesV139(room));
+   assert.deepEqual({station:room.station,colliders:room.colliders,ladders:room.ladders,platforms:room.platforms},geometry);}}
 });
 
 test('renderer clips native pixels and all architecture to the local rear plane, leaves inputs unchanged and balances Canvas state',()=>{
@@ -128,7 +135,7 @@ test('original equipment atlas occupies only available wall bays at human scale 
 
 test('mounted equipment keeps its physical wall socket across the full camera range and reduced-motion settings',()=>{
  const atlas=image(HUB_ENVIRONMENT_ATLAS_V134.asset);
- let reactorChecked=false;
+ let briefingChecked=false;
  for(const room of rooms){
    const deck=HUB_DECKS.findIndex(entry=>entry.rooms.some(candidate=>candidate.id===room.id));
    const geometry=deck<0?room:buildHubTraversalGeometryV87(deck);
@@ -137,8 +144,8 @@ test('mounted equipment keeps its physical wall socket across the full camera ra
    const center=(room.xStart||0)+(room.world?.width||1280)/2-640;
    for(const options of [nativeOptions,{ladders:geometry.ladders,platforms:geometry.platforms}]){
    let mounts;
-   for(const delta of [-10000,-640,-160,0,160,640,10000])for(const reducedMotion of [false,true]){
-     const model=getHubRoomParallaxPlanV134(room,center+delta,{reducedMotion});
+   for(const delta of [-10000,-640,-160,0,160,640,10000])for(const reducedMotion of [false,true])for(const enabled of [false,true]){
+     const model=getHubRoomParallaxPlanV134(room,center+delta,{reducedMotion,enabled});
      const panels=getHubRearEquipmentLayoutV134(room,model,atlas,options);
      const current=panels.map(panel=>({source:panel.source,socket:panel.socketBounds,envelope:panel.driftEnvelope,mirrored:panel.mirrored}));
      if(mounts)assert.deepEqual(current,mounts,`${room.id}: the camera must not select another wall bay`);
@@ -147,9 +154,9 @@ test('mounted equipment keeps its physical wall socket across the full camera ra
        assert.ok(target.x>=envelope.x-1e-8&&target.x+target.w<=envelope.x+envelope.w+1e-8,room.id);
        assert.ok(Math.abs(target.x-panel.socketBounds.x-model.layers[1].drift)<1e-8,room.id);
      }
-     if(room.id==='reactor'&&!options.doors){assert.ok(panels.length>0,'The regression must exercise actual mounted reactor equipment');reactorChecked=true;}
+     if(room.id==='briefing'&&!options.doors){assert.ok(panels.length>0,'The regression must exercise actual mounted briefing equipment');briefingChecked=true;}
    }
    }
  }
- assert.equal(reactorChecked,true);
+ assert.equal(briefingChecked,true);
 });

@@ -28,10 +28,11 @@ export function humanFootTravelV136(progress) {
 export function humanFootSwingV136(progress, duty, stride) {
   const t = unit(progress), support = Math.max(.25, Math.min(.85, finite(duty, .6)));
   const length = Math.max(0, finite(stride));
-  // Clear the deck early, hold a small clearance through recovery, then lower
-  // the boot smoothly. A narrow sine-like apex left the ankle too low while
-  // the foot was still behind the hip, forcing an exaggerated pelvis squat.
-  const liftWeight = smoothHumanStepV136(t / .25) * smoothHumanStepV136((1 - t) / .25);
+  // Clear the deck early, then extend the knee through late recovery instead
+  // of holding it high for most of the swing. The septic ends also make the
+  // lift's acceleration continuous when a boot leaves or meets the deck.
+  const clear = value => { const p=unit(value); return p**4*(35+p*(-84+p*(70-20*p))); };
+  const liftWeight = clear(t / .1) * clear((1 - t) / .75);
   return Object.freeze({ offset: length * (-support / 2 - (1 - support) * t + humanFootTravelV136(t)),
     liftWeight, rollWeight: liftWeight });
 }
@@ -45,7 +46,7 @@ export function humanMotionEnvelopeV136(state, stride) {
   return entrance * settle;
 }
 
-export const HUMAN_PELVIS_HEIGHT_V136 = Object.freeze({ standing: 94, crouching: 52 });
+export const HUMAN_PELVIS_HEIGHT_V136 = Object.freeze({ standing: 104, crouching: 52 });
 // Hip-to-ankle lengths fit the existing 193px standing stature and belt. They
 // are shared with ladders/casualties; changing stance cannot resize a femur.
 export const HUMAN_LEG_DIMENSIONS_V136 = Object.freeze({ upperLeg: 48, lowerLeg: 47 });

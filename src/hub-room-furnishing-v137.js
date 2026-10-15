@@ -6,6 +6,11 @@ import { HUB_FURNISHING_ATLAS_V137, getHubFurnishingCellV137 } from './hub-furni
 import { getHubRoomIdentityReservationsV137 } from './hub-room-identity-v137.js';
 import { getHubCirculationSolidReservationsV138 } from './hub-circulation-v137.js';
 import { HUB_FURNISHING_CRITICAL_OVERRIDES_V138 } from './hub-furnishing-critical-v138.js';
+import { HUB_FURNITURE_ATLAS_V139, getHubFurnitureCellV139 } from './hub-furniture-atlas-v139.js';
+import { getHubFurnishingFootSourceV139, getHubFurnishingPlacementBoundsV139 } from './hub-furnishing-contact-v139.js';
+import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
+import { reviseHubAnnexFurnishingsV139 } from './hub-furnishing-annex-revisions-v139.js';
+import { getHubClinicalBayReservationsV139 } from './hub-clinical-bay-v139.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -25,20 +30,23 @@ const group = (task,items,replaceKinds=[]) => ({task,items,replaceKinds});
  * work surfaces and service fittings behind the standing walking plane. */
 export const HUB_ROOM_FURNISHING_V137 = freeze({
   bridge: group('watch-seat-and-reference',[
-    furnishing('cockpit-seat',350,72,'watch-officer-seat'),wall('emergency-cabinet',1020,535,44,'bridge-fire-safety')
-  ],['chair','chart-cart']),
+    furnishing('seat-side',1027,40,'watch-officer-seat',{atlas:139}),wall('emergency-cabinet',1110,535,44,'bridge-fire-safety')
+  ],['chair','chart-cart','case']),
   briefing: group('meeting-material-and-seating',[
-    equipment('chair',950,30,50,'meeting-visitor-seat'),wall('emergency-cabinet',900,535,40,'briefing-fire-safety')
-  ]),
+    equipment('bench',660,88,36,'meeting-waiting-bench'),wall('emergency-cabinet',900,535,40,'briefing-fire-safety')
+  ],['chair']),
   'combat-information': group('signal-service-and-watch-safety',[
-    equipment('radio-rack',550,58,106,'signal-spare-receiver'),wall('emergency-cabinet',490,535,40,'signal-fire-safety')
-  ],['handset']), // The native radio console replaces the handset behind its deck bracket.
+    equipment('radio-rack',850,58,80,'signal-spare-receiver'),wall('emergency-cabinet',1120,535,40,'signal-fire-safety'),
+    furnishing('seat-side',650,40,'tactical-watch-seat',{atlas:139})
+  ],['handset','cable-spool']),
   'cryo-bay': group('stasis-service-and-emergency-oxygen',[
-    equipment('cylinder',550,22,76,'stasis-oxygen-reserve'),wall('emergency-cabinet',650,535,40,'stasis-emergency-kit')
+    equipment('cylinder',550,22,76,'stasis-oxygen-reserve'),wall('emergency-cabinet',650,535,40,'stasis-emergency-kit'),
+    equipment('work-counter',715,56,46,'stasis-clean-linen-cart')
   ],['cable-run']), // The existing stasis manifold and reachable kit replace the loose line fragment.
   'crew-quarters': group('bolted-berth-and-personal-storage',[
-    wall('crew-berth',440,376,152,'upper-crew-berth'),wall('emergency-cabinet',1100,535,38,'quarters-fire-safety')
-  ],['shelf']),
+    {...wall('crew-berth',440,376,154,'upper-crew-berth'),mountKindV139:'cantilever-berth'},
+    wall('emergency-cabinet',1100,535,38,'quarters-fire-safety'),equipment('stool',1128,28,32,'crew-bedside-table')
+  ],['shelf','stool']),
   mess: group('galley-return-and-shared-dining',[
     furnishing('galley-unit',565,166,'galley-return-counter'),furnishing('food-refrigerator',930,78,'chilled-drink-storage')
   ],['galley','chair']),
@@ -55,25 +63,27 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
     equipment('medical-cabinet',500,58,106,'sealed-clean-storage'),wall('emergency-cabinet',1090,475,40,'containment-emergency-kit')
   ]),
   armory: group('secure-issue-and-inspection',[
-    equipment('tool-chest',600,70,62,'armorer-service-chest'),wall('emergency-cabinet',950,535,40,'armory-fire-safety')
+    equipment('tool-chest',600,70,54,'armorer-service-chest'),wall('emergency-cabinet',950,535,40,'armory-fire-safety')
   ]),
   workshop: group('bench-stock-and-safe-repair',[
     equipment('tool-chest',575,68,62,'shop-service-chest'),wall('emergency-cabinet',710,535,40,'shop-fire-safety')
   ],['cylinder','cable-spool','parts-bin']),
   'vehicle-bay': group('inspection-supplies-outside-vehicle-bay',[
-    wall('emergency-cabinet',925,390,40,'vehicle-fire-safety'),wall('service-conduits',600,250,146,'vehicle-service-feed')
+    wall('emergency-cabinet',820,372,40,'vehicle-fire-safety'),wall('service-conduits',600,250,146,'vehicle-service-feed')
   ]),
   'dropship-hangar': group('flight-safety-outside-aircraft-silhouette',[
     wall('emergency-cabinet',900,248,40,'hangar-fire-safety')
   ]),
   reactor: group('electrical-isolation-and-mechanical-feed',[
-    wall('service-conduits',1020,275,170,'power-service-feed'),wall('emergency-cabinet',300,535,40,'electrical-fire-safety')
+    wall('service-conduits',1020,275,170,'power-service-feed'),wall('emergency-cabinet',315,535,40,'electrical-fire-safety'),
+    equipment('tool-chest',650,62,48,'reactor-service-chest')
   ]),
   'life-support': group('air-treatment-and-replaceable-filters',[
-    wall('service-conduits',1060,300,146,'air-treatment-feed'),wall('emergency-cabinet',530,535,40,'air-service-emergency-kit')
-  ]),
+    wall('service-conduits',1060,260,146,'air-treatment-feed'),wall('emergency-cabinet',530,535,40,'air-service-emergency-kit'),
+    equipment('work-counter',410,76,46,'air-filter-service-counter')
+  ],['filter-stack']),
   'sensor-array': group('array-service-and-signal-spares',[
-    wall('service-conduits',1030,265,146,'array-service-feed'),equipment('radio-rack',310,54,106,'array-spare-receiver')
+    wall('service-conduits',1030,265,146,'array-service-feed'),equipment('radio-rack',650,54,66,'array-spare-receiver')
   ],['case']),
   'arrival-airlock': group('clean-arrival-and-emergency-support',[
     wall('emergency-cabinet',400,535,42,'airlock-fire-safety'),equipment('bench',900,86,36,'arrival-equipment-bench')
@@ -106,13 +116,17 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
     wall('emergency-cabinet',1470,535,42,'biological-emergency-kit')
   ]),
   'animal-care': group('habitat-hygiene-and-emergency-stock',[
-    wall('emergency-cabinet',1520,470,38,'habitat-emergency-kit')
+    wall('emergency-cabinet',1520,470,38,'habitat-emergency-kit'),
+    equipment('work-counter',1000,74,46,'habitat-clean-preparation'),
+    {...furnishing('wall-handwash',1070,40,'habitat-handwash',{support:'rear-wall',atlas:139}),workSurfaceHeightV139:52}
   ]),
   'frontier-civil-counter': group('waiting-comfort-and-emergency-access',[
-    wall('emergency-cabinet',2330,535,42,'port-fire-safety'),wall('service-conduits',2350,350,146,'port-service-feed')
+    wall('emergency-cabinet',2330,535,42,'port-fire-safety'),wall('service-conduits',2350,350,146,'port-service-feed'),
+    equipment('work-counter',1570,80,46,'civil-records-counter')
   ]),
   'personal-refuge': group('private-rest-and-reading',[
-    wall('crew-berth',1350,450,152,'private-bolted-berth')
+    {...wall('crew-berth',1350,450,154,'private-bolted-berth'),mountKindV139:'cantilever-berth'},
+    equipment('stool',1170,42,32,'private-reading-table')
   ]),
   'flight-control-cockpit': group('flight-instruments-and-service-records',[
     equipment('radio-rack',350,60,106,'flight-spare-receiver'),equipment('chart-cart',560,62,46,'flight-checklist-cart'),
@@ -123,11 +137,13 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
   'galley-service': group('cold-storage-cleaning-and-preparation',[
     furnishing('food-refrigerator',550,88,'galley-cold-storage'),equipment('parts-bin',330,84,64,'dry-food-locker'),
     wall('galley-rack',700,475,84,'galley-clean-tableware',136),wall('galley-rack',1060,470,84,'galley-preparation-supplies',136),
-    equipment('bin',1090,28,42,'galley-sorted-waste'),wall('emergency-cabinet',1050,535,42,'galley-fire-safety')
+    equipment('bin',1090,28,42,'galley-sorted-waste'),wall('emergency-cabinet',1050,535,42,'galley-fire-safety'),
+    equipment('work-counter',680,110,46,'galley-preparation-counter')
   ]),
   'sanitary-bay': group('clean-linen-lockers-and-wet-service',[
     equipment('locker',370,54,106,'sanitary-personal-locker-west'),equipment('locker',500,54,106,'sanitary-personal-locker-east'),
-    equipment('bin',630,30,42,'used-linen-hamper'),wall('sterile-cabinet',650,470,80,'sanitary-clean-linen',136),
+    equipment('bin',730,30,42,'used-linen-hamper'),wall('sterile-cabinet',650,470,80,'sanitary-clean-linen',136),
+    equipment('work-counter',640,74,48,'sanitary-clean-linen-counter'),
     wall('service-conduits',910,300,170,'sanitary-water-feed'),wall('emergency-cabinet',1100,535,42,'sanitary-emergency-kit')
   ]),
   'engine-room': group('mechanical-drive-service-and-isolation',[
@@ -139,7 +155,7 @@ export const HUB_ROOM_FURNISHING_V137 = freeze({
   'water-recycling': group('filter-service-clean-spares-and-flow-control',[
     equipment('cylinder',350,24,76,'water-service-reservoir'),equipment('cylinder',430,24,76,'water-clean-reservoir'),
     equipment('tool-chest',590,68,62,'water-service-chest'),wall('sterile-cabinet',500,470,80,'water-clean-filter-stock',136),
-    wall('service-conduits',900,447,146,'water-return-feed'),wall('emergency-cabinet',1100,535,42,'water-emergency-kit')
+    wall('service-conduits',900,443,146,'water-return-feed'),wall('emergency-cabinet',1100,535,42,'water-emergency-kit')
   ]),
   'maintenance-spine': group('through-route-distribution-and-service-stock',[
     equipment('tool-chest',380,70,62,'maintenance-west-service-chest'),equipment('parts-bin',1100,76,64,'maintenance-central-spares'),
@@ -167,16 +183,26 @@ function materialize(definition,spatial) {
   const x=spatial.bounds.x+definition.x,support=definition.support;
   let entry;
   if(definition.cell){
-    const cell=definition.atlas===136?getHubPropAtlasCellV136(definition.cell):getHubFurnishingCellV137(definition.cell);
+    const cell=definition.atlas===139?getHubFurnitureCellV139(definition.cell):definition.atlas===136?getHubPropAtlasCellV136(definition.cell):getHubFurnishingCellV137(definition.cell);
     if(!cell)return null;
-    const w=Math.min(definition.width,cell.source.w),h=w*cell.source.h/cell.source.w;
-    entry={kind:'bitmap',cell:cell.id,asset:definition.atlas===136?HUB_PROP_ATLAS_V136.asset:HUB_FURNISHING_ATLAS_V137.asset,
-      source:{...cell.source},x:x-w/2,y:definition.y??spatial.planes.rearServiceY-h,w,h};
+    const w=Math.min(definition.width,cell.source.w,definition.atlas===139?cell.width:Infinity),scale=w/cell.source.w,h=cell.source.h*scale;
+    const footSourceY=getHubFurnishingFootSourceV139(definition.atlas,cell),surfaceSource=definition.usefulSurfaceSourceV139||cell.usefulSurfaceSource;
+    const y=definition.y??(definition.workSurfaceHeightV139!=null&&surfaceSource
+      ?spatial.planes.rearServiceY-definition.workSurfaceHeightV139-surfaceSource.y*scale
+      :spatial.planes.rearServiceY-footSourceY*scale);
+    entry={kind:'bitmap',cell:cell.id,asset:definition.atlas===139?HUB_FURNITURE_ATLAS_V139.asset:definition.atlas===136?HUB_PROP_ATLAS_V136.asset:HUB_FURNISHING_ATLAS_V137.asset,
+      source:{...cell.source},x:x-w/2,y,w,h,footSourceYV139:footSourceY,contactYV139:y+footSourceY*scale,
+      artProjectionV139:cell.projection||'original-measured-sprite'};
+    if(surfaceSource){const b={x:entry.x+surfaceSource.x*scale,y:entry.y+surfaceSource.y*scale,w:surfaceSource.w*scale,h:surfaceSource.h*scale};
+      entry.usefulSurfaceV139={id:`${definition.role}-useful-surface`,kind:surfaceSource.kind||'worktop',bounds:b,supportY:b.y,
+        side:'visible-front',occupied:[],sourceStatus:'measured-original-source-surface'};}
   }else{
     entry={kind:definition.kind,x:x-definition.width/2,y:definition.y??spatial.planes.rearServiceY-definition.height,
-      w:definition.width,h:definition.height};
+      w:definition.width,h:definition.height,contactYV139:spatial.planes.rearServiceY,cleanSurfaceV139:!!definition.cleanSurfaceV139};
   }
+  if(definition.mountKindV139==='cantilever-berth')entry.mountBoundsV139={x:entry.x,y:entry.y-6,w:entry.w,h:entry.h+24};
   return {...entry,role:definition.role,support,plane:'rear',collidable:false,interactive:false,
+    mirroredV139:!!definition.mirroredV139,mountKindV139:definition.mountKindV139||null,
     furnishingV137:true,perspective:spatial.projection.kind,projectionDxPerY:spatial.projection.dxPerY};
 }
 
@@ -187,7 +213,7 @@ export function getHubFurnishingStructuralReservationsV138(room,options={}){
   for(const platform of options.platforms||room.platforms||[]){
     if(!room.world&&platform.roomId!==room.id)continue;
     for(const depthEnabled of [true,false])for(const bounds of getHubCirculationSolidReservationsV138(platform,{
-      room,ladders:options.ladders||room.ladders||[],vents:options.vents||[],
+      room,ladders:options.ladders||room.ladders||[],vents:options.vents||room.vents||[],
       platforms:options.platforms||room.platforms||[],centeredLadders:!room.world,depthEnabled
     })){
       const key=[bounds.x,bounds.y,bounds.w,bounds.h,bounds.role].join(':');
@@ -198,21 +224,23 @@ export function getHubFurnishingStructuralReservationsV138(room,options={}){
 }
 
 export function enrichHubRoomCompositionV137(room, basePlan=null, options={}) {
+  room=getHubAnnexRuntimeGeometryV139(room);
   // The explicit override is also used by authoring review to evaluate a
   // complete proposed group against the live native geometry before saving it.
   const originalDefinition=HUB_ROOM_FURNISHING_V137[room?.id];
-  const definition=originalDefinition&&{...originalDefinition,...HUB_FURNISHING_CRITICAL_OVERRIDES_V138[room?.id],...options.furnishingDefinition};
+  const definition=originalDefinition&&reviseHubAnnexFurnishingsV139(room,
+    {...originalDefinition,...HUB_FURNISHING_CRITICAL_OVERRIDES_V138[room?.id],...options.furnishingDefinition});
   if(!definition)return basePlan;
   const spatial=getHubSpatialPlanV136(room,{...options,platforms:[]});
   if(!spatial)return basePlan;
   const equipmentReservations=getHubRearEquipmentReservationsV137(room,options);
   const identityReservations=getHubRoomIdentityReservationsV137(room,options);
   const structuralReservations=getHubFurnishingStructuralReservationsV138(room,options);
-  const plan={...spatial,reservations:[...spatial.reservations,...equipmentReservations,...identityReservations,...structuralReservations]};
+  const plan={...spatial,reservations:[...spatial.reservations,...equipmentReservations,...identityReservations,...structuralReservations,...getHubClinicalBayReservationsV139(room)]};
   const legacyOmissionsV138=[...basePlan?.legacyOmissionsV138||[]];
   const items=(basePlan?.items||[]).filter(item=>{
     const replaced=definition.replaceKinds.includes(item.kind);
-    const accepted=!replaced&&hubSpatialPlacementClearV136(item,plan,{margin:3});
+    const accepted=!replaced&&hubSpatialPlacementClearV136(getHubFurnishingPlacementBoundsV139(item),plan,{margin:3});
     if(!accepted)legacyOmissionsV138.push({kind:item.kind,role:item.role,
       bounds:{x:item.x,y:item.y,w:item.w,h:item.h},reason:replaced?'replaced-by-reviewed-functional-group':'native-or-architectural-clearance',
       task:definition.task,reservations:plan.reservations.filter(reservation=>overlap(item,reservation)).map(reservation=>reservation.role)});
@@ -221,7 +249,7 @@ export function enrichHubRoomCompositionV137(room, basePlan=null, options={}) {
   const added=[],rejected=[];
   for(const source of definition.items){
     const entry=materialize(source,plan);
-    if(!entry||!hubSpatialPlacementClearV136(entry,plan,{margin:3})||items.some(item=>overlap(item,entry))){
+    if(!entry||!hubSpatialPlacementClearV136(getHubFurnishingPlacementBoundsV139(entry),plan,{margin:3})||items.some(item=>overlap(item,entry))){
       rejected.push({role:source.role,bounds:entry&&{x:entry.x,y:entry.y,w:entry.w,h:entry.h}});continue;
     }
     items.push(entry);added.push(entry);
@@ -264,7 +292,19 @@ export function drawHubFurnishingMountsV137(ctx,composition) {
   for(const entry of composition.items.filter(item=>item.furnishingV137)){
     const {x,y,w,h}=entry;
     if(entry.support==='rear-floor'){
-      ctx.fillStyle='rgba(1,8,10,.5)';ctx.beginPath();ctx.ellipse(x+w/2,y+h-1,w*.49,3,0,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(1,8,10,.5)';
+      if(entry.projectionDxPerY===0)ctx.fillRect(x,(entry.contactYV139??y+h)-1,w,1);
+      else{ctx.beginPath();ctx.ellipse(x+w/2,(entry.contactYV139??y+h)-1,w*.49,3,0,0,Math.PI*2);ctx.fill();}
+    }else if(entry.mountKindV139==='cantilever-berth'){
+      // Two bolted wall plates and steel gussets distinguish this berth from
+      // a bed resting on cut-off legs in front of a distant wall light.
+      for(const bx of [x+14,x+w-24]){
+        ctx.fillStyle='#243e42';ctx.fillRect(bx-4,y-6,8,h+18);
+        ctx.fillStyle='#8c9b8c';for(const by of [y-3,y+h+8])ctx.fillRect(bx-1,by,2,2);
+        ctx.fillStyle='#344f52';ctx.beginPath();ctx.moveTo(bx,y+h-2);ctx.lineTo(bx,y+h+18);ctx.lineTo(bx+18,y+h-2);ctx.closePath();ctx.fill();
+        ctx.strokeStyle='#708881';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(bx,y+h+17);ctx.lineTo(bx+17,y+h-1);ctx.stroke();
+      }
+      ctx.fillStyle='#405c60';ctx.fillRect(x+5,y+h-3,w-10,5);
     }else{
       ctx.fillStyle='#172d31';ctx.fillRect(x+3,y+h-2,w-6,4);
       ctx.fillStyle='#536a66';ctx.fillRect(x+5,y+h-1,w-10,1);

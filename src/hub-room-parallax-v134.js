@@ -33,7 +33,7 @@ export function getHubRoomParallaxPlanV134(room, cameraX = 0, { enabled = true, 
   const x = finite(room.xStart), width = widthOf(room), floorY = floorOf(room);
   const bounds = clip || { x, y: 154, w: width, h: Math.max(0, floorY - 170) };
   const presentation = getHubRoomPresentationV119(room, enabled);
-  const activeDepth = presentation.presentationMode === '2.5d' && !reducedMotion;
+  const activeDepth = enabled && presentation.presentationMode === '2.5d' && !reducedMotion;
   // Camera is expressed in this room's world. Translation into another room
   // cancels exactly; accumulated deck distance can never change its image crop.
   const localEye = finite(cameraX) + 640 - (x + width / 2);

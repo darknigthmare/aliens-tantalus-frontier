@@ -80,7 +80,7 @@ export function getHubCompartmentShellPlanV138(room,cameraX=0,{enabled=true,redu
   const start=finite(room.xStart),width=finite(room.profile?.worldWidth??room.world?.width,1280),floorY=finite(room.world?.floorY,624);
   const bounds=clip||{x:start,y:154,w:width,h:Math.max(0,floorY-170)};
   if(![bounds.x,bounds.y,bounds.w,bounds.h].every(Number.isFinite)||bounds.w<=0||bounds.h<=0)return null;
-  const presentation=getHubRoomPresentationV119(room,enabled),active=presentation.presentationMode==='2.5d'&&!reducedMotion;
+  const presentation=getHubRoomPresentationV119(room,enabled),active=enabled&&presentation.presentationMode==='2.5d'&&!reducedMotion;
   const eye=finite(cameraX)+640-(start+width/2);
   const depthPlanes=layers||[
     {id:'distant-native-wall',factor:.095,maximumDrift:72},

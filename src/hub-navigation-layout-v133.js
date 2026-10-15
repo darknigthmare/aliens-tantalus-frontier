@@ -39,7 +39,7 @@ export const HUB_ANNEX_ENTRANCES_V133 = freeze({
   'mire-archives': { centerX: 300, bottom: 624 },
   'synthetic-bay': { centerX: 360, bottom: 624 },
   cctv: { centerX: 350, bottom: 624 },
-  'proving-ground': { centerX: 340, bottom: 624 },
+  'proving-ground': { centerX: 420, bottom: 624 },
   morgue: { centerX: 340, bottom: 624 },
   'escape-pods': { centerX: 360, bottom: 624 },
   durandal: { centerX: 360, bottom: 624 },

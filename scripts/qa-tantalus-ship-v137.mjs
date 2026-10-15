@@ -3,11 +3,12 @@ import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
-import { isAbsolute, join, relative, resolve } from 'node:path';
+import { isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createDefaultSave } from '../src/save.js';
 import { HUB_DECKS } from '../src/hub-game.js';
 import { HUB_SHIP_SPACES_V137, HUB_SHIP_CONNECTIONS_V137 } from '../src/hub-ship-layout-v137.js';
+import { getHubRoomProjectionV139 } from '../src/hub-room-projection-v139.js';
 
 // Save checkpoints disclose only an idle parent room. Every new entrance,
 // station, service route and return is reached with native keyboard input.
@@ -15,7 +16,7 @@ import { HUB_SHIP_SPACES_V137, HUB_SHIP_CONNECTIONS_V137 } from '../src/hub-ship
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = resolve(process.env.ATF_SHIP_QA_OUTPUT || join(tmpdir(), `atf-tantalus-ship-v137-${Date.now()}`));
 const rel = relative(root, output);
-if (!rel || !rel.startsWith('..') && !isAbsolute(rel)) throw Error('QA evidence must remain outside the checkout.');
+if (!rel || rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel)) throw Error('QA evidence must remain outside the checkout.');
 const base = process.env.ATF_BASE_URL || 'http://127.0.0.1:4173';
 const pass = process.env.ATF_SHIP_QA_PASS || 'final';
 const scope = process.env.ATF_SHIP_QA_SCOPE || 'all';
@@ -32,10 +33,28 @@ async function playwright() {
     throw Error('Existing Playwright installation required.', { cause: error });
   }
 }
+let manifestSequence = 0;
 async function sourceManifest() {
-  const files = (await fs.readdir(join(root, 'src'), { recursive: true })).filter(path => path.endsWith('.js')).map(path => `src/${path}`);
-  files.push('index.html', 'runtime-level.css', 'sw.js');
-  return Object.fromEntries(await Promise.all(files.sort().map(async path => [path, hash(await fs.readFile(join(root, path)))])));
+  const sources = (await fs.readdir(join(root, 'src'), { recursive: true })).filter(path => path.endsWith('.js')).map(path => `src/${path}`);
+  const assets = (await fs.readdir(join(root, 'assets'), { recursive: true, withFileTypes: true }))
+    .filter(entry => entry.isFile()).map(entry => relative(root, join(entry.parentPath, entry.name)));
+  const files = [...new Set([...sources, ...assets, 'index.html', 'runtime-level.css', 'sw.js'])].sort();
+  const manifest = {};
+  const scriptSha256 = createHash('sha256').update(await fs.readFile(fileURLToPath(import.meta.url))).digest('hex');
+  if (manifestSequence === 0) report.scriptSha256 = scriptSha256;
+  else assert.equal(scriptSha256, report.scriptSha256, 'The actual QA recipe changed during execution.');
+  report.sourceManifestFormat = 'relative-path-sha256-map-v1';
+  report.sourceManifestFiles = { start: 'source-manifest-start.json', end: 'source-manifest-end.json' };
+  // Hash sequentially: the original asset collection is about 1.5 GB; evidence
+  // must cover it without retaining the entire collection in process memory.
+  for (const path of files) manifest[path] = createHash('sha256').update(await fs.readFile(join(root, path))).digest('hex');
+  for (const name of ['furniture-atlas.png', 'service-front-atlas.png', 'ship-front-atlas.png', 'surface-details-atlas.png', 'annex-stations-front-atlas.png', 'dropship-hangar-side.png'])
+    assert.ok(manifest[`assets/openai/hub/props/v139/${name}`], `Required V139 original asset missing: ${name}`);
+  report.sourceFiles = files.length;
+  report.sourceAssetFiles = assets.length;
+  report.v139AssetFiles = assets.filter(path => path.startsWith('assets/openai/hub/props/v139/')).sort();
+  await fs.writeFile(join(output, `source-manifest-${++manifestSequence === 1 ? 'start' : 'end'}.json`), JSON.stringify(manifest, null, 2));
+  return manifest;
 }
 function observe() {
   const h = globalThis.__ATF_HUB__;
@@ -48,7 +67,7 @@ function observe() {
     station: h.nearestAnnexStationV71?.()?.annexId || null, exit: h.nearestAnnexExitV71?.() || null,
     ladders: (annex?.ladders || h.v51Ladders || []).map(a => ({ ...a })),
     platforms: (annex?.platforms || h.v51Platforms || []).map(a => ({ ...a })),
-    presentation: Object.fromEntries(Object.entries(snap).filter(([key]) => /134|136|137|138|Commercial|stationUses|visitedAnnex/.test(key))) };
+    presentation: Object.fromEntries(Object.entries(snap).filter(([key]) => /119|134|136|137|138|139|Commercial|stationUses|visitedAnnex/.test(key))) };
 }
 const state = () => page.evaluate(observe);
 const check = (label, evidence) => report.checks.push({ label, evidence });
@@ -82,6 +101,7 @@ async function capture(label) {
   await page.waitForFunction(() => { const snapshot = globalThis.__ATF_HUB__?.getSnapshot(), life = snapshot?.hubRoomLifeV136?.current;
     const shell = snapshot?.hubCompartmentShellV138?.current;
     return life?.furnishingV137 && life.furnishingV137.pendingImageRoles.length === 0 &&
+      life.workstationDetailsV139?.pending?.length === 0 &&
       (!shell || !['original-wall-material', 'preserve-authored-refuge-apertures'].includes(shell.sourcePolicy) || shell.nativeReady === true); });
   const file = `${String(++serial).padStart(2, '0')}-${label}.png`;
   const bytes = await page.locator('#hub-canvas').screenshot({ path: join(output, file) });
@@ -131,6 +151,8 @@ async function inspectStation(space) {
   assert.equal(life?.roomId, space.id); assert.deepEqual(life.furnishingV137.pendingImageRoles, []);
   assert.ok(life.furnishingV137.paintedRoles.length > 0, 'Original furnishing must actually be painted.');
   assert.ok(parallax?.nativeReady); assert.equal(parallax.gameplayPlane, '2d'); assert.equal(parallax.layers.length, 3);
+  assert.equal(parallax.presentationMode, getHubRoomProjectionV139(space).mode);
+  if (parallax.presentationMode === '2d') for (const layer of parallax.layers) { assert.equal(layer.factor, 0); assert.equal(layer.drift, 0); }
   for (const tile of parallax.nativeTiles) assert.ok(Math.abs(tile.scaleX - tile.scaleY) < 1e-9);
   check(`${space.name}: the actual scene paints every new furnishing image and retains three uniformly scaled background planes.`, { life, parallax }); return after;
 }

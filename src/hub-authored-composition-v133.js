@@ -55,10 +55,32 @@ export function hubAuthoredLayerBoundsV133(room, renderBounds = { x: 0, y: 0, w:
     y: roomFloor(room) - h * ratio + renderBounds.y * sceneScale, w, h };
 }
 
-/** Foreground bitmaps retain their exact source projection. Only the clip is
- * restricted below the physical walk rail; nobody stretches a complete room
- * sheet into a strip or treats a crop as a newly generated room asset. */
+/** A floor cutaway has its own narrow front rim. Cropping a whole old room
+ * bitmap below the walk rail left detached ladders and machinery underneath
+ * the real floor, falsely suggesting another accessible circulation plane. */
+export function getHubFrontFasciaV139(room, { height = 720 } = {}) {
+  const floorY = roomFloor(room), bottom = Math.max(floorY + 4, finite(height, 720));
+  const top = Math.max(floorY + 4, bottom - 14);
+  return { bounds: { x: finite(room?.xStart), y: top, w: roomWidth(room), h: bottom - top },
+    floorY, plane: 'front-floor-rim', source: 'original-architectural-fascia',
+    collidable: false, interactive: false, geometryPreserved: true };
+}
+
+export function drawHubFrontFasciaV139(ctx, room, options = {}) {
+  if (!ctx || !room) return false;
+  const plan = getHubFrontFasciaV139(room, options), b = plan.bounds;
+  if (!(b.h > 0)) return plan;
+  ctx.save(); ctx.beginPath(); ctx.rect(b.x, b.y, b.w, b.h); ctx.clip();
+  ctx.fillStyle = '#14272c'; ctx.fillRect(b.x, b.y, b.w, b.h);
+  ctx.fillStyle = '#3b5356'; ctx.fillRect(b.x, b.y, b.w, 2);
+  ctx.fillStyle = '#0a171d'; ctx.fillRect(b.x, b.y + b.h - 4, b.w, 4);
+  ctx.fillStyle = '#758681';
+  for (let x = b.x + 30; x < b.x + b.w - 12; x += 160) ctx.fillRect(x, b.y + 5, 2, 2);
+  ctx.restore(); return plan;
+}
+
 export function drawHubAuthoredLayerV133(ctx, image, entry, room, phase = entry?.phase) {
+  if (phase === 'front') return drawHubFrontFasciaV139(ctx, room);
   if (!ctx || !ready(image) || !entry?.renderBounds) return false;
   const target = hubAuthoredLayerBoundsV133(room, entry.renderBounds), floor = roomFloor(room), x = finite(room?.xStart), width = roomWidth(room);
   ctx.save(); ctx.beginPath(); ctx.rect(x, phase === 'front' ? floor + 4 : 0, width, phase === 'front' ? Math.max(0, 720 - floor - 4) : 720); ctx.clip();
@@ -129,9 +151,13 @@ export function drawHubSteelServicesV133(ctx, occlusion, { floorY = 624, ceiling
     for(let row=0;row<3;row++)line(ctx,[[x,y+row*9],[x+w,y+row*9]]);
     ctx.fillStyle='#536a6a';for(let xx=x+14;xx<x+w;xx+=92){ctx.fillRect(xx,beamTop,6,38);ctx.fillRect(xx-5,beamTop,16,4);}
   } else if(occlusion.art==='foregroundPipes') {
-    ctx.beginPath();ctx.rect(x,floorY+4,w,Math.max(0,720-floorY-4));ctx.clip();
-    for(let row=0;row<3;row++)line(ctx,[[x,floorY+22+row*18],[x+w,floorY+22+row*18]]);
-    ctx.fillStyle='#3f5655';for(let xx=x+10;xx<x+w;xx+=88)ctx.fillRect(xx,floorY+8,7,66);
+    // This is a closed underfloor service cover, not another traversable
+    // ladder or open rail. Its solid frontal face stays within floor+8..+24.
+    const top=floorY+8,height=16;
+    ctx.beginPath();ctx.rect(x,top,w,height);ctx.clip();
+    ctx.fillStyle='#14272c';ctx.fillRect(x,top,w,height);
+    ctx.fillStyle='#3b5356';ctx.fillRect(x,top,w,2);
+    ctx.fillStyle='#0a171d';ctx.fillRect(x,top+height-3,w,3);
   } else if(occlusion.art==='maintenancePipe') {
     const y=Math.max(174,occlusion.y),bottom=Math.min(floorY-150,y+occlusion.h);
     for(let offset=0;offset<3;offset++)line(ctx,[[x+20+offset*12,y],[x+20+offset*12,bottom-12],[x+w-18,bottom-12]]);
@@ -253,10 +279,8 @@ export function withHubAuthoredCompositionV133(Base) {
     }
     drawModularHangar(ctx, room, phase) {
       if(this.editorPlaytest)return super.drawModularHangar(ctx,room,phase);
-      if(phase!=='back') {
-        ctx.save();ctx.beginPath();ctx.rect(room.xStart,roomFloor(room)+4,roomWidth(room),720-roomFloor(room)-4);ctx.clip();
-        const result=super.drawModularHangar(ctx,room,phase);ctx.restore();return result;
-      }
+      if(phase==='front') return drawHubFrontFasciaV139(ctx,room);
+      if(phase!=='back') return super.drawModularHangar(ctx,room,phase);
       if(!this.drawHubSpatialRearV136?.(ctx,room))drawHubRearShellV133(ctx,room);
       // Dedicated booth, dropship and dangerous arc retain their native exact
       // sources and bounds. Only the fringed, non-colliding overhead is replaced.
@@ -287,8 +311,8 @@ export function withHubAuthoredCompositionV133(Base) {
     }
     drawAnnexForegroundV72(ctx, annex, image) {
       if (this.editorPlaytest || !annex) return super.drawAnnexForegroundV72(ctx, annex, image);
-      ctx.save();ctx.beginPath();ctx.rect(0,roomFloor(annex)+4,roomWidth(annex),720-roomFloor(annex)-4);ctx.clip();
-      const result=super.drawAnnexForegroundV72(ctx,annex,image);ctx.restore();return result;
+      if(this.hubTrainingV132?.active) return super.drawAnnexForegroundV72(ctx,annex,image);
+      return drawHubFrontFasciaV139(ctx,{...annex,xStart:0});
     }
     drawAnnexGeometryV71(ctx, annex) {
       if (!this.editorPlaytest) this.drawHubRoomPurposeV133(ctx, { ...annex, xStart: 0 });

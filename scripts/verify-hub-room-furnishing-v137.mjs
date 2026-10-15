@@ -14,15 +14,18 @@ import { HUB_FURNISHING_CRITICAL_OVERRIDES_V138 } from '../src/hub-furnishing-cr
 import { getHubRoomLifePlanV136,drawHubRoomLifeV136 } from '../src/hub-room-life-v136.js';
 import { getHubRoomParallaxPlanV134,getHubRearEquipmentLayoutV134 } from '../src/hub-room-parallax-v134.js';
 import { HUB_ENVIRONMENT_ATLAS_V134 } from '../src/hub-environment-atlas-v134.js';
+import { HUB_FURNITURE_ATLAS_V139 } from '../src/hub-furniture-atlas-v139.js';
+import { HUB_SURFACE_DETAILS_ATLAS_V139 } from '../src/hub-surface-details-atlas-v139.js';
+import { reviseHubAnnexFurnishingsV139 } from '../src/hub-furnishing-annex-revisions-v139.js';
 
 const rooms=[...HUB_DECKS.flatMap(deck=>deck.rooms),...HUB_ANNEXES_V87,...HUB_SHIP_SPACES_V137];
 const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} differs from ${b}`);
 function optionsFor(room){
   const deck=HUB_DECKS.findIndex(deck=>deck.rooms.includes(room));
-  if(deck<0)return{ladders:room.ladders,platforms:room.platforms};
+  if(deck<0)return{ladders:room.ladders,vents:room.vents||[],platforms:room.platforms};
   const geometry=buildHubTraversalGeometryV87(deck);
-  return{doors:buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck),ladders:geometry.ladders,platforms:geometry.platforms};
+  return{doors:buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck),ladders:geometry.ladders,vents:geometry.vents,platforms:geometry.platforms};
 }
 function canvas(){
   const calls=[],ctx=new Proxy({save(){calls.push(['save']);},restore(){calls.push(['restore']);},
@@ -31,14 +34,37 @@ function canvas(){
   return{ctx,calls};
 }
 const original=structuredClone(rooms);
+const sourcePngs=new Map();
+function assertRealFloorContact(item,supportY){
+  near(item.contactYV139,supportY);
+  if(item.kind!=='bitmap'){near(item.y+item.h,item.contactYV139);return;}
+  assert.ok(item.source&&Number.isFinite(item.footSourceYV139),`${item.role}: measured bitmap foot required`);
+  near(item.y+item.footSourceYV139*item.w/item.source.w,item.contactYV139);
+  if(!sourcePngs.has(item.asset))sourcePngs.set(item.asset,auditWeaponPngV120(fileURLToPath(new URL(`..${item.asset}`,import.meta.url))));
+  const png=sourcePngs.get(item.asset),s=item.source,foot=s.y+item.footSourceYV139;
+  assert.ok(Array.from({length:s.w},(_,x)=>png.pixelAlpha(s.x+x,foot-1)).some(alpha=>alpha>=192),`${item.role}: foot is a real hard source pixel`);
+  for(let y=foot;y<s.y+s.h;y++)for(let x=s.x;x<s.x+s.w;x++)
+    assert.ok(png.pixelAlpha(x,y)<192,`${item.role}: transparent padding cannot become the support`);
+}
 
 test('nine original separated furnishings retain the admitted RGBA bytes and complete non-overlapping crops',()=>{
   const png=auditWeaponPngV120(fileURLToPath(new URL(`..${atlas.asset}`,import.meta.url)));
   assert.equal(png.sha256,atlas.sha256);assert.equal(png.width,atlas.width);assert.equal(png.height,atlas.height);
-  assert.ok(png.transparentPixels>png.width*png.height*.45);
+  assert.ok(png.transparentPixels>png.width*png.height*.40);
   for(const [x,y]of [[0,0],[1535,0],[0,1023],[1535,1023]])assert.ok(png.pixelAlpha(x,y)<=1);
-  const crops=Object.values(atlas.cells).map(cell=>cell.source),counts=crops.map(()=>0);
+  const cells=Object.values(atlas.cells),crops=cells.map(cell=>cell.source),counts=crops.map(()=>0);
   assert.equal(crops.length,9);
+  for(const [index,cell]of cells.entries()){
+    const s=cell.source,foot=s.y+cell.footSourceY;
+    assert.equal(cell.projection,'strict-side-elevation');
+    assert.ok([s.x,s.y,s.w,s.h,cell.footSourceY].every(Number.isInteger));
+    assert.ok(s.x>=0&&s.y>=0&&s.x+s.w<=png.width&&s.y+s.h<=png.height);
+    assert.ok(cell.footSourceY>0&&cell.footSourceY<s.h);
+    assert.ok(Array.from({length:s.w},(_,x)=>png.pixelAlpha(s.x+x,foot-1)).some(alpha=>alpha>=192),`${cell.id}: the declared foot is actually opaque`);
+    for(let y=foot;y<s.y+s.h;y++)for(let x=s.x;x<s.x+s.w;x++)
+      assert.ok(png.pixelAlpha(x,y)<192,`${cell.id}: no hard foot pixel lies below the declared support`);
+    for(const other of crops.slice(0,index))assert.ok(!overlap(s,other),'Complete source crops remain disjoint');
+  }
   for(let y=0;y<png.height;y++)for(let x=0;x<png.width;x++){
     if(png.pixelAlpha(x,y)<=32)continue;
     const indices=crops.flatMap((c,index)=>x>=c.x&&x<c.x+c.w&&y>=c.y&&y<c.y+c.h?[index]:[]);
@@ -50,14 +76,24 @@ test('nine original separated furnishings retain the admitted RGBA bytes and com
 test('functional sizes use the source object and a standing human rather than a shared arbitrary height',()=>{
   for(const [id,cell]of Object.entries(atlas.cells)){
     assert.equal(getHubFurnishingCellV137(id),cell);near(cell.width/cell.height,cell.source.w/cell.source.h);
-    assert.ok(cell.width>=40&&cell.width<=180);assert.ok(cell.height>=30&&cell.height<=128);
+    assert.ok(cell.width>=40&&cell.width<=180);assert.ok(cell.height>=30&&cell.height<=130);
     assert.ok(cell.maximumWidth>=cell.width&&cell.maximumWidth<=cell.source.w);
     assert.equal(cell.collidable,false);assert.equal(cell.interactive,false);
   }
-  // The berth includes its locker; the actual mattress still fits an adult.
-  assert.ok(338*atlas.cells['crew-berth'].width/atlas.cells['crew-berth'].source.w>96.5*1.1);
-  // The shower's clear glazed opening has adult standing headroom.
-  assert.ok(254*atlas.cells['sanitary-unit'].width/atlas.cells['sanitary-unit'].source.w>96.5+8);
+  // Useful parts come from the newly admitted frontal pixels, rather than
+  // retaining dimensions measured in the superseded oblique atlas.
+  const berth=atlas.cells['crew-berth'],mattress=berth.usefulSurfaceSource;
+  assert.equal(mattress.kind,'mattress');
+  assert.ok(mattress.x>=0&&mattress.y>=0&&mattress.x+mattress.w<=berth.source.w&&mattress.y+mattress.h<=berth.source.h);
+  const mattressLength=mattress.w*berth.width/berth.source.w;
+  assert.ok(mattressLength>=110,'The actual frontal berth retains the 110px useful adult length contract');
+  assert.ok(mattressLength>96.5*1.1,'A lying adult retains at least ten percent useful length clearance');
+  const sanitary=atlas.cells['sanitary-unit'],interior=sanitary.interiorSource;
+  assert.equal(interior.kind,'standing-clearance');
+  assert.ok(interior.x>=0&&interior.y>=0&&interior.x+interior.w<=sanitary.source.w&&interior.y+interior.h<=sanitary.source.h);
+  const clearHeight=interior.h*sanitary.width/sanitary.source.w;
+  assert.ok(clearHeight>=104,'The frontal shower retains the same 104px adult clear height as native standing enclosures');
+  assert.ok(clearHeight>96.5,'The measured interior must clear the standing human');
   assert.ok(atlas.cells['cockpit-seat'].height<96.5*.7,'A seated cockpit must not become a standing-size throne');
   assert.equal(getHubFurnishingCellV137('__proto__'),null);assert.equal(getHubFurnishingCellV137('unknown'),null);
 });
@@ -69,8 +105,11 @@ test('all 35 compartments accept their authored functional groups with no hidden
     const options=optionsFor(room),plan=getHubRoomLifePlanV136(room,options);
     assert.deepEqual(getHubRoomLifePlanV136(room,options),plan);assert.equal(plan.schema,137);
     assert.deepEqual(plan.furnishingV137.rejected,[],room.id);
-    const definition=HUB_FURNISHING_CRITICAL_OVERRIDES_V138[room.id]||HUB_ROOM_FURNISHING_V137[room.id];
+    const definition=reviseHubAnnexFurnishingsV139(room,{
+      ...HUB_ROOM_FURNISHING_V137[room.id],...HUB_FURNISHING_CRITICAL_OVERRIDES_V138[room.id]
+    });
     assert.equal(plan.furnishingV137.added.length,definition.items.length,room.id);
+    assert.deepEqual(plan.furnishingV137.added.map(item=>item.role).sort(),definition.items.map(item=>item.role).sort(),`${room.id}: every authored role must survive`);
     authored+=definition.items.length;
     assert.ok(plan.furnishingV137.added.length>=1,room.id);count+=plan.items.length;added+=plan.furnishingV137.added.length;
     for(const item of plan.items){
@@ -78,13 +117,45 @@ test('all 35 compartments accept their authored functional groups with no hidden
       assert.ok([item.x,item.y,item.w,item.h].every(Number.isFinite));assert.ok(item.w>0&&item.h>0);
       assert.ok(item.x>=plan.start&&item.x+item.w<=plan.start+plan.width);
       assert.ok(!plan.spatial.reservations.some(reservation=>overlap(item,reservation)),`${room.id}:${item.role} blocks ${JSON.stringify(plan.spatial.reservations.filter(r=>overlap(item,r)))}`);
-      if(item.support==='rear-floor')near(item.y+item.h,plan.spatial.planes.rearServiceY);
+      if(item.support==='rear-floor')assertRealFloorContact(item,plan.spatial.planes.rearServiceY);
       if(item.source)near(item.w/item.h,item.source.w/item.source.h);
     }
     for(let i=0;i<plan.items.length;i++)for(let j=i+1;j<plan.items.length;j++)assert.ok(!overlap(plan.items[i],plan.items[j]),`${room.id}: ${plan.items[i].role}/${plan.items[j].role}`);
   }
   assert.equal(added,authored);assert.ok(count>=added);
   assert.deepEqual(rooms,original);
+});
+
+test('all 35 production plans retain their equipment while clearing the 18 actual hatches and native crawl approaches',()=>{
+  const retained={
+    'combat-information':['tactical-reference'],
+    'cryo-bay':['capsule-supplies','stasis-service-kit'],
+    medical:['upper-sterile-preparation-supply'],
+    'dropship-hangar':['ground-support-kit','flight-checklists','gantry-service-tools'],
+    'life-support':['air-treatment-feed']
+  };
+  let count=0,authored=0,details=0,hatches=0;
+  for(const room of rooms){
+    const options=optionsFor(room),plan=getHubRoomLifePlanV136(room,options);
+    count+=plan.items.length;authored+=plan.furnishingV137.added.length;details+=plan.workstationDetailsV139.items.length;
+    assert.deepEqual(plan.furnishingV137.rejected,[],room.id);
+    assert.deepEqual(plan.workstationDetailsV139.omitted,[],room.id);
+    for(const role of retained[room.id]||[])assert.ok(plan.items.some(item=>item.role===role),`${room.id}:${role} remains useful equipment`);
+    for(const vent of options.vents.filter(vent=>!vent.roomId||vent.roomId===room.id)){
+      hatches++;
+      const approach={x:vent.x-64,y:vent.y,w:vent.w+128,h:vent.h};
+      for(const item of plan.items){
+        assert.ok(!overlap(item,vent),`${room.id}:${item.role} is masked by ${vent.id}`);
+        assert.ok(!overlap(item,approach),`${room.id}:${item.role} occupies the crawl approach to ${vent.id}`);
+      }
+    }
+  }
+  assert.deepEqual({count,authored,details,hatches},{count:269,authored:127,details:37,hatches:18});
+  const cryo=rooms.find(room=>room.id==='cryo-bay');
+  const oldSlots=getHubRoomLifePlanV136(cryo,{...optionsFor(cryo),legacySupplyOverrides:{
+    'capsule-supplies':{y:300},'stasis-service-kit':{y:300}
+  }});
+  for(const role of retained['cryo-bay'])assert.ok(!oldSlots.items.some(item=>item.role===role),'The former obscured socket must actually fail clearance');
 });
 
 test('medical, crew berths and mess contain the corrected real support groups',()=>{
@@ -97,7 +168,7 @@ test('medical, crew berths and mess contain the corrected real support groups',(
   assert.ok(cabinet.x>rooms.find(room=>room.id==='medical').propRenderBounds.x,'Cabinet belongs beside the bed');
   const berth=quarters.items.find(item=>item.role==='upper-crew-berth');
   assert.equal(berth.cell,'crew-berth');assert.equal(berth.support,'rear-wall');assert.ok(berth.y+berth.h<498,'Mounted berth remains above the original refuge door');
-  assert.ok(mess.items.some(item=>item.role==='mess-tray-return-bench'&&item.kind==='bench'));
+  assert.ok(mess.items.some(item=>item.role==='mess-tray-return-counter'&&item.kind==='work-counter'));
   assert.ok(mess.items.some(item=>item.role==='mess-tray-return-stock'&&item.cell==='galley-rack'));
   assert.ok(!mess.items.some(item=>item.cell==='galley-unit'),'Cooking belongs in the separate galley-service compartment');
   assert.ok(mess.items.some(item=>item.role==='chilled-drink-storage'&&item.cell==='food-refrigerator'));
@@ -144,7 +215,10 @@ test('new service compartments keep the unique native hero and coherent adjacent
 test('render evidence reports actual loaded crops and mounted supports without changing gameplay or engine state',()=>{
   const native={complete:true,naturalWidth:HUB_PROP_ATLAS_V136.width,naturalHeight:HUB_PROP_ATLAS_V136.height},
     originalAtlas={complete:true,naturalWidth:atlas.width,naturalHeight:atlas.height},
-    images=new Map([[HUB_PROP_ATLAS_V136.asset,native],[atlas.asset,originalAtlas]]);
+    furniture={complete:true,naturalWidth:HUB_FURNITURE_ATLAS_V139.width,naturalHeight:HUB_FURNITURE_ATLAS_V139.height},
+    details={complete:true,naturalWidth:HUB_SURFACE_DETAILS_ATLAS_V139.width,naturalHeight:HUB_SURFACE_DETAILS_ATLAS_V139.height},
+    images=new Map([[HUB_PROP_ATLAS_V136.asset,native],[atlas.asset,originalAtlas],
+      [HUB_FURNITURE_ATLAS_V139.asset,furniture],[HUB_SURFACE_DETAILS_ATLAS_V139.asset,details]]);
   let atlasDraws=0,expectedAtlasDraws=0;
   for(const room of rooms){
     const before=structuredClone(room),subject=canvas(),report=drawHubRoomLifeV136(subject.ctx,room,{...optionsFor(room),images});

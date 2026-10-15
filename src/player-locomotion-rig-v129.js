@@ -62,11 +62,16 @@ function stepShape(state, side, scale, crouching, staticAction) {
   const settle = state.moving ? 1 : 1 - smoothHumanStepV136(state.settleProgress);
   const entrance = smoothHumanStepV136(state.entrance / (stride * .25));
   const freeFoot = humanFootSwingV136(swing, profile.duty, stride);
-  let lift = hasStride && swinging ? freeFoot.liftWeight * profile.lift * scale * settle * entrance : 0;
+  // World contact phase runs backwards when travelling left. Its asymmetric
+  // toe-clearance arc must follow the travelled direction, while horizontal
+  // targets retain their exact world-space contact trajectory.
+  const recovery = (state.direction ?? state.facing ?? 1) < 0
+    ? humanFootSwingV136(1-swing, profile.duty, stride) : freeFoot;
+  let lift = hasStride && swinging ? recovery.liftWeight * profile.lift * scale * settle * entrance : 0;
   let offset = !hasStride ? 0 : swinging
     ? freeFoot.offset
     : (profile.duty / 2 - phase) * stride;
-  let angle = lift > 0 ? -.15 * freeFoot.rollWeight * settle * entrance : 0;
+  let angle = lift > 0 ? -.15 * recovery.rollWeight * settle * entrance : 0;
   const correction = hasStride && state.gaitTransition?.feet[side];
   if (correction) {
     offset += correction.offset * (1 - smooth(correction.swingTravel / correction.swingSpan));
@@ -131,14 +136,20 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
   const moved = requested && Math.abs(dx) > 1e-7;
   const striding = moved && Math.abs(finite(actor.vx)) > (actor.crouching ? 6 : 8);
   const postureChanged = prior && Boolean(actor.crouching) !== prior.crouching;
+  // Support occupies [0,duty] in either direction. Keep its centre aligned
+  // while acceleration shortens support; otherwise the first left step holds
+  // its old boot for an extra half of the removed duty and overextends the
+  // other leg. The transition below preserves the existing world contacts.
+  const supportShift = prior && striding ? (profile.duty - (prior.duty ?? C[prior.gait].duty)) / 2 : 0;
   const cycles = !prior || postureChanged ? profile.duty / 2
-    : prior.cycles + (striding ? dx / stride : 0);
+    : prior.cycles + (striding ? dx / stride : 0) + supportShift;
   const distance = (prior?.distance || 0) + (moved ? Math.abs(dx) : 0);
   const elapsed = Math.max(0, now - (prior?.time ?? now));
   const settle = striding ? 0 : Math.min(C.settleDuration, (prior?.settle ?? C.settleDuration) + elapsed);
   const entrance = striding ? (prior?.settle >= C.settleDuration ? 0 : finite(prior?.entrance)) + Math.abs(dx)
     : finite(prior?.entrance);
   const next = { schema: 129, context, surface, time: now, x: actor.x, y: actor.y, facing,
+    direction: Math.sign(dx || finite(actor.vx)) || prior?.direction || facing,
     grounded: actor.grounded === true, crouching: Boolean(actor.crouching), gait,
     cycles, phase: mod(cycles), stride, duty: profile.duty, footLift: profile.lift, distance, entrance,
     hasWalked: Boolean(prior?.hasWalked || moved), moving: striding, stopOffsets: null,
@@ -203,6 +214,7 @@ function fallbackState(actor, bodyRig) {
   // clock, a second actor or a new mutable animation object.
   const cycles = profile.duty / 2 + (moving ? distance * Math.sign(actor.vx) / stride : 0);
   return { schema: 129, gait, cycles, phase: mod(cycles), stride, duty: profile.duty, footLift: profile.lift, distance,
+    direction: Math.sign(finite(actor.vx)) || bodyRig.facing,
     entrance: distance, hasWalked: moving && distance > 0, moving,
     settle: moving ? 0 : C.settleDuration, settleProgress: moving ? 0 : 1,
     source: 'recorded-ground-distance' };
@@ -256,7 +268,7 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   const state = locomotionState?.schema === 129 && Number.isFinite(locomotionState.cycles)
     && C[locomotionState.gait] ? locomotionState : fallbackState(actor, bodyRig);
   const motionEnvelope = humanMotionEnvelopeV136(state, state.stride);
-  const pelvisBob = grounded && !crouching && !staticAction ? .6 * (1 - Math.cos(state.cycles * Math.PI * 4)) * motionEnvelope : 0;
+  const pelvisBob = grounded && !crouching && !staticAction ? .35 * (1 - Math.cos(state.cycles * Math.PI * 4)) * motionEnvelope : 0;
   const hipDrop = (crouching ? 6 : grounded && state.moving ? 6 : 4) + pelvisBob;
   const hips = { near: point(waist.x - f * 9 * s, waist.y + hipDrop * s),
     far: point(waist.x + f * 12 * s, waist.y + hipDrop * s) };
@@ -288,6 +300,12 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
     requestedFeet[side] = { foot, contact };
   }
   if (grounded) {
+    if (!crouching && !staticAction && state.hasWalked) {
+      const meanReach = ['near', 'far'].reduce((sum, side) =>
+        sum + requestedFeet[side].foot.ankle.x - hips[side].x, 0) / 2;
+      const transfer = 6 * s * Math.tanh(meanReach / (6 * s)) * motionEnvelope;
+      hips.near.x += transfer; hips.far.x += transfer;
+    }
     // Stopping midway through a wide stride retains both actual contacts.
     // Settle the hidden pelvis within the belt instead of pulling either
     // boot off the deck or moving the accepted-shot torso above it.

@@ -27,8 +27,9 @@ test('all 35 actual ship spaces have a reviewed purpose, identity, and honest vi
     assert.notEqual(getHubRoomPresentationV119(room).depthProfile,'unreviewed',room.id);
     assert.ok(getHubRoomParallaxPlanV134(room,room.xStart));
   }
-  for(const id of ['flight-control-cockpit','engine-room','maintenance-spine'])assert.equal(getHubRoomPresentationV119(id).presentationMode,'2.5d');
-  for(const id of ['galley-service','sanitary-bay','water-recycling'])assert.equal(getHubRoomPresentationV119(id).presentationMode,'2d');
+  for(const room of rooms){const expected=room.id==='maintenance-spine'?'2.5d':'2d';
+    assert.equal(getHubRoomPresentationV119(room).presentationMode,expected);
+    assert.equal(getHubRoomPresentationV119(room,false).presentationMode,expected,'F7 cannot change a structural projection');}
 });
 
 test('exterior apertures are confined to navigation and flight rooms; interiors have distinct service hardware',()=>{
@@ -61,7 +62,7 @@ test('camera movement never drags fixtures or interior equipment and reduced mot
   for(const room of rooms){
     const left=getHubRoomIdentityPlanV137(room,-10000),right=getHubRoomIdentityPlanV137(room,10000);
     assert.deepEqual(left.bounds,right.bounds);assert.deepEqual(left.frame,right.frame);
-    if(left.type==='exterior'){assert.equal(left.distantDrift,-14);assert.equal(right.distantDrift,14);}
+    if(left.type==='exterior'&&left.roomPresentationMode==='2.5d'){assert.equal(left.distantDrift,-14);assert.equal(right.distantDrift,14);}
     else{assert.equal(left.distantDrift,0);assert.equal(right.distantDrift,0);}
     assert.equal(getHubRoomIdentityPlanV137(room,10000,{reducedMotion:true}).distantDrift,0);
     assert.equal(getHubRoomIdentityPlanV137(room,10000,{enabled:false}).distantDrift,0);

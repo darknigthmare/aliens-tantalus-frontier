@@ -325,7 +325,10 @@ export function withHubTrainingV132(Base) {
           state.loader.x+38-75,624-180,150,192);}
       ctx.strokeStyle='#c6b477';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(state.loader.x+38,570);ctx.lineTo(state.loader.x+110,595-state.loader.lift);
       ctx.lineTo(state.loader.x+165,595-state.loader.lift);ctx.stroke();
-      if(!state.mounted)this.drawPlayer(ctx);ctx.translate(camera,0);
+      if(!state.mounted)this.drawPlayer(ctx);
+      else this.player.supportShadowV139={schema:139,drawn:false,contactY:null,
+        frameTime:this.animationTime,omittedReason:'vehicle-mounted'};
+      ctx.translate(camera,0);
       ctx.fillStyle='#081315ed';ctx.fillRect(18,18,1244,112);ctx.fillStyle='#d5e0d9';ctx.font='700 15px monospace';
       ctx.fillText(`P-5000 HUMAIN · CHARGES ${state.placements.length}/3 · ÉNERGIE ${Math.ceil(state.energy)}% · HYDRAULIQUE ${Math.ceil(state.hydraulics)}% · FOURCHES ${Math.round(state.loader.lift)}`,32,43);
       ctx.font='12px monospace';ctx.fillText(this.statusPrompt(),32,70);ctx.fillText('Ajuster les fourches sous les poutres. Les emplacements sont des niches de réception derrière la voie de circulation.',32,94);

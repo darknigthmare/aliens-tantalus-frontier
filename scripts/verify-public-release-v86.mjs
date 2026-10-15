@@ -62,6 +62,13 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-hub-interior-wall-atlas-v138.mjs', 'verify-hub-compartment-shell-v138.mjs',
   'verify-hub-destination-signage-v138.mjs', 'verify-hub-annex-fixtures-v138.mjs',
   'verify-hub-critical-furnishing-v138.mjs', 'qa-tantalus-level-v138.mjs',
+  'verify-human-natural-gait-v139.mjs',
+  'verify-hub-dropship-hangar-v139.mjs',
+  'verify-hub-whole-room-projection-v139.mjs', 'verify-hub-workstation-details-v139.mjs',
+  'verify-hub-annex-runtime-geometry-v139.mjs',
+  'verify-player-climb-contacts-v139.mjs', 'verify-hub-support-planes-v139.mjs',
+  'verify-hub-native-prop-placement-v139.mjs', 'verify-hub-annex-storage-v139.mjs',
+  'verify-hub-support-contact-v139.mjs', 'verify-hub-furniture-atlases-v139.mjs', 'qa-tantalus-perspective-v139.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Exact original-image paths from the V100 public reference registry. Naming

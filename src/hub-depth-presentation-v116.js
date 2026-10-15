@@ -16,37 +16,56 @@ export function hubFarParallaxV116(cameraX, room, enabled = true) {
     -presentation.cameraProfile.maximumDrift, presentation.cameraProfile.maximumDrift);
 }
 
-export function hubFloorPerspectiveV116(cameraX, { width = 1280, height = 720, floorY = 624, horizonX, horizonY = 360 } = {}) {
+export function hubFloorPerspectiveV116(cameraX, { width = 1280, height = 720, floorY = 624,
+  presentationMode = '2.5d' } = {}) {
   const visibleStart = Math.floor(Math.max(0, cameraX) / 160) * 160 - 160;
-  const vanishingX = Number.isFinite(horizonX) ? horizonX : cameraX + width / 2;
   const nearY = Math.max(floorY, height);
+  const depthEnabled = presentationMode === '2.5d' && nearY > floorY + 4;
+  const dxPerY = depthEnabled ? 19 / 12 : 0;
   return {
-    walkY: floorY, nearY, horizonX: vanishingX, horizonY,
-    seams: Array.from({ length: Math.ceil(width / 160) + 4 }, (_, index) => {
+    walkY: floorY, startY: floorY + 4, nearY,
+    presentationMode, projection: depthEnabled ? 'parallel-oblique' : 'orthographic', dxPerY,
+    // A room has one fixed parallel projection. A camera-centred vanishing
+    // point would turn its floor while doors and supported furniture stayed put.
+    horizonX: null, horizonY: null, vanishingPoint: null,
+    seams: depthEnabled ? Array.from({ length: Math.ceil(width / 160) + 4 }, (_, index) => {
       const x = visibleStart + index * 160;
-      const projection = (nearY - Math.min(horizonY, floorY - 80)) / (floorY - Math.min(horizonY, floorY - 80));
-      return { farX: x, nearX: vanishingX + (x - vanishingX) * projection };
-    }),
-    crossRails: [0.13, 0.36, 0.72].map(fraction => floorY + (nearY - floorY) * fraction).filter(y => y < nearY)
+      return { walkX: x, farX: x + 4 * dxPerY, nearX: x + (nearY - floorY) * dxPerY };
+    }) : [],
+    crossRails: depthEnabled ? [0.13, 0.36, 0.72].map(fraction => floorY + (nearY - floorY) * fraction).filter(y => y < nearY) : []
   };
 }
 
 export function drawHubFloorPerspectiveV116(ctx, cameraX, bounds) {
   const model = hubFloorPerspectiveV116(cameraX, bounds);
+  if (!ctx || model.projection !== 'parallel-oblique') return false;
   ctx.save();
   ctx.strokeStyle = 'rgba(102, 146, 135, .16)'; ctx.lineWidth = 1;
   ctx.beginPath();
-  for (const seam of model.seams) { ctx.moveTo(seam.farX, model.walkY + 4); ctx.lineTo(seam.nearX, model.nearY); }
+  for (const seam of model.seams) { ctx.moveTo(seam.farX, model.startY); ctx.lineTo(seam.nearX, model.nearY); }
   for (const y of model.crossRails) { ctx.moveTo(cameraX, y); ctx.lineTo(cameraX + (bounds?.width || 1280), y); }
-  ctx.stroke(); ctx.restore();
+  ctx.stroke(); ctx.restore(); return model;
+}
+
+/** A contact shadow belongs to the actual supported feet. It is not a second
+ * shadow on the bottom deck while the actor uses a ladder or upper landing. */
+export function getHubContactShadowV139(actor, supportY) {
+  if (!actor || ![actor.x, actor.y, actor.w, actor.h, supportY].every(Number.isFinite)
+    || actor.w <= 0 || actor.h <= 0 || actor.grounded === false || actor.climbing
+    || actor.ventTransit || actor.inVehicle) return null;
+  const footY = actor.y + actor.h;
+  if (Math.abs(footY - supportY) > .75) return null;
+  return { schema: 139, x: actor.x + actor.w / 2, y: supportY + 2,
+    radiusX: Math.max(8, actor.w * .62), radiusY: 3,
+    supportY, footY, plane: 'actual-ground-contact', collidable: false };
 }
 
 export function drawHubContactShadowV116(ctx, actor, floorY, enabled = true) {
-  if (!enabled || !actor || !Number.isFinite(floorY)) return;
-  const airborne = clamp(floorY - actor.y - actor.h, 0, 220);
-  const width = Math.max(8, (actor.w || 44) * (.62 - airborne / 1000));
-  ctx.save(); ctx.fillStyle = `rgba(0, 0, 0, ${(.30 - airborne / 1100).toFixed(3)})`;
-  ctx.beginPath(); ctx.ellipse(actor.x + actor.w / 2, floorY + 3, width, 5, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  const contact = enabled && getHubContactShadowV139(actor, floorY);
+  if (!ctx || !contact) return null;
+  ctx.save(); ctx.fillStyle = 'rgba(0, 0, 0, .30)';
+  ctx.beginPath(); ctx.ellipse(contact.x, contact.y, contact.radiusX, contact.radiusY, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  return contact;
 }
 
 /** V119 extends the same floor renderer with room-local clips. Floor details
@@ -64,7 +83,7 @@ export function drawHubRoomDepthV119(ctx, cameraX, room, bounds = {}, enabled = 
   ctx.save();
   ctx.beginPath(); ctx.rect(roomX, floorY + 4, width, Math.max(0, height - floorY - 4)); ctx.clip();
   drawHubFloorPerspectiveV116(ctx, cameraX, { width: viewportWidth, height, floorY,
-    horizonX: roomX + width / 2, horizonY: presentation.horizonY ?? 360 });
+    presentationMode: presentation.presentationMode });
   const tint = ctx.createLinearGradient(0, floorY + 4, 0, height);
   tint.addColorStop(0, 'rgba(70, 104, 93, .04)'); tint.addColorStop(1, 'rgba(2, 8, 9, .26)');
   ctx.fillStyle = tint; ctx.fillRect(roomX, floorY + 4, width, height - floorY - 4);

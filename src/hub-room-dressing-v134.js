@@ -215,15 +215,18 @@ function path(ctx, points, fill) {
   ctx.beginPath(); points.forEach(([x, y], index) => index ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath();
   if (fill) { ctx.fillStyle = fill; ctx.fill(); } else ctx.stroke();
 }
-function body(ctx, w, h, color = '#34494b', depth = 7) {
-  // A shallow top and side join the orthographic facade. They project only
-  // into the rear service lane, never across the human silhouette.
-  const dx = Math.min(w * .23, depth * 19 / 12), dy = Math.min(h * .23, depth);
-  path(ctx, [[0, dy], [dx, 0], [w, 0], [w - dx, dy]], '#536265');
-  ctx.fillStyle = color; ctx.fillRect(0, dy, w - dx, h - dy);
-  path(ctx, [[w - dx, dy], [w, 0], [w, h - dy], [w - dx, h]], '#202f32');
-  ctx.fillStyle = '#708080'; ctx.fillRect(2, dy + 1, w - dx - 3, 2);
-  ctx.fillStyle = '#182629'; ctx.fillRect(3, h - 7, w - dx - 6, 7);
+function drawBody(ctx, w, h, color = '#34494b', depth = 7) {
+  // In strict side elevation the facade has no projected top/side at all.
+  // Depth compartments continue from the rear edge toward+x/+y, exactly like
+  // their floor and real decks; a narrow object reduces both axes together.
+  const dy = Math.min(Math.max(0, depth), h * .23, w * .23 / (19 / 12)), dx = dy * 19 / 12;
+  if (dy > 0) {
+    path(ctx, [[0, 0], [w - dx, 0], [w, dy], [dx, dy]], '#536265');
+    ctx.fillStyle = color; ctx.fillRect(dx, dy, w - dx, h - dy);
+    path(ctx, [[0, 0], [dx, dy], [dx, h], [0, h - dy]], '#202f32');
+  } else {ctx.fillStyle = color; ctx.fillRect(0, 0, w, h);}
+  ctx.fillStyle = '#708080'; ctx.fillRect(dx + 2, dy + 1, w - dx - 3, 2);
+  ctx.fillStyle = '#182629'; ctx.fillRect(dx + 3, h - 7, w - dx - 6, 7);
 }
 function slats(ctx, x, y, w, h, count = 6) {
   ctx.fillStyle = '#132226'; ctx.fillRect(x, y, w, h);
@@ -231,14 +234,16 @@ function slats(ctx, x, y, w, h, count = 6) {
   for (let n = 0; n < count; n++) ctx.fillRect(x + 3, y + 3 + n * (h - 6) / count, w - 6, 2);
 }
 function tinyLight(ctx, x, y, color) {ctx.fillStyle = color; ctx.fillRect(x, y, 3, 3);}
-function drawers(ctx, w, h, count = 3, color) {
-  body(ctx, w, h); const available = h - 27;
+function drawers(ctx, w, h, count = 3, color, depth = 7) {
+  drawBody(ctx, w, h, undefined, depth);
+  const dy=Math.min(Math.max(0,depth),h*.23,w*.23/(19/12)),dx=dy*19/12,available=h-27;
+  ctx.save();if(dy>0){ctx.beginPath();ctx.rect(dx,dy,w-dx,h-dy);ctx.clip();}
   for (let n = 0; n < count; n++) {
     const y = 14 + n * available / count;
     ctx.fillStyle = '#22373a';ctx.fillRect(8, y, w - 24, available / count - 5);
     ctx.fillStyle = '#69797a';ctx.fillRect(w * .34, y + 5, w * .25, 3);
   }
-  tinyLight(ctx, w - 22, 12, color);
+  tinyLight(ctx, w - 22, 12, color);ctx.restore();
 }
 function bottles(ctx, x, y, width, count = 5) {
   for (let n = 0; n < count; n++) {
@@ -251,6 +256,11 @@ function bottles(ctx, x, y, width, count = 5) {
 
 function drawEquipment(ctx, entry, accent) {
   const { kind, w, h } = entry;
+  const body = (target, width, height, color, depth = 7) => {
+    const selectedDepth=entry.projectionDxPerY===0?0:depth;drawBody(target,width,height,color,selectedDepth);
+    const dy=Math.min(selectedDepth,height*.23,width*.23/(19/12)),dx=dy*19/12;
+    if(dy>0){target.beginPath();target.rect(dx,dy,width-dx,height-dy);target.clip();}
+  };
   if (['locker', 'medical-cabinet', 'equipment-rack', 'radio-rack', 'electrical-cabinet', 'server-rack', 'sample-fridge', 'cold-storage'].includes(kind)) {
     body(ctx, w, h, kind === 'medical-cabinet' ? '#495c5a' : '#304448');
     ctx.fillStyle = '#223437';ctx.fillRect(9, 16, w - 27, h - 32);
@@ -264,10 +274,10 @@ function drawEquipment(ctx, entry, accent) {
     } else if (kind === 'cold-storage') {
       for (let n = 0; n < 3; n++) {const y = 20 + n * (h - 34) / 3;ctx.fillStyle='#566b6b';ctx.fillRect(12,y,w-33,(h-38)/3-6);ctx.fillStyle='#81918c';ctx.fillRect(w*.43,y+8,w*.18,3);}
     } else {slats(ctx, 16, h - 42, w - 40, 24, 4);tinyLight(ctx, w - 24, 27, accent);}
-  } else if (['tool-chest', 'parts-bin', 'case', 'chart-cart'].includes(kind)) {
-    drawers(ctx, w, h, kind === 'case' ? 1 : 3, accent);
+  } else if (['tool-chest', 'parts-bin', 'case', 'chart-cart', 'work-counter'].includes(kind)) {
+    drawers(ctx, w, h, kind === 'case' ? 1 : 3, accent, entry.projectionDxPerY === 0 ? 0 : 7);
     if (kind === 'chart-cart') {ctx.fillStyle='#a1a897';ctx.fillRect(9,5,w-27,6);ctx.fillStyle='#738784';ctx.fillRect(18,7,25,2);}
-    if (kind !== 'case') for (const x of [8, w - 21]) {ctx.fillStyle='#0e1d20';ctx.fillRect(x,h-4,10,4);}
+    if (kind !== 'case') for (const x of [entry.projectionDxPerY===0?8:14, w - 21]) {ctx.fillStyle='#0e1d20';ctx.fillRect(x,h-4,10,4);}
   } else if (['bench', 'chair', 'stool'].includes(kind)) {
     const seatY = kind === 'chair' ? h * .5 : 10;
     ctx.fillStyle = '#3f5555';ctx.fillRect(2,seatY,w-4,11);ctx.fillStyle='#77837a';ctx.fillRect(3,seatY,w-6,3);
@@ -280,8 +290,8 @@ function drawEquipment(ctx, entry, accent) {
     ctx.fillStyle='#192f32';ctx.fillRect(12,top+16,w-30,Math.max(12,h-top-38));
     for(const x of [8,w-18]){ctx.fillStyle='#193033';ctx.fillRect(x,h-8,8,8);}
     if(kind==='galley'){ctx.fillStyle='#101f21';ctx.fillRect(12,top+5,45,14);ctx.fillStyle='#526966';ctx.fillRect(18,top+8,33,8);ctx.strokeStyle='#82938a';ctx.lineWidth=3;ctx.beginPath();ctx.arc(45,top-3,12,Math.PI,0);ctx.stroke();}
-    else if(kind==='lab-bench'){bottles(ctx,w*.50,top,w*.43,6);ctx.fillStyle='#2b4246';ctx.fillRect(15,2,19,top-2);ctx.fillStyle='#6d9093';ctx.fillRect(19,6,12,10);}
-    else {bottles(ctx,12,top,w-25,5);ctx.fillStyle='#567575';ctx.fillRect(12,top+22,w-36,3);}
+    else if(kind==='lab-bench'&&!entry.cleanSurfaceV139){bottles(ctx,w*.50,top,w*.43,6);ctx.fillStyle='#2b4246';ctx.fillRect(15,2,19,top-2);ctx.fillStyle='#6d9093';ctx.fillRect(19,6,12,10);}
+    else if(kind!=='lab-bench'){bottles(ctx,12,top,w-25,5);ctx.fillStyle='#567575';ctx.fillRect(12,top+22,w-36,3);}
   } else if (['archive-rack', 'cargo-rack', 'filter-stack', 'drink-dispenser'].includes(kind)) {
     body(ctx,w,h,'#2e4448');
     if(kind==='drink-dispenser'){ctx.fillStyle='#13292c';ctx.fillRect(10,17,w-30,h*.42);tinyLight(ctx,w-22,26,accent);ctx.fillStyle='#738983';ctx.fillRect(14,h*.62,w-34,14);ctx.fillStyle='#15282b';ctx.fillRect(18,h*.63,w-42,11);}
@@ -289,14 +299,30 @@ function drawEquipment(ctx, entry, accent) {
       if(kind==='archive-rack')for(let z=0;z<5;z++){ctx.fillStyle=z%2?'#74857c':'#9c9274';ctx.fillRect(14+z*(w-37)/5,y+4,(w-46)/5,(h-52)/4);}
       else {ctx.fillStyle='#65766d';ctx.fillRect(16,y+4,w-43,(h-48)/4);ctx.fillStyle='#b0a17b';ctx.fillRect(24,y+9,12,3);}}
   } else if (kind === 'cylinder') {
-    ctx.fillStyle='#1b2e31';ctx.fillRect(w*.35,0,w*.3,8);ctx.fillStyle='#6c8583';ctx.beginPath();ctx.ellipse(w*.46,12,w*.4,8,0,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#4a6668';ctx.fillRect(w*.06,12,w*.80,h-20);ctx.fillStyle='#849b95';ctx.fillRect(w*.18,15,w*.16,h-29);
+    ctx.fillStyle='#1b2e31';ctx.fillRect(w*.35,0,w*.3,8);
+    ctx.fillStyle='#4a6668';ctx.fillRect(w*.06,12,w*.80,h-20);
+    ctx.fillStyle='#6c8583';
+    if(entry.projectionDxPerY===0){
+      // Elevation: a front shoulder and valve, with no visible horizontal cap.
+      ctx.fillRect(w*.06,8,w*.80,5);ctx.fillStyle='#92a79a';ctx.fillRect(w*.36,2,w*.28,2);
+    }else{
+      const dy=Math.min(4,w*.12),dx=dy*19/12,rx=Math.max(1,w*.40-dx);
+      ctx.beginPath();for(let n=0;n<=24;n++){const t=n*Math.PI/12;
+        const x=w*.46+rx*Math.cos(t)+dx*Math.sin(t),y=12+dy*Math.sin(t);
+        if(n)ctx.lineTo(x,y);else ctx.moveTo(x,y);
+      }ctx.closePath();ctx.fill();
+    }
+    ctx.fillStyle='#849b95';ctx.fillRect(w*.18,15,w*.16,h-29);
     ctx.fillStyle='#a99d74';ctx.fillRect(w*.06,h*.58,w*.80,8);ctx.fillStyle='#223a3d';ctx.fillRect(0,h-8,w,8);
   } else if (kind === 'bin') {
     body(ctx,w,h,'#4c5d54',4);ctx.fillStyle='#6e7e71';ctx.fillRect(0,5,w,6);ctx.fillStyle='#263c35';ctx.fillRect(8,h*.42,w-22,16);
   } else if (kind === 'cable-spool' || kind === 'hose-reel') {
-    const cx=w/2,cy=h/2,r=Math.min(w,h)/2-4;
+    const dy=entry.projectionDxPerY===0?0:3,dx=dy*19/12,cx=(w+dx)/2,cy=(h+dy)/2,r=Math.min(w-dx,h-dy)/2-4;
     ctx.fillStyle='#1c3033';ctx.fillRect(cx-6,kind==='hose-reel'?0:cy,12,h-cy);
+    if(dy>0){
+      ctx.fillStyle='#30484b';ctx.beginPath();ctx.arc(cx-dx,cy-dy,r,0,Math.PI*2);ctx.fill();
+      path(ctx,[[cx-dx-r,cy-dy],[cx-r,cy],[cx+r,cy],[cx+ r-dx,cy-dy]],'#263e42');
+    }
     ctx.fillStyle='#586f6d';ctx.beginPath();ctx.ellipse(cx,cy,r,r,0,0,Math.PI*2);ctx.fill();
     ctx.strokeStyle='#233b3f';ctx.lineWidth=5;for(const factor of [.35,.6,.84]){ctx.beginPath();ctx.arc(cx,cy,r*factor,0,Math.PI*2);ctx.stroke();}
     ctx.fillStyle='#84978f';ctx.fillRect(cx-4,cy-4,8,8);
@@ -337,7 +363,7 @@ function drawEquipment(ctx, entry, accent) {
 export function drawHubRoomDressingV134(ctx, room, { images = new Map(), resolveDrawable = resolveSpriteDrawableV134, doors, ladders, composition: authoredComposition = null } = {}) {
   const composition = authoredComposition || resolveHubRoomDressingV134(room, { doors, ladders });
   if (!ctx || !composition) return false;
-  ctx.save();ctx.beginPath();ctx.rect(composition.start + 112, composition.top, composition.width - 224, composition.floorY - composition.top - 4);ctx.clip();
+  ctx.save();ctx.beginPath();ctx.rect(composition.start + 112, composition.top, composition.width - 224, composition.floorY - composition.top);ctx.clip();
   const rendered = [];
   for (const entry of composition.items) {
     const image = entry.asset && images.get(entry.asset);
@@ -345,20 +371,24 @@ export function drawHubRoomDressingV134(ctx, room, { images = new Map(), resolve
       if (!(image?.complete && image.naturalWidth > 0)) continue;
       if (entry.source) {
         const s = entry.source;
-        ctx.drawImage(resolveDrawable(image), s.x, s.y, s.w, s.h, entry.x, entry.y, entry.w, entry.h);
+        if(entry.mirroredV139){ctx.save();ctx.translate(entry.x+entry.w,entry.y);ctx.scale(-1,1);
+          ctx.drawImage(resolveDrawable(image),s.x,s.y,s.w,s.h,0,0,entry.w,entry.h);ctx.restore();}
+        else ctx.drawImage(resolveDrawable(image), s.x, s.y, s.w, s.h, entry.x, entry.y, entry.w, entry.h);
       } else ctx.drawImage(resolveDrawable(image), entry.x, entry.y, entry.w, entry.h);
       rendered.push(entry);
       continue;
     }
     ctx.save();ctx.translate(entry.x, entry.y);
     if (entry.support === 'rear-floor') {
-      ctx.fillStyle='rgba(3,12,14,.44)';ctx.beginPath();ctx.ellipse(entry.w/2,entry.h-1,entry.w*.58,3,0,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(3,12,14,.44)';
+      if(entry.projectionDxPerY===0)ctx.fillRect(0,entry.h-1,entry.w,1);
+      else{ctx.beginPath();ctx.ellipse(entry.w/2,entry.h-1,entry.w*.58,3,0,0,Math.PI*2);ctx.fill();}
     }
     drawEquipment(ctx, entry, composition.accent);ctx.restore();
     rendered.push(entry);
   }
   ctx.restore();return { roomId: room.id, items: rendered.map(entry => ({ kind: entry.kind, role: entry.role, plane: entry.plane,
-    bounds: { x: entry.x, y: entry.y, w: entry.w, h: entry.h }, anchor: { x: entry.x + entry.w / 2, y: entry.y + entry.h, support: entry.support },
+    bounds: { x: entry.x, y: entry.y, w: entry.w, h: entry.h }, anchor: { x: entry.x + entry.w / 2, y: entry.contactYV139??entry.y + entry.h, support: entry.support },
     material: entry.asset ? 'native-bitmap' : 'authored-steel-and-supplies', source: entry.asset || 'original-canvas-equipment',
     collidable: entry.collidable, interactive: entry.interactive })) };
 }

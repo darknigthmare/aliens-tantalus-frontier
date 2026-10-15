@@ -11,8 +11,7 @@ import { getHubBulkheadColliderV134 } from '../src/hub-bulkhead-depth-v134.js';
 import { withHubTrainingV132,HUB_LOADER_ROOM_V132,createHubLoaderTrainingV132,
   validateHubLoaderTrainingV132,normalizeHubTrainingV132,validateHubLoaderReceiptV132,hubSecurityRoutesValidV132 } from '../src/hub-training-v132.js';
 import { createDefaultSave,getHubTrainingOperatorIdV132,recordHubLoaderQualificationV132,migrateSave } from '../src/save.js';
-import { PROVING_GROUND_CONSOLE_SOURCE_V136 } from '../src/hub-v81-runtime.js';
-import { PROVING_GROUND_ASSETS_V81 } from '../src/proving-ground-assets-v81.js';
+import { HUB_ANNEX_STATION_ATLAS_V139, getHubAnnexStationCellV139 } from '../src/hub-annex-station-atlas-v139.js';
 import { auditWeaponPngV120 } from './audit-weapon-png-v120.mjs';
 
 // Only browser APIs are substituted. The final hub stack and authored loader
@@ -81,33 +80,48 @@ test('P-5000 human course is distinct from automatic support and cannot start aw
   const base=createHubLoaderTrainingV132();assert.equal(base.operatorMode,'human');assert.equal(base.vehicleId,'vehicle-007-p-5000-powered-work-loader');
   assert.equal(validateHubLoaderTrainingV132(base).valid,true);assert.equal(subject.hub.playerAppearanceV126,identity);
 });
-test('the active V81 range console crops its real visible PNG and stays inside the resized physical station above the floor',async()=>{
-  const subject=await fixture(),asset=PROVING_GROUND_ASSETS_V81.console;
-  const png=auditWeaponPngV120(resolve(root,`.${asset.src}`));
-  assert.equal(png.sha256,asset.sha256);assert.deepEqual(PROVING_GROUND_CONSOLE_SOURCE_V136,png.alphaBounds);
+test('the active V81 range console crops its admitted frontal atlas once and keeps opaque192 feet on the actual floor',async()=>{
+  const subject=await fixture(),annex=subject.hub.currentAnnexV71(),asset=HUB_ANNEX_STATION_ATLAS_V139,
+    cell=getHubAnnexStationCellV139(annex.id),station=annex.station.bounds;
+  const png=auditWeaponPngV120(resolve(root,`.${asset.asset}`));
+  assert.equal(png.sha256,asset.sha256);assert.equal(annex.art.prop,asset.asset);
+  assert.equal(annex.propPlacementV139.cellId,cell.id);
   subject.images.length=0;subject.hub.draw();
-  const paints=subject.images.filter(row=>row.source===asset.src);assert.equal(paints.length,1,'The inherited V81 production path must draw its real console once');
-  const [sx,sy,sw,sh,x,y,w,h]=paints[0].bounds,station=HUB_ANNEX_BY_ID_V71['proving-ground'].station.bounds;
+  const paints=subject.images.filter(row=>row.source===asset.asset);assert.equal(paints.length,1,'The inherited V81 production path must draw its real console once');
+  const [sx,sy,sw,sh,x,y,w,h]=paints[0].bounds;
   assert.equal(paints[0].bounds.length,8,'Source crop and target must both reach Canvas');
-  assert.deepEqual([sx,sy,sx+sw,sy+sh],png.alphaBounds);
+  assert.deepEqual([sx,sy,sx+sw,sy+sh],annex.art.alphaBounds.prop);
+  assert.deepEqual({x:sx,y:sy,w:sw,h:sh},cell.source);
   assert.ok(Math.abs(w/h-sw/sh)<1e-12,'The console must keep the native visible ratio');
-  assert.ok(x>=station.x&&x+w<=station.x+station.w+1e-9);
-  assert.ok(y>=station.y&&y+h<=station.y+station.h+1e-9);
-  assert.ok(Math.abs(y+h-HUB_WORLD.floorY)<1e-9,'The visible feet must meet the physical floor');
+  assert.ok(x>=station.x-1e-9&&x+w<=station.x+station.w+1e-9);
+  assert.ok(y>=station.y-1e-9&&y+h<=station.y+station.h+1e-9);
+  assert.ok(Math.abs(y+cell.footSourceY*h/sh-HUB_WORLD.floorY)<1e-9,'The real opaque feet must meet the physical floor');
+  const foot=sy+cell.footSourceY;
+  assert.ok(Array.from({length:sw},(_,offset)=>png.pixelAlpha(sx+offset,foot-1)).some(alpha=>alpha>=192));
+  for(let py=foot;py<sy+sh;py++)for(let px=sx;px<sx+sw;px++)assert.ok(png.pixelAlpha(px,py)<192,'The remaining original fringe cannot be a physical foot');
   const report=subject.hub.getSnapshot().provingGroundConsoleV136;
   assert.equal(report.painted,true);assert.deepEqual(report.bounds,{x,y,w,h});assert.equal(report.floorY,HUB_WORLD.floorY);
+  assert.equal(report.asset,asset.asset);assert.equal(report.footAlphaThreshold,192);
   report.bounds.y=-1000;assert.equal(subject.hub.getSnapshot().provingGroundConsoleV136.bounds.y,y);
   subject.balanced();
 });
-test('the other nine annex station overrides still fit the actual current station and preserve their visible floor anchor',async()=>{
-  for(const annex of Object.values(HUB_ANNEX_BY_ID_V71).filter(row=>row.id!=='proving-ground')){
-    const subject=await fixture(null,annex.id);subject.images.length=0;subject.hub.draw();
+test('the other nine frontal annex stations draw once inside their current geometry and preserve the opaque192 floor anchor',async()=>{
+  for(const source of Object.values(HUB_ANNEX_BY_ID_V71).filter(row=>row.id!=='proving-ground')){
+    const subject=await fixture(null,source.id),annex=subject.hub.currentAnnexV71(),cell=getHubAnnexStationCellV139(annex.id);
+    subject.images.length=0;subject.hub.draw();
     const paints=subject.images.filter(row=>row.source===annex.art.prop);assert.equal(paints.length,1,annex.id);
-    const [,,, ,x,y,w,h]=paints[0].bounds,station=annex.station.bounds;
+    const [sx,sy,sw,sh,x,y,w,h]=paints[0].bounds,station=annex.station.bounds;
     assert.equal(paints[0].bounds.length,8,annex.id);
+    assert.equal(annex.art.prop,HUB_ANNEX_STATION_ATLAS_V139.asset);
+    assert.deepEqual({x:sx,y:sy,w:sw,h:sh},cell.source);
+    assert.ok(Math.abs(w/h-sw/sh)<1e-12,annex.id);
+    assert.equal(subject.images.filter(row=>row.source===source.art.prop).length,0,'The replaced historical station cannot also be painted');
     assert.ok(x>=station.x-1e-9&&x+w<=station.x+station.w+1e-9,annex.id);
     assert.ok(y>=station.y-1e-9&&y+h<=station.y+station.h+1e-9,annex.id);
-    assert.ok(Math.abs(y+h-annex.world.floorY)<1e-9,annex.id);subject.balanced();
+    assert.ok(Math.abs(y+cell.footSourceY*h/sh-annex.world.floorY)<1e-9,annex.id);
+    const physical=annex.propPlacementV139.physicalBounds;
+    assert.ok(physical.x>=x-1e-9&&physical.x+physical.w<=x+w+1e-9&&physical.y>=y-1e-9);
+    assert.ok(Math.abs(physical.y+physical.h-annex.world.floorY)<1e-9,annex.id);subject.balanced();
   }
 });
 test('real keyboard course lifts, transports, clears the beam, places three loads and parks before certificate issuance',async()=>{

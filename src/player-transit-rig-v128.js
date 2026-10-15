@@ -1,4 +1,4 @@
-import { HUMAN_LEG_DIMENSIONS_V136 } from './human-motion-v136.js';
+import { HUMAN_LEG_DIMENSIONS_V136, humanFootTravelV136 } from './human-motion-v136.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
@@ -148,15 +148,24 @@ function identityRejection(actor, sample, surface, neuroActive) {
 function ladderRungGrid(ladder) {
   return {
     spacing: ladder?.rungSpacing === undefined ? C.rungSpacing : ladder.rungSpacing,
-    first: ladder?.firstRung === undefined ? C.firstRung : ladder.firstRung
+    first: ladder?.firstRung === undefined ? C.firstRung : ladder.firstRung,
+    // A renderer may provide actual rungs extending above the upper landing.
+    // Never infer those grips for an older ladder that does not draw them.
+    top: ladder?.rungTop === undefined ? ladder?.top : ladder.rungTop,
+    // New contracts name the last painted rung itself (inclusive). Historical
+    // ladders keep their physical bottom as an exclusive rung-loop boundary.
+    bottom: ladder?.rungBottom === undefined ? ladder?.bottom : ladder.rungBottom,
+    bottomInclusive: ladder?.rungBottom !== undefined
   };
 }
 function validLadder(ladder) {
-  const { spacing, first } = ladderRungGrid(ladder);
+  const { spacing, first, top, bottom } = ladderRungGrid(ladder);
   // Authored world-pixel grids may differ between locations. Reject invalid
   // overrides rather than silently planting on a default grid that is not drawn.
-  return ladder && [ladder.x, ladder.top, ladder.bottom, spacing, first].every(Number.isFinite)
+  return ladder && [ladder.x, ladder.top, ladder.bottom, spacing, first, top, bottom].every(Number.isFinite)
     && spacing >= 1 && spacing <= 128 && first > 0 && first <= spacing
+    && top <= ladder.top
+    && bottom <= ladder.bottom && bottom >= ladder.top + first
     && ladder.bottom - ladder.top >= first + 1
     && (ladder.w === undefined || Number.isFinite(ladder.w) && ladder.w > 14);
 }
@@ -210,10 +219,15 @@ function solveLeg(hip, foot, s, facing) {
 function rungContact(ladder,cursor,offset,x,lift,facing) {
   const grid=ladderRungGrid(ladder),first=ladder.top+grid.first,stride=grid.spacing*2;
   const phase=(cursor-first-offset)/stride, whole=Math.floor(phase), p=phase-whole;
-  const last=Math.max(0,Math.ceil((ladder.bottom-first)/grid.spacing)-1);
-  const startIndex=clamp(whole*2+Math.round(offset/grid.spacing),0,last);
-  const nextIndex=clamp(whole*2+Math.round(offset/grid.spacing)+2,0,last);
-  const moving=p>=.5 && startIndex!==nextIndex, swing=moving?smooth((p-.5)*2):0;
+  const minimum=Math.min(0,Math.ceil((grid.top-first)/grid.spacing));
+  const last=Math.max(0,grid.bottomInclusive?Math.floor((grid.bottom-first)/grid.spacing)
+    :Math.ceil((grid.bottom-first)/grid.spacing)-1);
+  const startIndex=clamp(whole*2+Math.round(offset/grid.spacing),minimum,last);
+  const nextIndex=clamp(whole*2+Math.round(offset/grid.spacing)+2,minimum,last);
+  // Keep acceleration continuous at release/contact without the sharp speed
+  // peak of a whole-swing smoothstep. Height still owns phase, so holding or
+  // reversing cannot slide a planted grip or introduce a render-clock cycle.
+  const moving=p>=.5 && startIndex!==nextIndex, swing=moving?humanFootTravelV136((p-.5)*2):0;
   const y=mix(first+startIndex*grid.spacing,first+nextIndex*grid.spacing,swing);
   return {point:point(x-facing*Math.sin(Math.PI*swing)*lift,y),planted:!moving,
     rungIndex:!moving?startIndex:null,rungY:!moving?y:null,phase:p,swing};

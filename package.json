@@ -7,7 +7,7 @@
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "check": "node scripts/verify-public-release-v86.mjs",
-    "test:player": "node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-presentation-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-body-rig-v125.mjs scripts/verify-player-weapon-rig-v125.mjs scripts/verify-player-appearance-v126.mjs scripts/verify-player-appearance-runtime-v126.mjs scripts/verify-player-modular-rig-v126.mjs scripts/verify-player-action-rig-v127.mjs scripts/verify-player-appearance-preview-v127.mjs scripts/verify-player-transit-rig-v128.mjs scripts/verify-player-appearance-preview-v128.mjs scripts/verify-player-incapacitation-v128.mjs scripts/verify-player-locomotion-rig-v129.mjs scripts/verify-player-colonial-art-v129.mjs scripts/verify-player-appearance-preview-v129.mjs",
+    "test:player": "node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-presentation-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-body-rig-v125.mjs scripts/verify-player-weapon-rig-v125.mjs scripts/verify-player-appearance-v126.mjs scripts/verify-player-appearance-runtime-v126.mjs scripts/verify-player-modular-rig-v126.mjs scripts/verify-player-action-rig-v127.mjs scripts/verify-player-appearance-preview-v127.mjs scripts/verify-player-transit-rig-v128.mjs scripts/verify-player-appearance-preview-v128.mjs scripts/verify-player-incapacitation-v128.mjs scripts/verify-player-locomotion-rig-v129.mjs scripts/verify-player-colonial-art-v129.mjs scripts/verify-player-appearance-preview-v129.mjs scripts/verify-player-climb-contacts-v139.mjs",
     "test:weapons": "node --test scripts/verify-weapon-presentation-profiles-v124.mjs scripts/verify-weapon-effects-v124.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-held-weapon-v125.mjs scripts/verify-weapon-image-cache-v125.mjs",
     "test:frontier": "node --test scripts/verify-enemy-tactics-v130.mjs scripts/verify-destructible-scenery-v130.mjs scripts/verify-vertical-world-v130.mjs scripts/verify-weapon-actions-v130.mjs",
     "test:operations": "node --test scripts/verify-weapon-actions-v131.mjs scripts/verify-apc-course-v131.mjs scripts/verify-hive-missions-v131.mjs scripts/verify-hive-command-ui-v131.mjs scripts/verify-mecha-missions-v131.mjs scripts/verify-ecosystem-missions-v131.mjs scripts/verify-legacy-operations-v131.mjs scripts/verify-operations-integration-v131.mjs scripts/verify-operation-receipts-v131.mjs",
@@ -26,14 +26,16 @@
     "qa:continuation": "node scripts/qa-continuation-browser-v135.mjs",
     "qa:jeri": "node scripts/qa-jeri-surface-browser-v135.mjs",
     "qa:authoring": "node scripts/qa-authoring-browser-v135.mjs",
-    "test:coherence": "node --test scripts/verify-hub-spatial-design-v136.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-hub-prop-atlas-v136.mjs scripts/verify-human-motion-v136.mjs scripts/verify-npc-life-v136.mjs scripts/verify-editor-spatial-v136.mjs",
+    "test:coherence": "node --test scripts/verify-hub-spatial-design-v136.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-hub-prop-atlas-v136.mjs scripts/verify-human-motion-v136.mjs scripts/verify-npc-life-v136.mjs scripts/verify-editor-spatial-v136.mjs scripts/verify-human-natural-gait-v139.mjs",
     "qa:tantalus:design": "node scripts/qa-tantalus-design-v136.mjs",
     "qa:tantalus:npcs": "node scripts/qa-npc-life-v136.mjs",
     "qa:editor:spatial": "node scripts/qa-editor-spatial-browser-v136.mjs",
     "test:ship": "node --test scripts/verify-hub-ship-layout-v137.mjs scripts/verify-hub-circulation-v137.mjs scripts/verify-hub-room-furnishing-v137.mjs scripts/verify-hub-room-identity-v137.mjs",
     "qa:tantalus:ship": "node scripts/qa-tantalus-ship-v137.mjs",
     "test:level": "node --test scripts/verify-hub-service-routes-v138.mjs scripts/verify-hub-crawl-hint-v138.mjs scripts/verify-hub-interior-wall-atlas-v138.mjs scripts/verify-hub-compartment-shell-v138.mjs scripts/verify-hub-destination-signage-v138.mjs scripts/verify-hub-annex-fixtures-v138.mjs scripts/verify-hub-critical-furnishing-v138.mjs",
-    "qa:tantalus:level": "node scripts/qa-tantalus-level-v138.mjs"
+    "qa:tantalus:level": "node scripts/qa-tantalus-level-v138.mjs",
+    "test:perspective": "node --test scripts/verify-hub-support-planes-v139.mjs scripts/verify-hub-native-prop-placement-v139.mjs scripts/verify-hub-annex-storage-v139.mjs scripts/verify-hub-support-contact-v139.mjs scripts/verify-hub-furniture-atlases-v139.mjs scripts/verify-hub-annex-runtime-geometry-v139.mjs scripts/verify-hub-whole-room-projection-v139.mjs scripts/verify-hub-workstation-details-v139.mjs scripts/verify-hub-dropship-hangar-v139.mjs",
+    "qa:tantalus:perspective": "node scripts/qa-tantalus-perspective-v139.mjs"
   },
   "engines": {
     "node": ">=22"

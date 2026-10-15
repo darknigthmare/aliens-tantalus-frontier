@@ -80,12 +80,15 @@ test('the same native walk resolvers allow passage at .82 with no invisible old 
   }
 });
 test('door drawing exposes only actual completed draw phases and their exact projection for read-only browser QA', () => {
-  const subject = canvas(), door = bulkhead(.5), host = { player: { x: door.x - 22, w: 44 } };
+  const subject = canvas(), door = bulkhead(.5), host = {
+    player: { x: door.x - 22, w: 44 }, currentRoom: () => HUB_DECKS[0].rooms[0]
+  };
   BaseHub.prototype.drawDoor.call(host, subject.ctx, door, 'back');
   assert.deepEqual(host.bulkheadDrawnV134.get(door.id).drawnPhases, ['back']);
   BaseHub.prototype.drawDoor.call(host, subject.ctx, door, 'front');
   const drawn = host.bulkheadDrawnV134.get(door.id);
   assert.deepEqual(drawn.drawnPhases, ['back', 'front']);
-  assert.deepEqual(drawn.opening, hubBulkheadDepthGeometryV134(door).opening);
+  assert.deepEqual(drawn.opening, hubBulkheadDepthGeometryV134(door, { presentationMode: '2d' }).opening);
+  assert.equal(drawn.projection, 'orthographic-transverse-profile');
   assert.equal(drawn.assetSource, 'original-vector-architecture'); subject.balanced();
 });

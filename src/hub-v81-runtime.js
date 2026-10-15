@@ -594,6 +594,17 @@ export class HubGame extends HubGameV71 {
   }
 
   drawAnnexPropLayerV71(ctx, annex, image) {
+    if (annex?.id === PROVING_GROUND_ANNEX_ID_V81 && annex.propPlacementV139) {
+      super.drawAnnexPropLayerV71(ctx, annex, image);
+      const actual = this.annexNativePlacementRenderedV139;
+      this.provingGroundConsoleRenderedV136 = actual?.painted ? {
+        bounds: { ...actual.target }, sourceOpaqueBounds: [actual.source.x, actual.source.y,
+          actual.source.x + actual.source.w, actual.source.y + actual.source.h],
+        stationBounds: { ...annex.station.bounds }, floorY: annex.world.floorY,
+        asset: annex.propPlacementV139.asset, alphaThreshold: 16, footAlphaThreshold: 192, painted: true
+      } : null;
+      return;
+    }
     if (annex?.id !== PROVING_GROUND_ANNEX_ID_V81) {
       super.drawAnnexPropLayerV71(ctx, annex, image);
       return;

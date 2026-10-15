@@ -5,6 +5,7 @@ import { HUB_TRAVERSAL_PROFILES_V60, buildHubTraversalGeometryV87 } from '../src
 import { HUB_RETIRED_SERVICE_LANDINGS_V138, HUB_MEDICAL_SERVICE_APPROACH_V138 as medicalApproach,
   resolveHubServiceProfileV138 } from '../src/hub-service-geometry-v138.js';
 import { HUB_SERVICE_STANDARD_V137, resolveHubServiceProfileV137 } from '../src/hub-service-geometry-v137.js';
+import { HUB_SERVICE_APPROACHES_V139, resolveHubServiceProfileV139 } from '../src/hub-service-geometry-v139.js';
 import { HUB_MAINTENANCE_EAST_LANDING_V138 as landing } from '../src/hub-maintenance-landing-v138.js';
 import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { getHubCirculationPlanV137, drawHubCirculationV137, getHubCirculationSolidReservationsV138,
@@ -87,8 +88,9 @@ test('the existing circulation renderer paints the extended physical support and
   const options = { room: { ...room, xStart: 0 }, ladders: room.ladders, centeredLadders: false };
   const model = drawHubCirculationV137(ctx, platform, options);
   assert.deepEqual(model, getHubCirculationPlanV137(platform, options));
-  const edge = fills.find(fill => fill.color === '#7b918f');
-  assert.deepEqual(edge.bounds, [landing.x, landing.top, landing.endX - landing.x, 3]);
+  const edges = fills.filter(fill => fill.color === '#7b918f');
+  assert.deepEqual(edges.map(edge => edge.bounds), model.frontFaces.map(face => [face.x, face.y, face.w, 2]));
+  assert.deepEqual(model.supportLine, {from:[landing.x,landing.top],to:[landing.endX,landing.top],edge:'native-rear-edge'});
   assert.equal(model.openings.length, 2);
   for (const ladder of room.ladders) assert.ok(model.openings.some(opening => opening.ladderIds.includes(ladder.id)));
   for (const opening of model.openings) assert.ok(model.railSpans.every(span => span.right <= opening.left || span.left >= opening.right));
@@ -102,10 +104,17 @@ test('furniture reservations derive the actual deck faces and wall consoles with
       const room = HUB_DECKS[deck].rooms.find(room => room.id === platform.roomId), options = { ...geometry, room };
       const before = structuredClone(platform), plan = getHubCirculationPlanV137(platform, options);
       const reservations = getHubCirculationSolidReservationsV138(platform, options);
-      const face = reservations.find(bounds => bounds.role === 'native-deck-face');
-      for (const key of ['x', 'y', 'w', 'h']) near(face[key], plan.sourceBounds[key]);
+      // The actual V139 front lip follows the positive depth extrusion and
+      // stops at each ladder aperture; the physical foot line stays native.
+      const faces = reservations.filter(bounds => bounds.role === 'native-deck-face');
+      assert.equal(faces.length, plan.frontFaces.length);
+      for (const [index,face] of faces.entries()) {
+        const expected=plan.frontFaces[index],left=Math.max(room.xStart,expected.x);
+        near(face.x,left);near(face.y,expected.y);near(face.h,expected.h);
+        near(face.w,Math.min(room.xStart+room.profile.worldWidth,expected.x+expected.w)-left);
+      }
       assert.equal(reservations.filter(bounds => bounds.role === 'native-deck-console').length, plan.supports.length);
-      assert.ok(reservations.every(bounds => bounds.y >= platform.y - 8), 'An open rear railing became a solid furniture reservation');
+      assert.ok(reservations.every(bounds => bounds.y >= platform.y), 'An open rear railing became a solid furniture reservation');
       assert.ok(reservations.every(bounds => bounds.sourceId === platform.id && bounds.collidable === false));
       assert.ok(!HUB_RETIRED_SERVICE_LANDINGS_V138.some(entry => entry.platformId === platform.id));
       assert.deepEqual(platform, before);
@@ -113,7 +122,7 @@ test('furniture reservations derive the actual deck faces and wall consoles with
   }
 });
 
-function nativeFixture(deck, roomId, positionX, positionY) {
+function nativeFixture(deck, roomId, positionX, positionY, savedState = {}) {
   const events = new EventTarget();
   for (const method of ['addEventListener', 'removeEventListener']) globalThis[method] = events[method].bind(events);
   globalThis.document = Object.assign(new EventTarget(), { hidden: false, activeElement: null, hasFocus: () => true });
@@ -132,7 +141,7 @@ function nativeFixture(deck, roomId, positionX, positionY) {
     focus() { document.activeElement = this; }, getBoundingClientRect: () => ({ left: 0, top: 0, width: 1280, height: 720 }) });
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false;
   const hub = new HubGame(canvas, { onAction() {}, onPersist() {}, onStatus() {} });
-  hub.start({ deck, roomId, positionX, positionY }, { routineContextV62: { save } });
+  hub.start({ ...savedState, deck, roomId, positionX, positionY }, { routineContextV62: { save } });
   const key = (type, code) => {
     const event = new Event(type, { cancelable: true });
     Object.assign(event, { code, repeat: false, ctrlKey: false, metaKey: false, altKey: false }); events.dispatchEvent(event);
@@ -157,6 +166,57 @@ test('saved V137 positions on all three retired platforms fall onto native suppo
     assert.equal(subject.hub.player.grounded, true); assert.equal(subject.hub.player.climbing, false);
     assert.equal(subject.hub.player.health, 100); assert.equal(subject.hub.player.shockHits, 0); subject.hub.stop();
   }
+});
+
+test('V139 moves only the two named workbench access ladders, preserves their supports and accepts old mid-climb saves through native gravity', async () => {
+  for (const historical of Object.values(HUB_TRAVERSAL_PROFILES_V60)) {
+    const previous=resolveHubServiceProfileV138(historical),before=structuredClone(previous);
+    const current=resolveHubServiceProfileV139(historical);
+    assert.deepEqual(current.platforms,previous.platforms);assert.deepEqual(current.vents,previous.vents);
+    assert.deepEqual(current.ladders,previous.ladders.map(ladder=>{
+      const approach=HUB_SERVICE_APPROACHES_V139.find(entry=>entry.ladderId===ladder.id);
+      return approach?{...ladder,x:approach.ladderX}:ladder;
+    }));
+    assert.deepEqual(previous,before);
+  }
+  for(const approach of HUB_SERVICE_APPROACHES_V139){
+    const deck=HUB_DECKS.findIndex(deck=>deck.rooms.some(room=>room.id===approach.roomId));
+    const room=HUB_DECKS[deck].rooms.find(room=>room.id===approach.roomId);
+    const subject=nativeFixture(deck,room.id,room.xStart+approach.legacyLadderX-22,472,{climbing:true});
+    for(let index=0;index<8;index++)await Promise.resolve();
+    assert.equal(subject.hub.player.climbing,false,'Native start must not retain an unsupported ladder state');
+    subject.advance(1);
+    assert.equal(subject.hub.player.health,100);assert.equal(subject.hub.player.shockHits,0);
+    assert.equal(subject.hub.player.grounded,true);
+    subject.key('keydown','KeyA');subject.advance(.22);subject.key('keyup','KeyA');subject.advance(.12);
+    const ladder=subject.hub.nearestTraversalLadder();assert.equal(ladder?.id,approach.ladderId);
+    subject.key('keydown','KeyW');subject.advance(1.4);subject.key('keyup','KeyW');
+    near(subject.hub.player.y+subject.hub.player.h,ladder.top);
+    subject.key('keydown','KeyD');subject.advance(.18);subject.key('keyup','KeyD');subject.advance(.1);
+    assert.equal(subject.hub.player.climbing,false);assert.equal(subject.hub.player.grounded,true);
+    assert.equal(subject.hub.player.health,100);subject.hub.stop();
+  }
+});
+
+test('the moved proving-ground portal uses its live ID-based socket for native entry and return without rewriting historical annex data',async()=>{
+  const deck=2,room=HUB_DECKS[deck].rooms.find(room=>room.id==='armory');
+  const subject=nativeFixture(deck,room.id,room.xStart+420-22,532);
+  for(let index=0;index<8;index++)await Promise.resolve();
+  const door=subject.hub.getParentAnnexDoorV71('proving-ground');
+  near(door.bounds.x+door.bounds.w/2,room.xStart+420);
+  assert.equal(subject.hub.nearestParentAnnexDoorV71()?.annexId,'proving-ground');
+  subject.key('keydown','KeyE');subject.key('keyup','KeyE');subject.advance(.7);
+  assert.equal(subject.hub.currentAnnexV71()?.id,'proving-ground');
+  // Walk to the actual annex return bay; no player state is assigned.
+  const exit=subject.hub.annexExitDoorV71();
+  const target=exit.bounds.x+exit.bounds.w/2-22;
+  subject.key('keydown',subject.hub.player.x>target?'KeyA':'KeyD');
+  for(let frame=0;frame<900&&Math.abs(subject.hub.player.x-target)>6;frame++)subject.hub.update(1/60);
+  subject.key('keyup','KeyA');subject.key('keyup','KeyD');subject.advance(.12);
+  subject.key('keydown','KeyE');subject.key('keyup','KeyE');subject.advance(.7);
+  assert.equal(subject.hub.currentAnnexV71(),null);near(subject.hub.player.y+subject.hub.player.h,624);
+  assert.ok(Math.abs(subject.hub.player.x-(room.xStart+420-22))<2);
+  assert.equal(subject.hub.player.health,100);subject.hub.stop();
 });
 
 test('medical ladder approaches retain the adult after real sprint braking in both directions before W or S', async () => {

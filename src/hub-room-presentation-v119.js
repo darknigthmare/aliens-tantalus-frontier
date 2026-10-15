@@ -3,19 +3,25 @@
  * A room without a reviewed profile stays orthographic rather than silently
  * acquiring depth. Layers name existing renderer responsibilities, not assets
  * claimed to have been created. */
-const profile = (roomId, presentationMode, depthProfile, reason, farFactor = .025) => Object.freeze({
-  roomId, presentationMode, depthProfile, reason,
+import { getHubRoomProjectionV139 } from './hub-room-projection-v139.js';
+const profile = (roomId, legacyPresentationMode, depthProfile, legacyReason, farFactor = .025) => {
+  const projectionV139 = getHubRoomProjectionV139(roomId);
+  const presentationMode = projectionV139.mode;
+  return Object.freeze({
+  roomId, presentationMode, depthProfile,
+  projectionV139, legacyPresentationMode, legacyReason,
   gameplayPlane: '2d', coordinatePolicy: 'preserve-existing',
   layers: Object.freeze(['far', 'architecture', 'gameplay', 'light', 'foreground']),
   perspectiveFloor: presentationMode === '2.5d',
   foreground: 'below-walk-rail-only',
-  horizonY: 360,
+  horizonY: null,
   propPlane: 'rear-with-optional-one-way-top',
   compositionPolicyV133: 'room-purpose-specific-rear-instrumentation',
   cameraProfile: Object.freeze({ farFactor: presentationMode === '2.5d' ? farFactor : 0,
     maximumDrift: presentationMode === '2.5d' ? 18 : 0, gameplayFactor: 1, interactionFactor: 1 }),
-  referenceStatus: 'project-authored-presentation', canonStatus: 'project-adaptation'
-});
+  referenceStatus: 'project-authored-presentation', canonStatus: 'project-adaptation',
+  reason: projectionV139.reason,
+}); };
 const reviewed = [
   profile('bridge', '2.5d', 'command-observation', 'Grande passerelle : baie lointaine et plateforme de commande.', .022),
   profile('briefing', '2.5d', 'command-planning', 'Architecture profonde derrière la table ; interaction sur le plan historique.', .018),
@@ -60,7 +66,9 @@ export function getHubRoomPresentationV119(room, enabled = true) {
   const id = typeof room === 'string' ? room : room?.id;
   const entry = HUB_ROOM_PRESENTATIONS_V119[id] || profile(id || 'unknown', '2d', 'unreviewed', 'Présentation de cette salle à définir.');
   if (enabled) return entry;
-  return Object.freeze({ ...entry, presentationMode: '2d', perspectiveFloor: false,
+  // F7 reduces background motion; it cannot change half of a compartment's
+  // projection while its furniture, doors and collision supports stay fixed.
+  return Object.freeze({ ...entry, backgroundMotionEnabled: false,
     cameraProfile: Object.freeze({ ...entry.cameraProfile, farFactor: 0, maximumDrift: 0 }) });
 }
 

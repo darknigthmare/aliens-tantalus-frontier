@@ -178,7 +178,10 @@ test('walk/run transitions preserve both current trajectories and settle correct
       assert.deepEqual(rig(subject, { surface, locomotionState: changed }).legs, previous.legs);
       state = changed;
       let planted = 0;
-      for (let tick = 1; tick <= Math.ceil(changed.stride / .6) + 1; tick++) {
+      const cycleTicks = Math.ceil(changed.stride / .6);
+      // Observe two cycles with the shorter natural running stance, retaining
+      // the same exact-contact sample threshold and the one-cycle deadline.
+      for (let tick = 1; tick <= cycleTicks * 2 + 1; tick++) {
         subject = { ...subject, x: subject.x + direction * .6 };
         state = advancePlayerLocomotionStateV129(state, subject, .43 + tick / 120, { surface });
         const current = rig(subject, { surface, locomotionState: state });
@@ -186,6 +189,10 @@ test('walk/run transitions preserve both current trajectories and settle correct
           samePoint(current.legs[side].sole, previous.legs[side].sole,
             `${surface}/${facing}/${direction}/${from}/${tick}/${side}: a planted boot cannot slide`);
           planted++;
+        }
+        if (tick === cycleTicks) for (const entry of Object.values(state.gaitTransition.feet)) {
+          assert.ok(entry.swingTravel >= entry.swingSpan, 'The first complete stride absorbs horizontal correction.');
+          assert.ok(entry.travel >= state.stride * .25, 'Vertical correction ends within its first short travel window.');
         }
         previous = current;
       }

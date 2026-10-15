@@ -1,12 +1,15 @@
 import { HUB_DECKS } from './hub-game.js';
 import { HUB_SPATIAL_SECTION_V136, getHubSpatialPlanV136 } from './hub-spatial-design-v136.js';
-import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { HUB_SHIP_CONNECTIONS_V137 } from './hub-ship-layout-v137.js';
 import { drawHubSteelServicesV133 } from './hub-authored-composition-v133.js';
+import { getHubSupportPlanesV139 } from './hub-support-planes-v139.js';
+import { getHubInteractionPropBoundsV136 } from './hub-prop-placements-v136.js';
 
 const finite = value => typeof value === 'number' && Number.isFinite(value);
 const valid = bounds => bounds && [bounds.x, bounds.y, bounds.w, bounds.h].every(finite) && bounds.w > 0 && bounds.h > 0;
 const near = (a, b) => Math.abs(a - b) < .001;
+const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+const serviceConsoleFits = new Set(['briefing-low', 'lab-low']);
 const line = (ctx, points) => {
   ctx.beginPath(); points.forEach(([x, y], index) => index ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
 };
@@ -91,13 +94,16 @@ export function getHubCirculationPlanV137(platform, {
   if (!valid(platform) || platform.type === 'floor' || platform.role === 'floor') return null;
   const standard = HUB_CIRCULATION_STANDARD_V137;
   const x = platform.x, right = x + platform.w, y = platform.y;
-  const depth = standard.deckDepth, presentation = getHubRoomPresentationV119(room, depthEnabled);
-  const dx = presentation.presentationMode === '2.5d' ? -depth * standard.dxPerY : 0;
+  const supportPlanes = getHubSupportPlanesV139(room, { depthEnabled });
+  const depth = Math.min(supportPlanes.deckDepth, Math.max(0, platform.h - 3));
+  const dx = depth * supportPlanes.projectionDxPerY;
   const rawOpenings = ladders.flatMap(ladder => {
     const width = finite(ladder.w) ? ladder.w : 52;
     const center = ladder.x + (centeredLadders ? 0 : width / 2);
     if ((!near(ladder.top, y) && !near(ladder.bottom, y)) || center < x - width / 2 || center > right + width / 2) return [];
-    const half = Math.max(standard.minimumLadderOpening, width + 20) / 2;
+    // The front rim shifts with the depth extrusion. Its opening still has
+    // to leave the native44px adult clear, including that horizontal return.
+    const half = Math.max(standard.minimumLadderOpening, width + 20, 44 + Math.abs(dx) * 2 + 12) / 2;
     return [{ left: Math.max(x, center - half), right: Math.min(right, center + half), ladderIds: [ladder.id], center }];
   }).filter(opening => opening.right > opening.left).sort((a, b) => a.left - b.left);
   const openings = [];
@@ -109,11 +115,43 @@ export function getHubCirculationPlanV137(platform, {
   }
   const endInset = Math.min(28, platform.w / 4);
   const supportCount = Math.max(2, Math.ceil((platform.w - endInset * 2) / standard.maximumBracketSpacing) + 1);
-  const supports = Array.from({ length: supportCount }, (_, index) => ({
-    x: x + endInset + index * (platform.w - endInset * 2) / (supportCount - 1),
+  const authoredSupportXs = platform.id === 'lab-low' ? [x + 89, x + 165] : null;
+  const supportXs = (authoredSupportXs || Array.from({ length: supportCount }, (_, index) => {
+    let candidate = x + endInset + index * (platform.w - endInset * 2) / (supportCount - 1);
+    for (const opening of openings) if (candidate - 9 < opening.right && candidate + 14 > opening.left) {
+      const choices = [opening.left - 18, opening.right + 13]
+        .filter(value => value >= x + 12 && value <= right - 18);
+      candidate = choices.sort((a, b) => Math.abs(a - candidate) - Math.abs(b - candidate))[0] ?? candidate;
+    }
+    return candidate;
+  })).filter((value, index, values) => values.findIndex(other => Math.abs(other - value) < .001) === index)
+    .sort((a, b) => a - b);
+  const serviceBounds = serviceConsoleFits.has(platform.id) ? getHubInteractionPropBoundsV136(room) : null;
+  const supports = supportXs.map(supportX => ({
+    x: supportX,
     top: y + platform.h, bottom: y + platform.h + standard.maximumBracketDrop,
     attachment: 'rear-wall-bolted-console', collidable: false
-  }));
+  })).map(support => {
+    const silhouette = candidate => ({ x: candidate.x - 9, y: candidate.top - 2,
+      w: 23, h: candidate.bottom - candidate.top + 5 });
+    if (!valid(serviceBounds) || !overlap(silhouette(support), serviceBounds)) return support;
+    const margin = 8, minimumDrop = 16;
+    const drop = serviceBounds.y - margin - 3 - support.top;
+    if (drop >= minimumDrop) return { ...support, bottom: Math.min(support.bottom, support.top + drop),
+      serviceFit: 'short-console-above-native-worktop' };
+    // The new briefing table leaves0.76px above its opaque top. A compact
+    // 16px strut fits that measured slot; it does not claim the usual8px air.
+    const compactClearance = serviceBounds.y - support.top - minimumDrop - 3;
+    if (platform.id === 'briefing-low' && compactClearance >= .5)
+      return { ...support, bottom: support.top + minimumDrop, serviceClearance: compactClearance,
+        serviceFit: 'compact-console-above-native-worktop' };
+    const candidates = [serviceBounds.x - margin - 14, serviceBounds.x + serviceBounds.w + margin + 9]
+      .filter(candidate => candidate >= x + 12 && candidate <= right - 18
+        && openings.every(opening => candidate + 14 <= opening.left || candidate - 9 >= opening.right)
+        && !overlap(silhouette({ ...support, x: candidate }), serviceBounds))
+      .sort((a, b) => Math.abs(a - support.x) - Math.abs(b - support.x));
+    return candidates.length ? { ...support, x: candidates[0], serviceFit: 'wall-console-beside-native-workbay' } : support;
+  }).sort((a, b) => a.x - b.x);
   const hatches = vents.filter(vent => valid(vent) && near(vent.y + vent.h, y)
     && vent.x < right && vent.x + vent.w > x
     && (!room?.id || !vent.roomId || vent.roomId === room.id));
@@ -131,14 +169,20 @@ export function getHubCirculationPlanV137(platform, {
         label: target?.id === 'reactor' ? 'RÉACTEUR →' : 'COURSIVE →', x: right - 78, y: y + platform.h + 13 });
     }
   }
+  const frontSpans = guardSpans(x, right, openings);
   return {
     id: platform.id, roomId: room?.id || platform.roomId || null,
     sourceBounds: { x, y, w: platform.w, h: platform.h }, footY: y,
-    topSurface: [[x, y], [right, y], [right + dx, y - depth], [x + dx, y - depth]],
-    depthDx: dx, depthY: -depth, railY: y - depth, railHeight: standard.railHeight,
+    topSurface: [[x, y], [right, y], [right + dx, y + depth], [x + dx, y + depth]],
+    topSurfaces: frontSpans.map(span => [[span.left, y], [span.right, y],
+      [span.right + dx, y + depth], [span.left + dx, y + depth]]),
+    frontFaces: frontSpans.map(span => ({ x: span.left + dx, y: y + depth,
+      w: span.right - span.left, h: platform.h - depth })),
+    supportLine: { from: [x, y], to: [right, y], edge: 'native-rear-edge' },
+    depthDx: dx, depthY: depth, railY: y, railHeight: standard.railHeight,
     railSpans: guardSpans(x + 6, right - 6, openings), openings, supports, destinations,
     roomBounds: room ? { x: room.xStart || 0, w: room.profile?.worldWidth || room.world?.width || 1280 } : null,
-    presentationMode: presentation.presentationMode,
+    presentationMode: supportPlanes.presentationMode,
     plane: standard.plane, collidable: false, geometryPreserved: true
   };
 }
@@ -157,12 +201,15 @@ export function getHubCirculationSolidReservationsV138(platform, options = {}) {
       ...(polygon ? { polygon: polygon.map(point => [...point]) } : {}), plane: plan.plane,
       collidable: false, interactive: false, source: 'native-circulation-renderer' };
   };
-  const points = plan.topSurface, minX = Math.min(...points.map(point => point[0])), maxX = Math.max(...points.map(point => point[0]));
-  const minY = Math.min(...points.map(point => point[1])), maxY = Math.max(...points.map(point => point[1]));
-  return [reservation(plan.sourceBounds, 'native-deck-face'),
-    reservation({ x: minX, y: minY, w: maxX - minX, h: maxY - minY }, 'native-deck-top', points),
+  return [reservation({ x: plan.sourceBounds.x, y: plan.footY, w: plan.sourceBounds.w, h: 1 }, 'native-deck-support-edge'),
+    ...plan.frontFaces.map(face => reservation(face, 'native-deck-face')),
+    ...plan.topSurfaces.map(points => {
+      const minX = Math.min(...points.map(point => point[0])), maxX = Math.max(...points.map(point => point[0]));
+      const minY = Math.min(...points.map(point => point[1])), maxY = Math.max(...points.map(point => point[1]));
+      return reservation({ x: minX, y: minY, w: maxX - minX, h: maxY - minY }, 'native-deck-top', points);
+    }),
     ...plan.supports.map(support => {
-      const x = support.x + plan.depthDx;
+      const x = support.x;
       // Triangle reaches x+14; the bolted wall plate reaches x-9 and
       // three pixels below the diagonal's endpoint, exactly as drawn below.
       return reservation({ x: x - 9, y: support.top - 2, w: 23, h: support.bottom - support.top + 5 }, 'native-deck-console',
@@ -175,12 +222,13 @@ export function drawHubCirculationV137(ctx, platform, options = {}) {
   const plan = getHubCirculationPlanV137(platform, options);
   if (!ctx || !plan) return null;
   const { x, y, w, h } = plan.sourceBounds;
+  const phase = options.phase || 'all', drawRear = phase !== 'front', drawFront = phase !== 'back';
   ctx.save();
   if (plan.roomBounds) { ctx.beginPath(); ctx.rect(plan.roomBounds.x, 0, plan.roomBounds.w, 720); ctx.clip(); }
   // Triangular wall consoles are scenery in the rear plane. Each is bolted
   // near the deck underside; none becomes a visual column down to the floor.
-  for (const support of plan.supports) {
-    const sx = support.x + plan.depthDx;
+  if (drawRear) for (const support of plan.supports) {
+    const sx = support.x;
     ctx.fillStyle = '#1d3035';
     polygon(ctx, [[sx - 6, support.top - 2], [sx + 14, support.top - 2], [sx - 6, support.bottom]]);
     ctx.strokeStyle = '#3f595d'; ctx.lineWidth = 2;
@@ -189,30 +237,39 @@ export function drawHubCirculationV137(ctx, platform, options = {}) {
     ctx.fillStyle = '#758b86'; ctx.fillRect(sx - 6, support.bottom - 11, 2, 2); ctx.fillRect(sx - 6, support.bottom - 2, 2, 2);
   }
   ctx.strokeStyle = '#3c565a'; ctx.lineWidth = 2;
-  for (const span of plan.railSpans) {
-    const a = span.left + plan.depthDx, b = span.right + plan.depthDx;
+  if (drawRear) for (const span of plan.railSpans) {
+    const a = span.left, b = span.right;
     line(ctx, [[a, plan.railY], [a, plan.railY - plan.railHeight], [b, plan.railY - plan.railHeight], [b, plan.railY]]);
     line(ctx, [[a, plan.railY - plan.railHeight / 2], [b, plan.railY - plan.railHeight / 2]]);
     for (let post = a + 96; post < b - 12; post += 96) line(ctx, [[post, plan.railY], [post, plan.railY - plan.railHeight]]);
   }
-  ctx.fillStyle = '#354d52'; polygon(ctx, plan.topSurface);
-  ctx.strokeStyle = '#5b7477'; ctx.lineWidth = 1;
-  for (let seam = x + 44; seam < x + w; seam += 44) line(ctx, [[seam, y], [seam + plan.depthDx, y + plan.depthY]]);
-  ctx.fillStyle = '#23373d'; ctx.fillRect(x, y, w, h);
-  ctx.fillStyle = '#7b918f'; ctx.fillRect(x, y, w, Math.min(3, h));
-  ctx.fillStyle = '#14272e'; ctx.fillRect(x, y + h - 4, w, 4);
-  ctx.strokeStyle = '#40595d'; ctx.lineWidth = 1;
-  for (let rib = x + 24; rib < x + w - 6; rib += 64) line(ctx, [[rib, y + 5], [rib - 13, y + h - 6], [rib + 31, y + h - 6]]);
+  if (drawRear && plan.depthY) {
+    ctx.fillStyle = '#354d52'; for (const surface of plan.topSurfaces) polygon(ctx, surface);
+    ctx.strokeStyle = '#5b7477'; ctx.lineWidth = 1;
+    for (let seam = x + 44; seam < x + w; seam += 44) if (!plan.openings.some(opening => seam > opening.left && seam < opening.right))
+      line(ctx, [[seam, y], [seam + plan.depthDx, y + plan.depthY]]);
+  }
+  // The rear cleat is continuous like the native support. It explains a
+  // grounded foot while the front lip stays open for the climbing body.
+  if (drawRear) { ctx.fillStyle = '#536d70'; ctx.fillRect(x, y, w, 1); }
+  if (drawFront) for (const face of plan.frontFaces) {
+    ctx.fillStyle = '#23373d'; ctx.fillRect(face.x, face.y, face.w, face.h);
+    ctx.fillStyle = '#7b918f'; ctx.fillRect(face.x, face.y, face.w, Math.min(2, face.h));
+    ctx.fillStyle = '#14272e'; ctx.fillRect(face.x, face.y + face.h - Math.min(4, face.h), face.w, Math.min(4, face.h));
+    ctx.strokeStyle = '#40595d'; ctx.lineWidth = 1;
+    for (let rib = face.x + 24; rib < face.x + face.w - 6; rib += 64)
+      line(ctx, [[rib, face.y + 4], [rib - 13, face.y + face.h - 4], [Math.min(face.x + face.w - 2, rib + 31), face.y + face.h - 4]]);
+  }
   // Paint names a destination that actually exists. No decorative hatch,
   // suggested action key or extra navigation node is invented by this pass.
-  for (const destination of plan.destinations) {
+  if (drawRear) for (const destination of plan.destinations) {
     ctx.fillStyle = '#14272d'; ctx.fillRect(destination.x - 64, destination.y - 9, 128, 14);
     ctx.fillStyle = '#b2b7a0'; ctx.font = '8px ui-monospace, monospace'; ctx.textAlign = 'center';
     ctx.fillText(destination.label, destination.x, destination.y + 1, 120);
   }
-  for (const opening of plan.openings) {
+  if (drawFront) for (const opening of plan.openings) {
     ctx.fillStyle = '#a99f6c';
-    for (const edge of [opening.left, opening.right - 8]) ctx.fillRect(Math.max(x, Math.min(x + w - 8, edge)), y + 4, 8, 3);
+    for (const edge of [opening.left - 8, opening.right]) ctx.fillRect(Math.max(x, Math.min(x + w - 8, edge)) + plan.depthDx, y + plan.depthY + 4, 8, 3);
   }
   ctx.restore(); return plan;
 }
@@ -226,15 +283,34 @@ export function withHubCirculationV137(Base) {
       const room = HUB_DECKS[this.state?.deck || 0].rooms.find(candidate => candidate.id === platform.roomId);
       return drawHubCirculationV137(ctx, platform, {
         room, ladders: this.v51Ladders || [], vents: this.v51Vents || [], platforms: this.v51Platforms || [],
-        depthEnabled: this.depthPresentationV116 !== false
+        depthEnabled: this.depthPresentationV116 !== false, phase: 'back'
       });
     }
     drawAnnexSteelPlatformV133(ctx, platform, annex) {
       if (this.editorPlaytest) return super.drawAnnexSteelPlatformV133?.(ctx, platform, annex);
       return drawHubCirculationV137(ctx, platform, {
         room: { ...annex, xStart: 0 }, ladders: annex.ladders || [], centeredLadders: false,
-        depthEnabled: this.depthPresentationV116 !== false
+        depthEnabled: this.depthPresentationV116 !== false, phase: 'back'
       });
+    }
+    drawHubCirculationFrontV139(ctx) {
+      if (this.editorPlaytest || this.hubTrainingV132?.active) return false;
+      const annex = this.currentAnnexV71?.();
+      const platforms = annex ? annex.platforms : this.v51Platforms || [];
+      for (const platform of platforms.filter(entry => entry.type !== 'floor' && entry.role !== 'floor')) {
+        const room = annex ? { ...annex, xStart: 0 }
+          : HUB_DECKS[this.state?.deck || 0].rooms.find(candidate => candidate.id === platform.roomId);
+        drawHubCirculationV137(ctx, platform, {
+          room, ladders: annex ? annex.ladders || [] : this.v51Ladders || [],
+          centeredLadders: !annex, depthEnabled: this.depthPresentationV116 !== false, phase: 'front'
+        });
+      }
+      return true;
+    }
+    drawPlayer(ctx) {
+      const result = super.drawPlayer(ctx);
+      this.drawHubCirculationFrontV139(ctx);
+      return result;
     }
     drawTraversalOcclusions(ctx, phase = 'front') {
       if (this.editorPlaytest) return super.drawTraversalOcclusions(ctx, phase);

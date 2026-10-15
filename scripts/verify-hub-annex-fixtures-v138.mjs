@@ -13,8 +13,9 @@ import { HUB_ANNEX_MODULE_ART_V82, HUB_ANNEX_FIXTURE_STANDARD_V138 as standard,
 import { getHubSpatialPlanV136 } from '../src/hub-spatial-design-v136.js';
 import { getHubRoomLifePlanV136, withHubRoomLifeV136 } from '../src/hub-room-life-v136.js';
 import { getHubCirculationSolidReservationsV138 } from '../src/hub-circulation-v137.js';
+import { HUB_ANNEX_STATION_IDS_V139, getHubAnnexRuntimeGeometryV139 } from '../src/hub-annex-runtime-geometry-v139.js';
 
-const annexes=[...HUB_ANNEXES_V87,...HUB_SHIP_SPACES_V137];
+const annexes=[...HUB_ANNEXES_V87,...HUB_SHIP_SPACES_V137].map(getHubAnnexRuntimeGeometryV139);
 const rooms=[...HUB_DECKS.flatMap(deck=>deck.rooms),...annexes];
 const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} differs from ${b}`);
@@ -26,7 +27,7 @@ function optionsFor(room){
   const geometry=buildHubTraversalGeometryV87(deck);
   return{doors:buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck),ladders:geometry.ladders,platforms:geometry.platforms};
 }
-function painter(){const calls=[];return{calls,ctx:{drawImage(...args){calls.push(args);}}};}
+function painter(){const calls=[];return{calls,ctx:{drawImage(...args){calls.push(args);},save(){},restore(){},fillRect(){}}};}
 
 test('the canonical source pieces have one owner and the crate crop contains every native alpha pixel',()=>{
   assert.equal(nativeSources,HUB_ANNEX_MODULE_ART_V82,'Native drawing and clearance must use the same data');
@@ -39,14 +40,22 @@ test('the canonical source pieces have one owner and the crate crop contains eve
   assert.equal(png.pixelEdits,false);
 });
 
-test('native cargo retains uniform source scale, original boxes, floor contact and interaction geometry',()=>{
-  let cargo=0,stations=0;
+test('native cargo and task-specific storage retain uniform source scale, real boxes, floor contact and interaction geometry',()=>{
+  let cargo=0,stations=0,assemblies=0;
   for(const room of annexes){
     const before=structuredClone(room),plan=getHubAnnexFixturePlanV138(room);
+    const replaced=HUB_ANNEX_STATION_IDS_V139.includes(room.id);
+    assert.equal(plan.registryPreserved,true);assert.equal(plan.physicalStationRelocated,replaced);assert.equal(plan.geometryPreserved,!replaced);
+    if(!['personal-refuge','maintenance-spine'].includes(room.id))near(plan.stationSupport.supportY,624);
     for(const prop of plan.props){
       const original=room.props.find(entry=>entry.id===prop.id);assert.ok(original);
       if(prop.role==='cargo'){
-        cargo++;near(prop.target.w/prop.target.h,167/152);near(prop.target.y+prop.target.h,624);
+        cargo++;near(prop.target.y+prop.target.h,624);
+        if(prop.assembly){
+          assemblies++;assert.deepEqual(prop.target,prop.declaredBounds);
+          near(prop.assembly.contentTarget.w/prop.assembly.contentTarget.h,prop.source.w/prop.source.h);
+          near(prop.assembly.supportY,624);assert.equal(prop.support,'native-physical-work-bay');
+        }else near(prop.target.w/prop.target.h,167/152);
         assert.ok(prop.target.x>=original.x&&(prop.target.x+prop.target.w)<=original.x+original.w+1e-8);
         assert.ok(prop.target.y>=original.y-1e-8);assert.ok(prop.target.h<=original.h+1e-8);
       }
@@ -58,7 +67,7 @@ test('native cargo retains uniform source scale, original boxes, floor contact a
     }
     assert.deepEqual(room,before);
   }
-  assert.equal(cargo,20);assert.equal(stations,10);
+  assert.equal(cargo,20);assert.equal(assemblies,6);assert.equal(stations,10);
 });
 
 test('pipe bodies and ceiling-anchored shafts use the exact drawn source and isotropic tiles without altering solids',()=>{

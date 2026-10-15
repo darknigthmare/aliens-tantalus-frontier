@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { HUB_DECKS, HUB_WORLD } from '../src/hub-game.js';
 import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
+import { HUB_SHIP_SPACES_V137 } from '../src/hub-ship-layout-v137.js';
+import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from '../src/hub-navigation-layout-v133.js';
 import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
 import { hubBulkheadDepthGeometryV134, drawHubBulkheadDepthV134 } from '../src/hub-bulkhead-depth-v134.js';
@@ -28,12 +30,15 @@ function canvas() {
   return { ctx, fills, clips, images, paths, native, balanced: () => assert.equal(depth, 0) };
 }
 
-test('all 29 room sections share the native foot rail, a distinct service floor and immutable world reservations', () => {
+test('all 29 historical room sections retain their foot rail and use the V139 frontal or oblique service floor without mutating reservations', () => {
   assert.equal(rooms.length, 29);
   for (const room of rooms) {
     const before = structuredClone(room), plan = getHubSpatialPlanV136(room);
     assert.equal(plan.planes.walkY, room.world?.floorY || 624, room.id);
-    assert.equal(plan.planes.rearServiceY, plan.planes.walkY - 24);
+    const depth=plan.presentationMode==='2.5d'?24:0;
+    assert.equal(plan.planes.rearServiceY, plan.planes.walkY-depth);
+    assert.equal(plan.projection.dxPerY,depth?19/12:0);
+    assert.equal(plan.projection.kind,depth?'parallel-oblique':'orthographic');
     assert.equal(plan.planes.rearWallBaseY, plan.planes.walkY - 58);
     assert.equal(plan.bounds.x, room.xStart); assert.equal(plan.collidable, false);
     assert.equal(plan.geometryPreserved, true); assert.equal(plan.gameplayPlane, '2d');
@@ -55,12 +60,37 @@ test('real door, lift, ladder, viewport and service sockets exclude decorative f
   assert.equal(hubSpatialPlacementClearV136({ x: room.xStart - 1, y: 240, w: 10, h: 10 }, plan), false);
 });
 
+test('every live native hatch reserves its exact drawn rectangle and both existing crawl approaches', () => {
+  let hatchCount = 0;
+  for (const [deckIndex, deck] of HUB_DECKS.entries()) {
+    const geometry = buildHubTraversalGeometryV87(deckIndex), before = structuredClone(geometry.vents);
+    for (const room of deck.rooms) {
+      const plan = getHubSpatialPlanV136(room, { vents: geometry.vents });
+      const vents = geometry.vents.filter(vent => vent.roomId === room.id);
+      assert.equal(plan.reservations.filter(r => r.role === 'native-vent').length, vents.length, room.id);
+      assert.equal(plan.reservations.filter(r => r.role === 'vent-approach').length, vents.length, room.id);
+      for (const vent of vents) {
+        hatchCount++;
+        assert.ok(plan.reservations.some(r => r.role === 'native-vent'
+          && r.x === vent.x - 8 && r.y === vent.y - 8 && r.w === vent.w + 16 && r.h === vent.h + 16), vent.id);
+        for (const x of [vent.x - 63, vent.x + vent.w + 62]) {
+          assert.equal(hubSpatialPlacementClearV136({ x, y: vent.y + 10, w: 1, h: 10 }, plan), false, vent.id);
+        }
+        assert.equal(hubSpatialPlacementClearV136({ x: vent.x + 10, y: vent.y + 10, w: 10, h: 10 }, plan), false, vent.id);
+      }
+    }
+    assert.deepEqual(geometry.vents, before, 'Scenery must not relocate the hatch or change its collision');
+  }
+  assert.equal(hatchCount, 18);
+});
+
 test('every depth floor seam has the actual transverse bulkhead slope and remains independent of room translation', () => {
   const door = network(0).find(d => !d.lift), geometry = hubBulkheadDepthGeometryV134(door);
   const slope = (geometry.near.x - geometry.rear.x) / (geometry.near.floorY - geometry.rear.floorY);
-  const adjacentFloor = getHubSpatialFloorV136(HUB_DECKS[0].rooms[0]);
-  const boundarySeam = adjacentFloor.seams.find(seam => Math.abs(seam.from[0] - 4 * slope - door.x) < 1e-8);
-  assert.ok(boundarySeam, 'the actual door cross-section meets the same floor seam at walkY');
+  const frontalFloor = getHubSpatialFloorV136(HUB_DECKS[0].rooms[0]);
+  assert.equal(frontalFloor.dxPerY,0,'A frontal room cannot inherit a depth floor from its former profile');
+  const maintenanceFloor=getHubSpatialFloorV136(HUB_SHIP_SPACES_V137.find(room=>room.id==='maintenance-spine'));
+  assert.equal(maintenanceFloor.dxPerY,slope,'The sole depth corridor retains the common parallel vector');
   for (const room of rooms) {
     const model = getHubSpatialFloorV136(room), moved = getHubSpatialFloorV136({ ...room, xStart: room.xStart + 90000 });
     assert.ok(model.bounds.y > model.walkY); assert.equal(model.collidable, false);
@@ -70,7 +100,7 @@ test('every depth floor seam has the actual transverse bulkhead slope and remain
     }
     if (model.mode === 'parallel-oblique') assert.equal(model.dxPerY, slope);
     else assert.equal(model.dxPerY, 0);
-    assert.equal(getHubSpatialFloorV136(room, { enabled: false }).dxPerY, 0);
+    assert.equal(getHubSpatialFloorV136(room, { enabled: false }).dxPerY,model.dxPerY,'F7 retains the complete authored room projection');
   }
 });
 
@@ -169,13 +199,13 @@ test('passive dressing reserves the actual parked hulls, control booth and elect
   }
 });
 
-test('ladder mounting ends match real endpoints, uses the correct centred or annex anchor and preserves source geometry', () => {
+test('V139 ladder rails retain native lower endpoints and add visible upper handholds at the correct centred or annex anchor', () => {
   const ladder = { x: 450, top: 390, bottom: 624, w: 52 }, before = structuredClone(ladder);
   for (const centered of [true, false]) {
     const subject = canvas(); assert.equal(drawHubSpatialLadderV136(subject.ctx, ladder, { centered }), true);
-    const rails = subject.fills.filter(f => f.bounds[3] === 234);
+    const rails = subject.fills.filter(f => f.bounds[3] === 322);
     assert.ok(rails.length > 0); assert.equal(rails[0].bounds[0], centered ? 424 : 450);
-    assert.ok(rails.every(f => f.bounds[1] === 390 && f.bounds[1] + f.bounds[3] === 624));
+    assert.ok(rails.every(f => f.bounds[1] === 302 && f.bounds[1] + f.bounds[3] === 624));
     subject.balanced(); assert.deepEqual(ladder, before);
   }
 });

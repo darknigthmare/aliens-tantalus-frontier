@@ -7,6 +7,7 @@ import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
 import { HUB_ANNEXES_V137 } from '../src/hub-annex-registry-v137.js';
 import { REFUGE_PROPS_LAYOUT_V87 } from '../src/refuge-art-v87.js';
 import { getHubSpatialPlanV136 } from '../src/hub-spatial-design-v136.js';
+import { getHubRoomLifePlanV136 } from '../src/hub-room-life-v136.js';
 import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
 import { HUB_ROOM_DRESSING_V134, resolveHubRoomDressingV134, drawHubRoomDressingV134, drawHubRoomPlaqueV134, getHubRoomPlaqueBoundsV134,
@@ -33,7 +34,16 @@ test('all production rooms receive task-specific passive equipment, while their 
   assert.equal(new Set(Object.values(HUB_ROOM_DRESSING_V134).map(entry => entry.purpose)).size,29);
   for (const room of rooms) {
     const before = structuredClone(room), composition = resolveHubRoomDressingV134(room,optionsFor(room));
-    assert.ok(composition.items.length >= 4, `${room.id} has too little usable equipment`);
+    if(room.id==='science-lab'){
+      // The standalone legacy layer retains its three actual tasks. The live
+      // renderer adds the reviewed preparation/cold-stock group from Life.
+      for(const role of ['preparation-bench','sample-storage','lab-services'])assert.ok(composition.items.some(entry=>entry.role===role),role);
+      const deck=HUB_DECKS.findIndex(deck=>deck.rooms.includes(room)),geometry=buildHubTraversalGeometryV87(deck);
+      const active=getHubRoomLifePlanV136(room,{...optionsFor(room),platforms:geometry.platforms});
+      assert.deepEqual(active.furnishingV137.rejected,[]);
+      for(const role of ['sample-preparation-counter','sample-cold-storage','mobile-sample-preparation','catwalk-sterile-preparation-stock'])assert.ok(active.items.some(entry=>entry.role===role),role);
+      for(const entry of active.items)for(const reservation of active.spatial.reservations)assert.ok(!intersects(entry,reservation),`${entry.role} blocks ${reservation.role}`);
+    }else assert.ok(composition.items.length >= 4, `${room.id} has too little usable equipment`);
     assert.ok(new Set(composition.items.map(entry => entry.role)).size >= 2, room.id);
     const plaque=getHubRoomPlaqueBoundsV134(room);
     for (const entry of composition.items) {

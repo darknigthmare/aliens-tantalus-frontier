@@ -32,7 +32,8 @@ import { HUB_ROOM_NAVIGATION_V133, hubRearPropColliderV133 } from './hub-navigat
 import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { drawHubBulkheadDepthV134, hubBulkheadDepthGeometryV134, getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
-import { getHubPropHeightV136, getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
+import { getHubPropHeightV136, getHubVehiclePlacementV136, getHubNativePropPlacementV139 } from './hub-prop-placements-v136.js';
+import { HUB_FURNITURE_ATLAS_V139 } from './hub-furniture-atlas-v139.js';
 import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
   drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
   releaseHubPlayerAppearanceV126 } from './player-appearance-hub-v126.js';
@@ -108,26 +109,23 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
   const profile = HUB_ROOM_PROFILES[id];
   const worldWidth = profile?.worldWidth || ROOM_WIDTH;
   const navigation = HUB_ROOM_NAVIGATION_V133[id];
-  const propX = xStart + navigation.propX;
   const sourceSize = HUB_PROP_SOURCE_SIZES[prop] || { width: 1, height: 1 };
-  const renderWidth = sourceSize.width * (propHeight / sourceSize.height);
-  const propRenderBounds = Object.freeze({
-    x: propX - renderWidth / 2,
-    y: FLOOR_Y - propHeight,
-    w: renderWidth,
-    h: propHeight
-  });
-  const propCollisionBounds = profile?.propCollider ? Object.freeze({
-    collisionMode: navigation.collisionMode,
-    physicalPlane: navigation.propPlane,
-    x: propX - Math.min(profile.propCollider.width, renderWidth) / 2,
-    y: FLOOR_Y - Math.min(profile.propCollider.height, propHeight),
-    w: Math.min(profile.propCollider.width, renderWidth),
-    h: Math.min(profile.propCollider.height, propHeight)
-  }) : null;
-  const interactionWidth = Math.max(renderWidth, propCollisionBounds?.w || 0) + 96;
-  const propInteractionBounds = Object.freeze({ x: propX - interactionWidth / 2, y: FLOOR_Y - propHeight - 32, w: interactionWidth, h: propHeight + 64 });
-  const profileGeometry = profile?.authoredCollision && profile.propCollider
+  const originalAsset = `/assets/openai/hub/props/${sourceSize.file || `${prop}.png`}`;
+  let placement = getHubNativePropPlacementV139({ id, xStart, centerX: navigation.propX,
+    walkY: FLOOR_Y, asset: originalAsset, sourceSize, sourceBounds: sourceSize.sourceBounds || null,
+    renderHeight: propHeight, collider: profile?.propCollider || null });
+  if (!placement) throw new Error(`Missing native furniture placement: ${id}`);
+  if (placement.visible === false && id === 'vehicle-bay') {
+    const actor = resolveHubVehicleArtV58(id)?.vehicle;
+    const vehicle = getHubVehiclePlacementV136({ id, xStart }, actor);
+    if (!vehicle) throw new Error('Missing native vehicle inspection placement.');
+    placement = { ...placement, inspectionX: vehicle.renderBounds.x + vehicle.renderBounds.w / 2,
+      inspectionSource: actor.id };
+  }
+  const propRenderBounds = Object.freeze({ ...placement.renderBounds });
+  const propCollisionBounds = placement.colliders[0] ? Object.freeze({ ...placement.colliders[0] }) : null;
+  const propInteractionBounds = placement.interactionBounds ? Object.freeze({ ...placement.interactionBounds }) : null;
+  const profileGeometry = profile?.authoredCollision && propCollisionBounds
     ? [Object.freeze({
         ...propCollisionBounds,
         role: 'interaction-prop',
@@ -143,22 +141,25 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     npcRow,
     xStart,
     xEnd: xStart + worldWidth,
-    x: propX,
+    x: placement.inspectionX,
     profile,
     collisionSource: 'authored-room-profile',
     background: `/assets/openai/hub/rooms/${art}.png`,
-    prop: `/assets/openai/hub/props/${sourceSize.file || `${prop}.png`}`,
-    propSourceBounds: sourceSize.sourceBounds || null,
+    prop: placement.asset,
+    propSourceBounds: Object.freeze([placement.source.x, placement.source.y,
+      placement.source.x + placement.source.w, placement.source.y + placement.source.h]),
+    propPlacementV139: placement,
     propRenderBounds,
     propCollisionBounds,
     propInteractionBounds,
-    propHeight,
+    propHeight: propRenderBounds.h,
     viewport: Object.freeze({ x: xStart + viewport.x, y: viewport.y, w: viewport.w, h: viewport.h }),
     geometry: Object.freeze(profileGeometry || [])
   });
 };
 
 export const HUB_MODULAR_PROP_FILES = Object.freeze([
+  HUB_FURNITURE_ATLAS_V139.asset,
   '/assets/openai/hub/props/bulkhead-door.png',
   '/assets/openai/hub/props/lift-door.png',
   '/assets/openai/hub/props/bridge-terminal.png',
@@ -403,7 +404,7 @@ export class HubGame {
   // Shared with V51's overridden world renderer. Never invent a global walk
   // plane for editor-authored floors or alter actor/collider coordinates.
   drawDepthFloorV116(ctx) {
-    if (!this.depthPresentationV116 || this.editorPlaytest || this.useGlobalFloor === false) return;
+    if (this.editorPlaytest || this.useGlobalFloor === false) return;
     const annex = this.currentAnnexV71?.();
     const rooms = annex ? [annex] : HUB_DECKS[this.state?.deck || 0].rooms;
     const cameraX = annex ? this.annexCameraV71.x : this.camera.x;
@@ -412,7 +413,7 @@ export class HubGame {
   }
 
   drawDepthContactShadowV116(ctx, actor, floorY) {
-    drawHubContactShadowV116(ctx, actor, floorY, this.depthPresentationV116 && !this.editorPlaytest);
+    return drawHubContactShadowV116(ctx, actor, floorY, !this.editorPlaytest);
   }
 
   setControl(control, active) {
@@ -764,10 +765,15 @@ export class HubGame {
     const assetReport = this.getAssetReport();
     const playerCenter = (this.player?.x || 0) + (this.player?.w || 0) / 2;
     const activeDoor = this.doorStates.reduce((nearest, door) => !nearest || Math.abs(playerCenter - door.x) < Math.abs(playerCenter - nearest.x) ? door : nearest, null);
+    const nativePaints = this.editorPlaytest || this.currentAnnexV71?.() || this.hubTrainingV132?.active ? []
+      : [...(this.hubPropPlacementsRenderedV139?.values() || [])];
     return {
       running: this.running,
       playerAppearanceV126: hubPlayerAppearanceSnapshotV126(this),
-      presentationV116: this.depthPresentationV116 ? 'layered-2.5d-fixed-walk-plane' : '2d',
+      playerSupportV139: this.player?.supportShadowV139 ? { ...this.player.supportShadowV139 } : null,
+      hubPropPlacementV139: { current: structuredClone(nativePaints.find(entry => entry.roomId === room.id) || null),
+        rendered: structuredClone(nativePaints), sourceStatus: 'actual-native-prop-paint-calls' },
+      presentationV116: getHubRoomPresentationV119(this.currentAnnexV71?.() || room).presentationMode,
       roomPresentationV119: getHubRoomPresentationV119(this.currentAnnexV71?.() || room, this.depthPresentationV116),
       deck: this.state?.deck ?? 0,
       roomId: room.id,
@@ -809,6 +815,7 @@ export class HubGame {
 
   draw() {
     if (!this.player) return;
+    this.hubPropPlacementsRenderedV139 = new Map();
     const ctx = this.ctx;
     ctx.save();
     ctx.clearRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
@@ -1123,6 +1130,15 @@ export class HubGame {
   }
 
   drawInteractionProp(ctx, room) {
+    if (room.propPlacementV139?.visible === false) {
+      this.hubPropPlacementsRenderedV139 ||= new Map();
+      this.hubPropPlacementsRenderedV139.set(room.id, {
+        ...structuredClone(room.propPlacementV139), painted: false,
+        omittedReason: room.propPlacementV139.omittedReason,
+        target: null, frameTime: this.animationTime
+      });
+      return;
+    }
     const image = this.propImages.get(room.prop);
     const active = this.nearestInteraction()?.id === room.id;
     const pulse = this.reducedMotion ? 0.45 : 0.45 + Math.sin(this.animationTime * 4) * 0.15;
@@ -1141,6 +1157,15 @@ export class HubGame {
         const [left, top, right, bottom] = room.propSourceBounds;
         ctx.drawImage(resolveSpriteDrawableV134(image), left, top, right - left, bottom - top, bounds.x, bounds.y, width, height);
       } else ctx.drawImage(resolveSpriteDrawableV134(image), bounds.x, bounds.y, width, height);
+    }
+    if (room.propPlacementV139) {
+      this.hubPropPlacementsRenderedV139 ||= new Map();
+      this.hubPropPlacementsRenderedV139.set(room.id, {
+        ...structuredClone(room.propPlacementV139), painted: assetReady(image),
+        omittedReason: assetReady(image) ? null : 'native-prop-image-not-ready',
+        image: { asset: room.prop, width: image?.naturalWidth || 0, height: image?.naturalHeight || 0 },
+        source: { ...room.propPlacementV139.source }, target: { ...bounds }, frameTime: this.animationTime
+      });
     }
     ctx.fillStyle = active ? '#9be1ad' : '#d0a952';
     ctx.fillRect(room.x - 3, bounds.y - 14, 6, 6);
@@ -1166,11 +1191,13 @@ export class HubGame {
   }
 
   drawDoor(ctx, door, phase = 'front') {
+    const presentationMode = getHubRoomPresentationV119(door.roomId || this.currentRoom()).presentationMode;
     if (!door.lift && drawHubBulkheadDepthV134(ctx, door, { phase,
+      presentationMode,
       playerCenterX: this.player ? this.player.x + this.player.w / 2 : null })) {
       this.bulkheadDrawnV134 ||= new Map();
       const previous = this.bulkheadDrawnV134.get(door.id), phases = phase === 'back' ? [] : previous?.drawnPhases || [];
-      const geometry = hubBulkheadDepthGeometryV134(door), cameraX = this.camera?.x || 0;
+      const geometry = hubBulkheadDepthGeometryV134(door, { presentationMode }), cameraX = this.camera?.x || 0;
       this.bulkheadDrawnV134.set(door.id, { ...geometry, cameraX,
         onScreen: geometry.bounds.x + geometry.bounds.w > cameraX && geometry.bounds.x < cameraX + LOGICAL_WIDTH,
         drawnPhases: [...new Set([...phases, phase])] });
@@ -1212,8 +1239,15 @@ export class HubGame {
 
   drawPlayer(ctx) {
     loadPlayerCostumeAssetsV119(this.playerSheets, this.playerCostumeIdV119);
-    const shadowFloor = this.currentAnnexV71?.()?.world?.floorY ?? FLOOR_Y;
-    if (!this.ventActorV62?.ventTransit) this.drawDepthContactShadowV116(ctx, this.player, shadowFloor);
+    const shadowSupport = this.player.y + this.player.h;
+    const shadow = !this.ventActorV62?.ventTransit
+      ? this.drawDepthContactShadowV116(ctx, this.player, shadowSupport) : null;
+    this.player.supportShadowV139 = shadow
+      ? { ...shadow, drawn: true, contactY: shadow.supportY, frameTime: this.animationTime }
+      : { schema: 139, drawn: false, contactY: null, frameTime: this.animationTime,
+        omittedReason: this.ventActorV62?.ventTransit || this.player.ventTransit ? 'duct-transit'
+          : this.player.climbing ? 'ladder-contact' : this.player.grounded === false ? 'airborne'
+          : this.player.inVehicle ? 'vehicle-mounted' : 'presentation-disabled' };
     const request = resolvePlayerAnimation(this.player, false);
     const sample = this.playerAnimationV81.sample('hub:player:echo9', request, this.animationTime, {
       emit: false,

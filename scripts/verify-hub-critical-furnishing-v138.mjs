@@ -14,7 +14,7 @@ function composed(id) {
   const room = HUB_DECKS[deck].rooms.find(room => room.id === id);
   const geometry = buildHubTraversalGeometryV87(deck);
   const options = { doors: buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck),
-    ladders: geometry.ladders, platforms: geometry.platforms };
+    ladders: geometry.ladders, vents: geometry.vents, platforms: geometry.platforms };
   // No proposed-definition injection: this must be the production composition.
   return { room, geometry, plan: getHubRoomLifePlanV136(room, options) };
 }
@@ -41,7 +41,11 @@ test('the active four-room groups clear native metal, entrances and each other, 
       const entry = item(plan, source.role);
       assert.equal(entry.collidable, false); assert.equal(entry.interactive, false);
       assert.ok(!plan.spatial.reservations.some(reservation => overlaps(entry, reservation)), `${id}:${entry.role}`);
-      if (entry.support === 'rear-floor') near(entry.y+entry.h, plan.spatial.planes.rearServiceY);
+      if (entry.support === 'rear-floor') {
+        near(entry.contactYV139, plan.spatial.planes.rearServiceY);
+        if (entry.source) near(entry.y+entry.footSourceYV139*entry.w/entry.source.w, entry.contactYV139);
+        else near(entry.y+entry.h, entry.contactYV139);
+      }
       if (source.cell === 'emergency-cabinet') {
         const handleY = entry.y+entry.h*.5;
         assert.ok(handleY >= plan.floorY-96.5 && handleY <= plan.floorY-36, `${id}: emergency equipment is above standing reach.`);
@@ -68,10 +72,17 @@ test('the mess serves dining and tray return with its existing separate kitchen 
   const mess = composed('mess');
   assert.ok(getHubShipConnectionsForRoomV137(mess.room.id).some(connection => connection.spaceId === 'galley-service'));
   assert.ok(!mess.plan.items.some(entry => entry.cell === 'galley-unit'));
-  const bench = item(mess.plan, 'mess-tray-return-bench');
+  const counter = item(mess.plan, 'mess-tray-return-counter');
   const stock = item(mess.plan, 'mess-tray-return-stock');
   const cold = item(mess.plan, 'chilled-drink-storage');
-  near(bench.x+bench.w/2, stock.x+stock.w/2);
-  assert.ok(cold.x > bench.x+bench.w);
-  reachableStock(mess, 'mess-tray-return-stock');
+  assert.equal(counter.kind, 'work-counter');
+  near(counter.x+counter.w/2, stock.x+stock.w/2);
+  assert.ok(cold.x > counter.x+counter.w);
+  assert.ok(stock.y+stock.h < counter.y, 'Wall stock clears the actual tray counter');
+  const handDistance = mess.plan.floorY-stock.y-stock.h/2;
+  assert.ok(handDistance >= 24 && handDistance <= 80, 'The tray rack is reachable from the real ground floor');
+  const west = item(mess.plan, 'mess-west-dining-seat'), east = item(mess.plan, 'mess-east-dining-seat');
+  const table = mess.room.propRenderBounds;
+  assert.ok(west.x+west.w < table.x && east.x > table.x+table.w, 'Adult seats flank the actual dining table');
+  assert.equal(west.mirroredV139, true); assert.equal(east.mirroredV139, false);
 });

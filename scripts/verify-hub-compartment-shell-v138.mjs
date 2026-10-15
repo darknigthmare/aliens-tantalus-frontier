@@ -9,6 +9,7 @@ import { REFUGE_ARCHITECTURE_V87, REFUGE_PROPS_LAYOUT_V87, getRefugeApertureV87 
 import { HUB_COMPARTMENT_SHELLS_V138, getHubCompartmentShellPlanV138, getHubCompartmentWallTilesV138,
   subtractHubShellAperturesV138, drawHubCompartmentShellV138, drawHubCompartmentBaseV138 } from '../src/hub-compartment-shell-v138.js';
 import { drawHubRoomParallaxV134, withHubRoomParallaxV134 } from '../src/hub-room-parallax-v134.js';
+import { getHubRoomProjectionV139 } from '../src/hub-room-projection-v139.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const rooms=[...HUB_DECKS.flatMap(deck=>deck.rooms),...HUB_ANNEXES_V137.map(row=>({...row,xStart:0}))];
 const newWalls=rooms.filter(room=>HUB_COMPARTMENT_SHELLS_V138[room.id].sourcePolicy==='original-wall-material');
@@ -27,6 +28,8 @@ test('all 35 ship compartments have deliberate wall architecture and preserve th
   assert.equal(rooms.length,35);assert.equal(Object.keys(HUB_COMPARTMENT_SHELLS_V138).length,35);assert.equal(newWalls.length,30);
   assert.deepEqual([...new Set(Object.values(HUB_COMPARTMENT_SHELLS_V138).map(row=>row.family))].sort(),Object.keys(atlas.cells).sort());
   for(const room of rooms){const plan=getHubCompartmentShellPlanV138(room);assert.ok(plan,room.id);assert.ok(plan.wallBounds.h>0);assert.equal(plan.gameplayPlane,'2d');assert.equal(plan.originalGeometryPreserved,true);assert.equal(plan.collidable,false);assert.equal(plan.interactive,false);}
+  assert.equal(rooms.filter(room=>getHubCompartmentShellPlanV138(room).presentationMode==='2d').length,34);
+  assert.deepEqual(rooms.filter(room=>getHubCompartmentShellPlanV138(room).presentationMode==='2.5d').map(room=>room.id),['maintenance-spine']);
   for(const id of ['bridge','dropship-hangar','flight-control-cockpit','proving-ground']){
     const room=rooms.find(room=>room.id===id),browser=canvas(),model=drawHubCompartmentShellV138(browser.ctx,room,native);
     assert.equal(model.handled,false);assert.equal(browser.calls.length,0);
@@ -83,13 +86,20 @@ test('the refuge repaints only its original window-free wall crops and leaves bo
   for(const call of browser.calls)if(call.kind==='image'||call.kind==='fill')for(const hole of holes)assert.ok(!overlap(call.target||call.bounds,hole),'A shell or gradient repainted the real glass');
 });
 
-test('three actual depth layers use local camera motion while compact rooms and reduced motion stay stationary',()=>{
+test('only maintenance uses three moving depth layers and F7 freezes motion without changing shell projection or physical positions',()=>{
   for(const room of rooms){const start=room.xStart||0,width=room.profile?.worldWidth||room.world.width,center=start+width/2-640;
     const a=getHubCompartmentShellPlanV138(room,center),b=getHubCompartmentShellPlanV138(room,center+300);
     assert.deepEqual(a.wallBounds,b.wallBounds);assert.equal(a.layers.length,3);
     if(a.presentationMode==='2.5d'){const moves=b.layers.map((row,index)=>row.drift-a.layers[index].drift);assert.ok(moves[0]>moves[1]&&moves[1]>moves[2]&&moves[2]>0);}
     else assert.ok(b.layers.every(row=>row.drift===0));
-    for(const options of [{enabled:false},{reducedMotion:true}])assert.ok(getHubCompartmentShellPlanV138(room,center+300,options).layers.every(row=>row.drift===0&&row.factor===0));
+    const geometry=structuredClone({station:room.station,colliders:room.colliders,ladders:room.ladders,platforms:room.platforms});
+    for(const options of [{enabled:false},{reducedMotion:true}]){
+      const still=getHubCompartmentShellPlanV138(room,center+300,options);
+      assert.ok(still.layers.every(row=>row.drift===0&&row.factor===0));
+      assert.equal(still.presentationMode,b.presentationMode);assert.equal(still.presentationMode,getHubRoomProjectionV139(room).mode);
+      for(const key of ['projection','floorY','ceilingY','rearWallBaseY','materialScale','moduleWidth','structuralStep','bounds','wallBounds','apertures','paintRegions'])assert.deepEqual(still[key],b[key],`${room.id}: F7 changed ${key}`);
+      assert.deepEqual({station:room.station,colliders:room.colliders,ladders:room.ladders,platforms:room.platforms},geometry);
+    }
   }
 });
 
