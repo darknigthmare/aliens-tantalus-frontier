@@ -1,4 +1,4 @@
-import { inspectForgePlaytestV136 } from './forge-playtest-v136.js';
+import { inspectForgeJourneyV141 } from './forge-journey-admission-v141.js';
 import { ForgeVersionStoreV136, compareForgeDocumentsV136 } from './forge-versions-v136.js';
 const escape = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const button=(action,label,extra='')=>`<button type="button" data-control-action="${action}" ${extra}>${label}</button>`;
@@ -10,9 +10,9 @@ export function mountForgeControlV136(editor) {
   const tab=doc.createElement('button');tab.type='button';tab.dataset.workAction='tab';tab.dataset.tab='control';tab.setAttribute('aria-pressed','false');tab.textContent='Contrôle & versions';workbench.querySelector('.forge-tabs-v133').append(tab);
   const root=doc.createElement('section');root.className='forge-control-v136';root.dataset.workPanel='control';root.hidden=true;root.setAttribute('aria-label','Contrôle du test natif et versions des niveaux');
   root.innerHTML=`<header><h3>Contrôle du test natif</h3><p data-control-status role="status"></p></header>
-    <p class="forge-work-note">Volumes techniques de la salle active, pas un aperçu artistique. Les autres salles et les décors ne sont pas chargés par le test publié.</p>
+    <p class="forge-work-note">Contrôle des salles accessibles et des arrivées aux sas. En jeu : E pour traverser et valider les objectifs. La progression dure pendant le test.</p>
     <canvas width="1240" height="260" data-control-preview aria-label="Volumes de collision et silhouette du Marine à son insertion"></canvas>
-    <div class="forge-work-row"><label>Diagnostics<select data-control-field="severity"><option value="all">Tous</option><option value="error">Erreurs</option><option value="warning">Avertissements</option></select></label>${button('audit','Recontrôler')}${button('report','Exporter le contrôle')}${button('test','Tester la salle active')}</div>
+    <div class="forge-work-row"><label>Diagnostics<select data-control-field="severity"><option value="all">Tous</option><option value="error">Erreurs</option><option value="warning">Avertissements</option></select></label>${button('audit','Recontrôler')}${button('report','Exporter le contrôle')}${button('test','Tester le parcours')}</div>
     <div data-control-issues class="forge-control-issues-v136"></div>
     <section class="forge-versions-v136"><h3>Versions nommées du projet</h3>
     <p class="forge-work-note">Créez une copie avant un changement important. Restaurer ouvre un nouveau projet ; le projet courant et la version source sont conservés. Ces versions ne sont pas des sauvegardes de progression du test.</p>
@@ -33,14 +33,14 @@ export function mountForgeControlV136(editor) {
   function renderReport() {
     if(!report)return;
     const errors=report.issues.filter(i=>i.severity==='error').length,warnings=report.issues.filter(i=>i.severity==='warning').length;
-    out('status').textContent=`${report.roomName} · ${report.mode==='mission'?'Mission':'Vaisseau'} · ${report.bounds.width} × ${report.bounds.height} unités · ${errors} erreur(s), ${warnings} avertissement(s).`;
+    out('status').textContent=`${report.roomName} · ${report.mode==='mission'?'Mission':'Vaisseau'} · ${report.reachableRoomIds.length} salle(s) accessible(s) · ${report.totalObjectiveCount} objectif(s) · ${report.bounds.width} × ${report.bounds.height} unités · ${errors} erreur(s), ${warnings} avertissement(s).`;
     root.querySelector('[data-control-action="test"]').disabled=!report.ok;
     const filter=field('severity').value,issues=report.issues.filter(i=>filter==='all'||i.severity===filter);
     out('issues').innerHTML=issues.slice(0,100).map(i=>`<button type="button" class="forge-control-${i.severity}-v136" data-control-action="focus" data-cell="${escape(i.cellId||'')}" data-room="${escape(i.roomId)}"><strong>${i.severity==='error'?'ERREUR':'À VÉRIFIER'}</strong> ${escape(i.message)}</button>`).join('')||'<p>Aucune anomalie dans ce filtre. Les sauts ne sont pas simulés.</p>';
     if(issues.length>100){const note=doc.createElement('p');note.textContent=`${issues.length-100} diagnostics supplémentaires dans le rapport exporté.`;out('issues').append(note);}
     const canvas=out('preview'),ctx=canvas.getContext('2d'),s=Math.min((canvas.width-24)/report.bounds.width,(canvas.height-24)/report.bounds.height),x=(canvas.width-report.bounds.width*s)/2,y=(canvas.height-report.bounds.height*s)/2;
     ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#091410';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-    for(const g of report.geometry){ctx.fillStyle={floor:'#709584',platform:'#a4c8ae',wall:'#425e50',door:'#ddb56e',hazard:'#d77463',spawn:'#e1f7ba',lift:'#a197c6'}[g.type];ctx.fillRect(g.x,g.y,g.w,g.h);if(g.type==='spawn'){ctx.lineWidth=2/s;ctx.strokeStyle='#fff7c2';ctx.strokeRect(g.x,g.y,g.w,g.h);}}
+    for(const g of report.geometry){ctx.fillStyle={floor:'#709584',platform:'#a4c8ae',wall:'#425e50',door:'#ddb56e',vent:'#70a8b9',hazard:'#d77463',spawn:'#e1f7ba',lift:'#a197c6'}[g.type];ctx.fillRect(g.x,g.y,g.w,g.h);if(g.type==='spawn'){ctx.lineWidth=2/s;ctx.strokeStyle='#fff7c2';ctx.strokeRect(g.x,g.y,g.w,g.h);}}
     ctx.strokeStyle='#84aa93';ctx.lineWidth=1/s;ctx.strokeRect(0,0,report.bounds.width,report.bounds.height);ctx.restore();
   }
   const api={
@@ -48,7 +48,7 @@ export function mountForgeControlV136(editor) {
     refresh(){
       if(dead)return;
       const current=editor.model.data,key=`${editor.room.id}:${editor.model.revision}:${Boolean(editor.model.pending)}`;
-      if(source!==current||modeKey!==key){source=current;modeKey=key;report=inspectForgePlaytestV136(current);diff=null;out('diff').textContent='Choisissez une version à comparer.';renderReport();}
+      if(source!==current||modeKey!==key){source=current;modeKey=key;report=inspectForgeJourneyV141(current);diff=null;out('diff').textContent='Choisissez une version à comparer.';renderReport();}
       if(storeRevision!==store.revision){storeRevision=store.revision;const chosen=field('version').value;
         field('version').innerHTML='<option value="">Choisir une version</option>'+store.data.entries.map(e=>`<option value="${escape(e.id)}">${escape(e.name)} — ${escape(e.project.name)} (${e.project.rooms.length} salle(s))</option>`).join('');
         field('version').value=store.data.entries.some(e=>e.id===chosen)?chosen:'';
@@ -105,7 +105,7 @@ export function mountForgeControlV136(editor) {
   listen(panel,'click',event=>{
     if(!event.target.closest?.('#editor-play'))return;
     editor.cancelGesture();const checked=guard(()=>api.getReport());
-    if(!checked?.ok){event.preventDefault();event.stopImmediatePropagation();tab.click();tell('Test refusé. Corrigez les erreurs de la salle active dans ce contrôle.',true);}
+    if(!checked?.ok){event.preventDefault();event.stopImmediatePropagation();tab.click();tell('Test refusé. Corrigez les erreurs du parcours dans ce contrôle.',true);}
   },true);
   queueMicrotask(()=>{if(!dead){api.refresh();if(store.error)tell(store.error,true);}});
   return api;

@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-tantalus-forge-v140-1';
+const CACHE = 'atf-v86-tantalus-forge-v141-1';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v90/orbitals/uss-sulaco-rear-quarter.png',
   '/assets/openai/ui/title/v90/orbitals/narcissus-front-quarter.png',
@@ -73,6 +73,16 @@ const CORE = [
   '/src/legacy-operation-state-v131.js', '/src/legacy-operations-v131.js',
   '/src/directional-aim-v130.js', '/src/vertical-world-v130.js', '/src/vertical-levels-v130.js',
   '/src/destructible-scenery-v130.js', '/src/enemy-tactics-v130.js', '/src/weapon-actions-v130.js',
+  // Session journeys, authored decoration and distance-based human cadence.
+  '/src/forge-journey-v141.js',
+  '/src/forge-journey-admission-v141.js',
+  '/src/forge-mission-runtime-v141.js',
+  '/src/forge-ship-runtime-v141.js',
+  '/src/forge-decoration-v141.js',
+  '/src/enemy-distance-gait-v141.js',
+  '/src/hub-annex-npc-life-v141.js',
+  '/src/player-colonial-art-v141.js',
+  '/assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png',
   // Complete Forge import closure for cold/offline entry, including CSS.
   '/src/forge-editor-base.js',
   '/src/forge-model-v130.js',

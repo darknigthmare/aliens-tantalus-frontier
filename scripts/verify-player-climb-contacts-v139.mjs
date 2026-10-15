@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { PLAYER_BODY_RIG_ASSETS_V125 } from '../src/player-body-rig-v125.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
+import { PLAYER_COLONIAL_RIG_ASSETS_V141 } from '../src/player-colonial-art-v141.js';
 import { PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_PRESETS_V129,
   normalizePlayerAppearanceV126 } from '../src/player-appearance-v126.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128, resolvePlayerTransitRigV128 } from '../src/player-transit-rig-v128.js';
@@ -17,7 +18,7 @@ import { HubGame as ProductionHub } from '../src/hub-opening-v88.js';
 import { createDefaultSave } from '../src/save.js';
 
 const assets = [...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126,
-  ...PLAYER_TRANSIT_RIG_ASSETS_V128, ...PLAYER_COLONIAL_RIG_ASSETS_V129];
+  ...PLAYER_TRANSIT_RIG_ASSETS_V128, ...PLAYER_COLONIAL_RIG_ASSETS_V129, ...PLAYER_COLONIAL_RIG_ASSETS_V141];
 const images = new Map(assets.map(asset => [asset.imageKey, {
   complete: true, naturalWidth: asset.sourceWidth, naturalHeight: asset.sourceHeight
 }]));

@@ -37,6 +37,8 @@ import { withHordeDirectorV132 } from './horde-director-v132.js';
 import { withNarrativeEvidenceV132 } from './narrative-evidence-v132.js';
 import { withPlaceablesExtensionV132 } from './placeables-extension-v132.js';
 import { isolateForgeMissionOptionsV136 } from './editor-spatial-v136.js';
+import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
+import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 
 export * from './game-production-core.js';
 
@@ -71,7 +73,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V132ProductionEngine {
+export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV141(V132ProductionEngine)) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

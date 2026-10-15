@@ -230,6 +230,9 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    if (sourcePath === 'assets/openai/sprites/player/v141') return true;
+    if (sourcePath.startsWith('assets/openai/sprites/player/v141/'))
+      return sourcePath === 'assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png';
     const v123Admission=publicReleasePathAdmissionV123(sourcePath,{directory:PUBLIC_MEDIA_DIRECTORIES_V123.includes(sourcePath)});
     if (v123Admission!==null) return v123Admission;
     const v122Admission=publicReleasePathAdmissionV122(sourcePath,{directory:['assets/openai/equipment/v122-weapons','assets/openai/equipment/v122-vehicles','assets/openai/sprites/animated-import-v122'].includes(sourcePath)});

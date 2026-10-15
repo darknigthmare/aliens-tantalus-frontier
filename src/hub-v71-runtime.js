@@ -443,6 +443,8 @@ export class HubGame extends HubGameV62 {
       const annex = this.currentAnnexV71();
       const exit = this.nearestAnnexExitV71();
       if (exit) return `E — SORTIR VERS ${(exit.parentRoomName || exit.parentRoomId || annex.parentRoomId).toUpperCase()}`;
+      const annexNpc = this.nearestAnnexNpcV141?.();
+      if (annexNpc) return `E — ${annexNpc.interaction.label} · ${annexNpc.name}`;
       if (this.isRefugeActiveV87()) return this.refugeMovementLockedV87
         ? 'CONTEMPLATION · E / ÉCHAP / DÉPLACEMENT — REPRENDRE LA MARCHE'
         : getRefugeInteractionV87(this)?.prompt || 'REFUGE · ESPACE PERSONNEL · A / D — MARCHER · E — INTERAGIR';
@@ -475,6 +477,8 @@ export class HubGame extends HubGameV62 {
         this.beginAnnexTransitionV71(this.currentAnnexV71().id, 'exit');
         return;
       }
+      const annexNpc = this.nearestAnnexNpcV141?.();
+      if (annexNpc) { this.interactWithAnnexNpcV141(annexNpc); return; }
       if (this.isRefugeActiveV87()) {
         const interaction = this.refugeMovementLockedV87 ? { action: 'refuge:contemplate' } : getRefugeInteractionV87(this);
         if (interaction) this.onAction(interaction);
@@ -780,6 +784,7 @@ export class HubGame extends HubGameV62 {
     }
     this.updateAnnexPhysicsV71(elapsed);
     this.tickParentNpcLifeV136?.(elapsed);
+    this.tickAnnexNpcLifeV141?.(elapsed);
   }
 
   updateAnnexPhysicsV71(delta) {
@@ -1175,6 +1180,7 @@ export class HubGame extends HubGameV62 {
       this.drawDoorBitmapV71(ctx, images.get('door'), exit.bounds, nearbyExit?.id === exit.id ? 1 : 0, annex.art.alphaBounds.door);
       this.drawAnnexExitLabelV137(ctx, annex, exit);
     }
+    this.drawAnnexNpcsV141?.(ctx);
     this.drawPlayer(ctx);
     this.drawAnnexForegroundV72(ctx, annex, images.get('foreground'));
     ctx.restore();

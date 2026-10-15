@@ -21,6 +21,7 @@ import { PLAYER_AIR_POSES_V87, resolvePlayerAirClipV87, advancePlayerAirPresenta
 import { refinePlayerAnimationRequestV124, isPlayerAimingV124, advancePlayerPresentationV124,
   playerAnimationStepV124, playerPresentationSummaryV124 } from './player-presentation-v124.js';
 import { advanceHumanPatrolAnimationV133 } from './human-patrol-animation-v133.js';
+import { advanceEnemyDistanceGaitV141, isEnemyDistanceGaitV141, isEnemyDistanceGaitClipV141 } from './enemy-distance-gait-v141.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -818,15 +819,16 @@ export class SpriteAnimationController {
     this.playerPresentationStatesV124 = new Map();
     this.playerPendingEventsV124 = new Map();
     this.humanPatrolStatesV133 = new Map();
+    this.enemyDistanceGaitStatesV141 = new Map();
   }
 
   reset(entityId) {
-    const maps = [this.states, this.playerAirStatesV87, this.playerPresentationStatesV124, this.playerPendingEventsV124, this.humanPatrolStatesV133];
+    const maps = [this.states, this.playerAirStatesV87, this.playerPresentationStatesV124, this.playerPendingEventsV124, this.humanPatrolStatesV133, this.enemyDistanceGaitStatesV141];
     if (entityId === undefined) maps.forEach(map => map.clear());
     else maps.forEach(map => map.delete(String(entityId)));
   }
 
-  sample(entityId, request, timeSeconds, { emit = true, discardEvents = false, reducedMotion = false, physicalActor = null, physicalContext = '' } = {}) {
+  sample(entityId, request, timeSeconds, { emit = true, discardEvents = false, reducedMotion = false, physicalActor = null, physicalContext = '', movementEnabled = true } = {}) {
     const key = String(entityId);
     const now = Math.max(0, Number(timeSeconds) || 0);
     const previousPresentation = this.playerPresentationStatesV124.get(key);
@@ -854,8 +856,21 @@ export class SpriteAnimationController {
       request = { ...request, clipId: airState.phase, frame: PLAYER_AIR_POSES_V87[airState.phase] };
     }
     const sheetEntry = resolveSpriteSheet(request?.sheetId);
-    const clip = sheetEntry && resolveSpriteClip(sheetEntry.id, request?.clipId);
+    let clip = sheetEntry && resolveSpriteClip(sheetEntry.id, request?.clipId);
     if (!sheetEntry || !clip) return null;
+    // Observe humanoids during every action, including injury/attack, so those
+    // intervals never become a stride debt when locomotion resumes. Their own
+    // combat clocks and reviewed explicit frames continue below unchanged.
+    const enemyGait = sheetEntry.family === 'enemy' && isEnemyDistanceGaitV141(physicalActor)
+      ? advanceEnemyDistanceGaitV141(this.enemyDistanceGaitStatesV141.get(key), physicalActor, now,
+        { context: physicalContext, movementEnabled, reducedMotion }) : null;
+    if (enemyGait) this.enemyDistanceGaitStatesV141.set(key, enemyGait);
+    else this.enemyDistanceGaitStatesV141.delete(key);
+    if (enemyGait?.enabled && !enemyGait.moving && clip.id === 'chase' && isEnemyDistanceGaitClipV141(sheetEntry, clip)) {
+      clip = resolveSpriteClip(sheetEntry.id, 'idle') || clip;
+    }
+    const enemyStep = enemyGait && !request?.reaction && isEnemyDistanceGaitClipV141(sheetEntry, clip)
+      ? enemyGait.moving ? Math.floor(enemyGait.cycles * clip.frames.length + 1e-9) : 0 : null;
     const presentation = playerActor ? advancePlayerPresentationV124(previousPresentation, playerActor, request, now, { physicalContext, reducedMotion }) : null;
     if (presentation) this.playerPresentationStatesV124.set(key, presentation);
     else if (physicalActor) this.playerPresentationStatesV124.delete(key);
@@ -876,7 +891,7 @@ export class SpriteAnimationController {
     // A combat/lifecycle clock can own a reviewed frame. Reject requests
     // outside the selected clip so an actor can never sample another action.
     const explicitFrameIndex = Number.isInteger(request?.frame) ? clip.frames.indexOf(request.frame) : -1;
-    const rawStep = explicitFrameIndex >= 0 ? explicitFrameIndex : playerStep?.step ?? humanStep?.step ?? Math.floor(elapsed * effectiveFps);
+    const rawStep = explicitFrameIndex >= 0 ? explicitFrameIndex : playerStep?.step ?? humanStep?.step ?? enemyStep ?? Math.floor(elapsed * effectiveFps);
     const lastIndex = clip.frames.length - 1;
     const step = clip.loop ? rawStep : Math.min(rawStep, lastIndex);
     const localIndex = clip.loop ? step % clip.frames.length : step;
@@ -897,7 +912,7 @@ export class SpriteAnimationController {
         this.playerPendingEventsV124.delete(key);
       }
     }
-    if (emit && !discardEvents && !playerStep?.suppressEvents && !humanStep?.suppressEvents && step > state.lastEmittedStep) {
+    if (emit && !discardEvents && !playerStep?.suppressEvents && !humanStep?.suppressEvents && !(enemyStep !== null && enemyGait.suppressEvents) && step > state.lastEmittedStep) {
       const maximumSteps = Math.min(step, state.lastEmittedStep + 64);
       for (let absoluteStep = state.lastEmittedStep + 1; absoluteStep <= maximumSteps; absoluteStep += 1) {
         const eventIndex = clip.loop ? ((absoluteStep % clip.frames.length) + clip.frames.length) % clip.frames.length : Math.min(absoluteStep, lastIndex);
@@ -907,7 +922,7 @@ export class SpriteAnimationController {
           // A baked flash or an initial resume sample cannot create a shot.
           if (playerActor && event.type === 'weapon:shot') continue;
           // A newly entered movement pose has not travelled a footstep yet.
-          if ((presentation || humanStep) && absoluteStep === 0 && /audio:footstep|movement:climb-contact/.test(event.type)) continue;
+          if ((presentation || humanStep || enemyStep !== null) && absoluteStep === 0 && /audio:footstep|audio:synthetic-step|movement:climb-contact/.test(event.type)) continue;
           const payload = Object.freeze({ entityId: key, sheetId: sheetEntry.id, clipId: clip.id, frame: eventFrame, event: event.type, loop: Math.floor(Math.max(0, absoluteStep) / clip.frames.length) });
           events.push(payload);
           this.onEvent(payload);
@@ -933,6 +948,7 @@ export class SpriteAnimationController {
       motionV87: airState ? Object.freeze({ phase: airState.phase, events: airState.events, reseeded: airState.reseeded, reusedPose: true }) : null,
       presentationV124: playerPresentationSummaryV124(presentation, clip.id),
       humanPatrolV133: humanStep,
+      enemyDistanceGaitV141: enemyGait,
       events: Object.freeze(events)
     });
   }

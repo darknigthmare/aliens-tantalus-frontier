@@ -75,7 +75,9 @@ import { advancePlayerOpeningV88, getPlayerOpeningObjectiveV88, OPENING_SIGNAL_V
 import { advanceOpeningExerciseV89, getOpeningExerciseObjectiveV89 } from './opening-exercise-v89.js';
 import { advancePortMeridienV90, normalizePortMeridienV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
-import { admittedForgeProjectV136 } from './forge-playtest-v136.js';
+import { admittedForgeJourneyV141 } from './forge-journey-admission-v141.js';
+import { withForgeShipRuntimeV141 } from './forge-ship-runtime-v141.js';
+import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 import { buildForgeMissionSandboxV140 } from './forge-sandbox-v140.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
@@ -243,12 +245,13 @@ function applyCloudProfileV119(slot, payload, { owner, expectedRaw }) {
 }
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
-const HubGame = [
+const NativeHubGame = [
   withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
   withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
   withHubNpcLifeV136, withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
+const HubGame = withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -1801,15 +1804,26 @@ function renderHubStatus(status = lastHubStatus) {
   const room = status?.roomName || HUB_DECKS[deck]?.rooms.find((entry) => entry.id === saveSystem.data.hub.roomId)?.name || saveSystem.data.hub.roomId;
   byId('hub-deck-label').textContent = status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`;
   byId('hub-room-label').textContent = room;
-  const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
-  const openingObjectiveV88 = getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-  byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
-  if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${openingObjectiveV88.text} · A/D marcher · W/S ascenseur · E utiliser`;
-  const exerciseObjectiveV89 = getOpeningExerciseObjectiveV89(saveSystem.data.openingExerciseV89, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-  if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = exerciseObjectiveV89.text;
-  const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
-  if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
-  byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
+  if (standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship') {
+    const session = hubEngine.forgeSessionV141;
+    const required = session ? session.project.rooms.filter(entry => session.reachableRoomIds.includes(entry.id))
+      .reduce((sum, entry) => sum + entry.cells.filter(cell => cell.type === 'objective'
+        && !['background', 'foreground'].includes(cell.layer)).length, 0) : 0;
+    byId('hub-deck-label').textContent = 'PARCOURS FRONTIER FORGE';
+    byId('hub-onboarding-objective-v84').textContent = session?.complete ? 'PARCOURS TERMINÉ · Retour Frontier Forge pour modifier le projet.'
+      : `OBJECTIFS ${session?.completedObjectives.length || 0}/${required} · A/D marcher · W/S grimper · E utiliser`;
+    byId('hub-onboarding-objective-v84').hidden = false;
+  } else {
+    const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
+    const openingObjectiveV88 = getPlayerOpeningObjectiveV88(saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+    byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
+    if (openingObjectiveV88) byId('hub-onboarding-objective-v84').textContent = `${openingObjectiveV88.text} · A/D marcher · W/S ascenseur · E utiliser`;
+    const exerciseObjectiveV89 = getOpeningExerciseObjectiveV89(saveSystem.data.openingExerciseV89, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+    if (exerciseObjectiveV89) byId('hub-onboarding-objective-v84').textContent = exerciseObjectiveV89.text;
+    const portObjectiveV90 = getPortMeridienObjectiveV90(saveSystem.data.portMeridienV90, saveSystem.data.openingV88, saveSystem.data.onboardingV84);
+    if (portObjectiveV90) byId('hub-onboarding-objective-v84').textContent = portObjectiveV90.text;
+    byId('hub-onboarding-objective-v84').hidden = Boolean(hubEngine.isPortMeridienV90?.());
+  }
   byId('exit-hub').textContent = standaloneContext === 'forge-playtest' ? 'RETOUR FRONTIER FORGE'
     : hubEngine.isPortMeridienV90?.() ? 'SUSPENDRE · TABLEAU DE BORD' : 'QUITTER VERS COMMANDEMENT';
   const provingGroundActiveV81 = Boolean(
@@ -1819,9 +1833,10 @@ function renderHubStatus(status = lastHubStatus) {
   );
   const provingPhaseV81 = String(status?.provingGroundPhaseV81 || 'idle').toUpperCase();
   const provingScoreV81 = Math.max(0, Number(status?.provingGroundScoreV81) || 0);
+  const forgeShipSessionV141 = standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' ? hubEngine.forgeSessionV141 : null;
   const provingAmmoV81 = `${Math.max(0, Number(status?.provingGroundMagazineV81) || 0)}/${Math.max(0, Number(status?.provingGroundReserveV81) || 0)}`;
   byId('hub-prompt').textContent = status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser';
-  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? 'QUALIF M41A' : 'NIVEAU'} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : `${status?.route?.nodeCount || 26} ZONES`}</b></span>`;
+  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? 'QUALIF M41A' : 'NIVEAU'} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : forgeShipSessionV141 ? `${forgeShipSessionV141.reachableRoomIds.length} SALLES` : `${status?.route?.nodeCount || 26} ZONES`}</b></span>`;
   const hubView = document.querySelector('.view[data-panel="hub"]');
   if (hubView) hubView.dataset.provingGroundActiveV81 = String(provingGroundActiveV81);
   all('[data-proving-ground-control-v81]').forEach((button) => {
@@ -1851,11 +1866,11 @@ function renderEditorStatus() {
   const snapshot = editor.getSnapshot();
   const validation = snapshot.validation;
   const nativeAudit = editor.controlV136?.getReport();
-  const ready = validation.ok && (nativeAudit?.ok ?? true);
-  const errors = [...new Set([...validation.errors, ...(nativeAudit?.errors || [])])];
+  const ready = nativeAudit ? nativeAudit.ok : validation.ok;
+  const errors = nativeAudit ? nativeAudit.errors : validation.errors;
   byId('editor-mode').value = snapshot.kind;
   byId('editor-validation').innerHTML = ready
-    ? `<span class="chip success">PLAN VALIDE</span><p>${snapshot.tiles.length} blocs · ${snapshot.kind} · prêt pour playtest isolé · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
+    ? `<span class="chip success">PARCOURS PRÊT</span><p>${snapshot.tiles.length} blocs dans cette salle · ${nativeAudit?.reachableRoomIds?.length || 1} salle(s) accessible(s) · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
     : `<span class="chip danger">PLAN À CORRIGER</span><p>${errors.map(escapeHtml).join(' ')}</p>`;
   if ((forgeSaveSystem.lastWriteV130 || forgeSaveSystem.lastPersistenceV135)?.persisted === false) {
     byId('editor-validation').insertAdjacentHTML('beforeend', '<p role="status">Stockage local indisponible : modifications conservées en mémoire uniquement. Exportez le plan avant de fermer cette page.</p>');
@@ -3353,6 +3368,7 @@ function launchForgeMissionPlaytest(project) {
     difficulty: operationLoadout.difficulty,
     accessibility: clone(sandbox.settings),
     editorProject: project,
+    forgeJourneyV141: true,
     strategicBriefing: deployment.operation,
     resumeState: null
   });
@@ -3365,9 +3381,10 @@ function playtestEditor() {
   let project;
   try {
     const authored = editor.serialize();
-    project = { ...authored, ...admittedForgeProjectV136(authored) };
+    project = { ...authored, ...admittedForgeJourneyV141(authored) };
   } catch (error) { toast(error.message); return; }
-  forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`, name: `Frontier Forge ${title(project.kind)}` });
+  forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`,
+    name: project.name || `Frontier Forge ${title(project.kind)}` });
   if (project.kind === 'ship') {
     const sandbox = clone(saveSystem.data);
     forgePlaytest = { kind: 'ship', project: clone(project), sandbox, hubState: clone(sandbox.hub) };
@@ -3378,6 +3395,7 @@ function playtestEditor() {
     hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(sandbox.player.appearanceV126);
     hubEngine.start(forgePlaytest.hubState, {
       editorProject: project,
+      forgeJourneyV141: true,
       routineContextV62: getHubRoutineContextV62(sandbox)
     });
     byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
@@ -3389,14 +3407,15 @@ function playtestEditor() {
 function setupEditor() {
   editor = new LevelEditor(byId('editor-canvas'), (project) => {
     const active = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
-    const id = active?.kind === project.kind ? active.id : `local-forge-${project.kind}`;
-    const record = { ...project, id, name: `Frontier Forge ${title(project.kind)}`, updatedAt: Date.now() };
+    const id = active?.id || `local-forge-${project.kind}`;
+    const record = { ...project, id, name: project.name || active?.name || `Frontier Forge ${title(project.kind)}`, updatedAt: Date.now() };
     forgeSaveSystem.upsert(record);
     renderEditorStatus();
   }, { onDocumentChange: renderEditorStatus });
   byId('editor-tools').innerHTML = TILE_TYPES.map((tool, index) => `<button class="tool-button ${index ? '' : 'active'}" data-editor-tool="${tool}">${title(tool)}</button>`).join('');
   const saved = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
   if (saved) editor.loadInitialProject(saved);
+  byId('editor-play').textContent = 'TESTER LE PARCOURS';
   renderEditorStatus();
 }
 
@@ -3676,7 +3695,11 @@ function bind() {
   byId('editor-clear').onclick = () => editor.clear();
   byId('editor-undo').onclick = () => editor.undo();
   byId('editor-redo').onclick = () => editor.redo();
-  byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
+  byId('editor-validate').onclick = () => {
+    renderEditorStatus();
+    const audit = editor.controlV136?.getReport() || editor.validate();
+    toast(audit.ok ? 'Parcours prêt à tester.' : audit.errors.join(' '));
+  };
   byId('editor-play').onclick = playtestEditor;
   byId('editor-export').onclick = () => download(`atf-v62-forge-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => {

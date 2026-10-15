@@ -10,7 +10,7 @@ import { ForgeModel } from '../src/forge-model-v130.js';
 /** Native Forge regression shared with authoring QA. Inputs change the app; evaluations only read. */
 export async function runEditorSpatialQaV136(options = {}) {
 const repository = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const output = resolve(options.output || process.env.ATF_EDITOR_SPATIAL_QA_OUTPUT || join(tmpdir(), `atf-editor-native-v140-${Date.now()}`));
+const output = resolve(options.output || process.env.ATF_EDITOR_SPATIAL_QA_OUTPUT || join(tmpdir(), `atf-editor-native-v141-${Date.now()}`));
 const rel = relative(repository, output);
 if (!rel || !rel.startsWith('..') && !isAbsolute(rel)) throw Error('QA evidence must remain outside the checkout.');
 let pw;
@@ -27,11 +27,11 @@ const editor = () => page.evaluate(() => globalThis.__ATF_V51__?.editor?.getSnap
 const authored = () => page.evaluate(() => structuredClone(globalThis.__ATF_V51__.editor.model.data));
 const audit = () => page.evaluate(() => globalThis.__ATF_V51__?.editor?.controlV136?.getReport());
 const campaign = () => page.evaluate(() => JSON.parse(localStorage.getItem('atf-v47-profile-1')));
-const mission = () => page.evaluate(() => { const e = globalThis.__ATF_GAME__; return { player: { x: e.player.x, y: e.player.y, w: e.player.w, h: e.player.h, alive: e.player.alive, grounded: e.player.grounded }, grid: e.editorGridV136, tileCount: e.editorTileCount, objective: { ...e.objective }, state: e.mission.state, rewards: e.mission.rewards }; });
+const mission = () => page.evaluate(() => { const e = globalThis.__ATF_GAME__; return { player: Object.fromEntries(['x','y','w','h','alive','grounded','health','armor','ammo','ammoReserve','weaponMode','costumeId'].map(key => [key, e.player[key]])), inventory: structuredClone(e.inventory), equipment: [...e.equipmentActions.values()].map(item => ({id:item.id,remaining:item.remaining,uses:item.uses})), enemies: e.enemies.map(enemy => ({id:enemy.id,alive:enemy.alive,health:enemy.health})), journey: e.getForgeJourneySnapshotV141?.(), hud:e.getForgeMissionHudV141?.(), prompt:e.getInteractionPrompt(), doors: e.doors.map(door => ({id:door.forgeCellIdV141,open:door.open})), grid: e.editorGridV136, tileCount: e.editorTileCount, objective: { ...e.objective }, state: e.mission.state, rewards: e.mission.rewards }; });
 const ship = () => page.evaluate(() => { const e = globalThis.__ATF_HUB__; return { player: { x: e.player.x, y: e.player.y, w: e.player.w, h: e.player.h, grounded: e.player.grounded }, editorPlaytest: e.editorPlaytest, objectives: e.v51Objectives.map(o => ({ ...o })), grid: e.compiledProject?.grid, running: e.running }; });
 const tile = (x, y, type) => ({ position: `${x}:${y}`, type });
-function twoRoomMission() {
-  const m = new ForgeModel({ schema: 2, kind: 'mission', name: 'V140 deux secteurs', size: [128, 72], tiles: [...Array.from({ length: 128 }, (_, x) => tile(x, 70, 'floor')), tile(118, 69, 'spawn'), tile(126, 69, 'objective'), tile(110, 69, 'door')] });
+function twoRoomMission(enemies = true) {
+  const m = new ForgeModel({ schema: 2, kind: 'mission', name: 'V141 deux secteurs', size: [128, 72], tiles: [...Array.from({ length: 128 }, (_, x) => tile(x, 70, 'floor')), tile(118, 69, 'spawn'), tile(126, 69, 'objective'), tile(110, 69, 'door'), ...(enemies ? [tile(122, 69, 'enemy')] : [])] });
   m.transaction('Fixture authored document', () => { m.paint(1, 1, 'wall', 'background'); m.paint(1, 1, 'wall', 'foreground'); const door = m.room.cells.find(c => c.type === 'door').id; m.addRoom({ duplicate: true }); const second = m.room.cells.find(c => c.type === 'door').id; m.link(second, 'room-1', door); m.data.activeRoomId = 'room-1'; });
   return m.data;
 }
@@ -67,6 +67,82 @@ async function exportDocument(name) {
   const path = join(output, name); await download.saveAs(path); return JSON.parse(await fs.readFile(path, 'utf8'));
 }
 async function tab(name) { await page.locator(`[data-work-action="tab"][data-tab="${name}"]`).click(); }
+async function verifyMissionJourneyV141({ imported = false, exported = null } = {}) {
+  const beforeCampaign = await campaign();
+  if (!imported) await importProject(twoRoomMission());
+  const document = await authored(), roomA = document.activeRoomId, roomB = document.rooms.find(room => room.id !== roomA).id;
+  assert.equal((await audit()).scope, 'reachable-rooms'); assert.equal((await audit()).ok, true);
+  assert.match(await page.locator('#editor-play').textContent(), /TESTER LE PARCOURS/);
+  exported ||= await exportDocument('mission-two-rooms-v141.json');
+  const launch = async () => {
+    await page.locator('#editor-play').click(); await page.locator('#game-canvas').waitFor({ state: 'visible' });
+    await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused && e.player.grounded && !e.enemyAtlasLoadingPausedV65; }, null, { timeout: 45000 });
+    await page.locator('#game-canvas').focus();
+  };
+  const walk = async (code, condition) => { await page.keyboard.down(code); try { await page.waitForFunction(condition, null, { timeout: 20000 }); } finally { await page.keyboard.up(code); } };
+  const goal = () => walk('KeyD', () => { const e = globalThis.__ATF_GAME__; return Math.abs(e.player.x + e.player.w / 2 - e.objective.x - e.objective.w / 2) < 65; });
+  const door = () => walk('KeyA', () => Boolean(globalThis.__ATF_GAME__.forgeLinkedDoorV141()));
+  const pressE = () => page.keyboard.press('KeyE');
+  const resources = snapshot => ({ health:snapshot.player.health,armor:snapshot.player.armor,ammo:snapshot.player.ammo,ammoReserve:snapshot.player.ammoReserve,weaponMode:snapshot.player.weaponMode,costumeId:snapshot.player.costumeId,inventory:snapshot.inventory,equipment:snapshot.equipment });
+  const combat = async () => {
+    // F is actual native fire. Evaluations only observe the authored opponent.
+    await page.keyboard.down('KeyD'); await page.waitForTimeout(80); await page.keyboard.up('KeyD');
+    const before = await mission(); await page.keyboard.down('KeyF');
+    try { await page.waitForFunction(() => globalThis.__ATF_GAME__.enemies.every(enemy => !enemy.alive), null, { timeout: 15000 }); }
+    finally { await page.keyboard.up('KeyF'); }
+    const after = await mission(); assert.ok(after.player.ammo < before.player.ammo); assert.ok(after.enemies.every(enemy => !enemy.alive));
+    return { before, after };
+  };
+  await launch(); const insertion = await mission(); assert.equal(insertion.journey.roomId, roomA); assert.equal(insertion.tileCount, 132);
+  assert.equal(insertion.hud.context,'PARCOURS FORGE · SESSION'); assert.equal(insertion.hud.objectives,'OBJECTIFS GLOBAUX 0/2');
+  assert.equal(insertion.hud.location,`SALLE · ${document.rooms.find(room=>room.id===roomA).name}`);
+  const firstCombat = await combat(); await goal(); await pressE();
+  const firstGoal = await mission(); assert.equal(firstGoal.state, 'active'); assert.equal(firstGoal.journey.completedObjectives.length, 1);
+  assert.equal(firstGoal.hud.objectives,'OBJECTIFS GLOBAUX 1/2');
+  await pressE(); assert.equal((await mission()).state, 'active');
+  check('Native F spends ammunition during authored combat; E validates the first goal and extraction remains blocked by the remote goal', { combat:firstCombat, firstGoal });
+  await page.screenshot({ path: join(output, '01-mission-first-goal-blocked.png'), fullPage: true });
+  await door(); const beforeDeparture = await mission(); await pressE(); await page.waitForFunction(id => globalThis.__ATF_GAME__.forgeActiveRoomIdV141 === id, roomB);
+  const arrived = await mission(); assert.deepEqual(resources(arrived), resources(beforeDeparture)); assert.equal(arrived.player.grounded, true); assert.equal(arrived.player.y + arrived.player.h, 1050);
+  assert.equal(arrived.hud.location,`SALLE · ${document.rooms.find(room=>room.id===roomB).name}`);
+  check('Actual A/E crosses the linked physical door; the full supported body and carried resources survive', { beforeDeparture, arrived });
+  await page.screenshot({ path: join(output, '02-mission-second-room-arrival.png'), fullPage: true });
+  const secondCombat = await combat(); await goal(); await pressE(); const secondGoal = await mission();
+  assert.equal(secondGoal.state, 'active'); assert.equal(secondGoal.journey.completedObjectives.length, 2);
+  assert.equal(secondGoal.hud.objectives,'OBJECTIFS GLOBAUX 2/2');
+  await door(); const beforeReturn = await mission(); await pressE(); await page.waitForFunction(id => globalThis.__ATF_GAME__.forgeActiveRoomIdV141 === id, roomA);
+  const returned = await mission(); assert.deepEqual(resources(returned), resources(beforeReturn));
+  assert.ok(returned.enemies.every(enemy => !enemy.alive)); assert.equal(returned.objective.complete, true); assert.ok(returned.doors.every(door => door.open));
+  assert.equal(returned.journey.transitions, 2); check('Return through the native door preserves dead opponents, completed objectives, opened doors and resources', { secondCombat, secondGoal, returned });
+  await page.screenshot({ path: join(output, '03-mission-round-trip-persistence.png'), fullPage: true });
+  await goal(); await pressE(); await page.waitForFunction(() => globalThis.__ATF_GAME__.mission.state === 'complete'); const complete = await mission();
+  for (const key of ['credits','salvage','intel','apex','cargo']) assert.equal(complete.rewards[key], 0);
+  check('A separate native E confirms extraction after every reachable goal, with zero campaign rewards', complete);
+  await page.screenshot({ path: join(output, '04-mission-native-extraction.png'), fullPage: true });
+  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state:'visible' }); assert.deepEqual(await authored(), exported);
+  assert.deepEqual(await campaign(), beforeCampaign);
+  const oneWay = twoRoomMission(false), edge = oneWay.links[0]; [edge.from,edge.to] = [edge.to,edge.from]; edge.bidirectional = false;
+  await importProject(oneWay); await launch(); await door(); const refusalBefore = await mission(); await pressE(); await page.waitForTimeout(180);
+  const refusalAfter = await mission(); assert.equal(refusalAfter.journey.roomId, roomA); assert.equal(refusalAfter.journey.transitions, 0); assert.deepEqual(resources(refusalAfter), resources(refusalBefore));
+  check('A real E refuses a one-way departure that would strand an unfinished source objective', { before:refusalBefore,after:refusalAfter });
+  await page.screenshot({ path: join(output, '05-mission-one-way-refusal.png'), fullPage: true });
+  await goal(); await pressE(); await door(); await pressE(); await page.waitForFunction(id => globalThis.__ATF_GAME__.forgeActiveRoomIdV141 === id, roomB);
+  assert.equal((await mission()).journey.transitions, 1);
+  check('After the source objective is actually validated, the same one-way door admits the linear journey', await mission());
+  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state:'visible' }); assert.deepEqual(await campaign(), beforeCampaign);
+  const walled = twoRoomMission(false), entry = walled.rooms.find(room=>room.id===walled.activeRoomId);
+  entry.cells.find(cell=>cell.type==='door').x=121;
+  for(let row=64;row<70;row++) entry.cells.push({id:`qa-native-wall-${row}`,x:120,y:row,type:'wall',layer:'structure'});
+  await importProject(walled); assert.equal((await audit()).ok,true); await launch();
+  await walk('KeyD',()=>Boolean(globalThis.__ATF_GAME__.forgeLinkedDoorV141())); const wallBefore=await mission();
+  assert.match(wallBefore.prompt,/CLOISON/); await pressE(); await page.waitForTimeout(180); const wallAfter=await mission();
+  assert.equal(wallAfter.journey.roomId,roomA); assert.equal(wallAfter.journey.transitions,0); assert.deepEqual(resources(wallAfter),resources(wallBefore));
+  check('Native walking reaches a nearby sas across an authored full-height wall, and E refuses interaction through the wall',{before:wallBefore,after:wallAfter});
+  await page.screenshot({path:join(output,'06-mission-physical-wall-refusal.png'),fullPage:true});
+  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({state:'visible'}); assert.deepEqual(await campaign(),beforeCampaign);
+  await importProject(exported); assert.deepEqual(await authored(), exported);
+  check('Both native returns preserve the entire campaign and the authored document', { rooms:exported.rooms.length,links:exported.links.length,campaignUnchanged:true });
+}
 async function verifyDrawing() {
   const beforeProfile = await campaign();
   await importProject({ schema: 2, kind: 'mission', name: 'Atelier de dessin V140', size: [48, 24], tiles: [...Array.from({ length: 48 }, (_, x) => tile(x, 22, 'floor')), tile(2, 21, 'spawn'), tile(46, 21, 'objective')] });
@@ -121,6 +197,7 @@ try {
   await fs.mkdir(output, { recursive: true }); browser = await chromium.launch({ headless: true, ...(process.env.ATF_CHROMIUM_EXECUTABLE ? { executablePath: process.env.ATF_CHROMIUM_EXECUTABLE } : {}) });
   const context = await browser.newContext({ viewport: { width: 1680, height: 1100 }, serviceWorkers: 'block', acceptDownloads: true }); await openPage(context); await enterForge();
   if (options.authoringOnly) await verifyDrawing();
+  else if (options.missionOnly) await verifyMissionJourneyV141();
   else {
   const beforeCampaign = await campaign(); await importProject(twoRoomMission());
   let snapshot = await editor(), document = await authored(), review = await audit();
@@ -141,16 +218,7 @@ try {
   assert.equal(await page.locator('#editor-play').isEnabled(), true); assert.equal((await authored()).rooms.length, 2);
   check('Opening a valid library project from an empty document immediately refreshes the real launch button without a fake edit', { projectId: missionId });
   const exported = await exportDocument('mission-two-rooms.json'); assert.equal(exported.rooms.length, 2); assert.equal(exported.links.length, 1); assert.equal(Object.hasOwn(exported, 'tiles'), false);
-  await page.locator('#editor-play').click(); await page.locator('#game-canvas').waitFor({ state: 'visible' });
-  await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e?.running && !e.paused && e.player.grounded && !e.enemyAtlasLoadingPausedV65; }, null, { timeout: 45000 });
-  const insertion = await mission(); assert.deepEqual(insertion.grid, { columns: 128, rows: 72, tileWidth: 48.4375, tileHeight: 15 }); assert.ok(insertion.player.x > 5600); assert.equal(insertion.tileCount, 131);
-  await page.locator('#game-canvas').focus(); await page.keyboard.down('KeyD');
-  try { await page.waitForFunction(() => { const e = globalThis.__ATF_GAME__; return e.player.x >= e.objective.x - 30; }, null, { timeout: 15000 }); } finally { await page.keyboard.up('KeyD'); }
-  await page.keyboard.press('KeyE'); await page.waitForFunction(() => globalThis.__ATF_GAME__.mission.state === 'complete'); const complete = await mission();
-  for (const key of ['credits', 'salvage', 'intel', 'apex', 'cargo']) assert.equal(complete.rewards[key], 0);
-  check('Production Mission playtest uses the active large room and reaches extraction through actual D/E input', { insertion, completion: complete });
-  await page.screenshot({ path: join(output, '01-mission-playtest.png'), fullPage: true });
-  await page.locator('#retreat-mission').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), exported);
+  await verifyMissionJourneyV141({ imported:true,exported });
   await tab('projects'); await page.locator('[data-work-field="project-name"]').fill('Vaisseau V140'); await page.locator('[data-work-field="project-kind"]').selectOption('ship'); await page.locator('[data-work-action="project-create"]').click();
   const shipProject = { schema: 2, kind: 'ship', size: [128, 72], tiles: [...Array.from({ length: 128 }, (_, x) => tile(x, 70, 'floor')), tile(0, 69, 'spawn'), tile(10, 69, 'objective')] };
   await importProject(shipProject); review = await audit(); assert.equal(review.ok, true); assert.deepEqual(review.grid, [128, 72]);
@@ -160,9 +228,10 @@ try {
   const shipInsertion = await ship(); assert.equal(shipInsertion.player.x, 24); assert.equal(shipInsertion.player.y, 608); assert.equal(shipInsertion.player.h, 92);
   await page.waitForTimeout(180); const idle = await ship(); assert.equal(idle.player.x, 24); assert.equal(idle.player.y, 608);
   await page.locator('#hub-canvas').focus(); await page.keyboard.down('KeyD');
-  try { await page.waitForFunction(() => globalThis.__ATF_HUB__.v51Objectives.some(o => o.complete), null, { timeout: 15000 }); } finally { await page.keyboard.up('KeyD'); }
+  try { await page.waitForFunction(() => {const e=globalThis.__ATF_HUB__,o=e.v51Objectives[0];return Math.abs(e.player.x+e.player.w/2-o.x-o.w/2)<60;}, null, { timeout: 15000 }); } finally { await page.keyboard.up('KeyD'); }
+  await page.keyboard.press('KeyE'); await page.waitForFunction(() => globalThis.__ATF_HUB__.v51Objectives.some(o => o.complete));
   const shipReached = await ship(); assert.ok(shipReached.player.x > shipInsertion.player.x + 300); assert.equal(Math.round(shipReached.player.y + shipReached.player.h), 700);
-  check('Native 128×72 Ship admission inserts at bounded x24/y608, stays stable through idle updates, and physically walks to objective', { insertion: shipInsertion, idle, reached: shipReached });
+  check('Native 128×72 Ship admission inserts at bounded x24/y608, stays stable through idle updates, and validates its goal with native D/E', { insertion: shipInsertion, idle, reached: shipReached });
   await page.screenshot({ path: join(output, '02-ship-playtest.png'), fullPage: true });
   await page.locator('#exit-hub').click(); await page.locator('#editor-canvas').waitFor({ state: 'visible' }); assert.deepEqual(await authored(), shipExported);
   const afterCampaign = await campaign(); for (const key of ['statistics', 'clock', 'crew', 'hub']) assert.deepEqual(afterCampaign[key], beforeCampaign[key]); assert.deepEqual(afterCampaign.galaxy.resources, beforeCampaign.galaxy.resources); assert.deepEqual(afterCampaign.strategy.currentOperation, beforeCampaign.strategy.currentOperation);

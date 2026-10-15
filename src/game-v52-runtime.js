@@ -2241,7 +2241,12 @@ export function withV52MissionRuntime(BaseEngine) {
         this.animationTelemetry?.fallbackFamilies?.add(enemy.biology || 'unknown');
         return super.drawEnemy(ctx, enemy);
       }
-      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy', enemy, 'hostile'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy', enemy, 'hostile'), request, this.animationTime, {
+        emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: enemy,
+        physicalContext: this.bioforgeLevelV80 ? 'bioforge' : 'mission',
+        movementEnabled: !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+          && (this.bioforgeLevelV80 ? ['printing', 'combat'].includes(this.bioforgeRootV80?.activeSession?.phase) : this.mission?.state === 'active')
+      });
       ctx.save();
       if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
       if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }

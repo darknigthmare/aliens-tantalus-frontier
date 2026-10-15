@@ -2,6 +2,9 @@ import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87, getEnemyStaticPoseRangedBehaviorV96 as getEnemyStaticPoseRangedBehaviorV95, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
 import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { resolveHumanPoseGeometryV133 } from './human-visual-contract-v133.js';
+import { createEnemyDistanceGaitTrackerV141 } from './enemy-distance-gait-v141.js';
+
+const observeEnemyGaitV141 = createEnemyDistanceGaitTrackerV141();
 
 const clampV95 = (value, low, high) => Math.max(low, Math.min(high, value));
 const overlapV95 = (a, b) => a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -135,11 +138,17 @@ export function drawUserCastePoseV87(ctx, enemy, image, options = {}) {
   const human = resolveHumanPoseGeometryV133({ actor: enemy, definition });
   enemy.humanVisualV133 = human;
   requestEnemyImportAnimationV107(options.imageStore, definition);
-  const moving = options.movementEnabled !== false && Math.abs(Number(enemy.vx) || 0) > 1 && Math.abs(Number(enemy.vy) || 0) <= 1
+  const distanceGait = human ? observeEnemyGaitV141(enemy, options.timeSeconds, {
+    context: definition.id, movementEnabled: options.movementEnabled, reducedMotion: options.reducedMotion
+  }) : null;
+  // A first draw may use the walk atlas's neutral cell before any displacement
+  // has been observed. Only the distance state can advance its actual frame.
+  const moving = distanceGait ? distanceGait.enabled && Math.abs(Number(enemy.vx) || 0) > 1 : options.movementEnabled !== false && Math.abs(Number(enemy.vx) || 0) > 1 && Math.abs(Number(enemy.vy) || 0) <= 1
     && enemy.grounded !== false && !enemy.dormant && !enemy.ventTransit && !enemy.attacking && !enemy.pendingMelee
     && !['attackAnimationClock', 'attackWindupClock', 'staggerClock', 'hurtClock', 'v52HurtClock'].some(key => Number(enemy[key]) > 0);
   if (drawEnemyImportAnimationV107(ctx, definition, options.imageStore, {
     action: moving ? 'move' : 'idle', timeSeconds: options.timeSeconds, reducedMotion: options.reducedMotion,
+    distanceGaitV141: distanceGait,
     ...(human ? { height: human.renderHeight } : {}),
     x: enemy.x + enemy.w / 2, y: enemy.y + enemy.h * (definition.groundContact === false ? .5 : 1), facing: enemy.facing
   })) return true;

@@ -471,6 +471,14 @@ export const SPRITE_ALPHA_ASSETS_V134 = Object.freeze([
     "height": 1024
   },
   {
+    // Original native RGBA: no translucent white/purple matte measured.
+    // Keep this exact atlas in the measured path/size admission; its low-alpha
+    // antialiasing and pale opaque inscriptions remain authored pixels.
+    "path": "/assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png",
+    "width": 1536,
+    "height": 1024
+  },
+  {
     "path": "/assets/openai/sprites/static-enemy-v94/game-afe-synth-trooper.png",
     "width": 1024,
     "height": 1536

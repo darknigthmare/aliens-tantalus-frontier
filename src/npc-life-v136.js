@@ -3,6 +3,8 @@ import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { resolveSpriteSheet } from './sprite-animation-runtime.js';
 import { resolveHumanAtlasGeometryV133, drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { getHubInteractionPropBoundsV136 } from './hub-prop-placements-v136.js';
+import { annexNpcDutiesV141, createAnnexNpcsV141 } from './hub-annex-npc-life-v141.js';
+import { buildHubNpcInteractionEvent } from './hub-v52-runtime.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, finite(value, low)));
@@ -51,6 +53,9 @@ export function moveNpcAgainstGeometryV136(actor, proposedX, colliders = []) {
 /** A job visit goes beside the room's real interaction prop, on its existing
  * walking rail. It cannot send a technician to another room or through a lift. */
 export function npcWorkAnchorV136(actor, room) {
+  // Annex inspection rails already reserve every visible fitting and approach.
+  // Parent-room station visits must not invent a route across those exclusions.
+  if (actor.annexNativeV141) return null;
   const box = getHubInteractionPropBoundsV136(room);
   if (!box || ![box.x, box.w, room.xStart, room.xEnd].every(Number.isFinite)
     || actor.routinePhaseV62 !== 'work' || actor.mobile || room.id !== actor.roomId) return null;
@@ -217,8 +222,79 @@ export function resolveNpcLifeAnimationV136(actor, state, request) {
 
 export function withHubNpcLifeV136(Base) {
   return class HubNpcLifeV136 extends Base {
+    start(hubState, options) {
+      this.annexNpcCohortV141 = null;
+      this.annexNpcCohortKeyV141 = null;
+      this.annexNpcSandboxV141 = options?.forgeJourneyV141 === true;
+      return super.start(hubState, options);
+    }
+
+    ensureAnnexNpcCohortV141() {
+      const duties = annexNpcDutiesV141(this.npcRoutineResolutionsV62, this);
+      const key = duties.map(duty => `${duty.crewId}:${this.npcRoutineResolutionsV62.get(duty.crewId).deterministicKey}`).join('|');
+      if (key !== this.annexNpcCohortKeyV141 || !this.annexNpcCohortV141) {
+        this.annexNpcCohortKeyV141 = key;
+        this.annexNpcCohortV141 = createAnnexNpcsV141(duties, this.npcRoutineResolutionsV62);
+      }
+      return this.annexNpcCohortV141;
+    }
+
     createNpcs(deck) {
-      return spreadNpcStationSpawnsV136(super.createNpcs(deck), HUB_DECKS[deck]?.rooms || []);
+      const annexIds = new Set(this.ensureAnnexNpcCohortV141().map(npc => npc.crewId));
+      return spreadNpcStationSpawnsV136(super.createNpcs(deck).filter(npc => !annexIds.has(npc.crewId)), HUB_DECKS[deck]?.rooms || []);
+    }
+
+    activeAnnexNpcsV141() {
+      if (this.editorPlaytest || this.forgeSessionV141 || this.annexNpcSandboxV141) return [];
+      const room = this.currentAnnexV71?.();
+      return room ? this.ensureAnnexNpcCohortV141().filter(npc => npc.roomId === room.id) : [];
+    }
+
+    tickAnnexNpcLifeV141(delta) {
+      if (this.running === false || this.editorPlaytest || this.forgeSessionV141 || this.annexNpcSandboxV141 || !(delta > 0)) return;
+      const room = this.currentAnnexV71?.(), peers = this.activeAnnexNpcsV141(), dt = Math.min(delta, .1);
+      for (const npc of peers) {
+        npc.workClock = Math.max(0, finite(npc.workClock) - dt);
+        npc.supportClock = Math.max(0, finite(npc.supportClock) - dt);
+        const life = advanceNpcLifeV136(npc.lifeV136, npc, dt, { room, peers,
+          context: `annex:${room.id}:${npc.routineDeterministicKeyV62}`, colliders: room.colliders,
+          reducedMotion: this.reducedMotion });
+        npc.lifeV136 = life;
+        Object.assign(npc, { x: life.x, vx: life.actualVelocity, facing: life.facing });
+      }
+    }
+
+    nearestAnnexNpcV141() {
+      if (!this.player || this.nearestAnnexStationV71?.()) return null;
+      const center = this.player.x + this.player.w / 2, feet = this.player.y + this.player.h;
+      return this.activeAnnexNpcsV141().filter(npc => Math.abs(feet - npc.y - npc.h) < 36)
+        .map(npc => ({ npc, distance: Math.abs(center - npc.x - npc.w / 2) }))
+        .filter(entry => entry.distance < 118).sort((a, b) => a.distance - b.distance)[0]?.npc || null;
+    }
+
+    interactWithAnnexNpcV141(npc) {
+      if (!this.running || !this.activeAnnexNpcsV141().includes(npc)) return null;
+      npc.vx = 0; npc.workClock = 2.4;
+      this.hubNpcAnimation.reset(npc.crewId);
+      const count = (this.hubNpcInteractions[npc.crewId]?.count || 0) + 1;
+      const sequence = Math.max(this.hubNpcSequence + 1, count);
+      const event = buildHubNpcInteractionEvent(npc, { deck: this.state.deck, roomId: npc.roomId, count, sequence });
+      this.hubNpcSequence = sequence; this.hubNpcInteractions[npc.crewId] = { ...event.persistence.value };
+      this.audio?.ui?.(); this.persist(); this.onAction(event);
+      this.statusKey = ''; this.emitStatus(); return event;
+    }
+
+    drawAnnexNpcsV141(ctx) {
+      for (const npc of this.activeAnnexNpcsV141()) {
+        const sample = this.sampleNpcAnimation(npc, { emit: this.running !== false });
+        const image = sample && this.npcImagesBySheetId?.get(sample.sheet.id);
+        if (!sample || !image) continue;
+        const geometry = resolveHumanAtlasGeometryV133({ actor: npc, sheet: sample.sheet,
+          column: sample.column, row: sample.row, surface: 'hub' });
+        npc.humanVisualV133 = geometry;
+        this.drawDepthContactShadowV116?.(ctx, npc, npc.y + npc.h);
+        this.drawNpcLifeV136(ctx, image, npc, sample, geometry) || drawHumanAtlasV133(ctx, image, geometry);
+      }
     }
 
     stepHubNpcLifeV136(npc, delta, { parentDeck = false } = {}) {
@@ -235,7 +311,7 @@ export function withHubNpcLifeV136(Base) {
     }
 
     tickParentNpcLifeV136(delta) {
-      if (this.running === false || this.editorPlaytest || !(delta > 0)) return;
+      if (this.running === false || this.editorPlaytest || this.forgeSessionV141 || this.annexNpcSandboxV141 || !(delta > 0)) return;
       // Annex player physics bypass the parent update. Keep its actual crew
       // moving once here, in world coordinates, without running player physics
       // against the annex's local walls or producing camera-owned sound events.
@@ -272,7 +348,12 @@ export function withHubNpcLifeV136(Base) {
     }
 
     getSnapshot() {
-      return { ...super.getSnapshot(), npcLifeV136: (this.npcs || []).map(npc => ({
+      return { ...super.getSnapshot(), annexNpcLifeV141: this.activeAnnexNpcsV141().map(npc => ({
+        crewId: npc.crewId, roomId: npc.roomId, duty: npc.annexDutyV141, x: npc.x, y: npc.y,
+        min: npc.min, max: npc.max, vx: npc.vx, facing: npc.facing, mobile: npc.mobile,
+        mode: npc.lifeV136?.mode || 'unobserved', time: npc.lifeV136?.time || 0,
+        animation: npc.v52Animation || null, human: npc.humanVisualV133 || null
+      })), npcLifeV136: (this.npcs || []).map(npc => ({
         crewId: npc.crewId, roomId: npc.roomId, x: npc.x, y: npc.y, vx: npc.vx, facing: npc.facing,
         mode: npc.lifeV136?.mode || 'unobserved', tripPhase: npc.lifeV136?.tripPhase || null,
         passive: npc.lifeV136?.passive || null, time: npc.lifeV136?.time || 0

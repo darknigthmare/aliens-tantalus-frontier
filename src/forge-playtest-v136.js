@@ -59,10 +59,18 @@ function shipGeometry(project, cells, bounds) {
 /** Uses the production grid/spawn helpers and the actual ship compiler.
  * Checks physical clearance of the active room, not pathfinding. */
 export function inspectForgePlaytestV136(input) {
-  const project = parseProject(input), room = projectRoom(project), kind = project.kind;
+  const project = parseProject(input);
+  return inspectForgeRoomPhysicsV141(project, project.activeRoomId, validateProject(project));
+}
+
+/** Internal physics inspection for an already parsed document. The journey
+ * admission parses once and shares grid diagnostics across reachable rooms. */
+export function inspectForgeRoomPhysicsV141(project, roomId = project.activeRoomId, validation = validateProject(project)) {
+  const room = project.rooms.find(entry => entry.id === roomId), kind = project.kind;
+  if (!room) throw new TypeError('Salle Forge introuvable pour le contrôle physique.');
   const bounds = FORGE_TEST_BOUNDS_V136[kind];
   const cells = room.cells.filter(c => !decorative(c));
-  const issues = validateProject(project).issues.filter(i => i.roomId === room.id && !['decor-preview','links-authoring'].includes(i.code));
+  const issues = validation.issues.filter(i => i.roomId === room.id && !['decor-preview','links-authoring'].includes(i.code));
   const add = (severity,code,message,cell=null) => issues.push({severity,code,message,roomId:room.id,cellId:cell?.id||null,x:cell?.x??null,y:cell?.y??null});
   const ofType = type => cells.filter(c => c.type === type), counts = Object.fromEntries(['floor','platform','wall','door','ladder','lift','vent','spawn','objective','terminal','enemy','vehicle','hazard'].map(t=>[t,ofType(t).length]));
   const projection = { schema: 2, kind, size: [...room.size], tiles: nativeTiles(room) };

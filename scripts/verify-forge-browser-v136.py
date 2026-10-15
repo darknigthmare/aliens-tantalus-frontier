@@ -35,7 +35,7 @@ def main():
             check('invalid playtest opens Control rather than entering native launch callback',page.locator('.forge-control-v136').is_visible() and not page.evaluate('!!window.nativeTestProjection'))
             check('initial errors are explicit',page.locator('.forge-control-error-v136').count()>0)
             page.click('[data-forge-action="template"]');page.click('[data-tab="control"]')
-            check('ready room enables native test',page.locator('[data-control-action="test"]').is_enabled())
+            check('ready journey enables native test with its explicit button label',page.locator('[data-control-action="test"]').is_enabled() and page.locator('[data-control-action="test"]').inner_text()=='Tester le parcours')
             baseline=snap();writes=page.evaluate('getChangeCount()');click('audit')
             check('inspection neither writes nor changes document/history',snap()==baseline and page.evaluate('getChangeCount()')==writes)
             check('real engine dimensions are displayed', '6200' in page.locator('[data-control-status]').inner_text())
@@ -84,7 +84,7 @@ def main():
             page.click('#editor-play');check('manual Ship vehicle is refused explicitly','aucun véhicule' in page.locator('[data-control-issues]').inner_text() and not page.evaluate('!!nativeTestProjection'))
             page.click('#editor-undo');field('severity').select_option('warning');check('diagnostic filter hides errors',page.locator('.forge-control-error-v136').count()==0)
             with page.expect_download() as info:click('report')
-            info.value.save_as(out/'control.json');check('control export retains full unfiltered report',json.loads((out/'control.json').read_text())['scope']=='active-room')
+            info.value.save_as(out/'control.json');check('control export retains full unfiltered reachable-journey report',json.loads((out/'control.json').read_text())['scope']=='reachable-rooms')
             before=snap();page.evaluate("localStorage.setItem('atf-v47-profile-1','campaign-proof')")
             records=page.evaluate('localStorage.dump()') if args.offline else None
             load(records);page.click('[data-tab="control"]')

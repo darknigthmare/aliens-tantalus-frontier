@@ -95,7 +95,11 @@ for (const file of [
   'verify-enemy-patrol-v140.mjs', 'verify-npc-spacing-v140.mjs',
   'verify-player-wardrobe-parts-v140.mjs', 'verify-forge-native-v140.mjs',
   'verify-forge-release-v140.mjs', 'verify-forge-sandbox-v140.mjs',
-  'qa-enemy-patrol-browser-v140.mjs', 'qa-wardrobe-parts-browser-v140.mjs'
+  'qa-enemy-patrol-browser-v140.mjs', 'qa-wardrobe-parts-browser-v140.mjs',
+  'verify-forge-journey-v141.mjs', 'verify-forge-admission-v141.mjs',
+  'verify-forge-mission-v141.mjs', 'verify-forge-ship-v141.mjs', 'verify-forge-decoration-v141.mjs',
+  'verify-enemy-distance-gait-v141.mjs', 'verify-hub-annex-npc-life-v141.mjs',
+  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py'
 ]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
@@ -240,6 +244,10 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (v120Admission !== null) return v120Admission;
   const v119Admission = publicReleasePathAdmissionV119(path, { directory });
   if (v119Admission !== null) return v119Admission;
+  // V141 adds one reviewed original torso atlas, not an open candidate folder.
+  if (path === 'assets/openai/sprites/player/v141') return directory;
+  if (path.startsWith('assets/openai/sprites/player/v141/')) return !directory
+    && path === 'assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png';
   if (directory) {
     if (segments.length === 1) return ['src', 'scripts', 'assets'].includes(path);
     return segments[0] === 'assets' && segments.every(part => !part.startsWith('.') && !PRIVATE_FILENAME.test(part));

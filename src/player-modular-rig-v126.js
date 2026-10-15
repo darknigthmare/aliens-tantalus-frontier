@@ -4,9 +4,10 @@ import {
   PLAYER_BODY_RIG_ASSETS_V125, PLAYER_ARM_PARTS_V125,
   playerBodyRigImageReadyV125, resolvePlayerArmPoseV125
 } from './player-body-rig-v125.js';
-import { getPlayerColonialTorsoV129, getPlayerColonialArmsV129,
+import { getPlayerColonialArmsV129,
   getPlayerColonialHelmetV129, getPlayerColonialBackV129,
   PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
+import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -204,7 +205,7 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   if(reason) return freeze({schema:126,eligible:false,ready:false,reason,fallbackReason:reason,
     requestedSlots:slots,effectiveSlots:null,requiredAssets:[],layers:[],bodyRig});
   const m=bodyRig.matrix,sourceShoulders=bodyRig.sourceFrame.sourceShoulders;
-  const colonialTorso=getPlayerColonialTorsoV129(slots.torso,bodyRig.facing,anatomical.family);
+  const colonialTorso=getPlayerColonialTorsoWithVariantsV141(slots.torso,bodyRig.facing,anatomical.family);
   const torsoPart=colonialTorso?.part || PLAYER_MODULAR_RIG_PARTS_V126.torso[slots.torso][anatomical.family];
   const torsoMatrix=compose(m,triangle(torsoPart.joints,{...sourceShoulders,waist:anatomical.waist}));
   const upright=anatomical.family==='upright', headPart=PLAYER_MODULAR_RIG_PARTS_V126.head[upright?'upright':'forward'];

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
 import { SPRITE_ALPHA_POLICY_V134, SPRITE_ALPHA_ASSETS_V134,
   repairSpriteAlphaPixelsV134, resolveSpriteDrawableV134 } from '../src/sprite-alpha-policy-v134.js';
@@ -73,6 +74,36 @@ test('unadmitted art, unloaded images and wrong native dimensions bypass the cac
   }
   assert.equal(repairSpriteAlphaPixelsV134(fixture(),null),null);
   assert.equal(repairSpriteAlphaPixelsV134({data:new Uint8Array(1),width:1,height:1},policy),null);
+});
+
+test('the exact V141 Hudson atlas retains native antialiasing without admitting a white or magenta background', () => {
+  const path='/assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png';
+  const policies=SPRITE_ALPHA_ASSETS_V134.filter(asset=>asset.path===path);
+  assert.equal(policies.length,1);assert.deepEqual([policies[0].width,policies[0].height],[1536,1024]);
+  const bytes=readFileSync(new URL(`..${path}`,import.meta.url));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),
+    '7089fb04de1587661f6bb53a89647cdd6fe01d0e183e4da0191a87165dfb43de');
+  const source=decodePng(path),{data,width,height}=source;
+  let transparent=0,core=0,antialiased=0,paleCore=0,paleTranslucent=0,visibleMagenta=0,borderResidue=0;
+  for(let at=0;at<data.length;at+=4){
+    const [r,g,b,a]=data.subarray(at,at+4),pixel=at/4,x=pixel%width,y=Math.floor(pixel/width);
+    if(a===0)transparent++;else if(a<224)antialiased++;else core++;
+    const pale=Math.min(r,g,b)>=220&&Math.max(r,g,b)-Math.min(r,g,b)<=24;
+    if(a>0&&pale){if(a>=224)paleCore++;else paleTranslucent++;}
+    if(a>0&&r>=150&&b>=130&&g<=105&&Math.min(r,b)-g>=55)visibleMagenta++;
+    if(x<8||x>=width-8||y<8||y>=height-8){
+      assert.ok(a<=1,'The outer border must remain effectively empty; alpha 1 is natural native residue.');
+      assert.ok(!a||!pale,'No visible white border/backdrop.');
+      if(a)borderResidue++;
+    }
+  }
+  assert.equal(transparent,646250);assert.ok(transparent>width*height*.4);
+  assert.equal(core,870813);assert.ok(antialiased>50000,'Natural antialiasing is retained rather than rejected.');
+  assert.equal(paleCore,16962,'Pale calendar/lettering/highlights are legitimate solid material.');
+  assert.equal(paleTranslucent,0);assert.equal(visibleMagenta,0);assert.equal(borderResidue,210);
+  const result=repairSpriteAlphaPixelsV134(source,policies[0]);
+  assert.equal(result.changedPixels,0);assert.equal(result.whitePixels,0);assert.equal(result.purplePixels,0);
+  assert.equal(result.alphaUnchanged,true);assert.equal(result.data,source.data,'The native RGBA pixels need no rendering correction.');
 });
 
 test('all admitted real PNGs preserve alpha, opaque and interior pixels; all 656 human cells retain their soles', () => {

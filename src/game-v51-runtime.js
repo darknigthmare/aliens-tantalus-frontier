@@ -1,4 +1,6 @@
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
+import { advanceEnemyDistanceGaitV141, isEnemyDistanceGaitV141, canEnemyDistanceGaitMoveV141,
+  enemyDistanceGaitFrameV141 } from './enemy-distance-gait-v141.js';
 import { compileEditorGridV136, constrainEditorRectV136, editorMissionSpawnV136 } from './editor-spatial-v136.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, COMBAT_AIM_KEY_BINDINGS_V83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { bindCombatPointerAimV83, refreshCombatPointerAimV83 } from './mission-input-v77.js';
@@ -2363,6 +2365,22 @@ export class GameEngine {
         path: enemy.biology === 'human' ? '/assets/openai/human-factions-animation-sheet.png'
           : '/assets/openai/synthetic-android-animation-sheet.png', sourceFacing: 1
       } : null);
+    // Historical faction sheets have no SpriteAnimationController request.
+    // Spend their walking cells with the same measured world stride as Joe;
+    // combat, injury and corpse cells retain their original clocks and rows.
+    if (isEnemyDistanceGaitV141(enemy)) {
+      this.enemyFallbackGaitV141 ||= new WeakMap();
+      const gait = advanceEnemyDistanceGaitV141(this.enemyFallbackGaitV141.get(enemy), enemy, this.animationTime, {
+        context: this.bioforgeLevelV80 ? 'bioforge' : 'mission', reducedMotion: this.reducedMotion || this.accessibilityRuntime?.reducedMotion,
+        movementEnabled: !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+          && (this.bioforgeLevelV80 ? ['printing', 'combat'].includes(this.bioforgeRootV80?.activeSession?.phase) : this.mission?.state === 'active')
+      });
+      if (gait) this.enemyFallbackGaitV141.set(enemy, gait);
+      if (gait && canEnemyDistanceGaitMoveV141(enemy)) {
+        frame = enemyDistanceGaitFrameV141(gait, 4);
+        if (dedicatedEnemySheet?.clipSet === 'enemy-action-v56') row = gait.moving ? 1 : 0;
+      }
+    }
     const human = resolveHumanAtlasGeometryV133({ actor: enemy, sheet: humanSheet, column: frame, row });
     enemy.humanVisualV133 = human;
     if (human) { renderWidth = human.sprite.width; renderHeight = human.sprite.height; }

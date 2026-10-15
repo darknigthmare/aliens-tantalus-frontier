@@ -27,3 +27,17 @@ test('Forge styles are admitted exactly and authoring documentation is excluded 
   assert.equal(filter(resolve('docs/forge/README-V130.md')), false);
   assert.equal(filter(resolve('src/forge-editor-v130.css')), true);
 });
+
+test('V141 admits the reviewed Hudson PNG without opening its folder to additional candidates', () => {
+  const folder = 'assets/openai/sprites/player/v141';
+  const admitted = `${folder}/hudson-torso-candidate-v141.png`;
+  const filter = createBuildAssetFilter(process.cwd());
+  assert.equal(isPublicDistributionPathV86(folder, { directory: true, built: true }), true);
+  assert.equal(isPublicDistributionPathV86(admitted, { built: true }), true);
+  assert.equal(filter(resolve(admitted)), true);
+  for (const path of [`${folder}/other-torso.png`, `${folder}/hicks.png`,
+    `${folder}/nested/hudson-torso-candidate-v141.png`, `${folder}/measurements.json`]) {
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+    assert.equal(filter(resolve(path)), false, path);
+  }
+});
