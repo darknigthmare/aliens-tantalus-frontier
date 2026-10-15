@@ -48,6 +48,7 @@ import { publicReleasePathAdmissionV123, PUBLIC_MEDIA_DIRECTORIES_V123 } from '.
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
+  'docs/forge',
   'docs/references/v118-batch',
   'docs/references/v117-batch',
   'docs/references/v116-user',

@@ -1,6 +1,7 @@
 import { EDITOR_TILE_TYPES_V135, EDITOR_BRUSH_MODES_V135, assertEditorDimensionsV135, normalizeEditorProjectV135,
   editorLineCellsV135, editorRectangleCellsV135, editorFloodCellsV135 } from './editor-authoring-v135.js';
 import { analyzeEditorSpatialV136 } from './editor-spatial-v136.js';
+import { editorSelectionV140, editorSelectionTilesV140, planEditorModuleV140 } from './editor-modules-v140.js';
 const TILE_TYPES = EDITOR_TILE_TYPES_V135;
 
 export class LevelEditor {
@@ -10,6 +11,7 @@ export class LevelEditor {
     this.dragging = false; this.lastPaintKey = null; this.history = []; this.future = []; this.shipMode = false;
     this.strokeV135 = null; this.listenersV135 = new Set(); this.keyboardCellV135 = [0, 0];
     this.showSpatialV136 = false;
+    this.selectionV140 = null; this.selectionAnchorV140 = null; this.modulePlacementV140 = null; this.moduleMessageV140 = '';
     this.bind(); this.draw();
   }
 
@@ -25,12 +27,15 @@ export class LevelEditor {
     this.boundDownV135 = event => {
       if (this.strokeV135 || event.isPrimary === false || ![0, 2].includes(event.button ?? 0)) return;
       const start = cell(event); if (!start) return;
-      event.preventDefault(); this.canvas.focus?.(); this.keyboardCellV135 = start;
-      const mode = event.button === 2 || event.shiftKey ? 'erase' : this.brushMode;
-      this.strokeV135 = { id: event.pointerId, mode, tool: this.tool, before: this.state(), start, previous: start };
+      event.preventDefault(); this.canvas.focus?.({ preventScroll: true }); this.keyboardCellV135 = start;
+      const mode = event.button === 2 || event.shiftKey ? 'erase' : this.modulePlacementV140 ? 'module' : this.brushMode;
+      this.strokeV135 = { id: event.pointerId, mode, tool: this.tool, before: this.state(), start, previous: start,
+        selectionBefore: this.selectionV140 && { ...this.selectionV140 } };
       this.dragging = true;
       try { this.canvas.setPointerCapture?.(event.pointerId); } catch { /* Detached synthetic canvases need no capture. */ }
-      if (mode === 'fill') this.applyCellsV135(editorFloodCellsV135(this.tiles, this.cols, this.rows, start, this.tool), this.tool);
+      if (mode === 'module') { /* Placement commits only on release; interrupted touches leave the plan intact. */ }
+      else if (mode === 'select') { this.selectionV140 = editorSelectionV140(start); this.selectionAnchorV140 = start; this.moduleMessageV140 = ''; }
+      else if (mode === 'fill') this.applyCellsV135(editorFloodCellsV135(this.tiles, this.cols, this.rows, start, this.tool), this.tool);
       else this.applyCellsV135([start], mode === 'erase' ? undefined : this.tool);
       this.draw();
     };
@@ -38,7 +43,9 @@ export class LevelEditor {
       const stroke = this.strokeV135; if (!stroke || stroke.id !== event.pointerId) return;
       event.preventDefault(); const current = cell(event, true); if (!current) return;
       this.keyboardCellV135 = current;
-      if (stroke.mode === 'rectangle') {
+      if (stroke.mode === 'module') { /* The cursor previews the destination until release. */ }
+      else if (stroke.mode === 'select') this.selectionV140 = editorSelectionV140(stroke.start, current);
+      else if (stroke.mode === 'rectangle') {
         this.tiles = new Map(stroke.before.tiles);
         this.applyCellsV135(editorRectangleCellsV135(stroke.start, current), stroke.tool);
       } else if (stroke.mode !== 'fill') {
@@ -54,13 +61,26 @@ export class LevelEditor {
         event.preventDefault(); if (event.key.toLowerCase() === 'y' || event.shiftKey) this.redo(); else this.undo(); return;
       }
       if (event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.key === 'Escape' && (this.selectionV140 || this.modulePlacementV140)) {
+        event.preventDefault(); this.cancelModuleV140(); return;
+      }
       const directions = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
       if (directions[event.key]) {
         event.preventDefault(); const delta = directions[event.key];
+        const previous = this.keyboardCellV135;
         this.keyboardCellV135 = [Math.max(0, Math.min(this.cols - 1, this.keyboardCellV135[0] + delta[0])), Math.max(0, Math.min(this.rows - 1, this.keyboardCellV135[1] + delta[1]))];
+        if (this.brushMode === 'select' && event.shiftKey && !this.modulePlacementV140) {
+          this.selectionAnchorV140 ||= previous;
+          this.selectionV140 = editorSelectionV140(this.selectionAnchorV140, this.keyboardCellV135); this.moduleMessageV140 = '';
+        } else if (!event.shiftKey) this.selectionAnchorV140 = null;
         this.draw(); this.notifyUiV135();
       } else if ([' ', 'Enter', 'Delete', 'Backspace'].includes(event.key)) {
-        event.preventDefault(); this.paintCellV135(...this.keyboardCellV135, { erase: event.shiftKey || ['Delete', 'Backspace'].includes(event.key) });
+        event.preventDefault();
+        if (this.modulePlacementV140 && [' ', 'Enter'].includes(event.key)) this.placeModuleV140(this.keyboardCellV135);
+        else if (this.brushMode === 'select') {
+          if (['Delete', 'Backspace'].includes(event.key)) this.deleteSelectionV140();
+          else { this.selectionAnchorV140 = [...this.keyboardCellV135]; this.selectionV140 = editorSelectionV140(this.keyboardCellV135); this.draw(); this.notifyUiV135(); }
+        } else this.paintCellV135(...this.keyboardCellV135, { erase: event.shiftKey || ['Delete', 'Backspace'].includes(event.key) });
       }
     };
     this.canvas.addEventListener('pointerdown', this.boundDownV135); this.canvas.addEventListener('pointermove', this.boundMoveV135);
@@ -73,15 +93,16 @@ export class LevelEditor {
   notifyUiV135() { for (const listener of this.listenersV135) listener(this.getSnapshot()); }
   notifyV135() { this.onChange(this.serialize()); this.notifyUiV135(); }
   applyCellsV135(cells, type) { for (const [x, y] of cells) { const key = `${x}:${y}`; if (type === undefined) this.tiles.delete(key); else this.tiles.set(key, type); } }
-  setTool(tool) { if (TILE_TYPES.includes(tool)) { this.finishStrokeV135(); this.tool = tool; this.notifyUiV135(); } }
+  setTool(tool) { if (TILE_TYPES.includes(tool)) { this.finishStrokeV135(); this.tool = tool; this.modulePlacementV140 = null; this.moduleMessageV140 = ''; this.notifyUiV135(); } }
   setBrushMode(mode) {
     if (!EDITOR_BRUSH_MODES_V135.includes(mode)) return false;
-    this.finishStrokeV135(); this.brushMode = mode; this.notifyUiV135(); return true;
+    this.finishStrokeV135(); this.brushMode = mode; this.modulePlacementV140 = null; this.moduleMessageV140 = ''; this.notifyUiV135(); return true;
   }
   setShipMode(enabled) { const next = Boolean(enabled); if (next !== this.shipMode) this.mutate(() => { this.shipMode = next; }); }
   state() { return { shipMode: this.shipMode, size: [this.cols, this.rows], tiles: [...this.tiles] }; }
   restore(state, notify = true) {
     this.shipMode = Boolean(state.shipMode); [this.cols, this.rows] = state.size || [32, 18]; this.tiles = new Map(state.tiles || []);
+    this.resetSelectionV140();
     this.keyboardCellV135 = [Math.min(this.cols - 1, this.keyboardCellV135[0]), Math.min(this.rows - 1, this.keyboardCellV135[1])];
     this.draw(); if (notify) this.notifyV135();
   }
@@ -93,19 +114,32 @@ export class LevelEditor {
     const stroke = this.strokeV135; if (!stroke) return false;
     this.strokeV135 = null; this.dragging = false; this.lastPaintKey = null;
     try { if (this.canvas.hasPointerCapture?.(stroke.id)) this.canvas.releasePointerCapture(stroke.id); } catch { /* The browser may already have released it. */ }
+    if (stroke.mode === 'module') {
+      if (cancel) { this.draw(); this.notifyUiV135(); return false; }
+      return this.placeModuleV140(stroke.previous);
+    }
+    if (stroke.mode === 'select') {
+      if (cancel) this.selectionV140 = stroke.selectionBefore;
+      this.selectionAnchorV140 = null; this.draw(); this.notifyUiV135(); return false;
+    }
     if (cancel) { this.restore(stroke.before, false); return false; }
     return this.recordChangeV135(stroke.before);
   }
-  mutate(callback) { this.finishStrokeV135(); const before = this.state(); callback(); return this.recordChangeV135(before); }
-  clear() { return this.mutate(() => this.tiles.clear()); }
+  mutate(callback) {
+    this.finishStrokeV135(); const before = this.state(); callback(); const changed = this.recordChangeV135(before);
+    if (!changed) { this.draw(); this.notifyUiV135(); }
+    return changed;
+  }
+  clear() { return this.mutate(() => { this.tiles.clear(); this.resetSelectionV140(); }); }
   resize(columns, rows, { crop = false } = {}) {
     assertEditorDimensionsV135(columns, rows);
     const outside = [...this.tiles.keys()].filter(key => { const [x, y] = key.split(':').map(Number); return x >= columns || y >= rows; });
     if (outside.length && !crop) throw new Error(`${outside.length} tuile(s) seraient coupées. Autorisez explicitement le rognage ou agrandissez le plan.`);
-    return this.mutate(() => { this.cols = columns; this.rows = rows; for (const key of outside) this.tiles.delete(key); });
+    return this.mutate(() => { this.cols = columns; this.rows = rows; for (const key of outside) this.tiles.delete(key); this.resetSelectionV140(); });
   }
   paintCellV135(x, y, { erase = false } = {}) {
     if (!Number.isInteger(x) || !Number.isInteger(y) || x < 0 || x >= this.cols || y < 0 || y >= this.rows) return false;
+    if (this.brushMode === 'select' && !erase) return false;
     return this.mutate(() => {
       const mode = erase ? 'erase' : this.brushMode, replacement = mode === 'erase' ? undefined : this.tool;
       this.applyCellsV135(mode === 'fill' ? editorFloodCellsV135(this.tiles, this.cols, this.rows, [x, y], replacement) : [[x, y]], replacement);
@@ -121,13 +155,45 @@ export class LevelEditor {
     return { ok: errors.length === 0, errors, counts };
   }
   getSpatialReportV136() { return analyzeEditorSpatialV136({ kind: this.shipMode ? 'ship' : 'mission', size: [this.cols, this.rows], tiles: [...this.tiles].map(([position, type]) => ({ position, type })) }); }
+  resetSelectionV140() { this.selectionV140 = null; this.selectionAnchorV140 = null; this.modulePlacementV140 = null; this.moduleMessageV140 = ''; }
+  cancelModuleV140() {
+    this.finishStrokeV135({ cancel: true });
+    if (this.modulePlacementV140) { this.modulePlacementV140 = null; this.moduleMessageV140 = 'Destination annulée. La sélection est conservée.'; }
+    else this.resetSelectionV140();
+    this.draw(); this.notifyUiV135();
+  }
+  beginModulePlacementV140(mode) {
+    this.finishStrokeV135();
+    if (!['move', 'copy'].includes(mode) || !editorSelectionTilesV140(this.tiles, this.selectionV140).length) return false;
+    this.brushMode = 'select'; this.modulePlacementV140 = mode; this.selectionAnchorV140 = null;
+    this.moduleMessageV140 = 'Choisissez le coin supérieur gauche du module : touchez la grille ou utilisez les flèches puis Entrée. Échap annule.';
+    this.draw(); this.notifyUiV135(); return true;
+  }
+  placeModuleV140(destination) {
+    if (!this.modulePlacementV140) return false;
+    let planned;
+    try { planned = planEditorModuleV140(this.tiles, [this.cols, this.rows], this.selectionV140, destination, this.modulePlacementV140); }
+    catch (cause) { this.moduleMessageV140 = cause.message; this.draw(); this.notifyUiV135(); return false; }
+    const mode = this.modulePlacementV140;
+    const changed = this.mutate(() => { this.tiles = planned.tiles; this.selectionV140 = planned.selection; this.modulePlacementV140 = null; this.selectionAnchorV140 = null; });
+    this.moduleMessageV140 = `${planned.count} tuile(s) ${mode === 'copy' ? 'dupliquée(s)' : 'déplacée(s)'}. Annuler restaure le plan entier.`;
+    this.draw(); this.notifyUiV135(); return changed;
+  }
+  deleteSelectionV140() {
+    this.finishStrokeV135(); const selected = editorSelectionTilesV140(this.tiles, this.selectionV140);
+    if (!selected.length) return false;
+    return this.mutate(() => { for (const [key] of selected) this.tiles.delete(key); this.modulePlacementV140 = null; });
+  }
   setSpatialOverlayV136(enabled) { this.showSpatialV136 = Boolean(enabled); this.draw(); this.notifyUiV135(); }
   getSnapshot() { return { ...this.serialize(), tool: this.tool, brushMode: this.brushMode, cursor: [...this.keyboardCellV135], canUndo: this.history.length > 0, canRedo: this.future.length > 0,
-    spatialV136: { ...this.getSpatialReportV136(), visible: this.showSpatialV136 } }; }
+    spatialV136: { ...this.getSpatialReportV136(), visible: this.showSpatialV136 },
+    moduleV140: { selection: this.selectionV140 && { ...this.selectionV140 }, count: editorSelectionTilesV140(this.tiles, this.selectionV140).length,
+      placement: this.modulePlacementV140, message: this.moduleMessageV140 } }; }
   serialize() { return { schema: 2, kind: this.shipMode ? 'ship' : 'mission', size: [this.cols, this.rows], tiles: [...this.tiles].map(([position, type]) => ({ position, type })), validation: this.validate() }; }
   load(project) {
     const normalized = normalizeEditorProjectV135(project);
     this.finishStrokeV135(); const before = this.state(); this.shipMode = normalized.kind === 'ship'; [this.cols, this.rows] = normalized.size; this.tiles = new Map(normalized.tiles);
+    this.resetSelectionV140();
     this.keyboardCellV135 = [0, 0]; this.recordChangeV135(before);
   }
   draw() {
@@ -153,6 +219,15 @@ export class LevelEditor {
     }
     if (globalThis.document?.activeElement === this.canvas) {
       ctx.strokeStyle = '#f5e998'; ctx.lineWidth = 2; ctx.strokeRect(this.keyboardCellV135[0] * cw + 1, this.keyboardCellV135[1] * ch + 1, Math.max(1, cw - 2), Math.max(1, ch - 2));
+    }
+    if (this.selectionV140) {
+      const selection = this.selectionV140;
+      ctx.fillStyle = 'rgba(114, 214, 255, .16)'; ctx.strokeStyle = '#72d6ff'; ctx.lineWidth = 2;
+      const x = selection.left * cw, y = selection.top * ch, width = (selection.right - selection.left + 1) * cw, height = (selection.bottom - selection.top + 1) * ch;
+      ctx.fillRect(x, y, width, height); ctx.strokeRect(x + 1, y + 1, width - 2, height - 2);
+      if (this.modulePlacementV140) {
+        ctx.strokeStyle = '#f5e998'; ctx.strokeRect(this.keyboardCellV135[0] * cw + 1, this.keyboardCellV135[1] * ch + 1, width - 2, height - 2);
+      }
     }
   }
   destroy() {

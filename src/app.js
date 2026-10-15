@@ -33,7 +33,7 @@ import { createFieldMediaRepositoryV135 } from './field-media-v135.js';
 import { mountFieldMediaUiV135 } from './field-media-ui-v135.js';
 import { mountEditorAuthoringUiV135 } from './editor-authoring-ui-v135.js';
 import { savePlayerWardrobeOutfitV135, equipPlayerWardrobeOutfitV135, deletePlayerWardrobeOutfitV135,
-  copyPlayerAppearanceV135 } from './player-wardrobe-v135.js';
+  copyPlayerAppearanceV135, equipPlayerWardrobePartsV140 } from './player-wardrobe-v135.js';
 import {
   ensureAdvancedState, getShipModuleEffects, getModuleQuote, installShipModule, repairShipModule,
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
@@ -1569,6 +1569,8 @@ function renderPlayerAppearanceV126() {
           else if (action === 'save') savePlayerWardrobeOutfitV135(candidate, { owner, slot,
             name: panel.querySelector(`[data-wardrobe-name-v135="${slot}"]`)?.value || '' });
           else if (action === 'equip') equipPlayerWardrobeOutfitV135(candidate, { owner, slot });
+          else if (action === 'equip-parts') equipPlayerWardrobePartsV140(candidate, { owner, slot,
+            parts: [...panel.querySelectorAll(`[data-wardrobe-parts-v140="${slot}"]:checked`)].map(input => input.value) });
           else if (action === 'delete') deletePlayerWardrobeOutfitV135(candidate, { owner, slot });
           else throw new Error('Action de vestiaire inconnue.');
           if (!ownsTimelineV84(timeline)) throw new Error('Le profil a changé. Rouvrez le vestiaire.');
@@ -1583,8 +1585,13 @@ function renderPlayerAppearanceV126() {
         const focusTarget = controls.find(control => !control.disabled && control.dataset.wardrobeActionV135 === action
           && control.dataset.wardrobeOwnerV135 === owner && (action === 'copy' || Number(control.dataset.wardrobeSlotV135) === slot))
           || controls.find(control => !control.disabled && control.dataset.wardrobeActionV135 === 'save' && Number(control.dataset.wardrobeSlotV135) === slot);
+        if (action === 'equip-parts') {
+          const details = panel.querySelector(`[data-wardrobe-detail-v140="${slot}"]`);
+          if (details) details.open = true;
+        }
         focusTarget?.focus({ preventScroll: true });
-        const message = action === 'delete' ? 'Casier de tenue libéré.' : action === 'save' ? 'Tenue enregistrée dans votre casier.' : 'Tenue préparée.';
+        const message = action === 'delete' ? 'Casier de tenue libéré.' : action === 'save' ? 'Tenue enregistrée dans votre casier.'
+          : action === 'equip-parts' ? 'Pièces cochées préparées.' : 'Tenue préparée.';
         panel.querySelector('[data-wardrobe-status-v135]').textContent = message;
         toast(message);
         return;

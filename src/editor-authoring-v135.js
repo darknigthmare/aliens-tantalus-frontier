@@ -1,5 +1,5 @@
 export const EDITOR_TILE_TYPES_V135 = Object.freeze(['floor', 'platform', 'wall', 'door', 'vent', 'ladder', 'lift', 'spawn', 'objective', 'enemy', 'vehicle', 'terminal', 'hazard']);
-export const EDITOR_BRUSH_MODES_V135 = Object.freeze(['paint', 'erase', 'rectangle', 'fill']);
+export const EDITOR_BRUSH_MODES_V135 = Object.freeze(['paint', 'erase', 'rectangle', 'fill', 'select']);
 export const EDITOR_LIMITS_V135 = Object.freeze({ minColumns: 8, maxColumns: 128, minRows: 8, maxRows: 72, tiles: 9216 });
 const tileTypes = new Set(EDITOR_TILE_TYPES_V135);
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);

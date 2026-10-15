@@ -12,6 +12,26 @@ const hash = value => { let n = 2166136261; for (const c of String(value)) n = M
 const blockedVertically = (actor, box) => box && box.collisionMode !== 'one-way-top'
   && [box.x, box.y, box.w, box.h].every(Number.isFinite) && box.w > 0 && box.h > 0
   && actor.y + actor.h > box.y + .001 && actor.y < box.y + box.h - .001;
+const NPC_STANDING_GAP = 12;
+
+function standingPeers(actor, peers) {
+  const identity = actor.crewId || actor.id;
+  return peers.filter(peer => peer && peer !== actor && (!identity || (peer.crewId || peer.id) !== identity)
+    && peer.alive !== false && [peer.x, peer.y, peer.w, peer.h].every(Number.isFinite)
+    && peer.w > 0 && peer.h > 0 && Math.abs(actor.y + actor.h - peer.y - peer.h) < 16);
+}
+
+function nearestPeerAhead(actor, peers, direction) {
+  let nearest = null;
+  for (const peer of peers) {
+    const ahead = direction * (peer.x + peer.w / 2 - actor.x - actor.w / 2) > 0;
+    if (!ahead) continue;
+    const distance = direction > 0 ? peer.x - actor.x - actor.w - NPC_STANDING_GAP
+      : actor.x - peer.x - peer.w - NPC_STANDING_GAP;
+    if (!nearest || distance < nearest.distance) nearest = { peer, distance: Math.max(0, distance) };
+  }
+  return nearest;
+}
 
 /** Swept horizontal contacts share the actual closed leaves and solid room
  * geometry. Background tabletops never acquire a new collision plane. */
@@ -72,7 +92,7 @@ function workStationOccupied(state, actor, peers) {
 }
 
 function passivePose(state, actor, reducedMotion) {
-  if (state.mode === 'moving' || state.mode === 'blocked' || state.mode === 'alert'
+  if (state.mode === 'moving' || state.mode === 'blocked' || state.mode === 'yielding' || state.mode === 'alert'
     || actor.workClock > 0 || actor.supportClock > 0) return null;
   if (reducedMotion) return { clipId: 'idle', frame: 0 };
   if (state.tripPhase === 'work') {
@@ -106,6 +126,10 @@ export function advanceNpcLifeV136(previous, actor, delta, {
     tripPhase: 'rest', tripClock: 0, tripDelay: 6 + seed % 9, passive: null, previousPassive: null, blend: 1 };
   if (suspended || !Number.isFinite(delta) || delta <= 0) return state;
   const dt = Math.min(delta, .1), originalX = actor.x;
+  const cohort = standingPeers(actor, peers);
+  const peerColliders = cohort.map(peer => ({ x: peer.x - NPC_STANDING_GAP, y: peer.y,
+    w: peer.w + 2 * NPC_STANDING_GAP, h: peer.h }));
+  state.yieldingTo = null;
   state.time += dt; state.blend = Math.min(1, state.blend + dt / .14);
   const urgent = actor.alerted || actor.alive === false || actor.downed || actor.workClock > 0 || actor.supportClock > 0;
   if (urgent) {
@@ -126,17 +150,34 @@ export function advanceNpcLifeV136(previous, actor, delta, {
     const target = trip ? state.tripPhase === 'approach' ? state.workX : state.homeX
       : actor.mobile ? state.direction > 0 ? high : low : x;
     const moving = trip || actor.mobile && high - low > 1;
-    let blocked = false;
+    let blocked = false, yielding = false, peerStopped = false;
     if (!moving) state.velocity = 0;
     for (let remaining = moving ? dt : 0; remaining > 1e-8;) {
       const step = Math.min(1 / 120, remaining); remaining -= step;
       state.dwell = Math.max(0, state.dwell - step);
       const distance = Math.abs(target - x), direction = Math.sign(target - x);
-      const desired = moving && !state.dwell ? direction * Math.min(27, Math.sqrt(2 * 92 * Math.max(0, distance - .15))) : 0;
+      let speed = Math.min(27, Math.sqrt(2 * 92 * Math.max(0, distance - .15)));
+      const ahead = nearestPeerAhead({ ...actor, x }, cohort, direction);
+      if (ahead) {
+        // A closing person consumes stopping distance too. A person walking
+        // away permits normal following; neither case changes the free speed.
+        const peerVelocity = finite(ahead.peer.lifeV136?.velocity, finite(ahead.peer.vx));
+        const safeSpeed = Math.max(0, direction * peerVelocity
+          + Math.sqrt(2 * 92 * Math.max(0, ahead.distance - .2)));
+        if (safeSpeed < speed) {
+          speed = safeSpeed; yielding = true;
+          state.yieldingTo = ahead.peer.crewId || ahead.peer.id || 'crew';
+        }
+        peerStopped ||= ahead.distance < .6 && Math.abs(state.velocity) < 3;
+      }
+      const desired = moving && !state.dwell ? direction * speed : 0;
       const nextVelocity = approach(state.velocity, desired, 92 * step);
       const proposed = clamp(x + (state.velocity + nextVelocity) * .5 * step, Math.min(low, high), Math.max(low, high));
       const contact = moveNpcAgainstGeometryV136({ ...actor, x }, proposed, colliders);
-      x = contact.x; state.velocity = contact.blocked ? 0 : nextVelocity; blocked ||= contact.blocked;
+      const peerContact = moveNpcAgainstGeometryV136({ ...actor, x }, contact.x, peerColliders);
+      x = peerContact.x; state.velocity = contact.blocked || peerContact.blocked ? 0 : nextVelocity;
+      blocked ||= contact.blocked;
+      if (peerContact.blocked) { yielding = true; peerStopped = true; }
       if (distance < .25 && Math.abs(state.velocity) < 3) { state.velocity = 0; break; }
     }
     state.x = x; state.actualVelocity = (x - originalX) / dt;
@@ -146,10 +187,18 @@ export function advanceNpcLifeV136(previous, actor, delta, {
       if (trip) { state.tripPhase = state.tripPhase === 'approach' ? 'work' : 'rest'; state.tripClock = 0; }
       else if (!state.dwell) { state.direction *= -1; state.dwell = .7 + (seed % 8) / 10; }
     }
+    // This is a single walking rail: patrols stop, hold and turn away instead
+    // of crossing another body. A job approach yields its reservation and
+    // physically returns home; a blocked return waits for room to open.
+    if (peerStopped && !state.dwell) {
+      if (actor.mobile) { state.direction *= -1; state.dwell = .55 + (seed % 5) / 10; }
+      else if (state.tripPhase === 'approach') { state.tripPhase = 'return'; state.tripClock = 0; }
+    }
     // An inaccessible job anchor is abandoned; a closed route leaf is waited
     // at until the real door opens. Neither case advances a phantom walk.
     if (blocked && trip) { state.tripPhase = 'return'; state.tripClock = 0; }
-    state.mode = blocked ? 'blocked' : Math.abs(state.actualVelocity) > .1 ? 'moving' : state.dwell ? 'turn' : 'idle';
+    state.mode = blocked ? 'blocked' : Math.abs(state.actualVelocity) > .1 ? 'moving'
+      : yielding ? 'yielding' : state.dwell ? 'turn' : 'idle';
   }
   const nextPose = passivePose(state, actor, reducedMotion);
   if (nextPose?.clipId !== state.passive?.clipId || nextPose?.frame !== state.passive?.frame) {

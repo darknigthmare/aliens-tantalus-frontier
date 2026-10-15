@@ -1,5 +1,5 @@
 import { EDITOR_BRUSH_MODES_V135 } from './editor-authoring-v135.js';
-const MODES = Object.freeze({ paint: 'Pinceau', erase: 'Gomme', rectangle: 'Rectangle plein', fill: 'Remplissage' });
+const MODES = Object.freeze({ paint: 'Pinceau', erase: 'Gomme', rectangle: 'Rectangle plein', fill: 'Remplissage', select: 'Sélection' });
 function element(documentRef, tag, text, attributes = {}) {
   const node = documentRef.createElement(tag); if (text !== undefined) node.textContent = text;
   for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, String(value));
@@ -18,6 +18,24 @@ export function mountEditorAuthoringUiV135(editor, { parent = editor.canvas.pare
     const button = element(documentRef, 'button', MODES[mode], { type: 'button', class: 'button compact', 'data-editor-brush-v135': mode, 'aria-pressed': 'false' });
     button.addEventListener('click', () => editor.setBrushMode(mode)); tools.append(button); return button;
   });
+  const modules = element(documentRef, 'fieldset', undefined, { 'data-editor-modules-v140': '' });
+  modules.style.cssText = 'margin:.75rem 0;padding:.6rem;min-width:0';
+  const moduleTitle = element(documentRef, 'legend', 'Édition par modules');
+  const moduleStatus = element(documentRef, 'p', '', { role: 'status', 'aria-live': 'polite', 'data-editor-module-status-v140': '' });
+  const moduleActions = element(documentRef, 'div'); moduleActions.style.cssText = 'display:flex;flex-wrap:wrap;gap:.5rem';
+  const moduleButtons = ['move', 'copy', 'delete', 'cancel'].map((action, index) => {
+    const button = element(documentRef, 'button', ['Déplacer', 'Dupliquer', 'Effacer la sélection', 'Annuler la sélection / destination'][index],
+      { type: 'button', class: 'button compact', 'data-editor-module-v140': action });
+    button.style.cssText = 'min-height:44px;max-width:100%;white-space:normal;touch-action:manipulation';
+    button.addEventListener('click', () => {
+      if (action === 'cancel') editor.cancelModuleV140();
+      else if (action === 'delete') editor.deleteSelectionV140();
+      else { editor.beginModulePlacementV140(action); editor.canvas.focus({ preventScroll: true }); }
+    });
+    moduleActions.append(button); return button;
+  });
+  const moduleHelp = element(documentRef, 'p', 'Sélection : glissez sur un rectangle, ou utilisez Maj + flèches sur la grille. Déplacer / Dupliquer attend le coin supérieur gauche de destination. Une destination occupée ou hors du plan est refusée.');
+  moduleHelp.className = 'hint'; modules.append(moduleTitle, moduleStatus, moduleActions, moduleHelp);
   const dimensions = element(documentRef, 'form', undefined, { 'aria-label': 'Dimensions du niveau' });
   dimensions.style.cssText = 'display:flex;flex-wrap:wrap;gap:.65rem;align-items:end;margin:.75rem 0';
   const columnsLabel = element(documentRef, 'label', 'Colonnes '), rowsLabel = element(documentRef, 'label', 'Lignes ');
@@ -47,7 +65,7 @@ export function mountEditorAuthoringUiV135(editor, { parent = editor.canvas.pare
   const helpId = `${editor.canvas.id || 'editor'}-authoring-help-v135`; help.id = helpId;
   const previousDescription = editor.canvas.getAttribute('aria-describedby') || '';
   editor.canvas.setAttribute('aria-describedby', `${previousDescription} ${helpId}`.trim());
-  root.append(tools, dimensions, status, spatial, help); parent.insertBefore(root, editor.canvas);
+  root.append(tools, dimensions, status, modules, spatial, help); parent.insertBefore(root, editor.canvas);
   let destroyed = false, message = '';
   const refresh = () => {
     if (destroyed) return;
@@ -58,6 +76,12 @@ export function mountEditorAuthoringUiV135(editor, { parent = editor.canvas.pare
     const persistence = getPersistenceStatus();
     const storage = persistence?.persisted === false ? ' · stockage local indisponible : exportez votre plan avant de quitter.' : '';
     status.textContent = `${message || `${snapshot.size[0]} × ${snapshot.size[1]} · ${snapshot.tiles.length} tuiles · ${MODES[snapshot.brushMode]}`} · curseur ${snapshot.cursor[0] + 1}, ${snapshot.cursor[1] + 1}${storage}`;
+    const selected = snapshot.moduleV140;
+    const bounds = selected.selection;
+    moduleStatus.textContent = selected.message || (bounds
+      ? `${selected.count} tuile(s) sélectionnée(s) · colonnes ${bounds.left + 1}–${bounds.right + 1}, lignes ${bounds.top + 1}–${bounds.bottom + 1}.`
+      : 'Choisissez l’outil Sélection pour déplacer ou dupliquer une partie du plan.');
+    for (const button of moduleButtons) button.disabled = button.dataset.editorModuleV140 === 'cancel' ? !bounds && !selected.placement : !selected.count;
     const review = snapshot.spatialV136;
     spatialTitle.textContent = `Dégagement et volumes physiques${review.supported ? ` · ${review.issues.length} point(s) à vérifier` : ''}`;
     spatialToggle.disabled = !review.supported; spatialToggle.checked = review.visible;

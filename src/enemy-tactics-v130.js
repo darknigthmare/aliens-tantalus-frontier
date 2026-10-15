@@ -1,6 +1,7 @@
 import { sweepProjectileAabbV83 } from './projectile-collision-v83.js';
 import { cancelEnemyBatchAttackV66 } from './enemy-batch-combat-v66.js';
 import { updateEnemySupportStatusesV72 } from './gameplay-support-v72.js';
+import { ENEMY_PATROL_V140, advanceEnemyPatrolV140, restoreEnemyPatrolV140 } from './enemy-patrol-v140.js';
 
 // Awareness and deployment are project gameplay, never a claim about canon.
 // Existing accepted sprites and combat contracts remain the only combat art.
@@ -65,7 +66,7 @@ function initialState(engine, enemy) {
   return { schema: 130, mode: enemy.alert ? 'pursuit' : 'patrol', clock: 0, sight: 0, lost: 0,
     direction: enemy.facing < 0 ? -1 : 1, homeX: enemy.x, homeY: enemy.y,
     left: bounds.left, right: bounds.right, targetId: null, lastKnown: null,
-    lastNoiseId: 0, searchLeg: 0, transitions: 0 };
+    lastNoiseId: 0, searchLeg: 0, transitions: 0, patrolV140: null };
 }
 
 function cancelAttack(engine, enemy) {
@@ -172,7 +173,7 @@ export function withEnemyTacticsV130(BaseEngine) {
       const state = enemy.tacticsV130;
       if (state.mode === mode) return;
       const previous = state.mode;
-      state.mode = mode; state.clock = 0; state.transitions += 1;
+      state.mode = mode; state.clock = 0; state.transitions += 1; state.patrolV140 = null;
       if (this.enemyTacticsV130) this.enemyTacticsV130.transitions += 1;
       enemy.alert = mode === 'pursuit';
       if (mode !== 'pursuit') cancelAttack(this, enemy);
@@ -181,7 +182,7 @@ export function withEnemyTacticsV130(BaseEngine) {
 
     // Swept body collision and continuous support keep even large frame deltas
     // from moving a patrol through a thin wall, closed door or platform edge.
-    moveEnemyTacticsV130(enemy, destination, delta, speedScale = 1) {
+    moveEnemyTacticsV130(enemy, destination, delta, speedScale = 1, turnWhenBlocked = true) {
       const oldX = enemy.x, state = enemy.tacticsV130;
       const direction = Math.sign(destination - oldX);
       if (!direction || enemy.staggerClock > 0) { enemy.vx = 0; return false; }
@@ -194,7 +195,7 @@ export function withEnemyTacticsV130(BaseEngine) {
       }
       enemy.x = oldX + displacement;
       enemy.facing = direction; enemy.vx = delta > 0 ? displacement / delta : 0;
-      if (state && Math.abs(displacement) < .01 && Math.abs(destination - oldX) > 2) state.direction *= -1;
+      if (turnWhenBlocked && state && Math.abs(displacement) < .01 && Math.abs(destination - oldX) > 2) state.direction *= -1;
       return Math.abs(displacement) > .01;
     }
 
@@ -288,9 +289,12 @@ export function withEnemyTacticsV130(BaseEngine) {
           }
           const bounds = enemyPatrolBoundsV130(this, { ...enemy, spawnX: state.homeX });
           state.left = bounds.left; state.right = bounds.right;
-          const destination = state.direction > 0 ? state.right : state.left;
-          if (Math.abs(enemy.x - destination) < 2) state.direction *= -1;
-          this.moveEnemyTacticsV130(enemy, state.direction > 0 ? state.right : state.left, delta, policy.patrolSpeed);
+          if (enemy.staggerClock > 0) { enemy.vx = 0; return; }
+          advanceEnemyPatrolV140(enemy, state, bounds, delta, {
+            speed: finite(enemy.speed, 80) * policy.patrolSpeed,
+            pauseSeconds: policy === ENEMY_TACTICS_V130.humanoid ? ENEMY_PATROL_V140.humanoidPause : ENEMY_PATROL_V140.xenoPause,
+            move: (destination, step) => this.moveEnemyTacticsV130(enemy, destination, step, policy.patrolSpeed, false)
+          });
           return;
         }
         if (state.mode === 'investigation' && state.lastKnown) {
@@ -514,6 +518,10 @@ export function withEnemyTacticsV130(BaseEngine) {
             y: clamp(state.lastKnown.y, 0, finite(this.missionLevelBounds?.height, 1080)), w: clamp(state.lastKnown.w, 1, 1000),
             h: clamp(state.lastKnown.h, 1, 1000), floorY: clamp(finite(state.lastKnown.floorY), 0, finite(this.missionLevelBounds?.height, 1080)) };
           initial.targetId = typeof state.targetId === 'string' ? state.targetId.slice(0, 100) : null;
+          const policy = doctrine(enemy), bounds = enemyPatrolBoundsV130(this, { ...enemy, spawnX: initial.homeX });
+          if (initial.mode === 'patrol') initial.patrolV140 = restoreEnemyPatrolV140(state.patrolV140, enemy, bounds, initial.direction,
+            finite(enemy.speed, 80) * policy.patrolSpeed,
+            policy === ENEMY_TACTICS_V130.humanoid ? ENEMY_PATROL_V140.humanoidPause : ENEMY_PATROL_V140.xenoPause);
         }
         enemy.tacticsV130 = initial;
         const entry = saved.rearEntry, entrance = this.rearEntrancesForTacticsV130().find(value => value.id === entry?.entranceId);
@@ -540,6 +548,7 @@ export function withEnemyTacticsV130(BaseEngine) {
         rearArrivals: finite(this.enemyTacticsV130?.entries),
         enemies: list(this.enemies).filter(enemy => enemy.tacticsV130 || enemy.rearEntryV130).map(enemy => ({
           id: enemy.id, state: enemy.tacticsV130?.mode || null, x: enemy.x, y: enemy.y,
+          patrol: enemy.tacticsV130?.patrolV140 ? { ...enemy.tacticsV130.patrolV140 } : null,
           rear: enemy.rearEntryV130 ? { ...enemy.rearEntryV130 } : null })) };
     }
   };

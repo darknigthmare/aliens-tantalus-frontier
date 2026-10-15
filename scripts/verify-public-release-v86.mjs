@@ -71,6 +71,31 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-hub-support-contact-v139.mjs', 'verify-hub-furniture-atlases-v139.mjs', 'qa-tantalus-perspective-v139.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
+// Development tools recovered from the published Forge branch stay in Git.
+// They are never admitted in a built distribution, nor copied by the builder.
+const FORGE_TOOLING_V140 = new Set([
+  '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
+  'docs', 'docs/forge', 'docs/forge/QA-V130.md', 'docs/forge/README-V130.md',
+  'docs/forge/V133-AUTHORING.md', 'docs/forge/V134-NAVIGATION.md',
+  'docs/forge/V135-CONSTRUCTION.md', 'docs/forge/V136-CONTROLE-ET-VERSIONS.md',
+  'scripts/fixtures', 'scripts/fixtures/forge-v130.html'
+]);
+const FORGE_STYLES_V140 = new Set([
+  'src/forge-editor-v130.css', 'src/forge-workbench-v133.css',
+  'src/forge-navigator-v134.css', 'src/forge-construction-v135.css', 'src/forge-control-v136.css'
+]);
+for (const file of [
+  'forge-native-host-v136.mjs', 'forge-offline-harness-v130.py',
+  'verify-forge-v130.mjs', 'verify-forge-v133.mjs', 'verify-forge-v134.mjs',
+  'verify-forge-v135.mjs', 'verify-forge-v136.mjs', 'verify-forge-native-v136.mjs',
+  'verify-forge-browser-v130.py', 'verify-forge-browser-v133.py', 'verify-forge-browser-v134.py',
+  'verify-forge-browser-v135.py', 'verify-forge-browser-v136.py',
+  'verify-forge-shell-v134.py', 'verify-forge-shell-v135.py', 'verify-forge-shell-v136.py',
+  'verify-editor-modules-v140.mjs', 'verify-editor-ship-bounds-v140.mjs',
+  'verify-enemy-patrol-v140.mjs', 'verify-npc-spacing-v140.mjs',
+  'verify-player-wardrobe-parts-v140.mjs', 'verify-forge-native-v140.mjs',
+  'qa-enemy-patrol-browser-v140.mjs', 'qa-wardrobe-parts-browser-v140.mjs'
+]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
 const USER_REFERENCE_JPG_PATHS_V100 = new Set([
@@ -200,6 +225,8 @@ const PRIVATE_TEXT = [
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (!built && FORGE_TOOLING_V140.has(path)) return true;
+  if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
   const v123Admission = publicReleasePathAdmissionV123(path, { directory });
