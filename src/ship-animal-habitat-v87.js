@@ -182,6 +182,14 @@ const fittingLabelLinesV87 = (ctx, label, maxWidth) => {
   }
   return lines;
 };
+/** The same plaque rectangle is used for drawing and compartment clearance.
+ * Reserve every optional habitat state so installing a berth never requires
+ * moving the room's permanent furnishings or hiding a status plaque. */
+export function getShipAnimalFittingPlaqueBoundsV142(habitat) {
+  const centerX=habitat.type==='terrarium'?habitat.installX+48:habitat.installX;
+  return {x:centerX-66,y:492,w:132,h:52,centerX,habitatId:habitat.id};
+}
+
 export function drawShipAnimalHabitatV87(ctx, image, save) {
   if (!imageReady(image)) return false;
   const installed = new Set(getShipAnimalHabitatsV87(save).filter(entry => entry.installed).map(entry => entry.id));
@@ -199,10 +207,9 @@ export function drawShipAnimalHabitatV87(ctx, image, save) {
     if (habitat.installed) continue;
     // Keep the last plaque beside, rather than over, the permanent hygiene
     // cabinet. This offset changes signage only, never the installation point.
-    const centerX = habitat.type === 'terrarium' ? habitat.installX + 48 : habitat.installX;
-    const left = centerX - 66, top = 492;
-    ctx.fillStyle = '#122226'; ctx.fillRect(left, top, 132, 52);
-    ctx.strokeStyle = '#607c7d'; ctx.lineWidth = 1; ctx.strokeRect(left + .5, top + .5, 131, 51);
+    const {x:left,y:top,w,h,centerX}=getShipAnimalFittingPlaqueBoundsV142(habitat);
+    ctx.fillStyle = '#122226'; ctx.fillRect(left, top, w, h);
+    ctx.strokeStyle = '#607c7d'; ctx.lineWidth = 1; ctx.strokeRect(left + .5, top + .5, w-1, h-1);
     ctx.fillStyle = '#93b1a8'; ctx.fillRect(left + 9, top + 7, 3, 3); ctx.fillRect(left + 120, top + 7, 3, 3);
     const lines = fittingLabelLinesV87(ctx, habitat.label, 108);
     ctx.fillStyle = '#d4e0d8';

@@ -31,8 +31,21 @@ function host(){const events=new EventTarget();for(const name of ['addEventListe
   globalThis.Image=class extends EventTarget{complete=true;naturalWidth=0;naturalHeight=0;set src(source){this._src=source;[this.naturalWidth,this.naturalHeight]=size(source);
     queueMicrotask(()=>{const event=new Event(this.naturalWidth?'load':'error');this.dispatchEvent(event);this[`on${event.type}`]?.(event);});}get src(){return this._src;}
     async decode(){if(!this.naturalWidth)throw new Error('Missing fixture image');}};
-  let depth=0;const texts=[],images=[],ctx=new Proxy({save(){depth++;},restore(){assert.ok(depth>0);depth--;},fillText(text){texts.push(String(text));},
-    drawImage(image,...bounds){images.push({source:image.src,bounds});},
+  let depth=0,matrix=[1,0,0,1,0,0],clips=[],pathRects=[],pathComplex=false;const stack=[];
+  const multiply=right=>{const [a,b,c,d,e,f]=matrix,[g,h,i,j,k,l]=right;matrix=[a*g+c*h,b*g+d*h,a*i+c*j,b*i+d*j,a*k+c*l+e,b*k+d*l+f];};
+  const transformedRect=(x,y,w,h)=>{const [a,b,c,d,e,f]=matrix;
+    const points=[[x,y],[x+w,y],[x+w,y+h],[x,y+h]].map(([px,py])=>({x:a*px+c*py+e,y:b*px+d*py+f}));
+    const xs=points.map(p=>p.x),ys=points.map(p=>p.y);return{x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys)};};
+  const texts=[],images=[],ctx=new Proxy({save(){depth++;stack.push({matrix:[...matrix],clips:structuredClone(clips)});},
+    restore(){assert.ok(depth>0);depth--;({matrix,clips}=stack.pop());},fillText(text){texts.push(String(text));},
+    translate(x,y){multiply([1,0,0,1,x,y]);},scale(x,y){multiply([x,0,0,y,0,0]);},
+    rotate(angle){multiply([Math.cos(angle),Math.sin(angle),-Math.sin(angle),Math.cos(angle),0,0]);},
+    transform(...values){multiply(values);},setTransform(...values){matrix=[...values];},resetTransform(){matrix=[1,0,0,1,0,0];},
+    beginPath(){pathRects=[];pathComplex=false;},rect(x,y,w,h){pathRects.push(transformedRect(x,y,w,h));},
+    moveTo(){pathComplex=true;},lineTo(){pathComplex=true;},arc(){pathComplex=true;},ellipse(){pathComplex=true;},
+    clip(){clips.push(pathRects.length===1&&!pathComplex?{kind:'rect',bounds:{...pathRects[0]}}:{kind:'path'});},
+    drawImage(image,...bounds){const destination=bounds.length===8?bounds.slice(4):bounds.length===4?bounds:[...bounds,image.naturalWidth,image.naturalHeight];
+      images.push({source:image.src,bounds,matrix:[...matrix],clips:structuredClone(clips),screenTarget:transformedRect(...destination)});},
     measureText:text=>({width:String(text).length*7}),createLinearGradient:()=>({addColorStop(){}}),createRadialGradient:()=>({addColorStop(){}}),
     getImageData:()=>({data:new Uint8ClampedArray(4),width:1,height:1})},{get:(target,key)=>key in target?target[key]:()=>{}});
   const canvas=Object.assign(new EventTarget(),{width:1280,height:720,getContext:()=>ctx,focus(){document.activeElement=this;},getBoundingClientRect:()=>({left:0,top:0,width:1280,height:720})});
@@ -109,8 +122,35 @@ test('the other nine frontal annex stations draw once inside their current geome
   for(const source of Object.values(HUB_ANNEX_BY_ID_V71).filter(row=>row.id!=='proving-ground')){
     const subject=await fixture(null,source.id),annex=subject.hub.currentAnnexV71(),cell=getHubAnnexStationCellV139(annex.id);
     subject.images.length=0;subject.hub.draw();
-    const paints=subject.images.filter(row=>row.source===annex.art.prop);assert.equal(paints.length,1,annex.id);
+    // CCTV also paints its live bridge feed. Since V142 the bridge shares
+    // this atlas, but samples another crop; count the actual annex cabinet,
+    // retaining the once-only assertion for its exact source rectangle.
+    const nativeCrop=[cell.source.x,cell.source.y,cell.source.w,cell.source.h];
+    const atlasPaints=subject.images.filter(row=>row.source===annex.art.prop);
+    const paints=atlasPaints.filter(row=>row.bounds.length===8&&nativeCrop.every((value,index)=>row.bounds[index]===value));
+    assert.equal(paints.length,1,annex.id);
+    for(const extra of atlasPaints.filter(row=>!paints.includes(row))){
+      assert.equal(annex.id,'cctv','Another annex must not paint a main-deck station');
+      const feed=subject.hub.getHubTrainingCommandsV132().selectedFeed,room=HUB_DECKS[feed.deckIndex].rooms.find(room=>room.id===feed.id);
+      assert.ok(room,'The extra crop needs a real selected CCTV feed');
+      const s=room.propPlacementV139.source,t=room.propRenderBounds,expected=[s.x,s.y,s.w,s.h,t.x,t.y,t.w,t.h];
+      assert.equal(extra.bounds.length,8);expected.forEach((value,index)=>assert.ok(Math.abs(extra.bounds[index]-value)<1e-9));
+      // Observe the real Canvas clip/transform commands, not merely the fact
+      // that a crop belongs to some other station. The feed is an inset screen
+      // and must never leak its world coordinates onto the annex floor.
+      const monitor={x:710,y:116,w:530,h:180};
+      assert.ok(extra.clips.some(clip=>clip.kind==='rect'&&Object.keys(monitor).every(key=>Math.abs(clip.bounds[key]-monitor[key])<1e-9)),
+        'The remote station must be inside the explicit CCTV monitor clip');
+      const width=room.profile?.worldWidth||HUB_WORLD.roomWidth,expectedMatrix=[530/width,0,0,180/720,710-room.xStart*530/width,116];
+      expectedMatrix.forEach((value,index)=>assert.ok(Math.abs(extra.matrix[index]-value)<1e-9));
+      const screen=extra.screenTarget;
+      assert.ok(screen.x>=monitor.x&&screen.x+screen.w<=monitor.x+monitor.w&&screen.y>=monitor.y&&screen.y+screen.h<=monitor.y+monitor.h,
+        'The painted remote station stays entirely inside the top monitor');
+      assert.ok(screen.y+screen.h<300,'The remote station cannot reach the actual floor624');
+    }
     const [sx,sy,sw,sh,x,y,w,h]=paints[0].bounds,station=annex.station.bounds;
+    [1,0,0,1,-subject.hub.annexCameraV71.x,0].forEach((value,index)=>assert.ok(Math.abs(paints[0].matrix[index]-value)<1e-9,
+      'The actual cabinet must be painted in the annex world, outside the reduced CCTV feed'));
     assert.equal(paints[0].bounds.length,8,annex.id);
     assert.equal(annex.art.prop,HUB_ANNEX_STATION_ATLAS_V139.asset);
     assert.deepEqual({x:sx,y:sy,w:sw,h:sh},cell.source);

@@ -13,6 +13,8 @@ import {
   compileShipProject
 } from './hub-v52-runtime.js';
 import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
+import { buildHubTraversalGeometryV87 } from './hub-v51-runtime.js';
+import { buildHubVentMountsV142, createHubVentSceneV142, drawHubVentSceneV142 } from './hub-vent-scene-v142.js';
 import {
   NPC_IDENTITIES_V62,
   normalizeNpcRoutineStateV62,
@@ -60,6 +62,12 @@ export const HUB_VENT_DIRECTIONS_V62 = Object.freeze(['left', 'right', 'up', 'do
 const PLAYER_ACTOR_ID = 'hub-player-v62';
 const CRAWL_SPEED = 640;
 const TRANSITION_EPSILON = 1e-6;
+const HUB_VENT_LABELS_V142 = Object.freeze({
+  rooms: Object.freeze(Object.fromEntries(HUB_DECKS.flatMap(deck => deck.rooms.map(room => [room.id, room.name])))),
+  decks: Object.freeze(Object.fromEntries(HUB_DECKS.map(deck => [deck.id, deck.name])))
+});
+const HUB_VENT_MOUNTS_V142 = buildHubVentMountsV142(HUB_DECKS, HUB_DECKS.map((_, index) => buildHubTraversalGeometryV87(index)));
+const HUB_VENT_KEY_LABELS_V142 = Object.freeze({ left: 'A / ←', right: 'D / →', up: 'W / ↑', down: 'S / ↓', depth: 'Q — PROFONDEUR' });
 
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, Number(value) || 0));
 const clone = (value) => value == null ? value : JSON.parse(JSON.stringify(value));
@@ -692,11 +700,11 @@ export class HubGame extends HubGameV52 {
     const transit = this.ventActorV62.ventTransit;
     if (transit.phase === 'entering') return 'ENTRÉE DANS LE CONDUIT…';
     if (transit.phase === 'exiting') return 'OUVERTURE DE LA SORTIE…';
-    if (transit.phase === 'moving') return 'MAINTENIR LA DIRECTION — RAMPER DANS LE CONDUIT';
+    if (transit.phase === 'moving') return `MAINTENIR ${HUB_VENT_KEY_LABELS_V142[directionForTransit(transit)] || 'LA DIRECTION'} — RAMPER`;
     const exits = getVentExitsAtActorV62(HUB_VENT_NETWORK_V62, this.ventActorV62);
     const branches = getVentBranchesV62(HUB_VENT_NETWORK_V62, this.ventActorV62);
     const directions = HUB_VENT_DIRECTIONS_V62.filter((direction) => branches.some((branch) => Number.isFinite(directionScore(direction, branchVector(branch)))));
-    return `${directions.map((direction) => direction === 'depth' ? 'Q PROFONDEUR' : direction.toUpperCase()).join(' / ')}${exits.length ? ' · E — SORTIR' : ''}`;
+    return `${directions.map((direction) => HUB_VENT_KEY_LABELS_V142[direction]).join(' · ')}${exits.length ? ' · E — SORTIR' : ''}`;
   }
 
   persist() {
@@ -777,70 +785,61 @@ export class HubGame extends HubGameV52 {
   }
 
   drawVentInteriorBitmapV62(ctx, width, height) {
-    const image = this.ventInteriorImageV62;
-    if (!imageReady(image)) return;
-    const imageRatio = image.naturalWidth / image.naturalHeight;
-    const canvasRatio = width / height;
-    let sx = 0;
-    let sy = 0;
-    let sourceWidth = image.naturalWidth;
-    let sourceHeight = image.naturalHeight;
-    if (imageRatio > canvasRatio) {
-      sourceWidth = image.naturalHeight * canvasRatio;
-      sx = (image.naturalWidth - sourceWidth) / 2;
-    } else if (imageRatio < canvasRatio) {
-      sourceHeight = image.naturalWidth / canvasRatio;
-      sy = (image.naturalHeight - sourceHeight) / 2;
-    }
-    ctx.drawImage(image, sx, sy, sourceWidth, sourceHeight, 0, 0, width, height);
-    ctx.fillStyle = 'rgba(0, 4, 4, .16)';
-    ctx.fillRect(0, 0, width, height);
+    const scene = createHubVentSceneV142(HUB_VENT_NETWORK_V62, this.ventActorV62, {
+      width, height, heldDirection: directionFromKeys(this.keys), playerWidth: this.player.w, playerHeight: this.player.h, labels: HUB_VENT_LABELS_V142, portalMounts: HUB_VENT_MOUNTS_V142
+    });
+    this.ventSceneV142 = scene;
+    drawHubVentSceneV142(ctx, this.ventInteriorImageV62, scene, width, height);
   }
 
   drawVentPlayerV62(ctx, width, height) {
-    const transit = this.ventActorV62.ventTransit;
-    const progress = clamp(transit.progress, 0, 1);
-    const vertical = transit.phase === 'moving' && ['up', 'down'].includes(directionForTransit(transit));
-    const reverse = ['left', 'up'].includes(directionForTransit(transit));
-    const renderX = vertical ? width * 0.66 : width * (reverse ? 0.72 - progress * 0.44 : 0.28 + progress * 0.44);
-    const renderY = vertical ? height * (reverse ? 0.66 - progress * 0.38 : 0.28 + progress * 0.38) : height * 0.68;
+    const scene = this.ventSceneV142 || createHubVentSceneV142(HUB_VENT_NETWORK_V62, this.ventActorV62, {
+      width, height, heldDirection: directionFromKeys(this.keys), playerWidth: this.player.w, playerHeight: this.player.h, labels: HUB_VENT_LABELS_V142, portalMounts: HUB_VENT_MOUNTS_V142
+    });
+    if (!scene) return;
+    const pose = scene.actor;
     const previous = {
-      x: this.player.x,
-      y: this.player.y,
-      vx: this.player.vx,
-      vy: this.player.vy,
-      grounded: this.player.grounded,
-      crouching: this.player.crouching,
-      climbing: this.player.climbing,
-      facing: this.player.facing
+      x: this.player.x, y: this.player.y, vx: this.player.vx, vy: this.player.vy,
+      grounded: this.player.grounded, crouching: this.player.crouching,
+      climbing: this.player.climbing, facing: this.player.facing
     };
     Object.assign(this.player, {
-      x: renderX - this.player.w / 2,
-      y: renderY - this.player.h,
-      vx: vertical ? 0 : (reverse ? -70 : 70),
-      vy: vertical ? (reverse ? -70 : 70) : 0,
-      grounded: !vertical,
-      crouching: !vertical,
-      climbing: vertical,
-      facing: reverse ? -1 : 1
+      x: pose.x, y: pose.y, vx: pose.vx, vy: pose.vy,
+      grounded: !pose.climbing, crouching: pose.crouching, climbing: pose.climbing,
+      facing: pose.facing || previous.facing
     });
-    super.drawPlayer(ctx);
-    Object.assign(this.player, previous);
+    const animationTime = this.animationTime;
+    // Legacy crawl/climb clips share the physical distance clock. A released
+    // direction, pause or reduced motion cannot keep cycling limbs in place.
+    this.animationTime = Math.max(0, Number(this.ventActorV62.ventTransit.travelledDistance) || 0) / CRAWL_SPEED;
+    try { super.drawPlayer(ctx); } finally {
+      this.animationTime = animationTime;
+      Object.assign(this.player, previous);
+    }
   }
 
   drawVentHudV62(ctx, width, height) {
     const transit = this.ventActorV62.ventTransit;
-    const position = getVentTransitPositionV62(HUB_VENT_NETWORK_V62, this.ventActorV62);
+    const node = nodeById(transit.currentNodeId || transit.entryNodeId || transit.fromNodeId);
+    const destination = nodeById(transit.toNodeId);
+    const roomName = HUB_VENT_LABELS_V142.rooms[node?.roomId] || 'SECTION DE SERVICE';
+    const deckName = HUB_VENT_LABELS_V142.decks[node?.deckId] || 'PONT DE SERVICE';
+    const phase = { entering: 'ENTRÉE DANS LE CONDUIT', exiting: 'OUVERTURE DE LA SORTIE',
+      moving: 'EN DÉPLACEMENT', 'at-node': 'À L’EMBRANCHEMENT' }[transit.phase] || 'CONDUIT DE SERVICE';
+    const headerWidth = Math.min(720, width - 48);
     ctx.fillStyle = 'rgba(1, 7, 7, .88)';
-    ctx.fillRect(24, 20, Math.min(520, width - 48), 74);
+    ctx.fillRect(24, 20, headerWidth, 94);
     ctx.strokeStyle = '#78aa89';
-    ctx.strokeRect(24.5, 20.5, Math.min(520, width - 48), 74);
+    ctx.strokeRect(24.5, 20.5, headerWidth, 94);
     ctx.fillStyle = '#d3e1d6';
     ctx.font = '700 14px ui-monospace, monospace';
-    ctx.fillText('RÉSEAU DE CONDUITS · USS TANTALUS', 44, 49);
-    ctx.fillStyle = '#8bc6a1';
+    ctx.fillText('RÉSEAU DE CONDUITS · USS TANTALUS', 44, 47);
+    ctx.fillStyle = '#9db8a5';
     ctx.font = '600 12px ui-monospace, monospace';
-    ctx.fillText(`${transit.phase.toUpperCase()} · PROFONDEUR ${Number(position?.depth || 0).toFixed(1)} · ${transit.currentNodeId || transit.toNodeId || 'TRANSIT'}`, 44, 75);
+    ctx.fillText(`${roomName} · ${deckName}`, 44, 72);
+    ctx.fillStyle = '#8bc6a1';
+    ctx.font = '600 11px ui-monospace, monospace';
+    ctx.fillText(`${phase}${transit.phase === 'moving' && destination ? ` → ${HUB_VENT_LABELS_V142.rooms[destination.roomId] || 'SECTION DE SERVICE'}` : ''}`, 44, 96);
     const prompt = this.statusPrompt();
     ctx.font = '700 13px ui-monospace, monospace';
     const promptWidth = Math.min(width - 48, Math.max(340, ctx.measureText(prompt).width + 48));

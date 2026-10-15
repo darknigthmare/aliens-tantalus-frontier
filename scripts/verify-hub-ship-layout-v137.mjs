@@ -237,7 +237,7 @@ test('the native maintenance corridor connects both decks and rebuilds real geom
   for (const endpointId of ['maintenance-spine:primary', 'maintenance-spine:workshop']) {
     const entry = getHubShipConnectionV137(endpointId), exit = getHubShipConnectionsForSpaceV137('maintenance-spine').find(c => c.id !== entry.id);
     let subject = await fixture(entry); enter(subject, 'maintenance-spine');
-    assert.equal(subject.hub.player.x, entry.entranceSide === 'east' ? 2283 : 233);
+    assert.equal(subject.hub.player.x + subject.hub.player.w / 2, entry.entranceLocalX, 'Arrival is centred in the paired visible door');
     assert.equal(subject.hub.player.y + subject.hub.player.h, entry.annexDoorBounds.y + entry.annexDoorBounds.h);
     walk(subject, 1280);
     subject.hub.persist(); const patch = clone(subject.patches.at(-1));
@@ -255,7 +255,8 @@ test('the native maintenance corridor connects both decks and rebuilds real geom
     assert.deepEqual(subject.hub.doorStates.map(d => d.id), buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck).map(d => d.id));
     assert.ok(subject.hub.v51Platforms.every(p => HUB_DECKS[deck].rooms.some(room => room.id === p.roomId)));
     assert.equal(subject.hub.getSnapshot().hubCommercialV71.activeConnectionIdV137, null);
-    // The opposite endpoint remains usable immediately; this is a loop, not an exit-only scripted transfer.
+    // The destination leaves finish closing before E can start the return trip.
+    advance(subject, .7);
     enter(subject, 'maintenance-spine'); assert.equal(subject.hub.hubCommercialStateV71.returnContext.endpointId, exit.id);
     assert.equal(subject.hub.player.y + subject.hub.player.h, exit.annexDoorBounds.y + exit.annexDoorBounds.h);
     subject.hub.stop(false); subject.balanced();

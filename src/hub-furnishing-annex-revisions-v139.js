@@ -72,8 +72,8 @@ export const HUB_FURNISHING_ANNEX_REVISIONS_V139 = freeze({
     moves: {}, additions: [counter('biological-clean-preparation', 850, 92)]
   },
   'flight-control-cockpit': {
-    reason: 'The right-facing pilot seat, instruments and observation bay remain uncluttered.',
-    moves: {}, additions: []
+    reason: 'The pilot instrument panel has a complete floor pedestal beside the right-facing seat; its entire support is reserved.',
+    moves: { 'pilot-forward-instrument-console': { mountKindV142: 'floor-pedestal-console' } }, additions: []
   },
   'engine-room': {
     reason: 'The drive controller belongs beside the actual pump; the inlet clears the raised physical station.',

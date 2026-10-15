@@ -45,7 +45,7 @@ const pelvis = (bounds, waist, near, far) => piece(bounds, { waist: point(...wai
 
 export const PLAYER_LEG_PARTS_V128 = freeze({
   'legs-marine-v126': {
-    pelvis: pelvis([69,109,291,265], [181,176], [118,229], [258,226]),
+    pelvis: {...pelvis([69,109,291,265], [181,176], [118,229], [258,226]), belt:point(181,145)},
     near: {
       upper: segment([413,63,579,308], [490,102], [516,277]),
       lower: segment([715,62,845,303], [786,112], [777,276]),
@@ -58,7 +58,7 @@ export const PLAYER_LEG_PARTS_V128 = freeze({
     }
   },
   'legs-utility-v126': {
-    pelvis: pelvis([69,721,293,874], [181,787], [118,840], [258,837]),
+    pelvis: {...pelvis([69,721,293,874], [181,787], [118,840], [258,837]), belt:point(181,756)},
     near: {
       upper: segment([414,660,580,913], [490,701], [516,881]),
       lower: segment([714,658,845,907], [784,707], [777,880]),
@@ -253,7 +253,7 @@ function bodyFrame(base,waist,angle,kind) {
  * An invalid or incomplete definition is omitted so the compositor can use its
  * complete native fallback instead of producing half a pair of trousers. */
 export function buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,facing,
-  legDefinitions={}}={}) {
+  legDefinitions={},pelvisBelt=false}={}) {
   const result={};
   const definitions={...Object.fromEntries(Object.entries(PLAYER_LEG_PARTS_V128)
     .map(([itemId,parts])=>[itemId,{parts,asset:LEG_ASSET}])),...legDefinitions};
@@ -280,9 +280,11 @@ export function buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,f
         segmentMatrix(p.boot,pose.ankle,pose.sole,32*s,facing),asset));
     }
     const p=parts.pelvis;
-    // The pelvis overlaps the real round proximal ends of both thighs; the
-    // selected torso owns the outer belt and is composited after these layers.
-    layers.push(legLayer('pelvis',itemId,'pelvis',p,triangle([p.waist,p.near,p.far],[waist,hips.near,hips.far]),asset));
+    // The pelvis overlaps the real round proximal ends of both thighs. V142
+    // ground locomotion uses its measured belt and separates the jacket above
+    // it; dedicated transit retains the reviewed original waist registration.
+    layers.push(legLayer('pelvis',itemId,'pelvis',p,triangle([
+      pelvisBelt && validPoint(p.belt) ? p.belt : p.waist,p.near,p.far],[waist,hips.near,hips.far]),asset));
     result[itemId]=layers;
   }
   return result;
