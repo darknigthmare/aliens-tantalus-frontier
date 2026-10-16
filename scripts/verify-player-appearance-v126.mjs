@@ -80,7 +80,9 @@ test('V127 preview reads the frozen operation weapon and crew manifest after pro
   const save = createDefaultSave();
   const personalId = 'weapon-007-m37a2-pump-shotgun';
   save.crew[1].gearV85 = [{ instanceId: 'preview-manifest-weapon', kind: 'weapon', catalogId: personalId }];
-  beginOperation(save, CAMPAIGNS[0], WORLDS.find(world => world.id === CAMPAIGNS[0].worldId) || WORLDS[0]);
+  const campaign = CAMPAIGNS.find(entry => entry.id === 'pair-001-frontier');
+  assert.ok(campaign, 'Use a stable unlocked route, not a catalogue-order assumption.');
+  beginOperation(save, campaign, WORLDS.find(world => world.id === campaign.worldId));
   const deployment = resolveOperationDeployment(save, catalogs);
   const original = deployment.weapon.id;
   save.player.weaponIds = [WEAPONS[0].id];

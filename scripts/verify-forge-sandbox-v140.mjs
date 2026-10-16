@@ -8,7 +8,12 @@ import { prepareJumpV116 } from '../src/galaxy-jump-v115.js';
 import { equipPlayerAppearancePresetV129 } from '../src/player-appearance-v126.js';
 import { equipUserEquipmentV95, USER_EQUIPMENT_V95 } from '../src/user-equipment-v95.js';
 
-const campaign = CAMPAIGNS[0], world = WORLDS.find(entry => entry.id === campaign.worldId);
+// The sandbox resource/crew checks need an initially unlocked ordinary route.
+// Historical MIRE settings are independent and may legitimately remain locked.
+const campaign = CAMPAIGNS.find(entry => entry.id === 'pair-001-frontier');
+assert.ok(campaign, 'Stable Frontier fixture exists.');
+const world = WORLDS.find(entry => entry.id === campaign.worldId);
+assert.ok(world, 'Frontier fixture world exists.');
 const catalogs = { crewCatalog: CREW, weaponCatalog: WEAPONS, equipmentCatalog: EQUIPMENT,
   vehicleCatalog: VEHICLES, costumeCatalog: COSTUMES, neuroProfileCatalog: NEURO_XENO_PROFILES,
   apexDossierCatalog: APEX_DOSSIERS };
