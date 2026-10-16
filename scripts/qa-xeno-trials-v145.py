@@ -73,7 +73,11 @@ with sync_playwright() as p:
         canvas.focus()
         page.keyboard.down('ArrowRight')
         page.wait_for_timeout(80)
-        page.locator('.xt-combat-help > summary').focus()
+        # The legacy help is hidden in full-screen combat. Use the actual
+        # visible return button, focus only: do not navigate or alter the UI.
+        menu = page.locator('[data-xt="return"]')
+        assert menu.is_visible()
+        menu.focus()
         page.wait_for_function('globalThis.__ATF_XENO_TRIALS_V96__.snapshot().match.paused')
         frozen = state(page)['match']
         page.wait_for_timeout(250)
