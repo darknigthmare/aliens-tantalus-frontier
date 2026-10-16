@@ -7,7 +7,7 @@ import { CAMPAIGNS as BEFORE } from '../src/content-core-v50.js';
 import { MIRE_SETTINGS_V143, MIRE_PENDING_SOURCES_V143, buildMireCampaignsV143, validateMireCampaignsV143 } from '../src/mire-settings-v143.js';
 import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
-import { resolveSourceCommitV143 } from './build-release-v143.mjs';
+import { resolveSourceCommitV143, stampReleaseHtmlV143 } from './build-release-v143.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 
 const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
@@ -223,4 +223,27 @@ test('new release workflow and report are source tooling only', () => {
   for (const path of ['.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
+});
+
+
+test('visible HTML badges, title and metadata use the release identity and leave the rest of the shell intact', async () => {
+  const original = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const release = { version: '143.0.0', buildId: '143.0.0+abcdef123456' };
+  const html = stampReleaseHtmlV143(original, release);
+  assert.ok(html.includes('<meta name="atf-release" content="143.0.0+abcdef123456">'));
+  assert.ok(html.includes('VERSION 143.0.0+abcdef123456 · BUILD FRONTIER'));
+  assert.ok(html.includes('<b id="runtime-version-v143" title="143.0.0+abcdef123456">v143.0.0</b>RUNTIME'));
+  assert.ok(!html.includes('86.0.0'));
+  assert.equal(stampReleaseHtmlV143(html, release), html, 'Stamping is idempotent.');
+  for (const token of ['id="save-session-export-v144"', 'id="game-canvas"', 'id="hub-canvas"', '/src/app.js'])
+    assert.ok(html.includes(token), token);
+  assert.ok(stampReleaseHtmlV143(original, { version: '143.0.0' }).includes('>v143.0.0</b>'));
+});
+test('release HTML refuses broken/duplicate anchors and unsafe identities instead of silently mislabelling a build', async () => {
+  const original = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const release = { version: '143.0.0', buildId: '143.0.0+abcdef123456' };
+  assert.throws(() => stampReleaseHtmlV143(original.replace('atf-release', 'missing'), release), /anchor/);
+  assert.throws(() => stampReleaseHtmlV143(original + '<meta name="atf-release" content="wrong">', release), /anchor/);
+  assert.throws(() => stampReleaseHtmlV143(original, { version: '143.0.0', buildId: '144.0.0+different' }), /identity/);
+  assert.throws(() => stampReleaseHtmlV143(original, { version: '143.0.0', buildId: '143.0.0+<script>' }), /identity/);
 });

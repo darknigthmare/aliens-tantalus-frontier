@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { resolve, join, posix } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
-import { fileManifestV143 } from './build-release-v143.mjs';
+import { fileManifestV143, stampReleaseHtmlV143 } from './build-release-v143.mjs';
 import { verifyPublicReleaseV86 } from './verify-public-release-v86.mjs';
 
 export async function verifyReleaseArtifactV143(root) {
@@ -14,6 +14,8 @@ export async function verifyReleaseArtifactV143(root) {
   assert.equal(createHash('sha256').update(JSON.stringify(actual)).digest('hex'), info.manifestSha256);
   const release = (await import(pathToFileURL(join(root, 'src/release-info-v143.js')).href)).APP_RELEASE_V143;
   for (const field of ['version', 'sourceCommit', 'buildId', 'builtAt', 'cacheName', 'saveSchema']) assert.equal(release[field], info[field], field);
+  const html = await readFile(join(root, 'index.html'), 'utf8');
+  assert.equal(stampReleaseHtmlV143(html, release), html, 'Visible HTML labels differ from the shipped release.');
   const context = vm.createContext({ self: { addEventListener() {} }, URL, Request, Response });
   vm.runInContext(await readFile(join(root, 'sw.js'), 'utf8') + ';globalThis.checked={CACHE,SHELL};', context);
   assert.equal(context.checked.CACHE, info.cacheName);

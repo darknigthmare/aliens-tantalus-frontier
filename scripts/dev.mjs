@@ -3,6 +3,8 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { AUDIO_MIME_V77 } from '../src/audio-assets-v77.js';
 import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
+import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
+import { stampReleaseHtmlV143 } from './build-release-v143.mjs';
 
 const root = process.cwd();
 const port = Number(process.env.PORT || 4173);
@@ -31,7 +33,8 @@ createServer(async (request, response) => {
   try {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, 'index.html');
-    const body = await readFile(file);
+    const bytes = await readFile(file);
+    const body = file === join(root, 'index.html') ? stampReleaseHtmlV143(bytes.toString('utf8'), APP_RELEASE_V143) : bytes;
     response.writeHead(200, {
       'content-type': mime[extname(file)] || 'application/octet-stream',
       'cache-control': extname(file) === '.html' ? 'no-store' : 'public, max-age=60',
@@ -52,7 +55,7 @@ createServer(async (request, response) => {
       return;
     }
     try {
-      const body = await readFile(join(root, 'index.html'));
+      const body = stampReleaseHtmlV143(await readFile(join(root, 'index.html'), 'utf8'), APP_RELEASE_V143);
       response.writeHead(200, { 'content-type': mime['.html'], 'cache-control': 'no-store' });
       response.end(body);
     } catch { response.writeHead(404).end('Not found'); }

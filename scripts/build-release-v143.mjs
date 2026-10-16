@@ -36,6 +36,24 @@ export function resolveSourceCommitV143(root, env = process.env, readGit = (cwd)
   return candidate?.toLowerCase() || null;
 }
 
+/** Keep the metadata, title and visible runtime badge on the same build.
+ * Also used by the native dev server; no DOM mutation or global replacement. */
+export function stampReleaseHtmlV143(html, { version, buildId = version } = {}) {
+  if (typeof html !== 'string' || !/^\d+\.\d+\.\d+$/.test(version || '')
+    || typeof buildId !== 'string' || buildId.length > 100 || !/^[a-zA-Z0-9.+_-]+$/.test(buildId)
+    || buildId !== version && !buildId.startsWith(version + '+')) throw new Error('Invalid visible release identity.');
+  const replaceOne = (pattern, replacement) => {
+    if ([...html.matchAll(new RegExp(pattern.source, 'g'))].length !== 1) throw new Error('Release HTML anchor is missing or duplicated.');
+    html = html.replace(pattern, replacement);
+  };
+  replaceOne(/(<meta name="atf-release" content=")[^"]*(">)/, (_, start, end) => start + buildId + end);
+  replaceOne(/(<p class="title-build">[\s\S]*?VERSION )[^<]*(<\/p>)/,
+    (_, start, end) => start + buildId + ' · BUILD FRONTIER' + end);
+  replaceOne(/<b(?: id="runtime-version-v143")?(?: title="[^"]*")?>v[0-9.]+<\/b>RUNTIME/,
+    () => `<b id="runtime-version-v143" title="${buildId}">v${version}</b>RUNTIME`);
+  return html;
+}
+
 export async function stampReleaseV143(root, output, { env = process.env } = {}) {
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
   if (pkg.version !== APP_RELEASE_V143.version) throw new Error('Package and runtime release versions differ.');
@@ -51,6 +69,8 @@ export async function stampReleaseV143(root, output, { env = process.env } = {})
   const worker = await readFile(join(output, 'sw.js'), 'utf8');
   if (!/^const CACHE = 'atf-v143-[a-z0-9-]+';$/m.test(worker)) throw new Error('Unrecognized service worker cache declaration.');
   await writeFile(join(output, 'sw.js'), worker.replace(/^const CACHE = 'atf-v143-[a-z0-9-]+';$/m, `const CACHE = '${cacheName}';`));
+  const html = await readFile(join(output, 'index.html'), 'utf8');
+  await writeFile(join(output, 'index.html'), stampReleaseHtmlV143(html, release));
   const manifest = await fileManifestV143(output);
   const original = JSON.parse(await readFile(join(output, 'build-info.json'), 'utf8'));
   const mire = CAMPAIGNS.filter(entry => entry.mode === 'MIRE');

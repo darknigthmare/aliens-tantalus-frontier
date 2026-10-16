@@ -63,6 +63,13 @@ with sync_playwright() as p:
         first = context.new_page(); pages.append(first)
         first.on('pageerror', lambda error: report['pageErrors'].append(str(error)))
         settings(first)
+        release = first.request.get(args.base.rstrip('/') + '/build-info.json').json()
+        badge = first.locator('#runtime-version-v143')
+        check('Visible runtime badge, title and HTML metadata identify the actual built release',
+              badge.inner_text() == 'v' + release['version']
+              and badge.get_attribute('title') == release['buildId']
+              and first.locator('meta[name="atf-release"]').get_attribute('content') == release['buildId']
+              and release['buildId'] in first.locator('.title-build').inner_text())
         fixture = {'schema':52,'player':{'name':'Session Alpha'},'statistics':{'kills':3},
                    'settings':{'reducedMotion':True},'needsPlayerCreationV84':False}
         import_save(first, fixture)
