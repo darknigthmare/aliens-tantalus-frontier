@@ -65,6 +65,8 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
   brain.decisionIn = clamp(delay, .12, .7); brain.decisions++;
   const view = observe(match, specs), next = empty(); brain.observation = view;
   const move = toward => { next[(toward ? view.direction : -view.direction) > 0 ? 'right' : 'left'] = true; };
+  const rules = match.config.rulesV119;
+  const specialForbidden = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
   const choose = kind => {
     const spec = getSynthTrialAttackV110(definition, kind, specs[kind]);
     const lock = match.config.rulesV119;
@@ -101,7 +103,9 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     }
   } else if (view.targetRecovering && withinMelee && random() < profile.punishAwareness * (difficulty === 'easy' ? .5 : 1)) {
     transition(brain, 'PUNISH'); if (!choose(view.gap <= reach ? 'light' : 'heavy')) move(true);
-  } else if (profile.ranged && view.lane && view.gap >= profile.minimumRange && view.gap <= profile.maximumRange) {
+  } else if (profile.ranged && !specialForbidden && view.lane && view.gap >= profile.minimumRange && view.gap <= profile.maximumRange) {
+    // When rules prohibit this ranged special, fall through to ordinary melee
+    // approach/pressure instead of waiting forever at an unusable firing range.
     transition(brain, 'SPECIAL_SETUP');
     if (!choose('special')) {
       transition(brain, 'REPOSITION');

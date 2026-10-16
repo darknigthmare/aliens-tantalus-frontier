@@ -111,9 +111,12 @@ function fighterStep(match, fighter, enemy, controls, dt) {
   const definition = getXenoTrialsFighterV96(fighter.id);
   controls = { ...controls };
   const rules = match.config.rulesV119;
-  if (rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0)) controls.special = false;
+  const specialLocked = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
   for (const action of ACTIONS) {
+    // Observe the physical release before masking a restricted action. Holding
+    // special through its timer must not trigger it when the restriction ends.
     if (!controls[action]) fighter.rearmControls[action] = false;
+    if (action === 'special' && specialLocked && controls[action]) fighter.rearmControls[action] = true;
     if (fighter.rearmControls[action]) controls[action] = false;
   }
   fighter.stun = Math.max(0, fighter.stun - dt); fighter.hitFlash = Math.max(0, fighter.hitFlash - dt);

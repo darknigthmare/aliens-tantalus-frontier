@@ -45,7 +45,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     stageVisual: !stage.backdrop ? 'procedural' : images.has(stage.backdrop) ? 'backdrop-ready' : loaded ? 'procedural-fallback' : 'loading' });
   const images = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
   const observedMovement = createEnemyImportMotionTrackerV107();
-  let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null;
+  let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null, exited = false;
+  const pointerOwners = new Map();
+  const windowAvailable = () => doc?.hidden !== true && doc?.hasFocus?.() !== false;
+  const acceptsControls = () => running && loaded && !stopped && !assetFailure && !match.paused
+    && match.phase === 'active' && windowAvailable() && !presentationView().blocksSimulation;
   let emittedResult = false, notifyElapsed = 0, lastStatus = '', assetFailure = false;
   const originalSize = { width: canvas.width, height: canvas.height };
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
@@ -57,7 +61,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (!target?.addEventListener) return;
     target.addEventListener(type, handler, settings); listeners.push(() => target.removeEventListener(type, handler, settings));
   }
-  function clearInputs() { heldKeys.clear(); heldPointers.clear(); for (const key of ACTIONS) virtual[key] = false; }
+  function clearInputs() {
+    heldKeys.clear(); heldPointers.clear(); for (const key of ACTIONS) virtual[key] = false;
+    const captures = [...pointerOwners]; pointerOwners.clear();
+    for (const [id, button] of captures) { try { button.releasePointerCapture?.(id); } catch {} }
+  }
   function controls() {
     const result = { ...virtual };
     for (const key of heldKeys) result[KEY_ACTION[key]] = true;
@@ -75,13 +83,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     return `Manche ${match.round}, ${Math.ceil(match.timeRemaining)} secondes. Santé ${Math.ceil(match.fighters[0].hp)} contre ${Math.ceil(match.fighters[1].hp)}.`;
   }
   function notify(force = false) {
-    if (!force && notifyElapsed < .12) return;
+    if (stopped || !force && notifyElapsed < .12) return;
     notifyElapsed = 0;
     const status = statusText();
     if (options.statusElement && status !== lastStatus) options.statusElement.textContent = status;
     lastStatus = status;
     options.onState?.(snapshot());
-    if (match.result && !emittedResult) { emittedResult = true; options.onResult?.({ ...match.result, wins: { ...match.result.wins }, playerStats: { ...match.result.playerStats }, opponentStats: { ...match.result.opponentStats } }); }
+    if (!stopped && match.result && !emittedResult) { emittedResult = true; options.onResult?.({ ...match.result, wins: { ...match.result.wins }, playerStats: { ...match.result.playerStats }, opponentStats: { ...match.result.opponentStats } }); }
   }
   function text(content, x, y, size = 16, color = '#d7e9ed', align = 'left', maxWidth = null) {
     const weight = size >= 22 ? 'bold ' : '';
@@ -219,13 +227,17 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
   }
   function pause() {
-    if (stopped) return;
+    if (stopped || match.paused || match.phase === 'match-over') return false;
     for (const key of heldKeys) blockedKeys.add(key);
-    clearInputs(); setXenoTrialsPausedV96(match, true); previousTime = null; notify(true); render();
+    clearInputs(); setXenoTrialsPausedV96(match, true); previousTime = null;
+    if (raf !== null) cancelFrame(raf); raf = null;
+    notify(true); render(); return true;
   }
   function resume() {
-    if (stopped || !loaded || assetFailure || doc?.hidden) return false;
-    clearInputs(); setXenoTrialsPausedV96(match, false); previousTime = null; canvas.focus?.({ preventScroll: true }); notify(true); return true;
+    if (stopped || !loaded || assetFailure || !windowAvailable() || match.phase === 'match-over') return false;
+    clearInputs(); setXenoTrialsPausedV96(match, false); previousTime = null; canvas.focus?.({ preventScroll: true }); notify(true);
+    if (!stopped && running && raf === null) raf = requestFrame(frame);
+    return !stopped;
   }
   function keydown(event) {
     if (event.defaultPrevented) return;
@@ -241,8 +253,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       || event.target?.closest?.('button, a[href], summary, [role="button"], [role="link"]')) return;
     if (KEY_ACTION[event.code]) {
       event.preventDefault?.();
-      if (match.paused || presentationView().blocksSimulation) blockedKeys.add(event.code);
-      else if (!match.paused && !blockedKeys.has(event.code)) heldKeys.add(event.code);
+      // Repeats originating in a menu or during an unavailable phase cannot
+      // manufacture a fresh combat press after focus/countdown returns.
+      if (!acceptsControls() || event.repeat && !heldKeys.has(event.code)) blockedKeys.add(event.code);
+      else if (!blockedKeys.has(event.code)) heldKeys.add(event.code);
     }
   }
   function registerInputs() {
@@ -250,6 +264,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     listen(host, 'keyup', event => { heldKeys.delete(event.code); blockedKeys.delete(event.code); });
     listen(host, 'blur', pause);
     listen(doc, 'visibilitychange', () => { if (doc.hidden) pause(); });
+    listen(doc, 'focusin', event => {
+      const target = event.target, control = target?.closest?.('[data-xeno-action]');
+      // Accessible combat buttons are gameplay inputs. Pause/resume buttons
+      // own their explicit click; focusing one must not toggle it twice.
+      if (target === canvas || control && options.controlsRoot?.contains(control)
+        || target?.closest?.('[data-xt="pause"], [data-xt="resume-overlay"]')) return;
+      pause();
+    });
     listen(canvas, 'pointerdown', () => canvas.focus?.({ preventScroll: true }));
     const root = options.controlsRoot;
     listen(root, 'keydown', event => {
@@ -258,7 +280,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       const action = button?.getAttribute('data-xeno-action');
       if (!ACTIONS.has(action) || !root.contains(button)) return;
       event.preventDefault?.(); event.stopPropagation?.();
-      if (!event.repeat && !match.paused && !presentationView().blocksSimulation) virtual[action] = true;
+      if (!event.repeat && acceptsControls()) virtual[action] = true;
     });
     listen(root, 'keyup', event => {
       if (!['Space', 'Enter'].includes(event.code)) return;
@@ -269,13 +291,20 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     listen(root, 'pointerdown', event => {
       const button = event.target?.closest?.('[data-xeno-action]');
       const action = button?.getAttribute('data-xeno-action');
-      if (!ACTIONS.has(action) || !root.contains(button) || match.paused || presentationView().blocksSimulation) return;
-      event.preventDefault?.(); heldPointers.set(event.pointerId, action); button.setPointerCapture?.(event.pointerId);
+      if (!ACTIONS.has(action) || !root.contains(button) || !acceptsControls()) return;
+      event.preventDefault?.(); heldPointers.set(event.pointerId, action); pointerOwners.set(event.pointerId, button);
+      try { button.setPointerCapture?.(event.pointerId); } catch {}
     });
-    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(root, type, event => heldPointers.delete(event.pointerId));
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(root, type, event => {
+      heldPointers.delete(event.pointerId); pointerOwners.delete(event.pointerId);
+    });
   }
   function frame(timestamp) {
-    if (stopped || !running) return;
+    raf = null;
+    if (stopped || !running || match.paused) return;
+    // Also cover a missed browser blur event without accumulating elapsed debt.
+    if (!windowAvailable()) { pause(); return; }
+    if (stopped) return;
     const dt = previousTime === null ? 0 : clamp((timestamp - previousTime) / 1000, 0, .25);
     frameDelta = dt;
     previousTime = timestamp;
@@ -288,7 +317,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (match.round !== beforeRound) { presentation = createXenoPresentationV97(match.round); for (const key of heldKeys) blockedKeys.add(key); clearInputs(); }
     notifyElapsed += dt;
     render(); notify(match.phase === 'match-over' && !emittedResult);
-    if (!stopped && running) raf = requestFrame(frame);
+    if (match.phase === 'match-over') { running = false; clearInputs(); }
+    if (!stopped && running && !match.paused) raf = requestFrame(frame);
   }
   function loadImage(path) {
     if (options.loadImage) return options.loadImage(path);
@@ -305,7 +335,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       pendingLoads.add(cancel);
       image.onload = () => {
         if (settled) return;
-        if (!(image.naturalWidth > 0)) { fail(`Image vide: ${path}`); return; }
+        if (!(image.naturalWidth > 0 && image.naturalHeight > 0)) { fail(`Image vide: ${path}`); return; }
         settled = true; cleanup(); resolve(image);
       };
       image.onerror = () => fail(`Visuel indisponible: ${path}`);
@@ -317,11 +347,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (loading) return loading;
     loading = (async () => {
       render(); notify(true);
+      if (stopped) return false;
       const paths = [...new Set(match.fighters.map(f => getXenoTrialsArtV96(f.id, f.variant).path))];
       const allPaths = stage.backdrop ? [...paths, stage.backdrop] : paths;
       const results = await Promise.allSettled(allPaths.map(async path => {
         const image = await loadImage(path);
-        if (path === stage.backdrop && !(image?.naturalWidth > 0 && image?.naturalHeight > 0)) throw new Error('Décor vide');
+        // Apply the same validation to native and injected loaders. A resolved
+        // promise with no decodable fighter is not a successful admission.
+        if (!(image?.naturalWidth > 0 && image?.naturalHeight > 0)) throw new Error(`Visuel vide: ${path}`);
         if (!stopped) images.set(path, image);
       }));
       if (stopped) return false;
@@ -333,22 +366,30 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }
       loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');
       if (assetFailure) { setXenoTrialsPausedV96(match, true); options.onAssetError?.(paths.filter((path, i) => results[i].status === 'rejected')); }
+      if (stopped) return false;
       registerInputs(); running = true; previousTime = null;
-      if (doc?.hidden) setXenoTrialsPausedV96(match, true);
-      canvas.focus?.({ preventScroll: true }); notify(true); render(); raf = requestFrame(frame); return !assetFailure;
+      if (!windowAvailable()) setXenoTrialsPausedV96(match, true);
+      if (windowAvailable() && !match.paused) canvas.focus?.({ preventScroll: true });
+      notify(true);
+      if (stopped) return false;
+      render(); if (!match.paused) raf = requestFrame(frame); return !assetFailure;
     })();
     return loading;
   }
   function stop() {
     if (stopped) return;
-    stopped = true; running = false; clearInputs(); if (raf !== null) cancelFrame(raf);
+    stopped = true; running = false; clearInputs(); if (raf !== null) cancelFrame(raf); raf = null;
     for (const cancel of [...pendingLoads]) cancel();
     for (const remove of listeners.splice(0)) remove(); images.clear();
     canvas.width = originalSize.width; canvas.height = originalSize.height;
   }
   return Object.freeze({ start, pause, resume, stop,
-    exit() { stop(); options.onExit?.(); },
-    setInput(action, pressed) { if (ACTIONS.has(action) && !stopped && !match.paused && !presentationView().blocksSimulation) virtual[action] = pressed === true; },
+    exit() { if (exited || stopped) return; exited = true; stop(); options.onExit?.(); },
+    setInput(action, pressed) {
+      if (!ACTIONS.has(action)) return;
+      if (pressed !== true) virtual[action] = false;
+      else if (acceptsControls()) virtual[action] = true;
+    },
     getState() { return snapshot(); },
     nextRound() {
       if (stopped || match.paused) return false;

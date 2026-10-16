@@ -337,7 +337,9 @@ export class XenoTrialsUiV96 {
       }
       this.loading = false;
       if (ready === false) { this.closeRuntime(); this.render(); this.message('Sprite indisponible. Duel conservé : recommencez après rechargement.'); return false; }
-      this.render(); this.root.scrollTop = 0; this.el('canvas').focus({ preventScroll: true }); return true;
+      this.render(); this.root.scrollTop = 0;
+      if (!runtime.getState().paused && this.root.ownerDocument?.hasFocus?.() !== false) this.el('canvas').focus({ preventScroll: true });
+      return true;
     } catch (error) {
       if (generation !== this.generation) return false;
       this.closeRuntime(); this.render(); this.message(`Duel non lancé : ${error.message}`); return false;
@@ -374,7 +376,8 @@ export class XenoTrialsUiV96 {
     this.el('pause-overlay').hidden = !snapshot.paused || snapshot.phase === 'match-over';
     // A newly visible modal must own keyboard focus. Background/visibility
     // pauses wait for the next explicit interaction instead of stealing focus.
-    if (!this.el('pause-overlay').hidden && !wasPaused && !this.root.ownerDocument?.hidden)
+    if (!this.el('pause-overlay').hidden && !wasPaused && !this.root.ownerDocument?.hidden
+      && this.root.ownerDocument?.hasFocus?.() !== false)
       this.el('resume-overlay').focus({ preventScroll: true });
     this.root.setAttribute('data-xt-paused', String(snapshot.paused));
     this.root.setAttribute('data-xt-phase', snapshot.phase);
