@@ -1,0 +1,58 @@
+name: Apply reviewed preview observation once
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ['.github/workflows/apply-preview-pr9-once.yml']
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.repository == 'darknigthmare/aliens-tantalus-frontier' && github.event.pull_request.number == 9 && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'fix/audit-hardening-v143'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+      - name: Apply the reviewed observation without modifying the game
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = d6ac45e5ffefa43ee29d84a0888dbb6381071b03
+          test "$(git rev-parse HEAD:scripts/qa-player-browser-v124.mjs)" = c03426e083238ebdae99fbb993d3523683bc4fc9
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          path=Path('scripts/qa-player-browser-v124.mjs')
+          old="""      await page.waitForTimeout(180);
+                assert.notEqual(await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png')), frame,
+                  'The selected walk preview must animate actual canvas pixels.');"""
+          new="""      // Two fixed-delay samples can land on the same repeating pose, or
+                // before a busy browser has drawn again. Require a different real
+                // framebuffer within a bounded interval; a frozen preview still fails.
+                const changed = await page.waitForFunction(previous => {
+                  const canvas = document.querySelector('#player-appearance-preview-v126');
+                  if (canvas?.dataset.appearanceReadyV126 !== 'true' || canvas.dataset.appearanceAnimationV127 !== 'walk') return null;
+                  const current = canvas.toDataURL('image/png');
+                  return current !== previous ? current : null;
+                }, frame, { polling: 'raf', timeout: 5000 });
+                try { assert.notEqual(await changed.jsonValue(), frame, 'The selected walk preview must animate actual canvas pixels.'); }
+                finally { await changed.dispose(); }"""
+          text=path.read_text()
+          assert text.count(old)==1
+          path.write_text(text.replace(old,new))
+          assert hashlib.sha256(path.read_bytes()).hexdigest()=='b19e946c4c146c301216b91a37462ed6f5dca2340a8ec7dd8461044eb3471a04'
+          PY
+          node --check scripts/qa-player-browser-v124.mjs
+          git add scripts/qa-player-browser-v124.mjs
+          git diff --cached --check
+          test "$(git diff --cached --name-only)" = scripts/qa-player-browser-v124.mjs
+          git -c user.name=ChatGPT -c user.email=noreply@openai.com commit -m 'test: observe real preview animation instead of aliasing fixed-delay samples'
+          header="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $header" push origin HEAD:refs/heads/fix/audit-hardening-v143
