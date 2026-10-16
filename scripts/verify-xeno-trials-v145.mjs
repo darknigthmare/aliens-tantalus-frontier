@@ -261,3 +261,28 @@ test('pause parks rendering until explicit resume, without duplicate animation l
   h.frames(2); assert.ok(h.runtime.getState().tick > before.tick);
   h.runtime.stop(); assert.equal(h.queue.size, 0);
 });
+
+test('HTML pause overlay has no competing canvas pause text, standalone canvas retains its instructions', async () => {
+  for (const htmlHud of [true, false]) {
+    const h = host({ htmlHud }); await h.start(); h.text.length = 0;
+    h.runtime.pause();
+    assert.equal(h.text.includes('SIMULATION EN PAUSE'), !htmlHud);
+    assert.equal(h.text.includes('P / Échap ou bouton Reprendre'), !htmlHud);
+    h.runtime.stop();
+  }
+});
+
+test('a fast terminal KO does not freeze the fight announcement behind its result', async () => {
+  const h = host({ htmlHud: true, config: { playerId: 'warrior', opponentId: 'runner', seed: 96002,
+    rulesV119: { initialHp: 1 } } });
+  await h.start();
+  for (let i = 0; i < 8000 && h.runtime.getState().phase !== 'match-over'; i++) {
+    h.runtime.setInput('right', true); h.text.length = 0; h.frames(1);
+  }
+  assert.equal(h.runtime.getState().phase, 'match-over');
+  assert.equal(h.runtime.getState().presentation.phase, 'fight', 'Reproduce a KO while its short fight signal still exists.');
+  assert.ok(h.text.includes('DÉFAITE'));
+  assert.equal(h.text.includes('COMBAT'), false);
+  assert.equal(h.queue.size, 0);
+  h.runtime.stop();
+});

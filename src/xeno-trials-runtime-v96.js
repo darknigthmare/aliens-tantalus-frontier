@@ -209,17 +209,22 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       text(`MANCHE ${match.round}`, 500, 96, 12, '#b4c4d2', 'center');
     }
     const intro = presentationView();
-    if (loaded && !match.paused && intro.fighterSlot !== null) {
+    // A short round can finish before the fight signal fades. Terminal and
+    // intermission frames must never freeze that announcement over the result.
+    const showPresentation = loaded && !match.paused && match.phase === 'active';
+    if (showPresentation && intro.fighterSlot !== null) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
       context.fillStyle = '#061019df'; context.fillRect(200, 150, 600, 90);
       text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center', 570);
       const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR', human: 'HUMAIN' }[def.family];
       const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
       text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
-    } else if (loaded && !match.paused && ['countdown', 'fight'].includes(intro.phase)) {
+    } else if (showPresentation && ['countdown', 'fight'].includes(intro.phase)) {
       text(intro.countdown ? String(intro.countdown) : 'COMBAT', 500, 235, 54, '#efe8cb', 'center');
     }
-    if (!loaded || match.paused || match.phase !== 'active') {
+    // The accessible HTML pause dialog owns its text; standalone canvas
+    // integrations retain the original pause instructions.
+    if (!loaded || assetFailure || (match.paused ? options.htmlHud !== true : match.phase !== 'active')) {
       context.fillStyle = '#061019b8'; context.fillRect(150, 216, 700, 106);
       const heading = !loaded ? 'CHARGEMENT DES SPÉCIMENS' : assetFailure ? 'VISUEL INDISPONIBLE' : match.paused ? 'SIMULATION EN PAUSE' : match.phase === 'intro' ? `MANCHE ${match.round}` : match.phase === 'round-over' ? match.roundWinner === 'draw' ? 'ÉGALITÉ' : match.roundWinner === 'player' ? 'MANCHE REMPORTÉE' : 'MANCHE PERDUE' : match.result.winner === 'player' ? 'VICTOIRE' : match.result.winner === 'opponent' ? 'DÉFAITE' : 'ÉGALITÉ';
       text(heading, 500, 255, 25, '#efe8cb', 'center');
