@@ -809,11 +809,17 @@ try {
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
     const engine = globalThis.__ATF_GAME__, actor = engine?.player;
-    return engine?.running && !engine.paused && !engine.enemyAtlasLoadingPausedV65 && actor.grounded
+    return engine?.running && actor?.grounded && engine.canPerformGameplayAction(actor)
+      && !(actor.fireClock > 0) && !actor.reloading && !(actor.toolUseClock > 0) && !(actor.interactionClock > 0)
       && engine.enemies.some(enemy => enemy.alive && Math.abs(enemy.x + enemy.w / 2 - actor.x - actor.w / 2) < 90
-        && Math.abs(enemy.y + enemy.h / 2 - actor.y - actor.h / 2) < 94);
+        && Math.abs(enemy.y + enemy.h / 2 - actor.y - actor.h / 2) < 94 && engine.enemyMeleePathClearV64(actor, enemy));
   }, null, { timeout: 20000 });
-  await canvas.focus(); const beforeMelee = await snapshot(); await page.keyboard.press('KeyF');
+  // Use the explicit CQC control. F is a held, simulation-sampled trigger:
+  // a zero-duration press may fall between frames or fire after a moving target
+  // has left reach. Middle pointerdown requests melee immediately and cannot
+  // substitute a bullet. The real enemy and all gameplay assertions remain.
+  await canvas.focus(); const beforeMelee = await snapshot();
+  await canvas.click({ button: 'middle', position: { x: 24, y: 24 } });
   await page.waitForFunction(() => globalThis.__ATF_GAME__.player.meleeClock > 0);
   const meleeKind = await page.evaluate(() => globalThis.__ATF_GAME__.player.meleeKind);
   const melee = await freezeAction('player', meleeKind, '27-real-melee.png', 'A real contextual melee strike with the selected independent clothing', { freeze: false });
@@ -930,7 +936,12 @@ try {
     return e && p ? { running: e.running, paused: e.paused, loading: Boolean(e.enemyAtlasLoadingPausedV65 || e.userCasteLoadingV88),
       elapsed: e.animationTime, phase: e.mission?.state, keys: [...e.keys], focus: document.activeElement?.id,
       player: { x: p.x, y: p.y, vx: p.vx, vy: p.vy, grounded: p.grounded, alive: p.alive, downed: p.downed,
-        health: p.health, aiming: p.aimingV124, movement: p.movementIntentV124 },
+        health: p.health, aiming: p.aimingV124, movement: p.movementIntentV124, fireClock: p.fireClock,
+        meleeClock: p.meleeClock, meleeKind: p.meleeKind, reloading: p.reloading, climbing: p.climbing,
+        toolUseClock: p.toolUseClock, interactionClock: p.interactionClock, action: p.playerActionVisualV127 },
+      enemies: (e.enemies || []).map(enemy => ({ id: enemy.id, x: enemy.x, y: enemy.y, w: enemy.w, h: enemy.h,
+        alive: enemy.alive, dormant: enemy.dormant, health: enemy.health, plane: enemy.planeV130 || enemy.plane,
+        rearEntry: enemy.rearEntryV130, contactClear: e.enemyMeleePathClearV64(p, enemy) })),
       fieldAction: p.fieldActionV124 || null, placeables: e.getPlaceablesSnapshotV86?.() || null,
       squad: e.getSquadDoctrineSnapshotV132?.() || null } : null;
   }).catch(() => null);
