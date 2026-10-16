@@ -44,7 +44,8 @@
     "test:audit": "node --test scripts/verify-audit-v143.mjs scripts/verify-save-lifecycle-v143.mjs",
     "test:all": "node scripts/test-release-v143.mjs",
     "check:built": "node scripts/verify-release-artifact-v143.mjs",
-    "test:trials": "node --test scripts/verify-xeno-trials-v145.mjs"
+    "test:trials": "node --test scripts/verify-xeno-trials-v145.mjs",
+    "test:trials:plan": "node --test scripts/verify-xeno-trials-plan-v146.mjs"
   },
   "engines": {
     "node": ">=22"
