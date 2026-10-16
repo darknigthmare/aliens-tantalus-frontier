@@ -59,6 +59,7 @@ jobs:
           export ATF_PLAYER_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/player"
           export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           node scripts/qa-player-browser-v124.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player.log"
+          python scripts/qa-save-profiles-v144.py --output "$RUNNER_TEMP/atf-release-qa/profiles" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/profiles.log"
       - name: Retain results without distributing private documents
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
