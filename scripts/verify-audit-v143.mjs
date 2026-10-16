@@ -1,3 +1,4 @@
+import { withPlayerWeaponRigV125 } from '../src/player-weapon-runtime-v125.js';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -246,4 +247,30 @@ test('release HTML refuses broken/duplicate anchors and unsafe identities instea
   assert.throws(() => stampReleaseHtmlV143(original + '<meta name="atf-release" content="wrong">', release), /anchor/);
   assert.throws(() => stampReleaseHtmlV143(original, { version: '143.0.0', buildId: '144.0.0+different' }), /identity/);
   assert.throws(() => stampReleaseHtmlV143(original, { version: '143.0.0', buildId: '143.0.0+<script>' }), /identity/);
+});
+
+
+test('rendered weapon observations identify the drawn shot, never an input accepted before the next frame', () => {
+  const Engine = withPlayerWeaponRigV125(class {}), engine = new Engine();
+  const actor = { shots: 0, ammo: 10 }; engine.player = actor; engine.animationTime = 5;
+  const pose = { profile: { weaponId: 'test-weapon' }, path: '/test.png', surface: 'mission',
+    muzzle: { x: 10, y: 20 }, matrix: {}, bodyRig: {}, weaponImage: {}, grip: { x: 1, y: 2 } };
+  const render = { drawn: true, sheetId: 'test-body', frame: 0,
+    arms: { near: { hand: pose.grip }, far: { hand: pose.grip } } };
+  // Only this observation wrapper is under test, not the rig or raster art.
+  engine.resolvePlayerWeaponPoseV125 = () => pose;
+  engine.drawPlayerBodyCompositionV125 = () => render;
+  engine.drawPlayerWeaponRigV125({}, actor);
+  assert.equal(actor.heldWeaponVisualV125.shotSerial, 0);
+  assert.equal(actor.heldWeaponVisualV125.timeSeconds, 5);
+  actor.shots = 1; actor.ammo = 9;
+  assert.equal(actor.heldWeaponVisualV125.shotSerial, 0, 'An accepted input does not certify a newly drawn frame.');
+  engine.animationTime = 5.016;
+  engine.drawPlayerWeaponRigV125({}, actor);
+  assert.equal(actor.heldWeaponVisualV125.shotSerial, 1);
+  assert.equal(actor.heldWeaponVisualV125.timeSeconds, 5.016);
+  assert.equal(actor.ammo, 9); assert.equal(actor.shots, 1, 'Drawing never produces another accepted shot.');
+  render.drawn = false;
+  engine.drawPlayerWeaponRigV125({}, actor);
+  assert.equal(actor.heldWeaponVisualV125, null, 'A failed draw cannot certify a stale composition.');
 });

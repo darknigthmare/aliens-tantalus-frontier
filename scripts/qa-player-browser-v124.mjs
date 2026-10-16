@@ -293,11 +293,17 @@ try {
   let firing;
   for (let attempt = 0; attempt < 8 && !firing; attempt++) {
     await page.waitForFunction(() => {
-      const runtime = globalThis.__ATF_GAME__?.weaponEffectsV124;
-      return runtime?.lights.some(light => runtime.time - light.bornAt < light.duration * 0.5);
+      const engine = globalThis.__ATF_GAME__, actor = engine?.player, visual = actor?.heldWeaponVisualV125;
+      const runtime = engine?.weaponEffectsV124;
+      return visual && visual.shotSerial === actor.shots && visual.timeSeconds === engine.animationTime
+        && runtime?.lights.some(light => runtime.time - light.bornAt < light.duration * 0.5);
     }, null, { polling: 'raf', timeout: 10000 });
     const frame = await page.evaluate(readLiveState, true);
-    if (frame.effects?.lights.some(light => light.age >= 0 && light.age < light.duration * 0.8)) {
+    // Pointer input may accept another shot between the wait and this read.
+    // Certify that the framebuffer belongs to this exact simulation/shot too.
+    if (frame.player.heldWeapon?.shotSerial === frame.player.shots
+      && frame.player.heldWeapon?.timeSeconds === frame.elapsed
+      && frame.effects?.lights.some(light => light.age >= 0 && light.age < light.duration * 0.8)) {
       firing = await saveCanvasFrame('06-fire.png', 'A real RMB/LMB shot with its live scene light and ejected case', frame);
     }
   }
