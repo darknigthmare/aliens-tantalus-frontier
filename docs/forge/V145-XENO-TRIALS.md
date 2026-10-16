@@ -23,10 +23,13 @@ restent des règles originales de la simulation, pas des propriétés canoniques
   RAF ou résultat vers une scène fermée. La sortie ne notifie son propriétaire
   qu'une fois. Les images invalides suspendent le duel sans remplacer le spécimen ;
   un décor facultatif absent conserve l'arène procédurale.
+- Les annonces de départ ne restent plus derrière le résultat d'un KO rapide.
+  La pause HTML ne superpose plus les mêmes instructions dessinées dans le canvas ;
+  l'intégration canvas autonome conserve ses instructions.
 
 ## Vérifications
 
-`npm run test:trials` exécute 28 tests Node du moteur/runtime réels, avec un hôte
+`npm run test:trials` exécute 30 tests Node du moteur/runtime réels, avec un hôte
 DOM/images/RAF simulé. Les tests couvrent les scénarios de régression, une matrice
 sur les 31 identités de tir acide/impulsion/flamme admises, la détermination à
 30/60/120 Hz, la clôture d'un ticket réel et le refus d'une seconde récompense.
