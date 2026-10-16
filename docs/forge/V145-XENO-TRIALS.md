@@ -42,3 +42,15 @@ Les résultats CI et les empreintes doivent être associés au commit publié, e
 recopiés depuis une passe précédente. La recette ne valide pas un périphérique
 physique, l'ensemble du roster en navigateur, un compte cloud ou la production
 Vercel. Aucun statut d'opération historique n'est promu par ces corrections.
+
+## Fiabilité de la recette
+
+Les trois parcours du paquet (personnage, profils et Trials) s'exécutent même
+si l'un échoue ; l'état final reste un échec lorsqu'une assertion échoue. Cela
+conserve les preuves des autres systèmes sans masquer la régression.
+
+Le contrôle de marche en armurerie attend maintenant, pendant cinq secondes au
+maximum, un framebuffer réellement différent avec le bon mode et les images
+prêtes. Deux captures espacées de 180 ms pouvaient tomber sur une même pose ou
+avant le dessin suivant d'un navigateur occupé. Un aperçu toujours immobile
+échoue encore : aucun mouvement, pixel ou compteur n'est injecté dans ce test.
