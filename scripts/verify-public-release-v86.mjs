@@ -3,6 +3,7 @@ import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { validateContent, RELEASE } from '../src/content.js';
+import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
 import { publicReleasePathAdmissionV119, verifyPublicAdmissionsV119 } from './public-release-admissions-v119.mjs';
 import { publicReleasePathAdmissionV120, verifyPublicAdmissionsV120 } from './public-release-admissions-v120.mjs';
@@ -19,7 +20,12 @@ const ROOT_FILES = new Set([
   'runtime-level.css', 'sprite-gallery.css', 'styles-v50.css', 'styles.css', 'title-scene-v79.css', 'title-screen-v61.css',
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
-const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admissions-v123.mjs', 'public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
+const SCRIPT_FILES = new Set([
+  'verify-hub-console-support-v142.mjs','verify-hub-elevator-interior-v142.mjs',
+  'verify-hub-vent-scene-v142.mjs','verify-hub-room-composition-v142.mjs',
+  'verify-player-body-alignment-v142.mjs','verify-hub-door-passage-v142.mjs',
+  'verify-hub-door-npc-clearance-v142.mjs',
+'audit-weapon-png-v120.mjs', 'public-release-admissions-v123.mjs', 'public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
   'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs',
   'verify-player-runtime-v124.mjs', 'verify-player-presentation-v124.mjs', 'verify-player-field-actions-v124.mjs', 'qa-player-browser-v124.mjs',
   'verify-player-body-rig-v125.mjs', 'verify-player-weapon-rig-v125.mjs', 'verify-held-weapon-v125.mjs', 'verify-weapon-image-cache-v125.mjs',
@@ -70,11 +76,15 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-hub-native-prop-placement-v139.mjs', 'verify-hub-annex-storage-v139.mjs',
   'verify-hub-support-contact-v139.mjs', 'verify-hub-furniture-atlases-v139.mjs', 'qa-tantalus-perspective-v139.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
+for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-audit-v143.mjs',
+  'verify-save-lifecycle-v143.mjs', 'verify-release-artifact-v143.mjs',
+  'qa-service-worker-v143.py']) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
+  '.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md',
   'docs', 'docs/forge', 'docs/forge/QA-V130.md', 'docs/forge/README-V130.md',
   'docs/forge/V133-AUTHORING.md', 'docs/forge/V134-NAVIGATION.md',
   'docs/forge/V135-CONSTRUCTION.md', 'docs/forge/V136-CONTROLE-ET-VERSIONS.md',
@@ -99,11 +109,7 @@ for (const file of [
   'verify-forge-journey-v141.mjs', 'verify-forge-admission-v141.mjs',
   'verify-forge-mission-v141.mjs', 'verify-forge-ship-v141.mjs', 'verify-forge-decoration-v141.mjs',
   'verify-enemy-distance-gait-v141.mjs', 'verify-hub-annex-npc-life-v141.mjs',
-  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py',
-  'verify-hub-console-support-v142.mjs', 'verify-hub-elevator-interior-v142.mjs',
-  'verify-hub-vent-scene-v142.mjs', 'verify-hub-room-composition-v142.mjs',
-  'verify-player-body-alignment-v142.mjs', 'verify-hub-door-passage-v142.mjs',
-  'verify-hub-door-npc-clearance-v142.mjs'
+  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py'
 ]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
@@ -272,7 +278,8 @@ export function isPublicDistributionTextV86(text) {
 export async function verifyPublicReleaseV86(root = process.cwd(), { built = basename(resolve(root)) === 'dist' } = {}) {
   const validation = validateContent();
   assert.equal(validation.ok, true, `Gameplay registry invalid: ${validation.failures.join(', ')}`);
-  assert.equal(RELEASE.version, '86.0.0');
+  assert.equal(RELEASE.releaseVersion, APP_RELEASE_V143.version);
+  assert.equal(APP_RELEASE_V143.saveSchema, 52, 'Release version must not change the save format.');
   assert.equal((await lstat(resolve(root))).isSymbolicLink(), false, 'Distribution root must not be a symbolic link.');
   let files = 0, assets = 0, userReferenceJpgs = 0;
   async function walk(directory, prefix = '') {
