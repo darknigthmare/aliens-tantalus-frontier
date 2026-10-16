@@ -37,8 +37,14 @@ def screenshot(page, name):
     page.screenshot(path=str(output/name), full_page=True)
     report['captures'].append(name)
 
-def setup_duel(page, rules):
-    page.locator('[data-xt-branch="on-demand"]').click()
+def setup_duel(page, rules, *, after_abandon=False):
+    if after_abandon:
+        # Abandon returns to fighter selection. Use its real back button to
+        # edit the target; returning to the ship hides the external navigation.
+        assert state(page)['match'] is None
+        page.locator('[data-xt="branch-return"]').click()
+    else:
+        page.locator('[data-xt-branch="on-demand"]').click()
     page.locator('[data-xt="form"] [name="factionId"]').select_option('pursuit')
     page.locator('[data-xt="form"] [name="opponentId"]').select_option('runner')
     page.locator('[data-xt="form"] [name="requestedRules"]').select_option(rules)
@@ -101,9 +107,7 @@ with sync_playwright() as p:
         abandoned = state(page)['progress']
         check('Abandonment clears only the duel ticket without a reward', abandoned['pending'] is None
               and abandoned['credits'] == original['credits'] and abandoned['ledger'][-1]['winner'] == 'abandoned')
-        page.locator('[data-xt="return"]').click()
-        page.locator('#nav [data-view="xenotrials"]').click()
-        setup_duel(page, 'one-hp')
+        setup_duel(page, 'one-hp', after_abandon=True)
         check('The on-demand 1 HP rule reaches both real fighters', all(f['hp'] == 1 for f in state(page)['match']['fighters']))
         canvas.focus()
         held = False
