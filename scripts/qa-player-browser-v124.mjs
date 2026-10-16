@@ -479,9 +479,17 @@ try {
     assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
     if (mode === 'walk') {
       const frame = await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png'));
-      await page.waitForTimeout(180);
-      assert.notEqual(await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png')), frame,
-        'The selected walk preview must animate actual canvas pixels.');
+      // Two fixed-delay samples can land on the same repeating pose, or
+      // before a busy browser has drawn again. Require a different real
+      // framebuffer within a bounded interval; a frozen preview still fails.
+      const changed = await page.waitForFunction(previous => {
+        const canvas = document.querySelector('#player-appearance-preview-v126');
+        if (canvas?.dataset.appearanceReadyV126 !== 'true' || canvas.dataset.appearanceAnimationV127 !== 'walk') return null;
+        const current = canvas.toDataURL('image/png');
+        return current !== previous ? current : null;
+      }, frame, { polling: 'raf', timeout: 5000 });
+      try { assert.notEqual(await changed.jsonValue(), frame, 'The selected walk preview must animate actual canvas pixels.'); }
+      finally { await changed.dispose(); }
     }
     await capturePreview(`21-preview-${mode}.png`, `Actual animation selector: ${mode}, with the six selected J1 pieces`, 'player');
     previewEvidence.push({ mode, facing: -1, ready: true });
