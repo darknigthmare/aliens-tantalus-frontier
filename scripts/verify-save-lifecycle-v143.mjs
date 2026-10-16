@@ -144,3 +144,99 @@ test('save input budgets match the unchanged migration schema', () => {
   const broad = JSON.stringify({ player: { name: 'Broad' }, values: new Array(SAVE_PAYLOAD_LIMITS_V144.nodes).fill(0) });
   assert.equal(inspectSaveSlotV78(broad).reason, 'payload-too-complex');
 });
+
+// V144 continuation: actual SaveSystem instances sharing the same storage.
+// This verifies stale-session detection, not simultaneous atomic writes.
+for (const mutation of ['save', 'import', 'new-game', 'delete', 'corrupt']) test(`another session ${mutation} cannot be overwritten by a stale autosave`, () => {
+  const { storage, system: first } = ready();
+  const stale = new SaveSystem(storage); stale.load(1);
+  stale.data.player.name = 'Unsaved local operator';
+  if (mutation === 'save') first.commit({ player: { ...first.data.player, name: 'Newer operator' } });
+  if (mutation === 'import') first.import(JSON.stringify({ player: { name: 'Imported operator' } }));
+  if (mutation === 'new-game') { first.newGame(1); first.data.player.name = 'Fresh timeline'; first.commit(); }
+  if (mutation === 'delete') first.delete(1);
+  if (mutation === 'corrupt') storage.setItem(first.key(), '{unreadable');
+  const latest = storage.getItem(first.key()), local = stale.data;
+  assert.throws(() => stale.commit(), { code: 'SAVE_CONFLICT' });
+  assert.equal(storage.getItem(first.key()), latest);
+  assert.equal(stale.data, local); assert.equal(JSON.parse(stale.export()).player.name, 'Unsaved local operator');
+  assert.equal(stale.recoveryNeeded.status, 'conflict');
+  assert.equal(stale.recoveryNeeded.reason, mutation === 'delete' ? 'external-deletion' : 'external-change');
+  assert.throws(() => stale.commit(), { code: 'SAVE_RECOVERY_REQUIRED' });
+  assert.equal(storage.getItem(first.key()), latest);
+});
+test('unchanged timestamps do not conceal an external byte change', () => {
+  const { storage, system } = ready(), raw = JSON.parse(storage.getItem(system.key()));
+  storage.setItem(system.key(), JSON.stringify({ ...raw, player: { ...raw.player, name: 'Same clock, different bytes' } }));
+  assert.equal(system.checkExternalChangeV144(), true);
+  assert.throws(() => system.commit(), { code: 'SAVE_RECOVERY_REQUIRED' });
+});
+test('listing profiles never acknowledges newer bytes or unblocks a stale autosave', () => {
+  const { storage, system } = ready(), other = new SaveSystem(storage); other.load(1);
+  other.commit({ player: { ...other.data.player, name: 'Newer' } });
+  system.listProfiles();
+  assert.throws(() => system.commit(), { code: 'SAVE_CONFLICT' });
+});
+test('an unread occupied slot is not silently replaced by a default in-memory session', () => {
+  const { storage, system } = ready(), raw = storage.getItem(system.key());
+  const unopened = new SaveSystem(storage);
+  assert.throws(() => unopened.commit(), { code: 'SAVE_CONFLICT' });
+  assert.equal(storage.getItem(system.key()), raw);
+});
+test('ordinary writes update their own baseline without creating false conflicts', () => {
+  const { system } = ready();
+  for (let i = 0; i < 8; i++) { system.data.statistics.kills = i; system.commit(); assert.equal(system.checkExternalChangeV144(), false); }
+  assert.equal(system.data.statistics.kills, 7);
+});
+test('a different slot, selection marker and Forge project do not invalidate the active slot', () => {
+  const { storage, system } = ready(), other = new SaveSystem(storage); other.newGame(2);
+  storage.setItem('atf-frontier-forge-workspace-v134', 'unchanged-independent-project');
+  assert.equal(system.checkExternalChangeV144(), false);
+  system.data.player.name = 'Still active'; system.commit();
+  assert.equal(system.profile, 1); assert.equal(JSON.parse(storage.getItem(other.key())).profile, 2);
+});
+for (const recovery of ['load', 'import', 'new-game']) test(`explicit ${recovery} resolves a conflict and establishes a fresh baseline`, () => {
+  const { storage, system } = ready(), other = new SaveSystem(storage); other.load(1);
+  other.commit({ player: { ...other.data.player, name: 'Remote' } });
+  assert.equal(system.checkExternalChangeV144(), true);
+  if (recovery === 'load') system.load(1);
+  if (recovery === 'import') system.import(JSON.stringify({ player: { name: 'Chosen import' } }));
+  if (recovery === 'new-game') system.newGame(1);
+  assert.equal(system.recoveryNeeded, null); assert.equal(system.checkExternalChangeV144(), false);
+  system.commit(); assert.equal(system.checkExternalChangeV144(), false);
+});
+test('read failure before an autosave fails closed and preserves the in-memory root', () => {
+  const { storage, system } = ready(), root = system.data, before = storage.map.get(system.key());
+  storage.getItem = () => { throw new Error('access denied'); };
+  assert.throws(() => system.commit(), { code: 'SAVE_READ_FAILED' });
+  assert.equal(system.data, root); assert.equal(storage.map.get(system.key()), before);
+});
+test('a failed explicit replacement retains the prior comparison baseline and profile', () => {
+  const { storage, system } = ready(), before = storage.getItem(system.key());
+  storage.fail = true; assert.throws(() => system.newGame(2), { code: 'SAVE_WRITE_FAILED' });
+  storage.fail = false;
+  assert.equal(system.profile, 1); assert.equal(system.checkExternalChangeV144(), false);
+  assert.equal(storage.getItem(system.key()), before); system.commit();
+});
+test('a failed deletion is a typed failure and leaves original bytes and active identity intact', () => {
+  const { storage, system } = ready(), root = system.data, before = storage.getItem(system.key());
+  storage.removeItem = () => { throw new Error('denied'); };
+  assert.throws(() => system.delete(), { code: 'SAVE_WRITE_FAILED' });
+  assert.equal(system.data, root); assert.equal(storage.getItem(system.key()), before); system.commit();
+});
+for (const scenario of ['future', 'deep', 'unsafe', 'large']) test(`writer rejects a generated ${scenario} payload that the reader would refuse`, () => {
+  const { storage, system } = ready(), before = storage.getItem(system.key());
+  const candidate = structuredClone(system.data);
+  if (scenario === 'future') candidate.schema = 500;
+  if (scenario === 'deep') { let current = candidate; for (let i = 0; i < 70; i++) current = current.extra = {}; }
+  if (scenario === 'unsafe') candidate.extension = JSON.parse('{"__proto__":{"polluted":true}}');
+  if (scenario === 'large') candidate.extra = 'a'.repeat(SAVE_PAYLOAD_LIMITS_V144.bytes);
+  assert.throws(() => system.writeCandidateV78(candidate, 1), { code: 'SAVE_WRITE_INVALID' });
+  assert.equal(storage.getItem(system.key()), before); assert.equal(system.data.player.name, JSON.parse(before).player.name);
+});
+test('cyclic in-memory objects fail serialization without replacing valid stored data', () => {
+  const { storage, system } = ready(), before = storage.getItem(system.key());
+  const candidate = { ...system.data }; candidate.cycle = candidate;
+  assert.throws(() => system.writeCandidateV78(candidate, 1), { code: 'SAVE_WRITE_FAILED' });
+  assert.equal(storage.getItem(system.key()), before);
+});

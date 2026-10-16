@@ -51,7 +51,8 @@ export class MissionGamepadInputV77 {
       const available = this.engine.running && globalThis.document?.hidden !== true && globalThis.document?.hasFocus?.() !== false
         && !uiOwnsInput && (index === 0 || this.engine.coopEnabled);
       if (available && edge(9) && !pauseConsumed) { this.engine.togglePause(); pauseConsumed = true; }
-      const active = available && !this.engine.paused && !this.engine.enemyAtlasLoadingPausedV65 && this.engine.mission?.state === 'active' && actor?.alive;
+      const active = available && !this.engine.paused && !this.engine.enemyAtlasLoadingPausedV65
+        && !this.engine.userCasteLoadingV88 && this.engine.mission?.state === 'active' && actor?.alive && !actor.downed;
       const aim = readGamepadCombatAimV83(pad);
       const aimNeutral = Math.hypot(aim.x, aim.y) <= COMBAT_AIM_DEADZONE_V83;
       const neutral = Math.abs(axis(pad, 0)) < 0.25 && Math.abs(axis(pad, 1)) < 0.25
