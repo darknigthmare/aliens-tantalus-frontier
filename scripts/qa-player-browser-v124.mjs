@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
@@ -9,6 +9,7 @@ import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126, PLAYER_APP
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V129 } from '../src/player-colonial-art-v129.js';
+import { parseProject } from '../src/forge-model-v130.js';
 
 // Optional visual smoke test: use an existing Playwright/Chromium installation.
 // ATF_BASE_URL=https://preview.example ATF_PLAYER_QA_OUTPUT=/tmp/player-qa \
@@ -53,6 +54,34 @@ try {
   page.on('pageerror', error => report.pageErrors.push(error.message));
   page.on('requestfailed', request => report.requestFailures.push({ url: request.url(), failure: request.failure()?.errorText }));
   page.setDefaultTimeout(15000);
+  // A replacement is an explicit UI confirmation, not an implicit file-input
+  // side effect. Verify the exported document before launching its real runtime.
+  const importPlan = async (plan, name) => {
+    let unexpectedDialog = null;
+    const confirmImport = async dialog => {
+      if (dialog.type() === 'confirm' && dialog.message() === 'Remplacer le projet ouvert par ce fichier ? L’import reste annulable.') {
+        await dialog.accept();
+      } else {
+        unexpectedDialog = `${dialog.type()}: ${dialog.message()}`;
+        await dialog.dismiss();
+      }
+    };
+    page.on('dialog', confirmImport);
+    try {
+      await page.locator('#editor-import').setInputFiles({ name, mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+      await page.waitForFunction(() => document.querySelector('#editor-import')?.value === '');
+      assert.equal(unexpectedDialog, null, 'Only the expected Forge replacement confirmation may be accepted.');
+      const downloading = page.waitForEvent('download');
+      await page.locator('#editor-export').click();
+      const download = await downloading, path = await download.path();
+      assert.ok(path, 'The native Forge export must provide the imported document.');
+      const exported = JSON.parse(await readFile(path, 'utf8'));
+      assert.deepEqual(parseProject(exported), parseProject(plan), 'The playtest must use the requested plan, never a previous imported scene.');
+      await download.delete();
+    } finally {
+      page.off('dialog', confirmImport);
+    }
+  };
   let requestPhase = 'boot';
   const catalogueImagePaths = new Set(Object.values(WEAPON_VISUAL_ASSETS_ALL_V63));
   const appearanceImagePaths = new Set([...PLAYER_MODULAR_RIG_ASSETS_V126, ...PLAYER_TRANSIT_RIG_ASSETS_V128,
@@ -196,7 +225,7 @@ try {
     { position: '8:14', type: 'ladder' }, { position: '8:12', type: 'platform' },
     { position: '12:15', type: 'door' }, { position: '20:15', type: 'terminal' }
   ] };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-v124-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+  await importPlan(plan, 'player-v124-qa-stage.json');
   imagePhase('Before the first mission; armory catalogue has not been opened', await snapshot());
   requestPhase = 'first-forge-playtest';
   await page.locator('#editor-play').click();
@@ -497,7 +526,7 @@ try {
   await page.locator('#return-title').click();
   await page.locator('#title-start').click();
   await page.locator('#title-forge').click();
-  await page.locator('#editor-import').setInputFiles({ name: 'player-v126-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+  await importPlan(plan, 'player-v126-qa-stage.json');
   requestPhase = 'second-forge-playtest';
   await page.locator('#editor-play').click();
   await page.waitForFunction(id => {
@@ -570,7 +599,7 @@ try {
     { position: '2:15', type: 'spawn' }, { position: '30:15', type: 'objective' },
     { position: '4:15', type: 'hazard' }
   ] };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-actions-v127-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(actionPlan)) });
+  await importPlan(actionPlan, 'player-actions-v127-qa-stage.json');
   requestPhase = 'third-forge-actions';
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
@@ -775,7 +804,7 @@ try {
   // equipment checks above remain free from enemy damage or friendly gunfire.
   const meleePlan = { ...actionPlan, tiles: actionPlan.tiles.filter(tile => tile.type !== 'hazard')
     .concat({ position: '2:14', type: 'enemy' }) };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-melee-v127-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(meleePlan)) });
+  await importPlan(meleePlan, 'player-melee-v127-qa-stage.json');
   requestPhase = 'fourth-forge-melee';
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
@@ -798,8 +827,7 @@ try {
   // import. Every action below uses keyboard input; evaluations remain read-only.
   const transitPlan = { ...actionPlan, tiles: actionPlan.tiles.filter(tile => tile.type !== 'hazard')
     .concat({ position: '4:12', type: 'ladder' }, { position: '7:15', type: 'hazard' }) };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-transit-v128-qa-stage.json', mimeType: 'application/json',
-    buffer: Buffer.from(JSON.stringify(transitPlan)) });
+  await importPlan(transitPlan, 'player-transit-v128-qa-stage.json');
   requestPhase = 'fifth-forge-transit';
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
