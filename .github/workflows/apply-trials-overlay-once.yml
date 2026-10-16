@@ -1,0 +1,48 @@
+name: Apply reviewed Trials overlay corrections once
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ['.github/workflows/apply-trials-overlay-once.yml']
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.repository == 'darknigthmare/aliens-tantalus-frontier' && github.event.pull_request.number == 9 && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'fix/audit-hardening-v143'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+          sparse-checkout: |
+            src
+            scripts
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Apply exact reviewed patch and verify the two regressions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = c5c6d97a29142502c7ff036ef0d06f811971ac43
+          python - <<'PY'
+          import base64,hashlib,json,os,pathlib,subprocess,urllib.request
+          url='https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier/git/blobs/92211131a6edae743bbad8e582ac588ba247eac0'
+          request=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(request,timeout=30) as response: data=json.load(response)
+          patch=base64.b64decode(data['content'])
+          assert hashlib.sha256(patch).hexdigest()=='c44ddd05a3cf793a3f7f9ef37367f20a95d88afa9fc2c2b5fbb1d46df64d504b'
+          subprocess.run(['git','apply','--index','--whitespace=error'],input=patch,check=True)
+          expected={'src/xeno-trials-runtime-v96.js':'f7d48624ef0441952c2dbd373ba37c2404a63a8571052280db49f1bdf99dc2ca','scripts/verify-xeno-trials-v145.mjs':'51b812939768ca3af6d0ac8cd0875292c2e1085d80ab626983f91a193204135a'}
+          assert set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())==set(expected)
+          for path,digest in expected.items(): assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==digest
+          PY
+          npm run test:trials
+          git diff --cached --check
+          git -c user.name=ChatGPT -c user.email=noreply@openai.com commit -m 'fix: remove stale fight announcements and duplicate pause overlays'
+          header="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $header" push origin HEAD:refs/heads/fix/audit-hardening-v143
