@@ -1,4 +1,4 @@
-name: Apply reviewed Trials runtime patch once
+name: Apply reviewed Trials tests once
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -19,29 +19,46 @@ jobs:
           sparse-checkout: |
             src
             scripts
-      - name: Apply exactly the reviewed runtime bytes
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Retrieve reviewed blobs and verify exact changes
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = 4e97951b232e72b0c371db2aa25b4144349dea0c
+          test "$(git rev-parse HEAD^)" = 638e47e27537ea96514a0c581b45f2613f64c151
           python - <<'PY'
-          import base64, gzip, hashlib, pathlib, re, subprocess
-          previous = subprocess.check_output(['git','show','HEAD^:.github/workflows/apply-trials-pr9-once.yml'], text=True)
-          payload = re.search(r"payload = '([^']+)'", previous).group(1)
-          # Repair the single transport transcription, never change patch bytes.
-          payload = payload.replace('s0+lspv/+Xv4jew', 's0+lspv+Xv4jew')
-          patch = gzip.decompress(base64.b64decode(payload, validate=True))
-          assert hashlib.sha256(patch).hexdigest() == 'be69bbf701933f3d500eee375f45057c3414cf5babdbc3e41cc3e2708c414b90'
-          subprocess.run(['git','apply','--index','--whitespace=error'], input=patch, check=True)
-          expected = {'src/xeno-trials-runtime-v96.js':'55ddd91c65a8078f717ed368f1f38b257b75df869429a2a102c4fe32df7972cb','src/xeno-trials-engine-v96.js':'70bee9860950005c0da529ad85b547c090717e87bf3e536247b7a1d588f30880','src/xeno-trials-ai-v119.js':'2865a8b0743da3034513520bfcce51256f1d9d333efb75a789142f293478145b','src/xeno-trials-ui-v96.js':'bed6915ff5d1ce0dfe413faf657b4b9100dbe2811c2c65bfac9c3cbb71953d20'}
-          assert set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines()) == set(expected)
-          for path, digest in expected.items():
-              assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() == digest, path
-              subprocess.run(['node','--check',path], check=True)
+          import ast, base64, hashlib, json, os, pathlib, urllib.request
+          entries = [('scripts/verify-xeno-trials-v145.mjs','cc0d3a04674a319e5e7a219757e18faf13e0bb8e','c98d7b6ce6d501f6197e7772c21c8af2e6efcf3eb0f5fc32a9a84cb2163ba462'),('scripts/qa-xeno-trials-v145.py','52337c19e8c13557a6c7116c21217fb88d6c8c45','6754052a518693a66329dc5c2cfda54be4ff42290491c3b6692b7b379dabed39')]
+          for path, sha, digest in entries:
+              assert not pathlib.Path(path).exists()
+              request = urllib.request.Request('https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier/git/blobs/'+sha, headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(request, timeout=30) as response: blob = json.load(response)
+              data = base64.b64decode(blob['content'])
+              assert hashlib.sha256(data).hexdigest() == digest
+              pathlib.Path(path).write_bytes(data)
+          package = pathlib.Path('package.json'); data = json.loads(package.read_text())
+          assert 'test:trials' not in data['scripts']
+          data['scripts']['test:trials'] = 'node --test scripts/verify-xeno-trials-v145.mjs'
+          package.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          assert hashlib.sha256(package.read_bytes()).hexdigest() == 'f7c1076e2f1797877c25dc4878c82be40cca6c0dca0e856ff2815a804ec6018b'
+          guard = pathlib.Path('scripts/verify-public-release-v86.mjs'); text = guard.read_text()
+          old = "'qa-service-worker-v143.py', 'qa-save-profiles-v144.py']) SCRIPT_FILES.add(file);"
+          assert text.count(old) == 1
+          text = text.replace(old,"'qa-service-worker-v143.py', 'qa-save-profiles-v144.py', 'verify-xeno-trials-v145.mjs', 'qa-xeno-trials-v145.py']) SCRIPT_FILES.add(file);")
+          old = "'.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md',"
+          assert text.count(old) == 1
+          text = text.replace(old, old+" 'docs/forge/V145-XENO-TRIALS.md',")
+          guard.write_text(text)
+          assert hashlib.sha256(guard.read_bytes()).hexdigest() == '0073d6c947bc0a21565f07f004b22b0495cad0b2b57b314af4c818aca99c416c'
+          ast.parse(pathlib.Path('scripts/qa-xeno-trials-v145.py').read_text())
           PY
+          npm run test:trials
+          npm run test:audit
+          git add package.json scripts/verify-public-release-v86.mjs scripts/verify-xeno-trials-v145.mjs scripts/qa-xeno-trials-v145.py
           git diff --cached --check
-          git -c user.name=ChatGPT -c user.email=noreply@openai.com commit -m 'fix: enforce Trials input lifecycle and legal no-special AI offense'
+          git -c user.name=ChatGPT -c user.email=noreply@openai.com commit -m 'test: register Trials regressions and a real production browser journey'
           header="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $header" push origin HEAD:refs/heads/fix/audit-hardening-v143
