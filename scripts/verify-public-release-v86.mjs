@@ -78,13 +78,13 @@ const SCRIPT_FILES = new Set([
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
 for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-audit-v143.mjs',
   'verify-save-lifecycle-v143.mjs', 'verify-release-artifact-v143.mjs',
-  'qa-service-worker-v143.py', 'qa-save-profiles-v144.py']) SCRIPT_FILES.add(file);
+  'qa-service-worker-v143.py', 'qa-save-profiles-v144.py', 'verify-xeno-trials-v145.mjs', 'qa-xeno-trials-v145.py']) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
-  '.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md',
+  '.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md', 'docs/forge/V145-XENO-TRIALS.md',
   'docs', 'docs/forge', 'docs/forge/QA-V130.md', 'docs/forge/README-V130.md',
   'docs/forge/V133-AUTHORING.md', 'docs/forge/V134-NAVIGATION.md',
   'docs/forge/V135-CONSTRUCTION.md', 'docs/forge/V136-CONTROLE-ET-VERSIONS.md',
