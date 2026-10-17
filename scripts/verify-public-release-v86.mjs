@@ -85,6 +85,8 @@ SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
 SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
 SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-controls-v150.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-controls-v150.py');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
@@ -105,6 +107,9 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/manifest-v146.json',
   'docs/forge/xeno-trials/xeno-trials-plan-v146.json',
   'docs/forge/xeno-trials/ALIENS_TANTALUS_XENO_TRIALS_PLAN_V146.xlsx',
+  'docs/forge/xeno-trials/V150-CONTROLS.md',
+  'docs/forge/xeno-trials/progress-v150.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V150.xlsx',
   'docs', 'docs/forge', 'docs/forge/QA-V130.md', 'docs/forge/README-V130.md',
   'docs/forge/V133-AUTHORING.md', 'docs/forge/V134-NAVIGATION.md',
   'docs/forge/V135-CONSTRUCTION.md', 'docs/forge/V136-CONTROLE-ET-VERSIONS.md',

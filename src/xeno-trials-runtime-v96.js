@@ -3,7 +3,7 @@ import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSi
 import { getXenoTrialsStageMotionV147, drawXenoTrialsStageMotionV147, getXenoTrialsStageCueV149 } from './xeno-trials-stage-motion-v147.js';
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, setXenoTrialsPausedV96,
-  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
+  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, releaseXenoTrialsControlsV150, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
 import { createXenoPresentationV97, getXenoPresentationViewV97, advanceXenoPresentationV97 } from './xeno-trials-presentation-v97.js';
 import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
@@ -55,7 +55,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       return { side: fighter.side, id: signature?.id || null, canonExact: false, animation: signature?.animation || null };
     }),
     stageVisual: !stage.backdrop ? 'procedural' : images.has(stage.backdrop) ? 'backdrop-ready' : loaded ? 'procedural-fallback' : 'loading' });
-  const images = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
+  const images = new Map(), buttonKeys = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
   const observedMovement = createEnemyImportMotionTrackerV107();
   let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null, exited = false;
   const pointerOwners = new Map();
@@ -74,7 +74,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     target.addEventListener(type, handler, settings); listeners.push(() => target.removeEventListener(type, handler, settings));
   }
   function clearInputs() {
-    heldKeys.clear(); heldPointers.clear(); for (const key of ACTIONS) virtual[key] = false;
+    heldKeys.clear(); buttonKeys.clear(); heldPointers.clear(); for (const key of ACTIONS) virtual[key] = false;
+    releaseXenoTrialsControlsV150(match, 'player', controls());
     const captures = [...pointerOwners]; pointerOwners.clear();
     for (const [id, button] of captures) { try { button.releasePointerCapture?.(id); } catch {} }
   }
@@ -82,6 +83,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const result = { ...virtual };
     for (const key of heldKeys) result[KEY_ACTION[key]] = true;
     for (const action of heldPointers.values()) result[action] = true;
+    for (const action of buttonKeys.values()) result[action] = true;
     return result;
   }
   function statusText() {
@@ -269,13 +271,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     notify(true); render(); return true;
   }
   function resume() {
-    if (stopped || !loaded || assetFailure || !windowAvailable() || match.phase === 'match-over') return false;
+    if (stopped || !match.paused || !loaded || assetFailure || !windowAvailable() || match.phase === 'match-over') return false;
     clearInputs(); setXenoTrialsPausedV96(match, false); previousTime = null; canvas.focus?.({ preventScroll: true }); notify(true);
     if (!stopped && running && raf === null) raf = requestFrame(frame);
     return !stopped;
   }
   function keydown(event) {
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
     const tag = String(event.target?.tagName || '').toLowerCase();
     if (['input', 'select', 'textarea'].includes(tag) || event.target?.isContentEditable
       || event.target?.closest?.('input, select, textarea, [contenteditable]:not([contenteditable="false"])')) return;
@@ -296,7 +298,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   }
   function registerInputs() {
     listen(host, 'keydown', keydown);
-    listen(host, 'keyup', event => { heldKeys.delete(event.code); blockedKeys.delete(event.code); });
+    listen(host, 'keyup', event => { heldKeys.delete(event.code); blockedKeys.delete(event.code); buttonKeys.delete(event.code); releaseXenoTrialsControlsV150(match, 'player', controls()); });
     listen(host, 'blur', pause);
     listen(doc, 'visibilitychange', () => { if (doc.hidden) pause(); });
     listen(doc, 'focusin', event => {
@@ -310,20 +312,25 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     listen(canvas, 'pointerdown', () => canvas.focus?.({ preventScroll: true }));
     const root = options.controlsRoot;
     listen(root, 'keydown', event => {
-      if (!['Space', 'Enter'].includes(event.code)) return;
+      if (!['Space', 'Enter'].includes(event.code) || event.ctrlKey || event.metaKey || event.altKey) return;
       const button = event.target?.closest?.('[data-xeno-action]');
       const action = button?.getAttribute('data-xeno-action');
       if (!ACTIONS.has(action) || !root.contains(button)) return;
       event.preventDefault?.(); event.stopPropagation?.();
-      if (!event.repeat && acceptsControls()) virtual[action] = true;
+      if (!event.repeat && acceptsControls()) buttonKeys.set(event.code, action);
     });
     listen(root, 'keyup', event => {
       if (!['Space', 'Enter'].includes(event.code)) return;
-      const action = event.target?.closest?.('[data-xeno-action]')?.getAttribute('data-xeno-action');
-      if (ACTIONS.has(action)) { virtual[action] = false; event.preventDefault?.(); event.stopPropagation?.(); }
+      // Keyup may target a different button after keyboard focus moves.
+      const released = buttonKeys.delete(event.code);
+      releaseXenoTrialsControlsV150(match, 'player', controls());
+      if (released) { event.preventDefault?.(); event.stopPropagation?.(); }
     });
-    listen(root, 'focusout', () => { for (const action of ACTIONS) virtual[action] = false; });
+    listen(root, 'focusout', () => { buttonKeys.clear(); releaseXenoTrialsControlsV150(match, 'player', controls()); });
     listen(root, 'pointerdown', event => {
+      // Secondary mouse/pen buttons retain their native meaning; multi-touch
+      // contacts use button 0 and must not be rejected by isPrimary.
+      if (event.button !== undefined && event.button !== 0) return;
       const button = event.target?.closest?.('[data-xeno-action]');
       const action = button?.getAttribute('data-xeno-action');
       if (!ACTIONS.has(action) || !root.contains(button) || !acceptsControls()) return;
@@ -332,6 +339,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     });
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(root, type, event => {
       heldPointers.delete(event.pointerId); pointerOwners.delete(event.pointerId);
+      releaseXenoTrialsControlsV150(match, 'player', controls());
     });
   }
   function frame(timestamp) {
@@ -353,7 +361,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     notifyElapsed += dt;
     render(); notify(match.phase === 'match-over' && !emittedResult);
     if (match.phase === 'match-over') { running = false; clearInputs(); }
-    if (!stopped && running && !match.paused) raf = requestFrame(frame);
+    if (!stopped && running && !match.paused && raf === null) raf = requestFrame(frame);
   }
   function loadImage(path) {
     if (options.loadImage) return options.loadImage(path);
@@ -422,7 +430,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     exit() { if (exited || stopped) return; exited = true; stop(); options.onExit?.(); },
     setInput(action, pressed) {
       if (!ACTIONS.has(action)) return;
-      if (pressed !== true) virtual[action] = false;
+      if (pressed !== true) { virtual[action] = false; releaseXenoTrialsControlsV150(match, 'player', controls()); }
       else if (acceptsControls()) virtual[action] = true;
     },
     getState() { return snapshot(); },

@@ -145,6 +145,20 @@ try {
         cover: actor.coverV124 ? { id: actor.coverV124.id, peeking: actor.coverV124.peeking } : null } };
   };
   const snapshot = () => page.evaluate(readLiveState);
+  // Capture a transient action in the SAME browser evaluation that observes it.
+  // The handle contains a detached snapshot, not a live actor object that can
+  // become a hurt/idle pose while another protocol round-trip is in progress.
+  // Arm before the physical command; this only reads gameplay and the canvas.
+  const observeActionFrameV150 = (role, kind) => page.waitForFunction(`({ role, kind }) => {
+    const actor = globalThis.__ATF_GAME__?.[role];
+    const actual = actor?.playerActionVisualV127?.kind;
+    const wanted = kind === 'contextual-melee' ? actor?.meleeClock > 0 && actual === actor.meleeKind : actual === kind;
+    if (!actor?.playerAppearanceVisualV126?.drawn || !wanted) return false;
+    return JSON.parse(JSON.stringify((${readLiveState.toString()})(true)));
+  }`, { role, kind }, { polling: 'raf', timeout: 15000 }).then(async handle => {
+    try { return await handle.jsonValue(); } finally { await handle.dispose(); }
+  });
+
   const capture = async (filename, label) => {
     await page.locator('#game-canvas').screenshot({ path: join(output, filename) });
     report.captures.push({ filename, label, state: await snapshot() });
@@ -824,6 +838,7 @@ try {
   await page.waitForFunction(() => {
     const engine = globalThis.__ATF_GAME__, actor = engine?.player;
     return engine?.running && actor?.grounded && engine.canPerformGameplayAction(actor)
+      && !(actor.v52HurtClock > 0) && !(actor.shockClock > 0)
       && !(actor.fireClock > 0) && !actor.reloading && !(actor.toolUseClock > 0) && !(actor.interactionClock > 0)
       && engine.enemies.some(enemy => enemy.alive && Math.abs(enemy.x + enemy.w / 2 - actor.x - actor.w / 2) < 90
         && Math.abs(enemy.y + enemy.h / 2 - actor.y - actor.h / 2) < 94 && engine.enemyMeleePathClearV64(actor, enemy));
@@ -833,10 +848,14 @@ try {
   // has left reach. Middle pointerdown requests melee immediately and cannot
   // substitute a bullet. The real enemy and all gameplay assertions remain.
   await canvas.focus(); const beforeMelee = await snapshot();
+  const observedMelee = observeActionFrameV150('player', 'contextual-melee');
+  // Attach a handler immediately so a failed input cannot leave an unhandled
+  // rejected observer while the report is being written.
+  observedMelee.catch(() => {});
   await canvas.click({ button: 'middle', position: { x: 24, y: 24 } });
-  await page.waitForFunction(() => globalThis.__ATF_GAME__.player.meleeClock > 0);
-  const meleeKind = await page.evaluate(() => globalThis.__ATF_GAME__.player.meleeKind);
-  const melee = await freezeAction('player', meleeKind, '27-real-melee.png', 'A real contextual melee strike with the selected independent clothing', { freeze: false });
+  const melee = await saveCanvasFrame('27-real-melee.png',
+    'An accepted contextual melee and its real drawn pose captured in one observation', await observedMelee);
+  checkActionPose(melee, melee.player.action.kind, 'player');
   assert.equal(melee.player.ammo, beforeMelee.player.ammo); assert.equal(melee.player.shots, beforeMelee.player.shots);
   assert.ok(melee.player.action.props.length > 0);
   check('An accepted contextual melee attack uses the modular body and its own held implement without firearm ammo use', melee.player.action);

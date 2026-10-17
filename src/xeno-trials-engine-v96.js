@@ -21,6 +21,9 @@ const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(valu
 const ACTIONS = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
 const emptyInput = () => Object.fromEntries(ACTIONS.map(key => [key, false]));
 const input = value => Object.fromEntries(ACTIONS.map(key => [key, value?.[key] === true]));
+// Preserve both physically held and already masked inputs across scene gates.
+const releaseGate = fighter => Object.fromEntries(ACTIONS.map(key => [key,
+  fighter.rearmControls?.[key] === true || fighter.previousInput?.[key] === true]));
 function rng(match) {
   let value = match.rng | 0; value ^= value << 13; value ^= value >>> 17; value ^= value << 5;
   match.rng = value >>> 0; return match.rng / 4294967296;
@@ -80,7 +83,7 @@ function finishRound(match, reason) {
   event(match, 'round-end', { winner, reason, round: match.round });
   for (const fighter of match.fighters) {
     fighter.attack = null; fighter.guard = false;
-    fighter.rearmControls.super = fighter.previousInput.super;
+    fighter.rearmControls = releaseGate(fighter);
   }
   match.projectiles = [];
   const terminal = match.wins.player >= match.config.roundsToWin || match.wins.opponent >= match.config.roundsToWin || match.round >= match.config.roundsToWin * 2 + 1;
@@ -98,7 +101,7 @@ function finishRound(match, reason) {
 export function nextXenoTrialsRoundV96(match) {
   if (!match || match.paused || match.phase !== 'round-over') return false;
   const stats = match.fighters.map(f => f.stats), meters = match.fighters.map(getXenoTrialsSuperMeterV148);
-  const rearm = match.fighters.map(f => ({ ...emptyInput(), super: Boolean(f.rearmControls.super) }));
+  const rearm = match.fighters.map(f => input(f.rearmControls));
   match.fighters = [makeFighter('player', match.config.playerId, match.config.playerVariant), makeFighter('opponent', match.config.opponentId, match.config.opponentVariant)];
   match.fighters.forEach((f, i) => {
     f.stats = stats[i]; f.rearmControls = rearm[i];
@@ -112,8 +115,20 @@ export function nextXenoTrialsRoundV96(match) {
 }
 export function setXenoTrialsPausedV96(match, paused) {
   if (!match || match.phase === 'match-over') return false;
-  if (paused === true) for (const fighter of match.fighters) fighter.rearmControls = { ...fighter.previousInput };
+  if (paused === true) for (const fighter of match.fighters) fighter.rearmControls = releaseGate(fighter);
   match.paused = paused === true; match.accumulator = 0; return true;
+}
+/** Account for source releases during a blocked presentation without advancing
+ * the simulation. Only edge/rearm flags are changed, never pose/HP/resources. */
+export function releaseXenoTrialsControlsV150(match, side, controls = {}) {
+  if (!match || match.phase === 'match-over' || !['player', 'opponent'].includes(side)) return false;
+  const fighter = match.fighters.find(f => f.side === side);
+  if (!fighter) return false;
+  for (const action of ACTIONS) if (controls[action] !== true) {
+    fighter.rearmControls[action] = false;
+    fighter.previousInput[action] = false;
+  }
+  return true;
 }
 function aiInput(match, dt) {
   return stepXenoTrialsBrainV119(match, dt, XENO_TRIALS_ATTACKS_V96, () => rng(match));

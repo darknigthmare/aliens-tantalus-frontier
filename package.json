@@ -46,6 +46,7 @@
     "check:built": "node scripts/verify-release-artifact-v143.mjs",
     "test:trials": "node --test scripts/verify-xeno-trials-v145.mjs",
     "test:trials:plan": "node --test scripts/verify-xeno-trials-plan-v146.mjs",
+    "test:trials:controls": "node --test scripts/verify-xeno-trials-controls-v150.mjs",
     "test:trials:feedback": "node --test scripts/verify-xeno-trials-feedback-v149.mjs",
     "test:trials:supers": "node --test scripts/verify-xeno-trials-supers-v148.mjs",
     "test:trials:signatures": "node --test scripts/verify-xeno-trials-signatures-v147.mjs"
