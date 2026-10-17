@@ -137,20 +137,29 @@ test('recessed rear-wall portals retain their original foot point and image aspe
   }
 });
 
-test('a full opening lift clips its sliding leaf halves inside the rear-wall recess and never changes native access state', () => {
-  const subject = canvas(), image = { complete: true, naturalWidth: 187, naturalHeight: 191 };
+test('a lift keeps its surround fixed while its cropped leaves reveal a masked cabin without changing native access state', () => {
+  let subject = canvas(); const image = { complete: true, naturalWidth: 187, naturalHeight: 191 };
   class Base {
     constructor() { this.propImages = new Map([['/assets/openai/hub/props/lift-door.png', image]]); this.player = { x: 1000, w: 44 }; }
     drawDoor() { subject.native.push('door'); } draw() {} getSnapshot() { return { state: 'native' }; }
   }
   const Hub = withHubSpatialDesignV136(Base), hub = new Hub();
   for (const progress of [0, .5, 1]) {
+    subject = canvas();
     const door = { id: 'lift', lift: true, x: 1000, progress, shaftLabel: 'ASCENSEUR AVANT' }, before = structuredClone(door);
     hub.drawDoor(subject.ctx, door); const model = hub.hubSpatialLiftsV136.get('lift');
-    assert.equal(model.target.h, 156); assert.deepEqual(subject.clips.at(-1), Object.values(model.target));
-    const [left, right] = subject.images.slice(-2); assert.equal(left.at(-1), right.at(-1));
-    assert.equal(left.at(-2), right.at(-2)); assert.deepEqual(door, before);
-    if (progress === 1) { assert.ok(left[5] + left[7] <= model.target.x + 1e-8); assert.ok(right[5] >= model.target.x + model.target.w - 1e-8); }
+    assert.equal(model.target.h, 156); assert.equal(model.interior.schema, 142);
+    assert.deepEqual(subject.images[0], [image, model.target.x, model.target.y, model.target.w, model.target.h]);
+    if (progress === 0) {
+      assert.equal(subject.images.length, 1); assert.equal(subject.paths.length, 0);
+    } else {
+      assert.deepEqual(subject.paths.at(-1), model.interior.openingPolygon);
+      const [left, right] = subject.images.slice(-2); assert.equal(left.at(-1), right.at(-1));
+      assert.equal(left.at(-2), right.at(-2));
+      if (progress === 1) { const opening = model.interior.opening;
+        assert.ok(left[5] + left[7] <= opening.x + 1e-8); assert.ok(right[5] >= opening.x + opening.w - 1e-8); }
+    }
+    assert.deepEqual(door, before); subject.balanced();
   }
   assert.equal(subject.native.length, 0); subject.balanced();
   hub.editorPlaytest = true; hub.drawDoor(subject.ctx, { lift: true }); assert.equal(subject.native.length, 1);

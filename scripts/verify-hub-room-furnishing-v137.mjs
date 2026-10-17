@@ -150,7 +150,7 @@ test('all 35 production plans retain their equipment while clearing the 18 actua
       }
     }
   }
-  assert.deepEqual({count,authored,details,hatches},{count:269,authored:127,details:37,hatches:18});
+  assert.deepEqual({count,authored,details,hatches},{count:299,authored:160,details:37,hatches:18});
   const cryo=rooms.find(room=>room.id==='cryo-bay');
   const oldSlots=getHubRoomLifePlanV136(cryo,{...optionsFor(cryo),legacySupplyOverrides:{
     'capsule-supplies':{y:300},'stasis-service-kit':{y:300}

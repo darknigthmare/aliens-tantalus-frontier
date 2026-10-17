@@ -99,7 +99,11 @@ for (const file of [
   'verify-forge-journey-v141.mjs', 'verify-forge-admission-v141.mjs',
   'verify-forge-mission-v141.mjs', 'verify-forge-ship-v141.mjs', 'verify-forge-decoration-v141.mjs',
   'verify-enemy-distance-gait-v141.mjs', 'verify-hub-annex-npc-life-v141.mjs',
-  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py'
+  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py',
+  'verify-hub-console-support-v142.mjs', 'verify-hub-elevator-interior-v142.mjs',
+  'verify-hub-vent-scene-v142.mjs', 'verify-hub-room-composition-v142.mjs',
+  'verify-player-body-alignment-v142.mjs', 'verify-hub-door-passage-v142.mjs',
+  'verify-hub-door-npc-clearance-v142.mjs'
 ]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.

@@ -8,13 +8,14 @@ import {HUB_DECKS,HUB_WORLD,buildHubObstacleGeometryV87} from '../src/hub-game.j
 import {HUB_ANNEXES_V87} from '../src/hub-annex-registry-v87.js';
 import {HUB_ANNEXES_V71} from '../src/tantalus-hub-expansion-v71.js';
 import {withHubTrainingV132} from '../src/hub-training-v132.js';
+import {withHubNpcLifeV136} from '../src/npc-life-v136.js';
 import {HUB_ROOM_NAVIGATION_V133,validateHubWalkingLaneV133} from '../src/hub-navigation-layout-v133.js';
 import {ELECTRICAL_HAZARD_ART_V55} from '../src/hub-art-runtime-v55.js';
 import {getHubDoorBounds} from '../src/hub-profiles-v53.js';
 import {getHubBulkheadColliderV134} from '../src/hub-bulkhead-depth-v134.js';
 import {createDefaultSave} from '../src/save.js';
 import {requestShipPortDockV87,stepShipPortV87,SHIP_PORT_DEFINITION_V87} from '../src/ship-port-state-v87.js';
-const Engine=withHubTrainingV132(ProductionHub),root=fileURLToPath(new URL('../',import.meta.url));
+const Engine=withHubNpcLifeV136(withHubTrainingV132(ProductionHub)),root=fileURLToPath(new URL('../',import.meta.url));
 // Browser APIs only: contacts, doors, gravity and all movement remain native.
 function size(source){let descriptor;try{descriptor=openSync(resolve(root,`.${new URL(source,'http://fixture.invalid').pathname}`),'r');
   const header=Buffer.alloc(32);readSync(descriptor,header,0,32,0);
@@ -105,7 +106,9 @@ test('commercial annex doors are reachable on foot and their station/cargo remai
   walk(subject,annex.station.bounds.x+annex.station.bounds.w+10);
   assert.equal(subject.hub.player.y,532);assert.equal(subject.hub.nearestAnnexStationV71().annexId,annex.id);
   walk(subject,annex.entranceLocalX+(annex.entranceSide==='west'?annex.entrance.w/2+16:-annex.entrance.w/2-60));
-  tap(subject,'KeyE');advance(subject,.5);assert.equal(subject.hub.currentAnnexV71(),null);
+  // A passing crew member may own the destination until its real patrol clears it.
+  for(let retry=0;retry<120&&subject.hub.currentAnnexV71();retry++){tap(subject,'KeyE');advance(subject,.1);}
+  assert.equal(subject.hub.currentAnnexV71(),null);
   assert.ok(subject.hub.player.y===532&&subject.hub.player.alive);
  }
  assert.equal(HUB_ANNEXES_V87.length,13);
