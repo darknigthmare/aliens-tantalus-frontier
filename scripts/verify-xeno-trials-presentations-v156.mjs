@@ -10,6 +10,7 @@ import { XENO_TRIALS_RIGS_V154 as rigs,getXenoTrialsRigMeshV154 as mesh,drawXeno
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96 as create,stepXenoTrialsMatchV96 as step,nextXenoTrialsRoundV96 as next } from '../src/xeno-trials-engine-v96.js';
 import { createXenoTrialsRuntimeV96 as runtime } from '../src/xeno-trials-runtime-v96.js';
+import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 const copy = x => JSON.parse(JSON.stringify(x));
 const close = (a,b) => assert.ok(Math.abs(a-b)<1e-6,`${a} != ${b}`);
 const HUMAN = 'dd-darwin-era-cultist';
@@ -35,6 +36,26 @@ function host(extra={}) {
   async start(){assert.equal(await r.start(),true);},
   terminal(){for(let i=0;i<2000&&r.getState().phase!=='match-over';i++)frames();assert.equal(r.getState().phase,'match-over');}
  };
+}
+// Exercise the actual constructor's button callback and updateMatch focus state;
+// only unrelated roster rendering is omitted from this small DOM double.
+function attachUi(h) {
+ const elements=new Map([['canvas',h.canvas]]),attributes=new Map();
+ const el=key=>{
+  if(!elements.has(key))elements.set(key,target({tagName:'BUTTON',hidden:false,disabled:false,
+   setAttribute(){},focus(){h.document.activeElement=this;},closest:()=>null}));
+  return elements.get(key);
+ };
+ el('form').elements=new Proxy({}, {get:(_,key)=>el(`form-${String(key)}`)});
+ const root=target({ownerDocument:h.document,
+  getAttribute:key=>attributes.get(key),setAttribute:(key,value)=>attributes.set(key,value),
+  querySelector:selector=>el(selector.match(/data-xt="([^"]+)"/)?.[1]||'super-control')});
+ class MinimalUi extends XenoTrialsUiV96 {
+  updateOpponents() {} restorePendingSelection() {} render() {}
+ }
+ const ui=new MinimalUi({root,getProgress:()=>({}),canCommit:()=>true,onCommit(){},onReturn(){}});
+ ui.active=true;ui.runtime=h.r;
+ return ui;
 }
 const physical = s => copy({tick:s.tick,time:s.timeRemaining,result:s.result,fighters:s.fighters,events:s.events,wins:s.wins,rng:s.rng,projectiles:s.projectiles});
 
@@ -82,6 +103,44 @@ test('intro response reads the actual other fighter family, has no fabricated ri
  const human=sample(rigs[0],c),alien=sample(rigs[0],{...c,opponentFamily:'xenomorph'});assert.notDeepEqual(human.angles,alien.angles);
  assert.equal(sample(rigs[0],{...c,opponentFamily:'invented'}),null);assert.equal(sample(rigs[0],{...c,opponentFamily:undefined}),null);
  assert.deepEqual(m,before);
+});
+test('all admitted opponent families retain the responding native rig on either entrance',()=>{
+ const families=new Set(roster.map(f=>f.family));assert.equal(families.has('hybrid'),true);
+ for(const r of rigs)for(const opponent of roster)for(const side of [0,1]){
+  const m=create({playerId:side?opponent.id:r.fighterId,opponentId:side?r.fighterId:opponent.id,introSeconds:0});
+  const before=copy(m),slot=1-side;
+  const c=cue(r,m,m.fighters[side],{phase:slot?'intro-opponent':'intro-player',fighterSlot:slot,elapsedMs:564,blocksSimulation:true});
+  assert.equal(c.opponentFamily,opponent.family);const frame=sample(r,c);
+  assert.equal(frame?.sequenceIdV156,`${r.fighterId}::intro-rival`,`${r.fighterId} facing ${opponent.id} on side ${side}`);
+  assert.ok(frame.vertices.flat().every(Number.isFinite));assert.deepEqual(m,before);
+ }
+ for(const family of ['invented',undefined,'fauna'])if(!families.has(family))
+  assert.equal(sample(rigs[0],{clip:'intro-rival',progress:.47,elapsed:.564,opponentFamily:family}),null);
+});
+for(const reducedMotion of [false,true])test(`Défi button returns keyboard combat to canvas (reduced motion: ${reducedMotion})`,async()=>{
+ let ui;const h=host({reducedMotion,onState:s=>ui?.updateMatch(s)});ui=attachUi(h);await h.start();
+ h.r.skipSequence();h.r.skipSequence();for(let i=0;i<45&&!h.r.getState().canTauntV156;i++)h.frames();
+ assert.equal(h.r.getState().canTauntV156,true);const before=physical(h.r.getState());
+ h.document.activeElement=ui.el('taunt');ui.el('taunt').onclick();
+ assert.equal(h.document.activeElement,h.canvas);assert.equal(h.r.getState().paused,false);
+ assert.equal(h.r.getState().tauntV156.phase,reducedMotion?'complete':'playing');assert.deepEqual(physical(h.r.getState()),before);
+ for(const [code,action] of [['KeyD','right'],['KeyJ','light'],['KeyS','guard']]){
+  h.window.emit('keydown',{code,target:h.document.activeElement});h.frames();
+  assert.equal(h.r.getState().fighters[0].previousInput[action],true,action);
+  h.window.emit('keyup',{code,target:h.document.activeElement});h.frames();
+ }
+ assert.equal(h.r.pause(),true);const paused=h.r.getState(),modal=ui.el('resume-overlay');
+ assert.equal(h.document.activeElement,modal);ui.el('taunt').onclick();
+ assert.equal(h.document.activeElement,modal);assert.deepEqual(h.r.getState(),paused);
+ h.r.stop();
+});
+test('a refused Défi or a pause during its callback does not move keyboard focus away from its owner',()=>{
+ const h=host(),ui=attachUi(h),button=ui.el('taunt'),modal=ui.el('resume-overlay');
+ h.document.activeElement=button;ui.runtime={taunt:()=>false};button.onclick();assert.equal(h.document.activeElement,button);
+ ui.runtime={taunt(){h.document.activeElement=modal;return true;},getState:()=>({paused:true})};
+ button.onclick();assert.equal(h.document.activeElement,modal);
+ const previous={taunt(){ui.runtime=null;return true;},getState:()=>({paused:false})};
+ ui.runtime=previous;button.onclick();assert.equal(h.document.activeElement,modal);
 });
 test('real time-limit draws admit neutral recovery without awarding wins or altering the terminal engine',()=>{
  const m=finishDraw(),before=copy(m),t=terminal(m,'draw');assert.equal(t.participants.length,2);assert.equal(t.kind,'draw');

@@ -6,6 +6,8 @@ on:
       - 'src/xeno-trials-rig-v154.js'
       - 'src/xeno-trials-rig-data-v154.js'
       - 'src/xeno-trials-restraint-pose-v156.js'
+      - 'src/xeno-trials-engine-v96.js'
+      - 'src/xeno-trials-grapple-v153.js'
       - 'scripts/verify-xeno-trials-restraint-pose-v156.mjs'
       - 'scripts/verify-xeno-trials-rig-v154.mjs'
   workflow_dispatch:
@@ -23,6 +25,13 @@ jobs:
             assets/user/castes-v87
             assets/openai/sprites/static-game-v106
             assets/openai/sprites/static-game-v118
+            src
+            scripts/verify-xeno-trials-restraint-pose-v156.mjs
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify restraint geometry and engine integration
+        run: node --test scripts/verify-xeno-trials-restraint-pose-v156.mjs
       - name: Preserve the four native admitted images without changing pixels
         env:
           OUTPUT: ${{ runner.temp }}/trials-source-art

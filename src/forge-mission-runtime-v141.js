@@ -10,8 +10,8 @@ import { blockedForgeObjectivesV141 } from './forge-journey-v141.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
-const near = (a, b, range = 125) => a && b && Math.hypot(a.x + a.w / 2 - b.x - b.w / 2,
-  a.y + a.h / 2 - b.y - b.h / 2) < range;
+const interactionDistance = (a, b) => Math.hypot(a.x + a.w / 2 - b.x - b.w / 2, a.y + a.h / 2 - b.y - b.h / 2);
+const near = (a, b, range = 125) => a && b && interactionDistance(a, b) < range;
 const ROOM_FIELDS = ['platforms', 'walls', 'lifts', 'ladders', 'covers', 'doors', 'powerNode', 'vents', 'ventShortcut',
   'vehicle', 'weaponPickup', 'toolPickup', 'supplies', 'hazards', 'drops', 'bullets', 'hostileProjectiles', 'particles',
   'enemies', 'objective', 'editorMode', 'editorProjectKind', 'editorGridV136', 'editorTileCount', 'editorTileCounts',
@@ -216,9 +216,20 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
 
     forgeNarrativeTerminalV156(actor = this.player) {
       const room = this.forgeSessionV141?.project.rooms.find(entry => entry.id === this.forgeSessionV141.currentRoomId);
-      return [this.powerNode, this.archiveTerminal].filter(Boolean).find(terminal =>
-        room?.cells.some(cell => cell.id === terminal.forgeCellIdV141 && cell.narrative) && near(actor, terminal, 130)
-        && this.forgeInteractionClearV141(actor, terminal)) || null;
+      const terminal = [this.powerNode, this.archiveTerminal].filter(Boolean).filter(candidate =>
+        room?.cells.some(cell => cell.id === candidate.forgeCellIdV141 && cell.narrative) && near(actor, candidate, 130)
+        && this.forgeInteractionClearV141(actor, candidate))
+        .sort((a, b) => interactionDistance(actor, a) - interactionDistance(actor, b))[0] || null;
+      // Prefer a ready, nearer objective only when E can validate it or confirm
+      // extraction. A finished local objective cannot hide a story that may
+      // unlock the remaining remote objectives. Native power/archive checks
+      // still let a terminal unlock an unfinished objective before validation.
+      const session = this.forgeSessionV141;
+      const objectiveActionable = session && this.objective && (!session.completedObjectives.includes(this.objective.forgeCellIdV141)
+        || list(this.forgeRequiredObjectivesV141).every(id => session.completedObjectives.includes(id)));
+      if (terminal && objectiveActionable && near(actor, this.objective) && this.forgeInteractionClearV141(actor, this.objective)
+        && !super.missingExtractionRequirement() && interactionDistance(actor, this.objective) <= interactionDistance(actor, terminal)) return null;
+      return terminal;
     }
 
     syncForgeNarrativeRewardsV156(result) {

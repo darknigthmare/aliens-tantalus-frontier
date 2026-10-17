@@ -77,7 +77,7 @@ export function sampleXenoTrialsSequenceV155(rig, cue, reducedMotion = false) {
   const prior=getXenoTrialsSequenceV155(rig,cue.previousKind).keys.at(-1).angles;
   keys=keys.map((k,i)=>i<2?{...k,angles:scaleAngles(prior,i===0?1:.78)}:k);
  } else if(s.kind==='intro-rival') {
-  const gains={human:.85,synthetic:.75,xenomorph:1,pathogen:1.1,engineer:.9};
+  const gains={human:.85,synthetic:.75,xenomorph:1,pathogen:1.1,engineer:.9,hybrid:.95};
   if(!Object.hasOwn(gains,cue.opponentFamily))return null;
   keys=keys.map(k=>({...k,angles:scaleAngles(k.angles,gains[cue.opponentFamily])}));
  }

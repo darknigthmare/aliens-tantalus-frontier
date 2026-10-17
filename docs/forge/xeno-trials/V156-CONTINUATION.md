@@ -20,7 +20,7 @@ et Guardian. Le catalogue cumulatif `XENO_TRIALS_SEQUENCES_V156` contient
 Les cinq ajouts par identité sont les suivants :
 
 - `intro-rival` : réaction à la famille effective de l’adversaire pendant son
-  entrée, sur 1 200 ms. Aucune rivalité historique ou réplique canonique n’est
+  entrée, y compris les hybrides, sur 1 200 ms. Aucune rivalité historique ou réplique canonique n’est
   postulée.
 - `outro` : retour de la pose terminale réellement jouée vers la vigilance,
   sur 600 ms après la réaction finale V155 de 1 800 ms. La sortie spatiale par
@@ -29,7 +29,8 @@ Les cinq ajouts par identité sont les suivants :
   ou de match, sans vainqueur inventé.
 - `taunt` : défi de simulation sur 1 100 ms, par T ou le bouton DÉFI, au sol et
   pendant le combat actif. Le combat continue ; déplacement, garde, attaque
-  ou impact interrompent la présentation. Ce geste n’ajoute aucun pouvoir.
+  ou impact interrompent la présentation. Le bouton rend le focus au canvas
+  quand le combat accepte les commandes. Ce geste n’ajoute aucun pouvoir.
 - `rematch` : reprise pendant les 3 000 ms du décompte déjà utilisé pour les
   manches suivantes. La réinitialisation physique reste celle du moteur.
 
@@ -95,8 +96,19 @@ réponse doit attribuer est refusé.
 
 L’inspecteur permet l’édition avec annulation/rétablissement. L’import/export,
 les versions et différences V136 conservent les récits ; les copies ne
-remappent que les objectifs copiés avec elles. En playtest Mission et Vaisseau,
-E ouvre le vrai terminal. Les choix se font dans une fenêtre DOM au clavier
+remappent que les objectifs copiés avec elles. La capture d’un assemblage,
+sa bibliothèque, sa rotation et sa pose conservent aussi les références aux
+objectifs extérieurs à la sélection. Ces références sont résolues au placement ;
+l’aperçu et la pose refusent un objectif externe absent, décoratif ou en conflit
+physique. L’admission du projet complet conserve sa validation stricte.
+
+En playtest Mission et Vaisseau, E ouvre le vrai terminal. En Mission,
+le récit le plus proche est sélectionné ; un objectif plus proche et
+physiquement activable garde la priorité. Un objectif déjà terminé ne capte
+plus E tant qu’un autre objectif reste à accomplir : le récit peut alors valider
+l’objectif distant. Une fois tous les objectifs validés, la commande native
+d’extraction reste disponible. La première activation du terminal d’énergie
+reste disponible. Les choix se font dans une fenêtre DOM au clavier
 ou au clic, avec le monde suspendu. Le curseur, l’historique et les objectifs
 restent en mémoire au changement de salle puis au retour.
 

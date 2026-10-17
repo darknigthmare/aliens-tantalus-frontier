@@ -163,7 +163,11 @@ export class XenoTrialsUiV96 {
     this.el('pause').onclick = () => { if (!this.runtime || this.unsavedResult) return; this.runtime.getState().paused ? this.runtime.resume() : this.runtime.pause(); };
     this.el('next').onclick = () => this.runtime?.nextRound();
     this.el('skip-sequence').onclick = () => this.runtime?.skipSequence();
-    this.el('taunt').onclick = () => this.runtime?.taunt();
+    this.el('taunt').onclick = () => {
+      const runtime = this.runtime;
+      if (runtime?.taunt() && this.runtime === runtime && !runtime.getState().paused)
+        this.el('canvas').focus({ preventScroll: true });
+    };
     this.el('retry-save').onclick = () => this.finish(this.unsavedResult);
     this.updateOpponents(); this.restorePendingSelection(); this.render();
   }

@@ -41,12 +41,12 @@ export function parseForgeNarrativeV156(raw, type, layer) {
   for (const node of nodes) visit(node.id);
   return { schema: 1, title: text(raw.title, 100, 'titre'), start: raw.start, nodes };
 }
-export function validateForgeNarrativeReferencesV156(rooms) {
+export function validateForgeNarrativeReferencesV156(rooms, externalObjectiveIds = new Set()) {
   const objectives = new Set(rooms.flatMap(room => room.cells.filter(cell => cell.type === 'objective' && !['background', 'foreground'].includes(cell.layer)).map(cell => cell.id)));
   const terminals = rooms.flatMap(room => room.cells.filter(cell => cell.narrative));
   if (terminals.length > 64) fail('64 terminaux narratifs maximum.');
   for (const cell of terminals) for (const node of cell.narrative.nodes) for (const choice of node.choices) {
-    for (const key of ['requiresObjectiveId', 'rewardObjectiveId']) if (choice[key] && !objectives.has(choice[key])) fail(`objectif « ${choice[key]} » introuvable.`);
+    for (const key of ['requiresObjectiveId', 'rewardObjectiveId']) if (choice[key] && !objectives.has(choice[key]) && !externalObjectiveIds.has(choice[key])) fail(`objectif « ${choice[key]} » introuvable.`);
     if (choice.requiresObjectiveId && choice.requiresObjectiveId === choice.rewardObjectiveId) fail('une réponse ne peut pas exiger sa propre récompense.');
   }
 }

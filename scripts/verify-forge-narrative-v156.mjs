@@ -8,6 +8,8 @@ import { ForgeVersionStoreV136, parseForgeVersionsV136, compareForgeDocumentsV13
 import { missionV136, hostV136 } from './forge-native-host-v136.mjs';
 import { HubGame as PhysicalHub } from '../src/hub-v51-runtime.js';
 import { withForgeShipRuntimeV141 } from '../src/forge-ship-runtime-v141.js';
+import { captureAssemblyV133, normalizeAssemblyV133, transformAssemblyV133, placementPreviewV133, stampAssemblyV133,
+  ForgeAssemblyLibraryV133, parseAssemblyLibraryV133, ASSEMBLY_KEY_V133 } from '../src/forge-authoring-v133.js';
 
 function project(kind = 'mission') {
   const floor = kind === 'mission' ? 16 : 15;
@@ -259,4 +261,215 @@ test('a refused native Ship replacement preserves the open story transaction', t
   assert.throws(() => engine.start({}, { editorProject: invalid, forgeJourneyV141: true }), /refusé/);
   assert.equal(engine.forgeSessionV141, session); assert.equal(engine.closeForgeNarrativeV156, close);
   assert.equal(engine.forgeNarrativeOpenV156, 'a-terminal');
+});
+
+
+test('P2: terminal-only assembly capture preserves real external objectives through library export/load and transforms', () => {
+  const model = new ForgeModel(project()), before = structuredClone(model.data);
+  const assembly = captureAssemblyV133(model, ['a-terminal'], 'Terminal seul');
+  assert.deepEqual(model.data, before);
+  const storage = new Map(), adapter = { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) };
+  const first = new ForgeAssemblyLibraryV133(adapter); first.load(); first.add(assembly);
+  const loaded = new ForgeAssemblyLibraryV133(adapter); loaded.load(); assert.equal(loaded.protected, false);
+  const exported = parseAssemblyLibraryV133(loaded.export());
+  const normalized = normalizeAssemblyV133(exported.entries[0]);
+  let rotated = normalized;
+  for (let turn = 0; turn < 4; turn++) rotated = transformAssemblyV133(rotated, { turns: 1 });
+  assert.deepEqual(rotated, normalized);
+  const mirrored = transformAssemblyV133(transformAssemblyV133(normalized, { flipX: true }), { flipX: true });
+  assert.deepEqual(mirrored, normalized);
+  const response = normalized.cells[0].narrative.nodes[0].choices[0];
+  assert.equal(response.requiresObjectiveId, 'a-goal'); assert.equal(response.rewardObjectiveId, 'b-goal');
+  assert.equal(loaded.merge(first.export()), 1); assert.equal(loaded.data.entries.length, 2);
+});
+
+test('P2: terminal-only stamping keeps external bindings and each copy remains independently undoable', () => {
+  const model = new ForgeModel(project()), original = structuredClone(model.data);
+  const assembly = captureAssemblyV133(model, ['a-terminal'], 'Terminal seul');
+  const one = stampAssemblyV133(model, assembly, 16, 12), afterOne = structuredClone(model.data);
+  const two = stampAssemblyV133(model, assembly, 18, 12);
+  assert.notEqual(one[0], two[0]);
+  for (const cellId of [...one, ...two]) {
+    const response = model.room.cells.find(cell => cell.id === cellId).narrative.nodes[0].choices[0];
+    assert.equal(response.requiresObjectiveId, 'a-goal'); assert.equal(response.rewardObjectiveId, 'b-goal');
+  }
+  model.undo(); assert.deepEqual(model.data, afterOne);
+  model.undo(); assert.deepEqual(model.data, original);
+  model.redo(); assert.deepEqual(model.data, afterOne);
+});
+
+test('P2: assembly stamping remaps selected objectives while preserving external rewards', () => {
+  const model = new ForgeModel(project());
+  const assembly = captureAssemblyV133(model, ['a-terminal', 'a-goal'], 'Terminal et relevé');
+  const inserted = stampAssemblyV133(model, assembly, 16, 12);
+  const terminal = model.room.cells.find(cell => inserted.includes(cell.id) && cell.narrative);
+  const goal = model.room.cells.find(cell => inserted.includes(cell.id) && cell.type === 'objective');
+  const response = terminal.narrative.nodes[0].choices[0];
+  assert.equal(response.requiresObjectiveId, goal.id); assert.notEqual(goal.id, 'a-goal');
+  assert.equal(response.rewardObjectiveId, 'b-goal');
+});
+
+test('P2: external cell-N objectives never alias canonical assembly cells or paste remapping', () => {
+  const input = project(); input.rooms[0].cells.find(cell => cell.id === 'a-goal').id = 'cell-1';
+  story(input).nodes[0].choices[0].requiresObjectiveId = 'cell-1';
+  const model = new ForgeModel(input), assembly = captureAssemblyV133(model, ['a-terminal'], 'Liaison cell-1');
+  assert.notEqual(assembly.cells[0].id, 'cell-1');
+  assert.deepEqual(normalizeAssemblyV133(assembly), assembly);
+  const [inserted] = stampAssemblyV133(model, assembly, 16, 12);
+  assert.equal(model.room.cells.find(cell => cell.id === inserted).narrative.nodes[0].choices[0].requiresObjectiveId, 'cell-1');
+});
+
+test('P2: assembly preview and stamp reject unresolved, non-objective or decorative target bindings atomically', () => {
+  const source = new ForgeModel(project()), assembly = captureAssemblyV133(source, ['a-terminal'], 'Terminal seul');
+  for (const disposition of ['absent', 'wall', 'decorative']) {
+    const input = project(); delete input.rooms[0].cells.find(cell => cell.id === 'a-terminal').narrative;
+    if (disposition === 'absent') input.rooms[0].cells = input.rooms[0].cells.filter(cell => cell.id !== 'a-goal');
+    if (disposition === 'wall') input.rooms[0].cells.find(cell => cell.id === 'a-goal').type = 'wall';
+    if (disposition === 'decorative') input.rooms[0].cells.find(cell => cell.id === 'a-goal').layer = 'background';
+    const target = new ForgeModel(input), before = structuredClone(target.data);
+    const preview = placementPreviewV133(target, assembly, 16, 12);
+    assert.equal(preview.ok, false); assert.ok(preview.errors.some(error => error.includes('a-goal')));
+    assert.throws(() => stampAssemblyV133(target, assembly, 16, 12), /objectif externe introuvable/);
+    assert.deepEqual(target.data, before); assert.equal(target.history.length, 0);
+  }
+});
+
+test('P2: assembly library keeps strict story admission, local objective types and prior bytes on invalid import', () => {
+  const model = new ForgeModel(project()), captured = captureAssemblyV133(model, ['a-terminal'], 'Terminal seul');
+  const storage = new Map(), adapter = { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) };
+  const library = new ForgeAssemblyLibraryV133(adapter); library.load(); library.add(captured);
+  const before = library.export(), disk = storage.get(ASSEMBLY_KEY_V133);
+  for (const mutate of [
+    input => input.cells[0].narrative.nodes[0].choices[0].next = 'start',
+    input => input.cells[0].narrative.nodes[0].text = 'x'.repeat(601),
+    input => input.cells[0].narrative.nodes[0].choices[0].rewardObjectiveId = 'a-goal',
+    input => { input.cells.push({ id: 'a-goal', x: 1, y: 0, type: 'wall', layer: 'structure' }); },
+    input => { input.cells.push({ id: input.cells[0].id, x: 1, y: 0, type: 'objective', layer: 'gameplay' }); },
+  ]) {
+    const invalid = structuredClone(captured); invalid.id = 'invalid'; mutate(invalid);
+    assert.throws(() => library.merge({ schema: 1, entries: [invalid] }));
+    assert.equal(library.export(), before); assert.equal(storage.get(ASSEMBLY_KEY_V133), disk);
+  }
+  const untrusted = structuredClone(captured); untrusted.cells[0].script = 'execute';
+  untrusted.cells[0].narrative.script = 'execute'; untrusted.cells[0].narrative.nodes[0].script = 'execute';
+  const clean = normalizeAssemblyV133(untrusted);
+  assert.equal(clean.cells[0].script, undefined); assert.equal(clean.cells[0].narrative.script, undefined);
+  assert.equal(clean.cells[0].narrative.nodes[0].script, undefined);
+});
+
+test('P2: unresolved assembly bindings never weaken complete project import or playtest admission', () => {
+  const model = new ForgeModel(project()), assembly = captureAssemblyV133(model, ['a-terminal'], 'Terminal seul');
+  assert.ok(assembly.cells[0].narrative);
+  const invalid = project(); invalid.rooms[1].cells = invalid.rooms[1].cells.filter(cell => cell.id !== 'b-goal');
+  assert.throws(() => parseProject(invalid), /objectif.*b-goal.*introuvable/);
+  const before = structuredClone(model.data); assert.throws(() => model.load(invalid), /introuvable/);
+  assert.deepEqual(model.data, before); assert.equal(model.history.length, 0);
+});
+
+function closeObjectiveProjectV156({ size = [32, 18], spawnX = 4, goalX = 5, terminalX = 6, secondTerminalX = null } = {}) {
+  const [columns, rows] = size, ground = rows - 2;
+  const cell = (id, x, type, layer = 'gameplay') => ({ id, x, y: ground - 1, type, layer });
+  const narrative = { schema: 1, title: 'Journal voisin', start: 'read', nodes: [
+    { id: 'read', text: 'Consulter le relevé voisin.', choices: [{ id: 'finish', label: 'Terminer la lecture', next: 'done' }] },
+    { id: 'done', text: 'Lecture achevée.', choices: [] }
+  ] };
+  return { schema: 3, kind: 'mission', name: 'Objectif et lecture voisins', activeRoomId: 'close', links: [], rooms: [
+    { id: 'close', name: 'Poste de relevé', size, cells: [
+      ...Array.from({ length: columns }, (_, x) => ({ id: `floor-${x}`, x, y: ground, type: 'floor', layer: 'structure' })),
+      cell('spawn', spawnX, 'spawn'), cell('goal', goalX, 'objective'),
+      { ...cell('terminal', terminalX, 'terminal'), narrative },
+      ...(secondTerminalX === null ? [] : [{ ...cell('archive', secondTerminalX, 'terminal'), narrative: structuredClone(narrative) }])
+    ] }
+  ] };
+}
+const centerDistanceV156 = (actor, target) => Math.hypot(actor.x + actor.w / 2 - target.x - target.w / 2,
+  actor.y + actor.h / 2 - target.y - target.h / 2);
+
+test('review P2: native E reads pending power then validates and extracts at the same overlapping objective position', t => {
+  const input = closeObjectiveProjectV156(), runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop()); walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156()));
+  assert.ok(centerDistanceV156(engine.player, engine.objective) < 125);
+  assert.ok(centerDistanceV156(engine.player, engine.powerNode) < 130);
+  assert.ok(centerDistanceV156(engine.player, engine.objective) < centerDistanceV156(engine.player, engine.powerNode));
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.powerNode.active, true);
+  engine.closeForgeNarrativeV156(); const position = { x: engine.player.x, y: engine.player.y };
+  assert.equal(engine.forgeNarrativeTerminalV156(), null); assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/);
+  tap(runtime); assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']);
+  assert.equal(engine.forgeNarrativeOpenV156, null); assert.match(engine.getInteractionPrompt(), /CONFIRMER L’EXTRACTION/);
+  tap(runtime); assert.equal(engine.mission.state, 'complete'); assert.deepEqual({ x: engine.player.x, y: engine.player.y }, position);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']);
+});
+
+test('review P2: the nearer narrative terminal remains readable when its ready objective shares the reach range', t => {
+  const runtime = missionV136({ editorProject: closeObjectiveProjectV156(), forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop()); walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156())); tap(runtime); engine.closeForgeNarrativeV156();
+  walk(engine, () => centerDistanceV156(engine.player, engine.powerNode) < centerDistanceV156(engine.player, engine.objective));
+  assert.ok(centerDistanceV156(engine.player, engine.objective) < 125); assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/);
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.deepEqual(engine.forgeSessionV141.completedObjectives, []);
+  engine.closeForgeNarrativeV156(); walk(engine, () => centerDistanceV156(engine.player, engine.objective) < centerDistanceV156(engine.player, engine.powerNode), -1);
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']);
+});
+
+test('review P2: two overlapping stories select the nearest physical terminal before the objective is ready', t => {
+  const input = closeObjectiveProjectV156({ size: [128, 72], spawnX: 12, goalX: 6, terminalX: 10, secondTerminalX: 14 });
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop()); walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < centerDistanceV156(engine.player, engine.powerNode));
+  assert.ok(centerDistanceV156(engine.player, engine.powerNode) < 130);
+  assert.equal(engine.forgeNarrativeTerminalV156().forgeCellIdV141, 'archive'); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'archive'); assert.equal(engine.archiveTerminal.recovered, true); assert.equal(engine.powerNode.active, false);
+  engine.closeForgeNarrativeV156();
+  walk(engine, () => centerDistanceV156(engine.player, engine.powerNode) < centerDistanceV156(engine.player, engine.archiveTerminal), -1);
+  assert.equal(engine.forgeNarrativeTerminalV156().forgeCellIdV141, 'terminal'); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.powerNode.active, true);
+});
+
+test('review P2: prompt and E ignore a nearer target across a newly sealed partition', t => {
+  const runtime = missionV136({ editorProject: closeObjectiveProjectV156(), forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop()); walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156())); tap(runtime); engine.closeForgeNarrativeV156();
+  const original = structuredClone(engine.forgeSessionV141.project), position = { x: engine.player.x, y: engine.player.y };
+  // Explicit runtime fixture: a thin emergency partition seals one hand path
+  // after the player has genuinely read and activated the native power node.
+  const partition = { id: 'runtime-partition', x: engine.player.x - 12, y: engine.player.y - 10, w: 6, h: engine.player.h + 20 };
+  engine.walls.push(partition);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.objective), false);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.powerNode), true);
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.deepEqual(engine.forgeSessionV141.completedObjectives, []);
+  engine.closeForgeNarrativeV156(); partition.x = engine.player.x + engine.player.w + 2;
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.objective), true);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.powerNode), false);
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, null); assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']);
+  assert.deepEqual({ x: engine.player.x, y: engine.player.y }, position);
+  assert.deepEqual(engine.forgeSessionV141.project, original);
+});
+
+test('review P2: a completed nearby objective yields E to its conditional story until the remote reward permits extraction', t => {
+  const input = closeObjectiveProjectV156(), room = input.rooms[0];
+  room.cells.find(cell => cell.id === 'terminal').narrative = { schema: 1, title: 'Relais conditionnel', start: 'read', nodes: [
+    { id: 'read', text: 'Transmettre après le relevé local.', choices: [
+      { id: 'transmit', label: 'Valider le relais B', next: 'done', requiresObjectiveId: 'goal', rewardObjectiveId: 'b-goal' }
+    ] }, { id: 'done', text: 'Relais B validé.', choices: [] }
+  ] };
+  room.cells.push({ id: 'close-exit', x: 10, y: 15, type: 'door', layer: 'gameplay' });
+  input.rooms.push(project().rooms[1]);
+  input.links.push({ id: 'ab', from: { roomId: 'close', cellId: 'close-exit' }, to: { roomId: 'b', cellId: 'b-door' }, bidirectional: true });
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop()); walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156()));
+  const position = { x: engine.player.x, y: engine.player.y };
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal');
+  assert.equal(engine.chooseForgeNarrativeV156('transmit').reason, 'objective-required');
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, []); engine.closeForgeNarrativeV156();
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']); assert.equal(engine.mission.state, 'active');
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal');
+  assert.equal(engine.chooseForgeNarrativeV156('transmit').rewardedObjectiveId, 'b-goal');
+  engine.closeForgeNarrativeV156(); assert.match(engine.getInteractionPrompt(), /CONFIRMER L’EXTRACTION/);
+  tap(runtime); assert.equal(engine.mission.state, 'complete');
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal', 'b-goal']);
+  assert.equal(engine.forgeSessionV141.transitions, 0);
+  assert.deepEqual({ x: engine.player.x, y: engine.player.y }, position);
 });
