@@ -1,6 +1,9 @@
+import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
+import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
+import { getXenoTrialsStageMotionV147, drawXenoTrialsStageMotionV147, getXenoTrialsStageCueV149 } from './xeno-trials-stage-motion-v147.js';
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, setXenoTrialsPausedV96,
-  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
+  getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, releaseXenoTrialsControlsV150, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
 import { createXenoPresentationV97, getXenoPresentationViewV97, advanceXenoPresentationV97 } from './xeno-trials-presentation-v97.js';
 import { getXenoTrialsRenderMetricsV105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
@@ -8,10 +11,10 @@ import { requestEnemyImportAnimationV107, drawEnemyImportAnimationV107,
 import { requestEnemyImportAttackV109, drawEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { getXenoTrialsDisplayScaleV110, getXenoTrialsRenderMetricsV110, createXenoTrialsCameraV119 } from './xeno-trials-scale-v110.js';
 import { drawXenoTrialsArenaLayersV119, drawXenoTrialsArenaOverlayV119 } from './xeno-trials-arena-layers-v119.js';
-import { getSynthTrialAttackV110, drawSynthConeV110 } from './synth-combat-v110.js';
+import { drawSynthConeV110 } from './synth-combat-v110.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
-  ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special' });
+  ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super' });
 const ACTIONS = new Set(Object.values(KEY_ACTION));
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
@@ -40,28 +43,47 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let cameraView = camera.getState(), frameDelta = 0;
   let presentation = createXenoPresentationV97();
   const presentationView = () => getXenoPresentationViewV97(presentation);
+  const reduceMotion = () => options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
+    || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
+    supersV148: match.fighters.map(fighter => ({ side: fighter.side, ...getXenoTrialsSuperReadinessV148({ ...match, presentation: presentationView() }, fighter, getXenoTrialsFighterV96(fighter.id)) })),
+    stageAnimationV147: getXenoTrialsStageMotionV147(stage.id, match.tick, reduceMotion()),
+    stageCueV149: getXenoTrialsStageCueV149(stage.id, { ...match, presentation: presentationView() }, reduceMotion()),
+    combatSignaturesV147: match.fighters.map(fighter => {
+      const signature = getXenoTrialsSignatureV147(getXenoTrialsFighterV96(fighter.id));
+      return { side: fighter.side, id: signature?.id || null, canonExact: false, animation: signature?.animation || null };
+    }),
     stageVisual: !stage.backdrop ? 'procedural' : images.has(stage.backdrop) ? 'backdrop-ready' : loaded ? 'procedural-fallback' : 'loading' });
-  const images = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
+  const images = new Map(), buttonKeys = new Map(), heldKeys = new Set(), blockedKeys = new Set(), heldPointers = new Map(), pendingLoads = new Set(), virtual = {}, listeners = [];
   const observedMovement = createEnemyImportMotionTrackerV107();
-  let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null;
+  let running = false, stopped = false, loaded = false, loading = null, raf = null, previousTime = null, exited = false;
+  const pointerOwners = new Map();
+  const windowAvailable = () => doc?.hidden !== true && doc?.hasFocus?.() !== false;
+  const acceptsControls = () => running && loaded && !stopped && !assetFailure && !match.paused
+    && match.phase === 'active' && windowAvailable() && !presentationView().blocksSimulation;
   let emittedResult = false, notifyElapsed = 0, lastStatus = '', assetFailure = false;
   const originalSize = { width: canvas.width, height: canvas.height };
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
   canvas.width = XENO_TRIALS_ARENA_V96.width; canvas.height = XENO_TRIALS_ARENA_V96.height;
   canvas.setAttribute?.('data-xeno-display-scale-v110', String(displayScale));
-  canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Flèches pour se déplacer, J K L pour attaquer, S pour la garde, P pour la pause.');
+  canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Flèches pour se déplacer, J K L pour attaquer, I pour le super chargé, S pour la garde, P pour la pause.');
 
   function listen(target, type, handler, settings) {
     if (!target?.addEventListener) return;
     target.addEventListener(type, handler, settings); listeners.push(() => target.removeEventListener(type, handler, settings));
   }
-  function clearInputs() { heldKeys.clear(); heldPointers.clear(); for (const key of ACTIONS) virtual[key] = false; }
+  function clearInputs() {
+    heldKeys.clear(); buttonKeys.clear(); heldPointers.clear(); for (const key of ACTIONS) virtual[key] = false;
+    releaseXenoTrialsControlsV150(match, 'player', controls());
+    const captures = [...pointerOwners]; pointerOwners.clear();
+    for (const [id, button] of captures) { try { button.releasePointerCapture?.(id); } catch {} }
+  }
   function controls() {
     const result = { ...virtual };
     for (const key of heldKeys) result[KEY_ACTION[key]] = true;
     for (const action of heldPointers.values()) result[action] = true;
+    for (const action of buttonKeys.values()) result[action] = true;
     return result;
   }
   function statusText() {
@@ -75,13 +97,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     return `Manche ${match.round}, ${Math.ceil(match.timeRemaining)} secondes. Santé ${Math.ceil(match.fighters[0].hp)} contre ${Math.ceil(match.fighters[1].hp)}.`;
   }
   function notify(force = false) {
-    if (!force && notifyElapsed < .12) return;
+    if (stopped || !force && notifyElapsed < .12) return;
     notifyElapsed = 0;
     const status = statusText();
     if (options.statusElement && status !== lastStatus) options.statusElement.textContent = status;
     lastStatus = status;
     options.onState?.(snapshot());
-    if (match.result && !emittedResult) { emittedResult = true; options.onResult?.({ ...match.result, wins: { ...match.result.wins }, playerStats: { ...match.result.playerStats }, opponentStats: { ...match.result.opponentStats } }); }
+    if (!stopped && match.result && !emittedResult) { emittedResult = true; options.onResult?.({ ...match.result, wins: { ...match.result.wins }, playerStats: { ...match.result.playerStats }, opponentStats: { ...match.result.opponentStats } }); }
   }
   function text(content, x, y, size = 16, color = '#d7e9ed', align = 'left', maxWidth = null) {
     const weight = size >= 22 ? 'bold ' : '';
@@ -104,6 +126,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   }
   function drawArena() {
     drawXenoTrialsArenaLayersV119(context, stage, images, cameraView, match.tick);
+    drawXenoTrialsStageMotionV147(context, stage, cameraView, match.tick, reduceMotion(), { ...match, presentation: presentationView() });
   }
   function drawFighter(fighter) {
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
@@ -117,14 +140,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const moving = displaced && (Boolean(fighter.previousInput?.left) !== Boolean(fighter.previousInput?.right))
       && fighter.hp > 0 && !fighter.attack && !fighter.guard && fighter.stun <= 0
       && fighter.hitFlash <= 0 && fighter.y === 0 && match.phase === 'active';
-    const reducedMotion = options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
-      || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
+    const reducedMotion = reduceMotion();
     // The engine owns the attack clock and locked facing. Art cannot restart an
     // attack, extend its active window or change collision/damage/save data.
     const canShowAttack = fighter.hp > 0 && fighter.y === 0 && fighter.stun <= 0
       && fighter.hitFlash <= 0 && !fighter.guard && match.phase === 'active';
     const attackDrawn = canShowAttack && drawEnemyImportAttackV109(context, art, images, {
-      attack: fighter.attack, spec: XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind], reducedMotion,
+      attack: fighter.attack, spec: getXenoTrialsAttackV147(definition, fighter.attack?.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind]), reducedMotion,
       height, x: fighter.x, y: ground, facing: fighter.attack?.facing,
       maxHorizontalExtent: null
     });
@@ -145,17 +167,19 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.beginPath(); context.arc(face, ground - body.height * .55, body.height * .48,
         fighter.facing > 0 ? -Math.PI / 2 : Math.PI / 2, fighter.facing > 0 ? Math.PI / 2 : Math.PI * 1.5); context.stroke();
     }
-    if (fighter.attack && !(fighter.attack.kind === 'special' && ['flame', 'detonation'].includes(definition.special))) {
-      const attack = fighter.attack, spec = XENO_TRIALS_ATTACKS_V96[attack.kind], windowStart = spec.startup;
-      if (attack.age >= windowStart && attack.age < windowStart + .12) {
-        context.strokeStyle = attack.kind === 'special' ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
+    if (fighter.attack && !(['special', 'super'].includes(fighter.attack.kind)
+      && ['flame', 'detonation', 'acid', 'pulse', 'ground-wave', 'acid-cluster', 'aimed-acid'].includes(getXenoTrialsSpecialStyleV147(definition)))) {
+      const attack = fighter.attack, spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]), windowStart = spec.startup;
+      if (attack.age >= windowStart && attack.age < windowStart + spec.active) {
+        context.strokeStyle = ['special', 'super'].includes(attack.kind) ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
         const face = attack.facing > 0 ? body.right : body.left, reach = spec.reach * definition.reach;
-        context.beginPath(); context.moveTo(face, ground - body.height * .85);
-        context.quadraticCurveTo(face + attack.facing * reach, ground - body.height * .55,
-          face + attack.facing * reach * .5, ground - body.height * .15); context.stroke();
+        const strikeHeight = body.height * (spec.contactHeightRatioV151 || 1);
+        context.beginPath(); context.moveTo(face, ground - strikeHeight * .85);
+        context.quadraticCurveTo(face + attack.facing * reach, ground - strikeHeight * .55,
+          face + attack.facing * reach * .5, ground - strikeHeight * .15); context.stroke();
       }
     }
-    if (fighter.stun > .4) text('GARDE BRISÉE', fighter.x, ground - height * bottom - 12, 12, '#ffb86b', 'center');
+    if (fighter.guardBrokenV147 && fighter.stun > 0) text('GARDE BRISÉE', fighter.x, ground - height * bottom - 12, 12, '#ffb86b', 'center');
   }
   function render() {
     if (stopped) return;
@@ -167,32 +191,50 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     // Feedback uses physical hitbox coordinates, not the independently scaled portrait.
     for (const fighter of match.fighters) {
       const definition = getXenoTrialsFighterV96(fighter.id), attack = fighter.attack;
-      if (attack?.kind !== 'special' || !['flame', 'detonation'].includes(definition.special)) continue;
-      const body = getXenoTrialsBodyBoundsV105(fighter), spec = getSynthTrialAttackV110(definition, 'special', XENO_TRIALS_ATTACKS_V96.special);
-      if (definition.special === 'flame' && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
+      if (!['special', 'super'].includes(attack?.kind)) continue;
+      const style = getXenoTrialsSpecialStyleV147(definition), signature = attack.kind === 'super' ? getXenoTrialsSuperV148(definition) : getXenoTrialsSignatureV147(definition);
+      if (signature && attack.age < signature.spec.startup) {
+        const body = getXenoTrialsBodyBoundsV105(fighter);
+        context.strokeStyle = '#e4d397'; context.lineWidth = 2;
+        context.beginPath(); context.moveTo(body.left, 450 - body.top - 8);
+        context.lineTo(body.left + body.width * Math.min(1, attack.age / signature.spec.startup), 450 - body.top - 8); context.stroke();
+        text(signature.label.toUpperCase(), fighter.x, 450 - body.top - 18, 12, '#e4d397', 'center');
+      }
+      if (!['flame', 'detonation'].includes(style)) continue;
+      const body = getXenoTrialsBodyBoundsV105(fighter), spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96.special);
+      if (style === 'flame' && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
         drawSynthConeV110(context, attack.facing > 0 ? body.right : body.left, 450 - fighter.y - body.height * .55, attack.facing, spec.reach);
-      if (definition.special === 'detonation' && !attack.hit) {
+      if (style === 'detonation' && !attack.hit) {
         context.strokeStyle = '#ffb364'; context.lineWidth = 3;
         context.strokeRect(body.left - 5, 450 - body.top - 5, body.width + 10, body.height + 10);
-        text('SURCHARGE', fighter.x, 450 - body.top - 13, 12, '#ffca83', 'center');
+        text(definition.family === 'synthetic' ? 'SURCHARGE' : 'DÉTONATION', fighter.x, 450 - body.top - 13, 12, '#ffca83', 'center');
       }
     }
     for (const effect of match.synthEffectsV110 || []) {
-      context.fillStyle = '#ffc56c55'; context.strokeStyle = '#ffecc5'; context.lineWidth = 3; context.beginPath();
-      context.arc(effect.x, 450 - effect.y, effect.radius * (1 - effect.life / .4), 0, Math.PI * 2); context.fill(); context.stroke();
+      context.fillStyle = effect.kind === 'acid-death-v151' ? '#c1f07833' : '#ffc56c55';
+      context.strokeStyle = effect.kind === 'acid-death-v151' ? '#c1f078' : '#ffecc5'; context.lineWidth = 3; context.beginPath();
+      context.arc(effect.x, 450 - effect.y, effect.radius * Math.max(effect.kind === 'acid-death-v151' ? .65 : 0, 1 - effect.life / .4), 0, Math.PI * 2); context.fill(); context.stroke();
     }
     for (const projectile of match.projectiles) {
+      if (projectile.style === 'ground-wave') {
+        context.strokeStyle = '#e4d397'; context.lineWidth = 3;
+        context.beginPath(); context.moveTo(projectile.x - 7, 450);
+        context.lineTo(projectile.x, 450 - projectile.radiusV147 * 2); context.lineTo(projectile.x + 7, 450); context.stroke();
+        continue;
+      }
       context.fillStyle = projectile.style === 'acid' ? '#c1f078' : '#a7dafa';
-      context.beginPath(); context.ellipse(projectile.x, 450 - projectile.y, 13, 7, 0, 0, Math.PI * 2); context.fill();
+      context.beginPath(); context.ellipse(projectile.x, 450 - projectile.y, projectile.signatureIdV147 ? 7 : 13, 7, 0, 0, Math.PI * 2); context.fill();
     }
     context.restore();
-    drawXenoTrialsArenaOverlayV119(context, stage, cameraView, match.tick);
+    drawXenoTrialsArenaOverlayV119(context, stage, cameraView, reduceMotion() ? 0 : match.tick);
     if (options.htmlHud !== true) match.fighters.forEach((fighter, i) => {
       const def = getXenoTrialsFighterV96(fighter.id), x = i === 0 ? 30 : 585;
       text(`${i === 0 ? 'VOUS' : 'ADVERSAIRE'} / ${def.label}`, i === 0 ? 30 : 970, 31, 17, '#e4e9eb', i === 0 ? 'left' : 'right', 385);
       bar(x, 44, 385, fighter.hp / def.hp, i === 0 ? '#6bd4c5' : '#ed858e', i === 1);
       bar(x, 65, 385, fighter.stamina / def.stamina, '#ddbf69', i === 1);
       text(`PV ${Math.ceil(fighter.hp)} / ${def.hp}  •  END ${Math.floor(fighter.stamina)}`, i === 0 ? 30 : 970, 99, 12, '#bfc9d0', i === 0 ? 'left' : 'right');
+      const superState = getXenoTrialsSuperReadinessV148(match, fighter, def);
+      if (superState.supported) text(`SUPER ${Math.floor(superState.meter)} / 100${superState.ready ? ' · I' : ''}`, i === 0 ? 30 : 970, 115, 11, '#ddbf69', i === 0 ? 'left' : 'right');
       const wins = match.wins[fighter.side];
       for (let n = 0; n < match.config.roundsToWin; n++) { context.fillStyle = n < wins ? '#fae5a3' : '#424c58'; context.fillRect(i === 0 ? 426 + n * 15 : 559 - n * 15, 44, 10, 10); }
     });
@@ -201,34 +243,43 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       text(`MANCHE ${match.round}`, 500, 96, 12, '#b4c4d2', 'center');
     }
     const intro = presentationView();
-    if (loaded && !match.paused && intro.fighterSlot !== null) {
+    // A short round can finish before the fight signal fades. Terminal and
+    // intermission frames must never freeze that announcement over the result.
+    const showPresentation = loaded && !match.paused && match.phase === 'active';
+    if (showPresentation && intro.fighterSlot !== null) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
       context.fillStyle = '#061019df'; context.fillRect(200, 150, 600, 90);
       text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center', 570);
       const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR', human: 'HUMAIN' }[def.family];
       const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
       text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
-    } else if (loaded && !match.paused && ['countdown', 'fight'].includes(intro.phase)) {
+    } else if (showPresentation && ['countdown', 'fight'].includes(intro.phase)) {
       text(intro.countdown ? String(intro.countdown) : 'COMBAT', 500, 235, 54, '#efe8cb', 'center');
     }
-    if (!loaded || match.paused || match.phase !== 'active') {
+    // The accessible HTML pause dialog owns its text; standalone canvas
+    // integrations retain the original pause instructions.
+    if (!loaded || assetFailure || (match.paused ? options.htmlHud !== true : match.phase !== 'active')) {
       context.fillStyle = '#061019b8'; context.fillRect(150, 216, 700, 106);
       const heading = !loaded ? 'CHARGEMENT DES SPÉCIMENS' : assetFailure ? 'VISUEL INDISPONIBLE' : match.paused ? 'SIMULATION EN PAUSE' : match.phase === 'intro' ? `MANCHE ${match.round}` : match.phase === 'round-over' ? match.roundWinner === 'draw' ? 'ÉGALITÉ' : match.roundWinner === 'player' ? 'MANCHE REMPORTÉE' : 'MANCHE PERDUE' : match.result.winner === 'player' ? 'VICTOIRE' : match.result.winner === 'opponent' ? 'DÉFAITE' : 'ÉGALITÉ';
       text(heading, 500, 255, 25, '#efe8cb', 'center');
-      text(assetFailure ? 'Rechargez le module pour réessayer.' : match.paused ? 'P / Échap ou bouton Reprendre' : match.phase === 'match-over' ? 'Résultat transmis au terminal.' : 'J frappe • K lourd • L spécial • S garde', 500, 290, 15, '#b6cbd2', 'center');
+      text(assetFailure ? 'Rechargez le module pour réessayer.' : match.paused ? 'P / Échap ou bouton Reprendre' : match.phase === 'match-over' ? 'Résultat transmis au terminal.' : 'J frappe • K lourd • L spécial • I super • S garde', 500, 290, 15, '#b6cbd2', 'center');
     }
   }
   function pause() {
-    if (stopped) return;
+    if (stopped || match.paused || match.phase === 'match-over') return false;
     for (const key of heldKeys) blockedKeys.add(key);
-    clearInputs(); setXenoTrialsPausedV96(match, true); previousTime = null; notify(true); render();
+    clearInputs(); setXenoTrialsPausedV96(match, true); previousTime = null;
+    if (raf !== null) cancelFrame(raf); raf = null;
+    notify(true); render(); return true;
   }
   function resume() {
-    if (stopped || !loaded || assetFailure || doc?.hidden) return false;
-    clearInputs(); setXenoTrialsPausedV96(match, false); previousTime = null; canvas.focus?.({ preventScroll: true }); notify(true); return true;
+    if (stopped || !match.paused || !loaded || assetFailure || !windowAvailable() || match.phase === 'match-over') return false;
+    clearInputs(); setXenoTrialsPausedV96(match, false); previousTime = null; canvas.focus?.({ preventScroll: true }); notify(true);
+    if (!stopped && running && raf === null) raf = requestFrame(frame);
+    return !stopped;
   }
   function keydown(event) {
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
     const tag = String(event.target?.tagName || '').toLowerCase();
     if (['input', 'select', 'textarea'].includes(tag) || event.target?.isContentEditable
       || event.target?.closest?.('input, select, textarea, [contenteditable]:not([contenteditable="false"])')) return;
@@ -241,41 +292,64 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       || event.target?.closest?.('button, a[href], summary, [role="button"], [role="link"]')) return;
     if (KEY_ACTION[event.code]) {
       event.preventDefault?.();
-      if (match.paused || presentationView().blocksSimulation) blockedKeys.add(event.code);
-      else if (!match.paused && !blockedKeys.has(event.code)) heldKeys.add(event.code);
+      // Repeats originating in a menu or during an unavailable phase cannot
+      // manufacture a fresh combat press after focus/countdown returns.
+      if (!acceptsControls() || event.repeat && !heldKeys.has(event.code)) blockedKeys.add(event.code);
+      else if (!blockedKeys.has(event.code)) heldKeys.add(event.code);
     }
   }
   function registerInputs() {
     listen(host, 'keydown', keydown);
-    listen(host, 'keyup', event => { heldKeys.delete(event.code); blockedKeys.delete(event.code); });
+    listen(host, 'keyup', event => { heldKeys.delete(event.code); blockedKeys.delete(event.code); buttonKeys.delete(event.code); releaseXenoTrialsControlsV150(match, 'player', controls()); });
     listen(host, 'blur', pause);
     listen(doc, 'visibilitychange', () => { if (doc.hidden) pause(); });
+    listen(doc, 'focusin', event => {
+      const target = event.target, control = target?.closest?.('[data-xeno-action]');
+      // Accessible combat buttons are gameplay inputs. Pause/resume buttons
+      // own their explicit click; focusing one must not toggle it twice.
+      if (target === canvas || control && options.controlsRoot?.contains(control)
+        || target?.closest?.('[data-xt="pause"], [data-xt="resume-overlay"]')) return;
+      pause();
+    });
     listen(canvas, 'pointerdown', () => canvas.focus?.({ preventScroll: true }));
     const root = options.controlsRoot;
     listen(root, 'keydown', event => {
-      if (!['Space', 'Enter'].includes(event.code)) return;
+      if (!['Space', 'Enter'].includes(event.code) || event.ctrlKey || event.metaKey || event.altKey) return;
       const button = event.target?.closest?.('[data-xeno-action]');
       const action = button?.getAttribute('data-xeno-action');
       if (!ACTIONS.has(action) || !root.contains(button)) return;
       event.preventDefault?.(); event.stopPropagation?.();
-      if (!event.repeat && !match.paused && !presentationView().blocksSimulation) virtual[action] = true;
+      if (!event.repeat && acceptsControls()) buttonKeys.set(event.code, action);
     });
     listen(root, 'keyup', event => {
       if (!['Space', 'Enter'].includes(event.code)) return;
-      const action = event.target?.closest?.('[data-xeno-action]')?.getAttribute('data-xeno-action');
-      if (ACTIONS.has(action)) { virtual[action] = false; event.preventDefault?.(); event.stopPropagation?.(); }
+      // Keyup may target a different button after keyboard focus moves.
+      const released = buttonKeys.delete(event.code);
+      releaseXenoTrialsControlsV150(match, 'player', controls());
+      if (released) { event.preventDefault?.(); event.stopPropagation?.(); }
     });
-    listen(root, 'focusout', () => { for (const action of ACTIONS) virtual[action] = false; });
+    listen(root, 'focusout', () => { buttonKeys.clear(); releaseXenoTrialsControlsV150(match, 'player', controls()); });
     listen(root, 'pointerdown', event => {
+      // Secondary mouse/pen buttons retain their native meaning; multi-touch
+      // contacts use button 0 and must not be rejected by isPrimary.
+      if (event.button !== undefined && event.button !== 0) return;
       const button = event.target?.closest?.('[data-xeno-action]');
       const action = button?.getAttribute('data-xeno-action');
-      if (!ACTIONS.has(action) || !root.contains(button) || match.paused || presentationView().blocksSimulation) return;
-      event.preventDefault?.(); heldPointers.set(event.pointerId, action); button.setPointerCapture?.(event.pointerId);
+      if (!ACTIONS.has(action) || !root.contains(button) || !acceptsControls()) return;
+      event.preventDefault?.(); heldPointers.set(event.pointerId, action); pointerOwners.set(event.pointerId, button);
+      try { button.setPointerCapture?.(event.pointerId); } catch {}
     });
-    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(root, type, event => heldPointers.delete(event.pointerId));
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(root, type, event => {
+      heldPointers.delete(event.pointerId); pointerOwners.delete(event.pointerId);
+      releaseXenoTrialsControlsV150(match, 'player', controls());
+    });
   }
   function frame(timestamp) {
-    if (stopped || !running) return;
+    raf = null;
+    if (stopped || !running || match.paused) return;
+    // Also cover a missed browser blur event without accumulating elapsed debt.
+    if (!windowAvailable()) { pause(); return; }
+    if (stopped) return;
     const dt = previousTime === null ? 0 : clamp((timestamp - previousTime) / 1000, 0, .25);
     frameDelta = dt;
     previousTime = timestamp;
@@ -288,7 +362,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (match.round !== beforeRound) { presentation = createXenoPresentationV97(match.round); for (const key of heldKeys) blockedKeys.add(key); clearInputs(); }
     notifyElapsed += dt;
     render(); notify(match.phase === 'match-over' && !emittedResult);
-    if (!stopped && running) raf = requestFrame(frame);
+    if (match.phase === 'match-over') { running = false; clearInputs(); }
+    if (!stopped && running && !match.paused && raf === null) raf = requestFrame(frame);
   }
   function loadImage(path) {
     if (options.loadImage) return options.loadImage(path);
@@ -305,7 +380,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       pendingLoads.add(cancel);
       image.onload = () => {
         if (settled) return;
-        if (!(image.naturalWidth > 0)) { fail(`Image vide: ${path}`); return; }
+        if (!(image.naturalWidth > 0 && image.naturalHeight > 0)) { fail(`Image vide: ${path}`); return; }
         settled = true; cleanup(); resolve(image);
       };
       image.onerror = () => fail(`Visuel indisponible: ${path}`);
@@ -317,11 +392,14 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (loading) return loading;
     loading = (async () => {
       render(); notify(true);
+      if (stopped) return false;
       const paths = [...new Set(match.fighters.map(f => getXenoTrialsArtV96(f.id, f.variant).path))];
       const allPaths = stage.backdrop ? [...paths, stage.backdrop] : paths;
       const results = await Promise.allSettled(allPaths.map(async path => {
         const image = await loadImage(path);
-        if (path === stage.backdrop && !(image?.naturalWidth > 0 && image?.naturalHeight > 0)) throw new Error('Décor vide');
+        // Apply the same validation to native and injected loaders. A resolved
+        // promise with no decodable fighter is not a successful admission.
+        if (!(image?.naturalWidth > 0 && image?.naturalHeight > 0)) throw new Error(`Visuel vide: ${path}`);
         if (!stopped) images.set(path, image);
       }));
       if (stopped) return false;
@@ -333,22 +411,30 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }
       loaded = true; assetFailure = results.slice(0, paths.length).some(r => r.status === 'rejected');
       if (assetFailure) { setXenoTrialsPausedV96(match, true); options.onAssetError?.(paths.filter((path, i) => results[i].status === 'rejected')); }
+      if (stopped) return false;
       registerInputs(); running = true; previousTime = null;
-      if (doc?.hidden) setXenoTrialsPausedV96(match, true);
-      canvas.focus?.({ preventScroll: true }); notify(true); render(); raf = requestFrame(frame); return !assetFailure;
+      if (!windowAvailable()) setXenoTrialsPausedV96(match, true);
+      if (windowAvailable() && !match.paused) canvas.focus?.({ preventScroll: true });
+      notify(true);
+      if (stopped) return false;
+      render(); if (!match.paused) raf = requestFrame(frame); return !assetFailure;
     })();
     return loading;
   }
   function stop() {
     if (stopped) return;
-    stopped = true; running = false; clearInputs(); if (raf !== null) cancelFrame(raf);
+    stopped = true; running = false; clearInputs(); if (raf !== null) cancelFrame(raf); raf = null;
     for (const cancel of [...pendingLoads]) cancel();
     for (const remove of listeners.splice(0)) remove(); images.clear();
     canvas.width = originalSize.width; canvas.height = originalSize.height;
   }
   return Object.freeze({ start, pause, resume, stop,
-    exit() { stop(); options.onExit?.(); },
-    setInput(action, pressed) { if (ACTIONS.has(action) && !stopped && !match.paused && !presentationView().blocksSimulation) virtual[action] = pressed === true; },
+    exit() { if (exited || stopped) return; exited = true; stop(); options.onExit?.(); },
+    setInput(action, pressed) {
+      if (!ACTIONS.has(action)) return;
+      if (pressed !== true) { virtual[action] = false; releaseXenoTrialsControlsV150(match, 'player', controls()); }
+      else if (acceptsControls()) virtual[action] = true;
+    },
     getState() { return snapshot(); },
     nextRound() {
       if (stopped || match.paused) return false;

@@ -207,6 +207,8 @@ test('the moved proving-ground portal uses its live ID-based socket for native e
   assert.equal(subject.hub.nearestParentAnnexDoorV71()?.annexId,'proving-ground');
   subject.key('keydown','KeyE');subject.key('keyup','KeyE');subject.advance(.7);
   assert.equal(subject.hub.currentAnnexV71()?.id,'proving-ground');
+  // Let the paired arrival leaves close before requesting the return.
+  subject.advance(.7);
   // Walk to the actual annex return bay; no player state is assigned.
   const exit=subject.hub.annexExitDoorV71();
   const target=exit.bounds.x+exit.bounds.w/2-22;

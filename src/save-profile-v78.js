@@ -39,17 +39,51 @@ export function isSavePayloadV78(value) {
     || Array.isArray(value.crew) && value.crew.some((member) => record(member) && typeof member.id === 'string' && member.id.length > 0));
 }
 
+// A newer save must never be rewritten by an older migration. This is the
+// persistence schema, NOT the application's V143/V144 release number.
+export const SAVE_PAYLOAD_LIMITS_V144 = Object.freeze({ schema: 52, bytes: 16 * 1024 * 1024, depth: 64, nodes: 250000 });
+const forbiddenKeysV144 = new Set(['__proto__', 'prototype', 'constructor']);
+function payloadReasonV144(data) {
+  if (!record(data)) return 'invalid-save-shape';
+  if (Object.hasOwn(data, 'schema')) {
+    const raw = data.schema;
+    const schema = typeof raw === 'string' && /^\d+$/.test(raw) ? Number(raw) : raw;
+    if (!Number.isSafeInteger(schema) || schema < 0) return 'invalid-schema';
+    if (schema > SAVE_PAYLOAD_LIMITS_V144.schema) return 'future-schema';
+  }
+  // Iterative traversal bounds imported structures before recursive migration.
+  // Unknown ordinary fields remain available to existing legacy migrations.
+  const stack = [{ value: data, depth: 0 }];
+  let visited = 0;
+  while (stack.length) {
+    const { value, depth } = stack.pop();
+    if (++visited > SAVE_PAYLOAD_LIMITS_V144.nodes) return 'payload-too-complex';
+    if (value === null || typeof value !== 'object') continue;
+    if (depth > SAVE_PAYLOAD_LIMITS_V144.depth) return 'payload-too-deep';
+    for (const key of Object.keys(value)) {
+      if (forbiddenKeysV144.has(key)) return 'unsafe-key';
+      stack.push({ value: value[key], depth: depth + 1 });
+      if (visited + stack.length > SAVE_PAYLOAD_LIMITS_V144.nodes) return 'payload-too-complex';
+    }
+  }
+  return isSavePayloadV78(data) ? null : 'invalid-save-shape';
+}
+
 export function inspectSaveSlotV78(raw) {
   if (raw === null || raw === undefined) return { status: 'empty', data: null, reason: null };
+  if (typeof raw !== 'string') return { status: 'corrupt', data: null, reason: 'invalid-json' };
+  if (raw.length > SAVE_PAYLOAD_LIMITS_V144.bytes || new TextEncoder().encode(raw).byteLength > SAVE_PAYLOAD_LIMITS_V144.bytes)
+    return { status: 'corrupt', data: null, reason: 'payload-too-large' };
   let data;
   try { data = JSON.parse(raw); } catch { return { status: 'corrupt', data: null, reason: 'invalid-json' }; }
-  return isSavePayloadV78(data)
-    ? { status: 'ready', data, reason: null }
-    : { status: 'corrupt', data: null, reason: 'invalid-save-shape' };
+  const reason = payloadReasonV144(data);
+  return reason ? { status: 'corrupt', data: null, reason } : { status: 'ready', data, reason: null };
 }
 
 export function parseImportedSaveV78(text) {
   const slot = typeof text === 'string' ? inspectSaveSlotV78(text) : null;
-  if (slot?.status !== 'ready') throw new SaveProfileErrorV78('SAVE_IMPORT_INVALID', 'Fichier de sauvegarde invalide. Aucune partie n’a été remplacée.');
+  if (slot?.status !== 'ready') throw new SaveProfileErrorV78('SAVE_IMPORT_INVALID', slot?.reason === 'future-schema'
+    ? 'Cette sauvegarde nécessite une version plus récente du jeu. Le fichier original et la partie active sont conservés.'
+    : 'Fichier de sauvegarde invalide ou trop volumineux. Aucune partie n’a été remplacée.');
   return slot.data;
 }

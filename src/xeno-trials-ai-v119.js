@@ -1,21 +1,24 @@
+import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
-import { getSynthTrialAttackV110 } from './synth-combat-v110.js';
+import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, xenoTrialsSegmentContactV147 } from './xeno-trials-signatures-v147.js';
 
 export const XENO_TRIALS_AI_STATES_V119 = Object.freeze(['OBSERVE', 'APPROACH', 'PROBE', 'PRESSURE', 'RETREAT', 'EVADE', 'DEFEND', 'PUNISH', 'COMMIT_ATTACK', 'RECOVERY', 'REPOSITION', 'SPECIAL_SETUP']);
-const empty = () => ({ left: false, right: false, jump: false, guard: false, light: false, heavy: false, special: false });
+const empty = () => ({ left: false, right: false, jump: false, guard: false, light: false, heavy: false, special: false, super: false });
 const clamp = (n, low, high) => Math.max(low, Math.min(high, n));
 export function getXenoTrialsAIProfileV119(definition) {
   const resolved = resolveEnemyBehaviorV119({ ...definition, id: definition.profileId, biology: definition.family });
   const profile = { ...resolved.trials, aiProfile: resolved.aiProfile, behaviorStatus: resolved.behaviorStatus };
   // Arena attacks are known gameplay mechanics, not evidence of a species' lore.
-  const ranged = ['pulse', 'acid', 'flame'].includes(definition.special);
-  if (ranged) Object.assign(profile, { preferredRange: definition.special === 'flame' ? 150 : 275, minimumRange: definition.special === 'flame' ? 45 : 110,
+  const style = getXenoTrialsSpecialStyleV147(definition);
+  const ranged = ['pulse', 'acid', 'flame', 'acid-cluster', 'aimed-acid'].includes(style);
+  if (ranged) Object.assign(profile, { preferredRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? 150 : 275, minimumRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? 45 : 110,
     // A cone is not a projectile. Its real, unscaled reach is the shared attack
     // contract, so the Incinerator must close instead of firing beyond 190 px.
-    maximumRange: definition.special === 'flame' ? getSynthTrialAttackV110(definition, 'special', {}).reach : 580, specialUsage: .8 });
-  if (['ram', 'pounce'].includes(definition.special)) profile.specialUsage = Math.max(profile.specialUsage, .7);
+    maximumRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? getXenoTrialsAttackV147(definition, 'special', {}).reach
+      : Math.min(580, getXenoTrialsAttackV147(definition, 'special', { reach: 580 }).reach), specialUsage: .8 });
+  if (['ram', 'pounce', 'leap', 'ground-wave', 'detonation', 'tail-sweep'].includes(getXenoTrialsSpecialStyleV147(definition))) profile.specialUsage = Math.max(profile.specialUsage, .7);
   if (definition.role === 'tank') profile.jumpUsage = 0;
   return Object.freeze({ ...profile, ranged, canGuard: profile.guardProbability > 0, jumpUsage: definition.role === 'tank' ? 0 : profile.jumpUsage });
 }
@@ -26,6 +29,27 @@ export function createXenoTrialsBrainV119() {
 const transition = (brain, state) => {
   if (brain.state !== state) { brain.state = state; brain.stateTime = 0; brain.stateVisits[state] = (brain.stateVisits[state] || 0) + 1; }
 };
+/** Earliest possible contact with the observed body, not predicted inputs.
+ * Uses the same segment and floor tests as projectile collision. This lets a
+ * defender notice descending acid before it reaches body height, without
+ * reacting to shots flying away or expiring before contact. No state changes. */
+export function getXenoTrialsProjectileThreatV149(projectile, defender, horizon = .5) {
+  if (!projectile || projectile.owner === defender?.side || !(projectile.life > 0)
+    || !defender || defender.hp <= 0 || !Number.isFinite(horizon) || horizon <= 0) return null;
+  const vx = projectile.vx ?? projectile.direction * 560, vy = projectile.vy || 0;
+  const span = Math.min(projectile.life, horizon, .75);
+  if (![projectile.x, projectile.y, vx, vy, span, defender.x, defender.y].every(Number.isFinite)) return null;
+  const body = getXenoTrialsBodyBoundsV105(defender);
+  const x1 = projectile.x + vx * span, y1 = projectile.y + vy * span;
+  const signature = Boolean(projectile.signatureIdV147);
+  const box = signature ? body : { ...body, left: body.left - 9, right: body.right + 9 };
+  const contact = xenoTrialsSegmentContactV147(projectile.x, projectile.y, x1, y1, box,
+    signature ? projectile.radiusV147 : 0);
+  if (contact === null) return null;
+  const floor = signature && y1 < 0 && projectile.y >= 0 ? projectile.y / (projectile.y - y1) : Infinity;
+  if (contact > floor || signature && projectile.y < 0) return null;
+  return { id: projectile.id, contactSeconds: contact * span };
+}
 function observe(match, specs) {
   const [target, cpu] = match.fighters, own = getXenoTrialsFighterV96(cpu.id), other = getXenoTrialsFighterV96(target.id);
   const selfBody = getXenoTrialsBodyBoundsV105(cpu), targetBody = getXenoTrialsBodyBoundsV105(target);
@@ -33,15 +57,16 @@ function observe(match, specs) {
   const gap = Math.max(0, getXenoTrialsBodyGapV105(cpu, target, direction));
   const overlap = selfBody.bottom <= targetBody.top && targetBody.bottom <= selfBody.top;
   const shotY = cpu.y + selfBody.height * .55;
-  const coneSpread = own.special === 'flame' ? 12 + getSynthTrialAttackV110(own, 'special', {}).reach * .22 : 0;
-  const lane = shotY + coneSpread >= targetBody.bottom && shotY - coneSpread <= targetBody.top;
-  const attackSpec = target.attack ? getSynthTrialAttackV110(other, target.attack.kind, specs[target.attack.kind]) : null;
+  const coneSpread = own.special === 'flame' ? 12 + getXenoTrialsAttackV147(own, 'special', {}).reach * .22 : 0;
+  const aimed = ['acid-cluster', 'aimed-acid'].includes(getXenoTrialsSpecialStyleV147(own));
+  const lane = aimed ? Math.hypot(gap, targetBody.bottom + targetBody.height * .5 - shotY)
+    < getXenoTrialsAttackV147(own, 'special', specs.special).reach - 10
+    : shotY + coneSpread >= targetBody.bottom && shotY - coneSpread <= targetBody.top;
+  const attackSpec = target.attack ? getXenoTrialsAttackV147(other, target.attack.kind, specs[target.attack.kind]) : null;
   const attack = target.attack ? { id: target.attack.id, kind: target.attack.kind, age: target.attack.age,
     startup: attackSpec.startup, active: attackSpec.active, recovery: attackSpec.recovery,
     reach: attackSpec.reach * other.reach, facing: target.attack.facing } : null;
-  const projectileThreat = match.projectiles.some(p => p.owner !== cpu.side && p.life > 0
-    && p.y >= selfBody.bottom && p.y <= selfBody.top && (selfBody.center - p.x) * p.direction > 0
-    && Math.abs(selfBody.center - p.x) < 300);
+  const projectileThreat = match.projectiles.some(p => getXenoTrialsProjectileThreatV149(p, cpu) !== null);
   return { gap, direction, overlap, lane, attack, projectileThreat, targetAirborne: target.y > 1,
     frontOffset: direction > 0 ? selfBody.right - cpu.x : cpu.x - selfBody.left,
     detonationVerticalGap: Math.max(0, targetBody.bottom - (cpu.y + selfBody.height * .5), (cpu.y + selfBody.height * .5) - targetBody.top),
@@ -65,23 +90,28 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
   brain.decisionIn = clamp(delay, .12, .7); brain.decisions++;
   const view = observe(match, specs), next = empty(); brain.observation = view;
   const move = toward => { next[(toward ? view.direction : -view.direction) > 0 ? 'right' : 'left'] = true; };
+  const rules = match.config.rulesV119;
+  const specialForbidden = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
   const choose = kind => {
-    const spec = getSynthTrialAttackV110(definition, kind, specs[kind]);
+    const spec = getXenoTrialsAttackV147(definition, kind, specs[kind]);
     const lock = match.config.rulesV119;
-    const specialLocked = kind === 'special' && (lock?.noSpecial || match.config.roundSeconds - match.timeRemaining < (lock?.specialLockSeconds || 0));
-    if (specialLocked || cpu.stamina < spec.cost || (kind === 'special' && cpu.specialCooldown > 0) || brain.input[kind]) return false;
-    next[kind] = true; transition(brain, kind === 'special' ? 'SPECIAL_SETUP' : 'COMMIT_ATTACK'); return true;
+    const specialLocked = ['special', 'super'].includes(kind) && (lock?.noSpecial || match.config.roundSeconds - match.timeRemaining < (lock?.specialLockSeconds || 0));
+    if (!spec || specialLocked || spec.groundedOnly && !view.grounded || cpu.stamina < spec.cost || (['special', 'super'].includes(kind) && cpu.specialCooldown > 0) || brain.input[kind]) return false;
+    next[kind] = true; transition(brain, ['special', 'super'].includes(kind) ? 'SPECIAL_SETUP' : 'COMMIT_ATTACK'); return true;
   };
-  const light = getSynthTrialAttackV110(definition, 'light', specs.light), heavy = getSynthTrialAttackV110(definition, 'heavy', specs.heavy);
+  const chooseSignature = () => getXenoTrialsSuperReadinessV148(match, cpu, definition).ready && choose('super') || choose('special');
+  const light = getXenoTrialsAttackV147(definition, 'light', specs.light), heavy = getXenoTrialsAttackV147(definition, 'heavy', specs.heavy);
   const reach = light.reach * definition.reach, heavyReach = heavy.reach * definition.reach;
   const withinMelee = view.overlap && view.gap <= heavyReach;
-  const special = getSynthTrialAttackV110(definition, 'special', specs.special);
+  const special = getXenoTrialsAttackV147(definition, 'special', specs.special);
   const detonationHorizontalReach = Math.sqrt(Math.max(0, special.reach ** 2 - view.detonationVerticalGap ** 2));
-  const specialReach = definition.special === 'detonation'
+  const specialReach = getXenoTrialsSpecialStyleV147(definition) === 'detonation'
     // Radial damage starts at the robot centre, NOT its leading body edge.
     // Account for that measured offset and one decision/step safety margin.
     ? detonationHorizontalReach - view.frontOffset + 410 * special.chargeDuration - 12
-    : special.reach * definition.reach + (['ram', 'pounce'].includes(definition.special) ? 420 * special.active : 0);
+    : getXenoTrialsSpecialStyleV147(definition) === 'ground-wave' ? special.reach
+    : getXenoTrialsSpecialStyleV147(definition) === 'leap' ? special.reach * definition.reach + special.leapSpeed * special.active
+    : special.reach * definition.reach + (['ram', 'pounce'].includes(getXenoTrialsSpecialStyleV147(definition)) ? 420 * special.active : 0);
   const resourceLow = cpu.stamina < Math.max(light.cost * 1.5, 25);
   const error = difficulty === 'easy' ? .2 : difficulty === 'hard' ? .025 : .08;
   if (cpu.attack || cpu.stun > 0) transition(brain, 'RECOVERY');
@@ -101,9 +131,11 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     }
   } else if (view.targetRecovering && withinMelee && random() < profile.punishAwareness * (difficulty === 'easy' ? .5 : 1)) {
     transition(brain, 'PUNISH'); if (!choose(view.gap <= reach ? 'light' : 'heavy')) move(true);
-  } else if (profile.ranged && view.lane && view.gap >= profile.minimumRange && view.gap <= profile.maximumRange) {
+  } else if (profile.ranged && !specialForbidden && view.lane && view.gap >= profile.minimumRange && view.gap <= profile.maximumRange) {
+    // When rules prohibit this ranged special, fall through to ordinary melee
+    // approach/pressure instead of waiting forever at an unusable firing range.
     transition(brain, 'SPECIAL_SETUP');
-    if (!choose('special')) {
+    if (!chooseSignature()) {
       transition(brain, 'REPOSITION');
       if (view.gap < profile.preferredRange - 45 && view.roomBehind > 35) move(false);
       else if (view.gap > profile.preferredRange + 55) move(true);
@@ -114,7 +146,7 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     transition(brain, 'APPROACH');
     if (view.gap > reach || !view.overlap) move(true); else choose('light');
   } else if (view.gap > reach && view.gap <= specialReach && view.overlap && !profile.ranged
-    && random() < profile.specialUsage && choose('special')) { /* announced ordinary special */ }
+    && random() < profile.specialUsage && chooseSignature()) { /* announced ordinary special */ }
   else if (view.targetAirborne && !view.overlap && view.gap < 180 && profile.antiAirAwareness > .6) {
     transition(brain, 'REPOSITION');
     if (view.roomBehind > 35) move(false);
@@ -122,7 +154,8 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     if (view.grounded && view.selfHeight < 260 && random() < profile.jumpUsage) next.jump = true;
   } else if (withinMelee) {
     transition(brain, view.gap <= reach ? 'PRESSURE' : 'PROBE');
-    if (view.targetAirborne && view.heightRatio > 1.2 && !view.overlap) transition(brain, 'OBSERVE');
+    if (getXenoTrialsSuperReadinessV148(match, cpu, definition).ready && !view.targetAirborne && random() < .65 && choose('super')) { /* earned finite meter */ }
+    else if (view.targetAirborne && view.heightRatio > 1.2 && !view.overlap) transition(brain, 'OBSERVE');
     else if (view.gap <= reach) {
       if (random() < profile.aggression) choose(cpu.stamina > 60 && random() < profile.comboPressure && view.gap <= heavyReach ? 'heavy' : 'light');
       else transition(brain, 'PROBE');

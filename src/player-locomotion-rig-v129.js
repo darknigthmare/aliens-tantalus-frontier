@@ -345,7 +345,17 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       lift: contact.lift, reachClamped: leg.reachClamped,
       clearanceAdjusted };
   }
-  const lower = buildPlayerArticulatedLowerLayersV128({ waist, hips, legs, scale: s, facing: f, legDefinitions });
+  // The V125 full-body atlas's registered "waist" is its lower trouser seam.
+  // Its resting y sits below V139's femoral heads. Mapping the separated
+  // pelvis onto that seam inverted the pelvis and buried the thigh caps in
+  // the torso. Register the actual belt above the solved hip line instead;
+  // V142's body resolver already registers its horizontal axis on the belt.
+  // Only the trouser belt and jacket boundary change here. The supplied
+  // thorax affine, arms, weapon, head, collision, bones and contacts stay fixed.
+  const anatomicalBelt = grounded && !staticAction
+    ? point(waist.x, Math.min(waist.y, hips.near.y - 12 * s)) : waist;
+  const lower = buildPlayerArticulatedLowerLayersV128({ waist: anatomicalBelt, hips, legs, scale: s, facing: f,
+    legDefinitions, pelvisBelt: grounded && !staticAction });
   const relaxedTravel = grounded && !crouching && bodyRig.moving && bodyRig.atlas === 'locomotion'
     && !bodyRig.actionV127 && !actor.aimingV124 && !actor.aiming && !actor.reloading;
   // The authored combat-ready walk neck sits 25 source pixels ahead of the
@@ -364,8 +374,13 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       pelvis: grounded && !staticAction ? 'continuous-physical-foot-axis' : 'authored-action', motionEnvelope,
       upperPosture: relaxedTravel ? 'upright-travel' : 'authored-action',
       duty: state.duty ?? C[state.gait].duty,
-      flight: grounded && !Object.values(contacts.feet).some(foot => foot.planted) }, legs, contacts };
+      flight: grounded && !Object.values(contacts.feet).some(foot => foot.planted) },
+    alignmentV142: { schema: 142, belt: anatomicalBelt, authoredLowerSeam: waist,
+      hipAxis: point((hips.near.x + hips.far.x) / 2, hips.near.y),
+      waistToHip: hips.near.y - anatomicalBelt.y,
+      source: grounded && !staticAction ? 'solved-hip-line-with-fixed-shoulders' : 'authored-action' }, legs, contacts };
   const decorated = { ...bodyRig, ...(travelAnchors ? { modularAnchorsV127: travelAnchors } : {}),
+    ...(grounded && !staticAction ? { modularBeltV142: anatomicalBelt } : {}),
     modularLowerLayersV128: lower, locomotionV129: detail };
   const modular = resolvePlayerModularRigV126({ bodyRig: decorated, appearance, images });
   const requiredAssets = modular.requiredAssets || [];

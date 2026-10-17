@@ -61,6 +61,15 @@ async function sourceManifest() {
 function observe(withFrame = false) {
   const h = globalThis.__ATF_HUB__;
   if (!h?.player) return null;
+  // Capture a real intermediate pose and its native pixels in this same
+  // browser task. Returning the snapshot from the polling callback avoids a
+  // second protocol round trip while a short ladder continues to advance.
+  const gate=withFrame?.captureGate;
+  if(gate){
+    const p=h.player,feet=p.y+p.h;
+    if(gate.kind==='climb' && !(h.keys.has('KeyW')&&p.climbing&&feet<=gate.target&&feet>gate.top+24))return false;
+    if(gate.kind==='support' && !(h.keys.has('KeyD')&&p.x>=gate.target&&p.vx>0&&p.grounded&&!p.climbing))return false;
+  }
   const snap = h.getSnapshot(), annex = h.currentAnnexV71?.();
   const result = { running: h.running, deck: h.state.deck, room: h.currentRoom()?.id, annex: annex?.id || null,
     transition: h.annexTransitionV71?.direction || null, time: h.animationTime,
@@ -109,17 +118,31 @@ async function importParent(save) {
   await page.getByText('Sauvegarde importée et migrée.', { exact: true }).last().waitFor(); await openView('hub'); await ready();
   const s = await state(); assert.equal(s.annex, null); safe(s); return s;
 }
-async function capture(label) {
+async function captureReady() {
   await page.waitForFunction(() => { const snap = globalThis.__ATF_HUB__?.getSnapshot(), life = snap?.hubRoomLifeV136?.current;
     const shell = snap?.hubCompartmentShellV138?.current;
     return life?.furnishingV137 && life.furnishingV137.pendingImageRoles.length === 0 &&
       life.workstationDetailsV139?.pending?.length === 0 &&
       (!shell || !['original-wall-material', 'preserve-authored-refuge-apertures'].includes(shell.sourcePolicy) || shell.nativeReady === true); });
+}
+async function storeCapture(label,s) {
+  const bytes=Buffer.from(s.framePng.split(',')[1],'base64');delete s.framePng;
+  const file=`${String(++serial).padStart(2,'0')}-${label}.png`;await fs.writeFile(join(output,file),bytes);
+  report.captures.push({label,file,sha256:hash(bytes),method:'synchronous-native-canvas-and-state-read',state:s});return s;
+}
+async function capture(label) {
+  await captureReady();
   // Read native canvas pixels and the actual state in one browser task. This
   // does not redraw, pause, replace renderer methods or alter production pixels.
-  const s = await page.evaluate(observe, true), bytes = Buffer.from(s.framePng.split(',')[1], 'base64'); delete s.framePng;
-  const file = `${String(++serial).padStart(2, '0')}-${label}.png`; await fs.writeFile(join(output, file), bytes);
-  report.captures.push({ label, file, sha256: hash(bytes), method: 'synchronous-native-canvas-and-state-read', state: s }); return s;
+  return storeCapture(label,await page.evaluate(observe,true));
+}
+async function movingCapture(label,captureGate,key) {
+  const handle=await page.waitForFunction(observe,{captureGate},{polling:'raf',timeout:10000});
+  // The held-key snapshot already exists, including its original PNG. Release
+  // the real keyboard key before JSON transfer or filesystem encoding can
+  // consume the remaining ladder/platform travel window.
+  await page.keyboard.up(key);
+  const s=await handle.jsonValue();await handle.dispose();return storeCapture(label,s);
 }
 async function walkTo(x, footY = 624, sprint = true) {
   const before = await state(); if (Math.abs(before.player.x - x) < 7) { safe(before, footY); return before; }
@@ -275,17 +298,19 @@ function supportAt(s) {
 }
 async function activeClimb(label, ladder) {
   const before = await state(), target = (before.player.y + before.player.h + ladder.top) / 2;
+  await captureReady();
   await page.keyboard.down('KeyW'); let active;
   try {
-    await page.waitForFunction(y => { const p = globalThis.__ATF_HUB__.player; return p.y + p.h <= y; }, target, { polling: 'raf', timeout: 10000 });
-    active = await capture(`${label}-W-held`); assert.ok(active.keys.includes('KeyW')); climbingAt(active, 'ascending');
+    active=await movingCapture(`${label}-W-held`,{kind:'climb',target,top:ladder.top},'KeyW');
+    assert.ok(active.keys.includes('KeyW')); climbingAt(active, 'ascending');
   } finally { await page.keyboard.up('KeyW'); }
   await page.waitForTimeout(140); const holding = await capture(`${label}-W-released-holding`); assert.ok(!holding.keys.includes('KeyW')); climbingAt(holding, 'holding');
   await climbTo(ladder.top); const start = await state();
+  await captureReady();
   await page.keyboard.down('KeyD'); let moving;
   try {
-    await page.waitForFunction(x => globalThis.__ATF_HUB__.player.x >= x + 180, start.player.x, { polling: 'raf', timeout: 10000 });
-    moving = await capture(`${label}-D-held-on-support`); assert.ok(moving.keys.includes('KeyD')); assert.ok(moving.player.vx > 0); assert.equal(moving.player.climbing, false); supportAt(moving);
+    moving=await movingCapture(`${label}-D-held-on-support`,{kind:'support',target:start.player.x+180},'KeyD');
+    assert.ok(moving.keys.includes('KeyD')); assert.ok(moving.player.vx > 0); assert.equal(moving.player.climbing, false); supportAt(moving);
   } finally { await page.keyboard.up('KeyD'); }
   await page.waitForTimeout(320); const settled = await state(); safe(settled, ladder.top);
   check(`${label}: held W, released holding and moving D use actual ladder contacts, support geometry and native shadow visibility.`, { active, holding, moving, support: supportAt(moving) });
@@ -310,9 +335,8 @@ async function movedLaddersJourney() {
     await importParent(fixture(id, 100)); const s = await state(), room = HUB_DECKS.flatMap(d => d.rooms).find(r => r.id === id), ladder = s.ladders.find(l => l.id === ladderId);
     assert.ok(ladder); assert.equal(ladder.x - room.xStart, 800); await walkTo(ladder.x - 22);
     // The shorter lower service deck has no180px clearance in every room.
-    await page.keyboard.down('KeyW'); let climbing;
-    try { await page.waitForFunction(y => { const p = globalThis.__ATF_HUB__.player; return p.climbing && p.y + p.h < y - 14; }, s.player.y + s.player.h);
-      climbing = await capture(`${id}-new-ladder-W-held`); climbingAt(climbing, 'ascending'); }
+    await captureReady();await page.keyboard.down('KeyW'); let climbing;
+    try {climbing=await movingCapture(`${id}-new-ladder-W-held`,{kind:'climb',target:s.player.y+s.player.h-14,top:ladder.top},'KeyW');climbingAt(climbing,'ascending');}
     finally { await page.keyboard.up('KeyW'); }
     await climbTo(ladder.top); await walkTo(ladder.x - 22 - 84, ladder.top, false);
     const upper = await capture(`${id}-new-ladder-upper-support`); assert.equal(upper.player.climbing, false); supportAt(upper);
@@ -323,7 +347,9 @@ async function movedLaddersJourney() {
 async function propsJourney() {
   const contracts = [['medical', 'adult-mattress-length', 118], ['mess', 'dining-worktop-height', 40],
     ['workshop', 'useful-worktop-height', 46], ['briefing', 'standing-planning-worktop-height', 52],
-    ['bridge', 'useful-worktop-height', 38], ['combat-information', 'useful-worktop-height', 40],
+    // V142 replaces the legacy38px bridge prop with its measured frontal
+    // cabinet; all four console work surfaces have an explicit40px contract.
+    ['bridge', 'useful-worktop-height', 40], ['combat-information', 'useful-worktop-height', 40],
     ['cryo-bay', 'lying-clear-interior', 110], ['quarantine', 'standing-clear-interior', 104],
     ['crew-quarters', 'lying-clear-interior', 110], ['science-lab', 'useful-worktop-height', 40],
     ['sensor-array', 'useful-worktop-height', 40], ['armory', 'measured-visible-height', 100],

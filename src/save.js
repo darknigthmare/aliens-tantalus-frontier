@@ -2351,6 +2351,7 @@ export class SaveSystem {
     this.protectedProfilesV78 = new Set();
     this.recoveryNeeded = null;
     this.selectionPersistenceV78 = null;
+    this.observedRawV144 = new Map();
   }
 
   key(profile = this.profile) { return `${SAVE_PREFIX}${assertSaveProfileIdV78(profile)}`; }
@@ -2386,7 +2387,8 @@ export class SaveSystem {
   readSlotV78(profile) {
     try {
       if (typeof this.storage?.getItem !== 'function') throw new Error('Stockage indisponible.');
-      return inspectSaveSlotV78(this.storage.getItem(this.key(profile)));
+      const raw = this.storage.getItem(this.key(profile));
+      return { ...inspectSaveSlotV78(raw), raw };
     } catch (cause) {
       throw new SaveProfileErrorV78('SAVE_READ_FAILED', 'Lecture du profil impossible. La partie active est conservée.', { profile, cause });
     }
@@ -2446,6 +2448,7 @@ export class SaveSystem {
     if (legacy) candidate.migratedFromKey = legacy.key;
     this.profile = target;
     this.data = candidate;
+    this.observedRawV144.set(target, slot.raw);
     this.protectedProfilesV78.delete(target);
     this.recoveryNeeded = null;
     this.rememberProfileV78(target);
@@ -2478,6 +2481,35 @@ export class SaveSystem {
     return this.writeCandidateV78(candidate, this.profile);
   }
 
+  // Optimistic stale-session guard, not a distributed lock. localStorage has
+  // no atomic compare-and-set across simultaneous processes. Compare actual
+  // bytes, not clocks: equal timestamps and deleted slots must still conflict.
+  checkExternalChangeV144(profile = this.profile) {
+    const target = assertSaveProfileIdV78(profile);
+    if (this.recoveryNeeded) return this.recoveryNeeded.status === 'conflict';
+    let raw;
+    try {
+      if (typeof this.storage?.getItem !== 'function') throw new Error('Stockage indisponible.');
+      raw = this.storage.getItem(this.key(target));
+    } catch (cause) {
+      throw new SaveProfileErrorV78('SAVE_READ_FAILED', 'État du profil invérifiable. Aucune sauvegarde n’a été remplacée.', { profile: target, cause });
+    }
+    const expected = this.observedRawV144.get(target) ?? null;
+    if (raw === expected) return false;
+    this.protectedProfilesV78.add(target);
+    this.recoveryNeeded = { profile: target, status: 'conflict', code: 'SAVE_CONFLICT',
+      reason: raw === null ? 'external-deletion' : 'external-change' };
+    // Defer UI work until the current transaction has returned/thrown. No
+    // payload leaves SaveSystem and consumers recheck the current recovery.
+    queueMicrotask(() => {
+      try {
+        if (this.recoveryNeeded?.status === 'conflict' && typeof globalThis.CustomEvent === 'function')
+          globalThis.dispatchEvent?.(new CustomEvent('atf:save-conflict-v144', { detail: { profile: target } }));
+      } catch { /* A notification never authorizes an overwrite. */ }
+    });
+    return true;
+  }
+
   writeCandidateV78(candidate, profile, { replace = false } = {}) {
     const target = assertSaveProfileIdV78(profile);
     if (!replace && this.recoveryNeeded) {
@@ -2487,12 +2519,23 @@ export class SaveSystem {
       throw new SaveProfileErrorV78('SAVE_PROTECTED', 'Profil protégé : aucune sauvegarde automatique ne peut remplacer les données illisibles.', { profile: target });
     }
     const updatedAt = Date.now();
+    let serialized;
+    try { serialized = JSON.stringify({ ...candidate, profile: target, updatedAt }); }
+    catch (cause) { throw new SaveProfileErrorV78('SAVE_WRITE_FAILED', 'Sauvegarde non sérialisable. Le profil précédent est conservé.', { profile: target, cause }); }
+    // Validate the actual bytes after migration too. A successful write must
+    // never produce a payload that this same version rejects on its next load.
+    const checked = inspectSaveSlotV78(serialized);
+    if (checked.status !== 'ready') throw new SaveProfileErrorV78('SAVE_WRITE_INVALID',
+      'Sauvegarde incompatible ou trop volumineuse. Le profil précédent est conservé ; exportez la session pour récupération.', { profile: target });
+    if (!replace && this.checkExternalChangeV144(target)) throw new SaveProfileErrorV78('SAVE_CONFLICT',
+      'Ce profil a changé dans une autre session. Exportez cette session ou chargez le profil actuel avant de continuer.', { profile: target });
     try {
       if (typeof this.storage?.setItem !== 'function') throw new Error('Stockage indisponible.');
-      this.storage.setItem(this.key(target), JSON.stringify({ ...candidate, profile: target, updatedAt }));
+      this.storage.setItem(this.key(target), serialized);
     } catch (cause) {
       throw new SaveProfileErrorV78('SAVE_WRITE_FAILED', 'Sauvegarde impossible. La partie active et le profil précédent sont conservés.', { profile: target, cause });
     }
+    this.observedRawV144.set(target, serialized);
     // Publish the in-memory switch only after storage accepted the whole save.
     // Ordinary commits retain the active root object because live mission
     // systems (notably the narrative archive ledger) hold that reference.
@@ -2519,7 +2562,9 @@ export class SaveSystem {
   delete(profile = this.profile) {
     const target = assertSaveProfileIdV78(profile);
     if (typeof this.storage?.removeItem !== 'function') throw new SaveProfileErrorV78('SAVE_WRITE_FAILED', 'Suppression impossible : stockage indisponible.', { profile: target });
-    this.storage.removeItem(this.key(target));
+    try { this.storage.removeItem(this.key(target)); }
+    catch (cause) { throw new SaveProfileErrorV78('SAVE_WRITE_FAILED', 'Suppression impossible. Le profil précédent est conservé.', { profile: target, cause }); }
+    this.observedRawV144.set(target, null);
     this.protectedProfilesV78.delete(target);
     if (this.recoveryNeeded?.profile === target) this.recoveryNeeded = null;
     if (target === this.profile) this.data = createDefaultSave(target);
@@ -2541,7 +2586,10 @@ export class SaveSystem {
     const parsed = parseImportedSaveV78(text);
     const candidate = migrateSave(parsed, target);
     if (this.storage.getItem(this.key(target)) !== expectedRaw) throw new Error('L’emplacement a changé pendant le transfert.');
-    this.storage.setItem(this.key(target), JSON.stringify(candidate));
+    const serialized = JSON.stringify(candidate);
+    if (inspectSaveSlotV78(serialized).status !== 'ready') throw new SaveProfileErrorV78('SAVE_WRITE_INVALID',
+      'Sauvegarde migrée incompatible ou trop volumineuse. L’emplacement précédent est conservé.', { profile: target });
+    this.storage.setItem(this.key(target), serialized);
     // Deliberately leaves active data, profile and last-selected marker intact.
     return candidate;
   }

@@ -49,3 +49,13 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-unsaved=
   .xt-pause-overlay-v119 h2{margin:8px 0}
   .xt-pause-overlay-v119 p{margin:0}
 }
+
+/* The optional super row stays inside the existing HUD, not a new overlay. */
+.xt-super-value-v148{font-size:10px;color:#ddbf69;line-height:1.2}
+/* Intrinsic height is required: the legacy HUD rule gives progress height:100%,
+   but the optional seventh/eighth grid rows have no definite percentage basis. */
+.xt-match-hud .xt-super-meter-v148{height:5px;min-height:5px;align-self:start;width:100%;accent-color:#ddbf69}
+.xt-match-hud .xt-super-meter-v148::-webkit-progress-value{background:#ddbf69}
+.xt-match-hud .xt-super-meter-v148::-moz-progress-bar{background:#ddbf69}
+.xt-controls [data-xeno-action="super"][aria-disabled="true"]{opacity:.6}
+.xt-vitals [hidden],.xt-controls [hidden]{display:none!important}

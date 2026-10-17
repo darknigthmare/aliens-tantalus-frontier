@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
@@ -9,6 +9,7 @@ import { normalizePlayerAppearanceV126, PLAYER_APPEARANCE_SLOTS_V126, PLAYER_APP
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V129 } from '../src/player-colonial-art-v129.js';
+import { parseProject } from '../src/forge-model-v130.js';
 
 // Optional visual smoke test: use an existing Playwright/Chromium installation.
 // ATF_BASE_URL=https://preview.example ATF_PLAYER_QA_OUTPUT=/tmp/player-qa \
@@ -53,6 +54,34 @@ try {
   page.on('pageerror', error => report.pageErrors.push(error.message));
   page.on('requestfailed', request => report.requestFailures.push({ url: request.url(), failure: request.failure()?.errorText }));
   page.setDefaultTimeout(15000);
+  // A replacement is an explicit UI confirmation, not an implicit file-input
+  // side effect. Verify the exported document before launching its real runtime.
+  const importPlan = async (plan, name) => {
+    let unexpectedDialog = null;
+    const confirmImport = async dialog => {
+      if (dialog.type() === 'confirm' && dialog.message() === 'Remplacer le projet ouvert par ce fichier ? L’import reste annulable.') {
+        await dialog.accept();
+      } else {
+        unexpectedDialog = `${dialog.type()}: ${dialog.message()}`;
+        await dialog.dismiss();
+      }
+    };
+    page.on('dialog', confirmImport);
+    try {
+      await page.locator('#editor-import').setInputFiles({ name, mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+      await page.waitForFunction(() => document.querySelector('#editor-import')?.value === '');
+      assert.equal(unexpectedDialog, null, 'Only the expected Forge replacement confirmation may be accepted.');
+      const downloading = page.waitForEvent('download');
+      await page.locator('#editor-export').click();
+      const download = await downloading, path = await download.path();
+      assert.ok(path, 'The native Forge export must provide the imported document.');
+      const exported = JSON.parse(await readFile(path, 'utf8'));
+      assert.deepEqual(parseProject(exported), parseProject(plan), 'The playtest must use the requested plan, never a previous imported scene.');
+      await download.delete();
+    } finally {
+      page.off('dialog', confirmImport);
+    }
+  };
   let requestPhase = 'boot';
   const catalogueImagePaths = new Set(Object.values(WEAPON_VISUAL_ASSETS_ALL_V63));
   const appearanceImagePaths = new Set([...PLAYER_MODULAR_RIG_ASSETS_V126, ...PLAYER_TRANSIT_RIG_ASSETS_V128,
@@ -116,6 +145,21 @@ try {
         cover: actor.coverV124 ? { id: actor.coverV124.id, peeking: actor.coverV124.peeking } : null } };
   };
   const snapshot = () => page.evaluate(readLiveState);
+  // Capture a transient action in the SAME browser evaluation that observes it.
+  // The handle contains a detached snapshot, not a live actor object that can
+  // become a hurt/idle pose while another protocol round-trip is in progress.
+  // Arm before the physical command; this only reads gameplay and the canvas.
+  const observeActionFrameV150 = (role, kind) => page.waitForFunction(`(() => {
+    const { role, kind } = ${JSON.stringify({ role, kind })};
+    const actor = globalThis.__ATF_GAME__?.[role];
+    const actual = actor?.playerActionVisualV127?.kind;
+    const wanted = kind === 'contextual-melee' ? actor?.meleeClock > 0 && actual === actor.meleeKind : actual === kind;
+    if (!actor?.playerAppearanceVisualV126?.drawn || !wanted) return false;
+    return JSON.parse(JSON.stringify((${readLiveState.toString()})(true)));
+  })()`, null, { polling: 'raf', timeout: 15000 }).then(async handle => {
+    try { return await handle.jsonValue(); } finally { await handle.dispose(); }
+  });
+
   const capture = async (filename, label) => {
     await page.locator('#game-canvas').screenshot({ path: join(output, filename) });
     report.captures.push({ filename, label, state: await snapshot() });
@@ -196,7 +240,7 @@ try {
     { position: '8:14', type: 'ladder' }, { position: '8:12', type: 'platform' },
     { position: '12:15', type: 'door' }, { position: '20:15', type: 'terminal' }
   ] };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-v124-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+  await importPlan(plan, 'player-v124-qa-stage.json');
   imagePhase('Before the first mission; armory catalogue has not been opened', await snapshot());
   requestPhase = 'first-forge-playtest';
   await page.locator('#editor-play').click();
@@ -264,11 +308,17 @@ try {
   let firing;
   for (let attempt = 0; attempt < 8 && !firing; attempt++) {
     await page.waitForFunction(() => {
-      const runtime = globalThis.__ATF_GAME__?.weaponEffectsV124;
-      return runtime?.lights.some(light => runtime.time - light.bornAt < light.duration * 0.5);
+      const engine = globalThis.__ATF_GAME__, actor = engine?.player, visual = actor?.heldWeaponVisualV125;
+      const runtime = engine?.weaponEffectsV124;
+      return visual && visual.shotSerial === actor.shots && visual.timeSeconds === engine.animationTime
+        && runtime?.lights.some(light => runtime.time - light.bornAt < light.duration * 0.5);
     }, null, { polling: 'raf', timeout: 10000 });
     const frame = await page.evaluate(readLiveState, true);
-    if (frame.effects?.lights.some(light => light.age >= 0 && light.age < light.duration * 0.8)) {
+    // Pointer input may accept another shot between the wait and this read.
+    // Certify that the framebuffer belongs to this exact simulation/shot too.
+    if (frame.player.heldWeapon?.shotSerial === frame.player.shots
+      && frame.player.heldWeapon?.timeSeconds === frame.elapsed
+      && frame.effects?.lights.some(light => light.age >= 0 && light.age < light.duration * 0.8)) {
       firing = await saveCanvasFrame('06-fire.png', 'A real RMB/LMB shot with its live scene light and ejected case', frame);
     }
   }
@@ -444,9 +494,17 @@ try {
     assert.deepEqual(await readPanelSelection('player'), primaryAppearance);
     if (mode === 'walk') {
       const frame = await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png'));
-      await page.waitForTimeout(180);
-      assert.notEqual(await panel.locator('#player-appearance-preview-v126').evaluate(canvas => canvas.toDataURL('image/png')), frame,
-        'The selected walk preview must animate actual canvas pixels.');
+      // Two fixed-delay samples can land on the same repeating pose, or
+      // before a busy browser has drawn again. Require a different real
+      // framebuffer within a bounded interval; a frozen preview still fails.
+      const changed = await page.waitForFunction(previous => {
+        const canvas = document.querySelector('#player-appearance-preview-v126');
+        if (canvas?.dataset.appearanceReadyV126 !== 'true' || canvas.dataset.appearanceAnimationV127 !== 'walk') return null;
+        const current = canvas.toDataURL('image/png');
+        return current !== previous ? current : null;
+      }, frame, { polling: 'raf', timeout: 5000 });
+      try { assert.notEqual(await changed.jsonValue(), frame, 'The selected walk preview must animate actual canvas pixels.'); }
+      finally { await changed.dispose(); }
     }
     await capturePreview(`21-preview-${mode}.png`, `Actual animation selector: ${mode}, with the six selected J1 pieces`, 'player');
     previewEvidence.push({ mode, facing: -1, ready: true });
@@ -497,7 +555,7 @@ try {
   await page.locator('#return-title').click();
   await page.locator('#title-start').click();
   await page.locator('#title-forge').click();
-  await page.locator('#editor-import').setInputFiles({ name: 'player-v126-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(plan)) });
+  await importPlan(plan, 'player-v126-qa-stage.json');
   requestPhase = 'second-forge-playtest';
   await page.locator('#editor-play').click();
   await page.waitForFunction(id => {
@@ -570,7 +628,7 @@ try {
     { position: '2:15', type: 'spawn' }, { position: '30:15', type: 'objective' },
     { position: '4:15', type: 'hazard' }
   ] };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-actions-v127-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(actionPlan)) });
+  await importPlan(actionPlan, 'player-actions-v127-qa-stage.json');
   requestPhase = 'third-forge-actions';
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
@@ -775,19 +833,30 @@ try {
   // equipment checks above remain free from enemy damage or friendly gunfire.
   const meleePlan = { ...actionPlan, tiles: actionPlan.tiles.filter(tile => tile.type !== 'hazard')
     .concat({ position: '2:14', type: 'enemy' }) };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-melee-v127-qa-stage.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(meleePlan)) });
+  await importPlan(meleePlan, 'player-melee-v127-qa-stage.json');
   requestPhase = 'fourth-forge-melee';
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
     const engine = globalThis.__ATF_GAME__, actor = engine?.player;
-    return engine?.running && !engine.paused && !engine.enemyAtlasLoadingPausedV65 && actor.grounded
+    return engine?.running && actor?.grounded && engine.canPerformGameplayAction(actor)
+      && !(actor.v52HurtClock > 0) && !(actor.shockClock > 0)
+      && !(actor.fireClock > 0) && !actor.reloading && !(actor.toolUseClock > 0) && !(actor.interactionClock > 0)
       && engine.enemies.some(enemy => enemy.alive && Math.abs(enemy.x + enemy.w / 2 - actor.x - actor.w / 2) < 90
-        && Math.abs(enemy.y + enemy.h / 2 - actor.y - actor.h / 2) < 94);
+        && Math.abs(enemy.y + enemy.h / 2 - actor.y - actor.h / 2) < 94 && engine.enemyMeleePathClearV64(actor, enemy));
   }, null, { timeout: 20000 });
-  await canvas.focus(); const beforeMelee = await snapshot(); await page.keyboard.press('KeyF');
-  await page.waitForFunction(() => globalThis.__ATF_GAME__.player.meleeClock > 0);
-  const meleeKind = await page.evaluate(() => globalThis.__ATF_GAME__.player.meleeKind);
-  const melee = await freezeAction('player', meleeKind, '27-real-melee.png', 'A real contextual melee strike with the selected independent clothing', { freeze: false });
+  // Use the explicit CQC control. F is a held, simulation-sampled trigger:
+  // a zero-duration press may fall between frames or fire after a moving target
+  // has left reach. Middle pointerdown requests melee immediately and cannot
+  // substitute a bullet. The real enemy and all gameplay assertions remain.
+  await canvas.focus(); const beforeMelee = await snapshot();
+  const observedMelee = observeActionFrameV150('player', 'contextual-melee');
+  // Attach a handler immediately so a failed input cannot leave an unhandled
+  // rejected observer while the report is being written.
+  observedMelee.catch(() => {});
+  await canvas.click({ button: 'middle', position: { x: 24, y: 24 } });
+  const melee = await saveCanvasFrame('27-real-melee.png',
+    'An accepted contextual melee and its real drawn pose captured in one observation', await observedMelee);
+  checkActionPose(melee, melee.player.action.kind, 'player');
   assert.equal(melee.player.ammo, beforeMelee.player.ammo); assert.equal(melee.player.shots, beforeMelee.player.shots);
   assert.ok(melee.player.action.props.length > 0);
   check('An accepted contextual melee attack uses the modular body and its own held implement without firearm ammo use', melee.player.action);
@@ -798,8 +867,7 @@ try {
   // import. Every action below uses keyboard input; evaluations remain read-only.
   const transitPlan = { ...actionPlan, tiles: actionPlan.tiles.filter(tile => tile.type !== 'hazard')
     .concat({ position: '4:12', type: 'ladder' }, { position: '7:15', type: 'hazard' }) };
-  await page.locator('#editor-import').setInputFiles({ name: 'player-transit-v128-qa-stage.json', mimeType: 'application/json',
-    buffer: Buffer.from(JSON.stringify(transitPlan)) });
+  await importPlan(transitPlan, 'player-transit-v128-qa-stage.json');
   requestPhase = 'fifth-forge-transit';
   await page.locator('#editor-play').click();
   await page.waitForFunction(() => {
@@ -902,7 +970,12 @@ try {
     return e && p ? { running: e.running, paused: e.paused, loading: Boolean(e.enemyAtlasLoadingPausedV65 || e.userCasteLoadingV88),
       elapsed: e.animationTime, phase: e.mission?.state, keys: [...e.keys], focus: document.activeElement?.id,
       player: { x: p.x, y: p.y, vx: p.vx, vy: p.vy, grounded: p.grounded, alive: p.alive, downed: p.downed,
-        health: p.health, aiming: p.aimingV124, movement: p.movementIntentV124 },
+        health: p.health, aiming: p.aimingV124, movement: p.movementIntentV124, fireClock: p.fireClock,
+        meleeClock: p.meleeClock, meleeKind: p.meleeKind, reloading: p.reloading, climbing: p.climbing,
+        toolUseClock: p.toolUseClock, interactionClock: p.interactionClock, action: p.playerActionVisualV127 },
+      enemies: (e.enemies || []).map(enemy => ({ id: enemy.id, x: enemy.x, y: enemy.y, w: enemy.w, h: enemy.h,
+        alive: enemy.alive, dormant: enemy.dormant, health: enemy.health, plane: enemy.planeV130 || enemy.plane,
+        rearEntry: enemy.rearEntryV130, contactClear: e.enemyMeleePathClearV64(p, enemy) })),
       fieldAction: p.fieldActionV124 || null, placeables: e.getPlaceablesSnapshotV86?.() || null,
       squad: e.getSquadDoctrineSnapshotV132?.() || null } : null;
   }).catch(() => null);

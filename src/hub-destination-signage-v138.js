@@ -1,4 +1,5 @@
 import { HUB_DECKS } from './hub-game.js';
+import { getHubDoorFaceV142 } from './hub-door-passage-v142.js';
 import { HUB_ANNEXES_V137 } from './hub-annex-registry-v137.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from './hub-navigation-layout-v133.js';
 import { HUB_SHIP_SPACE_BY_ID_V137, HUB_SHIP_CONNECTIONS_V137 } from './hub-ship-layout-v137.js';
@@ -78,16 +79,17 @@ export function getHubDestinationSignPlansV138(room, { portalTargetForBounds } =
   const start = finite(room?.xStart), plans = [];
   for (const descriptor of getHubDoorDestinationDescriptorsV138(room)) {
     if (descriptor.delegatedToV137 || !descriptor.label) continue;
-    const target = portalTargetForBounds({ ...descriptor.socket });
+    const connection = HUB_DESTINATION_CONNECTIONS_V138.find(entry => entry.id === descriptor.connectionId);
+    const target = descriptor.connectionId === 'personal-refuge'
+      ? getHubDoorFaceV142(descriptor.socket, descriptor.face === 'parent' ? connection.annexSocket : connection.parentSocket,
+        annexById[connection.spaceId].art.alphaBounds.door)?.target
+      : portalTargetForBounds({ ...descriptor.socket });
     if (!valid(target)) continue;
     let fontSize = 11, height = 20, width = Math.max(72, Math.ceil((descriptor.label.length * 7 + 18) / 8) * 8);
     let x = target.x + target.w / 2 - width / 2, y = target.y - 10 - height;
     let mount = { kind: 'rear-wall-above-portal' };
     if (descriptor.face === 'parent' && descriptor.destinationId === 'sanitary-bay') {
       fontSize = 10; height = 18; width = 96; x = target.x + target.w / 2 - width / 2; y = target.y - 10 - height;
-    } else if (descriptor.face === 'parent' && descriptor.destinationId === 'personal-refuge') {
-      fontSize = 10; height = 16; width = 72; x = target.x + target.w / 2 - width / 2; y = 502;
-      mount = { kind: 'native-landing-fascia', platformId: 'quarters-low', nativeTop: 500, nativeThickness: 20 };
     } else if (descriptor.face === 'parent' && descriptor.destinationId === 'arrival-airlock') {
       fontSize = 10; height = 16; width = 88; x = target.x + target.w - width - 2; y = 442;
       mount = { kind: 'native-landing-fascia', platformId: 'hangar-maintenance-alcove-v133', nativeTop: 440, nativeThickness: 20 };

@@ -396,3 +396,62 @@ test('the real HUD and field prompts describe contact, fuel, thrown grenades and
   const firearm = fixture('M41A Pulse Rifle'); firearm.engine.drawHud(firearm.ctx);
   assert.ok(firearm.ctx.texts.find(text => text.startsWith('PV ')).includes('MUN'));
 });
+
+// V144: explicit CQC must reach the same admitted weapon contract as its
+// trigger, rather than the outer runtime replacing a baton/axe with a gun bash.
+for (const name of ['Combat Knife', 'Wrist Blades', 'Fire Axe', 'Maintenance Jack', 'Combi-Stick', 'Stun Baton']) {
+  test(`explicit CQC preserves the actual ${name} contact, damage and resources`, () => {
+    const trigger = fixture(name), triggerTarget = enemy(trigger.engine, 210);
+    assert.equal(trigger.engine.fire(trigger.actor), true);
+    const cqc = fixture(name), cqcTarget = enemy(cqc.engine, 210);
+    const before = [cqc.actor.ammo, cqc.actor.ammoReserve, cqc.actor.shots];
+    assert.equal(cqc.engine.melee(cqc.actor), true);
+    assert.equal(cqcTarget.health, triggerTarget.health, 'The physical weapon owns its damage.');
+    assert.equal(cqc.actor.fireClock, trigger.actor.fireClock);
+    assert.equal(cqc.actor.meleeKind, trigger.actor.meleeKind);
+    assert.equal(cqcTarget.staggerClock, triggerTarget.staggerClock);
+    assert.equal(cqcTarget.weaponStatusV130, triggerTarget.weaponStatusV130);
+    assert.deepEqual([cqc.actor.ammo, cqc.actor.ammoReserve, cqc.actor.shots], before);
+    noGunfire(cqc);
+  });
+}
+test('explicit baton CQC does not gain the longer generic gun-bash range', () => {
+  const trigger = fixture('Stun Baton'), a = enemy(trigger.engine, 277);
+  trigger.engine.fire(trigger.actor);
+  const cqc = fixture('Stun Baton'), b = enemy(cqc.engine, 277);
+  cqc.engine.melee(cqc.actor);
+  assert.equal(b.health, a.health);
+  assert.equal(b.weaponStatusV130, a.weaponStatusV130);
+  noGunfire(cqc);
+});
+for (const property of [{ dormant: true }, { planeV130: 'background' }, { plane: 'foreground' },
+  { ventTransit: { id: 'other-route' } }, { rearEntryV130: { phase: 'approach' } }]) {
+  test(`contextual firearm melee ignores unavailable target ${JSON.stringify(property)}`, () => {
+    const subject = fixture('M41A Pulse Rifle'), target = enemy(subject.engine, 210);
+    Object.assign(target, property);
+    assert.equal(subject.engine.melee(subject.actor), false);
+    assert.equal(target.health, 500);
+    assert.equal(subject.actor.meleeClock || 0, 0);
+    noGunfire(subject);
+  });
+}
+test('an unavailable nearer target cannot mask an active contextual melee target', () => {
+  const subject = fixture('M41A Pulse Rifle');
+  const dormant = enemy(subject.engine, 201); dormant.dormant = true;
+  const active = enemy(subject.engine, 220);
+  assert.equal(subject.engine.melee(subject.actor), true);
+  assert.equal(dormant.health, 500); assert.ok(active.health < 500);
+  noGunfire(subject);
+});
+test('explicit weapon CQC still rejects pause, disabled J2, reload and field work', () => {
+  for (const state of ['paused', 'coop-disabled', 'reload', 'field']) {
+    const subject = fixture('Stun Baton'), target = enemy(subject.engine, 210);
+    let actor = subject.actor;
+    if (state === 'paused') subject.engine.paused = true;
+    if (state === 'coop-disabled') actor = subject.engine.coop;
+    if (state === 'reload') actor.reloading = true;
+    if (state === 'field') { actor.health = 60; subject.engine.inventory.medkits = 1; assert.equal(subject.engine.useMedkit(actor), true); }
+    assert.equal(subject.engine.melee(actor), false, state);
+    assert.equal(target.health, 500); noGunfire(subject);
+  }
+});

@@ -350,7 +350,7 @@ export class GameEngine {
         this.restartFromCheckpoint();
         return;
       }
-      if (this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state !== 'active') return;
+      if (this.paused || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88 || this.mission?.state !== 'active') return;
       // After a pause/focus transfer, an OS repeat is not a new press.
       if (event.repeat && !this.keys.has(event.code)) return;
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
@@ -412,6 +412,11 @@ export class GameEngine {
   }
 
   setHeldGameplayKeyV77(code, active, source = 'keyboard') {
+    // Movement must still cancel field work, but loading/closed/paused scenes
+    // cannot queue a future movement, trigger or jump through touch/gamepad.
+    if (active && (!this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88
+      || this.mission?.state !== 'active' || !this.coopEnabled &&
+        ['KeyJ', 'KeyL', 'KeyI', 'KeyK', 'KeyO', 'KeyU', 'KeyY', 'KeyT', 'KeyG', 'ShiftRight', 'Comma'].includes(code))) return;
     if (!this.heldGameplayKeysV77) this.heldGameplayKeysV77 = new Map();
     const sources = this.heldGameplayKeysV77.get(code) || new Set();
     const wasHeld = sources.size > 0;
@@ -715,6 +720,16 @@ export class GameEngine {
     if (!this.paused) this.canvas?.focus?.({ preventScroll: true });
   }
   setCoop(enabled) {
+    if (Boolean(enabled) !== Boolean(this.coopEnabled)) {
+      for (const code of ['KeyJ', 'KeyL', 'KeyI', 'KeyK', 'KeyO', 'KeyU', 'KeyY', 'KeyT', 'KeyG', 'ShiftRight', 'Comma']) {
+        this.heldGameplayKeysV77?.delete(code); this.keys?.delete(code);
+      }
+      this.gamepadInputV77?.release(1);
+      if (this.gamepadInputV77?.slots[1]) this.gamepadInputV77.slots[1].suppressed = true;
+      if (this.coop) Object.assign(this.coop, { vx: 0, jumpBuffer: 0, gamepadAimV83: null,
+        gamepadMoveV124: null, gamepadAimHeldV124: false, gamepadCrouchV124: false,
+        aimLockedV124: false, aimLockCrouchV124: false, aimingV124: false });
+    }
     if (!enabled && this.coop) cancelTacticalReloadV77(this.coop, 'coop-disabled');
     this.coopEnabled = Boolean(enabled);
   }

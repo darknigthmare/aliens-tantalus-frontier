@@ -34,6 +34,7 @@ import { drawHubBulkheadDepthV134, hubBulkheadDepthGeometryV134, getHubBulkheadC
 import { loadPlayerCostumeAssetsV119 } from './player-costume-skins-v119.js';
 import { getHubPropHeightV136, getHubVehiclePlacementV136, getHubNativePropPlacementV139 } from './hub-prop-placements-v136.js';
 import { HUB_FURNITURE_ATLAS_V139 } from './hub-furniture-atlas-v139.js';
+import { drawHubElevatorDoorV142 } from './hub-elevator-interior-v142.js';
 import { prepareHubPlayerAppearanceV126, advanceHubPlayerAppearanceV126,
   drawHubPlayerAppearanceV126, hubPlayerAppearanceSnapshotV126,
   releaseHubPlayerAppearanceV126 } from './player-appearance-hub-v126.js';
@@ -160,6 +161,7 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
 
 export const HUB_MODULAR_PROP_FILES = Object.freeze([
   HUB_FURNITURE_ATLAS_V139.asset,
+  '/assets/openai/hub/props/v139/annex-stations-front-atlas.png',
   '/assets/openai/hub/props/bulkhead-door.png',
   '/assets/openai/hub/props/lift-door.png',
   '/assets/openai/hub/props/bridge-terminal.png',
@@ -1208,17 +1210,17 @@ export class HubGame {
     if (!assetReady(image)) return;
     const { x, y, w: width, h: height } = getHubDoorBounds(door);
     if (door.lift) {
-      ctx.strokeStyle = '#4b6658';
-      ctx.strokeRect(x - 15.5, y - 27.5, width + 31, height + 35);
+      drawHubElevatorDoorV142(ctx, image, { x, y, w: width, h: height }, door.progress);
+    } else {
+      const halfSource = image.naturalWidth / 2;
+      const halfTarget = width / 2;
+      const slide = door.progress * halfTarget * 0.78;
+      ctx.save();
+      ctx.globalAlpha = 0.98;
+      ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, halfSource, image.naturalHeight, x - slide, y, halfTarget, height);
+      ctx.drawImage(resolveSpriteDrawableV134(image), halfSource, 0, halfSource, image.naturalHeight, x + halfTarget + slide, y, halfTarget, height);
+      ctx.restore();
     }
-    const halfSource = image.naturalWidth / 2;
-    const halfTarget = width / 2;
-    const slide = door.progress * halfTarget * 0.78;
-    ctx.save();
-    ctx.globalAlpha = 0.98;
-    ctx.drawImage(resolveSpriteDrawableV134(image), 0, 0, halfSource, image.naturalHeight, x - slide, y, halfTarget, height);
-    ctx.drawImage(resolveSpriteDrawableV134(image), halfSource, 0, halfSource, image.naturalHeight, x + halfTarget + slide, y, halfTarget, height);
-    ctx.restore();
     ctx.fillStyle = door.progress > 0.5 ? '#89d99f' : '#d15a4d';
     ctx.fillRect(door.x - 3, y + 14, 6, 9);
     const playerCenter = this.player.x + this.player.w / 2;

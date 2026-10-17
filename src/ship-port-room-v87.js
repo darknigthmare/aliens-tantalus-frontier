@@ -87,6 +87,32 @@ export const SHIP_PORT_MEETINGS_V87 = freeze([
   { animalId: 'animal-tac', offerId: 'offer-tic-tac', vendorId: 'colony-shelter', x: 2420, drawX: 2438, name: 'Tac', imageRole: 'tac' },
   { animalId: 'animal-mica', offerId: 'offer-animal-mica', vendorId: 'station-shop', x: 810, drawX:768, interactionRadius:60, name: 'Mica', imageRole: 'mica' }
 ]);
+/** Exact visitor fixtures shared by the port renderer and its composition
+ * audit. Meeting props remain present after a sale, so their envelopes are
+ * independent of the currently available animal stock. */
+export const SHIP_PORT_TERRARIUM_BOUNDS_V142 = freeze({ x:750, y:536, w:120, h:88 });
+export function getShipPortVisitorFixtureBoundsV142() {
+  const result=[],seen=new Set();
+  for(const meeting of SHIP_PORT_MEETINGS_V87){
+    if(seen.has(meeting.offerId))continue;seen.add(meeting.offerId);
+    const pen=SHIP_PORT_PENS_V87[meeting.offerId],mica=meeting.animalId==='animal-mica';
+    const bounds=mica?SHIP_PORT_TERRARIUM_BOUNDS_V142:pen?.bounds||getPortPropBoundsV87('gate',{x:meeting.x-115,width:230,bottom:626});
+    result.push({...bounds,id:`port-visitor-${meeting.offerId}`,offerId:meeting.offerId,role:'civil-meeting-fixture'});
+    const names=SHIP_PORT_MEETINGS_V87.filter(entry=>entry.offerId===meeting.offerId).map(entry=>entry.name).join(' ET ');
+    const labelWidth=(names+' · CONTRAT SIGNÉ').length*7.2,labelY=pen?pen.bounds.y-12:521;
+    result.push({x:meeting.x-labelWidth/2,y:labelY-13,w:labelWidth,h:16,
+      id:`port-visitor-${meeting.offerId}-label`,offerId:meeting.offerId,role:'civil-meeting-label'});
+  }
+  const scale=PORT_ART_V87.vendor.worldScale,indices=[...new Set(Object.values(PORT_ART_V87.vendor.clips)
+    .filter(clip=>clip.runtimeEnabled).flatMap(clip=>clip.frames))];
+  const poses=indices.map(index=>{const frame=PORT_ART_V87.vendor.frames[index];return{
+    x:668-(frame.w-frame.pivotX)*scale,y:624-frame.pivotY*scale,w:frame.w*scale,h:frame.h*scale};});
+  const left=Math.min(...poses.map(b=>b.x)),top=Math.min(...poses.map(b=>b.y));
+  result.push({x:left,y:top,w:Math.max(...poses.map(b=>b.x+b.w))-left,
+    h:Math.max(...poses.map(b=>b.y+b.h))-top,id:'port-visitor-vendor',role:'civil-vendor-gesture-envelope'});
+  return result;
+}
+
 export const SHIP_PORT_VENDORS_V87 = freeze({
   'station-shop': { id: 'station-shop', name: 'Compagnons de la Frontière' },
   'colony-shelter': { id: 'colony-shelter', name: 'Refuge colonial · comptoir d’adoption' }
@@ -122,7 +148,7 @@ export function drawShipPortRoomV87(ctx, images, save, time = 0, reducedMotion =
     const stock = save?.shipAnimalsV1?.stock?.[meeting.offerId];
     const pen = SHIP_PORT_PENS_V87[meeting.offerId], enclosure = images?.get('enclosure');
     const mica = meeting.animalId === 'animal-mica';
-    const terrarium = images?.get('terrarium'), terrariumBounds = {x:750,y:536,w:120,h:88};
+    const terrarium = images?.get('terrarium'), terrariumBounds = SHIP_PORT_TERRARIUM_BOUNDS_V142;
     // A supervised meeting space: its fence is behind the animal, not an
     // opaque foreground cage concealing the individual the player meets.
     if (!drawnOffers.has(meeting.offerId)) {

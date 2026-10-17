@@ -867,3 +867,49 @@ test('pause and input loss discard the remembered keyboard angle', () => {
     engine.stop();
   }
 });
+
+for (const loading of ['enemyAtlasLoadingPausedV65', 'userCasteLoadingV88']) test(`no held input or delayed jump is queued while ${loading}`, () => {
+  const { engine, actor, key } = makeEngine();
+  engine[loading] = true;
+  key('keydown', 'KeyD'); key('keydown', 'Space');
+  engine.setHeldGameplayKeyV77('KeyF', true, 'touch-KeyF');
+  assert.equal(engine.keys.size, 0); assert.equal(actor.jumpBuffer, 0);
+  engine[loading] = false;
+  tickActor(engine, .2);
+  assert.equal(actor.x, 160); assert.equal(actor.grounded, true);
+});
+test('touch input during pause or a closed scene cannot leave an armed trigger', () => {
+  const { engine } = makeEngine();
+  engine.paused = true; engine.setHeldGameplayKeyV77('KeyF', true, 'touch-KeyF');
+  assert.equal(engine.keys.has('KeyF'), false);
+  engine.paused = false; engine.stop(); engine.setHeldGameplayKeyV77('KeyD', true, 'touch-KeyD');
+  assert.equal(engine.keys.has('KeyD'), false);
+});
+test('gamepad loading suspension requires release before movement or firing can resume', () => {
+  const { engine, actor } = makeEngine();
+  engine.gamepadInputV77.poll([pad()]);
+  engine.gamepadInputV77.poll([pad([1,0,0,0], [7])]);
+  assert.equal(engine.keys.has('KeyF'), true);
+  engine.userCasteLoadingV88 = true; engine.gamepadInputV77.poll([pad([1,0,0,0], [7])]);
+  assert.equal(engine.keys.has('KeyF'), false); assert.equal(actor.gamepadMoveV124, null);
+  engine.userCasteLoadingV88 = false; engine.gamepadInputV77.poll([pad([1,0,0,0], [7])]);
+  assert.equal(engine.keys.has('KeyD'), false); assert.equal(engine.keys.has('KeyF'), false);
+  engine.gamepadInputV77.poll([pad()]); engine.gamepadInputV77.poll([pad([1,0,0,0], [7])]);
+  assert.equal(engine.keys.has('KeyF'), true);
+});
+test('disabling J2 clears its held keys, buffered jump and aim without clearing J1', () => {
+  const { engine } = makeEngine(); engine.setCoop(true);
+  engine.setHeldGameplayKeyV77('KeyD', true, 'keyboard');
+  engine.setHeldGameplayKeyV77('KeyL', true, 'keyboard');
+  engine.setHeldGameplayKeyV77('KeyO', true, 'gamepad-1');
+  engine.setHeldGameplayKeyV77('KeyU', true, 'keyboard');
+  Object.assign(engine.coop, { vx: 80, gamepadAimV83: { x: 1, y: 0 }, gamepadCrouchV124: true });
+  engine.setCoop(false);
+  for (const code of ['KeyL', 'KeyO', 'KeyU']) assert.equal(engine.keys.has(code), false, code);
+  assert.equal(engine.keys.has('KeyD'), true);
+  assert.equal(engine.coop.jumpBuffer, 0); assert.equal(engine.coop.vx, 0); assert.equal(engine.coop.gamepadAimV83, null);
+  engine.setHeldGameplayKeyV77('KeyL', true, 'keyboard');
+  assert.equal(engine.keys.has('KeyL'), false);
+  engine.setCoop(true); const x = engine.coop.x; tickActor(engine, .2, 60, engine.coop);
+  assert.equal(engine.coop.x, x); assert.equal(engine.coop.grounded, true);
+});

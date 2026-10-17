@@ -44,6 +44,7 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
     const options=optionsFor(room),plan=getHubRoomLifePlanV136(room,options);
     assert.deepEqual(getHubRoomLifePlanV136(room,options),plan);
     assert.ok(plan.items.length>=(room.id==='dropship-hangar'?3:4),room.id);
+    assert.ok(plan.items.length<=14,`${room.id}: more than 14 passive props requires another composition review`);
     assert.ok(plan.items.some(item=>[HUB_PROP_ATLAS_V136.asset,HUB_FURNISHING_ATLAS_V137.asset,HUB_FURNITURE_ATLAS_V139.asset].includes(item.asset)),room.id);
     total+=plan.items.length;
     for(const entry of plan.items){
@@ -60,7 +61,11 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
     }
     for(let a=0;a<plan.items.length;a++)for(let b=a+1;b<plan.items.length;b++)assert.ok(!overlap(plan.items[a],plan.items[b]),room.id);
   }
-  assert.ok(total>=180&&total<=240,`Equipment density ${total} needs review`);
+  // This census excludes the six V137 service compartments. Its reviewed
+  // V140 baseline225 gains31 V142 items plus one restored navigation-records
+  // legacy role, minus four old civilian props concealed by real visitor pens;
+  // the two new cockpit items belong to the separate V137 census.
+  assert.equal(total,253,`The 29-room equipment census ${total} differs from its reviewed composition`);
   assert.deepEqual([...usedCells].sort(),Object.keys(HUB_PROP_ATLAS_V136.cells).sort());
   assert.deepEqual(rooms,before);
 });
