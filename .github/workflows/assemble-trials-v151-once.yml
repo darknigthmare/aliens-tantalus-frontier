@@ -1,0 +1,102 @@
+name: Assemble reviewed Trials V151 once
+on:
+  pull_request:
+    paths: ['.github/workflows/assemble-trials-v151-once.yml']
+permissions:
+  contents: read
+jobs:
+  assemble:
+    if: github.event.pull_request.number == 9 && github.repository == 'darknigthmare/aliens-tantalus-frontier' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'fix/audit-hardening-v143'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+      BASE: d9bb2ebcf9d9dede3de7c775f85cf984397db139
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Restore reviewed files and immutable blobs without updating any branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, json, base64, hashlib, lzma, subprocess, urllib.request
+          from pathlib import Path
+          root=Path.cwd(); out=Path(os.environ['RUNNER_TEMP'])/'v151-assembled'; out.mkdir(exist_ok=True)
+          workflow='.github/workflows/assemble-trials-v151-once.yml'
+          base=os.environ['BASE']
+          assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['EXPECTED_HEAD']
+          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()==base
+          assert subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines()==[workflow]
+          api='https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier'
+          def request(path, value=None):
+              assert path.startswith('/git/blobs')
+              data=None if value is None else json.dumps(value).encode()
+              req=urllib.request.Request(api+path,data=data,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'},method='GET' if value is None else 'POST')
+              with urllib.request.urlopen(req,timeout=60) as response: return json.load(response)
+          def sha(data): return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          def read_blob(key):
+              value=request('/git/blobs/'+key)
+              assert value['encoding']=='base64'
+              data=base64.b64decode(value['content'])
+              assert value['sha']==key and sha(data)==key
+              return data
+          keys=['9ae68fe58c48f1ecc8861b6005f676c4bfdbf031','646ea1a971937ca11e12c4607e8c5a54bf37b7ff','c2619134615c5ef0f1aab3a386683faf5a0e2f1b','ca848f59ace5489ca24c642ad2b3c714ffdd43ba']
+          compressed=base64.b64decode(b''.join(read_blob(key) for key in keys),validate=True)
+          assert len(compressed)==46068
+          assert hashlib.sha256(compressed).hexdigest()=='8ee3404fa524b31d772540fea54bb6c0469f3572a81ac1192c545be02f391228'
+          payload=lzma.decompress(compressed,memlimit=256*1024*1024)
+          assert len(payload)==100035
+          bundle=json.loads(payload); manifest=bundle['manifest']
+          assert bundle['base']==base
+          allowed={'docs/forge/xeno-trials/V151-FIRETEAM-CASTES.md','docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V151.xlsx','docs/forge/xeno-trials/progress-v151.json','package.json','scripts/qa-xeno-trials-signatures-v147.py','scripts/verify-public-release-v86.mjs','scripts/verify-xeno-trials-castes-v151.mjs','scripts/verify-xeno-trials-signatures-v147.mjs','scripts/verify-xeno-trials-supers-v148.mjs','src/xeno-trials-ai-v119.js','src/xeno-trials-castes-v151.js','src/xeno-trials-engine-v96.js','src/xeno-trials-runtime-v96.js','src/xeno-trials-signatures-v147.js','sw.js'}
+          assert set(manifest)==allowed
+          patch=out/'reviewed.patch'; patch.write_text(bundle['patch'],encoding='utf-8')
+          names={line.split('\t',2)[2] for line in subprocess.check_output(['git','apply','--numstat',str(patch)],text=True).splitlines()}
+          assert names==allowed
+          subprocess.run(['git','apply','--check',str(patch)],check=True)
+          subprocess.run(['git','apply',str(patch)],check=True)
+          for path,expected in manifest.items():
+              data=(root/path).read_bytes()
+              assert len(data)==expected['bytes'] and sha(data)==expected['sha'] and hashlib.sha256(data).hexdigest()==expected['sha256'],path
+              destination=out/'files'/path; destination.parent.mkdir(parents=True,exist_ok=True); destination.write_bytes(data)
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          subprocess.run(['git','rm',workflow],check=True)
+          subprocess.run(['git','add','--',*sorted(manifest)],check=True)
+          subprocess.run(['git','diff','--cached','--check'],check=True)
+          assert set(subprocess.check_output(['git','diff','--cached','--name-only',base],text=True).splitlines())==allowed
+          tree_sha=subprocess.check_output(['git','write-tree'],text=True).strip()
+          elements=[]
+          for path,expected in manifest.items():
+              data=(root/path).read_bytes()
+              created=request('/git/blobs',{'content':base64.b64encode(data).decode(),'encoding':'base64'})
+              assert created['sha']==expected['sha'],path
+              elements.append({'path':path,'mode':'100644','type':'blob','sha':created['sha']})
+          (out/'assembled-tree.json').write_text(json.dumps({'base':base,'stagingCommit':os.environ['EXPECTED_HEAD'],'tree':tree_sha,'files':len(manifest),'branchUpdated':False,'elements':elements},indent=2)+'\n')
+          print('Verified 15 reviewed files and created immutable blobs; no branch update performed.')
+          PY
+      - name: Verify castes, signatures, supers, controls and planning with complete media
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test scripts/verify-xeno-trials-castes-v151.mjs scripts/verify-xeno-trials-signatures-v147.mjs scripts/verify-xeno-trials-supers-v148.mjs scripts/verify-xeno-trials-feedback-v149.mjs scripts/verify-xeno-trials-controls-v150.mjs scripts/verify-xeno-trials-v145.mjs scripts/verify-xeno-trials-plan-v146.mjs 2>&1 | tee "$RUNNER_TEMP/v151-assembled/targeted-tests.log"
+          npm run check 2>&1 | tee "$RUNNER_TEMP/v151-assembled/source-check.log"
+      - name: Retain exact files and validation for connected publication
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v151-assembled
+          retention-days: 7
+          path: ${{ runner.temp }}/v151-assembled
+          if-no-files-found: error
