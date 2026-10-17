@@ -1421,11 +1421,26 @@
       "sessionPersistence": "session-memory-only",
       "interSessionProgress": false,
       "freeScripts": false
+    },
+    "weaponRecovery": {
+      "module": "src/weapon-actions-v131.js",
+      "mixin": "withWeaponActionsV131",
+      "method": "recoverableWeaponIndexV131",
+      "result": "index-or-minus-one",
+      "maxDistance": 72,
+      "readOnly": true,
+      "guards": [
+        "gameplay-admission",
+        "equipped-weapon-profile",
+        "projectile-owner",
+        "center-distance",
+        "native-line-of-sight"
+      ]
     }
   },
   "runtimeSourceSha256": {
     "src/forge-authoring-v133.js": "4ecbc1c16f57ae2d7e0395cfe305d189387aa5d364d913b8aa82c264c7d2787d",
-    "src/forge-mission-runtime-v141.js": "2257ff219a94498c9a7bf66b16586a3652ea44397065a322943a0184ff5b9c65",
+    "src/forge-mission-runtime-v141.js": "31bff5a62e6b748f85759d9e9b3e028c33c1849f12b36695d6ab60a17cf73308",
     "src/forge-model-v130.js": "e7fb0a3f79ab9515051393018f9d6230c42e74c062d3c8c63d862c65a8b8e647",
     "src/forge-narrative-ui-v156.js": "7577ffe05a08f398067fdc69761f491298d0c6ce53c136fe5b7e0efe1df6f330",
     "src/forge-narrative-v156.js": "615d056e05f7ce3970cc38085afd6b15ca4cd0a8ef22511580cf8b3b70e12153",
@@ -1434,6 +1449,7 @@
     "src/forge-versions-v136.js": "a3332e533bc0e972a8c5f82492a71dbd4b68c197ef1be9cf9b2277ad40dfb361",
     "src/game-production-runtime.js": "937312438f3059545734e1e09353e6fe868dcbd47289cede4eee5e6d18cc7b61",
     "src/hub-annex-npc-life-v141.js": "fe012faff2d6ece8a1fd52c4a5a20290c1f7153a447bf97f0cf8266636a946d3",
+    "src/weapon-actions-v131.js": "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
     "src/xeno-trials-restraint-pose-v156.js": "d38f61546c00cadd2ed3f9064b1dfe9b178f38e5c78dcc2448667017431a3a22",
     "src/xeno-trials-rig-v154.js": "fadce1943f542352980d30351edf0f5a8ef07adf5347da56677c8b2627386218",
     "src/xeno-trials-runtime-v96.js": "cd5c869465a778f6571dcb6721dd87cb9f5321b7b1f60bd959c9a7849a83fc3c",
@@ -2821,9 +2837,9 @@
         [
           "forge-native-choice",
           "Choix en playtest Mission / Vaisseau",
-          "Terminal réel le plus proche, E, fenêtre DOM clavier/clic et monde suspendu ; un objectif plus proche physiquement activable reste prioritaire.",
+          "E choisit une action admissible : récit, terminal ordinaire encore à activer ou objectif prêt. Verrou boss et prompts natifs conservés ; réanimation J2, clé et récupération d’arme déléguées au moteur natif.",
           "Implémenté (borné)",
-          "Les scénarios navigateur et contrôle du commit exact sont vérifiés séparément."
+          "Monde suspendu pendant le récit ; sans nouveau gain ni affaiblissement des prérequis. Récupération Bow/Harpoon : profil équipé, propriétaire, portée 72 et ligne de vue native conservés."
         ],
         [
           "forge-memory-session",
@@ -2921,9 +2937,9 @@
         ],
         [
           "QA156-FORGE",
-          "node --test scripts/verify-forge-narrative-v156.mjs",
+          "node --test scripts/verify-forge-narrative-v156.mjs scripts/verify-weapon-actions-v131.mjs",
           "À exécuter sur le commit publié",
-          "Projet, inspecteur, branches, objectifs, sessions et moteurs natifs."
+          "Projets, assemblages, choix, priorités natives et récupération Bow/Harpoon ; aucune CI anticipée."
         ],
         [
           "QA156-NATIVE",
@@ -4606,5 +4622,5 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "8477b37901d34a1e4d600687537b2784e9bd33eda7006bc673f7eee22cd67543"
+  "workbookSha256": "62f4b4e64c147446bf63571b364c94047e054a693d7d276ff89d137956628ced"
 }

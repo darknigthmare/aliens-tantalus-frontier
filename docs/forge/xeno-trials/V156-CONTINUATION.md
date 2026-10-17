@@ -112,6 +112,24 @@ reste disponible. Les choix se font dans une fenêtre DOM au clavier
 ou au clic, avec le monde suspendu. Le curseur, l’historique et les objectifs
 restent en mémoire au changement de salle puis au retour.
 
+
+
+Les récits d’archives respectent le verrou de boss natif : une archive encore
+bloquée ne masque pas une console d’énergie admissible. L’indication LIRE ne
+s’affiche que pour un récit admissible. L’indication d’objectif conserve les
+exigences natives d’énergie, d’archives récupérées et de boss, sans ajouter de
+verrou de route Forge. Les terminaux ordinaires encore à activer conservent
+leur sélection et leurs effets natifs.
+
+La réanimation de J2 à portée native de 86 et les clés de sécurité gardent leur
+priorité. La récupération d’une flèche ou d’un harpon est déléguée au moteur
+existant, via la requête sans effet `recoverableWeaponIndexV131` du mixin
+`withWeaponActionsV131`. Elle conserve le profil équipé, le propriétaire du
+projectile, la distance maximale de 72 au centre de l’acteur et la ligne de
+vue avec les obstacles natifs. La requête retourne un index ou −1 ; seul
+l’interact natif consomme l’objet et applique son effet une fois. Ces contrôles
+n’ajoutent aucun nouveau format de données ni capacité canonique.
+
 La progression du test reste limitée à la session en cours. Le cloud Forge,
 les checkpoints durables, personnages parlants, conditions d’inventaire,
 minuteries et scripts libres restent ouverts. Aucun récit ne modifie une
@@ -131,7 +149,7 @@ Les deux zéros correspondent aux clôtures artistiques et approbations 1:1.
 Ces nombres ne constituent pas un pourcentage de jeu terminé.
 
 `progress-v156.json` reprend toutes les tables, les empreintes des dix classeurs
-historiques et quatre PNG sources, les contrats runtime et le hash du nouveau
+historiques et quatre PNG sources, les seize empreintes runtime et le hash du nouveau
 classeur. Les documents sont admis comme sources de revue et exclus du paquet
 distribué. Les validateurs documentaires n’utilisent que Node et la bibliothèque
 standard Python :

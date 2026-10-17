@@ -290,6 +290,67 @@ test('a fired harpoon/arrow can be recovered exactly once by its actual owner wi
   }
 });
 
+for (const name of ['Compound Bow', 'Harpoon Gun']) test(`${name} recovery admission is read-only and preserves owner, equipped profile, 72px boundary and line of sight`, () => {
+  const subject = fixture(name), { engine, actor, weapon, events } = subject;
+  Object.assign(engine, { powerNode: null, archiveTerminal: null, objective: null, vents: [], vehicle: { ...engine.vehicle, active: false } });
+  engine.walls = [{ id: 'recover-wall', x: 270, y: 500, w: 3, h: 430 }];
+  const reserve = actor.ammoReserve;
+  assert.equal(engine.fire(actor), true); physics(engine, .6);
+  assert.equal(engine.recoverableWeaponsV131.length, 1);
+  const recoverables = engine.recoverableWeaponsV131, item = recoverables[0], itemBefore = { ...item };
+  // An actual impact produced this item. Remove that test wall explicitly so
+  // the admitted case has a clear path; retaining the wall must remain denied.
+  engine.walls = [];
+  Object.assign(actor, { x: item.x - actor.w / 2 - 72, y: item.y - actor.h / 2, fireClock: 0 });
+  const admittedX = actor.x, eventCount = events.length, interactionClock = actor.interactionClock;
+  assert.equal(engine.recoverableWeaponIndexV131(), 0);
+  assert.equal(engine.recoverableWeaponIndexV131(actor), 0);
+  assert.equal(engine.recoverableWeaponsV131, recoverables);
+  assert.deepEqual(item, itemBefore);
+  assert.equal(actor.ammoReserve, reserve); assert.equal(events.length, eventCount);
+  assert.equal(actor.interactionClock, interactionClock);
+
+  actor.x = admittedX - .001;
+  assert.equal(engine.recoverableWeaponIndexV131(actor), -1);
+  assert.equal(engine.interact(actor), false);
+  actor.x = admittedX;
+  engine.walls = [{ id: 'recover-occluder', x: item.x - 36, y: item.y - 30, w: 3, h: 60 }];
+  assert.equal(engine.recoverableWeaponIndexV131(actor), -1);
+  assert.equal(engine.interact(actor), false);
+  engine.walls = [];
+
+  const weaponMode = actor.weaponMode;
+  actor.weaponMode = 'sidearm';
+  assert.notEqual(engine.weaponActionProfileV131(actor)?.weaponId, weapon.id);
+  assert.equal(engine.recoverableWeaponIndexV131(actor), -1);
+  assert.equal(engine.interact(actor), false);
+  actor.weaponMode = weaponMode;
+  assert.equal(engine.weaponActionProfileV131(actor)?.weaponId, weapon.id);
+
+  engine.setCoop(true);
+  // Give the second fixture operator the same equipped profile, so rejection
+  // below isolates projectile ownership rather than a mismatched sidearm.
+  Object.assign(engine.coop, { x: actor.x, y: actor.y, weaponMode });
+  assert.equal(engine.canPerformGameplayAction(engine.coop), true);
+  assert.equal(engine.weaponActionProfileV131(engine.coop)?.weaponId, weapon.id);
+  assert.equal(engine.recoverableWeaponIndexV131(engine.coop), -1);
+  assert.equal(engine.interact(engine.coop), false);
+
+  engine.togglePause();
+  assert.equal(engine.recoverableWeaponIndexV131(actor), -1);
+  assert.equal(engine.interact(actor), false);
+  engine.togglePause();
+  assert.equal(actor.ammoReserve, reserve); assert.equal(engine.recoverableWeaponsV131.length, 1);
+  assert.equal(events.filter(event => event.type === 'weapon-recovered-v131').length, 0);
+
+  assert.equal(engine.recoverableWeaponIndexV131(actor), 0);
+  assert.equal(engine.interact(actor), true);
+  assert.equal(actor.ammoReserve, reserve + 1); assert.equal(engine.recoverableWeaponsV131.length, 0);
+  assert.equal(events.filter(event => event.type === 'weapon-recovered-v131').length, 1);
+  assert.equal(engine.recoverableWeaponIndexV131(actor), -1);
+  assert.equal(engine.interact(actor), false); assert.equal(actor.ammoReserve, reserve + 1);
+});
+
 test('bolts and harpoons retain real finite trajectories and a Sonic Harpoon applies real disorientation', () => {
   for (const name of ['Bolt Gun', 'Harpoon Gun', 'Foundry Nailgun', 'Sonic Harpoon']) {
     const subject = fixture(name), { engine, actor } = subject;

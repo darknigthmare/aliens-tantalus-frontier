@@ -16,6 +16,7 @@ import { HUB_ANNEX_NPC_DUTIES_V141 as annexDuties, HUB_ANNEX_NPC_ROTATIONS_V156 
 import { HUB_ANNEXES_V137 as annexes } from '../src/hub-annex-registry-v137.js';
 import { FORGE_NARRATIVE_LIMITS_V156 as narrativeLimits,
   defaultForgeNarrativeV156, parseForgeNarrativeV156 } from '../src/forge-narrative-v156.js';
+import { withWeaponActionsV131 } from '../src/weapon-actions-v131.js';
 
 const prefix = 'docs/forge/xeno-trials/';
 const bytes = name => readFileSync(new URL('../' + prefix + name, import.meta.url));
@@ -25,6 +26,14 @@ const current = json('progress-v156.json');
 const previous = json('progress-v155.json');
 const plan = json('xeno-trials-plan-v146.json');
 const ids = rows => rows.map(r => r[0]);
+const runtimeSources = [
+  'src/forge-authoring-v133.js', 'src/forge-mission-runtime-v141.js', 'src/forge-model-v130.js',
+  'src/forge-narrative-ui-v156.js', 'src/forge-narrative-v156.js', 'src/forge-ship-runtime-v141.js',
+  'src/forge-ui-v130.js', 'src/forge-versions-v136.js', 'src/game-production-runtime.js',
+  'src/hub-annex-npc-life-v141.js', 'src/weapon-actions-v131.js', 'src/xeno-trials-restraint-pose-v156.js',
+  'src/xeno-trials-rig-v154.js', 'src/xeno-trials-runtime-v96.js', 'src/xeno-trials-sequences-v155.js',
+  'src/xeno-trials-ui-v96.js'
+].sort();
 
 test('V156 keeps the exact inherited 40 presentation, 28 ART153 and 189 roster IDs without artistic closure', () => {
   assert.equal(current.lot, 'V156');
@@ -130,7 +139,7 @@ test('V156 documents separate technical scope, remaining audits and prepublicati
   assert.match(body, /1:1/);
   assert.match(body, /partiel/i);
   assert.doesNotMatch(body, /CI verte|CI réussie|tout est terminé/i);
-  assert.ok(Object.keys(current.runtimeSourceSha256).length >= 4);
+  assert.deepEqual(Object.keys(current.runtimeSourceSha256), runtimeSources);
   for (const [path, hash] of Object.entries(current.runtimeSourceSha256)) {
     assert.match(path, /^src\/[a-zA-Z0-9._-]+\.js$/);
     assert.equal(sha(readFileSync(new URL('../' + path, import.meta.url))), hash, path);
@@ -165,6 +174,15 @@ test('the appendix accurately records bounded human lowering, real annex watches
   assert.equal(forge.sessionPersistence, 'session-memory-only');
   assert.equal(forge.interSessionProgress, false);
   assert.equal(forge.freeScripts, false);
+  const recovery = current.runtimeContracts.weaponRecovery;
+  assert.equal(recovery.module, 'src/weapon-actions-v131.js');
+  assert.equal(recovery.mixin, 'withWeaponActionsV131');
+  assert.equal(recovery.method, 'recoverableWeaponIndexV131');
+  assert.equal(typeof withWeaponActionsV131(class {}).prototype[recovery.method], 'function');
+  assert.equal(recovery.result, 'index-or-minus-one');
+  assert.equal(recovery.maxDistance, 72);
+  assert.equal(recovery.readOnly, true);
+  assert.deepEqual(recovery.guards, ['gameplay-admission', 'equipped-weapon-profile', 'projectile-owner', 'center-distance', 'native-line-of-sight']);
   const art = new Map(current.tables['02_ART153'].rows.map(r => [r[0], r]));
   for (const id of ['ART153-11', 'ART153-12', 'ART153-18', 'ART153-19', 'ART153-25', 'ART153-26']) {
     assert.equal(art.get(id)[4], 'Partiel');

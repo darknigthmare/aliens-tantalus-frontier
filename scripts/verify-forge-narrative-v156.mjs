@@ -8,6 +8,7 @@ import { ForgeVersionStoreV136, parseForgeVersionsV136, compareForgeDocumentsV13
 import { missionV136, hostV136 } from './forge-native-host-v136.mjs';
 import { HubGame as PhysicalHub } from '../src/hub-v51-runtime.js';
 import { withForgeShipRuntimeV141 } from '../src/forge-ship-runtime-v141.js';
+import { ENEMIES, WEAPONS } from '../src/content.js';
 import { captureAssemblyV133, normalizeAssemblyV133, transformAssemblyV133, placementPreviewV133, stampAssemblyV133,
   ForgeAssemblyLibraryV133, parseAssemblyLibraryV133, ASSEMBLY_KEY_V133 } from '../src/forge-authoring-v133.js';
 
@@ -472,4 +473,225 @@ test('review P2: a completed nearby objective yields E to its conditional story 
   assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal', 'b-goal']);
   assert.equal(engine.forgeSessionV141.transitions, 0);
   assert.deepEqual({ x: engine.player.x, y: engine.player.y }, position);
+});
+
+test('review native admission: a boss-locked nearer archive cannot mask its admissible narrative power node', t => {
+  const input = closeObjectiveProjectV156({ spawnX: 4, goalX: 2, terminalX: 5, secondTerminalX: 6 });
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < centerDistanceV156(engine.player, engine.powerNode));
+  assert.ok(centerDistanceV156(engine.player, engine.powerNode) < 130);
+  // Explicit native prerequisite fixture; no combat outcome is fabricated.
+  engine.mission.objectives.boss = false;
+  assert.equal(engine.forgeNarrativeTerminalV156(), engine.powerNode); assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/);
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal');
+  assert.equal(engine.powerNode.active, true); assert.equal(engine.archiveTerminal.recovered, false); assert.equal(engine.mission.objectives.boss, false);
+});
+
+test('review native admission: an isolated locked archive reports the boss gate, becomes readable after it, and retains the gate on reread', t => {
+  const runtime = missionV136({ editorProject: closeObjectiveProjectV156({ spawnX: 4, goalX: 2, terminalX: 5, secondTerminalX: 6 }), forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.powerNode) >= 130 && centerDistanceV156(engine.player, engine.archiveTerminal) < 100);
+  engine.mission.objectives.boss = false;
+  assert.equal(engine.forgeNarrativeTerminalV156(), null); assert.match(engine.getInteractionPrompt(), /NEUTRALISER LA MENACE ALPHA/);
+  const before = structuredClone(engine.forgeSessionV141); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.equal(engine.archiveTerminal.recovered, false); assert.deepEqual(engine.forgeSessionV141, before);
+  engine.mission.objectives.boss = true;
+  assert.equal(engine.forgeNarrativeTerminalV156(), engine.archiveTerminal); assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/);
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'archive'); assert.equal(engine.archiveTerminal.recovered, true);
+  engine.closeForgeNarrativeV156(); engine.mission.objectives.boss = false;
+  assert.equal(engine.forgeNarrativeTerminalV156(), null); assert.match(engine.getInteractionPrompt(), /NEUTRALISER LA MENACE ALPHA/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.equal(engine.archiveTerminal.recovered, true);
+  engine.mission.objectives.boss = true; tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'archive');
+});
+
+test('review native admission: ordinary pending power keeps its native priority before a boss-locked narrative archive', t => {
+  const input = closeObjectiveProjectV156({ spawnX: 4, goalX: 2, terminalX: 5, secondTerminalX: 6 });
+  delete input.rooms[0].cells.find(cell => cell.id === 'terminal').narrative;
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < centerDistanceV156(engine.player, engine.powerNode));
+  engine.mission.objectives.boss = false;
+  assert.equal(engine.forgeNarrativeTerminalV156(), null); assert.match(engine.getInteractionPrompt(), /RÉTABLIR LE CIRCUIT/);
+  tap(runtime); assert.equal(engine.powerNode.active, true); assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+  assert.match(engine.getInteractionPrompt(), /NEUTRALISER LA MENACE ALPHA/); tap(runtime);
+  assert.equal(engine.archiveTerminal.recovered, false); assert.equal(engine.mission.objectives.boss, false);
+});
+
+test('review native admission: a sealed power approach and locked archive produce a truthful refusal without opening either story', t => {
+  const runtime = missionV136({ editorProject: closeObjectiveProjectV156({ spawnX: 4, goalX: 2, terminalX: 5, secondTerminalX: 6 }), forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < centerDistanceV156(engine.player, engine.powerNode));
+  engine.mission.objectives.boss = false;
+  // Explicit runtime partition fixture seals the left-hand power reach only.
+  const partition = { id: 'admission-partition', x: engine.player.x - 12, y: engine.player.y - 10, w: 6, h: engine.player.h + 20 };
+  engine.walls.push(partition);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.powerNode), false);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.archiveTerminal), true);
+  assert.equal(engine.forgeNarrativeTerminalV156(), null); assert.match(engine.getInteractionPrompt(), /TERMINAL BLOQUÉ PAR UNE CLOISON/);
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.equal(engine.powerNode.active, false); assert.equal(engine.archiveTerminal.recovered, false);
+  engine.walls.splice(engine.walls.indexOf(partition), 1);
+  assert.equal(engine.forgeNarrativeTerminalV156(), engine.powerNode); tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal');
+});
+
+test('review native admission: every unmet native objective requirement matches the prompt and refuses E before validation', t => {
+  const input = project(); input.rooms[0].cells.push(
+    { id: 'a-archive', x: 12, y: 15, type: 'terminal', layer: 'gameplay' },
+    { id: 'a-alpha', x: 24, y: 15, type: 'enemy', layer: 'gameplay' });
+  const alpha = ENEMIES.find(enemy => enemy.id === 'enemy-112-armored-queen');
+  assert.ok(alpha);
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true, enemyCatalog: [alpha] }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.objective) < 80);
+  assert.equal(engine.forgeNarrativeTerminalV156(), null);
+  const boss = engine.enemies.find(enemy => enemy.isBoss); assert.ok(boss);
+  assert.deepEqual([...engine.objectiveRuntime.requirements].sort(), ['archive', 'boss', 'power']);
+  const cases = [ ['power', 'ALIMENTATION AUXILIAIRE MANQUANTE'],
+    ['boss', 'MENACE ALPHA ENCORE ACTIVE'], ['archive', 'DONNÉES NON RÉCUPÉRÉES'] ];
+  for (const [blocked, message] of cases) {
+    // Declare one missing native condition at a time, without editing a save.
+    Object.assign(engine.mission.objectives, { power: true, route: true, boss: true, archive: true, [blocked]: false });
+    engine.powerNode.active = engine.mission.objectives.power; engine.archiveTerminal.recovered = engine.mission.objectives.archive;
+    boss.alive = blocked === 'boss'; boss.health = boss.alive ? boss.maxHealth : 0;
+    const before = structuredClone(engine.forgeSessionV141);
+    assert.equal(engine.getInteractionPrompt(), `E  ${message}`); tap(runtime);
+    assert.deepEqual(engine.forgeSessionV141, before); assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+    assert.ok(runtime.messages.some(event => event.type === 'locked' && event.requirement === message));
+  }
+  // The published Forge compiler does not require route: preserve that native
+  // admission instead of inventing an extra gate from the older V51 class.
+  Object.assign(engine.mission.objectives, { power: true, route: false, boss: true, archive: true });
+  engine.powerNode.active = true; engine.archiveTerminal.recovered = true; boss.alive = false; boss.health = 0;
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['a-goal']);
+});
+
+test('review native priority: ordinary power beats a farther archive story before an overlapping locked objective', t => {
+  const input = closeObjectiveProjectV156({ size: [128, 72], spawnX: 8, goalX: 10, terminalX: 11, secondTerminalX: 12 });
+  delete input.rooms[0].cells.find(cell => cell.id === 'terminal').narrative;
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < 130
+    && centerDistanceV156(engine.player, engine.powerNode) < centerDistanceV156(engine.player, engine.archiveTerminal));
+  assert.ok(centerDistanceV156(engine.player, engine.objective) < 125);
+  assert.equal(engine.forgePreferredUseV156().kind, 'native-terminal'); assert.match(engine.getInteractionPrompt(), /RÉTABLIR LE CIRCUIT/);
+  tap(runtime); assert.equal(engine.powerNode.active, true); assert.equal(engine.archiveTerminal.recovered, false);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.deepEqual(engine.forgeSessionV141.completedObjectives, []);
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'archive'); engine.closeForgeNarrativeV156();
+  assert.equal(engine.archiveTerminal.recovered, true);
+  // Explicit power-loss fixture: a relistenable recovered archive must still
+  // yield to its nearer ordinary power node when that native action returns.
+  engine.powerNode.active = false; engine.mission.objectives.power = false;
+  assert.match(engine.getInteractionPrompt(), /RÉTABLIR LE CIRCUIT/); tap(runtime);
+  assert.equal(engine.powerNode.active, true); assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']);
+});
+
+test('review native priority: narrative power retains its first native activation, then ordinary archive takes the nearer action', t => {
+  const input = closeObjectiveProjectV156({ size: [128, 72], spawnX: 8, goalX: 10, terminalX: 11, secondTerminalX: 12 });
+  delete input.rooms[0].cells.find(cell => cell.id === 'archive').narrative;
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < centerDistanceV156(engine.player, engine.powerNode));
+  assert.ok(centerDistanceV156(engine.player, engine.powerNode) < 130);
+  // V51 consumes pending power before archive: do not delegate and silently
+  // activate the power terminal without showing its authored narrative.
+  assert.equal(engine.forgePreferredUseV156().kind, 'narrative'); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.powerNode.active, true);
+  assert.equal(engine.archiveTerminal.recovered, false); engine.closeForgeNarrativeV156();
+  const intel = engine.inventory.intel;
+  assert.equal(engine.forgePreferredUseV156().kind, 'native-terminal'); assert.match(engine.getInteractionPrompt(), /EXTRAIRE LES ARCHIVES/);
+  tap(runtime); assert.equal(engine.archiveTerminal.recovered, true); assert.equal(engine.inventory.intel, intel + 3);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+});
+
+test('review native priority: either operator can revive the other through real E/Y before a neighboring story', t => {
+  const boundaryActor = { x: 0, y: 0, w: 42, h: 92, alive: true };
+  const boundaryAlly = { x: 86, y: 0, w: 42, h: 92, downed: true };
+  const boundaryOwner = { player: boundaryActor, coop: boundaryAlly, coopEnabled: true, drops: [], forgePendingTerminalV156: () => ({}) };
+  const productionSelector = missionV136({ editorProject: closeObjectiveProjectV156(), forgeJourneyV141: true }).engine;
+  t.after(() => productionSelector.stop());
+  // Read-only reach fixtures match the V51 revive predicate at <= 86, without
+  // moving either live operator used in the keyboard integration below.
+  assert.equal(productionSelector.forgeUrgentNativeUseV156.call(boundaryOwner, boundaryActor), 'revive');
+  boundaryAlly.x = 86.001;
+  assert.equal(productionSelector.forgeUrgentNativeUseV156.call(boundaryOwner, boundaryActor), null);
+  productionSelector.stop();
+  for (const helperRole of ['player', 'coop']) {
+    const runtime = missionV136({ editorProject: closeObjectiveProjectV156(), forgeJourneyV141: true }), { engine } = runtime;
+    t.after(() => engine.stop()); engine.setCoop(true);
+    walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156()));
+    engine.keys.add('KeyL');
+    for (let frame = 0; frame < 1800 && centerDistanceV156(engine.player, engine.coop) > 50; frame++) engine.update(1 / 60);
+    engine.keys.delete('KeyL'); assert.ok(centerDistanceV156(engine.player, engine.coop) <= 50);
+    const helper = engine[helperRole], target = helperRole === 'player' ? engine.coop : engine.player;
+    engine.damagePlayer(target, 999, { bypassCover: true, source: 'qa-native-revive-priority' });
+    assert.equal(target.downed, true); assert.equal(engine.mission.state, 'active');
+    assert.equal(engine.forgeUrgentNativeUseV156(helper), 'revive'); assert.match(engine.getInteractionPrompt(helper), /RÉANIMER LE COÉQUIPIER/);
+    tap(runtime, helperRole === 'player' ? 'KeyE' : 'KeyY');
+    assert.equal(target.downed, false); assert.equal(target.alive, true); assert.equal(target.health, 38);
+    assert.equal(engine.powerNode.active, false); assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+    assert.deepEqual(engine.forgeSessionV141.narrativeV156 || [], []);
+    assert.equal(runtime.messages.filter(event => event.type === 'marine-revived').length, 1);
+    engine.stop();
+  }
+});
+
+test('review native priority: a genuine key-carrier drop is taken before a story and uses the inherited resource effects once', t => {
+  const input = closeObjectiveProjectV156({ goalX: 2, terminalX: 5 });
+  for (const [index, x] of [6, 15, 20].entries()) input.rooms[0].cells.push({ id: `enemy-${index}`, x, y: 15, type: 'enemy', layer: 'gameplay' });
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop()); const carrier = engine.enemies.find(enemy => enemy.keyCarrier); assert.ok(carrier);
+  // Defeat through the production method so the key and its pickup identity
+  // come from the native drop factory, rather than an injected pickup record.
+  engine.defeatEnemy(carrier, engine.player);
+  const key = engine.drops.find(drop => drop.type === 'security-key'); assert.ok(key);
+  walk(engine, () => centerDistanceV156(engine.player, key) < 95 && Boolean(engine.forgeNarrativeTerminalV156()));
+  const before = engine.inventory.securityKeys;
+  assert.match(engine.getInteractionPrompt(), /RÉCUPÉRER LE BADGE/); tap(runtime);
+  assert.equal(key.taken, true); assert.equal(engine.inventory.securityKeys, before + 1);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.equal(engine.powerNode.active, false);
+  assert.equal(runtime.messages.filter(event => event.type === 'resource' && event.resource === 'security-key').length, 1);
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.inventory.securityKeys, before + 1);
+});
+
+for (const name of ['Compound Bow', 'Harpoon Gun']) test(`review native priority: ${name} projectile recovery keeps its owner and resource effects before rereading an activated story`, t => {
+  const input = closeObjectiveProjectV156({ goalX: 2, terminalX: 5 });
+  const weapon = WEAPONS.find(entry => entry.name === name); assert.ok(weapon);
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true, weapon }), { engine } = runtime;
+  t.after(() => engine.stop()); walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156())); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); engine.closeForgeNarrativeV156();
+  // Start inside the console's reach, so approaching the left-hand impact
+  // does not leave the very interaction overlap this regression exercises.
+  walk(engine, () => centerDistanceV156(engine.player, engine.powerNode) < 45);
+  for (let frame = 0; frame < 90; frame++) engine.update(1 / 60);
+  // A declared temporary impact surface creates a native recoverable projectile.
+  // Remove it before approach, so the pickup has the same clear LOS as its
+  // ordinary-terminal control; no actor/projectile/pickup position is injected.
+  const wall = { id: 'qa-recovery-impact', x: engine.player.x - 60, y: 600, w: 3, h: 360 };
+  engine.walls.push(wall); engine.player.pointerAimV83 = { x: -1, y: 0 };
+  assert.equal(engine.fire(engine.player), true);
+  for (let frame = 0; frame < 180 && !engine.recoverableWeaponsV131?.length; frame++) engine.update(1 / 60);
+  const item = engine.recoverableWeaponsV131?.[0]; assert.ok(item, `${name} native impact produced a pickup`);
+  assert.equal(item.owner, engine.player); assert.equal(item.weaponId, weapon.id);
+  engine.walls.splice(engine.walls.indexOf(wall), 1);
+  engine.player.pointerAimV83 = null;
+  engine.keys.add('KeyA');
+  for (let frame = 0; frame < 900 && Math.hypot(item.x - engine.player.x - engine.player.w / 2, item.y - engine.player.y - engine.player.h / 2) > 68; frame++) engine.update(1 / 60);
+  engine.keys.delete('KeyA');
+  assert.equal(engine.recoverableWeaponIndexV131(engine.player), 0, JSON.stringify({
+    actor: { x: engine.player.x, y: engine.player.y, w: engine.player.w, h: engine.player.h, alive: engine.player.alive },
+    pickup: { x: item.x, y: item.y }, distance: Math.hypot(item.x-engine.player.x-engine.player.w/2,item.y-engine.player.y-engine.player.h/2),
+    profile: engine.weaponActionProfileV131(engine.player)?.weaponId, allowed: engine.canPerformGameplayAction(engine.player), walls: engine.walls.map(wall=>wall.id) }));
+  assert.ok(centerDistanceV156(engine.player, engine.powerNode) < 130);
+  assert.equal(engine.forgeUrgentNativeUseV156(), 'recoverable-weapon');
+  assert.match(engine.getInteractionPrompt(), /RÉCUPÉRER/);
+  const reserve = engine.player.ammoReserve;
+  tap(runtime); assert.equal(engine.recoverableWeaponsV131.length, 0); assert.equal(engine.player.ammoReserve, reserve + 1);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.equal(engine.powerNode.active, true);
+  assert.equal(runtime.messages.filter(event => event.type === 'weapon-recovered-v131').length, 1);
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.player.ammoReserve, reserve + 1);
 });
