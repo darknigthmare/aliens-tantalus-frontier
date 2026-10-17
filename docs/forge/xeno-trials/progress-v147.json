@@ -1,0 +1,276 @@
+{
+  "schema": 147,
+  "baseCommit": "60dac906bbd50c421c586c8b2598defcf03ea3cd",
+  "phase": "partial-implementation",
+  "appVersion": "143.0.0",
+  "saveSchema": 52,
+  "approved1to1": 0,
+  "newCharacterAnimationClips": 0,
+  "unchangedFighters": 184,
+  "behaviorTests": 44,
+  "historicalTrialsTests": 30,
+  "workbook": "XENO_TRIALS_SUIVI_V147.xlsx",
+  "workbookSha256": "d271c15a8646bdd402aa25eafb81490c2d7bf8cde61f034590e7177de92254d4",
+  "planV146Sha256": "d6541b5656b9f8e807fa19ca26966249e4c6f1b79d508b91da9244c7744cfa21",
+  "pilots": [
+    {
+      "id": "pathogen-brute-ground-impact",
+      "fighterId": "drive-v123-fte-pathogen-brute-profile-v13",
+      "profileId": "pose-v123-drive-fte-pathogen-brute-profile-v13",
+      "label": "Onde de percussion",
+      "style": "ground-wave",
+      "sourceId": "pathogen",
+      "evidence": "reference-capability-adaptation",
+      "canonExact": false,
+      "animation": "existing-static-pose",
+      "description": "Frappe au sol puis deux ondes rasantes. Sauter au-dessus de leur front ou sortir de portée.",
+      "spec": {
+        "cost": 38,
+        "damage": 34,
+        "reach": 270,
+        "startup": 0.45,
+        "active": 0.1,
+        "recovery": 0.65,
+        "stun": 0.32,
+        "push": 34,
+        "groundedOnly": true,
+        "projectileSpeed": 480,
+        "projectileHeight": 20,
+        "cooldown": 2.1
+      },
+      "status": "engine-tested-partial",
+      "productionLotsV146": [
+        "drive-v123-fte-pathogen-brute-profile-v13::REFERENCE",
+        "drive-v123-fte-pathogen-brute-profile-v13::RIG",
+        "drive-v123-fte-pathogen-brute-profile-v13::COMBAT",
+        "drive-v123-fte-pathogen-brute-profile-v13::CINEMA",
+        "drive-v123-fte-pathogen-brute-profile-v13::QA"
+      ],
+      "remaining": [
+        "frame reference capture",
+        "authored articulated clips",
+        "complete moveset",
+        "supers",
+        "terminal finisher",
+        "intro/outro and reversible round poses",
+        "artist review"
+      ]
+    },
+    {
+      "id": "pathogen-queen-acid-cluster",
+      "fighterId": "drive-v123-fte-pathogen-queen-right-v13",
+      "profileId": "pose-v123-drive-fte-pathogen-queen-right-v13",
+      "label": "Grappe acide",
+      "style": "acid-cluster",
+      "sourceId": "pathogen",
+      "evidence": "reference-capability-adaptation",
+      "canonExact": false,
+      "animation": "existing-static-pose",
+      "description": "Trois projectiles divergents visent la position observée au départ. Aucun suivi après émission.",
+      "spec": {
+        "cost": 42,
+        "damage": 13,
+        "reach": 620,
+        "startup": 0.5,
+        "active": 0.1,
+        "recovery": 0.7,
+        "stun": 0.12,
+        "push": 12,
+        "groundedOnly": true,
+        "projectileSpeed": 450,
+        "spread": 0.14,
+        "cooldown": 2.4
+      },
+      "status": "engine-tested-partial",
+      "productionLotsV146": [
+        "drive-v123-fte-pathogen-queen-right-v13::REFERENCE",
+        "drive-v123-fte-pathogen-queen-right-v13::RIG",
+        "drive-v123-fte-pathogen-queen-right-v13::COMBAT",
+        "drive-v123-fte-pathogen-queen-right-v13::CINEMA",
+        "drive-v123-fte-pathogen-queen-right-v13::QA"
+      ],
+      "remaining": [
+        "frame reference capture",
+        "authored articulated clips",
+        "complete moveset",
+        "supers",
+        "terminal finisher",
+        "intro/outro and reversible round poses",
+        "artist review"
+      ]
+    },
+    {
+      "id": "afe2-warden-acid",
+      "fighterId": "import-game-afe2-warden",
+      "profileId": "pose-v106-import-game-afe2-warden",
+      "label": "Projection acide",
+      "style": "aimed-acid",
+      "sourceId": "dossier",
+      "evidence": "reference-capability-adaptation",
+      "canonExact": false,
+      "animation": "existing-static-pose",
+      "description": "Projection acide à distance, précédée d’une anticipation. La frappe lourde provoque un recul prolongé.",
+      "spec": {
+        "cost": 38,
+        "damage": 32,
+        "reach": 560,
+        "startup": 0.4,
+        "active": 0.1,
+        "recovery": 0.55,
+        "stun": 0.26,
+        "push": 28,
+        "groundedOnly": true,
+        "projectileSpeed": 470,
+        "cooldown": 1.9
+      },
+      "heavy": {
+        "cost": 27,
+        "damage": 28,
+        "reach": 86,
+        "startup": 0.3,
+        "active": 0.1,
+        "recovery": 0.48,
+        "stun": 0.46,
+        "push": 46
+      },
+      "status": "engine-tested-partial",
+      "productionLotsV146": [
+        "import-game-afe2-warden::REFERENCE",
+        "import-game-afe2-warden::RIG",
+        "import-game-afe2-warden::COMBAT",
+        "import-game-afe2-warden::CINEMA",
+        "import-game-afe2-warden::QA"
+      ],
+      "remaining": [
+        "frame reference capture",
+        "authored articulated clips",
+        "complete moveset",
+        "supers",
+        "terminal finisher",
+        "intro/outro and reversible round poses",
+        "artist review"
+      ]
+    },
+    {
+      "id": "afe2-exploder-detonation",
+      "fighterId": "import-game-afe2-exploder",
+      "profileId": "pose-v106-import-game-afe2-exploder",
+      "label": "Détonation sacrificielle",
+      "style": "detonation",
+      "sourceId": "dossier",
+      "evidence": "reference-capability-adaptation",
+      "canonExact": false,
+      "animation": "existing-static-pose",
+      "description": "Courte ruée puis détonation de proximité. Le spécimen est consommé, même si la cible esquive : double KO possible.",
+      "spec": {
+        "cost": 38,
+        "damage": 180,
+        "reach": 170,
+        "startup": 0.45,
+        "active": 0.62,
+        "recovery": 0.4,
+        "stun": 0.5,
+        "push": 50,
+        "groundedOnly": true,
+        "chargeDuration": 0.48,
+        "chargeSpeed": 410,
+        "cooldown": 1.6
+      },
+      "status": "engine-tested-partial",
+      "productionLotsV146": [
+        "import-game-afe2-exploder::REFERENCE",
+        "import-game-afe2-exploder::RIG",
+        "import-game-afe2-exploder::COMBAT",
+        "import-game-afe2-exploder::CINEMA",
+        "import-game-afe2-exploder::QA"
+      ],
+      "remaining": [
+        "frame reference capture",
+        "authored articulated clips",
+        "complete moveset",
+        "supers",
+        "terminal finisher",
+        "intro/outro and reversible round poses",
+        "artist review"
+      ]
+    },
+    {
+      "id": "afe2-harbinger-leap",
+      "fighterId": "import-game-afe2-harbinger",
+      "profileId": "pose-v106-import-game-afe2-harbinger",
+      "label": "Bond de renversement",
+      "style": "leap",
+      "sourceId": "dossier",
+      "evidence": "reference-capability-adaptation",
+      "canonExact": false,
+      "animation": "existing-static-pose",
+      "description": "Bond physique vers l’avant. La direction se verrouille au départ ; une seule collision inflige le coup.",
+      "spec": {
+        "cost": 38,
+        "damage": 35,
+        "reach": 78,
+        "startup": 0.32,
+        "active": 0.42,
+        "recovery": 0.6,
+        "stun": 0.42,
+        "push": 42,
+        "groundedOnly": true,
+        "leapSpeed": 390,
+        "leapImpulse": 280,
+        "cooldown": 1.9
+      },
+      "status": "engine-tested-partial",
+      "productionLotsV146": [
+        "import-game-afe2-harbinger::REFERENCE",
+        "import-game-afe2-harbinger::RIG",
+        "import-game-afe2-harbinger::COMBAT",
+        "import-game-afe2-harbinger::CINEMA",
+        "import-game-afe2-harbinger::QA"
+      ],
+      "remaining": [
+        "frame reference capture",
+        "authored articulated clips",
+        "complete moveset",
+        "supers",
+        "terminal finisher",
+        "intro/outro and reversible round poses",
+        "artist review"
+      ]
+    }
+  ],
+  "stages": {
+    "containment-deck": "pressure-monitors",
+    "reactor-ring": "coolant-cycle",
+    "hive-vault": "resin-drops",
+    "tantalus-bridge": "sensor-sweep",
+    "tantalus-cargo": "suspended-cables",
+    "planet-surface": "windborne-dust"
+  },
+  "sources": {
+    "pathogen": {
+      "url": "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+      "title": "Cold Iron Studios — Pathogen Deep Dive",
+      "published": "2022-08-29",
+      "checked": "2026-10-17",
+      "locator": "Pathogen Brute; Pathogen Queen; Matt Highison commentary",
+      "scope": "Ground shockwaves from Brute arm impacts; clustered acid shots from the Queen.",
+      "limits": "No measured frames, timings, hitboxes, projectile count or 2D choreography."
+    },
+    "dossier": {
+      "url": "https://steamcommunity.com/app/3448650/allnews/",
+      "title": "Cold Iron Studios — Xenomorph Showcase",
+      "published": "2026-08-20",
+      "checked": "2026-10-17",
+      "locator": "Xenomorph Dossier: WARDEN, EXPLODER, HARBRINGER; Patch #2: Harbinger leap",
+      "scope": "Warden ranged acid and knockdowns; Exploder proximity detonation; Harbinger leaping knockdown.",
+      "limits": "HARBRINGER is the dossier spelling. No canonical frame counts or arena balance."
+    }
+  },
+  "limits": [
+    "Existing static poses only; physics and original FX are not articulated 1:1 animation.",
+    "Only these exact fighter and profile IDs opt in. No implicit family or variant inheritance.",
+    "V146 remains an immutable preproduction snapshot; no complete fighter lot is marked finished.",
+    "Source capabilities are referenced; timings, damage, counts and 2D trajectories are original balance.",
+    "Global browser and CI status is reported per commit, not guaranteed by this planning snapshot."
+  ]
+}

@@ -64,6 +64,7 @@ jobs:
           node scripts/qa-player-browser-v124.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player.log" || status=1
           python scripts/qa-save-profiles-v144.py --output "$RUNNER_TEMP/atf-release-qa/profiles" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/profiles.log" || status=1
           python scripts/qa-xeno-trials-v145.py --output "$RUNNER_TEMP/atf-release-qa/trials" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/trials.log" || status=1
+          python scripts/qa-xeno-trials-signatures-v147.py --output "$RUNNER_TEMP/atf-release-qa/signatures" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/signatures.log" || status=1
           exit "$status"
       - name: Retain results without distributing private documents
         if: always()

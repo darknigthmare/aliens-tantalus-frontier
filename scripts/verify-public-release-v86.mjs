@@ -79,6 +79,8 @@ const SCRIPT_FILES = new Set([
 for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-audit-v143.mjs',
   'verify-save-lifecycle-v143.mjs', 'verify-release-artifact-v143.mjs',
   'qa-service-worker-v143.py', 'qa-save-profiles-v144.py', 'verify-xeno-trials-v145.mjs', 'qa-xeno-trials-v145.py']) SCRIPT_FILES.add(file);
+SCRIPT_FILES.add('verify-xeno-trials-signatures-v147.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
 SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
@@ -89,6 +91,9 @@ const FORGE_TOOLING_V140 = new Set([
   '.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md', 'docs/forge/V145-XENO-TRIALS.md',
   'docs/forge/xeno-trials',
   'docs/forge/xeno-trials/README.md',
+  'docs/forge/xeno-trials/V147-SIGNATURES.md',
+  'docs/forge/xeno-trials/progress-v147.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V147.xlsx',
   'docs/forge/xeno-trials/manifest-v146.json',
   'docs/forge/xeno-trials/xeno-trials-plan-v146.json',
   'docs/forge/xeno-trials/ALIENS_TANTALUS_XENO_TRIALS_PLAN_V146.xlsx',
