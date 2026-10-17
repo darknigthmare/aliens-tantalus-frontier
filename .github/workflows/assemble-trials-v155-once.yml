@@ -1,0 +1,118 @@
+name: Assemble reviewed Trials V155 once
+on:
+  pull_request:
+    paths: ['.github/workflows/assemble-trials-v155-once.yml']
+permissions:
+  contents: read
+jobs:
+  assemble:
+    if: github.event.pull_request.number == 9 && github.repository == 'darknigthmare/aliens-tantalus-frontier' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'fix/audit-hardening-v143'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+      BASE: 703a2ab87166df39f31bdf8d37d59ab09a9a3af4
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Restore exact reviewed files and create only immutable blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os,json,base64,hashlib,lzma,subprocess,urllib.request,zipfile,io,re
+          from pathlib import Path
+          root=Path.cwd();out=Path(os.environ['RUNNER_TEMP'])/'v155-assembled';out.mkdir(exist_ok=True)
+          workflow='.github/workflows/assemble-trials-v155-once.yml'
+          base=os.environ['BASE']
+          def git(*args):return subprocess.check_output(['git',*args],text=True).strip()
+          assert git('rev-parse','HEAD')==os.environ['EXPECTED_HEAD']
+          assert git('rev-parse','HEAD^')==base
+          assert git('diff','--name-only',base,'HEAD').splitlines()==[workflow]
+          api='https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier'
+          def request(path,value=None):
+              assert path=='/git/blobs' or re.fullmatch(r'/git/blobs/[0-9a-f]{40}',path)
+              data=None if value is None else json.dumps(value).encode()
+              req=urllib.request.Request(api+path,data=data,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'},method='GET' if value is None else 'POST')
+              with urllib.request.urlopen(req,timeout=60) as response:return json.load(response)
+          def blob_sha(data):return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          keys=['e13dcc28ef1409477c9d650a43030f74b2e1c40f','2c06bc9348d0b36beec01e67c88d6c650ba182b9','7774fa41b6f23305aab6fd7a5869495e746a7555','1811e66d87437a500bdbcd2937c168e657c9a3a4','cc2bc07f9cd8884ecce3ec6f681017bfe201d22a','f141f8f03d0ceaea5bb8ba9050cf08ef2b2018cb','ba08f88a90d1ecd81f3ce2f169aa2f30f9a25977','5ccc1ab77623d768c57d0603295cff2b3d9746a1']
+          parts=[]
+          for key in keys:
+              item=request('/git/blobs/'+key);assert item['encoding']=='base64'
+              data=base64.b64decode(item['content']);assert blob_sha(data)==key;parts.append(data)
+          compressed=base64.b64decode(b''.join(parts),validate=True)
+          assert len(compressed)==43032 and hashlib.sha256(compressed).hexdigest()=='f08f43d07ad601c014c0d047efece92c1d5e1d47b15d5016b5aa8e9fee23d113'
+          raw=lzma.decompress(compressed,memlimit=256*1024*1024);assert len(raw)==424527
+          bundle=json.loads(raw);manifest=bundle['manifest']
+          book='docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V155.xlsx'
+          allowed={'.github/workflows/full-release-v143.yml','docs/forge/xeno-trials/V155-SEQUENCES.md',book,'docs/forge/xeno-trials/progress-v155.json','package.json','scripts/qa-xeno-trials-sequences-v155.py','scripts/verify-public-release-v86.mjs','scripts/verify-xeno-trials-sequences-v155.mjs','src/xeno-trials-rig-v154.js','src/xeno-trials-runtime-v96.js','src/xeno-trials-sequences-v155.js','src/xeno-trials-ui-v96.js','sw.js','xeno-trials-fullscreen-v119.css'}
+          assert set(manifest)==allowed
+          patch=out/'reviewed.patch';patch.write_text(bundle['patch'],encoding='utf-8')
+          names={line.split('\t',2)[2] for line in git('apply','--numstat',str(patch)).splitlines()}
+          assert names==allowed-{book}
+          subprocess.run(['git','apply','--check',str(patch)],check=True)
+          subprocess.run(['git','apply',str(patch)],check=True)
+          # Reversible byte transport of the artifact_tool-authored workbook.
+          # No cells, styles, formulas or cached results are edited here.
+          assert bundle['baseWorkbook']=='docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V154.xlsx'
+          original=(root/bundle['baseWorkbook']).read_bytes()
+          assert hashlib.sha256(original).hexdigest()==bundle['baseWorkbookSha256']=='c85b82147f7d4c9110ca28b1d096a379e7f5c9ad3130aa965d2852a9fee22ff6'
+          source=zipfile.ZipFile(io.BytesIO(original));members={}
+          for name,transport in bundle['workbookDelta'].items():
+              if 'literal' in transport:text=transport['literal']
+              else:
+                  chunks=re.findall(r'<[^>]*>|[^<]+',source.read(name).decode())
+                  text=''.join(''.join(chunks[item[1]:item[2]]) if item[0]=='c' else item[1] for item in transport['ops'])
+              members[name]=text.encode('utf-8')
+          archive=io.BytesIO()
+          with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for name,data in sorted(members.items()):
+                  info=zipfile.ZipInfo(name,date_time=(2026,10,17,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
+                  z.writestr(info,data,compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          (root/book).write_bytes(archive.getvalue())
+          for path,expected in manifest.items():
+              data=(root/path).read_bytes()
+              assert len(data)==expected['bytes'] and blob_sha(data)==expected['sha'] and hashlib.sha256(data).hexdigest()==expected['sha256'],path
+              destination=out/'files'/path;destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(data)
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          subprocess.run(['git','rm',workflow],check=True)
+          subprocess.run(['git','add','--',*sorted(manifest)],check=True)
+          subprocess.run(['git','diff','--cached','--check'],check=True)
+          assert set(git('diff','--cached','--name-only',base).splitlines())==allowed
+          expected_tree=git('write-tree');elements=[]
+          for path,expected in manifest.items():
+              data=(root/path).read_bytes()
+              created=request('/git/blobs',{'content':base64.b64encode(data).decode(),'encoding':'base64'})
+              assert created['sha']==expected['sha'],path
+              elements.append({'path':path,'mode':'100644','type':'blob','sha':created['sha']})
+          (out/'tree-elements.json').write_text(json.dumps(elements,indent=2)+'\n')
+          (out/'assembled-tree.json').write_text(json.dumps({'base':base,'stagingCommit':os.environ['EXPECTED_HEAD'],'tree':expected_tree,'files':len(manifest),'branchUpdated':False},indent=2)+'\n')
+          print('Verified 14 reviewed files; prepared immutable blobs and tree '+expected_tree+'. No branch update performed.')
+          PY
+      - name: Test sequences and historical runtime paths with complete media
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test scripts/verify-xeno-trials-sequences-v155.mjs scripts/verify-xeno-trials-v145.mjs scripts/verify-xeno-trials-rig-v154.mjs scripts/verify-xeno-trials-grapple-v153.mjs 2>&1 | tee "$RUNNER_TEMP/v155-assembled/targeted-tests.log"
+          npm run check 2>&1 | tee "$RUNNER_TEMP/v155-assembled/source-check.log"
+      - name: Retain exact reviewed files and test results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v155-assembled
+          retention-days: 7
+          include-hidden-files: true
+          path: ${{ runner.temp }}/v155-assembled
+          if-no-files-found: error
