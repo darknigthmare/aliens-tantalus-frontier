@@ -1,0 +1,109 @@
+name: Assemble reviewed Trials V152 once
+on:
+  pull_request:
+    paths: ['.github/workflows/assemble-trials-v152-once.yml']
+permissions:
+  contents: read
+jobs:
+  assemble:
+    if: github.event.pull_request.number == 9 && github.repository == 'darknigthmare/aliens-tantalus-frontier' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'fix/audit-hardening-v143'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+      BASE: 28807a02d710a7156cbfca71420340651bfae0b3
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Restore reviewed source and workbook into an immutable tree
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64, hashlib, io, json, lzma, os, subprocess, urllib.request, zipfile
+          from pathlib import Path
+          root=Path.cwd(); out=Path(os.environ['RUNNER_TEMP'])/'v152-assembled'; out.mkdir(exist_ok=True)
+          base=os.environ['BASE']; workflow='.github/workflows/assemble-trials-v152-once.yml'
+          assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['EXPECTED_HEAD']
+          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()==base
+          assert subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines()==[workflow]
+          api='https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier'
+          def sha(data): return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          def request(path,value=None):
+              assert path.startswith('/git/blobs') or path=='/git/trees'
+              data=None if value is None else json.dumps(value).encode()
+              req=urllib.request.Request(api+path,data=data,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'},method='GET' if value is None else 'POST')
+              with urllib.request.urlopen(req,timeout=60) as response: return json.load(response)
+          def read_blob(key):
+              result=request('/git/blobs/'+key); assert result['encoding']=='base64'
+              data=base64.b64decode(result['content']); assert result['sha']==key and sha(data)==key
+              return data
+          keys=['9f69d0ef50a10ee09a750a1859c3cccdb41a72b8','0bb6498d59e8778d3540d43a740a566cf01aeca2','d526ade927c1ea0b64afff59267e1b09e2bf7de6','cc5b4ce77a34aa58a363f0fe897224b4e958d094','b1dd429b4c6b59894acc39a90d3113ae02b14fdd','5bf0e82fc5cda1b50259e978865733765394140d']
+          compressed=base64.b64decode(b''.join(read_blob(key) for key in keys),validate=True)
+          assert len(compressed)==30828
+          assert hashlib.sha256(compressed).hexdigest()=='156128ce8221166a4ea95520322ad20b81421151660d95fbb7ed6b635048db06'
+          raw=lzma.decompress(compressed,memlimit=256*1024*1024); assert len(raw)==259669
+          bundle=json.loads(raw); manifest=bundle['files']
+          book='docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V152.xlsx'
+          allowed={'package.json','scripts/qa-xeno-trials-signatures-v147.py','scripts/verify-public-release-v86.mjs','src/xeno-trials-ai-v119.js','src/xeno-trials-engine-v96.js','src/xeno-trials-runtime-v96.js','src/xeno-trials-signatures-v147.js','sw.js','src/xeno-trials-acid-pools-v152.js','scripts/verify-xeno-trials-acid-v152.mjs','docs/forge/xeno-trials/V152-ACID-POOLS.md','docs/forge/xeno-trials/progress-v152.json',book}
+          assert set(manifest)==set(bundle['baseFiles'])==allowed
+          for path,expected in bundle['baseFiles'].items():
+              current=root/path
+              assert (sha(current.read_bytes())==expected) if expected else not current.exists(),path
+          patch=out/'reviewed.patch'; patch.write_text(bundle['patch'],encoding='utf-8')
+          names={line.split('\t',2)[2] for line in subprocess.check_output(['git','apply','--numstat',str(patch)],text=True).splitlines()}
+          assert names==allowed-{book}
+          subprocess.run(['git','apply','--check',str(patch)],check=True)
+          subprocess.run(['git','apply',str(patch)],check=True)
+          archive=io.BytesIO()
+          with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for name,text in sorted(bundle['xlsxMembers'].items()):
+                  info=zipfile.ZipInfo(name,date_time=(2026,10,17,0,0,0)); info.compress_type=zipfile.ZIP_DEFLATED; info.external_attr=0o100644<<16
+                  z.writestr(info,text.encode('utf-8'),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          (root/book).write_bytes(archive.getvalue())
+          for path,expected in manifest.items():
+              data=(root/path).read_bytes()
+              assert len(data)==expected['bytes'] and sha(data)==expected['sha'] and hashlib.sha256(data).hexdigest()==expected['sha256'],path
+              dest=out/'files'/path; dest.parent.mkdir(parents=True,exist_ok=True); dest.write_bytes(data)
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          subprocess.run(['git','rm',workflow],check=True)
+          subprocess.run(['git','add','--',*sorted(allowed)],check=True)
+          subprocess.run(['git','diff','--cached','--check'],check=True)
+          assert set(subprocess.check_output(['git','diff','--cached','--name-only',base],text=True).splitlines())==allowed
+          tree_sha=subprocess.check_output(['git','write-tree'],text=True).strip()
+          elements=[]
+          for path,expected in manifest.items():
+              data=(root/path).read_bytes()
+              blob=request('/git/blobs',{'content':base64.b64encode(data).decode(),'encoding':'base64'})
+              assert blob['sha']==expected['sha'],path
+              elements.append({'path':path,'mode':'100644','type':'blob','sha':blob['sha']})
+          tree=request('/git/trees',{'base_tree':'a1736bda1f42bfcf88cb533116fb70f3c374bfe8','tree':elements})
+          assert tree['sha']==tree_sha
+          (out/'assembled-tree.json').write_text(json.dumps({'base':base,'stagingCommit':os.environ['EXPECTED_HEAD'],'tree':tree_sha,'files':len(manifest),'branchUpdated':False},indent=2)+'\n')
+          print('Verified thirteen reviewed files; immutable tree '+tree_sha+'; no branch update.')
+          PY
+      - name: Test Trials and source distribution with complete media
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test scripts/verify-xeno-trials-*.mjs 2>&1 | tee "$RUNNER_TEMP/v152-assembled/targeted-tests.log"
+          npm run check 2>&1 | tee "$RUNNER_TEMP/v152-assembled/source-check.log"
+      - name: Retain reviewed files and immutable tree for connected publication
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: v152-assembled
+          retention-days: 7
+          path: ${{ runner.temp }}/v152-assembled
+          if-no-files-found: error
