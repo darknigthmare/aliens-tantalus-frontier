@@ -1,3 +1,4 @@
+import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getSynthTrialAttackV110 } from './synth-combat-v110.js';
 
 /** Capability references, not motion capture or canonical balance.
@@ -67,6 +68,7 @@ export function getXenoTrialsSpecialStyleV147(definition) {
   return getXenoTrialsSignatureV147(definition)?.style || definition?.special;
 }
 export function getXenoTrialsAttackV147(definition, kind, fallback) {
+  if (kind === 'super') return getXenoTrialsSuperV148(definition)?.spec || null;
   const entry = getXenoTrialsSignatureV147(definition);
   return (kind === 'special' ? entry?.spec : kind === 'heavy' ? entry?.heavy : null)
     || getSynthTrialAttackV110(definition, kind, fallback);

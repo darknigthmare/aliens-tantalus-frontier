@@ -1,3 +1,4 @@
+import { getXenoTrialsSuperV148, getXenoTrialsSuperMeterV148, getXenoTrialsSuperReadinessV148, awardXenoTrialsContactMeterV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147,
   createXenoTrialsSignatureProjectilesV147, xenoTrialsSegmentContactV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsFighterV96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
@@ -17,7 +18,7 @@ export const XENO_TRIALS_ATTACKS_V96 = Object.freeze({
 });
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
-const ACTIONS = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special'];
+const ACTIONS = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super'];
 const emptyInput = () => Object.fromEntries(ACTIONS.map(key => [key, false]));
 const input = value => Object.fromEntries(ACTIONS.map(key => [key, value?.[key] === true]));
 function rng(match) {
@@ -29,6 +30,7 @@ function makeFighter(side, id, variant) {
   return { side, id, variant: definition.variants.includes(variant) ? variant : definition.variants[0] || null,
     x: side === 'player' ? 310 : 690, y: 0, vy: 0, facing: side === 'player' ? 1 : -1,
     hp: definition.hp, stamina: definition.stamina, guard: false, stun: 0, attack: null, specialCooldown: 0,
+    ...(getXenoTrialsSuperV148(definition) ? { superMeterV148: 0 } : {}),
     hitFlash: 0, previousInput: emptyInput(), rearmControls: emptyInput(), stats: { hits: 0, damage: 0, blocks: 0, specials: 0 } };
 }
 
@@ -76,7 +78,10 @@ function finishRound(match, reason) {
   match.roundWinner = winner; match.roundReason = reason;
   if (winner !== 'draw') match.wins[winner]++;
   event(match, 'round-end', { winner, reason, round: match.round });
-  for (const fighter of match.fighters) { fighter.attack = null; fighter.guard = false; }
+  for (const fighter of match.fighters) {
+    fighter.attack = null; fighter.guard = false;
+    fighter.rearmControls.super = fighter.previousInput.super;
+  }
   match.projectiles = [];
   const terminal = match.wins.player >= match.config.roundsToWin || match.wins.opponent >= match.config.roundsToWin || match.round >= match.config.roundsToWin * 2 + 1;
   if (!terminal) { match.phase = 'round-over'; match.phaseTime = 1.8; return; }
@@ -91,10 +96,14 @@ function finishRound(match, reason) {
   event(match, 'match-end', { winner: finalWinner });
 }
 export function nextXenoTrialsRoundV96(match) {
-  if (!match || match.phase !== 'round-over') return false;
-  const stats = match.fighters.map(f => f.stats);
+  if (!match || match.paused || match.phase !== 'round-over') return false;
+  const stats = match.fighters.map(f => f.stats), meters = match.fighters.map(getXenoTrialsSuperMeterV148);
+  const rearm = match.fighters.map(f => ({ ...emptyInput(), super: Boolean(f.rearmControls.super) }));
   match.fighters = [makeFighter('player', match.config.playerId, match.config.playerVariant), makeFighter('opponent', match.config.opponentId, match.config.opponentVariant)];
-  match.fighters.forEach((f, i) => { f.stats = stats[i]; });
+  match.fighters.forEach((f, i) => {
+    f.stats = stats[i]; f.rearmControls = rearm[i];
+    if (getXenoTrialsSuperV148(getXenoTrialsFighterV96(f.id))) f.superMeterV148 = meters[i];
+  });
   if (match.config.rulesV119?.initialHp === 1) match.fighters.forEach(f => { f.hp = 1; });
   resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], 1);
   match.round++; match.phase = match.config.introSeconds > 0 ? 'intro' : 'active'; match.phaseTime = match.config.introSeconds; match.timeRemaining = match.config.roundSeconds;
@@ -118,7 +127,7 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     // Observe the physical release before masking a restricted action. Holding
     // special through its timer must not trigger it when the restriction ends.
     if (!controls[action]) fighter.rearmControls[action] = false;
-    if (action === 'special' && specialLocked && controls[action]) fighter.rearmControls[action] = true;
+    if (['special', 'super'].includes(action) && specialLocked && controls[action]) fighter.rearmControls[action] = true;
     if (fighter.rearmControls[action]) controls[action] = false;
   }
   fighter.stun = Math.max(0, fighter.stun - dt);
@@ -136,24 +145,31 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     const axis = Number(controls.right) - Number(controls.left);
     fighter.x += axis * definition.speed * dt;
     if (controls.jump && !fighter.previousInput.jump && fighter.y === 0) { fighter.vy = definition.jump; fighter.y = .001; }
-    for (const action of ['special', 'heavy', 'light']) {
+    for (const action of ['super', 'special', 'heavy', 'light']) {
       const spec = getXenoTrialsAttackV147(definition, action, XENO_TRIALS_ATTACKS_V96[action]);
-      if (!controls[action] || fighter.previousInput[action] || spec.groundedOnly && fighter.y > 0 || fighter.stamina < spec.cost || (action === 'special' && fighter.specialCooldown > 0)) continue;
+      if (!spec || !controls[action] || fighter.previousInput[action] || spec.groundedOnly && fighter.y > 0 || fighter.stamina < spec.cost || (['special', 'super'].includes(action) && fighter.specialCooldown > 0)
+        || action === 'super' && !getXenoTrialsSuperReadinessV148(match, fighter, definition).ready) continue;
       fighter.attack = { kind: action, age: 0, hit: false, emitted: false, facing: fighter.facing, id: ++match.serial };
       fighter.stamina -= spec.cost;
+      if (action === 'super') {
+        fighter.superMeterV148 = 0; fighter.specialCooldown = spec.cooldown;
+        fighter.stats.supersV148 = (fighter.stats.supersV148 || 0) + 1;
+        fighter.attack.targetBodyV148 = { ...getXenoTrialsBodyBoundsV105(enemy) };
+      }
       if (action === 'special') { fighter.specialCooldown = spec.cooldown || 1.6; fighter.stats.specials++; }
       event(match, 'attack', { side: fighter.side, kind: action,
+        ...(action === 'super' ? { superIdV148: getXenoTrialsSuperV148(definition).id } : {}),
         ...(action === 'special' && getXenoTrialsSignatureV147(definition) ? { signatureIdV147: getXenoTrialsSignatureV147(definition).id } : {}) }); break;
     }
   }
   if (fighter.attack) {
     const attack = fighter.attack, spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
     attack.age += dt;
-    if (attack.kind === 'special' && ['ram', 'pounce'].includes(style) && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
+    if (['special', 'super'].includes(attack.kind) && ['ram', 'pounce'].includes(style) && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
       fighter.x += attack.facing * 420 * dt;
-    if (attack.kind === 'special' && style === 'detonation' && attack.age >= spec.startup && attack.age < spec.startup + spec.chargeDuration)
+    if (['special', 'super'].includes(attack.kind) && style === 'detonation' && attack.age >= spec.startup && attack.age < spec.startup + spec.chargeDuration)
       fighter.x += attack.facing * (spec.chargeSpeed || 410) * dt;
-    if (attack.kind === 'special' && style === 'leap' && attack.age >= spec.startup && attack.age < spec.startup + spec.active) {
+    if (['special', 'super'].includes(attack.kind) && style === 'leap' && attack.age >= spec.startup && attack.age < spec.startup + spec.active) {
       if (!attack.launchedV147) { attack.launchedV147 = true; fighter.vy = spec.leapImpulse; fighter.y = .001; }
       fighter.x += attack.facing * spec.leapSpeed * dt;
     }
@@ -168,16 +184,21 @@ function collectAttack(match, fighter, enemy, impacts) {
   const definition = getXenoTrialsFighterV96(fighter.id), style = getXenoTrialsSpecialStyleV147(definition);
   const spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
   if (attack.age < spec.startup || attack.age >= spec.startup + spec.active || attack.hit) return;
-  if (attack.kind === 'special' && ['ground-wave', 'acid-cluster', 'aimed-acid'].includes(style)) {
-    if (!attack.emitted) {
-      attack.emitted = true;
-      const projectiles = createXenoTrialsSignatureProjectilesV147(getXenoTrialsSignatureV147(definition), fighter,
-        getXenoTrialsBodyBoundsV105(fighter), getXenoTrialsBodyBoundsV105(enemy), attack);
-      for (const projectile of projectiles) match.projectiles.push({ ...projectile, id: ++match.serial, power: definition.power });
+  if (['special', 'super'].includes(attack.kind) && ['ground-wave', 'acid-cluster', 'aimed-acid'].includes(style)) {
+    const count = spec.volleyCount || 1, interval = spec.volleyInterval || 1;
+    const due = Math.min(count, 1 + Math.floor((attack.age - spec.startup + 1e-9) / interval));
+    while ((attack.volleysV148 || 0) < due) {
+      const volley = attack.volleysV148 || 0;
+      const group = attack.kind === 'super' ? ++match.serial : attack.id;
+      const projectiles = createXenoTrialsSignatureProjectilesV147({ ...getXenoTrialsSignatureV147(definition), spec }, fighter,
+        getXenoTrialsBodyBoundsV105(fighter), attack.targetBodyV148 || getXenoTrialsBodyBoundsV105(enemy), { ...attack, id: group });
+      for (const projectile of projectiles) match.projectiles.push({ ...projectile, id: ++match.serial, power: definition.power,
+        ...(attack.kind === 'super' ? { superIdV148: getXenoTrialsSuperV148(definition).id, volleyV148: volley } : {}) });
+      attack.volleysV148 = volley + 1; attack.emitted = true;
     }
     return;
   }
-  if (attack.kind === 'special' && style === 'flame') {
+  if (['special', 'super'].includes(attack.kind) && style === 'flame') {
     const pulse = Math.floor((attack.age - spec.startup) / spec.interval);
     if (attack.flamePulse === pulse) return;
     attack.flamePulse = pulse;
@@ -187,7 +208,7 @@ function collectAttack(match, fighter, enemy, impacts) {
       impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: attack.facing });
     return;
   }
-  if (attack.kind === 'special' && style === 'detonation') {
+  if (['special', 'super'].includes(attack.kind) && style === 'detonation') {
     if (attack.age < spec.startup + spec.chargeDuration) return;
     attack.hit = true;
     const body = getXenoTrialsBodyBoundsV105(fighter), other = getXenoTrialsBodyBoundsV105(enemy);
@@ -201,7 +222,7 @@ function collectAttack(match, fighter, enemy, impacts) {
     event(match, definition.family === 'synthetic' ? 'synth-detonation' : 'xeno-detonation', { side: fighter.side });
     return;
   }
-  if (attack.kind === 'special' && ['acid', 'pulse'].includes(definition.special)) {
+  if (['special', 'super'].includes(attack.kind) && ['acid', 'pulse'].includes(definition.special)) {
     if (!attack.emitted) {
       attack.emitted = true;
       const body = getXenoTrialsBodyBoundsV105(fighter);
@@ -218,6 +239,7 @@ function collectAttack(match, fighter, enemy, impacts) {
 }
 function applyImpact(match, impact) {
   const { from, to, spec, power, direction } = impact;
+  if (to.hp <= 0) return; // Resolved overkill cannot count as another hit or earn meter.
   const frontal = to.facing === -direction;
   const shield = to.id === 'synth-containment';
   const shieldBash = shield && to.attack?.kind === 'special';
@@ -229,6 +251,7 @@ function applyImpact(match, impact) {
   const damage = Math.min(to.hp, Math.max(1, Math.round(spec.damage * power * multiplier)));
   to.hp = Math.max(0, to.hp - damage); to.hitFlash = .13;
   from.stats.hits++; from.stats.damage += damage;
+  awardXenoTrialsContactMeterV148(from, to, damage, guarded, spec.superV148 === true);
   if (guarded) { to.stamina -= guardCost; to.stats.blocks++; }
   else { to.stun = guardBreak ? .72 : spec.stun; to.guardBrokenV147 = guardBreak; to.guard = false; to.attack = null; if (guardBreak) to.stamina = 0; }
   to.x = clamp(to.x + direction * spec.push * (guarded ? .25 : 1), XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);

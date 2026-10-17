@@ -107,6 +107,34 @@ with sync_playwright() as p:
             name = f'{signature}.png'
             (output/name).write_bytes(base64.b64decode(emitted['png'].split(',', 1)[1]))
             report['captures'].append({'file': name, 'state': state, 'method': 'Live read-only canvas and simulation observation'})
+            # V148 observes a naturally earned CPU super. The player remains
+            # idle: no meter, clock, HP, outcome or save values are assigned.
+            if fighter == 'import-game-afe2-warden':
+                check('Warrior has no invented super button', page.locator('[data-xeno-action="super"]').is_hidden())
+                check('Warden has a native HTML meter', page.locator('[data-xt="opponent-super"]').is_visible())
+                super_frame = None
+                deadline = time.monotonic() + 80
+                while time.monotonic() < deadline:
+                    current = frame(page)
+                    m = current['state']['match']
+                    if any(b.get('superIdV148') == 'warden-acid-barrage' for b in m['projectiles']):
+                        super_frame = current
+                        break
+                    if m['phase'] == 'match-over':
+                        break
+                    page.wait_for_timeout(30)
+                check('Warden earns and physically emits its original versus super', super_frame is not None)
+                m = super_frame['state']['match']
+                cpu = m['fighters'][1]
+                check('A real super consumes its earned meter and records one acceptance',
+                      cpu['superMeterV148'] == 0 and cpu['stats'].get('supersV148', 0) == 1
+                      and cpu['stats']['damage'] > 0
+                      and any(e.get('superIdV148') == 'warden-acid-barrage' for e in m['events']))
+                name = 'warden-earned-super-v148.png'
+                (output/name).write_bytes(base64.b64decode(super_frame['png'].split(',', 1)[1]))
+                report['captures'].append({'file': name, 'state': m, 'method': 'Real idle-player duel: CPU earned meter; no injected state'})
+                meter_reading = page.locator('[data-xt="opponent-super"]').evaluate('(element) => ({max:element.max,value:element.value})')
+                check('The visible opponent meter reflects the spent resource', meter_reading == {'max': 100, 'value': 0}, meter_reading)
             # Pause still works after an emitted projectile or between rounds.
             live = page.evaluate(READ)['match']
             if live['phase'] != 'match-over':
@@ -119,7 +147,7 @@ with sync_playwright() as p:
                 check(f'{fighter}: pause freezes physical effects and background motion', frozen['tick'] == still['tick']
                       and frozen['projectiles'] == still['projectiles']
                       and frozen['stageAnimationV147'] == still['stageAnimationV147'])
-                context.emulate_media(reduced_motion='reduce')
+                page.emulate_media(reduced_motion='reduce')
                 reduced = page.evaluate(READ)['match']['stageAnimationV147']
                 check(f'{fighter}: reduced motion uses a static background', reduced['time'] == 0)
                 page.locator('[data-xt="abandon-overlay"]').click()

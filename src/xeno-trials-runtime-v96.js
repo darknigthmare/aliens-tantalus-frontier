@@ -1,3 +1,4 @@
+import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsStageMotionV147, drawXenoTrialsStageMotionV147 } from './xeno-trials-stage-motion-v147.js';
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
@@ -13,7 +14,7 @@ import { drawXenoTrialsArenaLayersV119, drawXenoTrialsArenaOverlayV119 } from '.
 import { drawSynthConeV110 } from './synth-combat-v110.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
-  ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special' });
+  ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super' });
 const ACTIONS = new Set(Object.values(KEY_ACTION));
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
@@ -46,6 +47,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
+    supersV148: match.fighters.map(fighter => ({ side: fighter.side, ...getXenoTrialsSuperReadinessV148({ ...match, presentation: presentationView() }, fighter, getXenoTrialsFighterV96(fighter.id)) })),
     stageAnimationV147: getXenoTrialsStageMotionV147(stage.id, match.tick, reduceMotion()),
     combatSignaturesV147: match.fighters.map(fighter => {
       const signature = getXenoTrialsSignatureV147(getXenoTrialsFighterV96(fighter.id));
@@ -64,7 +66,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
   canvas.width = XENO_TRIALS_ARENA_V96.width; canvas.height = XENO_TRIALS_ARENA_V96.height;
   canvas.setAttribute?.('data-xeno-display-scale-v110', String(displayScale));
-  canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Flèches pour se déplacer, J K L pour attaquer, S pour la garde, P pour la pause.');
+  canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Flèches pour se déplacer, J K L pour attaquer, I pour le super chargé, S pour la garde, P pour la pause.');
 
   function listen(target, type, handler, settings) {
     if (!target?.addEventListener) return;
@@ -162,11 +164,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.beginPath(); context.arc(face, ground - body.height * .55, body.height * .48,
         fighter.facing > 0 ? -Math.PI / 2 : Math.PI / 2, fighter.facing > 0 ? Math.PI / 2 : Math.PI * 1.5); context.stroke();
     }
-    if (fighter.attack && !(fighter.attack.kind === 'special'
+    if (fighter.attack && !(['special', 'super'].includes(fighter.attack.kind)
       && ['flame', 'detonation', 'acid', 'pulse', 'ground-wave', 'acid-cluster', 'aimed-acid'].includes(getXenoTrialsSpecialStyleV147(definition)))) {
       const attack = fighter.attack, spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]), windowStart = spec.startup;
       if (attack.age >= windowStart && attack.age < windowStart + spec.active) {
-        context.strokeStyle = attack.kind === 'special' ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
+        context.strokeStyle = ['special', 'super'].includes(attack.kind) ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
         const face = attack.facing > 0 ? body.right : body.left, reach = spec.reach * definition.reach;
         context.beginPath(); context.moveTo(face, ground - body.height * .85);
         context.quadraticCurveTo(face + attack.facing * reach, ground - body.height * .55,
@@ -185,8 +187,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     // Feedback uses physical hitbox coordinates, not the independently scaled portrait.
     for (const fighter of match.fighters) {
       const definition = getXenoTrialsFighterV96(fighter.id), attack = fighter.attack;
-      if (attack?.kind !== 'special') continue;
-      const style = getXenoTrialsSpecialStyleV147(definition), signature = getXenoTrialsSignatureV147(definition);
+      if (!['special', 'super'].includes(attack?.kind)) continue;
+      const style = getXenoTrialsSpecialStyleV147(definition), signature = attack.kind === 'super' ? getXenoTrialsSuperV148(definition) : getXenoTrialsSignatureV147(definition);
       if (signature && attack.age < signature.spec.startup) {
         const body = getXenoTrialsBodyBoundsV105(fighter);
         context.strokeStyle = '#e4d397'; context.lineWidth = 2;
@@ -195,7 +197,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
         text(signature.label.toUpperCase(), fighter.x, 450 - body.top - 18, 12, '#e4d397', 'center');
       }
       if (!['flame', 'detonation'].includes(style)) continue;
-      const body = getXenoTrialsBodyBoundsV105(fighter), spec = getXenoTrialsAttackV147(definition, 'special', XENO_TRIALS_ATTACKS_V96.special);
+      const body = getXenoTrialsBodyBoundsV105(fighter), spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96.special);
       if (style === 'flame' && attack.age >= spec.startup && attack.age < spec.startup + spec.active)
         drawSynthConeV110(context, attack.facing > 0 ? body.right : body.left, 450 - fighter.y - body.height * .55, attack.facing, spec.reach);
       if (style === 'detonation' && !attack.hit) {
@@ -226,6 +228,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       bar(x, 44, 385, fighter.hp / def.hp, i === 0 ? '#6bd4c5' : '#ed858e', i === 1);
       bar(x, 65, 385, fighter.stamina / def.stamina, '#ddbf69', i === 1);
       text(`PV ${Math.ceil(fighter.hp)} / ${def.hp}  •  END ${Math.floor(fighter.stamina)}`, i === 0 ? 30 : 970, 99, 12, '#bfc9d0', i === 0 ? 'left' : 'right');
+      const superState = getXenoTrialsSuperReadinessV148(match, fighter, def);
+      if (superState.supported) text(`SUPER ${Math.floor(superState.meter)} / 100${superState.ready ? ' · I' : ''}`, i === 0 ? 30 : 970, 115, 11, '#ddbf69', i === 0 ? 'left' : 'right');
       const wins = match.wins[fighter.side];
       for (let n = 0; n < match.config.roundsToWin; n++) { context.fillStyle = n < wins ? '#fae5a3' : '#424c58'; context.fillRect(i === 0 ? 426 + n * 15 : 559 - n * 15, 44, 10, 10); }
     });
@@ -253,7 +257,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.fillStyle = '#061019b8'; context.fillRect(150, 216, 700, 106);
       const heading = !loaded ? 'CHARGEMENT DES SPÉCIMENS' : assetFailure ? 'VISUEL INDISPONIBLE' : match.paused ? 'SIMULATION EN PAUSE' : match.phase === 'intro' ? `MANCHE ${match.round}` : match.phase === 'round-over' ? match.roundWinner === 'draw' ? 'ÉGALITÉ' : match.roundWinner === 'player' ? 'MANCHE REMPORTÉE' : 'MANCHE PERDUE' : match.result.winner === 'player' ? 'VICTOIRE' : match.result.winner === 'opponent' ? 'DÉFAITE' : 'ÉGALITÉ';
       text(heading, 500, 255, 25, '#efe8cb', 'center');
-      text(assetFailure ? 'Rechargez le module pour réessayer.' : match.paused ? 'P / Échap ou bouton Reprendre' : match.phase === 'match-over' ? 'Résultat transmis au terminal.' : 'J frappe • K lourd • L spécial • S garde', 500, 290, 15, '#b6cbd2', 'center');
+      text(assetFailure ? 'Rechargez le module pour réessayer.' : match.paused ? 'P / Échap ou bouton Reprendre' : match.phase === 'match-over' ? 'Résultat transmis au terminal.' : 'J frappe • K lourd • L spécial • I super • S garde', 500, 290, 15, '#b6cbd2', 'center');
     }
   }
   function pause() {
