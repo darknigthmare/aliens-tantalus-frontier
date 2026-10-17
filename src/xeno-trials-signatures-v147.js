@@ -37,7 +37,7 @@ export const XENO_TRIALS_SIGNATURES_V147 = freeze([
   { id: 'pathogen-queen-acid-cluster', fighterId: 'drive-v123-fte-pathogen-queen-right-v13',
     profileId: 'pose-v123-drive-fte-pathogen-queen-right-v13', label: 'Grappe acide', style: 'acid-cluster', sourceId: 'pathogen',
     evidence: 'reference-capability-adaptation', canonExact: false, animation: 'existing-static-pose',
-    description: 'Trois projectiles divergents visent la position observée au départ. Aucun suivi après émission.',
+    description: 'Trois projectiles divergents visent la position observée au départ. Aucun suivi après émission. Le résidu retombe au sol et reste corrosif quelques secondes : quitter la zone ou sauter.',
     spec: { cost: 42, damage: 13, reach: 620, startup: .5, active: .10, recovery: .7, stun: .12, push: 12,
       groundedOnly: true, projectileSpeed: 450, spread: .14, cooldown: 2.4 } },
   { id: 'afe2-warden-acid', fighterId: 'import-game-afe2-warden', profileId: 'pose-v106-import-game-afe2-warden',

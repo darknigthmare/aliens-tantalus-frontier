@@ -51,6 +51,7 @@
     "test:trials:supers": "node --test scripts/verify-xeno-trials-supers-v148.mjs",
     "test:trials:signatures": "node --test scripts/verify-xeno-trials-signatures-v147.mjs",
     "test:qa:observation": "node --test scripts/verify-player-qa-observation-v150.mjs",
+    "test:trials:acid": "node --test scripts/verify-xeno-trials-acid-v152.mjs",
     "test:trials:castes": "node --test scripts/verify-xeno-trials-castes-v151.mjs"
   },
   "engines": {

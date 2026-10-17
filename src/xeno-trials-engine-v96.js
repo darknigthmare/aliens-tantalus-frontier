@@ -1,3 +1,4 @@
+import { depositXenoTrialsAcidV152, stepXenoTrialsAcidV152, clearXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsCasteV151, collectXenoTrialsDeathBurstsV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperMeterV148, getXenoTrialsSuperReadinessV148, awardXenoTrialsContactMeterV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147,
@@ -86,7 +87,7 @@ function finishRound(match, reason) {
     fighter.attack = null; fighter.guard = false;
     fighter.rearmControls = releaseGate(fighter);
   }
-  match.projectiles = [];
+  match.projectiles = []; clearXenoTrialsAcidV152(match);
   const terminal = match.wins.player >= match.config.roundsToWin || match.wins.opponent >= match.config.roundsToWin || match.round >= match.config.roundsToWin * 2 + 1;
   if (!terminal) { match.phase = 'round-over'; match.phaseTime = 1.8; return; }
   const finalWinner = match.wins.player === match.wins.opponent ? 'draw' : match.wins.player > match.wins.opponent ? 'player' : 'opponent';
@@ -101,6 +102,7 @@ function finishRound(match, reason) {
 }
 export function nextXenoTrialsRoundV96(match) {
   if (!match || match.paused || match.phase !== 'round-over') return false;
+  clearXenoTrialsAcidV152(match);
   const stats = match.fighters.map(f => f.stats), meters = match.fighters.map(getXenoTrialsSuperMeterV148);
   const rearm = match.fighters.map(f => input(f.rearmControls));
   match.fighters = [makeFighter('player', match.config.playerId, match.config.playerVariant), makeFighter('opponent', match.config.opponentId, match.config.opponentVariant)];
@@ -267,9 +269,12 @@ function applyImpact(match, impact) {
   const multiplier = guarded ? (to.id === 'defender' ? .03 : shield ? .04 : .08) : 1;
   const damage = Math.min(to.hp, Math.max(1, Math.round(spec.damage * power * multiplier)));
   to.hp = Math.max(0, to.hp - damage); to.hitFlash = .13;
-  from.stats.hits++; from.stats.damage += damage;
+  if (spec.continuousV152) from.stats.acidTicksV152 = (from.stats.acidTicksV152 || 0) + 1;
+  else from.stats.hits++;
+  from.stats.damage += damage;
   awardXenoTrialsContactMeterV148(from, to, damage, guarded, spec.superV148 === true);
-  if (guarded) { to.stamina -= guardCost; to.stats.blocks++; }
+  if (spec.continuousV152) { /* Floor exposure must not stun-lock an escape or cancel an accepted action. */ }
+  else if (guarded) { to.stamina -= guardCost; to.stats.blocks++; }
   else { to.stun = guardBreak ? .72 : spec.stun; to.guardBrokenV147 = guardBreak; to.guard = false; to.attack = null; if (guardBreak) to.stamina = 0; }
   to.x = clamp(to.x + direction * spec.push * (guarded ? .25 : 1), XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);
   event(match, guardBreak ? 'guard-break' : guarded ? 'block' : 'hit', { side: to.side, attacker: from.side, damage });
@@ -318,10 +323,20 @@ function fixedStep(match, playerControls, opponentControls, dt) {
       if (projectile.style === 'ground-wave') for (const other of match.projectiles)
         if (other.groupIdV147 === projectile.groupIdV147) other.life = 0;
     }
+    if (travel > 0 && (projectile.life <= 0 || groundContact !== Infinity)) {
+      // Resolve residue at the earliest physical contact, or the finite range
+      // endpoint. Airborne hits shed a falling, harmless drop, never a floor teleport.
+      const fraction = contact !== null && contact <= groundContact ? contact : Math.min(1, groundContact);
+      depositXenoTrialsAcidV152(match, projectile, getXenoTrialsFighterV96(owner.id),
+        previous.x + (projectile.x - previous.x) * fraction,
+        Math.max(0, previous.y + (projectile.y - previous.y) * fraction), XENO_TRIALS_ARENA_V96);
+    }
     if (projectile.signatureIdV147 && projectile.y < 0) projectile.life = 0;
   }
   match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > XENO_TRIALS_ARENA_V96.left - 200 && p.x < XENO_TRIALS_ARENA_V96.right + 200);
   for (const impact of impacts) applyImpact(match, impact);
+  stepXenoTrialsAcidV152(match, dt, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96,
+    impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   resolveXenoTrialsBodiesV105(a, b, impactOrder);

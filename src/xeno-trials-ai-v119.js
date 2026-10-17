@@ -1,3 +1,4 @@
+import { getXenoTrialsAcidEscapeV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
@@ -89,7 +90,23 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
   const difficulty = match.config.difficulty, delay = profile.reactionTime * (difficulty === 'easy' ? 1.6 : difficulty === 'hard' ? .65 : 1);
   brain.decisionIn = clamp(delay, .12, .7); brain.decisions++;
   const view = observe(match, specs), next = empty(); brain.observation = view;
-  const move = toward => { next[(toward ? view.direction : -view.direction) > 0 ? 'right' : 'left'] = true; };
+  const body = getXenoTrialsBodyBoundsV105(cpu);
+  const floorBody = { ...body, bottom: 0, top: body.height };
+  const acidEscape = getXenoTrialsAcidEscapeV152(match, cpu, floorBody, XENO_TRIALS_ARENA_V105);
+  let acidBlocked = false;
+  const move = toward => {
+    const direction = toward ? view.direction : -view.direction;
+    // Do not walk back into a visible pool immediately after escaping. Inspect
+    // only our ordinary travel until the next decision, not an opponent input.
+    // Swept bounds also catch a narrow pool between the two endpoints.
+    const distance = direction * definition.speed * (brain.decisionIn + 1 / 120);
+    const swept = { ...floorBody, left: Math.min(body.left, body.left + distance),
+      right: Math.max(body.right, body.right + distance) };
+    if (!acidEscape && getXenoTrialsAcidEscapeV152(match, cpu, swept, XENO_TRIALS_ARENA_V105)) {
+      acidBlocked = true; transition(brain, 'REPOSITION'); return;
+    }
+    next[direction > 0 ? 'right' : 'left'] = true;
+  };
   const rules = match.config.rulesV119;
   const specialForbidden = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
   const choose = kind => {
@@ -115,6 +132,10 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
   const resourceLow = cpu.stamina < Math.max(light.cost * 1.5, 25);
   const error = difficulty === 'easy' ? .2 : difficulty === 'hard' ? .025 : .08;
   if (cpu.attack || cpu.stun > 0) transition(brain, 'RECOVERY');
+  else if (acidEscape) {
+    transition(brain, 'EVADE');
+    next[acidEscape > 0 ? 'right' : 'left'] = true;
+  }
   else if (random() < error) transition(brain, 'OBSERVE');
   else if (resourceLow || (cpu.hp / definition.hp < profile.retreatThreshold && cpu.stamina < 55 && view.gap < 80)) {
     transition(brain, view.roomBehind > 35 ? 'RETREAT' : 'REPOSITION');
@@ -165,5 +186,8 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     transition(brain, 'APPROACH'); move(true);
     if (view.grounded && view.selfHeight < 260 && view.gap > 150 && view.gap < 280 && random() < profile.jumpUsage) next.jump = true;
   }
+  // A denied approach must not turn its optional locomotion hop into a jump
+  // over a spill that the CPU has not established it can clear.
+  if (acidBlocked) next.jump = false;
   brain.input = next; return next;
 }

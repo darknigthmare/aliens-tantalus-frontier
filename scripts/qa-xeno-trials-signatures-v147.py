@@ -114,6 +114,23 @@ with sync_playwright() as p:
             name = f'{signature}.png'
             (output/name).write_bytes(base64.b64decode(emitted['png'].split(',', 1)[1]))
             report['captures'].append({'file': name, 'state': state, 'method': 'Live read-only canvas and simulation observation'})
+            # V152: actual Queen projectile residue, not a spawned test hazard.
+            if signature == 'pathogen-queen-acid-cluster':
+                page.wait_for_function("""() => {
+                  const m=globalThis.__ATF_XENO_TRIALS_V96__.snapshot().match;
+                  return (m.acidPoolsV152 || []).some(p=>m.tick>=p.armedTick && m.tick<p.expiresTick);
+                }""", timeout=20000)
+                page.wait_for_function("""() => {
+                  const m=globalThis.__ATF_XENO_TRIALS_V96__.snapshot().match;
+                  return m.events.some(e=>e.type==='acid-contact-v152' && e.side==='player');
+                }""", timeout=20000)
+                residue = frame(page)
+                m = residue['state']['match']
+                check('Queen residue reaches the floor and damages through the native simulation',
+                      bool(m.get('acidPoolsV152')) and m['fighters'][1]['stats'].get('acidTicksV152', 0) > 0)
+                name = 'queen-persistent-acid-v152.png'
+                (output/name).write_bytes(base64.b64decode(residue['png'].split(',', 1)[1]))
+                report['captures'].append({'file': name, 'state': m, 'method': 'Actual CPU projectile, falling residue and damaging floor pool; no injected state'})
             # V148 observes a naturally earned CPU super. The player remains
             # idle: no meter, clock, HP, outcome or save values are assigned.
             if fighter == 'import-game-afe2-warden':
@@ -178,6 +195,8 @@ with sync_playwright() as p:
                 still = page.evaluate(READ)['match']
                 check(f'{fighter}: pause freezes physical effects and background motion', frozen['tick'] == still['tick']
                       and frozen['projectiles'] == still['projectiles']
+                      and frozen.get('acidPoolsV152') == still.get('acidPoolsV152')
+                      and frozen.get('acidDropsV152') == still.get('acidDropsV152')
                       and frozen['stageAnimationV147'] == still['stageAnimationV147']
                       and frozen['stageCueV149'] == still['stageCueV149'])
                 page.emulate_media(reduced_motion='reduce')
