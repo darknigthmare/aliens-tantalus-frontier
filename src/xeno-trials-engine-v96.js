@@ -1,3 +1,4 @@
+import { XENO_TRIALS_GRAPPLE_V153, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153, canXenoTrialsGrappleV153, isXenoTrialsGrappledV153, startXenoTrialsGrappleV153, stepXenoTrialsGrappleV153, releaseXenoTrialsGrappleV153, clearXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { depositXenoTrialsAcidV152, stepXenoTrialsAcidV152, clearXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsCasteV151, collectXenoTrialsDeathBurstsV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperMeterV148, getXenoTrialsSuperReadinessV148, awardXenoTrialsContactMeterV148 } from './xeno-trials-supers-v148.js';
@@ -74,6 +75,7 @@ function event(match, type, extra = {}) {
   if (match.events.length > 32) match.events.shift();
 }
 function finishRound(match, reason) {
+  clearXenoTrialsGrappleV153(match);
   const [a, b] = match.fighters;
   const hpLimit = match.config.rulesV119?.initialHp;
   const ratioA = a.hp / (hpLimit || getXenoTrialsFighterV96(a.id).hp);
@@ -102,7 +104,7 @@ function finishRound(match, reason) {
 }
 export function nextXenoTrialsRoundV96(match) {
   if (!match || match.paused || match.phase !== 'round-over') return false;
-  clearXenoTrialsAcidV152(match);
+  clearXenoTrialsAcidV152(match); clearXenoTrialsGrappleV153(match);
   const stats = match.fighters.map(f => f.stats), meters = match.fighters.map(getXenoTrialsSuperMeterV148);
   const rearm = match.fighters.map(f => input(f.rearmControls));
   match.fighters = [makeFighter('player', match.config.playerId, match.config.playerVariant), makeFighter('opponent', match.config.opponentId, match.config.opponentVariant)];
@@ -154,6 +156,9 @@ function fighterStep(match, fighter, enemy, controls, dt) {
   if (fighter.y > 0 || fighter.vy > 0) {
     fighter.vy -= 1450 * dt; fighter.y = Math.max(0, fighter.y + fighter.vy * dt);
     if (fighter.y === 0) fighter.vy = 0;
+  }
+  if (isXenoTrialsGrappledV153(match, fighter)) {
+    fighter.guard = false; fighter.attack = null; fighter.previousInput = controls; return;
   }
   if (!fighter.attack && !fighter.guard && fighter.stun <= 0) fighter.facing = enemy.x >= fighter.x ? 1 : -1;
   fighter.guard = controls.guard && fighter.stun <= 0 && !fighter.attack && fighter.y === 0 && fighter.stamina > 1;
@@ -254,7 +259,14 @@ function collectAttack(match, fighter, enemy, impacts) {
   const hitTop = spec.contactHeightRatioV151 ? body.bottom + body.height * spec.contactHeightRatioV151 : body.top;
   const verticalOverlap = body.bottom <= other.top && other.bottom <= hitTop;
   if ((other.center - body.center) * attack.facing < 0 || horizontal > spec.reach * definition.reach || !verticalOverlap) return;
-  attack.hit = true; impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: attack.facing });
+  // Only an admitted human restraint changes the leap contact distance.
+  // Other anatomies retain V151's ordinary hit, never a fake grab at range.
+  const wantsGrappleV153 = attack.kind === 'special' && hasXenoTrialsGrappleV153(definition)
+    && isXenoTrialsGrappleTargetV153(getXenoTrialsFighterV96(enemy.id)) && enemy.y === 0 && enemy.vy === 0;
+  if (wantsGrappleV153 && horizontal > XENO_TRIALS_GRAPPLE_V153.contactGap) return;
+  const grappleCandidateV153 = wantsGrappleV153 && canXenoTrialsGrappleV153(fighter, enemy, definition, getXenoTrialsFighterV96(enemy.id), getXenoTrialsBodyBoundsV105);
+  attack.hit = true; impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: attack.facing,
+    ...(grappleCandidateV153 ? { grappleCandidateV153: attack.id } : {}) });
 }
 function applyImpact(match, impact) {
   const { from, to, spec, power, direction } = impact;
@@ -269,14 +281,19 @@ function applyImpact(match, impact) {
   const multiplier = guarded ? (to.id === 'defender' ? .03 : shield ? .04 : .08) : 1;
   const damage = Math.min(to.hp, Math.max(1, Math.round(spec.damage * power * multiplier)));
   to.hp = Math.max(0, to.hp - damage); to.hitFlash = .13;
-  if (spec.continuousV152) from.stats.acidTicksV152 = (from.stats.acidTicksV152 || 0) + 1;
+  if (spec.continuousV153) from.stats.grappleTicksV153 = (from.stats.grappleTicksV153 || 0) + 1;
+  else if (spec.continuousV152) from.stats.acidTicksV152 = (from.stats.acidTicksV152 || 0) + 1;
   else from.stats.hits++;
   from.stats.damage += damage;
   awardXenoTrialsContactMeterV148(from, to, damage, guarded, spec.superV148 === true);
-  if (spec.continuousV152) { /* Floor exposure must not stun-lock an escape or cancel an accepted action. */ }
+  if (spec.continuousV152 || spec.continuousV153) { /* Exposure must not stun-lock an escape or cancel an accepted action. */ }
   else if (guarded) { to.stamina -= guardCost; to.stats.blocks++; }
   else { to.stun = guardBreak ? .72 : spec.stun; to.guardBrokenV147 = guardBreak; to.guard = false; to.attack = null; if (guardBreak) to.stamina = 0; }
-  to.x = clamp(to.x + direction * spec.push * (guarded ? .25 : 1), XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);
+  const capture = !guarded && impact.grappleCandidateV153 && from.hp > 0 && from.stun <= 0 && to.hp > 0;
+  if (!capture) to.x = clamp(to.x + direction * spec.push * (guarded ? .25 : 1), XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);
+  if (match.grappleV153 && (to.side === match.grappleV153.attacker || to.hp <= 0))
+    releaseXenoTrialsGrappleV153(match, 'interrupted', (type, details) => event(match, type, details));
+  if (capture) startXenoTrialsGrappleV153(match, from, to, impact.grappleCandidateV153, (type, details) => event(match, type, details));
   event(match, guardBreak ? 'guard-break' : guarded ? 'block' : 'hit', { side: to.side, attacker: from.side, damage });
 }
 function fixedStep(match, playerControls, opponentControls, dt) {
@@ -336,6 +353,8 @@ function fixedStep(match, playerControls, opponentControls, dt) {
   match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > XENO_TRIALS_ARENA_V96.left - 200 && p.x < XENO_TRIALS_ARENA_V96.right + 200);
   for (const impact of impacts) applyImpact(match, impact);
   stepXenoTrialsAcidV152(match, dt, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96,
+    impact => applyImpact(match, impact), (type, details) => event(match, type, details));
+  stepXenoTrialsGrappleV153(match, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));

@@ -1,3 +1,4 @@
+import { isXenoTrialsGrappledV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsAcidEscapeV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
@@ -90,6 +91,12 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
   const difficulty = match.config.difficulty, delay = profile.reactionTime * (difficulty === 'easy' ? 1.6 : difficulty === 'hard' ? .65 : 1);
   brain.decisionIn = clamp(delay, .12, .7); brain.decisions++;
   const view = observe(match, specs), next = empty(); brain.observation = view;
+  if (isXenoTrialsGrappledV153(match, cpu)) {
+    transition(brain, 'DEFEND');
+    // Same held guard and finite reaction delay as a player. No meter/HP writes.
+    if (match.grappleV153.target === cpu.side) next.guard = true;
+    brain.input = next; brain.guardRemaining = brain.decisionIn; return next;
+  }
   const body = getXenoTrialsBodyBoundsV105(cpu);
   const floorBody = { ...body, bottom: 0, top: body.height };
   const acidEscape = getXenoTrialsAcidEscapeV152(match, cpu, floorBody, XENO_TRIALS_ARENA_V105);

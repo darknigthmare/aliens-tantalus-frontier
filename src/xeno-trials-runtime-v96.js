@@ -1,3 +1,4 @@
+import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { drawXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
@@ -47,6 +48,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const reduceMotion = () => options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
     || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
+    grappleViewV153: getXenoTrialsGrappleViewV153(match),
     cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
     supersV148: match.fighters.map(fighter => ({ side: fighter.side, ...getXenoTrialsSuperReadinessV148({ ...match, presentation: presentationView() }, fighter, getXenoTrialsFighterV96(fighter.id)) })),
     stageAnimationV147: getXenoTrialsStageMotionV147(stage.id, match.tick, reduceMotion()),
@@ -190,6 +192,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     context.save(); context.translate(cameraView.translateX, cameraView.translateY); context.scale(cameraView.zoom, cameraView.zoom);
     drawXenoTrialsAcidV152(context, match, XENO_TRIALS_ARENA_V96, reduceMotion());
     for (const fighter of [...match.fighters].sort((a, b) => a.y - b.y)) drawFighter(fighter);
+    drawXenoTrialsGrappleV153(context, match, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96.floor);
     // Feedback uses physical hitbox coordinates, not the independently scaled portrait.
     for (const fighter of match.fighters) {
       const definition = getXenoTrialsFighterV96(fighter.id), attack = fighter.attack;

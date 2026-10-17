@@ -84,6 +84,8 @@ SCRIPT_FILES.add('verify-xeno-trials-supers-v148.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
 SCRIPT_FILES.add('verify-xeno-trials-castes-v151.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-acid-v152.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-grapple-v153.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-grapple-v153.py');
 SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
 SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
@@ -100,6 +102,9 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/progress-v149.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V149.xlsx',
   'docs/forge/xeno-trials',
+  'docs/forge/xeno-trials/V153-PROWLER-RESTRAINT.md',
+  'docs/forge/xeno-trials/progress-v153.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V153.xlsx',
   'docs/forge/xeno-trials/V152-ACID-POOLS.md',
   'docs/forge/xeno-trials/progress-v152.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V152.xlsx',
