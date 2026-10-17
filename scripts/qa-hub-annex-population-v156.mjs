@@ -119,32 +119,38 @@ async function importParent(testCase) {
   await page.locator('#hub-canvas').focus(); const s = await state(); safe(s, 624); assert.equal(s.annexId, null);
   assert.equal(s.clock.hour, testCase.hour); return s;
 }
+// Software-rendered headless runs can advance the clamped engine clock much
+// slower than wall time. Budget wall waits from travel distance with sixfold
+// headroom and 15s settling margin, retaining the exact physical arrival gates.
+const travelTimeout = (distance, speed = 100) => Math.max(30000, Math.ceil(Math.abs(distance) / speed * 1000 * 6 + 15000));
 async function walkTo(x, feetY = 624) {
   let s = await state(); if (Math.abs(s.player.x - x) < 4) return s;
   const right = x > s.player.x, key = right ? 'KeyD' : 'KeyA'; await page.keyboard.down(key);
   try { await page.waitForFunction(t => { const p = globalThis.__ATF_HUB__?.player; return p && (t.right ? p.x >= t.x - 3 : p.x <= t.x + 3); },
-    { x, right }, { polling: 'raf', timeout: Math.max(12000, Math.abs(s.player.x - x) / 100 * 1000 + 5000) }); }
+    { x, right }, { polling: 'raf', timeout: travelTimeout(s.player.x - x) }); }
   finally { await page.keyboard.up(key); }
   await page.waitForTimeout(180); s = await state(); safe(s, feetY); assert.ok(Math.abs(s.player.x - x) < 40); return s;
 }
 async function walkToCivilConversation() {
   // Release D at the actual interaction gate, before PNG/JSON transfer. This
   // narrow service bay must be reached by keys rather than assigning player x.
+  const before = await state(), targetX = 725;
   await page.keyboard.down('KeyD');
   try { await page.waitForFunction(() => {
     const h = globalThis.__ATF_HUB__;
     return h?.prioritizedCivilAnnexNpcV156?.()?.crewId === 'crew-09-inez-harlow';
-  }, null, { polling: 'raf', timeout: 15000 }); }
+  }, null, { polling: 'raf', timeout: travelTimeout(targetX - before.player.x) }); }
   finally { await page.keyboard.up('KeyD'); }
   // Normal deceleration can carry a short approach beyond a prompt boundary.
   // E owns the interaction immediately after actual key release.
   await page.keyboard.press('KeyE');
 }
 async function climbTo(feetY, up) {
+  const before = await state();
   const key = up ? 'KeyW' : 'KeyS'; await page.keyboard.down(key);
   try { await page.waitForFunction(target => { const p = globalThis.__ATF_HUB__?.player;
     return p?.grounded && !p.climbing && Math.abs(p.y + p.h - target) < .1 && Math.abs(p.vy) < .02;
-  }, feetY, { polling: 'raf', timeout: 12000 }); }
+  }, feetY, { polling: 'raf', timeout: travelTimeout(feetY - before.player.y - before.player.h, 205) }); }
   finally { await page.keyboard.up(key); }
   const s = await state(); safe(s, feetY); return s;
 }
