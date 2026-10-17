@@ -37,3 +37,7 @@ Référence API du contrôleur d’essai : https://playwright.dev/docs/api/class
 Les classeurs V146–V149 restent intacts. **Aucun nouveau clip, finisher, moveset intégral ou pose R1 articulée** n’est livré dans cette consolidation. Les 35 lots artistiques des cinq pilotes restent ouverts ; aucune référence canonique supplémentaire n’est inventée et aucun kit n’est certifié 1:1. Les finitions terminales ne doivent toujours pas être confondues avec les défaites réversibles de première manche.
 
 Aucun compte cloud réel, matériel physique, effacement de sauvegarde, fusion sur main ni changement de protection de branche.
+
+## Correctif de la première recette distante
+
+Le premier commit V150 a passé 2 003 tests Node, les 12 contrôles du banc de commandes, les profils, Trials et signatures. Le parcours tactique a échoué car une chaîne contenant une fonction fléchée non invoquée est une expression vraie pour `waitForFunction`, dont `jsonValue()` ne fournit pas un instantané sérialisable. L’expression est désormais une fonction immédiatement invoquée, avec paramètres encodés par `JSON.stringify`. Quatre tests isolés vérifient le résultat faux sans pose, la capture détachée, les paramètres échappés et la libération du handle en cas d’erreur. Aucun changement du gameplay et aucune assertion historique supprimée. Les 44 contrôles de commandes et les compteurs Excel restent inchangés ; ces quatre tests concernent seulement l’observateur de recette.

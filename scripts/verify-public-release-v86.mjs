@@ -86,6 +86,7 @@ SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
 SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-controls-v150.mjs');
+SCRIPT_FILES.add('verify-player-qa-observation-v150.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-controls-v150.py');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.

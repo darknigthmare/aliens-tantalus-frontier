@@ -149,13 +149,14 @@ try {
   // The handle contains a detached snapshot, not a live actor object that can
   // become a hurt/idle pose while another protocol round-trip is in progress.
   // Arm before the physical command; this only reads gameplay and the canvas.
-  const observeActionFrameV150 = (role, kind) => page.waitForFunction(`({ role, kind }) => {
+  const observeActionFrameV150 = (role, kind) => page.waitForFunction(`(() => {
+    const { role, kind } = ${JSON.stringify({ role, kind })};
     const actor = globalThis.__ATF_GAME__?.[role];
     const actual = actor?.playerActionVisualV127?.kind;
     const wanted = kind === 'contextual-melee' ? actor?.meleeClock > 0 && actual === actor.meleeKind : actual === kind;
     if (!actor?.playerAppearanceVisualV126?.drawn || !wanted) return false;
     return JSON.parse(JSON.stringify((${readLiveState.toString()})(true)));
-  }`, { role, kind }, { polling: 'raf', timeout: 15000 }).then(async handle => {
+  })()`, null, { polling: 'raf', timeout: 15000 }).then(async handle => {
     try { return await handle.jsonValue(); } finally { await handle.dispose(); }
   });
 
