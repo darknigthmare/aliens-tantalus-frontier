@@ -1,3 +1,4 @@
+import { getXenoTrialsCasteV151, collectXenoTrialsDeathBurstsV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperMeterV148, getXenoTrialsSuperReadinessV148, awardXenoTrialsContactMeterV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147,
   createXenoTrialsSignatureProjectilesV147, xenoTrialsSegmentContactV147 } from './xeno-trials-signatures-v147.js';
@@ -237,18 +238,19 @@ function collectAttack(match, fighter, enemy, impacts) {
     event(match, definition.family === 'synthetic' ? 'synth-detonation' : 'xeno-detonation', { side: fighter.side });
     return;
   }
-  if (['special', 'super'].includes(attack.kind) && ['acid', 'pulse'].includes(definition.special)) {
+  if (['special', 'super'].includes(attack.kind) && ['acid', 'pulse'].includes(style)) {
     if (!attack.emitted) {
       attack.emitted = true;
       const body = getXenoTrialsBodyBoundsV105(fighter);
       match.projectiles.push({ id: attack.id, owner: fighter.side, x: (attack.facing > 0 ? body.right : body.left) + attack.facing * 9,
-        y: fighter.y + body.height * .55, direction: attack.facing, life: 1.25, spec, power: definition.power, style: definition.special });
+        y: fighter.y + body.height * .55, direction: attack.facing, life: 1.25, spec, power: definition.power, style });
     }
     return;
   }
   const body = getXenoTrialsBodyBoundsV105(fighter), other = getXenoTrialsBodyBoundsV105(enemy);
   const horizontal = getXenoTrialsBodyGapV105(fighter, enemy, attack.facing);
-  const verticalOverlap = body.bottom <= other.top && other.bottom <= body.top;
+  const hitTop = spec.contactHeightRatioV151 ? body.bottom + body.height * spec.contactHeightRatioV151 : body.top;
+  const verticalOverlap = body.bottom <= other.top && other.bottom <= hitTop;
   if ((other.center - body.center) * attack.facing < 0 || horizontal > spec.reach * definition.reach || !verticalOverlap) return;
   attack.hit = true; impacts.push({ from: fighter, to: enemy, spec, power: definition.power, direction: attack.facing });
 }
@@ -258,7 +260,7 @@ function applyImpact(match, impact) {
   const frontal = to.facing === -direction;
   const shield = to.id === 'synth-containment';
   const shieldBash = shield && to.attack?.kind === 'special';
-  const guarding = to.guard || shieldBash;
+  const guarding = !spec.unblockableV151 && (to.guard || shieldBash);
   const guardCost = spec.damage * .82 * (to.id === 'defender' ? .75 : shield ? .65 : 1);
   const guarded = guarding && frontal && to.stamina >= guardCost;
   const guardBreak = guarding && frontal && !guarded;
@@ -294,6 +296,7 @@ function fixedStep(match, playerControls, opponentControls, dt) {
   fighterStep(match, b, a, opponentControls || aiInput(match, dt), dt);
   resolveXenoTrialsBodiesV105(a, b, order);
   const impactOrder = a.x <= b.x ? 1 : -1;
+  const livingAtStart = new Map(match.fighters.filter(f => f.hp > 0).map(f => [f, getXenoTrialsCasteV151(getXenoTrialsFighterV96(f.id))]));
   const impacts = [];
   // Capture both hit windows before applying damage: simultaneous KOs are legal.
   collectAttack(match, a, b, impacts); collectAttack(match, b, a, impacts);
@@ -319,6 +322,8 @@ function fixedStep(match, playerControls, opponentControls, dt) {
   }
   match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > XENO_TRIALS_ARENA_V96.left - 200 && p.x < XENO_TRIALS_ARENA_V96.right + 200);
   for (const impact of impacts) applyImpact(match, impact);
+  collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
+    impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   resolveXenoTrialsBodiesV105(a, b, impactOrder);
   match.timeRemaining = Math.max(0, match.timeRemaining - dt);
   if (a.hp <= 0 || b.hp <= 0) finishRound(match, a.hp <= 0 && b.hp <= 0 ? 'double-ko' : 'ko');

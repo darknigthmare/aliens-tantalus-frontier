@@ -1,3 +1,4 @@
+import { getXenoTrialsCasteV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { getSynthTrialAttackV110 } from './synth-combat-v110.js';
 
@@ -62,7 +63,7 @@ export const XENO_TRIALS_SIGNATURES_V147 = freeze([
 const byId = new Map(XENO_TRIALS_SIGNATURES_V147.map(entry => [entry.fighterId, entry]));
 export function getXenoTrialsSignatureV147(definition) {
   const entry = byId.get(definition?.id);
-  return entry && entry.profileId === definition.profileId ? entry : null;
+  return entry && entry.profileId === definition.profileId ? entry : getXenoTrialsCasteV151(definition);
 }
 export function getXenoTrialsSpecialStyleV147(definition) {
   return getXenoTrialsSignatureV147(definition)?.style || definition?.special;

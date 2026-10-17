@@ -173,9 +173,10 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       if (attack.age >= windowStart && attack.age < windowStart + spec.active) {
         context.strokeStyle = ['special', 'super'].includes(attack.kind) ? '#bbf280' : '#f9d5a2'; context.lineWidth = attack.kind === 'light' ? 2 : 4;
         const face = attack.facing > 0 ? body.right : body.left, reach = spec.reach * definition.reach;
-        context.beginPath(); context.moveTo(face, ground - body.height * .85);
-        context.quadraticCurveTo(face + attack.facing * reach, ground - body.height * .55,
-          face + attack.facing * reach * .5, ground - body.height * .15); context.stroke();
+        const strikeHeight = body.height * (spec.contactHeightRatioV151 || 1);
+        context.beginPath(); context.moveTo(face, ground - strikeHeight * .85);
+        context.quadraticCurveTo(face + attack.facing * reach, ground - strikeHeight * .55,
+          face + attack.facing * reach * .5, ground - strikeHeight * .15); context.stroke();
       }
     }
     if (fighter.guardBrokenV147 && fighter.stun > 0) text('GARDE BRISÉE', fighter.x, ground - height * bottom - 12, 12, '#ffb86b', 'center');
@@ -210,8 +211,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       }
     }
     for (const effect of match.synthEffectsV110 || []) {
-      context.fillStyle = '#ffc56c55'; context.strokeStyle = '#ffecc5'; context.lineWidth = 3; context.beginPath();
-      context.arc(effect.x, 450 - effect.y, effect.radius * (1 - effect.life / .4), 0, Math.PI * 2); context.fill(); context.stroke();
+      context.fillStyle = effect.kind === 'acid-death-v151' ? '#c1f07833' : '#ffc56c55';
+      context.strokeStyle = effect.kind === 'acid-death-v151' ? '#c1f078' : '#ffecc5'; context.lineWidth = 3; context.beginPath();
+      context.arc(effect.x, 450 - effect.y, effect.radius * Math.max(effect.kind === 'acid-death-v151' ? .65 : 0, 1 - effect.life / .4), 0, Math.PI * 2); context.fill(); context.stroke();
     }
     for (const projectile of match.projectiles) {
       if (projectile.style === 'ground-wave') {

@@ -41,8 +41,8 @@ test('five exact admitted identities have sourced, immutable and explicitly non-
     assert.equal(label(definition(p.fighterId)), p.label);
   }
 });
-test('all other 184 fighters retain each original attack contract; namesakes inherit nothing', () => {
-  const other = fighters.filter(f => !signature(f)); assert.equal(other.length, 184);
+test('all 180 unextended fighters retain their original contracts; namesakes inherit nothing', () => {
+  const other = fighters.filter(f => !signature(f)); assert.equal(other.length, 180);
   for (const f of other) for (const kind of ['light','heavy','special'])
     assert.equal(spec(f, kind, base[kind]), getSynthTrialAttackV110(f, kind, base[kind]), `${f.id}/${kind}`);
   for (const p of profiles) {

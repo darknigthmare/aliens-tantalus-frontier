@@ -525,6 +525,7 @@ const SHELL = Object.freeze([
   '/src/xeno-trials-selection-v97.js',
   '/src/xeno-trials-signatures-v147.js',
   '/src/xeno-trials-supers-v148.js',
+  '/src/xeno-trials-castes-v151.js',
   '/src/xeno-trials-stage-motion-v147.js',
   '/src/xeno-trials-ui-v96.js',
   '/src/xeno-trials-user-admissions-v105.js',

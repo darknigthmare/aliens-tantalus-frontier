@@ -82,6 +82,7 @@ for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-a
 SCRIPT_FILES.add('verify-xeno-trials-signatures-v147.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-supers-v148.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
+SCRIPT_FILES.add('verify-xeno-trials-castes-v151.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
 SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
@@ -98,6 +99,9 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/progress-v149.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V149.xlsx',
   'docs/forge/xeno-trials',
+  'docs/forge/xeno-trials/V151-FIRETEAM-CASTES.md',
+  'docs/forge/xeno-trials/progress-v151.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V151.xlsx',
   'docs/forge/xeno-trials/README.md',
   'docs/forge/xeno-trials/V147-SIGNATURES.md',
   'docs/forge/xeno-trials/V148-SUPERS.md',

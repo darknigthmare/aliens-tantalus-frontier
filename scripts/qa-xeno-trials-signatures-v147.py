@@ -1,4 +1,4 @@
-"""Five native Xeno Trials opponents through the real menus and CPU combat.
+"""Nine native Xeno Trials opponents through the real menus and CPU combat.
 Only UI input drives state. No fighter, clock, result or saved progress is injected.
 Frame captures are read-only observations, not new authored animation assets.
 """
@@ -21,9 +21,9 @@ if output == repo or repo in output.parents:
 output.mkdir(parents=True, exist_ok=True)
 report = {'status': 'running', 'base': args.base, 'checks': [], 'captures': [], 'pageErrors': [],
           'requestFailures': [], 'httpErrors': [], 'limitations': [
-              'Five CPU opponents in isolated fresh profiles, not 189 finished movesets.',
+              'Nine CPU opponents in isolated fresh profiles, not 189 finished movesets.',
               'Existing admitted static character images; no new character animation or 1:1 certification.',
-              'The five screenshots cover five arenas. Six arena functions have separate unit tests.',
+              'The nine pilots use existing arenas. Six arena functions have separate unit tests; Burster death splash is checked separately in boundary tests.',
               'No physical phone/gamepad, cloud account or hosted deployment review.']}
 pilots = [
     ('drive-v123-fte-pathogen-brute-profile-v13', 'pathogen', 'pathogen-brute-ground-impact', 'ground-wave', 'containment-deck'),
@@ -31,6 +31,10 @@ pilots = [
     ('import-game-afe2-warden', 'xenomorph', 'afe2-warden-acid', 'aimed-acid', 'reactor-ring'),
     ('import-game-afe2-exploder', 'xenomorph', 'afe2-exploder-detonation', 'detonation', 'tantalus-cargo'),
     ('import-game-afe2-harbinger', 'pathogen', 'afe2-harbinger-leap', 'leap', 'planet-surface'),
+    ('prowler', 'xenomorph', 'fte-prowler-ambush-leap', 'leap', 'tantalus-cargo'),
+    ('drive-v123-afe-runner', 'xenomorph', 'fte-runner-tail-sweep', 'tail-sweep', 'hive-vault'),
+    ('drive-v123-afe-spitter', 'xenomorph', 'fte-spitter-aimed-acid', 'aimed-acid', 'reactor-ring'),
+    ('burster', 'xenomorph', 'fte-burster-close-assault', 'ram', 'containment-deck'),
 ]
 READ = '() => globalThis.__ATF_XENO_TRIALS_V96__?.snapshot()'
 
@@ -92,6 +96,9 @@ with sync_playwright() as p:
                 observed = bool(shots) if style in ('ground-wave', 'acid-cluster', 'aimed-acid') else (
                     any(e['type'] == 'xeno-detonation' and e.get('side') == 'opponent' for e in m['events'])
                     if style == 'detonation' else cpu['y'] > 0 and (cpu.get('attack') or {}).get('kind') == 'special')
+                if style in ('ram', 'tail-sweep'):
+                    attack = cpu.get('attack') or {}
+                    observed = attack.get('kind') == 'special' and attack.get('hit') is True
                 if observed:
                     emitted = current
                     break

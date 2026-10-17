@@ -40,11 +40,15 @@ test('five immutable supers are original simulation extensions on exact fighter/
     assert.equal(spec(definition(s.fighterId),'super',null),s.spec);
   }
 });
-test('the other 184 fighters retain all light/heavy/special contracts and gain no guessed super', () => {
+test('the other 184 fighters retain their admitted contracts (including V151) and gain no guessed super', () => {
   const others = fighters.filter(f=>!profile(f));assert.equal(others.length,184);
   for(const f of others) {
     assert.equal(spec(f,'super',base.special),null);
-    for(const kind of ['light','heavy','special']) assert.equal(spec(f,kind,base[kind]),getSynthTrialAttackV110(f,kind,base[kind]));
+    for(const kind of ['light','heavy','special']) {
+      const caste = getXenoTrialsSignatureV147(f);
+      const expected = kind === 'special' && caste ? caste.spec : getSynthTrialAttackV110(f,kind,base[kind]);
+      assert.equal(spec(f,kind,base[kind]),expected);
+    }
     const m=make(f.id);tick(m,.1,{super:true});assert.equal(count(m),0);assert.equal(m.fighters[0].superMeterV148,undefined);
   }
   for(const f of [null,{}, {id:'constructor'},{id:WARDEN,profileId:null}])assert.equal(profile(f),null);

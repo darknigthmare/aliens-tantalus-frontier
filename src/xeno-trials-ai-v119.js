@@ -16,8 +16,9 @@ export function getXenoTrialsAIProfileV119(definition) {
   if (ranged) Object.assign(profile, { preferredRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? 150 : 275, minimumRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? 45 : 110,
     // A cone is not a projectile. Its real, unscaled reach is the shared attack
     // contract, so the Incinerator must close instead of firing beyond 190 px.
-    maximumRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? getXenoTrialsAttackV147(definition, 'special', {}).reach : 580, specialUsage: .8 });
-  if (['ram', 'pounce', 'leap', 'ground-wave', 'detonation'].includes(getXenoTrialsSpecialStyleV147(definition))) profile.specialUsage = Math.max(profile.specialUsage, .7);
+    maximumRange: getXenoTrialsSpecialStyleV147(definition) === 'flame' ? getXenoTrialsAttackV147(definition, 'special', {}).reach
+      : Math.min(580, getXenoTrialsAttackV147(definition, 'special', { reach: 580 }).reach), specialUsage: .8 });
+  if (['ram', 'pounce', 'leap', 'ground-wave', 'detonation', 'tail-sweep'].includes(getXenoTrialsSpecialStyleV147(definition))) profile.specialUsage = Math.max(profile.specialUsage, .7);
   if (definition.role === 'tank') profile.jumpUsage = 0;
   return Object.freeze({ ...profile, ranged, canGuard: profile.guardProbability > 0, jumpUsage: definition.role === 'tank' ? 0 : profile.jumpUsage });
 }
