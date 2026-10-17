@@ -5,6 +5,8 @@ on:
       - '.github/workflows/trials-source-review-v154.yml'
       - 'src/xeno-trials-rig-v154.js'
       - 'src/xeno-trials-rig-data-v154.js'
+      - 'src/xeno-trials-restraint-pose-v156.js'
+      - 'scripts/verify-xeno-trials-restraint-pose-v156.mjs'
       - 'scripts/verify-xeno-trials-rig-v154.mjs'
   workflow_dispatch:
 permissions:

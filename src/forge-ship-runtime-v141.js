@@ -1,3 +1,5 @@
+import { showForgeNarrativeV156 } from './forge-narrative-ui-v156.js';
+import { forgeNarrativeViewV156 } from './forge-narrative-v156.js';
 /** Forge ship sessions reuse the native actor, collision and combat systems.
  * Room changes replace their local geometry; they never restart the hub loop or
  * run campaign routines, companions, commercial stations or native crises. */
@@ -27,6 +29,7 @@ export function withForgeShipRuntimeV141(Base) {
 
     start(hubState = {}, options = {}) {
       if (options.editorProject?.kind !== 'ship' || options.forgeJourneyV141 !== true) {
+        this.closeForgeNarrativeV156?.({ focus: false });
         this.forgeSessionV141 = null;
         this.forgeShipStartingV141 = false;
         this.forgeTransitionRefusalV141 = null;
@@ -39,6 +42,7 @@ export function withForgeShipRuntimeV141(Base) {
       if (!audit.ok) throw new Error(`Test Forge refusé : ${audit.errors.join(' ')}`);
       const health = clamp(Number.isFinite(Number(hubState.playerHealth ?? hubState.health))
         ? Number(hubState.playerHealth ?? hubState.health) : 100, 0, 100);
+      this.closeForgeNarrativeV156?.({ focus: false });
       this.forgeSessionV141 = session;
       this.forgeShipStartingV141 = true;
       this.forgeTransitionRefusalV141 = null;
@@ -102,6 +106,7 @@ export function withForgeShipRuntimeV141(Base) {
       if (restored) for (const key of ['doors', 'terminals', 'objectives', 'enemies', 'projectiles', 'hazardClock']) {
         if (restored[key] !== undefined) runtime[key] = restored[key];
       }
+      for (const objective of runtime.objectives) if (session.completedObjectives.includes(objective.cellId)) objective.complete = true;
       return runtime;
     }
 
@@ -150,13 +155,18 @@ export function withForgeShipRuntimeV141(Base) {
     nearestInteraction(...args) { return this.forgeSessionV141 ? null : super.nearestInteraction(...args); }
     nearestLift(...args) { return this.forgeSessionV141 ? undefined : super.nearestLift(...args); }
     useLift(...args) { return this.forgeSessionV141 ? false : super.useLift(...args); }
+    stop(...args) {
+      this.closeForgeNarrativeV156?.({ focus: false });
+      return super.stop(...args);
+    }
     fire(...args) {
+      if (this.forgeNarrativeOpenV156) return false;
       return this.forgeSessionV141 ? PhysicalHubV51.prototype.fire.apply(this, args) : super.fire(...args);
     }
 
     update(delta) {
       if (!this.forgeSessionV141) return super.update(delta);
-      if (!this.running || this.forgeShipStartingV141) return;
+      if (!this.running || this.forgeShipStartingV141 || this.forgeNarrativeOpenV156) return;
       // Keep native physics/combat while excluding every campaign tick wrapper.
       return PhysicalHubV51.prototype.update.call(this, clamp(Number(delta) || 0, 0, .05));
     }
@@ -182,7 +192,8 @@ export function withForgeShipRuntimeV141(Base) {
       const candidates = [];
       for (const [type, entries] of [['door', this.v51Doors], ['terminal', this.v51Terminals], ['objective', this.v51Objectives]]) {
         for (const entity of entries || []) {
-          if (type === 'objective' && entity.complete || type === 'terminal' && entity.activated) continue;
+          const narrative = type === 'terminal' && roomOf(this.forgeSessionV141).cells.some(cell => cell.id === entity.cellId && cell.narrative);
+          if (type === 'objective' && entity.complete || type === 'terminal' && entity.activated && !narrative) continue;
           const gap = distance(this.player, entity);
           if (gap.dx <= (type === 'door' ? 90 : 72) && gap.dy <= 36
             && this.forgeShipInteractionClearV141(entity)) candidates.push({ type, entity, distance: gap.value });
@@ -200,7 +211,7 @@ export function withForgeShipRuntimeV141(Base) {
       const session = this.forgeSessionV141;
       const allowed = session && outgoingForgeLinksV141(session.project, session.currentRoomId)
         .find(entry => entry.id === link?.id && entry.from.cellId === link?.from?.cellId);
-      if (!allowed || !this.running || !this.player?.alive) return false;
+      if (this.forgeNarrativeOpenV156 || !allowed || !this.running || !this.player?.alive) return false;
       const sourceDoor = this.v51Doors.find(entry => entry.cellId === allowed.from.cellId);
       const gap = sourceDoor && distance(this.player, sourceDoor);
       if (!gap || gap.dx > 90 || gap.dy > 36 || !this.forgeShipInteractionClearV141(sourceDoor)) return false;
@@ -262,7 +273,7 @@ export function withForgeShipRuntimeV141(Base) {
 
     interact() {
       if (!this.forgeSessionV141) return super.interact();
-      if (!this.running || this.forgeShipStartingV141 || !this.player.alive) return false;
+      if (this.forgeNarrativeOpenV156 || !this.running || this.forgeShipStartingV141 || !this.player.alive) return false;
       const interaction = this.nearestForgeInteractionV141();
       if (!interaction) return false;
       const { type, entity } = interaction;
@@ -272,6 +283,23 @@ export function withForgeShipRuntimeV141(Base) {
         if (link) return this.travelForgeShipLinkV141(link);
         entity.open = !entity.open;
       } else if (type === 'terminal') {
+        const cell = roomOf(this.forgeSessionV141).cells.find(cell => cell.id === entity.cellId);
+        if (cell?.narrative) {
+          const owner = this.forgeSessionV141, roomId = owner.currentRoomId;
+          const shown = showForgeNarrativeV156(this, entity.cellId, result => {
+            for (const objective of this.v51Objectives) if (this.forgeSessionV141.completedObjectives.includes(objective.cellId)) objective.complete = true;
+            const required = this.forgeSessionV141.project.rooms.filter(room => this.forgeSessionV141.reachableRoomIds.includes(room.id)).flatMap(room => physicalCells(room, 'objective'));
+            if (!this.forgeSessionV141.complete && required.length && required.every(cell => this.forgeSessionV141.completedObjectives.includes(cell.id))) {
+              this.forgeSessionV141.complete = true; this.onAction({ action: 'editor:project-complete', objectives: required.length });
+            }
+            if (!this.running || this.forgeSessionV141 !== owner) return;
+            this.onAction({ action: 'editor:narrative-choice', terminalId: entity.cellId, roomId, ...result });
+            if (!this.running || this.forgeSessionV141 !== owner) return;
+            this.persist(); this.statusKey = ''; this.emitStatus();
+          });
+          if (shown) { entity.activated = true; this.persist(); this.statusKey = ''; this.emitStatus(); }
+          return shown;
+        }
         entity.activated = true;
         this.onAction({ action: 'editor:terminal', terminalId: entity.cellId, roomId: this.forgeActiveRoomIdV141 });
       } else {
@@ -310,6 +338,7 @@ export function withForgeShipRuntimeV141(Base) {
         forgeSessionV141: { schema: 141, currentRoomId: this.forgeActiveRoomIdV141,
           completedObjectives: clone(this.forgeSessionV141.completedObjectives),
           transitions: this.forgeSessionV141.transitions,
+          narrativeV156: clone(this.forgeSessionV141.narrativeV156 || []),
           roomStates: clone(this.forgeSessionV141.roomStates) } });
     }
 
@@ -326,7 +355,8 @@ export function withForgeShipRuntimeV141(Base) {
         const target = link && this.forgeSessionV141.project.rooms.find(room => room.id === link.to.roomId);
         return target ? `E — REJOINDRE ${target.name.toUpperCase()}` : 'E — ACTIONNER LE SAS';
       }
-      if (interaction?.type === 'terminal') return 'E — ACTIVER LE TERMINAL';
+      if (interaction?.type === 'terminal') return roomOf(this.forgeSessionV141).cells.some(cell => cell.id === interaction.entity.cellId && cell.narrative)
+        ? 'E — LIRE LE RÉCIT DU TERMINAL' : 'E — ACTIVER LE TERMINAL';
       if (interaction?.type === 'objective') return this.v51Terminals.some(terminal => !terminal.activated)
         ? 'OBJECTIF VERROUILLÉ · ACTIVEZ TOUS LES TERMINAUX DE CETTE SALLE'
         : 'E — VALIDER L’OBJECTIF';
@@ -361,6 +391,7 @@ export function withForgeShipRuntimeV141(Base) {
         enemies: this.enemies, projectiles: this.projectiles, hazardClock: this.hazardClock || 0 });
       return { ...snapshot, roomComposition: 'forge-authored-room-v141', roomBackground: null,
         forgeJourneyV141: session, forgeTransitionRefusalV141: clone(this.forgeTransitionRefusalV141),
+        narrativeDialogV156: this.forgeNarrativeOpenV156 ? forgeNarrativeViewV156(this.forgeSessionV141, this.forgeNarrativeOpenV156) : null,
         editorShipBoundsV141: FORGE_SHIP_BOUNDS_V141 };
     }
   };

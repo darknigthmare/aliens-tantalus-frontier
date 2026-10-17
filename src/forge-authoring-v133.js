@@ -1,3 +1,4 @@
+import { remapForgeNarrativeObjectivesV156 } from './forge-narrative-v156.js';
 /** Authoring operations only. No runtime compilation or campaign writes. */
 import { ForgeModel, parseProject, clone, keyOf, LAYERS, TILE_TYPES, decorative } from './forge-model-v130.js';
 
@@ -19,6 +20,8 @@ export function normalizeAssemblyV133(input) {
   const bounds = selectionBoundsV133(input.cells);
   if (![bounds.x, bounds.y, bounds.w, bounds.h].every(Number.isInteger) || bounds.x < 0 || bounds.y < 0 || bounds.w > 128 || bounds.h > 72) reject('Dimensions d’assemblage invalides.');
   const cells = input.cells.map((cell, index) => ({ ...clone(cell), id: `cell-${index + 1}`, x: cell.x - bounds.x, y: cell.y - bounds.y, locked: false }));
+  const mapping = new Map(input.cells.map((cell, index) => [cell.id, cells[index].id]));
+  remapForgeNarrativeObjectivesV156(cells, mapping);
   const model = parseProject({ schema: 3, kind: 'mission', name: 'Assemblage', activeRoomId: 'room-1', links: [], rooms: [{ id: 'room-1', name: 'Assemblage', size: [Math.max(8, bounds.w), Math.max(8, bounds.h)], cells }] });
   return { id: typeof input.id === 'string' && /^[a-z0-9][a-z0-9_-]{0,79}$/.test(input.id) ? input.id : 'assembly', name: title(input.name), cells: model.rooms[0].cells, size: [bounds.w, bounds.h] };
 }

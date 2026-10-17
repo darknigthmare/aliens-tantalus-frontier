@@ -1,3 +1,5 @@
+import { showForgeNarrativeV156 } from './forge-narrative-ui-v156.js';
+import { forgeNarrativeViewV156 } from './forge-narrative-v156.js';
 import { decorative } from './forge-model-v130.js';
 import { inspectForgeJourneyV141 } from './forge-journey-admission-v141.js';
 import { buildForgeObjectiveV136, EDITOR_MISSION_WORLD_V136 } from './editor-spatial-v136.js';
@@ -68,6 +70,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
           narrativeEvidenceV132: clone(options.narrativeEvidenceV132 || {}),
           onNarrativeArchivesChange: null };
       }
+      this.closeForgeNarrativeV156?.({ focus: false });
       this.forgeSessionV141 = null;
       this.forgeProjectV141 = null;
       this.forgeActiveRoomIdV141 = null;
@@ -143,7 +146,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
 
     travelForgeMissionV141(link, actor = this.player) {
       const session = this.forgeSessionV141, nearest = this.forgeLinkedDoorV141(actor);
-      if (!session || nearest?.link.id !== link?.id || !this.canPerformGameplayAction(actor, { allowSquadTask: true })) return false;
+      if (this.forgeNarrativeOpenV156 || !session || nearest?.link.id !== link?.id || !this.canPerformGameplayAction(actor, { allowSquadTask: true })) return false;
       if (!this.forgeInteractionClearV141(actor, nearest.door)) return this.locked('SAS INACCESSIBLE DERRIÈRE UNE CLOISON');
       const requirement = this.doorRequirement(nearest.door);
       if (requirement || nearest.door.levelLocked) return this.locked(requirement || 'SAS VERROUILLÉ');
@@ -184,6 +187,9 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       this.syncPlaceableBarriersV132?.();
       this.mission.objectives = target.missionObjectives;
       this.mission.phase = target.missionPhase;
+      if (this.objective && session.completedObjectives.includes(this.objective.forgeCellIdV141)) {
+        this.objective.complete = true; this.objectiveState.complete = true;
+      }
       for (const [index, member] of party.entries()) Object.assign(member, {
         x: arrivals[index].x, y: arrivals[index].y, vx: 0, vy: 0, grounded: true, climbing: false, inCover: false,
         ladderId: null, jumpBuffer: 0, coyoteTime: .1
@@ -198,12 +204,48 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       return true;
     }
 
+    stop(...args) {
+      this.closeForgeNarrativeV156?.({ focus: false });
+      return super.stop(...args);
+    }
+
+    update(delta) {
+      if (this.forgeNarrativeOpenV156) return;
+      return super.update(delta);
+    }
+
+    forgeNarrativeTerminalV156(actor = this.player) {
+      const room = this.forgeSessionV141?.project.rooms.find(entry => entry.id === this.forgeSessionV141.currentRoomId);
+      return [this.powerNode, this.archiveTerminal].filter(Boolean).find(terminal =>
+        room?.cells.some(cell => cell.id === terminal.forgeCellIdV141 && cell.narrative) && near(actor, terminal, 130)
+        && this.forgeInteractionClearV141(actor, terminal)) || null;
+    }
+
+    syncForgeNarrativeRewardsV156(result) {
+      const session = this.forgeSessionV141;
+      if (this.objective && session.completedObjectives.includes(this.objective.forgeCellIdV141)) {
+        this.objective.complete = true; this.objectiveState.complete = true;
+      }
+      this.onEvent({ type: 'forge-narrative-choice', roomId: session.currentRoomId, ...result });
+    }
+
     interact(actor = this.player) {
       const session = this.forgeSessionV141;
       if (!session) return super.interact(actor);
-      if (!this.canPerformGameplayAction(actor, { allowVent: true, allowSquadTask: true })) return false;
+      if (this.forgeNarrativeOpenV156 || !this.canPerformGameplayAction(actor, { allowVent: true, allowSquadTask: true })) return false;
       const linked = this.forgeLinkedDoorV141(actor);
       if (linked) return this.travelForgeMissionV141(linked.link, actor);
+      const storyTerminal = this.forgeNarrativeTerminalV156(actor);
+      if (storyTerminal) {
+        if (storyTerminal === this.archiveTerminal && !this.mission.objectives.boss) return this.locked('NEUTRALISER LA MENACE ALPHA');
+        const shown = showForgeNarrativeV156(this, storyTerminal.forgeCellIdV141, result => this.syncForgeNarrativeRewardsV156(result));
+        if (shown) {
+          if (storyTerminal === this.powerNode) { storyTerminal.active = true; this.mission.objectives.power = true; }
+          else { storyTerminal.recovered = true; this.mission.objectives.archive = true; }
+          this.onEvent({ type: 'forge-narrative-open', roomId: session.currentRoomId, cellId: storyTerminal.forgeCellIdV141 });
+        }
+        return shown;
+      }
       if (near(actor, this.objective)) {
         if (!this.forgeInteractionClearV141(actor, this.objective)) return this.locked('OBJECTIF INACCESSIBLE DERRIÈRE UNE CLOISON');
         const missing = super.missingExtractionRequirement();
@@ -254,6 +296,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       const linked = this.forgeLinkedDoorV141(actor);
       if (linked) return this.forgeInteractionClearV141(actor, linked.door)
         ? `E  SAS → ${session.project.rooms.find(room => room.id === linked.link.to.roomId)?.name || 'SALLE'}` : 'E  SAS BLOQUÉ PAR UNE CLOISON';
+      if (this.forgeNarrativeTerminalV156(actor)) return 'E  LIRE LE RÉCIT DU TERMINAL';
       if (near(actor, this.objective)) {
         if (!this.forgeInteractionClearV141(actor, this.objective)) return 'E  OBJECTIF BLOQUÉ PAR UNE CLOISON';
         if (!session.completedObjectives.includes(this.objective.forgeCellIdV141)) return 'E  VALIDER L’OBJECTIF DE CETTE SALLE';
@@ -303,7 +346,8 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         roomName: session.project.rooms.find(room => room.id === session.currentRoomId)?.name,
         reachableRoomIds: [...session.reachableRoomIds], visitedRoomIds: [...new Set([session.currentRoomId, ...Object.keys(session.roomStates)])],
         transitions: session.transitions, completedObjectives: [...session.completedObjectives],
-        requiredObjectives: [...list(this.forgeRequiredObjectivesV141)], scope: 'session' };
+        requiredObjectives: [...list(this.forgeRequiredObjectivesV141)], narrativeV156: clone(session.narrativeV156 || []),
+        narrativeDialogV156: this.forgeNarrativeOpenV156 ? forgeNarrativeViewV156(session, this.forgeNarrativeOpenV156) : null, scope: 'session' };
     }
 
     getSnapshot() {

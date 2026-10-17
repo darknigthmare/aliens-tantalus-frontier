@@ -96,12 +96,27 @@ SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-controls-v150.mjs');
 SCRIPT_FILES.add('verify-player-qa-observation-v150.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-controls-v150.py');
+for (const file of [
+  'verify-forge-narrative-v156.mjs',
+  'verify-hub-annex-population-v156.mjs',
+  'verify-xeno-trials-presentations-v156.mjs',
+  'verify-xeno-trials-restraint-pose-v156.mjs',
+  'verify-audit-continuation-v156.mjs',
+  'verify-audit-workbook-v156.py',
+  'qa-xeno-trials-presentations-v156.py',
+  'qa-forge-narrative-v156.py',
+  'qa-xeno-trials-restraint-v156.py',
+  'qa-hub-annex-population-v156.mjs',
+]) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
   '.github/workflows/trials-source-review-v154.yml',
+  'docs/forge/xeno-trials/V156-CONTINUATION.md',
+  'docs/forge/xeno-trials/progress-v156.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V156.xlsx',
   'docs/forge/xeno-trials/V155-SEQUENCES.md',
   'docs/forge/xeno-trials/progress-v155.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V155.xlsx',

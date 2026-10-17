@@ -1,3 +1,4 @@
+import { parseForgeNarrativeV156, validateForgeNarrativeReferencesV156, remapForgeNarrativeObjectivesV156 } from './forge-narrative-v156.js';
 import { parseForgeDecorationV141 } from './forge-decoration-v141.js';
 /** Frontier Forge V130. Pure authoring data; never imports a campaign store. */
 export const TILE_TYPES = Object.freeze(['floor','platform','wall','door','vent','ladder','lift','spawn','objective','enemy','vehicle','terminal','hazard']);
@@ -47,7 +48,8 @@ export function parseProject(input) {
       if (occupied.has(keyOf(cell))) fail('Deux blocs occupent la même case du même calque.');
       cellIds.add(cell.id); occupied.add(keyOf(cell));
       const decoration=parseForgeDecorationV141(cell.decoration,cell.layer);
-      return {id:cell.id,x:cell.x,y:cell.y,type:cell.type,layer:cell.layer,label:text(cell.label),locked:cell.locked === true,...(decoration?{decoration}:{})};
+      const narrative=parseForgeNarrativeV156(cell.narrative,cell.type,cell.layer);
+      return {id:cell.id,x:cell.x,y:cell.y,type:cell.type,layer:cell.layer,label:text(cell.label),locked:cell.locked === true,...(decoration?{decoration}:{}),...(narrative?{narrative}:{})};
     });
     return {id:raw.id,name:text(raw.name,'Secteur sans nom'),size:[...raw.size],cells};
   });
@@ -69,6 +71,7 @@ export function parseProject(input) {
     linkIds.add(raw.id);
     return {id:raw.id,from,to,bidirectional:raw.bidirectional !== false};
   });
+  validateForgeNarrativeReferencesV156(rooms);
   const activeRoomId=modern ? input.activeRoomId : rooms[0].id;
   if (!roomIds.has(activeRoomId)) fail('Salle active introuvable.');
   const result={schema:3,kind:input.kind==='ship'?'ship':'mission',name:text(input.name,'Frontier Forge'),activeRoomId,rooms,links};
@@ -199,8 +202,9 @@ export class ForgeModel {
   copy(ids){const selected=new Set(ids),cells=this.room.cells.filter(cell=>selected.has(cell.id));if(!cells.length)return null;const x=Math.min(...cells.map(c=>c.x)),y=Math.min(...cells.map(c=>c.y));return {cells:cells.map(cell=>({...clone(cell),x:cell.x-x,y:cell.y-y,locked:false}))};}
   paste(clipboard,x,y){
     if(!clipboard?.cells?.length)return [];
-    const inserted=[],occupied=new Set(this.room.cells.map(keyOf));
-    for(const original of clipboard.cells){const cell={...clone(original),x:x+original.x,y:y+original.y,id:this.cellId(),locked:false};if(cell.x<0||cell.y<0||cell.x>=this.room.size[0]||cell.y>=this.room.size[1]||occupied.has(keyOf(cell)))fail('Collage refusé : limites ou destination occupée.');occupied.add(keyOf(cell));this.room.cells.push(cell);inserted.push(cell.id);}
+    const inserted=[],copies=[],mapping=new Map(),occupied=new Set(this.room.cells.map(keyOf));
+    for(const original of clipboard.cells){const cell={...clone(original),x:x+original.x,y:y+original.y,id:this.cellId(),locked:false};if(cell.x<0||cell.y<0||cell.x>=this.room.size[0]||cell.y>=this.room.size[1]||occupied.has(keyOf(cell)))fail('Collage refusé : limites ou destination occupée.');occupied.add(keyOf(cell));this.room.cells.push(cell);copies.push(cell);mapping.set(original.id,cell.id);inserted.push(cell.id);}
+    remapForgeNarrativeObjectivesV156(copies,mapping);
     this.cellCache=null;return inserted;
   }
   deleteCells(ids){const wanted=new Set(ids),removed=new Set(this.room.cells.filter(cell=>wanted.has(cell.id)&&!cell.locked).map(cell=>cell.id));this.room.cells=this.room.cells.filter(cell=>!removed.has(cell.id));this.removeLinks([...removed]);this.cellCache=null;}
@@ -215,7 +219,7 @@ export class ForgeModel {
     if(this.data.rooms.length>=LIMITS.rooms)fail('Limite de 32 salles atteinte.');
     const id=freshId('room',new Set(this.data.rooms.map(room=>room.id)));
     const room=duplicate?clone(this.room):emptyRoom(id,`Secteur ${this.data.rooms.length+1}`);
-    room.id=id;if(duplicate){room.name=`${room.name} · copie`;const used=new Set(this.data.rooms.flatMap(r=>r.cells.map(c=>c.id)));for(const cell of room.cells){cell.id=freshId('cell',used);used.add(cell.id);}}
+    room.id=id;if(duplicate){room.name=`${room.name} · copie`;const used=new Set(this.data.rooms.flatMap(r=>r.cells.map(c=>c.id)));const mapping=new Map();for(const cell of room.cells){const previous=cell.id;cell.id=freshId('cell',used);used.add(cell.id);mapping.set(previous,cell.id);}remapForgeNarrativeObjectivesV156(room.cells,mapping);}
     this.data.rooms.push(room);this.data.activeRoomId=id;this.idCache=null;this.cellCache=null;return id;
   }
   deleteRoom(){if(this.data.rooms.length===1)fail('La dernière salle ne peut pas être supprimée.');const id=this.room.id;this.data.rooms=this.data.rooms.filter(room=>room.id!==id);this.data.links=this.data.links.filter(link=>link.from.roomId!==id&&link.to.roomId!==id);this.data.activeRoomId=this.data.rooms[0].id;}

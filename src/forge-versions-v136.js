@@ -59,7 +59,7 @@ export function compareForgeDocumentsV136(beforeInput,afterInput) {
     for(const [id,old] of a[kind]) {
       const next=b[kind].get(id);
       if(!next){changes.push({kind,id,change:'removed'});continue;}
-      const fields=kind==='rooms'?['name','size']:kind==='cells'?['roomId','x','y','type','layer','label','locked']:['from','to','bidirectional'];
+      const fields=kind==='rooms'?['name','size']:kind==='cells'?['roomId','x','y','type','layer','label','locked','decoration','narrative']:['from','to','bidirectional'];
       const changed=fields.filter(f=>JSON.stringify(old[f])!==JSON.stringify(next[f]));
       if(changed.length)changes.push({kind,id,change:'changed',fields:changed,before:Object.fromEntries(changed.map(f=>[f,clone(old[f])])),after:Object.fromEntries(changed.map(f=>[f,clone(next[f])]))});
     }

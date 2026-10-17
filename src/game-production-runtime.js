@@ -108,7 +108,7 @@ export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV
   }
 
   canPerformGameplayAction(actor = this.player, { allowVent = false, allowSquadTask = false } = {}) {
-    return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
+    return Boolean(this.running && !this.paused && !this.forgeNarrativeOpenV156 && !this.enemyAtlasLoadingPausedV65 && !this.userCasteLoadingV88
       && this.mission?.state === 'active' && actor?.alive && !actor.downed && (allowVent || !actor.ventTransit)
       && !(actor.hazardKind === 'electrical' && actor.hazardClock > 0)
       && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor) && !this.isFieldActionBusyV124(actor)
