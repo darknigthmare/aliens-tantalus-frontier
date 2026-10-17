@@ -86,6 +86,8 @@ SCRIPT_FILES.add('verify-xeno-trials-castes-v151.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-acid-v152.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-grapple-v153.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-rig-v154.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-sequences-v155.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-sequences-v155.py');
 SCRIPT_FILES.add('qa-xeno-trials-rig-v154.py');
 SCRIPT_FILES.add('qa-xeno-trials-grapple-v153.py');
 SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
@@ -100,6 +102,9 @@ const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 const FORGE_TOOLING_V140 = new Set([
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
   '.github/workflows/trials-source-review-v154.yml',
+  'docs/forge/xeno-trials/V155-SEQUENCES.md',
+  'docs/forge/xeno-trials/progress-v155.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V155.xlsx',
   'docs/forge/xeno-trials/V154-NATIVE-RIGS.md',
   'docs/forge/xeno-trials/progress-v154.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V154.xlsx',

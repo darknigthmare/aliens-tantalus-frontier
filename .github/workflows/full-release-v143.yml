@@ -68,6 +68,7 @@ jobs:
           python scripts/qa-xeno-trials-controls-v150.py --root dist --output "$RUNNER_TEMP/atf-release-qa/controls" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/controls.log" || status=1
           python scripts/qa-xeno-trials-grapple-v153.py --output "$RUNNER_TEMP/atf-release-qa/grapple" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/grapple.log" || status=1
           python scripts/qa-xeno-trials-rig-v154.py --output "$RUNNER_TEMP/atf-release-qa/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/rigs.log" || status=1
+          python scripts/qa-xeno-trials-sequences-v155.py --output "$RUNNER_TEMP/atf-release-qa/sequences" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/sequences.log" || status=1
           exit "$status"
       - name: Retain results without distributing private documents
         if: always()

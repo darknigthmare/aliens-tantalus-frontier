@@ -92,7 +92,7 @@ export class XenoTrialsUiV96 {
       </div>
       <div class="xt-arena"><canvas width="1000" height="560" tabindex="0" data-xt="canvas" aria-label="Arène de combat Xeno Trials" aria-describedby="xeno-trials-help-v96"></canvas>
       <p data-xt="health" class="xt-sr-only" aria-label="Santé et endurance des combattants"></p></div>
-      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p>Les mouvements disponibles sont indiqués au briefing : cycles ou déformations maillées adaptés, non certifiés 1:1. La simulation et le chrono sont arrêtés.</p><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
+      <div class="xt-actions"><button class="button" data-xt="pause" disabled>PAUSE</button><button type="button" class="button" data-xt="skip-sequence" hidden>PASSER LA PRÉSENTATION</button><button class="button" data-xt="next" hidden>MANCHE SUIVANTE</button><button class="button" data-xt="retry-save" hidden>RÉESSAYER LA SAUVEGARDE DU RÉSULTAT</button></div><section data-xt="pause-overlay" class="xt-pause-overlay-v119" role="dialog" aria-modal="true" aria-labelledby="xeno-trials-pause-title-v119" hidden><h2 id="xeno-trials-pause-title-v119">ÉVALUATION SUSPENDUE</h2><p>Q/D ou flèches · Saut Z/↑ · Garde S/↓ · Attaques J/K/L · Super I (jauge pleine) · P ou Échap pour reprendre.</p><p>Les mouvements disponibles sont indiqués au briefing : cycles ou déformations maillées adaptés, non certifiés 1:1. La simulation et le chrono sont arrêtés.</p><button type="button" class="button primary" data-xt="resume-overlay">REPRENDRE</button><button type="button" class="button danger-outline" data-xt="abandon-overlay">ABANDONNER · SANS GAIN</button></section>
       <div data-xt="controls" class="xt-controls" role="group" aria-label="Commandes de combat tactiles">
         ${[['left','←'],['right','→'],['jump','SAUT'],['guard','GARDE'],['light','J · RAPIDE'],['heavy','K · LOURD'],['special','L · SPÉCIAL'],['super','I · SUPER']].map(([key,label]) => `<button type="button" data-xeno-action="${key}" aria-label="${controlLabel[key]}">${label}</button>`).join('')}
       </div><details class="xt-combat-help"><summary>Commandes et règles du duel</summary><p id="xeno-trials-help-v96" class="xt-help">Déplacement : Q/D ou flèches · Saut : Z/↑/Espace · Garde : S/↓ · Attaques : J/K/L · Super : I, pour les spécimens compatibles. Jauge gagnée sur les contacts effectifs, conservée entre manches et consommée au départ. Pause : P. Deux manches gagnantes. Lors d’une saisie, maintenir GARDE permet le dégagement sans marteler une touche. La garde ordinaire consomme de l’endurance. Coups lourds pour briser une garde épuisée. Les poses sont fixes sauf les cycles de marche adaptés signalés sur les fiches ; déplacements et collisions sont simulés. Si un cycle est indisponible, la pose fixe est conservée.</p></details></section>
@@ -162,6 +162,7 @@ export class XenoTrialsUiV96 {
     };
     this.el('pause').onclick = () => { if (!this.runtime || this.unsavedResult) return; this.runtime.getState().paused ? this.runtime.resume() : this.runtime.pause(); };
     this.el('next').onclick = () => this.runtime?.nextRound();
+    this.el('skip-sequence').onclick = () => this.runtime?.skipSequence();
     this.el('retry-save').onclick = () => this.finish(this.unsavedResult);
     this.updateOpponents(); this.restorePendingSelection(); this.render();
   }
@@ -308,7 +309,7 @@ export class XenoTrialsUiV96 {
     this.el('arena-cards').innerHTML = STAGES.map(s => `<button type="button" class="xt-arena-card" data-xt-arena="${s.id}" aria-pressed="${s.id === stage.id}" ${locked || activity?.stageId && activity.stageId !== s.id ? 'disabled' : ''} style="--xt-back:${s.background};--xt-floor:${s.floor};--xt-accent:${s.accent}"><span class="xt-arena-thumbnail">${s.backdrop ? `<img src="${s.backdrop}" alt="" loading="lazy">` : '<i></i><i></i><i></i>'}</span><strong>${s.label}</strong><small>${activity?.stageId ? 'Environnement assigné à l’évaluation' : s.backdrop ? 'Décor du projet réutilisé' : 'Environnement procédural'} · 2D</small></button>`).join('');
     this.el('stage-preview').innerHTML = `<div class="xt-stage-scene" style="--xt-back:${stage.background};--xt-floor:${stage.floor};--xt-accent:${stage.accent}">${stage.backdrop ? `<img src="${stage.backdrop}" alt="Aperçu du décor sélectionné">` : '<i></i><i></i><i></i><i></i><i></i>'}<span>${stage.label}</span></div><p>${matchup} · Arène simulée, sans danger de décor. ${stage.backdrop ? 'Décor existant du projet, sans modification des collisions.' : ''}</p>`;
   }
-  closeRuntime() { this.generation++; this.runtime?.stop(); this.runtime = null; this.loading = false; this.lastStatus = null; }
+  closeRuntime() { this.root.removeAttribute('data-xt-outro'); this.el('skip-sequence').hidden = true; this.generation++; this.runtime?.stop(); this.runtime = null; this.loading = false; this.lastStatus = null; }
   close() {
     this.active = false; this.closeRuntime(); this.unsavedResult = null; this.lastStatus = null;
     this.root.ownerDocument?.documentElement?.classList?.remove('xt-fullscreen-v119');
@@ -397,9 +398,13 @@ export class XenoTrialsUiV96 {
     const text = `${grapple?.target === 'player' ? 'SAISIE · MAINTENIR S / GARDE POUR SE DÉGAGER · ' : ''}${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
     if (this.lastStatus !== text && !this.unsavedResult) { this.message(text); this.lastStatus = text; }
     this.el('next').hidden = snapshot.phase !== 'round-over';
-    this.el('pause').disabled = snapshot.phase === 'match-over' || Boolean(this.unsavedResult);
+    const outroPlaying = snapshot.outroV155?.phase === 'playing';
+    this.root.setAttribute('data-xt-outro',String(outroPlaying));
+    this.el('skip-sequence').hidden = !(outroPlaying || snapshot.presentation?.fighterSlot !== null && snapshot.presentation?.blocksSimulation) || snapshot.paused;
+    this.el('skip-sequence').textContent = outroPlaying ? 'PASSER LA SÉQUENCE FINALE' : 'PASSER LA PRÉSENTATION';
+    this.el('pause').disabled = snapshot.phase === 'match-over' && !outroPlaying || Boolean(this.unsavedResult);
     this.el('pause').textContent = snapshot.paused ? 'REPRENDRE' : 'PAUSE';
-    this.el('pause-overlay').hidden = !snapshot.paused || snapshot.phase === 'match-over';
+    this.el('pause-overlay').hidden = !snapshot.paused || snapshot.phase === 'match-over' && !outroPlaying;
     // A newly visible modal must own keyboard focus. Background/visibility
     // pauses wait for the next explicit interaction instead of stealing focus.
     if (!this.el('pause-overlay').hidden && !wasPaused && !this.root.ownerDocument?.hidden
@@ -468,7 +473,7 @@ export class XenoTrialsUiV96 {
     if (activity?.rules?.timeLimitSeconds) { this.form.elements.roundSeconds.value=String(activity.rules.timeLimitSeconds); this.form.elements.roundSeconds.disabled=true; }
     if (!state.pending) this.updateVariants();
     this.renderPreviews();
-    this.el('pause').disabled = !running || this.loading;
+    this.el('pause').disabled = (!running && this.runtime?.getState().outroV155?.phase !== 'playing') || this.loading || Boolean(this.unsavedResult);
     this.el('history').replaceChildren();
     for (const e of state.ledger.slice(-8).reverse()) {
       const row = document.createElement('p'); row.textContent = `${e.matchId} · ${e.playerId} / ${e.opponentId} · ${e.winner === 'abandoned' ? 'annulé' : { player: 'victoire', opponent: 'défaite', draw: 'égalité' }[e.winner]} · +${e.credits} crédits`;

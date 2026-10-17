@@ -87,6 +87,27 @@ export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
  const contacts=Object.fromEntries(Object.entries(rig.contacts).map(([name,a])=>[name,point(matrices[a.bone],...a.point)]));
  return{rigId:rig.id,clip:cue.clip,progress:p,angles,vertices,contacts,reducedMotion,canonExact:false,animation:rig.animation,active:gain>1e-6};
 }
+/** V155 presentation-only angle sampler. Exact native rigs and bounded angles;
+ * support bones cannot rotate. It never accepts an unreviewed replacement rig. */
+export function sampleXenoTrialsSequenceAnglesV155(rig, cue, keyedAngles, reducedMotion = false) {
+ if (!XENO_TRIALS_RIGS_V154.includes(rig) || !cue || !Number.isFinite(cue.progress)
+  || !Number.isFinite(cue.elapsed) || cue.elapsed < 0 || !keyedAngles || typeof keyedAngles !== 'object') return null;
+ const allowed = new Set(rig.bones.map(b => b.id));
+ if (Object.entries(keyedAngles).some(([key,value]) => !allowed.has(key) || !Number.isFinite(value)
+  || Math.abs(value) > 8 || key === 'hips' && value !== 0)) return null;
+ const angles = {}, matrices = {};
+ for (const bone of rig.bones) {
+  angles[bone.id] = reducedMotion ? 0 : keyedAngles[bone.id] || 0;
+  matrices[bone.id] = multiply(bone.parent ? matrices[bone.parent] : identity(), rotation(angles[bone.id],bone.pivot));
+ }
+ const mesh = getXenoTrialsRigMeshV154(rig);
+ const vertices = mesh.vertices.map(({source:[x,y],weights}) => weights.reduce((out,[id,w]) => {
+  const p = point(matrices[id],x,y); out[0] += p[0]*w; out[1] += p[1]*w; return out;
+ },[0,0]));
+ const contacts = Object.fromEntries(Object.entries(rig.contacts).map(([name,a]) => [name,point(matrices[a.bone],...a.point)]));
+ return {rigId:rig.id,clip:cue.clip,progress:clamp(cue.progress),angles,vertices,contacts,reducedMotion,
+  canonExact:false,animation:'authored-native-sequence-v155',active:Object.values(angles).some(n=>Math.abs(n)>1e-6)};
+}
 export function xenoTrialsTriangleAreaV154(a,b,c){return((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))/2;}
 function affine(s,d){
  const[s0,s1,s2]=s,[d0,d1,d2]=d,ux=s1[0]-s0[0],uy=s1[1]-s0[1],vx=s2[0]-s0[0],vy=s2[1]-s0[1],det=ux*vy-uy*vx;

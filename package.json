@@ -54,7 +54,8 @@
     "test:trials:acid": "node --test scripts/verify-xeno-trials-acid-v152.mjs",
     "test:trials:castes": "node --test scripts/verify-xeno-trials-castes-v151.mjs",
     "test:trials:grapple": "node --test scripts/verify-xeno-trials-grapple-v153.mjs",
-    "test:trials:rigs": "node --test scripts/verify-xeno-trials-rig-v154.mjs"
+    "test:trials:rigs": "node --test scripts/verify-xeno-trials-rig-v154.mjs",
+    "test:trials:sequences": "node --test scripts/verify-xeno-trials-sequences-v155.mjs"
   },
   "engines": {
     "node": ">=22"

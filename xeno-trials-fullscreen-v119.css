@@ -59,3 +59,10 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-unsaved=
 .xt-match-hud .xt-super-meter-v148::-moz-progress-bar{background:#ddbf69}
 .xt-controls [data-xeno-action="super"][aria-disabled="true"]{opacity:.6}
 .xt-vitals [hidden],.xt-controls [hidden]{display:none!important}
+
+/* V155: a skippable, finite presentation is not another combat HUD. Results
+   are already saved and remain visible without covering the two source rigs. */
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-actions [data-xt="skip-sequence"]{position:fixed;left:50%;bottom:max(70px,calc(env(safe-area-inset-bottom) + 70px));transform:translateX(-50%);max-width:calc(100vw - 32px);min-height:44px;white-space:normal}
+.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] .xt-result:not(:empty){top:auto;bottom:max(205px,calc(env(safe-area-inset-bottom) + 205px));transform:translateX(-50%);padding:8px 16px;font-size:12px;max-height:75px;overflow:auto}
+.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] [data-xt="new-duel"]{bottom:max(125px,calc(env(safe-area-inset-bottom) + 125px))}
+@media(max-height:520px){.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] .xt-result:not(:empty){top:max(90px,env(safe-area-inset-top));bottom:auto;font-size:10px;max-height:48px}.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] [data-xt="new-duel"]{bottom:112px}}

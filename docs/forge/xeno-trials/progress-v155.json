@@ -1,0 +1,3787 @@
+{
+  "lot": "V155",
+  "baseCommit": "703a2ab87166df39f31bdf8d37d59ab09a9a3af4",
+  "scope": "Séquences natives multi-temps ; aucune nouvelle règle de combat ou certification canonique.",
+  "rosterIds": [
+    "warrior",
+    "runner",
+    "arachnoid",
+    "defender",
+    "grid",
+    "spitter",
+    "prowler",
+    "razor-claws",
+    "chrysalis",
+    "smasher",
+    "predalien",
+    "xenoborg",
+    "royal-guard",
+    "queen",
+    "ravager",
+    "crusher-acm",
+    "boiler",
+    "burster",
+    "stalker-arcade",
+    "gorilla",
+    "rhino",
+    "panther",
+    "mantis",
+    "ultramorph",
+    "synth-trooper",
+    "synth-guard",
+    "synth-sniper",
+    "synth-heavy",
+    "armored-joe",
+    "combat-synth",
+    "mecha",
+    "mecha-2",
+    "mechanoid",
+    "albino-joe",
+    "albino-combat-synth",
+    "albino-runner",
+    "albino-crusher",
+    "albino-ravager",
+    "albino-burster",
+    "albino-six",
+    "albino-ripper",
+    "armored-runner",
+    "armored-ravager",
+    "armored-red",
+    "armored-k-series",
+    "armored-ripper",
+    "armored-ripper-queen",
+    "acid-runner",
+    "acid-lurker",
+    "acid-ravager",
+    "acid-boiler",
+    "acid-joe",
+    "acid-combat-synth",
+    "user-antilope",
+    "user-brute",
+    "user-carrier",
+    "user-spiker",
+    "user-warrior-red",
+    "user-phantera-black",
+    "user-rhino",
+    "user-chameleon",
+    "user-chameleon-2",
+    "user-trex-king",
+    "user-trex-queen",
+    "user-big-xeno",
+    "user-pale-spined",
+    "user-tiger-biped",
+    "user-raised-crest",
+    "user-bulbous-quadruped",
+    "user-black-bone-raptor",
+    "user-blue-violet-biped",
+    "user-skeletal-quadruped",
+    "user-red-horned",
+    "cryo-runner",
+    "cryo-crusher",
+    "cryo-lurker",
+    "cryo-ravager",
+    "cryo-boiler",
+    "cryo-burster",
+    "cryo-monica",
+    "cryo-ripper",
+    "cryo-ripper-queen",
+    "cryo-foundry-crusher",
+    "cryo-reef-stalker",
+    "cryo-pale-hunter",
+    "cryo-dust-runner",
+    "cryo-salvage-brute",
+    "cryo-caravan-stalker",
+    "cryo-joe",
+    "cryo-combat-synth",
+    "armored-foundry-crusher",
+    "armored-reef-stalker",
+    "armored-pale-hunter",
+    "armored-dust-runner",
+    "armored-salvage-brute",
+    "armored-caravan-stalker",
+    "acid-queen",
+    "acid-crusher",
+    "acid-burster",
+    "acid-k-series",
+    "acid-ripper",
+    "acid-ripper-queen",
+    "acid-foundry-crusher",
+    "import-joe-classic",
+    "import-joe-battle",
+    "import-joe-hazmat",
+    "import-joe-tactical",
+    "import-blue-drone",
+    "import-blue-queen",
+    "user-open-crest",
+    "user-green-dome",
+    "user-violet-lobes",
+    "user-green-vesicles",
+    "user-black-dome",
+    "user-black-fin",
+    "user-orange-biped",
+    "user-unclassified-multiarm",
+    "user-flesh-experiment",
+    "user-renaissance",
+    "import-engineer-armorsuit",
+    "import-engineer-battlesuit",
+    "import-engineer-behemotsuit",
+    "import-engineer-ceremonialsuit",
+    "import-engineer-mala-kak",
+    "import-engineer-original-space-jokey-variant",
+    "import-engineer-respirator",
+    "import-engineer-spacejokey",
+    "import-engineer-suit-open",
+    "import-engineer-wararmor",
+    "import-engineer-woman",
+    "import-synth-eloise",
+    "import-synth-jerri-1",
+    "import-synth-jerri-2",
+    "import-wy-apesuit",
+    "import-wy-covenant-david",
+    "import-alien-king-from-alien-extemrination",
+    "import-green-alien-king",
+    "import-xeno-gorillaxeno",
+    "import-xeno-kingrogue",
+    "import-xeno-spacejokeygiant",
+    "import-game-afe-synth-warden",
+    "import-game-afe2-warden",
+    "import-game-afe2-bulwark",
+    "import-game-dd-wy-commando",
+    "import-game-afe2-exploder",
+    "import-game-afe2-harbinger",
+    "import-game-dd-synthetic",
+    "import-game-dd-guardian",
+    "synth-incinerator",
+    "synth-detonator",
+    "synth-containment",
+    "synth-enforcer",
+    "afe2-engineer-hybrid",
+    "synth-peacekeeper",
+    "afe2-spider",
+    "afe2-igniter",
+    "afe2-bombardier",
+    "afe2-huntsman",
+    "import-xeno-titan-queen-nolegs",
+    "synth-good-boy",
+    "synth-tecsek",
+    "synth-automated-powerloader",
+    "dd-darwin-era-cultist",
+    "drive-v123-acm-boiler",
+    "drive-v123-acm-crusher",
+    "drive-v123-afe-burster",
+    "drive-v123-afe-prowler",
+    "drive-v123-afe-runner",
+    "drive-v123-afe-spitter",
+    "drive-v123-comic-rogue-king",
+    "drive-v123-creature-alien3-runner",
+    "drive-v123-creature-aliens-queen-mobile",
+    "drive-v123-creature-prometheus-engineer-biosuit",
+    "drive-v123-creature-resurrection-newborn-v2",
+    "drive-v123-creature-romulus-offspring",
+    "drive-v123-fte-pathogen-brute-profile-v13",
+    "drive-v123-fte-pathogen-popper-profile-v13",
+    "drive-v123-fte-pathogen-queen-right-v13",
+    "drive-v123-fte-pathogen-runner-nodules-v13",
+    "drive-v123-fte-pathogen-stalker-profile-v13",
+    "drive-v123-kenner-gorilla",
+    "drive-v123-neca-panther-kenner-tribute-v14",
+    "drive-v123-neca-rhino-kenner-orange-v14",
+    "drive-v123-neca-rhino-kenner-version2-blue-v14",
+    "drive-v123-neca-snake-series13-v14",
+    "drive-v123-game-working-joe-hazard",
+    "drive-v123-game-working-joe-standard",
+    "drive-v123-prometheus-engineer-chair-suit-v16",
+    "drive-v123-game-combat-synthetic-avp2"
+  ],
+  "sequenceIds": [
+    "prowler::intro",
+    "prowler::round-win",
+    "prowler::round-loss",
+    "prowler::outro-win",
+    "prowler::outro-loss",
+    "dd-darwin-era-cultist::intro",
+    "dd-darwin-era-cultist::round-win",
+    "dd-darwin-era-cultist::round-loss",
+    "dd-darwin-era-cultist::outro-win",
+    "dd-darwin-era-cultist::outro-loss",
+    "import-game-dd-wy-commando::intro",
+    "import-game-dd-wy-commando::round-win",
+    "import-game-dd-wy-commando::round-loss",
+    "import-game-dd-wy-commando::outro-win",
+    "import-game-dd-wy-commando::outro-loss",
+    "import-game-dd-guardian::intro",
+    "import-game-dd-guardian::round-win",
+    "import-game-dd-guardian::round-loss",
+    "import-game-dd-guardian::outro-win",
+    "import-game-dd-guardian::outro-loss"
+  ],
+  "rigCount": 4,
+  "sequences": 20,
+  "keyframes": 100,
+  "inheritedPresentationIds": [
+    "prowler::intro",
+    "prowler::intro-rival",
+    "prowler::outro",
+    "prowler::win-r1",
+    "prowler::lose-r1",
+    "prowler::win-final",
+    "prowler::lose-final",
+    "prowler::draw",
+    "prowler::taunt",
+    "prowler::rematch",
+    "import-game-dd-wy-commando::intro",
+    "import-game-dd-wy-commando::intro-rival",
+    "import-game-dd-wy-commando::outro",
+    "import-game-dd-wy-commando::win-r1",
+    "import-game-dd-wy-commando::lose-r1",
+    "import-game-dd-wy-commando::win-final",
+    "import-game-dd-wy-commando::lose-final",
+    "import-game-dd-wy-commando::draw",
+    "import-game-dd-wy-commando::taunt",
+    "import-game-dd-wy-commando::rematch",
+    "import-game-dd-guardian::intro",
+    "import-game-dd-guardian::intro-rival",
+    "import-game-dd-guardian::outro",
+    "import-game-dd-guardian::win-r1",
+    "import-game-dd-guardian::lose-r1",
+    "import-game-dd-guardian::win-final",
+    "import-game-dd-guardian::lose-final",
+    "import-game-dd-guardian::draw",
+    "import-game-dd-guardian::taunt",
+    "import-game-dd-guardian::rematch",
+    "dd-darwin-era-cultist::intro",
+    "dd-darwin-era-cultist::intro-rival",
+    "dd-darwin-era-cultist::outro",
+    "dd-darwin-era-cultist::win-r1",
+    "dd-darwin-era-cultist::lose-r1",
+    "dd-darwin-era-cultist::win-final",
+    "dd-darwin-era-cultist::lose-final",
+    "dd-darwin-era-cultist::draw",
+    "dd-darwin-era-cultist::taunt",
+    "dd-darwin-era-cultist::rematch"
+  ],
+  "approved1to1": 0,
+  "fullArtTasksClosed": 0,
+  "behaviorTests": 30,
+  "documentTests": 1,
+  "newOriginalSpriteFiles": 0,
+  "workbook": "XENO_TRIALS_SUIVI_V155.xlsx",
+  "tables": {
+    "01_Sequences": {
+      "headers": [
+        "Séquence_ID",
+        "Identité",
+        "Phase",
+        "Durée (ms)",
+        "Points clés",
+        "Présentation V146",
+        "État technique",
+        "Fidélité"
+      ],
+      "rows": [
+        [
+          "prowler::intro",
+          "Prowler",
+          "intro",
+          1200,
+          5,
+          "prowler::intro",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "prowler::round-win",
+          "Prowler",
+          "round-win",
+          1800,
+          5,
+          "prowler::win-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "prowler::round-loss",
+          "Prowler",
+          "round-loss",
+          1800,
+          5,
+          "prowler::lose-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "prowler::outro-win",
+          "Prowler",
+          "outro-win",
+          1800,
+          5,
+          "prowler::win-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "prowler::outro-loss",
+          "Prowler",
+          "outro-loss",
+          1800,
+          5,
+          "prowler::lose-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          "Cultiste Darwin Era",
+          "intro",
+          1200,
+          5,
+          "dd-darwin-era-cultist::intro",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "dd-darwin-era-cultist::round-win",
+          "Cultiste Darwin Era",
+          "round-win",
+          1800,
+          5,
+          "dd-darwin-era-cultist::win-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "dd-darwin-era-cultist::round-loss",
+          "Cultiste Darwin Era",
+          "round-loss",
+          1800,
+          5,
+          "dd-darwin-era-cultist::lose-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-win",
+          "Cultiste Darwin Era",
+          "outro-win",
+          1800,
+          5,
+          "dd-darwin-era-cultist::win-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-loss",
+          "Cultiste Darwin Era",
+          "outro-loss",
+          1800,
+          5,
+          "dd-darwin-era-cultist::lose-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "intro",
+          1200,
+          5,
+          "import-game-dd-wy-commando::intro",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-wy-commando::round-win",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "round-win",
+          1800,
+          5,
+          "import-game-dd-wy-commando::win-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-wy-commando::round-loss",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "round-loss",
+          1800,
+          5,
+          "import-game-dd-wy-commando::lose-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-win",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "outro-win",
+          1800,
+          5,
+          "import-game-dd-wy-commando::win-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-loss",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "outro-loss",
+          1800,
+          5,
+          "import-game-dd-wy-commando::lose-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          "Guardian — Darwin Era — adaptation",
+          "intro",
+          1200,
+          5,
+          "import-game-dd-guardian::intro",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-guardian::round-win",
+          "Guardian — Darwin Era — adaptation",
+          "round-win",
+          1800,
+          5,
+          "import-game-dd-guardian::win-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-guardian::round-loss",
+          "Guardian — Darwin Era — adaptation",
+          "round-loss",
+          1800,
+          5,
+          "import-game-dd-guardian::lose-r1",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-guardian::outro-win",
+          "Guardian — Darwin Era — adaptation",
+          "outro-win",
+          1800,
+          5,
+          "import-game-dd-guardian::win-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ],
+        [
+          "import-game-dd-guardian::outro-loss",
+          "Guardian — Darwin Era — adaptation",
+          "outro-loss",
+          1800,
+          5,
+          "import-game-dd-guardian::lose-final",
+          "Adaptation intégrée",
+          "Non approuvé 1:1"
+        ]
+      ]
+    },
+    "02_Production": {
+      "headers": [
+        "Présentation V146",
+        "Identité",
+        "Séquence prévue",
+        "État",
+        "Implémentation V155",
+        "Livré / manquant",
+        "Clos artistiquement",
+        "Approuvé 1:1"
+      ],
+      "rows": [
+        [
+          "prowler::intro",
+          "Prowler",
+          "Intro standard",
+          "Partiel",
+          "prowler::intro",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "prowler::intro-rival",
+          "Prowler",
+          "Intro de rivalité",
+          "À valider",
+          null,
+          "Réaction à la famille adverse; aucune relation historique postulée sans scène.",
+          0,
+          0
+        ],
+        [
+          "prowler::outro",
+          "Prowler",
+          "Outro",
+          "À valider",
+          null,
+          "Quitter vers une ouverture compatible; Reprendre une posture vigilante sans nouveau coup.",
+          0,
+          0
+        ],
+        [
+          "prowler::win-r1",
+          "Prowler",
+          "Victoire de première manche",
+          "Partiel",
+          "prowler::round-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "prowler::lose-r1",
+          "Prowler",
+          "Défaite de première manche",
+          "Partiel",
+          "prowler::round-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "prowler::win-final",
+          "Prowler",
+          "Victoire finale",
+          "Partiel",
+          "prowler::outro-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "prowler::lose-final",
+          "Prowler",
+          "Défaite finale",
+          "Partiel",
+          "prowler::outro-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "prowler::draw",
+          "Prowler",
+          "Égalité",
+          "À valider",
+          null,
+          "Deux poses neutres d’épuisement ou diagnostic; zéro gagnant affiché.",
+          0,
+          0
+        ],
+        [
+          "prowler::taunt",
+          "Prowler",
+          "Provocation",
+          "À valider",
+          null,
+          "Geste ou son adapté à la morphologie; pas de phrase canonique inventée.",
+          0,
+          0
+        ],
+        [
+          "prowler::rematch",
+          "Prowler",
+          "Début de manche suivante",
+          "À valider",
+          null,
+          "Réinitialisation explicite de simulation; reprendre les mêmes équipements et orientations.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Intro standard",
+          "Partiel",
+          "import-game-dd-wy-commando::intro",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::intro-rival",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Intro de rivalité",
+          "À valider",
+          null,
+          "Réaction à la famille adverse; aucune relation historique postulée sans scène.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::outro",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Outro",
+          "À valider",
+          null,
+          "Quitter vers une ouverture compatible; Reprendre une posture vigilante sans nouveau coup.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::win-r1",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Victoire de première manche",
+          "Partiel",
+          "import-game-dd-wy-commando::round-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::lose-r1",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Défaite de première manche",
+          "Partiel",
+          "import-game-dd-wy-commando::round-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::win-final",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Victoire finale",
+          "Partiel",
+          "import-game-dd-wy-commando::outro-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::lose-final",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Défaite finale",
+          "Partiel",
+          "import-game-dd-wy-commando::outro-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::draw",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Égalité",
+          "À valider",
+          null,
+          "Deux poses neutres d’épuisement ou diagnostic; zéro gagnant affiché.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::taunt",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Provocation",
+          "À valider",
+          null,
+          "Geste ou son adapté à la morphologie; pas de phrase canonique inventée.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando::rematch",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Début de manche suivante",
+          "À valider",
+          null,
+          "Réinitialisation explicite de simulation; reprendre les mêmes équipements et orientations.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          "Guardian — Darwin Era — adaptation",
+          "Intro standard",
+          "Partiel",
+          "import-game-dd-guardian::intro",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::intro-rival",
+          "Guardian — Darwin Era — adaptation",
+          "Intro de rivalité",
+          "À valider",
+          null,
+          "Réaction à la famille adverse; aucune relation historique postulée sans scène.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::outro",
+          "Guardian — Darwin Era — adaptation",
+          "Outro",
+          "À valider",
+          null,
+          "Quitter vers une ouverture compatible; Reprendre une posture vigilante sans nouveau coup.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::win-r1",
+          "Guardian — Darwin Era — adaptation",
+          "Victoire de première manche",
+          "Partiel",
+          "import-game-dd-guardian::round-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::lose-r1",
+          "Guardian — Darwin Era — adaptation",
+          "Défaite de première manche",
+          "Partiel",
+          "import-game-dd-guardian::round-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::win-final",
+          "Guardian — Darwin Era — adaptation",
+          "Victoire finale",
+          "Partiel",
+          "import-game-dd-guardian::outro-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::lose-final",
+          "Guardian — Darwin Era — adaptation",
+          "Défaite finale",
+          "Partiel",
+          "import-game-dd-guardian::outro-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::draw",
+          "Guardian — Darwin Era — adaptation",
+          "Égalité",
+          "À valider",
+          null,
+          "Deux poses neutres d’épuisement ou diagnostic; zéro gagnant affiché.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::taunt",
+          "Guardian — Darwin Era — adaptation",
+          "Provocation",
+          "À valider",
+          null,
+          "Geste ou son adapté à la morphologie; pas de phrase canonique inventée.",
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian::rematch",
+          "Guardian — Darwin Era — adaptation",
+          "Début de manche suivante",
+          "À valider",
+          null,
+          "Réinitialisation explicite de simulation; reprendre les mêmes équipements et orientations.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          "Cultiste Darwin Era",
+          "Intro standard",
+          "Partiel",
+          "dd-darwin-era-cultist::intro",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::intro-rival",
+          "Cultiste Darwin Era",
+          "Intro de rivalité",
+          "À valider",
+          null,
+          "Réaction à la famille adverse; aucune relation historique postulée sans scène.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::outro",
+          "Cultiste Darwin Era",
+          "Outro",
+          "À valider",
+          null,
+          "Quitter vers une ouverture compatible; Reprendre une posture vigilante sans nouveau coup.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::win-r1",
+          "Cultiste Darwin Era",
+          "Victoire de première manche",
+          "Partiel",
+          "dd-darwin-era-cultist::round-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::lose-r1",
+          "Cultiste Darwin Era",
+          "Défaite de première manche",
+          "Partiel",
+          "dd-darwin-era-cultist::round-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::win-final",
+          "Cultiste Darwin Era",
+          "Victoire finale",
+          "Partiel",
+          "dd-darwin-era-cultist::outro-win",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::lose-final",
+          "Cultiste Darwin Era",
+          "Défaite finale",
+          "Partiel",
+          "dd-darwin-era-cultist::outro-loss",
+          "Séquence maillée et cycle de vie intégrés. Dessin complet, audio, relevés et validation canonique ouverts.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::draw",
+          "Cultiste Darwin Era",
+          "Égalité",
+          "À valider",
+          null,
+          "Deux poses neutres d’épuisement ou diagnostic; zéro gagnant affiché.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::taunt",
+          "Cultiste Darwin Era",
+          "Provocation",
+          "À valider",
+          null,
+          "Geste ou son adapté à la morphologie; pas de phrase canonique inventée.",
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist::rematch",
+          "Cultiste Darwin Era",
+          "Début de manche suivante",
+          "À valider",
+          null,
+          "Réinitialisation explicite de simulation; reprendre les mêmes équipements et orientations.",
+          0,
+          0
+        ]
+      ]
+    },
+    "03_ART153": {
+      "headers": [
+        "Tâche héritée",
+        "Identité",
+        "ID exact",
+        "Travail",
+        "État",
+        "Livré / reste à produire",
+        "Lot",
+        "Approuvé 1:1"
+      ],
+      "rows": [
+        [
+          "ART153-01",
+          "Prowler",
+          "prowler",
+          "Références de poses et timecodes",
+          "À relever",
+          "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-02",
+          "Prowler",
+          "prowler",
+          "Rig et points de contact",
+          "Implémenté (adaptation)",
+          "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-03",
+          "Prowler",
+          "prowler",
+          "Préparation / capture",
+          "Partiel",
+          "Anticipation du bond adaptée.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-04",
+          "Prowler",
+          "prowler",
+          "Saisie articulée",
+          "Partiel",
+          "Réaction de corps debout ; mise au sol et raccords entre les deux corps à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-05",
+          "Prowler",
+          "prowler",
+          "Résistance / dégagement",
+          "Partiel",
+          "Réaction au progrès réel du dégagement ; chorégraphie complète à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-06",
+          "Prowler",
+          "prowler",
+          "Interruption / récupération",
+          "Implémenté (adaptation)",
+          "Récupération courte déclenchée par la libération réelle, sans rejouer une attaque.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-07",
+          "Prowler",
+          "prowler",
+          "Revue deux orientations et tailles",
+          "À valider",
+          "Mathématiques et deux orientations couvertes par tests ; validation artistique finale et 1:1 encore ouverte.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-08",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Références de poses et timecodes",
+          "À relever",
+          "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-09",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Rig et points de contact",
+          "Implémenté (adaptation)",
+          "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-10",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Préparation / capture",
+          "À produire",
+          "Animation complète de réception du bond non produite.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-11",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Saisie articulée",
+          "Partiel",
+          "Réaction de corps debout ; mise au sol et raccords entre les deux corps à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-12",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Résistance / dégagement",
+          "Partiel",
+          "Réaction au progrès réel du dégagement ; chorégraphie complète à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-13",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Interruption / récupération",
+          "Implémenté (adaptation)",
+          "Récupération courte déclenchée par la libération réelle, sans rejouer une attaque.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-14",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Revue deux orientations et tailles",
+          "À valider",
+          "Mathématiques et deux orientations couvertes par tests ; validation artistique finale et 1:1 encore ouverte.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-15",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Références de poses et timecodes",
+          "À relever",
+          "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-16",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Rig et points de contact",
+          "Implémenté (adaptation)",
+          "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-17",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Préparation / capture",
+          "À produire",
+          "Animation complète de réception du bond non produite.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-18",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Saisie articulée",
+          "Partiel",
+          "Réaction de corps debout ; mise au sol et raccords entre les deux corps à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-19",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Résistance / dégagement",
+          "Partiel",
+          "Réaction au progrès réel du dégagement ; chorégraphie complète à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-20",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Interruption / récupération",
+          "Implémenté (adaptation)",
+          "Récupération courte déclenchée par la libération réelle, sans rejouer une attaque.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-21",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Revue deux orientations et tailles",
+          "À valider",
+          "Mathématiques et deux orientations couvertes par tests ; validation artistique finale et 1:1 encore ouverte.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-22",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Références de poses et timecodes",
+          "À relever",
+          "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-23",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Rig et points de contact",
+          "Implémenté (adaptation)",
+          "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-24",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Préparation / capture",
+          "À produire",
+          "Animation complète de réception du bond non produite.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-25",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Saisie articulée",
+          "Partiel",
+          "Réaction de corps debout ; mise au sol et raccords entre les deux corps à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-26",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Résistance / dégagement",
+          "Partiel",
+          "Réaction au progrès réel du dégagement ; chorégraphie complète à produire.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-27",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Interruption / récupération",
+          "Implémenté (adaptation)",
+          "Récupération courte déclenchée par la libération réelle, sans rejouer une attaque.",
+          "V154",
+          0
+        ],
+        [
+          "ART153-28",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Revue deux orientations et tailles",
+          "À valider",
+          "Mathématiques et deux orientations couvertes par tests ; validation artistique finale et 1:1 encore ouverte.",
+          "V154",
+          0
+        ]
+      ]
+    },
+    "04_PointsCles": {
+      "headers": [
+        "Séquence_ID",
+        "Position normalisée",
+        "Temps de mise en scène",
+        "Angles de rendu",
+        "Texture native",
+        "Garde-fou"
+      ],
+      "rows": [
+        [
+          "prowler::intro",
+          0,
+          "neutre",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::intro",
+          0.22,
+          "observer",
+          "spine: -0.6°, head: 2°, tail0: -0.7°, tail2: 0.5°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::intro",
+          0.52,
+          "identifier",
+          "spine: 0.6°, head: -3.5°, tail0: 1.2°, tail1: -0.6°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::intro",
+          0.78,
+          "stabiliser",
+          "spine: 0.33°, head: -1.925°, tail0: 0.66°, tail1: -0.33°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::intro",
+          1,
+          "prêt",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-win",
+          0.24,
+          "constater",
+          "spine: -1.5°, head: -4°, tail0: 1.3°, tail1: -0.5°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-win",
+          0.57,
+          "surveiller",
+          "spine: -0.3°, head: 1°, tail0: -0.35°, tail2: 0.25°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-win",
+          0.78,
+          "recentrer",
+          "spine: -0.375°, head: -1°, tail0: 0.325°, tail1: -0.125°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-win",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-loss",
+          0.2,
+          "encaisser",
+          "spine: 2.6°, head: 4°, upper0: 1°, upper1: -1°, tail0: -1°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-loss",
+          0.52,
+          "récupérer",
+          "spine: 1.56°, head: 2.4°, upper0: 0.6°, upper1: -0.6°, tail0: -0.6°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-loss",
+          0.78,
+          "recentrer",
+          "spine: 0.21°, head: -1.225°, tail0: 0.42°, tail1: -0.21°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::round-loss",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-win",
+          0.24,
+          "confirmer",
+          "spine: -1.5°, head: -4°, tail0: 1.3°, tail1: -0.5°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-win",
+          0.53,
+          "vérifier",
+          "spine: -0.36°, head: 1.2°, tail0: -0.42°, tail2: 0.3°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-win",
+          0.76,
+          "sécuriser",
+          "spine: -1.5°, head: -4°, tail0: 1.3°, tail1: -0.5°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-win",
+          1,
+          "pose finale",
+          "spine: -1.05°, head: -2.8°, tail0: 0.91°, tail1: -0.35°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-loss",
+          0.2,
+          "encaisser",
+          "spine: 2.6°, head: 4°, upper0: 1°, upper1: -1°, tail0: -1°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-loss",
+          0.48,
+          "céder",
+          "spine: 2.21°, head: 3.4°, upper0: 0.85°, upper1: -0.85°, tail0: -0.85°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-loss",
+          0.75,
+          "immobiliser",
+          "spine: 1.82°, head: 2.8°, upper0: 0.7°, upper1: -0.7°, tail0: -0.7°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "prowler::outro-loss",
+          1,
+          "pose finale",
+          "spine: 1.82°, head: 2.8°, upper0: 0.7°, upper1: -0.7°, tail0: -0.7°",
+          "/assets/user/castes-v87/game_afe_prowler.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          0,
+          "neutre",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          0.22,
+          "observer",
+          "spine: -0.5°, head: 1.8°, upper1: -1°, fore1: -1.5°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          0.52,
+          "identifier",
+          "spine: 0.8°, head: -3°, upper0: 1°, fore0: 1.5°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          0.78,
+          "stabiliser",
+          "spine: 0.44°, head: -1.65°, upper0: 0.55°, fore0: 0.825°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::intro",
+          1,
+          "prêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-win",
+          0.24,
+          "constater",
+          "spine: -1.4°, head: -3.6°, upper0: 1.2°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-win",
+          0.57,
+          "surveiller",
+          "spine: -0.25°, head: 0.9°, upper1: -0.5°, fore1: -0.75°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-win",
+          0.78,
+          "recentrer",
+          "spine: -0.35°, head: -0.9°, upper0: 0.3°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-win",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-loss",
+          0.2,
+          "encaisser",
+          "spine: 2.6°, head: 4°, fore0: 1°, fore1: -1°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-loss",
+          0.52,
+          "récupérer",
+          "spine: 1.56°, head: 2.4°, fore0: 0.6°, fore1: -0.6°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-loss",
+          0.78,
+          "recentrer",
+          "spine: 0.28°, head: -1.05°, upper0: 0.35°, fore0: 0.525°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::round-loss",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-win",
+          0.24,
+          "confirmer",
+          "spine: -1.4°, head: -3.6°, upper0: 1.2°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-win",
+          0.53,
+          "vérifier",
+          "spine: -0.3°, head: 1.08°, upper1: -0.6°, fore1: -0.9°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-win",
+          0.76,
+          "sécuriser",
+          "spine: -1.4°, head: -3.6°, upper0: 1.2°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-win",
+          1,
+          "pose finale",
+          "spine: -0.98°, head: -2.52°, upper0: 0.84°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-loss",
+          0.2,
+          "encaisser",
+          "spine: 2.6°, head: 4°, fore0: 1°, fore1: -1°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-loss",
+          0.48,
+          "céder",
+          "spine: 2.21°, head: 3.4°, fore0: 0.85°, fore1: -0.85°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-loss",
+          0.75,
+          "immobiliser",
+          "spine: 1.82°, head: 2.8°, fore0: 0.7°, fore1: -0.7°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "dd-darwin-era-cultist::outro-loss",
+          1,
+          "pose finale",
+          "spine: 1.82°, head: 2.8°, fore0: 0.7°, fore1: -0.7°",
+          "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          0,
+          "neutre",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          0.22,
+          "observer",
+          "spine: 0.5°, head: -1.6°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          0.52,
+          "identifier",
+          "spine: -0.9°, head: 3.4°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          0.78,
+          "stabiliser",
+          "spine: -0.495°, head: 1.87°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::intro",
+          1,
+          "prêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-win",
+          0.24,
+          "constater",
+          "spine: 1.4°, head: 3.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-win",
+          0.57,
+          "surveiller",
+          "spine: 0.25°, head: -0.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-win",
+          0.78,
+          "recentrer",
+          "spine: 0.35°, head: 0.95°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-win",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-loss",
+          0.2,
+          "encaisser",
+          "spine: -2.6°, head: -4°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-loss",
+          0.52,
+          "récupérer",
+          "spine: -1.56°, head: -2.4°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-loss",
+          0.78,
+          "recentrer",
+          "spine: -0.315°, head: 1.19°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::round-loss",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-win",
+          0.24,
+          "confirmer",
+          "spine: 1.4°, head: 3.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-win",
+          0.53,
+          "vérifier",
+          "spine: 0.3°, head: -0.96°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-win",
+          0.76,
+          "sécuriser",
+          "spine: 1.4°, head: 3.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-win",
+          1,
+          "pose finale",
+          "spine: 0.98°, head: 2.66°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-loss",
+          0.2,
+          "encaisser",
+          "spine: -2.6°, head: -4°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-loss",
+          0.48,
+          "céder",
+          "spine: -2.21°, head: -3.4°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-loss",
+          0.75,
+          "immobiliser",
+          "spine: -1.82°, head: -2.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-wy-commando::outro-loss",
+          1,
+          "pose finale",
+          "spine: -1.82°, head: -2.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          0,
+          "neutre",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          0.22,
+          "observer",
+          "spine: 0.8°, head: -2.2°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          0.52,
+          "identifier",
+          "spine: -0.6°, head: 2.5°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          0.78,
+          "stabiliser",
+          "spine: -0.33°, head: 1.375°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::intro",
+          1,
+          "prêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-win",
+          0.24,
+          "constater",
+          "spine: 1.1°, head: 3.2°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-win",
+          0.57,
+          "surveiller",
+          "spine: 0.4°, head: -1.1°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-win",
+          0.78,
+          "recentrer",
+          "spine: 0.275°, head: 0.8°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-win",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-loss",
+          0.2,
+          "encaisser",
+          "spine: -2.2°, head: -3.7°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-loss",
+          0.52,
+          "récupérer",
+          "spine: -1.32°, head: -2.22°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-loss",
+          0.78,
+          "recentrer",
+          "spine: -0.21°, head: 0.875°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::round-loss",
+          1,
+          "reprise",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-win",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-win",
+          0.24,
+          "confirmer",
+          "spine: 1.1°, head: 3.2°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-win",
+          0.53,
+          "vérifier",
+          "spine: 0.48°, head: -1.32°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-win",
+          0.76,
+          "sécuriser",
+          "spine: 1.1°, head: 3.2°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-win",
+          1,
+          "pose finale",
+          "spine: 0.77°, head: 2.24°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-loss",
+          0,
+          "arrêt",
+          "Neutre",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-loss",
+          0.2,
+          "encaisser",
+          "spine: -2.2°, head: -3.7°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-loss",
+          0.48,
+          "céder",
+          "spine: -1.87°, head: -3.145°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-loss",
+          0.75,
+          "immobiliser",
+          "spine: -1.54°, head: -2.59°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ],
+        [
+          "import-game-dd-guardian::outro-loss",
+          1,
+          "pose finale",
+          "spine: -1.54°, head: -2.59°",
+          "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "Appuis fixes ; pas de déplacement physique"
+        ]
+      ]
+    },
+    "05_Sources": {
+      "headers": [
+        "Identité",
+        "URL de la source",
+        "SHA-256",
+        "Largeur",
+        "Hauteur",
+        "Vérification",
+        "Portée limitée"
+      ],
+      "rows": [
+        [
+          "Prowler",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8193368b2056a5a4cee1645ae76e16b7cb8261fc/assets/user/castes-v87/game_afe_prowler.png",
+          "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+          1536,
+          1024,
+          "Sprite natif du projet, pixels examinés",
+          "Ne valide ni l’identité canonique ni une chorégraphie officielle"
+        ],
+        [
+          "Cultiste Darwin Era",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8193368b2056a5a4cee1645ae76e16b7cb8261fc/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+          "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+          1024,
+          1536,
+          "Sprite natif du projet, pixels examinés",
+          "Ne valide ni l’identité canonique ni une chorégraphie officielle"
+        ],
+        [
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8193368b2056a5a4cee1645ae76e16b7cb8261fc/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+          "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+          1024,
+          1536,
+          "Sprite natif du projet, pixels examinés",
+          "Ne valide ni l’identité canonique ni une chorégraphie officielle"
+        ],
+        [
+          "Guardian — Darwin Era — adaptation",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8193368b2056a5a4cee1645ae76e16b7cb8261fc/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+          "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+          1024,
+          1536,
+          "Sprite natif du projet, pixels examinés",
+          "Ne valide ni l’identité canonique ni une chorégraphie officielle"
+        ]
+      ]
+    },
+    "06_Recette": {
+      "headers": [
+        "Contrôle_ID",
+        "Contrôle",
+        "État local",
+        "Portée / limite"
+      ],
+      "rows": [
+        [
+          "QA155-01",
+          "twenty exact-identity sequences map four native rigs and never grant new fighter powers",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-02",
+          "prowler: all sequence samples retain nonfolding triangles, native supports and finite keyed timing",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-03",
+          "prowler: neutral R1/intro boundaries, final held posture and exact reduced-motion geometry",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-04",
+          "prowler: multi-beat curves differ from a single scalar pose and mirror without game writes",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-05",
+          "dd-darwin-era-cultist: all sequence samples retain nonfolding triangles, native supports and finite keyed timing",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-06",
+          "dd-darwin-era-cultist: neutral R1/intro boundaries, final held posture and exact reduced-motion geometry",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-07",
+          "dd-darwin-era-cultist: multi-beat curves differ from a single scalar pose and mirror without game writes",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-08",
+          "import-game-dd-wy-commando: all sequence samples retain nonfolding triangles, native supports and finite keyed timing",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-09",
+          "import-game-dd-wy-commando: neutral R1/intro boundaries, final held posture and exact reduced-motion geometry",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-10",
+          "import-game-dd-wy-commando: multi-beat curves differ from a single scalar pose and mirror without game writes",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-11",
+          "import-game-dd-guardian: all sequence samples retain nonfolding triangles, native supports and finite keyed timing",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-12",
+          "import-game-dd-guardian: neutral R1/intro boundaries, final held posture and exact reduced-motion geometry",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-13",
+          "import-game-dd-guardian: multi-beat curves differ from a single scalar pose and mirror without game writes",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-14",
+          "foreign angles, unsupported clips, support rotations and malformed progress fail closed",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-15",
+          "R1 is reversible and belongs to the actual winner, without inventing final sequences",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-16",
+          "a terminal timeline refuses draws, double KO, unknown rigs and airborne winners",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-17",
+          "outro admission is detached and resolves time-limit survivors without changing health",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-18",
+          "presentation clock has a stall bound and freezes for pause, invalid dt and background",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-19",
+          "entrance skipping preserves the second specimen and mandatory countdown",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-20",
+          "held combat input cannot cross a skipped intro or create an early attack",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-21",
+          "native outcome is emitted immediately once, then outro alone advances with frozen combat",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-22",
+          "terminal pause, resume and hidden-window freeze never reopen the combat engine",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-23",
+          "skip snaps to a final pose, cancels its frame and cannot pay or play again",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-24",
+          "result callbacks can pause, resume, skip or close without duplicate scheduling or receipts",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-25",
+          "a state owner closing on terminal admission still prevents a late result callback",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-26",
+          "unsupported opponents keep instantaneous static results and zero extra frames",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-27",
+          "reduced motion omits the outro wait and restoring the preference cannot resurrect it",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-28",
+          "enabling reduced motion during the sequence terminates it without altering the verdict",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-29",
+          "returned clip/participant/contact snapshots cannot alter the renderer or final pose",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-30",
+          "both match stats and final poses reject fresh combat controls during outro",
+          "Réussi",
+          "Test Node ; ne vaut pas capture visuelle de l’œuvre."
+        ],
+        [
+          "QA155-EXCEL",
+          "Couverture et cohérence du suivi",
+          "À vérifier",
+          "Contrôle documentaire exécuté après export."
+        ],
+        [
+          "QA155-BROWSER",
+          "Fixtures de poses + issue réelle du duel",
+          "À exécuter en CI",
+          "Navigation locale refusée par politique hôte avant toute assertion."
+        ]
+      ]
+    },
+    "07_Roster": {
+      "headers": [
+        "ID exact",
+        "Identité",
+        "Famille",
+        "Rig V154",
+        "Séquences V155",
+        "Fidélité approuvée"
+      ],
+      "rows": [
+        [
+          "warrior",
+          "Warrior",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "runner",
+          "Runner",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "arachnoid",
+          "Arachnoid",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "defender",
+          "Defender",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "grid",
+          "Grid",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "spitter",
+          "Spitter",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "prowler",
+          "Prowler",
+          "xenomorph",
+          1,
+          5,
+          0
+        ],
+        [
+          "razor-claws",
+          "Razor Claws",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "chrysalis",
+          "Chrysalis",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "smasher",
+          "Smasher",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "predalien",
+          "Predalien — Primal Hunt",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "xenoborg",
+          "Xenoborg",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "royal-guard",
+          "Royal Guard",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "queen",
+          "Reine mobile",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "ravager",
+          "Ravager",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "crusher-acm",
+          "Crusher — ACM",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "boiler",
+          "Boiler",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "burster",
+          "Burster",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "stalker-arcade",
+          "Stalker — arcade",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "gorilla",
+          "Gorilla Alien",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "rhino",
+          "Rhino Alien",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "panther",
+          "Panther Alien",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "mantis",
+          "Mantis Alien",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "ultramorph",
+          "Ultramorph — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-trooper",
+          "Synth Trooper",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-guard",
+          "Synth Guard",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-sniper",
+          "Synth Sniper",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-heavy",
+          "Synth Heavy",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-joe",
+          "Working Joe blindé",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "combat-synth",
+          "Synthétique de combat blindé",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "mecha",
+          "Xeno Mecha",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "mecha-2",
+          "Xeno Mecha II",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "mechanoid",
+          "Xeno Mechanoid",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-joe",
+          "Working Joe — variante albino",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-combat-synth",
+          "Synthétique de combat — albino",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-runner",
+          "Runner — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-crusher",
+          "Crusher — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-ravager",
+          "Ravager — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-burster",
+          "Burster — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-six",
+          "Lignée Six — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "albino-ripper",
+          "ATARAX Ripper — albino",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-runner",
+          "Runner blindé",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-ravager",
+          "Ravager blindé",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-red",
+          "Xénomorphe rouge — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-k-series",
+          "K-Series jaune — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-ripper",
+          "ATARAX Ripper — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-ripper-queen",
+          "Reine Ripper — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-runner",
+          "Runner — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-lurker",
+          "Lurker — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-ravager",
+          "Ravager — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-boiler",
+          "Boiler — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-joe",
+          "Working Joe — variante acide",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-combat-synth",
+          "Synthétique de combat — variante acide",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-antilope",
+          "Xeno-Antilope — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-brute",
+          "Xeno-Brute — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-carrier",
+          "Carrier chargé — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-spiker",
+          "Spiker — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-warrior-red",
+          "Warrior Red — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-phantera-black",
+          "Phantera Black — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-rhino",
+          "Xeno-Rhino — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-chameleon",
+          "Chameleon — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-chameleon-2",
+          "Chameleon II — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-trex-king",
+          "TRex King — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-trex-queen",
+          "TRex Queen — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-big-xeno",
+          "Big Xeno — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-pale-spined",
+          "Quadrupède pâle épineux — référence 25",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-tiger-biped",
+          "Bipède tigre — référence 06",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-raised-crest",
+          "Bipède à crête relevée — référence 07",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-bulbous-quadruped",
+          "Quadrupède bulbeux — référence 08",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-black-bone-raptor",
+          "Rapace noir et os — référence 11",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-blue-violet-biped",
+          "Bipède bleu-violet — référence 12",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-skeletal-quadruped",
+          "Quadrupède squelettique — référence 13",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-red-horned",
+          "Quadrupède rouge corné — référence 17",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-runner",
+          "Runner — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-crusher",
+          "Crusher — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-lurker",
+          "Lurker — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-ravager",
+          "Ravager — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-boiler",
+          "Boiler — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-burster",
+          "Burster — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-monica",
+          "Lignée Monica — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-ripper",
+          "ATARAX Ripper — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-ripper-queen",
+          "Reine Ripper — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-foundry-crusher",
+          "Foundry Crusher — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-reef-stalker",
+          "Reef Stalker — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-pale-hunter",
+          "Pale Crucible Hunter — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-dust-runner",
+          "Dust Runner — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-salvage-brute",
+          "Salvage Hive Brute — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-caravan-stalker",
+          "Caravan Stalker — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-joe",
+          "Working Joe — variante cryo",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "cryo-combat-synth",
+          "Synthétique de combat — variante cryo",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-foundry-crusher",
+          "Foundry Crusher — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-reef-stalker",
+          "Reef Stalker — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-pale-hunter",
+          "Pale Crucible Hunter — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-dust-runner",
+          "Dust Runner — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-salvage-brute",
+          "Salvage Hive Brute — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "armored-caravan-stalker",
+          "Caravan Stalker — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-queen",
+          "Reine mobile — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-crusher",
+          "Crusher — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-burster",
+          "Burster — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-k-series",
+          "K-Series jaune — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-ripper",
+          "ATARAX Ripper — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-ripper-queen",
+          "Reine Ripper — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "acid-foundry-crusher",
+          "Foundry Crusher — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-joe-classic",
+          "Working Joe — Classic — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-joe-battle",
+          "Working Joe — Battle — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-joe-hazmat",
+          "Working Joe — Hazmat — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-joe-tactical",
+          "Working Joe — Tactical — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-blue-drone",
+          "Blueluminescent — Drone — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-blue-queen",
+          "Blueluminescent — Queen — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-open-crest",
+          "Bipède à crête ajourée — référence 15",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-green-dome",
+          "Bipède à dôme verdoyant — référence 18",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-violet-lobes",
+          "Quadrupède à lobes violets — référence 21",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-green-vesicles",
+          "Quadrupède à vésicules vertes — référence 22",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-black-dome",
+          "Quadrupède à dôme noir — référence 23",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-black-fin",
+          "Quadrupède à nageoire noire — référence 24",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-orange-biped",
+          "Bipède brun-orange — référence 26",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-unclassified-multiarm",
+          "Xeno à caste indéterminée — référence 53",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-flesh-experiment",
+          "Expérience Flesh — référence 59",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "user-renaissance",
+          "Expérience Renaissance — référence 61",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-armorsuit",
+          "Engineer — Armure — design utilisateur",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-battlesuit",
+          "Engineer — Armure de bataille — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-behemotsuit",
+          "Engineer — Armure Behemot — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-ceremonialsuit",
+          "Engineer — Tenue cérémonielle — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-mala-kak",
+          "Engineer — Mala'kak — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-original-space-jokey-variant",
+          "Engineer — Space Jockey Original Variant — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-respirator",
+          "Engineer — Respirateur — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-spacejokey",
+          "Engineer — Space Jockey — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-suit-open",
+          "Engineer — Combinaison ouverte — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-wararmor",
+          "Engineer — Armure de guerre — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-engineer-woman",
+          "Engineer — Femme — adaptation",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-synth-eloise",
+          "Eloise — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-synth-jerri-1",
+          "Jerri — apparence 1 — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-synth-jerri-2",
+          "Jerri — apparence 2 — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-wy-apesuit",
+          "Weyland-Yutani — Porteur de combinaison APE — adaptation",
+          "human",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-wy-covenant-david",
+          "David — Covenant — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-alien-king-from-alien-extemrination",
+          "Alien King — Extermination (nom fourni) — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-green-alien-king",
+          "Alien King vert — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-xeno-gorillaxeno",
+          "Gorilla Xeno — Altered — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-xeno-kingrogue",
+          "Rogue — King — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-xeno-spacejokeygiant",
+          "Xeno Space Jockey — Giant — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-afe-synth-warden",
+          "Synth Warden — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-afe2-warden",
+          "Warden — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-afe2-bulwark",
+          "Bulwark — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-dd-wy-commando",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "human",
+          1,
+          5,
+          0
+        ],
+        [
+          "import-game-afe2-exploder",
+          "Exploder — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-afe2-harbinger",
+          "Harbinger — adaptation",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-dd-synthetic",
+          "Synthetic — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-game-dd-guardian",
+          "Guardian — Darwin Era — adaptation",
+          "human",
+          1,
+          5,
+          0
+        ],
+        [
+          "synth-incinerator",
+          "Synth Incinerator",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-detonator",
+          "Synth Detonator",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-containment",
+          "Synth Containment",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-enforcer",
+          "Synth Enforcer",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "afe2-engineer-hybrid",
+          "Engineer hybrid — adaptation",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-peacekeeper",
+          "Peacekeeper — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "afe2-spider",
+          "Spider — adaptation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "afe2-igniter",
+          "Igniter — interprétation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "afe2-bombardier",
+          "Bombardier — interprétation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "afe2-huntsman",
+          "Huntsman — interprétation",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "import-xeno-titan-queen-nolegs",
+          "Titan Queen NoLegs — reconstruction",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-good-boy",
+          "SunSpot « Good Boy »",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-tecsek",
+          "TecSek",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "synth-automated-powerloader",
+          "Automated Power Loader",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "dd-darwin-era-cultist",
+          "Cultiste Darwin Era",
+          "human",
+          1,
+          5,
+          0
+        ],
+        [
+          "drive-v123-acm-boiler",
+          "Boiler — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-acm-crusher",
+          "Crusher — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-afe-burster",
+          "Burster — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-afe-prowler",
+          "Prowler — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-afe-runner",
+          "Runner — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-afe-spitter",
+          "Spitter — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-comic-rogue-king",
+          "Rogue — King — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-creature-alien3-runner",
+          "Runner — Dog Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-creature-aliens-queen-mobile",
+          "Reine mobile — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-creature-prometheus-engineer-biosuit",
+          "Engineer — Combinaison biologique — Altered",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-creature-resurrection-newborn-v2",
+          "Newborn — Altered",
+          "hybrid",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-creature-romulus-offspring",
+          "Offspring — Altered",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-fte-pathogen-brute-profile-v13",
+          "Pathogen Brute — Altered",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-fte-pathogen-popper-profile-v13",
+          "Pathogen Popper — Altered",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-fte-pathogen-queen-right-v13",
+          "Pathogen Queen — Altered",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-fte-pathogen-runner-nodules-v13",
+          "Pathogen Runner — Altered",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-fte-pathogen-stalker-profile-v13",
+          "Pathogen Stalker — Altered",
+          "pathogen",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-kenner-gorilla",
+          "Gorilla Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-neca-panther-kenner-tribute-v14",
+          "Panther Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-neca-rhino-kenner-orange-v14",
+          "Rhino Alien — orange — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-neca-rhino-kenner-version2-blue-v14",
+          "Rhino Alien — bleu — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-neca-snake-series13-v14",
+          "Snake Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-game-working-joe-hazard",
+          "Working Joe — combinaison de protection — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-game-working-joe-standard",
+          "Working Joe — unité standard — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-prometheus-engineer-chair-suit-v16",
+          "Engineer — Combinaison de pilotage — Altered",
+          "engineer",
+          0,
+          0,
+          0
+        ],
+        [
+          "drive-v123-game-combat-synthetic-avp2",
+          "Combat Synthetic — unité désarmée — Altered",
+          "synthetic",
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "limits": [
+    "Source plates unchanged; no ground pin, full fall or independently drawn costume parts.",
+    "20 planned presentation rows partly addressed, not 20 fully canonical clips.",
+    "Result callback stays before finite outro; no second reward write.",
+    "40 planned entries for the four identities retained; ART153 28 tasks unchanged."
+  ],
+  "workbookSha256": "fbd67f00a8bd13a3b6c7c64241a230dbd8a1e732e841379e55270d1743dd5d3a"
+}
