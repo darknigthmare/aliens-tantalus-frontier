@@ -1,3 +1,4 @@
+import { getXenoTrialsRigV154, getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { drawXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
@@ -47,7 +48,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const presentationView = () => getXenoPresentationViewV97(presentation);
   const reduceMotion = () => options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
     || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
+  const rigDrawsV154 = new Map();
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
+    rigViewsV154: JSON.parse(JSON.stringify([...rigDrawsV154].map(([side,view])=>({side,...view})))),
     grappleViewV153: getXenoTrialsGrappleViewV153(match),
     cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
     supersV148: match.fighters.map(fighter => ({ side: fighter.side, ...getXenoTrialsSuperReadinessV148({ ...match, presentation: presentationView() }, fighter, getXenoTrialsFighterV96(fighter.id)) })),
@@ -148,12 +151,20 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     // attack, extend its active window or change collision/damage/save data.
     const canShowAttack = fighter.hp > 0 && fighter.y === 0 && fighter.stun <= 0
       && fighter.hitFlash <= 0 && !fighter.guard && match.phase === 'active';
-    const attackDrawn = canShowAttack && drawEnemyImportAttackV109(context, art, images, {
+    const rig=getXenoTrialsRigV154(definition,art);
+    const cue=rig && getXenoTrialsRigCueV154(rig,match,fighter,presentationView());
+    const pose=cue && sampleXenoTrialsRigV154(rig,cue,reducedMotion);
+    context.save();
+    if(fighter.hitFlash>0) context.globalAlpha=.65;
+    const rigDrawn=pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},fighter.x,ground,fighter.facing);
+    context.restore();
+    if(rigDrawn) rigDrawsV154.set(fighter.side,rigDrawn);
+    const attackDrawn = !rigDrawn && canShowAttack && drawEnemyImportAttackV109(context, art, images, {
       attack: fighter.attack, spec: getXenoTrialsAttackV147(definition, fighter.attack?.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind]), reducedMotion,
       height, x: fighter.x, y: ground, facing: fighter.attack?.facing,
       maxHorizontalExtent: null
     });
-    const animated = attackDrawn || drawEnemyImportAnimationV107(context, art, images, {
+    const animated = rigDrawn || attackDrawn || drawEnemyImportAnimationV107(context, art, images, {
       action: moving ? 'move' : 'idle', timeSeconds, height, x: fighter.x, y: ground, facing: fighter.facing,
       maxHorizontalExtent: null,
       reducedMotion
@@ -186,6 +197,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   }
   function render() {
     if (stopped) return;
+    rigDrawsV154.clear();
     cameraView = camera.update(match.fighters, frameDelta); frameDelta = 0;
     canvas.setAttribute?.('data-xeno-camera-zoom-v119', String(cameraView.zoom));
     drawArena();
@@ -430,7 +442,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (stopped) return;
     stopped = true; running = false; clearInputs(); if (raf !== null) cancelFrame(raf); raf = null;
     for (const cancel of [...pendingLoads]) cancel();
-    for (const remove of listeners.splice(0)) remove(); images.clear();
+    for (const remove of listeners.splice(0)) remove(); images.clear(); rigDrawsV154.clear();
     canvas.width = originalSize.width; canvas.height = originalSize.height;
   }
   return Object.freeze({ start, pause, resume, stop,
