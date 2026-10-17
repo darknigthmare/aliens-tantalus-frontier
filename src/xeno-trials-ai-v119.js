@@ -2,7 +2,7 @@ import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
-import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
+import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, xenoTrialsSegmentContactV147 } from './xeno-trials-signatures-v147.js';
 
 export const XENO_TRIALS_AI_STATES_V119 = Object.freeze(['OBSERVE', 'APPROACH', 'PROBE', 'PRESSURE', 'RETREAT', 'EVADE', 'DEFEND', 'PUNISH', 'COMMIT_ATTACK', 'RECOVERY', 'REPOSITION', 'SPECIAL_SETUP']);
 const empty = () => ({ left: false, right: false, jump: false, guard: false, light: false, heavy: false, special: false, super: false });
@@ -28,6 +28,27 @@ export function createXenoTrialsBrainV119() {
 const transition = (brain, state) => {
   if (brain.state !== state) { brain.state = state; brain.stateTime = 0; brain.stateVisits[state] = (brain.stateVisits[state] || 0) + 1; }
 };
+/** Earliest possible contact with the observed body, not predicted inputs.
+ * Uses the same segment and floor tests as projectile collision. This lets a
+ * defender notice descending acid before it reaches body height, without
+ * reacting to shots flying away or expiring before contact. No state changes. */
+export function getXenoTrialsProjectileThreatV149(projectile, defender, horizon = .5) {
+  if (!projectile || projectile.owner === defender?.side || !(projectile.life > 0)
+    || !defender || defender.hp <= 0 || !Number.isFinite(horizon) || horizon <= 0) return null;
+  const vx = projectile.vx ?? projectile.direction * 560, vy = projectile.vy || 0;
+  const span = Math.min(projectile.life, horizon, .75);
+  if (![projectile.x, projectile.y, vx, vy, span, defender.x, defender.y].every(Number.isFinite)) return null;
+  const body = getXenoTrialsBodyBoundsV105(defender);
+  const x1 = projectile.x + vx * span, y1 = projectile.y + vy * span;
+  const signature = Boolean(projectile.signatureIdV147);
+  const box = signature ? body : { ...body, left: body.left - 9, right: body.right + 9 };
+  const contact = xenoTrialsSegmentContactV147(projectile.x, projectile.y, x1, y1, box,
+    signature ? projectile.radiusV147 : 0);
+  if (contact === null) return null;
+  const floor = signature && y1 < 0 && projectile.y >= 0 ? projectile.y / (projectile.y - y1) : Infinity;
+  if (contact > floor || signature && projectile.y < 0) return null;
+  return { id: projectile.id, contactSeconds: contact * span };
+}
 function observe(match, specs) {
   const [target, cpu] = match.fighters, own = getXenoTrialsFighterV96(cpu.id), other = getXenoTrialsFighterV96(target.id);
   const selfBody = getXenoTrialsBodyBoundsV105(cpu), targetBody = getXenoTrialsBodyBoundsV105(target);
@@ -44,9 +65,7 @@ function observe(match, specs) {
   const attack = target.attack ? { id: target.attack.id, kind: target.attack.kind, age: target.attack.age,
     startup: attackSpec.startup, active: attackSpec.active, recovery: attackSpec.recovery,
     reach: attackSpec.reach * other.reach, facing: target.attack.facing } : null;
-  const projectileThreat = match.projectiles.some(p => p.owner !== cpu.side && p.life > 0
-    && p.y >= selfBody.bottom && p.y <= selfBody.top && (selfBody.center - p.x) * p.direction > 0
-    && Math.abs(selfBody.center - p.x) < 300);
+  const projectileThreat = match.projectiles.some(p => getXenoTrialsProjectileThreatV149(p, cpu) !== null);
   return { gap, direction, overlap, lane, attack, projectileThreat, targetAirborne: target.y > 1,
     frontOffset: direction > 0 ? selfBody.right - cpu.x : cpu.x - selfBody.left,
     detonationVerticalGap: Math.max(0, targetBody.bottom - (cpu.y + selfBody.height * .5), (cpu.y + selfBody.height * .5) - targetBody.top),

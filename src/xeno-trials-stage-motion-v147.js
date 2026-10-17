@@ -15,7 +15,7 @@ export function getXenoTrialsStageMotionV147(stageId, tick = 0, reducedMotion = 
 /** Paint before the fighters. All details stay behind the gameplay plane and
  * above the floor; no flashing full-screen lights or solid foreground panels.
  */
-export function drawXenoTrialsStageMotionV147(ctx, stage, camera, tick = 0, reducedMotion = false) {
+export function drawXenoTrialsStageMotionV147(ctx, stage, camera, tick = 0, reducedMotion = false, cueContext = null) {
   const state = getXenoTrialsStageMotionV147(stage.id, tick, reducedMotion);
   if (!state.kind) return state;
   const t = state.time, floor = camera.floor, offset = (camera.center - 500) * .12;
@@ -75,5 +75,80 @@ export function drawXenoTrialsStageMotionV147(ctx, stage, camera, tick = 0, redu
       }
       break;
   }
-  ctx.restore(); return state;
+  ctx.restore();
+  if (cueContext) drawXenoTrialsStageCueV149(ctx, stage, camera, cueContext, reducedMotion);
+  return state;
+}
+
+
+/** Phase-cued set dressing for the original simulated arenas, not source-film
+ * choreography or fighter poses. R1 defeat remains recoverable; no terminal
+ * event, organ change, collision, damage or reward can be emitted here. */
+export const XENO_TRIALS_STAGE_CUES_V149 = Object.freeze({
+  'containment-deck': 'seal-indicators', 'reactor-ring': 'coolant-valves',
+  'hive-vault': 'observation-filaments', 'tantalus-bridge': 'evaluation-monitors',
+  'tantalus-cargo': 'bay-guides', 'planet-surface': 'perimeter-beacons'
+});
+const clampCue = value => Math.max(0, Math.min(1, value));
+export function getXenoTrialsStageCueV149(stageId, context = {}, reducedMotion = false) {
+  const supported = Object.hasOwn(XENO_TRIALS_STAGE_CUES_V149, stageId);
+  const view = context.presentation;
+  const phase = context.phase === 'match-over' ? 'result' : context.phase === 'round-over' ? 'intermission'
+    : context.phase === 'intro' || view?.blocksSimulation ? 'introduction' : 'combat';
+  const raw = phase === 'intermission' ? 1 - context.phaseTime / 1.8
+    : phase === 'introduction' && view ? view.elapsedMs / Math.max(1, view.durationMs) : 1;
+  const progress = reducedMotion ? 1 : clampCue(Number.isFinite(raw) ? raw : 1);
+  const winner = phase === 'result' ? context.result?.winner : phase === 'intermission' ? context.roundWinner : null;
+  const outcome = ['player', 'opponent', 'draw'].includes(winner) ? winner : null;
+  return Object.freeze({ stageId, kind: supported ? XENO_TRIALS_STAGE_CUES_V149[stageId] : null,
+    phase, progress, outcome, round: Number.isInteger(context.round) && context.round > 0 ? context.round : 1,
+    terminal: phase === 'result', reversible: phase === 'intermission',
+    reducedMotion: reducedMotion === true, affectsCombat: false });
+}
+export function drawXenoTrialsStageCueV149(ctx, stage, camera, context, reducedMotion = false) {
+  const cue = getXenoTrialsStageCueV149(stage.id, context, reducedMotion);
+  if (!cue.kind || cue.phase === 'combat') return cue;
+  const floor = Number.isFinite(camera?.floor) ? camera.floor : 450;
+  const t = cue.progress, easing = t * t * (3 - 2 * t);
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, 1000, floor); ctx.clip();
+  ctx.lineWidth = 2; ctx.strokeStyle = stage.accent; ctx.fillStyle = stage.accent;
+  // Two small rear-plane fixtures. All shapes sit inside the visible arena;
+  // no text/HUD overlays, full-screen flashes or foreground occlusion.
+  for (const [side, x] of [[0, 26], [1, 930]]) {
+    const selected = cue.outcome === 'draw' || cue.outcome === (side ? 'opponent' : 'player');
+    ctx.globalAlpha = cue.outcome ? selected ? .52 : .18 : .25 + easing * .18;
+    const y = floor * .52;
+    switch (cue.kind) {
+      case 'seal-indicators':
+        ctx.strokeRect(x, y, 44, 70);
+        for (let i = 0; i < 3; i++) ctx.fillRect(x + 7, y + 10 + i * 19, 30 * easing, 5);
+        break;
+      case 'coolant-valves':
+        ctx.beginPath(); ctx.arc(x + 22, y + 24, 20, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x + 22, y + 24);
+        ctx.lineTo(x + 22 + Math.cos(easing * Math.PI) * 17, y + 24 - Math.sin(easing * Math.PI) * 17); ctx.stroke();
+        break;
+      case 'observation-filaments':
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath(); ctx.moveTo(x + 8 + i * 13, y - 45);
+          ctx.quadraticCurveTo(x + 2 + i * 13, y - 15, x + 8 + i * 13, y + easing * 50); ctx.stroke();
+        }
+        break;
+      case 'evaluation-monitors':
+        ctx.strokeRect(x - 3, y, 50, 60);
+        for (let i = 0; i < 4; i++) ctx.fillRect(x + 4, y + 9 + i * 11, (8 + i * 7) * easing, 3);
+        break;
+      case 'bay-guides':
+        for (let i = 0; i < 5; i++) {
+          ctx.strokeRect(x + 9, y + i * 12, 26, 5);
+          if (easing >= (i + 1) / 5) ctx.fillRect(x + 9, y + i * 12, 26, 5);
+        }
+        break;
+      case 'perimeter-beacons':
+        ctx.beginPath(); ctx.moveTo(x + 22, y + 70); ctx.lineTo(x + 22, y + 8); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x + 22, y, 6 + 4 * easing, 0, Math.PI * 2); ctx.stroke();
+        break;
+    }
+  }
+  ctx.restore(); return cue;
 }

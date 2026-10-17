@@ -84,12 +84,16 @@ SCRIPT_FILES.add('verify-xeno-trials-supers-v148.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
 SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
+SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
   '.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md', 'docs/forge/V145-XENO-TRIALS.md',
+  'docs/forge/xeno-trials/V149-FEEDBACK.md',
+  'docs/forge/xeno-trials/progress-v149.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V149.xlsx',
   'docs/forge/xeno-trials',
   'docs/forge/xeno-trials/README.md',
   'docs/forge/xeno-trials/V147-SIGNATURES.md',

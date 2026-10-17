@@ -1,6 +1,6 @@
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
-import { getXenoTrialsStageMotionV147, drawXenoTrialsStageMotionV147 } from './xeno-trials-stage-motion-v147.js';
+import { getXenoTrialsStageMotionV147, drawXenoTrialsStageMotionV147, getXenoTrialsStageCueV149 } from './xeno-trials-stage-motion-v147.js';
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96, stepXenoTrialsMatchV96, setXenoTrialsPausedV96,
   getXenoTrialsSnapshotV96, nextXenoTrialsRoundV96, XENO_TRIALS_ARENA_V96, XENO_TRIALS_ATTACKS_V96, XENO_TRIALS_STEP_V96 } from './xeno-trials-engine-v96.js';
@@ -49,6 +49,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
     supersV148: match.fighters.map(fighter => ({ side: fighter.side, ...getXenoTrialsSuperReadinessV148({ ...match, presentation: presentationView() }, fighter, getXenoTrialsFighterV96(fighter.id)) })),
     stageAnimationV147: getXenoTrialsStageMotionV147(stage.id, match.tick, reduceMotion()),
+    stageCueV149: getXenoTrialsStageCueV149(stage.id, { ...match, presentation: presentationView() }, reduceMotion()),
     combatSignaturesV147: match.fighters.map(fighter => {
       const signature = getXenoTrialsSignatureV147(getXenoTrialsFighterV96(fighter.id));
       return { side: fighter.side, id: signature?.id || null, canonExact: false, animation: signature?.animation || null };
@@ -123,7 +124,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   }
   function drawArena() {
     drawXenoTrialsArenaLayersV119(context, stage, images, cameraView, match.tick);
-    drawXenoTrialsStageMotionV147(context, stage, cameraView, match.tick, reduceMotion());
+    drawXenoTrialsStageMotionV147(context, stage, cameraView, match.tick, reduceMotion(), { ...match, presentation: presentationView() });
   }
   function drawFighter(fighter) {
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);

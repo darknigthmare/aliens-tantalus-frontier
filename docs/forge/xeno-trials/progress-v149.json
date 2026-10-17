@@ -1,0 +1,3953 @@
+{
+  "schema": 149,
+  "baseCommit": "bc6241b4e775b02e3459f5f8cf95efad93de7545",
+  "appVersion": "143.0.0",
+  "saveSchema": 52,
+  "phase": "feedback-and-stage-cues",
+  "approved1to1": 0,
+  "newCharacterAnimationClips": 0,
+  "newSupers": 0,
+  "retainedPilotSupers": 5,
+  "newTests": 31,
+  "workbook": "XENO_TRIALS_SUIVI_V149.xlsx",
+  "workbookSha256": "a9be6889af6bde53963f75b6a03ae001fdd74a3ea8d43f89fcf095e6f6f3f370",
+  "retainedV148WorkbookSha256": "d748992fb2d061ee629942019e1da90e2792f620e1e7745ccfc08d0a24c72e11",
+  "fighters": [
+    {
+      "id": "warrior",
+      "label": "Warrior",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-film_warrior_aliens_1986"
+    },
+    {
+      "id": "runner",
+      "label": "Runner",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-film_runner_alien3_1992"
+    },
+    {
+      "id": "arachnoid",
+      "label": "Arachnoid",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_capcom_arachnoid"
+    },
+    {
+      "id": "defender",
+      "label": "Defender",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-defender"
+    },
+    {
+      "id": "grid",
+      "label": "Grid",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-film_grid_avp_2004"
+    },
+    {
+      "id": "spitter",
+      "label": "Spitter",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_acm_spitter"
+    },
+    {
+      "id": "prowler",
+      "label": "Prowler",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_afe_prowler"
+    },
+    {
+      "id": "razor-claws",
+      "label": "Razor Claws",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_capcom_razor_claws"
+    },
+    {
+      "id": "chrysalis",
+      "label": "Chrysalis",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_capcom_chrysalis"
+    },
+    {
+      "id": "smasher",
+      "label": "Smasher",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_capcom_smasher"
+    },
+    {
+      "id": "predalien",
+      "label": "Predalien — Primal Hunt",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_predalien_avp2_primal_hunt"
+    },
+    {
+      "id": "xenoborg",
+      "label": "Xenoborg",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_xenoborg_avp1999"
+    },
+    {
+      "id": "royal-guard",
+      "label": "Royal Guard",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_capcom_royal_guard"
+    },
+    {
+      "id": "queen",
+      "label": "Reine mobile",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-film_queen_aliens_1986"
+    },
+    {
+      "id": "ravager",
+      "label": "Ravager",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_extinction_ravager"
+    },
+    {
+      "id": "crusher-acm",
+      "label": "Crusher — ACM",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_acm_crusher"
+    },
+    {
+      "id": "boiler",
+      "label": "Boiler",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_acm_boiler"
+    },
+    {
+      "id": "burster",
+      "label": "Burster",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_afe_burster"
+    },
+    {
+      "id": "stalker-arcade",
+      "label": "Stalker — arcade",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "castes-game_avp_capcom_stalker"
+    },
+    {
+      "id": "gorilla",
+      "label": "Gorilla Alien",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-kenner-gorilla"
+    },
+    {
+      "id": "rhino",
+      "label": "Rhino Alien",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-kenner-rhino"
+    },
+    {
+      "id": "panther",
+      "label": "Panther Alien",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-kenner-panther"
+    },
+    {
+      "id": "mantis",
+      "label": "Mantis Alien",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v96-kenner-mantis"
+    },
+    {
+      "id": "ultramorph",
+      "label": "Ultramorph — adaptation",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-ultramorph"
+    },
+    {
+      "id": "synth-trooper",
+      "label": "Synth Trooper",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-afe-synth-trooper"
+    },
+    {
+      "id": "synth-guard",
+      "label": "Synth Guard",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-afe-synth-guard"
+    },
+    {
+      "id": "synth-sniper",
+      "label": "Synth Sniper",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-afe-synth-sniper"
+    },
+    {
+      "id": "synth-heavy",
+      "label": "Synth Heavy",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v94-afe-synth-heavy"
+    },
+    {
+      "id": "armored-joe",
+      "label": "Working Joe blindé",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-145-armored-working-joe"
+    },
+    {
+      "id": "combat-synth",
+      "label": "Synthétique de combat blindé",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-146-armored-combat-synthetic"
+    },
+    {
+      "id": "mecha",
+      "label": "Xeno Mecha",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-mecha"
+    },
+    {
+      "id": "mecha-2",
+      "label": "Xeno Mecha II",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-mecha-2"
+    },
+    {
+      "id": "mechanoid",
+      "label": "Xeno Mechanoid",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-mechanoid"
+    },
+    {
+      "id": "albino-joe",
+      "label": "Working Joe — variante albino",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-093-albino-working-joe"
+    },
+    {
+      "id": "albino-combat-synth",
+      "label": "Synthétique de combat — albino",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-094-albino-combat-synthetic"
+    },
+    {
+      "id": "albino-runner",
+      "label": "Runner — variante albino",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-058-albino-runner"
+    },
+    {
+      "id": "albino-crusher",
+      "label": "Crusher — variante albino",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-061-albino-crusher"
+    },
+    {
+      "id": "albino-ravager",
+      "label": "Ravager — variante albino",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-065-albino-ravager"
+    },
+    {
+      "id": "albino-burster",
+      "label": "Burster — variante albino",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-068-albino-burster"
+    },
+    {
+      "id": "albino-six",
+      "label": "Lignée Six — variante albino",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-070-albino-specimen-six-line"
+    },
+    {
+      "id": "albino-ripper",
+      "label": "ATARAX Ripper — albino",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-075-albino-atarax-ripper"
+    },
+    {
+      "id": "armored-runner",
+      "label": "Runner blindé",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-110-armored-runner"
+    },
+    {
+      "id": "armored-ravager",
+      "label": "Ravager blindé",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-117-armored-ravager"
+    },
+    {
+      "id": "armored-red",
+      "label": "Xénomorphe rouge — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-123-armored-red-xenomorph"
+    },
+    {
+      "id": "armored-k-series",
+      "label": "K-Series jaune — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-124-armored-k-series-yellow-xenomorph"
+    },
+    {
+      "id": "armored-ripper",
+      "label": "ATARAX Ripper — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-127-armored-atarax-ripper"
+    },
+    {
+      "id": "armored-ripper-queen",
+      "label": "Reine Ripper — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-128-armored-ripper-queen"
+    },
+    {
+      "id": "acid-runner",
+      "label": "Runner — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-162-acid-blooded-runner"
+    },
+    {
+      "id": "acid-lurker",
+      "label": "Lurker — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-167-acid-blooded-lurker"
+    },
+    {
+      "id": "acid-ravager",
+      "label": "Ravager — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-169-acid-blooded-ravager"
+    },
+    {
+      "id": "acid-boiler",
+      "label": "Boiler — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-170-acid-blooded-boiler"
+    },
+    {
+      "id": "acid-joe",
+      "label": "Working Joe — variante acide",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-197-acid-blooded-working-joe"
+    },
+    {
+      "id": "acid-combat-synth",
+      "label": "Synthétique de combat — variante acide",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-198-acid-blooded-combat-synthetic"
+    },
+    {
+      "id": "user-antilope",
+      "label": "Xeno-Antilope — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-antilope"
+    },
+    {
+      "id": "user-brute",
+      "label": "Xeno-Brute — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-brute"
+    },
+    {
+      "id": "user-carrier",
+      "label": "Carrier chargé — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-carrier"
+    },
+    {
+      "id": "user-spiker",
+      "label": "Spiker — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-spiker"
+    },
+    {
+      "id": "user-warrior-red",
+      "label": "Warrior Red — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-warrior-red"
+    },
+    {
+      "id": "user-phantera-black",
+      "label": "Phantera Black — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-phantera-black"
+    },
+    {
+      "id": "user-rhino",
+      "label": "Xeno-Rhino — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-rhino"
+    },
+    {
+      "id": "user-chameleon",
+      "label": "Chameleon — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-chameleon"
+    },
+    {
+      "id": "user-chameleon-2",
+      "label": "Chameleon II — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-chameleon-2"
+    },
+    {
+      "id": "user-trex-king",
+      "label": "TRex King — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-trex-king"
+    },
+    {
+      "id": "user-trex-queen",
+      "label": "TRex Queen — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-trex-queen"
+    },
+    {
+      "id": "user-big-xeno",
+      "label": "Big Xeno — référence utilisateur",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-big-xeno-1"
+    },
+    {
+      "id": "user-pale-spined",
+      "label": "Quadrupède pâle épineux — référence 25",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-pale-epineux"
+    },
+    {
+      "id": "user-tiger-biped",
+      "label": "Bipède tigre — référence 06",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-bipede-tigre"
+    },
+    {
+      "id": "user-raised-crest",
+      "label": "Bipède à crête relevée — référence 07",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-bipede-crete-relevee"
+    },
+    {
+      "id": "user-bulbous-quadruped",
+      "label": "Quadrupède bulbeux — référence 08",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-bulbeux"
+    },
+    {
+      "id": "user-black-bone-raptor",
+      "label": "Rapace noir et os — référence 11",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-rapace-noir-os"
+    },
+    {
+      "id": "user-blue-violet-biped",
+      "label": "Bipède bleu-violet — référence 12",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-bipede-bleu-violet"
+    },
+    {
+      "id": "user-skeletal-quadruped",
+      "label": "Quadrupède squelettique — référence 13",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-squelettique"
+    },
+    {
+      "id": "user-red-horned",
+      "label": "Quadrupède rouge corné — référence 17",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-rouge-corne"
+    },
+    {
+      "id": "cryo-runner",
+      "label": "Runner — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-214-cryo-adapted-runner"
+    },
+    {
+      "id": "cryo-crusher",
+      "label": "Crusher — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-217-cryo-adapted-crusher"
+    },
+    {
+      "id": "cryo-lurker",
+      "label": "Lurker — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-219-cryo-adapted-lurker"
+    },
+    {
+      "id": "cryo-ravager",
+      "label": "Ravager — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-221-cryo-adapted-ravager"
+    },
+    {
+      "id": "cryo-boiler",
+      "label": "Boiler — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-222-cryo-adapted-boiler"
+    },
+    {
+      "id": "cryo-burster",
+      "label": "Burster — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-224-cryo-adapted-burster"
+    },
+    {
+      "id": "cryo-monica",
+      "label": "Lignée Monica — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-225-cryo-adapted-monica-line"
+    },
+    {
+      "id": "cryo-ripper",
+      "label": "ATARAX Ripper — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-231-cryo-adapted-atarax-ripper"
+    },
+    {
+      "id": "cryo-ripper-queen",
+      "label": "Reine Ripper — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-232-cryo-adapted-ripper-queen"
+    },
+    {
+      "id": "cryo-foundry-crusher",
+      "label": "Foundry Crusher — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-234-cryo-adapted-foundry-crusher"
+    },
+    {
+      "id": "cryo-reef-stalker",
+      "label": "Reef Stalker — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-235-cryo-adapted-reef-stalker"
+    },
+    {
+      "id": "cryo-pale-hunter",
+      "label": "Pale Crucible Hunter — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-238-cryo-adapted-pale-crucible-hunter"
+    },
+    {
+      "id": "cryo-dust-runner",
+      "label": "Dust Runner — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-239-cryo-adapted-dust-runner"
+    },
+    {
+      "id": "cryo-salvage-brute",
+      "label": "Salvage Hive Brute — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-240-cryo-adapted-salvage-hive-brute"
+    },
+    {
+      "id": "cryo-caravan-stalker",
+      "label": "Caravan Stalker — variante cryo",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-242-cryo-adapted-caravan-stalker"
+    },
+    {
+      "id": "cryo-joe",
+      "label": "Working Joe — variante cryo",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-249-cryo-adapted-working-joe"
+    },
+    {
+      "id": "cryo-combat-synth",
+      "label": "Synthétique de combat — variante cryo",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-250-cryo-adapted-combat-synthetic"
+    },
+    {
+      "id": "armored-foundry-crusher",
+      "label": "Foundry Crusher — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-130-armored-foundry-crusher"
+    },
+    {
+      "id": "armored-reef-stalker",
+      "label": "Reef Stalker — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-131-armored-reef-stalker"
+    },
+    {
+      "id": "armored-pale-hunter",
+      "label": "Pale Crucible Hunter — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-134-armored-pale-crucible-hunter"
+    },
+    {
+      "id": "armored-dust-runner",
+      "label": "Dust Runner — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-135-armored-dust-runner"
+    },
+    {
+      "id": "armored-salvage-brute",
+      "label": "Salvage Hive Brute — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-136-armored-salvage-hive-brute"
+    },
+    {
+      "id": "armored-caravan-stalker",
+      "label": "Caravan Stalker — variante blindée",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-138-armored-caravan-stalker"
+    },
+    {
+      "id": "acid-queen",
+      "label": "Reine mobile — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-164-acid-blooded-queen"
+    },
+    {
+      "id": "acid-crusher",
+      "label": "Crusher — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-165-acid-blooded-crusher"
+    },
+    {
+      "id": "acid-burster",
+      "label": "Burster — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-172-acid-blooded-burster"
+    },
+    {
+      "id": "acid-k-series",
+      "label": "K-Series jaune — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-176-acid-blooded-k-series-yellow-xenomorph"
+    },
+    {
+      "id": "acid-ripper",
+      "label": "ATARAX Ripper — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-179-acid-blooded-atarax-ripper"
+    },
+    {
+      "id": "acid-ripper-queen",
+      "label": "Reine Ripper — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-180-acid-blooded-ripper-queen"
+    },
+    {
+      "id": "acid-foundry-crusher",
+      "label": "Foundry Crusher — variante acide",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "enemy-182-acid-blooded-foundry-crusher"
+    },
+    {
+      "id": "import-joe-classic",
+      "label": "Working Joe — Classic — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v103-import-synth-workingjoe-classic"
+    },
+    {
+      "id": "import-joe-battle",
+      "label": "Working Joe — Battle — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v103-import-synth-workingjoe-battle"
+    },
+    {
+      "id": "import-joe-hazmat",
+      "label": "Working Joe — Hazmat — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v103-import-synth-workingjoe-hazmat"
+    },
+    {
+      "id": "import-joe-tactical",
+      "label": "Working Joe — Tactical — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v103-import-synth-workingjoe-tactical"
+    },
+    {
+      "id": "import-blue-drone",
+      "label": "Blueluminescent — Drone — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v103-import-xeno-blueluminescent-drone"
+    },
+    {
+      "id": "import-blue-queen",
+      "label": "Blueluminescent — Queen — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v103-import-xeno-blueluminescent-queen"
+    },
+    {
+      "id": "user-open-crest",
+      "label": "Bipède à crête ajourée — référence 15",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-bipede-crete-ajouree"
+    },
+    {
+      "id": "user-green-dome",
+      "label": "Bipède à dôme verdoyant — référence 18",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-bipede-dome-verdoyant"
+    },
+    {
+      "id": "user-violet-lobes",
+      "label": "Quadrupède à lobes violets — référence 21",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-lobes-violets"
+    },
+    {
+      "id": "user-green-vesicles",
+      "label": "Quadrupède à vésicules vertes — référence 22",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-vesicules-vertes"
+    },
+    {
+      "id": "user-black-dome",
+      "label": "Quadrupède à dôme noir — référence 23",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-dome-noir"
+    },
+    {
+      "id": "user-black-fin",
+      "label": "Quadrupède à nageoire noire — référence 24",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-quadrupede-nageoire-noire"
+    },
+    {
+      "id": "user-orange-biped",
+      "label": "Bipède brun-orange — référence 26",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-bipede-brun-orange"
+    },
+    {
+      "id": "user-unclassified-multiarm",
+      "label": "Xeno à caste indéterminée — référence 53",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-caste-to-define"
+    },
+    {
+      "id": "user-flesh-experiment",
+      "label": "Expérience Flesh — référence 59",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-experiment-flesh"
+    },
+    {
+      "id": "user-renaissance",
+      "label": "Expérience Renaissance — référence 61",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v95-user-xeno-experiment-renaissance"
+    },
+    {
+      "id": "import-engineer-armorsuit",
+      "label": "Engineer — Armure — design utilisateur",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v105-import-engineer-armorsuit"
+    },
+    {
+      "id": "import-engineer-battlesuit",
+      "label": "Engineer — Armure de bataille — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-battlesuit"
+    },
+    {
+      "id": "import-engineer-behemotsuit",
+      "label": "Engineer — Armure Behemot — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-behemotsuit"
+    },
+    {
+      "id": "import-engineer-ceremonialsuit",
+      "label": "Engineer — Tenue cérémonielle — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-ceremonialsuit"
+    },
+    {
+      "id": "import-engineer-mala-kak",
+      "label": "Engineer — Mala'kak — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-mala-kak"
+    },
+    {
+      "id": "import-engineer-original-space-jokey-variant",
+      "label": "Engineer — Space Jockey Original Variant — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-original-space-jokey-variant"
+    },
+    {
+      "id": "import-engineer-respirator",
+      "label": "Engineer — Respirateur — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-respirator"
+    },
+    {
+      "id": "import-engineer-spacejokey",
+      "label": "Engineer — Space Jockey — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-spacejokey"
+    },
+    {
+      "id": "import-engineer-suit-open",
+      "label": "Engineer — Combinaison ouverte — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-suit-open"
+    },
+    {
+      "id": "import-engineer-wararmor",
+      "label": "Engineer — Armure de guerre — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-wararmor"
+    },
+    {
+      "id": "import-engineer-woman",
+      "label": "Engineer — Femme — adaptation",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-engineer-woman"
+    },
+    {
+      "id": "import-synth-eloise",
+      "label": "Eloise — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-synth-eloise"
+    },
+    {
+      "id": "import-synth-jerri-1",
+      "label": "Jerri — apparence 1 — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-synth-jerri-1"
+    },
+    {
+      "id": "import-synth-jerri-2",
+      "label": "Jerri — apparence 2 — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-synth-jerri-2"
+    },
+    {
+      "id": "import-wy-apesuit",
+      "label": "Weyland-Yutani — Porteur de combinaison APE — adaptation",
+      "family": "human",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-wy-apesuit"
+    },
+    {
+      "id": "import-wy-covenant-david",
+      "label": "David — Covenant — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-wy-covenant-david"
+    },
+    {
+      "id": "import-alien-king-from-alien-extemrination",
+      "label": "Alien King — Extermination (nom fourni) — adaptation",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-alien-king-from-alien-extemrination"
+    },
+    {
+      "id": "import-green-alien-king",
+      "label": "Alien King vert — adaptation",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-green-alien-king"
+    },
+    {
+      "id": "import-xeno-gorillaxeno",
+      "label": "Gorilla Xeno — Altered — adaptation",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-xeno-gorillaxeno"
+    },
+    {
+      "id": "import-xeno-kingrogue",
+      "label": "Rogue — King — adaptation",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-xeno-kingrogue"
+    },
+    {
+      "id": "import-xeno-spacejokeygiant",
+      "label": "Xeno Space Jockey — Giant — adaptation",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-xeno-spacejokeygiant"
+    },
+    {
+      "id": "import-game-afe-synth-warden",
+      "label": "Synth Warden — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-afe-synth-warden"
+    },
+    {
+      "id": "import-game-afe2-warden",
+      "label": "Warden — adaptation",
+      "family": "xenomorph",
+      "signature": "afe2-warden-acid",
+      "super": "warden-acid-barrage",
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-afe2-warden"
+    },
+    {
+      "id": "import-game-afe2-bulwark",
+      "label": "Bulwark — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-afe2-bulwark"
+    },
+    {
+      "id": "import-game-dd-wy-commando",
+      "label": "Weyland-Yutani Commando — Altered — adaptation",
+      "family": "human",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-dd-wy-commando"
+    },
+    {
+      "id": "import-game-afe2-exploder",
+      "label": "Exploder — adaptation",
+      "family": "xenomorph",
+      "signature": "afe2-exploder-detonation",
+      "super": "exploder-terminal-burst",
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-afe2-exploder"
+    },
+    {
+      "id": "import-game-afe2-harbinger",
+      "label": "Harbinger — adaptation",
+      "family": "pathogen",
+      "signature": "afe2-harbinger-leap",
+      "super": "harbinger-committed-leap",
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-afe2-harbinger"
+    },
+    {
+      "id": "import-game-dd-synthetic",
+      "label": "Synthetic — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-dd-synthetic"
+    },
+    {
+      "id": "import-game-dd-guardian",
+      "label": "Guardian — Darwin Era — adaptation",
+      "family": "human",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v106-import-game-dd-guardian"
+    },
+    {
+      "id": "synth-incinerator",
+      "label": "Synth Incinerator",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v110-afe-synth-incinerator"
+    },
+    {
+      "id": "synth-detonator",
+      "label": "Synth Detonator",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v110-afe-synth-detonator"
+    },
+    {
+      "id": "synth-containment",
+      "label": "Synth Containment",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v110-afe-synth-containment"
+    },
+    {
+      "id": "synth-enforcer",
+      "label": "Synth Enforcer",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v111-afe-synth-enforcer"
+    },
+    {
+      "id": "afe2-engineer-hybrid",
+      "label": "Engineer hybrid — adaptation",
+      "family": "pathogen",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v112-afe2-engineer-hybrid"
+    },
+    {
+      "id": "synth-peacekeeper",
+      "label": "Peacekeeper — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v112-afe2-peacekeeper"
+    },
+    {
+      "id": "afe2-spider",
+      "label": "Spider — adaptation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v113-afe2-spider"
+    },
+    {
+      "id": "afe2-igniter",
+      "label": "Igniter — interprétation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v113-afe2-igniter"
+    },
+    {
+      "id": "afe2-bombardier",
+      "label": "Bombardier — interprétation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v113-afe2-bombardier"
+    },
+    {
+      "id": "afe2-huntsman",
+      "label": "Huntsman — interprétation",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v113-afe2-huntsman"
+    },
+    {
+      "id": "import-xeno-titan-queen-nolegs",
+      "label": "Titan Queen NoLegs — reconstruction",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v113-import-xeno-titan-queen-nolegs"
+    },
+    {
+      "id": "synth-good-boy",
+      "label": "SunSpot « Good Boy »",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v116-sunspot-good-boy"
+    },
+    {
+      "id": "synth-tecsek",
+      "label": "TecSek",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v116-tecsek"
+    },
+    {
+      "id": "synth-automated-powerloader",
+      "label": "Automated Power Loader",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v116-automated-powerloader"
+    },
+    {
+      "id": "dd-darwin-era-cultist",
+      "label": "Cultiste Darwin Era",
+      "family": "human",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v118-dd-darwin-era-cultist"
+    },
+    {
+      "id": "drive-v123-acm-boiler",
+      "label": "Boiler — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-acm-boiler"
+    },
+    {
+      "id": "drive-v123-acm-crusher",
+      "label": "Crusher — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-acm-crusher"
+    },
+    {
+      "id": "drive-v123-afe-burster",
+      "label": "Burster — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-afe-burster"
+    },
+    {
+      "id": "drive-v123-afe-prowler",
+      "label": "Prowler — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-afe-prowler"
+    },
+    {
+      "id": "drive-v123-afe-runner",
+      "label": "Runner — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-afe-runner"
+    },
+    {
+      "id": "drive-v123-afe-spitter",
+      "label": "Spitter — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-afe-spitter"
+    },
+    {
+      "id": "drive-v123-comic-rogue-king",
+      "label": "Rogue — King — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-comic-rogue-king"
+    },
+    {
+      "id": "drive-v123-creature-alien3-runner",
+      "label": "Runner — Dog Alien — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-creature-alien3-runner"
+    },
+    {
+      "id": "drive-v123-creature-aliens-queen-mobile",
+      "label": "Reine mobile — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-creature-aliens-queen-mobile"
+    },
+    {
+      "id": "drive-v123-creature-prometheus-engineer-biosuit",
+      "label": "Engineer — Combinaison biologique — Altered",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-creature-prometheus-engineer-biosuit"
+    },
+    {
+      "id": "drive-v123-creature-resurrection-newborn-v2",
+      "label": "Newborn — Altered",
+      "family": "hybrid",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-creature-resurrection-newborn-v2"
+    },
+    {
+      "id": "drive-v123-creature-romulus-offspring",
+      "label": "Offspring — Altered",
+      "family": "pathogen",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-creature-romulus-offspring"
+    },
+    {
+      "id": "drive-v123-fte-pathogen-brute-profile-v13",
+      "label": "Pathogen Brute — Altered",
+      "family": "pathogen",
+      "signature": "pathogen-brute-ground-impact",
+      "super": "brute-seismic-sequence",
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-fte-pathogen-brute-profile-v13"
+    },
+    {
+      "id": "drive-v123-fte-pathogen-popper-profile-v13",
+      "label": "Pathogen Popper — Altered",
+      "family": "pathogen",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-fte-pathogen-popper-profile-v13"
+    },
+    {
+      "id": "drive-v123-fte-pathogen-queen-right-v13",
+      "label": "Pathogen Queen — Altered",
+      "family": "pathogen",
+      "signature": "pathogen-queen-acid-cluster",
+      "super": "queen-acid-saturation",
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-fte-pathogen-queen-right-v13"
+    },
+    {
+      "id": "drive-v123-fte-pathogen-runner-nodules-v13",
+      "label": "Pathogen Runner — Altered",
+      "family": "pathogen",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-fte-pathogen-runner-nodules-v13"
+    },
+    {
+      "id": "drive-v123-fte-pathogen-stalker-profile-v13",
+      "label": "Pathogen Stalker — Altered",
+      "family": "pathogen",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-fte-pathogen-stalker-profile-v13"
+    },
+    {
+      "id": "drive-v123-kenner-gorilla",
+      "label": "Gorilla Alien — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-kenner-gorilla"
+    },
+    {
+      "id": "drive-v123-neca-panther-kenner-tribute-v14",
+      "label": "Panther Alien — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-neca-panther-kenner-tribute-v14"
+    },
+    {
+      "id": "drive-v123-neca-rhino-kenner-orange-v14",
+      "label": "Rhino Alien — orange — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-neca-rhino-kenner-orange-v14"
+    },
+    {
+      "id": "drive-v123-neca-rhino-kenner-version2-blue-v14",
+      "label": "Rhino Alien — bleu — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-neca-rhino-kenner-version2-blue-v14"
+    },
+    {
+      "id": "drive-v123-neca-snake-series13-v14",
+      "label": "Snake Alien — Altered",
+      "family": "xenomorph",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-neca-snake-series13-v14"
+    },
+    {
+      "id": "drive-v123-game-working-joe-hazard",
+      "label": "Working Joe — combinaison de protection — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-game-working-joe-hazard"
+    },
+    {
+      "id": "drive-v123-game-working-joe-standard",
+      "label": "Working Joe — unité standard — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-game-working-joe-standard"
+    },
+    {
+      "id": "drive-v123-prometheus-engineer-chair-suit-v16",
+      "label": "Engineer — Combinaison de pilotage — Altered",
+      "family": "engineer",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-prometheus-engineer-chair-suit-v16"
+    },
+    {
+      "id": "drive-v123-game-combat-synthetic-avp2",
+      "label": "Combat Synthetic — unité désarmée — Altered",
+      "family": "synthetic",
+      "signature": null,
+      "super": null,
+      "artStatus": "dedicated-static-pose",
+      "profileId": "pose-v123-drive-game-combat-synthetic-avp2"
+    }
+  ],
+  "stages": [
+    {
+      "id": "containment-deck",
+      "label": "Banc de confinement",
+      "cue": "seal-indicators"
+    },
+    {
+      "id": "reactor-ring",
+      "label": "Anneau réacteur simulé",
+      "cue": "coolant-valves"
+    },
+    {
+      "id": "hive-vault",
+      "label": "Chambre de ruche simulée",
+      "cue": "observation-filaments"
+    },
+    {
+      "id": "tantalus-bridge",
+      "label": "Tantalus / Passerelle simulée",
+      "cue": "evaluation-monitors"
+    },
+    {
+      "id": "tantalus-cargo",
+      "label": "Tantalus / Soute simulée",
+      "cue": "bay-guides"
+    },
+    {
+      "id": "planet-surface",
+      "label": "Surface planétaire simulée",
+      "cue": "perimeter-beacons"
+    }
+  ],
+  "tables": {
+    "01_Corrections": {
+      "headers": [
+        "ID",
+        "Chantier",
+        "Avant",
+        "Après",
+        "Statut",
+        "Preuve attendue",
+        "Limite"
+      ],
+      "rows": [
+        [
+          "HUD-01",
+          "Jauge de super invisible",
+          "Hauteur CSS implicite = 0 px malgré hidden=false.",
+          "Hauteur minimale explicite de 5 px ; remplissage natif distinct.",
+          "Corrigé",
+          "Fixture Chromium locale et parcours réel CI",
+          "CSS reproduit avant : 0 px ; après : 5 px."
+        ],
+        [
+          "IA-01",
+          "Projectile acide descendant",
+          "La menace ignorait un tir situé au-dessus du corps mais arrivant vers lui.",
+          "Intersection de trajectoire sur le corps observé, avec durée de vie et sol.",
+          "Corrigé",
+          "Fixtures moteur et cerveau de combat",
+          "Aucune lecture des futures commandes, pas de modification des ressources."
+        ],
+        [
+          "QA-01",
+          "Lecture HUD après un super",
+          "Le HUD est notifié séparément de la physique.",
+          "Attente bornée de la valeur réelle affichée ; aucune mutation de jauge.",
+          "Corrigé",
+          "Parcours Warden natif",
+          "1440×1000, 390×844 et 844×390 sont des viewports, pas des appareils physiques."
+        ],
+        [
+          "STAGE-01",
+          "Transitions du décor",
+          "Aucun signal distinct entre introduction, R1 et fin de match.",
+          "Six motifs de décor réagissent aux trois phases.",
+          "Implémenté partiel",
+          "Tests des phases, pause et invariance du match",
+          "Mise en scène originale de simulation, pas une reconstitution de film."
+        ],
+        [
+          "ART-01",
+          "Gestes des personnages",
+          "Les nouvelles actions utilisent encore les médias existants.",
+          "Aucune certification 1:1 ou fausse planche annoncée.",
+          "À produire",
+          "Relevés visuels, rigs et clips à valider",
+          "Intros/outros et poses R1 articulées restent ouvertes."
+        ]
+      ]
+    },
+    "02_Stages": {
+      "headers": [
+        "Stage ID",
+        "Arène",
+        "Motif",
+        "Introduction",
+        "Entre-manches",
+        "Fin de match",
+        "Accessibilité",
+        "Contraintes"
+      ],
+      "rows": [
+        [
+          "containment-deck",
+          "Banc de confinement",
+          "Voyants de scellement",
+          "Calibration de l'introduction",
+          "Récupération / côté gagnant, sans élimination",
+          "Résultat final, indicateurs fixes",
+          "État fixe en mouvement réduit ; pause sans avancement",
+          "Aucun dégât, obstacle, personnage déformé ni gain de récompense"
+        ],
+        [
+          "reactor-ring",
+          "Anneau réacteur simulé",
+          "Vannes du refroidissement",
+          "Calibration de l'introduction",
+          "Récupération / côté gagnant, sans élimination",
+          "Résultat final, indicateurs fixes",
+          "État fixe en mouvement réduit ; pause sans avancement",
+          "Aucun dégât, obstacle, personnage déformé ni gain de récompense"
+        ],
+        [
+          "hive-vault",
+          "Chambre de ruche simulée",
+          "Filaments d'observation",
+          "Calibration de l'introduction",
+          "Récupération / côté gagnant, sans élimination",
+          "Résultat final, indicateurs fixes",
+          "État fixe en mouvement réduit ; pause sans avancement",
+          "Aucun dégât, obstacle, personnage déformé ni gain de récompense"
+        ],
+        [
+          "tantalus-bridge",
+          "Tantalus / Passerelle simulée",
+          "Moniteurs d'évaluation",
+          "Calibration de l'introduction",
+          "Récupération / côté gagnant, sans élimination",
+          "Résultat final, indicateurs fixes",
+          "État fixe en mouvement réduit ; pause sans avancement",
+          "Aucun dégât, obstacle, personnage déformé ni gain de récompense"
+        ],
+        [
+          "tantalus-cargo",
+          "Tantalus / Soute simulée",
+          "Guides de baie",
+          "Calibration de l'introduction",
+          "Récupération / côté gagnant, sans élimination",
+          "Résultat final, indicateurs fixes",
+          "État fixe en mouvement réduit ; pause sans avancement",
+          "Aucun dégât, obstacle, personnage déformé ni gain de récompense"
+        ],
+        [
+          "planet-surface",
+          "Surface planétaire simulée",
+          "Balises de périmètre",
+          "Calibration de l'introduction",
+          "Récupération / côté gagnant, sans élimination",
+          "Résultat final, indicateurs fixes",
+          "État fixe en mouvement réduit ; pause sans avancement",
+          "Aucun dégât, obstacle, personnage déformé ni gain de récompense"
+        ]
+      ]
+    },
+    "03_Roster": {
+      "headers": [
+        "Fighter ID",
+        "Nom",
+        "Famille",
+        "Signature pilote",
+        "Super pilote",
+        "Kit approuvé 1:1",
+        "Nouveaux clips V149",
+        "Prochain travail artistique"
+      ],
+      "rows": [
+        [
+          "warrior",
+          "Warrior",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "runner",
+          "Runner",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "arachnoid",
+          "Arachnoid",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "defender",
+          "Defender",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "grid",
+          "Grid",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "spitter",
+          "Spitter",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "prowler",
+          "Prowler",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "razor-claws",
+          "Razor Claws",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "chrysalis",
+          "Chrysalis",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "smasher",
+          "Smasher",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "predalien",
+          "Predalien — Primal Hunt",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "xenoborg",
+          "Xenoborg",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "royal-guard",
+          "Royal Guard",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "queen",
+          "Reine mobile",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "ravager",
+          "Ravager",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "crusher-acm",
+          "Crusher — ACM",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "boiler",
+          "Boiler",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "burster",
+          "Burster",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "stalker-arcade",
+          "Stalker — arcade",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "gorilla",
+          "Gorilla Alien",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "rhino",
+          "Rhino Alien",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "panther",
+          "Panther Alien",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "mantis",
+          "Mantis Alien",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "ultramorph",
+          "Ultramorph — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-trooper",
+          "Synth Trooper",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-guard",
+          "Synth Guard",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-sniper",
+          "Synth Sniper",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-heavy",
+          "Synth Heavy",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-joe",
+          "Working Joe blindé",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "combat-synth",
+          "Synthétique de combat blindé",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "mecha",
+          "Xeno Mecha",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "mecha-2",
+          "Xeno Mecha II",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "mechanoid",
+          "Xeno Mechanoid",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-joe",
+          "Working Joe — variante albino",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-combat-synth",
+          "Synthétique de combat — albino",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-runner",
+          "Runner — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-crusher",
+          "Crusher — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-ravager",
+          "Ravager — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-burster",
+          "Burster — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-six",
+          "Lignée Six — variante albino",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "albino-ripper",
+          "ATARAX Ripper — albino",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-runner",
+          "Runner blindé",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-ravager",
+          "Ravager blindé",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-red",
+          "Xénomorphe rouge — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-k-series",
+          "K-Series jaune — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-ripper",
+          "ATARAX Ripper — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-ripper-queen",
+          "Reine Ripper — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-runner",
+          "Runner — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-lurker",
+          "Lurker — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-ravager",
+          "Ravager — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-boiler",
+          "Boiler — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-joe",
+          "Working Joe — variante acide",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-combat-synth",
+          "Synthétique de combat — variante acide",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-antilope",
+          "Xeno-Antilope — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-brute",
+          "Xeno-Brute — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-carrier",
+          "Carrier chargé — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-spiker",
+          "Spiker — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-warrior-red",
+          "Warrior Red — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-phantera-black",
+          "Phantera Black — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-rhino",
+          "Xeno-Rhino — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-chameleon",
+          "Chameleon — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-chameleon-2",
+          "Chameleon II — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-trex-king",
+          "TRex King — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-trex-queen",
+          "TRex Queen — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-big-xeno",
+          "Big Xeno — référence utilisateur",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-pale-spined",
+          "Quadrupède pâle épineux — référence 25",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-tiger-biped",
+          "Bipède tigre — référence 06",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-raised-crest",
+          "Bipède à crête relevée — référence 07",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-bulbous-quadruped",
+          "Quadrupède bulbeux — référence 08",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-black-bone-raptor",
+          "Rapace noir et os — référence 11",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-blue-violet-biped",
+          "Bipède bleu-violet — référence 12",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-skeletal-quadruped",
+          "Quadrupède squelettique — référence 13",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-red-horned",
+          "Quadrupède rouge corné — référence 17",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-runner",
+          "Runner — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-crusher",
+          "Crusher — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-lurker",
+          "Lurker — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-ravager",
+          "Ravager — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-boiler",
+          "Boiler — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-burster",
+          "Burster — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-monica",
+          "Lignée Monica — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-ripper",
+          "ATARAX Ripper — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-ripper-queen",
+          "Reine Ripper — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-foundry-crusher",
+          "Foundry Crusher — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-reef-stalker",
+          "Reef Stalker — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-pale-hunter",
+          "Pale Crucible Hunter — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-dust-runner",
+          "Dust Runner — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-salvage-brute",
+          "Salvage Hive Brute — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-caravan-stalker",
+          "Caravan Stalker — variante cryo",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-joe",
+          "Working Joe — variante cryo",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "cryo-combat-synth",
+          "Synthétique de combat — variante cryo",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-foundry-crusher",
+          "Foundry Crusher — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-reef-stalker",
+          "Reef Stalker — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-pale-hunter",
+          "Pale Crucible Hunter — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-dust-runner",
+          "Dust Runner — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-salvage-brute",
+          "Salvage Hive Brute — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "armored-caravan-stalker",
+          "Caravan Stalker — variante blindée",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-queen",
+          "Reine mobile — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-crusher",
+          "Crusher — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-burster",
+          "Burster — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-k-series",
+          "K-Series jaune — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-ripper",
+          "ATARAX Ripper — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-ripper-queen",
+          "Reine Ripper — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "acid-foundry-crusher",
+          "Foundry Crusher — variante acide",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-joe-classic",
+          "Working Joe — Classic — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-joe-battle",
+          "Working Joe — Battle — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-joe-hazmat",
+          "Working Joe — Hazmat — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-joe-tactical",
+          "Working Joe — Tactical — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-blue-drone",
+          "Blueluminescent — Drone — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-blue-queen",
+          "Blueluminescent — Queen — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-open-crest",
+          "Bipède à crête ajourée — référence 15",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-green-dome",
+          "Bipède à dôme verdoyant — référence 18",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-violet-lobes",
+          "Quadrupède à lobes violets — référence 21",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-green-vesicles",
+          "Quadrupède à vésicules vertes — référence 22",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-black-dome",
+          "Quadrupède à dôme noir — référence 23",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-black-fin",
+          "Quadrupède à nageoire noire — référence 24",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-orange-biped",
+          "Bipède brun-orange — référence 26",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-unclassified-multiarm",
+          "Xeno à caste indéterminée — référence 53",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-flesh-experiment",
+          "Expérience Flesh — référence 59",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "user-renaissance",
+          "Expérience Renaissance — référence 61",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-armorsuit",
+          "Engineer — Armure — design utilisateur",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-battlesuit",
+          "Engineer — Armure de bataille — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-behemotsuit",
+          "Engineer — Armure Behemot — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-ceremonialsuit",
+          "Engineer — Tenue cérémonielle — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-mala-kak",
+          "Engineer — Mala'kak — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-original-space-jokey-variant",
+          "Engineer — Space Jockey Original Variant — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-respirator",
+          "Engineer — Respirateur — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-spacejokey",
+          "Engineer — Space Jockey — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-suit-open",
+          "Engineer — Combinaison ouverte — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-wararmor",
+          "Engineer — Armure de guerre — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-engineer-woman",
+          "Engineer — Femme — adaptation",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-synth-eloise",
+          "Eloise — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-synth-jerri-1",
+          "Jerri — apparence 1 — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-synth-jerri-2",
+          "Jerri — apparence 2 — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-wy-apesuit",
+          "Weyland-Yutani — Porteur de combinaison APE — adaptation",
+          "human",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-wy-covenant-david",
+          "David — Covenant — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-alien-king-from-alien-extemrination",
+          "Alien King — Extermination (nom fourni) — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-green-alien-king",
+          "Alien King vert — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-xeno-gorillaxeno",
+          "Gorilla Xeno — Altered — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-xeno-kingrogue",
+          "Rogue — King — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-xeno-spacejokeygiant",
+          "Xeno Space Jockey — Giant — adaptation",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-afe-synth-warden",
+          "Synth Warden — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-afe2-warden",
+          "Warden — adaptation",
+          "xenomorph",
+          1,
+          1,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-afe2-bulwark",
+          "Bulwark — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-dd-wy-commando",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "human",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-afe2-exploder",
+          "Exploder — adaptation",
+          "xenomorph",
+          1,
+          1,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-afe2-harbinger",
+          "Harbinger — adaptation",
+          "pathogen",
+          1,
+          1,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-dd-synthetic",
+          "Synthetic — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-game-dd-guardian",
+          "Guardian — Darwin Era — adaptation",
+          "human",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-incinerator",
+          "Synth Incinerator",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-detonator",
+          "Synth Detonator",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-containment",
+          "Synth Containment",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-enforcer",
+          "Synth Enforcer",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "afe2-engineer-hybrid",
+          "Engineer hybrid — adaptation",
+          "pathogen",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-peacekeeper",
+          "Peacekeeper — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "afe2-spider",
+          "Spider — adaptation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "afe2-igniter",
+          "Igniter — interprétation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "afe2-bombardier",
+          "Bombardier — interprétation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "afe2-huntsman",
+          "Huntsman — interprétation",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "import-xeno-titan-queen-nolegs",
+          "Titan Queen NoLegs — reconstruction",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-good-boy",
+          "SunSpot « Good Boy »",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-tecsek",
+          "TecSek",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "synth-automated-powerloader",
+          "Automated Power Loader",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "dd-darwin-era-cultist",
+          "Cultiste Darwin Era",
+          "human",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-acm-boiler",
+          "Boiler — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-acm-crusher",
+          "Crusher — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-afe-burster",
+          "Burster — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-afe-prowler",
+          "Prowler — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-afe-runner",
+          "Runner — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-afe-spitter",
+          "Spitter — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-comic-rogue-king",
+          "Rogue — King — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-creature-alien3-runner",
+          "Runner — Dog Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-creature-aliens-queen-mobile",
+          "Reine mobile — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-creature-prometheus-engineer-biosuit",
+          "Engineer — Combinaison biologique — Altered",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-creature-resurrection-newborn-v2",
+          "Newborn — Altered",
+          "hybrid",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-creature-romulus-offspring",
+          "Offspring — Altered",
+          "pathogen",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-fte-pathogen-brute-profile-v13",
+          "Pathogen Brute — Altered",
+          "pathogen",
+          1,
+          1,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-fte-pathogen-popper-profile-v13",
+          "Pathogen Popper — Altered",
+          "pathogen",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-fte-pathogen-queen-right-v13",
+          "Pathogen Queen — Altered",
+          "pathogen",
+          1,
+          1,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-fte-pathogen-runner-nodules-v13",
+          "Pathogen Runner — Altered",
+          "pathogen",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-fte-pathogen-stalker-profile-v13",
+          "Pathogen Stalker — Altered",
+          "pathogen",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-kenner-gorilla",
+          "Gorilla Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-neca-panther-kenner-tribute-v14",
+          "Panther Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-neca-rhino-kenner-orange-v14",
+          "Rhino Alien — orange — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-neca-rhino-kenner-version2-blue-v14",
+          "Rhino Alien — bleu — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-neca-snake-series13-v14",
+          "Snake Alien — Altered",
+          "xenomorph",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-game-working-joe-hazard",
+          "Working Joe — combinaison de protection — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-game-working-joe-standard",
+          "Working Joe — unité standard — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-prometheus-engineer-chair-suit-v16",
+          "Engineer — Combinaison de pilotage — Altered",
+          "engineer",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ],
+        [
+          "drive-v123-game-combat-synthetic-avp2",
+          "Combat Synthetic — unité désarmée — Altered",
+          "synthetic",
+          0,
+          0,
+          0,
+          0,
+          "Sources / rig / clips / intro / outro / R1 / finisher restent à valider"
+        ]
+      ]
+    },
+    "04_Recette": {
+      "headers": [
+        "ID",
+        "Groupe",
+        "Périmètre",
+        "Exécution",
+        "Limite"
+      ],
+      "rows": [
+        [
+          "UNIT-149",
+          "31 tests dont validation documentaire",
+          "Moteur / décor / HUD",
+          "Local + CI ciblée",
+          "Cas limites contrôlés, distincts des parcours ordinaires"
+        ],
+        [
+          "HIST-145",
+          "30 tests",
+          "Cycle de vie Trials",
+          "À réexécuter sur chaque arbre",
+          "Ne pas cumuler des résultats de commits différents"
+        ],
+        [
+          "HIST-147",
+          "44 tests",
+          "Cinq signatures et décors",
+          "À réexécuter avec les documents complets",
+          "Médias/documents absents localement ne sont pas un défaut moteur"
+        ],
+        [
+          "HIST-148",
+          "59 tests",
+          "Cinq supers et jauges",
+          "À réexécuter sur chaque arbre",
+          "Jauge initiale nulle en parcours ordinaire"
+        ],
+        [
+          "BROWSER",
+          "Parcours des cinq pilotes",
+          "Vrais menus / IA / jauge Warden",
+          "Résultats dans Actions pour le commit final",
+          "Aucune HP, jauge, position ou victoire injectée"
+        ],
+        [
+          "VIEWPORT",
+          "1440×1000 / 390×844 / 844×390",
+          "Rectangle réellement visible de la jauge",
+          "Dans le parcours Warden",
+          "Aucun test de téléphone physique"
+        ],
+        [
+          "GLOBAL",
+          "Node complet / build / gardes / navigateur",
+          "Régression globale et Forge",
+          "Résultats dans Actions pour le commit final",
+          "Le classeur n'affirme pas de CI verte avant le résultat"
+        ]
+      ]
+    },
+    "05_References": {
+      "headers": [
+        "ID",
+        "Source",
+        "URL",
+        "Portée",
+        "Vérification"
+      ],
+      "rows": [
+        [
+          "CODE-BASE",
+          "PR9 / base bc6241b",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/commit/bc6241b4e775b02e3459f5f8cf95efad93de7545",
+          "Sources et cinq supers existants ; pas une preuve canonique.",
+          "Consulté via GitHub"
+        ],
+        [
+          "QA-BASE",
+          "Recette globale de départ",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/39021182497",
+          "Échec sur la visibilité de la jauge Warden ; autres parcours passés.",
+          "Artefact téléchargé et inspecté"
+        ],
+        [
+          "LAYOUT",
+          "Playwright / rectangle visible",
+          "https://playwright.dev/python/docs/api/class-locator",
+          "Une assertion de visibilité nécessite un rectangle non vide ; guide technique, pas lore.",
+          "Consulté 17/10/2026"
+        ],
+        [
+          "V147-PATHOGEN",
+          "Cold Iron / capacités Pathogen",
+          "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+          "Référence héritée de V147/V148 ; aucun nouveau geste de personnage relevé dans cette passe.",
+          "Référence héritée"
+        ],
+        [
+          "V147-AFE2",
+          "Cold Iron / dossiers AFE2",
+          "https://steamcommunity.com/app/3448650/allnews/",
+          "Référence héritée de V147/V148 ; les supers et leurs timings sont des choix de simulation.",
+          "Référence héritée"
+        ]
+      ]
+    },
+    "06_Restant": {
+      "headers": [
+        "Priorité",
+        "Lot",
+        "Travail",
+        "Critère de clôture",
+        "Statut"
+      ],
+      "rows": [
+        [
+          "P0",
+          "HUD / commandes / intégrité",
+          "Continuer les parcours sur le paquet complet.",
+          "Un résultat par commit ; aucun gain ou action retardée.",
+          "En cours"
+        ],
+        [
+          "P1",
+          "Cinq pilotes",
+          "Relever les poses et les repères anatomiques exacts des références.",
+          "Clips correspondants, timings relevés et différence art/gameplay explicite.",
+          "À produire"
+        ],
+        [
+          "P1",
+          "Première manche",
+          "Animer victoire et défaite récupérables, retour cohérent en R2.",
+          "Pas de destruction irréversible avant le dernier round.",
+          "À produire"
+        ],
+        [
+          "P1",
+          "Intros et outros",
+          "Créer les clips dédiés aux cinq pilotes puis étendre le roster.",
+          "Pas de clone anatomique ; orientation, masque et profondeur cohérents.",
+          "À produire"
+        ],
+        [
+          "P1",
+          "Finitions terminales",
+          "Produire clips et variantes par anatomie de victime.",
+          "Résultat fixé avant cinématique ; saut/interruption sans deuxième paiement.",
+          "À produire"
+        ],
+        [
+          "P2",
+          "184 autres identités",
+          "Compléter les movesets et références distinctes.",
+          "Pas d'héritage de pouvoir basé seulement sur le nom ou la couleur.",
+          "À produire"
+        ]
+      ]
+    }
+  },
+  "limits": [
+    "Stage cues are original simulation scenery, not source-film animation.",
+    "No new fighter clip, full moveset or terminal finisher is certified.",
+    "The default threat horizon is 0.5 simulation seconds; only current body and projectile data are used.",
+    "Global CI and hosted deployment status must be read for the final commit."
+  ]
+}

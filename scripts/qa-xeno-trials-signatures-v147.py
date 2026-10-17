@@ -133,8 +133,33 @@ with sync_playwright() as p:
                 name = 'warden-earned-super-v148.png'
                 (output/name).write_bytes(base64.b64decode(super_frame['png'].split(',', 1)[1]))
                 report['captures'].append({'file': name, 'state': m, 'method': 'Real idle-player duel: CPU earned meter; no injected state'})
+                # The HTML observer is throttled independently from physics.
+                # Wait for its actual value, without changing the meter or using
+                # screenshot CSS to manufacture a non-empty progress bar.
+                page.wait_for_function("""document.querySelector('[data-xt=\"opponent-super\"]').value === 0""")
                 meter_reading = page.locator('[data-xt="opponent-super"]').evaluate('(element) => ({max:element.max,value:element.value})')
                 check('The visible opponent meter reflects the spent resource', meter_reading == {'max': 100, 'value': 0}, meter_reading)
+                # Real page resizing, no DOM/layout edits. These are browser
+                # viewports, not claims of physical phone/gamepad validation.
+                for width, height in [(1440, 1000), (390, 844), (844, 390)]:
+                    page.set_viewport_size({'width': width, 'height': height})
+                    bar = page.locator('[data-xt="opponent-super"]')
+                    bar.wait_for(state='visible')
+                    geometry = bar.evaluate("""e => {
+                      const r=e.getBoundingClientRect(), parent=e.closest('.xt-match-hud').getBoundingClientRect();
+                      return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right,
+                        hudBottom:parent.bottom, hidden:e.hidden, max:e.max, value:e.value};
+                    }""")
+                    check(f'Super meter has real visible area at {width}x{height}',
+                          not geometry['hidden'] and geometry['width'] > 0 and geometry['height'] >= 5
+                          and geometry['x'] >= 0 and geometry['right'] <= width + 1
+                          and geometry['bottom'] <= min(height, geometry['hudBottom']) + 1, geometry)
+                    if width == 1440:
+                        name='warden-super-hud-v149.png'
+                        page.screenshot(path=str(output/name))
+                        report['captures'].append({'file':name, 'method':'Unmodified live page screenshot including native HUD',
+                                                   'state':page.evaluate(READ)['match']})
+                page.set_viewport_size({'width':1440,'height':1000})
             # Pause still works after an emitted projectile or between rounds.
             live = page.evaluate(READ)['match']
             if live['phase'] != 'match-over':
@@ -146,7 +171,8 @@ with sync_playwright() as p:
                 still = page.evaluate(READ)['match']
                 check(f'{fighter}: pause freezes physical effects and background motion', frozen['tick'] == still['tick']
                       and frozen['projectiles'] == still['projectiles']
-                      and frozen['stageAnimationV147'] == still['stageAnimationV147'])
+                      and frozen['stageAnimationV147'] == still['stageAnimationV147']
+                      and frozen['stageCueV149'] == still['stageCueV149'])
                 page.emulate_media(reduced_motion='reduce')
                 reduced = page.evaluate(READ)['match']['stageAnimationV147']
                 check(f'{fighter}: reduced motion uses a static background', reduced['time'] == 0)
@@ -169,6 +195,9 @@ with sync_playwright() as p:
         if page is not None:
             try:
                 report['failureState'] = page.evaluate(READ)
+                report['failureMeters'] = page.locator('.xt-match-hud progress').evaluate_all(
+                    """els=>els.map(e=>({id:e.dataset.xt,hidden:e.hidden,rect:e.getBoundingClientRect().toJSON(),
+                      display:getComputedStyle(e).display,height:getComputedStyle(e).height,value:e.value}))""")
                 page.screenshot(path=str(output/'failure.png'), full_page=True)
             except Exception:
                 pass
