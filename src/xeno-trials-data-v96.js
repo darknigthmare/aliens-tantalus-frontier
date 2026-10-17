@@ -288,5 +288,5 @@ export const XENO_TRIALS_STAGES_V96 = Object.freeze([
 ]);
 export const XENO_TRIALS_CONTROLS_V96 = Object.freeze({
   left: '← / Q / A', right: '→ / D', jump: '↑ / Z / W / Espace',
-  guard: '↓ / S', light: 'J', heavy: 'K', special: 'L', pause: 'P / Échap'
+  guard: '↓ / S', light: 'J', heavy: 'K', special: 'L', super: 'I (jauge pleine)', pause: 'P / Échap'
 });

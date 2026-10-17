@@ -3,6 +3,7 @@ import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { validateContent, RELEASE } from '../src/content.js';
+import { APP_RELEASE_V143 } from '../src/release-info-v143.js';
 import { AUDIO_FORMATS_V77, AUDIO_SLOTS_V77 } from '../src/audio-assets-v77.js';
 import { publicReleasePathAdmissionV119, verifyPublicAdmissionsV119 } from './public-release-admissions-v119.mjs';
 import { publicReleasePathAdmissionV120, verifyPublicAdmissionsV120 } from './public-release-admissions-v120.mjs';
@@ -19,7 +20,12 @@ const ROOT_FILES = new Set([
   'runtime-level.css', 'sprite-gallery.css', 'styles-v50.css', 'styles.css', 'title-scene-v79.css', 'title-screen-v61.css',
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
-const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admissions-v123.mjs', 'public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
+const SCRIPT_FILES = new Set([
+  'verify-hub-console-support-v142.mjs','verify-hub-elevator-interior-v142.mjs',
+  'verify-hub-vent-scene-v142.mjs','verify-hub-room-composition-v142.mjs',
+  'verify-player-body-alignment-v142.mjs','verify-hub-door-passage-v142.mjs',
+  'verify-hub-door-npc-clearance-v142.mjs',
+'audit-weapon-png-v120.mjs', 'public-release-admissions-v123.mjs', 'public-release-admissions-v122.mjs', 'public-release-admissions-v121.mjs', 'audio-scan-v77.mjs', 'build-asset-filter.mjs', 'build-output-guard.mjs',
   'build.mjs', 'dev.mjs', 'verify-public-release-v86.mjs', 'public-release-admissions-v119.mjs', 'public-release-admissions-v120.mjs',
   'verify-player-runtime-v124.mjs', 'verify-player-presentation-v124.mjs', 'verify-player-field-actions-v124.mjs', 'qa-player-browser-v124.mjs',
   'verify-player-body-rig-v125.mjs', 'verify-player-weapon-rig-v125.mjs', 'verify-held-weapon-v125.mjs', 'verify-weapon-image-cache-v125.mjs',
@@ -70,11 +76,65 @@ const SCRIPT_FILES = new Set(['audit-weapon-png-v120.mjs', 'public-release-admis
   'verify-hub-native-prop-placement-v139.mjs', 'verify-hub-annex-storage-v139.mjs',
   'verify-hub-support-contact-v139.mjs', 'verify-hub-furniture-atlases-v139.mjs', 'qa-tantalus-perspective-v139.mjs',
   'verify-weapon-presentation-profiles-v124.mjs', 'verify-weapon-effects-v124.mjs', 'verify-weapon-runtime-v124.mjs']);
+for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-audit-v143.mjs',
+  'verify-save-lifecycle-v143.mjs', 'verify-release-artifact-v143.mjs',
+  'qa-service-worker-v143.py', 'qa-save-profiles-v144.py', 'verify-xeno-trials-v145.mjs', 'qa-xeno-trials-v145.py']) SCRIPT_FILES.add(file);
+SCRIPT_FILES.add('verify-xeno-trials-signatures-v147.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-supers-v148.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
+SCRIPT_FILES.add('verify-xeno-trials-castes-v151.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-acid-v152.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-grapple-v153.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-rig-v154.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-sequences-v155.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-sequences-v155.py');
+SCRIPT_FILES.add('qa-xeno-trials-rig-v154.py');
+SCRIPT_FILES.add('qa-xeno-trials-grapple-v153.py');
+SCRIPT_FILES.add('verify-xeno-trials-plan-v146.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-workbook-v146.py');
+SCRIPT_FILES.add('verify-xeno-trials-feedback-v149.mjs');
+SCRIPT_FILES.add('verify-xeno-trials-controls-v150.mjs');
+SCRIPT_FILES.add('verify-player-qa-observation-v150.mjs');
+SCRIPT_FILES.add('qa-xeno-trials-controls-v150.py');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
+  '.github/workflows/trials-source-review-v154.yml',
+  'docs/forge/xeno-trials/V155-SEQUENCES.md',
+  'docs/forge/xeno-trials/progress-v155.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V155.xlsx',
+  'docs/forge/xeno-trials/V154-NATIVE-RIGS.md',
+  'docs/forge/xeno-trials/progress-v154.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V154.xlsx',
+  '.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md', 'docs/forge/V145-XENO-TRIALS.md',
+  'docs/forge/xeno-trials/V149-FEEDBACK.md',
+  'docs/forge/xeno-trials/progress-v149.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V149.xlsx',
+  'docs/forge/xeno-trials',
+  'docs/forge/xeno-trials/V153-PROWLER-RESTRAINT.md',
+  'docs/forge/xeno-trials/progress-v153.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V153.xlsx',
+  'docs/forge/xeno-trials/V152-ACID-POOLS.md',
+  'docs/forge/xeno-trials/progress-v152.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V152.xlsx',
+  'docs/forge/xeno-trials/V151-FIRETEAM-CASTES.md',
+  'docs/forge/xeno-trials/progress-v151.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V151.xlsx',
+  'docs/forge/xeno-trials/README.md',
+  'docs/forge/xeno-trials/V147-SIGNATURES.md',
+  'docs/forge/xeno-trials/V148-SUPERS.md',
+  'docs/forge/xeno-trials/progress-v148.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V148.xlsx',
+  'docs/forge/xeno-trials/progress-v147.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V147.xlsx',
+  'docs/forge/xeno-trials/manifest-v146.json',
+  'docs/forge/xeno-trials/xeno-trials-plan-v146.json',
+  'docs/forge/xeno-trials/ALIENS_TANTALUS_XENO_TRIALS_PLAN_V146.xlsx',
+  'docs/forge/xeno-trials/V150-CONTROLS.md',
+  'docs/forge/xeno-trials/progress-v150.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V150.xlsx',
   'docs', 'docs/forge', 'docs/forge/QA-V130.md', 'docs/forge/README-V130.md',
   'docs/forge/V133-AUTHORING.md', 'docs/forge/V134-NAVIGATION.md',
   'docs/forge/V135-CONSTRUCTION.md', 'docs/forge/V136-CONTROLE-ET-VERSIONS.md',
@@ -99,11 +159,7 @@ for (const file of [
   'verify-forge-journey-v141.mjs', 'verify-forge-admission-v141.mjs',
   'verify-forge-mission-v141.mjs', 'verify-forge-ship-v141.mjs', 'verify-forge-decoration-v141.mjs',
   'verify-enemy-distance-gait-v141.mjs', 'verify-hub-annex-npc-life-v141.mjs',
-  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py',
-  'verify-hub-console-support-v142.mjs', 'verify-hub-elevator-interior-v142.mjs',
-  'verify-hub-vent-scene-v142.mjs', 'verify-hub-room-composition-v142.mjs',
-  'verify-player-body-alignment-v142.mjs', 'verify-hub-door-passage-v142.mjs',
-  'verify-hub-door-npc-clearance-v142.mjs'
+  'verify-player-colonial-art-v141.mjs', 'verify-forge-browser-journey-v141.py'
 ]) SCRIPT_FILES.add(file);
 // Exact original-image paths from the V100 public reference registry. Naming
 // a random JPG after a pack or recovery entry does not admit it to production.
@@ -272,7 +328,8 @@ export function isPublicDistributionTextV86(text) {
 export async function verifyPublicReleaseV86(root = process.cwd(), { built = basename(resolve(root)) === 'dist' } = {}) {
   const validation = validateContent();
   assert.equal(validation.ok, true, `Gameplay registry invalid: ${validation.failures.join(', ')}`);
-  assert.equal(RELEASE.version, '86.0.0');
+  assert.equal(RELEASE.releaseVersion, APP_RELEASE_V143.version);
+  assert.equal(APP_RELEASE_V143.saveSchema, 52, 'Release version must not change the save format.');
   assert.equal((await lstat(resolve(root))).isSymbolicLink(), false, 'Distribution root must not be a symbolic link.');
   let files = 0, assets = 0, userReferenceJpgs = 0;
   async function walk(directory, prefix = '') {

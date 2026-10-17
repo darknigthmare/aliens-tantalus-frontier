@@ -133,9 +133,19 @@ export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV
     if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.inVehicle || actor.reloading || actor.fireClock > 0
       || actor.toolUseClock > 0 || actor.interactionClock > 0) return false;
     if (this.neuro?.active && actor === this.player) return this.meleeAttack?.(actor) || false;
+    // The outer guard must not replace an admitted knife, axe or stun baton
+    // with a generic rifle bash. The weapon contract owns reach and effects.
+    if (['melee', 'stun'].includes(this.weaponActionProfileV130?.(actor)?.kind)) return super.melee(actor);
     const accepted = this.performContextualMelee(actor);
     if (accepted) this.refreshStealth?.(actor);
     return accepted;
+  }
+
+  enemyMeleePathClearV64(attacker, target) {
+    // Dormant room occupants are retained for return journeys, not contacts.
+    // Keep the existing depth, walls and closed-door checks in the base.
+    if (attacker?.dormant || target?.dormant) return false;
+    return super.enemyMeleePathClearV64(attacker, target);
   }
 
   reload(actor = this.player) {

@@ -176,7 +176,11 @@ export function withPlayerWeaponRigV125(Base) {
       const render = this.drawPlayerBodyCompositionV125(ctx, actor, { ...options, images: this.images,
         bodyRig: pose.bodyRig, weaponPose: pose, drawWeapon: () => drawHeldWeaponV125(ctx, pose.weaponImage, pose) });
       if (!render.drawn) { actor.heldWeaponVisualV125 = null; return null; }
-      actor.heldWeaponVisualV125 = { schema: 125, weaponId: pose.profile.weaponId, path: pose.path,
+      // Observation is stamped only after the body and held weapon were drawn.
+      // A pointer shot can be accepted between animation frames; its live state
+      // must not be confused with the previously drawn framebuffer.
+      actor.heldWeaponVisualV125 = { schema: 125, shotSerial: finite(actor.shots), timeSeconds: finite(this.animationTime),
+        weaponId: pose.profile.weaponId, path: pose.path,
         surface: pose.surface, bodySheetId: render.sheetId, bodyFrame: render.frame,
         grip: point(pose.grip), support: point(pose.support), muzzle: { ...pose.muzzle },
         reloadPort: point(pose.reloadPort), ejectionPort: point(pose.ejectionPort), matrix: { ...pose.matrix },

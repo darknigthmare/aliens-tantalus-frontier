@@ -1,0 +1,2893 @@
+{
+  "lot": 153,
+  "baseCommit": "15b4c7e02a47ff581b3c1f8d1e7a80ac09eee142",
+  "phase": "engine-tested-art-open",
+  "rosterIds": [
+    "warrior",
+    "runner",
+    "arachnoid",
+    "defender",
+    "grid",
+    "spitter",
+    "prowler",
+    "razor-claws",
+    "chrysalis",
+    "smasher",
+    "predalien",
+    "xenoborg",
+    "royal-guard",
+    "queen",
+    "ravager",
+    "crusher-acm",
+    "boiler",
+    "burster",
+    "stalker-arcade",
+    "gorilla",
+    "rhino",
+    "panther",
+    "mantis",
+    "ultramorph",
+    "synth-trooper",
+    "synth-guard",
+    "synth-sniper",
+    "synth-heavy",
+    "armored-joe",
+    "combat-synth",
+    "mecha",
+    "mecha-2",
+    "mechanoid",
+    "albino-joe",
+    "albino-combat-synth",
+    "albino-runner",
+    "albino-crusher",
+    "albino-ravager",
+    "albino-burster",
+    "albino-six",
+    "albino-ripper",
+    "armored-runner",
+    "armored-ravager",
+    "armored-red",
+    "armored-k-series",
+    "armored-ripper",
+    "armored-ripper-queen",
+    "acid-runner",
+    "acid-lurker",
+    "acid-ravager",
+    "acid-boiler",
+    "acid-joe",
+    "acid-combat-synth",
+    "user-antilope",
+    "user-brute",
+    "user-carrier",
+    "user-spiker",
+    "user-warrior-red",
+    "user-phantera-black",
+    "user-rhino",
+    "user-chameleon",
+    "user-chameleon-2",
+    "user-trex-king",
+    "user-trex-queen",
+    "user-big-xeno",
+    "user-pale-spined",
+    "user-tiger-biped",
+    "user-raised-crest",
+    "user-bulbous-quadruped",
+    "user-black-bone-raptor",
+    "user-blue-violet-biped",
+    "user-skeletal-quadruped",
+    "user-red-horned",
+    "cryo-runner",
+    "cryo-crusher",
+    "cryo-lurker",
+    "cryo-ravager",
+    "cryo-boiler",
+    "cryo-burster",
+    "cryo-monica",
+    "cryo-ripper",
+    "cryo-ripper-queen",
+    "cryo-foundry-crusher",
+    "cryo-reef-stalker",
+    "cryo-pale-hunter",
+    "cryo-dust-runner",
+    "cryo-salvage-brute",
+    "cryo-caravan-stalker",
+    "cryo-joe",
+    "cryo-combat-synth",
+    "armored-foundry-crusher",
+    "armored-reef-stalker",
+    "armored-pale-hunter",
+    "armored-dust-runner",
+    "armored-salvage-brute",
+    "armored-caravan-stalker",
+    "acid-queen",
+    "acid-crusher",
+    "acid-burster",
+    "acid-k-series",
+    "acid-ripper",
+    "acid-ripper-queen",
+    "acid-foundry-crusher",
+    "import-joe-classic",
+    "import-joe-battle",
+    "import-joe-hazmat",
+    "import-joe-tactical",
+    "import-blue-drone",
+    "import-blue-queen",
+    "user-open-crest",
+    "user-green-dome",
+    "user-violet-lobes",
+    "user-green-vesicles",
+    "user-black-dome",
+    "user-black-fin",
+    "user-orange-biped",
+    "user-unclassified-multiarm",
+    "user-flesh-experiment",
+    "user-renaissance",
+    "import-engineer-armorsuit",
+    "import-engineer-battlesuit",
+    "import-engineer-behemotsuit",
+    "import-engineer-ceremonialsuit",
+    "import-engineer-mala-kak",
+    "import-engineer-original-space-jokey-variant",
+    "import-engineer-respirator",
+    "import-engineer-spacejokey",
+    "import-engineer-suit-open",
+    "import-engineer-wararmor",
+    "import-engineer-woman",
+    "import-synth-eloise",
+    "import-synth-jerri-1",
+    "import-synth-jerri-2",
+    "import-wy-apesuit",
+    "import-wy-covenant-david",
+    "import-alien-king-from-alien-extemrination",
+    "import-green-alien-king",
+    "import-xeno-gorillaxeno",
+    "import-xeno-kingrogue",
+    "import-xeno-spacejokeygiant",
+    "import-game-afe-synth-warden",
+    "import-game-afe2-warden",
+    "import-game-afe2-bulwark",
+    "import-game-dd-wy-commando",
+    "import-game-afe2-exploder",
+    "import-game-afe2-harbinger",
+    "import-game-dd-synthetic",
+    "import-game-dd-guardian",
+    "synth-incinerator",
+    "synth-detonator",
+    "synth-containment",
+    "synth-enforcer",
+    "afe2-engineer-hybrid",
+    "synth-peacekeeper",
+    "afe2-spider",
+    "afe2-igniter",
+    "afe2-bombardier",
+    "afe2-huntsman",
+    "import-xeno-titan-queen-nolegs",
+    "synth-good-boy",
+    "synth-tecsek",
+    "synth-automated-powerloader",
+    "dd-darwin-era-cultist",
+    "drive-v123-acm-boiler",
+    "drive-v123-acm-crusher",
+    "drive-v123-afe-burster",
+    "drive-v123-afe-prowler",
+    "drive-v123-afe-runner",
+    "drive-v123-afe-spitter",
+    "drive-v123-comic-rogue-king",
+    "drive-v123-creature-alien3-runner",
+    "drive-v123-creature-aliens-queen-mobile",
+    "drive-v123-creature-prometheus-engineer-biosuit",
+    "drive-v123-creature-resurrection-newborn-v2",
+    "drive-v123-creature-romulus-offspring",
+    "drive-v123-fte-pathogen-brute-profile-v13",
+    "drive-v123-fte-pathogen-popper-profile-v13",
+    "drive-v123-fte-pathogen-queen-right-v13",
+    "drive-v123-fte-pathogen-runner-nodules-v13",
+    "drive-v123-fte-pathogen-stalker-profile-v13",
+    "drive-v123-kenner-gorilla",
+    "drive-v123-neca-panther-kenner-tribute-v14",
+    "drive-v123-neca-rhino-kenner-orange-v14",
+    "drive-v123-neca-rhino-kenner-version2-blue-v14",
+    "drive-v123-neca-snake-series13-v14",
+    "drive-v123-game-working-joe-hazard",
+    "drive-v123-game-working-joe-standard",
+    "drive-v123-prometheus-engineer-chair-suit-v16",
+    "drive-v123-game-combat-synthetic-avp2"
+  ],
+  "mechanic": {
+    "id": "fte-prowler-restraint",
+    "fighterId": "prowler",
+    "profileId": "castes-game_afe_prowler",
+    "canonExact": false,
+    "animation": "existing-static-pose",
+    "sourceId": "fte-dossier-2021",
+    "contactGap": 8,
+    "releaseGap": 18,
+    "durationTicks": 180,
+    "escapeTicks": 72,
+    "firstDamageTick": 48,
+    "damageIntervalTicks": 48,
+    "damage": 6,
+    "recovery": 0.25,
+    "minTargetHeight": 60,
+    "maxTargetHeight": 210,
+    "targets": [
+      {
+        "id": "import-game-dd-wy-commando",
+        "profileId": "pose-v106-import-game-dd-wy-commando"
+      },
+      {
+        "id": "import-game-dd-guardian",
+        "profileId": "pose-v106-import-game-dd-guardian"
+      },
+      {
+        "id": "dd-darwin-era-cultist",
+        "profileId": "pose-v118-dd-darwin-era-cultist"
+      }
+    ]
+  },
+  "behaviorTests": 32,
+  "documentTests": 1,
+  "testNames": [
+    "exact identity and three explicitly reviewed targets; no family/name inheritance",
+    "import-game-dd-wy-commando side 0: physical latch without relocation, extra cost or changed body scale",
+    "import-game-dd-wy-commando side 1: physical latch without relocation, extra cost or changed body scale",
+    "import-game-dd-guardian side 0: physical latch without relocation, extra cost or changed body scale",
+    "import-game-dd-guardian side 1: physical latch without relocation, extra cost or changed body scale",
+    "dd-darwin-era-cultist side 0: physical latch without relocation, extra cost or changed body scale",
+    "dd-darwin-era-cultist side 1: physical latch without relocation, extra cost or changed body scale",
+    "the leap closes to the physical contact gap instead of restraining at generic reach",
+    "a ranged miss neither creates a grapple nor delays an unrelated round",
+    "a xenomorph takes the existing Prowler impact, never a human restraint",
+    "frontal guard prevents a restraint and keeps its original chip/cost contract",
+    "an airborne human cannot be held on the floor by a remote grab",
+    "a real light contact interrupts the preparation before a restraint begins",
+    "a lethal initial contact ends the round, without restraining a corpse",
+    "one restraint causes three bounded DOT ticks, not four direct hits or endless damage",
+    "held actions cannot move either actor, attack, jump, refill stamina or create a super while restrained",
+    "holding guard escapes without mash, stamina costs or damage immunity",
+    "releasing guard resets incomplete escape progress",
+    "pause freezes restraint, damage and escape; the held guard must rearm after resume",
+    "controls held during escape do not replay as an opening attack or movement afterwards",
+    "a projectile in flight can hit the captor and release both actors without refund",
+    "external physical separation releases a restraint rather than snapping the target back",
+    "an already dead captor releases without any further DOT or corpse damage",
+    "DOT overkill counts only the remaining HP and cannot pay a second round",
+    "no-special disables admission and releases an existing restraint",
+    "round timeout removes restraints and the next round rebuilds independent actors",
+    "CPU gains a real restraint from the default starting positions",
+    "CPU victim reads the visible hold and escapes through the same guard input",
+    "the complete restraint serializes identically at 30/60/120Hz",
+    "a JSON snapshot resumes a bounded restraint without new damage/capture IDs",
+    "rendering and accessible view never mutate the authoritative simulation",
+    "existing historical attack numerics and super admission are not rewritten for the roster"
+  ],
+  "approved1to1": 0,
+  "newCharacterAnimationClips": 0,
+  "newFighters": 0,
+  "newSupers": 0,
+  "workbook": "XENO_TRIALS_SUIVI_V153.xlsx",
+  "workbookSha256": "efa0e415ba18abb79ea5ae45b910750cda05d4c165128df6813dd7c20f872ba2",
+  "sources": [
+    [
+      "V151",
+      "Dossier Fireteam du dépôt",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/15b4c7e02a47ff581b3c1f8d1e7a80ac09eee142/src/xeno-trials-castes-v151.js",
+      "Reprise de la provenance V151 : descriptions attribuées à Cold Iron / IGN First ; accès primaire bloqué.",
+      "N'établit pas de timing ni de prise animée complète ; adaptation versus, pas certifiée 1:1."
+    ],
+    [
+      "AFE-NOTES",
+      "Cold Iron : notes officielles",
+      "https://www.aliensfireteamelite.com/en/releasenotes/",
+      "Consulté le 17/10/2026 : corrections des grapples, téléportations en saisie et interactions de perks.",
+      "Confirme le système général de saisies ; ne valide pas ces trois cibles, les dégâts, les timings ni les poses du Prowler."
+    ],
+    [
+      "AFE2-NOTES",
+      "Cold Iron : notes Steam",
+      "https://steamcommunity.com/app/3448650/allnews/",
+      "Consulté le 17/10/2026 : Patch #2 du 17/09/2026, minijeu de libération des saisies.",
+      "Contexte de contre-jeu uniquement ; aucune transposition du moveset d'une autre créature vers le Prowler."
+    ]
+  ],
+  "openArtTasks": [
+    [
+      "ART153-01",
+      "Prowler",
+      "prowler",
+      "Références de poses et timecodes",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-02",
+      "Prowler",
+      "prowler",
+      "Rig et points de contact",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-03",
+      "Prowler",
+      "prowler",
+      "Préparation / capture",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-04",
+      "Prowler",
+      "prowler",
+      "Saisie articulée",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-05",
+      "Prowler",
+      "prowler",
+      "Résistance / dégagement",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-06",
+      "Prowler",
+      "prowler",
+      "Interruption / récupération",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-07",
+      "Prowler",
+      "prowler",
+      "Revue deux orientations et tailles",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-08",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Références de poses et timecodes",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-09",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Rig et points de contact",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-10",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Préparation / capture",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-11",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Saisie articulée",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-12",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Résistance / dégagement",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-13",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Interruption / récupération",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-14",
+      "Weyland-Yutani Commando — Altered — adaptation",
+      "import-game-dd-wy-commando",
+      "Revue deux orientations et tailles",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-15",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Références de poses et timecodes",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-16",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Rig et points de contact",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-17",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Préparation / capture",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-18",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Saisie articulée",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-19",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Résistance / dégagement",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-20",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Interruption / récupération",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-21",
+      "Guardian — Darwin Era — adaptation",
+      "import-game-dd-guardian",
+      "Revue deux orientations et tailles",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-22",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Références de poses et timecodes",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-23",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Rig et points de contact",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-24",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Préparation / capture",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-25",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Saisie articulée",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-26",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Résistance / dégagement",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-27",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Interruption / récupération",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ],
+    [
+      "ART153-28",
+      "Cultiste Darwin Era",
+      "dd-darwin-era-cultist",
+      "Revue deux orientations et tailles",
+      "À produire",
+      "",
+      "Aucun clip nouveau dans cette livraison"
+    ]
+  ],
+  "browserScope": "Isolated HTML host, production controller and images; normal constructor, then actual CPU and keyboard. No health/position/clock injection. Not an unlock/menu/progression scenario.",
+  "tables": {
+    "01_Mecanique": {
+      "headers": [
+        "Identité",
+        "Fonction",
+        "ID exact",
+        "Profil exact",
+        "Comportement / limite",
+        "État",
+        "Source"
+      ],
+      "rows": [
+        [
+          "Prowler",
+          "Attaquant",
+          "prowler",
+          "castes-game_afe_prowler",
+          "Contact physique puis saisie bornée",
+          "Moteur testé",
+          "V151"
+        ],
+        [
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "Cible humaine",
+          "import-game-dd-wy-commando",
+          "pose-v106-import-game-dd-wy-commando",
+          "Dégagement par maintien de GARDE ; aucun nouveau personnage",
+          "Moteur testé",
+          "V151"
+        ],
+        [
+          "Guardian — Darwin Era — adaptation",
+          "Cible humaine",
+          "import-game-dd-guardian",
+          "pose-v106-import-game-dd-guardian",
+          "Dégagement par maintien de GARDE ; aucun nouveau personnage",
+          "Moteur testé",
+          "V151"
+        ],
+        [
+          "Cultiste Darwin Era",
+          "Cible humaine",
+          "dd-darwin-era-cultist",
+          "pose-v118-dd-darwin-era-cultist",
+          "Dégagement par maintien de GARDE ; aucun nouveau personnage",
+          "Moteur testé",
+          "V151"
+        ]
+      ]
+    },
+    "02_Roster": {
+      "headers": [
+        "ID",
+        "Combattant",
+        "Famille",
+        "Admission prise",
+        "Profil",
+        "Graphismes",
+        "Fidélité"
+      ],
+      "rows": [
+        [
+          "warrior",
+          "Warrior",
+          "xenomorph",
+          "Non admis",
+          "castes-film_warrior_aliens_1986",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "runner",
+          "Runner",
+          "xenomorph",
+          "Non admis",
+          "castes-film_runner_alien3_1992",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "arachnoid",
+          "Arachnoid",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_capcom_arachnoid",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "defender",
+          "Defender",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-defender",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "grid",
+          "Grid",
+          "xenomorph",
+          "Non admis",
+          "castes-film_grid_avp_2004",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "spitter",
+          "Spitter",
+          "xenomorph",
+          "Non admis",
+          "castes-game_acm_spitter",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "prowler",
+          "Prowler",
+          "xenomorph",
+          "Attaquant",
+          "castes-game_afe_prowler",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "razor-claws",
+          "Razor Claws",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_capcom_razor_claws",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "chrysalis",
+          "Chrysalis",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_capcom_chrysalis",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "smasher",
+          "Smasher",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_capcom_smasher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "predalien",
+          "Predalien — Primal Hunt",
+          "xenomorph",
+          "Non admis",
+          "castes-game_predalien_avp2_primal_hunt",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "xenoborg",
+          "Xenoborg",
+          "xenomorph",
+          "Non admis",
+          "castes-game_xenoborg_avp1999",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "royal-guard",
+          "Royal Guard",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_capcom_royal_guard",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "queen",
+          "Reine mobile",
+          "xenomorph",
+          "Non admis",
+          "castes-film_queen_aliens_1986",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "ravager",
+          "Ravager",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_extinction_ravager",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "crusher-acm",
+          "Crusher — ACM",
+          "xenomorph",
+          "Non admis",
+          "castes-game_acm_crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "boiler",
+          "Boiler",
+          "xenomorph",
+          "Non admis",
+          "castes-game_acm_boiler",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "burster",
+          "Burster",
+          "xenomorph",
+          "Non admis",
+          "castes-game_afe_burster",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "stalker-arcade",
+          "Stalker — arcade",
+          "xenomorph",
+          "Non admis",
+          "castes-game_avp_capcom_stalker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "gorilla",
+          "Gorilla Alien",
+          "xenomorph",
+          "Non admis",
+          "pose-v94-kenner-gorilla",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "rhino",
+          "Rhino Alien",
+          "xenomorph",
+          "Non admis",
+          "pose-v94-kenner-rhino",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "panther",
+          "Panther Alien",
+          "xenomorph",
+          "Non admis",
+          "pose-v94-kenner-panther",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "mantis",
+          "Mantis Alien",
+          "xenomorph",
+          "Non admis",
+          "pose-v96-kenner-mantis",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "ultramorph",
+          "Ultramorph — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-ultramorph",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-trooper",
+          "Synth Trooper",
+          "synthetic",
+          "Non admis",
+          "pose-v94-afe-synth-trooper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-guard",
+          "Synth Guard",
+          "synthetic",
+          "Non admis",
+          "pose-v94-afe-synth-guard",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-sniper",
+          "Synth Sniper",
+          "synthetic",
+          "Non admis",
+          "pose-v94-afe-synth-sniper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-heavy",
+          "Synth Heavy",
+          "synthetic",
+          "Non admis",
+          "pose-v94-afe-synth-heavy",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-joe",
+          "Working Joe blindé",
+          "synthetic",
+          "Non admis",
+          "enemy-145-armored-working-joe",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "combat-synth",
+          "Synthétique de combat blindé",
+          "synthetic",
+          "Non admis",
+          "enemy-146-armored-combat-synthetic",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "mecha",
+          "Xeno Mecha",
+          "synthetic",
+          "Non admis",
+          "pose-v95-user-xeno-mecha",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "mecha-2",
+          "Xeno Mecha II",
+          "synthetic",
+          "Non admis",
+          "pose-v95-user-xeno-mecha-2",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "mechanoid",
+          "Xeno Mechanoid",
+          "synthetic",
+          "Non admis",
+          "pose-v95-user-xeno-mechanoid",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-joe",
+          "Working Joe — variante albino",
+          "synthetic",
+          "Non admis",
+          "enemy-093-albino-working-joe",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-combat-synth",
+          "Synthétique de combat — albino",
+          "synthetic",
+          "Non admis",
+          "enemy-094-albino-combat-synthetic",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-runner",
+          "Runner — variante albino",
+          "xenomorph",
+          "Non admis",
+          "enemy-058-albino-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-crusher",
+          "Crusher — variante albino",
+          "xenomorph",
+          "Non admis",
+          "enemy-061-albino-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-ravager",
+          "Ravager — variante albino",
+          "xenomorph",
+          "Non admis",
+          "enemy-065-albino-ravager",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-burster",
+          "Burster — variante albino",
+          "xenomorph",
+          "Non admis",
+          "enemy-068-albino-burster",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-six",
+          "Lignée Six — variante albino",
+          "xenomorph",
+          "Non admis",
+          "enemy-070-albino-specimen-six-line",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "albino-ripper",
+          "ATARAX Ripper — albino",
+          "xenomorph",
+          "Non admis",
+          "enemy-075-albino-atarax-ripper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-runner",
+          "Runner blindé",
+          "xenomorph",
+          "Non admis",
+          "enemy-110-armored-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-ravager",
+          "Ravager blindé",
+          "xenomorph",
+          "Non admis",
+          "enemy-117-armored-ravager",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-red",
+          "Xénomorphe rouge — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-123-armored-red-xenomorph",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-k-series",
+          "K-Series jaune — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-124-armored-k-series-yellow-xenomorph",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-ripper",
+          "ATARAX Ripper — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-127-armored-atarax-ripper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-ripper-queen",
+          "Reine Ripper — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-128-armored-ripper-queen",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-runner",
+          "Runner — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-162-acid-blooded-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-lurker",
+          "Lurker — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-167-acid-blooded-lurker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-ravager",
+          "Ravager — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-169-acid-blooded-ravager",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-boiler",
+          "Boiler — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-170-acid-blooded-boiler",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-joe",
+          "Working Joe — variante acide",
+          "synthetic",
+          "Non admis",
+          "enemy-197-acid-blooded-working-joe",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-combat-synth",
+          "Synthétique de combat — variante acide",
+          "synthetic",
+          "Non admis",
+          "enemy-198-acid-blooded-combat-synthetic",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-antilope",
+          "Xeno-Antilope — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-antilope",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-brute",
+          "Xeno-Brute — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-brute",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-carrier",
+          "Carrier chargé — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-carrier",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-spiker",
+          "Spiker — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-spiker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-warrior-red",
+          "Warrior Red — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-warrior-red",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-phantera-black",
+          "Phantera Black — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-phantera-black",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-rhino",
+          "Xeno-Rhino — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-rhino",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-chameleon",
+          "Chameleon — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-chameleon",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-chameleon-2",
+          "Chameleon II — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-chameleon-2",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-trex-king",
+          "TRex King — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-trex-king",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-trex-queen",
+          "TRex Queen — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-trex-queen",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-big-xeno",
+          "Big Xeno — référence utilisateur",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-big-xeno-1",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-pale-spined",
+          "Quadrupède pâle épineux — référence 25",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-pale-epineux",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-tiger-biped",
+          "Bipède tigre — référence 06",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-bipede-tigre",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-raised-crest",
+          "Bipède à crête relevée — référence 07",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-bipede-crete-relevee",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-bulbous-quadruped",
+          "Quadrupède bulbeux — référence 08",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-bulbeux",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-black-bone-raptor",
+          "Rapace noir et os — référence 11",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-rapace-noir-os",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-blue-violet-biped",
+          "Bipède bleu-violet — référence 12",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-bipede-bleu-violet",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-skeletal-quadruped",
+          "Quadrupède squelettique — référence 13",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-squelettique",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-red-horned",
+          "Quadrupède rouge corné — référence 17",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-rouge-corne",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-runner",
+          "Runner — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-214-cryo-adapted-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-crusher",
+          "Crusher — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-217-cryo-adapted-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-lurker",
+          "Lurker — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-219-cryo-adapted-lurker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-ravager",
+          "Ravager — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-221-cryo-adapted-ravager",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-boiler",
+          "Boiler — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-222-cryo-adapted-boiler",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-burster",
+          "Burster — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-224-cryo-adapted-burster",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-monica",
+          "Lignée Monica — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-225-cryo-adapted-monica-line",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-ripper",
+          "ATARAX Ripper — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-231-cryo-adapted-atarax-ripper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-ripper-queen",
+          "Reine Ripper — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-232-cryo-adapted-ripper-queen",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-foundry-crusher",
+          "Foundry Crusher — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-234-cryo-adapted-foundry-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-reef-stalker",
+          "Reef Stalker — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-235-cryo-adapted-reef-stalker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-pale-hunter",
+          "Pale Crucible Hunter — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-238-cryo-adapted-pale-crucible-hunter",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-dust-runner",
+          "Dust Runner — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-239-cryo-adapted-dust-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-salvage-brute",
+          "Salvage Hive Brute — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-240-cryo-adapted-salvage-hive-brute",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-caravan-stalker",
+          "Caravan Stalker — variante cryo",
+          "xenomorph",
+          "Non admis",
+          "enemy-242-cryo-adapted-caravan-stalker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-joe",
+          "Working Joe — variante cryo",
+          "synthetic",
+          "Non admis",
+          "enemy-249-cryo-adapted-working-joe",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "cryo-combat-synth",
+          "Synthétique de combat — variante cryo",
+          "synthetic",
+          "Non admis",
+          "enemy-250-cryo-adapted-combat-synthetic",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-foundry-crusher",
+          "Foundry Crusher — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-130-armored-foundry-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-reef-stalker",
+          "Reef Stalker — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-131-armored-reef-stalker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-pale-hunter",
+          "Pale Crucible Hunter — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-134-armored-pale-crucible-hunter",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-dust-runner",
+          "Dust Runner — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-135-armored-dust-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-salvage-brute",
+          "Salvage Hive Brute — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-136-armored-salvage-hive-brute",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "armored-caravan-stalker",
+          "Caravan Stalker — variante blindée",
+          "xenomorph",
+          "Non admis",
+          "enemy-138-armored-caravan-stalker",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-queen",
+          "Reine mobile — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-164-acid-blooded-queen",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-crusher",
+          "Crusher — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-165-acid-blooded-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-burster",
+          "Burster — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-172-acid-blooded-burster",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-k-series",
+          "K-Series jaune — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-176-acid-blooded-k-series-yellow-xenomorph",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-ripper",
+          "ATARAX Ripper — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-179-acid-blooded-atarax-ripper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-ripper-queen",
+          "Reine Ripper — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-180-acid-blooded-ripper-queen",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "acid-foundry-crusher",
+          "Foundry Crusher — variante acide",
+          "xenomorph",
+          "Non admis",
+          "enemy-182-acid-blooded-foundry-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-joe-classic",
+          "Working Joe — Classic — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v103-import-synth-workingjoe-classic",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-joe-battle",
+          "Working Joe — Battle — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v103-import-synth-workingjoe-battle",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-joe-hazmat",
+          "Working Joe — Hazmat — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v103-import-synth-workingjoe-hazmat",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-joe-tactical",
+          "Working Joe — Tactical — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v103-import-synth-workingjoe-tactical",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-blue-drone",
+          "Blueluminescent — Drone — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v103-import-xeno-blueluminescent-drone",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-blue-queen",
+          "Blueluminescent — Queen — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v103-import-xeno-blueluminescent-queen",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-open-crest",
+          "Bipède à crête ajourée — référence 15",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-bipede-crete-ajouree",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-green-dome",
+          "Bipède à dôme verdoyant — référence 18",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-bipede-dome-verdoyant",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-violet-lobes",
+          "Quadrupède à lobes violets — référence 21",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-lobes-violets",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-green-vesicles",
+          "Quadrupède à vésicules vertes — référence 22",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-vesicules-vertes",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-black-dome",
+          "Quadrupède à dôme noir — référence 23",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-dome-noir",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-black-fin",
+          "Quadrupède à nageoire noire — référence 24",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-quadrupede-nageoire-noire",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-orange-biped",
+          "Bipède brun-orange — référence 26",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-bipede-brun-orange",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-unclassified-multiarm",
+          "Xeno à caste indéterminée — référence 53",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-caste-to-define",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-flesh-experiment",
+          "Expérience Flesh — référence 59",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-experiment-flesh",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "user-renaissance",
+          "Expérience Renaissance — référence 61",
+          "xenomorph",
+          "Non admis",
+          "pose-v95-user-xeno-experiment-renaissance",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-armorsuit",
+          "Engineer — Armure — design utilisateur",
+          "engineer",
+          "Non admis",
+          "pose-v105-import-engineer-armorsuit",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-battlesuit",
+          "Engineer — Armure de bataille — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-battlesuit",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-behemotsuit",
+          "Engineer — Armure Behemot — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-behemotsuit",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-ceremonialsuit",
+          "Engineer — Tenue cérémonielle — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-ceremonialsuit",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-mala-kak",
+          "Engineer — Mala'kak — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-mala-kak",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-original-space-jokey-variant",
+          "Engineer — Space Jockey Original Variant — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-original-space-jokey-variant",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-respirator",
+          "Engineer — Respirateur — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-respirator",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-spacejokey",
+          "Engineer — Space Jockey — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-spacejokey",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-suit-open",
+          "Engineer — Combinaison ouverte — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-suit-open",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-wararmor",
+          "Engineer — Armure de guerre — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-wararmor",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-engineer-woman",
+          "Engineer — Femme — adaptation",
+          "engineer",
+          "Non admis",
+          "pose-v106-import-engineer-woman",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-synth-eloise",
+          "Eloise — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-synth-eloise",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-synth-jerri-1",
+          "Jerri — apparence 1 — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-synth-jerri-1",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-synth-jerri-2",
+          "Jerri — apparence 2 — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-synth-jerri-2",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-wy-apesuit",
+          "Weyland-Yutani — Porteur de combinaison APE — adaptation",
+          "human",
+          "Non admis",
+          "pose-v106-import-wy-apesuit",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-wy-covenant-david",
+          "David — Covenant — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-wy-covenant-david",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-alien-king-from-alien-extemrination",
+          "Alien King — Extermination (nom fourni) — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-alien-king-from-alien-extemrination",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-green-alien-king",
+          "Alien King vert — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-green-alien-king",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-xeno-gorillaxeno",
+          "Gorilla Xeno — Altered — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-xeno-gorillaxeno",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-xeno-kingrogue",
+          "Rogue — King — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-xeno-kingrogue",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-xeno-spacejokeygiant",
+          "Xeno Space Jockey — Giant — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-xeno-spacejokeygiant",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-afe-synth-warden",
+          "Synth Warden — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-game-afe-synth-warden",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-afe2-warden",
+          "Warden — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-game-afe2-warden",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-afe2-bulwark",
+          "Bulwark — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-game-afe2-bulwark",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-dd-wy-commando",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "human",
+          "Cible admise",
+          "pose-v106-import-game-dd-wy-commando",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-afe2-exploder",
+          "Exploder — adaptation",
+          "xenomorph",
+          "Non admis",
+          "pose-v106-import-game-afe2-exploder",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-afe2-harbinger",
+          "Harbinger — adaptation",
+          "pathogen",
+          "Non admis",
+          "pose-v106-import-game-afe2-harbinger",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-dd-synthetic",
+          "Synthetic — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v106-import-game-dd-synthetic",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-game-dd-guardian",
+          "Guardian — Darwin Era — adaptation",
+          "human",
+          "Cible admise",
+          "pose-v106-import-game-dd-guardian",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-incinerator",
+          "Synth Incinerator",
+          "synthetic",
+          "Non admis",
+          "pose-v110-afe-synth-incinerator",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-detonator",
+          "Synth Detonator",
+          "synthetic",
+          "Non admis",
+          "pose-v110-afe-synth-detonator",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-containment",
+          "Synth Containment",
+          "synthetic",
+          "Non admis",
+          "pose-v110-afe-synth-containment",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-enforcer",
+          "Synth Enforcer",
+          "synthetic",
+          "Non admis",
+          "pose-v111-afe-synth-enforcer",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "afe2-engineer-hybrid",
+          "Engineer hybrid — adaptation",
+          "pathogen",
+          "Non admis",
+          "pose-v112-afe2-engineer-hybrid",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-peacekeeper",
+          "Peacekeeper — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v112-afe2-peacekeeper",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "afe2-spider",
+          "Spider — adaptation",
+          "synthetic",
+          "Non admis",
+          "pose-v113-afe2-spider",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "afe2-igniter",
+          "Igniter — interprétation",
+          "synthetic",
+          "Non admis",
+          "pose-v113-afe2-igniter",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "afe2-bombardier",
+          "Bombardier — interprétation",
+          "synthetic",
+          "Non admis",
+          "pose-v113-afe2-bombardier",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "afe2-huntsman",
+          "Huntsman — interprétation",
+          "synthetic",
+          "Non admis",
+          "pose-v113-afe2-huntsman",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "import-xeno-titan-queen-nolegs",
+          "Titan Queen NoLegs — reconstruction",
+          "xenomorph",
+          "Non admis",
+          "pose-v113-import-xeno-titan-queen-nolegs",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-good-boy",
+          "SunSpot « Good Boy »",
+          "synthetic",
+          "Non admis",
+          "pose-v116-sunspot-good-boy",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-tecsek",
+          "TecSek",
+          "synthetic",
+          "Non admis",
+          "pose-v116-tecsek",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "synth-automated-powerloader",
+          "Automated Power Loader",
+          "synthetic",
+          "Non admis",
+          "pose-v116-automated-powerloader",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "dd-darwin-era-cultist",
+          "Cultiste Darwin Era",
+          "human",
+          "Cible admise",
+          "pose-v118-dd-darwin-era-cultist",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-acm-boiler",
+          "Boiler — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-acm-boiler",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-acm-crusher",
+          "Crusher — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-acm-crusher",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-afe-burster",
+          "Burster — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-afe-burster",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-afe-prowler",
+          "Prowler — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-afe-prowler",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-afe-runner",
+          "Runner — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-afe-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-afe-spitter",
+          "Spitter — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-afe-spitter",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-comic-rogue-king",
+          "Rogue — King — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-comic-rogue-king",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-creature-alien3-runner",
+          "Runner — Dog Alien — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-creature-alien3-runner",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-creature-aliens-queen-mobile",
+          "Reine mobile — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-creature-aliens-queen-mobile",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-creature-prometheus-engineer-biosuit",
+          "Engineer — Combinaison biologique — Altered",
+          "engineer",
+          "Non admis",
+          "pose-v123-drive-creature-prometheus-engineer-biosuit",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-creature-resurrection-newborn-v2",
+          "Newborn — Altered",
+          "hybrid",
+          "Non admis",
+          "pose-v123-drive-creature-resurrection-newborn-v2",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-creature-romulus-offspring",
+          "Offspring — Altered",
+          "pathogen",
+          "Non admis",
+          "pose-v123-drive-creature-romulus-offspring",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-fte-pathogen-brute-profile-v13",
+          "Pathogen Brute — Altered",
+          "pathogen",
+          "Non admis",
+          "pose-v123-drive-fte-pathogen-brute-profile-v13",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-fte-pathogen-popper-profile-v13",
+          "Pathogen Popper — Altered",
+          "pathogen",
+          "Non admis",
+          "pose-v123-drive-fte-pathogen-popper-profile-v13",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-fte-pathogen-queen-right-v13",
+          "Pathogen Queen — Altered",
+          "pathogen",
+          "Non admis",
+          "pose-v123-drive-fte-pathogen-queen-right-v13",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-fte-pathogen-runner-nodules-v13",
+          "Pathogen Runner — Altered",
+          "pathogen",
+          "Non admis",
+          "pose-v123-drive-fte-pathogen-runner-nodules-v13",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-fte-pathogen-stalker-profile-v13",
+          "Pathogen Stalker — Altered",
+          "pathogen",
+          "Non admis",
+          "pose-v123-drive-fte-pathogen-stalker-profile-v13",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-kenner-gorilla",
+          "Gorilla Alien — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-kenner-gorilla",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-neca-panther-kenner-tribute-v14",
+          "Panther Alien — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-neca-panther-kenner-tribute-v14",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-neca-rhino-kenner-orange-v14",
+          "Rhino Alien — orange — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-neca-rhino-kenner-orange-v14",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-neca-rhino-kenner-version2-blue-v14",
+          "Rhino Alien — bleu — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-neca-rhino-kenner-version2-blue-v14",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-neca-snake-series13-v14",
+          "Snake Alien — Altered",
+          "xenomorph",
+          "Non admis",
+          "pose-v123-drive-neca-snake-series13-v14",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-game-working-joe-hazard",
+          "Working Joe — combinaison de protection — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v123-drive-game-working-joe-hazard",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-game-working-joe-standard",
+          "Working Joe — unité standard — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v123-drive-game-working-joe-standard",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-prometheus-engineer-chair-suit-v16",
+          "Engineer — Combinaison de pilotage — Altered",
+          "engineer",
+          "Non admis",
+          "pose-v123-drive-prometheus-engineer-chair-suit-v16",
+          "Pose existante",
+          "Non certifié"
+        ],
+        [
+          "drive-v123-game-combat-synthetic-avp2",
+          "Combat Synthetic — unité désarmée — Altered",
+          "synthetic",
+          "Non admis",
+          "pose-v123-drive-game-combat-synthetic-avp2",
+          "Pose existante",
+          "Non certifié"
+        ]
+      ]
+    },
+    "03_Regles": {
+      "headers": [
+        "Domaine",
+        "Règle de simulation",
+        "État"
+      ],
+      "rows": [
+        [
+          "Admission",
+          "ID et profil Prowler exacts ; aucune inheritance automatique",
+          "Réalisé moteur"
+        ],
+        [
+          "Cibles",
+          "Commando WY, Guardian et Cultiste Darwin Era seulement ; les autres corps conservent le coup ordinaire",
+          "Réalisé moteur"
+        ],
+        [
+          "Contact",
+          "8 unités de séparation maximale après déplacement réel ; pas de repositionnement forcé",
+          "Réalisé moteur"
+        ],
+        [
+          "Défense",
+          "Garde frontale valide empêche la prise ; saut / interruption de la préparation restent possibles",
+          "Réalisé moteur"
+        ],
+        [
+          "Saisie",
+          "Durée 180 pas = 1,5 s ; impacts périodiques 6 PV aux pas 48, 96 et 144",
+          "Réalisé moteur"
+        ],
+        [
+          "Dégagement",
+          "Maintenir GARDE 72 pas = 0,6 s ; aucun martèlement ni coût supplémentaire",
+          "Réalisé moteur"
+        ],
+        [
+          "Interruptions",
+          "Dégât sur l'attaquant, mort, séparation physique ou règle sans spécial libèrent la prise",
+          "Réalisé moteur"
+        ],
+        [
+          "Simulation",
+          "Gravité et projectiles existants continuent ; ni téléportation ni invulnérabilité",
+          "Réalisé moteur"
+        ],
+        [
+          "Sortie",
+          "Récupération 0,25 s ; commandes déjà maintenues à relâcher avant réutilisation",
+          "Réalisé moteur"
+        ],
+        [
+          "Statistiques",
+          "Une prise et trois ticks au maximum ; ticks séparés des coups directs, dégâts bornés aux PV",
+          "Réalisé moteur"
+        ],
+        [
+          "Manches",
+          "Nettoyage au verdict et à la manche suivante ; aucune prise persistée au profil",
+          "Réalisé moteur"
+        ],
+        [
+          "Fidélité",
+          "Timings, compatibilités et maintien de garde : règles originales de cette simulation",
+          "Adaptation non certifiée"
+        ]
+      ]
+    },
+    "04_Sources": {
+      "headers": [
+        "ID",
+        "Source",
+        "URL",
+        "Observation",
+        "Limites"
+      ],
+      "rows": [
+        [
+          "V151",
+          "Dossier Fireteam du dépôt",
+          "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/15b4c7e02a47ff581b3c1f8d1e7a80ac09eee142/src/xeno-trials-castes-v151.js",
+          "Reprise de la provenance V151 : descriptions attribuées à Cold Iron / IGN First ; accès primaire bloqué.",
+          "N'établit pas de timing ni de prise animée complète ; adaptation versus, pas certifiée 1:1."
+        ],
+        [
+          "AFE-NOTES",
+          "Cold Iron : notes officielles",
+          "https://www.aliensfireteamelite.com/en/releasenotes/",
+          "Consulté le 17/10/2026 : corrections des grapples, téléportations en saisie et interactions de perks.",
+          "Confirme le système général de saisies ; ne valide pas ces trois cibles, les dégâts, les timings ni les poses du Prowler."
+        ],
+        [
+          "AFE2-NOTES",
+          "Cold Iron : notes Steam",
+          "https://steamcommunity.com/app/3448650/allnews/",
+          "Consulté le 17/10/2026 : Patch #2 du 17/09/2026, minijeu de libération des saisies.",
+          "Contexte de contre-jeu uniquement ; aucune transposition du moveset d'une autre créature vers le Prowler."
+        ]
+      ]
+    },
+    "05_Production": {
+      "headers": [
+        "Lot",
+        "Combattant",
+        "ID",
+        "Tâche",
+        "Statut",
+        "Responsable",
+        "Limite"
+      ],
+      "rows": [
+        [
+          "ART153-01",
+          "Prowler",
+          "prowler",
+          "Références de poses et timecodes",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-02",
+          "Prowler",
+          "prowler",
+          "Rig et points de contact",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-03",
+          "Prowler",
+          "prowler",
+          "Préparation / capture",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-04",
+          "Prowler",
+          "prowler",
+          "Saisie articulée",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-05",
+          "Prowler",
+          "prowler",
+          "Résistance / dégagement",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-06",
+          "Prowler",
+          "prowler",
+          "Interruption / récupération",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-07",
+          "Prowler",
+          "prowler",
+          "Revue deux orientations et tailles",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-08",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Références de poses et timecodes",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-09",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Rig et points de contact",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-10",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Préparation / capture",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-11",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Saisie articulée",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-12",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Résistance / dégagement",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-13",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Interruption / récupération",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-14",
+          "Weyland-Yutani Commando — Altered — adaptation",
+          "import-game-dd-wy-commando",
+          "Revue deux orientations et tailles",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-15",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Références de poses et timecodes",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-16",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Rig et points de contact",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-17",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Préparation / capture",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-18",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Saisie articulée",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-19",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Résistance / dégagement",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-20",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Interruption / récupération",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-21",
+          "Guardian — Darwin Era — adaptation",
+          "import-game-dd-guardian",
+          "Revue deux orientations et tailles",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-22",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Références de poses et timecodes",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-23",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Rig et points de contact",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-24",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Préparation / capture",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-25",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Saisie articulée",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-26",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Résistance / dégagement",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-27",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Interruption / récupération",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ],
+        [
+          "ART153-28",
+          "Cultiste Darwin Era",
+          "dd-darwin-era-cultist",
+          "Revue deux orientations et tailles",
+          "À produire",
+          "",
+          "Aucun clip nouveau dans cette livraison"
+        ]
+      ]
+    },
+    "06_Recette": {
+      "headers": [
+        "Nº",
+        "Contrôle",
+        "État",
+        "Type de preuve"
+      ],
+      "rows": [
+        [
+          1,
+          "exact identity and three explicitly reviewed targets; no family/name inheritance",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          2,
+          "import-game-dd-wy-commando side 0: physical latch without relocation, extra cost or changed body scale",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          3,
+          "import-game-dd-wy-commando side 1: physical latch without relocation, extra cost or changed body scale",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          4,
+          "import-game-dd-guardian side 0: physical latch without relocation, extra cost or changed body scale",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          5,
+          "import-game-dd-guardian side 1: physical latch without relocation, extra cost or changed body scale",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          6,
+          "dd-darwin-era-cultist side 0: physical latch without relocation, extra cost or changed body scale",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          7,
+          "dd-darwin-era-cultist side 1: physical latch without relocation, extra cost or changed body scale",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          8,
+          "the leap closes to the physical contact gap instead of restraining at generic reach",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          9,
+          "a ranged miss neither creates a grapple nor delays an unrelated round",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          10,
+          "a xenomorph takes the existing Prowler impact, never a human restraint",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          11,
+          "frontal guard prevents a restraint and keeps its original chip/cost contract",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          12,
+          "an airborne human cannot be held on the floor by a remote grab",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          13,
+          "a real light contact interrupts the preparation before a restraint begins",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          14,
+          "a lethal initial contact ends the round, without restraining a corpse",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          15,
+          "one restraint causes three bounded DOT ticks, not four direct hits or endless damage",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          16,
+          "held actions cannot move either actor, attack, jump, refill stamina or create a super while restrained",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          17,
+          "holding guard escapes without mash, stamina costs or damage immunity",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          18,
+          "releasing guard resets incomplete escape progress",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          19,
+          "pause freezes restraint, damage and escape; the held guard must rearm after resume",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          20,
+          "controls held during escape do not replay as an opening attack or movement afterwards",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          21,
+          "a projectile in flight can hit the captor and release both actors without refund",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          22,
+          "external physical separation releases a restraint rather than snapping the target back",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          23,
+          "an already dead captor releases without any further DOT or corpse damage",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          24,
+          "DOT overkill counts only the remaining HP and cannot pay a second round",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          25,
+          "no-special disables admission and releases an existing restraint",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          26,
+          "round timeout removes restraints and the next round rebuilds independent actors",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          27,
+          "CPU gains a real restraint from the default starting positions",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          28,
+          "CPU victim reads the visible hold and escapes through the same guard input",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          29,
+          "the complete restraint serializes identically at 30/60/120Hz",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          30,
+          "a JSON snapshot resumes a bounded restraint without new damage/capture IDs",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          31,
+          "rendering and accessible view never mutate the authoritative simulation",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          32,
+          "existing historical attack numerics and super admission are not rewritten for the roster",
+          "Réussi localement",
+          "Test unitaire / fixture de frontières"
+        ],
+        [
+          33,
+          "Contrat Excel / JSON / chemins publiables",
+          "À vérifier à l'export",
+          "Contrôle documentaire"
+        ],
+        [
+          34,
+          "Saisie et dégagement au clavier dans le contrôleur Chromium",
+          "À exécuter en CI",
+          "Hôte HTML isolé, vrais sprites et IA ; ni menu, ni déblocage, ni progression validés ici"
+        ]
+      ]
+    }
+  }
+}

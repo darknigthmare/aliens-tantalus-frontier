@@ -1,11 +1,11 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "86.0.0",
+  "version": "143.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build-release-v143.mjs",
     "check": "node scripts/verify-public-release-v86.mjs",
     "test:player": "node --test scripts/verify-player-runtime-v124.mjs scripts/verify-player-presentation-v124.mjs scripts/verify-player-field-actions-v124.mjs scripts/verify-player-body-rig-v125.mjs scripts/verify-player-weapon-rig-v125.mjs scripts/verify-player-appearance-v126.mjs scripts/verify-player-appearance-runtime-v126.mjs scripts/verify-player-modular-rig-v126.mjs scripts/verify-player-action-rig-v127.mjs scripts/verify-player-appearance-preview-v127.mjs scripts/verify-player-transit-rig-v128.mjs scripts/verify-player-appearance-preview-v128.mjs scripts/verify-player-incapacitation-v128.mjs scripts/verify-player-locomotion-rig-v129.mjs scripts/verify-player-colonial-art-v129.mjs scripts/verify-player-appearance-preview-v129.mjs scripts/verify-player-climb-contacts-v139.mjs scripts/verify-player-colonial-art-v141.mjs scripts/verify-player-body-alignment-v142.mjs",
     "test:weapons": "node --test scripts/verify-weapon-presentation-profiles-v124.mjs scripts/verify-weapon-effects-v124.mjs scripts/verify-weapon-runtime-v124.mjs scripts/verify-held-weapon-v125.mjs scripts/verify-weapon-image-cache-v125.mjs",
@@ -40,7 +40,22 @@
     "test:forge:authoring": "node --test scripts/verify-forge-v133.mjs scripts/verify-forge-v134.mjs scripts/verify-forge-v135.mjs",
     "test:forge:native": "node --test scripts/verify-forge-native-v136.mjs scripts/verify-forge-native-v140.mjs scripts/verify-editor-ship-bounds-v140.mjs scripts/verify-forge-release-v140.mjs scripts/verify-forge-sandbox-v140.mjs scripts/verify-forge-journey-v141.mjs scripts/verify-forge-admission-v141.mjs scripts/verify-forge-mission-v141.mjs scripts/verify-forge-ship-v141.mjs scripts/verify-forge-decoration-v141.mjs",
     "qa:wardrobe:parts": "node scripts/qa-wardrobe-parts-browser-v140.mjs",
-    "qa:enemy:patrol": "node scripts/qa-enemy-patrol-browser-v140.mjs"
+    "qa:enemy:patrol": "node scripts/qa-enemy-patrol-browser-v140.mjs",
+    "test:audit": "node --test scripts/verify-audit-v143.mjs scripts/verify-save-lifecycle-v143.mjs",
+    "test:all": "node scripts/test-release-v143.mjs",
+    "check:built": "node scripts/verify-release-artifact-v143.mjs",
+    "test:trials": "node --test scripts/verify-xeno-trials-v145.mjs",
+    "test:trials:plan": "node --test scripts/verify-xeno-trials-plan-v146.mjs",
+    "test:trials:controls": "node --test scripts/verify-xeno-trials-controls-v150.mjs",
+    "test:trials:feedback": "node --test scripts/verify-xeno-trials-feedback-v149.mjs",
+    "test:trials:supers": "node --test scripts/verify-xeno-trials-supers-v148.mjs",
+    "test:trials:signatures": "node --test scripts/verify-xeno-trials-signatures-v147.mjs",
+    "test:qa:observation": "node --test scripts/verify-player-qa-observation-v150.mjs",
+    "test:trials:acid": "node --test scripts/verify-xeno-trials-acid-v152.mjs",
+    "test:trials:castes": "node --test scripts/verify-xeno-trials-castes-v151.mjs",
+    "test:trials:grapple": "node --test scripts/verify-xeno-trials-grapple-v153.mjs",
+    "test:trials:rigs": "node --test scripts/verify-xeno-trials-rig-v154.mjs",
+    "test:trials:sequences": "node --test scripts/verify-xeno-trials-sequences-v155.mjs"
   },
   "engines": {
     "node": ">=22"

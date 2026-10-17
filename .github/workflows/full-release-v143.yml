@@ -1,0 +1,80 @@
+name: Full release regression
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: full-release-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: All registered Node suites with complete media
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/atf-release-qa"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/atf-release-qa/source-commit.txt"
+          npm run test:all 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/node-tests.log"
+      - name: Guard and build the complete distribution
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run check 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/source-check.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/build.log"
+          npm run check:built 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/distribution-check.log"
+          cp dist/build-info.json "$RUNNER_TEMP/atf-release-qa/"
+      - name: Browser tooling outside the release
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+          npm install --prefix "$RUNNER_TEMP/atf-browser" --no-save --ignore-scripts playwright@1.57.0
+      - name: Real worker offline and account-isolation checks
+        run: python scripts/qa-service-worker-v143.py --output "$RUNNER_TEMP/atf-release-qa/worker"
+      - name: Real production menu and tactical gameplay journey
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/atf-release-qa/http.log" 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_BASE_URL=http://127.0.0.1:4173
+          export ATF_PLAYWRIGHT_MODULE="$RUNNER_TEMP/atf-browser/node_modules/playwright/index.mjs"
+          export ATF_PLAYER_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/player"
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          # Preserve every scenario's evidence even when another one fails.
+          # pipefail plus the final exit keep any failed assertion blocking CI.
+          status=0
+          node scripts/qa-player-browser-v124.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player.log" || status=1
+          python scripts/qa-save-profiles-v144.py --output "$RUNNER_TEMP/atf-release-qa/profiles" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/profiles.log" || status=1
+          python scripts/qa-xeno-trials-v145.py --output "$RUNNER_TEMP/atf-release-qa/trials" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/trials.log" || status=1
+          python scripts/qa-xeno-trials-signatures-v147.py --output "$RUNNER_TEMP/atf-release-qa/signatures" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/signatures.log" || status=1
+          python scripts/qa-xeno-trials-controls-v150.py --root dist --output "$RUNNER_TEMP/atf-release-qa/controls" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/controls.log" || status=1
+          python scripts/qa-xeno-trials-grapple-v153.py --output "$RUNNER_TEMP/atf-release-qa/grapple" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/grapple.log" || status=1
+          python scripts/qa-xeno-trials-rig-v154.py --output "$RUNNER_TEMP/atf-release-qa/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/rigs.log" || status=1
+          python scripts/qa-xeno-trials-sequences-v155.py --output "$RUNNER_TEMP/atf-release-qa/sequences" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/sequences.log" || status=1
+          exit "$status"
+      - name: Retain results without distributing private documents
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: full-release-evidence
+          retention-days: 7
+          path: ${{ runner.temp }}/atf-release-qa
+          if-no-files-found: error

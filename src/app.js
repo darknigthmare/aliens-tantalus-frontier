@@ -172,6 +172,7 @@ const persistentStorageV78 = (() => {
   return { getItem: unavailable, setItem: unavailable, removeItem: unavailable };
 })();
 
+let sessionRecoveryExportV144 = null;
 const saveSystem = new SaveSystem(persistentStorageV78);
 try { saveSystem.loadLastProfileV78(); } catch { /* SaveSystem protects the original bytes; the title exposes recovery. */ }
 ensureAdvancedState(saveSystem.data);
@@ -1883,7 +1884,12 @@ function renderEditorStatus() {
 function renderProfiles() {
   const recovery = saveSystem.recoveryNeeded;
   byId('save-recovery-notice').hidden = !recovery;
-  byId('save-recovery-message').textContent = recovery ? `Profil ${recovery.profile} : ${recovery.status === 'corrupt' ? 'fichier illisible' : 'stockage inaccessible'}. Les sauvegardes automatiques sont suspendues.` : '';
+  if (!recovery) sessionRecoveryExportV144 = null;
+  const recoveryLabel = recovery?.status === 'conflict' ? 'profil modifié ou supprimé dans une autre session'
+    : recovery?.reason === 'future-schema' ? 'sauvegarde créée par une version plus récente'
+      : recovery?.status === 'corrupt' ? 'fichier illisible' : 'stockage inaccessible';
+  byId('save-recovery-message').textContent = recovery ? `Profil ${recovery.profile} : ${recoveryLabel}. Les sauvegardes automatiques sont suspendues. Chargez explicitement un profil ou exportez les données avant de choisir.` : '';
+  byId('save-session-export-v144').hidden = !sessionRecoveryExportV144;
   byId('profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<article class="profile-row"><div><strong>PROFIL ${profile.profile}${profile.profile === saveSystem.profile && !recovery ? ' · ACTIF' : ''}</strong><span>${profile.empty ? 'Emplacement vide' : escapeHtml(profile.release || 'Sauvegarde locale')}</span></div><div class="button-row"><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : profile.status === 'ready' ? 'CHARGER' : 'RÉESSAYER'}</button>${profile.status === 'corrupt' ? `<button class="button compact" data-export-profile="${profile.profile}">EXPORTER LE FICHIER BRUT</button>` : ''}</div></article>`).join('');
   all('.view[data-panel="settings"] [id^="setting-"]').forEach((control) => { control.disabled = Boolean(recovery); });
   byId('quick-save').disabled = Boolean(recovery);
@@ -2169,9 +2175,9 @@ function openMissionNarrativeArchivesV68(entryId = '') {
   return setupMissionArchiveOverlayV68().open(entryId);
 }
 
-function captureMissionResumeState() {
+function captureMissionResumeState({ forRecovery = false } = {}) {
   const operation = saveSystem.data.strategy.currentOperation;
-  if (!operation || !engine.mission || standaloneContext || saveSystem.recoveryNeeded
+  if (!operation || !engine.mission || standaloneContext || saveSystem.recoveryNeeded && !forRecovery
     || missionOwnerV78?.epoch !== profileEpochV78 || missionOwnerV78?.profile !== saveSystem.profile
     || missionOwnerV78?.operationId !== operation.id) return null;
   const nativeState = engine.captureResumeState?.();
@@ -2320,6 +2326,12 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  // Revoke all callbacks BEFORE any close/stop hook can attempt persistence.
+  profileEpochV78 += 1;
+  missionOwnerV78 = null;
+  hubOwnerV84 = null;
+  bioforgeOwnerV84 = null;
+  xenoTrialsOwnerV96 = null;
   hubControlBindingsV133.forEach(binding => binding.clear());
   squadCommandDockV132?.close({ restoreFocus: false });
   if (missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ resume: false, restoreFocus: false });
@@ -2336,8 +2348,6 @@ function discardProfileRuntimeV78() {
   if (playerCreatorUiV84.dialog.open) playerCreatorUiV84.dialog.close();
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
-  profileEpochV78 += 1;
-  missionOwnerV78 = null;
   pendingMissionLaunchV62 = null;
   hubEngine.stop(false);
   engine.stop();
@@ -3750,12 +3760,41 @@ function bind() {
       download(`aliens-tantalus-frontier-profile-${recovery?.profile || saveSystem.profile}${recovery ? '-original.txt' : '.json'}`, recovery ? saveSystem.exportRawProfileV78() : saveSystem.export());
     } catch (error) { toast(error.message); }
   };
+  byId('save-session-export-v144').onclick = () => {
+    if (sessionRecoveryExportV144) download(`tantalus-profil-${saveSystem.profile}-session-recuperee.json`, sessionRecoveryExportV144);
+  };
+  // Storage events arrive only in other documents. The focus check also catches
+  // an event missed while suspended. Never auto-load or auto-merge a timeline.
+  const protectExternalSessionV144 = () => {
+    if (saveSystem.recoveryNeeded?.status !== 'conflict' || sessionRecoveryExportV144) return;
+    const candidate = clone(saveSystem.data);
+    if (!standaloneContext && !creatorOwnerV84) {
+      const state = captureMissionResumeState({ forRecovery: true });
+      if (state) recordOperationResumeState(candidate, state);
+      Object.assign(candidate.hub, captureHubPoseV84());
+    }
+    sessionRecoveryExportV144 = JSON.stringify(candidate, null, 2);
+    discardProfileRuntimeV78();
+    standaloneContext = null; forgePlaytest = null;
+    titleScreen.hide(); renderProfiles(); showView('settings');
+    toast('Profil modifié ailleurs. Cette session est arrêtée sans remplacer la sauvegarde actuelle.');
+  };
+  const checkExternalSessionV144 = event => {
+    if (event?.type === 'storage' && (event.storageArea && event.storageArea !== persistentStorageV78
+      || event.key !== null && event.key !== saveSystem.key())) return;
+    try { if (saveSystem.checkExternalChangeV144()) protectExternalSessionV144(); }
+    catch (error) { toast(error.message); }
+  };
+  globalThis.addEventListener('storage', checkExternalSessionV144);
+  globalThis.addEventListener('focus', checkExternalSessionV144);
+  globalThis.addEventListener('atf:save-conflict-v144', protectExternalSessionV144);
   byId('save-import').onchange = async (event) => {
     const file = event.target.files?.[0]; if (!file) return;
     const targetProfile = saveSystem.recoveryNeeded?.profile || saveSystem.profile;
     const importEpoch = profileEpochV78;
     const importRequest = ++profileImportRequestV78;
     try {
+      if (file.size > 16 * 1024 * 1024) throw new Error('Fichier trop volumineux (16 Mio maximum). La partie active est conservée.');
       const text = await file.text();
       if (importRequest !== profileImportRequestV78) return;
       if (importEpoch !== profileEpochV78 || targetProfile !== (saveSystem.recoveryNeeded?.profile || saveSystem.profile)) throw new Error('La partie a changé pendant la lecture. Sélectionnez à nouveau le fichier.');
