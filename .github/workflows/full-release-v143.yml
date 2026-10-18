@@ -58,8 +58,23 @@ jobs:
           export ATF_BASE_URL=http://127.0.0.1:4173
           export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           python scripts/qa-forge-playtest-checkpoint-v157.py --output "$RUNNER_TEMP/atf-release-qa/forge-checkpoint-v157" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/forge-checkpoint-v157.log"
-      - name: Real production menu and tactical gameplay journey
+      - name: Production player controls and modular costumes
+        id: player_journey
         if: ${{ !cancelled() && (steps.forge_checkpoint.outcome == 'success' || steps.forge_checkpoint.outcome == 'failure') }}
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/atf-release-qa/http-player.log" 2>&1 &
+          player_server=$!
+          trap 'kill "$player_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_BASE_URL=http://127.0.0.1:4173
+          export ATF_PLAYWRIGHT_MODULE="$RUNNER_TEMP/atf-browser/node_modules/playwright/index.mjs"
+          export ATF_PLAYER_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/player"
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          node scripts/qa-player-browser-v124.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player.log"
+      - name: Remaining production menu and tactical gameplay journeys
+        if: ${{ !cancelled() && (steps.forge_checkpoint.outcome == 'success' || steps.forge_checkpoint.outcome == 'failure') && (steps.player_journey.outcome == 'success' || steps.player_journey.outcome == 'failure') }}
         shell: bash
         run: |
           set -o pipefail
@@ -74,7 +89,6 @@ jobs:
           # Preserve every scenario's evidence even when another one fails.
           # pipefail plus the final exit keep any failed assertion blocking CI.
           status=0
-          node scripts/qa-player-browser-v124.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player.log" || { status=1; echo '::error title=Browser QA::qa-player-browser-v124.mjs failed; inspect its retained report.'; }
           python scripts/qa-save-profiles-v144.py --output "$RUNNER_TEMP/atf-release-qa/profiles" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/profiles.log" || { status=1; echo '::error title=Browser QA::qa-save-profiles-v144.py failed; inspect its retained report.'; }
           python scripts/qa-xeno-trials-v145.py --output "$RUNNER_TEMP/atf-release-qa/trials" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/trials.log" || { status=1; echo '::error title=Browser QA::qa-xeno-trials-v145.py failed; inspect its retained report.'; }
           python scripts/qa-xeno-trials-signatures-v147.py --output "$RUNNER_TEMP/atf-release-qa/signatures" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/signatures.log" || { status=1; echo '::error title=Browser QA::qa-xeno-trials-signatures-v147.py failed; inspect its retained report.'; }
