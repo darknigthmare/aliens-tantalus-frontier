@@ -564,17 +564,23 @@ export class HubGame extends HubGameV62 {
     const matches = entry => entry?.annexId === annex.id && (entry.endpointId || null) === (door.endpointId || null);
     const opening = matches(transition) && (transition.direction === 'enter') !== local;
     const finishing = matches(closing) && closing.local === local;
-    const progress = opening ? transition.progress * transition.progress * (3 - 2 * transition.progress)
+    const nativeProgress = opening ? transition.progress * transition.progress * (3 - 2 * transition.progress)
       : finishing ? closingHubDoorProgressV142(closing.elapsed, closing.duration) : 0;
+    const npcProgress = this.npcAnnexDoorDemandV159?.(annex.id) || 0;
+    const progress = Math.max(nativeProgress, npcProgress);
     const receipt = drawHubDoorFaceV142(ctx, image, { ...face, source: source || face.source }, { progress, active });
     if (receipt) this.hubDoorDrawsV142.set(`${annex.id}:${door.endpointId || 'primary'}:${local ? 'annex' : 'parent'}`,
-      { ...receipt, annexId: annex.id, endpointId: door.endpointId || null, local, stage: opening ? 'opening' : finishing ? 'closing' : 'closed' });
+      { ...receipt, annexId: annex.id, endpointId: door.endpointId || null, local, stage: opening ? 'opening' : finishing ? 'closing' : npcProgress > 0 ? 'npc-transit' : 'closed' });
     return receipt;
   }
 
   beginAnnexTransitionV71(annexId, direction) {
     const annex = HUB_ANNEX_BY_ID_V71[annexId];
     if (!annex || !['enter', 'exit'].includes(direction) || this.annexTransitionV71) return null;
+    if (this.npcAnnexDoorReservedV159?.(annexId)) {
+      this.hubDoorBlockedV142 = { annexId, direction, remaining: 1.2 };
+      this.statusKey = ''; this.emitStatus(); return null;
+    }
     if (annex.id === SHIP_PORT_ANNEX_V87.id && direction === 'enter'
       && (!canAccessPortCounterV87(this.npcRoutineContextV62?.save)
         || getShipPortSafetyCodeV87(this.npcRoutineContextV62?.save, { careReady: true, manifestReady: true }))) {

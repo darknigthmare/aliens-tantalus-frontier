@@ -13,6 +13,7 @@ import {
 import { restoreMissionInsertionV62, serializeMissionInsertionV62 } from './mission-insertion-v62.js';
 import { normalizeHubVentStateV62 } from './hub-v62-runtime.js';
 import { normalizeNpcCirculationV158 } from './npc-circulation-v158.js';
+import { normalizeNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
 import {
   NARRATIVE_COLLECTABLES_V68,
   NARRATIVE_OPERATION_V68,
@@ -304,6 +305,7 @@ export function createDefaultSave(profile = 1) {
       dialogueMemory: normalizeDialogueMemoryV62(),
       npcRoutineState: normalizeNpcRoutineStateV62(),
       npcCirculationV158: normalizeNpcCirculationV158(),
+      npcAnnexCirculationV159: normalizeNpcAnnexCirculationV159(),
       commercialV71: createHubCommercialStateV71(),
       annexOperationsV71: createHubAnnexOperationsV71(),
       pendingModuleActionV71: null,
@@ -2110,6 +2112,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.dialogueMemory = dialogueHub.dialogueMemory;
   migrated.hub.npcRoutineState = dialogueHub.npcRoutineState;
   migrated.hub.npcCirculationV158 = normalizeNpcCirculationV158(hub.npcCirculationV158);
+  migrated.hub.npcAnnexCirculationV159 = normalizeNpcAnnexCirculationV159(hub.npcAnnexCirculationV159);
   const commercialV71 = hub.hubCommercialV71 ?? hub.commercialV71 ?? hub.hubExpansionV71;
   migrated.hub.commercialV71 = sanitizeHubCommercialStateV71(commercialV71);
   migrated.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(hub.annexOperationsV71);

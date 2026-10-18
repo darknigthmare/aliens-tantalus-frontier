@@ -1,0 +1,2372 @@
+{
+  "schema": 159,
+  "scope": "consulted-identity-design-and-lore-not-motion-certification",
+  "sourceEvidenceFrozenAt": "2026-10-18T07:48:22.086868+00:00",
+  "provenanceInputsSha256": {
+    "structuredEvidence": "633674a0c5442613588ffc274709172b7faf41570ae15e058d2e414428e24c44",
+    "mapping": "451697f0d38cc80b67e238052aff33efe1aaadf142e6a5fc2a695263d1a9d71d",
+    "combinedReferenceWorkbook": "7cc957f69cf22a67ac09db64e1e0f57b67507e1fc0266a4591e343c84f04d877",
+    "combinationProof": "b6e77801092a8398e97ccacaef8fdc4c618926bc872155cb8f1cf7b37f884174"
+  },
+  "counts": {
+    "htmlPagesRecovered": 11,
+    "publicProjectJsonRecovered": 2,
+    "officialImagesRecoveredAndViewed": 2,
+    "totalRecoveredSources": 15,
+    "httpContentUnavailable": 3,
+    "cdnImageRequestsBlocked": 4,
+    "exactAnimationReferencesRecovered": 0,
+    "canon1to1Closures": 0,
+    "missingUserDlcArchivesRecovered": 0
+  },
+  "mappingRows": 96,
+  "inheritedTaskRows": 68,
+  "sources": [
+    {
+      "id": "V159-REF-001",
+      "title": "Aliens: Fireteam Elite",
+      "authorPublisher": "Cold Iron Studios / official Aliens: Fireteam Elite site",
+      "url": "https://www.aliensfireteamelite.com/en/",
+      "consultedAt": "2026-10-18T07:37:40.412148+00:00",
+      "httpStatus": 200,
+      "contentSha256": "762d7bd7c455435dab56d7ea4471cd574bc3878feeb7a7eddae3a48c1927ac9f",
+      "evidenceScope": "identity and high-level game design",
+      "contribution": "Official overview of the launch-era game roster, cooperative context and classes. Counts are not a complete current expansion roster.",
+      "locator": "About / Survive the Hive",
+      "limitations": "No per-enemy choreography, frame counts, full DLC archive, or costume-specific film authenticity.",
+      "provenance": "game-official-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-002",
+      "title": "RELEASE NOTES | Aliens Fireteam Elite",
+      "authorPublisher": "Cold Iron Studios / official release notes",
+      "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+      "consultedAt": "2026-10-18T07:39:51.046186+00:00",
+      "httpStatus": 200,
+      "contentSha256": "8f6b7fb64cb00ac2bf718ecf2fcef44b65b38f1ada852607b00791868f6a948a",
+      "evidenceScope": "capability / patch behavior",
+      "contribution": "Official acknowledgement of a grapple mechanic and implementation corrections. Prowler stumble behavior is also present in text.",
+      "locator": "Enemies / balance and bug-fix notes",
+      "limitations": "Does not give a full Prowler animation cycle, victim pin geometry, frame timing or per-species choreography.",
+      "provenance": "game-official-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-003",
+      "title": "Pathogen Deep Dive: An Exhilarating New Story | Aliens Fireteam Elite",
+      "authorPublisher": "Cold Iron Studios; statements credited to Craig Zinkievich, Matt Highison and Chris Matz",
+      "url": "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+      "consultedAt": "2026-10-18T07:39:51.046530+00:00",
+      "httpStatus": 200,
+      "contentSha256": "48cf8b7b7703729283ad0943e43dc9be29621ca019f2b4b216aff2677743d8e9",
+      "evidenceScope": "identity / named capabilities / art-direction commentary",
+      "contribution": "Named Brute ground impact/shockwaves and Queen clustered acid shots; descriptions of Pathogen Runner, Blight and the campaign are present. The same article classifies4C2 Astra as Rifle/Auto Rifle and describes repeating3-round bursts; this does not imply a current catalogue bug.",
+      "locator": "Pathogen Brute / Pathogen Queen",
+      "limitations": "No measured startup, active/recovery timing, projectile count or canonical2D choreography. Existing arena tuning remains simulation.",
+      "provenance": "game-official-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-004",
+      "title": "Crossplay, A New Game Mode, New Progression System & More Coming July 26th! | Aliens Fireteam Elite",
+      "authorPublisher": "Cold Iron Studios / official Season4 announcement",
+      "url": "https://www.aliensfireteamelite.com/en/community/afe-season-4-announce/",
+      "consultedAt": "2026-10-18T07:39:51.047026+00:00",
+      "httpStatus": 200,
+      "contentSha256": "b013a8c4a0d37833df17903f68d75b7d4c9979167474b5fe0e50ccfa2a3165bf",
+      "evidenceScope": "cosmetics taxonomy / weapon names",
+      "contribution": "Official cosmetic reward categories and named Season4 weapons; supports separating FTE cosmetics from1986 film costumes. The page names APEsuit Mk.3 and Seegson Maintenance overalls and the four listed Season4 weapons; names alone do not verify every visual detail.",
+      "locator": "Prestige / New Weapons",
+      "limitations": "Does not identify every outfit in the project, prove a film-exact costume or provide a modular game sprite atlas.",
+      "provenance": "game-official-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-005",
+      "title": "ArtStation - Guardian Version.02",
+      "authorPublisher": "Raymond Sebastien, credited by the project OpenGraph author/title",
+      "url": "https://www.artstation.com/artwork/g0Va4P",
+      "consultedAt": "2026-10-18T07:39:52.180824+00:00",
+      "httpStatus": 200,
+      "contentSha256": "12c8d80269770773cc8fa3a6ce5f822cb7ed98fd95a875ac0371196ab09b7607",
+      "evidenceScope": "production concept identity / creator lore commentary",
+      "contribution": "Creator-authored Guardian Version.02 concept identity; description names Marlow, Darwin Era and Embryostatis. This is separate from the Fanatics/Androids/Commando project.",
+      "locator": "meta description / og:title Guardian Version.02, Raymond Sebastien",
+      "limitations": "Creator concept and final-design wording do not establish the final animated game model, attack timing, physical size or permission to reuse artwork. Full visual assets not certified by HTML metadata.",
+      "provenance": "creator-hosted-primary-candidate",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-006",
+      "title": "ArtStation - Ennemies for Aliens dark descent : The Fanatics, Androids, Weyland yutani Commando",
+      "authorPublisher": "Raymond Sebastien, credited by the project OpenGraph author/title",
+      "url": "https://www.artstation.com/artwork/JvgEP0",
+      "consultedAt": "2026-10-18T07:39:52.467292+00:00",
+      "httpStatus": 200,
+      "contentSha256": "d8bb9b34ea2026e6233fcb2df142f9490b5d9e667b4cc79118b8709f76c94706",
+      "evidenceScope": "production concept identity / corpus distinction",
+      "contribution": "Creator project covers a selection of Fanatics concepts and names Androids/Weyland-Yutani Commando in its title. It cannot be silently substituted for Guardian Version.02.",
+      "locator": "meta description / og:title Fanatics, Androids, Weyland yutani Commando",
+      "limitations": "No specific concept sheet was visually re-reviewed through the HTML metadata alone; it does not automatically certify each roster row or final animation.",
+      "provenance": "creator-hosted-primary-candidate",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-007",
+      "title": "Tindalos Interactive Aliens: Dark Descent Art Blast - ArtStation Magazine",
+      "authorPublisher": "Daniel Wade / ArtStation Magazine; showcase credits Tindalos Interactive artists",
+      "url": "https://magazine.artstation.com/2023/07/tindalos-interactive-aliens-dark-descent-art-blast/",
+      "consultedAt": "2026-10-18T07:39:52.512868+00:00",
+      "httpStatus": 200,
+      "contentSha256": "d3faca2a5061207234e3ea35515d7e43d7980db22bacddba9c9257ed43739180",
+      "evidenceScope": "production credit / concept provenance",
+      "contribution": "Production showcase independently credits Raymond Sebastien as a character concept artist for Aliens: Dark Descent.",
+      "locator": "Concept Artists section",
+      "limitations": "Showcase credit is not a frame-level animation reference, a complete final model roster, a measured size chart or a reuse licence.",
+      "provenance": "production-artist-showcase-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-008",
+      "title": "Aliens: Dark Descent - Focus Entertainment Facebook Twitter Instagram Facebook Twitter Youtube Twitch Instagram",
+      "authorPublisher": "Focus Entertainment / Tindalos Interactive /20th Century Studios",
+      "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+      "consultedAt": "2026-10-18T07:39:52.728105+00:00",
+      "httpStatus": 200,
+      "contentSha256": "21a9130573d9a329428a4dc71d37ff4f97ca9fa1da33231110afb95b211e5d9a",
+      "evidenceScope": "game identity / publisher provenance",
+      "contribution": "Publisher-hosted game identity and developer/publisher credits.",
+      "locator": "Official game page legal credit",
+      "limitations": "The retrieved server-rendered page contains limited descriptive text. No custom Blackout/Earth DLC archive or complete faction animation corpus is supplied.",
+      "provenance": "publisher-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-009",
+      "title": "Alien: Isolation™ - The Collection - manual",
+      "authorPublisher": "Feral Interactive; original game by Creative Assembly / SEGA",
+      "url": "https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/",
+      "consultedAt": "2026-10-18T07:39:52.784320+00:00",
+      "httpStatus": 200,
+      "contentSha256": "b34ad1fbd9b69888fea05ee886fdf95278ce8018654c79c06ea0b5e06b79cd22",
+      "evidenceScope": "game/manual identity / qualitative stealth behavior",
+      "contribution": "Official Isolation manual documents corridors/ducts, crouching, concealment and noise mechanics in that game.",
+      "locator": "Navigating the Sevastopol / stealth",
+      "limitations": "This is Alien: Isolation, not Alien: Blackout. It does not recover the missing user-provided Blackout/Earth DLC archives or establish their contents.",
+      "provenance": "publisher-manual-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-010",
+      "title": "Aliens | 20th Century Studios",
+      "authorPublisher": "20th Century Studios",
+      "url": "https://www.20thcenturystudios.com/movies/aliens",
+      "consultedAt": "2026-10-18T07:39:53.205983+00:00",
+      "httpStatus": 200,
+      "contentSha256": "29ac5109cfbdb1fcf53b9acb7e7a41e03a91ba6a2415ad51b5732be2c927c581",
+      "evidenceScope": "film identity / cast credit / published image metadata",
+      "contribution": "Official film identity, release date and cast credit list. The page also names a loader/Queen hero image in its alt text.",
+      "locator": "Film metadata / synopsis / cast",
+      "limitations": "The cast list does not map each actor to a role in the retrieved text and does not certify each Hicks/Hudson/Vasquez modular piece. Remote image/video frames were not inferred from alt text.",
+      "provenance": "film-studio-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-011",
+      "title": "Characters - Raymond SEBASTIEN Character Concept Artist",
+      "authorPublisher": "Raymond Sebastien / current artist site",
+      "url": "https://raymondsebastien.com/characters/",
+      "consultedAt": "2026-10-18T07:39:52.177917+00:00",
+      "httpStatus": 200,
+      "contentSha256": "0447fa116399b05a8b48e46cc671b370f2a68df52c451ae8c6a58c4bcda3846e",
+      "evidenceScope": "creator attribution / current portfolio navigation",
+      "contribution": "Current artist portfolio navigation and attribution are accessible; a Marlow entry is present. Historical/projects/g0Va4P andJvgEP0 URLs remain404.",
+      "locator": "meta description / current Characters page",
+      "limitations": "Current portfolio page does not itself replace the missing historical concept pages or supply a complete Dark Descent model/animation archive.",
+      "provenance": "creator-primary",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-012",
+      "title": "Guardian Version.02 — public project metadata",
+      "authorPublisher": "Raymond Sebastien (sebray)",
+      "url": "https://www.artstation.com/projects/g0Va4P.json",
+      "consultedAt": "2026-10-18T07:43:13.058039+00:00",
+      "httpStatus": 200,
+      "contentSha256": "43411c6a10c7c14aa4cd6845c1f266474cba6379818ac786a99f4a58ede3d5d3",
+      "evidenceScope": "creator project identity / exact asset index / captioned concept-versus-in-game-still distinction",
+      "contribution": "Public project metadata identifies a Guardian final-model sheet and a separate in-game Guardian still credited to Tamás Kerti; it also lists attitude/scene concept art.",
+      "locator": "assets64990631 and64995302; project published_at2023-07-13T08:27:29.169-05:00",
+      "limitations": "The four ArtStation CDN image requests are still CONNECT403. Captions were read, but their image pixels were not viewed or certified and no motion cycle/timecode follows from them.",
+      "provenance": "creator-public-project-data",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-013",
+      "title": "Fanatics, Androids, Weyland yutani Commando — public project metadata",
+      "authorPublisher": "Raymond Sebastien (sebray)",
+      "url": "https://www.artstation.com/projects/JvgEP0.json",
+      "consultedAt": "2026-10-18T07:43:13.058565+00:00",
+      "httpStatus": 200,
+      "contentSha256": "844f9c072d2342c95d24af0c642c259de8fdaea89c3160b97e8f06297387af41",
+      "evidenceScope": "creator concept taxonomy / rejected-versus-final identity distinction",
+      "contribution": "The public asset index distinguishes rejected GuardianV01 research, Fanatics sketches, Weyland-Yutani Commando concept and AndroidDaniel head/body concepts. It must not be collapsed into GuardianV02.",
+      "locator": "assets65092845,64990015,65093027; project published_at2023-07-17T07:08:55.328-05:00",
+      "limitations": "Asset65092845 is explicitly a failed first Guardian version. CDN images remain unavailable; neither this index nor a title certifies a final animated Android/Commando game model.",
+      "provenance": "creator-public-project-data",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-014",
+      "title": "Official Pathogen Queen reconnaissance reference image",
+      "authorPublisher": "Cold Iron Studios /20th Century Studios",
+      "url": "https://www.aliensfireteamelite.com/images/uploads/746bcc8d8ec4478b41ede93c4e7c2205.jpg",
+      "consultedAt": "2026-10-18T07:43:13.058927+00:00",
+      "httpStatus": 200,
+      "contentSha256": "6abdc7d38e077f23ba6c18ae97e2f83c84a2da1937ca3a0f8af5d665c9c3efa5",
+      "evidenceScope": "official static image identity / silhouette reference / approximate diegetic size",
+      "contribution": "The actually viewed official sheet names PATHOGENQUEEN, shows a heavy external carapace and describes approximate4.25m height in its diegetic reconnaissance panel. The stated stance is hunched; this applies only to that variant.",
+      "locator": "Image embedded after PathogenQueen paragraph;1920x1080 image directly viewed through view_image",
+      "limitations": "The approximate in-universe reconnaissance note is not a precise physical measurement, orthographic model, collision specification or animation. It must not set arena balance or other Queen variants by inference.",
+      "provenance": "official-published-image",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    },
+    {
+      "id": "V159-REF-015",
+      "title": "Official Pathogen weapon reference grid",
+      "authorPublisher": "Cold Iron Studios /20th Century Studios",
+      "url": "https://www.aliensfireteamelite.com/images/uploads/7c1e86e6cde1368364bb3f0cdbeed260.jpg",
+      "consultedAt": "2026-10-18T07:43:13.059144+00:00",
+      "httpStatus": 200,
+      "contentSha256": "98a64bac9cbd09b69e9137b4c1a22b46e9e58d215b78e93e6cf95c579095912d",
+      "evidenceScope": "official weapon identity / static silhouette comparison",
+      "contribution": "All four printed weapon names and distinct still silhouettes are actually readable in the downloaded official image. These correspond to project IDs160,161,172,173.",
+      "locator": "Official article weapon grid;1920x1080 image directly viewed through view_image",
+      "limitations": "This image does not establish dimensions, grip/muzzle pivots, reload animation, rates, ammunition, full material accuracy or1:1 generated sprites.",
+      "provenance": "official-published-image",
+      "animationReference": false,
+      "canonExact": false,
+      "permittedGameAssetReuseEstablished": false
+    }
+  ],
+  "mappings": [
+    {
+      "id": "prowler::intro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Intro standard",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Entrée V155 conservée sur le rig natif. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::intro-rival",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Intro de rivalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Réponse à la famille effective de l’adversaire, y compris hybride, pendant sa présentation ; aucune rivalité historique affirmée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::outro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Outro",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::win-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Victoire de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Réaction V155 réversible de victoire de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::lose-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Défaite de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Récupération V155 réversible de défaite de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::win-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Victoire finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Pose V155 de victoire terminale conservée ; aucun second résultat ni paiement. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::lose-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Défaite finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Pose V155 de défaite terminale conservée ; ce n’est pas une chute complète. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::draw",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Égalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Réaction sans vainqueur sur égalité réelle de manche ou de match ; ne force aucun résultat. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::taunt",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Provocation",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Commande T ou bouton DÉFI pendant le combat ; le bouton rend le focus au canvas quand le combat accepte les commandes. Annulation par déplacement, attaque, garde ou impact. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler::rematch",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Début de manche suivante",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Reprise visuelle pendant le décompte existant des manches suivantes, sans nouvel équipement ni changement physique. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-01",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Références de poses et timecodes",
+      "recordedState": "À relever",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-02",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Rig et points de contact",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-03",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Préparation / capture",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Anticipation du bond adaptée.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-04",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Saisie articulée",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Réaction de corps debout ; mise au sol et raccords entre les deux corps à produire.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-05",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Résistance / dégagement",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Réaction au progrès réel du dégagement ; chorégraphie complète à produire.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-06",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Interruption / récupération",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Récupération courte déclenchée par la libération réelle, sans rejouer une attaque.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-07",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Revue deux orientations et tailles",
+      "recordedState": "À valider",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Mathématiques et deux orientations couvertes par tests ; validation artistique finale et 1:1 encore ouverte.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::intro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Intro standard",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Entrée V155 conservée sur le rig natif. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::intro-rival",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Intro de rivalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Réponse à la famille effective de l’adversaire, y compris hybride, pendant sa présentation ; aucune rivalité historique affirmée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::outro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Outro",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::win-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Victoire de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Réaction V155 réversible de victoire de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::lose-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Défaite de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Récupération V155 réversible de défaite de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::win-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Victoire finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Pose V155 de victoire terminale conservée ; aucun second résultat ni paiement. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::lose-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Défaite finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Pose V155 de défaite terminale conservée ; ce n’est pas une chute complète. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::draw",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Égalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Réaction sans vainqueur sur égalité réelle de manche ou de match ; ne force aucun résultat. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::taunt",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Provocation",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Commande T ou bouton DÉFI pendant le combat ; le bouton rend le focus au canvas quand le combat accepte les commandes. Annulation par déplacement, attaque, garde ou impact. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando::rematch",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Début de manche suivante",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Reprise visuelle pendant le décompte existant des manches suivantes, sans nouvel équipement ni changement physique. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-08",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Références de poses et timecodes",
+      "recordedState": "À relever",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-09",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Rig et points de contact",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-10",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Préparation / capture",
+      "recordedState": "Implémenté (adaptation native)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Réception bornée sur la plaque native exacte ; absorption puis raccord à la prise existante. Chorégraphie de simulation, sans mise au sol complète, pin ou référence de mouvement canonique.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-11",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Saisie articulée",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Abaissement articulé borné sur la cible native, pieds et semelles fixes, cage des deux jambes ; ni corps couché ni pin complet. Dessins, mise au sol et raccords complets restent ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-12",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Résistance / dégagement",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "La résistance conserve l’abaissement de la cible et répond au progrès réel du dégagement. Chorégraphie de corps complète et validation artistique encore ouvertes.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-13",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Interruption / récupération",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Retour continu depuis l’abaissement réellement atteint lors de la libération. Récupération technique adaptée ; aucun nouvel événement de combat ni certification canonique.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-14",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Revue deux orientations et tailles",
+      "recordedState": "À valider",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Supports, maillage et abaissement contrôlés dans les deux orientations par les tests techniques. Revue artistique finale et relevés 1:1 toujours ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::intro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Intro standard",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Entrée V155 conservée sur le rig natif. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::intro-rival",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Intro de rivalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Réponse à la famille effective de l’adversaire, y compris hybride, pendant sa présentation ; aucune rivalité historique affirmée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::outro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Outro",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::win-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Victoire de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Réaction V155 réversible de victoire de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::lose-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Défaite de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Récupération V155 réversible de défaite de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::win-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Victoire finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Pose V155 de victoire terminale conservée ; aucun second résultat ni paiement. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::lose-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Défaite finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Pose V155 de défaite terminale conservée ; ce n’est pas une chute complète. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::draw",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Égalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Réaction sans vainqueur sur égalité réelle de manche ou de match ; ne force aucun résultat. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::taunt",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Provocation",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Commande T ou bouton DÉFI pendant le combat ; le bouton rend le focus au canvas quand le combat accepte les commandes. Annulation par déplacement, attaque, garde ou impact. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian::rematch",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Début de manche suivante",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Reprise visuelle pendant le décompte existant des manches suivantes, sans nouvel équipement ni changement physique. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-15",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Références de poses et timecodes",
+      "recordedState": "À relever",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-16",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Rig et points de contact",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-17",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Préparation / capture",
+      "recordedState": "Implémenté (adaptation native)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Réception bornée sur la plaque native exacte ; absorption puis raccord à la prise existante. Chorégraphie de simulation, sans mise au sol complète, pin ou référence de mouvement canonique.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-18",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Saisie articulée",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Abaissement articulé borné sur la cible native, pieds et semelles fixes, cage des deux jambes ; ni corps couché ni pin complet. Dessins, mise au sol et raccords complets restent ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-19",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Résistance / dégagement",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "La résistance conserve l’abaissement de la cible et répond au progrès réel du dégagement. Chorégraphie de corps complète et validation artistique encore ouvertes.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-20",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Interruption / récupération",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Retour continu depuis l’abaissement réellement atteint lors de la libération. Récupération technique adaptée ; aucun nouvel événement de combat ni certification canonique.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-21",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Revue deux orientations et tailles",
+      "recordedState": "À valider",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Supports, maillage et abaissement contrôlés dans les deux orientations par les tests techniques. Revue artistique finale et relevés 1:1 toujours ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::intro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Intro standard",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Entrée V155 conservée sur le rig natif. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::intro-rival",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Intro de rivalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Réponse à la famille effective de l’adversaire, y compris hybride, pendant sa présentation ; aucune rivalité historique affirmée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::outro",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Outro",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::win-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Victoire de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Réaction V155 réversible de victoire de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::lose-r1",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Défaite de première manche",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Récupération V155 réversible de défaite de manche conservée. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::win-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Victoire finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Pose V155 de victoire terminale conservée ; aucun second résultat ni paiement. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::lose-final",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Défaite finale",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Pose V155 de défaite terminale conservée ; ce n’est pas une chute complète. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::draw",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Égalité",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Réaction sans vainqueur sur égalité réelle de manche ou de match ; ne force aucun résultat. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::taunt",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Provocation",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Commande T ou bouton DÉFI pendant le combat ; le bouton rend le focus au canvas quand le combat accepte les commandes. Annulation par déplacement, attaque, garde ou impact. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist::rematch",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Début de manche suivante",
+      "recordedState": "Raccordé techniquement ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Reprise visuelle pendant le décompte existant des manches suivantes, sans nouvel équipement ni changement physique. Adaptation de simulation ; dessins complets, audio et relevés d’œuvre restent ouverts. Aucun lot artistique clos ni certification 1:1.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-22",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Références de poses et timecodes",
+      "recordedState": "À relever",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Coordonnées mesurées sur le sprite du projet ; référence d’œuvre et timecodes non relevés.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-23",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Rig et points de contact",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Rig exact, maillage, points de contact et appuis ; source native inchangée. Validation canonique non acquise.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-24",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Préparation / capture",
+      "recordedState": "Implémenté (adaptation native)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Réception bornée sur la plaque native exacte ; absorption puis raccord à la prise existante. Chorégraphie de simulation, sans mise au sol complète, pin ou référence de mouvement canonique.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-25",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Saisie articulée",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Abaissement articulé borné sur la cible native, pieds et semelles fixes, cage des deux jambes ; ni corps couché ni pin complet. Dessins, mise au sol et raccords complets restent ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-26",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Résistance / dégagement",
+      "recordedState": "Partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "La résistance conserve l’abaissement de la cible et répond au progrès réel du dégagement. Chorégraphie de corps complète et validation artistique encore ouvertes.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-27",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Interruption / récupération",
+      "recordedState": "Implémenté (adaptation)",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Retour continu depuis l’abaissement réellement atteint lors de la libération. Récupération technique adaptée ; aucun nouvel événement de combat ni certification canonique.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "ART153-28",
+      "kind": "Tâche Excel héritée",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Revue deux orientations et tailles",
+      "recordedState": "À valider",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Supports, maillage et abaissement contrôlés dans les deux orientations par les tests techniques. Revue artistique finale et relevés 1:1 toujours ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "prowler",
+      "kind": "Identité roster existante",
+      "fighterId": "prowler",
+      "sourceIds": [
+        "V159-REF-001",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "S08"
+      ],
+      "need": "Référence de l’identité exacte, sans fusion de variantes",
+      "recordedState": "Art adapté ; aucune fidélité1:1 approuvée",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "AFE1 identifié ; notes officielles attestent le mécanisme général de grapple. Pas de clipProwler complet mesuré.",
+      "remaining": "Édition/build ou concept exact, page/timecodes, capture approuvée, dessins cachés et revue comparative ; art complet et certification 1:1 ouverts.",
+      "projectFile": "/assets/user/castes-v87/game_afe_prowler.png",
+      "projectImageSha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-wy-commando",
+      "kind": "Identité roster existante",
+      "fighterId": "import-game-dd-wy-commando",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H17"
+      ],
+      "need": "Référence de l’identité exacte, sans fusion de variantes",
+      "recordedState": "Art adapté ; aucune fidélité1:1 approuvée",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02.",
+      "remaining": "Édition/build ou concept exact, page/timecodes, capture approuvée, dessins cachés et revue comparative ; art complet et certification 1:1 ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-wy-commando.png",
+      "projectImageSha256": "1bcafd4c6b5e06611d0184c317f76422749d43e4b97a14f39316eef3eca3c012",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "import-game-dd-guardian",
+      "kind": "Identité roster existante",
+      "fighterId": "import-game-dd-guardian",
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-012",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H22"
+      ],
+      "need": "Référence de l’identité exacte, sans fusion de variantes",
+      "recordedState": "Art adapté ; aucune fidélité1:1 approuvée",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Guardian Version.02 : planche du modèle retenu (asset64990631) et illustration présentée comme issue du jeu, réalisée par Tamás Kerti (64995302). Métadonnées seulement ; images ArtStation CDN non revues.",
+      "remaining": "Édition/build ou concept exact, page/timecodes, capture approuvée, dessins cachés et revue comparative ; art complet et certification 1:1 ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v106/game-dd-guardian.png",
+      "projectImageSha256": "9c78992ce49b080c73fef68a9813a1717970b5dae4be4e03d409a9876169d1c8",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dd-darwin-era-cultist",
+      "kind": "Identité roster existante",
+      "fighterId": "dd-darwin-era-cultist",
+      "sourceIds": [
+        "V159-REF-006",
+        "V159-REF-013",
+        "V159-REF-007"
+      ],
+      "historicalSourceIds": [
+        "H40",
+        "H41"
+      ],
+      "need": "Référence de l’identité exacte, sans fusion de variantes",
+      "recordedState": "Art adapté ; aucune fidélité1:1 approuvée",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Corpus Fanatics/Androids/Commando : croquis Fanatics64738238 et Commando65093027. Contient aussi GuardianV01 abandonné65092845, jugé trop mutant par l’auteur, distinct de Version.02. La figure précise du PNG projet n’est pas réévaluée visuellement dans cette reprise.",
+      "remaining": "Édition/build ou concept exact, page/timecodes, capture approuvée, dessins cachés et revue comparative ; art complet et certification 1:1 ouverts.",
+      "projectFile": "/assets/openai/sprites/static-game-v118/darwin-era-cultist.png",
+      "projectImageSha256": "63ad74726db54f2943fed909f0027cb5d489a5f4ca58484b41871140219fa182",
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "drive-v123-fte-pathogen-brute-profile-v13",
+      "kind": "Identité roster existante",
+      "fighterId": "drive-v123-fte-pathogen-brute-profile-v13",
+      "sourceIds": [
+        "V159-REF-003"
+      ],
+      "historicalSourceIds": [
+        "S09"
+      ],
+      "need": "Pathogen Brute",
+      "recordedState": "Source d’identité/capacité seulement",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Identité nommée et capacités qualitatives du texte officiel ; aucun timing mesuré.",
+      "remaining": "Atlas/mouvements, comparaison au PNG projet, animation et approbation1:1 restent ouverts.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "drive-v123-fte-pathogen-queen-right-v13",
+      "kind": "Identité roster existante",
+      "fighterId": "drive-v123-fte-pathogen-queen-right-v13",
+      "sourceIds": [
+        "V159-REF-003",
+        "V159-REF-014"
+      ],
+      "historicalSourceIds": [
+        "S09"
+      ],
+      "need": "Pathogen Queen",
+      "recordedState": "Source d’identité/capacité seulement",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Identité nommée et capacités qualitatives du texte officiel ; aucun timing mesuré. Image officielle revue : taille indiquée approximativement4,25m en posture voûtée ; indication diégétique approximative, sans redimensionnement du runtime.",
+      "remaining": "Atlas/mouvements, comparaison au PNG projet, animation et approbation1:1 restent ouverts.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "drive-v123-fte-pathogen-runner-nodules-v13",
+      "kind": "Identité roster existante",
+      "fighterId": "drive-v123-fte-pathogen-runner-nodules-v13",
+      "sourceIds": [
+        "V159-REF-003"
+      ],
+      "historicalSourceIds": [
+        "S09"
+      ],
+      "need": "Pathogen Runner",
+      "recordedState": "Source d’identité/capacité seulement",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Identité nommée et capacités qualitatives du texte officiel ; aucun timing mesuré.",
+      "remaining": "Atlas/mouvements, comparaison au PNG projet, animation et approbation1:1 restent ouverts.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "franchise-fireteam-ape-mk3",
+      "kind": "Costume existant — nom prouvé",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "Registre franchiseV119"
+      ],
+      "need": "APEsuit Mk.3",
+      "recordedState": "Atlas dédié manquant ; non équipable",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom de la tenue dans le texte officiel Saison4. Aucun pixel modulaire ni validation de costume filmique produit.",
+      "remaining": "Atlas dédiés, états utiles, pivots, alpha, compatibilité des opérateurs et recette visuelle restent à produire.",
+      "projectFile": "src/franchise-costumes-v119.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "franchise-fireteam-seegson-maintenance",
+      "kind": "Costume existant — nom prouvé",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "Registre franchiseV119"
+      ],
+      "need": "Seegson Maintenance overalls",
+      "recordedState": "Atlas dédié manquant ; non équipable",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom de la tenue dans le texte officiel Saison4. Aucun pixel modulaire ni validation de costume filmique produit.",
+      "remaining": "Atlas dédiés, états utiles, pivots, alpha, compatibilité des opérateurs et recette visuelle restent à produire.",
+      "projectFile": "src/franchise-costumes-v119.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-163-svat-92-sokol",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "SVAT-92 Sokol",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom dans le texte officiel ; aucun relevé animé.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-additions-v121.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-165-m51-breaching-scattergun",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "M51 Breaching Scattergun",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom dans le texte officiel ; aucun relevé animé.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-additions-v121.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-166-p649-hel",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "P.649 HEL",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom dans le texte officiel ; aucun relevé animé.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-additions-v121.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-167-dkt-59-misha",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "DKT-59 Misha",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom dans le texte officiel ; aucun relevé animé.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-additions-v121.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-160-eds-93-zadak",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-003",
+        "V159-REF-015"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "EDS-93 Zadak Plasma Discharger",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom et silhouette dans la grille officielle réellement revue ; pas de mouvement.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-additions-v121.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-161-thunderbolt-mk2",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-003",
+        "V159-REF-015"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "Thunderbolt Mk.2 Autocannon",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom et silhouette dans la grille officielle réellement revue ; pas de mouvement.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-additions-v121.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-172-lem-stg24-storm-rifle",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-003",
+        "V159-REF-015"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "LEM StG24 Storm Rifle",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom et silhouette dans la grille officielle réellement revue ; pas de mouvement.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-weapons-v122.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-173-u1a2-gl-conversion",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-003",
+        "V159-REF-015"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "U1A2 GL Conversion",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Nom et silhouette dans la grille officielle réellement revue ; pas de mouvement.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-weapons-v122.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "weapon-174-4c2-astra",
+      "kind": "Arme existante — identité prouvée",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-003"
+      ],
+      "historicalSourceIds": [
+        "RegistresV121/V122"
+      ],
+      "need": "4C2 Astra",
+      "recordedState": "static-pose-action-animation-missing",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Texte officiel : Rifle, Auto Rifle / repeating3-round burst. CatalogueV122 déjà rifle/burst ; ancienne tableV120 classehandgun : écart documentaire, pas défaut de gameplay démontré.",
+      "remaining": "Mouvement complet et comparaison1:1 non acquis ; statistiques et comportement de simulation conservés.",
+      "projectFile": "src/weapon-catalog-weapons-v122.js",
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "trials-presentation-unmapped",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-006",
+        "V159-REF-012",
+        "V159-REF-013",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Conserver les 40 raccordements et terminer leur art",
+      "recordedState": "40 raccordements techniques conservés ; art partiel",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "La sortie spatiale est maintenant suivie séparément sur quatre rigs ; les 40 séquences/200 clés héritées ne changent pas. Dessins, audio et revue restent ouverts.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "trials-capture-human",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-006",
+        "V159-REF-012",
+        "V159-REF-013",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Continuer la capture après les trois réceptions humaines natives",
+      "recordedState": "Prépublication : ART153-10/17/24 en adaptation native ; chorégraphie de simulation",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "Les trois réceptions visent des PNG natifs exacts ; leur chorégraphie demeure une simulation. Mise au sol complète, pin, corpus artistique et certification 1:1 restent ouverts.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "trials-reference-and-art",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-006",
+        "V159-REF-012",
+        "V159-REF-013",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Compléter dessins, audio et preuves d’œuvre des quatre identités",
+      "recordedState": "Ouvert artistiquement ; zéro clôture et zéro certification 1:1",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "Le registre 189 IDs distingue image projet et preuve d’œuvre. Les 65 fiches V146 restent des consultations historiques, sans nouvelle consultation attribuée à V158.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "trials-roster-extension",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-006",
+        "V159-REF-012",
+        "V159-REF-013",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Étendre les rigs et mouvements au reste du roster",
+      "recordedState": "185 identités hors de ce lot de rigs/séquences",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "189 IDs conservés ; quatre rigs et 40 séquences cumulatives V156. Les 185 autres gardent leurs mécaniques précédentes, sans ces rigs et séquences.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "trials-remaining-pilot-art",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-005",
+        "V159-REF-006",
+        "V159-REF-012",
+        "V159-REF-013",
+        "V159-REF-002"
+      ],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Produire clips, locomotion, finitions des pilotes V148/V151/V152",
+      "recordedState": "Ouvert / recouvrement historique",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "35 lots V148 et 28 lots V151 ne sont pas clos par les correctifs de gameplay; les versions du suivi se recouvrent. Ne pas additionner les tâches comme des demandes nouvelles.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "costume-art",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [
+        "V159-REF-004"
+      ],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Conserver le kit colonial disponible et produire les atlas franchise manquants",
+      "recordedState": "Prépublication : warmup des textures borné à 16 ; 30 atlas franchise restent absents",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "Le graphe courant des actions, transits, opérateurs et pickup est prioritaire ; le warmup sélectionné du kit, du fallback et des poses futures utilise seulement les places restantes jusqu’à 16. Retain/start restent synchrones sans attendre le décodage ; aucune garantie pendant chargement, échec d’image ou pression maximale. Aucun nouveau pixel ni canon.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "excel-identity-and-motion",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Résoudre identités ambiguës et animations du pont Excel",
+      "recordedState": "Ne pas réouvrir les images fixes déjà livrées",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "Harpoon prêt V63. 4 entrées d’armes et3 véhicules du pont conservent une réserve; certaines illustrations natives V112+ existent seulement en pose fixe.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "master-encyclopedia-source",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Récupérer le classeur brut sans perdre les registres disponibles",
+      "recordedState": "Classeur brut absent ; métadonnées et catalogue du jeu disponibles",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Aucune archiveDLC ou fichierExcel brut récupéré. FeralIsolation ne prouve pasBlackout ; les imagesEarth présentes ne sont pas le DLC.",
+      "remaining": "Le pont Excel conserve 19 feuilles, les comptes 2363/2929 et 14 liens d’armes/3 de véhicules ; le catalogue du jeu contient 1329 entrées. Ce ne sont ni le fichier brut, ni la preuve d’un registre exhaustif de 2363 lignes récupéré.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "dlc-v10-sources",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Récupérer archives de DLC Blackout/Earth et sprites V10",
+      "recordedState": "Sources absentes",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Aucune archiveDLC ou fichierExcel brut récupéré. FeralIsolation ne prouve pasBlackout ; les imagesEarth présentes ne sont pas le DLC.",
+      "remaining": "Absentes du workspace restauré et des noms d’archives versionnées inspectés. Mentions de sauvegarde Blackout ne prouvent pas les contenus DLC.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    },
+    {
+      "id": "campaigns-not-playable",
+      "kind": "Priorité du suivi",
+      "fighterId": null,
+      "sourceIds": [],
+      "historicalSourceIds": [
+        "PrioritesV158"
+      ],
+      "need": "Finir les corpus et campagnes des opérations déjà accessibles",
+      "recordedState": "21 accès V131 conservés ; 20 adaptations partielles / une effective",
+      "recordedStateScope": "historical-prepublication-v158-mapping-not-current-delivery",
+      "contribution": "Ces consultations précisent la provenance et les identités seulement ; le statut du chantier V158 reste inchangé.",
+      "remaining": "Le Cocon Noir vise résine, coupe et libération dédiées. Cela ne clôt pas extended-survivor-campaign et ne change pas les 20 statuts partial / un effective.",
+      "projectFile": null,
+      "projectImageSha256": null,
+      "fullyArtClosed": false,
+      "approved1to1": false
+    }
+  ],
+  "limitations": [
+    "Les 15 contenus récupérés ne sont ni 15 animations ni 96 nouvelles identités : les 96 correspondances gardent leurs IDs distincts.",
+    "Les états des correspondances sont le relevé prépublication V158 historique ; ils ne remplacent pas la livraison V158 finale ni les états courants.",
+    "Les 65 fiches V146 restent des consultations historiques séparées ; elles ne sont pas requalifiées en nouvelles lectures V159.",
+    "Deux images officielles statiques ont été vues ; les légendes et index ArtStation récupérés ne prouvent pas les pixels des quatre images CDN bloquées.",
+    "Aucun métrage, timecode, relevé de pose approuvé, nouvelle permission de réutilisation, archive DLC/V10 ou classeur encyclopédie brut n’est obtenu.",
+    "Les notices ne reproduisent pas les pages sources ou leurs extraits ; les empreintes identifient les contenus réellement conservés."
+  ]
+}

@@ -4,6 +4,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { resolveAuditSourcesV159 } from './audit-succession-v159.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V158 = Object.freeze({
   'docs/forge/xeno-trials/V157-CONTINUATION.md': '7f6d2eb3537d9da61c9bc4397d91d84a78430aa9cb2ba6f0f7848a6f10e53017',
@@ -33,6 +34,9 @@ export function verifyAuditSuccessionV158(previous, current, readSource = readRe
   }
   assert.deepEqual(previous, anchored, 'Previous contract must be the anchored final V157 public record');
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
+  // V158's own pins and transitions stay historical. A later source is admitted
+  // only through its byte-anchored V158 predecessor and complete V159 bridge.
+  const effective = resolveAuditSourcesV159(current, readSource);
   assert.equal(keys(before).length, 31);
   assert.ok(after && keys(after).length >= 31);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V157 source omitted: ' + path);
@@ -40,7 +44,7 @@ export function verifyAuditSuccessionV158(previous, current, readSource = readRe
     assert.ok(/^src\/[a-zA-Z0-9._-]+\.js$/.test(path) || path === 'src/forge-editor-v130.css',
       'Source path outside the reviewed scope: ' + path);
     assert.ok(validHash(expected), 'Invalid source hash: ' + path);
-    assert.equal(sha(readSource(path)), expected, 'Current V158 source changed: ' + path);
+    assert.equal(sha(readSource(path)), effective[path], 'Current V158 source changed: ' + path);
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
