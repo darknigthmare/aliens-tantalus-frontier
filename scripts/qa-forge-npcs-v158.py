@@ -193,7 +193,13 @@ with sync_playwright() as p:
             upload(page, '#editor-import', bad, 'invalid-npc.json')
             page.locator('.forge-message-v130').get_by_text('apparence ou orientation invalide', exact=False).wait_for()
             check(kind + ': bad NPC import preserves the complete previously authored document', authored(page)==edited)
-            page.locator('#editor-save').click()
+            # setupEditor autosaves each committed authoring change. Observe its
+            # actual durable record rather than invoking a campaign save button.
+            page.wait_for_function('''()=>{const store=window.__ATF_V62__?.forgeSaveSystem,doc=window.__ATF_V51__?.editor?.model?.data;
+              if(!store?.lastWriteV130?.persisted||!doc)return false;
+              const saved=JSON.parse(localStorage.getItem(store.key)),record=saved?.projects.find(p=>p.id===saved.activeProjectId);
+              const content=p=>Object.fromEntries(['schema','kind','name','activeRoomId','rooms','links'].map(k=>[k,p?.[k]]));
+              return saved.activeProjectId===store.data.activeProjectId&&JSON.stringify(content(record))===JSON.stringify(content(doc));}''')
             campaign = page.evaluate('()=>localStorage.getItem("atf-v47-profile-1")')
             phase(kind + ': start the real native playtest and reach the human speaker')
             page.locator('#editor-play').click()

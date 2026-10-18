@@ -31,10 +31,10 @@ def capture(name, value, scope):
     report['captures'].append({'file': name, 'sha256': hashlib.sha256(image).hexdigest(), 'scope': scope, 'data': value})
 HOST = '''<!doctype html><html lang="fr"><meta charset="utf-8"><title>V158 native reception review</title>
 <style>body{margin:0;background:#071119;color:#dcebe9;font:16px monospace}canvas{display:block;max-width:100%;height:auto}button{padding:14px;margin:10px;min-height:44px}</style>
-<canvas id="review" width="1480" height="1280"></canvas><canvas id="arena" width="1000" height="560"></canvas><button id="stop">Fermer</button></html>'''
+<canvas id="review" width="2240" height="1280"></canvas><canvas id="arena" width="1000" height="560"></canvas><button id="stop">Fermer</button></html>'''
 with sync_playwright() as pw:
     browser = pw.chromium.launch(headless=True, **({'executable_path': os.environ['ATF_CHROMIUM_EXECUTABLE']} if os.environ.get('ATF_CHROMIUM_EXECUTABLE') else {}))
-    context = browser.new_context(viewport={'width': 1480, 'height': 1000}, service_workers='block')
+    context = browser.new_context(viewport={'width': 2240, 'height': 1000}, service_workers='block')
     page = context.new_page()
     page.set_default_timeout(20000)
     page.on('pageerror', lambda e: report['pageErrors'].append(str(e)))
@@ -51,13 +51,13 @@ with sync_playwright() as pw:
             const height=540,width=height*r.sourceWidth/r.sourceHeight,metrics={width,height,pivotX:native.pivotX,bottom:native.bottom};
             ctx.fillStyle='#071119';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.font='17px monospace';const frames=[];
             for(const [index,seconds]of [.025,.095,.19,.295].entries()){
-              const x=185+index*370,cue={clip:'restraint',elapsed:seconds,progress:0,role:'captive',contactDirectionV158:1,facingV158:facing};
+              const x=280+index*560,cue={clip:'restraint',elapsed:seconds,progress:0,role:'captive',contactDirectionV158:1,facingV158:facing};
               const samples=[R.sampleXenoTrialsRigV154(r,{...cue,contactDirectionV158:undefined}),R.sampleXenoTrialsRigV154(r,cue)];
               const pixels=[],receipts=[];
               for(const [row,frame]of samples.entries()){
-                const y=615+row*625;ctx.fillStyle='#8faaa1';ctx.fillRect(x-175,y,350,2);ctx.fillStyle='#dbece7';ctx.fillText((row?'Réception V158 · ':'Base V156 · ')+C.XENO_TRIALS_CAPTURE_RECEPTION_V158.phases[index].id,x-175,row?665:40);
+                const y=615+row*625;ctx.fillStyle='#8faaa1';ctx.fillRect(x-270,y,540,2);ctx.fillStyle='#dbece7';ctx.fillText((row?'Réception V158 · ':'Base V156 · ')+C.XENO_TRIALS_CAPTURE_RECEPTION_V158.phases[index].id,x-270,row?665:40);
                 receipts.push(R.drawXenoTrialsRigV154(ctx,r,image,frame,metrics,x,y,facing));
-                pixels.push(ctx.getImageData(index*370,row*625+70,370,550).data);
+                pixels.push(ctx.getImageData(index*560,row*625+70,560,550).data);
               }
               let changed=0;for(let i=0;i<pixels[0].length;i+=4)if(pixels[0][i]!==pixels[1][i]||pixels[0][i+1]!==pixels[1][i+1]||pixels[0][i+2]!==pixels[1][i+2]||pixels[0][i+3]!==pixels[1][i+3])changed++;
               frames.push({seconds,phase:samples[1].captureReceptionV158?.phase,changed,baseline:receipts[0],reception:receipts[1]});
