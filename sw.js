@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-audit-1';
+const CACHE = 'atf-v143-continuation-v156';
 const SHELL = Object.freeze([
   '/src/hub-console-stations-v142.js',
   '/src/hub-door-passage-v142.js',
@@ -241,6 +241,8 @@ const SHELL = Object.freeze([
   '/src/forge-editor-v130.css',
   '/src/forge-journey-admission-v141.js',
   '/src/forge-journey-v141.js',
+  '/src/forge-narrative-v156.js',
+  '/src/forge-narrative-ui-v156.js',
   '/src/forge-layout-v134.js',
   '/src/forge-mission-runtime-v141.js',
   '/src/forge-model-v130.js',
@@ -526,7 +528,7 @@ const SHELL = Object.freeze([
   '/src/xeno-trials-signatures-v147.js',
   '/src/xeno-trials-supers-v148.js',
   '/src/xeno-trials-acid-pools-v152.js',
-  '/src/xeno-trials-rig-data-v154.js', '/src/xeno-trials-rig-v154.js', '/src/xeno-trials-sequences-v155.js', '/src/xeno-trials-grapple-v153.js',
+  '/src/xeno-trials-rig-data-v154.js', '/src/xeno-trials-rig-v154.js', '/src/xeno-trials-restraint-pose-v156.js', '/src/xeno-trials-sequences-v155.js', '/src/xeno-trials-grapple-v153.js',
   '/src/xeno-trials-castes-v151.js',
   '/src/xeno-trials-stage-motion-v147.js',
   '/src/xeno-trials-ui-v96.js',

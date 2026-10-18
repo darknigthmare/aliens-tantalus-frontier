@@ -382,14 +382,21 @@ export function withWeaponActionsV131(Base) {
       try { return super.applyEnemyDamage(enemy, amount, source); } finally { if (corroded) enemy.armor = armor; }
     }
 
-    interact(actor = this.player) {
-      const result = super.interact(actor);
-      if (result || !this.canPerformGameplayAction(actor)) return result;
+    // Read-only admission query shared with interaction layers above this one.
+    // Recovery still happens only in interact(), after native priorities run.
+    recoverableWeaponIndexV131(actor = this.player) {
+      if (!this.canPerformGameplayAction(actor)) return -1;
       const profile = this.weaponActionProfileV131(actor);
-      const index = (this.recoverableWeaponsV131 || []).findIndex(item => item.weaponId === profile?.weaponId && item.owner === actor
+      return (this.recoverableWeaponsV131 || []).findIndex(item => item.weaponId === profile?.weaponId && item.owner === actor
         && Math.hypot(item.x - actor.x - actor.w / 2, item.y - actor.y - actor.h / 2) <= 72
         && !firstProjectileObstacleV83({ ...center(actor), w: 0, h: 0 }, { x: item.x - actor.x - actor.w / 2,
           y: item.y - actor.y - actor.h / 2 }, world(this)));
+    }
+
+    interact(actor = this.player) {
+      const result = super.interact(actor);
+      if (result) return result;
+      const index = this.recoverableWeaponIndexV131(actor);
       if (index < 0) return result;
       const [item] = this.recoverableWeaponsV131.splice(index, 1);
       actor.ammoReserve = finite(actor.ammoReserve) + 1;

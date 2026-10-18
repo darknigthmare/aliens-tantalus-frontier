@@ -1,3 +1,4 @@
+import { remapForgeNarrativeObjectivesV156, parseForgeNarrativeV156, validateForgeNarrativeReferencesV156 } from './forge-narrative-v156.js';
 /** Authoring operations only. No runtime compilation or campaign writes. */
 import { ForgeModel, parseProject, clone, keyOf, LAYERS, TILE_TYPES, decorative } from './forge-model-v130.js';
 
@@ -18,8 +19,32 @@ export function normalizeAssemblyV133(input) {
   if (!title(input.name)) reject('Donnez un nom à cet assemblage.');
   const bounds = selectionBoundsV133(input.cells);
   if (![bounds.x, bounds.y, bounds.w, bounds.h].every(Number.isInteger) || bounds.x < 0 || bounds.y < 0 || bounds.w > 128 || bounds.h > 72) reject('Dimensions d’assemblage invalides.');
-  const cells = input.cells.map((cell, index) => ({ ...clone(cell), id: `cell-${index + 1}`, x: cell.x - bounds.x, y: cell.y - bounds.y, locked: false }));
+  const sourceIds = new Set();
+  for (const cell of input.cells) if (typeof cell.id === 'string') {
+    if (sourceIds.has(cell.id)) reject('Identifiant de bloc d’assemblage dupliqué.');
+    sourceIds.add(cell.id);
+  }
+  const stories = input.cells.map(cell => parseForgeNarrativeV156(cell.narrative, cell.type, cell.layer));
+  // A reusable assembly may refer to objectives outside its selected cells.
+  // Those references are resolved against the actual project at placement.
+  const externalIds = new Set(stories.filter(Boolean).flatMap(story => story.nodes.flatMap(node => node.choices
+    .flatMap(choice => [choice.requiresObjectiveId, choice.rewardObjectiveId].filter(id => id && !sourceIds.has(id))))));
+  let number = 1;
+  const cells = input.cells.map(cell => {
+    // Never alias an external objective (for example cell-1) with a generated
+    // local ID: paste remaps local references through these normalized IDs.
+    while (externalIds.has(`cell-${number}`)) number++;
+    const output = { ...clone(cell), id: `cell-${number++}`, x: cell.x - bounds.x, y: cell.y - bounds.y, locked: false };
+    delete output.narrative;
+    return output;
+  });
+  const mapping = new Map(input.cells.map((cell, index) => [cell.id, cells[index].id]));
+  // Keep the complete physical/decoration whitelist. Project admission itself
+  // stays strict: only this assembly boundary defers external references.
   const model = parseProject({ schema: 3, kind: 'mission', name: 'Assemblage', activeRoomId: 'room-1', links: [], rooms: [{ id: 'room-1', name: 'Assemblage', size: [Math.max(8, bounds.w), Math.max(8, bounds.h)], cells }] });
+  for (const [index, cell] of model.rooms[0].cells.entries()) if (stories[index]) cell.narrative = stories[index];
+  remapForgeNarrativeObjectivesV156(model.rooms[0].cells, mapping);
+  validateForgeNarrativeReferencesV156(model.rooms, externalIds);
   return { id: typeof input.id === 'string' && /^[a-z0-9][a-z0-9_-]{0,79}$/.test(input.id) ? input.id : 'assembly', name: title(input.name), cells: model.rooms[0].cells, size: [bounds.w, bounds.h] };
 }
 export function captureAssemblyV133(model, ids, name) {
@@ -40,9 +65,13 @@ export function placementPreviewV133(model, input, x, y, { locked = new Set(), v
   if (![x, y].every(Number.isInteger)) reject('Choisissez une case de pose.');
   const occupied = new Set(model.room.cells.map(keyOf)), physical = new Set(model.room.cells.filter(c => !decorative(c)).map(c => `${c.x}:${c.y}`));
   const staged = new Set();
+  const localIds = new Set(assembly.cells.map(cell => cell.id));
+  const targetObjectives = new Set(model.data.rooms.flatMap(room => room.cells.filter(cell => cell.type === 'objective' && !decorative(cell)).map(cell => cell.id)));
   const cells = assembly.cells.map(source => {
     const cell = { ...source, x: source.x + x, y: source.y + y };
-    const reason = !integer(cell.x, 0, model.room.size[0] - 1) || !integer(cell.y, 0, model.room.size[1] - 1) ? 'hors limites'
+    const missingObjective = source.narrative?.nodes.flatMap(node => node.choices.flatMap(choice => [choice.requiresObjectiveId, choice.rewardObjectiveId]))
+      .find(id => id && !localIds.has(id) && !targetObjectives.has(id));
+    const reason = missingObjective ? `objectif externe introuvable : ${missingObjective}` : !integer(cell.x, 0, model.room.size[0] - 1) || !integer(cell.y, 0, model.room.size[1] - 1) ? 'hors limites'
       : locked.has(cell.layer) || !visible.has(cell.layer) ? 'calque masqué ou verrouillé'
         : occupied.has(keyOf(cell)) ? 'case occupée'
           : !decorative(cell) && (physical.has(`${cell.x}:${cell.y}`) || staged.has(`${cell.x}:${cell.y}`)) ? 'chevauchement physique' : '';

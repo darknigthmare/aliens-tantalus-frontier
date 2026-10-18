@@ -69,6 +69,10 @@ jobs:
           python scripts/qa-xeno-trials-grapple-v153.py --output "$RUNNER_TEMP/atf-release-qa/grapple" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/grapple.log" || status=1
           python scripts/qa-xeno-trials-rig-v154.py --output "$RUNNER_TEMP/atf-release-qa/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/rigs.log" || status=1
           python scripts/qa-xeno-trials-sequences-v155.py --output "$RUNNER_TEMP/atf-release-qa/sequences" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/sequences.log" || status=1
+          python scripts/qa-xeno-trials-presentations-v156.py --output "$RUNNER_TEMP/atf-release-qa/presentations-v156" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/presentations-v156.log" || status=1
+          python scripts/qa-xeno-trials-restraint-v156.py --output "$RUNNER_TEMP/atf-release-qa/restraint-v156" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/restraint-v156.log" || status=1
+          python scripts/qa-forge-narrative-v156.py --output "$RUNNER_TEMP/atf-release-qa/forge-narrative-v156" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/forge-narrative-v156.log" || status=1
+          ATF_ANNEX_POPULATION_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/annexes-v156" node scripts/qa-hub-annex-population-v156.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/annexes-v156.log" || status=1
           exit "$status"
       - name: Retain results without distributing private documents
         if: always()

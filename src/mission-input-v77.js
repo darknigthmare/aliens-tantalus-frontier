@@ -49,7 +49,7 @@ export class MissionGamepadInputV77 {
       const focus = globalThis.document?.activeElement;
       const uiOwnsInput = Boolean(focus && focus !== this.engine.canvas && focus.closest?.('input,textarea,select,button,a[href],[contenteditable]:not([contenteditable="false"]),[role="textbox"],[role="button"],[role="slider"],[role="dialog"],[aria-modal="true"]'));
       const available = this.engine.running && globalThis.document?.hidden !== true && globalThis.document?.hasFocus?.() !== false
-        && !uiOwnsInput && (index === 0 || this.engine.coopEnabled);
+        && !this.engine.forgeNarrativeOpenV156 && !uiOwnsInput && (index === 0 || this.engine.coopEnabled);
       if (available && edge(9) && !pauseConsumed) { this.engine.togglePause(); pauseConsumed = true; }
       const active = available && !this.engine.paused && !this.engine.enemyAtlasLoadingPausedV65
         && !this.engine.userCasteLoadingV88 && this.engine.mission?.state === 'active' && actor?.alive && !actor.downed;
@@ -68,9 +68,13 @@ export class MissionGamepadInputV77 {
         const held = { left: axis(pad, 0) < -0.25 || buttons[14], right: axis(pad, 0) > 0.25 || buttons[15], up: axis(pad, 1) < -0.25 || buttons[12], down: axis(pad, 1) > 0.25 || buttons[13], fire: buttons[7], interact: buttons[3], jump: buttons[0] };
         for (const [action, code] of Object.entries(controls[index])) this.engine.setHeldGameplayKeyV77(code, held[action], 'gamepad-' + index);
         for (const [button, method] of [[2, 'reload'], [3, 'interact'], [4, 'activateTracker'], [5, 'toggleVehicle'], [8, 'useMedkit']]) {
+          if (this.engine.forgeNarrativeOpenV156) break;
           if (edge(button)) this.engine[method]?.(actor);
         }
-        if (edge(11)) this.engine.melee?.(actor);
+        // Interact may open a dialog during this very sample. Stop the batch
+        // immediately and require neutral controls after the dialog closes.
+        if (this.engine.forgeNarrativeOpenV156) this.reset();
+        else if (edge(11)) this.engine.melee?.(actor);
       }
       slot.previous = buttons;
     }

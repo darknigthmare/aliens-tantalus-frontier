@@ -6,6 +6,7 @@ import { getHubInteractionPropBoundsV136 } from './hub-prop-placements-v136.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141 } from './hub-annex-npc-life-v141.js';
 import { buildHubNpcInteractionEvent } from './hub-v52-runtime.js';
 import { getHubDoorDestinationDescriptorsV138 } from './hub-destination-signage-v138.js';
+import { getShipPortInteractionV87, SHIP_PORT_MEETINGS_V87 } from './ship-port-room-v87.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, finite(value, low)));
@@ -285,6 +286,33 @@ export function withHubNpcLifeV136(Base) {
         .filter(entry => entry.distance < 118).sort((a, b) => a.distance - b.distance)[0]?.npc || null;
     }
 
+    prioritizedCivilAnnexNpcV156() {
+      if (this.currentAnnexV71?.()?.id !== 'frontier-civil-counter'
+        || this.annexTransitionV71 || this.hubDoorClosingV142 || this.hubDoorBlockedV142
+        || this.annexStateReadOnlyV87 || this.nearestAnnexExitV71?.()
+        || this.prioritizedParentAnnexDoorV133?.() || this.getCompanionInteractionV87?.()) return null;
+      const npc = this.nearestAnnexNpcV141(), port = getShipPortInteractionV87(this);
+      if (!npc || !port) return null;
+      const center = this.player.x + this.player.w / 2;
+      const meeting = port.animalId && SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === port.animalId);
+      // Keep the existing physical port interaction anchors, including Mica's
+      // historical x810, rather than stealing all animal/vendor interactions
+      // whenever an off-duty crew member happens to be within talking range.
+      const portX = meeting?.x ?? (port.vendorId === 'station-shop' ? 668 : 1965);
+      const npcDistance = Math.abs(center - npc.x - npc.w / 2);
+      return npcDistance + 4 < Math.abs(center - portX) ? npc : null;
+    }
+
+    statusPrompt() {
+      const npc = this.prioritizedCivilAnnexNpcV156();
+      return npc ? `E — ${npc.interaction.label} · ${npc.name}` : super.statusPrompt();
+    }
+
+    interact() {
+      const npc = this.running && this.prioritizedCivilAnnexNpcV156();
+      return npc ? this.interactWithAnnexNpcV141(npc) : super.interact();
+    }
+
     interactWithAnnexNpcV141(npc) {
       if (!this.running || !this.activeAnnexNpcsV141().includes(npc)) return null;
       npc.vx = 0; npc.workClock = 2.4;
@@ -308,6 +336,13 @@ export function withHubNpcLifeV136(Base) {
         this.drawDepthContactShadowV116?.(ctx, npc, npc.y + npc.h);
         this.drawNpcLifeV136(ctx, image, npc, sample, geometry) || drawHumanAtlasV133(ctx, image, geometry);
       }
+    }
+
+    drawPlayer(ctx) {
+      // The Refuge has a dedicated render branch that bypasses the ordinary
+      // annex NPC pass. Keep its depth order: decor, visitor, player, foreground.
+      if (this.currentAnnexV71?.()?.id === 'personal-refuge') this.drawAnnexNpcsV141(ctx);
+      return super.drawPlayer(ctx);
     }
 
     stepHubNpcLifeV136(npc, delta, { parentDeck = false } = {}) {

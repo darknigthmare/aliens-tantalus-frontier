@@ -1680,7 +1680,9 @@ export class GameEngine {
       this.audio?.ui();
       return true;
     }
-    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130) {
+    // Optional room admission preserves native effects and default campaign behavior.
+    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130
+      && this.admitNativeTerminalInteractionV156?.(actor, this.powerNode) !== false) {
       this.powerNode.active = true;
       this.mission.objectives.power = true;
       this.setCheckpoint('power', actor.x, actor.y);
@@ -1689,7 +1691,8 @@ export class GameEngine {
       this.audio?.ui();
       return true;
     }
-    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130) {
+    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130
+      && this.admitNativeTerminalInteractionV156?.(actor, this.archiveTerminal) !== false) {
       if (!this.mission.objectives.boss) return this.locked('NEUTRALISER LA MENACE ALPHA');
       this.archiveTerminal.recovered = true;
       this.mission.objectives.archive = true;
@@ -2490,8 +2493,10 @@ export class GameEngine {
     const actorCenter = actor.x + actor.w / 2;
     const door = this.doors.find((candidate) => Math.abs(actorCenter - (candidate.x + candidate.w / 2)) < 118);
     if (door) return this.doorRequirement(door) ? `E  VERROUILLÉ — ${this.doorRequirement(door)}` : 'E  ACTIONNER LA PORTE';
-    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130) return 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE';
-    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130) return 'E  EXTRAIRE LES ARCHIVES';
+    if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130
+      && this.admitNativeTerminalInteractionV156?.(actor, this.powerNode) !== false) return 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE';
+    if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130
+      && this.admitNativeTerminalInteractionV156?.(actor, this.archiveTerminal) !== false) return 'E  EXTRAIRE LES ARCHIVES';
     if (this.vents.some((vent) => distanceBetween(actor, vent) < 125)) return this.inventory.cutter || this.vents.every((vent) => !vent.requiresTool) ? 'E  OUVRIR / EMPRUNTER LE CONDUIT' : 'CHALUMEAU REQUIS';
     if (this.objective && distanceBetween(actor, this.objective) < 125) return this.missingExtractionRequirement() ? `E  EXTRACTION BLOQUÉE — ${this.missingExtractionRequirement()}` : 'E  CONFIRMER L’EXTRACTION';
     if (this.vehicle?.active && distanceBetween(actor, this.vehicle) < 210) return actor.inVehicle ? `V  QUITTER ${this.vehicle.name || 'LE VÉHICULE'}` : `V  PILOTER ${this.vehicle.name || 'LE VÉHICULE'}`;

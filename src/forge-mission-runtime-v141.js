@@ -1,3 +1,5 @@
+import { showForgeNarrativeV156 } from './forge-narrative-ui-v156.js';
+import { forgeNarrativeViewV156 } from './forge-narrative-v156.js';
 import { decorative } from './forge-model-v130.js';
 import { inspectForgeJourneyV141 } from './forge-journey-admission-v141.js';
 import { buildForgeObjectiveV136, EDITOR_MISSION_WORLD_V136 } from './editor-spatial-v136.js';
@@ -8,8 +10,8 @@ import { blockedForgeObjectivesV141 } from './forge-journey-v141.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
-const near = (a, b, range = 125) => a && b && Math.hypot(a.x + a.w / 2 - b.x - b.w / 2,
-  a.y + a.h / 2 - b.y - b.h / 2) < range;
+const interactionDistance = (a, b) => Math.hypot(a.x + a.w / 2 - b.x - b.w / 2, a.y + a.h / 2 - b.y - b.h / 2);
+const near = (a, b, range = 125) => a && b && interactionDistance(a, b) < range;
 const ROOM_FIELDS = ['platforms', 'walls', 'lifts', 'ladders', 'covers', 'doors', 'powerNode', 'vents', 'ventShortcut',
   'vehicle', 'weaponPickup', 'toolPickup', 'supplies', 'hazards', 'drops', 'bullets', 'hostileProjectiles', 'particles',
   'enemies', 'objective', 'editorMode', 'editorProjectKind', 'editorGridV136', 'editorTileCount', 'editorTileCounts',
@@ -68,6 +70,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
           narrativeEvidenceV132: clone(options.narrativeEvidenceV132 || {}),
           onNarrativeArchivesChange: null };
       }
+      this.closeForgeNarrativeV156?.({ focus: false });
       this.forgeSessionV141 = null;
       this.forgeProjectV141 = null;
       this.forgeActiveRoomIdV141 = null;
@@ -143,7 +146,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
 
     travelForgeMissionV141(link, actor = this.player) {
       const session = this.forgeSessionV141, nearest = this.forgeLinkedDoorV141(actor);
-      if (!session || nearest?.link.id !== link?.id || !this.canPerformGameplayAction(actor, { allowSquadTask: true })) return false;
+      if (this.forgeNarrativeOpenV156 || !session || nearest?.link.id !== link?.id || !this.canPerformGameplayAction(actor, { allowSquadTask: true })) return false;
       if (!this.forgeInteractionClearV141(actor, nearest.door)) return this.locked('SAS INACCESSIBLE DERRIÈRE UNE CLOISON');
       const requirement = this.doorRequirement(nearest.door);
       if (requirement || nearest.door.levelLocked) return this.locked(requirement || 'SAS VERROUILLÉ');
@@ -184,6 +187,9 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       this.syncPlaceableBarriersV132?.();
       this.mission.objectives = target.missionObjectives;
       this.mission.phase = target.missionPhase;
+      if (this.objective && session.completedObjectives.includes(this.objective.forgeCellIdV141)) {
+        this.objective.complete = true; this.objectiveState.complete = true;
+      }
       for (const [index, member] of party.entries()) Object.assign(member, {
         x: arrivals[index].x, y: arrivals[index].y, vx: 0, vy: 0, grounded: true, climbing: false, inCover: false,
         ladderId: null, jumpBuffer: 0, coyoteTime: .1
@@ -198,12 +204,121 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       return true;
     }
 
+    stop(...args) {
+      this.closeForgeNarrativeV156?.({ focus: false });
+      return super.stop(...args);
+    }
+
+    update(delta) {
+      if (this.forgeNarrativeOpenV156) return;
+      return super.update(delta);
+    }
+
+    forgePreferredUseV156(actor = this.player) {
+      const session = this.forgeSessionV141;
+      const room = session?.project.rooms.find(entry => entry.id === session.currentRoomId);
+      const hasStory = terminal => room?.cells.some(cell => cell.id === terminal?.forgeCellIdV141 && cell.narrative);
+      const candidates = [this.powerNode, this.archiveTerminal].filter(Boolean).filter(candidate =>
+        hasStory(candidate) && near(actor, candidate, 130) && this.forgeInteractionClearV141(actor, candidate)
+        && (candidate !== this.archiveTerminal || this.mission.objectives.boss))
+        .map(target => ({ kind: 'narrative', target, distance: interactionDistance(actor, target) }));
+      // Delegate only the pending terminal that the inherited V51 dispatcher
+      // would actually use (power before archive), without bypassing its story.
+      const pending = this.forgePendingTerminalV156(actor);
+      if (pending && !hasStory(pending) && this.forgeInteractionClearV141(actor, pending)
+        && (pending !== this.archiveTerminal || this.mission.objectives.boss)) {
+        candidates.push({ kind: 'native-terminal', target: pending, distance: interactionDistance(actor, pending) });
+      }
+      const terminal = candidates.sort((a, b) => a.distance - b.distance
+        || Number(b.kind === 'native-terminal') - Number(a.kind === 'native-terminal'))[0] || null;
+      // A finished local objective cannot hide a story that may unlock remote
+      // objectives. Only validation or actual extraction can take precedence.
+      const objectiveActionable = session && this.objective && (!session.completedObjectives.includes(this.objective.forgeCellIdV141)
+        || list(this.forgeRequiredObjectivesV141).every(id => session.completedObjectives.includes(id)));
+      if (objectiveActionable && near(actor, this.objective) && this.forgeInteractionClearV141(actor, this.objective)
+        && !super.missingExtractionRequirement() && (!terminal || interactionDistance(actor, this.objective) <= terminal.distance)) {
+        return { kind: 'objective', target: this.objective };
+      }
+      return terminal;
+    }
+
+    forgeNarrativeTerminalV156(actor = this.player) {
+      const preferred = this.forgePreferredUseV156(actor);
+      return preferred?.kind === 'narrative' ? preferred.target : null;
+    }
+
+    forgeUrgentNativeUseV156(actor = this.player) {
+      const ally = actor === this.player ? this.coop : this.player;
+      // Match the V51 native revive/key reaches; the inherited interaction owns
+      // the rescue, inventory, checkpoint and event effects in both cases.
+      if (this.coopEnabled && actor?.alive && ally?.downed && interactionDistance(actor, ally) <= 86) return 'revive';
+      if (list(this.drops).some(drop => !drop.taken && drop.type === 'security-key' && near(actor, drop, 100))) return 'security-key';
+      // Recovery is an inherited fallback: preserve actionable Forge validation
+      // and do not let V51 extract through a partition while reaching a pickup.
+      const objectiveBlocksRecovery = near(actor, this.objective);
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+        && Math.abs(actor.y - candidate.y) < candidate.h + 60);
+      const doorBlocksRecovery = door && !this.forgeInteractionClearV141(actor, door);
+      if (!objectiveBlocksRecovery && !doorBlocksRecovery && !this.forgePendingTerminalV156(actor)
+        && this.recoverableWeaponIndexV131?.(actor) >= 0) return 'recoverable-weapon';
+      return null;
+    }
+
+    forgeBlockedNarrativeArchiveV156(actor = this.player) {
+      const archive = this.archiveTerminal;
+      const room = this.forgeSessionV141?.project.rooms.find(entry => entry.id === this.forgeSessionV141.currentRoomId);
+      return Boolean(archive && !this.mission.objectives.boss && near(actor, archive, 130)
+        && this.forgeInteractionClearV141(actor, archive)
+        && room?.cells.some(cell => cell.id === archive.forgeCellIdV141 && cell.narrative));
+    }
+
+    admitNativeTerminalInteractionV156(actor, terminal) {
+      // Native dispatch and its prompt share this pure admission hook. Outside
+      // a Forge session the historical campaign conditions remain unchanged.
+      if (!this.forgeSessionV141) return true;
+      return this.forgeInteractionClearV141(actor, terminal)
+        && (terminal !== this.archiveTerminal || Boolean(this.mission.objectives.boss));
+    }
+
+    forgePendingTerminalV156(actor = this.player, { includeBlocked = false } = {}) {
+      // Match inherited power → archive order after admission. Blocked terminals
+      // remain available only to the final refusal message, never to dispatch.
+      return [this.powerNode, this.archiveTerminal].find(terminal => terminal
+        && !(terminal === this.powerNode ? terminal.active : terminal.recovered)
+        && near(actor, terminal, 130)
+        && (includeBlocked || this.admitNativeTerminalInteractionV156(actor, terminal))) || null;
+    }
+
+    syncForgeNarrativeRewardsV156(result) {
+      const session = this.forgeSessionV141;
+      if (this.objective && session.completedObjectives.includes(this.objective.forgeCellIdV141)) {
+        this.objective.complete = true; this.objectiveState.complete = true;
+      }
+      this.onEvent({ type: 'forge-narrative-choice', roomId: session.currentRoomId, ...result });
+    }
+
     interact(actor = this.player) {
       const session = this.forgeSessionV141;
       if (!session) return super.interact(actor);
-      if (!this.canPerformGameplayAction(actor, { allowVent: true, allowSquadTask: true })) return false;
+      if (this.forgeNarrativeOpenV156 || !this.canPerformGameplayAction(actor, { allowVent: true, allowSquadTask: true })) return false;
+      const urgent = this.forgeUrgentNativeUseV156(actor);
+      if (urgent === 'revive' || urgent === 'security-key') return super.interact(actor);
       const linked = this.forgeLinkedDoorV141(actor);
       if (linked) return this.travelForgeMissionV141(linked.link, actor);
+      if (urgent === 'recoverable-weapon') return super.interact(actor);
+      const preferred = this.forgePreferredUseV156(actor);
+      if (preferred?.kind === 'native-terminal') return super.interact(actor);
+      const storyTerminal = preferred?.kind === 'narrative' ? preferred.target : null;
+      if (storyTerminal) {
+        if (storyTerminal === this.archiveTerminal && !this.mission.objectives.boss) return this.locked('NEUTRALISER LA MENACE ALPHA');
+        const shown = showForgeNarrativeV156(this, storyTerminal.forgeCellIdV141, result => this.syncForgeNarrativeRewardsV156(result));
+        if (shown) {
+          if (storyTerminal === this.powerNode) { storyTerminal.active = true; this.mission.objectives.power = true; }
+          else { storyTerminal.recovered = true; this.mission.objectives.archive = true; }
+          this.onEvent({ type: 'forge-narrative-open', roomId: session.currentRoomId, cellId: storyTerminal.forgeCellIdV141 });
+        }
+        return shown;
+      }
       if (near(actor, this.objective)) {
         if (!this.forgeInteractionClearV141(actor, this.objective)) return this.locked('OBJECTIF INACCESSIBLE DERRIÈRE UNE CLOISON');
         const missing = super.missingExtractionRequirement();
@@ -222,10 +337,11 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         if (remaining.length) return this.locked(`OBJECTIFS FORGE ${session.completedObjectives.length}/${this.forgeRequiredObjectivesV141.length}`);
         return this.completeMission(actor);
       }
-      const terminal = this.powerNode && !this.powerNode.active && near(actor, this.powerNode, 130) ? this.powerNode
-        : this.archiveTerminal && !this.archiveTerminal.recovered && near(actor, this.archiveTerminal, 130) ? this.archiveTerminal : null;
+      const terminal = this.forgePendingTerminalV156(actor, { includeBlocked: true });
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return this.locked('TERMINAL INACCESSIBLE DERRIÈRE UNE CLOISON');
-      const door = this.doors.find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+      if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
+        || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return this.locked('NEUTRALISER LA MENACE ALPHA');
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       if (door && !this.forgeInteractionClearV141(actor, door)) return this.locked('SAS INACCESSIBLE DERRIÈRE UNE CLOISON');
       return super.interact(actor);
@@ -251,15 +367,32 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
     getInteractionPrompt(actor = this.player) {
       const session = this.forgeSessionV141;
       if (!session || !actor?.alive) return super.getInteractionPrompt(actor);
+      const urgent = this.forgeUrgentNativeUseV156(actor);
+      if (urgent === 'revive') return 'E  RÉANIMER LE COÉQUIPIER';
+      if (urgent === 'security-key') return 'E  RÉCUPÉRER LE BADGE DE SÉCURITÉ';
       const linked = this.forgeLinkedDoorV141(actor);
       if (linked) return this.forgeInteractionClearV141(actor, linked.door)
         ? `E  SAS → ${session.project.rooms.find(room => room.id === linked.link.to.roomId)?.name || 'SALLE'}` : 'E  SAS BLOQUÉ PAR UNE CLOISON';
+      if (urgent === 'recoverable-weapon') return super.getInteractionPrompt(actor);
+      const preferred = this.forgePreferredUseV156(actor);
+      if (preferred?.kind === 'narrative') return 'E  LIRE LE RÉCIT DU TERMINAL';
+      if (preferred?.kind === 'native-terminal') return preferred.target === this.powerNode
+        ? 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE' : 'E  EXTRAIRE LES ARCHIVES';
       if (near(actor, this.objective)) {
         if (!this.forgeInteractionClearV141(actor, this.objective)) return 'E  OBJECTIF BLOQUÉ PAR UNE CLOISON';
+        const physicalRequirement = super.missingExtractionRequirement();
+        if (physicalRequirement) return `E  ${physicalRequirement}`;
         if (!session.completedObjectives.includes(this.objective.forgeCellIdV141)) return 'E  VALIDER L’OBJECTIF DE CETTE SALLE';
         const missing = this.missingExtractionRequirement();
         return missing ? `E  ${missing}` : 'E  CONFIRMER L’EXTRACTION FORGE';
       }
+      const terminal = this.forgePendingTerminalV156(actor, { includeBlocked: true });
+      if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return 'E  TERMINAL BLOQUÉ PAR UNE CLOISON';
+      if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
+        || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return 'E  NEUTRALISER LA MENACE ALPHA';
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+        && Math.abs(actor.y - candidate.y) < candidate.h + 60);
+      if (door && !this.forgeInteractionClearV141(actor, door)) return 'E  SAS BLOQUÉ PAR UNE CLOISON';
       return super.getInteractionPrompt(actor);
     }
 
@@ -303,7 +436,8 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         roomName: session.project.rooms.find(room => room.id === session.currentRoomId)?.name,
         reachableRoomIds: [...session.reachableRoomIds], visitedRoomIds: [...new Set([session.currentRoomId, ...Object.keys(session.roomStates)])],
         transitions: session.transitions, completedObjectives: [...session.completedObjectives],
-        requiredObjectives: [...list(this.forgeRequiredObjectivesV141)], scope: 'session' };
+        requiredObjectives: [...list(this.forgeRequiredObjectivesV141)], narrativeV156: clone(session.narrativeV156 || []),
+        narrativeDialogV156: this.forgeNarrativeOpenV156 ? forgeNarrativeViewV156(session, this.forgeNarrativeOpenV156) : null, scope: 'session' };
     }
 
     getSnapshot() {
