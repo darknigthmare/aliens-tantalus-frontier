@@ -3,7 +3,7 @@
   "baseCommit": "eb14c73601f1283e86cbc09dcc0054cf8bb07e12",
   "applicationVersion": "143.0.0",
   "saveSchema": 52,
-  "scope": "PNJ dialoguants Forge ; circuit physique ECHO-A au commandement ; trois réceptions humaines natives adaptées ; présentation résine/coupe/libération du Cocon Noir. Preuves du projet et de l’œuvre distinguées ; aucune clôture artistique ni certification 1:1.",
+  "scope": "PNJ dialoguants Forge ; circuit physique ECHO-A au commandement ; trois réceptions humaines natives adaptées ; présentation résine/coupe/libération du Cocon Noir ; préparation bornée des costumes modulaires. Preuves du projet et de l’œuvre distinguées ; aucune clôture artistique ni certification 1:1.",
   "rosterIds": [
     "warrior",
     "runner",
@@ -1918,6 +1918,25 @@
         "deformationAbsentBeforeReceptionExpiry": true
       }
     },
+    "modularCostumeReadiness": {
+      "module": "src/player-appearance-runtime-v126.js",
+      "scope": "selected-native-colonial-kit-readiness",
+      "imageLimit": 16,
+      "currentActionTransitTexturesRetainedBeforeFutureBodies": true,
+      "selectedTorsoFacings": [
+        -1,
+        1
+      ],
+      "warmupRequiresEligibleModularRig": true,
+      "futureBodyPagesUseSpareSlots": true,
+      "waitsForDecode": false,
+      "guaranteedDuringLoading": false,
+      "guaranteedAtMaximumCachePressure": false,
+      "newSourcePixels": false,
+      "newFranchiseAtlases": 0,
+      "approved1to1": 0,
+      "nativeRulesChanged": false
+    },
     "fidelityEvidence": {
       "projectSourcePlates": [
         {
@@ -2003,6 +2022,7 @@
     "src/mission-input-v77.js": "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
     "src/npc-circulation-v158.js": "8ba022817afb11bec4bb9af5056982ccadd63f4707f0859cc40bd94c431252fa",
     "src/npc-life-v136.js": "6179892f6f37f1220c85de66bc5ac0bd94fce15ea8d643d6dd53b2280735ebb3",
+    "src/player-appearance-runtime-v126.js": "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
     "src/save.js": "43391c19bb2617d7e9afaa17de2a79616af3fe510f24453cdd9e45b43ebc1678",
     "src/ship-animal-habitat-v87.js": "23b392916f7d76f89929e4e69e9b17c843cbd3784897893e7b49a33562ae26f4",
     "src/special-operations-v131.js": "4595ded20b4c7c44a7942039ca3ed8d12bba9f20a44a622ff840caca7a0e4bb5",
@@ -3542,6 +3562,13 @@
           "src/black-cocoon-presentation-v158.js",
           "Résine et libération du vrai joueur selon l’état du Cocon Noir.",
           "Présentation procédurale originale, sans atlas canonique ni campagne étendue."
+        ],
+        [
+          "SRC-COSTUME-READINESS-V158",
+          "Contrat exécutable",
+          "src/player-appearance-runtime-v126.js",
+          "Textures courantes prioritaires ; préparation du kit et de futures bases dans le budget natif de seize images.",
+          "Dépend de la disponibilité des images ; pas de nouvel atlas franchise ni de garantie sous pression maximale du cache."
         ]
       ]
     },
@@ -3593,7 +3620,7 @@
           "QA158-BROWSER",
           "Profils natifs et fixtures déclarés dans leurs vrais reçus",
           "À vérifier séparément",
-          "Captures et contrôles mesurés seulement après recette, sans participants humains inventés."
+          "Captures et contrôles mesurés après recette ; préparation du kit vérifiée après disponibilité initiale des images, sans participants humains inventés."
         ],
         [
           "QA158-RELEASE",
@@ -5586,6 +5613,13 @@
           "8ba022817afb11bec4bb9af5056982ccadd63f4707f0859cc40bd94c431252fa",
           "Le même ECHO-A franchit physiquement le sas du commandement selon sa routine ; reprises et interruptions conservent ses pieds réels.",
           "scripts/verify-npc-circulation-v158.mjs"
+        ],
+        [
+          "src/player-appearance-runtime-v126.js",
+          "Non épinglé en V157",
+          "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
+          "Les textures courantes des opérateurs et leurs équipements restent prioritaires ; le kit sélectionné et les futures bases sont préparés dans le budget natif de seize images, sans attendre le décodage.",
+          "scripts/verify-player-appearance-runtime-v126.mjs"
         ],
         [
           "src/save.js",
@@ -9097,6 +9131,15 @@
           "À exécuter sur le commit publié",
           "Présentation originale ; aucune certification 1:1",
           "Atlas bitmap dédié, corpus complet et campagne étendue."
+        ],
+        [
+          "modular-costume-readiness",
+          "Préparation des costumes modulaires",
+          "Opérateurs et kit colonial sélectionné ; budget natif de seize images",
+          "Implémenté (préparation bornée)",
+          "À exécuter sur le commit publié",
+          "Images natives déjà livrées ; aucun nouveau pixel ni canon",
+          "30 costumes franchise sans atlas dédié ; disponibilité et pression du cache restent des limites."
         ]
       ]
     }
@@ -9111,6 +9154,7 @@
     "21 accès d’opérations déjà jouables : 20 adaptations partielles et une effective ; rendu Cocon dédié distinct de la campagne étendue.",
     "Classeur encyclopédie brut et archives DLC Blackout/Earth ou V10 absents ; métadonnées Excel et catalogue du jeu disponibles.",
     "30 costumes franchise sans atlas dédié restent distincts du kit colonial modulaire déjà livré.",
+    "La préparation des costumes conserve le budget de seize images ; elle ne bloque pas le jeu jusqu’au décodage et ne garantit pas les pages anticipées pendant chargement ou pression maximale.",
     "Recette prépublication : résultats locaux, CI, fusion et déploiement du commit exact se vérifient séparément, sans transférer les résultats V157."
   ],
   "workbook": "XENO_TRIALS_SUIVI_V158.xlsx",
@@ -9224,8 +9268,8 @@
       "id": "v158Lots",
       "label": "Lots techniques V158 suivis",
       "cell": "E22",
-      "formula": "=COUNTA('15_LotsV158'!A6:A9)",
-      "expected": 4
+      "formula": "=COUNTA('15_LotsV158'!A6:A10)",
+      "expected": 5
     },
     {
       "id": "captureImplemented",
@@ -9235,7 +9279,7 @@
       "expected": 3
     }
   ],
-  "workbookSha256": "f04e41b6b827b4a48832015e0c0c57d715c15d882cdd189aac7a51cbc53822f1",
+  "workbookSha256": "36cc4f42bb0c60707959258950fd550d8bea4221cf901423d0cc848945ebb822",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V157",
@@ -9476,6 +9520,15 @@
         "reason": "Le même ECHO-A franchit physiquement le sas du commandement selon sa routine ; reprises et interruptions conservent ses pieds réels.",
         "verifiers": [
           "scripts/verify-npc-circulation-v158.mjs"
+        ]
+      },
+      {
+        "path": "src/player-appearance-runtime-v126.js",
+        "previousSha256": null,
+        "currentSha256": "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
+        "reason": "Les textures courantes des opérateurs et leurs équipements restent prioritaires ; le kit sélectionné et les futures bases sont préparés dans le budget natif de seize images, sans attendre le décodage.",
+        "verifiers": [
+          "scripts/verify-player-appearance-runtime-v126.mjs"
         ]
       },
       {

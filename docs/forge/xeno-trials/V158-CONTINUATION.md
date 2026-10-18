@@ -1,8 +1,9 @@
-# V158 — Dialogues éditables, circulation et gestes bornés
+# V158 — Dialogues, circulation, gestes et costumes
 
 Ce suivi continue les 68 tâches héritées sur les 189 identités conservées.
-Les quatre lots techniques portent sur les PNJ dialoguants de Forge, le circuit
-ECHO-A du commandement, trois réceptions humaines et la présentation du Cocon Noir.
+Les cinq lots techniques portent sur les PNJ dialoguants de Forge, le circuit
+ECHO-A du commandement, trois réceptions humaines, la présentation du Cocon Noir
+et la préparation des costumes modulaires.
 La recette du commit publié reste en prépublication, à exécuter et à vérifier
 séparément de la description des contrats.
 
@@ -99,6 +100,21 @@ Cette présentation dédiée ne livre pas un atlas bitmap canonique ni la campag
 étendue des survivants. Les conditions et durées natives de l’opération sont
 conservées. Le registre actif garde 21 accès jouables, dont 20 adaptations
 partielles et une entrée effective ; il ne devient pas 21 campagnes terminées.
+
+## Préparation des costumes modulaires
+
+Le runtime prépare les pages du kit colonial sélectionné pour les deux
+orientations du torse et anticipe les bases de corps utiles à la visée.
+Les besoins courants des opérateurs, actions, transits et équipements restent
+prioritaires ; les futures bases et pages de secours utilisent les places
+restantes du budget natif de seize images. Un préchauffage ne doit pas évincer
+un outil actuellement utilisé par l’autre opérateur.
+
+Cette préparation ne bloque pas le jeu jusqu’au décodage. Les contrôles se font
+après disponibilité initiale des images ; ils ne garantissent pas le rendu
+pendant un chargement, un échec d’image ou la pression maximale du cache.
+Les pixels et règles natifs sont conservés. Aucun nouvel atlas franchise,
+nouveau canon ou costume manquant n’est déclaré livré par cette correction.
 
 ## Audit et limites conservées
 

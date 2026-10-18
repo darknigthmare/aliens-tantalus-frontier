@@ -16,6 +16,7 @@ import { FORGE_NPC_LIMITS_V158 as npcLimits, FORGE_NPC_PRESETS_V158 as npcPreset
 import { HUB_NPC_CIRCULATION_V158 as circulation } from '../src/npc-circulation-v158.js';
 import { BLACK_COCOON_PRESENTATION_V158 as cocoon } from '../src/black-cocoon-presentation-v158.js';
 import { SPECIAL_OPERATION_COUNTS_V131 as operationCounts, SPECIAL_OPERATIONS_V131 as operations } from '../src/special-operations-v131.js';
+import { PLAYER_APPEARANCE_IMAGE_LIMIT_V129 as appearanceImageLimit } from '../src/player-appearance-runtime-v126.js';
 
 const prefix = 'docs/forge/xeno-trials/';
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -194,8 +195,9 @@ test('twelve historical workbooks, the three V157 documents and four native plat
 test('the strict V158 succession verifies every source and preserves the V156 to V157 historical bridge', () => {
   const result = verifyAuditSuccessionV158(previous, current);
   assert.equal(result.inherited, 31);
-  assert.ok(result.changed > 0);
-  assert.ok(result.added >= 4);
+  assert.equal(result.changed, 13);
+  assert.equal(result.added, 15);
+  assert.equal(result.current, 46);
   assert.equal(result.current, Object.keys(current.runtimeSourceSha256).length);
   const inherited = verifyAuditSuccessionV157(older, previous);
   assert.equal(inherited.inherited, 18);
@@ -230,9 +232,19 @@ test('succession rejects dishonest predecessors, missing transitions and unrevie
   }
 });
 
-test('the four lots and source notes keep every new validation explicitly pending', () => {
+test('the five lots and source notes keep every new validation explicitly pending', () => {
   assert.equal(Object.keys(current.tables).length, 15);
-  assert.equal(current.tables['15_LotsV158'].rows.length, 4);
+  assert.equal(current.tables['15_LotsV158'].rows.length, 5);
+  assert.ok(current.tables['15_LotsV158'].rows.some(row => row[0] === 'modular-costume-readiness'));
+  assert.deepEqual(current.runtimeContracts.modularCostumeReadiness, {
+    module: 'src/player-appearance-runtime-v126.js', scope: 'selected-native-colonial-kit-readiness',
+    imageLimit: appearanceImageLimit, currentActionTransitTexturesRetainedBeforeFutureBodies: true,
+    selectedTorsoFacings: [-1, 1], warmupRequiresEligibleModularRig: true,
+    futureBodyPagesUseSpareSlots: true, waitsForDecode: false,
+    guaranteedDuringLoading: false, guaranteedAtMaximumCachePressure: false,
+    newSourcePixels: false, newFranchiseAtlases: 0, approved1to1: 0, nativeRulesChanged: false,
+  });
+  assert.equal(appearanceImageLimit, 16);
   for (const [name, table] of Object.entries(current.tables)) {
     assert.ok(table.headers.length && table.rows.length, name);
     assert.equal(new Set(table.headers).size, table.headers.length, name);
