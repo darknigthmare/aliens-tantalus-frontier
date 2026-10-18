@@ -3,6 +3,7 @@ Evaluations only observe. Authored documents and isolated campaign profile use
 their native file inputs. No actor, storage, clock or RNG injection is used.
 """
 import argparse
+import importlib.metadata
 import json
 import os
 from pathlib import Path
@@ -18,6 +19,7 @@ if output == repo or repo in output.parents:
     raise SystemExit('QA evidence must remain outside the repository.')
 output.mkdir(parents=True, exist_ok=True)
 report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
+          'phase': 'browser setup',
           'method': 'Production app; native profile/project imports, actual keyboard walking/fire, checkpoint buttons, real page reload and routing; evaluations observe only.',
           'limitations': ['Automated Chromium journey, not a human usability study.',
                           'Local device checkpoint only; no cloud or campaign-progress migration.',
@@ -42,6 +44,15 @@ def check(label, condition):
     assert condition, label
     report['checks'].append(label)
     print('PASS ' + label, flush=True)
+
+
+def phase(label):
+    report['phase'] = label
+    print('STEP ' + label, flush=True)
+
+
+def annotation_message(value):
+    return str(value).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
 
 
 def upload(page, selector, value, name):
@@ -70,6 +81,7 @@ def checkpoint_panel(page, kind=None):
 def pointer_action(page, panel, action):
     """Native pointer activation; bounds/hit tests happen before any click.
     This deliberately avoids Locator.click's automatic scrollIntoView."""
+    phase(f'{report.get("kind", "runtime")} {page.viewport_size}: pointer {action}')
     details = panel.locator('details')
     if details.get_attribute('open') is None:
         target = panel.locator('[data-forge-checkpoint-toggle-v157]')
@@ -103,6 +115,7 @@ def enter_forge(page):
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, **({'executable_path': os.environ['ATF_CHROMIUM_EXECUTABLE']}
                               if os.environ.get('ATF_CHROMIUM_EXECUTABLE') else {}))
+    report['tooling'] = {'playwright': importlib.metadata.version('playwright'), 'chromium': browser.version}
     context = browser.new_context(viewport={'width': 1600, 'height': 1050}, service_workers='block', accept_downloads=True)
     page = context.new_page()
     page.set_default_timeout(30000)
@@ -111,6 +124,7 @@ with sync_playwright() as p:
     page.on('response', lambda response: report['httpErrors'].append({'url': response.url, 'status': response.status}) if response.status >= 400 else None)
     page.on('dialog', lambda dialog: dialog.accept())
     try:
+        phase('load title and import isolated profile')
         page.goto(args.base, wait_until='domcontentloaded')
         page.locator('#title-start').click(timeout=45000)
         page.locator('#title-options').click()
@@ -122,12 +136,15 @@ with sync_playwright() as p:
             page.locator('#title-start').click()
         enter_forge(page)
         for kind in ['mission', 'ship']:
+            report['kind'] = kind
+            phase(kind + ': import authored document')
             source = fixture(kind)
             (output / f'{kind}-input.json').write_text(json.dumps(source, ensure_ascii=False, indent=2))
             upload(page, '#editor-import', source, f'{kind}-checkpoint.json')
             page.locator('.forge-message-v130').get_by_text('Projet importé.', exact=False).wait_for()
             authored = page.evaluate('() => structuredClone(__ATF_V51__.editor.model.data)')
             campaign = page.evaluate('() => localStorage.getItem("atf-v47-profile-1")')
+            phase(kind + ': launch and wait for native grounded player')
             page.locator('#editor-play').click()
             canvas = page.locator('#game-canvas' if kind == 'mission' else '#hub-canvas')
             canvas.wait_for(state='visible')
@@ -135,12 +152,14 @@ with sync_playwright() as p:
               return e.running&&!e.paused&&!e.enemyAtlasLoadingPausedV65&&!e.userCasteLoadingV88&&e.player.grounded;}''', arg=kind, timeout=90000)
             canvas.focus()
             if kind == 'mission':
+                phase(kind + ': hold native fire until ammunition is consumed')
                 ammo = observed(page, kind)['ammo']
                 page.keyboard.down('KeyF')
                 try:
                     page.wait_for_function('(ammo)=>__ATF_GAME__.player.ammo<ammo', arg=ammo)
                 finally:
                     page.keyboard.up('KeyF')
+            phase(kind + ': walk to the narrative terminal')
             page.keyboard.down('KeyD')
             try:
                 page.wait_for_function('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
@@ -148,6 +167,7 @@ with sync_playwright() as p:
                     :e.nearestForgeInteractionV141()?.entity.cellId==='terminal';}''', arg=kind, timeout=180000)
             finally:
                 page.keyboard.up('KeyD')
+            phase(kind + ': open story and take the authored item')
             page.keyboard.press('KeyE')
             dialog = page.locator('[data-forge-narrative-v156] [role="dialog"]')
             dialog.wait_for(state='visible')
@@ -156,6 +176,7 @@ with sync_playwright() as p:
             dialog.wait_for(state='detached')
             page.wait_for_function('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
               return e.player.grounded&&!e.player.reloading&&!e.isPlaceableBusyV86?.(e.player);}''', arg=kind)
+            phase(kind + ': save checkpoint through native control')
             panel = checkpoint_panel(page, kind)
             panel.locator('[data-forge-checkpoint-v157="save"]').click()
             panel.locator('[role="status"]').get_by_text('Checkpoint de playtest enregistré', exact=False).wait_for()
@@ -170,13 +191,16 @@ with sync_playwright() as p:
                   saved['items'] == ['badge'] and saved['completed'] == ['goal'] and len(raw.encode()) < 4 * 1024 * 1024)
             (output / f'{kind}-saved-observation.json').write_text(json.dumps(saved, indent=2))
             capture(page, f'{kind}-01-saved.png')
+            phase(kind + ': stop playtest and check document/campaign isolation')
             page.locator('#retreat-mission' if kind == 'mission' else '#exit-hub').click()
             page.locator('#editor-canvas').wait_for(state='visible')
             check(kind + ': stopping returns to the same author document without touching campaign',
                   page.evaluate('() => structuredClone(__ATF_V51__.editor.model.data)') == authored
                   and page.evaluate('() => localStorage.getItem("atf-v47-profile-1")') == campaign)
+            phase(kind + ': real page reload and reopen Forge')
             page.reload(wait_until='domcontentloaded')
             enter_forge(page)
+            phase(kind + ': resume stored checkpoint from editor')
             panel = checkpoint_panel(page)
             panel.locator('[data-forge-checkpoint-v157="resume"]').click()
             canvas = page.locator('#game-canvas' if kind == 'mission' else '#hub-canvas')
@@ -193,6 +217,7 @@ with sync_playwright() as p:
                   page.evaluate('() => localStorage.getItem("atf-v47-profile-1")') == campaign)
             capture(page, f'{kind}-02-reloaded.png')
             for width, height in [(1280, 720), (1600, 900), (390, 844)]:
+                phase(f'{kind} {width}x{height}: resize responsive runtime')
                 page.set_viewport_size({'width': width, 'height': height})
                 panel = page.locator(f'[data-panel="{"play" if kind == "mission" else "hub"}"] .forge-checkpoint-v157')
                 before = observed(page, kind)
@@ -206,6 +231,7 @@ with sync_playwright() as p:
                       and page.evaluate('() => localStorage.getItem("atf-v47-profile-1")') == campaign)
                 pointer_action(page, panel, 'save')
                 capture(page, f'{kind}-layout-{width}x{height}-open.png')
+                phase(f'{kind} {width}x{height}: Escape/Enter disclosure keyboard behavior')
                 page.keyboard.press('Escape')
                 check(f'{kind} {width}x{height}: Escape closes to one compact control and native Enter reopens it without pausing gameplay',
                       panel.locator('details').get_attribute('open') is None
@@ -213,6 +239,7 @@ with sync_playwright() as p:
                 page.keyboard.press('Enter')
                 panel.locator('[data-forge-checkpoint-v157="save"]').wait_for(state='visible')
                 page.keyboard.press('Tab')
+                phase(f'{kind} {width}x{height}: no gameplay input through focused checkpoint controls')
                 protected = observed(page, kind)
                 page.keyboard.down('KeyD')
                 page.keyboard.down('KeyF')
@@ -227,6 +254,7 @@ with sync_playwright() as p:
             page.set_viewport_size({'width': 1600, 'height': 1050})
             page.locator('#retreat-mission' if kind == 'mission' else '#exit-hub').click()
             page.locator('#editor-canvas').wait_for(state='visible')
+            phase(kind + ': refuse a changed plan without losing document/checkpoint/campaign')
             page.locator('[data-forge-field="room-name"]').fill('Plan modifié après checkpoint')
             page.locator('[data-forge-field="room-name"]').press('Tab')
             changed = page.evaluate('() => structuredClone(__ATF_V51__.editor.model.data)')
@@ -239,12 +267,14 @@ with sync_playwright() as p:
                   and page.evaluate('() => localStorage.getItem("atf:forge-playtest-checkpoint:v157")') == raw
                   and page.evaluate('() => localStorage.getItem("atf-v47-profile-1")') == campaign)
             capture(page, f'{kind}-03-refused.png')
+            phase(kind + ': erase the isolated checkpoint')
             panel.locator('[data-forge-checkpoint-v157="clear"]').click()
             panel.locator('[role="status"]').get_by_text('Checkpoint de playtest effacé', exact=False).wait_for()
             check(kind + ': explicit erase removes only the checkpoint and disables resume',
                   page.evaluate('() => localStorage.getItem("atf:forge-playtest-checkpoint:v157")') is None
                   and panel.locator('[data-forge-checkpoint-v157="resume"]').is_disabled()
                   and page.evaluate('() => structuredClone(__ATF_V51__.editor.model.data)') == changed)
+        phase('continue the native campaign with Forge controls hidden')
         page.locator('#return-title').click()
         page.locator('#title-start:visible, #title-continue:visible').first.wait_for(state='visible')
         if page.locator('#title-start').is_visible():
@@ -262,6 +292,22 @@ with sync_playwright() as p:
     except Exception as error:
         report['status'] = 'failed'
         report['error'] = str(error)
+        detail = f'{report["tooling"]} | {report["phase"]} | last passed: {report["checks"][-1] if report["checks"] else "none"} | {type(error).__name__}: {error}'
+        try:
+            report['failureContext'] = page.evaluate('''()=>({
+              focus:{tag:document.activeElement?.tagName,id:document.activeElement?.id},
+              controls:[...document.querySelectorAll('.view.active .forge-checkpoint-v157')].map(n=>({
+                status:n.querySelector('[role="status"]')?.textContent,open:n.querySelector('details')?.open,
+                busy:n.getAttribute('aria-busy')})),
+              engines:[window.__ATF_GAME__,window.__ATF_HUB__].filter(Boolean).map(e=>({
+                running:e.running,paused:e.paused,loading:e.enemyAtlasLoadingPausedV65||e.userCasteLoadingV88,
+                room:e.forgeSessionV141?.currentRoomId,player:{x:e.player?.x,y:e.player?.y,
+                  grounded:e.player?.grounded,health:e.player?.health,ammo:e.player?.ammo},keys:[...(e.keys||[])]}))
+            })''')
+            detail += ' | observed: ' + json.dumps(report['failureContext'], ensure_ascii=False)
+        except Exception:
+            pass
+        print('::error title=Forge checkpoint::' + annotation_message(detail[:6000]), flush=True)
         try:
             capture(page, 'failure.png')
         except Exception:
