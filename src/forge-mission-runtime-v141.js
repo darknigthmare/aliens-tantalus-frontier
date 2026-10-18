@@ -253,9 +253,14 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       // the rescue, inventory, checkpoint and event effects in both cases.
       if (this.coopEnabled && actor?.alive && ally?.downed && interactionDistance(actor, ally) <= 86) return 'revive';
       if (list(this.drops).some(drop => !drop.taken && drop.type === 'security-key' && near(actor, drop, 100))) return 'security-key';
-      // Recovery is an inherited fallback: never silently activate a pending
-      // story terminal while trying to reach a dropped arrow or harpoon.
-      if (!this.forgePendingTerminalV156(actor) && this.recoverableWeaponIndexV131?.(actor) >= 0) return 'recoverable-weapon';
+      // Recovery is an inherited fallback: preserve actionable Forge validation
+      // and do not let V51 extract through a partition while reaching a pickup.
+      const objectiveBlocksRecovery = near(actor, this.objective);
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+        && Math.abs(actor.y - candidate.y) < candidate.h + 60);
+      const doorBlocksRecovery = door && !this.forgeInteractionClearV141(actor, door);
+      if (!objectiveBlocksRecovery && !doorBlocksRecovery && !this.forgePendingTerminalV156(actor)
+        && this.recoverableWeaponIndexV131?.(actor) >= 0) return 'recoverable-weapon';
       return null;
     }
 
@@ -267,9 +272,21 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         && room?.cells.some(cell => cell.id === archive.forgeCellIdV141 && cell.narrative));
     }
 
-    forgePendingTerminalV156(actor = this.player) {
-      return this.powerNode && !this.powerNode.active && near(actor, this.powerNode, 130) ? this.powerNode
-        : this.archiveTerminal && !this.archiveTerminal.recovered && near(actor, this.archiveTerminal, 130) ? this.archiveTerminal : null;
+    admitNativeTerminalInteractionV156(actor, terminal) {
+      // Native dispatch and its prompt share this pure admission hook. Outside
+      // a Forge session the historical campaign conditions remain unchanged.
+      if (!this.forgeSessionV141) return true;
+      return this.forgeInteractionClearV141(actor, terminal)
+        && (terminal !== this.archiveTerminal || Boolean(this.mission.objectives.boss));
+    }
+
+    forgePendingTerminalV156(actor = this.player, { includeBlocked = false } = {}) {
+      // Match inherited power → archive order after admission. Blocked terminals
+      // remain available only to the final refusal message, never to dispatch.
+      return [this.powerNode, this.archiveTerminal].find(terminal => terminal
+        && !(terminal === this.powerNode ? terminal.active : terminal.recovered)
+        && near(actor, terminal, 130)
+        && (includeBlocked || this.admitNativeTerminalInteractionV156(actor, terminal))) || null;
     }
 
     syncForgeNarrativeRewardsV156(result) {
@@ -320,11 +337,11 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         if (remaining.length) return this.locked(`OBJECTIFS FORGE ${session.completedObjectives.length}/${this.forgeRequiredObjectivesV141.length}`);
         return this.completeMission(actor);
       }
-      const terminal = this.forgePendingTerminalV156(actor);
+      const terminal = this.forgePendingTerminalV156(actor, { includeBlocked: true });
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return this.locked('TERMINAL INACCESSIBLE DERRIÈRE UNE CLOISON');
       if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
         || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return this.locked('NEUTRALISER LA MENACE ALPHA');
-      const door = this.doors.find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
         && Math.abs(actor.y - candidate.y) < candidate.h + 60);
       if (door && !this.forgeInteractionClearV141(actor, door)) return this.locked('SAS INACCESSIBLE DERRIÈRE UNE CLOISON');
       return super.interact(actor);
@@ -369,10 +386,13 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         const missing = this.missingExtractionRequirement();
         return missing ? `E  ${missing}` : 'E  CONFIRMER L’EXTRACTION FORGE';
       }
-      const terminal = this.forgePendingTerminalV156(actor);
+      const terminal = this.forgePendingTerminalV156(actor, { includeBlocked: true });
       if (terminal && !this.forgeInteractionClearV141(actor, terminal)) return 'E  TERMINAL BLOQUÉ PAR UNE CLOISON';
       if ((terminal === this.archiveTerminal && terminal && !this.mission.objectives.boss)
         || (!terminal && this.forgeBlockedNarrativeArchiveV156(actor))) return 'E  NEUTRALISER LA MENACE ALPHA';
+      const door = list(this.doors).find(candidate => Math.abs(actor.x + actor.w / 2 - candidate.x - candidate.w / 2) < 118
+        && Math.abs(actor.y - candidate.y) < candidate.h + 60);
+      if (door && !this.forgeInteractionClearV141(actor, door)) return 'E  SAS BLOQUÉ PAR UNE CLOISON';
       return super.getInteractionPrompt(actor);
     }
 

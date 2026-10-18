@@ -695,3 +695,189 @@ for (const name of ['Compound Bow', 'Harpoon Gun']) test(`review native priority
   assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
   assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.player.ammoReserve, reserve + 1);
 });
+
+function nativeRecoverableFixtureV156(t, { name = 'Compound Bow', archive = false, journey = true, objective = false, unlinkedDoor = false, nearObjective = false } = {}) {
+  const input = closeObjectiveProjectV156(unlinkedDoor || nearObjective ? { size: [128, 72], spawnX: 8, goalX: nearObjective ? 12 : 2, terminalX: 11 }
+    : { goalX: objective ? 5 : 2, terminalX: 5, secondTerminalX: archive ? 6 : null });
+  if (unlinkedDoor) input.rooms[0].cells.push({ id: 'unlinked-door', x: 12, y: 69, type: 'door', layer: 'gameplay' });
+  if (objective) input.rooms[0].cells = input.rooms[0].cells.filter(cell => cell.type !== 'terminal');
+  const weapon = WEAPONS.find(entry => entry.name === name); assert.ok(weapon);
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: journey, weapon }), { engine } = runtime;
+  t.after(() => engine.stop());
+  const target = objective ? engine.objective : archive ? engine.archiveTerminal : engine.powerNode;
+  walk(engine, () => centerDistanceV156(engine.player, target) < (unlinkedDoor ? 75 : 45));
+  for (let frame = 0; frame < 90; frame++) engine.update(1 / 60);
+  const impact = { id: 'qa-admission-projectile-impact', x: engine.player.x - 60, y: engine.player.y - 100, w: 3, h: engine.player.h + 200 };
+  engine.walls.push(impact); engine.player.pointerAimV83 = { x: -1, y: 0 };
+  assert.equal(engine.fire(engine.player), true);
+  for (let frame = 0; frame < 180 && !engine.recoverableWeaponsV131?.length; frame++) engine.update(1 / 60);
+  const item = engine.recoverableWeaponsV131?.[0]; assert.ok(item, `${name} native impact produced a pickup`);
+  engine.walls.splice(engine.walls.indexOf(impact), 1); engine.player.pointerAimV83 = null;
+  engine.keys.add('KeyA');
+  for (let frame = 0; frame < 900 && Math.hypot(item.x - engine.player.x - engine.player.w / 2, item.y - engine.player.y - engine.player.h / 2) > 68; frame++) engine.update(1 / 60);
+  engine.keys.delete('KeyA');
+  assert.equal(engine.recoverableWeaponIndexV131(engine.player), 0);
+  assert.equal(item.owner, engine.player); assert.equal(item.weaponId, weapon.id);
+  assert.ok(centerDistanceV156(engine.player, target) < 130, JSON.stringify({actor: {x:engine.player.x,y:engine.player.y,w:engine.player.w,h:engine.player.h},target,item:{x:item.x,y:item.y},distance:centerDistanceV156(engine.player,target)}));
+  return { ...runtime, item, target };
+}
+
+for (const name of ['Compound Bow', 'Harpoon Gun']) for (const blocked of ['power-wall', 'archive-boss']) {
+  test(`review blocked-terminal admission: ${name} recovers its real projectile despite ${blocked}, then retains the lock`, t => {
+    const runtime = nativeRecoverableFixtureV156(t, { name, archive: blocked === 'archive-boss' }), { engine, item, target } = runtime;
+    let partition;
+    if (blocked === 'power-wall') {
+      // This partition blocks only the console to the right. The actual native
+      // pickup to the left keeps its strict, independently asserted clear LOS.
+      const actorCenter = engine.player.x + engine.player.w / 2, terminalCenter = target.x + target.w / 2;
+      assert.ok(terminalCenter > actorCenter);
+      partition = { id: 'qa-admission-sealed-power', x: (actorCenter + terminalCenter) / 2, y: engine.player.y - 10, w: 4, h: engine.player.h + 20 };
+      engine.walls.push(partition); assert.equal(engine.forgeInteractionClearV141(engine.player, target), false);
+    } else {
+      engine.powerNode.active = true; engine.mission.objectives.power = true;
+      engine.mission.objectives.boss = false;
+      assert.equal(engine.forgeInteractionClearV141(engine.player, target), true);
+    }
+    assert.equal(engine.admitNativeTerminalInteractionV156(engine.player, target), false);
+    assert.equal(engine.forgePendingTerminalV156(), null);
+    assert.equal(engine.forgePendingTerminalV156(engine.player, { includeBlocked: true }), target);
+    assert.equal(engine.recoverableWeaponIndexV131(engine.player), 0);
+    // Reading the selectors and prompt cannot consume or move the pickup.
+    const before = { reserve: engine.player.ammoReserve, events: runtime.messages.length, x: item.x, y: item.y };
+    assert.equal(engine.forgeUrgentNativeUseV156(), 'recoverable-weapon'); assert.match(engine.getInteractionPrompt(), /RÉCUPÉRER/);
+    assert.equal(engine.player.ammoReserve, before.reserve); assert.equal(runtime.messages.length, before.events);
+    assert.equal(engine.recoverableWeaponsV131[0], item); assert.deepEqual([item.x, item.y], [before.x, before.y]);
+    tap(runtime);
+    assert.equal(engine.recoverableWeaponsV131.length, 0); assert.equal(engine.player.ammoReserve, before.reserve + 1);
+    assert.equal(runtime.messages.filter(event => event.type === 'weapon-recovered-v131').length, 1);
+    assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+    assert.equal(blocked === 'power-wall' ? engine.powerNode.active : engine.archiveTerminal.recovered, false);
+    const refusal = blocked === 'power-wall' ? /TERMINAL BLOQUÉ PAR UNE CLOISON/ : /NEUTRALISER LA MENACE ALPHA/;
+    assert.match(engine.getInteractionPrompt(), refusal); tap(runtime);
+    assert.equal(engine.player.ammoReserve, before.reserve + 1); assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+    assert.equal(blocked === 'power-wall' ? engine.powerNode.active : engine.archiveTerminal.recovered, false);
+    if (partition) engine.walls.splice(engine.walls.indexOf(partition), 1);
+    else engine.mission.objectives.boss = true;
+    assert.equal(engine.forgePendingTerminalV156(), target); assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/);
+    tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, blocked === 'power-wall' ? 'terminal' : 'archive');
+    assert.equal(engine.player.ammoReserve, before.reserve + 1);
+  });
+}
+
+for (const narrativeArchive of [false, true]) test(`review blocked-terminal admission: clear ${narrativeArchive ? 'narrative' : 'ordinary'} archive is used past blocked pending power`, t => {
+  const input = closeObjectiveProjectV156({ goalX: 2, terminalX: 5, secondTerminalX: 6 });
+  if (!narrativeArchive) delete input.rooms[0].cells.find(cell => cell.id === 'archive').narrative;
+  const runtime = missionV136({ editorProject: input, forgeJourneyV141: true }), { engine } = runtime;
+  t.after(() => engine.stop());
+  walk(engine, () => centerDistanceV156(engine.player, engine.archiveTerminal) < centerDistanceV156(engine.player, engine.powerNode));
+  const partition = { id: 'qa-admission-power-only', x: engine.player.x - 12, y: engine.player.y - 10, w: 6, h: engine.player.h + 20 };
+  engine.walls.push(partition);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.powerNode), false);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.archiveTerminal), true);
+  assert.equal(engine.mission.objectives.boss, true);
+  assert.equal(engine.forgePendingTerminalV156(), engine.archiveTerminal);
+  assert.equal(engine.forgePreferredUseV156().target, engine.archiveTerminal);
+  assert.match(engine.getInteractionPrompt(), narrativeArchive ? /LIRE LE RÉCIT/ : /EXTRAIRE LES ARCHIVES/);
+  const intel = engine.inventory.intel; tap(runtime);
+  assert.equal(engine.powerNode.active, false); assert.equal(engine.archiveTerminal.recovered, true);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, narrativeArchive ? 'archive' : null);
+  assert.equal(engine.inventory.intel, intel + (narrativeArchive ? 0 : 3));
+  assert.equal(runtime.messages.filter(event => event.type === 'power-restored').length, 0);
+  assert.equal(runtime.messages.filter(event => event.type === 'archive-recovered').length, narrativeArchive ? 0 : 1);
+});
+
+test('review blocked-terminal admission: an admitted first narrative activation still precedes a real recoverable projectile', t => {
+  const runtime = nativeRecoverableFixtureV156(t), { engine, item } = runtime;
+  assert.equal(engine.forgePendingTerminalV156(), engine.powerNode); assert.equal(engine.forgeUrgentNativeUseV156(), null);
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); const reserve = engine.player.ammoReserve;
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.powerNode.active, true);
+  assert.equal(engine.recoverableWeaponsV131[0], item); assert.equal(engine.player.ammoReserve, reserve);
+  engine.closeForgeNarrativeV156(); assert.equal(engine.forgeUrgentNativeUseV156(), 'recoverable-weapon'); tap(runtime);
+  assert.equal(engine.recoverableWeaponsV131.length, 0); assert.equal(engine.player.ammoReserve, reserve + 1);
+});
+
+test('review blocked-terminal admission: outside the Forge journey native power keeps its historical wall-blind priority', t => {
+  const runtime = nativeRecoverableFixtureV156(t, { journey: false }), { engine, item } = runtime;
+  assert.equal(engine.forgeSessionV141, null);
+  const actorCenter = engine.player.x + engine.player.w / 2, terminalCenter = engine.powerNode.x + engine.powerNode.w / 2;
+  const partition = { id: 'qa-native-baseline-partition', x: (actorCenter + terminalCenter) / 2, y: engine.player.y - 10, w: 4, h: engine.player.h + 20 };
+  engine.walls.push(partition);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.powerNode), false);
+  assert.equal(engine.admitNativeTerminalInteractionV156(engine.player, engine.powerNode), true);
+  assert.equal(engine.recoverableWeaponIndexV131(), 0); assert.match(engine.getInteractionPrompt(), /RÉTABLIR LE CIRCUIT/);
+  tap(runtime); assert.equal(engine.powerNode.active, true); assert.equal(engine.recoverableWeaponsV131[0], item);
+  assert.equal(runtime.messages.filter(event => event.type === 'power-restored').length, 1);
+});
+
+test('review recovery boundary: a ready Forge objective validates then extracts separately while its real projectile stays untouched', t => {
+  const runtime = nativeRecoverableFixtureV156(t, { objective: true }), { engine, item } = runtime;
+  assert.equal(engine.powerNode, null); assert.equal(engine.archiveTerminal, null);
+  assert.ok(centerDistanceV156(engine.player, engine.objective) < 125);
+  assert.equal(engine.forgePreferredUseV156().kind, 'objective'); assert.equal(engine.forgeUrgentNativeUseV156(), null);
+  const reserve = engine.player.ammoReserve;
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']); assert.equal(engine.mission.state, 'active');
+  assert.equal(engine.recoverableWeaponsV131[0], item); assert.equal(engine.player.ammoReserve, reserve);
+  assert.match(engine.getInteractionPrompt(), /CONFIRMER L’EXTRACTION FORGE/); tap(runtime);
+  assert.equal(engine.mission.state, 'complete'); assert.equal(engine.recoverableWeaponsV131[0], item);
+  assert.equal(engine.player.ammoReserve, reserve); assert.equal(runtime.messages.filter(event => event.type === 'weapon-recovered-v131').length, 0);
+  assert.equal(runtime.messages.filter(event => event.type === 'forge-objective-complete').length, 1);
+});
+
+for (const completed of [false, true]) test(`review recovery boundary: real pickup cannot delegate ${completed ? 'extraction' : 'validation'} through a sealed Forge objective`, t => {
+  const runtime = nativeRecoverableFixtureV156(t, { objective: true }), { engine, item } = runtime;
+  if (completed) { tap(runtime); assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']); }
+  const actorCenter = engine.player.x + engine.player.w / 2, targetCenter = engine.objective.x + engine.objective.w / 2;
+  assert.ok(targetCenter > actorCenter);
+  const partition = { id: 'qa-recovery-objective-partition', x: (actorCenter + targetCenter) / 2, y: engine.player.y - 10, w: 4, h: engine.player.h + 20 };
+  engine.walls.push(partition);
+  assert.equal(engine.recoverableWeaponIndexV131(), 0); assert.equal(engine.forgeInteractionClearV141(engine.player, engine.objective), false);
+  assert.equal(engine.forgePreferredUseV156(), null); assert.equal(engine.forgeUrgentNativeUseV156(), null);
+  const reserve = engine.player.ammoReserve, ledger = [...engine.forgeSessionV141.completedObjectives];
+  assert.match(engine.getInteractionPrompt(), /OBJECTIF BLOQUÉ PAR UNE CLOISON/); tap(runtime);
+  assert.equal(engine.mission.state, 'active'); assert.deepEqual(engine.forgeSessionV141.completedObjectives, ledger);
+  assert.equal(engine.recoverableWeaponsV131[0], item); assert.equal(engine.player.ammoReserve, reserve);
+  assert.equal(runtime.messages.filter(event => event.type === 'weapon-recovered-v131').length, 0);
+  engine.walls.splice(engine.walls.indexOf(partition), 1);
+  assert.equal(engine.forgePreferredUseV156().kind, 'objective'); tap(runtime);
+  assert.equal(engine.mission.state, completed ? 'complete' : 'active'); assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']);
+});
+
+test('review recovery boundary: an ordinary unlinked door behind a partition cannot be opened by recovery delegation', t => {
+  const runtime = nativeRecoverableFixtureV156(t, { unlinkedDoor: true }), { engine, item } = runtime;
+  // First activation still belongs to the narrative; recovery cannot silently
+  // activate it. Closing the story leaves a genuine pending native pickup.
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); engine.closeForgeNarrativeV156();
+  const door = engine.doors[0]; assert.ok(door); assert.equal(door.open, false);
+  assert.equal(engine.forgeLinkedDoorV141(), null);
+  const actorCenter = engine.player.x + engine.player.w / 2, doorCenter = door.x + door.w / 2;
+  assert.ok(Math.abs(actorCenter - doorCenter) < 118); assert.ok(Math.abs(engine.player.y - door.y) < door.h + 60);
+  const partition = { id: 'qa-recovery-unlinked-door-partition', x: (actorCenter + doorCenter) / 2,
+    y: engine.player.y - 10, w: 4, h: engine.player.h + 20 };
+  engine.walls.push(partition);
+  // Seal the story as well so this exercise reaches the legacy door fallback.
+  assert.equal(engine.forgeInteractionClearV141(engine.player, engine.powerNode), false);
+  assert.equal(engine.forgeInteractionClearV141(engine.player, door), false); assert.equal(engine.recoverableWeaponIndexV131(), 0);
+  assert.equal(engine.forgeUrgentNativeUseV156(), null); assert.match(engine.getInteractionPrompt(), /SAS BLOQUÉ PAR UNE CLOISON/);
+  const reserve = engine.player.ammoReserve; tap(runtime);
+  assert.equal(door.open, false); assert.equal(engine.recoverableWeaponsV131[0], item); assert.equal(engine.player.ammoReserve, reserve);
+  assert.equal(engine.mission.state, 'active'); assert.equal(engine.forgeNarrativeOpenV156 || null, null);
+  assert.ok(runtime.messages.some(event => event.type === 'locked' && /SAS INACCESSIBLE/.test(event.requirement)));
+});
+
+test('review recovery boundary: completed nearby objective cannot extract through native recovery when its rereadable story is nearer', t => {
+  const runtime = nativeRecoverableFixtureV156(t, { nearObjective: true }), { engine, item } = runtime;
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); engine.closeForgeNarrativeV156();
+  walk(engine, () => engine.forgePreferredUseV156()?.kind === 'objective');
+  assert.match(engine.getInteractionPrompt(), /VALIDER L’OBJECTIF/); tap(runtime);
+  assert.deepEqual(engine.forgeSessionV141.completedObjectives, ['goal']); assert.equal(engine.mission.state, 'active');
+  walk(engine, () => engine.recoverableWeaponIndexV131() >= 0 && engine.forgePreferredUseV156()?.kind === 'narrative', -1);
+  assert.ok(centerDistanceV156(engine.player, engine.objective) < 125);
+  assert.ok(centerDistanceV156(engine.player, engine.powerNode) < centerDistanceV156(engine.player, engine.objective));
+  assert.equal(engine.forgeUrgentNativeUseV156(), null); assert.equal(engine.recoverableWeaponIndexV131(), 0);
+  const reserve = engine.player.ammoReserve;
+  assert.match(engine.getInteractionPrompt(), /LIRE LE RÉCIT/); tap(runtime);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.mission.state, 'active');
+  assert.equal(engine.recoverableWeaponsV131[0], item); assert.equal(engine.player.ammoReserve, reserve);
+  assert.equal(runtime.messages.filter(event => event.type === 'weapon-recovered-v131').length, 0);
+});

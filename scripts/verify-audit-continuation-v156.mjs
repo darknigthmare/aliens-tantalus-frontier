@@ -17,6 +17,7 @@ import { HUB_ANNEXES_V137 as annexes } from '../src/hub-annex-registry-v137.js';
 import { FORGE_NARRATIVE_LIMITS_V156 as narrativeLimits,
   defaultForgeNarrativeV156, parseForgeNarrativeV156 } from '../src/forge-narrative-v156.js';
 import { withWeaponActionsV131 } from '../src/weapon-actions-v131.js';
+import { withForgeMissionRuntimeV141 } from '../src/forge-mission-runtime-v141.js';
 
 const prefix = 'docs/forge/xeno-trials/';
 const bytes = name => readFileSync(new URL('../' + prefix + name, import.meta.url));
@@ -29,7 +30,7 @@ const ids = rows => rows.map(r => r[0]);
 const runtimeSources = [
   'src/forge-authoring-v133.js', 'src/forge-mission-runtime-v141.js', 'src/forge-model-v130.js',
   'src/forge-narrative-ui-v156.js', 'src/forge-narrative-v156.js', 'src/forge-ship-runtime-v141.js',
-  'src/forge-ui-v130.js', 'src/forge-versions-v136.js', 'src/game-production-runtime.js',
+  'src/forge-ui-v130.js', 'src/forge-versions-v136.js', 'src/game-production-runtime.js', 'src/game-v51-runtime.js',
   'src/hub-annex-npc-life-v141.js', 'src/weapon-actions-v131.js', 'src/xeno-trials-restraint-pose-v156.js',
   'src/xeno-trials-rig-v154.js', 'src/xeno-trials-runtime-v96.js', 'src/xeno-trials-sequences-v155.js',
   'src/xeno-trials-ui-v96.js'
@@ -174,6 +175,15 @@ test('the appendix accurately records bounded human lowering, real annex watches
   assert.equal(forge.sessionPersistence, 'session-memory-only');
   assert.equal(forge.interSessionProgress, false);
   assert.equal(forge.freeScripts, false);
+  const admission = forge.nativeTerminalAdmission;
+  assert.equal(admission.module, 'src/game-v51-runtime.js');
+  assert.equal(admission.hook, 'admitNativeTerminalInteractionV156');
+  assert.equal(typeof withForgeMissionRuntimeV141(class {}).prototype[admission.hook], 'function');
+  assert.equal(admission.optional, true);
+  assert.deepEqual(admission.sharedWith, ['power-action', 'archive-action', 'power-prompt', 'archive-prompt']);
+  assert.deepEqual(admission.pendingOrder, ['power', 'archive']);
+  assert.equal(admission.outsideForge, 'native-conditions-preserved');
+  assert.equal(admission.blockedTerminalUse, 'refusal-message-only');
   const recovery = current.runtimeContracts.weaponRecovery;
   assert.equal(recovery.module, 'src/weapon-actions-v131.js');
   assert.equal(recovery.mixin, 'withWeaponActionsV131');

@@ -1420,7 +1420,24 @@
       },
       "sessionPersistence": "session-memory-only",
       "interSessionProgress": false,
-      "freeScripts": false
+      "freeScripts": false,
+      "nativeTerminalAdmission": {
+        "module": "src/game-v51-runtime.js",
+        "hook": "admitNativeTerminalInteractionV156",
+        "optional": true,
+        "sharedWith": [
+          "power-action",
+          "archive-action",
+          "power-prompt",
+          "archive-prompt"
+        ],
+        "pendingOrder": [
+          "power",
+          "archive"
+        ],
+        "outsideForge": "native-conditions-preserved",
+        "blockedTerminalUse": "refusal-message-only"
+      }
     },
     "weaponRecovery": {
       "module": "src/weapon-actions-v131.js",
@@ -1440,7 +1457,7 @@
   },
   "runtimeSourceSha256": {
     "src/forge-authoring-v133.js": "4ecbc1c16f57ae2d7e0395cfe305d189387aa5d364d913b8aa82c264c7d2787d",
-    "src/forge-mission-runtime-v141.js": "31bff5a62e6b748f85759d9e9b3e028c33c1849f12b36695d6ab60a17cf73308",
+    "src/forge-mission-runtime-v141.js": "7da4b55aab48a78c6220752b474f108c3ba10bcd0f0c8241d5279aa864f9b624",
     "src/forge-model-v130.js": "e7fb0a3f79ab9515051393018f9d6230c42e74c062d3c8c63d862c65a8b8e647",
     "src/forge-narrative-ui-v156.js": "7577ffe05a08f398067fdc69761f491298d0c6ce53c136fe5b7e0efe1df6f330",
     "src/forge-narrative-v156.js": "615d056e05f7ce3970cc38085afd6b15ca4cd0a8ef22511580cf8b3b70e12153",
@@ -1448,6 +1465,7 @@
     "src/forge-ui-v130.js": "1457e39382c08fb0c86af13d5773269e42a73dfd24021b286310e1a01852782b",
     "src/forge-versions-v136.js": "a3332e533bc0e972a8c5f82492a71dbd4b68c197ef1be9cf9b2277ad40dfb361",
     "src/game-production-runtime.js": "937312438f3059545734e1e09353e6fe868dcbd47289cede4eee5e6d18cc7b61",
+    "src/game-v51-runtime.js": "724da4ddc5f0b9daeea2f8cde4c7b4a93199cb93e65afc86c302f7b164ef5ddc",
     "src/hub-annex-npc-life-v141.js": "fe012faff2d6ece8a1fd52c4a5a20290c1f7153a447bf97f0cf8266636a946d3",
     "src/weapon-actions-v131.js": "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
     "src/xeno-trials-restraint-pose-v156.js": "d38f61546c00cadd2ed3f9064b1dfe9b178f38e5c78dcc2448667017431a3a22",
@@ -2837,9 +2855,9 @@
         [
           "forge-native-choice",
           "Choix en playtest Mission / Vaisseau",
-          "E choisit une action admissible : récit, terminal ordinaire encore à activer ou objectif prêt. Verrou boss et prompts natifs conservés ; réanimation J2, clé et récupération d’arme déléguées au moteur natif.",
+          "E choisit une action admissible ; admission commune aux actions et prompts natifs power/archive. Ordre power→archive après visibilité et verrou boss. Réanimation J2, clé et récupération restent déléguées au moteur natif.",
           "Implémenté (borné)",
-          "Monde suspendu pendant le récit ; sans nouveau gain ni affaiblissement des prérequis. Récupération Bow/Harpoon : profil équipé, propriétaire, portée 72 et ligne de vue native conservés."
+          "Récupération seulement sans terminal en attente admis, sans objectif proche ni porte native cloisonnée ; profil, propriétaire, portée 72 et ligne de vue natifs conservés. Hors Forge : conditions historiques inchangées."
         ],
         [
           "forge-memory-session",
@@ -4622,5 +4640,5 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "62f4b4e64c147446bf63571b364c94047e054a693d7d276ff89d137956628ced"
+  "workbookSha256": "2ce06baf4c8c12df77d167a32944d1aa50ddc3823f612261892eb3ed2eaf45ab"
 }
