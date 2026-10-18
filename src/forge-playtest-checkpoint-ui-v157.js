@@ -35,9 +35,15 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
     const ownedFocus = origin && doc.activeElement === origin.button;
     let focusMoved = false;
     const observedFocus = event => {
-      if (event.target !== origin?.button && event.target !== doc.body && event.target !== doc.documentElement) focusMoved = true;
+      if (event.target !== origin?.button && event.target !== origin?.summary
+        && event.target !== doc.body && event.target !== doc.documentElement) focusMoved = true;
     };
-    if (ownedFocus) doc.addEventListener?.('focusin', observedFocus, true);
+    if (ownedFocus) {
+      doc.addEventListener?.('focusin', observedFocus, true);
+      // Keep keyboard events inside the section throughout the async action.
+      // The disclosure remains focusable when all action buttons are disabled.
+      origin.summary.focus?.({ preventScroll: true });
+    }
     busy = true; update();
     try {
       if (action === 'save') {
@@ -63,12 +69,11 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
       const currentEngine = getEngine(), active = doc.activeElement;
       const sameOwner = currentEngine === ownerEngine && currentEngine?.forgeSessionV141 === ownerSession;
       const visible = node => node?.isConnected !== false && (!node.getClientRects || node.getClientRects().length > 0);
-      // Disabling the focused action can move focus to body in Chromium.
-      // Return only the focus we owned, while the same playtest/view remains.
+      // Return only our parked/displaced focus while the same playtest/view remains.
       // An intentional canvas focus, another control or navigation wins.
       if (ownedFocus && !dead && !focusMoved && sameOwner && isVisible(origin.root) && !origin.section.hidden
         && visible(origin.section) && doc.hasFocus?.() !== false
-        && (!active || active === doc.body || active === doc.documentElement || active === origin.button)) {
+        && (!active || active === doc.body || active === doc.documentElement || active === origin.button || active === origin.summary)) {
         const target = !origin.button.disabled && visible(origin.button) ? origin.button : origin.summary;
         if (visible(target)) target.focus?.({ preventScroll: true });
       }

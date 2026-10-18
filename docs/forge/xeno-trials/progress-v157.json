@@ -1483,6 +1483,20 @@
           ],
           "destroyRemovesListener": true
         },
+        "focusWhileBusy": {
+          "requiresOriginalActionFocus": true,
+          "target": "summary",
+          "timing": "synchronous-before-busy-and-disabled-update",
+          "keyIsolationDuringPendingAction": true,
+          "keys": [
+            "D",
+            "F",
+            "E",
+            "Escape"
+          ],
+          "ownedSummaryAcceptedForRestoration": true,
+          "closedDisclosureRestoresSummary": true
+        },
         "asyncFocus": {
           "requiresOriginalActionFocus": true,
           "targets": [
@@ -1655,7 +1669,7 @@
     "src/forge-model-v130.js": "e7fb0a3f79ab9515051393018f9d6230c42e74c062d3c8c63d862c65a8b8e647",
     "src/forge-narrative-ui-v156.js": "94427acc0b175f76de644b3cb892a04c955168baee023570f24b935854e561ac",
     "src/forge-narrative-v156.js": "918abde0155d427de668215b99457cf79667e7837b0caf41e05978aabf0ea96f",
-    "src/forge-playtest-checkpoint-ui-v157.js": "cfe79aa2a8a7e59fd667ba1ce25855afe1431d4bae93592a46cc5f4d6b97d2eb",
+    "src/forge-playtest-checkpoint-ui-v157.js": "85032efba0f8071afc69af9369682ce372c0ca6e718e6898c1ad456259ceafee",
     "src/forge-playtest-checkpoint-v157.js": "d7930fd9d9056970e63e02d54b6e70a3a4a00de931c26c7551db59ee15b4569c",
     "src/forge-ship-runtime-v141.js": "4079d01e92e14c350c9d6d607948722682d45dd366a38511446fe9de70dbbf9b",
     "src/forge-ui-v130.js": "1457e39382c08fb0c86af13d5773269e42a73dfd24021b286310e1a01852782b",
@@ -3088,7 +3102,7 @@
         [
           "forge-local-checkpoint-v157",
           "Checkpoint local explicite",
-          "Un slot ; 4 Mio ; même projet/équipe/équipement/véhicule de départ ; commandes visibles en 16:9/mobile ; focus asynchrone gardé par moteur/session ; validation avant mutation.",
+          "Un slot ; 4 Mio ; même projet/équipe/équipement/véhicule de départ ; commandes visibles en 16:9/mobile ; focus sur le résumé avant désactivation, puis restauration gardée par moteur/session ; validation avant mutation.",
           "Implémenté (borné)",
           "Pas de cloud, de récompense automatique ni de copie des sauvegardes de campagne."
         ]
@@ -5136,8 +5150,8 @@
         [
           "src/forge-playtest-checkpoint-ui-v157.js",
           "Non épinglé en V156",
-          "cfe79aa2a8a7e59fd667ba1ce25855afe1431d4bae93592a46cc5f4d6b97d2eb",
-          "Commandes explicites accessibles en 16:9/mobile ; après action asynchrone, focus restitué seulement au contrôle initial du même moteur/session, sans voler un autre focus ni revenir après navigation.",
+          "85032efba0f8071afc69af9369682ce372c0ca6e718e6898c1ad456259ceafee",
+          "Commandes accessibles en 16:9/mobile ; focus placé synchronement sur le résumé avant désactivation, puis restitué sous gardes moteur/session sans voler un autre focus ni revenir après navigation.",
           "scripts/verify-forge-playtest-checkpoint-v157.mjs"
         ],
         [
@@ -5365,7 +5379,7 @@
       "expected": 4
     }
   ],
-  "workbookSha256": "7bc15b73097bf7254f4ff0f461de5e8680ffd434a5a02bf5288547a7a676bc7d",
+  "workbookSha256": "5606550b16ca256531220a1975897ce6eda32b1416a9ae02f7efc97d3acc71ec",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V156",
@@ -5506,8 +5520,8 @@
       {
         "path": "src/forge-playtest-checkpoint-ui-v157.js",
         "previousSha256": null,
-        "currentSha256": "cfe79aa2a8a7e59fd667ba1ce25855afe1431d4bae93592a46cc5f4d6b97d2eb",
-        "reason": "Commandes explicites accessibles en 16:9/mobile ; après action asynchrone, focus restitué seulement au contrôle initial du même moteur/session, sans voler un autre focus ni revenir après navigation.",
+        "currentSha256": "85032efba0f8071afc69af9369682ce372c0ca6e718e6898c1ad456259ceafee",
+        "reason": "Commandes accessibles en 16:9/mobile ; focus placé synchronement sur le résumé avant désactivation, puis restitué sous gardes moteur/session sans voler un autre focus ni revenir après navigation.",
         "verifiers": [
           "scripts/verify-forge-playtest-checkpoint-v157.mjs"
         ]

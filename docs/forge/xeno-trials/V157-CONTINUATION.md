@@ -37,13 +37,16 @@ dépliage à la demande et accès dans un cadre 16:9 ou un viewport mobile. Les
 contrôles au pointeur et au clavier gardent leur portée dans le playtest ; les
 touches du panneau ne déclenchent pas les actions du personnage. Une recette
 dans un viewport Chromium ne certifie pas un téléphone ou un écran tactile.
-Après une action asynchrone, le bouton initialement focalisé retrouve le focus,
-ou le résumé prend le relais si ce bouton est devenu indisponible. Ce retour
+Quand le bouton déclencheur possède le focus, le résumé le reçoit synchronement,
+avant la désactivation des boutons et avant l’attente de l’action. Les touches
+D/F/E/Escape restent alors dans le panneau pendant l’opération. Après l’action,
+le bouton initialement focalisé retrouve le focus s’il est visible et disponible ;
+sinon, le résumé le conserve, notamment si Escape a refermé le panneau. Ce retour
 exige le même moteur, la même session et un panneau encore visible. Un autre
 contrôle, le canvas, une navigation ou un document défocalisé gardent leur
 priorité : une résolution tardive ne reprend pas le focus d’un contexte quitté.
-Le clavier reste ainsi dans le panneau après l’action, sans fuite d’Escape
-vers la pause du jeu ou le retour global à l’éditeur.
+Cette portée clavier couvre l’attente comme la fin de l’action pour empêcher
+Escape d’atteindre la pause du jeu ou le retour global à l’éditeur.
 L’indicateur de présence est mis en cache et rafraîchi après les actions ou un
 événement de stockage pertinent ; il ne relit pas les 4 Mio à chaque tick UI.
 

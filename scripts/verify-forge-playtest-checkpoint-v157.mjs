@@ -341,7 +341,7 @@ test('quota and storage errors do not confirm a save or erase the older checkpoi
 // Small DOM host double only for UI wiring; gameplay above uses production.
 class Node extends EventTarget {
   constructor(tag) { super(); this.tag = tag; this.children = []; this.dataset = {}; this.attributes = {}; }
-  append(node) { this.children.push(node); } setAttribute(key, value) { this.attributes[key] = value; }
+  append(node) { this.children.push(node); node.parentNode = this; } setAttribute(key, value) { this.attributes[key] = value; }
   remove() { this.removed = true; }
   querySelector(selector) { const action = selector.match(/="([^"]+)"/)?.[1]; const all = node => node.children.flatMap(child => [child, ...all(child)]); return all(this).find(node => node.dataset.forgeCheckpointV157 === action); }
 }
@@ -392,17 +392,24 @@ test('UI ticks never reread the checkpoint; explicit actions, failures and match
   ui.destroy(); const destroyedReads = reads; signal(store.key); tick(); assert.equal(reads, destroyedReads);
 });
 
-test('async checkpoint actions restore displaced native focus, respect other targets/owners and use the summary after erasing', async t => {
+test('async checkpoint actions keep pending keyboard input inside the section and respect other focus targets/owners', async t => {
   const doc = Object.assign(new EventTarget(), { hasFocus: () => true }), root = new Node('main'), subject = mission(t), e = subject.engine, local = storage(),
     store = new ForgePlaytestCheckpointStoreV157(local), actualSave = store.save.bind(store);
   doc.createElement = tag => {
     const node = new Node(tag);
-    node.getClientRects = () => [{}];
+    node.getClientRects = () => {
+      if (node.hidden) return [];
+      for (let child = node, parent = node.parentNode; parent; child = parent, parent = parent.parentNode) {
+        if (parent.hidden || parent.tag === 'details' && !parent.open && child !== parent.children[0]) return [];
+      }
+      return [{}];
+    };
     node.focus = () => {
       doc.activeElement = node;
       const event = new Event('focusin'); Object.defineProperty(event, 'target', { value: node }); doc.dispatchEvent(event);
     };
-    // DOM-host fixture for native disabled-button blur observed in CI143.
+    // DOM host models disabled-button blur; product code must not depend on
+    // a browser retaining focus on a disabled action.
     let disabled = false;
     Object.defineProperty(node, 'disabled', { get: () => disabled, set: value => {
       disabled = value; if (value && doc.activeElement === node) doc.body.focus();
@@ -410,6 +417,7 @@ test('async checkpoint actions restore displaced native focus, respect other tar
     return node;
   };
   doc.body = doc.createElement('body'); doc.documentElement = doc.createElement('html'); doc.activeElement = doc.body;
+  root.parentNode = doc;
   let currentEngine = e, visible = true, release;
   store.save = engine => {
     const gate = new Promise(resolve => { release = resolve; });
@@ -419,15 +427,47 @@ test('async checkpoint actions restore displaced native focus, respect other tar
   const ui = mountForgePlaytestCheckpointUIV157({ document: doc, roots: [root], store, getProject: () => project(), getEngine: () => currentEngine,
     isVisible: () => visible, resumePlaytest: async request => { const result = await store.resume(e, request.project); canvas.focus(); return result; } });
   t.after(() => ui.destroy());
-  const section = root.children[0], summary = section.children[0].children[0], button = action => section.querySelector(`[data-forge-checkpoint-v157="${action}"]`);
+  const section = root.children[0], details = section.children[0], summary = details.children[0],
+    button = action => section.querySelector(`[data-forge-checkpoint-v157="${action}"]`);
   const click = action => { const target = button(action); target.focus(); target.dispatchEvent(new Event('click')); };
   const settled = async () => {
     const deadline = Date.now() + 5000;
     while (section.attributes['aria-busy'] === 'true' && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 1));
     assert.equal(section.attributes['aria-busy'], 'false');
   };
-  click('save'); assert.equal(doc.activeElement, doc.body); release(); await settled();
+  // EventTarget has no DOM bubbling. Follow the focused host's real ancestor
+  // path, reaching the production engine's window listeners only when allowed.
+  const keyboard = (type, key, code) => {
+    const target = doc.activeElement, path = [];
+    for (let node = target; node; node = node.parentNode) path.push(node);
+    const event = new Event(type, { bubbles: true, cancelable: true });
+    Object.defineProperties(event, { target: { value: target }, key: { value: key }, code: { value: code },
+      repeat: { value: false }, composedPath: { value: () => path } });
+    for (const node of path) { node.dispatchEvent(event); if (event.cancelBubble) return event; }
+    subject.events.dispatchEvent(event); return event;
+  };
+  click('save');
+  assert.equal(section.attributes['aria-busy'], 'true');
+  assert.equal(button('save').disabled, true);
+  assert.equal(doc.activeElement, summary, 'focus parks inside the section before disabling the native action');
+  const x = e.player.x, ammo = e.player.ammo;
+  for (const [key, code] of [['d', 'KeyD'], ['f', 'KeyF'], ['e', 'KeyE']]) {
+    assert.equal(keyboard('keydown', key, code).cancelBubble, true);
+    assert.equal(keyboard('keyup', key, code).cancelBubble, true);
+  }
+  e.update(1 / 60);
+  assert.equal(e.player.x, x); assert.equal(e.player.ammo, ammo); assert.equal(e.keys.size, 0);
+  assert.equal(e.paused, false); assert.equal(e.running, true);
+  release(); await settled();
   assert.equal(doc.activeElement, button('save'), 'the exact native action regains only its displaced focus');
+  click('save');
+  assert.equal(doc.activeElement, summary);
+  assert.equal(keyboard('keydown', 'Escape', 'Escape').cancelBubble, true);
+  assert.equal(details.open, false); assert.equal(doc.activeElement, summary);
+  assert.equal(e.paused, false); assert.equal(e.running, true, 'Escape cannot reach the native engine while save is pending');
+  release(); await settled();
+  assert.equal(doc.activeElement, summary, 'a closed disclosure does not restore focus into its hidden actions');
+  details.open = true;
   click('save'); doc.documentElement.focus(); release(); await settled();
   assert.equal(doc.activeElement, button('save'), 'the document element focus fallback is treated like body');
   click('save'); other.focus(); release(); await settled(); assert.equal(doc.activeElement, other, 'a user-selected control retains focus');
@@ -436,7 +476,7 @@ test('async checkpoint actions restore displaced native focus, respect other tar
   click('save'); const previousOwner = e.forgeSessionV141; e.start(subject.options);
   for (let index = 0; index < 30; index++) e.update(1 / 60);
   assert.notEqual(e.forgeSessionV141, previousOwner); release(); await settled();
-  assert.equal(doc.activeElement, doc.body, 'a restarted session in the same engine never receives the previous action focus');
+  assert.equal(doc.activeElement, summary, 'a restarted session in the same engine never receives the previous action focus');
   click('save'); visible = false; currentEngine = null; e.stop(); release(); await settled();
-  assert.equal(doc.activeElement, doc.body, 'a changed view/owner never receives an old focus request');
+  assert.equal(doc.activeElement, summary, 'a changed view/owner never receives an old focus request');
 });
