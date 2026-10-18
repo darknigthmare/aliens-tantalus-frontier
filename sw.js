@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-continuation-v156';
+const CACHE = 'atf-v143-continuation-v157';
 const SHELL = Object.freeze([
   '/src/hub-console-stations-v142.js',
   '/src/hub-door-passage-v142.js',
@@ -243,6 +243,8 @@ const SHELL = Object.freeze([
   '/src/forge-journey-v141.js',
   '/src/forge-narrative-v156.js',
   '/src/forge-narrative-ui-v156.js',
+  '/src/forge-playtest-checkpoint-v157.js',
+  '/src/forge-playtest-checkpoint-ui-v157.js',
   '/src/forge-layout-v134.js',
   '/src/forge-mission-runtime-v141.js',
   '/src/forge-model-v130.js',

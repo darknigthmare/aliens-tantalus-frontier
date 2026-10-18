@@ -886,6 +886,16 @@ try {
     assert.ok(layers.every(layer => layer.imageKey === legImageKey));
     return actor.transit;
   };
+  // Revive can yield to a genuine hazard hurt pose before a second protocol
+  // round trip. Keep the accepted rendered transit and canvas in one sample.
+  const observeTransitFrameV157 = (role, kind) => page.waitForFunction(`(() => {
+    const { role, kind } = ${JSON.stringify({ role, kind })};
+    const actor = globalThis.__ATF_GAME__?.[role], transit = actor?.playerTransitVisualV128;
+    if (!actor?.playerAppearanceVisualV126?.drawn || transit?.kind !== kind || !transit.drawn) return false;
+    return JSON.parse(JSON.stringify((${readLiveState.toString()})(true)));
+  })()`, null, { polling: 'raf', timeout: 15000 }).then(async handle => {
+    try { return await handle.jsonValue(); } finally { await handle.dispose(); }
+  });
   const walkTo = async (role, targetX) => {
     const initialX = await page.evaluate(role => { const actor = globalThis.__ATF_GAME__[role]; return actor.x + actor.w / 2; }, role);
     const right = targetX > initialX, key = role === 'coop' ? right ? 'KeyL' : 'KeyJ' : right ? 'KeyD' : 'KeyA';
@@ -947,9 +957,10 @@ try {
   assert.deepEqual((await snapshot()).player.transit, pausedCasualty.player.transit, 'Pause freezes the actual casualty pose.');
   await page.keyboard.press('KeyP');
   check('A real hazard produces a grounded modular casualty while the cooperative mission stays active', casualty);
+  const observedRevive = observeTransitFrameV157('player', 'revive');
+  observedRevive.catch(() => {});
   await page.keyboard.press('KeyY');
-  await page.waitForFunction(() => globalThis.__ATF_GAME__.player.playerTransitVisualV128?.kind === 'revive');
-  const revived = await saveCanvasFrame('31-real-revive.png', 'J2 really revives J1; the same chosen pieces follow its rise', await page.evaluate(readLiveState, true));
+  const revived = await saveCanvasFrame('31-real-revive.png', 'J2 really revives J1; the same chosen pieces follow its rise', await observedRevive);
   checkTransitPose(revived, 'revive'); assert.equal(revived.player.alive, true); assert.equal(revived.player.downed, false);
   assert.ok(revived.player.health > 0); assert.equal(revived.player.ammo, downed.player.ammo);
   await walkTo('player', hazard.x - 90);
@@ -979,6 +990,18 @@ try {
       fieldAction: p.fieldActionV124 || null, placeables: e.getPlaceablesSnapshotV86?.() || null,
       squad: e.getSquadDoctrineSnapshotV132?.() || null } : null;
   }).catch(() => null);
+  report.lastPassedCheck = report.checks.at(-1)?.label || null;
+  const state = report.failureState, player = state?.player;
+  const diagnostic = { ...report.error, lastPassedCheck: report.lastPassedCheck,
+    failureState: state ? { running: state.running, paused: state.paused, loading: state.loading,
+      phase: state.phase, elapsed: state.elapsed, focus: state.focus, keys: state.keys,
+      player: player ? { x: player.x, y: player.y, vx: player.vx, vy: player.vy,
+        grounded: player.grounded, alive: player.alive, downed: player.downed, health: player.health,
+        climbing: player.climbing, reloading: player.reloading, action: player.action?.kind || null } : null,
+      enemies: state.enemies?.slice(0, 4) } : null };
+  const annotation = JSON.stringify(diagnostic).slice(0, 6000)
+    .replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+  console.error('::error title=Player browser QA::' + annotation);
   if (page && !page.isClosed()) await page.screenshot({ path: join(output, 'failure.png'), fullPage: true }).catch(() => {});
   process.exitCode = 1;
 } finally {

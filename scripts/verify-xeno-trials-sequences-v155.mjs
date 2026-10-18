@@ -116,7 +116,7 @@ test('held combat input cannot cross a skipped intro or create an early attack',
 test('native outcome is emitted immediately once, then outro alone advances with frozen combat',async()=>{
  const h=host();await h.start();h.terminal();const s=h.r.getState();assert.equal(s.outroV155.phase,'playing');assert.equal(h.results.length,1);assert.equal(h.queue.size,1);
  const before=physical(s);h.frames(5);const after=h.r.getState();assert.ok(after.outroV155.elapsedMs>0);assert.deepEqual(physical(after),before);
- assert.ok(after.rigViewsV154.some(r=>r.sequenceIdV155?.endsWith('outro-win')));h.frames(30);assert.equal(h.queue.size,0);assert.equal(h.results.length,1);assert.deepEqual(physical(h.r.getState()),before);
+ assert.ok(after.rigViewsV154.some(r=>r.sequenceIdV155?.endsWith('outro-win')));h.frames(160);assert.equal(h.queue.size,0);assert.equal(h.results.length,1);assert.deepEqual(physical(h.r.getState()),before);
  assert.equal(h.r.resume(),false);h.r.stop();
 });
 test('terminal pause, resume and hidden-window freeze never reopen the combat engine',async()=>{
@@ -132,7 +132,7 @@ test('result callbacks can pause, resume, skip or close without duplicate schedu
  for(const action of ['pause','skip','stop']) {
   let h,count=0;h=host({onResult(){count++;if(action==='pause')h.r.pause();if(action==='skip')h.r.skipSequence();if(action==='stop')h.r.stop();}});
   await h.start();h.terminal();assert.equal(count,1);
-  if(action==='pause'){assert.equal(h.queue.size,0);assert.equal(h.r.resume(),true);h.frames(25);}
+  if(action==='pause'){assert.equal(h.queue.size,0);assert.equal(h.r.resume(),true);h.frames(160);}
   assert.equal(h.queue.size,0);h.frames(50);assert.equal(count,1);h.r.stop();
  }
 });

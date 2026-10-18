@@ -403,7 +403,7 @@ export class XenoTrialsUiV96 {
     const text = `${grapple?.target === 'player' ? 'SAISIE · MAINTENIR S / GARDE POUR SE DÉGAGER · ' : ''}${phase} · Manche ${snapshot.round} · ${snapshot.wins.player} — ${snapshot.wins.opponent} · ${Math.ceil(snapshot.timeRemaining)} s`;
     if (this.lastStatus !== text && !this.unsavedResult) { this.message(text); this.lastStatus = text; }
     this.el('next').hidden = snapshot.phase !== 'round-over';
-    const outroPlaying = snapshot.outroV155?.phase === 'playing' || snapshot.terminalV156?.phase === 'playing';
+    const outroPlaying = snapshot.outroV155?.phase === 'playing' || snapshot.terminalV156?.phase === 'playing' || snapshot.exitV157?.phase === 'playing' || snapshot.landingV157?.phase === 'playing';
     this.el('taunt').hidden = !getXenoTrialsRigV154(FIGHTERS.find(f=>f.id===snapshot.fighters[0].id),getXenoTrialsArtV96(snapshot.fighters[0].id,snapshot.fighters[0].variant));
     this.el('taunt').disabled=!snapshot.canTauntV156 || Boolean(this.unsavedResult);
     this.root.setAttribute('data-xt-outro',String(outroPlaying));
@@ -480,7 +480,7 @@ export class XenoTrialsUiV96 {
     if (activity?.rules?.timeLimitSeconds) { this.form.elements.roundSeconds.value=String(activity.rules.timeLimitSeconds); this.form.elements.roundSeconds.disabled=true; }
     if (!state.pending) this.updateVariants();
     this.renderPreviews();
-    this.el('pause').disabled = (!running && this.runtime?.getState().outroV155?.phase !== 'playing' && this.runtime?.getState().terminalV156?.phase !== 'playing') || this.loading || Boolean(this.unsavedResult);
+    this.el('pause').disabled = (!running && this.runtime?.getState().outroV155?.phase !== 'playing' && this.runtime?.getState().terminalV156?.phase !== 'playing' && this.runtime?.getState().exitV157?.phase !== 'playing' && this.runtime?.getState().landingV157?.phase !== 'playing') || this.loading || Boolean(this.unsavedResult);
     this.el('history').replaceChildren();
     for (const e of state.ledger.slice(-8).reverse()) {
       const row = document.createElement('p'); row.textContent = `${e.matchId} · ${e.playerId} / ${e.opponentId} · ${e.winner === 'abandoned' ? 'annulé' : { player: 'victoire', opponent: 'défaite', draw: 'égalité' }[e.winner]} · +${e.credits} crédits`;

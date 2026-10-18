@@ -64,8 +64,9 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
   // This census excludes the six V137 service compartments. Its reviewed
   // V140 baseline225 gains31 V142 items plus one restored navigation-records
   // legacy role, minus four old civilian props concealed by real visitor pens;
-  // the two new cockpit items belong to the separate V137 census.
-  assert.equal(total,253,`The 29-room equipment census ${total} differs from its reviewed composition`);
+  // the two new cockpit items belong to the separate V137 census. V157 adds
+  // the adult animal-care counter/records and restores two clear supply slots.
+  assert.equal(total,257,`The 29-room equipment census ${total} differs from its reviewed composition`);
   assert.deepEqual([...usedCells].sort(),Object.keys(HUB_PROP_ATLAS_V136.cells).sort());
   assert.deepEqual(rooms,before);
 });

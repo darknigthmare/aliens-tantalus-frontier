@@ -79,6 +79,9 @@ import { admittedForgeJourneyV141 } from './forge-journey-admission-v141.js';
 import { withForgeShipRuntimeV141 } from './forge-ship-runtime-v141.js';
 import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 import { buildForgeMissionSandboxV140 } from './forge-sandbox-v140.js';
+import { ForgePlaytestCheckpointStoreV157, prepareForgePlaytestCheckpointV157,
+  applyForgePlaytestCheckpointV157 } from './forge-playtest-checkpoint-v157.js';
+import { mountForgePlaytestCheckpointUIV157 } from './forge-playtest-checkpoint-ui-v157.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
@@ -178,6 +181,7 @@ try { saveSystem.loadLastProfileV78(); } catch { /* SaveSystem protects the orig
 ensureAdvancedState(saveSystem.data);
 const forgeSaveSystem = new ForgeSaveSystemV62(persistentStorageV78);
 forgeSaveSystem.load();
+const forgeCheckpointStoreV157 = new ForgePlaytestCheckpointStoreV157(persistentStorageV78);
 const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
@@ -762,7 +766,7 @@ function showView(name) {
   }
   if (saveSystem.recoveryNeeded && !['settings', 'editor'].includes(name)) name = 'settings';
   if (name !== 'crew' && typeof crewUiV85 !== 'undefined') crewUiV85?.close();
-  if (activeView === 'hub' && name === 'hub') Object.assign(saveSystem.data.hub, captureHubPoseV84());
+  if (activeView === 'hub' && name === 'hub' && standaloneContext !== 'forge-playtest') Object.assign(saveSystem.data.hub, captureHubPoseV84());
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ resume: false, restoreFocus: false });
   if (name !== 'play' && archiveRelayReaderV122?.openState) archiveRelayReaderV122.close({ resume: false, restoreFocus: false });
   if (name !== 'play') hiveCommandDockV131?.close({ restoreFocus: false });
@@ -791,8 +795,10 @@ function showView(name) {
     hubOwnerV84 = currentOwnerV84();
     hubEngine.playerCostumeIdV119 = saveSystem.data.player.costumeId;
     hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(saveSystem.data.player.appearanceV126);
-    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90,
-      trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data) });
+    if (!(standaloneContext === 'forge-playtest' && forgePlaytest?.kind === 'ship' && hubEngine.forgeSessionV141)) {
+      hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84, openingV88: saveSystem.data.openingV88, openingExerciseV89: saveSystem.data.openingExerciseV89, portMeridienV90: saveSystem.data.portMeridienV90,
+        trainingOperatorIdV132: getHubTrainingOperatorIdV132(saveSystem.data) });
+    }
     if (hubEngine.isPortMeridienV90()) { byId('breadcrumb').textContent = 'PALISADE // PORT-MÉRIDIEN'; byId('view-title').textContent = 'Le quai des vivants'; }
   }
   if (name === 'bioforge') prepareBioforgeViewV80();
@@ -3325,7 +3331,22 @@ function returnToForgeContext() {
   byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
 }
 
-function launchForgeMissionPlaytest(project) {
+function revealForgePlaytestV157(project) {
+  showView(project.kind === 'ship' ? 'hub' : 'play');
+  byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
+  if (project.kind === 'mission') {
+    const size = project.size || project.rooms.find(room => room.id === project.activeRoomId)?.size || project.rooms[0].size;
+    byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
+    byId('mission-title').textContent = `PLAYTEST FORGE · ${size[0]} × ${size[1]}`;
+    byId('mission-log').textContent = 'BAC À SABLE FORGE · progression, journal et sauvegarde campagne verrouillés.';
+    setupAlphaBravoCommandDockV69().refresh();
+    setupAlienSurvivalDockV70().refresh();
+    renderMissionEquipment();
+  }
+  byId(project.kind === 'ship' ? 'hub-canvas' : 'game-canvas').focus({ preventScroll: true });
+}
+
+function launchForgeMissionPlaytest(project, { reveal = true } = {}) {
   const source = saveSystem.data;
   const campaign = CAMPAIGNS.find((entry) => entry.id === source.strategy.plannedCampaignId)
     || CAMPAIGNS.find((entry) => source.galaxy.unlockedWorldIds.includes(entry.worldId)) || CAMPAIGNS[0];
@@ -3352,11 +3373,6 @@ function launchForgeMissionPlaytest(project) {
   });
   forgePlaytest = { kind: 'mission', project: clone(project), sandbox, campaignId: 'forge-authored-v136' };
   standaloneContext = 'forge-playtest';
-  showView('play');
-  byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
-  byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
-  byId('mission-title').textContent = `PLAYTEST FORGE · ${project.size[0]} × ${project.size[1]}`;
-  byId('mission-log').textContent = 'BAC À SABLE FORGE · progression, journal et sauvegarde campagne verrouillés.';
   engine.setCoop(Boolean(sandbox.settings.coop));
   engine.start({
     seed: missionLevel.levelSeed.seed,
@@ -3382,9 +3398,58 @@ function launchForgeMissionPlaytest(project) {
     strategicBriefing: deployment.operation,
     resumeState: null
   });
-  setupAlphaBravoCommandDockV69().refresh();
-  setupAlienSurvivalDockV70().refresh();
-  renderMissionEquipment();
+  if (reveal) revealForgePlaytestV157(project);
+}
+
+function launchForgeShipPlaytestV157(project, { reveal = true } = {}) {
+  const sandbox = clone(saveSystem.data);
+  forgePlaytest = { kind: 'ship', project: clone(project), sandbox, hubState: clone(sandbox.hub) };
+  standaloneContext = 'forge-playtest';
+  hubEngine.stop(false);
+  hubEngine.playerCostumeIdV119 = sandbox.player.costumeId;
+  hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(sandbox.player.appearanceV126);
+  hubEngine.start(forgePlaytest.hubState, {
+    editorProject: project, forgeJourneyV141: true,
+    routineContextV62: getHubRoutineContextV62(sandbox)
+  });
+  if (reveal) revealForgePlaytestV157(project);
+}
+
+function activeForgeCheckpointEngineV157() {
+  if (standaloneContext !== 'forge-playtest' || !forgePlaytest) return null;
+  return forgePlaytest.kind === 'ship' ? hubEngine : engine;
+}
+
+async function resumeForgePlaytestV157({ project, raw }) {
+  const active = activeForgeCheckpointEngineV157();
+  if (active) {
+    const prepared = await prepareForgePlaytestCheckpointV157(active, raw, project);
+    if (activeForgeCheckpointEngineV157() !== active) throw new Error('Le playtest a changé pendant la reprise.');
+    const result = applyForgePlaytestCheckpointV157(active, prepared);
+    byId(project.kind === 'ship' ? 'hub-canvas' : 'game-canvas').focus({ preventScroll: true });
+    return result;
+  }
+  if (standaloneContext !== 'forge' || activeView !== 'editor') throw new Error('Ouvrez le plan correspondant dans Frontier Forge.');
+  // The editor owns no running game. Start its sandbox on the hidden canvas,
+  // admit and apply the checkpoint, then reveal it. Failure keeps the authored
+  // document and campaign save untouched and returns to the same editor.
+  let attempt = null;
+  try {
+    if (project.kind === 'ship') launchForgeShipPlaytestV157(project, { reveal: false });
+    else launchForgeMissionPlaytest(project, { reveal: false });
+    attempt = forgePlaytest;
+    const target = activeForgeCheckpointEngineV157();
+    const prepared = await prepareForgePlaytestCheckpointV157(target, raw, project);
+    if (activeForgeCheckpointEngineV157() !== target) throw new Error('Le playtest a changé pendant la reprise.');
+    const result = applyForgePlaytestCheckpointV157(target, prepared);
+    revealForgePlaytestV157(project);
+    return result;
+  } catch (error) {
+    // A navigation/profile change while hashes are being checked owns the new
+    // screen. A stale continuation must not stop it or reopen the old editor.
+    if (attempt === null || standaloneContext === 'forge-playtest' && forgePlaytest === attempt) returnToForgeContext();
+    throw error;
+  }
 }
 
 function playtestEditor() {
@@ -3395,23 +3460,10 @@ function playtestEditor() {
   } catch (error) { toast(error.message); return; }
   forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`,
     name: project.name || `Frontier Forge ${title(project.kind)}` });
-  if (project.kind === 'ship') {
-    const sandbox = clone(saveSystem.data);
-    forgePlaytest = { kind: 'ship', project: clone(project), sandbox, hubState: clone(sandbox.hub) };
-    standaloneContext = 'forge-playtest';
-    showView('hub');
-    hubEngine.stop(false);
-    hubEngine.playerCostumeIdV119 = sandbox.player.costumeId;
-    hubEngine.playerAppearanceV126 = normalizePlayerAppearanceV126(sandbox.player.appearanceV126);
-    hubEngine.start(forgePlaytest.hubState, {
-      editorProject: project,
-      forgeJourneyV141: true,
-      routineContextV62: getHubRoutineContextV62(sandbox)
-    });
-    byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
-    return;
-  }
-  try { launchForgeMissionPlaytest(project); } catch (error) { toast(error.message); returnToForgeContext(); }
+  try {
+    if (project.kind === 'ship') launchForgeShipPlaytestV157(project);
+    else launchForgeMissionPlaytest(project);
+  } catch (error) { toast(error.message); returnToForgeContext(); }
 }
 
 function setupEditor() {
@@ -3427,6 +3479,15 @@ function setupEditor() {
   if (saved) editor.loadInitialProject(saved);
   byId('editor-play').textContent = 'TESTER LE PARCOURS';
   renderEditorStatus();
+  mountForgePlaytestCheckpointUIV157({
+    document, store: forgeCheckpointStoreV157,
+    roots: ['editor', 'play', 'hub'].map(view => document.querySelector(`[data-panel="${view}"]`)),
+    getProject: () => activeForgeCheckpointEngineV157() ? forgePlaytest.project : editor.serialize(),
+    getEngine: activeForgeCheckpointEngineV157,
+    resumePlaytest: resumeForgePlaytestV157,
+    isVisible: () => ['forge', 'forge-playtest'].includes(standaloneContext),
+    onMessage: (message, failed) => { if (failed) toast(message); }
+  });
 }
 
 function bindHoldControl(button, target, code) {

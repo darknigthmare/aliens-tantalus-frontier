@@ -11,7 +11,11 @@ const start = source.indexOf('const observeActionFrameV150 = ');
 const end = source.indexOf('\n  const capture = ', start);
 assert.ok(start >= 0 && end > start);
 const expression = source.slice(start + 'const observeActionFrameV150 = '.length, end).trim().replace(/;$/, '');
-function fixture(actor, fail = false) {
+const transitStart = source.indexOf('const observeTransitFrameV157 = ');
+const transitEnd = source.indexOf('\n  const walkTo = ', transitStart);
+assert.ok(transitStart >= 0 && transitEnd > transitStart);
+const transitExpression = source.slice(transitStart + 'const observeTransitFrameV157 = '.length, transitEnd).trim().replace(/;$/, '');
+function fixture(actor, fail = false, observationExpression = expression, beforeJsonValue = () => {}) {
   const context = { __ATF_GAME__: { player: actor }, intruded: false };
   let disposed = 0, sampled;
   function reader(includeCanvas) {
@@ -23,11 +27,12 @@ function fixture(actor, fail = false) {
     assert.equal(options.polling, 'raf'); assert.equal(options.timeout, 15000);
     sampled = runInNewContext(body, context, { timeout: 1000 });
     return Promise.resolve({ jsonValue: async () => {
+      beforeJsonValue();
       if (fail) throw new Error('serialization failure');
       return sampled;
     }, dispose: async () => { disposed++; } });
   } };
-  return { observe: new Function('page', 'readLiveState', `return (${expression});`)(page, reader),
+  return { observe: new Function('page', 'readLiveState', `return (${observationExpression});`)(page, reader),
     context, get disposed() { return disposed; }, get sampled() { return sampled; } };
 }
 const actor = () => ({ meleeClock: .2, meleeKind: 'rifle-bash', health: 90,
@@ -59,5 +64,23 @@ test('observer encodes its role and action as data rather than executable expres
 test('failed handle serialization still disposes the observation handle', async () => {
   const h = fixture(actor(), true);
   await assert.rejects(h.observe('player', 'contextual-melee'), /serialization failure/);
+  assert.equal(h.disposed, 1);
+});
+test('accepted drawn revive remains detached when a real hurt pose supersedes it before handle serialization', async () => {
+  const current = { ...actor(), alive: true, downed: false, health: 35,
+    playerActionVisualV127: null, playerTransitVisualV128: { kind: 'revive', drawn: true, progress: .1 } };
+  const h = fixture(current, false, transitExpression, () => {
+    current.health = 33.345;
+    current.playerTransitVisualV128 = null;
+    current.playerActionVisualV127 = { kind: 'hurt', elapsed: .02 };
+  });
+  const result = await h.observe('player', 'revive');
+  assert.equal(current.playerTransitVisualV128, null);
+  assert.equal(current.playerActionVisualV127.kind, 'hurt');
+  assert.equal(result.canvasPng, 'data:image/png;base64,fixture');
+  assert.equal(result.player.health, 35);
+  assert.equal(result.player.playerTransitVisualV128.kind, 'revive');
+  assert.equal(result.player.playerTransitVisualV128.drawn, true);
+  assert.equal(result.player.playerActionVisualV127, null);
   assert.equal(h.disposed, 1);
 });

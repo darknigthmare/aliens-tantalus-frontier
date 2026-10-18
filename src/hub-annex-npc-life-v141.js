@@ -44,13 +44,19 @@ export const HUB_ANNEX_NPC_ROTATIONS_V156 = Object.freeze([
   { roomId: 'frontier-civil-counter', crewId: 'crew-09-inez-harlow', targetX: 694, duty: 'civil-arrival-biosafety', fromHour: 19, toHour: 21 }
 ].map(Object.freeze));
 
-/** All installation states are reserved. The habitat has no free adult post
- * between its real berths, plaques and pens: leave that level-design issue
- * explicit instead of placing a specialist inside an enclosure. */
+// Historical V156 diagnosis remains available to its frozen audit.
 export const HUB_ANNEX_NPC_DEFERRED_V156 = Object.freeze([
   Object.freeze({ roomId: 'animal-care', reason: 'no-clear-adult-duty-post',
     requiredWork: 'reserve-a-human-service-post-clear-of-berths-plaques-and-enclosures' })
 ]);
+
+/** A separate supported human service bay resolves the V156 layout blocker.
+ * Optional installation states stay reserved; no animal fitting is displaced. */
+export const HUB_ANNEX_NPC_ROTATIONS_V157 = Object.freeze([
+  ...HUB_ANNEX_NPC_ROTATIONS_V156,
+  { roomId: 'animal-care', crewId: 'crew-04-noor-okafor', targetX: 2060, duty: 'companion-welfare-inspection', fromHour: 9, toHour: 10.5, serviceVisitV157: true },
+].map(Object.freeze));
+export const HUB_ANNEX_NPC_DEFERRED_V157 = Object.freeze([]);
 const profileById = new Map(HUB_NPC_ROSTER.map((profile, sheet) => [profile.crewId, { ...profile, sheet }]));
 const overlapY = (a, b) => a.y < b.y + b.h && a.y + a.h > b.y;
 const valid = b => b && ['x', 'y', 'w', 'h'].every(key => Number.isFinite(b[key])) && b.w > 0 && b.h > 0;
@@ -59,7 +65,7 @@ const cache = new Map();
 export function annexNpcDutiesV141(resolutions, { editorPlaytest = false, forgeSessionV141 = null, annexNpcSandboxV141 = false } = {}) {
   if (editorPlaytest || forgeSessionV141 || annexNpcSandboxV141 || !(resolutions instanceof Map)) return [];
   const selected = new Map(HUB_ANNEX_NPC_DUTIES_V141.map(duty => [duty.crewId, duty]));
-  for (const duty of HUB_ANNEX_NPC_ROTATIONS_V156) {
+  for (const duty of HUB_ANNEX_NPC_ROTATIONS_V157) {
     const hour = resolutions.get(duty.crewId)?.hour;
     if (Number.isFinite(hour) && hour >= duty.fromHour && hour < duty.toHour) selected.set(duty.crewId, duty);
   }
@@ -151,9 +157,10 @@ export function createAnnexNpcsV141(duties, resolutions) {
       return score(a) - score(b);
     })[0];
     if (!member || !rail) continue;
-    const mobile = rail.max - rail.min >= 70;
-    const middle = mobile ? Math.max(rail.min + 35, Math.min(rail.max - 35, duty.targetX)) : (rail.min + rail.max) / 2;
-    const min = mobile ? Math.max(rail.min, middle - 110) : middle, max = mobile ? Math.min(rail.max, middle + 110) : middle;
+    const serviceVisit = duty.serviceVisitV157 === true && rail.max - rail.min >= 90;
+    const mobile = !serviceVisit && rail.max - rail.min >= 70;
+    const middle = mobile || serviceVisit ? Math.max(rail.min + 35, Math.min(rail.max - 35, duty.targetX)) : (rail.min + rail.max) / 2;
+    const min = mobile || serviceVisit ? Math.max(rail.min, middle - 110) : middle, max = mobile || serviceVisit ? Math.min(rail.max, middle + 110) : middle;
     const peers = cohort.filter(n => n.roomId === duty.roomId && Math.abs(n.min - min) < 60);
     const x = peers.length ? max : min, direction = peers.length ? -1 : 1;
     if (cohort.some(n => n.roomId === duty.roomId && Math.abs(n.x - x) < 56)) continue;
@@ -161,6 +168,7 @@ export function createAnnexNpcsV141(duties, resolutions) {
       annexNativeV141: true, annexDutyV141: duty.duty, annexSupportIdV156: plan.support.id, routinePhaseV62: 'work',
       routineDeterministicKeyV62: resolutions.get(duty.crewId)?.deterministicKey || '',
       x, y: plan.floorY - 92, w: 44, h: 92, min, max, vx: 0, facing: direction,
+      ...(serviceVisit ? { annexServiceVisitV157: { homeX: min, workX: max, supportId: plan.support.id } } : {}),
       patrolSpeed: direction * 27, resumeVx: direction * 27, mobile, alive: true,
       workClock: 0, alertClock: 0, supportClock: 0, alerted: false });
   }

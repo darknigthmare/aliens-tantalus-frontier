@@ -12,7 +12,7 @@ import { resolveHumanAtlasGeometryV133 } from '../src/human-visual-contract-v133
 import { withHubNpcLifeV136 } from '../src/npc-life-v136.js';
 import { createDefaultSave } from '../src/save.js';
 import { getShipPortVisitorFixtureBoundsV142, getShipPortInteractionV87 } from '../src/ship-port-room-v87.js';
-import { HUB_ANNEX_NPC_DUTIES_V141, HUB_ANNEX_NPC_ROTATIONS_V156, HUB_ANNEX_NPC_DEFERRED_V156,
+import { HUB_ANNEX_NPC_DUTIES_V141, HUB_ANNEX_NPC_ROTATIONS_V156, HUB_ANNEX_NPC_DEFERRED_V156, HUB_ANNEX_NPC_ROTATIONS_V157, HUB_ANNEX_NPC_DEFERRED_V157,
   annexNpcDutiesV141, createAnnexNpcsV141, getAnnexNpcPlacementV141 } from '../src/hub-annex-npc-life-v141.js';
 
 const Hub = withHubNpcLifeV136(AnnexHub);
@@ -60,7 +60,7 @@ function allDutyCases() {
   return [...result.values()];
 }
 
-test('a complete quarter-hour schedule covers eighteen real annexes, with one explicit habitat layout blocker', () => {
+test('a complete quarter-hour schedule covers nineteen real annexes while preserving the historical V156 diagnosis', () => {
   const covered = new Set();
   for (const day of [1, 2, 29]) for (let tick = 0; tick < 96; tick++) {
     const resolutions = routinesAt(tick / 4, {}, day), duties = annexNpcDutiesV141(resolutions);
@@ -69,8 +69,9 @@ test('a complete quarter-hour schedule covers eighteen real annexes, with one ex
     assert.equal(new Set(cohort.map(n => n.crewId)).size, cohort.length);
     for (const npc of cohort) covered.add(npc.roomId);
   }
-  assert.equal(covered.size, 18);
-  assert.deepEqual(HUB_ANNEXES_V137.filter(room => !covered.has(room.id)).map(room => room.id), ['animal-care']);
+  assert.equal(covered.size, 19);
+  assert.deepEqual(HUB_ANNEXES_V137.filter(room => !covered.has(room.id)).map(room => room.id), []);
+  assert.deepEqual(HUB_ANNEX_NPC_DEFERRED_V157, []);
   assert.deepEqual(HUB_ANNEX_NPC_DEFERRED_V156.map(entry => entry.roomId), ['animal-care']);
   assert.equal(HUB_ANNEX_NPC_DEFERRED_V156[0].reason, 'no-clear-adult-duty-post');
 });
@@ -93,7 +94,7 @@ test('native parent and annex factories conserve all sixteen identities exactly 
 
 test('the original six-person 08:00 and 16:00 watches survive while inspection windows replace individuals atomically', () => {
   for (const hour of [8, 16]) assert.deepEqual(annexNpcDutiesV141(routinesAt(hour)), HUB_ANNEX_NPC_DUTIES_V141);
-  for (const duty of HUB_ANNEX_NPC_ROTATIONS_V156) {
+  for (const duty of HUB_ANNEX_NPC_ROTATIONS_V157) {
     for (const hour of [duty.fromHour, (duty.fromHour + duty.toHour) / 2, duty.toHour - .01]) {
       const selected = annexNpcDutiesV141(routinesAt(hour)).filter(entry => entry.crewId === duty.crewId);
       assert.deepEqual(selected, [duty]);
@@ -138,7 +139,7 @@ test('every full standing, walking and work silhouette clears actual equipment a
           `${npc.roomId}:${npc.crewId}:${b.role}:${x}:${facing}:${frame}`);
       }
     }
-    assert.equal(npc.mobile, npc.max > npc.min);
+    assert.equal(npc.mobile || !!npc.annexServiceVisitV157, npc.max > npc.min);
     if (npc.mobile) assert.ok(npc.max - npc.min >= 70, `${npc.roomId} has an actual walking rail`);
   }
 });
@@ -153,7 +154,7 @@ test('physical rounds remain continuous at 30, 60 and 120Hz; small service posts
         assert.ok(n.x >= n.min - 1e-7 && n.x <= n.max + 1e-7);
         assert.ok(Math.abs(n.x - previous.get(n.crewId)) <= 27 / rate + 1e-7);
         travelled.set(n.crewId, travelled.get(n.crewId) + Math.abs(n.x - previous.get(n.crewId)));
-        if (!n.mobile) { assert.equal(n.x, first.get(n.crewId)); assert.equal(n.vx, 0); }
+        if (!n.mobile && !n.annexServiceVisitV157) { assert.equal(n.x, first.get(n.crewId)); assert.equal(n.vx, 0); }
       }
       const sorted = crew.toSorted((a, b) => a.x - b.x);
       for (let index = 1; index < sorted.length; index++) assert.ok(sorted[index].x - sorted[index - 1].x - sorted[index - 1].w >= 12 - 1e-7);
@@ -234,13 +235,14 @@ test('the real Refuge render branch draws its visitor once before the player and
 test('habitat state changes cannot spawn an adult inside an enclosure or an uninstalled fitting plaque', () => {
   for (const member of HUB_NPC_ROSTER) {
     const plan = getAnnexNpcPlacementV141('animal-care', member.crewId);
-    assert.deepEqual(plan.rails, [], member.crewId);
+    assert.ok(plan.rails.length > 0 && plan.rails.every(rail => rail.min > 1920), member.crewId);
     assert.equal(plan.reservations.filter(b => b.role === 'habitat-fitting-plaque').length, 6);
     assert.equal(plan.reservations.filter(b => b.role === 'installed-habitat-fixture').length, 3);
   }
   for (const hour of workHours) {
-    const hub = hubAt(hour, 'animal-care'); assert.deepEqual(hub.activeAnnexNpcsV141(), []);
-    assert.ok(hub.ensureAnnexNpcCohortV141().every(n => n.roomId !== 'animal-care'));
+    const hub = hubAt(hour, 'animal-care'), assigned = hub.activeAnnexNpcsV141();
+    assert.equal(assigned.length, hour >= 9 && hour < 10.5 ? 1 : 0);
+    for (const npc of assigned) assert.equal(npc.crewId, 'crew-04-noor-okafor');
   }
 });
 

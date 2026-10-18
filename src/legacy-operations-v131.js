@@ -16,6 +16,25 @@ const PROFILES = Object.freeze({ hunt: 'enemy-004-drone-big-chap', predator: 'en
 const nests = [{ x: 900, y: 820, w: 120, h: 80 }, { x: 1500, y: 850, w: 120, h: 80 }];
 const bells = [{ x: 95, y: 75, w: 190, h: 170 }, { x: 855, y: 350, w: 190, h: 190 }];
 
+// Finite bombardment is part of the chapter checkpoint. Losing a charge in
+// flight on reload could exhaust all six charges before the last nest is hit.
+// Missing data remains the older checkpoint contract; supplied data is checked
+// before any live mission state is changed.
+function validateLegacyBombsV157(raw, state) {
+  const bombs = raw?.specialOperation?.legacyBombsV157;
+  if (bombs === undefined) return { valid: true, bombs: [] };
+  const bounds = LEGACY_BOUNDS_V131[state.kind];
+  if (!Array.isArray(bombs) || bombs.length > 6 - state.bombs
+    || bombs.length && (state.kind !== 'broodstorm' || state.stage < 1)
+    || bombs.some(bomb => !bomb || typeof bomb !== 'object' || Array.isArray(bomb)
+      || Object.keys(bomb).length !== 7 || !['x', 'y', 'w', 'h', 'vx', 'vy', 'life'].every(key => Object.hasOwn(bomb, key) && Number.isFinite(bomb[key]))
+      || bomb.w !== 12 || bomb.h !== 20 || bomb.life <= 0 || bomb.life > 5 || Math.abs(bomb.vx) > 75
+      || bomb.x < -375 || bomb.x > bounds.width + 375 || bomb.y < 0 || bomb.y > bounds.height
+      || Math.abs(bomb.vy - (170 + 150 * (5 - bomb.life))) > 0.000001))
+    return { valid: false, reason: 'legacy-bomb-checkpoint-invalid' };
+  return { valid: true, bombs: clone(bombs) };
+}
+
 function geometry(kind) {
   const bounds = LEGACY_BOUNDS_V131[kind];
   const platforms = [{ id: `legacy-${kind}-bed`, x: 0, y: kind === 'nostromo' ? 570 : 990, w: bounds.width, h: 50, floor: true }];
@@ -406,12 +425,15 @@ export function withLegacyMissionsV131(BaseEngine) {
       return { ...raw, player: { ...raw.player, inVehicle: Boolean(this.player.inVehicle) },
         mission: { ...raw.mission, rewards: this.mission.rewards ? clone(this.mission.rewards) : null },
         specialOperation: { ...raw.specialOperation, operationId: this.legacyMissionV131.operationId,
-        legacyMissionV131: clone(this.legacyMissionV131), legacyCheckpointV131: this.legacyCheckpointV131 ? clone(this.legacyCheckpointV131) : null } };
+        legacyMissionV131: clone(this.legacyMissionV131), legacyBombsV157: clone(this.legacyBombsV131),
+        legacyCheckpointV131: this.legacyCheckpointV131 ? clone(this.legacyCheckpointV131) : null } };
     }
     validateLegacyResumeV131(raw) {
       const checked = validateLegacyOperationStateV131(raw?.specialOperation?.legacyMissionV131);
       if (!checked.valid) return checked;
       const state = checked.state, bounds = LEGACY_BOUNDS_V131[state.kind], identity = raw.identity;
+      const flight = validateLegacyBombsV157(raw, state);
+      if (!flight.valid) return flight;
       const rejection = { valid: false, reason: 'legacy-identity-mismatch' };
       if (raw.schema !== 1 || state.kind !== this.legacyMissionV131.kind || raw.specialOperation.operationId !== state.operationId
         || !identity || ['campaignId', 'worldId', 'levelSeedId', 'objectiveId', 'editorProjectKind'].some(key => identity[key] !== this.resumeIdentity?.[key])
@@ -445,7 +467,7 @@ export function withLegacyMissionsV131(BaseEngine) {
         : { ...raw.player, w: this.player.w, h: this.player.h };
       if (obstacles.some(box => inside(physical, box)) || state.kind === 'abyss' && state.stage < 4
         && (raw.player.x + this.player.w > 1940 || raw.vehicle.x + this.vehicle.w > 1940)) return rejection;
-      return checked;
+      return { ...checked, bombs: flight.bombs };
     }
     applyResumeState(raw) {
       if (!this.isLegacyMissionV131()) return super.applyResumeState(raw);
@@ -463,7 +485,7 @@ export function withLegacyMissionsV131(BaseEngine) {
       const result = super.applyResumeState(raw);
       if (!result?.applied) { this.legacyMissionV131 = previous; this.enemies = previousEnemies; return result; }
       if (!this.legacyMissionV131.complete) this.legacyMissionV131.hold = 0;
-      this.legacyBombsV131 = []; this.legacyHeldV131.clear();
+      this.legacyBombsV131 = checked.bombs; this.legacyHeldV131.clear();
       this.legacyCheckpointV131 = checkpoint ? clone(checkpoint) : null;
       this.player.vx = 0; this.player.vy = 0; this.player.inVehicle = checked.state.aboard;
       if (checked.state.aboard) this.pinLegacyDriverV131();

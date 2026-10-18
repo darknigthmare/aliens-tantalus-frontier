@@ -65,7 +65,17 @@ export function moveNpcAgainstGeometryV136(actor, proposedX, colliders = []) {
 export function npcWorkAnchorV136(actor, room) {
   // Annex inspection rails already reserve every visible fitting and approach.
   // Parent-room station visits must not invent a route across those exclusions.
-  if (actor.annexNativeV141) return null;
+  if (actor.annexNativeV141) {
+    const visit = actor.annexServiceVisitV157;
+    // Only a factory-reviewed continuous rail can own a local service trip.
+    // Do not infer routes to arbitrary tables or cross reserved animal volumes.
+    return visit && actor.routinePhaseV62 === 'work' && actor.roomId === room?.id
+      && visit.supportId === actor.annexSupportIdV156
+      && [visit.homeX, visit.workX, actor.min, actor.max].every(Number.isFinite)
+      && visit.homeX >= actor.min && visit.homeX <= actor.max
+      && visit.workX >= actor.min && visit.workX <= actor.max
+      && Math.abs(visit.workX - visit.homeX) >= 28 ? visit.workX : null;
+  }
   const box = getHubInteractionPropBoundsV136(room);
   if (!box || ![box.x, box.w, room.xStart, room.xEnd].every(Number.isFinite)
     || actor.routinePhaseV62 !== 'work' || actor.mobile || room.id !== actor.roomId) return null;

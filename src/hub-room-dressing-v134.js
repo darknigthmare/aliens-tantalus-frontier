@@ -143,7 +143,7 @@ export const HUB_ROOM_DRESSING_V134 = freeze({
   'animal-care': profile('animal-food-and-habitat-care', '#94a582', [
     cluster('feed-preparation', [floor('galley', 168, 188, 104), floor('bin', 402, 40, 64), floor('parts-bin', 498, 94, 86)]),
     cluster('habitat-supplies', [wall('shelf', 184, 326, 160, 76), floor('locker', 1210, 74, 142), floor('case', 1350, 78, 44)]),
-    cluster('animal-care-services', [wall('vent', 1130, 214, 194, 34), wall('lamp', 618, 196, 92, 15), wall('clock', 1370, 304, 36, 36)]),
+    cluster('animal-care-services', [wall('vent', 1980, 214, 194, 34), wall('lamp', 618, 196, 92, 15), wall('clock', 1370, 304, 36, 36)]),
     cluster('habitat-hygiene-storage', [wall('medical-cabinet', 638, 292, 78, 150), wall('shelf', 816, 340, 156, 72), wall('hose-reel', 1430, 262, 70, 74)])]),
   'frontier-civil-counter': profile('port-registration-and-waiting', '#ada184', [
     cluster('port-reception', [floor('bench', 170, 140, 58), floor('bin', 360, 40, 60), wall('document-rack', 174, 302, 146, 96)]),

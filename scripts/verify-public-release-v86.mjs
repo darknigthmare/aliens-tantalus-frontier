@@ -108,10 +108,25 @@ for (const file of [
   'qa-xeno-trials-restraint-v156.py',
   'qa-hub-annex-population-v156.mjs',
 ]) SCRIPT_FILES.add(file);
+for (const file of [
+  "audit-succession-v157.mjs",
+  "verify-audit-continuation-v157.mjs",
+  "verify-audit-workbook-v157.py",
+  "generate-audit-continuation-v157.py",
+  "verify-forge-conditions-v157.mjs",
+  "qa-forge-conditions-v157.py",
+  "verify-forge-playtest-checkpoint-v157.mjs",
+  "qa-forge-playtest-checkpoint-v157.py",
+  "verify-hub-annex-service-v157.mjs",
+  "qa-hub-annex-service-v157.mjs"
+]) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V157-CONTINUATION.md',
+  'docs/forge/xeno-trials/progress-v157.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V157.xlsx',
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
   '.github/workflows/trials-source-review-v154.yml',
   'docs/forge/xeno-trials/V156-CONTINUATION.md',
@@ -357,7 +372,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
-      if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|json|css|html|md|webmanifest)$/i.test(path)) {
+      if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|py|json|css|html|md|webmanifest)$/i.test(path)) {
         const text = await readFile(join(directory, entry.name), 'utf8');
         assert.equal(isPublicDistributionTextV86(text), true, `Private source metadata in distribution: ${path}`);
       }
