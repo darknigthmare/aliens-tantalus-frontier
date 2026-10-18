@@ -302,7 +302,8 @@ export function withBlackCocoonRuntimeV121(BaseEngine) {
       if (action.kind === 'cut' || forced) {
         state.cocoonProgress = Math.min(4, state.cocoonProgress + delta * (forced ? 2 : 1));
         if (forced) this.blackCocoonNoiseV121(delta * 20);
-        if (state.cocoonProgress >= 4) { state.freed = true; done = true; milestone = 'freed'; message = 'Résine sectionnée. Le sac est plus loin dans la galerie. Évitez les patrouilles.'; }
+        if (state.cocoonProgress >= 4) { state.freed = true; state.freedAtV158 = state.elapsed;
+          done = true; milestone = 'freed'; message = 'Résine sectionnée. Le sac est plus loin dans la galerie. Évitez les patrouilles.'; }
       } else if (action.kind === 'industrial') {
         state.liftProgress = Math.min(6, state.liftProgress + delta);
         this.blackCocoonNoiseV121(delta * 6);
@@ -586,7 +587,7 @@ export function withBlackCocoonRuntimeV121(BaseEngine) {
         ctx.beginPath(); ctx.moveTo(x - 42, 603); ctx.bezierCurveTo(x + 10, 560, x - 20, 495, x + 45, 430); ctx.stroke();
       }
       ctx.restore();
-      if (!state.freed) {
+      if (!state.freed && !this.hasBlackCocoonPresentationV158?.()) {
         const image = this.images.get('bc121-cocoon');
         if (ready(image)) ctx.drawImage(image, props.cocoon.x - 64, props.cocoon.groundY - 170, 128, 170);
         else this.drawBlackCocoonPropV121(ctx, { ...props.cocoon, h: 144, w: 90 }, 'COCON');

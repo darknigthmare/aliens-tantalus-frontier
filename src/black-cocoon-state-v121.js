@@ -36,7 +36,7 @@ export function createBlackCocoonStateV121() {
     power: null, route: null, liftProgress: 0, valveProgress: 0,
     beacons: [false, false], extractionElapsed: 0, nextWaveAt: 24, wavesSpawned: 0,
     scanProgress: 0, action: null, enemySequence: 0, enemies: [],
-    checkpoint: null, journal: ['captured'], rewards: null
+    checkpoint: null, journal: ['captured'], rewards: null, freedAtV158: null
   };
   for (const field of booleanFields) state[field] = false;
   return state;
@@ -73,12 +73,17 @@ export function sanitizeBlackCocoonStateV121(raw = {}) {
     route: state.route, quietPower: state.power === 'battery', quarantineComplete: state.complete
   };
   state.phase = blackCocoonPhaseV121(state);
+  // Historical freed snapshots have no observed release time and render the
+  // settled binding. Never synthesize a second release or a wall-clock timer.
+  state.freedAtV158 = Number.isFinite(raw.freedAtV158) ? raw.freedAtV158 : null;
   return state;
 }
 
 export function validateBlackCocoonStateV121(raw) {
   if (!record(raw) || raw.schema !== 121 || raw.operationId !== BLACK_COCOON_OPERATION_V121) return { valid: false, reason: 'cocoon-schema-mismatch' };
   const state = sanitizeBlackCocoonStateV121(raw);
+  if (raw.freedAtV158 != null && (!Number.isFinite(raw.freedAtV158) || raw.freedAtV158 < 0
+    || raw.freedAtV158 > state.elapsed || !state.freed)) return { valid: false, reason: 'cocoon-release-time-inconsistent' };
   const ordered = [state.freed, state.equipmentRecovered, state.relayContact, state.surfaceReached,
     state.deltaAbandoned, state.beacons.every(Boolean), state.extractionElapsed >= 90, state.boarded,
     state.weaponsDeposited, state.complete];

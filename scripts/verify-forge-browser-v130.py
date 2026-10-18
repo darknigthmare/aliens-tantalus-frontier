@@ -41,7 +41,9 @@ try:
         page=browser.new_page(viewport={'width':1600,'height':1050},accept_downloads=True)
         errors=[];page.on('pageerror',lambda error:errors.append(str(error)));page.on('dialog',lambda dialog:dialog.accept())
         load_page(page);page.wait_for_function('!!window.forgeEditor');page.locator('[data-forge-field="room"]').wait_for()
-        check('legacy palette mounted with 13 native types',page.locator('[data-editor-tool]').count()==13)
+        historical_tools = ['floor','platform','wall','door','vent','ladder','lift','spawn','objective','enemy','vehicle','terminal','hazard']
+        tools = page.locator('[data-editor-tool]').evaluate_all('(nodes)=>nodes.map(node=>node.dataset.editorTool)')
+        check('all 13 historical tools and the authored NPC appear exactly once', sorted(tools)==sorted([*historical_tools,'npc']))
         page.evaluate("localStorage.setItem('atf-v47-profile-1',JSON.stringify({proof:'unchanged',xp:99}))")
         campaign=page.evaluate("localStorage.getItem('atf-v47-profile-1')")
         page.click('[data-forge-action="template"]')

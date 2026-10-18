@@ -7,6 +7,7 @@ import { createForgeSessionV141, forgeRoomProjectV141, outgoingForgeLinksV141,
   captureForgeRoomV141, restoreForgeRoomV141, commitForgeTransitionV141, findForgeArrivalV141,
   forgeInteractionClearV141 } from './forge-journey-v141.js';
 import { blockedForgeObjectivesV141 } from './forge-journey-v141.js';
+import { forgeNpcActorsV158, drawForgeNpcsV158 } from './forge-npcs-v158.js';
 
 const clone = value => structuredClone(value);
 const list = value => Array.isArray(value) ? value : [];
@@ -41,6 +42,7 @@ function mapRoomGraph(value, resolve, seen = new Map()) {
 }
 
 function attachCells(engine, room) {
+  engine.forgeNpcsV158 = forgeNpcActorsV158(room, 'mission');
   const cells = room.cells.filter(cell => !decorative(cell)), of = type => cells.filter(cell => cell.type === type);
   for (const [type, field] of [['door', 'doors'], ['enemy', 'enemies'], ['vent', 'vents'], ['hazard', 'hazards']]) {
     for (const [index, entity] of list(engine[field]).entries()) {
@@ -74,6 +76,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       this.forgeSessionV141 = null;
       this.forgeProjectV141 = null;
       this.forgeActiveRoomIdV141 = null;
+      this.forgeNpcsV158 = [];
       const result = super.start(options);
       if (!session) return result;
       this.forgeSessionV141 = session;
@@ -164,6 +167,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         ...list(target.doors).filter(entry => !entry.open || Number(entry.progress) < .82),
         ...(target.vehicle?.active && !target.vehicle.destroyed ? [target.vehicle] : [])];
       const occupied = [...list(target.enemies).filter(enemy => enemy.alive && !enemy.dormant),
+        ...forgeNpcActorsV158(session.project.rooms.find(room => room.id === nearest.link.to.roomId), 'mission'),
         ...list(target.roomPlaceablesV141).filter(instance => instance.onGround && instance.health > 0)], arrivals = [];
       for (const member of party) {
         const arrival = findForgeArrivalV141({ door, actor: member, bounds: EDITOR_MISSION_WORLD_V136,
@@ -210,7 +214,10 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       this.syncPlaceableBarriersV132?.();
       this.mission.objectives = target.missionObjectives;
       this.mission.phase = target.missionPhase;
+      this.forgeNpcsV158 = forgeNpcActorsV158(this.forgeSessionV141.project.rooms.find(room => room.id === this.forgeSessionV141.currentRoomId), 'mission');
     }
+
+    drawForgeNpcsV158(ctx) { return drawForgeNpcsV158(ctx, this); }
 
     stop(...args) {
       this.closeForgeNarrativeV156?.({ focus: false });
@@ -236,6 +243,9 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         hasStory(candidate) && near(actor, candidate, 130) && this.forgeInteractionClearV141(actor, candidate)
         && (candidate !== this.archiveTerminal || this.mission.objectives.boss))
         .map(target => ({ kind: 'narrative', target, distance: interactionDistance(actor, target) }));
+      candidates.push(...list(this.forgeNpcsV158).filter(target => room?.cells.some(cell => cell.id === target.cellId && cell.narrative)
+        && near(actor, target, 130) && this.forgeInteractionClearV141(actor, target))
+        .map(target => ({ kind: 'npc', target, distance: interactionDistance(actor, target) })));
       // Delegate only the pending terminal that the inherited V51 dispatcher
       // would actually use (power before archive), without bypassing its story.
       const pending = this.forgePendingTerminalV156(actor);
@@ -259,6 +269,11 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
     forgeNarrativeTerminalV156(actor = this.player) {
       const preferred = this.forgePreferredUseV156(actor);
       return preferred?.kind === 'narrative' ? preferred.target : null;
+    }
+
+    forgeNarrativeNpcV158(actor = this.player) {
+      const preferred = this.forgePreferredUseV156(actor);
+      return preferred?.kind === 'npc' ? preferred.target : null;
     }
 
     forgeUrgentNativeUseV156(actor = this.player) {
@@ -322,6 +337,11 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       if (urgent === 'recoverable-weapon') return super.interact(actor);
       const preferred = this.forgePreferredUseV156(actor);
       if (preferred?.kind === 'native-terminal') return super.interact(actor);
+      if (preferred?.kind === 'npc') {
+        const shown = showForgeNarrativeV156(this, preferred.target.cellId, result => this.syncForgeNarrativeRewardsV156(result));
+        if (shown) this.onEvent({ type: 'forge-npc-dialogue-open', roomId: session.currentRoomId, cellId: preferred.target.cellId });
+        return shown;
+      }
       const storyTerminal = preferred?.kind === 'narrative' ? preferred.target : null;
       if (storyTerminal) {
         if (storyTerminal === this.archiveTerminal && !this.mission.objectives.boss) return this.locked('NEUTRALISER LA MENACE ALPHA');
@@ -389,6 +409,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         ? `E  SAS → ${session.project.rooms.find(room => room.id === linked.link.to.roomId)?.name || 'SALLE'}` : 'E  SAS BLOQUÉ PAR UNE CLOISON';
       if (urgent === 'recoverable-weapon') return super.getInteractionPrompt(actor);
       const preferred = this.forgePreferredUseV156(actor);
+      if (preferred?.kind === 'npc') return `E  PARLER À ${preferred.target.name.toUpperCase()}`;
       if (preferred?.kind === 'narrative') return 'E  LIRE LE RÉCIT DU TERMINAL';
       if (preferred?.kind === 'native-terminal') return preferred.target === this.powerNode
         ? 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE' : 'E  EXTRAIRE LES ARCHIVES';
@@ -452,7 +473,8 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         transitions: session.transitions, completedObjectives: [...session.completedObjectives],
         requiredObjectives: [...list(this.forgeRequiredObjectivesV141)], narrativeV156: clone(session.narrativeV156 || []),
         narrativeInventoryV157: clone(session.narrativeInventoryV157 || []), narrativePlaySecondsV157: session.narrativePlaySecondsV157 || 0,
-        narrativeDialogV156: this.forgeNarrativeOpenV156 ? forgeNarrativeViewV156(session, this.forgeNarrativeOpenV156) : null, scope: 'session' };
+        narrativeDialogV156: this.forgeNarrativeOpenV156 ? forgeNarrativeViewV156(session, this.forgeNarrativeOpenV156) : null,
+        npcsV158: clone(this.forgeNpcsV158 || []), scope: 'session' };
     }
 
     getSnapshot() {

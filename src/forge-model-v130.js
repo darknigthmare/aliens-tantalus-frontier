@@ -1,10 +1,11 @@
 import { parseForgeNarrativeV156, validateForgeNarrativeReferencesV156, remapForgeNarrativeObjectivesV156 } from './forge-narrative-v156.js';
 import { parseForgeDecorationV141 } from './forge-decoration-v141.js';
+import { parseForgeNpcV158, validateForgeNpcsV158 } from './forge-npcs-v158.js';
 /** Frontier Forge V130. Pure authoring data; never imports a campaign store. */
-export const TILE_TYPES = Object.freeze(['floor','platform','wall','door','vent','ladder','lift','spawn','objective','enemy','vehicle','terminal','hazard']);
+export const TILE_TYPES = Object.freeze(['floor','platform','wall','door','vent','ladder','lift','spawn','objective','enemy','vehicle','terminal','npc','hazard']);
 export const LAYERS = Object.freeze(['background','structure','gameplay','foreground']);
 export const LIMITS = Object.freeze({ rooms:32, columns:128, rows:72, cells:60000, bytes:4*1024*1024, history:60, historyBytes:16*1024*1024 });
-export const LABELS = Object.freeze({floor:'Sol',platform:'Passerelle',wall:'Cloison',door:'Sas',vent:'Conduit',ladder:'Échelle',lift:'Ascenseur',spawn:'Insertion',objective:'Objectif',enemy:'Menace',vehicle:'Véhicule',terminal:'Terminal',hazard:'Danger'});
+export const LABELS = Object.freeze({floor:'Sol',platform:'Passerelle',wall:'Cloison',door:'Sas',vent:'Conduit',ladder:'Échelle',lift:'Ascenseur',spawn:'Insertion',objective:'Objectif',enemy:'Menace',vehicle:'Véhicule',terminal:'Terminal',npc:'PNJ parlant',hazard:'Danger'});
 export const DEFAULT_LAYER = type => ['floor','platform','wall','ladder','lift','vent'].includes(type) ? 'structure' : 'gameplay';
 export const clone = value => structuredClone(value);
 export const keyOf = cell => `${cell.layer}:${cell.x}:${cell.y}`;
@@ -48,8 +49,9 @@ export function parseProject(input) {
       if (occupied.has(keyOf(cell))) fail('Deux blocs occupent la même case du même calque.');
       cellIds.add(cell.id); occupied.add(keyOf(cell));
       const decoration=parseForgeDecorationV141(cell.decoration,cell.layer);
+      const npc=parseForgeNpcV158(cell.npc,cell.type,cell.layer);
       const narrative=parseForgeNarrativeV156(cell.narrative,cell.type,cell.layer);
-      return {id:cell.id,x:cell.x,y:cell.y,type:cell.type,layer:cell.layer,label:text(cell.label),locked:cell.locked === true,...(decoration?{decoration}:{}),...(narrative?{narrative}:{})};
+      return {id:cell.id,x:cell.x,y:cell.y,type:cell.type,layer:cell.layer,label:text(cell.label),locked:cell.locked === true,...(decoration?{decoration}:{}),...(npc?{npc}:{}),...(narrative?{narrative}:{})};
     });
     return {id:raw.id,name:text(raw.name,'Secteur sans nom'),size:[...raw.size],cells};
   });
@@ -71,7 +73,7 @@ export function parseProject(input) {
     linkIds.add(raw.id);
     return {id:raw.id,from,to,bidirectional:raw.bidirectional !== false};
   });
-  validateForgeNarrativeReferencesV156(rooms);
+  validateForgeNarrativeReferencesV156(rooms); validateForgeNpcsV158(rooms);
   const activeRoomId=modern ? input.activeRoomId : rooms[0].id;
   if (!roomIds.has(activeRoomId)) fail('Salle active introuvable.');
   const result={schema:3,kind:input.kind==='ship'?'ship':'mission',name:text(input.name,'Frontier Forge'),activeRoomId,rooms,links};
@@ -81,7 +83,8 @@ export function parseProject(input) {
 
 export function projectRoom(project) { return project.rooms.find(room=>room.id===project.activeRoomId); }
 export function nativeTiles(room) {
-  return room.cells.filter(cell=>!decorative(cell)).map(cell=>({position:`${cell.x}:${cell.y}`,type:cell.type}));
+  // PNJ are compiled as authored characters, never as legacy terminal/enemy tiles.
+  return room.cells.filter(cell=>!decorative(cell)&&cell.type!=='npc').map(cell=>({position:`${cell.x}:${cell.y}`,type:cell.type}));
 }
 export function validateProject(project, roomId=project.activeRoomId) {
   const issues=[];
@@ -103,7 +106,7 @@ export function validateProject(project, roomId=project.activeRoomId) {
     }
     const solid=(x,y)=>occupied.get(`${x}:${y}`)?.some(cell=>['floor','platform','wall','lift'].includes(cell.type));
     for(const cell of physical) {
-      if(['spawn','objective','terminal','door','enemy','vehicle'].includes(cell.type) && !solid(cell.x,cell.y+1)) add(cell.type==='spawn'?'error':'warning','unsupported','Ce bloc n’a pas de support immédiatement dessous.',room,cell);
+      if(['spawn','objective','terminal','door','enemy','vehicle','npc'].includes(cell.type) && !solid(cell.x,cell.y+1)) add(['spawn','npc'].includes(cell.type)?'error':'warning','unsupported','Ce bloc n’a pas de support immédiatement dessous.',room,cell);
       if(cell.type==='spawn' && (solid(cell.x,cell.y-1) || occupied.get(`${cell.x}:${cell.y}`)?.some(c=>c.type==='hazard'))) add('error','unsafe-spawn','Insertion obstruée ou dangereuse.',room,cell);
       if(cell.type==='door') {
         if(!solid(cell.x-1,cell.y) && !solid(cell.x+1,cell.y) && cell.x!==0 && cell.x!==room.size[0]-1) add('warning','floating-door','Sas sans cloison latérale : vérifiez son encadrement.',room,cell);
@@ -174,7 +177,7 @@ export class ForgeModel {
       const positionKey=`${layer}:${px}:${py}`;const cell=this.cellCache.get(positionKey);
       if(cell?.locked)continue;
       if(erase){if(cell){this.removeLinks([cell.id]);this.room.cells.splice(this.room.cells.indexOf(cell),1);this.cellCache.delete(positionKey);}continue;}
-      if(cell){if(cell.type!==type){if(cell.type==='door')this.removeLinks([cell.id]);cell.type=type;}}else {const placed={id:this.cellId(),x:px,y:py,type,layer,label:'',locked:false};this.room.cells.push(placed);this.cellCache.set(positionKey,placed);}
+      if(cell){if(cell.type!==type){if(cell.type==='door')this.removeLinks([cell.id]);if(type!=='npc')delete cell.npc;if(!['npc','terminal'].includes(type))delete cell.narrative;cell.type=type;}}else {const placed={id:this.cellId(),x:px,y:py,type,layer,label:'',locked:false};this.room.cells.push(placed);this.cellCache.set(positionKey,placed);}
     }
     this.cellCacheLength=this.room.cells.length;
   }

@@ -24,6 +24,7 @@ import { PLAYER_ACTION_PROP_ASSETS_V127 } from '../src/player-action-rig-v127.js
 import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
 import { PLAYER_APPEARANCE_IMAGE_LIMIT_V129 } from '../src/player-appearance-runtime-v126.js';
+import { getPlayerColonialTorsoWithVariantsV141 } from '../src/player-colonial-art-v141.js';
 
 // Actual production, Bioforge and hub runtimes own all gameplay. The observable
 // host substitutes browser APIs only; dimensions come from shipped PNG headers.
@@ -128,6 +129,7 @@ function browserHost({ holdImages = false } = {}) {
     windowEvents.dispatchEvent(event);
   };
   return { canvas, drawing, key, images, requests,
+    finishRequestedImages() { for (const image of images) if (!image.complete) image.finish(); },
     releaseImages() { deferred = false; for (const image of images) if (!image.complete) image.finish(); },
     failImages() { for (const image of images) if (!image.complete) image.finish(true); },
     async flush() { for (let count = 0; count < 4; count++) await Promise.resolve(); } };
@@ -1181,5 +1183,126 @@ test('mixed colonial J1/J2 garments, opposite torso views and independent active
   assert.equal(subject.requests.length, requested);
   assert.deepEqual([combatState(actor), combatState(engine.coop)], resources); assert.equal(engine.inventory.medkits, kits);
   assert.deepEqual([engine.heldWeaponDescriptorV125(actor).id, engine.heldWeaponDescriptorV125(engine.coop).id], carried);
+  engine.stop(); assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
+});
+
+for (const role of ['player', 'coop']) for (const torsoId of ['torso-hicks-v129', 'torso-hudson-calendar-v141', 'torso-utility-v126']) {
+  test(`${role} keeps ${torsoId} through its first left aim after deferred deployment pages finish`, async () => {
+    const appearance = normalizePlayerAppearanceV126({ schema: 126,
+      slots: { ...colonial('hicks').slots, torso: torsoId } });
+    const torsoViews = [-1, 1].map(facing => getPlayerColonialTorsoWithVariantsV141(torsoId, facing)?.asset).filter(Boolean);
+    const combat = PLAYER_BODY_RIG_ASSETS_V125.find(asset => asset.kind === 'body-combat');
+    const delayedPaths = new Set([torsoViews[0]?.path, combat.path].filter(Boolean));
+    const subject = fixture({ weapon: WEAPONS.find(item => item.id === 'weapon-007-m37a2-pump-shotgun'),
+      playerAppearanceV126: appearance, coopAppearanceV126: appearance },
+    { holdImages: source => delayedPaths.has(source) });
+    const { engine } = subject; engine.setCoop(true);
+    const actor = engine[role], selected = normalizePlayerAppearanceV126(actor.appearanceV126);
+    engine.preparePlayerWeaponAssetsV125();
+    const deploymentRequests = [...subject.requests];
+    // Finish only pages requested by deployment. A page first requested by the
+    // turn remains deferred, so a fast host cannot hide the late-load defect.
+    subject.finishRequestedImages(); await subject.flush();
+    await readyAppearance(subject); await readyAppearance(subject, engine.coop);
+    const resources = [combatState(engine.player), combatState(engine.coop)];
+    const aim = resolveCombatAimV83({ x: -1, y: -1, facing: -1 });
+    Object.assign(actor, { facing: -1, aimingV124: true, combatAimV83: aim, pointerAimV83: aim });
+    const pose = engine.resolvePlayerWeaponPoseV125(actor, aim, { requireReady: false });
+    assert.ok(pose, 'The authoritative left-facing weapon geometry exists independently of image readiness.');
+    const beforeGeometry = geometry(pose), visual = drawActor(subject, actor);
+    assertComposed(subject, visual, selected, 'First left-facing aim');
+    for (const asset of [...torsoViews, combat]) {
+      assert.ok(deploymentRequests.includes(asset.path), `${asset.imageKey} was requested before the first turn.`);
+      assert.equal(subject.requests.filter(path => path === asset.path).length, 1, 'The scene shares each required page without reloading it.');
+    }
+    assert.equal(subject.requests.length, deploymentRequests.length, 'The first aim cannot issue a late torso or body request.');
+    assert.deepEqual(geometry(engine.resolvePlayerWeaponPoseV125(actor, aim)), beforeGeometry);
+    assert.deepEqual([combatState(engine.player), combatState(engine.coop)], resources);
+    const cache = engine.playerAppearanceSnapshotV126().images;
+    assert.ok(cache.retained <= 16 && cache.loading === 0 && cache.failed === 0);
+    engine.stop(); assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
+  });
+}
+
+test('an unarmed modular operator preloads its selected opposite torso without weapon-only combat pages', async () => {
+  const appearance = colonial('hicks'), left = getPlayerColonialTorsoWithVariantsV141(appearance.slots.torso, -1).asset;
+  const combat = PLAYER_BODY_RIG_ASSETS_V125.find(asset => asset.kind === 'body-combat');
+  const subject = fixture({ playerAppearanceV126: appearance }, { holdImages: source => source === left.path });
+  subject.actor.weaponMode = 'unarmed'; subject.engine.releasePlayerWeaponPresentationV125();
+  subject.requests.length = 0; subject.engine.preparePlayerWeaponAssetsV125();
+  const before = [...subject.requests]; subject.finishRequestedImages(); await subject.flush();
+  await readyAppearance(subject);
+  Object.assign(subject.actor, { facing: -1 });
+  assertComposed(subject, drawActor(subject), appearance, 'Unarmed first turn');
+  assert.ok(before.includes(left.path), 'An empty-handed human still needs both selected torso views.');
+  assert.equal(before.includes(combat.path), false, 'An unarmed idle operator does not prefetch an unused firearm pose.');
+  assert.equal(subject.requests.length, before.length);
+  assert.equal(subject.actor.heldWeaponVisualV125, null);
+});
+
+test('dedicated costume silhouettes never prewarm a modular torso or unused combat body', async () => {
+  const subject = fixture({ costume: getCostumeV119('franchise-nostromo-crew'), playerAppearanceV126: colonial('hicks') });
+  subject.engine.preparePlayerWeaponAssetsV125(); await subject.flush();
+  const visual = drawActor(subject);
+  assert.equal(visual.supported, false); assert.equal(visual.reason, 'dedicated-costume');
+  assert.equal(subject.actor.playerVisualV81?.skinId, 'player.nostromo-crew-v119');
+  for (const asset of [...PLAYER_COLONIAL_RIG_ASSETS_V129, ...PLAYER_BODY_RIG_ASSETS_V125]) {
+    assert.equal(subject.requests.includes(asset.path), false, `${asset.imageKey} is not part of this native costume.`);
+  }
+});
+
+test('two native tools and a distinct field pickup retain every current page inside sixteen slots without eviction cycles', async () => {
+  const primary = normalizePlayerAppearanceV126({ schema: 126,
+    slots: { ...alternate().slots, torso: 'torso-hudson-calendar-v141' } });
+  const secondary = colonial('hicks');
+  const subject = fixture({ weapon: WEAPONS.find(item => item.id === 'weapon-007-m37a2-pump-shotgun'),
+    playerAppearanceV126: primary, coopAppearanceV126: secondary });
+  const { engine, actor } = subject; engine.setCoop(true);
+  assert.equal(attachCrewDeploymentV85(actor, { ...CREW[0], gearV85: [
+    { instanceId: 'qa-prewarm-rifle', catalogId: 'weapon-001-m41a-pulse-rifle', kind: 'weapon' },
+    { instanceId: 'qa-prewarm-tracker', catalogId: 'equipment-001-motion-tracker', kind: 'equipment', charges: 3 }
+  ] }), true);
+  // The level's original shotgun pickup differs from both issued weapons.
+  // Make that declared physical fixture available without changing its image.
+  engine.weaponPickup.taken = false;
+  await readyAppearance(subject); await readyAppearance(subject, engine.coop);
+  actor.health = 30; engine.coop.health = 30;
+  assert.equal(engine.useEquipment('equipment-001-motion-tracker', actor), true);
+  assert.equal(engine.useMedkit(engine.coop), true);
+  engine.preparePlayerWeaponAssetsV125(); await subject.flush();
+  const required = engine.collectPlayerWeaponAssetsV125();
+  assert.ok(required.length > 12 && required.length <= 16, 'The two actual gestures, selected kits, carried weapons and pickup fit the unchanged cache.');
+  assertComposed(subject, drawActor(subject), primary, 'Personal tracker outfit');
+  assertComposed(subject, drawActor(subject, engine.coop), secondary, 'Cooperative medical outfit');
+  assert.equal(actor.fieldActionV124.kind, 'deep-scan');
+  assert.equal(actor.playerActionVisualV127.mode, 'motion-tracker');
+  assert.equal(engine.coop.playerActionVisualV127.mode, 'medical');
+  const cache = engine.playerAppearanceSnapshotV126().images;
+  for (const asset of required) assert.ok(cache.assets.some(entry => entry.imageKey === asset.imageKey && entry.pinned && entry.state === 'ready'),
+    `${asset.imageKey} needed by the current scene cannot be displaced by a future pose.`);
+  const requests = subject.requests.length, releases = cache.releases;
+  const resources = [combatState(actor), combatState(engine.coop)], kits = engine.inventory.medkits;
+  for (let frame = 0; frame < 12; frame++) {
+    engine.preparePlayerWeaponAssetsV125();
+    assert.equal(drawActor(subject).drawn, true);
+    assert.equal(drawActor(subject, engine.coop).drawn, true);
+  }
+  assert.equal(subject.requests.length, requests, 'Current pages never enter an eviction/reload cycle.');
+  assert.equal(engine.playerAppearanceSnapshotV126().images.releases, releases);
+  assert.deepEqual([combatState(actor), combatState(engine.coop)], resources); assert.equal(engine.inventory.medkits, kits);
+  assert.equal(engine.weaponPickup.taken, false);
+  const withoutGesture = value => { const { fieldActionV124, ...state } = value; return state; };
+  assert.equal(engine.cancelFieldActionV124(actor, 'cancelled'), true);
+  assert.equal(engine.cancelFieldActionV124(engine.coop, 'cancelled'), true);
+  await readyAppearance(subject); await readyAppearance(subject, engine.coop);
+  assert.equal(actor.heldWeaponVisualV125.weaponId, 'weapon-001-m41a-pulse-rifle');
+  assert.equal(engine.coop.heldWeaponVisualV125.weaponId, 'weapon-003-m4a3-service-pistol');
+  assert.deepEqual([combatState(actor), combatState(engine.coop)].map(withoutGesture), resources.map(withoutGesture));
+  assert.equal(engine.inventory.medkits, kits);
+  const restoredCache = engine.playerAppearanceSnapshotV126().images;
+  assert.equal(restoredCache.limit, 16); assert.ok(restoredCache.retained <= 16 && !restoredCache.loading && !restoredCache.failed);
+  const restoredRequests = subject.requests.length, restoredReleases = restoredCache.releases;
+  for (let frame = 0; frame < 12; frame++) { drawActor(subject); drawActor(subject, engine.coop); }
+  assert.equal(subject.requests.length, restoredRequests); assert.equal(engine.playerAppearanceSnapshotV126().images.releases, restoredReleases);
   engine.stop(); assert.equal(engine.playerAppearanceSnapshotV126().images.retained, 0);
 });

@@ -654,7 +654,7 @@ export class HubGame extends HubGameV50 {
     if (!this.editorPlaytest) {
       const playerCenter = this.player.x + this.player.w / 2;
       for (const door of this.doorStates) {
-        const target = Math.abs(playerCenter - door.x) < 182 ? 1 : 0;
+        const target = Math.abs(playerCenter - door.x) < 182 || this.hubNpcBulkheadDemandV158?.(door) ? 1 : 0;
         door.progress += (target - door.progress) * Math.min(1, delta * (this.reducedMotion ? 14 : 7));
       }
     }

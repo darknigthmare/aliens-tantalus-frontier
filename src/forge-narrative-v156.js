@@ -1,4 +1,4 @@
-/** Bounded, data-only terminal stories for Forge documents and playtest sessions.
+/** Bounded, data-only terminal/character stories for Forge documents and playtest sessions.
  * Effects validate authored objectives or exchange authored story tokens only.
  * No campaign equipment, script or storage API. */
 export const FORGE_NARRATIVE_LIMITS_V156 = Object.freeze({ terminals: 64, nodes: 8, choices: 2, text: 600 });
@@ -12,7 +12,7 @@ const text = (value, max, name) => {
 };
 export function parseForgeNarrativeV156(raw, type, layer) {
   if (raw === undefined) return undefined;
-  if (type !== 'terminal' || ['background', 'foreground'].includes(layer)) fail('un récit doit appartenir à un terminal physique.');
+  if (!['terminal', 'npc'].includes(type) || ['background', 'foreground'].includes(layer)) fail('un récit doit appartenir à un terminal ou un PNJ physique.');
   if (!record(raw) || raw.schema !== 1 || !Array.isArray(raw.nodes) || !raw.nodes.length || raw.nodes.length > 8 || !id(raw.start)) fail('1 à 8 nœuds requis.');
   let items;
   if (raw.items !== undefined) {
@@ -75,7 +75,7 @@ export function validateForgeNarrativeReferencesV156(rooms, externalObjectiveIds
   const objectives = new Set(rooms.flatMap(room => room.cells.filter(cell => cell.type === 'objective' && !['background', 'foreground'].includes(cell.layer)).map(cell => cell.id)));
   const items = new Set(forgeNarrativeItemsV157({ rooms }).map(item => item.id));
   const terminals = rooms.flatMap(room => room.cells.filter(cell => cell.narrative));
-  if (terminals.length > 64) fail('64 terminaux narratifs maximum.');
+  if (terminals.length > 64) fail('64 terminaux/PNJ narratifs maximum (budget partagé).');
   for (const cell of terminals) for (const node of cell.narrative.nodes) for (const choice of node.choices) {
     for (const key of ['requiresObjectiveId', 'rewardObjectiveId']) if (choice[key] && !objectives.has(choice[key]) && !externalObjectiveIds.has(choice[key])) fail(`objectif « ${choice[key]} » introuvable.`);
     for (const key of ['requiresItemId', 'rewardItemId']) if (choice[key] && !items.has(choice[key]) && !externalItemIds.has(choice[key])) fail(`objet de récit « ${choice[key]} » introuvable.`);
@@ -127,6 +127,7 @@ export function forgeNarrativeViewV156(session, cellId) {
   const last = node || cell.narrative.nodes.find(entry => entry.id === state.history.at(-1)?.nodeId);
   if (!last) return null;
   return { cellId, title: cell.narrative.title, nodeId: last.id, text: last.text,
+    ...(cell.type === 'npc' ? { speaker: { name: cell.npc.name, presetId: cell.npc.presetId } } : {}),
     finished: !node || !node.choices.length,
     inventory: forgeNarrativeItemsV157(session.project).filter(item => (session.narrativeInventoryV157 || []).includes(item.id)),
     playSeconds: session.narrativePlaySecondsV157 || 0,

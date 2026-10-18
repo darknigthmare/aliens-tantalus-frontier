@@ -3,18 +3,19 @@ import { defaultForgeNarrativeV156, openForgeNarrativeV156, chooseForgeNarrative
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const button = (action, label) => `<button type="button" data-forge-action="${action}">${label}</button>`;
 export function forgeNarrativeFieldsV156(editor, cell, nodeId) {
-  if (!cell || cell.type !== 'terminal' || ['background', 'foreground'].includes(cell.layer)) return '';
+  if (!cell || !['terminal', 'npc'].includes(cell.type) || ['background', 'foreground'].includes(cell.layer)) return '';
   const story = cell.narrative;
-  if (!story) return `<section><h4>RÉCIT DU TERMINAL</h4><p class="forge-note">Un dialogue à choix peut exiger ou valider un objectif, échanger des objets de récit et attendre du temps de jeu actif. La progression reste dans le test.</p>${button('story-create', 'Ajouter un récit')}</section>`;
+  const heading = cell.type === 'npc' ? 'DIALOGUE DU PERSONNAGE' : 'RÉCIT DU TERMINAL';
+  if (!story) return `<section><h4>${heading}</h4><p class="forge-note">Un dialogue à choix peut exiger ou valider un objectif, échanger des objets de récit et attendre du temps de jeu actif. La progression reste dans le test.</p>${button('story-create', cell.type === 'npc' ? 'Ajouter un dialogue' : 'Ajouter un récit')}</section>`;
   const node = story.nodes.find(entry => entry.id === nodeId) || story.nodes[0];
   const objectives = editor.model.data.rooms.flatMap(room => room.cells.filter(entry => entry.type === 'objective' && !['background', 'foreground'].includes(entry.layer)).map(entry => ({ id: entry.id, name: `${room.name} / ${entry.label || entry.id}` })));
   const items = forgeNarrativeItemsV157(editor.model.data).map(item => ({ id: item.id, name: `${item.label} · ${item.id}` }));
   const options = (entries, value, blank) => `<option value="">${blank}</option>` + entries.map(entry => `<option value="${escape(entry.id)}" ${entry.id === value ? 'selected' : ''}>${escape(entry.name || entry.id)}</option>`).join('');
-  return `<section data-forge-story-cell="${escape(cell.id)}"><h4>RÉCIT DU TERMINAL</h4><p class="forge-note">8 pages et 2 réponses par page au maximum, sans boucle. Un objectif récompensé est validé immédiatement, y compris dans une autre salle. Une réponse sans destination termine l’échange.</p>
+  return `<section data-forge-story-cell="${escape(cell.id)}"><h4>${heading}</h4><p class="forge-note">8 pages et 2 réponses par page au maximum, sans boucle. Un objectif récompensé est validé immédiatement, y compris dans une autre salle. Une réponse sans destination termine l’échange.</p>
     <label>Titre<input data-forge-field="story-title" maxlength="100" value="${escape(story.title)}"></label>
     <label>Objets de récit déclarés ici<textarea data-forge-field="story-items" maxlength="3300" rows="3" placeholder="badge-relais | Badge du relais">${escape((story.items || []).map(item => `${item.id} | ${item.label}`).join('\n'))}</textarea></label>
     ${button('story-items-save', 'Enregistrer les objets de récit')}
-    <p class="forge-note">Une ligne : identifiant | nom (80 caractères). 16 déclarations par terminal, 32 objets uniques par projet. Enregistrez-les pour les choisir ci-dessous. Chaque objet est un jeton unique partagé entre les terminaux ; les copies gardent le même identifiant et le même nom. Aucun équipement de campagne n’est accordé.</p>
+    <p class="forge-note">Une ligne : identifiant | nom (80 caractères). 16 déclarations par récit, 32 objets uniques par projet. Enregistrez-les pour les choisir ci-dessous. Chaque objet est un jeton unique partagé entre les terminaux et personnages ; les copies gardent le même identifiant et le même nom. Aucun équipement de campagne n’est accordé.</p>
     <label>Page<select data-forge-field="story-node">${story.nodes.map(entry => `<option value="${escape(entry.id)}" ${entry.id === node.id ? 'selected' : ''}>${escape(entry.id)}${entry.id === story.start ? ' · début' : ''}</option>`).join('')}</select></label>
     <label>Texte<textarea data-forge-field="story-text" maxlength="600" rows="5">${escape(node.text)}</textarea></label>
     ${[0, 1].map(index => { const choice = node.choices[index] || {}; return `<fieldset><legend>Réponse ${index + 1} · laisser vide pour retirer</legend>
@@ -31,11 +32,15 @@ export function forgeNarrativeFieldsV156(editor, cell, nodeId) {
 }
 export function editForgeNarrativeV156(editor, action, read) {
   const cell = editor.selected()[0];
-  if (!cell || editor.selected().length !== 1 || cell.type !== 'terminal') throw new Error('Sélectionnez un terminal physique.');
+  if (!cell || editor.selected().length !== 1 || !['terminal', 'npc'].includes(cell.type)) throw new Error('Sélectionnez un terminal ou un PNJ physique.');
   editor.assertSelectionEditable();
-  if (cell.locked) throw new Error('Déverrouillez le terminal avant de modifier son récit.');
-  return editor.edit('Modifier le récit du terminal', () => {
-    if (action === 'story-create') { cell.narrative = defaultForgeNarrativeV156(); return; }
+  if (cell.locked) throw new Error('Déverrouillez le bloc avant de modifier son récit.');
+  return editor.edit(cell.type === 'npc' ? 'Modifier le dialogue du PNJ' : 'Modifier le récit du terminal', () => {
+    if (action === 'story-create') {
+      cell.narrative = defaultForgeNarrativeV156();
+      if (cell.type === 'npc') { cell.narrative.title = 'Échange de service'; cell.narrative.nodes[0].text = 'Bonjour. De quelles informations avez-vous besoin ?'; }
+      return;
+    }
     if (action === 'story-remove') { delete cell.narrative; return; }
     if (action === 'story-items-save') {
       const lines = read('story-items').split('\n').map(line => line.trim()).filter(Boolean);
@@ -154,7 +159,7 @@ export function showForgeNarrativeV156(engine, cellId, onChange = () => {}) {
       ? `Objectif requis : ${objectives.find(entry => entry.id === requirement.objectiveId)?.label || requirement.objectiveId}`
       : requirement.reason === 'item-required' ? `Objet de récit requis : ${itemLabel(requirement.itemId)}`
         : `Temps de jeu actif requis : ${requirement.requiredSeconds} s · encore ${requirement.remainingSeconds} s. Fermez le récit pour poursuivre le jeu.`;
-    root.innerHTML = `<section role="dialog" aria-modal="true" aria-label="${escape(current.title)}" tabindex="-1" style="background:#101b18;border:2px solid #90b5a0;padding:24px;max-width:620px;width:min(620px,90vw);max-height:80vh;overflow:auto;color:#e3f4e8;box-shadow:0 12px 60px #000"><h2>${escape(current.title)}</h2><p style="white-space:pre-wrap" aria-live="polite">${escape(current.text)}</p>
+    root.innerHTML = `<section role="dialog" aria-modal="true" aria-label="${escape(current.speaker ? `Dialogue avec ${current.speaker.name}` : current.title)}" tabindex="-1" style="background:#101b18;border:2px solid #90b5a0;padding:24px;max-width:620px;width:min(620px,90vw);max-height:80vh;overflow:auto;color:#e3f4e8;box-shadow:0 12px 60px #000">${current.speaker ? `<p data-forge-speaker-v158><strong>${escape(current.speaker.name)}</strong> · Personnel du plan Forge</p>` : ''}<h2>${escape(current.title)}</h2><p style="white-space:pre-wrap" aria-live="polite">${escape(current.text)}</p>
       ${items.length || current.choices.some(choice => choice.requiresPlaySeconds) ? `<p><small>Temps de jeu actif : ${Math.floor(current.playSeconds)} s · Objets de récit : ${escape(current.inventory.map(item => item.label).join(', ') || 'aucun')}</small></p>` : ''}
       ${current.choices.map((choice, index) => `<p><button type="button" data-story-choice="${escape(choice.id)}" ${choice.available ? '' : 'disabled'} style="padding:12px;width:100%;text-align:left;${choice.available ? '' : 'opacity:1;color:#b7cbbd;background:#273b30;border-color:#698774'}">${index + 1} — ${escape(choice.label)}</button>${choice.blockedReasons.map(requirement => `<small style="display:block">${escape(refusal(requirement))}</small>`).join('')}${choice.consumeRequiredItem ? `<small style="display:block">Remet : ${escape(itemLabel(choice.requiresItemId))}</small>` : ''}${choice.rewardItemId ? `<small style="display:block">Reçoit : ${escape(itemLabel(choice.rewardItemId))}</small>` : ''}${choice.rewardObjectiveId ? `<small style="display:block">Valide : ${escape(objectives.find(entry => entry.id === choice.rewardObjectiveId)?.label || choice.rewardObjectiveId)}</small>` : ''}</p>`).join('')}
       <button type="button" data-story-close style="padding:10px">${current.finished ? 'Reprendre le parcours · E' : 'Fermer · Échap'}</button><p><small>Choisir : clic, Tab + Entrée, ou touches 1 / 2. Le monde attend pendant la lecture.</small></p></section>`;

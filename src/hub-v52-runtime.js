@@ -287,7 +287,7 @@ export class HubGame extends HubGameV51 {
     this.hubNpcSequence = sequence;
     const event = buildHubNpcInteractionEvent(npc, {
       deck: this.state.deck,
-      roomId: this.currentRoom().id,
+      roomId: npc.roomId || this.currentRoom().id,
       count,
       sequence
     });

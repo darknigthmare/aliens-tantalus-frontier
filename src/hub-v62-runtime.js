@@ -82,6 +82,15 @@ function stableOffset(value, maximum) {
   return (hash >>> 0) % Math.max(1, maximum);
 }
 
+/** The standing position used by the native routine factory. Circulation may
+ * approach this existing post; it must not invent another room or work bay. */
+export function getNpcRoutineStandingAnchorV158(crewId, roomId, phase = 'work', actorWidth = 44) {
+  const room = HUB_DECKS.flatMap(deck => deck.rooms).find(entry => entry.id === roomId);
+  if (!room || !NPC_IDENTITIES_V62.some(identity => identity.crewId === crewId)) return null;
+  return clamp(room.xStart + 280 + stableOffset(`${crewId}:${phase}`, 520),
+    room.xStart + 40, room.xEnd - actorWidth - 40);
+}
+
 function createImage(source) {
   const image = new Image();
   image.decoding = 'async';
@@ -89,7 +98,7 @@ function createImage(source) {
   return image;
 }
 
-function resolveNpcWaypointAnchorV62(waypoint, { deckIndex, doorStates, crewId, actorWidth = 44, phase = 'route' } = {}) {
+export function resolveNpcWaypointAnchorV62(waypoint, { deckIndex, doorStates, crewId, actorWidth = 44, phase = 'route' } = {}) {
   if (!waypoint || Number(waypoint.deck) !== Number(deckIndex)) return null;
   const deck = HUB_DECKS[deckIndex];
   const room = deck?.rooms.find((entry) => entry.id === waypoint.roomId);
@@ -347,11 +356,12 @@ export class HubGame extends HubGameV52 {
         }) : null;
         const roomId = activeAnchor?.roomId || resolution.roomId;
         const room = HUB_DECKS[deckIndex].rooms.find((entry) => entry.id === roomId) || HUB_DECKS[deckIndex].rooms[0];
-        const roomOffset = 280 + stableOffset(`${resolution.crewId}:${resolution.phase}`, 520);
         const interpolatedX = fromAnchor && toAnchor
           ? fromAnchor.x + (toAnchor.x - fromAnchor.x) * routeSample.segmentProgress
           : activeAnchor?.x;
-        const x = clamp(routePhase && Number.isFinite(interpolatedX) ? interpolatedX : room.xStart + roomOffset, room.xStart + 40, room.xEnd - source.w - 40);
+        const x = clamp(routePhase && Number.isFinite(interpolatedX) ? interpolatedX
+          : getNpcRoutineStandingAnchorV158(resolution.crewId, room.id, resolution.phase, source.w),
+        room.xStart + 40, room.xEnd - source.w - 40);
         const direction = routePhase && fromAnchor && toAnchor ? Math.sign(toAnchor.x - fromAnchor.x) : 0;
         const mobile = routePhase && direction !== 0 && Math.abs(toAnchor.x - fromAnchor.x) > 8;
         const segmentMinimum = mobile ? Math.min(fromAnchor.x, toAnchor.x) : x;

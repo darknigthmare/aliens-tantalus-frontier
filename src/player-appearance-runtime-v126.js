@@ -7,6 +7,7 @@ import { resolvePlayerActionStateV127, resolvePlayerActionRigV127, drawPlayerAct
 import { advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128 } from './player-transit-rig-v128.js';
 import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
 import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
+import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
@@ -198,6 +199,7 @@ export function withPlayerAppearanceV126(Base) {
       // The base contributes the carried weapons and selected pickup. Body
       // pages are retained below from each admitted pose and selected pieces.
       const assets = super.collectPlayerWeaponAssetsV125().filter(asset => !bodyAssetKeys.has(asset.imageKey));
+      const warmBodies = [];
       for (const actor of this.playerWeaponActorsV125()) {
         const transit = this.resolvePlayerAppearanceTransitV128(actor);
         const action = transit.eligible ? null : this.resolvePlayerAppearanceActionV127(actor);
@@ -205,16 +207,40 @@ export function withPlayerAppearanceV126(Base) {
           : this.decoratePlayerAppearanceBodyV129(actor, resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor)));
         if (bodyRig?.eligible) {
           const modular = resolvePlayerModularRigV126({ bodyRig, appearance: actor.appearanceV126, images: this.images });
-          assets.push(...bodyRig.requiredAssets, ...modular.requiredAssets);
+          // A modular action already declares every texture it actually uses.
+          // Its measured base body supplies geometry, not another full-body
+          // bitmap or the old arms underneath the selected independent parts.
+          if (!action?.eligible) assets.push(...bodyRig.requiredAssets);
+          assets.push(...modular.requiredAssets);
+          // A turn must keep the selected suit. Its opposite torso page and
+          // the portable weapon's aim body belong to this deployment, rather
+          // than first loading when the player changes direction or aims.
+          if (modular.eligible) for (const facing of [-1, 1]) {
+            const torso = getPlayerColonialTorsoWithVariantsV141(modular.requestedSlots.torso, facing);
+            if (torso) assets.push(torso.asset);
+          }
           // Keep the actual carried weapon warm while the hands work with a
           // tool. Returning to the weapon must not reload its sprite page.
           const weapon = resolveHeldWeaponProfileV125(this.heldWeaponDescriptorV125(actor));
-          if (weapon?.portable) assets.push(weapon);
+          if (weapon?.portable) {
+            assets.push(weapon);
+            if (modular.eligible) {
+              warmBodies.push(...bodyRig.requiredAssets,
+                ...PLAYER_BODY_RIG_ASSETS_V125.filter(asset => asset.kind.startsWith('body-')));
+            }
+          }
         }
         if (action?.eligible) assets.push(...action.requiredAssets);
         if (transit.eligible) assets.push(...transit.requiredAssets);
       }
-      return [...new Map(assets.map(asset => [asset.imageKey, asset])).values()];
+      const selected = new Map(assets.map(asset => [asset.imageKey, asset]));
+      // Prewarm only after BOTH operators' current components and implements
+      // have their places. A future body/fallback may use a spare slot, but
+      // cannot make retain() truncate the other operator's active tool.
+      for (const asset of warmBodies) {
+        if (!selected.has(asset.imageKey) && selected.size < PLAYER_APPEARANCE_IMAGE_LIMIT_V129) selected.set(asset.imageKey, asset);
+      }
+      return [...selected.values()];
     }
 
     preparePlayerWeaponAssetsV125() {

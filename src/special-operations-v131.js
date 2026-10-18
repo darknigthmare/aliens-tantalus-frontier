@@ -26,7 +26,7 @@ const limitations = {
   'black-abyss': ['dedicated-hadal-manta-art', 'complete-aquatic-bestiary'],
   'mire-archive-001': ['complete-nostromo-cast', 'complete-historical-campaign'],
   broodstorm: ['dedicated-flying-queen-art', 'complete-modular-dropship-corpus'],
-  'black-cocoon': ['dedicated-animated-cocoon', 'extended-survivor-campaign'],
+  'black-cocoon': ['dedicated-cocoon-bitmap-corpus', 'extended-survivor-campaign'],
   'last-course-tantalus': ['local-convoy-coop'],
   'cargo-brutal': ['dedicated-cargo-matriarch-art']
 };

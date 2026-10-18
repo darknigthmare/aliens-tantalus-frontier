@@ -5,6 +5,7 @@ import { parseProject, projectRoom, nativeTiles, validateProject, decorative } f
 import { compileEditorGridV136, editorMissionSpawnV136, constrainEditorRectV136,
   EDITOR_MISSION_WORLD_V136 } from './editor-spatial-v136.js';
 import { compileShipProject, HUB_WORLD } from './hub-v51-runtime.js';
+import { inspectForgeNpcsV158 } from './forge-npcs-v158.js';
 
 export const FORGE_TEST_BOUNDS_V136 = Object.freeze({
   mission: EDITOR_MISSION_WORLD_V136,
@@ -26,6 +27,7 @@ function missionGeometry(project, cells, bounds) {
       box = constrainEditorRectV136({ ...box, x: tile.x + cw * .34,
         y: tile.y + ch - h, w: Math.max(48, cw * .32), h }, grid);
     } else if (tile.type === 'hazard') box = { ...box, y: tile.y + ch * .65, h: ch * .35 };
+    else if (tile.type === 'vent') box = { ...box, x: tile.x + cw * .25, w: cw * .5 };
     else if (tile.type === 'spawn') {
       if (tile !== grid.tiles.find(entry => entry.type === 'spawn')) return [];
       box = { ...box, ...editorMissionSpawnV136(grid), w: bounds.actorWidth, h: bounds.actorHeight };
@@ -37,7 +39,7 @@ function missionGeometry(project, cells, bounds) {
 function shipGeometry(project, cells, bounds) {
   const compiled = compileShipProject(project), geometry = [];
   for (const [group, type] of [['floors', 'floor'], ['platforms', 'platform'], ['walls', 'wall'],
-    ['doors', 'door'], ['hazards', 'hazard']]) {
+    ['doors', 'door'], ['hazards', 'hazard'], ['vents', 'vent']]) {
     const sources = cells.filter(cell => cell.type === type);
     for (const [index, box] of compiled[group].entries()) {
       const cell = sources[index];
@@ -72,9 +74,13 @@ export function inspectForgeRoomPhysicsV141(project, roomId = project.activeRoom
   const cells = room.cells.filter(c => !decorative(c));
   const issues = validation.issues.filter(i => i.roomId === room.id && !['decor-preview','links-authoring'].includes(i.code));
   const add = (severity,code,message,cell=null) => issues.push({severity,code,message,roomId:room.id,cellId:cell?.id||null,x:cell?.x??null,y:cell?.y??null});
-  const ofType = type => cells.filter(c => c.type === type), counts = Object.fromEntries(['floor','platform','wall','door','ladder','lift','vent','spawn','objective','terminal','enemy','vehicle','hazard'].map(t=>[t,ofType(t).length]));
+  const ofType = type => cells.filter(c => c.type === type), counts = Object.fromEntries(['floor','platform','wall','door','ladder','lift','vent','spawn','objective','terminal','npc','enemy','vehicle','hazard'].map(t=>[t,ofType(t).length]));
   const projection = { schema: 2, kind, size: [...room.size], tiles: nativeTiles(room) };
   const geometry = kind === 'mission' ? missionGeometry(projection, cells, bounds) : shipGeometry(projection, cells, bounds);
+  const npcReport = inspectForgeNpcsV158(room, kind, geometry);
+  issues.push(...npcReport.issues);
+  geometry.push(...npcReport.actors.map(actor => ({ ...actor, type: 'npc' })));
+  for(const cell of ofType('npc').filter(cell=>!cell.narrative))add('warning','npc-no-dialogue','Ce PNJ n’a pas encore de dialogue. Sélectionnez-le puis ajoutez un dialogue dans l’inspecteur.',cell);
   const solids=geometry.filter(g=>['floor','platform','wall','door'].includes(g.type));
   const platforms=geometry.filter(g=>['floor','platform'].includes(g.type));
   for(const spawn of geometry.filter(g=>g.type==='spawn')) {
