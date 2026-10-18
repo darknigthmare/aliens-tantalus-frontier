@@ -29,6 +29,26 @@ def capture(name, value, scope):
     image = base64.b64decode(value.pop('png').split(',')[1])
     (out / name).write_bytes(image)
     report['captures'].append({'file': name, 'sha256': hashlib.sha256(image).hexdigest(), 'scope': scope, 'data': value})
+REDUCED_RECEPTION_CAPTURE = '''()=>{
+  const before=r.getState(),hold=before.grappleV153;
+  const age=hold?before.tick-hold.bornTick:null;
+  const player=before.fighters.find(f=>f.side==='player');
+  const reception=before.rigViewsV154.find(v=>v.side==='player')?.captureReceptionV158;
+  if(!before.paused||!hold||hold.target!=='player'||!player||!(age>0&&age<43)||!reception
+    ||Math.abs(reception.seconds-age/120)>1e-7)throw Error('Reduced-motion reception window missed');
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)throw Error('Reduced-motion preference is not active');
+  // Public APIs only. One synchronous task prevents RAF from advancing between
+  // the observed reception, pause's render(), and the captured framebuffer.
+  if(!r.resume()||!r.pause())throw Error('Reduced-motion atomic public pause failed');
+  const after=r.getState();
+  if(!after.paused||after.tick!==before.tick||after.grappleV153?.id!==hold.id
+    ||after.grappleV153?.bornTick!==hold.bornTick||!after.fighters.some(f=>f.side==='player'&&f.id===player.id)
+    ||after.rigViewsV154.some(v=>v.captureReceptionV158))throw Error('Reduced-motion reception did not redraw at the same native tick');
+  // Reduced native art uses the static draw fallback and legitimately emits
+  // no rig receipt; continuity belongs to the physical fighter and hold.
+  return{...frame(),reducedMotionObservationV158:{beforeTick:before.tick,grappleId:hold.id,bornTick:hold.bornTick,
+    fighterId:player.id,grappleAgeTicks:age,mediaMatches:true,publicApis:['resume','pause']}};
+}'''
 HOST = '''<!doctype html><html lang="fr"><meta charset="utf-8"><title>V158 native reception review</title>
 <style>body{margin:0;background:#071119;color:#dcebe9;font:16px monospace}canvas{display:block;max-width:100%;height:auto}button{padding:14px;margin:10px;min-height:44px}</style>
 <canvas id="review" width="2240" height="1280"></canvas><canvas id="arena" width="1000" height="560"></canvas><button id="stop">Fermer</button></html>'''
@@ -98,12 +118,16 @@ with sync_playwright() as pw:
             if index == 0:
                 page.emulate_media(reduced_motion='reduce')
                 page.locator('#arena').focus()
-                page.keyboard.press('KeyP')
-                page.wait_for_function("()=>r.getState().grappleV153&&!r.getState().rigViewsV154.some(v=>v.captureReceptionV158)", polling='raf')
-                page.keyboard.press('KeyP')
-                reduced = page.evaluate('()=>frame()')
-                check('Live reduced motion keeps the real hold while removing reception deformation', bool(reduced['state'].get('grappleV153')) and not any(v.get('captureReceptionV158') for v in reduced['state']['rigViewsV154']))
-                capture('native-reception-reduced-motion.png', reduced, 'Actual browser motion preference; no actor, result, position, HP or clock rewrite.')
+                reduced = page.evaluate(REDUCED_RECEPTION_CAPTURE)
+                rs, observation = reduced['state'], reduced['reducedMotionObservationV158']
+                rh = rs.get('grappleV153')
+                check('Live reduced motion keeps the real hold while removing reception deformation before reception expiry',
+                      rs['paused'] and bool(rh) and 0 < rs['tick'] - rh['bornTick'] < 43
+                      and rs['tick'] == observation['beforeTick'] and rh['id'] == observation['grappleId']
+                      and rh['bornTick'] == observation['bornTick'] and observation['mediaMatches']
+                      and any(f['side'] == 'player' and f['id'] == observation['fighterId'] for f in rs['fighters'])
+                      and not any(v.get('captureReceptionV158') for v in rs['rigViewsV154']), observation)
+                capture('native-reception-reduced-motion.png', reduced, 'Actual browser motion preference, same native hold and tick before reception expiry; public resume/pause APIs synchronously redraw and capture. No actor, result, position, HP or clock rewrite.')
                 page.emulate_media(reduced_motion='no-preference')
             page.locator('#arena').focus()
             page.keyboard.press('KeyP')

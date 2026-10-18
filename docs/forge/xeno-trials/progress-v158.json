@@ -1616,7 +1616,13 @@
             "hazard-overlap",
             "spawn-overlap",
             "other-npc-overlap"
-          ]
+          ],
+          "ventVolumesBlockNpcPlacement": true
+        },
+        "playerArrival": {
+          "missionVentIsSolid": false,
+          "shipVentIsSolid": true,
+          "matchesNativeCollisionRules": true
         },
         "dialogue": {
           "module": "src/forge-narrative-v156.js",
@@ -1903,7 +1909,14 @@
       "referenceMotionCaptured": false,
       "artClosed": 0,
       "approved1to1": 0,
-      "historicalSequencesChanged": false
+      "historicalSequencesChanged": false,
+      "reducedMotionProofRequirements": {
+        "minimumGrappleAgeTicksExclusive": 0,
+        "maximumGrappleAgeTicksExclusive": 43,
+        "sameNativeHoldAndTick": true,
+        "publicResumePauseOnly": true,
+        "deformationAbsentBeforeReceptionExpiry": true
+      }
     },
     "fidelityEvidence": {
       "projectSourcePlates": [
@@ -1964,7 +1977,7 @@
     "src/forge-decoration-v141.js": "8df7f9f306e2635547b4488198b1d3f6f815633999516bc5819d28cadff2cbfe",
     "src/forge-editor-base.js": "bcb438505c136e72d9c97ea05fca38331aac3738e935b2398dedd6ef0a946060",
     "src/forge-editor-v130.css": "b645064e47bda9c8162f79ecdaa5a93aedd37a7f35fdaebb7e66bd6faed943de",
-    "src/forge-journey-admission-v141.js": "b48b0a0762e7df1c2ef9c6aa8af4a412c42584936768467ae8dc60889ed16928",
+    "src/forge-journey-admission-v141.js": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
     "src/forge-mission-runtime-v141.js": "1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0",
     "src/forge-model-v130.js": "9bc39547e1bb1b7add1489efab073d22302a64f6220a701eb6abcd1c084252c7",
     "src/forge-narrative-ui-v156.js": "766a0a9abf003514425260e361868701117831de3245289d97fae92d109fdaf4",
@@ -3417,7 +3430,7 @@
         [
           "forge-dialogue-npcs-v158",
           "PNJ dialoguants éditables",
-          "16 PNJ/salle ; 64 PNJ/projet ; nom 80 caractères ; apparences coloniales existantes.",
+          "16 PNJ/salle ; 64 PNJ/projet ; nom 80 caractères ; conduits refusés pour les corps PNJ, arrivées Mission non bloquées par ces conduits.",
           "Implémenté (borné)",
           "PNJ stationnaires de playtest ; pas de membre de campagne, cloud ou script libre."
         ]
@@ -3562,7 +3575,7 @@
           "QA158-RECEPTION",
           "node --test scripts/verify-xeno-trials-capture-reception-v158.mjs",
           "À exécuter sur le commit publié",
-          "Trois plaques natives, contacts et raccord sans écriture physique."
+          "Trois plaques natives, contacts et raccord sans écriture physique ; preuve navigateur du mouvement réduit au même tick natif, avant 43 ticks de prise."
         ],
         [
           "QA158-COCOON",
@@ -5528,8 +5541,8 @@
         [
           "src/forge-journey-admission-v141.js",
           "Non épinglé en V157",
-          "b48b0a0762e7df1c2ef9c6aa8af4a412c42584936768467ae8dc60889ed16928",
-          "Les PNJ Forge bornés gardent leur identité éditable, leur récit et les admissions natives dans les deux playtests, copies et échanges de documents.",
+          "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+          "Les volumes de conduits gardent le refus des corps PNJ ; les arrivées Mission conservent leurs conduits non bloquants et les arrivées Vaisseau leurs obstacles natifs.",
           "scripts/verify-forge-npcs-v158.mjs"
         ],
         [
@@ -9222,7 +9235,7 @@
       "expected": 3
     }
   ],
-  "workbookSha256": "2cc629bfa2a4b136cb8757df3a93683069969654bfda1b36c9cc447abf778db5",
+  "workbookSha256": "f04e41b6b827b4a48832015e0c0c57d715c15d882cdd189aac7a51cbc53822f1",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V157",
@@ -9405,8 +9418,8 @@
       {
         "path": "src/forge-journey-admission-v141.js",
         "previousSha256": null,
-        "currentSha256": "b48b0a0762e7df1c2ef9c6aa8af4a412c42584936768467ae8dc60889ed16928",
-        "reason": "Les PNJ Forge bornés gardent leur identité éditable, leur récit et les admissions natives dans les deux playtests, copies et échanges de documents.",
+        "currentSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "reason": "Les volumes de conduits gardent le refus des corps PNJ ; les arrivées Mission conservent leurs conduits non bloquants et les arrivées Vaisseau leurs obstacles natifs.",
         "verifiers": [
           "scripts/verify-forge-npcs-v158.mjs"
         ]

@@ -15,6 +15,7 @@ import { missionV136, hostV136 } from './forge-native-host-v136.mjs';
 import { HubGame } from '../src/hub-v51-runtime.js';
 import { withForgeShipRuntimeV141 } from '../src/forge-ship-runtime-v141.js';
 import { withForgeDecorationV141 } from '../src/forge-decoration-v141.js';
+import { forgeBoxesOverlapV141 } from '../src/forge-journey-v141.js';
 
 const storage = () => { const data = new Map(); return { data, getItem: key => data.get(key) ?? null,
   setItem: (key, value) => data.set(key, String(value)), removeItem: key => data.delete(key) }; };
@@ -280,4 +281,48 @@ test('V158 Mission PNJ share the native environment/player camera transform and 
   assert.equal(calls.filter(call => call.label === 'npc').length, 1);
   assert.equal(calls.some(call => call.label === 'actor' && call.actor === e.player), false);
   assert.equal(e.forgeNpcRenderV158[0].drawn, true);
+});
+
+function ventLandingProject(kind = 'mission') {
+  const input = project('mission'); input.kind = kind;
+  input.rooms[0].cells = input.rooms[0].cells.filter(cell => cell.type !== 'npc');
+  input.rooms[1].cells = [
+    { id: 'b-landing', x: kind === 'ship' ? 5 : 6, y: 16, type: 'floor', layer: 'structure' },
+    { id: 'b-door', x: 6, y: 15, type: 'door', layer: 'gameplay' },
+    { id: 'b-vent', x: kind === 'ship' ? 5 : 6, y: 14, type: 'vent', layer: 'gameplay' }
+  ];
+  return input;
+}
+
+test('V158 Mission arrival ignores a body-height vent exactly like the native room transition', t => {
+  // The one landing tile supports only the two poses beside this door. The
+  // authored vent overlaps both bodies, but Mission vents are not colliders.
+  const input = ventLandingProject(), before = structuredClone(input), audit = inspectForgeJourneyV141(input);
+  assert.equal(audit.ok, true, audit.errors.join(' '));
+  assert.equal(audit.arrivals.find(arrival => arrival.to.roomId === 'b').ok, true);
+  assert.deepEqual(input, before);
+  const fixture = runtime(t, 'mission', input), e = fixture.engine;
+  walk(e, () => nearestDoor(e, 'mission')); tap(fixture);
+  assert.equal(e.forgeSessionV141.currentRoomId, 'b'); assert.equal(e.vents.length, 1);
+  assert.equal(forgeBoxesOverlapV141(e.player, e.vents[0]), true, 'the actual native arrival may overlap this nonblocking Mission vent');
+  assert.equal(e.player.grounded, true); e.update(1 / 60); assert.equal(e.player.grounded, true);
+});
+
+test('V158 Ship admission retains real vent collision beside a linked-door landing', () => {
+  const input = ventLandingProject('ship'), clear = structuredClone(input);
+  clear.rooms[1].cells = clear.rooms[1].cells.filter(cell => cell.type !== 'vent');
+  const clearAudit = inspectForgeJourneyV141(clear); assert.equal(clearAudit.ok, true, clearAudit.errors.join(' '));
+  const blocked = inspectForgeJourneyV141(input);
+  assert.equal(blocked.ok, false); assert.ok(blocked.issues.some(issue => issue.code === 'journey-blocked-arrival' && issue.roomId === 'b'));
+});
+
+test('V158 vent volumes still reject an intersecting PNJ body in both Mission and Ship', () => {
+  for (const kind of ['mission', 'ship']) {
+    const input = project(kind);
+    input.rooms[0].cells.push({ id: 'a-body-vent', x: 4, y: kind === 'ship' ? 13 : 14, type: 'vent', layer: 'gameplay' });
+    const audit = inspectForgeJourneyV141(input);
+    assert.equal(audit.ok, false);
+    assert.ok(audit.geometry.some(shape => shape.type === 'vent' && shape.cellId === 'a-body-vent'));
+    assert.ok(audit.issues.some(issue => issue.code === 'npc-body-blocked' && issue.cellId === 'a-npc'));
+  }
 });

@@ -61,7 +61,10 @@ export function inspectForgeJourneyV141(input) {
       actor: { w: destination.bounds.actorWidth, h: destination.bounds.actorHeight, facing: 1 },
       bounds: destination.bounds,
       surfaces: destination.geometry.filter(shape => ['floor', 'platform'].includes(shape.type)),
-      solids: [...destination.geometry.filter(shape => ['floor', 'platform', 'wall', 'door', 'vent'].includes(shape.type)),
+      // Mission vents provide PNJ placement volumes, not arrival colliders.
+      // Ship vents are actual native traversal obstacles and remain solid.
+      solids: [...destination.geometry.filter(shape => ['floor', 'platform', 'wall', 'door'].includes(shape.type)
+        || shape.type === 'vent' && project.kind === 'ship'),
         ...(project.kind === 'ship' ? [{ x: 0, y: 0, w: 24, h: destination.bounds.height },
           { x: destination.bounds.width - 24, y: 0, w: 24, h: destination.bounds.height }] : [])],
       hazards: destination.geometry.filter(shape => shape.type === 'hazard'),

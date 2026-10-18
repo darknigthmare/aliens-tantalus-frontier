@@ -69,6 +69,11 @@ test('the three receptions are exact native-image simulation adaptations with hi
   assert.equal(current.runtimeContracts.captureReception.referenceMotionCaptured, false);
   assert.equal(current.runtimeContracts.captureReception.newSourcePixels, false);
   assert.equal(current.runtimeContracts.captureReception.historicalSequencesChanged, false);
+  assert.deepEqual(current.runtimeContracts.captureReception.reducedMotionProofRequirements, {
+    minimumGrappleAgeTicksExclusive: 0, maximumGrappleAgeTicksExclusive: 43,
+    sameNativeHoldAndTick: true, publicResumePauseOnly: true,
+    deformationAbsentBeforeReceptionExpiry: true,
+  });
   assert.deepEqual(current.tables['03_Sequences'], previous.tables['03_Sequences']);
   assert.deepEqual(current.sequenceIds, sequences.map(row => row.id));
   assert.equal(sequences.length, 40);
@@ -93,6 +98,10 @@ test('Forge conversation NPCs retain their executable limits and local scope', (
     combatant: false, blocking: false });
   assert.equal(contract.placement.fixedSupportRequired, true);
   assert.equal(contract.placement.liftSupportAllowed, false);
+  assert.equal(contract.placement.ventVolumesBlockNpcPlacement, true);
+  assert.deepEqual(contract.playerArrival, {
+    missionVentIsSolid: false, shipVentIsSolid: true, matchesNativeCollisionRules: true,
+  });
   assert.equal(contract.dialogue.storiesIncludingTerminalsAndNpcs, 64);
   assert.equal(contract.dialogue.nativePowerOrArchiveActivation, false);
   assert.equal(contract.checkpoint.rebuildActorsFromProject, true);

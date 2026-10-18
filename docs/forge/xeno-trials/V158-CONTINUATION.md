@@ -46,6 +46,9 @@ restent nécessaires et un PNJ n’active pas l’énergie ou les archives de la
 Les checkpoints reconstruisent les acteurs depuis le projet et gardent l’identité
 du nom, de l’apparence et de l’orientation ; ils ne les transforment pas en opérateurs.
 Aucune nouvelle voix, patrouille, capacité de combat ou recrutement n’est livré.
+Les volumes des conduits empêchent une pose incompatible du corps d’un PNJ.
+Ils ne deviennent pas des obstacles aux arrivées du joueur en Mission ; les
+conduits du Vaisseau conservent leur traitement d’obstacle natif.
 
 La demande de l’éditeur retrouvée dans la conversation de l’auteur décrit un
 état ancien V132–V135. Le runtime V141/V157 comporte déjà des récits, objets et
@@ -72,6 +75,10 @@ ART153-10, ART153-17 et ART153-24 suivent les identités exactes Commando, Guard
 et Cultiste sur leurs plaques natives. La réception se raccorde à la capture
 réelle et à l’abaissement existant. Les phases et durées décrivent la simulation
 du projet, sans leur attribuer un relevé de chorégraphie canonique.
+Le contrôle navigateur du mouvement réduit doit observer la même prise et le
+même tick natif, avant 43 ticks de prise : une réception déjà terminée ne peut
+pas servir de preuve. Les API publiques de reprise et de pause permettent de
+redessiner et capturer cette préférence sans faire avancer la simulation.
 
 Ces réceptions ne constituent ni un pin complet, ni un corps entièrement couché,
 ni des dessins de parties cachées. Les 40 séquences et 200 clés historiques restent
