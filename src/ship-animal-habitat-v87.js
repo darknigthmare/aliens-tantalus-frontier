@@ -99,7 +99,9 @@ export const SHIP_ANIMAL_ANNEX_V87 = freeze({
   parentRoomId: 'crew-quarters', entranceSide: 'west', entranceLocalX: 144,
   parentDoorBounds: { x: 645, y: 432, w: 118, h: 192 },
   entrance: { id: 'animal-care-annex-door', x: 144, y: 432, w: 118, h: 192, bidirectional: true },
-  world: { width: 1920, height: 720, floorY: 624, floorHeight: 96, playerClearanceWidth: 112, playerClearanceHeight: 192 },
+  // The eastern 512px service bay provides an adult work rail. Animal
+  // installations retain their original coordinates and arrival points.
+  world: { width: 2432, height: 720, floorY: 624, floorHeight: 96, playerClearanceWidth: 112, playerClearanceHeight: 192 },
   station: { id: 'animal-care-station', label: 'Comptoir de soins',
     action: 'ship-animal:care', description: 'Contrôler les équipements et la capacité d’accueil',
     persistent: true, singleStation: true, upgradeId: 'animal-care-services-v87',
@@ -108,13 +110,13 @@ export const SHIP_ANIMAL_ANNEX_V87 = freeze({
   scope: 'companion-care', implementedFeatures: ['local-docked-counter', 'physical-arrival-transfer'],
   deferredFeatures: ['dedicated-human-carry-animation'],
   normalHubCreaturesVisible: false, isolatedLevelTarget: null,
-  platforms: [{ id: 'animal-care-floor', x: 0, y: 624, w: 1920, h: 96, role: 'floor' }],
+  platforms: [{ id: 'animal-care-floor', x: 0, y: 624, w: 2432, h: 96, role: 'floor' }],
   ladders: [], colliders: [], props,
   artRoles: ['far', 'prop', 'door'],
   art: { basePath: ROOT, far: ROOT + '/habitat-wall.png', prop: ROOT + '/habitat-props.png',
     door: '/assets/openai/hub/annexes/v71/bioforge/door.webp',
     alphaBounds: { prop: SHIP_ANIMAL_PROP_RECTS_V87.counter, door: [53, 29, 330, 483] } },
-  criteria: { scale: { logicalWidth: 1920, logicalHeight: 720, floorY: 624, minimumWalkableWidth: 1536,
+  criteria: { scale: { logicalWidth: 2432, logicalHeight: 720, floorY: 624, minimumWalkableWidth: 1536,
     minimumCeilingHeight: 432, minimumEntranceClearance: 112, requiredPerspectiveLayers: 3 },
     density: { minimumProps: 2, maximumProps: 17, minimumColliders: 0, maximumColliderCoverageRatio: .32, requiredInteractiveStations: 1 } }
 });

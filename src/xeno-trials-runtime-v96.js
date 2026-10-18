@@ -1,7 +1,7 @@
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
  getXenoTrialsSequenceCueV155, sampleXenoTrialsSequenceV155, skipXenoTrialsIntroV155,
- createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156 } from './xeno-trials-sequences-v155.js';
-import { getXenoTrialsRigV154, getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
+ createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157 } from './xeno-trials-sequences-v155.js';
+import { getXenoTrialsRigV154, getXenoTrialsRigCueV154, sampleXenoTrialsRigV154, drawXenoTrialsRigV154, sampleXenoTrialsExitPoseV157 } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsGrappleViewV153, drawXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { drawXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
@@ -47,9 +47,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const displayScale = getXenoTrialsDisplayScaleV110(match.fighters);
   const camera = createXenoTrialsCameraV119(match.fighters);
   let cameraView = camera.getState(), frameDelta = 0;
-  let presentation = createXenoPresentationV97(), outroV155 = null, terminalV156 = null, tauntV156 = null;
-  const outroPlaying = () => outroV155?.phase === 'playing' || terminalV156?.phase === 'playing';
-  const isPaused = () => match.paused || outroV155?.paused === true || terminalV156?.paused === true;
+  let presentation = createXenoPresentationV97(), outroV155 = null, terminalV156 = null, tauntV156 = null, exitV157 = null;
+  const outroPlaying = () => outroV155?.phase === 'playing' || terminalV156?.phase === 'playing' || exitV157?.phase === 'playing';
+  const isPaused = () => match.paused || outroV155?.paused === true || terminalV156?.paused === true || exitV157?.paused === true;
   const presentationView = () => getXenoPresentationViewV97(presentation);
   const reduceMotion = () => options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
     || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
@@ -58,6 +58,8 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     paused: isPaused(), outroV155: outroV155 ? JSON.parse(JSON.stringify(outroV155)) : null,
     terminalV156: terminalV156 ? JSON.parse(JSON.stringify(terminalV156)) : null,
     tauntV156: tauntV156 ? JSON.parse(JSON.stringify(tauntV156)) : null,
+    exitV157: exitV157 ? JSON.parse(JSON.stringify(exitV157)) : null,
+    exitViewsV157: match.fighters.map(f=>getXenoTrialsExitViewV157(match,f,exitV157,reduceMotion())).filter(Boolean),
     canTauntV156: acceptsControls() && tauntV156?.phase !== 'playing' && Boolean(createXenoTrialsTauntV156(match,presentationView(),controls(),reduceMotion())),
     rigViewsV154: JSON.parse(JSON.stringify([...rigDrawsV154].map(([side,view])=>({side,...view})))),
     grappleViewV153: getXenoTrialsGrappleViewV153(match),
@@ -104,6 +106,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   function statusText() {
     if (assetFailure) return 'Combat suspendu : visuel dédié indisponible. Rechargez pour réessayer.';
     if (isPaused()) return 'Simulation en pause. Reprendre avec P ou le bouton Reprendre.';
+    if (exitV157?.phase === 'playing') return 'Fin de simulation : sortie des spécimens.';
     if (terminalV156?.phase === 'playing') return terminalV156.kind==='draw' ? 'Égalité : récupération des spécimens.' : 'Fin de présentation : retour à la vigilance.';
     if (presentationView().fighterSlot !== null) return `Présentation : ${getXenoTrialsFighterV96(match.fighters[presentationView().fighterSlot].id).label}`;
     if (presentationView().countdown) return `Manche ${match.round} : ${presentationView().countdown}`;
@@ -145,10 +148,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     drawXenoTrialsStageMotionV147(context, stage, cameraView, match.tick, reduceMotion(), { ...match, presentation: presentationView() });
   }
   function drawFighter(fighter) {
+    const exitView=getXenoTrialsExitViewV157(match,fighter,exitV157,reduceMotion());
+    if(exitView&&!exitView.visible)return;
+    const drawX=exitView?.x??fighter.x,drawFacing=exitView?.direction??fighter.facing;
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
     const image = images.get(art.path), ground = 450 - fighter.y;
     const body = getXenoTrialsBodyBoundsV105(fighter);
-    context.fillStyle = '#0008'; context.beginPath(); context.ellipse(body.center, 454, body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
+    context.fillStyle = '#0008'; context.beginPath(); context.ellipse(body.center+drawX-fighter.x, 454, body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
     if (!image) { text('Visuel indisponible', fighter.x, ground - 90, 12, '#f0b6ac', 'center'); return; }
     const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
     const timeSeconds = match.tick * XENO_TRIALS_STEP_V96;
@@ -165,12 +171,22 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const sequenceCue=rig && (getXenoTrialsSequenceCueV156(rig,match,fighter,presentationView(),terminalV156,tauntV156)
       || getXenoTrialsSequenceCueV155(rig,match,fighter,presentationView(),outroV155));
     const cue=sequenceCue || rig && getXenoTrialsRigCueV154(rig,match,fighter,presentationView());
-    const pose=cue && (sequenceCue ? sampleXenoTrialsSequenceV155(rig,cue,reducedMotion) : sampleXenoTrialsRigV154(rig,cue,reducedMotion));
+    const pose=exitView ? sampleXenoTrialsExitPoseV157(rig,exitView,{width,height,pivotX,bottom},reducedMotion) : cue && (sequenceCue ? sampleXenoTrialsSequenceV155(rig,cue,reducedMotion) : sampleXenoTrialsRigV154(rig,cue,reducedMotion));
     context.save();
     if(fighter.hitFlash>0) context.globalAlpha=.65;
-    const rigDrawn=pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},fighter.x,ground,fighter.facing);
+    // Native plates have no authored back-facing turn. A short, stationary
+    // cross-dissolve changes facing before the first measured step.
+    if(exitView&&exitView.fromFacing!==drawFacing&&exitView.turn<1){
+      context.globalAlpha=1-exitView.turn;
+      const flip=exitView.fromFacing===sourceFacing?1:-1;
+      context.save();context.translate(drawX,ground);context.scale(flip,1);
+      context.drawImage(image,-width*pivotX,-height*bottom,width,height);context.restore();
+      context.globalAlpha=exitView.turn;
+    }
+    const rigDrawn=pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},drawX,ground,drawFacing);
     context.restore();
     if(rigDrawn) rigDrawsV154.set(fighter.side,{...rigDrawn,
+      ...(exitView?{exitV157:{...exitView,stepped:rigDrawn?.clip==='spatial-exit-v157',pose:pose?.exitPoseV157||null}}:{}),
       ...(pose.sequenceIdV155 ? {sequenceIdV155:pose.sequenceIdV155,beatV155:pose.beatV155,animation:pose.animation,...(pose.sequenceIdV156?{sequenceIdV156:pose.sequenceIdV156}:{})} : {})});
     const attackDrawn = !rigDrawn && canShowAttack && drawEnemyImportAttackV109(context, art, images, {
       attack: fighter.attack, spec: getXenoTrialsAttackV147(definition, fighter.attack?.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind]), reducedMotion,
@@ -178,16 +194,18 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       maxHorizontalExtent: null
     });
     const animated = rigDrawn || attackDrawn || drawEnemyImportAnimationV107(context, art, images, {
-      action: moving ? 'move' : 'idle', timeSeconds, height, x: fighter.x, y: ground, facing: fighter.facing,
+      action: moving ? 'move' : 'idle', timeSeconds, height, x: drawX, y: ground, facing: drawFacing,
       maxHorizontalExtent: null,
       reducedMotion
     });
     if (!animated) {
-      const flip = fighter.facing === sourceFacing ? 1 : -1;
-      context.save(); context.translate(fighter.x, ground); context.scale(flip, 1);
+      const flip = drawFacing === sourceFacing ? 1 : -1;
+      context.save(); context.translate(drawX, ground); context.scale(flip, 1);
+      if(exitView&&exitView.fromFacing!==drawFacing&&exitView.turn<1)context.globalAlpha=exitView.turn;
       if (fighter.hitFlash > 0) context.globalAlpha = .65;
       context.drawImage(image, -width * pivotX, -height * bottom, width, height); context.restore();
     }
+    if(exitView)return;
     if (fighter.guard) {
       context.strokeStyle = '#71e2f0'; context.lineWidth = 4;
       const face = fighter.facing > 0 ? body.right : body.left;
@@ -211,7 +229,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   function render() {
     if (stopped) return;
     rigDrawsV154.clear();
-    cameraView = camera.update(match.fighters, frameDelta); frameDelta = 0;
+    if(!exitV157)cameraView = camera.update(match.fighters, frameDelta); frameDelta = 0;
     canvas.setAttribute?.('data-xeno-camera-zoom-v119', String(cameraView.zoom));
     drawArena();
     context.save(); context.translate(cameraView.translateX, cameraView.translateY); context.scale(cameraView.zoom, cameraView.zoom);
@@ -299,7 +317,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (stopped || isPaused() || match.phase === 'match-over' && !outroPlaying()) return false;
     for (const key of heldKeys) blockedKeys.add(key);
     clearInputs();
-    if (match.phase === 'match-over') { if(outroV155)outroV155 = {...outroV155,paused:true}; if(terminalV156)terminalV156={...terminalV156,paused:true}; }
+    if (match.phase === 'match-over') { if(outroV155)outroV155 = {...outroV155,paused:true}; if(terminalV156)terminalV156={...terminalV156,paused:true}; if(exitV157)exitV157={...exitV157,paused:true}; }
     else setXenoTrialsPausedV96(match,true);
     previousTime = null; frameDelta = 0;
     if (raf !== null) cancelFrame(raf); raf = null;
@@ -309,7 +327,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (stopped || !isPaused() || !loaded || assetFailure || !windowAvailable()
       || match.phase === 'match-over' && !outroPlaying()) return false;
     clearInputs();
-    if (match.phase === 'match-over') { if(outroV155)outroV155 = {...outroV155,paused:false}; if(terminalV156)terminalV156={...terminalV156,paused:false}; }
+    if (match.phase === 'match-over') { if(outroV155)outroV155 = {...outroV155,paused:false}; if(terminalV156)terminalV156={...terminalV156,paused:false}; if(exitV157)exitV157={...exitV157,paused:false}; }
     else setXenoTrialsPausedV96(match,false);
     previousTime = null; canvas.focus?.({preventScroll:true}); notify(true);
     if (!stopped && running && raf === null) raf = requestFrame(frame);
@@ -319,7 +337,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (stopped || !loaded || assetFailure || isPaused() || !windowAvailable()) return false;
     let changed = false;
     if (outroPlaying()) {
-      outroV155 = skipXenoTrialsOutroV155(outroV155); terminalV156=skipXenoTrialsOutroV155(terminalV156); running = false; changed = true;
+      outroV155 = skipXenoTrialsOutroV155(outroV155); terminalV156=skipXenoTrialsOutroV155(terminalV156); exitV157=skipXenoTrialsOutroV155(exitV157); running = false; changed = true;
       if (raf !== null) cancelFrame(raf); raf = null;
     } else if (match.phase === 'active') {
       const next = skipXenoTrialsIntroV155(presentation);
@@ -411,14 +429,19 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const dt = previousTime === null ? 0 : clamp((timestamp - previousTime) / 1000, 0, .25);
     frameDelta = dt;
     previousTime = timestamp;
-    if (match.phase === 'match-over' && (outroV155 || terminalV156)) {
+    if (match.phase === 'match-over' && (outroV155 || terminalV156 || exitV157)) {
       // A separate finite presentation clock. The completed engine/result are
       // immutable; the result callback was already delivered before this frame.
       frameDelta = 0;
       if (reduceMotion()) {
         if(outroV155)outroV155 = {...skipXenoTrialsOutroV155(outroV155),reducedMotion:true};
         if(terminalV156)terminalV156 = {...skipXenoTrialsOutroV155(terminalV156),reducedMotion:true};
-      } else if(terminalV156)terminalV156=advanceXenoTrialsOutroV155(terminalV156,dt*1000);
+        if(exitV157)exitV157={...skipXenoTrialsOutroV155(exitV157),reducedMotion:true};
+      } else if(exitV157?.phase==='playing')exitV157=advanceXenoTrialsOutroV155(exitV157,dt*1000);
+      else if(terminalV156?.phase==='playing'){
+        terminalV156=advanceXenoTrialsOutroV155(terminalV156,dt*1000);
+        if(terminalV156.phase==='complete')exitV157=createXenoTrialsExitV157(match,terminalV156,cameraView);
+      }
       else {
         outroV155 = advanceXenoTrialsOutroV155(outroV155,dt*1000);
         if(outroV155?.phase==='complete')terminalV156=createXenoTrialsTerminalV156(match,'outro',false,outroV155);
@@ -500,7 +523,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   }
   function stop() {
     if (stopped) return;
-    stopped = true; running = false; outroV155 = null; terminalV156=null; tauntV156=null; clearInputs(); if (raf !== null) cancelFrame(raf); raf = null;
+    stopped = true; running = false; outroV155 = null; terminalV156=null; tauntV156=null; exitV157=null; clearInputs(); if (raf !== null) cancelFrame(raf); raf = null;
     for (const cancel of [...pendingLoads]) cancel();
     for (const remove of listeners.splice(0)) remove(); images.clear(); rigDrawsV154.clear();
     canvas.width = originalSize.width; canvas.height = originalSize.height;

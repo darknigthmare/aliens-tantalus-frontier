@@ -14,6 +14,10 @@ const counter = (role, x, width = 92) => ({
  * native cargo, doorway, ladder, collider or saved player position. Unchanged
  * flight/range/through-route groups deliberately retain their clear access. */
 export const HUB_FURNISHING_ANNEX_REVISIONS_V139 = freeze({
+  'animal-care': {
+    reason: 'An adult-height frontal preparation counter occupies the separate eastern human service bay, clear of every animal fitting.',
+    moves: {}, additions: [counter('companion-health-preparation', 2240, 94)]
+  },
   'arrival-airlock': {
     reason: 'The existing return bench hosts clean linen beside the pressure-control service.',
     moves: {}, additions: []

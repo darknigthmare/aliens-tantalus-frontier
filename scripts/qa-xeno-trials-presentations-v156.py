@@ -1,5 +1,5 @@
 """Three explicitly separate scopes: twenty declared render fixtures, a real
-CPU/keyboard controller duel, and a deterministic engine-only draw fixture.
+CPU/keyboard controller duel including the V157 spatial exit, and a deterministic engine-only draw fixture.
 No actor, HP, result, position, timer, meter or RNG is rewritten after creation.
 No menu/unlock/save journey or canonical 1:1 animation is claimed.
 """
@@ -17,10 +17,11 @@ if out == repo or repo in out.parents:
     raise SystemExit('Evidence must be outside the repository')
 out.mkdir(parents=True, exist_ok=True)
 report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
-          'scope': '20 new exact-source presentation render fixtures; native CPU/keyboard duel; separately declared engine-only draw fixture.',
+          'scope': '20 exact-source presentation definitions plus 16 V157 exit-step render fixtures; native CPU/keyboard duel with finite spatial exit; separately declared engine-only draw fixture.',
           'limitations': ['Four admitted source plates only; zero canonical or artistic completion certification.',
                          'Native duel uses the ordinary 1 HP rule selected at construction. No cloud reward or menu journey.',
-                         'Draw is an engine-only deterministic no-input fixture, not an asserted native CPU outcome.']}
+                         'Draw is an engine-only deterministic no-input fixture, not an asserted native CPU outcome.',
+                         'V157 exit is a bounded native-mesh adaptation, not complete locomotion. Prowler steps only the rear supports; turning is a stationary facing cross-dissolve.']}
 
 
 def check(label, ok, evidence=None):
@@ -51,7 +52,7 @@ with sync_playwright() as pw:
         page.route(a.base.rstrip('/') + '/', lambda route: route.fulfill(status=200, content_type='text/html', body=HOST))
         page.goto(a.base.rstrip('/') + '/', wait_until='domcontentloaded')
         entries = page.evaluate('''async()=>{
-          window.S=await import('/src/xeno-trials-sequences-v155.js');window.R=await import('/src/xeno-trials-rig-v154.js');window.images=new Map();
+          window.S=await import('/src/xeno-trials-sequences-v155.js');window.R=await import('/src/xeno-trials-rig-v154.js');window.M=await import('/src/xeno-trials-scale-v110.js');window.images=new Map();
           for(const r of R.XENO_TRIALS_RIGS_V154){const image=new Image();image.src=r.path;await image.decode();images.set(r.id,image);}
           window.review=({id,progress,facing,reduced=false,cue=null})=>{
             const s=S.XENO_TRIALS_SEQUENCES_V156.find(s=>s.id===id),r=R.XENO_TRIALS_RIGS_V154.find(r=>r.id===s.rigId),image=images.get(r.id),canvas=document.querySelector('#review'),ctx=canvas.getContext('2d');
@@ -63,6 +64,15 @@ with sync_playwright() as pw:
             const receipt=R.drawXenoTrialsRigV154(ctx,r,image,frame,m,360,590,facing);if(!receipt)native();
             const after=ctx.getImageData(0,0,720,620).data;let changed=0;for(let i=0;i<after.length;i+=4)if(after[i]!==baseline[i]||after[i+1]!==baseline[i+1]||after[i+2]!==baseline[i+2]||after[i+3]!==baseline[i+3])changed++;
             return{png:canvas.toDataURL('image/png'),receipt,changed,sequence:id,beat:frame.beatV155,progress:sampled.progress,facing};
+          };
+          window.reviewExit=({id,direction,distance})=>{
+            const rig=R.XENO_TRIALS_RIGS_V154.find(r=>r.fighterId===id),image=images.get(rig.id),canvas=document.querySelector('#review'),ctx=canvas.getContext('2d');
+            const native=M.getXenoTrialsRenderMetricsV110(id),height=rig.fighterId==='prowler'?400:560,width=height*rig.sourceWidth/rig.sourceHeight,m={width,height,pivotX:native.pivotX,bottom:native.bottom};
+            const view={rigId:rig.id,distance,stride:id==='prowler'?20:40,footLift:id==='prowler'?2:3.2};
+            const pose=R.sampleXenoTrialsExitPoseV157(rig,view,m);
+            ctx.clearRect(0,0,720,620);ctx.fillStyle='#071119';ctx.fillRect(0,0,720,620);ctx.fillStyle='#8baa9b';ctx.fillRect(0,590,720,2);
+            const receipt=R.drawXenoTrialsRigV154(ctx,rig,image,pose,m,360+direction*distance,590,direction);
+            return{png:canvas.toDataURL('image/png'),fighterId:id,direction,distance,receipt,pose:pose?.exitPoseV157,canonExact:false,fullLocomotion:false};
           };
           window.frame=()=>({state:r.getState(),results:structuredClone(results),png:document.querySelector('#arena').toDataURL('image/png')});
           window.physical=s=>JSON.stringify({tick:s.tick,time:s.timeRemaining,result:s.result,fighters:s.fighters,events:s.events,wins:s.wins,rng:s.rng,projectiles:s.projectiles});
@@ -80,6 +90,14 @@ with sync_playwright() as pw:
                     capture(seq['id'].replace('::', '-') + '.png', mid, 'Prepared sequence render fixture; not a gameplay event')
             reduced = page.evaluate('x=>review(x)', {'id': seq['id'], 'progress': .47, 'facing': 1, 'reduced': True})
             check(seq['id'] + ': reduced fixture restores exact native pixels', reduced['changed'] == 0 and reduced['receipt'] is None)
+
+        for rig_id in ['prowler', 'dd-darwin-era-cultist', 'import-game-dd-wy-commando', 'import-game-dd-guardian']:
+            stride = 20 if rig_id == 'prowler' else 40
+            for direction in [-1, 1]:
+                for beat, fraction in [('stance', .12), ('swing', .4)]:
+                    stepped = page.evaluate('x=>reviewExit(x)', {'id': rig_id, 'direction': direction, 'distance': stride * fraction})
+                    check(rig_id + '/' + str(direction) + '/' + beat + ': exact native mesh draws bounded exit step', bool(stepped['receipt']) and stepped['receipt']['clip'] == 'spatial-exit-v157' and stepped['pose']['bodyDrop'] <= 1.51)
+                    capture('fixture-exit-v157-' + rig_id + '-' + str(direction) + '-' + beat + '.png', stepped, 'Prepared exact-source V157 exit render fixture; not a combat outcome or full locomotion certification')
 
         ready = page.evaluate('''async()=>{
           const {createXenoTrialsRuntimeV96}=await import('/src/xeno-trials-runtime-v96.js');window.results=[];window.firstTerminalPhysical=null;
@@ -131,12 +149,27 @@ with sync_playwright() as pw:
         exit_frame = page.wait_for_function("()=>{const s=r.getState();return s.terminalV156?.kind==='outro'&&s.terminalV156.phase==='playing'&&s.terminalV156.elapsedMs>=60&&s.rigViewsV154.some(v=>v.sequenceIdV156?.endsWith('::outro'))?frame():null}", polling='raf', timeout=60000).json_value()
         check('The native terminal exit follows a delivered result without changing the completed engine', len(exit_frame['results']) == 1 and page.evaluate('()=>physical(r.getState())===firstTerminalPhysical'))
         capture('native-outro-v156.png', exit_frame, 'Actual CPU final result; short exit observed atomically from state and canvas')
-        page.wait_for_function("()=>r.getState().terminalV156?.phase==='complete'", polling='raf')
+        spatial = page.wait_for_function("()=>{const s=r.getState();return s.exitV157?.phase==='playing'&&s.exitViewsV157.some(v=>v.distance>20)&&s.rigViewsV154.some(v=>v.exitV157?.stepped)?frame():null}", polling='raf', timeout=30000).json_value()
+        check('V157 native CPU result leads to real render travel with fixed engine coordinates and a single result', len(spatial['results']) == 1 and page.evaluate('()=>physical(r.getState())===firstTerminalPhysical') and any(abs(v['x'] - v['startX']) > 20 for v in spatial['state']['exitViewsV157']))
+        capture('native-spatial-exit-v157.png', spatial, 'Native CPU result; detached render travel; no actor, HP, outcome or RNG write')
+        page.locator('#arena').focus()
+        page.keyboard.press('KeyP')
+        paused_exit = page.evaluate('()=>frame()')
+        frozen_exit = paused_exit['state']
+        check('Native P pauses the actual spatial exit', frozen_exit['paused'] and frozen_exit['exitV157']['phase'] == 'playing')
+        capture('native-spatial-exit-paused-v157.png', paused_exit, 'Native keyboard pause during real render travel')
+        page.wait_for_timeout(250)
+        check('Paused native exit retains the exact camera, support coordinates, engine and result', page.evaluate('()=>r.getState()') == frozen_exit)
+        page.keyboard.press('KeyP')
+        page.wait_for_function("()=>r.getState().exitV157?.phase==='complete'", polling='raf', timeout=30000)
         ended = page.evaluate('()=>r.getState()')
+        check('All admitted native participants reach offscreen and leave no standing rendered sprite', all(not v['visible'] for v in ended['exitViewsV157']) and not ended['rigViewsV154'])
+        end_capture = page.evaluate('()=>frame()')
+        capture('native-spatial-exit-complete-v157.png', end_capture, 'Native finite exit endpoint; empty arena and one engine-owned verdict')
         page.wait_for_timeout(250)
         check('Finite exit stops all further frames and cannot emit a second result', page.evaluate('()=>r.getState()') == ended and page.evaluate('()=>results.length===1&&r.resume()===false&&physical(r.getState())===firstTerminalPhysical'))
         page.locator('#stop').click()
-        check('Closing clears taunt, terminal presentation and rendered receipts', page.evaluate('()=>r.getState().tauntV156===null&&r.getState().terminalV156===null&&r.getState().rigViewsV154.length===0'))
+        check('Closing clears taunt, terminal presentation and rendered receipts', page.evaluate('()=>r.getState().tauntV156===null&&r.getState().terminalV156===null&&r.getState().exitV157===null&&r.getState().rigViewsV154.length===0'))
 
         draws = page.evaluate('''async()=>{
           const E=await import('/src/xeno-trials-engine-v96.js');

@@ -1,4 +1,4 @@
-import { remapForgeNarrativeObjectivesV156, parseForgeNarrativeV156, validateForgeNarrativeReferencesV156 } from './forge-narrative-v156.js';
+import { remapForgeNarrativeObjectivesV156, parseForgeNarrativeV156, validateForgeNarrativeReferencesV156, FORGE_NARRATIVE_LIMITS_V157 } from './forge-narrative-v156.js';
 /** Authoring operations only. No runtime compilation or campaign writes. */
 import { ForgeModel, parseProject, clone, keyOf, LAYERS, TILE_TYPES, decorative } from './forge-model-v130.js';
 
@@ -29,6 +29,9 @@ export function normalizeAssemblyV133(input) {
   // Those references are resolved against the actual project at placement.
   const externalIds = new Set(stories.filter(Boolean).flatMap(story => story.nodes.flatMap(node => node.choices
     .flatMap(choice => [choice.requiresObjectiveId, choice.rewardObjectiveId].filter(id => id && !sourceIds.has(id))))));
+  const itemIds = new Set(stories.flatMap(story => story?.items?.map(item => item.id) || []));
+  const externalItemIds = new Set(stories.filter(Boolean).flatMap(story => story.nodes.flatMap(node => node.choices
+    .flatMap(choice => [choice.requiresItemId, choice.rewardItemId].filter(id => id && !itemIds.has(id))))));
   let number = 1;
   const cells = input.cells.map(cell => {
     // Never alias an external objective (for example cell-1) with a generated
@@ -44,7 +47,7 @@ export function normalizeAssemblyV133(input) {
   const model = parseProject({ schema: 3, kind: 'mission', name: 'Assemblage', activeRoomId: 'room-1', links: [], rooms: [{ id: 'room-1', name: 'Assemblage', size: [Math.max(8, bounds.w), Math.max(8, bounds.h)], cells }] });
   for (const [index, cell] of model.rooms[0].cells.entries()) if (stories[index]) cell.narrative = stories[index];
   remapForgeNarrativeObjectivesV156(model.rooms[0].cells, mapping);
-  validateForgeNarrativeReferencesV156(model.rooms, externalIds);
+  validateForgeNarrativeReferencesV156(model.rooms, externalIds, externalItemIds);
   return { id: typeof input.id === 'string' && /^[a-z0-9][a-z0-9_-]{0,79}$/.test(input.id) ? input.id : 'assembly', name: title(input.name), cells: model.rooms[0].cells, size: [bounds.w, bounds.h] };
 }
 export function captureAssemblyV133(model, ids, name) {
@@ -67,11 +70,17 @@ export function placementPreviewV133(model, input, x, y, { locked = new Set(), v
   const staged = new Set();
   const localIds = new Set(assembly.cells.map(cell => cell.id));
   const targetObjectives = new Set(model.data.rooms.flatMap(room => room.cells.filter(cell => cell.type === 'objective' && !decorative(cell)).map(cell => cell.id)));
+  const targetItems = new Map([...model.data.rooms.flatMap(room => room.cells), ...assembly.cells]
+    .flatMap(cell => cell.narrative?.items || []).map(item => [item.id, item.label]));
+  const itemBudgetExceeded = targetItems.size > FORGE_NARRATIVE_LIMITS_V157.items;
   const cells = assembly.cells.map(source => {
     const cell = { ...source, x: source.x + x, y: source.y + y };
     const missingObjective = source.narrative?.nodes.flatMap(node => node.choices.flatMap(choice => [choice.requiresObjectiveId, choice.rewardObjectiveId]))
       .find(id => id && !localIds.has(id) && !targetObjectives.has(id));
-    const reason = missingObjective ? `objectif externe introuvable : ${missingObjective}` : !integer(cell.x, 0, model.room.size[0] - 1) || !integer(cell.y, 0, model.room.size[1] - 1) ? 'hors limites'
+    const missingItem = source.narrative?.nodes.flatMap(node => node.choices.flatMap(choice => [choice.requiresItemId, choice.rewardItemId]))
+      .find(id => id && !targetItems.has(id));
+    const conflictingItem = source.narrative?.items?.find(item => model.data.rooms.some(room => room.cells.some(entry => entry.narrative?.items?.some(existing => existing.id === item.id && existing.label !== item.label))));
+    const reason = itemBudgetExceeded ? `${FORGE_NARRATIVE_LIMITS_V157.items} objets de récit uniques maximum dans le projet` : missingObjective ? `objectif externe introuvable : ${missingObjective}` : missingItem ? `objet de récit externe introuvable : ${missingItem}` : conflictingItem ? `nom d’objet de récit différent : ${conflictingItem.id}` : !integer(cell.x, 0, model.room.size[0] - 1) || !integer(cell.y, 0, model.room.size[1] - 1) ? 'hors limites'
       : locked.has(cell.layer) || !visible.has(cell.layer) ? 'calque masqué ou verrouillé'
         : occupied.has(keyOf(cell)) ? 'case occupée'
           : !decorative(cell) && (physical.has(`${cell.x}:${cell.y}`) || staged.has(`${cell.x}:${cell.y}`)) ? 'chevauchement physique' : '';

@@ -26,7 +26,7 @@
     "qa:continuation": "node scripts/qa-continuation-browser-v135.mjs",
     "qa:jeri": "node scripts/qa-jeri-surface-browser-v135.mjs",
     "qa:authoring": "node scripts/qa-authoring-browser-v135.mjs",
-    "test:coherence": "node --test scripts/verify-hub-spatial-design-v136.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-hub-prop-atlas-v136.mjs scripts/verify-human-motion-v136.mjs scripts/verify-npc-life-v136.mjs scripts/verify-editor-spatial-v136.mjs scripts/verify-human-natural-gait-v139.mjs scripts/verify-npc-spacing-v140.mjs scripts/verify-hub-annex-npc-life-v141.mjs scripts/verify-hub-door-npc-clearance-v142.mjs scripts/verify-hub-annex-population-v156.mjs",
+    "test:coherence": "node --test scripts/verify-hub-spatial-design-v136.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-hub-prop-atlas-v136.mjs scripts/verify-human-motion-v136.mjs scripts/verify-npc-life-v136.mjs scripts/verify-editor-spatial-v136.mjs scripts/verify-human-natural-gait-v139.mjs scripts/verify-npc-spacing-v140.mjs scripts/verify-hub-annex-npc-life-v141.mjs scripts/verify-hub-door-npc-clearance-v142.mjs scripts/verify-hub-annex-population-v156.mjs scripts/verify-hub-annex-service-v157.mjs",
     "qa:tantalus:design": "node scripts/qa-tantalus-design-v136.mjs",
     "qa:tantalus:npcs": "node scripts/qa-npc-life-v136.mjs",
     "qa:editor:spatial": "node scripts/qa-editor-spatial-browser-v136.mjs",
@@ -38,7 +38,7 @@
     "qa:tantalus:perspective": "node scripts/qa-tantalus-perspective-v139.mjs",
     "test:forge": "node --test scripts/verify-forge-v130.mjs scripts/verify-forge-v133.mjs scripts/verify-forge-v134.mjs scripts/verify-forge-v135.mjs scripts/verify-forge-v136.mjs",
     "test:forge:authoring": "node --test scripts/verify-forge-v133.mjs scripts/verify-forge-v134.mjs scripts/verify-forge-v135.mjs",
-    "test:forge:native": "node --test scripts/verify-forge-native-v136.mjs scripts/verify-forge-native-v140.mjs scripts/verify-editor-ship-bounds-v140.mjs scripts/verify-forge-release-v140.mjs scripts/verify-forge-sandbox-v140.mjs scripts/verify-forge-journey-v141.mjs scripts/verify-forge-admission-v141.mjs scripts/verify-forge-mission-v141.mjs scripts/verify-forge-ship-v141.mjs scripts/verify-forge-decoration-v141.mjs scripts/verify-forge-narrative-v156.mjs",
+    "test:forge:native": "node --test scripts/verify-forge-native-v136.mjs scripts/verify-forge-native-v140.mjs scripts/verify-editor-ship-bounds-v140.mjs scripts/verify-forge-release-v140.mjs scripts/verify-forge-sandbox-v140.mjs scripts/verify-forge-journey-v141.mjs scripts/verify-forge-admission-v141.mjs scripts/verify-forge-mission-v141.mjs scripts/verify-forge-ship-v141.mjs scripts/verify-forge-decoration-v141.mjs scripts/verify-forge-narrative-v156.mjs scripts/verify-forge-conditions-v157.mjs scripts/verify-forge-playtest-checkpoint-v157.mjs",
     "qa:wardrobe:parts": "node scripts/qa-wardrobe-parts-browser-v140.mjs",
     "qa:enemy:patrol": "node scripts/qa-enemy-patrol-browser-v140.mjs",
     "test:audit": "node --test scripts/verify-audit-v143.mjs scripts/verify-save-lifecycle-v143.mjs",
@@ -58,7 +58,7 @@
     "test:trials:sequences": "node --test scripts/verify-xeno-trials-sequences-v155.mjs",
     "test:trials:presentations": "node --test scripts/verify-xeno-trials-presentations-v156.mjs",
     "test:trials:restraint": "node --test scripts/verify-xeno-trials-restraint-pose-v156.mjs",
-    "test:audit:continuation": "node --test scripts/verify-audit-continuation-v156.mjs"
+    "test:audit:continuation": "node --test scripts/verify-audit-continuation-v156.mjs scripts/verify-audit-continuation-v157.mjs"
   },
   "engines": {
     "node": ">=22"

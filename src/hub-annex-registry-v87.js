@@ -51,9 +51,11 @@ export function validateHubAnnexGeometryV87(annex) {
   const world = annex?.world;
   if (!extensionFor(annex?.id) || annex?.kind !== 'physical-annex') errors.push('unknown-extension');
   if (!parentFor(annex)) errors.push('invalid-parent-room');
-  // Only the authored external counter gains an east shelter wing. Historical
-  // annexes and the private REFUGE retain their exact 1920 px save geometry.
-  const expectedWidth = annex?.id === SHIP_PORT_ANNEX_V87.id ? 2560 : 1920;
+  // Fixed authored extensions: the port shelter wing and the V157 human
+  // animal-care service bay. Legacy positions remain unchanged in each room;
+  // imported/custom widths still fail this exact geometry admission.
+  const expectedWidth = annex?.id === SHIP_PORT_ANNEX_V87.id ? 2560
+    : annex?.id === SHIP_ANIMAL_ANNEX_V87.id ? 2432 : 1920;
   if (!world || world.width !== expectedWidth || world.height !== 720 || world.floorY !== 624) errors.push('invalid-world');
   if (errors.length) return { valid: false, errors, annexId: annex?.id || null };
   const parentRoom = parentFor(annex);

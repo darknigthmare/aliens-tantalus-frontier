@@ -5,11 +5,13 @@ import { XENO_TRIALS_SEQUENCES_V155 as historical, XENO_TRIALS_ADDED_SEQUENCES_V
  getXenoTrialsSequenceV155 as entry,sampleXenoTrialsSequenceV155 as sample,
  getXenoTrialsSequenceCueV156 as cue,createXenoTrialsTerminalV156 as terminal,
  createXenoTrialsTauntV156 as taunt,advanceXenoTrialsTauntV156 as advanceTaunt,
+ createXenoTrialsExitV157 as spatialExit,getXenoTrialsExitViewV157 as exitView,XENO_TRIALS_EXIT_V157 as EXIT,
  createXenoTrialsOutroV155 as outro,advanceXenoTrialsOutroV155 as advance,skipXenoTrialsOutroV155 as skip } from '../src/xeno-trials-sequences-v155.js';
-import { XENO_TRIALS_RIGS_V154 as rigs,getXenoTrialsRigMeshV154 as mesh,drawXenoTrialsRigV154 as draw,xenoTrialsTriangleAreaV154 as area } from '../src/xeno-trials-rig-v154.js';
+import { XENO_TRIALS_RIGS_V154 as rigs,getXenoTrialsRigMeshV154 as mesh,drawXenoTrialsRigV154 as draw,xenoTrialsTriangleAreaV154 as area,sampleXenoTrialsExitPoseV157 as exitPose } from '../src/xeno-trials-rig-v154.js';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96 as create,stepXenoTrialsMatchV96 as step,nextXenoTrialsRoundV96 as next } from '../src/xeno-trials-engine-v96.js';
 import { createXenoTrialsRuntimeV96 as runtime } from '../src/xeno-trials-runtime-v96.js';
+import { getXenoTrialsRenderMetricsV110 as physicalMetrics } from '../src/xeno-trials-scale-v110.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 const copy = x => JSON.parse(JSON.stringify(x));
 const close = (a,b) => assert.ok(Math.abs(a-b)<1e-6,`${a} != ${b}`);
@@ -207,10 +209,93 @@ test('exit pause, skip, stop and reduced-motion cancellation retain the same res
  for(const action of ['pause','skip','stop','reduced']){
   const h=host();await h.start();for(let i=0;i<3000&&h.r.getState().terminalV156?.kind!=='outro';i++)h.frames();assert.equal(h.r.getState().terminalV156.kind,'outro');
   const before=physical(h.r.getState());
-  if(action==='pause'){assert.equal(h.r.pause(),true);const paused=h.r.getState();h.frames(20);assert.deepEqual(h.r.getState(),paused);assert.equal(h.r.resume(),true);h.frames(10);}
+  if(action==='pause'){assert.equal(h.r.pause(),true);const paused=h.r.getState();h.frames(20);assert.deepEqual(h.r.getState(),paused);assert.equal(h.r.resume(),true);h.frames(160);}
   if(action==='skip'){assert.equal(h.r.skipSequence(),true);assert.equal(h.r.getState().terminalV156.skipped,true);}
   if(action==='stop')h.r.stop();
   if(action==='reduced'){h.window.matchMedia=()=>({matches:true});h.frames();assert.equal(h.r.getState().terminalV156.reducedMotion,true);}
   assert.deepEqual(physical(h.r.getState()),before);assert.equal(h.results.length,1);assert.equal(h.queue.size,0);assert.equal(h.r.resume(),false);h.r.stop();assert.equal(h.r.getState().terminalV156,null);assert.equal(h.r.getState().tauntV156,null);
+ }
+});
+
+
+// V157 explicit render fixtures do not claim a native CPU outcome for every
+// rig/result. Runtime tests below separately drive the unmodified CPU duel.
+function exitFixture(id,side='player',winner='player',flip=1){
+ const m=create({playerId:side==='player'?id:HUMAN,opponentId:side==='opponent'?id:'prowler',introSeconds:0});
+ m.phase='match-over';m.result={completed:true,winner,reason:'time'};
+ m.fighters.forEach((f,i)=>{f.x=i?700:300;f.facing=(i?-1:1)*flip;});
+ const old=winner==='draw'?null:outro(m),t=winner==='draw'?terminal(m,'draw'):terminal(m,'outro',false,{...old,phase:'complete',elapsedMs:old.durationMs});
+ const completed={...t,phase:'complete',elapsedMs:t.durationMs};
+ return{m,t:completed,camera:{zoom:1.5,translateX:-250},f:m.fighters.find(f=>f.side===side)};
+}
+for(const r of rigs)test(r.fighterId+': V157 both exits cover winner, loser and draw with measured support and no folded mesh',()=>{
+ for(const side of ['player','opponent'])for(const winner of ['player','opponent','draw'])for(const facing of [-1,1]){
+  const {m,t,camera,f}=exitFixture(r.fighterId,side,winner,facing),before=copy(m),e=spatialExit(m,t,camera);
+  assert.ok(e);assert.equal(e.fullLocomotion,false);assert.ok(e.durationMs<=EXIT.turnMs+EXIT.maxTravelMs);
+  const start=exitView(m,f,e);close(start.x,f.x);close(start.distance,0);assert.equal(start.visible,true);
+  const startPose=exitPose(r,start,physicalMetrics(r.fighterId));assert.ok(startPose);assert.equal(startPose.active,false);
+  startPose.vertices.forEach((p,i)=>p.forEach((v,axis)=>close(v,mesh(r).vertices[i].source[axis])));
+  const finished=exitView(m,f,{...e,phase:'complete',elapsedMs:e.durationMs});assert.equal(finished.visible,false);
+  const screenX=finished.x*camera.zoom+camera.translateX;assert.ok(finished.direction<0?screenX<=-299:screenX>=1299);
+  const p=e.participants.find(p=>p.side===side),met=physicalMetrics(r.fighterId);
+  for(let i=0;i<=160;i++){
+   const sample={...start,distance:i/160*start.stride*2},pose=exitPose(r,sample,met);assert.ok(pose,`${r.id} distance ${sample.distance}`);
+   for(const ids of mesh(r).triangles)assert.ok(area(...ids.map(j=>pose.vertices[j]))>=area(...ids.map(j=>mesh(r).vertices[j].source))*.2);
+   assert.ok(pose.exitPoseV157.bodyDrop<1.51);assert.equal(pose.fullLocomotion,false);
+   for(const [index,name] of ['footFar','footNear'].entries()){
+    const step=pose.exitPoseV157.feet[index];
+    close(pose.contacts[name][1],r.contacts[name].point[1]+step.y);
+   }
+  }
+  // A stance interval cancels the exact same root travel in world coordinates.
+  for(const [a,b] of [[.02,.1],[.32,.38]]){
+   const d1=p.stride*a,d2=p.stride*b,one=exitPose(r,{...start,distance:d1},met),two=exitPose(r,{...start,distance:d2},met);
+   const sx=met.width/r.sourceWidth,flip=p.direction*r.sourceFacing;
+   const stance=one.exitPoseV157.feet.findIndex((step,index)=>step.stance&&two.exitPoseV157.feet[index].stance);
+   assert.ok(stance>=0);const name=stance?'footNear':'footFar';
+   close(p.startX+p.direction*d1+one.contacts[name][0]*sx*flip,p.startX+p.direction*d2+two.contacts[name][0]*sx*flip);
+  }
+  assert.deepEqual(m,before);
+ }
+});
+test('V157 admission rejects incomplete, foreign, skipped and reduced terminal ownership',()=>{
+ const {m,t,camera,f}=exitFixture(HUMAN),before=copy(m),e=spatialExit(m,t,camera);assert.ok(e);
+ for(const change of [{phase:'playing'},{skipped:true},{reducedMotion:true},{matchId:'foreign'},{terminalTick:t.terminalTick+1}])assert.equal(spatialExit(m,{...t,...change},camera),null);
+ assert.equal(spatialExit(m,t,camera,true),null);assert.equal(spatialExit(m,t,{...camera,zoom:0}),null);
+ assert.equal(exitView(m,{...f},e),null);assert.equal(exitView(m,f,{...e,terminalTick:e.terminalTick+1}),null);
+ assert.equal(exitView(m,f,e,true).visible,false);assert.equal(exitView(m,f,{...e,reducedMotion:true},false).visible,false);
+ assert.equal(spatialExit(m,t,{zoom:.08,translateX:0}),null);assert.equal(exitPose({...rigs[1]},exitView(m,f,e),physicalMetrics(HUMAN)),null);
+ assert.deepEqual(m,before);
+});
+test('native V157 exit moves only render coordinates, freezes its camera and completes offscreen without result replay',async()=>{
+ const h=host();await h.start();let physicalTerminal=null,steps=0;
+ for(let i=0;i<3500&&(h.r.getState().phase!=='match-over'||h.queue.size);i++){
+  h.frames();const s=h.r.getState();
+  if(s.phase==='match-over'){physicalTerminal||=physical(s);assert.deepEqual(physical(s),physicalTerminal);}
+  if(s.exitV157?.phase==='playing'){
+   assert.equal(s.terminalV156.phase,'complete');const camera=s.cameraV119;
+   for(const v of s.rigViewsV154.filter(v=>v.exitV157)){assert.equal(v.exitV157.stepped,true);assert.equal(v.animation,'bounded-distance-steps-native-mesh-v157');steps++;}
+   h.r.setInput('right',true);h.key('KeyL');assert.equal(h.r.taunt(),false);
+   h.frames();assert.deepEqual(h.r.getState().cameraV119,camera);assert.deepEqual(physical(h.r.getState()),physicalTerminal);
+  }
+ }
+ assert.ok(steps>10);assert.equal(h.results.length,1);assert.equal(h.queue.size,0);assert.equal(h.r.getState().exitV157.phase,'complete');
+ assert.ok(h.r.getState().exitViewsV157.every(v=>v.visible===false));assert.equal(h.r.getState().rigViewsV154.length,0);assert.equal(h.r.resume(),false);
+ const ended=h.r.getState();h.frames(20);assert.deepEqual(h.r.getState(),ended);h.r.stop();
+});
+test('native V157 pause, visibility loss, skip, live reduced motion and stop retain a single result and no residual inputs',async()=>{
+ for(const action of ['pause','hidden','skip','reduced','stop']){
+  const h=host();await h.start();for(let i=0;i<3500&&!h.r.getState().exitV157;i++)h.frames();
+  assert.equal(h.r.getState().exitV157.phase,'playing');h.frames(4);const before=physical(h.r.getState());
+  if(action==='pause'||action==='hidden'){
+   if(action==='pause')assert.equal(h.r.pause(),true);else{h.document.hidden=true;h.frames();}
+   const paused=h.r.getState();assert.equal(paused.paused,true);h.frames(30);assert.deepEqual(h.r.getState(),paused);
+   h.document.hidden=false;assert.equal(h.r.resume(),true);h.frames(150);
+  }else if(action==='skip'){assert.equal(h.r.skipSequence(),true);assert.equal(h.r.getState().exitV157.skipped,true);}
+  else if(action==='reduced'){h.window.matchMedia=()=>({matches:true});h.frames();assert.equal(h.r.getState().exitV157.reducedMotion,true);assert.ok(h.r.getState().exitViewsV157.every(v=>!v.visible));h.window.matchMedia=()=>({matches:false});assert.ok(h.r.getState().exitViewsV157.every(v=>!v.visible));}
+  else h.r.stop();
+  assert.deepEqual(physical(h.r.getState()),before);assert.equal(h.results.length,1);assert.equal(h.queue.size,0);assert.equal(h.r.resume(),false);
+  const ended=h.r.getState();h.key('KeyJ');h.r.setInput('right',true);h.frames(20);assert.deepEqual(h.r.getState(),ended);
+  h.r.stop();assert.equal(h.r.getState().exitV157,null);assert.deepEqual(h.r.getState().exitViewsV157,[]);
  }
 });

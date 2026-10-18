@@ -58,7 +58,7 @@ export const HUB_ROOM_LIFE_V136 = freeze({
   'escape-pods': room('evacuation-checks-and-emergency-supply','industrial',[pack('sterile',575,535,126,'emergency-consumables'),pack('records',1710,386,116,'evacuation-checklists')]),
   durandal: room('computer-service-and-diagnostic-records','command',[pack('maintenance',1100,350,124,'computer-service-kit'),pack('records',1650,380,112,'diagnostic-records')]),
   bioforge: room('specimen-preparation-and-sterile-entry','clinical',[pack('sterile',740,376,126,'sterile-entry-supply'),pack('sterile',1730,388,108,'specimen-consumables')]),
-  'animal-care': room('habitat-hygiene-and-feed-preparation','habitat',[pack('galley',230,390,118,'feed-preparation'),pack('sterile',1320,392,108,'habitat-hygiene')]),
+  'animal-care': room('habitat-hygiene-and-feed-preparation','habitat',[pack('galley',230,390,118,'feed-preparation'),pack('sterile',1320,392,108,'habitat-hygiene'),pack('records',2240,392,108,'companion-welfare-records')]),
   'frontier-civil-counter': room('port-records-and-waiting-area','habitat',[pack('records',1070,382,122,'port-records'),pack('galley',2170,398,114,'waiting-area-supply')]),
   'personal-refuge': room('private-effects-and-reading-materials','habitat',[pack('personal',220,400,116,'private-effects'),pack('personal',1320,386,102,'reading-materials')])
 });

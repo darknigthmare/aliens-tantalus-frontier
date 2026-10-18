@@ -117,6 +117,59 @@ export function sampleXenoTrialsSequenceAnglesV155(rig, cue, keyedAngles, reduce
  return {rigId:rig.id,clip:cue.clip,progress:clamp(cue.progress),angles,vertices,contacts,reducedMotion,
   canonExact:false,animation:'authored-native-sequence-v155',active:Object.values(angles).some(n=>Math.abs(n)>1e-6)};
 }
+/** Restrained, distance-driven steps for the separate V157 exit only. Native
+ * plates do not contain a complete walk. The cage keeps the carried upper body
+ * rigid and deforms the two lower supports with a small alternating clearance.
+ * This is deliberately not registered as a combat locomotion animation. */
+export function sampleXenoTrialsExitPoseV157(rig,view,metrics,reducedMotion=false) {
+ if(!XENO_TRIALS_RIGS_V154.includes(rig)||reducedMotion||!view||view.rigId!==rig.id
+  ||![view.distance,view.stride,view.footLift,metrics?.width,metrics?.height].every(Number.isFinite)
+  ||view.distance<0||view.stride<=0||view.footLift<0||metrics.width<=0||metrics.height<=0)return null;
+ const mesh=getXenoTrialsRigMeshV154(rig),sx=metrics.width/rig.sourceWidth,sy=metrics.height/rig.sourceHeight;
+ const phase=view.distance/view.stride,envelope=smooth(view.distance/(view.stride*.2));
+ const feet=[0,1].map(index=>{
+  const q=(phase+(index===0?.3:.8))%1;
+  const swing=q>=.6,u=swing?(q-.6)/.4:0;
+  const x=(swing?-.3+.6*smooth(u):.3-q)*view.stride/sx*rig.sourceFacing;
+  const y=swing?-(Math.sin(Math.PI*u)**2)*view.footLift/sy*envelope:0;
+  return{x,y,stance:!swing,phase:q};
+ });
+ const human=rig.fighterId!=='prowler',bodyDrop=(human?1.5:.7)/sy*envelope;
+ const legs=[0,1].map(index=>{
+  const hip=rig.bones.find(b=>b.id===`thigh${index}`).pivot;
+  const anchor=rig.contacts[index===0?'footFar':'footNear'].point;
+  return{hip,anchor,foot:feet[index]};
+ });
+ const legDelta=(p,l)=>{
+  const top=human?(rig.fighterId==='dd-darwin-era-cultist'?820:l.hip[1]):650;
+  const bottom=l.anchor[1]-20;
+  const t=smooth((p[1]-top)/(bottom-top));
+  return[l.foot.x*t,bodyDrop*(1-t)+l.foot.y*t];
+ };
+ const delta=p=>{
+  const centers=legs.map(l=>{const t=clamp((p[1]-l.hip[1])/(l.anchor[1]-l.hip[1]));return l.hip[0]+(l.anchor[0]-l.hip[0])*t;});
+  const t=clamp((p[0]-centers[0])/(centers[1]-centers[0]||1));
+  const a=legDelta(p,legs[0]),b=legDelta(p,legs[1]);
+  // The Prowler's head/forelimbs overlap its support height in the plate.
+  // Its forward half remains rigid; only the two admitted rear supports step.
+  const rear=human?1:1-smooth((p[0]-820)/100);
+  // The cultist's low hanging carried weapon belongs to the upper-body band.
+  const weapon=rig.fighterId==='dd-darwin-era-cultist'?(1-smooth((p[0]-300)/150))*(1-smooth((p[1]-1040)/160)):0;
+  const gain=rear*(1-weapon);
+  return[(a[0]*(1-t)+b[0]*t)*gain,(a[1]*(1-t)+b[1]*t)*gain+bodyDrop*(1-gain)];
+ };
+ const vertices=mesh.vertices.map(v=>{const d=delta(v.source);return v.source.map((n,i)=>n+d[i]);});
+ // No folded triangles are ever drawn. Keep this failure visible to QA instead
+ // of pretending a rigid translated portrait was a successful stepped mesh.
+ if(mesh.triangles.some(ids=>xenoTrialsTriangleAreaV154(...ids.map(i=>vertices[i]))<xenoTrialsTriangleAreaV154(...ids.map(i=>mesh.vertices[i].source))*.2))return null;
+ const contacts=Object.fromEntries(Object.entries(rig.contacts).map(([name,a])=>{
+  const d=delta(a.point);return[name,a.point.map((n,i)=>n+d[i])];
+ }));
+ return{rigId:rig.id,clip:'spatial-exit-v157',progress:phase%1,angles:{},vertices,contacts,active:envelope>0,
+  animation:'bounded-distance-steps-native-mesh-v157',canonExact:false,fullLocomotion:false,
+  exitPoseV157:{distance:view.distance,bodyDrop:bodyDrop*sy,feet:feet.map((f,index)=>({name:index?'footNear':'footFar',...f})),
+   stride:view.stride,footLift:view.footLift,fullLocomotion:false}};
+}
 export function xenoTrialsTriangleAreaV154(a,b,c){return((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))/2;}
 function affine(s,d){
  const[s0,s1,s2]=s,[d0,d1,d2]=d,ux=s1[0]-s0[0],uy=s1[1]-s0[1],vx=s2[0]-s0[0],vy=s2[1]-s0[1],det=ux*vy-uy*vx;

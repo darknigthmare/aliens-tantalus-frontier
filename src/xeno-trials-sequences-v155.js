@@ -197,3 +197,57 @@ export function getXenoTrialsSequenceCueV156(rig, match, fighter, presentation, 
   return {clip:'taunt',progress:clamp(taunt.elapsedMs/taunt.durationMs),elapsed:taunt.elapsedMs/1000};
  return null;
 }
+
+/** V157 is a separate, finite render journey. The forty historical clips above
+ * keep their IDs, keys and durations. A completed result remains engine-owned.
+ * Native plates have no back-facing turn or full authored walk; the restrained
+ * mesh steps are an original adaptation, never a full locomotion certification. */
+export const XENO_TRIALS_EXIT_V157 = freeze({id:'native-spatial-exit-v157',turnMs:240,speed:48,maxTravelMs:12000,
+ stride:40,footLift:3.2,canonExact:false,fullLocomotion:false});
+export function createXenoTrialsExitV157(match, terminal, camera, reducedMotion=false) {
+ if(match?.phase!=='match-over'||!match.result?.completed||!['player','opponent','draw'].includes(match.result.winner)
+  ||terminal?.phase!=='complete'||terminal.skipped||terminal.reducedMotion||reducedMotion
+  ||terminal.kind!==(match.result.winner==='draw'?'draw':'outro')
+  ||terminal.matchId!==match.config.matchId||terminal.terminalTick!==match.tick||!Array.isArray(match.fighters)
+  ||!Number.isFinite(camera?.translateX)||!Number.isFinite(camera?.zoom)||camera.zoom<=0)return null;
+ const sorted=[...match.fighters].sort((a,b)=>a.x-b.x||a.side.localeCompare(b.side));
+ const participants=sorted.flatMap((f,index)=>{
+  const rig=getXenoTrialsRigV154(getXenoTrialsFighterV96(f.id),getXenoTrialsArtV96(f.id,f.variant));
+  if(!rig||f.y!==0||!Number.isFinite(f.x)||![-1,1].includes(f.facing)
+   ||!terminal.participants?.some(p=>p.fighterId===f.id&&p.side===f.side&&p.rigId===rig.id))return [];
+  const direction=index===0?-1:1;
+  // Full native width plus a mesh margin lies beyond the frozen viewport.
+  const margin=300,edge=(direction<0?-margin:1000+margin);
+  const endX=(edge-camera.translateX)/camera.zoom;
+  const speed=XENO_TRIALS_EXIT_V157.speed;
+  const distance=Math.abs(endX-f.x);
+  // A giant unsupported opponent can force a very wide camera. Keep its old
+  // static result rather than accelerate this plate into a comic sprint.
+  if(distance>speed*XENO_TRIALS_EXIT_V157.maxTravelMs/1000)return [];
+  const travelMs=Math.max(600,distance/speed*1000);
+  return [{side:f.side,fighterId:f.id,rigId:rig.id,startX:f.x,endX,direction,fromFacing:f.facing,
+   travelMs,ground:450,stride:rig.fighterId==='prowler'?20:XENO_TRIALS_EXIT_V157.stride,
+   footLift:rig.fighterId==='prowler'?2:XENO_TRIALS_EXIT_V157.footLift,
+   kind:match.result.winner==='draw'?'draw':match.result.winner===f.side?'winner':'loser'}];
+ });
+ if(!participants.length)return null;
+ return {id:XENO_TRIALS_EXIT_V157.id,matchId:match.config.matchId,terminalTick:match.tick,participants,
+  elapsedMs:0,durationMs:XENO_TRIALS_EXIT_V157.turnMs+Math.max(...participants.map(p=>p.travelMs)),phase:'playing',
+  paused:false,skipped:false,reducedMotion:false,canonExact:false,fullLocomotion:false};
+}
+export function getXenoTrialsExitViewV157(match,fighter,state,reducedMotion=false) {
+ if(match?.phase!=='match-over'||!match.result?.completed
+  ||state?.matchId!==match.config.matchId||state.terminalTick!==match.tick||!['playing','complete'].includes(state.phase)
+  ||!Number.isFinite(state.elapsedMs)||state.elapsedMs<0||!match.fighters?.includes(fighter))return null;
+ const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
+ if(!p||![p.startX,p.endX,p.travelMs].every(Number.isFinite)||p.travelMs<=0||![-1,1].includes(p.direction))return null;
+ const omitted=reducedMotion||state.reducedMotion||state.skipped;
+ const travel=omitted?1:clamp((state.elapsedMs-XENO_TRIALS_EXIT_V157.turnMs)/p.travelMs);
+ // A short acceleration keeps the first planted foot from jerking. Travel is
+ // measured from the same curve by the gait, rather than a second wall clock.
+ const ramp=.06,distanceProgress=travel<ramp?travel*travel/(2*ramp)/(1-ramp/2):(travel-ramp/2)/(1-ramp/2);
+ const distance=Math.abs(p.endX-p.startX)*distanceProgress;
+ return {...p,x:p.startX+p.direction*distance,distance,turn:omitted?1:smooth(state.elapsedMs/XENO_TRIALS_EXIT_V157.turnMs),
+  elapsedMs:state.elapsedMs,complete:travel>=1,visible:!state.skipped&&travel<1,
+  canonExact:false,fullLocomotion:false};
+}

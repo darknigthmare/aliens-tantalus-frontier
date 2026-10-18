@@ -185,7 +185,7 @@ test('all animal-care furniture clears the actual drawn plaques and all installe
     for(const item of plan.items)for(const bounds of rectangles)assert.ok(!overlap(item,bounds),`${name}:${item.role} hidden by actual native draw`);
     for(const detail of plan.workstationDetailsV139.items)for(const bounds of rectangles)assert.ok(!overlap(detail.target,bounds),`${name}:${detail.role} hidden by actual native draw`);
   }
-  assert.equal(plan.items.length,8);assert.deepEqual(plan.furnishingV137.rejected,[]);assert.deepEqual(plan.workstationDetailsV139.omitted,[]);
+  assert.equal(plan.items.length,12);assert.deepEqual(plan.furnishingV137.rejected,[]);assert.deepEqual(plan.workstationDetailsV139.omitted,[]);
 });
 
 test('the animal-care basin and preparation top remain practical individual fixtures with measured supports', () => {

@@ -1,5 +1,5 @@
 import { showForgeNarrativeV156 } from './forge-narrative-ui-v156.js';
-import { forgeNarrativeViewV156 } from './forge-narrative-v156.js';
+import { forgeNarrativeViewV156, advanceForgeNarrativeTimeV157 } from './forge-narrative-v156.js';
 /** Forge ship sessions reuse the native actor, collision and combat systems.
  * Room changes replace their local geometry; they never restart the hub loop or
  * run campaign routines, companions, commercial stations or native crises. */
@@ -166,9 +166,13 @@ export function withForgeShipRuntimeV141(Base) {
 
     update(delta) {
       if (!this.forgeSessionV141) return super.update(delta);
-      if (!this.running || this.forgeShipStartingV141 || this.forgeNarrativeOpenV156) return;
+      if (!this.running || this.forgeShipStartingV141 || this.forgeNarrativeOpenV156 || this.paused) return;
       // Keep native physics/combat while excluding every campaign tick wrapper.
-      return PhysicalHubV51.prototype.update.call(this, clamp(Number(delta) || 0, 0, .05));
+      const step = Number.isFinite(delta) ? clamp(delta, 0, .05) : 0;
+      const active = this.player?.alive && !this.forgeSessionV141.complete;
+      const result = PhysicalHubV51.prototype.update.call(this, step);
+      if (active) advanceForgeNarrativeTimeV157(this.forgeSessionV141, step);
+      return result;
     }
     updateCombat(delta) {
       return this.forgeSessionV141
@@ -339,6 +343,8 @@ export function withForgeShipRuntimeV141(Base) {
           completedObjectives: clone(this.forgeSessionV141.completedObjectives),
           transitions: this.forgeSessionV141.transitions,
           narrativeV156: clone(this.forgeSessionV141.narrativeV156 || []),
+          narrativeInventoryV157: clone(this.forgeSessionV141.narrativeInventoryV157 || []),
+          narrativePlaySecondsV157: this.forgeSessionV141.narrativePlaySecondsV157 || 0,
           roomStates: clone(this.forgeSessionV141.roomStates) } });
     }
 

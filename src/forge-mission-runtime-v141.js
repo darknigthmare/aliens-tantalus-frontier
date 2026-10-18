@@ -1,5 +1,5 @@
 import { showForgeNarrativeV156 } from './forge-narrative-ui-v156.js';
-import { forgeNarrativeViewV156 } from './forge-narrative-v156.js';
+import { forgeNarrativeViewV156, advanceForgeNarrativeTimeV157 } from './forge-narrative-v156.js';
 import { decorative } from './forge-model-v130.js';
 import { inspectForgeJourneyV141 } from './forge-journey-admission-v141.js';
 import { buildForgeObjectiveV136, EDITOR_MISSION_WORLD_V136 } from './editor-spatial-v136.js';
@@ -179,14 +179,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       commitForgeTransitionV141(session, nearest.link);
       const references = new Map([...partyReferences(this)].map(([operator, id]) => [id, operator]));
       target = mapRoomGraph(target, value => value?.forgeOperatorRefV141 ? references.get(value.forgeOperatorRefV141) || null : undefined);
-      for (const key of ROOM_FIELDS) this[key] = target[key];
-      if (this.placeablesV86) this.placeablesV86.instances = [
-        ...list(this.placeablesV86.instances).filter(instance => !instance.onGround), ...list(target.roomPlaceablesV141)
-      ];
-      this.placeablePreviewsV86?.clear();
-      this.syncPlaceableBarriersV132?.();
-      this.mission.objectives = target.missionObjectives;
-      this.mission.phase = target.missionPhase;
+      this.applyForgeCheckpointRoomV157(target);
       if (this.objective && session.completedObjectives.includes(this.objective.forgeCellIdV141)) {
         this.objective.complete = true; this.objectiveState.complete = true;
       }
@@ -204,6 +197,21 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
       return true;
     }
 
+    getForgeCheckpointRoomFieldsV157() { return [...ROOM_FIELDS]; }
+
+    /** Apply only an already admitted room graph. Used by room travel and the
+     * separate bounded local-checkpoint adapter, never by imported script. */
+    applyForgeCheckpointRoomV157(target) {
+      for (const key of ROOM_FIELDS) this[key] = target[key];
+      if (this.placeablesV86) this.placeablesV86.instances = [
+        ...list(this.placeablesV86.instances).filter(instance => !instance.onGround), ...list(target.roomPlaceablesV141)
+      ];
+      this.placeablePreviewsV86?.clear();
+      this.syncPlaceableBarriersV132?.();
+      this.mission.objectives = target.missionObjectives;
+      this.mission.phase = target.missionPhase;
+    }
+
     stop(...args) {
       this.closeForgeNarrativeV156?.({ focus: false });
       return super.stop(...args);
@@ -211,7 +219,13 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
 
     update(delta) {
       if (this.forgeNarrativeOpenV156) return;
-      return super.update(delta);
+      const session = this.forgeSessionV141;
+      if (session && (!this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.userCasteLoadingV88 || this.mission?.state !== 'active')) return;
+      const elapsed = this.mission?.elapsed;
+      const step = session ? (Number.isFinite(delta) ? Math.max(0, Math.min(delta, .05)) : 0) : delta;
+      const result = super.update(step);
+      if (session === this.forgeSessionV141 && Number.isFinite(elapsed)) advanceForgeNarrativeTimeV157(session, this.mission.elapsed - elapsed);
+      return result;
     }
 
     forgePreferredUseV156(actor = this.player) {
@@ -437,6 +451,7 @@ export function withForgeMissionRuntimeV141(BaseEngine) {
         reachableRoomIds: [...session.reachableRoomIds], visitedRoomIds: [...new Set([session.currentRoomId, ...Object.keys(session.roomStates)])],
         transitions: session.transitions, completedObjectives: [...session.completedObjectives],
         requiredObjectives: [...list(this.forgeRequiredObjectivesV141)], narrativeV156: clone(session.narrativeV156 || []),
+        narrativeInventoryV157: clone(session.narrativeInventoryV157 || []), narrativePlaySecondsV157: session.narrativePlaySecondsV157 || 0,
         narrativeDialogV156: this.forgeNarrativeOpenV156 ? forgeNarrativeViewV156(session, this.forgeNarrativeOpenV156) : null, scope: 'session' };
     }
 

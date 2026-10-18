@@ -12,7 +12,7 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     env:
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
@@ -73,6 +73,9 @@ jobs:
           python scripts/qa-xeno-trials-restraint-v156.py --output "$RUNNER_TEMP/atf-release-qa/restraint-v156" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/restraint-v156.log" || status=1
           python scripts/qa-forge-narrative-v156.py --output "$RUNNER_TEMP/atf-release-qa/forge-narrative-v156" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/forge-narrative-v156.log" || status=1
           ATF_ANNEX_POPULATION_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/annexes-v156" node scripts/qa-hub-annex-population-v156.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/annexes-v156.log" || status=1
+          python scripts/qa-forge-conditions-v157.py --output "$RUNNER_TEMP/atf-release-qa/forge-conditions-v157" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/forge-conditions-v157.log" || status=1
+          python scripts/qa-forge-playtest-checkpoint-v157.py --output "$RUNNER_TEMP/atf-release-qa/forge-checkpoint-v157" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/forge-checkpoint-v157.log" || status=1
+          ATF_ANNEX_SERVICE_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/annex-service-v157" node scripts/qa-hub-annex-service-v157.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/annex-service-v157.log" || status=1
           exit "$status"
       - name: Retain results without distributing private documents
         if: always()

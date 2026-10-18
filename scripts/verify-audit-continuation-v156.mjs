@@ -19,6 +19,7 @@ import { FORGE_NARRATIVE_LIMITS_V156 as narrativeLimits,
 import { withWeaponActionsV131 } from '../src/weapon-actions-v131.js';
 import { withForgeMissionRuntimeV141 } from '../src/forge-mission-runtime-v141.js';
 import { MissionGamepadInputV77 } from '../src/mission-input-v77.js';
+import { loadAuditSuccessionV157 } from './audit-succession-v157.mjs';
 
 const prefix = 'docs/forge/xeno-trials/';
 const bytes = name => readFileSync(new URL('../' + prefix + name, import.meta.url));
@@ -142,9 +143,15 @@ test('V156 documents separate technical scope, remaining audits and prepublicati
   assert.match(body, /partiel/i);
   assert.doesNotMatch(body, /CI verte|CI réussie|tout est terminé/i);
   assert.deepEqual(Object.keys(current.runtimeSourceSha256), runtimeSources);
+  const successor = loadAuditSuccessionV157();
+  assert.deepEqual(successor.previous, current);
   for (const [path, hash] of Object.entries(current.runtimeSourceSha256)) {
     assert.match(path, /^src\/[a-zA-Z0-9._-]+\.js$/);
-    assert.equal(sha(readFileSync(new URL('../' + path, import.meta.url))), hash, path);
+    assert.match(hash, /^[a-f0-9]{64}$/);
+    // The successor anchors these historical document bytes and verifies the
+    // exact old/new transition plus the current bytes for every inherited pin.
+    assert.equal(successor.current.runtimeSourceSha256[path],
+      successor.current.runtimeSuccession.transitions.find(t => t.path === path)?.currentSha256 ?? hash, path);
   }
 });
 

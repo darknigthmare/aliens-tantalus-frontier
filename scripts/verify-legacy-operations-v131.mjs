@@ -305,6 +305,96 @@ test('spent bombardment cannot leave an unwinnable active chapter and retry rest
   assert.equal(e.mission.state, 'failed'); assert.match(e.mission.failureReason, /bombes/);
   assert.equal(e.restartFromCheckpoint(), true); assert.equal(e.legacyMissionV131.bombs, 6); assert.equal(e.legacyMissionV131.stage, 1);
 });
+test('BROODSTORM save migration preserves the final finite bomb in flight and its real collision after reload', async () => {
+  const subject = await fixture('broodstorm'), e = subject.engine;
+  keyboardHold(subject, 1.5);
+  // Two legal missed drops leave exactly the four charges needed by the nests.
+  e.vehicle.x = 20; e.vehicle.y = 200; e.pinLegacyDriverV131();
+  for (let index = 0; index < 2; index++) { assert.equal(e.dropLegacyBombV131(), true); tick(e, 2.5); }
+  for (const [x, drops] of [[820, 2], [1420, 1]]) {
+    e.vehicle.x = x; e.vehicle.y = 590; e.pinLegacyDriverV131();
+    for (let index = 0; index < drops; index++) { assert.equal(e.dropLegacyBombV131(), true); tick(e, 1.2); }
+  }
+  assert.deepEqual(e.legacyMissionV131.nests, [0, 70]); assert.equal(e.legacyMissionV131.bombs, 1);
+  assert.equal(e.dropLegacyBombV131(), true); tick(e, 0.1);
+  assert.equal(e.legacyMissionV131.bombs, 0); assert.equal(e.legacyBombsV131.length, 1);
+  const expectedBomb = structuredClone(e.legacyBombsV131[0]);
+  const save = createDefaultSave(); save.galaxy.unlockedWorldIds.push(subject.options.world.id);
+  const deployment = beginOperation(save, subject.options.campaign, subject.options.world).operation;
+  deployment.missionLevelSignature = subject.options.missionLevel.signature; deployment.levelSeedId = e.resumeIdentity.levelSeedId;
+  assert.equal(recordOperationResumeState(save, e.captureResumeState()), true);
+  const migrated = migrateSave(JSON.parse(JSON.stringify(save)));
+  const resumed = await fixture('broodstorm', migrated.strategy.currentOperation.resumeState);
+  assert.equal(resumed.engine.lastResumeResult.applied, true);
+  assert.deepEqual(resumed.engine.legacyBombsV131, [expectedBomb]);
+  assert.equal(resumed.engine.legacyMissionV131.bombs, 0, 'Reload never refunds a finite bomb.');
+  resumed.engine.paused = true; tick(resumed.engine, 2);
+  assert.deepEqual(resumed.engine.legacyBombsV131, [expectedBomb], 'Pause freezes the restored trajectory.');
+  resumed.engine.paused = false; tick(resumed.engine, 1.2);
+  assert.deepEqual(resumed.engine.legacyMissionV131.nests, [0, 0]);
+  assert.equal(resumed.engine.legacyMissionV131.stage, 2);
+  assert.equal(resumed.engine.mission.state, 'active', 'The restored charge actually strikes the remaining nest.');
+  assert.equal(resumed.engine.legacyBombsV131.length, 0);
+  const restored = resumed.engine;
+  resumed.key('keydown', 'KeyQ'); resumed.key('keyup', 'KeyQ');
+  steer(resumed, { x: restored.legacyMissionV131.escort.x + 110, y: 360 });
+  for (let frame = 0; frame < 35 * 60 && restored.mission.state === 'active' && restored.legacyMissionV131.stage === 2; frame++) {
+    const targetX = restored.legacyMissionV131.escort.x + 160;
+    if (restored.vehicle.x + restored.vehicle.w / 2 < targetX - 12) restored.keys.add('KeyD'); else restored.keys.delete('KeyD');
+    const enemy = restored.enemies.find(actor => actor.alive);
+    if (enemy) {
+      const dx = enemy.x + enemy.w / 2 - restored.player.x - restored.player.w / 2;
+      const dy = enemy.y + enemy.h / 2 - restored.player.y - restored.player.h * 0.4;
+      const distance = Math.hypot(dx, dy); restored.player.pointerAimV83 = { x: dx / distance, y: dy / distance };
+      restored.keys.add('KeyF');
+    }
+    restored.update(1 / 60);
+  }
+  restored.keys.clear(); restored.player.pointerAimV83 = null;
+  assert.equal(restored.mission.state, 'active'); assert.equal(restored.legacyMissionV131.stage, 3);
+  await fight(restored, 20, 'queen'); assert.equal(restored.legacyMissionV131.stage, 4);
+  steer(resumed, LEGACY_STATIONS_V131.broodstorm[4]); keyboardHold(resumed, 3);
+  assert.equal(restored.mission.state, 'complete');
+  assert.equal(restored.validateLegacyResumeV131(restored.captureResumeState()).valid, true);
+  assert.equal(resumed.events.filter(event => event.type === 'mission-complete').length, 1);
+  assert.equal(restored.legacyMissionV131.bombs, 0, 'Extraction preserves the exhausted finite payload.');
+});
+test('legacy flight checkpoints reject malformed charges atomically and keep older no-flight saves compatible', async () => {
+  const subject = await fixture('broodstorm'), e = subject.engine;
+  keyboardHold(subject, 1.5); e.vehicle.x = 820; e.vehicle.y = 590; e.pinLegacyDriverV131();
+  assert.equal(e.dropLegacyBombV131(), true); tick(e, 0.1);
+  const saved = e.captureResumeState(), before = JSON.stringify(saved);
+  assert.equal(e.validateLegacyResumeV131(saved).valid, true);
+  for (const mutate of [
+    raw => { raw.specialOperation.legacyBombsV157 = {}; },
+    raw => { raw.specialOperation.legacyBombsV157.push(structuredClone(raw.specialOperation.legacyBombsV157[0])); },
+    raw => { raw.specialOperation.legacyBombsV157[0].w = 180; },
+    raw => { raw.specialOperation.legacyBombsV157[0].vy += 10; },
+    raw => { raw.specialOperation.legacyBombsV157[0].vx = 100; },
+    raw => { raw.specialOperation.legacyBombsV157[0].life = Infinity; },
+    raw => { raw.specialOperation.legacyBombsV157[0].x = -500; },
+    raw => { raw.specialOperation.legacyBombsV157[0].owner = 'other-player'; },
+    raw => { raw.specialOperation.legacyMissionV131.bombs = 6; },
+    raw => { raw.specialOperation.legacyCheckpointV131.specialOperation.legacyBombsV157 = [structuredClone(raw.specialOperation.legacyBombsV157[0])]; }
+  ]) {
+    const invalid = structuredClone(saved); mutate(invalid);
+    assert.equal(e.applyResumeState(invalid).applied, false);
+    assert.equal(JSON.stringify(e.captureResumeState()), before, 'Invalid flight data changes neither charge nor target state.');
+  }
+  assert.equal(e.applyResumeState(saved).applied, true);
+  assert.equal(e.applyResumeState(saved).applied, true);
+  assert.equal(e.legacyBombsV131.length, 1, 'Applying a checkpoint twice replaces its flight; it never duplicates damage.');
+  tick(e, 1.2); assert.deepEqual(e.legacyMissionV131.nests, [70, 140]);
+  for (const kind of ['nostromo', 'abyss', 'broodstorm']) {
+    const old = await fixture(kind), oldSave = old.engine.captureResumeState();
+    delete oldSave.specialOperation.legacyBombsV157;
+    delete oldSave.specialOperation.legacyCheckpointV131.specialOperation.legacyBombsV157;
+    assert.equal(old.engine.applyResumeState(oldSave).applied, true, `${kind}: pre-V157 checkpoint remains admitted.`);
+    const foreignCharge = structuredClone(oldSave);
+    foreignCharge.specialOperation.legacyBombsV157 = [structuredClone(saved.specialOperation.legacyBombsV157[0])];
+    assert.equal(old.engine.applyResumeState(foreignCharge).applied, false, `${kind}: an unspent or foreign charge is rejected.`);
+  }
+});
 test('Nostromo held keyboard journey pays 620 once, archives chapter/synchronization and survives migration', async () => {
   const { engine: e, key, options } = await fixture();
   const save = createDefaultSave(); save.galaxy.unlockedWorldIds.push(options.world.id);
