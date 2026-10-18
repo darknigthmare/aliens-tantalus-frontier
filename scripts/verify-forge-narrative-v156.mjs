@@ -8,7 +8,7 @@ import { ForgeVersionStoreV136, parseForgeVersionsV136, compareForgeDocumentsV13
 import { missionV136, hostV136 } from './forge-native-host-v136.mjs';
 import { HubGame as PhysicalHub } from '../src/hub-v51-runtime.js';
 import { withForgeShipRuntimeV141 } from '../src/forge-ship-runtime-v141.js';
-import { ENEMIES, WEAPONS } from '../src/content.js';
+import { ENEMIES, WEAPONS, EQUIPMENT } from '../src/content.js';
 import { captureAssemblyV133, normalizeAssemblyV133, transformAssemblyV133, placementPreviewV133, stampAssemblyV133,
   ForgeAssemblyLibraryV133, parseAssemblyLibraryV133, ASSEMBLY_KEY_V133 } from '../src/forge-authoring-v133.js';
 
@@ -880,4 +880,100 @@ test('review recovery boundary: completed nearby objective cannot extract throug
   assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.mission.state, 'active');
   assert.equal(engine.recoverableWeaponsV131[0], item); assert.equal(engine.player.ammoReserve, reserve);
   assert.equal(runtime.messages.filter(event => event.type === 'weapon-recovered-v131').length, 0);
+});
+
+const narrativePadV156 = (index, held = [], axes = [0, 0, 0, 0]) => ({ connected: true, mapping: 'standard', index,
+  id: `forge-story-pad-${index}`, axes, buttons: Array.from({ length: 17 }, (_, button) => ({ pressed: held.includes(button), value: held.includes(button) ? 1 : 0 })) });
+async function narrativePreviewFixtureV156(t, opener = 0) {
+  const equipment = EQUIPMENT.find(item => item.name === 'Portable Sentry'); assert.ok(equipment);
+  const runtime = missionV136({ editorProject: closeObjectiveProjectV156({ goalX: 2, terminalX: 5 }), forgeJourneyV141: true, equipment: [equipment] });
+  const { engine } = runtime; t.after(() => engine.stop());
+  await Promise.resolve();
+  engine.setCoop(true); walk(engine, () => Boolean(engine.forgeNarrativeTerminalV156()));
+  if (opener === 1) {
+    engine.keys.add('KeyL');
+    for (let frame = 0; frame < 2200 && !engine.forgeNarrativeTerminalV156(engine.coop); frame++) engine.update(1 / 60);
+    engine.keys.delete('KeyL'); assert.ok(engine.forgeNarrativeTerminalV156(engine.coop));
+  }
+  assert.equal(engine.useEquipment(equipment.id, engine.player), true);
+  assert.equal(engine.placeablePreviewsV86.size, 1); assert.equal(engine.isPlaceableBusyV86(engine.player), false);
+  return runtime;
+}
+const previewResourcesV156 = engine => structuredClone({ previews: [...engine.placeablePreviewsV86], tasks: [...engine.placeableTasksV86],
+  instances: engine.placeablesV86.instances, equipment: [...engine.equipmentActions].map(([id, state]) => [id, state.remaining]), inventory: engine.inventory,
+  actors: [engine.player, engine.coop].map(actor => ({ health: actor.health, armor: actor.armor, ammo: actor.ammo, ammoReserve: actor.ammoReserve,
+    medkits: actor.medkits, inVehicle: actor.inVehicle })) });
+
+for (const opener of [0, 1]) test(`review narrative gamepad: pad ${opener + 1} stops its action batch and both pads remain suppressed until neutral after closing`, async t => {
+  const runtime = await narrativePreviewFixtureV156(t, opener), { engine } = runtime;
+  const neutral = [narrativePadV156(0), narrativePadV156(1)]; engine.canvas.focus(); engine.gamepadInputV77.poll(neutral);
+  assert.ok(engine.gamepadInputV77.slots.every(slot => slot && !slot.suppressed));
+  const before = previewResourcesV156(engine), eventCount = runtime.messages.length;
+  // Observe dispatch without replacing its effects: every wrapper invokes the
+  // actual production method. Individual action guards must not hide a batch
+  // that incorrectly continues after interact opened the dialog.
+  const dispatches = [];
+  for (const method of ['reload', 'interact', 'activateTracker', 'toggleVehicle', 'useMedkit', 'melee']) {
+    const native = engine[method];
+    engine[method] = function (...args) { dispatches.push(method); return native.apply(this, args); };
+  }
+  const pressed = [3, 4, 5, 8, 11], sample = neutral.map((pad, index) => index === opener ? narrativePadV156(index, pressed) : pad);
+  // With J1 opening, J2 supplies a later slot of held movement/fire, pause and
+  // action edges. J2 must not dispatch after the dialog opened in the first slot.
+  if (opener === 0) sample[1] = narrativePadV156(1, [0, 2, 3, 4, 5, 7, 8, 9, 11], [1, 0, 1, 0]);
+  engine.gamepadInputV77.poll(sample);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.paused, false);
+  assert.deepEqual(dispatches, ['interact']);
+  assert.deepEqual(previewResourcesV156(engine), before);
+  assert.deepEqual(runtime.messages.slice(eventCount).map(event => event.type), ['forge-narrative-open']);
+  assert.equal(engine.keys.size, 0); assert.equal(engine.heldGameplayKeysV77.size, 0);
+  assert.ok(engine.gamepadInputV77.slots.every(slot => slot.suppressed));
+  for (const actor of [engine.player, engine.coop]) {
+    assert.equal(actor.gamepadAimV83, null); assert.equal(actor.gamepadMoveV124, null); assert.equal(actor.jumpBuffer, 0);
+  }
+  // A canvas focus restoration cannot make either pad active during the story,
+  // including Start/button9, which is dispatched before ordinary active checks.
+  engine.canvas.focus();
+  const held = [narrativePadV156(0, [0, 3, 4, 5, 7, 8, 9, 11], [1, 0, 1, 0]), narrativePadV156(1, [0, 3, 4, 5, 7, 8, 9, 11], [1, 0, 1, 0])];
+  const openedCount = runtime.messages.length;
+  engine.gamepadInputV77.poll(held); engine.gamepadInputV77.poll(neutral);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.equal(engine.paused, false);
+  assert.ok(engine.gamepadInputV77.slots.every(slot => slot.suppressed));
+  assert.deepEqual(previewResourcesV156(engine), before); assert.equal(runtime.messages.length, openedCount); assert.equal(engine.keys.size, 0);
+  // Sample the physical hold again before closing: Start remains the same held
+  // button across the boundary, rather than a fresh pause edge after close.
+  engine.gamepadInputV77.poll(held); assert.equal(engine.paused, false);
+  assert.equal(runtime.messages.length, openedCount); assert.deepEqual(previewResourcesV156(engine), before);
+  engine.closeForgeNarrativeV156(); assert.equal(document.activeElement, engine.canvas);
+  engine.gamepadInputV77.poll(held);
+  assert.equal(engine.forgeNarrativeOpenV156 || null, null); assert.equal(engine.paused, false);
+  assert.ok(engine.gamepadInputV77.slots.every(slot => slot.suppressed));
+  assert.deepEqual(previewResourcesV156(engine), before); assert.equal(runtime.messages.length, openedCount); assert.equal(engine.keys.size, 0);
+  assert.deepEqual(dispatches, ['interact']);
+  engine.gamepadInputV77.poll(neutral); assert.ok(engine.gamepadInputV77.slots.every(slot => !slot.suppressed));
+  const fresh = neutral.map((pad, index) => index === opener ? narrativePadV156(index, [3]) : pad);
+  engine.gamepadInputV77.poll(fresh);
+  assert.equal(engine.forgeNarrativeOpenV156, 'terminal'); assert.deepEqual(previewResourcesV156(engine), before);
+  assert.equal(runtime.messages.filter(event => event.type === 'placeable-task-cancelled').length, 0);
+  assert.equal(runtime.messages.filter(event => event.type === 'forge-narrative-open').length, 2);
+  assert.deepEqual(dispatches, ['interact', 'interact']);
+});
+
+test('review narrative gamepad: direct vehicle calls preserve the real sentry preview during a story and keep normal cancellation after close', async t => {
+  const runtime = await narrativePreviewFixtureV156(t), { engine } = runtime;
+  tap(runtime); assert.equal(engine.forgeNarrativeOpenV156, 'terminal');
+  const before = previewResourcesV156(engine), eventCount = runtime.messages.length;
+  assert.equal(engine.canPerformGameplayAction(engine.player), false);
+  assert.equal(engine.toggleVehicle(engine.player), false); assert.equal(engine.toggleVehicle(engine.coop), false);
+  assert.deepEqual(previewResourcesV156(engine), before); assert.equal(runtime.messages.length, eventCount);
+  engine.closeForgeNarrativeV156();
+  engine.toggleVehicle(engine.player);
+  assert.equal(engine.placeablePreviewsV86.size, 0); assert.equal(engine.placeableTasksV86.size, 0);
+  assert.deepEqual(engine.placeablesV86.instances, before.instances);
+  assert.deepEqual([...engine.equipmentActions].map(([id, state]) => [id, state.remaining]), before.equipment);
+  assert.equal(runtime.messages.filter(event => event.type === 'placeable-task-cancelled' && event.reason === 'vehicle').length, 1);
+  // Ordinary Start still toggles pause once, and needs a fresh edge to resume.
+  engine.gamepadInputV77.poll([narrativePadV156(0)]); engine.gamepadInputV77.poll([narrativePadV156(0, [9])]);
+  assert.equal(engine.paused, true); engine.gamepadInputV77.poll([narrativePadV156(0, [9])]); assert.equal(engine.paused, true);
+  engine.gamepadInputV77.poll([narrativePadV156(0)]); engine.gamepadInputV77.poll([narrativePadV156(0, [9])]); assert.equal(engine.paused, false);
 });

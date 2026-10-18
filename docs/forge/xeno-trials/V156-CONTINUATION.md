@@ -137,6 +137,15 @@ vue avec les obstacles natifs. La requête retourne un index ou −1 ; seul
 l’interact natif consomme l’objet et applique son effet une fois. Ces contrôles
 n’ajoutent aucun nouveau format de données ni capacité canonique.
 
+À la manette, l’état du récit est vérifié avant les actions, y compris la
+pause. Si un appui ouvre le récit pendant le même échantillon, le traitement
+des boutons s’arrête immédiatement : les commandes des deux joueurs sont
+relâchées et restent désarmées jusqu’au retour au neutre après fermeture.
+L’action véhicule appelée directement refuse aussi le récit avant d’annuler
+un travail ou l’aperçu d’un équipement. Un appui simultané interaction/véhicule
+conserve ainsi l’aperçu de sentinelle et ses ressources. La pause et les
+annulations ordinaires conservent leur fonctionnement hors récit.
+
 La progression du test reste limitée à la session en cours. Le cloud Forge,
 les checkpoints durables, personnages parlants, conditions d’inventaire,
 minuteries et scripts libres restent ouverts. Aucun récit ne modifie une
@@ -156,7 +165,7 @@ Les deux zéros correspondent aux clôtures artistiques et approbations 1:1.
 Ces nombres ne constituent pas un pourcentage de jeu terminé.
 
 `progress-v156.json` reprend toutes les tables, les empreintes des dix classeurs
-historiques et quatre PNG sources, les dix-sept empreintes runtime et le hash du nouveau
+historiques et quatre PNG sources, les dix-huit empreintes runtime et le hash du nouveau
 classeur. Les documents sont admis comme sources de revue et exclus du paquet
 distribué. Les validateurs documentaires n’utilisent que Node et la bibliothèque
 standard Python :

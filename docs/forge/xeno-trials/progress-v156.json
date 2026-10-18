@@ -1437,6 +1437,17 @@
         ],
         "outsideForge": "native-conditions-preserved",
         "blockedTerminalUse": "refusal-message-only"
+      },
+      "gamepadNarrativeGuard": {
+        "inputModule": "src/mission-input-v77.js",
+        "inputClass": "MissionGamepadInputV77",
+        "vehicleModule": "src/game-production-runtime.js",
+        "admissionBeforeActions": true,
+        "stopPollBatchOnNarrativeOpen": true,
+        "clearBothPlayers": true,
+        "suppressHeldUntilNeutral": true,
+        "directVehicleGuardBeforeCancellation": true,
+        "outsideNarrative": "ordinary-pause-and-cancellation-preserved"
       }
     },
     "weaponRecovery": {
@@ -1464,9 +1475,10 @@
     "src/forge-ship-runtime-v141.js": "befce4ea473bae353bf9f14397ec7c440c098aecf5e6f8c69996e1667d35646c",
     "src/forge-ui-v130.js": "1457e39382c08fb0c86af13d5773269e42a73dfd24021b286310e1a01852782b",
     "src/forge-versions-v136.js": "a3332e533bc0e972a8c5f82492a71dbd4b68c197ef1be9cf9b2277ad40dfb361",
-    "src/game-production-runtime.js": "937312438f3059545734e1e09353e6fe868dcbd47289cede4eee5e6d18cc7b61",
+    "src/game-production-runtime.js": "a930fc5b9f6f3eb8cd2ee05eb726bd7447fac4f299c19badae0f6429e46d58ab",
     "src/game-v51-runtime.js": "724da4ddc5f0b9daeea2f8cde4c7b4a93199cb93e65afc86c302f7b164ef5ddc",
     "src/hub-annex-npc-life-v141.js": "fe012faff2d6ece8a1fd52c4a5a20290c1f7153a447bf97f0cf8266636a946d3",
+    "src/mission-input-v77.js": "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
     "src/weapon-actions-v131.js": "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
     "src/xeno-trials-restraint-pose-v156.js": "d38f61546c00cadd2ed3f9064b1dfe9b178f38e5c78dcc2448667017431a3a22",
     "src/xeno-trials-rig-v154.js": "fadce1943f542352980d30351edf0f5a8ef07adf5347da56677c8b2627386218",
@@ -2855,9 +2867,9 @@
         [
           "forge-native-choice",
           "Choix en playtest Mission / Vaisseau",
-          "E choisit une action admissible ; admission commune aux actions et prompts natifs power/archive. Ordre power→archive après visibilité et verrou boss. Réanimation J2, clé et récupération restent déléguées au moteur natif.",
+          "E choisit une action admissible ; admission commune aux actions et prompts natifs power/archive. Ordre power→archive après visibilité et verrou boss. Réanimation J2, clé et récupération restent déléguées au moteur natif. À la manette, admission avant les actions et arrêt du lot dès l’ouverture d’un récit, pour les deux joueurs.",
           "Implémenté (borné)",
-          "Récupération seulement sans terminal en attente admis, sans objectif proche ni porte native cloisonnée ; profil, propriétaire, portée 72 et ligne de vue natifs conservés. Hors Forge : conditions historiques inchangées."
+          "Récupération seulement sans terminal en attente admis, sans objectif proche ni porte native cloisonnée ; profil, propriétaire, portée 72 et ligne de vue natifs conservés. Hors Forge : conditions historiques inchangées. Réarmement au neutre ; le refus direct du véhicule précède toute annulation de travail ou d’aperçu."
         ],
         [
           "forge-memory-session",
@@ -4640,5 +4652,5 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "2ce06baf4c8c12df77d167a32944d1aa50ddc3823f612261892eb3ed2eaf45ab"
+  "workbookSha256": "aadcf1f4b018150af8a4d183806f41a2c3ddc23847bbe6a19db5020a046b2e5d"
 }

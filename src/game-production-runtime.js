@@ -162,6 +162,7 @@ export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV
   }
 
   toggleVehicle(actor = this.player) {
+    if (this.forgeNarrativeOpenV156) return false;
     if (!this.paused && this.running) this.cancelPlaceableV86(actor, 'vehicle');
     if (!this.paused && this.running) this.cancelFieldActionV124(actor, 'vehicle');
     const changed = this.canPerformGameplayAction(actor) ? super.toggleVehicle(actor) : false;

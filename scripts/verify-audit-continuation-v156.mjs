@@ -18,6 +18,7 @@ import { FORGE_NARRATIVE_LIMITS_V156 as narrativeLimits,
   defaultForgeNarrativeV156, parseForgeNarrativeV156 } from '../src/forge-narrative-v156.js';
 import { withWeaponActionsV131 } from '../src/weapon-actions-v131.js';
 import { withForgeMissionRuntimeV141 } from '../src/forge-mission-runtime-v141.js';
+import { MissionGamepadInputV77 } from '../src/mission-input-v77.js';
 
 const prefix = 'docs/forge/xeno-trials/';
 const bytes = name => readFileSync(new URL('../' + prefix + name, import.meta.url));
@@ -31,7 +32,7 @@ const runtimeSources = [
   'src/forge-authoring-v133.js', 'src/forge-mission-runtime-v141.js', 'src/forge-model-v130.js',
   'src/forge-narrative-ui-v156.js', 'src/forge-narrative-v156.js', 'src/forge-ship-runtime-v141.js',
   'src/forge-ui-v130.js', 'src/forge-versions-v136.js', 'src/game-production-runtime.js', 'src/game-v51-runtime.js',
-  'src/hub-annex-npc-life-v141.js', 'src/weapon-actions-v131.js', 'src/xeno-trials-restraint-pose-v156.js',
+  'src/hub-annex-npc-life-v141.js', 'src/mission-input-v77.js', 'src/weapon-actions-v131.js', 'src/xeno-trials-restraint-pose-v156.js',
   'src/xeno-trials-rig-v154.js', 'src/xeno-trials-runtime-v96.js', 'src/xeno-trials-sequences-v155.js',
   'src/xeno-trials-ui-v96.js'
 ].sort();
@@ -184,6 +185,18 @@ test('the appendix accurately records bounded human lowering, real annex watches
   assert.deepEqual(admission.pendingOrder, ['power', 'archive']);
   assert.equal(admission.outsideForge, 'native-conditions-preserved');
   assert.equal(admission.blockedTerminalUse, 'refusal-message-only');
+  const gamepad = forge.gamepadNarrativeGuard;
+  assert.equal(gamepad.inputModule, 'src/mission-input-v77.js');
+  assert.equal(gamepad.inputClass, 'MissionGamepadInputV77');
+  assert.equal(typeof MissionGamepadInputV77.prototype.poll, 'function');
+  assert.equal(typeof MissionGamepadInputV77.prototype.reset, 'function');
+  assert.equal(gamepad.vehicleModule, 'src/game-production-runtime.js');
+  assert.equal(gamepad.admissionBeforeActions, true);
+  assert.equal(gamepad.stopPollBatchOnNarrativeOpen, true);
+  assert.equal(gamepad.clearBothPlayers, true);
+  assert.equal(gamepad.suppressHeldUntilNeutral, true);
+  assert.equal(gamepad.directVehicleGuardBeforeCancellation, true);
+  assert.equal(gamepad.outsideNarrative, 'ordinary-pause-and-cancellation-preserved');
   const recovery = current.runtimeContracts.weaponRecovery;
   assert.equal(recovery.module, 'src/weapon-actions-v131.js');
   assert.equal(recovery.mixin, 'withWeaponActionsV131');
