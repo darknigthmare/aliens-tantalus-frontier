@@ -255,9 +255,29 @@ with sync_playwright() as p:
             capture(page,f'{kind}-03-second-person.png')
             phase(kind + ': checkpoint, stop and actual page reload')
             panel=checkpoint_panel(page,kind)
+            # Observe native inertia reaching rest rather than comparing two
+            # moving instants separated by asynchronous WebCrypto/storage work.
+            page.wait_for_function('''kind=>{const e=kind==='mission'?__ATF_GAME__:__ATF_HUB__;
+              return e.running&&!e.paused&&!e.forgeNarrativeOpenV156&&e.player.grounded
+                &&e.player.vx===0&&e.player.vy===0&&e.keys.size===0;}''',arg=kind)
             panel.locator('[data-forge-checkpoint-v157="save"]').click()
             panel.locator('[role="status"]').get_by_text('Checkpoint de playtest enregistré',exact=False).wait_for()
             saved=observe(page,kind)
+            durable=page.evaluate('''async()=>{
+              const {inspectForgePlaytestCheckpointV157}=await import('/src/forge-playtest-checkpoint-v157.js');
+              const {data,envelope}=await inspectForgePlaytestCheckpointV157(localStorage.getItem('atf:forge-playtest-checkpoint:v157'),__ATF_V51__.editor.model.data);
+              const s=data.session,p=data.actors.find(actor=>actor.id==='player').state;
+              return {kind:envelope.payload.kind,savedAt:envelope.payload.savedAt,room:s.currentRoomId,
+                player:{x:p.x,y:p.y,health:p.health,ammo:p.ammo??null,reserve:p.ammoReserve??null},
+                history:s.narrativeV156||[],completed:s.completedObjectives,items:s.narrativeInventoryV157||[],
+                seconds:s.narrativePlaySecondsV157||0};}''')
+            checkpoint_observations={'liveAfterSave':saved,'durable':durable}
+            report.setdefault('checkpointObservations',{})[kind]=checkpoint_observations
+            check(kind + ': the durable checkpoint matches the exact native resting pose and completed story state',
+                  durable['kind']==kind and durable['room']=='b' and durable['player']==saved['player']
+                  and durable['history']==saved['history'] and durable['completed']==saved['completed']
+                  and durable['items']==saved['items']==[])
+            (output/f'{kind}-checkpoint-observations.json').write_text(json.dumps(checkpoint_observations,ensure_ascii=False,indent=2)+'\n')
             page.locator('#retreat-mission' if kind=='mission' else '#exit-hub').click()
             page.locator('#editor-canvas').wait_for(state='visible')
             check(kind + ': stopping preserves both the author document and campaign bytes', authored(page)==edited and page.evaluate('()=>localStorage.getItem("atf-v47-profile-1")')==campaign)
@@ -266,10 +286,17 @@ with sync_playwright() as p:
             panel.locator('[data-forge-checkpoint-v157="resume"]').click()
             game_canvas=page.locator('#game-canvas' if kind=='mission' else '#hub-canvas')
             game_canvas.wait_for(state='visible',timeout=90000)
+            resumed_panel=checkpoint_panel(page,kind)
+            resumed_panel.locator('[role="status"]').get_by_text('Checkpoint de playtest repris',exact=False).wait_for()
+            page.wait_for_function('node=>node.getAttribute("aria-busy")==="false"',arg=resumed_panel.element_handle())
             restored=observe(page,kind)
+            expected={'room':durable['room'],'actors':saved['actors'],'player':durable['player'],
+                      'history':durable['history'],'completed':durable['completed'],'items':durable['items']}
+            checkpoint_observations.update({'restored':restored,'mismatches':{
+                key:{'expected':value,'actual':restored[key]} for key,value in expected.items() if restored[key]!=value}})
+            (output/f'{kind}-checkpoint-observations.json').write_text(json.dumps(checkpoint_observations,ensure_ascii=False,indent=2)+'\n')
             check(kind + ': JSON reload reconstructs the right physical PNJ and preserves wounds/ammunition, completed goals and history without replay',
-                  restored['room']=='b' and restored['actors']==saved['actors'] and restored['player']==saved['player']
-                  and restored['history']==saved['history'] and restored['completed']==saved['completed'] and restored['items']==[])
+                  restored['running'] and not restored['paused'] and not checkpoint_observations['mismatches'])
             game_canvas.focus(); page.keyboard.press('KeyE'); dialog.wait_for(state='visible')
             check(kind + ': resumed PNJ keeps its finished cursor and cannot repeat the exchange', dialog.locator('[data-story-choice]').count()==0 and observe(page,kind)['items']==[])
             capture(page,f'{kind}-04-reloaded-dialogue.png')
@@ -291,6 +318,9 @@ with sync_playwright() as p:
     except Exception as error:
         report['status']='failed';report['error']=str(error)
         detail=f'{report["tooling"]} | {report["phase"]} | last passed: {report["checks"][-1] if report["checks"] else "none"} | {type(error).__name__}: {error}'
+        observations=report.get('checkpointObservations',{}).get(kind,{}) if 'kind' in locals() else {}
+        if observations:
+            detail+=' | checkpoint='+json.dumps({key:observations.get(key) for key in ['durable','liveAfterSave','restored','mismatches']},ensure_ascii=False,separators=(',',':'))
         print('::error title=Forge NPC::'+detail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'),flush=True)
         try:
             report['failureContext']=page.evaluate('''()=>({focus:{tag:document.activeElement?.tagName,id:document.activeElement?.id,documentFocused:document.hasFocus()},views:[...document.querySelectorAll('.view.active')].map(n=>n.dataset.panel),messages:[...document.querySelectorAll('.forge-message-v130')].map(n=>n.textContent)})''')
