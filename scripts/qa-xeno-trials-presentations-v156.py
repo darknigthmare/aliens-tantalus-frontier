@@ -17,9 +17,9 @@ if out == repo or repo in out.parents:
     raise SystemExit('Evidence must be outside the repository')
 out.mkdir(parents=True, exist_ok=True)
 report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
-          'scope': '20 exact-source presentation definitions plus 16 V157 exit-step render fixtures; native CPU/keyboard duel with finite spatial exit; separately declared engine-only draw fixture.',
+          'scope': '20 exact-source presentation definitions plus 16 V157 exit-step render fixtures; native CPU/keyboard duel with finite spatial exit plus separate seed20 native aerial result/landing; separately declared engine-only draw fixture.',
           'limitations': ['Four admitted source plates only; zero canonical or artistic completion certification.',
-                         'Native duel uses the ordinary 1 HP rule selected at construction. No cloud reward or menu journey.',
+                         'Native duels use ordinary 1 HP rules selected at construction. Separate seed20 CPU ticket verifies the actual airborne verdict and render-only landing. No cloud reward or menu journey.',
                          'Draw is an engine-only deterministic no-input fixture, not an asserted native CPU outcome.',
                          'V157 exit is a bounded native-mesh adaptation, not complete locomotion. Prowler steps only the rear supports; turning is a stationary facing cross-dissolve.']}
 
@@ -170,6 +170,41 @@ with sync_playwright() as pw:
         check('Finite exit stops all further frames and cannot emit a second result', page.evaluate('()=>r.getState()') == ended and page.evaluate('()=>results.length===1&&r.resume()===false&&physical(r.getState())===firstTerminalPhysical'))
         page.locator('#stop').click()
         check('Closing clears taunt, terminal presentation and rendered receipts', page.evaluate('()=>r.getState().tauntV156===null&&r.getState().terminalV156===null&&r.getState().exitV157===null&&r.getState().rigViewsV154.length===0'))
+
+        # Separate native CPU ticket: seed20 naturally finishes with the
+        # Prowler airborne on each tested frame cadence. No HP, y/vy, result,
+        # participant or RNG injection is used. RAF remains the browser clock.
+        native_air_started = page.evaluate('''async()=>{
+          const {createXenoTrialsRuntimeV96}=await import('/src/xeno-trials-runtime-v96.js');
+          window.results=[];window.nativeLandingAdmission=null;window.nativeLandingSettled=null;window.firstTerminalPhysical=null;
+          window.r=createXenoTrialsRuntimeV96({canvas:document.querySelector('#arena'),config:{playerId:'dd-darwin-era-cultist',opponentId:'prowler',seed:20,difficulty:'hard',rulesV119:{initialHp:1},roundSeconds:30},
+            onState:s=>{
+              if(s.phase==='match-over'&&!firstTerminalPhysical)firstTerminalPhysical=physical(s);
+              if(s.landingV157?.phase==='playing'&&!nativeLandingAdmission)nativeLandingAdmission=frame();
+              if(s.landingV157?.phase==='complete'&&!nativeLandingSettled)nativeLandingSettled=frame();
+            },onResult:x=>results.push(structuredClone(x))});
+          return await r.start();
+        }''')
+        check('Separate native seed20 ticket starts on real source images and browser RAF', native_air_started)
+        page.locator('#skip').click()
+        page.locator('#skip').click()
+        admitted_air = page.wait_for_function('()=>nativeLandingAdmission', polling='raf', timeout=60000).json_value()
+        air_state = admitted_air['state']
+        air_fighters = [f for f in air_state['fighters'] if f['y'] > 0]
+        check('Native CPU really delivers an airborne verdict and creates landingV157 immediately', len(air_fighters) == 1 and air_fighters[0]['id'] == 'prowler' and air_state['landingV157']['elapsedMs'] == 0)
+        landing_view = air_state['landingViewsV157'][0]
+        check('First landing frame preserves the actual terminal height and the historical grounded-only participants', abs(landing_view['renderY'] - air_fighters[0]['y']) < 1e-6 and abs(landing_view['ground'] - (450 - air_fighters[0]['y'])) < 1e-6 and all(p['side'] != air_fighters[0]['side'] for p in air_state['outroV155']['participants']))
+        capture('native-cpu-airborne-admission-v157.png', admitted_air, 'Actual native CPU seed20 verdict; first render frame retains terminal y; no rewritten actors or clock')
+        landed_air = page.wait_for_function('()=>nativeLandingSettled', polling='raf', timeout=15000).json_value()
+        check('Native render landing completes within600ms at the ground while physical y/vy remain airborne', landed_air['state']['landingV157']['durationMs'] <= 600 and all(v['renderY'] == 0 and v['ground'] == 450 for v in landed_air['state']['landingViewsV157']) and page.evaluate('()=>physical(r.getState())===firstTerminalPhysical'))
+        capture('native-cpu-airborne-landed-v157.png', landed_air, 'Actual native CPU outcome after bounded render-only landing; raw engine y/vy remain terminal values')
+        air_exit = page.wait_for_function("()=>{const s=r.getState();return s.exitV157?.phase==='playing'&&s.exitV157.participants.length===2&&s.rigViewsV154.some(v=>v.side==='opponent'&&v.exitV157?.stepped)?frame():null}", polling='raf', timeout=15000).json_value()
+        check('Both actual CPU finalists enter the V157 spatial exit after the airborne plate settles', len(air_exit['state']['exitV157']['participants']) == 2 and len(air_exit['results']) == 1 and page.evaluate('()=>physical(r.getState())===firstTerminalPhysical'))
+        capture('native-cpu-airborne-exit-both-v157.png', air_exit, 'Actual CPU winner and loser spatial exit; no fake historical participant or terminal')
+        page.wait_for_function("()=>r.getState().exitV157?.phase==='complete'", polling='raf', timeout=30000)
+        check('Native airborne verdict still ends with no remaining rig and a single result', page.evaluate('()=>results.length===1&&r.getState().rigViewsV154.length===0&&physical(r.getState())===firstTerminalPhysical'))
+        page.locator('#stop').click()
+        check('Closing the airborne ticket also clears the separate landing owner', page.evaluate('()=>r.getState().landingV157===null&&r.getState().landingViewsV157.length===0'))
 
         draws = page.evaluate('''async()=>{
           const E=await import('/src/xeno-trials-engine-v96.js');

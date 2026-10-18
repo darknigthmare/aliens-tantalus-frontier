@@ -134,7 +134,9 @@ export function sampleXenoTrialsExitPoseV157(rig,view,metrics,reducedMotion=fals
   const y=swing?-(Math.sin(Math.PI*u)**2)*view.footLift/sy*envelope:0;
   return{x,y,stance:!swing,phase:q};
  });
- const human=rig.fighterId!=='prowler',bodyDrop=(human?1.5:.7)/sy*envelope;
+ // Its forward claws remain a native support: lowering the whole Prowler's
+ // upper band would push those static claws through the ground pivot.
+ const human=rig.fighterId!=='prowler',bodyDrop=(human?1.5:0)/sy*envelope;
  const legs=[0,1].map(index=>{
   const hip=rig.bones.find(b=>b.id===`thigh${index}`).pivot;
   const anchor=rig.contacts[index===0?'footFar':'footNear'].point;
@@ -171,6 +173,24 @@ export function sampleXenoTrialsExitPoseV157(rig,view,metrics,reducedMotion=fals
    stride:view.stride,footLift:view.footLift,fullLocomotion:false}};
 }
 export function xenoTrialsTriangleAreaV154(a,b,c){return((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))/2;}
+/** The textured renderer applies one affine per native mesh triangle. Project a
+ * source landmark through that same triangle for V157 support QA/receipts;
+ * sampling only the intended cage/bone target would miss a mesh discrepancy. */
+export function projectXenoTrialsMeshPointV157(rig,frame,source){
+ const mesh=getXenoTrialsRigMeshV154(rig);
+ if(!mesh||frame?.rigId!==rig.id||!Array.isArray(frame.vertices)||frame.vertices.length!==mesh.vertices.length
+  ||!Array.isArray(source)||source.length!==2||!source.every(Number.isFinite))return null;
+ for(const ids of mesh.triangles){
+  const [a,b,c]=ids.map(i=>mesh.vertices[i].source),det=xenoTrialsTriangleAreaV154(a,b,c)*2;
+  const wb=((source[0]-a[0])*(c[1]-a[1])-(source[1]-a[1])*(c[0]-a[0]))/det;
+  const wc=((b[0]-a[0])*(source[1]-a[1])-(b[1]-a[1])*(source[0]-a[0]))/det,wa=1-wb-wc;
+  if(Math.min(wa,wb,wc)<-1e-7)continue;
+  const points=ids.map(i=>frame.vertices[i]);
+  if(points.some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)))return null;
+  return[0,1].map(axis=>points[0][axis]*wa+points[1][axis]*wb+points[2][axis]*wc);
+ }
+ return null;
+}
 function affine(s,d){
  const[s0,s1,s2]=s,[d0,d1,d2]=d,ux=s1[0]-s0[0],uy=s1[1]-s0[1],vx=s2[0]-s0[0],vy=s2[1]-s0[1],det=ux*vy-uy*vx;
  if(Math.abs(det)<1e-8)return null;

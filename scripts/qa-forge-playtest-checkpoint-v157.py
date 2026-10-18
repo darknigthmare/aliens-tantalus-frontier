@@ -61,7 +61,29 @@ def observed(page, kind):
 
 def checkpoint_panel(page, kind=None):
     view = 'editor' if kind is None else ('play' if kind == 'mission' else 'hub')
-    return page.locator(f'[data-panel="{view}"] .forge-checkpoint-v157')
+    panel = page.locator(f'[data-panel="{view}"] .forge-checkpoint-v157')
+    if panel.locator('details').get_attribute('open') is None:
+        panel.locator('[data-forge-checkpoint-toggle-v157]').click()
+    return panel
+
+
+def pointer_action(page, panel, action):
+    """Native pointer activation; bounds/hit tests happen before any click.
+    This deliberately avoids Locator.click's automatic scrollIntoView."""
+    details = panel.locator('details')
+    if details.get_attribute('open') is None:
+        target = panel.locator('[data-forge-checkpoint-toggle-v157]')
+        point = target.evaluate('''node=>{const r=node.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;
+          return {x,y,within:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,hit:document.elementFromPoint(x,y)===node};}''')
+        assert point['within'] and point['hit'], 'compact checkpoint disclosure must be reachable without scrolling'
+        page.mouse.click(point['x'], point['y'])
+    target = panel.locator(f'[data-forge-checkpoint-v157="{action}"]')
+    point = target.evaluate('''node=>{const r=node.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2,hit=document.elementFromPoint(x,y);
+      return {x,y,within:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,hit:hit===node||node.contains(hit)};}''')
+    assert point['within'] and point['hit'], f'{action}: must be visible, fully within viewport and above canvas'
+    page.mouse.click(point['x'], point['y'])
+    page.wait_for_function('node=>node.getAttribute("aria-busy")==="false"', arg=panel.element_handle())
+    return point
 
 
 def capture(page, name):
@@ -170,6 +192,39 @@ with sync_playwright() as p:
             check(kind + ': browser checkpoint restoration leaves the campaign profile byte-identical',
                   page.evaluate('() => localStorage.getItem("atf-v47-profile-1")') == campaign)
             capture(page, f'{kind}-02-reloaded.png')
+            for width, height in [(1280, 720), (1600, 900), (390, 844)]:
+                page.set_viewport_size({'width': width, 'height': height})
+                panel = page.locator(f'[data-panel="{"play" if kind == "mission" else "hub"}"] .forge-checkpoint-v157')
+                before = observed(page, kind)
+                positions = {action: pointer_action(page, panel, action) for action in ['save', 'resume', 'clear']}
+                check(f'{kind} {width}x{height}: real pointer save/resume/erase controls are inside the viewport and above the canvas without scrolling',
+                      all(point['within'] and point['hit'] for point in positions.values())
+                      and page.evaluate('() => localStorage.getItem("atf:forge-playtest-checkpoint:v157")') is None)
+                after = observed(page, kind)
+                check(f'{kind} {width}x{height}: active resume preserves resources, story and campaign at the exact aspect ratio',
+                      all(after[key] == before[key] for key in ['room', 'items', 'completed', 'history', 'health', 'ammo', 'reserve'])
+                      and page.evaluate('() => localStorage.getItem("atf-v47-profile-1")') == campaign)
+                pointer_action(page, panel, 'save')
+                capture(page, f'{kind}-layout-{width}x{height}-open.png')
+                page.keyboard.press('Escape')
+                check(f'{kind} {width}x{height}: Escape closes to one compact control and native Enter reopens it without pausing gameplay',
+                      panel.locator('details').get_attribute('open') is None
+                      and page.evaluate('kind=>(kind==="mission"?__ATF_GAME__:__ATF_HUB__).paused!==true', kind))
+                page.keyboard.press('Enter')
+                panel.locator('[data-forge-checkpoint-v157="save"]').wait_for(state='visible')
+                page.keyboard.press('Tab')
+                protected = observed(page, kind)
+                page.keyboard.down('KeyD')
+                page.keyboard.down('KeyF')
+                page.wait_for_timeout(150)
+                page.keyboard.up('KeyF')
+                page.keyboard.up('KeyD')
+                check(f'{kind} {width}x{height}: focused checkpoint commands keep movement and fire from leaking to the game',
+                      observed(page, kind)['x'] == protected['x'] and observed(page, kind)['ammo'] == protected['ammo'])
+                page.keyboard.press('Escape')
+                capture(page, f'{kind}-layout-{width}x{height}-closed.png')
+            raw = page.evaluate('() => localStorage.getItem("atf:forge-playtest-checkpoint:v157")')
+            page.set_viewport_size({'width': 1600, 'height': 1050})
             page.locator('#retreat-mission' if kind == 'mission' else '#exit-hub').click()
             page.locator('#editor-canvas').wait_for(state='visible')
             page.locator('[data-forge-field="room-name"]').fill('Plan modifié après checkpoint')
@@ -190,6 +245,16 @@ with sync_playwright() as p:
                   page.evaluate('() => localStorage.getItem("atf:forge-playtest-checkpoint:v157")') is None
                   and panel.locator('[data-forge-checkpoint-v157="resume"]').is_disabled()
                   and page.evaluate('() => structuredClone(__ATF_V51__.editor.model.data)') == changed)
+        page.locator('#return-title').click()
+        page.locator('#title-start:visible, #title-continue:visible').first.wait_for(state='visible')
+        if page.locator('#title-start').is_visible():
+            page.locator('#title-start').click()
+        page.locator('#title-continue').click()
+        page.locator('#hub-canvas').wait_for(state='visible', timeout=90000)
+        check('native campaign continuation hides every Forge checkpoint control through the immediate CSS scope guard',
+              page.evaluate('''()=>!document.documentElement.classList.contains('forge-mode')&&
+                [...document.querySelectorAll('.forge-checkpoint-v157')].every(node=>getComputedStyle(node).display==='none')'''))
+        capture(page, 'campaign-controls-absent.png')
         check('no uncaught browser exceptions', not report['pageErrors'])
         failures = [entry for entry in report['requestFailures'] if entry['failure'] != 'net::ERR_ABORTED']
         check('no HTTP error or failed request outside intentional navigation cancellation', not failures and not report['httpErrors'])

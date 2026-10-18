@@ -450,7 +450,7 @@
         "status": "Partiel",
         "newlyWired": false,
         "keyframes": 5,
-        "scope": "Sortie spatiale V157 séparée après terminalV156 ; quatre rigs exacts, sans modifier le combat.",
+        "scope": "Retombée/sortie V157 autonomes sur quatre rigs exacts ; participants historiques au sol et corps physiques inchangés.",
         "artisticallyClosed": 0,
         "approved1to1": 0,
         "canonExact": false
@@ -640,7 +640,7 @@
         "status": "Partiel",
         "newlyWired": false,
         "keyframes": 5,
-        "scope": "Sortie spatiale V157 séparée après terminalV156 ; quatre rigs exacts, sans modifier le combat.",
+        "scope": "Retombée/sortie V157 autonomes sur quatre rigs exacts ; participants historiques au sol et corps physiques inchangés.",
         "artisticallyClosed": 0,
         "approved1to1": 0,
         "canonExact": false
@@ -830,7 +830,7 @@
         "status": "Partiel",
         "newlyWired": false,
         "keyframes": 5,
-        "scope": "Sortie spatiale V157 séparée après terminalV156 ; quatre rigs exacts, sans modifier le combat.",
+        "scope": "Retombée/sortie V157 autonomes sur quatre rigs exacts ; participants historiques au sol et corps physiques inchangés.",
         "artisticallyClosed": 0,
         "approved1to1": 0,
         "canonExact": false
@@ -1020,7 +1020,7 @@
         "status": "Partiel",
         "newlyWired": false,
         "keyframes": 5,
-        "scope": "Sortie spatiale V157 séparée après terminalV156 ; quatre rigs exacts, sans modifier le combat.",
+        "scope": "Retombée/sortie V157 autonomes sur quatre rigs exacts ; participants historiques au sol et corps physiques inchangés.",
         "artisticallyClosed": 0,
         "approved1to1": 0,
         "canonExact": false
@@ -1463,9 +1463,26 @@
           "playSeconds": 3600
         },
         "explicitCommands": true,
+        "commandsAccessibleIn": [
+          "normal-layout",
+          "fullscreen-16:9",
+          "mobile-viewport"
+        ],
         "slots": 1,
         "integrity": "sha256",
-        "projectIdentity": "strict-project-and-real-loadout",
+        "projectIdentity": "strict-project-real-loadout-and-starting-vehicle",
+        "startingVehicleFingerprint": true,
+        "applicationVehicleNormalization": true,
+        "applicationVehicleSwapReproduced": false,
+        "presenceCache": {
+          "pollReadsPayload": false,
+          "refreshAfter": [
+            "mount",
+            "checkpoint-action",
+            "relevant-storage-event"
+          ],
+          "destroyRemovesListener": true
+        },
         "cloud": false,
         "campaignSave": false,
         "automaticRewards": false,
@@ -1519,16 +1536,69 @@
         "import-game-dd-wy-commando",
         "import-game-dd-guardian"
       ],
-      "phase": "after-completed-terminalV156",
+      "phase": "after-admitted-grounded-verdict-or-dedicated-render-landing",
       "gameplayCoordinatesChanged": false,
       "resultChanged": false,
       "camera": "frozen-terminal-camera",
       "fallbacks": [
-        "reduced-motion",
+        "reduced-motion-static-settle",
         "skip",
-        "unrigged-or-airborne-participant",
+        "unrigged-or-invalid-presentation-pose",
         "unsupported-wide-camera"
-      ]
+      ],
+      "landing": {
+        "configuration": {
+          "id": "terminal-render-landing-v157",
+          "minMs": 180,
+          "maxMs": 600,
+          "canonExact": false
+        },
+        "module": "src/xeno-trials-sequences-v155.js",
+        "helpers": [
+          "createXenoTrialsLandingV157",
+          "getXenoTrialsLandingViewV157"
+        ],
+        "snapshots": [
+          "landingV157",
+          "landingViewsV157"
+        ],
+        "scope": "four-admitted-native-rigs-only",
+        "admission": "completed-real-verdict-positive-native-y",
+        "capturedInputs": [
+          "terminal-y",
+          "terminal-vy"
+        ],
+        "renderedY": "terminal-y-to-zero-monotone",
+        "physicalCoordinatesChanged": false,
+        "physicalLanding": false,
+        "historicalGroundedParticipantsUnchanged": true,
+        "clock": "presentation-time-parallel-to-grounded-verdict",
+        "twoAirborne": "dedicated-v157-match-and-terminal-tick",
+        "startVy": "archived-only"
+      }
+    },
+    "sourceAvailability": {
+      "encyclopediaRawWorkbookRecovered": false,
+      "excelMetadata": {
+        "localSource": null,
+        "publicAsset": null,
+        "sha256": null,
+        "sheets": 19,
+        "globalEntities": 2363,
+        "thematicEntities": 2929
+      },
+      "excelBridgeLinks": {
+        "weapons": 14,
+        "vehicles": 3
+      },
+      "gameCatalogueCounts": {
+        "total": 1329,
+        "weapons": 178,
+        "equipment": 106,
+        "enemies": 763,
+        "vehicles": 282
+      },
+      "scope": "Current game catalogue and Excel bridge metadata; not the original 2363-row workbook."
     },
     "operations": {
       "module": "src/special-operations-v131.js",
@@ -1558,12 +1628,13 @@
     "src/app.js": "4491cf064d033b8f5bf044a6c6601caa61e912438f21b619a67bf6b1ee39b7a5",
     "src/content.js": "4d98bbdaa3ed2cc297a1d715335b0cfa8edc7105c39ce3031a2db0fd77975d0b",
     "src/forge-authoring-v133.js": "e9daf7824b6c88055cb7da3faf2cd36888c85779e9dc24803ac7636bd2dec74b",
+    "src/forge-editor-v130.css": "b645064e47bda9c8162f79ecdaa5a93aedd37a7f35fdaebb7e66bd6faed943de",
     "src/forge-mission-runtime-v141.js": "72322671dca0afd2ceef539692b8101fb715e6b123428ab1d860948d285074f0",
     "src/forge-model-v130.js": "e7fb0a3f79ab9515051393018f9d6230c42e74c062d3c8c63d862c65a8b8e647",
     "src/forge-narrative-ui-v156.js": "94427acc0b175f76de644b3cb892a04c955168baee023570f24b935854e561ac",
     "src/forge-narrative-v156.js": "918abde0155d427de668215b99457cf79667e7837b0caf41e05978aabf0ea96f",
-    "src/forge-playtest-checkpoint-ui-v157.js": "49064fe17a32e5875f2b6090718e87bb868f5e8015fac87cc7efe676bf367789",
-    "src/forge-playtest-checkpoint-v157.js": "16947f03cfe0b774d0cc78b9ed91993363b3727a11c0100241d8cd1add08c43f",
+    "src/forge-playtest-checkpoint-ui-v157.js": "9161d9152a551de3d60977a8f04610a8f1be6081affe1e906d32c492a96b15dd",
+    "src/forge-playtest-checkpoint-v157.js": "d7930fd9d9056970e63e02d54b6e70a3a4a00de931c26c7551db59ee15b4569c",
     "src/forge-ship-runtime-v141.js": "4079d01e92e14c350c9d6d607948722682d45dd366a38511446fe9de70dbbf9b",
     "src/forge-ui-v130.js": "1457e39382c08fb0c86af13d5773269e42a73dfd24021b286310e1a01852782b",
     "src/forge-versions-v136.js": "a3332e533bc0e972a8c5f82492a71dbd4b68c197ef1be9cf9b2277ad40dfb361",
@@ -1581,10 +1652,10 @@
     "src/special-operations-v131.js": "30d8f872f1dafa1e379f56ea599d789ee2e8875e699034cda5934c7fcbbb35db",
     "src/weapon-actions-v131.js": "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
     "src/xeno-trials-restraint-pose-v156.js": "d38f61546c00cadd2ed3f9064b1dfe9b178f38e5c78dcc2448667017431a3a22",
-    "src/xeno-trials-rig-v154.js": "a024ec81df0c045c9103f6e865d283386da6f0c88345faf2da516adf8ad67bc4",
-    "src/xeno-trials-runtime-v96.js": "03a482cc5097517f2c542d7784ba17dc0cf0d38ce61b6626c51cf2530b3281c4",
-    "src/xeno-trials-sequences-v155.js": "c029048154268a43019aef9914ed6a2d8002d0227e3470c18adbafc13d542550",
-    "src/xeno-trials-ui-v96.js": "1c14eb4d9e8cffe580abcfc6421a6d19c992bbe96fd2db4a17b5fc65e72b057e"
+    "src/xeno-trials-rig-v154.js": "7d14f17fb8d9febb3276bc047ba72685241ae3c6e6028a6a828a20e7517e9764",
+    "src/xeno-trials-runtime-v96.js": "4dcf2018e86b072fc9412040b78c872b4b4c8d952a1cccaec0fd7b0e46e71e72",
+    "src/xeno-trials-sequences-v155.js": "aace792160253b9df4d63e68da39cc20981565b7331607785c27f80ad34440af",
+    "src/xeno-trials-ui-v96.js": "2c60081f22f1a4853e449c23893c88334a3537aa2be3c81e16c609839ee0212e"
   },
   "tables": {
     "01_Presentations": {
@@ -1625,7 +1696,7 @@
           "Outro",
           "Partiel",
           "prowler::outro",
-          "V157 ajoute après le verdict et l’outro une sortie de rendu vers les bords, avec appuis alternés bornés et caméra fixe. Corpus dessiné complet, audio et revue 1:1 restent ouverts.",
+          "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
           0,
           0
         ],
@@ -1725,7 +1796,7 @@
           "Outro",
           "Partiel",
           "import-game-dd-wy-commando::outro",
-          "V157 ajoute après le verdict et l’outro une sortie de rendu vers les bords, avec appuis alternés bornés et caméra fixe. Corpus dessiné complet, audio et revue 1:1 restent ouverts.",
+          "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
           0,
           0
         ],
@@ -1825,7 +1896,7 @@
           "Outro",
           "Partiel",
           "import-game-dd-guardian::outro",
-          "V157 ajoute après le verdict et l’outro une sortie de rendu vers les bords, avec appuis alternés bornés et caméra fixe. Corpus dessiné complet, audio et revue 1:1 restent ouverts.",
+          "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
           0,
           0
         ],
@@ -1925,7 +1996,7 @@
           "Outro",
           "Partiel",
           "dd-darwin-era-cultist::outro",
-          "V157 ajoute après le verdict et l’outro une sortie de rendu vers les bords, avec appuis alternés bornés et caméra fixe. Corpus dessiné complet, audio et revue 1:1 restent ouverts.",
+          "V157 ajoute une retombée de rendu bornée si le verdict fige le rig en l’air, puis une sortie vers les bords. Corps physiques et verdict inchangés ; phases historiques au sol intactes. Dessins, audio et revue 1:1 restent ouverts.",
           0,
           0
         ],
@@ -2995,7 +3066,7 @@
         [
           "forge-local-checkpoint-v157",
           "Checkpoint local explicite",
-          "Un slot ; 4 Mio ; identité projet/équipement ; Enregistrer/Reprendre/Effacer ; validation avant mutation.",
+          "Un slot ; 4 Mio ; même projet/équipe/équipement/véhicule de départ ; commandes visibles en plein écran 16:9 et viewport mobile ; validation avant mutation.",
           "Implémenté (borné)",
           "Pas de cloud, de récompense automatique ni de copie des sauvegardes de campagne."
         ]
@@ -3070,7 +3141,7 @@
           "SRC-EXIT",
           "Contrat exécutable",
           "src/xeno-trials-sequences-v155.js",
-          "Sortie spatiale V157 séparée des 40 séquences/200 clés héritées.",
+          "Retombée et sortie de rendu V157 séparées des 40 séquences/200 clés héritées ; identités de partie/tick autonomes.",
           "Quatre rigs natifs ; pas de locomotion complète ni certification 1:1."
         ],
         [
@@ -3118,7 +3189,7 @@
           "QA157-EXIT",
           "node --test scripts/verify-xeno-trials-presentations-v156.mjs scripts/verify-xeno-trials-rig-v154.mjs scripts/verify-xeno-trials-sequences-v155.mjs",
           "À exécuter sur le commit publié",
-          "Quatre rigs, caméra fixe, appuis, fin du résultat et contrôles pause/skip/mouvement réduit."
+          "Quatre rigs ; retombée de rendu monotone, affine/caméra et appuis ; deux aériens sans faux participant historique ; pause/skip/réduit et corps physiques intacts."
         ],
         [
           "QA157-OPS",
@@ -4675,9 +4746,9 @@
       "rows": [
         [
           "encyclopedia-source",
-          "Audit Excel V61 historique",
+          "Pont Excel V61/V63 et catalogue courant V62 ; audit V61 historique",
           "Source brute absente",
-          "Hash et comptes anciens seulement ; aucune revue fictive des 2 363 entités.",
+          "Classeur brut absent ; métadonnées du pont présentes (2363 entités globales, 2929 thématiques), 14 liens d’armes/3 de véhicules et catalogue jeu de 1329 entrées disponibles. Pas de revue du classeur brut.",
           0
         ],
         [
@@ -4994,29 +5065,29 @@
         [
           "src/xeno-trials-rig-v154.js",
           "fadce1943f542352980d30351edf0f5a8ef07adf5347da56677c8b2627386218",
-          "a024ec81df0c045c9103f6e865d283386da6f0c88345faf2da516adf8ad67bc4",
-          "Le rendu ajoute des appuis alternés bornés pour les sorties spatiales, sans modifier les quatre PNG sources.",
+          "7d14f17fb8d9febb3276bc047ba72685241ae3c6e6028a6a828a20e7517e9764",
+          "Le rendu ajoute retombée visuelle et appuis alternés bornés ; la projection affine/caméra conserve les supports sans changer les PNG sources.",
           "scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-xeno-trials-rig-v154.mjs"
         ],
         [
           "src/xeno-trials-runtime-v96.js",
           "cd5c869465a778f6571dcb6721dd87cb9f5321b7b1f60bd959c9a7849a83fc3c",
-          "03a482cc5097517f2c542d7784ba17dc0cf0d38ce61b6626c51cf2530b3281c4",
-          "La sortie spatiale suit le verdict et son outro, conserve la caméra terminale et respecte pause/skip/mouvement réduit.",
+          "4dcf2018e86b072fc9412040b78c872b4b4c8d952a1cccaec0fd7b0e46e71e72",
+          "La retombée de rendu démarre au verdict réel, parallèlement aux phases admissibles au sol ; la sortie conserve caméra, pause, skip et mouvement réduit.",
           "scripts/verify-xeno-trials-presentations-v156.mjs"
         ],
         [
           "src/xeno-trials-sequences-v155.js",
           "db455cc5c4ee8a67c1f57ffd2d9dd4755d8f41f888a562bd25f9dbf8a8c388a6",
-          "c029048154268a43019aef9914ed6a2d8002d0227e3470c18adbafc13d542550",
-          "Une sortie de rendu séparée conserve les 40 séquences/200 clés historiques et ne modifie ni résultat ni coordonnées de combat.",
+          "aace792160253b9df4d63e68da39cc20981565b7331607785c27f80ad34440af",
+          "Les retombées et sorties V157 ont leur propre identité de partie/tick ; les 40 séquences/200 clés historiques et les corps physiques restent inchangés.",
           "scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-xeno-trials-sequences-v155.mjs"
         ],
         [
           "src/xeno-trials-ui-v96.js",
           "bb31a08eee423f1e6c0fda43b0660e253204aaa9b20444783024d8b9df8bf63b",
-          "1c14eb4d9e8cffe580abcfc6421a6d19c992bbe96fd2db4a17b5fc65e72b057e",
-          "L’interface rend les participants sortant vers les bords avec caméra fixe, en conservant l’accès au résultat.",
+          "2c60081f22f1a4853e449c23893c88334a3537aa2be3c81e16c609839ee0212e",
+          "L’interface présente la retombée vers le support puis la sortie vers les bords avec caméra fixe, sans modifier le résultat.",
           "scripts/verify-xeno-trials-presentations-v156.mjs"
         ],
         [
@@ -5034,17 +5105,24 @@
           "scripts/verify-operations-integration-v131.mjs"
         ],
         [
+          "src/forge-editor-v130.css",
+          "Non épinglé en V156",
+          "b645064e47bda9c8162f79ecdaa5a93aedd37a7f35fdaebb7e66bd6faed943de",
+          "Feuille de style nouvellement auditée : panneau checkpoint compact au-dessus du canvas et du HUD, repliable et accessible en 16:9 comme en viewport mobile.",
+          "scripts/verify-forge-playtest-checkpoint-v157.mjs"
+        ],
+        [
           "src/forge-playtest-checkpoint-ui-v157.js",
           "Non épinglé en V156",
-          "49064fe17a32e5875f2b6090718e87bb868f5e8015fac87cc7efe676bf367789",
-          "Nouvelles commandes explicites Enregistrer/Reprendre/Effacer, avec message d’erreur et reprise du playtest courant.",
+          "9161d9152a551de3d60977a8f04610a8f1be6081affe1e906d32c492a96b15dd",
+          "Nouvelles commandes explicites Enregistrer/Reprendre/Effacer accessibles en plein écran 16:9 et viewport mobile, avec erreurs et reprise du playtest courant.",
           "scripts/verify-forge-playtest-checkpoint-v157.mjs"
         ],
         [
           "src/forge-playtest-checkpoint-v157.js",
           "Non épinglé en V156",
-          "16947f03cfe0b774d0cc78b9ed91993363b3727a11c0100241d8cd1add08c43f",
-          "Nouveau codec et stockage local bornés des checkpoints Forge, avec identité projet/équipement et refus avant mutation.",
+          "d7930fd9d9056970e63e02d54b6e70a3a4a00de931c26c7551db59ee15b4569c",
+          "Nouveau codec et stockage local bornés des checkpoints Forge, avec identité projet/équipement/véhicule de départ et refus avant mutation.",
           "scripts/verify-forge-playtest-checkpoint-v157.mjs"
         ],
         [
@@ -5120,9 +5198,9 @@
         [
           "prowler",
           "native-spatial-exit-v157",
-          "Après verdict et terminalV156 complets",
-          "Trajet de rendu vers bord ; appuis alternés ; caméra fixe",
-          "Rig natif admis seulement ; pas de marche dessinée complète ; pause/skip/mouvement réduit respectés.",
+          "Après phases de verdict admissibles ou retombée V157 autonome",
+          "Retombée de rendu 180–600 ms si aérien ; puis trajet vers bord et appuis alternés",
+          "Rig natif admis seulement ; corps physiques inchangés ; caméra fixe et appuis contrôlés ; pas de marche dessinée complète. Pause/skip/mouvement réduit respectés.",
           "Partiel",
           0,
           0
@@ -5130,9 +5208,9 @@
         [
           "dd-darwin-era-cultist",
           "native-spatial-exit-v157",
-          "Après verdict et terminalV156 complets",
-          "Trajet de rendu vers bord ; appuis alternés ; caméra fixe",
-          "Rig natif admis seulement ; pas de marche dessinée complète ; pause/skip/mouvement réduit respectés.",
+          "Après phases de verdict admissibles ou retombée V157 autonome",
+          "Retombée de rendu 180–600 ms si aérien ; puis trajet vers bord et appuis alternés",
+          "Rig natif admis seulement ; corps physiques inchangés ; caméra fixe et appuis contrôlés ; pas de marche dessinée complète. Pause/skip/mouvement réduit respectés.",
           "Partiel",
           0,
           0
@@ -5140,9 +5218,9 @@
         [
           "import-game-dd-wy-commando",
           "native-spatial-exit-v157",
-          "Après verdict et terminalV156 complets",
-          "Trajet de rendu vers bord ; appuis alternés ; caméra fixe",
-          "Rig natif admis seulement ; pas de marche dessinée complète ; pause/skip/mouvement réduit respectés.",
+          "Après phases de verdict admissibles ou retombée V157 autonome",
+          "Retombée de rendu 180–600 ms si aérien ; puis trajet vers bord et appuis alternés",
+          "Rig natif admis seulement ; corps physiques inchangés ; caméra fixe et appuis contrôlés ; pas de marche dessinée complète. Pause/skip/mouvement réduit respectés.",
           "Partiel",
           0,
           0
@@ -5150,9 +5228,9 @@
         [
           "import-game-dd-guardian",
           "native-spatial-exit-v157",
-          "Après verdict et terminalV156 complets",
-          "Trajet de rendu vers bord ; appuis alternés ; caméra fixe",
-          "Rig natif admis seulement ; pas de marche dessinée complète ; pause/skip/mouvement réduit respectés.",
+          "Après phases de verdict admissibles ou retombée V157 autonome",
+          "Retombée de rendu 180–600 ms si aérien ; puis trajet vers bord et appuis alternés",
+          "Rig natif admis seulement ; corps physiques inchangés ; caméra fixe et appuis contrôlés ; pas de marche dessinée complète. Pause/skip/mouvement réduit respectés.",
           "Partiel",
           0,
           0
@@ -5161,14 +5239,14 @@
     }
   },
   "limitations": [
-    "185 autres identités ne possèdent pas ces quatre rigs et leurs sorties/séquences ; leurs mécaniques existantes restent distinctes.",
+    "185 autres identités ne possèdent pas ces quatre rigs et leurs retombées/sorties/séquences ; leurs mécaniques existantes restent distinctes.",
     "40 présentations et 28 ART153 conservés ; art partiel, zéro clôture artistique et zéro approbation 1:1.",
     "Mise au sol complète, contacts entre deux corps, dessins, audio et corpus de locomotion/combat/finishes restent ouverts.",
     "Checkpoint local explicite seulement : cloud Forge, personnages parlants et scripts libres restent ouverts ; pas d’inventaire de campagne.",
     "19 affectations conditionnelles ne signifient ni 19 PNJ simultanés, ni trajet continu entre annexes.",
     "21 accès d’opérations déjà jouables : 20 adaptations partielles et une effective ; campagnes étendues et corpus dédiés restent à finir.",
     "30 costumes franchise sans atlas dédié restent distincts du kit colonial modulaire déjà présent.",
-    "Encyclopédie brute et archives DLC Blackout/Earth ou sprites V10 absentes ; aucune revue intégrale fictive de ces sources.",
+    "Classeur encyclopédie brut absent ; métadonnées Excel, liens et catalogue du jeu disponibles. Archives DLC Blackout/Earth ou sprites V10 absentes ; aucune revue intégrale fictive.",
     "Recette prépublication : résultats locaux, CI, fusion et déploiement du commit exact se vérifient séparément, sans transférer les résultats V156."
   ],
   "workbook": "XENO_TRIALS_SUIVI_V157.xlsx",
@@ -5265,7 +5343,7 @@
       "expected": 4
     }
   ],
-  "workbookSha256": "ee119f85bb568211d7f8784016011e8f783cfe7fdf3d3c427cfb53d069c81f42",
+  "workbookSha256": "7e3a93d122afb389ce42d522ad18ae0de854b4c8c30ecba06c550091c2a262de",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V156",
@@ -5338,8 +5416,8 @@
       {
         "path": "src/xeno-trials-rig-v154.js",
         "previousSha256": "fadce1943f542352980d30351edf0f5a8ef07adf5347da56677c8b2627386218",
-        "currentSha256": "a024ec81df0c045c9103f6e865d283386da6f0c88345faf2da516adf8ad67bc4",
-        "reason": "Le rendu ajoute des appuis alternés bornés pour les sorties spatiales, sans modifier les quatre PNG sources.",
+        "currentSha256": "7d14f17fb8d9febb3276bc047ba72685241ae3c6e6028a6a828a20e7517e9764",
+        "reason": "Le rendu ajoute retombée visuelle et appuis alternés bornés ; la projection affine/caméra conserve les supports sans changer les PNG sources.",
         "verifiers": [
           "scripts/verify-xeno-trials-presentations-v156.mjs",
           "scripts/verify-xeno-trials-rig-v154.mjs"
@@ -5348,8 +5426,8 @@
       {
         "path": "src/xeno-trials-runtime-v96.js",
         "previousSha256": "cd5c869465a778f6571dcb6721dd87cb9f5321b7b1f60bd959c9a7849a83fc3c",
-        "currentSha256": "03a482cc5097517f2c542d7784ba17dc0cf0d38ce61b6626c51cf2530b3281c4",
-        "reason": "La sortie spatiale suit le verdict et son outro, conserve la caméra terminale et respecte pause/skip/mouvement réduit.",
+        "currentSha256": "4dcf2018e86b072fc9412040b78c872b4b4c8d952a1cccaec0fd7b0e46e71e72",
+        "reason": "La retombée de rendu démarre au verdict réel, parallèlement aux phases admissibles au sol ; la sortie conserve caméra, pause, skip et mouvement réduit.",
         "verifiers": [
           "scripts/verify-xeno-trials-presentations-v156.mjs"
         ]
@@ -5357,8 +5435,8 @@
       {
         "path": "src/xeno-trials-sequences-v155.js",
         "previousSha256": "db455cc5c4ee8a67c1f57ffd2d9dd4755d8f41f888a562bd25f9dbf8a8c388a6",
-        "currentSha256": "c029048154268a43019aef9914ed6a2d8002d0227e3470c18adbafc13d542550",
-        "reason": "Une sortie de rendu séparée conserve les 40 séquences/200 clés historiques et ne modifie ni résultat ni coordonnées de combat.",
+        "currentSha256": "aace792160253b9df4d63e68da39cc20981565b7331607785c27f80ad34440af",
+        "reason": "Les retombées et sorties V157 ont leur propre identité de partie/tick ; les 40 séquences/200 clés historiques et les corps physiques restent inchangés.",
         "verifiers": [
           "scripts/verify-xeno-trials-presentations-v156.mjs",
           "scripts/verify-xeno-trials-sequences-v155.mjs"
@@ -5367,8 +5445,8 @@
       {
         "path": "src/xeno-trials-ui-v96.js",
         "previousSha256": "bb31a08eee423f1e6c0fda43b0660e253204aaa9b20444783024d8b9df8bf63b",
-        "currentSha256": "1c14eb4d9e8cffe580abcfc6421a6d19c992bbe96fd2db4a17b5fc65e72b057e",
-        "reason": "L’interface rend les participants sortant vers les bords avec caméra fixe, en conservant l’accès au résultat.",
+        "currentSha256": "2c60081f22f1a4853e449c23893c88334a3537aa2be3c81e16c609839ee0212e",
+        "reason": "L’interface présente la retombée vers le support puis la sortie vers les bords avec caméra fixe, sans modifier le résultat.",
         "verifiers": [
           "scripts/verify-xeno-trials-presentations-v156.mjs"
         ]
@@ -5395,10 +5473,19 @@
         ]
       },
       {
+        "path": "src/forge-editor-v130.css",
+        "previousSha256": null,
+        "currentSha256": "b645064e47bda9c8162f79ecdaa5a93aedd37a7f35fdaebb7e66bd6faed943de",
+        "reason": "Feuille de style nouvellement auditée : panneau checkpoint compact au-dessus du canvas et du HUD, repliable et accessible en 16:9 comme en viewport mobile.",
+        "verifiers": [
+          "scripts/verify-forge-playtest-checkpoint-v157.mjs"
+        ]
+      },
+      {
         "path": "src/forge-playtest-checkpoint-ui-v157.js",
         "previousSha256": null,
-        "currentSha256": "49064fe17a32e5875f2b6090718e87bb868f5e8015fac87cc7efe676bf367789",
-        "reason": "Nouvelles commandes explicites Enregistrer/Reprendre/Effacer, avec message d’erreur et reprise du playtest courant.",
+        "currentSha256": "9161d9152a551de3d60977a8f04610a8f1be6081affe1e906d32c492a96b15dd",
+        "reason": "Nouvelles commandes explicites Enregistrer/Reprendre/Effacer accessibles en plein écran 16:9 et viewport mobile, avec erreurs et reprise du playtest courant.",
         "verifiers": [
           "scripts/verify-forge-playtest-checkpoint-v157.mjs"
         ]
@@ -5406,8 +5493,8 @@
       {
         "path": "src/forge-playtest-checkpoint-v157.js",
         "previousSha256": null,
-        "currentSha256": "16947f03cfe0b774d0cc78b9ed91993363b3727a11c0100241d8cd1add08c43f",
-        "reason": "Nouveau codec et stockage local bornés des checkpoints Forge, avec identité projet/équipement et refus avant mutation.",
+        "currentSha256": "d7930fd9d9056970e63e02d54b6e70a3a4a00de931c26c7551db59ee15b4569c",
+        "reason": "Nouveau codec et stockage local bornés des checkpoints Forge, avec identité projet/équipement/véhicule de départ et refus avant mutation.",
         "verifiers": [
           "scripts/verify-forge-playtest-checkpoint-v157.mjs"
         ]

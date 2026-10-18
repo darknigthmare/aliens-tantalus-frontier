@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { missionV136, hostV136 } from './forge-native-host-v136.mjs';
 import { HubGame } from '../src/hub-v51-runtime.js';
 import { withForgeShipRuntimeV141 } from '../src/forge-ship-runtime-v141.js';
-import { CREW, EQUIPMENT } from '../src/content.js';
+import { CREW, EQUIPMENT, VEHICLES } from '../src/content.js';
 import { openForgeNarrativeV156, chooseForgeNarrativeV156 } from '../src/forge-narrative-v156.js';
 import { FORGE_CHECKPOINT_STORAGE_KEY_V157, FORGE_CHECKPOINT_LIMITS_V157, ForgePlaytestCheckpointStoreV157,
   encodeForgeCheckpointGraphV157, decodeForgeCheckpointGraphV157, captureForgePlaytestCheckpointV157,
@@ -178,6 +178,32 @@ test('different actual equipment refuses before replacing the fresh loadout', as
   assert.equal(next.engine.equipmentActions, before);
 });
 
+test('an authored default vehicle resumes without refill while campaign vehicle selections remain isolated', async t => {
+  const input = project(); input.rooms[0].cells.push({ id: 'authored-vehicle', x: 24, y: 15, type: 'vehicle', layer: 'gameplay' });
+  const [vehicleA, vehicleB] = VEHICLES.slice(0, 2); assert.notEqual(vehicleA.id, vehicleB.id);
+  const first = mission(t, input, { vehicle: vehicleA }), original = first.engine;
+  // Production isolateForgeMissionOptionsV136 deliberately ignores selected
+  // campaign vehicles. Do not manufacture an A→B Forge path that does not exist.
+  assert.equal(original.selectedVehicleRuntime.id, 'vehicle-runtime-m577');
+  Object.assign(original.vehicle, { hull: 31, fuel: 12, turretAmmo: 3, turretReserve: 4 });
+  const raw = await captureForgePlaytestCheckpointV157(original); original.stop();
+  const changed = mission(t, input, { vehicle: vehicleB }), e = changed.engine;
+  const owner = e.forgeSessionV141, physical = e.vehicle, selected = e.selectedVehicleRuntime, handling = e.vehicleHandling,
+    before = structuredClone(e.vehicle), player = structuredClone(e.player);
+  assert.equal(selected.id, original.selectedVehicleRuntime.id);
+  assert.deepEqual(selected, original.selectedVehicleRuntime);
+  const prepared = await prepareForgePlaytestCheckpointV157(e, raw, input);
+  assert.equal(e.forgeSessionV141, owner); assert.equal(e.vehicle, physical); assert.deepEqual(e.vehicle, before); assert.deepEqual(e.player, player);
+  applyForgePlaytestCheckpointV157(e, prepared);
+  assert.equal(e.vehicle.id, selected.id); assert.equal(e.selectedVehicleRuntime, selected); assert.equal(e.vehicleHandling, handling);
+  assert.equal(e.vehicle.hull, 31); assert.equal(e.vehicle.fuel, 12); assert.equal(e.vehicle.turretAmmo, 3); assert.equal(e.vehicle.turretReserve, 4);
+  e.stop(); const matching = mission(t, input, { vehicle: vehicleA }), next = matching.engine;
+  applyForgePlaytestCheckpointV157(next, await prepareForgePlaytestCheckpointV157(next, raw, input));
+  assert.equal(next.vehicle.id, original.selectedVehicleRuntime.id); assert.equal(next.selectedVehicleRuntime.id, original.selectedVehicleRuntime.id);
+  assert.equal(next.vehicle.hull, 31); assert.equal(next.vehicle.fuel, 12); assert.equal(next.vehicle.turretAmmo, 3); assert.equal(next.vehicle.turretReserve, 4);
+  assert.equal(next.vehicleHandling.family, handling.family);
+});
+
 test('airborne, unsupported, downed, narrative-open, busy deployment and finished tests refuse an explicit save', async t => {
   const { engine: e } = mission(t), first = e.forgeSessionV141;
   for (const mutate of [() => { e.player.grounded = false; }, () => { e.player.y -= 100; }, () => { e.player.downed = true; },
@@ -317,7 +343,7 @@ class Node extends EventTarget {
   constructor(tag) { super(); this.tag = tag; this.children = []; this.dataset = {}; this.attributes = {}; }
   append(node) { this.children.push(node); } setAttribute(key, value) { this.attributes[key] = value; }
   remove() { this.removed = true; }
-  querySelector(selector) { const action = selector.match(/="([^"]+)"/)?.[1]; return this.children.flatMap(node => [node, ...node.children]).find(node => node.dataset.forgeCheckpointV157 === action); }
+  querySelector(selector) { const action = selector.match(/="([^"]+)"/)?.[1]; const all = node => node.children.flatMap(child => [child, ...all(child)]); return all(this).find(node => node.dataset.forgeCheckpointV157 === action); }
 }
 test('checkpoint UI keeps routing in its callback, announces refusals and disables unavailable actions', async t => {
   const root = new Node('main'), doc = { createElement: tag => new Node(tag) }, local = storage(), { engine: e } = mission(t);
@@ -332,4 +358,36 @@ test('checkpoint UI keeps routing in its callback, announces refusals and disabl
   assert.equal(routed[0].checkpoint.project.kind, 'mission'); assert.ok(routed[0].raw);
   local.setItem(store.key, '{broken'); assert.equal(await ui.run('resume'), false); assert.equal(routed.length, 1);
   assert.equal(messages.at(-1).error, true); assert.equal(await ui.run('clear'), true); assert.equal(store.raw(), null);
+});
+
+test('UI ticks never reread the checkpoint; explicit actions, failures and matching cross-tab storage changes refresh presence', async t => {
+  const root = new Node('main'), eventTarget = new EventTarget(), doc = { defaultView: eventTarget, createElement: tag => new Node(tag) },
+    local = storage(), { engine: e } = mission(t), store = new ForgePlaytestCheckpointStoreV157(local);
+  // The interval remains responsible for engine/visibility changes, but never
+  // copies the potentially 4 MiB checkpoint during ordinary frames or menus.
+  local.setItem(store.key, 'x'.repeat(FORGE_CHECKPOINT_LIMITS_V157.bytes));
+  let reads = 0, tick; const raw = store.raw.bind(store), previousInterval = globalThis.setInterval;
+  store.raw = () => { reads++; return raw(); };
+  globalThis.setInterval = callback => { tick = callback; return 0; };
+  let visible = false;
+  const ui = mountForgePlaytestCheckpointUIV157({ document: doc, roots: [root], store, getProject: () => project(), getEngine: () => e,
+    isVisible: () => visible, resumePlaytest: request => store.resume(e, request.project) });
+  globalThis.setInterval = previousInterval; t.after(() => ui.destroy());
+  const resume = root.children[0].querySelector('[data-forge-checkpoint-v157="resume"]');
+  assert.equal(reads, 1); assert.equal(resume.disabled, false);
+  for (let index = 0; index < 20; index++) tick();
+  visible = true; ui.refresh(); for (let index = 0; index < 20; index++) tick();
+  assert.equal(reads, 1, 'neither hidden nor visible ticks copy the large record');
+  assert.equal(await ui.run('clear'), true); assert.equal(resume.disabled, true);
+  const clearedReads = reads; for (let index = 0; index < 10; index++) tick(); assert.equal(reads, clearedReads);
+  assert.equal(await ui.run('save'), true); assert.equal(resume.disabled, false);
+  const savedReads = reads; for (let index = 0; index < 10; index++) tick(); assert.equal(reads, savedReads);
+  local.removeItem(store.key); assert.equal(await ui.run('resume'), false);
+  assert.equal(resume.disabled, true, 'a failed action also notices an externally removed record');
+  const failedReads = reads;
+  const signal = key => { const event = new Event('storage'); Object.defineProperty(event, 'key', { value: key }); eventTarget.dispatchEvent(event); };
+  local.setItem(store.key, 'external-record'); signal('unrelated-campaign-key'); assert.equal(reads, failedReads);
+  signal(store.key); assert.equal(reads, failedReads + 1); assert.equal(resume.disabled, false);
+  local.removeItem(store.key); signal(null); assert.equal(resume.disabled, true);
+  ui.destroy(); const destroyedReads = reads; signal(store.key); tick(); assert.equal(reads, destroyedReads);
 });

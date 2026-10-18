@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { resolve } from 'node:path';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { isPublicDistributionPathV86, verifyPublicReleaseV86 } from './verify-public-release-v86.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
 
 test('Forge repository tooling never becomes a built public path', () => {
@@ -40,4 +42,18 @@ test('V141 admits the reviewed Hudson PNG without opening its folder to addition
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
     assert.equal(filter(resolve(path)), false, path);
   }
+});
+
+test('V157 scans admitted Python tooling for private source metadata', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'atf-python-public-guard-'));
+  try {
+    await mkdir(resolve(root, 'scripts'));
+    // Synthetic metadata stays in a temporary tree, never in the release.
+    const path = 'scripts/verify-audit-workbook-v157.py';
+    await writeFile(resolve(root, path), '# source: ' + ['chatgpt', 'com'].join('.') + '/c/example\n');
+    await assert.rejects(verifyPublicReleaseV86(root), error => {
+      assert.ok(error.message.startsWith(`Private source metadata in distribution: ${path}`));
+      return true;
+    });
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

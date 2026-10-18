@@ -372,7 +372,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
-      if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|json|css|html|md|webmanifest)$/i.test(path)) {
+      if (ROOT_FILES.has(path) || path === 'src/vendor/supabase-LICENSE.txt' || /\.(?:js|mjs|py|json|css|html|md|webmanifest)$/i.test(path)) {
         const text = await readFile(join(directory, entry.name), 'utf8');
         assert.equal(isPublicDistributionTextV86(text), true, `Private source metadata in distribution: ${path}`);
       }

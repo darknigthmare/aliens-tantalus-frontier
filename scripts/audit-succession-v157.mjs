@@ -38,7 +38,8 @@ export function verifyAuditSuccessionV157(previous, current, readSource = readRe
   assert.ok(after && sortedKeys(after).length >= sortedKeys(before).length);
   for (const path of sortedKeys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited source omitted: ' + path);
   for (const [path, hash] of Object.entries(after)) {
-    assert.match(path, /^src\/[a-zA-Z0-9._-]+\.js$/);
+    assert.ok(/^src\/[a-zA-Z0-9._-]+\.js$/.test(path) || path === 'src/forge-editor-v130.css',
+      'Source path outside the reviewed JavaScript and checkpoint stylesheet scope: ' + path);
     assert.ok(validHash(hash), 'Invalid current SHA: ' + path);
     assert.equal(sha(readSource(path)), hash, 'Current source changed: ' + path);
   }

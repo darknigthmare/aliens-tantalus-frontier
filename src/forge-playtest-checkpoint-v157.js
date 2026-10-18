@@ -35,6 +35,10 @@ const actorIdentity = actor => pick(actor, ['w', 'h', 'maxHealth', 'maxArmor', '
 const loadout = engine => ({ kind: engine.forgeSessionV141?.kind, coopEnabled: Boolean(engine.coopEnabled),
   actors: [...party(engine)].map(([actor, id]) => [id, actorIdentity(actor)]),
   weapon: pick(engine.weaponRuntime || {}, ['id', 'magazine', 'damage']),
+  // The room ledger restores the physical vehicle. Its frozen selection owns
+  // handling, seating and cargo rules outside that room graph, so bind both.
+  vehicle: engine.selectedVehicleRuntime || null,
+  vehicleHandling: engine.vehicleHandling || null,
   equipment: [...(engine.equipmentActions || new Map())].map(([id, item]) => [id, item.maxCharges ?? item.charges ?? null]) });
 
 /** JSON-safe graph, including cycles. Operators use a distinct tag rather than

@@ -7,7 +7,7 @@ import { XENO_TRIALS_SEQUENCES_V155 as historical, XENO_TRIALS_ADDED_SEQUENCES_V
  createXenoTrialsTauntV156 as taunt,advanceXenoTrialsTauntV156 as advanceTaunt,
  createXenoTrialsExitV157 as spatialExit,getXenoTrialsExitViewV157 as exitView,XENO_TRIALS_EXIT_V157 as EXIT,
  createXenoTrialsOutroV155 as outro,advanceXenoTrialsOutroV155 as advance,skipXenoTrialsOutroV155 as skip } from '../src/xeno-trials-sequences-v155.js';
-import { XENO_TRIALS_RIGS_V154 as rigs,getXenoTrialsRigMeshV154 as mesh,drawXenoTrialsRigV154 as draw,xenoTrialsTriangleAreaV154 as area,sampleXenoTrialsExitPoseV157 as exitPose } from '../src/xeno-trials-rig-v154.js';
+import { XENO_TRIALS_RIGS_V154 as rigs,getXenoTrialsRigMeshV154 as mesh,drawXenoTrialsRigV154 as draw,xenoTrialsTriangleAreaV154 as area,sampleXenoTrialsExitPoseV157 as exitPose,projectXenoTrialsMeshPointV157 as projectMeshPoint } from '../src/xeno-trials-rig-v154.js';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { createXenoTrialsMatchV96 as create,stepXenoTrialsMatchV96 as step,nextXenoTrialsRoundV96 as next } from '../src/xeno-trials-engine-v96.js';
 import { createXenoTrialsRuntimeV96 as runtime } from '../src/xeno-trials-runtime-v96.js';
@@ -236,7 +236,7 @@ for(const r of rigs)test(r.fighterId+': V157 both exits cover winner, loser and 
   const startPose=exitPose(r,start,physicalMetrics(r.fighterId));assert.ok(startPose);assert.equal(startPose.active,false);
   startPose.vertices.forEach((p,i)=>p.forEach((v,axis)=>close(v,mesh(r).vertices[i].source[axis])));
   const finished=exitView(m,f,{...e,phase:'complete',elapsedMs:e.durationMs});assert.equal(finished.visible,false);
-  const screenX=finished.x*camera.zoom+camera.translateX;assert.ok(finished.direction<0?screenX<=-299:screenX>=1299);
+  const screenX=finished.x*camera.zoom+camera.translateX;assert.ok(finished.direction<0?screenX<=-finished.offscreenMargin+1e-6:screenX>=1000+finished.offscreenMargin-1e-6);
   const p=e.participants.find(p=>p.side===side),met=physicalMetrics(r.fighterId);
   for(let i=0;i<=160;i++){
    const sample={...start,distance:i/160*start.stride*2},pose=exitPose(r,sample,met);assert.ok(pose,`${r.id} distance ${sample.distance}`);
@@ -264,7 +264,7 @@ test('V157 admission rejects incomplete, foreign, skipped and reduced terminal o
  assert.equal(spatialExit(m,t,camera,true),null);assert.equal(spatialExit(m,t,{...camera,zoom:0}),null);
  assert.equal(exitView(m,{...f},e),null);assert.equal(exitView(m,f,{...e,terminalTick:e.terminalTick+1}),null);
  assert.equal(exitView(m,f,e,true).visible,false);assert.equal(exitView(m,f,{...e,reducedMotion:true},false).visible,false);
- assert.equal(spatialExit(m,t,{zoom:.08,translateX:0}),null);assert.equal(exitPose({...rigs[1]},exitView(m,f,e),physicalMetrics(HUMAN)),null);
+ assert.equal(spatialExit(m,t,{zoom:.08,translateX:460}),null);assert.equal(exitPose({...rigs[1]},exitView(m,f,e),physicalMetrics(HUMAN)),null);
  assert.deepEqual(m,before);
 });
 test('native V157 exit moves only render coordinates, freezes its camera and completes offscreen without result replay',async()=>{
@@ -298,4 +298,106 @@ test('native V157 pause, visibility loss, skip, live reduced motion and stop ret
   const ended=h.r.getState();h.key('KeyJ');h.r.setInput('right',true);h.frames(20);assert.deepEqual(h.r.getState(),ended);
   h.r.stop();assert.equal(h.r.getState().exitV157,null);assert.deepEqual(h.r.getState().exitViewsV157,[]);
  }
+});
+
+// Regression source: real CPU browser receipt83c5c40, seed155, terminalTick1885.
+// This is an explicitly reconstructed terminal fixture, not a newly played CPU
+// outcome. Its immutable y/vy came from the archived native browser capture.
+const airborneCpuFixtureV157=()=>{
+ const m=create({playerId:HUMAN,opponentId:'prowler',seed:155,introSeconds:0});
+ m.phase='match-over';m.tick=1885;m.result={completed:true,winner:'opponent',reason:'ko'};
+ Object.assign(m.fighters[0],{x:295,y:0,vy:0,hp:0,facing:1});
+ Object.assign(m.fighters[1],{x:427.5,y:36.06697222222224,vy:-515.833333333333,hp:1,facing:-1});
+ return m;
+};
+test('V157 exact native CPU airborne regression lands the rendered ground through the real affine and camera',async()=>{
+ const S=await import('../src/xeno-trials-sequences-v155.js'),m=airborneCpuFixtureV157(),before=copy(m),f=m.fighters[1],r=rigs[0];
+ let landing=S.createXenoTrialsLandingV157?.(m);
+ if(landing)for(let i=0;i<6;i++)landing=advance(landing,100);
+ const view=S.getXenoTrialsLandingViewV157?.(m,f,landing),ground=view?.ground??450-f.y,met=physicalMetrics(f.id);
+ const native=exitPose(r,{rigId:r.id,distance:0,stride:20,footLift:2},met);
+ // Canonical alpha-ground boundary, transformed by the same draw function as
+ // the textured mesh. Native foot labels are ankle/claw landmarks above this
+ // painted lower boundary; pretending each label itself is y450 would be false.
+ const boundary=projectMeshPoint(r,native,[1236,met.bottom*r.sourceHeight]);assert.ok(boundary);
+ const frame={...native,active:true,contacts:{...native.contacts,paintedGroundBoundaryV157:boundary}};
+ const receipt=draw(new Proxy({},{get:()=>()=>{}}),r,image(r),frame,met,f.x,ground,f.facing);assert.ok(receipt);
+ const camera={zoom:1.3027028569139927,floor:453.6},translateY=camera.floor-450*camera.zoom;
+ close(receipt.contacts.paintedGroundBoundaryV157[1]*camera.zoom+translateY,camera.floor);
+ assert.equal(landing.phase,'complete');assert.deepEqual(m,before);
+});
+
+test('V157 all four admitted airborne plates settle continuously within600ms and use only a V157 owner for a two-air exit',async()=>{
+ const S=await import('../src/xeno-trials-sequences-v155.js');
+ for(const r of rigs)for(const side of ['player','opponent'])for(const winner of ['player','opponent','draw']){
+  const m=create({playerId:side==='player'?r.fighterId:HUMAN,opponentId:side==='opponent'?r.fighterId:'prowler',introSeconds:0});
+  m.phase='match-over';m.result={completed:true,winner,reason:winner==='draw'?'time':'ko'};
+  m.fighters.forEach((f,index)=>Object.assign(f,{x:index?700:300,y:index?140:36.06697222222224,vy:index?220:-515.833333333333}));
+  const before=copy(m),historical=outro(m);assert.equal(historical,null);
+  if(winner==='draw')assert.equal(terminal(m,'draw'),null);
+  let state=S.createXenoTrialsLandingV157(m);assert.equal(state.participants.length,2);assert.ok(state.durationMs<=600);
+  const previous=m.fighters.map(f=>S.getXenoTrialsLandingViewV157(m,f,state));
+  m.fighters.forEach((f,index)=>{close(previous[index].renderY,f.y);close(previous[index].ground,450-f.y);});
+  for(let tick=0;tick<6;tick++){
+   state=advance(state,100);
+   m.fighters.forEach((f,index)=>{const view=S.getXenoTrialsLandingViewV157(m,f,state);assert.ok(view.renderY>=0&&view.renderY<=previous[index].renderY);previous[index]=view;});
+  }
+  assert.equal(state.phase,'complete');assert.ok(previous.every(v=>v.renderY===0&&v.ground===450));
+  const exit=spatialExit(m,null,{zoom:1.5,translateX:-250},false,state);assert.equal(exit.participants.length,2);
+  for(const f of m.fighters){const view=exitView(m,f,exit);close(view.x,f.x);close(view.ground,450);assert.equal(view.distance,0);}
+  assert.equal(spatialExit(m,null,{zoom:1.5,translateX:-250},false,{...state,terminalTick:state.terminalTick+1}),null);
+  assert.deepEqual(m,before);
+ }
+});
+test('V157 lowest painted sole boundaries stay at or above the floor under real triangle affines, both facings and camera zooms',()=>{
+ const points=[[[323,988],[879,959],[1236,1011],[1426,1001]],[[365,1412],[763,1452]],[[355,1476],[750,1446]],[[404,1462],[810,1486]]];
+ for(const [index,r] of rigs.entries())for(const facing of [-1,1]){
+  const met=physicalMetrics(r.fighterId),stride=index?40:20;
+  for(let d=0;d<=stride*2;d+=stride/40){
+   const sampled=exitPose(r,{rigId:r.id,distance:d,stride,footLift:index?3.2:2},met),contacts={...sampled.contacts};
+   for(const [n,source] of points[index].entries()){contacts['paintedSole'+n]=projectMeshPoint(r,sampled,source);assert.ok(contacts['paintedSole'+n]);}
+   const receipt=draw(new Proxy({},{get:()=>()=>{}}),r,image(r),{...sampled,active:true,contacts},met,500,450,facing);assert.ok(receipt);
+   for(const [name,p] of Object.entries(receipt.contacts).filter(([name])=>name.startsWith('paintedSole'))){
+    assert.ok(p[1]<=450+1e-6,`${r.id}/${name}: sole${p[1]} below floor`);
+    for(const zoom of [.8,1.3027028569139927,1.65])assert.ok(p[1]*zoom+(453.6-450*zoom)<=453.6+1e-6);
+   }
+  }
+ }
+});
+test('native CPU aerial verdict starts the V157 render landing immediately, retains historical participants and later exits both rigs',async()=>{
+ const h=host({config:{playerId:HUMAN,opponentId:'prowler',seed:20,difficulty:'hard',roundSeconds:30,rulesV119:{initialHp:1}}});
+ await h.start();h.terminal();const first=h.r.getState(),airborne=first.fighters.filter(f=>f.y>0);assert.equal(airborne.length,1);
+ assert.equal(first.landingV157.phase,'playing');assert.equal(first.landingV157.elapsedMs,0);
+ const f=airborne[0],initial=first.landingViewsV157.find(v=>v.side===f.side);close(initial.renderY,f.y);close(initial.ground,450-f.y);
+ assert.equal(first.outroV155.participants.some(p=>p.side===f.side),false);const before=physical(first);
+ h.frames(6);let s=h.r.getState();assert.equal(s.landingV157.phase,'complete');assert.equal(s.landingViewsV157[0].renderY,0);assert.deepEqual(physical(s),before);
+ for(let i=0;i<150&&!h.r.getState().exitV157;i++)h.frames();s=h.r.getState();assert.equal(s.exitV157.participants.length,2);assert.equal(h.results.length,1);
+ h.frames(160);assert.equal(h.queue.size,0);assert.equal(h.r.getState().rigViewsV154.length,0);assert.deepEqual(physical(h.r.getState()),before);h.r.stop();
+});
+test('native landing pause, hidden window, skip, live reduced motion and stop freeze or finish only V157 render state',async()=>{
+ for(const action of ['pause','hidden','skip','reduced','stop']){
+  const h=host({config:{playerId:HUMAN,opponentId:'prowler',seed:20,difficulty:'hard',roundSeconds:30,rulesV119:{initialHp:1}}});
+  await h.start();h.terminal();assert.equal(h.r.getState().landingV157.phase,'playing');const before=physical(h.r.getState());h.frames();
+  if(action==='pause'||action==='hidden'){
+   if(action==='pause')assert.equal(h.r.pause(),true);else{h.document.hidden=true;h.frames();}
+   const paused=h.r.getState();assert.equal(paused.paused,true);h.frames(20);assert.deepEqual(h.r.getState(),paused);
+   h.document.hidden=false;assert.equal(h.r.resume(),true);h.frames(180);
+  }else if(action==='skip'){assert.equal(h.r.skipSequence(),true);assert.equal(h.r.getState().landingV157.skipped,true);assert.ok(h.r.getState().landingViewsV157.every(v=>v.renderY===0));}
+  else if(action==='reduced'){h.window.matchMedia=()=>({matches:true});h.frames();assert.equal(h.r.getState().landingV157.reducedMotion,true);h.window.matchMedia=()=>({matches:false});assert.ok(h.r.getState().landingViewsV157.every(v=>v.renderY===0));}
+  else h.r.stop();
+  assert.deepEqual(physical(h.r.getState()),before);assert.equal(h.results.length,1);assert.equal(h.queue.size,0);assert.equal(h.r.resume(),false);
+  h.r.stop();assert.equal(h.r.getState().landingV157,null);assert.deepEqual(h.r.getState().landingViewsV157,[]);
+ }
+});
+test('accepted jump commands can produce two real airborne CPU finalists and the runtime lands then exits without a historical terminal',async()=>{
+ const h=host({config:{playerId:HUMAN,opponentId:'prowler',seed:4,difficulty:'hard',roundSeconds:30,rulesV119:{initialHp:1}}});
+ await h.start();
+ for(let i=0;i<3000&&h.r.getState().phase!=='match-over';i++){
+  const s=h.r.getState();h.r.setInput('jump',s.fighters[0].y===0);h.frames();
+ }
+ const first=h.r.getState();assert.equal(first.phase,'match-over');assert.ok(first.fighters.every(f=>f.y>0));
+ assert.equal(first.outroV155,null);assert.equal(first.terminalV156,null);assert.equal(first.landingV157.participants.length,2);const before=physical(first);
+ h.frames(6);const after=h.r.getState();assert.equal(after.landingV157.phase,'complete');assert.equal(after.exitV157.phase,'playing');assert.equal(after.exitV157.participants.length,2);
+ assert.equal(after.outroV155,null);assert.equal(after.terminalV156,null);assert.deepEqual(physical(after),before);assert.equal(h.results.length,1);
+ h.frames(160);assert.equal(h.queue.size,0);assert.ok(h.r.getState().exitViewsV157.every(v=>!v.visible));assert.deepEqual(physical(h.r.getState()),before);h.r.stop();
 });

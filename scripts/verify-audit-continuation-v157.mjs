@@ -10,7 +10,8 @@ import { AUDIT_PREDECESSOR_DOCUMENTS_V157, verifyAuditSuccessionV157 } from './a
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { XENO_TRIALS_FIGHTERS_V96 as roster } from '../src/xeno-trials-data-v96.js';
 import { XENO_TRIALS_RIGS_V154 as rigs } from '../src/xeno-trials-rig-v154.js';
-import { XENO_TRIALS_SEQUENCES_V156 as sequences, XENO_TRIALS_EXIT_V157 as spatialExit } from '../src/xeno-trials-sequences-v155.js';
+import { XENO_TRIALS_SEQUENCES_V156 as sequences, XENO_TRIALS_EXIT_V157 as spatialExit,
+  XENO_TRIALS_LANDING_V157 as landing } from '../src/xeno-trials-sequences-v155.js';
 import { SPECIAL_OPERATIONS_V131 as operations, SPECIAL_OPERATION_COUNTS_V131 as operationCounts } from '../src/special-operations-v131.js';
 import { HUB_ANNEX_NPC_DUTIES_V141 as baseDuties, HUB_ANNEX_NPC_ROTATIONS_V157 as rotations,
   HUB_ANNEX_NPC_DEFERRED_V157 as deferred } from '../src/hub-annex-npc-life-v141.js';
@@ -18,6 +19,9 @@ import { HUB_ANNEXES_V137 as annexes } from '../src/hub-annex-registry-v137.js';
 import { FORGE_NARRATIVE_LIMITS_V157 as narrativeExtensions } from '../src/forge-narrative-v156.js';
 import { FORGE_CHECKPOINT_LIMITS_V157 as checkpointLimits,
   FORGE_CHECKPOINT_STORAGE_KEY_V157 as checkpointKey } from '../src/forge-playtest-checkpoint-v157.js';
+import { EXCEL_SOURCE_V61 as excelMetadata, EXCEL_WEAPON_BRIDGE_V61 as excelWeapons,
+  EXCEL_VEHICLE_BRIDGE_V61 as excelVehicles } from '../src/excel-content-bridge-v61.js';
+import { CATALOG_COUNTS_V62 as gameCatalogueCounts } from '../src/catalog-runtime-v62.js';
 
 const prefix = 'docs/forge/xeno-trials/';
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -71,6 +75,20 @@ test('V157 retains 40 historical sequences and 200 keys while declaring spatial 
   assert.equal(current.runtimeContracts.spatialExit.camera, 'frozen-terminal-camera');
   assert.equal(spatialExit.canonExact, false);
   assert.equal(spatialExit.fullLocomotion, false);
+  const renderedLanding = current.runtimeContracts.spatialExit.landing;
+  assert.deepEqual(renderedLanding.configuration, landing);
+  assert.equal(landing.minMs, 180);
+  assert.equal(landing.maxMs, 600);
+  assert.equal(landing.canonExact, false);
+  assert.equal(renderedLanding.scope, 'four-admitted-native-rigs-only');
+  assert.equal(renderedLanding.renderedY, 'terminal-y-to-zero-monotone');
+  assert.deepEqual(renderedLanding.capturedInputs, ['terminal-y', 'terminal-vy']);
+  assert.equal(renderedLanding.startVy, 'archived-only');
+  assert.equal(renderedLanding.physicalCoordinatesChanged, false);
+  assert.equal(renderedLanding.physicalLanding, false);
+  assert.equal(renderedLanding.historicalGroundedParticipantsUnchanged, true);
+  assert.equal(renderedLanding.twoAirborne, 'dedicated-v157-match-and-terminal-tick');
+  assert.ok(!current.runtimeContracts.spatialExit.fallbacks.includes('unrigged-or-airborne-participant'));
 });
 
 test('current annex and Forge capabilities match their versioned exports without rewriting historical contracts', () => {
@@ -98,6 +116,13 @@ test('current annex and Forge capabilities match their versioned exports without
   assert.equal(checkpoint.storageKey, checkpointKey);
   assert.equal(checkpoint.scope, 'forge-local-playtest');
   assert.equal(checkpoint.explicitCommands, true);
+  assert.equal(checkpoint.projectIdentity, 'strict-project-real-loadout-and-starting-vehicle');
+  assert.equal(checkpoint.startingVehicleFingerprint, true);
+  assert.equal(checkpoint.applicationVehicleNormalization, true);
+  assert.equal(checkpoint.applicationVehicleSwapReproduced, false);
+  assert.deepEqual(checkpoint.commandsAccessibleIn, ['normal-layout', 'fullscreen-16:9', 'mobile-viewport']);
+  assert.deepEqual(checkpoint.presenceCache, { pollReadsPayload: false,
+    refreshAfter: ['mount', 'checkpoint-action', 'relevant-storage-event'], destroyRemovesListener: true });
   assert.equal(checkpoint.cloud, false);
   assert.equal(checkpoint.campaignSave, false);
 });
@@ -117,6 +142,7 @@ test('the succession bridge declares every changed inherited module and verifies
   assert.equal(result.inherited, 18);
   assert.ok(result.changed > 0);
   assert.equal(result.current, Object.keys(current.runtimeSourceSha256).length);
+  assert.ok(Object.hasOwn(current.runtimeSourceSha256, 'src/forge-editor-v130.css'));
   const expectedRows = [...current.runtimeSuccession.transitions, ...current.runtimeSuccession.addedSources]
     .map(row => [row.path, row.previousSha256 ?? 'Non épinglé en V156', row.currentSha256, row.reason, row.verifiers.join(' ; ')]);
   assert.deepEqual(current.tables['11_Succession'].rows, expectedRows);
@@ -136,7 +162,8 @@ test('the succession bridge rejects missing, duplicate and misleading old/new tr
     c => { c.runtimeSuccession.transitions[0].currentSha256 = '0'.repeat(64); },
     c => { c.runtimeSuccession.transitions[0].reason = 'mise à jour'; },
     c => { c.runtimeSuccession.transitions[0].verifiers = []; },
-    c => { delete c.runtimeSourceSha256[first.path]; }
+    c => { delete c.runtimeSourceSha256[first.path]; },
+    c => { c.runtimeSourceSha256['src/unreviewed.css'] = '0'.repeat(64); }
   ]) {
     const bad = clone(current);
     change(bad);
@@ -148,6 +175,9 @@ test('the succession bridge rejects changed runtime bytes and changed immutable 
   const module = Object.keys(current.runtimeSourceSha256)[0];
   assert.throws(() => verifyAuditSuccessionV157(previous, current,
     path => path === module ? Buffer.concat([read(path), Buffer.from('\n// unreviewed mutation')]) : read(path)));
+  const stylesheet = 'src/forge-editor-v130.css';
+  assert.throws(() => verifyAuditSuccessionV157(previous, current,
+    path => path === stylesheet ? Buffer.concat([read(path), Buffer.from('\n/* unreviewed overlay */')]) : read(path)));
   const historical = Object.keys(AUDIT_PREDECESSOR_DOCUMENTS_V157)[0];
   assert.throws(() => verifyAuditSuccessionV157(previous, current,
     path => path === historical ? Buffer.concat([read(path), Buffer.from('\n')]) : read(path)));
@@ -183,11 +213,20 @@ test('V157 tables and notes distinguish implemented scope, pending verification 
   assert.match(current.limitations.join(' '), /185/);
   assert.match(current.limitations.join(' '), /cloud/i);
   assert.match(current.limitations.join(' '), /absent/i);
+  const availability = current.runtimeContracts.sourceAvailability;
+  assert.equal(availability.encyclopediaRawWorkbookRecovered, false);
+  assert.deepEqual(availability.excelMetadata, excelMetadata);
+  assert.equal(excelMetadata.globalEntities, 2363);
+  assert.equal(excelMetadata.localSource, null);
+  assert.deepEqual(availability.excelBridgeLinks, { weapons: excelWeapons.length, vehicles: excelVehicles.length });
+  assert.deepEqual(availability.gameCatalogueCounts, gameCatalogueCounts);
   const notes = bytes('V157-CONTINUATION.md').toString('utf8');
   assert.match(notes, /prépublication/i);
   assert.match(notes, /V67/);
   assert.match(notes, /21/);
   assert.match(notes, /1:1/);
+  assert.match(notes, /métadonnées/i);
+  assert.match(notes, /1 329/);
   assert.doesNotMatch(notes, /CI verte|CI réussie|tout est terminé|21 campagnes finies/i);
 });
 

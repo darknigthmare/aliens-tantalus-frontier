@@ -8,12 +8,15 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
   if (!doc || !store || typeof getProject !== 'function' || typeof getEngine !== 'function'
     || typeof resumePlaytest !== 'function') return null;
   let busy = false, dead = false, message = 'Un checkpoint local de playtest. Le plan et la campagne gardent leurs sauvegardes séparées.';
-  let error = false;
+  let error = false, present = false;
   const sections = [], removers = [];
+  const refreshPresence = () => {
+    if (dead) return;
+    try { present = store.raw() !== null; } catch { present = false; /* Actions report storage failures explicitly. */ }
+  };
+  refreshPresence();
   const update = () => {
     if (dead) return;
-    let present = false;
-    try { present = store.raw() !== null; } catch { /* Action reports the storage error explicitly. */ }
     const engine = getEngine(), active = Boolean(engine?.running && engine.forgeSessionV141);
     for (const { root, section, status } of sections) {
       section.hidden = !isVisible(root);
@@ -47,13 +50,18 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
       } else return false;
       return true;
     } catch (cause) { publish(cause?.message || 'Action de checkpoint impossible.', true); return false; }
-    finally { busy = false; update(); }
+    finally { refreshPresence(); busy = false; update(); }
   };
   for (const root of roots.filter(Boolean)) {
+    const runtime = ['play', 'hub'].includes(root.dataset?.panel);
     const section = doc.createElement('section');
-    section.className = 'panel forge-checkpoint-v157';
+    section.className = `panel forge-checkpoint-v157${runtime ? ' forge-checkpoint-runtime-v157' : ''}`;
     section.setAttribute('aria-label', 'Checkpoint local du playtest Forge');
-    const heading = doc.createElement('h3'); heading.textContent = 'CHECKPOINT DU PLAYTEST'; section.append(heading);
+    const details = doc.createElement('details'); details.open = !runtime;
+    const summary = doc.createElement('summary'); summary.className = 'button';
+    summary.textContent = 'Checkpoint du playtest'; summary.setAttribute('data-forge-checkpoint-toggle-v157', '');
+    details.append(summary);
+    const controls = doc.createElement('div'); controls.className = 'forge-checkpoint-controls-v157';
     const actions = doc.createElement('div'); actions.className = 'button-row';
     for (const [action, label] of [['save', 'Sauvegarder le playtest'], ['resume', 'Reprendre le playtest'], ['clear', 'Effacer le checkpoint']]) {
       const button = doc.createElement('button'); button.type = 'button'; button.className = 'button'; button.textContent = label;
@@ -62,13 +70,33 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
       button.addEventListener('click', listener); removers.push(() => button.removeEventListener('click', listener));
       actions.append(button);
     }
-    section.append(actions);
+    controls.append(actions);
     const note = doc.createElement('p');
     note.textContent = 'Local à cet appareil · un emplacement · même plan et même équipement. Sauvegardez au sol, récit fermé, après les rechargements, déploiements et transits. Aucun transfert cloud.';
-    section.append(note);
-    const status = doc.createElement('p'); status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite'); section.append(status);
+    controls.append(note);
+    const status = doc.createElement('p'); status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
+    controls.append(status); details.append(controls); section.append(details);
+    const toggle = () => {
+      if (details.open && runtime) { const engine = getEngine(); engine?.clearGameplayInput?.(); engine?.keys?.clear(); }
+    };
+    const keydown = event => {
+      // Preserve native disclosure/button/Tab behavior while focused commands
+      // cannot leak movement, fire or E to the canvas behind the toolbar.
+      event.stopPropagation();
+      if (event.key === 'Escape' && details.open) { event.preventDefault(); details.open = false; summary.focus?.({ preventScroll: true }); }
+    };
+    const keyup = event => event.stopPropagation();
+    details.addEventListener('toggle', toggle); section.addEventListener('keydown', keydown); section.addEventListener('keyup', keyup);
+    removers.push(() => details.removeEventListener('toggle', toggle), () => section.removeEventListener('keydown', keydown), () => section.removeEventListener('keyup', keyup));
     root.append(section); sections.push({ root, section, status });
   }
+  const storageTarget = doc.defaultView || globalThis;
+  const storageChanged = event => {
+    if (event.key !== null && event.key !== store.key) return;
+    refreshPresence(); update();
+  };
+  storageTarget.addEventListener?.('storage', storageChanged);
+  removers.push(() => storageTarget.removeEventListener?.('storage', storageChanged));
   update();
   const timer = globalThis.setInterval(update, 500);
   return { refresh: update, run, destroy() { dead = true; globalThis.clearInterval(timer); removers.forEach(remove => remove()); sections.forEach(({ section }) => section.remove()); } };
