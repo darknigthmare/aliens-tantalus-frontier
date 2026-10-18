@@ -2034,6 +2034,9 @@ export class GameEngine {
     this.drawVehicle(ctx);
     this.drawWeaponPickup(ctx);
     this.drawToolPickup(ctx);
+    // Optional authored people share the native world transform/tint, even
+    // when the player silhouette is hidden inside a vehicle.
+    this.drawForgeNpcsV158?.(ctx);
     if (!this.player.inVehicle) this.drawActor(ctx, this.player);
     if (this.coopEnabled && !this.coop.inVehicle) this.drawActor(ctx, this.coop);
     for (const enemy of visibleEnemies) this.drawEnemy(ctx, enemy);

@@ -120,10 +120,27 @@ for (const file of [
   "verify-hub-annex-service-v157.mjs",
   "qa-hub-annex-service-v157.mjs"
 ]) SCRIPT_FILES.add(file);
+for (const file of [
+  'audit-succession-v158.mjs',
+  'generate-audit-continuation-v158.py',
+  'verify-audit-continuation-v158.mjs',
+  'verify-audit-workbook-v158.py',
+  'verify-black-cocoon-presentation-v158.mjs',
+  'verify-npc-circulation-v158.mjs',
+  'verify-forge-npcs-v158.mjs',
+  'verify-xeno-trials-capture-reception-v158.mjs',
+  'qa-black-cocoon-browser-v158.mjs',
+  'qa-npc-circulation-v158.py',
+  'qa-forge-npcs-v158.py',
+  'qa-xeno-trials-capture-reception-v158.py',
+]) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V158-CONTINUATION.md',
+  'docs/forge/xeno-trials/progress-v158.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V158.xlsx',
   'docs/forge/xeno-trials/V157-CONTINUATION.md',
   'docs/forge/xeno-trials/progress-v157.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V157.xlsx',

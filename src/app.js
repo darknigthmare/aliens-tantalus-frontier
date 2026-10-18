@@ -61,6 +61,7 @@ import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.
 import { withHubRoomParallaxV134 } from './hub-room-parallax-v134.js';
 import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
 import { withHubNpcLifeV136 } from './npc-life-v136.js';
+import { withHubNpcCirculationV158 } from './npc-circulation-v158.js';
 import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
 import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
 import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
@@ -253,7 +254,7 @@ const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameE
 const NativeHubGame = [
   withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
   withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
-  withHubNpcLifeV136, withHubCirculationV137, withHubRoomIdentityV137,
+  withHubNpcLifeV136, withHubNpcCirculationV158, withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
 const HubGame = withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame));

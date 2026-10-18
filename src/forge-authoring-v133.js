@@ -113,7 +113,7 @@ export function editSelectionV133(model, ids, command, value, { locked = new Set
       if (!TILE_TYPES.includes(value)) reject('Type inconnu.');
       const linked = cells.filter(c => c.type === 'door' && value !== 'door').map(c => c.id);
       if (linked.some(id => model.data.links.some(l => l.from.cellId === id || l.to.cellId === id))) reject('Déliez les sas avant de remplacer leur type.');
-      for (const c of cells) c.type = value;
+      for (const c of cells) { c.type = value; if (value !== 'npc') delete c.npc; if (!['npc', 'terminal'].includes(value)) delete c.narrative; }
     } else if (command === 'rotate') model.transform(ids, c => ({ x: bounds.x + bounds.h - 1 - (c.y - bounds.y), y: bounds.y + c.x - bounds.x }));
     else if (command === 'array') {
       if (!integer(value?.count, 1, 12) || !integer(value.dx, -128, 128) || !integer(value.dy, -72, 72) || !(value.dx || value.dy)) reject('Répétition : 1–12 copies, avec un décalage non nul.');

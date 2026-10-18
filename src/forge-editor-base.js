@@ -3,7 +3,7 @@ import { mountForgeUI } from './forge-ui-v130.js';
 import { forgeDecorationPlanV141, drawForgeDecorationPlanV141 } from './forge-decoration-v141.js';
 export { TILE_TYPES } from './forge-model-v130.js';
 
-const colors={floor:'#789486',platform:'#96b6a1',wall:'#425951',door:'#ecc677',vent:'#70a8b9',ladder:'#cb9e66',lift:'#b194ce',spawn:'#86efbb',objective:'#ffde7b',enemy:'#ed7983',vehicle:'#8fb6e1',terminal:'#69dacc',hazard:'#fa9d63'};
+const colors={floor:'#789486',platform:'#96b6a1',wall:'#425951',door:'#ecc677',vent:'#70a8b9',ladder:'#cb9e66',lift:'#b194ce',spawn:'#86efbb',objective:'#ffde7b',enemy:'#ed7983',vehicle:'#8fb6e1',terminal:'#69dacc',npc:'#c6bce8',hazard:'#fa9d63'};
 /** Canvas controller. A gesture is one transaction, never one history entry per pixel. */
 export class LevelEditor {
   constructor(canvas,onChange=()=>{}) {
@@ -164,7 +164,7 @@ export class LevelEditor {
       ctx.strokeStyle='#081510';ctx.lineWidth=Math.max(1,s*.04);
       if(cell.type==='ladder'){for(let k=1;k<4;k++){ctx.beginPath();ctx.moveTo(x+s*.22,y+s*k/4);ctx.lineTo(x+s*.78,y+s*k/4);ctx.stroke();}}
       else if(cell.type==='door'){ctx.strokeRect(x+s*.2,y+s*.12,s*.6,s*.78);ctx.beginPath();ctx.moveTo(x+s*.5,y+s*.12);ctx.lineTo(x+s*.5,y+s*.9);ctx.stroke();}
-      else if(s>=16){ctx.fillStyle='#081510';ctx.font=`bold ${Math.max(10,Math.min(19,s*.44))}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText({spawn:'S',objective:'O',enemy:'X',vehicle:'V',terminal:'T',hazard:'!',floor:'═',wall:'▥',vent:'≋',lift:'↕'}[cell.type]||'',x+s/2,y+s/2);}
+      else if(s>=16){ctx.fillStyle='#081510';ctx.font=`bold ${Math.max(10,Math.min(19,s*.44))}px monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText({spawn:'S',objective:'O',enemy:'X',vehicle:'V',terminal:'T',npc:'P',hazard:'!',floor:'═',wall:'▥',vent:'≋',lift:'↕'}[cell.type]||'',x+s/2,y+s/2);}
       ctx.globalAlpha=1;
       if(cell.locked){ctx.fillStyle='#fff';ctx.fillRect(x+s*.78,y+s*.1,Math.max(2,s*.12),Math.max(2,s*.12));}
       if(this.selection.has(cell.id)){ctx.strokeStyle='#fff3ba';ctx.lineWidth=2;ctx.strokeRect(x+1,y+1,s-2,s-2);}

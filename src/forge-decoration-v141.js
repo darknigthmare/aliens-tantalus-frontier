@@ -137,6 +137,7 @@ const authoredMission = engine => engine.editorMode && engine.forgeProjectV141?.
 function drawAuthoredShipWorld(ctx, engine) {
   engine.drawTraversal(ctx);
   engine.drawDepthFloorV116?.(ctx);
+  engine.drawForgeNpcsV158?.(ctx);
   for (const enemy of engine.enemies || []) if (enemy.alive) engine.drawEnemy(ctx, enemy);
   engine.drawPlayer(ctx);
   for (const projectile of engine.projectiles || []) {

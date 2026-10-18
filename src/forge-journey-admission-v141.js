@@ -30,7 +30,7 @@ export function inspectForgeJourneyV141(input) {
     if (project.kind === 'ship') {
       const compiled = compileShipProject({ schema: 2, kind: 'ship', size: room.size, tiles: nativeTiles(room) });
       const cells = room.cells.filter(cell => cell.type === 'vent' && !decorative(cell));
-      geometry.push(...compiled.vents.map((vent, index) => ({ ...vent, type: 'vent',
+      if (!geometry.some(shape => shape.type === 'vent')) geometry.push(...compiled.vents.map((vent, index) => ({ ...vent, type: 'vent',
         id: cells[index].id, cellId: cells[index].id })));
       const spawn = entry && geometry.find(shape => shape.type === 'spawn');
       if (spawn && compiled.vents.some(vent => forgeBoxesOverlapV141(spawn, vent))) issues.push({
@@ -64,7 +64,8 @@ export function inspectForgeJourneyV141(input) {
       solids: [...destination.geometry.filter(shape => ['floor', 'platform', 'wall', 'door', 'vent'].includes(shape.type)),
         ...(project.kind === 'ship' ? [{ x: 0, y: 0, w: 24, h: destination.bounds.height },
           { x: destination.bounds.width - 24, y: 0, w: 24, h: destination.bounds.height }] : [])],
-      hazards: destination.geometry.filter(shape => shape.type === 'hazard') });
+      hazards: destination.geometry.filter(shape => shape.type === 'hazard'),
+      occupied: destination.geometry.filter(shape => shape.type === 'npc') });
     arrivals.push({ linkId: link.id, from: link.from, to: link.to, ...arrival });
     if (!arrival.ok) add('error', 'journey-blocked-arrival',
       `Le sas vers ${destination.roomName} ne dispose pas d'une arrivée libre et supportée.`, link.to.roomId, link.to.cellId);

@@ -14,6 +14,7 @@ import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
 import { withPlaceablesRuntimeV86 } from './placeables-runtime-v86.js';
 import { withUserCasteCampaignV88 } from './enemy-user-campaign-runtime-v88.js';
 import { withBlackCocoonRuntimeV121 } from './black-cocoon-runtime-v121.js';
+import { withBlackCocoonPresentationV158 } from './black-cocoon-presentation-v158.js';
 import { withApcConvoyRuntimeV121 } from './apc-convoy-runtime-v121.js';
 import { withC12HordeRuntimeV121 } from './c12-horde-runtime-v121.js';
 import { withArchiveRelayRuntimeV122 } from './archive-relay-runtime-v122.js';
@@ -61,6 +62,7 @@ const V131ProductionEngine = withLegacyMissionsV131(withEcosystemMissionsV131(wi
   withHiveMissionsV131(withApcCourseV131(withWeaponActionsV131(V130ProductionEngine))))));
 const V132ProductionEngine = withNarrativeEvidenceV132(withHordeDirectorV132(
   withSquadDoctrineV132(withPlaceablesExtensionV132(V131ProductionEngine))));
+const V158ProductionEngine = withBlackCocoonPresentationV158(V132ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -73,7 +75,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV141(V132ProductionEngine)) {
+export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;

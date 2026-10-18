@@ -1,4 +1,5 @@
 import { sampleXenoTrialsRestraintPoseV156 } from './xeno-trials-restraint-pose-v156.js';
+import { sampleXenoTrialsCaptureReceptionV158 } from './xeno-trials-capture-reception-v158.js';
 import { XENO_TRIALS_RIG_DATA_V154 } from './xeno-trials-rig-data-v154.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
@@ -23,6 +24,10 @@ export function getXenoTrialsRigV154(definition,art){
 const inside=(p,r)=>r&&p[0]>=r[0]&&p[0]<=r[2]&&p[1]>=r[1]&&p[1]<=r[3];
 function distance(p,b){const[x,y]=b.pivot,dx=b.tip[0]-x,dy=b.tip[1]-y,t=clamp(((p[0]-x)*dx+(p[1]-y)*dy)/(dx*dx+dy*dy||1));return Math.hypot(p[0]-x-dx*t,p[1]-y-dy*t);}
 const meshes=new WeakMap();
+// One observed contact per match, outside the authoritative engine. A projectile
+// can separate the actors before release: reception must keep the direction it
+// actually displayed, rather than recompute it from newly displaced bodies.
+const receptionContactsV158=new WeakMap();
 // Native alpha cells are retained even when they contain a single visible pixel.
 export function getXenoTrialsRigMeshV154(rig){
  if(!XENO_TRIALS_RIGS_V154.includes(rig))return null;
@@ -56,7 +61,10 @@ export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
  const hold=match.grappleV153;
  if(hold&&[hold.attacker,hold.target].includes(fighter.side)){
   const elapsed=Math.max(0,(match.tick-hold.bornTick)/120);
-  return{clip:hold.escapeProgress>0?'struggle':'restraint',progress:clamp(hold.escapeProgress/XENO_TRIALS_GRAPPLE_V153.escapeTicks),elapsed,role:hold.attacker===fighter.side?'captor':'captive',grappleId:hold.id};
+  const direction=Math.sign(hold.targetX-hold.attackerX);
+  receptionContactsV158.set(match,{grappleId:hold.id,round:match.round,direction});
+  return{clip:hold.escapeProgress>0?'struggle':'restraint',progress:clamp(hold.escapeProgress/XENO_TRIALS_GRAPPLE_V153.escapeTicks),elapsed,role:hold.attacker===fighter.side?'captor':'captive',grappleId:hold.id,
+   contactDirectionV158:direction,facingV158:fighter.facing};
  }
  const startup=XENO_TRIALS_CASTES_V151.find(c=>c.fighterId===rig.fighterId)?.spec.startup;
  if(fighter.attack?.kind==='special'&&rig.fighterId==='prowler'&&fighter.attack.age<startup&&fighter.stun<=0)
@@ -66,8 +74,10 @@ export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
  const roundStart=[...(match.events||[])].reverse().find(e=>e.type==='round-start');
  if(end&&(!roundStart||end.id>roundStart.id)&&match.tick>=end.tick&&(match.tick-end.tick)/120<T.release){
   const elapsed=(match.tick-end.tick)/120,start=[...(match.events||[])].reverse().find(e=>e.type==='grapple-start-v153'&&e.grappleId===end.grappleId&&e.tick<=end.tick);
+  const contact=receptionContactsV158.get(match);
   return{clip:'release',progress:elapsed/T.release,elapsed,role:end.attacker===fighter.side?'captor':'captive',
-   heldSeconds:start?(end.tick-start.tick)/120:XENO_TRIALS_GRAPPLE_V153.durationTicks/120,releaseFrom:end.reason==='escaped'?'struggle':'restraint'};
+   heldSeconds:start?(end.tick-start.tick)/120:XENO_TRIALS_GRAPPLE_V153.durationTicks/120,releaseFrom:end.reason==='escaped'?'struggle':'restraint',
+   contactDirectionV158:contact?.grappleId===end.grappleId&&contact.round===match.round?contact.direction:undefined,facingV158:fighter.facing};
  }
  return null;
 }
@@ -94,7 +104,8 @@ export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
  const vertices=mesh.vertices.map(({source:[x,y],weights})=>weights.reduce((out,[id,w])=>{const p=point(matrices[id],x,y);out[0]+=p[0]*w;out[1]+=p[1]*w;return out;},[0,0]));
  const contacts=Object.fromEntries(Object.entries(rig.contacts).map(([name,a])=>[name,point(matrices[a.bone],...a.point)]));
  const frame={rigId:rig.id,clip:cue.clip,progress:p,angles,vertices,contacts,reducedMotion,canonExact:false,animation:rig.animation,active:gain>1e-6};
- return sampleXenoTrialsRestraintPoseV156(rig,mesh,frame,cue,reducedMotion);
+ const supported=sampleXenoTrialsRestraintPoseV156(rig,mesh,frame,cue,reducedMotion);
+ return sampleXenoTrialsCaptureReceptionV158(rig,mesh,supported,cue,reducedMotion);
 }
 /** V155 presentation-only angle sampler. Exact native rigs and bounded angles;
  * support bones cannot rotate. It never accepts an unreviewed replacement rig. */
@@ -210,6 +221,10 @@ export function drawXenoTrialsRigV154(ctx,rig,image,frame,metrics,x,y,facing){
  const lowered=frame.restraintPoseV156;
  if(lowered&&(!Number.isFinite(lowered.gain)||lowered.gain<0||lowered.gain>1||!Number.isFinite(lowered.sourceLowering)||lowered.sourceLowering<0
   ||['knees','hips'].some(key=>!Array.isArray(lowered[key])||lowered[key].length!==2||lowered[key].some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)))))return null;
+ const reception=frame.captureReceptionV158;
+ if(reception&&(!Number.isFinite(reception.seconds)||reception.seconds<0||reception.seconds>.36
+  ||!Number.isFinite(reception.releaseGain)||reception.releaseGain<0||reception.releaseGain>1
+  ||['hips','knees','ankles'].some(key=>!Array.isArray(reception[key])||reception[key].length!==2||reception[key].some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)))))return null;
  const draws=mesh.triangles.map(ids=>({s:ids.map(i=>mesh.vertices[i].source),d:ids.map(i=>frame.vertices[i])}));
  if(draws.some(({s,d})=>xenoTrialsTriangleAreaV154(...d)<xenoTrialsTriangleAreaV154(...s)*.2))return null;
  const sx=metrics.width/rig.sourceWidth,sy=metrics.height/rig.sourceHeight,flip=facing*rig.sourceFacing;
@@ -226,5 +241,6 @@ export function drawXenoTrialsRigV154(ctx,rig,image,frame,metrics,x,y,facing){
  return{rigId:rig.id,clip:frame.clip,progress:frame.progress,drawn:true,triangles:draws.length,sourcePath:rig.path,sourceSha256:rig.sourceSha256,
   contacts:Object.fromEntries(Object.entries(frame.contacts).map(([key,p])=>[key,world(p)])),animation:frame.animation,canonExact:false,
   ...(frame.restraintPoseV156?{restraintPoseV156:{...frame.restraintPoseV156,
-   knees:frame.restraintPoseV156.knees.map(world),hips:frame.restraintPoseV156.hips.map(world)}}:{})};
+   knees:frame.restraintPoseV156.knees.map(world),hips:frame.restraintPoseV156.hips.map(world)}}:{}),
+  ...(reception?{captureReceptionV158:{...reception,hips:reception.hips.map(world),knees:reception.knees.map(world),ankles:reception.ankles.map(world)}}:{})};
 }

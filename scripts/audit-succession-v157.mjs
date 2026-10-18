@@ -5,6 +5,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { verifyAuditSuccessionV158 } from './audit-succession-v158.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V157 = Object.freeze({
   'docs/forge/xeno-trials/V156-CONTINUATION.md': '48ddc7a166370bbcbd4e04ca4cd15c31a05d0340b90443600ec006d1ad31416e',
@@ -34,6 +35,20 @@ export function verifyAuditSuccessionV157(previous, current, readSource = readRe
   assert.deepEqual(previous, predecessorRecord, 'Previous contract must be the anchored V156 record');
   const before = previous.runtimeSourceSha256;
   const after = current.runtimeSourceSha256;
+  // A successor never rewrites these 31 historical hashes. Its anchored
+  // predecessor, exhaustive transitions and actual source hashes are checked
+  // first; V156/V157 assertions still inspect their original contracts.
+  let effective = after;
+  let successor;
+  try {
+    successor = JSON.parse(readSource('docs/forge/xeno-trials/progress-v158.json'));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  if (successor) {
+    verifyAuditSuccessionV158(current, successor, readSource);
+    effective = successor.runtimeSourceSha256;
+  }
   assert.equal(sortedKeys(before).length, 18);
   assert.ok(after && sortedKeys(after).length >= sortedKeys(before).length);
   for (const path of sortedKeys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited source omitted: ' + path);
@@ -41,7 +56,7 @@ export function verifyAuditSuccessionV157(previous, current, readSource = readRe
     assert.ok(/^src\/[a-zA-Z0-9._-]+\.js$/.test(path) || path === 'src/forge-editor-v130.css',
       'Source path outside the reviewed JavaScript and checkpoint stylesheet scope: ' + path);
     assert.ok(validHash(hash), 'Invalid current SHA: ' + path);
-    assert.equal(sha(readSource(path)), hash, 'Current source changed: ' + path);
+    assert.equal(sha(readSource(path)), effective[path], 'Current source changed: ' + path);
   }
   const changed = sortedKeys(before).filter(path => before[path] !== after[path]);
   const added = sortedKeys(after).filter(path => !Object.hasOwn(before, path));
