@@ -391,3 +391,52 @@ test('UI ticks never reread the checkpoint; explicit actions, failures and match
   local.removeItem(store.key); signal(null); assert.equal(resume.disabled, true);
   ui.destroy(); const destroyedReads = reads; signal(store.key); tick(); assert.equal(reads, destroyedReads);
 });
+
+test('async checkpoint actions restore displaced native focus, respect other targets/owners and use the summary after erasing', async t => {
+  const doc = Object.assign(new EventTarget(), { hasFocus: () => true }), root = new Node('main'), subject = mission(t), e = subject.engine, local = storage(),
+    store = new ForgePlaytestCheckpointStoreV157(local), actualSave = store.save.bind(store);
+  doc.createElement = tag => {
+    const node = new Node(tag);
+    node.getClientRects = () => [{}];
+    node.focus = () => {
+      doc.activeElement = node;
+      const event = new Event('focusin'); Object.defineProperty(event, 'target', { value: node }); doc.dispatchEvent(event);
+    };
+    // DOM-host fixture for native disabled-button blur observed in CI143.
+    let disabled = false;
+    Object.defineProperty(node, 'disabled', { get: () => disabled, set: value => {
+      disabled = value; if (value && doc.activeElement === node) doc.body.focus();
+    } });
+    return node;
+  };
+  doc.body = doc.createElement('body'); doc.documentElement = doc.createElement('html'); doc.activeElement = doc.body;
+  let currentEngine = e, visible = true, release;
+  store.save = engine => {
+    const gate = new Promise(resolve => { release = resolve; });
+    return Promise.all([actualSave(engine), gate]).then(([result]) => result);
+  };
+  const canvas = doc.createElement('canvas'), other = doc.createElement('button');
+  const ui = mountForgePlaytestCheckpointUIV157({ document: doc, roots: [root], store, getProject: () => project(), getEngine: () => currentEngine,
+    isVisible: () => visible, resumePlaytest: async request => { const result = await store.resume(e, request.project); canvas.focus(); return result; } });
+  t.after(() => ui.destroy());
+  const section = root.children[0], summary = section.children[0].children[0], button = action => section.querySelector(`[data-forge-checkpoint-v157="${action}"]`);
+  const click = action => { const target = button(action); target.focus(); target.dispatchEvent(new Event('click')); };
+  const settled = async () => {
+    const deadline = Date.now() + 5000;
+    while (section.attributes['aria-busy'] === 'true' && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 1));
+    assert.equal(section.attributes['aria-busy'], 'false');
+  };
+  click('save'); assert.equal(doc.activeElement, doc.body); release(); await settled();
+  assert.equal(doc.activeElement, button('save'), 'the exact native action regains only its displaced focus');
+  click('save'); doc.documentElement.focus(); release(); await settled();
+  assert.equal(doc.activeElement, button('save'), 'the document element focus fallback is treated like body');
+  click('save'); other.focus(); release(); await settled(); assert.equal(doc.activeElement, other, 'a user-selected control retains focus');
+  click('resume'); await settled(); assert.equal(doc.activeElement, canvas, 'intentional resume canvas focus is preserved');
+  click('clear'); await settled(); assert.equal(button('clear').disabled, true); assert.equal(doc.activeElement, summary);
+  click('save'); const previousOwner = e.forgeSessionV141; e.start(subject.options);
+  for (let index = 0; index < 30; index++) e.update(1 / 60);
+  assert.notEqual(e.forgeSessionV141, previousOwner); release(); await settled();
+  assert.equal(doc.activeElement, doc.body, 'a restarted session in the same engine never receives the previous action focus');
+  click('save'); visible = false; currentEngine = null; e.stop(); release(); await settled();
+  assert.equal(doc.activeElement, doc.body, 'a changed view/owner never receives an old focus request');
+});

@@ -29,8 +29,15 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
     }
   };
   const publish = (text, failed = false) => { message = text; error = failed; update(); onMessage(text, failed); };
-  const run = async action => {
+  const run = async (action, origin = null) => {
     if (busy || dead) return false;
+    const ownerEngine = getEngine(), ownerSession = ownerEngine?.forgeSessionV141;
+    const ownedFocus = origin && doc.activeElement === origin.button;
+    let focusMoved = false;
+    const observedFocus = event => {
+      if (event.target !== origin?.button && event.target !== doc.body && event.target !== doc.documentElement) focusMoved = true;
+    };
+    if (ownedFocus) doc.addEventListener?.('focusin', observedFocus, true);
     busy = true; update();
     try {
       if (action === 'save') {
@@ -50,7 +57,22 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
       } else return false;
       return true;
     } catch (cause) { publish(cause?.message || 'Action de checkpoint impossible.', true); return false; }
-    finally { refreshPresence(); busy = false; update(); }
+    finally {
+      refreshPresence(); busy = false; update();
+      if (ownedFocus) doc.removeEventListener?.('focusin', observedFocus, true);
+      const currentEngine = getEngine(), active = doc.activeElement;
+      const sameOwner = currentEngine === ownerEngine && currentEngine?.forgeSessionV141 === ownerSession;
+      const visible = node => node?.isConnected !== false && (!node.getClientRects || node.getClientRects().length > 0);
+      // Disabling the focused action can move focus to body in Chromium.
+      // Return only the focus we owned, while the same playtest/view remains.
+      // An intentional canvas focus, another control or navigation wins.
+      if (ownedFocus && !dead && !focusMoved && sameOwner && isVisible(origin.root) && !origin.section.hidden
+        && visible(origin.section) && doc.hasFocus?.() !== false
+        && (!active || active === doc.body || active === doc.documentElement || active === origin.button)) {
+        const target = !origin.button.disabled && visible(origin.button) ? origin.button : origin.summary;
+        if (visible(target)) target.focus?.({ preventScroll: true });
+      }
+    }
   };
   for (const root of roots.filter(Boolean)) {
     const runtime = ['play', 'hub'].includes(root.dataset?.panel);
@@ -66,7 +88,7 @@ export function mountForgePlaytestCheckpointUIV157({ document: doc = globalThis.
     for (const [action, label] of [['save', 'Sauvegarder le playtest'], ['resume', 'Reprendre le playtest'], ['clear', 'Effacer le checkpoint']]) {
       const button = doc.createElement('button'); button.type = 'button'; button.className = 'button'; button.textContent = label;
       button.dataset.forgeCheckpointV157 = action;
-      const listener = () => { void run(action); };
+      const listener = () => { void run(action, { button, section, summary, root }); };
       button.addEventListener('click', listener); removers.push(() => button.removeEventListener('click', listener));
       actions.append(button);
     }

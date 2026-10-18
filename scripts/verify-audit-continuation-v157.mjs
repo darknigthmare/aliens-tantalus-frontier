@@ -123,6 +123,10 @@ test('current annex and Forge capabilities match their versioned exports without
   assert.deepEqual(checkpoint.commandsAccessibleIn, ['normal-layout', 'fullscreen-16:9', 'mobile-viewport']);
   assert.deepEqual(checkpoint.presenceCache, { pollReadsPayload: false,
     refreshAfter: ['mount', 'checkpoint-action', 'relevant-storage-event'], destroyRemovesListener: true });
+  assert.deepEqual(checkpoint.asyncFocus, { requiresOriginalActionFocus: true,
+    targets: ['enabled-visible-action', 'summary-fallback'], allowedFocusLoss: ['body', 'documentElement', 'null'],
+    guards: ['same-engine', 'same-session', 'visible-connected-panel', 'document-not-defocused', 'no-intervening-focus', 'not-destroyed'],
+    preserveCanvasAndOtherControlFocus: true, staleCompletionRestoresFocus: false });
   assert.equal(checkpoint.cloud, false);
   assert.equal(checkpoint.campaignSave, false);
 });

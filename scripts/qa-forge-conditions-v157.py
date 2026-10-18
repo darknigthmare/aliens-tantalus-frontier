@@ -96,7 +96,16 @@ with sync_playwright() as p:
         page.locator('#title-options').click()
         upload(page, '#save-import', {'schema': 52, 'needsPlayerCreationV84': False,
                'player': {'name': 'QA conditions'}, 'settings': {'reducedMotion': True}}, 'isolated-qa-profile.json')
-        page.get_by_text('Sauvegarde importée et migrée.', exact=True).wait_for()
+        # Import completion is durable state plus its rendered setting. A toast
+        # can expire before the first observable frame on a busy renderer.
+        page.wait_for_function('''()=>{
+          const stored=JSON.parse(localStorage.getItem('atf-v47-profile-1')),model=window.__ATF_V51__?.saveSystem?.data;
+          return stored?.player?.name==='QA conditions'&&model?.player?.name==='QA conditions'
+            &&stored.needsPlayerCreationV84===false&&model.needsPlayerCreationV84===false
+            &&stored.settings?.reducedMotion===true&&model.settings?.reducedMotion===true
+            &&document.querySelector('#setting-motion')?.checked===true
+            &&document.documentElement.classList.contains('reduced-motion');
+        }''')
         page.locator('#return-title').click()
         if page.locator('#title-start').is_visible():
             page.locator('#title-start').click()

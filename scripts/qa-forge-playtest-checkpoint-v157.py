@@ -130,7 +130,16 @@ with sync_playwright() as p:
         page.locator('#title-options').click()
         upload(page, '#save-import', {'schema': 52, 'needsPlayerCreationV84': False,
                'player': {'name': 'QA checkpoint'}, 'settings': {'reducedMotion': True}}, 'isolated-checkpoint-profile.json')
-        page.get_by_text('Sauvegarde importée et migrée.', exact=True).wait_for()
+        # Import completion is durable state plus its rendered setting. A toast
+        # can expire before the first observable frame on a busy renderer.
+        page.wait_for_function('''()=>{
+          const stored=JSON.parse(localStorage.getItem('atf-v47-profile-1')),model=window.__ATF_V51__?.saveSystem?.data;
+          return stored?.player?.name==='QA checkpoint'&&model?.player?.name==='QA checkpoint'
+            &&stored.needsPlayerCreationV84===false&&model.needsPlayerCreationV84===false
+            &&stored.settings?.reducedMotion===true&&model.settings?.reducedMotion===true
+            &&document.querySelector('#setting-motion')?.checked===true
+            &&document.documentElement.classList.contains('reduced-motion');
+        }''')
         page.locator('#return-title').click()
         if page.locator('#title-start').is_visible():
             page.locator('#title-start').click()
@@ -232,6 +241,12 @@ with sync_playwright() as p:
                 pointer_action(page, panel, 'save')
                 capture(page, f'{kind}-layout-{width}x{height}-open.png')
                 phase(f'{kind} {width}x{height}: Escape/Enter disclosure keyboard behavior')
+                report.setdefault('focusBeforeEscape', []).append(page.evaluate('''()=>({
+                  tag:document.activeElement?.tagName,id:document.activeElement?.id,
+                  documentFocused:document.hasFocus(),
+                  checkpointAction:document.activeElement?.dataset?.forgeCheckpointV157,
+                  views:[...document.querySelectorAll('.view.active')].map(n=>n.dataset.panel)
+                })'''))
                 page.keyboard.press('Escape')
                 check(f'{kind} {width}x{height}: Escape closes to one compact control and native Enter reopens it without pausing gameplay',
                       panel.locator('details').get_attribute('open') is None
@@ -295,7 +310,8 @@ with sync_playwright() as p:
         detail = f'{report["tooling"]} | {report["phase"]} | last passed: {report["checks"][-1] if report["checks"] else "none"} | {type(error).__name__}: {error}'
         try:
             report['failureContext'] = page.evaluate('''()=>({
-              focus:{tag:document.activeElement?.tagName,id:document.activeElement?.id},
+              focus:{tag:document.activeElement?.tagName,id:document.activeElement?.id,documentFocused:document.hasFocus()},
+              views:[...document.querySelectorAll('.view.active')].map(n=>n.dataset.panel),
               controls:[...document.querySelectorAll('.view.active .forge-checkpoint-v157')].map(n=>({
                 status:n.querySelector('[role="status"]')?.textContent,open:n.querySelector('details')?.open,
                 busy:n.getAttribute('aria-busy')})),
