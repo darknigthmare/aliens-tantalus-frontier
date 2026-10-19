@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { verifyAuditSuccessionV158 } from './audit-succession-v158.mjs';
+import { resolveAuditSourcesV159 } from './audit-succession-v159.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V157 = Object.freeze({
   'docs/forge/xeno-trials/V156-CONTINUATION.md': '48ddc7a166370bbcbd4e04ca4cd15c31a05d0340b90443600ec006d1ad31416e',
@@ -47,7 +48,7 @@ export function verifyAuditSuccessionV157(previous, current, readSource = readRe
   }
   if (successor) {
     verifyAuditSuccessionV158(current, successor, readSource);
-    effective = successor.runtimeSourceSha256;
+    effective = resolveAuditSourcesV159(successor, readSource);
   }
   assert.equal(sortedKeys(before).length, 18);
   assert.ok(after && sortedKeys(after).length >= sortedKeys(before).length);

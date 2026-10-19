@@ -3,6 +3,7 @@ const CACHE = 'atf-v143-continuation-v158';
 const SHELL = Object.freeze([
   '/src/black-cocoon-presentation-v158.js',
   '/src/npc-circulation-v158.js',
+  '/src/npc-annex-circulation-v159.js',
   '/src/forge-npcs-v158.js',
   '/src/xeno-trials-capture-reception-v158.js',
   '/src/hub-console-stations-v142.js',
