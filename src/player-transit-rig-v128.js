@@ -305,13 +305,19 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
   const rungSpacing=ladderRungGrid(ladder).spacing;
   const p=smooth(state.progress),standing=kind==='revive'?p:1-p;
   let angle,waist,contacts={ladderId:null,floorY:kind==='climb'?null:F,feet:{near:null,far:null},hands:{near:null,far:null}};
+  const wallGrip = Boolean(ladder?.physicalSurfaceIdV135
+    && ['left','right'].includes(ladder.physicalSurfaceFaceV135));
   if(kind==='climb') {
     // Keep the complete chest/hips far enough from the ladder that its far
     // hand can hold a real rung without folding inside the elbow's minimum
     // reach. The former 20px canonical gap put that hand ~7 world px from its
     // shoulder (minimum9.67); moving the whole climbing posture back four
     // world px preserves the rung, fixed bones and 145-degree elbow bound.
-    angle=.09;waist=point(center-f*C.climbWaistStandoff*s,F-98*s);contacts.ladderId=String(ladder.id||actor.ladderId||'')||null;
+    // Jeri's native wall lies beside the collider, unlike a ladder centred
+    // through it. Bring the entire posture towards that admitted face so both
+    // hands can meet the wall without extending bones or folding past145°.
+    // Real ladder rungs and the underside retain their own28px registration.
+    angle=.09;waist=point(center-f*(wallGrip?4:C.climbWaistStandoff)*s,F-98*s);contacts.ladderId=String(ladder.id||actor.ladderId||'')||null;
   } else if(kind==='death') {
     angle=mix(.57,Math.PI/2-.08,p);waist=point(center+f*mix(0,16,p)*s,F-mix(51,30,p)*s);
   } else {
@@ -363,7 +369,7 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
   for(const side of ['near','far']) {
     if(kind==='climb') {
       const contact=rungContact(ladder,F-132*s,side==='near'?rungSpacing:0,
-        ladder.x+(side==='near'?-5:5)*f,5*s,f);
+        wallGrip?ladder.x:ladder.x+(side==='near'?-5:5)*f,5*s,f);
       const shoulder=body.shoulders[side];
       const solved=solvePlayerArmIKV125(shoulder,contact.point,body.armLengths[side],f,armLimits);
       hands[side]=solved.hand;

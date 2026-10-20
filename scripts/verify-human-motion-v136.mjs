@@ -5,18 +5,21 @@ import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from
 import { resolvePlayerBodyRigV125 } from '../src/player-body-rig-v125.js';
 import { PLAYER_TRANSIT_PRESENTATION_V128 } from '../src/player-transit-rig-v128.js';
 import { PLAYER_LOCOMOTION_PRESENTATION_V129 } from '../src/player-locomotion-rig-v129.js';
-import { PLAYER_MODULAR_RIG_PARTS_V126, resolvePlayerModularRigV126 } from '../src/player-modular-rig-v126.js';
+import { PLAYER_MODULAR_RIG_PARTS_V126, PLAYER_MODULAR_RIG_ANCHORS_V126, resolvePlayerModularRigV126 } from '../src/player-modular-rig-v126.js';
 import { normalizePlayerAppearanceV126 } from '../src/player-appearance-v126.js';
 
 const actor = patch => ({ x: 100, y: 200, w: 42, h: 92, alive: true, grounded: true,
   facing: 1, vx: 200, vy: 0, ...patch });
 const close = (a, b, tolerance = 1e-6) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
 function phaseRig(phase, gait, patch = {}) {
-  const subject = actor({ vx: gait === 'run' ? 270 : 155, crouching: gait === 'crouch', ...patch });
+  // Sample the pure endpoints here:155px/s is now a blended jog, whose stride
+  // cannot be paired with an omitted (therefore pure-walk) support duty.
+  const subject = actor({ vx: gait === 'run' ? 270 : gait === 'walk' ? 80 : 155, crouching: gait === 'crouch', ...patch });
   const stride = humanGaitStrideV133(subject, gait, .5);
   subject.x += phase * stride;
   const state = { schema: 129, gait, stride, cycles: phase, entrance: stride, hasWalked: true,
-    moving: true, settle: 0, settleProgress: 0, source: 'observed-ground-displacement' };
+    moving: true, settle: 0, settleProgress: 0, source: 'observed-ground-displacement',
+    x:subject.x,y:subject.y,facing:subject.facing,crouching:subject.crouching,time:0 };
   subject.playerLocomotionStateV129 = state;
   const bodyRig = resolvePlayerBodyRigV125({ actor: subject });
   return { subject, rig: resolvePlayerLocomotionRigV129({ actor: subject, bodyRig, locomotionState: state }), stride };
@@ -75,7 +78,8 @@ test('discrete upper-body atlas changes cannot snap either hip during its contin
 test('physical acceleration, blocked movement and a stop retain exact contacts without a residual stride', () => {
   for (const facing of [-1, 1]) {
     let subject = actor({ vx: 0, facing }), state = advancePlayerLocomotionStateV129(null, subject, 0);
-    let time = 0, traveled = 0, previous = null, contacts = 0;
+    let time = 0, traveled = 0, previous = null;
+    const contacts = { acceleration:0, travel:0, deceleration:0, settled:0 };
     for (let frame = 1; frame <= 180; frame++) {
       const speed = frame < 40 ? frame * 5 : frame < 100 ? 200 : Math.max(0, 200 - (frame - 100) * 5);
       const dx = speed / 120 * facing;
@@ -89,12 +93,16 @@ test('physical acceleration, blocked movement and a stop retain exact contacts w
         const contact = current.contacts.feet[side];
         if (contact.planted && previous?.contacts.feet[side].planted) {
           close(contact.point.x, previous.contacts.feet[side].point.x);
-          close(contact.point.y, previous.contacts.feet[side].point.y); contacts++;
+          close(contact.point.y, previous.contacts.feet[side].point.y);
+          contacts[frame<40?'acceleration':frame<100?'travel':frame<140?'deceleration':'settled']++;
         }
       }
       previous = current;
     }
-    close(state.distance, traveled); assert.ok(contacts > 150);
+    close(state.distance, traveled);
+    for(const stage of ['acceleration','deceleration'])assert.ok(contacts[stage]>=20,`${stage}: enough real consecutive supports must be checked`);
+    assert.ok(contacts.travel>=25,'The shorter running duty still provides repeated exact world contacts during steady travel');
+    assert.ok(contacts.settled>=45,'Both boots must settle into a sustained physical hold');
     const stopped = state, rig = previous;
     state = advancePlayerLocomotionStateV129(state, { ...subject, vx: facing * 200 }, time + .5);
     assert.equal(state.moving, false); close(state.cycles, stopped.cycles); close(state.distance, stopped.distance);
@@ -103,15 +111,17 @@ test('physical acceleration, blocked movement and a stop retain exact contacts w
   }
 });
 
-test('lean crosses the sprint threshold continuously and accepted-shot sampling matches the next physical observation', () => {
+test('lean crosses both physical walk/run blend boundaries continuously and accepted-shot sampling matches the next observation', () => {
   for (const facing of [-1, 1]) {
-    const angles = [235 - 1e-5, 235 + 1e-5].map(speed => {
-      const subject = actor({ facing, vx: speed * facing, weaponRigMotionV125: { distance: 100 } });
-      return resolvePlayerBodyRigV125({ actor: subject }).locomotionMotionV133.lean;
-    });
-    assert.ok(Math.abs(angles[0] - angles[1]) < 1e-8, 'Entering the run atlas cannot snap the shoulder angle.');
+    for(const boundary of [100,190]){
+      const angles = [boundary - 1e-5, boundary + 1e-5].map(speed => {
+        const subject = actor({ facing, vx: speed * facing, weaponRigMotionV125: { distance: 100 } });
+        return resolvePlayerBodyRigV125({ actor: subject }).locomotionMotionV133.lean;
+      });
+      assert.ok(Math.abs(angles[0] - angles[1]) < 1e-8, `Crossing the actual${boundary}px/s blend boundary cannot snap the shoulder angle`);
+    }
     let subject = actor({ facing, vx: 0 }), state = advancePlayerLocomotionStateV129(null, subject, 0), time = 0;
-    for (const speed of [15, 45, 110, 170, 234, 236, 255, 270, 180, 70, 13]) {
+    for (const speed of [15, 45, 99, 100, 101, 110, 170, 189, 190, 191, 234, 236, 255, 270, 180, 70, 13]) {
       time += 1 / 120;
       subject = { ...subject, x: subject.x + speed * facing / 120, vx: speed * facing,
         playerLocomotionStateV129: state };
@@ -141,12 +151,12 @@ test('the calibrated skeleton has a stable pelvis at real walk and ship-run spee
         assert.equal(rig.legs[side].clearanceAdjusted, false);
       }
       const cadence = 2 * Math.abs(subject.vx) / stride;
-      assert.ok(cadence >= 3 && cadence <= 4.3);
+      assert.ok(cadence >= 1.5 && cadence <= 3.6,'The pure walk and ship-run endpoints stay inside the reviewed cadence envelope');
     }
     const maximumVariation=gait==='walk'?3:5;
     assert.ok(Math.max(...hips) - Math.min(...hips) < maximumVariation, `${gait}: pelvis motion stays inside its small anatomical support envelope.`);
     if (gait === 'walk') assert.equal(flight, 0);
-    else { assert.ok(flight > 180 && flight < 250); assert.ok(clearance > .5 && clearance <= 3); }
+    else { assert.ok(flight>=240 && flight<=260,'The quarter-cycle running support gives a bounded half-cycle of flight'); assert.ok(clearance > .5 && clearance <= 3); }
   }
   for (const dimension of ['upperLeg', 'lowerLeg']) {
     assert.equal(PLAYER_TRANSIT_PRESENTATION_V128[dimension], PLAYER_LOCOMOTION_PRESENTATION_V129[dimension],
@@ -191,9 +201,14 @@ test('ordinary travel uses a connected upright head and matching torso art while
       const head = modular.layers.find(layer=>layer.id==='bare-head'), torso = modular.layers.find(layer=>layer.id==='torso');
       assert.equal(head.part,'bare-head-upright'); assert.equal(torso.part,'upright');
       const neck = transform(head.matrix,PLAYER_MODULAR_RIG_PARTS_V126.head.upright.neck);
-      const target = transform(rig.bodyRig.matrix,rig.bodyRig.modularAnchorsV127.neck);
+      const anchors=rig.bodyRig.modularAnchorsV127||PLAYER_MODULAR_RIG_ANCHORS_V126[rig.bodyRig.atlas]?.[rig.bodyRig.frame];
+      assert.ok(anchors,'The actual selected native frame supplies complete measured neck/waist anchors');
+      const target = transform(rig.bodyRig.matrix,anchors.neck);
       close(neck.x,target.x); close(neck.y,target.y);
-      const belt=transform(rig.bodyRig.matrix,rig.bodyRig.modularAnchorsV127.waist);
+      const belt=transform(rig.bodyRig.matrix,anchors.waist);
+      const torsoPart=PLAYER_MODULAR_RIG_PARTS_V126.torso[appearance.slots.torso][torso.part];
+      for(const side of ['near','far']){const socket=transform(torso.matrix,torsoPart.joints[side]);
+        close(socket.x,rig.bodyRig.shoulders[side].x);close(socket.y,rig.bodyRig.shoulders[side].y);}
       assert.ok(Math.abs(neck.x-belt.x)<4,'Relaxed travel cannot inherit the twenty-degree combat neck pitch.');
     }
     const aimed=phaseRig(phase,gait,{facing,aimingV124:true}).rig;

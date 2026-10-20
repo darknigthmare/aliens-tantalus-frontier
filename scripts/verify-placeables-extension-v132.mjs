@@ -184,6 +184,23 @@ test('real stream, laser, plasma, bolt and shotgun actions damage the armature t
     const weapon = WEAPONS.find(item => item.id === profile.weaponId);
     const { engine, actor } = fixture({ names: ['Portable Quarantine'], weapon });
     const barrier = deploy(engine, 'Portable Quarantine', actor, 'barrier'), hidden = enemy(engine, barrier.x + barrier.w + 12), health = hidden.health, ammo = actor.ammo;
+    if (['stream', 'bolt', 'scatter'].includes(kind)) {
+      actor.fireClock = 0; engine.keys.add('ShiftLeft');
+      const close = engine.resolvePlayerWeaponPoseV125(actor, { x: 1, y: 0, facing: 1 },
+        { requireReady: false, shotPreviewV160: true });
+      assert.equal(close.weaponWithdrawalV160.active, true, kind);
+      assert.equal(close.armReachV160.feasible, true, kind); assert.ok(close.visibleBounds.right < barrier.x, kind);
+      const before = structuredClone(actor), barrierHealth = barrier.health;
+      assert.equal(engine.fire(actor), false, kind); assert.deepEqual(actor, before);
+      assert.equal(barrier.health, barrierHealth, kind); assert.equal(hidden.health, health, kind);
+    }
+    // The installation places the physical armature immediately in front of
+    // the Marine. Step back within the stream's real range for an aimed shot.
+    actor.x -= 60;
+    const clear = engine.resolvePlayerWeaponPoseV125(actor, { x: 1, y: 0, facing: 1 },
+      { requireReady: false, shotPreviewV160: true });
+    assert.equal(clear.weaponWithdrawalV160, undefined, kind); assert.equal(clear.armReachV160.feasible, true, kind);
+    assert.ok(clear.visibleBounds.right < barrier.x, kind);
     shot(engine); assert.ok(barrier.health < barrier.maxHealth, kind); assert.equal(actor.ammo, ammo - 1, kind);
     if (kind !== 'scatter') assert.equal(hidden.health, health, kind);
     assert.equal(engine.equipmentActions.get(barrier.catalogId).uses, 1);

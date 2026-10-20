@@ -94,20 +94,39 @@ test('a real firearm hits intact glass before a hidden enemy then the broken ope
 
 test('a nearer enemy, closed door, opaque wall or platform consumes the shot before scenery', () => {
   for (const blocker of ['enemy', 'wall', 'door', 'platform']) {
-    const { engine } = fixture();
+    const { engine, actor } = fixture();
+    // The rendered closed-door collider is wider than its authored centre
+    // marker. Stand outside its physical clearance before testing shot order.
+    actor.x = 100;
     if (blocker === 'enemy') enemy(engine, 300);
     if (blocker === 'wall') engine.walls.unshift({ id: 'opaque', x: 320, y: 650, w: 30, h: 250 });
     if (blocker === 'door') engine.doors.push({ id: 'closed', x: 320, y: 650, w: 30, h: 250, open: false, progress: 0 });
     if (blocker === 'platform') engine.platforms.push({ x: 320, y: 650, w: 30, h: 250, solid: true });
+    const held = engine.resolvePlayerWeaponPoseV125(actor, { x: 1, y: 0, facing: 1 },
+      { requireReady: false, shotPreviewV160: true });
+    assert.equal(held.armReachV160.feasible, true, blocker); assert.equal(held.weaponWithdrawalV160, undefined, blocker);
     shot(engine); assert.equal(object(engine).hp, 32, blocker); assert.equal(object(engine).impactCount, 0);
   }
 });
 
-test('a long barrel against glass fires into its near face and cannot spawn the bullet beyond the pane', () => {
+test('a barrel against glass withdraws without spending, then a clear shot strikes its near face before the hidden enemy', () => {
   const { engine, actor } = fixture({ objects: [pane({ hp: 500 })] });
   const target = enemy(engine), health = target.health;
   actor.x = 420 - actor.w; engine.keys.add('ShiftLeft'); engine.keys.add('KeyD');
-  actor.fireClock = 0; assert.equal(engine.fire(actor), true);
+  actor.fireClock = 0;
+  const held = engine.resolvePlayerWeaponPoseV125(actor, { x: 1, y: 0, facing: 1 },
+    { requireReady: false, shotPreviewV160: true });
+  assert.equal(held.weaponWithdrawalV160.active, true); assert.equal(held.armReachV160.feasible, true);
+  assert.ok(held.visibleBounds.right < 420, 'The entire withdrawn receiver stays on the near side.');
+  const before = structuredClone(actor), ammo = actor.ammo;
+  assert.equal(engine.fire(actor), false); assert.deepEqual(actor, before);
+  assert.equal(engine.bullets.length, 0); assert.equal(object(engine).hp, 500); assert.equal(target.health, health);
+  actor.x -= 64;
+  const clear = engine.resolvePlayerWeaponPoseV125(actor, { x: 1, y: 0, facing: 1 },
+    { requireReady: false, shotPreviewV160: true });
+  assert.equal(clear.weaponWithdrawalV160, undefined); assert.equal(clear.armReachV160.feasible, true);
+  assert.ok(clear.visibleBounds.right < 420);
+  assert.equal(engine.fire(actor), true); assert.equal(actor.ammo, ammo - 1);
   assert.ok(engine.bullets[0].x < 420, 'Muzzle is constrained on the firing side of the glass.');
   engine.updateBullets(0.6); assert.ok(object(engine).hp < 500); assert.equal(target.health, health);
 });

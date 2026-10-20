@@ -974,7 +974,8 @@ export function withHiveMissionsV131(BaseEngine) {
         : this.jeriSurfaceV135.face === 'left' ? surface.x : surface.x + surface.w,
         top: this.jeriSurfaceV135.face === 'underside' ? actor.y - 1 : surface.y,
         bottom: this.jeriSurfaceV135.face === 'underside' ? feet(actor) + 2 : surface.y + surface.h,
-        w: actor.w, rungSpacing: 1, firstRung: 1, physicalSurfaceIdV135: surface.id };
+        w: actor.w, rungSpacing: 1, firstRung: 1, physicalSurfaceIdV135: surface.id,
+        physicalSurfaceFaceV135: this.jeriSurfaceV135.face };
     }
     drawActor(ctx, actor) {
       if (actor !== this.player || !this.isJeriSurfaceAttachedV135()) return super.drawActor(ctx, actor);

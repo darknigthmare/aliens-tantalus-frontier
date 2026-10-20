@@ -254,15 +254,23 @@ test('rendered weapon observations identify the drawn shot, never an input accep
   const Engine = withPlayerWeaponRigV125(class {}), engine = new Engine();
   const actor = { shots: 0, ammo: 10 }; engine.player = actor; engine.animationTime = 5;
   const pose = { profile: { weaponId: 'test-weapon' }, path: '/test.png', surface: 'mission',
-    muzzle: { x: 10, y: 20 }, matrix: {}, bodyRig: {}, weaponImage: {}, grip: { x: 1, y: 2 } };
+    muzzle: { x: 10, y: 20 }, matrix: {}, bodyRig: { facing: 1,
+      matrix: { a: 1, b: 0, c: 0, d: 1 },
+      armLengths: { near: { upper: 2, fore: 1 }, far: { upper: 2, fore: 1 } } },
+    armBendsV160: { near: 1, far: 1 }, armReachV160: { feasible: true, error: 0 },
+    weaponImage: {}, grip: { x: 1, y: 2 } };
   const render = { drawn: true, sheetId: 'test-body', frame: 0,
-    arms: { near: { hand: pose.grip }, far: { hand: pose.grip } } };
+    arms: { near: { shoulder: { x: 0, y: 0 }, elbow: { x: 0, y: 2 }, hand: pose.grip },
+      far: { shoulder: { x: 0, y: 0 }, elbow: { x: 0, y: 2 }, hand: pose.grip } } };
   // Only this observation wrapper is under test, not the rig or raster art.
   engine.resolvePlayerWeaponPoseV125 = () => pose;
   engine.drawPlayerBodyCompositionV125 = () => render;
   engine.drawPlayerWeaponRigV125({}, actor);
   assert.equal(actor.heldWeaponVisualV125.shotSerial, 0);
   assert.equal(actor.heldWeaponVisualV125.timeSeconds, 5);
+  assert.deepEqual(actor.heldWeaponVisualV125.nearShoulder, render.arms.near.shoulder);
+  assert.deepEqual(actor.heldWeaponVisualV125.nearElbow, render.arms.near.elbow);
+  assert.ok(Math.abs(actor.heldWeaponVisualV125.armJointAnglesV160.near.flexionDegrees - 90) < 1e-8);
   actor.shots = 1; actor.ammo = 9;
   assert.equal(actor.heldWeaponVisualV125.shotSerial, 0, 'An accepted input does not certify a newly drawn frame.');
   engine.animationTime = 5.016;

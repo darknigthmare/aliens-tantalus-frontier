@@ -103,6 +103,31 @@ test('every retained main and annex ladder supports anatomical hands and feet th
   }
 });
 
+test('Jeri wall posture cannot displace the47 native ship ladders or the separate Meridien rung grid', () => {
+  const entries = [
+    ...Object.values(HUB_TRAVERSAL_PROFILES_V60).flatMap(profile =>
+      resolveHubServiceProfileV139(profile).ladders.map(source => ({ source }))),
+    ...HUB_ANNEXES_V137.flatMap(annex => (annex.ladders || []).map(source => ({ source, annex: true })))
+  ];
+  assert.equal(entries.length,47);
+  const ladders=entries.map(entry=>mounted(entry.source,entry).ladder);
+  ladders.push({id:'port-meridien-ladder',x:1232,top:432,bottom:624,w:44,rungSpacing:24,firstRung:8});
+  for (const ladder of ladders) for (const facing of [-1,1]) for (const fraction of [0,.5,1]) {
+    const feet=ladder.top+(ladder.bottom-ladder.top)*fraction,base=rig(ladder,feet,{patch:{facing}});
+    const m=base.bodyRig.matrix,sourceWaist=base.bodyRig.modularAnchorsV127.waist;
+    const waistX=m.a*sourceWaist.x+m.c*sourceWaist.y+m.e;
+    close(waistX,ladder.x-facing*28*base.bodyRig.scale,'Actual rung posture keeps its separate28px standoff');
+    for (const annotation of [{physicalSurfaceFaceV135:'left'},
+      {physicalSurfaceIdV135:'wall-id-without-face'},
+      {physicalSurfaceIdV135:'actual-underside',physicalSurfaceFaceV135:'underside'}]) {
+      const annotated=rig({...ladder,...annotation},feet,{patch:{facing}});
+      assert.deepEqual(annotated.bodyRig.matrix,base.bodyRig.matrix);
+      assert.deepEqual(annotated.bodyRig.shoulders,base.bodyRig.shoulders);
+      assert.deepEqual(annotated.contacts,base.contacts);
+    }
+  }
+});
+
 test('all wardrobe pieces and complete presets preserve the same supports in ascent, descent and hold', () => {
   const { mount, ladder } = mounted(medical);
   const appearances = [normalizePlayerAppearanceV126(),

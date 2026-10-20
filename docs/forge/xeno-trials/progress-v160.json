@@ -2167,9 +2167,18 @@
           "nativeFallbackUsesFrameSpecificSoleAnchors": true,
           "partialLoadUpperBodyAndWeaponFramePreserved": true,
           "servicePouchFallbackDropRigUnits": 16,
-          "climbWholePostureStandoffRigUnits": 28,
           "climbRetainsActualRungCoordinates": true,
-          "climbRetainsExistingLimbLengthsAndJointEnvelope": true
+          "climbRetainsExistingLimbLengthsAndJointEnvelope": true,
+          "ladderWholePostureStandoffRigUnits": 28,
+          "physicalWallGripStandoffRigUnits": 4,
+          "physicalWallSurfaceIdentityAndFaceExplicit": true,
+          "physicalWallGripPostureSeparateFromLadderAndCeiling": true,
+          "physicalWallHandsStayOnActualFace": true,
+          "jeriDedicatedNewArt": false,
+          "physicalWallFeetStayOnActualFace": true,
+          "physicalWallHandsAndFeetRemainWithinReach": true,
+          "ceilingRetainsExistingPresentation": true,
+          "physicalWallPostureRequiresExplicitSurfaceIdentityAndSide": true
         },
         "C160-TRACKER": {
           "rangeGameUnits": 900,
@@ -2315,6 +2324,7 @@
     "src/game-v51-runtime.js": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
     "src/game-v52-level-runtime.js": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
     "src/held-weapon-renderer-v125.js": "bf20b93457fbd7d6296acf66aacf1175698d4d68092c1297465df6a64dcaba5f",
+    "src/hive-missions-v131.js": "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
     "src/hub-annex-npc-life-v141.js": "a7ef6f64c02d2a7445a155bf017dbf0624a06d7f20c45cc73b118ba0c0f5c8de",
     "src/hub-annex-registry-v87.js": "67d74d09b8ffed8f078516bf99259ee3491610947669f8acbb5616da3efbece7",
     "src/hub-furnishing-annex-revisions-v139.js": "8b189a9c9703fadf8ec93d979dfad1f429991237f476a96d068a932170a3e3b5",
@@ -2340,7 +2350,7 @@
     "src/player-human-proportions-v160.js": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
     "src/player-locomotion-rig-v129.js": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
     "src/player-modular-rig-v126.js": "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
-    "src/player-transit-rig-v128.js": "dc73fb0ad6183e0e4be80e85f525db6b375e3ffe498fec2112a60c491606309d",
+    "src/player-transit-rig-v128.js": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
     "src/player-weapon-runtime-v125.js": "03004ebf7a640eccd537132a5f44d38852f1f3061da5a31dd15754c5abb63e55",
     "src/save.js": "ee15bc4a5df71e98c50cdbbf980d46c02d8e48c08ba74f6be84c2587eaa45718",
     "src/ship-animal-habitat-v87.js": "23b392916f7d76f89929e4e69e9b17c843cbd3784897893e7b49a33562ae26f4",
@@ -3907,9 +3917,9 @@
         [
           "C160-PLAYER",
           "Contrat exécutable / demande utilisateur",
-          "src/player-human-proportions-v160.js ; src/player-body-rig-v125.js ; src/player-locomotion-rig-v129.js ; src/player-modular-rig-v126.js ; src/player-action-rig-v127.js ; src/player-transit-rig-v128.js ; src/player-gait-v133.js",
-          "Les pieds, le bassin, la ceinture, le thorax et les épaules de l’arme partagent le même repère de support au lieu de dissocier le haut et le bas du corps. La tête, le casque et le masque utilisent une attache réduite commune ; les hanches projetées sont resserrées. Les longueurs de cuisse/tibia restent rigides, les appuis plantés sont conservés et la cadence suit la distance réelle en marche et jogging. Les raccords de poses, d’échelle, de conduit et de chargement partiel conservent les supports natifs. La poche de recharge suit le tissu de la cuisse éloignée, y compris pendant les poses et le secours de chargement natif, au lieu de rester suspendue à un point vide. Lors d’un chargement incomplet, les sept pièces de jambes disponibles restent procédurales ; si leurs images manquent aussi, les vraies frames natives 4–7 suivent la phase de marche avec leurs propres ancres de semelle. Sur échelle, la posture entière s’écarte du montant pour que la main éloignée reste sur le vrai barreau dans l’enveloppe du coude, sans déplacer les barreaux ni changer les longueurs des membres.",
-          "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final."
+          "src/player-human-proportions-v160.js ; src/player-body-rig-v125.js ; src/player-locomotion-rig-v129.js ; src/player-modular-rig-v126.js ; src/player-action-rig-v127.js ; src/player-transit-rig-v128.js ; src/player-gait-v133.js ; src/hive-missions-v131.js",
+          "Les pieds, le bassin, la ceinture, le thorax et les épaules de l’arme partagent le même repère de support au lieu de dissocier le haut et le bas du corps. La tête, le casque et le masque utilisent une attache réduite commune ; les hanches projetées sont resserrées. Les longueurs de cuisse/tibia restent rigides, les appuis plantés sont conservés et la cadence suit la distance réelle en marche et jogging. Les raccords de poses, d’échelle, de conduit et de chargement partiel conservent les supports natifs. La poche de recharge suit le tissu de la cuisse éloignée, y compris pendant les poses et le secours de chargement natif, au lieu de rester suspendue à un point vide. Lors d’un chargement incomplet, les sept pièces de jambes disponibles restent procédurales ; si leurs images manquent aussi, les vraies frames natives 4–7 suivent la phase de marche avec leurs propres ancres de semelle. Sur échelle, la posture entière s’écarte du montant pour que la main éloignée reste sur le vrai barreau dans l’enveloppe du coude, sans déplacer les barreaux ni changer les longueurs des membres. Pour le contact mural Jeri, l’identifiant et la face de la surface physique choisissent une posture de prise distincte de l’échelle centrée ; les mains et les pieds plantés visent la vraie face sans projection hors portée, et le plafond garde sa présentation propre.",
+          "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final. Le contact Jeri adapte le rig existant ; il ne fournit aucun nouvel art synthétique dédié ni animation de franchise certifiée."
         ],
         [
           "C160-TRACKER",
@@ -3957,9 +3967,9 @@
         ],
         [
           "QA160-PLAYER",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs",
           "À exécuter sur le commit final",
-          "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final."
+          "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final. Le contact Jeri adapte le rig existant ; il ne fournit aucun nouvel art synthétique dédié ni animation de franchise certifiée."
         ],
         [
           "QA160-TRACKER",
@@ -3969,7 +3979,7 @@
         ],
         [
           "QA160-WEAPONS",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs",
           "À exécuter sur le commit final",
           "Les 5°–145° du coude et −90°–150° du bras supérieur sont des enveloppes de conception projetées, pas des mesures biomécaniques ni une chorégraphie canonique. Dessins natifs conservés ; les comparaisons visuelles du corps final, de la branche de coude retenue et du retrait au mur attendent la recette exacte."
         ],
@@ -5834,21 +5844,21 @@
           "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
           "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
           "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "src/player-appearance-runtime-v126.js",
           "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
           "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
           "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "src/weapon-actions-v131.js",
           "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
           "de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654",
           "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "index.html",
@@ -5918,7 +5928,14 @@
           "Non épinglé en V159",
           "bf20b93457fbd7d6296acf66aacf1175698d4d68092c1297465df6a64dcaba5f",
           "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
+        ],
+        [
+          "src/hive-missions-v131.js",
+          "Non épinglé en V159",
+          "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/mission-insertion-ui-v62.js",
@@ -5945,64 +5962,64 @@
           "src/player-action-rig-v127.js",
           "Non épinglé en V159",
           "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-arm-constraints-v160.js",
           "Non épinglé en V159",
           "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
           "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "src/player-body-rig-v125.js",
           "Non épinglé en V159",
           "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-gait-v133.js",
           "Non épinglé en V159",
           "8210c7f89a0db7d9e3a0f2fb0138d9819bead4ed1df83d8aa8eb97d1bb32c310",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-human-proportions-v160.js",
           "Non épinglé en V159",
           "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-locomotion-rig-v129.js",
           "Non épinglé en V159",
           "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-modular-rig-v126.js",
           "Non épinglé en V159",
           "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-transit-rig-v128.js",
           "Non épinglé en V159",
-          "dc73fb0ad6183e0e4be80e85f525db6b375e3ffe498fec2112a60c491606309d",
-          "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs"
+          "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
+          "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs"
         ],
         [
           "src/player-weapon-runtime-v125.js",
           "Non épinglé en V159",
           "03004ebf7a640eccd537132a5f44d38852f1f3061da5a31dd15754c5abb63e55",
           "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "sw.js",
@@ -11175,12 +11192,12 @@
           "C160-PLAYER",
           "Demande utilisateur explicite V160",
           "Corps du joueur",
-          "Les pieds, le bassin, la ceinture, le thorax et les épaules de l’arme partagent le même repère de support au lieu de dissocier le haut et le bas du corps. La tête, le casque et le masque utilisent une attache réduite commune ; les hanches projetées sont resserrées. Les longueurs de cuisse/tibia restent rigides, les appuis plantés sont conservés et la cadence suit la distance réelle en marche et jogging. Les raccords de poses, d’échelle, de conduit et de chargement partiel conservent les supports natifs. La poche de recharge suit le tissu de la cuisse éloignée, y compris pendant les poses et le secours de chargement natif, au lieu de rester suspendue à un point vide. Lors d’un chargement incomplet, les sept pièces de jambes disponibles restent procédurales ; si leurs images manquent aussi, les vraies frames natives 4–7 suivent la phase de marche avec leurs propres ancres de semelle. Sur échelle, la posture entière s’écarte du montant pour que la main éloignée reste sur le vrai barreau dans l’enveloppe du coude, sans déplacer les barreaux ni changer les longueurs des membres.",
-          "src/player-human-proportions-v160.js ; src/player-body-rig-v125.js ; src/player-locomotion-rig-v129.js ; src/player-modular-rig-v126.js ; src/player-action-rig-v127.js ; src/player-transit-rig-v128.js ; src/player-gait-v133.js",
-          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs",
+          "Les pieds, le bassin, la ceinture, le thorax et les épaules de l’arme partagent le même repère de support au lieu de dissocier le haut et le bas du corps. La tête, le casque et le masque utilisent une attache réduite commune ; les hanches projetées sont resserrées. Les longueurs de cuisse/tibia restent rigides, les appuis plantés sont conservés et la cadence suit la distance réelle en marche et jogging. Les raccords de poses, d’échelle, de conduit et de chargement partiel conservent les supports natifs. La poche de recharge suit le tissu de la cuisse éloignée, y compris pendant les poses et le secours de chargement natif, au lieu de rester suspendue à un point vide. Lors d’un chargement incomplet, les sept pièces de jambes disponibles restent procédurales ; si leurs images manquent aussi, les vraies frames natives 4–7 suivent la phase de marche avec leurs propres ancres de semelle. Sur échelle, la posture entière s’écarte du montant pour que la main éloignée reste sur le vrai barreau dans l’enveloppe du coude, sans déplacer les barreaux ni changer les longueurs des membres. Pour le contact mural Jeri, l’identifiant et la face de la surface physique choisissent une posture de prise distincte de l’échelle centrée ; les mains et les pieds plantés visent la vraie face sans projection hors portée, et le plafond garde sa présentation propre.",
+          "src/player-human-proportions-v160.js ; src/player-body-rig-v125.js ; src/player-locomotion-rig-v129.js ; src/player-modular-rig-v126.js ; src/player-action-rig-v127.js ; src/player-transit-rig-v128.js ; src/player-gait-v133.js ; src/hive-missions-v131.js",
+          "scripts/verify-player-human-coherence-v160.mjs ; scripts/verify-player-body-alignment-v142.mjs ; scripts/verify-jeri-surface-motion-v135.mjs ; scripts/verify-player-climb-contacts-v139.mjs ; scripts/verify-human-gait-v133.mjs ; scripts/verify-human-motion-v136.mjs",
           "Implémentation source ; recette exacte en attente",
           "V160-REF-006 ; V160-REF-007 ; V160-REF-008 ; V160-REF-009 ; V160-REF-010",
-          "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final.",
+          "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final. Le contact Jeri adapte le rig existant ; il ne fournit aucun nouvel art synthétique dédié ni animation de franchise certifiée.",
           "À vérifier sur le commit final",
           "costume-art ; excel-identity-and-motion",
           0,
@@ -11207,7 +11224,7 @@
           "Prise des armes et origine du tir",
           "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources.",
           "src/player-arm-constraints-v160.js ; src/held-weapon-renderer-v125.js ; src/player-weapon-runtime-v125.js ; src/player-appearance-runtime-v126.js ; src/mission-input-v77.js ; src/weapon-actions-v131.js",
-          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs",
           "Implémentation source ; recette exacte en attente",
           "V160-REF-004 ; V160-REF-007",
           "Les 5°–145° du coude et −90°–150° du bras supérieur sont des enveloppes de conception projetées, pas des mesures biomécaniques ni une chorégraphie canonique. Dessins natifs conservés ; les comparaisons visuelles du corps final, de la branche de coude retenue et du retrait au mur attendent la recette exacte.",
@@ -11463,7 +11480,7 @@
     "Classeur encyclopédie brut et archives DLC Blackout/Earth/sprites V10 toujours absents.",
     "Les 15 sources et 96 correspondances V159 restent historiques ; les 10 enregistrements V160 incluent des références indisponibles explicitement non récupérées.",
     "Recette du commit V160, revue, CI, fusion et publication attendent leurs reçus propres ; aucun résultat V159 transféré.",
-    "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final.",
+    "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final. Le contact Jeri adapte le rig existant ; il ne fournit aucun nouvel art synthétique dédié ni animation de franchise certifiée.",
     "Adaptation inspirée du manuel officiel Alien: Isolation, distincte du modèle M314 du film. Pas de portée métrique canonique, d’identification IFF ou de copie 1:1 de son écran. Consultation native de 0,7 seconde puis projection HUD de cinq secondes ; aucun appareil tenu en continu n’est déclaré. Seuls les corps admis sont observés, pas les machines ou tous les accessoires mobiles. La dotation Q native reste distincte d’un consommable personnel.",
     "Les 5°–145° du coude et −90°–150° du bras supérieur sont des enveloppes de conception projetées, pas des mesures biomécaniques ni une chorégraphie canonique. Dessins natifs conservés ; les comparaisons visuelles du corps final, de la branche de coude retenue et du retrait au mur attendent la recette exacte.",
     "Intrigue Tantalus originale, sans reconstruction canonique Aliens ni conclusion sur une responsabilité personnelle. Les images de préparation du vaisseau restent illustratives ; seul le déploiement reprend la scène jouable. Ce parcours borné ne termine pas les corpus des vingt autres opérations. Comparaisons natives, reprise et résultats du commit final restent à vérifier."
@@ -11611,7 +11628,7 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "5715e22383ae691158092491c5a16fc2ae388fdcfdf12d624b17114ce6fc38ab",
+  "workbookSha256": "6eae1e17505ae8fc4be847396c7981f0e4d13e7ea1f4b750feff629c5670200a",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V159",
@@ -11665,7 +11682,11 @@
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-actions-v131.mjs",
-          "scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-audit-v143.mjs",
+          "scripts/verify-destructible-scenery-v130.mjs",
+          "scripts/verify-forge-mission-v141.mjs",
+          "scripts/verify-placeables-extension-v132.mjs"
         ]
       },
       {
@@ -11677,7 +11698,11 @@
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-actions-v131.mjs",
-          "scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-audit-v143.mjs",
+          "scripts/verify-destructible-scenery-v130.mjs",
+          "scripts/verify-forge-mission-v141.mjs",
+          "scripts/verify-placeables-extension-v132.mjs"
         ]
       },
       {
@@ -11689,7 +11714,11 @@
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-actions-v131.mjs",
-          "scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-audit-v143.mjs",
+          "scripts/verify-destructible-scenery-v130.mjs",
+          "scripts/verify-forge-mission-v141.mjs",
+          "scripts/verify-placeables-extension-v132.mjs"
         ]
       }
     ],
@@ -11790,7 +11819,25 @@
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-actions-v131.mjs",
-          "scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-audit-v143.mjs",
+          "scripts/verify-destructible-scenery-v130.mjs",
+          "scripts/verify-forge-mission-v141.mjs",
+          "scripts/verify-placeables-extension-v132.mjs"
+        ]
+      },
+      {
+        "path": "src/hive-missions-v131.js",
+        "previousSha256": null,
+        "currentSha256": "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
+        "verifiers": [
+          "scripts/verify-player-human-coherence-v160.mjs",
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
@@ -11825,10 +11872,14 @@
         "path": "src/player-action-rig-v127.js",
         "previousSha256": null,
         "currentSha256": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
@@ -11840,67 +11891,95 @@
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-actions-v131.mjs",
-          "scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-audit-v143.mjs",
+          "scripts/verify-destructible-scenery-v130.mjs",
+          "scripts/verify-forge-mission-v141.mjs",
+          "scripts/verify-placeables-extension-v132.mjs"
         ]
       },
       {
         "path": "src/player-body-rig-v125.js",
         "previousSha256": null,
         "currentSha256": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
         "path": "src/player-gait-v133.js",
         "previousSha256": null,
         "currentSha256": "8210c7f89a0db7d9e3a0f2fb0138d9819bead4ed1df83d8aa8eb97d1bb32c310",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
         "path": "src/player-human-proportions-v160.js",
         "previousSha256": null,
         "currentSha256": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
         "path": "src/player-locomotion-rig-v129.js",
         "previousSha256": null,
         "currentSha256": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
         "path": "src/player-modular-rig-v126.js",
         "previousSha256": null,
         "currentSha256": "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
         "path": "src/player-transit-rig-v128.js",
         "previousSha256": null,
-        "currentSha256": "dc73fb0ad6183e0e4be80e85f525db6b375e3ffe498fec2112a60c491606309d",
-        "reason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés.",
+        "currentSha256": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
+        "reason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres.",
         "verifiers": [
           "scripts/verify-player-human-coherence-v160.mjs",
-          "scripts/verify-player-body-alignment-v142.mjs"
+          "scripts/verify-player-body-alignment-v142.mjs",
+          "scripts/verify-jeri-surface-motion-v135.mjs",
+          "scripts/verify-player-climb-contacts-v139.mjs",
+          "scripts/verify-human-gait-v133.mjs",
+          "scripts/verify-human-motion-v136.mjs"
         ]
       },
       {
@@ -11912,7 +11991,11 @@
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-actions-v131.mjs",
-          "scripts/verify-player-runtime-v124.mjs"
+          "scripts/verify-player-runtime-v124.mjs",
+          "scripts/verify-audit-v143.mjs",
+          "scripts/verify-destructible-scenery-v130.mjs",
+          "scripts/verify-forge-mission-v141.mjs",
+          "scripts/verify-placeables-extension-v132.mjs"
         ]
       },
       {
@@ -11996,18 +12079,23 @@
         "src/player-modular-rig-v126.js",
         "src/player-action-rig-v127.js",
         "src/player-transit-rig-v128.js",
-        "src/player-gait-v133.js"
+        "src/player-gait-v133.js",
+        "src/hive-missions-v131.js"
       ],
       "verifiers": [
         "scripts/verify-player-human-coherence-v160.mjs",
-        "scripts/verify-player-body-alignment-v142.mjs"
+        "scripts/verify-player-body-alignment-v142.mjs",
+        "scripts/verify-jeri-surface-motion-v135.mjs",
+        "scripts/verify-player-climb-contacts-v139.mjs",
+        "scripts/verify-human-gait-v133.mjs",
+        "scripts/verify-human-motion-v136.mjs"
       ],
       "priorityLinks": [
         "costume-art",
         "excel-identity-and-motion"
       ],
-      "implementedScope": "Les pieds, le bassin, la ceinture, le thorax et les épaules de l’arme partagent le même repère de support au lieu de dissocier le haut et le bas du corps. La tête, le casque et le masque utilisent une attache réduite commune ; les hanches projetées sont resserrées. Les longueurs de cuisse/tibia restent rigides, les appuis plantés sont conservés et la cadence suit la distance réelle en marche et jogging. Les raccords de poses, d’échelle, de conduit et de chargement partiel conservent les supports natifs. La poche de recharge suit le tissu de la cuisse éloignée, y compris pendant les poses et le secours de chargement natif, au lieu de rester suspendue à un point vide. Lors d’un chargement incomplet, les sept pièces de jambes disponibles restent procédurales ; si leurs images manquent aussi, les vraies frames natives 4–7 suivent la phase de marche avec leurs propres ancres de semelle. Sur échelle, la posture entière s’écarte du montant pour que la main éloignée reste sur le vrai barreau dans l’enveloppe du coude, sans déplacer les barreaux ni changer les longueurs des membres.",
-      "limits": "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final.",
+      "implementedScope": "Les pieds, le bassin, la ceinture, le thorax et les épaules de l’arme partagent le même repère de support au lieu de dissocier le haut et le bas du corps. La tête, le casque et le masque utilisent une attache réduite commune ; les hanches projetées sont resserrées. Les longueurs de cuisse/tibia restent rigides, les appuis plantés sont conservés et la cadence suit la distance réelle en marche et jogging. Les raccords de poses, d’échelle, de conduit et de chargement partiel conservent les supports natifs. La poche de recharge suit le tissu de la cuisse éloignée, y compris pendant les poses et le secours de chargement natif, au lieu de rester suspendue à un point vide. Lors d’un chargement incomplet, les sept pièces de jambes disponibles restent procédurales ; si leurs images manquent aussi, les vraies frames natives 4–7 suivent la phase de marche avec leurs propres ancres de semelle. Sur échelle, la posture entière s’écarte du montant pour que la main éloignée reste sur le vrai barreau dans l’enveloppe du coude, sans déplacer les barreaux ni changer les longueurs des membres. Pour le contact mural Jeri, l’identifiant et la face de la surface physique choisissent une posture de prise distincte de l’échelle centrée ; les mains et les pieds plantés visent la vraie face sans projection hors portée, et le plafond garde sa présentation propre.",
+      "limits": "Correction procédurale de dessins natifs conservés ; enveloppe de conception et mesures de pixels, pas calibration anatomique universelle. Le relevé CMU générique ne retargete aucun personnage de franchise. La collision native reste 42 × 92 unités ; les variantes finales des bras et les comparaisons visuelles avant/après attendent la recette du commit final. Le contact Jeri adapte le rig existant ; il ne fournit aucun nouvel art synthétique dédié ni animation de franchise certifiée.",
       "contract": {
         "oneSupportOwnedBodyFrame": true,
         "rigidFemurAndShank": true,
@@ -12058,11 +12146,20 @@
         "nativeFallbackUsesFrameSpecificSoleAnchors": true,
         "partialLoadUpperBodyAndWeaponFramePreserved": true,
         "servicePouchFallbackDropRigUnits": 16,
-        "climbWholePostureStandoffRigUnits": 28,
         "climbRetainsActualRungCoordinates": true,
-        "climbRetainsExistingLimbLengthsAndJointEnvelope": true
+        "climbRetainsExistingLimbLengthsAndJointEnvelope": true,
+        "ladderWholePostureStandoffRigUnits": 28,
+        "physicalWallGripStandoffRigUnits": 4,
+        "physicalWallSurfaceIdentityAndFaceExplicit": true,
+        "physicalWallGripPostureSeparateFromLadderAndCeiling": true,
+        "physicalWallHandsStayOnActualFace": true,
+        "jeriDedicatedNewArt": false,
+        "physicalWallFeetStayOnActualFace": true,
+        "physicalWallHandsAndFeetRemainWithinReach": true,
+        "ceilingRetainsExistingPresentation": true,
+        "physicalWallPostureRequiresExplicitSurfaceIdentityAndSide": true
       },
-      "sourceChangeReason": "Raccorde le bassin, la ceinture, le torse et les jambes dans le même repère de rendu, avec stature et attaches réduites à une enveloppe de conception cohérente et appuis conservés."
+      "sourceChangeReason": "Les poses de déplacement et de transit gardent leurs appuis et leur repère commun ; une face physique explicite distingue le contact mural Jeri des barreaux centrés et du plafond, sans modifier les longueurs des membres."
     },
     {
       "id": "C160-TRACKER",
@@ -12133,7 +12230,11 @@
         "scripts/verify-held-weapon-v125.mjs",
         "scripts/verify-player-weapon-rig-v125.mjs",
         "scripts/verify-weapon-actions-v131.mjs",
-        "scripts/verify-player-runtime-v124.mjs"
+        "scripts/verify-player-runtime-v124.mjs",
+        "scripts/verify-audit-v143.mjs",
+        "scripts/verify-destructible-scenery-v130.mjs",
+        "scripts/verify-forge-mission-v141.mjs",
+        "scripts/verify-placeables-extension-v132.mjs"
       ],
       "priorityLinks": [
         "excel-identity-and-motion"
