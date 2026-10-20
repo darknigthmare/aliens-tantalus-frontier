@@ -1,5 +1,6 @@
 import { CAMPAIGNS } from './content.js';
 import { createInfestationExposureV62 } from './infestation-chain-v62.js';
+import { applyCampaignStoryReturnV160 } from './campaign-story-v160.js';
 
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, Number(value) || 0));
 const add = (target, key, amount, maximum = 100) => {
@@ -128,7 +129,8 @@ export function applyCampaignConsequence(save, campaign, world, result = {}) {
   save.galaxy.alerts = [alert, ...save.galaxy.alerts.filter((entry) => entry?.id !== alert.id)].slice(0, 256);
   const exposureEvent = causalExposureFor(consequence, worldState);
   const exposure = exposureEvent ? createInfestationExposureV62(save, exposureEvent) : null;
-  return { consequence, alert, exposure };
+  const storyReturn = applyCampaignStoryReturnV160(save, campaign, result);
+  return { consequence, alert, exposure, storyReturn };
 }
 
 export { OBJECTIVE_EFFECTS };

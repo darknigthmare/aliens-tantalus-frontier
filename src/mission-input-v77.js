@@ -111,6 +111,13 @@ export function refreshCombatPointerAimV83(canvas, engine) {
   return binding?.engine === engine ? binding.refresh() : null;
 }
 
+/** Read the identical current cursor projection without changing its owner,
+ * capture, held keys or actor. Admission queries may subsequently refuse. */
+export function previewCombatPointerAimV160(canvas, engine) {
+  const binding = combatPointerBindingsV83.get(canvas);
+  return binding?.engine === engine ? binding.refresh(false) : null;
+}
+
 /** Captures aim and held fire, then delegates the accepted contact to its owner.
  * The optional callback runs only after all input guards and projection succeed;
  * this module never fires autonomously or creates a second unguarded listener.
@@ -136,21 +143,22 @@ export function bindCombatPointerAimV83(canvas, engine, onStart) {
       try { canvas.releasePointerCapture?.(released.id); } catch {}
     }
   };
-  const refresh = () => {
+  const refresh = (commit = true) => {
     if (disposed || !pointer) return null;
     const actor = engine.player;
-    if (actor !== owner || !pointerGameplayAvailableV83(engine, actor)) { clear(); return null; }
+    if (actor !== owner || !pointerGameplayAvailableV83(engine, actor)) { if (commit) clear(); return null; }
     const rect = canvas.getBoundingClientRect?.();
     if (!rect || !(rect.width > 0) || !(rect.height > 0)
-      || !Number.isFinite(rect.left) || !Number.isFinite(rect.top)) { clear(); return null; }
+      || !Number.isFinite(rect.left) || !Number.isFinite(rect.top)) { if (commit) clear(); return null; }
     // The renderer scales a 1280x720 logical viewport, independent of backing-store DPR.
     const worldX = (Number(engine.camera?.x) || 0) + (pointer.clientX - rect.left) / rect.width * 1280;
     const worldY = (Number(engine.camera?.y) || 0) + (pointer.clientY - rect.top) / rect.height * 720;
     const vehicle = actor.inVehicle && engine.vehicle;
     const options = vehicle ? { barrelLength: 0, pivotX: vehicle.x + vehicle.w / 2, pivotY: vehicle.y + 28 } : { barrelLength: 0 };
     const shoulder = resolveCombatMuzzleV83(actor, { facing: actor.facing }, options);
-    actor.pointerAimV83 = Object.freeze({ x: worldX - shoulder.x, y: worldY - shoulder.y, source: 'pointer' });
-    return actor.pointerAimV83;
+    const aim = Object.freeze({ x: worldX - shoulder.x, y: worldY - shoulder.y, source: 'pointer' });
+    if (commit) actor.pointerAimV83 = aim;
+    return aim;
   };
   const updateButtons = (buttons) => {
     if (!pointer) return;

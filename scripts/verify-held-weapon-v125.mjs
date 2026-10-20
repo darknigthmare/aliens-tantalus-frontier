@@ -8,6 +8,9 @@ import { getHeldWeaponPoseV125 as pose, drawHeldWeaponV125 as draw, translateHel
   HELD_WEAPON_SURFACE_HEIGHTS_V125 } from '../src/held-weapon-renderer-v125.js';
 import { startTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77 } from '../src/tactical-reload-v77.js';
 import { resolvePlayerBodyRigV125, resolvePlayerArmPoseV125 } from '../src/player-body-rig-v125.js';
+import { PLAYER_ARM_FLEXION_LIMITS_V160, getPlayerArmReachV160,
+  PLAYER_ARM_SHOULDER_LIMITS_V160, getPlayerArmAxesV160,
+  nearestReachableWeaponGripV160, interpolatePlayerArmTargetV160 } from '../src/player-arm-constraints-v160.js';
 
 const named = name => WEAPONS.find(weapon => weapon.name === name);
 const actor = overrides => ({ x: 100, y: 200, w: 42, h: 92, facing: 1, alive: true, grounded: true,
@@ -261,4 +264,109 @@ test('incapacity, travel and an occupied tool/action leave no floating held fire
   assert.equal(pose({ actor: actor(), descriptor, bodyRig: rig({ eligible: false }) }), null);
   assert.deepEqual(pose({ actor: actor(), descriptor, bodyRig: rig({ ready: false }) }),
     pose({ actor: actor(), descriptor, bodyRig: rig({ ready: true }) }), 'readiness cannot change pure shot geometry');
+});
+
+test('a reload hand takes a continuous reachable arc instead of travelling through its own shoulder', () => {
+  const shoulder = { x: 30, y: 40 }, lengths = { upper: 15.5, fore: 16.5 };
+  const reach = getPlayerArmReachV160(lengths);
+  const angle = Math.acos((reach.min - 2) / 20);
+  const from = { x: 30 + Math.cos(angle) * 20, y: 40 + Math.sin(angle) * 20 };
+  const to = { x: from.x, y: 40 - Math.sin(angle) * 20 };
+  let previous = null;
+  for (let step = 0; step <= 100; step++) {
+    const target = interpolatePlayerArmTargetV160(from, to, step / 100, shoulder, lengths, 1);
+    const mirrored = interpolatePlayerArmTargetV160({ x: 60 - from.x, y: from.y },
+      { x: 60 - to.x, y: to.y }, step / 100, shoulder, lengths, -1);
+    const radius = Math.hypot(target.x - shoulder.x, target.y - shoulder.y);
+    assert.ok(radius >= reach.min && radius <= reach.max);
+    approximately(target.x - shoulder.x, shoulder.x - mirrored.x);
+    approximately(target.y, mirrored.y);
+    if (previous) assert.ok(Math.hypot(target.x - previous.x, target.y - previous.y) < .5,
+      'No hand teleport at the inner-reach boundary.');
+    previous = target;
+  }
+  equalPoint(interpolatePlayerArmTargetV160(from, to, 0, shoulder, lengths), from);
+  equalPoint(interpolatePlayerArmTargetV160(from, to, 1, shoulder, lengths), to);
+  const middle = interpolatePlayerArmTargetV160(from, to, .5, shoulder, lengths, 1);
+  assert.ok(middle.x > shoulder.x + 19.9, 'The hand travels on the operator-facing side.');
+});
+
+test('small endpoint changes at the former straight-to-arc tangent do not make a reload hand jump', () => {
+  const shoulder = { x: 0, y: 0 }, lengths = { upper: 15.5, fore: 16.5 };
+  const reach = getPlayerArmReachV160(lengths), tangent = Math.acos((reach.min + .001) / 20);
+  const at = angle => ({ x: Math.cos(angle) * 20, y: Math.sin(angle) * 20 });
+  for (let step = 0; step <= 100; step++) {
+    const first = interpolatePlayerArmTargetV160(at(-tangent + 1e-5), at(tangent - 1e-5), step / 100, shoulder, lengths);
+    const second = interpolatePlayerArmTargetV160(at(-tangent - 1e-5), at(tangent + 1e-5), step / 100, shoulder, lengths);
+    assert.ok(Math.hypot(first.x - second.x, first.y - second.y) < .001,
+      'A subpixel port change cannot create the previous ten-pixel hand jump.');
+  }
+});
+
+test('an impossible rigid contact reports its lack of reach without mutating the weapon target', () => {
+  const target = { x: 2, y: 0 }, frozen = JSON.stringify(target);
+  const result = nearestReachableWeaponGripV160(target, [
+    { center: { x: 0, y: 0 }, min: .1, max: 1 },
+    { center: { x: 10, y: 0 }, min: .1, max: 1 }
+  ]);
+  assert.equal(result.feasible, false);
+  assert.ok(result.error > 0);
+  assert.ok(Number.isFinite(result.grip.x) && Number.isFinite(result.grip.y));
+  assert.equal(JSON.stringify(target), frozen);
+});
+
+test('a nearby obstacle face and inner elbow reach admit one rigid contact without crossing the face', () => {
+  const band = { center: { x: 0, y: 0 }, min: 10, max: 30 };
+  const left = nearestReachableWeaponGripV160({ x: 4, y: 5 }, [band], 1,
+    [{ normal: { x: -1, y: 0 }, offset: 8 }]);
+  const right = nearestReachableWeaponGripV160({ x: -4, y: 5 }, [band], -1,
+    [{ normal: { x: 1, y: 0 }, offset: 8 }]);
+  assert.equal(left.feasible, true); assert.equal(right.feasible, true);
+  approximately(left.grip.x, -8); approximately(left.grip.y, 6);
+  approximately(right.grip.x, 8); approximately(right.grip.y, 6);
+  approximately(Math.hypot(left.grip.x, left.grip.y), 10);
+});
+
+test('every admitted held source keeps both actual arms inside the elbow envelope across aim and reload phases', () => {
+  const phases = [null, 0, .09, .18, .25, .35, .44, .53, .615, .70, .84, .92, 1];
+  for (const profile of HELD_WEAPON_PROFILES_V125.filter(entry => entry.portable)) {
+    for (const crouching of [false, true]) for (let sector = 0; sector < 8; sector++) for (const phase of phases) {
+      const angle = sector * Math.PI / 4, aim = { x: Math.cos(angle), y: Math.sin(angle) };
+      const body = actor({ crouching, facing: aim.x < -.1 ? -1 : 1, aimingV124: true,
+        ...(phase === null ? {} : { reloading: true, tacticalReload: {
+          weaponKey: profile.weaponId, phase: 'reloading', elapsed: phase, completeAt: 1
+        } }) });
+      const bodyRig = resolvePlayerBodyRigV125({ actor: body });
+      const held = pose({ actor: body, descriptor: profile, bodyRig, aim });
+      const arms = resolvePlayerArmPoseV125(bodyRig, held);
+      const context = `${profile.weaponId} crouch=${crouching} direction=${sector} reload=${phase}`;
+      assert.equal(held.armReachV160.feasible, true, context);
+      for (const side of ['near', 'far']) {
+        const arm = arms[side], reach = getPlayerArmReachV160(bodyRig.armLengths[side]);
+        assert.ok(arm.reachError < 1e-6, `${context} ${side} actual hand contact`);
+        assert.ok(arm.requestedDistance >= reach.min - 1e-6 && arm.requestedDistance <= reach.max + 1e-6,
+          `${context} ${side} elbow within ${PLAYER_ARM_FLEXION_LIMITS_V160.maxFlexionDegrees} degrees`);
+        const axes = getPlayerArmAxesV160(bodyRig.torsoAxisV160 || {
+          forward: { x: bodyRig.matrix.a, y: bodyRig.matrix.b },
+          down: { x: bodyRig.matrix.c, y: bodyRig.matrix.d }
+        }, bodyRig.facing);
+        const upper = { x: arm.elbow.x - arm.shoulder.x, y: arm.elbow.y - arm.shoulder.y };
+        const angle = Math.atan2(upper.x * axes.down.x + upper.y * axes.down.y,
+          upper.x * axes.forward.x + upper.y * axes.forward.y) * 180 / Math.PI;
+        assert.ok(angle >= PLAYER_ARM_SHOULDER_LIMITS_V160.minDegrees - 1e-6
+          && angle <= PLAYER_ARM_SHOULDER_LIMITS_V160.maxDegrees + 1e-6,
+          `${context} ${side} actual drawn upper-arm angle ${angle}`);
+      }
+      equalPoint(pointAt(held, held.profile.gripPivot), arms.near.hand);
+      if (held.support) equalPoint(arms.far.hand, held.support);
+      equalPoint(pointAt(held, held.profile.muzzlePivot), held.muzzle);
+      const mirroredBody = { ...body, facing: -body.facing };
+      const mirrored = pose({ actor: mirroredBody, descriptor: profile,
+        bodyRig: resolvePlayerBodyRigV125({ actor: mirroredBody }), aim: { x: -aim.x, y: aim.y } });
+      for (const key of ['grip', 'support', 'muzzle', 'reloadPort', 'ejectionPort']) if (held[key] && mirrored[key]) {
+        approximately(held[key].x + mirrored[key].x, 2 * (body.x + body.w / 2), `${context} mirrored ${key} x`);
+        approximately(held[key].y, mirrored[key].y, `${context} mirrored ${key} y`);
+      }
+    }
+  }
 });

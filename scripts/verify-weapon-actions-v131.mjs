@@ -489,8 +489,10 @@ test('a barrel crossing an opaque near wall cannot start flame or laser damage o
     const muzzle = engine.resolvePlayerMuzzleV124(actor, RIGHT), target = enemy(engine, muzzle.x + 20), health = target.health;
     assert.ok(muzzle.x > muzzle.pivotX);
     engine.walls = [{ id: 'near-barrel-wall', x: (muzzle.pivotX + muzzle.x) / 2, y: 500, w: 3, h: 430 }];
-    assert.equal(engine.fire(actor), true); assert.equal(target.health, health);
-    assert.ok(engine.weaponBeamsV131[0].segments.every(segment => segment.endX <= engine.walls[0].x));
+    const ammo = actor.ammo;
+    assert.equal(engine.fire(actor), false, 'A withdrawn barrel cannot emit a beam from a different firing direction.');
+    assert.equal(actor.ammo, ammo); assert.equal(target.health, health);
+    assert.equal(engine.weaponBeamsV131.length, 0);
   }
 });
 

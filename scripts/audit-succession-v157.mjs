@@ -48,7 +48,7 @@ export function verifyAuditSuccessionV157(previous, current, readSource = readRe
   }
   if (successor) {
     verifyAuditSuccessionV158(current, successor, readSource);
-    effective = resolveAuditSourcesV159(successor, readSource);
+    effective = resolveAuditSourcesV159(successor, readSource, { effective: true });
   }
   assert.equal(sortedKeys(before).length, 18);
   assert.ok(after && sortedKeys(after).length >= sortedKeys(before).length);

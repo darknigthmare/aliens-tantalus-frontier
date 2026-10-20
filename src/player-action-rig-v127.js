@@ -1,3 +1,4 @@
+import { getPlayerTorsoAxisV160 } from './player-human-proportions-v160.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { WEAPONS } from './content-core-v50.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
@@ -8,6 +9,7 @@ import { PLAYER_MODULAR_RIG_ANCHORS_V126, resolvePlayerModularRigV126,
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125 } from './held-weapon-renderer-v125.js';
 import { weaponImageReadyV125 } from './weapon-image-cache-v125.js';
+import { getPlayerArmReachV160, nearestReachableWeaponGripV160 } from './player-arm-constraints-v160.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, finite(value, low)));
@@ -164,18 +166,23 @@ function actionBody(actor, action, options) {
     waist.y + (value.x - waist.x) * sin + (value.y - waist.y) * cos);
   const sourceShoulders = Object.fromEntries(Object.entries(base.sourceFrame.sourceShoulders).map(([side, p]) => [side, rotate(p)]));
   const shoulders = Object.fromEntries(Object.entries(sourceShoulders).map(([side, p]) => [side, transform(base.matrix, p)]));
-  const bodyRig = { ...base, shoulders, neutralGrip: point(shoulders.near.x + base.facing * 30 * base.scale,
+  const modularAnchorsV127 = { ...anatomical, neck: rotate(anatomical.neck), headAngle: angle };
+  const bodyRig = { ...base, shoulders,
+    torsoAxisV160: getPlayerTorsoAxisV160(base.matrix, modularAnchorsV127, base.facing), neutralGrip: point(shoulders.near.x + base.facing * 30 * base.scale,
     shoulders.near.y + 11 * base.scale), sourceFrame: { ...base.sourceFrame, sourceShoulders },
-    modularAnchorsV127: { ...anatomical, neck: rotate(anatomical.neck), headAngle: angle },
+    modularAnchorsV127,
     actionV127: { kind: action.kind, mode: action.mode, progress: p, angle },
     stance: action.groundedPose ? 'working-kneel' : base.stance };
   return { bodyRig, observed };
 }
 
 function limitTarget(target, shoulder, lengths, ratio = .98) {
-  const radius = (lengths.upper + lengths.fore) * ratio;
+  const reach = getPlayerArmReachV160(lengths);
+  const radius = Math.min(reach.max - .001, (lengths.upper + lengths.fore) * ratio);
   const dx = target.x - shoulder.x, dy = target.y - shoulder.y, d = Math.hypot(dx, dy);
-  return d > radius ? point(shoulder.x + dx * radius / d, shoulder.y + dy * radius / d) : target;
+  const admitted = clamp(d, reach.min + .001, radius);
+  return d > 1e-8 ? point(shoulder.x + dx * admitted / d, shoulder.y + dy * admitted / d)
+    : point(shoulder.x, shoulder.y + admitted);
 }
 
 function propMatrix(source, target, scale, facing, angle = 0) {
@@ -188,14 +195,22 @@ const cell = index => ({ x: index % 2 * 256, y: Math.floor(index / 2) * 256, wid
 function makeProp(asset, sourceRect, gripPixel, supportPixel, target, size, angle, rig, side = 'near') {
   const scale = size * rig.standingHeight;
   const lengths = rig.armLengths, other = side === 'near' ? 'far' : 'near';
-  let grip = limitTarget(target, rig.shoulders[side], lengths[side]);
-  // Rigid translation preserves the implement and both measured contacts.
-  // Fitting uses the same bounded anatomy as the firearm renderer.
-  for (let index = 0; index < 12 && supportPixel; index++) {
-    const matrix = propMatrix(gripPixel, grip, scale, rig.facing, angle);
-    const offset = transform(matrix, supportPixel), supported = limitTarget(offset, rig.shoulders[other], lengths[other]);
-    grip = limitTarget(point(grip.x + supported.x - offset.x, grip.y + supported.y - offset.y), rig.shoulders[side], lengths[side]);
+  const reachFor = name => {
+    const reach = getPlayerArmReachV160(lengths[name]);
+    return { ...reach, max: Math.min(reach.max, (lengths[name].upper + lengths[name].fore) * .98) };
+  };
+  const bands = [{ center: rig.shoulders[side], ...reachFor(side) }];
+  if (supportPixel) {
+    const offset = transform(propMatrix(gripPixel, point(0, 0), scale, rig.facing, angle), supportPixel);
+    bands.push({ center: point(rig.shoulders[other].x - offset.x, rig.shoulders[other].y - offset.y),
+      ...reachFor(other) });
   }
+  // Fit both actual contacts simultaneously. Alternating upper-reach-only
+  // projections could fold a support elbow through its shoulder or leave an
+  // implement floating away from the separately clamped final hand.
+  const fitted = nearestReachableWeaponGripV160(target, bands.map(b => ({ ...b,
+    min: b.min + .002, max: b.max - .002 })), rig.facing);
+  const grip = fitted.grip;
   const matrix = propMatrix(gripPixel, grip, scale, rig.facing, angle);
   return { id: `action-${asset.id}`, slot: 'action-prop', itemId: asset.weaponId || asset.id,
     name: asset.name, asset, imageKey: asset.imageKey, sourceRect, matrix, part: 'independent-action-prop',

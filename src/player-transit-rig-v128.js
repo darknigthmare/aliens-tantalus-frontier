@@ -1,5 +1,7 @@
+import { getPlayerTorsoAxisV160 } from './player-human-proportions-v160.js';
 import { HUMAN_LEG_DIMENSIONS_V136, humanFootTravelV136 } from './human-motion-v136.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
+import { PLAYER_ARM_FLEXION_LIMITS_V160 } from './player-arm-constraints-v160.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { resolvePlayerBodyRigV125, resolvePlayerArmPoseV125, solvePlayerArmIKV125,
@@ -74,7 +76,7 @@ export const PLAYER_LEG_PARTS_V128 = freeze({
 
 export const PLAYER_TRANSIT_PRESENTATION_V128 = freeze({
   schema: 128, downDuration: .42, deathDuration: .48, reviveDuration: .48,
-  rungSpacing: 22, firstRung: 11, ...HUMAN_LEG_DIMENSIONS_V136,
+  rungSpacing: 22, firstRung: 11, climbWaistStandoff: 28, ...HUMAN_LEG_DIMENSIONS_V136,
   artStatus: 'separated-pieces-with-constant-length-leg-ik'
 });
 const C = PLAYER_TRANSIT_PRESENTATION_V128;
@@ -240,7 +242,7 @@ function bodyFrame(base,waist,angle,kind) {
   const matrix={a,b,c,d,e:waist.x-a*anatomical.waist.x-c*anatomical.waist.y,
     f:waist.y-b*anatomical.waist.x-d*anatomical.waist.y};
   const shoulders=Object.fromEntries(Object.entries(base.sourceFrame.sourceShoulders).map(([side,p])=>[side,transform(matrix,p)]));
-  return {...base,matrix,shoulders,atlas:'transit-v128',frame:kind==='climb'?0:kind==='downed'?1:kind==='death'?2:3,
+  return {...base,matrix,shoulders,torsoAxisV160:getPlayerTorsoAxisV160(matrix,anatomical,f),atlas:'transit-v128',frame:kind==='climb'?0:kind==='downed'?1:kind==='death'?2:3,
     modularAnchorsV127:{...anatomical,family:kind==='climb'?'upright':'compact'},
     neutralGrip:point(shoulders.near.x+f*25*base.scale,shoulders.near.y+20*base.scale),
     gait:kind,stance:kind,moving:kind==='climb',sourceFrame:{...base.sourceFrame},
@@ -253,7 +255,7 @@ function bodyFrame(base,waist,angle,kind) {
  * An invalid or incomplete definition is omitted so the compositor can use its
  * complete native fallback instead of producing half a pair of trousers. */
 export function buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,facing,
-  legDefinitions={},pelvisBelt=false}={}) {
+  legDefinitions={},pelvisBelt=false,projectedHipSpread=1}={}) {
   const result={};
   const definitions={...Object.fromEntries(Object.entries(PLAYER_LEG_PARTS_V128)
     .map(([itemId,parts])=>[itemId,{parts,asset:LEG_ASSET}])),...legDefinitions};
@@ -283,8 +285,16 @@ export function buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,f
     // The pelvis overlaps the real round proximal ends of both thighs. V142
     // ground locomotion uses its measured belt and separates the jacket above
     // it; dedicated transit retains the reviewed original waist registration.
+    // The old outside hip-protector pins encoded a wide three-quarter stance.
+    // A profile pose projects the femoral sockets closer together inside that
+    // same opaque cloth. Contract source and target depth together so a side
+    // step does not squash the complete pelvis into a thin vertical strip.
+    const sourceCenter=(p.near.x+p.far.x)/2;
+    const sourceSpread=Number.isFinite(projectedHipSpread)&&projectedHipSpread>0?projectedHipSpread:1;
+    const sourceHip=side=>sourceSpread!==1 ? point(sourceCenter+(p[side].x-sourceCenter)
+      *sourceSpread,p[side].y) : p[side];
     layers.push(legLayer('pelvis',itemId,'pelvis',p,triangle([
-      pelvisBelt && validPoint(p.belt) ? p.belt : p.waist,p.near,p.far],[waist,hips.near,hips.far]),asset));
+      pelvisBelt && validPoint(p.belt) ? p.belt : p.waist,sourceHip('near'),sourceHip('far')],[waist,hips.near,hips.far]),asset));
     result[itemId]=layers;
   }
   return result;
@@ -296,7 +306,12 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
   const p=smooth(state.progress),standing=kind==='revive'?p:1-p;
   let angle,waist,contacts={ladderId:null,floorY:kind==='climb'?null:F,feet:{near:null,far:null},hands:{near:null,far:null}};
   if(kind==='climb') {
-    angle=.09;waist=point(center-f*20*s,F-98*s);contacts.ladderId=String(ladder.id||actor.ladderId||'')||null;
+    // Keep the complete chest/hips far enough from the ladder that its far
+    // hand can hold a real rung without folding inside the elbow's minimum
+    // reach. The former 20px canonical gap put that hand ~7 world px from its
+    // shoulder (minimum9.67); moving the whole climbing posture back four
+    // world px preserves the rung, fixed bones and 145-degree elbow bound.
+    angle=.09;waist=point(center-f*C.climbWaistStandoff*s,F-98*s);contacts.ladderId=String(ladder.id||actor.ladderId||'')||null;
   } else if(kind==='death') {
     angle=mix(.57,Math.PI/2-.08,p);waist=point(center+f*mix(0,16,p)*s,F-mix(51,30,p)*s);
   } else {
@@ -340,13 +355,17 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
     if(legs[side].reachClamped)contacts.feet[side]={...contact,point:legs[side].sole,planted:false,
       rungIndex:null,rungY:null,reachClamped:true};
   }
+  // A fully extended arm can hold an actual ladder rung. The remaining elbow
+  // flexion envelope is the same as tools/weapons; contact resolution and draw
+  // must use it together instead of applying a later, different IK clamp.
+  const armLimits={...PLAYER_ARM_FLEXION_LIMITS_V160,minFlexionDegrees:kind==='climb'?0:5};
   const hands={};
   for(const side of ['near','far']) {
     if(kind==='climb') {
       const contact=rungContact(ladder,F-132*s,side==='near'?rungSpacing:0,
         ladder.x+(side==='near'?-5:5)*f,5*s,f);
       const shoulder=body.shoulders[side];
-      const solved=solvePlayerArmIKV125(shoulder,contact.point,body.armLengths[side],f);
+      const solved=solvePlayerArmIKV125(shoulder,contact.point,body.armLengths[side],f,armLimits);
       hands[side]=solved.hand;
       contacts.hands[side]={...contact,point:solved.hand,planted:contact.planted&&!solved.reachClamped,
         rungIndex:solved.reachClamped?null:contact.rungIndex,rungY:solved.reachClamped?null:contact.rungY,
@@ -357,20 +376,20 @@ function buildGeometry(base,actor,state,ladder,reducedMotion,legDefinitions) {
       const rest=point(shoulder.x+f*(side==='near'?7:-5)*s,shoulder.y+53*s);
       const target=kind==='death'?ground:mixPoint(ground,rest,standing);
       let resolvedTarget=target;
-      let solved=solvePlayerArmIKV125(shoulder,resolvedTarget,body.armLengths[side],f);
+      let solved=solvePlayerArmIKV125(shoulder,resolvedTarget,body.armLengths[side],f,armLimits);
       // A prone arm may otherwise choose the elbow branch below the floor.
       // Move the free hand's target outward/upward until the bent elbow has
       // physical clearance; keep both bone lengths and the ground unchanged.
       for(let attempt=0;attempt<12 && solved.elbow.y>F-8*s;attempt++) {
         resolvedTarget=point(resolvedTarget.x+f*4*s,resolvedTarget.y-3*s);
-        solved=solvePlayerArmIKV125(shoulder,resolvedTarget,body.armLengths[side],f);
+        solved=solvePlayerArmIKV125(shoulder,resolvedTarget,body.armLengths[side],f,armLimits);
       }
       hands[side]=solved.hand;
       contacts.hands[side]={point:solved.hand,planted:false,rungIndex:null,rungY:null,reachClamped:solved.reachClamped};
     }
   }
   body.modularLowerLayersV128=buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,facing:f,legDefinitions});
-  const handPose={unarmed:true,visible:false,grip:hands.near,support:hands.far,serviceHand:hands.far,
+  const handPose={unarmed:true,visible:false,grip:hands.near,support:hands.far,serviceHand:hands.far,armJointLimitsV160:armLimits,
     translation:point(0,0),handKinds:{near:kind==='climb'?'grip':'service',far:kind==='climb'?'grip':'service'}};
   return {bodyRig:body,handPose,legs,contacts};
 }

@@ -372,3 +372,79 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Authored QZ-18 transmissions use the native crew sheets and existing ship /
+ * approach illustrations. Shots preserve image ratio and never invent video. */
+.mission-insertion-v62[data-campaign-story] .mission-insertion-v62__media {
+  min-height: 470px;
+}
+.mission-insertion-v62[data-campaign-story] .mission-insertion-v62__media-source {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  transform-origin: center;
+}
+.mission-insertion-v62[data-campaign-story] .mission-insertion-v62__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(1, 4, 5, .18), transparent 35%, rgba(1, 4, 5, .7));
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, .4);
+}
+.mission-insertion-v62__media[data-story-shot='approach'] .mission-insertion-v62__media-source,
+.mission-insertion-v62__media[data-story-shot='deployment'] .mission-insertion-v62__media-source {
+  animation: campaign-story-v160-shot 20s ease-out both;
+}
+.mission-insertion-v62__media-source[data-native-relay-shot] { animation: none !important; transform: none !important; }
+@keyframes campaign-story-v160-shot { from { transform: scale(1); } to { transform: scale(1.035); } }
+.mission-insertion-v62__shot-label {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 44px;
+  z-index: 1;
+  padding-top: 14px;
+  color: #f0dfb9;
+  border-top: 1px solid #8d8d72;
+  font-size: .76rem;
+  letter-spacing: .12em;
+}
+.mission-insertion-v62__story { display: grid; gap: 18px; }
+.mission-insertion-v62__story > h3 { color: var(--insertion-amber-soft); font-size: .9rem; }
+.mission-insertion-v62__dialogue-line { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 12px; align-items: start; }
+.mission-insertion-v62__dialogue-line strong { display: block; color: #b7dcd0; font-size: .72rem; margin-bottom: 6px; }
+.mission-insertion-v62__dialogue-line p { color: #e0e7df; font-size: .86rem; line-height: 1.6; }
+.mission-insertion-v62__portrait { width: 60px; height: 64px; border: 1px solid #52655e; background-color: #0b1515; background-repeat: no-repeat; background-size: 512px 512px; background-position: -34px -2px; }
+.mission-insertion-v62__portrait[data-character='inez'] { background-image: url('/assets/openai/sprites/normalized/npcs/inez-harlow-locomotion-sheet.png'); }
+.mission-insertion-v62__portrait[data-character='rook'] { background-image: url('/assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png'); }
+.mission-insertion-v62__portrait[data-character='operator'],
+.mission-insertion-v62__portrait[data-character='mother'] { display: grid; place-items: center; color: #9fcab5; font-size: .56rem; overflow-wrap: anywhere; letter-spacing: -.03em; }
+.mission-insertion-v62__story-objective { padding: 12px; border-left: 2px solid var(--insertion-amber); background: #141c1b; color: #f2dfb4; font-size: .8rem; line-height: 1.5; }
+.mission-insertion-v62__story-protocol { color: #a5b6ae; font-size: .7rem; line-height: 1.5; }
+.mission-insertion-v62__story-choices { display: grid; gap: 9px; }
+.mission-insertion-v62__story-choice { display: grid; gap: 7px; padding: 12px; color: #e8eee9; text-align: left; font: inherit; border: 1px solid #57665d; background: #111b1a; cursor: pointer; }
+.mission-insertion-v62__story-choice span { color: #c1cec5; font-size: .73rem; line-height: 1.5; }
+.mission-insertion-v62__story-choice[aria-pressed='true'] { border-color: #f1bd60; background: #30291b; }
+.mission-insertion-v62__story-choice:focus-visible { outline: 2px solid #ffe1a3; outline-offset: 3px; }
+.mission-insertion-v62[data-reduced-motion='true'] .mission-insertion-v62__media-source { animation: none; transform: none; }
+.campaign-story-v160 { display: grid; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #56665c; }
+.campaign-story-v160__status { color: #e8c475; font-size: .72rem; letter-spacing: .08em; }
+.campaign-story-v160__protocol, .campaign-story-v160__notice { color: #b8c8bd; font-size: .75rem; }
+.campaign-story-v160__questions { display: flex; flex-wrap: wrap; gap: 8px; }
+.campaign-story-v160__questions button { padding: 10px 12px; min-height: 44px; color: #e1e9df; border: 1px solid #617263; background: #111d16; font: inherit; font-size: .76rem; cursor: pointer; text-align: left; }
+.campaign-story-v160__questions button[aria-pressed='true'] { background: #304b35; border-color: #abcda4; }
+.campaign-story-v160__questions button:focus-visible { outline: 2px solid #d9ecba; outline-offset: 3px; }
+.campaign-story-v160__questions button:disabled { opacity: .55; cursor: default; }
+.campaign-story-v160__answer { padding: 15px; background: #101b15; border-left: 2px solid #8ba886; }
+.campaign-story-v160__answer strong { color: #b9d6b1; font-size: .78rem; }
+.campaign-story-v160__answer p { margin-top: 8px; line-height: 1.65; }
+@media (max-width: 860px) {
+  .mission-insertion-v62[data-campaign-story] .mission-insertion-v62__media { min-height: 250px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-insertion-v62[data-campaign-story] .mission-insertion-v62__media-source { animation: none; transform: none; }
+}

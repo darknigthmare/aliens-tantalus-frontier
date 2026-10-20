@@ -3,8 +3,8 @@ import { smoothHumanStepV136 } from './human-motion-v136.js';
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, finite(value, low)));
 export const HUMAN_GAIT_PROFILES_V133 = Object.freeze({
-  walk: Object.freeze({ heightStride: .8, duty: .54, lift: 8, lean: .012 }),
-  run: Object.freeze({ heightStride: 1.5, duty: .28, lift: 8, lean: .024 }),
+  walk: Object.freeze({ heightStride: .8, duty: .54, lift: 10, lean: .012 }),
+  run: Object.freeze({ heightStride: 1.7, duty: .25, lift: 18, lean: .024 }),
   crouch: Object.freeze({ heightStride: .46, duty: .72, lift: 5, lean: .006 })
 });
 /** At ship speeds an operator is running, rather than performing a very fast
@@ -13,16 +13,24 @@ export const HUMAN_GAIT_PROFILES_V133 = Object.freeze({
  * kinematic boundary. Running has brief genuine free-foot intervals. */
 export function humanGaitProfileV136(actor, gait = humanGaitKindV133(actor)) {
   if (gait === 'crouch') return HUMAN_GAIT_PROFILES_V133.crouch;
-  const blend = smoothHumanStepV136((Math.abs(finite(actor?.vx)) - 170) / 80);
+  // At 155 world px/s the 92px operator was still spending a short walking
+  // stride more than four steps/second. Introduce the jog through actual speed
+  // before that point; larger strides and shorter support belong together.
+  const blend = smoothHumanStepV136((Math.abs(finite(actor?.vx)) - 100) / 90);
   const walk = HUMAN_GAIT_PROFILES_V133.walk, run = HUMAN_GAIT_PROFILES_V133.run;
   if (blend === 0) return walk;
   if (blend === 1) return run;
-  const supportBlend = smoothHumanStepV136((Math.abs(finite(actor?.vx)) - 170) / 50);
-  return Object.freeze(Object.fromEntries(['heightStride', 'duty', 'lift', 'lean']
-    .map(key => [key, walk[key] + (run[key] - walk[key]) * (key === 'duty' ? supportBlend : blend)])));
+  const result = Object.fromEntries(['heightStride', 'lift', 'lean']
+    .map(key => [key, walk[key] + (run[key] - walk[key]) * blend]));
+  // Interpolating stride and duty independently makes their product peak in
+  // the middle: the jog then spreads its planted feet farther than either
+  // walking or running. Blend the supported travel, then derive its duty.
+  const supportedTravel = walk.heightStride * walk.duty
+    + (run.heightStride * run.duty - walk.heightStride * walk.duty) * blend;
+  return Object.freeze({ ...result, duty: supportedTravel / result.heightStride });
 }
 export function humanGaitKindV133(actor) {
-  return actor?.crouching ? 'crouch' : actor?.movementV124?.gait === 'run' || Math.abs(finite(actor?.vx)) >= 235 ? 'run' : 'walk';
+  return actor?.crouching ? 'crouch' : actor?.movementV124?.gait === 'run' || Math.abs(finite(actor?.vx)) >= 190 ? 'run' : 'walk';
 }
 /** A full cycle contains two steps. Its world distance comes from the human's
  * supported stature, not the width or cell size of the source atlas. */

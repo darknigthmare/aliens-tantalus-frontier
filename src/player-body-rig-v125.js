@@ -1,7 +1,10 @@
+import { normalizePlayerAppearanceV126 } from './player-appearance-v126.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { sampleHumanGaitV133 } from './player-gait-v133.js';
+import { PLAYER_HUMAN_PROPORTIONS_V160, PLAYER_MODULAR_SOURCE_ANCHORS_V160, getPlayerTorsoAxisV160 } from './player-human-proportions-v160.js';
 import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { getPlayerCostumeSkinV119 } from './player-costume-skins-v119.js';
+import { getPlayerArmReachV160, PLAYER_ARM_FLEXION_LIMITS_V160 } from './player-arm-constraints-v160.js';
 
 /** Separate, reviewed Echo9 art. No full-body image is hidden by a torso mask:
  * these derived PNGs actually have no arms or gun. The native output is 1254
@@ -178,7 +181,11 @@ function selectPose(actor, timeSeconds, reducedMotion, motion) {
   if (moving) {
     const backwards = Math.sign(finite(actor.vx)) !== facingOf(actor);
     const phase = Math.floor(motion.phase * 4 + 1e-9) % 4;
-    return { atlas: 'locomotion', frame: 4 + phase,
+    // The procedural lower body owns the actual stride. Reusing the native
+    // running torso and then moving only its head upright put the collar,
+    // shoulders and neck on different axes. Use the complete native upright
+    // upper pose for travel; arms/weapon still resolve from its real sockets.
+    return { atlas: 'locomotion', frame: phase,
       gait: backwards ? 'backpedal' : motion.gait, moving: true };
   }
   if (aiming || actor.reloading || acceptedShot || finite(actor.v52FireClock) > 0) return { atlas: 'combat', frame: 3, gait: 'idle', moving: false };
@@ -226,15 +233,32 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
   const topLeft = world(point(facing < 0 ? source.x + source.width : source.x, source.y));
   const corners = [point(source.x, source.y), point(source.x + source.width, source.y), point(source.x, source.y + source.height), point(source.x + source.width, source.y + source.height)].map(world);
   const sprite = { x: Math.min(...corners.map(p => p.x)), y: Math.min(...corners.map(p => p.y)), width: Math.max(...corners.map(p => p.x)) - Math.min(...corners.map(p => p.x)), height: Math.max(...corners.map(p => p.y)) - Math.min(...corners.map(p => p.y)) };
+  // The upright upper pose must not freeze a complete native-body fallback.
+  // Retain a separately registered native lower frame from the same observed
+  // travel phase. It has its own sole plane and never tilts the held weapon.
+  const fallbackLowerIndex = pose.atlas === 'locomotion' && pose.moving && pose.frame < 4
+    ? 4 + pose.frame : pose.frame;
+  const fallbackLowerFrame = PLAYER_BODY_RIG_FRAMES_V125[pose.atlas][fallbackLowerIndex];
+  const lowerScale = standingHeight / fallbackLowerFrame.standingHeight;
+  const lowerMatrix = { a: facing * lowerScale, b: 0, c: 0, d: lowerScale,
+    e: pivot.x - facing * lowerScale * fallbackLowerFrame.support.x,
+    f: pivot.y - lowerScale * fallbackLowerFrame.support.y };
+  const nativeLowerV160 = { asset: descriptor, frame: fallbackLowerIndex, atlas: pose.atlas,
+    sourceRect: fallbackLowerFrame.source, sourceFrame: fallbackLowerFrame, matrix: lowerMatrix };
   const ready = playerBodyRigImageReadyV125(imageFrom(images, descriptor.imageKey), descriptor)
     && playerBodyRigImageReadyV125(imageFrom(images, ARMS.imageKey), ARMS);
   return freeze({ schema: 125, id: descriptor.id, sheetId: descriptor.id, rigType: 'echo9', exact: false,
     eligible: true, ready, reason: ready ? null : 'rig-images-unavailable', surface,
     asset: descriptor, imageKey: descriptor.imageKey, requiredAssets: [descriptor, ARMS],
     armsAsset: ARMS, frame: pose.frame, atlas: pose.atlas, source, sourceFrame: frame,
-    sprite, pivot, matrix, facing, flip: facing < 0, shoulders,
+    sprite, pivot, matrix, facing, flip: facing < 0, shoulders, nativeLowerV160,
+    torsoAxisV160: getPlayerTorsoAxisV160(matrix, PLAYER_MODULAR_SOURCE_ANCHORS_V160[pose.atlas]?.[pose.frame], facing),
     neutralGrip: point(shoulders.near.x + facing * 30 * scale, shoulders.near.y + 11 * scale),
-    pouch: point(pivot.x - facing * 12 * scale, pivot.y - standingHeight * (actor.crouching ? .29 : .49)),
+    // The magazine pouch is on the visible front belt/thigh. The former
+    // rearward/high target made a service hand reach behind its shoulder.
+    // The lower anatomic point is measured on the actual trouser/thigh art.
+    pouch: point(pivot.x + facing * 6 * scale, pivot.y - standingHeight * (actor.crouching ? .29 : .49)
+      + PLAYER_HUMAN_PROPORTIONS_V160.servicePouchDrop * scale),
     armLengths: { near: { upper: 31 * scale, fore: 33 * scale }, far: { upper: 31 * scale, fore: 33 * scale } },
     scale, sourceScaleX: horizontal, sourceScaleY: vertical, locomotionMotionV133: { ...motion, lean },
     standingHeight, bodyHeight: standingHeight, poseHeight: nativePoseHeight * vertical,
@@ -249,14 +273,17 @@ export function resolvePlayerBodyRigV125({ actor, sample = null, timeSeconds = 0
  * reported instead of producing NaN or silently lengthening a limb. Returning
  * both target and hand makes the remaining distance observable in QA.
  */
-export function solvePlayerArmIKV125(shoulder, target, lengths, bend = 1) {
+export function solvePlayerArmIKV125(shoulder, target, lengths, bend = 1, jointLimits = null) {
   if (!validPoint(shoulder) || !validPoint(target)) return null;
   const upper = finite(lengths?.upper), fore = finite(lengths?.fore);
   if (upper <= 0 || fore <= 0) return null;
   const dx = target.x - shoulder.x, dy = target.y - shoulder.y;
   const requestedDistance = Math.hypot(dx, dy);
-  const maxDistance = upper + fore - 1e-6;
-  const minDistance = Math.abs(upper - fore) + 1e-6;
+  // Optional elbow limits are explicit. The same analytic solver also serves
+  // knees and authored transit, which retain their own contact constraints.
+  const reach = jointLimits ? getPlayerArmReachV160(lengths, jointLimits) : null;
+  const maxDistance = (reach?.max ?? upper + fore) - 1e-6;
+  const minDistance = (reach?.min ?? Math.abs(upper - fore)) + 1e-6;
   const distance = clamp(requestedDistance, minDistance, maxDistance);
   const ux = requestedDistance > 1e-8 ? dx / requestedDistance : 0;
   const uy = requestedDistance > 1e-8 ? dy / requestedDistance : 1;
@@ -269,7 +296,9 @@ export function solvePlayerArmIKV125(shoulder, target, lengths, bend = 1) {
   return freeze({ shoulder: point(shoulder.x, shoulder.y), elbow, hand,
     target: point(target.x, target.y), requestedDistance, distance, upper, fore,
     reachClamped: Math.abs(requestedDistance - distance) > 1e-5,
-    reachError: Math.abs(requestedDistance - distance) });
+    reachError: Math.abs(requestedDistance - distance),
+    flexionDegrees: Math.acos(clamp((distance * distance - upper * upper - fore * fore) / (2 * upper * fore), -1, 1)) * 180 / Math.PI,
+    jointLimits: reach ? { minFlexionDegrees: reach.minFlexionDegrees, maxFlexionDegrees: reach.maxFlexionDegrees } : null });
 }
 
 function handTarget(bodyRig, pose, side) {
@@ -299,7 +328,7 @@ export function fitPlayerArmShoulderV125(bodyRig, weaponPose, side = 'near') {
   const obstructed = translated || weaponPose.muzzle?.obstructedV124 === true || weaponPose.obstructedV124 === true;
   const socket = PLAYER_SHOULDER_SOCKETS_V125[bodyRig.atlas]?.[bodyRig.frame]?.[side];
   let amount = 0, limit = 0;
-  if (obstructed && socket && distance > 0) {
+  if (obstructed && socket && distance > 0 && weaponPose.armReachV160?.feasible !== true) {
     // The reviewed reference permits five world pixels at its 148px cell.
     // A smaller shared stature reduces that bound; opaque socket bounds can
     // restrict it further for the actual movement direction.
@@ -337,7 +366,9 @@ export function resolvePlayerArmPoseV125(bodyRig, weaponPose) {
     const target = handTarget(bodyRig, weaponPose, side);
     const fitting = fitPlayerArmShoulderV125(bodyRig, weaponPose, side);
     if (!fitting) return null;
-    const ik = solvePlayerArmIKV125(fitting.shoulder, target, bodyRig.armLengths[side], bodyRig.facing);
+    const elbowSide = weaponPose.armBendsV160?.[side] === -1 ? -1 : 1;
+    const ik = solvePlayerArmIKV125(fitting.shoulder, target, bodyRig.armLengths[side], bodyRig.facing * elbowSide,
+      weaponPose.armJointLimitsV160 || PLAYER_ARM_FLEXION_LIMITS_V160);
     if (!ik) return null;
     const dx = ik.hand.x - ik.elbow.x, dy = ik.hand.y - ik.elbow.y;
     const length = Math.max(1e-8, Math.hypot(dx, dy));
@@ -371,6 +402,70 @@ function drawPart(ctx, image, descriptor, from, to, width, facing) {
   ctx.restore();
 }
 
+/** A complete fallback keeps the authoritative chest/weapon frame. Loaded
+ * articulated trousers can still animate when an unrelated upper PNG fails.
+ * If the trousers are unavailable too, actual native walking lower frames
+ * animate on their own measured sole plane. Image readiness changes drawing
+ * only; the collision, shoulders, weapon and sewn pouch remain identical.
+ */
+export function resolvePlayerNativeBodyLayersV160(bodyRig, { images = null, appearance = null } = {}) {
+  const base = bodyRig?.baseBodyRigV160 || bodyRig;
+  const anatomical = bodyRig?.modularAnchorsV127
+    || PLAYER_MODULAR_SOURCE_ANCHORS_V160[bodyRig?.atlas]?.[bodyRig?.frame];
+  const layer = (id, matrix, extra = {}) => ({ id, asset: bodyRig.asset,
+    sourceRect: bodyRig.source, matrix, ...extra });
+  const slots = normalizePlayerAppearanceV126(appearance).slots;
+  const parts = bodyRig?.modularLowerLayersV128?.[slots.legs];
+  const completeLower = Array.isArray(parts) && parts.length === 7
+    && new Set(parts.map(part => part.id)).size === 7
+    && parts.every(part => part.slot === 'legs' && part.itemId === slots.legs
+      && part.sourceRect && Object.values(part.matrix || {}).length === 6
+      && Object.values(part.matrix).every(Number.isFinite)
+      && playerBodyRigImageReadyV125(imageFrom(images, part.imageKey), part.asset));
+  const animatedNative = bodyRig.nativeLowerV160;
+  const differentLower = animatedNative && animatedNative.frame !== bodyRig.frame;
+  if (!completeLower && !differentLower && !bodyRig.moving && bodyRig.matrix === base.matrix) {
+    return [layer('native-body', bodyRig.matrix)];
+  }
+  if (!anatomical?.waist || !anatomical?.cut) return [layer('native-body', base.matrix)];
+  const m = bodyRig.matrix, waist = anatomical.waist;
+  const belt = completeLower && bodyRig.modularBeltV142 || point(m.a * waist.x + m.c * waist.y + m.e,
+    m.b * waist.x + m.d * waist.y + m.f);
+  const upper = layer('native-upper', bodyRig.matrix, {
+    clipPolygon: [point(belt.x - 512, belt.y - 512), point(belt.x + 512, belt.y - 512),
+      point(belt.x + 512, belt.y + 3 * bodyRig.scale), point(belt.x - 512, belt.y + 3 * bodyRig.scale)],
+    clipMatrix: { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 }
+  });
+  if (completeLower) return [...parts, upper];
+  const lower = animatedNative || { asset: bodyRig.asset, sourceRect: bodyRig.source,
+    matrix: base.matrix, atlas: bodyRig.atlas, frame: bodyRig.frame };
+  const lowerAnatomy = PLAYER_MODULAR_SOURCE_ANCHORS_V160[lower.atlas]?.[lower.frame] || anatomical;
+  const source = lower.sourceRect, left = source.x, right = left + source.width;
+  // Include the native waistband overlap, rather than cutting below it at the
+  // old full-body thigh seam; otherwise a straight chest could leave a gap
+  // above the forward-leaning source trousers on the first moving frame.
+  const seamY = lowerAnatomy.waist.y - 8, bottom = source.y + source.height;
+  return [{ ...lower, id: 'native-lower',
+    clipPolygon: [point(left, seamY), point(right, seamY), point(right, bottom), point(left, bottom)],
+    clipMatrix: lower.matrix }, upper];
+}
+
+function drawNativeBodyLayerV160(ctx, image, layer) {
+  ctx.save();
+  if (layer.clipPolygon) {
+    const m = layer.clipMatrix;
+    const polygon = layer.clipPolygon.map(p => point(m.a * p.x + m.c * p.y + m.e, m.b * p.x + m.d * p.y + m.f));
+    ctx.beginPath(); ctx.moveTo(polygon[0].x, polygon[0].y);
+    for (const p of polygon.slice(1)) ctx.lineTo(p.x, p.y);
+    ctx.closePath(); ctx.clip();
+  }
+  const { a, b, c, d, e, f } = layer.matrix, source = layer.sourceRect;
+  ctx.transform(a, b, c, d, e, f);
+  ctx.drawImage(resolveSpriteDrawableV134(image), source.x, source.y, source.width, source.height,
+    source.x, source.y, source.width, source.height);
+  ctx.restore();
+}
+
 /** Draw in world coordinates; the caller already owns camera translation.
  * The callback draws the actual native weapon with its authoritative affine.
  * No ammunition, action timers, actor state or image loading is mutated here.
@@ -398,13 +493,9 @@ export function drawPlayerBodyRigV125(ctx, options = {}) {
   ctx.save();
   drawUpper('far'); drawFore('far');
   drawUpper('near');
-  ctx.save();
-  const { a, b, c, d, e, f } = bodyRig.matrix;
-  const source = bodyRig.source;
-  ctx.transform(a, b, c, d, e, f);
-  ctx.drawImage(resolveSpriteDrawableV134(bodyImage), source.x, source.y, source.width, source.height,
-    source.x, source.y, source.width, source.height);
-  ctx.restore();
+  for (const layer of resolvePlayerNativeBodyLayersV160(bodyRig, {
+    images: options.images, appearance: options.appearance || options.actor?.appearanceV126
+  })) drawNativeBodyLayerV160(ctx, imageFrom(options.images, layer.asset.imageKey), layer);
   ctx.save();
   options.drawWeapon(ctx, weaponPose);
   ctx.restore();

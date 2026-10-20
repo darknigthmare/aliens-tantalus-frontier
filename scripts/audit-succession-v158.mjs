@@ -36,7 +36,7 @@ export function verifyAuditSuccessionV158(previous, current, readSource = readRe
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
   // V158's own pins and transitions stay historical. A later source is admitted
   // only through its byte-anchored V158 predecessor and complete V159 bridge.
-  const effective = resolveAuditSourcesV159(current, readSource);
+  const effective = resolveAuditSourcesV159(current, readSource, { effective: true });
   assert.equal(keys(before).length, 31);
   assert.ok(after && keys(after).length >= 31);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V157 source omitted: ' + path);
