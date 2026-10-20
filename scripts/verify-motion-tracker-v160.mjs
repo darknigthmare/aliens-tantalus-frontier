@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { runInNewContext } from 'node:vm';
 import { AudioDirector } from '../src/audio.js';
 import { bindHubControlV133 } from '../src/hub-control-bindings-v133.js';
+import { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } from '../src/hive-missions-v131.js';
 import { GameEngine as ProductionGame } from '../src/game-production-runtime.js';
 import { HubGame as NativeHub } from '../src/hub-opening-v88.js';
 import { createDefaultSave } from '../src/save.js';
@@ -164,10 +165,13 @@ function host() {
     focus() { document.activeElement = this; }, getBoundingClientRect: () => ({ left: 0, top: 0, width: 1280, height: 720 }) });
   return { canvas, ctx, words };
 }
-function production() {
+function production({ hive = false } = {}) {
   const h = host(), audio = { enabled: true, volumes: { master: 1, effects: 1 }, pings: 0, tracker() { this.pings++; } };
   const events = [], Game = withMotionTrackerV160(ProductionGame), e = new Game(h.canvas, { audio, onEvent: event => events.push(event) });
-  e.start({ world: WORLDS[0], campaign: CAMPAIGNS[0], weapon: WEAPONS[0], enemyCatalog: ENEMIES.slice(0, 1), equipment: [], crew: [], seed: 426 });
+  const campaign = hive ? HIVE_CAMPAIGNS_V131.find(entry => entry.specialOperationId === 'atax-false-queen') : CAMPAIGNS[0];
+  e.start({ world: WORLDS[0], campaign, weapon: WEAPONS[0], enemyCatalog: ENEMIES.slice(0, hive ? 8 : 1),
+    ...(hive ? { missionLevel: buildHiveMissionV131({ campaign }) } : {}), equipment: [], crew: [], seed: 426 });
+  if (hive) return { ...h, e, audio, events };
   Object.assign(e, { platforms: [{ id: 'fixture-floor', x: -200, y: 930, w: 6800, h: 200, floor: true }],
     ladders: [], lifts: [], walls: [], covers: [], doors: [], hazards: [], enemies: [], missionLevelRuntime: null });
   Object.assign(e.player, { x: 160, y: 838, vx: 0, vy: 0, grounded: true });
@@ -175,6 +179,65 @@ function production() {
   e.enemies = [enemy]; return { ...h, e, enemy, audio, events };
 }
 function advance(e, seconds) { for (let left = seconds; left > 1e-8; left -= .025) e.update(Math.min(.025, left)); }
+
+function movingHiveRecruit() {
+  const f=production({hive:true}),e=f.e;
+  assert.equal(e.hiveActorsV131[0].hiveRecruitedV131,false);
+  assert.equal(e.motionTrackerStateV160.observations.get(e.hiveActorsV131[0])?.moving,false,
+    'A living but unrecruited body is observed without inventing motion or an allegiance filter.');
+  const key=(type,code)=>{const event=new Event(type,{cancelable:true});
+    Object.assign(event,{code,repeat:false,ctrlKey:false,altKey:false,metaKey:false,isComposing:false});globalThis.dispatchEvent(event);};
+  const walkTo=target=>{
+    const code=e.player.x+e.player.w/2<target?'KeyD':'KeyA',direction=code==='KeyD'?1:-1;
+    key('keydown',code);
+    for(let frame=0;frame<400&&(target-e.player.x-e.player.w/2)*direction>5;frame++)advance(e,.025);
+    key('keyup',code);advance(e,.15);assert.ok(Math.abs(e.player.x+e.player.w/2-target)<65);
+  };
+  walkTo(240);key('keydown','KeyE');advance(e,2.1);key('keyup','KeyE');advance(e,.1);
+  assert.equal(e.hiveV131.commissioned,true);
+  const recruit=e.hiveActorsV131[0];walkTo(recruit.x+recruit.w/2-50);
+  const charge=e.hiveV131.charge;assert.equal(e.recruitHiveActorV131(recruit.id).applied,true);
+  assert.equal(e.hiveV131.charge,charge-12);assert.equal(recruit.hiveRecruitedV131,true);
+  assert.equal(e.issueHiveOrderV131('bulwark',recruit.id).applied,true);
+  return {...f,recruit};
+}
+
+test('a genuinely recruited Hive caste moving under its native order produces an anonymous measured echo', () => {
+  const {e,recruit,ctx,words}=movingHiveRecruit(),startX=recruit.x;
+  assert.ok(!e.enemies.includes(recruit)&&!e.activeSquadActors().includes(recruit)&&!e.forgeNpcsV158?.includes(recruit));
+  advance(e,.2);assert.ok(recruit.x>startX+10,'The actual Hive ally controller must move the body.');
+  const previous={energy:e.tracker.energy,pulses:e.tracker.pulses,revealed:recruit.revealed,alert:recruit.alert};
+  assert.equal(e.activateTracker(),true);
+  assert.equal(recruit.revealed,previous.revealed);assert.equal(recruit.alert,previous.alert);
+  assert.equal(e.tracker.energy,previous.energy-24);assert.equal(e.tracker.pulses,previous.pulses+1);
+  assert.equal(e.motionTrackerSnapshotV160().contacts.length,0);
+  advance(e,.8);const model=e.motionTrackerSnapshotV160(),echo=model.contacts.find(contact=>contact.id===recruit.id);
+  assert.ok(echo,'The moving recruit is not in enemies or the human squad; its real roster must be sampled.');
+  assert.equal(echo.currentMotion,true);assert.equal(model.identityAvailable,false);assert.equal(model.factionAvailable,false);
+  assert.ok(Math.abs(echo.distance-Math.hypot(echo.x-e.player.x-e.player.w/2,echo.y-e.player.y-e.player.h))<1e-6);
+  for(const key of ['species','faction','hiveHostileV131','hiveRecruitedV131','loyaltyV131','hiveOrderV131','isBoss'])assert.equal(Object.hasOwn(echo,key),false);
+  words.length=0;drawMotionTrackerDisplayV160(ctx,model);assert.ok(!words.some(word=>/drone|recruit|caste|allié|ennemi/i.test(word)));
+  e.togglePause();const frozen=structuredClone(e.motionTrackerSnapshotV160());advance(e,.3);
+  assert.deepEqual(e.motionTrackerSnapshotV160(),frozen);e.stop();assert.equal(e.motionTrackerSnapshotV160().active,false);
+});
+
+test('Hive motion echoes clear on admitted death flags or roster removal and cannot carry an old caste into another mission', () => {
+  for(const change of ['death','removed','another-mission']) {
+    const {e,recruit}=movingHiveRecruit();advance(e,.2);assert.equal(e.activateTracker(),true);advance(e,.6);
+    assert.ok(e.motionTrackerSnapshotV160().contacts.some(contact=>contact.id===recruit.id));
+    if(change==='death'){recruit.health=0;recruit.alive=false;recruit.hiveLostV131=true;}
+    if(change==='removed')e.hiveActorsV131=e.hiveActorsV131.filter(actor=>actor!==recruit);
+    if(change==='another-mission') {
+      e.start({world:WORLDS[0],campaign:CAMPAIGNS[0],weapon:WEAPONS[0],enemyCatalog:[],equipment:[],crew:[],seed:426});
+      assert.equal(e.isHiveMissionV131(),false);assert.deepEqual(e.hiveActorsV131,[]);
+      // A disclosed stale-roster fixture must still have no ownership in this
+      // new chart, even if the old living object remains reachable in memory.
+      e.hiveActorsV131=[recruit];
+    }
+    advance(e,.025);assert.equal(e.motionTrackerStateV160.observations.has(recruit),false,change);
+    assert.ok(!e.motionTrackerSnapshotV160().contacts.some(contact=>contact.id===recruit.id),change);e.stop();
+  }
+});
 
 test('production Q uses real native movement, keeps energy/objective accounting and never outlines or identifies the contact', () => {
   const { e, enemy, events } = production(); advance(e, .3);

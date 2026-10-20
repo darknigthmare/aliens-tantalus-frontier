@@ -121,7 +121,8 @@ export function motionTrackerPingIntervalV160(distance, range = MOTION_TRACKER_V
 function directBodies(engine, observer, context, hub) {
   const annex = hub ? engine.currentAnnexV71?.()?.id || null : null;
   const natives = hub ? annex ? list(engine.activeAnnexNpcsV141?.()) : list(engine.npcs)
-    : [...list(engine.activeSquadActors?.()), ...list(engine.forgeNpcsV158)];
+    : [...list(engine.activeSquadActors?.()), ...list(engine.forgeNpcsV158),
+      ...(engine.isHiveMissionV131?.() ? list(engine.hiveActorsV131) : [])];
   const actors = [...new Set([...list(engine.enemies), ...natives,
     ...(!hub && engine.coopEnabled && engine.coop !== observer ? [engine.coop] : []),
     ...(!hub && engine.player !== observer ? [engine.player] : []),

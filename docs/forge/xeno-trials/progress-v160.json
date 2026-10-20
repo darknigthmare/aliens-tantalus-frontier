@@ -2244,7 +2244,10 @@
           "hubReadyMutedUnavailableOrDeniedAudioPreservesGameplay": true,
           "hubDeferredActivationRechecksOwnerActorGenerationTrackerChartAndPulse": true,
           "hubObsoleteActivationCreatesLateScan": false,
-          "nonDetectorHubControlsRemainSynchronous": true
+          "nonDetectorHubControlsRemainSynchronous": true,
+          "activeHivePhysicalActorsSampled": true,
+          "hiveRecruitmentOrLoyaltyRevealed": false,
+          "staleHivePoolOutsideHiveMissionSampled": false
         },
         "C160-WEAPONS": {
           "elbowFlexionDesignDegrees": [
@@ -2394,7 +2397,7 @@
     "src/mission-input-v77.js": "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
     "src/mission-insertion-ui-v62.js": "70fcb59b28ba6f48a974fca4195cd685a9fc2e178efead7e56a64e180b3b6ab2",
     "src/motion-tracker-display-v160.js": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
-    "src/motion-tracker-v160.js": "92b77b736978e9bd25a7c01dbf31b44b1c2e8051157357ec72a391a0fa10dc9d",
+    "src/motion-tracker-v160.js": "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
     "src/npc-annex-circulation-v159.js": "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
     "src/npc-circulation-v158.js": "8ba022817afb11bec4bb9af5056982ccadd63f4707f0859cc40bd94c431252fa",
     "src/npc-life-v136.js": "6179892f6f37f1220c85de66bc5ac0bd94fce15ea8d643d6dd53b2280735ebb3",
@@ -3982,7 +3985,7 @@
           "C160-TRACKER",
           "Contrat exécutable / demande utilisateur",
           "src/motion-tracker-v160.js ; src/motion-tracker-display-v160.js ; src/game-v51-runtime.js ; src/game-production-base.js ; src/game-v52-level-runtime.js",
-          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif.",
+          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif. Dans une mission de ruche active, les castes physiques du registre natif hiveActorsV131 participent au même échantillonnage de déplacement, sans distinction de loyauté ou de recrutement. Leurs échos restent anonymes et suivent les mêmes règles de vie, de scène et de disparition.",
           "Adaptation inspirée du manuel officiel Alien: Isolation, distincte du modèle M314 du film. Pas de portée métrique canonique, d’identification IFF ou de copie 1:1 de son écran. Consultation native de 0,7 seconde puis projection HUD de cinq secondes ; aucun appareil tenu en continu n’est déclaré. Seuls les corps admis sont observés, pas les machines ou tous les accessoires mobiles. La dotation Q native reste distincte d’un consommable personnel."
         ],
         [
@@ -5893,7 +5896,7 @@
           "src/game-v51-runtime.js",
           "4552dd04bcd4e505f88aa8196e485bbe1ca43ed0dfbf4f867bef7a3810ca27d1",
           "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
-          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+          "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
@@ -5977,14 +5980,14 @@
           "src/game-production-base.js",
           "Non épinglé en V159",
           "95b136fcc0caade82a784522dcedc635d6acb2ad91ba6517c6d07fb36ca89793",
-          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+          "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/game-v52-level-runtime.js",
           "Non épinglé en V159",
           "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
-          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+          "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
@@ -6012,14 +6015,14 @@
           "src/motion-tracker-display-v160.js",
           "Non épinglé en V159",
           "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
-          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+          "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/motion-tracker-v160.js",
           "Non épinglé en V159",
-          "92b77b736978e9bd25a7c01dbf31b44b1c2e8051157357ec72a391a0fa10dc9d",
-          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+          "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
+          "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
@@ -11278,7 +11281,7 @@
           "C160-TRACKER",
           "Demande utilisateur explicite V160",
           "Détecteur de mouvement",
-          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif.",
+          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif. Dans une mission de ruche active, les castes physiques du registre natif hiveActorsV131 participent au même échantillonnage de déplacement, sans distinction de loyauté ou de recrutement. Leurs échos restent anonymes et suivent les mêmes règles de vie, de scène et de disparition.",
           "src/motion-tracker-v160.js ; src/motion-tracker-display-v160.js ; src/game-v51-runtime.js ; src/game-production-base.js ; src/game-v52-level-runtime.js",
           "scripts/verify-motion-tracker-v160.mjs",
           "Implémentation source ; recette exacte en attente",
@@ -11699,7 +11702,7 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "28704ad216de659f0ab6dff7091bbdd9c10141a9dfb6d13f5423f676ede83c8c",
+  "workbookSha256": "50d6ef55026f6686b5fb360136c68614942d8c6e6f4d4d82f90bea1b581b4a72",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V159",
@@ -11739,7 +11742,7 @@
         "path": "src/game-v51-runtime.js",
         "previousSha256": "4552dd04bcd4e505f88aa8196e485bbe1ca43ed0dfbf4f867bef7a3810ca27d1",
         "currentSha256": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
-        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+        "reason": "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11877,7 +11880,7 @@
         "path": "src/game-production-base.js",
         "previousSha256": null,
         "currentSha256": "95b136fcc0caade82a784522dcedc635d6acb2ad91ba6517c6d07fb36ca89793",
-        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+        "reason": "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11886,7 +11889,7 @@
         "path": "src/game-v52-level-runtime.js",
         "previousSha256": null,
         "currentSha256": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
-        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+        "reason": "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11936,7 +11939,7 @@
         "path": "src/motion-tracker-display-v160.js",
         "previousSha256": null,
         "currentSha256": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
-        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+        "reason": "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11944,8 +11947,8 @@
       {
         "path": "src/motion-tracker-v160.js",
         "previousSha256": null,
-        "currentSha256": "92b77b736978e9bd25a7c01dbf31b44b1c2e8051157357ec72a391a0fa10dc9d",
-        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
+        "currentSha256": "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
+        "reason": "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -12304,7 +12307,7 @@
       "priorityLinks": [
         "excel-identity-and-motion"
       ],
-      "implementedScope": "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif.",
+      "implementedScope": "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif. Dans une mission de ruche active, les castes physiques du registre natif hiveActorsV131 participent au même échantillonnage de déplacement, sans distinction de loyauté ou de recrutement. Leurs échos restent anonymes et suivent les mêmes règles de vie, de scène et de disparition.",
       "limits": "Adaptation inspirée du manuel officiel Alien: Isolation, distincte du modèle M314 du film. Pas de portée métrique canonique, d’identification IFF ou de copie 1:1 de son écran. Consultation native de 0,7 seconde puis projection HUD de cinq secondes ; aucun appareil tenu en continu n’est déclaré. Seuls les corps admis sont observés, pas les machines ou tous les accessoires mobiles. La dotation Q native reste distincte d’un consommable personnel.",
       "contract": {
         "rangeGameUnits": 900,
@@ -12349,9 +12352,12 @@
         "hubReadyMutedUnavailableOrDeniedAudioPreservesGameplay": true,
         "hubDeferredActivationRechecksOwnerActorGenerationTrackerChartAndPulse": true,
         "hubObsoleteActivationCreatesLateScan": false,
-        "nonDetectorHubControlsRemainSynchronous": true
+        "nonDetectorHubControlsRemainSynchronous": true,
+        "activeHivePhysicalActorsSampled": true,
+        "hiveRecruitmentOrLoyaltyRevealed": false,
+        "staleHivePoolOutsideHiveMissionSampled": false
       },
-      "sourceChangeReason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation."
+      "sourceChangeReason": "Les castes physiques du registre natif des missions de ruche actives utilisent les mêmes mesures de mouvement et les mêmes gardes que les autres corps ; ni leur loyauté ni leur recrutement ne sont révélés."
     },
     {
       "id": "C160-WEAPONS",
