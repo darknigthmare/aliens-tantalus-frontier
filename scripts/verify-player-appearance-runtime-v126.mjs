@@ -8,6 +8,7 @@ import { GameEngine } from '../src/game-production-runtime.js';
 import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { createBioforgeV80 } from '../src/bioforge-session-v80.js';
 import { HubGame, HUB_DECKS } from '../src/hub-opening-v88.js';
+import { withHubSpatialDesignV136 } from '../src/hub-spatial-design-v136.js';
 import { HUB_ANNEX_BY_ID_V137 } from '../src/hub-annex-registry-v137.js';
 import { HUB_ANNEX_ENTRANCES_V133 } from '../src/hub-navigation-layout-v133.js';
 import { createPlayerOnboardingV84 } from '../src/player-onboarding-v84.js';
@@ -943,8 +944,11 @@ test('a real annex ladder uses its physical rectangle and drawn rungs without re
   assert.equal(hub.getSnapshot().playerAppearanceV126.images.retained, 0);
 });
 
-test('the real Port Meridien ladder keeps modular hands and boots on its own authored rung spacing', async () => {
-  const host = browserHost(), hub = new HubGame(host.canvas, { onAction: () => true });
+for(const [presentation,NativePortHub] of [['native',HubGame],['production spatial wrapper',withHubSpatialDesignV136(HubGame)]])
+test(`the real Port Meridien ladder keeps hands and boots on its painted rungs through the ${presentation}`, async () => {
+  const host = browserHost(), hub = new NativePortHub(host.canvas, { onAction: () => true });
+  assert.equal(Boolean(hub.constructor.hubSpatialDesignV136),presentation==='production spatial wrapper',
+    'Exercise the real production spatial wrapper, including its inherited mount admission');
   hub.playerAppearanceV126 = colonial('smartgunner');
   hub.start({}, {
     onboardingV84: { ...createPlayerOnboardingV84({ name: 'Alex Ward', callsign: 'ECHO-9' }), phase: 'complete' },
@@ -964,7 +968,8 @@ test('the real Port Meridien ladder keeps modular hands and boots on its own aut
   const rungs = host.drawing.draws.filter(draw => draw.image === hub.portImagesV90.get('ladder')
     && draw.args.length === 8 && draw.args[7] === 4)
     .map(draw => ({ x: draw.args[4], y: draw.args[5], w: draw.args[6], h: draw.args[7] }));
-  assert.ok(rungs.length > 1);
+  assert.equal(rungs.length,8,'The dedicated quay renderer submits all eight actual native rungs');
+  assert.deepEqual(rungs[0],{x:1216,y:439,w:32,h:4},'Contact uses the painted crossbar, not the wider physical ladder rectangle');
   near(rungs[1].y - rungs[0].y, 24, 'The quay draws its own 24 px rung spacing');
   const visual = actor.playerAppearanceVisualV126, climbing = visual.transit;
   assertComposed(host, visual, colonial('smartgunner'), 'Port ladder');

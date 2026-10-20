@@ -54,7 +54,11 @@ function hubTransitOptions(hub, sample = null) {
       && actor.y + actor.h >= entry.top - 18 && actor.y <= entry.bottom + 18;
   }) : actor?.climbing ? hub.nearestTraversalLadder?.(actor)
     || hub.ladders?.find(entry => entry.id === actor.ladderId) : null;
-  const mount = source && hub.constructor?.hubSpatialDesignV136 && !hub.editorPlaytest
+  // The quay keeps its dedicated native renderer even when its class inherits
+  // the ship's spatial wrapper. Its painted 24 px / first 8 px rungs must not
+  // acquire the ship renderer's 22 px / first 11 px mounting grid.
+  const nativePort = hub.isPortMeridienV90?.() === true;
+  const mount = source && hub.constructor?.hubSpatialDesignV136 && !hub.editorPlaytest && !nativePort
     ? getHubLadderMountV139(source, { centered: !annex }) : null;
   const ladder = source ? {
     id: source.id || (annex ? `${annex.id}:ladder:${source.x}:${source.top}:${source.bottom}:${source.w}` : null),
