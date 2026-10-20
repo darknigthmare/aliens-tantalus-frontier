@@ -105,9 +105,9 @@ def walk_to(page, x):
     page.wait_for_function('()=>Math.abs(__ATF_HUB__.player.vx)<1', timeout=30000)
 
 
-def collect(page, name, stop):
+def collect(page, name, stop, move_to=None):
     phase(name)
-    result = page.evaluate('''opts=>new Promise((resolve,reject)=>{
+    page.evaluate('''opts=>{ window.__ATF_V159_COLLECTION__=new Promise((resolve,reject)=>{
       const rows=[],frames={},h=__ATF_HUB__;
       const timer=setTimeout(()=>reject(Error('Native annex journey timed out: '+opts.name)),240000);
       function frame(){
@@ -128,7 +128,12 @@ def collect(page, name, stop):
         requestAnimationFrame(frame);
       }
       requestAnimationFrame(frame);
-    })''', {'name': name, 'stop': stop})
+    }); }''', {'name': name, 'stop': stop})
+    # Keep observing before the player clears a reserved opening. Walking first
+    # can legitimately let the whole door cycle finish before collection starts.
+    if move_to is not None:
+        walk_to(page, move_to)
+    result = page.evaluate('()=>window.__ATF_V159_COLLECTION__')
     rows = result['rows']
     (output / (name + '.json')).write_text(json.dumps(rows, indent=2))
     continuous = True
@@ -277,8 +282,7 @@ with sync_playwright() as pw:
               and occupied['route']['actor']['x'] == waiting['route']['actor']['x']
               and waiting['route']['actor']['crossings'] == 1)
         capture(page, '07-player-blocks-return-sas.png')
-        walk_to(page, 4450)
-        returning = collect(page, '08-return-through-real-paired-sas', 'handoff')
+        returning = collect(page, '08-return-through-real-paired-sas', 'handoff', move_to=4450)
         last = next(row['actor'] for row in reversed(returning) if row['actor'])
         handoff = observed(page)['route']['nativeHandoff']
         check('return really reaches its laboratory home before native quarantine handoff',
