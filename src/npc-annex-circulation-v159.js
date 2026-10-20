@@ -9,6 +9,7 @@ import { getHubDoorFaceV142, projectHubDoorActorV142 } from './hub-door-passage-
 import { advanceNpcLifeV136, moveNpcAgainstGeometryV136, spreadNpcStationSpawnsV136 } from './npc-life-v136.js';
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
+import { CREW_SPRITE_IDS, CREW_MISSION_SPRITE_IDS, resolveSpriteClip } from './sprite-animation-runtime.js';
 
 const ID = 'crew-05-bishop-9', PARENT = 'science-lab', ANNEX = 'synthetic-bay', DECK = 1;
 const parent = HUB_DECKS[DECK].rooms.find(room => room.id === PARENT);
@@ -24,6 +25,11 @@ const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h 
 const stages = ['walking', 'service', 'opening', 'covering', 'revealing'];
 const reasons = ['daily-schedule', 'active-crisis', 'infestation', 'mission-assignment', 'medical-recovery', 'unavailable', 'interaction', 'occupied'];
 const crossing = state => ['opening', 'covering', 'revealing'].includes(state?.stage);
+const inDoorway = actor => {
+  const opening = actor && faces[actor.roomId]?.opening;
+  return Boolean(opening && actor.x <= opening.x + opening.w + 12
+    && actor.x + (actor.w || 44) >= opening.x - 12);
+};
 const socketX = roomId => faces[roomId].opening.x + faces[roomId].opening.w / 2 - 22;
 const homeTemplate = () => {
   const actor = RosterHubV52.prototype.createNpcs.call({}, DECK).find(npc => npc.crewId === ID);
@@ -124,7 +130,7 @@ export function advanceNpcAnnexCirculationV159(previous, actor, delta, {
   let s = { ...previous, x: actor.x, y: actor.y, time: Math.min(1e9, previous.time + dt), actualVelocity: 0, blocked: false };
   const interruption = npcAnnexInterruptionV159(resolution, actor);
   const emergency = interruption === 'active-crisis' || interruption === 'infestation';
-  const clearingDoor = emergency && (crossing(s) || s.doorProgress > 0);
+  const clearingDoor = emergency && (crossing(s) || s.doorProgress > 0 || inDoorway(actor));
   if (!clearingDoor && (interruption || actor.workClock > 0 || actor.supportClock > 0)) return { ...s, velocity: 0,
     reason: interruption || 'interaction' };
   // An emergency cannot leave a frozen body owning both faces indefinitely.
@@ -311,6 +317,23 @@ export function withHubNpcAnnexCirculationV159(Base) {
       return super.stepHubNpcLifeV136(actor, delta, options);
     }
 
+    npcAnimationRequest(npc) {
+      const request = super.npcAnimationRequest(npc), s = this.npcAnnexStateV159;
+      if (npc !== this.npcAnnexActorV159 || npc?.crewId !== ID || this.running === false || s?.stage !== 'walking'
+        || !['active-crisis', 'infestation'].includes(s.reason)
+        || !(Math.abs(s.actualVelocity) > .1 && Math.abs(npc.vx) > .1)
+        || npc.inVehicle || npc.ventTransit || npc.grounded === false || npc.crouching || npc.inCover
+        || !['ready', 'role-support'].includes(request?.clipId)) return request;
+      const sheetId = CREW_SPRITE_IDS[ID];
+      if (![sheetId, CREW_MISSION_SPRITE_IDS[ID]].includes(request.sheetId)
+        || !resolveSpriteClip(sheetId, 'walk')?.loop) return request;
+      // Only the real emergency withdrawal outranks a stationary alert/work
+      // pose. Its own native walk spends measured floor distance; lifecycle,
+      // combat, traversal and alternate uniform requests retain precedence.
+      // Include the final moving frame that has just closed the cleared leaf.
+      return { sheetId, clipId: 'walk' };
+    }
+
     tickAnnexNpcLifeV141(delta) {
       // Let the existing loop own every other crew member, never this singleton.
       const actor = this.npcAnnexActorV159;
@@ -325,7 +348,8 @@ export function withHubNpcAnnexCirculationV159(Base) {
 
     npcAnnexDoorReservedV159(annexId) {
       const s = this.npcAnnexStateV159;
-      return annexId === ANNEX && Boolean(s && (crossing(s) || s.doorProgress > 0));
+      const actor = this.npcAnnexActorV159;
+      return annexId === ANNEX && Boolean(s && actor && (crossing(s) || s.doorProgress > 0 || inDoorway(actor)));
     }
 
     drawSheetCell(ctx, image, ...args) {
