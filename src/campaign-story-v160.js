@@ -98,11 +98,23 @@ export function campaignInsertionStoryV160(value) {
     choices: CAMPAIGN_STORY_PROTOCOLS_V160 };
 }
 
-function resolvedOperation(save) {
+function latestResolvedOperation(save) {
   const operation = save?.strategy?.lastOperation;
   return record(operation) && hasCampaignStoryV160(operation.campaignId)
     && operation.worldId === ARCHIVE_RELAY_CAMPAIGN_V122.worldId
-    && /^operation-[1-9][0-9]{0,8}-special-archive-relay$/.test(operation.id || '') ? operation : null;
+    && typeof operation.id === 'string' && /^operation-[1-9][0-9]{0,8}-special-archive-relay$/.test(operation.id) ? operation : null;
+}
+
+function resolvedOperation(save) {
+  const latest = latestResolvedOperation(save);
+  if (latest) return latest;
+  const archived = normalizeArchiveRelayArchiveV122(save?.archiveRelayArchivesV122).lastReturnV160;
+  return archived ? { ...archived, id: archived.operationId, archivedReturnV160: true } : null;
+}
+
+function returnProtocol(operation) {
+  return operation?.archivedReturnV160 ? PROTOCOLS.get(operation.protocolId) || null
+    : campaignStoryProtocolV160(operation?.insertionState);
 }
 
 function returnedEvidence(save, operation) {
@@ -111,6 +123,7 @@ function returnedEvidence(save, operation) {
 }
 
 function returnLedger(operation) {
+  if (operation?.archivedReturnV160) return operation.ledger;
   const insertion = insertionFor(operation?.insertionState);
   if (!insertion || insertion.operationId !== operation.id) return null;
   const raw = insertion.phases.find(phase => phase.kind === 'preparation')?.payload?.campaignStoryReturnV160;
@@ -127,6 +140,7 @@ function returnLedger(operation) {
 }
 
 function writeReturnLedger(operation, ledger) {
+  if (operation?.archivedReturnV160) { operation.ledger = ledger; return true; }
   const insertion = insertionFor(operation.insertionState);
   if (!insertion || insertion.operationId !== operation.id) return false;
   insertion.phases.find(phase => phase.kind === 'preparation').payload.campaignStoryReturnV160 = ledger;
@@ -134,37 +148,62 @@ function writeReturnLedger(operation, ledger) {
   return true;
 }
 
+function preserveReturn(save, operation) {
+  if (!operation) return { changed: false };
+  const insertion = operation.archivedReturnV160 ? null : insertionFor(operation.insertionState);
+  if (!operation.archivedReturnV160 && operation.insertionState && (!insertion || insertion.operationId !== operation.id
+    || operation.success && (insertion.status !== 'completed' || !insertion.controlGranted))) return { changed: false };
+  const archive = normalizeArchiveRelayArchiveV122({ ...save.archiveRelayArchivesV122,
+    lastReturnV160: { schema: 160, operationId: operation.id, campaignId: operation.campaignId, worldId: operation.worldId,
+      success: operation.success, reason: operation.reason, completedDay: operation.completedDay, completedHour: operation.completedHour,
+      protocolId: returnProtocol(operation)?.id || null, ledger: returnLedger(operation) } });
+  if (!archive.lastReturnV160 || JSON.stringify(archive.lastReturnV160) === JSON.stringify(save.archiveRelayArchivesV122?.lastReturnV160))
+    return { changed: false };
+  save.archiveRelayArchivesV122 = archive;
+  return { changed: true, operationId: operation.id };
+}
+
+/** Preserve an already resolved QZ-18 return before a later operation replaces
+ * strategy.lastOperation. This bounded migration neither awards nor reads it. */
+export function preserveCampaignStoryReturnV160(save) {
+  return preserveReturn(save, latestResolvedOperation(save));
+}
+
 /** Called only on the same transaction candidate as the native operation
  * resolution. The six-record permanent dossier owns the reward, never a UI
  * click, an insertion skip, a bare success flag or a previous run's archive. */
 export function applyCampaignStoryReturnV160(save, campaign, result = {}) {
-  const operation = resolvedOperation(save);
+  // Payment can only belong to the just-resolved native lastOperation. The
+  // durable historical return is deliberately never a payment input.
+  const operation = latestResolvedOperation(save);
   if (!operation || campaign?.id !== operation.campaignId || save.strategy.currentOperation
-    || result.success !== true || operation.success !== true) return { applied: false, reason: 'return-not-qualified' };
+    || typeof result.success !== 'boolean' || result.success !== operation.success) return { applied: false, reason: 'return-not-qualified' };
+  const finish = outcome => { preserveReturn(save, operation); return outcome; };
+  if (result.success !== true) return finish({ applied: false, reason: 'return-not-qualified' });
   const insertion = insertionFor(operation.insertionState);
   const protocol = insertion && campaignStoryProtocolV160(insertion);
   if (!insertion || insertion.operationId !== operation.id || insertion.status !== 'completed' || !insertion.controlGranted
-    || !protocol || !returnedEvidence(save, operation)) return { applied: false, reason: 'complete-evidence-required' };
+    || !protocol || !returnedEvidence(save, operation)) return finish({ applied: false, reason: 'complete-evidence-required' });
   const ledger = returnLedger(operation);
-  if (ledger?.receipt) return { applied: false, reason: 'already-recorded', protocolId: protocol.id };
+  if (ledger?.receipt) return finish({ applied: false, reason: 'already-recorded', protocolId: protocol.id });
   const target = protocol.reward.resource ? save.galaxy?.resources : save.hub?.systems;
   const key = protocol.reward.resource || protocol.reward.system;
   const maximum = protocol.reward.resource ? 999999999 : 100;
   if (!record(target) || !finite(target[key]) || target[key] < 0 || target[key] > maximum)
-    return { applied: false, reason: 'return-ledger-invalid' };
+    return finish({ applied: false, reason: 'return-ledger-invalid' });
   const previous = target[key];
   target[key] = Math.min(maximum, previous + protocol.reward.amount);
   writeReturnLedger(operation, { ...ledger, receipt: { operationId: operation.id,
     protocolId: protocol.id, key, amount: target[key] - previous } });
-  return { applied: true, protocolId: protocol.id, key, amount: target[key] - previous,
-    expectedAmount: protocol.reward.amount, operationId: operation.id };
+  return finish({ applied: true, protocolId: protocol.id, key, amount: target[key] - previous,
+    expectedAmount: protocol.reward.amount, operationId: operation.id });
 }
 
 export function campaignStoryReturnV160(save) {
   const operation = resolvedOperation(save);
   if (!operation) return null;
   const evidence = returnedEvidence(save, operation);
-  const protocol = campaignStoryProtocolV160(operation.insertionState);
+  const protocol = returnProtocol(operation);
   const ledger = returnLedger(operation);
   const success = operation.success === true;
   const selectedTopic = ledger?.activeTopic || 'return';
@@ -203,5 +242,6 @@ export function recordCampaignStoryReviewV160(save, operationId, topicId) {
   const changed = !ledger.readTopics.includes(topicId) || ledger.activeTopic !== topicId;
   if (!changed) return { ok: true, changed: false };
   writeReturnLedger(operation, { ...ledger, readTopics: [...new Set([...ledger.readTopics, topicId])], activeTopic: topicId });
+  preserveReturn(save, operation);
   return { ok: true, changed: true, operationId, topicId };
 }

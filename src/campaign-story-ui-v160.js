@@ -1,4 +1,4 @@
-import { campaignStoryReturnV160 } from './campaign-story-v160.js';
+import { campaignStoryReturnV160, hasCampaignStoryV160 } from './campaign-story-v160.js';
 
 const element = (document, tag, className, text) => {
   const node = document.createElement(tag);
@@ -10,8 +10,9 @@ const element = (document, tag, className, text) => {
 /** Mount after the operation-plan owner has replaced its own contents.
  * The callback must commit a candidate save, then rerender from durable state.
  * A failed write therefore never displays a newly accepted reading receipt. */
-export function mountCampaignDebriefV160(root, { save, onReview } = {}) {
+export function mountCampaignDebriefV160(root, { save, campaignId, onReview } = {}) {
   root.querySelector?.('[data-campaign-story-return]')?.remove?.();
+  if (!hasCampaignStoryV160(campaignId)) return null;
   const model = campaignStoryReturnV160(save);
   if (!model) return null;
   const document = root.ownerDocument || globalThis.document;

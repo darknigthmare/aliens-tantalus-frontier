@@ -1,20 +1,55 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { GameEngine } from '../src/game-production-runtime.js';
-import { WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content.js';
-import { createDefaultSave, beginOperation, resolveOperation, recordOperationResumeState, migrateSave } from '../src/save.js';
-import { ARCHIVE_RELAY_CAMPAIGN_V122 as campaign, ARCHIVE_RELAY_DOCUMENT_IDS_V122 } from '../src/archive-relay-state-v122.js';
+import { CAMPAIGNS, WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content.js';
+import { SaveSystem, createDefaultSave, beginOperation, resolveOperation, recordOperationResumeState, migrateSave } from '../src/save.js';
+import { ARCHIVE_RELAY_CAMPAIGN_V122 as campaign, ARCHIVE_RELAY_DOCUMENT_IDS_V122, normalizeArchiveRelayArchiveV122 } from '../src/archive-relay-state-v122.js';
 import { buildArchiveRelayLevelV122, ARCHIVE_RELAY_PROPS_V122 } from '../src/archive-relay-runtime-v122.js';
 import { createMissionInsertionV62, applyMissionInsertionActionV62, getMissionInsertionReadReceiptV62,
   pauseMissionInsertionV62, resumeMissionInsertionV62 } from '../src/mission-insertion-v62.js';
 import { getMissionInsertionUiModelV62, MissionInsertionUiV62 } from '../src/mission-insertion-ui-v62.js';
 import { campaignInsertionStoryV160, chooseCampaignStoryProtocolV160, campaignStoryProtocolV160,
-  applyCampaignStoryReturnV160, campaignStoryReturnV160, recordCampaignStoryReviewV160 } from '../src/campaign-story-v160.js';
+  applyCampaignStoryReturnV160, campaignStoryReturnV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from '../src/campaign-story-v160.js';
 import { applyCampaignConsequence } from '../src/campaign-consequences.js';
+import { mountCampaignDebriefV160 } from '../src/campaign-story-ui-v160.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
 const clone = value => structuredClone(value);
+function storyDocument() {
+  const document = { activeElement: null, addEventListener() {}, removeEventListener() {} };
+  const dataKey = name => name.replace(/^data-/, '').replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  const matches = (node, selector) => {
+    if (selector.startsWith('.')) return node.className.split(/\s+/u).includes(selector.slice(1));
+    const attribute = selector.match(/^\[([^=\]]+)(?:="([^"]*)")?\]$/u);
+    if (attribute) {
+      const value = attribute[1].startsWith('data-') ? node.dataset[dataKey(attribute[1])] : node.attributes[attribute[1]];
+      return value !== undefined && (attribute[2] === undefined || value === attribute[2]);
+    }
+    return node.tagName.toLowerCase() === selector;
+  };
+  document.createElement = tag => {
+    const node = { tagName: tag.toUpperCase(), ownerDocument: document, parentNode: null,
+      children: [], dataset: {}, attributes: {}, className: '', ownText: '',
+      style: { values: {}, setProperty(key, value) { this.values[key] = String(value); }, getPropertyValue(key) { return this.values[key] || ''; } },
+      append(...children) { for (const child of children) { child.parentNode = this; this.children.push(child); } },
+      replaceChildren(...children) { this.children.forEach(child => { child.parentNode = null; }); this.children = []; this.ownText = ''; this.append(...children); },
+      setAttribute(key, value) { this.attributes[key] = String(value); },
+      getAttribute(key) { return this.attributes[key] ?? null; }, removeAttribute(key) { delete this.attributes[key]; },
+      addEventListener() {}, removeEventListener() {}, focus() {},
+      contains(target) { return target === this || this.children.some(child => child.contains(target)); },
+      querySelectorAll(selector) { return this.children.flatMap(child => [...(matches(child, selector) ? [child] : []), ...child.querySelectorAll(selector)]); },
+      querySelector(selector) { return this.querySelectorAll(selector)[0] || null; },
+      remove() { if (this.parentNode) this.parentNode.children = this.parentNode.children.filter(child => child !== this); this.parentNode = null; }
+    };
+    node.classList = { add(name) { node.className += ' ' + name; }, contains(name) { return node.className.split(/\s+/u).includes(name); } };
+    Object.defineProperty(node, 'textContent', { get() { return this.ownText + this.children.map(child => child.textContent).join(''); },
+      set(value) { this.ownText = String(value); this.children = []; } });
+    return node;
+  };
+  return { document, root: document.createElement('div') };
+}
 const insertion = (id = 'operation-1-special-archive-relay', extras = {}) => createMissionInsertionV62({
   operation: { id, campaignId: campaign.id, worldId: world.id }, campaign, world, ...extras });
 const advance = state => {
@@ -227,7 +262,10 @@ test('native retreat preserves its wounded crew and old dossier without a protoc
   const { operation } = beginOperation(save, campaign, world); operation.insertionState = completedInsertion(operation.id, 'crew-prevention');
   const outcome = resolveOperation(save, { success: false, reason: 'retreat' }); assert.equal(outcome.success, false);
   assert.ok(save.crew.some(member => member.injuries.length)); const before = clone(save);
-  assert.equal(applyCampaignStoryReturnV160(save, campaign, { success: false }).applied, false); assert.deepEqual(save, before);
+  assert.equal(applyCampaignStoryReturnV160(save, campaign, { success: false }).applied, false);
+  assert.equal(save.archiveRelayArchivesV122.lastReturnV160.success, false);
+  const withoutHistoricalReturn = clone(save); delete withoutHistoricalReturn.archiveRelayArchivesV122.lastReturnV160;
+  assert.deepEqual(withoutHistoricalReturn, before, 'only the compact failed return is archived; no wound, resource, clock or other field changes');
   const scene = campaignStoryReturnV160(save); assert.equal(scene.evidenceComplete, false); assert.equal(scene.status, 'RETRAITE ENREGISTRÉE');
   assert.match(scene.questions.find(topic => topic.id === 'return').answer, /blessures/);
   assert.equal(recordCampaignStoryReviewV160(save, 'operation-999-special-archive-relay', 'identity').ok, false);
@@ -243,4 +281,126 @@ test('malformed or legacy return metadata stays readable without granting a rece
   save.strategy.lastOperation.insertionState = null;
   assert.equal(campaignStoryReturnV160(save).canPersistReview, false);
   assert.equal(recordCampaignStoryReviewV160(save, save.strategy.lastOperation.id, 'identity').reason, 'legacy-return-read-only');
+});
+
+test('PR15: the real QZ-18 return survives another resolved mission and JSON/save reload without another payment', async () => {
+  const { save } = await nativeCompletedRun('technical-audit');
+  applyCampaignConsequence(save, campaign, world, { success: true });
+  const qz18Id = save.strategy.lastOperation.id;
+  for (const topic of ['chronology', 'identity', 'return']) recordCampaignStoryReviewV160(save, qz18Id, topic);
+  const other = CAMPAIGNS.find(entry => entry.id !== campaign.id && !entry.specialOperationId && save.galaxy.unlockedWorldIds.includes(entry.worldId));
+  assert.ok(other); const otherWorld = WORLDS.find(entry => entry.id === other.worldId);
+  assert.ok(beginOperation(save, other, otherWorld).operation);
+  assert.equal(resolveOperation(save, { success: false, reason: 'retreat' }).ok, true);
+  assert.equal(save.strategy.lastOperation.campaignId, other.id);
+  const values = new Map();
+  const storage = { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
+  const writer = new SaveSystem(storage); writer.newGame(1); writer.commit(JSON.parse(JSON.stringify(save)));
+  const reader = new SaveSystem(storage), reloaded = reader.load(1);
+  const story = campaignStoryReturnV160(reloaded);
+  assert.ok(story, 'a later mission must not erase the conserved QZ-18 return');
+  assert.equal(story.operationId, qz18Id); assert.equal(story.protocolLabel, 'Audit technique');
+  assert.equal(story.evidenceComplete, true); assert.equal(story.readingComplete, true);
+  const before = clone({ clock: reloaded.clock, galaxy: reloaded.galaxy, hub: reloaded.hub, crew: reloaded.crew, statistics: reloaded.statistics });
+  assert.equal(recordCampaignStoryReviewV160(reloaded, qz18Id, 'identity').ok, true);
+  reader.commit(reloaded);
+  assert.equal(campaignStoryReturnV160(new SaveSystem(storage).load(1)).selectedTopic, 'identity');
+  assert.deepEqual({ clock: reloaded.clock, galaxy: reloaded.galaxy, hub: reloaded.hub, crew: reloaded.crew, statistics: reloaded.statistics }, before);
+  const paid = clone(reloaded); assert.equal(applyCampaignStoryReturnV160(reloaded, campaign, { success: true }).applied, false);
+  assert.deepEqual(reloaded, paid);
+});
+
+test('PR15: older QZ-18 saves acquire only a bounded durable return without another reward or an invented reading', () => {
+  const save = returnedFixture(); applyCampaignStoryReturnV160(save, campaign, { success: true });
+  delete save.archiveRelayArchivesV122.lastReturnV160;
+  const before = clone(save);
+  assert.equal(preserveCampaignStoryReturnV160(save).changed, true);
+  const stored = save.archiveRelayArchivesV122.lastReturnV160;
+  assert.deepEqual(Object.keys(stored), ['schema', 'operationId', 'campaignId', 'worldId', 'success', 'reason', 'completedDay', 'completedHour', 'protocolId', 'ledger']);
+  assert.deepEqual(stored.ledger.readTopics, []); assert.equal(stored.ledger.receipt.amount, 2);
+  const after = clone(save); delete after.archiveRelayArchivesV122.lastReturnV160; assert.deepEqual(after, before);
+  assert.equal(preserveCampaignStoryReturnV160(save).changed, false);
+  const legacy = returnedFixture({ protocolId: null }); legacy.strategy.lastOperation.insertionState = null;
+  assert.equal(preserveCampaignStoryReturnV160(legacy).changed, true);
+  legacy.strategy.lastOperation = null;
+  const restored = migrateSave(JSON.parse(JSON.stringify(legacy)));
+  assert.equal(campaignStoryReturnV160(restored).canPersistReview, false);
+  assert.equal(campaignStoryReturnV160(restored).protocolLabel, 'Bilan standard');
+  assert.deepEqual(normalizeArchiveRelayArchiveV122({ schema: 122, case: null }), { schema: 122, case: null });
+});
+
+test('PR15: durable return normalization rejects mismatched evidence, identities and protocol ownership and strips unrelated objects', () => {
+  const save = returnedFixture(); applyCampaignStoryReturnV160(save, campaign, { success: true });
+  const archive = save.archiveRelayArchivesV122;
+  for (const mutate of [
+    s => { s.lastReturnV160.operationId = 'operation-2-special-archive-relay'; },
+    s => { s.lastReturnV160.operationId = [s.lastReturnV160.operationId]; },
+    s => { s.lastReturnV160.campaignId = 'pair-001-mire'; },
+    s => { s.lastReturnV160.worldId = 'world-01-acheron-lv-426'; },
+    s => { s.lastReturnV160.protocolId = 'invented-protocol'; },
+    s => { s.lastReturnV160.protocolId = ['technical-audit']; },
+    s => { s.lastReturnV160.completedDay = Infinity; },
+    s => { s.lastReturnV160.ledger.operationId = 'operation-2-special-archive-relay'; },
+    s => { s.case.documentIds.pop(); },
+    s => { s.case.verdict = 'clock-failure'; }
+  ]) {
+    const bad = clone(archive); mutate(bad);
+    assert.equal(normalizeArchiveRelayArchiveV122(bad).lastReturnV160, undefined);
+  }
+  for (const mutate of [r => { r.key = 'morale'; }, r => { r.protocolId = 'crew-prevention'; },
+    r => { r.operationId = 'operation-2-special-archive-relay'; }, r => { r.amount = 3; }]) {
+    const bad = clone(archive); mutate(bad.lastReturnV160.ledger.receipt);
+    assert.equal(normalizeArchiveRelayArchiveV122(bad).lastReturnV160.ledger.receipt, null);
+  }
+  const extras = clone(archive);
+  Object.assign(extras.lastReturnV160, { actor: { x: 100 }, strategy: { serial: 9 }, insertionState: { updatedAt: 123 }, clock: { hour: 18 } });
+  extras.lastReturnV160.ledger.readTopics = ['identity', 'identity', 'forged'];
+  const normalized = normalizeArchiveRelayArchiveV122(extras).lastReturnV160;
+  assert.deepEqual(Object.keys(normalized), Object.keys(archive.lastReturnV160));
+  assert.deepEqual(normalized.ledger.readTopics, ['identity']);
+});
+
+test('PR15: a QZ-18 report is mounted only in its own displayed campaign plan', () => {
+  const save = returnedFixture(); applyCampaignStoryReturnV160(save, campaign, { success: true });
+  const { root } = storyDocument();
+  assert.ok(mountCampaignDebriefV160(root, { save, campaignId: campaign.id, onReview() {} }));
+  assert.ok(root.querySelector('[data-campaign-story-return]'));
+  assert.equal(mountCampaignDebriefV160(root, { save, campaignId: 'pair-001-mire', onReview() {} }), null);
+  assert.equal(root.querySelector('[data-campaign-story-return]'), null, 'switching campaign removes the unrelated report');
+});
+
+test('PR15: ordinary insertions retain their actual phase hooks while authored dialogue remains distinct', () => {
+  const { root } = storyDocument();
+  const ordinary = insertion(); ordinary.campaignId = 'pair-001-mire';
+  const ui = new MissionInsertionUiV62({ root, state: ordinary, autoProgress: false });
+  assert.match(root.textContent, /LIAISONS OPÉRATIONNELLES/u);
+  assert.equal(root.querySelectorAll('[data-hook-channel]').length, ui.state.phases[0].hooks.length);
+  const authored = storyDocument(); new MissionInsertionUiV62({ root: authored.root, state: insertion(), autoProgress: false });
+  assert.match(authored.root.textContent, /Ramenez les relevés/u);
+  assert.equal(authored.root.querySelectorAll('[data-hook-channel]').length, 0);
+});
+
+test('PR15: illustrated approach framing follows persisted phase progress through ticks, pause and reload', () => {
+  const { root } = storyDocument();
+  const state = advance(advance(insertion()));
+  const ui = new MissionInsertionUiV62({ root, state, autoProgress: false, now: () => 1000,
+    mediaRegistry: { approach: { id: 'registered-approach', src: '/registered-approach.png', type: 'image' } } });
+  const frame = () => root.querySelector('.mission-insertion-v62__media');
+  ui.setPhaseProgress(0.35);
+  assert.equal(Number(frame().style.getPropertyValue('--story-shot-progress')), 0.35);
+  const replaced = frame(); ui.tick(250);
+  assert.notEqual(frame(), replaced, 'the real renderer recreates the media element');
+  const progressed = ui.state.phases[ui.state.currentIndex].progress;
+  assert.ok(progressed > 0.35);
+  assert.equal(Number(frame().style.getPropertyValue('--story-shot-progress')), progressed);
+  ui.pause(); const paused = Number(frame().style.getPropertyValue('--story-shot-progress'));
+  ui.tick(1000); assert.equal(Number(frame().style.getPropertyValue('--story-shot-progress')), paused);
+  const next = storyDocument(); const restored = new MissionInsertionUiV62({ root: next.root, state: JSON.parse(JSON.stringify(ui.serialize())), autoProgress: false, reducedMotion: true });
+  assert.equal(Number(next.root.querySelector('.mission-insertion-v62__media').style.getPropertyValue('--story-shot-progress')), progressed);
+  assert.equal(next.root.dataset.reducedMotion, 'true');
+  const css = readFileSync(new URL('../mission-insertion-v62.css', import.meta.url), 'utf8');
+  assert.doesNotMatch(css, /@keyframes campaign-story-v160-shot/u);
+  assert.match(css, /transform:\s*scale\(calc\(1\s*\+\s*0\.035\s*\*\s*var\(--story-shot-progress/u);
+  assert.match(css, /\[data-reduced-motion='true'\][^{]*\{[^}]*transform:\s*none/u);
+  assert.equal(restored.state.paused, true);
 });

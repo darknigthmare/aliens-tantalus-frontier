@@ -584,6 +584,74 @@ test('a newly obstructed delayed charge or burst cannot commit a round or consum
   }
 });
 
+for (const name of ['Compound Bow', '4C2 Astra']) test(`left-facing ${name} commits its real delayed rounds with the stored x/y aim`, async () => {
+  const weapon = WEAPONS.find(item => item.name === name);
+  const subject = fixture({ weapon }); equipPickup(subject);
+  const aim = resolveCombatAimV83({ x: -1, y: 0, facing: -1 });
+  Object.assign(subject.actor, { x: 800, facing: -1, aimingV124: true, pointerAimV83: aim, combatAimV83: aim,
+    vx: name === 'Compound Bow' ? -155 : 0 });
+  await readyPose(subject, subject.actor, aim);
+  if (name === 'Compound Bow') {
+    // The collider is wholly outside the moving operator. Its real left-facing
+    // arms can hold the short bow here; a right-facing preview rejects it.
+    const held = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, aim,
+      { requireReady: false, shotPreviewV160: true });
+    const edge = held.bodyRig.shoulders.near.x - 30;
+    assert.ok(edge < subject.actor.x);
+    subject.engine.walls = [{ x: edge - 4, y: 540, w: 4, h: 600 }];
+    assert.equal(subject.engine.playerWeaponFireBlockedV160(subject.actor, aim), false);
+  }
+  const profile = resolveWeaponActionProfileV131(weapon);
+  const ammo = subject.actor.ammo, shots = subject.actor.shots;
+  const acceptedShots = subject.engine.weaponEffectsV124.stats.acceptedShots;
+  assert.equal(subject.engine.fire(subject.actor), true);
+  const cycle = subject.engine.weaponCyclesV131.get(subject.actor);
+  assert.ok(cycle, 'The native trigger must create the real charge or burst cycle.');
+  assert.deepEqual(cycle.aim, { x: -1, y: 0 }, 'Deferred rounds deliberately store direction without a facing field.');
+  subject.engine.updateBullets((profile.charge || profile.spacing * (profile.rounds - 1)) + .02);
+  const rounds = profile.rounds || 1;
+  assert.equal(subject.actor.ammo, ammo - rounds, 'Every accepted deferred round spends its own cartridge.');
+  assert.equal(subject.actor.shots, shots + rounds);
+  assert.equal(subject.engine.weaponEffectsV124.stats.acceptedShots, acceptedShots + rounds);
+  assert.equal(subject.engine.weaponCyclesV131.has(subject.actor), false);
+  assert.equal(subject.actor.facing, -1);
+  const deferredPose = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, cycle.aim,
+    { requireReady: false, shotPreviewV160: true });
+  assert.equal(deferredPose.bodyRig.facing, -1, 'Admission must use the same body side as the stored firing direction.');
+  if (name === 'Compound Bow') {
+    const recovered = subject.engine.recoverableWeaponsV131;
+    assert.equal(recovered.length, 1, 'The actual charged arrow reaches the first left-side wall.');
+    assert.equal(recovered[0].owner, subject.actor);
+    assert.equal(recovered[0].weaponId, weapon.id);
+    near(recovered[0].x, subject.engine.walls[0].x + subject.engine.walls[0].w, 'arrow impact on the near wall face');
+  } else assert.equal(subject.engine.weaponProjectilesV131.length, rounds);
+  for (const projectile of subject.engine.weaponProjectilesV131) {
+    assert.equal(projectile.owner, subject.actor);
+    assert.ok(projectile.vx < 0, 'The actual deferred projectile must travel to the left.');
+    assert.ok(projectile.sourceX < subject.actor.x + subject.actor.w / 2,
+      'Its accepted muzzle stays on the left-facing body side.');
+  }
+});
+
+test('supplied shot aims derive only missing facing and preserve vertical actor facing without mutation', async () => {
+  const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+  for (const actorFacing of [-1, 1]) {
+    subject.actor.facing = actorFacing;
+    for (const [x, y, explicitFacing, expected] of [
+      [-1, 0, undefined, -1], [1, 0, undefined, 1],
+      [0, -1, undefined, actorFacing], [1e-10, 1, undefined, actorFacing],
+      [-1, 0, 1, 1]
+    ]) {
+      const aim = Object.freeze({ x, y, ...(explicitFacing === undefined ? {} : { facing: explicitFacing }), source: 'deferred-test' });
+      const original = structuredClone(subject.actor);
+      const projected = subject.engine.previewPlayerWeaponInputV160(subject.actor, aim).aim;
+      assert.deepEqual(projected, { ...aim, facing: expected });
+      assert.deepEqual(subject.actor, original);
+      assert.equal(Object.hasOwn(aim, 'facing'), explicitFacing !== undefined);
+    }
+  }
+});
+
 test('the pure accepted-shot preview matches the real input, cover, injury and recoil chain in every body stance', async () => {
   for (const mode of ['standing', 'crouched', 'covered', 'hurt', 'moving']) {
     const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);

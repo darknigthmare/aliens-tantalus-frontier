@@ -45,7 +45,7 @@ import {
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
-import { hasCampaignStoryV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
+import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
 import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
 import { withHubMotionTrackerV160 } from './motion-tracker-v160.js';
 import { GameEngine } from './game-production-runtime.js';
@@ -1397,6 +1397,12 @@ function renderAdvanced() {
 }
 
 function renderOperationPlan() {
+  // Preserve a genuine existing QZ-18 return, including older saves, before
+  // any subsequent plan can replace strategy.lastOperation. No reward/read.
+  try {
+    const candidate = clone(saveSystem.data);
+    if (preserveCampaignStoryReturnV160(candidate).changed) saveSystem.commit(candidate);
+  } catch (error) { toast(error.message); }
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
     || CAMPAIGNS.find((entry) => saveSystem.data.galaxy.unlockedWorldIds.includes(entry.worldId));
@@ -1447,6 +1453,7 @@ function renderOperationPlan() {
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
   mountCampaignDebriefV160(byId('operation-plan'), {
     save: saveSystem.data,
+    campaignId: campaign.id,
     onReview: (operationId, topicId) => {
       try {
         const candidate = clone(saveSystem.data);
@@ -3520,16 +3527,29 @@ function bindHoldControl(button, target, code) {
 }
 
 function setupRuntimeControls() {
+  const canActivateHubTracker = () => activeView === 'hub' && hubEngine.running && !creatorOwnerV84
+    && (ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest') && !hubEngine.isVentActiveV62?.();
+  const activateHubTracker = async () => {
+    if (!canActivateHubTracker()) return false;
+    const owner = hubOwnerV84, actor = hubEngine.player, generation = hubEngine.loopToken;
+    const tracker = hubEngine.motionTrackerStateV160, context = tracker?.context, pulse = tracker?.activationSerial;
+    const ready = audio.unlock();
+    if (audio.enabled && audio.volumes.master > 0 && audio.volumes.effects > 0 && audio.context?.state === 'suspended') {
+      // Both detector inputs resume inside the user gesture and wait for a
+      // playable cue, without carrying the request into a different scene.
+      await ready;
+      if (!canActivateHubTracker() || hubOwnerV84 !== owner || hubEngine.player !== actor || hubEngine.loopToken !== generation
+        || hubEngine.motionTrackerStateV160 !== tracker || tracker?.context !== context || tracker?.activationSerial !== pulse) return false;
+    }
+    return hubEngine.activateTracker();
+  };
   all('[data-hub-control]').forEach((button) => {
     hubControlBindingsV133.push(bindHubControlV133(button, {
       canActivate: () => activeView === 'hub' && hubEngine.running && !creatorOwnerV84
         && (ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest'),
       activate: control => {
+        if (control === 'depth' && !hubEngine.isVentActiveV62?.()) return activateHubTracker();
         audio.unlock();
-        if (control === 'depth' && !hubEngine.isVentActiveV62?.()) {
-          hubEngine.activateTracker();
-          return;
-        }
         hubEngine.setControl(control, true);
         // The canvas keydown handler calls useLift on W/S. Touch and focused
         // buttons need the same command, while still holding the ladder key.
@@ -3556,11 +3576,10 @@ function setupRuntimeControls() {
   byId('mission-tracker').onclick = () => engine.activateTracker(engine.player);
   globalThis.addEventListener('keydown', event => {
     if (event.code !== 'KeyQ' || event.repeat || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey
-      || event.isComposing || activeView !== 'hub' || !hubEngine.running || creatorOwnerV84
-      || !(ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest')
-      || hubEngine.isVentActiveV62?.()
+      || event.isComposing || !canActivateHubTracker()
       || event.target?.closest?.('input,select,textarea,[contenteditable],button')) return;
-    if (hubEngine.activateTracker()) { audio.unlock(); event.preventDefault(); }
+    event.preventDefault();
+    return activateHubTracker();
   });
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);

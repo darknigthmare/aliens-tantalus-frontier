@@ -155,7 +155,26 @@ def start_runtime(page):
 
 
 def protected(save):
-    return {key: save[key] for key in ['clock', 'galaxy', 'hub', 'crew', 'statistics', 'archiveRelayArchivesV122']}
+    result = {key: save[key] for key in ['clock', 'galaxy', 'hub', 'crew', 'statistics', 'archiveRelayArchivesV122']}
+    result['archiveRelayArchivesV122'] = json.loads(json.dumps(result['archiveRelayArchivesV122']))
+    ledger = result['archiveRelayArchivesV122'].get('lastReturnV160', {}).get('ledger')
+    if isinstance(ledger, dict):
+        # These two explicit reading fields are checked against their complete
+        # expected values after every click. Evidence, receipt and all other
+        # durable return fields remain inside this strict protected projection.
+        ledger.pop('readTopics', None)
+        ledger.pop('activeTopic', None)
+    return result
+
+
+def return_ledgers(save):
+    archived = save['archiveRelayArchivesV122'].get('lastReturnV160', {})
+    current = save['strategy'].get('lastOperation')
+    insertion = current.get('insertionState') if current and current.get('id') == archived.get('operationId') else None
+    preparation = next((item for item in insertion['phases'] if item['kind'] == 'preparation'), None) if insertion else None
+    return {'durable': archived.get('ledger'),
+            'latestOperation': preparation.get('payload', {}).get('campaignStoryReturnV160') if preparation else None,
+            'latestOperationMatches': bool(current and current.get('id') == archived.get('operationId'))}
 
 
 def protected_difference(before, after, path=''):
@@ -281,25 +300,42 @@ with sync_playwright() as pw:
         capture(page, '09-return-dialogue.png', '#operation-plan')
         # Native hub exit persists the actual hub pose before command becomes
         # active. Isolate the question clicks from that earlier navigation.
-        before_questions = protected(observed(page)['save'])
+        question_save = observed(page)['save']
+        before_questions = protected(question_save)
+        ledger_baseline = return_ledgers(question_save)
+        expected_reads = list(ledger_baseline['durable']['readTopics'])
         report['questionInvariants'] = {
             'fields': list(before_questions),
+            'readingFieldsComparedSeparately': ['/archiveRelayArchivesV122/lastReturnV160/ledger/readTopics', '/archiveRelayArchivesV122/lastReturnV160/ledger/activeTopic'],
+            'ledgerBeforeQuestions': ledger_baseline,
             'afterReturnBeforeCommand': protected(back_aboard),
             'beforeQuestionsAfterCommand': before_questions,
             'navigationDifference': protected_difference(protected(back_aboard), before_questions),
             'observations': []}
         for topic in ['chronology', 'identity', 'return']:
             page.locator(f'[data-campaign-story-topic="{topic}"]').click()
-            current = protected(observed(page)['save'])
+            actual_save = observed(page)['save']
+            current = protected(actual_save)
+            if topic not in expected_reads:
+                expected_reads.append(topic)
+            expected_ledger = {**ledger_baseline['durable'], 'readTopics': list(expected_reads), 'activeTopic': topic}
+            actual_ledgers = return_ledgers(actual_save)
+            ledgers_match = actual_ledgers['durable'] == expected_ledger and actual_ledgers['latestOperationMatches'] and actual_ledgers['latestOperation'] == expected_ledger
             report['questionInvariants']['observations'].append({'pass': 'first-reading', 'topic': topic,
+                'expectedLedger': expected_ledger, 'actualLedgers': actual_ledgers, 'ledgersMatchExactly': ledgers_match,
                 'protectedSnapshot': current, 'differenceFromBeforeQuestions': protected_difference(before_questions, current)})
         after_reading = observed(page)['save']
         for topic in ['chronology', 'identity', 'return']:
             page.locator(f'[data-campaign-story-topic="{topic}"]').click()
-            current = protected(observed(page)['save'])
+            actual_save = observed(page)['save']
+            current = protected(actual_save)
+            expected_ledger = {**ledger_baseline['durable'], 'readTopics': list(expected_reads), 'activeTopic': topic}
+            actual_ledgers = return_ledgers(actual_save)
+            ledgers_match = actual_ledgers['durable'] == expected_ledger and actual_ledgers['latestOperationMatches'] and actual_ledgers['latestOperation'] == expected_ledger
             report['questionInvariants']['observations'].append({'pass': 'repeated-reading', 'topic': topic,
+                'expectedLedger': expected_ledger, 'actualLedgers': actual_ledgers, 'ledgersMatchExactly': ledgers_match,
                 'protectedSnapshot': current, 'differenceFromBeforeQuestions': protected_difference(before_questions, current)})
-        check('first and repeated questions do not pay, heal or advance campaign time', all(not row['differenceFromBeforeQuestions'] for row in report['questionInvariants']['observations']))
+        check('first and repeated questions preserve strategy while updating both reading ledgers exactly', all(not row['differenceFromBeforeQuestions'] and row['ledgersMatchExactly'] for row in report['questionInvariants']['observations']))
         before_reload = observed(page)['save']
         topics_before_reload = {topic: page.locator(f'[data-campaign-story-topic="{topic}"]').inner_text() for topic in ['chronology', 'identity', 'return']}
         reload_started = time.monotonic()
@@ -327,11 +363,13 @@ with sync_playwright() as pw:
         last_before, last_after = before_reload['strategy']['lastOperation'], after_reload['strategy']['lastOperation']
         ledger_before = next(item for item in last_before['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
         ledger_after = next(item for item in last_after['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
+        durable_ledgers_before, durable_ledgers_after = return_ledgers(before_reload), return_ledgers(after_reload)
         topics_after_reload = {topic: page.locator(f'[data-campaign-story-topic="{topic}"]').inner_text() for topic in ['chronology', 'identity', 'return']}
         report['reloadInvariants'] = {
             'before': protected(before_reload), 'after': protected(after_reload), 'differences': differences,
             'unexpectedDifferences': unexpected_differences,
             'ledgerBefore': ledger_before, 'ledgerAfter': ledger_after,
+            'durableLedgersBefore': durable_ledgers_before, 'durableLedgersAfter': durable_ledgers_after,
             'subjectsBefore': topics_before_reload, 'subjectsAfter': topics_after_reload,
             'sessionTiming': {'before': session_before_reload, 'after': session_after_reload,
                               'reloadAndNativeNavigationMonotonicSeconds': reload_interval},
@@ -344,7 +382,28 @@ with sync_playwright() as pw:
         check('the return reading ledger, payment and strategic state survive reload with only measured session clocks advancing',
               not unexpected_differences and play_seconds_valid and npc_time_valid
               and ledger_after == ledger_before and last_after['id'] == last_before['id'] and last_after['success'] is True
+              and durable_ledgers_after == durable_ledgers_before and durable_ledgers_after['durable'] == ledger_after
               and topics_after_reload == topics_before_reload and all('RELU' in text for text in topics_after_reload.values()))
+
+        phase('native campaign selection keeps QZ18 return attached to its own plan')
+        before_selection = observed(page)['save']
+        page.locator('#command-world-v110').select_option('')
+        candidates = page.locator('#command-mission-v110 option').evaluate_all('(nodes)=>nodes.map(node=>node.value).filter(value=>value&&value!=="special-archive-relay")')
+        check('an unlocked alternative can be selected without deploying it', bool(candidates))
+        other_campaign = candidates[0]
+        page.locator('#command-mission-v110').select_option(other_campaign)
+        page.wait_for_function('id=>__ATF_V51__.saveSystem.data.strategy.plannedCampaignId===id', arg=other_campaign)
+        check('another campaign plan does not display the QZ18 debrief', page.locator('[data-campaign-story-return]').count() == 0 and observed(page)['save']['strategy']['currentOperation'] is None)
+        page.locator('#command-mission-v110').select_option('special-archive-relay')
+        page.locator('[data-campaign-story-return]').wait_for(state='visible')
+        after_selection = observed(page)['save']
+        report['planSelection'] = {'alternativeCampaignId': other_campaign,
+            'protectedDifferences': protected_difference(protected(before_selection), protected(after_selection)),
+            'ledgersBefore': return_ledgers(before_selection), 'ledgersAfter': return_ledgers(after_selection)}
+        check('returning to the QZ18 plan retains exact topics and receipt without another operation or reward',
+              not report['planSelection']['protectedDifferences'] and return_ledgers(before_selection) == return_ledgers(after_selection)
+              and all('RELU' in page.locator(f'[data-campaign-story-topic="{topic}"]').inner_text() for topic in ['chronology', 'identity', 'return'])
+              and after_selection['strategy']['currentOperation'] is None)
 
         phase('native replay skip, reduced motion, retreat and an explicitly disclosed legacy resume')
         open_view(page, 'settings')

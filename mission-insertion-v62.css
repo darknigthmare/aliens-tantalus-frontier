@@ -397,10 +397,9 @@
 }
 .mission-insertion-v62__media[data-story-shot='approach'] .mission-insertion-v62__media-source,
 .mission-insertion-v62__media[data-story-shot='deployment'] .mission-insertion-v62__media-source {
-  animation: campaign-story-v160-shot 20s ease-out both;
+  transform: scale(calc(1 + 0.035 * var(--story-shot-progress, 0)));
 }
 .mission-insertion-v62__media-source[data-native-relay-shot] { animation: none !important; transform: none !important; }
-@keyframes campaign-story-v160-shot { from { transform: scale(1); } to { transform: scale(1.035); } }
 .mission-insertion-v62__shot-label {
   position: absolute;
   left: 22px;

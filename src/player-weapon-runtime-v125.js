@@ -290,7 +290,11 @@ export function withPlayerWeaponRigV125(Base) {
         actor === this.coop ? COMBAT_AIM_KEY_BINDINGS_V83.coop : COMBAT_AIM_KEY_BINDINGS_V83.player);
       const pointer = actor === this.player ? previewCombatPointerAimV160(this.canvas, this) || actor.pointerAimV83 : actor.pointerAimV83;
       const input = [pointer, actor.gamepadAimV83].find(value => value && Math.hypot(value.x || 0, value.y || 0) > .25) || keyboard;
-      return { aim: aim || resolveCombatAimV83({ ...input, facing: actor.facing }),
+      // Deferred charge/burst cycles retain x/y only. Their admission preview
+      // must keep the body on the same side as the stored firing direction.
+      const resolvedAim = aim ? { ...aim, facing: aim.facing ?? (Math.abs(finite(aim.x)) > 1e-8
+        ? Math.sign(aim.x) : actor.facing < 0 ? -1 : 1) } : resolveCombatAimV83({ ...input, facing: actor.facing });
+      return { aim: resolvedAim,
         aiming: Boolean(pointer || actor.gamepadAimV83 || actor.gamepadAimHeldV124
           || this.keys?.has(actor.coop ? 'ShiftRight' : 'ShiftLeft')) };
     }

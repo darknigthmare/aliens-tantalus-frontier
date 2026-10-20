@@ -24,7 +24,7 @@
       "url": "https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/",
       "sha256": "b34ad1fbd9b69888fea05ee886fdf95278ce8018654c79c06ea0b5e06b79cd22",
       "inheritedSourceId": "V159-REF-009",
-      "locator": "Motion Tracker section, extracted text lines436–449; HTML image at line513",
+      "locator": "Motion Tracker section, extracted text lines 436–449; HTML image at line 513",
       "actuallyRead": true,
       "visualReference": false,
       "proves": [
@@ -60,7 +60,7 @@
       "actuallyVisuallyInspected": true,
       "proves": [
         "Green display with forward fan sector, arc markings and a luminous unclassified point.",
-        "A lower-left distance number is visible; the screenshot reads0.59 without establishing a world-unit conversion.",
+        "A lower-left distance number is visible; the screenshot reads 0.59 without establishing a world-unit conversion.",
         "Side indicators and a left edge rectangular marker are visible."
       ],
       "doesNotProve": [
@@ -129,10 +129,10 @@
       "url": "https://www.20thcenturystudios.com/movies/aliens",
       "sha256": "29ac5109cfbdb1fcf53b9acb7e7a41e03a91ba6a2415ad51b5732be2c927c581",
       "inheritedSourceId": "V159-REF-010",
-      "locator": "Extracted text line23 synopsis; no film frames recovered",
+      "locator": "Extracted text line 23 synopsis; no film frames recovered",
       "actuallyRead": true,
       "proves": [
-        "Ripley returns from hypersleep after57years; lost contact with colonists leads to a military expedition."
+        "Ripley returns from hypersleep after 57 years; lost contact with colonists leads to a military expedition."
       ],
       "doesNotProve": [
         "Tantalus, Echo-9, Mire-9 or the project original storyline.",
@@ -157,7 +157,7 @@
       "frameCount": 362,
       "durationSeconds": 6.039367,
       "proves": [
-        "The official montage advertises Pathogen; one environment establishing shot is identified at1.001s."
+        "The official montage advertises Pathogen; one environment establishing shot is identified at 1.001 s."
       ],
       "doesNotProve": [
         "A complete unobstructed human gait or arm cycle.",
@@ -176,7 +176,7 @@
       ],
       "kind": "existing-native-game-art-not-external-evidence",
       "work": "Echo-9 modular colonial artwork",
-      "editionObserved": "Project baseline4fc9da8, generated adapted sprite parts",
+      "editionObserved": "Project baseline 4fc9da8, generated adapted sprite parts",
       "actuallyVisuallyInspected": true,
       "proves": [
         "The native leg part contains pelvis, femur, shin and boot sprites with individual attachment openings.",
@@ -225,7 +225,7 @@
         "C160-CAMPAIGN"
       ],
       "kind": "missing-requested-game-reference",
-      "work": "Terminator2D: NO FATE",
+      "work": "Terminator 2D: NO FATE",
       "status": "NO_EXACT_LOCAL_SOURCE_OR_TIME_CODE_FOUND",
       "proves": [],
       "doesNotProve": [
@@ -243,7 +243,7 @@
         "C160-PLAYER"
       ],
       "kind": "generic-human-motion-capture-reference",
-      "work": "CMU Graphics Lab Motion Capture Database — subject02,trial01,walk",
+      "work": "CMU Graphics Lab Motion Capture Database — subject 02, trial 01, walk",
       "status": "GENERIC_MOCAP_GEOMETRY_RETRIEVED_AND_ANALYSED",
       "sourceRepository": "https://github.com/una-dinosauria/cmu-mocap",
       "sourceCommit": "09a07f54f3bbb58797325f009282d0b2048a2871",
@@ -291,8 +291,8 @@
       "originalAmcSha256": null,
       "primaryDatasetWebsite": "http://mocap.cs.cmu.edu/",
       "primaryDatasetWebsiteFetched": false,
-      "conversion": "Bruce Hahne MotionBuilder-friendly BVH2010 release; T-pose estimated and prepended",
-      "sequenceDescriptionLocator": "cmu-mocap-index-text.txt line39:02_01 walk",
+      "conversion": "Bruce Hahne MotionBuilder-friendly BVH 2010 release; T-pose estimated and prepended",
+      "sequenceDescriptionLocator": "cmu-mocap-index-text.txt line 39: 02_01 walk",
       "rightsObserved": {
         "source": "READMEFIRST.txt USAGE RIGHTS section",
         "statement": "The conversion README states that CMU places no use restrictions and the converter adds none, including research and commercial use.",
@@ -322,7 +322,7 @@
       "analysis": {
         "method": "3D forward kinematics through complete hierarchy; geometric knee angle between femur and shank; side-view plane uses root travel direction and world vertical.",
         "normalization": {
-          "method": "Vertical extent all joints/end sites of added frame0T-pose; sourceunitsunestablished, notmetres",
+          "method": "Vertical extent all joints/end sites of added frame 0 T-pose; source units unestablished, not metres",
           "heightSourceUnits": 26.083212941504545
         },
         "leftKneeFlexDeg": {
@@ -350,13 +350,13 @@
       "limits": [
         "One walk capture by one performer, not universal joint limits or a canonical franchise animation.",
         "READMEFIRST explicitly warns CMU joint calibration/T-pose are guessed and source motion may contain impossible head angles/noise.",
-        "Frame0 is synthetic added T-pose; excluded from motion extrema.",
+        "Frame 0 is synthetic added T-pose; excluded from motion extrema.",
         "Knee flexion measured from 3D segment geometry; hip-like value uses world vertical/travel plane, not calibrated anatomical pelvis joint angle.",
-        "Source game speed, phase, mappingnear/far vsleft/right differ; no1:1 certification or direct targetdegreeconstraint.",
-        "Sourceunits, subject anthropometry and marker calibration not established.",
-        "This source does not certify an Aliens,Terminator or other franchise animation.",
+        "Source game speed, phase, mapping near/far vs left/right differ; no 1:1 certification or direct target degree constraint.",
+        "Source units, subject anthropometry and marker calibration not established.",
+        "This source does not certify an Aliens, Terminator or other franchise animation.",
         "Finger/thumb motion is not captured according to the README; cannot validate weapon grip animation.",
-        "No BVH,raw capture,PNG or private trace is proposed for the public repository."
+        "No BVH, raw capture, PNG or private trace is proposed for the public repository."
       ],
       "canonicalFranchiseHumanMotionReferences": 0,
       "genericHumanMocapReferences": 1,
@@ -364,7 +364,7 @@
       "artClosed": 0,
       "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/data/002/02_01.bvh",
       "sha256": "cf56db43157acc3d200b3d4215523f54d354a8926bea67e1f6c8031bd335ba7e",
-      "editionObserved": "Bruce Hahne MotionBuilder-friendly BVH2010 release; T-pose estimated and prepended",
+      "editionObserved": "Bruce Hahne MotionBuilder-friendly BVH 2010 release; T-pose estimated and prepended",
       "frames": 344,
       "motionFrames": 343,
       "calibrationFrameExcluded": 0,
@@ -379,13 +379,13 @@
       "doesNotProve": [
         "One walk capture by one performer, not universal joint limits or a canonical franchise animation.",
         "READMEFIRST explicitly warns CMU joint calibration/T-pose are guessed and source motion may contain impossible head angles/noise.",
-        "Frame0 is synthetic added T-pose; excluded from motion extrema.",
+        "Frame 0 is synthetic added T-pose; excluded from motion extrema.",
         "Knee flexion measured from 3D segment geometry; hip-like value uses world vertical/travel plane, not calibrated anatomical pelvis joint angle.",
-        "Source game speed, phase, mappingnear/far vsleft/right differ; no1:1 certification or direct targetdegreeconstraint.",
-        "Sourceunits, subject anthropometry and marker calibration not established.",
-        "This source does not certify an Aliens,Terminator or other franchise animation.",
+        "Source game speed, phase, mapping near/far vs left/right differ; no 1:1 certification or direct target degree constraint.",
+        "Source units, subject anthropometry and marker calibration not established.",
+        "This source does not certify an Aliens, Terminator or other franchise animation.",
         "Finger/thumb motion is not captured according to the README; cannot validate weapon grip animation.",
-        "No BVH,raw capture,PNG or private trace is proposed for the public repository."
+        "No BVH, raw capture, PNG or private trace is proposed for the public repository."
       ]
     }
   ],
@@ -404,7 +404,7 @@
       "units": "world pixels and normalized skeleton lengths, not metres",
       "capturePairs": [
         "Neutral left/right next to the same human NPC and floor.",
-        "At leastone full slow walking cycle left/right, running cycle, brake and restart.",
+        "At least one full slow walking cycle left/right, running cycle, brake and restart.",
         "Crouch idle/move, jump ascent/apex/landing, ladder step and vent entry/exit.",
         "Same camera zoom, viewport, outfit, neutral pose and known Save-picker fixture before/after."
       ],
@@ -417,7 +417,7 @@
       ],
       "passConditions": [
         "No detached waist, reversed knee, below-floor sole or visibly rescaled leg across postures.",
-        "Numeric constraints are engineering plausibility checks; external anatomical1:1 remains unapproved."
+        "Numeric constraints are engineering plausibility checks; external anatomical 1:1 remains unapproved."
       ]
     },
     "C160-TRACKER": {

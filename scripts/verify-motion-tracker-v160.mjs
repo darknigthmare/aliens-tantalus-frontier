@@ -3,6 +3,9 @@ import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
+import { runInNewContext } from 'node:vm';
+import { AudioDirector } from '../src/audio.js';
+import { bindHubControlV133 } from '../src/hub-control-bindings-v133.js';
 import { GameEngine as ProductionGame } from '../src/game-production-runtime.js';
 import { HubGame as NativeHub } from '../src/hub-opening-v88.js';
 import { createDefaultSave } from '../src/save.js';
@@ -254,6 +257,175 @@ function hub() {
     { routineContextV62: { save, crew: save.crew, clock: save.clock } });
   return { ...h, e };
 }
+
+// Execute the shipped callback against the actual hub and AudioDirector. Only
+// the browser's AudioContext backend is controlled; no copied input handler.
+function keyboardTracker({ state = 'suspended', existing = false, enabled = true, supported = true, volumes = {} } = {}) {
+  const { e } = hub(), cues = []; let finishResume, failResume, resumes = 0;
+  class Context {
+    state = state; destination = {};
+    createGain() { return { gain: { value: 1 }, connect() {} }; }
+    createBufferSource() {
+      const context = this;
+      return { connect() {}, disconnect() {}, stop() {}, start() { cues.push(context.state); } };
+    }
+    resume() { resumes++; return new Promise((resolve, reject) => {
+      finishResume = () => { this.state = 'running'; resolve(); }; failResume = () => reject(new Error('resume denied'));
+    }); }
+  }
+  const audio = new AudioDirector({ AudioContextCtor: supported ? Context : null, AudioCtor: null, fetchImpl: null });
+  audio.manifestStatus = 'ready'; audio.effectBuffers.set('tracker', { length: 32, numberOfChannels: 1 }); audio.enabled = enabled;
+  audio.setVolumes(volumes);
+  if (existing) { audio.context = new Context(); audio.master = audio.context.createGain(); }
+  e.audio = audio;
+  const owner = {}, scope = { activeView: 'hub', creatorOwnerV84: null, hubOwnerV84: owner,
+    standaloneContext: null, hubEngine: e, audio, ownsTimelineV84: candidate => candidate === owner };
+  const buttons = Object.fromEntries(['depth','left','up'].map(control => [control,
+    Object.assign(new EventTarget(),{dataset:{hubControl:control},disabled:false,hidden:false,setPointerCapture(){}})]));
+  const controls=[],lifts=[];let pendingTouch;
+  const nativeControl=e.setControl.bind(e),nativeLift=e.useLift.bind(e);
+  e.setControl=(control,active)=>{controls.push([control,active]);return nativeControl(control,active);};
+  e.useLift=direction=>{lifts.push(direction);return nativeLift(direction);};
+  scope.all=selector=>{assert.equal(selector,'[data-hub-control]');return Object.values(buttons);};
+  scope.hubControlBindingsV133=[];
+  scope.bindHubControlV133=(button,options)=>bindHubControlV133(button,{...options,
+    activate:control=>{pendingTouch=options.activate(control);return pendingTouch;}});
+  let listener;
+  scope.globalThis = { addEventListener(type, callback) { assert.equal(type, 'keydown'); listener = callback; } };
+  const source = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8'), condition = source.indexOf("event.code !== 'KeyQ'");
+  const start = source.lastIndexOf("globalThis.addEventListener('keydown',", condition);
+  const end = source.indexOf("\n  byId('mission-vehicle')", start);
+  const setup=source.indexOf('function setupRuntimeControls() {')+'function setupRuntimeControls() {'.length;
+  const controlsEnd=source.indexOf("\n  all('[data-mission-key]')",setup);
+  assert.ok(condition >= 0 && start >= 0 && end > start && controlsEnd>setup);
+  runInNewContext(source.slice(setup,controlsEnd)+'\n'+source.slice(start,end),scope);
+  const event = overrides => ({ code: 'KeyQ', target: { closest: () => null }, defaultPrevented: false,
+    preventDefault() { this.defaultPrevented = true; }, ...overrides });
+  return { e, audio, scope, cues, event, buttons, controls, lifts, press: overrides => listener(event(overrides)),
+    touch(type='pointerdown',fields={},control='depth') {
+      const event=new Event(type,{cancelable:true});Object.assign(event,{pointerId:1,button:0,...fields});
+      buttons[control].dispatchEvent(event);return pendingTouch;
+    },
+    finish: () => finishResume(), reject: () => failResume(), get resumes() { return resumes; },
+    close() {scope.hubControlBindingsV133.forEach(binding=>binding.destroy());e.stop(false);audio.dispose();} };
+}
+
+test('the actual hub Q callback unlocks native audio before the immediate first consultation cue', async () => {
+  for (const existing of [false,true]) {
+    const f=keyboardTracker({state:'running',existing});
+    const pending=f.press();
+    assert.equal(f.e.motionTrackerSnapshotV160().active,true,'Already available audio must not delay the input.');
+    assert.deepEqual(f.cues,['running']);assert.equal(f.resumes,0);
+    await pending;assert.deepEqual(f.cues,['running']);f.close();
+  }
+});
+
+test('native suspended audio finishes resuming before Q emits one cue; muted, unavailable and denied audio preserve gameplay', async () => {
+  for (const existing of [false,true]) {
+    const f=keyboardTracker({existing}),pending=f.press();
+    assert.equal(f.resumes,1);assert.equal(f.e.motionTrackerSnapshotV160().active,false);assert.deepEqual(f.cues,[]);
+    f.finish();await pending;
+    assert.equal(f.e.motionTrackerSnapshotV160().active,true);assert.deepEqual(f.cues,['running']);
+    const serial=f.e.motionTrackerStateV160.activationSerial;await f.press();
+    assert.equal(f.e.motionTrackerStateV160.activationSerial,serial);assert.deepEqual(f.cues,['running']);f.close();
+  }
+  for (const options of [{enabled:false},{supported:false},{volumes:{master:0}},{volumes:{effects:0}}]) {
+    const f=keyboardTracker(options),pending=f.press();
+    assert.equal(f.e.motionTrackerSnapshotV160().active,true);assert.equal(f.resumes,options.volumes?1:0);
+    if(options.volumes)f.finish();await pending;
+    assert.deepEqual(f.cues,[]);f.close();
+  }
+  const f=keyboardTracker(),pending=f.press();f.reject();await pending;
+  assert.equal(f.e.motionTrackerSnapshotV160().active,true);assert.deepEqual(f.cues,[]);f.close();
+  const muted=keyboardTracker(),waiting=muted.press();muted.audio.enabled=false;muted.finish();await waiting;
+  assert.equal(muted.e.motionTrackerSnapshotV160().active,true);assert.deepEqual(muted.cues,[]);muted.close();
+});
+
+test('pending hub Q cannot activate across pause, resume, reload, owner, scene or chart changes', async () => {
+  for (const change of ['pause','pause-resume','reload','owner','view','creator','chart','device-state']) {
+    const f=keyboardTracker(),pending=f.press();
+    if (change==='pause') f.e.pause();
+    if (change==='pause-resume') {f.e.pause();f.e.resume();}
+    if (change==='reload') {f.e.stop(false);f.e.start({deck:1,roomId:'science-lab',positionX:4500,positionY:532});}
+    if (change==='owner') {f.scope.hubOwnerV84={};f.scope.ownsTimelineV84=()=>true;}
+    if (change==='view') f.scope.activeView='command';
+    if (change==='creator') f.scope.creatorOwnerV84={};
+    if (change==='chart') f.e.motionTrackerStateV160.context+=':different-chart';
+    if (change==='device-state') f.e.motionTrackerStateV160=createMotionTrackerStateV160();
+    f.finish();await pending;
+    assert.equal(f.e.motionTrackerSnapshotV160().active,false,change);assert.deepEqual(f.cues,[],change);f.close();
+  }
+  const f=keyboardTracker(),pending=f.press();assert.equal(f.e.activateTracker(),true);advance(f.e,2.2);
+  const serial=f.e.motionTrackerStateV160.activationSerial;f.finish();await pending;
+  assert.equal(f.e.motionTrackerStateV160.activationSerial,serial,'A later tactile pulse supersedes the waiting keyboard request.');
+  assert.deepEqual(f.cues,[]);f.close();
+});
+
+test('ignored hub keyboard input cannot unlock sound or start a detector consultation', async () => {
+  const f=keyboardTracker();
+  for (const overrides of [{code:'KeyE'},{repeat:true},{defaultPrevented:true},{ctrlKey:true},{altKey:true},
+    {metaKey:true},{isComposing:true},{target:{closest:()=>({tagName:'INPUT'})}}]) await f.press(overrides);
+  f.e.running=false;await f.press();f.e.running=true;
+  f.scope.activeView='command';await f.press();f.scope.activeView='hub';
+  f.e.isVentActiveV62=()=>true;await f.press();
+  assert.equal(f.resumes,0);assert.equal(f.audio.context,null);assert.equal(f.e.motionTrackerSnapshotV160().active,false);
+  assert.deepEqual(f.cues,[]);f.close();
+});
+
+test('the native tactile binding waits for audio once and preserves two-finger release ownership', async () => {
+  const f=keyboardTracker();f.buttons.depth.disabled=true;f.touch();
+  assert.equal(f.resumes,0);f.buttons.depth.disabled=false;
+  const pending=f.touch();f.touch('pointerdown',{pointerId:2});
+  assert.equal(f.resumes,1);assert.equal(f.e.motionTrackerSnapshotV160().active,false);assert.deepEqual(f.cues,[]);
+  f.touch('pointerup');assert.deepEqual(f.controls,[]);
+  f.touch('pointercancel',{pointerId:2});assert.deepEqual(f.controls,[['depth',false]]);
+  f.finish();await pending;
+  assert.equal(f.e.motionTrackerSnapshotV160().active,true);assert.deepEqual(f.cues,['running']);f.close();
+});
+
+test('focused and assistive detector-button presses share one resumed cue and immediate silent fallbacks', async () => {
+  for (const code of ['Enter','Space','assistive-click']) {
+    const f=keyboardTracker(),pending=code==='assistive-click'?f.touch('click',{detail:0}):f.touch('keydown',{code,repeat:false});
+    if (code!=='assistive-click') {
+      f.touch('keydown',{code,repeat:true});f.touch('click',{detail:0});f.touch('keyup',{code});
+    }
+    assert.equal(f.resumes,1);assert.deepEqual(f.controls,[['depth',false]]);assert.deepEqual(f.cues,[]);
+    f.finish();await pending;
+    assert.equal(f.e.motionTrackerSnapshotV160().active,true);assert.deepEqual(f.cues,['running']);f.close();
+  }
+  for (const options of [{state:'running'},{enabled:false},{supported:false},{volumes:{master:0}},{volumes:{effects:0}}]) {
+    const f=keyboardTracker(options),pending=f.touch();
+    assert.equal(f.e.motionTrackerSnapshotV160().active,true);assert.equal(f.resumes,options.volumes?1:0);
+    if(options.volumes)f.finish();
+    await pending;assert.deepEqual(f.cues,options.state==='running'?['running']:[]);
+    f.touch('pointerup');assert.deepEqual(f.controls,[['depth',false]]);f.close();
+  }
+});
+
+test('a suspended tactile detector cannot outlive pause, reload, owner or vent changes', async () => {
+  for (const change of ['pause-resume','reload','owner','view','chart','vent']) {
+    const f=keyboardTracker(),pending=f.touch();f.touch('pointerup');
+    if (change==='pause-resume') {f.e.pause();f.e.resume();}
+    if (change==='reload') {f.e.stop(false);f.e.start({deck:1,roomId:'science-lab',positionX:4500,positionY:532});}
+    if (change==='owner') {f.scope.hubOwnerV84={};f.scope.ownsTimelineV84=()=>true;}
+    if (change==='view') f.scope.activeView='command';
+    if (change==='chart') f.e.motionTrackerStateV160.context+=':different-chart';
+    if (change==='vent') f.e.isVentActiveV62=()=>true;
+    f.finish();await pending;
+    assert.equal(f.e.motionTrackerSnapshotV160().active,false,change);assert.deepEqual(f.cues,[],change);f.close();
+  }
+});
+
+test('movement, lift and vent-depth tactile controls remain immediate while audio resumes', async () => {
+  for (const control of ['left','up','depth']) {
+    const f=keyboardTracker();if(control==='depth')f.e.isVentActiveV62=()=>true;
+    f.touch('pointerdown',{},control);
+    assert.equal(f.resumes,1);assert.deepEqual(f.controls,[[control,true]]);
+    assert.deepEqual(f.lifts,control==='up'?[-1]:[]);assert.equal(f.e.motionTrackerSnapshotV160().active,false);
+    f.touch('pointerup',{},control);assert.deepEqual(f.controls,[[control,true],[control,false]]);
+    f.finish();await Promise.resolve();assert.deepEqual(f.cues,[]);f.close();
+  }
+});
 
 test('native hub Q observes BISHOP physically walking, holds its actual tool, and excludes stationary duties', () => {
   const { e } = hub(); e.setNpcRoutineContextV62({ clock: { day: 1, hour: 9 } }, { persist: false });

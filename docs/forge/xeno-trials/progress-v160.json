@@ -2233,7 +2233,18 @@
           "compactSectorFontCssPixels": 11,
           "compactMinimumFontCssPixels": 10,
           "compactPlacementUsesPlayerAndCamera": true,
-          "rangeReadoutLabel": "PORTÉE RELATIVE"
+          "rangeReadoutLabel": "PORTÉE RELATIVE",
+          "hubActivationInputs": [
+            "KeyQ",
+            "native-detector-button"
+          ],
+          "hubDetectorButtonSupportsKeyboardAndAssistiveClick": true,
+          "hubAudioUnlockBeginsInsideUserGesture": true,
+          "hubAudibleSuspendedAudioResumeBeforeActivation": true,
+          "hubReadyMutedUnavailableOrDeniedAudioPreservesGameplay": true,
+          "hubDeferredActivationRechecksOwnerActorGenerationTrackerChartAndPulse": true,
+          "hubObsoleteActivationCreatesLateScan": false,
+          "nonDetectorHubControlsRemainSynchronous": true
         },
         "C160-WEAPONS": {
           "elbowFlexionDesignDegrees": [
@@ -2266,7 +2277,11 @@
           "obstacleRetractionUsesFullSpriteAlphaEnvelope": true,
           "physicalClearanceReevaluatedBeforeFire": true,
           "stalePoseObstructionFlagsCanBlockPhysicallyClearedMuzzle": false,
-          "peekUsesActualSpriteAlphaAndNativeProjectileCollision": true
+          "peekUsesActualSpriteAlphaAndNativeProjectileCollision": true,
+          "deferredChargeAndBurstPreviewKeepsSuppliedAimFacing": true,
+          "deferredAimWithoutFacingUsesHorizontalDirection": true,
+          "verticalDeferredAimFallsBackToActorFacing": true,
+          "suppliedAimObjectMutatedByPreview": false
         },
         "C160-CAMPAIGN": {
           "operationId": "special-archive-relay",
@@ -2279,7 +2294,8 @@
           "existingFailureAndWoundsPreserved": true,
           "saveFields": [
             "insertionState.phases[preparation].payload.campaignStoryV160",
-            "insertionState.phases[preparation].payload.campaignStoryReturnV160"
+            "insertionState.phases[preparation].payload.campaignStoryReturnV160",
+            "archiveRelayArchivesV122.lastReturnV160"
           ],
           "newSaveSchema": false,
           "originalProjectFiction": true,
@@ -2306,23 +2322,37 @@
           "causalIncidentNoticeOnlyWhileCurrentAndUnresolved": true,
           "archiveDeploymentCaption": "Relais QZ-18 · quai ouest",
           "missionSaveUsesExistingNativeHandler": true,
-          "postExtractionReturnCaption": "RETOUR À BORD"
+          "postExtractionReturnCaption": "RETOUR À BORD",
+          "lastQz18ReturnConservedWithSameOperationDossier": true,
+          "lastQz18ReturnAccessibleAfterAnotherOperation": true,
+          "compactDurableReturnOwner": "archiveRelayArchivesV122.lastReturnV160",
+          "compactDurableReturnEntryLimit": 1,
+          "fullInvestigationHistory": false,
+          "durableReturnIncludesActorOrStrategyOrInsertionClockState": false,
+          "rewardReadsOnlyCurrentNativeResolvedOperation": true,
+          "archivedReturnCanGrantReward": false,
+          "debriefVisibleOnlyOnMatchingCampaignPlan": true,
+          "legacyReturnPreservationGrantsPaymentOrReading": false,
+          "ordinaryInsertionContextualHooksRestored": true,
+          "illustrativeShotTransformUsesPersistedPhaseProgress": true,
+          "illustrativeShotAnimationRestartsOnRender": false
         }
       }
     }
   },
   "runtimeSourceSha256": {
     "index.html": "84f22fb623d4d7bf5db5b2b55e9da70516ffc09ac0eacaad904b0cbd74bc240a",
-    "mission-insertion-v62.css": "0fce41555d8a8376d75a0e77f5eddb06bf1ef5548901f3a55ad000f8a3962354",
-    "src/app.js": "9f39b1588a8a2316b288481495948586c126494ebecefe779f8e4c90cc7f19f7",
+    "mission-insertion-v62.css": "192432c7cb0aad9d8b3d119cf5f819d031e92f27a8ad0eea8aab02dba2c532a2",
+    "src/app.js": "72918e62a99e91e504302834f76e6f9489195299f366f84ee858f850a7272ba1",
     "src/archive-relay-presentation-v160.js": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
     "src/archive-relay-runtime-v122.js": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
+    "src/archive-relay-state-v122.js": "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
     "src/black-cocoon-presentation-v158.js": "69169757f789461886aed3788b79e5ba9adcbd8bfa41b5cab81af85ff0be0767",
     "src/black-cocoon-runtime-v121.js": "d2c40f3a1c5e03468d5a26bf30075f18f94914a0d8b0f7b6caec9fcc01abff05",
     "src/black-cocoon-state-v121.js": "c794a201f11b84c43be06aa9c3815b43f2da780ca74b724ece1de5228b675631",
     "src/campaign-consequences.js": "359a55917b4cb2cfa2be07485d202cbfc57ca993dbeaaec5097801bda4504f0e",
-    "src/campaign-story-ui-v160.js": "5872809077adf1f06443997e62834f3b94df62df11b0e4b9a717e4ba07c68946",
-    "src/campaign-story-v160.js": "12bad86f8d591efe2e8aaa898bb7f26ceff38528687ad174731f1840cd11d37c",
+    "src/campaign-story-ui-v160.js": "94c8dea45e869e308f72e9905530bf0c2a1ab584d7951f906a3747c73a8a96e4",
+    "src/campaign-story-v160.js": "aa458b8917aa1454e7c8e9c3a035428e6b3704f564b44e1aa0e7dc6d89d73d4c",
     "src/content.js": "4d98bbdaa3ed2cc297a1d715335b0cfa8edc7105c39ce3031a2db0fd77975d0b",
     "src/forge-authoring-v133.js": "41a3f33249661d32caa841155d9947589ec9c6548068932553fb114c90ac3975",
     "src/forge-decoration-v141.js": "8df7f9f306e2635547b4488198b1d3f6f815633999516bc5819d28cadff2cbfe",
@@ -2357,7 +2387,7 @@
     "src/hub-v71-runtime.js": "289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4",
     "src/legacy-operations-v131.js": "70d94552c2614f667fdd5083ee5677249dc733060855329c4551591f048fec60",
     "src/mission-input-v77.js": "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
-    "src/mission-insertion-ui-v62.js": "b10e7dfc090367718c6b33263ca08b57bc584531af793cc8f6168966ec788069",
+    "src/mission-insertion-ui-v62.js": "70fcb59b28ba6f48a974fca4195cd685a9fc2e178efead7e56a64e180b3b6ab2",
     "src/motion-tracker-display-v160.js": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
     "src/motion-tracker-v160.js": "92b77b736978e9bd25a7c01dbf31b44b1c2e8051157357ec72a391a0fa10dc9d",
     "src/npc-annex-circulation-v159.js": "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
@@ -2373,7 +2403,7 @@
     "src/player-locomotion-rig-v129.js": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
     "src/player-modular-rig-v126.js": "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
     "src/player-transit-rig-v128.js": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
-    "src/player-weapon-runtime-v125.js": "03004ebf7a640eccd537132a5f44d38852f1f3061da5a31dd15754c5abb63e55",
+    "src/player-weapon-runtime-v125.js": "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
     "src/save.js": "ee15bc4a5df71e98c50cdbbf980d46c02d8e48c08ba74f6be84c2587eaa45718",
     "src/ship-animal-habitat-v87.js": "23b392916f7d76f89929e4e69e9b17c843cbd3784897893e7b49a33562ae26f4",
     "src/special-operations-v131.js": "4595ded20b4c7c44a7942039ca3ed8d12bba9f20a44a622ff840caca7a0e4bb5",
@@ -3947,21 +3977,21 @@
           "C160-TRACKER",
           "Contrat exécutable / demande utilisateur",
           "src/motion-tracker-v160.js ; src/motion-tracker-display-v160.js ; src/game-v51-runtime.js ; src/game-production-base.js ; src/game-v52-level-runtime.js",
-          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu.",
+          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif.",
           "Adaptation inspirée du manuel officiel Alien: Isolation, distincte du modèle M314 du film. Pas de portée métrique canonique, d’identification IFF ou de copie 1:1 de son écran. Consultation native de 0,7 seconde puis projection HUD de cinq secondes ; aucun appareil tenu en continu n’est déclaré. Seuls les corps admis sont observés, pas les machines ou tous les accessoires mobiles. La dotation Q native reste distincte d’un consommable personnel."
         ],
         [
           "C160-WEAPONS",
           "Contrat exécutable / demande utilisateur",
           "src/player-arm-constraints-v160.js ; src/held-weapon-renderer-v125.js ; src/player-weapon-runtime-v125.js ; src/player-appearance-runtime-v126.js ; src/mission-input-v77.js ; src/weapon-actions-v131.js",
-          "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources.",
+          "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources. Pour les tirs différés de charge ou de rafale, l’aperçu conserve l’orientation explicitement fournie ; si la visée stockée ne contient que x/y, son sens horizontal détermine le côté du corps, avec repli sur l’orientation de l’acteur pour une visée verticale. L’aperçu ne modifie pas cette visée.",
           "Les 5°–145° du coude et −90°–150° du bras supérieur sont des enveloppes de conception projetées, pas des mesures biomécaniques ni une chorégraphie canonique. Dessins natifs conservés ; les comparaisons visuelles du corps final, de la branche de coude retenue et du retrait au mur attendent la recette exacte."
         ],
         [
           "C160-CAMPAIGN",
           "Contrat exécutable / demande utilisateur",
-          "src/campaign-story-v160.js ; src/campaign-story-ui-v160.js ; src/mission-insertion-ui-v62.js ; src/campaign-consequences.js ; src/archive-relay-presentation-v160.js ; src/archive-relay-runtime-v122.js ; mission-insertion-v62.css",
-          "« Le dernier relais » approfondit QZ-18/Lethe dans l’opération special-archive-relay : cinq phases dialoguées avec portraits natifs, avec l’incident natif lorsqu’il est présent, choix de préparation technique ou de prévention à bord, six pièces persistantes et retour rattaché au même identifiant d’opération. Les retombées de recherche ou de moral exigent extraction native et dossier complet ; lecture/relecture ne récompensent jamais, et les blessures/échecs restent réels. Le déploiement emploie le même renderer QZ-18 que la mission ; les props réutilisent cinq atlas admis, au contact des vraies ancres, en 2D intégrale sans ajouter de collision. Les contrôles de sauvegarde en mission et de retour après extraction utilisent les handlers natifs ; le retour est libellé « RETOUR À BORD ».",
+          "src/campaign-story-v160.js ; src/campaign-story-ui-v160.js ; src/mission-insertion-ui-v62.js ; src/campaign-consequences.js ; src/archive-relay-presentation-v160.js ; src/archive-relay-runtime-v122.js ; mission-insertion-v62.css ; src/archive-relay-state-v122.js",
+          "« Le dernier relais » approfondit QZ-18/Lethe dans l’opération special-archive-relay : cinq phases dialoguées avec portraits natifs, avec l’incident natif lorsqu’il est présent, choix de préparation technique ou de prévention à bord, six pièces persistantes et retour rattaché au même identifiant d’opération. Les retombées de recherche ou de moral exigent extraction native et dossier complet ; lecture/relecture ne récompensent jamais, et les blessures/échecs restent réels. Le déploiement emploie le même renderer QZ-18 que la mission ; les props réutilisent cinq atlas admis, au contact des vraies ancres, en 2D intégrale sans ajouter de collision. Les contrôles de sauvegarde en mission et de retour après extraction utilisent les handlers natifs ; le retour est libellé « RETOUR À BORD ». Le dernier compte rendu QZ-18 est conservé avec son dossier, accessible après une autre opération ; ce retour compact et borné garde son identifiant, son résultat, son protocole et son reçu de lecture/paiement. Il est affiché uniquement dans le plan QZ-18 ; le paiement lit seulement le résultat natif courant, jamais le retour archivé. Les insertions ordinaires retrouvent leurs interactions contextuelles et le cadrage des illustrations suit la progression persistée de la phase, sans redémarrer une animation à chaque rendu.",
           "Intrigue Tantalus originale, sans reconstruction canonique Aliens ni conclusion sur une responsabilité personnelle. Les images de préparation du vaisseau restent illustratives ; seul le déploiement reprend la scène jouable. Ce parcours borné ne termine pas les corpus des vingt autres opérations. Comparaisons natives, reprise et résultats du commit final restent à vérifier."
         ],
         [
@@ -5843,8 +5873,8 @@
         [
           "src/app.js",
           "69e7da0d3e41362513eb3abd94bebae9f269e892be567b1f8a47357ebf5c6e6d",
-          "9f39b1588a8a2316b288481495948586c126494ebecefe779f8e4c90cc7f19f7",
-          "Branche les contrôles natifs du détecteur, le mouvement réduit et les retours de la même campagne ; la sauvegarde en mission réutilise le handler réel et le retour après extraction affiche RETOUR À BORD.",
+          "72918e62a99e91e504302834f76e6f9489195299f366f84ee858f850a7272ba1",
+          "Branche les contrôles natifs, la reprise audio partagée de Q et du bouton sans scan obsolète, et le dernier compte rendu QZ-18 borné au bon plan ; sa préservation et ses lectures utilisent les transactions de sauvegarde natives sans paiement archivé.",
           "scripts/verify-motion-tracker-v160.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-player-runtime-v124.mjs"
         ],
         [
@@ -5858,28 +5888,28 @@
           "src/game-v51-runtime.js",
           "4552dd04bcd4e505f88aa8196e485bbe1ca43ed0dfbf4f867bef7a3810ca27d1",
           "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
-          "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/mission-input-v77.js",
           "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
           "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
-          "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+          "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "src/player-appearance-runtime-v126.js",
           "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
           "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
-          "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+          "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
           "src/weapon-actions-v131.js",
           "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
           "de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654",
-          "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+          "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
@@ -5892,64 +5922,71 @@
         [
           "mission-insertion-v62.css",
           "Non épinglé en V159",
-          "0fce41555d8a8376d75a0e77f5eddb06bf1ef5548901f3a55ad000f8a3962354",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "192432c7cb0aad9d8b3d119cf5f819d031e92f27a8ad0eea8aab02dba2c532a2",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/archive-relay-presentation-v160.js",
           "Non épinglé en V159",
           "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/archive-relay-runtime-v122.js",
           "Non épinglé en V159",
           "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
+          "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
+        ],
+        [
+          "src/archive-relay-state-v122.js",
+          "Non épinglé en V159",
+          "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/campaign-consequences.js",
           "Non épinglé en V159",
           "359a55917b4cb2cfa2be07485d202cbfc57ca993dbeaaec5097801bda4504f0e",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/campaign-story-ui-v160.js",
           "Non épinglé en V159",
-          "5872809077adf1f06443997e62834f3b94df62df11b0e4b9a717e4ba07c68946",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "94c8dea45e869e308f72e9905530bf0c2a1ab584d7951f906a3747c73a8a96e4",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/campaign-story-v160.js",
           "Non épinglé en V159",
-          "12bad86f8d591efe2e8aaa898bb7f26ceff38528687ad174731f1840cd11d37c",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "aa458b8917aa1454e7c8e9c3a035428e6b3704f564b44e1aa0e7dc6d89d73d4c",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/game-production-base.js",
           "Non épinglé en V159",
           "95b136fcc0caade82a784522dcedc635d6acb2ad91ba6517c6d07fb36ca89793",
-          "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/game-v52-level-runtime.js",
           "Non épinglé en V159",
           "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
-          "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/held-weapon-renderer-v125.js",
           "Non épinglé en V159",
           "bf20b93457fbd7d6296acf66aacf1175698d4d68092c1297465df6a64dcaba5f",
-          "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+          "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
@@ -5962,22 +5999,22 @@
         [
           "src/mission-insertion-ui-v62.js",
           "Non épinglé en V159",
-          "b10e7dfc090367718c6b33263ca08b57bc584531af793cc8f6168966ec788069",
-          "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+          "70fcb59b28ba6f48a974fca4195cd685a9fc2e178efead7e56a64e180b3b6ab2",
+          "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs"
         ],
         [
           "src/motion-tracker-display-v160.js",
           "Non épinglé en V159",
           "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
-          "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/motion-tracker-v160.js",
           "Non épinglé en V159",
           "92b77b736978e9bd25a7c01dbf31b44b1c2e8051157357ec72a391a0fa10dc9d",
-          "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+          "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
           "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
@@ -5998,7 +6035,7 @@
           "src/player-arm-constraints-v160.js",
           "Non épinglé en V159",
           "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
-          "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+          "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
@@ -6046,8 +6083,8 @@
         [
           "src/player-weapon-runtime-v125.js",
           "Non épinglé en V159",
-          "03004ebf7a640eccd537132a5f44d38852f1f3061da5a31dd15754c5abb63e55",
-          "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+          "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
+          "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs"
         ],
         [
@@ -11236,7 +11273,7 @@
           "C160-TRACKER",
           "Demande utilisateur explicite V160",
           "Détecteur de mouvement",
-          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu.",
+          "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif.",
           "src/motion-tracker-v160.js ; src/motion-tracker-display-v160.js ; src/game-v51-runtime.js ; src/game-production-base.js ; src/game-v52-level-runtime.js",
           "scripts/verify-motion-tracker-v160.mjs",
           "Implémentation source ; recette exacte en attente",
@@ -11251,7 +11288,7 @@
           "C160-WEAPONS",
           "Demande utilisateur explicite V160",
           "Prise des armes et origine du tir",
-          "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources.",
+          "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources. Pour les tirs différés de charge ou de rafale, l’aperçu conserve l’orientation explicitement fournie ; si la visée stockée ne contient que x/y, son sens horizontal détermine le côté du corps, avec repli sur l’orientation de l’acteur pour une visée verticale. L’aperçu ne modifie pas cette visée.",
           "src/player-arm-constraints-v160.js ; src/held-weapon-renderer-v125.js ; src/player-weapon-runtime-v125.js ; src/player-appearance-runtime-v126.js ; src/mission-input-v77.js ; src/weapon-actions-v131.js",
           "scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-actions-v131.mjs ; scripts/verify-player-runtime-v124.mjs ; scripts/verify-audit-v143.mjs ; scripts/verify-destructible-scenery-v130.mjs ; scripts/verify-forge-mission-v141.mjs ; scripts/verify-placeables-extension-v132.mjs",
           "Implémentation source ; recette exacte en attente",
@@ -11266,8 +11303,8 @@
           "C160-CAMPAIGN",
           "Demande utilisateur explicite V160",
           "Continuité narrative Tantalus",
-          "« Le dernier relais » approfondit QZ-18/Lethe dans l’opération special-archive-relay : cinq phases dialoguées avec portraits natifs, avec l’incident natif lorsqu’il est présent, choix de préparation technique ou de prévention à bord, six pièces persistantes et retour rattaché au même identifiant d’opération. Les retombées de recherche ou de moral exigent extraction native et dossier complet ; lecture/relecture ne récompensent jamais, et les blessures/échecs restent réels. Le déploiement emploie le même renderer QZ-18 que la mission ; les props réutilisent cinq atlas admis, au contact des vraies ancres, en 2D intégrale sans ajouter de collision. Les contrôles de sauvegarde en mission et de retour après extraction utilisent les handlers natifs ; le retour est libellé « RETOUR À BORD ».",
-          "src/campaign-story-v160.js ; src/campaign-story-ui-v160.js ; src/mission-insertion-ui-v62.js ; src/campaign-consequences.js ; src/archive-relay-presentation-v160.js ; src/archive-relay-runtime-v122.js ; mission-insertion-v62.css",
+          "« Le dernier relais » approfondit QZ-18/Lethe dans l’opération special-archive-relay : cinq phases dialoguées avec portraits natifs, avec l’incident natif lorsqu’il est présent, choix de préparation technique ou de prévention à bord, six pièces persistantes et retour rattaché au même identifiant d’opération. Les retombées de recherche ou de moral exigent extraction native et dossier complet ; lecture/relecture ne récompensent jamais, et les blessures/échecs restent réels. Le déploiement emploie le même renderer QZ-18 que la mission ; les props réutilisent cinq atlas admis, au contact des vraies ancres, en 2D intégrale sans ajouter de collision. Les contrôles de sauvegarde en mission et de retour après extraction utilisent les handlers natifs ; le retour est libellé « RETOUR À BORD ». Le dernier compte rendu QZ-18 est conservé avec son dossier, accessible après une autre opération ; ce retour compact et borné garde son identifiant, son résultat, son protocole et son reçu de lecture/paiement. Il est affiché uniquement dans le plan QZ-18 ; le paiement lit seulement le résultat natif courant, jamais le retour archivé. Les insertions ordinaires retrouvent leurs interactions contextuelles et le cadrage des illustrations suit la progression persistée de la phase, sans redémarrer une animation à chaque rendu.",
+          "src/campaign-story-v160.js ; src/campaign-story-ui-v160.js ; src/mission-insertion-ui-v62.js ; src/campaign-consequences.js ; src/archive-relay-presentation-v160.js ; src/archive-relay-runtime-v122.js ; mission-insertion-v62.css ; src/archive-relay-state-v122.js",
           "scripts/verify-campaign-story-v160.mjs ; scripts/verify-archive-relay-presentation-v160.mjs",
           "Implémentation source ; recette exacte en attente",
           "V160-REF-005 ; V160-REF-006 ; V160-REF-009",
@@ -11319,7 +11356,7 @@
           "https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/motion_tracker.jpg",
           "ac5ef11291d013636ee8bac24b110197eea155f7cda732ff3bfccfd348f57b07",
           "Official Feral manual illustration; exact gameplay build unknown",
-          "Green display with forward fan sector, arc markings and a luminous unclassified point. ; A lower-left distance number is visible; the screenshot reads0.59 without establishing a world-unit conversion. ; Side indicators and a left edge rectangular marker are visible.",
+          "Green display with forward fan sector, arc markings and a luminous unclassified point. ; A lower-left distance number is visible; the screenshot reads 0.59 without establishing a world-unit conversion. ; Side indicators and a left edge rectangular marker are visible.",
           "M314 Aliens-film model, matching physical casing, source unit scale or an orthographic display projection. ; Actual motion timing or beep cadence from a still image.",
           "Consultation historique ou locale ; illustration nouvelle explicitement identifiée",
           "2026-10-20T09:30:51.028624+00:00",
@@ -11363,8 +11400,8 @@
           "Aliens (1986)",
           "https://www.20thcenturystudios.com/movies/aliens",
           "29ac5109cfbdb1fcf53b9acb7e7a41e03a91ba6a2415ad51b5732be2c927c581",
-          "Extracted text line23 synopsis; no film frames recovered",
-          "Ripley returns from hypersleep after57years; lost contact with colonists leads to a military expedition.",
+          "Extracted text line 23 synopsis; no film frames recovered",
+          "Ripley returns from hypersleep after 57 years; lost contact with colonists leads to a military expedition.",
           "Tantalus, Echo-9, Mire-9 or the project original storyline. ; Cinematic shot timing, blocking, camera interpolation, gestures or dialogue exactness.",
           "Consultation historique ou locale ; illustration nouvelle explicitement identifiée",
           "2026-10-20T09:30:51.028624+00:00",
@@ -11379,7 +11416,7 @@
           "https://www.aliensfireteamelite.com/assets/html5/loop_desktop.mp4",
           "45e805ec67b0be20fe195d53efbdb246734b7f6746f0bef89f9c756adc346449",
           "Pathogen visible on the closing title card; actual game build unknown",
-          "The official montage advertises Pathogen; one environment establishing shot is identified at1.001s.",
+          "The official montage advertises Pathogen; one environment establishing shot is identified at 1.001 s.",
           "A complete unobstructed human gait or arm cycle. ; Actual gameplay speed, exact build, skeletal proportions or inter-shot timing in the game. ; A canonical Tantalus scene.",
           "Consultation historique ou locale ; illustration nouvelle explicitement identifiée",
           "2026-10-20T09:30:51.028624+00:00",
@@ -11393,7 +11430,7 @@
           "Echo-9 modular colonial artwork",
           "Art natif du projet ou source absente",
           "assets/openai/sprites/player/colonial-v129/uscm-legs-v129.png:862d7afa275ee54d78e031d68ed461255804b3b5ad4d7534ba8fa2018a99165f ; assets/openai/sprites/player/colonial-v129/uscm-torso-right-v129.png:6be09c3d5ef197b0e1d343c530ec70a2eb13b03c1d2c7ca620c96f8dc7218cc5 ; assets/openai/sprites/tools/m314-motion-tracker-use-sheet.png:021536b998dbae4c7e6a17e4e65d3ad26b30877fcb59288a9f80d5b2041c623a",
-          "Project baseline4fc9da8, generated adapted sprite parts",
+          "Project baseline 4fc9da8, generated adapted sprite parts",
           "The native leg part contains pelvis, femur, shin and boot sprites with individual attachment openings. ; Native torso armour and tracker artwork can be used as the project visual style baseline.",
           "Film-accurate uniform details, true anatomical joint locations or movie tracker identity. ; A generated atlas is not an external canon source.",
           "Consultation historique ou locale ; illustration nouvelle explicitement identifiée",
@@ -11420,7 +11457,7 @@
           "V160-REF-009",
           "C160-PLAYER ; C160-CAMPAIGN",
           "missing-requested-game-reference",
-          "Terminator2D: NO FATE",
+          "Terminator 2D: NO FATE",
           "Art natif du projet ou source absente",
           "Aucun contenu récupéré",
           "Édition exacte non établie",
@@ -11435,12 +11472,12 @@
           "V160-REF-010",
           "C160-PLAYER",
           "generic-human-motion-capture-reference",
-          "CMU Graphics Lab Motion Capture Database — subject02,trial01,walk",
+          "CMU Graphics Lab Motion Capture Database — subject 02, trial 01, walk",
           "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/data/002/02_01.bvh",
           "cf56db43157acc3d200b3d4215523f54d354a8926bea67e1f6c8031bd335ba7e",
-          "Bruce Hahne MotionBuilder-friendly BVH2010 release; T-pose estimated and prepended",
+          "Bruce Hahne MotionBuilder-friendly BVH 2010 release; T-pose estimated and prepended",
           "One identified generic human walk is available as a converted CMU BVH with 343 motion frames after excluding the synthetic added T-pose. ; The declared hierarchy and samples support exploratory geometric knee/segment comparison, using estimated scale and side projection only. ; The mirror conversion README rights statement was actually read; the primary CMU terms were not independently fetched.",
-          "One walk capture by one performer, not universal joint limits or a canonical franchise animation. ; READMEFIRST explicitly warns CMU joint calibration/T-pose are guessed and source motion may contain impossible head angles/noise. ; Frame0 is synthetic added T-pose; excluded from motion extrema. ; Knee flexion measured from 3D segment geometry; hip-like value uses world vertical/travel plane, not calibrated anatomical pelvis joint angle. ; Source game speed, phase, mappingnear/far vsleft/right differ; no1:1 certification or direct targetdegreeconstraint. ; Sourceunits, subject anthropometry and marker calibration not established. ; This source does not certify an Aliens,Terminator or other franchise animation. ; Finger/thumb motion is not captured according to the README; cannot validate weapon grip animation. ; No BVH,raw capture,PNG or private trace is proposed for the public repository.",
+          "One walk capture by one performer, not universal joint limits or a canonical franchise animation. ; READMEFIRST explicitly warns CMU joint calibration/T-pose are guessed and source motion may contain impossible head angles/noise. ; Frame 0 is synthetic added T-pose; excluded from motion extrema. ; Knee flexion measured from 3D segment geometry; hip-like value uses world vertical/travel plane, not calibrated anatomical pelvis joint angle. ; Source game speed, phase, mapping near/far vs left/right differ; no 1:1 certification or direct target degree constraint. ; Source units, subject anthropometry and marker calibration not established. ; This source does not certify an Aliens, Terminator or other franchise animation. ; Finger/thumb motion is not captured according to the README; cannot validate weapon grip animation. ; No BVH, raw capture, PNG or private trace is proposed for the public repository.",
           "GENERIC_MOCAP_GEOMETRY_RETRIEVED_AND_ANALYSED",
           "2026-10-20T09:34:03.191074+00:00",
           0,
@@ -11462,9 +11499,9 @@
         [
           "C160-PLAYER-VISUAL",
           "C160-PLAYER",
-          "Neutral left/right next to the same human NPC and floor. ; At leastone full slow walking cycle left/right, running cycle, brake and restart. ; Crouch idle/move, jump ascent/apex/landing, ladder step and vent entry/exit. ; Same camera zoom, viewport, outfit, neutral pose and known Save-picker fixture before/after.",
+          "Neutral left/right next to the same human NPC and floor. ; At least one full slow walking cycle left/right, running cycle, brake and restart. ; Crouch idle/move, jump ascent/apex/landing, ladder step and vent entry/exit. ; Same camera zoom, viewport, outfit, neutral pose and known Save-picker fixture before/after.",
           "Silhouette alpha height/width and skull/waist/hip/floor landmarks. ; Distance between registered belt and pelvis centres; same single anatomical frame in both facings. ; Femur/shank world length constant across all poses; triangle reach remains feasible. ; Support-foot drift, knee bending direction, pelvis/torso continuity and clearance during swing. ; Frame-to-frame displacement/angle continuity, plus pause/read-only draw idempotence.",
-          "No detached waist, reversed knee, below-floor sole or visibly rescaled leg across postures. ; Numeric constraints are engineering plausibility checks; external anatomical1:1 remains unapproved.",
+          "No detached waist, reversed knee, below-floor sole or visibly rescaled leg across postures. ; Numeric constraints are engineering plausibility checks; external anatomical 1:1 remains unapproved.",
           "À vérifier sur le commit final ; protocole distinct des contrôles exécutés",
           0
         ],
@@ -11657,7 +11694,7 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "ae359eff073ea23d8af94208829f9ab594932bd93c4c3739671307279a2f183f",
+  "workbookSha256": "d1c9d69a3ff29a3228e93b5c78b5b6c237d8cdeef6dde769fe442c245d79386f",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V159",
@@ -11672,8 +11709,8 @@
       {
         "path": "src/app.js",
         "previousSha256": "69e7da0d3e41362513eb3abd94bebae9f269e892be567b1f8a47357ebf5c6e6d",
-        "currentSha256": "9f39b1588a8a2316b288481495948586c126494ebecefe779f8e4c90cc7f19f7",
-        "reason": "Branche les contrôles natifs du détecteur, le mouvement réduit et les retours de la même campagne ; la sauvegarde en mission réutilise le handler réel et le retour après extraction affiche RETOUR À BORD.",
+        "currentSha256": "72918e62a99e91e504302834f76e6f9489195299f366f84ee858f850a7272ba1",
+        "reason": "Branche les contrôles natifs, la reprise audio partagée de Q et du bouton sans scan obsolète, et le dernier compte rendu QZ-18 borné au bon plan ; sa préservation et ses lectures utilisent les transactions de sauvegarde natives sans paiement archivé.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs",
           "scripts/verify-campaign-story-v160.mjs",
@@ -11697,7 +11734,7 @@
         "path": "src/game-v51-runtime.js",
         "previousSha256": "4552dd04bcd4e505f88aa8196e485bbe1ca43ed0dfbf4f867bef7a3810ca27d1",
         "currentSha256": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
-        "reason": "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11706,7 +11743,7 @@
         "path": "src/mission-input-v77.js",
         "previousSha256": "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
         "currentSha256": "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
-        "reason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+        "reason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
         "verifiers": [
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
@@ -11722,7 +11759,7 @@
         "path": "src/player-appearance-runtime-v126.js",
         "previousSha256": "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
         "currentSha256": "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
-        "reason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+        "reason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
         "verifiers": [
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
@@ -11738,7 +11775,7 @@
         "path": "src/weapon-actions-v131.js",
         "previousSha256": "d61542276a06d6bb05ff5f2205ee40b0dd8c36f151b84834ad63b2b0488244d3",
         "currentSha256": "de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654",
-        "reason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+        "reason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
         "verifiers": [
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
@@ -11764,8 +11801,8 @@
       {
         "path": "mission-insertion-v62.css",
         "previousSha256": null,
-        "currentSha256": "0fce41555d8a8376d75a0e77f5eddb06bf1ef5548901f3a55ad000f8a3962354",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "currentSha256": "192432c7cb0aad9d8b3d119cf5f819d031e92f27a8ad0eea8aab02dba2c532a2",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11775,7 +11812,7 @@
         "path": "src/archive-relay-presentation-v160.js",
         "previousSha256": null,
         "currentSha256": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11785,7 +11822,17 @@
         "path": "src/archive-relay-runtime-v122.js",
         "previousSha256": null,
         "currentSha256": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
+        "verifiers": [
+          "scripts/verify-campaign-story-v160.mjs",
+          "scripts/verify-archive-relay-presentation-v160.mjs"
+        ]
+      },
+      {
+        "path": "src/archive-relay-state-v122.js",
+        "previousSha256": null,
+        "currentSha256": "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11795,7 +11842,7 @@
         "path": "src/campaign-consequences.js",
         "previousSha256": null,
         "currentSha256": "359a55917b4cb2cfa2be07485d202cbfc57ca993dbeaaec5097801bda4504f0e",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11804,8 +11851,8 @@
       {
         "path": "src/campaign-story-ui-v160.js",
         "previousSha256": null,
-        "currentSha256": "5872809077adf1f06443997e62834f3b94df62df11b0e4b9a717e4ba07c68946",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "currentSha256": "94c8dea45e869e308f72e9905530bf0c2a1ab584d7951f906a3747c73a8a96e4",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11814,8 +11861,8 @@
       {
         "path": "src/campaign-story-v160.js",
         "previousSha256": null,
-        "currentSha256": "12bad86f8d591efe2e8aaa898bb7f26ceff38528687ad174731f1840cd11d37c",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "currentSha256": "aa458b8917aa1454e7c8e9c3a035428e6b3704f564b44e1aa0e7dc6d89d73d4c",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11825,7 +11872,7 @@
         "path": "src/game-production-base.js",
         "previousSha256": null,
         "currentSha256": "95b136fcc0caade82a784522dcedc635d6acb2ad91ba6517c6d07fb36ca89793",
-        "reason": "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11834,7 +11881,7 @@
         "path": "src/game-v52-level-runtime.js",
         "previousSha256": null,
         "currentSha256": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
-        "reason": "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11843,7 +11890,7 @@
         "path": "src/held-weapon-renderer-v125.js",
         "previousSha256": null,
         "currentSha256": "bf20b93457fbd7d6296acf66aacf1175698d4d68092c1297465df6a64dcaba5f",
-        "reason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+        "reason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
         "verifiers": [
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
@@ -11873,8 +11920,8 @@
       {
         "path": "src/mission-insertion-ui-v62.js",
         "previousSha256": null,
-        "currentSha256": "b10e7dfc090367718c6b33263ca08b57bc584531af793cc8f6168966ec788069",
-        "reason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives.",
+        "currentSha256": "70fcb59b28ba6f48a974fca4195cd685a9fc2e178efead7e56a64e180b3b6ab2",
+        "reason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions.",
         "verifiers": [
           "scripts/verify-campaign-story-v160.mjs",
           "scripts/verify-archive-relay-presentation-v160.mjs"
@@ -11884,7 +11931,7 @@
         "path": "src/motion-tracker-display-v160.js",
         "previousSha256": null,
         "currentSha256": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
-        "reason": "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11893,7 +11940,7 @@
         "path": "src/motion-tracker-v160.js",
         "previousSha256": null,
         "currentSha256": "92b77b736978e9bd25a7c01dbf31b44b1c2e8051157357ec72a391a0fa10dc9d",
-        "reason": "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants.",
+        "reason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation.",
         "verifiers": [
           "scripts/verify-motion-tracker-v160.mjs"
         ]
@@ -11932,7 +11979,7 @@
         "path": "src/player-arm-constraints-v160.js",
         "previousSha256": null,
         "currentSha256": "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
-        "reason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+        "reason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
         "verifiers": [
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
@@ -12037,8 +12084,8 @@
       {
         "path": "src/player-weapon-runtime-v125.js",
         "previousSha256": null,
-        "currentSha256": "03004ebf7a640eccd537132a5f44d38852f1f3061da5a31dd15754c5abb63e55",
-        "reason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé.",
+        "currentSha256": "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
+        "reason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé.",
         "verifiers": [
           "scripts/verify-held-weapon-v125.mjs",
           "scripts/verify-player-weapon-rig-v125.mjs",
@@ -12082,7 +12129,7 @@
   },
   "referencesDocument": {
     "path": "docs/forge/xeno-trials/references-v160.json",
-    "sha256": "b7b39bcda388e3ad2c88b04c996fb52ea6aa57aeb5c94e712b4937e509692a78",
+    "sha256": "f59c2dc108c1e2aeb89abe2b9270f9c0ae5c75c72b522fbcb4d2c4037a1a3834",
     "records": 10,
     "newOfficialImagesRetrievedAndViewed": 1,
     "genericHumanMocapReferences": 1,
@@ -12252,7 +12299,7 @@
       "priorityLinks": [
         "excel-identity-and-motion"
       ],
-      "implementedScope": "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu.",
+      "implementedScope": "Q active la capacité native de détection à 900 unités du jeu : contacts de positions réellement mobiles dans le même repère/pont, balayage, échos datés et expiration. L’écran en coupe 2D ne révèle ni camp, espèce ou boss ; alliés, ennemis et conduits projetés ne sont suivis que sur mouvement mesuré. Bip et bruit tactique local suivent le temps actif après activation ; pauses, générations et changements de repère ne créent pas de dette de mouvement. Sur écran étroit, le boîtier compact se place d’après le corps et la caméra et affiche une portée relative sans attribuer des mètres aux unités du jeu. À bord, Q et le bouton natif du détecteur partagent la même activation, y compris au clavier focalisé et au clic assistif. Le déverrouillage audio commence dans le geste ; seule une reprise audio audible et suspendue retarde la consultation, puis l’identité du joueur, du propriétaire, de la génération, du repère et de l’impulsion est revérifiée. Un son muet, absent ou refusé laisse le gameplay disponible ; une demande devenue obsolète ne déclenche aucun scan tardif.",
       "limits": "Adaptation inspirée du manuel officiel Alien: Isolation, distincte du modèle M314 du film. Pas de portée métrique canonique, d’identification IFF ou de copie 1:1 de son écran. Consultation native de 0,7 seconde puis projection HUD de cinq secondes ; aucun appareil tenu en continu n’est déclaré. Seuls les corps admis sont observés, pas les machines ou tous les accessoires mobiles. La dotation Q native reste distincte d’un consommable personnel.",
       "contract": {
         "rangeGameUnits": 900,
@@ -12286,9 +12333,20 @@
         "compactSectorFontCssPixels": 11,
         "compactMinimumFontCssPixels": 10,
         "compactPlacementUsesPlayerAndCamera": true,
-        "rangeReadoutLabel": "PORTÉE RELATIVE"
+        "rangeReadoutLabel": "PORTÉE RELATIVE",
+        "hubActivationInputs": [
+          "KeyQ",
+          "native-detector-button"
+        ],
+        "hubDetectorButtonSupportsKeyboardAndAssistiveClick": true,
+        "hubAudioUnlockBeginsInsideUserGesture": true,
+        "hubAudibleSuspendedAudioResumeBeforeActivation": true,
+        "hubReadyMutedUnavailableOrDeniedAudioPreservesGameplay": true,
+        "hubDeferredActivationRechecksOwnerActorGenerationTrackerChartAndPulse": true,
+        "hubObsoleteActivationCreatesLateScan": false,
+        "nonDetectorHubControlsRemainSynchronous": true
       },
-      "sourceChangeReason": "Les observations, le balayage et le HUD du détecteur emploient des échos mobiles bornés au repère actif plutôt qu’un relevé omniscient des ennemis vivants."
+      "sourceChangeReason": "Les échos mobiles restent bornés au repère actif ; Q et le bouton natif partagent une reprise audio admise dans le geste, avec rejet des demandes devenues obsolètes avant consultation."
     },
     {
       "id": "C160-WEAPONS",
@@ -12314,7 +12372,7 @@
       "priorityLinks": [
         "excel-identity-and-motion"
       ],
-      "implementedScope": "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources.",
+      "implementedScope": "Le solveur maintient les mains dans une enveloppe de conception réalisable, avec des zones de poignée, avant-main et port de service qui évitent la singularité près de l’épaule, et une portée d’épaule mesurée depuis le vrai torse. Le corps final V129 est résolu avant le canon et l’origine du tir. Lors d’un obstacle réel, la rétraction recalcule l’arme rigide et les mains sans déplacer la poche du corps pendant la recharge. Un aperçu pur de la pose après déclenchement, blessure et recul prévoit le vrai cadrage avant de dépenser une ressource ou de lancer un cycle. La projection du curseur peut être consultée sans mutation ; les gardes de tir et de commit refusent les cycles obstrués avant leur consommation. Le guide d’obstruction suit la garde physique courante : un ancien flag de pose ne bloque plus un canon réellement dégagé après un peek, et un vrai contact au mur conserve le refus avant ressources. Pour les tirs différés de charge ou de rafale, l’aperçu conserve l’orientation explicitement fournie ; si la visée stockée ne contient que x/y, son sens horizontal détermine le côté du corps, avec repli sur l’orientation de l’acteur pour une visée verticale. L’aperçu ne modifie pas cette visée.",
       "limits": "Les 5°–145° du coude et −90°–150° du bras supérieur sont des enveloppes de conception projetées, pas des mesures biomécaniques ni une chorégraphie canonique. Dessins natifs conservés ; les comparaisons visuelles du corps final, de la branche de coude retenue et du retrait au mur attendent la recette exacte.",
       "contract": {
         "elbowFlexionDesignDegrees": [
@@ -12347,9 +12405,13 @@
         "obstacleRetractionUsesFullSpriteAlphaEnvelope": true,
         "physicalClearanceReevaluatedBeforeFire": true,
         "stalePoseObstructionFlagsCanBlockPhysicallyClearedMuzzle": false,
-        "peekUsesActualSpriteAlphaAndNativeProjectileCollision": true
+        "peekUsesActualSpriteAlphaAndNativeProjectileCollision": true,
+        "deferredChargeAndBurstPreviewKeepsSuppliedAimFacing": true,
+        "deferredAimWithoutFacingUsesHorizontalDirection": true,
+        "verticalDeferredAimFallsBackToActorFacing": true,
+        "suppliedAimObjectMutatedByPreview": false
       },
-      "sourceChangeReason": "La prévision pure du corps après déclenchement, le raccord mains/arme et les gardes natives de tir/cycles évitent une pose impossible ou un prélèvement de ressource avant un tir refusé."
+      "sourceChangeReason": "La prévision pure et les gardes natives refusent les tirs obstrués avant ressources ; les charges et rafales conservent le côté de leur visée différée au lieu de simuler un corps tourné à l’opposé."
     },
     {
       "id": "C160-CAMPAIGN",
@@ -12361,7 +12423,8 @@
         "src/campaign-consequences.js",
         "src/archive-relay-presentation-v160.js",
         "src/archive-relay-runtime-v122.js",
-        "mission-insertion-v62.css"
+        "mission-insertion-v62.css",
+        "src/archive-relay-state-v122.js"
       ],
       "verifiers": [
         "scripts/verify-campaign-story-v160.mjs",
@@ -12370,7 +12433,7 @@
       "priorityLinks": [
         "campaigns-not-playable"
       ],
-      "implementedScope": "« Le dernier relais » approfondit QZ-18/Lethe dans l’opération special-archive-relay : cinq phases dialoguées avec portraits natifs, avec l’incident natif lorsqu’il est présent, choix de préparation technique ou de prévention à bord, six pièces persistantes et retour rattaché au même identifiant d’opération. Les retombées de recherche ou de moral exigent extraction native et dossier complet ; lecture/relecture ne récompensent jamais, et les blessures/échecs restent réels. Le déploiement emploie le même renderer QZ-18 que la mission ; les props réutilisent cinq atlas admis, au contact des vraies ancres, en 2D intégrale sans ajouter de collision. Les contrôles de sauvegarde en mission et de retour après extraction utilisent les handlers natifs ; le retour est libellé « RETOUR À BORD ».",
+      "implementedScope": "« Le dernier relais » approfondit QZ-18/Lethe dans l’opération special-archive-relay : cinq phases dialoguées avec portraits natifs, avec l’incident natif lorsqu’il est présent, choix de préparation technique ou de prévention à bord, six pièces persistantes et retour rattaché au même identifiant d’opération. Les retombées de recherche ou de moral exigent extraction native et dossier complet ; lecture/relecture ne récompensent jamais, et les blessures/échecs restent réels. Le déploiement emploie le même renderer QZ-18 que la mission ; les props réutilisent cinq atlas admis, au contact des vraies ancres, en 2D intégrale sans ajouter de collision. Les contrôles de sauvegarde en mission et de retour après extraction utilisent les handlers natifs ; le retour est libellé « RETOUR À BORD ». Le dernier compte rendu QZ-18 est conservé avec son dossier, accessible après une autre opération ; ce retour compact et borné garde son identifiant, son résultat, son protocole et son reçu de lecture/paiement. Il est affiché uniquement dans le plan QZ-18 ; le paiement lit seulement le résultat natif courant, jamais le retour archivé. Les insertions ordinaires retrouvent leurs interactions contextuelles et le cadrage des illustrations suit la progression persistée de la phase, sans redémarrer une animation à chaque rendu.",
       "limits": "Intrigue Tantalus originale, sans reconstruction canonique Aliens ni conclusion sur une responsabilité personnelle. Les images de préparation du vaisseau restent illustratives ; seul le déploiement reprend la scène jouable. Ce parcours borné ne termine pas les corpus des vingt autres opérations. Comparaisons natives, reprise et résultats du commit final restent à vérifier.",
       "contract": {
         "operationId": "special-archive-relay",
@@ -12383,7 +12446,8 @@
         "existingFailureAndWoundsPreserved": true,
         "saveFields": [
           "insertionState.phases[preparation].payload.campaignStoryV160",
-          "insertionState.phases[preparation].payload.campaignStoryReturnV160"
+          "insertionState.phases[preparation].payload.campaignStoryReturnV160",
+          "archiveRelayArchivesV122.lastReturnV160"
         ],
         "newSaveSchema": false,
         "originalProjectFiction": true,
@@ -12410,9 +12474,22 @@
         "causalIncidentNoticeOnlyWhileCurrentAndUnresolved": true,
         "archiveDeploymentCaption": "Relais QZ-18 · quai ouest",
         "missionSaveUsesExistingNativeHandler": true,
-        "postExtractionReturnCaption": "RETOUR À BORD"
+        "postExtractionReturnCaption": "RETOUR À BORD",
+        "lastQz18ReturnConservedWithSameOperationDossier": true,
+        "lastQz18ReturnAccessibleAfterAnotherOperation": true,
+        "compactDurableReturnOwner": "archiveRelayArchivesV122.lastReturnV160",
+        "compactDurableReturnEntryLimit": 1,
+        "fullInvestigationHistory": false,
+        "durableReturnIncludesActorOrStrategyOrInsertionClockState": false,
+        "rewardReadsOnlyCurrentNativeResolvedOperation": true,
+        "archivedReturnCanGrantReward": false,
+        "debriefVisibleOnlyOnMatchingCampaignPlan": true,
+        "legacyReturnPreservationGrantsPaymentOrReading": false,
+        "ordinaryInsertionContextualHooksRestored": true,
+        "illustrativeShotTransformUsesPersistedPhaseProgress": true,
+        "illustrativeShotAnimationRestartsOnRender": false
       },
-      "sourceChangeReason": "Le dossier QZ18 relie préparation, mission réelle, pièces persistantes et débrief de la même opération, sans récompenser la lecture ni remplacer les conséquences natives."
+      "sourceChangeReason": "Le dernier compte rendu QZ-18 reste borné et lié au dossier de la même opération après une autre sortie ; son affichage suit le plan choisi, ses lectures ne paient jamais et les insertions ordinaires conservent leurs interactions."
     }
   ],
   "newWorkstreamOrigin": "Explicit user request after the validated V159 delivery; not an invented entry of the absent encyclopedia workbook.",

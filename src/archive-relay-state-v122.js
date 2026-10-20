@@ -114,14 +114,47 @@ export function archiveRelayDossierV122(state) {
   return { phase, title: stages[phase][0], instruction: stages[phase][1], solo: true };
 }
 export function createArchiveRelayArchiveV122() { return { schema: 122, case: null }; }
+const RETURN_PROTOCOLS_V160 = Object.freeze({ 'technical-audit': 'research', 'crew-prevention': 'morale' });
+const RETURN_TOPICS_V160 = Object.freeze(['chronology', 'identity', 'return']);
+function normalizeArchiveRelayReturnV160(raw, evidence) {
+  if (!record(raw) || raw.schema !== 160 || raw.campaignId !== ARCHIVE_RELAY_CAMPAIGN_V122.id
+    || raw.worldId !== ARCHIVE_RELAY_CAMPAIGN_V122.worldId || typeof raw.success !== 'boolean'
+    || typeof raw.operationId !== 'string' || !/^operation-[1-9][0-9]{0,8}-special-archive-relay$/.test(raw.operationId)
+    || !Number.isInteger(raw.completedDay) || raw.completedDay < 1 || raw.completedDay > 999999999
+    || !Number.isFinite(raw.completedHour) || raw.completedHour < 0 || raw.completedHour > 24
+    || raw.protocolId != null && (typeof raw.protocolId !== 'string' || !Object.hasOwn(RETURN_PROTOCOLS_V160, raw.protocolId))
+    || raw.success && evidence?.operationId !== raw.operationId) return null;
+  const protocolId = raw.protocolId ?? null;
+  let ledger = null;
+  if (raw.ledger != null) {
+    if (!record(raw.ledger) || raw.ledger.schema !== 160 || raw.ledger.operationId !== raw.operationId) return null;
+    const receipt = raw.ledger.receipt;
+    const validReceipt = raw.success && protocolId && record(receipt) && receipt.operationId === raw.operationId
+      && receipt.protocolId === protocolId && receipt.key === RETURN_PROTOCOLS_V160[protocolId]
+      && Number.isFinite(receipt.amount) && receipt.amount >= 0 && receipt.amount <= 2;
+    ledger = { schema: 160, operationId: raw.operationId,
+      receipt: validReceipt ? { operationId: raw.operationId, protocolId, key: receipt.key, amount: receipt.amount } : null,
+      readTopics: Array.isArray(raw.ledger.readTopics) ? [...new Set(raw.ledger.readTopics.filter(topic => RETURN_TOPICS_V160.includes(topic)))].slice(0, 3) : [],
+      activeTopic: RETURN_TOPICS_V160.includes(raw.ledger.activeTopic) ? raw.ledger.activeTopic : 'return' };
+  }
+  // A compact last QZ-18 return, independent of the last unrelated operation.
+  // Actor state, strategy, insertion clocks and callbacks are never archived.
+  return { schema: 160, operationId: raw.operationId, campaignId: raw.campaignId, worldId: raw.worldId,
+    success: raw.success, reason: typeof raw.reason === 'string' ? raw.reason.slice(0, 60) : 'migrated',
+    completedDay: raw.completedDay, completedHour: raw.completedHour, protocolId, ledger };
+}
 export function normalizeArchiveRelayArchiveV122(raw) {
   const archive = createArchiveRelayArchiveV122(), entry = raw?.case;
-  if (raw?.schema !== 122 || !record(entry) || entry.verdict !== 'delayed-distress'
-    || !/^operation-[1-9][0-9]{0,8}-special-archive-relay$/.test(entry.operationId || '')
-    || ids(entry.documentIds).length !== 6 || entry.documentIds.length !== 6) return archive;
-  archive.case = { id: 'qz18-last-relay', operationId: entry.operationId, verdict: 'delayed-distress',
-    documentIds: [...ARCHIVE_RELAY_DOCUMENT_IDS_V122], completedDay: Math.floor(bounded(entry.completedDay, 999999999)),
-    completedHour: bounded(entry.completedHour, 24) };
+  if (raw?.schema !== 122) return archive;
+  if (record(entry) && entry.verdict === 'delayed-distress' && typeof entry.operationId === 'string'
+    && /^operation-[1-9][0-9]{0,8}-special-archive-relay$/.test(entry.operationId)
+    && ids(entry.documentIds).length === 6 && entry.documentIds.length === 6) {
+    archive.case = { id: 'qz18-last-relay', operationId: entry.operationId, verdict: 'delayed-distress',
+      documentIds: [...ARCHIVE_RELAY_DOCUMENT_IDS_V122], completedDay: Math.floor(bounded(entry.completedDay, 999999999)),
+      completedHour: bounded(entry.completedHour, 24) };
+  }
+  const lastReturn = normalizeArchiveRelayReturnV160(raw.lastReturnV160, archive.case);
+  if (lastReturn) archive.lastReturnV160 = lastReturn;
   return archive;
 }
 export function getArchiveRelayArchiveV122(save) {

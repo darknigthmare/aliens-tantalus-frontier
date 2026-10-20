@@ -601,6 +601,7 @@ export class MissionInsertionUiV62 {
       credit: 'Illustration du Tantalus · transmission textuelle' } : model.media);
     if (model.story) {
       media.dataset.storyShot = model.phase.kind;
+      media.style.setProperty('--story-shot-progress', String(clamp(model.phase.progress)));
       media.append(createElement(this.document, 'p', 'mission-insertion-v62__shot-label', model.story.location));
     }
     const panel = createElement(this.document, 'section', 'mission-insertion-v62__panel');
@@ -618,7 +619,8 @@ export class MissionInsertionUiV62 {
     progress.append(createElement(this.document, 'span'));
     panel.append(progress);
     this.renderIncident(panel, model.state);
-    this.renderStory(panel, model.story);
+    if (model.story) this.renderStory(panel, model.story);
+    else this.renderHooks(panel, model.phase);
     this.renderControls(panel, model);
     body.append(media, panel);
 
