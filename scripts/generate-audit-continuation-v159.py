@@ -166,6 +166,8 @@ def rebuild(directory, lot='V159'):
         for name, payload in sorted(entries.items()):
             info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_STORED
+            # Match the reviewed Unix ZIP metadata on every host OS.
+            info.create_system = 3
             archive.writestr(info, payload)
     record['workbookSha256'] = hashlib.sha256(target.read_bytes()).hexdigest()
     path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

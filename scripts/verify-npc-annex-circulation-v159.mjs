@@ -95,9 +95,9 @@ test('both real openings reject occupied bodies and busy/locked portals before a
   const held=simulate({...a},2,{state:covered,peers:[{...target,crewId:'other-crew',x:122}]});assert.equal(held.state.doorProgress,.6);assert.equal(held.state.stage,'covering');
 });
 
-test('pause, interaction, crisis, invalid delta and reduced motion retain native feet, leaf phase and bounded duration', () => {
-  const partial=simulate(actor(),8), state=partial.state;
-  assert.ok(['covering','revealing','walking'].includes(state.stage));
+test('pause, interaction, emergencies outside the SAS and invalid delta retain native feet; reduced motion bounds door duration', () => {
+  const partial=simulate(actor(),3), state=partial.state;
+  assert.equal(state.stage,'walking');
   for(const delta of [0,-1,Infinity,NaN]) assert.equal(advanceNpcAnnexCirculationV159(state,partial.a,delta),state);
   assert.equal(advanceNpcAnnexCirculationV159(state,partial.a,5,{running:false}),state);
   for(const extra of [{crisis:{id:'actual',active:true}},{infestation:{active:true,stage:'confirmation'}}]) {
@@ -109,6 +109,27 @@ test('pause, interaction, crisis, invalid delta and reduced motion retain native
   assert.equal(reduced.state.crossings,1);assert.equal(reduced.state.stage,'service');assert.ok(Math.abs(reduced.state.distance-slow.state.distance)<.1);
   const dropped=advanceNpcAnnexCirculationV159(createNpcAnnexCirculationStateV159(actor(),dutyActor()),actor(),20,{resolution:routine(9),duty:true});
   assert.equal(dropped.time,.1);assert.ok(4350-dropped.x<=2.7);
+});
+
+test('crisis and infestation safely clear either face instead of freezing a reserved SAS or allowing passage through its body', () => {
+  const out=simulate(actor(),25), back=simulate(out.a,25,{state:out.state,duty:false,resolution:routine(10.5)});
+  const samples=[out,back].flatMap(run=>['opening','covering','revealing','walking'].map(stage=>
+    run.frames.find(s=>s.stage===stage&&(stage==='walking'?s.doorProgress>0:s.doorProgress>.2&&s.doorProgress<.8))));
+  assert.ok(samples.every(Boolean));
+  for(const sample of samples)for(const extra of [{crisis:{id:'actual',active:true}},{infestation:{active:true,stage:'confirmation'}}]){
+    const a=actor({x:sample.x,y:sample.y,roomId:sample.roomId}),resolution=routine(9,extra);
+    const held=simulate(a,8,{state:sample,resolution});
+    assert.equal(held.state.roomId,sample.roomId,'Emergency withdrawal never changes coordinate charts.');
+    assert.equal(held.state.crossings,sample.crossings);assert.equal(held.state.arrivals,sample.arrivals);
+    assert.equal(held.state.doorProgress,0);assert.equal(held.state.stage,'walking');
+    assert.ok(held.state.x>sample.x+60,'The body really withdraws before releasing the leaf.');
+    assert.ok(held.frames.every(s=>s.y===532&&Math.abs(s.velocity)<=27.000001));
+    assert.ok(held.frames.every(s=>normalizeNpcAnnexCirculationV159({schema:159,actor:s}).actor));
+    const stationary=simulate({...held.a},2,{state:held.state,resolution});
+    assert.equal(stationary.state.x,held.state.x);assert.equal(stationary.state.doorProgress,0);
+    const resumed=simulate(held.a,35,{state:held.state,resolution:routine(9)});
+    assert.equal(resumed.state.roomId,'synthetic-bay');assert.equal(resumed.state.stage,'service');
+  }
 });
 
 test('every real native chart and door phase saves/reloads exactly, corrupt room/feet/progress/identity are rejected', () => {
@@ -256,6 +277,46 @@ test('the real V71 player gate reserves only this occupied SAS and keeps other a
   const h=runtime();context(h,9);tick(h,7);assert.ok(h.npcAnnexDoorReservedV159('synthetic-bay'));
   assert.equal(AnnexHub.prototype.beginAnnexTransitionV71.call(h,'synthetic-bay','enter'),null);
   assert.equal(h.hubDoorBlockedV142.annexId,'synthetic-bay');assert.equal(h.npcAnnexDoorReservedV159('morgue'),false);
+});
+
+test('the real owner releases an emergency SAS only after withdrawing its body, including a reload during that withdrawal', () => {
+  for(const stage of ['opening','covering','revealing','walking']){
+    const h=runtime();context(h,9);
+    for(let i=0;i<1500;i++){
+      const s=h.npcAnnexStateV159;
+      if(s.stage===stage&&s.doorProgress>.2&&s.doorProgress<1)break;
+      h.update(1/60);
+    }
+    assert.equal(h.npcAnnexStateV159.stage,stage);assert.ok(h.npcAnnexStateV159.doorProgress>0);
+    const a=h.npcAnnexActorV159,origin={roomId:a.roomId,x:a.x,crossings:h.npcAnnexStateV159.crossings};
+    const extra={crisis:{id:'actual',active:true}};context(h,9,extra);h.update(1/60);
+    assert.equal(h.npcAnnexActorV159,a);assert.equal(a.roomId,origin.roomId);
+    assert.equal(h.npcAnnexDoorReservedV159('synthetic-bay'),true);
+    h.persist();const patch=h.persisted.at(-1),saved=patch.npcAnnexCirculationV159.actor;
+    const resumed=runtime(9,patch);context(resumed,9,extra);
+    assert.equal(resumed.npcAnnexActorV159.x,saved.x);assert.equal(resumed.npcAnnexStateV159.doorProgress,saved.doorProgress);
+    for(const owner of [h,resumed]){
+      for(let i=0;i<900&&owner.npcAnnexDoorReservedV159('synthetic-bay');i++){
+        const before=structuredClone(owner.npcAnnexStateV159);owner.update(1/60);
+        const s=owner.npcAnnexStateV159,body=owner.npcAnnexActorV159;
+        assert.equal(s.roomId,origin.roomId);assert.equal(s.crossings,origin.crossings);
+        if(s.doorProgress<before.doorProgress){
+          const receipt=owner.getSnapshot().npcAnnexCirculationV159;
+          const opening=(s.roomId==='science-lab'?receipt.sourceFace:receipt.annexFace).opening;
+          assert.ok(body.x>opening.x+opening.w+12||body.x+body.w<opening.x-12,'The leaf may close only after the entire body clears it.');
+        }
+      }
+      assert.equal(owner.npcAnnexDoorReservedV159('synthetic-bay'),false);
+      assert.equal(owner.npcAnnexDoorDemandV159('synthetic-bay'),0);
+      const final=owner.getSnapshot().npcAnnexCirculationV159;
+      const opening=(origin.roomId==='science-lab'?final.sourceFace:final.annexFace).opening;
+      assert.ok(owner.npcAnnexActorV159.x>opening.x+opening.w+12);
+      assert.ok(owner.npcAnnexActorV159.x>origin.x);
+      const stable=owner.npcAnnexActorV159.x;tick(owner,1);assert.equal(owner.npcAnnexActorV159.x,stable);
+      context(owner,9,{crisis:{active:false}});tick(owner,35);assert.equal(owner.npcAnnexStateV159.stage,'service');
+      assert.equal(owner.npcAnnexStateV159.roomId,'synthetic-bay');
+    }
+  }
 });
 
 

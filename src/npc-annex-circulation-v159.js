@@ -123,13 +123,21 @@ export function advanceNpcAnnexCirculationV159(previous, actor, delta, {
   const dt = Math.min(delta, .1), originalX = actor.x;
   let s = { ...previous, x: actor.x, y: actor.y, time: Math.min(1e9, previous.time + dt), actualVelocity: 0, blocked: false };
   const interruption = npcAnnexInterruptionV159(resolution, actor);
-  if (interruption || actor.workClock > 0 || actor.supportClock > 0) return { ...s, velocity: 0,
+  const emergency = interruption === 'active-crisis' || interruption === 'infestation';
+  const clearingDoor = emergency && (crossing(s) || s.doorProgress > 0);
+  if ((interruption && !clearingDoor) || actor.workClock > 0 || actor.supportClock > 0) return { ...s, velocity: 0,
     reason: interruption || 'interaction' };
-  const targetRoomId = duty ? ANNEX : PARENT;
+  // An emergency cannot leave a frozen body owning both faces indefinitely.
+  // Reopen its current leaf, withdraw on the real floor in the same chart,
+  // then close only after the whole body clears the opening. Merely dropping
+  // the reservation would instead allow a player to pass through that body.
+  if (clearingDoor && s.stage !== 'revealing' && crossing(s))
+    s = { ...s, targetRoomId: s.roomId, stage: 'revealing' };
+  const targetRoomId = clearingDoor ? s.roomId : duty ? ANNEX : PARENT;
   // A committed cycle finishes before a changed timetable can reverse it.
-  // Emergencies above freeze it at its exact visible leaf/feet instead.
+  // Emergency withdrawal above cancels it without changing coordinate charts.
   if (!crossing(s) && targetRoomId !== s.targetRoomId) s = { ...s, targetRoomId, stage: 'walking', velocity: 0 };
-  s.reason = 'daily-schedule';
+  s.reason = interruption || 'daily-schedule';
   const doorDuration = stage => reducedMotion ? .12 : stage === 'covering' ? .65 : .42;
   if (crossing(s)) {
     if (s.stage === 'opening') {
