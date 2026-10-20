@@ -95,9 +95,9 @@ test('both real openings reject occupied bodies and busy/locked portals before a
   const held=simulate({...a},2,{state:covered,peers:[{...target,crewId:'other-crew',x:122}]});assert.equal(held.state.doorProgress,.6);assert.equal(held.state.stage,'covering');
 });
 
-test('pause, interaction, crisis, invalid delta and reduced motion retain native feet, leaf phase and bounded duration', () => {
-  const partial=simulate(actor(),8), state=partial.state;
-  assert.ok(['covering','revealing','walking'].includes(state.stage));
+test('pause, interaction, emergencies outside the SAS and invalid delta retain native feet; reduced motion bounds door duration', () => {
+  const partial=simulate(actor(),3), state=partial.state;
+  assert.equal(state.stage,'walking');
   for(const delta of [0,-1,Infinity,NaN]) assert.equal(advanceNpcAnnexCirculationV159(state,partial.a,delta),state);
   assert.equal(advanceNpcAnnexCirculationV159(state,partial.a,5,{running:false}),state);
   for(const extra of [{crisis:{id:'actual',active:true}},{infestation:{active:true,stage:'confirmation'}}]) {
@@ -109,6 +109,27 @@ test('pause, interaction, crisis, invalid delta and reduced motion retain native
   assert.equal(reduced.state.crossings,1);assert.equal(reduced.state.stage,'service');assert.ok(Math.abs(reduced.state.distance-slow.state.distance)<.1);
   const dropped=advanceNpcAnnexCirculationV159(createNpcAnnexCirculationStateV159(actor(),dutyActor()),actor(),20,{resolution:routine(9),duty:true});
   assert.equal(dropped.time,.1);assert.ok(4350-dropped.x<=2.7);
+});
+
+test('crisis and infestation safely clear either face instead of freezing a reserved SAS or allowing passage through its body', () => {
+  const out=simulate(actor(),25), back=simulate(out.a,25,{state:out.state,duty:false,resolution:routine(10.5)});
+  const samples=[out,back].flatMap(run=>['opening','covering','revealing','walking'].map(stage=>
+    run.frames.find(s=>s.stage===stage&&(stage==='walking'?s.doorProgress>0:s.doorProgress>.2&&s.doorProgress<.8))));
+  assert.ok(samples.every(Boolean));
+  for(const sample of samples)for(const extra of [{crisis:{id:'actual',active:true}},{infestation:{active:true,stage:'confirmation'}}]){
+    const a=actor({x:sample.x,y:sample.y,roomId:sample.roomId}),resolution=routine(9,extra);
+    const held=simulate(a,8,{state:sample,resolution});
+    assert.equal(held.state.roomId,sample.roomId,'Emergency withdrawal never changes coordinate charts.');
+    assert.equal(held.state.crossings,sample.crossings);assert.equal(held.state.arrivals,sample.arrivals);
+    assert.equal(held.state.doorProgress,0);assert.equal(held.state.stage,'walking');
+    assert.ok(held.state.x>sample.x+60,'The body really withdraws before releasing the leaf.');
+    assert.ok(held.frames.every(s=>s.y===532&&Math.abs(s.velocity)<=27.000001));
+    assert.ok(held.frames.every(s=>normalizeNpcAnnexCirculationV159({schema:159,actor:s}).actor));
+    const stationary=simulate({...held.a},2,{state:held.state,resolution});
+    assert.equal(stationary.state.x,held.state.x);assert.equal(stationary.state.doorProgress,0);
+    const resumed=simulate(held.a,35,{state:held.state,resolution:routine(9)});
+    assert.equal(resumed.state.roomId,'synthetic-bay');assert.equal(resumed.state.stage,'service');
+  }
 });
 
 test('every real native chart and door phase saves/reloads exactly, corrupt room/feet/progress/identity are rejected', () => {
@@ -147,7 +168,7 @@ class FixtureBase {
   tickAnnexNpcLifeV141(...args){return LifeHub.prototype.tickAnnexNpcLifeV141.apply(this,args);}
   tickParentNpcLifeV136(...args){return LifeHub.prototype.tickParentNpcLifeV136.apply(this,args);}
   stepHubNpcLifeV136(...args){return LifeHub.prototype.stepHubNpcLifeV136.apply(this,args);}
-  npcAnimationRequest(n){return {sheetId:n.spriteId,clipId:Math.abs(n.vx)>.1?'walk':'idle'};}
+  npcAnimationRequest(...args){return LifeHub.prototype.npcAnimationRequest.apply(this,args);}
   sampleNpcAnimation(n){this.samples.push({id:n.crewId,x:n.x,roomId:n.roomId,vx:n.vx});}
   drawNpcLifeV136(){return false;}
   drawDepthContactShadowV116(){return true;}
@@ -258,13 +279,106 @@ test('the real V71 player gate reserves only this occupied SAS and keeps other a
   assert.equal(h.hubDoorBlockedV142.annexId,'synthetic-bay');assert.equal(h.npcAnnexDoorReservedV159('morgue'),false);
 });
 
+test('only the owned emergency walk overrides stationary native ready/work requests, preserving action and lifecycle priorities', () => {
+  const h=runtime();context(h,9);tick(h,7.2);context(h,9,{crisis:{id:'actual',active:true}});tick(h,1);
+  const a=h.npcAnnexActorV159;assert.ok(a.vx>.1);assert.equal(h.npcAnnexStateV159.stage,'walking');
+  a.workClock=12;const physical=structuredClone(h.npcAnnexStateV159);
+  assert.equal(LifeHub.prototype.npcAnimationRequest.call(h,a).clipId,'role-support');
+  assert.deepEqual(h.npcAnimationRequest(a),{sheetId:a.spriteId,clipId:'walk'});
+  for(const patch of [{downed:true},{dead:true},{alive:false},{hurtClock:1},{vehicleAccessPhase:'entering'},
+    {climbing:true},{fireClock:1},{crouching:true},{inCover:true},{grounded:false},{inVehicle:true},{ventTransit:{}},
+    {crewId:'recruit-v85-deadbeef-000001',visualProfileId:'echo9-standard-v85',crewV85:{schema:85,crewId:'recruit-v85-deadbeef-000001',visualProfileId:'echo9-standard-v85'}}]){
+    const before=Object.fromEntries(Object.keys(patch).map(key=>[key,{present:Object.hasOwn(a,key),value:a[key]}]));
+    Object.assign(a,patch);
+    assert.deepEqual(h.npcAnimationRequest(a),LifeHub.prototype.npcAnimationRequest.call(h,a));
+    for(const [key,value] of Object.entries(before)){if(value.present)a[key]=value.value;else delete a[key];}
+  }
+  const other={...a};assert.deepEqual(h.npcAnimationRequest(other),LifeHub.prototype.npcAnimationRequest.call(h,other));
+  h.running=false;assert.deepEqual(h.npcAnimationRequest(a),LifeHub.prototype.npcAnimationRequest.call(h,a));
+  tick(h,1);assert.deepEqual(h.npcAnnexStateV159,physical);assert.equal(a.workClock,12);assert.equal(a.alerted,true);
+});
+
+test('an emergency during the zero-progress approach reserves the physical opening and withdraws without opening or crossing it', () => {
+  const h=runtime();context(h,9);
+  for(let i=0;i<1500&&h.npcAnnexActorV159.x>4200;i++)h.update(1/60);
+  const a=h.npcAnnexActorV159,before=structuredClone(h.npcAnnexStateV159);
+  assert.equal(before.stage,'walking');assert.equal(before.doorProgress,0);
+  assert.equal(h.npcAnnexDoorReservedV159('synthetic-bay'),true);
+  a.workClock=12;context(h,9,{crisis:{id:'actual',active:true}});
+  let samples=0;
+  for(let i=0;i<900&&h.npcAnnexDoorReservedV159('synthetic-bay');i++){
+    h.update(1/60);const s=h.npcAnnexStateV159;
+    assert.equal(s.roomId,before.roomId);assert.equal(s.crossings,before.crossings);assert.equal(s.arrivals,before.arrivals);
+    assert.equal(s.doorProgress,0);assert.equal(a.y+a.h,624);assert.equal(h.npcAnnexDoorDemandV159('synthetic-bay'),0);
+    if(s.actualVelocity>.1){assert.equal(h.npcAnimationRequest(a).clipId,'walk');samples++;}
+  }
+  const opening=h.getSnapshot().npcAnnexCirculationV159.sourceFace.opening;
+  assert.ok(samples>60);assert.ok(a.x>opening.x+opening.w+12);assert.ok(a.workClock>0);
+  assert.equal(h.npcAnnexDoorReservedV159('synthetic-bay'),false);
+  h.update(1/60);assert.equal(a.vx,0);assert.notEqual(h.npcAnimationRequest(a).clipId,'walk');
+});
+
+test('the real owner releases an emergency SAS only after withdrawing its body, including a reload during that withdrawal', () => {
+  for(const stage of ['opening','covering','revealing','walking'])for(const clock of [null,'workClock','supportClock']){
+    const h=runtime();context(h,9);
+    for(let i=0;i<1500;i++){
+      const s=h.npcAnnexStateV159;
+      if(s.stage===stage&&s.doorProgress>.2&&s.doorProgress<1)break;
+      h.update(1/60);
+    }
+    assert.equal(h.npcAnnexStateV159.stage,stage);assert.ok(h.npcAnnexStateV159.doorProgress>0);
+    const a=h.npcAnnexActorV159,origin={roomId:a.roomId,x:a.x,crossings:h.npcAnnexStateV159.crossings};
+    if(clock)a[clock]=12;
+    const extra={crisis:{id:'actual',active:true}};context(h,9,extra);h.update(1/60);
+    assert.equal(h.npcAnnexActorV159,a);assert.equal(a.roomId,origin.roomId);
+    assert.equal(h.npcAnnexDoorReservedV159('synthetic-bay'),true);
+    h.persist();const patch=h.persisted.at(-1),saved=patch.npcAnnexCirculationV159.actor;
+    const resumed=runtime(9,patch);context(resumed,9,extra);
+    assert.equal(resumed.npcAnnexActorV159.x,saved.x);assert.equal(resumed.npcAnnexStateV159.doorProgress,saved.doorProgress);
+    // Native interaction clocks are transient rather than part of the route
+    // save. Exercise one in both real owners; only their update may elapse it.
+    if(clock)resumed.npcAnnexActorV159[clock]=12;
+    for(const owner of [h,resumed]){
+      const clockBefore=clock&&owner.npcAnnexActorV159[clock],timeBefore=owner.npcAnnexStateV159.time;
+      for(let i=0;i<900&&owner.npcAnnexDoorReservedV159('synthetic-bay');i++){
+        const before=structuredClone(owner.npcAnnexStateV159);owner.update(1/60);
+        const s=owner.npcAnnexStateV159,body=owner.npcAnnexActorV159;
+        assert.equal(s.roomId,origin.roomId);assert.equal(s.crossings,origin.crossings);
+        if(s.doorProgress<before.doorProgress){
+          const receipt=owner.getSnapshot().npcAnnexCirculationV159;
+          const opening=(s.roomId==='science-lab'?receipt.sourceFace:receipt.annexFace).opening;
+          assert.ok(body.x>opening.x+opening.w+12||body.x+body.w<opening.x-12,'The leaf may close only after the entire body clears it.');
+        }
+      }
+      assert.equal(owner.npcAnnexDoorReservedV159('synthetic-bay'),false);
+      assert.equal(owner.npcAnnexDoorDemandV159('synthetic-bay'),0);
+      if(clock){
+        const remaining=owner.npcAnnexActorV159[clock],elapsed=owner.npcAnnexStateV159.time-timeBefore;
+        assert.ok(remaining>0,'Emergency withdrawal must clear the SAS before its interaction clock expires.');
+        assert.ok(Math.abs(remaining-(clockBefore-elapsed))<1e-6,'The real owner still elapses its interaction clock once per frame.');
+      }
+      const final=owner.getSnapshot().npcAnnexCirculationV159;
+      const opening=(origin.roomId==='science-lab'?final.sourceFace:final.annexFace).opening;
+      assert.ok(owner.npcAnnexActorV159.x>opening.x+opening.w+12);
+      assert.ok(owner.npcAnnexActorV159.x>origin.x);
+      const stable=owner.npcAnnexActorV159.x;tick(owner,1);assert.equal(owner.npcAnnexActorV159.x,stable);
+      context(owner,9,{crisis:{active:false}});tick(owner,35);assert.equal(owner.npcAnnexStateV159.stage,'service');
+      assert.equal(owner.npcAnnexStateV159.roomId,'synthetic-bay');
+    }
+  }
+});
+
 
 // Native engine integration with real assets' measured dimensions and a
 // recording Canvas. This is not a browser/visual/human-playtest substitute.
 test('native engine update/draw/pause own the true paired leaves and one supported source actor without changing player/camera/resources', async () => {
-  const root=fileURLToPath(new URL('../',import.meta.url)),events=new EventTarget();
-  for(const name of ['addEventListener','removeEventListener'])globalThis[name]=events[name].bind(events);
-  globalThis.document=Object.assign(new EventTarget(),{hidden:false,activeElement:null,hasFocus:()=>true});
+  const root=fileURLToPath(new URL('../',import.meta.url));
+  function freshInput(){
+    const events=new EventTarget();
+    for(const name of ['addEventListener','removeEventListener'])globalThis[name]=events[name].bind(events);
+    globalThis.document=Object.assign(new EventTarget(),{hidden:false,activeElement:null,hasFocus:()=>true});
+  }
+  freshInput();
   globalThis.requestAnimationFrame=()=>1;globalThis.cancelAnimationFrame=()=>{};
   globalThis.Image=class extends EventTarget {
     complete=true;naturalWidth=0;naturalHeight=0;
@@ -280,7 +394,8 @@ test('native engine update/draw/pause own the true paired leaves and one support
     fillRect(...args){if(['#9fb978','#e0e7bc'].includes(this.fillStyle))marks.push({args,clipActive,zeroClip});},
     measureText:t=>({width:String(t).length*6}),createLinearGradient:()=>({addColorStop(){}}),createRadialGradient:()=>({addColorStop(){}}),
     getImageData:()=>({data:new Uint8ClampedArray(4),width:1,height:1})},{get:(o,k)=>k in o?o[k]:()=>{}});
-  const canvas=Object.assign(new EventTarget(),{width:1280,height:720,getContext:()=>ctx,focus(){document.activeElement=this;},getBoundingClientRect:()=>({left:0,top:0,width:1280,height:720})});
+  const makeCanvas=()=>Object.assign(new EventTarget(),{width:1280,height:720,getContext:()=>ctx,focus(){document.activeElement=this;},getBoundingClientRect:()=>({left:0,top:0,width:1280,height:720})});
+  const canvas=makeCanvas();
   const Game=withHubNpcAnnexCirculationV159(withHubNpcCirculationV158(withHubNpcLifeV136(NativeHub)));
   const patches=[],actions=[],save=createDefaultSave();save.needsPlayerCreationV84=false;
   const h=new Game(canvas,{onAction:e=>actions.push(structuredClone(e)),onPersist:p=>patches.push(structuredClone(p)),onStatus(){}});
@@ -314,4 +429,35 @@ test('native engine update/draw/pause own the true paired leaves and one support
   for(let i=0;i<60&&!partialParent;i++){h.update(1/60);const s=h.npcAnnexStateV159;if(s?.stage==='revealing'&&s.doorProgress>.2&&s.doorProgress<.8){
     marks.length=0;h.draw();assert.equal(marks.length,2);assert.ok(marks.every(m=>m.clipActive&&!m.zeroClip));partialParent=true;}}
   assert.ok(partialParent);h.draw();assert.equal(depth,0);h.stop(false);
+
+  for(const [phase,clock] of [['covering',null],['covering','workClock'],['covering','supportClock'],['approach','workClock']]){
+    freshInput();const emergency=new Game(makeCanvas(),{onAction(){},onPersist(){},onStatus(){}});
+    emergency.start({deck:1,roomId:'science-lab',positionX:3950},{routineContextV62:{save,crew:save.crew,clock:{day:1,hour:5}}});
+    emergency.setNpcRoutineContextV62({clock:{day:1,hour:9}},{persist:false});
+    for(let i=0;i<1500&&(phase==='approach'?emergency.npcAnnexActorV159.x>4200:emergency.npcAnnexStateV159.stage!=='covering');i++)emergency.update(1/60);
+    const body=emergency.npcAnnexActorV159,origin=structuredClone(emergency.npcAnnexStateV159);
+    if(clock)body[clock]=12;
+    emergency.setNpcRoutineContextV62({clock:{day:1,hour:9},crisis:{id:'actual',active:true}},{persist:false});
+    const frames=new Set();let firstX,lastGait,movingSamples=0,lastClosedStep=false;
+    for(let i=0;i<900&&emergency.npcAnnexDoorReservedV159('synthetic-bay');i++){
+      emergency.update(1/60);const s=emergency.npcAnnexStateV159;emergency.draw();
+      assert.equal(body.roomId,origin.roomId);assert.equal(s.crossings,origin.crossings);assert.equal(body.y+body.h,624);
+      if(Math.abs(s.actualVelocity)>.1){
+        const sample=emergency.sampleNpcAnimation(body,{emit:false});assert.equal(sample.clip.id,'walk');
+        assert.equal(sample.sheet.id,body.spriteId);assert.ok(sample.humanPatrolV133?.moving);
+        firstX ??= body.x;lastGait=sample.humanPatrolV133;frames.add(sample.frame);movingSamples++;
+        assert.ok(lastGait.distance<=body.x-firstX+1e-6,'Gait spends actual floor distance without stride debt.');
+        if(s.doorProgress===0)lastClosedStep=true;
+      }
+    }
+    assert.ok(movingSamples>60&&frames.size>1&&lastGait.distance>50&&lastClosedStep);
+    assert.equal(emergency.npcAnnexDoorReservedV159('synthetic-bay'),false);
+    if(clock)assert.ok(body[clock]>0,'A live interaction clock does not suppress the emergency gait.');
+    emergency.update(1/60);const still=structuredClone(emergency.npcAnnexStateV159),x=body.x;
+    assert.notEqual(emergency.npcAnimationRequest(body).clipId,'walk');assert.equal(body.alerted,true);
+    emergency.draw();const idle=emergency.sampleNpcAnimation(body,{emit:false});assert.equal(idle.humanPatrolV133,null);
+    emergency.pause();emergency.update(.1);assert.equal(body.x,x);assert.deepEqual(emergency.npcAnnexStateV159,still);
+    emergency.stop(false);
+  }
+  assert.equal(depth,0);
 });

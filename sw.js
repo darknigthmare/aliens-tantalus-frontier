@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-continuation-v158';
+const CACHE = 'atf-v143-continuation-v159';
 const SHELL = Object.freeze([
   '/src/black-cocoon-presentation-v158.js',
   '/src/npc-circulation-v158.js',

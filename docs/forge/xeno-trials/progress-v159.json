@@ -2072,7 +2072,33 @@
         "medical-recovery",
         "unavailable"
       ],
-      "recipeState": "PENDING_CURRENT_HEAD_RECEIPTS"
+      "recipeState": "PENDING_CURRENT_HEAD_RECEIPTS",
+      "emergencyDoorRecovery": {
+        "interruptions": [
+          "active-crisis",
+          "infestation"
+        ],
+        "withdrawOnCurrentFloor": true,
+        "coordinateChartChanged": false,
+        "crossingCounterChanged": false,
+        "reservationReleasedOnlyAfterWholeBodyClearsAndLeafCloses": true,
+        "savedWithdrawalResumes": true,
+        "outsideDoor": "hold-current-supported-pose",
+        "takesPriorityOverOrdinaryInteractionClocks": true,
+        "approachingBodyReservesOpeningAtZeroProgress": true,
+        "closedApproachWithdrawalOpensLeaf": false,
+        "reopenCurrentFaceWhenCycleEngaged": true
+      },
+      "emergencyLocomotion": {
+        "source": "native-bishop-walk",
+        "clock": "measured-floor-distance",
+        "onlyActualMovement": true,
+        "stationaryRequestsReplaced": [
+          "ready",
+          "role-support"
+        ],
+        "preserveLifecycleCombatTraversalAndAlternateUniforms": true
+      }
     }
   },
   "runtimeSourceSha256": {
@@ -2110,7 +2136,7 @@
     "src/hub-v71-runtime.js": "289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4",
     "src/legacy-operations-v131.js": "70d94552c2614f667fdd5083ee5677249dc733060855329c4551591f048fec60",
     "src/mission-input-v77.js": "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
-    "src/npc-annex-circulation-v159.js": "e015ad1958f6dec98149dd288023b0076ef0240ce72b788b38c7047c6acac407",
+    "src/npc-annex-circulation-v159.js": "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
     "src/npc-circulation-v158.js": "8ba022817afb11bec4bb9af5056982ccadd63f4707f0859cc40bd94c431252fa",
     "src/npc-life-v136.js": "6179892f6f37f1220c85de66bc5ac0bd94fce15ea8d643d6dd53b2280735ebb3",
     "src/player-appearance-runtime-v126.js": "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
@@ -3298,7 +3324,7 @@
           "09:00–10:30",
           "Sol physique, y=624",
           "Affectation technique conditionnelle",
-          "Affectation native conditionnelle ; V159 suit le même BISHOP depuis science-lab par le sas apparié et le retour. Priorités mission/alerte/soins conservées ; pas de trajet quarantaine ou autres annexes."
+          "Affectation native conditionnelle ; V159 suit le même BISHOP depuis science-lab par le sas apparié et le retour. Alerte : retrait réel prioritaire aux minuteurs, réservation dès le corps sur l’ouverture même à progression zéro, marche native pilotée par distance. Missions et soins prioritaires ; quarantaine et autres annexes hors de ce circuit."
         ],
         [
           "cctv",
@@ -5520,8 +5546,8 @@
     "11_Succession": {
       "headers": [
         "Module",
-        "SHA V157",
         "SHA V158",
+        "SHA V159",
         "Évolution volontaire",
         "Vérificateurs comportementaux"
       ],
@@ -5550,8 +5576,8 @@
         [
           "src/npc-annex-circulation-v159.js",
           "Non épinglé en V158",
-          "e015ad1958f6dec98149dd288023b0076ef0240ce72b788b38c7047c6acac407",
-          "Contrôleur borné du même BISHOP, marche sur sols natifs et passage de sas apparié entièrement occulté avant changement de repère.",
+          "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
+          "Même BISHOP sur sols natifs ; retrait d’alerte prioritaire aux minuteurs, ouverture recouverte réservée dès l’approche même à progression zéro, marche native pilotée par distance réelle.",
           "scripts/verify-npc-annex-circulation-v159.mjs"
         ]
       ]
@@ -9019,7 +9045,7 @@
           "bishop-annex-circulation",
           "Trajet physique laboratoire / baie synthétique",
           "crew-05-bishop-9 ; science-lab ↔ synthetic-bay ; pont 1",
-          "Implémenté (trajet borné)",
+          "Implémenté (trajet borné ; réservation physique et marche native pendant le retrait d’alerte)",
           "À exécuter sur le commit publié",
           "Acteur,art, sols 2D et sas apparié natifs ; aucune nouvelle certification 1:1",
           "Quarantaine, autres annexes, ponts, ascenseurs et corpus artistique complet."
@@ -10839,7 +10865,7 @@
       "expected": 3
     }
   ],
-  "workbookSha256": "437626fae309bf974ca47c4991d02c23aec0961d5f48986f98fd5bb103187a1c",
+  "workbookSha256": "34108149c61193417f2a1786c37082abe31447d44b33d7234731e62bac085674",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V158",
@@ -10882,8 +10908,8 @@
       {
         "path": "src/npc-annex-circulation-v159.js",
         "previousSha256": null,
-        "currentSha256": "e015ad1958f6dec98149dd288023b0076ef0240ce72b788b38c7047c6acac407",
-        "reason": "Contrôleur borné du même BISHOP, marche sur sols natifs et passage de sas apparié entièrement occulté avant changement de repère.",
+        "currentSha256": "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
+        "reason": "Même BISHOP sur sols natifs ; retrait d’alerte prioritaire aux minuteurs, ouverture recouverte réservée dès l’approche même à progression zéro, marche native pilotée par distance réelle.",
         "verifiers": [
           "scripts/verify-npc-annex-circulation-v159.mjs"
         ]
