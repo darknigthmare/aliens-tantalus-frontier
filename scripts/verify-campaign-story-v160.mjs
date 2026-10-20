@@ -37,7 +37,11 @@ function storyDocument() {
       replaceChildren(...children) { this.children.forEach(child => { child.parentNode = null; }); this.children = []; this.ownText = ''; this.append(...children); },
       setAttribute(key, value) { this.attributes[key] = String(value); },
       getAttribute(key) { return this.attributes[key] ?? null; }, removeAttribute(key) { delete this.attributes[key]; },
-      addEventListener() {}, removeEventListener() {}, focus() {},
+      listeners: {},
+      addEventListener(type, handler) { this.listeners[type] ??= []; this.listeners[type].push(handler); },
+      removeEventListener(type, handler) { this.listeners[type] = (this.listeners[type] || []).filter(entry => entry !== handler); },
+      click() { if (!this.disabled) for (const handler of this.listeners.click || []) handler({ target: this }); },
+      focus() {},
       contains(target) { return target === this || this.children.some(child => child.contains(target)); },
       querySelectorAll(selector) { return this.children.flatMap(child => [...(matches(child, selector) ? [child] : []), ...child.querySelectorAll(selector)]); },
       querySelector(selector) { return this.querySelectorAll(selector)[0] || null; },
@@ -56,8 +60,8 @@ const advance = state => {
   const result = applyMissionInsertionActionV62(state, state.phases[state.currentIndex].requiredAction, { now: state.updatedAt + 100 });
   assert.equal(result.ok, true); return result.state;
 };
-function completedInsertion(id, protocolId = 'technical-audit') {
-  let state = insertion(id); state = advance(state);
+function completedInsertion(id, protocolId = 'technical-audit', extras = {}) {
+  let state = insertion(id, extras); state = advance(state);
   if (protocolId) state = chooseCampaignStoryProtocolV160(state, protocolId).state;
   while (state.status !== 'completed') state = advance(state);
   return state;
@@ -88,7 +92,7 @@ async function nativeCompletedRun(protocolId) {
   const { operation } = beginOperation(save, campaign, world);
   const level = buildArchiveRelayLevelV122({ campaign, world, levelSeeds: LEVEL_SEEDS, seed: 160 });
   Object.assign(operation, { levelSeedId: level.levelSeed.id, missionLevelSignature: level.signature,
-    insertionState: completedInsertion(operation.id, protocolId) });
+    insertionState: completedInsertion(operation.id, protocolId, { mission: level }) });
   const host = hostV136(), events = [], engine = new GameEngine(host.canvas, { onEvent: event => events.push(event) });
   engine.start({ operationId: operation.id, campaign, world, missionLevel: level,
     levelSeed: level.levelSeed, weapon: WEAPONS[0], enemyCatalog: ENEMIES, equipment: [], crew: [], seed: 160 });
@@ -310,6 +314,56 @@ test('PR15: the real QZ-18 return survives another resolved mission and JSON/sav
   assert.deepEqual(reloaded, paid);
 });
 
+test('PR15: each app-style reading transaction after SaveSystem normalization keeps the latest and durable ledgers equal', async () => {
+  const { save } = await nativeCompletedRun('technical-audit');
+  applyCampaignConsequence(save, campaign, world, { success: true });
+  const values = new Map();
+  const storage = { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
+  const system = new SaveSystem(storage); system.newGame(1); system.commit(save);
+  const initial = clone(system.data), id = initial.strategy.lastOperation.id;
+  assert.equal(initial.strategy.lastOperation.insertionState.phases.length, 6, 'the real QZ-18 insertion includes its native incident');
+  const originalReturn = clone(initial.archiveRelayArchivesV122.lastReturnV160);
+  const protectedFields = value => clone({ clock: value.clock, galaxy: value.galaxy, hub: value.hub, crew: value.crew,
+    statistics: value.statistics, case: value.archiveRelayArchivesV122.case });
+  const protectedBefore = protectedFields(initial), reads = [];
+  for (const topic of ['chronology', 'identity', 'return', 'chronology', 'identity', 'return']) {
+    const candidate = clone(system.data);
+    const result = recordCampaignStoryReviewV160(candidate, id, topic);
+    assert.equal(result.ok, true);
+    if (result.changed) system.commit(candidate);
+    // Same migration/commit performed by renderOperationPlan after onReview.
+    const planCandidate = clone(system.data);
+    if (preserveCampaignStoryReturnV160(planCandidate).changed) system.commit(planCandidate);
+    if (!reads.includes(topic)) reads.push(topic);
+    const expected = { ...originalReturn.ledger, readTopics: [...reads], activeTopic: topic };
+    const latestLedger = system.data.strategy.lastOperation.insertionState.phases
+      .find(phase => phase.kind === 'preparation').payload.campaignStoryReturnV160;
+    assert.deepEqual(latestLedger, expected);
+    assert.deepEqual(system.data.archiveRelayArchivesV122.lastReturnV160.ledger, expected,
+      'the durable ledger must follow the actual committed reading, not retain its initial value');
+    assert.deepEqual({ ...system.data.archiveRelayArchivesV122.lastReturnV160, ledger: originalReturn.ledger }, originalReturn);
+    assert.deepEqual(protectedFields(system.data), protectedBefore);
+  }
+  const loaded = new SaveSystem(storage).load(1);
+  assert.equal(campaignStoryReturnV160(loaded).readingComplete, true);
+  assert.deepEqual(loaded.archiveRelayArchivesV122.lastReturnV160.ledger.readTopics, reads);
+  assert.equal(applyCampaignStoryReturnV160(loaded, campaign, { success: true }).applied, false);
+  assert.deepEqual(protectedFields(loaded), protectedBefore);
+  const other = CAMPAIGNS.find(entry => entry.id !== campaign.id && !entry.specialOperationId && loaded.galaxy.unlockedWorldIds.includes(entry.worldId));
+  assert.ok(beginOperation(loaded, other, WORLDS.find(entry => entry.id === other.worldId)).operation);
+  assert.equal(resolveOperation(loaded, { success: false, reason: 'retreat' }).ok, true);
+  const nextWriter = new SaveSystem(storage); nextWriter.load(1); nextWriter.commit(loaded);
+  const afterOther = new SaveSystem(storage).load(1), otherProtected = protectedFields(afterOther);
+  assert.equal(campaignStoryReturnV160(afterOther).operationId, id);
+  assert.equal(campaignStoryReturnV160(afterOther).readingComplete, true);
+  assert.equal(recordCampaignStoryReviewV160(afterOther, id, 'identity').ok, true);
+  const finalWriter = new SaveSystem(storage); finalWriter.load(1); finalWriter.commit(afterOther);
+  const finalLoad = new SaveSystem(storage).load(1);
+  assert.equal(campaignStoryReturnV160(finalLoad).selectedTopic, 'identity');
+  assert.deepEqual(finalLoad.archiveRelayArchivesV122.lastReturnV160.ledger.receipt, originalReturn.ledger.receipt);
+  assert.deepEqual(protectedFields(finalLoad), otherProtected);
+});
+
 test('PR15: older QZ-18 saves acquire only a bounded durable return without another reward or an invented reading', () => {
   const save = returnedFixture(); applyCampaignStoryReturnV160(save, campaign, { success: true });
   delete save.archiveRelayArchivesV122.lastReturnV160;
@@ -327,6 +381,49 @@ test('PR15: older QZ-18 saves acquire only a bounded durable return without anot
   assert.equal(campaignStoryReturnV160(restored).canPersistReview, false);
   assert.equal(campaignStoryReturnV160(restored).protocolLabel, 'Bilan standard');
   assert.deepEqual(normalizeArchiveRelayArchiveV122({ schema: 122, case: null }), { schema: 122, case: null });
+});
+
+test('PR15: missing normalized completion dates use only the validated same return or native legacy victory case', () => {
+  const save = returnedFixture(); applyCampaignStoryReturnV160(save, campaign, { success: true });
+  const normalized = migrateSave(JSON.parse(JSON.stringify(save)));
+  assert.equal(normalized.strategy.lastOperation.insertionState.status, 'completed');
+  assert.equal(normalized.strategy.lastOperation.insertionState.controlGranted, true);
+  const legacy = clone(normalized); delete legacy.archiveRelayArchivesV122.lastReturnV160;
+  const nativeDate = { completedDay: legacy.archiveRelayArchivesV122.case.completedDay, completedHour: legacy.archiveRelayArchivesV122.case.completedHour };
+  const before = clone(legacy);
+  assert.equal(preserveCampaignStoryReturnV160(legacy).changed, true);
+  assert.equal(legacy.archiveRelayArchivesV122.lastReturnV160.completedDay, nativeDate.completedDay);
+  assert.equal(legacy.archiveRelayArchivesV122.lastReturnV160.completedHour, nativeDate.completedHour);
+  assert.deepEqual(legacy.archiveRelayArchivesV122.lastReturnV160.ledger.readTopics, []);
+  const stripped = clone(legacy); delete stripped.archiveRelayArchivesV122.lastReturnV160;
+  assert.deepEqual(stripped, before, 'the old native date does not pay, read, heal or advance anything');
+  for (const mutate of [
+    value => { value.archiveRelayArchivesV122.lastReturnV160.operationId = 'operation-2-special-archive-relay'; },
+    value => { value.archiveRelayArchivesV122.lastReturnV160.success = false; },
+    value => { delete value.archiveRelayArchivesV122.lastReturnV160; value.archiveRelayArchivesV122.case.operationId = 'operation-2-special-archive-relay'; },
+    value => { delete value.archiveRelayArchivesV122.lastReturnV160; value.archiveRelayArchivesV122.case.documentIds.pop(); },
+    value => { delete value.archiveRelayArchivesV122.lastReturnV160; value.strategy.lastOperation.success = false; }
+  ]) {
+    const bad = clone(normalized); mutate(bad); const unchanged = clone(bad);
+    assert.equal(preserveCampaignStoryReturnV160(bad).changed, false);
+    assert.deepEqual(bad, unchanged);
+    assert.equal(recordCampaignStoryReviewV160(bad, bad.strategy.lastOperation.id, 'identity').ok, false);
+    assert.deepEqual(bad, unchanged, 'a missing or foreign date cannot be invented by reading');
+  }
+});
+
+test('PR15: a normalized legacy failure without a trustworthy completion date stays locally readable without a false saved reading', () => {
+  const legacy = migrateSave(JSON.parse(JSON.stringify(returnedFixture({ success: false }))));
+  const before = clone(legacy), { root } = storyDocument(); let writes = 0;
+  const model = mountCampaignDebriefV160(root, { save: legacy, campaignId: campaign.id, onReview() { writes++; } });
+  assert.equal(model.canPersistReview, false); assert.equal(model.canReview, true);
+  const question = root.querySelector('[data-campaign-story-topic="identity"]');
+  assert.equal(question.disabled, false); question.click();
+  assert.equal(writes, 0, 'legacy consultation must not call the durable writer that would refuse its missing date');
+  assert.equal(root.querySelector('[data-campaign-story-answer]').dataset.campaignStoryAnswer, 'identity');
+  assert.match(root.querySelector('[data-campaign-story-answer]').textContent, /Aucune identification personnelle/u);
+  assert.equal(recordCampaignStoryReviewV160(legacy, legacy.strategy.lastOperation.id, 'identity').reason, 'return-date-unavailable');
+  assert.deepEqual(legacy, before);
 });
 
 test('PR15: durable return normalization rejects mismatched evidence, identities and protocol ownership and strips unrelated objects', () => {

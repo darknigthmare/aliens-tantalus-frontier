@@ -148,14 +148,36 @@ function writeReturnLedger(operation, ledger) {
   return true;
 }
 
+function completionFields(save, operation) {
+  const fields = value => Number.isInteger(value?.completedDay) && value.completedDay >= 1 && value.completedDay <= 999999999
+    && finite(value.completedHour) && value.completedHour >= 0 && value.completedHour <= 24
+    ? { completedDay: value.completedDay, completedHour: value.completedHour } : null;
+  const direct = fields(operation);
+  if (direct) return direct;
+  // SaveSystem's historical lastOperation projection omits completion dates.
+  // Keep strict validation and recover them only from the already validated
+  // record of this exact return, never from today's strategic clock.
+  if (operation.completedDay != null || operation.completedHour != null) return null;
+  const archive = normalizeArchiveRelayArchiveV122(save?.archiveRelayArchivesV122);
+  const stored = archive.lastReturnV160;
+  if (save?.archiveRelayArchivesV122?.lastReturnV160 != null) {
+    return stored?.operationId === operation.id && stored.success === operation.success ? fields(stored) : null;
+  }
+  // An older victory may predate lastReturnV160. Its native six-piece case
+  // already owns the completion date; an incomplete/foreign case owns none.
+  return operation.success === true && archive.case?.operationId === operation.id ? fields(archive.case) : null;
+}
+
 function preserveReturn(save, operation) {
   if (!operation) return { changed: false };
   const insertion = operation.archivedReturnV160 ? null : insertionFor(operation.insertionState);
   if (!operation.archivedReturnV160 && operation.insertionState && (!insertion || insertion.operationId !== operation.id
     || operation.success && (insertion.status !== 'completed' || !insertion.controlGranted))) return { changed: false };
+  const completion = completionFields(save, operation);
+  if (!completion) return { changed: false };
   const archive = normalizeArchiveRelayArchiveV122({ ...save.archiveRelayArchivesV122,
     lastReturnV160: { schema: 160, operationId: operation.id, campaignId: operation.campaignId, worldId: operation.worldId,
-      success: operation.success, reason: operation.reason, completedDay: operation.completedDay, completedHour: operation.completedHour,
+      success: operation.success, reason: operation.reason, ...completion,
       protocolId: returnProtocol(operation)?.id || null, ledger: returnLedger(operation) } });
   if (!archive.lastReturnV160 || JSON.stringify(archive.lastReturnV160) === JSON.stringify(save.archiveRelayArchivesV122?.lastReturnV160))
     return { changed: false };
@@ -206,6 +228,7 @@ export function campaignStoryReturnV160(save) {
   const protocol = returnProtocol(operation);
   const ledger = returnLedger(operation);
   const success = operation.success === true;
+  const completion = completionFields(save, operation);
   const selectedTopic = ledger?.activeTopic || 'return';
   const questions = [
     { id: 'chronology', label: 'Qu’établissent les horaires ?', speaker: 'Inez Harlow · liaison science',
@@ -227,8 +250,8 @@ export function campaignStoryReturnV160(save) {
       : 'Les faits établis restent séparés des pièces manquantes et des suppositions.',
     protocolLabel: protocol?.label || 'Bilan standard', evidenceComplete: Boolean(evidence), selectedTopic,
     questions, readingComplete: questions.every(question => question.read), canReview: !save.strategy.currentOperation,
-    canPersistReview: Boolean(ledger),
-    completedDay: operation.completedDay, completedHour: operation.completedHour };
+    canPersistReview: Boolean(ledger && completion),
+    completedDay: completion?.completedDay, completedHour: completion?.completedHour };
 }
 
 /** Reading is a bounded, zero-cost ledger entry on this returned operation.
@@ -239,6 +262,7 @@ export function recordCampaignStoryReviewV160(save, operationId, topicId) {
     return { ok: false, changed: false, reason: 'return-unavailable' };
   const ledger = returnLedger(operation);
   if (!ledger) return { ok: false, changed: false, reason: 'legacy-return-read-only' };
+  if (!completionFields(save, operation)) return { ok: false, changed: false, reason: 'return-date-unavailable' };
   const changed = !ledger.readTopics.includes(topicId) || ledger.activeTopic !== topicId;
   if (!changed) return { ok: true, changed: false };
   writeReturnLedger(operation, { ...ledger, readTopics: [...new Set([...ledger.readTopics, topicId])], activeTopic: topicId });
