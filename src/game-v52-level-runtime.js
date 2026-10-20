@@ -1663,7 +1663,7 @@ export function withV52LevelRuntime(BaseEngine) {
 
     activateTracker(actor = this.player) {
       const activated = super.activateTracker(actor);
-      if (!activated || !this.missionVentNetworkV62) return activated;
+      if (!activated || this.motionTrackerOwnsHudV160 || !this.missionVentNetworkV62) return activated;
       const contacts = this.createMissionVentContactOutputsV62(actor)
         .filter((output) => output.tracker.actorKind === 'enemy' && output.tracker.strength > 0)
         .map((output) => ({

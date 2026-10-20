@@ -1,0 +1,474 @@
+{
+  "schema": 160,
+  "scope": "Documentary records for four explicitly requested V160 workstreams. Local game art, official illustrations, generic CMU motion data, historical pages and unavailable candidates are distinct; no record certifies motion 1:1 or asset reuse.",
+  "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+  "historicalReferencesV159": {
+    "path": "docs/forge/xeno-trials/references-v159.json",
+    "sha256": "c01452cecc0ad6b4165e194ba9c69811eca6b281a2e6307b29f436181ed04a71",
+    "sources": 15,
+    "mappings": 96,
+    "inheritedTaskRows": 68,
+    "motionReferences": 0,
+    "approved1to1": 0,
+    "historicalMappingStateIsCurrentDelivery": false
+  },
+  "sourceRows": [
+    {
+      "id": "V160-REF-001",
+      "domains": [
+        "C160-TRACKER"
+      ],
+      "kind": "official-manual-text",
+      "work": "Alien: Isolation — The Collection",
+      "editionObserved": "Official Feral Steam manual, latest URL; exact gameplay build unknown",
+      "url": "https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/",
+      "sha256": "b34ad1fbd9b69888fea05ee886fdf95278ce8018654c79c06ea0b5e06b79cd22",
+      "inheritedSourceId": "V159-REF-009",
+      "locator": "Motion Tracker section, extracted text lines 436–449; HTML image at line 513",
+      "actuallyRead": true,
+      "visualReference": false,
+      "proves": [
+        "Movement-only contacts; stationary hostiles do not appear.",
+        "Forward cone with flashing dots, side/rear quarter sectors, nearest movement distance, objective direction marker.",
+        "Audible tracker beeps can reveal the user location."
+      ],
+      "doesNotProve": [
+        "M314 Aliens-film identity or exact display.",
+        "Exact scan range in metres, update rate, angular cone degrees or beep timing.",
+        "IFF enemy/friend/species identification or all-deck omniscience."
+      ],
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-002",
+      "domains": [
+        "C160-TRACKER"
+      ],
+      "kind": "official-manual-illustration",
+      "work": "Alien: Isolation — The Collection",
+      "editionObserved": "Official Feral manual illustration; exact gameplay build unknown",
+      "url": "https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/motion_tracker.jpg",
+      "sha256": "ac5ef11291d013636ee8bac24b110197eea155f7cda732ff3bfccfd348f57b07",
+      "httpStatus": 200,
+      "nativeDimensions": [
+        443,
+        443
+      ],
+      "locator": "Official manual img#motiontrackerimg; image retrieved through same allowed host",
+      "actuallyVisuallyInspected": true,
+      "proves": [
+        "Green display with forward fan sector, arc markings and a luminous unclassified point.",
+        "A lower-left distance number is visible; the screenshot reads 0.59 without establishing a world-unit conversion.",
+        "Side indicators and a left edge rectangular marker are visible."
+      ],
+      "doesNotProve": [
+        "M314 Aliens-film model, matching physical casing, source unit scale or an orthographic display projection.",
+        "Actual motion timing or beep cadence from a still image."
+      ],
+      "canonical1to1Approved": false,
+      "reuseLicenceEstablished": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-003",
+      "domains": [
+        "C160-TRACKER"
+      ],
+      "kind": "unretrieved-candidate",
+      "work": "M314 Motion Tracker — article candidate",
+      "url": "https://avp.fandom.com/wiki/M314_Motion_Tracker",
+      "httpStatus": 402,
+      "actuallyVisuallyInspected": false,
+      "proves": [],
+      "doesNotProve": [
+        "The article contents, exact URL identity, M314 display, movement rules or range."
+      ],
+      "status": "CONTENT_NOT_RETRIEVED_SINGLE_ATTEMPT_NO_RETRY",
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-004",
+      "domains": [
+        "C160-WEAPONS"
+      ],
+      "kind": "official-labelled-weapons-image",
+      "work": "Aliens: Fireteam Elite — Pathogen",
+      "url": "https://www.aliensfireteamelite.com/images/uploads/7c1e86e6cde1368364bb3f0cdbeed260.jpg",
+      "sha256": "98a64bac9cbd09b69e9137b4c1a22b46e9e58d215b78e93e6cf95c579095912d",
+      "inheritedSourceId": "V159-REF-015",
+      "nativeDimensions": [
+        1920,
+        1080
+      ],
+      "actuallyVisuallyInspected": true,
+      "proves": [
+        "Labelled side silhouettes of EDS-93 Zadak Plasma Discharger, Thunderbolt Mk.2 Autocannon, LEM STG24 Storm Rifle and U1A2 GL Conversion.",
+        "Visible grips, stocks, support handles and barrel axes of those four models only."
+      ],
+      "doesNotProve": [
+        "M41A, M4A3 or other unpictured weapon geometry.",
+        "Human hand placement, shouldering, recoil, reload or per-frame timings.",
+        "Absolute physical dimensions from the montage."
+      ],
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-005",
+      "domains": [
+        "C160-CAMPAIGN"
+      ],
+      "kind": "official-film-synopsis",
+      "work": "Aliens (1986)",
+      "url": "https://www.20thcenturystudios.com/movies/aliens",
+      "sha256": "29ac5109cfbdb1fcf53b9acb7e7a41e03a91ba6a2415ad51b5732be2c927c581",
+      "inheritedSourceId": "V159-REF-010",
+      "locator": "Extracted text line 23 synopsis; no film frames recovered",
+      "actuallyRead": true,
+      "proves": [
+        "Ripley returns from hypersleep after 57 years; lost contact with colonists leads to a military expedition."
+      ],
+      "doesNotProve": [
+        "Tantalus, Echo-9, Mire-9 or the project original storyline.",
+        "Cinematic shot timing, blocking, camera interpolation, gestures or dialogue exactness."
+      ],
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-006",
+      "domains": [
+        "C160-CAMPAIGN",
+        "C160-PLAYER"
+      ],
+      "kind": "official-promotional-video-limited-framing",
+      "work": "Aliens: Fireteam Elite — Pathogen",
+      "url": "https://www.aliensfireteamelite.com/assets/html5/loop_desktop.mp4",
+      "sha256": "45e805ec67b0be20fe195d53efbdb246734b7f6746f0bef89f9c756adc346449",
+      "editionObserved": "Pathogen visible on the closing title card; actual game build unknown",
+      "frameRateRational": "60000/1001",
+      "frameCount": 362,
+      "durationSeconds": 6.039367,
+      "proves": [
+        "The official montage advertises Pathogen; one environment establishing shot is identified at 1.001 s."
+      ],
+      "doesNotProve": [
+        "A complete unobstructed human gait or arm cycle.",
+        "Actual gameplay speed, exact build, skeletal proportions or inter-shot timing in the game.",
+        "A canonical Tantalus scene."
+      ],
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-007",
+      "domains": [
+        "C160-PLAYER",
+        "C160-WEAPONS"
+      ],
+      "kind": "existing-native-game-art-not-external-evidence",
+      "work": "Echo-9 modular colonial artwork",
+      "editionObserved": "Project baseline 4fc9da8, generated adapted sprite parts",
+      "actuallyVisuallyInspected": true,
+      "proves": [
+        "The native leg part contains pelvis, femur, shin and boot sprites with individual attachment openings.",
+        "Native torso armour and tracker artwork can be used as the project visual style baseline."
+      ],
+      "doesNotProve": [
+        "Film-accurate uniform details, true anatomical joint locations or movie tracker identity.",
+        "A generated atlas is not an external canon source."
+      ],
+      "canonical1to1Approved": false,
+      "baselineSha256": {
+        "assets/openai/sprites/player/colonial-v129/uscm-legs-v129.png": "862d7afa275ee54d78e031d68ed461255804b3b5ad4d7534ba8fa2018a99165f",
+        "assets/openai/sprites/player/colonial-v129/uscm-torso-right-v129.png": "6be09c3d5ef197b0e1d343c530ec70a2eb13b03c1d2c7ca620c96f8dc7218cc5",
+        "assets/openai/sprites/tools/m314-motion-tracker-use-sheet.png": "021536b998dbae4c7e6a17e4e65d3ad26b30877fcb59288a9f80d5b2041c623a"
+      },
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-008",
+      "domains": [
+        "C160-PLAYER"
+      ],
+      "kind": "missing-biomechanics-reference",
+      "work": "Human lower-limb biomechanics and body proportions",
+      "status": "NO_AUTHORITATIVE_SOURCE_RETRIEVED",
+      "proves": [],
+      "doesNotProve": [
+        "Any exact universal knee/hip degree limit, body/head ratio, walking stride or duty factor."
+      ],
+      "engineeringCriteriaOnly": [
+        "Constant bone lengths and feasible IK triangle reach.",
+        "Stable knee bending side relative to facing; no reverse hinge through full extension.",
+        "Planted foot does not slide in world space during support.",
+        "No pose or facing change separates waist/belt and hip registration.",
+        "Neutral alpha stature measured against native NPCs on the same floor; no transparent-cell-size comparison."
+      ],
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-009",
+      "domains": [
+        "C160-PLAYER",
+        "C160-CAMPAIGN"
+      ],
+      "kind": "missing-requested-game-reference",
+      "work": "Terminator 2D: NO FATE",
+      "status": "NO_EXACT_LOCAL_SOURCE_OR_TIME_CODE_FOUND",
+      "proves": [],
+      "doesNotProve": [
+        "A matching animation cycle, directional aiming implementation, room perspective or cinematics."
+      ],
+      "networkAttempted": false,
+      "reason": "No exact local reference; required publisher/video hosts are outside the current custom nine-host policy. No new host or blocked CDN was queried.",
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:30:51.028624+00:00",
+      "recordingStage": "initial-nine-record-research-snapshot"
+    },
+    {
+      "id": "V160-REF-010",
+      "domains": [
+        "C160-PLAYER"
+      ],
+      "kind": "generic-human-motion-capture-reference",
+      "work": "CMU Graphics Lab Motion Capture Database — subject 02, trial 01, walk",
+      "status": "GENERIC_MOCAP_GEOMETRY_RETRIEVED_AND_ANALYSED",
+      "sourceRepository": "https://github.com/una-dinosauria/cmu-mocap",
+      "sourceCommit": "09a07f54f3bbb58797325f009282d0b2048a2871",
+      "sourceUrl": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/data/002/02_01.bvh",
+      "sourceSha256": "cf56db43157acc3d200b3d4215523f54d354a8926bea67e1f6c8031bd335ba7e",
+      "observedAt": "2026-10-20T09:34:03.191074+00:00",
+      "inputs": [
+        {
+          "role": "converted-motion-data",
+          "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/data/002/02_01.bvh",
+          "sha256": "cf56db43157acc3d200b3d4215523f54d354a8926bea67e1f6c8031bd335ba7e",
+          "httpStatus": 200,
+          "bytes": 260091,
+          "observedAt": "2026-10-20T09:34:03.191074+00:00"
+        },
+        {
+          "role": "conversion-provenance-and-rights-statement",
+          "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/READMEFIRST.txt",
+          "sha256": "8e6fe2e640b3728ef2e43e722cb5ae9cdf0010028c0517c4226ed165f9037930",
+          "httpStatus": 200,
+          "bytes": 13248,
+          "observedAt": "2026-10-20T09:34:38.960385+00:00"
+        },
+        {
+          "role": "mirror-provenance",
+          "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/README.md",
+          "sha256": "1dff3f1b6cd54dd2375d8151f2b2eb112714ac2102778461c9245b37531b0ce9",
+          "httpStatus": 200,
+          "bytes": 512,
+          "observedAt": "2026-10-20T09:34:02.049899+00:00"
+        },
+        {
+          "role": "sequence-description",
+          "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/cmu-mocap-index-text.txt",
+          "sha256": "b611669b7e8e4cb653cbda3b47ebc42c4151d019e4d28f2ed3e052e4e240ffbd",
+          "httpStatus": 200,
+          "bytes": 68400,
+          "observedAt": "2026-10-20T09:34:39.848137+00:00"
+        }
+      ],
+      "originalDataFormat": "ASF/AMC according to conversion README; original ASF/AMC files not fetched",
+      "originalAsfUrl": null,
+      "originalAsfSha256": null,
+      "originalAmcUrl": null,
+      "originalAmcSha256": null,
+      "primaryDatasetWebsite": "http://mocap.cs.cmu.edu/",
+      "primaryDatasetWebsiteFetched": false,
+      "conversion": "Bruce Hahne MotionBuilder-friendly BVH 2010 release; T-pose estimated and prepended",
+      "sequenceDescriptionLocator": "cmu-mocap-index-text.txt line 39: 02_01 walk",
+      "rightsObserved": {
+        "source": "READMEFIRST.txt USAGE RIGHTS section",
+        "statement": "The conversion README states that CMU places no use restrictions and the converter adds none, including research and commercial use.",
+        "acknowledgementRequested": "Data from mocap.cs.cmu.edu; database funded by NSF EIA-0196217.",
+        "primaryWebsiteTermsIndependentlyFetched": false,
+        "formalLicenceIdentifier": null
+      },
+      "rig": {
+        "format": "BVH hierarchy with declared channel order Zrotation Yrotation Xrotation",
+        "jointsOfInterest": [
+          "LeftUpLeg",
+          "LeftLeg",
+          "LeftFoot",
+          "RightUpLeg",
+          "RightLeg",
+          "RightFoot"
+        ],
+        "nodesIncludingEndSites": 38,
+        "channels": 96,
+        "addedTposeFrame": 0,
+        "totalFrames": 344,
+        "motionFrames": 343,
+        "frameTimeSeconds": 0.0083333,
+        "sampleRateApproxHz": 120.00048000192001,
+        "motionDurationSeconds": 2.8583219
+      },
+      "analysis": {
+        "method": "3D forward kinematics through complete hierarchy; geometric knee angle between femur and shank; side-view plane uses root travel direction and world vertical.",
+        "normalization": {
+          "method": "Vertical extent all joints/end sites of added frame 0 T-pose; source units unestablished, not metres",
+          "heightSourceUnits": 26.083212941504545
+        },
+        "leftKneeFlexDeg": {
+          "min": 8.564732728055139,
+          "max": 73.45592544744053,
+          "p05": 11.71513201666872,
+          "p95": 71.28494530686802
+        },
+        "rightKneeFlexDeg": {
+          "min": 8.978412108138107,
+          "max": 73.40292273311906,
+          "p05": 11.535577851222802,
+          "p95": 71.20995258797669
+        },
+        "visualizationCycleEstimate": {
+          "frames": 133,
+          "seconds": 1.1083289,
+          "correlation": 0.9955498978326179,
+          "scope": "For plotting only; no clinical cadence or exact phase registration."
+        },
+        "plotsActuallyViewed": 3,
+        "sourceRigCalibrationClinical": false,
+        "speedOrPhaseMatchedToGame": false
+      },
+      "limits": [
+        "One walk capture by one performer, not universal joint limits or a canonical franchise animation.",
+        "READMEFIRST explicitly warns CMU joint calibration/T-pose are guessed and source motion may contain impossible head angles/noise.",
+        "Frame 0 is synthetic added T-pose; excluded from motion extrema.",
+        "Knee flexion measured from 3D segment geometry; hip-like value uses world vertical/travel plane, not calibrated anatomical pelvis joint angle.",
+        "Source game speed, phase, mapping near/far vs left/right differ; no 1:1 certification or direct target degree constraint.",
+        "Source units, subject anthropometry and marker calibration not established.",
+        "This source does not certify an Aliens, Terminator or other franchise animation.",
+        "Finger/thumb motion is not captured according to the README; cannot validate weapon grip animation.",
+        "No BVH, raw capture, PNG or private trace is proposed for the public repository."
+      ],
+      "canonicalFranchiseHumanMotionReferences": 0,
+      "genericHumanMocapReferences": 1,
+      "approved1to1": 0,
+      "artClosed": 0,
+      "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/09a07f54f3bbb58797325f009282d0b2048a2871/data/002/02_01.bvh",
+      "sha256": "cf56db43157acc3d200b3d4215523f54d354a8926bea67e1f6c8031bd335ba7e",
+      "editionObserved": "Bruce Hahne MotionBuilder-friendly BVH 2010 release; T-pose estimated and prepended",
+      "frames": 344,
+      "motionFrames": 343,
+      "calibrationFrameExcluded": 0,
+      "canonical1to1Approved": false,
+      "recordedAt": "2026-10-20T09:34:03.191074+00:00",
+      "recordingStage": "later-generic-human-complement-to-initial-research",
+      "proves": [
+        "One identified generic human walk is available as a converted CMU BVH with 343 motion frames after excluding the synthetic added T-pose.",
+        "The declared hierarchy and samples support exploratory geometric knee/segment comparison, using estimated scale and side projection only.",
+        "The mirror conversion README rights statement was actually read; the primary CMU terms were not independently fetched."
+      ],
+      "doesNotProve": [
+        "One walk capture by one performer, not universal joint limits or a canonical franchise animation.",
+        "READMEFIRST explicitly warns CMU joint calibration/T-pose are guessed and source motion may contain impossible head angles/noise.",
+        "Frame 0 is synthetic added T-pose; excluded from motion extrema.",
+        "Knee flexion measured from 3D segment geometry; hip-like value uses world vertical/travel plane, not calibrated anatomical pelvis joint angle.",
+        "Source game speed, phase, mapping near/far vs left/right differ; no 1:1 certification or direct target degree constraint.",
+        "Source units, subject anthropometry and marker calibration not established.",
+        "This source does not certify an Aliens, Terminator or other franchise animation.",
+        "Finger/thumb motion is not captured according to the README; cannot validate weapon grip animation.",
+        "No BVH, raw capture, PNG or private trace is proposed for the public repository."
+      ]
+    }
+  ],
+  "initialNineRecordsAt": "2026-10-20T09:30:51.028624+00:00",
+  "laterGenericMocapObservedAt": "2026-10-20T09:34:03.191074+00:00",
+  "newOfficialImagesRetrievedAndViewed": 1,
+  "genericHumanMocapReferences": 1,
+  "franchiseSpecificHumanMotionReferences": 0,
+  "exactHumanMotionReferences": 0,
+  "exactHumanMotionScope": "franchise-specific named character",
+  "exactM314References": 0,
+  "artClosuresAdded": 0,
+  "approved1to1Added": 0,
+  "comparisonProtocols": {
+    "C160-PLAYER": {
+      "units": "world pixels and normalized skeleton lengths, not metres",
+      "capturePairs": [
+        "Neutral left/right next to the same human NPC and floor.",
+        "At least one full slow walking cycle left/right, running cycle, brake and restart.",
+        "Crouch idle/move, jump ascent/apex/landing, ladder step and vent entry/exit.",
+        "Same camera zoom, viewport, outfit, neutral pose and known Save-picker fixture before/after."
+      ],
+      "metrics": [
+        "Silhouette alpha height/width and skull/waist/hip/floor landmarks.",
+        "Distance between registered belt and pelvis centres; same single anatomical frame in both facings.",
+        "Femur/shank world length constant across all poses; triangle reach remains feasible.",
+        "Support-foot drift, knee bending direction, pelvis/torso continuity and clearance during swing.",
+        "Frame-to-frame displacement/angle continuity, plus pause/read-only draw idempotence."
+      ],
+      "passConditions": [
+        "No detached waist, reversed knee, below-floor sole or visibly rescaled leg across postures.",
+        "Numeric constraints are engineering plausibility checks; external anatomical 1:1 remains unapproved."
+      ]
+    },
+    "C160-TRACKER": {
+      "capturePairs": [
+        "Empty scan, one moving front contact, same actor stopped, rear/side movement and multiple actors.",
+        "Left/right facing, changing deck/room, active cinematic/pause and resume.",
+        "Tracker absent/unselected and no hidden actor ID/species labels."
+      ],
+      "metrics": [
+        "Screen centre and direction map to the player pose in the active coordinate chart.",
+        "Range and distance use explicitly named game units; radar radius boundary matches the actual filter.",
+        "Contacts require measured actor movement; user movement alone cannot animate a stationary entity.",
+        "Scan refresh and beep schedule advance by simulation time and hold during pause."
+      ],
+      "passConditions": [
+        "UI compared to official Isolation illustration as an attributed adaptation, not a faithful M314 recreation.",
+        "No wall-occlusion or deck omniscience claimed as movie canon."
+      ]
+    },
+    "C160-WEAPONS": {
+      "capturePairs": [
+        "Primary/sidearm/heavy or launcher in both facings.",
+        "Eight aim directions, muzzle shot onset, recoil recovery and reload stages.",
+        "Crouching, moving, aiming backwards and tracker/tool swap."
+      ],
+      "metrics": [
+        "Grip/hand and stock/shoulder anchor residuals after their actual shared matrices.",
+        "Rendered barrel axis intersects actual projectile origin/velocity, with no backwards muzzle flash.",
+        "No arm IK beyond reachable length; bone lengths invariant after tool/weapon swaps.",
+        "Local silhouette ratios compared only with an identified corresponding model source."
+      ],
+      "passConditions": [
+        "No firearm-size claim from mixed-source image grids.",
+        "Unpictured M41A or other models retain source gaps."
+      ]
+    },
+    "C160-CAMPAIGN": {
+      "capturePairs": [
+        "Opening shot→interactive choice→mission consequence→return/debrief.",
+        "Same sequence after Save reload, reduced-motion, skip and failure."
+      ],
+      "metrics": [
+        "Scene geography and character blocking agree with the following playable room.",
+        "Choice text, actual persisted consequence and return dialogue refer to the same event.",
+        "Skip/replay cannot duplicate rewards or skip required gameplay state.",
+        "Camera/text fit same viewport and remain usable in small-screen layouts."
+      ],
+      "passConditions": [
+        "Original Tantalus story is labelled as project fiction; film synopsis is context only.",
+        "Promotional framing is inspiration, not proof of exact cinematic duration or a canonical scene."
+      ]
+    }
+  }
+}

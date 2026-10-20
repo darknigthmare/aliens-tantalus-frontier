@@ -142,7 +142,16 @@ test('a busy teammate refuses the whole transition without cancelling their task
 
 test('native bullets are frozen in their room and restore their real operator owner on return', t => {
   const runtime = start(t), { engine } = runtime; reachDoor(runtime);
+  // At interaction range the closed door correctly withdraws a forward gun.
+  // Use the native directional lock to fire into the clear space above it.
+  engine.keys.add('ShiftLeft'); engine.keys.add('KeyW');
+  engine.resolvePlayerCombatAimV83(engine.player);
+  const held = engine.resolvePlayerWeaponPoseV125(engine.player, engine.player.combatAimV83,
+    { requireReady: false, shotPreviewV160: true });
+  assert.equal(held.armReachV160.feasible, true); assert.equal(held.weaponWithdrawalV160, undefined);
   const ammo = engine.player.ammo; assert.equal(engine.fire(engine.player), true); assert.equal(engine.player.ammo, ammo - 1);
+  assert.equal(engine.bullets.at(-1).vx, 0); assert.ok(engine.bullets.at(-1).vy < 0);
+  engine.keys.delete('ShiftLeft'); engine.keys.delete('KeyW');
   assert.ok(engine.bullets.some(bullet => bullet.owner === engine.player)); const sourceBullets = engine.bullets.length;
   key(runtime); assert.equal(engine.bullets.length, 0); assert.equal(engine.player.ammo, ammo - 1);
   key(runtime); assert.equal(engine.forgeActiveRoomIdV141, 'a'); assert.equal(engine.bullets.length, sourceBullets);

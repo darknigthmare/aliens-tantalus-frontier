@@ -45,6 +45,9 @@ import {
 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
+import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
+import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
+import { withHubMotionTrackerV160 } from './motion-tracker-v160.js';
 import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
@@ -258,7 +261,7 @@ const NativeHubGame = [
   withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
-const HubGame = withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame));
+const HubGame = withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -1394,6 +1397,12 @@ function renderAdvanced() {
 }
 
 function renderOperationPlan() {
+  // Preserve a genuine existing QZ-18 return, including older saves, before
+  // any subsequent plan can replace strategy.lastOperation. No reward/read.
+  try {
+    const candidate = clone(saveSystem.data);
+    if (preserveCampaignStoryReturnV160(candidate).changed) saveSystem.commit(candidate);
+  } catch (error) { toast(error.message); }
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
     || CAMPAIGNS.find((entry) => saveSystem.data.galaxy.unlockedWorldIds.includes(entry.worldId));
@@ -1442,6 +1451,20 @@ function renderOperationPlan() {
   byId('operation-launch').onclick = () => launchCampaign(campaign);
   const abandonButton = byId('operation-abandon-v69');
   if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
+  mountCampaignDebriefV160(byId('operation-plan'), {
+    save: saveSystem.data,
+    campaignId: campaign.id,
+    onReview: (operationId, topicId) => {
+      try {
+        const candidate = clone(saveSystem.data);
+        const result = recordCampaignStoryReviewV160(candidate, operationId, topicId);
+        if (!result.ok) return;
+        if (result.changed) saveSystem.commit(candidate);
+        renderOperationPlan();
+        byId('operation-plan').querySelector(`[data-campaign-story-topic="${topicId}"]`)?.focus({ preventScroll: true });
+      } catch (error) { toast(error.message); }
+    }
+  });
   // This render may have selected the first unlocked fallback campaign. Keep
   // the player selector synchronized with that exact displayed manifesto.
   renderCommandMissionsV110();
@@ -2444,12 +2467,16 @@ function campaignObjectiveLabel(campaignId) {
 }
 
 function startMissionInsertionV62(context) {
-  // These operations own their opening/objectives, not the generic squad insertion.
-  if (isSoloSpecialOperationV131(context.campaign?.id)) {
+  const operation = saveSystem.data.strategy.currentOperation;
+  const authoredStory = hasCampaignStoryV160(context.campaign?.id);
+  // Preserve mid-mission saves from before this authored opening existed.
+  // An insertion paused before deployment still has its own durable phase.
+  const legacyStoryResume = authoredStory && context.deployment?.resumed
+    && operation?.resumeState && !operation.insertionState;
+  if (isSoloSpecialOperationV131(context.campaign?.id) && (!authoredStory || legacyStoryResume)) {
     startMissionRuntimeV62(context);
     return;
   }
-  const operation = saveSystem.data.strategy.currentOperation;
   if (!operation) {
     startMissionRuntimeV62(context);
     return;
@@ -2488,13 +2515,14 @@ function startMissionInsertionV62(context) {
     root,
     state,
     mediaRegistry: MISSION_INSERTION_MEDIA_V62,
-    returnContext: 'operations',
+    returnContext: 'command',
+    reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
     onPersist: (serialized, metadata) => {
       const current = saveSystem.data.strategy.currentOperation;
       if (!current || current.id !== operation.id) return;
       current.insertionState = clone(serialized);
       saveSystem.commit();
-      if (metadata.reason === 'pause') queueMicrotask(() => showView('operations'));
+      if (metadata.reason === 'pause') queueMicrotask(() => showView('command'));
     },
     onHooks: handleMissionInsertionHooksV62,
     onComplete: ({ state: completedState, readReceipt }) => {
@@ -2839,7 +2867,7 @@ function handleGameEvent(event) {
       return;
     }
     pendingResolutionV121 = null;
-    byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
+    byId('retreat-mission').textContent = 'RETOUR À BORD';
     log.textContent = outcome.result;
     toast(outcome?.success
       ? 'Victoire persistée : monde, équipage, économie et continuité mis à jour.'
@@ -3500,12 +3528,30 @@ function bindHoldControl(button, target, code) {
 }
 
 function setupRuntimeControls() {
+  const canActivateHubTracker = () => activeView === 'hub' && hubEngine.running && !creatorOwnerV84
+    && (ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest') && !hubEngine.isVentActiveV62?.();
+  const activateHubTracker = async () => {
+    if (!canActivateHubTracker()) return false;
+    const owner = hubOwnerV84, actor = hubEngine.player, generation = hubEngine.loopToken;
+    const tracker = hubEngine.motionTrackerStateV160, context = tracker?.context, pulse = tracker?.activationSerial;
+    const ready = audio.unlock();
+    if (audio.enabled && audio.volumes.master > 0 && audio.volumes.effects > 0 && audio.context?.state === 'suspended') {
+      // Both detector inputs resume inside the user gesture and wait for a
+      // playable cue, without carrying the request into a different scene.
+      await ready;
+      if (!canActivateHubTracker() || hubOwnerV84 !== owner || hubEngine.player !== actor || hubEngine.loopToken !== generation
+        || hubEngine.motionTrackerStateV160 !== tracker || tracker?.context !== context || tracker?.activationSerial !== pulse) return false;
+    }
+    return hubEngine.activateTracker();
+  };
   all('[data-hub-control]').forEach((button) => {
     hubControlBindingsV133.push(bindHubControlV133(button, {
       canActivate: () => activeView === 'hub' && hubEngine.running && !creatorOwnerV84
         && (ownsTimelineV84(hubOwnerV84) || standaloneContext === 'forge-playtest'),
       activate: control => {
-        audio.unlock(); hubEngine.setControl(control, true);
+        if (control === 'depth' && !hubEngine.isVentActiveV62?.()) return activateHubTracker();
+        audio.unlock();
+        hubEngine.setControl(control, true);
         // The canvas keydown handler calls useLift on W/S. Touch and focused
         // buttons need the same command, while still holding the ladder key.
         if (!hubEngine.hubTrainingV132?.active && ['up', 'down'].includes(control))
@@ -3529,6 +3575,13 @@ function setupRuntimeControls() {
   byId('mission-interact').onclick = () => engine.interact(engine.player);
   bindHoldControl(byId('mission-interact'), engine, 'KeyE');
   byId('mission-tracker').onclick = () => engine.activateTracker(engine.player);
+  globalThis.addEventListener('keydown', event => {
+    if (event.code !== 'KeyQ' || event.repeat || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey
+      || event.isComposing || !canActivateHubTracker()
+      || event.target?.closest?.('input,select,textarea,[contenteditable],button')) return;
+    event.preventDefault();
+    return activateHubTracker();
+  });
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
@@ -3658,6 +3711,7 @@ function bind() {
   };
   byId('menu-toggle').onclick = () => document.querySelector('.rail').classList.toggle('open');
   byId('quick-save').onclick = handleQuickSaveV86;
+  byId('mission-save-v160').onclick = handleQuickSaveV86;
   byId('return-title').onclick = () => {
     if (standaloneContext === 'forge-playtest') {
       returnToForgeContext();

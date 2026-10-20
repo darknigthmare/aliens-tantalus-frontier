@@ -331,7 +331,7 @@ export class GameEngine extends FinalGameEngine {
 
   activateTracker(player) {
     const activated = super.activateTracker(player);
-    if (!activated || !this.vehicle?.occupied || !this.vehicle.observeBonus) return activated;
+    if (!activated || this.motionTrackerOwnsHudV160 || !this.vehicle?.occupied || !this.vehicle.observeBonus) return activated;
     const extra = this.enemies.filter((enemy) => enemy.alive && distance(player.inVehicle ? this.vehicle : player, enemy) < 900 + this.vehicle.observeBonus);
     for (const enemy of extra) enemy.revealed = Math.max(enemy.revealed, 4);
     this.tracker.contacts = [...new Map([...this.tracker.contacts, ...extra.map((enemy) => ({ id: enemy.id, x: Math.round(enemy.x), y: Math.round(enemy.y), threat: enemy.isBoss ? 'boss' : enemy.behavior }))].map((contact) => [contact.id, contact])).values()];

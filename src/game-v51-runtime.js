@@ -1506,7 +1506,10 @@ export class GameEngine {
     this.tracker.pulses += 1;
     this.trackerPulse = 1;
     this.setToolAnimation(player, 'motion-tracker', 0.7);
-    const contacts = this.enemies.filter((enemy) => enemy.alive && distanceBetween(player, enemy) < 900);
+    // The V160 device owns measured acquisition after its sweep. Publishing a
+    // second instantaneous enemy-only scan would leak identity/counts first.
+    const contacts = this.motionTrackerOwnsHudV160 ? []
+      : this.enemies.filter((enemy) => enemy.alive && distanceBetween(player, enemy) < 900);
     for (const enemy of contacts) {
       enemy.revealed = 4;
       if (distanceBetween(player, enemy) < 360) enemy.alert = true;
@@ -2541,7 +2544,7 @@ export class GameEngine {
       ctx.strokeStyle = '#86c797'; ctx.strokeRect((LOGICAL_WIDTH - width) / 2 + 0.5, 654.5, width, 38);
       ctx.fillStyle = '#c7e7ce'; ctx.textAlign = 'center'; ctx.fillText(prompt, LOGICAL_WIDTH / 2, 678); ctx.textAlign = 'left';
     }
-    if (this.trackerPulse > 0) {
+    if (this.trackerPulse > 0 && !this.motionTrackerOwnsHudV160) {
       ctx.fillStyle = 'rgba(4, 18, 12, .88)'; ctx.fillRect(1072, 18, 170, 152);
       ctx.strokeStyle = '#689177'; ctx.strokeRect(1072.5, 18.5, 170, 152);
       ctx.strokeStyle = `rgba(140, 232, 163, ${this.trackerPulse})`; ctx.lineWidth = 3;

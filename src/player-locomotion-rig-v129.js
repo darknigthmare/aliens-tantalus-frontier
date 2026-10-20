@@ -5,6 +5,7 @@ import { solvePlayerArmIKV125, playerBodyRigImageReadyV125 } from './player-body
 import { buildPlayerArticulatedLowerLayersV128 } from './player-transit-rig-v128.js';
 import { HUMAN_LEG_DIMENSIONS_V136, HUMAN_PELVIS_HEIGHT_V136, humanFootSwingV136, humanMotionEnvelopeV136,
   smoothHumanStepV136 } from './human-motion-v136.js';
+import { PLAYER_HUMAN_PROPORTIONS_V160, getPlayerTorsoAxisV160 } from './player-human-proportions-v160.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, finite(value, low)));
@@ -240,17 +241,22 @@ function solveLeg(hip, foot, scale, facing) {
 function stepContact(actor, state, side, scale, facing, crouching, staticAction) {
   const floor = actor.y + actor.h, center = actor.x + actor.w / 2;
   const { phase, swing, lift, offset, angle, swinging, hasStride } = stepShape(state, side, scale, crouching, staticAction);
-  const sole = point(center + facing * (side === 'near' ? 0 : 21) * scale + offset, floor - lift);
+  const sole = point(center + facing * (PLAYER_HUMAN_PROPORTIONS_V160.hips[side]
+    + PLAYER_HUMAN_PROPORTIONS_V160.soleFromAnkle) * scale + offset, floor - lift);
   return { point: sole, planted: lift < 1e-7 && (!state.moving || !swinging || !hasStride),
     phase, swing, lift, support: 'ground', ...footFromSole(sole, scale, facing, angle) };
 }
 
-/** Decorate an already selected V125/V127 body, preserving every original
- * upper-body field by reference. Weapon affine, muzzle, hand targets, torso
- * matrix and hitbox therefore remain byte-for-byte their accepted values.
+/** Decorate an already selected V125/V127 body. A support-owned rigid weight
+ * transfer moves its complete upper body and authoritative weapon together;
+ * appearance choices never alter that geometry, bones, feet or collision.
  * Transit V128 keeps its own ladder, casualty and revival contacts. */
 export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = actor?.appearanceV126,
   images = null, locomotionState = null, legDefinitions = {}, groundSupport = null } = {}) {
+  // Weapon resolution and drawing both call this decorator. Always solve from
+  // the same immutable native frame; a second draw cannot apply the weight
+  // transfer again or gradually move the thorax away from its own legs.
+  bodyRig = bodyRig?.baseBodyRigV160 || bodyRig;
   const anatomical = bodyRig?.modularAnchorsV127
     || PLAYER_MODULAR_RIG_ANCHORS_V126[bodyRig?.atlas]?.[bodyRig?.frame];
   const reason = !validActor(actor) ? 'invalid-actor' : !bodyRig?.eligible ? bodyRig?.reason || 'body-unavailable'
@@ -270,16 +276,17 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   const motionEnvelope = humanMotionEnvelopeV136(state, state.stride);
   const pelvisBob = grounded && !crouching && !staticAction ? .35 * (1 - Math.cos(state.cycles * Math.PI * 4)) * motionEnvelope : 0;
   const hipDrop = (crouching ? 6 : grounded && state.moving ? 6 : 4) + pelvisBob;
-  const hips = { near: point(waist.x - f * 9 * s, waist.y + hipDrop * s),
-    far: point(waist.x + f * 12 * s, waist.y + hipDrop * s) };
+  const hipOffset = PLAYER_HUMAN_PROPORTIONS_V160.hips;
+  const hips = { near: point(waist.x + f * hipOffset.near * s, waist.y + hipDrop * s),
+    far: point(waist.x + f * hipOffset.far * s, waist.y + hipDrop * s) };
   if (grounded && !staticAction) {
     // Keep the articulated skeleton over its physical foot axis; the pelvis
     // panel still connects to the actual authored belt above it. Anatomical
     // support below can lower these hips only as far as real leg reach needs.
     const center = actor.x + actor.w / 2;
     const height = crouching ? HUMAN_PELVIS_HEIGHT_V136.crouching : HUMAN_PELVIS_HEIGHT_V136.standing;
-    hips.near = point(center - f * 9 * s, floor - height * s + pelvisBob * s);
-    hips.far = point(center + f * 12 * s, hips.near.y);
+    hips.near = point(center + f * hipOffset.near * s, floor - height * s + pelvisBob * s);
+    hips.far = point(center + f * hipOffset.far * s, hips.near.y);
   }
   const legs = {}, requestedFeet = {}, contacts = { floorY: grounded ? floor : null, feet: { near: null, far: null } };
   for (const side of ['near', 'far']) {
@@ -345,25 +352,34 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       lift: contact.lift, reachClamped: leg.reachClamped,
       clearanceAdjusted };
   }
-  // The V125 full-body atlas's registered "waist" is its lower trouser seam.
-  // Its resting y sits below V139's femoral heads. Mapping the separated
-  // pelvis onto that seam inverted the pelvis and buried the thigh caps in
-  // the torso. Register the actual belt above the solved hip line instead;
-  // V142's body resolver already registers its horizontal axis on the belt.
-  // Only the trouser belt and jacket boundary change here. The supplied
-  // thorax affine, arms, weapon, head, collision, bones and contacts stay fixed.
+  // Keep one body above the solved support. V142 moved only the pelvis under
+  // a fixed thorax and hid the mismatch with a jacket clip. The same weight
+  // transfer now carries chest, neck, shoulders, arms and weapon together.
+  // The original foot pivot, collision and actual leg contacts stay fixed.
+  const weightTransfer = grounded && !staticAction ? point(
+    (hips.near.x + hips.far.x) / 2 - (actor.x + actor.w / 2),
+    hips.near.y - (floor - (crouching ? HUMAN_PELVIS_HEIGHT_V136.crouching : HUMAN_PELVIS_HEIGHT_V136.standing) * s)
+  ) : point(0, 0);
+  const translated = p => point(p.x + weightTransfer.x, p.y + weightTransfer.y);
+  const transfersWeight = Math.abs(weightTransfer.x) + Math.abs(weightTransfer.y) > 1e-9;
+  const bodyMatrix = transfersWeight ? { ...bodyRig.matrix, e: bodyRig.matrix.e + weightTransfer.x,
+    f: bodyRig.matrix.f + weightTransfer.y } : bodyRig.matrix;
+  const bodyShoulders = transfersWeight
+    ? Object.fromEntries(Object.entries(bodyRig.shoulders).map(([side, p]) => [side, translated(p)])) : bodyRig.shoulders;
+  const registeredWaist = translated(waist);
   const anatomicalBelt = grounded && !staticAction
-    ? point(waist.x, Math.min(waist.y, hips.near.y - 12 * s)) : waist;
+    ? point(registeredWaist.x, Math.min(registeredWaist.y, hips.near.y - 12 * s)) : waist;
   const lower = buildPlayerArticulatedLowerLayersV128({ waist: anatomicalBelt, hips, legs, scale: s, facing: f,
-    legDefinitions, pelvisBelt: grounded && !staticAction });
+    legDefinitions, pelvisBelt: grounded && !staticAction,
+    projectedHipSpread: PLAYER_HUMAN_PROPORTIONS_V160.sourceHipSpreadRatio });
   const relaxedTravel = grounded && !crouching && bodyRig.moving && bodyRig.atlas === 'locomotion'
     && !bodyRig.actionV127 && !actor.aimingV124 && !actor.aiming && !actor.reloading;
-  // The authored combat-ready walk neck sits 25 source pixels ahead of the
-  // belt (about twenty degrees). Ordinary travel uses the existing upright
-  // head and torso parts with a neutral six-pixel neck lead. Shoulder targets,
-  // the real belt and all combat affines remain the selected body's values.
-  const travelAnchors = relaxedTravel ? { ...anatomical, family: 'upright',
-    neck: point(anatomical.waist.x + 6, anatomical.neck.y) } : null;
+  // A service pocket is sewn to the trouser leg, not to an empty point below
+  // the belt. A fixed lowered point left the cloth whenever that thigh swung
+  // away during moving reloads. Bind it to the same rigid femur as its pixels.
+  const pocketLeg = legs.far, pocketFraction = PLAYER_HUMAN_PROPORTIONS_V160.servicePouchThighFraction;
+  const servicePouch = point(pocketLeg.hip.x + (pocketLeg.knee.x - pocketLeg.hip.x) * pocketFraction,
+    pocketLeg.hip.y + (pocketLeg.knee.y - pocketLeg.hip.y) * pocketFraction);
   const detail = { schema: 129, mode: !grounded ? 'airborne' : staticAction ? bodyRig.stance
     : state.moving ? crouching ? 'crouch-move' : state.gait : state.settleProgress < 1 ? 'settling' : 'idle',
     source: state.source, phase: mod(state.cycles), stride: state.stride,
@@ -375,11 +391,22 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       upperPosture: relaxedTravel ? 'upright-travel' : 'authored-action',
       duty: state.duty ?? C[state.gait].duty,
       flight: grounded && !Object.values(contacts.feet).some(foot => foot.planted) },
-    alignmentV142: { schema: 142, belt: anatomicalBelt, authoredLowerSeam: waist,
+    alignmentV142: { schema: 142, belt: anatomicalBelt, authoredLowerSeam: registeredWaist,
       hipAxis: point((hips.near.x + hips.far.x) / 2, hips.near.y),
       waistToHip: hips.near.y - anatomicalBelt.y,
-      source: grounded && !staticAction ? 'solved-hip-line-with-fixed-shoulders' : 'authored-action' }, legs, contacts };
-  const decorated = { ...bodyRig, ...(travelAnchors ? { modularAnchorsV127: travelAnchors } : {}),
+      source: grounded && !staticAction ? 'solved-hip-line-with-shared-upper-body' : 'authored-action' },
+    alignmentV160: { schema: 160, weightTransfer,
+      projectedHipSpan: Math.abs(hips.far.x - hips.near.x),
+      upperBodySource: 'complete-native-upper-pose-with-shared-weight-transfer',
+      bodyAndWeaponShareShoulders: true,
+      pouchAttachment: { part: 'far-thigh', fraction: pocketFraction, point: servicePouch } }, legs, contacts };
+  const decorated = { ...bodyRig, baseBodyRigV160: bodyRig, matrix: bodyMatrix,
+    torsoAxisV160: bodyRig.torsoAxisV160 || getPlayerTorsoAxisV160(bodyMatrix, anatomical, f),
+    shoulders: bodyShoulders, neutralGrip: transfersWeight ? translated(bodyRig.neutralGrip) : bodyRig.neutralGrip,
+    pouch: servicePouch,
+    sprite: transfersWeight ? { ...bodyRig.sprite, x: bodyRig.sprite.x + weightTransfer.x,
+      y: bodyRig.sprite.y + weightTransfer.y } : bodyRig.sprite,
+    weightTransferV160: weightTransfer,
     ...(grounded && !staticAction ? { modularBeltV142: anatomicalBelt } : {}),
     modularLowerLayersV128: lower, locomotionV129: detail };
   const modular = resolvePlayerModularRigV126({ bodyRig: decorated, appearance, images });

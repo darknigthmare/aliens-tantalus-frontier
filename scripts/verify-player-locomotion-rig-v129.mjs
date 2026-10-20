@@ -158,7 +158,7 @@ test('every declared stance foot stays at the same world contact while the opera
 
 test('walk/run transitions preserve both current trajectories and settle corrections only during actual movement', () => {
   for (const surface of ['mission', 'hub', 'bioforge']) for (const facing of [-1, 1])
-    for (const direction of [-1, 1]) for (const [from, to] of [[200, 300], [300, 200]]) {
+    for (const direction of [-1, 1]) for (const [from, to] of [[120, 270], [270, 120]]) {
       let subject = actor({ vx: direction * from, facing });
       let state = advancePlayerLocomotionStateV129(null, subject, 0, { surface });
       for (let tick = 1; tick <= 50; tick++) {
@@ -262,7 +262,7 @@ test('airborne legs tuck and extend with physical vertical velocity and never in
   assert.equal(rig(actor({ grounded: undefined })).contacts.floorY, null);
 });
 
-test('changing only the lower art leaves all accepted weapon affines, ports, hand targets and shoulders exact', () => {
+test('support weight moves the complete accepted weapon and body together without changing collision, lengths or source pixels', () => {
   for (const descriptor of WEAPONS.filter(item => resolveHeldWeaponProfileV125(item)?.portable))
     for (const patch of [{}, { aimingV124: true }, { crouching: true, aimingV124: true },
       { crouching: true, coverV124: { peeking: true, peekRise: 20 } },
@@ -271,12 +271,23 @@ test('changing only the lower art leaves all accepted weapon affines, ports, han
       const subject = freeze(actor(patch)), original = JSON.stringify(subject);
       const base = resolvePlayerBodyRigV125({ actor: subject, images, timeSeconds: 1 });
       const decorated = rig(subject, { bodyRig: base }); assert.equal(decorated.eligible, true);
-      for (const key of Object.keys(base)) assert.equal(decorated.bodyRig[key], base[key], `Original ${key} retained by reference/value.`);
+      for (const key of Object.keys(base).filter(key=>!['matrix','shoulders','sprite','neutralGrip','pouch'].includes(key)))
+        assert.equal(decorated.bodyRig[key], base[key], `Original ${key} retained by reference/value.`);
+      const transfer=decorated.alignmentV160.weightTransfer;
+      for(const side of ['near','far'])samePoint(decorated.bodyRig.shoulders[side],{
+        x:base.shoulders[side].x+transfer.x,y:base.shoulders[side].y+transfer.y},'One real shoulder frame');
       const options = { actor: subject, descriptor, aim: { x: 1, y: -.15 }, timeSeconds: 1 };
       const nativePose = getHeldWeaponPoseV125({ ...options, bodyRig: base });
       const segmentedPose = getHeldWeaponPoseV125({ ...options, bodyRig: decorated.bodyRig });
-      assert.deepEqual(segmentedPose, nativePose);
-      if (nativePose) assert.deepEqual(resolvePlayerArmPoseV125(decorated.bodyRig, segmentedPose), resolvePlayerArmPoseV125(base, nativePose));
+      assert.equal(Boolean(segmentedPose),Boolean(nativePose));
+      if(nativePose){
+        for(const key of ['a','b','c','d'])close(segmentedPose.matrix[key],nativePose.matrix[key],'Rigid weapon source affine');
+        for(const key of ['grip','support','muzzle','reloadPort','ejectionPort'])if(nativePose[key])samePoint(segmentedPose[key],{
+          x:nativePose[key].x+transfer.x,y:nativePose[key].y+transfer.y},'Every real weapon port follows the body');
+        const beforeArms=resolvePlayerArmPoseV125(base,nativePose),afterArms=resolvePlayerArmPoseV125(decorated.bodyRig,segmentedPose);
+        for(const side of ['near','far'])for(const key of ['shoulder','elbow','hand'])samePoint(afterArms[side][key],{
+          x:beforeArms[side][key].x+transfer.x,y:beforeArms[side][key].y+transfer.y},'The actual arm follows the same body frame');
+      }
       assert.equal(JSON.stringify(subject), original);
     }
 });

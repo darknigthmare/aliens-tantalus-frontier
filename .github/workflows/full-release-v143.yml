@@ -12,7 +12,7 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     env:
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
@@ -73,8 +73,27 @@ jobs:
           export ATF_PLAYER_QA_OUTPUT="$RUNNER_TEMP/atf-release-qa/player"
           export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           node scripts/qa-player-browser-v124.mjs 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player.log"
-      - name: Remaining production menu and tactical gameplay journeys
+      - name: Production V160 anatomy, motion detector and campaign journeys
+        id: continuation_v160
         if: ${{ !cancelled() && (steps.forge_checkpoint.outcome == 'success' || steps.forge_checkpoint.outcome == 'failure') && (steps.player_journey.outcome == 'success' || steps.player_journey.outcome == 'failure') }}
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/atf-release-qa/http-continuation-v160.log" 2>&1 &
+          continuation_server=$!
+          trap 'kill "$continuation_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_BASE_URL=http://127.0.0.1:4173
+          export ATF_PLAYWRIGHT_MODULE="$RUNNER_TEMP/atf-browser/node_modules/playwright/index.mjs"
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          # Run every V160 profile in order, retaining each report on failure.
+          status=0
+          python scripts/qa-player-anatomy-v160.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-release-qa/player-anatomy-v160" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/player-anatomy-v160.log" || { status=1; echo '::error title=Browser QA::qa-player-anatomy-v160.py failed; inspect its retained report.'; }
+          python scripts/qa-motion-tracker-v160.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-release-qa/motion-tracker-v160" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/motion-tracker-v160.log" || { status=1; echo '::error title=Browser QA::qa-motion-tracker-v160.py failed; inspect its retained report.'; }
+          python scripts/qa-campaign-story-v160.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-release-qa/campaign-story-v160" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/campaign-story-v160.log" || { status=1; echo '::error title=Browser QA::qa-campaign-story-v160.py failed; inspect its retained report.'; }
+          exit "$status"
+      - name: Remaining production menu and tactical gameplay journeys
+        if: ${{ !cancelled() && (steps.forge_checkpoint.outcome == 'success' || steps.forge_checkpoint.outcome == 'failure') && (steps.player_journey.outcome == 'success' || steps.player_journey.outcome == 'failure') && (steps.continuation_v160.outcome == 'success' || steps.continuation_v160.outcome == 'failure') }}
         shell: bash
         run: |
           set -o pipefail

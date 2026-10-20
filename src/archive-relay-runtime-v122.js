@@ -9,6 +9,16 @@ export const ARCHIVE_RELAY_PROPS_V122 = Object.freeze({
   freight: Object.freeze({ x: 1010, groundY: 570 }), analysis: Object.freeze({ x: 1150, groundY: 570 }),
   extraction: Object.freeze({ x: 1680, groundY: 570 })
 });
+/** One source of physical geometry for the mission and its insertion shots. */
+export function archiveRelayGeometryV122() {
+  return {
+    platforms: [{ id: 'qz18-floor', x: 0, y: 570, w: 1800, h: 38, floor: true, art: 'floor' },
+      { id: 'qz18-walkway', x: 350, y: 355, w: 750, h: 20, art: 'grate' }],
+    ladders: [{ id: 'qz18-ladder', x: 420, top: 355, bottom: 570, y: 355, w: 50, h: 215 }],
+    doors: [{ id: 'qz18-return-gate', x: 1390, y: 0, w: 50, h: 570, progress: 0, open: false, lockedBy: 'archive-relay', levelLocked: true }],
+    missionLevelBounds: { width: 1800, height: 620, voidY: 720 }
+  };
+}
 const clone = value => structuredClone(value);
 const near = (actor, prop, radius = 70) => Boolean(actor && prop && Math.hypot(
   actor.x + actor.w / 2 - prop.x, actor.y + actor.h - prop.groundY) <= radius);
@@ -43,10 +53,7 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
     }
     configureArchiveRelayWorldV122() {
       this.enemies = []; this.bullets = []; this.hostileProjectiles = []; this.drops = []; this.squadActors = []; this.coopEnabled = false;
-      this.platforms = [{ id: 'qz18-floor', x: 0, y: 570, w: 1800, h: 38, floor: true, art: 'floor' },
-        { id: 'qz18-walkway', x: 350, y: 355, w: 750, h: 20, art: 'grate' }];
-      this.ladders = [{ id: 'qz18-ladder', x: 420, top: 355, bottom: 570, y: 355, w: 50, h: 215 }];
-      this.doors = [{ id: 'qz18-return-gate', x: 1390, y: 0, w: 50, h: 570, progress: 0, open: false, lockedBy: 'archive-relay', levelLocked: true }];
+      Object.assign(this, archiveRelayGeometryV122());
       for (const key of ['walls', 'lifts', 'covers', 'hazards', 'vents', 'supplies', 'objectiveNodes', 'collectablesV68', 'narrativeCollectablesV68']) this[key] = [];
       this.powerNode = null; this.archiveTerminal = null; this.ventShortcut = null;
       if (this.weaponPickup) this.weaponPickup.taken = true; if (this.toolPickup) this.toolPickup.taken = true;
@@ -57,7 +64,7 @@ export function withArchiveRelayRuntimeV122(BaseEngine) {
       this.checkpoint = { id: 'insertion', x: this.player.x, y: this.player.y };
       this.missionVentNetworkV62 = null; this.missionVentActorsV62?.clear();
       this.missionLevelEvents?.clear(); this.missionLevelSpawns?.clear(); this.missionLevelTimers?.clear(); this.missionLevelExtractionTimer = null;
-      this.missionLevelBounds = { width: 1800, height: 620, voidY: 720 }; this.camera.x = 0; this.camera.y = 0;
+      this.camera.x = 0; this.camera.y = 0;
     }
     syncArchiveRelayWorldV122() {
       if (!this.isArchiveRelayV122() || !this.mission) return;

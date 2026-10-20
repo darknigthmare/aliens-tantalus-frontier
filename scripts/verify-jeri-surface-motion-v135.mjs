@@ -5,6 +5,7 @@ import { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } from '../src/hive-missions-
 import { createHiveControlV131 } from '../src/hive-control-v131.js';
 import { createJeriSurfaceStateV135, buildJeriSurfaceSceneV135, attachJeriSurfaceV135, stepJeriSurfaceV135,
   releaseJeriSurfaceV135, validateJeriSurfaceStateV135, findJeriSurfaceV135 } from '../src/jeri-surface-motion-v135.js';
+import { resolvePlayerTransitRigV128 } from '../src/player-transit-rig-v128.js';
 import { WORLDS, WEAPONS, ENEMIES } from '../src/content.js';
 
 const campaign = HIVE_CAMPAIGNS_V131[0], level = buildHiveMissionV131({ campaign });
@@ -104,6 +105,12 @@ test('native keyboard route, adhesion, paused inputs, resume and release keep in
   assert.ok(Math.abs(wallRig.bodyRig.standingHeight-96.5)<.01);
   assert.ok(Math.abs(wallRig.contacts.feet.near.point.x-1000)<5);
   assert.ok(Math.abs(wallRig.contacts.hands.near.point.x-1000)<6);
+  assert.equal(e.playerAppearanceLadderV128(e.player).physicalSurfaceFaceV135,'left');
+  for (const side of ['near','far']) {
+    assert.equal(wallRig.contacts.hands[side].reachClamped,false);
+    assert.ok(Math.abs(wallRig.contacts.hands[side].point.x-1000)<1e-6);
+    assert.deepEqual(wallRig.arms[side].hand,wallRig.contacts.hands[side].point);
+  }
   const charge=e.hiveV131.charge; tap(f,'KeyE'); assert.deepEqual(e.hiveV131.inspections,[]); assert.equal(e.hiveV131.charge,charge);
   hold(f,'KeyW',1.4);assert.equal(e.jeriSurfaceV135.face,'underside');
   const ceilingRig=e.resolvePlayerAppearanceTransitV128(e.player);
@@ -124,6 +131,56 @@ test('native keyboard route, adhesion, paused inputs, resume and release keep in
   tap(f,'Space');tick(e,.1);assert.equal(e.jeriSurfaceV135.mode,'free');tick(e,1);
   assert.equal(e.player.y,668);assert.equal(e.player.grounded,true);assert.equal(e.player.w,42);assert.equal(e.player.h,92);
   assert.equal(e.hiveV131.complete,false);assert.equal(e.hiveV131.rewardClaimed,false);e.stop();
+});
+test('native Jeri wall grips reach the real face through the whole climb before retaining the separate ceiling posture', () => {
+  const f=fixture(),e=f.engine;routeToWall(f);let wallSamples=0,ceilingSamples=0,plantedHands=0;
+  f.key('keydown','KeyW');
+  for (let frame=0;frame<84;frame++) {
+    const ladder=e.playerAppearanceLadderV128(e.player),rig=e.resolvePlayerAppearanceTransitV128(e.player);
+    assert.equal(rig.eligible,true);assert.equal(ladder.physicalSurfaceIdV135,e.jeriSurfaceV135.surfaceId);
+    for (const side of ['near','far']) {
+      const contact=rig.contacts.hands[side],arm=rig.arms[side];
+      assert.equal(contact.reachClamped,false);assert.equal(arm.reachClamped,false);
+      assert.equal(rig.legs[side].reachClamped,false);
+      assert.ok(arm.flexionDegrees>=-1e-6&&arm.flexionDegrees<=145+1e-6);
+      assert.ok(Math.abs(Math.hypot(arm.elbow.x-arm.shoulder.x,arm.elbow.y-arm.shoulder.y)-arm.upper)<1e-6);
+      assert.ok(Math.abs(Math.hypot(arm.hand.x-arm.elbow.x,arm.hand.y-arm.elbow.y)-arm.fore)<1e-6);
+      assert.deepEqual(arm.hand,contact.point);
+      if (ladder.physicalSurfaceFaceV135==='left') {
+        assert.ok(Math.abs(contact.point.x-ladder.x)<=5*rig.bodyRig.scale+1e-6);
+        if (contact.planted) {assert.ok(Math.abs(contact.point.x-ladder.x)<1e-6);plantedHands++;}
+      }
+    }
+    if (ladder.physicalSurfaceFaceV135==='left') {wallSamples++;assert.equal(ladder.x,1000);}
+    else {ceilingSamples++;assert.equal(ladder.physicalSurfaceFaceV135,'underside');assert.equal(ladder.x,e.player.x+e.player.w/2);}
+    assert.deepEqual(e.hiveV131.inspections,[]);assert.equal(e.hiveV131.bossReleased,false);
+    e.update(1/60);
+  }
+  f.key('keyup','KeyW');assert.ok(wallSamples>45&&ceilingSamples>0&&plantedHands>30);e.stop();
+});
+test('both authored Jeri wall faces retain reachable rigid hands and boots through every contact phase', () => {
+  const f=fixture(),e=f.engine;routeToWall(f);
+  const descriptor=e.playerAppearanceLadderV128(e.player),surface=e.jeriSurfaceSceneV135().solids.find(s=>s.id===descriptor.physicalSurfaceIdV135);
+  const options=e.playerAppearanceRigOptionsV127(e.player),state=e.observePlayerTransitV128(e.player),before=e.captureResumeState();
+  for (const facing of [-1,1]) for (let y=482;y<=668;y+=.125) {
+    const wallX=facing>0?surface.x:surface.x+surface.w;
+    const actor={...e.player,x:facing>0?wallX-e.player.w:wallX,y,facing};
+    const ladder={...descriptor,x:wallX,physicalSurfaceFaceV135:facing>0?'left':'right'};
+    const rig=resolvePlayerTransitRigV128({...options,actor,ladder,transitState:state});
+    assert.equal(rig.eligible,true);
+    for (const side of ['near','far']) {
+      const hand=rig.contacts.hands[side],foot=rig.contacts.feet[side];
+      assert.equal(hand.reachClamped,false);assert.equal(rig.arms[side].reachClamped,false);
+      assert.equal(rig.legs[side].reachClamped,false);
+      assert.deepEqual(hand.point,rig.arms[side].hand);assert.deepEqual(foot.point,rig.legs[side].sole);
+      assert.ok(rig.arms[side].flexionDegrees>=0&&rig.arms[side].flexionDegrees<=145);
+      if (hand.planted) assert.ok(Math.abs(hand.point.x-wallX)<1e-6);
+      if (foot.planted) assert.ok(Math.abs(foot.point.x-wallX)<=4);
+    }
+    assert.ok(Object.values(rig.contacts.hands).some(hand=>hand.planted));
+    assert.ok(Object.values(rig.contacts.feet).some(foot=>foot.planted));
+  }
+  assert.deepEqual(e.captureResumeState(),before);assert.deepEqual(e.hiveV131.inspections,[]);e.stop();
 });
 test('invalid contact resume is atomic, opened-door attachment is refused, legacy checkpoints migrate', () => {
   const f=fixture(),e=f.engine;routeToWall(f);const valid=e.captureResumeState();

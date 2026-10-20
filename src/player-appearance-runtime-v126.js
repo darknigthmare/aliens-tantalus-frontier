@@ -182,16 +182,22 @@ export function withPlayerAppearanceV126(Base) {
         resolvePlayerBodyRigV125(this.playerAppearanceRigOptionsV127(actor, options)));
     }
 
+    previewPlayerWeaponActorV160(actor) {
+      if ((actor === this.player || actor === this.coop) && finite(actor?.v52HurtClock) > 0
+        && !(finite(actor.shockClock) > 0)) {
+        const action = resolvePlayerActionStateV127(this.playerAppearanceRigOptionsV127(actor));
+        if (action.eligible && action.mode === 'hurt') return { ...actor, v52HurtClock: 0 };
+      }
+      return actor;
+    }
+
     beginPlayerWeaponShotV125(actor) {
       // Gameplay already accepted this response shot. End only Echo9's
       // cosmetic injury pose before V125 resolves the authoritative muzzle;
       // health, damage, electrical stun and action admission remain untouched.
       // Otherwise an allowed shot could leave an apparently holstered weapon.
-      if ((actor === this.player || actor === this.coop) && finite(actor?.v52HurtClock) > 0
-        && !(finite(actor.shockClock) > 0)) {
-        const action = resolvePlayerActionStateV127(this.playerAppearanceRigOptionsV127(actor));
-        if (action.eligible && action.mode === 'hurt') actor.v52HurtClock = 0;
-      }
+      const preview = this.previewPlayerWeaponActorV160(actor);
+      if (preview !== actor) actor.v52HurtClock = preview.v52HurtClock;
       return super.beginPlayerWeaponShotV125(actor);
     }
 

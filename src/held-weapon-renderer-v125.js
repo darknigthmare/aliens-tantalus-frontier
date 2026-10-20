@@ -1,12 +1,13 @@
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
+import { getPlayerArmReachV160, nearestReachableWeaponGripV160,
+  interpolatePlayerArmTargetV160 } from './player-arm-constraints-v160.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, value));
 const sign = value => finite(value, 1) < 0 ? -1 : 1;
 const point = (x, y) => ({ x, y });
 const validPoint = value => value && Number.isFinite(value.x) && Number.isFinite(value.y);
-const lerp = (a, b, t) => point(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t);
 const smooth = t => { const value = clamp(t); return value * value * (3 - 2 * value); };
 const transform = (matrix, value) => point(matrix.a * value.x + matrix.c * value.y + matrix.e,
   matrix.b * value.x + matrix.d * value.y + matrix.f);
@@ -17,6 +18,10 @@ export const HELD_WEAPON_SURFACE_HEIGHTS_V125 = Object.freeze({
   mission: HUMAN_VISUAL_CONTRACT_V133.standingHeight, hub: HUMAN_VISUAL_CONTRACT_V133.standingHeight,
   bioforge: HUMAN_VISUAL_CONTRACT_V133.standingHeight
 });
+// A source-level presentation choice shared by holding and servicing. Keep
+// the support elbow below a horizontal rifle, and never flip that branch at
+// a reload phase boundary to conceal a bad service contact.
+export const HELD_WEAPON_ARM_BRANCHES_V160 = Object.freeze({ near: 1, far: 1 });
 
 function unitAim(aim, actor) {
   const x = finite(aim?.x), y = finite(aim?.y);
@@ -49,8 +54,10 @@ function bodyGeometry(actor, rig, surface) {
       : point(shoulder.x + facing * standingHeight * .11, shoulder.y + standingHeight * .13),
     pouch: validPoint(rig?.pouch) ? rig.pouch
       : point(farShoulder.x + facing * standingHeight * .02, farShoulder.y + standingHeight * .27),
-    nearReach: finite(rig?.armLengths?.near?.upper) + finite(rig?.armLengths?.near?.fore),
-    farReach: finite(rig?.armLengths?.far?.upper) + finite(rig?.armLengths?.far?.fore)
+    nearLengths: rig?.armLengths?.near, farLengths: rig?.armLengths?.far,
+    shoulderAxes: rig?.torsoAxisV160 || (rig?.matrix ? {
+      forward: point(rig.matrix.a, rig.matrix.b), down: point(rig.matrix.c, rig.matrix.d)
+    } : null), facing
   };
 }
 
@@ -63,36 +70,36 @@ function reloadState(actor, profile) {
     feed: profile.reload.feed, result: active ? state.result || 'normal' : null };
 }
 
-function circleLimit(value, center, radius) {
-  if (!(radius > 0)) return value;
-  const dx = value.x - center.x, dy = value.y - center.y, distance = Math.hypot(dx, dy);
-  if (distance <= radius || distance === 0) return value;
-  return point(center.x + dx * radius / distance, center.y + dy * radius / distance);
-}
-
 /** Preserve one rigid weapon while putting both hands inside their arm reach.
  * Translating a complete image keeps the stock, bore and contact points intact;
  * stretching only a barrel or a wrist would make their apparent contact false. */
-function reachableGrip(grip, supportOffset, geometry, reloadOffset = null) {
-  let result = grip;
-  const nearReach = geometry.nearReach > 0 ? geometry.nearReach * .98 : 0;
-  const farReach = geometry.farReach > 0 ? geometry.farReach * .98 : 0;
+function reachableGrip(grip, supportOffset, geometry, reloadOffset = null, obstaclePlanes = []) {
+  const bands = [];
+  const add = (center, lengths, bend) => {
+    const reach = getPlayerArmReachV160(lengths);
+    if (!reach) return;
+    const margin = Math.min(.001, (reach.max - reach.min) / 4);
+    bands.push({ center, min: reach.min + margin,
+      max: Math.max(reach.min + margin, Math.min(reach.max - margin, reach.max * .98)),
+      lengths, axes: geometry.shoulderAxes, bend });
+  };
+  add(geometry.shoulder, geometry.nearLengths, HELD_WEAPON_ARM_BRANCHES_V160.near);
   // During a reload both the receiver port and foregrip must remain reachable.
-  // Every interpolation between those contacts and the reachable body pouch
-  // then lies inside the same arm-reach circle, including a downward heavy gun.
-  const centers = [supportOffset, reloadOffset].filter(Boolean)
-    .map(offset => point(geometry.farShoulder.x - offset.x, geometry.farShoulder.y - offset.y));
-  for (let index = 0; index < 8; index += 1) {
-    result = circleLimit(result, geometry.shoulder, nearReach);
-    for (const center of centers) result = circleLimit(result, center, farReach);
-  }
-  return circleLimit(result, geometry.shoulder, nearReach);
+  // Do not put a service port inside the elbow's folded inner reach simply
+  // because it fits inside its outer circle. The complete rigid weapon moves
+  // to the closest shared admissible region for trigger, foregrip and port.
+  for (const offset of [supportOffset, reloadOffset].filter(Boolean))
+    add(point(geometry.farShoulder.x - offset.x, geometry.farShoulder.y - offset.y), geometry.farLengths,
+      HELD_WEAPON_ARM_BRANCHES_V160.far);
+  return nearestReachableWeaponGripV160(grip, bands, geometry.facing, obstaclePlanes);
 }
 
-function servicePose(state, home, port, pouch, actor) {
+function servicePose(state, home, port, pouch, actor, geometry) {
   const progress = state.progress;
   if (!state.active || !port) return { hand: null, phase: 'idle' };
-  if (progress < .18) return { hand: lerp(home, port, smooth(progress / .18)), phase: 'reach' };
+  const travel = (from, to, amount) => interpolatePlayerArmTargetV160(from, to, amount,
+    geometry.farShoulder, geometry.farLengths, geometry.facing, geometry.shoulderAxes, HELD_WEAPON_ARM_BRANCHES_V160.far);
+  if (progress < .18) return { hand: travel(home, port, smooth(progress / .18)), phase: 'reach' };
   if (progress < .35) return { hand: port, phase: state.feed === 'cylinder' ? 'open-cylinder'
     : state.feed === 'tube' ? 'open-loading-port' : 'remove' };
   // Tube loading never poses a detachable box. Repeated hand trips are visual
@@ -101,13 +108,13 @@ function servicePose(state, home, port, pouch, actor) {
     const missing = Math.max(1, finite(actor.magazineSize, 1) - finite(actor.ammo));
     const cycles = Math.min(4, Math.ceil(missing));
     const cycle = ((progress - .35) / .49 * cycles) % 1;
-    return { hand: cycle < .5 ? lerp(port, pouch, smooth(cycle * 2)) : lerp(pouch, port, smooth((cycle - .5) * 2)),
+    return { hand: cycle < .5 ? travel(port, pouch, smooth(cycle * 2)) : travel(pouch, port, smooth((cycle - .5) * 2)),
       phase: cycle < .5 ? 'fetch-shell' : 'insert-shell' };
   }
-  if (progress < .53) return { hand: lerp(port, pouch, smooth((progress - .35) / .18)), phase: 'fetch' };
-  if (progress < .70) return { hand: lerp(pouch, port, smooth((progress - .53) / .17)), phase: 'insert' };
+  if (progress < .53) return { hand: travel(port, pouch, smooth((progress - .35) / .18)), phase: 'fetch' };
+  if (progress < .70) return { hand: travel(pouch, port, smooth((progress - .53) / .17)), phase: 'insert' };
   if (progress < .84) return { hand: port, phase: state.feed === 'cylinder' ? 'close-cylinder' : 'seat' };
-  return { hand: lerp(port, home, smooth((progress - .84) / .16)), phase: 'settle' };
+  return { hand: travel(port, home, smooth((progress - .84) / .16)), phase: 'settle' };
 }
 
 function boundsAt(profile, matrix) {
@@ -131,7 +138,7 @@ function muzzleWithPorts(muzzle, grip, direction, ejectionPort, reloadPort) {
  * A body rig supplies measured world shoulders and its constant standing height.
  * The source bore axis is distinct from the diagonal hand-to-muzzle segment. */
 export function getHeldWeaponPoseV125({ actor, descriptor, aim, bodyRig = null, surface = 'mission',
-  timeSeconds = 0, reducedMotion = false } = {}) {
+  timeSeconds = 0, reducedMotion = false, obstaclePlanesV160 = [] } = {}) {
   const profile = resolveHeldWeaponProfileV125(descriptor);
   if (!actor || !profile?.portable || bodyRig?.eligible === false || actor.alive === false || actor.downed
     || actor.inVehicle || actor.ventTransit || actor.climbing || actor.grappling
@@ -181,7 +188,14 @@ export function getHeldWeaponPoseV125({ actor, descriptor, aim, bodyRig = null, 
   const supportOffset = supportPixel ? transform(matrix, point(supportPixel.x - sourceGrip.x, supportPixel.y - sourceGrip.y)) : null;
   const reloadPixel = reload.active ? sourcePoint(profile, profile.reloadPivot) : null;
   const reloadOffset = reloadPixel ? transform(matrix, point(reloadPixel.x - sourceGrip.x, reloadPixel.y - sourceGrip.y)) : null;
-  grip = reachableGrip(grip, supportOffset, geometry, reloadOffset);
+  // Downward fire carries its trigger at or below the shoulder. Without this
+  // anatomical half-plane a close wall can select the disconnected solution
+  // above the head, then teleport the gun back below when that pocket closes.
+  const posturePlanes = vector.y > 1e-6 ? [{ normal: { x: 0, y: 1 }, offset: geometry.shoulder.y }] : [];
+  const originalReach = reachableGrip(grip, supportOffset, geometry, reloadOffset, posturePlanes);
+  const armReach = obstaclePlanesV160.length
+    ? reachableGrip(grip, supportOffset, geometry, reloadOffset, [...posturePlanes, ...obstaclePlanesV160]) : originalReach;
+  grip = armReach.grip;
   matrix.e = grip.x - matrix.a * sourceGrip.x - matrix.c * sourceGrip.y;
   matrix.f = grip.y - matrix.b * sourceGrip.x - matrix.d * sourceGrip.y;
 
@@ -194,7 +208,7 @@ export function getHeldWeaponPoseV125({ actor, descriptor, aim, bodyRig = null, 
   const ejectionPort = atPivot(profile, matrix, profile.ejectionPivot);
   const restHand = foregrip || point(geometry.farShoulder.x + vector.facing * geometry.standingHeight * .04,
     geometry.farShoulder.y + geometry.standingHeight * .25);
-  const service = servicePose(reload, restHand, reloadPort, geometry.pouch, actor);
+  const service = servicePose(reload, restHand, reloadPort, geometry.pouch, actor, geometry);
   const muzzle = muzzleWithPorts(atPivot(profile, matrix, profile.muzzlePivot), grip, direction, ejectionPort, reloadPort);
   return {
     schema: 125, profile, visible: true, imageKey: profile.imageKey, path: profile.path,
@@ -206,7 +220,13 @@ export function getHeldWeaponPoseV125({ actor, descriptor, aim, bodyRig = null, 
     muzzle, reloadPort, ejectionPort, handedness: profile.handedness,
     standingHeight: geometry.standingHeight, visibleBounds: boundsAt(profile, matrix),
     recoil, reloadProgress: reload.progress, reloadPhase: service.phase, reloadFeed: reload.feed,
-    reloading: reload.active, timeSeconds: time, translation: point(0, 0)
+    reloading: reload.active, timeSeconds: time,
+    translation: point(grip.x - originalReach.grip.x, grip.y - originalReach.grip.y),
+    armReachV160: { feasible: armReach.feasible, error: armReach.error,
+      obstacleConstrained: obstaclePlanesV160.length > 0 },
+    // One stable branch for each anatomical arm. Changing the far elbow only
+    // when reload begins would snap it across the shoulder-to-hand line.
+    armBendsV160: { ...HELD_WEAPON_ARM_BRANCHES_V160 }
   };
 }
 
@@ -226,7 +246,8 @@ export function translateHeldWeaponPoseV125(pose, dx = 0, dy = 0) {
     muzzle: muzzleWithPorts(moved(pose.muzzle), grip, point(pose.aimX, pose.aimY), ejectionPort, reloadPort),
     visibleBounds: { ...bounds, left: bounds.left + x, right: bounds.right + x,
       top: bounds.top + y, bottom: bounds.bottom + y, corners: bounds.corners.map(moved) },
-    translation: point(finite(pose.translation?.x) + x, finite(pose.translation?.y) + y) };
+    translation: point(finite(pose.translation?.x) + x, finite(pose.translation?.y) + y),
+    armReachV160: { feasible: false, error: null, reason: 'translated-without-reach-resolution' } };
 }
 
 /** The full native source is drawn once, with the same affine used for hands

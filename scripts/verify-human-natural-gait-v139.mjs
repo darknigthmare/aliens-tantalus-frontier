@@ -27,25 +27,30 @@ function observed(speed,{fps=120,facing=1,surface='hub',seconds=3}={}){
   return {subject,state,frames};
 }
 
-test('steady simulated travel has restrained thighs, useful foot clearance and rigid legs instead of a high-knee march',()=>{
+test('steady travel keeps rigid bones, a shared body frame and actual free-foot recovery without skating',()=>{
   for(const surface of ['hub','mission','bioforge'])for(const facing of [-1,1])for(const speed of [155,270,370]){
     const {frames}=observed(speed,{surface,facing}),steady=frames.filter(frame=>frame.state.entrance>=frame.state.stride);
     const hips=[];let maxLift=0,plantedPairs=0,previous=null;
     assert.ok(steady.length>120);
     for(const {subject,rig,body}of steady){
       assert.equal(rig.ready,true);assert.equal(subject.vx,speed*facing);
-      assert.equal(rig.bodyRig.matrix,body.matrix,'Lower-body balance cannot move an accepted weapon/body affine');
+      const transfer=rig.alignmentV160.weightTransfer;
+      close(rig.bodyRig.matrix.e-body.matrix.e,transfer.x);close(rig.bodyRig.matrix.f-body.matrix.f,transfer.y);
+      for(const side of ['near','far']){
+        close(rig.bodyRig.shoulders[side].x-body.shoulders[side].x,transfer.x);
+        close(rig.bodyRig.shoulders[side].y-body.shoulders[side].y,transfer.y);
+      }
       assert.ok(Math.abs(rig.legs.near.sole.x-rig.legs.far.sole.x)<55,'Boots cannot reproduce the former 63px running split');
       for(const side of ['near','far']){
         const leg=rig.legs[side],contact=rig.contacts.feet[side],angle=thighAngle(leg,facing);
-        assert.ok(angle>=-(speed===155?28:38)&&angle<=(speed===155?28:38),`${speed}: thigh ${angle}`);
+        assert.ok(angle>=-40&&angle<=55,`${speed}: finite forward/backward thigh ${angle}`);
         const shin=Math.atan2((leg.ankle.x-leg.knee.x)*facing,leg.ankle.y-leg.knee.y)*180/Math.PI;
-        assert.ok(Math.abs(angle-shin)<=55,'Knee flexion remains restrained through recovery');
+        assert.ok(Math.abs(angle-shin)<=100,'A recovering free foot bends a real knee instead of remaining rigidly extended');
         close(distance(leg.hip,leg.knee),24);close(distance(leg.knee,leg.ankle),23.5);
         assert.equal(leg.reachClamped,false);assert.equal(leg.clearanceAdjusted,false);
         assert.ok(leg.heel.y<=624+1e-6&&leg.toe.y<=624+1e-6);
-        assert.ok(contact.lift<=4+1e-6);maxLift=Math.max(maxLift,contact.lift);
-        const nativeHipX=subject.x+subject.w/2+facing*(side==='near'?-4.5:6);
+        assert.ok(contact.lift<=9+1e-6);maxLift=Math.max(maxLift,contact.lift);
+        const nativeHipX=subject.x+subject.w/2+facing*(side==='near'?-3:3);
         assert.ok(Math.abs(leg.hip.x-nativeHipX)<=3+1e-6,'Sagittal weight transfer stays within three pixels of the belt axis');
         if(contact.planted&&previous?.contacts.feet[side].planted){
           close(leg.sole.x,previous.legs[side].sole.x);close(leg.sole.y,previous.legs[side].sole.y);plantedPairs++;
@@ -53,8 +58,8 @@ test('steady simulated travel has restrained thighs, useful foot clearance and r
       }
       hips.push(rig.legs.near.hip.y);previous=rig;
     }
-    assert.ok(maxLift>=2&&maxLift<=4.001);
-    assert.ok(Math.max(...hips)-Math.min(...hips)<(speed===155?3:5));
+    assert.ok(maxLift>=4&&maxLift<=9.001);
+    assert.ok(Math.max(...hips)-Math.min(...hips)<7);
     assert.ok(plantedPairs>40,'Natural tuning cannot hide foot skating by removing support declarations');
   }
   assert.equal(PLAYER_TRANSIT_PRESENTATION_V128.upperLeg,48);assert.equal(PLAYER_TRANSIT_PRESENTATION_V128.lowerLeg,47);
@@ -75,7 +80,7 @@ test('a real acceleration sequence starts and turns in either direction without 
       maximumSpan=Math.max(maximumSpan,Math.abs(rig.legs.near.sole.x-rig.legs.far.sole.x));
       for(const side of ['near','far']){
         const leg=rig.legs[side];
-        assert.ok(Math.abs(thighAngle(leg,facing))<=38,'The first accelerating step keeps the running thigh envelope');
+        assert.ok(Math.abs(thighAngle(leg,facing))<=55,'The first accelerating step keeps the bounded running thigh envelope');
         assert.equal(leg.reachClamped,false);assert.equal(leg.clearanceAdjusted,false);
         assert.ok(leg.heel.y<=624+1e-6&&leg.toe.y<=624+1e-6);
         if(rig.contacts.feet[side].planted&&previous?.contacts.feet[side].planted){

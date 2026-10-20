@@ -1,6 +1,13 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-continuation-v159';
+const CACHE = 'atf-v143-continuation-v160';
 const SHELL = Object.freeze([
+  '/src/player-arm-constraints-v160.js',
+  '/src/player-human-proportions-v160.js',
+  '/src/motion-tracker-v160.js',
+  '/src/motion-tracker-display-v160.js',
+  '/src/campaign-story-v160.js',
+  '/src/campaign-story-ui-v160.js',
+  '/src/archive-relay-presentation-v160.js',
   '/src/black-cocoon-presentation-v158.js',
   '/src/npc-circulation-v158.js',
   '/src/npc-annex-circulation-v159.js',

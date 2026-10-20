@@ -22,13 +22,15 @@ function observed({ speed=245,rate=60,seconds=1,patch={},surface='mission' }={})
   }
   return {subject,state,frames};
 }
-test('ordinary movement has a supported human stride and a bounded 3–5 step cadence without changing velocity',()=>{
-  for(const surface of ['mission','hub','bioforge']) for(const speed of [155,245,270]) {
+test('ordinary movement keeps a stature-sized stride and bounded walking/jogging cadence without changing velocity',()=>{
+  for(const surface of ['mission','hub','bioforge']) for(const speed of [80,155,200,245,270]) {
     const {subject,state,frames}=observed({speed,surface}); const last=frames.at(-1);
-    assert.equal(subject.vx,speed); assert.ok(state.stride>=73 && state.stride<=139);
-    assert.ok(last.presentationV133.stepsPerSecond>=3 && last.presentationV133.stepsPerSecond<5);
-    assert.equal(state.gait,speed<235?'walk':'run'); close(last.presentationV133.standingHeight,96.5);
-    assert.ok(last.presentationV133.footLiftLimit<=6);
+    assert.equal(subject.vx,speed); close(state.distance,speed,'One second of physical travel');
+    assert.ok(state.stride>=subject.h*.75 && state.stride<=subject.h*1.8,'The complete cycle stays in the reviewed stature envelope');
+    assert.ok(last.presentationV133.stepsPerSecond>=1.5 && last.presentationV133.stepsPerSecond<=3.6,
+      'A jog cannot be forced into the old three-to-five tiny steps per second');
+    assert.equal(state.gait,speed<190?'walk':'run'); close(last.presentationV133.standingHeight,96.5);
+    assert.ok(last.presentationV133.footLiftLimit>=4 && last.presentationV133.footLiftLimit<=9);
   }
 });
 test('the same travelled distance preserves phase, rigid stature and foot placement at30/60/144Hz',()=>{
@@ -65,7 +67,13 @@ test('upper-body motion keeps native proportions, a fixed physical foot pivot an
   for(const frame of frames) {
     const body=frame.bodyRig,m=body.matrix,support=body.sourceFrame.support;
     close(Math.hypot(m.a,m.b),Math.hypot(m.c,m.d),'Isotropic native pixels');
-    close(m.a*m.c+m.b*m.d,0,'No shear'); close(m.a*support.x+m.c*support.y+m.e,body.pivot.x); close(m.b*support.x+m.d*support.y+m.f,292);
+    close(m.a*m.c+m.b*m.d,0,'No shear');
+    const raw=body.baseBodyRigV160,transfer=body.weightTransferV160,physical=raw.matrix;
+    close(body.pivot.x,raw.pivot.x,'The physical pivot cannot follow upper-body weight transfer'); close(body.pivot.y,292);
+    close(physical.a*support.x+physical.c*support.y+physical.e,body.pivot.x,'Native physical support x');
+    close(physical.b*support.x+physical.d*support.y+physical.f,body.pivot.y,'Native physical support y');
+    close(m.a*support.x+m.c*support.y+m.e,body.pivot.x+transfer.x,'The complete upper frame follows the solved pelvis');
+    close(m.b*support.x+m.d*support.y+m.f,body.pivot.y+transfer.y);
     assert.ok(Math.abs(body.locomotionMotionV133.lean)<=.024); assert.ok(frame.presentationV133.pelvisBob<=.6);
     if(previous!==body.frame)varying++; previous=body.frame;
   } assert.ok(varying>=7);
@@ -94,7 +102,9 @@ test('gait tuning never borrows a human rig for custom bodies, costumes, or dedi
     const subject=actor(patch),body=resolvePlayerBodyRigV125({actor:subject,images}),rig=resolvePlayerLocomotionRigV129({actor:subject,bodyRig:body,images});
     assert.equal(rig.eligible,false);
   }
-  assert.equal(humanGaitKindV133(actor({vx:155})),'walk'); close(humanGaitStrideV133(actor({vx:270}),'run',.5),138);
+  assert.equal(humanGaitKindV133(actor({vx:155})),'walk');
+  const runner=actor({vx:270}),stride=humanGaitStrideV133(runner,'run',.5);
+  assert.ok(stride>runner.h && stride<runner.h*1.8,'Running keeps a finite full-cycle stride without granting a body rig');
   const frozen=Object.freeze(actor()); assert.ok(Number.isFinite(sampleHumanGaitV133(frozen,.5).cycles)); assert.equal(frozen.x,100);
 });
 

@@ -173,6 +173,7 @@ export function withWeaponActionsV131(Base) {
     }
 
     commitWeaponRoundV131(actor, profile, aim) {
+      if (this.playerWeaponFireBlockedV160?.(actor, aim)) return false;
       const bag = profile.resource === 'arrows' || profile.resource === 'harpoons';
       const count = profile.pellets || 1;
       if (!this.allowedWeaponV131(actor, true) || this.weaponProjectilesV131.length + count > LIMIT

@@ -11,6 +11,9 @@ import { resolveCombatAimV83 } from '../src/combat-aim-v83.js';
 import { getPlayerAimGuideV124 } from '../src/player-control-v124.js';
 import { resolveWeaponVisualProfileV63 } from '../src/weapon-visual-runtime-v63.js';
 import { getCostumeV119 } from '../src/franchise-costumes-v119.js';
+import { getPlayerArmReachV160, getPlayerArmAxesV160,
+  PLAYER_ARM_SHOULDER_LIMITS_V160 } from '../src/player-arm-constraints-v160.js';
+import { resolveWeaponActionProfileV131 } from '../src/weapon-actions-v131.js';
 
 // The shipped production engine owns all simulation and equipment changes.
 // Only DOM, image loading and canvas drawing are replaced by observable hosts.
@@ -329,6 +332,30 @@ test('body posture and aim feed the same muzzle used by the guide and real proje
   }
 });
 
+test('accepted shots and drawn hands share the final articulated locomotion body before rendering', async () => {
+  const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) });
+  equipPickup(subject);
+  subject.key('keydown', 'KeyD'); advance(subject.engine, .37); subject.key('keyup', 'KeyD');
+  Object.assign(subject.actor, { aimingV124: true, pointerAimV83: RIGHT, combatAimV83: RIGHT });
+  const before = await readyPose(subject);
+  assert.ok(before.bodyRig.locomotionV129, 'Simulation resolves the final articulated body before any canvas draw.');
+  const render = subject.engine.drawPlayerWeaponRigV125(subject.drawing.ctx, subject.actor);
+  assert.ok(render?.drawn);
+  assert.deepEqual(render.bodyRig.shoulders, before.bodyRig.shoulders);
+  assert.deepEqual(render.bodyRig.matrix, before.bodyRig.matrix);
+  assert.deepEqual(render.bodyRig.locomotionV129.alignmentV142, before.bodyRig.locomotionV129.alignmentV142);
+  near(render.arms.near.hand.x, before.grip.x, 'drawn trigger hand x');
+  near(render.arms.near.hand.y, before.grip.y, 'drawn trigger hand y');
+  assert.equal(subject.engine.fire(subject.actor), true);
+  const after = await readyPose(subject), bullet = subject.engine.bullets.at(-1);
+  near(bullet.x, after.muzzle.x, 'articulated accepted-shot muzzle x');
+  near(bullet.y, after.muzzle.y, 'articulated accepted-shot muzzle y');
+  const guide = getPlayerAimGuideV124(subject.engine, subject.actor);
+  near(guide.x, after.muzzle.x, 'articulated guide muzzle x');
+  near(guide.y, after.muzzle.y, 'articulated guide muzzle y');
+  subject.drawing.assertBalanced();
+});
+
 test('the native left-facing weapon maps its photographed grip and muzzle to the rendered world pose', async () => {
   const weapon = WEAPONS.find(item => [-1, 'left'].includes(resolveWeaponVisualProfileV63(item)?.sourceFacing));
   assert.ok(weapon, 'The catalogue contains a reviewed native weapon facing left.');
@@ -388,7 +415,7 @@ test('a long held barrel still stops at a thin wall for the actual guide and sho
   const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
   Object.assign(subject.actor, { aimingV124: true, combatAimV83: RIGHT, pointerAimV83: RIGHT });
   const pose = await readyPose(subject);
-  const wallX = (pose.muzzle.pivotX + pose.muzzle.x) / 2;
+  const wallX = pose.muzzle.pivotX + (pose.muzzle.x - pose.muzzle.pivotX) * .97;
   assert.ok(Number.isFinite(wallX));
   subject.engine.walls = [{ id: 'held-rifle-wall', x: wallX, y: subject.actor.y - 100, w: 3, h: subject.actor.h + 200 }];
   const guide = getPlayerAimGuideV124(subject.engine, subject.actor); assert.ok(guide?.blocked);
@@ -400,6 +427,274 @@ test('a long held barrel still stops at a thin wall for the actual guide and sho
   near(bullet.x, shotGuide.x, 'Blocked guide/projectile x'); near(bullet.y, shotGuide.y, 'Blocked guide/projectile y');
   subject.engine.updateBullets(1 / 60);
   assert.ok(bullet.hit || !subject.engine.bullets.includes(bullet), 'The projectile must hit, not spawn behind the wall.');
+});
+
+test('obstacle retraction preserves both actual arm envelopes and one rigid source in all aim sectors', async () => {
+  for (let sector = 0; sector < 8; sector++) {
+    const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+    const angle = sector * Math.PI / 4, x = Math.cos(angle), y = Math.sin(angle);
+    const aim = resolveCombatAimV83({ x, y, facing: x < -.1 ? -1 : 1 });
+    Object.assign(subject.actor, { facing: aim.facing, aimingV124: true, combatAimV83: aim, pointerAimV83: aim });
+    const initial = await readyPose(subject, subject.actor, aim);
+    const shoulder = initial.bodyRig.shoulders.near;
+    if (Math.abs(x) > Math.abs(y)) {
+      const edge = shoulder.x + (initial.muzzle.x - shoulder.x) * .65;
+      subject.engine.walls = [{ x: x > 0 ? edge : edge - 4, y: shoulder.y - 300, w: 4, h: 600 }];
+    } else {
+      const edge = shoulder.y + (initial.muzzle.y - shoulder.y) * .65;
+      subject.engine.walls = [{ x: shoulder.x - 300, y: y > 0 ? edge : edge - 4, w: 600, h: 4 }];
+    }
+    const held = await readyPose(subject, subject.actor, aim);
+    assert.equal(held.armReachV160.feasible, true, `sector${sector}`);
+    assert.equal(held.armReachV160.obstacleConstrained, true, `sector${sector}`);
+    const render = subject.engine.drawPlayerWeaponRigV125(subject.drawing.ctx, subject.actor);
+    assert.ok(render?.drawn, `sector${sector}`);
+    for (const side of ['near', 'far']) {
+      const arm = render.arms[side], reach = getPlayerArmReachV160(held.bodyRig.armLengths[side]);
+      assert.ok(arm.reachError < 1e-6, `sector${sector} ${side} hand contact`);
+      assert.ok(arm.requestedDistance >= reach.min - 1e-6 && arm.requestedDistance <= reach.max + 1e-6,
+        `sector${sector} ${side} anatomical elbow envelope`);
+      const axes = getPlayerArmAxesV160(held.bodyRig.torsoAxisV160, held.bodyRig.facing);
+      const upper = { x: arm.elbow.x - arm.shoulder.x, y: arm.elbow.y - arm.shoulder.y };
+      const shoulderAngle = Math.atan2(upper.x * axes.down.x + upper.y * axes.down.y,
+        upper.x * axes.forward.x + upper.y * axes.forward.y) * 180 / Math.PI;
+      assert.ok(shoulderAngle >= PLAYER_ARM_SHOULDER_LIMITS_V160.minDegrees - 1e-6
+        && shoulderAngle <= PLAYER_ARM_SHOULDER_LIMITS_V160.maxDegrees + 1e-6,
+        `sector${sector} ${side} actual shoulder angle ${shoulderAngle}`);
+      near(subject.actor.heldWeaponVisualV125.armJointAnglesV160[side].shoulderDegrees, shoulderAngle,
+        `sector${sector} ${side} observation measures actual drawn arm`);
+    }
+    const guide = getPlayerAimGuideV124(subject.engine, subject.actor);
+    assert.ok(guide.blocked); near(guide.x, held.muzzle.x, `sector${sector} guide x`);
+    near(guide.y, held.muzzle.y, `sector${sector} guide y`);
+    const determinant = held.matrix.a * held.matrix.d - held.matrix.b * held.matrix.c;
+    near(Math.abs(determinant), held.scale ** 2, `sector${sector} rigid weapon scale`);
+  }
+});
+
+test('reloading against a real wall keeps the service hand on the body pouch while the receiver retracts', async () => {
+  const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+  Object.assign(subject.actor, { aimingV124: true, combatAimV83: RIGHT, pointerAimV83: RIGHT });
+  await readyPose(subject);
+  assert.equal(subject.engine.fire(subject.actor), true);
+  advance(subject.engine, .3);
+  assert.equal(subject.engine.reload(subject.actor), true);
+  const duration = subject.actor.tacticalReload.completeAt;
+  advance(subject.engine, duration * .53 + 1e-6);
+  const unconstrained = await readyPose(subject);
+  const wallX = subject.actor.x + subject.actor.w + 4;
+  assert.ok(unconstrained.muzzle.x > wallX, 'A physical wall outside the actor intersects its carried barrel.');
+  subject.engine.walls = [{ x: wallX, y: subject.actor.y - 200, w: 5, h: subject.actor.h + 400 }];
+  const held = await readyPose(subject);
+  assert.equal(held.reloadPhase, 'insert');
+  assert.equal(held.armReachV160.feasible, true);
+  assert.ok(Math.hypot(held.translation.x, held.translation.y) > 1);
+  near(held.serviceHand.x, held.bodyRig.pouch.x, 'service hand stays on anatomical pouch x', 1e-6);
+  near(held.serviceHand.y, held.bodyRig.pouch.y, 'service hand stays on anatomical pouch y', 1e-6);
+  assert.ok(held.muzzle.x < wallX, 'No round originates beyond the wall face.');
+  const render = subject.engine.drawPlayerWeaponRigV125(subject.drawing.ctx, subject.actor);
+  assert.ok(render?.drawn);
+  near(render.arms.far.hand.x, held.serviceHand.x, 'actual service hand x');
+  near(render.arms.far.hand.y, held.serviceHand.y, 'actual service hand y');
+  assert.ok(render.arms.far.reachError < 1e-6);
+});
+
+test('a close wall withdraws the rigid rifle continuously with both hands attached and refuses the shot', async () => {
+  for (const facing of [1, -1]) {
+    const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+    const aim = resolveCombatAimV83({ x: facing, y: 1, facing });
+    Object.assign(subject.actor, { facing, aimingV124: true, pointerAimV83: aim, combatAimV83: aim });
+    const first = await readyPose(subject, subject.actor, aim), shoulder = first.bodyRig.shoulders.near;
+    let previous = null, withdrew = false;
+    for (let step = 0; step <= 230; step++) {
+      const edge = shoulder.x + facing * (40 - step * .1);
+      subject.engine.walls = [{ x: facing > 0 ? edge : edge - 4, y: shoulder.y - 300, w: 4, h: 600 }];
+      const held = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, aim, { requireReady: false });
+      assert.equal(held.armReachV160.feasible, true);
+      assert.equal(held.armBendsV160.far, 1, 'No phase or facing branch flip.');
+      if (previous) assert.ok(Math.hypot(held.grip.x - previous.grip.x, held.grip.y - previous.grip.y) < 1,
+        'A subpixel obstacle change cannot teleport the weapon to another arm pocket.');
+      if (held.weaponWithdrawalV160?.active) {
+        withdrew = true;
+        assert.ok(facing > 0 ? held.visibleBounds.right < edge : held.visibleBounds.left > edge,
+          'The entire transformed alpha rectangle stays in front of the wall.');
+        const rendered = subject.engine.drawPlayerWeaponRigV125(subject.drawing.ctx, subject.actor);
+        assert.ok(rendered.arms.near.reachError < 1e-6 && rendered.arms.far.reachError < 1e-6);
+      }
+      previous = held;
+    }
+    assert.equal(withdrew, true);
+    const ammo = subject.actor.ammo, shots = subject.actor.shots, bullets = subject.engine.bullets.length;
+    assert.equal(subject.engine.fire(subject.actor), false);
+    assert.equal(subject.actor.ammo, ammo); assert.equal(subject.actor.shots, shots);
+    assert.equal(subject.engine.bullets.length, bullets);
+    subject.engine.walls = [];
+    assert.equal(subject.engine.fire(subject.actor), true, 'Moving away restores the requested firing direction.');
+  }
+});
+
+test('shot admission previews the accepted torso and cosmetic hurt transition without actor or image mutation', async () => {
+  for (const hurt of [false, true]) {
+    const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+    subject.engine.animationTime = 1;
+    Object.assign(subject.actor, { aimingV124: false, pointerAimV83: RIGHT, combatAimV83: RIGHT,
+      v52HurtClock: hurt ? .2 : 0, shockClock: 0,
+      weaponRigMotionV125: { ...subject.actor.weaponRigMotionV125, shotAt: -Infinity, time: 1 } });
+    subject.engine.walls = [{ x: 215, y: 540, w: 4, h: 600 }];
+    const originalActor = structuredClone(subject.actor);
+    const originalImages = [...subject.engine.images.entries()];
+    const originalCache = subject.engine.weaponImageCacheV125.snapshot();
+    const before = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, RIGHT, { requireReady: false });
+    const accepted = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, RIGHT,
+      { requireReady: false, shotPreviewV160: true });
+    if (hurt) assert.equal(before, null); else {
+      assert.equal(before.armReachV160.feasible, true);
+      assert.equal(before.weaponWithdrawalV160, undefined, 'The pre-shot idle pose alone would have admitted this shot.');
+    }
+    assert.equal(accepted.bodyRig.atlas, 'combat');
+    assert.equal(accepted.weaponWithdrawalV160.active, true);
+    assert.equal(subject.engine.fire(subject.actor), false);
+    assert.deepEqual(subject.actor, originalActor, 'A refused transaction leaves all actor/action clocks intact.');
+    assert.deepEqual([...subject.engine.images.entries()], originalImages);
+    assert.deepEqual(subject.engine.weaponImageCacheV125.snapshot(), originalCache,
+      'The admission query does not acquire, retain, evict or reorder images.');
+  }
+});
+
+test('a newly obstructed delayed charge or burst cannot commit a round or consume its pending resources', async () => {
+  for (const name of ['Compound Bow', '4C2 Astra']) {
+    const weapon = WEAPONS.find(item => item.name === name);
+    const subject = fixture({ weapon }); equipPickup(subject);
+    Object.assign(subject.actor, { aimingV124: true, pointerAimV83: RIGHT, combatAimV83: RIGHT });
+    await readyPose(subject);
+    const profile = resolveWeaponActionProfileV131(weapon);
+    assert.equal(subject.engine.fire(subject.actor), true);
+    assert.equal(subject.engine.weaponCyclesV131.has(subject.actor), true);
+    const held = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, RIGHT, { requireReady: false });
+    const edge = held.bodyRig.shoulders.near.x + 20;
+    subject.engine.walls = [{ x: edge, y: 540, w: 4, h: 600 }];
+    assert.equal(subject.engine.playerWeaponFireBlockedV160(subject.actor, RIGHT), true);
+    const ammo = subject.actor.ammo, reserve = subject.actor.ammoReserve, shots = subject.actor.shots;
+    const acceptedShots = subject.engine.weaponEffectsV124.stats.acceptedShots;
+    subject.engine.updateBullets((profile.charge || profile.spacing) + .02);
+    assert.equal(subject.actor.ammo, ammo); assert.equal(subject.actor.ammoReserve, reserve);
+    assert.equal(subject.actor.shots, shots);
+    assert.equal(subject.engine.weaponEffectsV124.stats.acceptedShots, acceptedShots);
+    assert.equal(subject.engine.weaponCyclesV131.has(subject.actor), false);
+  }
+});
+
+for (const name of ['Compound Bow', '4C2 Astra']) test(`left-facing ${name} commits its real delayed rounds with the stored x/y aim`, async () => {
+  const weapon = WEAPONS.find(item => item.name === name);
+  const subject = fixture({ weapon }); equipPickup(subject);
+  const aim = resolveCombatAimV83({ x: -1, y: 0, facing: -1 });
+  Object.assign(subject.actor, { x: 800, facing: -1, aimingV124: true, pointerAimV83: aim, combatAimV83: aim,
+    vx: name === 'Compound Bow' ? -155 : 0 });
+  await readyPose(subject, subject.actor, aim);
+  if (name === 'Compound Bow') {
+    // The collider is wholly outside the moving operator. Its real left-facing
+    // arms can hold the short bow here; a right-facing preview rejects it.
+    const held = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, aim,
+      { requireReady: false, shotPreviewV160: true });
+    const edge = held.bodyRig.shoulders.near.x - 30;
+    assert.ok(edge < subject.actor.x);
+    subject.engine.walls = [{ x: edge - 4, y: 540, w: 4, h: 600 }];
+    assert.equal(subject.engine.playerWeaponFireBlockedV160(subject.actor, aim), false);
+  }
+  const profile = resolveWeaponActionProfileV131(weapon);
+  const ammo = subject.actor.ammo, shots = subject.actor.shots;
+  const acceptedShots = subject.engine.weaponEffectsV124.stats.acceptedShots;
+  assert.equal(subject.engine.fire(subject.actor), true);
+  const cycle = subject.engine.weaponCyclesV131.get(subject.actor);
+  assert.ok(cycle, 'The native trigger must create the real charge or burst cycle.');
+  assert.deepEqual(cycle.aim, { x: -1, y: 0 }, 'Deferred rounds deliberately store direction without a facing field.');
+  subject.engine.updateBullets((profile.charge || profile.spacing * (profile.rounds - 1)) + .02);
+  const rounds = profile.rounds || 1;
+  assert.equal(subject.actor.ammo, ammo - rounds, 'Every accepted deferred round spends its own cartridge.');
+  assert.equal(subject.actor.shots, shots + rounds);
+  assert.equal(subject.engine.weaponEffectsV124.stats.acceptedShots, acceptedShots + rounds);
+  assert.equal(subject.engine.weaponCyclesV131.has(subject.actor), false);
+  assert.equal(subject.actor.facing, -1);
+  const deferredPose = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, cycle.aim,
+    { requireReady: false, shotPreviewV160: true });
+  assert.equal(deferredPose.bodyRig.facing, -1, 'Admission must use the same body side as the stored firing direction.');
+  if (name === 'Compound Bow') {
+    const recovered = subject.engine.recoverableWeaponsV131;
+    assert.equal(recovered.length, 1, 'The actual charged arrow reaches the first left-side wall.');
+    assert.equal(recovered[0].owner, subject.actor);
+    assert.equal(recovered[0].weaponId, weapon.id);
+    near(recovered[0].x, subject.engine.walls[0].x + subject.engine.walls[0].w, 'arrow impact on the near wall face');
+  } else assert.equal(subject.engine.weaponProjectilesV131.length, rounds);
+  for (const projectile of subject.engine.weaponProjectilesV131) {
+    assert.equal(projectile.owner, subject.actor);
+    assert.ok(projectile.vx < 0, 'The actual deferred projectile must travel to the left.');
+    assert.ok(projectile.sourceX < subject.actor.x + subject.actor.w / 2,
+      'Its accepted muzzle stays on the left-facing body side.');
+  }
+});
+
+test('supplied shot aims derive only missing facing and preserve vertical actor facing without mutation', async () => {
+  const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+  for (const actorFacing of [-1, 1]) {
+    subject.actor.facing = actorFacing;
+    for (const [x, y, explicitFacing, expected] of [
+      [-1, 0, undefined, -1], [1, 0, undefined, 1],
+      [0, -1, undefined, actorFacing], [1e-10, 1, undefined, actorFacing],
+      [-1, 0, 1, 1]
+    ]) {
+      const aim = Object.freeze({ x, y, ...(explicitFacing === undefined ? {} : { facing: explicitFacing }), source: 'deferred-test' });
+      const original = structuredClone(subject.actor);
+      const projected = subject.engine.previewPlayerWeaponInputV160(subject.actor, aim).aim;
+      assert.deepEqual(projected, { ...aim, facing: expected });
+      assert.deepEqual(subject.actor, original);
+      assert.equal(Object.hasOwn(aim, 'facing'), explicitFacing !== undefined);
+    }
+  }
+});
+
+test('the pure accepted-shot preview matches the real input, cover, injury and recoil chain in every body stance', async () => {
+  for (const mode of ['standing', 'crouched', 'covered', 'hurt', 'moving']) {
+    const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+    subject.engine.animationTime = 1;
+    Object.assign(subject.actor, { aimingV124: false, pointerAimV83: RIGHT, combatAimV83: RIGHT,
+      crouching: ['crouched', 'covered'].includes(mode), v52HurtClock: mode === 'hurt' ? .2 : 0,
+      vx: mode === 'moving' ? 80 : 0, shockClock: 0,
+      weaponRigMotionV125: { ...subject.actor.weaponRigMotionV125, shotAt: -Infinity, time: 1 } });
+    if (mode === 'covered') {
+      subject.engine.covers = [{ id: 'preview-cover', x: 208, y: 867, w: 60, h: 63 }];
+      subject.engine.refreshPlayerCoverV124(subject.actor, { fire: false });
+      assert.equal(subject.actor.coverV124.peeking, false);
+    }
+    const original = structuredClone(subject.actor);
+    const preview = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, RIGHT,
+      { requireReady: false, shotPreviewV160: true });
+    assert.deepEqual(subject.actor, original, `${mode} preview is pure`);
+    const actualAim = subject.engine.resolvePlayerCombatAimV83(subject.actor);
+    subject.engine.refreshPlayerCoverV124(subject.actor, { fire: true });
+    subject.engine.beginPlayerWeaponShotV125(subject.actor);
+    const actual = subject.engine.resolvePlayerWeaponPoseV125(subject.actor, actualAim, { requireReady: false });
+    for (const key of ['matrix', 'grip', 'support', 'muzzle', 'armReachV160', 'weaponWithdrawalV160'])
+      assert.deepEqual(preview[key], actual[key], `${mode} authoritative ${key}`);
+    assert.deepEqual(preview.bodyRig.shoulders, actual.bodyRig.shoulders, `${mode} authoritative shoulders`);
+    if (mode === 'covered') {
+      assert.equal(subject.actor.coverV124.peeking, true);
+      assert.equal(preview.weaponWithdrawalV160.active, true);
+    }
+  }
+});
+
+test('a held pointer is reprojected for admission without changing actor or captured gameplay keys', async () => {
+  const subject = fixture({ weapon: WEAPONS.find(item => item.id === ID.rifle) }); equipPickup(subject);
+  const event = new Event('pointerdown', { cancelable: true });
+  Object.assign(event, { pointerId: 47, pointerType: 'mouse', button: 2, buttons: 2, clientX: 700, clientY: 300 });
+  subject.canvas.dispatchEvent(event);
+  subject.engine.camera.x += 55; subject.engine.camera.y += 12;
+  const original = structuredClone(subject.actor), keys = [...subject.engine.keys];
+  const preview = subject.engine.previewPlayerWeaponInputV160(subject.actor);
+  assert.deepEqual(subject.actor, original); assert.deepEqual([...subject.engine.keys], keys);
+  const actual = subject.engine.resolvePlayerCombatAimV83(subject.actor);
+  assert.deepEqual(preview.aim, actual);
+  assert.equal(preview.aiming, subject.actor.aimingV124);
 });
 
 test('Neuro, climbing, vent travel and downed postures never receive a catalogue weapon overlay', async () => {

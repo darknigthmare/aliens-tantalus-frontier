@@ -455,20 +455,28 @@ test('a low-cover peek lifts the real muzzle and the guide matches the actual sh
   assert.equal(actor.coverV124?.peeking, true);
   const guide = getPlayerAimGuideV124(engine, actor);
   assert.ok(guide); assert.ok(guide.y < engine.covers[0].y);
+  assert.equal(guide.blocked, false, 'A corrected weapon above cover must not retain its earlier obstruction.');
+  assert.ok(guide.endX > engine.covers[0].x + engine.covers[0].w);
   const pose = engine.resolvePlayerWeaponPoseV125(actor, actor.combatAimV83, { requireReady: false });
   const withoutHandLift = getHeldWeaponPoseV125({ actor: { ...actor, coverV124: { ...actor.coverV124, peeking: false } },
     descriptor: engine.heldWeaponDescriptorV125(actor), aim: actor.combatAimV83, bodyRig: pose.bodyRig,
     timeSeconds: engine.animationTime });
   assert.ok(pose.grip.y < withoutHandLift.grip.y);
   assert.equal(pose.bodyRig.standingHeight, 96.5);assert.equal(pose.bodyRig.pivot.y, actor.y + actor.h);
-  assert.deepEqual(pose.translation, { x: 0, y: 0 }, 'A peek is anatomical hand motion, not obstruction or a teleported shot.');
+  assert.equal(pose.armReachV160.feasible, true);
+  assert.equal(pose.weaponWithdrawalV160, undefined, 'This clearance remains a true horizontal firing pose.');
+  assert.equal(pose.translation.x, 0);
+  assert.ok(pose.translation.y <= 0, 'The complete rigid receiver may lift to clear its lower edge.');
+  assert.ok(pose.visibleBounds.bottom <= engine.covers[0].y,
+    'Every transformed alpha-rectangle corner clears the cargo, including the receiver below the bore.');
+  assert.ok(Math.abs(pose.aimX - 1) < 1e-12 && Math.abs(pose.aimY) < 1e-12);
   const arms = resolvePlayerArmPoseV125(pose.bodyRig, pose);
   for (const side of ['near', 'far']) {
     assert.ok(arms[side].reachError < 1e-6);assert.equal(arms[side].shoulderShiftDistance, 0);
   }
   assert.equal(engine.fire(actor), true);
   const shotGuide = getPlayerAimGuideV124(engine, actor);
-  assert.ok(shotGuide); assert.ok(shotGuide.y < engine.covers[0].y);
+  assert.ok(shotGuide); assert.ok(shotGuide.y < engine.covers[0].y); assert.equal(shotGuide.blocked, false);
   assert.equal(actor.coverV124?.peeking, true);
   const bullet = engine.bullets.at(-1);
   assert.equal(bullet.x, shotGuide.x); assert.equal(bullet.y, shotGuide.y);
@@ -716,18 +724,35 @@ test('actual overhead hostile projectiles retain launch origin and clear frontal
   }
 });
 
-test('a thin wall stops the real muzzle and the shot drawn by the aim guide', () => {
+test('a close thin wall withdraws the weapon and refuses a shot while a distant wall retains a valid shot', () => {
   const { engine, actor, key } = makeEngine();
   engine.walls = [{ id: 'thin-bulkhead', x: 209, y: 700, w: 4, h: 230 }];
   key('keydown', 'ShiftLeft'); key('keydown', 'KeyD'); tickActor(engine, 0.05);
   const guide = getPlayerAimGuideV124(engine, actor);
   assert.ok(guide?.blocked); assert.ok(guide.x < engine.walls[0].x);
-  assert.equal(engine.fire(actor), true);
+  const withdrawn = engine.resolvePlayerWeaponPoseV125(actor, actor.combatAimV83, { requireReady: false });
+  assert.equal(withdrawn.weaponWithdrawalV160.active, true);
+  assert.equal(withdrawn.armReachV160.feasible, true);
+  assert.ok(withdrawn.visibleBounds.right < engine.walls[0].x);
+  const arms = resolvePlayerArmPoseV125(withdrawn.bodyRig, withdrawn);
+  for (const side of ['near', 'far']) assert.ok(arms[side].reachError < 1e-6, `${side} remains attached to its real weapon contact`);
+  const original = structuredClone(actor), bullets = engine.bullets.length;
+  assert.equal(engine.fire(actor), false);
+  assert.deepEqual(actor, original, 'Refusing a withdrawn firing pose spends no resource or action state.');
+  assert.equal(engine.bullets.length, bullets);
+  // The same input is permitted once the receiver has room. The guide still
+  // stops at a distant wall and the actual round collides with that wall.
+  engine.walls[0].x += 140;
+  const valid = engine.resolvePlayerWeaponPoseV125(actor, actor.combatAimV83, { requireReady: false });
+  assert.equal(valid.weaponWithdrawalV160, undefined); assert.equal(valid.armReachV160.feasible, true);
+  assert.ok(valid.visibleBounds.right < engine.walls[0].x);
+  const ammo = actor.ammo, shots = actor.shots;
+  assert.equal(engine.fire(actor), true); assert.equal(actor.ammo, ammo - 1); assert.equal(actor.shots, shots + 1);
   const shotGuide = getPlayerAimGuideV124(engine, actor);
   assert.ok(shotGuide?.blocked); assert.ok(shotGuide.x < engine.walls[0].x);
   const shot = engine.bullets.at(-1);
   assert.equal(shot.x, shotGuide.x); assert.equal(shot.y, shotGuide.y);
-  engine.updateBullets(1 / 60);
+  for (let step = 0; step < 30 && engine.bullets.includes(shot) && !shot.hit; step++) engine.updateBullets(1 / 60);
   assert.ok(shot.hit || !engine.bullets.includes(shot), 'The round must hit the wall, not spawn behind it.');
 });
 

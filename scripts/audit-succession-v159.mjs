@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { resolveAuditSourcesV160 } from './audit-succession-v160.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V159 = Object.freeze({
   'docs/forge/xeno-trials/V158-CONTINUATION.md': '14ba5d60557c6d499c31fa78aac8f43fd4c646029fd78480e82f0dbb6b24d62e',
@@ -35,6 +36,9 @@ export function verifyAuditSuccessionV159(previous, current, readSource = readRe
   assert.deepEqual(bridge.predecessorDocuments, AUDIT_PREDECESSOR_DOCUMENTS_V159);
   verifyAnchoredPredecessor(previous, readSource);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
+  // These 48 V159 hashes remain historical. Later runtime bytes are admitted
+  // only through their byte-anchored predecessor and complete V160 bridge.
+  const effective = resolveAuditSourcesV160(current, readSource);
   assert.equal(keys(before).length, 46);
   assert.ok(after && keys(after).length >= 46);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V158 source omitted: ' + path);
@@ -42,7 +46,7 @@ export function verifyAuditSuccessionV159(previous, current, readSource = readRe
     assert.ok(/^src\/[a-zA-Z0-9._-]+\.js$/.test(path) || path === 'src/forge-editor-v130.css',
       'Source path outside the reviewed scope: ' + path);
     assert.ok(validHash(expected), 'Invalid source hash: ' + path);
-    assert.equal(sha(readSource(path)), expected, 'Current V159 source changed: ' + path);
+    assert.equal(sha(readSource(path)), effective[path], 'Current V159 source changed: ' + path);
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
@@ -66,7 +70,7 @@ export function verifyAuditSuccessionV159(previous, current, readSource = readRe
 }
 
 /** A historical caller may use successor bytes only after this exact bridge passes. */
-export function resolveAuditSourcesV159(previous, readSource = readRepository) {
+export function resolveAuditSourcesV159(previous, readSource = readRepository, { effective = false } = {}) {
   // Absence of a successor must never admit a fabricated historical record.
   verifyAnchoredPredecessor(previous, readSource);
   let current;
@@ -77,7 +81,9 @@ export function resolveAuditSourcesV159(previous, readSource = readRepository) {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV159(previous, current, readSource);
-  return current.runtimeSourceSha256;
+  // Historical callers retain their exact V159 return by default. Earlier
+  // bridges explicitly request the latest verified bytes for runtime checking.
+  return effective ? resolveAuditSourcesV160(current, readSource) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV159(readSource = readRepository) {

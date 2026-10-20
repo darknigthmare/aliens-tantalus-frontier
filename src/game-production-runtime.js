@@ -40,6 +40,8 @@ import { withPlaceablesExtensionV132 } from './placeables-extension-v132.js';
 import { isolateForgeMissionOptionsV136 } from './editor-spatial-v136.js';
 import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
 import { withForgeDecorationV141 } from './forge-decoration-v141.js';
+import { withMotionTrackerV160 } from './motion-tracker-v160.js';
+import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
 
 export * from './game-production-core.js';
 
@@ -75,7 +77,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)) {
+export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
@@ -124,7 +126,7 @@ export class GameEngine extends withForgeDecorationV141(withForgeMissionRuntimeV
 
   fire(actor = this.player) {
     return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.toolUseClock > 0)
-      && !(actor.interactionClock > 0) ? super.fire(actor) : false;
+      && !(actor.interactionClock > 0) && !this.playerWeaponFireBlockedV160?.(actor) ? super.fire(actor) : false;
   }
 
   melee(actor = this.player) {
