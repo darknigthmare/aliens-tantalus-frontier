@@ -320,9 +320,10 @@ with sync_playwright() as pw:
                 expected_reads.append(topic)
             expected_ledger = {**ledger_baseline['durable'], 'readTopics': list(expected_reads), 'activeTopic': topic}
             actual_ledgers = return_ledgers(actual_save)
+            focus_preserved = page.evaluate('topic => { const active = document.activeElement; return Boolean(active?.isConnected && active.dataset.campaignStoryTopic === topic); }', topic)
             ledgers_match = actual_ledgers['durable'] == expected_ledger and actual_ledgers['latestOperationMatches'] and actual_ledgers['latestOperation'] == expected_ledger
             report['questionInvariants']['observations'].append({'pass': 'first-reading', 'topic': topic,
-                'expectedLedger': expected_ledger, 'actualLedgers': actual_ledgers, 'ledgersMatchExactly': ledgers_match,
+                'expectedLedger': expected_ledger, 'actualLedgers': actual_ledgers, 'ledgersMatchExactly': ledgers_match, 'focusPreserved': focus_preserved,
                 'protectedSnapshot': current, 'differenceFromBeforeQuestions': protected_difference(before_questions, current)})
         after_reading = observed(page)['save']
         for topic in ['chronology', 'identity', 'return']:
@@ -331,11 +332,13 @@ with sync_playwright() as pw:
             current = protected(actual_save)
             expected_ledger = {**ledger_baseline['durable'], 'readTopics': list(expected_reads), 'activeTopic': topic}
             actual_ledgers = return_ledgers(actual_save)
+            focus_preserved = page.evaluate('topic => { const active = document.activeElement; return Boolean(active?.isConnected && active.dataset.campaignStoryTopic === topic); }', topic)
             ledgers_match = actual_ledgers['durable'] == expected_ledger and actual_ledgers['latestOperationMatches'] and actual_ledgers['latestOperation'] == expected_ledger
             report['questionInvariants']['observations'].append({'pass': 'repeated-reading', 'topic': topic,
-                'expectedLedger': expected_ledger, 'actualLedgers': actual_ledgers, 'ledgersMatchExactly': ledgers_match,
+                'expectedLedger': expected_ledger, 'actualLedgers': actual_ledgers, 'ledgersMatchExactly': ledgers_match, 'focusPreserved': focus_preserved,
                 'protectedSnapshot': current, 'differenceFromBeforeQuestions': protected_difference(before_questions, current)})
         check('first and repeated questions preserve strategy while updating both reading ledgers exactly', all(not row['differenceFromBeforeQuestions'] and row['ledgersMatchExactly'] for row in report['questionInvariants']['observations']))
+        check('first and repeated native question activations retain focus on the connected replacement button', all(row['focusPreserved'] for row in report['questionInvariants']['observations']))
         before_reload = observed(page)['save']
         topics_before_reload = {topic: page.locator(f'[data-campaign-story-topic="{topic}"]').inner_text() for topic in ['chronology', 'identity', 'return']}
         reload_started = time.monotonic()

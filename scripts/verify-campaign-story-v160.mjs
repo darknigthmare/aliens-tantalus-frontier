@@ -18,7 +18,7 @@ import { hostV136 } from './forge-native-host-v136.mjs';
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
 const clone = value => structuredClone(value);
 function storyDocument() {
-  const document = { activeElement: null, addEventListener() {}, removeEventListener() {} };
+  const document = { activeElement: null, focusCalls: [], addEventListener() {}, removeEventListener() {} };
   const dataKey = name => name.replace(/^data-/, '').replace(/-([a-z])/g, (_, c) => c.toUpperCase());
   const matches = (node, selector) => {
     if (selector.startsWith('.')) return node.className.split(/\s+/u).includes(selector.slice(1));
@@ -34,25 +34,36 @@ function storyDocument() {
       children: [], dataset: {}, attributes: {}, className: '', ownText: '',
       style: { values: {}, setProperty(key, value) { this.values[key] = String(value); }, getPropertyValue(key) { return this.values[key] || ''; } },
       append(...children) { for (const child of children) { child.parentNode = this; this.children.push(child); } },
-      replaceChildren(...children) { this.children.forEach(child => { child.parentNode = null; }); this.children = []; this.ownText = ''; this.append(...children); },
+      replaceChildren(...children) {
+        if (this.children.some(child => child.contains(document.activeElement))) document.activeElement = document.body;
+        this.children.forEach(child => { child.parentNode = null; }); this.children = []; this.ownText = ''; this.append(...children);
+      },
       setAttribute(key, value) { this.attributes[key] = String(value); },
       getAttribute(key) { return this.attributes[key] ?? null; }, removeAttribute(key) { delete this.attributes[key]; },
       listeners: {},
       addEventListener(type, handler) { this.listeners[type] ??= []; this.listeners[type].push(handler); },
       removeEventListener(type, handler) { this.listeners[type] = (this.listeners[type] || []).filter(entry => entry !== handler); },
       click() { if (!this.disabled) for (const handler of this.listeners.click || []) handler({ target: this }); },
-      focus() {},
+      focus(options) {
+        if (this.disabled || !document.body?.contains(this)) return;
+        document.activeElement = this; document.focusCalls.push({ node: this, options });
+      },
       contains(target) { return target === this || this.children.some(child => child.contains(target)); },
       querySelectorAll(selector) { return this.children.flatMap(child => [...(matches(child, selector) ? [child] : []), ...child.querySelectorAll(selector)]); },
       querySelector(selector) { return this.querySelectorAll(selector)[0] || null; },
-      remove() { if (this.parentNode) this.parentNode.children = this.parentNode.children.filter(child => child !== this); this.parentNode = null; }
+      remove() {
+        if (this.contains(document.activeElement)) document.activeElement = document.body;
+        if (this.parentNode) this.parentNode.children = this.parentNode.children.filter(child => child !== this); this.parentNode = null;
+      }
     };
     node.classList = { add(name) { node.className += ' ' + name; }, contains(name) { return node.className.split(/\s+/u).includes(name); } };
     Object.defineProperty(node, 'textContent', { get() { return this.ownText + this.children.map(child => child.textContent).join(''); },
       set(value) { this.ownText = String(value); this.children = []; } });
     return node;
   };
-  return { document, root: document.createElement('div') };
+  document.body = document.createElement('body'); document.activeElement = document.body;
+  const root = document.createElement('div'); document.body.append(root);
+  return { document, root };
 }
 const insertion = (id = 'operation-1-special-archive-relay', extras = {}) => createMissionInsertionV62({
   operation: { id, campaignId: campaign.id, worldId: world.id }, campaign, world, ...extras });
@@ -464,6 +475,59 @@ test('PR15: a QZ-18 report is mounted only in its own displayed campaign plan', 
   assert.ok(root.querySelector('[data-campaign-story-return]'));
   assert.equal(mountCampaignDebriefV160(root, { save, campaignId: 'pair-001-mire', onReview() {} }), null);
   assert.equal(root.querySelector('[data-campaign-story-return]'), null, 'switching campaign removes the unrelated report');
+});
+
+test('PR15: the actual app review callback restores focus to the replaced topic on first and repeated reading', () => {
+  const values = new Map();
+  const system = new SaveSystem({ getItem: key => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) });
+  const save = returnedFixture(); save.strategy.plannedCampaignId = campaign.id;
+  applyCampaignStoryReturnV160(save, campaign, { success: true }); system.newGame(1); system.commit(save);
+  const { document, root } = storyDocument(), accepted = [], errors = [], resets = [];
+  let launch;
+  // The plan's unrelated HTML is represented by its launch control. Replacing
+  // it really detaches the mounted debrief and invalidates its active element.
+  Object.defineProperty(root, 'innerHTML', { set() {
+    root.replaceChildren(); resets.push(document.activeElement);
+    launch = document.createElement('button'); root.append(launch);
+  } });
+  const dependencies = { saveSystem: system, clone, preserveCampaignStoryReturnV160,
+    CAMPAIGNS: [campaign], WORLDS: [world], WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
+    getOperationBrief: () => ({ crewIds: [], ready: true, risk: 0, hours: 0 }),
+    resolveCrewDefinitionV85: member => member, getSpecialOperationByCampaignIdV67: () => null,
+    isSoloSpecialOperationV131: () => true, getAlphaBravoStrategicRecoveryV69: () => ({ canAbandon: false }),
+    APC_CONVOY_CAMPAIGN_V121: { id: 'other-convoy' }, BLACK_COCOON_CAMPAIGN_V121: { id: 'other-cocoon' },
+    ARCHIVE_RELAY_CAMPAIGN_V122: campaign, escapeHtml: String, formatCost: () => '',
+    byId: id => id === 'operation-plan' ? root : id === 'operation-launch' ? launch : null,
+    launchCampaign() {}, abandonBlockedOperationV69() {}, renderCommandMissionsV110() {},
+    mountCampaignDebriefV160, recordCampaignStoryReviewV160(candidate, id, topic) {
+      const result = recordCampaignStoryReviewV160(candidate, id, topic); accepted.push(result); return result;
+    }, toast: message => errors.push(message) };
+  // Execute the repository's complete renderer and callback, rather than a
+  // mirrored onReview implementation or a source-pattern assertion.
+  const app = readFileSync(new URL('../src/app.js', import.meta.url), 'utf8');
+  const start = app.indexOf('function renderOperationPlan() {');
+  const end = app.indexOf('\nfunction procurementActionsV62(', start);
+  assert.ok(start >= 0 && end > start);
+  const render = new Function(...Object.keys(dependencies), `${app.slice(start, end)}; return renderOperationPlan;`)(...Object.values(dependencies));
+  render();
+  const protectedBefore = clone({ clock: system.data.clock, galaxy: system.data.galaxy, crew: system.data.crew });
+  for (const changed of [true, false]) {
+    const previous = root.querySelector('[data-campaign-story-topic="identity"]'); previous.focus();
+    assert.equal(document.activeElement, previous); document.focusCalls.length = 0;
+    previous.click();
+    const replacement = root.querySelector('[data-campaign-story-topic="identity"]');
+    assert.notEqual(replacement, previous); assert.equal(document.body.contains(previous), false);
+    assert.equal(resets.at(-1), document.body, 'replacement must first invalidate the removed control focus');
+    assert.equal(document.activeElement, replacement, 'the accepted callback must focus the newly mounted topic');
+    assert.equal(document.body.contains(document.activeElement), true);
+    assert.deepEqual(document.focusCalls, [{ node: replacement, options: { preventScroll: true } }]);
+    assert.equal(accepted.at(-1).changed, changed);
+    assert.equal(replacement.getAttribute('aria-pressed'), 'true'); assert.match(replacement.textContent, /RELU/u);
+    assert.equal(root.querySelector('[data-campaign-story-answer]').dataset.campaignStoryAnswer, 'identity');
+  }
+  assert.deepEqual(errors, []);
+  assert.deepEqual({ clock: system.data.clock, galaxy: system.data.galaxy, crew: system.data.crew }, protectedBefore);
 });
 
 test('PR15: ordinary insertions retain their actual phase hooks while authored dialogue remains distinct', () => {

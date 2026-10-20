@@ -1461,6 +1461,7 @@ function renderOperationPlan() {
         if (!result.ok) return;
         if (result.changed) saveSystem.commit(candidate);
         renderOperationPlan();
+        byId('operation-plan').querySelector(`[data-campaign-story-topic="${topicId}"]`)?.focus({ preventScroll: true });
       } catch (error) { toast(error.message); }
     }
   });
