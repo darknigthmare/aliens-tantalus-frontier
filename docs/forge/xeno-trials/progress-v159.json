@@ -2084,7 +2084,8 @@
         "crossingCounterChanged": false,
         "reservationReleasedOnlyAfterWholeBodyClearsAndLeafCloses": true,
         "savedWithdrawalResumes": true,
-        "outsideDoor": "hold-current-supported-pose"
+        "outsideDoor": "hold-current-supported-pose",
+        "takesPriorityOverOrdinaryInteractionClocks": true
       }
     }
   },
@@ -2123,7 +2124,7 @@
     "src/hub-v71-runtime.js": "289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4",
     "src/legacy-operations-v131.js": "70d94552c2614f667fdd5083ee5677249dc733060855329c4551591f048fec60",
     "src/mission-input-v77.js": "96e176efc2232ff08b5ae477828b9e60a4d2baa56ca7a5c9444e20ed09d2ee6f",
-    "src/npc-annex-circulation-v159.js": "320356c188b644ab4c47bf1a1ff786a15ad9b3501bdc08dac498645ffa409ed8",
+    "src/npc-annex-circulation-v159.js": "d079a3b5895e0bd7b32f5de3281b3dc3a9badc072544859ff16cb18c3e0a2306",
     "src/npc-circulation-v158.js": "8ba022817afb11bec4bb9af5056982ccadd63f4707f0859cc40bd94c431252fa",
     "src/npc-life-v136.js": "6179892f6f37f1220c85de66bc5ac0bd94fce15ea8d643d6dd53b2280735ebb3",
     "src/player-appearance-runtime-v126.js": "6216b2066114e30b628807ab2eef1ff1ed742ce277aa216a3cef8927b337b78a",
@@ -3311,7 +3312,7 @@
           "09:00–10:30",
           "Sol physique, y=624",
           "Affectation technique conditionnelle",
-          "Affectation native conditionnelle ; V159 suit le même BISHOP depuis science-lab par le sas apparié et le retour. Sous crise ou infestation au sas : réouverture, retrait dans la même pièce puis fermeture avant libération du passage. Missions et soins prioritaires ; pas de trajet quarantaine ou autres annexes."
+          "Affectation native conditionnelle ; V159 suit le même BISHOP depuis science-lab par le sas apparié et le retour. Sous crise ou infestation au sas, y compris avec minuteurs d’interaction actifs : réouverture, retrait dans la même pièce puis fermeture avant libération du passage. Missions et soins prioritaires ; pas de trajet quarantaine ou autres annexes."
         ],
         [
           "cctv",
@@ -5563,8 +5564,8 @@
         [
           "src/npc-annex-circulation-v159.js",
           "Non épinglé en V158",
-          "320356c188b644ab4c47bf1a1ff786a15ad9b3501bdc08dac498645ffa409ed8",
-          "Contrôleur du même BISHOP sur sols natifs ; sas occulté, puis réouverture et retrait réel dans la pièce courante sous crise ou infestation avant libération du passage.",
+          "d079a3b5895e0bd7b32f5de3281b3dc3a9badc072544859ff16cb18c3e0a2306",
+          "Contrôleur du même BISHOP sur sols natifs ; sous crise ou infestation, réouverture et retrait réel dans la pièce courante avant libération du sas, y compris avec minuteurs d’interaction actifs.",
           "scripts/verify-npc-annex-circulation-v159.mjs"
         ]
       ]
@@ -10852,7 +10853,7 @@
       "expected": 3
     }
   ],
-  "workbookSha256": "6249f3559f5fbad7d762e11b301bc9071bafcd7f993ec80ba7b08f890086dd97",
+  "workbookSha256": "07aa37bdf37b81588b8e38eefc38df6b9116fd1e5fb3bad8283e7478677c2f7d",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V158",
@@ -10895,8 +10896,8 @@
       {
         "path": "src/npc-annex-circulation-v159.js",
         "previousSha256": null,
-        "currentSha256": "320356c188b644ab4c47bf1a1ff786a15ad9b3501bdc08dac498645ffa409ed8",
-        "reason": "Contrôleur du même BISHOP sur sols natifs ; sas occulté, puis réouverture et retrait réel dans la pièce courante sous crise ou infestation avant libération du passage.",
+        "currentSha256": "d079a3b5895e0bd7b32f5de3281b3dc3a9badc072544859ff16cb18c3e0a2306",
+        "reason": "Contrôleur du même BISHOP sur sols natifs ; sous crise ou infestation, réouverture et retrait réel dans la pièce courante avant libération du sas, y compris avec minuteurs d’interaction actifs.",
         "verifiers": [
           "scripts/verify-npc-annex-circulation-v159.mjs"
         ]

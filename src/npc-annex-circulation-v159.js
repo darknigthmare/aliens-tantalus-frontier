@@ -125,7 +125,7 @@ export function advanceNpcAnnexCirculationV159(previous, actor, delta, {
   const interruption = npcAnnexInterruptionV159(resolution, actor);
   const emergency = interruption === 'active-crisis' || interruption === 'infestation';
   const clearingDoor = emergency && (crossing(s) || s.doorProgress > 0);
-  if ((interruption && !clearingDoor) || actor.workClock > 0 || actor.supportClock > 0) return { ...s, velocity: 0,
+  if (!clearingDoor && (interruption || actor.workClock > 0 || actor.supportClock > 0)) return { ...s, velocity: 0,
     reason: interruption || 'interaction' };
   // An emergency cannot leave a frozen body owning both faces indefinitely.
   // Reopen its current leaf, withdraw on the real floor in the same chart,

@@ -280,7 +280,7 @@ test('the real V71 player gate reserves only this occupied SAS and keeps other a
 });
 
 test('the real owner releases an emergency SAS only after withdrawing its body, including a reload during that withdrawal', () => {
-  for(const stage of ['opening','covering','revealing','walking']){
+  for(const stage of ['opening','covering','revealing','walking'])for(const clock of [null,'workClock','supportClock']){
     const h=runtime();context(h,9);
     for(let i=0;i<1500;i++){
       const s=h.npcAnnexStateV159;
@@ -289,13 +289,18 @@ test('the real owner releases an emergency SAS only after withdrawing its body, 
     }
     assert.equal(h.npcAnnexStateV159.stage,stage);assert.ok(h.npcAnnexStateV159.doorProgress>0);
     const a=h.npcAnnexActorV159,origin={roomId:a.roomId,x:a.x,crossings:h.npcAnnexStateV159.crossings};
+    if(clock)a[clock]=12;
     const extra={crisis:{id:'actual',active:true}};context(h,9,extra);h.update(1/60);
     assert.equal(h.npcAnnexActorV159,a);assert.equal(a.roomId,origin.roomId);
     assert.equal(h.npcAnnexDoorReservedV159('synthetic-bay'),true);
     h.persist();const patch=h.persisted.at(-1),saved=patch.npcAnnexCirculationV159.actor;
     const resumed=runtime(9,patch);context(resumed,9,extra);
     assert.equal(resumed.npcAnnexActorV159.x,saved.x);assert.equal(resumed.npcAnnexStateV159.doorProgress,saved.doorProgress);
+    // Native interaction clocks are transient rather than part of the route
+    // save. Exercise one in both real owners; only their update may elapse it.
+    if(clock)resumed.npcAnnexActorV159[clock]=12;
     for(const owner of [h,resumed]){
+      const clockBefore=clock&&owner.npcAnnexActorV159[clock],timeBefore=owner.npcAnnexStateV159.time;
       for(let i=0;i<900&&owner.npcAnnexDoorReservedV159('synthetic-bay');i++){
         const before=structuredClone(owner.npcAnnexStateV159);owner.update(1/60);
         const s=owner.npcAnnexStateV159,body=owner.npcAnnexActorV159;
@@ -308,6 +313,11 @@ test('the real owner releases an emergency SAS only after withdrawing its body, 
       }
       assert.equal(owner.npcAnnexDoorReservedV159('synthetic-bay'),false);
       assert.equal(owner.npcAnnexDoorDemandV159('synthetic-bay'),0);
+      if(clock){
+        const remaining=owner.npcAnnexActorV159[clock],elapsed=owner.npcAnnexStateV159.time-timeBefore;
+        assert.ok(remaining>0,'Emergency withdrawal must clear the SAS before its interaction clock expires.');
+        assert.ok(Math.abs(remaining-(clockBefore-elapsed))<1e-6,'The real owner still elapses its interaction clock once per frame.');
+      }
       const final=owner.getSnapshot().npcAnnexCirculationV159;
       const opening=(origin.roomId==='science-lab'?final.sourceFace:final.annexFace).opening;
       assert.ok(owner.npcAnnexActorV159.x>opening.x+opening.w+12);
