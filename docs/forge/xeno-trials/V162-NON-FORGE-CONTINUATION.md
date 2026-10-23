@@ -16,7 +16,7 @@ Aucune nouvelle musique, voix, banque originale ou source de franchise. Le pilot
 
 ## C162-CREW — Circuit médical vers la morgue
 
-Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.
+Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée. Le pilote calcule l’arrivée de retour depuis le vrai cadre de porte, relâche les touches et observe le freinage avant de vérifier l’occupation durant au moins 0,15 seconde simulée. L’attente mesure la progression physique avec des bornes distinctes de simulation, de temps mural et de blocage ; cette adaptation de recette ne change pas le jeu.
 
 Un circuit parent/annexe borné. Aucun ascenseur, déplacement physique entre ponts, nouveau dessin ou cycle de dos. Les soins, missions et autres priorités restent natifs ; le trajet après délégation n’est pas prouvé par ce lot.
 

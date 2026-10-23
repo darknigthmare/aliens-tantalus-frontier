@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser()
@@ -18,7 +19,12 @@ parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--route', choices=['all', 'noor-morgue'], default='all')
 parser.add_argument('--comparison-stage', choices=['before', 'after'], default='after')
 parser.add_argument('--fixture', type=Path, help='Optional disclosed native Save reused byte-for-byte for before/after.')
+parser.add_argument('--return-cpu-throttle', type=float, default=1, help='Optional CDP CPU slowdown,1..8, only for the native occupied-return phase.')
 args = parser.parse_args()
+if not 1 <= args.return_cpu_throttle <= 8:
+    parser.error('--return-cpu-throttle must be between1 and8.')
+if args.return_cpu_throttle > 1 and args.comparison_stage != 'after':
+    parser.error('--return-cpu-throttle applies only to --comparison-stage after.')
 repo = Path(__file__).resolve().parents[1]
 output = args.output.resolve()
 if output == repo or repo in output.parents:
@@ -62,7 +68,7 @@ OBSERVE = '''c => {
  const h=__ATF_HUB__,snap=h.getSnapshot(),r=snap.npcMedicalRouteV162?.routes?.[c.id]||null;
  const annex=h.currentAnnexV71?.()?.id||null, visible=annex?h.activeAnnexNpcsV141():h.npcs;
  const a=h.getNpcMedicalActorV162?.()||visible.find(n=>n.crewId===c.crew)||null;
- return {route:r?structuredClone(r):null,running:h.running,deck:h.state.deck,annex,
+ return {route:r?structuredClone(r):null,running:h.running,deck:h.state.deck,roomId:h.state.roomId,annex,ventActive:Boolean(h.ventActorV62),
   player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,health:h.player.health},
   camera:{...h.camera},clock:structuredClone(h.npcRoutineContextV62.clock),
   actualActor:a?{crewId:a.crewId,x:a.x,y:a.y,w:a.w,h:a.h,roomId:a.roomId,vx:a.vx,facing:a.facing,
@@ -106,19 +112,34 @@ def open_hub(page, config, art=True):
     page.locator('#hub-canvas').focus()
 
 
-def walk_to(page, config, x):
+def walk_to(page, config, x, precise=False):
     current = observed(page, config)['player']['x']
-    if abs(current - x) < 4:
-        return
-    key = 'KeyD' if x > current else 'KeyA'
-    page.locator('#hub-canvas').focus()
-    page.keyboard.down(key)
-    try:
-        page.wait_for_function('t=>t.right?__ATF_HUB__.player.x>=t.x-3:__ATF_HUB__.player.x<=t.x+3',
-                               arg={'x': x, 'right': x > current}, timeout=90000)
-    finally:
-        page.keyboard.up(key)
+    if abs(current - x) >= 4:
+        key = 'KeyD' if x > current else 'KeyA'
+        page.locator('#hub-canvas').focus()
+        page.keyboard.down(key)
+        try:
+            page.wait_for_function('t=>t.right?__ATF_HUB__.player.x>=t.x-3:__ATF_HUB__.player.x<=t.x+3',
+                                   arg={'x': x, 'right': x > current}, timeout=90000)
+        finally:
+            page.keyboard.up(key)
     page.wait_for_function('()=>Math.abs(__ATF_HUB__.player.vx)<1')
+    if precise:
+        page.wait_for_function('()=>__ATF_HUB__.player.vx===0', timeout=15000)
+        deadline = time.monotonic() + 45
+        # A delayed keyup may pass a target despite the crossing predicate.
+        # Correct the final resting position with bounded real keyboard taps.
+        for attempt in range(16):
+            if time.monotonic() >= deadline:
+                break
+            delta = x - observed(page, config)['player']['x']
+            if abs(delta) <= 8:
+                return
+            page.locator('#hub-canvas').focus()
+            page.keyboard.press('KeyD' if delta > 0 else 'KeyA', delay=max(16, min(70, abs(delta) * 3)))
+            page.wait_for_function('()=>__ATF_HUB__.player.vx===0',
+                                   timeout=min(15000, max(1, (deadline - time.monotonic()) * 1000)))
+        raise AssertionError('Native keyboard steps did not settle on the actual return arrival.')
 
 
 def collect(page, config, name, stop, move_to=None):
@@ -179,6 +200,89 @@ def open_crew_dialogue(page, config):
     report.setdefault('conversationAttempts', []).append({'route': config['id'], 'before': observed(page, config)})
     page.keyboard.press('KeyE', delay=80)
     page.locator('#hub-dialogue').wait_for(state='visible')
+
+
+def ensure_return_occupant(page, config, label):
+    """Use real key releases/steps, then verify the actual paired arrival."""
+    state = observed(page, config)
+    actor = state['actualActor']
+    face = state['route']['sourceFace']
+    arrival = {'x': face['opening']['x'] + (face['opening']['w'] - actor['w']) / 2,
+               'y': face['socket']['y'] + face['socket']['h'] - actor['h'],
+               'w': actor['w'], 'h': actor['h']}
+    # The native portal already puts a stationary player in this aperture.
+    # A coarse extra walk can instead overshoot it after the keyup round trip.
+    page.keyboard.up('KeyA')
+    page.keyboard.up('KeyD')
+    page.wait_for_function('()=>__ATF_HUB__.player.vx===0')
+    walk_to(page, config, arrival['x'], precise=True)
+    state = observed(page, config)
+    player = state['player']
+    overlap = player['x'] < arrival['x'] + arrival['w'] and player['x'] + player['w'] > arrival['x'] \
+        and player['y'] < arrival['y'] + arrival['h'] and player['y'] + player['h'] > arrival['y']
+    record = {'phase': label, 'expectedArrival': arrival, 'observed': state}
+    report.setdefault('returnPlacement', []).append(record)
+    check(config['id'] + ': ' + label + ' occupies the actual NPC arrival after native keyup/braking',
+          not state['annex'] and not state['ventActive'] and state['deck'] == config['deck']
+          and state['roomId'] == config['parent'] and abs(player['x'] - arrival['x']) <= 8 and overlap
+          and abs(state['inputGuards']['playerVx']) < 1
+          and not any(key in state['inputGuards']['keys'] for key in ['KeyA', 'KeyD']))
+    return arrival
+
+
+def wait_occupied_return(page, config):
+    """Observe the complete return, bounded in simulation and wall time.
+
+    The native loop caps each update at34ms. The ~29 simulated seconds needed
+    here require ~850 frames;120 wall seconds cannot cover that below7FPS.
+    Actual x/leaf/phase progress, rather than time alone, owns the stall guard.
+    """
+    result = page.evaluate('''opts=>new Promise(resolve=>{
+      const h=__ATF_HUB__,started=performance.now();let frames=0,done=false,lastProgressAt=started,
+        lastProgress=null,origin=null,latest=null,lastSampleAt=-Infinity,simBudget=50;
+      const samples=[],wallBudgetMs=360000,stallBudgetMs=45000;
+      function read(){const s=h.getSnapshot().npcMedicalRouteV162.routes[opts.id],a=s.actor,p=h.player,
+        r=h.npcRoutineResolutionsV62?.get(opts.crew);
+        return {actor:a?structuredClone(a):null,handoff:structuredClone(s.nativeHandoff),sourceFace:s.sourceFace,running:h.running,
+          deck:h.state.deck,roomId:h.state.roomId,annex:h.currentAnnexV71?.()?.id||null,
+          player:{x:p.x,y:p.y,w:p.w,h:p.h,vx:p.vx},
+          routine:r?{reason:r.reason,missionAssigned:r.missionAssigned,needsCare:r.needsCare,alert:r.alert}:null};}
+      function finish(status,reason){if(done)return;done=true;clearInterval(timer);cancelAnimationFrame(raf);
+        const wallMs=performance.now()-started,simSeconds=latest?.actor&&origin?.actor?latest.actor.time-origin.actor.time:null;
+        resolve({status,reason,frames,wallMs,simSeconds,observedRafFps:wallMs?frames*1000/wallMs:0,
+          simBudgetSeconds:simBudget,wallBudgetMs,stallBudgetMs,lastProgressAgeMs:performance.now()-lastProgressAt,
+          origin,latest,samples});}
+      function frame(){if(done)return;frames++;const now=performance.now();latest=read();origin ||= latest;
+        const a=latest.actor,p=latest.player,face=origin.sourceFace;
+        const arrivalX=face.opening.x+(face.opening.w-44)/2;
+        if(now-lastSampleAt>=1000){samples.push({wallMs:now-started,actor:latest.actor,player:latest.player,
+          routine:latest.routine});if(samples.length>360)samples.shift();lastSampleAt=now;}
+        if(!a)return finish('failed','owned-actor-lost-before-occupation');
+        if(!latest.running)return finish('failed','native-loop-paused-before-occupation');
+        if(latest.annex||latest.deck!==opts.deck||latest.roomId!==opts.parent
+          ||Math.abs(p.x-arrivalX)>8||p.y!==532||Math.abs(p.vx)>=1)
+          return finish('failed','player-left-actual-parent-arrival');
+        if(a.roomId!==opts.annex||a.crossings!==1)return finish('failed','unexpected-portal-handoff-before-occupation');
+        if(latest.routine?.missionAssigned||latest.routine?.needsCare||latest.routine?.alert
+          ||['medical-recovery','mission-assignment','unavailable','active-crisis','infestation','annex-assignment'].includes(a.reason))
+          return finish('failed','native-priority-interrupted-return');
+        if(a.reason==='occupied')return finish('occupied','actual-return-opening-occupied');
+        if(!lastProgress||Math.abs(a.x-lastProgress.x)>=.5||a.stage!==lastProgress.stage
+          ||Math.abs(a.doorProgress-lastProgress.doorProgress)>=.01||a.crossings!==lastProgress.crossings){
+          lastProgress={x:a.x,stage:a.stage,doorProgress:a.doorProgress,crossings:a.crossings};lastProgressAt=now;}
+        if(a.time-origin.actor.time>simBudget)return finish('failed','simulated-return-budget-exhausted');
+        raf=requestAnimationFrame(frame);
+      }
+      const timer=setInterval(()=>{const now=performance.now();
+        if(now-started>=wallBudgetMs)finish('failed','wall-return-budget-exhausted');
+        else if(now-lastProgressAt>=stallBudgetMs)finish('failed','no-physical-return-progress');},1000);
+      let raf=requestAnimationFrame(frame);
+    })''', config)
+    report.setdefault('returnWaits', []).append(result)
+    (output / (config['id'] + '-occupied-return-wait.json')).write_text(json.dumps(result, indent=2))
+    check(config['id'] + ': real observed return reaches occupied within simulation/wall/progress guards',
+          result['status'] == 'occupied')
+    return result
 
 
 def fixture(config):
@@ -279,19 +383,42 @@ with sync_playwright() as pw:
                 walk_to(page, config, config['annexDoor'])
                 page.keyboard.press('KeyE')
                 page.wait_for_function('()=>!__ATF_HUB__.currentAnnexV71?.()&&!__ATF_HUB__.annexTransitionV71', timeout=45000)
-                walk_to(page, config, config['parentDoor'])
+                arrival = ensure_return_occupant(page, config, 'before native save')
                 page.locator('#exit-hub').click()
+                saved_player = page.evaluate('()=>({x:__ATF_V51__.saveSystem.data.hub.positionX,y:__ATF_V51__.saveSystem.data.hub.positionY})')
+                report['savedReturnPlayer'] = saved_player
+                check(prefix + ': native save retains the actual occupied return position',
+                      abs(saved_player['x'] - arrival['x']) <= 8.5 and saved_player['y'] == arrival['y'])
                 open_view(page, 'command')
                 page.locator(config['returnAction']).click()
                 page.wait_for_function('hour=>__ATF_V51__.saveSystem.data.clock.hour===hour', arg=config['returnHour'])
-                open_hub(page, config)
-                page.wait_for_function('id=>__ATF_HUB__.getSnapshot().npcMedicalRouteV162.routes[id].actor?.reason==="occupied"', arg=config['id'], timeout=120000)
-                occupied = observed(page, config)
-                page.wait_for_timeout(350)
-                waiting = observed(page, config)
-                check(prefix + ': actual destination occupant prevents return handoff', occupied['route']['actor']['roomId'] == config['annex']
-                      and waiting['route']['actor']['roomId'] == config['annex'] and waiting['route']['actor']['crossings'] == 1
-                      and waiting['route']['actor']['x'] == occupied['route']['actor']['x'])
+                cdp = None
+                report['returnCpuThrottle'] = {'rate': args.return_cpu_throttle, 'phase': 'native occupied return', 'applied': False}
+                if args.return_cpu_throttle > 1:
+                    cdp = context.new_cdp_session(page)
+                    cdp.send('Emulation.setCPUThrottlingRate', {'rate': args.return_cpu_throttle})
+                    report['returnCpuThrottle']['applied'] = True
+                try:
+                    open_hub(page, config)
+                    ensure_return_occupant(page, config, 'after native resume')
+                    wait_occupied_return(page, config)
+                    occupied = observed(page, config)
+                    page.wait_for_function('''p=>{const a=__ATF_HUB__.getSnapshot().npcMedicalRouteV162.routes[p.id].actor;
+                      return !a||a.roomId!==p.annex||a.crossings!==1||a.time>=p.time+.15;}''',
+                      arg={'id': config['id'], 'annex': config['annex'], 'time': occupied['route']['actor']['time']}, timeout=45000)
+                    waiting = observed(page, config)
+                    check(prefix + ': actual destination occupant prevents return handoff across native simulation frames',
+                          occupied['route']['actor']['roomId'] == config['annex'] and waiting['route']['actor'] is not None
+                          and waiting['route']['actor']['roomId'] == config['annex'] and waiting['route']['actor']['crossings'] == 1
+                          and waiting['route']['actor']['reason'] == 'occupied'
+                          and waiting['route']['actor']['time'] >= occupied['route']['actor']['time'] + .15
+                          and waiting['route']['actor']['x'] == occupied['route']['actor']['x']
+                          and waiting['player']['x'] == occupied['player']['x'])
+                finally:
+                    if cdp:
+                        cdp.send('Emulation.setCPUThrottlingRate', {'rate': 1})
+                        cdp.detach()
+                        report['returnCpuThrottle']['restoredRate'] = 1
                 capture(page, prefix + '-06-occupied-return-opening.png')
                 rows = collect(page, config, prefix + '-07-return-and-handoff', 'handoff', move_to=config['parentDoor'] + 600)
                 last = next(row['actor'] for row in reversed(rows) if row['actor'])
@@ -312,7 +439,7 @@ with sync_playwright() as pw:
             page.screenshot(path=str(output / 'failure.png'), full_page=True)
         except Exception as capture_error:
             report['captureError'] = str(capture_error)
-        print('::error file=scripts/qa-npc-service-routes-v162.py::' + str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'), flush=True)
+        print('::error file=scripts/qa-npc-medical-route-v162.py::' + str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'), flush=True)
         raise
     finally:
         browser.close()

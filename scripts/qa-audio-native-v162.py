@@ -186,7 +186,7 @@ raw_profile = subprocess.run(['node', '--input-type=module', '-e', script], cwd=
                              capture_output=True, text=True, check=True).stdout.encode()
 (output / 'disclosed-audio-profile-v162.json').write_bytes(raw_profile)
 report['fixtureSha256'] = hashlib.sha256(raw_profile).hexdigest()
-source_paths = sorted([*repo.glob('src/**/*.js'), *repo.glob('*.css'), repo / 'sw.js', repo / 'index.html', Path(__file__)])
+source_paths = sorted([*repo.glob('src/**/*.js'), *repo.glob('*.css'), repo / 'sw.js', repo / 'index.html', Path(__file__).resolve()])
 source_start = {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
 (output / 'profile-source-start.json').write_text(json.dumps(source_start, indent=2))
 

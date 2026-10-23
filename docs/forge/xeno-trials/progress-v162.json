@@ -2548,6 +2548,38 @@
               "idris-engine",
               "leila-galley"
             ]
+          },
+          "qaOccupiedReturnPolicy": {
+            "driver": "scripts/qa-npc-medical-route-v162.py",
+            "arrivalFrom": "actual sourceFace opening and actor dimensions",
+            "movement": "native keyboard with keyup and observed braking",
+            "maxRestingArrivalError": 8,
+            "simulationBudgetSeconds": 50,
+            "wallBudgetSeconds": 360,
+            "physicalProgressStallSeconds": 45,
+            "progressCriteria": [
+              "x changes at least0.5",
+              "phase changes",
+              "door progress changes at least0.01",
+              "crossing count changes"
+            ],
+            "diagnosticSampleHzMax": 1,
+            "diagnosticSamplesMax": 360,
+            "occupationHeldSimulationSeconds": 0.15,
+            "optionalReturnCpuThrottle": {
+              "default": 1,
+              "range": [
+                1,
+                8
+              ],
+              "phase": "occupied return only",
+              "alwaysRestored": true
+            },
+            "actorOrSimulationClockInjection": false,
+            "newRuntimeChangeForThisQaIteration": false,
+            "snapshotsPerAnimationFrame": 1,
+            "arrivalFaceCachedAtOrigin": true,
+            "ciTimeoutCauseEstablished": false
           }
         },
         "C162-APC": {
@@ -4287,7 +4319,7 @@
           "C162-CREW",
           "Périmètre hors Forge / demande existante",
           "src/npc-medical-route-v162.js ; src/npc-service-routes-v161.js ; scripts/qa-npc-medical-route-v162.py",
-          "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+          "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée. Le pilote calcule l’arrivée de retour depuis le vrai cadre de porte, relâche les touches et observe le freinage avant de vérifier l’occupation durant au moins 0,15 seconde simulée. L’attente mesure la progression physique avec des bornes distinctes de simulation, de temps mural et de blocage ; cette adaptation de recette ne change pas le jeu.",
           "Un circuit parent/annexe borné. Aucun ascenseur, déplacement physique entre ponts, nouveau dessin ou cycle de dos. Les soins, missions et autres priorités restent natifs ; le trajet après délégation n’est pas prouvé par ce lot."
         ],
         [
@@ -6184,7 +6216,7 @@
           "src/npc-service-routes-v161.js",
           "1571979e0dfe7d6bbad7e120aa1edae445099911909da0e7e3748e514674e189",
           "3bfd466c91a0861b1f99c806769a69a144942627c25fe2f1d47dcbd40711bf56",
-          "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+          "Expose la fabrique de circuits de service paramétrée et intègre le circuit médical indépendant, en préservant les propriétaires existants et les priorités natives.",
           "scripts/verify-npc-medical-route-v162.mjs"
         ],
         [
@@ -6233,7 +6265,7 @@
           "src/npc-medical-route-v162.js",
           "Non épinglé en V161",
           "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
-          "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+          "Expose la fabrique de circuits de service paramétrée et intègre le circuit médical indépendant, en préservant les propriétaires existants et les priorités natives.",
           "scripts/verify-npc-medical-route-v162.mjs"
         ]
       ]
@@ -11770,7 +11802,7 @@
           "C162-CREW",
           "Circuit médical vers la morgue",
           "annex-crew-coverage",
-          "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+          "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée. Le pilote calcule l’arrivée de retour depuis le vrai cadre de porte, relâche les touches et observe le freinage avant de vérifier l’occupation durant au moins 0,15 seconde simulée. L’attente mesure la progression physique avec des bornes distinctes de simulation, de temps mural et de blocage ; cette adaptation de recette ne change pas le jeu.",
           "src/npc-medical-route-v162.js ; src/npc-service-routes-v161.js",
           "scripts/verify-npc-medical-route-v162.mjs ; scripts/qa-npc-medical-route-v162.py",
           "À vérifier sur le commit final",
@@ -11993,7 +12025,7 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "fb6967a4c4c6d6ef19d162196357adf0905aa9e72c84bcb8e69689b3e6dc564c",
+  "workbookSha256": "994632af8d436fc1996eeec8b1f9fab20857391286bf81ba1b1f07a718e7ea72",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V161",
@@ -12031,7 +12063,7 @@
         "path": "src/npc-service-routes-v161.js",
         "previousSha256": "1571979e0dfe7d6bbad7e120aa1edae445099911909da0e7e3748e514674e189",
         "currentSha256": "3bfd466c91a0861b1f99c806769a69a144942627c25fe2f1d47dcbd40711bf56",
-        "reason": "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+        "reason": "Expose la fabrique de circuits de service paramétrée et intègre le circuit médical indépendant, en préservant les propriétaires existants et les priorités natives.",
         "verifiers": [
           "scripts/verify-npc-medical-route-v162.mjs"
         ]
@@ -12099,7 +12131,7 @@
         "path": "src/npc-medical-route-v162.js",
         "previousSha256": null,
         "currentSha256": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
-        "reason": "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+        "reason": "Expose la fabrique de circuits de service paramétrée et intègre le circuit médical indépendant, en préservant les propriétaires existants et les priorités natives.",
         "verifiers": [
           "scripts/verify-npc-medical-route-v162.mjs"
         ]
@@ -12897,7 +12929,7 @@
       "qaDrivers": [
         "scripts/qa-npc-medical-route-v162.py"
       ],
-      "implementedScope": "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée.",
+      "implementedScope": "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée. Le pilote calcule l’arrivée de retour depuis le vrai cadre de porte, relâche les touches et observe le freinage avant de vérifier l’occupation durant au moins 0,15 seconde simulée. L’attente mesure la progression physique avec des bornes distinctes de simulation, de temps mural et de blocage ; cette adaptation de recette ne change pas le jeu.",
       "limits": "Un circuit parent/annexe borné. Aucun ascenseur, déplacement physique entre ponts, nouveau dessin ou cycle de dos. Les soins, missions et autres priorités restent natifs ; le trajet après délégation n’est pas prouvé par ce lot.",
       "contract": {
         "crewId": "crew-04-noor-okafor",
@@ -12935,9 +12967,41 @@
             "idris-engine",
             "leila-galley"
           ]
+        },
+        "qaOccupiedReturnPolicy": {
+          "driver": "scripts/qa-npc-medical-route-v162.py",
+          "arrivalFrom": "actual sourceFace opening and actor dimensions",
+          "movement": "native keyboard with keyup and observed braking",
+          "maxRestingArrivalError": 8,
+          "simulationBudgetSeconds": 50,
+          "wallBudgetSeconds": 360,
+          "physicalProgressStallSeconds": 45,
+          "progressCriteria": [
+            "x changes at least0.5",
+            "phase changes",
+            "door progress changes at least0.01",
+            "crossing count changes"
+          ],
+          "diagnosticSampleHzMax": 1,
+          "diagnosticSamplesMax": 360,
+          "occupationHeldSimulationSeconds": 0.15,
+          "optionalReturnCpuThrottle": {
+            "default": 1,
+            "range": [
+              1,
+              8
+            ],
+            "phase": "occupied return only",
+            "alwaysRestored": true
+          },
+          "actorOrSimulationClockInjection": false,
+          "newRuntimeChangeForThisQaIteration": false,
+          "snapshotsPerAnimationFrame": 1,
+          "arrivalFaceCachedAtOrigin": true,
+          "ciTimeoutCauseEstablished": false
         }
       },
-      "sourceChangeReason": "Noor Okafor relie l’infirmerie à la morgue du pont 1 pour son service médico-légal. Le circuit reprend le même acteur de 44 × 92 unités, le sol 624, les sockets natifs et la fermeture opaque des portes. Le créneau de soins animaliers 09 h–10 h 30 est préservé par un retour réel à l’infirmerie puis une délégation native signalée comme non observée."
+      "sourceChangeReason": "Expose la fabrique de circuits de service paramétrée et intègre le circuit médical indépendant, en préservant les propriétaires existants et les priorités natives."
     },
     {
       "id": "C162-APC",
