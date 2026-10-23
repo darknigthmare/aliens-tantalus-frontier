@@ -1,0 +1,88 @@
+name: Excel continuation V163
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gameplay-v163-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  native-v163:
+    name: Native V163 (${{ matrix.workstream }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      matrix:
+        workstream: [campaign, crew-lifts, crew-leases, weapons-title, trials]
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install locked application dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Browser tooling outside the release
+        run: |
+          python -m pip install playwright==1.57.0 openpyxl==3.1.5
+          python -m playwright install --with-deps chromium
+      - name: Contracts and actual distribution
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/atf-gameplay-v163"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/atf-gameplay-v163/source-commit.txt"
+          npm run test:continuation:v163 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/node.log"
+          npm run check 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/source-check.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/build.log"
+          npm run check:built 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/distribution-check.log"
+      - name: Native visual journeys
+        shell: bash
+        env:
+          WORKSTREAM: ${{ matrix.workstream }}
+        run: |
+          set -o pipefail
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/atf-gameplay-v163/http.log" 2>&1 &
+          gameplay_server=$!
+          trap 'kill "$gameplay_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_BASE_URL=http://127.0.0.1:4173
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          status=0
+          case "$WORKSTREAM" in
+            campaign)
+              python scripts/qa-campaign-lethe-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/campaign" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/campaign.log" || status=1
+              ;;
+            crew-lifts)
+              python scripts/qa-npc-annex-service-routes-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew.log" || status=1
+              python scripts/qa-hub-lift-transit-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/lifts" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/lifts.log" || status=1
+              ;;
+            crew-leases)
+              python scripts/qa-npc-annex-leases-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew-leases" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew-leases.log" || status=1
+              ;;
+            weapons-title)
+              python scripts/qa-reload-branches-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/reloads" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/reloads.log" || status=1
+              python scripts/qa-title-compositions-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/title" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/title.log" || status=1
+              ;;
+            trials)
+              python scripts/qa-xeno-trials-capture-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/captures" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/captures.log" || status=1
+              python scripts/qa-native-rig-catalog-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/rigs.log" || status=1
+              python scripts/qa-trials-continuity-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/continuity" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/continuity.log" || status=1
+              ;;
+          esac
+          exit "$status"
+      - name: Retain actual evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: gameplay-v163-${{ matrix.workstream }}
+          retention-days: 7
+          path: ${{ runner.temp }}/atf-gameplay-v163
+          if-no-files-found: error

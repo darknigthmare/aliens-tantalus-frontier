@@ -159,6 +159,17 @@ test('rendering and accessible view never mutate the authoritative simulation',(
   assert.equal(view(m).animation,'existing-static-pose');assert.equal(view(m).canonExact,false);assert.equal(view(m).escapeRatio,30/72);
   const detached=view(m);detached.escapeProgress=999;assert.equal(m.grappleV153.escapeProgress,30);assert.equal(view({}),null);
 });
+test('a drawn paired floor pose removes only the legacy connector; static fallback keeps it and both retain the escape HUD',()=>{
+  const m=latch();ticks(m,30,{}, {guard:true});const before=copy(m);
+  const record=options=>{const calls=[],ctx=new Proxy({},{get:(_,key)=>(...args)=>calls.push([key,...args]),set:()=>true});
+    draw(ctx,m,bounds,450,options);return calls;};
+  const historical=record(undefined),fallback=record({showLegacyContactLine:true}),paired=record({showLegacyContactLine:false});
+  assert.deepEqual(historical,fallback);assert.equal(historical.filter(c=>c[0]==='lineTo').length,1);
+  for(const method of ['beginPath','moveTo','lineTo','stroke'])assert.equal(paired.filter(c=>c[0]===method).length,0,method);
+  const hud=calls=>calls.filter(c=>['fillRect','fillText'].includes(c[0]));
+  assert.deepEqual(hud(paired),hud(historical));assert.equal(hud(paired).filter(c=>c[0]==='fillRect').length,2);
+  assert.ok(hud(paired).some(c=>c[0]==='fillText'&&c[1].includes('GARDE')));assert.deepEqual(m,before);
+});
 test('existing historical attack numerics and super admission are not rewritten for the roster',()=>{
   assert.equal(spec(def('prowler'),'special',base.special).cost,34);assert.equal(spec(def('prowler'),'special',base.special).damage,30);
   for(const f of roster)for(const kind of ['light','heavy','special'])assert.ok(spec(f,kind,base[kind]));

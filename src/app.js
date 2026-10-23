@@ -51,6 +51,9 @@ import { hasCampaignStoryV161, recordCampaignStoryReviewV161 } from './campaign-
 import { mountCampaignDebriefV161 } from './campaign-convoy-story-ui-v161.js';
 import { preserveConvoyReturnHistoryV162 } from './campaign-convoy-history-v162.js';
 import { mountConvoyReturnHistoryV162 } from './campaign-convoy-history-ui-v162.js';
+import { hasCampaignStoryV163 } from './campaign-lethe-story-v163.js';
+import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from './campaign-lethe-continuity-v163.js';
+import { mountLetheContinuityV163 } from './campaign-lethe-continuity-ui-v163.js';
 import { withHubMotionTrackerV160 } from './motion-tracker-v160.js';
 import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
@@ -72,6 +75,9 @@ import { withHubNpcCirculationV158 } from './npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
 import { withHubNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
 import { withHubNpcMedicalRouteV162 } from './npc-medical-route-v162.js';
+import { withHubNpcAnnexServiceRoutesV163 } from './npc-annex-service-routes-v163.js';
+import { withHubNpcAnnexLeasesV163 } from './npc-annex-leases-v163.js';
+import { withHubLiftTransitV163 } from './hub-lift-transit-v163.js';
 import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
 import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
 import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
@@ -266,9 +272,9 @@ const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameE
 const NativeHubGame = [
   withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
   withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
-  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161, withHubNpcMedicalRouteV162,
+  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161, withHubNpcMedicalRouteV162, withHubNpcAnnexServiceRoutesV163, withHubNpcAnnexLeasesV163,
   withHubCirculationV137, withHubRoomIdentityV137,
-  withHubDestinationSignsV138
+  withHubDestinationSignsV138, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
 const HubGame = withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)));
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -1413,7 +1419,8 @@ function renderOperationPlan() {
     const candidate = clone(saveSystem.data);
     const storyChanged = preserveCampaignStoryReturnV160(candidate).changed;
     const convoyChanged = preserveConvoyReturnHistoryV162(candidate).changed;
-    if (storyChanged || convoyChanged) saveSystem.commit(candidate);
+    const letheChanged = preserveLetheContinuityV163(candidate).changed;
+    if (storyChanged || convoyChanged || letheChanged) saveSystem.commit(candidate);
   } catch (error) { toast(error.message); }
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
@@ -1493,6 +1500,31 @@ function renderOperationPlan() {
     }
   });
   mountConvoyReturnHistoryV162(byId('operation-plan'), { save: saveSystem.data });
+  mountLetheContinuityV163(byId('operation-plan'), {
+    save: saveSystem.data,
+    onPlan: campaignId => {
+      if (saveSystem.data.strategy.currentOperation) return false;
+      const selected = CAMPAIGNS.find(entry => entry.id === campaignId);
+      if (!selected || !saveSystem.data.galaxy.unlockedWorldIds.includes(selected.worldId)) return false;
+      try {
+        const candidate = clone(saveSystem.data);
+        candidate.strategy.plannedCampaignId = selected.id;
+        saveSystem.commit(candidate);
+        renderOperationPlan();
+        byId('operation-launch')?.focus({ preventScroll: true });
+        return true;
+      } catch (error) { toast(error.message); return false; }
+    },
+    onReview: (chapterId, operationId, topicId) => {
+      try {
+        const candidate = clone(saveSystem.data);
+        const result = recordLetheContinuityReviewV163(candidate, chapterId, operationId, topicId);
+        if (!result.ok) return false;
+        if (result.changed) saveSystem.commit(candidate);
+        return true;
+      } catch (error) { toast(error.message); return false; }
+    }
+  });
   // This render may have selected the first unlocked fallback campaign. Keep
   // the player selector synchronized with that exact displayed manifesto.
   renderCommandMissionsV110();
@@ -2496,7 +2528,8 @@ function campaignObjectiveLabel(campaignId) {
 
 function startMissionInsertionV62(context) {
   const operation = saveSystem.data.strategy.currentOperation;
-  const authoredStory = hasCampaignStoryV160(context.campaign?.id) || hasCampaignStoryV161(context.campaign?.id);
+  const authoredStory = hasCampaignStoryV160(context.campaign?.id) || hasCampaignStoryV161(context.campaign?.id)
+    || hasCampaignStoryV163(context.campaign?.id);
   // Preserve mid-mission saves from before this authored opening existed.
   // An insertion paused before deployment still has its own durable phase.
   const legacyStoryResume = authoredStory && context.deployment?.resumed

@@ -102,15 +102,20 @@ export function getXenoTrialsGrappleViewV153(match) {
 /** Read-only restraint indicators. Existing art and world scale are untouched.
  * No procedural bending is presented as an authored, articulated pin animation.
  */
-export function drawXenoTrialsGrappleV153(ctx, match, bounds, floor) {
+export function drawXenoTrialsGrappleV153(ctx, match, bounds, floor, options = {}) {
   const view = getXenoTrialsGrappleViewV153(match);
   if (!view) return;
   const actors = [view.attacker, view.target].map(side => match.fighters.find(f => f.side === side));
   if (actors.some(f => !f)) return;
   const [a,b] = actors.map(bounds), y = floor - Math.max(a.top,b.top) - 28;
   ctx.save(); ctx.strokeStyle = '#e4c889'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(a.center, floor - a.bottom - a.height * .45);
-  ctx.lineTo(b.center, floor - b.bottom - b.height * .45); ctx.stroke();
+  // The historical connector explains the static fallback. A complete paired
+  // pose already shows its contact and must not draw a line to standing bounds.
+  // Explicit opt-out keeps every existing caller's HUD contract unchanged.
+  if (options?.showLegacyContactLine !== false) {
+    ctx.beginPath(); ctx.moveTo(a.center, floor - a.bottom - a.height * .45);
+    ctx.lineTo(b.center, floor - b.bottom - b.height * .45); ctx.stroke();
+  }
   ctx.fillStyle = '#061019'; ctx.fillRect(b.center - 48, y, 96, 8);
   ctx.fillStyle = '#a7dbb0'; ctx.fillRect(b.center - 48, y, 96 * view.escapeRatio, 8);
   ctx.font = '12px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#e4c889';

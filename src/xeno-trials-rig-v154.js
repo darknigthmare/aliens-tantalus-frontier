@@ -1,6 +1,7 @@
 import { sampleXenoTrialsRestraintPoseV156 } from './xeno-trials-restraint-pose-v156.js';
 import { sampleXenoTrialsCaptureReceptionV158 } from './xeno-trials-capture-reception-v158.js';
 import { XENO_TRIALS_RIG_DATA_V154 } from './xeno-trials-rig-data-v154.js';
+import { XENO_TRIALS_RIG_DATA_V163 } from './xeno-trials-rig-data-v163.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
 import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
@@ -9,6 +10,9 @@ import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 // captured 1:1 choreography. No collision, stature, damage, clock or save writes.
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 export const XENO_TRIALS_RIGS_V154=freeze(XENO_TRIALS_RIG_DATA_V154);
+// Historical API remains the four reviewed V154 plates. V163 adds its own
+// measured sources; an object copy still cannot acquire admission.
+const admittedRigsV163=freeze([...XENO_TRIALS_RIGS_V154,...XENO_TRIALS_RIG_DATA_V163]);
 export const XENO_TRIALS_RIG_TIMING_V154=Object.freeze({intro:XENO_PRESENTATION_V97.introMs/1000,round:1.8,release:XENO_TRIALS_GRAPPLE_V153.recovery,settle:.12});
 const clamp=(v,lo=0,hi=1)=>Math.max(lo,Math.min(hi,v));
 const smooth=v=>{const t=clamp(v);return t*t*(3-2*t);};
@@ -17,11 +21,31 @@ const point=(m,x,y)=>[m[0]*x+m[2]*y+m[4],m[1]*x+m[3]*y+m[5]];
 const multiply=(a,b)=>[a[0]*b[0]+a[2]*b[1],a[1]*b[0]+a[3]*b[1],a[0]*b[2]+a[2]*b[3],a[1]*b[2]+a[3]*b[3],a[0]*b[4]+a[2]*b[5]+a[4],a[1]*b[4]+a[3]*b[5]+a[5]];
 function rotation(degrees,pivot){const a=degrees*Math.PI/180,c=Math.cos(a),s=Math.sin(a),[x,y]=pivot;return[c,s,-s,c,x-c*x+s*y,y-s*x-c*y];}
 export function getXenoTrialsRigV154(definition,art){
- const r=XENO_TRIALS_RIGS_V154.find(r=>r.fighterId===definition?.id&&r.profileId===definition.profileId);
+ const r=admittedRigsV163.find(r=>r.fighterId===definition?.id&&r.profileId===definition.profileId);
  return r&&art?.id===r.profileId&&art.path===r.path&&art.sourceWidth===r.sourceWidth&&art.sourceHeight===r.sourceHeight
   &&art.sourceFacing===r.sourceFacing&&(!art.sha256||art.sha256===r.sourceSha256)?r:null;
 }
 const inside=(p,r)=>r&&p[0]>=r[0]&&p[0]<=r[2]&&p[1]>=r[1]&&p[1]<=r[3];
+const inPolygonV163=(p,polygon)=>{let hit=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){
+ const a=polygon[i],b=polygon[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])hit=!hit;
+}return hit;};
+const crossV163=(a,b,p)=>(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);
+const onSegmentV163=(p,a,b)=>Math.abs(crossV163(a,b,p))<1e-7
+ &&p[0]>=Math.min(a[0],b[0])-1e-7&&p[0]<=Math.max(a[0],b[0])+1e-7
+ &&p[1]>=Math.min(a[1],b[1])-1e-7&&p[1]<=Math.max(a[1],b[1])+1e-7;
+function segmentsTouchV163(a,b,c,d){
+ const abC=crossV163(a,b,c),abD=crossV163(a,b,d),cdA=crossV163(c,d,a),cdB=crossV163(c,d,b);
+ return abC*abD<0&&cdA*cdB<0||onSegmentV163(c,a,b)||onSegmentV163(d,a,b)
+  ||onSegmentV163(a,c,d)||onSegmentV163(b,c,d);
+}
+function triangleTouchesPolygonV163(triangle,polygon){
+ if(triangle.some(p=>inPolygonV163(p,polygon)))return true;
+ if(polygon.some(p=>{
+  const signs=triangle.map((a,i)=>crossV163(a,triangle[(i+1)%3],p));
+  return signs.every(n=>n>=-1e-7)||signs.every(n=>n<=1e-7);
+ }))return true;
+ return triangle.some((a,i)=>polygon.some((c,j)=>segmentsTouchV163(a,triangle[(i+1)%3],c,polygon[(j+1)%polygon.length])));
+}
 function distance(p,b){const[x,y]=b.pivot,dx=b.tip[0]-x,dy=b.tip[1]-y,t=clamp(((p[0]-x)*dx+(p[1]-y)*dy)/(dx*dx+dy*dy||1));return Math.hypot(p[0]-x-dx*t,p[1]-y-dy*t);}
 const meshes=new WeakMap();
 // One observed contact per match, outside the authoritative engine. A projectile
@@ -30,13 +54,15 @@ const meshes=new WeakMap();
 const receptionContactsV158=new WeakMap();
 // Native alpha cells are retained even when they contain a single visible pixel.
 export function getXenoTrialsRigMeshV154(rig){
- if(!XENO_TRIALS_RIGS_V154.includes(rig))return null;
+ if(!admittedRigsV163.includes(rig))return null;
  if(meshes.has(rig))return meshes.get(rig);
  const{cell,cols,rows,mask}=rig.mesh,vertices=[],triangles=[],lookup=new Map();
  const vertex=(x,y)=>{
   const key=`${x}:${y}`;if(lookup.has(key))return lookup.get(key);
   const p=[Math.min(x*cell,rig.sourceWidth),Math.min(y*cell,rig.sourceHeight)];let weights;
-  if(inside(p,rig.pinned))weights=[['hips',1]];
+  const carried=rig.rigidZonesV163?.find(zone=>inPolygonV163(p,zone.polygon));
+  if(carried)weights=[[carried.bone,1]];
+  else if(inside(p,rig.pinned))weights=[['hips',1]];
   else if(inside(p,rig.rigidWeaponZone))weights=[['spine',1]];
   else{const near=rig.bones.map(b=>[b.id,distance(p,b)]).sort((a,b)=>a[1]-b[1]).slice(0,2);
    const values=near.map(([id,d])=>[id,1/(d+24)**4]),sum=values.reduce((n,v)=>n+v[1],0);weights=values.map(([id,w])=>[id,w/sum]);}
@@ -46,11 +72,19 @@ export function getXenoTrialsRigMeshV154(rig){
   const n=y*cols+x;if(!(parseInt(mask[Math.floor(n/4)],16)&(8>>(n%4))))continue;
   const a=vertex(x,y),b=vertex(x+1,y),c=vertex(x,y+1),d=vertex(x+1,y+1);triangles.push([a,b,c],[b,d,c]);
  }
+ // A source pixel is rendered by a whole affine triangle. Pinning only vertices
+ // inside the measured gun polygon still bends pixels along its boundary.
+ // Admit exactly the intersecting triangles, including shared boundary points;
+ // no art, pose, collision or support-contact data is changed.
+ for(const zone of rig.rigidZonesV163||[])for(const ids of triangles){
+  if(triangleTouchesPolygonV163(ids.map(id=>vertices[id].source),zone.polygon))
+   for(const id of ids)vertices[id].weights=[[zone.bone,1]];
+ }
  const mesh=freeze({vertices,triangles});meshes.set(rig,mesh);return mesh;
 }
 // Only events and phases owned by this match can select a clip.
 export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
- if(!XENO_TRIALS_RIGS_V154.includes(rig)||fighter?.id!==rig.fighterId||!match?.fighters?.includes(fighter))return null;
+ if(!admittedRigsV163.includes(rig)||fighter?.id!==rig.fighterId||!match?.fighters?.includes(fighter))return null;
  const index=match.fighters.indexOf(fighter),T=XENO_TRIALS_RIG_TIMING_V154;
  if(match.phase==='active'&&presentation?.fighterSlot===index&&presentation.blocksSimulation)
   return{clip:'intro',progress:clamp(presentation.elapsedMs/(T.intro*1000)),elapsed:presentation.elapsedMs/1000};
@@ -83,7 +117,7 @@ export function getXenoTrialsRigCueV154(rig,match,fighter,presentation=null){
 }
 // Rigid bone transforms blend only the source mesh, never the simulation bodies.
 export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
- if(!XENO_TRIALS_RIGS_V154.includes(rig)||!Object.hasOwn(rig.poses,cue?.clip)||!Number.isFinite(cue.progress)||!Number.isFinite(cue.elapsed)||cue.elapsed<0)return null;
+ if(!admittedRigsV163.includes(rig)||!Object.hasOwn(rig.poses,cue?.clip)||!Number.isFinite(cue.progress)||!Number.isFinite(cue.elapsed)||cue.elapsed<0)return null;
  const p=clamp(cue.progress);let gain=1;
  if(cue.clip==='intro')gain=Math.sin(Math.PI*p)**2;
  else if(cue.clip==='windup')gain=Math.sin(Math.PI*p)**2;
@@ -211,7 +245,7 @@ function affine(s,d){
 }
 // Wrong images or inverted triangles fall back to the exact native pose.
 export function drawXenoTrialsRigV154(ctx,rig,image,frame,metrics,x,y,facing){
- if(!frame?.active||!XENO_TRIALS_RIGS_V154.includes(rig)||frame.rigId!==rig.id||image?.complete===false
+ if(!frame?.active||!admittedRigsV163.includes(rig)||frame.rigId!==rig.id||image?.complete===false
   ||(image?.naturalWidth??image?.width)!==rig.sourceWidth||(image?.naturalHeight??image?.height)!==rig.sourceHeight
   ||![x,y,metrics?.width,metrics?.height,metrics?.pivotX,metrics?.bottom].every(Number.isFinite)||metrics.width<=0||metrics.height<=0
   ||![-1,1].includes(facing)||typeof ctx?.clip!=='function'||typeof ctx?.transform!=='function')return null;

@@ -2,6 +2,7 @@ import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { HUMAN_VISUAL_CONTRACT_V133 } from './human-visual-contract-v133.js';
 import { getPlayerArmReachV160, nearestReachableWeaponGripV160,
   interpolatePlayerArmTargetV160 } from './player-arm-constraints-v160.js';
+import { getReloadPresentationProgressV163 } from './reload-presentation-v163.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low = 0, high = 1) => Math.max(low, Math.min(high, value));
@@ -66,7 +67,7 @@ function reloadState(actor, profile) {
   const sameWeapon = !state?.weaponKey || [profile.weaponId, profile.fallbackFor, profile.name].includes(state.weaponKey);
   const active = actor.reloading === true && state?.phase === 'reloading' && sameWeapon
     && finite(state.completeAt) > 0 && profile.reload.feed !== 'none';
-  return { active, progress: active ? clamp(finite(state.elapsed) / state.completeAt) : 0,
+  return { active, progress: active ? getReloadPresentationProgressV163(state) : 0,
     feed: profile.reload.feed, result: active ? state.result || 'normal' : null };
 }
 

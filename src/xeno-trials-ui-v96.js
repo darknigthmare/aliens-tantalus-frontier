@@ -1,4 +1,5 @@
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
+import { getXenoTrialsSequenceV155 } from './xeno-trials-sequences-v155.js';
 import { hasXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperReadinessV148, getXenoTrialsSuperStatusV148 } from './xeno-trials-supers-v148.js';
 import { getXenoTrialsSignatureV147 } from './xeno-trials-signatures-v147.js';
@@ -300,11 +301,11 @@ export class XenoTrialsUiV96 {
       const attack = getEnemyImportAttackV109(art);
       const signature = getXenoTrialsSignatureV147(f);
       const rig=getXenoTrialsRigV154(f,art);
-      const motionLabel = rig ? 'Rig maillé adapté : entrées et réponse adverse, défi T, résultats et reprises de manche, saisie et dégagement.' : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label;
+      const motionLabel = rig ? (rig.id.startsWith('rig-v154-') ? 'Rig maillé adapté : entrées, défi T, résultats et saisie sur les trois cibles compatibles.' : 'Rig natif mesuré : présentations et réactions prudentes, appuis et arme conservés. Marche complète non disponible.') : attack ? `Marche : 4 poses adaptées · ${attack.label}` : walk?.label;
       const desiredFacing = i ? -1 : 1;
       const sourceFacing = art?.sourceFacing === 1 ? 1 : -1;
       const family = FAMILIES.find(entry => entry.id === getXenoTrialsSelectionFamilyV119(f))?.label || 'À DÉFINIR';
-      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${f.hp} PV · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description)}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie de simulation sur Commando WY, Guardian et Cultiste Darwin Era : maintenir GARDE pour se dégager. Cible abaissée, genoux fléchis et appuis conservés ; position couchée complète encore à produire. Les autres anatomies restent sur le coup de contact.</small>' : ''}<small>Origine : ${escapeHtml(art?.sourceWork || art?.sourceName || 'Dossier de simulation')} · Référence : adaptation non certifiée</small>${motionLabel ? `<small>Aperçu fixe · ${motionLabel}</small>` : '<small>Pose fixe dédiée · Animation complète non disponible</small>'}</figure>`;
+      return `<figure><figcaption>${i ? 'ADVERSAIRE' : 'VOTRE SPÉCIMEN'}</figcaption><div class="xt-facing-preview" data-facing="${desiredFacing}" style="transform:scaleX(${desiredFacing * sourceFacing});width:100%">${portrait}</div><strong>${escapeHtml(f.label)}</strong><span>${family} · ${roleLabel[f.role]} · ${f.hp} PV · ${f.speed} mobilité</span><small>${escapeHtml(getXenoTrialsFighterSpecialLabelV147(f))}</small>${signature ? `<small data-xt-signature="${signature.id}">${escapeHtml(signature.description)}</small>` : ''}${hasXenoTrialsGrappleV153(f) ? '<small>Saisie de simulation sur Commando WY, Guardian et Cultiste Darwin Era : maintenir GARDE pour se dégager. Réception, chute articulée, maintien au sol, résistance et relevé en neuf poses originales adaptées par cible. Si la planche est indisponible, abaissement natif conservé. Les autres anatomies restent sur le coup de contact.</small>' : ''}<small>Origine : ${escapeHtml(art?.sourceWork || art?.sourceName || 'Dossier de simulation')} · Référence : adaptation non certifiée</small>${motionLabel ? `<small>Aperçu fixe · ${motionLabel}</small>` : '<small>Pose fixe dédiée · Animation complète non disponible</small>'}</figure>`;
     }).join('<span class="xt-versus" aria-hidden="true">VS</span>');
     const stage = STAGES.find(s => s.id === this.form.elements.stageId.value) || STAGES[0];
     const matchup = ids.map(id => FIGHTERS.find(f => f.id === id)?.label || '').join(' contre ');
@@ -404,7 +405,7 @@ export class XenoTrialsUiV96 {
     if (this.lastStatus !== text && !this.unsavedResult) { this.message(text); this.lastStatus = text; }
     this.el('next').hidden = snapshot.phase !== 'round-over';
     const outroPlaying = snapshot.outroV155?.phase === 'playing' || snapshot.terminalV156?.phase === 'playing' || snapshot.exitV157?.phase === 'playing' || snapshot.landingV157?.phase === 'playing';
-    this.el('taunt').hidden = !getXenoTrialsRigV154(FIGHTERS.find(f=>f.id===snapshot.fighters[0].id),getXenoTrialsArtV96(snapshot.fighters[0].id,snapshot.fighters[0].variant));
+    this.el('taunt').hidden = !getXenoTrialsSequenceV155(getXenoTrialsRigV154(FIGHTERS.find(f=>f.id===snapshot.fighters[0].id),getXenoTrialsArtV96(snapshot.fighters[0].id,snapshot.fighters[0].variant)), 'taunt');
     this.el('taunt').disabled=!snapshot.canTauntV156 || Boolean(this.unsavedResult);
     this.root.setAttribute('data-xt-outro',String(outroPlaying));
     this.el('skip-sequence').hidden = !(outroPlaying || snapshot.presentation?.fighterSlot !== null && snapshot.presentation?.blocksSimulation) || snapshot.paused;
