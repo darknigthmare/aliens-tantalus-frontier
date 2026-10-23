@@ -2757,7 +2757,7 @@
     "src/legacy-operations-v131.js": "70d94552c2614f667fdd5083ee5677249dc733060855329c4551591f048fec60",
     "src/mission-input-v77.js": "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
     "src/mission-insertion-ui-v62.js": "1e8b4c42e6b5115ff75e86c50dbace7d649c8a4b244629c7788b963a6c690dc5",
-    "src/motion-tracker-display-v160.js": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
+    "src/motion-tracker-display-v160.js": "5062de6ccd88582691498bf7c340e9381602937aa1e22f8583efaf308aa60818",
     "src/motion-tracker-v160.js": "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
     "src/npc-annex-circulation-v159.js": "30ff9afe4985a2e9db880845521e3fb4e31a38304f97a0a7c12c3c5ba54ef493",
     "src/npc-annex-leases-v163.js": "693127019ce88885f1a1a376016dda1910f82d45929431bd3acec0dce7fe95c6",
@@ -6492,6 +6492,13 @@
           "1e8b4c42e6b5115ff75e86c50dbace7d649c8a4b244629c7788b963a6c690dc5",
           "Conserver le focus et l’état natif des contrôles lors des scènes originales et des échecs atomiques de stockage, en cohérence avec les nouveaux protocoles C12/Cocon et les retours de campagne.",
           "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs"
+        ],
+        [
+          "src/motion-tracker-display-v160.js",
+          "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
+          "5062de6ccd88582691498bf7c340e9381602937aa1e22f8583efaf308aa60818",
+          "Correction ciblée de l’affichage hérité du détecteur : proposer une position sous un acteur haut à 320 px lorsque les deux coins HUD le recouvrent, sans modifier les mesures, les contacts ou le comportement du détecteur. Vérification par le profil motion-tracker-v160 déjà obligatoire ; aucun nouveau détecteur ni profil de recette.",
+          "scripts/verify-motion-tracker-v160.mjs"
         ],
         [
           "src/npc-circulation-v158.js",
@@ -15489,7 +15496,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "bcbecbd97433479890bc733633a6b13d21ec6e08b9dd8364620c31202f2afa4b",
+  "workbookSha256": "31fa6a02297fc0b6207fc9375445209a21044a63b8c13dedcd762676a2cf66b7",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -15563,6 +15570,15 @@
         "verifiers": [
           "scripts/verify-campaign-lethe-v163.mjs",
           "scripts/verify-campaign-story-v160.mjs"
+        ]
+      },
+      {
+        "path": "src/motion-tracker-display-v160.js",
+        "previousSha256": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
+        "currentSha256": "5062de6ccd88582691498bf7c340e9381602937aa1e22f8583efaf308aa60818",
+        "reason": "Correction ciblée de l’affichage hérité du détecteur : proposer une position sous un acteur haut à 320 px lorsque les deux coins HUD le recouvrent, sans modifier les mesures, les contacts ou le comportement du détecteur. Vérification par le profil motion-tracker-v160 déjà obligatoire ; aucun nouveau détecteur ni profil de recette.",
+        "verifiers": [
+          "scripts/verify-motion-tracker-v160.mjs"
         ]
       },
       {

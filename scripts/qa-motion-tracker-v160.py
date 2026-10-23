@@ -133,6 +133,46 @@ with sync_playwright() as pw:
         page.wait_for_function("()=>__ATF_HUB__.motionTrackerSnapshotV160().contacts.some(c=>c.sector==='rear')")
         capture(page, '02-native-rear-sector.png')
         check('The native tactile control acquires the rear sector after the actual facing change', page.evaluate("()=>{const m=__ATF_HUB__.motionTrackerSnapshotV160();return m.active&&m.heading===1&&m.contacts.some(c=>c.sector==='rear')}"))
+        # Preserve the390px rear-sector proof, then use another real native
+        # consultation so resize is observed during one unchanged active scan.
+        page.wait_for_function('()=>__ATF_HUB__.hubMotionTrackerCooldownV160===0')
+        button.tap()
+        page.wait_for_function('()=>__ATF_HUB__.motionTrackerSnapshotV160().active')
+        before_resize = page.evaluate('''()=>{const h=__ATF_HUB__,s=__ATF_V51__.saveSystem.data;
+          return {tracker:h.motionTrackerSnapshotV160(),protected:{clock:structuredClone(s.clock),
+            resources:structuredClone(s.galaxy.resources),player:structuredClone(s.player)}};}''')
+        page.set_viewport_size({'width': 320, 'height': 844})
+        frame320 = page.evaluate('''async()=>{
+          const{motionTrackerActorBoundsV160,motionTrackerLayoutV160}=await import('/src/motion-tracker-display-v160.js');
+          return new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+            const h=__ATF_HUB__,s=__ATF_V51__.saveSystem.data,a=h.player,canvas=document.querySelector('#hub-canvas');
+            const rect=canvas.getBoundingClientRect(),camera=h.currentAnnexV71?.()?h.annexCameraV71:h.camera;
+            const body=motionTrackerActorBoundsV160(a,camera);
+            const radar=motionTrackerLayoutV160({viewportWidth:rect.width,actorScreenBounds:body});
+            const overlaps=radar.x<body.x+body.width&&radar.x+radar.width>body.x
+              &&radar.y<body.y+body.height&&radar.y+radar.height>body.y;
+            resolve({tracker:h.motionTrackerSnapshotV160(),bishop:structuredClone(h.npcAnnexStateV159),
+              player:{x:a.x,y:a.y,w:a.w,h:a.h,facing:a.facing,grounded:a.grounded},
+              viewport:{width:innerWidth,height:innerHeight},
+              geometry:{body,radar,overlaps,canvasCssWidth:rect.width,logicalWidth:canvas.width,logicalHeight:canvas.height},
+              protected:{clock:structuredClone(s.clock),resources:structuredClone(s.galaxy.resources),player:structuredClone(s.player)},
+              png:canvas.toDataURL('image/png')});
+          })));
+        }''')
+        check('The true320px viewport preserves the same active native scan and keeps the radar clear of the supported body',
+              frame320['viewport']['width'] == 320 and frame320['tracker']['active']
+              and frame320['tracker']['activationSerial'] == before_resize['tracker']['activationSerial']
+              and frame320['player']['grounded'] and frame320['player']['y'] + frame320['player']['h'] == 624
+              and frame320['geometry']['radar']['compact'] and not frame320['geometry']['overlaps']
+              and 0 < frame320['geometry']['canvasCssWidth'] <= 320
+              and frame320['geometry']['radar']['x'] >= 0 and frame320['geometry']['radar']['y'] >= 0
+              and frame320['geometry']['radar']['x'] + frame320['geometry']['radar']['width'] <= frame320['geometry']['logicalWidth']
+              and frame320['geometry']['radar']['y'] + frame320['geometry']['radar']['height'] <= frame320['geometry']['logicalHeight'])
+        check('The active-scan viewport change spends no strategic time, resources or player inventory',
+              frame320['protected'] == before_resize['protected'])
+        capture(page, '03-native320-active-scan-clear-body.png', frame320)
+        report['mobile320Observation'] = {'beforeResize': before_resize, 'afterResize': frame320,
+                                         'runtimePlacementInjected': False, 'bodyOrClockWritten': False}
         page.locator('#exit-hub').click()
         check('Leaving the active ship view stops the displayed detector', page.evaluate('()=>!__ATF_HUB__.motionTrackerSnapshotV160().active'))
         open_view(page, 'hub')
