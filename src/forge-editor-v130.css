@@ -82,3 +82,26 @@ html:not(.forge-mode) .forge-checkpoint-v157 { display:none!important; }
   .forge-checkpoint-runtime-v157 > details > summary { max-width:170px; padding:10px 8px; font-size:10px; }
   .forge-checkpoint-runtime-v157 .forge-checkpoint-controls-v157 { left:0; transform:none; max-height:calc(100svh - 138px); }
 }
+
+/* Separate native local campaign disclosure; collapsed during gameplay. */
+html:not(.forge-mode) .forge-campaign-v161 { display:none!important; }
+.forge-campaign-v161[hidden] { display:none!important; }
+.forge-campaign-v161 > details > summary { cursor:pointer; min-height:44px; box-sizing:border-box; }
+.forge-campaign-v161 .forge-campaign-controls-v161 { display:grid; gap:10px; min-width:0; padding:12px 0; }
+.forge-campaign-v161 [data-error="true"] { color:#ffb0b9; }
+.forge-campaign-v161 label { display:grid; gap:5px; }
+.forge-campaign-v161 input,.forge-campaign-v161 select { min-height:44px; width:100%; min-width:0; box-sizing:border-box; }
+.forge-campaign-v161 small { display:block; line-height:1.45; }
+.forge-campaign-v161 .button-row { display:flex; flex-wrap:wrap; gap:6px; }
+.forge-campaign-v161 button { min-height:44px; white-space:normal; }
+.forge-campaign-v161 .button-row .button { flex:1 1 150px; }
+.forge-campaign-v161 :focus-visible { outline:2px solid #edce83; outline-offset:2px; }
+.forge-campaign-runtime-v161 { position:fixed; z-index:49; top:max(12px,env(safe-area-inset-top)); left:max(12px,env(safe-area-inset-left)); width:max-content; max-width:calc(100vw - 24px); margin:0; padding:0; border:0; background:transparent; box-shadow:none; }
+.forge-campaign-runtime-v161 > details > summary { width:max-content; max-width:100%; padding:11px 12px; border:1px solid #789b84; background:#06150fee; color:#d8eedf; font:600 11px/20px ui-monospace,monospace; }
+.forge-campaign-runtime-v161 .forge-campaign-controls-v161 { position:absolute; top:calc(100% + 6px); left:0; width:min(410px,calc(100vw - 24px)); max-height:calc(100svh - 86px); overflow:auto; box-sizing:border-box; padding:12px; border:1px solid #789b84; background:#06150ff5; color:#d8eedf; box-shadow:0 8px 25px #0008; }
+.forge-campaign-runtime-v161 p { margin:0; font-size:12px; line-height:1.45; }
+@media(max-width:720px) {
+  .forge-campaign-runtime-v161 { top:max(112px,calc(env(safe-area-inset-top) + 100px)); left:max(10px,env(safe-area-inset-left)); }
+  .forge-campaign-runtime-v161 > details > summary { max-width:170px; padding:10px 8px; font-size:10px; }
+  .forge-campaign-runtime-v161 .forge-campaign-controls-v161 { max-height:calc(100svh - 186px); }
+}

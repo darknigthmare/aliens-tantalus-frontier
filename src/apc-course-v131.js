@@ -228,10 +228,9 @@ export function withApcCourseV131(BaseEngine) {
       ctx.restore();
     }
     drawHud(ctx) {
-      super.drawHud(ctx); if (!this.isApcConvoyV121() || !this.apcCourseStateV131) return;
-      const s=this.apcCourseStateV131;ctx.save();ctx.fillStyle='#091318';ctx.fillRect(18,208,1150,49);ctx.fillStyle='#d4e5b6';ctx.font='700 13px monospace';
-      ctx.fillText(`${s.mode==='endless'?'ENDLESS':'COURSE FINIE'} · TOUR ${s.lap} · VOIE ${s.lane+1}/3 · SCORE ${Math.floor(s.score)} · TOTAL ${Math.floor(s.totalDistance)} M`,32,227);
-      ctx.font='11px monospace';ctx.fillText(this.objectiveProgressText(),32,246);ctx.restore();
+      // The convoy owner includes these same live course instruments in its
+      // single panel, keeping the road and its contacts unobstructed.
+      return super.drawHud(ctx);
     }
   };
 }

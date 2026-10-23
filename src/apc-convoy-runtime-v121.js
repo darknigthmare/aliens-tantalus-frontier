@@ -1,6 +1,7 @@
 import { VEHICLES } from './content-core-v50.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
+import { convoyMilestoneTransmissionV161 } from './campaign-convoy-story-v161.js';
 import { APC_CONVOY_CAMPAIGN_V121, APC_CONVOY_OPERATION_V121, APC_CONVOY_LIMITS_V121,
   createApcConvoyStateV121, sanitizeApcConvoyStateV121, validateApcConvoyStateV121,
   apcConvoyPhaseV121, apcConvoyDossierV121 } from './apc-convoy-state-v121.js';
@@ -262,7 +263,8 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
     }
     apcConvoyMilestoneV121(id, text) {
       const state = this.apcConvoyV121;
-      if (!state.journal.includes(id)) { state.journal.push(id); this.onEvent({ type: 'apc-convoy-radio', operationId: APC_CONVOY_OPERATION_V121, id, text }); }
+      if (!state.journal.includes(id)) { state.journal.push(id); this.onEvent({ type: 'apc-convoy-radio', operationId: APC_CONVOY_OPERATION_V121, id,
+        text: convoyMilestoneTransmissionV161(id, text) }); }
       this.checkpoint = { id: 'insertion', x: this.player.x, y: this.player.y };
       this.apcConvoyCheckpointV121 = this.captureApcConvoyCheckpointV121();
       this.onEvent({ type: 'checkpoint', checkpoint: `apc-convoy-${id}`, operationId: APC_CONVOY_OPERATION_V121 });
@@ -376,15 +378,37 @@ export function withApcConvoyRuntimeV121(BaseEngine) {
       }
     }
     drawHud(ctx) {
-      super.drawHud(ctx); if (!this.isApcConvoyV121()) return;
+      if (!this.isApcConvoyV121()) return super.drawHud(ctx);
       const state = this.apcConvoyV121, dossier = apcConvoyDossierV121(state);
-      ctx.save(); ctx.fillStyle = '#091318ed'; ctx.fillRect(18, 113, 1150, 92);
-      ctx.font = '700 13px monospace'; ctx.fillStyle = '#cbded5';
-      ctx.fillText(`CORRIDOR DE FEU · ${dossier.title} · ${Math.round(state.distance)}/3200 M`, 32, 133);
-      ctx.font = '12px monospace'; ctx.fillStyle = '#acc1c3'; ctx.fillText(dossier.instruction, 32, 153);
-      ctx.fillStyle = state.overheated ? '#f8aa79' : '#aacdcc';
-      ctx.fillText(`CHALEUR ${Math.round(state.heat)}%${state.overheated ? ' · REFROIDISSEMENT' : ''} · BANDE ${this.vehicle.turretAmmo} · RÉSERVE ${this.vehicle.turretReserve}${state.reloadRemaining ? ` · CHARGEMENT ${state.reloadRemaining.toFixed(1)} S` : ''}`, 32, 173);
-      ctx.fillStyle = '#24373b'; ctx.fillRect(32, 187, 1118, 5); ctx.fillStyle = '#8dbfad'; ctx.fillRect(32, 187, 1118 * state.distance / 3200, 5); ctx.restore();
+      const course = this.apcCourseStateV131;
+      // The seated convoy has one instrument panel. Generic infantry/sector,
+      // route-map and objective panels describe another control scheme and
+      // previously painted on top of each other. State overlays remain owned
+      // by drawStateOverlay, outside this HUD path.
+      ctx.save(); ctx.fillStyle = '#091318ed'; ctx.fillRect(18, 16, 1244, 146);
+      ctx.strokeStyle = '#5b817e'; ctx.strokeRect(18.5, 16.5, 1243, 145);
+      ctx.font = '700 15px monospace'; ctx.fillStyle = '#d3e8df';
+      ctx.fillText(`CORRIDOR DE FEU · ${dossier.title}`, 34, 41);
+      ctx.font = '13px monospace'; ctx.fillStyle = '#c6d9d9';
+      ctx.fillText(`BLINDAGE ${Math.ceil(this.vehicle.hull)}/${this.vehicle.maxHull} · CARBURANT ${Math.ceil(this.vehicle.fuel)}% · BANDE ${this.vehicle.turretAmmo} · RÉSERVE ${this.vehicle.turretReserve} · PILOTE ${Math.ceil(this.player.health)} PV`, 34, 66);
+      ctx.fillStyle = state.overheated ? '#f8aa79' : '#a8d7c5';
+      const courseLabel = course ? `${course.mode === 'endless' ? 'SANS FIN' : 'COURSE FINIE'} · TOUR ${course.lap} · VOIE ${course.lane + 1}/3 · SCORE ${Math.floor(course.score)} · ` : '';
+      ctx.fillText(`${courseLabel}CHALEUR ${Math.round(state.heat)}%${state.overheated ? ' · REFROIDISSEMENT' : ''}${state.reloadRemaining ? ` · CHARGEMENT ${state.reloadRemaining.toFixed(1)} S` : ''}`, 34, 91);
+      ctx.font = '12px monospace'; ctx.fillStyle = '#c1d0d2';
+      ctx.fillText(this.objectiveProgressText(), 34, 117);
+      ctx.fillStyle = '#24373b'; ctx.fillRect(34, 139, 1130, 5); ctx.fillStyle = '#8dbfad';
+      ctx.fillRect(34, 139, 1130 * state.distance / 3200, 5);
+      ctx.font = '11px monospace'; ctx.fillStyle = '#c6d9d9'; ctx.textAlign = 'right';
+      ctx.fillText(`${Math.round(state.distance / 3200 * 100)} %`, 1244, 146); ctx.textAlign = 'left';
+      const prompt = this.getInteractionPrompt();
+      if (prompt) {
+        ctx.font = '700 14px monospace';
+        const width = Math.min(1160, ctx.measureText(prompt).width + 44);
+        ctx.fillStyle = '#091318ed'; ctx.fillRect((1280 - width) / 2, 654, width, 38);
+        ctx.strokeStyle = '#8dbfad'; ctx.strokeRect((1280 - width) / 2 + .5, 654.5, width, 38);
+        ctx.fillStyle = '#d3e8df'; ctx.textAlign = 'center'; ctx.fillText(prompt, 640, 679);
+      }
+      ctx.restore();
     }
   };
 }

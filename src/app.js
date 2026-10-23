@@ -47,6 +47,8 @@ import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from './campaign-story-v160.js';
 import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
+import { hasCampaignStoryV161, recordCampaignStoryReviewV161 } from './campaign-convoy-story-v161.js';
+import { mountCampaignDebriefV161 } from './campaign-convoy-story-ui-v161.js';
 import { withHubMotionTrackerV160 } from './motion-tracker-v160.js';
 import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
@@ -66,6 +68,7 @@ import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
 import { withHubNpcLifeV136 } from './npc-life-v136.js';
 import { withHubNpcCirculationV158 } from './npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
+import { withHubNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
 import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
 import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
 import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
@@ -87,6 +90,7 @@ import { buildForgeMissionSandboxV140 } from './forge-sandbox-v140.js';
 import { ForgePlaytestCheckpointStoreV157, prepareForgePlaytestCheckpointV157,
   applyForgePlaytestCheckpointV157 } from './forge-playtest-checkpoint-v157.js';
 import { mountForgePlaytestCheckpointUIV157 } from './forge-playtest-checkpoint-ui-v157.js';
+import { mountForgeCampaignUIV161 } from './forge-campaign-ui-v161.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60, VEHICLE_DEPLOYMENT_ATLAS_REQUIRED_V122 } from './vehicle-deployment-gates-v60.js';
@@ -195,6 +199,7 @@ let standaloneContext = null;
 // A rejected terminal balance never becomes a false victory or a paid retreat.
 let pendingResolutionV121 = null;
 let forgePlaytest = null;
+let forgeCampaignUIV161 = null;
 let activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
 let deferredInstall = null;
 let sessionStart = Date.now();
@@ -258,7 +263,8 @@ const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameE
 const NativeHubGame = [
   withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
   withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
-  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubCirculationV137, withHubRoomIdentityV137,
+  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161,
+  withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
 const HubGame = withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)));
@@ -1122,6 +1128,7 @@ function handlePortMeridienV90(interaction, owner = hubOwnerV84) {
 }
 
 function openForgeContext() {
+  forgeCampaignUIV161?.detach();
   refugeControllerV87.close();
   missionOwnerV78 = null;
   hubEngine.stop(false);
@@ -1462,6 +1469,20 @@ function renderOperationPlan() {
         if (result.changed) saveSystem.commit(candidate);
         renderOperationPlan();
         byId('operation-plan').querySelector(`[data-campaign-story-topic="${topicId}"]`)?.focus({ preventScroll: true });
+      } catch (error) { toast(error.message); }
+    }
+  });
+  mountCampaignDebriefV161(byId('operation-plan'), {
+    save: saveSystem.data,
+    campaignId: campaign.id,
+    onReview: (operationId, topicId) => {
+      try {
+        const candidate = clone(saveSystem.data);
+        const result = recordCampaignStoryReviewV161(candidate, operationId, topicId);
+        if (!result.ok) return;
+        if (result.changed) saveSystem.commit(candidate);
+        renderOperationPlan();
+        byId('operation-plan').querySelector(`[data-convoy-story-topic="${topicId}"]`)?.focus({ preventScroll: true });
       } catch (error) { toast(error.message); }
     }
   });
@@ -2468,7 +2489,7 @@ function campaignObjectiveLabel(campaignId) {
 
 function startMissionInsertionV62(context) {
   const operation = saveSystem.data.strategy.currentOperation;
-  const authoredStory = hasCampaignStoryV160(context.campaign?.id);
+  const authoredStory = hasCampaignStoryV160(context.campaign?.id) || hasCampaignStoryV161(context.campaign?.id);
   // Preserve mid-mission saves from before this authored opening existed.
   // An insertion paused before deployment still has its own durable phase.
   const legacyStoryResume = authoredStory && context.deployment?.resumed
@@ -2695,7 +2716,11 @@ function handleForgePlaytestEvent(event) {
   };
   const label = labels[event.type];
   if (label) log.textContent = `${label}${event.eventId ? ` · ${event.eventId}` : ''}`;
-  if (event.type === 'mission-complete') toast('Playtest validé dans le bac à sable Forge. Aucune progression de campagne modifiée.');
+  if (event.type === 'mission-complete') {
+    const advanced = forgeCampaignUIV161?.completeNative(engine);
+    if (advanced !== null) toast(advanced ? 'Étape Forge enregistrée. Consultez « Campagne Forge locale » pour la suite.'
+      : 'Playtest validé dans le bac à sable Forge. Profil de campagne inchangé.');
+  }
 }
 
 function handleGameEvent(event) {
@@ -3199,8 +3224,11 @@ function handleHubAction(interaction) {
   if (!interaction?.action) return;
   if (interaction.action.startsWith('port:')) return handlePortMeridienV90(interaction);
   if (standaloneContext === 'forge-playtest') {
+    const advanced = interaction.action === 'editor:project-complete' && forgeCampaignUIV161?.completeNative(hubEngine);
     const status = byId('hub-status');
-    if (status) status.textContent = `PLAYTEST FORGE · ${interaction.action} · CAMPAGNE INCHANGÉE`;
+    if (status) status.textContent = advanced === null ? 'FIN D’ÉTAPE NON ENREGISTRÉE · ouvrez « Campagne Forge locale » puis réessayez'
+      : advanced ? 'ÉTAPE FORGE ENREGISTRÉE · suite dans « Campagne Forge locale » · profil inchangé'
+      : `PLAYTEST FORGE · ${interaction.action} · PROFIL DE CAMPAGNE INCHANGÉ`;
     return;
   }
   if (interaction.action === 'hub:onboarding-wake') {
@@ -3349,6 +3377,7 @@ function abandonBlockedOperationV69() {
 }
 
 function returnToForgeContext() {
+  forgeCampaignUIV161?.detach();
   engine.stop();
   hubEngine.stop(false);
   forgePlaytest = null;
@@ -3377,6 +3406,7 @@ function revealForgePlaytestV157(project) {
 }
 
 function launchForgeMissionPlaytest(project, { reveal = true } = {}) {
+  forgeCampaignUIV161?.detach();
   const source = saveSystem.data;
   const campaign = CAMPAIGNS.find((entry) => entry.id === source.strategy.plannedCampaignId)
     || CAMPAIGNS.find((entry) => source.galaxy.unlockedWorldIds.includes(entry.worldId)) || CAMPAIGNS[0];
@@ -3432,6 +3462,7 @@ function launchForgeMissionPlaytest(project, { reveal = true } = {}) {
 }
 
 function launchForgeShipPlaytestV157(project, { reveal = true } = {}) {
+  forgeCampaignUIV161?.detach();
   const sandbox = clone(saveSystem.data);
   forgePlaytest = { kind: 'ship', project: clone(project), sandbox, hubState: clone(sandbox.hub) };
   standaloneContext = 'forge-playtest';
@@ -3456,6 +3487,7 @@ async function resumeForgePlaytestV157({ project, raw }) {
     const prepared = await prepareForgePlaytestCheckpointV157(active, raw, project);
     if (activeForgeCheckpointEngineV157() !== active) throw new Error('Le playtest a changé pendant la reprise.');
     const result = applyForgePlaytestCheckpointV157(active, prepared);
+    forgeCampaignUIV161?.detach();
     byId(project.kind === 'ship' ? 'hub-canvas' : 'game-canvas').focus({ preventScroll: true });
     return result;
   }
@@ -3509,6 +3541,23 @@ function setupEditor() {
   if (saved) editor.loadInitialProject(saved);
   byId('editor-play').textContent = 'TESTER LE PARCOURS';
   renderEditorStatus();
+  forgeCampaignUIV161 = mountForgeCampaignUIV161({
+    document, storage: forgeSaveSystem.storage,
+    roots: ['editor', 'play', 'hub'].map(view => document.querySelector(`[data-panel="${view}"]`)),
+    getProjects: () => forgeSaveSystem.data.projects,
+    saveCurrentProject: () => editor.workspaceV133?.requireSaved(),
+    getEngine: activeForgeCheckpointEngineV157,
+    launch: project => {
+      engine.stop(); hubEngine.stop(false);
+      // A campaign launches its frozen document, leaving the editor's current
+      // project and the profile untouched. Native admission is checked again.
+      if (project.kind === 'ship') launchForgeShipPlaytestV157(project);
+      else launchForgeMissionPlaytest(project);
+      return activeForgeCheckpointEngineV157();
+    },
+    isVisible: () => ['forge', 'forge-playtest'].includes(standaloneContext),
+    onMessage: (message, failed) => { if (failed) toast(message); }
+  });
   mountForgePlaytestCheckpointUIV157({
     document, store: forgeCheckpointStoreV157,
     roots: ['editor', 'play', 'hub'].map(view => document.querySelector(`[data-panel="${view}"]`)),

@@ -62,7 +62,8 @@
     "test:trials:reception": "node --test scripts/verify-xeno-trials-capture-reception-v158.mjs",
     "test:npc:annex": "node --test scripts/verify-npc-annex-circulation-v159.mjs",
     "test:continuation:v160": "node --test scripts/verify-player-human-coherence-v160.mjs scripts/verify-motion-tracker-v160.mjs scripts/verify-campaign-story-v160.mjs scripts/verify-archive-relay-presentation-v160.mjs scripts/verify-audit-continuation-v160.mjs",
-    "qa:player:anatomy": "python3 -B scripts/qa-player-anatomy-v160.py --output /tmp/tantalus-player-anatomy-v160 --comparison-stage after"
+    "qa:player:anatomy": "python3 -B scripts/qa-player-anatomy-v160.py --output /tmp/tantalus-player-anatomy-v160 --comparison-stage after",
+    "test:continuation:v161": "node --test scripts/verify-forge-campaign-v161.mjs scripts/verify-campaign-convoy-story-v161.mjs scripts/verify-npc-service-routes-v161.mjs scripts/verify-audit-continuation-v161.mjs"
   },
   "engines": {
     "node": ">=22"

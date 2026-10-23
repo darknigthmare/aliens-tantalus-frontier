@@ -362,6 +362,37 @@ with sync_playwright() as pw:
                           and math.isfinite(old_npc_time) and math.isfinite(new_npc_time) and new_npc_time >= old_npc_time)
         differences = protected_difference(protected(before_reload), protected(after_reload))
         allowed_paths = {'/statistics/playSeconds', '/hub/npcCirculationV158/actor/time'}
+        service_clock_exceptions = []
+        before_routes = before_reload['hub'].get('npcServiceRoutesV161', {}).get('routes', {})
+        after_routes = after_reload['hub'].get('npcServiceRoutesV161', {}).get('routes', {})
+        for route_id, expected_crew_id in [('idris-engine', 'crew-03-idris-kwan'),
+                                           ('leila-galley', 'crew-15-leila-s-rensen')]:
+            old_actor = before_routes.get(route_id, {}).get('actor')
+            new_actor = after_routes.get(route_id, {}).get('actor')
+            if old_actor is None and new_actor is None:
+                continue
+            same_crew = (isinstance(old_actor, dict) and isinstance(new_actor, dict)
+                         and old_actor.get('crewId') == new_actor.get('crewId') == expected_crew_id)
+            old_time = old_actor.get('time') if isinstance(old_actor, dict) else None
+            new_time = new_actor.get('time') if isinstance(new_actor, dict) else None
+            measured_clock_valid = (same_crew and type(old_time) in [int, float]
+                                    and type(new_time) in [int, float]
+                                    and math.isfinite(old_time) and math.isfinite(new_time)
+                                    and 0 <= new_time - old_time <= reload_interval)
+            path = '/hub/npcServiceRoutesV161/routes/' + route_id + '/actor/time'
+            # Only a known, unchanged crew identity may advance this single
+            # animation clock within the measured reload/navigation interval.
+            # Room, location, route phase, handoff and every other actor field
+            # remain in the exact protected comparison above.
+            if measured_clock_valid:
+                allowed_paths.add(path)
+            service_clock_exceptions.append({
+                'path': path, 'expectedCrewId': expected_crew_id,
+                'beforeCrewId': old_actor.get('crewId') if isinstance(old_actor, dict) else None,
+                'afterCrewId': new_actor.get('crewId') if isinstance(new_actor, dict) else None,
+                'sameExactCrewIdentity': same_crew, 'before': old_time, 'after': new_time,
+                'maximumMeasuredDeltaSeconds': reload_interval, 'accepted': measured_clock_valid,
+                'reason': 'Only the finite, non-regressing animation clock of the same known service crew may advance, bounded by measured reload/native-navigation elapsed seconds; no frame tolerance or other route field is excepted.'})
         unexpected_differences = [row for row in differences if row['path'] not in allowed_paths]
         last_before, last_after = before_reload['strategy']['lastOperation'], after_reload['strategy']['lastOperation']
         ledger_before = next(item for item in last_before['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
@@ -381,9 +412,11 @@ with sync_playwright() as pw:
                  'maximumMeasuredDeltaSeconds': maximum_play_seconds_delta, 'accepted': play_seconds_valid,
                  'reason': 'Actual page-unload wall-clock play duration; non-regressing integer bounded by observed old page age plus measured reload/native navigation interval.'},
                 {'path': '/hub/npcCirculationV158/actor/time', 'before': old_npc_time, 'after': new_npc_time,
-                 'accepted': npc_time_valid, 'reason': 'Finite, non-regressing NPC animation clock persisted during the real new hub session; no other NPC field is excepted.'}]}
+                 'accepted': npc_time_valid, 'reason': 'Finite, non-regressing NPC animation clock persisted during the real new hub session; no other NPC field is excepted.'}]
+                + service_clock_exceptions}
         check('the return reading ledger, payment and strategic state survive reload with only measured session clocks advancing',
               not unexpected_differences and play_seconds_valid and npc_time_valid
+              and all(row['accepted'] for row in service_clock_exceptions)
               and ledger_after == ledger_before and last_after['id'] == last_before['id'] and last_after['success'] is True
               and durable_ledgers_after == durable_ledgers_before and durable_ledgers_after['durable'] == ledger_after
               and topics_after_reload == topics_before_reload and all('RELU' in text for text in topics_after_reload.values()))
