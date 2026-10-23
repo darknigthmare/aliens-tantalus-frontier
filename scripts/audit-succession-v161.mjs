@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { resolveAuditSourcesV162 } from './audit-succession-v162.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V161 = Object.freeze({
   'docs/forge/xeno-trials/V160-PLAYER-TRACKER-CAMPAIGN.md': 'bba092e37c881cde8bdc3a98aefbe96f9a50231733c1e5345e29a52373e5331e',
@@ -36,6 +37,7 @@ export function verifyAuditSuccessionV161(previous, current, readSource = readRe
   assert.equal(bridge.to, 'V161');
   assert.deepEqual(bridge.predecessorDocuments, AUDIT_PREDECESSOR_DOCUMENTS_V161);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
+  const effective = resolveAuditSourcesV162(current, readSource);
   assert.equal(keys(before).length, 74);
   assert.ok(after && keys(after).length >= 74);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V160 source omitted: ' + path);
@@ -44,7 +46,7 @@ export function verifyAuditSuccessionV161(previous, current, readSource = readRe
       || /^[a-zA-Z0-9._-]+\.css$/.test(path) || ['index.html', 'sw.js'].includes(path),
     'Source path outside the reviewed runtime scope: ' + path);
     assert.ok(validHash(expected), 'Invalid source hash: ' + path);
-    assert.equal(sha(readSource(path)), expected, 'Current V161 source changed: ' + path);
+    assert.equal(sha(readSource(path)), effective[path], 'Current V161 source changed: ' + path);
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
@@ -68,7 +70,7 @@ export function verifyAuditSuccessionV161(previous, current, readSource = readRe
 }
 
 /** A missing successor preserves the anchored record; invalid content never falls back. */
-export function resolveAuditSourcesV161(previous, readSource = readRepository) {
+export function resolveAuditSourcesV161(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
   let current;
   try {
@@ -78,7 +80,7 @@ export function resolveAuditSourcesV161(previous, readSource = readRepository) {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV161(previous, current, readSource);
-  return current.runtimeSourceSha256;
+  return effective ? resolveAuditSourcesV162(current, readSource) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV161(readSource = readRepository) {

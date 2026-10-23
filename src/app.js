@@ -49,6 +49,8 @@ import { hasCampaignStoryV160, preserveCampaignStoryReturnV160, recordCampaignSt
 import { mountCampaignDebriefV160 } from './campaign-story-ui-v160.js';
 import { hasCampaignStoryV161, recordCampaignStoryReviewV161 } from './campaign-convoy-story-v161.js';
 import { mountCampaignDebriefV161 } from './campaign-convoy-story-ui-v161.js';
+import { preserveConvoyReturnHistoryV162 } from './campaign-convoy-history-v162.js';
+import { mountConvoyReturnHistoryV162 } from './campaign-convoy-history-ui-v162.js';
 import { withHubMotionTrackerV160 } from './motion-tracker-v160.js';
 import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
@@ -69,6 +71,7 @@ import { withHubNpcLifeV136 } from './npc-life-v136.js';
 import { withHubNpcCirculationV158 } from './npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
 import { withHubNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
+import { withHubNpcMedicalRouteV162 } from './npc-medical-route-v162.js';
 import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
 import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
 import { getHubShipStationReadoutV137 } from './hub-ship-layout-v137.js';
@@ -263,7 +266,7 @@ const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameE
 const NativeHubGame = [
   withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
   withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
-  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161,
+  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161, withHubNpcMedicalRouteV162,
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
@@ -1408,7 +1411,9 @@ function renderOperationPlan() {
   // any subsequent plan can replace strategy.lastOperation. No reward/read.
   try {
     const candidate = clone(saveSystem.data);
-    if (preserveCampaignStoryReturnV160(candidate).changed) saveSystem.commit(candidate);
+    const storyChanged = preserveCampaignStoryReturnV160(candidate).changed;
+    const convoyChanged = preserveConvoyReturnHistoryV162(candidate).changed;
+    if (storyChanged || convoyChanged) saveSystem.commit(candidate);
   } catch (error) { toast(error.message); }
   let campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.currentOperation?.campaignId)
     || CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
@@ -1480,12 +1485,14 @@ function renderOperationPlan() {
         const candidate = clone(saveSystem.data);
         const result = recordCampaignStoryReviewV161(candidate, operationId, topicId);
         if (!result.ok) return;
-        if (result.changed) saveSystem.commit(candidate);
+        const preserved = preserveConvoyReturnHistoryV162(candidate);
+        if (result.changed || preserved.changed) saveSystem.commit(candidate);
         renderOperationPlan();
         byId('operation-plan').querySelector(`[data-convoy-story-topic="${topicId}"]`)?.focus({ preventScroll: true });
       } catch (error) { toast(error.message); }
     }
   });
+  mountConvoyReturnHistoryV162(byId('operation-plan'), { save: saveSystem.data });
   // This render may have selected the first unlocked fallback campaign. Keep
   // the player selector synchronized with that exact displayed manifesto.
   renderCommandMissionsV110();
@@ -3977,14 +3984,20 @@ function bind() {
     disposePlayerAppearancePreviewV126();
     if (creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
     hubDialogueUiV76.destroy({ restoreFocus: false });
+    // Capture the live mission before stop releases projectiles, recoverable
+    // weapons and thermal state. An unload must preserve the last real frame.
+    let commitOnUnloadV162 = !standaloneContext && !saveSystem.recoveryNeeded;
+    if (commitOnUnloadV162) {
+      try { persistMissionResumeState(); }
+      catch { commitOnUnloadV162 = false; }
+    }
     audio.dispose();
     hubEngine.stop(!saveSystem.recoveryNeeded);
     engine.stop();
     // A reload suspends the laboratory; only an explicit purge may destroy its population.
     bioforgeRuntimeV80.stop({ purge: false, reason: 'page-unload' });
     if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
-    if (standaloneContext || saveSystem.recoveryNeeded) return;
-    persistMissionResumeState();
+    if (!commitOnUnloadV162 || saveSystem.recoveryNeeded) return;
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
     try { saveSystem.commit(); } catch { /* No successful-save claim during unload; original storage stays intact. */ }
   });

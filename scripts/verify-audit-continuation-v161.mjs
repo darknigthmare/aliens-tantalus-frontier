@@ -70,9 +70,9 @@ test('the complete anchored bridge validates current bytes while default histori
   const v159 = JSON.parse(bytes('progress-v159.json'));
   const v158 = JSON.parse(bytes('progress-v158.json'));
   assert.deepEqual(resolveAuditSourcesV160(v159), previous.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV160(v159, read, { effective: true }), current.runtimeSourceSha256);
+  assert.deepEqual(resolveAuditSourcesV160(v159, read, { effective: true }), resolveAuditSourcesV161(previous, read, { effective: true }));
   assert.deepEqual(resolveAuditSourcesV159(v158), v159.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV159(v158, read, { effective: true }), current.runtimeSourceSha256);
+  assert.deepEqual(resolveAuditSourcesV159(v158, read, { effective: true }), resolveAuditSourcesV161(previous, read, { effective: true }));
   assert.equal(verifyAuditSuccessionV160(v159, previous).current, 74);
 });
 

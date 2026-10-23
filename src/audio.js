@@ -111,7 +111,9 @@ export class AudioDirector {
     this.effectPending.set(id, work); return work;
   }
   playEffect(id, fallback) {
-    if (!this._enabled || !this.volumes.effects || this.disposed || this.context?.state !== 'running') return false;
+    // Admit only audible events. A source started under a zero master gain
+    // could reveal its remaining tail (or a delayed alarm) on a quick unmute.
+    if (!this._enabled || !this.volumes.effects || !this.volumes.master || this.disposed || this.context?.state !== 'running') return false;
     const buffer = this.effectBuffers.get(id);
     if (buffer) {
       try {
@@ -134,7 +136,7 @@ export class AudioDirector {
     this.effectVoices.clear(); for (const timer of this.timers) clearTimeout(timer); this.timers.clear();
   }
   tone(frequency = 220, duration = 0.08, type = 'square', volume = 0.08, glide = 0) {
-    if (!this.context || this.context.state !== 'running' || !this._enabled || !this.volumes.effects || this.disposed) return false;
+    if (!this.context || this.context.state !== 'running' || !this._enabled || !this.volumes.effects || !this.volumes.master || this.disposed) return false;
     try {
       const now = this.context.currentTime, oscillator = this.context.createOscillator(), gain = this.context.createGain();
       oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, now);

@@ -34,6 +34,7 @@ for (const directory of ['src', 'assets']) {
 await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
 await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
 await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));
+await cp(join(root, 'campaign-convoy-history-v162.css'), join(output, 'campaign-convoy-history-v162.css'));
 await cp(join(root, 'echo9-v110.css'), join(output, 'echo9-v110.css'));
 await cp(join(root, 'player-appearance-v126.css'), join(output, 'player-appearance-v126.css'));
 await cp(join(root, 'xeno-trials-fullscreen-v119.css'), join(output, 'xeno-trials-fullscreen-v119.css'));

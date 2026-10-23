@@ -39,7 +39,7 @@ export function verifyAuditSuccessionV160(previous, current, readSource = readRe
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
   // Historical V160 pins retain their exact values. A later runtime is
   // admitted only through a complete bridge anchored to these documents.
-  const effective = resolveAuditSourcesV161(current, readSource);
+  const effective = resolveAuditSourcesV161(current, readSource, { effective: true });
   assert.equal(keys(before).length, 48);
   assert.ok(after && keys(after).length >= 48);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V159 source omitted: ' + path);
@@ -82,7 +82,7 @@ export function resolveAuditSourcesV160(previous, readSource = readRepository, {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV160(previous, current, readSource);
-  return effective ? resolveAuditSourcesV161(current, readSource) : current.runtimeSourceSha256;
+  return effective ? resolveAuditSourcesV161(current, readSource, { effective: true }) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV160(readSource = readRepository) {

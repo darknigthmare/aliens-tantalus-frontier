@@ -15,6 +15,9 @@ import { normalizeHubVentStateV62 } from './hub-v62-runtime.js';
 import { normalizeNpcCirculationV158 } from './npc-circulation-v158.js';
 import { normalizeNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
 import { normalizeNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
+import { normalizeNpcMedicalRouteV162 } from './npc-medical-route-v162.js';
+import { createConvoyReturnHistoryV162, normalizeConvoyReturnHistoryV162,
+  preserveConvoyReturnHistoryV162 } from './campaign-convoy-history-v162.js';
 import {
   NARRATIVE_COLLECTABLES_V68,
   NARRATIVE_OPERATION_V68,
@@ -308,6 +311,7 @@ export function createDefaultSave(profile = 1) {
       npcCirculationV158: normalizeNpcCirculationV158(),
       npcAnnexCirculationV159: normalizeNpcAnnexCirculationV159(),
       npcServiceRoutesV161: normalizeNpcServiceRoutesV161(),
+      npcMedicalRouteV162: normalizeNpcMedicalRouteV162(),
       commercialV71: createHubCommercialStateV71(),
       annexOperationsV71: createHubAnnexOperationsV71(),
       pendingModuleActionV71: null,
@@ -335,6 +339,7 @@ export function createDefaultSave(profile = 1) {
     narrativeArchives: createNarrativeArchivesV68(),
     narrativeEvidenceV132: createNarrativeEvidenceV132(),
     archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
+    convoyReturnHistoryV162: createConvoyReturnHistoryV162(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -1495,6 +1500,7 @@ export function beginOperation(save, campaign, world) {
     return { ok: true, resumed: true, operation };
   }
   if (strategy.currentOperation) throw new Error('Une autre operation est deja en cours.');
+  preserveConvoyReturnHistoryV162(save);
   strategy.selectedVehicleId = resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const brief = getOperationBrief(save, campaign, world);
   if (!brief.worldUnlocked) throw new Error('Route verrouillee : effectuez une reconnaissance.');
@@ -2032,6 +2038,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   }
   strategy.currentOperation = null;
   addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !resolvedSuccess, result });
+  preserveConvoyReturnHistoryV162(save);
   return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation,
     ...(specialRewardV121 ? { strategicRewardV121: structuredClone(paidStrategicRewardV121),
       expectedStrategicRewardV121: structuredClone(specialRewardV121.strategicReward) } : {}) };
@@ -2116,6 +2123,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.npcCirculationV158 = normalizeNpcCirculationV158(hub.npcCirculationV158);
   migrated.hub.npcAnnexCirculationV159 = normalizeNpcAnnexCirculationV159(hub.npcAnnexCirculationV159);
   migrated.hub.npcServiceRoutesV161 = normalizeNpcServiceRoutesV161(hub.npcServiceRoutesV161);
+  migrated.hub.npcMedicalRouteV162 = normalizeNpcMedicalRouteV162(hub.npcMedicalRouteV162);
   const commercialV71 = hub.hubCommercialV71 ?? hub.commercialV71 ?? hub.hubExpansionV71;
   migrated.hub.commercialV71 = sanitizeHubCommercialStateV71(commercialV71);
   migrated.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(hub.annexOperationsV71);
@@ -2302,6 +2310,9 @@ export function migrateSave(input, profile = 1) {
   };
 
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
+  migrated.convoyReturnHistoryV162 = normalizeConvoyReturnHistoryV162(source.convoyReturnHistoryV162,
+    { resolvedSerial: migrated.strategy.specialOperationResolutionSerialV121 });
+  preserveConvoyReturnHistoryV162(migrated);
   migrated.narrativeEvidenceV132 = normalizeNarrativeEvidenceV132(source.narrativeEvidenceV132, {
     narrativeArchives: migrated.narrativeArchives, archiveRelayArchivesV122: source.archiveRelayArchivesV122
   });

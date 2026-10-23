@@ -12,6 +12,7 @@ import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './pu
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const ROOT_FILES = new Set([
+  'campaign-convoy-history-v162.css',
   'command-v110.css', 'echo9-v110.css', 'player-appearance-v126.css',
   '.gitattributes', '.gitignore', '.vercelignore', 'LICENSE_NOTICE.md',
   'index.html', 'manifest.webmanifest', 'package.json', 'package-lock.json', 'sw.js', 'vercel.json',
@@ -142,6 +143,15 @@ for (const file of [
 ]) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
+  'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
+  'verify-audit-continuation-v162.mjs', 'verify-audit-workbook-v162.py',
+  'verify-audio-lifecycle-v162.mjs', 'qa-audio-native-v162.py',
+  'qa-harpoon-native-v162.py',
+  'verify-harpoon-unload-v162.mjs',
+  'verify-npc-medical-route-v162.mjs', 'qa-npc-medical-route-v162.py',
+  'verify-campaign-convoy-history-v162.mjs', 'qa-campaign-convoy-history-v162.py',
+]) SCRIPT_FILES.add(file);
+for (const file of [
   'audit-succession-v161.mjs', 'generate-audit-continuation-v161.py',
   'verify-audit-continuation-v161.mjs', 'verify-audit-workbook-v161.py',
   'verify-forge-campaign-v161.mjs', 'qa-forge-campaign-v161.py',
@@ -157,6 +167,9 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V162-NON-FORGE-CONTINUATION.md',
+  'docs/forge/xeno-trials/progress-v162.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V162.xlsx',
   'docs/forge/xeno-trials/V161-REMAINING-WORKSTREAMS.md',
   'docs/forge/xeno-trials/progress-v161.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V161.xlsx',
@@ -176,6 +189,7 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V157.xlsx',
   '.github', '.github/workflows', '.github/workflows/forge-regression.yml',
   '.github/workflows/trials-source-review-v154.yml',
+  '.github/workflows/non-forge-regression-v162.yml',
   'docs/forge/xeno-trials/V156-CONTINUATION.md',
   'docs/forge/xeno-trials/progress-v156.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V156.xlsx',
