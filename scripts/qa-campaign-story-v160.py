@@ -363,10 +363,12 @@ with sync_playwright() as pw:
         differences = protected_difference(protected(before_reload), protected(after_reload))
         allowed_paths = {'/statistics/playSeconds', '/hub/npcCirculationV158/actor/time'}
         service_clock_exceptions = []
-        before_routes = before_reload['hub'].get('npcServiceRoutesV161', {}).get('routes', {})
-        after_routes = after_reload['hub'].get('npcServiceRoutesV161', {}).get('routes', {})
-        for route_id, expected_crew_id in [('idris-engine', 'crew-03-idris-kwan'),
-                                           ('leila-galley', 'crew-15-leila-s-rensen')]:
+        for state_field, route_id, expected_crew_id in [
+                ('npcServiceRoutesV161', 'idris-engine', 'crew-03-idris-kwan'),
+                ('npcServiceRoutesV161', 'leila-galley', 'crew-15-leila-s-rensen'),
+                ('npcMedicalRouteV162', 'noor-morgue', 'crew-04-noor-okafor')]:
+            before_routes = before_reload['hub'].get(state_field, {}).get('routes', {})
+            after_routes = after_reload['hub'].get(state_field, {}).get('routes', {})
             old_actor = before_routes.get(route_id, {}).get('actor')
             new_actor = after_routes.get(route_id, {}).get('actor')
             if old_actor is None and new_actor is None:
@@ -379,7 +381,7 @@ with sync_playwright() as pw:
                                     and type(new_time) in [int, float]
                                     and math.isfinite(old_time) and math.isfinite(new_time)
                                     and 0 <= new_time - old_time <= reload_interval)
-            path = '/hub/npcServiceRoutesV161/routes/' + route_id + '/actor/time'
+            path = '/hub/' + state_field + '/routes/' + route_id + '/actor/time'
             # Only a known, unchanged crew identity may advance this single
             # animation clock within the measured reload/navigation interval.
             # Room, location, route phase, handoff and every other actor field
@@ -387,7 +389,7 @@ with sync_playwright() as pw:
             if measured_clock_valid:
                 allowed_paths.add(path)
             service_clock_exceptions.append({
-                'path': path, 'expectedCrewId': expected_crew_id,
+                'path': path, 'stateField': state_field, 'routeId': route_id, 'expectedCrewId': expected_crew_id,
                 'beforeCrewId': old_actor.get('crewId') if isinstance(old_actor, dict) else None,
                 'afterCrewId': new_actor.get('crewId') if isinstance(new_actor, dict) else None,
                 'sameExactCrewIdentity': same_crew, 'before': old_time, 'after': new_time,

@@ -17,7 +17,8 @@ import { CREW_SPRITE_IDS, CREW_MISSION_SPRITE_IDS, resolveSpriteClip } from './s
  * combines the existing door hooks with super, never replacing another crew.
  * All movement/occlusion uses the same native floor, paired socket and atlas
  * policy. Cross-deck/lift travel remains delegated, explicitly unobserved. */
-function createServiceRouteV161(definition) {
+export function createServiceRouteV161(definition, { schema: SCHEMA = 161,
+  stateField: STATE_FIELD = 'npcServiceRoutesV161', alternateAnnexRoomIds = [] } = {}) {
 const { crewId: ID, parentRoomId: PARENT, annexRoomId: ANNEX, deck: DECK } = definition;
 const actorKey = Symbol('actor:' + definition.id), stateKey = Symbol('state:' + definition.id),
   handoffKey = Symbol('handoff:' + definition.id), sandboxKey = Symbol('sandbox:' + definition.id),
@@ -56,7 +57,10 @@ const clone = value => value == null ? value : JSON.parse(JSON.stringify(value))
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const stages = ['walking', 'service', 'opening', 'covering', 'revealing'];
-const reasons = ['daily-schedule', 'active-crisis', 'infestation', 'mission-assignment', 'medical-recovery', 'unavailable', 'interaction', 'occupied'];
+const reasons = ['daily-schedule', 'active-crisis', 'infestation', 'mission-assignment', 'medical-recovery', 'unavailable', 'interaction', 'occupied',
+  ...(alternateAnnexRoomIds.length ? ['annex-assignment'] : [])];
+const alternateDuty = hub => annexNpcDutiesV141(hub.npcRoutineResolutionsV62, hub)
+  .find(duty => duty.crewId === ID && alternateAnnexRoomIds.includes(duty.roomId));
 const crossing = state => ['opening', 'covering', 'revealing'].includes(state?.stage);
 const inDoorway = actor => {
   const opening = actor && faces[actor.roomId]?.opening;
@@ -72,24 +76,29 @@ const homeTemplate = () => {
     x: getNpcRoutineStandingAnchorV158(ID, PARENT, 'station') }], [parent])[0];
 };
 
-const HUB_NPC_ANNEX_CIRCULATION_V161 = Object.freeze({ id: definition.id, schema: 161, crewId: ID, deck: DECK,
+const HUB_NPC_ANNEX_CIRCULATION_V161 = Object.freeze({ id: definition.id, schema: SCHEMA, crewId: ID, deck: DECK,
   parentRoomId: PARENT, annexRoomId: ANNEX, connectionId: descriptor.connectionId,
   maximumSpeed: 27, acceleration: 92, actorWidth: 44, actorHeight: 92,
   openingSeconds: .42, coveringSeconds: .65, reducedDoorSeconds: .12,
   crossingPolicy: 'paired-airlock-covered-coordinate-handoff',
-  source: 'native-v52-actor-v141-v156-watches-v138-sockets-v142-paired-doors',
+  source: definition.source || 'native-v52-actor-v141-v156-watches-v138-sockets-v142-paired-doors',
   excluded: Object.freeze(['lift-transit', 'other-annex-routes', 'new-back-view-art']) });
 
 /** Strict actual coordinates and finite native door phases, never the old
  * timetable's sampled room pose. Historical V158/ECHO state is untouched. */
 function normalizeNpcAnnexCirculationV161(value) {
-  const rawHandoff = value?.schema === 161 && value.nativeHandoff;
+  const rawHandoff = value?.schema === SCHEMA && value.nativeHandoff;
+  const nativeTarget = rawHandoff?.reason !== 'annex-assignment'
+    && HUB_DECKS.some(deck => deck.rooms.some(room => room.id === rawHandoff?.toRoomId));
+  const annexTarget = rawHandoff?.reason === 'annex-assignment' && rawHandoff?.fromRoomId === PARENT
+    && rawHandoff?.owner === 'native-v141-annex-watch'
+    && alternateAnnexRoomIds.includes(rawHandoff?.toRoomId);
   const nativeHandoff = rawHandoff?.crewId === ID && [PARENT, ANNEX].includes(rawHandoff.fromRoomId)
-    && HUB_DECKS.some(deck => deck.rooms.some(room => room.id === rawHandoff.toRoomId))
+    && (nativeTarget || annexTarget)
     && reasons.includes(rawHandoff.reason) && rawHandoff.observedTravel === false
     ? { crewId: ID, fromRoomId: rawHandoff.fromRoomId, toRoomId: rawHandoff.toRoomId,
-      reason: rawHandoff.reason, observedTravel: false, owner: 'native-v62-routine' } : null;
-  const empty = { schema: 161, actor: null, nativeHandoff }, a = value?.schema === 161 && value.actor;
+      reason: rawHandoff.reason, observedTravel: false, owner: annexTarget ? 'native-v141-annex-watch' : 'native-v62-routine' } : null;
+  const empty = { schema: SCHEMA, actor: null, nativeHandoff }, a = value?.schema === SCHEMA && value.actor;
   if (!a || a.crewId !== ID || a.deck !== DECK || ![PARENT, ANNEX].includes(a.roomId)
     || ![PARENT, ANNEX].includes(a.targetRoomId) || !stages.includes(a.stage)
     || ![a.x, a.y, a.homeX, a.dutyX, a.velocity, a.time, a.distance, a.doorProgress].every(finite)
@@ -111,7 +120,7 @@ function normalizeNpcAnnexCirculationV161(value) {
     || ['opening', 'covering'].includes(a.stage) && a.roomId === a.targetRoomId
     || a.stage === 'revealing' && a.roomId !== a.targetRoomId
     || a.stage === 'service' && a.roomId !== a.targetRoomId) return empty;
-  return { schema: 161, nativeHandoff: null, actor: { crewId: ID, deck: DECK, roomId: a.roomId, x: a.x, y: a.y,
+  return { schema: SCHEMA, nativeHandoff: null, actor: { crewId: ID, deck: DECK, roomId: a.roomId, x: a.x, y: a.y,
     homeX: a.homeX, dutyX: a.dutyX, targetRoomId: a.targetRoomId, stage: a.stage,
     velocity: a.velocity, facing: a.facing, doorProgress: a.doorProgress,
     time: a.time, distance: a.distance, crossings: a.crossings, arrivals: a.arrivals,
@@ -128,7 +137,7 @@ function npcAnnexInterruptionV161(resolution, actor) {
 
 function createNpcAnnexCirculationStateV161(actor, dutyActor) {
   if (actor?.crewId !== ID || ![PARENT, ANNEX].includes(actor.roomId) || !dutyActor) return null;
-  return normalizeNpcAnnexCirculationV161({ schema: 161, actor: { crewId: ID, deck: DECK,
+  return normalizeNpcAnnexCirculationV161({ schema: SCHEMA, actor: { crewId: ID, deck: DECK,
     roomId: actor.roomId, x: actor.x, y: actor.y, homeX: actor.roomId === PARENT ? actor.x : homeTemplate().x,
     dutyX: dutyActor.x, targetRoomId: actor.roomId, stage: 'service', velocity: 0,
     facing: actor.facing === -1 ? -1 : 1, doorProgress: 0, time: 0, distance: 0,
@@ -258,8 +267,8 @@ function withHubNpcAnnexCirculationV161(Base) {
   return class HubNpcAnnexCirculationV161 extends Base {
     start(hubState = {}, options = {}) {
       this[sandboxKey] = Boolean(options.editorProject || options.forgeJourneyV141 || this.forgeSessionV141);
-      this[stateKey] = this[sandboxKey] ? null : normalizeNpcAnnexCirculationV161(hubState.npcServiceRoutesV161?.routes?.[definition.id]).actor;
-      this[handoffKey] = normalizeNpcAnnexCirculationV161(hubState.npcServiceRoutesV161?.routes?.[definition.id]).nativeHandoff;
+      this[stateKey] = this[sandboxKey] ? null : normalizeNpcAnnexCirculationV161(hubState[STATE_FIELD]?.routes?.[definition.id]).actor;
+      this[handoffKey] = normalizeNpcAnnexCirculationV161(hubState[STATE_FIELD]?.routes?.[definition.id]).nativeHandoff;
       this[actorKey] = null; this[peersKey] = [];
       const result = super.start(hubState, options);
       this.draw?.(); return result;
@@ -325,14 +334,18 @@ function withHubNpcAnnexCirculationV161(Base) {
       if (!actor || !s || !resolution) return false;
       if (resolution.missionAssigned || resolution.needsCare || actor.alive === false || actor.downed) return true;
       const duty = annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).some(d => d.crewId === ID && d.roomId === ANNEX);
-      return !resolution.alert && !duty && resolution.roomId !== PARENT && actor.roomId === PARENT && s.stage === 'service';
+      return !resolution.alert && !duty && (resolution.roomId !== PARENT || alternateDuty(this))
+        && actor.roomId === PARENT && s.stage === 'service';
     }
 
     [handoffMethodKey](resolution) {
       const actor = this[actorKey];
       if (!actor) return;
-      this[handoffKey] = { crewId: ID, fromRoomId: actor.roomId, toRoomId: resolution.roomId,
-        reason: npcAnnexInterruptionV161(resolution, actor) || 'daily-schedule', observedTravel: false, owner: 'native-v62-routine' };
+      const interruption = npcAnnexInterruptionV161(resolution, actor);
+      const alternate = !interruption && alternateDuty(this);
+      this[handoffKey] = { crewId: ID, fromRoomId: actor.roomId, toRoomId: alternate?.roomId || resolution.roomId,
+        reason: interruption || (alternate ? 'annex-assignment' : 'daily-schedule'), observedTravel: false,
+        owner: alternate ? 'native-v141-annex-watch' : 'native-v62-routine' };
       this[actorKey] = null; this[stateKey] = null;
     }
 
@@ -477,8 +490,8 @@ function withHubNpcAnnexCirculationV161(Base) {
       const original = this.onPersist; let patch;
       this.onPersist = value => { patch = value; };
       try { super.persist(); } finally { this.onPersist = original; }
-      if (patch) original({ ...patch, npcServiceRoutesV161: { schema: 161, routes: {
-        ...patch.npcServiceRoutesV161?.routes, [definition.id]: normalizeNpcAnnexCirculationV161({ schema: 161,
+      if (patch) original({ ...patch, [STATE_FIELD]: { schema: SCHEMA, routes: {
+        ...patch[STATE_FIELD]?.routes, [definition.id]: normalizeNpcAnnexCirculationV161({ schema: SCHEMA,
           actor: this[stateKey], nativeHandoff: this[handoffKey] }) } } });
     }
 
@@ -488,9 +501,9 @@ function withHubNpcAnnexCirculationV161(Base) {
 
     getSnapshot() {
       const snapshot = super.getSnapshot();
-      return { ...snapshot, npcServiceRoutesV161: { schema: 161, routes: {
-        ...snapshot.npcServiceRoutesV161?.routes, [definition.id]: {
-        ...normalizeNpcAnnexCirculationV161({ schema: 161, actor: this[stateKey], nativeHandoff: this[handoffKey] }),
+      return { ...snapshot, [STATE_FIELD]: { schema: SCHEMA, routes: {
+        ...snapshot[STATE_FIELD]?.routes, [definition.id]: {
+        ...normalizeNpcAnnexCirculationV161({ schema: SCHEMA, actor: this[stateKey], nativeHandoff: this[handoffKey] }),
         actualVelocity: this[actorKey]?.vx || 0, reserved: this.npcAnnexDoorReservedV159(ANNEX),
         occlusion: npcAnnexOcclusionV161(this[stateKey]),
         initialCondition: this[stateKey]?.admittedRoomId || null,
@@ -513,7 +526,7 @@ export const HUB_NPC_SERVICE_ROUTE_DEFINITIONS_V161 = Object.freeze([
   Object.freeze({ id: 'leila-galley', crewId: 'crew-15-leila-s-rensen', deck: 1, parentRoomId: 'mess',
     annexRoomId: 'galley-service', targetX: 420, duty: 'ration-and-galley-review' })
 ]);
-export const HUB_NPC_SERVICE_ROUTES_V161 = Object.freeze(HUB_NPC_SERVICE_ROUTE_DEFINITIONS_V161.map(createServiceRouteV161));
+export const HUB_NPC_SERVICE_ROUTES_V161 = Object.freeze(HUB_NPC_SERVICE_ROUTE_DEFINITIONS_V161.map(definition => createServiceRouteV161(definition)));
 
 /** Separate bounded native route saves; no cloud state, campaign clock, reward
  * or unobserved lift route is synthesized. Unknown routes never migrate. */
