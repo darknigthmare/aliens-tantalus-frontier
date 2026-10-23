@@ -200,6 +200,26 @@ test('E can abandon a blocked cabin approach at its actual floor pose without re
   assert.equal(hub.persisted.at(-1).positionX, approached);
 });
 
+test('the actual on-screen interact control cancels boarding and reopens a travelling source cabin without admitting movement', () => {
+  class ControlsBase extends FixtureBase {
+    setControl(...args) { return HubGame.prototype.setControl.apply(this, args); }
+  }
+  const ControlsTransit = withHubLiftTransitV163(ControlsBase);
+  for (const phase of ['boarding', 'travel']) {
+    const hub = new ControlsTransit(); hub.start(); assert.equal(hub.useLift(1), true);
+    for (let i = 0; i < 900 && hub.hubLiftTransitV163.trip.phase !== phase; i++) tick(hub);
+    tick(hub, 2); const before = structuredClone(hub.hubLiftTransitV163), pose = structuredClone(hub.player);
+    hub.setControl('right', true); hub.setControl('jump', true); hub.setControl('interact', false);
+    assert.equal(hub.keys.size, 0); assert.deepEqual(hub.hubLiftTransitV163, before);
+    hub.setControl('interact', true); hub.setControl('interact', false);
+    assert.equal(hub.state.deck, 1); assert.equal(hub.player.x, pose.x); assert.equal(hub.player.y, pose.y);
+    if (phase === 'boarding') assert.equal(hub.hubLiftTransitV163.trip, null);
+    else { assert.equal(hub.hubLiftTransitV163.trip.phase, 'returning'); tick(hub, 120); }
+    assert.equal(hub.hubLiftTransitV163.trip, null); assert.equal(hub.state.deck, 1);
+    hub.setControl('left', true); assert.ok(hub.keys.has('KeyA')); hub.setControl('left', false); assert.equal(hub.keys.size, 0);
+  }
+});
+
 test('off-deck occupancy overlays durable owner locations without adopting, cloning or moving their actors', () => {
   const actual = { crewId: 'crew-09-inez-harlow', deck: 2, roomId: 'bioforge', x: 1205, y: 532 };
   const hub = { state: { deck: 1 }, getSnapshot: () => ({ npcAnnexRoutesV163: { routes: { route: { actor: actual } } } }),

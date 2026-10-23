@@ -362,7 +362,7 @@ report['saveFixtureNames'] = [c['id'] + '-disclosed-native0530.json' for c in RO
 source_start = manifest()
 (output / 'runtime-source-start-v163.json').write_text(json.dumps(source_start, indent=2))
 with sync_playwright() as pw:
-    browser = pw.chromium.launch(headless=True, executable_path=os.environ.get('ATF_CHROMIUM_EXECUTABLE', '/usr/bin/chromium'))
+    browser = pw.chromium.launch(headless=True, **({'executable_path': os.environ['ATF_CHROMIUM_EXECUTABLE']} if os.environ.get('ATF_CHROMIUM_EXECUTABLE') else {}))
     report['tooling'] = {'playwright': importlib.metadata.version('playwright'), 'chromium': browser.version}
     try:
         for config in ROUTES:

@@ -62,6 +62,7 @@ export function createXenoTrialsMatchV96(config = {}) {
     holdRoundTransition: config.holdRoundTransition === true,
     matchId: typeof config.matchId === 'string' && /^[a-zA-Z0-9_-]{1,96}$/.test(config.matchId) ? config.matchId : `trial-${seed}` };
   const match = { version: 96, config: normalized, rng: seed, accumulator: 0, tick: 0, round: 1,
+    opponentInputSourceV163: 'cpu',
     phase: normalized.introSeconds > 0 ? 'intro' : 'active', phaseTime: normalized.introSeconds, paused: false, timeRemaining: normalized.roundSeconds,
     wins: { player: 0, opponent: 0 }, roundWinner: null, roundReason: null, result: null,
     fighters: [makeFighter('player', playerId, config.playerVariant), makeFighter('opponent', opponentId, config.opponentVariant)],
@@ -120,7 +121,18 @@ export function nextXenoTrialsRoundV96(match) {
 }
 export function setXenoTrialsPausedV96(match, paused) {
   if (!match || match.phase === 'match-over') return false;
-  if (paused === true) for (const fighter of match.fighters) fighter.rearmControls = releaseGate(fighter);
+  if (paused === true) for (const fighter of match.fighters) {
+    // Physical releases belong to caller-controlled actors. The native CPU
+    // cannot release a keyboard: its continuous guard must survive a pause.
+    if (fighter.side === 'player' || match.opponentInputSourceV163 === 'direct')
+      fighter.rearmControls = releaseGate(fighter);
+  }
+  // Missing markers are legacy native-CPU matches. Also remove a gate written
+  // by an older pause without changing the CPU's real input/decision state.
+  if (match.opponentInputSourceV163 !== 'direct') {
+    const cpu = match.fighters.find(fighter => fighter.side === 'opponent');
+    if (cpu) cpu.rearmControls = emptyInput();
+  }
   match.paused = paused === true; match.accumulator = 0; return true;
 }
 /** Account for source releases during a blocked presentation without advancing
@@ -368,6 +380,12 @@ function fixedStep(match, playerControls, opponentControls, dt) {
  * Browser blur pauses independently. Null opponent input selects deterministic AI. */
 export function stepXenoTrialsMatchV96(match, dt, playerInput = {}, opponentInput = null) {
   if (!match || match.paused || match.phase === 'match-over' || !Number.isFinite(dt) || dt <= 0) return match;
+  const source = opponentInput === null ? 'cpu' : 'direct';
+  if (source === 'cpu' && match.opponentInputSourceV163 === 'direct') {
+    const cpu = match.fighters.find(fighter => fighter.side === 'opponent');
+    if (cpu) cpu.rearmControls = emptyInput();
+  }
+  match.opponentInputSourceV163 = source;
   match.accumulator += Math.min(dt, .25);
   const a = input(playerInput), b = opponentInput === null ? null : input(opponentInput);
   while (match.accumulator + 1e-10 >= XENO_TRIALS_STEP_V96) {

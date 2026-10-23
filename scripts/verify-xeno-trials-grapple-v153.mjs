@@ -101,6 +101,62 @@ test('pause freezes restraint, damage and escape; the held guard must rearm afte
   pause(m,false);ticks(m,30,{}, {guard:true});assert.equal(m.grappleV153.escapeProgress,0);
   step(m,DT,{},{});ticks(m,config.escapeTicks,{}, {guard:true});assert.equal(ended(m)[0].reason,'escaped');
 });
+for(const t of config.targets)test(`${t.id}: pausing a real CPU guard preserves its earned escape progress and exact native release`,()=>{
+  const m=latch({opponentId:t.id});
+  for(let i=0;i<100&&m.grappleV153?.escapeProgress<20;i++)step(m,DT,{},null);
+  const target=m.fighters[1],progress=m.grappleV153?.escapeProgress;
+  assert.ok(progress>=20);assert.equal(target.previousInput.guard,true);
+  assert.equal(target.rearmControls.guard,false);assert.equal(m.opponentInputSourceV163,'cpu');
+  const uninterrupted=copy(m),guardBefore=copy(target.rearmControls),beforeStats=copy(target.stats);
+  pause(m,true);assert.deepEqual(target.rearmControls,guardBefore);
+  const frozen=copy(m);ticks(m,240,{},null);assert.deepEqual(copy(m),frozen);
+  pause(m,false);step(m,DT,{},null);
+  assert.equal(m.grappleV153.escapeProgress,progress+1,'The same CPU guard continues on the first resumed step.');
+  for(let i=1;i<config.escapeTicks-progress;i++)step(m,DT,{},null);
+  ticks(uninterrupted,config.escapeTicks-progress,{},null);
+  assert.equal(m.grappleV153,undefined);assert.equal(ended(m).length,1);
+  assert.equal(ended(m)[0].reason,'escaped');assert.equal(target.stats.grappleEscapesV153,(beforeStats.grappleEscapesV153||0)+1);
+  assert.equal(m.result,null);assert.deepEqual(copy(m),uninterrupted,'Pause adds no simulation time, damage, AI decision or delayed release.');
+});
+test('legacy paused CPU snapshots clear only the obsolete physical release gate and keep the real guard/AI state',()=>{
+  const original=latch();for(let i=0;i<100&&original.grappleV153?.escapeProgress<20;i++)step(original,DT,{},null);
+  // Declared legacy boundary fixture: old snapshots had no source marker and
+  // stored the CPU guard gate written by the former all-actor pause loop.
+  const m=copy(original);delete m.opponentInputSourceV163;m.paused=true;m.fighters[1].rearmControls.guard=true;
+  const before=copy(m),progress=m.grappleV153.escapeProgress;
+  pause(m,false);
+  assert.deepEqual(m.ai,before.ai);assert.deepEqual(m.fighters[1].previousInput,before.fighters[1].previousInput);
+  assert.equal(m.fighters[1].rearmControls.guard,false);assert.deepEqual(m.fighters.map(f=>[f.hp,f.stamina,f.x,f.y,f.stats]),before.fighters.map(f=>[f.hp,f.stamina,f.x,f.y,f.stats]));
+  ticks(m,config.escapeTicks-progress,{},null);
+  assert.equal(m.opponentInputSourceV163,'cpu');assert.equal(ended(m).length,1);assert.equal(ended(m)[0].reason,'escaped');
+});
+for(const attackerSide of [0,1])test(`direct control side ${1-attackerSide}: JSON resume still requires an actual human guard release after pause`,()=>{
+  const opts=attackerSide?{playerId:HUMAN,opponentId:'prowler'}:{};
+  const m=latch(opts,attackerSide),both={guard:true};ticks(m,20,both,both);
+  assert.equal(m.opponentInputSourceV163,'direct');pause(m,true);const restored=copy(m);
+  assert.equal(restored.opponentInputSourceV163,'direct');pause(restored,false);
+  assert.ok(restored.fighters.every(f=>f.rearmControls.guard));
+  ticks(restored,30,both,both);assert.equal(restored.grappleV153.escapeProgress,0);
+  step(restored,DT,{},{});ticks(restored,config.escapeTicks,both,both);
+  assert.equal(ended(restored).length,1);assert.equal(ended(restored)[0].reason,'escaped');
+  assert.equal(restored.fighters[1-attackerSide].stats.grappleEscapesV153,1);
+});
+test('pause before the first step defaults to CPU, while paused/invalid calls cannot change input ownership',()=>{
+  const m=make();assert.equal(m.opponentInputSourceV163,'cpu');pause(m,true);const frozen=copy(m);
+  step(m,DT,{}, {guard:true});assert.deepEqual(copy(m),frozen);
+  pause(m,false);step(m,NaN,{}, {guard:true});assert.equal(m.opponentInputSourceV163,'cpu');
+  step(m,DT,{},{});assert.equal(m.opponentInputSourceV163,'direct');
+});
+test('direct to CPU to direct ownership never transfers a physical guard gate to the CPU or bypasses the returning human gate',()=>{
+  const m=latch();ticks(m,20,{}, {guard:true});pause(m,true);pause(m,false);
+  assert.equal(m.opponentInputSourceV163,'direct');assert.equal(m.fighters[1].rearmControls.guard,true);
+  step(m,DT,{},null);assert.equal(m.opponentInputSourceV163,'cpu');assert.equal(m.fighters[1].rearmControls.guard,false);
+  for(let i=0;i<50&&m.grappleV153.escapeProgress<5;i++)step(m,DT,{},null);
+  assert.ok(m.grappleV153.escapeProgress>=5);assert.equal(m.fighters[1].previousInput.guard,true);
+  step(m,DT,{}, {guard:true});assert.equal(m.opponentInputSourceV163,'direct');pause(m,true);pause(m,false);
+  assert.equal(m.fighters[1].rearmControls.guard,true);ticks(m,10,{}, {guard:true});assert.equal(m.grappleV153.escapeProgress,0);
+  step(m,DT,{},{});ticks(m,config.escapeTicks,{}, {guard:true});assert.equal(ended(m)[0].reason,'escaped');
+});
 test('controls held during escape do not replay as an opening attack or movement afterwards',()=>{
   const m=latch();const held={guard:true,light:true,special:true,jump:true,right:true};ticks(m,config.escapeTicks,{},held);
   const x=m.fighters[1].x,hits=m.fighters[1].stats.hits;ticks(m,70,{},held);
@@ -158,6 +214,19 @@ test('rendering and accessible view never mutate the authoritative simulation',(
   draw(ctx,m,bounds,450);assert.equal(JSON.stringify(m),before);assert.ok(calls.some(c=>c[0]==='fillText'&&c[1].includes('GARDE')));
   assert.equal(view(m).animation,'existing-static-pose');assert.equal(view(m).canonExact,false);assert.equal(view(m).escapeRatio,30/72);
   const detached=view(m);detached.escapeProgress=999;assert.equal(m.grappleV153.escapeProgress,30);assert.equal(view({}),null);
+});
+test('escape guidance follows the real captive input owner in both rendered and accessible views',()=>{
+  for(const [attackerSide,direct] of [[0,false],[0,true],[1,false]]) {
+    const m=latch(attackerSide?{playerId:HUMAN,opponentId:'prowler'}:{},attackerSide);
+    step(m,DT,{},direct?{}:null);const before=copy(m),calls=[];
+    const ctx=new Proxy({},{get:(_,key)=>(...args)=>calls.push([key,...args]),set:()=>true});
+    draw(ctx,m,bounds,450);
+    const cpuCaptive=attackerSide===0&&!direct;
+    assert.equal(view(m).label.includes('RÉSISTANCE ADVERSE'),cpuCaptive);
+    assert.equal(view(m).label.includes('GARDE'),!cpuCaptive);
+    assert.ok(calls.some(call=>call[0]==='fillText'&&call[1].includes(cpuCaptive?'RÉSISTANCE ADVERSE':'GARDE')));
+    assert.deepEqual(m,before);
+  }
 });
 test('a drawn paired floor pose removes only the legacy connector; static fallback keeps it and both retain the escape HUD',()=>{
   const m=latch();ticks(m,30,{}, {guard:true});const before=copy(m);

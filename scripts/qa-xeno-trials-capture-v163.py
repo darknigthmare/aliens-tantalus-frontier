@@ -63,38 +63,144 @@ def wait_frame(page, predicate, timeout=45000):
 def get_frame(page):
     return page.evaluate('''()=>({state:globalThis.__ATF_XENO_TRIALS_V96__.snapshot(),png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')})''')
 
-def acquire_player_capture(page, after):
-    deadline = time.monotonic() + 55
+def acquire_player_capture(page, after, trace):
+    # The Prowler and these humans have different front-biased bodies. Their
+    # pivot distance is not the V153 contact test. All imports below only read
+    # the public snapshot through the same pure geometry/spec functions used
+    # by combat; movement, guard and every special still use actual keys.
+    read_contact = r'''async()=>{
+      const G=await import('/src/xeno-trials-geometry-v105.js'),
+        A=await import('/src/xeno-trials-signatures-v147.js'),
+        D=await import('/src/xeno-trials-data-v96.js'),
+        E=await import('/src/xeno-trials-engine-v96.js');
+      const m=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match;if(!m)return null;
+      const[a,b]=m.fighters,direction=b.x>=a.x?1:-1,
+        playerBody=G.getXenoTrialsBodyBoundsV105(a),targetBody=G.getXenoTrialsBodyBoundsV105(b),
+        special=A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(a.id),'special',E.XENO_TRIALS_ATTACKS_V96.special),
+        targetAttack=b.attack?A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(b.id),b.attack.kind,E.XENO_TRIALS_ATTACKS_V96[b.attack.kind]):null;
+      return{match:m,direction,gap:G.getXenoTrialsBodyGapV105(a,b,direction),playerBody,targetBody,
+        targetAhead:(targetBody.center-playerBody.center)*direction>=0,
+        verticalOverlap:playerBody.bottom<=targetBody.top&&targetBody.bottom<=playerBody.top,
+        specialCost:special.cost,specialStartup:special.startup,
+        targetThreat:!!targetAttack&&b.attack.age<targetAttack.startup+targetAttack.active,
+        targetRecovery:!!targetAttack&&b.attack.age>=targetAttack.startup+targetAttack.active};
+    }'''
+    started = time.monotonic()
+    deadline = started + 55
+    trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
+                  'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [],
+                  'policy': 'Real keys: approach using pure V105 body gap to <=6px (V153 admission <=8px), guard visible attack startup/active at contact, then special during observed target recovery when grounded, unstunned, affordable and cooldown zero. No match field is assigned.'})
     held = None
-    prep = None
-    while time.monotonic() < deadline:
-        m = observed(page)['match']
-        if m.get('grappleV153'):
-            if held:
-                page.keyboard.up(held)
-            return prep
-        if m['phase'] == 'match-over':
-            break
+    guarding = False
+    preparations = {}
+    observed_preparation_ids = set()
+    last_observation_tick = -120
+
+    def summarize(value):
+        m = value['match']
         a, b = m['fighters']
-        delta = b['x'] - a['x']
-        desired = 'ArrowRight' if delta > 175 else 'ArrowLeft' if delta < -175 else None
-        if desired != held:
-            if held:
-                page.keyboard.up(held)
-            held = desired
-            if held:
-                page.keyboard.down(held)
-        if not desired and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0:
-            page.keyboard.press('KeyL')
-        match = observed(page)['match']
-        if not prep:
-            candidate = next((v for v in match.get('rigViewsV154', []) if v['side'] == 'player' and (v.get('preparationV163') if after else v.get('clip') == 'windup')), None)
-            if candidate:
-                prep = get_frame(page)
-        page.wait_for_timeout(20)
-    if held:
-        page.keyboard.up(held)
-    raise AssertionError('Keyboard Prowler did not earn a native capture before the deadline')
+        return {'tick': m['tick'], 'phase': m['phase'], 'round': m['round'],
+                'gap': value['gap'], 'direction': value['direction'],
+                'playerBody': value['playerBody'], 'targetBody': value['targetBody'],
+                'targetAhead': value['targetAhead'], 'verticalOverlap': value['verticalOverlap'],
+                'targetThreat': value['targetThreat'], 'targetRecovery': value['targetRecovery'],
+                'player': {k: a.get(k) for k in ['x', 'y', 'vy', 'hp', 'stamina', 'stun', 'guard', 'attack', 'specialCooldown', 'stats']},
+                'target': {k: b.get(k) for k in ['x', 'y', 'vy', 'hp', 'stamina', 'stun', 'guard', 'attack']},
+                'grappleId': (m.get('grappleV153') or {}).get('id')}
+
+    try:
+        while time.monotonic() < deadline:
+            value = page.evaluate(read_contact)
+            if value is None:
+                raise AssertionError('Native match disappeared during keyboard capture acquisition')
+            m = value['match']
+            sample = summarize(value)
+            trace['lastObservation'] = sample
+            if m['tick'] - last_observation_tick >= 12 or m.get('grappleV153'):
+                trace['observations'].append(sample)
+                if len(trace['observations']) > trace['observationLimit']:
+                    trace['observations'].pop(0)
+                    trace['discardedOldObservations'] = trace.get('discardedOldObservations', 0) + 1
+                last_observation_tick = m['tick']
+            if value['targetAhead'] and -8 <= value['gap'] <= 8 and not trace.get('firstContact'):
+                trace['firstContact'] = sample
+            if m.get('grappleV153'):
+                start = next((e for e in m['events'] if e['type'] == 'grapple-start-v153' and e['grappleId'] == m['grappleV153']['id']), None)
+                attack = next((e for e in reversed(m['events']) if start and e['type'] == 'attack' and e['side'] == 'player' and e['id'] < start['id']), None)
+                prep = preparations.get(attack['id']) if attack and attack.get('kind') == 'special' else None
+                accepted = next((attempt for attempt in reversed(trace['attempts']) if attempt.get('nativeSpecialAccepted') and attack and attempt.get('attackEventId') == attack['id']), None)
+                if not (prep and accepted):
+                    raise AssertionError('The native hold has no atomically observed startup linked to its accepted player special; all attempts are retained')
+                trace.update({'status': 'captured', 'grapple': m['grappleV153'],
+                              'successfulSpecial': {'attackEvent': attack, 'grappleStart': start,
+                                                    'attemptNumber': accepted['number'],
+                                                    'preparationProof': prep['preparationProof']},
+                              'elapsedSeconds': time.monotonic() - started})
+                return prep
+            if m['phase'] == 'match-over':
+                break
+            a, b = m['fighters']
+            # Validate the pose and attack in the same atomic state+PNG read.
+            # A prior polling snapshot only decides whether a read is useful;
+            # it never supplies the identity claimed for the captured image.
+            if (a.get('attack') or {}).get('kind') == 'special' and a['attack']['id'] not in observed_preparation_ids:
+                frame = get_frame(page)
+                frame_match = frame['state']['match']
+                frame_player = frame_match['fighters'][0] if frame_match else None
+                frame_attack = frame_player.get('attack') if frame_player else None
+                cue = next((v for v in frame_match.get('rigViewsV154', []) if v['side'] == 'player' and (v.get('preparationV163') if after else v.get('clip') == 'windup')), None) if frame_match else None
+                attack_event = next((e for e in reversed(frame_match['events']) if e['type'] == 'attack' and e['side'] == 'player'), None) if frame_match else None
+                if frame_attack and frame_attack['kind'] == 'special' and frame_attack['age'] < value['specialStartup'] and cue and attack_event and attack_event['kind'] == 'special':
+                    proof = {'attackId': frame_attack['id'], 'attackEventId': attack_event['id'],
+                             'attackEventTick': attack_event['tick'], 'frameTick': frame_match['tick'],
+                             'attackAge': frame_attack['age'], 'clip': cue.get('clip')}
+                    frame['preparationProof'] = proof
+                    preparations[attack_event['id']] = frame
+                    observed_preparation_ids.add(frame_attack['id'])
+                    trace['preparations'].append(proof)
+            contact = value['targetAhead'] and -8 <= value['gap'] <= 6 and value['verticalOverlap']
+            desired = ('ArrowRight' if value['direction'] > 0 else 'ArrowLeft') if value['gap'] > 6 else None
+            if desired != held:
+                if held:
+                    page.keyboard.up(held)
+                held = desired
+                if held:
+                    page.keyboard.down(held)
+            want_guard = bool(contact and value['targetThreat'] and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] > 1)
+            if want_guard != guarding:
+                if want_guard:
+                    page.keyboard.down('KeyS')
+                else:
+                    page.keyboard.up('KeyS')
+                guarding = want_guard
+            ready = (m['phase'] == 'active' and not m.get('paused') and contact
+                     and value['targetRecovery'] and not a.get('attack')
+                     and a['stun'] <= 0 and a['y'] == 0 and b['y'] == 0 and b['vy'] == 0
+                     and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
+            if ready:
+                if len(trace['attempts']) >= trace['attemptLimit']:
+                    raise AssertionError('Native keyboard capture reached its disclosed attempt limit')
+                attempt = {'number': len(trace['attempts']) + 1, 'before': sample,
+                           'elapsedSeconds': time.monotonic() - started}
+                trace['attempts'].append(attempt)
+                page.keyboard.press('KeyL', delay=40)
+                after_press = page.evaluate(read_contact)
+                if after_press:
+                    attempt['after'] = summarize(after_press)
+                    attempt['nativeSpecialAccepted'] = after_press['match']['fighters'][0]['stats']['specials'] > a['stats']['specials']
+                    if attempt['nativeSpecialAccepted']:
+                        event = next((e for e in reversed(after_press['match']['events']) if e['type'] == 'attack' and e['side'] == 'player' and e['kind'] == 'special'), None)
+                        attempt['attackEventId'] = event['id'] if event else None
+            page.wait_for_timeout(20)
+        raise AssertionError('Keyboard Prowler did not earn a native capture before the deadline')
+    except Exception as e:
+        trace.update({'status': 'failed', 'error': str(e), 'elapsedSeconds': time.monotonic() - started})
+        raise
+    finally:
+        if held:
+            page.keyboard.up(held)
+        if guarding:
+            page.keyboard.up('KeyS')
 
 # Clone-only fixtures. No evaluated function can access a runtime setter.
 COMPARISON = r'''async native=>{
@@ -161,7 +267,7 @@ def main():
     report['identityBefore'] = identity()
     page = None
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True, executable_path=os.environ.get('ATF_CHROMIUM_EXECUTABLE', '/usr/bin/chromium'))
+        browser = pw.chromium.launch(headless=True, **({'executable_path': os.environ['ATF_CHROMIUM_EXECUTABLE']} if os.environ.get('ATF_CHROMIUM_EXECUTABLE') else {}))
         try:
             roles = ['cpu-captor', 'player-captor'] if args.roles == 'both' else [args.roles]
             for target_id in TARGETS:
@@ -188,7 +294,9 @@ def main():
                         prep_predicate = "m.rigViewsV154.some(v=>v.side==='opponent'&&v.preparationV163)" if after else "m.fighters[1].attack?.kind==='special'&&m.fighters[1].attack.age<.32"
                         preparation = wait_frame(page, prep_predicate)
                     else:
-                        preparation = acquire_player_capture(page, after)
+                        acquisition = {'profile': name}
+                        report.setdefault('playerCaptureAcquisitions', []).append(acquisition)
+                        preparation = acquire_player_capture(page, after, acquisition)
                     check(name + ': actual native Prowler startup is observed', preparation is not None)
                     capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
                     hold_predicate = "m.grappleV153&&m.captureViewsV163?.some(v=>v.role==='captive'&&v.fullFloorPin&&v.pairedContacts)" if after else "m.grappleV153&&m.tick-m.grappleV153.bornTick>=55"

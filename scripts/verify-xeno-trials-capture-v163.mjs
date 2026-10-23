@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
+import {inflateSync} from 'node:zlib';
 import {XENO_TRIALS_CAPTURE_ATLASES_V163 as atlases} from '../src/xeno-trials-capture-data-v163.js';
 import {XENO_TRIALS_CAPTURE_V163 as config,getXenoTrialsCaptureAtlasV163 as atlasFor,getXenoTrialsCaptureViewV163 as view,
  drawXenoTrialsCaptureTargetV163 as draw,getXenoTrialsCaptureReceiptV163 as receipt,sampleXenoTrialsPreparationV163 as prep} from '../src/xeno-trials-capture-v163.js';
@@ -15,20 +15,74 @@ const images=new Map([...atlases,...rigs].map(a=>[a.path,{naturalWidth:a.sourceW
 function native(id){const m=create({playerId:id,opponentId:'prowler',introSeconds:0,roundSeconds:120,seed:153,difficulty:'hard'});
  for(let i=0;i<5400&&!m.grappleV153;i++)step(m,DT,{});assert.ok(m.grappleV153,'native CPU must earn contact');return m;}
 const ctx=()=>new Proxy({globalAlpha:1,calls:[]},{get:(t,k)=>k in t?t[k]:(...args)=>t.calls.push([k,...args])});
+// Inspect the actual atlas bytes using only Node's standard library. The source
+// contract is non-interlaced 8-bit RGBA PNG; Python imaging packages are not a
+// dependency of the repository's Node/CI verification phase.
+function rgbaAlpha(bytes){
+ assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
+ assert.equal(bytes.toString('ascii',12,16),'IHDR');assert.equal(bytes.readUInt32BE(8),13);
+ const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
+ assert.equal(bytes[24],8);assert.equal(bytes[25],6);assert.equal(bytes[26],0);assert.equal(bytes[27],0);assert.equal(bytes[28],0);
+ const chunks=[];
+ for(let offset=8;offset<bytes.length;){
+  const length=bytes.readUInt32BE(offset);assert.ok(offset+length+12<=bytes.length);
+  if(bytes.toString('ascii',offset+4,offset+8)==='IDAT')chunks.push(bytes.subarray(offset+8,offset+8+length));
+  offset+=length+12;
+ }
+ const raw=inflateSync(Buffer.concat(chunks)),stride=width*4,alpha=new Uint8Array(width*height);
+ assert.equal(raw.length,(stride+1)*height);
+ const paeth=(a,b,c)=>{const p=a+b-c,aa=Math.abs(p-a),bb=Math.abs(p-b),cc=Math.abs(p-c);return aa<=bb&&aa<=cc?a:bb<=cc?b:c;};
+ let previous=new Uint8Array(stride),offset=0;
+ for(let y=0;y<height;y++){
+  const filter=raw[offset++],row=new Uint8Array(stride);assert.ok(filter<=4);
+  for(let i=0;i<stride;i++){
+   const left=i>=4?row[i-4]:0,up=previous[i],corner=i>=4?previous[i-4]:0;
+   let prediction=0;
+   if(filter===1)prediction=left;
+   else if(filter===2)prediction=up;
+   else if(filter===3)prediction=Math.floor((left+up)/2);
+   else if(filter===4)prediction=paeth(left,up,corner);
+   row[i]=(raw[offset++]+prediction)&255;
+  }
+  for(let x=0;x<width;x++)alpha[y*width+x]=row[x*4+3];
+  previous=row;
+ }
+ assert.equal(offset,raw.length);return{width,height,alpha};
+}
+function inspectAtlasAlpha(bytes,atlas){
+ const {width,height,alpha}=rgbaAlpha(bytes),labels=new Uint32Array(alpha.length),queue=new Uint32Array(alpha.length),large=new Set();
+ let zero=0,solid=0,component=0;
+ for(let index=0;index<alpha.length;index++){
+  if(alpha[index]===0)zero++;if(alpha[index]>=128)solid++;
+  if(alpha[index]<=2||labels[index])continue;
+  // scipy.ndimage.label's default two-dimensional connectivity is the same
+  // four-neighbour cross. Label every component before applying size>1000.
+  const id=++component;let head=0,tail=1;queue[0]=index;labels[index]=id;
+  const visit=next=>{if(alpha[next]>2&&!labels[next]){labels[next]=id;queue[tail++]=next;}};
+  while(head<tail){
+   const next=queue[head++],x=next%width;
+   if(x>0)visit(next-1);if(x+1<width)visit(next+1);
+   if(next>=width)visit(next-width);if(next+width<alpha.length)visit(next+width);
+  }
+  if(tail>1000)large.add(id);
+ }
+ const at=point=>{
+  const[x,y]=point;assert.ok(Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<width&&y<height);
+  return alpha[y*width+x];
+ };
+ const frames=atlas.frames.map(frame=>{
+  const[x0,y0,x1,y1]=frame.rect;assert.ok([x0,y0,x1,y1].every(Number.isInteger)&&x0>=0&&y0>=0&&x1<=width&&y1<=height&&x1>x0&&y1>y0);
+  const bodies=new Set();let pixels=0;
+  for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){
+   const index=y*width+x;if(alpha[index]>2)pixels++;
+   if(large.has(labels[index]))bodies.add(labels[index]);
+  }
+  return{bodies:[...bodies],pixels,solidContacts:Object.values(frame.contacts).every(point=>at(point)>=128),floor:at(frame.contacts.floorSupport)};
+ });
+ return{mode:'RGBA',zero,solid,bodyCount:large.size,frames};
+}
 test('27 original painted poses have pinned byte provenance, real alpha and nine separated bodies per atlas',()=>{
- const report=JSON.parse(execFileSync('python',['-c',`import json,sys,hashlib
-from PIL import Image
-import numpy as np
-from scipy.ndimage import label
-out=[]
-for a in json.load(sys.stdin):
- p='.'+a['path'];im=Image.open(p);v=np.array(im);alpha=v[:,:,3];lab,n=label(alpha>2);counts=np.bincount(lab.ravel());large=[i for i in range(1,n+1) if counts[i]>1000]
- frames=[]
- for f in a['frames']:
-  x0,y0,x1,y1=f['rect'];part=alpha[y0:y1,x0:x1];ids=np.unique(lab[y0:y1,x0:x1]);bodies=[int(i) for i in ids if i in large]
-  frames.append({'bodies':bodies,'pixels':int((part>2).sum()),'solidContacts':all(int(alpha[p[1],p[0]])>=128 for p in f['contacts'].values()),'floor':int(alpha[f['contacts']['floorSupport'][1],f['contacts']['floorSupport'][0]])})
- out.append({'mode':im.mode,'zero':int((alpha==0).sum()),'solid':int((alpha>=128).sum()),'bodyCount':len(large),'frames':frames})
-print(json.dumps(out))`],{cwd:new URL('..',import.meta.url),input:JSON.stringify(atlases),encoding:'utf8'}));
+ const report=atlases.map(a=>inspectAtlasAlpha(readFileSync(new URL('..'+a.path,import.meta.url)),a));
  assert.equal(atlases.length,3);assert.equal(config.taskIds.length,9);assert.equal(atlases.reduce((n,a)=>n+a.frames.length,0),27);
  for(const[a,i]of atlases.map((a,i)=>[a,i])){const bytes=readFileSync(new URL('..'+a.path,import.meta.url));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),a.sourceSha256);assert.equal(bytes.length,a.bytes);

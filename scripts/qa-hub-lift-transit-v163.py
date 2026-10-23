@@ -32,7 +32,7 @@ if output == repo or repo in output.parents:
 output.mkdir(parents=True, exist_ok=True)
 report = {'status': 'running', 'comparisonStage': args.comparison_stage, 'phase': 'prepare', 'checks': [], 'captures': [],
           'faces': [], 'fixtures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
-          'method': 'Disclosed completed-onboarding initial profiles at a real lift socket minus60px; native Save input, hub navigation and W/S; read-only RAF/canvas capture; native exit during travel, actual page reload and document-click-microtask observation of synchronous native resume.',
+          'method': 'Disclosed completed-onboarding initial profiles at a real lift socket minus60px; native Save input and hub navigation; if a native ladder masks the lift affordance, real A/D floor walking toward the cabin followed by key release and complete braking; then W/S. Read-only RAF/canvas capture preserves fixtureInitial separately from the actual pre-boarding initial pose; native exit during travel, actual page reload and document-click-microtask observation of synchronous native resume.',
           'limitations': ['Automated Chromium, not four human QA participants or canonical1:1 certification.',
                          'Eight player lift faces are observed. Physical cross-deck NPC locomotion is not claimed.',
                          'The source/destination coordinate chart changes behind native closed leaves; no new back-facing sprite is supplied.',
@@ -103,7 +103,7 @@ const lift=buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck).find(d=>d.shaftId===
 s.needsPlayerCreationV84=false;s.player.name=occupied?'QA Lift occupied1230 V163':'QA Lift cancellation V163';s.scene='command';s.settings.reducedMotion=false;
 s.onboardingV84=normalizePlayerOnboardingV84({...createPlayerOnboardingV84({name:s.player.name,callsign:'LIFT163'}),phase:'complete'});
 if(occupied)s.clock.hour=12.5;
-Object.assign(s.hub,{deck,roomId:lift.roomId,positionX:lift.x-22-60,positionY:HUB_WORLD.floorY-92,facing:1});
+Object.assign(s.hub,{deck,roomId:lift.roomId,positionX:lift.x-22+(occupied?120:-60),positionY:HUB_WORLD.floorY-92,facing:1});
 console.log(JSON.stringify(s));"""
         profile = json.loads(subprocess.run(['node', '--input-type=module', '-e', code, kind], cwd=repo,
             capture_output=True, text=True, check=True).stdout)
@@ -112,7 +112,7 @@ console.log(JSON.stringify(s));"""
               'toDeck': 2 if kind == 'occupied' else 0, 'key': 'KeyW'}
     (output / filename).write_bytes(raw)
     changes = ['named isolated existing identity', 'completed onboarding initial condition', 'scene=command',
-               'reducedMotion=false', 'native midship room/deck and lift.x-22-60px', 'native standing floor']
+               'reducedMotion=false', 'native midship room/deck and ' + ('lift.x-22+120px' if kind == 'occupied' else 'lift.x-22-60px'), 'native standing floor']
     if kind == 'occupied':
         changes.append('initial strategic clock=day1 12h30; existing NPC timetable supplies the occupied destination')
     report['fixtures'].append({'file': filename, 'sha256': hashlib.sha256(raw).hexdigest(), 'config': config,
@@ -124,8 +124,8 @@ console.log(JSON.stringify(s));"""
 fixtures = {(shaft, deck): fixture(shaft, deck) for shaft in args.shafts for deck in args.decks}
 supplemental = {kind: supplemental_fixture(kind) for kind in ['cancel', 'occupied']} if args.comparison_stage == 'after' else {}
 if supplemental:
-    report['supplementalCases'] = ['native-E-cancel-returning-save-reload', 'native12h30-occupied-arrival-refusal']
-    report['method'] += ' After the unchanged face matrix: actual E cancellation before handoff, durable returning/source reopening and restored walking controls; then a declared12h30 reactor profile whose unchanged native timetable occupies deck2/armory, real W/S refusal and retained held walking input.'
+    report['supplementalCases'] = ['native-E-cancel-returning-save-reload', 'native-touch-cancel-returning-save-reload', 'native12h30-occupied-arrival-refusal']
+    report['method'] += ' After the unchanged face matrix: actual E cancellation before handoff, durable returning/source reopening and restored walking controls; repeat the same cancellation fixture in a390x900 mobile touch context using a real tap on the visible interact button, with a window-pointerdown microtask observer after native target handlers; then a declared12h30 reactor profile whose unchanged native timetable occupies deck2/armory, real W/S refusal and retained held walking input.'
 if args.prepare_only:
     report['status'] = 'fixtures-prepared-no-browser'
     (output / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
@@ -136,7 +136,7 @@ report['identityBefore'] = identity()
 OBSERVE = """c=>{const h=__ATF_HUB__,s=__ATF_V51__.saveSystem.data,a=h.player,
  d=h.doorStates?.find(d=>d.shaftId===c.shaftId),paint=d&&h.hubSpatialLiftsV136?.get(d.id);
  return {running:h.running,time:h.animationTime,deck:h.state?.deck,roomId:h.state?.roomId,
- player:a?{x:a.x,y:a.y,w:a.w,h:a.h,vx:a.vx,vy:a.vy,facing:a.facing,grounded:a.grounded,health:a.health}:null,
+ player:a?{x:a.x,y:a.y,w:a.w,h:a.h,vx:a.vx,vy:a.vy,facing:a.facing,grounded:a.grounded,climbing:!!a.climbing,health:a.health}:null,
  camera:h.camera?{...h.camera}:null,
  lift:d?{id:d.id,shaftId:d.shaftId,x:d.x,roomId:d.roomId,progress:d.progress,deckIndex:d.deckIndex,
  destinations:d.destinations.map(v=>({deckIndex:v.deckIndex,roomId:v.roomId,destinationX:v.destinationX}))}:null,
@@ -145,6 +145,8 @@ OBSERVE = """c=>{const h=__ATF_HUB__,s=__ATF_V51__.saveSystem.data,a=h.player,
  departureBlocked:h.liftDepartureBlockedV163?structuredClone(h.liftDepartureBlockedV163):null,
  painted:paint?structuredClone(paint):null,
  anatomy:a?.playerAppearanceVisualV126?{drawn:a.playerAppearanceVisualV126.drawn,body:a.playerAppearanceVisualV126.body,locomotion:a.playerAppearanceVisualV126.locomotion}:null,
+ affordance:a&&h.state?{liftShaftId:h.nearestLift?.()?.shaftId||null,
+ ladder:h.nearestTraversalLadder?.()?structuredClone(h.nearestTraversalLadder()):null}:null,
  prompt:a&&h.state?h.statusPrompt?.():null,input:[...(h.keys||[])],annex:a&&h.state?(h.currentAnnexV71?.()?.id||null):null,
  savedHub:structuredClone(s.hub),protected:{clock:structuredClone(s.clock),resources:structuredClone(s.galaxy.resources),
  player:structuredClone(s.player),strategy:structuredClone(s.strategy)}};}"""
@@ -173,6 +175,60 @@ def save_frame(name, frame):
 def capture(page, config, name):
     frame = page.evaluate('''c=>({...(''' + OBSERVE + ''')(c),png:document.querySelector('#hub-canvas').toDataURL('image/png')})''', config)
     save_frame(name, frame)
+
+
+def approach_native_lift(page, config, label, fixture_initial):
+    if fixture_initial['affordance']['liftShaftId'] == config['shaftId']:
+        return fixture_initial, None
+    check(label + ': the unmodified source fixture exposes a real ladder before its nearby lift',
+          fixture_initial['affordance']['ladder'] is not None
+          and fixture_initial['lift']['shaftId'] == config['shaftId']
+          and fixture_initial['player']['grounded'] and not fixture_initial['player']['climbing'])
+    phase(label + ': native floor approach clears ladder priority before W/S')
+    cabin_x = fixture_initial['lift']['x'] - fixture_initial['player']['w'] / 2
+    key = 'KeyD' if cabin_x > fixture_initial['player']['x'] else 'KeyA'
+    page.evaluate('''c=>{window.__V163_LIFT_APPROACH__=new Promise(resolve=>{
+      const rows=[],started=performance.now();let nativeStart=null,lastX=null,lastProgress=started;
+      function frame(){const row=(''' + OBSERVE + ''')(c),now=performance.now();rows.push(row);
+        nativeStart??=row.time;
+        if(lastX===null||Math.abs(row.player.x-lastX)>=.25){lastX=row.player.x;lastProgress=now;}
+        const ready=row.affordance.liftShaftId===c.shaftId&&row.player.grounded
+          &&!row.player.climbing&&row.player.vx===0;
+        const invalid=!row.running||row.deck!==c.fromDeck||row.trip
+          ||!row.player.grounded||row.player.climbing||Math.abs(row.player.y+row.player.h-624)>.001;
+        if(ready||invalid||now-started>30000||row.time-nativeStart>3||now-lastProgress>6000){
+          resolve({rows,status:ready?'ready':'failed',reason:ready?'native-lift-affordance-after-braking'
+            :invalid?'native-source-support-or-chart-changed':now-started>30000?'wall-budget'
+            :row.time-nativeStart>3?'simulation-budget':'no-physical-progress'});return;}
+        requestAnimationFrame(frame);
+      }requestAnimationFrame(frame);
+    });}''', config)
+    page.locator('#hub-canvas').focus()
+    page.keyboard.down(key)
+    try:
+        page.wait_for_function('''shaft=>__ATF_HUB__.nearestLift?.()?.shaftId===shaft
+          &&__ATF_HUB__.player.grounded&&!__ATF_HUB__.player.climbing''', arg=config['shaftId'], timeout=15000)
+    finally:
+        page.keyboard.up(key)
+    page.wait_for_function('()=>__ATF_HUB__.player.vx===0&&__ATF_HUB__.player.grounded&&!__ATF_HUB__.player.climbing', timeout=15000)
+    trace = page.evaluate('()=>window.__V163_LIFT_APPROACH__')
+    initial = observed(page, config)
+    trace.update({'key': key, 'fixtureInitial': fixture_initial, 'initial': initial})
+    (output / (label + '-native-floor-approach.json')).write_text(json.dumps(trace, ensure_ascii=False, indent=2))
+    check(label + ': real keyboard approach reaches and brakes at the actual lift affordance',
+          trace['status'] == 'ready' and initial['affordance']['liftShaftId'] == config['shaftId']
+          and initial['player']['vx'] == 0 and abs(initial['player']['x'] - fixture_initial['player']['x']) > .25
+          and all(row['deck'] == config['fromDeck'] and row['roomId'] == fixture_initial['roomId']
+                  and not row['trip'] and row['player']['grounded'] and not row['player']['climbing']
+                  and row['player']['w'] == 44 and row['player']['h'] == 92
+                  and abs(row['player']['y'] + row['player']['h'] - 624) < .001 for row in trace['rows']))
+    check(label + ': floor approach uses bounded native steps and preserves resources and strategic time',
+          initial['protected'] == fixture_initial['protected']
+          and all(row['protected'] == fixture_initial['protected'] for row in trace['rows'])
+          and all(abs(b['player']['x'] - a['player']['x']) <= 270 * max(0, b['time'] - a['time']) + .01
+                  for a, b in zip(trace['rows'], trace['rows'][1:])))
+    capture(page, config, label + '-source-after-native-approach.png')
+    return initial, trace
 
 
 def install_observer(page, config):
@@ -281,8 +337,11 @@ def verify_journey(label, config, initial, rows, final):
             'maximumObservedDoorHeight': max(m['target']['h'] for m in painted)}
 
 
-def supplemental_page(browser, profile, config, raw, label):
-    context = browser.new_context(viewport={'width': 1600, 'height': 1000}, service_workers='block')
+def supplemental_page(browser, profile, config, raw, label, input_mode='keyboard'):
+    context_options = {'viewport': {'width': 1600, 'height': 1000}, 'service_workers': 'block'}
+    if input_mode == 'touch':
+        context_options.update(viewport={'width': 390, 'height': 900}, has_touch=True, is_mobile=True)
+    context = browser.new_context(**context_options)
     page = context.new_page()
     page.set_default_timeout(90000)
     page.on('pageerror', lambda error: report['pageErrors'].append(str(error)))
@@ -318,33 +377,49 @@ def prove_source_controls(page, config, label, initial):
     return moved
 
 
-def cancellation_case(page, profile, config):
-    label = 'midship-cancel-during-travel'
-    phase(label + ': actual E cancellation, durable returning phase and native reload')
+def cancellation_case(page, profile, config, input_mode='keyboard'):
+    label = 'midship-cancel-during-travel' + ('-touch' if input_mode == 'touch' else '')
+    phase(label + ': actual ' + ('touch-button tap' if input_mode == 'touch' else 'E')
+          + ' cancellation, durable returning phase and native reload')
     initial = observed(page, config)
     capture(page, config, label + '-source.png')
+    if input_mode == 'touch':
+        page.locator('[data-hub-control="interact"]').scroll_into_view_if_needed()
     install_observer(page, config)
     page.keyboard.press(config['key'])
     page.wait_for_function('()=>{const t=__ATF_HUB__.hubLiftTransitV163?.trip;return t?.phase==="travel"&&t.elapsed>=.12;}')
     travelling = observed(page, config)
-    # Observe the real E dispatch after its synchronous handlers, before RAF can
-    # advance the newly created returning phase. No game method is invoked.
+    # Window bubble observes the real keyboard or button-pointer dispatch after
+    # its native handlers, before RAF advances the new returning phase.
     page.evaluate('''c=>{window.__V163_FIRST_CANCEL__=new Promise(resolve=>{
-      const listener=event=>{if(event.code!=='KeyE'||event.target.id!=='hub-canvas')return;
-        document.removeEventListener('keydown',listener);
-        queueMicrotask(()=>resolve({...(''' + OBSERVE + ''')(c),png:document.querySelector('#hub-canvas').toDataURL('image/png')}));
-      };document.addEventListener('keydown',listener);
-    });}''', config)
-    page.keyboard.press('KeyE')
+      const touch=c.inputMode==='touch',eventType=touch?'pointerdown':'keydown';
+      const listener=event=>{
+        if(touch?!event.target.closest?.('[data-hub-control="interact"]')||event.pointerType!=='touch'
+          :event.code!=='KeyE'||event.target.id!=='hub-canvas')return;
+        window.removeEventListener(eventType,listener);
+        const cancellationInput={type:event.type,isTrusted:event.isTrusted,pointerType:event.pointerType||null,
+          control:touch?'interact':'KeyE'};
+        queueMicrotask(()=>resolve({...(''' + OBSERVE + ''')(c),cancellationInput,
+          png:document.querySelector('#hub-canvas').toDataURL('image/png')}));
+      };window.addEventListener(eventType,listener);
+    });}''', {**config, 'inputMode': input_mode})
+    if input_mode == 'touch':
+        page.locator('[data-hub-control="interact"]').tap()
+    else:
+        page.keyboard.press('KeyE')
     first = page.evaluate('()=>window.__V163_FIRST_CANCEL__')
     first_state = {key: value for key, value in first.items() if key != 'png'}
     save_frame(label + '-first-native-returning-draw.png', first)
-    check(label + ': E creates a real source-deck return without rewind or chart handoff', first_state['trip']['phase'] == 'returning'
+    check(label + ': ' + ('visible touch button' if input_mode == 'touch' else 'E')
+          + ' creates a real source-deck return without rewind or chart handoff', first_state['trip']['phase'] == 'returning'
           and first_state['trip']['elapsed'] == 0 and first_state['trip']['id'] == travelling['trip']['id']
           and first_state['trip']['fromDeck'] == travelling['trip']['fromDeck']
           and first_state['trip']['toDeck'] == travelling['trip']['toDeck']
           and first_state['deck'] == config['fromDeck'] and first_state['player']['x'] == travelling['player']['x']
           and first_state['player']['y'] == travelling['player']['y'] and first_state['lift']['progress'] == 0)
+    check(label + ': cancellation comes from the real requested browser input', first_state['cancellationInput']['isTrusted']
+          and first_state['cancellationInput']['type'] == ('pointerdown' if input_mode == 'touch' else 'keydown')
+          and (input_mode != 'touch' or first_state['cancellationInput']['pointerType'] == 'touch'))
     page.locator('#exit-hub').click()
     stopped = observed(page, config)
     partial = collect(page, label, 'before-reload')
@@ -385,8 +460,15 @@ def cancellation_case(page, profile, config):
           and any(row['lift']['progress'] > 0 for row in returning) and final_progress is not None and final_progress >= .95
           and final['player']['grounded'] and abs(final['player']['y'] + final['player']['h'] - 624) < .001)
     capture(page, config, label + '-source-reopened.png')
+    if input_mode == 'touch':
+        viewport_file = label + '-actual-touch-viewport.png'
+        page.screenshot(path=str(output / viewport_file))
+        report['captures'].append({'file': viewport_file, 'state': {
+            'viewport': page.viewport_size, 'scope': 'Actual mobile CSS viewport and HTML controls; separate from native canvas pixels.'}})
     moved = prove_source_controls(page, config, label, initial)
-    report['cancellation'] = {'fixture': 'initial-lift-cancel-midship-deck1.json', 'initial': initial,
+    report['touchCancellation' if input_mode == 'touch' else 'cancellation'] = {
+        'fixture': 'initial-lift-cancel-midship-deck1.json', 'inputMode': input_mode,
+        'viewport': page.viewport_size, 'fixtureReusedWithoutChanges': True, 'initial': initial,
         'beforeCancellation': travelling, 'firstNativeReturningDraw': first_state, 'durableReturning': durable,
         'firstNativeResumedDraw': resumed_state, 'sourceReopened': final, 'walkingControls': moved,
         'chartChanges': 0, 'completionReason': remaining['reason']}
@@ -411,6 +493,8 @@ def occupied_case(page, profile, config):
         'actualSourcePeersBefore': source_peers, 'nativeArrivalPeersBefore': peers, 'npcPlacementInjected': False}
     check(label + ': declared12h30 reactor source has real native armory peers at the arrival socket',
           initial['protected']['clock']['hour'] == 12.5 and initial['deck'] == 3 and initial['roomId'] == 'reactor'
+          and abs(initial['player']['x'] - initial['lift']['x'] + 22 - 120) < .001
+          and initial['affordance']['liftShaftId'] == config['shaftId']
           and {n['crewId']: n['x'] for n in peers} == {'crew-02-tamsin-velez': 2350, 'crew-13-pablo-reyes': 2408}
           and all(n['roomId'] == 'armory' and n['y'] == 532 and n['alive'] for n in peers))
     capture(page, config, label + '-source.png')
@@ -456,7 +540,7 @@ def occupied_case(page, profile, config):
 
 
 with sync_playwright() as pw:
-    browser = pw.chromium.launch(headless=True, executable_path=os.environ.get('ATF_CHROMIUM_EXECUTABLE', '/usr/bin/chromium'))
+    browser = pw.chromium.launch(headless=True, **({'executable_path': os.environ['ATF_CHROMIUM_EXECUTABLE']} if os.environ.get('ATF_CHROMIUM_EXECUTABLE') else {}))
     report['tooling'] = {'playwright': importlib.metadata.version('playwright'), 'chromium': browser.version}
     try:
         for (shaft, deck), (profile, config, raw) in fixtures.items():
@@ -475,11 +559,12 @@ with sync_playwright() as pw:
             page.locator('#save-import').set_input_files({'name': label + '.json', 'mimeType': 'application/json', 'buffer': raw})
             page.wait_for_function('name=>__ATF_V51__.saveSystem.data.player.name===name', arg=profile['player']['name'])
             open_hub(page)
-            initial = observed(page, config)
-            check(label + ': initial native fixture is at its real source socket minus60px', initial['deck'] == deck
-                  and initial['lift']['shaftId'] == config['shaftId'] and abs(initial['player']['x'] - initial['lift']['x'] + 82) < .01
-                  and initial['player']['grounded'])
+            fixture_initial = observed(page, config)
+            check(label + ': initial native fixture is at its real source socket minus60px', fixture_initial['deck'] == deck
+                  and fixture_initial['lift']['shaftId'] == config['shaftId'] and abs(fixture_initial['player']['x'] - fixture_initial['lift']['x'] + 82) < .01
+                  and fixture_initial['player']['grounded'])
             capture(page, config, label + '-source.png')
+            initial, approach = approach_native_lift(page, config, label, fixture_initial)
             install_observer(page, config)
             page.locator('#hub-canvas').focus()
             page.keyboard.press(config['key'])
@@ -490,7 +575,8 @@ with sync_playwright() as pw:
             final = observed(page, config)
             metrics = verify_journey(label, config, initial, rows, final)
             capture(page, config, label + '-arrival.png')
-            report['faces'].append({'id': label, 'config': config, 'initial': initial, 'final': final, 'metrics': metrics,
+            report['faces'].append({'id': label, 'config': config, 'fixtureInitial': fixture_initial,
+                                    'initial': initial, 'nativeFloorApproach': approach, 'final': final, 'metrics': metrics,
                                     'fixtureSha256': hashlib.sha256(raw).hexdigest()})
             context.close()
         check('every requested native lift face was observed', len(report['faces']) == len(args.shafts) * len(args.decks))
@@ -500,6 +586,10 @@ with sync_playwright() as pw:
                 context, page = supplemental_page(browser, profile, config, raw, kind)
                 run_case(page, profile, config)
                 context.close()
+                if kind == 'cancel':
+                    context, page = supplemental_page(browser, profile, config, raw, 'cancel-touch', input_mode='touch')
+                    cancellation_case(page, profile, config, input_mode='touch')
+                    context.close()
         check('lift matrix has no browser runtime, request or HTTP error', not report['pageErrors'] and not report['requestFailures'] and not report['httpErrors'])
         report['identityAfter'] = identity()
         check('the same served build completed every native lift face', report['identityBefore'] == report['identityAfter'])

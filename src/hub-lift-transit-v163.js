@@ -216,7 +216,7 @@ export function withHubLiftTransitV163(Base) {
       const source = liftAt(trip.fromDeck, trip.shaftId), destination = liftAt(trip.toDeck, trip.shaftId);
       const sweep = { ...current, x: Math.min(current.x, predicted.x), w: 44 + Math.abs(predicted.x - current.x) };
       const admission = advanceHubLiftTripV163(this.hubLiftTransitV163, delta, {
-        sourceClear: passageClear(this, sweep, trip.fromDeck, source.roomId),
+        sourceClear: trip.phase !== 'boarding' || passageClear(this, sweep, trip.fromDeck, source.roomId),
         arrivalClear: trip.phase !== 'travel' || passageClear(this, floorPose(trip.cabinX), trip.toDeck, destination.roomId)
       });
       this.liftBlockedV163 = admission.blocked;
@@ -264,7 +264,10 @@ export function withHubLiftTransitV163(Base) {
       return super.interact();
     }
     fire(...args) { if (!this.liftStateV163().trip) return super.fire(...args); return false; }
-    setControl(control, active) { if (this.liftStateV163().trip) return; return super.setControl(control, active); }
+    setControl(control, active) {
+      if (this.liftStateV163().trip && control !== 'interact') return;
+      return super.setControl(control, active);
+    }
 
     statusPrompt() {
       const blocked = this.liftDepartureBlockedV163;
