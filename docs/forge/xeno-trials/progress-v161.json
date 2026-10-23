@@ -2431,6 +2431,11 @@
             "feetChanged": false,
             "nativeFrame11Width": 66.7746,
             "openingWidth": 71
+          },
+          "handoffComposition": {
+            "virtualCreateNpcsPreservesAllRouteOwners": true,
+            "downedAndMedicalPeerPreserved": true,
+            "historicalBishopRouteBehaviorOtherwiseUnchanged": true
           }
         }
       },
@@ -2495,10 +2500,10 @@
     "src/mission-insertion-ui-v62.js": "058201fe659b0d022f2d29dbde309bdd0ca5efe263c3fa76af54dec65198a010",
     "src/motion-tracker-display-v160.js": "0b82e164c2ffd3439317e5ccef3c5892f1f920932072111cc5d1b7958682ad4d",
     "src/motion-tracker-v160.js": "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
-    "src/npc-annex-circulation-v159.js": "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
+    "src/npc-annex-circulation-v159.js": "30ff9afe4985a2e9db880845521e3fb4e31a38304f97a0a7c12c3c5ba54ef493",
     "src/npc-circulation-v158.js": "8ba022817afb11bec4bb9af5056982ccadd63f4707f0859cc40bd94c431252fa",
     "src/npc-life-v136.js": "6179892f6f37f1220c85de66bc5ac0bd94fce15ea8d643d6dd53b2280735ebb3",
-    "src/npc-service-routes-v161.js": "4099be016856f1d21d476e7789bd6f33a53b84c8a5aa5ef4e2a6d7bb938e6652",
+    "src/npc-service-routes-v161.js": "1571979e0dfe7d6bbad7e120aa1edae445099911909da0e7e3748e514674e189",
     "src/player-action-rig-v127.js": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
     "src/player-appearance-hub-v126.js": "584adbd984e3f4f07846043ead8bf0c5f87c2f568e508c38318996e47a046cc8",
     "src/player-appearance-runtime-v126.js": "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
@@ -4124,8 +4129,8 @@
         [
           "C161-CREW",
           "Contrat exécutable / manquant historique",
-          "src/npc-service-routes-v161.js ; src/save.js ; src/app.js ; src/hub-destination-signage-runtime-v138.js",
-          "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
+          "src/npc-service-routes-v161.js ; src/save.js ; src/app.js ; src/hub-destination-signage-runtime-v138.js ; src/npc-annex-circulation-v159.js",
+          "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. Le retour aux routines natives respecte la composition des trois propriétaires de circuit pour conserver les autres acteurs à terre ou en récupération médicale. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
           "Les deux routes sont des circuits parent/annexe bornés : aucun ascenseur, trajet physique entre ponts, nouveau dessin ou sprite de dos. Le retour aux routines natives après le service est signalé séparément et son déplacement ultérieur n’est pas observé ; les dix-neuf annexes ne sont pas couvertes par ce lot."
         ]
       ]
@@ -6013,6 +6018,13 @@
           "scripts/verify-campaign-convoy-story-v161.mjs"
         ],
         [
+          "src/npc-annex-circulation-v159.js",
+          "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
+          "30ff9afe4985a2e9db880845521e3fb4e31a38304f97a0a7c12c3c5ba54ef493",
+          "Le retour à la routine native recrée la population via la méthode virtuelle commune afin de préserver les propriétaires superposés des trois circuits, y compris un collègue à terre ou en récupération médicale.",
+          "scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-annex-circulation-v159.mjs"
+        ],
+        [
           "src/save.js",
           "ee15bc4a5df71e98c50cdbbf980d46c02d8e48c08ba74f6be84c2587eaa45718",
           "59d429c858402a26a7768e47e6520aff95f6b6f12668f8bb69430502c8952e5d",
@@ -6078,7 +6090,7 @@
         [
           "src/npc-service-routes-v161.js",
           "Non épinglé en V160",
-          "4099be016856f1d21d476e7789bd6f33a53b84c8a5aa5ef4e2a6d7bb938e6652",
+          "1571979e0dfe7d6bbad7e120aa1edae445099911909da0e7e3748e514674e189",
           "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
           "scripts/verify-npc-service-routes-v161.mjs"
         ]
@@ -11564,8 +11576,8 @@
           "C161-CREW",
           "Circuits de service réacteur et cuisine",
           "annex-crew-coverage",
-          "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
-          "src/npc-service-routes-v161.js ; src/save.js ; src/app.js ; src/hub-destination-signage-runtime-v138.js",
+          "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. Le retour aux routines natives respecte la composition des trois propriétaires de circuit pour conserver les autres acteurs à terre ou en récupération médicale. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
+          "src/npc-service-routes-v161.js ; src/save.js ; src/app.js ; src/hub-destination-signage-runtime-v138.js ; src/npc-annex-circulation-v159.js",
           "scripts/verify-npc-service-routes-v161.mjs",
           "À vérifier sur le commit final",
           "Les deux routes sont des circuits parent/annexe bornés : aucun ascenseur, trajet physique entre ponts, nouveau dessin ou sprite de dos. Le retour aux routines natives après le service est signalé séparément et son déplacement ultérieur n’est pas observé ; les dix-neuf annexes ne sont pas couvertes par ce lot.",
@@ -11752,7 +11764,7 @@
       "expected": 0
     }
   ],
-  "workbookSha256": "2cbf53211ca54d2e979ad8b00730fb2a7a061cf98b3445a2b88d9c06a6cb603b",
+  "workbookSha256": "a16933dd541e60e5b69307d300962d3fe9e1994cf31c5669926ef94efc226fd0",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V160",
@@ -11791,6 +11803,16 @@
         "reason": "Le départ APC développe cinq phases originales Tantalus avec un choix facultatif de lecture du blindage ou du parcours, conservé sans bonus économique. Sept jalons natifs alimentent la radio et le HUD APC est regroupé. Trois questions de retour lisent seulement le résultat terminal et le checkpoint de la même opération native ; les lectures bornées dans insertionState survivent à la sauvegarde normalisée, sans rejouer de paiement.",
         "verifiers": [
           "scripts/verify-campaign-convoy-story-v161.mjs"
+        ]
+      },
+      {
+        "path": "src/npc-annex-circulation-v159.js",
+        "previousSha256": "5034808833beea323a3a3836c60cfeb40d5822575e085f0bead50d8826038f81",
+        "currentSha256": "30ff9afe4985a2e9db880845521e3fb4e31a38304f97a0a7c12c3c5ba54ef493",
+        "reason": "Le retour à la routine native recrée la population via la méthode virtuelle commune afin de préserver les propriétaires superposés des trois circuits, y compris un collègue à terre ou en récupération médicale.",
+        "verifiers": [
+          "scripts/verify-npc-service-routes-v161.mjs",
+          "scripts/verify-npc-annex-circulation-v159.mjs"
         ]
       },
       {
@@ -11883,7 +11905,7 @@
       {
         "path": "src/npc-service-routes-v161.js",
         "previousSha256": null,
-        "currentSha256": "4099be016856f1d21d476e7789bd6f33a53b84c8a5aa5ef4e2a6d7bb938e6652",
+        "currentSha256": "1571979e0dfe7d6bbad7e120aa1edae445099911909da0e7e3748e514674e189",
         "reason": "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
         "verifiers": [
           "scripts/verify-npc-service-routes-v161.mjs"
@@ -12422,12 +12444,13 @@
         "src/npc-service-routes-v161.js",
         "src/save.js",
         "src/app.js",
-        "src/hub-destination-signage-runtime-v138.js"
+        "src/hub-destination-signage-runtime-v138.js",
+        "src/npc-annex-circulation-v159.js"
       ],
       "verifiers": [
         "scripts/verify-npc-service-routes-v161.mjs"
       ],
-      "implementedScope": "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
+      "implementedScope": "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. Le retour aux routines natives respecte la composition des trois propriétaires de circuit pour conserver les autres acteurs à terre ou en récupération médicale. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs.",
       "limits": "Les deux routes sont des circuits parent/annexe bornés : aucun ascenseur, trajet physique entre ponts, nouveau dessin ou sprite de dos. Le retour aux routines natives après le service est signalé séparément et son déplacement ultérieur n’est pas observé ; les dix-neuf annexes ne sont pas couvertes par ce lot.",
       "contract": {
         "routes": [
@@ -12465,6 +12488,11 @@
           "feetChanged": false,
           "nativeFrame11Width": 66.7746,
           "openingWidth": 71
+        },
+        "handoffComposition": {
+          "virtualCreateNpcsPreservesAllRouteOwners": true,
+          "downedAndMedicalPeerPreserved": true,
+          "historicalBishopRouteBehaviorOtherwiseUnchanged": true
         }
       },
       "sourceChangeReason": "Deux circuits natifs relient Idris entre le réacteur et la salle des machines du pont 3, et Leila entre le mess et la cuisine du pont 1. Les mêmes acteurs de 44 × 92 unités marchent sur le sol 624 jusqu’aux vraies portes appariées ; leur changement de repère se produit uniquement derrière les vantaux opaques entièrement fermés. Les deux faces du cadre cuisine sont agrandies uniformément pour contenir la silhouette native ; les plaques suivent le cadre réel avec dix pixels de dégagement. L’état borné conserve les phases à la reprise et réagit aux interruptions, aux passages occupés et aux dialogues natifs."

@@ -11,6 +11,8 @@ import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { CREW_SPRITE_IDS, CREW_MISSION_SPRITE_IDS, resolveSpriteClip } from './sprite-animation-runtime.js';
 
+// V161 composition may place additional route owners outside this wrapper.
+const handoffRebuildV161 = Symbol('bishop-annex-handoff-rebuild');
 const ID = 'crew-05-bishop-9', PARENT = 'science-lab', ANNEX = 'synthetic-bay', DECK = 1;
 const parent = HUB_DECKS[DECK].rooms.find(room => room.id === PARENT);
 const annex = getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[ANNEX]);
@@ -251,11 +253,12 @@ export function withHubNpcAnnexCirculationV159(Base) {
           toRoomId: resolution.roomId, reason: resolution.reason, observedTravel: false, owner: 'native-v62-routine' };
         this.npcAnnexStateV159 = null;
       }
-      if (this.shouldHandoffNpcAnnexV159(resolution)) this.handoffNpcAnnexV159(resolution);
+      const released = this.shouldHandoffNpcAnnexV159(resolution);
+      if (released) this.handoffNpcAnnexV159(resolution);
       // Release before the base factory reads annex membership, otherwise its
       // parent filter would suppress the newly medical/mission-owned identity.
       const natives = super.createNpcs(deck);
-      if (!this.npcAnnexActorV159) {
+      if (!this.npcAnnexActorV159 && !released && !this[handoffRebuildV161]) {
         const duty = { roomId: ANNEX, crewId: ID, targetX: 960, duty: 'synthetic-diagnostics' };
         const dutyActor = createAnnexNpcsV141([duty], this.npcRoutineResolutionsV62).find(n => n.crewId === ID);
         const saved = this.npcAnnexStateV159;
@@ -387,7 +390,15 @@ export function withHubNpcAnnexCirculationV159(Base) {
       if (!actor || !previous) return result;
       const resolution = this.npcRoutineResolutionsV62?.get(ID);
       if (this.shouldHandoffNpcAnnexV159(resolution)) {
-        this.handoffNpcAnnexV159(resolution); this.npcs = super.createNpcs(this.state.deck); return result;
+        this.handoffNpcAnnexV159(resolution);
+        // Publish through all outer route owners. Direct super sampling would
+        // replace their physical actors with native timetable templates.
+        // Keep only this just-released owner from immediate re-admission if
+        // its transient lifecycle has not yet reached the native crew record.
+        const rebuilding = this[handoffRebuildV161]; this[handoffRebuildV161] = true;
+        try { this.npcs = this.createNpcs(this.state.deck); }
+        finally { this[handoffRebuildV161] = rebuilding; }
+        return result;
       }
       const dt = Math.min(delta, .1);
       if (actor === before) for (const [key, value] of Object.entries(clocks))

@@ -231,3 +231,80 @@ test('Forge/editor sessions admit no service singleton, route save or door reser
     }
   }
 });
+
+test('inner native handoffs publish through every composed owner instead of replacing visible Leila with a timetable template', () => {
+  for (const owner of ['idris-engine', 'bishop']) for (const reason of ['medical', 'mission', 'unavailable']) {
+    const h = runtime(5, { deck: 1, roomId: 'mess' });
+    const leila = h.getNpcServiceActorV161('leila-galley');
+    const idris = h.getNpcServiceActorV161('idris-engine'), bishop = h.npcAnnexActorV159;
+    const departing = owner === 'bishop' ? bishop : idris, id = departing.crewId;
+    assert.equal(h.npcs.find(n => n.crewId === leila.crewId), leila);
+    assert.ok(bishop && idris && leila);
+    const states = structuredClone(h.getSnapshot().npcServiceRoutesV161);
+    if (reason === 'unavailable') departing.downed = true;
+    else h.setNpcRoutineContextV62({ clock: { day: 1, hour: 5 },
+      ...(reason === 'medical' ? { crew: [{ id, health: 20, injuries: [] }] } : { operation: { crewIds: [id] } }) },
+    { persist: false, rebuild: false });
+    // Exercise UPDATE's publication, not the routine setter's separate,
+    // already virtual rebuild path. The active Leila body must survive it.
+    h.update(1 / 60);
+    assert.equal(h.getNpcServiceActorV161('leila-galley'), leila);
+    assert.equal(h.npcs.filter(n => n.crewId === leila.crewId).length, 1);
+    assert.equal(h.npcs.find(n => n.crewId === leila.crewId), leila, `${owner}/${reason}: preserve the real visible Leila reference`);
+    assert.equal(leila.x, states.routes['leila-galley'].actor.x);
+    const released = owner === 'bishop' ? h.npcAnnexActorV159 : h.getNpcServiceActorV161('idris-engine');
+    const releasedState = owner === 'bishop' ? h.getSnapshot().npcAnnexCirculationV159 : snapshot(h, 'idris-engine');
+    assert.equal(released, null, `${owner}/${reason}: the virtual rebuild must not re-admit the just released body`);
+    assert.equal(releasedState.nativeHandoff.observedTravel, false);
+    const retained = owner === 'bishop' ? idris : bishop;
+    assert.equal(owner === 'bishop' ? h.getNpcServiceActorV161('idris-engine') : h.npcAnnexActorV159, retained);
+    assert.equal(h.npcs.filter(n => n.crewId === retained.crewId).length, retained.roomId === 'science-lab' ? 1 : 0);
+    if (retained.roomId === 'science-lab') assert.equal(h.npcs.find(n => n.crewId === retained.crewId), retained);
+    assert.equal(h.npcAnnexDoorReservedV159(owner === 'bishop' ? 'synthetic-bay' : 'engine-room'), false);
+  }
+});
+
+test('an inner handoff cannot create a parent duplicate while the real Leila is physically in her annex', () => {
+  for (const owner of ['idris-engine', 'bishop']) for (const reason of ['medical', 'mission', 'unavailable']) {
+    const h = runtime(5, { deck: 1, roomId: 'mess' }); context(h, 17); tick(h, 70);
+    const leila = h.getNpcServiceActorV161('leila-galley'); assert.equal(leila.roomId, 'galley-service');
+    // The next native day restores BISHOP's laboratory station, but elapsed
+    // strategy hours never manufacture a walk home for the owned annex body.
+    h.setNpcRoutineContextV62({ clock: { day: 2, hour: 5 } }, { persist: false, rebuild: true });
+    h.local = 'galley-service';
+    const departing = owner === 'bishop' ? h.npcAnnexActorV159 : h.getNpcServiceActorV161('idris-engine');
+    const retained = owner === 'bishop' ? h.getNpcServiceActorV161('idris-engine') : h.npcAnnexActorV159;
+    assert.ok(departing && retained); const id = departing.crewId, x = leila.x;
+    if (reason === 'unavailable') departing.alive = false;
+    else h.setNpcRoutineContextV62({ clock: { day: 2, hour: 5 },
+      ...(reason === 'medical' ? { crew: [{ id, health: 20, injuries: [] }] } : { operation: { crewIds: [id] } }) },
+    { persist: false, rebuild: false });
+    h.update(1 / 60);
+    assert.equal(h.getNpcServiceActorV161('leila-galley'), leila);
+    const cohort = h.activeAnnexNpcsV141().filter(n => n.crewId === leila.crewId);
+    assert.equal(cohort.length, 1); assert.equal(cohort[0], leila);
+    assert.equal(h.npcs.filter(n => n.crewId === leila.crewId).length, 0, `${owner}/${reason}: no sampled parent duplicate`);
+    assert.ok(Math.abs(leila.x - x) <= 27 / 60 + 1e-7);
+    assert.equal(owner === 'bishop' ? h.getNpcServiceActorV161('idris-engine') : h.npcAnnexActorV159, retained);
+    assert.equal(owner === 'bishop' ? h.npcAnnexActorV159 : h.getNpcServiceActorV161('idris-engine'), null);
+  }
+});
+
+test('native context factories do not immediately re-admit a lifecycle handoff or replace other route owners', () => {
+  for (const owner of ['idris-engine', 'bishop', 'leila-galley']) for (const flag of ['downed', 'alive']) {
+    const h = runtime(5, { deck: 1, roomId: 'mess' });
+    const bodies = { bishop: h.npcAnnexActorV159, 'idris-engine': h.getNpcServiceActorV161('idris-engine'),
+      'leila-galley': h.getNpcServiceActorV161('leila-galley') };
+    bodies[owner][flag] = flag === 'downed';
+    h.setNpcRoutineContextV62({ clock: { day: 1, hour: 5 } }, { persist: false, rebuild: true });
+    for (const [id, body] of Object.entries(bodies)) {
+      const current = id === 'bishop' ? h.npcAnnexActorV159 : h.getNpcServiceActorV161(id);
+      if (id === owner) assert.equal(current, null, `${id}/${flag}: factory must retain its explicit lifecycle handoff`);
+      else {
+        assert.equal(current, body); const visible = h.npcs.filter(n => n.crewId === body.crewId);
+        assert.equal(visible.length, body.roomId === 'reactor' ? 0 : 1);
+        if (visible.length) assert.equal(visible[0], body);
+      }
+    }
+  }
+});

@@ -23,7 +23,8 @@ const actorKey = Symbol('actor:' + definition.id), stateKey = Symbol('state:' + 
   handoffKey = Symbol('handoff:' + definition.id), sandboxKey = Symbol('sandbox:' + definition.id),
   peersKey = Symbol('peers:' + definition.id),
   refreshKey = Symbol('refresh:' + definition.id), shouldHandoffKey = Symbol('shouldHandoff:' + definition.id),
-  handoffMethodKey = Symbol('handoffMethod:' + definition.id);
+  handoffMethodKey = Symbol('handoffMethod:' + definition.id),
+  handoffRebuildKey = Symbol('handoffRebuild:' + definition.id);
 const parent = HUB_DECKS[DECK].rooms.find(room => room.id === PARENT);
 const annex = getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[ANNEX]);
 const descriptor = getHubDoorDestinationDescriptorsV138(parent).find(door => door.destinationId === ANNEX);
@@ -283,11 +284,12 @@ function withHubNpcAnnexCirculationV161(Base) {
           toRoomId: resolution.roomId, reason: resolution.reason, observedTravel: false, owner: 'native-v62-routine' };
         this[stateKey] = null;
       }
-      if (this[shouldHandoffKey](resolution)) this[handoffMethodKey](resolution);
+      const released = this[shouldHandoffKey](resolution);
+      if (released) this[handoffMethodKey](resolution);
       // Release before the base factory reads annex membership, otherwise its
       // parent filter would suppress the newly medical/mission-owned identity.
       const natives = super.createNpcs(deck);
-      if (!this[actorKey]) {
+      if (!this[actorKey] && !released && !this[handoffRebuildKey]) {
         const duty = { roomId: ANNEX, crewId: ID, targetX: definition.targetX, duty: definition.duty };
         const dutyActor = createAnnexNpcsV141([duty], this.npcRoutineResolutionsV62).find(n => n.crewId === ID);
         const saved = this[stateKey];
@@ -427,7 +429,15 @@ function withHubNpcAnnexCirculationV161(Base) {
       if (!actor || !previous) return result;
       const resolution = this.npcRoutineResolutionsV62?.get(ID);
       if (this[shouldHandoffKey](resolution)) {
-        this[handoffMethodKey](resolution); this.npcs = super.createNpcs(this.state.deck); return result;
+        this[handoffMethodKey](resolution);
+        // Publishing a cohort must visit every composed owner (including
+        // outer Leila), unlike the super calls used only to sample templates.
+        // A transient downed/dead body may still have a healthy timetable:
+        // do not immediately re-admit this released owner during that rebuild.
+        const rebuilding = this[handoffRebuildKey]; this[handoffRebuildKey] = true;
+        try { this.npcs = this.createNpcs(this.state.deck); }
+        finally { this[handoffRebuildKey] = rebuilding; }
+        return result;
       }
       const dt = Math.min(delta, .1);
       if (actor === before) for (const [key, value] of Object.entries(clocks))
