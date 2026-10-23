@@ -1,0 +1,233 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from '../src/hub-game.js';
+import { HubGame as RosterHub } from '../src/hub-v52-runtime.js';
+import { HubGame as RoutineHub, getNpcRoutineStandingAnchorV158 } from '../src/hub-v62-runtime.js';
+import { HubGame as AnnexHub } from '../src/hub-v71-runtime.js';
+import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
+import { resolveNpcRoutineV62 } from '../src/npc-dialogue-v62.js';
+import { withHubNpcLifeV136, spreadNpcStationSpawnsV136 } from '../src/npc-life-v136.js';
+import { withHubNpcCirculationV158 } from '../src/npc-circulation-v158.js';
+import { withHubNpcAnnexCirculationV159 } from '../src/npc-annex-circulation-v159.js';
+import { createAnnexNpcsV141 } from '../src/hub-annex-npc-life-v141.js';
+import { HUB_ANNEX_BY_ID_V137 } from '../src/hub-annex-registry-v137.js';
+import { getHubAnnexRuntimeGeometryV139 } from '../src/hub-annex-runtime-geometry-v139.js';
+import { getHubRoomPresentationV119 } from '../src/hub-room-presentation-v119.js';
+import { resolveHumanAtlasGeometryV133 } from '../src/human-visual-contract-v133.js';
+import { resolveSpriteSheet } from '../src/sprite-animation-runtime.js';
+import { createDefaultSave, migrateSave } from '../src/save.js';
+import { getHubLiveDestinationSignPlansV161 } from '../src/hub-destination-signage-runtime-v138.js';
+import { HUB_NPC_SERVICE_ROUTES_V161, HUB_NPC_SERVICE_ROUTE_DEFINITIONS_V161, normalizeNpcServiceRoutesV161,
+  withHubNpcServiceRoutesV161 } from '../src/npc-service-routes-v161.js';
+
+const config = route => HUB_NPC_SERVICE_ROUTE_DEFINITIONS_V161.find(d => d.id === route.definition.id);
+const routine = (route, hour, extra = {}) => resolveNpcRoutineV62(route.definition.crewId, { clock: { day: 1, hour }, ...extra });
+const dutyActor = route => createAnnexNpcsV141([{ ...config(route), roomId: route.definition.annexRoomId }],
+  new Map([[route.definition.crewId, routine(route, route.definition.deck === 3 ? 8 : 17)]]))[0];
+const parent = route => HUB_DECKS[route.definition.deck].rooms.find(r => r.id === route.definition.parentRoomId);
+const actor = (route, extra = {}) => {
+  const c = route.definition;
+  return { ...spreadNpcStationSpawnsV136([{ ...RosterHub.prototype.createNpcs.call({}, c.deck).find(n => n.crewId === c.crewId),
+    mobile: false, x: getNpcRoutineStandingAnchorV158(c.crewId, c.parentRoomId, 'station') }], [parent(route)])[0], vx: 0, ...extra };
+};
+function simulate(route, a, seconds, { state = route.create(a, dutyActor(route)), duty = true, rate = 60,
+  resolution = routine(route, route.definition.deck === 3 ? 8 : 17), ...options } = {}) {
+  const frames = [];
+  for (let i = 0; i < seconds * rate; i++) {
+    const before = { ...state };
+    state = route.advance(state, a, 1 / rate, { resolution, duty, ...options });
+    if (state.roomId === before.roomId) assert.ok(Math.abs(state.x - before.x) <= 27 / rate + 1e-7);
+    else {
+      assert.equal(before.stage, 'covering'); assert.equal(state.stage, 'revealing'); assert.equal(state.doorProgress, 0);
+      assert.equal(state.distance, before.distance); assert.equal(state.actualVelocity, 0);
+    }
+    Object.assign(a, { x: state.x, y: state.y, roomId: state.roomId, facing: state.facing, vx: state.actualVelocity });
+    assert.equal(a.y + a.h, 624); frames.push({ ...state });
+  }
+  return { a, state, frames };
+}
+
+for (const route of HUB_NPC_SERVICE_ROUTES_V161) {
+  const c = route.definition;
+  test(`${c.id}: exact native rig, supported paired sockets, whole-room projection and service post`, () => {
+    const a = actor(route), d = dutyActor(route), s = route.create(a, d); assert.ok(s);
+    assert.equal(a.spriteId, d.spriteId); assert.equal(a.w, 44); assert.equal(a.h, 92);
+    const snap = simulate(route, a, 70), covering = snap.frames.find(f => f.stage === 'covering');
+    const passage = route.passage({ ...a, ...covering }, c.annexRoomId); assert.ok(passage);
+    assert.equal(passage.offsetX, 0); assert.equal(passage.arrival.y, 532);
+    const reverse = route.passage({ ...a, ...passage.arrival, roomId: c.annexRoomId }, c.parentRoomId);
+    assert.equal(reverse.arrival.x, covering.x);
+    for (const room of [parent(route), getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[c.annexRoomId])]) {
+      const p = getHubRoomPresentationV119(room); assert.equal(p.presentationMode, '2d');
+      assert.equal(p.projectionV139.mixedProjectionAllowed, false);
+    }
+    assert.equal(snap.state.stage, 'service'); assert.ok(Math.abs(snap.a.x - d.x) < .25);
+  });
+
+  test(`${c.id}: complete outbound/return spend only real distance and preserve intact feet and atlas leaf occlusion`, () => {
+    const out = simulate(route, actor(route), 70); assert.equal(out.state.crossings, 1); assert.equal(out.state.arrivals, 1);
+    for (const stage of ['opening', 'covering', 'revealing', 'service']) assert.ok(out.frames.some(f => f.stage === stage));
+    const back = simulate(route, out.a, 70, { state: out.state, duty: false });
+    assert.equal(back.state.roomId, c.parentRoomId); assert.equal(back.state.stage, 'service');
+    assert.equal(back.state.crossings, 2); assert.equal(back.state.arrivals, 2);
+    assert.ok(Math.abs(back.state.distance - out.state.distance * 2) < .02);
+    const covered = out.frames.find(f => f.stage === 'covering'), sheet = resolveSpriteSheet(out.a.spriteId);
+    for (const progress of [1, .5, 0]) {
+      const clip = route.occlusion({ ...covered, doorProgress: progress });
+      assert.equal(clip.w === 0, progress === 0); assert.ok(clip.y + clip.h >= 624);
+      for (const facing of [-1, 1]) for (let frame = 0; frame < 12; frame++) {
+        const g = resolveHumanAtlasGeometryV133({ actor: { ...out.a, ...covered, facing }, sheet,
+          column: frame % 4, row: Math.floor(frame / 4), surface: 'hub' });
+        assert.equal(g.pivot.y, 624); assert.ok(Math.abs(g.visible.y + g.visible.height - 624) < 1e-9);
+        if (progress === 1) assert.ok(g.visible.x >= clip.x && g.visible.x + g.visible.width <= clip.x + clip.w);
+      }
+    }
+  });
+
+  test(`${c.id}: every native door phase resumes, while wrong identities/rooms/support/post/velocity are rejected`, () => {
+    const out = simulate(route, actor(route), 70);
+    for (const stage of ['walking', 'opening', 'covering', 'revealing', 'service']) {
+      const s = out.frames.find(f => f.stage === stage), restored = route.normalize({ schema: 161, actor: s }).actor;
+      assert.ok(restored, stage); for (const key of ['x', 'y', 'roomId', 'stage', 'doorProgress', 'distance']) assert.equal(restored[key], s[key]);
+      const end = simulate(route, actor(route, { ...restored }), 70, { state: restored }); assert.equal(end.state.crossings, 1);
+    }
+    const s = out.frames[0];
+    for (const patch of [{ crewId: 'crew-05-bishop-9' }, { roomId: 'quarantine' }, { deck: 0 }, { y: 530 },
+      { dutyX: 8000 }, { homeX: 0 }, { x: -2 }, { doorProgress: 2 }, { velocity: 100 }, { stage: 'teleport' }])
+      assert.equal(route.normalize({ schema: 161, actor: { ...s, ...patch } }).actor, null);
+  });
+
+  test(`${c.id}: pause, interaction, occupied door, physical peers and crisis withdraw without extra crossings`, () => {
+    const start = simulate(route, actor(route), 1);
+    assert.equal(route.advance(start.state, start.a, 1 / 60, { resolution: routine(route, 8), duty: true, running: false }), start.state);
+    const interaction = simulate(route, { ...start.a, workClock: 2 }, 2, { state: start.state }); assert.equal(interaction.a.x, start.a.x);
+    const out = simulate(route, actor(route), 70), atDoor = out.frames.find(f => f.stage === 'covering');
+    const a = actor(route, { ...atDoor }), passage = route.passage(a, c.annexRoomId);
+    const player = { ...passage.arrival, roomId: c.annexRoomId, w: 44, h: 92, alive: true };
+    const held = simulate(route, a, 1, { state: atDoor, player }); assert.equal(held.state.roomId, c.parentRoomId);
+    assert.equal(held.state.x, atDoor.x); assert.equal(held.state.doorProgress, atDoor.doorProgress); assert.equal(held.state.reason, 'occupied');
+    const withdrawn = simulate(route, a, 70, { state: held.state,
+      resolution: routine(route, 8, { crisis: { id: 'actual', active: true } }) });
+    assert.equal(withdrawn.state.roomId, c.parentRoomId); assert.equal(withdrawn.state.crossings, 0);
+    assert.equal(withdrawn.state.doorProgress, 0); assert.ok(withdrawn.a.x > atDoor.x + 27);
+    assert.equal(withdrawn.state.reason, 'active-crisis');
+    const peer = { x: start.a.x - 90, y: 532, w: 44, h: 92, roomId: c.parentRoomId, crewId: 'physical-peer', alive: true };
+    const waiting = simulate(route, { ...start.a }, 3, { state: start.state, peers: [peer] });
+    assert.ok(waiting.a.x >= peer.x + peer.w + 12 - 1e-5); assert.equal(waiting.state.crossings, 0);
+  });
+}
+
+const LifeHub = withHubNpcLifeV136(RoutineHub);
+class FixtureBase {
+  initializeNpcRoutinesV62(...args) { return RoutineHub.prototype.initializeNpcRoutinesV62.apply(this, args); }
+  getNpcRoutineResolutionsV62(...args) { return RoutineHub.prototype.getNpcRoutineResolutionsV62.apply(this, args); }
+  setNpcRoutineContextV62(...args) { return RoutineHub.prototype.setNpcRoutineContextV62.apply(this, args); }
+  createNpcs(...args) { return LifeHub.prototype.createNpcs.apply(this, args); }
+  ensureAnnexNpcCohortV141(...args) { return LifeHub.prototype.ensureAnnexNpcCohortV141.apply(this, args); }
+  activeAnnexNpcsV141(...args) { return LifeHub.prototype.activeAnnexNpcsV141.apply(this, args); }
+  tickAnnexNpcLifeV141(...args) { return LifeHub.prototype.tickAnnexNpcLifeV141.apply(this, args); }
+  tickParentNpcLifeV136(...args) { return LifeHub.prototype.tickParentNpcLifeV136.apply(this, args); }
+  stepHubNpcLifeV136(...args) { return LifeHub.prototype.stepHubNpcLifeV136.apply(this, args); }
+  npcAnimationRequest(...args) { return LifeHub.prototype.npcAnimationRequest.apply(this, args); }
+  hubDoorPairV142(...args) { return AnnexHub.prototype.hubDoorPairV142.apply(this, args); }
+  sampleNpcAnimation() {}
+  drawNpcLifeV136() { return false; }
+  drawDepthContactShadowV116() { return true; }
+  setNpcCrisisAlert() {}
+  currentAnnexV71() { return this.local ? getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[this.local]) : null; }
+  isAnnexActiveV71() { return Boolean(this.local); }
+  start(save = {}, { routineContextV62 = { clock: { day: 1, hour: 5 } } } = {}) {
+    this.state = { deck: save.deck ?? 3, roomId: save.roomId || 'reactor' };
+    this.player = { x: this.state.deck === 3 ? 2400 : 2350, y: 532, w: 44, h: 92, alive: true };
+    this.initializeNpcRoutinesV62(save, routineContextV62);
+    this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, this.state.deck).map(d => ({ ...d }));
+    this.npcs = this.createNpcs(this.state.deck); this.obstacles = buildHubObstacleGeometryV87(this.state.deck); this.running = true;
+    this.persisted = []; this.onPersist = patch => this.persisted.push(patch);
+  }
+  update(dt) {
+    if (!this.running) return;
+    if (this.local) { this.tickParentNpcLifeV136(dt); this.tickAnnexNpcLifeV141(dt); }
+    else for (const n of this.npcs) { n.workClock = Math.max(0, n.workClock - dt); n.supportClock = Math.max(0, n.supportClock - dt); this.stepHubNpcLifeV136(n, dt); }
+  }
+  persist() { this.onPersist({ npcRoutineState: structuredClone(this.npcRoutineStateV62) }); }
+  getSnapshot() { return {}; }
+  emitStatus() {}
+}
+const TestHub = withHubNpcServiceRoutesV161(withHubNpcAnnexCirculationV159(withHubNpcCirculationV158(FixtureBase)));
+function runtime(hour = 5, save = {}) { const h = new TestHub(); h.start(save, { routineContextV62: { clock: { day: 1, hour } } }); return h; }
+function tick(h, seconds) { for (let i = 0; i < seconds * 60; i++) h.update(1 / 60); }
+function context(h, hour, extra = {}) { return h.setNpcRoutineContextV62({ clock: { day: 1, hour }, ...extra }, { persist: false }); }
+const snapshot = (h, id) => h.getSnapshot().npcServiceRoutesV161.routes[id];
+
+for (const route of HUB_NPC_SERVICE_ROUTES_V161) {
+  const c = route.definition, hour = c.deck === 3 ? 8 : 17;
+  test(`${c.id}: true owner survives native routine rebuild, hidden deck, conversation clocks, reload and return handoff`, () => {
+    const h = runtime(5, { deck: c.deck, roomId: c.parentRoomId }), a = h.getNpcServiceActorV161(c.id); assert.ok(a); assert.equal(a.roomId, c.parentRoomId);
+    context(h, hour); tick(h, 4); const x = a.x;
+    context(h, hour + .25); assert.equal(h.getNpcServiceActorV161(c.id), a); assert.equal(a.x, x);
+    h.state.deck = 0; h.npcs = h.createNpcs(0); tick(h, 66);
+    assert.equal(a.roomId, c.annexRoomId); assert.equal(snapshot(h, c.id).actor.stage, 'service');
+    assert.equal(h.ensureAnnexNpcCohortV141().filter(n => n.crewId === c.crewId).length, 1);
+    a.workClock = 2.4; h.local = c.annexRoomId; tick(h, 1); assert.ok(Math.abs(a.workClock - 1.4) < 1e-6);
+    h.running = false; const frozen = snapshot(h, c.id); tick(h, 1); assert.deepEqual(snapshot(h, c.id), frozen);
+    h.persist(); const patch = h.persisted.at(-1); const restored = runtime(hour, { ...patch, deck: c.deck });
+    assert.deepEqual(snapshot(restored, c.id).actor, snapshot(h, c.id).actor);
+    h.running = true; h.local = null; context(h, c.deck === 3 ? 12 : 19); tick(h, 70);
+    const final = snapshot(h, c.id); assert.equal(final.actor, null); assert.equal(final.nativeHandoff.fromRoomId, c.parentRoomId);
+    assert.equal(final.nativeHandoff.observedTravel, false);
+  });
+  test(`${c.id}: actual V71 player gate uses the shared reservation while BISHOP and other door owners remain independent`, () => {
+    const h = runtime(5, { deck: c.deck }); context(h, hour);
+    for (let i = 0; i < 3000 && !snapshot(h, c.id).reserved; i++) h.update(1 / 60);
+    assert.equal(snapshot(h, c.id).reserved, true);
+    assert.equal(AnnexHub.prototype.beginAnnexTransitionV71.call(h, c.annexRoomId, 'enter'), null);
+    assert.equal(h.hubDoorBlockedV142.annexId, c.annexRoomId);
+    const pair = h.hubDoorPairV142(getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[c.annexRoomId]));
+    assert.deepEqual(pair.parent.opening, snapshot(h, c.id).sourceFace.opening);
+    assert.deepEqual(pair.local.opening, snapshot(h, c.id).annexFace.opening);
+    assert.equal(pair.parent.opening.w, pair.local.opening.w);
+    assert.equal(pair.parent.target.w, snapshot(h, c.id).sourceFace.target.w);
+    const native = AnnexHub.prototype.hubDoorPairV142.call(h, getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[c.annexRoomId]));
+    for (const face of ['parent', 'local']) {
+      const f = pair[face], original = native[face], scale = f.target.w / original.target.w;
+      assert.ok(Math.abs(f.target.h / original.target.h - scale) < 1e-9, 'Scale the whole native frame uniformly.');
+      assert.ok(Math.abs(f.opening.w / original.opening.w - scale) < 1e-9, 'Preserve the painted aperture inset.');
+      assert.ok(f.target.w <= f.socket.w && f.target.h <= f.socket.h);
+      assert.equal(f.target.y + f.target.h, 624); assert.deepEqual(f.source, original.source);
+    }
+    assert.equal(pair.parent.target.w, pair.local.target.w); assert.equal(pair.parent.target.h, pair.local.target.h);
+    if (c.id === 'leila-galley') { assert.equal(pair.parent.opening.w, 71); assert.ok(pair.parent.target.h > native.parent.target.h); }
+    else assert.deepEqual(pair.parent, native.parent);
+    assert.equal(h.npcAnnexDoorReservedV159('synthetic-bay'), false);
+    for (const room of [parent(route), { ...getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[c.annexRoomId]), xStart: 0 }]) {
+      const plaque = getHubLiveDestinationSignPlansV161(h, room).find(sign => sign.connectionId === c.connectionId);
+      assert.ok(plaque); const face = room.id === c.parentRoomId ? pair.parent : pair.local;
+      assert.deepEqual(plaque.portalTarget, face.target);
+      assert.ok(Math.abs(plaque.bounds.y + plaque.bounds.h + 10 - face.target.y) < 1e-9);
+    }
+    const other = snapshot(h, c.id === 'idris-engine' ? 'leila-galley' : 'idris-engine');
+    assert.notEqual(other.actor?.crewId, c.crewId); assert.notEqual(other.actor, snapshot(h, c.id).actor);
+  });
+}
+
+test('save normalization preserves both independent route states and existing V158/V159 fields without sharing references', () => {
+  const h = runtime(5); context(h, 8); tick(h, 8); h.persist(); const patch = h.persisted.at(-1);
+  const save = createDefaultSave(); save.hub = { ...save.hub, ...patch };
+  const migrated = migrateSave(save); assert.deepEqual(migrated.hub.npcServiceRoutesV161, normalizeNpcServiceRoutesV161(patch.npcServiceRoutesV161));
+  assert.deepEqual(migrated.hub.npcAnnexCirculationV159, patch.npcAnnexCirculationV159);
+  assert.deepEqual(migrated.hub.npcCirculationV158, patch.npcCirculationV158);
+  assert.equal(normalizeNpcServiceRoutesV161({ schema: 999, routes: patch.npcServiceRoutesV161.routes }).routes['idris-engine'].actor, null);
+  const cloned = normalizeNpcServiceRoutesV161(patch.npcServiceRoutesV161); cloned.routes['idris-engine'].actor.x = 0;
+  assert.notEqual(h.getNpcServiceActorV161('idris-engine').x, 0);
+});
+
+test('Forge/editor sessions admit no service singleton, route save or door reservation', () => {
+  for (const options of [{ editorProject: {} }, { forgeJourneyV141: true }]) {
+    const h = new TestHub(); h.start({}, { ...options, routineContextV62: { clock: { day: 1, hour: 8 } } }); tick(h, 2);
+    for (const route of HUB_NPC_SERVICE_ROUTES_V161) {
+      assert.equal(h.getNpcServiceActorV161(route.definition.id), null);
+      assert.equal(snapshot(h, route.definition.id).actor, null);
+      assert.equal(h.npcAnnexDoorReservedV159(route.definition.annexRoomId), false);
+    }
+  }
+});

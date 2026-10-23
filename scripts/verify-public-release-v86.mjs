@@ -142,6 +142,11 @@ for (const file of [
 ]) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
+  'audit-succession-v161.mjs', 'generate-audit-continuation-v161.py',
+  'verify-audit-continuation-v161.mjs', 'verify-audit-workbook-v161.py',
+  'verify-forge-campaign-v161.mjs', 'qa-forge-campaign-v161.py',
+  'verify-campaign-convoy-story-v161.mjs', 'qa-campaign-convoy-v161.py',
+  'verify-npc-service-routes-v161.mjs', 'qa-npc-service-routes-v161.py',
   'audit-succession-v160.mjs', 'generate-audit-continuation-v160.py',
   'verify-audit-continuation-v160.mjs', 'verify-audit-workbook-v160.py',
   'verify-motion-tracker-v160.mjs', 'verify-campaign-story-v160.mjs',
@@ -152,6 +157,9 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V161-REMAINING-WORKSTREAMS.md',
+  'docs/forge/xeno-trials/progress-v161.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V161.xlsx',
   'docs/forge/xeno-trials/V160-PLAYER-TRACKER-CAMPAIGN.md',
   'docs/forge/xeno-trials/progress-v160.json',
   'docs/forge/xeno-trials/references-v160.json',

@@ -79,7 +79,7 @@ test('all current runtime bytes pass the exhaustive V160 succession while histor
   const v157 = JSON.parse(bytes('progress-v157.json'));
   const v156 = JSON.parse(bytes('progress-v156.json'));
   assert.deepEqual(resolveAuditSourcesV159(v158), previous.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV159(v158, read, { effective: true }), current.runtimeSourceSha256);
+  assert.deepEqual(resolveAuditSourcesV159(v158, read, { effective: true }), resolveAuditSourcesV160(previous, read, { effective: true }));
   assert.equal(verifyAuditSuccessionV159(v158, previous).current, 48);
   assert.equal(verifyAuditSuccessionV158(v157, v158).current, 46);
   assert.equal(verifyAuditSuccessionV157(v156, v157).current, 31);

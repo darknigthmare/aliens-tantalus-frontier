@@ -38,7 +38,7 @@ export function verifyAuditSuccessionV159(previous, current, readSource = readRe
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
   // These 48 V159 hashes remain historical. Later runtime bytes are admitted
   // only through their byte-anchored predecessor and complete V160 bridge.
-  const effective = resolveAuditSourcesV160(current, readSource);
+  const effective = resolveAuditSourcesV160(current, readSource, { effective: true });
   assert.equal(keys(before).length, 46);
   assert.ok(after && keys(after).length >= 46);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V158 source omitted: ' + path);
@@ -83,7 +83,7 @@ export function resolveAuditSourcesV159(previous, readSource = readRepository, {
   verifyAuditSuccessionV159(previous, current, readSource);
   // Historical callers retain their exact V159 return by default. Earlier
   // bridges explicitly request the latest verified bytes for runtime checking.
-  return effective ? resolveAuditSourcesV160(current, readSource) : current.runtimeSourceSha256;
+  return effective ? resolveAuditSourcesV160(current, readSource, { effective: true }) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV159(readSource = readRepository) {

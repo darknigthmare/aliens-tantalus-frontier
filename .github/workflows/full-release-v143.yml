@@ -92,6 +92,23 @@ jobs:
           python scripts/qa-motion-tracker-v160.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-release-qa/motion-tracker-v160" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/motion-tracker-v160.log" || { status=1; echo '::error title=Browser QA::qa-motion-tracker-v160.py failed; inspect its retained report.'; }
           python scripts/qa-campaign-story-v160.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-release-qa/campaign-story-v160" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/campaign-story-v160.log" || { status=1; echo '::error title=Browser QA::qa-campaign-story-v160.py failed; inspect its retained report.'; }
           exit "$status"
+      - name: Production V161 Forge campaign, convoy story and crew service journeys
+        id: continuation_v161
+        if: ${{ !cancelled() && (steps.continuation_v160.outcome == 'success' || steps.continuation_v160.outcome == 'failure') }}
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/atf-release-qa/http-continuation-v161.log" 2>&1 &
+          continuation_server=$!
+          trap 'kill "$continuation_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_BASE_URL=http://127.0.0.1:4173
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          status=0
+          python scripts/qa-forge-campaign-v161.py --output "$RUNNER_TEMP/atf-release-qa/forge-campaign-v161" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/forge-campaign-v161.log" || { status=1; echo '::error title=Browser QA::qa-forge-campaign-v161.py failed; inspect its retained report.'; }
+          python scripts/qa-campaign-convoy-v161.py --output "$RUNNER_TEMP/atf-release-qa/campaign-convoy-v161" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/campaign-convoy-v161.log" || { status=1; echo '::error title=Browser QA::qa-campaign-convoy-v161.py failed; inspect its retained report.'; }
+          python scripts/qa-npc-service-routes-v161.py --output "$RUNNER_TEMP/atf-release-qa/npc-service-routes-v161" 2>&1 | tee "$RUNNER_TEMP/atf-release-qa/npc-service-routes-v161.log" || { status=1; echo '::error title=Browser QA::qa-npc-service-routes-v161.py failed; inspect its retained report.'; }
+          exit "$status"
       - name: Remaining production menu and tactical gameplay journeys
         if: ${{ !cancelled() && (steps.forge_checkpoint.outcome == 'success' || steps.forge_checkpoint.outcome == 'failure') && (steps.player_journey.outcome == 'success' || steps.player_journey.outcome == 'failure') && (steps.continuation_v160.outcome == 'success' || steps.continuation_v160.outcome == 'failure') }}
         shell: bash

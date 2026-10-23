@@ -13,6 +13,7 @@ import { campaignInsertionStoryV160, chooseCampaignStoryProtocolV160, campaignSt
   applyCampaignStoryReturnV160, campaignStoryReturnV160, preserveCampaignStoryReturnV160, recordCampaignStoryReviewV160 } from '../src/campaign-story-v160.js';
 import { applyCampaignConsequence } from '../src/campaign-consequences.js';
 import { mountCampaignDebriefV160 } from '../src/campaign-story-ui-v160.js';
+import { mountCampaignDebriefV161 } from '../src/campaign-convoy-story-ui-v161.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
@@ -500,7 +501,7 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
     ARCHIVE_RELAY_CAMPAIGN_V122: campaign, escapeHtml: String, formatCost: () => '',
     byId: id => id === 'operation-plan' ? root : id === 'operation-launch' ? launch : null,
     launchCampaign() {}, abandonBlockedOperationV69() {}, renderCommandMissionsV110() {},
-    mountCampaignDebriefV160, recordCampaignStoryReviewV160(candidate, id, topic) {
+    mountCampaignDebriefV160, mountCampaignDebriefV161, recordCampaignStoryReviewV160(candidate, id, topic) {
       const result = recordCampaignStoryReviewV160(candidate, id, topic); accepted.push(result); return result;
     }, toast: message => errors.push(message) };
   // Execute the repository's complete renderer and callback, rather than a
