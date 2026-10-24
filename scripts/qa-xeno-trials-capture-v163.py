@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import subprocess
 import time
+import traceback
 import urllib.request
 from playwright.sync_api import sync_playwright
 
@@ -59,6 +60,66 @@ def setup(page, base, raw, name, player_id, opponent_id, roster):
 def wait_frame(page, predicate, timeout=45000):
     return page.wait_for_function('''()=>{const s=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot(),m=s?.match;
       if(!m)return false;if(PREDICATE)return{state:s,png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')};return false;}'''.replace('PREDICATE', predicate), polling='raf', timeout=timeout).json_value()
+
+# Read-only RAF evidence stays browser-local until real keys secure the pause.
+CAPTURE_OBSERVER = r'''c=> {
+  const slots=globalThis.__ATF_CAPTURE_OBSERVER_V163__ ||= {};
+  if(slots[c.stage])slots[c.stage].cancelled=true;
+  const out=slots[c.stage]={expected:c,ready:false,done:false,error:null,trace:[],floor:null,struggle:null,release:null};
+  const read=()=>globalThis.__ATF_XENO_TRIALS_V96__?.snapshot();
+  const compact=s=>{const m=s?.match,h=m?.grappleV153;return m?{tick:m.tick,round:m.round,paused:m.paused,
+    matchId:m.config.matchId,grapple:h?{id:h.id,attacker:h.attacker,target:h.target,escapeProgress:h.escapeProgress}:null,
+    fighters:m.fighters.map(f=>({id:f.id,side:f.side,hp:f.hp,guard:f.guard,escapes:f.stats?.grappleEscapesV153||0})),
+    receipts:m.captureViewsV163?.map(v=>({grappleId:v.grappleId,role:v.role,side:v.side,targetId:v.targetId,
+      phase:v.phase,fullFloorPin:v.fullFloorPin,pairedContacts:v.pairedContacts,escapeProgress:v.escapeProgress})),
+    ends:m.events.filter(e=>e.type==='grapple-end-v153').slice(-2)}:{match:null};};
+  const fail=message=>{out.error=message;out.done=true;};
+  const sameMatch=m=>m&&m.config.matchId===c.matchId&&m.round===c.round
+    &&m.fighters.length===2&&m.fighters.every((f,i)=>f.id===c.fighterIds[i]&&f.side===c.sides[i]);
+  const sameHold=h=>h&&h.attacker===c.attackerSide&&h.target===c.targetSide&&(c.holdId===null||h.id===c.holdId);
+  const receipt=(m,phase)=>m.captureViewsV163?.find(v=>v.role==='captive'&&v.side===c.targetSide
+    &&v.targetId===c.targetId&&v.grappleId===(c.holdId??m.grappleV153?.id)&&v.phase===phase);
+  // Public snapshot and canvas bytes belong to this same synchronous callback.
+  const frame=s=>({state:s,png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')});
+  const armed=read(),start=performance.now();out.armedState=compact(armed);
+  if(!sameMatch(armed?.match)){fail('Different match, round or participants at observer arm');return{error:out.error};}
+  if(c.stage==='post'&&!(armed.match.paused&&sameHold(armed.match.grappleV153)
+    &&(!c.after||receipt(armed.match,'capture')?.fullFloorPin&&receipt(armed.match,'capture')?.pairedContacts))){
+    fail('Actual pause no longer owns the exact painted native floor hold');return{error:out.error};}
+  let floorHoldId=c.holdId??armed.match.grappleV153?.id??null;
+  function sample(){
+    if(out.cancelled||out.done)return;
+    const s=read(),m=s?.match,row=compact(s);out.last=row;
+    if(!out.trace.length||row.tick!==out.trace.at(-1).tick||row.paused!==out.trace.at(-1).paused){out.trace.push(row);if(out.trace.length>240)out.trace.shift();}
+    if(performance.now()-start>c.timeoutMs){fail('Read-only '+c.stage+' observer exceeded original '+c.timeoutMs+'ms budget');return;}
+    if(!sameMatch(m)||m.tick<armed.match.tick){fail('Match, round, participants or monotonic tick changed');return;}
+    if(c.stage==='post'&&m.paused){requestAnimationFrame(sample);return;}
+    const h=m.grappleV153;
+    if(h&&!sameHold(h)){fail('Different native hold cannot replace expected capture');return;}
+    if(c.stage==='floor'){
+      if(m.events.some(e=>e.type==='grapple-end-v153'&&e.tick>=c.sinceTick)){fail('Native hold ended before exact floor observation');return;}
+      if(h){floorHoldId??=h.id;if(h.id!==floorHoldId){fail('A later hold cannot replace first floor contact');return;}
+        const r=receipt(m,'capture');
+        if(c.after?r?.fullFloorPin&&r.pairedContacts:m.tick-h.bornTick>=55){out.floor=frame(s);out.ready=true;out.done=true;return;}}
+    }else if(h){
+      const r=receipt(m,'capture');
+      if(!out.struggle&&m.tick>armed.match.tick&&h.escapeProgress>0&&(!c.after||r?.escapeProgress>0&&r.pairedContacts))out.struggle=frame(s);
+    }else{
+      const end=m.events.find(e=>e.type==='grapple-end-v153'&&e.grappleId===c.holdId);
+      if(end){out.release=frame(s);out.done=true;
+        if(!out.struggle)fail('Expected hold ended before a real post-resume resistance frame');
+        else if(c.after&&!receipt(m,'recovery'))fail('First native release has no recovery painted for the same captive and hold');
+        return;}
+    }
+    requestAnimationFrame(sample);
+  }
+  requestAnimationFrame(sample);
+  return{armed:true};
+}
+'''
+
+def wait_observation(page, stage, field, timeout):
+    page.wait_for_function("([stage,field])=>{const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.[stage];if(o?.error)throw Error(o.error);return Boolean(o?.[field]);}", arg=[stage, field], polling='raf', timeout=timeout)
 
 def get_frame(page):
     return page.evaluate('''()=>({state:globalThis.__ATF_XENO_TRIALS_V96__.snapshot(),png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')})''')
@@ -254,6 +315,9 @@ def main():
     def check(label, passed, evidence=None):
         assert passed, label
         report['checks'].append({'label': label, 'evidence': evidence, 'status': 'passed'})
+        report['lastPassedCheck'] = label
+    def phase(profile, step):
+        report['phase'] = profile + ': ' + step
     def capture(name, value, scope):
         value = dict(value)
         png = base64.b64decode(value.pop('png').split(',', 1)[1])
@@ -285,6 +349,7 @@ def main():
                     page.on('response', lambda r: report['httpErrors'].append({'url': r.url, 'status': r.status}) if r.status >= 400 else None)
                     page.on('dialog', lambda d: d.accept())
                     player, opponent = (target_id, 'prowler') if role == 'cpu-captor' else ('prowler', target_id)
+                    phase(name, 'menu and native startup')
                     print(name + ': native menu and capture', flush=True)
                     original = setup(page, args.base, raw, name, player, opponent, roster)
                     m = observed(page)['match']
@@ -297,20 +362,46 @@ def main():
                         acquisition = {'profile': name}
                         report.setdefault('playerCaptureAcquisitions', []).append(acquisition)
                         preparation = acquire_player_capture(page, after, acquisition)
-                    check(name + ': actual native Prowler startup is observed', preparation is not None)
-                    capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
-                    hold_predicate = "m.grappleV153&&m.captureViewsV163?.some(v=>v.role==='captive'&&v.fullFloorPin&&v.pairedContacts)" if after else "m.grappleV153&&m.tick-m.grappleV153.bornTick>=55"
-                    hold = wait_frame(page, hold_predicate)
+                    # Preparation is already observed; defer its transfer to disk and all
+                    # checks until the first painted floor contact has been paused by a real key.
+                    pm = preparation['state']['match']
+                    target_side = 'player' if role == 'cpu-captor' else 'opponent'
+                    binding = {'matchId': pm['config']['matchId'], 'round': pm['round'],
+                               'fighterIds': [f['id'] for f in pm['fighters']],
+                               'sides': [f['side'] for f in pm['fighters']],
+                               'attackerSide': 'opponent' if role == 'cpu-captor' else 'player',
+                               'targetSide': target_side, 'targetId': target_id,
+                               'holdId': acquisition['grapple']['id'] if role == 'player-captor' else None,
+                               'sinceTick': pm['tick'], 'after': after}
+                    phase(name, 'floor observation then immediate public pause')
+                    armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
+                    assert not armed.get('error'), armed.get('error')
+                    wait_observation(page, 'floor', 'ready', 45000)  # Boolean acknowledgement only.
+                    page.keyboard.press('KeyP')  # No state/PNG transfer or disk I/O before this key.
+                    frozen = observed(page)['match']
+                    floor_observation = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor')
+                    hold = floor_observation['floor']
                     m = hold['state']['match']
                     hold_id = m['grappleV153']['id']
+                    binding['holdId'] = hold_id
+                    fh = frozen.get('grappleV153') or {}
+                    same_pause = (frozen.get('paused') is True and frozen['config']['matchId'] == binding['matchId']
+                                  and frozen['round'] == binding['round']
+                                  and [(f['id'], f['side']) for f in frozen['fighters']] == list(zip(binding['fighterIds'], binding['sides']))
+                                  and fh.get('id') == hold_id and fh.get('attacker') == binding['attackerSide'] and fh.get('target') == target_side
+                                  and (not after or any(v['role'] == 'captive' and v['side'] == target_side and v['targetId'] == target_id
+                                       and v['grappleId'] == hold_id and v['phase'] == 'capture' and v['fullFloorPin'] and v['pairedContacts'] for v in frozen.get('captureViewsV163', []))))
+                    report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
+                        'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen, 'floorTrace': floor_observation['trace']})
+                    check(name + ': public pause retains the same painted native hold and participants', same_pause)
+                    check(name + ': actual native Prowler startup is observed', preparation is not None)
+                    capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
                     check(name + ': actual capture event owns the displayed hold', any(e['type'] == 'grapple-start-v153' and e['grappleId'] == hold_id for e in m['events']))
                     if after:
                         receipt = next(v for v in m['captureViewsV163'] if v['role'] == 'captive')
                         check(name + ': original floor art, real hand contact and source provenance', receipt['targetId'] == target_id and receipt['fullFloorPin'] and receipt['pairedContacts'] and max(receipt['contactGaps']) <= 8 and receipt['canonExact'] is False and receipt['engineBodiesUnchanged'] is True, receipt)
                         check(name + ': painted floor support remains on the native floor', abs(receipt['contacts']['floorSupport'][1] - receipt['floor']) < 1e-6)
                     capture(name+'-floor-hold.png', hold, 'Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.')
-                    page.keyboard.press('KeyP')
-                    frozen = observed(page)['match']
                     page.wait_for_timeout(180)
                     check(name + ': public pause freezes exact native tick and capture receipts', observed(page)['match'] == frozen)
                     if role == 'cpu-captor' and after:
@@ -318,15 +409,20 @@ def main():
                         check(name + ': declared mirror fixture preserves both hand contacts', all(row['receipt']['pairedContacts'] for row in comparison['rows']))
                         capture(name+'-comparison-fixture.png', comparison, 'Declared clone-only old V158 versus new native art; observed and mirrored direction, same world scale2x. Not a second gameplay event.')
                         capture(name+'-nine-poses-fixture.png', page.evaluate(ATLAS_REVIEW, target_id), 'Declared 9-pose art inspection at2x native stature; no live state writes.')
+                    phase(name, 'arm same-hold resistance and release observations while paused')
+                    armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='post', timeoutMs=15000))
+                    assert not armed.get('error'), armed.get('error')
                     page.keyboard.press('KeyP')
                     page.locator('[data-xt="canvas"]').focus()
                     if role == 'cpu-captor':
                         page.keyboard.down('KeyS')
-                    struggle_predicate = "m.grappleV153&&m.captureViewsV163?.some(v=>v.role==='captive'&&v.escapeProgress>0&&v.pairedContacts)" if after else "m.grappleV153&&m.grappleV153.escapeProgress>0"
-                    struggle = wait_frame(page, struggle_predicate, timeout=15000)
+                    phase(name, 'post-resume resistance of the same native hold')
+                    wait_observation(page, 'post', 'struggle', 15000)
+                    struggle = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.post.struggle')
                     capture(name+'-resistance.png', struggle, 'Real guard resistance from keyboard or CPU, never assigned escape progress.')
-                    target_side = 'player' if role == 'cpu-captor' else 'opponent'
-                    release = wait_frame(page, "!m.grappleV153&&m.events.some(e=>e.type==='grapple-end-v153'&&e.grappleId===" + str(hold_id) + ")", timeout=15000)
+                    phase(name, 'first native release and recovery of the same hold')
+                    wait_observation(page, 'post', 'release', 15000)
+                    release = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.post.release')
                     if role == 'cpu-captor':
                         page.keyboard.up('KeyS')
                     rm = release['state']['match']
@@ -334,10 +430,11 @@ def main():
                     end = next(e for e in rm['events'] if e['type'] == 'grapple-end-v153' and e['grappleId'] == hold_id)
                     check(name + ': native guard escape resolves once without a new combat result', end['reason'] == 'escaped' and target['stats'].get('grappleEscapesV153', 0) == 1 and rm.get('result') is None, end)
                     if after:
-                        check(name + ': release selects a separate recovery pose', any(v['phase'] == 'recovery' for v in rm['captureViewsV163']))
+                        check(name + ': release selects a separate recovery pose', any(v['phase'] == 'recovery' and v['role'] == 'captive' and v['side'] == target_side and v['targetId'] == target_id and v['grappleId'] == hold_id for v in rm['captureViewsV163']))
                     capture(name+'-release.png', release, 'Actual native escape and presentation recovery; engine stun/cost/result unchanged.')
                     page.wait_for_timeout(450)
                     capture(name+'-recovered-or-interrupted.png', get_frame(page), 'Native continuation after recovery; new combat actions may interrupt presentation.')
+                    phase(name, 'public abandonment and exact reward check')
                     page.keyboard.press('KeyP')
                     if not observed(page)['match']['paused']:
                         page.keyboard.press('KeyP')
@@ -353,8 +450,12 @@ def main():
         except Exception as e:
             report['status'] = 'failed'
             report['error'] = str(e)
+            report['failureStack'] = traceback.format_exc(limit=6)[-4000:]
+            details = 'capture pipeline failed; phase=' + str(report.get('phase')) + '; lastPassedCheck=' + str(report.get('lastPassedCheck')) + '; error=' + str(e)
+            print('::error::' + details[:1800].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'), flush=True)
             if page:
                 try:
+                    report['captureObserverDiagnostics'] = page.evaluate("()=>Object.fromEntries(Object.entries(globalThis.__ATF_CAPTURE_OBSERVER_V163__||{}).map(([k,v])=>[k,{expected:v.expected,armedState:v.armedState,last:v.last,error:v.error,ready:v.ready,done:v.done,trace:v.trace}]))")
                     report['failureState'] = observed(page)
                     page.screenshot(path=str(out/'failure.png'), full_page=True)
                 except Exception:
