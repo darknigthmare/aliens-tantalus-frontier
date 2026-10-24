@@ -1,4 +1,4 @@
-"""Six prepared native-texture comparisons, then three real CPU receptions.
+"""Six prepared native-texture comparisons, then three real CPU receptions with the V163 atlas deliberately unavailable.
 No actor/HP/position/attack/result/RNG field is injected. The public pause API
 freezes the first observed receipt for inspection; browser RAF is unchanged.
 This isolated host bypasses unlock menus and proves no canonical or full pin art.
@@ -21,6 +21,7 @@ report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], '
           'limits': ['Original simulation choreography; no canonical timings or frame1:1 approval.',
                      'No full prone body, floor pin, new painted frame, or substitute identity.',
                      'Isolated controller host bypasses menus/unlocks/rewards; not human gameplay QA.',
+                     'V163 atlas decode is deliberately rejected locally: this is the supported historical fallback, not the new full pin validation.',
                      'The public pause API freezes the first real reception receipt; no scheduler or engine field is rewritten.']}
 def check(label, ok, evidence=None):
     assert ok, label
@@ -99,7 +100,7 @@ with sync_playwright() as pw:
         for index, t in enumerate([] if a.fixtures_only else targets):
             started = page.evaluate('''async id=>{
               const {createXenoTrialsRuntimeV96}=await import('/src/xeno-trials-runtime-v96.js');window.receipts={};window.results=[];window.frozeFirst=false;
-              window.r=createXenoTrialsRuntimeV96({canvas:document.querySelector('#arena'),config:{playerId:id,opponentId:'prowler',seed:1,difficulty:'hard',roundSeconds:120},onState:s=>{
+              window.r=createXenoTrialsRuntimeV96({canvas:document.querySelector('#arena'),loadImage:async path=>{if(path.includes('/trials-v163/'))throw Error('Declared legacy fallback: V163 atlas deliberately unavailable');const image=new Image();image.src=path;await image.decode();return image;},config:{playerId:id,opponentId:'prowler',seed:1,difficulty:'hard',roundSeconds:120},onState:s=>{
                 const v=s.rigViewsV154.find(v=>v.side==='player');
                 if(v?.captureReceptionV158&&!receipts.reception){receipts.reception=frame();if(!frozeFirst){frozeFirst=true;r.pause();}}
                 if(v?.clip==='release'&&!receipts.release)receipts.release=frame();

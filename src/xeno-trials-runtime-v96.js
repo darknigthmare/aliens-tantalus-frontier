@@ -18,6 +18,8 @@ import { requestEnemyImportAttackV109, drawEnemyImportAttackV109 } from './enemy
 import { getXenoTrialsDisplayScaleV110, getXenoTrialsRenderMetricsV110, createXenoTrialsCameraV119 } from './xeno-trials-scale-v110.js';
 import { drawXenoTrialsArenaLayersV119, drawXenoTrialsArenaOverlayV119 } from './xeno-trials-arena-layers-v119.js';
 import { drawSynthConeV110 } from './synth-combat-v110.js';
+import { getXenoTrialsCaptureAssetsV163, getXenoTrialsCaptureViewV163, getXenoTrialsCaptureReceiptV163,
+ drawXenoTrialsCaptureTargetV163, sampleXenoTrialsPreparationV163 } from './xeno-trials-capture-v163.js';
 
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super' });
@@ -54,6 +56,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const reduceMotion = () => options.reducedMotion === true || host?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true
     || doc?.documentElement?.classList?.contains?.('reduced-motion') === true;
   const rigDrawsV154 = new Map();
+  let captureViewV163 = null;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     paused: isPaused(), outroV155: outroV155 ? JSON.parse(JSON.stringify(outroV155)) : null,
     terminalV156: terminalV156 ? JSON.parse(JSON.stringify(terminalV156)) : null,
@@ -64,6 +67,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     exitViewsV157: match.fighters.map(f=>getXenoTrialsExitViewV157(match,f,exitV157,reduceMotion())).filter(Boolean),
     canTauntV156: acceptsControls() && tauntV156?.phase !== 'playing' && Boolean(createXenoTrialsTauntV156(match,presentationView(),controls(),reduceMotion())),
     rigViewsV154: JSON.parse(JSON.stringify([...rigDrawsV154].map(([side,view])=>({side,...view})))),
+    captureViewsV163: JSON.parse(JSON.stringify([...rigDrawsV154].filter(([,view])=>view.captureV163).map(([side,view])=>({side,...view.captureV163})))),
     grappleViewV153: getXenoTrialsGrappleViewV153(match),
     cameraV119: { zoom: cameraView.zoom, center: cameraView.center, pixelsPerMeter: cameraView.pixelsPerMeter },
     supersV148: match.fighters.map(fighter => ({ side: fighter.side, ...getXenoTrialsSuperReadinessV148({ ...match, presentation: presentationView() }, fighter, getXenoTrialsFighterV96(fighter.id)) })),
@@ -158,7 +162,15 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const definition = getXenoTrialsFighterV96(fighter.id), art = getXenoTrialsArtV96(fighter.id, fighter.variant);
     const image = images.get(art.path), ground = exitView?.ground ?? landingView?.ground ?? 450 - fighter.y;
     const body = getXenoTrialsBodyBoundsV105(fighter);
-    context.fillStyle = '#0008'; context.beginPath(); context.ellipse(body.center+drawX-fighter.x, 454, body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
+    const captive = captureViewV163?.target === fighter ? captureViewV163 : null;
+    // The floor drawing follows the visible prone body. Its physical hitbox
+    // stays unchanged; leaving the shadow at that hitbox stranded it beside
+    // the body whenever the paired hands required a visual root offset.
+    const shadowBlend = captive?.previous ? captive.mix : 1;
+    const plateWidth = captive && ((captive.layout.bounds.right - captive.layout.bounds.left) * shadowBlend
+      + (captive.previous ? captive.previous.bounds.right - captive.previous.bounds.left : 0) * (1 - shadowBlend));
+    context.fillStyle = '#0008'; context.beginPath(); context.ellipse(captive?.layout.rootX ?? body.center+drawX-fighter.x,
+      454, captive ? Math.max(12, plateWidth * .46) : body.width * .68, 11, 0, 0, Math.PI * 2); context.fill();
     if (!image) { text('Visuel indisponible', fighter.x, ground - 90, 12, '#f0b6ac', 'center'); return; }
     const { width, height, pivotX, bottom, sourceFacing } = getXenoTrialsRenderMetricsV110(fighter.id, fighter.variant, displayScale);
     const timeSeconds = match.tick * XENO_TRIALS_STEP_V96;
@@ -175,7 +187,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const sequenceCue=rig && (getXenoTrialsSequenceCueV156(rig,match,fighter,presentationView(),terminalV156,tauntV156)
       || getXenoTrialsSequenceCueV155(rig,match,fighter,presentationView(),outroV155));
     const cue=sequenceCue || rig && getXenoTrialsRigCueV154(rig,match,fighter,presentationView());
-    const pose=exitView ? sampleXenoTrialsExitPoseV157(rig,exitView,{width,height,pivotX,bottom},reducedMotion) : cue && (sequenceCue ? sampleXenoTrialsSequenceV155(rig,cue,reducedMotion) : sampleXenoTrialsRigV154(rig,cue,reducedMotion));
+    let pose=exitView ? sampleXenoTrialsExitPoseV157(rig,exitView,{width,height,pivotX,bottom},reducedMotion) : cue && (sequenceCue ? sampleXenoTrialsSequenceV155(rig,cue,reducedMotion) : sampleXenoTrialsRigV154(rig,cue,reducedMotion));
+    if(!exitView&&!sequenceCue)pose=sampleXenoTrialsPreparationV163(rig,pose,cue,reducedMotion);
+    if(captureViewV163?.attacker===fighter&&(captureViewV163.record.phase==='capture'||captureViewV163.captorRecovery)&&!exitView&&!sequenceCue)pose=captureViewV163.captorPose;
     context.save();
     if(fighter.hitFlash>0) context.globalAlpha=.65;
     // Native plates have no authored back-facing turn. A short, stationary
@@ -187,11 +201,15 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.drawImage(image,-width*pivotX,-height*bottom,width,height);context.restore();
       context.globalAlpha=exitView.turn;
     }
-    const rigDrawn=pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},drawX,ground,drawFacing);
+    const atlasDrawn=captureViewV163?.target===fighter&&!exitView&&!sequenceCue
+      &&drawXenoTrialsCaptureTargetV163(context,images.get(captureViewV163.atlas.path),captureViewV163);
+    const rigDrawn=atlasDrawn||pose && drawXenoTrialsRigV154(context,rig,image,pose,{width,height,pivotX,bottom},drawX,ground,drawFacing);
     context.restore();
     if(rigDrawn) rigDrawsV154.set(fighter.side,{...rigDrawn,
+      ...(captureViewV163?.attacker===fighter&&(captureViewV163.record.phase==='capture'||captureViewV163.captorRecovery)?{captureV163:getXenoTrialsCaptureReceiptV163(captureViewV163,'captor')}:{}),
+      ...(pose?.preparationV163?{preparationV163:{...pose.preparationV163}}:{}),
       ...(exitView?{exitV157:{...exitView,stepped:rigDrawn?.clip==='spatial-exit-v157',pose:pose?.exitPoseV157||null}}:{}),
-      ...(pose.sequenceIdV155 ? {sequenceIdV155:pose.sequenceIdV155,beatV155:pose.beatV155,animation:pose.animation,...(pose.sequenceIdV156?{sequenceIdV156:pose.sequenceIdV156}:{})} : {})});
+      ...(pose?.sequenceIdV155 ? {sequenceIdV155:pose.sequenceIdV155,beatV155:pose.beatV155,animation:pose.animation,...(pose.sequenceIdV156?{sequenceIdV156:pose.sequenceIdV156}:{})} : {})});
     const attackDrawn = !rigDrawn && canShowAttack && drawEnemyImportAttackV109(context, art, images, {
       attack: fighter.attack, spec: getXenoTrialsAttackV147(definition, fighter.attack?.kind, XENO_TRIALS_ATTACKS_V96[fighter.attack?.kind]), reducedMotion,
       height, x: fighter.x, y: ground, facing: fighter.attack?.facing,
@@ -233,13 +251,16 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   function render() {
     if (stopped) return;
     rigDrawsV154.clear();
+    captureViewV163=(!exitV157&&!outroPlaying()&&!presentationView().blocksSimulation)?getXenoTrialsCaptureViewV163(match,images,reduceMotion()):null;
     if(!exitV157)cameraView = camera.update(match.fighters, frameDelta); frameDelta = 0;
     canvas.setAttribute?.('data-xeno-camera-zoom-v119', String(cameraView.zoom));
     drawArena();
     context.save(); context.translate(cameraView.translateX, cameraView.translateY); context.scale(cameraView.zoom, cameraView.zoom);
     drawXenoTrialsAcidV152(context, match, XENO_TRIALS_ARENA_V96, reduceMotion());
-    for (const fighter of [...match.fighters].sort((a, b) => a.y - b.y)) drawFighter(fighter);
-    drawXenoTrialsGrappleV153(context, match, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96.floor);
+    for (const fighter of [...match.fighters].sort((a, b) => captureViewV163
+      ? Number(a===captureViewV163.attacker)-Number(b===captureViewV163.attacker) : a.y-b.y)) drawFighter(fighter);
+    drawXenoTrialsGrappleV153(context, match, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96.floor,
+      {showLegacyContactLine:!Boolean(captureViewV163&&rigDrawsV154.get(captureViewV163.target.side)?.captureV163)});
     // Feedback uses physical hitbox coordinates, not the independently scaled portrait.
     for (const fighter of match.fighters) {
       const definition = getXenoTrialsFighterV96(fighter.id), attack = fighter.attack;
@@ -300,11 +321,13 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const showPresentation = loaded && !match.paused && match.phase === 'active';
     if (showPresentation && intro.fighterSlot !== null) {
       const fighter = match.fighters[intro.fighterSlot], def = getXenoTrialsFighterV96(fighter.id);
-      context.fillStyle = '#061019df'; context.fillRect(200, 150, 600, 90);
-      text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 185, 24, stage.accent, 'center', 570);
-      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR', human: 'HUMAIN' }[def.family];
+      // Keep the introduction below the support plane: tall specimens must
+      // remain visible at their native scale throughout their presentation.
+      context.fillStyle = '#061019df'; context.fillRect(200, 472, 600, 72);
+      text(`${intro.fighterSlot === 0 ? 'VOTRE SPÉCIMEN' : 'ADVERSAIRE'} / ${def.label.toUpperCase()}`, 500, 500, 24, stage.accent, 'center', 570);
+      const family = { synthetic: 'SYNTHÉTIQUE', pathogen: 'PATHOGÈNE', xenomorph: 'XÉNOMORPHE', engineer: 'INGÉNIEUR', human: 'HUMAIN', hybrid: 'HYBRIDE' }[def.family];
       const role = { balanced: 'POLYVALENT', agile: 'MOBILE', tank: 'DÉFENSIF', ranged: 'DISTANCE' }[def.role];
-      text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 218, 15, '#d4e1e7', 'center', 570);
+      text(`${def.hp} PV  •  ${family}  •  ${role}`, 500, 528, 15, '#d4e1e7', 'center', 570);
     } else if (showPresentation && ['countdown', 'fight'].includes(intro.phase)) {
       text(intro.countdown ? String(intro.countdown) : 'COMBAT', 500, 235, 54, '#efe8cb', 'center');
     }
@@ -385,9 +408,16 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     listen(doc, 'visibilitychange', () => { if (doc.hidden) pause(); });
     listen(doc, 'focusin', event => {
       const target = event.target, control = target?.closest?.('[data-xeno-action]');
+      const returning = target?.closest?.('[data-xt="return"]');
+      if (returning) {
+        // Return must remain activatable by both pointer and Tab/Enter. Drop
+        // held combat inputs without inserting a modal over its own action.
+        for (const key of heldKeys) blockedKeys.add(key);
+        clearInputs();
+      }
       // Accessible combat buttons are gameplay inputs. Pause/resume buttons
       // own their explicit click; focusing one must not toggle it twice.
-      if (target === canvas || control && options.controlsRoot?.contains(control)
+      if (target === canvas || returning || control && options.controlsRoot?.contains(control)
         || target?.closest?.('[data-xt="pause"], [data-xt="resume-overlay"], [data-xt="skip-sequence"], [data-xt="taunt"]')) return;
       pause();
     });
@@ -506,7 +536,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       render(); notify(true);
       if (stopped) return false;
       const paths = [...new Set(match.fighters.map(f => getXenoTrialsArtV96(f.id, f.variant).path))];
-      const allPaths = stage.backdrop ? [...paths, stage.backdrop] : paths;
+      const allPaths = [...paths,...(stage.backdrop?[stage.backdrop]:[]),...getXenoTrialsCaptureAssetsV163(match.fighters)];
       const results = await Promise.allSettled(allPaths.map(async path => {
         const image = await loadImage(path);
         // Apply the same validation to native and injected loaders. A resolved
@@ -537,7 +567,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     if (stopped) return;
     stopped = true; running = false; outroV155 = null; terminalV156=null; tauntV156=null; exitV157=null; landingV157=null; clearInputs(); if (raf !== null) cancelFrame(raf); raf = null;
     for (const cancel of [...pendingLoads]) cancel();
-    for (const remove of listeners.splice(0)) remove(); images.clear(); rigDrawsV154.clear();
+    for (const remove of listeners.splice(0)) remove(); images.clear(); rigDrawsV154.clear(); captureViewV163=null;
     canvas.width = originalSize.width; canvas.height = originalSize.height;
   }
   return Object.freeze({ start, pause, resume, stop, skipSequence, taunt,

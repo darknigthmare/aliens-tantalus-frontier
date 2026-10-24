@@ -1,3 +1,6 @@
+# V163 compatibility: this isolated V156 host deliberately rejects the optional
+# V163 atlas, testing the supported historical fallback. Full-pose capture is
+# covered separately by qa-xeno-trials-capture-v163.py through production menus.
 """Declared render fixtures plus three native CPU matches. No menu journey,
 canonical choreography, edited HP/positions, or complete floor pin is claimed."""
 import argparse, base64, json, os
@@ -50,7 +53,7 @@ with sync_playwright() as pw:
   for index,t in enumerate([] if args.fixtures_only else targets):
    ready=page.evaluate('''async id=>{
     const {createXenoTrialsRuntimeV96}=await import('/src/xeno-trials-runtime-v96.js');window.nativeReceipts={};
-    window.rigRuntime=createXenoTrialsRuntimeV96({canvas:document.querySelector('#arena'),config:{playerId:id,opponentId:'prowler',difficulty:'hard',roundSeconds:120,seed:153},onState:s=>{
+    window.rigRuntime=createXenoTrialsRuntimeV96({canvas:document.querySelector('#arena'),loadImage:async path=>{if(path.includes('/trials-v163/'))throw Error('Declared legacy fallback: V163 atlas deliberately unavailable');const image=new Image();image.src=path;await image.decode();return image;},config:{playerId:id,opponentId:'prowler',difficulty:'hard',roundSeconds:120,seed:153},onState:s=>{
      const v=s.rigViewsV154.find(r=>r.side==='player');
      if(v?.restraintPoseV156&&['restraint','struggle','release'].includes(v.clip)&&!nativeReceipts[v.clip])nativeReceipts[v.clip]={state:s,png:document.querySelector('#arena').toDataURL('image/png')};
     }});document.querySelector('#stop').onclick=()=>rigRuntime.stop();return await rigRuntime.start();

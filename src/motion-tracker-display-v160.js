@@ -37,6 +37,13 @@ export function motionTrackerLayoutV160({ viewportWidth = 1280, vehicle = false,
     if (overlaps(layout, actorScreenBounds)) {
       const opposite = { ...layout, x: margin };
       if (!overlaps(opposite, actorScreenBounds)) layout.x = opposite.x;
+      else {
+        // A high, camera-centred body may span both compact corners. Keep the
+        // instrument below its feet when that full composition still fits.
+        const below = { ...layout, y: actorScreenBounds.y + actorScreenBounds.height + gap };
+        if (below.y >= minimumY && below.y + below.height <= 720
+          && !overlaps(below, actorScreenBounds)) layout.y = below.y;
+      }
     }
   }
   layout.y = clamp(layout.y, 0, Math.max(0, 720 - height));

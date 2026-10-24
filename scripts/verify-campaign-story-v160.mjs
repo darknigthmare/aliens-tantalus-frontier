@@ -16,6 +16,8 @@ import { mountCampaignDebriefV160 } from '../src/campaign-story-ui-v160.js';
 import { mountCampaignDebriefV161 } from '../src/campaign-convoy-story-ui-v161.js';
 import { preserveConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-v162.js';
 import { mountConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-ui-v162.js';
+import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from '../src/campaign-lethe-continuity-v163.js';
+import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v163.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
@@ -496,6 +498,7 @@ test('PR15: the actual app review callback restores focus to the replaced topic 
   } });
   const dependencies = { saveSystem: system, clone, preserveCampaignStoryReturnV160,
     preserveConvoyReturnHistoryV162, mountConvoyReturnHistoryV162,
+    preserveLetheContinuityV163, mountLetheContinuityV163, recordLetheContinuityReviewV163,
     CAMPAIGNS: [campaign], WORLDS: [world], WEAPONS: [], EQUIPMENT: [], VEHICLES: [], CREW: [],
     getOperationBrief: () => ({ crewIds: [], ready: true, risk: 0, hours: 0 }),
     resolveCrewDefinitionV85: member => member, getSpecialOperationByCampaignIdV67: () => null,

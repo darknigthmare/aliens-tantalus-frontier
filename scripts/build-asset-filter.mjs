@@ -1,3 +1,4 @@
+import { publicReleasePathAdmissionV163 } from './public-release-admissions-v163.mjs';
 import { relative } from 'node:path';
 import { V65_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v65.js';
 import { V66_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v66.js';
@@ -230,6 +231,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const v163Admission = publicReleasePathAdmissionV163(sourcePath, { directory: sourcePath === 'assets/openai/sprites/trials-v163' });
+    if (v163Admission !== null) return v163Admission;
     if (sourcePath === 'assets/openai/sprites/player/v141') return true;
     if (sourcePath.startsWith('assets/openai/sprites/player/v141/'))
       return sourcePath === 'assets/openai/sprites/player/v141/hudson-torso-candidate-v141.png';

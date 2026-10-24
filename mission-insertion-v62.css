@@ -23,6 +23,73 @@
   font-family: "IBM Plex Mono", "Share Tech Mono", ui-monospace, monospace;
 }
 
+/* Insertion is a reading flow. Portrait gameplay's flex row must not
+   shrink it beside the still-mounted log/help siblings. Keep the real mission
+   toolbar usable in flow, and own vertical scrolling while body is locked. */
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) {
+  display: block;
+  width: 100%;
+  height: 100svh;
+  min-height: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) > .game-toolbar {
+  position: relative;
+  inset: auto;
+  margin: 0;
+  padding: 10px 14px;
+}
+
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) > .game-toolbar .button-row {
+  width: 100%;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) > .field-media-capture-v135 {
+  position: relative;
+  inset: auto;
+  display: block;
+  margin: 12px 14px;
+  max-width: calc(100% - 28px);
+}
+
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) > .mission-log,
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) > .mission-touch-controls,
+.mission-mode .play-view:has(> #mission-insertion-v62:not([hidden])) > #mission-aim-help-v83 {
+  display: none;
+}
+
+.mission-insertion-v62 {
+  width: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.mission-insertion-v62__header,
+.mission-insertion-v62__rail,
+.mission-insertion-v62__body,
+.mission-insertion-v62__live,
+.mission-insertion-v62__story,
+.mission-insertion-v62__dialogue-line > div {
+  min-inline-size: 0;
+}
+
+.mission-insertion-v62__header h2,
+.mission-insertion-v62__header p,
+.mission-insertion-v62__panel,
+.mission-insertion-v62__live,
+.mission-insertion-v62__shot-label,
+.mission-insertion-v62__credit {
+  overflow-wrap: anywhere;
+}
+
+.mission-insertion-v62__credit { max-inline-size: calc(100% - 24px); }
+
 .mission-insertion-v62[hidden] {
   display: none;
 }
@@ -40,7 +107,7 @@
   grid-area: header;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 6px 24px;
   padding: 22px clamp(20px, 4vw, 56px) 18px;
@@ -186,6 +253,8 @@
 }
 
 .mission-insertion-v62__panel {
+  min-inline-size: 0;
+  container-type: inline-size;
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -197,7 +266,10 @@
 .mission-insertion-v62__panel > h2 {
   color: #fff8ea;
   font-size: clamp(1.7rem, 3.5vw, 3.3rem);
-  line-height: 0.95;
+  font-size: clamp(1.7rem, 11cqi, 3.3rem);
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+  line-height: 1.1;
   letter-spacing: 0.045em;
 }
 
@@ -310,7 +382,7 @@
 
 @media (max-width: 860px) {
   .mission-insertion-v62 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "header" "rail" "body" "live";
   }
 
@@ -327,7 +399,7 @@
   }
 
   .mission-insertion-v62__body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .mission-insertion-v62__media {
@@ -344,7 +416,7 @@
 
 @media (max-width: 560px) {
   .mission-insertion-v62__header {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .mission-insertion-v62__operation {

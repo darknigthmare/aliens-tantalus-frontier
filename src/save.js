@@ -16,8 +16,14 @@ import { normalizeNpcCirculationV158 } from './npc-circulation-v158.js';
 import { normalizeNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
 import { normalizeNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
 import { normalizeNpcMedicalRouteV162 } from './npc-medical-route-v162.js';
+import { normalizeNpcAnnexServiceRoutesV163 } from './npc-annex-service-routes-v163.js';
+import { normalizeNpcAnnexLeasesV163 } from './npc-annex-leases-v163.js';
+import { normalizeNpcServiceTrafficV163 } from './npc-service-traffic-v163.js';
+import { normalizeHubLiftTransitV163 } from './hub-lift-transit-v163.js';
 import { createConvoyReturnHistoryV162, normalizeConvoyReturnHistoryV162,
   preserveConvoyReturnHistoryV162 } from './campaign-convoy-history-v162.js';
+import { createLetheContinuityV163, normalizeLetheContinuityV163,
+  preserveLetheContinuityV163 } from './campaign-lethe-continuity-v163.js';
 import {
   NARRATIVE_COLLECTABLES_V68,
   NARRATIVE_OPERATION_V68,
@@ -312,6 +318,10 @@ export function createDefaultSave(profile = 1) {
       npcAnnexCirculationV159: normalizeNpcAnnexCirculationV159(),
       npcServiceRoutesV161: normalizeNpcServiceRoutesV161(),
       npcMedicalRouteV162: normalizeNpcMedicalRouteV162(),
+      npcAnnexRoutesV163: normalizeNpcAnnexServiceRoutesV163(),
+      npcAnnexLeasesV163: normalizeNpcAnnexLeasesV163(),
+      npcServiceTrafficV163: normalizeNpcServiceTrafficV163(),
+      hubLiftTransitV163: normalizeHubLiftTransitV163(),
       commercialV71: createHubCommercialStateV71(),
       annexOperationsV71: createHubAnnexOperationsV71(),
       pendingModuleActionV71: null,
@@ -340,6 +350,7 @@ export function createDefaultSave(profile = 1) {
     narrativeEvidenceV132: createNarrativeEvidenceV132(),
     archiveRelayArchivesV122: createArchiveRelayArchiveV122(),
     convoyReturnHistoryV162: createConvoyReturnHistoryV162(),
+    letheContinuityV163: createLetheContinuityV163(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
@@ -1501,6 +1512,7 @@ export function beginOperation(save, campaign, world) {
   }
   if (strategy.currentOperation) throw new Error('Une autre operation est deja en cours.');
   preserveConvoyReturnHistoryV162(save);
+  preserveLetheContinuityV163(save);
   strategy.selectedVehicleId = resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const brief = getOperationBrief(save, campaign, world);
   if (!brief.worldUnlocked) throw new Error('Route verrouillee : effectuez une reconnaissance.');
@@ -2039,6 +2051,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   strategy.currentOperation = null;
   addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !resolvedSuccess, result });
   preserveConvoyReturnHistoryV162(save);
+  preserveLetheContinuityV163(save);
   return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation,
     ...(specialRewardV121 ? { strategicRewardV121: structuredClone(paidStrategicRewardV121),
       expectedStrategicRewardV121: structuredClone(specialRewardV121.strategicReward) } : {}) };
@@ -2124,6 +2137,10 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.npcAnnexCirculationV159 = normalizeNpcAnnexCirculationV159(hub.npcAnnexCirculationV159);
   migrated.hub.npcServiceRoutesV161 = normalizeNpcServiceRoutesV161(hub.npcServiceRoutesV161);
   migrated.hub.npcMedicalRouteV162 = normalizeNpcMedicalRouteV162(hub.npcMedicalRouteV162);
+  migrated.hub.npcAnnexRoutesV163 = normalizeNpcAnnexServiceRoutesV163(hub.npcAnnexRoutesV163);
+  migrated.hub.npcAnnexLeasesV163 = normalizeNpcAnnexLeasesV163(hub.npcAnnexLeasesV163);
+  migrated.hub.npcServiceTrafficV163 = normalizeNpcServiceTrafficV163(hub.npcServiceTrafficV163);
+  migrated.hub.hubLiftTransitV163 = normalizeHubLiftTransitV163(hub.hubLiftTransitV163);
   const commercialV71 = hub.hubCommercialV71 ?? hub.commercialV71 ?? hub.hubExpansionV71;
   migrated.hub.commercialV71 = sanitizeHubCommercialStateV71(commercialV71);
   migrated.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(hub.annexOperationsV71);
@@ -2317,6 +2334,9 @@ export function migrateSave(input, profile = 1) {
     narrativeArchives: migrated.narrativeArchives, archiveRelayArchivesV122: source.archiveRelayArchivesV122
   });
   migrated.archiveRelayArchivesV122 = normalizeArchiveRelayArchiveV122(source.archiveRelayArchivesV122);
+  migrated.letheContinuityV163 = normalizeLetheContinuityV163(source.letheContinuityV163,
+    { resolvedSerial: migrated.strategy.specialOperationResolutionSerialV121 });
+  preserveLetheContinuityV163(migrated);
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);

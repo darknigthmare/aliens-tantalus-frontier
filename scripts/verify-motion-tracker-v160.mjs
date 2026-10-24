@@ -560,6 +560,54 @@ test('compact layout keeps the radar above the grounded player at actual mobile 
   }
 });
 
+test('compact tracker avoids actual projected high and grounded bodies at288/320/360/390px on either side and in vehicles', () => {
+  const overlap = (a,b) => a.x < b.x+b.width && a.x+a.width > b.x && a.y < b.y+b.height && a.y+a.height > b.y;
+  for (const viewportWidth of [288,320,360,390]) for (const vehicle of [false,true]) {
+    for (const facing of [-1,1]) for (const floorY of [240,624]) for (const cameraX of [100,560,1100]) {
+      const actor = { x:1200, y:floorY-92, w:44, h:92, facing }, camera = { x:cameraX, y:0 };
+      const original = structuredClone(actor), bounds = motionTrackerActorBoundsV160(actor,camera);
+      const layout = motionTrackerLayoutV160({ viewportWidth,vehicle,actorScreenBounds:bounds });
+      assert.ok(!overlap(layout,bounds), `${viewportWidth}px floor${floorY} camera${cameraX} facing${facing} vehicle${vehicle}`);
+      assert.ok(layout.x>=0 && layout.x+layout.width<=1280 && layout.y>=0 && layout.y+layout.height<=720);
+      assert.ok(Math.abs(layout.width*viewportWidth/1280-176)<1e-8);
+      assert.ok(Math.abs(layout.height*viewportWidth/1280-82)<1e-8);
+      if (floorY===240 && cameraX===560) assert.ok(layout.y>=bounds.y+bounds.height);
+      assert.deepEqual(actor,original,'body projection never rewrites the actor or its facing');
+    }
+  }
+});
+
+test('moving the compact instrument around the body preserves every radar drawing command outside translation and leaves measured contacts immutable', () => {
+  const drawCalls = (model,options) => {
+    const calls=[],context=new Proxy({}, {
+      set(_target,key,value) { calls.push(['set',String(key),value]); return true; },
+      get(_target,key) { return (...values)=>calls.push(['call',String(key),...values]); }
+    });
+    assert.equal(drawMotionTrackerDisplayV160(context,model,options),true);
+    return calls;
+  };
+  for (const viewportWidth of [288,320,360,390]) for (const vehicle of [false,true]) {
+    for (const heading of [-1,1]) for (const reducedMotion of [false,true]) {
+      const model = { active:true,range:900,sweep:.45,heading,nearestDistance:120,currentMovement:true,
+        contacts:[{sector:'front',distance:120,bearing:.3,alpha:.9,currentMotion:true},
+          {sector:'rear',distance:240,bearing:2.8,alpha:.7,currentMotion:false},
+          {sector:'above',distance:280,bearing:-1.4,alpha:.6,currentMotion:true},
+          {sector:'depth',distance:400,bearing:0,alpha:.5,currentMotion:false}] };
+      const original = structuredClone(model), camera = {x:560,y:0};
+      const high = motionTrackerActorBoundsV160({x:1200,y:148,w:44,h:92},camera);
+      const ground = motionTrackerActorBoundsV160({x:1200,y:532,w:44,h:92},camera);
+      const common = {viewportWidth,vehicle,reducedMotion};
+      const highCalls=drawCalls(model,{...common,actorScreenBounds:high});
+      const groundCalls=drawCalls(model,{...common,actorScreenBounds:ground});
+      const translations=calls=>calls.filter(call=>call[0]==='call' && call[1]==='translate');
+      assert.notDeepEqual(translations(highCalls),translations(groundCalls));
+      const radar=calls=>calls.filter(call=>!(call[0]==='call' && call[1]==='translate'));
+      assert.deepEqual(radar(highCalls),radar(groundCalls),'relative arcs, dots, sectors, text, alpha and scale are unchanged');
+      assert.deepEqual(model,original);
+    }
+  }
+});
+
 test('compact layout moves to the clear corner when an elevated player cannot fit underneath it', () => {
   for (const viewportWidth of [320, 390, 720]) {
     const actorScreenBounds = { x: 1090, y: 150, width: 130, height: 150 };

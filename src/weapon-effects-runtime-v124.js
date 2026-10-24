@@ -1,4 +1,5 @@
 import { getWeaponPresentationProfileV124 } from './weapon-presentation-profiles-v124.js';
+import { RELOAD_DISCARD_PROGRESS_V163 } from './reload-presentation-v163.js';
 import {
   createWeaponEffectsV124, resetWeaponEffectsV124, emitWeaponShotEffectsV124, emitWeaponCycleEffectsV124,
   emitWeaponReloadEffectsV124, updateWeaponEffectsV124,
@@ -9,7 +10,7 @@ const list = value => Array.isArray(value) ? value : [];
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const VIEWPORT = Object.freeze({ width: 1280, height: 720 });
 const DEFAULT_BOUNDS = Object.freeze({ width: 6200, height: 1080 });
-const RELOAD_DISCARD_PHASE = 0.35;
+const RELOAD_DISCARD_PHASE = RELOAD_DISCARD_PROGRESS_V163;
 const profileKey = profile => profile.weaponId || profile.name || profile.mechanism;
 
 /** Cosmetic integration observes accepted simulation events. It never spends,
