@@ -208,6 +208,13 @@ export function withHubNpcAnnexLeasesV163(Base) {
       return [...cohort.filter(a => !ids.has(a.crewId)), ...leased.map(d => this.getNpcAnnexLeaseActorV163(d.id))
         .filter(a => a && HUB_NPC_ANNEX_LEASE_DEFINITIONS_V163.some(d => d.crewId === a.crewId && d.annexRoomId === a.roomId))];
     }
+    npcAnnexPhysicalPeersV163() {
+      const room = this.currentAnnexV71?.();
+      // Native route owners suppress their own tick, not their physical body.
+      // The unfiltered cohort retains every exact singleton as a collision
+      // peer while another owner alone advances its pose.
+      return room ? this.ensureAnnexNpcCohortV141().filter(actor => actor.roomId === room.id) : [];
+    }
     getNpcServiceTrafficIntentsV163() {
       const intents = super.getNpcServiceTrafficIntentsV163?.() || [];
       for (const d of HUB_NPC_ANNEX_LEASE_DEFINITIONS_V163) {

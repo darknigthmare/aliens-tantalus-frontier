@@ -55,26 +55,46 @@ jobs:
           for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
           export ATF_BASE_URL=http://127.0.0.1:4173
           export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          annotate_failure() {
+            python - "$1" "$2" <<'PYREPORT'
+          import json
+          from pathlib import Path
+          import sys
+          script, report_path = sys.argv[1:]
+          def scalar(value):
+              return str(value)[:1800] if isinstance(value, (str, int, float, bool)) or value is None else '<non-scalar omitted>'
+          def escape(value):
+              return value.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          try:
+              report = json.loads(Path(report_path).read_text())
+              if not isinstance(report, dict):
+                  raise ValueError('report root is not an object')
+              detail = '; '.join(key + '=' + scalar(report.get(key)) for key in ('status', 'phase', 'error'))
+          except Exception as error:
+              detail = 'report unavailable: ' + type(error).__name__ + ': ' + str(error)[:500]
+          print('::error file=' + script + ',title=Native browser QA::' + escape(script + ' pipeline failed; ' + detail), flush=True)
+          PYREPORT
+          }
           status=0
           case "$WORKSTREAM" in
             campaign)
-              python scripts/qa-campaign-lethe-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/campaign" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/campaign.log" || status=1
+              python scripts/qa-campaign-lethe-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/campaign" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/campaign.log" || { status=1; annotate_failure scripts/qa-campaign-lethe-v163.py "$RUNNER_TEMP/atf-gameplay-v163/campaign/report.json"; }
               ;;
             crew-lifts)
-              python scripts/qa-npc-annex-service-routes-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew.log" || status=1
-              python scripts/qa-hub-lift-transit-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/lifts" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/lifts.log" || status=1
+              python scripts/qa-npc-annex-service-routes-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew.log" || { status=1; annotate_failure scripts/qa-npc-annex-service-routes-v163.py "$RUNNER_TEMP/atf-gameplay-v163/crew/report.json"; }
+              python scripts/qa-hub-lift-transit-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/lifts" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/lifts.log" || { status=1; annotate_failure scripts/qa-hub-lift-transit-v163.py "$RUNNER_TEMP/atf-gameplay-v163/lifts/report.json"; }
               ;;
             crew-leases)
-              python scripts/qa-npc-annex-leases-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew-leases" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew-leases.log" || status=1
+              python scripts/qa-npc-annex-leases-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/crew-leases" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/crew-leases.log" || { status=1; annotate_failure scripts/qa-npc-annex-leases-v163.py "$RUNNER_TEMP/atf-gameplay-v163/crew-leases/report.json"; }
               ;;
             weapons-title)
-              python scripts/qa-reload-branches-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/reloads" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/reloads.log" || status=1
-              python scripts/qa-title-compositions-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/title" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/title.log" || status=1
+              python scripts/qa-reload-branches-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/reloads" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/reloads.log" || { status=1; annotate_failure scripts/qa-reload-branches-v163.py "$RUNNER_TEMP/atf-gameplay-v163/reloads/report.json"; }
+              python scripts/qa-title-compositions-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/title" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/title.log" || { status=1; annotate_failure scripts/qa-title-compositions-v163.py "$RUNNER_TEMP/atf-gameplay-v163/title/report.json"; }
               ;;
             trials)
-              python scripts/qa-xeno-trials-capture-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/captures" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/captures.log" || status=1
-              python scripts/qa-native-rig-catalog-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/rigs.log" || status=1
-              python scripts/qa-trials-continuity-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/continuity" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/continuity.log" || status=1
+              python scripts/qa-xeno-trials-capture-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/captures" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/captures.log" || { status=1; annotate_failure scripts/qa-xeno-trials-capture-v163.py "$RUNNER_TEMP/atf-gameplay-v163/captures/report.json"; }
+              python scripts/qa-native-rig-catalog-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/rigs.log" || { status=1; annotate_failure scripts/qa-native-rig-catalog-v163.py "$RUNNER_TEMP/atf-gameplay-v163/rigs/report.json"; }
+              python scripts/qa-trials-continuity-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/continuity" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/continuity.log" || { status=1; annotate_failure scripts/qa-trials-continuity-v163.py "$RUNNER_TEMP/atf-gameplay-v163/continuity/report.json"; }
               ;;
           esac
           exit "$status"

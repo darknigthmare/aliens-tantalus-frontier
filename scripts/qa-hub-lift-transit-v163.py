@@ -407,6 +407,11 @@ def cancellation_case(page, profile, config, input_mode='keyboard'):
         page.locator('[data-hub-control="interact"]').tap()
     else:
         page.keyboard.press('KeyE')
+    # Returning lasts only the native 0.65s. Stop through the real visible exit
+    # before transferring snapshots, encoding/writing evidence or printing
+    # checks; those observations must not consume the phase being saved.
+    page.locator('#exit-hub').click()
+    stopped = observed(page, config)
     first = page.evaluate('()=>window.__V163_FIRST_CANCEL__')
     first_state = {key: value for key, value in first.items() if key != 'png'}
     save_frame(label + '-first-native-returning-draw.png', first)
@@ -420,8 +425,6 @@ def cancellation_case(page, profile, config, input_mode='keyboard'):
     check(label + ': cancellation comes from the real requested browser input', first_state['cancellationInput']['isTrusted']
           and first_state['cancellationInput']['type'] == ('pointerdown' if input_mode == 'touch' else 'keydown')
           and (input_mode != 'touch' or first_state['cancellationInput']['pointerType'] == 'touch'))
-    page.locator('#exit-hub').click()
-    stopped = observed(page, config)
     partial = collect(page, label, 'before-reload')
     durable = stopped['savedHub']
     check(label + ': native exit durably preserves the exact returning source pose', not stopped['running']

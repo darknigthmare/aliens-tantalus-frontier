@@ -549,7 +549,9 @@ export function withLegacyMissionsV131(BaseEngine) {
         ctx.fillStyle = '#e9c073'; for (const bomb of this.legacyBombsV131) ctx.fillRect(bomb.x, bomb.y, bomb.w, bomb.h);
       }
       for (const station of LEGACY_STATIONS_V131[state.kind].filter(entry => entry.seconds > 0)) {
-        ctx.fillStyle = '#244847'; ctx.fillRect(station.x - 18, station.y - 24, 36, 48);
+        // A flight hold is a navigation point, not a solid fitting over the
+        // existing Cheyenne. Preserve its label and native E proximity action.
+        if (state.kind !== 'broodstorm') { ctx.fillStyle = '#244847'; ctx.fillRect(station.x - 18, station.y - 24, 36, 48); }
         ctx.fillStyle = '#a2dfcc'; ctx.fillText(station.label, station.x - 70, station.y - 36, 220);
       }
       ctx.restore();
@@ -560,9 +562,15 @@ export function withLegacyMissionsV131(BaseEngine) {
       const resources = state.kind === 'nostromo' ? `SYNCHRO ${Math.round(state.synchronization)}% · AUTO ${Math.ceil(state.countdown)} s`
         : state.kind === 'abyss' ? `O₂ ${Math.ceil(state.oxygen)} · PRESSION ${Math.ceil(state.pressure)} · HADAL ${state.hadalMode} · MANTA ${Math.ceil(state.battery)}%`
           : `COQUE ${Math.ceil(state.hull)} · ESCORTE ${Math.ceil(state.escort.hull)} · CARB ${Math.ceil(state.fuel)} · BOMBES ${state.bombs} · AILE ${state.wingMode}`;
-      ctx.save(); ctx.fillStyle = '#071c24ed'; ctx.fillRect(18, 113, 1220, 89); ctx.fillStyle = '#bce3dc'; ctx.font = 'bold 13px monospace';
+      // The inherited objective text occupies y103..135. A translucent
+      // chapter band lets that text ghost through its own flight instructions.
+      const flightHud = state.kind === 'broodstorm';
+      ctx.save(); ctx.fillStyle = flightHud ? '#071c24' : '#071c24ed';
+      ctx.fillRect(18, flightHud ? 102 : 113, 1220, flightHud ? 100 : 89); ctx.fillStyle = '#bce3dc'; ctx.font = 'bold 13px monospace';
       ctx.fillText(`${dossier.title} · ${resources}`, 30, 132, 1190); ctx.font = '11px monospace';
-      ctx.fillText(dossier.instruction, 30, 151, 1190); ctx.fillText(`CHAPITRE PARTIEL · ${dossier.limitations}`, 30, 169, 1190);
+      ctx.fillText(dossier.instruction, 30, 151, 1190);
+      ctx.fillText(flightHud ? 'CHARGES LIMITÉES · Viser avant le largage et protéger l’escorte.'
+        : `CHAPITRE PARTIEL · ${dossier.limitations}`, 30, 169, 1190);
       ctx.fillText(this.getInteractionPrompt(), 30, 190, 1190); ctx.restore();
     }
   };

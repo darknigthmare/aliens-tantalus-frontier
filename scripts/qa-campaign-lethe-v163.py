@@ -86,6 +86,97 @@ def capture(page, name, selector='#game-canvas'):
     report['captures'].append(name)
 
 
+def verify_insertion_layout(page, label):
+    # Measure the real component, its actual reading viewport and every prose
+    # block. Native wheel input proves the last actions can really be reached.
+    original_viewport = dict(page.viewport_size)
+    measure = '''async root => {
+      await document.fonts.ready;
+      const parent=root.closest('.play-view'),panel=root.querySelector('.mission-insertion-v62__panel');
+      const box=node=>{const r=node.getBoundingClientRect(),style=getComputedStyle(node);
+        const range=document.createRange();range.selectNodeContents(node);
+        return {text:node.textContent.trim(),left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,
+          clientWidth:node.clientWidth,scrollWidth:node.scrollWidth,clientHeight:node.clientHeight,
+          scrollHeight:node.scrollHeight,scrollTop:node.scrollTop,fontSize:style.fontSize,overflowY:style.overflowY,action:node.dataset.insertionAction||null,
+          textRects:[...range.getClientRects()].filter(b=>b.width&&b.height).map(b=>({left:b.left,right:b.right}))};};
+      const photo=parent.querySelector(':scope > [data-field-media-capture-v135]');
+      return {viewport:innerWidth,parent:box(parent),root:box(root),panel:box(panel),
+        photoCapture:photo&&!photo.hidden&&photo.getClientRects().length?box(photo):null,
+        containers:[root.querySelector('.mission-insertion-v62__header'),root.querySelector('.mission-insertion-v62__body')].map(box),
+        heading:box(panel.querySelector(':scope > h2')),
+        prose:[...root.querySelectorAll(`.mission-insertion-v62__header h2,.mission-insertion-v62__header p,
+          .mission-insertion-v62__panel h2,.mission-insertion-v62__panel h3,.mission-insertion-v62__panel p,
+          .mission-insertion-v62__dialogue-line > div,.mission-insertion-v62__story-choice > strong,
+          .mission-insertion-v62__story-choice > span,.mission-insertion-v62__shot-label,.mission-insertion-v62__credit,
+          .mission-insertion-v62__live`)].filter(n=>n.getClientRects().length).map(box),
+        controls:[...panel.querySelectorAll('button')].filter(n=>!n.hidden&&n.getClientRects().length).map(box)};
+    }'''
+    settle = '()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))'
+    try:
+        for width in [1600, 390, 320]:
+            page.set_viewport_size({'width': width, 'height': 1000})
+            page.mouse.move(width / 2, 500)
+            page.mouse.wheel(0, -100000)
+            page.evaluate(settle)
+            row = page.locator('#mission-insertion-v62').evaluate(measure)
+            row['label'] = label
+            report.setdefault('insertionLayoutMeasurements', []).append(row)
+            parent, root, panel = row['parent'], row['root'], row['panel']
+            check(label + ': insertion uses its complete real reading viewport without horizontal overflow at ' + str(width) + 'px',
+                  parent['left'] >= -1 and parent['right'] <= width + 1 and parent['width'] >= width - 1
+                  and abs(root['left'] - parent['left']) <= 1 and abs(root['width'] - parent['clientWidth']) <= 1
+                  and parent['scrollWidth'] <= parent['clientWidth'] + 1 and root['scrollWidth'] <= root['clientWidth'] + 1
+                  and all(c['scrollWidth'] <= c['clientWidth'] + 1 and c['left'] >= root['left'] - 1
+                      and c['right'] <= root['right'] + 1 for c in [panel] + row['containers']))
+            check(label + ': header, dialogue and every prose line stay within their actual component at ' + str(width) + 'px',
+                  bool(row['prose']) and all(text['scrollWidth'] <= text['clientWidth'] + 1
+                      and text['left'] >= root['left'] - 1 and text['right'] <= root['right'] + 1
+                      and all(line['left'] >= text['left'] - 1 and line['right'] <= text['right'] + 1 for line in text['textRects'])
+                      for text in row['prose']))
+            check(label + ': every visible preparation choice and action fits its native panel at ' + str(width) + 'px',
+                  bool(row['controls']) and all(c['scrollWidth'] <= c['clientWidth'] + 1
+                      and c['left'] >= panel['left'] - 1 and c['right'] <= panel['right'] + 1 for c in row['controls']))
+            photo = row['photoCapture']
+            check(label + ': photograph action stays readable in the reading flow without covering insertion at ' + str(width) + 'px',
+                  photo is not None and photo['scrollWidth'] <= photo['clientWidth'] + 1
+                  and photo['left'] >= parent['left'] - 1 and photo['right'] <= parent['right'] + 1
+                  and (photo['bottom'] <= root['top'] + 1 or photo['top'] >= root['bottom'] - 1))
+            viewport_file = label + '-viewport-' + str(width) + 'px.png'
+            page.screenshot(path=str(output / viewport_file))
+            report['captures'].append(viewport_file)
+            capture(page, label + '-layout-' + str(width) + 'px.png', '#mission-insertion-v62')
+            # Return the pointer to the actual scroll owner after element capture;
+            # no DOM scroll setter or programmatic game control is used.
+            page.mouse.move(width / 2, 500)
+            page.mouse.wheel(0, -100000)
+            page.evaluate(settle)
+            scroll_start = page.locator('#mission-insertion-v62').evaluate(measure)
+            row['nativeScrollStart'] = scroll_start['parent']
+            for _ in range(12):
+                page.mouse.wheel(0, 800)
+                page.evaluate(settle)
+                reached = page.locator('#mission-insertion-v62').evaluate(measure)
+                final_actions = [c for c in reached['controls'] if c['action'] in ['advance', 'pause']]
+                photo_end = reached['photoCapture']
+                if (final_actions and all(c['top'] >= 0 and c['bottom'] <= 1000 for c in final_actions)
+                        and photo_end is not None and photo_end['top'] >= 0 and photo_end['bottom'] <= 1000):
+                    break
+            row['nativeScrollEnd'] = {'parent': reached['parent'], 'controls': reached['controls'], 'photoCapture': reached['photoCapture']}
+            check(label + ': native wheel reaches every final action in the real reading viewport at ' + str(width) + 'px',
+                  reached['parent']['overflowY'] in ['auto', 'scroll']
+                  and scroll_start['parent']['scrollTop'] <= 1
+                  and (scroll_start['parent']['scrollHeight'] <= scroll_start['parent']['clientHeight'] + 1
+                       or reached['parent']['scrollTop'] > scroll_start['parent']['scrollTop'])
+                  and {c['action'] for c in final_actions} == {'advance', 'pause'}
+                  and all(c['top'] >= 0 and c['bottom'] <= 1000 for c in final_actions)
+                  and photo_end is not None and photo_end['top'] >= 0 and photo_end['bottom'] <= 1000)
+            end_file = label + '-viewport-actions-' + str(width) + 'px.png'
+            page.screenshot(path=str(output / end_file))
+            report['captures'].append(end_file)
+    finally:
+        page.set_viewport_size(original_viewport)
+
+
 def continue_profile(page):
     page.locator('#title-start').click(timeout=45000)
     page.locator('#title-continue').click()
@@ -250,6 +341,7 @@ with sync_playwright() as pw:
         resumed = observed(page)['save']
         check('reload restores the same insertion phase, choice, operation and strategic payment', page.locator('[data-story-protocol="lift-review"]').get_attribute('aria-pressed') == 'true' and resumed['strategy']['currentOperation']['id'] == paused['strategy']['currentOperation']['id'] and resumed['galaxy'] == paused['galaxy'] and resumed['clock'] == paused['clock'])
         capture(page, '03-c12-preparation-resumed.png', '#mission-insertion-v62')
+        verify_insertion_layout(page, 'c12-preparation-resumed')
         start_runtime(page, 'special-c12-horde')
         complete_c12(page)
         victory = observed(page)['save']

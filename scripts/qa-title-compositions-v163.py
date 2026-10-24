@@ -28,6 +28,55 @@ if output == repo or repo in output.parents:
 output.mkdir(parents=True, exist_ok=True)
 presets = ['frontier-night', 'storm-terminator', 'ember-quarantine']
 modes = ['full', 'reduced', 'static']
+# Authored exterior compositions (catalogue V79/V87). Static intentionally
+# omits the near-star layers and image scan sweep; its retained procedural VFX
+# is frozen by the native static mode. A layer-count minimum cannot express it.
+COMMON_LAYERS = {
+    'deep-space': 'space', 'stars-far': 'stars', 'frontier-nebula': 'nebula',
+    'frontier-world': 'planet', 'terminator-glow': 'atmosphere',
+    'storm-bands': 'clouds', 'sensor-sweep': 'vfx',
+    'bitmap-space-01-deep-frontier': 'space', 'bitmap-stars-01-distant-field': 'stars',
+    'bitmap-nebula-01-cold-ion': 'nebula'}
+MOTION_LAYERS = {'stars-near': 'stars', 'bitmap-stars-02-near-sparks': 'stars',
+                 'bitmap-vfx-03-scan-sweep': 'vfx'}
+PRESET_LAYERS = {
+    'frontier-night': {'shipId': 'uss-sulaco',
+        'shipAssetIds': ['orbitals-uss-sulaco-reference-v87', 'orbitals-uss-sulaco-rear-quarter-v90'], 'layers': {
+        'bitmap-planet-01-acheron': 'planet', 'bitmap-atmosphere-02-acheron-storm': 'atmosphere',
+        'bitmap-clouds-01-acheron-storm': 'clouds'}},
+    'storm-terminator': {'shipId': 'uscss-nostromo',
+        'shipAssetIds': ['orbitals-uscss-nostromo-reference-v87', 'orbitals-uscss-nostromo-front-quarter-v90'], 'layers': {
+        'bitmap-planet-02-ceto-basin': 'planet', 'bitmap-atmosphere-01-ceto-cyan': 'atmosphere'}},
+    'ember-quarantine': {'shipId': 'narcissus',
+        'shipAssetIds': ['orbitals-narcissus-reference-v87', 'orbitals-narcissus-front-quarter-v90', 'orbitals-narcissus-side-quarter-v90'], 'layers': {
+        'bitmap-planet-03-mire-9': 'planet', 'bitmap-atmosphere-03-mire-9': 'atmosphere'}}}
+
+
+def expected_composition(preset, mode, ship_asset_id):
+    expected = {**COMMON_LAYERS, **PRESET_LAYERS[preset]['layers'],
+                'bitmap-' + ship_asset_id: 'orbitals'}
+    if mode != 'static':
+        expected.update(MOTION_LAYERS)
+    return expected
+
+
+def composition_matches(before, preset, mode):
+    scene = before['title']['scene']
+    expected = expected_composition(preset, mode, scene['shipAssetId'])
+    layers = before['layers']
+    return (scene['presetId'] == preset and scene['mode'] == mode
+            and scene['shipId'] == PRESET_LAYERS[preset]['shipId']
+            and scene['shipAssetId'] in PRESET_LAYERS[preset]['shipAssetIds']
+            and before['sceneData']['mode'] == mode
+            and scene['layerCount'] == len(layers) == len(expected)
+            and {layer['id']: layer['role'] for layer in layers} == expected
+            and set(scene['roles']) == set(expected.values())
+            and len(before['images']) == sum(layer_id.startswith('bitmap-') for layer_id in expected)
+            and all(layer['renderer'] == ('image' if layer['id'].startswith('bitmap-') else 'procedural')
+                    and (not layer['id'].startswith('bitmap-') or layer['assetId'] == layer['id'][7:])
+                    for layer in layers))
+
+
 report = {'status': 'running', 'stage': args.stage, 'phase': 'prepare', 'checks': [], 'captures': [], 'rows': [],
           'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
           'method': 'Declared initial profile via native Save file input; actual title preview, keyboard menu and Options/return controls; read-only title/profile observations.',
@@ -40,6 +89,35 @@ def check(label, condition):
     assert condition, label
     report['checks'].append(label)
     print('PASS ' + label, flush=True)
+
+
+def profile_changes(before, after, path=''):
+    """Retain every changed JSON value; expected commit fields stay visible."""
+    missing = object()
+
+    def visit(left, right, pointer):
+        if type(left) is type(right) and not isinstance(left, (dict, list)) and left == right:
+            return []
+        if isinstance(left, dict) and isinstance(right, dict):
+            result = []
+            for key in sorted(set(left) | set(right)):
+                token = str(key).replace('~', '~0').replace('/', '~1')
+                result.extend(visit(left.get(key, missing), right.get(key, missing), pointer + '/' + token))
+            return result
+        if isinstance(left, list) and isinstance(right, list):
+            result = []
+            for index in range(max(len(left), len(right))):
+                result.extend(visit(left[index] if index < len(left) else missing,
+                                    right[index] if index < len(right) else missing, pointer + '/' + str(index)))
+            return result
+        change = {'path': pointer, 'beforePresent': left is not missing, 'afterPresent': right is not missing}
+        if left is not missing:
+            change['before'] = left
+        if right is not missing:
+            change['after'] = right
+        return [change]
+
+    return visit(before, after, path)
 
 
 def phase(label):
@@ -83,6 +161,7 @@ report['identityBefore'] = identity()
 OBSERVE = """()=>{const t=__ATF_V61__.snapshot(),root=document.querySelector('#title-scene-v79');
  return {title:t,focus:document.activeElement?.id,sceneData:{...root.dataset},
  flight:{x:root.style.getPropertyValue('--title-flight-x-v88'),y:root.style.getPropertyValue('--title-flight-y-v88')},
+ layers:[...root.children].map(n=>({id:n.dataset.layerId,role:n.dataset.role,renderer:n.dataset.renderer,assetId:n.dataset.assetId||null})),
  images:[...root.querySelectorAll('[data-renderer="image"]')].map(n=>({id:n.dataset.assetId,status:n.dataset.assetStatus,
  hidden:n.hidden,angle:n.dataset.shipAngle,background:getComputedStyle(n).backgroundImage})),
  controls:[...document.querySelectorAll('#title-menu button')].filter(n=>!n.hidden).map(n=>{const r=n.getBoundingClientRect();
@@ -148,8 +227,11 @@ with sync_playwright() as pw:
                         page.keyboard.press('Enter')
                     page.wait_for_function('()=>__ATF_V61__.snapshot().state==="menu"')
                     before = observed(page)
-                    check(label + ': actual delivered layered preset and requested motion mode', before['title']['scene']['presetId'] == preset
-                          and before['title']['scene']['mode'] == mode and before['title']['scene']['layerCount'] >= 15)
+                    report['activeCompositionContract'] = {'id': label, 'preset': preset, 'mode': mode,
+                        'shipId': PRESET_LAYERS[preset]['shipId'],
+                        'expectedLayerRoles': expected_composition(preset, mode, before['title']['scene']['shipAssetId'])}
+                    check(label + ': actual delivered layered preset and requested motion mode',
+                          composition_matches(before, preset, mode))
                     check(label + ': production images decoded without fallback failure', before['title']['scene']['missingAssetCount'] == 0
                           and before['title']['scene']['readyAssetCount'] >= 4 and not before['title']['scene']['fallbackVisible']
                           and all(image['status'] == 'ready' for image in before['images']))
@@ -172,13 +254,29 @@ with sync_playwright() as pw:
                     ready(page)
                     page.wait_for_function('()=>document.activeElement?.id==="title-options"')
                     after = observed(page)
+                    # Return to title invokes the real commitCurrentRuntimeV78:
+                    # SaveSystem updates the root save timestamp and migration
+                    # provenance. Retain all values before asserting so any
+                    # unexpected gameplay or metadata mutation remains visible.
+                    changes = profile_changes(before['profile'], after['profile'])
+                    report['rows'].append({'id': label, 'initialProfileSha256': hashlib.sha256(raw).hexdigest(),
+                                           'before': before, 'after': after, 'focusOrder': focus_order,
+                                           'profileChanges': changes,
+                                           'expectedNativeCommitMetadata': {
+                                               'updatedAt': 'finite nondecreasing root save timestamp',
+                                               'migratedFrom': before['profile']['release']}})
                     check(label + ': Options returns to the same native composition and focus', after['title']['state'] == 'menu'
                           and after['focus'] == 'title-options' and all(before['title']['scene'][key] == after['title']['scene'][key]
                           for key in ['presetId', 'mode', 'placementId', 'shipAssetId', 'shipAngleId']))
-                    check(label + ': title and Options leave the exact profile untouched', before['profile'] == after['profile'])
+                    check(label + ': native title return writes only the declared commit metadata',
+                          type(after['profile'].get('updatedAt')) is int
+                          and after['profile']['updatedAt'] >= before['profile']['updatedAt']
+                          and after['profile'].get('migratedFrom') == before['profile']['release'])
+                    expected_profile = {**before['profile'], 'updatedAt': after['profile']['updatedAt'],
+                                        'migratedFrom': before['profile']['release']}
+                    check(label + ': title and Options preserve every other exact profile value',
+                          not profile_changes(expected_profile, after['profile']))
                     capture(page, label + '-options-return.png')
-                    report['rows'].append({'id': label, 'initialProfileSha256': hashlib.sha256(raw).hexdigest(),
-                                           'before': before, 'after': after, 'focusOrder': focus_order})
                     context.close()
         check('no browser runtime, network or HTTP error during delivered title matrix', not report['pageErrors']
               and not report['requestFailures'] and not report['httpErrors'])

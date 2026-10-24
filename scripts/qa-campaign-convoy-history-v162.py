@@ -84,6 +84,19 @@ def open_plan(page, campaign=None):
     page.locator('#operation-launch').wait_for(state='visible')
 
 
+def advance_to(page, target):
+    # Follow the same public insertion controls as the native APC prelude.
+    # A first C12 reading cannot use skip without a previously earned receipt.
+    for _ in range(8):
+        phase = page.locator('#mission-insertion-v62').get_attribute('data-insertion-phase')
+        report.setdefault('secondaryInsertionPhases', []).append(phase)
+        if phase == target:
+            return
+        page.locator('[data-insertion-action="advance"]').click()
+        page.wait_for_function('previous=>document.querySelector("#mission-insertion-v62").dataset.insertionPhase!==previous', arg=phase)
+    raise AssertionError('Insertion phase unavailable: ' + target)
+
+
 def capture(page, name, selector='#operation-plan'):
     page.locator(selector).screenshot(path=str(output / name))
     report['captures'].append(name)
@@ -167,6 +180,9 @@ try:
     expected_archive = json.loads(json.dumps(after_reading['convoyReturnHistoryV162']))
     open_plan(page, 'special-c12-horde')
     page.locator('#operation-launch').click()
+    page.locator('#mission-insertion-v62[data-insertion-phase="briefing"]').wait_for(state='visible')
+    advance_to(page, 'player-control')
+    page.locator('[data-insertion-action="advance"]').click()
     page.wait_for_function('()=>__ATF_GAME__.running&&__ATF_GAME__.isC12HordeV121?.()')
     second_operation = observe(page)['save']['strategy']['currentOperation']['id']
     check('a different native operation starts without altering the convoy archive',

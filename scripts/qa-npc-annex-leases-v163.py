@@ -97,12 +97,13 @@ OBSERVE = '''c => {
  const traffic=snap.npcServiceTrafficV163||null;
  const annex=h.currentAnnexV71?.()?.id||null, visible=annex?h.activeAnnexNpcsV141():h.npcs;
  const a=h.getNpcAnnexLeaseActorV163?.(c.id)||visible.find(n=>n.crewId===c.crew)||null;
- return {route:r?structuredClone(r):null,traffic:structuredClone(traffic),running:h.running,deck:h.state.deck,roomId:h.state.roomId,annex,ventActive:Boolean(h.ventActorV62),
+ return {route:r?structuredClone(r):null,traffic:structuredClone(traffic),running:h.running,nativeTime:h.animationTime,deck:h.state.deck,roomId:h.state.roomId,annex,ventActive:Boolean(h.ventActorV62),
   player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,health:h.player.health},
   camera:{...h.camera},clock:structuredClone(h.npcRoutineContextV62.clock),
   actualActor:a?{crewId:a.crewId,x:a.x,y:a.y,w:a.w,h:a.h,roomId:a.roomId,vx:a.vx,facing:a.facing,
     animation:structuredClone(a.v52Animation||null),human:structuredClone(a.humanVisualV133||null)}:null,
-  visibleCrew:visible.map(n=>({crewId:n.crewId,x:n.x,y:n.y,w:n.w,h:n.h,alive:n.alive!==false})),
+  visibleCrew:visible.map(n=>({crewId:n.crewId,roomId:n.roomId,x:n.x,y:n.y,w:n.w,h:n.h,vx:n.vx,alive:n.alive!==false})),
+  nativeInteraction:{station:structuredClone(h.currentAnnexV71?.()?.station||null),stationActive:Boolean(h.nearestAnnexStationV71?.())},
   worldWidth:h.currentAnnexV71?.()?.world?.width||5120,
   visibleCount:visible.filter(n=>n.crewId===c.crew).length,
   visibleSingleton:visible.filter(n=>n.crewId===c.crew).every(n=>n===a),
@@ -205,7 +206,7 @@ def walk_to(page, config, x, precise=False):
             page.locator('#hub-canvas').focus()
             page.keyboard.press('KeyD' if delta > 0 else 'KeyA', delay=max(16, min(70, abs(delta) * 3)))
             page.wait_for_function('()=>__ATF_HUB__.player.vx===0',
-                                   timeout=min(15000, max(1, (deadline - time.monotonic()) * 1000)))
+                                   timeout=min(60000, max(1, (deadline - time.monotonic()) * 1000)))
         raise AssertionError('Native keyboard steps did not settle on the actual return arrival.')
 
 
@@ -278,29 +279,65 @@ def collect(page, config, name, stop, move_to=None, exit_after=False):
     return rows
 
 
+def annex_approach_candidates(state, config):
+    """Read-only approach planning; actual native nearestCrew still admits E."""
+    actor, player = state['actualActor'], state['player']
+    peers = [peer for peer in state['visibleCrew'] if peer['crewId'] != config['crew'] and peer['alive'] is not False
+             and abs(peer['y'] + peer['h'] - actor['y'] - actor['h']) < 36]
+    station = state['nativeInteraction']['station']
+    def clears_station(x):
+        if not station:
+            return True
+        box = station['bounds']
+        aligned = player['y'] + player['h'] >= box['y'] - 34 and player['y'] <= box['y'] + box['h'] + 28
+        # The native station owns E within72px. Extra8px protects a real
+        # keyboard release/braking step at that priority boundary.
+        gap = max(box['x'] - x - player['w'], x - box['x'] - box['w'], 0)
+        return not aligned or gap > 80
+    candidates = [actor['x'] + offset for offset in [-104, -92, -78, -60, 60, 78, 92, 104]]
+    return [x for x in candidates if 24 <= x <= state['worldWidth'] - player['w'] - 24
+            and clears_station(x)
+            and all(x + player['w'] + 12 <= peer['x'] or x >= peer['x'] + peer['w'] + 12 for peer in peers)
+            and all(abs(x + player['w'] / 2 - actor['x'] - actor['w'] / 2) + 4
+                    < abs(x + player['w'] / 2 - peer['x'] - peer['w'] / 2) for peer in peers)]
+
+
 def approach_live_npc(page, config):
-    """Follow the existing native visitor on its actual rail using keyboard only."""
-    deadline = time.monotonic() + 180
-    for _ in range(10):
+    """Follow real patrol progress until Jun is the actual native E speaker."""
+    deadline, started_native, iteration = time.monotonic() + 180, None, 0
+    while time.monotonic() < deadline:
         state = observed(page, config)
+        started_native = state['nativeTime'] if started_native is None else started_native
         actor = state['actualActor']
         if actor is None or actor['roomId'] != config['annex']:
             raise AssertionError('The actual service owner is absent from its native annex.')
         if state['inputGuards']['nearestCrew'] == config['crew']:
             return
-        peers = [peer for peer in state['visibleCrew'] if peer['crewId'] != config['crew'] and peer['alive'] is not False
-                 and abs(peer['y'] + peer['h'] - actor['y'] - actor['h']) < 36]
-        candidates = [actor['x'] + offset for offset in [-78, 78, -60, 60]]
-        candidates = [x for x in candidates if 24 <= x <= state['worldWidth'] - state['player']['w'] - 24
-                      and all(abs(x + state['player']['w'] / 2 - actor['x'] - actor['w'] / 2) + 4
-                              < abs(x + state['player']['w'] / 2 - peer['x'] - peer['w'] / 2) for peer in peers)]
-        if not candidates:
-            raise AssertionError('No native nearby interaction position separates the requested speaker from other crew.')
-        target = min(candidates, key=lambda x: abs(x - state['player']['x']))
-        walk_to(page, config, target)
-        if time.monotonic() >= deadline:
+        if state['nativeTime'] - started_native > 120:
             break
-    raise AssertionError('Real keyboard pursuit did not reach the moving native service identity.')
+        candidates = annex_approach_candidates(state, config)
+        record = {'route': config['id'], 'iteration': iteration, 'nativeTime': state['nativeTime'],
+                  'player': state['player'], 'actor': actor, 'peers': state['visibleCrew'],
+                  'nearestCrew': state['inputGuards']['nearestCrew'],
+                  'stationActive': state['nativeInteraction']['stationActive'], 'candidates': candidates}
+        report.setdefault('npcApproaches', []).append(record)
+        iteration += 1
+        if candidates:
+            target = min(candidates, key=lambda x: abs(x - state['player']['x']))
+            record['target'] = target
+            walk_to(page, config, target)
+        else:
+            # A close pair or priority station can temporarily own every
+            # approach. Wait for real native patrol displacement, without
+            # moving, hiding or changing either crew body or the player.
+            baseline = {peer['crewId']: peer['x'] for peer in state['visibleCrew']}
+            page.wait_for_function('''c=>{const h=__ATF_HUB__;
+              return h.nearestAnnexNpcV141?.()?.crewId===c.crew
+                ||h.activeAnnexNpcsV141().some(n=>Number.isFinite(c.positions[n.crewId])
+                  &&Math.abs(n.x-c.positions[n.crewId])>=2);}''',
+                arg={'crew': config['crew'], 'positions': baseline},
+                timeout=min(60000, max(1, (deadline - time.monotonic()) * 1000)))
+    raise AssertionError('Real native patrol and keyboard approach did not admit the requested service identity within120sim/180wall seconds.')
 
 
 def open_crew_dialogue(page, config):

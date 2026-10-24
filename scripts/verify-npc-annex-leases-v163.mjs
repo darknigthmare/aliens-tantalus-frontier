@@ -177,6 +177,40 @@ for (const d of leaseDefinitions) {
  });
 }
 
+test('native annex ticking keeps a leased Jun visible to Pablo collisions without taking a second movement owner at60Hz and low FPS', () => {
+ for (const dt of [1/60,.034]) {
+  const h=runtime(5.5,{deck:3,roomId:'life-support'});context(h,9.5);
+  const entry=()=>h.npcAnnexLeasesStateV163.routes['jun-maintenance'];
+  for(let i=0;i<Math.ceil(180/dt)&&(entry().actor.roomId!=='maintenance-spine'||entry().actor.stage!=='service');i++)h.update(dt);
+  assert.equal(entry().actor.roomId,'maintenance-spine');assert.equal(entry().actor.stage,'service');
+  h.local='maintenance-spine';h.player.x=1338.3882819596042; // Actual failed browser approach pose, on its real floor.
+  const jun=h.getNpcAnnexLeaseActorV163('jun-maintenance');
+  const pablo=h.activeAnnexNpcsV141().find(n=>n.crewId==='crew-13-pablo-reyes');assert.ok(pablo);
+  for(let i=0;i<Math.ceil(40/dt);i++){
+   const oldJun=jun.x,oldPablo=pablo.x;h.update(dt);
+   assert.ok(Math.abs(jun.x-pablo.x)>=44+12-1e-6,'the real same-floor bodies keep their native standing gap');
+   assert.ok(Math.abs(jun.x-oldJun)<=27*dt+1e-6);assert.ok(Math.abs(pablo.x-oldPablo)<=27*dt+1e-6);
+   assert.equal(jun.y+jun.h,624);assert.equal(pablo.y+pablo.h,624);
+   const actual=h.activeAnnexNpcsV141();assert.equal(actual.filter(n=>n.crewId===jun.crewId).length,1);
+   assert.equal(actual.find(n=>n.crewId===jun.crewId),jun);assert.equal(actual.find(n=>n.crewId===pablo.crewId),pablo);
+  }
+ }
+});
+
+test('showing any leased annex advances its saved native occupation once without resetting it through the ordinary NPC tick', () => {
+ for(const d of leaseDefinitions){
+  const h=runtime(5.5,{deck:d.deck,roomId:d.originRoomIds.at(-1)});context(h,9.5);
+  const entry=()=>h.npcAnnexLeasesStateV163.routes[d.id];
+  for(let i=0;i<180*60&&(entry().actor.roomId!==d.annexRoomId||entry().actor.stage!=='service');i++)h.update(1/60);
+  assert.equal(entry().actor.roomId,d.annexRoomId);assert.equal(entry().actor.stage,'service');
+  const actor=h.getNpcAnnexLeaseActorV163(d.id);h.local=d.annexRoomId;
+  const oldTime=entry().occupation.time,oldX=actor.x;h.update(.034);
+  assert.ok(Math.abs(entry().occupation.time-oldTime-.034)<1e-7,d.id+' has exactly one occupation clock');
+  assert.equal(h.getNpcAnnexLeaseActorV163(d.id),actor);assert.ok(Math.abs(actor.x-oldX)<=27*.034+1e-6);
+  assert.equal(h.activeAnnexNpcsV141().filter(n=>n.crewId===d.crewId).length,1);
+ }
+});
+
 test('all three leases keep one exact owner across priority releases without replacing any other leased body', () => {
  for(const d of leaseDefinitions) for(const reason of ['medical','mission','unavailable']) {
   const h=runtime(5.5);context(h,9.5);tick(h,1);

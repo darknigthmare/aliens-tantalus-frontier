@@ -366,7 +366,12 @@ with sync_playwright() as pw:
         for state_field, route_id, expected_crew_id in [
                 ('npcServiceRoutesV161', 'idris-engine', 'crew-03-idris-kwan'),
                 ('npcServiceRoutesV161', 'leila-galley', 'crew-15-leila-s-rensen'),
-                ('npcMedicalRouteV162', 'noor-morgue', 'crew-04-noor-okafor')]:
+                ('npcMedicalRouteV162', 'noor-morgue', 'crew-04-noor-okafor'),
+                ('npcAnnexRoutesV163', 'maksim-arrival', 'crew-08-maksim-orlov'),
+                ('npcAnnexRoutesV163', 'inez-bioforge', 'crew-09-inez-harlow'),
+                ('npcAnnexRoutesV163', 'asha-refuge', 'crew-12-asha-mbaye'),
+                ('npcAnnexRoutesV163', 'jun-water', 'crew-11-jun-park'),
+                ('npcAnnexRoutesV163', 'mara-archives', 'crew-01-mara-vega')]:
             before_routes = before_reload['hub'].get(state_field, {}).get('routes', {})
             after_routes = after_reload['hub'].get(state_field, {}).get('routes', {})
             old_actor = before_routes.get(route_id, {}).get('actor')
@@ -479,6 +484,13 @@ with sync_playwright() as pw:
         report['status'] = 'passed'
     except Exception as error:
         report['status'] = 'failed'; report['error'] = str(error)
+        report['lastPassedCheck'] = report['checks'][-1] if report['checks'] else None
+        # Keep CI diagnostic annotations bounded and single-command escaped;
+        # the retained private report remains authoritative for full evidence.
+        message = (str(error)[:1200] + '; phase=' + str(report.get('phase'))[:300]
+                   + '; lastPassedCheck=' + str(report['lastPassedCheck'])[:500])
+        print('::error file=scripts/qa-campaign-story-v160.py::'
+              + message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'), flush=True)
         try:
             page.screenshot(path=str(output / 'failure.png'), full_page=True)
             report['captures'].append('failure.png')

@@ -39,15 +39,17 @@ function host() {
     get src() { return this._src; }
     async decode() { if (!this.naturalWidth) throw Error('Missing shipped bitmap'); }
   };
-  const text = [], drawings = [], stack = [], gradient = { addColorStop() {} };
+  const text = [], drawings = [], paints = [], stack = [], gradient = { addColorStop() {} };
   const ctx = new Proxy({ globalAlpha: 1, save() { stack.push(this.globalAlpha); }, restore() { assert.ok(stack.length); this.globalAlpha = stack.pop(); },
-    fillText(value) { text.push(String(value)); }, drawImage(image, ...args) { assert.ok(image.naturalWidth); drawings.push({ path: image.src, args }); },
+    fillText(value, x, y) { text.push(String(value)); paints.push({ kind: 'text', text: String(value), x, y, font: this.font, style: this.fillStyle }); },
+    fillRect(x, y, w, h) { paints.push({ kind: 'rect', x, y, w, h, style: this.fillStyle }); },
+    drawImage(image, ...args) { assert.ok(image.naturalWidth); drawings.push({ path: image.src, args }); },
     measureText: value => ({ width: String(value).length * 7 }), createLinearGradient: () => gradient, createRadialGradient: () => gradient,
     getImageData: () => ({ data: new Uint8ClampedArray(4), width: 1, height: 1 }) }, { get: (target, property) => property in target ? target[property] : () => {} });
   const canvas = Object.assign(new EventTarget(), { width: 1280, height: 720, getContext: () => ctx,
     focus() { document.activeElement = this; }, getBoundingClientRect: () => ({ left: 0, top: 0, width: 1280, height: 720 }) });
   const key = (type, code) => { const event = new Event(type, { cancelable: true }); Object.assign(event, { code, repeat: false, ctrlKey: false, metaKey: false, altKey: false, isComposing: false }); window.dispatchEvent(event); };
-  return { canvas, ctx, text, drawings, stack, key };
+  return { canvas, ctx, text, drawings, paints, stack, key };
 }
 async function fixture(kind = 'nostromo', resumeState = null) {
   const browser = host(), events = [], campaign = LEGACY_CAMPAIGNS_V131.find(entry => entry.kind === kind);
@@ -215,7 +217,9 @@ test('BROODSTORM finite bombs hit actual nests, cliffs block them, director and 
   e.vehicle.x = 2650; tick(e, 1); assert.equal(e.legacyMissionV131.escort.x, escortX, 'Abandoned escort waits.');
   e.vehicle.x = e.legacyMissionV131.escort.x; tick(e, 1); assert.ok(e.legacyMissionV131.escort.x > escortX);
   assert.equal(e.activateTracker(), true); assert.equal(e.legacyMissionV131.wingMode, 'suppress');
-  e.drawWorld(ctx); e.drawHud(ctx); assert.ok(drawings.some(draw => /dropship/i.test(draw.path))); assert.ok(text.some(line => /ADAPTATION|adaptation/.test(line)));
+  e.drawWorld(ctx); e.drawHud(ctx); assert.ok(drawings.some(draw => /dropship/i.test(draw.path)));
+  assert.ok(text.some(line => line.startsWith('CHARGES LIMITÉES')));
+  assert.match(e.getLegacyMissionDossierV131().limitations, /adaptation/i, 'Art limitations remain in the dossier instead of the flight HUD.');
   const saved = e.captureResumeState(); assert.equal(e.validateLegacyResumeV131(saved).valid, true); assert.equal(e.applyResumeState(saved).applied, true);
 });
 test('resources create actual failure; dead pilot, oxygen, escort and battery never produce success', async () => {
@@ -469,4 +473,38 @@ test('BROODSTORM keyboard flight and bombing clear a real escort route and retur
   await fight(e, 20, 'queen'); assert.equal(e.legacyMissionV131.stage, 4);
   steer(subject, LEGACY_STATIONS_V131.broodstorm[4]); keyboardHold(subject, 3);
   assert.equal(e.mission.state, 'complete'); assert.equal(e.validateLegacyResumeV131(e.captureResumeState()).valid, true);
+});
+
+test('BROODSTORM station guidance leaves the Cheyenne visible and flight HUD occludes inherited duplicate text without changing native interaction', async () => {
+  for (const kind of ['broodstorm', 'nostromo', 'abyss']) {
+    const subject = await fixture(kind), e = subject.engine;
+    const station = atStation(e), prompt = e.getInteractionPrompt();
+    assert.match(prompt, /MAINTENIR E/);
+    const before = structuredClone(e.captureResumeState()), limitations = e.getLegacyMissionDossierV131().limitations;
+    subject.paints.length = 0; subject.drawings.length = 0;
+    e.drawWorld(subject.ctx);
+    const markers = subject.paints.filter(p => p.kind === 'rect' && p.style === '#244847' && p.w === 36 && p.h === 48);
+    assert.equal(markers.length, kind === 'broodstorm' ? 0 : LEGACY_STATIONS_V131[kind].filter(s => s.seconds > 0).length);
+    assert.ok(subject.paints.some(p => p.kind === 'text' && p.text === station.label));
+    if (kind === 'broodstorm') assert.ok(subject.drawings.some(d => /cheyenne|ud-4l/i.test(d.path)), 'The existing Cheyenne raster still renders.');
+    subject.paints.length = 0;
+    e.drawHud(subject.ctx);
+    const panelIndex = subject.paints.findIndex(p => p.kind === 'rect' && p.x === 18 && p.w === 1220);
+    assert.ok(panelIndex >= 0);
+    const panel = subject.paints[panelIndex];
+    if (kind === 'broodstorm') {
+      assert.equal(panel.style, '#071c24', 'The chapter panel is opaque over the actual inherited objective text.');
+      const inherited = subject.paints.slice(0, panelIndex).filter(p => p.kind === 'text' && p.x === 488 && [114, 135].includes(p.y));
+      assert.equal(inherited.length, 2, 'Both real inherited objective draws participate in this regression.');
+      assert.ok(inherited.every(p => panel.y <= p.y - 11 && panel.y + panel.h >= p.y + 2 && panel.x <= p.x));
+      assert.ok(panel.y > 99, 'Native health/resource/track lines remain above the flight panel.');
+      assert.ok(subject.paints.some(p => p.kind === 'text' && p.text === 'CHARGES LIMITÉES · Viser avant le largage et protéger l’escorte.'));
+      assert.ok(!subject.paints.some(p => p.kind === 'text' && p.text.includes('CHAPITRE PARTIEL')));
+      assert.equal(e.getLegacyMissionDossierV131().limitations, limitations, 'Technical/art limitations remain in the dossier API.');
+    } else assert.deepEqual({ style: panel.style, y: panel.y, h: panel.h }, { style: '#071c24ed', y: 113, h: 89 });
+    assert.ok(subject.paints.slice(panelIndex + 1).some(p => p.kind === 'text' && p.text === prompt));
+    assert.deepEqual(e.captureResumeState(), before, 'Rendering cannot alter mission state, hitboxes, counters or checkpoint.');
+    keyboardHold(subject, .2);
+    assert.ok(e.legacyMissionV131.hold > 0 && e.legacyMissionV131.hold < station.seconds, 'The same native E action still advances its finite hold.');
+  }
 });
