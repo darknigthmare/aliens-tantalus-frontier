@@ -84,8 +84,8 @@ CAPTURE_OBSERVER = r'''c=> {
   const armed=read(),start=performance.now();out.armedState=compact(armed);
   if(!sameMatch(armed?.match)){fail('Different match, round or participants at observer arm');return{error:out.error};}
   if(c.stage==='post'&&!(armed.match.paused&&sameHold(armed.match.grappleV153)
-    &&(!c.after||receipt(armed.match,'capture')?.fullFloorPin&&receipt(armed.match,'capture')?.pairedContacts))){
-    fail('Actual pause no longer owns the exact painted native floor hold');return{error:out.error};}
+    &&(!c.after||receipt(armed.match,'capture')?.fullFloorPin&&Math.abs(receipt(armed.match,'capture').contacts?.floorSupport?.[1]-receipt(armed.match,'capture').floor)<1e-6))){
+    fail('Actual pause no longer owns the same native hold and floor support');return{error:out.error};}
   let floorHoldId=c.holdId??armed.match.grappleV153?.id??null;
   function sample(){
     if(out.cancelled||out.done)return;
@@ -390,10 +390,10 @@ def main():
                                   and [(f['id'], f['side']) for f in frozen['fighters']] == list(zip(binding['fighterIds'], binding['sides']))
                                   and fh.get('id') == hold_id and fh.get('attacker') == binding['attackerSide'] and fh.get('target') == target_side
                                   and (not after or any(v['role'] == 'captive' and v['side'] == target_side and v['targetId'] == target_id
-                                       and v['grappleId'] == hold_id and v['phase'] == 'capture' and v['fullFloorPin'] and v['pairedContacts'] for v in frozen.get('captureViewsV163', []))))
+                                       and v['grappleId'] == hold_id and v['phase'] == 'capture' and v['fullFloorPin'] and abs(v['contacts']['floorSupport'][1] - v['floor']) < 1e-6 for v in frozen.get('captureViewsV163', []))))
                     report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
                         'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen, 'floorTrace': floor_observation['trace']})
-                    check(name + ': public pause retains the same painted native hold and participants', same_pause)
+                    check(name + ': public pause retains native hold ownership, participants and floor support', same_pause)
                     check(name + ': actual native Prowler startup is observed', preparation is not None)
                     capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
                     check(name + ': actual capture event owns the displayed hold', any(e['type'] == 'grapple-start-v153' and e['grappleId'] == hold_id for e in m['events']))
