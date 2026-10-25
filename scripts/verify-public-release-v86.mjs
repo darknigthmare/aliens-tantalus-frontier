@@ -24,6 +24,7 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'qa-npc-matte-apertures-v164.py', 'verify-npc-matte-apertures-v164.mjs',
   'verify-hub-console-support-v142.mjs','verify-hub-elevator-interior-v142.mjs',
   'verify-hub-vent-scene-v142.mjs','verify-hub-room-composition-v142.mjs',
   'verify-player-body-alignment-v142.mjs','verify-hub-door-passage-v142.mjs',
@@ -196,6 +197,7 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V164-NPC-MATTE.md',
   'docs/forge/xeno-trials/V163-EXCEL-COMPLETION.md',
   'docs/forge/xeno-trials/progress-v163.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V163.xlsx',
