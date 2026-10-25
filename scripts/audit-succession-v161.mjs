@@ -37,7 +37,7 @@ export function verifyAuditSuccessionV161(previous, current, readSource = readRe
   assert.equal(bridge.to, 'V161');
   assert.deepEqual(bridge.predecessorDocuments, AUDIT_PREDECESSOR_DOCUMENTS_V161);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
-  const effective = resolveAuditSourcesV162(current, readSource);
+  const effective = resolveAuditSourcesV162(current, readSource, { effective: true });
   assert.equal(keys(before).length, 74);
   assert.ok(after && keys(after).length >= 74);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V160 source omitted: ' + path);
@@ -80,7 +80,7 @@ export function resolveAuditSourcesV161(previous, readSource = readRepository, {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV161(previous, current, readSource);
-  return effective ? resolveAuditSourcesV162(current, readSource) : current.runtimeSourceSha256;
+  return effective ? resolveAuditSourcesV162(current, readSource, { effective: true }) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV161(readSource = readRepository) {

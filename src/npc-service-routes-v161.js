@@ -10,6 +10,8 @@ import { advanceNpcLifeV136, moveNpcAgainstGeometryV136, spreadNpcStationSpawnsV
 import { getHubRoomPresentationV119 } from './hub-room-presentation-v119.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { CREW_SPRITE_IDS, CREW_MISSION_SPRITE_IDS, resolveSpriteClip } from './sprite-animation-runtime.js';
+import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
+import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 
 
 /** V161 adds two physically bounded service routes. The reviewed V159 BISHOP
@@ -18,15 +20,28 @@ import { CREW_SPRITE_IDS, CREW_MISSION_SPRITE_IDS, resolveSpriteClip } from './s
  * All movement/occlusion uses the same native floor, paired socket and atlas
  * policy. Cross-deck/lift travel remains delegated, explicitly unobserved. */
 export function createServiceRouteV161(definition, { schema: SCHEMA = 161,
-  stateField: STATE_FIELD = 'npcServiceRoutesV161', alternateAnnexRoomIds = [] } = {}) {
+  stateField: STATE_FIELD = 'npcServiceRoutesV161', alternateAnnexRoomIds = [],
+  homeRoomId: HOME = definition.parentRoomId } = {}) {
 const { crewId: ID, parentRoomId: PARENT, annexRoomId: ANNEX, deck: DECK } = definition;
 const actorKey = Symbol('actor:' + definition.id), stateKey = Symbol('state:' + definition.id),
   handoffKey = Symbol('handoff:' + definition.id), sandboxKey = Symbol('sandbox:' + definition.id),
   peersKey = Symbol('peers:' + definition.id),
+  doorsKey = Symbol('main-doors:' + definition.id),
+  syncDoorsKey = Symbol('sync-main-doors:' + definition.id),
   refreshKey = Symbol('refresh:' + definition.id), shouldHandoffKey = Symbol('shouldHandoff:' + definition.id),
   handoffMethodKey = Symbol('handoffMethod:' + definition.id),
   handoffRebuildKey = Symbol('handoffRebuild:' + definition.id);
 const parent = HUB_DECKS[DECK].rooms.find(room => room.id === PARENT);
+const home = HUB_DECKS[DECK].rooms.find(room => room.id === HOME);
+if (!home || !parent) throw new RangeError('Service origin must be a real room on the portal deck: ' + definition.id);
+const mainRooms = HUB_DECKS[DECK].rooms.filter(room => room.xEnd > Math.min(parent.xStart, home.xStart)
+  && room.xStart < Math.max(parent.xEnd, home.xEnd));
+const mainIds = mainRooms.map(room => room.id);
+const mainLeft = mainRooms[0].xStart, mainRight = mainRooms.at(-1).xEnd;
+const corridor = HOME !== PARENT;
+const mainDoorTemplates = corridor ? buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, DECK)
+  .filter(door => !door.lift && door.x > mainLeft && door.x < mainRight) : [];
+const mainDoorIds = mainDoorTemplates.map(door => door.id);
 const annex = getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137[ANNEX]);
 const descriptor = getHubDoorDestinationDescriptorsV138(parent).find(door => door.destinationId === ANNEX);
 // Reserve every shipped idle/walk/work alpha hull before defining the real
@@ -68,13 +83,20 @@ const inDoorway = actor => {
     && actor.x + (actor.w || 44) >= opening.x - 12);
 };
 const socketX = roomId => faces[roomId].opening.x + faces[roomId].opening.w / 2 - 22;
+const portalDestination = state => state.targetRoomId === ANNEX ? ANNEX : PARENT;
+const inMainChart = roomId => mainIds.includes(roomId);
+const normalizeMainDoors = value => Object.fromEntries(mainDoorIds.map(id => [id,
+  finite(value?.[id]) && value[id] >= 0 && value[id] <= 1 ? value[id] : 0]));
 const homeTemplate = () => {
   const actor = RosterHubV52.prototype.createNpcs.call({}, DECK).find(npc => npc.crewId === ID);
   // The actual native station is the source anchor, never the sampled
   // timetable's remote work position or an invented transit destination.
   return spreadNpcStationSpawnsV136([{ ...actor, mobile: false,
-    x: getNpcRoutineStandingAnchorV158(ID, PARENT, 'station') }], [parent])[0];
+    roomId: HOME, x: getNpcRoutineStandingAnchorV158(ID, HOME, 'station') }], [home])[0];
 };
+const mainPost = (roomId, phase = 'station') => spreadNpcStationSpawnsV136([{ ...homeTemplate(), roomId,
+  x: getNpcRoutineStandingAnchorV158(ID, roomId, phase), mobile: false }],
+  [mainRooms.find(room => room.id === roomId)])[0]?.x;
 
 const HUB_NPC_ANNEX_CIRCULATION_V161 = Object.freeze({ id: definition.id, schema: SCHEMA, crewId: ID, deck: DECK,
   parentRoomId: PARENT, annexRoomId: ANNEX, connectionId: descriptor.connectionId,
@@ -82,6 +104,8 @@ const HUB_NPC_ANNEX_CIRCULATION_V161 = Object.freeze({ id: definition.id, schema
   openingSeconds: .42, coveringSeconds: .65, reducedDoorSeconds: .12,
   crossingPolicy: 'paired-airlock-covered-coordinate-handoff',
   source: definition.source || 'native-v52-actor-v141-v156-watches-v138-sockets-v142-paired-doors',
+  ...(corridor ? { homeRoomId: HOME, mainRoomIds: Object.freeze([...mainIds]),
+    mainDoorIds: Object.freeze([...mainDoorIds]), mainTravelPolicy: 'continuous-native-floor-and-bulkheads' } : {}),
   excluded: Object.freeze(['lift-transit', 'other-annex-routes', 'new-back-view-art']) });
 
 /** Strict actual coordinates and finite native door phases, never the old
@@ -90,41 +114,56 @@ function normalizeNpcAnnexCirculationV161(value) {
   const rawHandoff = value?.schema === SCHEMA && value.nativeHandoff;
   const nativeTarget = rawHandoff?.reason !== 'annex-assignment'
     && HUB_DECKS.some(deck => deck.rooms.some(room => room.id === rawHandoff?.toRoomId));
-  const annexTarget = rawHandoff?.reason === 'annex-assignment' && rawHandoff?.fromRoomId === PARENT
+  const annexTarget = rawHandoff?.reason === 'annex-assignment' && rawHandoff?.fromRoomId === HOME
     && rawHandoff?.owner === 'native-v141-annex-watch'
     && alternateAnnexRoomIds.includes(rawHandoff?.toRoomId);
-  const nativeHandoff = rawHandoff?.crewId === ID && [PARENT, ANNEX].includes(rawHandoff.fromRoomId)
+  const nativeHandoff = rawHandoff?.crewId === ID && [...mainIds, ANNEX].includes(rawHandoff.fromRoomId)
     && (nativeTarget || annexTarget)
     && reasons.includes(rawHandoff.reason) && rawHandoff.observedTravel === false
     ? { crewId: ID, fromRoomId: rawHandoff.fromRoomId, toRoomId: rawHandoff.toRoomId,
       reason: rawHandoff.reason, observedTravel: false, owner: annexTarget ? 'native-v141-annex-watch' : 'native-v62-routine' } : null;
   const empty = { schema: SCHEMA, actor: null, nativeHandoff }, a = value?.schema === SCHEMA && value.actor;
-  if (!a || a.crewId !== ID || a.deck !== DECK || ![PARENT, ANNEX].includes(a.roomId)
-    || ![PARENT, ANNEX].includes(a.targetRoomId) || !stages.includes(a.stage)
+  if (!a || a.crewId !== ID || a.deck !== DECK || ![...mainIds, ANNEX].includes(a.roomId)
+    || ![...mainIds, ANNEX].includes(a.targetRoomId) || !stages.includes(a.stage)
     || ![a.x, a.y, a.homeX, a.dutyX, a.velocity, a.time, a.distance, a.doorProgress].every(finite)
-    || a.y !== 532 || a.homeX < parent.xStart + 96 || a.homeX > parent.xEnd - 140
+    || a.y !== 532 || a.homeX < home.xStart + 96 || a.homeX > home.xEnd - 140
     || a.dutyX < 24 || a.dutyX > annex.world.width - 68
-    || a.x < (a.roomId === PARENT ? parent.xStart + 24 : 24)
-    || a.x > (a.roomId === PARENT ? parent.xEnd - 68 : annex.world.width - 68)
+    || a.x < (inMainChart(a.roomId) ? mainLeft + 24 : 24)
+    || a.x > (inMainChart(a.roomId) ? mainRight - 68 : annex.world.width - 68)
     || Math.abs(a.velocity) > 27.000001 || ![-1, 1].includes(a.facing)
     || a.time < 0 || a.time > 1e9 || a.distance < 0 || a.distance > 1e9
     || a.doorProgress < 0 || a.doorProgress > 1
     || !Number.isInteger(a.crossings) || a.crossings < 0 || a.crossings > 1e6
     || !Number.isInteger(a.arrivals) || a.arrivals < 0 || a.arrivals > 1e6
-    || ![PARENT, ANNEX].includes(a.admittedRoomId)) return empty;
+    || ![HOME, ANNEX].includes(a.admittedRoomId)) return empty;
+  const bulkheadProgress = normalizeMainDoors(a.bulkheadProgress);
+  const targetPostX = corridor ? (finite(a.targetPostX) ? a.targetPostX : a.homeX) : null;
+  if (corridor && (targetPostX < mainLeft + 96 || targetPostX > mainRight - 140
+    || inMainChart(a.targetRoomId) && (a.targetRoomId === HOME ? targetPostX !== a.homeX
+      : !['station', 'work', 'break'].some(phase => Math.abs(mainPost(a.targetRoomId, phase) - targetPostX) < 1e-8)))) return empty;
+  if (corridor && a.bulkheadProgress != null && (typeof a.bulkheadProgress !== 'object'
+    || Array.isArray(a.bulkheadProgress) || Object.entries(a.bulkheadProgress).some(([id, progress]) =>
+      !mainDoorIds.includes(id) || !finite(progress) || progress < 0 || progress > 1))) return empty;
+  if (corridor && inMainChart(a.roomId)) {
+    const room = mainRooms.find(room => room.id === a.roomId);
+    if (a.x + 44 <= room.xStart || a.x >= room.xEnd) return empty;
+    if (mainDoorTemplates.some(door => overlap({ x: a.x, y: a.y, w: 44, h: 92 }, getHubBulkheadColliderV134(door))
+      && bulkheadProgress[door.id] < .82)) return empty;
+  }
   const dutyPlan = getAnnexNpcPlacementV141(ANNEX, ID);
   if (!dutyPlan?.rails.some(rail => a.dutyX >= rail.min && a.dutyX <= rail.max)
     || overlap({ x: a.homeX, y: 532, w: 44, h: 92 }, { ...descriptor.socket, x: descriptor.socket.x - 12, w: descriptor.socket.w + 24 })) return empty;
-  if (a.stage === 'service' && Math.abs(a.x - (a.roomId === ANNEX ? a.dutyX : a.homeX)) > .26) return empty;
-  if (crossing(a) && (Math.abs(a.x - socketX(a.roomId)) > .26 || a.velocity !== 0)
-    || ['opening', 'covering'].includes(a.stage) && a.roomId === a.targetRoomId
-    || a.stage === 'revealing' && a.roomId !== a.targetRoomId
+  if (a.stage === 'service' && Math.abs(a.x - (a.roomId === ANNEX ? a.dutyX : corridor ? targetPostX : a.homeX)) > .26) return empty;
+  if (crossing(a) && (![PARENT, ANNEX].includes(a.roomId) || Math.abs(a.x - socketX(a.roomId)) > .26 || a.velocity !== 0)
+    || ['opening', 'covering'].includes(a.stage) && a.roomId !== (a.targetRoomId === ANNEX ? PARENT : ANNEX)
+    || a.stage === 'revealing' && a.roomId !== portalDestination(a)
     || a.stage === 'service' && a.roomId !== a.targetRoomId) return empty;
   return { schema: SCHEMA, nativeHandoff: null, actor: { crewId: ID, deck: DECK, roomId: a.roomId, x: a.x, y: a.y,
     homeX: a.homeX, dutyX: a.dutyX, targetRoomId: a.targetRoomId, stage: a.stage,
     velocity: a.velocity, facing: a.facing, doorProgress: a.doorProgress,
     time: a.time, distance: a.distance, crossings: a.crossings, arrivals: a.arrivals,
-    admittedRoomId: a.admittedRoomId, reason: reasons.includes(a.reason) ? a.reason : 'unavailable' } };
+    admittedRoomId: a.admittedRoomId, reason: reasons.includes(a.reason) ? a.reason : 'unavailable',
+    ...(corridor ? { bulkheadProgress, targetPostX } : {}) } };
 }
 
 function npcAnnexInterruptionV161(resolution, actor) {
@@ -136,9 +175,9 @@ function npcAnnexInterruptionV161(resolution, actor) {
 }
 
 function createNpcAnnexCirculationStateV161(actor, dutyActor) {
-  if (actor?.crewId !== ID || ![PARENT, ANNEX].includes(actor.roomId) || !dutyActor) return null;
+  if (actor?.crewId !== ID || ![HOME, ANNEX].includes(actor.roomId) || !dutyActor) return null;
   return normalizeNpcAnnexCirculationV161({ schema: SCHEMA, actor: { crewId: ID, deck: DECK,
-    roomId: actor.roomId, x: actor.x, y: actor.y, homeX: actor.roomId === PARENT ? actor.x : homeTemplate().x,
+    roomId: actor.roomId, x: actor.x, y: actor.y, homeX: actor.roomId === HOME ? actor.x : homeTemplate().x,
     dutyX: dutyActor.x, targetRoomId: actor.roomId, stage: 'service', velocity: 0,
     facing: actor.facing === -1 ? -1 : 1, doorProgress: 0, time: 0, distance: 0,
     crossings: 0, arrivals: 0, admittedRoomId: actor.roomId, reason: 'daily-schedule' } }).actor;
@@ -165,7 +204,9 @@ function npcAnnexDoorPassageV161(actor, destinationRoomId, { peers = [], player 
  * coordinate charts. It cannot manufacture gait, distance, rewards or events. */
 function advanceNpcAnnexCirculationV161(previous, actor, delta, {
   resolution, duty = false, peers = [], player = null, portalBusy = false, running = true,
-  reducedMotion = false, colliders = actor?.roomId === ANNEX ? annex.colliders : buildHubObstacleGeometryV87(DECK)
+  reducedMotion = false, doors = [], alternateAssignment = false,
+  returnToOrigin = false, preserveIntentVelocity = false,
+  colliders = actor?.roomId === ANNEX ? annex.colliders : buildHubObstacleGeometryV87(DECK)
 } = {}) {
   if (!previous || !actor || !running || !finite(delta) || delta <= 0) return previous;
   const dt = Math.min(delta, .1), originalX = actor.x;
@@ -181,26 +222,31 @@ function advanceNpcAnnexCirculationV161(previous, actor, delta, {
   // the reservation would instead allow a player to pass through that body.
   if (clearingDoor && s.stage !== 'revealing' && crossing(s))
     s = { ...s, targetRoomId: s.roomId, stage: 'revealing' };
-  const targetRoomId = clearingDoor ? s.roomId : duty ? ANNEX : PARENT;
+  const nativeRoomId = resolution?.phase === 'route' ? resolution.toRoomId : resolution?.roomId;
+  const nativeMainPost = !returnToOrigin && corridor && inMainChart(nativeRoomId) && !alternateAssignment;
+  const targetRoomId = clearingDoor ? inMainChart(s.roomId) ? HOME : ANNEX : duty ? ANNEX : nativeMainPost ? nativeRoomId : HOME;
+  const targetPostX = targetRoomId === HOME ? s.homeX : corridor && inMainChart(targetRoomId)
+    ? mainPost(targetRoomId, ['work', 'break', 'station'].includes(resolution?.phase) ? resolution.phase : 'work') : s.targetPostX;
   // A committed cycle finishes before a changed timetable can reverse it.
   // Emergency withdrawal above cancels it without changing coordinate charts.
-  if (!crossing(s) && targetRoomId !== s.targetRoomId) s = { ...s, targetRoomId, stage: 'walking', velocity: 0 };
+  if (!crossing(s) && (targetRoomId !== s.targetRoomId || corridor && targetPostX !== s.targetPostX))
+    s = { ...s, targetRoomId, stage: 'walking', velocity: preserveIntentVelocity ? s.velocity : 0, ...(corridor ? { targetPostX } : {}) };
   s.reason = interruption || 'daily-schedule';
   const doorDuration = stage => reducedMotion ? .12 : stage === 'covering' ? .65 : .42;
   if (crossing(s)) {
     if (s.stage === 'opening') {
-      if (portalBusy || !npcAnnexDoorPassageV161(actor, s.targetRoomId, { peers, player })) return { ...s, reason: 'occupied' };
+      if (portalBusy || !npcAnnexDoorPassageV161(actor, portalDestination(s), { peers, player })) return { ...s, reason: 'occupied' };
       s.doorProgress = Math.min(1, s.doorProgress + dt / doorDuration(s.stage));
       if (s.doorProgress >= 1) s.stage = 'covering';
     } else if (s.stage === 'covering') {
-      if (portalBusy || !npcAnnexDoorPassageV161(actor, s.targetRoomId, { peers, player })) return { ...s, reason: 'occupied' };
+      if (portalBusy || !npcAnnexDoorPassageV161(actor, portalDestination(s), { peers, player })) return { ...s, reason: 'occupied' };
       s.doorProgress = Math.max(0, s.doorProgress - dt / doorDuration(s.stage));
       if (s.doorProgress === 0) {
-        const passage = !portalBusy && npcAnnexDoorPassageV161(actor, s.targetRoomId, { peers, player });
+        const passage = !portalBusy && npcAnnexDoorPassageV161(actor, portalDestination(s), { peers, player });
         if (!passage) return { ...s, reason: 'occupied' };
         // The only coordinate-chart handoff. It occurs behind a fully closed
         // native leaf, at the same measured aperture offset and supported feet.
-        Object.assign(s, { x: passage.arrival.x, y: passage.arrival.y, roomId: s.targetRoomId,
+        Object.assign(s, { x: passage.arrival.x, y: passage.arrival.y, roomId: portalDestination(s),
           stage: 'revealing', crossings: Math.min(1e6, s.crossings + 1) });
       }
     } else {
@@ -212,17 +258,22 @@ function advanceNpcAnnexCirculationV161(previous, actor, delta, {
     }
     return { ...s, velocity: 0 };
   }
-  const atDestination = s.roomId === s.targetRoomId;
-  const goal = atDestination ? s.roomId === ANNEX ? s.dutyX : s.homeX : socketX(s.roomId);
+  const serviceGoal = s.targetRoomId === ANNEX ? s.roomId === ANNEX : inMainChart(s.roomId);
+  const goal = serviceGoal ? s.targetRoomId === ANNEX ? s.dutyX : corridor ? s.targetPostX : s.homeX
+    : socketX(s.roomId === ANNEX ? ANNEX : PARENT);
   if (s.stage === 'service') {
     s.doorProgress = Math.max(0, s.doorProgress - dt / (reducedMotion ? .12 : .65));
     return { ...s, velocity: 0 };
   }
-  const physicalPeers = peers.filter(p => p && p !== actor && p.crewId !== ID && p.alive !== false && p.roomId === s.roomId
+  const physicalPeers = peers.filter(p => p && p !== actor && p.crewId !== ID && p.alive !== false
+    && (p.roomId === s.roomId || corridor && inMainChart(p.roomId) && inMainChart(s.roomId))
     && [p.x, p.y, p.w, p.h].every(finite) && Math.abs(p.y + p.h - actor.y - actor.h) < 16);
-  if (player?.roomId === s.roomId && player.alive !== false && [player.x, player.y, player.w, player.h].every(finite)
+  if ((player?.roomId === s.roomId || corridor && inMainChart(player?.roomId) && inMainChart(s.roomId))
+    && player.alive !== false && [player.x, player.y, player.w, player.h].every(finite)
     && Math.abs(player.y + player.h - actor.y - actor.h) < 16) physicalPeers.push(player);
-  const boxes = [...colliders, ...physicalPeers.map(p => ({ x: p.x - 12, y: p.y, w: p.w + 24, h: p.h }))];
+  const boxes = [...colliders, ...(inMainChart(s.roomId) ? doors.filter(door => mainDoorIds.includes(door.id)
+    && door.blocking !== false && door.progress < .82).map(door => getHubBulkheadColliderV134(door)) : []),
+  ...physicalPeers.map(p => ({ x: p.x - 12, y: p.y, w: p.w + 24, h: p.h }))];
   for (let remaining = dt; remaining > 1e-8;) {
     const step = Math.min(1 / 120, remaining); remaining -= step;
     const distance = Math.abs(goal - s.x), direction = Math.sign(goal - s.x);
@@ -238,17 +289,22 @@ function advanceNpcAnnexCirculationV161(previous, actor, delta, {
     s.x = contact.x; s.velocity = contact.blocked ? 0 : velocity; s.blocked ||= contact.blocked;
     if (Math.abs(s.x - goal) < .25 && Math.abs(s.velocity) < 3) {
       s.velocity = 0;
-      if (atDestination) { s.stage = 'service'; s.arrivals = Math.min(1e6, s.arrivals + 1); }
+      if (serviceGoal) { s.stage = 'service'; s.arrivals = Math.min(1e6, s.arrivals + 1); }
       else s.stage = 'opening';
       break;
     }
   }
   s.actualVelocity = (s.x - originalX) / dt;
+  if (corridor && inMainChart(s.roomId)) {
+    s.roomId = mainRooms.find(room => s.x + actor.w / 2 >= room.xStart && s.x + actor.w / 2 < room.xEnd)?.id || s.roomId;
+    s.bulkheadProgress = Object.fromEntries(mainDoorIds.map(id => [id,
+      doors.find(door => door.id === id)?.progress ?? s.bulkheadProgress?.[id] ?? 0]));
+  }
   s.distance = Math.min(1e9, s.distance + Math.abs(s.x - originalX));
   if (Math.abs(s.actualVelocity) > .1) s.facing = Math.sign(s.actualVelocity);
   // Keep the paired opening free until the departing whole body clears it.
-  const opening = faces[s.roomId].opening;
-  if (atDestination && (s.x + actor.w < opening.x - 12 || s.x > opening.x + opening.w + 12))
+  const opening = faces[s.roomId === ANNEX ? ANNEX : PARENT].opening;
+  if (serviceGoal && (s.x + actor.w < opening.x - 12 || s.x > opening.x + opening.w + 12))
     s.doorProgress = Math.max(0, s.doorProgress - dt / (reducedMotion ? .12 : .65));
   return s;
 }
@@ -270,7 +326,10 @@ function withHubNpcAnnexCirculationV161(Base) {
       this[stateKey] = this[sandboxKey] ? null : normalizeNpcAnnexCirculationV161(hubState[STATE_FIELD]?.routes?.[definition.id]).actor;
       this[handoffKey] = normalizeNpcAnnexCirculationV161(hubState[STATE_FIELD]?.routes?.[definition.id]).nativeHandoff;
       this[actorKey] = null; this[peersKey] = [];
+      this[doorsKey] = mainDoorTemplates.map(door => ({ ...door,
+        progress: this[stateKey]?.bulkheadProgress?.[door.id] || 0 }));
       const result = super.start(hubState, options);
+      this[syncDoorsKey]();
       this.draw?.(); return result;
     }
 
@@ -293,23 +352,24 @@ function withHubNpcAnnexCirculationV161(Base) {
           toRoomId: resolution.roomId, reason: resolution.reason, observedTravel: false, owner: 'native-v62-routine' };
         this[stateKey] = null;
       }
-      const released = this[shouldHandoffKey](resolution);
+      const leased = this.hubNpcLeaseOwnerV163?.(ID);
+      const released = !leased && this[shouldHandoffKey](resolution);
       if (released) this[handoffMethodKey](resolution);
       // Release before the base factory reads annex membership, otherwise its
       // parent filter would suppress the newly medical/mission-owned identity.
       const natives = super.createNpcs(deck);
-      if (!this[actorKey] && !released && !this[handoffRebuildKey]) {
+      if (!this[actorKey] && !released && !this[handoffRebuildKey] && !this.hubNpcLeaseReentryBlockedV163?.(ID)) {
         const duty = { roomId: ANNEX, crewId: ID, targetX: definition.targetX, duty: definition.duty };
         const dutyActor = createAnnexNpcsV141([duty], this.npcRoutineResolutionsV62).find(n => n.crewId === ID);
         const saved = this[stateKey];
         // A fresh load may adopt the existing standing V141 duty. That is an
         // initial condition, never evidence that a pre-load journey was walked.
-        const source = natives.find(n => n.crewId === ID && n.roomId === PARENT)
+        const source = natives.find(n => n.crewId === ID && n.roomId === HOME)
           || super.ensureAnnexNpcCohortV141().find(n => n.crewId === ID && n.roomId === ANNEX);
         let parentSource = source;
-        if (!source && !saved && resolution?.roomId === PARENT && resolution.deck === DECK) {
+        if (!source && !saved && resolution?.roomId === HOME && resolution.deck === DECK) {
           // createNpcs can be requested while the player is on another deck.
-          parentSource = super.createNpcs(DECK).find(n => n.crewId === ID && n.roomId === PARENT);
+          parentSource = super.createNpcs(DECK).find(n => n.crewId === ID && n.roomId === HOME);
         }
         if (dutyActor && (saved || parentSource?.alive !== false && parentSource)
           && !resolution?.missionAssigned && !resolution?.needsCare) {
@@ -325,17 +385,21 @@ function withHubNpcAnnexCirculationV161(Base) {
       if (!actor) return natives;
       this[refreshKey]();
       if (deck === DECK) this[peersKey] = natives.filter(n => n.crewId !== ID);
+      else if (SCHEMA === 163 && this.getNpcServicePeersV163) this[peersKey] = this.getNpcServicePeersV163(DECK, ID);
       else if (!this[peersKey]?.length) this[peersKey] = super.createNpcs(DECK).filter(n => n.crewId !== ID);
-      return [...natives.filter(n => n.crewId !== ID), ...(deck === DECK && actor.roomId === PARENT ? [actor] : [])];
+      return [...natives.filter(n => n.crewId !== ID), ...(deck === DECK && (inMainChart(actor.roomId)
+        || leased && HUB_DECKS[DECK].rooms.some(room => room.id === actor.roomId)) ? [actor] : [])];
     }
 
     [shouldHandoffKey](resolution = this.npcRoutineResolutionsV62?.get(ID)) {
+      if (this.hubNpcLeaseOwnerV163?.(ID)) return false;
       const actor = this[actorKey], s = this[stateKey];
       if (!actor || !s || !resolution) return false;
       if (resolution.missionAssigned || resolution.needsCare || actor.alive === false || actor.downed) return true;
       const duty = annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).some(d => d.crewId === ID && d.roomId === ANNEX);
-      return !resolution.alert && !duty && (resolution.roomId !== PARENT || alternateDuty(this))
-        && actor.roomId === PARENT && s.stage === 'service';
+      if (corridor && inMainChart(resolution.phase === 'route' ? resolution.toRoomId : resolution.roomId) && !alternateDuty(this)) return false;
+      return !resolution.alert && !duty && (resolution.roomId !== HOME || alternateDuty(this))
+        && actor.roomId === HOME && s.stage === 'service';
     }
 
     [handoffMethodKey](resolution) {
@@ -352,7 +416,7 @@ function withHubNpcAnnexCirculationV161(Base) {
     [refreshKey]() {
       const actor = this[actorKey], r = this.npcRoutineResolutionsV62?.get(ID);
       if (!actor || !r) return;
-      Object.assign(actor, { routinePhaseV62: actor.roomId === ANNEX ? 'work' : r.roomId === PARENT ? r.phase : 'station',
+      Object.assign(actor, { routinePhaseV62: actor.roomId === ANNEX ? 'work' : r.roomId === actor.roomId ? r.phase : 'station',
         routineReasonV62: r.reason, routineDeterministicKeyV62: r.deterministicKey,
         alerted: Boolean(r.alert), annexNativeV141: actor.roomId === ANNEX,
         annexDutyV141: actor.roomId === ANNEX ? definition.duty : undefined,
@@ -362,6 +426,24 @@ function withHubNpcAnnexCirculationV161(Base) {
     stepHubNpcLifeV136(actor, delta, options) {
       if (actor === this[actorKey]) return;
       return super.stepHubNpcLifeV136(actor, delta, options);
+    }
+
+    [syncDoorsKey]() {
+      if (!corridor || this.state?.deck !== DECK || !this.doorStates?.some(door => mainDoorIds.includes(door.id))) return;
+      for (const door of this.doorStates) if (mainDoorIds.includes(door.id)) {
+        const previous = this[doorsKey]?.find(entry => entry.id === door.id);
+        if (previous && previous !== door) door.progress = previous.progress;
+      }
+      this[doorsKey] = this.doorStates.filter(door => mainDoorIds.includes(door.id));
+    }
+
+    hubNpcBulkheadDemandV158(door) {
+      if (super.hubNpcBulkheadDemandV158?.(door)) return true;
+      const actor = this[actorKey];
+      if (!corridor || !actor || !inMainChart(actor.roomId) || !mainDoorIds.includes(door.id)
+        || Math.abs(actor.x + actor.w / 2 - door.x) >= 182) return false;
+      const locked = this.hubTrainingV132?.lockedDoorIds?.includes(door.id);
+      return !locked || overlap(actor, getHubBulkheadColliderV134(door));
     }
 
     npcAnimationRequest(npc) {
@@ -397,19 +479,19 @@ function withHubNpcAnnexCirculationV161(Base) {
 
     npcAnnexDoorDemandV159(annexId) {
       return Math.max(super.npcAnnexDoorDemandV159?.(annexId) || 0,
-        annexId === ANNEX && this[actorKey] ? this[stateKey]?.doorProgress || 0 : 0);
+        annexId === ANNEX && this[actorKey] && !this.hubNpcLeaseOwnerV163?.(ID) ? this[stateKey]?.doorProgress || 0 : 0);
     }
 
     npcAnnexDoorReservedV159(annexId) {
       const s = this[stateKey];
       const actor = this[actorKey];
       return Boolean(super.npcAnnexDoorReservedV159?.(annexId)
-        || annexId === ANNEX && s && actor && (crossing(s) || s.doorProgress > 0 || inDoorway(actor)));
+        || annexId === ANNEX && s && actor && !this.hubNpcLeaseOwnerV163?.(ID) && (crossing(s) || s.doorProgress > 0 || inDoorway(actor)));
     }
 
     drawSheetCell(ctx, image, ...args) {
       const actor = this[actorKey];
-      const clip = actor && this.npcImageCrewIds?.get(image) === ID && this.npcs?.includes(actor)
+      const clip = actor && !this.hubNpcLeaseOwnerV163?.(ID) && this.npcImageCrewIds?.get(image) === ID && this.npcs?.includes(actor)
         && npcAnnexOcclusionV161(this[stateKey]);
       if (!clip) return super.drawSheetCell(ctx, image, ...args);
       // V52 adds the optional uniform marking AFTER the body renderer. Keep
@@ -419,7 +501,7 @@ function withHubNpcAnnexCirculationV161(Base) {
     }
 
     drawNpcLifeV136(ctx, image, actor, sample, geometry) {
-      const clip = actor === this[actorKey] && npcAnnexOcclusionV161(this[stateKey]);
+      const clip = actor === this[actorKey] && !this.hubNpcLeaseOwnerV163?.(ID) && npcAnnexOcclusionV161(this[stateKey]);
       if (!clip) return super.drawNpcLifeV136(ctx, image, actor, sample, geometry);
       ctx.save(); ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.w, clip.h); ctx.clip();
       super.drawNpcLifeV136(ctx, image, actor, sample, geometry) || drawHumanAtlasV133(ctx, image, geometry);
@@ -427,16 +509,19 @@ function withHubNpcAnnexCirculationV161(Base) {
     }
 
     drawDepthContactShadowV116(ctx, actor, supportY) {
-      const clip = actor === this[actorKey] && npcAnnexOcclusionV161(this[stateKey]);
+      const clip = actor === this[actorKey] && !this.hubNpcLeaseOwnerV163?.(ID) && npcAnnexOcclusionV161(this[stateKey]);
       if (!clip) return super.drawDepthContactShadowV116(ctx, actor, supportY);
       ctx.save(); ctx.beginPath(); ctx.rect(clip.x, clip.y, clip.w, clip.h); ctx.clip();
       const result = super.drawDepthContactShadowV116(ctx, actor, supportY); ctx.restore(); return result;
     }
 
     update(delta) {
+      this[syncDoorsKey]();
+      const doorProgressBefore = corridor ? new Map((this[doorsKey] || []).map(door => [door.id, door.progress])) : null;
       const before = this[actorKey], wasRunning = this.running;
       const clocks = before && Object.fromEntries(['workClock', 'supportClock', 'alertClock'].map(k => [k, finite(before[k]) ? before[k] : 0]));
       const result = super.update(delta);
+      if (this.hubNpcLeaseOwnerV163?.(ID)) return result;
       if (!wasRunning || !this.running || this[sandboxKey] || !finite(delta) || delta <= 0) return result;
       const actor = this[actorKey], previous = this[stateKey];
       if (!actor || !previous) return result;
@@ -453,24 +538,40 @@ function withHubNpcAnnexCirculationV161(Base) {
         return result;
       }
       const dt = Math.min(delta, .1);
+      this[syncDoorsKey]();
+      // Native floor updates and the inner ECHO route may already own these
+      // same leaves. Only advance an unchanged leaf when no inherited update
+      // has moved it; restore a saved threshold without adding another clock.
+      for (const door of this[doorsKey] || []) {
+        if (door.progress === doorProgressBefore?.get(door.id)) {
+          const target = this.hubNpcBulkheadDemandV158(door) ? 1 : 0;
+          door.progress += (target - door.progress) * Math.min(1, dt * (this.reducedMotion ? 14 : 7));
+        }
+        if (this.hubTrainingV132?.lockedDoorIds?.includes(door.id))
+          door.progress = overlap(actor, getHubBulkheadColliderV134(door)) ? Math.max(.82, door.progress) : 0;
+      }
       if (actor === before) for (const [key, value] of Object.entries(clocks))
         actor[key] = finite(actor[key]) && actor[key] > value ? actor[key] : Math.max(0, value - dt);
       const cohort = this.ensureAnnexNpcCohortV141();
-      const peers = [...(this.state?.deck === DECK ? this.npcs || [] : this[peersKey] || []), ...cohort];
+      const physicalPeers = SCHEMA === 163 && this.getNpcServicePeersV163 ? this.getNpcServicePeersV163(DECK, ID)
+        : this.state?.deck === DECK ? this.npcs || [] : this[peersKey] || [];
+      const peers = [...physicalPeers, ...cohort];
       const local = this.currentAnnexV71?.();
       const player = !this.ventActorV62 && this.player && { ...this.player, roomId: local?.id || (this.state?.deck === DECK ? this.state.roomId : null) };
       const duty = annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).some(d => d.crewId === ID && d.roomId === ANNEX);
       const portalBusy = this.annexTransitionV71?.annexId === ANNEX || this.hubDoorClosingV142?.annexId === ANNEX
         || this.hubTrainingV132?.lockedDoorIds?.some(id => [ANNEX, descriptor.connectionId, descriptor.id].includes(id));
       const next = advanceNpcAnnexCirculationV161(previous, actor, dt, { resolution,
-        duty, peers, player, portalBusy, reducedMotion: this.reducedMotion });
+        duty, peers, player, portalBusy, doors: this[doorsKey] || [], alternateAssignment: Boolean(alternateDuty(this)),
+        reducedMotion: this.reducedMotion });
+      if (corridor) next.bulkheadProgress = Object.fromEntries((this[doorsKey] || []).map(door => [door.id, door.progress]));
       const changedRoom = next.roomId !== actor.roomId;
       Object.assign(actor, { x: next.x, y: next.y, roomId: next.roomId, facing: next.facing, vx: next.actualVelocity || 0 });
       this[stateKey] = next; this[refreshKey]();
       if (changedRoom) this.npcs = [...(this.npcs || []).filter(n => n.crewId !== ID),
-        ...(this.state?.deck === DECK && actor.roomId === PARENT ? [actor] : [])];
+        ...(this.state?.deck === DECK && inMainChart(actor.roomId) ? [actor] : [])];
       if (next.stage === 'service' && next.reason === 'daily-schedule') {
-        const life = advanceNpcLifeV136(actor.lifeV136, actor, dt, { room: actor.roomId === ANNEX ? annex : parent,
+        const life = advanceNpcLifeV136(actor.lifeV136, actor, dt, { room: actor.roomId === ANNEX ? annex : mainRooms.find(room => room.id === actor.roomId),
           peers, context: `annex-circulation-v161:${actor.roomId}`, colliders: actor.roomId === ANNEX ? annex.colliders : buildHubObstacleGeometryV87(DECK),
           reducedMotion: this.reducedMotion });
         if (life) actor.lifeV136 = life;
@@ -495,29 +596,64 @@ function withHubNpcAnnexCirculationV161(Base) {
           actor: this[stateKey], nativeHandoff: this[handoffKey] }) } } });
     }
 
+    /** Read actual intent without sampling a native timetable body. */
+    getNpcServiceTrafficIntentsV163() {
+      const inherited = super.getNpcServiceTrafficIntentsV163?.() || [];
+      const actor = this[actorKey], s = this[stateKey];
+      if (SCHEMA !== 163 || this.hubNpcLeaseOwnerV163?.(ID) || !actor || !s || !inMainChart(actor.roomId) || crossing(s)
+        || s.stage !== 'walking' || s.reason !== 'daily-schedule') return inherited;
+      const goalX = s.targetRoomId === ANNEX ? socketX(PARENT) : corridor ? s.targetPostX : s.homeX;
+      return [...inherited, { routeId: definition.id, actor, deck: DECK, goalX,
+        roomIds: [...mainIds], minX: mainLeft + 24, maxX: mainRight - 68,
+        doorIds: [...mainDoorIds] }];
+    }
+
     getNpcServiceActorV161(routeId) {
       return routeId === definition.id ? this[actorKey] : super.getNpcServiceActorV161?.(routeId) || null;
     }
 
+    returnNpcPhysicalLeaseV163(crewId) {
+      if (crewId !== ID) return super.returnNpcPhysicalLeaseV163?.(crewId);
+      const actor = this[actorKey], state = this[stateKey];
+      if (actor && state) this[stateKey] = { ...state, x: actor.x, y: actor.y, velocity: 0, facing: actor.facing };
+      this[refreshKey]();
+    }
+
+    delegateNpcPhysicalLeaseV163(crewId) {
+      if (crewId !== ID) return super.delegateNpcPhysicalLeaseV163?.(crewId);
+      this[actorKey] = null; this[stateKey] = null; this[handoffKey] = null;
+    }
+
     getSnapshot() {
       const snapshot = super.getSnapshot();
+      const leased = this.hubNpcLeaseOwnerV163?.(ID);
       return { ...snapshot, [STATE_FIELD]: { schema: SCHEMA, routes: {
         ...snapshot[STATE_FIELD]?.routes, [definition.id]: {
         ...normalizeNpcAnnexCirculationV161({ schema: SCHEMA, actor: this[stateKey], nativeHandoff: this[handoffKey] }),
+        ...(leased ? { actor: null, leasedToV163: leased,
+          leaseOriginBookmarkV163: normalizeNpcAnnexCirculationV161({ schema: SCHEMA, actor: this[stateKey] }).actor } : {}),
         actualVelocity: this[actorKey]?.vx || 0, reserved: this.npcAnnexDoorReservedV159(ANNEX),
         occlusion: npcAnnexOcclusionV161(this[stateKey]),
         initialCondition: this[stateKey]?.admittedRoomId || null,
         preLoadTravelObserved: false, scope: 'one-native-parent-annex-route',
         sourceFace: clone(parentFace), annexFace: clone(localFace),
-        presentation: [parent, annex].map(room => ({ roomId: room.id, mode: getHubRoomPresentationV119(room).presentationMode,
-          projection: getHubRoomPresentationV119(room).projectionV139.projection, mixedProjectionAllowed: false })) } } } };
+        presentation: [...mainRooms, annex].map(room => ({ roomId: room.id, mode: getHubRoomPresentationV119(room).presentationMode,
+          projection: getHubRoomPresentationV119(room).projectionV139.projection, mixedProjectionAllowed: false })),
+        ...(corridor ? { homeRoomId: HOME, mainRoomIds: [...mainIds], mainDoors: (this[doorsKey] || []).map(door => ({
+          id: door.id, x: door.x, progress: door.progress, demandedBy: this.hubNpcBulkheadDemandV158(door) ? ID : null })) } : {}) } } } };
     }
   };
 }
 
 return Object.freeze({ definition: HUB_NPC_ANNEX_CIRCULATION_V161, normalize: normalizeNpcAnnexCirculationV161,
   create: createNpcAnnexCirculationStateV161, advance: advanceNpcAnnexCirculationV161,
-  passage: npcAnnexDoorPassageV161, occlusion: npcAnnexOcclusionV161, withHub: withHubNpcAnnexCirculationV161 });
+  passage: npcAnnexDoorPassageV161, occlusion: npcAnnexOcclusionV161,
+  faces: Object.freeze({ parent: parentFace, local: localFace }), mainRooms: Object.freeze([...mainRooms]),
+  trafficIntent: (state, actor) => !actor || !state || !inMainChart(actor.roomId) || state.stage !== 'walking'
+    || state.reason !== 'daily-schedule' ? null : { routeId: definition.id, actor, deck: DECK,
+      goalX: state.targetRoomId === ANNEX ? socketX(PARENT) : corridor ? state.targetPostX : state.homeX,
+      roomIds: [...mainIds], minX: mainLeft + 24, maxX: mainRight - 68, doorIds: [...mainDoorIds] },
+  withHub: withHubNpcAnnexCirculationV161 });
 }
 
 export const HUB_NPC_SERVICE_ROUTE_DEFINITIONS_V161 = Object.freeze([

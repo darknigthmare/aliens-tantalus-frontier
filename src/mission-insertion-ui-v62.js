@@ -11,6 +11,7 @@ import {
 } from './mission-insertion-v62.js';
 import { campaignInsertionStoryV160, chooseCampaignStoryProtocolV160 } from './campaign-story-v160.js';
 import { campaignInsertionStoryV161, chooseConvoyStoryProtocolV161, hasCampaignStoryV161 } from './campaign-convoy-story-v161.js';
+import { campaignInsertionStoryV163, chooseLetheStoryProtocolV163, hasCampaignStoryV163 } from './campaign-lethe-story-v163.js';
 import { drawArchiveRelayInsertionShotV160, loadArchiveRelayArtV160 } from './archive-relay-presentation-v160.js';
 
 export const MISSION_INSERTION_UI_SCHEMA_V62 = 62;
@@ -173,7 +174,7 @@ export function getMissionInsertionUiModelV62(state, options = {}) {
   const restored = restoreMissionInsertionV62(state);
   const phase = restored.phases[restored.currentIndex];
   const relayStory = campaignInsertionStoryV160(restored);
-  const story = relayStory || campaignInsertionStoryV161(restored);
+  const story = relayStory || campaignInsertionStoryV161(restored) || campaignInsertionStoryV163(restored);
   const storyScene = relayStory && ['deployment', 'player-control'].includes(phase.kind)
     ? { kind: 'native-qz18-scene', cameraX: 0, width: 1280, height: 720 } : null;
   const media = resolveMissionInsertionMediaV62({
@@ -344,7 +345,7 @@ export class MissionInsertionUiV62 {
       return { ok: false, reason: this.state.paused ? 'paused' : 'unavailable', state: this.state };
     }
     const phase = getActiveMissionInsertionPhaseV62(this.state);
-    const story = campaignInsertionStoryV160(this.state) || campaignInsertionStoryV161(this.state);
+    const story = campaignInsertionStoryV160(this.state) || campaignInsertionStoryV161(this.state) || campaignInsertionStoryV163(this.state);
     // Let every radio line be read before an illustrated approach/deployment
     // advances. The manual continue action remains available at all times.
     const spokenWords = story?.lines.reduce((count, line) => count + line.text.split(/\s+/u).length, 0) || 0;
@@ -381,7 +382,8 @@ export class MissionInsertionUiV62 {
   }
 
   chooseStoryProtocol(protocolId) {
-    const choose = hasCampaignStoryV161(this.state.campaignId) ? chooseConvoyStoryProtocolV161 : chooseCampaignStoryProtocolV160;
+    const choose = hasCampaignStoryV163(this.state.campaignId) ? chooseLetheStoryProtocolV163
+      : hasCampaignStoryV161(this.state.campaignId) ? chooseConvoyStoryProtocolV161 : chooseCampaignStoryProtocolV160;
     const result = choose(this.state, protocolId, { now: this.now() });
     if (!result.ok) { this.announce('Le protocole se choisit pendant la préparation.'); return result; }
     if (!result.changed) return result;

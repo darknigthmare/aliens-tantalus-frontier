@@ -79,15 +79,19 @@ with sync_playwright() as p:
         canvas.focus()
         page.keyboard.down('ArrowRight')
         page.wait_for_timeout(80)
-        # The legacy help is hidden in full-screen combat. Use the actual
-        # visible return button, focus only: do not navigate or alter the UI.
+        # Return remains an activatable native action. Its focus releases held
+        # movement without covering the pending action with the pause modal.
         menu = page.locator('[data-xt="return"]')
         assert menu.is_visible()
         menu.focus()
+        check('The visible return action keeps keyboard focus and releases held movement',
+              not state(page)['match']['paused'] and not state(page)['match']['fighters'][0]['previousInput']['right'])
+        canvas.focus()
+        page.keyboard.press('KeyP')
         page.wait_for_function('globalThis.__ATF_XENO_TRIALS_V96__.snapshot().match.paused')
         frozen = state(page)['match']
         page.wait_for_timeout(250)
-        check('Moving keyboard focus to a menu pauses combat and its clock', state(page)['match']['tick'] == frozen['tick'])
+        check('Explicit native pause freezes combat and its clock after return focus', state(page)['match']['tick'] == frozen['tick'])
         screenshot(page, 'trials-focus-pause.png')
         page.keyboard.down('ArrowRight')
         page.locator('[data-xt="resume-overlay"]').click()

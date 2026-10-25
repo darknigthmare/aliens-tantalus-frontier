@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { XENO_TRIALS_RIG_DATA_V163 } from '../src/xeno-trials-rig-data-v163.js';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -14,9 +15,9 @@ const image=r=>({naturalWidth:r.sourceWidth,naturalHeight:r.sourceHeight,complet
 const metrics=r=>({width:r.sourceWidth*.25,height:r.sourceHeight*.25,pivotX:.5,bottom:1});
 function live(){const m=create({playerId:HUMAN,opponentId:'prowler',introSeconds:0,holdRoundTransition:true,roundSeconds:120,difficulty:'hard',seed:153});
  for(let i=0;i<5400&&!m.grappleV153;i++)step(m,DT,{});assert.ok(m.grappleV153,'CPU must actually obtain contact');return m;}
-test('four exact rigs, twenty-five key poses; no inferred anatomy for 185 other identities',()=>{
+test('four historical rigs and twenty-five historical poses remain intact beside the measured V163 catalog',()=>{
  assert.equal(rigs.length,4);assert.equal(rigs.reduce((n,r)=>n+Object.keys(r.poses).length,0),25);assert.ok(Object.isFrozen(rigs));
- assert.equal(roster.length,189);for(const f of roster)assert.equal(Boolean(rigFor(f,art(f.id))),rigs.some(r=>r.fighterId===f.id),f.id);
+ assert.equal(roster.length,189);for(const f of roster)assert.equal(Boolean(rigFor(f,art(f.id))),[...rigs,...XENO_TRIALS_RIG_DATA_V163].some(r=>r.fighterId===f.id),f.id);
  for(const r of rigs){assert.equal(r.canonExact,false);assert.equal(r.animation,'authored-keyframes-native-mesh');assert.ok(Object.isFrozen(r.bones));}
 });
 for(const r of rigs){

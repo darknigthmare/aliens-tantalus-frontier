@@ -1,3 +1,4 @@
+import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
@@ -12,6 +13,7 @@ import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './pu
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const ROOT_FILES = new Set([
+  'campaign-lethe-continuity-v163.css',
   'campaign-convoy-history-v162.css',
   'command-v110.css', 'echo9-v110.css', 'player-appearance-v126.css',
   '.gitattributes', '.gitignore', '.vercelignore', 'LICENSE_NOTICE.md',
@@ -141,6 +143,33 @@ for (const file of [
   'qa-forge-npcs-v158.py',
   'qa-xeno-trials-capture-reception-v158.py',
 ]) SCRIPT_FILES.add(file);
+for (const file of [
+  'audit-succession-v163.mjs',
+  'generate-audit-continuation-v163.py',
+  'public-release-admissions-v163.mjs',
+  'qa-campaign-lethe-v163.py',
+  'qa-hub-lift-transit-v163.py',
+  'qa-native-rig-catalog-v163.py',
+  'qa-npc-annex-leases-v163.py',
+  'qa-npc-annex-service-routes-v163.py',
+  'qa-reload-branches-v163.py',
+  'qa-title-compositions-v163.py',
+  'qa-trials-continuity-v163.py',
+  'qa-xeno-trials-capture-v163.py',
+  'verify-audit-continuation-v163.mjs',
+  'verify-audit-workbook-v163.py',
+  'verify-campaign-lethe-v163.mjs',
+  'verify-capture-admission-v163.mjs',
+  'verify-hub-lift-transit-v163.mjs',
+  'verify-native-rig-catalog-v163.mjs',
+  'verify-native-rig-terminal-v163.mjs',
+  'verify-native-rig-weapon-rigidity-v163.mjs',
+  'verify-npc-annex-leases-v163.mjs',
+  'verify-npc-annex-service-routes-v163.mjs',
+  'verify-reload-presentation-v163.mjs',
+  'verify-trials-navigation-v163.mjs',
+  'verify-xeno-trials-capture-v163.mjs',
+]) SCRIPT_FILES.add(file);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -167,6 +196,10 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V163-EXCEL-COMPLETION.md',
+  'docs/forge/xeno-trials/progress-v163.json',
+  'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V163.xlsx',
+  '.github/workflows/non-forge-regression-v163.yml',
   'docs/forge/xeno-trials/V162-NON-FORGE-CONTINUATION.md',
   'docs/forge/xeno-trials/progress-v162.json',
   'docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V162.xlsx',
@@ -385,6 +418,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const v163Admission = publicReleasePathAdmissionV163(path, { directory });
+  if (v163Admission !== null) return v163Admission;
   const v123Admission = publicReleasePathAdmissionV123(path, { directory });
   if (v123Admission !== null) return v123Admission;
   const v122Admission = publicReleasePathAdmissionV122(path, { directory });
@@ -449,6 +484,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicAdmissionsV121(root, { strict: true });
   await verifyPublicAdmissionsV122(root, { strict: true });
   await verifyPublicAdmissionsV123(root, { strict: true });
+  await verifyPublicAdmissionsV163(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

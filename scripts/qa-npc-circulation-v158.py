@@ -48,6 +48,7 @@ OBSERVE = '''() => {
   const h=__ATF_HUB__,s=h.getSnapshot().npcCirculationV158,a=h.npcCirculationActorV158;
   return {state:structuredClone(s),running:h.running,deck:h.state.deck,annex:h.currentAnnexV71?.()?.id||null,
     clock:structuredClone(h.npcRoutineContextV62.clock),player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,health:h.player.health},
+    liftTransit:h.hubLiftTransitV163?structuredClone(h.hubLiftTransitV163):null,inputKeys:[...h.keys],
     camera:{...h.camera},visible:h.npcs.filter(n=>n.crewId==='crew-14-echo-a').length,
     sameObject:h.npcs.find(n=>n.crewId==='crew-14-echo-a')===a,
     animation:a?.v52Animation?structuredClone(a.v52Animation):null,
@@ -218,7 +219,10 @@ with sync_playwright() as pw:
         phase('real lift to Habitat and medical service advances the campaign to 14:00')
         walk_to(page, 2350)
         page.keyboard.press('KeyS')
-        page.wait_for_function('()=>__ATF_HUB__.state.deck===1')
+        # The chart handoff starts the native opening phase; its cabin still
+        # owns inputs. Send the next real walk only after that journey finishes.
+        page.wait_for_function('''()=>{const h=__ATF_HUB__,p=h.player;return h.state.deck===1
+          &&!h.hubLiftTransitV163?.trip&&p.grounded&&!p.climbing&&Math.abs(p.y+p.h-624)<.001;}''')
         # Bounds come from the current authored compartment through a read-only module.
         medical_x = page.evaluate('''async()=>{const {HUB_DECKS}=await import('/src/hub-game.js');
           const b=HUB_DECKS[1].rooms.find(r=>r.id==='medical').propInteractionBounds;return b.x+b.w/2-22;}''')
@@ -232,7 +236,10 @@ with sync_playwright() as pw:
               offscreen['state']['actor']['roomId'] == 'combat-information' and offscreen['clock']['hour'] == 14)
         walk_to(page, 2350)
         page.keyboard.press('KeyW')
-        page.wait_for_function('()=>__ATF_HUB__.state.deck===0')
+        # The chart handoff starts the native opening phase; its cabin still
+        # owns inputs. Send the next real walk only after that journey finishes.
+        page.wait_for_function('''()=>{const h=__ATF_HUB__,p=h.player;return h.state.deck===0
+          &&!h.hubLiftTransitV163?.trip&&p.grounded&&!p.climbing&&Math.abs(p.y+p.h-624)<.001;}''')
         walk_to(page, 2200)
         returning = collect(page, '04-return-through-sas', destination='briefing')
         check('return reaches the original native briefing post, after actual travel and a second crossing',

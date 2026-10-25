@@ -12,3 +12,7 @@ Les huit fichiers de `assets/audio/` sont des compositions et effets originaux
 créés pour ce projet par synthèse hors ligne. Ils n'utilisent aucun échantillon
 de film, de jeu ou de bibliothèque commerciale. La partition et le générateur
 sont fournis dans `src/audio-score-v132.js` et `scripts/generate-audio-v132.mjs`.
+
+## V163 native capture illustrations
+
+The three RGBA pose atlases in `assets/openai/sprites/trials-v163/` are original OpenAI ImageGen adaptations of the existing native commando, guardian and cultist illustrations. They supply nine measured capture/recovery poses per identity. They are presentation assets for this fan project, not official franchise artwork or a claim of canonical visual fidelity. Atlas source hashes and geometry are recorded in `src/xeno-trials-capture-data-v163.js`.

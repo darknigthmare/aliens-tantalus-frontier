@@ -63,6 +63,12 @@ export const XENO_TRIALS_ADDED_SEQUENCES_V156 = freeze(styles.flatMap(style=>[
 ]));
 export const XENO_TRIALS_SEQUENCES_V156 = freeze([...XENO_TRIALS_SEQUENCES_V155,...XENO_TRIALS_ADDED_SEQUENCES_V156]);
 const lookup = new Map(XENO_TRIALS_SEQUENCES_V156.map(s => [s.id,s]));
+// A source-bound upper-body rig is not an admission for the four historical
+// choreographies, terminal landings or distance-driven exits.
+const historicalRigForV155 = fighter => {
+ const rig = getXenoTrialsRigV154(getXenoTrialsFighterV96(fighter.id), getXenoTrialsArtV96(fighter.id, fighter.variant));
+ return XENO_TRIALS_RIGS_V154.includes(rig) ? rig : null;
+};
 export function getXenoTrialsSequenceV155(rig, kind) {
  if (!XENO_TRIALS_RIGS_V154.includes(rig)) return null;
  return lookup.get(`${rig.fighterId}::${kind}`) || null;
@@ -95,10 +101,11 @@ export function createXenoTrialsOutroV155(match, reducedMotion = false) {
  if (match?.phase !== 'match-over' || !match.result?.completed || !['player','opponent'].includes(match.result.winner)
   || match.result.reason === 'double-ko' || !Array.isArray(match.fighters)) return null;
  const participants = match.fighters.flatMap(f => {
-  const def = getXenoTrialsFighterV96(f.id), rig = getXenoTrialsRigV154(def,getXenoTrialsArtV96(f.id,f.variant));
+  const rig = historicalRigForV155(f);
   if (!rig || f.y !== 0 || match.result.winner === f.side && f.hp <= 0) return [];
   const kind = f.side === match.result.winner ? 'outro-win' : 'outro-loss';
-  return [{side:f.side,fighterId:f.id,rigId:rig.id,sequenceId:getXenoTrialsSequenceV155(rig,kind).id,kind}];
+  const sequence = getXenoTrialsSequenceV155(rig,kind);
+  return sequence ? [{side:f.side,fighterId:f.id,rigId:rig.id,sequenceId:sequence.id,kind}] : [];
  });
  if (!participants.length) return null;
  return {matchId:match.config.matchId,terminalTick:match.tick,winner:match.result.winner,participants,
@@ -141,7 +148,7 @@ export function createXenoTrialsTerminalV156(match, kind, reducedMotion=false, p
    || previousOutro.reducedMotion || previousOutro.matchId!==match.config.matchId || previousOutro.terminalTick!==match.tick)return null;
  } else return null;
  const participants=match.fighters.flatMap(f=>{
-  const rig=getXenoTrialsRigV154(getXenoTrialsFighterV96(f.id),getXenoTrialsArtV96(f.id,f.variant));
+  const rig=historicalRigForV155(f);
   const previous=previousOutro?.participants?.find(p=>p.side===f.side&&p.fighterId===f.id&&p.rigId===rig?.id);
   if(!rig || f.y!==0 || kind==='outro'&&(!previous || previous.kind!==(f.side===match.result.winner?'outro-win':'outro-loss')))return [];
   return [{side:f.side,fighterId:f.id,rigId:rig.id,kind,sequenceId:`${f.id}::${kind}`,...(previous?{previousKind:previous.kind}:{})}];
@@ -155,8 +162,8 @@ export function createXenoTrialsTauntV156(match, presentation, controls={}, redu
  const f=match?.fighters?.[0];
  if(match?.phase!=='active' || match.paused || presentation?.blocksSimulation || !f || f.side!=='player'
   || f.hp<=0 || f.y!==0 || f.vy!==0 || f.attack || f.guard || f.stun>0 || f.hitFlash>0 || Object.values(controls).some(Boolean))return null;
- const rig=getXenoTrialsRigV154(getXenoTrialsFighterV96(f.id),getXenoTrialsArtV96(f.id,f.variant));
- if(!rig || getXenoTrialsRigCueV154(rig,match,f,presentation))return null;
+ const rig=historicalRigForV155(f);
+ if(!rig || !getXenoTrialsSequenceV155(rig,'taunt') || getXenoTrialsRigCueV154(rig,match,f,presentation))return null;
  return {kind:'taunt',matchId:match.config.matchId,round:match.round,startedTick:match.tick,fighterId:f.id,rigId:rig.id,
   healthAtStart:f.hp,phase:reducedMotion?'complete':'playing',elapsedMs:0,durationMs:XENO_TRIALS_SEQUENCE_TIMING_V156.tauntMs,
   paused:false,skipped:false,reducedMotion:reducedMotion===true};
@@ -213,7 +220,7 @@ export function createXenoTrialsLandingV157(match,reducedMotion=false) {
  if(match?.phase!=='match-over'||!match.result?.completed||!['player','opponent','draw'].includes(match.result.winner)
   ||!Array.isArray(match.fighters))return null;
  const participants=match.fighters.flatMap(f=>{
-  const rig=getXenoTrialsRigV154(getXenoTrialsFighterV96(f.id),getXenoTrialsArtV96(f.id,f.variant));
+  const rig=historicalRigForV155(f);
   if(!rig||![f.x,f.y,f.vy].every(Number.isFinite)||f.y<=0||f.y>1000)return [];
   const landingMs=Math.min(XENO_TRIALS_LANDING_V157.maxMs,Math.max(XENO_TRIALS_LANDING_V157.minMs,200+Math.sqrt(f.y)*12));
   return[{side:f.side,fighterId:f.id,rigId:rig.id,startX:f.x,startY:f.y,startVy:f.vy,landingMs}];
@@ -228,7 +235,9 @@ export function getXenoTrialsLandingViewV157(match,fighter,state,reducedMotion=f
  if(match?.phase!=='match-over'||!match.result?.completed||state?.matchId!==match.config.matchId
   ||state.terminalTick!==match.tick||!['playing','complete'].includes(state.phase)||!match.fighters?.includes(fighter)
   ||!Number.isFinite(state.elapsedMs)||state.elapsedMs<0)return null;
- const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
+ const rig=historicalRigForV155(fighter);
+ if(!rig)return null;
+ const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id&&p.rigId===rig.id);
  if(!p||![p.startY,p.landingMs].every(Number.isFinite)||p.startY<=0||p.landingMs<=0)return null;
  const progress=reducedMotion||state.reducedMotion||state.skipped?1:clamp(state.elapsedMs/p.landingMs);
  const renderY=p.startY*(1-smooth(progress));
@@ -246,7 +255,7 @@ export function createXenoTrialsExitV157(match, terminal, camera, reducedMotion=
  if(terminal?!terminalReady:!landingReady)return null;
  const sorted=[...match.fighters].sort((a,b)=>a.x-b.x||a.side.localeCompare(b.side));
  const participants=sorted.flatMap((f,index)=>{
-  const rig=getXenoTrialsRigV154(getXenoTrialsFighterV96(f.id),getXenoTrialsArtV96(f.id,f.variant));
+  const rig=historicalRigForV155(f);
   const landed=landingReady&&getXenoTrialsLandingViewV157(match,f,landing)?.settled;
   const grounded=f.y===0&&terminalReady&&terminal.participants?.some(p=>p.fighterId===f.id&&p.side===f.side&&p.rigId===rig?.id);
   if(!rig||!landed&&!grounded||!Number.isFinite(f.x)||![-1,1].includes(f.facing))return [];
@@ -278,7 +287,9 @@ export function getXenoTrialsExitViewV157(match,fighter,state,reducedMotion=fals
  if(match?.phase!=='match-over'||!match.result?.completed
   ||state?.matchId!==match.config.matchId||state.terminalTick!==match.tick||!['playing','complete'].includes(state.phase)
   ||!Number.isFinite(state.elapsedMs)||state.elapsedMs<0||!match.fighters?.includes(fighter))return null;
- const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id);
+ const rig=historicalRigForV155(fighter);
+ if(!rig)return null;
+ const p=state.participants?.find(p=>p.side===fighter.side&&p.fighterId===fighter.id&&p.rigId===rig.id);
  if(!p||![p.startX,p.endX,p.travelMs].every(Number.isFinite)||p.travelMs<=0||![-1,1].includes(p.direction))return null;
  const omitted=reducedMotion||state.reducedMotion||state.skipped;
  const travel=omitted?1:clamp((state.elapsedMs-XENO_TRIALS_EXIT_V157.turnMs)/p.travelMs);

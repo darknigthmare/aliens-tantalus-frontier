@@ -1,6 +1,21 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-continuation-v162';
+const CACHE = 'atf-v143-continuation-v163';
 const SHELL = Object.freeze([
+  '/src/npc-annex-leases-v163.js',
+  '/src/npc-service-traffic-v163.js',
+  '/src/xeno-trials-capture-v163.js',
+  '/assets/openai/sprites/trials-v163/cultist-capture-v163.png',
+  '/assets/openai/sprites/trials-v163/guardian-capture-v163.png',
+  '/assets/openai/sprites/trials-v163/wy-commando-capture-v163.png',
+  '/campaign-lethe-continuity-v163.css',
+  '/src/campaign-lethe-continuity-ui-v163.js',
+  '/src/campaign-lethe-continuity-v163.js',
+  '/src/campaign-lethe-story-v163.js',
+  '/src/hub-lift-transit-v163.js',
+  '/src/npc-annex-service-routes-v163.js',
+  '/src/reload-presentation-v163.js',
+  '/src/xeno-trials-capture-data-v163.js',
+  '/src/xeno-trials-rig-data-v163.js',
   '/campaign-convoy-history-v162.css',
   '/src/campaign-convoy-history-v162.js',
   '/src/campaign-convoy-history-ui-v162.js',

@@ -202,12 +202,13 @@ export function withHubNpcCirculationV158(Base) {
       if (this.npcCirculationSandboxV158 || this.editorPlaytest || this.forgeSessionV141) return natives;
       const resolution = this.npcRoutineResolutionsV62?.get(CREW_ID);
       const duty = annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).some(duty => duty.crewId === CREW_ID);
-      if (duty) {
+      if (duty && !this.hubNpcLeaseOwnerV163?.(CREW_ID)
+        && !this.canRestoreNpcPhysicalLeaseOriginV163?.(CREW_ID, this.npcCirculationStateV158)) {
         // The historical annex watch is still a conditional assignment. It is
         // explicitly outside this circuit, with no hidden parent duplicate.
         this.npcCirculationActorV158 = null; this.npcCirculationStateV158 = null; return natives;
       }
-      if (!this.npcCirculationActorV158) {
+      if (!this.npcCirculationActorV158 && !this.hubNpcLeaseReentryBlockedV163?.(CREW_ID)) {
         let sources = natives;
         if (deck !== 0) {
           const visibleDoors = this.doorStates;
@@ -283,6 +284,7 @@ export function withHubNpcCirculationV158(Base) {
       const clocks = beforeActor && Object.fromEntries(['workClock', 'supportClock', 'alertClock']
         .map(key => [key, finite(beforeActor[key]) ? beforeActor[key] : 0]));
       const result = super.update(delta);
+      if (this.hubNpcLeaseOwnerV163?.(CREW_ID)) return result;
       if (!wasRunning || !this.running || this.npcCirculationSandboxV158 || !finite(delta) || delta <= 0) return result;
       const actor = this.npcCirculationActorV158, previous = this.npcCirculationStateV158;
       if (!actor || !previous) return result;
@@ -343,9 +345,25 @@ export function withHubNpcCirculationV158(Base) {
       if (patch) original({ ...patch, npcCirculationV158: normalizeNpcCirculationV158({ schema: 158, actor: this.npcCirculationStateV158 }) });
     }
 
+    returnNpcPhysicalLeaseV163(crewId) {
+      if (crewId !== CREW_ID) return super.returnNpcPhysicalLeaseV163?.(crewId);
+      const actor = this.npcCirculationActorV158;
+      if (actor && this.npcCirculationStateV158) this.npcCirculationStateV158 = {
+        ...this.npcCirculationStateV158, x: actor.x, y: actor.y, facing: actor.facing, velocity: 0 };
+      this.refreshNpcCirculationIntentV158();
+    }
+
+    delegateNpcPhysicalLeaseV163(crewId) {
+      if (crewId !== CREW_ID) return super.delegateNpcPhysicalLeaseV163?.(crewId);
+      this.npcCirculationActorV158 = null; this.npcCirculationStateV158 = null;
+    }
+
     getSnapshot() {
+      const leased = this.hubNpcLeaseOwnerV163?.(CREW_ID);
       return { ...super.getSnapshot(), npcCirculationV158: { ...normalizeNpcCirculationV158({ schema: 158,
         actor: this.npcCirculationStateV158 }),
+      ...(leased ? { actor: null, leasedToV163: leased,
+        leaseOriginBookmarkV163: normalizeNpcCirculationV158({ schema: 158, actor: this.npcCirculationStateV158 }).actor } : {}),
       doors: (this.npcCirculationDoorsV158 || []).filter(door => door.id === CENTRAL_ID).map(door => ({
         id: door.id, x: door.x, progress: door.progress, demandedBy: this.hubNpcBulkheadDemandV158(door) ? CREW_ID : null })) } };
     }

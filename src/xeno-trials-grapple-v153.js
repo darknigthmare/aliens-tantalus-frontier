@@ -92,27 +92,36 @@ export function stepXenoTrialsGrappleV153(match, bounds, impact, emit) {
       spec: { damage: config.damage, stun: 0, push: 0, unblockableV151: true, continuousV153: true } });
   }
 }
+function escapePrompt(match, hold, detailed = false) {
+  if (hold.target === 'opponent' && match.opponentInputSourceV163 !== 'direct') return 'SAISIE · RÉSISTANCE ADVERSE';
+  return detailed ? 'SAISIE · MAINTENIR GARDE POUR SE DÉGAGER' : 'SAISIE · GARDE POUR DÉGAGER';
+}
 export function getXenoTrialsGrappleViewV153(match) {
   const hold = match?.grappleV153;
   return hold ? { ...hold, remainingTicks: Math.max(0, hold.expiresTick - match.tick),
     escapeRatio: Math.min(1, hold.escapeProgress / config.escapeTicks),
-    label: 'SAISIE · MAINTENIR GARDE POUR SE DÉGAGER', canonExact: false,
+    label: escapePrompt(match, hold, true), canonExact: false,
     animation: config.animation } : null;
 }
 /** Read-only restraint indicators. Existing art and world scale are untouched.
  * No procedural bending is presented as an authored, articulated pin animation.
  */
-export function drawXenoTrialsGrappleV153(ctx, match, bounds, floor) {
+export function drawXenoTrialsGrappleV153(ctx, match, bounds, floor, options = {}) {
   const view = getXenoTrialsGrappleViewV153(match);
   if (!view) return;
   const actors = [view.attacker, view.target].map(side => match.fighters.find(f => f.side === side));
   if (actors.some(f => !f)) return;
   const [a,b] = actors.map(bounds), y = floor - Math.max(a.top,b.top) - 28;
   ctx.save(); ctx.strokeStyle = '#e4c889'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(a.center, floor - a.bottom - a.height * .45);
-  ctx.lineTo(b.center, floor - b.bottom - b.height * .45); ctx.stroke();
+  // The historical connector explains the static fallback. A complete paired
+  // pose already shows its contact and must not draw a line to standing bounds.
+  // Explicit opt-out keeps every existing caller's HUD contract unchanged.
+  if (options?.showLegacyContactLine !== false) {
+    ctx.beginPath(); ctx.moveTo(a.center, floor - a.bottom - a.height * .45);
+    ctx.lineTo(b.center, floor - b.bottom - b.height * .45); ctx.stroke();
+  }
   ctx.fillStyle = '#061019'; ctx.fillRect(b.center - 48, y, 96, 8);
   ctx.fillStyle = '#a7dbb0'; ctx.fillRect(b.center - 48, y, 96 * view.escapeRatio, 8);
   ctx.font = '12px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#e4c889';
-  ctx.fillText('SAISIE · GARDE POUR DÉGAGER', b.center, y - 8); ctx.restore();
+  ctx.fillText(escapePrompt(match, view), b.center, y - 8); ctx.restore();
 }

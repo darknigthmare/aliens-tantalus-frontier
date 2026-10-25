@@ -277,10 +277,12 @@ export function withHubNpcLifeV136(Base) {
     tickAnnexNpcLifeV141(delta) {
       if (this.running === false || this.editorPlaytest || this.forgeSessionV141 || this.annexNpcSandboxV141 || !(delta > 0)) return;
       const room = this.currentAnnexV71?.(), peers = this.activeAnnexNpcsV141(), dt = Math.min(delta, .1);
+      const physicalPeers = this.npcAnnexPhysicalPeersV163?.() || peers;
       for (const npc of peers) {
+        if (this.hubNpcLeaseOwnerV163?.(npc.crewId)) continue;
         npc.workClock = Math.max(0, finite(npc.workClock) - dt);
         npc.supportClock = Math.max(0, finite(npc.supportClock) - dt);
-        const life = advanceNpcLifeV136(npc.lifeV136, npc, dt, { room, peers,
+        const life = advanceNpcLifeV136(npc.lifeV136, npc, dt, { room, peers: physicalPeers,
           context: `annex:${room.id}:${npc.routineDeterministicKeyV62}`, colliders: room.colliders,
           reducedMotion: this.reducedMotion });
         npc.lifeV136 = life;
