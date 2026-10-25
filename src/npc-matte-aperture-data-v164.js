@@ -1031,6 +1031,144 @@ export const NPC_MATTE_APERTURES_V164 = freeze([
             ],
             "expectedRgbaHex": "fffffffffdfdfefff4f4f3fffffffffffffffdfff9f9f9fff1f0f0fffbfbf9ffffffffffeaeaebffecededfffffffffffbfafaffecefedffffffffffe9eaebffeeeceeffe8e9e9ffececedfffffffffffcfefcffeaebeaffebebecffeaeaeafffffffffffffffeffebebeaffeeeeeeffedeeeeffffffffffffffffffececedfff1f1f2fff0f1f1fffffffffffffffffff2f1f2fff9f9fafff6f7f7fffffffffffffffffff6f6f5fffafafafff5f5f6ffffffffffefeff0fffcfcfdfff9f9fafffafbfbfff6f6f6fffffffffffffffffff9fafafffdfdfdfffbfbfbfff8f8f8fffcfdfdfff3f3f1fffffffffffafafbfffdfdfdfffbfbfbfff7f7f7fffafaf9fffffffffffffffffffbfbfbfffefefefffbfafbfff5f5f6fffefdfefffffffffff9f9f8fffffffefffafafafff3f3f3fffffffffffffffffff9f8f9fffffffffffcfbfcfff4f5f5fffffffffffffffffffafbfafffefdfefff9fafafff2f2f2fffefefefff7f6f7fff8faf9fff9f7f8fff8f7f8fff0f0f0fffffffffff1f1f2fffbfaf9fffaf8f9fffafaf9fffefefefff2f5f2fff5f4f4fff6f6f6fff6f6f6ffffffffffffffffffeeefeefff3f4f4fffefefefffafaf8ffe9eae9fffffffffff9fbf7fff1f1f1ff",
             "pixelCount": 114
+          },
+          {
+            "id": "underarm-2",
+            "bboxCellLocal": [
+              109,
+              92,
+              128,
+              116
+            ],
+            "runs": [
+              [
+                92,
+                629,
+                632
+              ],
+              [
+                93,
+                628,
+                632
+              ],
+              [
+                94,
+                626,
+                632
+              ],
+              [
+                95,
+                625,
+                632
+              ],
+              [
+                96,
+                624,
+                633
+              ],
+              [
+                97,
+                623,
+                633
+              ],
+              [
+                98,
+                622,
+                633
+              ],
+              [
+                99,
+                621,
+                634
+              ],
+              [
+                100,
+                621,
+                636
+              ],
+              [
+                101,
+                621,
+                638
+              ],
+              [
+                102,
+                622,
+                637
+              ],
+              [
+                103,
+                622,
+                637
+              ],
+              [
+                104,
+                623,
+                636
+              ],
+              [
+                105,
+                623,
+                637
+              ],
+              [
+                106,
+                624,
+                638
+              ],
+              [
+                107,
+                625,
+                640
+              ],
+              [
+                108,
+                626,
+                640
+              ],
+              [
+                109,
+                627,
+                638
+              ],
+              [
+                110,
+                627,
+                637
+              ],
+              [
+                111,
+                628,
+                637
+              ],
+              [
+                112,
+                628,
+                629
+              ],
+              [
+                112,
+                630,
+                636
+              ],
+              [
+                113,
+                628,
+                636
+              ],
+              [
+                114,
+                630,
+                637
+              ],
+              [
+                115,
+                632,
+                636
+              ]
+            ],
+            "expectedRgbaHex": "f2f2f3fffbfafafffffffffffffffffff1f2f1ffedededfffafbfafffffffffffdfdfdfff2f3f3fff1f2f2fff7f8f7fffbfbfbfffffffffffbfafafff8f8f9fff9fafafff7f8f9fff9f8f9fffffffffffffffffff4f5f4fffefefefffffffffffffffefffffffffffffefefffefefdfffcfcfbfff9f9f9ffeaeae9fff4f6f4fff6f6f6fff8f8f8fffaf9fbfffafafbfffafafafff4f4f3fffffdfcfffefcf9ffe8e7e8fff1f2f2fff1f3f3fff5f5f6fff8f8f8fff9fafafff9fafafffbfbfafff4f5f3fffdfbfafffbfafbffedece9fff4f3f2fff5f7f7fff8fafafffcfcfcfffdfefdfffefffffffffffffffffffefff8f8f7fff3f3f3fffffdfdfffffffffff1f0ebfff6f6f5fff5f6f8fff8fafbfffbfcfbfffdfefdfffdfefefffefefffffefefefff6f6f7fff2f2f3fff3f1f2fffcfbfcfff5f7f4ffebe9e9fffbfbf7fff6f6f5fff9f9fafffbfbfdfffefefefffdfdfdfffefefefffffefefffefdfefff4f5f5fff0f0f1fff2f3f2fff0eef0fff0f1effffdfefffff0eeeafffffffffff6f6f3fffdfdfcfffdfefefffffefefffffffffffffdfefffefefefffcfdfefff3f3f4ffecefeefff0f0f1fff4f3f4ffefefeffffbfbfbfffffffffff5f4f3fff9fafbfffcfdfcfffffffffffffffffffefefefffbfcfefffcfcfcfff0f2f2ffeaececfff0f1f1ffeeeef0fff3f4f5fff1efeffffffffffff4f4f4fffdfcfcfffffefffffffffffffdfefffffbfcfdfffafbfbfff0f1f1ffeaebebfff0f0f0ffedeeeffff6f7f7ffe7ebecfffcfbfafff8f8f8fffcfdfdfffcfdfcfffcfdfdfffafbfbfffafbfbfff1f3f2ffe8eae9ffedefefffeff0f1ffebebebfffffffefffffffffff9f9f7fffafbfbfffcfcfdfffdfefefffbfcfcfff9fbfbfff2f4f3ffeaebeaffedeeeeffeff0efffeff0f0fff0f0f1fffaf9f7fffffffffff0f0f1fff5f6f6fff3f5f5fff1f3f4fff0f2f1ffedf1effff0f2f1fff5f5f5fff8f7f7fffafbfbfff9fafafff4f3f2fffbfcfcfffafbfbfff3f4f3ffe7e8e6ffecededffebedeeffeceeedffeff0f0fff7f8f7fffcfbfbfffdfdfefffffffefffdfdfefff8f8f7fffbfbfafffffffffff8faf9ffeaebebffeff2f1ffedeff0fff2f2f2fffafbfafffcfcfbfffdfdfdfffcfcfcfffefefeffedebecffe6ececfff0f1f0ffe9eaebffecedecfff2f3f3fffdfdfefffdfdfdfffefefefff9faf9fffffffffffdfdfdffe7e8e7ffecececfff6f6f4fffffefefffdfcfcfffbfbfbfffffffffff2f3f3fffbfafcffe8e8e7fff6f6f4fffffffffffafbfbfff9faf9fffffffffffffffffffcfbfbfff7f7f6fff7f6f5fffcfdfcfff8f8f8fff3f3f4fffefefeffe9e6e7fffffffffffbfbfcfff6f6f5fffcfbfcfffffffffff7f7f6fffefefefffdfeffffebececffececebff",
+            "pixelCount": 251
           }
         ]
       },
@@ -1248,7 +1386,7 @@ export const NPC_MATTE_APERTURES_V164 = freeze([
         ]
       }
     ],
-    "maskedPixels": 463
+    "maskedPixels": 714
   },
   {
     "id": "npc.asha-mbaye.locomotion",

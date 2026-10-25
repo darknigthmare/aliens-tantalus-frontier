@@ -1,6 +1,6 @@
 # Tantalus Frontier — V163
 
-Prépublication : reprise exhaustive hors Forge. Les 68 tâches, 17 priorités et 189 identités restent distinctes de leurs preuves de réalisation.
+Contrats cumulatifs hors Forge. La livraison V163 a été validée sur 043bb60 et fusionnée par 8a934b7. Les empreintes runtime de ce fichier sont maintenues pour le correctif V164, dont les résultats doivent rester distincts. Les 68 tâches, 17 priorités et 189 identités ne deviennent pas toutes closes.
 
 ## C163-CAMPAIGN — Dossier de Lethe : campagne originale continue et retours natifs durables
 
@@ -70,3 +70,7 @@ Couverture automatisée de continuité ; aucune validation humaine ni certificat
 Les matrices du classeur affectent chaque ligne et chaque identité. Les références, médias, rigs et preuves de recette sont distingués ; Forge reste reportée. Aucune approbation artistique 1:1 déduite.
 
 Les champs hérités rigCount=4 et newOriginalSpriteFiles=0, ainsi que les tables listées dans inheritedTablesFromV162, décrivent les livraisons historiques. Les 189 sprites du projet sont présents. Les états V163 sont séparés : 19 maillages de présentation aux fonctions limitées (4 historiques et 15 nouveaux), 170 identités à mesurer et produire, et 3 nouveaux PNG ImageGen de capture totalisant 27 poses originales du projet. Les cycles complets de marche et les certifications 1:1 restent distincts.
+
+## Livraison historique et suivi V164
+
+La livraison historique V163 est validée sur 043bb60 et fusionnée par 8a934b7 : 2 993 tests Node, 16 profils, 1 566 contrôles et 835 captures. Ces résultats V163 et les compteurs V162 restent historiques. Les contrats runtime cumulatifs de ce document sont amendés pour V164, qui attend ses propres reçus de recette, CI, revue et fusion ; aucun résultat antérieur ne les remplace.

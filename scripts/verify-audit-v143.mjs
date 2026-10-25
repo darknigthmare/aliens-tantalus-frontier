@@ -181,10 +181,14 @@ test('a complete install warms the shell with omitted credentials and does not s
   assert.ok(h.calls.every(request => request.credentials === 'omit'));
 });
 test('a failed install rolls back the entire new cache, not the previous release', async () => {
-  const h = host(); await h.caches.open('atf-previous');
+  const h = host(), previousName = 'atf-v143-continuation-v163';
+  assert.notEqual(h.api.CACHE, previousName, 'The source worker must not overwrite the active V163 cache.');
+  const previous = await h.caches.open(previousName), stableRequest = req('/src/app.js');
+  await previous.put(stableRequest, new Response('stable V163 source module'));
   h.network(async request => { if (request.url.endsWith('/src/app.js')) throw new Error('missing module'); return response(request.url); });
   await assert.rejects(h.dispatch('install'), /missing module/);
-  assert.deepEqual(await h.caches.keys(), ['atf-previous']);
+  assert.deepEqual(await h.caches.keys(), [previousName]);
+  assert.equal(await (await previous.match(stableRequest)).text(), 'stable V163 source module');
 });
 test('optional atlas warming is same-origin, bounded and tolerant of unavailable files', async () => {
   const h = host();

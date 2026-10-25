@@ -40,7 +40,7 @@ function decodePng(path) {
 
 const accepted = new Map([
   ['npc.maksim-orlov.locomotion', { sha: 'cfde33f66024ff7962c6ab250e6962fec4ef9e157af2f20d748adf6c385c6f94', pixels: 396, frames: [0, 1, 2, 3] }],
-  ['npc.inez-harlow.locomotion', { sha: 'dd0e93df51e4240ac0a91e2cee6d2b824688afaee88f12a0e86c7ea7e1ed0a92', pixels: 463, frames: [0, 1, 2, 3] }],
+  ['npc.inez-harlow.locomotion', { sha: 'dd0e93df51e4240ac0a91e2cee6d2b824688afaee88f12a0e86c7ea7e1ed0a92', pixels: 714, frames: [0, 1, 2, 3] }],
   ['npc.asha-mbaye.locomotion', { sha: 'a9cfe2c6df338f0a3c1f743cb936914460c0126b560687785c156b12ce1614c7', pixels: 500, frames: [0, 1, 2, 3] }],
   ['npc.mara-vega.locomotion', { sha: 'b74106a299e1d48fc7acb160940a54285faf405f7e60bd6293203db5f6d4ac35', pixels: 225, frames: [0, 1, 3, 12] }],
 ]);
@@ -71,7 +71,7 @@ function visibleCellBounds(data, width, index) {
   return right ? [left, top, right, bottom] : null;
 }
 
-test('only the four reviewed source atlases and their 1,584 exact opaque pocket pixels are admitted', () => {
+test('only the four reviewed source atlases and their 1,835 exact opaque pocket pixels are admitted', () => {
   assert.equal(NPC_MATTE_APERTURES_V164.length, 4);
   assert.equal(new Set(NPC_MATTE_APERTURES_V164.map(p => p.id)).size, 4);
   assert.equal(new Set(NPC_MATTE_APERTURES_V164.map(p => p.path)).size, 4);
@@ -105,7 +105,7 @@ test('only the four reviewed source atlases and their 1,584 exact opaque pocket 
     assert.equal(admittedPixels(policy).size, expected.pixels);
     assert.equal(policy.maskedPixels, expected.pixels); total += expected.pixels; frames += policy.frames.length;
   }
-  assert.equal(total, 1584); assert.equal(frames, 16);
+  assert.equal(total, 1835); assert.equal(frames, 16);
 });
 
 test('real PNG repairs change only admitted alpha bytes, retaining all RGB, clothing and 64 cell silhouettes/soles', () => {
@@ -229,7 +229,7 @@ test('the complete admitted atlas working set stays within four images and 16 Mi
     }
     const snapshot = runtime.getNpcMatteApertureSnapshotV164(), stable = { ...calls };
     assert.equal(snapshot.retainedEntries, 4); assert.equal(snapshot.retainedBytes, 16 * 1024 * 1024);
-    assert.equal(snapshot.preparations, 4); assert.equal(snapshot.changedPixels, 1584);
+    assert.equal(snapshot.preparations, 4); assert.equal(snapshot.changedPixels, 1835);
     for (let index = 0; index < 32; index++) {
       const unknown = Object.freeze({ src: `/assets/unreviewed-uniform-${index}.png`, complete: true, naturalWidth: 1024, naturalHeight: 1024 });
       assert.equal(runtime.resolveHumanSpriteDrawableV164(unknown), unknown);

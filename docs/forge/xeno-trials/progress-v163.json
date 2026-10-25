@@ -2772,8 +2772,8 @@
     "src/npc-annex-service-routes-v163.js": "25d7efed89dc1134a79cabe8fad259c029c2db8db58f43d1a2fa4be487a0f92f",
     "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
     "src/npc-life-v136.js": "ccd320fd541abf156e59cac8e2af45322b908204e5141849252de487102c66d9",
-    "src/npc-matte-aperture-data-v164.js": "16e7eb2bc96f16c7f404748463d7374e5d5fcc7fa46ec9d73b966b41c24c0e6f",
-    "src/npc-matte-apertures-v164.js": "5b27f25b90688989c4d3ba0627ae746f1c155b2f5a1b01aef50b072b4d725324",
+    "src/npc-matte-aperture-data-v164.js": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+    "src/npc-matte-apertures-v164.js": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
     "src/npc-medical-route-v162.js": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
     "src/npc-service-routes-v161.js": "806952ac6deaf7edb659c6f3c46254be7a569ac9a5b225e5b816a6e832a753cb",
     "src/npc-service-traffic-v163.js": "cd4b19be365797e185bd6d55e4125457decc134e4298dfd4a18a544b9a7ca3b2",
@@ -2805,7 +2805,7 @@
     "src/xeno-trials-runtime-v96.js": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
     "src/xeno-trials-sequences-v155.js": "ed140f0788d4d13b91ddd0aaa8a955c7ca50507185f9eee3debd537385ad2321",
     "src/xeno-trials-ui-v96.js": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
-    "sw.js": "cb6eb87ee7f5b25bc822f6fbaf035128497c10876aa72c6b879e7fbec0a32994"
+    "sw.js": "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6"
   },
   "tables": {
     "01_Presentations": {
@@ -4601,67 +4601,67 @@
         [
           "QA163-NODE",
           "Toutes les suites Node déclarées, fichiers dédupliqués",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Aucun résultat historique transféré."
         ],
         [
           "QA163-C163-CAMPAIGN",
           "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/qa-campaign-lethe-v163.py ; scripts/qa-campaign-story-v160.py ; scripts/qa-campaign-convoy-history-v162.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Quatre opérations originales existantes : les455 entrées de campagnes du catalogue ne sont pas toutes des missions nouvelles entièrement validées par ce chantier. Aucune archive Blackout/Earth manquante ou scène filmique canonique n’est reconstruite ; fiction originale indiquée dans les données. Les scènes sont illustrées et radio, avec assets existants ; elles ne constituent pas des voix ou clips récupérés. Le pilote natif complète C12 ; il ne parcourt pas intégralement QZ18, APC ou toute la colonie/quarantaine Cocon dans sa propre session. Les anciens profils peuvent fournir un dossier QZ complet ou un historique APC validé : ils sont des reprises déclarées, jamais des parcours frais inventés. L’historique local est validé structurellement, pas signé cryptographiquement ; il n’autorise aucun paiement. La QA automatisée ne constitue pas une validation humaine ou 1:1. Les contrôles de géométrie portent sur la préparation C12 réellement reprise ; ils ne certifient pas toutes les phases, toutes les campagnes ou une finition artistique globale. Les pilotes hérités conservent leurs assertions : les cinq identités V163 ne peuvent faire avancer que leur unique horloge d’animation finie et bornée au temps de rechargement mesuré."
         ],
         [
           "QA163-C163-CREW",
           "scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/qa-npc-annex-service-routes-v163.py ; scripts/qa-npc-annex-leases-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Eight additional physical watch circuits;19-annex matrix preserves all other actual statuses. No NPC lift/cross-deck travel is observed or manufactured. C163-LIFT is the player foundation owned by root. Cal logistics duty remains on actual468catwalk; completing his circuit requires a durable ladder approach/ascent/top departure controller and fitting shipped climb art. No floor624 substitute. Other annex watches of a crew with an existing owner require extending that same owner, never creating a second samecrew factory. Source/destination coordinate charts change only behind a fully closed native paired leaf; this is not an animated back-facing walk. Native timetable/lifecycle/other-annex and courtesy context handoffs are explicitly observedTravel:false; macro command hours are not observed walking hours. Courtesy only adopts native routine peers that have no physical route owner and no care/mission/crisis/contact priority. Actual blockers, destination occupancy, locked leaves, unsupported goals and unsafe chains stay blocked. Native art and actual44×92actor contracts are preserved; no new back-view sprite or artistic/canonical1:1 certification. Forge/editor remains outside the requested scope; sandbox sessions create no new owners."
         ],
         [
           "QA163-C163-LIFT",
           "scripts/verify-hub-lift-transit-v163.mjs ; scripts/qa-hub-lift-transit-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Ne démontre pas transport PNJ entre ponts ni nouvelle animation climb PNG/cabine existants ; aucune attestation artistique canonique1:1 QA Chromium automatisée, sans participants humains"
         ],
         [
           "QA163-C163-RELOAD",
           "scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/qa-reload-branches-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Les atlas dédiés NORMAL/SUCCESS/PERFECT/FAILED par famille restent absents. Un geste procédural corrigé n'est pas une nouvelle animation source dédiée. Les coordonnées service/grip existantes sont des mesures/tunings de silhouette du projet ; aucune certification canonique1:1."
         ],
         [
           "QA163-C163-TITLE",
           "scripts/qa-title-compositions-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "La demande historique de20presets artistiques dédiés reste ouverte :17autres décors planétaires/35slots historiques absents. V79/V87/V90 existants sont déjà branchés. Les variantes de présentation ne sont pas20nouvelles compositions artistiques. Pas de nouvelle composition titre livrée ni certification artistique1:1. La comparaison QA conserve tous les changements de métadonnées réellement observés : seuls updatedAt et migratedFrom peuvent suivre le vrai commit du menu ; toutes les autres valeurs et leurs types restent strictement égaux. Aucun résultat d180 échoué n’est transféré. Les 18 parcours QA couvrent les trois presets existants sur deux viewports et trois modes ; les 21 combinaisons catalogue/angle/mode examinées séparément ne sont pas 21 nouveaux parcours natifs, décors ou assets."
         ],
         [
           "QA163-C163-CAPTURE",
           "scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/qa-xeno-trials-capture-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète."
         ],
         [
           "QA163-C163-ROSTER",
           "scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/qa-native-rig-catalog-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "0 new full locomotion cycles. The9 historically admitted walks remain unchanged. 0 ART153 capture sequence or full native action-moveset admissions. 0 new complete dedicated costume skins;30 missing skin sets retain five missing atlas families each. 0 canonical source-game1:1 approvals. Native controller fixtures use a normalized public initial one-HP rule and ordinary CPU/keyboard play, distinct from the production menu/unlock journey. Canvas sourceSha256 is a provenance declaration bound to data, not an independent browser hash of decoded PNG bytes; exact bytes are checked by the source verifier and frozen build admissions. Optional --ids executes a preview subset only, with passed-subset status and releaseEvidenceEligible:false; the default full catalogue remains required for recipe evidence."
         ],
         [
           "QA163-C163-CONTINUITY",
           "scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/qa-trials-continuity-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Couverture automatisée de continuité ; aucune validation humaine ni certification canonique1:1. Broodstorm s’arrête à la destruction réelle du second nid par la dernière bombe restaurée ; escorte, reine et extraction finale ne sont pas revendiquées par ce pilote. Le profil Trials déclare quatre déblocages initiaux non gagnés ; la règle 1 PV est sélectionnée dans l’interface existante, sans écriture de santé dans le moteur. Les quatre identités de sortie héritées sont couvertes ; nouveaux dessins, audio, tours de dos, locomotion entièrement dessinée et autres identités restent ouverts. Les projections CSS vérifient la géométrie du viewport ; les captures conservent les pixels natifs réellement observés. Aucun visuel de film ou résultat de combat n’est reconstruit. Le correctif de rendu Broodstorm ne fournit aucun nouvel art ni chapitre complet ; il ne valide ni escorte, reine, extraction finale, ni fidélité franchise1:1. Les21tests ciblés du successeur partagé sont préliminaires ; seules de nouvelles captures natives liées au candidat exact peuvent vérifier le rendu corrigé. Aucun reçu d180 n’est transféré."
         ],
         [
           "QA163-DOCUMENTS",
           "Audit complet85lignes/189IDs, classeur et succession",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Un classement ne constitue pas une réalisation."
         ],
         [
           "QA163-PUBLICATION",
           "CI, revue, fusion et identité de source",
-          "À vérifier séparément",
+          "V164 : à vérifier, CI, revue et fusion propres",
           "Reçus finaux conservés hors sources prépublication."
         ]
       ]
@@ -6583,9 +6583,9 @@
         [
           "sw.js",
           "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-          "cb6eb87ee7f5b25bc822f6fbaf035128497c10876aa72c6b879e7fbec0a32994",
-          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution.",
-          "scripts/verify-public-release-v86.mjs ; scripts/verify-release-artifact-v143.mjs"
+          "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6",
+          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue.",
+          "scripts/verify-public-release-v86.mjs ; scripts/verify-release-artifact-v143.mjs ; scripts/verify-audit-v143.mjs"
         ],
         [
           "campaign-lethe-continuity-v163.css",
@@ -6646,14 +6646,14 @@
         [
           "src/npc-matte-aperture-data-v164.js",
           "Non épinglé en V162",
-          "16e7eb2bc96f16c7f404748463d7374e5d5fcc7fa46ec9d73b966b41c24c0e6f",
-          "Épingler les sources et runs exacts de vingt-quatre poches de fond dans seize cellules de quatre PNJ, sans redessiner les PNG ni certifier leurs autres poses.",
+          "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+          "Épingler les sources et runs exacts de poches de fond explicitement admises dans seize cellules de quatre PNJ, sans redessiner les PNG ni certifier leurs autres poses.",
           "scripts/verify-npc-matte-apertures-v164.mjs"
         ],
         [
           "src/npc-matte-apertures-v164.js",
           "Non épinglé en V162",
-          "5b27f25b90688989c4d3ba0627ae746f1c155b2f5a1b01aef50b072b4d725324",
+          "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
           "Corriger les seuls pixels opaques de fond admis avec garde des octets ciblés, cache borné et gestion des changements de portrait sans clé globale des blancs.",
           "scripts/verify-npc-matte-apertures-v164.mjs"
         ],
@@ -15311,7 +15311,7 @@
     "Trente ensembles de tenues dédiées manquent ; il ne s’agit ni de trente PNG ni d’un nombre de fichiers commandés.",
     "Le classeur encyclopédie brut et les archives DLC Blackout/Earth/spritesV10 restent absents ; le lore ne les reconstruit pas.",
     "Les éventuelles nouvelles poses natives dérivées restent des adaptations du projet, sans certification de mouvement d’œuvre1:1.",
-    "Tous les résultats de recette, CI, revue et fusion V163 attendent leurs reçus exacts ; les compteurs V162 restent historiques.",
+    "La livraison historique V163 est validée sur 043bb60 et fusionnée par 8a934b7 : 2 993 tests Node, 16 profils, 1 566 contrôles et 835 captures. Ces résultats V163 et les compteurs V162 restent historiques. Les contrats runtime cumulatifs de ce document sont amendés pour V164, qui attend ses propres reçus de recette, CI, revue et fusion ; aucun résultat antérieur ne les remplace.",
     "Quatre opérations originales existantes : les455 entrées de campagnes du catalogue ne sont pas toutes des missions nouvelles entièrement validées par ce chantier. Aucune archive Blackout/Earth manquante ou scène filmique canonique n’est reconstruite ; fiction originale indiquée dans les données. Les scènes sont illustrées et radio, avec assets existants ; elles ne constituent pas des voix ou clips récupérés. Le pilote natif complète C12 ; il ne parcourt pas intégralement QZ18, APC ou toute la colonie/quarantaine Cocon dans sa propre session. Les anciens profils peuvent fournir un dossier QZ complet ou un historique APC validé : ils sont des reprises déclarées, jamais des parcours frais inventés. L’historique local est validé structurellement, pas signé cryptographiquement ; il n’autorise aucun paiement. La QA automatisée ne constitue pas une validation humaine ou 1:1. Les contrôles de géométrie portent sur la préparation C12 réellement reprise ; ils ne certifient pas toutes les phases, toutes les campagnes ou une finition artistique globale. Les pilotes hérités conservent leurs assertions : les cinq identités V163 ne peuvent faire avancer que leur unique horloge d’animation finie et bornée au temps de rechargement mesuré.",
     "Eight additional physical watch circuits;19-annex matrix preserves all other actual statuses. No NPC lift/cross-deck travel is observed or manufactured. C163-LIFT is the player foundation owned by root. Cal logistics duty remains on actual468catwalk; completing his circuit requires a durable ladder approach/ascent/top departure controller and fitting shipped climb art. No floor624 substitute. Other annex watches of a crew with an existing owner require extending that same owner, never creating a second samecrew factory. Source/destination coordinate charts change only behind a fully closed native paired leaf; this is not an animated back-facing walk. Native timetable/lifecycle/other-annex and courtesy context handoffs are explicitly observedTravel:false; macro command hours are not observed walking hours. Courtesy only adopts native routine peers that have no physical route owner and no care/mission/crisis/contact priority. Actual blockers, destination occupancy, locked leaves, unsupported goals and unsafe chains stay blocked. Native art and actual44×92actor contracts are preserved; no new back-view sprite or artistic/canonical1:1 certification. Forge/editor remains outside the requested scope; sandbox sessions create no new owners.",
     "Ne démontre pas transport PNJ entre ponts ni nouvelle animation climb PNG/cabine existants ; aucune attestation artistique canonique1:1 QA Chromium automatisée, sans participants humains",
@@ -15548,7 +15548,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "d27ba72934b58a417150a5a2672364993ca7d93080d5fa260adf1c6d45403852",
+  "workbookSha256": "969a969690564c46e27b601034933364e6372997713851136299dac33b56ec76",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -15810,11 +15810,12 @@
       {
         "path": "sw.js",
         "previousSha256": "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-        "currentSha256": "cb6eb87ee7f5b25bc822f6fbaf035128497c10876aa72c6b879e7fbec0a32994",
-        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution.",
+        "currentSha256": "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6",
+        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue.",
         "verifiers": [
           "scripts/verify-public-release-v86.mjs",
-          "scripts/verify-release-artifact-v143.mjs"
+          "scripts/verify-release-artifact-v143.mjs",
+          "scripts/verify-audit-v143.mjs"
         ]
       }
     ],
@@ -15910,8 +15911,8 @@
       {
         "path": "src/npc-matte-aperture-data-v164.js",
         "previousSha256": null,
-        "currentSha256": "16e7eb2bc96f16c7f404748463d7374e5d5fcc7fa46ec9d73b966b41c24c0e6f",
-        "reason": "Épingler les sources et runs exacts de vingt-quatre poches de fond dans seize cellules de quatre PNJ, sans redessiner les PNG ni certifier leurs autres poses.",
+        "currentSha256": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+        "reason": "Épingler les sources et runs exacts de poches de fond explicitement admises dans seize cellules de quatre PNJ, sans redessiner les PNG ni certifier leurs autres poses.",
         "verifiers": [
           "scripts/verify-npc-matte-apertures-v164.mjs"
         ]
@@ -15919,7 +15920,7 @@
       {
         "path": "src/npc-matte-apertures-v164.js",
         "previousSha256": null,
-        "currentSha256": "5b27f25b90688989c4d3ba0627ae746f1c155b2f5a1b01aef50b072b4d725324",
+        "currentSha256": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
         "reason": "Corriger les seuls pixels opaques de fond admis avec garde des octets ciblés, cache borné et gestion des changements de portrait sans clé globale des blancs.",
         "verifiers": [
           "scripts/verify-npc-matte-apertures-v164.mjs"
@@ -20161,5 +20162,30 @@
     "Aucune nouvelle musique, voix, banque originale ou source de franchise. Le pilote Chromium headless active réellement un autre onglet et minimise la fenêtre, mais document.hidden n’y est pas observé : aucun parcours de scène masquée réussi n’est certifié. Un contrôle automatisé ne certifie pas le rendu sur haut-parleurs ou appareils physiques ; recette exacte à exécuter.",
     "Un circuit parent/annexe borné. Aucun ascenseur, déplacement physique entre ponts, nouveau dessin ou cycle de dos. Les soins, missions et autres priorités restent natifs ; le trajet après délégation n’est pas prouvé par ce lot.",
     "Journal de huit retours au plus, pas campagne étendue, enregistrement vidéo ou nouveau canon. Seuls les vrais résultats admissibles sont capturés ; aucun résultat absent n’est inventé et la lecture ne rejoue pas de paiement."
-  ]
+  ],
+  "historicalDeliveryV163": {
+    "status": "MERGED_AND_INVENTORY_FINALIZED",
+    "reviewedHead": "043bb60d9777335d247c8d64c2c58c301d23b306",
+    "mainMerge": "8a934b7634cb8acd22a04fc900bd772d4fd1e9ac",
+    "canonicalSourceSha256": "73d6fcee30c7788b253f2f7ff36161dcc32db20fa83c0a0eae8a8a40dc617452",
+    "nodeTests": 2993,
+    "nodeFiles": 171,
+    "browserProfiles": 16,
+    "automatedBrowserChecks": 1566,
+    "captures": 835,
+    "countsAreCurrentV164Results": false,
+    "notAHumanPlaytest": true,
+    "artistic1to1Approved": false,
+    "pullRequestUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/18"
+  },
+  "publicationStateScopeV164": "PREPUBLICATION décrit les contrats runtime cumulatifs amendés pour V164. La livraison V163 déjà fusionnée est consignée séparément dans historicalDeliveryV163.",
+  "followupV164": {
+    "scope": "Correction de poches de fond opaques dans quatre atlas PNJ, sans modification des PNG.",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "historicalV163ResultsTransferred": false,
+    "forgeState": "DEFERRED_BY_USER",
+    "artClosed": 0,
+    "approved1to1": 0
+  },
+  "workbookPublicationNoticeV164": "Livraison V163 : 043bb60 vers 8a934b7 ; 2 993 tests, 16 profils, 1 566 contrôles, 835 PNG. Contrats maintenus pour V164 : nouvelle validation requise."
 }

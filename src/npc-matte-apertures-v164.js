@@ -8,7 +8,7 @@ export { NPC_MATTE_APERTURES_V164 } from './npc-matte-aperture-data-v164.js';
 export const NPC_MATTE_RUNTIME_POLICY_V164 = Object.freeze({
   schema: 164, cacheEntries: 4, cacheBytes: 16 * 1024 * 1024,
   sourcePngsChanged: false, reviewedAssets: 4, maskedFrames: 16,
-  maskedPixels: 1584, scope: 'exact-reviewed-opaque-internal-pockets'
+  maskedPixels: 1835, scope: 'exact-reviewed-opaque-internal-pockets'
 });
 
 const admitted = new Map(NPC_MATTE_APERTURES_V164.map(policy => [policy.path, policy]));
