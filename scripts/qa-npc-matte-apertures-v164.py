@@ -116,7 +116,7 @@ console.log(JSON.stringify(s));"""
 
 
 def open_view(page, view):
-    menu = page.locator('#mobile-menu')
+    menu = page.locator('#menu-toggle')
     if menu.is_visible() and 'open' not in (page.locator('.rail').get_attribute('class') or '').split():
         menu.click()
     page.locator('[data-view="' + view + '"]').click()
