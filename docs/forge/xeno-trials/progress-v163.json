@@ -2805,7 +2805,7 @@
     "src/xeno-trials-runtime-v96.js": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
     "src/xeno-trials-sequences-v155.js": "ed140f0788d4d13b91ddd0aaa8a955c7ca50507185f9eee3debd537385ad2321",
     "src/xeno-trials-ui-v96.js": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
-    "sw.js": "2c47b5a63287569005d7f01f04adf2db4658d5022e574471a77ab3d730c782b7"
+    "sw.js": "cb6eb87ee7f5b25bc822f6fbaf035128497c10876aa72c6b879e7fbec0a32994"
   },
   "tables": {
     "01_Presentations": {
@@ -6583,9 +6583,9 @@
         [
           "sw.js",
           "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-          "2c47b5a63287569005d7f01f04adf2db4658d5022e574471a77ab3d730c782b7",
-          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées.",
-          "scripts/verify-public-release-v86.mjs"
+          "cb6eb87ee7f5b25bc822f6fbaf035128497c10876aa72c6b879e7fbec0a32994",
+          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution.",
+          "scripts/verify-public-release-v86.mjs ; scripts/verify-release-artifact-v143.mjs"
         ],
         [
           "campaign-lethe-continuity-v163.css",
@@ -15548,7 +15548,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "6f99121751b6fdf64ebb055356e5e1e859aa3331d89528f64bcadd99147af03a",
+  "workbookSha256": "d27ba72934b58a417150a5a2672364993ca7d93080d5fa260adf1c6d45403852",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -15810,10 +15810,11 @@
       {
         "path": "sw.js",
         "previousSha256": "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-        "currentSha256": "2c47b5a63287569005d7f01f04adf2db4658d5022e574471a77ab3d730c782b7",
-        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées.",
+        "currentSha256": "cb6eb87ee7f5b25bc822f6fbaf035128497c10876aa72c6b879e7fbec0a32994",
+        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution.",
         "verifiers": [
-          "scripts/verify-public-release-v86.mjs"
+          "scripts/verify-public-release-v86.mjs",
+          "scripts/verify-release-artifact-v143.mjs"
         ]
       }
     ],
