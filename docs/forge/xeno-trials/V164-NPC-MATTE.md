@@ -17,7 +17,11 @@ Le cache supplémentaire retient au plus quatre drawables, soit 16 Mio de pixels
 cette limite ne représente pas toute la mémoire du moteur.
 
 La recette dédiée importe des profils déclarés à 05 h 30, rejoint les quatre PNJ
-par les commandes de déplacement et ouvre leurs dialogues avec E. Un cinquième
+après une commande native de récupération de 5 h ou de recherche de 12 h, observe
+leur marche aller et ouvre leurs dialogues dans les annexes avec déplacement et E.
+La fixture d’Asha ajoute les 20 points de recherche requis ; les autres ressources
+gardent leurs valeurs par défaut. Les heures stratégiques ne représentent pas
+des heures de marche observée. Un cinquième
 passage vérifie le portrait d’Inez à 390 px. Les planches source/rendu des
 16 cellules sont des fixtures séparées. La recette est intégrée au job
 crew-lifts existant, avec ses rapports et PNG.

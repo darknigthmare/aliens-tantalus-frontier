@@ -36,13 +36,21 @@ sha = lambda raw: hashlib.sha256(raw).hexdigest()
 git = lambda *cmd: subprocess.check_output(['git', *cmd], cwd=repo, text=True).strip()
 configs = [
     dict(id='maksim', crew='crew-08-maksim-orlov', speaker='Orlov',
-         deck=3, room='dropship-hangar', player=225),
+         deck=3, room='dropship-hangar', player=225, route='maksim-arrival',
+         annex='arrival-airlock', parentDoor=1018, hour=10.5,
+         action='[data-strategy-action="salvage-run"]'),
     dict(id='inez', crew='crew-09-inez-harlow', speaker='Harlow',
-         deck=2, room='quarantine', player=783),
+         deck=2, room='quarantine', player=783, route='inez-bioforge',
+         annex='bioforge', parentDoor=318, hour=10.5,
+         action='[data-strategy-action="salvage-run"]'),
     dict(id='asha', crew='crew-12-asha-mbaye', speaker='Mbaye',
-         deck=1, room='crew-quarters', player=479),
+         deck=1, room='crew-quarters', player=479, route='asha-refuge',
+         annex='personal-refuge', parentDoor=1187, hour=17.5, research=20,
+         action='[data-research-id="vehicle-doctrine"]'),
     dict(id='mara', crew='crew-01-mara-vega', speaker='Vega',
-         deck=0, room='bridge', player=300),
+         deck=0, room='bridge', player=300, route='mara-archives',
+         annex='mire-archives', parentDoor=1558, hour=10.5,
+         action='[data-strategy-action="salvage-run"]'),
 ]
 configs.append({**configs[1], 'id': 'inez-mobile', 'character': 'Inez',
                 'viewport': {'width': 390, 'height': 844}})
@@ -50,9 +58,11 @@ report = dict(status='running', startedAt=now(), stage=args.stage,
               sourceCommit=args.expect_build, harnessCommit=args.expect_harness,
               checks=[], captures=[], pageErrors=[], requestFailures=[], httpErrors=[],
               nativeDialogues=[], renderingFixtures=[], characters=[],
-              method='Disclosed 05h30 native Save imports, real walking/E and existing dialogue. Separate source/render fixtures use the production drawable resolver.',
+              method='Disclosed 05h30 Save imports, actual 5h salvage or 12h research command, observed native NPC outbound walk, player walking/E and existing annex dialogue. Separate source/render fixtures use the production drawable resolver.',
               limitations=['Automated Chromium, no human participants or artistic 1:1 approval.',
                            'Four NPCs and sixteen curated cells only; exterior fringes and other poses remain open.',
+                           'The Asha save adds20research for the existing12h research command; other resources retain their native defaults.',
+                           'Strategic elapsed hours are not observed walking hours. Return journeys are outside this focused alpha check.',
                            'The source/render boards are explicit fixtures, not additional gameplay journeys.',
                            'Before observations and V163 counts are not current V164 test totals.'])
 
@@ -87,6 +97,7 @@ const c=JSON.parse(process.argv[1]),s=createDefaultSave();
 s.needsPlayerCreationV84=false;s.scene='hub';s.player.name='QA NPC matte V164';
 s.settings.reducedMotion=false;s.clock.hour=5.5;
 Object.assign(s.hub,{deck:c.deck,roomId:c.room,positionX:c.player,positionY:532});
+if(c.research)s.galaxy.resources.research=c.research;
 s.crew.find(m=>m.id===c.crew).appearanceV110={schema:110,markingId:'olive'};
 console.log(JSON.stringify(s));"""
     name = config['id'] + '-disclosed-native0530.json'
@@ -113,13 +124,29 @@ def open_view(page, view):
 
 def observe(page, crew):
     return page.evaluate("""crew => {
-      const h=__ATF_HUB__, peers=h.npcs.filter(n=>n.crewId===crew), a=peers[0];
+      const h=__ATF_HUB__, visible=h.currentAnnexV71?.()?h.activeAnnexNpcsV141():h.npcs;
+      const peers=visible.filter(n=>n.crewId===crew), a=peers[0];
       return {running:h.running, visibleCount:peers.length,
         actor:a?{x:a.x,y:a.y,w:a.w,h:a.h,roomId:a.roomId}:null,
         player:{x:h.player.x,y:h.player.y,vx:h.player.vx},
         clock:structuredClone(__ATF_V51__.saveSystem.data.clock),
         resources:structuredClone(__ATF_V51__.saveSystem.data.galaxy.resources)};
     }""", crew)
+
+
+def walk_to(page, target):
+    current = page.evaluate('()=>__ATF_HUB__.player.x')
+    page.locator('#hub-canvas').focus()
+    if abs(current-target) >= 4:
+        key = 'KeyD' if target > current else 'KeyA'
+        page.keyboard.down(key)
+        try:
+            page.wait_for_function(
+                'c=>c.right?__ATF_HUB__.player.x>=c.x-3:__ATF_HUB__.player.x<=c.x+3',
+                arg=dict(x=target, right=target > current), timeout=90000)
+        finally:
+            page.keyboard.up(key)
+    page.wait_for_function('()=>Math.abs(__ATF_HUB__.player.vx)<1')
 
 
 def capture(page, locator, name, kind):
@@ -168,21 +195,39 @@ try:
                 check(config['id'] + ': one physical 44x92 body at the native floor',
                       before['visibleCount'] == 1 and before['actor']['w'] == 44
                       and before['actor']['h'] == 92 and before['actor']['y'] == 532)
-                target = before['actor']['x'] + (55 if before['player']['x'] > before['actor']['x'] else -55)
-                current = before['player']['x']
-                page.locator('#hub-canvas').focus()
-                key = 'KeyD' if target > current else 'KeyA'
-                page.keyboard.down(key)
-                try:
-                    page.wait_for_function(
-                        'c=>c.right?__ATF_HUB__.player.x>=c.x:__ATF_HUB__.player.x<=c.x',
-                        arg=dict(x=target, right=target > current))
-                finally:
-                    page.keyboard.up(key)
-                page.wait_for_function('()=>Math.abs(__ATF_HUB__.player.vx)<1')
+                page.locator('#exit-hub').click()
+                open_view(page, 'command')
+                page.locator(config['action']).click()
+                page.wait_for_function('hour=>__ATF_V51__.saveSystem.data.clock.hour===hour',
+                                       arg=config['hour'])
+                open_view(page, 'hub')
+                page.wait_for_function('()=>__ATF_HUB__?.running')
+                report['phase'] = config['id'] + ': observed native outbound walk'
+                print('STEP ' + report['phase'], flush=True)
+                page.wait_for_function("""c=>{
+                  const a=__ATF_HUB__.getSnapshot().npcAnnexRoutesV163?.routes?.[c.route]?.actor;
+                  return a?.stage==='service'&&a.roomId===c.annex;
+                }""", arg=config, polling=100, timeout=240000)
+                walk_to(page, config['parentDoor'])
+                page.keyboard.press('KeyE', delay=80)
+                page.wait_for_function("""id=>__ATF_HUB__.currentAnnexV71?.()?.id===id
+                  &&!__ATF_HUB__.annexTransitionV71&&!__ATF_HUB__.hubDoorClosingV142""",
+                                       arg=config['annex'])
+                arrived = observe(page, config['crew'])
+                check(config['id'] + ': native walking reaches the matching physical annex service',
+                      arrived['visibleCount'] == 1 and arrived['actor']
+                      and arrived['actor']['roomId'] == config['annex'])
+                walk_to(page, arrived['actor']['x']-84)
+                page.wait_for_function("""crew=>{
+                  const h=__ATF_HUB__;return h.running&&!h.hubDoorClosingV142
+                    &&h.nearestAnnexNpcV141?.()?.crewId===crew;
+                }""", arg=config['crew'])
+                before = observe(page, config['crew'])
                 capture(page, '#hub-canvas', config['id'] + '-native-hub.png', 'native-canvas')
                 page.keyboard.press('KeyE', delay=80)
                 page.locator('#hub-dialogue').wait_for(state='visible')
+                check(config['id'] + ': E selects the requested speaker before inspecting its image',
+                      config['speaker'] in page.locator('#hub-dialogue-speaker').inner_text())
                 page.wait_for_function("""()=>{const i=document.querySelector('#hub-dialogue-image');
                   return i.complete&&i.naturalWidth===1024;}""")
                 if args.stage == 'after':
