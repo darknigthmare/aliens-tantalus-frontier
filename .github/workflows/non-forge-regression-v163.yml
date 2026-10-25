@@ -98,6 +98,22 @@ jobs:
               ;;
           esac
           exit "$status"
+      - name: Native NPC matte correction V164
+        if: matrix.workstream == 'crew-lifts'
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:npc:matte:v164
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/atf-gameplay-v163/matte-http.log" 2>&1 &
+          matte_server=$!
+          trap 'kill "$matte_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          matte_head="$(git rev-parse HEAD)"
+          python -B scripts/qa-npc-matte-apertures-v164.py \
+            --base http://127.0.0.1:4173 --stage after \
+            --expect-build "$matte_head" --expect-harness "$matte_head" \
+            --output "$RUNNER_TEMP/atf-gameplay-v163/npc-matte-v164" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/npc-matte-v164.log"
       - name: Retain actual evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

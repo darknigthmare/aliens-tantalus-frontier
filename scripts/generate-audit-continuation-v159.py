@@ -91,7 +91,13 @@ def rebuild(directory, lot='V159'):
 
         cell(1, 1, 'Tantalus Frontier — ' + lot, style=1)
         cell(2, 1, name)
-        cell(3, 1, 'Prépublication : implémentation et validation du commit restent distinctes.')
+        notice = record.get('workbookPublicationNoticeV164')
+        assert notice is None or isinstance(notice, str) and 0 < len(notice) <= 400
+        cell(3, 1, notice or 'Prépublication : implémentation et validation du commit restent distinctes.')
+        if notice:
+            row_nodes[3].set('ht', '48')
+            merged = tag(doc, 'mergeCells', {'count': '1'})
+            tag(merged, 'mergeCell', {'ref': 'A3:' + chr(64 + count) + '3'})
         if index == 1:
             cell(5, 1, 'Indicateur', style=1)
             cell(5, 5, 'Compte vérifiable', style=1)

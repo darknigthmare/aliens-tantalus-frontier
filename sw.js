@@ -1,6 +1,8 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-continuation-v163';
+const CACHE = 'atf-v143-npc-matte-v164';
 const SHELL = Object.freeze([
+  '/src/npc-matte-apertures-v164.js',
+  '/src/npc-matte-aperture-data-v164.js',
   '/src/npc-annex-leases-v163.js',
   '/src/npc-service-traffic-v163.js',
   '/src/xeno-trials-capture-v163.js',

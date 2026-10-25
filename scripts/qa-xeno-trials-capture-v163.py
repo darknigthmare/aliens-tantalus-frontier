@@ -61,7 +61,8 @@ def wait_frame(page, predicate, timeout=45000):
     return page.wait_for_function('''()=>{const s=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot(),m=s?.match;
       if(!m)return false;if(PREDICATE)return{state:s,png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')};return false;}'''.replace('PREDICATE', predicate), polling='raf', timeout=timeout).json_value()
 
-# Read-only RAF evidence stays browser-local until real keys secure the pause.
+# Read-only RAF evidence copies pixels locally; PNG compression waits until
+# real keys secure the pause, or both post-resume observations are complete.
 CAPTURE_OBSERVER = r'''c=> {
   const slots=globalThis.__ATF_CAPTURE_OBSERVER_V163__ ||= {};
   if(slots[c.stage])slots[c.stage].cancelled=true;
@@ -79,8 +80,15 @@ CAPTURE_OBSERVER = r'''c=> {
   const sameHold=h=>h&&h.attacker===c.attackerSide&&h.target===c.targetSide&&(c.holdId===null||h.id===c.holdId);
   const receipt=(m,phase)=>m.captureViewsV163?.find(v=>v.role==='captive'&&v.side===c.targetSide
     &&v.targetId===c.targetId&&v.grappleId===(c.holdId??m.grappleV153?.id)&&v.phase===phase);
-  // Public snapshot and canvas bytes belong to this same synchronous callback.
-  const frame=s=>({state:s,png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')});
+  // This detached, same-size copy belongs to the snapshot in this synchronous
+  // callback. It is never drawn back into the live canvas or supplied to combat.
+  // PNG compression here could consume the remaining native guard-escape window.
+  const frame=s=>{
+    const source=document.querySelector('[data-xt="canvas"]'),bitmap=document.createElement('canvas');
+    bitmap.width=source.width;bitmap.height=source.height;
+    const startedMs=performance.now();bitmap.getContext('2d').drawImage(source,0,0);
+    return{state:s,bitmap,bitmapCopy:{width:bitmap.width,height:bitmap.height,startedMs,finishedMs:performance.now()}};
+  };
   const armed=read(),start=performance.now();out.armedState=compact(armed);
   if(!sameMatch(armed?.match)){fail('Different match, round or participants at observer arm');return{error:out.error};}
   if(c.stage==='post'&&!(armed.match.paused&&sameHold(armed.match.grappleV153)
@@ -117,6 +125,22 @@ CAPTURE_OBSERVER = r'''c=> {
   return{armed:true};
 }
 '''
+
+CAPTURE_EXPORT = r'''c=> {
+  const out=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.[c.stage];
+  if(!out||out.error||!out.done)throw Error(out?.error||'Native observation is not complete');
+  if(c.stage==='floor'){
+    const current=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match,recorded=out.floor?.state?.match;
+    if(!current?.paused||!recorded?.grappleV153||current.grappleV153?.id!==recorded.grappleV153.id)
+      throw Error('Floor PNG requires the public pause on the same native hold');
+  }else if(c.stage!=='post'||!out.struggle||!out.release){
+    throw Error('Post PNGs require both same-hold resistance and release observations');
+  }
+  return Object.fromEntries(c.fields.map(field=>{
+    const frame=out[field];if(!frame?.bitmap)throw Error('Missing copied native frame: '+field);
+    return[field,{state:frame.state,png:frame.bitmap.toDataURL('image/png'),bitmapCopy:frame.bitmapCopy}];
+  }));
+}'''
 
 def wait_observation(page, stage, field, timeout):
     page.wait_for_function("([stage,field])=>{const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.[stage];if(o?.error)throw Error(o.error);return Boolean(o?.[field]);}", arg=[stage, field], polling='raf', timeout=timeout)
@@ -199,7 +223,10 @@ def acquire_player_capture(page, after, trace):
                               'elapsedSeconds': time.monotonic() - started})
                 return prep
             if m['phase'] == 'match-over':
-                break
+                result = m.get('result') or {}
+                trace['terminalBeforeCapture'] = {'tick': m['tick'], 'round': m['round'],
+                    'winner': result.get('winner'), 'reason': result.get('reason')}
+                raise AssertionError('Native match ended before keyboard capture: ' + json.dumps(trace['terminalBeforeCapture'], separators=(',', ':')))
             a, b = m['fighters']
             # Validate the pose and attack in the same atomic state+PNG read.
             # A prior polling snapshot only decides whether a read is useful;
@@ -312,8 +339,8 @@ def main():
     report = {'status': 'running', 'comparisonStage': args.comparison_stage, 'taskIds': TASKS, 'checks': [], 'captures': [], 'profiles': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
               'scope': 'Six production menu duels on real browser RAF: three original target identities, both captor roles/directions, actual native startup/contact/floor hold/guard resistance/escape/recovery, public pause and abandonment. Additional art/geometry comparisons are declared fixtures.',
               'limits': ['Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.', 'Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.', 'Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.', 'Recovery is presentation only and yields immediately to a new target action.', 'Automated keyboard/menu scenarios; not human playtesting.']}
-    def check(label, passed, evidence=None):
-        assert passed, label
+    def check(label, passed, evidence=None, failure_detail=None):
+        assert passed, label + ('; ' + failure_detail[:1000] if failure_detail else '')
         report['checks'].append({'label': label, 'evidence': evidence, 'status': 'passed'})
         report['lastPassedCheck'] = label
     def phase(profile, step):
@@ -377,9 +404,14 @@ def main():
                     armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
                     assert not armed.get('error'), armed.get('error')
                     wait_observation(page, 'floor', 'ready', 45000)  # Boolean acknowledgement only.
-                    page.keyboard.press('KeyP')  # No state/PNG transfer or disk I/O before this key.
-                    frozen = observed(page)['match']
-                    floor_observation = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor')
+                    page.keyboard.press('KeyP')  # No PNG compression/transfer or disk I/O before this key.
+                    frozen = observed(page)['match'] or {}
+                    # Transfer only metadata until the strict public-pause check
+                    # succeeds; the detached bitmap remains browser-local.
+                    floor_observation = page.evaluate('''()=>{
+                      const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor;
+                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace};
+                    }''')
                     hold = floor_observation['floor']
                     m = hold['state']['match']
                     hold_id = m['grappleV153']['id']
@@ -391,9 +423,19 @@ def main():
                                   and fh.get('id') == hold_id and fh.get('attacker') == binding['attackerSide'] and fh.get('target') == target_side
                                   and (not after or any(v['role'] == 'captive' and v['side'] == target_side and v['targetId'] == target_id
                                        and v['grappleId'] == hold_id and v['phase'] == 'capture' and v['fullFloorPin'] and abs(v['contacts']['floorSupport'][1] - v['floor']) < 1e-6 for v in frozen.get('captureViewsV163', []))))
+                    pause_diagnostics = {'paused': frozen.get('paused'), 'floorTick': m['tick'],
+                        'pausedTick': frozen.get('tick'), 'floorHoldId': hold_id, 'pausedHoldId': fh.get('id'),
+                        'floorBornTick': m['grappleV153'].get('bornTick'),
+                        'floorEscape': m['grappleV153'].get('escapeProgress'), 'pausedEscape': fh.get('escapeProgress'),
+                        'pausedPhase': frozen.get('phase'), 'floorRound': m['round'], 'pausedRound': frozen.get('round'),
+                        'ends': [{k: e.get(k) for k in ['tick', 'grappleId', 'reason']}
+                                 for e in frozen.get('events', []) if e.get('type') == 'grapple-end-v153'][-2:]}
                     report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
-                        'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen, 'floorTrace': floor_observation['trace']})
-                    check(name + ': public pause retains native hold ownership, participants and floor support', same_pause)
+                        'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen,
+                        'floorTrace': floor_observation['trace'], 'compactDiagnostics': pause_diagnostics})
+                    check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
+                          failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
+                    hold = page.evaluate(CAPTURE_EXPORT, {'stage': 'floor', 'fields': ['floor']})['floor']
                     check(name + ': actual native Prowler startup is observed', preparation is not None)
                     capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
                     check(name + ': actual capture event owns the displayed hold', any(e['type'] == 'grapple-start-v153' and e['grappleId'] == hold_id for e in m['events']))
@@ -418,13 +460,13 @@ def main():
                         page.keyboard.down('KeyS')
                     phase(name, 'post-resume resistance of the same native hold')
                     wait_observation(page, 'post', 'struggle', 15000)
-                    struggle = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.post.struggle')
-                    capture(name+'-resistance.png', struggle, 'Real guard resistance from keyboard or CPU, never assigned escape progress.')
                     phase(name, 'first native release and recovery of the same hold')
                     wait_observation(page, 'post', 'release', 15000)
-                    release = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.post.release')
                     if role == 'cpu-captor':
                         page.keyboard.up('KeyS')
+                    frames = page.evaluate(CAPTURE_EXPORT, {'stage': 'post', 'fields': ['struggle', 'release']})
+                    struggle, release = frames['struggle'], frames['release']
+                    capture(name+'-resistance.png', struggle, 'Real guard resistance from keyboard or CPU, never assigned escape progress.')
                     rm = release['state']['match']
                     target = next(f for f in rm['fighters'] if f['side'] == target_side)
                     end = next(e for e in rm['events'] if e['type'] == 'grapple-end-v153' and e['grappleId'] == hold_id)

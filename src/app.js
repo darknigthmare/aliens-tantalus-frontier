@@ -12,6 +12,7 @@ import {
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
 import { Echo9UiV110 } from './echo9-ui-v110.js';
+import { setNpcPortraitSourceV164 } from './npc-matte-apertures-v164.js';
 import { selectPremiumDossierV119 } from './premium-personnel-v119.js';
 import { getAllCostumesV119, getCostumeV119 } from './franchise-costumes-v119.js';
 import { CostumeArchivesUiV119 } from './costume-ui-v119.js';
@@ -699,7 +700,7 @@ function openHubDialogue(interaction) {
   byId('hub-dialogue-text').textContent = contract.text;
   const portrait = byId('hub-dialogue-image');
   portrait.classList.remove('is-sprite-cell-v62');
-  portrait.src = contract.portrait;
+  setNpcPortraitSourceV164(portrait, contract.portrait);
   portrait.alt = `Portrait de ${contract.speaker}`;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
@@ -726,7 +727,7 @@ function openNpcDialogueV62(interaction) {
   const portrait = byId('hub-dialogue-image');
   const profile = HUB_NPC_ROSTER.find((entry) => entry.crewId === conversation.crewId);
   portrait.classList.add('is-sprite-cell-v62');
-  portrait.src = profile?.spritePath || '/assets/openai/tantalus-hub-crew-animation-sheet.png';
+  setNpcPortraitSourceV164(portrait, profile?.spritePath || '/assets/openai/tantalus-hub-crew-animation-sheet.png');
   portrait.alt = `Cellule d’animation de ${conversation.identity.name}`;
   const choices = byId('hub-dialogue-choices');
   choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('');
@@ -954,7 +955,7 @@ function openOnboardingDialogueV84(interaction) {
   byId('hub-dialogue-text').textContent = contract.lines[state.dialogueNode];
   const portrait = byId('hub-dialogue-image');
   portrait.classList.add('is-sprite-cell-v62');
-  portrait.src = HUB_NPC_ROSTER.find(npc => npc.crewId === contact.crewId).spritePath;
+  setNpcPortraitSourceV164(portrait, HUB_NPC_ROSTER.find(npc => npc.crewId === contact.crewId).spritePath);
   portrait.alt = `Cellule d’animation de ${contract.speaker.name}`;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
@@ -1033,7 +1034,7 @@ function openOpeningDialogueV88() {
   byId('hub-dialogue-text').textContent = state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.';
   const portrait = byId('hub-dialogue-image');
   portrait.classList.remove('is-sprite-cell-v62');
-  portrait.src = HUB_STATION_DIALOGUES_V61['dropship-hangar'].portrait;
+  setNpcPortraitSourceV164(portrait, HUB_STATION_DIALOGUES_V61['dropship-hangar'].portrait);
   portrait.alt = 'Poste opérationnel du Tantalus';
   const choices = byId('hub-dialogue-choices');
   choices.replaceChildren();

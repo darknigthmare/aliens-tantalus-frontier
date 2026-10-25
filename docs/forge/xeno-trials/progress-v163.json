@@ -2707,7 +2707,7 @@
     "mission-insertion-v62.css": "049525a19d40f882ce415330a1d467ebd26d7e3e641cffe76e19a61ecfeaffaf",
     "src/apc-convoy-runtime-v121.js": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
     "src/apc-course-v131.js": "a9b6fe7fa4ee899497baf590a0ce09c42258ca4bd39d78816a743c1ec145fd03",
-    "src/app.js": "74d0f90cefe5f9a5798795562bd348dc0695a840bfc5a9ed555e5f44d9c5285a",
+    "src/app.js": "418385128f0a42d5df8d793fc775424ff6cd4153f94466a02e65f6297fcdae98",
     "src/archive-relay-presentation-v160.js": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
     "src/archive-relay-runtime-v122.js": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
     "src/archive-relay-state-v122.js": "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
@@ -2761,6 +2761,7 @@
     "src/hub-v52-runtime.js": "7b67eb2cb7c5281e3ae0acd69adfb252db555a00f879194a553012b8d53efb4c",
     "src/hub-v62-runtime.js": "6af03c23ec837458b45ce4e1c9d62e7d8b436ac5e54d2037528616730cd21cd9",
     "src/hub-v71-runtime.js": "289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4",
+    "src/human-visual-contract-v133.js": "f009c9e00a60a06cf0cb9d6ecfce22b59d59cfcb8a28d4a9e224d1163abff4c8",
     "src/legacy-operations-v131.js": "ab9d4021dde9dcf8609f1a23e43643b0d4f94857836f9df8145641537ce0328d",
     "src/mission-input-v77.js": "cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846",
     "src/mission-insertion-ui-v62.js": "1e8b4c42e6b5115ff75e86c50dbace7d649c8a4b244629c7788b963a6c690dc5",
@@ -2771,6 +2772,8 @@
     "src/npc-annex-service-routes-v163.js": "25d7efed89dc1134a79cabe8fad259c029c2db8db58f43d1a2fa4be487a0f92f",
     "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
     "src/npc-life-v136.js": "ccd320fd541abf156e59cac8e2af45322b908204e5141849252de487102c66d9",
+    "src/npc-matte-aperture-data-v164.js": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+    "src/npc-matte-apertures-v164.js": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
     "src/npc-medical-route-v162.js": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
     "src/npc-service-routes-v161.js": "806952ac6deaf7edb659c6f3c46254be7a569ac9a5b225e5b816a6e832a753cb",
     "src/npc-service-traffic-v163.js": "cd4b19be365797e185bd6d55e4125457decc134e4298dfd4a18a544b9a7ca3b2",
@@ -2802,7 +2805,7 @@
     "src/xeno-trials-runtime-v96.js": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
     "src/xeno-trials-sequences-v155.js": "ed140f0788d4d13b91ddd0aaa8a955c7ca50507185f9eee3debd537385ad2321",
     "src/xeno-trials-ui-v96.js": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
-    "sw.js": "2c47b5a63287569005d7f01f04adf2db4658d5022e574471a77ab3d730c782b7"
+    "sw.js": "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6"
   },
   "tables": {
     "01_Presentations": {
@@ -4598,67 +4601,67 @@
         [
           "QA163-NODE",
           "Toutes les suites Node déclarées, fichiers dédupliqués",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Aucun résultat historique transféré."
         ],
         [
           "QA163-C163-CAMPAIGN",
           "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/qa-campaign-lethe-v163.py ; scripts/qa-campaign-story-v160.py ; scripts/qa-campaign-convoy-history-v162.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Quatre opérations originales existantes : les455 entrées de campagnes du catalogue ne sont pas toutes des missions nouvelles entièrement validées par ce chantier. Aucune archive Blackout/Earth manquante ou scène filmique canonique n’est reconstruite ; fiction originale indiquée dans les données. Les scènes sont illustrées et radio, avec assets existants ; elles ne constituent pas des voix ou clips récupérés. Le pilote natif complète C12 ; il ne parcourt pas intégralement QZ18, APC ou toute la colonie/quarantaine Cocon dans sa propre session. Les anciens profils peuvent fournir un dossier QZ complet ou un historique APC validé : ils sont des reprises déclarées, jamais des parcours frais inventés. L’historique local est validé structurellement, pas signé cryptographiquement ; il n’autorise aucun paiement. La QA automatisée ne constitue pas une validation humaine ou 1:1. Les contrôles de géométrie portent sur la préparation C12 réellement reprise ; ils ne certifient pas toutes les phases, toutes les campagnes ou une finition artistique globale. Les pilotes hérités conservent leurs assertions : les cinq identités V163 ne peuvent faire avancer que leur unique horloge d’animation finie et bornée au temps de rechargement mesuré."
         ],
         [
           "QA163-C163-CREW",
           "scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/qa-npc-annex-service-routes-v163.py ; scripts/qa-npc-annex-leases-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Eight additional physical watch circuits;19-annex matrix preserves all other actual statuses. No NPC lift/cross-deck travel is observed or manufactured. C163-LIFT is the player foundation owned by root. Cal logistics duty remains on actual468catwalk; completing his circuit requires a durable ladder approach/ascent/top departure controller and fitting shipped climb art. No floor624 substitute. Other annex watches of a crew with an existing owner require extending that same owner, never creating a second samecrew factory. Source/destination coordinate charts change only behind a fully closed native paired leaf; this is not an animated back-facing walk. Native timetable/lifecycle/other-annex and courtesy context handoffs are explicitly observedTravel:false; macro command hours are not observed walking hours. Courtesy only adopts native routine peers that have no physical route owner and no care/mission/crisis/contact priority. Actual blockers, destination occupancy, locked leaves, unsupported goals and unsafe chains stay blocked. Native art and actual44×92actor contracts are preserved; no new back-view sprite or artistic/canonical1:1 certification. Forge/editor remains outside the requested scope; sandbox sessions create no new owners."
         ],
         [
           "QA163-C163-LIFT",
           "scripts/verify-hub-lift-transit-v163.mjs ; scripts/qa-hub-lift-transit-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Ne démontre pas transport PNJ entre ponts ni nouvelle animation climb PNG/cabine existants ; aucune attestation artistique canonique1:1 QA Chromium automatisée, sans participants humains"
         ],
         [
           "QA163-C163-RELOAD",
           "scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/qa-reload-branches-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Les atlas dédiés NORMAL/SUCCESS/PERFECT/FAILED par famille restent absents. Un geste procédural corrigé n'est pas une nouvelle animation source dédiée. Les coordonnées service/grip existantes sont des mesures/tunings de silhouette du projet ; aucune certification canonique1:1."
         ],
         [
           "QA163-C163-TITLE",
           "scripts/qa-title-compositions-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "La demande historique de20presets artistiques dédiés reste ouverte :17autres décors planétaires/35slots historiques absents. V79/V87/V90 existants sont déjà branchés. Les variantes de présentation ne sont pas20nouvelles compositions artistiques. Pas de nouvelle composition titre livrée ni certification artistique1:1. La comparaison QA conserve tous les changements de métadonnées réellement observés : seuls updatedAt et migratedFrom peuvent suivre le vrai commit du menu ; toutes les autres valeurs et leurs types restent strictement égaux. Aucun résultat d180 échoué n’est transféré. Les 18 parcours QA couvrent les trois presets existants sur deux viewports et trois modes ; les 21 combinaisons catalogue/angle/mode examinées séparément ne sont pas 21 nouveaux parcours natifs, décors ou assets."
         ],
         [
           "QA163-C163-CAPTURE",
           "scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/qa-xeno-trials-capture-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète."
         ],
         [
           "QA163-C163-ROSTER",
           "scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/qa-native-rig-catalog-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "0 new full locomotion cycles. The9 historically admitted walks remain unchanged. 0 ART153 capture sequence or full native action-moveset admissions. 0 new complete dedicated costume skins;30 missing skin sets retain five missing atlas families each. 0 canonical source-game1:1 approvals. Native controller fixtures use a normalized public initial one-HP rule and ordinary CPU/keyboard play, distinct from the production menu/unlock journey. Canvas sourceSha256 is a provenance declaration bound to data, not an independent browser hash of decoded PNG bytes; exact bytes are checked by the source verifier and frozen build admissions. Optional --ids executes a preview subset only, with passed-subset status and releaseEvidenceEligible:false; the default full catalogue remains required for recipe evidence."
         ],
         [
           "QA163-C163-CONTINUITY",
           "scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/qa-trials-continuity-v163.py",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Couverture automatisée de continuité ; aucune validation humaine ni certification canonique1:1. Broodstorm s’arrête à la destruction réelle du second nid par la dernière bombe restaurée ; escorte, reine et extraction finale ne sont pas revendiquées par ce pilote. Le profil Trials déclare quatre déblocages initiaux non gagnés ; la règle 1 PV est sélectionnée dans l’interface existante, sans écriture de santé dans le moteur. Les quatre identités de sortie héritées sont couvertes ; nouveaux dessins, audio, tours de dos, locomotion entièrement dessinée et autres identités restent ouverts. Les projections CSS vérifient la géométrie du viewport ; les captures conservent les pixels natifs réellement observés. Aucun visuel de film ou résultat de combat n’est reconstruit. Le correctif de rendu Broodstorm ne fournit aucun nouvel art ni chapitre complet ; il ne valide ni escorte, reine, extraction finale, ni fidélité franchise1:1. Les21tests ciblés du successeur partagé sont préliminaires ; seules de nouvelles captures natives liées au candidat exact peuvent vérifier le rendu corrigé. Aucun reçu d180 n’est transféré."
         ],
         [
           "QA163-DOCUMENTS",
           "Audit complet85lignes/189IDs, classeur et succession",
-          "À exécuter sur le commit final",
+          "V164 : à exécuter sur son propre commit",
           "Un classement ne constitue pas une réalisation."
         ],
         [
           "QA163-PUBLICATION",
           "CI, revue, fusion et identité de source",
-          "À vérifier séparément",
+          "V164 : à vérifier, CI, revue et fusion propres",
           "Reçus finaux conservés hors sources prépublication."
         ]
       ]
@@ -6489,9 +6492,9 @@
         [
           "src/app.js",
           "ac0404430bb38a08b454bcc30a4d85a6af1f0afb57a953552739039cdc8180dd",
-          "74d0f90cefe5f9a5798795562bd348dc0695a840bfc5a9ed555e5f44d9c5285a",
-          "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique.",
-          "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs"
+          "418385128f0a42d5df8d793fc775424ff6cd4153f94466a02e65f6297fcdae98",
+          "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique. Appliquer aussi aux portraits natifs le masque V164 des seules poches de fond admises, en conservant les PNG et le cadrage et en retirant le masque lors de chaque changement de source.",
+          "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/verify-npc-matte-apertures-v164.mjs"
         ],
         [
           "src/held-weapon-renderer-v125.js",
@@ -6580,9 +6583,9 @@
         [
           "sw.js",
           "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-          "2c47b5a63287569005d7f01f04adf2db4658d5022e574471a77ab3d730c782b7",
-          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées.",
-          "scripts/verify-public-release-v86.mjs"
+          "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6",
+          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue.",
+          "scripts/verify-public-release-v86.mjs ; scripts/verify-release-artifact-v143.mjs ; scripts/verify-audit-v143.mjs"
         ],
         [
           "campaign-lethe-continuity-v163.css",
@@ -6620,6 +6623,13 @@
           "scripts/verify-hub-lift-transit-v163.mjs"
         ],
         [
+          "src/human-visual-contract-v133.js",
+          "Non épinglé en V162",
+          "f009c9e00a60a06cf0cb9d6ecfce22b59d59cfcb8a28d4a9e224d1163abff4c8",
+          "Faire passer les atlas humains par la correction V164 des poches opaques explicitement admises, tout en conservant géométrie, vêtements et garanties RGB du noyau V134.",
+          "scripts/verify-npc-matte-apertures-v164.mjs"
+        ],
+        [
           "src/npc-annex-leases-v163.js",
           "Non épinglé en V162",
           "ecf66b6474a9770a8d68d017659e623caca15965827c0330c28b9927f7f08d90",
@@ -6632,6 +6642,20 @@
           "25d7efed89dc1134a79cabe8fad259c029c2db8db58f43d1a2fa4be487a0f92f",
           "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker.",
           "scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs"
+        ],
+        [
+          "src/npc-matte-aperture-data-v164.js",
+          "Non épinglé en V162",
+          "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+          "Épingler les sources et runs exacts de poches de fond explicitement admises dans seize cellules de quatre PNJ, sans redessiner les PNG ni certifier leurs autres poses.",
+          "scripts/verify-npc-matte-apertures-v164.mjs"
+        ],
+        [
+          "src/npc-matte-apertures-v164.js",
+          "Non épinglé en V162",
+          "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
+          "Corriger les seuls pixels opaques de fond admis avec garde des octets ciblés, cache borné et gestion des changements de portrait sans clé globale des blancs.",
+          "scripts/verify-npc-matte-apertures-v164.mjs"
         ],
         [
           "src/npc-service-traffic-v163.js",
@@ -12954,7 +12978,7 @@
           "Rig et points de contact",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 7",
@@ -12968,7 +12992,7 @@
           "Préparation / capture",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 8",
@@ -12982,7 +13006,7 @@
           "Saisie articulée",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 9",
@@ -12996,7 +13020,7 @@
           "Résistance / dégagement",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 10",
@@ -13010,7 +13034,7 @@
           "Interruption / récupération",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 11",
@@ -13024,7 +13048,7 @@
           "Revue deux orientations et tailles",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 12",
@@ -13052,7 +13076,7 @@
           "Rig et points de contact",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 14",
@@ -13066,7 +13090,7 @@
           "Préparation / capture",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 15",
@@ -13080,7 +13104,7 @@
           "Saisie articulée",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 16",
@@ -13094,7 +13118,7 @@
           "Résistance / dégagement",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 17",
@@ -13108,7 +13132,7 @@
           "Interruption / récupération",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 18",
@@ -13122,7 +13146,7 @@
           "Revue deux orientations et tailles",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 19",
@@ -13150,7 +13174,7 @@
           "Rig et points de contact",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 21",
@@ -13164,7 +13188,7 @@
           "Préparation / capture",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 22",
@@ -13178,7 +13202,7 @@
           "Saisie articulée",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 23",
@@ -13192,7 +13216,7 @@
           "Résistance / dégagement",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 24",
@@ -13206,7 +13230,7 @@
           "Interruption / récupération",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 25",
@@ -13220,7 +13244,7 @@
           "Revue deux orientations et tailles",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 26",
@@ -13248,7 +13272,7 @@
           "Rig et points de contact",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 28",
@@ -13262,7 +13286,7 @@
           "Préparation / capture",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 29",
@@ -13276,7 +13300,7 @@
           "Saisie articulée",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 30",
@@ -13290,7 +13314,7 @@
           "Résistance / dégagement",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "TECHNIQUE_V163_IMPLEMENTEE_RECETTE_ROOT_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "Vérifier le comportement natif courant puis conserver les limites artistiques et moteur explicites : Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 31",
@@ -13304,7 +13328,7 @@
           "Interruption / récupération",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 32",
@@ -13318,7 +13342,7 @@
           "Revue deux orientations et tailles",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "HERITAGE_ET_EXTENSION_V163_A_REVERIFIER_SUR_RECETTE_ROOT",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier le périmètre explicitement décrit dans la recette courante ; conserver les références exactes et le reste artistique ouverts.",
           "docs/forge/xeno-trials/progress-v160.json ; 02_ART153 ; 33",
@@ -13332,9 +13356,9 @@
           "Recetter le candidat V163 courant puis constater la CI, la revue et la fusion exactes",
           "VERIFICATION_NECESSAIRE",
           "root",
-          "RECETTE_EXACTE_V163_NON_EXECUTEE",
-          "Aucun résultat préliminaire ni historique ne constitue une recette complète du candidat final V163.",
-          "Figer le candidat propre, exécuter toutes les recettes déclarées, conserver les reçus puis constater la CI et la fusion du même arbre.",
+          "MERGED_EXACT_TESTED_TREE",
+          "Conserver ces reçus comme historique du lot ; toute évolution ultérieure exige sa propre recette.",
+          "Conserver les reçus du lot ; une évolution ultérieure exige sa propre recette.",
           "",
           0,
           0
@@ -13360,7 +13384,7 @@
           "Compléter mise au sol et maintien de capture Trials",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Références externes chorégraphiques/timecodes/validation artistique de chaque œuvre absents. Longueur de corps normalisée avec estimations explicites ; adaptation originale, pas mesure canonique. Les corps de collision V153 restent debout ; maintien couché, contacts et décalage de racine sont de la présentation distinctement exposée. Pose artistique native originale, pas validation de chaque sourcefranchise1:1. La récupération visuelle dure au plus0,6s et cède à la prochaine action du captif ; le stun natif0,25s reste inchangé. Si le PNG est absent ou de dimensions incorrectes, V156/V158 reprend : aucune substitution d’identité. Les15autresrigsV163 ne sont admis ni en capture ni en marchecomplète.",
           "Vérifier les six duels réels, contacts et récupération ; garder les corps moteur V153 et les références d’œuvre séparés de la présentation.",
           "",
@@ -13388,7 +13412,7 @@
           "Étendre rigs et mouvements au reste du roster",
           "VERIFICATION_NECESSAIRE",
           "sources_roster_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "0 new full locomotion cycles. The9 historically admitted walks remain unchanged. 0 ART153 capture sequence or full native action-moveset admissions. 0 new complete dedicated costume skins;30 missing skin sets retain five missing atlas families each. 0 canonical source-game1:1 approvals. Native controller fixtures use a normalized public initial one-HP rule and ordinary CPU/keyboard play, distinct from the production menu/unlock journey. Canvas sourceSha256 is a provenance declaration bound to data, not an independent browser hash of decoded PNG bytes; exact bytes are checked by the source verifier and frozen build admissions. Optional --ids executes a preview subset only, with passed-subset status and releaseEvidenceEligible:false; the default full catalogue remains required for recipe evidence.",
           "Vérifier les15introductions natives et180fixtures déclarées ; poursuivre repères/production technique des170autres identités, sans admission de marche ou capture implicite.",
           "",
@@ -13402,7 +13426,7 @@
           "Terminer clips, locomotion et finitions des pilotes",
           "REFERENCES_MEDIAS_ABSENTS",
           "sources_roster_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "La présentation complète, les médias dédiés et les relevés chorégraphiques exacts de chaque œuvre restent ouverts.",
           "Examiner les27poses à échelle de jeu, puis produire les médias manquants sans annoncer les40lignes de présentation complètes.",
           "",
@@ -13444,7 +13468,7 @@
           "Développer les autres opérations et leurs conséquences",
           "VERIFICATION_NECESSAIRE",
           "campaign_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Quatre opérations originales existantes : les455 entrées de campagnes du catalogue ne sont pas toutes des missions nouvelles entièrement validées par ce chantier. Aucune archive Blackout/Earth manquante ou scène filmique canonique n’est reconstruite ; fiction originale indiquée dans les données. Les scènes sont illustrées et radio, avec assets existants ; elles ne constituent pas des voix ou clips récupérés. Le pilote natif complète C12 ; il ne parcourt pas intégralement QZ18, APC ou toute la colonie/quarantaine Cocon dans sa propre session. Les anciens profils peuvent fournir un dossier QZ complet ou un historique APC validé : ils sont des reprises déclarées, jamais des parcours frais inventés. L’historique local est validé structurellement, pas signé cryptographiquement ; il n’autorise aucun paiement. La QA automatisée ne constitue pas une validation humaine ou 1:1. Les contrôles de géométrie portent sur la préparation C12 réellement reprise ; ils ne certifient pas toutes les phases, toutes les campagnes ou une finition artistique globale. Les pilotes hérités conservent leurs assertions : les cinq identités V163 ne peuvent faire avancer que leur unique horloge d’animation finie et bornée au temps de rechargement mesuré.",
           "Exécuter la chaîne originale et ses reprises ; poursuivre séparément les autres campagnes et corpus, sans transformer455entrées de catalogue en455campagnes terminées.",
           "",
@@ -13472,7 +13496,7 @@
           "Distinguer géométrie livrée et sources de mouvement 1:1",
           "VERIFICATION_NECESSAIRE",
           "root",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Pas de nouvelle pleine locomotion parmi les15rigs ; aucune anatomie ou chorégraphie canonique certifiée, transport PNJ entre ponts ouvert.",
           "Rejouer l’anatomie principale V160 et vérifier les nouveaux périmètres au vrai rendu ; ne pas confondre présentation, collision et déplacement.",
           "",
@@ -13514,7 +13538,7 @@
           "Reproduire les anciens écarts avant correction",
           "VERIFICATION_NECESSAIRE",
           "weapons_menus_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Les atlas dédiés NORMAL/SUCCESS/PERFECT/FAILED par famille restent absents. Un geste procédural corrigé n'est pas une nouvelle animation source dédiée. Les coordonnées service/grip existantes sont des mesures/tunings de silhouette du projet ; aucune certification canonique1:1. La demande historique de20presets artistiques dédiés reste ouverte :17autres décors planétaires/35slots historiques absents. V79/V87/V90 existants sont déjà branchés. Les variantes de présentation ne sont pas20nouvelles compositions artistiques. Pas de nouvelle composition titre livrée ni certification artistique1:1. La comparaison QA conserve tous les changements de métadonnées réellement observés : seuls updatedAt et migratedFrom peuvent suivre le vrai commit du menu ; toutes les autres valeurs et leurs types restent strictement égaux. Aucun résultat d180 échoué n’est transféré. Les 18 parcours QA couvrent les trois presets existants sur deux viewports et trois modes ; les 21 combinaisons catalogue/angle/mode examinées séparément ne sont pas 21 nouveaux parcours natifs, décors ou assets.",
           "Vérifier les56cellules de rechargement et18parcours titre ; produire séparément les atlas de gestes et les17décors/35slots restants.",
           "",
@@ -13528,7 +13552,7 @@
           "Étendre la circulation physique de l’équipage",
           "VERIFICATION_NECESSAIRE",
           "crew_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Eight additional physical watch circuits;19-annex matrix preserves all other actual statuses. No NPC lift/cross-deck travel is observed or manufactured. C163-LIFT is the player foundation owned by root. Cal logistics duty remains on actual468catwalk; completing his circuit requires a durable ladder approach/ascent/top departure controller and fitting shipped climb art. No floor624 substitute. Other annex watches of a crew with an existing owner require extending that same owner, never creating a second samecrew factory. Source/destination coordinate charts change only behind a fully closed native paired leaf; this is not an animated back-facing walk. Native timetable/lifecycle/other-annex and courtesy context handoffs are explicitly observedTravel:false; macro command hours are not observed walking hours. Courtesy only adopts native routine peers that have no physical route owner and no care/mission/crisis/contact priority. Actual blockers, destination occupancy, locked leaves, unsupported goals and unsafe chains stay blocked. Native art and actual44×92actor contracts are preserved; no new back-view sprite or artistic/canonical1:1 certification. Forge/editor remains outside the requested scope; sandbox sessions create no new owners. Ne démontre pas transport PNJ entre ponts ni nouvelle animation climb PNG/cabine existants ; aucune attestation artistique canonique1:1 QA Chromium automatisée, sans participants humains",
           "Vérifier tous les circuits supplémentaires et les huit faces joueur ; poursuivre les routes restantes selon la matrice19annexes, sans déduire le transport PNJ entre ponts.",
           "",
@@ -13542,7 +13566,7 @@
           "Compléter le corpus artistique des sorties Trials",
           "VERIFICATION_NECESSAIRE",
           "trials_capture_v163",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Couverture automatisée de continuité ; aucune validation humaine ni certification canonique1:1. Broodstorm s’arrête à la destruction réelle du second nid par la dernière bombe restaurée ; escorte, reine et extraction finale ne sont pas revendiquées par ce pilote. Le profil Trials déclare quatre déblocages initiaux non gagnés ; la règle 1 PV est sélectionnée dans l’interface existante, sans écriture de santé dans le moteur. Les quatre identités de sortie héritées sont couvertes ; nouveaux dessins, audio, tours de dos, locomotion entièrement dessinée et autres identités restent ouverts. Les projections CSS vérifient la géométrie du viewport ; les captures conservent les pixels natifs réellement observés. Aucun visuel de film ou résultat de combat n’est reconstruit. Le correctif de rendu Broodstorm ne fournit aucun nouvel art ni chapitre complet ; il ne valide ni escorte, reine, extraction finale, ni fidélité franchise1:1. Les21tests ciblés du successeur partagé sont préliminaires ; seules de nouvelles captures natives liées au candidat exact peuvent vérifier le rendu corrigé. Aucun reçu d180 n’est transféré.",
           "Exécuter les trois duels et conserver les mesures de projection et pixels ; les dessins, audio et autres identités de sortie restent séparés.",
           "",
@@ -13556,7 +13580,7 @@
           "Conserver la reprise de projectile lors de l’extension des campagnes",
           "VERIFICATION_NECESSAIRE",
           "root",
-          "PERIMETRE_V163_LIVRE_OU_RECETTE_PREPAREE_PREUVES_EXACTES_PENDING",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Couverture automatisée de continuité ; aucune validation humaine ni certification canonique1:1. Broodstorm s’arrête à la destruction réelle du second nid par la dernière bombe restaurée ; escorte, reine et extraction finale ne sont pas revendiquées par ce pilote. Le profil Trials déclare quatre déblocages initiaux non gagnés ; la règle 1 PV est sélectionnée dans l’interface existante, sans écriture de santé dans le moteur. Les quatre identités de sortie héritées sont couvertes ; nouveaux dessins, audio, tours de dos, locomotion entièrement dessinée et autres identités restent ouverts. Les projections CSS vérifient la géométrie du viewport ; les captures conservent les pixels natifs réellement observés. Aucun visuel de film ou résultat de combat n’est reconstruit. Le correctif de rendu Broodstorm ne fournit aucun nouvel art ni chapitre complet ; il ne valide ni escorte, reine, extraction finale, ni fidélité franchise1:1. Les21tests ciblés du successeur partagé sont préliminaires ; seules de nouvelles captures natives liées au candidat exact peuvent vérifier le rendu corrigé. Aucun reçu d180 n’est transféré.",
           "Exécuter la reprise native du dernier projectile ; poursuivre séparément l’escorte, la reine et l’extraction, que ce contrôle ne termine pas.",
           "",
@@ -13580,7 +13604,7 @@
           "warrior",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -13634,7 +13658,7 @@
           "prowler",
           true,
           "VERIFICATION_NECESSAIRE",
-          "RIG_NATIF_HERITE_QA_V163_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier le rig natif dédié et ses contacts sur le candidat courant ; validation artistique1:1 séparée.",
           0,
           0
@@ -13796,7 +13820,7 @@
           "synth-trooper",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -13805,7 +13829,7 @@
           "synth-guard",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -13814,7 +13838,7 @@
           "synth-sniper",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -13823,7 +13847,7 @@
           "synth-heavy",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -13832,7 +13856,7 @@
           "armored-joe",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -13841,7 +13865,7 @@
           "combat-synth",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -14651,7 +14675,7 @@
           "import-engineer-armorsuit",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -14741,7 +14765,7 @@
           "import-engineer-woman",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -14777,7 +14801,7 @@
           "import-wy-apesuit",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -14867,7 +14891,7 @@
           "import-game-dd-wy-commando",
           true,
           "VERIFICATION_NECESSAIRE",
-          "RIG_NATIF_HERITE_QA_V163_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier le rig natif dédié et ses contacts sur le candidat courant ; validation artistique1:1 séparée.",
           0,
           0
@@ -14903,7 +14927,7 @@
           "import-game-dd-guardian",
           true,
           "VERIFICATION_NECESSAIRE",
-          "RIG_NATIF_HERITE_QA_V163_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier le rig natif dédié et ses contacts sur le candidat courant ; validation artistique1:1 séparée.",
           0,
           0
@@ -15011,7 +15035,7 @@
           "synth-good-boy",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -15038,7 +15062,7 @@
           "dd-darwin-era-cultist",
           true,
           "VERIFICATION_NECESSAIRE",
-          "RIG_NATIF_HERITE_QA_V163_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier le rig natif dédié et ses contacts sur le candidat courant ; validation artistique1:1 séparée.",
           0,
           0
@@ -15074,7 +15098,7 @@
           "drive-v123-afe-prowler",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -15137,7 +15161,7 @@
           "drive-v123-creature-resurrection-newborn-v2",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -15146,7 +15170,7 @@
           "drive-v123-creature-romulus-offspring",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -15155,7 +15179,7 @@
           "drive-v123-fte-pathogen-brute-profile-v13",
           false,
           "VERIFICATION_NECESSAIRE",
-          "RIG_PRESENTATION_V163_VERIFICATEUR_CIBLE_RECETTE_VISUELLE_A_EXECUTER",
+          "PASSED_EXACT_HEAD_WITH_DECLARED_LIMITS",
           "Vérifier les introductions et fins natives, les poses de présentation et la rigidité des armes sur cette identité ; la règle1PV initiale du contrôleur est déclarée et distincte d’un parcours menu. Full multi-pose locomotion and authored capture choreography remain separate work; current native lower supports remain planted.",
           0,
           0
@@ -15287,7 +15311,7 @@
     "Trente ensembles de tenues dédiées manquent ; il ne s’agit ni de trente PNG ni d’un nombre de fichiers commandés.",
     "Le classeur encyclopédie brut et les archives DLC Blackout/Earth/spritesV10 restent absents ; le lore ne les reconstruit pas.",
     "Les éventuelles nouvelles poses natives dérivées restent des adaptations du projet, sans certification de mouvement d’œuvre1:1.",
-    "Tous les résultats de recette, CI, revue et fusion V163 attendent leurs reçus exacts ; les compteurs V162 restent historiques.",
+    "La livraison historique V163 est validée sur 043bb60 et fusionnée par 8a934b7 : 2 993 tests Node, 16 profils, 1 566 contrôles et 835 captures. Ces résultats V163 et les compteurs V162 restent historiques. Les contrats runtime cumulatifs de ce document sont amendés pour V164, qui attend ses propres reçus de recette, CI, revue et fusion ; aucun résultat antérieur ne les remplace.",
     "Quatre opérations originales existantes : les455 entrées de campagnes du catalogue ne sont pas toutes des missions nouvelles entièrement validées par ce chantier. Aucune archive Blackout/Earth manquante ou scène filmique canonique n’est reconstruite ; fiction originale indiquée dans les données. Les scènes sont illustrées et radio, avec assets existants ; elles ne constituent pas des voix ou clips récupérés. Le pilote natif complète C12 ; il ne parcourt pas intégralement QZ18, APC ou toute la colonie/quarantaine Cocon dans sa propre session. Les anciens profils peuvent fournir un dossier QZ complet ou un historique APC validé : ils sont des reprises déclarées, jamais des parcours frais inventés. L’historique local est validé structurellement, pas signé cryptographiquement ; il n’autorise aucun paiement. La QA automatisée ne constitue pas une validation humaine ou 1:1. Les contrôles de géométrie portent sur la préparation C12 réellement reprise ; ils ne certifient pas toutes les phases, toutes les campagnes ou une finition artistique globale. Les pilotes hérités conservent leurs assertions : les cinq identités V163 ne peuvent faire avancer que leur unique horloge d’animation finie et bornée au temps de rechargement mesuré.",
     "Eight additional physical watch circuits;19-annex matrix preserves all other actual statuses. No NPC lift/cross-deck travel is observed or manufactured. C163-LIFT is the player foundation owned by root. Cal logistics duty remains on actual468catwalk; completing his circuit requires a durable ladder approach/ascent/top departure controller and fitting shipped climb art. No floor624 substitute. Other annex watches of a crew with an existing owner require extending that same owner, never creating a second samecrew factory. Source/destination coordinate charts change only behind a fully closed native paired leaf; this is not an animated back-facing walk. Native timetable/lifecycle/other-annex and courtesy context handoffs are explicitly observedTravel:false; macro command hours are not observed walking hours. Courtesy only adopts native routine peers that have no physical route owner and no care/mission/crisis/contact priority. Actual blockers, destination occupancy, locked leaves, unsupported goals and unsafe chains stay blocked. Native art and actual44×92actor contracts are preserved; no new back-view sprite or artistic/canonical1:1 certification. Forge/editor remains outside the requested scope; sandbox sessions create no new owners.",
     "Ne démontre pas transport PNJ entre ponts ni nouvelle animation climb PNG/cabine existants ; aucune attestation artistique canonique1:1 QA Chromium automatisée, sans participants humains",
@@ -15524,7 +15548,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "99f1d5c3b5811886f417bc679c6a60f66be160cc867b5411a2e5db17524643dd",
+  "workbookSha256": "969a969690564c46e27b601034933364e6372997713851136299dac33b56ec76",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -15557,8 +15581,8 @@
       {
         "path": "src/app.js",
         "previousSha256": "ac0404430bb38a08b454bcc30a4d85a6af1f0afb57a953552739039cdc8180dd",
-        "currentSha256": "74d0f90cefe5f9a5798795562bd348dc0695a840bfc5a9ed555e5f44d9c5285a",
-        "reason": "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique.",
+        "currentSha256": "418385128f0a42d5df8d793fc775424ff6cd4153f94466a02e65f6297fcdae98",
+        "reason": "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique. Appliquer aussi aux portraits natifs le masque V164 des seules poches de fond admises, en conservant les PNG et le cadrage et en retirant le masque lors de chaque changement de source.",
         "verifiers": [
           "scripts/verify-campaign-lethe-v163.mjs",
           "scripts/verify-campaign-story-v160.mjs",
@@ -15587,7 +15611,8 @@
           "scripts/verify-native-rig-weapon-rigidity-v163.mjs",
           "scripts/verify-legacy-operations-v131.mjs",
           "scripts/verify-xeno-trials-presentations-v156.mjs",
-          "scripts/verify-trials-navigation-v163.mjs"
+          "scripts/verify-trials-navigation-v163.mjs",
+          "scripts/verify-npc-matte-apertures-v164.mjs"
         ]
       },
       {
@@ -15785,10 +15810,12 @@
       {
         "path": "sw.js",
         "previousSha256": "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-        "currentSha256": "2c47b5a63287569005d7f01f04adf2db4658d5022e574471a77ab3d730c782b7",
-        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées.",
+        "currentSha256": "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6",
+        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue.",
         "verifiers": [
-          "scripts/verify-public-release-v86.mjs"
+          "scripts/verify-public-release-v86.mjs",
+          "scripts/verify-release-artifact-v143.mjs",
+          "scripts/verify-audit-v143.mjs"
         ]
       }
     ],
@@ -15843,6 +15870,15 @@
         ]
       },
       {
+        "path": "src/human-visual-contract-v133.js",
+        "previousSha256": null,
+        "currentSha256": "f009c9e00a60a06cf0cb9d6ecfce22b59d59cfcb8a28d4a9e224d1163abff4c8",
+        "reason": "Faire passer les atlas humains par la correction V164 des poches opaques explicitement admises, tout en conservant géométrie, vêtements et garanties RGB du noyau V134.",
+        "verifiers": [
+          "scripts/verify-npc-matte-apertures-v164.mjs"
+        ]
+      },
+      {
         "path": "src/npc-annex-leases-v163.js",
         "previousSha256": null,
         "currentSha256": "ecf66b6474a9770a8d68d017659e623caca15965827c0330c28b9927f7f08d90",
@@ -15870,6 +15906,24 @@
           "scripts/verify-npc-life-v136.mjs",
           "scripts/verify-npc-circulation-v158.mjs",
           "scripts/verify-npc-annex-circulation-v159.mjs"
+        ]
+      },
+      {
+        "path": "src/npc-matte-aperture-data-v164.js",
+        "previousSha256": null,
+        "currentSha256": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+        "reason": "Épingler les sources et runs exacts de poches de fond explicitement admises dans seize cellules de quatre PNJ, sans redessiner les PNG ni certifier leurs autres poses.",
+        "verifiers": [
+          "scripts/verify-npc-matte-apertures-v164.mjs"
+        ]
+      },
+      {
+        "path": "src/npc-matte-apertures-v164.js",
+        "previousSha256": null,
+        "currentSha256": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
+        "reason": "Corriger les seuls pixels opaques de fond admis avec garde des octets ciblés, cache borné et gestion des changements de portrait sans clé globale des blancs.",
+        "verifiers": [
+          "scripts/verify-npc-matte-apertures-v164.mjs"
         ]
       },
       {
@@ -20108,5 +20162,30 @@
     "Aucune nouvelle musique, voix, banque originale ou source de franchise. Le pilote Chromium headless active réellement un autre onglet et minimise la fenêtre, mais document.hidden n’y est pas observé : aucun parcours de scène masquée réussi n’est certifié. Un contrôle automatisé ne certifie pas le rendu sur haut-parleurs ou appareils physiques ; recette exacte à exécuter.",
     "Un circuit parent/annexe borné. Aucun ascenseur, déplacement physique entre ponts, nouveau dessin ou cycle de dos. Les soins, missions et autres priorités restent natifs ; le trajet après délégation n’est pas prouvé par ce lot.",
     "Journal de huit retours au plus, pas campagne étendue, enregistrement vidéo ou nouveau canon. Seuls les vrais résultats admissibles sont capturés ; aucun résultat absent n’est inventé et la lecture ne rejoue pas de paiement."
-  ]
+  ],
+  "historicalDeliveryV163": {
+    "status": "MERGED_AND_INVENTORY_FINALIZED",
+    "reviewedHead": "043bb60d9777335d247c8d64c2c58c301d23b306",
+    "mainMerge": "8a934b7634cb8acd22a04fc900bd772d4fd1e9ac",
+    "canonicalSourceSha256": "73d6fcee30c7788b253f2f7ff36161dcc32db20fa83c0a0eae8a8a40dc617452",
+    "nodeTests": 2993,
+    "nodeFiles": 171,
+    "browserProfiles": 16,
+    "automatedBrowserChecks": 1566,
+    "captures": 835,
+    "countsAreCurrentV164Results": false,
+    "notAHumanPlaytest": true,
+    "artistic1to1Approved": false,
+    "pullRequestUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/18"
+  },
+  "publicationStateScopeV164": "PREPUBLICATION décrit les contrats runtime cumulatifs amendés pour V164. La livraison V163 déjà fusionnée est consignée séparément dans historicalDeliveryV163.",
+  "followupV164": {
+    "scope": "Correction de poches de fond opaques dans quatre atlas PNJ, sans modification des PNG.",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "historicalV163ResultsTransferred": false,
+    "forgeState": "DEFERRED_BY_USER",
+    "artClosed": 0,
+    "approved1to1": 0
+  },
+  "workbookPublicationNoticeV164": "Livraison V163 : 043bb60 vers 8a934b7 ; 2 993 tests, 16 profils, 1 566 contrôles, 835 PNG. Contrats maintenus pour V164 : nouvelle validation requise."
 }

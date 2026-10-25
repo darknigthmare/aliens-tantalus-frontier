@@ -50,6 +50,27 @@ test('the V162 final delivery and seventeen public workbook ancestors remain his
   for (const [path, expected] of Object.entries(AUDIT_PREDECESSOR_DOCUMENTS_V163)) assert.equal(sha(read(path)), expected, path);
 });
 
+test('the completed V163 delivery stays historical while V164 runtime contracts require new evidence', () => {
+  const historical = current.historicalDeliveryV163;
+  assert.equal(historical.status, 'MERGED_AND_INVENTORY_FINALIZED');
+  assert.equal(historical.reviewedHead, '043bb60d9777335d247c8d64c2c58c301d23b306');
+  assert.equal(historical.mainMerge, '8a934b7634cb8acd22a04fc900bd772d4fd1e9ac');
+  assert.deepEqual([historical.nodeTests, historical.nodeFiles, historical.browserProfiles,
+    historical.automatedBrowserChecks, historical.captures], [2993, 171, 16, 1566, 835]);
+  assert.equal(historical.countsAreCurrentV164Results, false);
+  assert.equal(historical.notAHumanPlaytest, true);
+  assert.equal(historical.artistic1to1Approved, false);
+  assert.equal(current.followupV164.historicalV163ResultsTransferred, false);
+  assert.equal(current.followupV164.runtimeValidation, 'REQUIRES_OWN_EXACT_HEAD_RECEIPTS');
+  assert.equal(current.followupV164.forgeState, 'DEFERRED_BY_USER');
+  assert.equal(current.followupV164.artClosed, 0);
+  assert.equal(current.followupV164.approved1to1, 0);
+  assert.ok(current.workbookPublicationNoticeV164.includes('043bb60'));
+  assert.ok(current.workbookPublicationNoticeV164.includes('8a934b7'));
+  assert.ok(current.tables['07_Recette'].rows.every(row => row[2].startsWith('V164 :')));
+  assert.equal(current.limitations.some(text => text.startsWith('Tous les résultats de recette, CI, revue et fusion V163 attendent')), false);
+});
+
 test('the full current bridge validates runtime bytes and older default returns stay historical', () => {
   const result = verifyAuditSuccessionV163(previous, current);
   assert.equal(result.inherited, 87);

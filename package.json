@@ -65,7 +65,8 @@
     "qa:player:anatomy": "python3 -B scripts/qa-player-anatomy-v160.py --output /tmp/tantalus-player-anatomy-v160 --comparison-stage after",
     "test:continuation:v161": "node --test scripts/verify-forge-campaign-v161.mjs scripts/verify-campaign-convoy-story-v161.mjs scripts/verify-npc-service-routes-v161.mjs scripts/verify-audit-continuation-v161.mjs",
     "test:continuation:v162": "node --test scripts/verify-harpoon-unload-v162.mjs scripts/verify-audio-lifecycle-v162.mjs scripts/verify-npc-medical-route-v162.mjs scripts/verify-campaign-convoy-history-v162.mjs scripts/verify-audit-continuation-v162.mjs",
-    "test:continuation:v163": "node --test scripts/verify-audit-continuation-v163.mjs scripts/verify-campaign-lethe-v163.mjs scripts/verify-capture-admission-v163.mjs scripts/verify-hub-lift-transit-v163.mjs scripts/verify-native-rig-catalog-v163.mjs scripts/verify-native-rig-terminal-v163.mjs scripts/verify-native-rig-weapon-rigidity-v163.mjs scripts/verify-npc-annex-leases-v163.mjs scripts/verify-npc-annex-service-routes-v163.mjs scripts/verify-reload-presentation-v163.mjs scripts/verify-trials-navigation-v163.mjs scripts/verify-xeno-trials-capture-v163.mjs"
+    "test:continuation:v163": "node --test scripts/verify-audit-continuation-v163.mjs scripts/verify-campaign-lethe-v163.mjs scripts/verify-capture-admission-v163.mjs scripts/verify-hub-lift-transit-v163.mjs scripts/verify-native-rig-catalog-v163.mjs scripts/verify-native-rig-terminal-v163.mjs scripts/verify-native-rig-weapon-rigidity-v163.mjs scripts/verify-npc-annex-leases-v163.mjs scripts/verify-npc-annex-service-routes-v163.mjs scripts/verify-reload-presentation-v163.mjs scripts/verify-trials-navigation-v163.mjs scripts/verify-xeno-trials-capture-v163.mjs",
+    "test:npc:matte:v164": "node --test scripts/verify-npc-matte-apertures-v164.mjs"
   },
   "engines": {
     "node": ">=22"
