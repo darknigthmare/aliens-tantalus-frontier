@@ -43,14 +43,18 @@ export function sampleHumanGaitV133(actor, scale) {
   const stride = humanGaitStrideV133(actor, gait, scale), prior = actor?.playerLocomotionStateV129;
   const moving = actor?.grounded === true && !actor?.climbing && !actor?.downed && actor?.alive !== false
     && Math.abs(finite(actor?.vx)) > (actor?.crouching ? 8 : 12);
-  const observed = prior?.schema === 129 && finite(prior.facing, 1) === (actor?.facing < 0 ? -1 : 1)
+  // Heading is presentation, not a new journey. Keep the world contact phase
+  // through a turn so shot sampling before the simulation observation and the
+  // following draw resolve the same real upper-body frame.
+  const observed = prior?.schema === 129
     && prior.crouching === Boolean(actor?.crouching) && Math.abs(finite(actor?.x) - prior.x) <= 160;
   const dx = observed && moving ? finite(actor.x) - prior.x : 0;
   // Weapon/upper-body sampling happens before the simulation observation.
   // Predict the same support-centre adjustment once, using only new travel.
   const supportShift = observed && Math.abs(dx) > 1e-7
     ? (profile.duty - (prior.duty ?? HUMAN_GAIT_PROFILES_V133[prior.gait]?.duty ?? profile.duty)) / 2 : 0;
-  const cycles = observed ? prior.cycles + dx / stride + supportShift
+  const depthSwap = observed && finite(prior.facing, 1) !== (actor?.facing < 0 ? -1 : 1) ? .5 : 0;
+  const cycles = observed ? prior.cycles + depthSwap + dx / stride + supportShift
     : profile.duty / 2 + finite(actor?.weaponRigMotionV125?.distance) * (Math.sign(finite(actor?.vx)) || 1) / stride;
   // World travel is signed for planted-foot contacts. Upper-body atlas
   // phase is anatomical: reflecting the same motion must keep its cell.

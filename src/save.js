@@ -1,6 +1,7 @@
 import { COSTUMES, CREW, RELEASE, VEHICLES, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT } from './content.js';
 import { normalizeCrewConversationMemoryV135 } from './crew-conversation-memory-v135.js';
 import { normalizePlayerWardrobeV135 } from './player-wardrobe-v135.js';
+import { applyCostumeOutfitV165 } from './player-costume-outfits-v165.js';
 import { ARCHIVE_RELAY_CAMPAIGN_V122, validateArchiveRelayStateV122,
   ARCHIVE_RELAY_DOCUMENT_IDS_V122, createArchiveRelayArchiveV122, normalizeArchiveRelayArchiveV122 } from './archive-relay-state-v122.js';
 import { canEquipCostumeV119, sanitizeCostumeSelectionV119 } from './franchise-costumes-v119.js';
@@ -18,6 +19,10 @@ import { normalizeNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
 import { normalizeNpcMedicalRouteV162 } from './npc-medical-route-v162.js';
 import { normalizeNpcAnnexServiceRoutesV163 } from './npc-annex-service-routes-v163.js';
 import { normalizeNpcAnnexLeasesV163 } from './npc-annex-leases-v163.js';
+import { normalizeNpcAnnexWorkpostRoutesV165 } from './npc-annex-workpost-routes-v165.js';
+import { normalizeNpcCalLogisticsRouteV165 } from './npc-cal-logistics-route-v165.js';
+import { normalizeNpcInterdeckRoutesV165 } from './npc-interdeck-routes-v165.js';
+import { normalizeNpcInterdeckPassageV165 } from './npc-interdeck-passage-v165.js';
 import { normalizeNpcServiceTrafficV163 } from './npc-service-traffic-v163.js';
 import { normalizeHubLiftTransitV163 } from './hub-lift-transit-v163.js';
 import { createConvoyReturnHistoryV162, normalizeConvoyReturnHistoryV162,
@@ -320,6 +325,10 @@ export function createDefaultSave(profile = 1) {
       npcMedicalRouteV162: normalizeNpcMedicalRouteV162(),
       npcAnnexRoutesV163: normalizeNpcAnnexServiceRoutesV163(),
       npcAnnexLeasesV163: normalizeNpcAnnexLeasesV163(),
+      npcAnnexWorkpostRoutesV165: normalizeNpcAnnexWorkpostRoutesV165(),
+      npcCalLogisticsRouteV165: normalizeNpcCalLogisticsRouteV165(),
+      npcInterdeckRoutesV165: normalizeNpcInterdeckRoutesV165(),
+      npcInterdeckPassageV165: normalizeNpcInterdeckPassageV165(),
       npcServiceTrafficV163: normalizeNpcServiceTrafficV163(),
       hubLiftTransitV163: normalizeHubLiftTransitV163(),
       commercialV71: createHubCommercialStateV71(),
@@ -1426,6 +1435,7 @@ export function treatCrewMember(save, crewId) {
 export function applyCostume(save, costumeId) {
   if (ensureStrategy(save).currentOperation) throw new Error('Combinaison verrouillee pendant une operation.');
   if (!canEquipCostumeV119(costumeId, COSTUMES)) throw new Error('Combinaison invalide ou atlas joueur dédié absent.');
+  applyCostumeOutfitV165(save, costumeId);
   save.player.costumeId = costumeId;
   addStrategyLog(save, { type: 'loadout', title: 'Combinaison appliquee', risk: 0, incident: false, result: costumeId + ' devient la tenue active.' });
   return costumeId;
@@ -2139,6 +2149,10 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.npcMedicalRouteV162 = normalizeNpcMedicalRouteV162(hub.npcMedicalRouteV162);
   migrated.hub.npcAnnexRoutesV163 = normalizeNpcAnnexServiceRoutesV163(hub.npcAnnexRoutesV163);
   migrated.hub.npcAnnexLeasesV163 = normalizeNpcAnnexLeasesV163(hub.npcAnnexLeasesV163);
+  migrated.hub.npcAnnexWorkpostRoutesV165 = normalizeNpcAnnexWorkpostRoutesV165(hub.npcAnnexWorkpostRoutesV165);
+  migrated.hub.npcCalLogisticsRouteV165 = normalizeNpcCalLogisticsRouteV165(hub.npcCalLogisticsRouteV165);
+  migrated.hub.npcInterdeckRoutesV165 = normalizeNpcInterdeckRoutesV165(hub.npcInterdeckRoutesV165);
+  migrated.hub.npcInterdeckPassageV165 = normalizeNpcInterdeckPassageV165(hub.npcInterdeckPassageV165);
   migrated.hub.npcServiceTrafficV163 = normalizeNpcServiceTrafficV163(hub.npcServiceTrafficV163);
   migrated.hub.hubLiftTransitV163 = normalizeHubLiftTransitV163(hub.hubLiftTransitV163);
   const commercialV71 = hub.hubCommercialV71 ?? hub.commercialV71 ?? hub.hubExpansionV71;

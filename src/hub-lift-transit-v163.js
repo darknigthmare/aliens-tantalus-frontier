@@ -107,7 +107,8 @@ export function liftDestinationPeersV163(hub, deck) {
   const owners = (liveOwners
     ? [hub.npcCirculationActorV158, hub.npcAnnexActorV159, hub.getNpcMedicalActorV162(),
       hub.getNpcServiceActorV161('idris-engine'), hub.getNpcServiceActorV161('leila-galley'),
-      ...hub.getNpcAnnexServiceActorsV163(), ...(hub.getNpcServiceTrafficActorsV163?.() || [])]
+      ...hub.getNpcAnnexServiceActorsV163(), ...(hub.getNpcServiceTrafficActorsV163?.() || []),
+      ...(hub.getNpcInterdeckActorsV165?.() || [])]
     : [snapshot.npcCirculationV158?.actor, snapshot.npcAnnexCirculationV159?.actor,
       ...(snapshot.npcServiceTrafficV163?.actors || []),
       ...['npcServiceRoutesV161', 'npcMedicalRouteV162', 'npcAnnexRoutesV163']
@@ -178,6 +179,7 @@ export function withHubLiftTransitV163(Base) {
       if (!this.running || this.liftStateV163().trip || this.isAnnexActiveV71?.() || this.isVentActiveV62?.()
         || this.annexTransitionV71 || this.hubDoorClosingV142 || this.hubTrainingV132?.active) return false;
       const lift = this.nearestLift();
+      if (lift && this.npcLiftCabinReservationV165?.(lift.shaftId)) return false;
       const state = createHubLiftTripV163(this.liftStateV163(), { lift, deck: this.state.deck, direction, wrap, player: this.player, reducedMotion: this.reducedMotion });
       if (!state.trip) return false;
       const pose = liftPoseV163({ ...state.trip, phase: 'closing', elapsed: 0 });

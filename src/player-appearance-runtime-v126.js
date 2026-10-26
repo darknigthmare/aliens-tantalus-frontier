@@ -8,6 +8,11 @@ import { advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerT
 import { advancePlayerLocomotionStateV129, resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
 import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
 import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
+import { getPlayerCostumeTorsoV165, PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from './player-costume-parts-v165.js';
+
+const CLOTHING_LEG_DEFINITIONS_V165 = Object.freeze({
+  ...PLAYER_COLONIAL_LEG_DEFINITIONS_V129, ...PLAYER_COSTUME_LEG_DEFINITIONS_V165
+});
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
@@ -141,7 +146,7 @@ export function withPlayerAppearanceV126(Base) {
     decoratePlayerAppearanceBodyV129(actor, bodyRig) {
       return resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance: actor?.appearanceV126,
         images: this.images, locomotionState: actor?.playerLocomotionStateV129,
-        legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
+        legDefinitions: CLOTHING_LEG_DEFINITIONS_V165,
         groundSupport: playerAppearanceGroundSupportV129(actor,
           [...(this.platforms || []), ...(this.walls || []), ...(this.covers || []),
             ...(this.closedDoorColliders?.() || [])].filter(surface => !surface.destroyed)) }).bodyRig;
@@ -159,7 +164,7 @@ export function withPlayerAppearanceV126(Base) {
     resolvePlayerAppearanceTransitV128(actor = this.player, options = {}) {
       return resolvePlayerTransitRigV128({ ...this.playerAppearanceRigOptionsV127(actor, options),
         appearance: actor?.appearanceV126, ladder: this.playerAppearanceLadderV128(actor),
-        transitState: this.observePlayerTransitV128(actor), legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129 });
+        transitState: this.observePlayerTransitV128(actor), legDefinitions: CLOTHING_LEG_DEFINITIONS_V165 });
     }
 
     resolvePlayerAppearanceActionV127(actor = this.player, options = {}) {
@@ -222,7 +227,8 @@ export function withPlayerAppearanceV126(Base) {
           // the portable weapon's aim body belong to this deployment, rather
           // than first loading when the player changes direction or aims.
           if (modular.eligible) for (const facing of [-1, 1]) {
-            const torso = getPlayerColonialTorsoWithVariantsV141(modular.requestedSlots.torso, facing);
+            const torso = getPlayerCostumeTorsoV165(modular.requestedSlots.torso, facing)
+              || getPlayerColonialTorsoWithVariantsV141(modular.requestedSlots.torso, facing);
             if (torso) assets.push(torso.asset);
           }
           // Keep the actual carried weapon warm while the hands work with a

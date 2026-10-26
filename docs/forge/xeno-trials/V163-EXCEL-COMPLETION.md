@@ -1,6 +1,6 @@
 # Tantalus Frontier — V163
 
-Contrats cumulatifs hors Forge. La livraison V163 a été validée sur 043bb60 et fusionnée par 8a934b7. Les empreintes runtime de ce fichier sont maintenues pour le correctif V164, dont les résultats doivent rester distincts. Les 68 tâches, 17 priorités et 189 identités ne deviennent pas toutes closes.
+Contrats cumulatifs hors Forge. V163 a été validée sur 043bb60 et fusionnée par 8a934b7 ; V164 a été validée sur 21b70e et fusionnée par ebbdbb6. Les empreintes runtime du suivi public sont maintenues cumulativement pour V165, en prépublication avec ses propres preuves encore attendues. Les résultats de ces trois lots restent distincts. Les 68 tâches, 17 priorités et 189 identités ne deviennent pas toutes closes. Le détail des six chantiers actuels est dans [V165-PARALLEL-COMPLETION.md](V165-PARALLEL-COMPLETION.md).
 
 ## C163-CAMPAIGN — Dossier de Lethe : campagne originale continue et retours natifs durables
 
@@ -73,4 +73,12 @@ Les champs hérités rigCount=4 et newOriginalSpriteFiles=0, ainsi que les table
 
 ## Livraison historique et suivi V164
 
-La livraison historique V163 est validée sur 043bb60 et fusionnée par 8a934b7 : 2 993 tests Node, 16 profils, 1 566 contrôles et 835 captures. Ces résultats V163 et les compteurs V162 restent historiques. Les contrats runtime cumulatifs de ce document sont amendés pour V164, qui attend ses propres reçus de recette, CI, revue et fusion ; aucun résultat antérieur ne les remplace.
+La livraison historique V163 est validée sur 043bb60 et fusionnée par 8a934b7 : 2 993 tests Node dans 171 fichiers, 16 profils, 1 566 contrôles et 835 captures. Ces résultats V163 et les compteurs V162 restent historiques.
+
+V164 est livrée sur 21b70e140a44775f9f5cb49809d0ca0a5c2abf29, fusionnée par ebbdbb6520e4d76054c3c6d175c9a7a26b07e02d, avec le même arbre testé et fusionné : cdb58b7d4d7bc0ea2ffbde1404d6b574d2413519. Sa suite Node compte 3 003 tests réussis dans 172 fichiers. La recette alpha compte 61 contrôles et 26 captures, dont cinq parcours natifs et seize fixtures de rendu distinctes. Le complément Trials compte séparément 65 contrôles, 42 captures et six duels natifs ; ses captures ne sont pas ajoutées au compteur alpha. Les quatre workflows CI et leurs huit jobs ont réussi. Cela n’établit pas l’identité d’un serveur HTTP de production ni une validation humaine ou artistique 1:1.
+
+Les champs `followupV164` et le tableau `07_Recette` conservent l’instantané prépublication historique V164 pour compatibilité. `historicalRecipeV164` lui donne l’alias documentaire `07_RecetteV164` ; les résultats réellement livrés figurent séparément dans `historicalDeliveryV164`. Les cellules historiques « V164 : à exécuter » ne décrivent pas l’état de livraison actuel. Les dix-neuf tableaux hérités, les 68 identités de tâches, les 189 identités du roster et les dix-sept classeurs ancêtres sont préservés.
+
+`followupV165` et `26_ChantiersV165` décrivent les nouveaux contrats en prépublication. Les preuves V165 de la suite complète, du candidat natif, de CI, de revue et de fusion sont encore attendues. Les 835 captures V163 et les 26 captures alpha V164 ne sont pas transférées à V165. Aucun tableau de suivi ne clôture automatiquement les manquants artistiques, les sept trajets PNJ, les trente ensembles de costumes ou les sources non récupérées. Forge reste différée par l’utilisateur, avec deux priorités et les trente-deux empreintes sources conservées.
+
+Le lot costumes V165 comprend huit créations modulaires et dix-sept PNG portables, plus deux liaisons aux vrais presets V129 Hicks/Hudson : dix références équipables, 20 autres références franchise encore ouvertes. Les trois dernières créations adaptent des kits Fireteam documentés distincts : Seegson Maintenance, Nostromo Jacket et Flightsuit. Les deux liaisons V129 ne sont pas de nouveaux arts. Les quinze planches précomposées et leurs 240 cellules restent des aperçus ; le skin Nostromo V119 historique conserve ses cinq PNG inchangés et aucun nouveau kit n’utilise de secours précomposé à M41A.

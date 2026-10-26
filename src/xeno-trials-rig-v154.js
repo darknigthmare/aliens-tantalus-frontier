@@ -2,6 +2,7 @@ import { sampleXenoTrialsRestraintPoseV156 } from './xeno-trials-restraint-pose-
 import { sampleXenoTrialsCaptureReceptionV158 } from './xeno-trials-capture-reception-v158.js';
 import { XENO_TRIALS_RIG_DATA_V154 } from './xeno-trials-rig-data-v154.js';
 import { XENO_TRIALS_RIG_DATA_V163 } from './xeno-trials-rig-data-v163.js';
+import { XENO_TRIALS_RIG_DATA_V165 } from './xeno-trials-rig-data-v165.js';
 import { XENO_TRIALS_GRAPPLE_V153 } from './xeno-trials-grapple-v153.js';
 import { XENO_TRIALS_CASTES_V151 } from './xeno-trials-castes-v151.js';
 import { XENO_PRESENTATION_V97 } from './xeno-trials-presentation-v97.js';
@@ -10,9 +11,10 @@ import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 // captured 1:1 choreography. No collision, stature, damage, clock or save writes.
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 export const XENO_TRIALS_RIGS_V154=freeze(XENO_TRIALS_RIG_DATA_V154);
-// Historical API remains the four reviewed V154 plates. V163 adds its own
-// measured sources; an object copy still cannot acquire admission.
-const admittedRigsV163=freeze([...XENO_TRIALS_RIGS_V154,...XENO_TRIALS_RIG_DATA_V163]);
+// Historical API remains the four reviewed V154 plates. Later catalogs add
+// individually measured presentation plates, without admitting historical
+// capture/exit choreography. An object copy still cannot acquire admission.
+const admittedRigsV163=freeze([...XENO_TRIALS_RIGS_V154,...XENO_TRIALS_RIG_DATA_V163,...XENO_TRIALS_RIG_DATA_V165]);
 export const XENO_TRIALS_RIG_TIMING_V154=Object.freeze({intro:XENO_PRESENTATION_V97.introMs/1000,round:1.8,release:XENO_TRIALS_GRAPPLE_V153.recovery,settle:.12});
 const clamp=(v,lo=0,hi=1)=>Math.max(lo,Math.min(hi,v));
 const smooth=v=>{const t=clamp(v);return t*t*(3-2*t);};
@@ -62,7 +64,8 @@ export function getXenoTrialsRigMeshV154(rig){
   const p=[Math.min(x*cell,rig.sourceWidth),Math.min(y*cell,rig.sourceHeight)];let weights;
   const carried=rig.rigidZonesV163?.find(zone=>inPolygonV163(p,zone.polygon));
   if(carried)weights=[[carried.bone,1]];
-  else if(inside(p,rig.pinned))weights=[['hips',1]];
+  else if(rig.rigidDefaultBoneV165)weights=[[rig.rigidDefaultBoneV165,1]];
+  else if(inside(p,rig.pinned))weights=[[rig.supportRootBoneV165||'hips',1]];
   else if(inside(p,rig.rigidWeaponZone))weights=[['spine',1]];
   else{const near=rig.bones.map(b=>[b.id,distance(p,b)]).sort((a,b)=>a[1]-b[1]).slice(0,2);
    const values=near.map(([id,d])=>[id,1/(d+24)**4]),sum=values.reduce((n,v)=>n+v[1],0);weights=values.map(([id,w])=>[id,w/sum]);}
@@ -131,13 +134,22 @@ export function sampleXenoTrialsRigV154(rig,cue,reducedMotion=false){
  const angles={},matrices={};
  for(const bone of rig.bones){
   angles[bone.id]=(nativePose[bone.id]||0)*gain;
-  if((cue.clip==='struggle'||heldRelease&&cue.releaseFrom==='struggle')&&!reducedMotion&&bone.id==='head')angles[bone.id]+=Math.sin((heldRelease?(Number.isFinite(cue.heldSeconds)?cue.heldSeconds:0):cue.elapsed)*12)*.7*gain;
+  const oscillation=rig.struggleOscillationV165;
+  if((cue.clip==='struggle'||heldRelease&&cue.releaseFrom==='struggle')&&!reducedMotion&&bone.id===(oscillation?.bone||'head'))
+   angles[bone.id]+=Math.sin((heldRelease?(Number.isFinite(cue.heldSeconds)?cue.heldSeconds:0):cue.elapsed)*(oscillation?.radiansPerSecond??12))*(oscillation?.degrees??.7)*gain;
   matrices[bone.id]=multiply(bone.parent?matrices[bone.parent]:identity(),rotation(angles[bone.id],bone.pivot));
  }
  const mesh=getXenoTrialsRigMeshV154(rig);
  const vertices=mesh.vertices.map(({source:[x,y],weights})=>weights.reduce((out,[id,w])=>{const p=point(matrices[id],x,y);out[0]+=p[0]*w;out[1]+=p[1]*w;return out;},[0,0]));
  const contacts=Object.fromEntries(Object.entries(rig.contacts).map(([name,a])=>[name,point(matrices[a.bone],...a.point)]));
  const frame={rigId:rig.id,clip:cue.clip,progress:p,angles,vertices,contacts,reducedMotion,canonExact:false,animation:rig.animation,active:gain>1e-6};
+ // New sparse rigs report the same painted attachment that the affine mesh
+ // actually displays. A desired bone target is not a skin-contact measurement.
+ if(rig.presentationRevision===165)for(const[name,anchor]of Object.entries(rig.contacts)){
+  const displayed=projectXenoTrialsMeshPointV157(rig,frame,anchor.point);
+  if(!displayed)return null;
+  frame.contacts[name]=displayed;
+ }
  const supported=sampleXenoTrialsRestraintPoseV156(rig,mesh,frame,cue,reducedMotion);
  return sampleXenoTrialsCaptureReceptionV158(rig,mesh,supported,cue,reducedMotion);
 }

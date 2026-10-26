@@ -29,7 +29,18 @@ export const HUB_NPC_SERVICE_TRAFFIC_CIRCUITS_V163 = Object.freeze({
   'mara-archives': circuit('crew-01-mara-vega', 0, ['bridge', 'briefing']),
   'noor-animal': circuit('crew-04-noor-okafor', 1, ['crew-quarters', 'mess', 'medical']),
   'echo-escape': circuit('crew-14-echo-a', 0, ['briefing', 'combat-information', 'cryo-bay']),
-  'jun-maintenance': circuit('crew-11-jun-park', 3, ['life-support', 'sensor-array'])
+  'jun-maintenance': circuit('crew-11-jun-park', 3, ['life-support', 'sensor-array']),
+  'rook-cctv': circuit('crew-06-rook', 0, ['combat-information']),
+  'tamsin-proving': circuit('crew-02-tamsin-velez', 2, ['armory']),
+  'cal-logistics': circuit('crew-16-cal-mercer', 2, ['vehicle-bay']),
+  // Four shipped passenger identities, each bound to one of the four actual
+  // main-deck charts. The walker still has to traverse the full native floor
+  // and bulkheads; these reservations never manufacture a lift arrival.
+  ...Object.fromEntries([
+    ['david-durandal', 'crew-10-david-8r'], ['inez-civil', 'crew-09-inez-harlow'],
+    ['maksim-cockpit', 'crew-08-maksim-orlov'], ['jun-sanitary', 'crew-11-jun-park']
+  ].flatMap(([id, owner]) => [0, 1, 2, 3].map(deck => [id + ':deck-' + deck,
+    circuit(owner, deck, HUB_DECKS[deck].rooms.map(room => room.id))])))
 });
 
 /** Durable courtesy only for an existing native timetable body. Never admit
@@ -87,7 +98,8 @@ export function withHubNpcServiceTrafficV163(Base) {
     getNpcServiceOwnedActorsV163() {
       return [this.npcCirculationActorV158, this.npcAnnexActorV159,
         this.getNpcServiceActorV161?.('idris-engine'), this.getNpcServiceActorV161?.('leila-galley'),
-        this.getNpcMedicalActorV162?.(), ...(this.getNpcAnnexServiceActorsV163?.() || [])].filter(Boolean);
+        this.getNpcMedicalActorV162?.(), ...(this.getNpcAnnexServiceActorsV163?.() || []),
+        ...(this.getNpcAnnexWorkpostActorsV165?.() || [])].filter(Boolean);
     }
 
     /** Read-only native factory, followed by exact actual-owner substitution.
@@ -182,7 +194,9 @@ export function withHubNpcServiceTrafficV163(Base) {
         const actor = intent.actor, direction = Math.sign(intent.goalX - actor.x);
         if (!direction) continue;
         const peers = this.getNpcServicePeersV163(intent.deck, actor.crewId);
-        const blockers = peers.filter(peer => !ownedIds.has(peer.crewId) && !this.npcTrafficBodiesV163.has(peer.crewId)
+        const blockers = peers.filter(peer => !ownedIds.has(peer.crewId)
+          && (!this.npcTrafficBodiesV163.has(peer.crewId)
+            || this.canPreemptNpcServiceCourtesyV165?.(intent, this.npcTrafficStateV163.actors.find(saved => saved.crewId === peer.crewId)))
           && intent.roomIds.includes(peer.roomId) && peer.alive !== false && !peer.downed
           && Math.abs(peer.y + peer.h - 624) < 1
           && direction * (peer.x - actor.x) > 0 && direction * (peer.x - intent.goalX) < 56)
@@ -204,6 +218,14 @@ export function withHubNpcServiceTrafficV163(Base) {
         for (const { peer, target } of plans) {
           const r = this.npcRoutineResolutionsV62.get(peer.crewId);
           const body = peer;
+          const previous = this.npcTrafficStateV163.actors.find(saved => saved.crewId === peer.crewId);
+          if (previous) {
+            // An explicitly coordinated owner can change a real body's bay.
+            // Its original bookmark, distance, time and object stay intact.
+            Object.assign(previous, { ownerCrewId: actor.crewId, routeId: intent.routeId,
+              targetX: target, phase: 'clearing' });
+            continue;
+          }
           const state = { crewId: peer.crewId, deck: intent.deck, roomId: peer.roomId, homeRoomId: peer.roomId,
             x: body.x, y: 532, homeX: body.x, targetX: target, velocity: 0, time: 0, distance: 0,
             facing: peer.facing === -1 ? -1 : 1, phase: 'clearing', routineKey: r.deterministicKey,

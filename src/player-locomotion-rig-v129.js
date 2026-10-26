@@ -3,7 +3,7 @@ import { PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 import { PLAYER_MODULAR_RIG_ANCHORS_V126, resolvePlayerModularRigV126 } from './player-modular-rig-v126.js';
 import { solvePlayerArmIKV125, playerBodyRigImageReadyV125 } from './player-body-rig-v125.js';
 import { buildPlayerArticulatedLowerLayersV128 } from './player-transit-rig-v128.js';
-import { HUMAN_LEG_DIMENSIONS_V136, HUMAN_PELVIS_HEIGHT_V136, humanFootSwingV136, humanMotionEnvelopeV136,
+import { HUMAN_LEG_DIMENSIONS_V136, HUMAN_PELVIS_HEIGHT_V136, humanFootSwingV136, humanFootTravelV136, humanMotionEnvelopeV136,
   smoothHumanStepV136 } from './human-motion-v136.js';
 import { PLAYER_HUMAN_PROPORTIONS_V160, getPlayerTorsoAxisV160 } from './player-human-proportions-v160.js';
 
@@ -29,6 +29,7 @@ const freeze = value => {
  * surface contract. No option changes an actor's collision or firing rig. */
 export const PLAYER_LOCOMOTION_PRESENTATION_V129 = freeze({
   schema: 129, ...HUMAN_LEG_DIMENSIONS_V136, settleDuration: .12,
+  stopRecoveryDurationV165: .16, stopRecoveryLiftV165: 6,
   walk: { stride: 176, ...HUMAN_GAIT_PROFILES_V133.walk },
   run: { stride: 216, ...HUMAN_GAIT_PROFILES_V133.run },
   crouch: { stride: 80, ...HUMAN_GAIT_PROFILES_V133.crouch },
@@ -81,6 +82,26 @@ function stepShape(state, side, scale, crouching, staticAction) {
     angle += correction.angle * weight;
   }
   if (hasStride && Number.isFinite(state.stopOffsets?.[side])) offset = state.stopOffsets[side];
+  const stopRecovery = hasStride && state.stopRecoveryV165?.side === side ? state.stopRecoveryV165 : null;
+  const recoveryProgress = stopRecovery ? clamp((state.time - stopRecovery.startedAt) / C.stopRecoveryDurationV165) : 1;
+  const recovering = Boolean(stopRecovery && recoveryProgress < 1);
+  if (stopRecovery) {
+    // One real stop may finish with a wide free boot frozen behind the body.
+    // Release that foot, clear the deck, then place it beneath the operator.
+    // The other contact is untouched; this is one simulation-owned adjustment,
+    // never render-clock walking, a moving collision box or a sliding shoe.
+    const travel = humanFootTravelV136(recoveryProgress);
+    // This adjustment has its own short160ms duration. The ordinary gait's
+    // early-clearance arc reached the full three world pixels in16ms here,
+    // pulling the support-owned pelvis upward by more than one pixel/frame.
+    // A single symmetric C2 pulse retains its clearance and duration while
+    // leaving zero vertical velocity and acceleration at both contacts.
+    const liftPulse = 64 * recoveryProgress ** 3 * (1 - recoveryProgress) ** 3;
+    offset = mix(stopRecovery.from.offset, stopRecovery.targetOffset, travel);
+    lift = stopRecovery.from.lift * (1 - smoothHumanStepV136(recoveryProgress))
+      + C.stopRecoveryLiftV165 * scale * liftPulse;
+    angle = stopRecovery.from.angle * (1 - smoothHumanStepV136(recoveryProgress));
+  }
   // During a speed blend an inherited clearance and the new free-foot arc
   // overlap. They cannot add two separate knee lifts to the same real boot.
   lift = clamp(lift, 0, C.run.lift * scale);
@@ -89,7 +110,7 @@ function stepShape(state, side, scale, crouching, staticAction) {
   // cannot penetrate the deck while the contact point remains truthful.
   const rollLimit = Math.asin(clamp(lift / ((angle < 0 ? 19 : 14) * scale)));
   angle = clamp(angle, -rollLimit, rollLimit);
-  return { phase, swing, lift, offset, angle, settle, swinging, hasStride };
+  return { phase, swing, lift, offset, angle, settle, swinging, hasStride, recovering, recoveryProgress };
 }
 
 const activeGait = humanGaitKindV133;
@@ -118,11 +139,26 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
   const now = timeSeconds, facing = facingOf(actor), scale = contract.height / 256;
   const discontinuity = previous?.schema !== 129 || ![previous?.cycles,previous?.time,previous?.x,previous?.y].every(Number.isFinite)
     || !C[previous?.gait] || previous.context !== context
-    || previous.surface !== surface || now < previous.time || previous.facing !== facing
+    || previous.surface !== surface || now < previous.time
     || Math.hypot(actor.x - previous.x, actor.y - previous.y) > 160;
-  const prior = discontinuity ? null : previous;
+  const observed = discontinuity ? null : previous;
+  const headingChanged = Boolean(observed && observed.facing !== facing);
+  // A profile turn exchanges the two depth-labelled legs. Relabel their
+  // phase and any pending contact correction together instead of starting a
+  // neutral stride, or pinning the toe of a reflected boot and forcing the
+  // pelvis down. The ankles keep their world positions while each boot pivots
+  // around its own ankle. This half cycle is a label swap, never travelled
+  // distance or an invented footstep.
+  const prior = headingChanged ? { ...observed, facing, cycles: observed.cycles + .5,
+    phase: mod(observed.cycles + .5),
+    stopOffsets: observed.stopOffsets ? { near: observed.stopOffsets.far, far: observed.stopOffsets.near } : null,
+    gaitTransition: observed.gaitTransition ? { ...observed.gaitTransition,
+      feet: { near: observed.gaitTransition.feet.far, far: observed.gaitTransition.feet.near } } : null,
+    stopRecoveryV165: observed.stopRecoveryV165 ? { ...observed.stopRecoveryV165,
+      side: observed.stopRecoveryV165.side === 'near' ? 'far' : 'near' } : null } : observed;
   if (prior && now === prior.time && actor.x === prior.x && actor.y === prior.y
-    && Boolean(actor.crouching) === prior.crouching && (actor.grounded === true) === prior.grounded) return prior;
+    && !headingChanged && Boolean(actor.crouching) === prior.crouching
+    && (actor.grounded === true) === prior.grounded) return prior;
   const desiredGait = activeGait(actor);
   // A stopped run keeps its phase and contacts; merely releasing sprint does
   // not swap to another stride before the remaining boot has met the floor.
@@ -135,7 +171,11 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
     ? prior.stride : humanGaitStrideV133(actor, gait, scale);
   const dx = prior ? actor.x - prior.x : 0;
   const moved = requested && Math.abs(dx) > 1e-7;
-  const striding = moved && Math.abs(finite(actor.vx)) > (actor.crouching ? 6 : 8);
+  const relabelSameObservation = headingChanged && now === prior.time && dx === 0
+    && actor.y === prior.y && Boolean(actor.crouching) === prior.crouching
+    && (actor.grounded === true) === prior.grounded;
+  const striding = moved && Math.abs(finite(actor.vx)) > (actor.crouching ? 6 : 8)
+    || Boolean(relabelSameObservation && requested && prior.moving);
   const postureChanged = prior && Boolean(actor.crouching) !== prior.crouching;
   // Support occupies [0,duty] in either direction. Keep its centre aligned
   // while acceleration shortens support; otherwise the first left step holds
@@ -154,8 +194,13 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
     grounded: actor.grounded === true, crouching: Boolean(actor.crouching), gait,
     cycles, phase: mod(cycles), stride, duty: profile.duty, footLift: profile.lift, distance, entrance,
     hasWalked: Boolean(prior?.hasWalked || moved), moving: striding, stopOffsets: null,
+    stopRecoveryV165: null,
     settle, settleProgress: clamp(settle / C.settleDuration),
     source: 'observed-ground-displacement',
+    headingChangeV165: headingChanged ? { from: observed.facing, to: facing, at: now,
+      retainedTravel: prior.distance, retainedGroundHistory: prior.grounded && actor.grounded === true && !postureChanged,
+      depthSidesSwapped: true, contact: 'ankle-pivot-not-fixed-toe' }
+      : prior?.headingChangeV165 || null,
     gaitTransition: prior && !postureChanged ? advanceGaitTransition(prior, cycles, moved ? Math.abs(dx) : 0) : null };
   if (prior?.hasWalked && !striding && !postureChanged) {
     // The simulation's exponential braking has a long subpixel tail. Lower
@@ -166,12 +211,36 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
       (prior.stopOffsets?.[side] ?? stepShape(prior, side, scale, prior.crouching, false).offset)
         - (moved ? dx : 0)]));
   }
+  const continuedRecovery = prior?.stopRecoveryV165 && !postureChanged && next.grounded
+    ? { ...prior.stopRecoveryV165,
+      from: { ...prior.stopRecoveryV165.from,
+        offset: prior.stopRecoveryV165.from.offset - (moved ? dx : 0) },
+      targetOffset: prior.stopRecoveryV165.targetOffset - (moved ? dx : 0) } : null;
+  if (!striding && next.stopOffsets && continuedRecovery) {
+    if (now - continuedRecovery.startedAt >= C.stopRecoveryDurationV165) {
+      next.stopOffsets[continuedRecovery.side] = continuedRecovery.targetOffset;
+    } else next.stopRecoveryV165 = continuedRecovery;
+  }
+  if (prior?.moving && elapsed <= .25 && !striding && !postureChanged && !next.crouching && next.grounded && next.stopOffsets
+    && actor.alive !== false && !actor.downed && !actor.climbing && !actor.inVehicle
+    && !actor.ventTransit && !actor.vehicleAccessPhase) {
+    const shapes = Object.fromEntries(['near', 'far'].map(side => [side,
+      stepShape({ ...next, stopRecoveryV165: null }, side, scale, next.crouching, false)]));
+    const free = ['near', 'far'].filter(side => shapes[side].lift > 1e-5);
+    const candidates = free.length ? free : ['near', 'far'];
+    const side = candidates.reduce((best, side) => Math.abs(shapes[side].offset)
+      > Math.abs(shapes[best].offset) ? side : best, candidates[0]);
+    if (Math.abs(shapes[side].offset) > 4 * scale) next.stopRecoveryV165 = {
+      side, startedAt: now, from: { offset: shapes[side].offset,
+        lift: shapes[side].lift, angle: shapes[side].angle }, targetOffset: 0 };
+  }
   if (prior && !postureChanged && (gait !== prior.gait || Math.abs(stride - prior.stride) > 1e-7
     || Math.abs(profile.duty - (prior.duty ?? C[prior.gait].duty)) > 1e-7 || prior.stopOffsets && striding)) {
     const oldCycles = prior.cycles + (moved ? dx / prior.stride : 0);
     const continued = { ...next, gait: prior.gait, stride: prior.stride,
       duty: prior.duty ?? C[prior.gait].duty, footLift: prior.footLift ?? C[prior.gait].lift, cycles: oldCycles,
       stopOffsets: prior.stopOffsets ? Object.fromEntries(Object.entries(prior.stopOffsets).map(([side, offset]) => [side, offset - (moved ? dx : 0)])) : null,
+      stopRecoveryV165: continuedRecovery,
       gaitTransition: advanceGaitTransition(prior, oldCycles, moved ? Math.abs(dx) : 0) };
     const feet = {};
     for (const side of ['near', 'far']) {
@@ -240,11 +309,12 @@ function solveLeg(hip, foot, scale, facing) {
 
 function stepContact(actor, state, side, scale, facing, crouching, staticAction) {
   const floor = actor.y + actor.h, center = actor.x + actor.w / 2;
-  const { phase, swing, lift, offset, angle, swinging, hasStride } = stepShape(state, side, scale, crouching, staticAction);
+  const { phase, swing, lift, offset, angle, swinging, hasStride, recovering, recoveryProgress }
+    = stepShape(state, side, scale, crouching, staticAction);
   const sole = point(center + facing * (PLAYER_HUMAN_PROPORTIONS_V160.hips[side]
     + PLAYER_HUMAN_PROPORTIONS_V160.soleFromAnkle) * scale + offset, floor - lift);
-  return { point: sole, planted: lift < 1e-7 && (!state.moving || !swinging || !hasStride),
-    phase, swing, lift, support: 'ground', ...footFromSole(sole, scale, facing, angle) };
+  return { point: sole, planted: !recovering && lift < 1e-7 && (!state.moving || !swinging || !hasStride),
+    phase, swing, lift, recovering, recoveryProgress, support: 'ground', ...footFromSole(sole, scale, facing, angle) };
 }
 
 /** Decorate an already selected V125/V127 body. A support-owned rigid weight
@@ -350,7 +420,10 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
     contacts.feet[side] = { point: leg.sole, planted, phase: contact.phase, swing: contact.swing,
       support: supportConfirmed === false ? null : contact.support, supportConfirmed,
       lift: contact.lift, reachClamped: leg.reachClamped,
-      clearanceAdjusted };
+      clearanceAdjusted,
+      stopRecoveryV165: contact.recovering ? { progress: contact.recoveryProgress } : null,
+      pivotingV165: Boolean(planted && state.headingChangeV165 && state.headingChangeV165.at === state.time
+        && state.headingChangeV165.retainedGroundHistory) };
   }
   // Keep one body above the solved support. V142 moved only the pelvis under
   // a fixed thorax and hid the mismatch with a jacket clip. The same weight
@@ -381,7 +454,7 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
   const servicePouch = point(pocketLeg.hip.x + (pocketLeg.knee.x - pocketLeg.hip.x) * pocketFraction,
     pocketLeg.hip.y + (pocketLeg.knee.y - pocketLeg.hip.y) * pocketFraction);
   const detail = { schema: 129, mode: !grounded ? 'airborne' : staticAction ? bodyRig.stance
-    : state.moving ? crouching ? 'crouch-move' : state.gait : state.settleProgress < 1 ? 'settling' : 'idle',
+    : state.moving ? crouching ? 'crouch-move' : state.gait : state.settleProgress < 1 || state.stopRecoveryV165 ? 'settling' : 'idle',
     source: state.source, phase: mod(state.cycles), stride: state.stride,
     presentationV133: { schema: 133, cadenceSource: 'supported-stature-and-world-distance',
       stepsPerSecond: state.moving ? 2 * Math.abs(finite(actor.vx)) / state.stride : 0,
@@ -399,7 +472,13 @@ export function resolvePlayerLocomotionRigV129({ actor, bodyRig, appearance = ac
       projectedHipSpan: Math.abs(hips.far.x - hips.near.x),
       upperBodySource: 'complete-native-upper-pose-with-shared-weight-transfer',
       bodyAndWeaponShareShoulders: true,
-      pouchAttachment: { part: 'far-thigh', fraction: pocketFraction, point: servicePouch } }, legs, contacts };
+      pouchAttachment: { part: 'far-thigh', fraction: pocketFraction, point: servicePouch } },
+    headingV165: state.headingChangeV165 ? { ...state.headingChangeV165,
+      active: state.headingChangeV165.at === state.time,
+      soleMidpointFixedDuringPivot: false } : null,
+    stopRecoveryV165: state.stopRecoveryV165 ? { ...state.stopRecoveryV165,
+      duration: C.stopRecoveryDurationV165, progress: clamp((state.time - state.stopRecoveryV165.startedAt) / C.stopRecoveryDurationV165),
+      owner: 'single-observed-simulation-stop', collisionMoved: false } : null, legs, contacts };
   const decorated = { ...bodyRig, baseBodyRigV160: bodyRig, matrix: bodyMatrix,
     torsoAxisV160: bodyRig.torsoAxisV160 || getPlayerTorsoAxisV160(bodyMatrix, anatomical, f),
     shoulders: bodyShoulders, neutralGrip: transfersWeight ? translated(bodyRig.neutralGrip) : bodyRig.neutralGrip,

@@ -66,7 +66,8 @@
     "test:continuation:v161": "node --test scripts/verify-forge-campaign-v161.mjs scripts/verify-campaign-convoy-story-v161.mjs scripts/verify-npc-service-routes-v161.mjs scripts/verify-audit-continuation-v161.mjs",
     "test:continuation:v162": "node --test scripts/verify-harpoon-unload-v162.mjs scripts/verify-audio-lifecycle-v162.mjs scripts/verify-npc-medical-route-v162.mjs scripts/verify-campaign-convoy-history-v162.mjs scripts/verify-audit-continuation-v162.mjs",
     "test:continuation:v163": "node --test scripts/verify-audit-continuation-v163.mjs scripts/verify-campaign-lethe-v163.mjs scripts/verify-capture-admission-v163.mjs scripts/verify-hub-lift-transit-v163.mjs scripts/verify-native-rig-catalog-v163.mjs scripts/verify-native-rig-terminal-v163.mjs scripts/verify-native-rig-weapon-rigidity-v163.mjs scripts/verify-npc-annex-leases-v163.mjs scripts/verify-npc-annex-service-routes-v163.mjs scripts/verify-reload-presentation-v163.mjs scripts/verify-trials-navigation-v163.mjs scripts/verify-xeno-trials-capture-v163.mjs",
-    "test:npc:matte:v164": "node --test scripts/verify-npc-matte-apertures-v164.mjs"
+    "test:npc:matte:v164": "node --test scripts/verify-npc-matte-apertures-v164.mjs",
+    "test:parallel:v165": "node --test scripts/verify-hub-service-details-v165.mjs scripts/verify-native-rig-catalog-v165.mjs scripts/verify-npc-annex-workpost-routes-v165.mjs scripts/verify-player-allies-contacts-v165.mjs scripts/verify-hub-interaction-input-v165.mjs scripts/verify-npc-cal-climb-rig-v165.mjs scripts/verify-costume-atlases-v165.mjs scripts/verify-parallel-completion-v165.mjs scripts/verify-npc-jun-climb-rig-v165.mjs scripts/verify-npc-interdeck-routes-v165.mjs scripts/verify-npc-interdeck-passage-v165.mjs scripts/verify-npc-cal-logistics-route-v165.mjs"
   },
   "engines": {
     "node": ">=22"

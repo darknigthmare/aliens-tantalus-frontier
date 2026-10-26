@@ -125,7 +125,12 @@ export function withHubNpcAnnexLeasesV163(Base) {
         && r && !r.alert && !r.needsCare && !r.missionAssigned);
     }
     npcAnnexLeaseDutyV163(d) {
-      return annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).find(duty => duty.crewId === d.crewId && duty.roomId === d.annexRoomId);
+      const duty = annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).find(duty => duty.crewId === d.crewId && duty.roomId === d.annexRoomId);
+      const r = this.npcRoutineResolutionsV62?.get(d.crewId);
+      const passing = this.getNpcServicePassingDutyV165?.(d.id, this.getNpcAnnexLeaseActorV163(d.id));
+      if (typeof passing !== 'boolean') return duty;
+      return passing && r?.reason === 'daily-schedule' && !r.alert && !r.needsCare && !r.missionAssigned
+        ? { ...d, roomId: d.annexRoomId, passingVisitV165: true } : undefined;
     }
     prepareNpcAnnexLeasesV163() {
       if (this.npcAnnexLeaseSandboxV163 || this.editorPlaytest || this.forgeSessionV141 || !this.npcAnnexLeasesStateV163) return;
@@ -307,8 +312,14 @@ export function withHubNpcAnnexLeasesV163(Base) {
         const duty = Boolean(this.npcAnnexLeaseDutyV163(d));
         const portalBusy = this.annexTransitionV71?.annexId === d.annexRoomId || this.hubDoorClosingV142?.annexId === d.annexRoomId
           || this.hubTrainingV132?.lockedDoorIds?.some(id => [d.annexRoomId, route.definition.connectionId].includes(id));
-        let next = route.advance(previous, actor, dt, { resolution: r, duty, peers, player, doors, portalBusy,
-          reducedMotion: this.reducedMotion, returnToOrigin: true, preserveIntentVelocity: true });
+        const heldAtPost = previous.stage === 'service' && previous.roomId === d.annexRoomId
+          && previous.doorProgress === 0 && !r?.alert && actor.workClock <= 0 && actor.supportClock <= 0
+          && this.shouldHoldNpcServiceOwnerV165?.(d.id, actor, previous) === true;
+        let next = heldAtPost ? { ...previous, time: Math.min(1e9, previous.time + dt),
+          velocity: 0, actualVelocity: 0, reason: 'occupied' }
+          : route.advance(previous, actor, dt, { resolution: r, duty, peers, player, doors, portalBusy,
+            yieldGoalX: this.getNpcServiceOwnerYieldGoalV165?.(d.id, actor),
+            reducedMotion: this.reducedMotion, returnToOrigin: true, preserveIntentVelocity: true });
         next.bulkheadProgress = Object.fromEntries(route.definition.mainDoorIds.map(id => [id, doors.find(door => door.id === id)?.progress || 0]));
         const changed = next.roomId !== actor.roomId;
         Object.assign(actor, { x: next.x, y: next.y, roomId: next.roomId, facing: next.facing, vx: next.actualVelocity || 0 });

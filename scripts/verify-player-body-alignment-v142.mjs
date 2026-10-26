@@ -10,6 +10,8 @@ import {PLAYER_MODULAR_RIG_ASSETS_V126, PLAYER_MODULAR_RIG_ANCHORS_V126,
 import {PLAYER_TRANSIT_RIG_ASSETS_V128, PLAYER_LEG_PARTS_V128} from '../src/player-transit-rig-v128.js';
 import {PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129} from '../src/player-colonial-art-v129.js';
 import {PLAYER_COLONIAL_RIG_ASSETS_V141, getPlayerColonialTorsoWithVariantsV141} from '../src/player-colonial-art-v141.js';
+import {PLAYER_COSTUME_PART_ASSETS_V165, PLAYER_COSTUME_LEG_DEFINITIONS_V165,
+  getPlayerCostumeTorsoV165} from '../src/player-costume-parts-v165.js';
 import {PLAYER_MODULAR_RIG_PARTS_V126} from '../src/player-modular-rig-v126.js';
 import {PLAYER_APPEARANCE_ITEMS_V126, normalizePlayerAppearanceV126} from '../src/player-appearance-v126.js';
 import {advancePlayerLocomotionStateV129,resolvePlayerLocomotionRigV129} from '../src/player-locomotion-rig-v129.js';
@@ -18,7 +20,9 @@ import {getHeldWeaponPoseV125} from '../src/held-weapon-renderer-v125.js';
 import {resolveHeldWeaponProfileV125} from '../src/held-weapon-profiles-v125.js';
 
 const assets=[...PLAYER_BODY_RIG_ASSETS_V125,...PLAYER_MODULAR_RIG_ASSETS_V126,
-  ...PLAYER_TRANSIT_RIG_ASSETS_V128,...PLAYER_COLONIAL_RIG_ASSETS_V129,...PLAYER_COLONIAL_RIG_ASSETS_V141];
+  ...PLAYER_TRANSIT_RIG_ASSETS_V128,...PLAYER_COLONIAL_RIG_ASSETS_V129,...PLAYER_COLONIAL_RIG_ASSETS_V141,
+  ...PLAYER_COSTUME_PART_ASSETS_V165];
+const legDefinitions={...PLAYER_COLONIAL_LEG_DEFINITIONS_V129,...PLAYER_COSTUME_LEG_DEFINITIONS_V165};
 const images=new Map(assets.map(a=>[a.imageKey,{complete:true,naturalWidth:a.sourceWidth,naturalHeight:a.sourceHeight}]));
 const actor=patch=>({x:250,y:532,w:42,h:92,facing:1,grounded:true,alive:true,vx:0,vy:0,costumeId:'costume-001',...patch});
 const close=(a,b,label='coordinate')=>assert.ok(Math.abs(a-b)<1e-6,`${label}: ${a} != ${b}`);
@@ -29,8 +33,10 @@ const determinant=m=>m.a*m.d-m.b*m.c;
 function rig(subject,{surface='mission',state=null,time=1,appearance=normalizePlayerAppearanceV126()}={}){
   const body=resolvePlayerBodyRigV125({actor:subject,images,surface,timeSeconds:time,reducedMotion:true});
   const resolved=resolvePlayerLocomotionRigV129({actor:subject,bodyRig:body,images,appearance,
-    locomotionState:state,legDefinitions:PLAYER_COLONIAL_LEG_DEFINITIONS_V129});
-  return{body,resolved,modular:resolvePlayerModularRigV126({bodyRig:resolved.bodyRig,images,appearance})};
+    locomotionState:state,legDefinitions});
+  const modular=resolvePlayerModularRigV126({bodyRig:resolved.bodyRig,images,appearance});
+  assert.equal(modular.ready,true,'Alignment fixture must load every selected real clothing asset.');
+  return{body,resolved,modular};
 }
 const pngs=new Map();
 function alpha(asset,x,y){
@@ -56,7 +62,7 @@ function alphaAt(layer,p){
   return alpha(layer.asset,q.x,q.y);
 }
 const torsos=PLAYER_APPEARANCE_ITEMS_V126.filter(item=>item.slot==='torso').map(item=>item.id);
-const legIds=['legs-marine-v126','legs-utility-v126','legs-uscm-v129','legs-smartgunner-v129'];
+const legIds=PLAYER_APPEARANCE_ITEMS_V126.filter(item=>item.slot==='legs').map(item=>item.id);
 
 test('the source registration follows measured anatomical belts rather than nominal cell or moving boot centres',()=>{
   for(const [atlas,frames]of Object.entries(PLAYER_BODY_LATERAL_SUPPORTS_V142))for(const [frame,x]of Object.entries(frames)){
@@ -96,7 +102,10 @@ test('every selected jacket keeps its full chest affine and separates above actu
     const original=resolvePlayerModularRigV126({bodyRig:{...resolved.bodyRig,modularBeltV142:undefined},appearance,images}).layers.find(l=>l.id==='torso');
     const jacket=modular.layers.find(l=>l.id==='torso'),pelvis=modular.layers.find(l=>l.id==='pelvis');
     assert.deepEqual(jacket.matrix,original.matrix,'Correct the common body pivot; never squash or shear its chest locally');
-    const def=getPlayerColonialTorsoWithVariantsV141(torso,facing,jacket.part)?.part||PLAYER_MODULAR_RIG_PARTS_V126.torso[torso][jacket.part];
+    const def=getPlayerCostumeTorsoV165(torso,facing,jacket.part)?.part
+      ||getPlayerColonialTorsoWithVariantsV141(torso,facing,jacket.part)?.part
+      ||PLAYER_MODULAR_RIG_PARTS_V126.torso[torso]?.[jacket.part];
+    assert.ok(def,`${torso}: selected jacket must have its own measured source definition.`);
     pointClose(transform(jacket.matrix,def.joints.near),body.shoulders.near,'Near shoulder socket');
     pointClose(transform(jacket.matrix,def.joints.far),body.shoulders.far,'Far shoulder socket');
     let seamOverlap=0;
@@ -123,20 +132,32 @@ test('the corrected resting thorax is centred over the hips symmetrically in bot
   }
 });
 
-test('distance-driven starts and stops preserve contacts and a continuous belt plane, then stay still',()=>{
+test('distance-driven starts and stops preserve contacts and a continuous belt plane, then stay still',t=>{
+  let maximumBeltStep=0,plantedContactPairs=0,recoverySamples=0;
   for(const facing of [-1,1])for(const stopTick of [18,37,68]){
     let subject=actor({facing,vx:155*facing}),state=advancePlayerLocomotionStateV129(null,subject,0),previous=null;
     for(let tick=1;tick<=stopTick+24;tick++){
       const moving=tick<=stopTick;subject={...subject,x:subject.x+(moving?subject.vx/120:0),vx:moving?subject.vx:0};
       state=advancePlayerLocomotionStateV129(state,subject,tick/120);subject.playerLocomotionStateV129=state;
-      const {resolved}=rig(subject,{state,time:tick/120});
-      if(previous){assert.ok(Math.abs(resolved.alignmentV142.belt.y-previous.alignmentV142.belt.y)<1);
-        for(const side of ['near','far'])if(resolved.contacts.feet[side].planted&&previous.contacts.feet[side].planted)pointClose(resolved.legs[side].sole,previous.legs[side].sole,'Existing world boot contact');}
+      const {body,resolved}=rig(subject,{state,time:tick/120});
+      if(state.stopRecoveryV165)recoverySamples++;
+      if(previous){const beltStep=Math.abs(resolved.alignmentV142.belt.y-previous.alignmentV142.belt.y);
+        maximumBeltStep=Math.max(maximumBeltStep,beltStep);assert.ok(beltStep<1,
+        JSON.stringify({facing,stopTick,tick,phase:state.phase,moving:state.moving,settle:state.settleProgress,
+          recovery:state.stopRecoveryV165,previousBelt:previous.alignmentV142.belt,belt:resolved.alignmentV142.belt,
+          previousHips:previous.alignmentV142.hipAxis,hips:resolved.alignmentV142.hipAxis,
+          previousTransfer:previous.alignmentV160.weightTransfer,transfer:resolved.alignmentV160.weightTransfer,
+          atlas:body.atlas,frame:body.frame}));
+        for(const side of ['near','far'])if(resolved.contacts.feet[side].planted&&previous.contacts.feet[side].planted){
+          pointClose(resolved.legs[side].sole,previous.legs[side].sole,'Existing world boot contact');plantedContactPairs++;}}
       previous=resolved;
     }
     const frozen=advancePlayerLocomotionStateV129(state,subject,state.time);
     assert.equal(frozen,state);assert.equal(previous.mode,'idle');assert.equal(previous.presentationV133.stepsPerSecond,0);
   }
+  assert.ok(recoverySamples>0);assert.ok(plantedContactPairs>100);
+  t.diagnostic(JSON.stringify({maximumBeltStep,plantedContactPairs,recoverySamples,
+    observedRateHz:120,facings:2,stopTicks:[18,37,68],beltStepLimitUnchanged:1}));
 });
 
 test('recentering keeps accepted-shot ports and both hands on the same real rigid weapon in either facing',()=>{

@@ -15,6 +15,7 @@ import { getHubClinicalBayPlanV139, drawHubClinicalBayV139 } from './hub-clinica
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 import { drawHubRearShellV133 } from './hub-authored-composition-v133.js';
 import { HUB_DROPSHIP_HANGAR_ART_V139 } from './hub-dropship-hangar-art-v139.js';
+import { getHubRoomServiceDetailPlanV165, drawHubRoomServiceDetailsV165 } from './hub-room-service-details-v165.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -105,7 +106,11 @@ function wallTop(kind,height,plan) {
 export function getHubRoomLifePlanV136(room,options={}) {
   room=getHubAnnexRuntimeGeometryV139(room);
   const definition=HUB_ROOM_LIFE_V136[room?.id],original=HUB_ROOM_DRESSING_V134[room?.id];
-  const complete=composition=>composition&&({...composition,workstationDetailsV139:getHubWorkstationDetailPlanV139(room,composition),clinicalBayV139:getHubClinicalBayPlanV139(room,composition)});
+  const complete=composition=>{
+    if(!composition)return composition;
+    const detailed={...composition,workstationDetailsV139:getHubWorkstationDetailPlanV139(room,composition),clinicalBayV139:getHubClinicalBayPlanV139(room,composition)};
+    return {...detailed,serviceDetailsV165:getHubRoomServiceDetailPlanV165(room,detailed)};
+  };
   if(!definition||!original)return complete(enrichHubRoomCompositionV137(room,null,options));
   // The background pass precedes drawTraversal: decks remain in front of wall
   // equipment. Reserve entrances and climbing corridors, rather than deleting
@@ -189,6 +194,7 @@ function drawFixtureDetails(ctx,composition,motion) {
 export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMotion=false,...options}={}) {
   const composition=getHubRoomLifePlanV136(room,options);
   if(!ctx||!composition)return null;
+  const serviceDetails=drawHubRoomServiceDetailsV165(ctx,composition.serviceDetailsV165,{time,reducedMotion});
   const clinicalBay=drawHubClinicalBayV139(ctx,composition.clinicalBayV139);
   drawHubFurnishingMountsV137(ctx,composition);
   const rendered=drawHubRoomDressingV134(ctx,room,{images,composition});
@@ -203,7 +209,7 @@ export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMot
     items:rendered.items.map(entry=>({...entry,motif:composition.task})),supplies:composition.supplies.map(entry=>({role:entry.role,cell:entry.cell,bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h}})),
     reservations:structuredClone(composition.spatial.reservations),preservedCriticalSpaces:true,
     legacyOmissionsV138:structuredClone(composition.legacyOmissionsV138),
-    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,clinicalBayV139:clinicalBay,
+    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,clinicalBayV139:clinicalBay,serviceDetailsV165:serviceDetails,
     workstationDetailsV139:{plan:composition.workstationDetailsV139,surfaces:composition.workstationDetailsV139.surfaces,
       omitted:composition.workstationDetailsV139.omitted,painted:surfaceDetails?.painted||[],pending:[...surfaceDetails?.pending||[],...missingHostDetails]},
     furnishingV137:composition.furnishingV137?{...structuredClone(composition.furnishingV137),

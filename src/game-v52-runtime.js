@@ -2312,7 +2312,11 @@ export function withV52MissionRuntime(BaseEngine) {
 
     drawSquadActor(ctx, member) {
       const request = resolveIdentitySafeNpcAnimationV57(member);
-      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('npc', member, 'crew'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: member });
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('npc', member, 'crew'), request, this.animationTime, {
+        emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: member,
+        // Match the simulation sample. A default empty draw context discarded
+        // the just-observed room-owned gait every frame in room-based missions.
+        physicalContext: String(this.missionLevelRuntime?.currentRoomId || this.activeRoomId || this.room || '') });
       ctx.save();
       if (!member.alive) ctx.globalAlpha = member.downed ? 0.72 : 0.38;
       const drawn = this.drawSpriteSample(ctx, sample, member);

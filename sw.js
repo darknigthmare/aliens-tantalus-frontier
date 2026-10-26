@@ -1,6 +1,18 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-npc-matte-v164';
+const CACHE = 'atf-v143-parallel-completion-v165';
 const SHELL = Object.freeze([
+  '/src/npc-interdeck-passage-v165.js',
+  '/src/npc-interdeck-routes-v165.js',
+  '/src/npc-jun-climb-rig-v165.js',
+  '/src/npc-lift-transit-v165.js',
+  '/src/npc-cal-logistics-route-v165.js',
+  '/src/npc-cal-climb-rig-v165.js',
+  '/src/player-costume-outfits-v165.js',
+  '/src/player-costume-parts-v165.js',
+  '/src/player-costume-atlases-v165.js',
+  '/src/xeno-trials-rig-data-v165.js',
+  '/src/hub-room-service-details-v165.js',
+  '/src/npc-annex-workpost-routes-v165.js',
   '/src/npc-matte-apertures-v164.js',
   '/src/npc-matte-aperture-data-v164.js',
   '/src/npc-annex-leases-v163.js',

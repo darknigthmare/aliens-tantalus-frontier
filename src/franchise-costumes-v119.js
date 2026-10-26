@@ -1,21 +1,28 @@
+import { getCostumeOutfitV165 } from './player-costume-outfits-v165.js';
+
 // Source identities are separate from the 392 historical modular combinations.
 // A documented outfit is not a certified 1:1 skin. Missing art cannot be equipped.
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const source = (work, url = null) => ({ work, url, status: url ? 'documented-primary-reference' : 'reference-pending' });
-const costume = (slug, name, work, character, faction, era, type, layers, url = null, skinId = null) => freeze({
+const costume = (slug, name, work, character, faction, era, type, layers, url = null, skinId = null) => {
+  const outfit = getCostumeOutfitV165(`franchise-${slug}`);
+  return freeze({
   id: `franchise-${slug}`, name, collection: 'franchise', body: 'human-a', bodyCompatibility: ['human-a', 'human-b', 'human-c', 'synthetic-a', 'synthetic-b'],
   sourceWork: work, sourceCharacter: character, sourceFaction: faction, faction, era, type,
   source: source(work, url), referenceStatus: url ? 'documented-primary-reference' : 'reference-pending',
   layers: { underLayer: layers[0], armorLayer: layers[1] || null, helmet: layers[2] || null,
     accessories: layers[3] || [], environmentSuit: type === 'environment-suit' ? name : null },
-  skinId, visualStatus: skinId ? 'adapted-dedicated-atlas' : 'missing', exact: false,
+  skinId, outfitId: outfit?.id || null,
+  visualStatus: outfit ? 'adapted-modular-outfit' : skinId ? 'adapted-dedicated-atlas' : 'missing', exact: false,
   equipmentPolicy: 'cosmetic-only-no-inferred-bonuses', provenance: 'franchise-reference-project-adaptation',
   part: type, palette: 'source-outfit', wear: 'field',
-  description: `${name} — référence ${character || faction}. ${skinId ? 'Planches dédiées adaptées au joueur ; fidélité exacte non certifiée.' : 'Visuel joueur dédié à produire ; non équipable pour le moment.'}`
-});
+  description: `${name} — référence ${character || faction}. ${outfit ? 'Tenue adaptée en pièces séparées, personnalisable sur votre opérateur ; fidélité exacte non certifiée.' : skinId ? 'Planches dédiées adaptées au joueur ; fidélité exacte non certifiée.' : 'Visuel joueur dédié à produire ; non équipable pour le moment.'}`
+  });
+};
 const necaCrew = 'https://store.necaonline.com/blogs/behind-the-scenes/closer-look-alien-series-4-action-figures';
 const necaMarine = 'https://store.necaonline.com/blogs/behind-the-scenes/behind-the-scenes-1st-look-hudson-hicks-and-warrior-alien-figures-coming-2013';
 const afe = 'https://www.aliensfireteamelite.com/en/releasenotes/';
+const afe2 = 'https://www.aliensfireteamelite.com/en/community/afe-season-2/';
 const afe4 = 'https://www.aliensfireteamelite.com/en/community/afe-season-4-announce/';
 export const FRANCHISE_COSTUMES_V119 = freeze([
   costume('nostromo-crew', 'Combinaison d’équipage du Nostromo', 'Alien (1979)', 'Ripley / équipage', 'Weyland-Yutani', '2122', 'crew-coveralls', ['Combinaison utilitaire gris-bleu', null, null, ['Patch d’équipage', 'Ceinture']], necaCrew, 'player.nostromo-crew-v119'),
@@ -42,8 +49,8 @@ export const FRANCHISE_COSTUMES_V119 = freeze([
   costume('romulus-hazmat', 'Tenue de récupération contaminée', 'Alien: Romulus (2024)', 'Équipe de récupération', 'Weyland-Yutani', '2142', 'environment-suit', ['Protection en latex', null, 'Casque'], 'https://www.caftcad.com/alien-romulus'),
   costume('andy-coveralls', 'Combinaison utilitaire d’Andy', 'Alien: Romulus (2024)', 'Andy', 'civilian', '2142', 'synthetic-uniform', ['Combinaison utilitaire'], 'https://nofilmschool.com/carlos-rosario-alien-romulus'),
   costume('navarro-jacket', 'Tenue d’aviatrice de Navarro', 'Alien: Romulus (2024)', 'Navarro', 'civilian', '2142', 'crew-jacket', ['Chemise hawaïenne', 'Blouson en cuir'], 'https://www.motionpictures.org/2024/09/designed-to-shred-how-alien-romulus-costume-designer-carlos-rosario-stylized-horror/'),
-  costume('fireteam-nostromo-jacket', 'Veste d’équipage du Nostromo — kit colonial', 'Aliens: Fireteam Elite (2021)', 'Marine colonial', 'uscm', '2202', 'crew-jacket', ['Uniforme colonial', 'Veste d’équipage du Nostromo'], afe),
-  costume('fireteam-flightsuit', 'Combinaison de vol coloniale', 'Aliens: Fireteam Elite (2021)', 'Marine colonial', 'uscm', '2202', 'flight-suit', ['Combinaison de vol'], afe),
+  costume('fireteam-nostromo-jacket', 'Veste d’équipage du Nostromo — kit colonial', 'Aliens: Fireteam Elite (2021)', 'Marine colonial', 'uscm', '2202', 'crew-jacket', ['Uniforme colonial', 'Veste d’équipage du Nostromo'], afe2),
+  costume('fireteam-flightsuit', 'Combinaison de vol coloniale', 'Aliens: Fireteam Elite (2021)', 'Marine colonial', 'uscm', '2202', 'flight-suit', ['Combinaison de vol'], afe2),
   costume('fireteam-specialist', 'Tenue de spécialiste colonial', 'Aliens: Fireteam Elite (2021)', 'Marine colonial', 'uscm', '2202', 'combat-armor', ['Treillis colonial', 'Kit Specialist'], afe),
   costume('fireteam-ape-mk3', 'Combinaison APE Mk.3', 'Aliens: Fireteam Elite (2021)', 'Marine colonial', 'uscm', '2202', 'environment-suit', ['Sous-combinaison', 'Combinaison APE Mk.3', 'Casque'], afe4),
   costume('fireteam-seegson-maintenance', 'Combinaison de maintenance Seegson', 'Aliens: Fireteam Elite (2021)', 'Technicien', 'Seegson', '2202', 'crew-coveralls', ['Combinaison de maintenance'], afe4),
@@ -55,7 +62,10 @@ export function getAllCostumesV119(legacyCatalog = []) { return Object.freeze([.
 export function getCostumeV119(id, legacyCatalog = []) { return typeof id === 'string' ? byId.get(id) || legacyCatalog.find(entry => entry.id === id) || null : null; }
 export function canEquipCostumeV119(id, legacyCatalog = []) {
   const entry = getCostumeV119(id, legacyCatalog);
-  return Boolean(entry && (entry.collection !== 'franchise' || (entry.skinId && entry.visualStatus === 'adapted-dedicated-atlas')));
+  return Boolean(entry && (entry.collection !== 'franchise'
+    || (entry.skinId && entry.visualStatus === 'adapted-dedicated-atlas')
+    || (entry.outfitId && entry.visualStatus === 'adapted-modular-outfit'
+      && getCostumeOutfitV165(entry.id)?.id === entry.outfitId)));
 }
 export function sanitizeCostumeSelectionV119(id, legacyCatalog = []) { return canEquipCostumeV119(id, legacyCatalog) ? id : null; }
 export function resolveCostumePanelV119({ legacyCatalog = [], selectedId = null, query = '', faction = 'all', era = 'all', type = 'all', availability = 'all' } = {}) {

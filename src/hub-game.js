@@ -329,7 +329,12 @@ export class HubGame {
       if (event.repeat) return;
       if (event.code === 'F7') { event.preventDefault(); this.setDepthPresentationV116(!this.depthPresentationV116); }
       if (event.code === 'Space') this.jumpQueued = 0.14;
-      if (event.code === 'KeyE') this.interact();
+      if (event.code === 'KeyE') {
+        // Interaction may synchronously focus an editable dialogue field.
+        // Consume this key before that field can receive its default text.
+        event.preventDefault();
+        this.interact();
+      }
       if (event.code === 'KeyW' || event.code === 'ArrowUp') this.useLift(-1);
       if (event.code === 'KeyS' || event.code === 'ArrowDown') this.useLift(1);
     });

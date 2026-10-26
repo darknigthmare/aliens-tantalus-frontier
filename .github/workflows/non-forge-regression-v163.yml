@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        workstream: [campaign, crew-lifts, crew-leases, weapons-title, trials]
+        workstream: [campaign, crew-lifts, crew-leases, weapons-title, trials, player-v165, ship-v165, costumes-v165, rigs-v165, workposts-v165, cal-v165, david-v165, inez-v165, maksim-v165, jun-v165]
     env:
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
@@ -54,6 +54,7 @@ jobs:
           trap 'kill "$gameplay_server"' EXIT
           for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
           export ATF_BASE_URL=http://127.0.0.1:4173
+          source_head="$(git rev-parse HEAD)"
           export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           annotate_failure() {
             python - "$1" "$2" <<'PYREPORT'
@@ -77,6 +78,33 @@ jobs:
           }
           status=0
           case "$WORKSTREAM" in
+            player-v165)
+              python -B scripts/qa-player-allies-contacts-v165.py --base "$ATF_BASE_URL" --comparison-stage after --expect-source "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/player-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/player-v165.log" || { status=1; annotate_failure scripts/qa-player-allies-contacts-v165.py "$RUNNER_TEMP/atf-gameplay-v163/player-v165/report.json"; }
+              ;;
+            ship-v165)
+              python -B scripts/qa-hub-service-details-v165.py --base "$ATF_BASE_URL" --stage after --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/ship-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/ship-v165.log" || { status=1; annotate_failure scripts/qa-hub-service-details-v165.py "$RUNNER_TEMP/atf-gameplay-v163/ship-v165/report.json"; }
+              ;;
+            costumes-v165)
+              python -B scripts/qa-costume-atlases-v165.py --base "$ATF_BASE_URL" --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/costumes-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/costumes-v165.log" || { status=1; annotate_failure scripts/qa-costume-atlases-v165.py "$RUNNER_TEMP/atf-gameplay-v163/costumes-v165/report.json"; }
+              ;;
+            rigs-v165)
+              python -B scripts/qa-native-rig-catalog-v165.py --base "$ATF_BASE_URL" --comparison-stage after --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/rigs-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/rigs-v165.log" || { status=1; annotate_failure scripts/qa-native-rig-catalog-v165.py "$RUNNER_TEMP/atf-gameplay-v163/rigs-v165/report.json"; }
+              ;;
+            workposts-v165)
+              python -B scripts/qa-npc-annex-workpost-routes-v165.py --base "$ATF_BASE_URL" --comparison-stage after --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/workposts-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/workposts-v165.log" || { status=1; annotate_failure scripts/qa-npc-annex-workpost-routes-v165.py "$RUNNER_TEMP/atf-gameplay-v163/workposts-v165/report.json"; }
+              ;;
+            cal-v165)
+              python -B scripts/qa-npc-cal-logistics-route-v165.py --base "$ATF_BASE_URL" --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/cal-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/cal-v165.log" || { status=1; annotate_failure scripts/qa-npc-cal-logistics-route-v165.py "$RUNNER_TEMP/atf-gameplay-v163/cal-v165/report.json"; }
+              ;;
+            david-v165|inez-v165|maksim-v165|jun-v165)
+              case "$WORKSTREAM" in
+                david-v165) route_id=david-durandal ;;
+                inez-v165) route_id=inez-civil ;;
+                maksim-v165) route_id=maksim-cockpit ;;
+                jun-v165) route_id=jun-sanitary ;;
+              esac
+              python -B scripts/qa-npc-interdeck-native-v165.py --base "$ATF_BASE_URL" --route "$route_id" --comparison-stage after --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/$WORKSTREAM" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/$WORKSTREAM.log" || { status=1; annotate_failure scripts/qa-npc-interdeck-native-v165.py "$RUNNER_TEMP/atf-gameplay-v163/$WORKSTREAM/report.json"; }
+              ;;
             campaign)
               python scripts/qa-campaign-lethe-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/campaign" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/campaign.log" || { status=1; annotate_failure scripts/qa-campaign-lethe-v163.py "$RUNNER_TEMP/atf-gameplay-v163/campaign/report.json"; }
               ;;

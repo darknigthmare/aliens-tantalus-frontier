@@ -7,7 +7,8 @@ import { PLAYER_BODY_RIG_ASSETS_V125 } from '../src/player-body-rig-v125.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126 } from '../src/player-modular-rig-v126.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
 import { PLAYER_COLONIAL_RIG_ASSETS_V141 } from '../src/player-colonial-art-v141.js';
-import { PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_PRESETS_V129,
+import { PLAYER_COSTUME_PART_ASSETS_V165, PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from '../src/player-costume-parts-v165.js';
+import { PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_PRESETS_ALL_V165,
   normalizePlayerAppearanceV126 } from '../src/player-appearance-v126.js';
 import { PLAYER_TRANSIT_RIG_ASSETS_V128, resolvePlayerTransitRigV128 } from '../src/player-transit-rig-v128.js';
 import { HUB_TRAVERSAL_PROFILES_V60 } from '../src/hub-v51-runtime.js';
@@ -18,7 +19,9 @@ import { HubGame as ProductionHub } from '../src/hub-opening-v88.js';
 import { createDefaultSave } from '../src/save.js';
 
 const assets = [...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126,
-  ...PLAYER_TRANSIT_RIG_ASSETS_V128, ...PLAYER_COLONIAL_RIG_ASSETS_V129, ...PLAYER_COLONIAL_RIG_ASSETS_V141];
+  ...PLAYER_TRANSIT_RIG_ASSETS_V128, ...PLAYER_COLONIAL_RIG_ASSETS_V129, ...PLAYER_COLONIAL_RIG_ASSETS_V141,
+  ...PLAYER_COSTUME_PART_ASSETS_V165];
+const clothingLegDefinitions = { ...PLAYER_COLONIAL_LEG_DEFINITIONS_V129, ...PLAYER_COSTUME_LEG_DEFINITIONS_V165 };
 const images = new Map(assets.map(asset => [asset.imageKey, {
   complete: true, naturalWidth: asset.sourceWidth, naturalHeight: asset.sourceHeight
 }]));
@@ -42,7 +45,7 @@ function mounted(source, { annex = false, id = source.id } = {}) {
 function rig(ladder, feet, options = {}) {
   const { patch, ...rest } = options;
   return resolvePlayerTransitRigV128({ actor: actorAt(ladder, feet, patch), ladder,
-    surface: 'hub', images, timeSeconds: 1, legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
+    surface: 'hub', images, timeSeconds: 1, legDefinitions: clothingLegDefinitions,
     ...rest });
 }
 function assertPhysicalContacts(result, mount) {
@@ -132,12 +135,12 @@ test('all wardrobe pieces and complete presets preserve the same supports in asc
   const { mount, ladder } = mounted(medical);
   const appearances = [normalizePlayerAppearanceV126(),
     ...PLAYER_APPEARANCE_ITEMS_V126.map(item => normalizePlayerAppearanceV126({ schema: 126, slots: { [item.slot]: item.id } })),
-    ...PLAYER_APPEARANCE_PRESETS_V129.map(preset => normalizePlayerAppearanceV126({ schema: 126, slots: preset.slots }))];
+    ...PLAYER_APPEARANCE_PRESETS_ALL_V165.map(preset => normalizePlayerAppearanceV126({ schema: 126, slots: preset.slots }))];
   for (const facing of [-1, 1]) for (const feet of [500, 525, 543.821, 575, 599, 611, 624]) {
     const base = rig(ladder, feet, { patch: { facing } });
     for (const appearance of appearances) for (const vy of [-185, 0, 185]) {
       const result = rig(ladder, feet, { appearance, patch: { facing, vy }, timeSeconds: vy ? 1 : 300 });
-      assert.equal(result.ready, true);
+      assert.equal(result.ready, true, `${JSON.stringify(appearance.slots)}: ${result.reason}`);
       assert.deepEqual(result.contacts, base.contacts);
       assert.deepEqual(result.legs, base.legs);
       assertPhysicalContacts(result, mount);

@@ -70,8 +70,15 @@ export const REFUGE_PROPS_LAYOUT_V87 = freeze([
   { id: 'refuge-porthole-view', kind: 'porthole', x: 1500, width: 280, bottom: 550 }
 ].map(value => ({ ...value, ...getRefugePropBoundsV87(value.kind,value), collidable: false, asset: REFUGE_ART_V87.prop.path })));
 export const REFUGE_HOLOGRAM_ANCHOR_V87 = freeze({ x: 1325, y: 614 });
-// Caption sits above the frame and above the grounded Marine, not at his feet.
-export const REFUGE_PORTRAIT_LABEL_V87 = freeze({ x: 444, y: 485, size: 11, maxWidth: 176 });
+// The caption is a small nameplate fixed to the actual upper frame, above its
+// photo aperture and the grounded Marine. It is never floating authoring UI.
+const portraitFrameV165 = REFUGE_PROPS_LAYOUT_V87.find(prop => prop.kind === 'portrait');
+export const REFUGE_PORTRAIT_LABEL_V87 = freeze({
+  x: portraitFrameV165.x + portraitFrameV165.w / 2,
+  y: portraitFrameV165.y + 12, size: 7, maxWidth: portraitFrameV165.w - 20,
+  mountBounds: { x: portraitFrameV165.x + 6, y: portraitFrameV165.y + 3,
+    w: portraitFrameV165.w - 12, h: 12 }
+});
 // Reuse actual wall/ceiling pixels at architectural scale, not one giant room
 // picture. The 96.5px Marine stands in a 290px-high visible compartment.
 // Overhead alpha after row248 is only dangling wires: do not count those as
@@ -216,9 +223,13 @@ export function drawRefugeLayerV87(ctx,images,options = {}) {
       drawRefugePropV87(ctx,get('prop'),prop.kind,prop); ctx.restore();
     }
     drawRefugeHologramV87(ctx,get('hologram'),{ time,reducedMotion,greetingRemaining });
-    const caption = REFUGE_PORTRAIT_LABEL_V87;
-    label(ctx,String(personal?.name || 'PORTRAIT PERSONNALISABLE').slice(0,40),caption.x,caption.y,caption.size,'#d7c4a0',caption.maxWidth);
-    label(ctx,'SIMULATION FÉLINE GÉNÉRIQUE',1325,512,10,'#9acbd4');
+    if (isRefugeArtReadyV87('prop',get('prop')) && typeof ctx.fillRect === 'function') {
+      const caption = REFUGE_PORTRAIT_LABEL_V87, plate = caption.mountBounds;
+      ctx.fillStyle='#293b38';ctx.fillRect(plate.x,plate.y,plate.w,plate.h);
+      ctx.fillStyle='#8b9a85';ctx.fillRect(plate.x,plate.y,plate.w,1);
+      ctx.fillStyle='#c1b28c';for(const x of [plate.x+3,plate.x+plate.w-4])ctx.fillRect(x,plate.y+5,1,1);
+      label(ctx,String(personal?.name || 'SOUVENIRS').slice(0,40),caption.x,caption.y,caption.size,'#d7c4a0',caption.maxWidth);
+    }
     return isRefugeArtReadyV87('prop',get('prop'));
   } finally { ctx.restore(); }
 }
