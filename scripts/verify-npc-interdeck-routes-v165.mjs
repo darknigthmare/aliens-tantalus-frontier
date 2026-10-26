@@ -25,6 +25,8 @@ import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 as definitions,
   HUB_NPC_ANNEX_WORKPOST_ROUTES_V165 as routes, normalizeNpcAnnexWorkpostRoutesV165,
   withHubNpcAnnexWorkpostRoutesV165 } from '../src/npc-annex-workpost-routes-v165.js';
 
+import { withHubTrainingV132, normalizeHubTrainingV132 } from '../src/hub-training-v132.js';
+import { getHubBulkheadColliderV134 } from '../src/hub-bulkhead-depth-v134.js';
 import { withHubSpatialDesignV136 } from '../src/hub-spatial-design-v136.js';
 import { resolveHumanAtlasGeometryV133 } from '../src/human-visual-contract-v133.js';
 import { resolveSpriteSheet } from '../src/sprite-animation-runtime.js';
@@ -62,7 +64,8 @@ class FixtureBase {
   start(save = {}, { routineContextV62 = { clock: { day: 1, hour: 7 } } } = {}) {
     this.calClimbImageV165 = { complete: true, naturalWidth: 1254, naturalHeight: 1254 };
     this.state = { deck: save.deck ?? 0, roomId: save.roomId || 'combat-information' };
-    this.player = { x: 5000, y: 532, w: 44, h: 92, alive: true };
+    this.local = save.activeAnnexId || null;
+    this.player = { x: save.positionX ?? 5000, y: save.positionY ?? 532, w: 44, h: 92, alive: true };
     this.hubCommercialStateV71 = { returnContext: null };
     this.hubNpcInteractions = {}; this.hubNpcSequence = 0; this.hubNpcAnimation = { reset() {} };
     this.events = []; this.onAction = event => this.events.push(event); this.audio = { ui() {} };
@@ -294,4 +297,131 @@ test('native lift drawing still follows a real passenger and clips its intact at
     assert.deepEqual(e.actor,before);if(t.phase==='closing')closing=true;else closed=true;
   }
   assert.ok(closing&&closed,'both an opening-width partial cover and the fully opaque travelling cover are exercised');
+});
+
+const SecurityCommandsV165=withHubTrainingV132(FixtureBase).prototype;
+class LockedBulkheadFixtureV165 extends TestHub {
+  start(save={},options={}) {
+    this.hubTrainingV132=normalizeHubTrainingV132(save.hubTrainingV132);
+    return super.start(save,options);
+  }
+  nearestAnnexStationV71(...args) {return AnnexHub.prototype.nearestAnnexStationV71.apply(this,args);}
+  hubTrainingContactV132(...args) {return SecurityCommandsV165.hubTrainingContactV132.apply(this,args);}
+  getHubTrainingCommandsV132(...args) {return SecurityCommandsV165.getHubTrainingCommandsV132.apply(this,args);}
+  executeHubTrainingCommandV132(...args) {return SecurityCommandsV165.executeHubTrainingCommandV132.apply(this,args);}
+  enforceSecurityLocksV132(...args) {return SecurityCommandsV165.enforceSecurityLocksV132.apply(this,args);}
+  getNpcServiceOwnerYieldGoalV165(id,actor) {
+    if(id===(this.withdrawOwnerId||'david-durandal')&&Number.isFinite(this.withdrawToObservedFloorX))return this.withdrawToObservedFloorX;
+    return super.getNpcServiceOwnerYieldGoalV165(id,actor);
+  }
+  persist() {
+    const sink=this.onPersist;this.onPersist=patch=>sink({...patch,deck:this.state.deck,roomId:this.state.roomId,
+      activeAnnexId:this.local||null,positionX:this.player.x,positionY:this.player.y,
+      hubTrainingV132:normalizeHubTrainingV132(this.hubTrainingV132)});
+    try{return super.persist();}finally{this.onPersist=sink;}
+  }
+}
+const bodyOverlaps=(actor,box)=>actor.x<box.x+box.w&&actor.x+actor.w>box.x&&actor.y<box.y+box.h&&actor.y+actor.h>box.y;
+function securityRuntimeV165(hour,save) {
+  const h=new LockedBulkheadFixtureV165();h.start(save,{routineContextV62:{clock:{day:1,hour},save:portCampaign}});return h;
+}
+test('a real remote CCTV lock preserves an interdeck body crossing a bulkhead through save/reload and supported withdrawal',()=>{
+  const consoleRoom=getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137.cctv);
+  // The observer starts at the actual CCTV console; David starts in his real
+  // native05h station and reaches the other deck through his timed cabin.
+  const h=securityRuntimeV165(5,{deck:0,roomId:'combat-information',activeAnnexId:'cctv',
+    positionX:consoleRoom.station.bounds.x+consoleRoom.station.bounds.w/2-22,positionY:532});
+  assert.ok(h.hubTrainingContactV132('cctv'));context(h,11);
+  const door=h.npcInterdeckDoorsV165[2].find(d=>d.id==='industrial:hub-east-bulkhead'),bounds=getHubBulkheadColliderV134(door);
+  const foreign=h.npcInterdeckDoorsV165[3].find(d=>d.id==='engineering:hub-east-bulkhead');
+  let observedExit=null,crossingBody=null;
+  for(let i=0;i<140*60;i++) {
+    h.update(1/60);const a=entry(h,'david-durandal').actor;
+    if(a?.deck===2&&a.stage==='walking-portal'&&observedExit===null)observedExit={x:a.x,y:a.y,deck:a.deck};
+    const body=h.npcInterdeckBodiesV165.get('david-durandal');
+    if(body&&a.deck===2&&a.stage==='walking-portal'&&body.x>=bounds.x-6&&body.x<bounds.x+2&&bodyOverlaps(body,bounds)) {
+      crossingBody=body;break;
+    }
+  }
+  assert.ok(observedExit&&crossingBody,'the same body must physically arrive and walk into the real industrial bulkhead');
+  assert.equal(observedExit.y,532);assert.equal(entry(h,'david-durandal').actor.liftJourneys,1);
+  assert.notEqual(h.state.deck,2);assert.equal(h.currentAnnexV71().id,'cctv');
+  assert.ok(h.executeHubTrainingCommandV132('door-toggle',door.id),'the genuine remote security command accepts this connected route');
+  assert.ok(h.executeHubTrainingCommandV132('door-toggle',foreign.id));
+  h.update(1/60);assert.ok(bodyOverlaps(crossingBody,bounds));
+  assert.ok(door.progress>=.82,'an occupied locked leaf must retain the real passage threshold');
+  assert.equal(foreign.progress,0,'the same coordinates on another deck do not occupy its locked leaf');
+  h.persist();const saved=h.persisted.at(-1),pose=saved.npcInterdeckRoutesV165.routes['david-durandal'].actor;
+  assert.ok(pose,'the occupied body must remain valid in the durable route schema');
+  assert.ok(pose.bulkheadProgress[door.id]>=.82);assert.ok(saved.hubTrainingV132.lockedDoorIds.includes(door.id));
+  for(const observerDeck of [0,2]) {
+    // These are declared observer initial conditions for the same saved body,
+    // never an NPC coordinate edit or a claimed player interdeck journey.
+    const save=observerDeck===0?saved:{...saved,deck:2,roomId:'vehicle-bay',activeAnnexId:null,positionX:5000,positionY:532};
+    const resumed=securityRuntimeV165(11,save),body=resumed.npcInterdeckBodiesV165.get('david-durandal');
+    assert.ok(body);assert.equal(body.x,pose.x);assert.equal(body.y,pose.y);
+    assert.deepEqual(entry(resumed,'david-durandal').actor,pose);
+    const owned=resumed.npcInterdeckDoorsV165[2].find(d=>d.id===door.id);
+    const visible=resumed.doorStates.find(d=>d.id===door.id);
+    resumed.update(1/60);assert.ok(owned.progress>=.82);if(visible)assert.equal(visible.progress,owned.progress);
+    assert.ok(bodyOverlaps(body,bounds));resumed.withdrawToObservedFloorX=observedExit.x;
+    let cleared=false;
+    for(let i=0;i<10*60;i++) {
+      const previous={x:body.x,y:body.y};resumed.update(1/60);
+      assert.equal(body.y,previous.y);assert.equal(body.y+body.h,624);assert.equal(body.grounded,true);
+      assert.equal(entry(resumed,'david-durandal').actor.deck,2);assert.equal(entry(resumed,'david-durandal').actor.liftJourneys,1);
+      assert.ok(Math.abs(body.x-previous.x)<=27/60+1e-6,'withdrawal spends real bounded floor motion');
+      if(visible)assert.equal(visible.progress,owned.progress);
+      assert.ok(normalizeNpcInterdeckRoutesV165(resumed.npcInterdeckStateV165).routes['david-durandal'].actor);
+      if(!bodyOverlaps(body,bounds)){cleared=true;break;}
+      assert.ok(owned.progress>=.82,'both visible and off-screen leaves stay clear until the whole body has withdrawn');
+    }
+    assert.ok(cleared);resumed.update(1/60);assert.equal(owned.progress,0);if(visible)assert.equal(visible.progress,0);
+    assert.equal(resumed.npcInterdeckDoorsV165[3].find(d=>d.id===foreign.id).progress,0);
+    assert.equal(resumed.npcInterdeckBodiesV165.get('david-durandal'),body,'withdrawal and closing keep one actual body');
+  }
+});
+
+test('locked shared leaves retain the existing Jun-maintenance owner until its real floor withdrawal clears the opening',()=>{
+  const consoleRoom=getHubAnnexRuntimeGeometryV139(HUB_ANNEX_BY_ID_V137.cctv);
+  const h=securityRuntimeV165(5,{deck:0,roomId:'combat-information',activeAnnexId:'cctv',
+    positionX:consoleRoom.station.bounds.x+consoleRoom.station.bounds.w/2-22,positionY:532});
+  context(h,8);const door=h.npcInterdeckDoorsV165[3].find(d=>d.id==='engineering:hub-east-bulkhead'),bounds=getHubBulkheadColliderV134(door);
+  let body=null;
+  for(let i=0;i<80*60;i++) {
+    h.update(1/60);const candidate=h.getNpcAnnexLeaseActorV163('jun-maintenance');
+    if(candidate&&candidate.x>=bounds.x-22&&candidate.x<bounds.x-18&&bodyOverlaps(candidate,bounds)){body=candidate;break;}
+  }
+  assert.ok(body,'Jun must reach the real sensors bulkhead through his unchanged V163 floor controller');
+  assert.equal(h.npcInterdeckStateV165.routes['jun-sanitary'].actor,null);
+  assert.ok(h.getNpcServiceOwnedActorsV163().includes(body));assert.ok(!h.getNpcInterdeckActorsV165().includes(body));
+  assert.ok(h.executeHubTrainingCommandV132('door-toggle',door.id));h.update(1/60);
+  assert.ok(bodyOverlaps(body,bounds));assert.ok(door.progress>=.82,'the interdeck layer must not crush a different physical owner');
+  h.persist();const saved=h.persisted.at(-1),jun=saved.npcAnnexLeasesV163.routes['jun-maintenance'];assert.ok(jun.actor);
+  for(const observerDeck of [0,3]) {
+    const save=observerDeck===0?saved:{...saved,deck:3,roomId:'sensor-array',activeAnnexId:null,positionX:5000,positionY:532};
+    const resumed=securityRuntimeV165(8,save),actor=resumed.getNpcAnnexLeaseActorV163('jun-maintenance');
+    assert.equal(actor.x,jun.actor.x);assert.equal(actor.y,jun.actor.y);
+    const owned=resumed.npcInterdeckDoorsV165[3].find(d=>d.id===door.id),visible=resumed.doorStates.find(d=>d.id===door.id);
+    resumed.update(1/60);assert.ok(owned.progress>=.82);if(visible)assert.equal(visible.progress,owned.progress);
+    resumed.withdrawOwnerId='jun-maintenance';resumed.withdrawToObservedFloorX=jun.actor.homeX;let cleared=false;
+    for(let i=0;i<10*60;i++) {
+      const x=actor.x;resumed.update(1/60);assert.equal(actor.y+actor.h,624);
+      assert.ok(Math.abs(actor.x-x)<=27/60+1e-6);assert.equal(resumed.npcInterdeckStateV165.routes['jun-sanitary'].actor,null);
+      if(visible)assert.equal(visible.progress,owned.progress);
+      if(!bodyOverlaps(actor,bounds)){cleared=true;break;}assert.ok(owned.progress>=.82);
+    }
+    assert.ok(cleared);resumed.update(1/60);assert.equal(owned.progress,0);if(visible)assert.equal(visible.progress,0);
+    assert.equal(resumed.getNpcAnnexLeaseActorV163('jun-maintenance'),actor);
+  }
+});
+test('the genuine main-chart player also keeps its occupied locked bulkhead above the passage threshold',()=>{
+  const locked=normalizeHubTrainingV132({schema:132,lockedDoorIds:['industrial:hub-east-bulkhead']});
+  assert.deepEqual(locked.lockedDoorIds,['industrial:hub-east-bulkhead']);
+  const h=securityRuntimeV165(6,{deck:2,roomId:'vehicle-bay',positionX:3840,positionY:532,hubTrainingV132:locked});
+  const owned=h.npcInterdeckDoorsV165[2].find(d=>d.id==='industrial:hub-east-bulkhead');
+  const visible=h.doorStates.find(d=>d.id===owned.id),box=getHubBulkheadColliderV134(owned);
+  assert.ok(bodyOverlaps(h.player,box));assert.equal(h.isAnnexActiveV71(),false);
+  assert.ok(h.getNpcInterdeckActorsV165().length===0);h.update(1/60);
+  assert.ok(owned.progress>=.82);assert.equal(visible.progress,owned.progress);assert.equal(h.player.y+h.player.h,624);
 });

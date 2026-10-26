@@ -380,6 +380,8 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       const wasRunning=this.running,result=super.update(delta);
       if(!wasRunning||!this.running||!finite(delta)||delta<=0||this.npcInterdeckSandboxV165)return result;
       const dt=Math.min(delta,.1);
+      const physicalPeers=[...(this.getNpcServiceOwnedActorsV163?.()||[]),
+        ...(this.getNpcServiceTrafficActorsV163?.()||[]),...(this.npcs||[])];
       for(let deck=0;deck<HUB_DECKS.length;deck++) {
         const visible=this.state?.deck===deck?this.doorStates:[];
         for(const door of this.npcInterdeckDoorsV165[deck]) {
@@ -387,7 +389,14 @@ export function withHubNpcInterdeckRoutesV165(Base) {
           const demand=this.hubNpcBulkheadDemandV158({...door,deckIndex:deck});
           if(actual){if(demand)actual.progress=Math.min(1,actual.progress+(1-actual.progress)*Math.min(1,dt*7));door.progress=actual.progress;}
           else door.progress+=(Number(demand)-door.progress)*Math.min(1,dt*7);
-          if(this.hubTrainingV132?.lockedDoorIds?.includes(door.id))door.progress=0;
+          if(this.hubTrainingV132?.lockedDoorIds?.includes(door.id)) {
+            const collider=getHubBulkheadColliderV134(door);
+            const mainPlayer=this.state?.deck===deck&&!this.isAnnexActiveV71?.()&&!this.ventActorV62?this.player:null;
+            const occupied=physicalPeers.some(actor=>deckOf(actor.roomId)===deck&&overlap(actor,collider))
+              ||Boolean(mainPlayer&&overlap(mainPlayer,collider));
+            door.progress=occupied?Math.max(.82,door.progress):0;
+            if(actual)actual.progress=door.progress;
+          }
         }
       }
       let persist=false,rebuild=false;
