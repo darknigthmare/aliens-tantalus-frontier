@@ -91,9 +91,15 @@ function stepShape(state, side, scale, crouching, staticAction) {
     // The other contact is untouched; this is one simulation-owned adjustment,
     // never render-clock walking, a moving collision box or a sliding shoe.
     const travel = humanFootTravelV136(recoveryProgress);
+    // This adjustment has its own short160ms duration. The ordinary gait's
+    // early-clearance arc reached the full three world pixels in16ms here,
+    // pulling the support-owned pelvis upward by more than one pixel/frame.
+    // A single symmetric C2 pulse retains its clearance and duration while
+    // leaving zero vertical velocity and acceleration at both contacts.
+    const liftPulse = 64 * recoveryProgress ** 3 * (1 - recoveryProgress) ** 3;
     offset = mix(stopRecovery.from.offset, stopRecovery.targetOffset, travel);
     lift = stopRecovery.from.lift * (1 - smoothHumanStepV136(recoveryProgress))
-      + C.stopRecoveryLiftV165 * scale * humanFootSwingV136(recoveryProgress, .54, 0).liftWeight;
+      + C.stopRecoveryLiftV165 * scale * liftPulse;
     angle = stopRecovery.from.angle * (1 - smoothHumanStepV136(recoveryProgress));
   }
   // During a speed blend an inherited clearance and the new free-foot arc

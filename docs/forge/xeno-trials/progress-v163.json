@@ -2804,7 +2804,7 @@
     "src/player-costume-parts-v165.js": "94f3cba4aa29950b749fad9e0a109dae8573d09e34f44d91db80c1814ddc8195",
     "src/player-gait-v133.js": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
     "src/player-human-proportions-v160.js": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
-    "src/player-locomotion-rig-v129.js": "e83d0d3c0c76f470c18b3584141f84ad6ef91f2f131d80d7ff6fb5a48451b8d6",
+    "src/player-locomotion-rig-v129.js": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
     "src/player-modular-rig-v126.js": "63e7894684e439701fbccca1f61a0cdea5e021ff80c2d3e4bd5fc7bd1a452c6b",
     "src/player-transit-rig-v128.js": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
     "src/player-weapon-runtime-v125.js": "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
@@ -6815,7 +6815,7 @@
         [
           "src/player-locomotion-rig-v129.js",
           "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
-          "e83d0d3c0c76f470c18b3584141f84ad6ef91f2f131d80d7ff6fb5a48451b8d6",
+          "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
           "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs.",
           "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs"
         ],
@@ -15847,7 +15847,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "be882ec4b0e249dddcd81a139da9185e134d537afd5e67cba376447fc50ff044",
+  "workbookSha256": "0394934e6d89f85e0b784cf3b23bbd82bbdce2dcbe307f1e2dd6b9ad98fc9374",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -16060,7 +16060,7 @@
       {
         "path": "src/player-locomotion-rig-v129.js",
         "previousSha256": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
-        "currentSha256": "e83d0d3c0c76f470c18b3584141f84ad6ef91f2f131d80d7ff6fb5a48451b8d6",
+        "currentSha256": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
         "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
@@ -21476,7 +21476,7 @@
       {
         "path": "src/player-locomotion-rig-v129.js",
         "previousSha256": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
-        "currentSha256": "e83d0d3c0c76f470c18b3584141f84ad6ef91f2f131d80d7ff6fb5a48451b8d6",
+        "currentSha256": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
         "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
