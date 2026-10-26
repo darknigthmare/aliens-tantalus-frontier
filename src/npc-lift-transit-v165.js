@@ -4,7 +4,8 @@ import { liftPhaseDurationV163 } from './hub-lift-transit-v163.js';
 
 const finite = Number.isFinite;
 const phases = ['boarding', 'closing', 'travel', 'opening', 'exiting'];
-const crewIds = ['crew-10-david-8r', 'crew-09-inez-harlow', 'crew-08-maksim-orlov', 'crew-11-jun-park'];
+const crewIds = ['crew-10-david-8r', 'crew-09-inez-harlow', 'crew-08-maksim-orlov', 'crew-11-jun-park',
+  'crew-06-rook', 'crew-02-tamsin-velez'];
 export const NPC_LIFT_TRANSIT_V165 = Object.freeze({ schema: 165, passengerWidth: 44, passengerHeight: 92,
   speed: 27, exclusiveCabin: true, handoff: 'closed-leaves-after-timed-carriage',
   coordinateDistancePolicy: 'chart-handoff-is-not-walking-distance' });

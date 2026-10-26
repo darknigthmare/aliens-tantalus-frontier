@@ -26,6 +26,7 @@ export function createServiceRouteV161(definition, { schema: SCHEMA = 161,
   originPhase: ORIGIN_PHASE = 'station' } = {}) {
 const { crewId: ID, parentRoomId: PARENT, annexRoomId: ANNEX, deck: DECK } = definition;
 const actorKey = Symbol('actor:' + definition.id), stateKey = Symbol('state:' + definition.id),
+  relayOwnerKey = Symbol('station-relay-owner:' + definition.id),
   handoffKey = Symbol('handoff:' + definition.id), sandboxKey = Symbol('sandbox:' + definition.id),
   peersKey = Symbol('peers:' + definition.id),
   doorsKey = Symbol('main-doors:' + definition.id),
@@ -338,6 +339,7 @@ function withHubNpcAnnexCirculationV161(Base) {
       this[stateKey] = this[sandboxKey] ? null : normalizeNpcAnnexCirculationV161(hubState[STATE_FIELD]?.routes?.[definition.id]).actor;
       this[handoffKey] = normalizeNpcAnnexCirculationV161(hubState[STATE_FIELD]?.routes?.[definition.id]).nativeHandoff;
       this[actorKey] = null; this[peersKey] = [];
+      this[relayOwnerKey] = null;
       this[doorsKey] = mainDoorTemplates.map(door => ({ ...door,
         progress: this[stateKey]?.bulkheadProgress?.[door.id] || 0 }));
       const result = super.start(hubState, options);
@@ -354,6 +356,51 @@ function withHubNpcAnnexCirculationV161(Base) {
       const actor = this[actorKey];
       if (actor?.roomId === ANNEX) filtered.push(actor);
       return actor ? filtered : cohort;
+    }
+
+    /** Transfer the existing object, never a template or a cloned actor.
+     * The caller owns its station bookmark; this owner alone advances the
+     * established local circuit after accepting a supported work arrival. */
+    adoptNpcServicePhysicalOwnerV166(routeId, actor, { ownerId, workBookmark } = {}) {
+      if (routeId !== definition.id) return super.adoptNpcServicePhysicalOwnerV166?.(routeId, actor, { ownerId, workBookmark }) || false;
+      if (SCHEMA !== 165 || !['rook-cctv', 'tamsin-proving'].includes(definition.id)
+        || ownerId !== (definition.id === 'rook-cctv' ? 'rook-station-relay' : 'tamsin-station-relay')
+        || !actor || actor.crewId !== ID || actor.w !== 44 || actor.h !== 92 || actor.alive === false || actor.downed
+        || workBookmark?.crewId !== ID || workBookmark.deck !== DECK || workBookmark.roomId !== HOME
+        || workBookmark.y !== 532 || !finite(workBookmark.x)) return false;
+      const r = this.npcRoutineResolutionsV62?.get(ID);
+      if (!r || r.alert || r.missionAssigned || r.needsCare) return false;
+      if (this[actorKey]) {
+        // A saved local owner rehydrates itself exactly once. Binding its
+        // relay after load does not construct or replace a second body.
+        if (this[actorKey] !== actor || this[stateKey]?.homeX !== workBookmark.x
+          || this[relayOwnerKey] && this[relayOwnerKey] !== ownerId) return false;
+        this[relayOwnerKey] = ownerId; return true;
+      }
+      if (this.getNpcStationRelayActorV166?.(ownerId) !== actor || this[stateKey]
+        || actor.roomId !== HOME || actor.x !== workBookmark.x || actor.y !== 532
+        || actor.vx && Math.abs(actor.vx) > .001) return false;
+      const lease = this.hubNpcLeaseOwnerV163?.(ID);
+      if (lease && lease !== ownerId) return false;
+      const box = { x: actor.x, y: 532, w: 44, h: 92 };
+      const peers = this.getNpcServicePeersV163?.(DECK, ID) || [];
+      if (buildHubObstacleGeometryV87(DECK).some(b => b.collisionMode !== 'one-way-top' && overlap(box, b))
+        || peers.some(p => p.crewId !== ID && p.alive !== false && overlap(box, p))) return false;
+      const duty = createAnnexNpcsV141([{ roomId: ANNEX, crewId: ID, targetX: definition.targetX, duty: definition.duty }], this.npcRoutineResolutionsV62)[0];
+      const state = duty && createNpcAnnexCirculationStateV161(actor, duty);
+      if (!state || state.homeX !== workBookmark.x) return false;
+      this[actorKey] = actor; this[stateKey] = state; this[relayOwnerKey] = ownerId; this[handoffKey] = null;
+      actor.vx = 0; actor.mobile = false; this[refreshKey](); return true;
+    }
+
+    releaseNpcServicePhysicalOwnerV166(routeId, actor, { ownerId } = {}) {
+      if (routeId !== definition.id) return super.releaseNpcServicePhysicalOwnerV166?.(routeId, actor, { ownerId }) || null;
+      const s = this[stateKey];
+      if (!actor || this[actorKey] !== actor || this[relayOwnerKey] !== ownerId || !s
+        || s.roomId !== HOME || s.stage !== 'service' || s.doorProgress !== 0
+        || Math.abs(s.x - s.homeX) > .26 || s.y !== 532 || s.velocity !== 0) return null;
+      this[actorKey] = null; this[stateKey] = null; this[handoffKey] = null; this[relayOwnerKey] = null;
+      actor.vx = 0; return actor;
     }
 
     createNpcs(deck) {

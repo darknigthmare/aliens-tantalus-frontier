@@ -38,7 +38,8 @@ export const HUB_NPC_SERVICE_TRAFFIC_CIRCUITS_V163 = Object.freeze({
   // and bulkheads; these reservations never manufacture a lift arrival.
   ...Object.fromEntries([
     ['david-durandal', 'crew-10-david-8r'], ['inez-civil', 'crew-09-inez-harlow'],
-    ['maksim-cockpit', 'crew-08-maksim-orlov'], ['jun-sanitary', 'crew-11-jun-park']
+    ['maksim-cockpit', 'crew-08-maksim-orlov'], ['jun-sanitary', 'crew-11-jun-park'],
+    ['rook-station-relay', 'crew-06-rook'], ['tamsin-station-relay', 'crew-02-tamsin-velez']
   ].flatMap(([id, owner]) => [0, 1, 2, 3].map(deck => [id + ':deck-' + deck,
     circuit(owner, deck, HUB_DECKS[deck].rooms.map(room => room.id))])))
 });
@@ -93,6 +94,44 @@ export function withHubNpcServiceTrafficV163(Base) {
 
     getNpcServiceTrafficActorsV163(deck = null) {
       return [...(this.npcTrafficBodiesV163?.values() || [])].filter(actor => deck == null || actorRoom(actor) === deck);
+    }
+
+    /** A real annex owner may reserve its paired arrival before it can be
+     * painted on that main chart. The requester supplies the existing peer
+     * object, never a projected/virtual owner at the arrival coordinates. */
+    reserveNpcServiceArrivalCourtesyV166({ routeId, owner, peer, deck, targetX } = {}) {
+      const allowed = HUB_NPC_SERVICE_TRAFFIC_CIRCUITS_V163[routeId];
+      if (!allowed || !['rook-station-relay:deck-0', 'tamsin-station-relay:deck-2'].includes(routeId)
+        || owner?.crewId !== allowed.ownerCrewId || deck !== allowed.deck || !finite(targetX)
+        || targetX < allowed.minX || targetX > allowed.maxX || !owner || !peer || owner === peer
+        || owner.alive === false || owner.downed
+        || !this.getNpcServiceOwnedActorsV163().includes(owner)
+        || this.getNpcServiceOwnedActorsV163().some(a => a.crewId === peer.crewId)
+        || !this.getNpcServicePeersV163(deck, owner.crewId).includes(peer)
+        || peer.alive === false || peer.downed || actorRoom(peer) !== deck || peer.y !== 532
+        || peer.w !== 44 || peer.h !== 92 || peer.workClock > 0 || peer.supportClock > 0) return false;
+      const r = this.npcRoutineResolutionsV62?.get(peer.crewId), ownerRoutine = this.npcRoutineResolutionsV62?.get(owner.crewId);
+      if (!r || r.alert || r.missionAssigned || r.needsCare || !ownerRoutine
+        || ownerRoutine.alert || ownerRoutine.missionAssigned || ownerRoutine.needsCare) return false;
+      const grant = this.getNpcServiceArrivalCourtesyGeometryV166?.(routeId, owner);
+      if (!grant || !overlap(grant.arrival, peer)
+        || targetX !== grant.arrival.x + (peer.x < grant.arrival.x ? -68 : 68)) return false;
+      const existing = this.npcTrafficStateV163.actors.find(a => a.crewId === peer.crewId);
+      if (existing && (existing.ownerCrewId !== owner.crewId || existing.routeId !== routeId || existing.deck !== deck)) return false;
+      const target = { x: targetX, y: 532, w: 44, h: 92 };
+      const peers = this.getNpcServicePeersV163(deck, peer.crewId);
+      const player = this.state?.deck === deck && !this.isAnnexActiveV71?.() && !this.ventActorV62 ? this.player : null;
+      if (buildHubObstacleGeometryV87(deck).filter(blocks).some(b => overlap(target, b))
+        || [...peers, ...(player ? [player] : [])].some(p => p !== owner && p.alive !== false && overlap({ ...target, x: target.x - 12, w: 68 }, p))) return false;
+      if (existing) {
+        existing.targetX = targetX; existing.phase = 'clearing'; return true;
+      }
+      this.npcTrafficStateV163.actors.push({ crewId: peer.crewId, deck, roomId: peer.roomId, homeRoomId: peer.roomId,
+        x: peer.x, y: 532, homeX: peer.x, targetX, velocity: 0, time: 0, distance: 0,
+        facing: peer.facing === -1 ? -1 : 1, phase: 'clearing', routineKey: r.deterministicKey,
+        ownerCrewId: owner.crewId, routeId,
+        bulkheadProgress: Object.fromEntries(this.npcTrafficDoorsV163[deck].map(d => [d.id, d.progress])) });
+      this.npcTrafficBodiesV163.set(peer.crewId, peer); return true;
     }
 
     getNpcServiceOwnedActorsV163() {
@@ -267,6 +306,8 @@ export function withHubNpcServiceTrafficV163(Base) {
           body[key] = finite(body[key]) && body[key] > value ? body[key] : Math.max(0, value - dt);
         const owner = owners.find(a => a.crewId === saved.ownerCrewId);
         const intent = (this.getNpcServiceTrafficIntentsV163?.() || []).find(i => i.actor === owner);
+        if (['rook-station-relay:deck-0', 'tamsin-station-relay:deck-2'].includes(saved.routeId)
+          && owner && actorRoom(owner) !== saved.deck && !this.hasNpcServiceArrivalCourtesyGrantV166?.(saved)) saved.phase = 'returning';
         if (!owner || actorRoom(owner) === saved.deck && !intent
           && (owner.x + owner.w + 12 < Math.min(saved.x, saved.homeX)
             || owner.x > Math.max(saved.x, saved.homeX) + 56)) saved.phase = 'returning';

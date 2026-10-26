@@ -25,6 +25,9 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'qa-npc-station-relays-v166.py',
+  'verify-npc-station-relays-v166.mjs',
+  'verify-npc-relay-locked-bulkheads-v166.mjs',
   'qa-npc-interdeck-native-v165.py',
   'qa-npc-cal-logistics-route-v165.py',
   'qa-npc-interdeck-routes-v165.py',
