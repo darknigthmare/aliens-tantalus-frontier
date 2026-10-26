@@ -1,5 +1,5 @@
 import {
-  PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_SLOTS_V126, PLAYER_APPEARANCE_PRESETS_V129,
+  PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_SLOTS_V126, PLAYER_APPEARANCE_PRESETS_ALL_V165,
   getPlayerAppearanceSelectionV126, getPlayerAppearanceSelectedPresetV129
 } from './player-appearance-v126.js';
 import { getCostumeV119 } from './franchise-costumes-v119.js';
@@ -38,7 +38,7 @@ export function playerAppearanceUiModelV126(save, owner = 'player') {
     wardrobe: getPlayerWardrobeModelV135(save, target),
     wardrobeLocked: locked || Boolean(save?.needsPlayerCreationV84 || save?.onboardingV84 && save.onboardingV84.phase !== 'complete'),
     selectedPresetId: selectedPreset?.id || null,
-    presets: PLAYER_APPEARANCE_PRESETS_V129.map(preset => ({ ...preset,
+    presets: PLAYER_APPEARANCE_PRESETS_ALL_V165.map(preset => ({ ...preset,
       selected: preset.id === selectedPreset?.id })),
     slots: PLAYER_APPEARANCE_SLOTS_V126.map(slot => ({ ...slot, selectedItemId: state.slots[slot.id],
       choices: [
@@ -67,7 +67,7 @@ export function playerAppearancePanelHtmlV126(save, { owner = 'player', facing =
       <div class="appearance-status-v126" data-appearance-effective-v126="${model.effective}" data-appearance-reason-v126="${model.reason || ''}"><strong>${escapeHtml(model.ownerLabel)}</strong><p>${escapeHtml(model.status)}</p>${model.locked ? '<p>Opération active : les choix de J1 et J2 sont verrouillés jusqu’au retour.</p>' : ''}</div>
     </div>
     <section class="appearance-presets-v129" aria-labelledby="appearance-presets-title-${model.owner}-v129">
-      <div class="appearance-presets-heading-v129"><h4 id="appearance-presets-title-${model.owner}-v129">Tenues d’Aliens (1986)</h4><p>Appliquez une tenue complète, puis ajustez chaque pièce.</p></div>
+      <div class="appearance-presets-heading-v129"><h4 id="appearance-presets-title-${model.owner}-v129">Tenues de référence adaptées</h4><p>Appliquez une tenue complète, puis ajustez chaque pièce.</p></div>
       <div class="appearance-preset-choices-v129" role="group" aria-label="Tenue complète de ${escapeHtml(model.ownerLabel)}">${model.presets.map(preset => `<button type="button" class="button appearance-preset-v129 ${preset.selected ? '' : 'ghost'}" data-appearance-owner-v126="${model.owner}" data-appearance-preset-v129="${preset.id}" aria-pressed="${preset.selected}"${model.locked ? ' disabled' : ''}><strong>${escapeHtml(preset.name)}</strong><span>${escapeHtml(preset.description)}</span></button>`).join('')}</div>
       <p class="appearance-preset-selection-v129" data-appearance-preset-status-v129 role="status" aria-live="polite">${model.selectedPresetId ? `Tenue complète préparée : ${escapeHtml(model.presets.find(preset => preset.selected).name)}.` : 'Tenue composée pièce par pièce.'}</p>
     </section>

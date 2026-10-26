@@ -299,7 +299,11 @@ export function resolveNpcMissionAnimationV55(actor = {}) {
   }
   if (actor.crouching || actor.inCover) return missionResult(identity, 'cover', 'cover');
   if (actor.grounded === false) return missionResult(identity, 'traversal', 'traversal');
-  if (actor.combatReady || actor.aiming || actor.alert || actor.alerted || Number(actor.alertClock) > 0) return missionResult(identity, 'ready', 'ready');
+  // A raised level of vigilance is not an action that owns the legs. Every
+  // roster member has an authored armed walking row; keeping the full ready
+  // pose while its physical body moves made alerted allies skate on the deck.
+  // Real firing, support, injury, cover and traversal retain priority above.
   if (Math.abs(Number(actor.vx) || 0) > 8) return locomotionResult(identity, 'walk');
+  if (actor.combatReady || actor.aiming || actor.alert || actor.alerted || Number(actor.alertClock) > 0) return missionResult(identity, 'ready', 'ready');
   return locomotionResult(identity, 'idle');
 }

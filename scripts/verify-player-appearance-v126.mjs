@@ -4,7 +4,7 @@ import {
   PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_SLOTS_V126,
   normalizePlayerAppearanceV126, equipPlayerAppearanceV126,
   resetPlayerAppearanceV126, getPlayerAppearanceSelectionV126,
-  PLAYER_APPEARANCE_PRESETS_V129, getPlayerAppearancePresetV129,
+  PLAYER_APPEARANCE_PRESETS_V129, PLAYER_APPEARANCE_PRESETS_ALL_V165, getPlayerAppearancePresetV129,
   getPlayerAppearanceSelectedPresetV129, equipPlayerAppearancePresetV129,
   getPlayerAppearanceItemV126
 } from '../src/player-appearance-v126.js';
@@ -507,7 +507,7 @@ test('V129 armory exposes four native preset buttons, the exact selected preset 
   equipPlayerAppearancePresetV129(save, { owner: 'coop', presetId: 'uscm-smartgunner-v129' });
   const html = playerAppearancePanelHtmlV126(save, { owner: 'coop' });
   const buttons = [...html.matchAll(/<button\b[^>]*data-appearance-preset-v129="([^"]*)"[^>]*>/g)];
-  assert.equal(buttons.length, 4);
+  assert.equal(buttons.length, PLAYER_APPEARANCE_PRESETS_ALL_V165.length);
   assert.match(html, /aria-labelledby="appearance-presets-title-coop-v129"/);
   assert.match(html, /role="group" aria-label="Tenue complète de J2 · Opérateur coop"/);
   assert.match(html, /data-appearance-preset-status-v129 role="status" aria-live="polite">Tenue complète préparée : Équipement Vasquez\./);
@@ -523,27 +523,30 @@ test('V129 armory exposes four native preset buttons, the exact selected preset 
   save.strategy.currentOperation = { id: 'active' };
   const locked = playerAppearancePanelHtmlV126(save, { owner: 'coop' });
   const lockedButtons = [...locked.matchAll(/<button\b[^>]*data-appearance-preset-v129="[^"]*"[^>]*>/g)];
-  assert.equal(lockedButtons.length, 4);
+  assert.equal(lockedButtons.length, PLAYER_APPEARANCE_PRESETS_ALL_V165.length);
   for (const [button] of lockedButtons) assert.match(button, / disabled/);
   assert.doesNotMatch(locked, /fidèle 1:1|exactement identique/i);
 });
 
-test('V129 Hicks and Hudson archive cards open the correct modular outfit without admitting a dedicated costume', () => {
+test('V165 Hicks and Hudson archive cards apply matching modular clothes and preserve customization and operation locks', () => {
   for (const [costumeId, presetId] of [
     ['franchise-hicks-combat', 'uscm-hicks-v129'],
     ['franchise-hudson-combat', 'uscm-hudson-v129']
   ]) {
     const costume = getCostumeV119(costumeId);
-    assert.equal(canEquipCostumeV119(costumeId, COSTUMES), false);
+    assert.equal(canEquipCostumeV119(costumeId, COSTUMES), true);
     for (const locked of [false, true]) {
       const html = renderCostumeArchiveCardV119(costume, { locked, COSTUMES,
         getSkin: () => assert.fail('A modular navigation link must not request a dedicated costume atlas.') });
-      assert.match(html, /TENUE EN PIÈCES SÉPARÉES · ARMURERIE/);
+      assert.match(html, /TENUE MODULAIRE ADAPTÉE · ÉQUIPABLE/);
+      const apply = html.match(/<button\b[^>]*data-costume-id="[^"]*"[^>]*>/)?.[0];
+      assert.ok(apply);
+      assert.equal(/ disabled/.test(apply), locked, 'Archive application retains the active operation lock.');
       const button = html.match(/<button\b[^>]*data-costume-appearance-v129="[^"]*"[^>]*>/)?.[0];
       assert.ok(button);
       assert.match(button, new RegExp(`data-costume-appearance-v129="${presetId}"`));
       assert.match(button, /type="button"/);
-      assert.match(button, /aria-label="Préparer/);
+      assert.match(button, /aria-label="Personnaliser/);
       assert.doesNotMatch(button, / disabled|data-costume-id/,
         'Navigation remains available during an operation; the armory owns the mutation lock.');
       assert.doesNotMatch(html, /NON ÉQUIPABLE · VISUEL ABSENT/);
@@ -551,7 +554,7 @@ test('V129 Hicks and Hudson archive cards open the correct modular outfit withou
   }
 });
 
-test('V129 archive orientation leaves other documented outfits and the dedicated availability filter intact', () => {
+test('V165 archive equipment admits the matching film clothes and keeps other documented outfits separate', () => {
   const save = createDefaultSave(), before = clone(save);
   const vasquez = renderCostumeArchiveCardV119(getCostumeV119('franchise-vasquez-bdu'), { COSTUMES });
   assert.doesNotMatch(vasquez, /data-costume-appearance-v129/,
@@ -561,9 +564,8 @@ test('V129 archive orientation leaves other documented outfits and the dedicated
   assert.doesNotMatch(nostromo, /data-costume-appearance-v129/);
   const ready = buildCostumeArchivesModelV119({ save, COSTUMES, filters: { availability: 'ready' } });
   assert.ok(ready.entries.some(entry => entry.id === 'franchise-nostromo-crew'));
-  assert.ok(!ready.entries.some(entry => ['franchise-hicks-combat', 'franchise-hudson-combat'].includes(entry.id)));
+  for (const id of ['franchise-hicks-combat', 'franchise-hudson-combat']) assert.ok(ready.entries.some(entry => entry.id === id));
   const missing = buildCostumeArchivesModelV119({ save, COSTUMES, filters: { availability: 'missing', character: 'Hicks' } });
-  assert.equal(missing.entries.length, 1);
-  assert.equal(missing.entries[0].id, 'franchise-hicks-combat');
+  assert.equal(missing.entries.length, 0);
   assert.deepEqual(save, before);
 });

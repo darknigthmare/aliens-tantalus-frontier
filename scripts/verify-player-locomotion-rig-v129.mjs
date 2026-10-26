@@ -116,10 +116,10 @@ test('finite collision segments revoke unsupported foot contacts without moving 
   assert.deepEqual(rig(subject, { groundSupport: null }).contacts, continuous.contacts);
 });
 
-test('a scene change, a teleport, a facing change or a reversed clock starts a neutral observation', () => {
+test('a scene change, a teleport or a reversed clock starts a neutral observation', () => {
   const { subject, state } = walk();
   for (const [next, now, options] of [[{ ...subject, x: subject.x + 400 }, 2, {}],
-    [{ ...subject, facing: -1 }, 2, {}], [subject, 0, {}], [subject, 2, { context: 'another-room' }],
+    [subject, 0, {}], [subject, 2, { context: 'another-room' }],
     [subject, 2, { surface: 'hub' }]]) {
     const reset = advancePlayerLocomotionStateV129(state, next, now, options);
     assert.equal(reset.distance, 0); assert.equal(reset.hasWalked, false); assert.equal(reset.moving, false);

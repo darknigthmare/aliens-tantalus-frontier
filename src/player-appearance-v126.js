@@ -1,3 +1,5 @@
+import { COSTUME_APPEARANCE_ITEMS_V165, COSTUME_APPEARANCE_PRESETS_V165 } from './player-costume-outfits-v165.js';
+
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     Object.values(value).forEach(freeze);
@@ -60,7 +62,8 @@ export const PLAYER_APPEARANCE_ITEMS_V126 = freeze([
   filmItem('legs-smartgunner-v129', 'legs', 'Treillis de smartgunner', 'Pantalon et bottes d’après l’équipement de Vasquez.'),
   filmItem('back-shoulder-lamp-v129', 'back', 'Lampe d’épaule USCM', 'Lampe et support dorsal de la tenue coloniale.'),
   filmItem('back-hicks-scabbard-v129', 'back', 'Fourreau de Hicks', 'Fourreau dorsal d’après la tenue de Hicks ; apparence du paquetage.'),
-  filmItem('back-smartgun-harness-v129', 'back', 'Harnais de smartgunner', 'Support dorsal d’après l’équipement de Vasquez ; apparence du paquetage.')
+  filmItem('back-smartgun-harness-v129', 'back', 'Harnais de smartgunner', 'Support dorsal d’après l’équipement de Vasquez ; apparence du paquetage.'),
+  ...COSTUME_APPEARANCE_ITEMS_V165
 ]);
 
 const SLOT_BY_ID = new Map(PLAYER_APPEARANCE_SLOTS_V126.map(slot => [slot.id, slot]));
@@ -102,7 +105,10 @@ export const PLAYER_APPEARANCE_PRESETS_V129 = freeze([
       arms: 'arms-smartgunner-v129', legs: 'legs-smartgunner-v129', back: 'back-smartgun-harness-v129'
     })
 ]);
-const PRESET_BY_ID_V129 = new Map(PLAYER_APPEARANCE_PRESETS_V129.map(preset => [preset.id, preset]));
+export const PLAYER_APPEARANCE_PRESETS_ALL_V165 = Object.freeze([
+  ...PLAYER_APPEARANCE_PRESETS_V129, ...COSTUME_APPEARANCE_PRESETS_V165
+]);
+const PRESET_BY_ID_V129 = new Map(PLAYER_APPEARANCE_PRESETS_ALL_V165.map(preset => [preset.id, preset]));
 export const getPlayerAppearancePresetV129 = id => PRESET_BY_ID_V129.get(id) || null;
 
 /** Exact six-slot matching is derived without changing the saved selection.
@@ -110,7 +116,7 @@ export const getPlayerAppearancePresetV129 = id => PRESET_BY_ID_V129.get(id) || 
  */
 export function getPlayerAppearanceSelectedPresetV129(appearance) {
   const selected = normalizePlayerAppearanceV126(appearance);
-  return PLAYER_APPEARANCE_PRESETS_V129.find(preset => PLAYER_APPEARANCE_SLOTS_V126
+  return PLAYER_APPEARANCE_PRESETS_ALL_V165.find(preset => PLAYER_APPEARANCE_SLOTS_V126
     .every(slot => preset.slots[slot.id] === selected.slots[slot.id])) || null;
 }
 

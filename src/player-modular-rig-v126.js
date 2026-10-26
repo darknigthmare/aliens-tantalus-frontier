@@ -8,6 +8,8 @@ import { getPlayerColonialArmsV129,
   getPlayerColonialHelmetV129, getPlayerColonialBackV129,
   PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
 import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
+import { getPlayerCostumeTorsoV165, getPlayerCostumeArmsV165,
+  getPlayerCostumeHelmetV165, PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from './player-costume-parts-v165.js';
 import { PLAYER_HUMAN_PROPORTIONS_V160, PLAYER_MODULAR_SOURCE_ANCHORS_V160 } from './player-human-proportions-v160.js';
 
 const freeze = value => {
@@ -177,13 +179,15 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
   const reason=!bodyRig?.eligible ? bodyRig?.reason || 'body-rig-ineligible'
     : bodyRig.rigType!=='echo9' || !anatomical || !validPoint(bodyRig.shoulders?.near)
       || !validPoint(bodyRig.shoulders?.far) || !bodyRig.matrix ? 'modular-pose-unavailable'
-      : (bodyRig.modularLowerLayersV128 || PLAYER_COLONIAL_LEG_DEFINITIONS_V129[slots.legs])
+      : (bodyRig.modularLowerLayersV128 || PLAYER_COLONIAL_LEG_DEFINITIONS_V129[slots.legs]
+        || PLAYER_COSTUME_LEG_DEFINITIONS_V165[slots.legs])
         && !validLowerLayersV128(lowerLayers,slots.legs)
         ? 'modular-lower-body-unavailable' : null;
   if(reason) return freeze({schema:126,eligible:false,ready:false,reason,fallbackReason:reason,
     requestedSlots:slots,effectiveSlots:null,requiredAssets:[],layers:[],bodyRig});
   const m=bodyRig.matrix,sourceShoulders=bodyRig.sourceFrame.sourceShoulders;
-  const colonialTorso=getPlayerColonialTorsoWithVariantsV141(slots.torso,bodyRig.facing,anatomical.family);
+  const colonialTorso=getPlayerCostumeTorsoV165(slots.torso,bodyRig.facing,anatomical.family)
+    || getPlayerColonialTorsoWithVariantsV141(slots.torso,bodyRig.facing,anatomical.family);
   const torsoPart=colonialTorso?.part || PLAYER_MODULAR_RIG_PARTS_V126.torso[slots.torso][anatomical.family];
   const torsoMatrix=compose(m,triangle(torsoPart.joints,{...sourceShoulders,waist:anatomical.waist}));
   const upright=anatomical.family==='upright', headPart=PLAYER_MODULAR_RIG_PARTS_V126.head[upright?'upright':'forward'];
@@ -231,7 +235,8 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
     sourceSeparation:'jacket-above-articulated-belt'} : {};
   layers.push(layer('torso','torso',slots.torso,colonialTorso?.asset || UPPER,anatomical.family,torsoPart,torsoMatrix,beltClip));
   if(slots.helmet) {
-    const colonialHelmet=getPlayerColonialHelmetV129(slots.helmet,bodyRig.facing);
+    const colonialHelmet=getPlayerCostumeHelmetV165(slots.helmet,bodyRig.facing)
+      || getPlayerColonialHelmetV129(slots.helmet,bodyRig.facing);
     const p=colonialHelmet?.part || PLAYER_MODULAR_RIG_PARTS_V126.helmet[slots.helmet];
     layers.push(layer('helmet','helmet',slots.helmet,colonialHelmet?.asset || HEAD_BACK,'open-helmet',p,
       compose(headMatrix,attachment(p.ear,headPart.ear,
@@ -248,7 +253,7 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
     layers.push(layer('back-strap','back',slots.back,HEAD_BACK,'front-strap',p,
       compose(m,attachment(p.mount,anchor,.055,.245,lean))));
   }
-  const colonialArms=getPlayerColonialArmsV129(slots.arms);
+  const colonialArms=getPlayerCostumeArmsV165(slots.arms) || getPlayerColonialArmsV129(slots.arms);
   const armAsset=colonialArms?.asset || (slots.arms==='arms-marine-v126'?MARINE_ARMS:UPPER);
   const armParts=colonialArms?.parts || (slots.arms==='arms-marine-v126'?PLAYER_ARM_PARTS_V125:PLAYER_MODULAR_RIG_PARTS_V126.arms);
   const requiredAssets=[...new Map([...layers.map(l=>l.asset),armAsset].map(a=>[a.imageKey,a])).values()];

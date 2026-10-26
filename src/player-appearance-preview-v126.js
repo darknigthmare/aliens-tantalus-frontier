@@ -4,6 +4,7 @@ import { resolvePlayerModularRigV126, drawPlayerModularRigV126 } from './player-
 import { resolvePlayerLocomotionRigV129 } from './player-locomotion-rig-v129.js';
 import { PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from './player-colonial-art-v129.js';
 import { getPlayerColonialTorsoWithVariantsV141 } from './player-colonial-art-v141.js';
+import { getPlayerCostumeTorsoV165, PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from './player-costume-parts-v165.js';
 import { resolveHeldWeaponProfileV125 } from './held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125, drawHeldWeaponV125 } from './held-weapon-renderer-v125.js';
 import { WeaponImageCacheV125, weaponImageReadyV125 } from './weapon-image-cache-v125.js';
@@ -11,6 +12,10 @@ import { resolvePlayerActionRigV127, drawPlayerActionRigV127 } from './player-ac
 import {
   advancePlayerTransitStateV128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128
 } from './player-transit-rig-v128.js';
+
+const CLOTHING_LEG_DEFINITIONS_V165 = Object.freeze({
+  ...PLAYER_COLONIAL_LEG_DEFINITIONS_V129, ...PLAYER_COSTUME_LEG_DEFINITIONS_V165
+});
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clone = value => value == null ? value : JSON.parse(JSON.stringify(value));
@@ -186,7 +191,8 @@ export function createPlayerAppearancePreviewV126(canvas, {
   // Keep only selected clothing. The two authored torso sides are kept warm
   // together so turning the preview never flashes a missing costume frame.
   const baseAssets = [...PLAYER_BODY_RIG_ASSETS_V125,
-    ...[-1,1].map(facing => getPlayerColonialTorsoWithVariantsV141(selected.slots.torso,facing)?.asset).filter(Boolean),
+    ...[-1,1].map(facing => (getPlayerCostumeTorsoV165(selected.slots.torso,facing)
+      || getPlayerColonialTorsoWithVariantsV141(selected.slots.torso,facing))?.asset).filter(Boolean),
     ...(profile?.portable ? [profile] : [])];
   let disposed = false, frame = null, lastFrame = -Infinity, ready = false, loadEpoch = 0, pendingLoad = null;
   let currentAnimation = normalizePlayerAppearancePreviewAnimationV128(animation, weaponDescriptor);
@@ -205,10 +211,10 @@ export function createPlayerAppearancePreviewV126(canvas, {
       surface: 'mission', timeSeconds: sample.timeSeconds, reducedMotion };
     const decorateBodyRigV129 = bodyRig => resolvePlayerLocomotionRigV129({
       actor: sample.actor, bodyRig, appearance: selected, images,
-      legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129 }).bodyRig;
+      legDefinitions: CLOTHING_LEG_DEFINITIONS_V165 }).bodyRig;
     const transitCandidate = sample.transit ? resolvePlayerTransitRigV128({ ...options,
       ladder: sample.ladder, transitState: sample.transitState,
-      legDefinitions: PLAYER_COLONIAL_LEG_DEFINITIONS_V129 }) : null;
+      legDefinitions: CLOTHING_LEG_DEFINITIONS_V165 }) : null;
     const transitRig = sample.animation === 'revive' && transitCandidate?.reason === 'no-active-transit'
       ? null : transitCandidate;
     const actionRig = sample.action ? resolvePlayerActionRigV127({ ...options, decorateBodyRigV129 }) : null;

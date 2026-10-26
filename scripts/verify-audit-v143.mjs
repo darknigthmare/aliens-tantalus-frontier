@@ -190,6 +190,20 @@ test('a failed install rolls back the entire new cache, not the previous release
   assert.deepEqual(await h.caches.keys(), [previousName]);
   assert.equal(await (await previous.match(stableRequest)).text(), 'stable V163 source module');
 });
+test('a failed V165 precache retains the active V164 masked-sprite deployment intact', async () => {
+  const h = host(), previousName = 'atf-v143-npc-matte-v164';
+  assert.notEqual(h.api.CACHE, previousName, 'A new source deployment needs its own cache namespace.');
+  const previous = await h.caches.open(previousName);
+  const stableRequest = req('/src/npc-matte-apertures-v164.js');
+  await previous.put(stableRequest, new Response('stable V164 sprite policy'));
+  h.network(async request => {
+    if (request.url.endsWith('/src/app.js')) throw new Error('incomplete V165 deployment');
+    return response(request.url);
+  });
+  await assert.rejects(h.dispatch('install'), /incomplete V165 deployment/);
+  assert.deepEqual(await h.caches.keys(), [previousName]);
+  assert.equal(await (await previous.match(stableRequest)).text(), 'stable V164 sprite policy');
+});
 test('optional atlas warming is same-origin, bounded and tolerant of unavailable files', async () => {
   const h = host();
   const paths = Array.from({ length: 40 }, (_, i) => `/assets/openai/sprites/normalized/enemies/enemy-${i}.png`);

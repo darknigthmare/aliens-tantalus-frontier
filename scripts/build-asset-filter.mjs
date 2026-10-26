@@ -1,5 +1,11 @@
 import { publicReleasePathAdmissionV163 } from './public-release-admissions-v163.mjs';
+import { PUBLIC_COSTUME_ASSET_PATHS_V165, publicCostumePathAdmissionV165 } from './public-costume-admissions-v165.mjs';
 import { relative } from 'node:path';
+
+const costumeDirectoriesV165 = new Set(PUBLIC_COSTUME_ASSET_PATHS_V165.flatMap(path => {
+  const parts = path.split('/');
+  return parts.slice(0, -1).map((_, index) => parts.slice(0, index + 1).join('/'));
+}));
 import { V65_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v65.js';
 import { V66_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v66.js';
 import { V81_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v81.js';
@@ -231,6 +237,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const costumeAdmissionV165 = publicCostumePathAdmissionV165(sourcePath, { directory: costumeDirectoriesV165.has(sourcePath) });
+    if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
     const v163Admission = publicReleasePathAdmissionV163(sourcePath, { directory: sourcePath === 'assets/openai/sprites/trials-v163' });
     if (v163Admission !== null) return v163Admission;
     if (sourcePath === 'assets/openai/sprites/player/v141') return true;

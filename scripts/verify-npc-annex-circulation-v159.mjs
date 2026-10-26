@@ -438,18 +438,45 @@ test('native engine update/draw/pause own the true paired leaves and one support
     const body=emergency.npcAnnexActorV159,origin=structuredClone(emergency.npcAnnexStateV159);
     if(clock)body[clock]=12;
     emergency.setNpcRoutineContextV62({clock:{day:1,hour:9},crisis:{id:'actual',active:true}},{persist:false});
-    const frames=new Set();let firstX,lastGait,movingSamples=0,lastClosedStep=false;
+    // Observe the actual samples consumed by draw, without introducing an
+    // earlier sampler call that would consume its one-shot reseed signal.
+    const nativeSample=emergency.sampleNpcAnimation,drawSamples=[];
+    emergency.sampleNpcAnimation=function(npc,options){
+      const sample=nativeSample.call(this,npc,options);
+      if(npc===body)drawSamples.push(sample);
+      return sample;
+    };
+    const frames=new Set();let firstX,lastGait,movingSamples=0,lastClosedStep=false,initialObservations=0;
     for(let i=0;i<900&&emergency.npcAnnexDoorReservedV159('synthetic-bay');i++){
-      emergency.update(1/60);const s=emergency.npcAnnexStateV159;emergency.draw();
+      emergency.update(1/60);const s=emergency.npcAnnexStateV159;drawSamples.length=0;emergency.draw();
       assert.equal(body.roomId,origin.roomId);assert.equal(s.crossings,origin.crossings);assert.equal(body.y+body.h,624);
       if(Math.abs(s.actualVelocity)>.1){
-        const sample=emergency.sampleNpcAnimation(body,{emit:false});assert.equal(sample.clip.id,'walk');
-        assert.equal(sample.sheet.id,body.spriteId);assert.ok(sample.humanPatrolV133?.moving);
-        firstX ??= body.x;lastGait=sample.humanPatrolV133;frames.add(sample.frame);movingSamples++;
-        assert.ok(lastGait.distance<=body.x-firstX+1e-6,'Gait spends actual floor distance without stride debt.');
+        assert.ok(drawSamples.length>0,'The native draw must sample its actual visible body.');
+        const sample=drawSamples[0];assert.equal(sample.clip.id,'walk');
+        assert.equal(sample.sheet.id,body.spriteId);const gait=sample.humanPatrolV133;assert.ok(gait);
+        const repeated=nativeSample.call(emergency,body,{emit:false});
+        assert.equal(repeated.frame,sample.frame);
+        assert.deepEqual(repeated.humanPatrolV133,{...gait,reseeded:false},
+          'Repeated observation at the same coordinates/time preserves motion, distance and cadence; only the one-shot reseed clears.');
+        if(!lastGait){
+          // This fixture disables RAF and advances to the emergency without
+          // drawing the preceding approach. Its first walk observation has
+          // no earlier sampled position: vx alone must not invent a step.
+          assert.equal(gait.reseeded,true);assert.equal(gait.moving,false);
+          assert.equal(gait.requestedMovingV165,true);assert.equal(gait.distance,0);
+          assert.equal(gait.cycles,0);assert.equal(gait.stepsPerSecond,0);
+          assert.equal(gait.suppressEvents,true);firstX=body.x;initialObservations++;
+        }else{
+          assert.equal(gait.reseeded,false);assert.equal(gait.moving,true);
+          assert.ok(gait.distance>lastGait.distance,'Every subsequent walking sample spends actual new floor travel.');
+          movingSamples++;
+        }
+        lastGait=gait;frames.add(sample.frame);
+        assert.ok(Math.abs(lastGait.distance-(body.x-firstX))<1e-6,'Gait spends exactly observed floor distance without stride debt or lost travel.');
         if(s.doorProgress===0)lastClosedStep=true;
       }
     }
+    assert.equal(initialObservations,1);
     assert.ok(movingSamples>60&&frames.size>1&&lastGait.distance>50&&lastClosedStep);
     assert.equal(emergency.npcAnnexDoorReservedV159('synthetic-bay'),false);
     if(clock)assert.ok(body[clock]>0,'A live interaction clock does not suppress the emergency gait.');
@@ -457,6 +484,7 @@ test('native engine update/draw/pause own the true paired leaves and one support
     assert.notEqual(emergency.npcAnimationRequest(body).clipId,'walk');assert.equal(body.alerted,true);
     emergency.draw();const idle=emergency.sampleNpcAnimation(body,{emit:false});assert.equal(idle.humanPatrolV133,null);
     emergency.pause();emergency.update(.1);assert.equal(body.x,x);assert.deepEqual(emergency.npcAnnexStateV159,still);
+    emergency.sampleNpcAnimation=nativeSample;
     emergency.stop(false);
   }
   assert.equal(depth,0);

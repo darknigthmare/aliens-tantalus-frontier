@@ -11,6 +11,7 @@ import { publicReleasePathAdmissionV120, verifyPublicAdmissionsV120 } from './pu
 import { publicReleasePathAdmissionV121, verifyPublicAdmissionsV121 } from './public-release-admissions-v121.mjs';
 import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs';
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
+import { publicCostumePathAdmissionV165, verifyPublicCostumeAdmissionsV165 } from './public-costume-admissions-v165.mjs';
 
 const ROOT_FILES = new Set([
   'campaign-lethe-continuity-v163.css',
@@ -24,6 +25,27 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'qa-npc-interdeck-native-v165.py',
+  'qa-npc-cal-logistics-route-v165.py',
+  'qa-npc-interdeck-routes-v165.py',
+  'verify-npc-cal-logistics-route-v165.mjs',
+  'verify-npc-interdeck-passage-v165.mjs',
+  'verify-npc-interdeck-routes-v165.mjs',
+  'verify-npc-jun-climb-rig-v165.mjs',
+  'verify-parallel-completion-v165.mjs',
+  'verify-npc-cal-climb-rig-v165.mjs',
+  'verify-hub-interaction-input-v165.mjs',
+  'qa-hub-service-details-v165.py',
+  'qa-native-rig-catalog-v165.py',
+  'qa-npc-annex-workpost-routes-v165.py',
+  'qa-player-allies-contacts-v165.py',
+  'verify-hub-service-details-v165.mjs',
+  'verify-native-rig-catalog-v165.mjs',
+  'verify-npc-annex-workpost-routes-v165.mjs',
+  'verify-player-allies-contacts-v165.mjs',
+  'public-costume-admissions-v165.mjs',
+  'verify-costume-atlases-v165.mjs',
+  'qa-costume-atlases-v165.py',
   'qa-npc-matte-apertures-v164.py', 'verify-npc-matte-apertures-v164.mjs',
   'verify-hub-console-support-v142.mjs','verify-hub-elevator-interior-v142.mjs',
   'verify-hub-vent-scene-v142.mjs','verify-hub-room-composition-v142.mjs',
@@ -197,6 +219,7 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V165-PARALLEL-COMPLETION.md',
   'docs/forge/xeno-trials/V164-NPC-MATTE.md',
   'docs/forge/xeno-trials/V163-EXCEL-COMPLETION.md',
   'docs/forge/xeno-trials/progress-v163.json',
@@ -420,6 +443,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
+  const costumeAdmissionV165 = publicCostumePathAdmissionV165(path, { directory });
+  if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
   const v163Admission = publicReleasePathAdmissionV163(path, { directory });
   if (v163Admission !== null) return v163Admission;
   const v123Admission = publicReleasePathAdmissionV123(path, { directory });
@@ -487,6 +512,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicAdmissionsV122(root, { strict: true });
   await verifyPublicAdmissionsV123(root, { strict: true });
   await verifyPublicAdmissionsV163(root);
+  await verifyPublicCostumeAdmissionsV165(root, { strict: true });
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

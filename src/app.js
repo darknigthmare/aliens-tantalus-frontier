@@ -78,6 +78,10 @@ import { withHubNpcServiceRoutesV161 } from './npc-service-routes-v161.js';
 import { withHubNpcMedicalRouteV162 } from './npc-medical-route-v162.js';
 import { withHubNpcAnnexServiceRoutesV163 } from './npc-annex-service-routes-v163.js';
 import { withHubNpcAnnexLeasesV163 } from './npc-annex-leases-v163.js';
+import { withHubNpcAnnexWorkpostRoutesV165 } from './npc-annex-workpost-routes-v165.js';
+import { withHubNpcCalLogisticsRouteV165 } from './npc-cal-logistics-route-v165.js';
+import { withHubNpcInterdeckRoutesV165 } from './npc-interdeck-routes-v165.js';
+import { withHubNpcInterdeckPassageV165 } from './npc-interdeck-passage-v165.js';
 import { withHubLiftTransitV163 } from './hub-lift-transit-v163.js';
 import { withHubSpatialDesignV136 } from './hub-spatial-design-v136.js';
 import { withHubRoomLifeV136 } from './hub-room-life-v136.js';
@@ -273,9 +277,9 @@ const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameE
 const NativeHubGame = [
   withHubTrainingV132, withHubAuthoredCompositionV133, withHubRoomParallaxV134,
   withHubSpatialDesignV136, withHubRoomDressingV134, withHubRoomLifeV136,
-  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161, withHubNpcMedicalRouteV162, withHubNpcAnnexServiceRoutesV163, withHubNpcAnnexLeasesV163,
+  withHubNpcLifeV136, withHubNpcCirculationV158, withHubNpcAnnexCirculationV159, withHubNpcServiceRoutesV161, withHubNpcMedicalRouteV162, withHubNpcAnnexServiceRoutesV163, withHubNpcAnnexLeasesV163, withHubNpcAnnexWorkpostRoutesV165, withHubNpcCalLogisticsRouteV165,
   withHubCirculationV137, withHubRoomIdentityV137,
-  withHubDestinationSignsV138, withHubLiftTransitV163
+  withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
 const HubGame = withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)));
 const hubEngine = new HubGame(byId('hub-canvas'), {
