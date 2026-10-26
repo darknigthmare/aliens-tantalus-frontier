@@ -336,7 +336,8 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       try{return super.tickAnnexNpcLifeV141(delta);}finally{this.activeAnnexNpcsV141=active;}
     }
     npcLiftCabinReservationV165(shaftId) {
-      const entry=Object.entries(this.npcInterdeckStateV165?.routes||{}).find(([,e])=>e.actor?.lift?.shaftId===shaftId);
+      if(typeof shaftId!=='string'||!shaftId)return null;
+      const entry=Object.entries(this.npcInterdeckStateV165?.routes||{}).find(([,e])=>e.actor?.lift&&e.actor.lift.shaftId===shaftId);
       return entry?{owner:entry[0],crewId:entry[1].actor.crewId,shaftId,phase:entry[1].actor.lift.phase}:null;
     }
     hubNpcBulkheadDemandV158(door) {
@@ -607,9 +608,11 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       return intents;
     }
     drawDoor(ctx,door,...args) {
-      const e=Object.values(this.npcInterdeckStateV165?.routes||{}).find(e=>e.actor?.lift?.shaftId===door.shaftId
-        &&npcLiftPoseV165(e.actor.lift).deck===this.state?.deck);
-      if(e)door.progress=npcLiftDoorProgressV165(e.actor.lift);
+      if(door.lift&&typeof door.shaftId==='string') {
+        const trip=Object.values(this.npcInterdeckStateV165?.routes||{}).map(e=>e.actor?.lift)
+          .find(trip=>trip&&trip.shaftId===door.shaftId&&npcLiftPoseV165(trip).deck===this.state?.deck);
+        if(trip)door.progress=npcLiftDoorProgressV165(trip);
+      }
       return super.drawDoor(ctx,door,...args);
     }
     npcInterdeckClipV165(actor) {

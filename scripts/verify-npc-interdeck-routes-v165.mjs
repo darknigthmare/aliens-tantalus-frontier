@@ -3,7 +3,7 @@ import { writeFileSync, mkdirSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { test } from 'node:test';
-import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from '../src/hub-game.js';
+import { HubGame as NativeHub, HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from '../src/hub-game.js';
 import { HubGame as RosterHub } from '../src/hub-v52-runtime.js';
 import { HubGame as RoutineHub } from '../src/hub-v62-runtime.js';
 import { HubGame as AnnexHub } from '../src/hub-v71-runtime.js';
@@ -25,6 +25,9 @@ import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 as definitions,
   HUB_NPC_ANNEX_WORKPOST_ROUTES_V165 as routes, normalizeNpcAnnexWorkpostRoutesV165,
   withHubNpcAnnexWorkpostRoutesV165 } from '../src/npc-annex-workpost-routes-v165.js';
 
+import { withHubSpatialDesignV136 } from '../src/hub-spatial-design-v136.js';
+import { resolveHumanAtlasGeometryV133 } from '../src/human-visual-contract-v133.js';
+import { resolveSpriteSheet } from '../src/sprite-animation-runtime.js';
 import { withHubNpcCalLogisticsRouteV165 } from '../src/npc-cal-logistics-route-v165.js';
 import { withHubNpcInterdeckPassageV165 } from '../src/npc-interdeck-passage-v165.js';
 import { withHubNpcInterdeckRoutesV165, normalizeNpcInterdeckRoutesV165, NPC_INTERDECK_DEFINITIONS_V165 as interdeckDefinitions } from '../src/npc-interdeck-routes-v165.js';
@@ -32,6 +35,7 @@ import { npcLiftSocketV165, createNpcLiftTransitV165, advanceNpcLiftTransitV165,
 import { requestShipPortDockV87, stepShipPortV87, canAccessPortCounterV87 } from '../src/ship-port-state-v87.js';
 
 const LifeHub = withHubNpcLifeV136(RoutineHub);
+const DoorPaintHub = withHubSpatialDesignV136(NativeHub);
 class FixtureBase {
   initializeNpcRoutinesV62(...args) { return RoutineHub.prototype.initializeNpcRoutinesV62.apply(this, args); }
   getNpcRoutineResolutionsV62(...args) { return RoutineHub.prototype.getNpcRoutineResolutionsV62.apply(this, args); }
@@ -51,6 +55,7 @@ class FixtureBase {
   isAnnexActiveV71() { return Boolean(this.local); }
   sampleNpcAnimation() {}
   drawNpcLifeV136() { return false; }
+  drawDoor(...args) { return DoorPaintHub.prototype.drawDoor.apply(this, args); }
   drawDepthContactShadowV116() { return true; }
   setNpcCrisisAlert() {}
   emitStatus() {}
@@ -231,4 +236,62 @@ test('an arriving cabin waits on its real source chart until the destination flo
   }
   assert.ok(held,'the actual two-passenger source/destination conflict must be observed');
   assert.ok(boarded,'the same waiting passenger boards only after a real departure clears its arrival corridor');
+});
+
+function nativePaintRecorderV165() {
+  const calls=[];const context={measureText:text=>({width:String(text).length*6})};
+  for(const method of ['save','restore','beginPath','closePath','moveTo','lineTo','rect','clip','fill','stroke',
+    'fillRect','strokeRect','fillText','drawImage','translate','scale'])
+    context[method]=(...args)=>calls.push({method,args});
+  return{context,calls};
+}
+test('native06h door drawing paints ordinary bulkheads when every passenger ledger is empty',()=>{
+  const h=runtime(6,{deck:0,roomId:'combat-information'}),{context:ctx,calls}=nativePaintRecorderV165();
+  assert.ok(Object.values(h.npcInterdeckStateV165.routes).every(e=>e.actor===null));
+  assert.equal(h.npcLiftCabinReservationV165(),null);
+  assert.equal(h.npcLiftCabinReservationV165(''),null);
+  assert.equal(h.npcLiftCabinReservationV165('hub-midship-lift'),null);
+  const before=structuredClone(h.npcInterdeckStateV165),ordinary=h.doorStates.filter(d=>!d.lift);
+  assert.ok(ordinary.length);assert.ok(ordinary.every(d=>d.shaftId===undefined));
+  for(const door of ordinary) {
+    const progress=door.progress;
+    assert.doesNotThrow(()=>{h.drawDoor(ctx,door,'back');h.drawDoor(ctx,door,'front');});
+    assert.equal(door.progress,progress);
+    const painted=h.bulkheadDrawnV134.get(door.id);
+    assert.ok(painted,'the inherited native bulkhead painter must actually complete');
+    assert.deepEqual(painted.drawnPhases,['back','front']);
+    assert.equal(painted.progress,progress);
+  }
+  assert.ok(calls.some(c=>c.method==='fillRect'),'native architectural pixels are painted');
+  assert.deepEqual(h.npcInterdeckStateV165,before,'ordinary rendering cannot create a passenger or move its ledger');
+});
+test('native lift drawing still follows a real passenger and clips its intact atlas behind closing and closed leaves',()=>{
+  const h=runtime(5,{deck:0,roomId:'cryo-bay'}),{context:ctx,calls}=nativePaintRecorderV165();
+  const liftImage={complete:true,naturalWidth:187,naturalHeight:191};
+  h.propImages=new Map([['/assets/openai/hub/props/lift-door.png',liftImage]]);
+  context(h,11);let closing=false,closed=false;
+  for(let i=0;i<60*12&&(!closing||!closed);i++) {
+    h.update(1/12);const e=h.npcInterdeckStateV165.routes['david-durandal'],t=e.actor?.lift;
+    if(!t||t.phase==='closing'&&(t.elapsed<.2||closing)||t.phase!=='closing'&&t.phase!=='travel'||t.phase==='travel'&&closed)continue;
+    const body=h.npcInterdeckBodiesV165.get('david-durandal'),door=h.doorStates.find(d=>d.shaftId===t.shaftId);
+    const before=structuredClone(e.actor),progress=npcLiftDoorProgressV165(t);calls.length=0;
+    h.drawDoor(ctx,door,'front');assert.equal(door.progress,progress);
+    assert.deepEqual(h.npcLiftCabinReservationV165(t.shaftId),{owner:'david-durandal',crewId:body.crewId,shaftId:t.shaftId,phase:t.phase});
+    assert.equal(h.npcLiftCabinReservationV165(),null);
+    assert.equal(h.npcLiftCabinReservationV165('hub-midship-lift'),null);
+    const interior=h.hubSpatialLiftsV136.get(door.id).interior;
+    assert.equal(interior.progress,progress);assert.equal(interior.target.h,156);
+    assert.ok(calls.filter(c=>c.method==='drawImage'&&c.args[0]===liftImage).length>=1,'the real native lift frame/leaves painter runs');
+    if(t.phase==='closing')assert.ok(progress>0&&progress<1);else assert.equal(progress,0);
+    const geometry=resolveHumanAtlasGeometryV133({actor:body,sheet:resolveSpriteSheet(body.spriteId),column:0,row:0,surface:'hub'});
+    assert.ok(geometry);const actorImage={complete:true,naturalWidth:geometry.sourceWidth,naturalHeight:geometry.sourceHeight};
+    const clip=h.npcInterdeckClipV165(body);assert.ok(clip);assert.equal(clip.w,interior.opening.w*progress);
+    calls.length=0;assert.equal(h.drawNpcLifeV136(ctx,actorImage,body,null,geometry),true);
+    assert.ok(calls.some(c=>c.method==='rect'&&c.args.every((v,index)=>v===[clip.x,clip.y,clip.w,clip.h][index])));
+    assert.ok(calls.some(c=>c.method==='clip'),'the passenger draw really applies the native aperture clip');
+    const atlasDraw=calls.find(c=>c.method==='drawImage'&&c.args[0]===actorImage);assert.ok(atlasDraw);
+    assert.deepEqual(atlasDraw.args.slice(-2),[geometry.sprite.width,geometry.sprite.height],'occlusion preserves the complete source sprite scale');
+    assert.deepEqual(e.actor,before);if(t.phase==='closing')closing=true;else closed=true;
+  }
+  assert.ok(closing&&closed,'both an opening-width partial cover and the fully opaque travelling cover are exercised');
 });

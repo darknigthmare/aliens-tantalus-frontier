@@ -2781,7 +2781,7 @@
     "src/npc-cal-logistics-route-v165.js": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
     "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
     "src/npc-interdeck-passage-v165.js": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f",
-    "src/npc-interdeck-routes-v165.js": "0dcd02beeb35d2712d7bcda0855a89fd5fea18c3d299f971e0f5aa4847f3a03e",
+    "src/npc-interdeck-routes-v165.js": "f917246ede9d38a8cc9323d43d4ab306370bfd4b44e0b4d16595d85a33dc1585",
     "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0",
     "src/npc-life-v136.js": "ccd320fd541abf156e59cac8e2af45322b908204e5141849252de487102c66d9",
     "src/npc-lift-transit-v165.js": "cc77869c8b7b1a190b7e245dee7cd4ad3f5f77fafc4cc76f50132118b65f428f",
@@ -6689,7 +6689,7 @@
         [
           "src/npc-interdeck-routes-v165.js",
           "Non épinglé en V162",
-          "0dcd02beeb35d2712d7bcda0855a89fd5fea18c3d299f971e0f5aa4847f3a03e",
+          "f917246ede9d38a8cc9323d43d4ab306370bfd4b44e0b4d16595d85a33dc1585",
           "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé.",
           "scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-climb-rig-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs"
         ],
@@ -15847,7 +15847,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "0394934e6d89f85e0b784cf3b23bbd82bbdce2dcbe307f1e2dd6b9ad98fc9374",
+  "workbookSha256": "105424d3017210a864b11ab88e00cc79ab55a3fad14e695091f3f89ccce5fbdf",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -16421,7 +16421,7 @@
       {
         "path": "src/npc-interdeck-routes-v165.js",
         "previousSha256": null,
-        "currentSha256": "0dcd02beeb35d2712d7bcda0855a89fd5fea18c3d299f971e0f5aa4847f3a03e",
+        "currentSha256": "f917246ede9d38a8cc9323d43d4ab306370bfd4b44e0b4d16595d85a33dc1585",
         "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
@@ -21303,7 +21303,7 @@
       {
         "path": "src/npc-interdeck-routes-v165.js",
         "previousSha256": null,
-        "currentSha256": "0dcd02beeb35d2712d7bcda0855a89fd5fea18c3d299f971e0f5aa4847f3a03e",
+        "currentSha256": "f917246ede9d38a8cc9323d43d4ab306370bfd4b44e0b4d16595d85a33dc1585",
         "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
@@ -21651,7 +21651,7 @@
     "scripts/verify-npc-cal-logistics-route-v165.mjs": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
     "scripts/verify-npc-circulation-v158.mjs": "3feb8b1460764784bff3b002e270189032157ccc7e33b7636fa8806b1ef0e24e",
     "scripts/verify-npc-interdeck-passage-v165.mjs": "8a92af78cb7a9ee175eed22c4c65d4779645342adf0152948b842476c50f26ef",
-    "scripts/verify-npc-interdeck-routes-v165.mjs": "5f455785af72c02ff3f768ba3a14688f406e05e79762efd6ad3778ffeb5bb1a2",
+    "scripts/verify-npc-interdeck-routes-v165.mjs": "7ec1b977242d04c2c9f48abc20495d56b536d36ef492d4cfa6832f622d08b719",
     "scripts/verify-npc-jun-climb-rig-v165.mjs": "a2094edcddea1f9e3b3d4333390b793d9661ec760e49151a81008a9ac954e88a",
     "scripts/verify-npc-life-v136.mjs": "7984aa4dd6e544dcf31bf5a2f32173786c9155e0d359d928e9c80c94f544cac0",
     "scripts/verify-npc-matte-apertures-v164.mjs": "f9e20a36782bd44d0efac0bbb20b4bcb9ca27a3e539460c272b6f70aed053a50",
