@@ -5,6 +5,8 @@ import { HUB_ANNEXES_V137 } from '../src/hub-annex-registry-v137.js';
 import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
 import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
 import { drawHubSteelServicesV133 } from '../src/hub-authored-composition-v133.js';
+import { HubGame as ProvingGroundHubV81, HUB_ANNEX_MODULE_ART_V82,
+  PROVING_GROUND_ASSETS_V81, PROVING_GROUND_TARGETS_V81 } from '../src/hub-v81-runtime.js';
 import { getHubRoomLifePlanV136 } from '../src/hub-room-life-v136.js';
 import { HUB_ROOM_SERVICE_DETAILS_V165, getHubRoomServiceDetailPlanV165,
   getHubRoomServiceMotionV165, drawHubRoomServiceDetailsV165 } from '../src/hub-room-service-details-v165.js';
@@ -101,6 +103,55 @@ test('the medical mount clears the native service pipe and its lower wall clamp 
   assert.ok(clamps.some(rectangle => overlap(historical, rectangle)), 'The native failure remains represented');
   for (const rectangle of painted)
     assert.ok(!overlap(item.clearanceBounds, rectangle), 'The whole clearance envelope must clear ' + rectangle.role);
+});
+
+test('the range service mount clears the actual support rails and every fully deployed native target', () => {
+  const rail = { complete: true, naturalWidth: 256, naturalHeight: 256 };
+  const bracket = { complete: true, naturalWidth: 256, naturalHeight: 256 };
+  const target = { complete: true, naturalWidth: 2048, naturalHeight: 1024 };
+  const footprints = [], targetSources = [];
+  const ctx = {
+    lineWidth: 1, save() {}, restore() {},
+    drawImage(image, sx, sy, sw, sh, x, y, w, h) {
+      const role = image === rail ? 'native-target-support-rail'
+        : image === bracket ? 'native-target-foot-bracket' : 'native-fully-deployed-target';
+      footprints.push({ x, y, w, h, role });
+      if (image === target) targetSources.push({ sx, sy, sw, sh });
+    },
+    strokeRect(x, y, w, h) {
+      const radius = this.lineWidth / 2;
+      footprints.push({ x: x - radius, y: y - radius, w: w + radius * 2,
+        h: h + radius * 2, role: 'native-active-target-outline' });
+    }
+  };
+  const host = {
+    annexModularImagesV72: new Map([[HUB_ANNEX_MODULE_ART_V82.ladder, rail],
+      [HUB_ANNEX_MODULE_ART_V82.catwalk, bracket]]),
+    provingGroundImagesV81: new Map([[PROVING_GROUND_ASSETS_V81.target.runtimeId, target]]),
+    // Unit measurement of the union of every native active silhouette. This
+    // does not make nine targets active together in the playable session.
+    provingGroundStateV81: { targets: PROVING_GROUND_TARGETS_V81.map(entry => ({
+      id: entry.id, status: 'active', exposureRemaining: 0
+    })) },
+    drawProvingTargetSupportsV82(context) {
+      return ProvingGroundHubV81.prototype.drawProvingTargetSupportsV82.call(this, context);
+    }
+  };
+  ProvingGroundHubV81.prototype.drawProvingTargetsV81.call(host, ctx);
+  const rails = footprints.filter(entry => entry.role === 'native-target-support-rail');
+  const targets = footprints.filter(entry => entry.role === 'native-fully-deployed-target');
+  assert.ok(rails.length >= PROVING_GROUND_TARGETS_V81.length);
+  assert.equal(targets.length, PROVING_GROUND_TARGETS_V81.length);
+  const atlas = PROVING_GROUND_ASSETS_V81.target.atlas;
+  assert.ok(targetSources.every(source => source.sx === atlas.frameWidth * 3 && source.sy === 0),
+    'Measure the actual fully emerged frame3, not only the small stowed target');
+  const item = compositions.get('proving-ground').serviceDetailsV165.items[0];
+  const historical = { ...item.clearanceBounds,
+    x: 1200 - item.bounds.w / 2 - (item.bounds.x - item.clearanceBounds.x) };
+  assert.ok(rails.some(entry => overlap(historical, entry)), 'Historical centre1200 crosses native supports');
+  assert.ok(targets.some(entry => overlap(historical, entry)), 'Historical centre1200 crosses a deployed target');
+  for (const footprint of footprints)
+    assert.ok(!overlap(item.clearanceBounds, footprint), 'The full service clearance must avoid ' + footprint.role);
 });
 
 test('a newly occupied authored bay is explicitly omitted instead of moving the assembly somewhere arbitrary', () => {

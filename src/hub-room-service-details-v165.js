@@ -38,7 +38,7 @@ export const HUB_ROOM_SERVICE_DETAILS_V165 = freeze({
   'mire-archives': service('air', 'evidence-storage-conditioned-air-return', 'ARC 01', 1240),
   'synthetic-bay': service('electrical', 'clean-diagnostic-power-isolation', 'SYN 01', 640),
   cctv: service('signal', 'camera-line-termination-and-recording-backup', 'SEC 01', 800, 248),
-  'proving-ground': service('signal', 'range-observation-intercom-and-safety-call', 'TIR 01', 1200, 248),
+  'proving-ground': service('signal', 'range-observation-intercom-and-safety-call', 'TIR 01', 1040, 248),
   morgue: service('hygiene', 'forensic-room-extraction-and-water-isolation', 'MED 02', 1200, 248),
   'escape-pods': service('electrical', 'evacuation-service-lighting-and-local-isolation', 'EVA 01', 1080, 400),
   durandal: service('air', 'processor-cooling-return-and-filter-access', 'CPU 01', 1400, 400),

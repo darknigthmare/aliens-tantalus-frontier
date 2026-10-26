@@ -2761,7 +2761,7 @@
     "src/hub-lift-transit-v163.js": "1d31e6ca7367b2453f846f46f09afc883d9e99500796ae7ff53f90d95ce4038a",
     "src/hub-room-dressing-v134.js": "c1b5d8364ccf714ea64a540276197744537829d2524c0407c83b51adf822e8fd",
     "src/hub-room-life-v136.js": "ee7433e6b7d663d4c4cee0da5a366617b0141cafad0a63e0928e4924e3b6b7f3",
-    "src/hub-room-service-details-v165.js": "694fd7ffcea452c335586e0363070754f08d6ef5dbed9538615fc2b7d7a1a0d2",
+    "src/hub-room-service-details-v165.js": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
     "src/hub-v51-runtime.js": "1cc35c82a83910dc154305f952118194162cde11382388734529bb5a73a54a4e",
     "src/hub-v52-runtime.js": "7b67eb2cb7c5281e3ae0acd69adfb252db555a00f879194a553012b8d53efb4c",
     "src/hub-v62-runtime.js": "6af03c23ec837458b45ce4e1c9d62e7d8b436ac5e54d2037528616730cd21cd9",
@@ -6598,7 +6598,7 @@
         [
           "src/hub-room-service-details-v165.js",
           "Non épinglé en V162",
-          "694fd7ffcea452c335586e0363070754f08d6ef5dbed9538615fc2b7d7a1a0d2",
+          "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
           "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes.",
           "scripts/verify-hub-service-details-v165.mjs"
         ],
@@ -15847,7 +15847,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "84299803de31dec29074ebba4ff8bfbe43aa9ab141e704e5bad5172ee74166f4",
+  "workbookSha256": "ac383e23c2603576c0b59d0dae83bb5cf2ca699f08cd53b79dc5a0e535946bab",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -16300,7 +16300,7 @@
       {
         "path": "src/hub-room-service-details-v165.js",
         "previousSha256": null,
-        "currentSha256": "694fd7ffcea452c335586e0363070754f08d6ef5dbed9538615fc2b7d7a1a0d2",
+        "currentSha256": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs"
@@ -21213,7 +21213,7 @@
       {
         "path": "src/hub-room-service-details-v165.js",
         "previousSha256": null,
-        "currentSha256": "694fd7ffcea452c335586e0363070754f08d6ef5dbed9538615fc2b7d7a1a0d2",
+        "currentSha256": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs"
@@ -21636,7 +21636,7 @@
     "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
     "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
     "scripts/verify-hub-lift-transit-v163.mjs": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
-    "scripts/verify-hub-service-details-v165.mjs": "b5d8500f5125efb77fdb3a794f3307a24f530fb7a842e95f4e1097e6a152f8c4",
+    "scripts/verify-hub-service-details-v165.mjs": "b1e7733d23718fee9ce67c45d2f37f24c06c529a6060d6144b4b33ed38ef9b54",
     "scripts/verify-legacy-operations-v131.mjs": "950fbaa2c7b92d1b062ac7b933862c52c7787ca00671e1922213686100ec3e28",
     "scripts/verify-motion-tracker-v160.mjs": "105ce9312dafe96826765fa5fb9c065bc2015b8e91ca441f7467845cd10a40d4",
     "scripts/verify-native-rig-catalog-v163.mjs": "3264d4009437b84e25979fb7deeb20b1bc401cd2d12d1721b9a1566fde24afe3",
