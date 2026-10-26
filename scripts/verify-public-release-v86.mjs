@@ -512,7 +512,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicAdmissionsV122(root, { strict: true });
   await verifyPublicAdmissionsV123(root, { strict: true });
   await verifyPublicAdmissionsV163(root);
-  await verifyPublicCostumeAdmissionsV165(root, { strict: true });
+  await verifyPublicCostumeAdmissionsV165(root, { strict: true, built });
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

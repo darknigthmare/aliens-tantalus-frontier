@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, mkdirSync, copyFileSync, unlinkSync, rmSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { WEAPONS } from '../src/content-core-v50.js';
 import { createDefaultSave, migrateSave, applyCostume } from '../src/save.js';
 import { getCostumeV119, canEquipCostumeV119 } from '../src/franchise-costumes-v119.js';
@@ -25,7 +28,9 @@ import { PLAYER_APPEARANCE_PREVIEW_MODES_V128, samplePlayerAppearancePreviewV128
 import { resolveHeldWeaponProfileV125 } from '../src/held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125 } from '../src/held-weapon-renderer-v125.js';
 import { renderCostumeArchiveCardV119, buildCostumeArchivesModelV119 } from '../src/costume-ui-v119.js';
-import { publicCostumePathAdmissionV165, verifyPublicCostumeAdmissionsV165 } from './public-costume-admissions-v165.mjs';
+import { publicCostumePathAdmissionV165, verifyPublicCostumeAdmissionsV165,
+  PUBLIC_COSTUME_ASSET_PATHS_V165, PUBLIC_COSTUME_RUNTIME_PATHS_V165,
+  PUBLIC_COSTUME_SCRIPT_PATHS_V165 } from './public-costume-admissions-v165.mjs';
 
 const root = new URL('../', import.meta.url);
 const allAssets = [...PLAYER_BODY_RIG_ASSETS_V125, ...PLAYER_MODULAR_RIG_ASSETS_V126,
@@ -208,4 +213,26 @@ test('V165 exact admission rejects extra costume assets and retains independent 
   assert.equal(publicCostumePathAdmissionV165('src/unrelated.js'),null);
   const result=await verifyPublicCostumeAdmissionsV165(new URL('../',import.meta.url).pathname,{strict:true});
   assert.equal(result.nativePartAtlases,17);assert.equal(result.previewPoseCells,240);assert.equal(result.newPlayablePrecompositedSkins,0);
+});
+
+test('V165 built admission omits tooling while source QA and every runtime/PNG input remain mandatory',async()=>{
+  const fixture=mkdtempSync(join(tmpdir(),'atf-costume-admission-v165-'));
+  const copy=path=>{const target=join(fixture,path);mkdirSync(dirname(target),{recursive:true});
+    copyFileSync(fileURLToPath(new URL('../'+path,import.meta.url)),target);};
+  try{
+    assert.equal(PUBLIC_COSTUME_ASSET_PATHS_V165.length,32);
+    assert.equal(PUBLIC_COSTUME_RUNTIME_PATHS_V165.length,3);
+    for(const path of [...PUBLIC_COSTUME_ASSET_PATHS_V165,...PUBLIC_COSTUME_RUNTIME_PATHS_V165])copy(path);
+    const built=await verifyPublicCostumeAdmissionsV165(fixture,{strict:true,built:true});
+    assert.equal(built.nativePartAtlases,17);assert.equal(built.previewPoseCells,240);
+    for(const path of PUBLIC_COSTUME_SCRIPT_PATHS_V165.filter(path=>!path.endsWith('.py')))copy(path);
+    await assert.rejects(()=>verifyPublicCostumeAdmissionsV165(fixture,{strict:true}),/qa-costume-atlases-v165\.py/);
+    copy('scripts/qa-costume-atlases-v165.py');
+    assert.equal((await verifyPublicCostumeAdmissionsV165(fixture,{strict:true,built:false})).ok,true);
+    const runtime=PUBLIC_COSTUME_RUNTIME_PATHS_V165[1];unlinkSync(join(fixture,runtime));
+    for(const built of [false,true])await assert.rejects(()=>verifyPublicCostumeAdmissionsV165(fixture,{strict:true,built}),/ENOENT/);
+    copy(runtime);
+    const asset=PUBLIC_COSTUME_ASSET_PATHS_V165.at(-1);unlinkSync(join(fixture,asset));
+    for(const built of [false,true])await assert.rejects(()=>verifyPublicCostumeAdmissionsV165(fixture,{strict:true,built}),/ENOENT/);
+  }finally{rmSync(fixture,{recursive:true,force:true});}
 });

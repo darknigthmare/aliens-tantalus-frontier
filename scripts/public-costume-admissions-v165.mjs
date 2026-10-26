@@ -53,8 +53,9 @@ async function bytesAt(root, path) {
   const bytes = await readFile(current); assert.ok(bytes.length); return bytes;
 }
 
-export async function verifyPublicCostumeAdmissionsV165(projectRoot, { strict = false } = {}) {
+export async function verifyPublicCostumeAdmissionsV165(projectRoot, { strict = false, built = false } = {}) {
   const root = resolve(projectRoot);
+  assert.equal(typeof built, 'boolean', 'The source/built costume admission mode must be explicit.');
   assert.equal((await lstat(root)).isSymbolicLink(), false);
   assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 8);
   assert.equal(PLAYER_COSTUME_LINKED_OUTFITS_V165.length, 2);
@@ -84,7 +85,10 @@ export async function verifyPublicCostumeAdmissionsV165(projectRoot, { strict = 
     assert.deepEqual([bytes.readUInt32BE(16), bytes.readUInt32BE(20)], [asset.sourceWidth, asset.sourceHeight]);
     assert.equal(bytes[24], 8); assert.equal(bytes[25], 6); assert.equal(bytes[28], 0);
   }
-  for (const path of [...PUBLIC_COSTUME_RUNTIME_PATHS_V165, ...PUBLIC_COSTUME_SCRIPT_PATHS_V165]) await bytesAt(root, path);
+  for (const path of PUBLIC_COSTUME_RUNTIME_PATHS_V165) await bytesAt(root, path);
+  // The distribution deliberately omits Node/Python tooling. Runtime inputs
+  // retain identical admissions in both modes; source still requires its QA.
+  if (!built) for (const path of PUBLIC_COSTUME_SCRIPT_PATHS_V165) await bytesAt(root, path);
   if (strict) {
     const walk = async folder => {
       for (const entry of await readdir(join(root, folder), { withFileTypes: true })) {
