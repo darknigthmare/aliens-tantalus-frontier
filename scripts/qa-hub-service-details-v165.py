@@ -275,10 +275,12 @@ def inspect_scene(page, config, label, expected_room):
                 return [...expected.getImageData(Math.floor(x),Math.floor(y),1,1).data];
               }
               return d.items.flatMap(item=>{const b=item.bounds;
-                // Both signatures are interior full-colour pixels. The code
-                // plate point is beyond the short engraved text. A missing
-                // assembly cannot pass on the dark wall colour alone.
-                return [{kind:'base',dx:2,dy:2,color:'#2b4543'},
+                // Every kind leaves the lower-right band below its cabinets,
+                // pipes, grilles and valves, beyond the short code plate.
+                // Keep this base signature far from outer fastening edges.
+                // The bright code-plate point is beyond its engraved text;
+                // a missing assembly cannot pass on dark wall colour alone.
+                return [{kind:'base',dx:b.w-16,dy:b.h-4,color:'#2b4543'},
                   {kind:'code-plate',dx:45,dy:b.h-4,color:'#b1b6a3'}].map(point=>{
                   const x=b.x+point.dx-camera,y=b.y+point.dy,
                     visible=x>=0&&y>=0&&x<canvas.width&&y<canvas.height;

@@ -23,7 +23,7 @@ export const HUB_ROOM_SERVICE_DETAILS_V165 = freeze({
   'cryo-bay': service('hygiene', 'stasis-bay-clean-gas-and-pressure-isolation', 'CRY 01', 460, 320, 96),
   'crew-quarters': service('habitat', 'berth-air-return-and-call-point', 'HAB 01', 460, 320, 96, 42),
   mess: service('habitat', 'dining-air-return-and-service-call', 'HAB 02', 860),
-  medical: service('hygiene', 'bedside-clean-gas-isolation-and-service-access', 'MED 01', 1080, 400, 96, 42),
+  medical: service('hygiene', 'bedside-clean-gas-isolation-and-service-access', 'MED 01', 1080, 424, 96, 42),
   'science-lab': service('hygiene', 'analysis-clean-gas-isolation-and-extraction', 'LAB 01', 1000),
   quarantine: service('air', 'sealed-room-extraction-and-filter-access', 'ISO 01', 750, 320, 96),
   armory: service('electrical', 'secure-issue-lighting-and-test-circuit-isolation', 'ARM 01', 880, 320, 96, 42),
