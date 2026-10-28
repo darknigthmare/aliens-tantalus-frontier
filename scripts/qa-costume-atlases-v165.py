@@ -211,7 +211,7 @@ try:
   page.locator('#costume-archives-v119 [data-costume-id="'+outfit['costumeId']+'"]').click()
   selection=page.evaluate('o=>{const p=__ATF_V51__.saveSystem.data.player;return {expected:o,actual:{costumeId:p.costumeId,slots:structuredClone(p.appearanceV126.slots)},equal:JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots)};}',outfit)
   report.setdefault('buttonSelections',[]).append(selection);print('SELECTION '+json.dumps(selection,ensure_ascii=False),flush=True)
-  page.wait_for_function('o=>{const p=__ATF_V51__.saveSystem.data.player;return p.costumeId===o.costumeId&&JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots);}',arg=outfit)
+  page.wait_for_function('o=>{const p=__ATF_V51__.saveSystem.data.player,s=p.appearanceV126.slots;return p.costumeId===o.costumeId&&Object.keys(s).length===Object.keys(o.slots).length&&Object.entries(o.slots).every(([k,v])=>Object.hasOwn(s,k)&&s[k]===v);}',arg=outfit)
   check(slug+': real costume button equips all six parts without identity/resources/issued gear/J2 changes',inventory(page)==before)
   screenshot(page,'[data-archive-costume="'+outfit['costumeId']+'"]',slug+'-native-archive-card.png','native-archive-ui')
   open_view(page,'hub');page.wait_for_function('()=>__ATF_HUB__?.running&&__ATF_HUB__.player.playerAppearanceVisualV126?.drawn')
