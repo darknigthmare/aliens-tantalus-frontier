@@ -222,6 +222,7 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
   'docs/forge/xeno-trials/V165-PARALLEL-COMPLETION.md',
   'docs/forge/xeno-trials/V164-NPC-MATTE.md',
   'docs/forge/xeno-trials/V163-EXCEL-COMPLETION.md',

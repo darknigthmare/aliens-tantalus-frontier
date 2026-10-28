@@ -21764,7 +21764,7 @@
     "scripts/verify-player-appearance-v126.mjs": "f37afd4e4735ee84080511fe2f1d6ce53e9114fe87def495d8e9ebea72c25c6e",
     "scripts/verify-player-locomotion-rig-v129.mjs": "542ba6a0da7988ed264cd18db280c6f2da27d0ad6a5928212bc112a7b9581fd6",
     "scripts/verify-player-weapon-rig-v125.mjs": "2cc74b21db33c540bc2466c444aca7a87f507e012e47d4895f38816bc16da98b",
-    "scripts/verify-public-release-v86.mjs": "0b227fa2dcb62e1824854e72ea46fd61cfbc6b066786bd5c5d2d4b404e6eb090",
+    "scripts/verify-public-release-v86.mjs": "0e26815e484d21078005a77c0d984705bae81bf7cf6d90ce140ceaa0da9bf532",
     "scripts/verify-release-artifact-v143.mjs": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
     "scripts/verify-reload-presentation-v163.mjs": "7751841c22a3c8daa104cc9112b6df6406e040f1e385a67ff9561913287c7683",
     "scripts/verify-trials-navigation-v163.mjs": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
