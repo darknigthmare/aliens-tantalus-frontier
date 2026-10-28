@@ -227,6 +227,9 @@ export function withHubNpcInterdeckRoutesV165(Base) {
           this.npcInterdeckStateV165.routes[d.id]={actor:null,origin:null,returned:null,nativeHandoff:null,admissionReady:true};
       }
       this.npcInterdeckBodiesV165=new Map();this.npcInterdeckObservedV165=new Map();this.npcInterdeckRestoringV165=true;
+      // A new start restores this Save's physical owners. A cohort left on
+      // the reused engine by an earlier timetable is not a restored source.
+      this.npcs=[];
       this.npcInterdeckDoorsV165=HUB_DECKS.map((_,deck)=>doorsFor(deck).map(door=>({...door,progress:
         Math.max(0,...Object.values(this.npcInterdeckStateV165.routes).map(e=>e.actor?.bulkheadProgress?.[door.id]||0))})));
       if(!this.junClimbImageV165&&typeof Image==='function'){this.junClimbImageV165=new Image();this.junClimbImageV165.src=JUN_CLIMB_ASSET_V165.path;}
@@ -318,9 +321,27 @@ export function withHubNpcInterdeckRoutesV165(Base) {
     }
     npcInterdeckDutyV165(d) {return annexNpcDutiesV141(this.npcRoutineResolutionsV62,this).some(w=>w.crewId===d.crewId&&w.roomId===d.annexRoomId);}
     createNpcs(deck) {
-      this.prepareNpcInterdeckV165();const natives=super.createNpcs(deck);
+      this.prepareNpcInterdeckV165();let natives=super.createNpcs(deck);
       if(this.npcInterdeckSandboxV165||!this.npcInterdeckStateV165)return natives;
-      for(const d of NPC_INTERDECK_DEFINITIONS_V165){const source=natives.find(a=>a.crewId===d.crewId);
+      for(const d of NPC_INTERDECK_DEFINITIONS_V165){
+        const entry=this.npcInterdeckStateV165.routes[d.id],physical=this.npcInterdeckObservedV165.get(d.crewId);
+        const resolution=this.npcRoutineResolutionsV62?.get(d.crewId);
+        const primary=d.legacyRouteId&&this.getNpcServiceActorV161?.(d.legacyRouteId);
+        const traffic=this.getNpcServiceTrafficActorsV163?.().find(a=>a.crewId===d.crewId);
+        // A strategic refresh spends no physical time. Keep the actual native
+        // object, including any position it really reached, instead of making
+        // a fresh timetable sample its next observed origin. Real service and
+        // courtesy owners, emergencies and care keep their existing priority.
+        const keepObserved=this.running===false&&!this.npcInterdeckBodiesV165.has(d.id)
+          &&entry.retained?.source==='native-observed-body'&&physical&&physical.alive!==false&&!physical.downed
+          &&physical.y===532&&d.origins.includes(physical.roomId)&&!primary&&!traffic
+          &&!super.hubNpcLeaseOwnerV163?.(d.crewId)&&resolution&&!resolution.alert&&!resolution.missionAssigned&&!resolution.needsCare;
+        if(keepObserved){
+          natives=natives.filter(a=>a.crewId!==d.crewId);
+          if(deckOf(physical.roomId)===deck)natives.push(physical);
+          continue;
+        }
+        const source=natives.find(a=>a.crewId===d.crewId);
         if(source&&!this.npcInterdeckBodiesV165.has(d.id)&&d.origins.includes(source.roomId))this.npcInterdeckObservedV165.set(d.crewId,source);}
       this.prepareNpcInterdeckV165();const ids=new Set(this.getNpcInterdeckActorsV165().map(a=>a.crewId));
       return[...natives.filter(a=>!ids.has(a.crewId)&&!this.hubNpcLeaseReentryBlockedV163(a.crewId)),...this.getNpcInterdeckActorsV165(deck).filter(a=>deckOf(a.roomId)===deck)];
@@ -380,6 +401,8 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       const wasRunning=this.running,result=super.update(delta);
       if(!wasRunning||!this.running||!finite(delta)||delta<=0||this.npcInterdeckSandboxV165)return result;
       const dt=Math.min(delta,.1);
+      const physicalPeers=[...(this.getNpcServiceOwnedActorsV163?.()||[]),
+        ...(this.getNpcServiceTrafficActorsV163?.()||[]),...(this.npcs||[])];
       for(let deck=0;deck<HUB_DECKS.length;deck++) {
         const visible=this.state?.deck===deck?this.doorStates:[];
         for(const door of this.npcInterdeckDoorsV165[deck]) {
@@ -387,7 +410,14 @@ export function withHubNpcInterdeckRoutesV165(Base) {
           const demand=this.hubNpcBulkheadDemandV158({...door,deckIndex:deck});
           if(actual){if(demand)actual.progress=Math.min(1,actual.progress+(1-actual.progress)*Math.min(1,dt*7));door.progress=actual.progress;}
           else door.progress+=(Number(demand)-door.progress)*Math.min(1,dt*7);
-          if(this.hubTrainingV132?.lockedDoorIds?.includes(door.id))door.progress=0;
+          if(this.hubTrainingV132?.lockedDoorIds?.includes(door.id)) {
+            const collider=getHubBulkheadColliderV134(door);
+            const mainPlayer=this.state?.deck===deck&&!this.isAnnexActiveV71?.()&&!this.ventActorV62?this.player:null;
+            const occupied=physicalPeers.some(actor=>deckOf(actor.roomId)===deck&&overlap(actor,collider))
+              ||Boolean(mainPlayer&&overlap(mainPlayer,collider));
+            door.progress=occupied?Math.max(.82,door.progress):0;
+            if(actual)actual.progress=door.progress;
+          }
         }
       }
       let persist=false,rebuild=false;

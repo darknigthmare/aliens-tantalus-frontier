@@ -1,8 +1,9 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-parallel-completion-v165';
+const CACHE = 'atf-v143-human-ship-polish-v167';
 const SHELL = Object.freeze([
   '/src/npc-interdeck-passage-v165.js',
   '/src/npc-interdeck-routes-v165.js',
+  '/src/npc-station-relays-v166.js',
   '/src/npc-jun-climb-rig-v165.js',
   '/src/npc-lift-transit-v165.js',
   '/src/npc-cal-logistics-route-v165.js',

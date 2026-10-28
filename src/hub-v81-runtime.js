@@ -201,7 +201,11 @@ export class HubGame extends HubGameV71 {
       super.interact();
       return;
     }
-    if (this.nearestAnnexStationV71()) this.armProvingGroundV81();
+    if (this.nearestAnnexStationV71()) { this.armProvingGroundV81(); return; }
+    // The range owns its live qualification controls. Outside a live session,
+    // the existing crew interaction must still reach the nearby real actor.
+    if (!['armed', 'active'].includes(this.provingGroundStateV81.phase)
+      && this.nearestAnnexNpcV141?.()) return super.interact();
   }
 
   statusPrompt() {

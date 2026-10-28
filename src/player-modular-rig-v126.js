@@ -274,9 +274,20 @@ export function resolvePlayerModularRigV126({bodyRig,appearance,images}={}) {
 export function createPlayerNeutralPoseV126(bodyRig) {
   if(!bodyRig?.eligible || !validPoint(bodyRig.shoulders?.near) || !validPoint(bodyRig.shoulders?.far)) return null;
   const s=bodyRig.scale,f=bodyRig.facing;
-  const sway=bodyRig.moving?Math.sin(finite(bodyRig.timeSeconds)*4)*4*s:0;
-  const grip=point(bodyRig.shoulders.near.x+f*(8*s+sway),bodyRig.shoulders.near.y+55*s);
-  const support=point(bodyRig.shoulders.far.x-f*(8*s+sway),bodyRig.shoulders.far.y+55*s);
+  const gait=bodyRig.locomotionV129;
+  const active=gait && ['walk','run','crouch-move','settling'].includes(gait.mode)
+    && Number.isFinite(gait.phase) && Number.isFinite(gait.presentationV136?.duty);
+  const envelope=active?Math.max(0,Math.min(1,finite(gait.presentationV136?.motionEnvelope))):0;
+  // Empty hands follow the same observed stride as their opposite legs. A
+  // separate render-time oscillator drifts out of step at every speed and
+  // can move the arms without a newly observed step. World-space phase also
+  // preserves the opposition during backpedalling and depth-label turns.
+  // The existing one-shot stop envelope returns both arms to rest; a body
+  // without observed locomotion keeps its neutral pose instead of inventing
+  // a walk from its velocity or the wall clock.
+  const sway=active?Math.sin((gait.phase-gait.presentationV136.duty/2)*Math.PI*2)*4*s*envelope:0;
+  const grip=point(bodyRig.shoulders.near.x+f*8*s+sway,bodyRig.shoulders.near.y+55*s);
+  const support=point(bodyRig.shoulders.far.x-f*8*s-sway,bodyRig.shoulders.far.y+55*s);
   return freeze({unarmed:true,visible:false,grip,support,serviceHand:support,translation:point(0,0)});
 }
 

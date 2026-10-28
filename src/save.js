@@ -23,6 +23,7 @@ import { normalizeNpcAnnexWorkpostRoutesV165 } from './npc-annex-workpost-routes
 import { normalizeNpcCalLogisticsRouteV165 } from './npc-cal-logistics-route-v165.js';
 import { normalizeNpcInterdeckRoutesV165 } from './npc-interdeck-routes-v165.js';
 import { normalizeNpcInterdeckPassageV165 } from './npc-interdeck-passage-v165.js';
+import { normalizeNpcStationRelaysV166, normalizeNpcSharedLiftOwnersV166 } from './npc-station-relays-v166.js';
 import { normalizeNpcServiceTrafficV163 } from './npc-service-traffic-v163.js';
 import { normalizeHubLiftTransitV163 } from './hub-lift-transit-v163.js';
 import { createConvoyReturnHistoryV162, normalizeConvoyReturnHistoryV162,
@@ -328,6 +329,7 @@ export function createDefaultSave(profile = 1) {
       npcAnnexWorkpostRoutesV165: normalizeNpcAnnexWorkpostRoutesV165(),
       npcCalLogisticsRouteV165: normalizeNpcCalLogisticsRouteV165(),
       npcInterdeckRoutesV165: normalizeNpcInterdeckRoutesV165(),
+      npcStationRelaysV166: normalizeNpcStationRelaysV166(),
       npcInterdeckPassageV165: normalizeNpcInterdeckPassageV165(),
       npcServiceTrafficV163: normalizeNpcServiceTrafficV163(),
       hubLiftTransitV163: normalizeHubLiftTransitV163(),
@@ -2152,6 +2154,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.npcAnnexWorkpostRoutesV165 = normalizeNpcAnnexWorkpostRoutesV165(hub.npcAnnexWorkpostRoutesV165);
   migrated.hub.npcCalLogisticsRouteV165 = normalizeNpcCalLogisticsRouteV165(hub.npcCalLogisticsRouteV165);
   migrated.hub.npcInterdeckRoutesV165 = normalizeNpcInterdeckRoutesV165(hub.npcInterdeckRoutesV165);
+  Object.assign(migrated.hub, normalizeNpcSharedLiftOwnersV166(hub));
   migrated.hub.npcInterdeckPassageV165 = normalizeNpcInterdeckPassageV165(hub.npcInterdeckPassageV165);
   migrated.hub.npcServiceTrafficV163 = normalizeNpcServiceTrafficV163(hub.npcServiceTrafficV163);
   migrated.hub.hubLiftTransitV163 = normalizeHubLiftTransitV163(hub.hubLiftTransitV163);

@@ -27,6 +27,19 @@ Les assertions exécutables sont dans `scripts/verify-parallel-completion-v165.m
 
 La configuration CI conserve cinq workflows applicables. Le workflow de continuation V163 ajoute dix jobs natifs aux cinq jobs existants : joueur, vaisseau, costumes, rigs, postes locaux, Cal et quatre services inter-ponts. Cette matrice de quinze jobs est une configuration, pas un résultat d’exécution. Son empreinte est conservée dans le suivi V165 ; aucune conclusion CI n’est renseignée avant ses reçus propres.
 
+Les six entrées `newWorkstreamsV165` regroupent les dix jobs natifs V165 selon la correspondance suivante. Le chantier archives est vérifié par l’inventaire et les gardes documentaires, sans parcours navigateur propre.
+
+| Chantier du suivi | Jobs natifs V165 | Nombre |
+| --- | --- | --- |
+| `C165-COSTUMES` | `costumes-v165` | 1 |
+| `C165-RIGS` | `rigs-v165` | 1 |
+| `C165-ROUTES` | `workposts-v165`, `cal-v165`, `david-v165`, `inez-v165`, `maksim-v165`, `jun-v165` | 6 |
+| `C165-PLAYER` | `player-v165` | 1 |
+| `C165-SHIP` | `ship-v165` | 1 |
+| `C165-ARCHIVES` | Inventaire des sources et vérifications documentaires ; aucun job natif propre | 0 |
+
+Le total V165 est donc de dix jobs natifs (1 + 1 + 6 + 1 + 1), auxquels s’ajoutent les cinq jobs de continuation historiques de la matrice.
+
 V163 a été livrée sur `043bb60` puis fusionnée par `8a934b7` : 2 993 tests, 16 profils, 1 566 contrôles et 835 captures. V164 a été livrée sur `21b70e` puis fusionnée par `ebbdbb6` : 3 003 tests dans 172 fichiers ; alpha 61 contrôles et 26 captures ; complément Trials séparé de 65 contrôles et 42 captures ; quatre workflows CI et huit jobs réussis. Les champs `followupV164` et `07_Recette` restent des instantanés historiques de prépublication, avec l’alias documentaire `07_RecetteV164`. `historicalDeliveryV164` consigne la livraison constatée. Aucun de ces résultats n’est transféré à V165.
 
 Forge et son éditeur restent différés par l’utilisateur. Les priorités `forge-narrative-events` et `forge-test-persistence` gardent l’état différé ; les 32 fichiers Forge de `deferredForge.sourceSha256` conservent leurs octets exacts. Ce chantier ne réouvre ni ne clôture Forge.

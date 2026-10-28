@@ -56,6 +56,7 @@ def check(label,condition):
 
 
 def open_view(page,view):
+ if view!='hub' and page.locator('#exit-hub').is_visible():page.locator('#exit-hub').click()
  menu=page.locator('#menu-toggle')
  if menu.is_visible() and 'open' not in (page.locator('.rail').get_attribute('class') or '').split():menu.click()
  page.locator('[data-view="'+view+'"]').click()
@@ -205,9 +206,16 @@ try:
   page.goto(args.base,wait_until='domcontentloaded');page.locator('#title-start').click();page.locator('#title-options').click()
   page.locator('#save-import').set_input_files({'name':'costumes-v165.json','mimeType':'application/json','buffer':initial})
   page.wait_for_function("()=>__ATF_V51__?.saveSystem.data.player.name==='QA Costumes V165'")
-  before=inventory(page);open_view(page,'archives')
+  # Costume archives are part of Echo-9, not the mission Archives view.
+  before=inventory(page);open_view(page,'crew')
+  page.locator('[data-panel="crew"] #costume-archives-v119').wait_for(state='visible')
   page.locator('#costume-archives-v119 [data-costume-id="'+outfit['costumeId']+'"]').click()
-  page.wait_for_function('o=>{const p=__ATF_V51__.saveSystem.data.player;return p.costumeId===o.costumeId&&JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots);}',arg=outfit)
+  selection=page.evaluate('o=>{const p=__ATF_V51__.saveSystem.data.player;return {expected:o,actual:{costumeId:p.costumeId,slots:structuredClone(p.appearanceV126.slots)},equal:JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots)};}',outfit)
+  report.setdefault('buttonSelections',[]).append(selection);print('SELECTION '+json.dumps(selection,ensure_ascii=False),flush=True)
+  # Preserve the optional null slots across the polling utility context.
+  # Passing the nested dictionary directly drops those entries in this
+  # tooling version; the six-slot native result must still match exactly.
+  page.wait_for_function('raw=>{const o=JSON.parse(raw),p=__ATF_V51__.saveSystem.data.player,s=p.appearanceV126.slots;return p.costumeId===o.costumeId&&Object.keys(s).length===Object.keys(o.slots).length&&Object.entries(o.slots).every(([k,v])=>Object.hasOwn(s,k)&&s[k]===v);}',arg=json.dumps(outfit))
   check(slug+': real costume button equips all six parts without identity/resources/issued gear/J2 changes',inventory(page)==before)
   screenshot(page,'[data-archive-costume="'+outfit['costumeId']+'"]',slug+'-native-archive-card.png','native-archive-ui')
   open_view(page,'hub');page.wait_for_function('()=>__ATF_HUB__?.running&&__ATF_HUB__.player.playerAppearanceVisualV126?.drawn')

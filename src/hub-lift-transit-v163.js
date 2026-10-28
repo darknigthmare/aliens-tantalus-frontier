@@ -108,7 +108,7 @@ export function liftDestinationPeersV163(hub, deck) {
     ? [hub.npcCirculationActorV158, hub.npcAnnexActorV159, hub.getNpcMedicalActorV162(),
       hub.getNpcServiceActorV161('idris-engine'), hub.getNpcServiceActorV161('leila-galley'),
       ...hub.getNpcAnnexServiceActorsV163(), ...(hub.getNpcServiceTrafficActorsV163?.() || []),
-      ...(hub.getNpcInterdeckActorsV165?.() || [])]
+      ...(hub.getNpcInterdeckActorsV165?.() || []), ...(hub.getNpcStationRelayActorsV166?.() || [])]
     : [snapshot.npcCirculationV158?.actor, snapshot.npcAnnexCirculationV159?.actor,
       ...(snapshot.npcServiceTrafficV163?.actors || []),
       ...['npcServiceRoutesV161', 'npcMedicalRouteV162', 'npcAnnexRoutesV163']

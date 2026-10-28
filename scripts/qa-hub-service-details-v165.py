@@ -255,13 +255,57 @@ def inspect_scene(page, config, label, expected_room):
             probe = page.evaluate(r"""() => {const h=__ATF_HUB__,s=h.getSnapshot(),d=s.hubRoomLifeV136.current.serviceDetailsV165;
               const canvas=document.querySelector('#hub-canvas'),ctx=canvas.getContext('2d');
               const camera=h.currentAnnexV71?.()?h.annexCameraV71.x:h.camera.x;
-              return d.items.map(item=>{const b=item.bounds,x=b.x+2-camera,y=b.y+2;
-                return {id:item.id,x,y,canvasWidth:canvas.width,canvasHeight:canvas.height,
-                  rgba:x>=0&&y>=0&&x<canvas.width&&y<canvas.height?[...ctx.getImageData(Math.floor(x),Math.floor(y),1,1).data]:null};});} """)
-            check(label + ': admitted hardware also reaches visible native canvas pixels',
-                  all(item['rgba'] and item['rgba'][3] >= 240
-                      and max(abs(item['rgba'][i]-color) for i, color in enumerate([43, 69, 67])) <= 14 for item in probe))
+              const annexLighting=!!h.currentAnnexV71?.();
+              // An independent, detached reference computes only expected
+              // source-over colour. Observed pixels always come from the
+              // original live hub canvas; no game draw hook/state is changed.
+              const reference=document.createElement('canvas');reference.width=canvas.width;reference.height=canvas.height;
+              const expected=reference.getContext('2d');
+              function expectedRgba(color,x,y){
+                expected.clearRect(0,0,reference.width,reference.height);
+                expected.fillStyle=color;expected.fillRect(0,0,reference.width,reference.height);
+                if(annexLighting){
+                  // drawAnnexLightingV71 is applied after props: its native
+                  // 1280x720 radial vignette must also affect the signature.
+                  const vignette=expected.createRadialGradient(640,396,120,640,396,760);
+                  vignette.addColorStop(0,'rgba(0, 0, 0, 0)');
+                  vignette.addColorStop(1,'rgba(0, 3, 4, .62)');
+                  expected.fillStyle=vignette;expected.fillRect(0,0,1280,720);
+                }
+                return [...expected.getImageData(Math.floor(x),Math.floor(y),1,1).data];
+              }
+              return d.items.flatMap(item=>{const b=item.bounds;
+                // Every kind leaves the lower-right band below its cabinets,
+                // pipes, grilles and valves, beyond the short code plate.
+                // Keep this base signature far from outer fastening edges.
+                // The bright code-plate point is beyond its engraved text;
+                // a missing assembly cannot pass on dark wall colour alone.
+                return [{kind:'base',dx:b.w-16,dy:b.h-4,color:'#2b4543'},
+                  {kind:'code-plate',dx:45,dy:b.h-4,color:'#b1b6a3'}].map(point=>{
+                  const x=b.x+point.dx-camera,y=b.y+point.dy,
+                    visible=x>=0&&y>=0&&x<canvas.width&&y<canvas.height;
+                  return {id:item.id,kind:point.kind,x,y,sampleX:Math.floor(x),sampleY:Math.floor(y),
+                    canvasWidth:canvas.width,canvasHeight:canvas.height,sourceColor:point.color,
+                    lighting:annexLighting?'native-annex-radial-vignette':'unlit-main-room',
+                    rgba:visible?[...ctx.getImageData(Math.floor(x),Math.floor(y),1,1).data]:null,
+                    expectedRgba:visible?expectedRgba(point.color,x,y):null};
+                });});} """)
             row['servicePixelProbes'] = probe
+            report.setdefault('servicePixelProbes', []).append(dict(scene=label, roomId=expected_room, probes=probe))
+            raster_label = label + ': admitted hardware also reaches visible native canvas pixels'
+            raster_valid = (len(probe) == 2 * len(details['items'])
+                            and all(item['rgba'] and item['expectedRgba'] and item['rgba'][3] >= 250
+                                    and max(abs(item['rgba'][i]-item['expectedRgba'][i]) for i in range(3)) <= 3 for item in probe))
+            if raster_valid:
+                check(raster_label, True)
+            else:
+                # Keep every failed raster assertion failed, but collect the
+                # remaining genuine scenes/captures before the final guard.
+                # These failures are never appended to passed check counts.
+                report.setdefault('rasterFailures', []).append(dict(
+                    scene=label, roomId=expected_room, assertion=raster_label,
+                    expectedProbeCount=2 * len(details['items']), probes=probe))
+                print('FAIL ' + raster_label + ' (retained for final failure)', flush=True)
         else:
             check(label + ': its deliberate quiet or flight envelope remains free', not details['items'])
         if config.get('reducedMotion'):
@@ -473,6 +517,9 @@ try:
     check('Seven room families completed with no page, unexpected request or HTTP error',
           len(report['families']) >= 7 and not report['pageErrors'] and not report['httpErrors']
           and not [entry for entry in report['requestFailures'] if entry['failure'] != 'net::ERR_ABORTED'])
+    if args.stage == 'after':
+        check('Every admitted hardware raster assertion succeeded across all observed scenes',
+              not report.get('rasterFailures', []))
     report['status'] = 'passed'
 except Exception as error:
     report['status'] = 'failed'
