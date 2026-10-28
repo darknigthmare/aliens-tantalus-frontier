@@ -411,16 +411,17 @@ with sync_playwright() as pw:
             dialogue(page, c)
             if args.comparison_stage == 'after':
                 reload_exact(page, c, 'local owner', 'local-post', frames)
-            # Wait inside the annex at its real player exit. In particular,
-            # standing on the CIC floor aperture would itself block ECHO's
-            # westbound courtesy passage and prevent Rook from returning.
-            walk_to(page, c, c['annexX'])
+            # Leave while the NPC is still at its09h post. Waiting in the
+            # local exit until12h traps both bodies in the same aperture:
+            # the NPC correctly reserves its doorway and brakes behind the
+            # spectator. Wait on the clear native parent floor instead.
+            enter_annex(page, c, False)
+            walk_to(page, c, c['clear'])
             collect_observer(page, c, 'before-return-command', frames)
             command(page, c, 'frontier-recon', 12)
             install_observer(page, c, 'return-watch')
             ready = wait_body(page, c, lambda r: local_return_ready(r, c), 'real local release after physical passing clearance')
             artifact(c['id'] + '-return-release-readiness.json', ready)
-            enter_annex(page, c, False)
             walk_to(page, c, c['parentX'])
             if args.comparison_stage == 'after':
                 wait_body(page, c, lambda r: occupied_local_arrival(r, c), 'occupied real work arrival')
