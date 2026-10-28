@@ -77,11 +77,31 @@ function edge(ctx, points, color, width = 1) {
 function drawDestinationLabelV139(ctx, door, geometry, playerCenterX) {
   if (!Number.isFinite(playerCenterX) || Math.abs(playerCenterX - geometry.centerX) >= 520 || !door.destinationLabel) return;
   const label = door.destinationLabel;
-  ctx.font = '700 10px ui-monospace, monospace'; ctx.textBaseline = 'alphabetic';
-  const width = Math.min(310, ctx.measureText(label).width + 18), y = Math.min(geometry.rear.topY, geometry.near.topY) - 39;
-  ctx.fillStyle = 'rgba(2,8,7,.88)'; ctx.fillRect(geometry.centerX - width / 2, y, width, 18);
-  ctx.strokeStyle = '#526b5d'; ctx.strokeRect(geometry.centerX - width / 2 + .5, y + .5, width - 1, 17);
-  ctx.fillStyle = '#b7d1be'; ctx.textAlign = 'center'; ctx.fillText(label, geometry.centerX, y + 13); ctx.textAlign = 'left';
+  ctx.font = '700 9px ui-monospace, monospace'; ctx.textBaseline = 'alphabetic';
+  const measuredWidth = finite(ctx.measureText(label).width);
+  const width = Math.max(80, Math.min(260, measuredWidth + 22)), height = 20;
+  const x = geometry.centerX - width / 2, y = Math.min(geometry.rear.topY, geometry.near.topY) - 41;
+  // This is a small steel direction plate fixed to the existing lintel, not
+  // an opaque interface banner floating across the adjoining rooms. Both
+  // short straps reach the actual header in either room projection.
+  const headerY = (geometry.rear.topY + geometry.near.topY) / 2 - 12;
+  for (const mountX of [geometry.centerX - 6, geometry.centerX + 3]) {
+    ctx.fillStyle = '#152b2f'; ctx.fillRect(mountX, y - 3, 3, headerY + 2 - (y - 3));
+    ctx.fillStyle = '#6e8580'; ctx.fillRect(mountX + 1, y - 2, 1, headerY + 1 - (y - 2));
+    ctx.fillStyle = '#9aa69b'; ctx.fillRect(mountX + 1, headerY - 1, 1, 1);
+  }
+  ctx.fillStyle = '#12292d'; ctx.fillRect(x - 1, y - 1, width + 2, height + 2);
+  ctx.fillStyle = '#354d4d'; ctx.fillRect(x, y, width, height);
+  ctx.fillStyle = '#80938a'; ctx.fillRect(x + 1, y + 1, width - 2, 1);
+  ctx.fillStyle = '#1b3337'; ctx.fillRect(x + 1, y + height - 3, width - 2, 2);
+  for (const boltX of [x + 3, x + width - 5]) for (const boltY of [y + 3, y + height - 5]) {
+    ctx.fillStyle = '#a7b2a2'; ctx.fillRect(boltX, boltY, 2, 2);
+    ctx.fillStyle = '#283e3d'; ctx.fillRect(boltX, boltY, 1, 1);
+  }
+  ctx.fillStyle = '#d0d6bf'; ctx.textAlign = 'center';
+  // Native labels may be long or translated. Their ink must remain between
+  // the fasteners rather than escaping the admitted mounting footprint.
+  ctx.fillText(label, geometry.centerX, y + 13, width - 20); ctx.textAlign = 'left';
 }
 
 /** A door seen in profile occupies the same sixteen pixels as its physical

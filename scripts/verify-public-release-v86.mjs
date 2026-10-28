@@ -25,6 +25,9 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'verify-player-arm-phase-v167.mjs',
+  'verify-allied-patrol-phase-v167.mjs',
+  'verify-ship-placement-v167.mjs',
   'qa-npc-station-relays-v166.py',
   'verify-npc-station-relays-v166.mjs',
   'verify-npc-relay-locked-bulkheads-v166.mjs',
@@ -222,6 +225,7 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
   'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
   'docs/forge/xeno-trials/V165-PARALLEL-COMPLETION.md',
   'docs/forge/xeno-trials/V164-NPC-MATTE.md',

@@ -20,7 +20,7 @@ import { enforcePlayerAnimationRequestV81, PLAYER_VISUAL_CONTRACT_V81 } from './
 import { PLAYER_AIR_POSES_V87, resolvePlayerAirClipV87, advancePlayerAirPresentationV87, applyPlayerAirPresentationV87 } from './player-airborne-presentation-v87.js';
 import { refinePlayerAnimationRequestV124, isPlayerAimingV124, advancePlayerPresentationV124,
   playerAnimationStepV124, playerPresentationSummaryV124 } from './player-presentation-v124.js';
-import { advanceHumanPatrolAnimationV133 } from './human-patrol-animation-v133.js';
+import { advanceHumanPatrolAnimationV133, observeHumanPatrolInterruptionV167 } from './human-patrol-animation-v133.js';
 import { advanceEnemyDistanceGaitV141, isEnemyDistanceGaitV141, isEnemyDistanceGaitClipV141 } from './enemy-distance-gait-v141.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
@@ -875,11 +875,23 @@ export class SpriteAnimationController {
     if (presentation) this.playerPresentationStatesV124.set(key, presentation);
     else if (physicalActor) this.playerPresentationStatesV124.delete(key);
     const playerStep = playerAnimationStepV124(presentation, clip);
+    // Mission actions and locomotion belong to the same crew body. Keep its
+    // walking phase through grounded actions without sampling those actions
+    // from the walking atlas or borrowing another character's identity.
+    const crewWalkSheet = CREW_SPRITE_IDS[physicalActor?.crewId];
+    const sameCrewSheet = crewWalkSheet && [crewWalkSheet, CREW_MISSION_SPRITE_IDS[physicalActor?.crewId]].includes(sheetEntry.id);
+    const humanContext = `${physicalContext}:${sameCrewSheet ? crewWalkSheet : sheetEntry.id}`;
     const humanStep = physicalActor && sheetEntry.family === 'npc'
       ? advanceHumanPatrolAnimationV133(this.humanPatrolStatesV133.get(key), physicalActor, clip, now,
-        { context: `${physicalContext}:${sheetEntry.id}`, reducedMotion }) : null;
+        { context: humanContext, reducedMotion }) : null;
     if (humanStep) this.humanPatrolStatesV133.set(key, humanStep);
-    else this.humanPatrolStatesV133.delete(key);
+    else {
+      const heldHuman = physicalActor && sheetEntry.family === 'npc'
+        ? observeHumanPatrolInterruptionV167(this.humanPatrolStatesV133.get(key), physicalActor, now,
+          { context: humanContext, reducedMotion }) : null;
+      if (heldHuman) this.humanPatrolStatesV133.set(key, heldHuman);
+      else this.humanPatrolStatesV133.delete(key);
+    }
     const signature = `${sheetEntry.id}:${clip.id}`;
     let state = this.states.get(key);
     if (!state || state.signature !== signature || now < state.lastTime || presentation?.restart || presentation?.reseeded || humanStep?.reseeded) {
