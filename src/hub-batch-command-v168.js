@@ -31,13 +31,13 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "kind": "map-case",
     "purpose": "manual-navigation-chart-drawer",
     "bounds": {
-      "x": 512,
-      "y": 392,
+      "x": 672,
+      "y": 294,
       "w": 80,
       "h": 48
     },
     "mount": "rear-wall",
-    "note": "Paper chart case below the navigation window, to the left of the cockpit entrance, paired with the existing reference counter."
+    "note": "Chart case on the solid pier immediately right of the navigation window, above the access deck and outside both ladder clearances."
   },
   {
     "id": "T168-C03",
@@ -46,12 +46,12 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "purpose": "bridge-threshold-security-camera",
     "bounds": {
       "x": 1080,
-      "y": 284,
+      "y": 256,
       "w": 48,
       "h": 40
     },
     "mount": "rear-wall",
-    "note": "Small camera on the outboard return wall, aimed at the bridge threshold without occupying the navigation view."
+    "note": "Small threshold camera high on the outboard return wall, above the vent approach and outside the navigation view."
   },
   {
     "id": "T168-C04",
@@ -59,13 +59,13 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "kind": "map-case",
     "purpose": "landing-party-map-sleeves",
     "bounds": {
-      "x": 448,
-      "y": 250,
+      "x": 608,
+      "y": 248,
       "w": 64,
       "h": 48
     },
     "mount": "rear-wall",
-    "note": "Wall chart sleeves beside the existing briefing supplies, outside the display and meeting circulation."
+    "note": "Wall chart sleeves above the rear briefing equipment, right of the existing meeting supplies; the header, display and ladder approach stay clear."
   },
   {
     "id": "T168-C05",
@@ -87,13 +87,13 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "kind": "reel-recorder",
     "purpose": "mission-briefing-audio-archive",
     "bounds": {
-      "x": 160,
-      "y": 360,
+      "x": 992,
+      "y": 192,
       "w": 80,
       "h": 36
     },
     "mount": "rear-wall",
-    "note": "A compact recorder in the wall strip below the viewport and above the entrance header; no floor obstruction."
+    "note": "Compact recorder directly above the briefing audio amplifier, forming one service stack on the upper starboard wall, away from vents and catwalks."
   },
   {
     "id": "T168-C07",
@@ -101,13 +101,13 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "kind": "reel-recorder",
     "purpose": "tactical-watch-radio-backup",
     "bounds": {
-      "x": 480,
-      "y": 370,
+      "x": 792,
+      "y": 190,
       "w": 88,
       "h": 64
     },
     "mount": "rear-wall",
-    "note": "Radio backup recorder below the tactical viewport, outside the CCTV entrance and receiver cabinet envelopes."
+    "note": "Physical radio backup on the upper bulkhead between the room header and signal-routing trunk, clear of the tactical view, catwalk and vent approaches."
   },
   {
     "id": "T168-C08",
@@ -129,13 +129,13 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "kind": "hazard-monitor",
     "purpose": "isolated-network-status-monitor",
     "bounds": {
-      "x": 160,
+      "x": 144,
       "y": 330,
       "w": 64,
       "h": 50
     },
     "mount": "rear-wall",
-    "note": "Small network-isolation status monitor on the west return wall, below chronometers and clear of the CCTV approach."
+    "note": "Small network-isolation monitor in the west return-wall niche, below the chronometers and separated from the vent approach and CCTV entrance."
   },
   {
     "id": "T168-C10",
@@ -144,12 +144,12 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "purpose": "stasis-clean-gas-analogue-check",
     "bounds": {
       "x": 384,
-      "y": 260,
+      "y": 250,
       "w": 80,
       "h": 44
     },
     "mount": "rear-wall",
-    "note": "Mechanical gas reference gauges on the wall between the viewport and the cryo service assembly."
+    "note": "Mechanical gas reference gauges beside the viewport and above the cryo service manifold, with a clear service gap around both installations."
   },
   {
     "id": "T168-C11",
@@ -171,13 +171,13 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "kind": "hygiene-dispenser",
     "purpose": "stasis-hand-preparation-point",
     "bounds": {
-      "x": 928,
-      "y": 394,
+      "x": 916,
+      "y": 448,
       "w": 64,
       "h": 48
     },
     "mount": "rear-wall",
-    "note": "Wall-fixed preparation dispenser between the rear equipment bay and oxygen lines, above the human lane."
+    "note": "Wall-fixed preparation dispenser beside the lift approach, below the catwalk and just above the cryo equipment bay, clear of both access routes."
   },
   {
     "id": "T168-C13",
@@ -242,12 +242,12 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "purpose": "evidence-chain-paper-records",
     "bounds": {
       "x": 672,
-      "y": 304,
+      "y": 246,
       "w": 80,
       "h": 48
     },
     "mount": "rear-wall",
-    "note": "Chain-of-custody paper sleeves beside the archive display, before the evidence-reference shelf."
+    "note": "Chain-of-custody paper sleeves beside the archive display and above the moving rear equipment envelope, before the evidence-reference shelf."
   },
   {
     "id": "T168-C18",

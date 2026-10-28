@@ -36,13 +36,13 @@
       "kind": "map-case",
       "purpose": "manual-navigation-chart-drawer",
       "bounds": {
-        "x": 512,
-        "y": 392,
+        "x": 672,
+        "y": 294,
         "w": 80,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "Paper chart case below the navigation window, to the left of the cockpit entrance, paired with the existing reference counter.",
+      "note": "Chart case on the solid pier immediately right of the navigation window, above the access deck and outside both ladder clearances.",
       "sector": "command"
     },
     {
@@ -52,12 +52,12 @@
       "purpose": "bridge-threshold-security-camera",
       "bounds": {
         "x": 1080,
-        "y": 284,
+        "y": 256,
         "w": 48,
         "h": 40
       },
       "mount": "rear-wall",
-      "note": "Small camera on the outboard return wall, aimed at the bridge threshold without occupying the navigation view.",
+      "note": "Small threshold camera high on the outboard return wall, above the vent approach and outside the navigation view.",
       "sector": "command"
     },
     {
@@ -66,13 +66,13 @@
       "kind": "map-case",
       "purpose": "landing-party-map-sleeves",
       "bounds": {
-        "x": 448,
-        "y": 250,
+        "x": 608,
+        "y": 248,
         "w": 64,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "Wall chart sleeves beside the existing briefing supplies, outside the display and meeting circulation.",
+      "note": "Wall chart sleeves above the rear briefing equipment, right of the existing meeting supplies; the header, display and ladder approach stay clear.",
       "sector": "command"
     },
     {
@@ -96,13 +96,13 @@
       "kind": "reel-recorder",
       "purpose": "mission-briefing-audio-archive",
       "bounds": {
-        "x": 160,
-        "y": 360,
+        "x": 992,
+        "y": 192,
         "w": 80,
         "h": 36
       },
       "mount": "rear-wall",
-      "note": "A compact recorder in the wall strip below the viewport and above the entrance header; no floor obstruction.",
+      "note": "Compact recorder directly above the briefing audio amplifier, forming one service stack on the upper starboard wall, away from vents and catwalks.",
       "sector": "command"
     },
     {
@@ -111,13 +111,13 @@
       "kind": "reel-recorder",
       "purpose": "tactical-watch-radio-backup",
       "bounds": {
-        "x": 480,
-        "y": 370,
+        "x": 792,
+        "y": 190,
         "w": 88,
         "h": 64
       },
       "mount": "rear-wall",
-      "note": "Radio backup recorder below the tactical viewport, outside the CCTV entrance and receiver cabinet envelopes.",
+      "note": "Physical radio backup on the upper bulkhead between the room header and signal-routing trunk, clear of the tactical view, catwalk and vent approaches.",
       "sector": "command"
     },
     {
@@ -141,13 +141,13 @@
       "kind": "hazard-monitor",
       "purpose": "isolated-network-status-monitor",
       "bounds": {
-        "x": 160,
+        "x": 144,
         "y": 330,
         "w": 64,
         "h": 50
       },
       "mount": "rear-wall",
-      "note": "Small network-isolation status monitor on the west return wall, below chronometers and clear of the CCTV approach.",
+      "note": "Small network-isolation monitor in the west return-wall niche, below the chronometers and separated from the vent approach and CCTV entrance.",
       "sector": "command"
     },
     {
@@ -157,12 +157,12 @@
       "purpose": "stasis-clean-gas-analogue-check",
       "bounds": {
         "x": 384,
-        "y": 260,
+        "y": 250,
         "w": 80,
         "h": 44
       },
       "mount": "rear-wall",
-      "note": "Mechanical gas reference gauges on the wall between the viewport and the cryo service assembly.",
+      "note": "Mechanical gas reference gauges beside the viewport and above the cryo service manifold, with a clear service gap around both installations.",
       "sector": "command"
     },
     {
@@ -186,13 +186,13 @@
       "kind": "hygiene-dispenser",
       "purpose": "stasis-hand-preparation-point",
       "bounds": {
-        "x": 928,
-        "y": 394,
+        "x": 916,
+        "y": 448,
         "w": 64,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "Wall-fixed preparation dispenser between the rear equipment bay and oxygen lines, above the human lane.",
+      "note": "Wall-fixed preparation dispenser beside the lift approach, below the catwalk and just above the cryo equipment bay, clear of both access routes.",
       "sector": "command"
     },
     {
@@ -262,12 +262,12 @@
       "purpose": "evidence-chain-paper-records",
       "bounds": {
         "x": 672,
-        "y": 304,
+        "y": 246,
         "w": 80,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "Chain-of-custody paper sleeves beside the archive display, before the evidence-reference shelf.",
+      "note": "Chain-of-custody paper sleeves beside the archive display and above the moving rear equipment envelope, before the evidence-reference shelf.",
       "sector": "command"
     },
     {
@@ -411,13 +411,13 @@
       "kind": "personal-shelf",
       "purpose": "crew-personal-reading-shelf",
       "bounds": {
-        "x": 544,
-        "y": 322,
-        "w": 88,
+        "x": 672,
+        "y": 278,
+        "w": 80,
         "h": 44
       },
       "mount": "rear-wall",
-      "note": "A compact wall shelf fills the bay beyond the upper berth, away from the service doorway and the existing bedside surfaces.",
+      "note": "An 80px reading shelf fits the narrow upper-deck wall pier east of the ladder clearance, stopping before the ship-service doorway; no books project into either access.",
       "sector": "habitat"
     },
     {
@@ -427,12 +427,12 @@
       "purpose": "aft-berth-clean-linen-storage",
       "bounds": {
         "x": 960,
-        "y": 300,
+        "y": 234,
         "w": 80,
         "h": 64
       },
       "mount": "rear-wall",
-      "note": "A closed linen cabinet serves the aft berth group; its footprint stops above the existing personal-effects shelf and below the wall crown.",
+      "note": "A closed linen cabinet serves the aft berths from the high east wall bay; its lower edge remains above both the ventilation grille and its approach envelope.",
       "sector": "habitat"
     },
     {
@@ -441,13 +441,13 @@
       "kind": "ration-shelf",
       "purpose": "mess-sealed-ration-distribution",
       "bounds": {
-        "x": 384,
-        "y": 388,
+        "x": 576,
+        "y": 410,
         "w": 96,
         "h": 56
       },
       "mount": "rear-wall",
-      "note": "A restrained ration shelf belongs over the tray-return side of the mess, below the viewport rather than across its glazing.",
+      "note": "The sealed ration shelf occupies the clear central wall bay between the west console and east ladder, above the lower serving deck and below the glazing.",
       "sector": "habitat"
     },
     {
@@ -456,13 +456,13 @@
       "kind": "utensil-rail",
       "purpose": "mess-tray-and-cup-storage",
       "bounds": {
-        "x": 544,
-        "y": 388,
+        "x": 640,
+        "y": 344,
         "w": 96,
         "h": 32
       },
       "mount": "rear-wall",
-      "note": "A short utensil rail sits beside the ration stock, distinct from the serving counter and the native seating.",
+      "note": "A short utensil rail sits above and beside the ration shelf, to the east of the viewport and clear of the upper-deck console and moving rear equipment.",
       "sector": "habitat"
     },
     {
@@ -471,13 +471,13 @@
       "kind": "hygiene-dispenser",
       "purpose": "mess-cleaning-refill-reservoir",
       "bounds": {
-        "x": 640,
-        "y": 454,
+        "x": 160,
+        "y": 234,
         "w": 48,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "A small sealed cleaning refill dispenser is wall-mounted above the serving approach, clear of chairs and the equipment bank.",
+      "note": "A small sealed cleaning-refill reservoir is fixed to the west upper-deck wall above the air return, near service access without covering its grille or the doorway below.",
       "sector": "habitat"
     },
     {
@@ -501,13 +501,13 @@
       "kind": "sterile-cabinet",
       "purpose": "clinical-clean-ppe-wall-cabinet",
       "bounds": {
-        "x": 928,
-        "y": 344,
+        "x": 800,
+        "y": 234,
         "w": 80,
         "h": 60
       },
       "mount": "rear-wall",
-      "note": "A closed PPE cabinet is mounted beside the clinical service bay, above the existing handwash zone with the medical bed envelope clear.",
+      "note": "The closed PPE cabinet occupies the high clinical wall bay between the room sign and gas-service plaque; its lower edge stays above the native vent and its access envelope, with every bed clear.",
       "sector": "habitat"
     },
     {
@@ -562,12 +562,12 @@
       "purpose": "forensic-sealed-identification-consumables",
       "bounds": {
         "x": 704,
-        "y": 278,
+        "y": 234,
         "w": 80,
         "h": 52
       },
       "mount": "rear-wall",
-      "note": "A separate sealed identification kit is mounted above the existing forensic consumables, with both worktop and gantry clear.",
+      "note": "A separate sealed identification kit stays high above the forensic consumables, west of the room sign and above the full rear-equipment drift envelope; worktop and gantry remain clear.",
       "sector": "habitat"
     },
     {
@@ -771,13 +771,13 @@
       "kind": "lab-sample-rack",
       "purpose": "sealed-sample-transfer-rack",
       "bounds": {
-        "x": 608,
-        "y": 270,
+        "x": 720,
+        "y": 246,
         "w": 88,
         "h": 44
       },
       "mount": "rear-wall",
-      "note": "Beside the observation window, above the preparation zone; sealed containers never cover the viewport.",
+      "note": "Upper clean-preparation wall beyond the real ladder clearance; sealed containers cover neither the viewport nor the climbing route.",
       "sector": "industrial"
     },
     {
@@ -786,13 +786,13 @@
       "kind": "hazard-monitor",
       "purpose": "analysis-bench-condition-readout",
       "bounds": {
-        "x": 160,
-        "y": 278,
+        "x": 1040,
+        "y": 212,
         "w": 72,
         "h": 44
       },
       "mount": "rear-wall",
-      "note": "Left wall above the sample cold store, separate from the glass and the specimen preparation counter.",
+      "note": "Upper analysis-side wall beyond the ceiling services, clear of the viewport, vent approach and rear equipment.",
       "sector": "industrial"
     },
     {
@@ -801,13 +801,13 @@
       "kind": "sterile-cabinet",
       "purpose": "clean-sample-handling-consumables",
       "bounds": {
-        "x": 512,
-        "y": 432,
+        "x": 160,
+        "y": 212,
         "w": 72,
         "h": 64
       },
       "mount": "rear-wall",
-      "note": "Closed sterile supply above the existing mobile preparation station, clear of its worktop and catwalk stock.",
+      "note": "Closed handling stock above the left cold-store bay, entirely above the real vent and its approach.",
       "sector": "industrial"
     },
     {
@@ -831,13 +831,13 @@
       "kind": "air-filter",
       "purpose": "negative-pressure-prefilter-service",
       "bounds": {
-        "x": 624,
-        "y": 270,
+        "x": 664,
+        "y": 246,
         "w": 88,
         "h": 52
       },
       "mount": "rear-wall",
-      "note": "Filter access occupies the narrow service bay between the viewport and the existing extraction equipment.",
+      "note": "Filter access lies beyond the ladder and above the extraction service assembly, clear of the viewport and climbing route.",
       "sector": "industrial"
     },
     {
@@ -846,8 +846,8 @@
       "kind": "oxygen-locker",
       "purpose": "sealed-escape-breathing-set",
       "bounds": {
-        "x": 496,
-        "y": 412,
+        "x": 456,
+        "y": 402,
         "w": 56,
         "h": 72
       },
@@ -876,13 +876,13 @@
       "kind": "weapons-cleaning",
       "purpose": "armorer-cleaning-and-clearing-kit",
       "bounds": {
-        "x": 536,
-        "y": 270,
+        "x": 840,
+        "y": 246,
         "w": 112,
         "h": 40
       },
       "mount": "rear-wall",
-      "note": "Wall tools occupy their own bay beside the ammunition stock, away from the counter and route signage.",
+      "note": "Wall tools occupy a bay below the secure ceiling services, above the rear equipment and away from the real ladder.",
       "sector": "industrial"
     },
     {
@@ -891,13 +891,13 @@
       "kind": "electrical-isolator",
       "purpose": "weapons-bench-test-power-isolation",
       "bounds": {
-        "x": 544,
-        "y": 402,
+        "x": 632,
+        "y": 350,
         "w": 64,
         "h": 56
       },
       "mount": "rear-wall",
-      "note": "Test-power isolation above the armourer chest, between the annex doorway and the issue-record stock.",
+      "note": "Test-power isolation sits beyond the ladder and above the inspection-record stock, outside the annex doorway.",
       "sector": "industrial"
     },
     {
@@ -921,13 +921,13 @@
       "kind": "parts-bins",
       "purpose": "fastener-and-service-fittings-stock",
       "bounds": {
-        "x": 656,
+        "x": 760,
         "y": 246,
         "w": 96,
         "h": 52
       },
       "mount": "rear-wall",
-      "note": "Labelled small-parts bins use the bay below the room sign and above the existing electrical service panel.",
+      "note": "Labelled small-parts bins sit beyond the real ladder, below the room sign and above the electrical service panel.",
       "sector": "industrial"
     },
     {
@@ -936,13 +936,13 @@
       "kind": "battery-charger",
       "purpose": "tool-battery-charging-station",
       "bounds": {
-        "x": 824,
-        "y": 390,
+        "x": 840,
+        "y": 432,
         "w": 72,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "A dedicated charging dock below the utility panel, away from the bench stock and its useful surface.",
+      "note": "A fixed charging dock occupies the lower wall below the native service deck, clear of its face, consoles and bench worktop.",
       "sector": "industrial"
     },
     {
@@ -951,13 +951,13 @@
       "kind": "hydraulic-accumulator",
       "purpose": "vehicle-jack-hydraulic-reserve",
       "bounds": {
-        "x": 392,
+        "x": 1064,
         "y": 246,
         "w": 64,
         "h": 72
       },
       "mount": "rear-wall",
-      "note": "Hydraulic service on the free wall return beside the viewport, entirely above the parked vehicle silhouette.",
+      "note": "A fixed accumulator uses the right service bay, clear of the viewport, parked hull, inspection stock and existing isolation panel.",
       "sector": "industrial"
     },
     {
@@ -1072,12 +1072,12 @@
       "purpose": "biological-entry-cleaning-dispenser",
       "bounds": {
         "x": 712,
-        "y": 270,
+        "y": 246,
         "w": 56,
         "h": 48
       },
       "mount": "rear-wall",
-      "note": "A clean-handling dispenser between the native service fixture and the upper sign; no new biological room is implied.",
+      "note": "A clean-handling dispenser occupies the upper wall above the full rear-equipment envelope; no new biological room is implied.",
       "sector": "industrial"
     },
     {
@@ -1117,12 +1117,12 @@
       "purpose": "range-session-reference-timers",
       "bounds": {
         "x": 704,
-        "y": 270,
+        "y": 246,
         "w": 80,
         "h": 40
       },
       "mount": "rear-wall",
-      "note": "Fixed session clocks remain left of the muzzle, distinct from the nine active target silhouettes and their suspension paths.",
+      "note": "Fixed session clocks sit above the equipment envelope and left of the muzzle, distinct from the nine target silhouettes and their suspension paths.",
       "sector": "industrial"
     },
     {
@@ -1146,13 +1146,13 @@
       "kind": "flight-kit",
       "purpose": "ground-crew-flight-harness-and-inspection-kit",
       "bounds": {
-        "x": 160,
-        "y": 234,
+        "x": 244,
+        "y": 190,
         "w": 80,
-        "h": 60
+        "h": 56
       },
       "mount": "rear-wall",
-      "note": "Baie murale ouest avant la zone vitrée, au-dessus des portes et hors de la coque du dropship.",
+      "note": "Casier de harnais dans la baie haute entre l’échelle ouest et le hublot ; dégagement de quatre pixels sous le plafond et de douze avant l’approche du conduit.",
       "sector": "engineering"
     },
     {
@@ -1162,12 +1162,12 @@
       "purpose": "landing-gear-ground-hydraulics-isolation",
       "bounds": {
         "x": 640,
-        "y": 344,
+        "y": 350,
         "w": 80,
-        "h": 60
+        "h": 56
       },
       "mount": "rear-wall",
-      "note": "Module de support au train entre les outils hauts et la silhouette du véhicule ; aucune pièce posée sur sa trajectoire.",
+      "note": "Support hydraulique du train fixé au mur entre deux consoles de passerelle ; sous son bandeau et au-dessus de l’arc réservé au dropship.",
       "sector": "engineering"
     },
     {
@@ -1176,13 +1176,13 @@
       "kind": "battery-charger",
       "purpose": "ground-support-battery-charging-and-retention",
       "bounds": {
-        "x": 832,
-        "y": 344,
+        "x": 800,
+        "y": 350,
         "w": 80,
         "h": 56
       },
       "mount": "rear-wall",
-      "note": "Recharge des batteries de piste dans la baie droite, sous les outils de passerelle et avant le coffret électrique natif.",
+      "note": "Recharge des batteries de piste dans la baie entre deux consoles, sous la passerelle et au-dessus de la coque du dropship ; l’échelle droite reste dégagée.",
       "sector": "engineering"
     },
     {
@@ -1221,13 +1221,13 @@
       "kind": "coolant-loop",
       "purpose": "closed-reactor-coolant-sampling-and-bypass",
       "bounds": {
-        "x": 992,
-        "y": 432,
+        "x": 1024,
+        "y": 190,
         "w": 96,
         "h": 64
       },
       "mount": "rear-wall",
-      "note": "Circuit fermé de prélèvement sous les raccords natifs, fixé au mur et au-dessus des coffres de maintenance.",
+      "note": "Boucle fermée de prélèvement dans la baie haute droite, au-dessus du départ de refroidissement natif ; l’ascenseur, son échelle et le bord de plateforme restent libres.",
       "sector": "engineering"
     },
     {
@@ -1251,13 +1251,13 @@
       "kind": "valve-box",
       "purpose": "air-loop-isolation-and-maintenance-bypass",
       "bounds": {
-        "x": 672,
-        "y": 278,
+        "x": 480,
+        "y": 366,
         "w": 80,
         "h": 52
       },
       "mount": "rear-wall",
-      "note": "Vannes de dérivation au-dessus de l’entrée vers les services, sans traverser son volume de porte.",
+      "note": "Vannes d’isolement sous le hublot de traitement d’air, à gauche de l’échelle centrale et à droite de son outillage mural ; hors des approches de conduits.",
       "sector": "engineering"
     },
     {
@@ -1266,13 +1266,13 @@
       "kind": "air-filter",
       "purpose": "removable-clean-filter-inspection-housing",
       "bounds": {
-        "x": 880,
-        "y": 366,
+        "x": 248,
+        "y": 212,
         "w": 72,
         "h": 64
       },
       "mount": "rear-wall",
-      "note": "Cartouche de filtration sous le retour haut, près des stocks d’air mais séparée du terminal au sol.",
+      "note": "Boîtier filtrant près de la réserve respiratoire gauche, séparé de son casier et placé avant le hublot ; au-dessus de l’ensemble de service et loin des conduits navigables.",
       "sector": "engineering"
     },
     {
@@ -1296,13 +1296,13 @@
       "kind": "sensor-calibration",
       "purpose": "receiver-reference-and-calibration-standard",
       "bounds": {
-        "x": 160,
-        "y": 388,
+        "x": 224,
+        "y": 432,
         "w": 80,
         "h": 56
       },
       "mount": "rear-wall",
-      "note": "Étalon de réception sous le hublot gauche et au-dessus du terminal ; le passage d’échelle reste libre.",
+      "note": "Étalon mural au-dessus du terminal de réception et sous sa passerelle, entre les retombées des consoles ; le conduit et l’accès de service restent libres.",
       "sector": "engineering"
     },
     {

@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { HUB_DECKS } from '../src/hub-game.js';
+import { HUB_DECKS, HUB_WORLD } from '../src/hub-game.js';
+import { buildHubTraversalGeometryV87 } from '../src/hub-v51-runtime.js';
+import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
 import { HUB_ANNEXES_V137 } from '../src/hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from '../src/hub-annex-runtime-geometry-v139.js';
 import { getHubRoomLifePlanV136, drawHubRoomLifeV136 } from '../src/hub-room-life-v136.js';
@@ -11,6 +13,16 @@ import { HUB_PROP_ATLAS_V136 } from '../src/hub-prop-atlas-v136.js';
 import { HUB_FURNISHING_ATLAS_V137 } from '../src/hub-furnishing-atlas-v137.js';
 
 const rooms = [...HUB_DECKS.flatMap(deck => deck.rooms), ...HUB_ANNEXES_V137.map(getHubAnnexRuntimeGeometryV139)];
+// Use the same traversal reservations as the live RoomLife wrapper. A bare
+// room omits ladders, vent approaches and the native deck faces around them.
+function optionsFor(room) {
+  const deck = HUB_DECKS.findIndex(item => item.rooms.includes(room));
+  if (deck < 0) return { doors: [], ladders: room.ladders || [], vents: room.vents || [], platforms: room.platforms || [] };
+  const geometry = buildHubTraversalGeometryV87(deck);
+  return { doors: buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck),
+    ladders: geometry.ladders, vents: geometry.vents,
+    platforms: geometry.platforms.filter(platform => platform.x < room.xEnd && platform.x + platform.w > room.xStart) };
+}
 const overlap = (a,b) => a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y;
 const ctx = () => {
   let depth=0;const draws=[];
@@ -39,7 +51,7 @@ test('batch100 is exactly four authored25-installation sectors covering every ex
 test('all100 real composition placements are admitted without touching native props, clinical surfaces or route reservations', () => {
   let admitted=0;
   for(const room of rooms){
-    const before=JSON.stringify(room),composition=getHubRoomLifePlanV136(room),plan=composition.batchDetailsV168;
+    const before=JSON.stringify(room),composition=getHubRoomLifePlanV136(room,optionsFor(room)),plan=composition.batchDetailsV168;
     assert.ok(plan,room.id);assert.equal(plan.omitted.length,0,JSON.stringify(plan.omitted));
     assert.ok(plan.items.length>=2&&plan.items.length<=4,room.id);admitted+=plan.items.length;
     assert.equal(plan.projection,composition.spatial.projection.kind);
@@ -62,7 +74,7 @@ test('all100 real composition placements are admitted without touching native pr
 test('the real painter draws every admitted silhouette, keeps atlas aspect and records unavailable images as pending', () => {
   let total=0,bitmapDraws=0;
   for(const room of rooms){
-    const composition=getHubRoomLifePlanV136(room),canvas=ctx(),before=JSON.stringify(composition.batchDetailsV168);
+    const options=optionsFor(room),composition=getHubRoomLifePlanV136(room,options),canvas=ctx(),before=JSON.stringify(composition.batchDetailsV168);
     const report=drawHubRoomBatchDetailsV168(canvas,composition.batchDetailsV168,{images});
     total+=report.painted.length;assert.equal(report.pending.length,0);assert.equal(report.omitted.length,0);
     for(const draw of canvas.draws){const [,sx,sy,sw,sh,x,y,w,h]=draw;assert.ok(sx>=0&&sy>=0&&x>=0&&y>=0);
@@ -70,14 +82,14 @@ test('the real painter draws every admitted silhouette, keeps atlas aspect and r
     canvas.balanced();assert.equal(JSON.stringify(composition.batchDetailsV168),before);
     const empty=ctx(),missing=drawHubRoomBatchDetailsV168(empty,composition.batchDetailsV168);
     assert.equal(missing.pending.length+missing.painted.length,report.painted.length);empty.balanced();
-    const actual=drawHubRoomLifeV136(ctx(),room,{images});assert.ok(actual.batchDetailsV168);
+    const actual=drawHubRoomLifeV136(ctx(),room,{...options,images});assert.ok(actual.batchDetailsV168);
     assert.deepEqual(actual.batchDetailsV168.painted.map(item=>item.id),report.painted.map(item=>item.id));
   }
   assert.equal(total,100);assert.ok(bitmapDraws>=10);
 });
 
 test('bad wall placements and duplicate or unsupported installations are omitted explicitly without relocation', () => {
-  const room=rooms.find(r=>r.id==='briefing'),composition=getHubRoomLifePlanV136(room);
+  const room=rooms.find(r=>r.id==='briefing'),composition=getHubRoomLifePlanV136(room,optionsFor(room));
   const source=HUB_ROOM_BATCH_DETAILS_V168.find(item=>item.roomId===room.id),start=composition.spatial.bounds.x;
   const reserved=composition.spatial.reservations.find(b=>b.w>40&&b.h>24);
   assert.ok(reserved);

@@ -30,13 +30,13 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "kind": "personal-shelf",
     "purpose": "crew-personal-reading-shelf",
     "bounds": {
-      "x": 544,
-      "y": 322,
-      "w": 88,
+      "x": 672,
+      "y": 278,
+      "w": 80,
       "h": 44
     },
     "mount": "rear-wall",
-    "note": "A compact wall shelf fills the bay beyond the upper berth, away from the service doorway and the existing bedside surfaces."
+    "note": "An 80px reading shelf fits the narrow upper-deck wall pier east of the ladder clearance, stopping before the ship-service doorway; no books project into either access."
   },
   {
     "id": "T168-H03",
@@ -45,12 +45,12 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "purpose": "aft-berth-clean-linen-storage",
     "bounds": {
       "x": 960,
-      "y": 300,
+      "y": 234,
       "w": 80,
       "h": 64
     },
     "mount": "rear-wall",
-    "note": "A closed linen cabinet serves the aft berth group; its footprint stops above the existing personal-effects shelf and below the wall crown."
+    "note": "A closed linen cabinet serves the aft berths from the high east wall bay; its lower edge remains above both the ventilation grille and its approach envelope."
   },
   {
     "id": "T168-H04",
@@ -58,13 +58,13 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "kind": "ration-shelf",
     "purpose": "mess-sealed-ration-distribution",
     "bounds": {
-      "x": 384,
-      "y": 388,
+      "x": 576,
+      "y": 410,
       "w": 96,
       "h": 56
     },
     "mount": "rear-wall",
-    "note": "A restrained ration shelf belongs over the tray-return side of the mess, below the viewport rather than across its glazing."
+    "note": "The sealed ration shelf occupies the clear central wall bay between the west console and east ladder, above the lower serving deck and below the glazing."
   },
   {
     "id": "T168-H05",
@@ -72,13 +72,13 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "kind": "utensil-rail",
     "purpose": "mess-tray-and-cup-storage",
     "bounds": {
-      "x": 544,
-      "y": 388,
+      "x": 640,
+      "y": 344,
       "w": 96,
       "h": 32
     },
     "mount": "rear-wall",
-    "note": "A short utensil rail sits beside the ration stock, distinct from the serving counter and the native seating."
+    "note": "A short utensil rail sits above and beside the ration shelf, to the east of the viewport and clear of the upper-deck console and moving rear equipment."
   },
   {
     "id": "T168-H06",
@@ -86,13 +86,13 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "kind": "hygiene-dispenser",
     "purpose": "mess-cleaning-refill-reservoir",
     "bounds": {
-      "x": 640,
-      "y": 454,
+      "x": 160,
+      "y": 234,
       "w": 48,
       "h": 48
     },
     "mount": "rear-wall",
-    "note": "A small sealed cleaning refill dispenser is wall-mounted above the serving approach, clear of chairs and the equipment bank."
+    "note": "A small sealed cleaning-refill reservoir is fixed to the west upper-deck wall above the air return, near service access without covering its grille or the doorway below."
   },
   {
     "id": "T168-H07",
@@ -114,13 +114,13 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "kind": "sterile-cabinet",
     "purpose": "clinical-clean-ppe-wall-cabinet",
     "bounds": {
-      "x": 928,
-      "y": 344,
+      "x": 800,
+      "y": 234,
       "w": 80,
       "h": 60
     },
     "mount": "rear-wall",
-    "note": "A closed PPE cabinet is mounted beside the clinical service bay, above the existing handwash zone with the medical bed envelope clear."
+    "note": "The closed PPE cabinet occupies the high clinical wall bay between the room sign and gas-service plaque; its lower edge stays above the native vent and its access envelope, with every bed clear."
   },
   {
     "id": "T168-H09",
@@ -171,12 +171,12 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "purpose": "forensic-sealed-identification-consumables",
     "bounds": {
       "x": 704,
-      "y": 278,
+      "y": 234,
       "w": 80,
       "h": 52
     },
     "mount": "rear-wall",
-    "note": "A separate sealed identification kit is mounted above the existing forensic consumables, with both worktop and gantry clear."
+    "note": "A separate sealed identification kit stays high above the forensic consumables, west of the room sign and above the full rear-equipment drift envelope; worktop and gantry remain clear."
   },
   {
     "id": "T168-H13",

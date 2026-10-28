@@ -17,13 +17,13 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "kind": "flight-kit",
     "purpose": "ground-crew-flight-harness-and-inspection-kit",
     "bounds": {
-      "x": 160,
-      "y": 234,
+      "x": 244,
+      "y": 190,
       "w": 80,
-      "h": 60
+      "h": 56
     },
     "mount": "rear-wall",
-    "note": "Baie murale ouest avant la zone vitrée, au-dessus des portes et hors de la coque du dropship."
+    "note": "Casier de harnais dans la baie haute entre l’échelle ouest et le hublot ; dégagement de quatre pixels sous le plafond et de douze avant l’approche du conduit."
   },
   {
     "id": "T168-E02",
@@ -32,12 +32,12 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "purpose": "landing-gear-ground-hydraulics-isolation",
     "bounds": {
       "x": 640,
-      "y": 344,
+      "y": 350,
       "w": 80,
-      "h": 60
+      "h": 56
     },
     "mount": "rear-wall",
-    "note": "Module de support au train entre les outils hauts et la silhouette du véhicule ; aucune pièce posée sur sa trajectoire."
+    "note": "Support hydraulique du train fixé au mur entre deux consoles de passerelle ; sous son bandeau et au-dessus de l’arc réservé au dropship."
   },
   {
     "id": "T168-E03",
@@ -45,13 +45,13 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "kind": "battery-charger",
     "purpose": "ground-support-battery-charging-and-retention",
     "bounds": {
-      "x": 832,
-      "y": 344,
+      "x": 800,
+      "y": 350,
       "w": 80,
       "h": 56
     },
     "mount": "rear-wall",
-    "note": "Recharge des batteries de piste dans la baie droite, sous les outils de passerelle et avant le coffret électrique natif."
+    "note": "Recharge des batteries de piste dans la baie entre deux consoles, sous la passerelle et au-dessus de la coque du dropship ; l’échelle droite reste dégagée."
   },
   {
     "id": "T168-E04",
@@ -87,13 +87,13 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "kind": "coolant-loop",
     "purpose": "closed-reactor-coolant-sampling-and-bypass",
     "bounds": {
-      "x": 992,
-      "y": 432,
+      "x": 1024,
+      "y": 190,
       "w": 96,
       "h": 64
     },
     "mount": "rear-wall",
-    "note": "Circuit fermé de prélèvement sous les raccords natifs, fixé au mur et au-dessus des coffres de maintenance."
+    "note": "Boucle fermée de prélèvement dans la baie haute droite, au-dessus du départ de refroidissement natif ; l’ascenseur, son échelle et le bord de plateforme restent libres."
   },
   {
     "id": "T168-E07",
@@ -115,13 +115,13 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "kind": "valve-box",
     "purpose": "air-loop-isolation-and-maintenance-bypass",
     "bounds": {
-      "x": 672,
-      "y": 278,
+      "x": 480,
+      "y": 366,
       "w": 80,
       "h": 52
     },
     "mount": "rear-wall",
-    "note": "Vannes de dérivation au-dessus de l’entrée vers les services, sans traverser son volume de porte."
+    "note": "Vannes d’isolement sous le hublot de traitement d’air, à gauche de l’échelle centrale et à droite de son outillage mural ; hors des approches de conduits."
   },
   {
     "id": "T168-E09",
@@ -129,13 +129,13 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "kind": "air-filter",
     "purpose": "removable-clean-filter-inspection-housing",
     "bounds": {
-      "x": 880,
-      "y": 366,
+      "x": 248,
+      "y": 212,
       "w": 72,
       "h": 64
     },
     "mount": "rear-wall",
-    "note": "Cartouche de filtration sous le retour haut, près des stocks d’air mais séparée du terminal au sol."
+    "note": "Boîtier filtrant près de la réserve respiratoire gauche, séparé de son casier et placé avant le hublot ; au-dessus de l’ensemble de service et loin des conduits navigables."
   },
   {
     "id": "T168-E10",
@@ -157,13 +157,13 @@ export const HUB_ENGINEERING_DETAILS_V168 = freeze([
     "kind": "sensor-calibration",
     "purpose": "receiver-reference-and-calibration-standard",
     "bounds": {
-      "x": 160,
-      "y": 388,
+      "x": 224,
+      "y": 432,
       "w": 80,
       "h": 56
     },
     "mount": "rear-wall",
-    "note": "Étalon de réception sous le hublot gauche et au-dessus du terminal ; le passage d’échelle reste libre."
+    "note": "Étalon mural au-dessus du terminal de réception et sous sa passerelle, entre les retombées des consoles ; le conduit et l’accès de service restent libres."
   },
   {
     "id": "T168-E12",

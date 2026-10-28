@@ -39,6 +39,7 @@ git = lambda *cmd: subprocess.check_output(['git', *cmd], cwd=repo, text=True).s
 report = dict(schema=168, status='running', stage=args.stage, startedAt=now(), checks=[], captures=[],
               fixtures=[], views=[], pageErrors=[], requestFailures=[], httpErrors=[],
               method='Declared Save fixtures, native hub entry and selected short A/D controls. Actual canvas pixels are compared with an independent detached component reference.',
+              cameraPolicy='Fixed room anchors at640; long annexes additionally use their geometric centre and width minus640. Safe floor starts depend only on native collision geometry, never installation positions.',
               limitations=[
                   'Automated Chromium observation, no human participants or canonical1:1 approval.',
                   'Room and camera starting positions are declared fixtures, not observed travel to those positions.',
@@ -86,6 +87,7 @@ const overlaps=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const valid=b=>b&&[b.x,b.y,b.w,b.h].every(Number.isFinite);
 const main=HUB_DECKS.flatMap((d,deck)=>d.rooms.map(room=>({room,deck,annex:false})));
 const annexes=HUB_ANNEXES_V137.map(getHubAnnexRuntimeGeometryV139).map(room=>({room,deck:HUB_DECKS.findIndex(d=>d.id===room.parentDeck),annex:true}));
+if(details.length!==100||new Set(details.map(d=>d.id)).size!==100)throw Error('Expected exactly100 unique authored installations');
 const result=[];
 for(const {room,deck,annex} of [...main,...annexes]){
  const start=room.xStart||0,width=room.profile?.worldWidth||room.world?.width||1280;
@@ -100,13 +102,15 @@ for(const {room,deck,annex} of [...main,...annexes]){
    Math.max(0,Math.min(5120-1280,start+local-640));
    // The optional short native walk and camera easing retain64px safety.
    const x=(annex?0:start)+item.bounds.x;return x>=camera+64&&x+item.bounds.w<=camera+1216;};
- const remaining=new Set(items.map(d=>d.id));let view=0;
- while(remaining.size){
-  const first=items.find(d=>remaining.has(d.id));
-  const local=room.id==='personal-refuge'?nearest(640):nearest(first.bounds.x+first.bounds.w/2-22);
+ // Stimuli are fixed by room dimensions and collision geometry. Moving,
+ // adding or removing decoration cannot move a baseline camera fixture.
+ // The refuge has exactly one real E entry; its Save resumes at the parent.
+ const anchors=room.id==='personal-refuge'||!annex||width<=1280?[640]:[640,width/2,width-640];
+ const covered=new Set();let view=0;
+ for(const anchor of [...new Set(anchors)]){
+  const local=nearest(anchor);
   const expected=items.filter(d=>visible(d,local));
-  if(!expected.some(d=>remaining.has(d.id)))throw Error('No complete viewport for '+first.id);
-  for(const d of expected)remaining.delete(d.id);
+  for(const d of expected)covered.add(d.id);
   const walkSpan=(direction)=>{const xx=(annex?0:start)+local+(direction<0?-40:0);
     return blocks.every(b=>!overlaps({x:xx,y:532,w:84,h:92},b))&&free(local+direction*40);};
   const walk=room.id==='personal-refuge'||view>0?0:walkSpan(1)?1:walkSpan(-1)?-1:0;
@@ -114,6 +118,8 @@ for(const {room,deck,annex} of [...main,...annexes]){
     localStart:local,roomStart:start,width,enterRefuge:room.id==='personal-refuge',walkDirection:walk,
     expectedIds:expected.map(d=>d.id),expectedInstallations:items,projection:room.id==='maintenance-spine'?'parallel-oblique':'orthographic'});
  }
+ const uncovered=items.filter(d=>!covered.has(d.id)).map(d=>d.id);
+ if(uncovered.length)throw Error('Fixed room cameras do not fully cover '+room.id+': '+uncovered.join(','));
 }
 console.log(JSON.stringify(result));
 """
@@ -125,6 +131,7 @@ if args.rooms:
     configs = [c for c in configs if c['roomId'] in args.rooms]
 target_rooms = sorted({c['roomId'] for c in configs})
 target_ids = sorted({item['id'] for c in configs for item in c['expectedInstallations']})
+assert args.rooms or len(target_ids) == 100, 'The complete profile must cover exactly100 unique installation IDs'
 report.update(requestedRooms=target_rooms, expectedInstallationIds=target_ids, declaredViewCount=len(configs),
               subset=bool(args.rooms), requestedBatchSize=len(target_ids))
 
@@ -160,7 +167,10 @@ def fixture(config):
         source = args.fixture_dir.resolve()
         raw, meta_raw = (source / save_name).read_bytes(), (source / meta_name).read_bytes()
         meta = json.loads(meta_raw)
-        assert meta['config'] == config, 'The comparison fixture differs from this exact room/view configuration'
+        stimulus_keys = ('roomId', 'annex', 'deck', 'parentRoomId', 'localStart', 'roomStart',
+                         'width', 'enterRefuge', 'walkDirection')
+        assert all(meta['config'][key] == config[key] for key in stimulus_keys), \
+            'The comparison fixture differs from this exact room/view stimulus'
         assert json.loads(raw)['player']['name'] == 'QA Tantalus batch100 V168'
     else:
         generated = json.loads(subprocess.check_output(
@@ -220,7 +230,12 @@ PIXELS = r"""async raw => {
  const cam=a?h.annexCameraV71.x:h.camera.x,nativeContext=canvas.getContext('2d'),native=nativeContext.getImageData(0,0,canvas.width,canvas.height).data;
  const {getHubRoomLifePlanV136}=await import('/src/hub-room-life-v136.js');
  const {drawHubRoomBatchDetailsV168}=await import('/src/hub-room-batch-details-v168.js');
- const plan=getHubRoomLifePlanV136(room).batchDetailsV168;
+ // Copy the native drawHubRoomDressingV136 inputs exactly: architecture is
+ // part of admission and cannot be omitted from this separate reference.
+ const options={doors:room.world?[]:h.doorStates||[],ladders:room.world?room.ladders||[]:h.v51Ladders||[],
+  vents:room.world?room.vents||[]:h.v51Vents||[],
+  platforms:room.world?room.platforms||[]:(h.v51Platforms||[]).filter(p=>p.x<room.xEnd&&p.x+p.w>room.xStart)};
+ const plan=getHubRoomLifePlanV136(room,options).batchDetailsV168;
  const reference=document.createElement('canvas');reference.width=canvas.width;reference.height=canvas.height;
  const c=reference.getContext('2d');c.imageSmoothingEnabled=nativeContext.imageSmoothingEnabled;
  c.imageSmoothingQuality=nativeContext.imageSmoothingQuality;c.save();c.translate(-cam,0);
