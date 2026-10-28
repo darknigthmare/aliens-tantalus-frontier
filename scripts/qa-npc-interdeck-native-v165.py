@@ -247,7 +247,8 @@ def player_lift_to(page, c, deck):
             return
         before = r['deck']
         page.locator('#hub-canvas').focus()
-        page.keyboard.press('KeyW' if deck > before else 'KeyS')
+        # Native W decreases the deck index; S increases it.
+        page.keyboard.press('KeyS' if deck > before else 'KeyW')
         page.wait_for_function('before=>__ATF_HUB__.hubLiftTransitV163?.trip||__ATF_HUB__.state.deck!==before', arg=before)
         page.wait_for_function('before=>__ATF_HUB__.state.deck!==before&&!__ATF_HUB__.hubLiftTransitV163?.trip', arg=before, timeout=90000)
     raise AssertionError('Native player lift did not reach destination')

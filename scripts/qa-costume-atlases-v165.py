@@ -205,7 +205,9 @@ try:
   page.goto(args.base,wait_until='domcontentloaded');page.locator('#title-start').click();page.locator('#title-options').click()
   page.locator('#save-import').set_input_files({'name':'costumes-v165.json','mimeType':'application/json','buffer':initial})
   page.wait_for_function("()=>__ATF_V51__?.saveSystem.data.player.name==='QA Costumes V165'")
-  before=inventory(page);open_view(page,'archives')
+  # Costume archives are part of Echo-9, not the mission Archives view.
+  before=inventory(page);open_view(page,'crew')
+  page.locator('[data-panel="crew"] #costume-archives-v119').wait_for(state='visible')
   page.locator('#costume-archives-v119 [data-costume-id="'+outfit['costumeId']+'"]').click()
   page.wait_for_function('o=>{const p=__ATF_V51__.saveSystem.data.player;return p.costumeId===o.costumeId&&JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots);}',arg=outfit)
   check(slug+': real costume button equips all six parts without identity/resources/issued gear/J2 changes',inventory(page)==before)

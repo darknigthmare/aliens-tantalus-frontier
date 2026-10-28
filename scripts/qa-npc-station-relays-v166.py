@@ -329,8 +329,12 @@ def local_return_ready(r, c):
     if c['localId'] != 'rook-cctv' or args.comparison_stage == 'before':
         return True
     echo = r['echo']
-    return echo is None or echo['roomId'] in ['bridge', 'briefing', 'combat-information', 'cryo-bay'] \
-        and echo['x'] + echo['w'] + 12 <= c['parentX']
+    # The spectator must leave before it blocks Rook's approach to the local
+    # exit. ECHO may stand on either side of the real parent aperture; only
+    # intersection with its arrival clearance prevents the native exit.
+    return echo is None or echo['roomId'] not in ['bridge', 'briefing', 'combat-information', 'cryo-bay'] \
+        or echo['x'] + echo['w'] + 12 <= c['parentX'] \
+        or echo['x'] >= c['parentX'] + r['player']['w'] + 12
 
 
 def occupied_local_arrival(r, c):
