@@ -259,7 +259,8 @@ def player_lift_to(page, c, deck):
             continue
         before = r['deck']
         page.locator('#hub-canvas').focus()
-        page.keyboard.press('KeyW' if deck > before else 'KeyS')
+        # Native W goes toward the lower deck index; S toward the higher.
+        page.keyboard.press('KeyS' if deck > before else 'KeyW')
         try:
             page.wait_for_function('before=>__ATF_HUB__.hubLiftTransitV163?.trip||__ATF_HUB__.state.deck!==before', arg=before, timeout=3000)
         except PlaywrightTimeout:
