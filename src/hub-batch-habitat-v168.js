@@ -44,13 +44,13 @@ export const HUB_HABITAT_DETAILS_V168 = freeze([
     "kind": "linen-cabinet",
     "purpose": "aft-berth-clean-linen-storage",
     "bounds": {
-      "x": 960,
+      "x": 1072,
       "y": 234,
-      "w": 80,
+      "w": 64,
       "h": 64
     },
     "mount": "rear-wall",
-    "note": "A closed linen cabinet serves the aft berths from the high east wall bay; its lower edge remains above both the ventilation grille and its approach envelope."
+    "note": "A compact closed linen cabinet serves the aft berths from the east wall pier, beyond the visible vertical pipes and above the ventilation approach, with its front completely clear."
   },
   {
     "id": "T168-H04",

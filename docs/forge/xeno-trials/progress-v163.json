@@ -2756,9 +2756,9 @@
     "src/hive-missions-v131.js": "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
     "src/hub-annex-npc-life-v141.js": "a7ef6f64c02d2a7445a155bf017dbf0624a06d7f20c45cc73b118ba0c0f5c8de",
     "src/hub-annex-registry-v87.js": "67d74d09b8ffed8f078516bf99259ee3491610947669f8acbb5616da3efbece7",
-    "src/hub-batch-command-v168.js": "82b773e62e03ba72a99ed161044b43c36f56d3e2756cd795aade1bc2a58dd255",
+    "src/hub-batch-command-v168.js": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
     "src/hub-batch-engineering-v168.js": "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
-    "src/hub-batch-habitat-v168.js": "e245850c5c22ec8be2615d645fdfbc7f975b0e54445b2ff90f04d4010c6c50dd",
+    "src/hub-batch-habitat-v168.js": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
     "src/hub-batch-industrial-v168.js": "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
     "src/hub-bulkhead-depth-v134.js": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
     "src/hub-destination-signage-runtime-v138.js": "f9502b068c8c53932e403b4b512d562ea72c9f145e8bb5c904dc8f7ab9dfd428",
@@ -2766,7 +2766,7 @@
     "src/hub-game.js": "2e6c4101e04579252bc6045e22cb9305921fbe20c931072732d9a9e045e15b3e",
     "src/hub-lift-transit-v163.js": "05c6efb9553eb7908a633b1c811651efe6c292c4a036c2f8628fa051c1bae824",
     "src/hub-room-backgrounds-v168.js": "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
-    "src/hub-room-batch-details-v168.js": "f940cf464baa31c21440f30e17b3d2a2eb1389008e14c5ce6b3aa877eae28068",
+    "src/hub-room-batch-details-v168.js": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
     "src/hub-room-dressing-v134.js": "c1b5d8364ccf714ea64a540276197744537829d2524c0407c83b51adf822e8fd",
     "src/hub-room-life-v136.js": "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
     "src/hub-room-parallax-v134.js": "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
@@ -6597,7 +6597,7 @@
         [
           "src/hub-batch-command-v168.js",
           "Non épinglé en V162",
-          "82b773e62e03ba72a99ed161044b43c36f56d3e2756cd795aade1bc2a58dd255",
+          "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
           "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
           "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
@@ -6611,7 +6611,7 @@
         [
           "src/hub-batch-habitat-v168.js",
           "Non épinglé en V162",
-          "e245850c5c22ec8be2615d645fdfbc7f975b0e54445b2ff90f04d4010c6c50dd",
+          "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
           "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
           "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
@@ -6653,7 +6653,7 @@
         [
           "src/hub-room-batch-details-v168.js",
           "Non épinglé en V162",
-          "f940cf464baa31c21440f30e17b3d2a2eb1389008e14c5ce6b3aa877eae28068",
+          "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
           "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
           "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
@@ -15951,7 +15951,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "778f03106c362418b8b6c60ec32908e5ea2f889e2b8579feea91e97f742aa900",
+  "workbookSha256": "5dc7c05f8e0be15ccb3f84ad5f390a3b946db27c12cd17a0bcdb354141a0e18f",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -16424,7 +16424,7 @@
       {
         "path": "src/hub-batch-command-v168.js",
         "previousSha256": null,
-        "currentSha256": "82b773e62e03ba72a99ed161044b43c36f56d3e2756cd795aade1bc2a58dd255",
+        "currentSha256": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
@@ -16450,7 +16450,7 @@
       {
         "path": "src/hub-batch-habitat-v168.js",
         "previousSha256": null,
-        "currentSha256": "e245850c5c22ec8be2615d645fdfbc7f975b0e54445b2ff90f04d4010c6c50dd",
+        "currentSha256": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
@@ -16528,7 +16528,7 @@
       {
         "path": "src/hub-room-batch-details-v168.js",
         "previousSha256": null,
-        "currentSha256": "f940cf464baa31c21440f30e17b3d2a2eb1389008e14c5ce6b3aa877eae28068",
+        "currentSha256": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
@@ -21567,7 +21567,7 @@
       {
         "path": "src/hub-batch-command-v168.js",
         "previousSha256": null,
-        "currentSha256": "82b773e62e03ba72a99ed161044b43c36f56d3e2756cd795aade1bc2a58dd255",
+        "currentSha256": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
@@ -21593,7 +21593,7 @@
       {
         "path": "src/hub-batch-habitat-v168.js",
         "previousSha256": null,
-        "currentSha256": "e245850c5c22ec8be2615d645fdfbc7f975b0e54445b2ff90f04d4010c6c50dd",
+        "currentSha256": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
@@ -21670,7 +21670,7 @@
       {
         "path": "src/hub-room-batch-details-v168.js",
         "previousSha256": null,
-        "currentSha256": "f940cf464baa31c21440f30e17b3d2a2eb1389008e14c5ce6b3aa877eae28068",
+        "currentSha256": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
         "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
@@ -22308,7 +22308,7 @@
     "portraitSpeakers": 16,
     "newPngAssets": 0,
     "ledgerPath": "docs/forge/xeno-trials/batch100-v168.json",
-    "ledgerSha256": "7d409a01abdc7351c534ad13f8a1c9e48416180d95776f23f5c7f07adebdd173",
+    "ledgerSha256": "6363ffb045e53cbb00e691b1b84bb43b6793b366c948dbb30bdc7804c4c0ef63",
     "geometryChanged": false,
     "artistic1to1Approved": false,
     "humanParticipants": 0,

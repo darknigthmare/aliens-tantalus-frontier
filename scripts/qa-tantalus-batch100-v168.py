@@ -240,7 +240,10 @@ PIXELS = r"""async raw => {
  const c=reference.getContext('2d');c.imageSmoothingEnabled=nativeContext.imageSmoothingEnabled;
  c.imageSmoothingQuality=nativeContext.imageSmoothingQuality;c.save();c.translate(-cam,0);
  const draw=drawHubRoomBatchDetailsV168(c,plan,{images:h.hubLifeImagesV136||new Map()});c.restore();
- if(a){const v=c.createRadialGradient(640,396,120,640,396,760);v.addColorStop(0,'rgba(0, 0, 0, 0)');v.addColorStop(1,'rgba(0, 3, 4, .62)');c.fillStyle=v;c.fillRect(0,0,1280,720);}
+ // The refuge returns before drawAnnexLightingV71; applying the ordinary
+ // annex vignette there would compare its actual pixels with invented shade.
+ const vignette=!!a&&a.id!=='personal-refuge';
+ if(vignette){const v=c.createRadialGradient(640,396,120,640,396,760);v.addColorStop(0,'rgba(0, 0, 0, 0)');v.addColorStop(1,'rgba(0, 3, 4, .62)');c.fillStyle=v;c.fillRect(0,0,1280,720);}
  const ref=c.getImageData(0,0,reference.width,reference.height).data;
  return cfg.expectedIds.map(id=>{const item=plan.items.find(v=>v.id===id);if(!item)return{id,error:'missing-plan-item'};
   const b=item.bounds,x0=Math.ceil(b.x-cam),y0=Math.ceil(b.y),x1=Math.floor(b.x+b.w-cam),y1=Math.floor(b.y+b.h);
@@ -256,7 +259,7 @@ PIXELS = r"""async raw => {
   return{id,kind:item.kind,bounds:{...b},cameraX:cam,canvasWidth:canvas.width,canvasHeight:canvas.height,
    fullyInNativeCanvas:visible,expectedOpaqueBrightPixels:candidates,nativeMatchingCorePixels:matches,
    nativeOpaquePixels:opaque,nativeChromaticPixels:colorful,detachedReferencePainted:draw.painted.some(v=>v.id===id),
-   referenceMethod:'separate-component-render-no-engine-mutation',lighting:a?'native-annex-radial-vignette':'main-room'};
+   referenceMethod:'separate-component-render-no-engine-mutation',lighting:vignette?'native-annex-radial-vignette':a?'native-refuge-no-vignette':'main-room'};
  });
 }"""
 

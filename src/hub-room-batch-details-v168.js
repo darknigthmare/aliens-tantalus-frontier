@@ -90,6 +90,19 @@ const atlasKinds = {
   'service-conduits':[HUB_FURNISHING_ATLAS_V137,'service-conduits'],
   'emergency-cabinet':[HUB_FURNISHING_ATLAS_V137,'emergency-cabinet']
 };
+const equipmentLabels = {
+  'sterile-cabinet':'MED', 'personal-shelf':'PERSONAL', 'tool-board':'TOOLS',
+  'data-cabinet':'RECORDS', 'service-conduits':'SERVICE', 'emergency-cabinet':'RESCUE'
+};
+function equipmentLabel(c,b,kind) {
+  // A small fixed identification plate belongs to the actual equipment.
+  // Keep it within the assembly without editing the original source atlas.
+  const width=Math.min(30,b.w-14),x=b.x+(b.w-width)/2,y=b.y+b.h-7;
+  c.fillStyle='#263b3b';c.fillRect(x-1,y-1,width+2,7);
+  c.fillStyle='#bac1a7';c.fillRect(x,y,width,5);
+  c.fillStyle='#182e31';c.font='4px monospace';c.textAlign='center';c.textBaseline='middle';
+  c.fillText(equipmentLabels[kind],x+width/2,y+2.5,width-4);
+}
 function mounts(c,b) {
   // Every loose silhouette is visibly supported by two short wall brackets.
   for (const x of [b.x+5,b.x+b.w-8]) {
@@ -103,7 +116,8 @@ function drawInstallation(c,item,images) {
     const [atlas,id]=atlasKinds[k],cell=atlas.cells[id],image=images.get(atlas.asset);
     if (!image?.complete || image.naturalWidth!==atlas.width || image.naturalHeight!==atlas.height) return false;
     const s=cell.source,scale=Math.min(w/s.w,h/s.h,1),ww=s.w*scale,hh=s.h*scale;
-    mounts(c,b);c.drawImage(resolveSpriteDrawableV134(image),s.x,s.y,s.w,s.h,x+(w-ww)/2,y+(h-hh)/2,ww,hh);return true;
+    mounts(c,b);c.drawImage(resolveSpriteDrawableV134(image),s.x,s.y,s.w,s.h,x+(w-ww)/2,y+(h-hh)/2,ww,hh);
+    equipmentLabel(c,b,k);return true;
   }
   mounts(c,b);
   if (k==='camera-dome') {

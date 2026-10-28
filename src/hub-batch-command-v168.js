@@ -32,12 +32,12 @@ export const HUB_COMMAND_DETAILS_V168 = freeze([
     "purpose": "manual-navigation-chart-drawer",
     "bounds": {
       "x": 672,
-      "y": 294,
+      "y": 274,
       "w": 80,
       "h": 48
     },
     "mount": "rear-wall",
-    "note": "Chart case on the solid pier immediately right of the navigation window, above the access deck and outside both ladder clearances."
+    "note": "Chart case on the solid pier immediately right of the navigation window, with its brackets above the visible guardrail and outside both ladder clearances."
   },
   {
     "id": "T168-C03",
