@@ -182,7 +182,11 @@ def stop_case(page, index, phase_bin):
           if(!frames.stopping)frames.stopping={...row,png:canvas.toDataURL('image/png')};
           if(!frames.adjustment&&row.time-stoppedAt>=.06)frames.adjustment={...row,png:canvas.toDataURL('image/png')};
         }
+        // Simulation can settle one frame before a throttled renderer. Read
+        // the completed rendered stance; its spread is still checked below.
+        const rendered=row.visual?.locomotion;
         if(Math.abs(row.player.vx)<.5&&!state?.moving&&state?.settleProgress>=1&&!state?.stopRecoveryV165
+          &&rendered?.mode==='idle'&&!rendered?.stopRecoveryV165
           &&row.time-first.time>.55){
           frames.rest={...row,png:canvas.toDataURL('image/png')};resolve({rows,frames});return;
         }
