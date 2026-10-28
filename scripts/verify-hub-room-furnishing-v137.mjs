@@ -223,10 +223,13 @@ test('render evidence reports actual loaded crops and mounted supports without c
   for(const room of rooms){
     const before=structuredClone(room),subject=canvas(),report=drawHubRoomLifeV136(subject.ctx,room,{...optionsFor(room),images});
     const painted=subject.calls.filter(call=>call[0]==='image'&&call[1]===originalAtlas);atlasDraws+=painted.length;
-    expectedAtlasDraws+=getHubRoomLifePlanV136(room,optionsFor(room)).items.filter(item=>item.asset===atlas.asset).length;
+    const planned=getHubRoomLifePlanV136(room,optionsFor(room));
+    expectedAtlasDraws+=planned.items.filter(item=>item.asset===atlas.asset).length
+      +planned.batchDetailsV168.items.filter(item=>item.asset===atlas.asset).length;
     assert.deepEqual(report.furnishingV137.pendingImageRoles,[],room.id);
     assert.equal(report.furnishingV137.paintedRoles.length,report.furnishingV137.added.length,room.id);
-    assert.equal(report.items.filter(item=>item.source===atlas.asset).length,painted.length,room.id);
+    assert.equal(report.items.filter(item=>item.source===atlas.asset).length
+      +report.batchDetailsV168.painted.filter(item=>item.source===atlas.asset).length,painted.length,room.id);
     for(const call of painted){const [sx,sy,sw,sh,x,y,w,h]=call.slice(2);near(sw/sh,w/h);assert.ok(sx>=0&&sy>=0&&sx+sw<=atlas.width&&sy+sh<=atlas.height);assert.ok([x,y,w,h].every(Number.isFinite));}
     assert.equal(subject.calls.filter(call=>call[0]==='save').length,subject.calls.filter(call=>call[0]==='restore').length);
     assert.deepEqual(room,before);

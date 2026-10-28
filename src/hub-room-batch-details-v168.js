@@ -60,7 +60,9 @@ export function getHubRoomBatchDetailPlanV168(room, composition, { entries = HUB
       continue;
     }
     seen.add(entry.id);
+    const native=atlasKinds[entry.kind],cell=native&&native[0].cells[native[1]];
     plan.items.push({...entry,bounds:target,clearanceBounds:envelope,support:'flush-rear-wall',
+      ...(cell?{asset:native[0].asset,source:{...cell.source}}:{}),
       plane:'rear',projection:plan.projection,projectionDxPerY:plan.projectionDxPerY,
       collidable:false,interactive:false});
   }
@@ -188,6 +190,7 @@ export function drawHubRoomBatchDetailsV168(ctx, plan, {images=new Map()}={}) {
   for(const item of plan.items){
     ctx.save();ctx.beginPath();const b=item.clearanceBounds;ctx.rect(b.x,b.y,b.w,b.h);ctx.clip();
     if(drawInstallation(ctx,item,images))report.painted.push({id:item.id,kind:item.kind,role:item.purpose,
+      source:item.asset||null,sourceRect:item.source?{...item.source}:null,
       bounds:{...item.bounds},support:item.support,sector:item.sector});
     else report.pending.push(item.id);
     ctx.restore();

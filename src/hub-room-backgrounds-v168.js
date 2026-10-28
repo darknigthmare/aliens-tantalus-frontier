@@ -129,58 +129,68 @@ export function getHubRoomBackgroundPlanV168(room, model, { shell = null } = {})
     physicalCoordinatesChanged: false, nativeImageScalingChanged: false };
 }
 
-const rect = (ctx, color, x, y, w, h) => { ctx.fillStyle = color; ctx.fillRect(x, y, w, h); };
+const rect = (ctx, plan, color, x, y, w, h) => {
+  const bounds = { x, y, w, h };
+  if (!valid(bounds)) return;
+  ctx.fillStyle = color;
+  // Keep the emitted paint geometry outside authored glass, independently
+  // of Canvas clip state. The surrounding clip remains a second safeguard.
+  for (const region of plan.regions) {
+    const piece = intersect(bounds, region);
+    if (piece) ctx.fillRect(piece.x, piece.y, piece.w, piece.h);
+  }
+};
 
 function lining(ctx, plan) {
   const b = plan.bounds, p = plan.material, bayTop = b.y + 16, bayHeight = Math.min(84, b.h - 28);
-  ctx.globalAlpha = .075; rect(ctx, p.wash, b.x, b.y, b.w, b.h); ctx.globalAlpha = 1;
+  ctx.globalAlpha = .075; rect(ctx, plan, p.wash, b.x, b.y, b.w, b.h); ctx.globalAlpha = 1;
   if (plan.protectedNativeEnvelope) return;
   for (let x = plan.originX - plan.pitch; x < b.x + b.w; x += plan.pitch) {
     const left = x + 20, right = x + plan.pitch - 20, width = right - left;
     ctx.globalAlpha = .37;
     if (plan.lining === 'acoustic') {
-      rect(ctx, p.dark, left, bayTop, width, bayHeight);
-      for (let row = 9; row < bayHeight - 5; row += 9) rect(ctx, p.edge, left + 9, bayTop + row, width - 18, 1);
+      rect(ctx, plan, p.dark, left, bayTop, width, bayHeight);
+      for (let row = 9; row < bayHeight - 5; row += 9) rect(ctx, plan, p.edge, left + 9, bayTop + row, width - 18, 1);
     } else if (plan.lining === 'wet' || plan.lining === 'sealed' || plan.lining === 'insulated') {
       ctx.strokeStyle = p.edge; ctx.lineWidth = 1;
       ctx.strokeRect(left, bayTop, width, bayHeight);
-      if (plan.lining === 'wet') for (let row = 24; row < bayHeight; row += 24) rect(ctx, p.edge, left, bayTop + row, width, 1);
-      if (plan.lining === 'insulated') rect(ctx, p.dark, left + 5, bayTop + 5, 3, bayHeight - 10);
+      if (plan.lining === 'wet') for (let row = 24; row < bayHeight; row += 24) rect(ctx, plan, p.edge, left, bayTop + row, width, 1);
+      if (plan.lining === 'insulated') rect(ctx, plan, p.dark, left + 5, bayTop + 5, 3, bayHeight - 10);
     } else if (plan.lining === 'thermal') {
-      rect(ctx, p.dark, left, bayTop, width, bayHeight);
+      rect(ctx, plan, p.dark, left, bayTop, width, bayHeight);
       for (let fin = 8; fin < width - 5; fin += 12) {
-        rect(ctx, p.edge, left + fin, bayTop + 5, 2, bayHeight - 10);
-        rect(ctx, p.wash, left + fin + 2, bayTop + 5, 3, bayHeight - 10);
+        rect(ctx, plan, p.edge, left + fin, bayTop + 5, 2, bayHeight - 10);
+        rect(ctx, plan, p.wash, left + fin + 2, bayTop + 5, 3, bayHeight - 10);
       }
     } else if (plan.lining === 'plenum' || plan.lining === 'archive') {
-      rect(ctx, p.dark, left, bayTop, width, bayHeight);
+      rect(ctx, plan, p.dark, left, bayTop, width, bayHeight);
       const rows = plan.lining === 'archive' ? 5 : 3;
-      for (let row = 0; row < rows; row++) rect(ctx, p.edge, left + 6, bayTop + 8 + row * (bayHeight - 16) / rows, width - 12, 2);
-      if (plan.lining === 'archive') rect(ctx, p.wash, left + width * .48, bayTop + 5, 5, bayHeight - 10);
+      for (let row = 0; row < rows; row++) rect(ctx, plan, p.edge, left + 6, bayTop + 8 + row * (bayHeight - 16) / rows, width - 12, 2);
+      if (plan.lining === 'archive') rect(ctx, plan, p.wash, left + width * .48, bayTop + 5, 5, bayHeight - 10);
     } else if (plan.lining === 'habitat') {
-      rect(ctx, p.dark, left, bayTop, width, bayHeight);
-      rect(ctx, p.edge, left + 2, bayTop + 2, width - 4, 1);
-      rect(ctx, p.edge, left + 2, bayTop + bayHeight - 3, width - 4, 1);
-      rect(ctx, p.wash, left + width / 2, bayTop + 4, 2, bayHeight - 8);
+      rect(ctx, plan, p.dark, left, bayTop, width, bayHeight);
+      rect(ctx, plan, p.edge, left + 2, bayTop + 2, width - 4, 1);
+      rect(ctx, plan, p.edge, left + 2, bayTop + bayHeight - 3, width - 4, 1);
+      rect(ctx, plan, p.wash, left + width / 2, bayTop + 4, 2, bayHeight - 8);
     } else {
       // Signal/service/security/freight bays use straight front-facing ribs.
       // Their structural strips are not perspective returns or a platform.
-      rect(ctx, p.dark, left, bayTop, 6, bayHeight);
-      rect(ctx, p.edge, left + 6, bayTop, 1, bayHeight);
+      rect(ctx, plan, p.dark, left, bayTop, 6, bayHeight);
+      rect(ctx, plan, p.edge, left + 6, bayTop, 1, bayHeight);
       if (plan.lining === 'reinforced' || plan.lining === 'secured') {
-        rect(ctx, p.edge, right - 7, bayTop, 7, bayHeight);
-        for (const yy of [bayTop + 5, bayTop + bayHeight - 9]) rect(ctx, p.edge, left - 4, yy, 15, 4);
+        rect(ctx, plan, p.edge, right - 7, bayTop, 7, bayHeight);
+        for (const yy of [bayTop + 5, bayTop + bayHeight - 9]) rect(ctx, plan, p.edge, left - 4, yy, 15, 4);
       }
-      if (plan.lining === 'signal') for (let run = 0; run < 3; run++) rect(ctx, p.edge, left + 12 + run * 4, bayTop + 4, 1, bayHeight - 8);
+      if (plan.lining === 'signal') for (let run = 0; run < 3; run++) rect(ctx, plan, p.edge, left + 12 + run * 4, bayTop + 4, 1, bayHeight - 8);
       if (plan.lining === 'containment') {
-        rect(ctx, p.edge, left + 10, bayTop + 3, width - 13, 2);
-        rect(ctx, p.edge, right - 3, bayTop + 3, 2, bayHeight - 6);
+        rect(ctx, plan, p.edge, left + 10, bayTop + 3, width - 13, 2);
+        rect(ctx, plan, p.edge, right - 3, bayTop + 3, 2, bayHeight - 6);
       }
     }
   }
   ctx.globalAlpha = .26;
-  rect(ctx, p.dark, b.x, plan.datumY, b.w, plan.lining === 'wet' ? 5 : 3);
-  rect(ctx, p.edge, b.x, plan.datumY, b.w, 1);
+  rect(ctx, plan, p.dark, b.x, plan.datumY, b.w, plan.lining === 'wet' ? 5 : 3);
+  rect(ctx, plan, p.edge, b.x, plan.datumY, b.w, 1);
   ctx.globalAlpha = 1;
 }
 
@@ -191,10 +201,10 @@ export function drawHubRoomBackgroundV168(ctx, room, model, options = {}) {
   for (const r of plan.regions) ctx.rect(r.x, r.y, r.w, r.h);
   ctx.clip(); lining(ctx, plan);
   for (const light of plan.lights) {
-    rect(ctx, '#11242a', light.x - 3, light.y - 3, light.w + 6, light.h + 6);
-    rect(ctx, plan.material.edge, light.x - 1, light.y - 1, light.w + 2, light.h + 2);
-    rect(ctx, plan.light, light.x, light.y, light.w, light.h);
-    ctx.globalAlpha = .12; rect(ctx, plan.light, light.x + 2, light.y + light.h + 1, light.w - 4, 4); ctx.globalAlpha = 1;
+    rect(ctx, plan, '#11242a', light.x - 3, light.y - 3, light.w + 6, light.h + 6);
+    rect(ctx, plan, plan.material.edge, light.x - 1, light.y - 1, light.w + 2, light.h + 2);
+    rect(ctx, plan, plan.light, light.x, light.y, light.w, light.h);
+    ctx.globalAlpha = .12; rect(ctx, plan, plan.light, light.x + 2, light.y + light.h + 1, light.w - 4, 4); ctx.globalAlpha = 1;
   }
   ctx.restore(); return plan;
 }

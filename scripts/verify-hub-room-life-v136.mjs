@@ -186,14 +186,16 @@ test('actual rendering crops all three admitted prop atlases, reports painted eq
     const subject=renderer(),before=structuredClone(room),report=drawHubRoomLifeV136(subject.ctx,room,{...optionsFor(room),images,time:17});
     const atlasPaints=subject.calls.filter(c=>c[0]==='image'&&[atlas,furnishingAtlas,furnitureAtlas].includes(c[1]));imagesDrawn+=atlasPaints.length;
     const composition=getHubRoomLifePlanV136(room,optionsFor(room));
-    expectedImages+=composition.items.filter(item=>images.has(item.asset)).length;
+    expectedImages+=composition.items.filter(item=>images.has(item.asset)).length
+      +composition.batchDetailsV168.items.filter(item=>images.has(item.asset)).length;
     assert.ok(atlasPaints.length>=1,room.id);
     for(const call of atlasPaints){
       assert.equal(call.length,10);const [sx,sy,sw,sh,x,y,w,h]=call.slice(2);
       assert.ok(sx>=0&&sy>=0&&sx+sw<=call[1].naturalWidth&&sy+sh<=call[1].naturalHeight);
       near(w/h,sw/sh);assert.ok([x,y,w,h].every(Number.isFinite));
     }
-    assert.equal(report.items.filter(i=>images.has(i.source)).length,atlasPaints.length);
+    assert.equal(report.items.filter(i=>images.has(i.source)).length
+      +report.batchDetailsV168.painted.filter(i=>images.has(i.source)).length,atlasPaints.length);
     for(const item of report.items){
       assert.ok(item.motif);
       const planned=composition.items.find(entry=>entry.role===item.role&&entry.kind===item.kind
