@@ -1,0 +1,1519 @@
+{
+  "schema": 168,
+  "batchId": "T168-BATCH-001",
+  "state": "PREPUBLICATION",
+  "installations": 100,
+  "rooms": 35,
+  "kinds": 36,
+  "sectors": {
+    "command": 25,
+    "habitat": 25,
+    "industrial": 25,
+    "engineering": 25
+  },
+  "backgroundProfilesCountedAsProps": false,
+  "artistic1to1Approved": false,
+  "humanParticipants": 0,
+  "entries": [
+    {
+      "id": "T168-C01",
+      "roomId": "bridge",
+      "kind": "patch-bay",
+      "purpose": "bridge-wing-intercom-patch",
+      "bounds": {
+        "x": 800,
+        "y": 254,
+        "w": 88,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Starboard wall above the navigation reference position; the observation window and watch desks remain clear.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C02",
+      "roomId": "bridge",
+      "kind": "map-case",
+      "purpose": "manual-navigation-chart-drawer",
+      "bounds": {
+        "x": 672,
+        "y": 274,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Chart case on the solid pier immediately right of the navigation window, with its brackets above the visible guardrail and outside both ladder clearances.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C03",
+      "roomId": "bridge",
+      "kind": "camera-dome",
+      "purpose": "bridge-threshold-security-camera",
+      "bounds": {
+        "x": 1080,
+        "y": 256,
+        "w": 48,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Small threshold camera high on the outboard return wall, above the vent approach and outside the navigation view.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C04",
+      "roomId": "briefing",
+      "kind": "map-case",
+      "purpose": "landing-party-map-sleeves",
+      "bounds": {
+        "x": 608,
+        "y": 248,
+        "w": 64,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Wall chart sleeves above the rear briefing equipment, right of the existing meeting supplies; the header, display and ladder approach stay clear.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C05",
+      "roomId": "briefing",
+      "kind": "comms-rack",
+      "purpose": "briefing-audio-recording-amplifier",
+      "bounds": {
+        "x": 992,
+        "y": 250,
+        "w": 96,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Upper side-wall audio amplifier above the intercom service assembly, separated from the meeting seats.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C06",
+      "roomId": "briefing",
+      "kind": "reel-recorder",
+      "purpose": "mission-briefing-audio-archive",
+      "bounds": {
+        "x": 992,
+        "y": 192,
+        "w": 80,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Compact recorder directly above the briefing audio amplifier, forming one service stack on the upper starboard wall, away from vents and catwalks.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C07",
+      "roomId": "combat-information",
+      "kind": "reel-recorder",
+      "purpose": "tactical-watch-radio-backup",
+      "bounds": {
+        "x": 792,
+        "y": 190,
+        "w": 88,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Physical radio backup on the upper bulkhead between the room header and signal-routing trunk, clear of the tactical view, catwalk and vent approaches.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C08",
+      "roomId": "combat-information",
+      "kind": "patch-bay",
+      "purpose": "encrypted-signal-test-patch",
+      "bounds": {
+        "x": 1040,
+        "y": 250,
+        "w": 88,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Signal patch beneath the routing trunk and above the receiver bay; no overlap with the tactical view.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C09",
+      "roomId": "combat-information",
+      "kind": "hazard-monitor",
+      "purpose": "isolated-network-status-monitor",
+      "bounds": {
+        "x": 144,
+        "y": 330,
+        "w": 64,
+        "h": 50
+      },
+      "mount": "rear-wall",
+      "note": "Small network-isolation monitor in the west return-wall niche, below the chronometers and separated from the vent approach and CCTV entrance.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C10",
+      "roomId": "cryo-bay",
+      "kind": "pressure-gauges",
+      "purpose": "stasis-clean-gas-analogue-check",
+      "bounds": {
+        "x": 384,
+        "y": 250,
+        "w": 80,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Mechanical gas reference gauges beside the viewport and above the cryo service manifold, with a clear service gap around both installations.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C11",
+      "roomId": "cryo-bay",
+      "kind": "sterile-cabinet",
+      "purpose": "sealed-stasis-resupply-locker",
+      "bounds": {
+        "x": 968,
+        "y": 240,
+        "w": 64,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Dedicated sealed resupply cabinet above the outboard oxygen service area, clear of pod access.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C12",
+      "roomId": "cryo-bay",
+      "kind": "hygiene-dispenser",
+      "purpose": "stasis-hand-preparation-point",
+      "bounds": {
+        "x": 916,
+        "y": 448,
+        "w": 64,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Wall-fixed preparation dispenser beside the lift approach, below the catwalk and just above the cryo equipment bay, clear of both access routes.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C13",
+      "roomId": "cctv",
+      "kind": "camera-dome",
+      "purpose": "bench-camera-optical-calibration",
+      "bounds": {
+        "x": 1040,
+        "y": 266,
+        "w": 64,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Test camera head above the watch-records cabinet, beside the monitor group and outside its service approach.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C14",
+      "roomId": "cctv",
+      "kind": "reel-recorder",
+      "purpose": "redundant-security-tape-recorder",
+      "bounds": {
+        "x": 1440,
+        "y": 390,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Separate evidence recorder below the native monitor group, between the watch desk and camera spares.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C15",
+      "roomId": "cctv",
+      "kind": "battery-charger",
+      "purpose": "portable-camera-battery-charging",
+      "bounds": {
+        "x": 288,
+        "y": 340,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Charging sockets above the security equipment locker, clear of the exit and structural pipe.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C16",
+      "roomId": "mire-archives",
+      "kind": "data-cabinet",
+      "purpose": "indexed-evidence-media-locker",
+      "bounds": {
+        "x": 256,
+        "y": 256,
+        "w": 80,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Lockable index-media cabinet beside the archives entry-side wall services; preserves the sorting station.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C17",
+      "roomId": "mire-archives",
+      "kind": "map-case",
+      "purpose": "evidence-chain-paper-records",
+      "bounds": {
+        "x": 672,
+        "y": 246,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Chain-of-custody paper sleeves beside the archive display and above the moving rear equipment envelope, before the evidence-reference shelf.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C18",
+      "roomId": "mire-archives",
+      "kind": "hazard-monitor",
+      "purpose": "conditioned-evidence-storage-monitor",
+      "bounds": {
+        "x": 1536,
+        "y": 264,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Evidence humidity and seal monitor on the outboard wall, outside the structural pipe and return entrance.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C19",
+      "roomId": "synthetic-bay",
+      "kind": "battery-charger",
+      "purpose": "isolated-diagnostic-battery-bank",
+      "bounds": {
+        "x": 288,
+        "y": 268,
+        "w": 88,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Isolated battery charging bay above the clean component preparation area, separated from the structural pipe.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C20",
+      "roomId": "synthetic-bay",
+      "kind": "parts-bins",
+      "purpose": "clean-synthetic-connector-stock",
+      "bounds": {
+        "x": 1088,
+        "y": 328,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Small connector bins on the free wall between the diagnostic equipment bay and native service display.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C21",
+      "roomId": "synthetic-bay",
+      "kind": "electrical-isolator",
+      "purpose": "diagnostic-bench-electrical-isolation",
+      "bounds": {
+        "x": 1536,
+        "y": 270,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Dedicated bench isolation switch adjacent to the native diagnostic display, above the service feed.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C22",
+      "roomId": "durandal",
+      "kind": "coolant-loop",
+      "purpose": "processor-cooling-branch-inspection",
+      "bounds": {
+        "x": 352,
+        "y": 362,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Visible closed coolant loop above the existing core-service cabinet and beside the structural riser.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C23",
+      "roomId": "durandal",
+      "kind": "patch-bay",
+      "purpose": "redundant-processor-io-test-bus",
+      "bounds": {
+        "x": 1520,
+        "y": 282,
+        "w": 88,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Processor I/O patch on the right-hand service wall, clear of the native display and cooling-filter assembly.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C24",
+      "roomId": "flight-control-cockpit",
+      "kind": "flight-kit",
+      "purpose": "pilot-preflight-reference-kit",
+      "bounds": {
+        "x": 248,
+        "y": 338,
+        "w": 72,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Preflight kit on the left perimeter wall beside the return approach; the central forward observation cone stays empty.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-C25",
+      "roomId": "flight-control-cockpit",
+      "kind": "comms-rack",
+      "purpose": "flight-frequency-backup-radio",
+      "bounds": {
+        "x": 1040,
+        "y": 294,
+        "w": 72,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Backup flight radio on the right perimeter above the native instrument fixture; no new item in the central observation cone.",
+      "sector": "command"
+    },
+    {
+      "id": "T168-H01",
+      "roomId": "crew-quarters",
+      "kind": "coat-hooks",
+      "purpose": "upper-berth-personal-coat-hangers",
+      "bounds": {
+        "x": 384,
+        "y": 256,
+        "w": 72,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Flush hooks occupy the small pier beside the west viewport, above the berth approach; no object is placed on the mattress or ladder.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H02",
+      "roomId": "crew-quarters",
+      "kind": "personal-shelf",
+      "purpose": "crew-personal-reading-shelf",
+      "bounds": {
+        "x": 672,
+        "y": 278,
+        "w": 80,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "An 80px reading shelf fits the narrow upper-deck wall pier east of the ladder clearance, stopping before the ship-service doorway; no books project into either access.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H03",
+      "roomId": "crew-quarters",
+      "kind": "linen-cabinet",
+      "purpose": "aft-berth-clean-linen-storage",
+      "bounds": {
+        "x": 1072,
+        "y": 234,
+        "w": 64,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "A compact closed linen cabinet serves the aft berths from the east wall pier, beyond the visible vertical pipes and above the ventilation approach, with its front completely clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H04",
+      "roomId": "mess",
+      "kind": "ration-shelf",
+      "purpose": "mess-sealed-ration-distribution",
+      "bounds": {
+        "x": 576,
+        "y": 410,
+        "w": 96,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "The sealed ration shelf occupies the clear central wall bay between the west console and east ladder, above the lower serving deck and below the glazing.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H05",
+      "roomId": "mess",
+      "kind": "utensil-rail",
+      "purpose": "mess-tray-and-cup-storage",
+      "bounds": {
+        "x": 640,
+        "y": 344,
+        "w": 96,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A short utensil rail sits above and beside the ration shelf, to the east of the viewport and clear of the upper-deck console and moving rear equipment.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H06",
+      "roomId": "mess",
+      "kind": "hygiene-dispenser",
+      "purpose": "mess-cleaning-refill-reservoir",
+      "bounds": {
+        "x": 160,
+        "y": 234,
+        "w": 48,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "A small sealed cleaning-refill reservoir is fixed to the west upper-deck wall above the air return, near service access without covering its grille or the doorway below.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H07",
+      "roomId": "medical",
+      "kind": "medical-stock",
+      "purpose": "clinical-sealed-dressing-stock",
+      "bounds": {
+        "x": 384,
+        "y": 278,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Sealed dressings occupy the narrow wall pier between the west viewport and the technical bay, outside every bed and annex entrance.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H08",
+      "roomId": "medical",
+      "kind": "sterile-cabinet",
+      "purpose": "clinical-clean-ppe-wall-cabinet",
+      "bounds": {
+        "x": 800,
+        "y": 234,
+        "w": 80,
+        "h": 60
+      },
+      "mount": "rear-wall",
+      "note": "The closed PPE cabinet occupies the high clinical wall bay between the room sign and gas-service plaque; its lower edge stays above the native vent and its access envelope, with every bed clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H09",
+      "roomId": "medical",
+      "kind": "lab-sample-rack",
+      "purpose": "clinical-labeled-specimen-rack",
+      "bounds": {
+        "x": 1056,
+        "y": 264,
+        "w": 80,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "A compact rack for closed sample tubes stays high in the east wall bay, separated from the clean-gas manifold and all patient surfaces.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H10",
+      "roomId": "morgue",
+      "kind": "hazard-monitor",
+      "purpose": "forensic-temperature-and-air-quality-monitor",
+      "bounds": {
+        "x": 224,
+        "y": 278,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "The forensic monitor is mounted beyond the west structural pipe and below the wall crown; it does not cover the autopsy counter.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H11",
+      "roomId": "morgue",
+      "kind": "sterile-cabinet",
+      "purpose": "forensic-clean-protective-stock",
+      "bounds": {
+        "x": 1472,
+        "y": 388,
+        "w": 80,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "A clean protective-stock cabinet sits in the east cold-storage bay, above its floor cabinet and away from the return doorway.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H12",
+      "roomId": "morgue",
+      "kind": "medical-stock",
+      "purpose": "forensic-sealed-identification-consumables",
+      "bounds": {
+        "x": 704,
+        "y": 234,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "A separate sealed identification kit stays high above the forensic consumables, west of the room sign and above the full rear-equipment drift envelope; worktop and gantry remain clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H13",
+      "roomId": "personal-refuge",
+      "kind": "personal-shelf",
+      "purpose": "private-small-personal-effects-shelf",
+      "bounds": {
+        "x": 288,
+        "y": 388,
+        "w": 66,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "One small shelf fills the west wall pier beside the personal-effects zone, leaving the room photo, reading place and native furniture unchanged.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H14",
+      "roomId": "personal-refuge",
+      "kind": "coat-hooks",
+      "purpose": "private-rest-area-garment-hooks",
+      "bounds": {
+        "x": 736,
+        "y": 432,
+        "w": 72,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A quiet garment-hook rail occupies the empty interior pier; it remains outside the personal photo, berth and editing stations.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H15",
+      "roomId": "galley-service",
+      "kind": "ration-shelf",
+      "purpose": "galley-reserve-dry-ration-storage",
+      "bounds": {
+        "x": 512,
+        "y": 388,
+        "w": 88,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "A compact reserve shelf sits above the cold-storage side of the galley, outside the worktop and existing tableware stock.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H16",
+      "roomId": "galley-service",
+      "kind": "utensil-rail",
+      "purpose": "galley-cooking-utensil-rail",
+      "bounds": {
+        "x": 768,
+        "y": 432,
+        "w": 96,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "The preparation wall gains a short utensil rail above the working zone; it does not overlap the native service console or the preparation supplies.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H17",
+      "roomId": "galley-service",
+      "kind": "air-filter",
+      "purpose": "galley-cooking-air-return-filter",
+      "bounds": {
+        "x": 1024,
+        "y": 256,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "The galley air-return filter belongs in the upper east wall bay, away from food stock and fire-safety access.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H18",
+      "roomId": "sanitary-bay",
+      "kind": "linen-cabinet",
+      "purpose": "sanitary-reserve-clean-linen-cabinet",
+      "bounds": {
+        "x": 512,
+        "y": 388,
+        "w": 80,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Reserve linen stays in a closed wall cabinet between the personal-locker zone and the clean-linen counter, with its existing stock unobstructed.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H19",
+      "roomId": "sanitary-bay",
+      "kind": "hygiene-dispenser",
+      "purpose": "sanitary-sealed-hygiene-refill",
+      "bounds": {
+        "x": 704,
+        "y": 432,
+        "w": 48,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "A narrow sealed hygiene-refill dispenser sits beside the linen zone, clear of the wash fixtures and the floor hamper.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H20",
+      "roomId": "sanitary-bay",
+      "kind": "valve-box",
+      "purpose": "sanitary-local-water-isolation-box",
+      "bounds": {
+        "x": 1056,
+        "y": 344,
+        "w": 64,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "A separate water-isolation box serves the east plumbing bay; it leaves the authored water feed, emergency kit and sanitary station untouched.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H21",
+      "roomId": "animal-care",
+      "kind": "animal-supply",
+      "purpose": "animal-feed-and-enrichment-reserve",
+      "bounds": {
+        "x": 352,
+        "y": 388,
+        "w": 88,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "A wall rack of reserve feed and enrichment stock serves the west habitats, entirely above the habitat labels and feed preparation surface.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H22",
+      "roomId": "animal-care",
+      "kind": "hygiene-dispenser",
+      "purpose": "animal-isolated-hygiene-refill",
+      "bounds": {
+        "x": 1504,
+        "y": 388,
+        "w": 56,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "A narrow isolated hygiene refill is mounted beside the established hygiene store, outside enclosure silhouettes and animal identification plaques.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H23",
+      "roomId": "animal-care",
+      "kind": "clock-bank",
+      "purpose": "animal-welfare-feeding-clock-bank",
+      "bounds": {
+        "x": 2112,
+        "y": 256,
+        "w": 80,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "A small pair of feeding-interval clocks sits in the east care bay, below the service plaque and away from recording and treatment stations.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H24",
+      "roomId": "frontier-civil-counter",
+      "kind": "map-case",
+      "purpose": "civil-public-route-map-case",
+      "bounds": {
+        "x": 256,
+        "y": 344,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "The public route map is a bounded wall case on the west reception pier, near the forms area but clear of its entrance and counter.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-H25",
+      "roomId": "frontier-civil-counter",
+      "kind": "cargo-manifest",
+      "purpose": "civil-processed-manifest-wall-file",
+      "bounds": {
+        "x": 1600,
+        "y": 388,
+        "w": 88,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "A separate processed-manifest file occupies the middle wall bay below the native system fixture, outside the seated visitor labels and meeting furniture.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T168-I01",
+      "roomId": "science-lab",
+      "kind": "lab-sample-rack",
+      "purpose": "sealed-sample-transfer-rack",
+      "bounds": {
+        "x": 720,
+        "y": 246,
+        "w": 88,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Upper clean-preparation wall beyond the real ladder clearance; sealed containers cover neither the viewport nor the climbing route.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I02",
+      "roomId": "science-lab",
+      "kind": "hazard-monitor",
+      "purpose": "analysis-bench-condition-readout",
+      "bounds": {
+        "x": 1040,
+        "y": 212,
+        "w": 72,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Upper analysis-side wall beyond the ceiling services, clear of the viewport, vent approach and rear equipment.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I03",
+      "roomId": "science-lab",
+      "kind": "sterile-cabinet",
+      "purpose": "clean-sample-handling-consumables",
+      "bounds": {
+        "x": 160,
+        "y": 212,
+        "w": 72,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Closed handling stock above the left cold-store bay, entirely above the real vent and its approach.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I04",
+      "roomId": "quarantine",
+      "kind": "hygiene-dispenser",
+      "purpose": "quarantine-glove-and-wipe-dispenser",
+      "bounds": {
+        "x": 160,
+        "y": 278,
+        "w": 56,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Clean supply on the left wall, outside the observation glass and both the room entry and annex doorway.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I05",
+      "roomId": "quarantine",
+      "kind": "air-filter",
+      "purpose": "negative-pressure-prefilter-service",
+      "bounds": {
+        "x": 664,
+        "y": 246,
+        "w": 88,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Filter access lies beyond the ladder and above the extraction service assembly, clear of the viewport and climbing route.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I06",
+      "roomId": "quarantine",
+      "kind": "oxygen-locker",
+      "purpose": "sealed-escape-breathing-set",
+      "bounds": {
+        "x": 456,
+        "y": 402,
+        "w": 56,
+        "h": 72
+      },
+      "mount": "rear-wall",
+      "note": "Sealed breathing reserve beside the decontamination access; elevated clear of the door and standing lane.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I07",
+      "roomId": "armory",
+      "kind": "ammo-shelf",
+      "purpose": "segregated-issue-ammunition",
+      "bounds": {
+        "x": 392,
+        "y": 270,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Secure boxed ammunition mounted beyond the viewport and above the armourer issue side of the room.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I08",
+      "roomId": "armory",
+      "kind": "weapons-cleaning",
+      "purpose": "armorer-cleaning-and-clearing-kit",
+      "bounds": {
+        "x": 840,
+        "y": 246,
+        "w": 112,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Wall tools occupy a bay below the secure ceiling services, above the rear equipment and away from the real ladder.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I09",
+      "roomId": "armory",
+      "kind": "electrical-isolator",
+      "purpose": "weapons-bench-test-power-isolation",
+      "bounds": {
+        "x": 632,
+        "y": 350,
+        "w": 64,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Test-power isolation sits beyond the ladder and above the inspection-record stock, outside the annex doorway.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I10",
+      "roomId": "workshop",
+      "kind": "tool-board",
+      "purpose": "repair-bench-outline-tools",
+      "bounds": {
+        "x": 160,
+        "y": 270,
+        "w": 96,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Bolted tool silhouettes on the left repair wall; neither the observation glass nor a floor worktop is covered.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I11",
+      "roomId": "workshop",
+      "kind": "parts-bins",
+      "purpose": "fastener-and-service-fittings-stock",
+      "bounds": {
+        "x": 760,
+        "y": 246,
+        "w": 96,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Labelled small-parts bins sit beyond the real ladder, below the room sign and above the electrical service panel.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I12",
+      "roomId": "workshop",
+      "kind": "battery-charger",
+      "purpose": "tool-battery-charging-station",
+      "bounds": {
+        "x": 840,
+        "y": 432,
+        "w": 72,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "A fixed charging dock occupies the lower wall below the native service deck, clear of its face, consoles and bench worktop.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I13",
+      "roomId": "vehicle-bay",
+      "kind": "hydraulic-accumulator",
+      "purpose": "vehicle-jack-hydraulic-reserve",
+      "bounds": {
+        "x": 1064,
+        "y": 246,
+        "w": 64,
+        "h": 72
+      },
+      "mount": "rear-wall",
+      "note": "A fixed accumulator uses the right service bay, clear of the viewport, parked hull, inspection stock and existing isolation panel.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I14",
+      "roomId": "vehicle-bay",
+      "kind": "pressure-gauges",
+      "purpose": "vehicle-service-pressure-check",
+      "bounds": {
+        "x": 944,
+        "y": 258,
+        "w": 72,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Pressure instruments on the right service wall, separate from the ceiling feeds and inspection stock.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I15",
+      "roomId": "vehicle-bay",
+      "kind": "service-conduits",
+      "purpose": "vehicle-tool-air-line-return",
+      "bounds": {
+        "x": 928,
+        "y": 316,
+        "w": 112,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A compact fixed return line below the gauges and above the existing service supplies; no loose floor hose.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I16",
+      "roomId": "logistics",
+      "kind": "cargo-manifest",
+      "purpose": "freight-route-and-load-checklists",
+      "bounds": {
+        "x": 288,
+        "y": 270,
+        "w": 72,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Route records on the inbound freight wall above the packing-tools area, clear of all cargo approach volumes.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I17",
+      "roomId": "logistics",
+      "kind": "muster-kit",
+      "purpose": "cargo-team-restraint-and-response-kit",
+      "bounds": {
+        "x": 1040,
+        "y": 246,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Closed handling-team safety stock on the upper central bay; no additional freight obstructs the floor.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I18",
+      "roomId": "logistics",
+      "kind": "emergency-cabinet",
+      "purpose": "freight-bay-fire-response-stock",
+      "bounds": {
+        "x": 1544,
+        "y": 278,
+        "w": 48,
+        "h": 72
+      },
+      "mount": "rear-wall",
+      "note": "A narrow emergency locker on the right handling wall, outside the entrance and the raised-deck geometry.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I19",
+      "roomId": "logistics",
+      "kind": "flight-kit",
+      "purpose": "outbound-flight-restraint-kit",
+      "bounds": {
+        "x": 1216,
+        "y": 412,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Packed restraint equipment in the free wall pocket next to freight records, above the working deck and crates.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I20",
+      "roomId": "bioforge",
+      "kind": "lab-sample-rack",
+      "purpose": "sealed-entry-sample-container-rack",
+      "bounds": {
+        "x": 232,
+        "y": 278,
+        "w": 88,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Closed transfer containers in the existing entry compartment, clear of the tall pipe and cargo storage.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I21",
+      "roomId": "bioforge",
+      "kind": "hygiene-dispenser",
+      "purpose": "biological-entry-cleaning-dispenser",
+      "bounds": {
+        "x": 712,
+        "y": 246,
+        "w": 56,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "A clean-handling dispenser occupies the upper wall above the full rear-equipment envelope; no new biological room is implied.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I22",
+      "roomId": "bioforge",
+      "kind": "hazard-monitor",
+      "purpose": "entry-containment-differential-readout",
+      "bounds": {
+        "x": 1504,
+        "y": 278,
+        "w": 72,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Containment readout on the right clean-entry bay, separate from pipework and the real return doorway.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I23",
+      "roomId": "proving-ground",
+      "kind": "medical-stock",
+      "purpose": "range-first-response-and-eye-care-stock",
+      "bounds": {
+        "x": 232,
+        "y": 278,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "First-response supplies on the wall behind the muzzle and target field, above the preparation equipment.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I24",
+      "roomId": "proving-ground",
+      "kind": "clock-bank",
+      "purpose": "range-session-reference-timers",
+      "bounds": {
+        "x": 704,
+        "y": 246,
+        "w": 80,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Fixed session clocks sit above the equipment envelope and left of the muzzle, distinct from the nine target silhouettes and their suspension paths.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-I25",
+      "roomId": "proving-ground",
+      "kind": "weapons-cleaning",
+      "purpose": "unloaded-weapon-cleaning-kit",
+      "bounds": {
+        "x": 352,
+        "y": 438,
+        "w": 112,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Unloaded-weapon care tools below the left service fixture and behind the firing pad; no object occupies a shot ray.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T168-E01",
+      "roomId": "dropship-hangar",
+      "kind": "flight-kit",
+      "purpose": "ground-crew-flight-harness-and-inspection-kit",
+      "bounds": {
+        "x": 244,
+        "y": 190,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Casier de harnais dans la baie haute entre l’échelle ouest et le hublot ; dégagement de quatre pixels sous le plafond et de douze avant l’approche du conduit.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E02",
+      "roomId": "dropship-hangar",
+      "kind": "hydraulic-accumulator",
+      "purpose": "landing-gear-ground-hydraulics-isolation",
+      "bounds": {
+        "x": 640,
+        "y": 350,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Support hydraulique du train fixé au mur entre deux consoles de passerelle ; sous son bandeau et au-dessus de l’arc réservé au dropship.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E03",
+      "roomId": "dropship-hangar",
+      "kind": "battery-charger",
+      "purpose": "ground-support-battery-charging-and-retention",
+      "bounds": {
+        "x": 800,
+        "y": 350,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Recharge des batteries de piste dans la baie entre deux consoles, sous la passerelle et au-dessus de la coque du dropship ; l’échelle droite reste dégagée.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E04",
+      "roomId": "reactor",
+      "kind": "pressure-gauges",
+      "purpose": "reactor-primary-loop-pressure-and-service-readout",
+      "bounds": {
+        "x": 384,
+        "y": 256,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Petit banc de mesures entre le hublot et l’équipement arrière, sans recouvrir le sas de service.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E05",
+      "roomId": "reactor",
+      "kind": "electrical-isolator",
+      "purpose": "reactor-maintenance-lockout-and-test-points",
+      "bounds": {
+        "x": 800,
+        "y": 234,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Consignation électrique au-dessus de la baie centrale, distincte de ses conduites et de la plaque de salle.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E06",
+      "roomId": "reactor",
+      "kind": "coolant-loop",
+      "purpose": "closed-reactor-coolant-sampling-and-bypass",
+      "bounds": {
+        "x": 1024,
+        "y": 190,
+        "w": 96,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Boucle fermée de prélèvement dans la baie haute droite, au-dessus du départ de refroidissement natif ; l’ascenseur, son échelle et le bord de plateforme restent libres.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E07",
+      "roomId": "life-support",
+      "kind": "oxygen-locker",
+      "purpose": "sealed-reserve-oxygen-service-cartridges",
+      "bounds": {
+        "x": 160,
+        "y": 212,
+        "w": 64,
+        "h": 72
+      },
+      "mount": "rear-wall",
+      "note": "Cartouches fermées dans la baie murale gauche, au-dessus du traitement d’air et hors du hublot.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E08",
+      "roomId": "life-support",
+      "kind": "valve-box",
+      "purpose": "air-loop-isolation-and-maintenance-bypass",
+      "bounds": {
+        "x": 480,
+        "y": 366,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Vannes d’isolement sous le hublot de traitement d’air, à gauche de l’échelle centrale et à droite de son outillage mural ; hors des approches de conduits.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E09",
+      "roomId": "life-support",
+      "kind": "air-filter",
+      "purpose": "removable-clean-filter-inspection-housing",
+      "bounds": {
+        "x": 248,
+        "y": 212,
+        "w": 72,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Boîtier filtrant près de la réserve respiratoire gauche, séparé de son casier et placé avant le hublot ; au-dessus de l’ensemble de service et loin des conduits navigables.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E10",
+      "roomId": "sensor-array",
+      "kind": "clock-bank",
+      "purpose": "receiver-timing-reference-and-sync-status",
+      "bounds": {
+        "x": 1024,
+        "y": 190,
+        "w": 80,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "Horloges de synchronisation sur une baie haute à droite des lignes de signal, sans agrandir la console de balayage.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E11",
+      "roomId": "sensor-array",
+      "kind": "sensor-calibration",
+      "purpose": "receiver-reference-and-calibration-standard",
+      "bounds": {
+        "x": 224,
+        "y": 432,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Étalon mural au-dessus du terminal de réception et sous sa passerelle, entre les retombées des consoles ; le conduit et l’accès de service restent libres.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E12",
+      "roomId": "sensor-array",
+      "kind": "patch-bay",
+      "purpose": "sensor-array-line-patching-and-receiver-routing",
+      "bounds": {
+        "x": 928,
+        "y": 322,
+        "w": 64,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Terminaisons entre la baie de réception arrière et le casier de registres, hors des gaines natives.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E13",
+      "roomId": "arrival-airlock",
+      "kind": "hygiene-dispenser",
+      "purpose": "sealed-entry-hand-and-equipment-decontamination",
+      "bounds": {
+        "x": 224,
+        "y": 256,
+        "w": 64,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Distributeur fermé à côté du montant gauche, avant la station de décontamination et hors des canalisations.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E14",
+      "roomId": "arrival-airlock",
+      "kind": "pressure-gauges",
+      "purpose": "inner-and-outer-airlock-pressure-reference",
+      "bounds": {
+        "x": 672,
+        "y": 212,
+        "w": 80,
+        "h": 48
+      },
+      "mount": "rear-wall",
+      "note": "Deux pressions de sas dans une petite baie à gauche de son identification, près des commandes et hors de la baie de traitement native.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E15",
+      "roomId": "arrival-airlock",
+      "kind": "oxygen-locker",
+      "purpose": "sealed-emergency-breathing-set-at-return-zone",
+      "bounds": {
+        "x": 1632,
+        "y": 278,
+        "w": 80,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Réserve respiratoire sur le mur du retour équipage, en amont et au-dessus de l’ouverture de porte.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E16",
+      "roomId": "escape-pods",
+      "kind": "muster-kit",
+      "purpose": "evacuation-manifest-and-muster-equipment",
+      "bounds": {
+        "x": 288,
+        "y": 256,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Trousse de rassemblement proche de l’accès de retour, fixée dans la baie disponible avant la colonne technique.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E17",
+      "roomId": "escape-pods",
+      "kind": "oxygen-locker",
+      "purpose": "escape-capsule-reserve-breathing-cartridges",
+      "bounds": {
+        "x": 1536,
+        "y": 256,
+        "w": 64,
+        "h": 72
+      },
+      "mount": "rear-wall",
+      "note": "Réserve respiratoire accolée aux équipements d’évacuation à droite, sans recouvrir le pupitre ou le tuyau.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E18",
+      "roomId": "escape-pods",
+      "kind": "emergency-cabinet",
+      "purpose": "sealed-escape-service-and-first-response-stock",
+      "bounds": {
+        "x": 1216,
+        "y": 410,
+        "w": 72,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Armoire murale de secours entre la fin de passerelle et le terminal d’évacuation ; aucun support inventé au sol.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E19",
+      "roomId": "engine-room",
+      "kind": "hydraulic-accumulator",
+      "purpose": "drive-service-pressure-accumulator-and-isolation",
+      "bounds": {
+        "x": 800,
+        "y": 344,
+        "w": 80,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Accumulateur fixé dans la baie de service centrale, avant le départ de coursive et au-dessus des coffres.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E20",
+      "roomId": "engine-room",
+      "kind": "coolant-loop",
+      "purpose": "engine-cooling-return-and-balanced-bypass",
+      "bounds": {
+        "x": 1536,
+        "y": 256,
+        "w": 96,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Retour de refroidissement à droite de la conduite native haute, avec une baie dédiée au-dessus de la coursive.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E21",
+      "roomId": "engine-room",
+      "kind": "tool-board",
+      "purpose": "drive-inspection-and-belt-service-tools",
+      "bounds": {
+        "x": 352,
+        "y": 388,
+        "w": 80,
+        "h": 60
+      },
+      "mount": "rear-wall",
+      "note": "Outillage d’inspection près du contrôleur de propulsion, sous la baie technique et hors de la porte de retour.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E22",
+      "roomId": "water-recycling",
+      "kind": "valve-box",
+      "purpose": "clean-and-return-water-isolation-and-test-valves",
+      "bounds": {
+        "x": 576,
+        "y": 300,
+        "w": 80,
+        "h": 52
+      },
+      "mount": "rear-wall",
+      "note": "Vannes de séparation au milieu du mur de traitement, distinctes des réservoirs et du pupitre bas.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E23",
+      "roomId": "water-recycling",
+      "kind": "air-filter",
+      "purpose": "recycling-filter-breather-and-vent-cartridge",
+      "bounds": {
+        "x": 1024,
+        "y": 322,
+        "w": 80,
+        "h": 64
+      },
+      "mount": "rear-wall",
+      "note": "Reniflard filtré dans la baie droite du recyclage, au-dessus de l’accès de maintenance et à l’écart des commandes.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E24",
+      "roomId": "maintenance-spine",
+      "kind": "service-conduits",
+      "purpose": "segregated-service-distribution-and-labelled-feed",
+      "bounds": {
+        "x": 1440,
+        "y": 256,
+        "w": 112,
+        "h": 44
+      },
+      "mount": "rear-wall",
+      "note": "Tronçon fermé de distribution fixé au mur de la coursive, entre deux alimentations existantes ; pas de plancher ajouté.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T168-E25",
+      "roomId": "maintenance-spine",
+      "kind": "electrical-isolator",
+      "purpose": "central-service-lockout-and-test-isolation",
+      "bounds": {
+        "x": 1856,
+        "y": 344,
+        "w": 80,
+        "h": 56
+      },
+      "mount": "rear-wall",
+      "note": "Consignation de la dérivation centrale avant les réserves est, au-dessus de la coursive oblique et hors de ses supports.",
+      "sector": "engineering"
+    }
+  ]
+}

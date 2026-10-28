@@ -2703,11 +2703,12 @@
   "runtimeSourceSha256": {
     "campaign-convoy-history-v162.css": "6f92b205b5c1970912e1051be0b6d6c3b2716acf27e767423a8d9c25b93806e2",
     "campaign-lethe-continuity-v163.css": "adac522847cbed1696f24a64f85d1c9c79cfa76b06088e812cca96e4dd2784ef",
+    "hub-stations-v61.css": "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
     "index.html": "a4f5bf1470b0b736451ffbb74cc7c07994d2c9a6f9816bb9e81f53016253d6f5",
     "mission-insertion-v62.css": "049525a19d40f882ce415330a1d467ebd26d7e3e641cffe76e19a61ecfeaffaf",
     "src/apc-convoy-runtime-v121.js": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
     "src/apc-course-v131.js": "a9b6fe7fa4ee899497baf590a0ce09c42258ca4bd39d78816a743c1ec145fd03",
-    "src/app.js": "52df812dec93254e16133812240e2bf511df4f90a231661f511502868a8b9803",
+    "src/app.js": "1f0dbf0340728e653b90cb613c8e6676d611e25d0cfedaba15cae2602ac15525",
     "src/archive-relay-presentation-v160.js": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
     "src/archive-relay-runtime-v122.js": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
     "src/archive-relay-state-v122.js": "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
@@ -2755,13 +2756,20 @@
     "src/hive-missions-v131.js": "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
     "src/hub-annex-npc-life-v141.js": "a7ef6f64c02d2a7445a155bf017dbf0624a06d7f20c45cc73b118ba0c0f5c8de",
     "src/hub-annex-registry-v87.js": "67d74d09b8ffed8f078516bf99259ee3491610947669f8acbb5616da3efbece7",
+    "src/hub-batch-command-v168.js": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
+    "src/hub-batch-engineering-v168.js": "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
+    "src/hub-batch-habitat-v168.js": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
+    "src/hub-batch-industrial-v168.js": "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
     "src/hub-bulkhead-depth-v134.js": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
     "src/hub-destination-signage-runtime-v138.js": "f9502b068c8c53932e403b4b512d562ea72c9f145e8bb5c904dc8f7ab9dfd428",
     "src/hub-furnishing-annex-revisions-v139.js": "8b189a9c9703fadf8ec93d979dfad1f429991237f476a96d068a932170a3e3b5",
     "src/hub-game.js": "2e6c4101e04579252bc6045e22cb9305921fbe20c931072732d9a9e045e15b3e",
     "src/hub-lift-transit-v163.js": "05c6efb9553eb7908a633b1c811651efe6c292c4a036c2f8628fa051c1bae824",
+    "src/hub-room-backgrounds-v168.js": "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
+    "src/hub-room-batch-details-v168.js": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
     "src/hub-room-dressing-v134.js": "c1b5d8364ccf714ea64a540276197744537829d2524c0407c83b51adf822e8fd",
-    "src/hub-room-life-v136.js": "ee7433e6b7d663d4c4cee0da5a366617b0141cafad0a63e0928e4924e3b6b7f3",
+    "src/hub-room-life-v136.js": "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
+    "src/hub-room-parallax-v134.js": "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
     "src/hub-room-service-details-v165.js": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
     "src/hub-v51-runtime.js": "1cc35c82a83910dc154305f952118194162cde11382388734529bb5a73a54a4e",
     "src/hub-v52-runtime.js": "7b67eb2cb7c5281e3ae0acd69adfb252db555a00f879194a553012b8d53efb4c",
@@ -2782,6 +2790,7 @@
     "src/npc-cal-climb-rig-v165.js": "2ac8b1c472c20689772ddfe35199e49bd2125b6d3e90237f8c6da2d4ccc2813d",
     "src/npc-cal-logistics-route-v165.js": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
     "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
+    "src/npc-dialogue-portraits-v168.js": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
     "src/npc-interdeck-passage-v165.js": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f",
     "src/npc-interdeck-routes-v165.js": "85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1",
     "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0",
@@ -2831,7 +2840,7 @@
     "src/xeno-trials-runtime-v96.js": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
     "src/xeno-trials-sequences-v155.js": "ed140f0788d4d13b91ddd0aaa8a955c7ca50507185f9eee3debd537385ad2321",
     "src/xeno-trials-ui-v96.js": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
-    "sw.js": "f51ae4141ecbf889dfd79261f0442d46f8b5b837e0038f8e8291ad157c604e6b"
+    "sw.js": "732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9"
   },
   "tables": {
     "01_Presentations": {
@@ -6509,6 +6518,13 @@
           "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs"
         ],
         [
+          "hub-stations-v61.css",
+          "Non épinglé en V162",
+          "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
+        ],
+        [
           "index.html",
           "9cce9373641e8440201bf6d64cd5b48ae0dfcab7f7cc90c5fe6230e9d2c500e0",
           "a4f5bf1470b0b736451ffbb74cc7c07994d2c9a6f9816bb9e81f53016253d6f5",
@@ -6525,9 +6541,9 @@
         [
           "src/app.js",
           "ac0404430bb38a08b454bcc30a4d85a6af1f0afb57a953552739039cdc8180dd",
-          "52df812dec93254e16133812240e2bf511df4f90a231661f511502868a8b9803",
-          "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique. Appliquer aussi aux portraits natifs le masque V164 des seules poches de fond admises, en conservant les PNG et le cadrage et en retirant le masque lors de chaque changement de source. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage.",
-          "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-costume-atlases-v165.mjs ; scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "1f0dbf0340728e653b90cb613c8e6676d611e25d0cfedaba15cae2602ac15525",
+          "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique. Appliquer aussi aux portraits natifs le masque V164 des seules poches de fond admises, en conservant les PNG et le cadrage et en retirant le masque lors de chaque changement de source. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage. Suite V168 : les quatre ouvertures de dialogue désignent leur vrai locuteur et la source de son portrait.",
+          "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-costume-atlases-v165.mjs ; scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/campaign-lethe-continuity-ui-v163.js",
@@ -6568,8 +6584,8 @@
           "src/game-v52-runtime.js",
           "Non épinglé en V162",
           "ac0049ef9ba4a732b126d2de85984e78e74a9fbef2ca36b428d0fbcf23fa821f",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/held-weapon-renderer-v125.js",
@@ -6579,11 +6595,39 @@
           "scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs"
         ],
         [
+          "src/hub-batch-command-v168.js",
+          "Non épinglé en V162",
+          "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
+          "src/hub-batch-engineering-v168.js",
+          "Non épinglé en V162",
+          "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
+          "src/hub-batch-habitat-v168.js",
+          "Non épinglé en V162",
+          "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
+          "src/hub-batch-industrial-v168.js",
+          "Non épinglé en V162",
+          "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
           "src/hub-bulkhead-depth-v134.js",
           "Non épinglé en V162",
           "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
-          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
-          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs"
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
         [
           "src/hub-game.js",
@@ -6600,32 +6644,53 @@
           "scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-climb-rig-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
         ],
         [
+          "src/hub-room-backgrounds-v168.js",
+          "Non épinglé en V162",
+          "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
+          "src/hub-room-batch-details-v168.js",
+          "Non épinglé en V162",
+          "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
           "src/hub-room-life-v136.js",
           "61c15a13031a7d25208a366d1e4f0975b71c317ae23edbf5493778f56f6fa05b",
-          "ee7433e6b7d663d4c4cee0da5a366617b0141cafad0a63e0928e4924e3b6b7f3",
-          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
-          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs"
+          "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
+        ],
+        [
+          "src/hub-room-parallax-v134.js",
+          "Non épinglé en V162",
+          "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
         [
           "src/hub-room-service-details-v165.js",
           "Non épinglé en V162",
           "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
-          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
-          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs"
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
         [
           "src/hub-v81-runtime.js",
           "Non épinglé en V162",
           "26a75cc4fe0e7280146b370c9183cd89a52dabddd865f408289439fe824e4067",
-          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
-          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs"
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
         [
           "src/human-patrol-animation-v133.js",
           "Non épinglé en V162",
           "5c9283b4f848a9a5882809f7b4f3c8c84478ed756f89bdc329cd1b875e8e0fe6",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/human-visual-contract-v133.js",
@@ -6696,6 +6761,13 @@
           "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
           "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. ",
           "scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs"
+        ],
+        [
+          "src/npc-dialogue-portraits-v168.js",
+          "Non épinglé en V162",
+          "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/npc-interdeck-passage-v165.js",
@@ -6778,22 +6850,22 @@
           "src/player-appearance-hub-v126.js",
           "584adbd984e3f4f07846043ead8bf0c5f87c2f568e508c38318996e47a046cc8",
           "7f056e474636f829e5309b1c52e68e04d3e2844b275fb001b574d6af90fb8b6f",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/player-appearance-preview-v126.js",
           "Non épinglé en V162",
           "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/player-appearance-runtime-v126.js",
           "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
           "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/player-appearance-ui-v126.js",
@@ -6834,29 +6906,29 @@
           "src/player-gait-v133.js",
           "8210c7f89a0db7d9e3a0f2fb0138d9819bead4ed1df83d8aa8eb97d1bb32c310",
           "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/player-locomotion-rig-v129.js",
           "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
           "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/player-modular-rig-v126.js",
           "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
           "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/refuge-art-v87.js",
           "Non épinglé en V162",
           "958f9c403d5dab828df67781425afe120769b45666f2e2a51732339b5831f053",
-          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
-          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs"
+          "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs"
         ],
         [
           "src/reload-presentation-v163.js",
@@ -6869,15 +6941,15 @@
           "src/save.js",
           "98a20e4a0f52a7c33d5d3e53757ad4aba30cad350bacbe2fbac4aa8a6dc3403a",
           "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-          "Déclarer et normaliser les états durables de continuité de campagne, circuits d’annexes, courtoisie physique et trajet joueur ascenseur tout en conservant la reprise des sauvegardes historiques. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage.",
-          "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/verify-costume-atlases-v165.mjs ; scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "Déclarer et normaliser les états durables de continuité de campagne, circuits d’annexes, courtoisie physique et trajet joueur ascenseur tout en conservant la reprise des sauvegardes historiques. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage. Suite V168 : les quatre ouvertures de dialogue désignent leur vrai locuteur et la source de son portrait.",
+          "scripts/verify-campaign-lethe-v163.mjs ; scripts/verify-campaign-story-v160.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-reload-presentation-v163.mjs ; scripts/verify-held-weapon-v125.mjs ; scripts/verify-player-weapon-rig-v125.mjs ; scripts/verify-weapon-runtime-v124.mjs ; scripts/verify-weapon-effects-v124.mjs ; scripts/verify-xeno-trials-capture-v163.mjs ; scripts/verify-xeno-trials-rig-v154.mjs ; scripts/verify-xeno-trials-restraint-pose-v156.mjs ; scripts/verify-xeno-trials-capture-reception-v158.mjs ; scripts/verify-native-rig-catalog-v163.mjs ; scripts/verify-xeno-trials-grapple-v153.mjs ; scripts/verify-xeno-trials-controls-v150.mjs ; scripts/verify-capture-admission-v163.mjs ; scripts/verify-native-rig-terminal-v163.mjs ; scripts/verify-native-rig-weapon-rigidity-v163.mjs ; scripts/verify-legacy-operations-v131.mjs ; scripts/verify-xeno-trials-presentations-v156.mjs ; scripts/verify-trials-navigation-v163.mjs ; scripts/verify-costume-atlases-v165.mjs ; scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/sprite-animation-runtime.js",
           "Non épinglé en V162",
           "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
-          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs"
+          "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
         ],
         [
           "src/weapon-effects-runtime-v124.js",
@@ -6959,8 +7031,8 @@
         [
           "sw.js",
           "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-          "f51ae4141ecbf889dfd79261f0442d46f8b5b837e0038f8e8291ad157c604e6b",
-          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue. V165 : admettre dans le cache de production les nouveaux modules effectivement intégrés avec un namespace distinct, sans réadmettre les sources privées, les prévisualisations hors périmètre ni les fichiers différés Forge. Suite V166 : séparer le cache des nouveaux trajets de poste du cache V165. Suite V167 : nouveau cache des mouvements humains et plaques de portes.",
+          "732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9",
+          "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue. V165 : admettre dans le cache de production les nouveaux modules effectivement intégrés avec un namespace distinct, sans réadmettre les sources privées, les prévisualisations hors périmètre ni les fichiers différés Forge. Suite V166 : séparer le cache des nouveaux trajets de poste du cache V165. Suite V167 : nouveau cache des mouvements humains et plaques de portes. Suite V168 : précacher les sept modules de portraits et de décor dans un namespace distinct.",
           "scripts/verify-public-release-v86.mjs ; scripts/verify-release-artifact-v143.mjs ; scripts/verify-audit-v143.mjs"
         ]
       ]
@@ -12580,10 +12652,10 @@
           "C165-PLAYER",
           "Joueur principal et alliés / appuis",
           "IMPLEMENTATION_PREPUBLICATION",
-          "Révision des appuis et attaches du bassin, des jambes et du torse ; cadence liée à la distance, continuité marche/arrêt et présentation des humains alliés. Suite V167 : bras mains libres synchronisés aux pas ; continuité des alliés à travers les actions et rejet des faux pas sans temps écoulé.",
+          "Révision des appuis et attaches du bassin, des jambes et du torse ; cadence liée à la distance, continuité marche/arrêt et présentation des humains alliés. Suite V167 : bras mains libres synchronisés aux pas ; continuité des alliés à travers les actions et rejet des faux pas sans temps écoulé. Suite V168 : seize portraits individuels tête/épaules dans les cadres de dialogue, sans nouveau PNG.",
           "Correction procédurale du projet, sans nouvelle capture de mouvement ni anatomie universelle ou fidélité franchise 1:1. Comparaisons natives propres au candidat encore attendues.",
-          "src/player-gait-v133.js ; src/player-locomotion-rig-v129.js ; src/player-modular-rig-v126.js ; src/human-patrol-animation-v133.js ; src/sprite-animation-runtime.js",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/qa-player-allies-contacts-v165.py",
+          "src/player-gait-v133.js ; src/player-locomotion-rig-v129.js ; src/player-modular-rig-v126.js ; src/human-patrol-animation-v133.js ; src/sprite-animation-runtime.js ; src/npc-dialogue-portraits-v168.js",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs ; scripts/qa-player-allies-contacts-v165.py",
           0,
           0
         ],
@@ -12591,10 +12663,10 @@
           "C165-SHIP",
           "Tantalus / détails techniques et refuge",
           "IMPLEMENTATION_PREPUBLICATION",
-          "31 assemblages de service pour 35 profils de pièces ; quatre vues volontairement dégagées. Plaque du vrai nom sur le cadre du refuge ; retrait des gros libellés de développement. Suite V167 : plaques physiques de destination fixées aux douze linteaux, dans les deux projections.",
+          "31 assemblages de service pour 35 profils de pièces ; quatre vues volontairement dégagées. Plaque du vrai nom sur le cadre du refuge ; retrait des gros libellés de développement. Suite V167 : plaques physiques de destination fixées aux douze linteaux, dans les deux projections. Suite V168 : lot001 de cent installations, quatre secteurs de vingt-cinq, trente-six types, et trente-cinq profils de fond ; aucune collision nouvelle.",
           "Murs arrière, réservations et projection propres à la pièce. Aucune nouvelle collision, porte ou géométrie ; pas finition de tout le vaisseau ou nouvelle certification artistique 1:1.",
-          "src/hub-room-service-details-v165.js ; src/hub-room-life-v136.js ; src/refuge-art-v87.js ; src/hub-bulkhead-depth-v134.js",
-          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/qa-hub-service-details-v165.py",
+          "src/hub-room-service-details-v165.js ; src/hub-room-life-v136.js ; src/refuge-art-v87.js ; src/hub-bulkhead-depth-v134.js ; src/hub-room-backgrounds-v168.js ; src/hub-room-batch-details-v168.js ; src/hub-batch-command-v168.js ; src/hub-batch-habitat-v168.js ; src/hub-batch-industrial-v168.js ; src/hub-batch-engineering-v168.js",
+          "scripts/verify-hub-service-details-v165.mjs ; scripts/verify-ship-placement-v167.mjs ; scripts/verify-range-crew-interaction-v167.mjs ; scripts/verify-tantalus-batch100-v168.mjs ; scripts/verify-hub-backgrounds-v168.mjs ; scripts/qa-hub-service-details-v165.py ; scripts/qa-tantalus-batch100-v168.py",
           0,
           0
         ]
@@ -15879,7 +15951,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "cfd8acc05cc4fcf6a486252bba6d6e74b37ba439046fa8ca0476246da4e39e50",
+  "workbookSha256": "5dc7c05f8e0be15ccb3f84ad5f390a3b946db27c12cd17a0bcdb354141a0e18f",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -15912,8 +15984,8 @@
       {
         "path": "src/app.js",
         "previousSha256": "ac0404430bb38a08b454bcc30a4d85a6af1f0afb57a953552739039cdc8180dd",
-        "currentSha256": "52df812dec93254e16133812240e2bf511df4f90a231661f511502868a8b9803",
-        "reason": "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique. Appliquer aussi aux portraits natifs le masque V164 des seules poches de fond admises, en conservant les PNG et le cadrage et en retirant le masque lors de chaque changement de source. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage.",
+        "currentSha256": "1f0dbf0340728e653b90cb613c8e6676d611e25d0cfedaba15cae2602ac15525",
+        "reason": "Intégrer les propriétaires natifs de circulation, le cycle durable des ascenseurs et la continuité de Lethe dans les vrais hooks du jeu et de ses vues, sans double propriétaire ni action synthétique. Appliquer aussi aux portraits natifs le masque V164 des seules poches de fond admises, en conservant les PNG et le cadrage et en retirant le masque lors de chaque changement de source. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage. Suite V168 : les quatre ouvertures de dialogue désignent leur vrai locuteur et la source de son portrait.",
         "verifiers": [
           "scripts/verify-campaign-lethe-v163.mjs",
           "scripts/verify-campaign-story-v160.mjs",
@@ -15952,7 +16024,8 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -15971,12 +16044,14 @@
       {
         "path": "src/hub-room-life-v136.js",
         "previousSha256": "61c15a13031a7d25208a366d1e4f0975b71c317ae23edbf5493778f56f6fa05b",
-        "currentSha256": "ee7433e6b7d663d4c4cee0da5a366617b0141cafad0a63e0928e4924e3b6b7f3",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "currentSha256": "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
@@ -16066,72 +16141,77 @@
         "path": "src/player-appearance-hub-v126.js",
         "previousSha256": "584adbd984e3f4f07846043ead8bf0c5f87c2f568e508c38318996e47a046cc8",
         "currentSha256": "7f056e474636f829e5309b1c52e68e04d3e2844b275fb001b574d6af90fb8b6f",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-appearance-runtime-v126.js",
         "previousSha256": "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
         "currentSha256": "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-gait-v133.js",
         "previousSha256": "8210c7f89a0db7d9e3a0f2fb0138d9819bead4ed1df83d8aa8eb97d1bb32c310",
         "currentSha256": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-locomotion-rig-v129.js",
         "previousSha256": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
         "currentSha256": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-modular-rig-v126.js",
         "previousSha256": "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
         "currentSha256": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/save.js",
         "previousSha256": "98a20e4a0f52a7c33d5d3e53757ad4aba30cad350bacbe2fbac4aa8a6dc3403a",
         "currentSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-        "reason": "Déclarer et normaliser les états durables de continuité de campagne, circuits d’annexes, courtoisie physique et trajet joueur ascenseur tout en conservant la reprise des sauvegardes historiques. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage.",
+        "reason": "Déclarer et normaliser les états durables de continuité de campagne, circuits d’annexes, courtoisie physique et trajet joueur ascenseur tout en conservant la reprise des sauvegardes historiques. V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage. Suite V168 : les quatre ouvertures de dialogue désignent leur vrai locuteur et la source de son portrait.",
         "verifiers": [
           "scripts/verify-campaign-lethe-v163.mjs",
           "scripts/verify-campaign-story-v160.mjs",
@@ -16169,7 +16249,8 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -16244,8 +16325,8 @@
       {
         "path": "sw.js",
         "previousSha256": "0b506c1e7e57e36e50348d3a89400cc5976a65202b8830ef2163f9cde0c2e657",
-        "currentSha256": "f51ae4141ecbf889dfd79261f0442d46f8b5b837e0038f8e8291ad157c604e6b",
-        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue. V165 : admettre dans le cache de production les nouveaux modules effectivement intégrés avec un namespace distinct, sans réadmettre les sources privées, les prévisualisations hors périmètre ni les fichiers différés Forge. Suite V166 : séparer le cache des nouveaux trajets de poste du cache V165. Suite V167 : nouveau cache des mouvements humains et plaques de portes.",
+        "currentSha256": "732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9",
+        "reason": "Épingler explicitement les modules, styles et trois nouveaux PNG de capture admis pour leur disponibilité hors ligne, sans élargir les règles de publication des preuves privées. Ajouter les deux modules de correction des poches PNJ V164 au shell hors ligne vérifié par le contrôle réel de distribution. Séparer aussi le namespace du worker source V164 du cache actif V163 afin de conserver celui-ci si le nouveau précache échoue. V165 : admettre dans le cache de production les nouveaux modules effectivement intégrés avec un namespace distinct, sans réadmettre les sources privées, les prévisualisations hors périmètre ni les fichiers différés Forge. Suite V166 : séparer le cache des nouveaux trajets de poste du cache V165. Suite V167 : nouveau cache des mouvements humains et plaques de portes. Suite V168 : précacher les sept modules de portraits et de décor dans un namespace distinct.",
         "verifiers": [
           "scripts/verify-public-release-v86.mjs",
           "scripts/verify-release-artifact-v143.mjs",
@@ -16262,6 +16343,20 @@
         "verifiers": [
           "scripts/verify-campaign-lethe-v163.mjs",
           "scripts/verify-campaign-story-v160.mjs"
+        ]
+      },
+      {
+        "path": "hub-stations-v61.css",
+        "previousSha256": null,
+        "currentSha256": "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+        "verifiers": [
+          "scripts/verify-player-allies-contacts-v165.mjs",
+          "scripts/verify-player-locomotion-rig-v129.mjs",
+          "scripts/verify-player-appearance-v126.mjs",
+          "scripts/verify-player-arm-phase-v167.mjs",
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -16316,24 +16411,79 @@
         "path": "src/game-v52-runtime.js",
         "previousSha256": null,
         "currentSha256": "ac0049ef9ba4a732b126d2de85984e78e74a9fbef2ca36b428d0fbcf23fa821f",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-command-v168.js",
+        "previousSha256": null,
+        "currentSha256": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-engineering-v168.js",
+        "previousSha256": null,
+        "currentSha256": "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-habitat-v168.js",
+        "previousSha256": null,
+        "currentSha256": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-industrial-v168.js",
+        "previousSha256": null,
+        "currentSha256": "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/hub-bulkhead-depth-v134.js",
         "previousSha256": null,
         "currentSha256": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
@@ -16363,38 +16513,82 @@
         ]
       },
       {
-        "path": "src/hub-room-service-details-v165.js",
+        "path": "src/hub-room-backgrounds-v168.js",
         "previousSha256": null,
-        "currentSha256": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "currentSha256": "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-room-batch-details-v168.js",
+        "previousSha256": null,
+        "currentSha256": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-room-parallax-v134.js",
+        "previousSha256": null,
+        "currentSha256": "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-room-service-details-v165.js",
+        "previousSha256": null,
+        "currentSha256": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/hub-v81-runtime.js",
         "previousSha256": null,
         "currentSha256": "26a75cc4fe0e7280146b370c9183cd89a52dabddd865f408289439fe824e4067",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/human-patrol-animation-v133.js",
         "previousSha256": null,
         "currentSha256": "5c9283b4f848a9a5882809f7b4f3c8c84478ed756f89bdc329cd1b875e8e0fe6",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -16490,6 +16684,20 @@
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
           "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+        ]
+      },
+      {
+        "path": "src/npc-dialogue-portraits-v168.js",
+        "previousSha256": null,
+        "currentSha256": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+        "verifiers": [
+          "scripts/verify-player-allies-contacts-v165.mjs",
+          "scripts/verify-player-locomotion-rig-v129.mjs",
+          "scripts/verify-player-appearance-v126.mjs",
+          "scripts/verify-player-arm-phase-v167.mjs",
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -16633,13 +16841,14 @@
         "path": "src/player-appearance-preview-v126.js",
         "previousSha256": null,
         "currentSha256": "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -16691,11 +16900,13 @@
         "path": "src/refuge-art-v87.js",
         "previousSha256": null,
         "currentSha256": "958f9c403d5dab828df67781425afe120769b45666f2e2a51732339b5831f053",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
@@ -16715,13 +16926,14 @@
         "path": "src/sprite-animation-runtime.js",
         "previousSha256": null,
         "currentSha256": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -21101,14 +21313,15 @@
       "id": "C165-PLAYER",
       "owner": "player",
       "label": "Joueur principal et alliés / appuis",
-      "scope": "Révision des appuis et attaches du bassin, des jambes et du torse ; cadence liée à la distance, continuité marche/arrêt et présentation des humains alliés. Suite V167 : bras mains libres synchronisés aux pas ; continuité des alliés à travers les actions et rejet des faux pas sans temps écoulé.",
+      "scope": "Révision des appuis et attaches du bassin, des jambes et du torse ; cadence liée à la distance, continuité marche/arrêt et présentation des humains alliés. Suite V167 : bras mains libres synchronisés aux pas ; continuité des alliés à travers les actions et rejet des faux pas sans temps écoulé. Suite V168 : seize portraits individuels tête/épaules dans les cadres de dialogue, sans nouveau PNG.",
       "limits": "Correction procédurale du projet, sans nouvelle capture de mouvement ni anatomie universelle ou fidélité franchise 1:1. Comparaisons natives propres au candidat encore attendues.",
       "modules": [
         "src/player-gait-v133.js",
         "src/player-locomotion-rig-v129.js",
         "src/player-modular-rig-v126.js",
         "src/human-patrol-animation-v133.js",
-        "src/sprite-animation-runtime.js"
+        "src/sprite-animation-runtime.js",
+        "src/npc-dialogue-portraits-v168.js"
       ],
       "qa": [
         "scripts/qa-player-allies-contacts-v165.py"
@@ -21119,7 +21332,8 @@
         "scripts/verify-player-locomotion-rig-v129.mjs",
         "scripts/verify-player-appearance-v126.mjs",
         "scripts/verify-player-arm-phase-v167.mjs",
-        "scripts/verify-allied-patrol-phase-v167.mjs"
+        "scripts/verify-allied-patrol-phase-v167.mjs",
+        "scripts/verify-dialogue-portraits-v168.mjs"
       ],
       "releaseValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
       "artClosed": 0,
@@ -21129,22 +21343,31 @@
       "id": "C165-SHIP",
       "owner": "ship",
       "label": "Tantalus / détails techniques et refuge",
-      "scope": "31 assemblages de service pour 35 profils de pièces ; quatre vues volontairement dégagées. Plaque du vrai nom sur le cadre du refuge ; retrait des gros libellés de développement. Suite V167 : plaques physiques de destination fixées aux douze linteaux, dans les deux projections.",
+      "scope": "31 assemblages de service pour 35 profils de pièces ; quatre vues volontairement dégagées. Plaque du vrai nom sur le cadre du refuge ; retrait des gros libellés de développement. Suite V167 : plaques physiques de destination fixées aux douze linteaux, dans les deux projections. Suite V168 : lot001 de cent installations, quatre secteurs de vingt-cinq, trente-six types, et trente-cinq profils de fond ; aucune collision nouvelle.",
       "limits": "Murs arrière, réservations et projection propres à la pièce. Aucune nouvelle collision, porte ou géométrie ; pas finition de tout le vaisseau ou nouvelle certification artistique 1:1.",
       "modules": [
         "src/hub-room-service-details-v165.js",
         "src/hub-room-life-v136.js",
         "src/refuge-art-v87.js",
-        "src/hub-bulkhead-depth-v134.js"
+        "src/hub-bulkhead-depth-v134.js",
+        "src/hub-room-backgrounds-v168.js",
+        "src/hub-room-batch-details-v168.js",
+        "src/hub-batch-command-v168.js",
+        "src/hub-batch-habitat-v168.js",
+        "src/hub-batch-industrial-v168.js",
+        "src/hub-batch-engineering-v168.js"
       ],
       "qa": [
-        "scripts/qa-hub-service-details-v165.py"
+        "scripts/qa-hub-service-details-v165.py",
+        "scripts/qa-tantalus-batch100-v168.py"
       ],
       "state": "IMPLEMENTATION_PREPUBLICATION",
       "verifiers": [
         "scripts/verify-hub-service-details-v165.mjs",
         "scripts/verify-ship-placement-v167.mjs",
-        "scripts/verify-range-crew-interaction-v167.mjs"
+        "scripts/verify-range-crew-interaction-v167.mjs",
+        "scripts/verify-tantalus-batch100-v168.mjs",
+        "scripts/verify-hub-backgrounds-v168.mjs"
       ],
       "releaseValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
       "artClosed": 0,
@@ -21278,10 +21501,24 @@
     },
     "sourceChanges": [
       {
+        "path": "hub-stations-v61.css",
+        "previousSha256": null,
+        "currentSha256": "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+        "verifiers": [
+          "scripts/verify-player-allies-contacts-v165.mjs",
+          "scripts/verify-player-locomotion-rig-v129.mjs",
+          "scripts/verify-player-appearance-v126.mjs",
+          "scripts/verify-player-arm-phase-v167.mjs",
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
+        ]
+      },
+      {
         "path": "src/app.js",
         "previousSha256": "418385128f0a42d5df8d793fc775424ff6cd4153f94466a02e65f6297fcdae98",
-        "currentSha256": "52df812dec93254e16133812240e2bf511df4f90a231661f511502868a8b9803",
-        "reason": "V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage.",
+        "currentSha256": "1f0dbf0340728e653b90cb613c8e6676d611e25d0cfedaba15cae2602ac15525",
+        "reason": "V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage. Suite V168 : les quatre ouvertures de dialogue désignent leur vrai locuteur et la source de son portrait.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs",
           "scripts/verify-player-allies-contacts-v165.mjs",
@@ -21291,7 +21528,8 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -21316,24 +21554,79 @@
         "path": "src/game-v52-runtime.js",
         "previousSha256": null,
         "currentSha256": "ac0049ef9ba4a732b126d2de85984e78e74a9fbef2ca36b428d0fbcf23fa821f",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-command-v168.js",
+        "previousSha256": null,
+        "currentSha256": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-engineering-v168.js",
+        "previousSha256": null,
+        "currentSha256": "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-habitat-v168.js",
+        "previousSha256": null,
+        "currentSha256": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-batch-industrial-v168.js",
+        "previousSha256": null,
+        "currentSha256": "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/hub-bulkhead-depth-v134.js",
         "previousSha256": null,
         "currentSha256": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
@@ -21362,49 +21655,95 @@
         ]
       },
       {
-        "path": "src/hub-room-life-v136.js",
-        "previousSha256": "61c15a13031a7d25208a366d1e4f0975b71c317ae23edbf5493778f56f6fa05b",
-        "currentSha256": "ee7433e6b7d663d4c4cee0da5a366617b0141cafad0a63e0928e4924e3b6b7f3",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "path": "src/hub-room-backgrounds-v168.js",
+        "previousSha256": null,
+        "currentSha256": "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-room-batch-details-v168.js",
+        "previousSha256": null,
+        "currentSha256": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-room-life-v136.js",
+        "previousSha256": "61c15a13031a7d25208a366d1e4f0975b71c317ae23edbf5493778f56f6fa05b",
+        "currentSha256": "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/hub-room-parallax-v134.js",
+        "previousSha256": null,
+        "currentSha256": "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-ship-placement-v167.mjs",
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/hub-room-service-details-v165.js",
         "previousSha256": null,
         "currentSha256": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/hub-v81-runtime.js",
         "previousSha256": null,
         "currentSha256": "26a75cc4fe0e7280146b370c9183cd89a52dabddd865f408289439fe824e4067",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/human-patrol-animation-v133.js",
         "previousSha256": null,
         "currentSha256": "5c9283b4f848a9a5882809f7b4f3c8c84478ed756f89bdc329cd1b875e8e0fe6",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -21469,6 +21808,20 @@
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
           "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+        ]
+      },
+      {
+        "path": "src/npc-dialogue-portraits-v168.js",
+        "previousSha256": null,
+        "currentSha256": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
+        "verifiers": [
+          "scripts/verify-player-allies-contacts-v165.mjs",
+          "scripts/verify-player-locomotion-rig-v129.mjs",
+          "scripts/verify-player-appearance-v126.mjs",
+          "scripts/verify-player-arm-phase-v167.mjs",
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -21603,39 +21956,42 @@
         "path": "src/player-appearance-hub-v126.js",
         "previousSha256": "584adbd984e3f4f07846043ead8bf0c5f87c2f568e508c38318996e47a046cc8",
         "currentSha256": "7f056e474636f829e5309b1c52e68e04d3e2844b275fb001b574d6af90fb8b6f",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-appearance-preview-v126.js",
         "previousSha256": null,
         "currentSha256": "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-appearance-runtime-v126.js",
         "previousSha256": "3ab7e4155ca7ac97dd447c25df168374c815ea1eee07370f9674d3a8ccd12bf0",
         "currentSha256": "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -21687,57 +22043,62 @@
         "path": "src/player-gait-v133.js",
         "previousSha256": "8210c7f89a0db7d9e3a0f2fb0138d9819bead4ed1df83d8aa8eb97d1bb32c310",
         "currentSha256": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-locomotion-rig-v129.js",
         "previousSha256": "a7401d90b4dd0a6ef9c7da2322bab03f6fb175618428b66357e6fbf1ac3ac957",
         "currentSha256": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/player-modular-rig-v126.js",
         "previousSha256": "cbf671c6d508e40dbc38d84f0a871cb840b94aa773a5bcd81eb43109b51f7e2f",
         "currentSha256": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/refuge-art-v87.js",
         "previousSha256": null,
         "currentSha256": "958f9c403d5dab828df67781425afe120769b45666f2e2a51732339b5831f053",
-        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active.",
+        "reason": "V165 : poser trente et un assemblages techniques sur les seules baies libres des murs arrière des trente-cinq pièces, avant le mobilier natif, avec réservations et projection de la pièce ; intégrer le nom choisi sur le cadre du refuge sans légende de développement ni modification des collisions ou portes. Suite V167 : fixer la signalétique de destination au linteau des douze cloisons selon leur projection, sans changement de collision ou de trajet ; transmettre la touche de dialogue à Tamsin dans le stand hors qualification active. Suite V168 : cent installations murales choisies par usage, trente-cinq fonds architecturaux et suppression des retours obliques dans les sections frontales ; conserver les réservations, dimensions, pixels existants, géométrie et projection de chaque pièce.",
         "verifiers": [
           "scripts/verify-hub-service-details-v165.mjs",
           "scripts/verify-ship-placement-v167.mjs",
-          "scripts/verify-range-crew-interaction-v167.mjs"
+          "scripts/verify-range-crew-interaction-v167.mjs",
+          "scripts/verify-tantalus-batch100-v168.mjs",
+          "scripts/verify-hub-backgrounds-v168.mjs"
         ]
       },
       {
         "path": "src/save.js",
         "previousSha256": "e63cecc589a56bc2419eaf77a28fdba13279de78e1ad425567fd216a9981c09c",
         "currentSha256": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
-        "reason": "V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage.",
+        "reason": "V165 : intégrer et sérialiser les propriétaires de service PNJ, les pièces de costumes et les présentations effectivement atteintes par la production ; préserver les transactions, les interruptions, la normalisation des sauvegardes et l’unicité des corps, sans changer le schéma public ni attribuer des preuves futures. Suite V166 : intégrer et normaliser les propriétaires des deux trajets de poste sans dupliquer les corps ni inventer un voyage. Suite V168 : les quatre ouvertures de dialogue désignent leur vrai locuteur et la source de son portrait.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs",
           "scripts/verify-player-allies-contacts-v165.mjs",
@@ -21747,20 +22108,22 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
         "path": "src/sprite-animation-runtime.js",
         "previousSha256": null,
         "currentSha256": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
-        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions.",
+        "reason": "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-appearance-v126.mjs",
           "scripts/verify-player-arm-phase-v167.mjs",
-          "scripts/verify-allied-patrol-phase-v167.mjs"
+          "scripts/verify-allied-patrol-phase-v167.mjs",
+          "scripts/verify-dialogue-portraits-v168.mjs"
         ]
       },
       {
@@ -21786,8 +22149,8 @@
       {
         "path": "sw.js",
         "previousSha256": "428232e7d31e03925f3ca9d60c6980a47fc3cbd73acc2d72d1430b1e0a151ea6",
-        "currentSha256": "f51ae4141ecbf889dfd79261f0442d46f8b5b837e0038f8e8291ad157c604e6b",
-        "reason": "V165 : admettre dans le cache de production les nouveaux modules effectivement intégrés avec un namespace distinct, sans réadmettre les sources privées, les prévisualisations hors périmètre ni les fichiers différés Forge. Suite V166 : séparer le cache des nouveaux trajets de poste du cache V165. Suite V167 : nouveau cache des mouvements humains et plaques de portes.",
+        "currentSha256": "732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9",
+        "reason": "V165 : admettre dans le cache de production les nouveaux modules effectivement intégrés avec un namespace distinct, sans réadmettre les sources privées, les prévisualisations hors périmètre ni les fichiers différés Forge. Suite V166 : séparer le cache des nouveaux trajets de poste du cache V165. Suite V167 : nouveau cache des mouvements humains et plaques de portes. Suite V168 : précacher les sept modules de portraits et de décor dans un namespace distinct.",
         "verifiers": [
           "scripts/verify-public-release-v86.mjs",
           "scripts/verify-release-artifact-v143.mjs",
@@ -21795,7 +22158,7 @@
         ]
       }
     ],
-    "runtimeSourceCount": 131,
+    "runtimeSourceCount": 140,
     "forgeState": "DEFERRED_BY_USER",
     "forgePrioritiesDeferred": 2,
     "newArchivesRecovered": 0,
@@ -21878,7 +22241,9 @@
     "scripts/verify-campaign-story-v160.mjs": "e1bee1d0c2a9336cef6d11722222e8606a76cac9e7b27b0d29c3cd7abcc5c0b4",
     "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
     "scripts/verify-costume-atlases-v165.mjs": "aa60a94bb91557743e4f89b6754298f63da018e7a7c98d2c5db3aa36f9acb36f",
+    "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
     "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
+    "scripts/verify-hub-backgrounds-v168.mjs": "20314af3bb3849981646db3a73f65c3cbb22f326385e6c9ea6591e4415801ed3",
     "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
     "scripts/verify-hub-lift-transit-v163.mjs": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
     "scripts/verify-hub-service-details-v165.mjs": "b1e7733d23718fee9ce67c45d2f37f24c06c529a6060d6144b4b33ed38ef9b54",
@@ -21910,11 +22275,12 @@
     "scripts/verify-player-arm-phase-v167.mjs": "d9f87786c8fa989fe35033e0969dc0631a6fbcb2dee727d820fe7de8048d8a5e",
     "scripts/verify-player-locomotion-rig-v129.mjs": "542ba6a0da7988ed264cd18db280c6f2da27d0ad6a5928212bc112a7b9581fd6",
     "scripts/verify-player-weapon-rig-v125.mjs": "2cc74b21db33c540bc2466c444aca7a87f507e012e47d4895f38816bc16da98b",
-    "scripts/verify-public-release-v86.mjs": "f85829ba9b5069c4b993ab27bf8d53ddc0d77e73c31ff4aae47232a6110dba7d",
+    "scripts/verify-public-release-v86.mjs": "77a2e8163ead189f81ea57ebba9a0a7b488da7e331f3705bb78ab4fa9810c959",
     "scripts/verify-range-crew-interaction-v167.mjs": "9276254ba9f8f28c769df1f53e07b3f2aa79de6f8a0d1fdab61ef374b4954d33",
     "scripts/verify-release-artifact-v143.mjs": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
     "scripts/verify-reload-presentation-v163.mjs": "7751841c22a3c8daa104cc9112b6df6406e040f1e385a67ff9561913287c7683",
     "scripts/verify-ship-placement-v167.mjs": "0e608d9e531b50c03979866cd361a797f11108d7d4b472c715e4c30b37e1721e",
+    "scripts/verify-tantalus-batch100-v168.mjs": "211728e67be9b2ae0a4c7bb8ea2192fc7c4a2a86ea33f22628a8af25bf59abe6",
     "scripts/verify-trials-navigation-v163.mjs": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
     "scripts/verify-weapon-effects-v124.mjs": "26cea89893acbea90aa853f80c5795ef08152fe03f7e8d384c51459b3418b220",
     "scripts/verify-weapon-runtime-v124.mjs": "ff0e57aa0346b960ae87e20eed56af324ffd2ffac6c0e47818eb22b3b5d8a572",
@@ -21925,5 +22291,32 @@
     "scripts/verify-xeno-trials-presentations-v156.mjs": "acfa6c0e57c6e72f15e56ecabb909248e0b64219622e23643b417040635e1ed9",
     "scripts/verify-xeno-trials-restraint-pose-v156.mjs": "327048a20ac03a51861ed20935c361ed2a4804219bd70e183d1c413e027d129d",
     "scripts/verify-xeno-trials-rig-v154.mjs": "27feaf6aaa3ae4b55ed7b5709c82664a6e175b13b78c2728b21f73f409f056bb"
+  },
+  "followupV168": {
+    "state": "PREPUBLICATION",
+    "batchId": "T168-BATCH-001",
+    "installations": 100,
+    "rooms": 35,
+    "kinds": 36,
+    "sectorCounts": {
+      "command": 25,
+      "habitat": 25,
+      "industrial": 25,
+      "engineering": 25
+    },
+    "backgroundProfiles": 35,
+    "portraitSpeakers": 16,
+    "newPngAssets": 0,
+    "ledgerPath": "docs/forge/xeno-trials/batch100-v168.json",
+    "ledgerSha256": "6363ffb045e53cbb00e691b1b84bb43b6793b366c948dbb30bdc7804c4c0ef63",
+    "geometryChanged": false,
+    "artistic1to1Approved": false,
+    "humanParticipants": 0,
+    "releaseEvidence": {
+      "node": null,
+      "native": null,
+      "ci": null,
+      "merge": null
+    }
   }
 }

@@ -12,7 +12,7 @@ import {
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
 import { Echo9UiV110 } from './echo9-ui-v110.js';
-import { setNpcPortraitSourceV164 } from './npc-matte-apertures-v164.js';
+import { setDialogueSpeakerPortraitV168 } from './npc-dialogue-portraits-v168.js';
 import { selectPremiumDossierV119 } from './premium-personnel-v119.js';
 import { getAllCostumesV119, getCostumeV119 } from './franchise-costumes-v119.js';
 import { CostumeArchivesUiV119 } from './costume-ui-v119.js';
@@ -703,10 +703,9 @@ function openHubDialogue(interaction) {
   hubEngine.pause();
   byId('hub-dialogue-speaker').textContent = contract.speaker;
   byId('hub-dialogue-text').textContent = contract.text;
-  const portrait = byId('hub-dialogue-image');
-  portrait.classList.remove('is-sprite-cell-v62');
-  setNpcPortraitSourceV164(portrait, contract.portrait);
-  portrait.alt = `Portrait de ${contract.speaker}`;
+  setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), {
+    name: contract.speaker, paintedSource: contract.portrait
+  });
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
   byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
@@ -729,11 +728,9 @@ function openNpcDialogueV62(interaction) {
   hubEngine.pause();
   byId('hub-dialogue-speaker').textContent = `${conversation.identity.name} · ${conversation.identity.role}`;
   byId('hub-dialogue-text').textContent = conversation.lines.map((line) => line.text).join(' ');
-  const portrait = byId('hub-dialogue-image');
-  const profile = HUB_NPC_ROSTER.find((entry) => entry.crewId === conversation.crewId);
-  portrait.classList.add('is-sprite-cell-v62');
-  setNpcPortraitSourceV164(portrait, profile?.spritePath || '/assets/openai/tantalus-hub-crew-animation-sheet.png');
-  portrait.alt = `Cellule d’animation de ${conversation.identity.name}`;
+  setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), {
+    crewId: conversation.crewId, name: conversation.identity.name
+  });
   const choices = byId('hub-dialogue-choices');
   choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('');
   byId('hub-dialogue-continue').hidden = true;
@@ -958,10 +955,9 @@ function openOnboardingDialogueV84(interaction) {
   pendingOnboardingDialogV84 = { owner: currentOwnerV84(), phase: state.phase, node: state.dialogueNode };
   byId('hub-dialogue-speaker').textContent = `${contract.speaker.name} · ${contract.speaker.role}`;
   byId('hub-dialogue-text').textContent = contract.lines[state.dialogueNode];
-  const portrait = byId('hub-dialogue-image');
-  portrait.classList.add('is-sprite-cell-v62');
-  setNpcPortraitSourceV164(portrait, HUB_NPC_ROSTER.find(npc => npc.crewId === contact.crewId).spritePath);
-  portrait.alt = `Cellule d’animation de ${contract.speaker.name}`;
+  setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), {
+    crewId: contact.crewId, name: contract.speaker.name
+  });
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
   byId('hub-dialogue-continue').textContent = state.dialogueNode === contract.lines.length - 1 ? 'CONSIGNES REÇUES' : 'ÉCOUTER LA SUITE';
@@ -1037,10 +1033,9 @@ function openOpeningDialogueV88() {
   pendingOpeningDialogV88 = { owner, phase: state.phase, node: state.signalNode };
   byId('hub-dialogue-speaker').textContent = state.phase === 'signal' ? 'DAVID-8R · RELAIS DU TANTALUS' : 'MANIFESTE · FRET DE SECOURS';
   byId('hub-dialogue-text').textContent = state.phase === 'signal' ? OPENING_SIGNAL_V88[state.signalNode] : 'Une seule place est disponible dans la soute de première sortie. Le lot choisi est scellé ici, puis consommé au départ : il ne sera pas renouvelé en rechargeant la partie.';
-  const portrait = byId('hub-dialogue-image');
-  portrait.classList.remove('is-sprite-cell-v62');
-  setNpcPortraitSourceV164(portrait, HUB_STATION_DIALOGUES_V61['dropship-hangar'].portrait);
-  portrait.alt = 'Poste opérationnel du Tantalus';
+  setDialogueSpeakerPortraitV168(byId('hub-dialogue-image'), state.phase === 'signal'
+    ? { crewId: 'crew-10-david-8r', name: 'DAVID-8R' }
+    : { name: 'Manifeste de fret' });
   const choices = byId('hub-dialogue-choices');
   choices.replaceChildren();
   byId('hub-dialogue-continue').hidden = state.phase === 'manifest';

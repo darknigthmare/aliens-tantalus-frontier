@@ -4,6 +4,7 @@ import { getHubVehiclePlacementV136 } from './hub-prop-placements-v136.js';
 import { resolveHubVehicleArtV58 } from './hub-art-runtime-v58.js';
 import { resolveSpriteDrawableV134 } from './sprite-alpha-policy-v134.js';
 import { HUB_PROP_ATLAS_V136, getHubPropAtlasCellV136 } from './hub-prop-atlas-v136.js';
+import { getHubRoomBatchDetailPlanV168, drawHubRoomBatchDetailsV168 } from './hub-room-batch-details-v168.js';
 import { HUB_FURNISHING_ATLAS_V137 } from './hub-furnishing-atlas-v137.js';
 import { HUB_ROOM_FURNISHING_V137, enrichHubRoomCompositionV137, drawHubFurnishingMountsV137 } from './hub-room-furnishing-v137.js';
 import { HUB_FURNITURE_ATLAS_V139 } from './hub-furniture-atlas-v139.js';
@@ -109,7 +110,8 @@ export function getHubRoomLifePlanV136(room,options={}) {
   const complete=composition=>{
     if(!composition)return composition;
     const detailed={...composition,workstationDetailsV139:getHubWorkstationDetailPlanV139(room,composition),clinicalBayV139:getHubClinicalBayPlanV139(room,composition)};
-    return {...detailed,serviceDetailsV165:getHubRoomServiceDetailPlanV165(room,detailed)};
+    const serviced={...detailed,serviceDetailsV165:getHubRoomServiceDetailPlanV165(room,detailed)};
+    return {...serviced,batchDetailsV168:getHubRoomBatchDetailPlanV168(room,serviced)};
   };
   if(!definition||!original)return complete(enrichHubRoomCompositionV137(room,null,options));
   // The background pass precedes drawTraversal: decks remain in front of wall
@@ -195,6 +197,7 @@ export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMot
   const composition=getHubRoomLifePlanV136(room,options);
   if(!ctx||!composition)return null;
   const serviceDetails=drawHubRoomServiceDetailsV165(ctx,composition.serviceDetailsV165,{time,reducedMotion});
+  const batchDetails=drawHubRoomBatchDetailsV168(ctx,composition.batchDetailsV168,{images});
   const clinicalBay=drawHubClinicalBayV139(ctx,composition.clinicalBayV139);
   drawHubFurnishingMountsV137(ctx,composition);
   const rendered=drawHubRoomDressingV134(ctx,room,{images,composition});
@@ -209,7 +212,7 @@ export function drawHubRoomLifeV136(ctx,room,{images=new Map(),time=0,reducedMot
     items:rendered.items.map(entry=>({...entry,motif:composition.task})),supplies:composition.supplies.map(entry=>({role:entry.role,cell:entry.cell,bounds:{x:entry.x,y:entry.y,w:entry.w,h:entry.h}})),
     reservations:structuredClone(composition.spatial.reservations),preservedCriticalSpaces:true,
     legacyOmissionsV138:structuredClone(composition.legacyOmissionsV138),
-    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,clinicalBayV139:clinicalBay,serviceDetailsV165:serviceDetails,
+    collidable:false,interactive:false,motion,sourceStatus:composition.sourceStatus,clinicalBayV139:clinicalBay,serviceDetailsV165:serviceDetails,batchDetailsV168:batchDetails,
     workstationDetailsV139:{plan:composition.workstationDetailsV139,surfaces:composition.workstationDetailsV139.surfaces,
       omitted:composition.workstationDetailsV139.omitted,painted:surfaceDetails?.painted||[],pending:[...surfaceDetails?.pending||[],...missingHostDetails]},
     furnishingV137:composition.furnishingV137?{...structuredClone(composition.furnishingV137),

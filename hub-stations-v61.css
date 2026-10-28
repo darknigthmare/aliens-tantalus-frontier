@@ -105,6 +105,37 @@ html.station-mode::after {
   transform: translate3d(-12.5%, -12.5%, 0);
 }
 
+.hub-dialogue-portrait.has-speaker-avatar-v168 {
+  background: radial-gradient(ellipse at 50% 38%, #203c43 0, #101f26 58%, #080f14 100%);
+}
+
+.hub-dialogue-portrait.has-speaker-avatar-v168 img[hidden],
+.hub-dialogue-avatar-v168[hidden] {
+  display: none !important;
+}
+
+.hub-dialogue-avatar-v168 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center 38%;
+  image-rendering: pixelated;
+}
+
+.hub-dialogue-portrait.has-speaker-avatar-v168[data-dialogue-portrait-state-v168="loading"]::after,
+.hub-dialogue-portrait.has-speaker-avatar-v168[data-dialogue-portrait-state-v168="fallback"]::after {
+  content: attr(data-dialogue-portrait-initials-v168);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #baccc5;
+  font: 700 clamp(2rem, 16cqw, 4.5rem) var(--mono);
+  letter-spacing: .08em;
+}
+
 .hub-dialogue-copy {
   display: flex;
   flex-direction: column;
