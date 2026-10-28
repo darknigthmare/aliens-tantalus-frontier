@@ -8,6 +8,7 @@ import { getHubSpatialPlanV136, hubSpatialPlacementClearV136 } from './hub-spati
 import { getHubRoomIdentityReservationsV137 } from './hub-room-identity-v137.js';
 import { HUB_INTERIOR_WALL_ATLAS_V138 } from './hub-interior-wall-atlas-v138.js';
 import { HUB_COMPARTMENT_SHELLS_V138, drawHubCompartmentShellV138, drawHubCompartmentBaseV138 } from './hub-compartment-shell-v138.js';
+import { drawHubRoomBackgroundV168 } from './hub-room-backgrounds-v168.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -81,10 +82,16 @@ function drawRearShell(ctx, model, accent) {
   for (let x = b.x - unit; x < b.x + b.w + unit; x += unit) {
     ctx.fillStyle = 'rgba(7,20,24,.38)'; ctx.fillRect(x + 34, y + 35, unit - 74, height - 56);
     ctx.strokeStyle = 'rgba(60,84,89,.65)'; ctx.lineWidth = 3;
-    // Recessed wall bays with diagonal return surfaces. Their bottoms remain
-    // above actor shoulders; none looks like a jumpable traversing platform.
-    line(ctx, [[x+25,y+30],[x+42,y+10],[x+unit-45,y+10],[x+unit-27,y+30]]);
-    line(ctx, [[x+25,y+30],[x+25,y+height-12],[x+42,y+height],[x+unit-45,y+height],[x+unit-27,y+height-12],[x+unit-27,y+30]]);
+    // A frontal room keeps frontal wall sections even when its native flight
+    // or range wall bypasses the material shell. Only the wholly oblique
+    // maintenance room may use depth returns.
+    if (model.presentationMode === '2.5d') {
+      line(ctx, [[x+25,y+30],[x+42,y+10],[x+unit-45,y+10],[x+unit-27,y+30]]);
+      line(ctx, [[x+25,y+30],[x+25,y+height-12],[x+42,y+height],[x+unit-45,y+height],[x+unit-27,y+height-12],[x+unit-27,y+30]]);
+    } else {
+      line(ctx, [[x+25,y+10],[x+unit-27,y+10],[x+unit-27,y+height],[x+25,y+height],[x+25,y+10]]);
+      line(ctx, [[x+30,y+15],[x+unit-32,y+15]]);
+    }
     ctx.strokeStyle = 'rgba(12,30,34,.75)'; ctx.lineWidth = 8;
     line(ctx, [[x+12,y],[x+12,y+height+10]]);
     ctx.fillStyle = '#344c50'; ctx.fillRect(x+9,y+20,6,19); ctx.fillRect(x+9,y+height-28,6,19);
@@ -165,6 +172,7 @@ export function drawHubRoomParallaxV134(ctx, room, image, cameraX = 0, options =
     ctx.globalAlpha=1;drawRearShell(ctx,model,accent);
   }
   model.compartmentShellV138=shell?{...shell,nativeTiles:model.nativeTiles,nativeReady:model.nativeReady,asset:model.asset}:null;
+  model.roomBackgroundV168=drawHubRoomBackgroundV168(ctx,room,model,{...options,shell});
   model.equipmentPanels=getHubRearEquipmentLayoutV134(room,model,options.atlasImage,options);
   for(const {source:s,target:t,mirrored} of model.equipmentPanels){
     const drawable=resolveSpriteDrawableV134(options.atlasImage);

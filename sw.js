@@ -1,6 +1,13 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-human-ship-polish-v167';
+const CACHE = 'atf-v143-dialogue-tantalus-batch100-v168';
 const SHELL = Object.freeze([
+  '/src/npc-dialogue-portraits-v168.js',
+  '/src/hub-room-backgrounds-v168.js',
+  '/src/hub-room-batch-details-v168.js',
+  '/src/hub-batch-command-v168.js',
+  '/src/hub-batch-habitat-v168.js',
+  '/src/hub-batch-industrial-v168.js',
+  '/src/hub-batch-engineering-v168.js',
   '/src/npc-interdeck-passage-v165.js',
   '/src/npc-interdeck-routes-v165.js',
   '/src/npc-station-relays-v166.js',
