@@ -209,6 +209,84 @@ for(const d of interdeckDefinitions) {
   });
 }
 
+test('V167 David: paused05→08→11 refresh retains the observed native station without rewinding a physical legacy owner',()=>{
+  // A genuine legacy owner is allowed to spend real distance before its
+  // alternate watch. Retention cannot rewind it to an earlier station.
+  const legacy=runtime(5,{deck:2,roomId:'quarantine'});
+  const primary=legacy.getNpcServiceActorV161('inez-bioforge');assert.ok(primary);
+  const originalLegacy={x:primary.x,y:primary.y,roomId:primary.roomId};
+  context(legacy,11);
+  for(let i=0;i<10*60&&Math.abs(primary.x-originalLegacy.x)<=8;i++)legacy.update(1/60);
+  const beforeBorrow=legacy.getNpcServicePhysicalStateV165('inez-bioforge');
+  assert.ok(beforeBorrow&&beforeBorrow.distance>0&&Math.abs(primary.x-originalLegacy.x)>8,
+    'the control requires actual movement through the existing legacy controller');
+  assert.equal(beforeBorrow.stage,'walking');assert.equal(primary.roomId,originalLegacy.roomId);
+  const movingLegacy={x:primary.x,y:primary.y,roomId:primary.roomId};
+  context(legacy,20);
+  assert.equal(legacy.getNpcServiceActorV161('inez-bioforge'),primary);
+  assert.deepEqual({x:primary.x,y:primary.y,roomId:primary.roomId},movingLegacy,
+    'a timetable refresh cannot restore an obsolete bookmark over a real moving owner');
+  assert.equal(entry(legacy,'inez-civil').actor,null,'the alternate route waits for the real local owner');
+  legacy.update(1/60);
+  assert.ok(Math.abs(primary.x-movingLegacy.x)<=27/60+1e-6,'the legacy return spends bounded real distance');
+  assert.equal(primary.y,movingLegacy.y);
+
+  const h=runtime(5,{deck:0,roomId:'cryo-bay'}),crew='crew-10-david-8r';
+  const physical=h.npcs.find(a=>a.crewId===crew);assert.ok(physical);
+  const pose={x:physical.x,y:physical.y,roomId:physical.roomId};
+  const retained05=structuredClone(entry(h,'david-durandal').retained);
+  assert.ok(retained05);assert.equal(retained05.source,'native-observed-body');
+  assert.equal(retained05.roomId,pose.roomId);assert.equal(retained05.x,pose.x);
+  assert.equal(entry(h,'david-durandal').actor,null);
+  h.running=false;context(h,8);
+  const at08=structuredClone(entry(h,'david-durandal'));
+  const cohort08=h.npcs.filter(a=>a.crewId===crew);
+  const seen08=h.npcInterdeckObservedV165.get(crew);
+  context(h,11);
+  const at11=entry(h,'david-durandal'),borrowed=h.npcInterdeckBodiesV165.get('david-durandal');
+  const diagnostic=JSON.stringify({at08,at11,cohort08:cohort08.map(a=>({x:a.x,y:a.y,roomId:a.roomId})),
+    seen08:seen08&&{x:seen08.x,y:seen08.y,roomId:seen08.roomId}});
+  assert.equal(at08.actor,null,'08h is before the Durandal watch: '+diagnostic);
+  assert.deepEqual(at08.retained,retained05,'a sampled08h work room is not observed physical travel: '+diagnostic);
+  assert.equal(cohort08.length,1,'one real native cohort body at08h');
+  assert.equal(seen08,physical,'a paused rebuild keeps the actually observed native owner');
+  assert.equal(cohort08[0],physical);
+  assert.deepEqual({x:cohort08[0].x,y:cohort08[0].y,roomId:cohort08[0].roomId},pose);
+  assert.ok(at11.actor&&borrowed,diagnostic);assert.equal(borrowed,physical);
+  assert.equal(at11.origin.source,'native-observed-body');
+  assert.deepEqual({x:at11.origin.x,y:at11.origin.y,roomId:at11.origin.roomId},pose);
+  assert.deepEqual({x:borrowed.x,y:borrowed.y,roomId:borrowed.roomId},pose);
+  assert.equal(at11.actor.distance,0);assert.equal(at11.actor.crossings,0);assert.equal(at11.actor.liftJourneys,0);
+  assert.equal(new Set([...h.getNpcInterdeckActorsV165(),...h.npcs].filter(a=>a.crewId===crew)).size,1);
+});
+
+test('V167 David: a reused hub restores saved05h before stale08h natives can replace its station',()=>{
+  const h=runtime(5,{deck:0,roomId:'cryo-bay'}),crew='crew-10-david-8r';
+  const physical=h.npcs.find(a=>a.crewId===crew);assert.ok(physical);
+  const pose={x:physical.x,y:physical.y,roomId:physical.roomId};h.persist();
+  const saved05=structuredClone(h.persisted.at(-1)),savedBytes=JSON.stringify(saved05);
+  const retained05=structuredClone(saved05.npcInterdeckRoutesV165.routes['david-durandal'].retained);
+  assert.ok(retained05);assert.equal(retained05.source,'native-observed-body');
+  assert.equal(saved05.npcInterdeckRoutesV165.routes['david-durandal'].actor,null);
+  h.running=false;context(h,8);
+  const stale08=h.npcs.filter(a=>a.crewId===crew).map(a=>({x:a.x,y:a.y,roomId:a.roomId}));
+  h.start(structuredClone(saved05),{routineContextV62:{clock:{day:1,hour:11},save:portCampaign}});
+  const fresh=runtime(11,structuredClone(saved05)),restored=entry(h,'david-durandal'),control=entry(fresh,'david-durandal');
+  const actual=h.npcInterdeckBodiesV165.get('david-durandal'),freshBody=fresh.npcInterdeckBodiesV165.get('david-durandal');
+  const diagnostic=JSON.stringify({savedRetained:retained05,stale08,restored,control});
+  assert.equal(JSON.stringify(saved05),savedBytes,'restarting either runtime cannot rewrite the earlier save');
+  assert.ok(restored.actor&&actual&&control.actor&&freshBody,diagnostic);
+  assert.deepEqual(restored.origin,control.origin,'reused and new hubs restore the same observed station: '+diagnostic);
+  assert.deepEqual({x:restored.origin.x,y:restored.origin.y,roomId:restored.origin.roomId},pose);
+  assert.equal(restored.origin.source,'native-observed-body');
+  assert.deepEqual({x:actual.x,y:actual.y,roomId:actual.roomId},pose);
+  assert.equal(actual.w,44);assert.equal(actual.h,92);
+  assert.equal(restored.actor.distance,0);assert.equal(restored.actor.crossings,0);assert.equal(restored.actor.liftJourneys,0);
+  assert.deepEqual(restored.actor,control.actor);
+  assert.equal(new Set([...h.getNpcInterdeckActorsV165(),...h.npcs].filter(a=>a.crewId===crew)).size,1,
+    'the reused hub publishes one rehydrated body rather than the stale timetable sample');
+});
+
 test('diagnostic07: actual DAVID Rook ECHO order after the native07h to11h watch',()=>{
   const h=runtime(7,{deck:0,roomId:'combat-information'});const native=h.npcs.find(a=>a.crewId==='crew-10-david-8r');
   assert.ok(native);const initial=h.getSnapshot();context(h,11);const samples=[];let lastX=null,lastProgress=0;

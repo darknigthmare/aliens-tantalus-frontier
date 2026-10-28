@@ -28,6 +28,7 @@ const SCRIPT_FILES = new Set([
   'verify-player-arm-phase-v167.mjs',
   'verify-allied-patrol-phase-v167.mjs',
   'verify-ship-placement-v167.mjs',
+  'verify-range-crew-interaction-v167.mjs',
   'qa-npc-station-relays-v166.py',
   'verify-npc-station-relays-v166.mjs',
   'verify-npc-relay-locked-bulkheads-v166.mjs',
