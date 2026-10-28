@@ -209,6 +209,8 @@ try:
   before=inventory(page);open_view(page,'crew')
   page.locator('[data-panel="crew"] #costume-archives-v119').wait_for(state='visible')
   page.locator('#costume-archives-v119 [data-costume-id="'+outfit['costumeId']+'"]').click()
+  selection=page.evaluate('o=>{const p=__ATF_V51__.saveSystem.data.player;return {expected:o,actual:{costumeId:p.costumeId,slots:structuredClone(p.appearanceV126.slots)},equal:JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots)};}',outfit)
+  report.setdefault('buttonSelections',[]).append(selection);print('SELECTION '+json.dumps(selection,ensure_ascii=False),flush=True)
   page.wait_for_function('o=>{const p=__ATF_V51__.saveSystem.data.player;return p.costumeId===o.costumeId&&JSON.stringify(p.appearanceV126.slots)===JSON.stringify(o.slots);}',arg=outfit)
   check(slug+': real costume button equips all six parts without identity/resources/issued gear/J2 changes',inventory(page)==before)
   screenshot(page,'[data-archive-costume="'+outfit['costumeId']+'"]',slug+'-native-archive-card.png','native-archive-ui')
