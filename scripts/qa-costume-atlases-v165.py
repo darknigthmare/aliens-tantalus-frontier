@@ -56,6 +56,7 @@ def check(label,condition):
 
 
 def open_view(page,view):
+ if view!='hub' and page.locator('#exit-hub').is_visible():page.locator('#exit-hub').click()
  menu=page.locator('#menu-toggle')
  if menu.is_visible() and 'open' not in (page.locator('.rail').get_attribute('class') or '').split():menu.click()
  page.locator('[data-view="'+view+'"]').click()
