@@ -22276,7 +22276,7 @@
         "jun-v165"
       ],
       "workflow": ".github/workflows/non-forge-regression-v163.yml",
-      "workflowSha256": "0451e940b9a2bcc6d7dd517e7840590a1c01d9c37ec751cefbb8f2c73b3b56c3",
+      "workflowSha256": "d450e1b1cdb822f86510c523c87e9848aff3f0f0a012cba31d9ca389a522a468",
       "conclusion": null
     },
     "releaseEvidence": {
@@ -22328,7 +22328,7 @@
     "scripts/verify-npc-relay-locked-bulkheads-v166.mjs": "52c2b1a55f40b32063e164a2d9d5a4bccb997bd0f62362c3c87f8473446e1e17",
     "scripts/verify-npc-service-routes-v161.mjs": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
     "scripts/verify-npc-station-relays-v166.mjs": "b331b5b23224ec3e80f612e1ab70bb52d016a000c837b7b6dfa6ea2a406dff69",
-    "scripts/verify-parallel-completion-v165.mjs": "a0edf22fb013bc44e42c57f819125d464d30695f07b77efd5b7958cd8acbcdaa",
+    "scripts/verify-parallel-completion-v165.mjs": "c49d78b68bae4f17844320dd73a119f056b97566101e79b8186c60e7026718bb",
     "scripts/verify-player-allies-contacts-v165.mjs": "a493954439f413c34e826888fddf61eba78f4e9bb85367a7bab11949fccef7a1",
     "scripts/verify-player-appearance-v126.mjs": "5eae7584cc69bf96b3ac8f680fa3b96bc62e5ece1f8be3b3b0315fdec54b5ea1",
     "scripts/verify-player-arm-phase-v167.mjs": "d9f87786c8fa989fe35033e0969dc0631a6fbcb2dee727d820fe7de8048d8a5e",
@@ -22426,7 +22426,6 @@
       "iterations": [
         {
           "id": "vasquez_upper",
-          "generatedOutputName": "exec-40bd017d-0ae7-48d6-9c5c-5db4d4ca53a1.png",
           "outputSha256": "baed189a7e200fe55feb25c54bab50f197aed290ed0f32c98e4575a01ac47a00",
           "status": "SUPERSEDED_WRONG_LEFT_TORSO_DIRECTION",
           "transparentBackground": true,
@@ -22434,7 +22433,6 @@
         },
         {
           "id": "vasquez_legs",
-          "generatedOutputName": "exec-d5c10d29-e94d-4b22-9a84-233e93c4682a.png",
           "outputSha256": "ce9f840174e8e762af26483cc25a0898cf2315cac8402d77ab41c976374f95c5",
           "status": "RETAINED_PRODUCTION_BYTES",
           "transparentBackground": true,
@@ -22443,7 +22441,6 @@
         },
         {
           "id": "vasquez_upper_direction",
-          "generatedOutputName": "exec-def9758c-d732-4cfb-8347-e4c348a089ac.png",
           "outputSha256": "36813636dc858c4951995a22907ed4a582267199f64b5dae371b25e1c7b3a47b",
           "status": "SUPERSEDED_OVERSIZED_ARM_APERTURES",
           "transparentBackground": true,
@@ -22451,7 +22448,6 @@
         },
         {
           "id": "rain_upper",
-          "generatedOutputName": "exec-1f39e207-d9f7-46ba-88f8-fef4b2855d11.png",
           "outputSha256": "932aacfae72c0c36f15a55dd4eb8c8f4984c97d4b9efff669fd727b92c5a29c5",
           "status": "REJECTED_OPAQUE_NECK_APERTURES",
           "transparentBackground": true,
@@ -22459,7 +22455,6 @@
         },
         {
           "id": "rain_legs",
-          "generatedOutputName": "exec-f0375043-aec4-4db6-ad9e-6ee8b549470e.png",
           "outputSha256": "955489c82885637b8ea7d48284b93834ea7c60771e02593685884ca76fa5624b",
           "status": "SUPERSEDED_SINGLE_FACING_BOOTS",
           "transparentBackground": true,
@@ -22467,7 +22462,6 @@
         },
         {
           "id": "rain_upper_neck_correction",
-          "generatedOutputName": "exec-7206ef11-2658-4aae-bf1f-46558a1c9b3d.png",
           "outputSha256": "4cfb7e3c850d8a1016954084d9d3c438c1d85a577e29aeb3a77df969a4e30c65",
           "status": "SUPERSEDED_OVERSIZED_ARM_APERTURES",
           "transparentBackground": true,
@@ -22475,7 +22469,6 @@
         },
         {
           "id": "rain_legs_direction_correction",
-          "generatedOutputName": "exec-afdbc414-df72-497e-9be0-70f5a1cd143d.png",
           "outputSha256": "9f24bcae84bc5983abdb926a9b4f02c141cac49440abcd85964bda89b325d69a",
           "status": "SUPERSEDED_REVERSED_LEFT_WORDMARK",
           "transparentBackground": true,
@@ -22483,7 +22476,6 @@
         },
         {
           "id": "rain_legs_wordmark_correction",
-          "generatedOutputName": "exec-c4f0a385-4ce4-42eb-aaf3-d0b15a308a9a.png",
           "outputSha256": "0d9c1fa27a65bdd92bdd0437bd28ffc7bdf395654612059d45ca55c8ef8acb24",
           "status": "RETAINED_PRODUCTION_BYTES",
           "transparentBackground": true,
@@ -22492,7 +22484,6 @@
         },
         {
           "id": "vasquez_upper_armhole_correction",
-          "generatedOutputName": "exec-c9f4ebd8-c981-4b07-b0c2-6c1e04006e72.png",
           "outputSha256": "0f45d9f546ce08c2d31762a0305b5068779de95433a9d023c1341b32799b7c0c",
           "status": "RETAINED_PRODUCTION_BYTES",
           "transparentBackground": true,
@@ -22501,14 +22492,14 @@
         },
         {
           "id": "rain_upper_armhole_correction",
-          "generatedOutputName": "exec-a1109c33-001e-4f9c-bf56-ab42bddcf5f3.png",
           "outputSha256": "93f92c17ff52b6c2756dfe94b00af1229c208334354d8a0c7480bf6629e2c0c6",
           "status": "RETAINED_PRODUCTION_BYTES",
           "transparentBackground": true,
           "prompt": "Edit the supplied Rain jacket transparent modular sprite atlas to fit its six armholes to the actual separate articulated sleeves. Preserve all14 components, exact4x4 layout, positions, directions (firstthree torsos LEFT, nextthree RIGHT), clothing colors/quilting/zipper/Tshirt, ALL six small transparent neck holes, cuffs, barehands, outer torso silhouettes and transparent empty gutters.\nONLY change the visible ARM OPENING in each of the six torso components R1C1,R1C2,R1C3,R1C4,R2C1,R2C2. The existing arm apertures are much too large for the separate sleeve attachment. REDUCE EVERY ARM HOLE to a near-round fully transparent opening40–45PIXELS WIDE AND40–45PIXELS HIGH at the supplied1254x1254 atlas size, centered at the center of the existing hole. This is less than half the present opening diameter. Fill the outer annular area of the former oversized hole with opaque, continuous red quilted jacket fabric and dark lining appropriate to the surrounding jacket, finishing a narrow sewn rim around the new small central hole. The remaining40–45pixel hole must be true alpha0 transparency, not black/gray paint, skin or an attached sleeve. Do not leave a giant oval hole in any torso including the crouching pair.\nThis is a controlled sprite assembly correction: the six real neck holes already fixed in the source must stay transparent and unchanged, the separate sleeve and hand components must stay unchanged, and the shoulders, garment edges, atlas scale and directions must not move. No head, neck flesh, arms attached to torso, gun, extra equipment, grid, text labels or background. Keep the dark red waxed-cotton puffer design exactly as supplied.",
           "productionPath": "assets/openai/sprites/player/costume-parts-v165/rain-jacket/upper.png"
         }
-      ]
+      ],
+      "outputIdentity": "Outputs are identified by the retained iteration id, original SHA-256 and, when selected, the production path. Local generator filenames are omitted from published source."
     },
     "references": [
       {
@@ -22551,8 +22542,18 @@
           "weathered off-white shoes"
         ],
         "examinedImages": [
-          "https://images.squarespace-cdn.com/content/v1/595bf215cd0f68ef9f08ab51/882781d1-58d4-4069-8f5f-018ceae42b07/Some%2Bof%2Bthe%2B25%2Bduplicates%2Bmade%2Bfor%2BRain%2Band%2BNavaro%27s%2Bcostumes.jpeg",
-          "https://images.squarespace-cdn.com/content/v1/595bf215cd0f68ef9f08ab51/9e087a07-a2d5-47c3-8c2e-d4c9cdd32982/Reebok%2BCollaboration%2Bfor%2BRain.jpeg"
+          {
+            "sourcePage": "https://www.caftcad.com/alien-romulus",
+            "description": "Photograph of costume-rack duplicates for Rain and Navarro, supplied by costume designer Carlos Rosario.",
+            "sourceImageSha256": "e056d16d4dd5b970a76917e84e3d1026d2e119db19118d649c4af430852f743f",
+            "sourceImageBytes": 899908
+          },
+          {
+            "sourcePage": "https://www.caftcad.com/alien-romulus",
+            "description": "Photograph of the Reebok collaboration for Rain, supplied by costume designer Carlos Rosario.",
+            "sourceImageSha256": "37818dba038337c78fa1f486cc5d9b769d746eb270d16980e207098bc2eafa59",
+            "sourceImageBytes": 70821
+          }
         ],
         "limits": "Photographs inspected as reference; raw reference photos are not copied into production sprite assets."
       },
@@ -24324,8 +24325,8 @@
     "fullArtTasksClosed": 0,
     "humanParticipants": 0,
     "localNodeValidation": {
-      "distinctPassingCases": 234,
-      "newCases": 9,
+      "distinctPassingCases": 235,
+      "newCases": 10,
       "suites": [
         {
           "scope": "costume parts, appearance, transit, preview, incapacitation and locomotion",
@@ -24351,18 +24352,149 @@
           "tapSha256": "c2fcff9af9f8ca21d192be49c9844af0d36cdd98fd7ed1c62da3bc488c74c58c"
         },
         {
-          "scope": "parallel completion6, V162 succession11, selected V163 succession14",
-          "passed": 31,
+          "scope": "parallel completion7, V162 succession11, selected V163 succession14",
+          "passed": 32,
           "failed": 0,
           "excludedCases": 2,
           "exclusions": "Two unchanged historical PNG inventory cases outside the downloaded candidate art scope; this is not the complete V163 suite.",
-          "receiptSha256": "1ff905936c494da342ef2da9155dfbb19c265f2980df580ac0ba9b3329e5efb6"
+          "newCases": 1,
+          "priorReceiptSha256": "1ff905936c494da342ef2da9155dfbb19c265f2980df580ac0ba9b3329e5efb6",
+          "tapSha256": "55301829cf57fa2b27d28823d39a7c46ab9c129a056f764ba3bfb582ed49dcdb"
         }
       ],
       "countingPolicy": "Distinct successful cases only; targeted reruns, the3 independent Jun review cases and expected old-code failures are not added again.",
       "fullReleaseSuite": false,
       "chromiumJourney": false,
       "ciConclusion": null
+    },
+    "ciCorrectionAfterFirstPublication": {
+      "observedCommit": "1e5089f1d1ec3fbeee6f99dc3bf57078b4b6d23e",
+      "state": "CORRECTED_LOCALLY_REQUIRES_NEW_COMMIT_CI",
+      "sourceAdmission": {
+        "runUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40952901938",
+        "jobId": 123725393565,
+        "failure": "Private source metadata in distribution: docs/forge/xeno-trials/progress-v163.json",
+        "cause": "The existing generic UUID detector rejected ten local generator output filenames and two image-CDN URLs in the new provenance block.",
+        "correction": "Omit local output filenames; retain iteration ids, all original prompts and output SHA-256; identify the two source photos by their primary publication page, description, exact SHA-256 and bytes.",
+        "releaseGuardUnchanged": true,
+        "regressionTest": "V165 current provenance and development guide satisfy the source text admission guard",
+        "beforeCorrection": {
+          "tests": 1,
+          "passed": 0,
+          "failed": 1,
+          "tapSha256": "62532b57207c63622d41959f471817e2a5115a6dadecaee41c6f2de20259b39b"
+        }
+      },
+      "browserPlatform": {
+        "observedRunner": "Ubuntu 26.04.1 LTS, ubuntu-26.04 image 20261025.179.1",
+        "playwrightVersion": "1.57.0",
+        "failure": "Playwright does not support chromium on ubuntu26.04-x64",
+        "observedJobs": [
+          {
+            "runUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40952901993",
+            "jobId": 123725392574
+          },
+          {
+            "runUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40952901926",
+            "jobId": 123725392326
+          }
+        ],
+        "replacementRunner": "ubuntu-24.04",
+        "primarySource": "https://github.com/microsoft/playwright/blob/v1.57.0/packages/playwright-core/src/server/utils/hostPlatform.ts",
+        "primarySourceBlobSha": "635d65d3d98ce67741cb7eb20b455751c990f0db",
+        "workflowChanges": [
+          {
+            "path": ".github/workflows/forge-regression.yml",
+            "before": {
+              "bytes": 3562,
+              "sha256": "9ba87ab5cdc0f546c5a7b9bf72a10f2cf3f06744156580af6e4caa5baa4f36a4",
+              "gitBlobSha": "b54fe82d709e284322599d0e493997e98f69af87"
+            },
+            "after": {
+              "bytes": 3561,
+              "sha256": "47e85b0921be154df7c2626217832f01aae86149e4f14c3d1ba27f4235002297",
+              "gitBlobSha": "afff2a6210c2279c424e3292e541067c73db7da0"
+            },
+            "yamlChanges": [
+              "jobs.forge.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          },
+          {
+            "path": ".github/workflows/full-release-v143.yml",
+            "before": {
+              "bytes": 14892,
+              "sha256": "a890f93510ba903dd8ead2235cc18bc91459f60675e0b9703e8bbaa9cf3c93f8",
+              "gitBlobSha": "31dd374a737d92b7f4fc321f3231bd285652b31c"
+            },
+            "after": {
+              "bytes": 14891,
+              "sha256": "0ec3deb5a88aac2e6bae73f51f41ed653ce3ff202254fb318bcff98034fbe8a2",
+              "gitBlobSha": "cb0ebe9c057b6681ebdc0934e4f0ec76118b4545"
+            },
+            "yamlChanges": [
+              "jobs.release.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          },
+          {
+            "path": ".github/workflows/non-forge-regression-v162.yml",
+            "before": {
+              "bytes": 4062,
+              "sha256": "f69619409ff0cbb30eaa58900a80f53f0e8514b196d371f89789bfce5dbecdef",
+              "gitBlobSha": "1bdb0454c3dff6bbe54b91f7902d9f76732d3339"
+            },
+            "after": {
+              "bytes": 4061,
+              "sha256": "c39830feca3806b2f89d8b899c0a3655909d94b2ceffca00feb75e44162183a6",
+              "gitBlobSha": "ccd640c38e55c77c5428829752de6a47965e534f"
+            },
+            "yamlChanges": [
+              "jobs.continuation-v162.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          },
+          {
+            "path": ".github/workflows/non-forge-regression-v163.yml",
+            "before": {
+              "bytes": 11731,
+              "sha256": "0451e940b9a2bcc6d7dd517e7840590a1c01d9c37ec751cefbb8f2c73b3b56c3",
+              "gitBlobSha": "6a9fb387a8f4f65bb1d448c617786b6544088144"
+            },
+            "after": {
+              "bytes": 11730,
+              "sha256": "d450e1b1cdb822f86510c523c87e9848aff3f0f0a012cba31d9ca389a522a468",
+              "gitBlobSha": "de1da2ce928769cd70bfc1c0b65d27f4a4800aad"
+            },
+            "yamlChanges": [
+              "jobs.native-v163.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          }
+        ],
+        "validation": {
+          "yamlParser": "PyYAML 6.0.3 BaseLoader (on remains a string key)",
+          "parsedWorkflows": 4,
+          "structuralDifference": "Only each job runs-on string changes from ubuntu-latest to ubuntu-24.04",
+          "textDiff": "Exactly one removed and one added runs-on line per file",
+          "browserRerun": false
+        }
+      },
+      "localVerification": {
+        "documentaryCasesPassed": 32,
+        "documentaryCasesFailed": 0,
+        "documentaryTapSha256": "55301829cf57fa2b27d28823d39a7c46ab9c129a056f764ba3bfb582ed49dcdb",
+        "distinctPassingCasesIncludingUnchangedRuntimeSuites": 235,
+        "newCasesIncludingSourceMetadataRegression": 10,
+        "workbookUnchanged": true,
+        "workbookSha256": "95848cb8a1ab14aed101a4f66d99bc2fb3321ee74482bd83540afa265586e61b",
+        "browserJourneyOnNewRunner": false,
+        "newCommitCiConclusion": null
+      }
     }
   }
 }

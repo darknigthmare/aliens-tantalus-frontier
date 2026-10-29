@@ -13,6 +13,7 @@ import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
 import { PLAYER_COSTUME_PART_ASSETS_V165 } from '../src/player-costume-parts-v165.js';
 import { PLAYER_COSTUME_ASSETS_V119, getPlayerCostumeSkinV119 } from '../src/player-costume-skins-v119.js';
 import { HUB_ROOM_SERVICE_DETAILS_V165 } from '../src/hub-room-service-details-v165.js';
+import { isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 
 const prefix = 'docs/forge/xeno-trials/';
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -26,6 +27,12 @@ const streamIds = ['C165-COSTUMES', 'C165-RIGS', 'C165-ROUTES', 'C165-ARCHIVES',
 const ciWorkstreams = ['campaign', 'crew-lifts', 'crew-leases', 'weapons-title', 'trials',
   'player-v165', 'ship-v165', 'costumes-v165', 'rigs-v165', 'workposts-v165',
   'cal-v165', 'david-v165', 'inez-v165', 'maksim-v165', 'jun-v165'];
+
+test('V165 current provenance and development guide satisfy the source text admission guard', () => {
+  for (const path of [prefix + 'progress-v163.json', 'docs/development/GAMEDEV_GUIDANCE.md'])
+    assert.equal(isPublicDistributionTextV86(read(path).toString()), true,
+      'Private source metadata in tracked development documentation: ' + path);
+});
 
 export function verifyParallelCompletionV165(record, readSource = read) {
   const followup = record.followupV165;
