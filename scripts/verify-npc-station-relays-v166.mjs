@@ -4,6 +4,8 @@ import { HUB_DECKS,HUB_WORLD,buildHubObstacleGeometryV87 } from '../src/hub-game
 import { HubGame as RoutineHub } from '../src/hub-v62-runtime.js';
 import { HubGame as AnnexHub } from '../src/hub-v71-runtime.js';
 import { buildHubDoorNetworkV58 } from '../src/topology-coherence-v58.js';
+import { getHubBulkheadColliderV134 } from '../src/hub-bulkhead-depth-v134.js';
+import { annexNpcDutiesV141 } from '../src/hub-annex-npc-life-v141.js';
 import { resolveNpcRoutineV62 } from '../src/npc-dialogue-v62.js';
 import { withHubNpcLifeV136 } from '../src/npc-life-v136.js';
 import { withHubNpcCirculationV158 } from '../src/npc-circulation-v158.js';
@@ -98,6 +100,183 @@ function allBodies(h,c) {
     ...(h.getNpcServiceTrafficActorsV163?.()||[]),...(h.npcs||[]),...h.ensureAnnexNpcCohortV141()]
     .filter(a=>a?.crewId===c.crewId));
 }
+
+test('station courtesy lets the actual Maksim passenger pass Tamsin and restores her exact pre-watch body through every saved phase',()=>{
+  const c=stationDefinitions[1],d=definition(c),h=runtime(5,{deck:3,roomId:'dropship-hangar'});
+  const original=body(h,d),origin=structuredClone(h.npcStationRelaysStateV166.routes[d.id].stationOrigin);
+  assert.equal(origin.x,1855);assert.equal(original.x,origin.x);
+  context(h,8);const checkpoints=new Map();let prior=null;
+  const observe=()=>{
+    const e=h.npcStationRelaysStateV166.routes[d.id],a=e.actor;
+    assert.equal(body(h,d),original);assert.deepEqual(e.stationOrigin,origin);
+    assert.ok(!h.getNpcServiceTrafficActorsV163().some(p=>p.crewId===c.crewId),'V163 reserves a bay; V166 remains the sole movement owner');
+    if(prior){assert.ok(Math.abs(a.x-prior.x)<=27/12+1e-7);assert.ok(a.distance>=prior.distance);
+      assert.ok(a.time-prior.time<=1/12+1e-7);}
+    prior=structuredClone(a);
+    for(const peer of h.getNpcServicePeersV163(0,c.crewId))if(peer.alive!==false&&peer.y===532)
+      assert.ok(Math.abs(original.x-peer.x)>=56-1e-6,'the same-floor bodies cannot pass through one another');
+    const phase=e.courtesy?.phase;
+    if(phase&&!checkpoints.has(phase)){
+      assert.equal(allBodies(h,c).size,1);h.persist();
+      const save=structuredClone(h.persisted.at(-1));
+      checkpoints.set(phase,{hour:h.npcRoutineContextV62.clock.hour,save,state:structuredClone(save.npcStationRelaysV166.routes[d.id])});
+    }
+  };
+  for(let i=0;i<220*12;i++){
+    h.update(1/12);observe();
+    if(h.npcInterdeckStateV165.routes['maksim-cockpit'].actor?.stage==='service')break;
+  }
+  const passenger=h.npcInterdeckStateV165.routes['maksim-cockpit'];
+  assert.equal(passenger.actor?.stage,'service',JSON.stringify({maksim:passenger.actor,tamsin:h.npcStationRelaysStateV166.routes[d.id]}));
+  assert.equal(passenger.actor.roomId,'flight-control-cockpit');
+  const yielding=h.npcStationRelaysStateV166.routes[d.id];assert.equal(yielding.courtesy.phase,'holding');
+  const bays=[yielding.courtesy.targetX,...h.npcTrafficStateV163.actors
+    .filter(a=>a.routeId==='maksim-cockpit:deck-0').map(a=>a.targetX)].sort((a,b)=>a-b);
+  assert.ok(bays.length>=3);for(let i=1;i<bays.length;i++)assert.ok(bays[i]-bays[i-1]>=68-1e-7);
+  context(h,14);
+  for(let i=0;i<360*12;i++){
+    h.update(1/12);observe();
+    if(h.npcStationRelaysStateV166.routes[d.id].courtesy?.phase==='returned'
+      &&h.npcInterdeckStateV165.routes['maksim-cockpit'].returned?.observedTravel)break;
+  }
+  const finished=h.npcStationRelaysStateV166.routes[d.id];
+  assert.equal(finished.actor.stage,'station');assert.equal(finished.actor.x,origin.x);assert.equal(finished.actor.y,532);
+  assert.equal(finished.actor.roomId,origin.roomId);assert.equal(finished.courtesy.phase,'returned');
+  assert.equal(finished.actor.liftJourneys,0);assert.equal(finished.localOwner,false);
+  assert.ok(finished.actor.distance>=2*(origin.x-yielding.courtesy.targetX)-1e-6);
+  assert.equal(h.npcInterdeckStateV165.routes['maksim-cockpit'].returned?.observedTravel,true);
+  for(const peer of h.npcTrafficStateV163.actors.filter(a=>a.routeId==='maksim-cockpit:deck-0'))
+    assert.ok(Math.abs(peer.x-peer.homeX)<.25,'ordinary courtesy bodies also physically regain their own bookmarks');
+  for(const phase of ['clearing','holding','returning','returned']){
+    const checkpoint=checkpoints.get(phase);assert.ok(checkpoint,'observed physical phase '+phase);
+    const restored=runtime(checkpoint.hour,checkpoint.save),e=restored.npcStationRelaysStateV166.routes[d.id];
+    assert.deepEqual(e,checkpoint.state,'restore keeps the complete durable owner ledger at '+phase);
+    const retained=body(restored,d);assert.equal(retained.x,checkpoint.state.actor.x);
+    assert.equal(allBodies(restored,c).size,1);assert.equal(restored.getNpcServiceTrafficActorsV163().some(a=>a.crewId===c.crewId),false);
+    restored.update(1/12);assert.equal(body(restored,d),retained);
+    assert.ok(Math.abs(retained.x-checkpoint.state.actor.x)<=27/12+1e-7);
+  }
+});
+
+let stationCourtesyBoundarySaveV166;
+function stationCourtesyBoundaryV166(){
+  if(!stationCourtesyBoundarySaveV166){
+    const h=runtime(5,{deck:0,roomId:'briefing'});context(h,8);
+    for(let i=0;i<120*12;i++){
+      h.update(1/12);
+      if(h.npcInterdeckStateV165.routes['maksim-cockpit'].actor?.stage==='walking-portal')break;
+    }
+    assert.equal(h.npcInterdeckStateV165.routes['maksim-cockpit'].actor?.stage,'walking-portal');
+    assert.equal(h.npcStationRelaysStateV166.routes['tamsin-station-relay'].actor.stage,'station');
+    h.persist();stationCourtesyBoundarySaveV166=structuredClone(h.persisted.at(-1));
+  }
+  return runtime(8,structuredClone(stationCourtesyBoundarySaveV166));
+}
+const stationCourtesyIntentV166=h=>h.getNpcServiceTrafficIntentsV163()
+  .find(i=>i.routeId==='maksim-cockpit:deck-0');
+
+test('station courtesy preserves atomic bay refusal for priorities, contacts and the player and admits only the real pre-watch pair',()=>{
+  const id='tamsin-station-relay',crew='crew-02-tamsin-velez';
+  const cases=[
+    ['contact',h=>{body(h,{id}).workClock=2;}],
+    ['support',h=>{body(h,{id}).supportClock=2;}],
+    ['owner-contact',h=>{h.npcInterdeckBodiesV165.get('maksim-cockpit').workClock=2;}],
+    ['care',h=>context(h,8,{crew:[{id:crew,health:20,injuries:[]}]})],
+    ['mission',h=>context(h,8,{operation:{crewIds:[crew]}})],
+    ['alert',h=>context(h,8,{crisis:{id:'station-courtesy-alert',active:true}})],
+    ['player-at-bay',h=>{h.state.roomId='bridge';h.player.x=stationCourtesyIntentV166(h).goalX-68;}]
+  ];
+  for(const[label,block]of cases){
+    const h=stationCourtesyBoundaryV166();block(h);h.getNpcServicePeersV163(0);
+    const original=body(h,{id}),pose=nativeBookmark(original),before=structuredClone(h.npcStationRelaysStateV166.routes[id]);
+    const traffic=()=>structuredClone(h.npcTrafficStateV163.actors.filter(a=>a.routeId==='maksim-cockpit:deck-0'));
+    const oldTraffic=traffic();h.planNpcServiceCourtesyV163();
+    assert.deepEqual(h.npcStationRelaysStateV166.routes[id],before,label+' cannot reserve a partial owner plan');
+    assert.deepEqual(traffic(),oldTraffic,label+' cannot retarget the other bodies of the same plan');
+    assert.deepEqual(nativeBookmark(original),pose);assert.equal(body(h,{id}),original);
+  }
+  const h=stationCourtesyBoundaryV166(),intent=stationCourtesyIntentV166(h),tamsin=body(h,{id});
+  assert.equal(h.canPlanNpcServiceOwnerCourtesyV166(intent,tamsin),true);
+  const unchanged=structuredClone(h.npcStationRelaysStateV166.routes[id]);
+  for(const changed of [{...intent,actor:{...intent.actor}},{...intent,routeId:'david-durandal:deck-0'},
+    {...intent,deck:1},{...intent,goalX:intent.goalX+1}]){
+    assert.equal(h.canPlanNpcServiceOwnerCourtesyV166(changed,tamsin),false);
+    assert.equal(h.reserveNpcServiceOwnerCourtesyV166(changed,tamsin,intent.goalX-68),false);
+    assert.deepEqual(h.npcStationRelaysStateV166.routes[id],unchanged);
+  }
+  assert.equal(h.canPlanNpcServiceOwnerCourtesyV166(intent,body(h,relayDefinitions[0])),false);
+  assert.equal(h.canReserveNpcServiceOwnerCourtesyV166(intent,tamsin,intent.goalX-67),false);
+  assert.equal(h.canReserveNpcServiceOwnerCourtesyV166(intent,tamsin,-1),false);
+  context(h,9);assert.equal(h.canPlanNpcServiceOwnerCourtesyV166(stationCourtesyIntentV166(h),tamsin),false,
+    'a new courtesy cannot replace an already due work relay');
+});
+
+test('station courtesy walking still stops at a real locked bulkhead and a player on its floor path',()=>{
+  const id='tamsin-station-relay';
+  for(const obstruction of ['bulkhead','player']){
+    const h=stationCourtesyBoundaryV166(),original=body(h,{id});let boundary;
+    if(obstruction==='bulkhead'){
+      const door=h.npcStationRelayDoorsV166[0].find(d=>d.id==='command:hub-west-bulkhead');
+      const solid=getHubBulkheadColliderV134(door);boundary=solid.x+solid.w;
+      h.hubTrainingV132={lockedDoorIds:[door.id]};
+    }else{h.state.roomId='briefing';h.player.x=1600;boundary=h.player.x+h.player.w+12;}
+    let previous=original.x;
+    for(let i=0;i<90*12;i++){
+      h.update(1/12);assert.equal(body(h,{id}),original);
+      assert.ok(Math.abs(original.x-previous)<=27/12+1e-7);assert.ok(original.x>=boundary-1e-7);previous=original.x;
+    }
+    const e=h.npcStationRelaysStateV166.routes[id];assert.equal(e.actor.stage,'courtesy');assert.equal(e.courtesy.phase,'clearing');
+    assert.ok(original.x>e.courtesy.targetX);assert.equal(e.actor.reason,'occupied');
+    h.running=false;const frozen=structuredClone(e);h.update(.1);
+    assert.deepEqual(h.npcStationRelaysStateV166.routes[id],frozen);
+  }
+});
+
+test('station courtesy survives a changed watch, returns to its bookmark, then resumes the same owner without erasing its native origin',()=>{
+  const h=stationCourtesyBoundaryV166(),id='tamsin-station-relay',c=stationDefinitions[1],d=definition(c),original=body(h,d);
+  tick(h,4);assert.equal(h.npcStationRelaysStateV166.routes[id].actor.stage,'courtesy');
+  const origin=structuredClone(h.npcStationRelaysStateV166.routes[id].stationOrigin);
+  context(h,9);assert.ok(annexNpcDutiesV141(h.npcRoutineResolutionsV62,h).some(a=>a.crewId===c.crewId&&a.roomId===c.annexRoomId));
+  tick(h,1);assert.equal(body(h,d),original);assert.equal(h.npcStationRelaysStateV166.routes[id].actor.stage,'courtesy');
+  assert.deepEqual(h.npcStationRelaysStateV166.routes[id].stationOrigin,origin);
+  h.persist();const save=structuredClone(h.persisted.at(-1)),restored=runtime(9,save),retained=body(restored,d);
+  assert.deepEqual(restored.npcStationRelaysStateV166.routes[id],save.npcStationRelaysV166.routes[id]);
+  restored.update(1/12);assert.equal(body(restored,d),retained);assert.equal(restored.npcStationRelaysStateV166.routes[id].actor.stage,'courtesy');
+  // A real mission priority withdraws the requesting passenger. It is not
+  // counted as a completed flight watch. Tamsin must walk home before her
+  // now-due native relay can depart from that unchanged bookmark.
+  context(h,9,{operation:{crewIds:['crew-08-maksim-orlov']}});
+  let homeSeen=false,previous=original.x;
+  for(let i=0;i<120*12;i++){
+    h.update(1/12);const e=h.npcStationRelaysStateV166.routes[id];
+    assert.equal(body(h,d),original);assert.deepEqual(e.stationOrigin,origin);
+    assert.ok(Math.abs(original.x-previous)<=27/12+1e-7);previous=original.x;
+    if(e.courtesy?.phase==='returned'){assert.equal(original.x,origin.x);homeSeen=true;}
+    if(e.actor.stage==='walking-lift')break;
+  }
+  assert.equal(homeSeen,true);assert.equal(h.npcStationRelaysStateV166.routes[id].actor.stage,'walking-lift');
+  assert.equal(h.npcStationRelaysStateV166.routes[id].courtesy,null);assert.equal(allBodies(h,c).size,1);
+  assert.equal(h.npcInterdeckStateV165.routes['maksim-cockpit'].nativeHandoff?.observedTravel,false);
+});
+
+test('station courtesy normalization rejects foreign owners, bays, phases and unspent physical displacement',()=>{
+  const h=stationCourtesyBoundaryV166(),id='tamsin-station-relay';h.planNpcServiceCourtesyV163();h.persist();
+  const saved=h.persisted.at(-1).npcStationRelaysV166,valid=saved.routes[id];
+  assert.ok(valid.courtesy);assert.deepEqual(normalizeNpcStationRelaysV166(saved).routes[id],valid);
+  for(const patch of [{source:'foreign'},{routeId:'inez-civil:deck-0'},{ownerCrewId:'crew-01-mara-vega'},
+    {originX:valid.stationOrigin.x+1},{originRoomId:'bridge'},{goalX:valid.courtesy.goalX+1},
+    {targetX:valid.courtesy.targetX+1},{targetX:-1},{phase:'teleport'},{phase:'holding'},
+    {phase:'returned'},{startTime:-1},{startTime:valid.actor.time+1},{startDistance:valid.actor.distance+1}]){
+    const forged=structuredClone(saved);Object.assign(forged.routes[id].courtesy,patch);
+    assert.equal(normalizeNpcStationRelaysV166(forged).routes[id].actor,null,JSON.stringify(patch));
+  }
+  for(const patch of [{stage:'station'},{x:valid.actor.x-10},{direction:'return'},{liftJourneys:1}]){
+    const forged=structuredClone(saved);Object.assign(forged.routes[id].actor,patch);
+    assert.equal(normalizeNpcStationRelaysV166(forged).routes[id].actor,null,JSON.stringify(patch));
+  }
+  const missing=structuredClone(saved);missing.routes[id].courtesy=null;
+  assert.equal(normalizeNpcStationRelaysV166(missing).routes[id].actor,null);
+});
 
 test('V166 contains exactly the two observed station-to-work relays, preserving their distinct local owner IDs',()=>{
   assert.equal(relayDefinitions.length,2);

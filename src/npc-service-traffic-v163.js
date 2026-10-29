@@ -233,7 +233,8 @@ export function withHubNpcServiceTrafficV163(Base) {
         const actor = intent.actor, direction = Math.sign(intent.goalX - actor.x);
         if (!direction) continue;
         const peers = this.getNpcServicePeersV163(intent.deck, actor.crewId);
-        const candidates = peers.filter(peer => !ownedIds.has(peer.crewId)
+        const candidates = peers.filter(peer => (!ownedIds.has(peer.crewId)
+            || this.canPlanNpcServiceOwnerCourtesyV166?.(intent, peer) === true)
           && (!this.npcTrafficBodiesV163.has(peer.crewId)
             || this.canPreemptNpcServiceCourtesyV165?.(intent, this.npcTrafficStateV163.actors.find(saved => saved.crewId === peer.crewId)))
           && intent.roomIds.includes(peer.roomId) && peer.alive !== false && !peer.downed
@@ -260,15 +261,22 @@ export function withHubNpcServiceTrafficV163(Base) {
         const player = !this.isAnnexActiveV71?.() && this.state?.deck === intent.deck && !this.ventActorV62 ? this.player : null;
         const blocked = plans.some(({ peer, target }) => target < intent.minX || target > intent.maxX
           || boxes.some(box => overlap({ x: target, y: 532, w: 44, h: 92 }, box))
-          || [...owners, ...(player ? [player] : []), ...peers.filter(p => !blockers.includes(p))]
+          || [...owners.filter(owner => !blockers.includes(owner)), ...(player ? [player] : []), ...peers.filter(p => !blockers.includes(p))]
             .some(other => other !== actor && other !== peer && (other === player || actorRoom(other) === intent.deck)
               && overlap({ x: target - 12, y: 532, w: 68, h: 92 }, other))
           || this.npcRoutineResolutionsV62?.get(peer.crewId)?.alert
           || this.npcRoutineResolutionsV62?.get(peer.crewId)?.missionAssigned
           || this.npcRoutineResolutionsV62?.get(peer.crewId)?.needsCare
-          || peer.workClock > 0 || peer.supportClock > 0);
+          || peer.workClock > 0 || peer.supportClock > 0
+          || ownedIds.has(peer.crewId) && this.canReserveNpcServiceOwnerCourtesyV166?.(intent, peer, target) !== true);
         if (blocked) continue;
         for (const { peer, target } of plans) {
+          if (ownedIds.has(peer.crewId)) {
+            // The collective plan reserves this slot, but the existing
+            // physical owner retains its ledger, body and sole walking tick.
+            this.reserveNpcServiceOwnerCourtesyV166(intent, peer, target);
+            continue;
+          }
           const r = this.npcRoutineResolutionsV62.get(peer.crewId);
           const body = peer;
           const previous = this.npcTrafficStateV163.actors.find(saved => saved.crewId === peer.crewId);

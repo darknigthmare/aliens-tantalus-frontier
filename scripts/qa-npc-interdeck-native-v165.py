@@ -152,6 +152,50 @@ def walk_to(page, c, x, timeout=120):
     raise AssertionError('Native walking did not reach ' + str(x))
 
 
+NATIVE_SERVICE_SPEAKER_V165 = r'''c=>{const h=__ATF_HUB__,p=h.player,
+all=h.activeAnnexNpcsV141?.()||[],matches=all.filter(n=>n.crewId===c.crewId),
+n=h.nearestAnnexNpcV141?.();
+return h.running&&h.currentAnnexV71?.()?.id===c.annexRoomId
+&&!h.annexTransitionV71&&!h.hubDoorClosingV142&&!h.hubDoorBlockedV142&&!h.annexStateReadOnlyV87
+&&p.alive&&p.grounded&&!p.climbing&&Math.abs(p.vx)<1
+&&matches.length===1&&n===matches[0]&&n.alive!==false
+&&h.statusPrompt()===`E — ${n.interaction.label} · ${n.name}`;}'''
+
+
+def approach_service_dialogue(page, c):
+    if c['id'] != 'inez-civil':
+        walk_to(page, c, c['post'] - 84)
+        return
+    # The counter wins at post-84; Mica wins at post+84. Approach the right
+    # edge of the actual speaker. The existing7px walk tolerance remains in
+    # Inez's native speaking zone; the real selector is checked before E.
+    service = observed(page, c)
+    actor = service['actualActor']
+    check(c['id'] + ': approach retains the actual visible service singleton',
+          service['annex'] == c['annexRoomId'] and service['visibleCount'] == 1
+          and service['visibleSingleton'] and actor and actor['crewId'] == c['crewId'])
+    walk_to(page, c, actor['x'] + actor['w'] - 7)
+
+
+def open_service_dialogue(page, c):
+    if c['id'] != 'inez-civil':
+        page.keyboard.press('KeyE')
+        page.locator('#hub-dialogue').wait_for(state='visible')
+        return
+    # Selection and opening share the original45s dialogue budget. A visible
+    # shop/animal prompt or another crew member must never count as success.
+    deadline = time.monotonic() + 45
+    before = (observed(page, c)['interaction'] or {}).get('count', 0)
+    page.wait_for_function(NATIVE_SERVICE_SPEAKER_V165, arg=c,
+                           timeout=max(1, int((deadline - time.monotonic()) * 1000)))
+    page.keyboard.press('KeyE')
+    page.locator('#hub-dialogue').wait_for(state='visible',
+                                         timeout=max(1, int((deadline - time.monotonic()) * 1000)))
+    opened = observed(page, c)
+    check(c['id'] + ': native E records exactly the requested crew interaction',
+          not opened['running'] and (opened['interaction'] or {}).get('count') == before + 1)
+
+
 def commands_to(page, c, hour):
     page.locator('#exit-hub').click()
     open_view(page, 'command')
@@ -359,12 +403,11 @@ with sync_playwright() as pw:
             walk_to(page, c, c['parentX'])
             page.keyboard.press('KeyE')
             page.wait_for_function('id=>__ATF_HUB__.currentAnnexV71?.()?.id===id&&!__ATF_HUB__.annexTransitionV71', arg=c['annexRoomId'])
-            walk_to(page, c, c['post'] - 84)
+            approach_service_dialogue(page, c)
             service = observed(page, c)
             check(c['id'] + ': actual player entry sees the same singleton at the service post', service['visibleCount'] == 1 and service['visibleSingleton'])
             png(c['id'] + '-visible-annex-service.png', page.locator('#hub-canvas').screenshot(), service)
-            page.keyboard.press('KeyE')
-            page.locator('#hub-dialogue').wait_for(state='visible')
+            open_service_dialogue(page, c)
             check(c['id'] + ': native E opens crew dialogue and pauses physical movement', not observed(page, c)['running'])
             png(c['id'] + '-native-dialogue.png', page.locator('#hub-canvas').screenshot())
             page.locator('[data-npc-dialogue-choice]:not([disabled])').first.click()

@@ -102,15 +102,18 @@ def capture_native(page,name,hub=False):
 def observe_action(page,condition):
  page.evaluate('''condition=>{window.__COSTUME_V165_OBSERVER__=new Promise((resolve,reject)=>{
  const started=performance.now();const ready=new Function('e','p','return ('+condition+')');
- function tick(){const e=globalThis.__ATF_GAME__,p=e?.player;
+ function tick(){try{const e=globalThis.__ATF_GAME__,p=e?.player;
   if(e&&p&&p.playerAppearanceVisualV126?.drawn&&ready(e,p)){
    resolve({png:document.querySelector('#game-canvas').toDataURL('image/png'),state:{
     player:{x:p.x,y:p.y,w:p.w,h:p.h,facing:p.facing,grounded:p.grounded,costumeId:p.costumeId,
-     shots:p.shots,ammo:p.ammo,ammoReserve:p.ammoReserve,reloading:p.reloading},
+     shots:p.shots,ammo:p.ammo,ammoReserve:p.ammoReserve,reloading:p.reloading,
+     interactionClock:p.interactionClock,interactionKind:p.interactionKind},
     appearance:structuredClone(p.playerAppearanceVisualV126),action:structuredClone(p.playerActionVisualV127),
-    weapon:structuredClone(p.heldWeaponVisualV125)}});return;}
+    weapon:structuredClone(p.heldWeaponVisualV125),terminal:structuredClone(e.powerNode),
+    powerObjective:e.mission?.objectives?.power,roomId:e.forgeActiveRoomIdV141}});return;}
   if(performance.now()-started>15000){reject(Error('Native costume action was not observed: '+condition));return;}
   requestAnimationFrame(tick);
+ }catch(error){reject(error);}
  }requestAnimationFrame(tick);});window.__COSTUME_V165_OBSERVER__.catch(()=>{});}''',condition)
 
 
@@ -128,6 +131,38 @@ NATIVE_HELD_WEAPON_FRAME_V165 = '''p.heldWeaponVisualV125?.schema===125
  &&p.playerAppearanceVisualV126?.drawn
  &&p.playerAppearanceVisualV126.layers?.some(layer=>layer.slot==='weapon'
   &&layer.itemId===p.heldWeaponVisualV125.weaponId)'''
+
+
+# Read the compiled terminal, then keep its room/cell/geometry bound to the
+# native E action. The Forge dispatcher owns reach and obstacle admission.
+NATIVE_TERMINAL_V165 = '''(e,expected=null)=>{
+ const p=e?.player,t=e?.powerNode;
+ const box=a=>a&&['x','y','w','h'].every(k=>Number.isFinite(a[k]))&&a.w>0&&a.h>0;
+ if(!box(p)||!box(t)||t.id!=='editor-power'||!t.forgeCellIdV141||!e.forgeActiveRoomIdV141)
+  throw Error('Native costume terminal is missing or invalid');
+ const target={id:t.id,cellId:t.forgeCellIdV141,roomId:e.forgeActiveRoomIdV141,
+  x:t.x,y:t.y,w:t.w,h:t.h};
+ if(expected&&Object.keys(target).some(k=>target[k]!==expected[k]))
+  throw Error('Native costume terminal changed during approach or observation');
+ const active=t.active===true,power=e.mission?.objectives?.power===true;
+ const playable=e.running&&!e.paused&&e.mission?.state==='active'&&p.alive&&!p.downed;
+ return {target,active,power,
+  x:p.x+p.w/2<t.x+t.w/2?t.x-p.w-12:t.x+t.w+12,
+  ready:Boolean(playable&&!active&&!power&&p.grounded&&Math.abs(p.vx)<1
+   &&e.canPerformGameplayAction(p)&&e.forgePendingTerminalV156(p)===t),
+  drawn:Boolean(playable&&active&&power&&p.interactionClock>0&&p.interactionKind==='control-use'
+   &&p.playerActionVisualV127?.kind==='control-use'&&p.playerActionVisualV127.drawn
+   &&p.playerAppearanceVisualV126?.drawn&&p.playerAppearanceVisualV126.sampledAt===e.animationTime)};
+}'''
+
+
+def approach_terminal(page):
+ state=page.evaluate('()=>('+NATIVE_TERMINAL_V165+')(__ATF_GAME__)')
+ if state['active'] or state['power']:raise AssertionError('Native costume terminal must start inactive')
+ walk_to(page,state['x'])
+ reached=page.evaluate('target=>('+NATIVE_TERMINAL_V165+')(__ATF_GAME__,target)',state['target'])
+ if not reached['ready']:raise AssertionError('Native costume terminal is not physically reachable: '+json.dumps(reached))
+ return state['target']
 
 
 def walk_to(page,target,hub=False):
@@ -274,7 +309,14 @@ try:
   observe_action(page,"p.playerActionVisualV127?.kind==='motion-tracker'");page.keyboard.press('KeyQ');tracker=finish_action(page,slug+'-native-mission-tracker.png')
   check(slug+': real motion detector uses its own implement with the same clothing',tracker['appearance']['selected']['slots']==outfit['slots'] and any(prop['itemId']=='tool.motion-tracker' for prop in tracker['action']['props']))
   page.wait_for_function('()=>!(__ATF_GAME__.player.toolUseClock>0)')
-  walk_to(page,p0['player']['x']+70);observe_action(page,'p.interactionClock>0');page.keyboard.press('KeyE');finish_action(page,slug+'-native-mission-interaction.png')
+  terminal=approach_terminal(page)
+  observe_action(page,'('+NATIVE_TERMINAL_V165+')(e,'+json.dumps(terminal)+').drawn')
+  page.keyboard.press('KeyE');interaction=finish_action(page,slug+'-native-mission-interaction.png')
+  check(slug+': native E activates the approached terminal and draws its control action with the selected outfit',
+   interaction['terminal']['id']==terminal['id'] and interaction['terminal']['forgeCellIdV141']==terminal['cellId']
+   and interaction['roomId']==terminal['roomId'] and interaction['terminal']['active'] and interaction['powerObjective']
+   and interaction['action']['kind']=='control-use' and interaction['action']['drawn']
+   and interaction['appearance']['selected']['slots']==outfit['slots'])
   page.locator('#retreat-mission').click();page.locator('#editor-canvas').wait_for(state='visible')
   melee={**plan,'tiles':[tile for tile in plan['tiles'] if tile['type']!='terminal']+[{'position':'2:14','type':'enemy'}]}
   import_plan(page,melee,slug+'-disclosed-melee.json')

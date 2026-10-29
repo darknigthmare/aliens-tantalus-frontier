@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser()
@@ -122,6 +123,26 @@ def walk_to(page, config, x):
     finally:
         page.keyboard.up(key)
     page.wait_for_function('()=>Math.abs(__ATF_HUB__.player.vx)<1')
+
+
+def leave_annex(page, config):
+    walk_to(page, config, config['annexDoor'])
+    # A parent-deck walker can briefly occupy the return aperture. E is an
+    # immediate native attempt, not a queued request; wait for the real exit
+    # projection before pressing it. Readiness and passage share the old45s
+    # budget, so a stationary occupant or a broken transition still fails.
+    deadline = time.monotonic() + 45
+    page.wait_for_function('''c=>{const h=__ATF_HUB__,a=h.currentAnnexV71?.(),exit=h.nearestAnnexExitV71?.();
+      return a?.id===c.annex&&exit&&h.running&&h.player.alive&&Math.abs(h.player.vx)<1
+        &&!h.annexTransitionV71&&!h.hubDoorClosingV142&&!h.annexStateReadOnlyV87
+        &&!h.npcAnnexDoorReservedV159?.(a.id)&&Boolean(h.prepareHubDoorPassageV142(a,'exit',exit.endpointId));
+    }''', arg=config, timeout=45000)
+    page.locator('#hub-canvas').focus()
+    assert time.monotonic() < deadline, 'Native annex exit exceeded45s before interaction'
+    page.keyboard.press('KeyE')
+    remaining = (deadline - time.monotonic()) * 1000
+    assert remaining > 0, 'Native annex exit exceeded45s before passage'
+    page.wait_for_function('()=>!__ATF_HUB__.currentAnnexV71?.()&&!__ATF_HUB__.annexTransitionV71', timeout=remaining)
 
 
 def collect(page, config, name, stop, move_to=None):
@@ -276,9 +297,7 @@ with sync_playwright() as pw:
             page.wait_for_function('()=>__ATF_HUB__.running')
             if args.comparison_stage == 'after':
                 check(prefix + ': dialogue retains the original actor, floor and crossing count', observed(page, config)['route']['actor']['crossings'] == 1)
-                walk_to(page, config, config['annexDoor'])
-                page.keyboard.press('KeyE')
-                page.wait_for_function('()=>!__ATF_HUB__.currentAnnexV71?.()&&!__ATF_HUB__.annexTransitionV71', timeout=45000)
+                leave_annex(page, config)
                 walk_to(page, config, config['parentDoor'])
                 page.locator('#exit-hub').click()
                 open_view(page, 'command')

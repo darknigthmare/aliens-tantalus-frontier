@@ -93,13 +93,28 @@ function nativeHeldWeaponFramePredicateV165() {
   return new Function('e', 'p', `return Boolean(${expression[1]});`);
 }
 
-async function withNativeCostumeFixtureV165(run) {
+function nativeTerminalObservationV165() {
+  const qa = readFileSync(new URL('./qa-costume-atlases-v165.py', import.meta.url), 'utf8');
+  const expression = qa.match(/NATIVE_TERMINAL_V165 = '''([\s\S]*?)'''/);
+  assert.ok(expression, 'Read the exact terminal approach/action observer used by the browser QA.');
+  return new Function(`return (${expression[1]});`)();
+}
+
+function nativeCostumeFloorV165({ spawn = 2, terminal = 4, blocked = false } = {}) {
+  return { schema: 2, kind: 'mission', name: 'QA tenue modulaire V165', size: [48, 18],
+    tiles: [...Array.from({ length: 48 }, (_, x) => ({ position: `${x}:16`, type: 'floor' })),
+      { position: `${spawn}:15`, type: 'spawn' }, { position: '46:15', type: 'objective' },
+      ...(terminal === null ? [] : [{ position: `${terminal}:15`, type: 'terminal' }]),
+      ...(blocked ? [{ position: '3:15', type: 'door' }] : [])] };
+}
+
+async function withNativeCostumeFixtureV165(run, { project = null } = {}) {
   const names = ['addEventListener', 'removeEventListener', 'dispatchEvent', 'document',
-    'Image', 'requestAnimationFrame', 'cancelAnimationFrame'];
+    'Image', 'requestAnimationFrame', 'cancelAnimationFrame', 'window', '__ATF_GAME__', '__COSTUME_V165_OBSERVER__'];
   const previous = new Map(names.map(name => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
   let engine;
   try {
-    const host = hostV136(), draws = [], ctx = host.canvas.getContext('2d');
+    const host = hostV136(), draws = [], events = [], ctx = host.canvas.getContext('2d');
     const dimensions = new Map([...allAssets, ...portable.map(row => row.profile)]
       .map(asset => [asset.path, { width: asset.sourceWidth, height: asset.sourceHeight }]));
     // The production engine, input events and renderer are real. DOM, RAF,
@@ -118,23 +133,45 @@ async function withNativeCostumeFixtureV165(run) {
     ctx.drawImage = (...args) => draws.push(args);
     const outfit = PLAYER_COSTUME_OUTFITS_V165.find(row => row.slug === 'amanda-working');
     assert.ok(outfit);
-    engine = new GameEngine(host.canvas);
+    engine = new GameEngine(host.canvas, { onEvent: event => events.push(event) });
     engine.start({ world: WORLDS[0], campaign: CAMPAIGNS[0],
       weapon: WEAPONS.find(row => row.id === 'weapon-003-m4a3-service-pistol'),
       enemyCatalog: [], equipment: [], crew: [], seed: 426, costume: getCostumeV119(outfit.costumeId),
-      playerAppearanceV126: { schema: 126, slots: outfit.slots } });
-    Object.assign(engine, { platforms: [{ id: 'qa-floor', x: -200, y: 930, w: 6800, h: 200, floor: true }],
-      ladders: [], lifts: [], walls: [], covers: [], doors: [], hazards: [], enemies: [], missionLevelRuntime: null });
-    Object.assign(engine.player, { x: 160, y: 838, vx: 0, vy: 0, grounded: true, operatorId: 'echo-9' });
+      playerAppearanceV126: { schema: 126, slots: outfit.slots },
+      ...(project ? { editorProject: project, forgeJourneyV141: true } : {}) });
+    if (!project) {
+      Object.assign(engine, { platforms: [{ id: 'qa-floor', x: -200, y: 930, w: 6800, h: 200, floor: true }],
+        ladders: [], lifts: [], walls: [], covers: [], doors: [], hazards: [], enemies: [], missionLevelRuntime: null });
+      Object.assign(engine.player, { x: 160, y: 838, vx: 0, vy: 0, grounded: true, operatorId: 'echo-9' });
+    }
     for (let count = 0; count < 10; count++) {
       await Promise.resolve(); engine.update(1 / 60); engine.drawActor(ctx, engine.player);
     }
-    const pointer = (button, buttons) => {
-      const event = new Event('pointerdown', { cancelable: true });
+    const pointer = (button, buttons, down = true) => {
+      const event = new Event(down ? 'pointerdown' : 'pointerup', { cancelable: true });
       Object.assign(event, { pointerId: 47, pointerType: 'mouse', button, buttons, clientX: 1200, clientY: 500 });
       host.canvas.focus(); host.canvas.dispatchEvent(event);
     };
-    await run({ engine, actor: engine.player, ctx, draws, pointer, outfit });
+    const key = (code, down = true) => {
+      host.canvas.focus();
+      const event = new Event(down ? 'keydown' : 'keyup', { cancelable: true });
+      Object.assign(event, { code, repeat: false }); host.events.dispatchEvent(event);
+    };
+    const press = code => { key(code); key(code, false); };
+    const frame = () => { engine.update(1 / 60); engine.drawActor(ctx, engine.player); };
+    const until = (condition, limit = 1800) => {
+      for (let count = 0; count < limit; count++) { if (condition()) return true; frame(); }
+      return condition();
+    };
+    const walk = target => {
+      const right = target > engine.player.x, code = right ? 'KeyD' : 'KeyA'; key(code);
+      let reached;
+      try { reached = until(() => right ? engine.player.x >= target : engine.player.x <= target); }
+      finally { key(code, false); }
+      assert.ok(until(() => Math.abs(engine.player.vx) < 1), 'The real controller settles after releasing the key.');
+      return reached;
+    };
+    await run({ engine, actor: engine.player, canvas: host.canvas, ctx, draws, pointer, outfit, events, press, frame, until, walk });
   } finally {
     engine?.stop();
     for (const [name, descriptor] of previous) {
@@ -143,6 +180,145 @@ async function withNativeCostumeFixtureV165(run) {
     }
   }
 }
+
+test('V165 native costume QA approaches the compiled terminal through real input and observes its exact action', async () => {
+  const observe = nativeTerminalObservationV165();
+  await withNativeCostumeFixtureV165(({ engine, actor, ctx, pointer, outfit, events, press, frame, until, walk }) => {
+    // The same 48x18 editor fixture goes through createForgeSessionV141,
+    // forgeRoomProjectV141 and compileEditorGridV136 inside the production start.
+    assert.ok(engine.forgeSessionV141); assert.deepEqual(engine.editorGridV136,
+      { columns: 48, rows: 18, tileWidth: 6200 / 48, tileHeight: 60 });
+    assert.ok(Math.abs(actor.x - 303.54166666666663) < .001); assert.equal(actor.y, 868);
+    const origin = actor.x, target = observe(engine).target;
+    assert.ok(Math.abs(target.x - 568.3333333333333) < .001);
+    assert.deepEqual([target.y, target.w, target.h], [900, 52, 60]);
+    assert.equal(walk(origin + 110), true);
+    pointer(2, 2); frame(); assert.equal(actor.aimingV124, true);
+    const shots = actor.shots, ammo = actor.ammo;
+    pointer(0, 3); frame(); pointer(0, 2, false); pointer(2, 0, false);
+    assert.equal(actor.shots, shots + 1); assert.equal(actor.ammo, ammo - 1);
+    press('KeyR'); assert.ok(until(() => !actor.reloading));
+    press('KeyQ'); frame(); assert.equal(actor.playerActionVisualV127.kind, 'motion-tracker');
+    assert.ok(until(() => !(actor.toolUseClock > 0)));
+    assert.equal(walk(origin + 70), true);
+    const distance = Math.hypot(actor.x + actor.w / 2 - target.x - target.w / 2,
+      actor.y + actor.h / 2 - target.y - target.h / 2);
+    assert.ok(distance > 200, 'The former spawn-relative return is outside the native 130px reach.');
+    assert.equal(observe(engine, target).ready, false);
+    press('KeyE'); for (let count = 0; count < 900; count++) frame();
+    assert.equal(actor.interactionClock, 0); assert.equal(engine.powerNode.active, false);
+    assert.equal(engine.mission.objectives.power, false);
+    assert.equal(events.filter(event => event.type === 'power-restored').length, 0);
+
+    assert.equal(walk(observe(engine, target).x), true);
+    assert.equal(observe(engine, target).ready, true);
+    assert.equal(engine.forgePendingTerminalV156(actor), engine.powerNode);
+    assert.equal(observe(engine, target).drawn, false);
+    const ammoBeforeInteraction = actor.ammo, reserve = actor.ammoReserve;
+    press('KeyE');
+    assert.equal(engine.powerNode.active, true); assert.equal(engine.mission.objectives.power, true);
+    assert.equal(observe(engine, target).drawn, false, 'An accepted E cannot reuse the preceding framebuffer.');
+    engine.drawActor(ctx, actor);
+    assert.equal(observe(engine, target).drawn, true);
+    assert.deepEqual(actor.playerAppearanceVisualV126.selected.slots, outfit.slots);
+    assert.equal(actor.playerActionVisualV127.kind, 'control-use');
+    assert.equal(events.filter(event => event.type === 'power-restored').length, 1);
+    assert.equal(actor.ammo, ammoBeforeInteraction); assert.equal(actor.ammoReserve, reserve);
+    engine.update(1 / 60);
+    assert.equal(observe(engine, target).drawn, false, 'The action receipt must belong to this animation frame.');
+    engine.drawActor(ctx, actor); assert.equal(observe(engine, target).drawn, true);
+    assert.ok(until(() => !(actor.interactionClock > 0)));
+    assert.equal(observe(engine, target).drawn, false, 'A completed power objective is not a new interaction.');
+    assert.deepEqual(observe(engine).target, target);
+    assert.equal(events.filter(event => event.type === 'power-restored').length, 1);
+  }, { project: nativeCostumeFloorV165() });
+});
+
+test('V165 native costume QA follows real terminal geometry from both directions', async () => {
+  const observe = nativeTerminalObservationV165();
+  for (const setup of [{ spawn: 2, terminal: 6 }, { spawn: 8, terminal: 4 }]) {
+    await withNativeCostumeFixtureV165(({ engine, actor, ctx, outfit, events, press, walk }) => {
+      const state = observe(engine), origin = actor.x;
+      assert.equal(state.active, false); assert.equal(state.power, false);
+      assert.equal(Math.sign(state.x - origin), setup.spawn < setup.terminal ? 1 : -1);
+      assert.equal(walk(state.x), true);
+      assert.equal(observe(engine, state.target).ready, true);
+      press('KeyE'); engine.drawActor(ctx, actor);
+      assert.equal(observe(engine, state.target).drawn, true);
+      assert.deepEqual(actor.playerAppearanceVisualV126.selected.slots, outfit.slots);
+      assert.equal(events.filter(event => event.type === 'power-restored').length, 1);
+    }, { project: nativeCostumeFloorV165(setup) });
+  }
+});
+
+test('V165 native costume QA refuses absent, obstructed or changed terminals and unrelated E actions', async () => {
+  const observe = nativeTerminalObservationV165();
+  await withNativeCostumeFixtureV165(({ engine, actor, events }) => {
+    const origin = { x: actor.x, y: actor.y };
+    assert.equal(engine.powerNode, null);
+    assert.throws(() => observe(engine), /terminal is missing or invalid/);
+    assert.deepEqual({ x: actor.x, y: actor.y }, origin);
+    assert.equal(events.filter(event => event.type === 'power-restored').length, 0);
+  }, { project: nativeCostumeFloorV165({ terminal: null }) });
+  await withNativeCostumeFixtureV165(({ engine, actor, ctx, events, press, walk }) => {
+    const state = observe(engine), door = engine.doors[0];
+    assert.equal(door.open, false);
+    assert.equal(walk(state.x), false, 'The unchanged 30s movement budget fails against a real closed door.');
+    assert.ok(actor.x + actor.w <= door.x + .01);
+    assert.equal(observe(engine, state.target).ready, false);
+    assert.equal(engine.powerNode.active, false);
+    // An E near the blocking door is a real action, but never this terminal's action.
+    press('KeyE'); engine.drawActor(ctx, actor);
+    assert.equal(door.open, true); assert.ok(actor.interactionClock > 0);
+    assert.equal(actor.interactionKind, 'force-interact');
+    assert.equal(observe(engine, state.target).drawn, false);
+    assert.equal(engine.powerNode.active, false); assert.equal(engine.mission.objectives.power, false);
+    assert.equal(events.filter(event => event.type === 'power-restored').length, 0);
+    for (const field of ['id', 'cellId', 'roomId', 'x', 'y', 'w', 'h']) {
+      const changed = { ...state.target, [field]: typeof state.target[field] === 'number' ? state.target[field] + 1 : 'other' };
+      assert.throws(() => observe(engine, changed), /terminal changed/, field);
+    }
+  }, { project: nativeCostumeFloorV165({ blocked: true }) });
+});
+
+test('V165 native costume QA captures terminal activation and its rendered frame in the same observer callback', async () => {
+  const observe = nativeTerminalObservationV165();
+  const qa = readFileSync(new URL('./qa-costume-atlases-v165.py', import.meta.url), 'utf8');
+  const source = qa.match(/def observe_action\(page,condition\):\n page\.evaluate\('''([\s\S]*?)''',condition\)/);
+  assert.ok(source, 'Execute the exact browser action observer, including capture and rejection.');
+  const install = new Function(`return (${source[1]});`)();
+  await withNativeCostumeFixtureV165(async ({ engine, actor, canvas, press, frame, until, walk }) => {
+    const state = observe(engine); assert.ok(walk(state.x));
+    const callbacks = [];
+    globalThis.window = globalThis; globalThis.__ATF_GAME__ = engine;
+    globalThis.requestAnimationFrame = callback => { callbacks.push(callback); return callbacks.length; };
+    globalThis.document.querySelector = selector => selector === '#game-canvas' ? canvas : null;
+    // A frame label replaces raster bytes in this controller test; no PNG proof is claimed.
+    canvas.toDataURL = () => `test-frame:${engine.animationTime}`;
+    const expression = qa.match(/NATIVE_TERMINAL_V165 = '''([\s\S]*?)'''/)[1];
+    install(`(${expression})(e,${JSON.stringify(state.target)}).drawn`);
+    const promise = globalThis.__COSTUME_V165_OBSERVER__;
+    press('KeyE'); callbacks.shift()();
+    assert.equal(callbacks.length, 1, 'Accepted gameplay still waits for the action to be drawn.');
+    frame(); const sampledAt = engine.animationTime; callbacks.shift()();
+    assert.equal(callbacks.length, 0);
+    const captured = await promise;
+    assert.equal(captured.png, `test-frame:${sampledAt}`);
+    assert.equal(captured.state.appearance.sampledAt, sampledAt);
+    assert.equal(captured.state.terminal.id, state.target.id);
+    assert.equal(captured.state.terminal.forgeCellIdV141, state.target.cellId);
+    assert.equal(captured.state.roomId, state.target.roomId);
+    assert.equal(captured.state.terminal.active, true); assert.equal(captured.state.powerObjective, true);
+    assert.equal(captured.state.action.kind, 'control-use'); assert.equal(captured.state.action.drawn, true);
+    assert.ok(captured.state.player.interactionClock > 0);
+    assert.ok(until(() => !(actor.interactionClock > 0)));
+    assert.ok(captured.state.player.interactionClock > 0, 'The resolved snapshot cannot decay before the Python capture consumes it.');
+    install(`(${expression})(e,${JSON.stringify({ ...state.target, cellId: 'changed-cell' })}).drawn`);
+    callbacks.shift()();
+    await assert.rejects(globalThis.__COSTUME_V165_OBSERVER__, /terminal changed/);
+    assert.equal(callbacks.length, 0, 'Invalid target identity rejects instead of leaving an unresolved observer.');
+  }, { project: nativeCostumeFloorV165() });
+});
 
 test('V165 native costume QA observes the real weapon receipt and waits for the accepted shot to be drawn', async () => {
   const ready = nativeHeldWeaponFramePredicateV165();

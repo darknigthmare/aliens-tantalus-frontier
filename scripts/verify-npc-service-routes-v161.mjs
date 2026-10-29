@@ -1,5 +1,10 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { execFileSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from '../src/hub-game.js';
 import { HubGame as RosterHub } from '../src/hub-v52-runtime.js';
 import { HubGame as RoutineHub, getNpcRoutineStandingAnchorV158 } from '../src/hub-v62-runtime.js';
@@ -308,3 +313,182 @@ test('native context factories do not immediately re-admit a lifecycle handoff o
     }
   }
 });
+
+// The production Python controls run against the real V88 player/door owner
+// and V136 parent-deck walking. DOM/images/RAF are host doubles; the disclosed
+// fixture gives one native crew body a short patrol across the return aperture.
+// No actor is moved or removed by the driver after fixture initialization.
+async function nativeExitQaDriverV161(root) {
+  const assert = (await import('node:assert/strict')).default;
+  const { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
+  const { withHubNpcLifeV136 } = await import(new URL('src/npc-life-v136.js', root));
+  const { createDefaultSave } = await import(new URL('src/save.js', root));
+  const { hostV136 } = await import(new URL('scripts/forge-native-host-v136.mjs', root));
+  const { createInterface } = await import('node:readline');
+  const options = JSON.parse(process.argv[2]), host = hostV136(), events = [], attempts = [];
+  document.createElement = () => ({ ...host.canvas, style: {}, getContext: () => host.canvas.getContext('2d') });
+  const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.clock.hour = 5;
+  Object.assign(save.hub, { deck: 3, roomId: 'reactor', positionX: 1678, positionY: 532 });
+  const NativeDoorHub = withHubNpcLifeV136(HubGame);
+  const hub = new NativeDoorHub(host.canvas, { audio: { ui() {}, unlock() {} }, onPersist() {}, onStatus() {},
+    onAction: event => events.push(structuredClone(event)) });
+  hub.start(save.hub, { routineContextV62: { clock: save.clock, save }, onboardingV84: save.onboardingV84 });
+  globalThis.__ATF_HUB__ = hub;
+  const rate = options.rate || 60; let elapsed = 0, blocker = null, maxBlockerSpeed = 0;
+  const advance = ms => {
+    for (let left = ms / 1000; left > 1e-9;) {
+      const dt = Math.min(1 / rate, left), before = blocker?.x;
+      if (hub.running) hub.update(dt);
+      if (blocker) {
+        assert.equal(hub.npcs.find(npc => npc.crewId === blocker.crewId), blocker);
+        assert.equal(blocker.y + blocker.h, 624);
+        const speed = Math.abs(blocker.x - before) / dt;
+        assert.ok(speed <= 27 + 1e-6); maxBlockerSpeed = Math.max(maxBlockerSpeed, speed);
+      }
+      elapsed += dt; left -= dt;
+    }
+  };
+  const until = (predicate, timeout) => {
+    const deadline = elapsed + timeout / 1000;
+    while (!predicate()) {
+      if (elapsed >= deadline - 1e-9) throw new Error('Native wait timed out');
+      advance(Math.min(1000 / rate, (deadline - elapsed) * 1000));
+    }
+  };
+  const passage = () => {
+    const annex = hub.currentAnnexV71(), exit = hub.nearestAnnexExitV71();
+    return annex && exit && hub.prepareHubDoorPassageV142(annex, 'exit', exit.endpointId);
+  };
+  const key = (type, code) => {
+    if (blocker && type === 'keydown' && code === 'KeyE')
+      attempts.push({ elapsed, passageReady: Boolean(passage()), blockerX: blocker.x });
+    host.events.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), { code, repeat: false }));
+  };
+  // Reach the annex through its actual interaction and covered-leaf handoff.
+  host.canvas.focus(); key('keydown', 'KeyE'); key('keyup', 'KeyE');
+  until(() => hub.currentAnnexV71()?.id === 'engine-room' && !hub.annexTransitionV71 && !hub.hubDoorClosingV142, 45000);
+  blocker = hub.npcs.find(npc => npc.crewId === 'crew-08-maksim-orlov'); assert.ok(blocker);
+  Object.assign(blocker, { x: 1661.7375, y: 532, min: 1661.7375, max: 1800, roomId: 'reactor',
+    mobile: !options.blocked, resumeVx: 27, vx: 0, facing: 1, lifeV136: null,
+    workClock: 0, supportClock: 0, alertClock: 0, alerted: false, routinePhaseV62: 'idle' });
+  assert.equal(blocker.w, 44); assert.equal(blocker.h, 92); assert.equal(passage(), null);
+  elapsed = 0; events.length = 0;
+  const snapshot = () => ({ elapsed, player: { x: hub.player.x, y: hub.player.y, w: hub.player.w, h: hub.player.h, vx: hub.player.vx },
+    annex: hub.currentAnnexV71()?.id || null, transition: Boolean(hub.annexTransitionV71), heldKeys: [...hub.keys],
+    blocker: { crewId: blocker.crewId, x: blocker.x, y: blocker.y, w: blocker.w, h: blocker.h },
+    maxBlockerSpeed, attempts, events, passageReady: Boolean(passage()),
+    config: { id: 'idris-engine', annex: 'engine-room', annexDoor: 122 } });
+  console.log(JSON.stringify(snapshot()));
+  for await (const line of createInterface({ input: process.stdin })) {
+    const request = JSON.parse(line); let error = null;
+    try {
+      if (request.type === 'focus') host.canvas.focus();
+      else if (request.type === 'wait') advance(request.ms);
+      else if (request.type === 'key') {
+        key(request.down ? 'keydown' : 'keyup', request.key);
+        if (request.press) { advance(request.ms || 0); key('keyup', request.key); }
+      } else if (request.type === 'predicate') {
+        const predicate = Function('return (' + request.expression + ')')();
+        until(() => predicate(request.arg), request.timeout);
+      } else if (request.type === 'stop') break;
+    } catch (failure) { error = failure.message; }
+    console.log(JSON.stringify({ ...snapshot(), error }));
+  }
+}
+
+function runNativeExitQaV161(cases) {
+  const directory = mkdtempSync(join(tmpdir(), 'service-exit-native-qa-'));
+  const root = new URL('../', import.meta.url).href, driver = join(directory, 'driver.mjs');
+  const input = join(directory, 'input.json'), output = join(directory, 'output.json');
+  const qa = process.env.ATF_QA_SERVICE_SOURCE || fileURLToPath(new URL('qa-npc-service-routes-v161.py', import.meta.url));
+  writeFileSync(driver, `(${nativeExitQaDriverV161.toString()})(${JSON.stringify(root)});\n`);
+  writeFileSync(input, JSON.stringify({ driver, qa, cases, node: process.execPath, output }));
+  const python = String.raw`import ast, json, subprocess, sys
+from pathlib import Path
+from types import SimpleNamespace
+spec = json.loads(Path(sys.argv[1]).read_text())
+tree = ast.parse(Path(spec['qa']).read_text())
+functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in ['walk_to', 'leave_annex']]
+if not any(n.name == 'leave_annex' for n in functions):
+    # A before-source run executes the original inline exit statements, not
+    # a separately maintained implementation of the old control sequence.
+    candidates = []
+    for owner in ast.walk(tree):
+        for field, body in ast.iter_fields(owner):
+            if not isinstance(body, list): continue
+            for index, node in enumerate(body):
+                call = node.value if isinstance(node, ast.Expr) else None
+                if not isinstance(call, ast.Call) or not isinstance(call.func, ast.Name) or call.func.id != 'walk_to' or len(call.args) != 3: continue
+                target = call.args[2]
+                if isinstance(target, ast.Subscript) and isinstance(target.value, ast.Name) and target.value.id == 'config' and isinstance(target.slice, ast.Constant) and target.slice.value == 'annexDoor':
+                    candidates.append(body[index:index + 3])
+    assert len(candidates) == 1 and len(candidates[0]) == 3
+    extracted = ast.parse('def leave_annex(page, config): pass').body[0]
+    extracted.body = candidates[0]; functions.append(extracted)
+module = ast.fix_missing_locations(ast.Module(body=functions, type_ignores=[]))
+class Page:
+    def __init__(self, case):
+        self.proc = subprocess.Popen([spec['node'], spec['driver'], json.dumps(case)],
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        line = self.proc.stdout.readline()
+        if not line: raise RuntimeError(self.proc.stderr.read())
+        self.state = json.loads(line)
+        self.keyboard = SimpleNamespace(
+            press=lambda key, delay=0: self.call(type='key', key=key, down=True, press=True, ms=delay),
+            down=lambda key: self.call(type='key', key=key, down=True),
+            up=lambda key: self.call(type='key', key=key, down=False))
+    def call(self, **request):
+        self.proc.stdin.write(json.dumps(request) + '\n'); self.proc.stdin.flush()
+        line = self.proc.stdout.readline()
+        if not line: raise RuntimeError(self.proc.stderr.read())
+        self.state = json.loads(line)
+        if self.state.get('error'): raise AssertionError(self.state['error'])
+        return self.state
+    def locator(self, selector):
+        assert selector == '#hub-canvas'
+        return SimpleNamespace(focus=lambda: self.call(type='focus'))
+    def wait_for_function(self, expression, arg=None, timeout=30000):
+        self.call(type='predicate', expression=expression, arg=arg, timeout=timeout)
+    def close(self):
+        self.proc.stdin.write('{"type":"stop"}\n'); self.proc.stdin.flush()
+        self.proc.stdin.close(); self.proc.wait(timeout=5)
+        self.proc.stdout.close(); self.proc.stderr.close()
+results = []
+for case in spec['cases']:
+    page = Page(case)
+    namespace = {'time': SimpleNamespace(monotonic=lambda: page.state['elapsed']),
+                 'observed': lambda page, config: page.call(type='read')}
+    exec(compile(module, '<actual-native-service-exit-qa>', 'exec'), namespace)
+    error = None
+    try: namespace['leave_annex'](page, page.state['config'])
+    except AssertionError as failure: error = str(failure)
+    results.append({'case': case, **page.state, 'error': error})
+    page.close()
+Path(spec['output']).write_text(json.dumps(results))
+`;
+  try {
+    execFileSync('python3', ['-c', python, input], { stdio: 'inherit', timeout: 30000 });
+    return JSON.parse(readFileSync(output, 'utf8'));
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+}
+
+test('native service QA waits for a walking parent occupant before the real player exit', () => {
+  const [result] = runNativeExitQaV161([{}]);
+  assert.equal(result.error, null, JSON.stringify(result));
+  assert.equal(result.annex, null); assert.equal(result.transition, false);
+  assert.equal(result.player.y + result.player.h, 624); assert.equal(result.player.x, 1678);
+  assert.ok(result.elapsed > 2 && result.elapsed < 45);
+  assert.equal(result.attempts.length, 1); assert.equal(result.attempts[0].passageReady, true);
+  assert.ok(result.maxBlockerSpeed > 26 && result.maxBlockerSpeed <= 27 + 1e-6);
+  assert.deepEqual(result.events.map(event => event.action), ['hub:annex-exit-start', 'hub:annex-exit-complete']);
+});
+
+test('native service QA still refuses a stationary return occupant within the same45s budget', () => {
+  const [result] = runNativeExitQaV161([{ blocked: true }]);
+  assert.match(result.error, /Native wait timed out/);
+  assert.equal(result.annex, 'engine-room'); assert.equal(result.transition, false);
+  assert.ok(Math.abs(result.elapsed - 45) < 1e-6); assert.equal(result.player.y, 532);
+  assert.equal(result.blocker.x, 1661.7375); assert.equal(result.passageReady, false);
+  assert.equal(result.events.length, 0); assert.ok(!result.heldKeys.includes('KeyE'));
+});
+
