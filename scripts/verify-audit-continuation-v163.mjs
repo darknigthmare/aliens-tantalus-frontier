@@ -7,7 +7,8 @@ import { basename, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AUDIT_PRIORITY_IDS_V163,
-  loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163 } from './audit-succession-v163.mjs';
+  loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163,
+  verifyGamedevCorrectionV163 } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -154,19 +155,85 @@ test('every roster source plate exists with its observed exact bytes while missi
   assert.throws(() => verifyAuditCoverageV163(previous, bad));
 });
 
-test('all thirty-two Forge modules are deferred and keep their actual source bytes', () => {
+test('all thirty-two historical Forge pins remain exact with only one verified maintenance continuation', () => {
   assert.equal(current.deferredForge.state, 'DEFERRED_BY_USER');
   assert.equal(current.deferredForge.baselineCommit, current.baseCommit);
   assert.equal(current.deferredForge.newForgeRuntime, 0);
   assert.equal(Object.keys(AUDIT_DEFERRED_FORGE_SOURCES_V163).length, 32);
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V163);
+  const corrections = verifyGamedevCorrectionV163(current);
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V163)) {
-    assert.equal(sha(read(path)), expected, path);
+    assert.equal(sha(read(path)), corrections[path] ?? expected, path);
     const modified = p => p === path ? Buffer.concat([read(p), Buffer.from('\nUNREVIEWED')]) : read(p);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, modified), path);
   }
   const invalid = clone(current); invalid.deferredForge.state = 'DONE';
   assert.throws(() => verifyAuditSuccessionV163(previous, invalid));
+});
+
+test('the gamedev correction binds its exact source, behavioral verifier and historical predecessor', () => {
+  const path = 'src/forge-journey-admission-v141.js';
+  const correction = current.followupGamedev20261029.corrections[0];
+  const admitted = verifyGamedevCorrectionV163(current);
+  assert.deepEqual(admitted, { [path]: sha(read(path)) });
+  assert.ok(Object.isFrozen(admitted));
+  assert.equal(correction.previousSha256, previous.runtimeSourceSha256[path]);
+  assert.equal(correction.previousSha256, current.followupV165.runtimeV164SourceSha256[path]);
+  assert.equal(correction.verifier.sha256, sha(read('scripts/verify-forge-admission-v141.mjs')));
+  const without = clone(current); delete without.followupGamedev20261029;
+  assert.deepEqual(verifyGamedevCorrectionV163(without), {});
+  assert.throws(() => verifyAuditSuccessionV163(previous, without), /Deferred Forge module changed/);
+  for (const changedPath of [path, correction.verifier.path]) {
+    const changed = name => name === changedPath ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyGamedevCorrectionV163(current, changed), /Unreviewed Forge correction/);
+  }
+});
+
+test('malformed, broadened and fabricated gamedev correction records fail closed', () => {
+  for (const mutate of [
+    r => { r.schema = 2; },
+    r => { r.id = 'UNREVIEWED'; },
+    r => { r.baselineCommit = '0'.repeat(40); },
+    r => { r.state = 'DONE'; },
+    r => { r.runtimeValidation = 'PASSED'; },
+    r => { r.scope.newForgeRuntimeModules = 1; },
+    r => { r.scope.deferredForgePrioritiesReopened = 2; },
+    r => { r.scope.allowAnyForgeSource = true; },
+    r => { r.unreviewedOverride = true; },
+    r => { r.corrections = []; },
+    r => { r.corrections.push(clone(r.corrections[0])); },
+    r => { r.corrections[0].path = 'src/forge-journey-v141.js'; },
+    r => { r.corrections[0].path = '../unsafe.js'; },
+    r => { r.corrections[0].previousSha256 = '0'.repeat(64); },
+    r => { r.corrections[0].currentSha256 = r.corrections[0].previousSha256; },
+    r => { r.corrections[0].currentSha256 = '0'.repeat(64); },
+    r => { r.corrections[0].currentSha256 = null; },
+    r => { r.corrections[0].reason = 'fix'; },
+    r => { r.corrections[0].verifier.path = 'scripts/verify-forge-journey-v141.mjs'; },
+    r => { r.corrections[0].verifier.sha256 = '0'.repeat(64); },
+    r => { r.corrections[0].verifier.skip = true; },
+    ...['nodeSuite', 'nativeCandidate', 'ci', 'review', 'merge'].map(key => r => { r.releaseEvidence[key] = { status: 'PASSED' }; })
+  ]) {
+    const invalid = clone(current); mutate(invalid.followupGamedev20261029);
+    assert.throws(() => verifyGamedevCorrectionV163(invalid));
+  }
+  for (const value of [null, false, [], {}]) {
+    const invalid = clone(current); invalid.followupGamedev20261029 = value;
+    assert.throws(() => verifyGamedevCorrectionV163(invalid));
+  }
+  for (const select of [r => r.deferredForge.sourceSha256, r => r.followupV165.runtimeV164SourceSha256,
+    r => r.runtimeSourceSha256]) {
+    const invalid = clone(current); select(invalid)['src/forge-journey-admission-v141.js'] = '0'.repeat(64);
+    assert.throws(() => verifyGamedevCorrectionV163(invalid));
+  }
+});
+
+test('the gamedev correction never admits another changed Forge module even with a matching current pin', () => {
+  const path = 'src/forge-journey-v141.js';
+  const changedBytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
+  const invalid = clone(current); invalid.runtimeSourceSha256[path] = sha(changedBytes);
+  const changed = name => name === path ? changedBytes : read(name);
+  assert.throws(() => verifyAuditSuccessionV163(previous, invalid, changed), /Deferred Forge module changed/);
 });
 
 test('declared current recipe cells and generated adaptations make no current pass or canon claim', () => {

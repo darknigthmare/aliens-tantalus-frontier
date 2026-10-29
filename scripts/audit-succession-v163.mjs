@@ -49,6 +49,47 @@ const readRepository = path => readFileSync(new URL('../' + path, import.meta.ur
 const keys = value => Object.keys(value).sort();
 const validHash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 
+/** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
+export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
+  if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
+  const record = current.followupGamedev20261029;
+  assert.ok(record && typeof record === 'object' && !Array.isArray(record));
+  assert.deepEqual(keys(record), ['baselineCommit', 'corrections', 'id', 'releaseEvidence',
+    'runtimeValidation', 'schema', 'scope', 'state'].sort());
+  assert.equal(record.schema, 1);
+  assert.equal(record.id, 'GAMEDEV-20261029-FORGE-ADMISSION');
+  assert.equal(record.baselineCommit, 'ffea37ad83ef1fa1fdd0a1e0549b4b4035bb4c52');
+  assert.equal(record.state, 'PREPUBLICATION');
+  assert.equal(record.runtimeValidation, 'REQUIRES_OWN_EXACT_HEAD_RECEIPTS');
+  assert.deepEqual(record.scope, { existingModuleMaintenance: true, newForgeRuntimeModules: 0,
+    deferredForgePrioritiesReopened: 0, historicalForgeScope: 'V163' });
+  assert.deepEqual(record.releaseEvidence, { nodeSuite: null, nativeCandidate: null, ci: null, review: null, merge: null });
+  assert.ok(Array.isArray(record.corrections) && record.corrections.length === 1,
+    'Exactly one Forge admission correction is authorized by this continuation');
+  const correction = record.corrections[0];
+  assert.ok(correction && typeof correction === 'object' && !Array.isArray(correction));
+  assert.deepEqual(keys(correction), ['currentSha256', 'path', 'previousSha256', 'reason', 'verifier'].sort());
+  const path = 'src/forge-journey-admission-v141.js';
+  const previousSha256 = AUDIT_DEFERRED_FORGE_SOURCES_V163[path];
+  assert.equal(correction.path, path, 'The maintenance continuation cannot admit another runtime path');
+  assert.equal(correction.previousSha256, previousSha256);
+  assert.equal(current.deferredForge?.sourceSha256?.[path], previousSha256);
+  assert.equal(current.followupV165?.runtimeV164SourceSha256?.[path], previousSha256);
+  assert.ok(validHash(correction.currentSha256));
+  assert.notEqual(correction.currentSha256, previousSha256, 'A correction must identify changed source bytes');
+  assert.equal(current.runtimeSourceSha256?.[path], correction.currentSha256);
+  assert.ok(typeof correction.reason === 'string' && correction.reason.trim().length >= 60,
+    'Explain the concrete admission behavior corrected after the historical Forge scope');
+  const verifier = correction.verifier;
+  assert.ok(verifier && typeof verifier === 'object' && !Array.isArray(verifier));
+  assert.deepEqual(keys(verifier), ['path', 'sha256']);
+  assert.equal(verifier.path, 'scripts/verify-forge-admission-v141.mjs');
+  assert.ok(validHash(verifier.sha256));
+  assert.equal(sha(readSource(path)), correction.currentSha256, 'Unreviewed Forge correction bytes: ' + path);
+  assert.equal(sha(readSource(verifier.path)), verifier.sha256, 'Unreviewed Forge correction verifier bytes');
+  return Object.freeze({ [path]: correction.currentSha256 });
+}
+
 function anchoredPredecessor(previous, readSource) {
   let anchored;
   for (const [path, expected] of Object.entries(AUDIT_PREDECESSOR_DOCUMENTS_V163)) {
@@ -177,8 +218,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.deepEqual(bridge.predecessorDocuments, AUDIT_PREDECESSOR_DOCUMENTS_V163);
   assert.equal(current.deferredForge?.state, 'DEFERRED_BY_USER');
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V163);
+  const corrections = verifyGamedevCorrectionV163(current, readSource);
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V163))
-    assert.equal(sha(readSource(path)), expected, 'Deferred Forge module changed: ' + path);
+    assert.equal(sha(readSource(path)), corrections[path] ?? expected, 'Deferred Forge module changed: ' + path);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
   assert.equal(keys(before).length, 87);
   assert.ok(after && keys(after).length >= 87);
@@ -192,7 +234,8 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
-  for (const path of [...changed, ...added]) assert.ok(!path.startsWith('src/forge'), 'Forge is deferred by the user: ' + path);
+  for (const path of [...changed, ...added]) assert.ok(!path.startsWith('src/forge') || Object.hasOwn(corrections, path),
+    'Forge is deferred by the user outside the verified maintenance correction: ' + path);
   assert.ok(Array.isArray(bridge.transitions) && Array.isArray(bridge.addedSources));
   assert.deepEqual(bridge.transitions.map(row => row.path), changed, 'Declare every changed inherited V162 source exactly once');
   assert.deepEqual(bridge.addedSources.map(row => row.path), added, 'Declare every new V163 source exactly once');

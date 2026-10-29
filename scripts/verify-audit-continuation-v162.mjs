@@ -111,7 +111,7 @@ test('absent successor never admits a fabricated predecessor and malformed succe
   }
 });
 
-test('Forge is explicitly deferred and every one of its32 native modules remains byte-identical', () => {
+test('Forge keeps all32 historical pins and uses only a fully verified successor for current bytes', () => {
   assert.equal(current.deferredForge.state, 'DEFERRED_BY_USER');
   assert.equal(current.deferredForge.baselineCommit, current.baseCommit);
   assert.equal(current.deferredForge.newForgeRuntime, 0);
@@ -119,8 +119,9 @@ test('Forge is explicitly deferred and every one of its32 native modules remains
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V162);
   assert.deepEqual(readdirSync(new URL('../src/', import.meta.url)).filter(name => name.startsWith('forge')).sort(),
     Object.keys(AUDIT_DEFERRED_FORGE_SOURCES_V162).map(path => basename(path)).sort());
+  const effective = resolveAuditSourcesV162(previous, read, { effective: true });
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V162)) {
-    assert.equal(sha(read(path)), expected, path);
+    assert.equal(sha(read(path)), effective[path] ?? expected, path);
     const modified = p => p === path ? Buffer.concat([read(p), Buffer.from('\nUNAUTHORIZED')]) : read(p);
     assert.throws(() => verifyAuditSuccessionV162(previous, current, modified), path);
   }
@@ -128,6 +129,23 @@ test('Forge is explicitly deferred and every one of its32 native modules remains
     assert.ok(!path.startsWith('src/forge'), path);
   const bad = clone(current);bad.deferredForge.state = 'DONE';
   assert.throws(() => verifyAuditSuccessionV162(previous, bad));
+});
+
+test('V162 rejects changed Forge bytes without a valid V163 maintenance successor', () => {
+  const path = 'src/forge-journey-admission-v141.js';
+  const latest = JSON.parse(bytes('progress-v163.json'));
+  assert.equal(resolveAuditSourcesV162(previous)[path], AUDIT_DEFERRED_FORGE_SOURCES_V162[path]);
+  assert.equal(resolveAuditSourcesV162(previous, read, { effective: true })[path], latest.runtimeSourceSha256[path]);
+  const absent = name => {
+    if (name === prefix + 'progress-v163.json') { const error = new Error('absent'); error.code = 'ENOENT'; throw error; }
+    return read(name);
+  };
+  assert.throws(() => verifyAuditSuccessionV162(previous, current, absent), /Deferred Forge module changed/);
+  const unreviewed = clone(latest); delete unreviewed.followupGamedev20261029;
+  const missingCorrection = name => name === prefix + 'progress-v163.json' ? Buffer.from(JSON.stringify(unreviewed)) : read(name);
+  assert.throws(() => verifyAuditSuccessionV162(previous, current, missingCorrection), /Deferred Forge module changed/);
+  const malformed = name => name === prefix + 'progress-v163.json' ? Buffer.from('{') : read(name);
+  assert.throws(() => verifyAuditSuccessionV162(previous, current, malformed));
 });
 
 test('current recipe cells claim no result and retained reference records remain historical', () => {

@@ -117,7 +117,42 @@ Les nouveaux documents sont admis explicitement dans le contrôle des sources. I
 
 Les tests présents dans le dépôt ne prouvent pas leur réussite sur une nouvelle branche. Un inventaire Excel n’atteste pas à lui seul que les éléments sont jouables. Une capture isolée atteste un rendu, pas la réussite d’une mission entière.
 
-## 5. Entretien de cette adaptation
+## 5. Première application — 29 octobre 2026
+
+Les guides `game-ai`, `level-design` et `save-systems` ont été appliqués à des défauts reproduits sur la base de la PR #23 (`ffea37ad83ef1fa1fdd0a1e0549b4b4035bb4c52`). Les corrections restent dans les modules actifs et leurs suites existantes.
+
+| Système | Défaut reproduit | Comportement obtenu |
+| --- | --- | --- |
+| Perception IA | Le combat et la navigation pouvaient choisir un joueur plus proche mais hors du cône de vue, alors que la vigilance poursuivait un coopéquipier visible. | Vigilance, combat et navigation partagent les mêmes règles de portée, posture, angle, proximité et obstacles. Les contrôleurs spécialisés gardent leur comportement. |
+| Investigation et reprise IA | Des dégâts sans propriétaire pouvaient identifier par accident un joueur sans `id`. Une investigation sans position mémorisée pouvait ensuite rester bloquée. | Un attaquant inconnu ne révèle aucune position. Sans destination mémorisée, l’ennemi cherche localement puis reprend sa patrouille, y compris après une reprise JSON incomplète. |
+| Arrivées arrière | Une mise à jour franchissant la fin du délai comptait une partie du temps deux fois. | Seul le temps restant après le délai avance l’avertissement et l’approche ; les reprises conservent le temps écoulé sans rejouer l’avertissement. |
+| Parcours Forge | Deux branches sans retour pouvaient chacune porter un objectif obligatoire : l’admission acceptait le projet, puis le runtime refusait les deux sorties. | L’admission détecte les branches incompatibles. Les chaînes, retours, cycles et objectifs validables par un dialogue distant restent admissibles. Une page de dialogue non reliée ne constitue pas une récompense accessible. |
+| Arrivée dans une salle Forge | Une insertion inutilisée dans une salle secondaire pouvait bloquer le parcours malgré une arrivée par sas valide. | Les diagnostics propres à cette insertion deviennent des avertissements. Un objectif cloisonné reste une erreur sauf si son volume est connecté à une arrivée réellement libre et supportée. L’insertion de départ reste obligatoire. |
+
+Les nouveaux scénarios ont d’abord été exécutés avec les sources d’origine injectées hors de la copie de travail : quatre régressions IA et douze régressions Forge échouaient. Les mêmes scénarios réussissent avec les corrections. Les tests utilisent les moteurs et compilateurs existants, avec leurs doublures d’API navigateur ; ils ne constituent pas une validation visuelle en navigateur.
+
+Résultats locaux sous Node 24.22.1 :
+
+| Suite existante | Résultat |
+| --- | --- |
+| `scripts/verify-enemy-tactics-v130.mjs` | 20/20 |
+| `scripts/verify-enemy-patrol-v140.mjs` | 9/9 |
+| `scripts/verify-forge-admission-v141.mjs` | 32/32 |
+| `scripts/verify-forge-journey-v141.mjs` | 17/17 |
+| `scripts/verify-forge-mission-v141.mjs` | 20/20 |
+| `scripts/verify-save-lifecycle-v143.mjs` | 55/55 |
+| `scripts/verify-campaign-story-v160.mjs` | 23/23 |
+| `scripts/verify-audit-v143.mjs` | 71/71 |
+
+Soit 247 tests dans ces huit suites. Les commandes ciblées sont `node scripts/<suite>.mjs` pour Forge, sauvegardes et audit ; pour les suites du moteur sous Node 24, `node --test --test-isolation=none --test-reporter=spec scripts/<suite>.mjs` expose les sous-tests. La campagne a été contrôlée avec `--test-reporter=tap --test-reporter-destination=/tmp/tantalus-campaign-final.log`. Les sprites et fichiers auxiliaires nécessaires proviennent des octets réels du dépôt, sans média de substitution.
+
+**Traçabilité des corrections.** Le dépôt épingle aussi des sources et vérificateurs dans `docs/forge/xeno-trials/progress-v163.json`. Mettre à jour une empreinte courante ne doit pas remplacer une preuve historique : conserver les ancres V162/V163/V164, déclarer la transition précise et vérifier les nouveaux octets. Le bloc `followupGamedev20261029` décrit uniquement la correction du module d’admission et lie sa suite comportementale. Les contrôles de succession refusent un autre module Forge, une empreinte divergente, un test altéré ou une preuve publique inventée. Les empreintes courantes des vérificateurs modifiés par la documentation initiale sont également corrigées.
+
+Dix contrôles ciblés supplémentaires passent dans les gardes de succession : 2 dans `verify-audit-continuation-v162.mjs`, 6 dans `verify-audit-continuation-v163.mjs` et 2 dans `verify-parallel-completion-v165.mjs`. Ils couvrent aussi la résolution V161 → V162 → V163 et le refus d’une succession absente ou mal formée. Les 59 empreintes courantes de vérificateurs correspondent aux fichiers. Ces résultats portent sur les cas sélectionnés, pas sur l’ensemble des tests documentaires et médias de ces trois suites.
+
+**Limites de cette passe.** Les sauts et les conditions narratives ne sont pas simulés par l’admission statique. Les obstructions mobiles restent contrôlées au passage en jeu. Le build complet, le parcours clavier et la revue visuelle ne sont pas revendiqués par ces tests locaux. La CI navigateur présentait déjà des échecs sur `main`, notamment dans le [contrôle de release du commit de départ](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40676003061/job/122774883422) ; les résultats de la nouvelle tête de PR doivent être suivis séparément. Aucune correction de sauvegarde de campagne n’est déduite de ce seul échec navigateur.
+
+## 6. Entretien de cette adaptation
 
 Conserver un ensemble réduit de références utiles. Ajouter une discipline complémentaire quand une tâche le demande, après lecture du guide correspondant. Pour les problèmes propres à Tantalus, les interfaces du dépôt, les références franchise et les résultats observés restent déterminants.
 

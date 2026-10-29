@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { verifyAuditSuccessionV163 } from './audit-succession-v163.mjs';
+import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -41,6 +41,7 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   });
   assert.equal(sha(canonicalMap(followup.runtimeV164SourceSha256)), followup.historicalSource.runtimeMapSha256,
     'The delivered V164 source map is immutable, independent of current source bytes');
+  const corrections = verifyGamedevCorrectionV163(record, readSource);
   const before = followup.runtimeV164SourceSha256, after = record.runtimeSourceSha256;
   assert.equal(Object.keys(before).length, 105);
   for (const path of Object.keys(before)) assert.ok(Object.hasOwn(after, path), 'Omitted V164 source: ' + path);
@@ -49,7 +50,8 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   assert.equal(followup.runtimeSourceCount, Object.keys(after).length);
   const requiredVerifiers = new Set();
   for (const row of followup.sourceChanges) {
-    assert.ok(!row.path.startsWith('src/forge'), 'Forge is deferred');
+    assert.ok(!row.path.startsWith('src/forge') || Object.hasOwn(corrections, row.path),
+      'Forge is deferred outside the verified maintenance correction');
     assert.equal(row.previousSha256, before[row.path] ?? null);
     assert.equal(row.currentSha256, after[row.path]);
     assert.equal(sha(readSource(row.path)), row.currentSha256, 'Stale V165 source: ' + row.path);
@@ -223,6 +225,8 @@ test('invented receipts, omitted source changes, modified verifiers and broadene
     r => { r.followupV165.releaseEvidence.nativeCandidate = { status: 'PASSED', captures: 835 }; },
     r => { r.followupV165.approved1to1 = 1; },
     r => { r.followupV165.forgePrioritiesDeferred = 0; },
+    r => { delete r.followupGamedev20261029; },
+    r => { r.followupGamedev20261029.corrections[0].path = 'src/forge-journey-v141.js'; },
     r => { r.followupV165.rigs.newFullWalkAdmissions = 170; },
     r => { r.followupV165.costumes.newPlayablePrecompositedSkins = 3; },
     r => { r.followupV165.npcRoutes.routesClosedByThisDocument = 7; },

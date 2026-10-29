@@ -40,6 +40,20 @@ export function enemySightClearV130(engine, enemy, target) {
     .some(value => sweepProjectileAabbV83(ray, displacement, value));
 }
 
+// Awareness, combat and navigation must agree on which actors can be seen.
+// A clear ray alone must not reveal a closer actor behind the enemy or beyond
+// its range when another, actually visible actor triggered the pursuit.
+function targetVisible(engine, enemy, target) {
+  if (!box(enemy) || !box(target)) return false;
+  const from = point(enemy), to = point(target), dx = to.x - from.x, dy = to.y - from.y;
+  const distance = Math.hypot(dx, dy), policy = doctrine(enemy);
+  const range = finite(enemy.behaviorProfileV119?.perception?.vision, 620);
+  const visibility = target.crouching ? .58 : target.inCover ? .72 : 1;
+  return distance < Math.max(100, range * visibility)
+    && (distance < 105 || dx * (enemy.facing || 1) / Math.max(1, distance) >= policy.cone)
+    && enemySightClearV130(engine, enemy, target);
+}
+
 // Merge contiguous real supports. Patrol endpoints never extend across a gap.
 export function enemyPatrolBoundsV130(engine, enemy, radius = 170) {
   const foot = feet(enemy), center = enemy.x + enemy.w / 2;
@@ -147,7 +161,7 @@ export function withEnemyTacticsV130(BaseEngine) {
         .filter(occupant => occupant?.alive && !occupant.downed && occupant.inVehicle);
       const alive = actor === this.vehicle ? this.vehicle.active && !this.vehicle.destroyed && occupants.length > 0 : actor?.alive;
       return Boolean(enemy.tacticsV130.mode === 'pursuit' && box(actor) && alive && !actor.downed
-        && !actor.ventTransit && enemySightClearV130(this, enemy, actor.inVehicle && this.vehicle?.active ? this.vehicle : actor));
+        && !actor.ventTransit && targetVisible(this, enemy, actor.inVehicle && this.vehicle?.active ? this.vehicle : actor));
     }
 
     activeSquadActors() {
@@ -217,14 +231,8 @@ export function withEnemyTacticsV130(BaseEngine) {
     updateEnemyTacticsStepV130(enemy, delta) {
       const state = enemy.tacticsV130, policy = doctrine(enemy), origin = point(enemy);
       const targets = this.tacticsTargetsV130();
-      const visible = targets.filter(target => {
-        const eye = point(target), dx = eye.x - origin.x, dy = eye.y - origin.y, distance = Math.hypot(dx, dy);
-        const range = finite(enemy.behaviorProfileV119?.perception?.vision, 620);
-        const visibility = target.crouching ? .58 : target.inCover ? .72 : 1;
-        return distance < Math.max(100, range * visibility)
-          && (distance < 105 || dx * (enemy.facing || 1) / Math.max(1, distance) >= policy.cone)
-          && enemySightClearV130(this, enemy, target);
-      }).sort((a, b) => Math.hypot(point(a).x - origin.x, point(a).y - origin.y)
+      const visible = targets.filter(target => targetVisible(this, enemy, target))
+        .sort((a, b) => Math.hypot(point(a).x - origin.x, point(a).y - origin.y)
         - Math.hypot(point(b).x - origin.x, point(b).y - origin.y));
       const target = visible.find(actor => actor.id === state.targetId) || visible[0];
       state.clock += delta;
@@ -297,8 +305,15 @@ export function withEnemyTacticsV130(BaseEngine) {
           });
           return;
         }
-        if (state.mode === 'investigation' && state.lastKnown) {
+        if (state.mode === 'investigation') {
           const memory = state.lastKnown;
+          // Damage without an identified source and older/incomplete cursors
+          // can leave no destination. Search locally instead of freezing or
+          // inventing the hidden player's current position.
+          if (!memory) {
+            state.searchLeg = 0; this.setEnemyTacticsStateV130(enemy, 'search');
+            return;
+          }
           const surface = this.missionLevelSurfaceFor?.(enemy, { tolerance: 30 });
           const destinationSurface = this.missionLevelSurfaceFor?.(memory, { tolerance: 30 });
           if (this.missionLevelRuntime && this.advanceEnemyMissionNavigation && (enemy.levelNavigation?.mode !== 'surface'
@@ -349,7 +364,9 @@ export function withEnemyTacticsV130(BaseEngine) {
       if (rear(enemy)) return false;
       const health = enemy?.health, result = super.applyEnemyDamage(enemy, amount, source);
       if (mobile(enemy) && enemy.health < health && enemy.tacticsV130) {
-        const owner = typeof source.owner === 'object' ? source.owner : this.tacticsTargetsV130().find(target => target.id === source.owner);
+        // An omitted owner must not match an actor whose id is also omitted.
+        const owner = typeof source.owner === 'object' ? source.owner
+          : source.owner != null ? this.tacticsTargetsV130().find(target => target.id === source.owner) : null;
         const actor = box(owner) ? owner : null;
         if (box(actor)) enemy.tacticsV130.lastKnown = { x: actor.x, y: actor.y, w: actor.w, h: actor.h, floorY: feet(actor) };
         this.setEnemyTacticsStateV130(enemy, 'investigation');
@@ -431,6 +448,9 @@ export function withEnemyTacticsV130(BaseEngine) {
       enemy.dormant = true; enemy.attacking = false; enemy.alert = false; enemy.vx = 0;
       const nearby = this.tacticsTargetsV130().some(actor => Math.hypot(point(actor).x - (entrance.x + entrance.w / 2), feet(actor) - entrance.floorY) < 920);
       if (state.phase === 'waiting' && !nearby) return;
+      // Only the time left after the deployment delay advances the warning
+      // and approach. Counting the whole frame makes large steps arrive early.
+      const activeDelta = Math.max(0, delta - state.delay);
       state.delay = Math.max(0, state.delay - delta);
       if (state.delay > 0) return;
       if (state.phase === 'waiting') {
@@ -438,7 +458,7 @@ export function withEnemyTacticsV130(BaseEngine) {
         this.onEvent?.({ type: 'rear-entrance-warning-v130', enemyId: enemy.id, entranceId: entrance.id });
         this.pushCaption?.('warning', 'MOUVEMENT DERRIÈRE LA PORTE');
       }
-      state.elapsed += delta;
+      state.elapsed += activeDelta;
       if (state.phase === 'warning' && state.elapsed >= ENEMY_TACTICS_V130.rearWarningSeconds) {
         state.elapsed -= ENEMY_TACTICS_V130.rearWarningSeconds; state.phase = 'approach';
       }

@@ -73,10 +73,11 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
   assert.deepEqual(bridge.predecessorDocuments, AUDIT_PREDECESSOR_DOCUMENTS_V162);
   assert.equal(current.deferredForge?.state, 'DEFERRED_BY_USER');
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V162);
-  for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V162))
-    assert.equal(sha(readSource(path)), expected, 'Deferred Forge module changed: ' + path);
-  const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
+  // Historical pins stay fixed; only a fully verified successor can supply newer bytes.
   const effective = resolveAuditSourcesV163(current, readSource);
+  for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V162))
+    assert.equal(sha(readSource(path)), effective[path] ?? expected, 'Deferred Forge module changed: ' + path);
+  const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
   assert.equal(keys(before).length, 82);
   assert.ok(after && keys(after).length >= 82);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V161 source omitted: ' + path);

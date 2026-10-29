@@ -2734,7 +2734,7 @@
     "src/forge-decoration-v141.js": "8df7f9f306e2635547b4488198b1d3f6f815633999516bc5819d28cadff2cbfe",
     "src/forge-editor-base.js": "bcb438505c136e72d9c97ea05fca38331aac3738e935b2398dedd6ef0a946060",
     "src/forge-editor-v130.css": "26fbbe3ab81709df35eb90b0f3eca57829297673a935a1a3a95603a23fddedba",
-    "src/forge-journey-admission-v141.js": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+    "src/forge-journey-admission-v141.js": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
     "src/forge-mission-runtime-v141.js": "1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0",
     "src/forge-model-v130.js": "9bc39547e1bb1b7add1489efab073d22302a64f6220a701eb6abcd1c084252c7",
     "src/forge-narrative-ui-v156.js": "766a0a9abf003514425260e361868701117831de3245289d97fae92d109fdaf4",
@@ -16029,6 +16029,18 @@
         ]
       },
       {
+        "path": "src/forge-journey-admission-v141.js",
+        "previousSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "currentSha256": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+        "reason": "Maintenance gamedev du 29 octobre 2026, après le périmètre Forge historique V163. Corriger l’admission des parcours existants : refuser les branches à sens unique dont les objectifs physiques ne peuvent pas tous être visités, conserver les cycles, les chaînes et les récompenses narratives distantes ; évaluer une salle secondaire depuis une véritable arrivée libre et supportée, sans bloquer sur son insertion inutilisée ni admettre un objectif scellé.",
+        "verifiers": [
+          "scripts/verify-audit-continuation-v162.mjs",
+          "scripts/verify-audit-continuation-v163.mjs",
+          "scripts/verify-forge-admission-v141.mjs",
+          "scripts/verify-parallel-completion-v165.mjs"
+        ]
+      },
+      {
         "path": "src/held-weapon-renderer-v125.js",
         "previousSha256": "bf20b93457fbd7d6296acf66aacf1175698d4d68092c1297465df6a64dcaba5f",
         "currentSha256": "7112bc41d7952df2fc4affac5005613d7727041caba8ef5ec5a50e00aec70524",
@@ -21542,6 +21554,18 @@
         ]
       },
       {
+        "path": "src/forge-journey-admission-v141.js",
+        "previousSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "currentSha256": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+        "reason": "V165 : conserver les ancres historiques Forge et déclarer la seule maintenance d’admission du 29 octobre 2026, sans rouvrir les priorités Forge différées. Corriger l’admission des parcours existants : refuser les branches à sens unique dont les objectifs physiques ne peuvent pas tous être visités, conserver les cycles, les chaînes et les récompenses narratives distantes ; évaluer une salle secondaire depuis une véritable arrivée libre et supportée, sans bloquer sur son insertion inutilisée ni admettre un objectif scellé.",
+        "verifiers": [
+          "scripts/verify-audit-continuation-v162.mjs",
+          "scripts/verify-audit-continuation-v163.mjs",
+          "scripts/verify-forge-admission-v141.mjs",
+          "scripts/verify-parallel-completion-v165.mjs"
+        ]
+      },
+      {
         "path": "src/franchise-costumes-v119.js",
         "previousSha256": null,
         "currentSha256": "147afb5919da23a0fda98409ef8914484938786e05f78f1936fe4813e52e32ef",
@@ -22236,12 +22260,15 @@
   },
   "verifierSourceSha256V165": {
     "scripts/verify-allied-patrol-phase-v167.mjs": "68627ad4da93413ac8ad5df8b129e1401ef6fb73b2a9a310b017271cbbefeb55",
-    "scripts/verify-audit-v143.mjs": "86d52580d58483818ebc2aa65edb076cbb0426123b0657a9f775a18c8e033270",
+    "scripts/verify-audit-continuation-v162.mjs": "4a0f581c4cd915fbab05351d455b0b9a4d0e3722a659323026b4b021a488d9cc",
+    "scripts/verify-audit-continuation-v163.mjs": "0e62c205e45006c9adbf6f58850233b40d79aaaaefabd802fad3c845dc5eaaf1",
+    "scripts/verify-audit-v143.mjs": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
     "scripts/verify-campaign-lethe-v163.mjs": "a5aeb4ac231b038fe0f1e711ac3cdc33d97e66b7414001d9b095622ec43d8c80",
     "scripts/verify-campaign-story-v160.mjs": "e1bee1d0c2a9336cef6d11722222e8606a76cac9e7b27b0d29c3cd7abcc5c0b4",
     "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
     "scripts/verify-costume-atlases-v165.mjs": "aa60a94bb91557743e4f89b6754298f63da018e7a7c98d2c5db3aa36f9acb36f",
     "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
+    "scripts/verify-forge-admission-v141.mjs": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782",
     "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
     "scripts/verify-hub-backgrounds-v168.mjs": "20314af3bb3849981646db3a73f65c3cbb22f326385e6c9ea6591e4415801ed3",
     "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
@@ -22269,13 +22296,13 @@
     "scripts/verify-npc-relay-locked-bulkheads-v166.mjs": "52c2b1a55f40b32063e164a2d9d5a4bccb997bd0f62362c3c87f8473446e1e17",
     "scripts/verify-npc-service-routes-v161.mjs": "cf49d1c3bd838fd9cb292e5b07141440259457250f17ecb89746e7d6f0fc8ae1",
     "scripts/verify-npc-station-relays-v166.mjs": "72c55f2d7b6d851c02d0ebae310b0c4d44a53ac8034cc406173b9c5964948259",
-    "scripts/verify-parallel-completion-v165.mjs": "e025e90e553fac8297c7658dd66cb243e63d829d5be7989a8d4470c6a4053224",
+    "scripts/verify-parallel-completion-v165.mjs": "dfbcd1f067b27c559586d46660c7fbde559caa6195b80fc579c3b5d57069de15",
     "scripts/verify-player-allies-contacts-v165.mjs": "a493954439f413c34e826888fddf61eba78f4e9bb85367a7bab11949fccef7a1",
     "scripts/verify-player-appearance-v126.mjs": "f37afd4e4735ee84080511fe2f1d6ce53e9114fe87def495d8e9ebea72c25c6e",
     "scripts/verify-player-arm-phase-v167.mjs": "d9f87786c8fa989fe35033e0969dc0631a6fbcb2dee727d820fe7de8048d8a5e",
     "scripts/verify-player-locomotion-rig-v129.mjs": "542ba6a0da7988ed264cd18db280c6f2da27d0ad6a5928212bc112a7b9581fd6",
     "scripts/verify-player-weapon-rig-v125.mjs": "2cc74b21db33c540bc2466c444aca7a87f507e012e47d4895f38816bc16da98b",
-    "scripts/verify-public-release-v86.mjs": "77a2e8163ead189f81ea57ebba9a0a7b488da7e331f3705bb78ab4fa9810c959",
+    "scripts/verify-public-release-v86.mjs": "4b432c2bd6d5d30af744ae96103a678d96cf6839bfe76907ab56077d48cb7eb3",
     "scripts/verify-range-crew-interaction-v167.mjs": "9276254ba9f8f28c769df1f53e07b3f2aa79de6f8a0d1fdab61ef374b4954d33",
     "scripts/verify-release-artifact-v143.mjs": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
     "scripts/verify-reload-presentation-v163.mjs": "7751841c22a3c8daa104cc9112b6df6406e040f1e385a67ff9561913287c7683",
@@ -22316,6 +22343,38 @@
       "node": null,
       "native": null,
       "ci": null,
+      "merge": null
+    }
+  },
+  "followupGamedev20261029": {
+    "schema": 1,
+    "id": "GAMEDEV-20261029-FORGE-ADMISSION",
+    "baselineCommit": "ffea37ad83ef1fa1fdd0a1e0549b4b4035bb4c52",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "scope": {
+      "existingModuleMaintenance": true,
+      "newForgeRuntimeModules": 0,
+      "deferredForgePrioritiesReopened": 0,
+      "historicalForgeScope": "V163"
+    },
+    "corrections": [
+      {
+        "path": "src/forge-journey-admission-v141.js",
+        "previousSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "currentSha256": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+        "reason": "Corriger l’admission des parcours existants : refuser les branches à sens unique dont les objectifs physiques ne peuvent pas tous être visités, conserver les cycles, les chaînes et les récompenses narratives distantes ; évaluer une salle secondaire depuis une véritable arrivée libre et supportée, sans bloquer sur son insertion inutilisée ni admettre un objectif scellé.",
+        "verifier": {
+          "path": "scripts/verify-forge-admission-v141.mjs",
+          "sha256": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782"
+        }
+      }
+    ],
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
       "merge": null
     }
   }
