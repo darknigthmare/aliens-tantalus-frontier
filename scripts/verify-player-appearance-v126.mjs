@@ -528,10 +528,12 @@ test('V129 armory exposes four native preset buttons, the exact selected preset 
   assert.doesNotMatch(locked, /fidèle 1:1|exactement identique/i);
 });
 
-test('V165 Hicks and Hudson archive cards apply matching modular clothes and preserve customization and operation locks', () => {
+test('V165 admitted film archive cards apply matching modular clothes and preserve customization and operation locks', () => {
   for (const [costumeId, presetId] of [
     ['franchise-hicks-combat', 'uscm-hicks-v129'],
-    ['franchise-hudson-combat', 'uscm-hudson-v129']
+    ['franchise-hudson-combat', 'uscm-hudson-v129'],
+    ['franchise-vasquez-bdu', 'outfit-vasquez-bdu-v165'],
+    ['franchise-rain-jacket', 'outfit-rain-jacket-v165']
   ]) {
     const costume = getCostumeV119(costumeId);
     assert.equal(canEquipCostumeV119(costumeId, COSTUMES), true);
@@ -557,14 +559,18 @@ test('V165 Hicks and Hudson archive cards apply matching modular clothes and pre
 test('V165 archive equipment admits the matching film clothes and keeps other documented outfits separate', () => {
   const save = createDefaultSave(), before = clone(save);
   const vasquez = renderCostumeArchiveCardV119(getCostumeV119('franchise-vasquez-bdu'), { COSTUMES });
-  assert.doesNotMatch(vasquez, /data-costume-appearance-v129/,
-    'Vasquez’s BDU archive outfit is not silently mapped to her separate smartgunner equipment.');
+  assert.match(vasquez, /data-costume-appearance-v129="outfit-vasquez-bdu-v165"/);
+  assert.doesNotMatch(vasquez, /data-costume-appearance-v129="uscm-smartgunner-v129"/,
+    'The admitted BDU stays separate from Vasquez’s smartgunner equipment.');
   const nostromo = renderCostumeArchiveCardV119(getCostumeV119('franchise-nostromo-crew'), { COSTUMES, locked: true });
   assert.match(nostromo, /data-costume-id="franchise-nostromo-crew"[^>]*disabled/);
   assert.doesNotMatch(nostromo, /data-costume-appearance-v129/);
   const ready = buildCostumeArchivesModelV119({ save, COSTUMES, filters: { availability: 'ready' } });
   assert.ok(ready.entries.some(entry => entry.id === 'franchise-nostromo-crew'));
-  for (const id of ['franchise-hicks-combat', 'franchise-hudson-combat']) assert.ok(ready.entries.some(entry => entry.id === id));
+  assert.equal(ready.modularReadyCount, 12);
+  assert.equal(ready.entries.length, 13);
+  for (const id of ['franchise-hicks-combat', 'franchise-hudson-combat', 'franchise-vasquez-bdu', 'franchise-rain-jacket'])
+    assert.ok(ready.entries.some(entry => entry.id === id));
   const missing = buildCostumeArchivesModelV119({ save, COSTUMES, filters: { availability: 'missing', character: 'Hicks' } });
   assert.equal(missing.entries.length, 0);
   assert.deepEqual(save, before);

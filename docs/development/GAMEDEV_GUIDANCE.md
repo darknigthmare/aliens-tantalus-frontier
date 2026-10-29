@@ -260,7 +260,69 @@ Un blocage distinct reste constaté sur le parcours Jun de `5f70ab2` : après re
 
 La CI Chromium de la tête livrée reste nécessaire pour clôturer les parcours et la release. Les succès antérieurs ne lui sont pas transférés. Les résultats locaux ne constituent ni une recette visuelle, ni une approbation artistique, ni une publication en production.
 
-## 9. Entretien de cette adaptation
+## 9. Tenues documentées, pixels réels et retour de Jun — cinquième application
+
+Cette application part de `ce12c76d0fdb5a19d606a7a70f1b652875caa5a9`. Elle poursuit les critères `create-game-assets`, `save-systems` et `level-design` du guide : une entrée de catalogue ne vaut pas un vêtement produit, une matrice valide ne prouve pas le bon assemblage des pixels, et un pilote doit emprunter les commandes réellement nécessaires au passage.
+
+### Deux tenues produites et raccordées
+
+**Vasquez BDU, Aliens (1986).** Le treillis sans manches est une tenue distincte du preset de smartgunner historique. Les références examinées sont la [fiche du fabricant sous licence NECA](https://store.necaonline.com/products/aliens-series-12-vasquez-7-inch-scale-action-figure-bdus) et ses vues de face et de côté. Le nouveau kit comporte le treillis, les bras nus, les mitaines et les bottes noires. Le bandeau rouge réutilise sa véritable pièce V129 et son identifiant de catalogue, sans la redéclarer. La sangle diagonale et son étui, visibles sur la photo BDU, appartiennent aux pixels du vêtement ; le kit n’ajoute ni harnais de smartgunner ni arme à l’équipement.
+
+**Rain, Alien: Romulus (2024).** Les choix de matière et de couleur viennent de l’[entretien du costumier Carlos Rosario avec la MPA](https://www.motionpictures.org/2024/09/designed-to-shred-how-alien-romulus-costume-designer-carlos-rosario-stylized-horror/), des [photos du rack et des chaussures fournies par le costumier à CAFTCAD](https://www.caftcad.com/alien-romulus), et du [pantalon de la figurine sous licence Hot Toys/Sideshow](https://www.sideshow.com/collectibles/alien-rain-carradine-hot-toys-914037). Le kit adapte la veste matelassée rouge sombre en coton ciré, le T-shirt gris-vert, le pantalon gris foncé et les chaussures blanc cassé avec détails rouges. Les photos de référence servent à la comparaison ; elles ne sont pas redistribuées comme sprites du jeu.
+
+Les quatre PNG sont générés avec l’outil d’image intégré, puis copiés intacts dans `assets/openai/sprites/player/costume-parts-v165/{vasquez-bdu,rain-jacket}/{upper,legs}.png`. Les prompts effectifs, références, itérations retenues et refusées, dimensions et empreintes sont consignés dans le bloc `followupFidelity20261029` du JSON de suivi. Aucune retouche de pixels par script n’est appliquée aux fichiers de production.
+
+Chaque haut dispose de trois poses pour chaque sens : debout, penché et compact. Les coordonnées source des torses gauches sont mesurées pour utiliser la transformation triangulaire existante sans retourner les inscriptions. Rain possède aussi deux chaussures gauches et deux droites dans sa planche de jambes. Le constructeur partagé choisit une définition `partsLeft` complète quand elle existe et tient compte du `sourceFacing` des pièces. Une variante gauche présente mais invalide reste refusée ; elle ne revient pas discrètement aux chaussures droites. Les calculs des ensembles historiques sans variante restent identiques, y compris les appuis et les zéros signés, sur 672 couches comparées.
+
+Le raccordement utilise les registres, les six emplacements cosmétiques, les transactions de sauvegarde, la personnalisation et les résolveurs déjà actifs en mission, dans le hub et dans l’aperçu. Les admissions énumèrent précisément les quatre nouveaux chemins. Les armes proviennent toujours de l’équipement choisi. Les planches complètes de référence restent exclues du rendu jouable.
+
+### Le contrôle visuel corrige ce que les seuls descripteurs laissaient passer
+
+Les premiers essais de composition native avec les vrais PNG ont montré des emmanchures trop grandes : les bras s’attachaient correctement au squelette, mais laissaient voir le fond dans l’épaule, notamment en visée et sur une échelle. Les six ouvertures de chaque nouveau haut ont été réduites par génération ciblée, puis les attaches ont été recalées sur les ouvertures réellement mesurées. Les douze attaches d’épaule `near` sont placées au centre transparent mesuré de leur emmanchure. Les points `far` et `waist` ainsi que les pivots des bras restent transférés du gabarit V126/V128 sur les nouvelles silhouettes ; aucun déplacement expérimental des biceps ni élargissement des bras n’est retenu.
+
+Le premier haut de Rain avait également six cols opaques ; il a été refusé avant admission, puis régénéré avec de véritables ouvertures transparentes. La première version des chaussures n’avait qu’un seul sens, et une itération suivante avait retourné leur marquage dans l’image : la version retenue distingue les deux sens et corrige cet ordre. Le contrôle numérique du déterminant affine vérifie le sens de la transformation, pas à lui seul la forme des lettres dessinées.
+
+Le candidat final est dessiné avec les véritables fonctions de production et 13 PNG réels décodés par Canvas/Skia, dont les quatre nouveaux atlas et neuf dépendances historiques. Les deux tenues couvrent 14 modes dans les deux directions : 56 poses fixes, 112 tuiles sur deux fonds et 8 planches contacts. Un échantillonnage numérique ajoute 112 poses de phase, soit 168 compositions natives au total ; il ne s’agit pas de 168 parcours. Les 59 fichiers source transitifs sont épinglés et restent stables pendant le rendu. Aucun fallback, découpage par bord de scène ou échec de préparation alpha n’est observé. La revue des contacts par les assistants accepte les raccords techniques, avec des coutures circulaires plus épaisses que sur les références. L’échantillonnage au pixel le plus proche conserve au maximum 5,52 % de points source clairs dans les petites emmanchures de Vasquez et 5,80 % pour Rain, essentiellement au bord ; ces nombres ne mesurent pas une erreur visuelle globale. Cette preuve porte sur des poses de présentation hors écran ; aucun parcours Chromium de mission ou du hub n’est revendiqué.
+
+### Jun : traverser le conduit et ouvrir le bon dialogue
+
+Le blocage signalé à la fin de la quatrième application est reproduit. Le conduit du palier commence à x888 ; le joueur debout, large de 44 pixels, s’arrête à x844 alors que le pilote attend x892. Jun reste derrière lui à x788. Le nouveau helper maintient la commande native `KeyC` pendant l’observation et le dégagement, revient au sas hors du conduit, relâche la touche dans un `finally`, puis exige un joueur debout, au sol et entièrement sorti de la zone. La marche, le suivi et leurs délais sont inchangés ; une véritable cloison conserve l’échec attendu.
+
+Le pilote atteignait ensuite le service mais sélectionnait l’inspection sanitaire à la place de Jun. Il approche désormais le vrai corps du locuteur depuis sa droite à 84 pixels, hors de la marge de priorité de la station. Les gardes de singleton visible, d’identité, de prompt et de compteur d’interaction restent nécessaires avant et après E. La sélection et l’ouverture partagent toujours leur budget de 45 secondes.
+
+La suite interdeck passe 29/29, dont trois nouveaux tests. Deux régressions sélectionnées échouent sur l’ancien QA. Un rejeu distinct extrait les fonctions Python finales par AST, puis exécute le trajet natif complet avec sauvegarde/rechargement exact dans la cabine fermée, déplacement par ascenseur et échelles, dialogue réel, occupation de l’arrivée et retour. À 398,548 secondes simulées, Jun est revenu à x3158/y532 dans `life-support`, avec deux ascenseurs, deux franchissements et 496 pixels verticaux. Le joueur est debout à x833,567/y284, entièrement hors du conduit, sans touche maintenue. Les doubles DOM, images, RAF, horloge et stockage sont déclarés ; ce rejeu n’est pas une recette Chromium.
+
+### Vérifications et suivi courant
+
+| Périmètre exécuté | Résultat | Portée |
+| --- | ---: | --- |
+| Costumes et admissions PNG | 24/24 | Suite complète, six nouveaux cas |
+| Apparence et sauvegarde | 29/29 | Suite complète |
+| Transit, aperçu, incapacité et locomotion | 50/50 | Quatre suites complètes |
+| Interdeck et Jun | 29/29 | Suite complète, trois nouveaux cas |
+| Audit V143 et politique de release | 71/71 | Cas paramétrés compris |
+| Succession et classeur | 31 cas distincts | V165 6/6, V162 11/11, V163 14/14 sélectionnés sur 16 |
+
+Le total dédupliqué est de 234 cas réussis, dont neuf nouveaux. Les deux contrôles V163 d’inventaires PNG historiques inchangés ne sont pas exécutés ; aucune réussite de la suite complète V163 n’est annoncée. Les réexécutions ciblées et les deux échecs attendus de l’ancien QA Jun ne sont pas ajoutés au total. Les doublures nécessaires aux tests Node sont distinctes des vrais PNG employés dans le rendu Canvas. Les erreurs locales de sous-processus Python et les copies historiques absentes ont été résolues avant les réussites retenues ; le reçu documentaire conserve le passage groupé de 30 cas et le rattrapage exact du dernier cas, sans fabriquer un journal unique.
+
+Les seules empreintes runtime modifiées sont celles du registre de tenues, des pièces et du constructeur de jambes partagé. Les empreintes courantes des vérificateurs concernés sont actualisées ; celle du vérificateur de transit est ajoutée, portant le total à 60. La succession déclare explicitement ce constructeur auparavant inchangé. Les ancres V162/V164, les 17 classeurs historiques, les champs de clôture artistique, les reçus de release non obtenus et la maintenance Forge initiale restent intacts.
+
+Le classeur courant est reconstruit avec le générateur versionné : 27 feuilles, 26 tables, 10 358 cellules source, 32 formules et zéro erreur. Une seconde reconstruction donne les mêmes octets (SHA-256 `95848cb8a1ab14aed101a4f66d99bc2fb3321ee74482bd83540afa265586e61b`). Les 27 notices restent présentes. La nouvelle ligne de succession du constructeur de jambes explique les cinq cellules supplémentaires ; les textes du chantier costumes et les empreintes courantes changent sans réécrire les feuilles historiques. Le bloc de provenance ajouté au JSON est purement documentaire et ne change pas les octets du classeur.
+
+### Ce qui reste ouvert pour une fidélité 1:1
+
+Le catalogue actif comporte **31 références, dont 13 équipables** après ces ajouts : le Nostromo historique, dix créations modulaires et deux liaisons aux presets V129. Le chantier V165 porte sur les 30 références hors Nostromo ; son compteur passe donc de dix à douze équipables et de vingt à dix-huit ouvertes. Les 21 PNG de pièces sont distincts des 15 planches de référence et de leurs 240 cellules.
+
+Les **18 tenues encore sans visuel joueur équipable** sont : les deux combinaisons de compression Nostromo ; Ripley et les détenus de Fury 161 ; Ripley 8 et l’équipage du Betty ; l’expédition Prometheus et David 8 ; l’expédition Covenant et Walter ; Rain en combinaison spatiale, la récupération contaminée de Romulus, Andy et Navarro ; le Specialist et l’APE Mk.3 de Fireteam ; le marine et le technicien de Lethe. Le suivi contient leurs identifiants exacts et l’état de leurs références. Douze entrées du catalogue complet, dont trois déjà adaptées, attendent encore une source primaire explicitement associée dans leur fiche.
+
+L’inventaire des demandes ennemies conserve également 14 lignes sans dossier relié parmi 84 lignes regroupées par œuvre ; ce ne sont pas quatorze espèces certifiées manquantes. Leurs identifiants sont conservés dans le même bloc de suivi et ne sont pas remplacés par des silhouettes génériques.
+
+Les nouvelles tenues habillent toujours l’opérateur Echo9. Elles ne remplacent pas son visage, sa morphologie ou ses mouvements par ceux de Vasquez ou de Rain. Le patch latéral de Vasquez, l’inscription dorsale non représentée et l’exactitude typographique des petits marquages demandent encore une revue dédiée. Les bordures des emmanchures sont désormais plus rondes et plus épaisses que sur les références ; ce compromis de raccordement reste un écart artistique à revoir. Aucun des 31 costumes n’est déclaré `exact:true`. Les vérifications de transparence, d’assemblage et d’orientation constituent des preuves techniques précises ; elles ne ferment pas ces écarts artistiques.
+
+La CI Chromium et la release doivent fournir leurs propres résultats sur la nouvelle tête. Les succès du parent ou d’anciens lots ne leur sont pas transférés.
+
+
+## 10. Entretien de cette adaptation
 
 Conserver un ensemble réduit de références utiles. Ajouter une discipline complémentaire quand une tâche le demande, après lecture du guide correspondant. Pour les problèmes propres à Tantalus, les interfaces du dépôt, les références franchise et les résultats observés restent déterminants.
 

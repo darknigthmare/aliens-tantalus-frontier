@@ -200,9 +200,12 @@ def reference_fixtures(page,slug):
  rows=page.evaluate('''async slug=>{
   const {getPlayerCostumePreviewSkinV165}=await import('/src/player-costume-atlases-v165.js');
   const {PLAYER_COSTUME_PARTS_V165}=await import('/src/player-costume-parts-v165.js');
-  const {PLAYER_COLONIAL_RIG_ASSETS_V129}=await import('/src/player-colonial-art-v129.js');
+  const {getCostumeOutfitV165}=await import('/src/player-costume-outfits-v165.js');
+  const {PLAYER_COLONIAL_RIG_ASSETS_V129,getPlayerColonialHelmetV129}=await import('/src/player-colonial-art-v129.js');
   const skin=getPlayerCostumePreviewSkinV165('franchise-'+slug),kit=PLAYER_COSTUME_PARTS_V165[slug];
-  const sources=kit?[...(skin?.atlases||[]),kit.upperAsset,kit.legAsset,...Object.values(kit.helmet||{}).map(row=>row.asset)]:PLAYER_COLONIAL_RIG_ASSETS_V129;
+  const helmetId=getCostumeOutfitV165('franchise-'+slug)?.slots.helmet;
+  const inheritedHelmets=[-1,1].map(facing=>getPlayerColonialHelmetV129(helmetId,facing)?.asset).filter(Boolean);
+  const sources=kit?[...(skin?.atlases||[]),kit.upperAsset,kit.legAsset,...Object.values(kit.helmet||{}).map(row=>row.asset),...inheritedHelmets]:PLAYER_COLONIAL_RIG_ASSETS_V129;
   const unique=new Map(sources.map(a=>[a.path,a]));
   const result=[];
   for(const asset of unique.values()){
@@ -222,7 +225,7 @@ def reference_fixtures(page,slug):
  for row in rows:
   png=row.pop('png');kind=row['kind'].replace('costume-','').replace('-parts','')
   save_png(slug+'-'+kind+'-'+row['background']+'-source-fixture.png',png,'source-composition-fixture',row)
- expected=16 if slug=='sevastopol-security' else 14 if slug in ['amanda-working','working-joe-uniform'] else 10 if slug in ['hicks-combat','hudson-combat'] else 4
+ expected=16 if slug=='sevastopol-security' else 14 if slug in ['amanda-working','working-joe-uniform'] else 10 if slug in ['hicks-combat','hudson-combat'] else 6 if slug=='vasquez-bdu' else 4
  check(slug+': declared source art keeps exact served bytes on light/dark fixtures',len(rows)==expected)
 
 

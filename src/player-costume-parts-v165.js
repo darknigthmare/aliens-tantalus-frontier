@@ -4946,6 +4946,1739 @@ export const PLAYER_COSTUME_PARTS_V165=freeze({
         }
       }
     }
+  },
+  "vasquez-bdu": {
+    "slug": "vasquez-bdu",
+    "upperAsset": {
+      "id": "player.echo9.costume-parts-v165.vasquez-bdu.upper",
+      "kind": "costume-upper-parts",
+      "rigType": "echo9",
+      "imageKey": "playerCostumePartsV165:vasquez-bdu:upper",
+      "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/upper.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "0f45d9f546ce08c2d31762a0305b5068779de95433a9d023c1341b32799b7c0c",
+      "sourceFacing": 1,
+      "exact": false,
+      "visualStatus": "adapted-separated-outfit-parts",
+      "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+      "pixelEditsAfterGeneration": false
+    },
+    "legAsset": {
+      "id": "player.echo9.costume-parts-v165.vasquez-bdu.legs",
+      "kind": "costume-legs-parts",
+      "rigType": "echo9",
+      "imageKey": "playerCostumePartsV165:vasquez-bdu:legs",
+      "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/legs.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "ce9f840174e8e762af26483cc25a0898cf2315cac8402d77ab41c976374f95c5",
+      "sourceFacing": 1,
+      "exact": false,
+      "visualStatus": "adapted-separated-outfit-parts",
+      "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+      "pixelEditsAfterGeneration": false
+    },
+    "torso": {
+      "upright": {
+        "alphaBounds": [
+          994,
+          54,
+          1222,
+          333
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 228,
+        "source": {
+          "x": 991,
+          "y": 51,
+          "width": 234,
+          "height": 285
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review",
+        "joints": {
+          "near": {
+            "x": 1031,
+            "y": 165
+          },
+          "far": {
+            "x": 1184.175,
+            "y": 151.376
+          },
+          "waist": {
+            "x": 1124.285,
+            "y": 293.612
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 1137,
+            "y": 98
+          },
+          "arm": {
+            "x": 1031,
+            "y": 165
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 52,
+          "armPixels": 1108,
+          "maxAlpha": 16
+        },
+        "sourceFacing": 1
+      },
+      "forward": {
+        "alphaBounds": [
+          69,
+          376,
+          304,
+          643
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 235,
+        "source": {
+          "x": 66,
+          "y": 373,
+          "width": 241,
+          "height": 273
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review",
+        "joints": {
+          "near": {
+            "x": 104,
+            "y": 476
+          },
+          "far": {
+            "x": 277.143,
+            "y": 462.537
+          },
+          "waist": {
+            "x": 183.143,
+            "y": 605.008
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 221,
+            "y": 420
+          },
+          "arm": {
+            "x": 104,
+            "y": 476
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 105,
+          "armPixels": 1172,
+          "maxAlpha": 16
+        },
+        "sourceFacing": 1
+      },
+      "compact": {
+        "alphaBounds": [
+          361,
+          400,
+          628,
+          655
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 267,
+        "source": {
+          "x": 358,
+          "y": 397,
+          "width": 273,
+          "height": 261
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review",
+        "joints": {
+          "near": {
+            "x": 435,
+            "y": 505
+          },
+          "far": {
+            "x": 586.39,
+            "y": 489.682
+          },
+          "waist": {
+            "x": 484.675,
+            "y": 620.424
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 564,
+            "y": 452
+          },
+          "arm": {
+            "x": 435,
+            "y": 505
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 91,
+          "armPixels": 1403,
+          "maxAlpha": 16
+        },
+        "sourceFacing": 1
+      }
+    },
+    "torsoLeft": {
+      "upright": {
+        "alphaBounds": [
+          35,
+          54,
+          261,
+          333
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 226,
+        "source": {
+          "x": 32,
+          "y": 51,
+          "width": 232,
+          "height": 285
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally",
+        "joints": {
+          "near": {
+            "x": 225,
+            "y": 163
+          },
+          "far": {
+            "x": 72.493,
+            "y": 151.376
+          },
+          "waist": {
+            "x": 131.857,
+            "y": 293.612
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 118,
+            "y": 97
+          },
+          "arm": {
+            "x": 225,
+            "y": 163
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 138,
+          "armPixels": 1084,
+          "maxAlpha": 16
+        },
+        "sourceFacing": -1
+      },
+      "forward": {
+        "alphaBounds": [
+          339,
+          57,
+          570,
+          334
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 231,
+        "source": {
+          "x": 336,
+          "y": 54,
+          "width": 237,
+          "height": 283
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally",
+        "joints": {
+          "near": {
+            "x": 532,
+            "y": 166
+          },
+          "far": {
+            "x": 365.4,
+            "y": 146.779
+          },
+          "waist": {
+            "x": 457.8,
+            "y": 294.585
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 421,
+            "y": 100
+          },
+          "arm": {
+            "x": 532,
+            "y": 166
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 136,
+          "armPixels": 1110,
+          "maxAlpha": 16
+        },
+        "sourceFacing": -1
+      },
+      "compact": {
+        "alphaBounds": [
+          656,
+          107,
+          921,
+          352
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 265,
+        "source": {
+          "x": 653,
+          "y": 104,
+          "width": 271,
+          "height": 251
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally",
+        "joints": {
+          "near": {
+            "x": 852,
+            "y": 212
+          },
+          "far": {
+            "x": 697.298,
+            "y": 193.166
+          },
+          "waist": {
+            "x": 798.251,
+            "y": 318.78
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 734,
+            "y": 150
+          },
+          "arm": {
+            "x": 852,
+            "y": 212
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 104,
+          "armPixels": 1124,
+          "maxAlpha": 16
+        },
+        "sourceFacing": -1
+      }
+    },
+    "arms": {
+      "near": {
+        "upper": {
+          "alphaBounds": [
+            723,
+            372,
+            870,
+            668
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 147,
+          "source": {
+            "x": 720,
+            "y": 369,
+            "width": 153,
+            "height": 302
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 794.891,
+            "y": 405.003
+          },
+          "distal": {
+            "x": 795.964,
+            "y": 614.369
+          }
+        },
+        "fore": {
+          "alphaBounds": [
+            1041,
+            381,
+            1204,
+            674
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 163,
+          "source": {
+            "x": 1038,
+            "y": 378,
+            "width": 169,
+            "height": 299
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 1112.912,
+            "y": 431.67
+          },
+          "distal": {
+            "x": 1157.258,
+            "y": 628.838
+          }
+        },
+        "grip": {
+          "alphaBounds": [
+            92,
+            722,
+            276,
+            942
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 184,
+          "source": {
+            "x": 89,
+            "y": 719,
+            "width": 190,
+            "height": 226
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 162.15,
+            "y": 751.464
+          },
+          "distal": {
+            "x": 186.3,
+            "y": 859.5
+          }
+        },
+        "service": {
+          "alphaBounds": [
+            370,
+            721,
+            572,
+            960
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 202,
+          "source": {
+            "x": 367,
+            "y": 718,
+            "width": 208,
+            "height": 245
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 464.995,
+            "y": 753.0
+          },
+          "distal": {
+            "x": 466.086,
+            "y": 876.0
+          }
+        }
+      },
+      "far": {
+        "upper": {
+          "alphaBounds": [
+            723,
+            692,
+            884,
+            979
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 161,
+          "source": {
+            "x": 720,
+            "y": 689,
+            "width": 167,
+            "height": 293
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 809.364,
+            "y": 723.438
+          },
+          "distal": {
+            "x": 788.039,
+            "y": 932.35
+          }
+        },
+        "fore": {
+          "alphaBounds": [
+            1043,
+            710,
+            1193,
+            979
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 150,
+          "source": {
+            "x": 1040,
+            "y": 707,
+            "width": 156,
+            "height": 275
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 1127.587,
+            "y": 751.705
+          },
+          "distal": {
+            "x": 1105.03,
+            "y": 940.422
+          }
+        },
+        "grip": {
+          "alphaBounds": [
+            76,
+            1005,
+            253,
+            1207
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 177,
+          "source": {
+            "x": 73,
+            "y": 1002,
+            "width": 183,
+            "height": 208
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 187.321,
+            "y": 1034.706
+          },
+          "distal": {
+            "x": 157.264,
+            "y": 1145.608
+          }
+        },
+        "service": {
+          "alphaBounds": [
+            377,
+            1005,
+            582,
+            1230
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 205,
+          "source": {
+            "x": 374,
+            "y": 1002,
+            "width": 211,
+            "height": 231
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 494.816,
+            "y": 1035.208
+          },
+          "distal": {
+            "x": 484.213,
+            "y": 1162.292
+          }
+        }
+      }
+    },
+    "legs": {
+      "pelvis": {
+        "alphaBounds": [
+          52,
+          698,
+          343,
+          885
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 291,
+        "source": {
+          "x": 49,
+          "y": 695,
+          "width": 297,
+          "height": 193
+        },
+        "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+        "waist": {
+          "x": 197.5,
+          "y": 778.667
+        },
+        "near": {
+          "x": 115.656,
+          "y": 843.445
+        },
+        "far": {
+          "x": 297.531,
+          "y": 839.778
+        },
+        "belt": {
+          "x": 197.5,
+          "y": 740.778
+        }
+      },
+      "near": {
+        "upper": {
+          "alphaBounds": [
+            419,
+            656,
+            640,
+            924
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 221,
+          "source": {
+            "x": 416,
+            "y": 653,
+            "width": 227,
+            "height": 274
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 520.18,
+            "y": 699.431
+          },
+          "distal": {
+            "x": 554.795,
+            "y": 890.103
+          }
+        },
+        "lower": {
+          "alphaBounds": [
+            743,
+            656,
+            881,
+            920
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 138,
+          "source": {
+            "x": 740,
+            "y": 653,
+            "width": 144,
+            "height": 270
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 816.74,
+            "y": 707.951
+          },
+          "distal": {
+            "x": 809.366,
+            "y": 891.374
+          }
+        },
+        "boot": {
+          "alphaBounds": [
+            1017,
+            806,
+            1229,
+            943
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 212,
+          "source": {
+            "x": 1014,
+            "y": 803,
+            "width": 218,
+            "height": 143
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "ankle": {
+            "x": 1079.497,
+            "y": 883.062
+          },
+          "proximal": {
+            "x": 1079.497,
+            "y": 883.062
+          },
+          "sole": {
+            "x": 1150,
+            "y": 942
+          },
+          "distal": {
+            "x": 1150,
+            "y": 942
+          },
+          "heel": {
+            "x": 1040.283,
+            "y": 930.632
+          },
+          "toe": {
+            "x": 1208.168,
+            "y": 930.632
+          },
+          "supportMethod": "opaque sole support at measured alpha>=128 bottom edge; anatomical ankle/heel/toe from normalized V128 template",
+          "sourceFacing": 1
+        }
+      },
+      "far": {
+        "upper": {
+          "alphaBounds": [
+            97,
+            951,
+            370,
+            1206
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 273,
+          "source": {
+            "x": 94,
+            "y": 948,
+            "width": 279,
+            "height": 261
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 198.845,
+            "y": 997.946
+          },
+          "distal": {
+            "x": 283.715,
+            "y": 1176.126
+          }
+        },
+        "lower": {
+          "alphaBounds": [
+            445,
+            947,
+            619,
+            1211
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 174,
+          "source": {
+            "x": 442,
+            "y": 944,
+            "width": 180,
+            "height": 270
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 537.272,
+            "y": 1000.658
+          },
+          "distal": {
+            "x": 518.818,
+            "y": 1182.025
+          }
+        },
+        "boot": {
+          "alphaBounds": [
+            751,
+            1056,
+            966,
+            1219
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 215,
+          "source": {
+            "x": 748,
+            "y": 1053,
+            "width": 221,
+            "height": 169
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "ankle": {
+            "x": 810.185,
+            "y": 1145.768
+          },
+          "proximal": {
+            "x": 810.185,
+            "y": 1145.768
+          },
+          "sole": {
+            "x": 890,
+            "y": 1218
+          },
+          "distal": {
+            "x": 890,
+            "y": 1218
+          },
+          "heel": {
+            "x": 773.949,
+            "y": 1202.464
+          },
+          "toe": {
+            "x": 945.466,
+            "y": 1202.464
+          },
+          "supportMethod": "opaque sole support at measured alpha>=128 bottom edge; anatomical ankle/heel/toe from normalized V128 template",
+          "sourceFacing": 1
+        }
+      }
+    }
+  },
+  "rain-jacket": {
+    "slug": "rain-jacket",
+    "upperAsset": {
+      "id": "player.echo9.costume-parts-v165.rain-jacket.upper",
+      "kind": "costume-upper-parts",
+      "rigType": "echo9",
+      "imageKey": "playerCostumePartsV165:rain-jacket:upper",
+      "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/upper.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "93f92c17ff52b6c2756dfe94b00af1229c208334354d8a0c7480bf6629e2c0c6",
+      "sourceFacing": 1,
+      "exact": false,
+      "visualStatus": "adapted-separated-outfit-parts",
+      "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+      "pixelEditsAfterGeneration": false
+    },
+    "legAsset": {
+      "id": "player.echo9.costume-parts-v165.rain-jacket.legs",
+      "kind": "costume-legs-parts",
+      "rigType": "echo9",
+      "imageKey": "playerCostumePartsV165:rain-jacket:legs",
+      "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/legs.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "width": 1254,
+      "height": 1254,
+      "sha256": "0d9c1fa27a65bdd92bdd0437bd28ffc7bdf395654612059d45ca55c8ef8acb24",
+      "sourceFacing": 1,
+      "exact": false,
+      "visualStatus": "adapted-separated-outfit-parts",
+      "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+      "pixelEditsAfterGeneration": false
+    },
+    "torso": {
+      "upright": {
+        "alphaBounds": [
+          974,
+          33,
+          1228,
+          348
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 254,
+        "source": {
+          "x": 971,
+          "y": 30,
+          "width": 260,
+          "height": 321
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review",
+        "joints": {
+          "near": {
+            "x": 1026,
+            "y": 154
+          },
+          "far": {
+            "x": 1185.862,
+            "y": 142.941
+          },
+          "waist": {
+            "x": 1119.143,
+            "y": 303.53
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 1136,
+            "y": 97
+          },
+          "arm": {
+            "x": 1026,
+            "y": 154
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 376,
+          "armPixels": 1583,
+          "maxAlpha": 16
+        },
+        "sourceFacing": 1
+      },
+      "forward": {
+        "alphaBounds": [
+          50,
+          376,
+          308,
+          673
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 258,
+        "source": {
+          "x": 47,
+          "y": 373,
+          "width": 264,
+          "height": 303
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review",
+        "joints": {
+          "near": {
+            "x": 111,
+            "y": 478
+          },
+          "far": {
+            "x": 278.515,
+            "y": 472.261
+          },
+          "waist": {
+            "x": 175.315,
+            "y": 630.739
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 234,
+            "y": 443
+          },
+          "arm": {
+            "x": 111,
+            "y": 478
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 522,
+          "armPixels": 1603,
+          "maxAlpha": 16
+        },
+        "sourceFacing": 1
+      },
+      "compact": {
+        "alphaBounds": [
+          349,
+          401,
+          645,
+          671
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 296,
+        "source": {
+          "x": 346,
+          "y": 398,
+          "width": 302,
+          "height": 276
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review",
+        "joints": {
+          "near": {
+            "x": 447,
+            "y": 498
+          },
+          "far": {
+            "x": 598.871,
+            "y": 495.958
+          },
+          "waist": {
+            "x": 486.108,
+            "y": 634.39
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 570,
+            "y": 480
+          },
+          "arm": {
+            "x": 447,
+            "y": 498
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 712,
+          "armPixels": 1713,
+          "maxAlpha": 16
+        },
+        "sourceFacing": 1
+      }
+    },
+    "torsoLeft": {
+      "upright": {
+        "alphaBounds": [
+          32,
+          32,
+          283,
+          349
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 251,
+        "source": {
+          "x": 29,
+          "y": 29,
+          "width": 257,
+          "height": 323
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally",
+        "joints": {
+          "near": {
+            "x": 226,
+            "y": 153
+          },
+          "far": {
+            "x": 73.64,
+            "y": 142.639
+          },
+          "waist": {
+            "x": 139.572,
+            "y": 304.247
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 114,
+            "y": 99
+          },
+          "arm": {
+            "x": 226,
+            "y": 153
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 441,
+          "armPixels": 1591,
+          "maxAlpha": 16
+        },
+        "sourceFacing": -1
+      },
+      "forward": {
+        "alphaBounds": [
+          341,
+          39,
+          610,
+          351
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 269,
+        "source": {
+          "x": 338,
+          "y": 36,
+          "width": 275,
+          "height": 318
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally",
+        "joints": {
+          "near": {
+            "x": 541,
+            "y": 152
+          },
+          "far": {
+            "x": 371.743,
+            "y": 140.122
+          },
+          "waist": {
+            "x": 479.343,
+            "y": 306.605
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 415,
+            "y": 107
+          },
+          "arm": {
+            "x": 541,
+            "y": 152
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 617,
+          "armPixels": 1607,
+          "maxAlpha": 16
+        },
+        "sourceFacing": -1
+      },
+      "compact": {
+        "alphaBounds": [
+          649,
+          97,
+          937,
+          351
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 288,
+        "source": {
+          "x": 646,
+          "y": 94,
+          "width": 294,
+          "height": 260
+        },
+        "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally",
+        "joints": {
+          "near": {
+            "x": 855,
+            "y": 196
+          },
+          "far": {
+            "x": 693.883,
+            "y": 186.331
+          },
+          "waist": {
+            "x": 803.597,
+            "y": 316.56
+          }
+        },
+        "apertures": {
+          "neck": {
+            "x": 730,
+            "y": 166
+          },
+          "arm": {
+            "x": 855,
+            "y": 196
+          }
+        },
+        "apertureMeasurements": {
+          "neckPixels": 638,
+          "armPixels": 1569,
+          "maxAlpha": 16
+        },
+        "sourceFacing": -1
+      }
+    },
+    "arms": {
+      "near": {
+        "upper": {
+          "alphaBounds": [
+            725,
+            377,
+            878,
+            681
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 153,
+          "source": {
+            "x": 722,
+            "y": 374,
+            "width": 159,
+            "height": 310
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 799.825,
+            "y": 410.895
+          },
+          "distal": {
+            "x": 800.942,
+            "y": 625.92
+          }
+        },
+        "fore": {
+          "alphaBounds": [
+            1043,
+            378,
+            1213,
+            687
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 170,
+          "source": {
+            "x": 1040,
+            "y": 375,
+            "width": 176,
+            "height": 315
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 1118.0,
+            "y": 431.437
+          },
+          "distal": {
+            "x": 1164.25,
+            "y": 639.372
+          }
+        },
+        "grip": {
+          "alphaBounds": [
+            93,
+            711,
+            266,
+            943
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 173,
+          "source": {
+            "x": 90,
+            "y": 708,
+            "width": 179,
+            "height": 238
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 158.956,
+            "y": 742.072
+          },
+          "distal": {
+            "x": 181.663,
+            "y": 856.0
+          }
+        },
+        "service": {
+          "alphaBounds": [
+            376,
+            711,
+            566,
+            959
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 190,
+          "source": {
+            "x": 373,
+            "y": 708,
+            "width": 196,
+            "height": 254
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 465.351,
+            "y": 744.205
+          },
+          "distal": {
+            "x": 466.378,
+            "y": 871.837
+          }
+        }
+      },
+      "far": {
+        "upper": {
+          "alphaBounds": [
+            728,
+            696,
+            896,
+            976
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 168,
+          "source": {
+            "x": 725,
+            "y": 693,
+            "width": 174,
+            "height": 286
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 818.119,
+            "y": 726.671
+          },
+          "distal": {
+            "x": 795.867,
+            "y": 930.488
+          }
+        },
+        "fore": {
+          "alphaBounds": [
+            1049,
+            706,
+            1195,
+            976
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 146,
+          "source": {
+            "x": 1046,
+            "y": 703,
+            "width": 152,
+            "height": 276
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 1131.331,
+            "y": 747.86
+          },
+          "distal": {
+            "x": 1109.376,
+            "y": 937.279
+          }
+        },
+        "grip": {
+          "alphaBounds": [
+            79,
+            995,
+            254,
+            1207
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 175,
+          "source": {
+            "x": 76,
+            "y": 992,
+            "width": 181,
+            "height": 218
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 189.063,
+            "y": 1026.176
+          },
+          "distal": {
+            "x": 159.345,
+            "y": 1142.568
+          }
+        },
+        "service": {
+          "alphaBounds": [
+            381,
+            996,
+            580,
+            1233
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 199,
+          "source": {
+            "x": 378,
+            "y": 993,
+            "width": 205,
+            "height": 243
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 495.368,
+            "y": 1027.819
+          },
+          "distal": {
+            "x": 485.075,
+            "y": 1161.681
+          }
+        }
+      }
+    },
+    "legs": {
+      "pelvis": {
+        "alphaBounds": [
+          44,
+          709,
+          350,
+          911
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 306,
+        "source": {
+          "x": 41,
+          "y": 706,
+          "width": 312,
+          "height": 208
+        },
+        "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+        "waist": {
+          "x": 197.0,
+          "y": 796.137
+        },
+        "near": {
+          "x": 110.937,
+          "y": 866.112
+        },
+        "far": {
+          "x": 302.187,
+          "y": 862.15
+        },
+        "belt": {
+          "x": 197.0,
+          "y": 755.209
+        }
+      },
+      "near": {
+        "upper": {
+          "alphaBounds": [
+            416,
+            664,
+            642,
+            950
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 226,
+          "source": {
+            "x": 413,
+            "y": 661,
+            "width": 232,
+            "height": 292
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 519.47,
+            "y": 710.348
+          },
+          "distal": {
+            "x": 554.867,
+            "y": 913.826
+          }
+        },
+        "lower": {
+          "alphaBounds": [
+            734,
+            668,
+            879,
+            950
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 145,
+          "source": {
+            "x": 731,
+            "y": 665,
+            "width": 151,
+            "height": 288
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 811.481,
+            "y": 723.493
+          },
+          "distal": {
+            "x": 803.733,
+            "y": 919.422
+          }
+        },
+        "boot": {
+          "alphaBounds": [
+            999,
+            821,
+            1229,
+            971
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 230,
+          "source": {
+            "x": 996,
+            "y": 818,
+            "width": 236,
+            "height": 156
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "ankle": {
+            "x": 1066.804,
+            "y": 905.375
+          },
+          "proximal": {
+            "x": 1066.804,
+            "y": 905.375
+          },
+          "sole": {
+            "x": 1143,
+            "y": 970
+          },
+          "distal": {
+            "x": 1143,
+            "y": 970
+          },
+          "heel": {
+            "x": 1024.26,
+            "y": 957.458
+          },
+          "toe": {
+            "x": 1206.399,
+            "y": 957.458
+          },
+          "supportMethod": "opaque sole support at measured alpha>=128 bottom edge; anatomical ankle/heel/toe from normalized V128 template",
+          "sourceFacing": 1
+        }
+      },
+      "far": {
+        "upper": {
+          "alphaBounds": [
+            82,
+            958,
+            371,
+            1226
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 289,
+          "source": {
+            "x": 79,
+            "y": 955,
+            "width": 295,
+            "height": 274
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 189.814,
+            "y": 1007.339
+          },
+          "distal": {
+            "x": 279.658,
+            "y": 1194.603
+          }
+        },
+        "lower": {
+          "alphaBounds": [
+            431,
+            957,
+            621,
+            1237
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 190,
+          "source": {
+            "x": 428,
+            "y": 954,
+            "width": 196,
+            "height": 286
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 531.757,
+            "y": 1013.911
+          },
+          "distal": {
+            "x": 511.606,
+            "y": 1206.268
+          }
+        },
+        "boot": {
+          "alphaBounds": [
+            731,
+            1055,
+            986,
+            1238
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 255,
+          "source": {
+            "x": 728,
+            "y": 1052,
+            "width": 261,
+            "height": 189
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "ankle": {
+            "x": 801.196,
+            "y": 1155.782
+          },
+          "proximal": {
+            "x": 801.196,
+            "y": 1155.782
+          },
+          "sole": {
+            "x": 898,
+            "y": 1237
+          },
+          "distal": {
+            "x": 898,
+            "y": 1237
+          },
+          "heel": {
+            "x": 758.219,
+            "y": 1219.435
+          },
+          "toe": {
+            "x": 961.646,
+            "y": 1219.435
+          },
+          "supportMethod": "opaque sole support at measured alpha>=128 bottom edge; anatomical ankle/heel/toe from normalized V128 template",
+          "sourceFacing": 1
+        }
+      }
+    },
+    "legsLeft": {
+      "pelvis": {
+        "alphaBounds": [
+          44,
+          709,
+          350,
+          911
+        ],
+        "alphaBoundsThreshold": 128,
+        "width": 306,
+        "source": {
+          "x": 41,
+          "y": 706,
+          "width": 312,
+          "height": 208
+        },
+        "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+        "waist": {
+          "x": 197.0,
+          "y": 796.137
+        },
+        "near": {
+          "x": 110.937,
+          "y": 866.112
+        },
+        "far": {
+          "x": 302.187,
+          "y": 862.15
+        },
+        "belt": {
+          "x": 197.0,
+          "y": 755.209
+        }
+      },
+      "near": {
+        "upper": {
+          "alphaBounds": [
+            416,
+            664,
+            642,
+            950
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 226,
+          "source": {
+            "x": 413,
+            "y": 661,
+            "width": 232,
+            "height": 292
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 519.47,
+            "y": 710.348
+          },
+          "distal": {
+            "x": 554.867,
+            "y": 913.826
+          }
+        },
+        "lower": {
+          "alphaBounds": [
+            734,
+            668,
+            879,
+            950
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 145,
+          "source": {
+            "x": 731,
+            "y": 665,
+            "width": 151,
+            "height": 288
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 811.481,
+            "y": 723.493
+          },
+          "distal": {
+            "x": 803.733,
+            "y": 919.422
+          }
+        },
+        "boot": {
+          "alphaBounds": [
+            946,
+            199,
+            1218,
+            361
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 272,
+          "source": {
+            "x": 943,
+            "y": 196,
+            "width": 278,
+            "height": 168
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette; native left artwork uses horizontally reflected source landmarks",
+          "ankle": {
+            "x": 1137.815,
+            "y": 290.125
+          },
+          "proximal": {
+            "x": 1137.815,
+            "y": 290.125
+          },
+          "sole": {
+            "x": 1048,
+            "y": 360
+          },
+          "distal": {
+            "x": 1048,
+            "y": 360
+          },
+          "heel": {
+            "x": 1188.127,
+            "y": 346.375
+          },
+          "toe": {
+            "x": 972.728,
+            "y": 346.375
+          },
+          "supportMethod": "opaque sole support at measured alpha>=128 bottom edge; anatomical ankle/heel/toe from normalized V128 template",
+          "sourceFacing": -1
+        }
+      },
+      "far": {
+        "upper": {
+          "alphaBounds": [
+            82,
+            958,
+            371,
+            1226
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 289,
+          "source": {
+            "x": 79,
+            "y": 955,
+            "width": 295,
+            "height": 274
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 189.814,
+            "y": 1007.339
+          },
+          "distal": {
+            "x": 279.658,
+            "y": 1194.603
+          }
+        },
+        "lower": {
+          "alphaBounds": [
+            431,
+            957,
+            621,
+            1237
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 190,
+          "source": {
+            "x": 428,
+            "y": 954,
+            "width": 196,
+            "height": 286
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette",
+          "proximal": {
+            "x": 531.757,
+            "y": 1013.911
+          },
+          "distal": {
+            "x": 511.606,
+            "y": 1206.268
+          }
+        },
+        "boot": {
+          "alphaBounds": [
+            653,
+            494,
+            923,
+            659
+          ],
+          "alphaBoundsThreshold": 128,
+          "width": 270,
+          "source": {
+            "x": 650,
+            "y": 491,
+            "width": 276,
+            "height": 171
+          },
+          "pivotMethod": "corresponding V126/V128 anatomical landmarks normalized inside measured native silhouette; native left artwork uses horizontally reflected source landmarks",
+          "ankle": {
+            "x": 848.675,
+            "y": 584.869
+          },
+          "proximal": {
+            "x": 848.675,
+            "y": 584.869
+          },
+          "sole": {
+            "x": 752,
+            "y": 658
+          },
+          "distal": {
+            "x": 752,
+            "y": 658
+          },
+          "heel": {
+            "x": 894.18,
+            "y": 642.261
+          },
+          "toe": {
+            "x": 678.787,
+            "y": 642.261
+          },
+          "supportMethod": "opaque sole support at measured alpha>=128 bottom edge; anatomical ankle/heel/toe from normalized V128 template",
+          "sourceFacing": -1
+        }
+      }
+    }
   }
 });
 export const PLAYER_COSTUME_PART_ASSETS_V165=freeze([
@@ -5237,11 +6970,86 @@ export const PLAYER_COSTUME_PART_ASSETS_V165=freeze([
     "visualStatus": "adapted-separated-outfit-parts",
     "provenance": "imagegen-adaptation-of-existing-game-clothing-parts",
     "pixelEditsAfterGeneration": false
+  },
+  {
+    "id": "player.echo9.costume-parts-v165.vasquez-bdu.upper",
+    "kind": "costume-upper-parts",
+    "rigType": "echo9",
+    "imageKey": "playerCostumePartsV165:vasquez-bdu:upper",
+    "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/upper.png",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "width": 1254,
+    "height": 1254,
+    "sha256": "0f45d9f546ce08c2d31762a0305b5068779de95433a9d023c1341b32799b7c0c",
+    "sourceFacing": 1,
+    "exact": false,
+    "visualStatus": "adapted-separated-outfit-parts",
+    "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+    "pixelEditsAfterGeneration": false
+  },
+  {
+    "id": "player.echo9.costume-parts-v165.vasquez-bdu.legs",
+    "kind": "costume-legs-parts",
+    "rigType": "echo9",
+    "imageKey": "playerCostumePartsV165:vasquez-bdu:legs",
+    "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/legs.png",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "width": 1254,
+    "height": 1254,
+    "sha256": "ce9f840174e8e762af26483cc25a0898cf2315cac8402d77ab41c976374f95c5",
+    "sourceFacing": 1,
+    "exact": false,
+    "visualStatus": "adapted-separated-outfit-parts",
+    "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+    "pixelEditsAfterGeneration": false
+  },
+  {
+    "id": "player.echo9.costume-parts-v165.rain-jacket.upper",
+    "kind": "costume-upper-parts",
+    "rigType": "echo9",
+    "imageKey": "playerCostumePartsV165:rain-jacket:upper",
+    "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/upper.png",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "width": 1254,
+    "height": 1254,
+    "sha256": "93f92c17ff52b6c2756dfe94b00af1229c208334354d8a0c7480bf6629e2c0c6",
+    "sourceFacing": 1,
+    "exact": false,
+    "visualStatus": "adapted-separated-outfit-parts",
+    "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+    "pixelEditsAfterGeneration": false
+  },
+  {
+    "id": "player.echo9.costume-parts-v165.rain-jacket.legs",
+    "kind": "costume-legs-parts",
+    "rigType": "echo9",
+    "imageKey": "playerCostumePartsV165:rain-jacket:legs",
+    "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/legs.png",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "width": 1254,
+    "height": 1254,
+    "sha256": "0d9c1fa27a65bdd92bdd0437bd28ffc7bdf395654612059d45ca55c8ef8acb24",
+    "sourceFacing": 1,
+    "exact": false,
+    "visualStatus": "adapted-separated-outfit-parts",
+    "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+    "pixelEditsAfterGeneration": false
   }
 ]);
 const torsoById=new Map(Object.values(PLAYER_COSTUME_PARTS_V165).map(kit=>['torso-'+kit.slug+'-v165',kit]));
 const armsById=new Map(Object.values(PLAYER_COSTUME_PARTS_V165).map(kit=>['arms-'+kit.slug+'-v165',kit]));
-export const PLAYER_COSTUME_LEG_DEFINITIONS_V165=freeze(Object.fromEntries(Object.values(PLAYER_COSTUME_PARTS_V165).map(kit=>['legs-'+kit.slug+'-v165',{asset:kit.legAsset,parts:kit.legs}])));
-export const getPlayerCostumeTorsoV165=(id,facing=1,family='upright')=>{const kit=torsoById.get(id),part=kit?.torso?.[family];return part?{asset:kit.upperAsset,part}:null;};
+export const PLAYER_COSTUME_LEG_DEFINITIONS_V165=freeze(Object.fromEntries(Object.values(PLAYER_COSTUME_PARTS_V165).map(kit=>['legs-'+kit.slug+'-v165',{asset:kit.legAsset,parts:kit.legs,...(kit.legsLeft?{partsLeft:kit.legsLeft}:{})}])));
+// Native left torsos keep asymmetric lettering readable through the existing
+// affine triangle. Their reflected source landmarks cancel the native facing
+// reflection; older kits retain their original shared torso definitions.
+export const getPlayerCostumeTorsoV165=(id,facing=1,family='upright')=>{
+  const kit=torsoById.get(id),variants=facing<0&&kit?.torsoLeft?kit.torsoLeft:kit?.torso;
+  const part=variants?.[family];
+  return part?{asset:kit.upperAsset,part}:null;
+};
 export const getPlayerCostumeArmsV165=id=>{const kit=armsById.get(id);return kit?{asset:kit.upperAsset,parts:kit.arms}:null;};
 export const getPlayerCostumeHelmetV165=(id,facing=1)=>id==='helmet-sevastopol-security-v165'?PLAYER_COSTUME_PARTS_V165['sevastopol-security']?.helmet?.[facing<0?'left':'right']||null:null;

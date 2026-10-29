@@ -15,17 +15,20 @@ import { getPlayerCostumeSkinV119, PLAYER_COSTUME_ASSETS_V119 } from '../src/pla
 import { PLAYER_COSTUME_SKINS_V165, PLAYER_COSTUME_ASSETS_V165,
   getPlayerCostumePreviewSkinV165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165, COSTUME_APPEARANCE_PRESETS_V165,
-  applyCostumeOutfitV165 } from '../src/player-costume-outfits-v165.js';
+  COSTUME_APPEARANCE_ITEMS_V165, getCostumeOutfitV165, applyCostumeOutfitV165 } from '../src/player-costume-outfits-v165.js';
 import { PLAYER_COSTUME_PARTS_V165, PLAYER_COSTUME_PART_ASSETS_V165,
-  PLAYER_COSTUME_LEG_DEFINITIONS_V165 } from '../src/player-costume-parts-v165.js';
+  PLAYER_COSTUME_LEG_DEFINITIONS_V165, getPlayerCostumeTorsoV165 } from '../src/player-costume-parts-v165.js';
 import { normalizePlayerAppearanceV126, getPlayerAppearanceItemV126,
-  PLAYER_APPEARANCE_PRESETS_V129, getPlayerAppearancePresetV129 } from '../src/player-appearance-v126.js';
+  PLAYER_APPEARANCE_ITEMS_V126, PLAYER_APPEARANCE_PRESETS_V129,
+  getPlayerAppearancePresetV129 } from '../src/player-appearance-v126.js';
 import { PLAYER_BODY_RIG_ASSETS_V125, resolvePlayerBodyRigV125 } from '../src/player-body-rig-v125.js';
 import { PLAYER_MODULAR_RIG_ASSETS_V126, drawPlayerModularRigV126 } from '../src/player-modular-rig-v126.js';
-import { PLAYER_TRANSIT_RIG_ASSETS_V128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128 } from '../src/player-transit-rig-v128.js';
+import { PLAYER_TRANSIT_RIG_ASSETS_V128, resolvePlayerTransitRigV128, drawPlayerTransitRigV128,
+  buildPlayerArticulatedLowerLayersV128 } from '../src/player-transit-rig-v128.js';
 import { PLAYER_ACTION_PROP_ASSETS_V127, resolvePlayerActionRigV127, drawPlayerActionRigV127 } from '../src/player-action-rig-v127.js';
 import { resolvePlayerLocomotionRigV129 } from '../src/player-locomotion-rig-v129.js';
-import { PLAYER_COLONIAL_RIG_ASSETS_V129 } from '../src/player-colonial-art-v129.js';
+import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129,
+  getPlayerColonialHelmetV129 } from '../src/player-colonial-art-v129.js';
 import { PLAYER_APPEARANCE_PREVIEW_MODES_V128, samplePlayerAppearancePreviewV128 } from '../src/player-appearance-preview-v126.js';
 import { resolveHeldWeaponProfileV125 } from '../src/held-weapon-profiles-v125.js';
 import { getHeldWeaponPoseV125 } from '../src/held-weapon-renderer-v125.js';
@@ -66,13 +69,14 @@ function png(asset) {
 const host=()=>{const calls=[],stack=[];return {calls,stack,ctx:{save(){stack.push(1);},restore(){assert.ok(stack.pop());},
   transform(...values){assert.ok(values.every(Number.isFinite));},drawImage(...args){calls.push(args);},
   beginPath(){},moveTo(){},lineTo(){},closePath(){},clip(){}}};};
-function render(preset, mode, facing=1, descriptor=portable[0].descriptor, selectedImages=images) {
+function render(preset, mode, facing=1, descriptor=portable[0].descriptor, selectedImages=images,
+  legDefinitions=PLAYER_COSTUME_LEG_DEFINITIONS_V165) {
   const appearance=normalizePlayerAppearanceV126({schema:126,slots:preset.slots});
   const sample=samplePlayerAppearancePreviewV128({appearance,animation:mode.id,timeSeconds:mode.fixedTime,facing,weaponDescriptor:descriptor});
   const options={actor:sample.actor,appearance,images:selectedImages,timeSeconds:sample.timeSeconds,surface:'mission'};
-  const decorate=bodyRig=>resolvePlayerLocomotionRigV129({...options,bodyRig,legDefinitions:PLAYER_COSTUME_LEG_DEFINITIONS_V165}).bodyRig;
+  const decorate=bodyRig=>resolvePlayerLocomotionRigV129({...options,bodyRig,legDefinitions}).bodyRig;
   const transit=sample.transit?resolvePlayerTransitRigV128({...options,ladder:sample.ladder,transitState:sample.transitState,
-    legDefinitions:PLAYER_COSTUME_LEG_DEFINITIONS_V165}):null;
+    legDefinitions}):null;
   const action=sample.action?resolvePlayerActionRigV127({...options,weaponDescriptor:descriptor,decorateBodyRigV129:decorate}):null;
   const body=transit?.bodyRig||action?.bodyRig||decorate(resolvePlayerBodyRigV125(options));
   const draw=host();let result,weaponPose;
@@ -84,6 +88,14 @@ function render(preset, mode, facing=1, descriptor=portable[0].descriptor, selec
       ...(weaponPose?{weaponPose,drawWeapon(){}}:{})});
   }
   return {sample,body,result,weaponPose,draw};
+}
+
+function lowerGeometryFixtureV165(facing,scale) {
+  const point=(x,y)=>({x:200+facing*x*scale,y:100+y*scale});
+  const hips={near:point(-9,10),far:point(12,10)};
+  return {facing,scale,waist:point(0,0),hips,legs:{
+    near:{hip:hips.near,knee:point(-14,47),ankle:point(4,82),sole:point(13,93)},
+    far:{hip:hips.far,knee:point(20,45),ankle:point(-10,78),sole:point(-1,89)}}};
 }
 
 function nativeHeldWeaponFramePredicateV165() {
@@ -373,8 +385,10 @@ test('V165 native costume QA rejects missing, mismatched and fallback weapon obs
   });
 });
 
-test('V165 eight new outfits own six admitted cosmetic slots, distinct from the four historical film presets',()=>{
-  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length,8);assert.equal(PLAYER_APPEARANCE_PRESETS_V129.length,4);
+test('V165 ten new outfits own six admitted cosmetic slots, distinct from the four historical film presets',()=>{
+  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length,10);assert.equal(PLAYER_APPEARANCE_PRESETS_V129.length,4);
+  assert.equal(new Set(PLAYER_APPEARANCE_ITEMS_V126.map(item=>item.id)).size,PLAYER_APPEARANCE_ITEMS_V126.length,
+    'A reused historical item cannot silently overwrite its catalogue record.');
   for(const outfit of PLAYER_COSTUME_OUTFITS_V165){
     assert.deepEqual(Object.keys(outfit.slots).sort(),['arms','back','helmet','legs','mask','torso']);
     assert.equal(outfit.exact,false);assert.equal(outfit.cosmeticOnly,true);
@@ -396,7 +410,7 @@ test('V165 full-body reference boards cannot become playable or baked-weapon fal
   }
 });
 
-test('V165 Hicks and Hudson archive application uses their exact existing V129 clothes without relabelling the Vasquez BDU',()=>{
+test('V165 Hicks and Hudson archive application preserves their exact existing V129 clothes',()=>{
   assert.equal(PLAYER_COSTUME_LINKED_OUTFITS_V165.length,2);
   for(const outfit of PLAYER_COSTUME_LINKED_OUTFITS_V165){
     const preset=getPlayerAppearancePresetV129(outfit.id);assert.ok(preset);
@@ -407,34 +421,59 @@ test('V165 Hicks and Hudson archive application uses their exact existing V129 c
     assert.deepEqual(save.player.weaponIds,before.player.weaponIds);assert.deepEqual(save.galaxy.resources,before.galaxy.resources);
     assert.equal(getPlayerCostumeSkinV119(outfit.costumeId),null);
   }
-  assert.equal(getCostumeV119('franchise-vasquez-bdu').outfitId,null);
-  assert.equal(canEquipCostumeV119('franchise-vasquez-bdu'),false);
 });
 
-test('V165 seventeen original part PNGs have genuine transparency and measured torso/helmet apertures',()=>{
-  assert.equal(PLAYER_COSTUME_PART_ASSETS_V165.length,17);
+test('V165 Vasquez BDU reuses only her historical headband and keeps the smartgunner preset separate',()=>{
+  const outfit=getCostumeOutfitV165('franchise-vasquez-bdu'),smartgunner=getPlayerAppearancePresetV129('uscm-smartgunner-v129');
+  assert.equal(outfit.id,'outfit-vasquez-bdu-v165');assert.equal(canEquipCostumeV119(outfit.costumeId),true);
+  assert.deepEqual(outfit.slots,{helmet:'headband-vasquez-v129',mask:null,torso:'torso-vasquez-bdu-v165',
+    arms:'arms-vasquez-bdu-v165',legs:'legs-vasquez-bdu-v165',back:null});
+  assert.deepEqual(smartgunner.slots,{helmet:'headband-vasquez-v129',mask:null,torso:'torso-smartgunner-v129',
+    arms:'arms-smartgunner-v129',legs:'legs-smartgunner-v129',back:'back-smartgun-harness-v129'});
+  assert.equal(PLAYER_APPEARANCE_ITEMS_V126.filter(item=>item.id===outfit.slots.helmet).length,1);
+  assert.equal(COSTUME_APPEARANCE_ITEMS_V165.some(item=>item.id===outfit.slots.helmet),false);
+  assert.equal(getPlayerAppearanceItemV126(outfit.slots.helmet).name,'Bandeau de Vasquez');
+  for(const facing of [-1,1]){
+    const {result}=render(outfit,{id:'idle',fixedTime:.4},facing,null);
+    assert.equal(result.drawn,true);assert.equal(result.unarmed,true);
+    const helmet=result.layers.find(layer=>layer.slot==='helmet');
+    assert.deepEqual(helmet.sourceRect,getPlayerColonialHelmetV129(outfit.slots.helmet,facing).part.source);
+    assert.equal(result.layers.some(layer=>layer.slot==='back'||layer.slot==='weapon'),false);
+    assert.equal(result.layers.some(layer=>String(layer.itemId).includes('smartgunner')),false);
+  }
+});
+
+test('V165 twenty-one original part PNGs have genuine transparency and measured torso/helmet apertures',()=>{
+  assert.equal(PLAYER_COSTUME_PART_ASSETS_V165.length,21);
   for(const asset of PLAYER_COSTUME_PART_ASSETS_V165){const image=png(asset);let empty=0,solid=0;
     for(let at=3;at<image.data.length;at+=4){if(image.data[at]===0)empty++;if(image.data[at]>=128)solid++;}
     assert.ok(empty>image.width*image.height*.1);assert.ok(solid>image.width*image.height*.05);
   }
   for(const kit of Object.values(PLAYER_COSTUME_PARTS_V165)){
     const upper=png(kit.upperAsset),legs=png(kit.legAsset);
-    for(const part of Object.values(kit.torso))for(const point of Object.values(part.apertures))assert.ok(upper.alpha(point.x,point.y)<=16);
-    for(const side of ['near','far']){const part=kit.legs[side].boot;assert.ok(legs.alpha(part.sole.x,part.sole.y)>=128);
+    for(const torsos of [kit.torso,kit.torsoLeft].filter(Boolean))for(const part of Object.values(torsos))
+      for(const point of Object.values(part.apertures))assert.ok(upper.alpha(point.x,point.y)<=16);
+    for(const parts of [kit.legs,kit.legsLeft].filter(Boolean))for(const side of ['near','far']){
+      const part=parts[side].boot;assert.ok(legs.alpha(part.sole.x,part.sole.y)>=128);
       assert.equal(part.sole.y,part.alphaBounds[3]-1);}
     for(const helmet of Object.values(kit.helmet||{})){const image=png(helmet.asset),p=helmet.part.apertures.face;assert.ok(image.alpha(p.x,p.y)<=16);}
   }
 });
 
-test('V165 actual costume application prepares all six pieces without resources, issued gear or J2 changes',()=>{
+test('V165 actual costume application preserves identity, resources, issued gear and J2 through save and operation locks',()=>{
   for(const outfit of PLAYER_COSTUME_OUTFITS_V165){const save=createDefaultSave();save.needsPlayerCreationV84=false;
     const before=structuredClone(save);applyCostume(save,outfit.costumeId);
     assert.equal(save.player.costumeId,outfit.costumeId);assert.deepEqual(save.player.appearanceV126.slots,outfit.slots);
+    const {costumeId:beforeCostume,appearanceV126:beforeAppearance,...beforePlayer}=before.player;
+    const {costumeId:afterCostume,appearanceV126:afterAppearance,...afterPlayer}=save.player;
+    assert.deepEqual(afterPlayer,beforePlayer,'Only the cosmetic costume ID and six appearance slots may change.');
     for(const key of ['weaponIds','equipmentIds','ammo','userEquipmentV95','coopAppearanceV126'])assert.deepEqual(save.player[key],before.player[key]);
     assert.deepEqual(save.galaxy.resources,before.galaxy.resources);assert.deepEqual(save.crew,before.crew);
     const restored=migrateSave(JSON.parse(JSON.stringify(save)));assert.deepEqual(restored.player.appearanceV126,save.player.appearanceV126);
+    assert.equal(restored.player.costumeId,outfit.costumeId);
     save.strategy.currentOperation={id:'active'};const locked=structuredClone(save);
     assert.throws(()=>applyCostumeOutfitV165(save,outfit.costumeId),/Opération active/);assert.deepEqual(save,locked);
+    assert.throws(()=>applyCostume(save,outfit.costumeId),/verrouillee pendant une operation/);assert.deepEqual(save,locked);
   }
 });
 
@@ -448,6 +487,103 @@ test('V165 fourteen production preview modes retain each outfit and real indepen
     assert.equal(result.layers.filter(layer=>layer.slot==='legs').length,7);
     assert.ok(result.layers.every(layer=>!String(layer.imageKey).startsWith('playerCostumeV165:')));
     assert.equal(draw.stack.length,0);assert.ok(draw.calls.length>8);assert.ok(body.eligible);
+  }
+});
+
+for(const slug of ['vasquez-bdu','rain-jacket'])test(`V165 ${slug} renders all three native torso families in each facing without mirroring source art`,()=>{
+  const families=['upright','forward','compact'];
+  const kit=PLAYER_COSTUME_PARTS_V165[slug],outfit=getCostumeOutfitV165('franchise-'+slug);
+  assert.ok(kit?.torsoLeft,`${slug}: three distinct left-facing torso cells are mandatory.`);
+  assert.deepEqual(Object.keys(kit.torso),families);assert.deepEqual(Object.keys(kit.torsoLeft),families);
+  for(const family of families){
+    assert.notDeepEqual(kit.torsoLeft[family].source,kit.torso[family].source);
+    for(const facing of [-1,1]){
+      const selected=getPlayerCostumeTorsoV165(outfit.slots.torso,facing,family);
+      assert.equal(selected.asset,kit.upperAsset);
+      assert.equal(selected.part,(facing<0?kit.torsoLeft:kit.torso)[family]);
+    }
+  }
+  for(const facing of [-1,1]){
+    const observed=new Set();
+    for(const mode of PLAYER_APPEARANCE_PREVIEW_MODES_V128){
+      const {result}=render(outfit,mode,facing),torso=result.layers.find(layer=>layer.slot==='torso');
+      assert.equal(result.drawn,true,`${slug}/${facing}/${mode.id}: ${result.reason}`);assert.ok(torso);
+      const expected=(facing<0?kit.torsoLeft:kit.torso)[torso.part];
+      assert.ok(expected);assert.deepEqual(torso.sourceRect,expected.source);observed.add(torso.part);
+      const {a,b,c,d}=torso.matrix;
+      assert.ok(a*d-b*c>0,`${slug}/${facing}/${mode.id}: the native facing must retain the lettering orientation.`);
+    }
+    assert.deepEqual([...observed].sort(),[...families].sort());
+  }
+});
+
+test('V165 Rain uses native facing-specific boots while retaining every ankle and sole contact',()=>{
+  const kit=PLAYER_COSTUME_PARTS_V165['rain-jacket'],outfit=getCostumeOutfitV165('franchise-rain-jacket');
+  assert.ok(kit?.legsLeft);assert.deepEqual(kit.legsLeft.pelvis,kit.legs.pelvis);
+  for(const side of ['near','far']){
+    for(const part of ['upper','lower'])assert.deepEqual(kit.legsLeft[side][part],kit.legs[side][part]);
+    assert.equal(kit.legsLeft[side].boot.sourceFacing,-1);
+    assert.notDeepEqual(kit.legsLeft[side].boot.source,kit.legs[side].boot.source);
+  }
+  for(const facing of [-1,1])for(const mode of PLAYER_APPEARANCE_PREVIEW_MODES_V128){
+    const {result,body}=render(outfit,mode,facing);
+    assert.equal(result.drawn,true,`Rain/${facing}/${mode.id}: ${result.reason}`);
+    const legs=result.transitV128?.legs||body.locomotionV129?.legs;assert.ok(legs);
+    for(const side of ['near','far']){
+      const boot=(facing<0?kit.legsLeft:kit.legs)[side].boot;
+      const layer=result.layers.find(layer=>layer.id===side+'-boot');assert.ok(layer);
+      assert.deepEqual(layer.sourceRect,boot.source);
+      const {a,b,c,d,e,f}=layer.matrix;
+      assert.ok(a*d-b*c>0,`Rain/${facing}/${mode.id}/${side}: source art must not be mirrored.`);
+      for(const contact of ['ankle','sole']){
+        const source=boot[contact],target=legs[side][contact];
+        assert.ok(Math.hypot(a*source.x+c*source.y+e-target.x,b*source.x+d*source.y+f-target.y)<1e-6,
+          `Rain/${facing}/${mode.id}/${side}: ${contact} stays at its native solved contact.`);
+      }
+    }
+  }
+});
+
+test('V165 directional boot admission keeps all twelve historical lower-body transforms byte-identical',()=>{
+  const slugs=['amanda-working','working-joe-uniform','sevastopol-security','ripley-bomber','bishop-utility',
+    'fireteam-seegson-maintenance','fireteam-nostromo-jacket','fireteam-flightsuit'];
+  const legDefinitions={...PLAYER_COLONIAL_LEG_DEFINITIONS_V129,...Object.fromEntries(slugs.map(slug=>
+    ['legs-'+slug+'-v165',PLAYER_COSTUME_LEG_DEFINITIONS_V165['legs-'+slug+'-v165']]))};
+  for(const definition of Object.values(legDefinitions)){
+    assert.equal(Object.hasOwn(definition,'partsLeft'),false);
+    for(const side of ['near','far'])for(const part of ['upper','lower','boot'])
+      assert.equal(Object.hasOwn(definition.parts[side][part],'sourceFacing'),false);
+  }
+  const rows=[];
+  for(const facing of [-1,1])for(const scale of [.5,1])for(const pelvisBelt of [false,true]){
+    const layers=buildPlayerArticulatedLowerLayersV128({...lowerGeometryFixtureV165(facing,scale),legDefinitions,
+      pelvisBelt,projectedHipSpread:pelvisBelt ? .42 : 1});
+    assert.equal(Object.keys(layers).length,12);
+    rows.push({facing,scale,pelvisBelt,layers:Object.entries(layers).sort(([a],[b])=>a.localeCompare(b))
+      .map(([itemId,layers])=>({itemId,layers:layers.map(({id,sourceRect,matrix})=>({id,sourceRect,matrix}))}))});
+  }
+  // Recorded before directional support from ce12c76d's transit source,
+  // SHA256 872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613.
+  // Eight fixed geometry cases cover both facings/scales and both pelvis registrations.
+  assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),
+    '5ba388bf4d8885ad9c3c85de4cdecb98546ba38621ee32b87fc54105df6accba');
+});
+
+test('V165 an explicitly invalid left-leg definition cannot fall back to right art or draw a partial outfit',()=>{
+  const outfit=getCostumeOutfitV165('franchise-rain-jacket'),id=outfit.slots.legs;
+  const definition=PLAYER_COSTUME_LEG_DEFINITIONS_V165[id];assert.ok(definition?.partsLeft);
+  const missingBoot=structuredClone(definition.partsLeft);delete missingBoot.far.boot;
+  const zeroSegment=structuredClone(definition.partsLeft);zeroSegment.near.boot.distal={...zeroSegment.near.boot.proximal};
+  const offSheet=structuredClone(definition.partsLeft);offSheet.near.boot.source.x=-1;
+  for(const partsLeft of [undefined,null,{},missingBoot,zeroSegment,offSheet]){
+    const legDefinitions={...PLAYER_COSTUME_LEG_DEFINITIONS_V165,[id]:{...definition,partsLeft}};
+    assert.equal(render(outfit,{id:'idle',fixedTime:.4},1,null,images,legDefinitions).result.drawn,true,
+      'Invalid unused left art does not replace the valid right definition.');
+    for(const mode of PLAYER_APPEARANCE_PREVIEW_MODES_V128){
+      const {result,draw}=render(outfit,mode,-1,null,images,legDefinitions);
+      assert.equal(result.drawn,false);assert.equal(result.fallback,true);
+      assert.equal(result.reason,'modular-lower-body-unavailable');assert.equal(draw.calls.length,0);
+    }
   }
 });
 
@@ -472,9 +608,12 @@ test('V165 unarmed and mixed saved pieces do not require a hidden firearm or a m
 
 test('V165 missing selected clothing fails before any partial outfit is drawn',()=>{
   for(const preset of COSTUME_APPEARANCE_PRESETS_V165){const kit=PLAYER_COSTUME_PARTS_V165[preset.id.slice(7,-5)];
-    for(const asset of [kit.upperAsset,kit.legAsset,...Object.values(kit.helmet||{}).map(row=>row.asset)]){
+    const inheritedHelmets=[-1,1].map(facing=>getPlayerColonialHelmetV129(preset.slots.helmet,facing)?.asset).filter(Boolean);
+    const required=new Map([kit.upperAsset,kit.legAsset,...Object.values(kit.helmet||{}).map(row=>row.asset),...inheritedHelmets]
+      .map(asset=>[asset.imageKey,asset]));
+    for(const asset of required.values())for(const facing of [-1,1]){
       const broken=new Map(images);broken.delete(asset.imageKey);
-      const {result,draw}=render(preset,{id:'idle',fixedTime:.4},1,null,broken);
+      const {result,draw}=render(preset,{id:'idle',fixedTime:.4},facing,null,broken);
       assert.equal(result.drawn,false);assert.equal(result.fallback,true);assert.equal(draw.calls.length,0);
     }
   }
@@ -497,11 +636,15 @@ test('V165 archives separate live modular clothing from illustrative full-body b
 });
 
 test('V165 exact admission rejects extra costume assets and retains independent source checks',async()=>{
-  for(const path of ['assets/openai/sprites/player/costumes-v165/extra.png','assets/openai/sprites/player/costume-parts-v165/sevastopol-security/unreviewed.png','../src/app.js'])
+  for(const path of ['assets/openai/sprites/player/costumes-v165/extra.png',
+    'assets/openai/sprites/player/costumes-v165/vasquez-bdu/locomotion.png',
+    'assets/openai/sprites/player/costumes-v165/rain-jacket/locomotion.png',
+    'assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/harness.png',
+    'assets/openai/sprites/player/costume-parts-v165/sevastopol-security/unreviewed.png','../src/app.js'])
     assert.equal(publicCostumePathAdmissionV165(path),false);
   assert.equal(publicCostumePathAdmissionV165('src/unrelated.js'),null);
   const result=await verifyPublicCostumeAdmissionsV165(new URL('../',import.meta.url).pathname,{strict:true});
-  assert.equal(result.nativePartAtlases,17);assert.equal(result.previewPoseCells,240);assert.equal(result.newPlayablePrecompositedSkins,0);
+  assert.equal(result.nativePartAtlases,21);assert.equal(result.previewPoseCells,240);assert.equal(result.newPlayablePrecompositedSkins,0);
 });
 
 test('V165 built admission omits tooling while source QA and every runtime/PNG input remain mandatory',async()=>{
@@ -509,11 +652,11 @@ test('V165 built admission omits tooling while source QA and every runtime/PNG i
   const copy=path=>{const target=join(fixture,path);mkdirSync(dirname(target),{recursive:true});
     copyFileSync(fileURLToPath(new URL('../'+path,import.meta.url)),target);};
   try{
-    assert.equal(PUBLIC_COSTUME_ASSET_PATHS_V165.length,32);
+    assert.equal(PUBLIC_COSTUME_ASSET_PATHS_V165.length,36);
     assert.equal(PUBLIC_COSTUME_RUNTIME_PATHS_V165.length,3);
     for(const path of [...PUBLIC_COSTUME_ASSET_PATHS_V165,...PUBLIC_COSTUME_RUNTIME_PATHS_V165])copy(path);
     const built=await verifyPublicCostumeAdmissionsV165(fixture,{strict:true,built:true});
-    assert.equal(built.nativePartAtlases,17);assert.equal(built.previewPoseCells,240);
+    assert.equal(built.nativePartAtlases,21);assert.equal(built.previewPoseCells,240);
     for(const path of PUBLIC_COSTUME_SCRIPT_PATHS_V165.filter(path=>!path.endsWith('.py')))copy(path);
     await assert.rejects(()=>verifyPublicCostumeAdmissionsV165(fixture,{strict:true}),/qa-costume-atlases-v165\.py/);
     copy('scripts/qa-costume-atlases-v165.py');

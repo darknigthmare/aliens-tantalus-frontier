@@ -163,27 +163,29 @@ return h.running&&h.currentAnnexV71?.()?.id===c.annexRoomId
 
 
 def approach_service_dialogue(page, c):
-    if c['id'] != 'inez-civil':
+    if c['id'] not in ['inez-civil', 'jun-sanitary']:
         walk_to(page, c, c['post'] - 84)
         return
     # The counter wins at post-84; Mica wins at post+84. Approach the right
     # edge of the actual speaker. The existing7px walk tolerance remains in
     # Inez's native speaking zone; the real selector is checked before E.
+    # Jun's sanitary station extends to x981 with a72px interaction margin;
+    # his right-side84px approach stays outside it and inside speaking range.
     service = observed(page, c)
     actor = service['actualActor']
     check(c['id'] + ': approach retains the actual visible service singleton',
           service['annex'] == c['annexRoomId'] and service['visibleCount'] == 1
           and service['visibleSingleton'] and actor and actor['crewId'] == c['crewId'])
-    walk_to(page, c, actor['x'] + actor['w'] - 7)
+    walk_to(page, c, actor['x'] + 84 if c['id'] == 'jun-sanitary' else actor['x'] + actor['w'] - 7)
 
 
 def open_service_dialogue(page, c):
-    if c['id'] != 'inez-civil':
+    if c['id'] not in ['inez-civil', 'jun-sanitary']:
         page.keyboard.press('KeyE')
         page.locator('#hub-dialogue').wait_for(state='visible')
         return
     # Selection and opening share the original45s dialogue budget. A visible
-    # shop/animal prompt or another crew member must never count as success.
+    # shop/animal/station prompt or another crew member must never count as success.
     deadline = time.monotonic() + 45
     before = (observed(page, c)['interaction'] or {}).get('count', 0)
     page.wait_for_function(NATIVE_SERVICE_SPEAKER_V165, arg=c,
@@ -261,6 +263,38 @@ def follow_floor_actor(page, c, stop, timeout=None):
                 page.keyboard.press('KeyD' if dx > 0 else 'KeyA', delay=100)
         page.wait_for_timeout(80)
     raise AssertionError('Native journey wall budget exhausted')
+
+
+def follow_jun_parent(page, c, stop, clear_before=False):
+    # The real quarters vent begins at x888. Walking upright stops at x844,
+    # short of the existing892px observation bay beyond Jun's portal arrival.
+    # Hold the native crouch control only for this high-landing observation,
+    # then walk back out of the duct before standing; never move Jun or geometry.
+    phase(c['id'] + ': native crouched high-landing observation and standing return')
+    before = observed(page, c)
+    check(c['id'] + ': clearance starts on the real upper parent landing',
+          c['id'] == 'jun-sanitary' and not before['annex'] and before['deck'] == c['deck']
+          and before['player']['grounded'] and not before['player']['climbing']
+          and abs(before['player']['y'] + before['player']['h'] - c['ladders'][-1]['top']) < .1)
+    page.locator('#hub-canvas').focus()
+    page.keyboard.down('KeyC')
+    try:
+        if clear_before:
+            walk_to(page, c, 892)
+        follow_floor_actor(page, c, stop)
+        # The native socket lies west of the vent; its normal7px walk tolerance
+        # leaves the entire44px body clear of the x888 standing collider.
+        walk_to(page, c, c['parentX'])
+    finally:
+        page.keyboard.up('KeyC')
+    page.wait_for_function('()=>!__ATF_HUB__.keys.has("KeyC")&&!__ATF_HUB__.player.crouching'
+                           '&&__ATF_HUB__.player.grounded&&!__ATF_HUB__.player.climbing', timeout=45000)
+    result = observed(page, c)
+    check(c['id'] + ': native observer leaves the duct with the requested route state',
+          not result['annex'] and result['deck'] == c['deck']
+          and abs(result['player']['x'] - c['parentX']) <= 7
+          and result['player']['x'] + result['player']['w'] <= 888 and stop(result))
+    return result
 
 
 def reload_travel(page, c, all_frames):
@@ -395,7 +429,8 @@ with sync_playwright() as pw:
                 player_lift_to(page, c, c['deck'])
             if c['id'] == 'jun-sanitary':
                 climb_parent(page, c)
-            arrived = follow_floor_actor(page, c, lambda r: (r['route'] or {}).get('actor', {}).get('stage') == 'service')
+            observe_service = lambda r: (r['route'] or {}).get('actor', {}).get('stage') == 'service'
+            arrived = follow_jun_parent(page, c, observe_service) if c['id'] == 'jun-sanitary' else follow_floor_actor(page, c, observe_service)
             collect_observer(page, c, 'outbound-after-reload', frames)
             check(c['id'] + ': timed real passenger arrives through one paired annex portal', arrived['route']['actor']['roomId'] == c['annexRoomId'] and arrived['route']['actor']['crossings'] == 1 and arrived['route']['actor']['liftJourneys'] == 1)
             if c['id'] == 'jun-sanitary':
@@ -423,9 +458,13 @@ with sync_playwright() as pw:
             held = follow_floor_actor(page, c, lambda r: (r['route'] or {}).get('actor', {}).get('reason') == 'occupied', timeout=180)
             check(c['id'] + ': real player body holds the occupied parent arrival', held['route']['actor']['roomId'] == c['annexRoomId'] and held['route']['actor']['crossings'] == 1)
             png(c['id'] + '-actual-occupied-return.png', page.locator('#hub-canvas').screenshot(), held)
-            clear = 892 if c['id'] == 'jun-sanitary' else max(24, c['parentX'] - 150) if c['cabinX'] > c['parentX'] else c['parentX'] + 150
-            walk_to(page, c, clear)
-            returned = follow_floor_actor(page, c, lambda r: bool((r['route'] or {}).get('returned')))
+            observe_return = lambda r: bool((r['route'] or {}).get('returned'))
+            if c['id'] == 'jun-sanitary':
+                returned = follow_jun_parent(page, c, observe_return, clear_before=True)
+            else:
+                clear = max(24, c['parentX'] - 150) if c['cabinX'] > c['parentX'] else c['parentX'] + 150
+                walk_to(page, c, clear)
+                returned = follow_floor_actor(page, c, observe_return)
             collect_observer(page, c, 'return', frames)
             done = returned['route']['returned']
             check(c['id'] + ': full native roundtrip reaches the exact physical bookmark', done['observedTravel'] is True and done['roomId'] == start['route']['origin']['roomId'] and done['x'] == start['route']['origin']['x'] and done['liftJourneys'] == 2 and done['crossings'] == 2)

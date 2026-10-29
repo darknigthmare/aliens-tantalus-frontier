@@ -135,15 +135,15 @@ test('V165 counts describe actual limited presentation rigs, separated clothing 
   assert.equal(XENO_TRIALS_RIG_DATA_V165.length, 170);
   assert.equal(new Set(XENO_TRIALS_RIG_DATA_V165.map(row => row.fighterId)).size, 170);
   assert.deepEqual(f.rigs, { newScopedPresentation: 170, historicalPresentation: 19, totalPresentationIdentities: 189, newFullWalkAdmissions: 0 });
-  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 8);
+  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 10);
   assert.equal(PLAYER_COSTUME_LINKED_OUTFITS_V165.length, 2);
-  assert.equal(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.length, 10);
-  assert.equal(new Set(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.map(row => row.costumeId)).size, 10);
+  assert.equal(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.length, 12);
+  assert.equal(new Set(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.map(row => row.costumeId)).size, 12);
   assert.deepEqual(PLAYER_COSTUME_OUTFITS_V165.map(row => row.slug), ['amanda-working', 'working-joe-uniform',
     'sevastopol-security', 'ripley-bomber', 'bishop-utility', 'fireteam-seegson-maintenance',
-    'fireteam-nostromo-jacket', 'fireteam-flightsuit']);
+    'fireteam-nostromo-jacket', 'fireteam-flightsuit', 'vasquez-bdu', 'rain-jacket']);
   const parts = PLAYER_COSTUME_PART_ASSETS_V165;
-  assert.equal(parts.length, 17);
+  assert.equal(parts.length, 21);
   for (const asset of parts) assert.equal(sha(read(asset.path.slice(1))), asset.sha256);
   assert.equal(PLAYER_COSTUME_ASSETS_V119.length, 5);
   for (const asset of PLAYER_COSTUME_ASSETS_V119) assert.equal(sha(read(asset.path.slice(1))), asset.sha256);
@@ -156,8 +156,8 @@ test('V165 counts describe actual limited presentation rigs, separated clothing 
     assert.equal(skin.admission, 'reference-preview-only-not-playable-skin');
     assert.equal(skin.exact, false);
   }
-  assert.deepEqual(f.costumes, { requestedFranchiseReferences: 30, newModularOutfits: 8, linkedExistingV129Presets: 2,
-    equippableFranchiseReferences: 10, remainingFranchiseReferencesOpen: 20, separatedPartPngs: 17,
+  assert.deepEqual(f.costumes, { requestedFranchiseReferences: 30, newModularOutfits: 10, linkedExistingV129Presets: 2,
+    equippableFranchiseReferences: 12, remainingFranchiseReferencesOpen: 18, separatedPartPngs: 21,
     historicalNostromoPngsUnchanged: 5, referencePreviewAtlases: 15, referencePreviewCells: 240, newPlayablePrecompositedSkins: 0 });
   assert.equal(Object.keys(HUB_ROOM_SERVICE_DETAILS_V165).length, 35);
   assert.equal(Object.values(HUB_ROOM_SERVICE_DETAILS_V165).filter(row => !row.omissionReason).length, 31);

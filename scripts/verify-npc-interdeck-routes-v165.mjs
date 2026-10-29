@@ -539,21 +539,29 @@ async function nativeQaDriverV165(root) {
     this.data = { ...this.data, ...structuredClone(patch) };
   } };
   if (docking) controller = new ShipCompanionControllerV87({ hub, saveSystem: system, isActive: () => true, toast() {} });
-  else if (options.blocked) hub.v51Ladders = hub.v51Ladders.filter(ladder => ladder.id !== 'quarters-floor');
+  else if (options.blocked && options.kind !== 'jun-clearance') hub.v51Ladders = hub.v51Ladders.filter(ladder => ladder.id !== 'quarters-floor');
   globalThis.__ATF_HUB__ = hub; globalThis.__ATF_V51__ = { saveSystem: system };
-  const rate = options.rate || 60, releases = []; let elapsed = 0;
+  const rate = options.rate || 60, releases = [], crouchReleases = [];
+  const duct = { frames: 0, crouchedFrames: 0, highestX: 0 }; let elapsed = 0;
   const snapshot = () => ({ elapsed, player: { x: hub.player.x, y: hub.player.y, h: hub.player.h,
-    vx: hub.player.vx, grounded: hub.player.grounded, climbing: hub.player.climbing },
+    w: hub.player.w, vx: hub.player.vx, grounded: hub.player.grounded, climbing: hub.player.climbing,
+    crouching: hub.player.crouching }, deck: hub.state.deck, annex: hub.currentAnnexV71()?.id || null,
     running: hub.running, port: structuredClone(system.data.shipPortV1), dialogOpen: controller?.ui.isOpen || false,
-    heldKeys: [...hub.keys], releases, config: { id: docking ? 'inez-civil' : 'jun-sanitary', nativeDeck: 1, cabinX: 2350,
+    heldKeys: [...hub.keys], releases, crouchReleases, duct, config: { id: docking ? 'inez-civil' : 'jun-sanitary', nativeDeck: 1, deck: 1, cabinX: 2350,
+      parentX: 828,
       ladders: getNpcInterdeckGeometryV165('jun-sanitary').ladders } });
   const key = (type, code) => {
     if (type === 'keyup' && code === 'KeyW') releases.push(snapshot().player);
+    if (type === 'keyup' && code === 'KeyC') crouchReleases.push(snapshot().player);
     host.events.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), { code, repeat: false }));
   };
   const advance = ms => {
     let left = ms / 1000;
-    while (left > 1e-9) { const dt = Math.min(1 / rate, left); if (hub.running) hub.update(dt); elapsed += dt; left -= dt; }
+    while (left > 1e-9) { const dt = Math.min(1 / rate, left); if (hub.running) hub.update(dt); elapsed += dt; left -= dt;
+      if (hub.player.y === 284 && hub.player.x + hub.player.w > 888) {
+        duct.frames++; if (hub.player.crouching) duct.crouchedFrames++; duct.highestX = Math.max(duct.highestX, hub.player.x);
+      }
+    }
   };
   const until = (predicate, timeout) => {
     const deadline = elapsed + timeout / 1000;
@@ -568,6 +576,7 @@ async function nativeQaDriverV165(root) {
     try {
       if (request.type === 'focus') host.canvas.focus();
       else if (request.type === 'wait') advance(request.ms);
+      else if (request.type === 'clearance-wall') hub.v51Walls.push({ x: 850, y: 260, w: 32, h: 116 });
       else if (request.type === 'key') {
         key(request.down ? 'keydown' : 'keyup', request.key);
         if (request.press) { advance(request.ms || 0); key('keyup', request.key); }
@@ -597,7 +606,7 @@ function runNativeQaV165(cases) {
 from pathlib import Path
 from types import SimpleNamespace
 spec = json.loads(Path(sys.argv[1]).read_text())
-names = ['walk_to', 'climb_parent', 'dock_native']
+names = ['walk_to', 'climb_parent', 'dock_native', 'follow_jun_parent']
 module = ast.Module(body=[n for n in ast.parse(Path(spec['qa']).read_text()).body
                          if isinstance(n, ast.FunctionDef) and n.name in names], type_ignores=[])
 class Page:
@@ -641,10 +650,25 @@ for case in spec['cases']:
     if case['kind'] == 'dock':
         walk_to = namespace['walk_to']
         namespace['walk_to'] = lambda page, c, x: walk_to(page, c, x) if x == 18 else None
-    error = None
-    try: namespace['dock_native' if case['kind'] == 'dock' else 'climb_parent'](page, page.state['config'])
+    error, waiting_at = None, None
+    try:
+        if case['kind'] == 'jun-clearance':
+            namespace['climb_parent'](page, page.state['config'])
+            if case.get('blocked'): page.call(type='clearance-wall')
+            waiting_at = page.state['elapsed']
+            # This test covers observer controls against real player physics.
+            # Its route callback only executes the original892px clearance walk;
+            # no NPC travel/service completion is fabricated or claimed here.
+            namespace['follow_floor_actor'] = lambda page, c, stop: namespace['walk_to'](page, c, 892)
+            if 'follow_jun_parent' in namespace:
+                namespace['follow_jun_parent'](page, page.state['config'], lambda r: True)
+            else:
+                # The old actual callback used the same upright walk to892.
+                namespace['walk_to'](page, page.state['config'], 892)
+        else:
+            namespace['dock_native' if case['kind'] == 'dock' else 'climb_parent'](page, page.state['config'])
     except AssertionError as failure: error = str(failure)
-    results.append({'case': case, **page.state, 'error': error})
+    results.append({'case': case, **page.state, 'error': error, 'waitingAt': waiting_at})
     page.close()
 Path(spec['output']).write_text(json.dumps(results))
 `;
@@ -672,9 +696,31 @@ test('native interdeck QA observes automatic docking closure and refuses a rejec
   assert.equal(rejected.dialogOpen, true); assert.equal(rejected.running, false);
 });
 
+test('native Jun QA passes the real upper vent crouched at30/60Hz and stands only after leaving it', () => {
+  for (const arrived of runNativeQaV165([{ kind: 'jun-clearance', rate: 30 }, { kind: 'jun-clearance', rate: 60 }])) {
+    assert.equal(arrived.error, null, JSON.stringify(arrived));
+    assert.ok(Math.abs(arrived.player.x - 828) <= 7); assert.equal(arrived.player.y, 284);
+    assert.equal(arrived.player.grounded, true); assert.equal(arrived.player.climbing, false); assert.equal(arrived.player.crouching, false);
+    assert.ok(arrived.player.x + arrived.player.w <= 888);
+    assert.ok(arrived.duct.highestX >= 885 && arrived.duct.highestX <= 899);
+    assert.ok(arrived.duct.frames > 0); assert.equal(arrived.duct.crouchedFrames, arrived.duct.frames);
+    assert.equal(arrived.crouchReleases.length, 1); assert.ok(arrived.crouchReleases[0].x + 44 <= 888);
+    assert.deepEqual(arrived.heldKeys, []);
+  }
+});
+
+test('native Jun crouch never bypasses a solid blocker and releases its key on the unchanged120s walk failure', () => {
+  const [blocked] = runNativeQaV165([{ kind: 'jun-clearance', blocked: true }]);
+  assert.match(blocked.error, /Native walking did not reach 892/);
+  assert.ok(blocked.elapsed - blocked.waitingAt >= 120 && blocked.elapsed - blocked.waitingAt < 120.3);
+  assert.equal(blocked.player.x, 806); assert.equal(blocked.player.y, 284);
+  assert.equal(blocked.duct.frames, 0); assert.equal(blocked.crouchReleases.length, 1);
+  assert.deepEqual(blocked.heldKeys, []);
+});
+
 // The actual Python interaction helpers run against native keyboard movement,
 // NPC/counter selection, the app's conversation callback and both real UI owners.
-// The declared20h docked initial fixture owns no claimed interdeck travel here;
+// The declared20h docked/17h sanitary initial fixtures own no claimed interdeck travel here;
 // DOM/images/RAF and local storage transport are doubles, not Chromium evidence.
 async function nativeServiceDialogueQaDriverV165(root) {
   const { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
@@ -689,6 +735,11 @@ async function nativeServiceDialogueQaDriverV165(root) {
   const { readFileSync } = await import('node:fs');
   const { createInterface } = await import('node:readline');
   const options = JSON.parse(process.argv[2]), host = hostV136(), events = [], attempts = [];
+  const jun = options.route === 'jun-sanitary';
+  const config = jun ? { id: 'jun-sanitary', crewId: 'crew-11-jun-park', annexRoomId: 'sanitary-bay',
+    post: getNpcInterdeckGeometryV165('jun-sanitary').post.x }
+    : { id: 'inez-civil', crewId: 'crew-09-inez-harlow', annexRoomId: 'frontier-civil-counter',
+      post: getNpcInterdeckGeometryV165('inez-civil').post.x };
   class NodeDouble extends EventTarget {
     constructor() { super(); Object.assign(this, { dataset: {}, children: [], attrs: new Map(), style: {},
       hidden: false, disabled: false, open: false, isConnected: true,
@@ -712,8 +763,9 @@ async function nativeServiceDialogueQaDriverV165(root) {
     authorization: { granted: true, portId: 'frontier-civil-relay', sectorId: 'current-service-sector', campaignHours: 5 } };
   save = requestShipPortDockV87(save, { transactionId: 'native-speaker-qa-v165' }, dockingContext).save;
   for (let i = 1; i <= 14; i++) save = stepShipPortV87(save, { simulationTime: i, dtSeconds: 1 }, dockingContext).save;
-  save.clock.hour = 20;
-  Object.assign(save.hub, { deck: 3, roomId: 'dropship-hangar', positionX: 92, positionY: 532 });
+  save.clock.hour = jun ? 17 : 20;
+  Object.assign(save.hub, jun ? { deck: 1, roomId: 'crew-quarters', positionX: 828, positionY: 284 }
+    : { deck: 3, roomId: 'dropship-hangar', positionX: 92, positionY: 532 });
   const memory = new Map(), system = new SaveSystem({ getItem: k => memory.get(k) ?? null,
     setItem: (k, v) => memory.set(k, String(v)), removeItem: k => memory.delete(k) });
   system.data = save; system.commit();
@@ -742,13 +794,11 @@ async function nativeServiceDialogueQaDriverV165(root) {
     while (!predicate()) { if (elapsed >= deadline - 1e-9) throw new Error('Native wait timed out');
       advance(Math.min(1000 / rate, (deadline - elapsed) * 1000)); } };
   const key = (type, code) => { if (type === 'keydown' && code === 'KeyE') attempts.push({ elapsed, x: hub.player.x,
-    prompt: hub.statusPrompt(), selected: hub.prioritizedCivilAnnexNpcV156()?.crewId || null });
+    prompt: hub.statusPrompt(), selected: (jun ? hub.nearestAnnexNpcV141() : hub.prioritizedCivilAnnexNpcV156())?.crewId || null });
     host.events.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), { code, repeat: false })); };
   key('keydown', 'KeyE'); key('keyup', 'KeyE');
-  until(() => hub.currentAnnexV71()?.id === 'frontier-civil-counter' && !hub.annexTransitionV71 && !hub.hubDoorClosingV142, 45000);
+  until(() => hub.currentAnnexV71()?.id === config.annexRoomId && !hub.annexTransitionV71 && !hub.hubDoorClosingV142, 45000);
   attempts.length = 0; events.length = 0;
-  const config = { id: 'inez-civil', crewId: 'crew-09-inez-harlow', annexRoomId: 'frontier-civil-counter',
-    post: getNpcInterdeckGeometryV165('inez-civil').post.x };
   const actor = hub.activeAnnexNpcsV141().find(n => n.crewId === config.crewId);
   const initialActor = { x: actor.x, y: actor.y, roomId: actor.roomId }, startElapsed = elapsed;
   const read = Function('return (' + options.read + ')')();
@@ -882,4 +932,28 @@ test('native interdeck QA refuses the competing counter and Mica prompts within 
   }
   assert.match(results[0].observation.prompt, /RESPONSABLE DU COMPTOIR/);
   assert.match(results[1].observation.prompt, /MICA/);
+});
+
+test('native Jun QA selects his real conversation beyond the sanitary station and refuses its competing prompt', () => {
+  const results = runNativeServiceDialogueQaV165([{ route: 'jun-sanitary', rate: 30 }, { route: 'jun-sanitary', rate: 60 },
+    { route: 'jun-sanitary', offset: -84 }, { route: 'jun-sanitary', offset: 37 }]);
+  for (const arrived of results.slice(0, 2)) {
+    assert.equal(arrived.error, null, JSON.stringify(arrived));
+    assert.equal(arrived.dialogueOpen, true); assert.equal(arrived.observation.running, false);
+    assert.match(arrived.speaker, /Jun Park/); assert.equal(arrived.attempts.length, 1);
+    assert.equal(arrived.attempts[0].selected, 'crew-11-jun-park');
+    assert.equal(arrived.events.length, 1); assert.equal(arrived.events[0].type, 'hub:npc-interaction');
+    assert.equal(arrived.events[0].crewId, 'crew-11-jun-park'); assert.equal(arrived.observation.interaction.count, 1);
+    assert.equal(arrived.sameActor, true); assert.deepEqual(arrived.currentActor, arrived.initialActor);
+    assert.ok(arrived.observation.player.x > 1053); assert.equal(arrived.observation.player.y, 532);
+    assert.deepEqual(arrived.heldKeys, []);
+  }
+  for (const blocked of results.slice(2)) {
+    assert.match(blocked.error, /Native wait timed out/, JSON.stringify(blocked));
+    assert.ok(Math.abs(blocked.elapsed - blocked.waitingAt - 45) < .002);
+    assert.match(blocked.observation.prompt, /CONTRÔLER LES INSTALLATIONS SANITAIRES/);
+    assert.equal(blocked.attempts.length, 0); assert.equal(blocked.events.length, 0);
+    assert.equal(blocked.dialogueOpen, false); assert.equal(blocked.sameActor, true);
+    assert.deepEqual(blocked.currentActor, blocked.initialActor);
+  }
 });

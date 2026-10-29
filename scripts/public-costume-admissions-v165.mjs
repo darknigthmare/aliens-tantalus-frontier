@@ -9,7 +9,8 @@ import { getPlayerCostumeSkinV119 } from '../src/player-costume-skins-v119.js';
 
 const slugs = ['amanda-working', 'working-joe-uniform', 'sevastopol-security'];
 const partSlugs = [...slugs, 'ripley-bomber', 'bishop-utility',
-  'fireteam-seegson-maintenance', 'fireteam-nostromo-jacket', 'fireteam-flightsuit'];
+  'fireteam-seegson-maintenance', 'fireteam-nostromo-jacket', 'fireteam-flightsuit',
+  'vasquez-bdu', 'rain-jacket'];
 const kinds = ['locomotion', 'combat', 'melee', 'interaction', 'tool-use'];
 const previewRoot = 'assets/openai/sprites/player/costumes-v165';
 const partsRoot = 'assets/openai/sprites/player/costume-parts-v165';
@@ -57,9 +58,9 @@ export async function verifyPublicCostumeAdmissionsV165(projectRoot, { strict = 
   const root = resolve(projectRoot);
   assert.equal(typeof built, 'boolean', 'The source/built costume admission mode must be explicit.');
   assert.equal((await lstat(root)).isSymbolicLink(), false);
-  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 8);
+  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 10);
   assert.equal(PLAYER_COSTUME_LINKED_OUTFITS_V165.length, 2);
-  assert.equal(PLAYER_COSTUME_PART_ASSETS_V165.length, 17);
+  assert.equal(PLAYER_COSTUME_PART_ASSETS_V165.length, 21);
   assert.equal(PLAYER_COSTUME_ASSETS_V165.length, 15);
   assert.deepEqual(PLAYER_COSTUME_OUTFITS_V165.map(outfit => outfit.slug), partSlugs);
   for (const outfit of PLAYER_COSTUME_OUTFITS_V165) {
@@ -101,7 +102,7 @@ export async function verifyPublicCostumeAdmissionsV165(projectRoot, { strict = 
     };
     await walk(previewRoot); await walk(partsRoot);
   }
-  return { ok: true, modularOutfits: 8, linkedExistingOutfits: 2, equippableModularOutfits: 10,
-    nativePartAtlases: 17, previewAtlases: 15,
+  return { ok: true, modularOutfits: 10, linkedExistingOutfits: 2, equippableModularOutfits: 12,
+    nativePartAtlases: 21, previewAtlases: 15,
     previewPoseCells: 240, newPlayablePrecompositedSkins: 0, approved1to1: 0 };
 }
