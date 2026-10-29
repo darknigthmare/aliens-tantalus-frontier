@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { writeFileSync, mkdirSync, mkdtempSync } from 'node:fs';
+import { writeFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { test } from 'node:test';
@@ -502,4 +504,170 @@ test('the genuine main-chart player also keeps its occupied locked bulkhead abov
   assert.ok(bodyOverlaps(h.player,box));assert.equal(h.isAnnexActiveV71(),false);
   assert.ok(h.getNpcInterdeckActorsV165().length===0);h.update(1/60);
   assert.ok(owned.progress>=.82);assert.equal(visible.progress,owned.progress);assert.equal(h.player.y+h.player.h,624);
+});
+
+// Run the actual Python driver against the native owners of ladder movement and
+// terminal actions. DOM/images/RAF, persistence storage and the already-covered
+// lift trip to the terminal are explicit doubles; no Chromium is launched here.
+async function nativeQaDriverV165(root) {
+  const { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
+  const { createDefaultSave } = await import(new URL('src/save.js', root));
+  const { hostV136 } = await import(new URL('scripts/forge-native-host-v136.mjs', root));
+  const { getNpcInterdeckGeometryV165 } = await import(new URL('src/npc-interdeck-routes-v165.js', root));
+  const { ShipCompanionControllerV87 } = await import(new URL('src/ship-companion-controller-v87.js', root));
+  const { createInterface } = await import('node:readline');
+  const options = JSON.parse(process.argv[2]), docking = options.kind === 'dock', host = hostV136();
+  class NodeDouble extends EventTarget {
+    constructor() { super(); this.dataset = {}; this.children = []; this.style = {}; this.open = false; }
+    setAttribute() {} append(...nodes) { this.children.push(...nodes); }
+    replaceChildren(...nodes) { this.children = nodes; }
+    focus() { document.activeElement = this; } getContext() { return host.canvas.getContext('2d'); }
+    showModal() { this.open = true; } close() { this.open = false; this.dispatchEvent(new Event('close')); }
+  }
+  document.createElement = () => new NodeDouble(); document.body = new NodeDouble();
+  const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.clock.hour = 5;
+  if (save.onboardingV84) save.onboardingV84.phase = 'complete';
+  Object.assign(save.hub, { deck: docking ? 3 : 1, roomId: docking ? 'dropship-hangar' : 'mess',
+    positionX: docking ? 24 : 2350, positionY: 532 });
+  Object.assign(save.hub.systems, { hull: 100, power: 100, oxygen: 100, quarantine: 100 });
+  let controller;
+  const hub = new HubGame(host.canvas, { audio: { ui() {}, unlock() {} }, onPersist() {}, onStatus() {},
+    onAction: action => controller?.handle(action) });
+  hub.start(save.hub, { routineContextV62: { clock: save.clock, save }, onboardingV84: save.onboardingV84 });
+  const system = { profile: 1, data: save, commit(patch) {
+    if (options.blocked) throw new Error('Disclosed storage failure');
+    this.data = { ...this.data, ...structuredClone(patch) };
+  } };
+  if (docking) controller = new ShipCompanionControllerV87({ hub, saveSystem: system, isActive: () => true, toast() {} });
+  else if (options.blocked) hub.v51Ladders = hub.v51Ladders.filter(ladder => ladder.id !== 'quarters-floor');
+  globalThis.__ATF_HUB__ = hub; globalThis.__ATF_V51__ = { saveSystem: system };
+  const rate = options.rate || 60, releases = []; let elapsed = 0;
+  const snapshot = () => ({ elapsed, player: { x: hub.player.x, y: hub.player.y, h: hub.player.h,
+    vx: hub.player.vx, grounded: hub.player.grounded, climbing: hub.player.climbing },
+    running: hub.running, port: structuredClone(system.data.shipPortV1), dialogOpen: controller?.ui.isOpen || false,
+    heldKeys: [...hub.keys], releases, config: { id: docking ? 'inez-civil' : 'jun-sanitary', nativeDeck: 1, cabinX: 2350,
+      ladders: getNpcInterdeckGeometryV165('jun-sanitary').ladders } });
+  const key = (type, code) => {
+    if (type === 'keyup' && code === 'KeyW') releases.push(snapshot().player);
+    host.events.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), { code, repeat: false }));
+  };
+  const advance = ms => {
+    let left = ms / 1000;
+    while (left > 1e-9) { const dt = Math.min(1 / rate, left); if (hub.running) hub.update(dt); elapsed += dt; left -= dt; }
+  };
+  const until = (predicate, timeout) => {
+    const deadline = elapsed + timeout / 1000;
+    while (!predicate()) {
+      if (elapsed >= deadline) throw new Error('Native wait timed out');
+      advance(1000 / rate);
+    }
+  };
+  console.log(JSON.stringify(snapshot()));
+  for await (const line of createInterface({ input: process.stdin })) {
+    const request = JSON.parse(line); let error = null;
+    try {
+      if (request.type === 'focus') host.canvas.focus();
+      else if (request.type === 'wait') advance(request.ms);
+      else if (request.type === 'key') {
+        key(request.down ? 'keydown' : 'keyup', request.key);
+        if (request.press) { advance(request.ms || 0); key('keyup', request.key); }
+      } else if (request.type === 'predicate') {
+        const predicate = Function('return (' + request.expression + ')')();
+        until(() => predicate(request.arg), request.timeout);
+      } else if (request.type === 'visibility') until(() => controller.ui.isOpen === request.visible, request.timeout);
+      else if (request.type === 'click') {
+        if (!controller.ui.isOpen) throw new Error('Cannot click hidden terminal');
+        const button = request.action === 'dock' ? controller.ui.dockButton : controller.ui.closeButton;
+        if (button.disabled) throw new Error('Cannot click disabled terminal action');
+        button.dispatchEvent(new Event('click')); await Promise.resolve();
+      } else if (request.type === 'stop') break;
+    } catch (failure) { error = failure.message; }
+    console.log(JSON.stringify({ ...snapshot(), error }));
+  }
+}
+
+function runNativeQaV165(cases) {
+  const directory = mkdtempSync(join(tmpdir(), 'interdeck-native-qa-'));
+  const root = new URL('../', import.meta.url).href;
+  const driver = join(directory, 'driver.mjs'), input = join(directory, 'input.json'), output = join(directory, 'output.json');
+  const qa = process.env.ATF_QA_INTERDECK_SOURCE || fileURLToPath(new URL('qa-npc-interdeck-native-v165.py', import.meta.url));
+  writeFileSync(driver, `(${nativeQaDriverV165.toString()})(${JSON.stringify(root)});\n`);
+  writeFileSync(input, JSON.stringify({ driver, qa, cases, node: process.execPath, output }));
+  const python = String.raw`import ast, json, subprocess, sys
+from pathlib import Path
+from types import SimpleNamespace
+spec = json.loads(Path(sys.argv[1]).read_text())
+names = ['walk_to', 'climb_parent', 'dock_native']
+module = ast.Module(body=[n for n in ast.parse(Path(spec['qa']).read_text()).body
+                         if isinstance(n, ast.FunctionDef) and n.name in names], type_ignores=[])
+class Page:
+    def __init__(self, case):
+        self.proc = subprocess.Popen([spec['node'], spec['driver'], json.dumps(case)],
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        self.state = json.loads(self.proc.stdout.readline())
+        self.keyboard = SimpleNamespace(
+            press=lambda key, delay=0: self.call(type='key', key=key, down=True, press=True, ms=delay),
+            down=lambda key: self.call(type='key', key=key, down=True),
+            up=lambda key: self.call(type='key', key=key, down=False))
+    def call(self, **request):
+        self.proc.stdin.write(json.dumps(request) + '\n'); self.proc.stdin.flush()
+        line = self.proc.stdout.readline()
+        if not line: raise RuntimeError(self.proc.stderr.read())
+        self.state = json.loads(line)
+        if self.state.get('error'): raise AssertionError(self.state['error'])
+        return self.state
+    def locator(self, selector):
+        action = 'dock' if selector == '[data-port-action="dock"]' else 'close'
+        return SimpleNamespace(focus=lambda: self.call(type='focus'),
+            wait_for=lambda state: self.call(type='visibility', visible=state == 'visible', timeout=45000),
+            click=lambda: self.call(type='click', action=action))
+    def wait_for_timeout(self, ms): self.call(type='wait', ms=ms)
+    def wait_for_function(self, expression, arg=None, timeout=45000):
+        self.call(type='predicate', expression=expression, arg=arg, timeout=timeout)
+    def screenshot(self): return b''
+    def close(self):
+        self.proc.stdin.write('{"type":"stop"}\n'); self.proc.stdin.flush()
+        self.proc.stdin.close(); self.proc.wait(timeout=5)
+        self.proc.stdout.close(); self.proc.stderr.close()
+def check(name, ok):
+    if not ok: raise AssertionError(name)
+results = []
+for case in spec['cases']:
+    page = Page(case)
+    namespace = {'time': SimpleNamespace(monotonic=lambda: page.state['elapsed']),
+        'observed': lambda page, c: page.call(type='read'), 'phase': lambda label: None,
+        'check': check, 'png': lambda *args: None, 'player_lift_to': lambda *args: None}
+    exec(compile(module, '<actual-native-interdeck-qa>', 'exec'), namespace)
+    if case['kind'] == 'dock':
+        walk_to = namespace['walk_to']
+        namespace['walk_to'] = lambda page, c, x: walk_to(page, c, x) if x == 18 else None
+    error = None
+    try: namespace['dock_native' if case['kind'] == 'dock' else 'climb_parent'](page, page.state['config'])
+    except AssertionError as failure: error = str(failure)
+    results.append({'case': case, **page.state, 'error': error})
+    page.close()
+Path(spec['output']).write_text(json.dumps(results))
+`;
+  try {
+    execFileSync('python3', ['-c', python, input], { stdio: 'inherit', timeout: 30000 });
+    return JSON.parse(readFileSync(output, 'utf8'));
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+}
+
+test('native interdeck QA finishes both real ladder landings and still refuses a missing ladder', () => {
+  const [arrived, blocked] = runNativeQaV165([{ kind: 'climb' }, { kind: 'climb', blocked: true }]);
+  assert.equal(arrived.error, null); assert.ok(Math.abs(arrived.player.x - 700) <= 7);
+  assert.equal(arrived.player.y, 284); assert.equal(arrived.player.grounded, true); assert.equal(arrived.player.climbing, false);
+  assert.equal(arrived.releases.length, 2);
+  assert.ok(arrived.releases.every(player => player.grounded && !player.climbing));
+  assert.match(blocked.error, /Native wait timed out/); assert.ok(blocked.elapsed >= 90);
+  assert.equal(blocked.player.y, 532); assert.ok(!blocked.heldKeys.includes('KeyW'), 'finally must release W on failure');
+});
+
+test('native interdeck QA observes automatic docking closure and refuses a rejected storage commit', () => {
+  const [docked, rejected] = runNativeQaV165([{ kind: 'dock' }, { kind: 'dock', blocked: true }]);
+  assert.equal(docked.error, null, JSON.stringify(docked)); assert.equal(docked.port.phase, 'docked');
+  assert.equal(docked.dialogOpen, false); assert.equal(docked.running, true);
+  assert.match(rejected.error, /Native wait timed out/); assert.notEqual(rejected.port.phase, 'docked');
+  assert.equal(rejected.dialogOpen, true); assert.equal(rejected.running, false);
 });

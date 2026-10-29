@@ -6,7 +6,9 @@ import { inflateSync } from 'node:zlib';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { WEAPONS } from '../src/content-core-v50.js';
+import { WORLDS, CAMPAIGNS, WEAPONS } from '../src/content.js';
+import { GameEngine } from '../src/game-production-runtime.js';
+import { hostV136 } from './forge-native-host-v136.mjs';
 import { createDefaultSave, migrateSave, applyCostume } from '../src/save.js';
 import { getCostumeV119, canEquipCostumeV119 } from '../src/franchise-costumes-v119.js';
 import { getPlayerCostumeSkinV119, PLAYER_COSTUME_ASSETS_V119 } from '../src/player-costume-skins-v119.js';
@@ -83,6 +85,117 @@ function render(preset, mode, facing=1, descriptor=portable[0].descriptor, selec
   }
   return {sample,body,result,weaponPose,draw};
 }
+
+function nativeHeldWeaponFramePredicateV165() {
+  const qa = readFileSync(new URL('./qa-costume-atlases-v165.py', import.meta.url), 'utf8');
+  const expression = qa.match(/NATIVE_HELD_WEAPON_FRAME_V165 = '''([\s\S]*?)'''/);
+  assert.ok(expression, 'Read the predicate actually shared by native aim and shot observations.');
+  return new Function('e', 'p', `return Boolean(${expression[1]});`);
+}
+
+async function withNativeCostumeFixtureV165(run) {
+  const names = ['addEventListener', 'removeEventListener', 'dispatchEvent', 'document',
+    'Image', 'requestAnimationFrame', 'cancelAnimationFrame'];
+  const previous = new Map(names.map(name => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
+  let engine;
+  try {
+    const host = hostV136(), draws = [], ctx = host.canvas.getContext('2d');
+    const dimensions = new Map([...allAssets, ...portable.map(row => row.profile)]
+      .map(asset => [asset.path, { width: asset.sourceWidth, height: asset.sourceHeight }]));
+    // The production engine, input events and renderer are real. DOM, RAF,
+    // images and canvas calls are explicit doubles, not raster/Chromium proof.
+    globalThis.Image = class extends EventTarget {
+      complete = true; naturalWidth = 0; naturalHeight = 0; width = 0; height = 0;
+      async decode() {}
+      set src(path) {
+        this._src = path;
+        const size = dimensions.get(path) || { width: 1024, height: 1024 };
+        this.naturalWidth = this.width = size.width; this.naturalHeight = this.height = size.height;
+        queueMicrotask(() => this.dispatchEvent(new Event('load')));
+      }
+      get src() { return this._src; }
+    };
+    ctx.drawImage = (...args) => draws.push(args);
+    const outfit = PLAYER_COSTUME_OUTFITS_V165.find(row => row.slug === 'amanda-working');
+    assert.ok(outfit);
+    engine = new GameEngine(host.canvas);
+    engine.start({ world: WORLDS[0], campaign: CAMPAIGNS[0],
+      weapon: WEAPONS.find(row => row.id === 'weapon-003-m4a3-service-pistol'),
+      enemyCatalog: [], equipment: [], crew: [], seed: 426, costume: getCostumeV119(outfit.costumeId),
+      playerAppearanceV126: { schema: 126, slots: outfit.slots } });
+    Object.assign(engine, { platforms: [{ id: 'qa-floor', x: -200, y: 930, w: 6800, h: 200, floor: true }],
+      ladders: [], lifts: [], walls: [], covers: [], doors: [], hazards: [], enemies: [], missionLevelRuntime: null });
+    Object.assign(engine.player, { x: 160, y: 838, vx: 0, vy: 0, grounded: true, operatorId: 'echo-9' });
+    for (let count = 0; count < 10; count++) {
+      await Promise.resolve(); engine.update(1 / 60); engine.drawActor(ctx, engine.player);
+    }
+    const pointer = (button, buttons) => {
+      const event = new Event('pointerdown', { cancelable: true });
+      Object.assign(event, { pointerId: 47, pointerType: 'mouse', button, buttons, clientX: 1200, clientY: 500 });
+      host.canvas.focus(); host.canvas.dispatchEvent(event);
+    };
+    await run({ engine, actor: engine.player, ctx, draws, pointer, outfit });
+  } finally {
+    engine?.stop();
+    for (const [name, descriptor] of previous) {
+      if (descriptor) Object.defineProperty(globalThis, name, descriptor);
+      else delete globalThis[name];
+    }
+  }
+}
+
+test('V165 native costume QA observes the real weapon receipt and waits for the accepted shot to be drawn', async () => {
+  const ready = nativeHeldWeaponFramePredicateV165();
+  await withNativeCostumeFixtureV165(({ engine, actor, ctx, draws, pointer, outfit }) => {
+    pointer(2, 2); engine.update(1 / 60); engine.drawActor(ctx, actor);
+    assert.equal(actor.aimingV124, true);
+    assert.equal(actor.heldWeaponVisualV125.visible, undefined, 'The production receipt has no visible flag.');
+    assert.equal(ready(engine, actor), true);
+    assert.deepEqual(actor.playerAppearanceVisualV126.selected.slots, outfit.slots);
+    assert.ok(draws.some(([image]) => image.src === actor.heldWeaponVisualV125.path));
+    const shots = actor.shots, ammo = actor.ammo, reserve = actor.ammoReserve;
+    pointer(0, 3);
+    assert.equal(actor.shots, shots + 1, 'The real pointer event accepts one native shot.');
+    assert.equal(actor.ammo, ammo - 1); assert.equal(actor.ammoReserve, reserve);
+    assert.equal(actor.heldWeaponVisualV125.shotSerial, shots);
+    assert.equal(ready(engine, actor), false, 'A live shot cannot reuse the previous rendered frame.');
+    engine.drawActor(ctx, actor);
+    assert.equal(ready(engine, actor), true);
+    assert.equal(actor.shots, shots + 1, 'Drawing a receipt cannot duplicate the accepted shot.');
+    assert.equal(actor.ammo, ammo - 1); assert.equal(actor.ammoReserve, reserve);
+    assert.equal(actor.heldWeaponVisualV125.shotSerial, actor.shots);
+    assert.equal(actor.heldWeaponVisualV125.weaponId, 'weapon-003-m4a3-service-pistol');
+    engine.update(1 / 60);
+    assert.equal(ready(engine, actor), false, 'A receipt from the previous animation time is not current.');
+    engine.drawActor(ctx, actor); assert.equal(ready(engine, actor), true);
+    engine.stop(); assert.equal(ready(engine, actor), false);
+  });
+});
+
+test('V165 native costume QA rejects missing, mismatched and fallback weapon observations', async () => {
+  const ready = nativeHeldWeaponFramePredicateV165();
+  await withNativeCostumeFixtureV165(({ engine, actor }) => {
+    assert.equal(ready(engine, actor), true);
+    const mutations = [
+      ['missing receipt', row => { row.heldWeaponVisualV125 = null; }],
+      ['foreign schema', row => { row.heldWeaponVisualV125.schema = 124; }],
+      ['old shot', row => { row.heldWeaponVisualV125.shotSerial--; }],
+      ['future shot', row => { row.heldWeaponVisualV125.shotSerial++; }],
+      ['old frame', row => { row.heldWeaponVisualV125.timeSeconds -= .01; }],
+      ['future frame', row => { row.heldWeaponVisualV125.timeSeconds += .01; }],
+      ['missing outfit', row => { row.playerAppearanceVisualV126 = null; }],
+      ['undrawn outfit', row => { row.playerAppearanceVisualV126.drawn = false; }],
+      ['missing layers', row => { delete row.playerAppearanceVisualV126.layers; }],
+      ['unarmed layers', row => { row.playerAppearanceVisualV126.layers = row.playerAppearanceVisualV126.layers.filter(layer => layer.slot !== 'weapon'); }],
+      ['different weapon layer', row => { row.playerAppearanceVisualV126.layers.find(layer => layer.slot === 'weapon').itemId = 'weapon-001-m41a-pulse-rifle'; }]
+    ];
+    for (const [label, mutate] of mutations) {
+      const row = structuredClone(actor); mutate(row);
+      assert.equal(ready(engine, row), false, label);
+    }
+    assert.equal(ready(engine, actor), true, 'Testing rejected observations never changes the live receipt.');
+  });
+});
 
 test('V165 eight new outfits own six admitted cosmetic slots, distinct from the four historical film presets',()=>{
   assert.equal(PLAYER_COSTUME_OUTFITS_V165.length,8);assert.equal(PLAYER_APPEARANCE_PRESETS_V129.length,4);

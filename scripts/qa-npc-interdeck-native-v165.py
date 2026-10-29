@@ -263,7 +263,9 @@ def climb_parent(page, c):
         walk_to(page, c, ladder['x'] - 22)
         page.keyboard.down('KeyW')
         try:
-            page.wait_for_function('top=>__ATF_HUB__.player.y+__ATF_HUB__.player.h<=top+.1', arg=ladder['top'], timeout=90000)
+            # Keep climbing until the native endpoint releases the ladder and
+            # the platform supports the player; reaching its height is earlier.
+            page.wait_for_function('top=>__ATF_HUB__.player.y+__ATF_HUB__.player.h<=top+.1&&__ATF_HUB__.player.grounded&&!__ATF_HUB__.player.climbing', arg=ladder['top'], timeout=90000)
         finally:
             page.keyboard.up('KeyW')
         page.wait_for_function('()=>__ATF_HUB__.player.grounded&&!__ATF_HUB__.player.climbing', timeout=45000)
@@ -277,10 +279,12 @@ def dock_native(page, c):
     page.keyboard.press('KeyE')
     page.locator('dialog.ship-port-v87').wait_for(state='visible')
     page.locator('[data-port-action="dock"]').click()
+    # An accepted terminal action closes its dialog and resumes the real hub.
+    page.locator('dialog.ship-port-v87').wait_for(state='hidden')
+    page.wait_for_function('()=>__ATF_HUB__.running')
     page.wait_for_function('()=>__ATF_V51__.saveSystem.data.shipPortV1.phase==="docked"', timeout=90000)
     check(c['id'] + ': real terminal completes the local docking period', observed(page, c)['port']['phase'] == 'docked')
     png(c['id'] + '-native-docked-terminal.png', page.screenshot())
-    page.locator('[data-port-action="close"]').click()
     # Return the observer to the origin deck using its own native lift.
     player_lift_to(page, c, c['nativeDeck'])
     walk_to(page, c, c['cabinX'] + 220)

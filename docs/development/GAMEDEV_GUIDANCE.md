@@ -167,7 +167,48 @@ La véritable fonction Python `walk_to`, également extraite par AST, a été re
 
 Cette passe ne modifie que les deux QA Python, la suite campagne, son empreinte courante et ce guide. La sortie d’annexe après Idris, le retour d’Echo et le contrôle d’arme d’Amanda restent des sujets distincts sans correction revendiquée ici. Les prochains résultats CI doivent être attribués au nouveau commit et conservés séparément des preuves ci-dessus.
 
-## 7. Entretien de cette adaptation
+## 7. Circulation en file et contrôles natifs — troisième application
+
+Sur la tête [`a79a616`](https://github.com/darknigthmare/aliens-tantalus-frontier/commit/a79a61660d696962bb119e2f2f06367a4a2685cd), la CI confirme la réussite de l’étape V160 complète, reprise de campagne comprise, et du parcours inter-ponts de David. Les workflows [Forge](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40890426555) et [Gameplay V162](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40890426453) sont également verts. La [release globale](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40890426296) et les [parcours V163](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40890426531) présentent encore des échecs distincts. La release réussit aussi **3 720/3 720 tests Node**, le build et toutes ses autres étapes de parcours. Son seul groupe en échec est V161 : Idris bloque encore à l’attente de sortie du joueur hors de l’annexe après dialogue. Ces résultats appartiennent à cette tête antérieure, exécutée sur son merge de PR `4f4b1b7f8e198b7eb78fd57684ad85bba8fd054b`.
+
+### Défaut réel de circulation
+
+Le calcul `planNpcServiceCourtesyV163` de `src/npc-service-traffic-v163.js` pouvait laisser une file immobile : il sélectionnait un PNJ devant le passager, mais sa baie de dégagement était elle-même occupée par un second PNJ situé au-delà de la fenêtre initiale. Le plan entier était refusé et aucun des deux ne pouvait dégager le chemin.
+
+Le cas natif observé concerne Maksim à x2238, une étape vers x2254, Asha à x2294 et Sanaa à x2350. La baie proposée pour Asha, x2322, chevauche Sanaa. Le correctif étend le plan uniquement aux pairs admissibles occupant réellement une baie proposée, jusqu’à stabilisation. La boucle reste bornée au nombre de pairs et conserve leur ordre dans les deux directions. La planification ne déplace pas de corps ; la marche et les collisions existantes exécutent les réservations. Les gardes collectifs de joueur, propriétaires, obstacles, limites, soins, missions et interactions restent appliqués avant toute réservation.
+
+Les trois nouveaux cas de `verify-npc-annex-service-routes-v163.mjs` couvrent des chaînes de deux et trois PNJ en miroir, la vitesse maximale de 27 pixels par seconde, l’identité physique, la distance parcourue, la reprise JSON, 18 refus atomiques et les préemptions autorisées ou étrangères. Avec les mêmes tests finaux, l’ancien module échoue sur les deux régressions et conserve le contrôle négatif ; le module corrigé passe les trois.
+
+Une sonde utilise la composition `NativeHubGame`, les commandes stratégiques réelles, les événements clavier et la physique. Sur l’ancien module, Maksim reste bloqué dans la file après 200 secondes simulées et Echo reste en attente dans son annexe. Après correction, Maksim franchit l’ascenseur de retour. La sauvegarde obtenue après 200 secondes est reprise avec les mêmes coordonnées, temps et compteurs d’Echo ; après 98,33 secondes simulées supplémentaires, Maksim a rejoint son origine x365/y532 et Echo retrouve exactement x3192/y532, avec deux franchissements et deux arrivées. Cette sonde emploie des doublures DOM/images/RAF, un sol natif et une fixture de départ déclarée à 05h30. Elle ne remplace pas le parcours Chromium, et sa durée n’est pas une mesure de performance.
+
+### Trois contrats de QA corrigés
+
+- **Amanda :** le vrai rendu ne produit pas de propriété `heldWeaponVisualV125.visible`. Le QA exige désormais le reçu de dessin du schéma 125, le numéro du tir courant, le temps d’animation courant, une tenue dessinée et sa couche d’arme correspondante. Il conserve la vraie visée et l’augmentation du nombre de tirs. Les tests vérifient une consommation unique de munition et refusent le reçu précédent entre un tir et son dessin, ainsi que onze observations absentes ou incohérentes.
+- **Inez :** une manœuvre d’amarrage acceptée ferme déjà son dialogue et reprend le hub. Le QA attend ces deux événements puis la phase réelle `docked`, au lieu de cliquer à nouveau sur un bouton caché. Un commit de stockage rejeté reste un échec.
+- **Jun :** atteindre la hauteur d’un palier précède la libération native de l’échelle. Le QA maintient W jusqu’à l’appui réel et à la fin de `climbing`, puis libère toujours la touche. Les deux échelles passent à 30, 60 et 120 Hz ; l’absence de la première échelle conserve l’expiration dans les deux versions. Les huit essais sont des simulations avec la composition native, pas des parcours navigateur.
+
+### Vérifications et suivi
+
+| Contrôle local | Résultat constaté |
+| --- | --- |
+| Costumes V165, sélection sans les quatre contrôles de PNG/distribution | 10/10, dont les deux nouveaux cas |
+| Services d’annexe et circulation V163 | 37/37 |
+| Passage inter-ponts V165 | 8/8 |
+| Prêts de propriétaires aux annexes V163 | 10/10 |
+| Relais de postes V166 | 20/20 |
+| Relais et cloisons verrouillées V166 | 5/5 |
+| Inter-ponts V165 sur le runtime combiné | 24/24 dans la suite complète finale |
+| Succession et provenance, sélection V163/V165 sans contrôles de médias | 14/14 |
+
+La première exécution combinée inter-ponts a rencontré un timeout mural de 30 secondes dans le sous-processus de test du terminal. Le même cas réussit isolément en 3,28 secondes, puis la suite complète réussit 24/24 sur les mêmes fichiers, sans changement de garde ni de timeout. Dans cette dernière exécution, les deux nouveaux cas prennent 6,37 et 6,09 secondes. La durée murale totale de 434,75 secondes reflète un environnement fortement ralenti ; elle ne mesure pas les performances du jeu. Les fonctions Python réelles sont extraites par AST et reliées aux propriétaires natifs ; les doublures de stockage, DOM, images, RAF et ascenseur préalable sont déclarées.
+
+Le cycle QZ-18 de production, avec `SaveSystem.commit` puis chargement, est également rejoué sur le runtime corrigé : les seules différences protégées restent les cinq horloges d’animation déjà admises. Les autres données protégées restent identiques.
+
+Les trois empreintes courantes des vérificateurs modifiés et les quatre références courantes du module de circulation sont actualisées. La ligne correspondante de `11_Succession` conserve son sens de SHA cumulatif. Le classeur courant est régénéré avec le générateur versionné : seules les cellules C52 et D52 de cette feuille changent. Le vérificateur ZIP/XML contrôle 27 feuilles, 10 353 cellules source, 32 formules et aucune erreur. Le script réel de notice vérifie les 27 notices ; deux reconstructions donnent exactement les mêmes octets, sans changement de pins ou d’ancêtres. Ces vérifications Python sont exécutées directement, car les appels avec capture de sortie depuis Node renvoient localement `EPERM`. Les 17 classeurs historiques restent identiques et les 59 empreintes courantes de tests correspondent aux fichiers.
+
+**Limites de livraison.** La circulation en file est corrigée et les contrats QA ci-dessus sont couverts. Le retour natif observé ne clôt pas automatiquement les recettes navigateur d’Echo, d’Idris ou d’Asha : leurs attentes et leurs dépendances de circulation doivent encore être contrôlées par la CI de la nouvelle tête. Les autres échecs, dont le parcours navigateur de Maksim et une observation de pause dans Trials, restent distincts. Aucune preuve de publication, de revue visuelle ou de fidélité artistique n’est ajoutée aux historiques.
+
+## 8. Entretien de cette adaptation
 
 Conserver un ensemble réduit de références utiles. Ajouter une discipline complémentaire quand une tâche le demande, après lecture du guide correspondant. Pour les problèmes propres à Tantalus, les interfaces du dépôt, les références franchise et les résultats observés restent déterminants.
 

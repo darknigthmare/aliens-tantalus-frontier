@@ -22,7 +22,8 @@ import { HUB_NPC_MEDICAL_ROUTE_V162 as route, HUB_NPC_MEDICAL_ROUTE_DEFINITION_V
   normalizeNpcMedicalRouteV162, withHubNpcMedicalRouteV162 } from '../src/npc-medical-route-v162.js';
 
 import { HUB_NPC_ANNEX_SERVICE_ROUTES_V163 as routes, HUB_NPC_ANNEX_SERVICE_ROUTE_DEFINITIONS_V163 as definitions, normalizeNpcAnnexServiceRoutesV163, withHubNpcAnnexServiceRoutesV163 } from '../src/npc-annex-service-routes-v163.js';
-import { normalizeNpcServiceTrafficV163 } from '../src/npc-service-traffic-v163.js';
+import { normalizeNpcServiceTrafficV163, withHubNpcServiceTrafficV163 } from '../src/npc-service-traffic-v163.js';
+import { withHubNpcInterdeckRoutesV165 } from '../src/npc-interdeck-routes-v165.js';
 const LifeHub = withHubNpcLifeV136(RoutineHub);
 class FixtureBase {
   initializeNpcRoutinesV62(...a) { return RoutineHub.prototype.initializeNpcRoutinesV62.apply(this, a); }
@@ -231,6 +232,138 @@ test('new annex owners are absent in editor/Forge contexts and normalization rej
 
 const overlaps = (a, b) => a.x < b.x + b.w - 1e-7 && a.x + a.w > b.x + 1e-7
   && a.y < b.y + b.h && a.y + a.h > b.y;
+
+// Isolate the production courtesy planner and physical walker on real native
+// routine bodies. The passenger/timetable remain fixed while their blockers
+// clear; full interdeck journeys retain their separate integration suite.
+const interdeckCourtesyMethodsV165 = withHubNpcInterdeckRoutesV165(class {}).prototype;
+class CourtesyQueueHubV163 extends withHubNpcServiceTrafficV163(class extends FixtureBase { update() {} }) {
+  getNpcServiceOwnedActorsV163() { return this.queueOwners || []; }
+  getNpcInterdeckActorsV165() { return this.queueOwners || []; }
+  getNpcServiceTrafficIntentsV163() {
+    return interdeckCourtesyMethodsV165.getNpcServiceTrafficIntentsV163.call(this);
+  }
+  canPreemptNpcServiceCourtesyV165(...args) {
+    return interdeckCourtesyMethodsV165.canPreemptNpcServiceCourtesyV165.apply(this, args);
+  }
+}
+function courtesyQueueV163(direction = 1, count = 2, saved = null) {
+  const h = new CourtesyQueueHubV163();
+  h.start({ deck: 0, roomId: 'briefing', ...(saved ? { npcServiceTrafficV163: saved } : {}) },
+    { routineContextV62: { clock: { day: 1, hour: 12.5 } } });
+  const native = id => h.getNpcServicePeersV163(0).find(peer => peer.crewId === id);
+  const owner = native('crew-08-maksim-orlov'), first = native('crew-12-asha-mbaye'),
+    second = native('crew-07-sanaa-doyle'), third = native('crew-06-rook');
+  const goal = direction === 1 ? 2254 : 2446;
+  Object.assign(owner, { x: goal - direction * 16, y: 532, w: 44, h: 92 });
+  // The unrelated briefing body is parked outside the disclosed queue.
+  native('crew-01-mara-vega').x = 1450;
+  const peers = [first, second, ...(count === 3 ? [third] : [])];
+  if (count !== 3) third.x = 1550;
+  if (!saved) peers.forEach((peer, index) => Object.assign(peer,
+    { x: goal + direction * (40 + index * 56), y: 532, w: 44, h: 92, workClock: 0, supportClock: 0 }));
+  h.queueOwners = [owner];
+  h.npcInterdeckBodiesV165 = new Map([['maksim-cockpit', owner]]);
+  h.npcInterdeckStateV165 = { routes: { 'maksim-cockpit': { actor: {
+    x: owner.x, y: 532, deck: 0, roomId: 'briefing', stage: 'walking-lift' } } } };
+  assert.equal(h.getNpcServiceTrafficIntentsV163()[0].goalX, goal);
+  return { h, owner, peers, goal, direction };
+}
+
+test('courtesy expands only the occupied bay chain in both directions and moves the same bodies without overtaking', () => {
+  for (const direction of [1, -1]) for (const count of [2, 3]) {
+    const { h, owner, peers, goal } = courtesyQueueV163(direction, count);
+    const initial = peers.map(peer => peer.x), untouched = h.getNpcServicePeersV163(0)
+      .filter(peer => peer !== owner && !peers.includes(peer)).map(peer => ({ peer, x: peer.x }));
+    h.planNpcServiceCourtesyV163();
+    assert.deepEqual(h.npcTrafficStateV163.actors.map(row => row.crewId), peers.map(peer => peer.crewId));
+    for (const [index, peer] of peers.entries()) {
+      assert.equal(h.npcTrafficBodiesV163.get(peer.crewId), peer);
+      assert.equal(peer.x, initial[index], 'Planning reserves a bay without moving its body.');
+      assert.equal(h.npcTrafficStateV163.actors[index].targetX, goal + direction * 68 * (index + 1));
+    }
+    const walked = new Map(peers.map(peer => [peer, 0]));
+    for (let frame = 0; frame < 600; frame++) {
+      const before = new Map(peers.map(peer => [peer, peer.x]));
+      h.update(1 / 60);
+      for (const [index, peer] of peers.entries()) {
+        const step = Math.abs(peer.x - before.get(peer)); walked.set(peer, walked.get(peer) + step);
+        assert.ok(step <= 27 / 60 + 1e-7);
+        assert.equal(h.getNpcServiceTrafficActorsV163(0).find(body => body.crewId === peer.crewId), peer);
+        assert.equal(h.npcs.filter(body => body.crewId === peer.crewId).length, 1);
+        assert.ok(!overlaps(peer, owner));
+        if (index) assert.ok(direction * (peer.x - peers[index - 1].x) >= 56 - 1e-7);
+      }
+    }
+    for (const [index, peer] of peers.entries()) {
+      const state = h.npcTrafficStateV163.actors.find(row => row.crewId === peer.crewId);
+      assert.ok(Math.abs(peer.x - (goal + direction * 68 * (index + 1))) < .25);
+      assert.equal(state.homeX, initial[index]); assert.ok(state.distance > 20);
+      assert.ok(Math.abs(state.distance - walked.get(peer)) < 1e-7);
+    }
+    for (const { peer, x } of untouched) assert.equal(peer.x, x, 'A body outside the occupied chain stays untouched.');
+    const saved = normalizeNpcServiceTrafficV163(h.npcTrafficStateV163);
+    assert.equal(saved.actors.length, peers.length);
+    const reloaded = courtesyQueueV163(direction, count, JSON.parse(JSON.stringify(saved)));
+    assert.deepEqual(normalizeNpcServiceTrafficV163(reloaded.h.npcTrafficStateV163), saved);
+    for (const state of saved.actors) {
+      const body = reloaded.h.getNpcServiceTrafficActorsV163(0).find(peer => peer.crewId === state.crewId);
+      assert.equal(body.x, state.x); assert.equal(body.roomId, state.roomId);
+    }
+  }
+});
+
+test('courtesy chain reservations remain atomic for player, owner, contact, crisis, mission, care and circuit limits', () => {
+  const cases = [
+    ['player', ({ h, goal, direction }) => { h.player.x = goal + direction * 176; }],
+    ['owner', ({ h, peers }) => { h.queueOwners.push(peers[1]); }],
+    ['work', ({ peers }) => { peers[1].workClock = 1; }],
+    ['support', ({ peers }) => { peers[1].supportClock = 1; }],
+    ['downed', ({ peers }) => { peers[1].downed = true; }],
+    ...['alert', 'missionAssigned', 'needsCare'].map(flag => [flag, ({ h, peers }) => {
+      const id = peers[1].crewId, resolution = h.npcRoutineResolutionsV62.get(id);
+      h.npcRoutineResolutionsV62.set(id, { ...resolution, [flag]: true });
+    }]),
+    ['circuit limit', ({ h, goal, direction }) => {
+      const intent = h.getNpcServiceTrafficIntentsV163()[0];
+      if (direction === 1) intent.maxX = goal + 100; else intent.minX = goal - 100;
+      h.getNpcServiceTrafficIntentsV163 = () => [intent];
+    }]
+  ];
+  for (const direction of [1, -1]) for (const [label, prepare] of cases) {
+    const fixture = courtesyQueueV163(direction); prepare(fixture);
+    const before = fixture.peers.map(peer => peer.x);
+    fixture.h.planNpcServiceCourtesyV163();
+    assert.equal(fixture.h.npcTrafficStateV163.actors.length, 0, label + '/' + direction);
+    assert.deepEqual(fixture.peers.map(peer => peer.x), before, label + ': no partial movement');
+  }
+});
+
+test('courtesy chain preemption preserves the original bookmark, body and travelled distance', () => {
+  const { h, owner, peers, goal } = courtesyQueueV163();
+  const peer = peers[0], before = { crewId: peer.crewId, deck: 0, roomId: peer.roomId, homeRoomId: peer.roomId,
+    x: peer.x, y: 532, homeX: 2180, targetX: peer.x, velocity: 0, time: 5, distance: peer.x - 2180,
+    facing: 1, phase: 'holding', routineKey: h.npcRoutineResolutionsV62.get(peer.crewId).deterministicKey,
+    ownerCrewId: 'crew-01-mara-vega', routeId: 'mara-archives',
+    bulkheadProgress: Object.fromEntries(h.npcTrafficDoorsV163[0].map(door => [door.id, door.progress])) };
+  h.npcTrafficStateV163.actors.push(before); h.npcTrafficBodiesV163.set(peer.crewId, peer);
+  h.planNpcServiceCourtesyV163();
+  assert.equal(h.npcTrafficStateV163.actors.length, 2);
+  assert.equal(h.npcTrafficStateV163.actors[0], before);
+  assert.equal(h.npcTrafficBodiesV163.get(peer.crewId), peer);
+  assert.equal(before.ownerCrewId, owner.crewId); assert.equal(before.routeId, 'maksim-cockpit:deck-0');
+  assert.equal(before.homeX, 2180); assert.equal(before.time, 5); assert.equal(before.distance, peer.x - 2180);
+  const protectedFixture = courtesyQueueV163(), protectedPeer = protectedFixture.peers[1];
+  const protectedState = { ...before, crewId: protectedPeer.crewId, x: protectedPeer.x, homeX: protectedPeer.x,
+    targetX: protectedPeer.x, ownerCrewId: 'crew-14-echo-a', routeId: 'echo-escape',
+    routineKey: protectedFixture.h.npcRoutineResolutionsV62.get(protectedPeer.crewId).deterministicKey };
+  protectedFixture.h.npcTrafficStateV163.actors.push(protectedState);
+  protectedFixture.h.npcTrafficBodiesV163.set(protectedPeer.crewId, protectedPeer);
+  const snapshot = structuredClone(protectedState);
+  protectedFixture.h.planNpcServiceCourtesyV163();
+  assert.deepEqual(protectedFixture.h.npcTrafficStateV163.actors, [snapshot], 'A foreign reservation cannot be absorbed into the chain.');
+});
+
 for (const id of ['maksim-arrival', 'inez-bioforge', 'mara-archives']) {
   test(id + ': a complete native watch visibly clears actual unowned peers without crossing, duplicating or moving another route owner', () => {
     const route = routes.find(r => r.definition.id === id), c = route.definition;

@@ -119,6 +119,17 @@ def finish_action(page,name):
  save_png(name,frame['png'],'native-mission-action',frame['state']);return frame['state']
 
 
+# The renderer stamps this receipt after drawing the body and held weapon.
+# It has no `visible` flag. Require the current frame and accepted-shot serial
+# so a shot between animation frames cannot reuse the previous framebuffer.
+NATIVE_HELD_WEAPON_FRAME_V165 = '''p.heldWeaponVisualV125?.schema===125
+ &&p.heldWeaponVisualV125.shotSerial===p.shots
+ &&p.heldWeaponVisualV125.timeSeconds===e.animationTime
+ &&p.playerAppearanceVisualV126?.drawn
+ &&p.playerAppearanceVisualV126.layers?.some(layer=>layer.slot==='weapon'
+  &&layer.itemId===p.heldWeaponVisualV125.weaponId)'''
+
+
 def walk_to(page,target,hub=False):
  accessor='__ATF_HUB__' if hub else '__ATF_GAME__'
  current=page.evaluate('()=>'+accessor+'.player.x');key='KeyD' if target>current else 'KeyA'
@@ -254,9 +265,9 @@ try:
    'tiles':[{'position':str(x)+':16','type':'floor'} for x in range(48)]+[{'position':'2:15','type':'spawn'},{'position':'46:15','type':'objective'},{'position':'4:15','type':'terminal'}]}
   import_plan(page,plan,slug+'-disclosed-floor.json');canvas=page.locator('#game-canvas');capture_native(page,slug+'-native-mission-idle.png')
   p0=native_state(page);walk_to(page,p0['player']['x']+110);capture_native(page,slug+'-native-mission-walk.png')
-  canvas.focus();page.mouse.move(1200,500);page.mouse.down(button='right');page.wait_for_function('()=>__ATF_GAME__.player.heldWeaponVisualV125?.visible')
+  canvas.focus();page.mouse.move(1200,500);page.mouse.down(button='right');page.wait_for_function('()=>{const e=__ATF_GAME__,p=e.player;return p.aimingV124&&('+NATIVE_HELD_WEAPON_FRAME_V165+');}')
   capture_native(page,slug+'-native-mission-aim.png');shots=native_state(page)['player']['shots']
-  observe_action(page,'p.shots>'+str(shots)+'&&p.heldWeaponVisualV125?.visible');page.mouse.down(button='left');fired=finish_action(page,slug+'-native-mission-fire.png');page.mouse.up(button='left');page.mouse.up(button='right')
+  observe_action(page,'p.shots>'+str(shots)+'&&('+NATIVE_HELD_WEAPON_FRAME_V165+')');page.mouse.down(button='left');fired=finish_action(page,slug+'-native-mission-fire.png');page.mouse.up(button='left');page.mouse.up(button='right')
   check(slug+': native firing uses the actual issued handgun and keeps the selected six parts',
    fired['weapon']['weaponId']=='weapon-003-m4a3-service-pistol' and fired['appearance']['selected']['slots']==outfit['slots'])
   canvas.focus();observe_action(page,'p.reloading');page.keyboard.press('KeyR');finish_action(page,slug+'-native-mission-reload.png');page.wait_for_function('()=>!__ATF_GAME__.player.reloading')
