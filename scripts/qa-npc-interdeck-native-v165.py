@@ -142,6 +142,10 @@ def walk_to(page, c, x, timeout=120):
         distance = x - p['x']
         if abs(distance) <= 7 and abs(p['vx']) < 1:
             return
+        # Let native inertia settle once inside the existing arrival tolerance.
+        if abs(distance) <= 7:
+            page.wait_for_timeout(60)
+            continue
         key = 'KeyD' if distance > 0 else 'KeyA'
         page.keyboard.press(key, delay=max(16, min(160, abs(distance) * 3)))
         page.wait_for_timeout(60)

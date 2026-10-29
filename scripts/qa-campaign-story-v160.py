@@ -193,6 +193,78 @@ def protected_difference(before, after, path=''):
     return [] if before == after else [{'path': path, 'before': before, 'after': after}]
 
 
+def service_clock_evidence(before, after, reload_interval):
+    """Admit only measured animation clocks of these exact service owners.
+
+    Rook and Tamsin are the two V165 workpost owners observed after the real
+    QZ-18 return. Other new routes must still produce an unexpected difference.
+    """
+    rows = []
+    for state_field, route_id, expected_crew_id in [
+            ('npcServiceRoutesV161', 'idris-engine', 'crew-03-idris-kwan'),
+            ('npcServiceRoutesV161', 'leila-galley', 'crew-15-leila-s-rensen'),
+            ('npcMedicalRouteV162', 'noor-morgue', 'crew-04-noor-okafor'),
+            ('npcAnnexRoutesV163', 'maksim-arrival', 'crew-08-maksim-orlov'),
+            ('npcAnnexRoutesV163', 'inez-bioforge', 'crew-09-inez-harlow'),
+            ('npcAnnexRoutesV163', 'asha-refuge', 'crew-12-asha-mbaye'),
+            ('npcAnnexRoutesV163', 'jun-water', 'crew-11-jun-park'),
+            ('npcAnnexRoutesV163', 'mara-archives', 'crew-01-mara-vega'),
+            ('npcAnnexWorkpostRoutesV165', 'rook-cctv', 'crew-06-rook'),
+            ('npcAnnexWorkpostRoutesV165', 'tamsin-proving', 'crew-02-tamsin-velez')]:
+        before_routes = before['hub'].get(state_field, {}).get('routes', {})
+        after_routes = after['hub'].get(state_field, {}).get('routes', {})
+        old_actor = before_routes.get(route_id, {}).get('actor')
+        new_actor = after_routes.get(route_id, {}).get('actor')
+        if old_actor is None and new_actor is None:
+            continue
+        same_crew = (isinstance(old_actor, dict) and isinstance(new_actor, dict)
+                     and old_actor.get('crewId') == new_actor.get('crewId') == expected_crew_id)
+        old_time = old_actor.get('time') if isinstance(old_actor, dict) else None
+        new_time = new_actor.get('time') if isinstance(new_actor, dict) else None
+        measured_clock_valid = (same_crew and type(reload_interval) in [int, float]
+                                and math.isfinite(reload_interval) and reload_interval >= 0
+                                and type(old_time) in [int, float]
+                                and type(new_time) in [int, float]
+                                and math.isfinite(old_time) and math.isfinite(new_time)
+                                and 0 <= new_time - old_time <= reload_interval)
+        path = '/hub/' + state_field + '/routes/' + route_id + '/actor/time'
+        # Only a known, unchanged crew identity may advance this single
+        # animation clock within the measured reload/navigation interval.
+        # Room, location, route phase, handoff and every other actor field
+        # remain in the exact protected comparison above.
+        rows.append({
+            'path': path, 'stateField': state_field, 'routeId': route_id, 'expectedCrewId': expected_crew_id,
+            'beforeCrewId': old_actor.get('crewId') if isinstance(old_actor, dict) else None,
+            'afterCrewId': new_actor.get('crewId') if isinstance(new_actor, dict) else None,
+            'sameExactCrewIdentity': same_crew, 'before': old_time, 'after': new_time,
+            'maximumMeasuredDeltaSeconds': reload_interval, 'accepted': measured_clock_valid,
+            'reason': 'Only the finite, non-regressing animation clock of the same known service crew may advance, bounded by measured reload/native-navigation elapsed seconds; no frame tolerance or other route field is excepted.'})
+    return rows
+
+
+def reload_failure_diagnostic(invariants):
+    """Bound CI output to useful deltas; full snapshots remain in report.json."""
+    def bounded(value):
+        if isinstance(value, dict):
+            return {'type': 'object', 'keys': len(value)}
+        if isinstance(value, list):
+            return {'type': 'array', 'length': len(value)}
+        return value[:120] if isinstance(value, str) else value
+
+    def sampled(rows):
+        return [{'path': str(row.get('path', ''))[:180],
+                 'before': bounded(row.get('before')), 'after': bounded(row.get('after'))}
+                for row in rows[:6]]
+
+    differences = invariants.get('unexpectedDifferences', [])
+    rejected = [row for row in invariants.get('preciseSessionExceptions', []) if not row.get('accepted')]
+    return {'unexpectedDifferenceCount': len(differences), 'unexpectedDifferences': sampled(differences),
+            'rejectedClockCount': len(rejected), 'rejectedClocks': sampled(rejected),
+            'ledgerStable': invariants.get('ledgerBefore') == invariants.get('ledgerAfter'),
+            'durableLedgersStable': invariants.get('durableLedgersBefore') == invariants.get('durableLedgersAfter'),
+            'subjectsStable': invariants.get('subjectsBefore') == invariants.get('subjectsAfter')}
+
+
 source_start = manifest()
 (output / 'profile-source-start.json').write_text(json.dumps(source_start, indent=2))
 script = """import{createDefaultSave}from'./src/save.js';const s=createDefaultSave();s.needsPlayerCreationV84=false;s.player.name='QA QZ18 V160';s.strategy.plannedCampaignId='special-archive-relay';s.worldId='world-05-lethe';s.scene='hub';s.settings.reducedMotion=false;console.log(JSON.stringify(s));"""
@@ -362,44 +434,8 @@ with sync_playwright() as pw:
                           and math.isfinite(old_npc_time) and math.isfinite(new_npc_time) and new_npc_time >= old_npc_time)
         differences = protected_difference(protected(before_reload), protected(after_reload))
         allowed_paths = {'/statistics/playSeconds', '/hub/npcCirculationV158/actor/time'}
-        service_clock_exceptions = []
-        for state_field, route_id, expected_crew_id in [
-                ('npcServiceRoutesV161', 'idris-engine', 'crew-03-idris-kwan'),
-                ('npcServiceRoutesV161', 'leila-galley', 'crew-15-leila-s-rensen'),
-                ('npcMedicalRouteV162', 'noor-morgue', 'crew-04-noor-okafor'),
-                ('npcAnnexRoutesV163', 'maksim-arrival', 'crew-08-maksim-orlov'),
-                ('npcAnnexRoutesV163', 'inez-bioforge', 'crew-09-inez-harlow'),
-                ('npcAnnexRoutesV163', 'asha-refuge', 'crew-12-asha-mbaye'),
-                ('npcAnnexRoutesV163', 'jun-water', 'crew-11-jun-park'),
-                ('npcAnnexRoutesV163', 'mara-archives', 'crew-01-mara-vega')]:
-            before_routes = before_reload['hub'].get(state_field, {}).get('routes', {})
-            after_routes = after_reload['hub'].get(state_field, {}).get('routes', {})
-            old_actor = before_routes.get(route_id, {}).get('actor')
-            new_actor = after_routes.get(route_id, {}).get('actor')
-            if old_actor is None and new_actor is None:
-                continue
-            same_crew = (isinstance(old_actor, dict) and isinstance(new_actor, dict)
-                         and old_actor.get('crewId') == new_actor.get('crewId') == expected_crew_id)
-            old_time = old_actor.get('time') if isinstance(old_actor, dict) else None
-            new_time = new_actor.get('time') if isinstance(new_actor, dict) else None
-            measured_clock_valid = (same_crew and type(old_time) in [int, float]
-                                    and type(new_time) in [int, float]
-                                    and math.isfinite(old_time) and math.isfinite(new_time)
-                                    and 0 <= new_time - old_time <= reload_interval)
-            path = '/hub/' + state_field + '/routes/' + route_id + '/actor/time'
-            # Only a known, unchanged crew identity may advance this single
-            # animation clock within the measured reload/navigation interval.
-            # Room, location, route phase, handoff and every other actor field
-            # remain in the exact protected comparison above.
-            if measured_clock_valid:
-                allowed_paths.add(path)
-            service_clock_exceptions.append({
-                'path': path, 'stateField': state_field, 'routeId': route_id, 'expectedCrewId': expected_crew_id,
-                'beforeCrewId': old_actor.get('crewId') if isinstance(old_actor, dict) else None,
-                'afterCrewId': new_actor.get('crewId') if isinstance(new_actor, dict) else None,
-                'sameExactCrewIdentity': same_crew, 'before': old_time, 'after': new_time,
-                'maximumMeasuredDeltaSeconds': reload_interval, 'accepted': measured_clock_valid,
-                'reason': 'Only the finite, non-regressing animation clock of the same known service crew may advance, bounded by measured reload/native-navigation elapsed seconds; no frame tolerance or other route field is excepted.'})
+        service_clock_exceptions = service_clock_evidence(before_reload, after_reload, reload_interval)
+        allowed_paths.update(row['path'] for row in service_clock_exceptions if row['accepted'])
         unexpected_differences = [row for row in differences if row['path'] not in allowed_paths]
         last_before, last_after = before_reload['strategy']['lastOperation'], after_reload['strategy']['lastOperation']
         ledger_before = next(item for item in last_before['insertionState']['phases'] if item['kind'] == 'preparation')['payload']['campaignStoryReturnV160']
@@ -485,6 +521,9 @@ with sync_playwright() as pw:
     except Exception as error:
         report['status'] = 'failed'; report['error'] = str(error)
         report['lastPassedCheck'] = report['checks'][-1] if report['checks'] else None
+        if 'reloadInvariants' in report:
+            print('QZ18_RELOAD_DIAGNOSTIC ' + json.dumps(reload_failure_diagnostic(report['reloadInvariants']),
+                                                       ensure_ascii=False, separators=(',', ':')), flush=True)
         # Keep CI diagnostic annotations bounded and single-command escaped;
         # the retained private report remains authoritative for full evidence.
         message = (str(error)[:1200] + '; phase=' + str(report.get('phase'))[:300]

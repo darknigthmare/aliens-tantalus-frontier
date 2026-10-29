@@ -22264,7 +22264,7 @@
     "scripts/verify-audit-continuation-v163.mjs": "0e62c205e45006c9adbf6f58850233b40d79aaaaefabd802fad3c845dc5eaaf1",
     "scripts/verify-audit-v143.mjs": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
     "scripts/verify-campaign-lethe-v163.mjs": "a5aeb4ac231b038fe0f1e711ac3cdc33d97e66b7414001d9b095622ec43d8c80",
-    "scripts/verify-campaign-story-v160.mjs": "e1bee1d0c2a9336cef6d11722222e8606a76cac9e7b27b0d29c3cd7abcc5c0b4",
+    "scripts/verify-campaign-story-v160.mjs": "321a8909f59755ecfcecb0a63dcf16fd507df762bc655e822a0cb16fc711b897",
     "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
     "scripts/verify-costume-atlases-v165.mjs": "aa60a94bb91557743e4f89b6754298f63da018e7a7c98d2c5db3aa36f9acb36f",
     "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
