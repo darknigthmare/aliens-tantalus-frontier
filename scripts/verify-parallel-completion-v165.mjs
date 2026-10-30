@@ -5,7 +5,9 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { verifyAuditSuccessionV163 } from './audit-succession-v163.mjs';
+import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSourcesV163,
+  V165_VERIFIER_SUCCESSORS_V171, V165_VERIFIER_SUCCESSORS_V173,
+  V165_VERIFIER_SUCCESSORS_V174 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -13,6 +15,7 @@ import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
 import { PLAYER_COSTUME_PART_ASSETS_V165 } from '../src/player-costume-parts-v165.js';
 import { PLAYER_COSTUME_ASSETS_V119, getPlayerCostumeSkinV119 } from '../src/player-costume-skins-v119.js';
 import { HUB_ROOM_SERVICE_DETAILS_V165 } from '../src/hub-room-service-details-v165.js';
+import { isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 
 const prefix = 'docs/forge/xeno-trials/';
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -26,6 +29,12 @@ const streamIds = ['C165-COSTUMES', 'C165-RIGS', 'C165-ROUTES', 'C165-ARCHIVES',
 const ciWorkstreams = ['campaign', 'crew-lifts', 'crew-leases', 'weapons-title', 'trials',
   'player-v165', 'ship-v165', 'costumes-v165', 'rigs-v165', 'workposts-v165',
   'cal-v165', 'david-v165', 'inez-v165', 'maksim-v165', 'jun-v165'];
+
+test('V165 current provenance and development guide satisfy the source text admission guard', () => {
+  for (const path of [prefix + 'progress-v163.json', 'docs/development/GAMEDEV_GUIDANCE.md'])
+    assert.equal(isPublicDistributionTextV86(read(path).toString()), true,
+      'Private source metadata in tracked development documentation: ' + path);
+});
 
 export function verifyParallelCompletionV165(record, readSource = read) {
   const followup = record.followupV165;
@@ -41,6 +50,10 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   });
   assert.equal(sha(canonicalMap(followup.runtimeV164SourceSha256)), followup.historicalSource.runtimeMapSha256,
     'The delivered V164 source map is immutable, independent of current source bytes');
+  const corrections = verifyGamedevCorrectionV163(record, readSource);
+  // The reviewed modern source hashes are a separate, exact successor chain.
+  // V165's recorded map remains historical and is never rewritten to today's bytes.
+  const effective = resolveAuditSourcesV163(previous, readSource, { effective: true });
   const before = followup.runtimeV164SourceSha256, after = record.runtimeSourceSha256;
   assert.equal(Object.keys(before).length, 105);
   for (const path of Object.keys(before)) assert.ok(Object.hasOwn(after, path), 'Omitted V164 source: ' + path);
@@ -49,10 +62,12 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   assert.equal(followup.runtimeSourceCount, Object.keys(after).length);
   const requiredVerifiers = new Set();
   for (const row of followup.sourceChanges) {
-    assert.ok(!row.path.startsWith('src/forge'), 'Forge is deferred');
+    assert.ok(!row.path.startsWith('src/forge') || Object.hasOwn(corrections, row.path),
+      'Forge is deferred outside the verified maintenance correction');
     assert.equal(row.previousSha256, before[row.path] ?? null);
     assert.equal(row.currentSha256, after[row.path]);
-    assert.equal(sha(readSource(row.path)), row.currentSha256, 'Stale V165 source: ' + row.path);
+    assert.equal(sha(readSource(row.path)), effective[row.path] ?? row.currentSha256,
+      'Unexpected undeclared source successor: ' + row.path);
     assert.ok(row.reason.startsWith('V165 :') && row.reason.trim().length >= 60);
     assert.ok(row.verifiers.length > 0 && new Set(row.verifiers).size === row.verifiers.length);
     row.verifiers.forEach(verifier => requiredVerifiers.add(verifier));
@@ -69,10 +84,31 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   }
   for (const verifier of requiredVerifiers) {
     assert.match(verifier, /^scripts\/verify-[a-zA-Z0-9._-]+\.mjs$/);
-    assert.equal(sha(readSource(verifier)), record.verifierSourceSha256V165[verifier], 'Unreviewed verifier bytes: ' + verifier);
+    const legacy = V165_VERIFIER_SUCCESSORS_V171[verifier];
+    const revision = V165_VERIFIER_SUCCESSORS_V173[verifier];
+    const next = V165_VERIFIER_SUCCESSORS_V174[verifier];
+    if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
+      'Invalid V171-to-V173 verifier successor: ' + verifier);
+    if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
+      'Invalid V173/V171-to-V174 verifier successor: ' + verifier);
+    const successor = next || revision || legacy;
+    if (legacy) assert.equal(record.verifierSourceSha256V165[verifier], legacy.previousSha256,
+      'Untrusted V165 original verifier receipt: ' + verifier);
+    assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? record.verifierSourceSha256V165[verifier],
+      'Unreviewed verifier bytes: ' + verifier);
   }
-  for (const [verifier, expected] of Object.entries(record.verifierSourceSha256V165))
-    assert.equal(sha(readSource(verifier)), expected, verifier);
+  for (const [verifier, expected] of Object.entries(record.verifierSourceSha256V165)) {
+    const legacy = V165_VERIFIER_SUCCESSORS_V171[verifier];
+    const revision = V165_VERIFIER_SUCCESSORS_V173[verifier];
+    const next = V165_VERIFIER_SUCCESSORS_V174[verifier];
+    if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
+      'Invalid V171-to-V173 verifier successor: ' + verifier);
+    if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
+      'Invalid V173/V171-to-V174 verifier successor: ' + verifier);
+    const successor = next || revision || legacy;
+    if (legacy) assert.equal(legacy.previousSha256, expected, 'Incorrect V165 verifier predecessor');
+    assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? expected, verifier);
+  }
   assert.deepEqual(followup.releaseEvidence, { nodeSuite: null, nativeCandidate: null, ci: null, review: null, merge: null });
   assert.deepEqual([followup.artClosed, followup.approved1to1, followup.humanParticipants], [0, 0, 0]);
   assert.equal(followup.forgeState, 'DEFERRED_BY_USER');
@@ -133,15 +169,15 @@ test('V165 counts describe actual limited presentation rigs, separated clothing 
   assert.equal(XENO_TRIALS_RIG_DATA_V165.length, 170);
   assert.equal(new Set(XENO_TRIALS_RIG_DATA_V165.map(row => row.fighterId)).size, 170);
   assert.deepEqual(f.rigs, { newScopedPresentation: 170, historicalPresentation: 19, totalPresentationIdentities: 189, newFullWalkAdmissions: 0 });
-  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 8);
+  assert.equal(PLAYER_COSTUME_OUTFITS_V165.length, 10);
   assert.equal(PLAYER_COSTUME_LINKED_OUTFITS_V165.length, 2);
-  assert.equal(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.length, 10);
-  assert.equal(new Set(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.map(row => row.costumeId)).size, 10);
+  assert.equal(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.length, 12);
+  assert.equal(new Set(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.map(row => row.costumeId)).size, 12);
   assert.deepEqual(PLAYER_COSTUME_OUTFITS_V165.map(row => row.slug), ['amanda-working', 'working-joe-uniform',
     'sevastopol-security', 'ripley-bomber', 'bishop-utility', 'fireteam-seegson-maintenance',
-    'fireteam-nostromo-jacket', 'fireteam-flightsuit']);
+    'fireteam-nostromo-jacket', 'fireteam-flightsuit', 'vasquez-bdu', 'rain-jacket']);
   const parts = PLAYER_COSTUME_PART_ASSETS_V165;
-  assert.equal(parts.length, 17);
+  assert.equal(parts.length, 21);
   for (const asset of parts) assert.equal(sha(read(asset.path.slice(1))), asset.sha256);
   assert.equal(PLAYER_COSTUME_ASSETS_V119.length, 5);
   for (const asset of PLAYER_COSTUME_ASSETS_V119) assert.equal(sha(read(asset.path.slice(1))), asset.sha256);
@@ -154,8 +190,8 @@ test('V165 counts describe actual limited presentation rigs, separated clothing 
     assert.equal(skin.admission, 'reference-preview-only-not-playable-skin');
     assert.equal(skin.exact, false);
   }
-  assert.deepEqual(f.costumes, { requestedFranchiseReferences: 30, newModularOutfits: 8, linkedExistingV129Presets: 2,
-    equippableFranchiseReferences: 10, remainingFranchiseReferencesOpen: 20, separatedPartPngs: 17,
+  assert.deepEqual(f.costumes, { requestedFranchiseReferences: 30, newModularOutfits: 10, linkedExistingV129Presets: 2,
+    equippableFranchiseReferences: 12, remainingFranchiseReferencesOpen: 18, separatedPartPngs: 21,
     historicalNostromoPngsUnchanged: 5, referencePreviewAtlases: 15, referencePreviewCells: 240, newPlayablePrecompositedSkins: 0 });
   assert.equal(Object.keys(HUB_ROOM_SERVICE_DETAILS_V165).length, 35);
   assert.equal(Object.values(HUB_ROOM_SERVICE_DETAILS_V165).filter(row => !row.omissionReason).length, 31);
@@ -223,6 +259,8 @@ test('invented receipts, omitted source changes, modified verifiers and broadene
     r => { r.followupV165.releaseEvidence.nativeCandidate = { status: 'PASSED', captures: 835 }; },
     r => { r.followupV165.approved1to1 = 1; },
     r => { r.followupV165.forgePrioritiesDeferred = 0; },
+    r => { delete r.followupGamedev20261029; },
+    r => { r.followupGamedev20261029.corrections[0].path = 'src/forge-journey-v141.js'; },
     r => { r.followupV165.rigs.newFullWalkAdmissions = 170; },
     r => { r.followupV165.costumes.newPlayablePrecompositedSkins = 3; },
     r => { r.followupV165.npcRoutes.routesClosedByThisDocument = 7; },

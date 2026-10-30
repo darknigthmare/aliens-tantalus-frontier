@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from '../src/hub-game.js';
 import { HubGame as RosterHub } from '../src/hub-v52-runtime.js';
@@ -24,6 +25,7 @@ import { HUB_NPC_MEDICAL_ROUTE_V162 as route, HUB_NPC_MEDICAL_ROUTE_DEFINITION_V
 import { HUB_NPC_ANNEX_SERVICE_ROUTES_V163 as routes, HUB_NPC_ANNEX_SERVICE_ROUTE_DEFINITIONS_V163 as definitions, normalizeNpcAnnexServiceRoutesV163, withHubNpcAnnexServiceRoutesV163 } from '../src/npc-annex-service-routes-v163.js';
 import { HUB_NPC_ANNEX_LEASE_DEFINITIONS_V163 as leaseDefinitions, getNpcAnnexLeaseRouteV163, normalizeNpcAnnexLeasesV163, withHubNpcAnnexLeasesV163 } from '../src/npc-annex-leases-v163.js';
 import { normalizeNpcServiceTrafficV163 } from '../src/npc-service-traffic-v163.js';
+import { withHubNpcInterdeckRoutesV165, NPC_INTERDECK_DEFINITIONS_V165 } from '../src/npc-interdeck-routes-v165.js';
 const LifeHub = withHubNpcLifeV136(RoutineHub);
 class FixtureBase {
   initializeNpcRoutinesV62(...a) { return RoutineHub.prototype.initializeNpcRoutinesV62.apply(this, a); }
@@ -73,6 +75,80 @@ function context(h, hour, extra = {}, rebuild = true) { return h.setNpcRoutineCo
 
 
 const leaseSnapshot = (h, id) => h.getSnapshot().npcAnnexLeasesV163.routes[id];
+
+function qaReturnProgressV163(options={}) {
+ const source=readFileSync(process.env.ATF_QA_ANNEX_LEASES_SOURCE||new URL('qa-npc-annex-leases-v163.py',import.meta.url),'utf8');
+ const literal=source.match(/NATIVE_ROUTE_PROGRESS_V163 = '''([\s\S]*?)'''/);
+ assert.ok(literal,'the verifier executes the pure observer actually used by both native QA waits');
+ return new Function('return ('+literal[1]+')')()({id:'echo-escape',annex:'escape-pods',annexDoor:122,returning:true,...options},0);
+}
+const echoWaitingV163=time=>({x:1169.2917956349206,y:532,deck:0,roomId:'escape-pods',stage:'service',
+ reason:'occupied',doorProgress:0,crossings:1,time});
+const maksimReturningV163=(time,x)=>({x,y:532,deck:3,roomId:'dropship-hangar',stage:'walking-home',
+ reason:'daily-schedule',doorProgress:0,crossings:2,liftJourneys:2,time});
+
+test('native lease QA follows only the exact interdeck dependency declared by the real passing controller',()=>{
+ const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
+ for(const id of ['noor-animal','echo-escape','jun-maintenance']){
+  const actual=NPC_INTERDECK_DEFINITIONS_V165.filter(d=>controller.npcInterdeckPassingRequestV165.call({
+   npcInterdeckStateV165:{routes:{[d.id]:{actor:{crewId:d.crewId}}}}},id)).map(d=>d.id);
+  assert.deepEqual(qaReturnProgressV163({id}).dependencyIds,actual);
+ }
+});
+
+test('native lease QA budgets real passenger clearance separately from its own return and reaches the local opening',()=>{
+ const progress=qaReturnProgressV163();
+ for(let seconds=0;seconds<=220;seconds++)assert.equal(progress.observe({actor:echoWaitingV163(100+seconds),
+  passageRequested:true,dependencies:[{id:'maksim-cockpit',actor:maksimReturningV163(seconds,2900-seconds*8)}]},seconds*1000),null);
+ assert.equal(progress.snapshot(220000).activeSimSeconds,0);
+ assert.equal(progress.snapshot(220000).dependencySimSeconds,220);
+ // The exact passenger has now returned. Every subsequent second belongs to
+ // ECHO's own150-second trip, even though total observed simulation exceeds it.
+ for(let seconds=1;seconds<=80;seconds++)assert.equal(progress.observe({actor:{...echoWaitingV163(320+seconds),
+  x:1169.2917956349206-seconds*13,stage:'walking',reason:'daily-schedule'},passageRequested:false,
+  dependencies:[{id:'maksim-cockpit',actor:null}]},(220+seconds)*1000),null);
+ const arrived={...echoWaitingV163(401),x:122,stage:'opening'};
+ assert.equal(progress.observe({actor:arrived,passageRequested:false,dependencies:[]},301000),null);
+ assert.equal(progress.occupiedOpening(arrived),true);
+ assert.equal(progress.snapshot(301000).activeSimSeconds,81);
+ assert.equal(progress.snapshot(301000).dependencySimSeconds,220);
+ assert.deepEqual(progress.snapshot(301000).waitingFor,[]);
+});
+
+test('native lease QA rejects frozen or unrelated dependencies despite advancing clocks and keeps both hard budgets',()=>{
+ for(const mode of ['frozen','unrelated','request-not-active','not-at-post','outbound']){
+  const progress=qaReturnProgressV163({returning:mode!=='outbound'});let failure=null;
+  for(let seconds=0;seconds<=60;seconds+=10){
+   const owner=echoWaitingV163(seconds);if(mode==='not-at-post')owner.stage='walking';
+   const passenger=maksimReturningV163(seconds,mode==='frozen'?2000:2000-seconds*8);
+   // Timers and unrelated activity cannot reset the physical-progress guard.
+   passenger.animationTime=seconds;passenger.lift={phase:'travel',elapsed:seconds};
+   failure=progress.observe({actor:owner,passageRequested:mode!=='request-not-active',dependencies:[
+    {id:mode==='unrelated'?'david-durandal':'maksim-cockpit',actor:passenger},
+    {id:'inez-civil',actor:maksimReturningV163(seconds,3000-seconds*8)}]},seconds*1000);
+  }
+  assert.equal(failure,'no-physical-return-progress',mode);
+ }
+ const own=qaReturnProgressV163();let failure=null;
+ for(let seconds=0;seconds<=151;seconds++)failure=own.observe({actor:{...echoWaitingV163(seconds),
+  x:1169-seconds*4,stage:'walking',reason:'daily-schedule'},passageRequested:false,dependencies:[]},seconds*1000);
+ assert.equal(failure,'simulated-return-budget-exhausted');
+ const wall=qaReturnProgressV163();
+ for(let seconds=0;seconds<=900;seconds++)failure=wall.observe({actor:echoWaitingV163(seconds),passageRequested:true,
+  dependencies:[{id:'maksim-cockpit',actor:maksimReturningV163(seconds,2300-seconds*2)}]},seconds*1000);
+ assert.equal(failure,'wall-return-budget-exhausted');
+ assert.equal(wall.snapshot(900000).activeSimSeconds,0);
+});
+
+test('native lease QA requires an occupied local portal, not a held service post or a different crossing',()=>{
+ const progress=qaReturnProgressV163(),a=echoWaitingV163(10);
+ assert.equal(progress.occupiedOpening(a),false,'the prior service/occupied false positive must fail');
+ for(const patch of [{stage:'walking',x:122},{stage:'opening',x:1169},{stage:'opening',x:122,crossings:2},
+  {stage:'opening',x:122,roomId:'cryo-bay'},{stage:'opening',x:122,reason:'daily-schedule'}])
+  assert.equal(progress.occupiedOpening({...a,...patch}),false);
+ assert.equal(progress.occupiedOpening({...a,stage:'opening',x:122}),true);
+});
+
 test('native command re-entry restores the actual05h30 legacy bookmark before a first-frame lease instead of sampling its new annex duty', () => {
  for (const d of leaseDefinitions) {
   const home=d.originRoomIds.at(-1),h=runtime(5.5,{deck:d.deck,roomId:home});

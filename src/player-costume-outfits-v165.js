@@ -40,7 +40,13 @@ export const PLAYER_COSTUME_OUTFITS_V165 = freeze([
     null, 'Aliens: Fireteam Elite (2021)'),
   outfit('fireteam-flightsuit', 'Combinaison de vol · adaptation Fireteam', 'Marine colonial',
     'Combinaison anthracite à fermeture claire, manches retroussées, gants et chaussures de travail claires ; adaptation du kit Nostromo Salvage.',
-    null, 'Aliens: Fireteam Elite (2021)')
+    null, 'Aliens: Fireteam Elite (2021)'),
+  outfit('vasquez-bdu', 'Treillis colonial · adaptation Vasquez', 'Vasquez',
+    'Haut, bras et pantalon de treillis séparés, avec bandeau rouge amovible ; tenue adaptée sur votre opérateur.',
+    'headband-vasquez-v129', 'Aliens (1986)'),
+  outfit('rain-jacket', 'Blouson rouge · adaptation Rain', 'Rain',
+    'Blouson rouge, manches et pantalon de colonie séparés ; tenue adaptée sur votre opérateur.',
+    null, 'Alien: Romulus (2024)')
 ]);
 
 // These are the very same documented V129 clothes, not new skins or palette
@@ -67,8 +73,10 @@ const byCostume = new Map(PLAYER_COSTUME_EQUIPPABLE_OUTFITS_V165.map(entry => [e
 export const getCostumeOutfitV165 = costumeId => byCostume.get(costumeId) || null;
 
 const labels = { torso: 'Haut', arms: 'Manches et gants', legs: 'Pantalon et bottes', helmet: 'Casque creux' };
+// Reused historical pieces keep their existing catalogue identity and provenance.
+// In particular, the BDU reuses Vasquez's V129 headband without redefining it.
 export const COSTUME_APPEARANCE_ITEMS_V165 = freeze(PLAYER_COSTUME_OUTFITS_V165.flatMap(entry =>
-  Object.entries(entry.slots).filter(([,id]) => id !== null).map(([slot,id]) => ({
+  Object.entries(entry.slots).filter(([,id]) => id !== null && id.endsWith('-v165')).map(([slot,id]) => ({
     id, slot, name: `${labels[slot]} · ${entry.name}`, label: `${labels[slot]} · ${entry.name}`,
     description: entry.description, rigType: 'echo9', cosmeticOnly: true, exact: false,
     collection: entry.collection, sourceWork: entry.sourceWork,

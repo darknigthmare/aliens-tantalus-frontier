@@ -233,28 +233,50 @@ export function withHubNpcServiceTrafficV163(Base) {
         const actor = intent.actor, direction = Math.sign(intent.goalX - actor.x);
         if (!direction) continue;
         const peers = this.getNpcServicePeersV163(intent.deck, actor.crewId);
-        const blockers = peers.filter(peer => !ownedIds.has(peer.crewId)
+        const candidates = peers.filter(peer => (!ownedIds.has(peer.crewId)
+            || this.canPlanNpcServiceOwnerCourtesyV166?.(intent, peer) === true)
           && (!this.npcTrafficBodiesV163.has(peer.crewId)
             || this.canPreemptNpcServiceCourtesyV165?.(intent, this.npcTrafficStateV163.actors.find(saved => saved.crewId === peer.crewId)))
           && intent.roomIds.includes(peer.roomId) && peer.alive !== false && !peer.downed
           && Math.abs(peer.y + peer.h - 624) < 1
-          && direction * (peer.x - actor.x) > 0 && direction * (peer.x - intent.goalX) < 56)
+          && direction * (peer.x - actor.x) > 0);
+        let blockers = candidates.filter(peer => direction * (peer.x - intent.goalX) < 56)
           .sort((a, b) => direction * (a.x - b.x));
-        const plans = blockers.map((peer, index) => ({ peer,
+        let plans = blockers.map((peer, index) => ({ peer,
           target: intent.goalX + direction * (68 + index * 68) }));
+        // A proposed bay can itself be occupied just beyond the initial
+        // approach window. Include only the real eligible bodies occupying
+        // those bays, then preserve their physical order. Each expansion
+        // adds existing peers; the normal guards below admit the whole plan
+        // or none of it, without moving a body during planning.
+        for (let expansion = 0; expansion < peers.length; expansion++) {
+          const added = candidates.filter(peer => !blockers.includes(peer)
+            && plans.some(({ target }) => overlap({ x: target - 12, y: 532, w: 68, h: 92 }, peer)));
+          if (!added.length) break;
+          blockers = [...blockers, ...added].sort((a, b) => direction * (a.x - b.x));
+          plans = blockers.map((peer, index) => ({ peer,
+            target: intent.goalX + direction * (68 + index * 68) }));
+        }
         const boxes = buildHubObstacleGeometryV87(intent.deck).filter(blocks);
         const player = !this.isAnnexActiveV71?.() && this.state?.deck === intent.deck && !this.ventActorV62 ? this.player : null;
         const blocked = plans.some(({ peer, target }) => target < intent.minX || target > intent.maxX
           || boxes.some(box => overlap({ x: target, y: 532, w: 44, h: 92 }, box))
-          || [...owners, ...(player ? [player] : []), ...peers.filter(p => !blockers.includes(p))]
+          || [...owners.filter(owner => !blockers.includes(owner)), ...(player ? [player] : []), ...peers.filter(p => !blockers.includes(p))]
             .some(other => other !== actor && other !== peer && (other === player || actorRoom(other) === intent.deck)
               && overlap({ x: target - 12, y: 532, w: 68, h: 92 }, other))
           || this.npcRoutineResolutionsV62?.get(peer.crewId)?.alert
           || this.npcRoutineResolutionsV62?.get(peer.crewId)?.missionAssigned
           || this.npcRoutineResolutionsV62?.get(peer.crewId)?.needsCare
-          || peer.workClock > 0 || peer.supportClock > 0);
+          || peer.workClock > 0 || peer.supportClock > 0
+          || ownedIds.has(peer.crewId) && this.canReserveNpcServiceOwnerCourtesyV166?.(intent, peer, target) !== true);
         if (blocked) continue;
         for (const { peer, target } of plans) {
+          if (ownedIds.has(peer.crewId)) {
+            // The collective plan reserves this slot, but the existing
+            // physical owner retains its ledger, body and sole walking tick.
+            this.reserveNpcServiceOwnerCourtesyV166(intent, peer, target);
+            continue;
+          }
           const r = this.npcRoutineResolutionsV62.get(peer.crewId);
           const body = peer;
           const previous = this.npcTrafficStateV163.actors.find(saved => saved.crewId === peer.crewId);

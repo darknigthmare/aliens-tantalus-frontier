@@ -2734,7 +2734,7 @@
     "src/forge-decoration-v141.js": "8df7f9f306e2635547b4488198b1d3f6f815633999516bc5819d28cadff2cbfe",
     "src/forge-editor-base.js": "bcb438505c136e72d9c97ea05fca38331aac3738e935b2398dedd6ef0a946060",
     "src/forge-editor-v130.css": "26fbbe3ab81709df35eb90b0f3eca57829297673a935a1a3a95603a23fddedba",
-    "src/forge-journey-admission-v141.js": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+    "src/forge-journey-admission-v141.js": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
     "src/forge-mission-runtime-v141.js": "1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0",
     "src/forge-model-v130.js": "9bc39547e1bb1b7add1489efab073d22302a64f6220a701eb6abcd1c084252c7",
     "src/forge-narrative-ui-v156.js": "766a0a9abf003514425260e361868701117831de3245289d97fae92d109fdaf4",
@@ -2801,8 +2801,8 @@
     "src/npc-medical-route-v162.js": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
     "src/npc-mission-runtime-v55.js": "d1922839a7e23f9912ae2e38d5e2ae442cf6da67718ae0e97d28d5fc4f5b6390",
     "src/npc-service-routes-v161.js": "d3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750",
-    "src/npc-service-traffic-v163.js": "08d91c32f20217f1f3eb9f193787f17096745e304e8c48287a633c789ea95147",
-    "src/npc-station-relays-v166.js": "e0fc98ade1450bd4fa82e1de513172fb8573bc4932d2c0722e77e9311437e8f1",
+    "src/npc-service-traffic-v163.js": "50b90764828ab341cabb0d5795addd06092beed00957e6abc2a8310675e8de5d",
+    "src/npc-station-relays-v166.js": "371f5de036111531b79adffea4e6d5ffaf0c1f86f5773b18fed88b129ccaf156",
     "src/player-action-rig-v127.js": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
     "src/player-appearance-hub-v126.js": "7f056e474636f829e5309b1c52e68e04d3e2844b275fb001b574d6af90fb8b6f",
     "src/player-appearance-preview-v126.js": "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
@@ -2812,13 +2812,13 @@
     "src/player-arm-constraints-v160.js": "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
     "src/player-body-rig-v125.js": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
     "src/player-costume-atlases-v165.js": "4026d6e6b6047a7d868d2b03cea56da3e2dd5de7f099ac730a0166a3b844a8e6",
-    "src/player-costume-outfits-v165.js": "ed0e7d794aecfa733a9e271611cc7d7928deea3b1e72fa4d7a2ed170a95d01bd",
-    "src/player-costume-parts-v165.js": "94f3cba4aa29950b749fad9e0a109dae8573d09e34f44d91db80c1814ddc8195",
+    "src/player-costume-outfits-v165.js": "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+    "src/player-costume-parts-v165.js": "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
     "src/player-gait-v133.js": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
     "src/player-human-proportions-v160.js": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
     "src/player-locomotion-rig-v129.js": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
     "src/player-modular-rig-v126.js": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
-    "src/player-transit-rig-v128.js": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
+    "src/player-transit-rig-v128.js": "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
     "src/player-weapon-runtime-v125.js": "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
     "src/refuge-art-v87.js": "958f9c403d5dab828df67781425afe120769b45666f2e2a51732339b5831f053",
     "src/reload-presentation-v163.js": "1d7611f540bd44b74f4ac9457026a59824fd30b06cf24d2ffb4b6cbc37963bce",
@@ -6835,15 +6835,15 @@
         [
           "src/npc-service-traffic-v163.js",
           "Non épinglé en V162",
-          "08d91c32f20217f1f3eb9f193787f17096745e304e8c48287a633c789ea95147",
-          "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+          "50b90764828ab341cabb0d5795addd06092beed00957e6abc2a8310675e8de5d",
+          "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Maintenance gamedev du 29 octobre 2026 : inclure les pairs admissibles qui occupent une baie de dégagement proposée, jusqu’à stabilisation de la chaîne ; préserver ordre physique, identités, garde atomique, préemptions autorisées et reprise. Quatrième application gamedev du 29 octobre 2026 : réserver dans le plan collectif une baie physique pour Tamsin avant son premier service lorsque le véritable trajet Maksim-cockpit traverse le pont 0 ; conserver son propriétaire V166, son corps unique, son origine observée et les phases durables de dégagement, attente et retour, avec refus atomiques, collisions, priorités et cloisons natives.",
           "scripts/verify-npc-annex-service-routes-v163.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-medical-route-v162.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-life-v136.mjs ; scripts/verify-npc-circulation-v158.mjs ; scripts/verify-npc-annex-circulation-v159.mjs ; scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-climb-rig-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
         ],
         [
           "src/npc-station-relays-v166.js",
           "Non épinglé en V162",
-          "e0fc98ade1450bd4fa82e1de513172fb8573bc4932d2c0722e77e9311437e8f1",
-          "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+          "371f5de036111531b79adffea4e6d5ffaf0c1f86f5773b18fed88b129ccaf156",
+          "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Quatrième application gamedev du 29 octobre 2026 : réserver dans le plan collectif une baie physique pour Tamsin avant son premier service lorsque le véritable trajet Maksim-cockpit traverse le pont 0 ; conserver son propriétaire V166, son corps unique, son origine observée et les phases durables de dégagement, attente et retour, avec refus atomiques, collisions, priorités et cloisons natives.",
           "scripts/verify-npc-annex-workpost-routes-v165.mjs ; scripts/verify-npc-cal-climb-rig-v165.mjs ; scripts/verify-npc-cal-logistics-route-v165.mjs ; scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-interdeck-passage-v165.mjs ; scripts/verify-npc-jun-climb-rig-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
         ],
         [
@@ -6891,15 +6891,15 @@
         [
           "src/player-costume-outfits-v165.js",
           "Non épinglé en V162",
-          "ed0e7d794aecfa733a9e271611cc7d7928deea3b1e72fa4d7a2ed170a95d01bd",
-          "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
+          "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+          "V165 : ajouter les tenues modulaires Vasquez BDU et Rain au catalogue, aux six emplacements et aux transactions existantes ; réutiliser le bandeau V129 sous son identifiant historique sans dupliquer son entrée. Conserver les armes choisies, les sauvegardes, les dix autres ensembles modulaires et le statut d’adaptation non certifiée.",
           "scripts/verify-costume-atlases-v165.mjs"
         ],
         [
           "src/player-costume-parts-v165.js",
           "Non épinglé en V162",
-          "94f3cba4aa29950b749fad9e0a109dae8573d09e34f44d91db80c1814ddc8195",
-          "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
+          "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
+          "V165 : intégrer quatre PNG originaux transparents pour Vasquez BDU et Rain, six poses de torse par tenue et deux orientations des chaussures de Rain. Mesurer les découpes, ouvertures et appuis, puis recaler les épaules sur des rendus des vrais pixels. Préserver exactement les huit kits antérieurs et leurs dix-sept fichiers ; les nouveaux vêtements restent adaptés à Echo9, sans certification 1:1.",
           "scripts/verify-costume-atlases-v165.mjs"
         ],
         [
@@ -6922,6 +6922,13 @@
           "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
           "V165 : resserrer et raccorder les appuis, les longueurs de membres et les attaches du joueur et des alliés, avec marche entraînée par le déplacement réel, transitions et secours de chargement ; les corps physiques et les armes demeurent les propriétaires natifs. Suite V167 : synchroniser les bras mains libres avec les pas observés ; rejeter les déplacements à horloge figée et conserver la phase de marche des alliés pendant leurs actions au sol, sans modifier les événements de ces actions. Suite V168 : cadrer les seize vrais locuteurs sur leur tête et leurs épaules, avec transparence conservée, initiales accessibles et protection contre les chargements tardifs ; ne jamais présenter un sprite entier comme avatar.",
           "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-locomotion-rig-v129.mjs ; scripts/verify-player-appearance-v126.mjs ; scripts/verify-player-arm-phase-v167.mjs ; scripts/verify-allied-patrol-phase-v167.mjs ; scripts/verify-dialogue-portraits-v168.mjs"
+        ],
+        [
+          "src/player-transit-rig-v128.js",
+          "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
+          "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
+          "V165 : sélectionner une définition gauche complète lorsqu’elle existe et respecter l’orientation source des chaussures de Rain pour conserver le sens du marquage. Garder les calculs antérieurs pour les pièces sans variante, refuser une variante présente mais incomplète et conserver les appuis, l’IK, la physique et les transitions de locomotion.",
+          "scripts/verify-costume-atlases-v165.mjs ; scripts/verify-player-transit-rig-v128.mjs ; scripts/verify-player-locomotion-rig-v129.mjs"
         ],
         [
           "src/refuge-art-v87.js",
@@ -12608,10 +12615,10 @@
           "C165-COSTUMES",
           "Trente ensembles demandés / pièces modulaires",
           "IMPLEMENTATION_PREPUBLICATION",
-          "Huit créations de tenues modulaires, dix-sept PNG de pièces portables ; deux liaisons aux vrais presets V129 Hicks/Hudson, soit dix références équipables. Les trois dernières créations adaptent des kits Fireteam documentés distincts. Quinze atlas de référence, 240 cellules, séparés du rendu jouable.",
-          "20 autres références franchise restent ouvertes. Les deux liaisons réutilisent des vêtements V129 et ne sont pas de nouveaux arts. Nostromo V119 conserve ses cinq PNG ; aucun fallback précomposé à M41A pour les nouveaux kits. Aucune approbation artistique 1:1.",
-          "src/player-costume-atlases-v165.js ; src/player-costume-outfits-v165.js ; src/player-costume-parts-v165.js",
-          "scripts/verify-costume-atlases-v165.mjs ; scripts/qa-costume-atlases-v165.py",
+          "Dix créations de tenues modulaires, vingt et un PNG de pièces portables ; deux liaisons aux vrais presets V129 Hicks/Hudson, soit douze références équipables dans ce chantier. Vasquez BDU et Rain ajoutent quatre PNG avec torses gauche/droite distincts et chaussures directionnelles pour Rain. Quinze atlas de référence, 240 cellules, restent séparés du rendu jouable.",
+          "18 autres références franchise restent ouvertes. Le catalogue complet compte 31 entrées et 13 tenues équipables en incluant le Nostromo V119 historique, hors des 30 références de ce chantier. Les deux liaisons V129 réutilisent des vêtements existants ; les cinq PNG Nostromo restent inchangés. Les nouveaux kits habillent Echo9 et utilisent son arme réellement équipée. Aucune approbation artistique 1:1.",
+          "src/player-costume-atlases-v165.js ; src/player-costume-outfits-v165.js ; src/player-costume-parts-v165.js ; src/player-transit-rig-v128.js",
+          "scripts/verify-costume-atlases-v165.mjs ; scripts/verify-player-transit-rig-v128.mjs ; scripts/qa-costume-atlases-v165.py",
           0,
           0
         ],
@@ -15951,7 +15958,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "5dc7c05f8e0be15ccb3f84ad5f390a3b946db27c12cd17a0bcdb354141a0e18f",
+  "workbookSha256": "95848cb8a1ab14aed101a4f66d99bc2fb3321ee74482bd83540afa265586e61b",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -16026,6 +16033,18 @@
           "scripts/verify-npc-station-relays-v166.mjs",
           "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/forge-journey-admission-v141.js",
+        "previousSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "currentSha256": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+        "reason": "Maintenance gamedev du 29 octobre 2026, après le périmètre Forge historique V163. Corriger l’admission des parcours existants : refuser les branches à sens unique dont les objectifs physiques ne peuvent pas tous être visités, conserver les cycles, les chaînes et les récompenses narratives distantes ; évaluer une salle secondaire depuis une véritable arrivée libre et supportée, sans bloquer sur son insertion inutilisée ni admettre un objectif scellé.",
+        "verifiers": [
+          "scripts/verify-audit-continuation-v162.mjs",
+          "scripts/verify-audit-continuation-v163.mjs",
+          "scripts/verify-forge-admission-v141.mjs",
+          "scripts/verify-parallel-completion-v165.mjs"
         ]
       },
       {
@@ -16205,6 +16224,17 @@
           "scripts/verify-player-arm-phase-v167.mjs",
           "scripts/verify-allied-patrol-phase-v167.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/player-transit-rig-v128.js",
+        "previousSha256": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
+        "currentSha256": "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
+        "reason": "V165 : sélectionner une définition gauche complète lorsqu’elle existe et respecter l’orientation source des chaussures de Rain pour conserver le sens du marquage. Garder les calculs antérieurs pour les pièces sans variante, refuser une variante présente mais incomplète et conserver les appuis, l’IK, la physique et les transitions de locomotion.",
+        "verifiers": [
+          "scripts/verify-costume-atlases-v165.mjs",
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-player-locomotion-rig-v129.mjs"
         ]
       },
       {
@@ -16801,8 +16831,8 @@
       {
         "path": "src/npc-service-traffic-v163.js",
         "previousSha256": null,
-        "currentSha256": "08d91c32f20217f1f3eb9f193787f17096745e304e8c48287a633c789ea95147",
-        "reason": "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+        "currentSha256": "50b90764828ab341cabb0d5795addd06092beed00957e6abc2a8310675e8de5d",
+        "reason": "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Maintenance gamedev du 29 octobre 2026 : inclure les pairs admissibles qui occupent une baie de dégagement proposée, jusqu’à stabilisation de la chaîne ; préserver ordre physique, identités, garde atomique, préemptions autorisées et reprise. Quatrième application gamedev du 29 octobre 2026 : réserver dans le plan collectif une baie physique pour Tamsin avant son premier service lorsque le véritable trajet Maksim-cockpit traverse le pont 0 ; conserver son propriétaire V166, son corps unique, son origine observée et les phases durables de dégagement, attente et retour, avec refus atomiques, collisions, priorités et cloisons natives.",
         "verifiers": [
           "scripts/verify-npc-annex-service-routes-v163.mjs",
           "scripts/verify-npc-service-routes-v161.mjs",
@@ -16824,8 +16854,8 @@
       {
         "path": "src/npc-station-relays-v166.js",
         "previousSha256": null,
-        "currentSha256": "e0fc98ade1450bd4fa82e1de513172fb8573bc4932d2c0722e77e9311437e8f1",
-        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+        "currentSha256": "371f5de036111531b79adffea4e6d5ffaf0c1f86f5773b18fed88b129ccaf156",
+        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Quatrième application gamedev du 29 octobre 2026 : réserver dans le plan collectif une baie physique pour Tamsin avant son premier service lorsque le véritable trajet Maksim-cockpit traverse le pont 0 ; conserver son propriétaire V166, son corps unique, son origine observée et les phases durables de dégagement, attente et retour, avec refus atomiques, collisions, priorités et cloisons natives.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
           "scripts/verify-npc-cal-climb-rig-v165.mjs",
@@ -16881,8 +16911,8 @@
       {
         "path": "src/player-costume-outfits-v165.js",
         "previousSha256": null,
-        "currentSha256": "ed0e7d794aecfa733a9e271611cc7d7928deea3b1e72fa4d7a2ed170a95d01bd",
-        "reason": "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
+        "currentSha256": "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+        "reason": "V165 : ajouter les tenues modulaires Vasquez BDU et Rain au catalogue, aux six emplacements et aux transactions existantes ; réutiliser le bandeau V129 sous son identifiant historique sans dupliquer son entrée. Conserver les armes choisies, les sauvegardes, les dix autres ensembles modulaires et le statut d’adaptation non certifiée.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs"
         ]
@@ -16890,8 +16920,8 @@
       {
         "path": "src/player-costume-parts-v165.js",
         "previousSha256": null,
-        "currentSha256": "94f3cba4aa29950b749fad9e0a109dae8573d09e34f44d91db80c1814ddc8195",
-        "reason": "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
+        "currentSha256": "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
+        "reason": "V165 : intégrer quatre PNG originaux transparents pour Vasquez BDU et Rain, six poses de torse par tenue et deux orientations des chaussures de Rain. Mesurer les découpes, ouvertures et appuis, puis recaler les épaules sur des rendus des vrais pixels. Préserver exactement les huit kits antérieurs et leurs dix-sept fichiers ; les nouveaux vêtements restent adaptés à Echo9, sans certification 1:1.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs"
         ]
@@ -21215,19 +21245,21 @@
       "id": "C165-COSTUMES",
       "owner": "costumes",
       "label": "Trente ensembles demandés / pièces modulaires",
-      "scope": "Huit créations de tenues modulaires, dix-sept PNG de pièces portables ; deux liaisons aux vrais presets V129 Hicks/Hudson, soit dix références équipables. Les trois dernières créations adaptent des kits Fireteam documentés distincts. Quinze atlas de référence, 240 cellules, séparés du rendu jouable.",
-      "limits": "20 autres références franchise restent ouvertes. Les deux liaisons réutilisent des vêtements V129 et ne sont pas de nouveaux arts. Nostromo V119 conserve ses cinq PNG ; aucun fallback précomposé à M41A pour les nouveaux kits. Aucune approbation artistique 1:1.",
+      "scope": "Dix créations de tenues modulaires, vingt et un PNG de pièces portables ; deux liaisons aux vrais presets V129 Hicks/Hudson, soit douze références équipables dans ce chantier. Vasquez BDU et Rain ajoutent quatre PNG avec torses gauche/droite distincts et chaussures directionnelles pour Rain. Quinze atlas de référence, 240 cellules, restent séparés du rendu jouable.",
+      "limits": "18 autres références franchise restent ouvertes. Le catalogue complet compte 31 entrées et 13 tenues équipables en incluant le Nostromo V119 historique, hors des 30 références de ce chantier. Les deux liaisons V129 réutilisent des vêtements existants ; les cinq PNG Nostromo restent inchangés. Les nouveaux kits habillent Echo9 et utilisent son arme réellement équipée. Aucune approbation artistique 1:1.",
       "modules": [
         "src/player-costume-atlases-v165.js",
         "src/player-costume-outfits-v165.js",
-        "src/player-costume-parts-v165.js"
+        "src/player-costume-parts-v165.js",
+        "src/player-transit-rig-v128.js"
       ],
       "qa": [
         "scripts/qa-costume-atlases-v165.py"
       ],
       "state": "IMPLEMENTATION_PREPUBLICATION",
       "verifiers": [
-        "scripts/verify-costume-atlases-v165.mjs"
+        "scripts/verify-costume-atlases-v165.mjs",
+        "scripts/verify-player-transit-rig-v128.mjs"
       ],
       "releaseValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
       "artClosed": 0,
@@ -21539,6 +21571,18 @@
         "reason": "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs"
+        ]
+      },
+      {
+        "path": "src/forge-journey-admission-v141.js",
+        "previousSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "currentSha256": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+        "reason": "V165 : conserver les ancres historiques Forge et déclarer la seule maintenance d’admission du 29 octobre 2026, sans rouvrir les priorités Forge différées. Corriger l’admission des parcours existants : refuser les branches à sens unique dont les objectifs physiques ne peuvent pas tous être visités, conserver les cycles, les chaînes et les récompenses narratives distantes ; évaluer une salle secondaire depuis une véritable arrivée libre et supportée, sans bloquer sur son insertion inutilisée ni admettre un objectif scellé.",
+        "verifiers": [
+          "scripts/verify-audit-continuation-v162.mjs",
+          "scripts/verify-audit-continuation-v163.mjs",
+          "scripts/verify-forge-admission-v141.mjs",
+          "scripts/verify-parallel-completion-v165.mjs"
         ]
       },
       {
@@ -21923,8 +21967,8 @@
       {
         "path": "src/npc-service-traffic-v163.js",
         "previousSha256": "cd4b19be365797e185bd6d55e4125457decc134e4298dfd4a18a544b9a7ca3b2",
-        "currentSha256": "08d91c32f20217f1f3eb9f193787f17096745e304e8c48287a633c789ea95147",
-        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+        "currentSha256": "50b90764828ab341cabb0d5795addd06092beed00957e6abc2a8310675e8de5d",
+        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Maintenance gamedev du 29 octobre 2026 : inclure les pairs admissibles qui occupent une baie de dégagement proposée, jusqu’à stabilisation de la chaîne ; préserver ordre physique, identités, garde atomique, préemptions autorisées et reprise. Quatrième application gamedev du 29 octobre 2026 : réserver dans le plan collectif une baie physique pour Tamsin avant son premier service lorsque le véritable trajet Maksim-cockpit traverse le pont 0 ; conserver son propriétaire V166, son corps unique, son origine observée et les phases durables de dégagement, attente et retour, avec refus atomiques, collisions, priorités et cloisons natives.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
           "scripts/verify-npc-cal-climb-rig-v165.mjs",
@@ -21933,14 +21977,15 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
         "path": "src/npc-station-relays-v166.js",
         "previousSha256": null,
-        "currentSha256": "e0fc98ade1450bd4fa82e1de513172fb8573bc4932d2c0722e77e9311437e8f1",
-        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+        "currentSha256": "371f5de036111531b79adffea4e6d5ffaf0c1f86f5773b18fed88b129ccaf156",
+        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Quatrième application gamedev du 29 octobre 2026 : réserver dans le plan collectif une baie physique pour Tamsin avant son premier service lorsque le véritable trajet Maksim-cockpit traverse le pont 0 ; conserver son propriétaire V166, son corps unique, son origine observée et les phases durables de dégagement, attente et retour, avec refus atomiques, collisions, priorités et cloisons natives.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
           "scripts/verify-npc-cal-climb-rig-v165.mjs",
@@ -22024,8 +22069,8 @@
       {
         "path": "src/player-costume-outfits-v165.js",
         "previousSha256": null,
-        "currentSha256": "ed0e7d794aecfa733a9e271611cc7d7928deea3b1e72fa4d7a2ed170a95d01bd",
-        "reason": "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
+        "currentSha256": "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+        "reason": "V165 : ajouter les tenues modulaires Vasquez BDU et Rain au catalogue, aux six emplacements et aux transactions existantes ; réutiliser le bandeau V129 sous son identifiant historique sans dupliquer son entrée. Conserver les armes choisies, les sauvegardes, les dix autres ensembles modulaires et le statut d’adaptation non certifiée.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs"
         ]
@@ -22033,8 +22078,8 @@
       {
         "path": "src/player-costume-parts-v165.js",
         "previousSha256": null,
-        "currentSha256": "94f3cba4aa29950b749fad9e0a109dae8573d09e34f44d91db80c1814ddc8195",
-        "reason": "V165 : raccorder huit créations de tenues en pièces modulaires à la personnalisation de l’opérateur et lier Hicks/Hudson à leurs vrais presets V129 existants ; distinguer les dix-sept PNG de pièces portables des quinze atlas de référence et conserver le skin Nostromo historique, équipement, identité et compatibilité des anciens profils.",
+        "currentSha256": "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
+        "reason": "V165 : intégrer quatre PNG originaux transparents pour Vasquez BDU et Rain, six poses de torse par tenue et deux orientations des chaussures de Rain. Mesurer les découpes, ouvertures et appuis, puis recaler les épaules sur des rendus des vrais pixels. Préserver exactement les huit kits antérieurs et leurs dix-sept fichiers ; les nouveaux vêtements restent adaptés à Echo9, sans certification 1:1.",
         "verifiers": [
           "scripts/verify-costume-atlases-v165.mjs"
         ]
@@ -22079,6 +22124,17 @@
           "scripts/verify-player-arm-phase-v167.mjs",
           "scripts/verify-allied-patrol-phase-v167.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs"
+        ]
+      },
+      {
+        "path": "src/player-transit-rig-v128.js",
+        "previousSha256": "872cb530d903bab7cb0b9cb26da9652926f9e588c98c8a88ad9c034b45814613",
+        "currentSha256": "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
+        "reason": "V165 : sélectionner une définition gauche complète lorsqu’elle existe et respecter l’orientation source des chaussures de Rain pour conserver le sens du marquage. Garder les calculs antérieurs pour les pièces sans variante, refuser une variante présente mais incomplète et conserver les appuis, l’IK, la physique et les transitions de locomotion.",
+        "verifiers": [
+          "scripts/verify-costume-atlases-v165.mjs",
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-player-locomotion-rig-v129.mjs"
         ]
       },
       {
@@ -22173,11 +22229,11 @@
     },
     "costumes": {
       "requestedFranchiseReferences": 30,
-      "newModularOutfits": 8,
+      "newModularOutfits": 10,
       "linkedExistingV129Presets": 2,
-      "equippableFranchiseReferences": 10,
-      "remainingFranchiseReferencesOpen": 20,
-      "separatedPartPngs": 17,
+      "equippableFranchiseReferences": 12,
+      "remainingFranchiseReferencesOpen": 18,
+      "separatedPartPngs": 21,
       "historicalNostromoPngsUnchanged": 5,
       "referencePreviewAtlases": 15,
       "referencePreviewCells": 240,
@@ -22220,7 +22276,7 @@
         "jun-v165"
       ],
       "workflow": ".github/workflows/non-forge-regression-v163.yml",
-      "workflowSha256": "0451e940b9a2bcc6d7dd517e7840590a1c01d9c37ec751cefbb8f2c73b3b56c3",
+      "workflowSha256": "d450e1b1cdb822f86510c523c87e9848aff3f0f0a012cba31d9ca389a522a468",
       "conclusion": null
     },
     "releaseEvidence": {
@@ -22236,12 +22292,15 @@
   },
   "verifierSourceSha256V165": {
     "scripts/verify-allied-patrol-phase-v167.mjs": "68627ad4da93413ac8ad5df8b129e1401ef6fb73b2a9a310b017271cbbefeb55",
-    "scripts/verify-audit-v143.mjs": "86d52580d58483818ebc2aa65edb076cbb0426123b0657a9f775a18c8e033270",
+    "scripts/verify-audit-continuation-v162.mjs": "4a0f581c4cd915fbab05351d455b0b9a4d0e3722a659323026b4b021a488d9cc",
+    "scripts/verify-audit-continuation-v163.mjs": "0e62c205e45006c9adbf6f58850233b40d79aaaaefabd802fad3c845dc5eaaf1",
+    "scripts/verify-audit-v143.mjs": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
     "scripts/verify-campaign-lethe-v163.mjs": "a5aeb4ac231b038fe0f1e711ac3cdc33d97e66b7414001d9b095622ec43d8c80",
-    "scripts/verify-campaign-story-v160.mjs": "e1bee1d0c2a9336cef6d11722222e8606a76cac9e7b27b0d29c3cd7abcc5c0b4",
+    "scripts/verify-campaign-story-v160.mjs": "321a8909f59755ecfcecb0a63dcf16fd507df762bc655e822a0cb16fc711b897",
     "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
-    "scripts/verify-costume-atlases-v165.mjs": "aa60a94bb91557743e4f89b6754298f63da018e7a7c98d2c5db3aa36f9acb36f",
+    "scripts/verify-costume-atlases-v165.mjs": "9110d44e1c69721d8ba26eb83b61f2bbd6e709d6db11664db167632068ef1dee",
     "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
+    "scripts/verify-forge-admission-v141.mjs": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782",
     "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
     "scripts/verify-hub-backgrounds-v168.mjs": "20314af3bb3849981646db3a73f65c3cbb22f326385e6c9ea6591e4415801ed3",
     "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
@@ -22254,28 +22313,29 @@
     "scripts/verify-native-rig-terminal-v163.mjs": "7e40cc10ae88b20a0e470dc524f55fa46203b8110c278587adff0a66e2c20845",
     "scripts/verify-native-rig-weapon-rigidity-v163.mjs": "1983607d4e4c0098febd07d2e721d0921df691b7a112fe16b54e95a38f2b8d0e",
     "scripts/verify-npc-annex-circulation-v159.mjs": "fe2ec8edc0a25708970a76eabcbce140f27c025ebdd5e81752a61ddfc0eaf1c2",
-    "scripts/verify-npc-annex-leases-v163.mjs": "51520f832d3d7d07e66a606b5f16e1000accd576f1feae8010b9785dacecd5fc",
-    "scripts/verify-npc-annex-service-routes-v163.mjs": "9e661719189310dcff2081258aa3d52497558c86f290c37a85ee5b866825242d",
+    "scripts/verify-npc-annex-leases-v163.mjs": "a66fd715db0dc3f08aa9614af687fa699136f958b8d38244d7cfb165129723f0",
+    "scripts/verify-npc-annex-service-routes-v163.mjs": "5cd2986a960aa659f321260eec006e64d56e6a9fb7d9ea897ed0508a2f3a00d0",
     "scripts/verify-npc-annex-workpost-routes-v165.mjs": "53e0d41f012ba7c083214a7e53657dc08e85342c9675cc699660c3bcd3ed5a58",
     "scripts/verify-npc-cal-climb-rig-v165.mjs": "63e01b44052a65392901ef54a227be24920621e28079f134e632eb2cd71d5006",
     "scripts/verify-npc-cal-logistics-route-v165.mjs": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
     "scripts/verify-npc-circulation-v158.mjs": "3feb8b1460764784bff3b002e270189032157ccc7e33b7636fa8806b1ef0e24e",
     "scripts/verify-npc-interdeck-passage-v165.mjs": "8a92af78cb7a9ee175eed22c4c65d4779645342adf0152948b842476c50f26ef",
-    "scripts/verify-npc-interdeck-routes-v165.mjs": "0438c5735e021b6de1dd40fd9ad85a55db8e3484b801667fd1f140925b48c606",
+    "scripts/verify-npc-interdeck-routes-v165.mjs": "1e0a4abba4be1d18d4d9b6023749246179634035542c4f0f7e6e0deec4d24733",
     "scripts/verify-npc-jun-climb-rig-v165.mjs": "a2094edcddea1f9e3b3d4333390b793d9661ec760e49151a81008a9ac954e88a",
     "scripts/verify-npc-life-v136.mjs": "7984aa4dd6e544dcf31bf5a2f32173786c9155e0d359d928e9c80c94f544cac0",
     "scripts/verify-npc-matte-apertures-v164.mjs": "f9e20a36782bd44d0efac0bbb20b4bcb9ca27a3e539460c272b6f70aed053a50",
     "scripts/verify-npc-medical-route-v162.mjs": "9a426ed06f6f396fd0eb7989a7135e6ab49834745879dd5eaf3548db183df774",
     "scripts/verify-npc-relay-locked-bulkheads-v166.mjs": "52c2b1a55f40b32063e164a2d9d5a4bccb997bd0f62362c3c87f8473446e1e17",
-    "scripts/verify-npc-service-routes-v161.mjs": "cf49d1c3bd838fd9cb292e5b07141440259457250f17ecb89746e7d6f0fc8ae1",
-    "scripts/verify-npc-station-relays-v166.mjs": "72c55f2d7b6d851c02d0ebae310b0c4d44a53ac8034cc406173b9c5964948259",
-    "scripts/verify-parallel-completion-v165.mjs": "e025e90e553fac8297c7658dd66cb243e63d829d5be7989a8d4470c6a4053224",
+    "scripts/verify-npc-service-routes-v161.mjs": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
+    "scripts/verify-npc-station-relays-v166.mjs": "b331b5b23224ec3e80f612e1ab70bb52d016a000c837b7b6dfa6ea2a406dff69",
+    "scripts/verify-parallel-completion-v165.mjs": "c49d78b68bae4f17844320dd73a119f056b97566101e79b8186c60e7026718bb",
     "scripts/verify-player-allies-contacts-v165.mjs": "a493954439f413c34e826888fddf61eba78f4e9bb85367a7bab11949fccef7a1",
-    "scripts/verify-player-appearance-v126.mjs": "f37afd4e4735ee84080511fe2f1d6ce53e9114fe87def495d8e9ebea72c25c6e",
+    "scripts/verify-player-appearance-v126.mjs": "5eae7584cc69bf96b3ac8f680fa3b96bc62e5ece1f8be3b3b0315fdec54b5ea1",
     "scripts/verify-player-arm-phase-v167.mjs": "d9f87786c8fa989fe35033e0969dc0631a6fbcb2dee727d820fe7de8048d8a5e",
     "scripts/verify-player-locomotion-rig-v129.mjs": "542ba6a0da7988ed264cd18db280c6f2da27d0ad6a5928212bc112a7b9581fd6",
+    "scripts/verify-player-transit-rig-v128.mjs": "6c6d57288f8ac46bebc5d72637e452b62781e454a4985b5080ad64c0074f5529",
     "scripts/verify-player-weapon-rig-v125.mjs": "2cc74b21db33c540bc2466c444aca7a87f507e012e47d4895f38816bc16da98b",
-    "scripts/verify-public-release-v86.mjs": "77a2e8163ead189f81ea57ebba9a0a7b488da7e331f3705bb78ab4fa9810c959",
+    "scripts/verify-public-release-v86.mjs": "4b432c2bd6d5d30af744ae96103a678d96cf6839bfe76907ab56077d48cb7eb3",
     "scripts/verify-range-crew-interaction-v167.mjs": "9276254ba9f8f28c769df1f53e07b3f2aa79de6f8a0d1fdab61ef374b4954d33",
     "scripts/verify-release-artifact-v143.mjs": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
     "scripts/verify-reload-presentation-v163.mjs": "7751841c22a3c8daa104cc9112b6df6406e040f1e385a67ff9561913287c7683",
@@ -22285,7 +22345,7 @@
     "scripts/verify-weapon-effects-v124.mjs": "26cea89893acbea90aa853f80c5795ef08152fe03f7e8d384c51459b3418b220",
     "scripts/verify-weapon-runtime-v124.mjs": "ff0e57aa0346b960ae87e20eed56af324ffd2ffac6c0e47818eb22b3b5d8a572",
     "scripts/verify-xeno-trials-capture-reception-v158.mjs": "9b848dfb8dd3c7945a62f7e16bdd91c480d4b33a3355f85088ca63bab5ff1fe6",
-    "scripts/verify-xeno-trials-capture-v163.mjs": "0110ec7caa484cb5f0bf072204d8fd9be9675925e41d2a2da1216263315d1970",
+    "scripts/verify-xeno-trials-capture-v163.mjs": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
     "scripts/verify-xeno-trials-controls-v150.mjs": "532e144f7a337b1ee8b8e9bd420bd23fe2f103970072891a30adf190c153fe76",
     "scripts/verify-xeno-trials-grapple-v153.mjs": "6cc90d28711d2ac58ac02a3d2443f08b17e788ef8b2cacc543b9232e63556397",
     "scripts/verify-xeno-trials-presentations-v156.mjs": "acfa6c0e57c6e72f15e56ecabb909248e0b64219622e23643b417040635e1ed9",
@@ -22317,6 +22377,2124 @@
       "native": null,
       "ci": null,
       "merge": null
+    }
+  },
+  "followupGamedev20261029": {
+    "schema": 1,
+    "id": "GAMEDEV-20261029-FORGE-ADMISSION",
+    "baselineCommit": "ffea37ad83ef1fa1fdd0a1e0549b4b4035bb4c52",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "scope": {
+      "existingModuleMaintenance": true,
+      "newForgeRuntimeModules": 0,
+      "deferredForgePrioritiesReopened": 0,
+      "historicalForgeScope": "V163"
+    },
+    "corrections": [
+      {
+        "path": "src/forge-journey-admission-v141.js",
+        "previousSha256": "5bbc1fd5546e55c7f82c13d5f1b2962e8f49a00c5baf5c614b2a9ade81d14491",
+        "currentSha256": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+        "reason": "Corriger l’admission des parcours existants : refuser les branches à sens unique dont les objectifs physiques ne peuvent pas tous être visités, conserver les cycles, les chaînes et les récompenses narratives distantes ; évaluer une salle secondaire depuis une véritable arrivée libre et supportée, sans bloquer sur son insertion inutilisée ni admettre un objectif scellé.",
+        "verifier": {
+          "path": "scripts/verify-forge-admission-v141.mjs",
+          "sha256": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782"
+        }
+      }
+    ],
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    }
+  },
+  "followupFidelity20261029": {
+    "schema": 1,
+    "id": "GAMEDEV-20261029-COSTUME-FIDELITY",
+    "baselineCommit": "ce12c76d0fdb5a19d606a7a70f1b652875caa5a9",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "scope": "Two documented modular costumes and the remaining Jun QA correction; no whole-franchise completion claim.",
+    "generation": {
+      "method": "built-in-imagegen",
+      "generationRequests": 10,
+      "productionPngs": 4,
+      "pixelEditsAfterGeneration": false,
+      "iterations": [
+        {
+          "id": "vasquez_upper",
+          "outputSha256": "baed189a7e200fe55feb25c54bab50f197aed290ed0f32c98e4575a01ac47a00",
+          "status": "SUPERSEDED_WRONG_LEFT_TORSO_DIRECTION",
+          "transparentBackground": true,
+          "prompt": "Use case: precise-object-edit / game sprite production.\nAsset: a new transparent upper-body clothing parts atlas for an existing 2D side-on game rig, inspired by the faithfully documented VASQUEZ BDU costume from ALIENS (1986).\nInput 1 bishop-upper.png is the EXACT layout/scale/painted game-art reference to preserve, NOT the garment to keep. Inputs 2-3 are licensed NECA Vasquez BDU costume references for colors, cut and details. Output only the new atlas on genuine RGBA transparency, ideally 1254x1254, same square layout, empty gaps and no cropping of pieces.\nReplace the blue Bishop clothing with the sleeveless Vasquez BDU: pale warm sand fabric with the reference's muted grey-blue, brown and sage camouflage patches; close upright collar, two chest flap pockets, black lower vest belt and the diagonal dark green pouch strap visible in the reference. This is NOT the red tank-top smartgunner costume; no smartgun harness, no weapon, no chest armor, no head, no helmet. Anatomical proportions must fit the existing operator rig; do not draw a full character.\nKEEP ALL 14 separated components in a strict four-column/four-row layout, matching the reference cells. Row1 column1 LEFT-facing upright hollow vest; r1c2 LEFT-facing forward lean hollow vest; r1c3 LEFT-facing compact/crouch hollow vest; r1c4 RIGHT-facing upright hollow vest. Row2 c1 RIGHT-facing forward vest; r2c2 RIGHT-facing compact vest; r2c3 near bare muscular upper arm; r2c4 near bare forearm. Row3 c1 near gripping hand with black fingerless glove, r3c2 near relaxed service hand with black fingerless glove, r3c3 far bare upper arm, r3c4 far bare forearm. Row4 c1 far gripping hand with fingerless glove, r4c2 far relaxed service hand with fingerless glove. R4c3 and c4 empty. Arms must NOT have sleeves. Preserve the approximate original elbow/wrist connection angles and component scale. Hands hold no object.\nIMPORTANT: all six torso pieces are hollow garment shells; neck and BOTH arm apertures are actual TRANSPARENT holes, never black fill, skin or mannequin. Rounded cut ends of limbs are clean and non-gory. Arms lightly tanned natural skin, textured painted game style, not shiny toy plastic. Faithful small USCM/name-tape markings where visible, correctly oriented on each side; the word LOCO belongs only on a visible BACK panel, never on the front chest. Do not invent large text or cover the chest with lettering. Preserve material realism and subtle outlines of the source game art, crisp alpha edges, no cast shadows on background, no grid, labels, title or watermark. The left-facing garments must be separately rendered rather than mirrored text. Do not add any extra pieces."
+        },
+        {
+          "id": "vasquez_legs",
+          "outputSha256": "ce9f840174e8e762af26483cc25a0898cf2315cac8402d77ab41c976374f95c5",
+          "status": "RETAINED_PRODUCTION_BYTES",
+          "transparentBackground": true,
+          "prompt": "Use case: precise-object-edit / game sprite production.\nAsset: new transparent separated trouser/boot atlas VASQUEZ BDU from ALIENS (1986), for an existing articulated side-on game rig.\nInput1 bishop-legs.png fixes the EXACT 4x4 layout, pose, relative sizes and separation of all 14 parts. Input2 is licensed NECA BDU appearance reference. Replace blue utility trousers with the reference's pale warm sand camouflage BDU trousers, muted grey-blue, sage and brown patches, cargo pockets and worn brown belt. Replace low work shoes with the high black lace-up combat boots, trouser bottoms tucked into them. Keep the original foot/ankle pivot geometry rather than making oversized boots. Clothing-only image, no character, skin, head or upper body; no pistol, knife, gun or other weapon attached to the pieces.\nOutput genuine RGBA transparent background, square ideally1254x1254. Keep every piece separated, fully inside its original cell with generous transparent padding, matching source atlas:\nrow1 c1 pelvis/short upper hip section, c2 near thigh, c3 near shin, c4 near boot;\nrow2 c1 far thigh, c2 far shin, c3 far boot, c4 empty;\nrow3 c1 second pelvis/hip, c2 near thigh, c3 near shin, c4 near boot;\nrow4 c1 far thigh, c2 far shin, c3 far boot, c4 empty.\nAll boots face right as in layout reference. Preserve the actual sewn silhouettes and knee/ankle segment angles of the reference game rig. Real hollow waist opening, no body/mannequin. Consistent hand-painted detailed 2D game art with subtle outlines, fabric folds and black leather texture, not plastic toy material. No rectangular backgrounds, cast shadows, grid, labels, captions, watermarks or detached decorative debris. Actual bottom of each boot must be opaque and uncut, with a clear heel and toe.",
+          "productionPath": "assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/legs.png"
+        },
+        {
+          "id": "vasquez_upper_direction",
+          "outputSha256": "36813636dc858c4951995a22907ed4a582267199f64b5dae371b25e1c7b3a47b",
+          "status": "SUPERSEDED_OVERSIZED_ARM_APERTURES",
+          "transparentBackground": true,
+          "prompt": "Edit this transparent sprite atlas, changing ONLY the THREE torso shells in the FIRST ROW, columns1,2,3. They must face LEFT, while the torso in row1column4 and row2columns1,2 must stay RIGHT-facing. This is a directional clothing atlas and six identical right-facing torsos are unusable.\nKeep exactly the current positions, approximate bounding boxes and item count. Row1col1 left-facing upright, row1col2 left-facing forward/lean, row1col3 left-facing compact/crouch. On those three LEFT pieces, the visible NEAR ARMHOLE moves to the RIGHT side of the vest silhouette, and the shirt-front closure and pouches move toward the LEFT. Recreate camouflage and correctly readable small USCM name tape; do NOT mirror lettering. Make the neck and both armholes actual transparent holes. There is no head/mannequin inside the vests.\nPreserve every other part: the right-facing torso at top right, the two right-facing torso shells below left, all eight bare-arm/fingerless-glove pieces, their locations and orientations. All clothing remains Vasquez's pale sand/grey-blue/brown/sage BDU with sleeveless collared vest, chest flap pockets and dark diagonal pouch strap, NO smartgun harness or armor. Keep the current quality, textured 2D painted game art, genuine RGBA transparency, scale and exact square dimensions. No added arms, weapons, grid, labels or background. The only requested structural change is LEFT direction of the first3 torso garments."
+        },
+        {
+          "id": "rain_upper",
+          "outputSha256": "932aacfae72c0c36f15a55dd4eb8c8f4984c97d4b9efff669fd727b92c5a29c5",
+          "status": "REJECTED_OPAQUE_NECK_APERTURES",
+          "transparentBackground": true,
+          "prompt": "Create the production RGBA modular UPPER CLOTHING sprite atlas for Rain Carradine's red jacket outfit from Alien: Romulus, for the existing 2D painted Tantalus game. Use the first image ONLY as the exact 4-column by 4-row layout, component scale, transparent spacing and facing-direction template. Replace every Vasquez/camouflage/skin-arm/glove element with Rain's actual clothing. Use the second image (the costume designer's rack, red jackets on LEFT) as the authoritative jacket material/design reference. Use the third official Rain image for her muted gray-green Weyland T-shirt and bare hands, ignoring the face, hair and rifle.\nOUTPUT: square high-resolution PNG with true transparent background and fully transparent gutters, no checkerboard/background/shadow/grid/numbers. Consistent sharp hand-painted semi-realistic 2D game asset style and soft neutral lighting, matching the layout template. Four equal columns, four equal rows, 14 isolated components. NOTHING may cross a cell boundary. Last two cells blank.\nEXACT LAYOUT AND DIRECTIONS:\nR1C1 ghost torso UPRIGHT facing LEFT: chest opening and shirt front on image-left, arm aperture on image-right.\nR1C2 ghost torso LEANING FORWARD facing LEFT, same orientation.\nR1C3 ghost torso COMPACT/CROUCH facing LEFT, same orientation.\nR1C4 ghost torso UPRIGHT facing RIGHT: arm aperture image-left, chest opening image-right.\nR2C1 ghost torso LEANING FORWARD facing RIGHT.\nR2C2 ghost torso COMPACT/CROUCH facing RIGHT.\nR2C3 near upper sleeve, shoulder to elbow, vertical, no hand attached.\nR2C4 near forearm sleeve elbow to wrist, vertical, no hand attached.\nR3C1 near bare hand relaxed gripping fist, no gun, gray-black ribbed cuff.\nR3C2 near bare hand service/open pinch pose, no object, gray-black ribbed cuff.\nR3C3 far upper sleeve, shoulder to elbow, vertical.\nR3C4 far forearm sleeve, elbow to wrist, vertical.\nR4C1 far bare hand relaxed gripping fist, no gun, gray-black ribbed cuff.\nR4C2 far bare hand service/open pinch pose, no object, gray-black ribbed cuff.\nR4C3 and R4C4 completely transparent empty.\nSix torso pieces are CLOTHING ONLY without head, hair, neck, body, arms or legs. Keep the collar neck opening and the large single visible arm opening genuinely transparent, bounded by the clothing; avoid dark filled holes. Separate sleeves will be assembled over the holes by the game's rig.\nFIDELITY: visibly oversized puffy dark brick-red / worn burgundy WAXED COTTON jacket, closely spaced broad horizontal quilted channels as in the rack photo, worn charcoal gray ribbed cuffs and dark lining. Jacket partially open to show the muted gray-green T-shirt, tiny worn WEYLAND print only where actually visible, never large invented symbols. Red fabric with soot and faded folds, not shiny nylon, not scarlet, no body armor, no harness, no webbing, no camouflage, no tactical pouches, no holster, no gloves, no weapon. Sleeves must have the same horizontal quilting and puffy volume as jacket. Bare hands light neutral skin with correct anatomy and five fingers. Preserve source directional anatomy: first THREE torsos face LEFT, next THREE face RIGHT. Any visible lettering reads normally in both directions, never mirrored. Keep anatomical attachment borders and part sizes consistent with the game template."
+        },
+        {
+          "id": "rain_legs",
+          "outputSha256": "955489c82885637b8ea7d48284b93834ea7c60771e02593685884ca76fa5624b",
+          "status": "SUPERSEDED_SINGLE_FACING_BOOTS",
+          "transparentBackground": true,
+          "prompt": "Create the production RGBA modular LOWER CLOTHING sprite atlas for Rain Carradine from Alien: Romulus for the existing 2D painted Tantalus game. Reference1 is ONLY the EXACT 4x4 cell layout, pose geometry and piece proportions of the game's Bishop leg atlas; replace its blue trousers and black boots completely. Reference2 is the actual Rain shoe supplied by costume designer Carlos Rosario, authoritative for sneaker details. Reference3 is the official Hot Toys/Sideshow Rain whole figure, authoritative for the dark gray pants and how they bunch at the sneakers; ignore her head, torso, weapon and stand.\nOUTPUT square high-resolution PNG, true transparent background, 14 separate modular pieces, generous transparent gutters, no background/checkerboard/grid/numbers/captions/ground shadow. Sharp soft-lit semi-realistic painted 2D game style consistent with reference1, not photo cutouts.\nEXACT 4 COLUMN ×4 ROW LAYOUT copied from reference1:\nR1C1 separate pelvis/short upper crotch trouser piece with open waist;\nR1C2 near upper leg/thigh piece angled as template;\nR1C3 near lower leg/shin piece vertical as template;\nR1C4 near high-top sneaker, side facing RIGHT, heel left/toe right;\nR2C1 far upper leg/thigh piece;\nR2C2 far lower leg/shin piece;\nR2C3 far high-top sneaker with short trouser ankle cuff, facing RIGHT;\nR2C4 EMPTY transparent.\nRows3 and4 repeat the same seven pieces in the same positions and scale:\nR3C1 pelvis,R3C2 near thigh,R3C3 near shin,R3C4 near sneaker;\nR4C1 far thigh,R4C2 far shin,R4C3 far sneaker,R4C4 EMPTY.\nPANTS: worn soft charcoal/dark-gray loose work trousers, baggy natural folds around knees and ankle cuffs, subtle fabric texture, front fly and seam detail consistent with the licensed Rain reference. NO blue, no camouflage, no hard knee armor, no military webbing, no weapons or large extra pouches. Slightly bloused ankles meeting the tall sneakers.\nSNEAKERS: reproduce Rain's weathered off-white leather high-top Reebok design from reference2, chunky pale sole with DARK RED/BURGUNDY outsole visible as a continuous strip, burgundy laces and side stripes, dark gray padded high ankle collar, exactly two burgundy hook-and-loop ankle straps; aged creases and grime, not combat boots. Side-profile toe points right in every sneaker cell. If the small Reebok wordmark appears, correctly readable left-to-right, do not mirror the letters from the left-facing source photograph. At least one clear nearly horizontal opaque tread contact pixel at the lowest point of each sneaker, with transparent margin below, no shadows. No anatomy, no model, no legs of skin, no torso or arms. Preserve consistent scale and color between corresponding near/far components and both repeats."
+        },
+        {
+          "id": "rain_upper_neck_correction",
+          "outputSha256": "4cfb7e3c850d8a1016954084d9d3c438c1d85a577e29aeb3a77df969a4e30c65",
+          "status": "SUPERSEDED_OVERSIZED_ARM_APERTURES",
+          "transparentBackground": true,
+          "prompt": "Edit ONLY the six torso neck apertures in the supplied transparent Rain jacket production atlas. Preserve the entire 4x4 layout, all component positions, facing directions (top three LEFT, following three RIGHT), jacket quilting, colors, shirt design, sleeves, hands, proportions, scale, alpha background and all existing armholes.\nCRITICAL CORRECTION: each of the six ghost-clothing torsos currently has a filled dark gray/black top inside its collar and T-shirt neckline. Replace that FILLED INTERIOR with a real fully transparent (alpha 0) oval NECK HOLE bounded on all sides by the shirt collar. This is an empty clothing sleeve for a separate articulated human neck to enter. Keep the material rims of the jacket collar and the gray-green T-shirt neckline opaque and unmodified. The top interior opening of the T-shirt must be an actual transparent hole, approximately 25–45 pixels wide at this atlas scale, not painted black, gray or skin. The same correction must occur for all six torsos at R1C1, R1C2, R1C3, R1C4, R2C1 and R2C2. Every torso must have TWO separate true transparent interior apertures: neck AND arm. No head, neck flesh or body inside the clothing. Do not remove any shirt fabric below the neckline, do not cut a slit connecting the neck hole to the outside, and do not change the outer collar silhouette.\nEverything else must remain as close as possible to the supplied atlas, including all 8 arm/hand pieces and the last two blank cells. Transparent background PNG, no labels, no extra objects, no new scene."
+        },
+        {
+          "id": "rain_legs_direction_correction",
+          "outputSha256": "9f24bcae84bc5983abdb926a9b4f02c141cac49440abcd85964bda89b325d69a",
+          "status": "SUPERSEDED_REVERSED_LEFT_WORDMARK",
+          "transparentBackground": true,
+          "prompt": "Edit ONLY the two HIGHER sneaker components in the supplied Rain modular clothing atlas (first image), preserving the 4x4 atlas, all trousers, all positions, all component scales and true transparency.\nThe two sneaker cells to edit are ROW1 COLUMN4 (top far right shoe) and ROW2 COLUMN3 (the shoe in the second row, with a short trouser cuff). Redraw those TWO sneaker pieces facing LEFT: TOE points to image-LEFT, HEEL and high padded ankle on image-RIGHT. Keep the same occupied cell, height, approximate bounding box, sole baseline and attachment design. Use the second image (actual Rain shoe from the costume designer) as the correct left-facing reference: weathered off-white leather, burgundy laces, burgundy side stripes and outsole, gray high padded ankle collar with exactly TWO burgundy straps.\nAny small Reebok text on these two LEFT-facing shoes must read normally left-to-right, with correct spelling Reebok; do not mirror the letters. The trouser cuff remains on the back/top ankle end.\nLeave the LOWER TWO sneaker pieces at ROW3 COLUMN4 and ROW4 COLUMN3 facing RIGHT exactly as they are. These are independently used right-facing artwork.\nThe final atlas therefore has FOUR shoe parts: two LEFT-facing shoes in the upper half, two RIGHT-facing shoes in the lower half. All other 10 clothing pieces and the blank ROW2COL4/ROW4COL4 stay unchanged. Absolutely no camo, blue, black combat boots, shadows, backgrounds, text labels, grids, anatomy, hands or weapons. Preserve high quality semi-realistic painted 2D style and a clean actual alpha PNG."
+        },
+        {
+          "id": "rain_legs_wordmark_correction",
+          "outputSha256": "0d9c1fa27a65bdd92bdd0437bd28ffc7bdf395654612059d45ca55c8ef8acb24",
+          "status": "RETAINED_PRODUCTION_BYTES",
+          "transparentBackground": true,
+          "prompt": "Make a very small correction to the first transparent sprite atlas. Do not change the shoes' directions, garment geometry, colors, alpha, cell positions, any trousers, or any right-facing lower shoes.\nONLY correct the tiny black wordmark and adjacent flag on the TWO LEFT-FACING shoes in the upper half: row1 column4 and row2 column3. They currently have mirrored/gibberish lettering and the flag before the word. On each of these two shoes, write EXACTLY the six letters:\nReebok\nCapital R, then lowercase e, e, b, o, k, in that exact order from IMAGE LEFT to IMAGE RIGHT. Normal readable lettering, NOT mirrored. Put the small Union Jack flag immediately AFTER the final k on the IMAGE RIGHT end of the word. The second reference photo shows this correct ordering on the real LEFT-FACING shoe: readable Reebok, then flag. Match that order even though the shoe points left. The logo runs on the cream diagonal leather side panel. No additional text. The wordmark may be tiny but every letter must face normally.\nThe two upper shoes remain toe-left/heel-right. The two lower shoes remain toe-right/heel-left. Everything else in the 14-piece transparent 4x4 clothing atlas remains unchanged. This is a targeted lettering correction, not a redesign.",
+          "productionPath": "assets/openai/sprites/player/costume-parts-v165/rain-jacket/legs.png"
+        },
+        {
+          "id": "vasquez_upper_armhole_correction",
+          "outputSha256": "0f45d9f546ce08c2d31762a0305b5068779de95433a9d023c1341b32799b7c0c",
+          "status": "RETAINED_PRODUCTION_BYTES",
+          "transparentBackground": true,
+          "prompt": "Edit the supplied Vasquez BDU modular sprite atlas to correct the SIX sleeve openings for actual articulated game assembly. Keep the exact square4x4 layout, all14 components, all colors/camouflage/strap/pouch/belt/lettering, all left/right directions, ALL six neck apertures, the arm and hand parts, the outer garment outlines, blank cells and transparent background.\nThe sole edit is to the visible armhole in each of the six torso pieces (R1C1,R1C2,R1C3,R1C4,R2C1,R2C2). The current openings are oversized, roughly80–110 pixels across. REDUCE EACH ARM OPENING to a compact near-round true transparent opening ONLY40–45 PIXELS across in both width and height at the supplied1254x1254 atlas scale (about half the current diameter). Keep its center at the existing opening's center. Extend the authentic camouflage vest fabric inward to close the outer ring of the former opening, with a narrow realistic sewn fabric edge around the new smaller hole. The newly closed ring must be opaque patterned cloth consistent with the surrounding BDU, not skin, not black fill, not a new armor plate or a filled sleeve. The remaining central40–45px hole is genuine alpha0 transparency.\nApply this to all SIX torsos, including the compact tilted pair; do NOT leave any giant oval aperture. The six neck holes stay truly transparent and separate. The rest of the clothing stays identical as far as possible. Keep the diagonal shoulder holster strap already present: it is documented on Vasquez's late-film BDU. Do not add a smartgunner harness, gun or new accessory. Do not alter torso scale, any limbs, any gloves or any part placements. No background, captions, labels or grid. This is a precise sprite assembly correction, not new character art.",
+          "productionPath": "assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/upper.png"
+        },
+        {
+          "id": "rain_upper_armhole_correction",
+          "outputSha256": "93f92c17ff52b6c2756dfe94b00af1229c208334354d8a0c7480bf6629e2c0c6",
+          "status": "RETAINED_PRODUCTION_BYTES",
+          "transparentBackground": true,
+          "prompt": "Edit the supplied Rain jacket transparent modular sprite atlas to fit its six armholes to the actual separate articulated sleeves. Preserve all14 components, exact4x4 layout, positions, directions (firstthree torsos LEFT, nextthree RIGHT), clothing colors/quilting/zipper/Tshirt, ALL six small transparent neck holes, cuffs, barehands, outer torso silhouettes and transparent empty gutters.\nONLY change the visible ARM OPENING in each of the six torso components R1C1,R1C2,R1C3,R1C4,R2C1,R2C2. The existing arm apertures are much too large for the separate sleeve attachment. REDUCE EVERY ARM HOLE to a near-round fully transparent opening40–45PIXELS WIDE AND40–45PIXELS HIGH at the supplied1254x1254 atlas size, centered at the center of the existing hole. This is less than half the present opening diameter. Fill the outer annular area of the former oversized hole with opaque, continuous red quilted jacket fabric and dark lining appropriate to the surrounding jacket, finishing a narrow sewn rim around the new small central hole. The remaining40–45pixel hole must be true alpha0 transparency, not black/gray paint, skin or an attached sleeve. Do not leave a giant oval hole in any torso including the crouching pair.\nThis is a controlled sprite assembly correction: the six real neck holes already fixed in the source must stay transparent and unchanged, the separate sleeve and hand components must stay unchanged, and the shoulders, garment edges, atlas scale and directions must not move. No head, neck flesh, arms attached to torso, gun, extra equipment, grid, text labels or background. Keep the dark red waxed-cotton puffer design exactly as supplied.",
+          "productionPath": "assets/openai/sprites/player/costume-parts-v165/rain-jacket/upper.png"
+        }
+      ],
+      "outputIdentity": "Outputs are identified by the retained iteration id, original SHA-256 and, when selected, the production path. Local generator filenames are omitted from published source."
+    },
+    "references": [
+      {
+        "id": "vasquez-bdu-neca",
+        "url": "https://store.necaonline.com/products/aliens-series-12-vasquez-7-inch-scale-action-figure-bdus",
+        "kind": "licensed-manufacturer-costume-reference",
+        "supports": [
+          "distinct late-film BDU",
+          "sleeveless camouflage garment",
+          "red headband",
+          "fingerless black gloves",
+          "black boots",
+          "diagonal holster strap"
+        ],
+        "examinedImages": [
+          "https://store.necaonline.com/cdn/shop/files/Vasquez3.jpg?v=1745611746&width=1500",
+          "https://store.necaonline.com/cdn/shop/files/Vasquez2.jpg?v=1745611726&width=1500"
+        ],
+        "limits": "Licensed figure reference, not screen-pixel or motion certification; lateral patch and rear lettering remain unimplemented details."
+      },
+      {
+        "id": "rain-rosario-mpa",
+        "url": "https://www.motionpictures.org/2024/09/designed-to-shred-how-alien-romulus-costume-designer-carlos-rosario-stylized-horror/",
+        "kind": "firsthand-costume-designer-interview",
+        "supports": [
+          "oversized red waxed-cotton jacket",
+          "green Weyland T-shirt",
+          "white sneakers with red laces and outsole"
+        ],
+        "limits": "Describes the costume but supplies no game rig or exact orthographic motion reference."
+      },
+      {
+        "id": "rain-rosario-caftcad",
+        "url": "https://www.caftcad.com/alien-romulus",
+        "kind": "firsthand-costume-designer-images",
+        "supports": [
+          "horizontal quilting and worn jacket fabric",
+          "gray padded high ankle collar",
+          "two burgundy shoe straps",
+          "weathered off-white shoes"
+        ],
+        "examinedImages": [
+          {
+            "sourcePage": "https://www.caftcad.com/alien-romulus",
+            "description": "Photograph of costume-rack duplicates for Rain and Navarro, supplied by costume designer Carlos Rosario.",
+            "sourceImageSha256": "e056d16d4dd5b970a76917e84e3d1026d2e119db19118d649c4af430852f743f",
+            "sourceImageBytes": 899908
+          },
+          {
+            "sourcePage": "https://www.caftcad.com/alien-romulus",
+            "description": "Photograph of the Reebok collaboration for Rain, supplied by costume designer Carlos Rosario.",
+            "sourceImageSha256": "37818dba038337c78fa1f486cc5d9b769d746eb270d16980e207098bc2eafa59",
+            "sourceImageBytes": 70821
+          }
+        ],
+        "limits": "Photographs inspected as reference; raw reference photos are not copied into production sprite assets."
+      },
+      {
+        "id": "rain-hot-toys-sideshow",
+        "url": "https://www.sideshow.com/collectibles/alien-rain-carradine-hot-toys-914037",
+        "kind": "licensed-manufacturer-and-distributor-reference",
+        "supports": [
+          "dark gray trousers",
+          "gray-green top",
+          "white and red high-top sneakers"
+        ],
+        "examinedImages": [
+          "https://www.sideshow.com/storage/product-images/914037/hot-toys-alien-rain-carradine-sixth-scale-figure-silo.png"
+        ],
+        "limits": "Licensed prototype reference, not a reproduction certificate or exact character-body replacement."
+      }
+    ],
+    "assets": [
+      {
+        "id": "player.echo9.costume-parts-v165.vasquez-bdu.upper",
+        "kind": "costume-upper-parts",
+        "rigType": "echo9",
+        "imageKey": "playerCostumePartsV165:vasquez-bdu:upper",
+        "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/upper.png",
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "width": 1254,
+        "height": 1254,
+        "sha256": "0f45d9f546ce08c2d31762a0305b5068779de95433a9d023c1341b32799b7c0c",
+        "sourceFacing": 1,
+        "exact": false,
+        "visualStatus": "adapted-separated-outfit-parts",
+        "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+        "pixelEditsAfterGeneration": false
+      },
+      {
+        "id": "player.echo9.costume-parts-v165.vasquez-bdu.legs",
+        "kind": "costume-legs-parts",
+        "rigType": "echo9",
+        "imageKey": "playerCostumePartsV165:vasquez-bdu:legs",
+        "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/legs.png",
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "width": 1254,
+        "height": 1254,
+        "sha256": "ce9f840174e8e762af26483cc25a0898cf2315cac8402d77ab41c976374f95c5",
+        "sourceFacing": 1,
+        "exact": false,
+        "visualStatus": "adapted-separated-outfit-parts",
+        "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+        "pixelEditsAfterGeneration": false
+      },
+      {
+        "id": "player.echo9.costume-parts-v165.rain-jacket.upper",
+        "kind": "costume-upper-parts",
+        "rigType": "echo9",
+        "imageKey": "playerCostumePartsV165:rain-jacket:upper",
+        "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/upper.png",
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "width": 1254,
+        "height": 1254,
+        "sha256": "93f92c17ff52b6c2756dfe94b00af1229c208334354d8a0c7480bf6629e2c0c6",
+        "sourceFacing": 1,
+        "exact": false,
+        "visualStatus": "adapted-separated-outfit-parts",
+        "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+        "pixelEditsAfterGeneration": false
+      },
+      {
+        "id": "player.echo9.costume-parts-v165.rain-jacket.legs",
+        "kind": "costume-legs-parts",
+        "rigType": "echo9",
+        "imageKey": "playerCostumePartsV165:rain-jacket:legs",
+        "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/legs.png",
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "width": 1254,
+        "height": 1254,
+        "sha256": "0d9c1fa27a65bdd92bdd0437bd28ffc7bdf395654612059d45ca55c8ef8acb24",
+        "sourceFacing": 1,
+        "exact": false,
+        "visualStatus": "adapted-separated-outfit-parts",
+        "provenance": "imagegen-adaptation-of-existing-game-clothing-parts-and-documented-costume-reference",
+        "pixelEditsAfterGeneration": false
+      }
+    ],
+    "measurements": [
+      {
+        "slug": "vasquez-bdu",
+        "torsos": [
+          {
+            "facing": 1,
+            "family": "upright",
+            "source": {
+              "x": 991,
+              "y": 51,
+              "width": 234,
+              "height": 285
+            },
+            "alphaBounds": [
+              994,
+              54,
+              1222,
+              333
+            ],
+            "joints": {
+              "near": {
+                "x": 1031,
+                "y": 165
+              },
+              "far": {
+                "x": 1184.175,
+                "y": 151.376
+              },
+              "waist": {
+                "x": 1124.285,
+                "y": 293.612
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 1137,
+                "y": 98
+              },
+              "arm": {
+                "x": 1031,
+                "y": 165
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 52,
+              "armPixels": 1108,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review"
+          },
+          {
+            "facing": 1,
+            "family": "forward",
+            "source": {
+              "x": 66,
+              "y": 373,
+              "width": 241,
+              "height": 273
+            },
+            "alphaBounds": [
+              69,
+              376,
+              304,
+              643
+            ],
+            "joints": {
+              "near": {
+                "x": 104,
+                "y": 476
+              },
+              "far": {
+                "x": 277.143,
+                "y": 462.537
+              },
+              "waist": {
+                "x": 183.143,
+                "y": 605.008
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 221,
+                "y": 420
+              },
+              "arm": {
+                "x": 104,
+                "y": 476
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 105,
+              "armPixels": 1172,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review"
+          },
+          {
+            "facing": 1,
+            "family": "compact",
+            "source": {
+              "x": 358,
+              "y": 397,
+              "width": 273,
+              "height": 261
+            },
+            "alphaBounds": [
+              361,
+              400,
+              628,
+              655
+            ],
+            "joints": {
+              "near": {
+                "x": 435,
+                "y": 505
+              },
+              "far": {
+                "x": 586.39,
+                "y": 489.682
+              },
+              "waist": {
+                "x": 484.675,
+                "y": 620.424
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 564,
+                "y": 452
+              },
+              "arm": {
+                "x": 435,
+                "y": 505
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 91,
+              "armPixels": 1403,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review"
+          },
+          {
+            "facing": -1,
+            "family": "upright",
+            "source": {
+              "x": 32,
+              "y": 51,
+              "width": 232,
+              "height": 285
+            },
+            "alphaBounds": [
+              35,
+              54,
+              261,
+              333
+            ],
+            "joints": {
+              "near": {
+                "x": 225,
+                "y": 163
+              },
+              "far": {
+                "x": 72.493,
+                "y": 151.376
+              },
+              "waist": {
+                "x": 131.857,
+                "y": 293.612
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 118,
+                "y": 97
+              },
+              "arm": {
+                "x": 225,
+                "y": 163
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 138,
+              "armPixels": 1084,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally"
+          },
+          {
+            "facing": -1,
+            "family": "forward",
+            "source": {
+              "x": 336,
+              "y": 54,
+              "width": 237,
+              "height": 283
+            },
+            "alphaBounds": [
+              339,
+              57,
+              570,
+              334
+            ],
+            "joints": {
+              "near": {
+                "x": 532,
+                "y": 166
+              },
+              "far": {
+                "x": 365.4,
+                "y": 146.779
+              },
+              "waist": {
+                "x": 457.8,
+                "y": 294.585
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 421,
+                "y": 100
+              },
+              "arm": {
+                "x": 532,
+                "y": 166
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 136,
+              "armPixels": 1110,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally"
+          },
+          {
+            "facing": -1,
+            "family": "compact",
+            "source": {
+              "x": 653,
+              "y": 104,
+              "width": 271,
+              "height": 251
+            },
+            "alphaBounds": [
+              656,
+              107,
+              921,
+              352
+            ],
+            "joints": {
+              "near": {
+                "x": 852,
+                "y": 212
+              },
+              "far": {
+                "x": 697.298,
+                "y": 193.166
+              },
+              "waist": {
+                "x": 798.251,
+                "y": 318.78
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 734,
+                "y": 150
+              },
+              "arm": {
+                "x": 852,
+                "y": 212
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 104,
+              "armPixels": 1124,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally"
+          }
+        ],
+        "leftBootArtPresent": false,
+        "completeCalibrationFile": "src/player-costume-parts-v165.js"
+      },
+      {
+        "slug": "rain-jacket",
+        "torsos": [
+          {
+            "facing": 1,
+            "family": "upright",
+            "source": {
+              "x": 971,
+              "y": 30,
+              "width": 260,
+              "height": 321
+            },
+            "alphaBounds": [
+              974,
+              33,
+              1228,
+              348
+            ],
+            "joints": {
+              "near": {
+                "x": 1026,
+                "y": 154
+              },
+              "far": {
+                "x": 1185.862,
+                "y": 142.941
+              },
+              "waist": {
+                "x": 1119.143,
+                "y": 303.53
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 1136,
+                "y": 97
+              },
+              "arm": {
+                "x": 1026,
+                "y": 154
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 376,
+              "armPixels": 1583,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review"
+          },
+          {
+            "facing": 1,
+            "family": "forward",
+            "source": {
+              "x": 47,
+              "y": 373,
+              "width": 264,
+              "height": 303
+            },
+            "alphaBounds": [
+              50,
+              376,
+              308,
+              673
+            ],
+            "joints": {
+              "near": {
+                "x": 111,
+                "y": 478
+              },
+              "far": {
+                "x": 278.515,
+                "y": 472.261
+              },
+              "waist": {
+                "x": 175.315,
+                "y": 630.739
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 234,
+                "y": 443
+              },
+              "arm": {
+                "x": 111,
+                "y": 478
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 522,
+              "armPixels": 1603,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review"
+          },
+          {
+            "facing": 1,
+            "family": "compact",
+            "source": {
+              "x": 346,
+              "y": 398,
+              "width": 302,
+              "height": 276
+            },
+            "alphaBounds": [
+              349,
+              401,
+              645,
+              671
+            ],
+            "joints": {
+              "near": {
+                "x": 447,
+                "y": 498
+              },
+              "far": {
+                "x": 598.871,
+                "y": 495.958
+              },
+              "waist": {
+                "x": 486.108,
+                "y": 634.39
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 570,
+                "y": 480
+              },
+              "arm": {
+                "x": 447,
+                "y": 498
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 712,
+              "armPixels": 1713,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review"
+          },
+          {
+            "facing": -1,
+            "family": "upright",
+            "source": {
+              "x": 29,
+              "y": 29,
+              "width": 257,
+              "height": 323
+            },
+            "alphaBounds": [
+              32,
+              32,
+              283,
+              349
+            ],
+            "joints": {
+              "near": {
+                "x": 226,
+                "y": 153
+              },
+              "far": {
+                "x": 73.64,
+                "y": 142.639
+              },
+              "waist": {
+                "x": 139.572,
+                "y": 304.247
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 114,
+                "y": 99
+              },
+              "arm": {
+                "x": 226,
+                "y": 153
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 441,
+              "armPixels": 1591,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally"
+          },
+          {
+            "facing": -1,
+            "family": "forward",
+            "source": {
+              "x": 338,
+              "y": 36,
+              "width": 275,
+              "height": 318
+            },
+            "alphaBounds": [
+              341,
+              39,
+              610,
+              351
+            ],
+            "joints": {
+              "near": {
+                "x": 541,
+                "y": 152
+              },
+              "far": {
+                "x": 371.743,
+                "y": 140.122
+              },
+              "waist": {
+                "x": 479.343,
+                "y": 306.605
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 415,
+                "y": 107
+              },
+              "arm": {
+                "x": 541,
+                "y": 152
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 617,
+              "armPixels": 1607,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally"
+          },
+          {
+            "facing": -1,
+            "family": "compact",
+            "source": {
+              "x": 646,
+              "y": 94,
+              "width": 294,
+              "height": 260
+            },
+            "alphaBounds": [
+              649,
+              97,
+              937,
+              351
+            ],
+            "joints": {
+              "near": {
+                "x": 855,
+                "y": 196
+              },
+              "far": {
+                "x": 693.883,
+                "y": 186.331
+              },
+              "waist": {
+                "x": 803.597,
+                "y": 316.56
+              }
+            },
+            "apertures": {
+              "neck": {
+                "x": 730,
+                "y": 166
+              },
+              "arm": {
+                "x": 855,
+                "y": 196
+              }
+            },
+            "apertureMeasurements": {
+              "neckPixels": 638,
+              "armPixels": 1569,
+              "maxAlpha": 16
+            },
+            "pivotMethod": "far shoulder and waist from normalized V126/V128 landmarks; near shoulder registered at the measured alpha<=16 arm-aperture center after native-pixel review; native left far/waist source landmarks reflected horizontally"
+          }
+        ],
+        "leftBootArtPresent": true,
+        "completeCalibrationFile": "src/player-costume-parts-v165.js"
+      }
+    ],
+    "integration": {
+      "newCostumeIds": [
+        "franchise-vasquez-bdu",
+        "franchise-rain-jacket"
+      ],
+      "nativeSlots": [
+        "helmet",
+        "mask",
+        "torso",
+        "arms",
+        "legs",
+        "back"
+      ],
+      "reusedHeadband": "headband-vasquez-v129",
+      "implicitSmartgunnerHarness": false,
+      "implicitWeapon": false,
+      "sourceCharacterIdentityReplaced": false,
+      "saveSchemaChanged": false,
+      "historicalKitsUnchanged": 8,
+      "historicalPartPngsUnchanged": 17
+    },
+    "localRendering": {
+      "method": "Actual imported production sample/resolve/draw functions and actual native PNG images decoded by Skia Canvas. Only an offscreen Canvas-producing document adapter and fixed preview actors/backgrounds are provided.",
+      "renderer": {
+        "library": "@napi-rs/canvas",
+        "version": "0.1.100",
+        "node": "v24.22.1"
+      },
+      "counts": {
+        "costumes": 2,
+        "modes": 14,
+        "directions": 2,
+        "backgrounds": 2,
+        "nativePoses": 56,
+        "renderedTiles": 112,
+        "newCostumeOutfits": 2,
+        "newCostumeAtlases": 4,
+        "decodedPNGs": 13,
+        "historicalDecodedPNGs": 9,
+        "numericPhaseSamples": 112,
+        "totalNativeRenderObservations": 168,
+        "contactSheets": 8
+      },
+      "phaseSamples": 112,
+      "totalNativeCompositions": 168,
+      "contactSheets": 8,
+      "sourceFiles": [
+        {
+          "path": "src/player-appearance-preview-v126.js",
+          "sha256": "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
+          "bytes": 22330
+        },
+        {
+          "path": "src/player-appearance-v126.js",
+          "sha256": "69c62a380a15d2d3b34e950620cd514fa780b531d016071029a17215c5ee59e1",
+          "bytes": 11554
+        },
+        {
+          "path": "src/player-costume-outfits-v165.js",
+          "sha256": "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+          "bytes": 7325
+        },
+        {
+          "path": "src/player-body-rig-v125.js",
+          "sha256": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
+          "bytes": 32014
+        },
+        {
+          "path": "src/sprite-alpha-policy-v134.js",
+          "sha256": "be3676d653133487c3d3c743620cf29690f62ebf82fedcc71821fe4e567577f5",
+          "bytes": 29241
+        },
+        {
+          "path": "src/player-gait-v133.js",
+          "sha256": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
+          "bytes": 5135
+        },
+        {
+          "path": "src/human-motion-v136.js",
+          "sha256": "3bec918e71fe53842e004beb3374990262b701a961f76c7aaecca6b440bd9fdf",
+          "bytes": 2917
+        },
+        {
+          "path": "src/player-human-proportions-v160.js",
+          "sha256": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
+          "bytes": 3527
+        },
+        {
+          "path": "src/player-visual-contract-v81.js",
+          "sha256": "dee30171b406f12d642e45a72f63d0c799c70efc482c44ad720ea45a4c78638d",
+          "bytes": 14798
+        },
+        {
+          "path": "src/player-presentation-v124.js",
+          "sha256": "f7a1eeecb973f97cf39a9eb6c3625d252f19a43f6922895f0891b528852f1412",
+          "bytes": 14251
+        },
+        {
+          "path": "src/human-visual-contract-v133.js",
+          "sha256": "f009c9e00a60a06cf0cb9d6ecfce22b59d59cfcb8a28d4a9e224d1163abff4c8",
+          "bytes": 30419
+        },
+        {
+          "path": "src/npc-matte-apertures-v164.js",
+          "sha256": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
+          "bytes": 9029
+        },
+        {
+          "path": "src/npc-matte-aperture-data-v164.js",
+          "sha256": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+          "bytes": 67245
+        },
+        {
+          "path": "src/player-costume-skins-v119.js",
+          "sha256": "10518f927292d3fedeb6743facc6c4e80a093b8fd90688158056c67fcc3f6132",
+          "bytes": 7432
+        },
+        {
+          "path": "src/franchise-costumes-v119.js",
+          "sha256": "147afb5919da23a0fda98409ef8914484938786e05f78f1936fe4813e52e32ef",
+          "bytes": 11513
+        },
+        {
+          "path": "src/player-arm-constraints-v160.js",
+          "sha256": "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
+          "bytes": 11187
+        },
+        {
+          "path": "src/player-modular-rig-v126.js",
+          "sha256": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
+          "bytes": 22326
+        },
+        {
+          "path": "src/player-colonial-art-v129.js",
+          "sha256": "4bb1b75b9711c6349fcebb12bde4922e4f39a722706866b733027173e6dd2b10",
+          "bytes": 11342
+        },
+        {
+          "path": "src/player-colonial-art-v141.js",
+          "sha256": "1222498f022afcef53e8306943bea748b5f217ef3473b0c5eea96fc3001a048c",
+          "bytes": 4514
+        },
+        {
+          "path": "src/player-costume-parts-v165.js",
+          "sha256": "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
+          "bytes": 182313
+        },
+        {
+          "path": "src/player-locomotion-rig-v129.js",
+          "sha256": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
+          "bytes": 33869
+        },
+        {
+          "path": "src/player-transit-rig-v128.js",
+          "sha256": "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
+          "bytes": 28455
+        },
+        {
+          "path": "src/held-weapon-profiles-v125.js",
+          "sha256": "8ebfdfc221628d6a161c2b30001170273e2be10b05b8aedcd48098c4ca004dcb",
+          "bytes": 12640
+        },
+        {
+          "path": "src/content-core-v50.js",
+          "sha256": "fc71b52d7dbe8b5ca69beb38cdbc19690fe67534372358b0998004e829cb3555",
+          "bytes": 33347
+        },
+        {
+          "path": "src/weapon-native-visuals-v116.js",
+          "sha256": "a896a9fc9af6bba60d437f1c88ec38d2ed09d9dfbe960d6b1f4a93852b5e3a43",
+          "bytes": 4402
+        },
+        {
+          "path": "src/weapon-release-v121.js",
+          "sha256": "a10140256fc0c56021ee8d003fdf01c3e23f631dc5cf93d1053431e0f926d0ad",
+          "bytes": 2017
+        },
+        {
+          "path": "src/weapon-native-visuals-v121.js",
+          "sha256": "fab32c863cef4ab53b8681b2eddd50da15da83786388f83abfef0c9dca402c67",
+          "bytes": 87837
+        },
+        {
+          "path": "src/weapon-catalog-additions-v121.js",
+          "sha256": "76ad74c22afb693d78ccdde51e0ded68b89c0b9a8248bb535cb73f2b134eef90",
+          "bytes": 11695
+        },
+        {
+          "path": "src/weapon-native-extra-v121.js",
+          "sha256": "0b95af247045d538fb91c861adf9d6337987347642645cf16a032932192b44fd",
+          "bytes": 3315
+        },
+        {
+          "path": "src/equipment-release-v121.js",
+          "sha256": "a889588405e86eb692041126a16dbea1a67fddde23740ac066b0ba67864755ab",
+          "bytes": 12973
+        },
+        {
+          "path": "src/weapon-release-v122.js",
+          "sha256": "c7c9320dcce2cea2116815755aeba05c359a41e20a3f86ae5095b2ce2565bf0d",
+          "bytes": 1230
+        },
+        {
+          "path": "src/weapon-native-weapons-v122.js",
+          "sha256": "4f56fdee4c5034f58f9810e754f176b4c2e2820943516715bd820ed73987eb72",
+          "bytes": 9396
+        },
+        {
+          "path": "src/weapon-catalog-weapons-v122.js",
+          "sha256": "a5d5d44891e41bc9d42bf56bba45178903bdcce3769f4e12eea96d6c9155abee",
+          "bytes": 9679
+        },
+        {
+          "path": "src/equipment-release-v122.js",
+          "sha256": "c1525cf3e78dab8489d9ffa5a0042a3bc8e084adc1ac629535f051c9954d7d42",
+          "bytes": 1979
+        },
+        {
+          "path": "src/vehicle-catalog-additions-v121.js",
+          "sha256": "e50d5a8a67f124b2f1225f29b36cb4e4054379905b817d80909bf529c40c2982",
+          "bytes": 5631
+        },
+        {
+          "path": "src/vehicle-catalog-additions-v122.js",
+          "sha256": "fcecc61763aa5c2d259625e78fead95f0fb9f25a1b28122745c5e55f255dc068",
+          "bytes": 3082
+        },
+        {
+          "path": "src/vehicle-native-visuals-v122.js",
+          "sha256": "d28b17bb077e4e0aafdc9424cf1b2e9ddc22cf3f0f74648ab296b761261883e3",
+          "bytes": 4666
+        },
+        {
+          "path": "src/enemy-behavior-registry-v119.js",
+          "sha256": "e3d980cd7d826c3f0b00f87508e84abfa58bea03afe6b978498a216be9415fed",
+          "bytes": 17785
+        },
+        {
+          "path": "src/enemy-catalog-taxonomy-v105.js",
+          "sha256": "6fc747d0a7db85d5858b70238e5097db94988bbee811fd41eefb5a9ab785bf96",
+          "bytes": 6657
+        },
+        {
+          "path": "src/user-pack-v100.js",
+          "sha256": "14c59f976fc6d9ce6b2a1f0d5678895f4747177cc4dba667f2443e800372091f",
+          "bytes": 65177
+        },
+        {
+          "path": "src/enemy-import-admissions-v106.js",
+          "sha256": "50c55b0322e0b5f0404015942609ee6eb49791015227086f171188116e84f980",
+          "bytes": 30802
+        },
+        {
+          "path": "src/weapon-visual-runtime-v63.js",
+          "sha256": "6976c0cf9fabfb8f1473e8b428ce18aba0365bdab168dccbc565b0b188b5acad",
+          "bytes": 6224
+        },
+        {
+          "path": "src/weapon-visual-runtime-v61.js",
+          "sha256": "8cba684f871dc29d16335126cbc7e11f70852386e9c9e57d0b5061bd17f4e70b",
+          "bytes": 6467
+        },
+        {
+          "path": "src/weapon-visual-runtime-v56.js",
+          "sha256": "bc2cb4b11c67d42cb459928948fe752d8dda59e1fb8f365d5089261196c00585",
+          "bytes": 7484
+        },
+        {
+          "path": "src/weapon-native-visuals-v112.js",
+          "sha256": "da1389095a7948e4376870f0a7c75d50bfa36d4ce7eac78a46ab95905a8ddf40",
+          "bytes": 4767
+        },
+        {
+          "path": "src/weapon-native-visuals-v113.js",
+          "sha256": "6a433e8acf2040673c26db1f6c48854accc751299a2a98a118357969aa18d174",
+          "bytes": 6735
+        },
+        {
+          "path": "src/weapon-native-visuals-v117.js",
+          "sha256": "a67a005180bd3af077db55efd986c3bf0eeb17376ee3572da20dec16d1ba05e4",
+          "bytes": 6738
+        },
+        {
+          "path": "src/weapon-native-visuals-v118.js",
+          "sha256": "89afa2543a2ad1535ee02570a013bb248675e40cefa273e2821af99df61101ef",
+          "bytes": 4511
+        },
+        {
+          "path": "src/weapon-native-visuals-v120.js",
+          "sha256": "73b12e0911af76363a48c43443aa730e47a87591dc91d45c31879154c3a80173",
+          "bytes": 7399
+        },
+        {
+          "path": "src/user-equipment-v95.js",
+          "sha256": "17c9a4433a178c005fc4bc7d561b09fc594d07cd39f2c5719b5af69ce5a4119d",
+          "bytes": 12290
+        },
+        {
+          "path": "src/user-equipment-art-v95.js",
+          "sha256": "e807116d21959281c9a1e9cfd82094ad227b1d212dd6b7bc4be87e7f2f8fa40d",
+          "bytes": 816
+        },
+        {
+          "path": "src/user-reference-art-v95.js",
+          "sha256": "37ccae96763624f08b596d86ac3d755b15f93704666ba099e02813b73d019443",
+          "bytes": 73775
+        },
+        {
+          "path": "src/combat-aim-v83.js",
+          "sha256": "1213be6b5895fc6a2ea87d37e4320bf7cbfcb1a6e8d9c4c89f496b72a0b42a12",
+          "bytes": 7537
+        },
+        {
+          "path": "src/weapon-presentation-profiles-v124.js",
+          "sha256": "9b41acb35ef2bb887b8afc0e8a7455e5b47f178ee4c8488621c891eae6342858",
+          "bytes": 17606
+        },
+        {
+          "path": "src/weapon-mechanics-weapons-v122.js",
+          "sha256": "28f49c0dd78030bf8b5d9297bee3a72fa61ef4b06aa1a87cd4a752d8a1fa7ac6",
+          "bytes": 1022
+        },
+        {
+          "path": "src/held-weapon-renderer-v125.js",
+          "sha256": "7112bc41d7952df2fc4affac5005613d7727041caba8ef5ec5a50e00aec70524",
+          "bytes": 17702
+        },
+        {
+          "path": "src/reload-presentation-v163.js",
+          "sha256": "1d7611f540bd44b74f4ac9457026a59824fd30b06cf24d2ffb4b6cbc37963bce",
+          "bytes": 1959
+        },
+        {
+          "path": "src/weapon-image-cache-v125.js",
+          "sha256": "9e77a67bae3607b51c5e7f06ad812dcbcaccb6be6aa063c52f69187bd6a77d2f",
+          "bytes": 4376
+        },
+        {
+          "path": "src/player-action-rig-v127.js",
+          "sha256": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
+          "bytes": 27753
+        }
+      ],
+      "sourcesStableDuringRun": true,
+      "decodedAssets": [
+        {
+          "imageKey": "playerBodyLocomotionV125",
+          "path": "/assets/openai/sprites/player/rig-v125/echo9-body-locomotion-v125.png",
+          "sha256": "782352c57a953f2cfed8b4df790bb1800b8a9c9b7bd206c43915b17c0910cbde",
+          "bytes": 1019631,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerBodyCombatV125",
+          "path": "/assets/openai/sprites/player/rig-v125/echo9-body-combat-v125.png",
+          "sha256": "1bb31c3bce71511efea71ba0e3272d379c039d89b85d916fd1196ad6d2c40b42",
+          "bytes": 969733,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerArmPartsV125",
+          "path": "/assets/openai/sprites/player/rig-v125/echo9-arm-parts-v125.png",
+          "sha256": "5685c11e883e2265f8de2d07f708640fa16a985914a18aeebd43041c1717e8cc",
+          "bytes": 712610,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "weaponV117:1",
+          "path": "/assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+          "sha256": "8ec28caf174cd92c2d9b26d5cb6e249a8370591fc3d294575626702f903f2cc2",
+          "bytes": 1433266,
+          "width": 1945,
+          "height": 809,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerCostumePartsV165:vasquez-bdu:legs",
+          "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/legs.png",
+          "sha256": "ce9f840174e8e762af26483cc25a0898cf2315cac8402d77ab41c976374f95c5",
+          "bytes": 1405717,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerHeadBackPartsV126",
+          "path": "/assets/openai/sprites/player/rig-v126/echo9-head-back-parts-v126.png",
+          "sha256": "ac3bfbffd40fa16ee10fdcad1fe6f0818a0af1aeaa5b116cba402fd5927dd450",
+          "bytes": 718893,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerCostumePartsV165:vasquez-bdu:upper",
+          "path": "/assets/openai/sprites/player/costume-parts-v165/vasquez-bdu/upper.png",
+          "sha256": "0f45d9f546ce08c2d31762a0305b5068779de95433a9d023c1341b32799b7c0c",
+          "bytes": 1380123,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerColonialHeadBackV129",
+          "path": "/assets/openai/sprites/player/colonial-v129/uscm-head-back-v129.png",
+          "sha256": "2f8aed2e99d6be9108aaf07d809cf0ff093bab0fa83219b5205b19ef58091cf5",
+          "bytes": 2491854,
+          "width": 1536,
+          "height": 1024,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerActionMedkitV127",
+          "path": "/assets/openai/sprites/tools/medkit-use-sheet.png",
+          "sha256": "41c2dd4f23eb1a4af16fa96f464501e8329bf15024da691622fc481744bde7e3",
+          "bytes": 204664,
+          "width": 512,
+          "height": 512,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerActionTunerV127",
+          "path": "/assets/openai/sprites/tools/security-access-tuner-use-sheet.png",
+          "sha256": "02e03b2a75aff1ee6beb3a366eaf61132e6b42a18243f12bb3c2f4cfe75d2321",
+          "bytes": 248652,
+          "width": 512,
+          "height": 512,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "weaponV121:32",
+          "path": "/assets/openai/equipment/v121-weapons/combat-knife-native-v121.png",
+          "sha256": "4e1275cf266ce70532a524dd1c11a8b259c28621b41f655db495c9d45626f3b6",
+          "bytes": 537156,
+          "width": 1774,
+          "height": 887,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerCostumePartsV165:rain-jacket:legs",
+          "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/legs.png",
+          "sha256": "0d9c1fa27a65bdd92bdd0437bd28ffc7bdf395654612059d45ca55c8ef8acb24",
+          "bytes": 1337961,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        },
+        {
+          "imageKey": "playerCostumePartsV165:rain-jacket:upper",
+          "path": "/assets/openai/sprites/player/costume-parts-v165/rain-jacket/upper.png",
+          "sha256": "93f92c17ff52b6c2756dfe94b00af1229c208334354d8a0c7480bf6629e2c0c6",
+          "bytes": 1467164,
+          "width": 1254,
+          "height": 1254,
+          "decoder": "Image"
+        }
+      ],
+      "measuredApertures": [
+        {
+          "slug": "vasquez-bdu",
+          "side": "right",
+          "family": "upright",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 1137,
+            "y": 98
+          },
+          "alpha": 9
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "right",
+          "family": "upright",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 1031,
+            "y": 165
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "right",
+          "family": "forward",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 221,
+            "y": 420
+          },
+          "alpha": 2
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "right",
+          "family": "forward",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 104,
+            "y": 476
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "right",
+          "family": "compact",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 564,
+            "y": 452
+          },
+          "alpha": 4
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "right",
+          "family": "compact",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 435,
+            "y": 505
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "left",
+          "family": "upright",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 118,
+            "y": 97
+          },
+          "alpha": 5
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "left",
+          "family": "upright",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 225,
+            "y": 163
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "left",
+          "family": "forward",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 421,
+            "y": 100
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "left",
+          "family": "forward",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 532,
+            "y": 166
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "left",
+          "family": "compact",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 734,
+            "y": 150
+          },
+          "alpha": 2
+        },
+        {
+          "slug": "vasquez-bdu",
+          "side": "left",
+          "family": "compact",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 852,
+            "y": 212
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "right",
+          "family": "upright",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 1136,
+            "y": 97
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "right",
+          "family": "upright",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 1026,
+            "y": 154
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "right",
+          "family": "forward",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 234,
+            "y": 443
+          },
+          "alpha": 1
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "right",
+          "family": "forward",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 111,
+            "y": 478
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "right",
+          "family": "compact",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 570,
+            "y": 480
+          },
+          "alpha": 1
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "right",
+          "family": "compact",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 447,
+            "y": 498
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "left",
+          "family": "upright",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 114,
+            "y": 99
+          },
+          "alpha": 2
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "left",
+          "family": "upright",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 226,
+            "y": 153
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "left",
+          "family": "forward",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 415,
+            "y": 107
+          },
+          "alpha": 1
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "left",
+          "family": "forward",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 541,
+            "y": 152
+          },
+          "alpha": 0
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "left",
+          "family": "compact",
+          "aperture": "neck",
+          "sourcePoint": {
+            "x": 730,
+            "y": 166
+          },
+          "alpha": 1
+        },
+        {
+          "slug": "rain-jacket",
+          "side": "left",
+          "family": "compact",
+          "aperture": "arm",
+          "sourcePoint": {
+            "x": 855,
+            "y": 196
+          },
+          "alpha": 0
+        }
+      ],
+      "maximumRemainingClearApertureFraction": {
+        "vasquez-bdu": 0.05516014234875445,
+        "rain-jacket": 0.0579987253027406
+      },
+      "apertureCoverageMethod": "Source aperture alpha pixels projected through native affine and sampled in the real framebuffer; residual edge samples are not an exhaustive animation or canon metric.",
+      "automatedChecks": "PASS",
+      "assistantVisualAssemblyReview": "ACCEPTED_WITH_DOCUMENTED_ART_LIMITS",
+      "humanVisualReview": false,
+      "artistic1to1Approved": false,
+      "limitations": [
+        "Canvas/Skia, not Chromium; Playwright Chromium cache and standard browser executable locations unavailable.",
+        "Presentation actors from production armory preview, not mission/hub gameplay, physics, input, saving or traversal.",
+        "One native fixed time per mode in contact sheets; optional half/one-and-a-half fixed-time sweep is numeric and not exhaustive animation sampling.",
+        "Visual adaptation only; no canonical 1:1 likeness certification.",
+        "Custom contact-sheet labels, framing and light/dark backgrounds are harness composition; body/arms/legs/props/weapons are production draws."
+      ]
+    },
+    "junQa": {
+      "qaPath": "scripts/qa-npc-interdeck-native-v165.py",
+      "qaSourceSha256": "94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3",
+      "verifierPath": "scripts/verify-npc-interdeck-routes-v165.mjs",
+      "verifierSha256": "1e0a4abba4be1d18d4d9b6023749246179634035542c4f0f7e6e0deec4d24733",
+      "suitePassed": 29,
+      "newTests": 3,
+      "selectedOldQaRegressionsFailedAsExpected": 2,
+      "exactPythonCallbacks": true,
+      "fullNativeComposition": true,
+      "nativeClosedCarriageReload": true,
+      "simulatedSeconds": 398.54774877598436,
+      "finalPlayer": {
+        "x": 833.5669805705282,
+        "y": 284,
+        "w": 44,
+        "h": 92,
+        "vx": 0,
+        "grounded": true,
+        "climbing": false,
+        "crouching": false
+      },
+      "heldKeys": [],
+      "returned": {
+        "crewId": "crew-11-jun-park",
+        "deck": 3,
+        "roomId": "life-support",
+        "x": 3158,
+        "y": 532,
+        "distance": 9179.999999999638,
+        "verticalDistance": 496,
+        "liftJourneys": 2,
+        "crossings": 2,
+        "observedTravel": true
+      },
+      "domImagesRafStorageDoubles": true,
+      "chromiumJourney": false
+    },
+    "currentInventory": {
+      "totalFranchiseReferences": 31,
+      "equippableReferences": 13,
+      "missingReferences": [
+        {
+          "id": "franchise-nostromo-dallas-compression",
+          "name": "Combinaison de compression de Dallas",
+          "sourceWork": "Alien (1979)",
+          "sourceCharacter": "Dallas",
+          "reference": "https://store.necaonline.com/blogs/behind-the-scenes/closer-look-alien-series-4-action-figures",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-nostromo-ripley-compression",
+          "name": "Combinaison de compression de Ripley",
+          "sourceWork": "Alien (1979)",
+          "sourceCharacter": "Ripley",
+          "reference": "https://store.necaonline.com/blogs/behind-the-scenes/closer-look-alien-series-4-action-figures",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-fury-ripley",
+          "name": "Uniforme de détention de Ripley",
+          "sourceWork": "Alien 3 (1992)",
+          "sourceCharacter": "Ripley",
+          "reference": "https://propstore.com/product/alien-1992/ripleys-sigourney-weaver-prison-uniform-2/",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-fury-inmate",
+          "name": "Tenue de détenu de Fury 161",
+          "sourceWork": "Alien 3 (1992)",
+          "sourceCharacter": "Détenus",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-ripley8",
+          "name": "Tenue de Ripley 8",
+          "sourceWork": "Alien Resurrection (1997)",
+          "sourceCharacter": "Ripley 8",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-betty-crew",
+          "name": "Tenue de contrebandier du Betty",
+          "sourceWork": "Alien Resurrection (1997)",
+          "sourceCharacter": "Équipage du Betty",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-prometheus-expedition",
+          "name": "Combinaison d’expédition du Prometheus",
+          "sourceWork": "Prometheus (2012)",
+          "sourceCharacter": "Équipe scientifique",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-david8",
+          "name": "Uniforme de David 8",
+          "sourceWork": "Prometheus (2012)",
+          "sourceCharacter": "David",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-covenant-expedition",
+          "name": "Combinaison d’expédition du Covenant",
+          "sourceWork": "Alien: Covenant (2017)",
+          "sourceCharacter": "Équipe de colonisation",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-walter",
+          "name": "Uniforme de Walter",
+          "sourceWork": "Alien: Covenant (2017)",
+          "sourceCharacter": "Walter",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-rain-pressure",
+          "name": "Combinaison spatiale de Rain",
+          "sourceWork": "Alien: Romulus (2024)",
+          "sourceCharacter": "Rain",
+          "reference": "https://www.caftcad.com/alien-romulus",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-romulus-hazmat",
+          "name": "Tenue de récupération contaminée",
+          "sourceWork": "Alien: Romulus (2024)",
+          "sourceCharacter": "Équipe de récupération",
+          "reference": "https://www.caftcad.com/alien-romulus",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-andy-coveralls",
+          "name": "Combinaison utilitaire d’Andy",
+          "sourceWork": "Alien: Romulus (2024)",
+          "sourceCharacter": "Andy",
+          "reference": "https://nofilmschool.com/carlos-rosario-alien-romulus",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-navarro-jacket",
+          "name": "Tenue d’aviatrice de Navarro",
+          "sourceWork": "Alien: Romulus (2024)",
+          "sourceCharacter": "Navarro",
+          "reference": "https://www.motionpictures.org/2024/09/designed-to-shred-how-alien-romulus-costume-designer-carlos-rosario-stylized-horror/",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-fireteam-specialist",
+          "name": "Tenue de spécialiste colonial",
+          "sourceWork": "Aliens: Fireteam Elite (2021)",
+          "sourceCharacter": "Marine colonial",
+          "reference": "https://www.aliensfireteamelite.com/en/releasenotes/",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-fireteam-ape-mk3",
+          "name": "Combinaison APE Mk.3",
+          "sourceWork": "Aliens: Fireteam Elite (2021)",
+          "sourceCharacter": "Marine colonial",
+          "reference": "https://www.aliensfireteamelite.com/en/community/afe-season-4-announce/",
+          "referenceStatus": "documented-primary-reference",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-dark-descent-marine",
+          "name": "Tenue de marine de Lethe",
+          "sourceWork": "Aliens: Dark Descent (2023)",
+          "sourceCharacter": "Marine colonial",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        },
+        {
+          "id": "franchise-dark-descent-technician",
+          "name": "Tenue de technicien de Lethe",
+          "sourceWork": "Aliens: Dark Descent (2023)",
+          "sourceCharacter": "Technicien colonial",
+          "reference": null,
+          "referenceStatus": "reference-pending",
+          "visualStatus": "missing",
+          "equippable": false,
+          "exact": false
+        }
+      ],
+      "primaryReferencePendingIds": [
+        "franchise-fury-inmate",
+        "franchise-ripley8",
+        "franchise-betty-crew",
+        "franchise-prometheus-expedition",
+        "franchise-david8",
+        "franchise-covenant-expedition",
+        "franchise-walter",
+        "franchise-amanda-working",
+        "franchise-sevastopol-security",
+        "franchise-working-joe-uniform",
+        "franchise-dark-descent-marine",
+        "franchise-dark-descent-technician"
+      ],
+      "certifiedExactCostumes": 0,
+      "enemyRequestGroups": [
+        {
+          "group": "afe2",
+          "total": 35,
+          "dossiersAvailable": 32,
+          "assetRegistrations": 32,
+          "dedicatedPoses": 30,
+          "requestedWorkAdaptations": 7,
+          "certifiedCanonVisuals": 0,
+          "reviewedWalks": 4,
+          "fixedPoseOnly": 26,
+          "registeredLegacyAtlases": 2,
+          "missing": [
+            "siren",
+            "gasbag",
+            "wey-yu-worker"
+          ],
+          "byDeclaredCoverage": {
+            "shared-species": 8,
+            "afe1-adaptation": 10,
+            "afe2-adaptation": 7,
+            "missing": 3,
+            "synth-adaptation": 4,
+            "project-interpretation": 3
+          }
+        },
+        {
+          "group": "afe1",
+          "total": 30,
+          "dossiersAvailable": 25,
+          "assetRegistrations": 25,
+          "dedicatedPoses": 23,
+          "requestedWorkAdaptations": 14,
+          "certifiedCanonVisuals": 0,
+          "reviewedWalks": 3,
+          "fixedPoseOnly": 20,
+          "registeredLegacyAtlases": 2,
+          "missing": [
+            "irradiated-spitter",
+            "three",
+            "pathogen-husk",
+            "maintenance-synth",
+            "overcharged-warden"
+          ],
+          "byDeclaredCoverage": {
+            "shared-species": 8,
+            "source-adaptation": 14,
+            "missing": 5,
+            "synth-adaptation": 3
+          }
+        },
+        {
+          "group": "dark-descent",
+          "total": 16,
+          "dossiersAvailable": 13,
+          "assetRegistrations": 13,
+          "dedicatedPoses": 11,
+          "requestedWorkAdaptations": 4,
+          "certifiedCanonVisuals": 0,
+          "reviewedWalks": 1,
+          "fixedPoseOnly": 10,
+          "registeredLegacyAtlases": 2,
+          "missing": [
+            "titan",
+            "wy-private-security",
+            "numinous"
+          ],
+          "byDeclaredCoverage": {
+            "shared-species": 9,
+            "missing": 3,
+            "source-adaptation": 4
+          }
+        },
+        {
+          "group": "afe2-additional",
+          "total": 3,
+          "dossiersAvailable": 0,
+          "assetRegistrations": 0,
+          "dedicatedPoses": 0,
+          "requestedWorkAdaptations": 0,
+          "certifiedCanonVisuals": 0,
+          "reviewedWalks": 0,
+          "fixedPoseOnly": 0,
+          "registeredLegacyAtlases": 0,
+          "missing": [
+            "crawler-turret",
+            "engineer-husk",
+            "spore-thrower"
+          ],
+          "byDeclaredCoverage": {
+            "unresolved": 3
+          }
+        }
+      ],
+      "enemyCountScope": "84 requested rows grouped by work;14 rows without linked dossiers, not a claim of14 distinct canonical species."
+    },
+    "remainingArtLimits": [
+      "Echo9 face, body proportions and native movements remain those of the operator.",
+      "Vasquez lateral patch and rear lettering are not represented in these fronts/profiles.",
+      "Arm aperture seam rings are thicker and rounder than the costume references.",
+      "Tiny generated marks and fabric patterns are adaptations, not pixel-exact franchise reproductions.",
+      "The18 other missing costumes and unresolved enemy references remain open."
+    ],
+    "releaseEvidence": {
+      "chromium": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "approved1to1": 0,
+    "fullArtTasksClosed": 0,
+    "humanParticipants": 0,
+    "localNodeValidation": {
+      "distinctPassingCases": 235,
+      "newCases": 10,
+      "suites": [
+        {
+          "scope": "costume parts, appearance, transit, preview, incapacitation and locomotion",
+          "passed": 103,
+          "failed": 0,
+          "skipped": 0,
+          "newCases": 6,
+          "receiptSha256": "1d7e324fc1a50571b2ecd71d81d139739a8784963f9700da2c2fdc41714dca6f"
+        },
+        {
+          "scope": "Jun and interdeck native routes",
+          "passed": 29,
+          "failed": 0,
+          "skipped": 0,
+          "newCases": 3,
+          "tapSha256": "5a7f9cd28f6079fbcee24ea3cee8020c8a951e1d32ecdaa0ac8d210f79ce1139"
+        },
+        {
+          "scope": "audit V143, release policy, source guidance and service worker",
+          "passed": 71,
+          "failed": 0,
+          "skipped": 0,
+          "tapSha256": "c2fcff9af9f8ca21d192be49c9844af0d36cdd98fd7ed1c62da3bc488c74c58c"
+        },
+        {
+          "scope": "parallel completion7, V162 succession11, selected V163 succession14",
+          "passed": 32,
+          "failed": 0,
+          "excludedCases": 2,
+          "exclusions": "Two unchanged historical PNG inventory cases outside the downloaded candidate art scope; this is not the complete V163 suite.",
+          "newCases": 1,
+          "priorReceiptSha256": "1ff905936c494da342ef2da9155dfbb19c265f2980df580ac0ba9b3329e5efb6",
+          "tapSha256": "55301829cf57fa2b27d28823d39a7c46ab9c129a056f764ba3bfb582ed49dcdb"
+        }
+      ],
+      "countingPolicy": "Distinct successful cases only; targeted reruns, the3 independent Jun review cases and expected old-code failures are not added again.",
+      "fullReleaseSuite": false,
+      "chromiumJourney": false,
+      "ciConclusion": null
+    },
+    "ciCorrectionAfterFirstPublication": {
+      "observedCommit": "1e5089f1d1ec3fbeee6f99dc3bf57078b4b6d23e",
+      "state": "CORRECTED_LOCALLY_REQUIRES_NEW_COMMIT_CI",
+      "sourceAdmission": {
+        "runUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40952901938",
+        "jobId": 123725393565,
+        "failure": "Private source metadata in distribution: docs/forge/xeno-trials/progress-v163.json",
+        "cause": "The existing generic UUID detector rejected ten local generator output filenames and two image-CDN URLs in the new provenance block.",
+        "correction": "Omit local output filenames; retain iteration ids, all original prompts and output SHA-256; identify the two source photos by their primary publication page, description, exact SHA-256 and bytes.",
+        "releaseGuardUnchanged": true,
+        "regressionTest": "V165 current provenance and development guide satisfy the source text admission guard",
+        "beforeCorrection": {
+          "tests": 1,
+          "passed": 0,
+          "failed": 1,
+          "tapSha256": "62532b57207c63622d41959f471817e2a5115a6dadecaee41c6f2de20259b39b"
+        }
+      },
+      "browserPlatform": {
+        "observedRunner": "Ubuntu 26.04.1 LTS, ubuntu-26.04 image 20261025.179.1",
+        "playwrightVersion": "1.57.0",
+        "failure": "Playwright does not support chromium on ubuntu26.04-x64",
+        "observedJobs": [
+          {
+            "runUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40952901993",
+            "jobId": 123725392574
+          },
+          {
+            "runUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/40952901926",
+            "jobId": 123725392326
+          }
+        ],
+        "replacementRunner": "ubuntu-24.04",
+        "primarySource": "https://github.com/microsoft/playwright/blob/v1.57.0/packages/playwright-core/src/server/utils/hostPlatform.ts",
+        "primarySourceBlobSha": "635d65d3d98ce67741cb7eb20b455751c990f0db",
+        "workflowChanges": [
+          {
+            "path": ".github/workflows/forge-regression.yml",
+            "before": {
+              "bytes": 3562,
+              "sha256": "9ba87ab5cdc0f546c5a7b9bf72a10f2cf3f06744156580af6e4caa5baa4f36a4",
+              "gitBlobSha": "b54fe82d709e284322599d0e493997e98f69af87"
+            },
+            "after": {
+              "bytes": 3561,
+              "sha256": "47e85b0921be154df7c2626217832f01aae86149e4f14c3d1ba27f4235002297",
+              "gitBlobSha": "afff2a6210c2279c424e3292e541067c73db7da0"
+            },
+            "yamlChanges": [
+              "jobs.forge.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          },
+          {
+            "path": ".github/workflows/full-release-v143.yml",
+            "before": {
+              "bytes": 14892,
+              "sha256": "a890f93510ba903dd8ead2235cc18bc91459f60675e0b9703e8bbaa9cf3c93f8",
+              "gitBlobSha": "31dd374a737d92b7f4fc321f3231bd285652b31c"
+            },
+            "after": {
+              "bytes": 14891,
+              "sha256": "0ec3deb5a88aac2e6bae73f51f41ed653ce3ff202254fb318bcff98034fbe8a2",
+              "gitBlobSha": "cb0ebe9c057b6681ebdc0934e4f0ec76118b4545"
+            },
+            "yamlChanges": [
+              "jobs.release.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          },
+          {
+            "path": ".github/workflows/non-forge-regression-v162.yml",
+            "before": {
+              "bytes": 4062,
+              "sha256": "f69619409ff0cbb30eaa58900a80f53f0e8514b196d371f89789bfce5dbecdef",
+              "gitBlobSha": "1bdb0454c3dff6bbe54b91f7902d9f76732d3339"
+            },
+            "after": {
+              "bytes": 4061,
+              "sha256": "c39830feca3806b2f89d8b899c0a3655909d94b2ceffca00feb75e44162183a6",
+              "gitBlobSha": "ccd640c38e55c77c5428829752de6a47965e534f"
+            },
+            "yamlChanges": [
+              "jobs.continuation-v162.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          },
+          {
+            "path": ".github/workflows/non-forge-regression-v163.yml",
+            "before": {
+              "bytes": 11731,
+              "sha256": "0451e940b9a2bcc6d7dd517e7840590a1c01d9c37ec751cefbb8f2c73b3b56c3",
+              "gitBlobSha": "6a9fb387a8f4f65bb1d448c617786b6544088144"
+            },
+            "after": {
+              "bytes": 11730,
+              "sha256": "d450e1b1cdb822f86510c523c87e9848aff3f0f0a012cba31d9ca389a522a468",
+              "gitBlobSha": "de1da2ce928769cd70bfc1c0b65d27f4a4800aad"
+            },
+            "yamlChanges": [
+              "jobs.native-v163.runs-on"
+            ],
+            "exactOneLineReplacement": true,
+            "stepsAndAllOtherFieldsUnchanged": true
+          }
+        ],
+        "validation": {
+          "yamlParser": "PyYAML 6.0.3 BaseLoader (on remains a string key)",
+          "parsedWorkflows": 4,
+          "structuralDifference": "Only each job runs-on string changes from ubuntu-latest to ubuntu-24.04",
+          "textDiff": "Exactly one removed and one added runs-on line per file",
+          "browserRerun": false
+        }
+      },
+      "localVerification": {
+        "documentaryCasesPassed": 32,
+        "documentaryCasesFailed": 0,
+        "documentaryTapSha256": "55301829cf57fa2b27d28823d39a7c46ab9c129a056f764ba3bfb582ed49dcdb",
+        "distinctPassingCasesIncludingUnchangedRuntimeSuites": 235,
+        "newCasesIncludingSourceMetadataRegression": 10,
+        "workbookUnchanged": true,
+        "workbookSha256": "95848cb8a1ab14aed101a4f66d99bc2fb3321ee74482bd83540afa265586e61b",
+        "browserJourneyOnNewRunner": false,
+        "newCommitCiConclusion": null
+      }
     }
   }
 }

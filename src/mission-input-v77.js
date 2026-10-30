@@ -69,7 +69,12 @@ export class MissionGamepadInputV77 {
         for (const [action, code] of Object.entries(controls[index])) this.engine.setHeldGameplayKeyV77(code, held[action], 'gamepad-' + index);
         for (const [button, method] of [[2, 'reload'], [3, 'interact'], [4, 'activateTracker'], [5, 'toggleVehicle'], [8, 'useMedkit']]) {
           if (this.engine.forgeNarrativeOpenV156) break;
-          if (edge(button)) this.engine[method]?.(actor);
+          if (edge(button)) {
+            // R3 held + face reload: speed reload; ordinary reload remains unchanged.
+            const action = button === 2 && buttons[10] && this.engine.experimentalPhysicalMagazinesV167
+              ? 'speedReloadWeaponV168' : method;
+            this.engine[action]?.(actor);
+          }
         }
         // Interact may open a dialog during this very sample. Stop the batch
         // immediately and require neutral controls after the dialog closes.

@@ -204,6 +204,24 @@ for (const file of [
   'verify-trials-navigation-v163.mjs',
   'verify-xeno-trials-capture-v163.mjs',
 ]) SCRIPT_FILES.add(file);
+SCRIPT_FILES.add('verify-weapon-arsenal-v167.mjs');
+SCRIPT_FILES.add('verify-weapon-magazine-world-v168.mjs');
+SCRIPT_FILES.add('verify-weapon-attachments-v168.mjs');
+SCRIPT_FILES.add('verify-weapon-fidelity-v170.mjs');
+SCRIPT_FILES.add('verify-weapon-research-v171.mjs');
+SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
+// Exact V174 dual-feed source-only QA, not a public asset.
+SCRIPT_FILES.add('verify-weapon-underbarrel-v174.mjs');
+SCRIPT_FILES.add('verify-armory-art-installer-v171.mjs');
+SCRIPT_FILES.add('verify-armory-resupply-v174.mjs');
+SCRIPT_FILES.add('install-armory-art-v171.mjs');
+// Source-only V175 manual costume import; no artwork is whitelisted by this declaration.
+SCRIPT_FILES.add('install-costume-art-v175.mjs');
+SCRIPT_FILES.add('verify-costume-art-installer-v175.mjs');
+// Exact specialist-feed QA script: source-only audit without wildcard admission.
+SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
+// Source-tree verifier for the three V169 armory storefront variants; exact path only.
+SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -230,6 +248,20 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  // Project gamedev guidance is source-only, never public distribution content.
+  'AGENTS.md',
+  'docs/development',
+  'docs/development/GAMEDEV_GUIDANCE.md',
+  'docs/development/SPRITE_PACK_V170.md',
+  // Narrow, source-only admission for the arsenal specification; not shipped.
+  'docs/arsenal',
+  'docs/arsenal/README.md',
+  'docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx',
+  'docs/arsenal/weapon_system_contract_v1.json',
+  'docs/arsenal/data',
+  'docs/arsenal/data/tantalus_arsenal_master_v1.csv',
+  'docs/arsenal/data/tantalus_arsenal_qa_v1.csv',
+  'docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv',
   'docs/forge/xeno-trials/V168-DIALOGUE-AND-TANTALUS-BATCH100.md',
   'docs/forge/xeno-trials/batch100-v168.json',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',

@@ -61,7 +61,8 @@ report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], '
           'comparisonStage': args.comparison_stage, 'routes': [],
           'method': 'Disclosed05h30 native Save imports; actual5h salvage or12h research watch,3h reconnaissance or4h colony-relief return; keyboard/E, physical courtesy, exact leaf reload and occupied arrival. Evaluations only observe.',
           'limitations': ['Automated native controls, not human participants.',
-                         'Five native watches; Mara uses the real west bulkhead. No NPC lift or cross-deck walking claimed.',
+                         'Five native parent/annex watches; Mara uses the real west bulkhead. Asha separately observes the existing Jun-sanitary interdeck return before testing her own occupied arrival.',
+                         'Jun prerequisite:900s wall/360s native simulation/45s without physical progress, justified by the observed316.033s return; each player door passage keeps45s. Asha occupation retains50s simulation/360s wall/45s stall and final collection150s simulation/480s wall/45s stall.',
                          'Asha fixture adds exactly20 research to pay the existing vehicle-doctrine12h command in one mutation; other fixture resources remain defaults.',
                          'Native strategy elapsed hours are not observed walking hours.',
                          'Covered source/destination chart changes are not walking distance or back-facing art.',
@@ -173,21 +174,161 @@ def walk_to(page, config, x, precise=False):
         raise AssertionError('Native keyboard steps did not settle on the actual return arrival.')
 
 
+NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started) {
+  const dependencyId='jun-sanitary',crewId='crew-11-jun-park';
+  const wallBudgetMs=900000,simBudgetSeconds=360,stallBudgetMs=45000;
+  let first=null,lastPose=null,lastProgressAt=started,simSeconds=0,seen=false;
+  const originMatches=o=>o&&o.crewId===crewId&&o.deck===3&&o.roomId==='life-support'
+    &&Math.abs(o.x-3158)<.25&&o.y===532&&o.source==='legacy-physical-owner';
+  const check=now=>now-started>=wallBudgetMs?'jun-wall-budget-exhausted'
+    :now-lastProgressAt>=stallBudgetMs?'jun-no-physical-progress'
+    :simSeconds>simBudgetSeconds?'jun-simulation-budget-exhausted':null;
+  const failed=reason=>({status:'failed',reason});
+  function observe(s,now){
+    const timeout=check(now);if(timeout)return failed(timeout);
+    if(opts.id!=='asha-refuge'||s.dependencyId!==dependencyId)return failed('foreign-return-dependency');
+    const e=s.dependency,a=e?.actor,p=s.player,o=s.owner;
+    if(!e)return failed('jun-dependency-missing');
+    if(!Number.isFinite(s.nativeTime))return failed('native-simulation-clock-missing');
+    if(!first)first=structuredClone(s);
+    simSeconds=s.nativeTime-first.nativeTime;
+    if(simSeconds<0)return failed('native-simulation-clock-reversed');
+    if(!s.running||s.annex!==opts.annex||s.deck!==opts.deck||!p?.alive||p.y!==532
+      ||Math.abs(p.vx)>=1||Math.abs(p.x-first.player.x)>.01||s.exitAnnex!==opts.annex)
+      return failed('player-left-native-refuge-threshold');
+    if(!o||o.crewId!==opts.crew||o.roomId!==opts.annex||o.crossings!==1||s.ownerHandoff)
+      return failed('asha-owner-changed-during-jun-return');
+    if(!originMatches(e.origin)||!originMatches(first.dependency?.origin))return failed('jun-origin-mismatch');
+    if(e.nativeHandoff||s.routine?.missionAssigned||s.routine?.needsCare||s.routine?.alert
+      ||['medical-recovery','mission-assignment','unavailable','active-crisis','infestation','annex-assignment'].includes(a?.reason))
+      return failed('jun-priority-handoff-is-not-a-return');
+    if(!seen&&(!a||s.passageRequested!==true))return failed('jun-passing-request-not-active');
+    if(a){
+      if(a.crewId!==crewId)return failed('foreign-jun-physical-owner');
+      if(s.passageRequested!==true)return failed('jun-passing-request-not-active');
+      if(o.stage!=='service'||o.reason!=='occupied'||o.doorProgress!==0)
+        return failed('asha-is-not-held-for-jun');
+      seen=true;
+      const pose={x:a.x,y:a.y,deck:a.deck,roomId:a.roomId,stage:a.stage,doorProgress:a.doorProgress,
+        crossings:a.crossings,liftJourneys:a.liftJourneys,liftPhase:a.lift?.phase||null};
+      if(!lastPose||Math.abs(pose.x-lastPose.x)>=.5||Math.abs(pose.y-lastPose.y)>=.5
+        ||pose.deck!==lastPose.deck||pose.roomId!==lastPose.roomId||pose.stage!==lastPose.stage
+        ||Math.abs(pose.doorProgress-lastPose.doorProgress)>=.01||pose.crossings!==lastPose.crossings
+        ||pose.liftJourneys!==lastPose.liftJourneys||pose.liftPhase!==lastPose.liftPhase){
+        lastPose=pose;lastProgressAt=now;}
+    }else{
+      const r=e.returned,origin=first.dependency.origin;
+      if(s.passageRequested!==false||!r||r.observedTravel!==true||r.crewId!==crewId
+        ||r.deck!==origin.deck||r.roomId!==origin.roomId||!Number.isFinite(r.x)||Math.abs(r.x-origin.x)>=.25||r.y!==origin.y
+        ||r.crossings!==2||r.liftJourneys!==2||!Number.isFinite(r.verticalDistance)||Math.abs(r.verticalDistance-496)>1e-6
+        ||!Number.isFinite(r.distance)||r.distance<=0||r.distance<first.dependency.actor.distance)
+        return failed('jun-lost-without-complete-physical-return');
+      const timeout=check(now);return timeout?failed(timeout):{status:'returned',reason:'jun-complete-native-return'};
+    }
+    const timeoutAfter=check(now);return timeoutAfter?failed(timeoutAfter):{status:'waiting',reason:'jun-physical-return-in-progress'};
+  }
+  const snapshot=now=>({dependencyId,simSeconds,wallMs:now-started,lastProgressAgeMs:now-lastProgressAt,
+    simBudgetSeconds,wallBudgetMs,stallBudgetMs,observedOrigin:first?.dependency?.origin||null});
+  return{dependencyId,observe,check,snapshot};
+}'''
+
+
+def pass_asha_dependency_door(page, config, entering):
+    """Use E and the native projection; preserve its real local offset, not a fabricated125px pose."""
+    deadline = time.monotonic() + 45
+    projection = page.wait_for_function('''o=>{const h=__ATF_HUB__,c=o.config,
+      door=o.entering?h.nearestParentAnnexDoorV71?.():h.nearestAnnexExitV71?.(),
+      annex=o.entering?door?.annex:h.currentAnnexV71?.();
+      if(!h.running||!h.player.alive||Math.abs(h.player.vx)>=1||h.annexTransitionV71||h.hubDoorClosingV142
+        ||h.annexStateReadOnlyV87||door?.annexId!==c.annex||annex?.id!==c.annex
+        ||h.npcAnnexDoorReservedV159?.(c.annex))return false;
+      return h.prepareHubDoorPassageV142(annex,o.entering?'enter':'exit',door.endpointId)||false;
+    }''', arg={'config': config, 'entering': entering}, timeout=45000).json_value()
+    page.locator('#hub-canvas').focus()
+    assert time.monotonic() < deadline, 'Asha prerequisite passage exceeded45s before E'
+    page.keyboard.press('KeyE')
+    remaining = (deadline - time.monotonic()) * 1000
+    assert remaining > 0, 'Asha prerequisite passage exceeded45s before completion'
+    page.wait_for_function('''o=>{const h=__ATF_HUB__,a=h.currentAnnexV71?.();
+      return (o.entering?a?.id===o.config.annex:!a&&h.state.roomId===o.config.parent)
+        &&!h.annexTransitionV71&&!h.hubDoorClosingV142&&h.running; }''',
+        arg={'config': config, 'entering': entering}, timeout=remaining)
+    state = observed(page, config)
+    check(config['id'] + ': prerequisite E keeps the real projected arrival',
+          abs(state['player']['x'] - projection['arrival']['x']) < .25
+          and state['player']['y'] == projection['arrival']['y'] and state['inputGuards']['playerAlive'])
+    report.setdefault('ashaDependencyPassages', []).append({'entering': entering,
+        'projection': projection, 'player': state['player'], 'annex': state['annex']})
+
+
+def arm_asha_return_dependency(page, config):
+    # The promise stays in the page. Only a small completion acknowledgement
+    # crosses to Python before E leaves the refuge; detailed samples wait until
+    # Asha's actual occupied opening has been secured by the player.
+    page.evaluate('''opts=>{const createProgress=(''' + NATIVE_ASHA_DEPENDENCY_V163 + ''');
+      window.__ATF_ASHA_JUN_DEPENDENCY_V163__=new Promise(resolve=>{
+        const h=__ATF_HUB__,started=performance.now(),progress=createProgress(opts,started),samples=[];
+        let done=false,raf,latest=null,origin=null,lastSampleAt=-Infinity,frames=0;
+        function finish(status,reason){if(done)return;done=true;clearInterval(timer);cancelAnimationFrame(raf);
+          resolve({status,reason,frames,...progress.snapshot(performance.now()),origin,latest,samples});}
+        function frame(){if(done)return;frames++;const now=performance.now(),snap=h.getSnapshot(),
+          route=snap.npcAnnexRoutesV163.routes[opts.id],p=h.player,r=h.npcRoutineResolutionsV62?.get('crew-11-jun-park');
+          latest={nativeTime:h.animationTime,running:h.running,deck:h.state.deck,annex:h.currentAnnexV71?.()?.id||null,
+            exitAnnex:h.nearestAnnexExitV71?.()?.annexId||null,player:{x:p.x,y:p.y,vx:p.vx,alive:p.alive},
+            owner:structuredClone(route.actor),ownerHandoff:structuredClone(route.nativeHandoff),
+            dependencyId:progress.dependencyId,dependency:structuredClone(h.npcInterdeckStateV165?.routes[progress.dependencyId]||null),
+            passageRequested:h.npcInterdeckPassingRequestV165?.(opts.id)===true,
+            routine:r?{missionAssigned:r.missionAssigned,needsCare:r.needsCare,alert:r.alert}:null};
+          origin ||= latest;
+          if(now-lastSampleAt>=1000){samples.push(latest);if(samples.length>900)samples.shift();lastSampleAt=now;}
+          const result=progress.observe(latest,now);
+          if(result.status!=='waiting')return finish(result.status,result.reason);
+          raf=requestAnimationFrame(frame);
+        }
+        const timer=setInterval(()=>{const failure=progress.check(performance.now());if(failure)finish('failed',failure);},1000);
+        raf=requestAnimationFrame(frame);
+      });}''', config)
+
+
+def prepare_asha_return_dependency(page, config):
+    phase(config['id'] + ': native refuge entry for the exact Jun return prerequisite')
+    pass_asha_dependency_door(page, config, True)
+    arm_asha_return_dependency(page, config)
+    acknowledgement = page.evaluate('''async()=>{const r=await window.__ATF_ASHA_JUN_DEPENDENCY_V163__;
+      return{status:r.status,reason:r.reason,simSeconds:r.simSeconds,wallMs:r.wallMs,
+        lastProgressAgeMs:r.lastProgressAgeMs,returned:r.latest?.dependency?.returned||null,
+        observedOrigin:r.observedOrigin};}''')
+    report.setdefault('ashaDependencyAcknowledgements', []).append(acknowledgement)
+    check(config['id'] + ': Jun completes its exact native physical return before Asha occupation',
+          acknowledgement['status'] == 'returned')
+    # Avoid transferring the large sample history while Asha starts its29s walk.
+    pass_asha_dependency_door(page, config, False)
+    ensure_return_occupant(page, config, 'after the observed Jun physical return')
+
+
+def export_asha_return_dependency(page, config):
+    result = page.evaluate('()=>window.__ATF_ASHA_JUN_DEPENDENCY_V163__')
+    report.setdefault('ashaDependencyWaits', []).append(result)
+    (output / (config['id'] + '-jun-physical-prerequisite.json')).write_text(json.dumps(result, indent=2))
+
+
 def collect(page, config, name, stop, move_to=None, exit_after=False):
     phase(name)
     page.evaluate('''opts=>{ window.__ATF_V163_COLLECTION__=new Promise((resolve,reject)=>{
       const rows=[],frames={},h=__ATF_HUB__;
-      const started=performance.now();let origin=null,lastProgress=null,lastProgressAt=started;
+      const started=performance.now();let origin=null,lastProgress=null,lastProgressAt=started,finished=false,raf;
+      function fail(message){if(finished)return;finished=true;clearInterval(timer);cancelAnimationFrame(raf);reject(Error(message));}
       const timer=setInterval(()=>{const now=performance.now();
-        if(now-started>480000||now-lastProgressAt>45000){clearInterval(timer);
-          reject(Error('Native service route wall/progress guard: '+opts.name));}},1000);
+        if(now-started>480000||now-lastProgressAt>45000)
+          fail('Native service route wall/progress guard: '+opts.name);},1000);
       function frame(){
+        if(finished)return;
         const snap=h.getSnapshot().npcAnnexRoutesV163.routes[opts.id],a=snap.actor;
         if(a){origin ||= a.time;const now=performance.now();
           if(!lastProgress||Math.abs(a.x-lastProgress.x)>=.5||a.roomId!==lastProgress.roomId
             ||a.stage!==lastProgress.stage||Math.abs(a.doorProgress-lastProgress.doorProgress)>=.01){
             lastProgress={x:a.x,roomId:a.roomId,stage:a.stage,doorProgress:a.doorProgress};lastProgressAt=now;}
-          if(a.time-origin>150){clearInterval(timer);reject(Error('Native service route simulation guard: '+opts.name));return;}}
+          if(a.time-origin>150){fail('Native service route simulation guard: '+opts.name);return;}}
         const row={actor:a?structuredClone(a):null,handoff:structuredClone(snap.nativeHandoff),traffic:structuredClone(h.getSnapshot().npcServiceTrafficV163||null),
           reserved:snap.reserved,occlusion:structuredClone(snap.occlusion),
           player:{x:h.player.x,y:h.player.y},clock:structuredClone(h.npcRoutineContextV62.clock)};
@@ -202,9 +343,9 @@ def collect(page, config, name, stop, move_to=None, exit_after=False):
           ||opts.stop==='handoff'&&snap.nativeHandoff?.fromRoomId===opts.parent
           ||opts.stop==='parent-service'&&a?.roomId===opts.parent&&a.stage==='service'&&a.crossings===2
           ||opts.stop==='home-service'&&a?.roomId===opts.origin&&a.stage==='service'&&Math.abs(a.x-a.homeX)<.25&&a.crossings===2;
-        if(done){clearInterval(timer);resolve({rows,frames});return;}
-        requestAnimationFrame(frame);
-      } requestAnimationFrame(frame);
+        if(done){finished=true;clearInterval(timer);cancelAnimationFrame(raf);resolve({rows,frames});return;}
+        raf=requestAnimationFrame(frame);
+      } raf=requestAnimationFrame(frame);
     }); }''', {**config, 'name': name, 'stop': stop})
     if move_to is not None:
         walk_to(page, config, move_to)
@@ -316,11 +457,14 @@ def wait_occupied_return(page, config):
         if(latest.routine?.missionAssigned||latest.routine?.needsCare||latest.routine?.alert
           ||['medical-recovery','mission-assignment','unavailable','active-crisis','infestation','annex-assignment'].includes(a.reason))
           return finish('failed','native-priority-interrupted-return');
-        if(a.reason==='occupied')return finish('occupied','actual-return-opening-occupied');
+        if(a.time-origin.actor.time>simBudget)return finish('failed','simulated-return-budget-exhausted');
+        if(now-started>=wallBudgetMs)return finish('failed','wall-return-budget-exhausted');
+        if(now-lastProgressAt>=stallBudgetMs)return finish('failed','no-physical-return-progress');
+        if(a.reason==='occupied'&&a.stage==='opening'&&Math.abs(a.x-opts.annexDoor)<.25)
+          return finish('occupied','actual-return-opening-occupied');
         if(!lastProgress||Math.abs(a.x-lastProgress.x)>=.5||a.stage!==lastProgress.stage
           ||Math.abs(a.doorProgress-lastProgress.doorProgress)>=.01||a.crossings!==lastProgress.crossings){
           lastProgress={x:a.x,stage:a.stage,doorProgress:a.doorProgress,crossings:a.crossings};lastProgressAt=now;}
-        if(a.time-origin.actor.time>simBudget)return finish('failed','simulated-return-budget-exhausted');
         raf=requestAnimationFrame(frame);
       }
       const timer=setInterval(()=>{const now=performance.now();
@@ -448,13 +592,15 @@ with sync_playwright() as pw:
                 page.wait_for_function('hour=>__ATF_V51__.saveSystem.data.clock.hour===hour', arg=config['returnHour'])
                 cdp = None
                 report['returnCpuThrottle'] = {'rate': args.return_cpu_throttle, 'phase': 'native occupied return', 'applied': False}
-                if args.return_cpu_throttle > 1:
-                    cdp = context.new_cdp_session(page)
-                    cdp.send('Emulation.setCPUThrottlingRate', {'rate': args.return_cpu_throttle})
-                    report['returnCpuThrottle']['applied'] = True
                 try:
                     open_hub(page, config)
                     ensure_return_occupant(page, config, 'after native resume')
+                    if config['id'] == 'asha-refuge':
+                        prepare_asha_return_dependency(page, config)
+                    if args.return_cpu_throttle > 1:
+                        cdp = context.new_cdp_session(page)
+                        cdp.send('Emulation.setCPUThrottlingRate', {'rate': args.return_cpu_throttle})
+                        report['returnCpuThrottle']['applied'] = True
                     wait_occupied_return(page, config)
                     occupied = observed(page, config)
                     page.wait_for_function('''p=>{const a=__ATF_HUB__.getSnapshot().npcAnnexRoutesV163.routes[p.id].actor;
@@ -468,6 +614,8 @@ with sync_playwright() as pw:
                           and waiting['route']['actor']['time'] >= occupied['route']['actor']['time'] + .15
                           and waiting['route']['actor']['x'] == occupied['route']['actor']['x']
                           and waiting['player']['x'] == occupied['player']['x'])
+                    if config['id'] == 'asha-refuge':
+                        export_asha_return_dependency(page, config)
                 finally:
                     if cdp:
                         cdp.send('Emulation.setCPUThrottlingRate', {'rate': 1})

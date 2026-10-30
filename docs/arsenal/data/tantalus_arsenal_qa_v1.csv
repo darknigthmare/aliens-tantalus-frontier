@@ -1,0 +1,58 @@
+﻿QA ID,Scénario,Manipulation,Résultat attendu,Groupe,Priorité
+Q01,M41A caseless,tir 99 fois,zéro douille; flash et recul; exactement 99 consommées,VFX + ammo,Bloquant
+Q02,M56 caseless,tir 10 fois,aucune douille; harnais; suivi cible LOS seulement,VFX + AI,Bloquant
+Q03,Hicks shotgun,tir puis pompe,"une douille au cycle, pas double",VFX + action,Bloquant
+Q04,Revolver,tir 6 puis recharger,6 chambres distinctes; étuis lors éjection,ammo + VFX,Bloquant
+Q05,M41A underbarrel,tir primaire/secondaire,mag principal et chargeur grenade indépendants,ammo,Bloquant
+Q06,Ripley combo,alterner armes,"deux flux indépendants, pas de recharge commune",ammo/rig,Bloquant
+Q07,Reload before transfer,annuler à 25%,aucune mutation de munitions,FSM,Bloquant
+Q08,Reload after eject,annuler à 38%,chargeur ancien accessible au sol/inventaire; nouvelle id pas dupliquée,FSM,Bloquant
+Q09,Reload after insert,annuler à 75%,nouveau chargeur conservé sur arme,FSM,Bloquant
+Q10,Save during reload,checkpoint à toutes phases,reprise exacte; ammo conserved,save,Bloquant
+Q11,Double insert,deux inputs même frame,"un seul mag attaché, transaction idempotente",ammo,Bloquant
+Q12,Coop reload,2 joueurs 1 mag,1 seul propriétaire par magazine,coop,Bloquant
+Q13,Magazine partial,tactical 45/99,objet 45 conservé et récupérable,ammo,Bloquant
+Q14,Speed reload,drop 8/30,"état du monde contient 8, peut ramasser",ammo/VFX,Bloquant
+Q15,Tube interruption,recharger 1 sur 6 puis bouger,"au moins 1 introduite, pas 6 ajoutées",ammo,Bloquant
+Q16,Cell compatibility,cell plasma vers arme balistique,refus explicite sans mutation,modularité,Bloquant
+Q17,Tank leak,réservoir endommagé,consommation et fuite distinctes,ammo,Important
+Q18,Heat save,sauvegarde energy >0,température persiste / décroît au tick réel,save,Important
+Q19,XP duplicate event,même shotSerial reçu deux fois,XP accordé une seule fois,XP,Bloquant
+Q20,XP friendly fire,tir allié / décor,aucun farm XP dégâts non hostiles,XP,Important
+Q21,XP assist coop,2 joueurs tirent même cible,anti double comptage + contribution bornée,XP,Important
+Q22,XP objective,objectif autorisé,récompense exactement 1 fois,XP,Bloquant
+Q23,XP cap,LV30 max,paliers et unlocks stables,XP,Important
+Q24,XP migration,save legacy V143,"same ammo count mapped without duplication, warning migration",save,Bloquant
+Q25,Attachment invalid,optique sniper sur lame,"refus, aucune animation cassée",slots,Important
+Q26,Attachment canonical,M41A montage iconique,position cohérente canon film / non modifiée arbitrairement,art,Important
+Q27,Rig swap,changement costume,weapon stays attached hand right/left and transparent,rig,Bloquant
+Q28,Recoil vs aim,montée recul,muzzle/beam/cover coherent,gameplay,Bloquant
+Q29,Cover projectile,tir depuis couverture,"impact réel porte/cloison, pas traversée",gameplay,Bloquant
+Q30,Flash occluder,tir derrière mur,lumière respecte obstruction locale,VFX,Important
+Q31,Effects cap,horde 300 ennemis,<=256 douilles et <=12 lumières; aucune croissance infini,performance,Bloquant
+Q32,Frame independence,30/60/120 Hz,mêmes munitions/XP & VFX événements,simulation,Bloquant
+Q33,Save audio,reprendre après tir,aucun replay du son / muzzleflash,save,Important
+Q34,Burst cancellation,tir burst interrompu,seuls projectiles effectivement émis consomment ammo,gameplay,Bloquant
+Q35,Jam recovery,interruption durant reset,"état sérialisé, pas de round création",FSM,Important
+Q36,Grenade blast,blast près opérateur,self damage/cover guard/friendly fire settings,gameplay,Important
+Q37,Fireball projectile,X1 D17 tir,"projectile impact explosive, jamais stream flammes",source,Bloquant
+Q38,Visual provenance,chaque asset à publier,"hash et dimensions vérifiés, statut 1:1 non inventé",assets,Bloquant
+Q39,Media source,chaque arme canon,lien source exploitable et origine distinguée,data,Important
+Q40,Offline release,build public,docs restent hors bundle; pas de nouvelle img chargée sans admission,build,Bloquant
+QA-RIFLE,Animation Rifle,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-SMG,Animation SMG,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-PISTOL,Animation Pistol,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-SHOTGUN,Animation Shotgun,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-SNIPER,Animation Sniper,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-HEAVY,Animation Heavy,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-LAUNCHER,Animation Launcher,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-GRENADE,Animation Grenade,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-MELEE,Animation Melee,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-ENERGY,Animation Energy,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-HARPOON,Animation Harpoon,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-INDUSTRIA,Animation Industrial,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-CHEMICAL,Animation Chemical,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-SENTRY,Animation Sentry,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-HYBRID,Animation Hybrid,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-MINE,Animation Mine,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important
+QA-FLAMETHRO,Animation Flamethrower,idle→aim→fire→reload→holster,grip/muzzle/recoil/foot alignment and correct shell profile,art/animation,Important

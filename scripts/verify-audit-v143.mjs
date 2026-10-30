@@ -238,8 +238,9 @@ test('release commit identity uses the actual checkout, with a strict archive fa
   assert.throws(() => resolveSourceCommitV143('.', { CI: 'true' }, () => { throw new Error(); }));
   assert.throws(() => resolveSourceCommitV143('.', { VERCEL_GIT_COMMIT_SHA: 'not-a-sha' }, () => { throw new Error(); }));
 });
-test('new release workflow and report are source tooling only', () => {
-  for (const path of ['.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md']) {
+test('release workflow, reports and gamedev guidance are source tooling only', () => {
+  for (const path of ['.github/workflows/full-release-v143.yml', 'docs/forge/V143-AUDIT-FIXES.md',
+    'AGENTS.md', 'docs/development/GAMEDEV_GUIDANCE.md']) {
     assert.equal(isPublicDistributionPathV86(path), true); assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   }
 });
@@ -299,4 +300,14 @@ test('rendered weapon observations identify the drawn shot, never an input accep
   render.drawn = false;
   engine.drawPlayerWeaponRigV125({}, actor);
   assert.equal(actor.heldWeaponVisualV125, null, 'A failed draw cannot certify a stale composition.');
+});
+
+test('gamedev guidance admission stays exact and rejects unrelated documents', () => {
+  assert.equal(isPublicDistributionPathV86('docs/development', { directory: true }), true);
+  assert.equal(isPublicDistributionPathV86('docs/development', { directory: true, built: true }), false);
+  for (const path of ['docs/development/unreviewed.md', 'docs/development/GAMEDEV_GUIDANCE.md.bak',
+    'AGENTS.md.bak', 'src/AGENTS.md', 'docs/development/../private.md']) {
+    assert.equal(isPublicDistributionPathV86(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+  }
 });

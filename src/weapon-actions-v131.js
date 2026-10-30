@@ -4,6 +4,8 @@ import { resolveWeaponActionProfileV130 } from './weapon-actions-v130.js';
 import { resolveWeaponReferenceCoverageV122 } from './weapon-reference-coverage-v122.js';
 import { collectProjectileCollisionsV83, firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { consumeTacticalReloadBonusV77 } from './tactical-reload-v77.js';
+import { spendAcceptedRoundV167, weaponFeedLoadedRoundsV167,
+  weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
 
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -180,6 +182,12 @@ export function withWeaponActionsV131(Base) {
         || !(actor.ammo > 0 || bag && actor.ammoReserve > 0)) return false;
       const thermal = this.thermalWeaponV131(actor, profile);
       if (thermal.overheated) return false;
+      const physical = actor.weaponFeedV167;
+      if (physical && physical.weaponDefinitionId === profile.weaponId) {
+        if (weaponFeedLoadedRoundsV167(physical) !== actor.ammo
+          || weaponFeedReserveRoundsV167(physical) !== actor.ammoReserve) actor.weaponFeedV167 = null;
+        else if (!spendAcceptedRoundV167(physical, String(Math.floor(finite(actor.shots) + 1)))) return false;
+      }
       if (actor.ammo > 0) actor.ammo -= 1; else actor.ammoReserve -= 1;
       actor.shots = finite(actor.shots) + 1;
       actor.fireClock = profile.interval; actor.actionClock = .22; actor.v52FireClock = .34;
@@ -253,6 +261,7 @@ export function withWeaponActionsV131(Base) {
       // Resolve cone contacts against the intact scene before any pane breaks.
       for (const [target, contact] of contacts) {
         const source = { owner: actor, family: profile.family, kind: profile.kind, weaponId: profile.weaponId,
+          id: 'beam:' + Math.floor(finite(actor.shots)) + ':' + String(target.id),
           x: contact.x, y: contact.y, damage };
         if (target.sceneryV130) this.damageDestructibleSceneryV130(target.id, damage, source, contact);
         else if (this.applyEnemyDamage(target, damage, source) > 0) this.applyWeaponStatusV131(target, profile, actor);

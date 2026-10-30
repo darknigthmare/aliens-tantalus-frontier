@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { CAMPAIGNS, WORLDS, WEAPONS, ENEMIES, LEVEL_SEEDS } from '../src/content.js';
 import { SaveSystem, createDefaultSave, beginOperation, resolveOperation, recordOperationResumeState, migrateSave } from '../src/save.js';
@@ -19,6 +23,7 @@ import { mountConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-ui-
 import { preserveLetheContinuityV163, recordLetheContinuityReviewV163 } from '../src/campaign-lethe-continuity-v163.js';
 import { mountLetheContinuityV163 } from '../src/campaign-lethe-continuity-ui-v163.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
+import { HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165 } from '../src/npc-annex-workpost-routes-v165.js';
 
 const world = WORLDS.find(entry => entry.id === campaign.worldId);
 const clone = value => structuredClone(value);
@@ -571,4 +576,164 @@ test('PR15: illustrated approach framing follows persisted phase progress throug
   assert.match(css, /transform:\s*scale\(calc\(1\s*\+\s*0\.035\s*\*\s*var\(--story-shot-progress/u);
   assert.match(css, /\[data-reduced-motion='true'\][^{]*\{[^}]*transform:\s*none/u);
   assert.equal(restored.state.paused, true);
+});
+
+// Execute the actual pure Python QA predicates without importing its CLI or
+// launching Chromium. These fixtures test the guard, not a browser journey.
+const serviceClockOwners = [
+  ['npcServiceRoutesV161', 'idris-engine', 'crew-03-idris-kwan'],
+  ['npcServiceRoutesV161', 'leila-galley', 'crew-15-leila-s-rensen'],
+  ['npcMedicalRouteV162', 'noor-morgue', 'crew-04-noor-okafor'],
+  ['npcAnnexRoutesV163', 'maksim-arrival', 'crew-08-maksim-orlov'],
+  ['npcAnnexRoutesV163', 'inez-bioforge', 'crew-09-inez-harlow'],
+  ['npcAnnexRoutesV163', 'asha-refuge', 'crew-12-asha-mbaye'],
+  ['npcAnnexRoutesV163', 'jun-water', 'crew-11-jun-park'],
+  ['npcAnnexRoutesV163', 'mara-archives', 'crew-01-mara-vega'],
+  ...HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165.map(d => ['npcAnnexWorkpostRoutesV165', d.id, d.crewId])
+];
+function clockGuardFixture() {
+  const returned = returnedFixture(); applyCampaignStoryReturnV160(returned, campaign, { success: true });
+  preserveCampaignStoryReturnV160(returned);
+  // Small guard fixtures keep the real return values at the mutation paths;
+  // the separate native runtime tests above cover complete save round trips.
+  const save = {
+    clock: { hour: returned.clock.hour }, galaxy: { resources: { research: returned.galaxy.resources.research } },
+    hub: { systems: { morale: returned.hub.systems.morale } },
+    crew: [{ id: returned.crew[0].id, health: returned.crew[0].health }],
+    statistics: { campaigns: returned.statistics.campaigns },
+    archiveRelayArchivesV122: { lastReturnV160: { ledger: { receipt: {
+      amount: returned.archiveRelayArchivesV122.lastReturnV160.ledger.receipt.amount
+    } } } }
+  };
+  for (const [field, route, crewId] of serviceClockOwners) {
+    save.hub[field] ??= { routes: {} };
+    save.hub[field].routes[route] = { actor: { crewId, time: 10, roomId: 'fixture-station', x: 180, stage: 'service' } };
+  }
+  return save;
+}
+function checkQaServiceClocks(cases, extras = {}) {
+  const source = fileURLToPath(new URL('./qa-campaign-story-v160.py', import.meta.url));
+  const script = `import ast, copy, json, math, sys
+from pathlib import Path
+path = Path(sys.argv[1])
+names = {'protected', 'protected_difference', 'service_clock_evidence', 'reload_failure_diagnostic'}
+module = ast.Module(body=[node for node in ast.parse(path.read_text()).body
+                         if isinstance(node, ast.FunctionDef) and node.name in names], type_ignores=[])
+assert {node.name for node in module.body} == names
+scope = {'json': json, 'math': math}
+exec(compile(module, str(path), 'exec'), scope)
+payload = json.loads(Path(sys.argv[2]).read_text())
+results = []
+for case in payload['cases']:
+    evidence = scope['service_clock_evidence'](case['before'], case['after'], case['interval'])
+    allowed = {row['path'] for row in evidence if row['accepted']}
+    differences = scope['protected_difference'](scope['protected'](case['before']), scope['protected'](case['after']))
+    unexpected = [row for row in differences if row['path'] not in allowed]
+    results.append({'accepted': all(row['accepted'] for row in evidence) and not unexpected,
+                    'evidence': evidence, 'allowedPaths': sorted(allowed), 'unexpected': unexpected})
+numerical = []
+if payload.get('numberCase'):
+    baseline = payload['numberCase']
+    assert all(row['accepted'] for row in scope['service_clock_evidence'](baseline['before'], baseline['after'], baseline['interval']))
+    for number in [float('nan'), float('inf'), -float('inf')]:
+        for target in ['before', 'after', 'interval']:
+            case = copy.deepcopy(baseline)
+            if target == 'interval': case[target] = number
+            else: case[target]['hub']['npcAnnexWorkpostRoutesV165']['routes']['rook-cctv']['actor']['time'] = number
+            rows = scope['service_clock_evidence'](case['before'], case['after'], case['interval'])
+            numerical.append(all(row['accepted'] for row in rows))
+Path(sys.argv[3]).write_text(json.dumps({'results': results, 'numerical': numerical,
+                  'diagnostic': scope['reload_failure_diagnostic'](payload['diagnostic']) if payload.get('diagnostic') else None}))`;
+  const directory = mkdtempSync(join(tmpdir(), 'campaign-clock-guard-'));
+  const input = join(directory, 'input.json'), output = join(directory, 'output.json');
+  try {
+    writeFileSync(input, JSON.stringify({ cases, ...extras }));
+    execFileSync('python3', ['-c', script, source, input, output], { stdio: 'inherit', timeout: 30000 });
+    return JSON.parse(readFileSync(output, 'utf8'));
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+}
+const workpostActor = (save, id = 'rook-cctv') => save.hub.npcAnnexWorkpostRoutesV165.routes[id].actor;
+
+test('gamedev QA reload: exact registered workpost clocks advance only within measured elapsed time', () => {
+  assert.deepEqual(HUB_NPC_ANNEX_WORKPOST_ROUTE_DEFINITIONS_V165.map(d => [d.id, d.crewId]),
+    [['rook-cctv', 'crew-06-rook'], ['tamsin-proving', 'crew-02-tamsin-velez']]);
+  const before = clockGuardFixture();
+  const cases = [0, .25, 1.5].map(delta => {
+    const after = clone(before);
+    for (const [field, route] of serviceClockOwners) after.hub[field].routes[route].actor.time += delta;
+    return { before, after, interval: 1.5 };
+  });
+  for (const result of checkQaServiceClocks(cases).results) {
+    assert.equal(result.accepted, true); assert.deepEqual(result.unexpected, []);
+    assert.equal(result.evidence.length, 10, 'Preserve the eight original owners and the two registered workpost owners');
+    assert.deepEqual(result.allowedPaths, serviceClockOwners.map(([field, route]) => `/hub/${field}/routes/${route}/actor/time`).sort());
+  }
+});
+
+test('gamedev QA reload: changed identities, missing owners and invalid or excessive clocks are refused', () => {
+  const before = clockGuardFixture();
+  const mutate = [
+    s => { workpostActor(s).crewId = 'crew-unknown'; },
+    s => { workpostActor(s, 'tamsin-proving').crewId = 'crew-06-rook'; },
+    s => { s.hub.npcAnnexWorkpostRoutesV165.routes['rook-cctv'].actor = null; },
+    s => { delete s.hub.npcAnnexWorkpostRoutesV165.routes['tamsin-proving']; },
+    ...[null, true, '10', 9, 11.5001].map(value => s => { workpostActor(s).time = value; }),
+    s => { delete workpostActor(s).time; }
+  ];
+  const cases = mutate.map(change => { const after = clone(before); change(after); return { before, after, interval: 1.5 }; });
+  for (const interval of [-1, null, true, '1.5']) cases.push({ before, after: clone(before), interval });
+  const missingBefore = clone(before); missingBefore.hub.npcAnnexWorkpostRoutesV165.routes['rook-cctv'].actor = null;
+  cases.push({ before: missingBefore, after: clone(before), interval: 1.5 });
+  const wrongOwner = clone(before); workpostActor(wrongOwner).crewId = 'crew-unknown';
+  cases.push({ before: wrongOwner, after: clone(wrongOwner), interval: 1.5 });
+  const checked = checkQaServiceClocks(cases, { numberCase: { before, after: clone(before), interval: 1.5 } });
+  assert.ok(checked.results.every(result => result.accepted === false && result.evidence.some(row => !row.accepted)),
+    'The clock predicate itself must reject each case, even an unchanged but incorrect owner');
+  assert.deepEqual(checked.numerical, Array(9).fill(false), 'NaN and infinities in either clock or the measured interval are rejected');
+});
+
+test('gamedev QA reload: clock allowances retain every physical route and campaign mutation in protected differences', () => {
+  const before = clockGuardFixture();
+  const mutations = [
+    ['/hub/npcAnnexWorkpostRoutesV165/routes/rook-cctv/actor/x', s => { workpostActor(s).x += 1; }],
+    ['/hub/npcAnnexWorkpostRoutesV165/routes/rook-cctv/actor/roomId', s => { workpostActor(s).roomId = 'cctv'; }],
+    ['/hub/npcAnnexWorkpostRoutesV165/routes/tamsin-proving/actor/stage', s => { workpostActor(s, 'tamsin-proving').stage = 'walking'; }],
+    ['/hub/npcAnnexWorkpostRoutesV165/routes/rook-cctv/nativeHandoff', s => { s.hub.npcAnnexWorkpostRoutesV165.routes['rook-cctv'].nativeHandoff = { observedTravel: true }; }],
+    ['/galaxy/resources/research', s => { s.galaxy.resources.research += 1; }],
+    ['/hub/systems/morale', s => { s.hub.systems.morale += 1; }],
+    ['/crew/0/health', s => { s.crew[0].health -= 1; }],
+    ['/clock/hour', s => { s.clock.hour += 1; }],
+    ['/statistics/campaigns', s => { s.statistics.campaigns += 1; }],
+    ['/archiveRelayArchivesV122/lastReturnV160/ledger/receipt/amount', s => { s.archiveRelayArchivesV122.lastReturnV160.ledger.receipt.amount += 1; }],
+    ['/hub/npcAnnexWorkpostRoutesV165/routes/unknown-owner', s => { s.hub.npcAnnexWorkpostRoutesV165.routes['unknown-owner'] = { actor: { crewId: 'crew-06-rook', time: 10.25 } }; }]
+  ];
+  const cases = mutations.map(([, change]) => {
+    const after = clone(before); workpostActor(after).time += .25; change(after);
+    return { before, after, interval: 1.5 };
+  });
+  const results = checkQaServiceClocks(cases).results;
+  results.forEach((result, index) => {
+    assert.equal(result.accepted, false);
+    assert.ok(result.unexpected.some(row => row.path === mutations[index][0]), mutations[index][0]);
+  });
+});
+
+test('gamedev QA reload: CI diagnostics show bounded deltas without dumping protected snapshots', () => {
+  const row = { path: '/hub/' + 'route'.repeat(70), before: { privateSnapshot: 'never copy this object' }, after: 'x'.repeat(500) };
+  const diagnostic = { unexpectedDifferences: Array(30).fill(row),
+    preciseSessionExceptions: Array(12).fill({ ...row, accepted: false }),
+    ledgerBefore: { receipt: 2 }, ledgerAfter: { receipt: 3 },
+    durableLedgersBefore: { receipt: 2 }, durableLedgersAfter: { receipt: 2 }, subjectsBefore: ['RELU'], subjectsAfter: ['RELU'] };
+  const result = checkQaServiceClocks([], { diagnostic }).diagnostic;
+  assert.equal(result.unexpectedDifferenceCount, 30); assert.equal(result.rejectedClockCount, 12);
+  assert.equal(result.unexpectedDifferences.length, 6); assert.equal(result.rejectedClocks.length, 6);
+  assert.equal(result.ledgerStable, false); assert.equal(result.durableLedgersStable, true); assert.equal(result.subjectsStable, true);
+  for (const entry of [...result.unexpectedDifferences, ...result.rejectedClocks]) {
+    assert.equal(entry.path.length, 180); assert.equal(entry.after.length, 120);
+    assert.deepEqual(entry.before, { type: 'object', keys: 1 });
+  }
+  assert.ok(JSON.stringify(result).length < 5000);
+  assert.doesNotMatch(JSON.stringify(result), /privateSnapshot|never copy this object/);
 });

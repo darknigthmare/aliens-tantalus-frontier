@@ -6,7 +6,7 @@ import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
 import { moveNpcAgainstGeometryV136, spreadNpcStationSpawnsV136 } from './npc-life-v136.js';
 import { annexNpcDutiesV141 } from './hub-annex-npc-life-v141.js';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTES_V165 } from './npc-annex-workpost-routes-v165.js';
-import { NPC_INTERDECK_DEFINITIONS_V165, normalizeNpcInterdeckRoutesV165 } from './npc-interdeck-routes-v165.js';
+import { NPC_INTERDECK_DEFINITIONS_V165, normalizeNpcInterdeckRoutesV165, getNpcInterdeckGeometryV165 } from './npc-interdeck-routes-v165.js';
 import { npcLiftSocketV165, normalizeNpcLiftTransitV165, createNpcLiftTransitV165,
   advanceNpcLiftTransitV165, npcLiftPoseV165, npcLiftDurationV165, npcLiftDoorProgressV165 } from './npc-lift-transit-v165.js';
 import { getLiftOcclusionV163 } from './hub-lift-transit-v163.js';
@@ -21,7 +21,7 @@ const deckOf=id=>HUB_DECKS.findIndex(d=>d.rooms.some(r=>r.id===id));
 const roomAt=(deck,x)=>HUB_DECKS[deck]?.rooms.find(r=>x+22>=r.xStart&&x+22<r.xEnd);
 const doorsFor=deck=>buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck).filter(d=>!d.lift);
 const doorIds=HUB_DECKS.flatMap((_,deck)=>doorsFor(deck).map(d=>d.id));
-const stages=['station','walking-lift','waiting-lift','lift','walking-workpost','local','walking-home','returned'];
+const stages=['station','courtesy','walking-lift','waiting-lift','lift','walking-workpost','local','walking-home','returned'];
 const reasons=['daily-schedule','occupied','interaction','active-crisis','infestation','medical-recovery','mission-assignment','unavailable'];
 export const NPC_STATION_RELAY_DEFINITIONS_V166=Object.freeze([
   {id:'rook-station-relay',crewId:'crew-06-rook',stationDeck:3,stationRoomId:'sensor-array',deck:0,
@@ -39,7 +39,26 @@ export const NPC_STATION_RELAY_DEFINITIONS_V166=Object.freeze([
   return Object.freeze({...d,workGoalX});
 }));
 const localRoute=d=>HUB_NPC_ANNEX_WORKPOST_ROUTES_V165.find(r=>r.definition.id===d.localId);
-const empty=()=>({actor:null,stationOrigin:null,workBookmark:null,localOwner:false,localState:null,returned:null,nativeHandoff:null});
+const empty=()=>({actor:null,stationOrigin:null,workBookmark:null,localOwner:false,localState:null,returned:null,nativeHandoff:null,courtesy:null});
+const stationCourtesySource='physical-station-courtesy-v166';
+const cockpitArrivalX=()=>{const face=getNpcInterdeckGeometryV165('maksim-cockpit').faces.parent;
+  return face.opening.x+(face.opening.w-44)/2;};
+function normalizeStationCourtesy(d,c,o,a){
+  if(!c||d.id!=='tamsin-station-relay'||c.source!==stationCourtesySource
+    ||c.routeId!=='maksim-cockpit:deck-0'||c.ownerCrewId!=='crew-08-maksim-orlov'
+    ||c.originX!==o.x||c.originRoomId!==o.roomId||c.goalX!==cockpitArrivalX()
+    ||!['clearing','holding','returning','returned'].includes(c.phase)
+    ||![c.targetX,c.startTime,c.startDistance].every(finite)||c.targetX<24||c.targetX>=c.goalX
+    ||c.startTime<0||c.startTime>a.time||c.startDistance<0||c.startDistance>a.distance
+    ||a.direction!=='outbound'||a.deck!==d.stationDeck||a.x<24||a.x>o.x
+    ||a.distance-c.startDistance+1e-6<Math.abs(a.x-o.x)
+    ||(c.phase==='returned'?a.stage!=='station'||a.x!==o.x||a.velocity!==0:a.stage!=='courtesy')
+    ||c.phase==='holding'&&(a.x!==c.targetX||a.velocity!==0))return null;
+  const slot=(c.goalX-c.targetX)/68;
+  if(slot<1||slot>16||Math.abs(slot-Math.round(slot))>1e-8)return null;
+  return{source:stationCourtesySource,routeId:c.routeId,ownerCrewId:c.ownerCrewId,originX:o.x,originRoomId:o.roomId,
+    goalX:c.goalX,targetX:c.targetX,phase:c.phase,startTime:c.startTime,startDistance:c.startDistance};
+}
 const normalizeDoors=value=>value&&typeof value==='object'&&!Array.isArray(value)
   &&Object.entries(value).every(([id,p])=>doorIds.includes(id)&&finite(p)&&p>=0&&p<=1)
   ?Object.fromEntries(doorIds.map(id=>[id,value[id]||0])):null;
@@ -66,6 +85,8 @@ export function normalizeNpcStationRelaysV166(value){
       continue;
     }
     const w=raw.workBookmark==null?null:workBookmark(d,raw.workBookmark);
+    const courtesy=normalizeStationCourtesy(d,raw.courtesy,o,a);
+    if(raw.courtesy!=null&&!courtesy||a.stage==='courtesy'&&!courtesy)continue;
     if(raw.workBookmark!=null&&!w||typeof raw.localOwner!=='boolean'||!stages.includes(a.stage)||!reasons.includes(a.reason)
       ||a.crewId!==d.crewId||![d.stationDeck,d.deck].includes(a.deck)||!['outbound','return'].includes(a.direction)
       ||![a.x,a.y,a.velocity,a.time,a.distance,a.localDistance,a.localTime].every(finite)
@@ -115,7 +136,7 @@ export function normalizeNpcStationRelaysV166(value){
       stage:a.stage,direction:a.direction,reason:a.reason,time:a.time,distance:a.distance,liftJourneys:a.liftJourneys,
       localDistance:a.localDistance,localTime:a.localTime,localCrossings:a.localCrossings,localArrivals:a.localArrivals,
       returnRequested:a.returnRequested,lift,bulkheadProgress:normalizeDoors(a.bulkheadProgress)},
-      stationOrigin:o,workBookmark:w,localOwner:raw.localOwner,localState:l,returned,nativeHandoff:null};
+      stationOrigin:o,workBookmark:w,localOwner:raw.localOwner,localState:l,returned,nativeHandoff:null,courtesy};
   }
   const shafts=new Map();for(const[d,e]of Object.entries(routes))if(e.actor?.lift){const id=e.actor.lift.shaftId;
     if(!shafts.has(id))shafts.set(id,[]);shafts.get(id).push(d);}
@@ -252,7 +273,7 @@ export function withHubNpcStationRelaysV166(Base){return class HubNpcStationRela
     .some(e=>e.actor&&!e.localOwner&&!e.actor.lift&&!['station','returned'].includes(e.actor.stage)&&e.actor.deck===door.deckIndex&&Math.abs(e.actor.x+22-door.x)<182));}
   getNpcServiceTrafficIntentsV163(){const inherited=super.getNpcServiceTrafficIntentsV163?.()||[];
     for(const d of NPC_STATION_RELAY_DEFINITIONS_V166){const e=this.npcStationRelaysStateV166?.routes[d.id],a=e?.actor,actor=this.getNpcStationRelayActorV166(d.id);
-      if(!a||!actor||e.localOwner||['station','returned'].includes(a.stage)||a.lift&&!['boarding','exiting'].includes(a.lift.phase))continue;
+      if(!a||!actor||e.localOwner||['station','returned','courtesy'].includes(a.stage)||a.lift&&!['boarding','exiting'].includes(a.lift.phase))continue;
       const cabin=npcLiftSocketV165(a.deck,d.shaftId).x-22;
       const yieldGoal=this.getNpcServiceOwnerYieldGoalV165?.(d.id,actor);
       const goalX=finite(yieldGoal)?yieldGoal:a.lift?(a.lift.phase==='boarding'?a.lift.cabinX:a.lift.exitX)
@@ -260,6 +281,40 @@ export function withHubNpcStationRelaysV166(Base){return class HubNpcStationRela
       inherited.push({routeId:d.id+':deck-'+a.deck,actor,deck:a.deck,goalX,roomIds:HUB_DECKS[a.deck].rooms.map(r=>r.id),
         minX:24,maxX:HUB_WORLD.width-68,doorIds:doorsFor(a.deck).map(d=>d.id)});
     }return inherited;}
+  canPlanNpcServiceOwnerCourtesyV166(intent,peer){
+    const e=this.npcStationRelaysStateV166?.routes['tamsin-station-relay'],a=e?.actor;
+    const passenger=this.npcInterdeckStateV165?.routes['maksim-cockpit']?.actor;
+    if(intent?.routeId!=='maksim-cockpit:deck-0'||intent.deck!==0||intent.goalX!==cockpitArrivalX()
+      ||intent.actor!==this.npcInterdeckBodiesV165?.get('maksim-cockpit')
+      ||passenger?.stage!=='walking-portal'||passenger.direction!=='outbound'||passenger.deck!==0
+      ||peer!==this.getNpcStationRelayActorV166('tamsin-station-relay')||!a||e.localOwner||e.workBookmark
+      ||a.deck!==0||a.y!==532||peer.w!==44||peer.h!==92||a.lift||a.liftJourneys!==0
+      ||this.hubNpcLeaseOwnerV163(peer.crewId)!=='tamsin-station-relay')return false;
+    if(a.stage==='courtesy')return ['clearing','holding'].includes(e.courtesy?.phase)
+      &&e.courtesy.routeId===intent.routeId&&e.courtesy.ownerCrewId===intent.actor.crewId;
+    return a.stage==='station'&&!annexNpcDutiesV141(this.npcRoutineResolutionsV62,this)
+      .some(d=>d.crewId===peer.crewId&&d.roomId==='proving-ground');
+  }
+  canReserveNpcServiceOwnerCourtesyV166(intent,peer,targetX){
+    if(!this.canPlanNpcServiceOwnerCourtesyV166(intent,peer)||!finite(targetX))return false;
+    const slot=(intent.goalX-targetX)/68;
+    if(targetX<24||slot<1||slot>16||Math.abs(slot-Math.round(slot))>1e-8)return false;
+    return [intent.actor,peer].every(body=>{const r=this.npcRoutineResolutionsV62?.get(body.crewId);
+      return body.alive!==false&&!body.downed&&body.workClock<=0&&body.supportClock<=0&&r
+        &&!r.alert&&!r.missionAssigned&&!r.needsCare;});
+  }
+  reserveNpcServiceOwnerCourtesyV166(intent,peer,targetX){
+    // Called only after V163 admitted the complete ordered plan. It assigns
+    // a goal to this owner, never a pose or another movement controller.
+    if(!this.canReserveNpcServiceOwnerCourtesyV166(intent,peer,targetX))return false;
+    const e=this.npcStationRelaysStateV166.routes['tamsin-station-relay'],a=e.actor;
+    const prior=a.stage==='courtesy'?e.courtesy:null;
+    e.courtesy={source:stationCourtesySource,routeId:intent.routeId,ownerCrewId:intent.actor.crewId,
+      originX:e.stationOrigin.x,originRoomId:e.stationOrigin.roomId,goalX:intent.goalX,targetX,phase:'clearing',
+      startTime:prior?.startTime??a.time,startDistance:prior?.startDistance??a.distance};
+    e.actor={...a,stage:'courtesy'};
+    return true;
+  }
   canPreemptNpcServiceCourtesyV165(intent,saved){
     const d=NPC_STATION_RELAY_DEFINITIONS_V166.find(d=>intent?.routeId===d.id+':deck-'+intent.deck&&intent.actor?.crewId===d.crewId);
     // Retarget this owner's existing real courtesy body when the floor goal
@@ -327,10 +382,10 @@ export function withHubNpcStationRelaysV166(Base){return class HubNpcStationRela
       const alert=r?.alert?(r.reason==='active-crisis'?'active-crisis':'infestation'):null;
       const watch=annexNpcDutiesV141(this.npcRoutineResolutionsV62,this).some(w=>w.crewId===d.crewId&&w.roomId===d.annexRoomId);
       if(priority&&!old.lift){e.nativeHandoff={crewId:d.crewId,fromRoomId:body.roomId,toRoomId:r?.roomId||null,reason:priority,observedTravel:false};
-        e.actor=null;e.localOwner=false;e.localState=null;this.npcStationRelayBodiesV166.delete(d.id);
+        e.actor=null;e.localOwner=false;e.localState=null;e.courtesy=null;this.npcStationRelayBodiesV166.delete(d.id);
         this.npcs=(this.npcs||[]).filter(a=>a.crewId!==d.crewId);this.npcs=this.createNpcs(this.state.deck);continue;}
       let a={...old,time:Math.min(1e9,old.time+dt),actualVelocity:0};
-      if(!watch&&!['station','returned'].includes(a.stage)||priority||alert)a.returnRequested=true;
+      if(!watch&&!['station','returned','courtesy'].includes(a.stage)||priority||alert)a.returnRequested=true;
       if(e.localOwner){const s=this.getNpcServicePhysicalStateV165?.(d.localId);
         if(!s||this.getNpcServiceActorV161(d.localId)!==body)continue;
         a={...a,x:s.x,y:s.y,roomId:s.roomId,facing:s.facing,velocity:0,reason:s.reason,distance:a.distance+Math.max(0,s.distance-a.localDistance),
@@ -345,9 +400,24 @@ export function withHubNpcStationRelaysV166(Base){return class HubNpcStationRela
       const peers=this.getNpcServicePeersV163?.(a.deck,d.crewId)||[],player=!this.ventActorV62&&this.player
         ?{...this.player,roomId:this.currentAnnexV71?.()?.id||(this.state.deck===a.deck?this.state.roomId:null)}:null;
       const yieldGoal=this.getNpcServiceOwnerYieldGoalV165?.(d.id,body),cabin=npcLiftSocketV165(a.deck,d.shaftId).x-22;
+      if(a.stage==='courtesy'){
+        const c=e.courtesy,p=this.npcInterdeckStateV165?.routes['maksim-cockpit']?.actor;
+        // On the return, the passenger is already east of the waiting body.
+        // Follow it home while the other ordered courtesy bodies remain west;
+        // waiting for its distant lift would reverse their restitution order.
+        const returning=!p||p.direction==='return'&&(p.deck!==a.deck
+          ||deckOf(p.roomId)===a.deck&&p.x>=a.x+56);
+        if(returning)c.phase='returning';
+        const goal=c.phase==='returning'?e.stationOrigin.x:c.targetX;
+        a=walk(a,body,goal,dt,peers,player,this.npcStationRelayDoorsV166[a.deck]);
+        if(a.x===goal){if(c.phase==='returning'){a.stage='station';c.phase='returned';}
+          else c.phase='holding';}
+        a.bulkheadProgress=Object.fromEntries(this.npcStationRelayDoorsV166.flatMap(ds=>ds.map(d=>[d.id,d.progress||0])));
+        e.actor=a;this.applyNpcStationRelayPoseV166(body,a);continue;
+      }
       if(a.stage==='station'||a.stage==='returned'){
         if(!watch){e.actor=a;this.applyNpcStationRelayPoseV166(body,a);continue;}
-        e.returned=null;e.workBookmark=null;a={...a,stage:'walking-lift',direction:'outbound',returnRequested:false,
+        e.returned=null;e.workBookmark=null;e.courtesy=null;a={...a,stage:'walking-lift',direction:'outbound',returnRequested:false,
           distance:0,liftJourneys:0,localDistance:0,localTime:0,localCrossings:0,localArrivals:0};
       }
       if(a.stage==='walking-lift'){

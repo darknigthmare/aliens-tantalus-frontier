@@ -210,22 +210,69 @@ def walk_to(page, config, x, precise=False):
         raise AssertionError('Native keyboard steps did not settle on the actual return arrival.')
 
 
+# The return controller can keep ECHO at its occupied service post until the
+# exact interdeck passenger has returned. Observe that passenger's physical
+# progress without treating its time/animation as motion or increasing any
+# wall/stall budget. This pure observer is also exercised by the Node verifier.
+NATIVE_ROUTE_PROGRESS_V163 = '''function createNativeRouteProgressV163(opts, started) {
+  const dependencyIds=opts.id==='echo-escape'?['maksim-cockpit']:[];
+  const wallBudgetMs=900000,stallBudgetMs=60000,simBudgetSeconds=150;
+  const checkpoints=new Map();let lastProgressAt=started,lastActorTime=null,previousHold=false,
+    activeSimSeconds=0,dependencySimSeconds=0,waitingFor=[];
+  function changed(id,a){
+    const pose={x:a.x,y:a.y,deck:a.deck,roomId:a.roomId,stage:a.stage,doorProgress:a.doorProgress||0,
+      crossings:a.crossings||0,liftJourneys:a.liftJourneys||0,liftPhase:a.lift?.phase||null};
+    const before=checkpoints.get(id);
+    const moved=!before||Math.abs(pose.x-before.x)>=.5||Math.abs(pose.y-before.y)>=.5
+      ||pose.deck!==before.deck||pose.roomId!==before.roomId||pose.stage!==before.stage
+      ||Math.abs(pose.doorProgress-before.doorProgress)>=.01||pose.crossings!==before.crossings
+      ||pose.liftJourneys!==before.liftJourneys||pose.liftPhase!==before.liftPhase;
+    if(moved)checkpoints.set(id,pose);
+    return moved;
+  }
+  function check(now){
+    if(now-started>=wallBudgetMs)return 'wall-return-budget-exhausted';
+    if(now-lastProgressAt>=stallBudgetMs)return 'no-physical-return-progress';
+    if(activeSimSeconds>simBudgetSeconds)return 'simulated-return-budget-exhausted';
+    return null;
+  }
+  function observe(sample,now){
+    const a=sample.actor,dependencies=(sample.dependencies||[]).filter(d=>dependencyIds.includes(d.id)&&d.actor);
+    const hold=opts.returning===true&&a?.roomId===opts.annex&&a.stage==='service'
+      &&a.reason==='occupied'&&a.doorProgress===0&&sample.passageRequested===true&&dependencies.length>0;
+    if(a){
+      const elapsed=lastActorTime==null?0:Math.max(0,a.time-lastActorTime);
+      if(hold&&previousHold)dependencySimSeconds+=elapsed;else activeSimSeconds+=elapsed;
+      lastActorTime=a.time;
+      if(changed('owner',a))lastProgressAt=now;
+    }
+    if(hold)for(const d of dependencies)if(changed(d.id,d.actor))lastProgressAt=now;
+    previousHold=hold;waitingFor=hold?dependencies.map(d=>d.id):[];
+    return check(now);
+  }
+  function snapshot(now){return {activeSimSeconds,dependencySimSeconds,waitingFor:[...waitingFor],
+    wallMs:now-started,lastProgressAgeMs:now-lastProgressAt,simBudgetSeconds,wallBudgetMs,stallBudgetMs};}
+  function occupiedOpening(a){return Boolean(a&&a.roomId===opts.annex&&a.stage==='opening'
+    &&a.reason==='occupied'&&a.crossings===1&&Math.abs(a.x-opts.annexDoor)<.25);}
+  return {dependencyIds,observe,check,snapshot,occupiedOpening};
+}'''
+
+
 def collect(page, config, name, stop, move_to=None, exit_after=False):
     phase(name)
-    page.evaluate('''opts=>{ window.__ATF_LEASES_V163_COLLECTION__=new Promise((resolve,reject)=>{
+    page.evaluate('''opts=>{ const createProgress=(''' + NATIVE_ROUTE_PROGRESS_V163 + ''');
+      window.__ATF_LEASES_V163_COLLECTION__=new Promise((resolve,reject)=>{
       const rows=[],frames={},h=__ATF_HUB__;
-      const started=performance.now();let origin=null,lastProgress=null,lastProgressAt=started;
-      const timer=setInterval(()=>{const now=performance.now();
-        if(now-started>900000||now-lastProgressAt>60000){clearInterval(timer);
-          reject(Error('Native service route wall/progress guard: '+opts.name));}},1000);
+      const progress=createProgress({...opts,returning:opts.stop==='returned'},performance.now());let finished=false,raf;
+      function fail(reason){if(finished)return;finished=true;clearInterval(timer);cancelAnimationFrame(raf);
+        reject(Error('Native service route guard: '+opts.name+' '+reason+' '+JSON.stringify(progress.snapshot(performance.now()))));}
+      const timer=setInterval(()=>{const failure=progress.check(performance.now());if(failure)fail(failure);},1000);
       function frame(){
-        const snap=h.getSnapshot().npcAnnexLeasesV163.routes[opts.id],a=snap.actor;
-        if(a){origin ||= a.time;const now=performance.now();
-          if(!lastProgress||Math.abs(a.x-lastProgress.x)>=.5||a.roomId!==lastProgress.roomId
-            ||a.stage!==lastProgress.stage||Math.abs(a.doorProgress-lastProgress.doorProgress)>=.01){
-            lastProgress={x:a.x,roomId:a.roomId,stage:a.stage,doorProgress:a.doorProgress};lastProgressAt=now;}
-          if(a.time-origin>150){clearInterval(timer);reject(Error('Native service route simulation guard: '+opts.name));return;}}
-        const row={actor:a?structuredClone(a):null,handoff:structuredClone(snap.nativeHandoff),returned:structuredClone(snap.returned||null),originX:snap.originX,sourceRoomId:snap.sourceRoomId,traffic:structuredClone(h.getSnapshot().npcServiceTrafficV163||null),
+        if(finished)return;const snapshot=h.getSnapshot(),snap=snapshot.npcAnnexLeasesV163.routes[opts.id],a=snap.actor;
+        const dependencies=progress.dependencyIds.map(id=>({id,actor:structuredClone(h.npcInterdeckStateV165?.routes[id]?.actor||null)}));
+        const failure=progress.observe({actor:a,dependencies,passageRequested:h.npcInterdeckPassingRequestV165?.(opts.id)===true},performance.now());
+        if(failure){fail(failure);return;}
+        const row={actor:a?structuredClone(a):null,dependencies,handoff:structuredClone(snap.nativeHandoff),returned:structuredClone(snap.returned||null),originX:snap.originX,sourceRoomId:snap.sourceRoomId,traffic:structuredClone(snapshot.npcServiceTrafficV163||null),
           reserved:snap.reserved,occlusion:structuredClone(snap.occlusion),
           nativeTime:h.animationTime,player:{x:h.player.x,y:h.player.y},clock:structuredClone(h.npcRoutineContextV62.clock)};
         rows.push(row);
@@ -237,9 +284,9 @@ def collect(page, config, name, stop, move_to=None, exit_after=False):
         const done=opts.stop==='mid-cover'&&a?.stage==='covering'&&a.doorProgress>.35&&a.doorProgress<.7
           ||opts.stop==='annex-service'&&a?.roomId===opts.annex&&a.stage==='service'&&a.arrivals>=1
           ||opts.stop==='returned'&&snap.returned?.observedTravel===true&&snap.returned.owner==='native-physical-owner-return-v163'&&!a;
-        if(done){clearInterval(timer);resolve({rows,frames});return;}
-        requestAnimationFrame(frame);
-      } requestAnimationFrame(frame);
+        if(done){finished=true;clearInterval(timer);resolve({rows,frames,progress:progress.snapshot(performance.now())});return;}
+        raf=requestAnimationFrame(frame);
+      } raf=requestAnimationFrame(frame);
     }); }''', {**config, 'name': name, 'stop': stop})
     if move_to is not None:
         walk_to(page, config, move_to)
@@ -251,6 +298,7 @@ def collect(page, config, name, stop, move_to=None, exit_after=False):
         page.evaluate('async()=>{await window.__ATF_LEASES_V163_COLLECTION__;return true;}')
         page.locator('#exit-hub').click()
     result = page.evaluate('()=>window.__ATF_LEASES_V163_COLLECTION__')
+    report.setdefault('journeyProgress', {})[name] = result['progress']
     rows = result['rows']
     (output / (name + '.json')).write_text(json.dumps(rows, indent=2))
     continuous = True
@@ -385,31 +433,36 @@ def ensure_return_occupant(page, config, label):
 def wait_occupied_return(page, config):
     """Observe the complete return, bounded in simulation and wall time.
 
-    The native loop caps each update at34ms. A complete native companion visit can leave Noor
-    over2000pixels from the portal.150 simulated seconds and900 wall seconds cover
-    the real return while a60-second physical-progress guard detects a stall.
-    Actual x/leaf/phase progress, rather than time alone, owns the stall guard.
+    The native loop caps each update at34ms. The150-second own travel budget
+    excludes only a confirmed wait for the exact physical passenger. The
+    complete wait retains900 wall seconds and60 seconds without physical
+    owner/dependency progress. An occupied service post is not a portal test.
     """
     result = page.evaluate('''opts=>new Promise(resolve=>{
-      const h=__ATF_HUB__,started=performance.now();let frames=0,done=false,lastProgressAt=started,
-        lastProgress=null,origin=null,latest=null,lastSampleAt=-Infinity,simBudget=150;
-      const samples=[],wallBudgetMs=900000,stallBudgetMs=60000;
-      function read(){const s=h.getSnapshot().npcAnnexLeasesV163.routes[opts.id],a=s.actor,p=h.player,
+      const createProgress=(''' + NATIVE_ROUTE_PROGRESS_V163 + ''');
+      const h=__ATF_HUB__,started=performance.now(),progress=createProgress({...opts,returning:true},started);
+      const sourceFace=structuredClone(h.getSnapshot().npcAnnexLeasesV163.routes[opts.id].sourceFace);
+      let frames=0,done=false,origin=null,latest=null,lastSampleAt=-Infinity;
+      const samples=[];
+      function read(){const s=h.npcAnnexLeasesStateV163.routes[opts.id],a=s.actor,p=h.player,
         r=h.npcRoutineResolutionsV62?.get(opts.crew);
-        return {actor:a?structuredClone(a):null,handoff:structuredClone(s.nativeHandoff),returned:structuredClone(s.returned||null),sourceFace:s.sourceFace,running:h.running,
+        return {actor:a?structuredClone(a):null,handoff:structuredClone(s.nativeHandoff),returned:structuredClone(s.returned||null),sourceFace,running:h.running,
+          dependencies:progress.dependencyIds.map(id=>({id,actor:structuredClone(h.npcInterdeckStateV165?.routes[id]?.actor||null)})),
+          passageRequested:h.npcInterdeckPassingRequestV165?.(opts.id)===true,
           deck:h.state.deck,roomId:h.state.roomId,annex:h.currentAnnexV71?.()?.id||null,
           player:{x:p.x,y:p.y,w:p.w,h:p.h,vx:p.vx},
           routine:r?{reason:r.reason,missionAssigned:r.missionAssigned,needsCare:r.needsCare,alert:r.alert}:null};}
       function finish(status,reason){if(done)return;done=true;clearInterval(timer);cancelAnimationFrame(raf);
         const wallMs=performance.now()-started,simSeconds=latest?.actor&&origin?.actor?latest.actor.time-origin.actor.time:null;
         resolve({status,reason,frames,wallMs,simSeconds,observedRafFps:wallMs?frames*1000/wallMs:0,
-          simBudgetSeconds:simBudget,wallBudgetMs,stallBudgetMs,lastProgressAgeMs:performance.now()-lastProgressAt,
+          ...progress.snapshot(performance.now()),
           origin,latest,samples});}
       function frame(){if(done)return;frames++;const now=performance.now();latest=read();origin ||= latest;
         const a=latest.actor,p=latest.player,face=origin.sourceFace;
         const arrivalX=face.opening.x+(face.opening.w-44)/2;
         if(now-lastSampleAt>=1000){samples.push({wallMs:now-started,actor:latest.actor,player:latest.player,
-          routine:latest.routine});if(samples.length>900)samples.shift();lastSampleAt=now;}
+          routine:latest.routine,dependencies:latest.dependencies,progress:progress.snapshot(now)});
+          if(samples.length>900)samples.shift();lastSampleAt=now;}
         if(!a)return finish('failed','owned-actor-lost-before-occupation');
         if(!latest.running)return finish('failed','native-loop-paused-before-occupation');
         if(latest.annex||latest.deck!==opts.deck||latest.roomId!==opts.parent
@@ -419,16 +472,11 @@ def wait_occupied_return(page, config):
         if(latest.routine?.missionAssigned||latest.routine?.needsCare||latest.routine?.alert
           ||['medical-recovery','mission-assignment','unavailable','active-crisis','infestation','annex-assignment'].includes(a.reason))
           return finish('failed','native-priority-interrupted-return');
-        if(a.reason==='occupied')return finish('occupied','actual-return-opening-occupied');
-        if(!lastProgress||Math.abs(a.x-lastProgress.x)>=.5||a.stage!==lastProgress.stage
-          ||Math.abs(a.doorProgress-lastProgress.doorProgress)>=.01||a.crossings!==lastProgress.crossings){
-          lastProgress={x:a.x,stage:a.stage,doorProgress:a.doorProgress,crossings:a.crossings};lastProgressAt=now;}
-        if(a.time-origin.actor.time>simBudget)return finish('failed','simulated-return-budget-exhausted');
+        const failure=progress.observe(latest,now);if(failure)return finish('failed',failure);
+        if(progress.occupiedOpening(a))return finish('occupied','actual-return-opening-occupied');
         raf=requestAnimationFrame(frame);
       }
-      const timer=setInterval(()=>{const now=performance.now();
-        if(now-started>=wallBudgetMs)finish('failed','wall-return-budget-exhausted');
-        else if(now-lastProgressAt>=stallBudgetMs)finish('failed','no-physical-return-progress');},1000);
+      const timer=setInterval(()=>{const failure=progress.check(performance.now());if(failure)finish('failed',failure);},1000);
       let raf=requestAnimationFrame(frame);
     })''', config)
     report.setdefault('returnWaits', []).append(result)

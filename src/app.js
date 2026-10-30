@@ -71,6 +71,7 @@ import { bindHubControlV133 } from './hub-control-bindings-v133.js';
 import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.js';
 import { withHubRoomParallaxV134 } from './hub-room-parallax-v134.js';
 import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
+import { withHubArmoryStorefrontV169 } from './hub-armory-scene-v169.js';
 import { withHubNpcLifeV136 } from './npc-life-v136.js';
 import { withHubNpcCirculationV158 } from './npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
@@ -113,6 +114,8 @@ import { TitleScreenController } from './title-screen-v61.js';
 import { TitleSceneControllerV79 } from './title-scene-v79.js';
 import { getTitleSceneShipOptionsV87, sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
+import { renderWeaponFidelityDossiersV170 } from './weapon-fidelity-ledger-v170.js';
+import { renderArmoryResupplyV174, purchaseArmoryResupplyV174 } from './armory-resupply-v174.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
 import { CATALOG_COUNTS_V62, CATALOG_RECORDS_V62 } from './catalog-runtime-v62.js';
@@ -282,7 +285,7 @@ const NativeHubGame = [
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
-const HubGame = withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)));
+const HubGame = withHubArmoryStorefrontV169(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -1791,6 +1794,25 @@ function renderArmory() {
   }
   userPanel.innerHTML = userEquipmentPanelHtmlV95(saveSystem.data);
   userPanel.hidden = !userPanel.innerHTML;
+  // Historical armory procurement remains the only purchase route.
+  // Archive dossiers are read-only and never act as catalog weapons.
+  let resupplyMount = byId('armory-resupply-mount-v174');
+  if (!resupplyMount) {
+    resupplyMount = document.createElement('div');
+    resupplyMount.id = 'armory-resupply-mount-v174';
+    userPanel.insertAdjacentElement('afterend', resupplyMount);
+  }
+  resupplyMount.innerHTML = renderArmoryResupplyV174(saveSystem.data);
+  let sourcePanel = byId('armory-fidelity-mount-v170');
+  if (!sourcePanel) {
+    const mount = document.createElement('div');
+    mount.id = 'armory-fidelity-mount-v170';
+    byId('armory-catalog-v62').insertAdjacentElement('afterend', mount);
+    sourcePanel = mount;
+  }
+  const wasOpen = sourcePanel.querySelector('details')?.open === true;
+  sourcePanel.innerHTML = renderWeaponFidelityDossiersV170();
+  if (wasOpen) sourcePanel.querySelector('details').open = true;
   renderPlayerAppearanceV126();
 }
 
@@ -3287,6 +3309,17 @@ function handleHubAction(interaction) {
   }
   if (interaction.action.startsWith('opening:')) return handleOpeningActionV88(interaction);
   if (interaction.action.startsWith('opening-exercise:')) return handleOpeningExerciseV89(interaction);
+  if (interaction.action === 'armory:open-shop-v169') {
+    // Re-read the actual physical contact; an arbitrary scripted event cannot
+    // buy goods or open a remote seller without a traversed native location.
+    const contact = hubEngine.armoryShopContactV169?.()
+      || hubEngine.portArmoryShopContactV169?.();
+    if (standaloneContext || saveSystem.recoveryNeeded || activeView !== 'hub'
+      || !ownsTimelineV84(hubOwnerV84) || !contact
+      || interaction.variant !== contact.variant || interaction.roomId !== contact.roomId
+      || interaction.contactId !== contact.contactId || interaction.source !== contact.source) return false;
+    return openHubStation('armory');
+  }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
   if (interaction.action.startsWith('refuge:')) return refugeControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet', 'ship-animal:observe'].includes(interaction.action))
@@ -3674,6 +3707,20 @@ function setupRuntimeControls() {
   });
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
+  // Experimental physical feed only: Shift+R performs an honest speed reload.
+  // Capture before the ordinary canvas R handler so one edge cannot start two reloads.
+  globalThis.addEventListener('keydown', event => {
+    if (event.code !== 'KeyR' || !event.shiftKey || event.repeat || event.defaultPrevented
+      || event.ctrlKey || event.metaKey || event.altKey || event.isComposing
+      || activeView !== 'play' || !engine.running || engine.paused || standaloneContext
+      || event.target?.closest?.('input,select,textarea,[contenteditable],button,a[href],[role="dialog"]')
+      || engine.canRouteGameplayKey?.(event) === false) return;
+    if (engine.speedReloadWeaponV168?.(engine.player)) {
+      event.preventDefault();
+      event.stopImmediatePropagation?.();
+      audio.unlock?.();
+    }
+  }, true);
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
   byId('mission-melee-v124').onclick = () => engine.melee(engine.player);
   byId('mission-neuro-counter').onclick = () => engine.activateNeuroCountermeasure(engine.player);
@@ -3714,6 +3761,12 @@ function bindDelegatedActions() {
     if (target.dataset.planCampaign) {
       saveSystem.data.strategy.plannedCampaignId = target.dataset.planCampaign;
       saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); toast('Campagne ajoutée au plan opérationnel.');
+    }
+    if (target.dataset.armoryResupplyV174 && target.closest('#armory-resupply-mount-v174')) {
+      if (!saveSystem.recoveryNeeded && !standaloneContext && !creatorOwnerV84
+        && (activeView === 'armory' || activeHubStation === 'armory'))
+        runTimedMutation(() => purchaseArmoryResupplyV174(saveSystem.data, target.dataset.armoryResupplyV174),
+          'Lot de munitions reçu et sauvegardé.');
     }
     if (target.dataset.procureId) {
       const kind = target.dataset.procureKind;

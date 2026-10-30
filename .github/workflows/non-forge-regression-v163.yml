@@ -12,7 +12,7 @@ concurrency:
 jobs:
   native-v163:
     name: Native V163 (${{ matrix.workstream }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 55
     strategy:
       fail-fast: false

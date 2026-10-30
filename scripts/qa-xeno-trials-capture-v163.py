@@ -2,6 +2,8 @@
 
 Only the Save picker imports an explicitly unearned roster-unlock profile.
 Keyboard/menu actions obtain every gameplay contact, hold, escape and recovery.
+The first observed floor frame synchronously clicks the production pause button;
+that declared public UI action is the observer's only game-control action.
 The additional atlas/mirrored comparisons are labelled render fixtures: clones
 of an observed hold are used only by pure render functions, never by runtime.
 No scheduler, simulation body, HP, result, RNG or live match field is rewritten.
@@ -61,8 +63,10 @@ def wait_frame(page, predicate, timeout=45000):
     return page.wait_for_function('''()=>{const s=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot(),m=s?.match;
       if(!m)return false;if(PREDICATE)return{state:s,png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')};return false;}'''.replace('PREDICATE', predicate), polling='raf', timeout=timeout).json_value()
 
-# Read-only RAF evidence copies pixels locally; PNG compression waits until
-# real keys secure the pause, or both post-resume observations are complete.
+# RAF evidence copies pixels locally, then synchronously activates the production
+# pause button through its DOM click handler. This floor callback is not read-only;
+# it never calls a runtime setter or assigns a match field. PNG compression waits
+# until that public UI pause, or both post-resume observations are complete.
 CAPTURE_OBSERVER = r'''c=> {
   const slots=globalThis.__ATF_CAPTURE_OBSERVER_V163__ ||= {};
   if(slots[c.stage])slots[c.stage].cancelled=true;
@@ -99,7 +103,7 @@ CAPTURE_OBSERVER = r'''c=> {
     if(out.cancelled||out.done)return;
     const s=read(),m=s?.match,row=compact(s);out.last=row;
     if(!out.trace.length||row.tick!==out.trace.at(-1).tick||row.paused!==out.trace.at(-1).paused){out.trace.push(row);if(out.trace.length>240)out.trace.shift();}
-    if(performance.now()-start>c.timeoutMs){fail('Read-only '+c.stage+' observer exceeded original '+c.timeoutMs+'ms budget');return;}
+    if(performance.now()-start>c.timeoutMs){fail('Native '+c.stage+' observer exceeded original '+c.timeoutMs+'ms budget');return;}
     if(!sameMatch(m)||m.tick<armed.match.tick){fail('Match, round, participants or monotonic tick changed');return;}
     if(c.stage==='post'&&m.paused){requestAnimationFrame(sample);return;}
     const h=m.grappleV153;
@@ -108,7 +112,24 @@ CAPTURE_OBSERVER = r'''c=> {
       if(m.events.some(e=>e.type==='grapple-end-v153'&&e.tick>=c.sinceTick)){fail('Native hold ended before exact floor observation');return;}
       if(h){floorHoldId??=h.id;if(h.id!==floorHoldId){fail('A later hold cannot replace first floor contact');return;}
         const r=receipt(m,'capture');
-        if(c.after?r?.fullFloorPin&&r.pairedContacts:m.tick-h.bornTick>=55){out.floor=frame(s);out.ready=true;out.done=true;return;}}
+        if(c.after?r?.fullFloorPin&&r.pairedContacts:m.tick-h.bornTick>=55){
+          const control=document.querySelector('[data-xt="pause"]');
+          if(m.paused||!control||control.disabled||typeof control.click!=='function'){
+            fail('First floor frame requires an enabled public pause button and a running match');return;}
+          out.floor=frame(s);
+          // A Playwright round trip can outlast the remaining CPU escape ticks.
+          // The real UI handler must pause this same hold before this RAF returns.
+          out.pauseAction={method:'DOM click on production pause button',selector:'[data-xt="pause"]',
+            beforeTick:m.tick,beforePaused:m.paused,holdId:h.id};
+          control.click();
+          const paused=read()?.match,p=paused&&receipt(paused,'capture');
+          Object.assign(out.pauseAction,{afterTick:paused?.tick,afterPaused:paused?.paused,
+            afterHoldId:paused?.grappleV153?.id});
+          if(!sameMatch(paused)||paused.paused!==true||paused.tick!==m.tick
+            ||paused.grappleV153?.id!==h.id||!sameHold(paused.grappleV153)
+            ||c.after&&!(p?.fullFloorPin&&p.pairedContacts&&Math.abs(p.contacts?.floorSupport?.[1]-p.floor)<1e-6)){
+            fail('Public pause button did not retain the exact native tick, hold, participants and floor support');return;}
+          out.ready=true;out.done=true;return;}}
     }else if(h){
       const r=receipt(m,'capture');
       if(!out.struggle&&m.tick>armed.match.tick&&h.escapeProgress>0&&(!c.after||r?.escapeProgress>0&&r.pairedContacts))out.struggle=frame(s);
@@ -337,8 +358,8 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     after = args.comparison_stage == 'after'
     report = {'status': 'running', 'comparisonStage': args.comparison_stage, 'taskIds': TASKS, 'checks': [], 'captures': [], 'profiles': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
-              'scope': 'Six production menu duels on real browser RAF: three original target identities, both captor roles/directions, actual native startup/contact/floor hold/guard resistance/escape/recovery, public pause and abandonment. Additional art/geometry comparisons are declared fixtures.',
-              'limits': ['Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.', 'Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.', 'Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.', 'Recovery is presentation only and yields immediately to a new target action.', 'Automated keyboard/menu scenarios; not human playtesting.']}
+              'scope': 'Six production menu duels on real browser RAF: three original target identities, both captor roles/directions, actual native startup/contact/floor hold/guard resistance/escape/recovery, a synchronized DOM click on the production pause button, keyboard resume and public abandonment. Additional art/geometry comparisons are declared fixtures.',
+              'limits': ['Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.', 'Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.', 'Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.', 'Recovery is presentation only and yields immediately to a new target action.', 'Automated keyboard/menu scenarios; not human playtesting.', 'The first observed floor frame activates the real public pause button with DOM click in the same RAF callback; this is an explicit UI action, not a read-only observation or a trusted physical click. No direct runtime pause API is called; no scheduler or match field is assigned.']}
     def check(label, passed, evidence=None, failure_detail=None):
         assert passed, label + ('; ' + failure_detail[:1000] if failure_detail else '')
         report['checks'].append({'label': label, 'evidence': evidence, 'status': 'passed'})
@@ -390,7 +411,7 @@ def main():
                         report.setdefault('playerCaptureAcquisitions', []).append(acquisition)
                         preparation = acquire_player_capture(page, after, acquisition)
                     # Preparation is already observed; defer its transfer to disk and all
-                    # checks until the first painted floor contact has been paused by a real key.
+                    # checks until the first observed floor contact has activated the public pause button.
                     pm = preparation['state']['match']
                     target_side = 'player' if role == 'cpu-captor' else 'opponent'
                     binding = {'matchId': pm['config']['matchId'], 'round': pm['round'],
@@ -400,24 +421,24 @@ def main():
                                'targetSide': target_side, 'targetId': target_id,
                                'holdId': acquisition['grapple']['id'] if role == 'player-captor' else None,
                                'sinceTick': pm['tick'], 'after': after}
-                    phase(name, 'floor observation then immediate public pause')
+                    phase(name, 'floor observation with synchronous public button pause')
                     armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
                     assert not armed.get('error'), armed.get('error')
-                    wait_observation(page, 'floor', 'ready', 45000)  # Boolean acknowledgement only.
-                    page.keyboard.press('KeyP')  # No PNG compression/transfer or disk I/O before this key.
+                    wait_observation(page, 'floor', 'ready', 45000)  # Acknowledges the completed native UI pause.
                     frozen = observed(page)['match'] or {}
                     # Transfer only metadata until the strict public-pause check
                     # succeeds; the detached bitmap remains browser-local.
                     floor_observation = page.evaluate('''()=>{
                       const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor;
-                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace};
+                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction};
                     }''')
                     hold = floor_observation['floor']
                     m = hold['state']['match']
                     hold_id = m['grappleV153']['id']
                     binding['holdId'] = hold_id
                     fh = frozen.get('grappleV153') or {}
-                    same_pause = (frozen.get('paused') is True and frozen['config']['matchId'] == binding['matchId']
+                    same_pause = (frozen.get('paused') is True and frozen.get('tick') == m['tick']
+                                  and frozen['config']['matchId'] == binding['matchId']
                                   and frozen['round'] == binding['round']
                                   and [(f['id'], f['side']) for f in frozen['fighters']] == list(zip(binding['fighterIds'], binding['sides']))
                                   and fh.get('id') == hold_id and fh.get('attacker') == binding['attackerSide'] and fh.get('target') == target_side
@@ -425,6 +446,7 @@ def main():
                                        and v['grappleId'] == hold_id and v['phase'] == 'capture' and v['fullFloorPin'] and abs(v['contacts']['floorSupport'][1] - v['floor']) < 1e-6 for v in frozen.get('captureViewsV163', []))))
                     pause_diagnostics = {'paused': frozen.get('paused'), 'floorTick': m['tick'],
                         'pausedTick': frozen.get('tick'), 'floorHoldId': hold_id, 'pausedHoldId': fh.get('id'),
+                        'publicControlAction': floor_observation.get('pauseAction'),
                         'floorBornTick': m['grappleV153'].get('bornTick'),
                         'floorEscape': m['grappleV153'].get('escapeProgress'), 'pausedEscape': fh.get('escapeProgress'),
                         'pausedPhase': frozen.get('phase'), 'floorRound': m['round'], 'pausedRound': frozen.get('round'),
@@ -432,7 +454,8 @@ def main():
                                  for e in frozen.get('events', []) if e.get('type') == 'grapple-end-v153'][-2:]}
                     report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
                         'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen,
-                        'floorTrace': floor_observation['trace'], 'compactDiagnostics': pause_diagnostics})
+                        'floorTrace': floor_observation['trace'], 'publicControlAction': floor_observation.get('pauseAction'),
+                        'compactDiagnostics': pause_diagnostics})
                     check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
                           failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
                     hold = page.evaluate(CAPTURE_EXPORT, {'stage': 'floor', 'fields': ['floor']})['floor']
@@ -497,7 +520,7 @@ def main():
             print('::error::' + details[:1800].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'), flush=True)
             if page:
                 try:
-                    report['captureObserverDiagnostics'] = page.evaluate("()=>Object.fromEntries(Object.entries(globalThis.__ATF_CAPTURE_OBSERVER_V163__||{}).map(([k,v])=>[k,{expected:v.expected,armedState:v.armedState,last:v.last,error:v.error,ready:v.ready,done:v.done,trace:v.trace}]))")
+                    report['captureObserverDiagnostics'] = page.evaluate("()=>Object.fromEntries(Object.entries(globalThis.__ATF_CAPTURE_OBSERVER_V163__||{}).map(([k,v])=>[k,{expected:v.expected,armedState:v.armedState,last:v.last,error:v.error,ready:v.ready,done:v.done,trace:v.trace,pauseAction:v.pauseAction}]))")
                     report['failureState'] = observed(page)
                     page.screenshot(path=str(out/'failure.png'), full_page=True)
                 except Exception:

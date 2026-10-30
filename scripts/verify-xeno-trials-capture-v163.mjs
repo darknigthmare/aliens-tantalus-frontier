@@ -1,3 +1,9 @@
+import {createContext,runInContext} from 'node:vm';
+import {createXenoTrialsRuntimeV96} from '../src/xeno-trials-runtime-v96.js';
+import {XenoTrialsUiV96} from '../src/xeno-trials-ui-v96.js';
+import {getXenoTrialsBodyBoundsV105 as bodyBounds,getXenoTrialsBodyGapV105 as bodyGap} from '../src/xeno-trials-geometry-v105.js';
+import {getXenoTrialsAttackV147 as attackSpec} from '../src/xeno-trials-signatures-v147.js';
+import {XENO_TRIALS_ATTACKS_V96 as baseAttacks} from '../src/xeno-trials-engine-v96.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -161,4 +167,162 @@ test('nine task IDs are technique-only and no renderer changes authority, costs 
  const source=readFileSync(new URL('../src/xeno-trials-capture-v163.js',import.meta.url),'utf8');
  assert.equal(config.canonExact,false);assert.ok(!/match\.(tick|phase|fighters|grappleV153)\s*=/.test(source));
  assert.ok(source.includes('engineBodiesUnchanged:true'));assert.ok(source.includes('new-original-native-art-not-canonical-reference'));
+});
+
+
+// Explicit DOM, decoded-image dimensions, RAF and menu-render doubles. The
+// production engine/controller, constructor-installed pause handler and actual
+// Python QA observer execute unchanged. This is not Chromium or pixel evidence.
+function captureEventTarget(extra={}){
+ const listeners=new Map();
+ return Object.assign({addEventListener(type,fn){if(!listeners.has(type))listeners.set(type,new Set());listeners.get(type).add(fn);},
+  removeEventListener(type,fn){listeners.get(type)?.delete(fn);},
+  emit(type,event={}){for(const fn of [...(listeners.get(type)||[])])fn({preventDefault(){},stopPropagation(){},...event});},
+  closest(){return null;},click(){if(!this.disabled){this.clicks=(this.clicks||0)+1;this.onclick?.();}}},extra);
+}
+function captureRuntimeHost(){
+ const win=captureEventTarget(),doc=captureEventTarget({hidden:false,hasFocus:()=>true});
+ const context=new Proxy({measureText:s=>({width:String(s).length*8}),createLinearGradient:()=>({addColorStop(){}}),
+  createRadialGradient:()=>({addColorStop(){}})},{get:(o,k)=>o[k]??(()=>{})});
+ const canvas=captureEventTarget({tagName:'CANVAS',width:1000,height:560,setAttribute(){},getContext:()=>context,focus(){doc.activeElement=this;}});
+ const elements=new Map([['canvas',canvas]]);
+ const element=key=>{if(!elements.has(key))elements.set(key,captureEventTarget({tagName:'BUTTON',disabled:false}));return elements.get(key);};
+ element('form').elements=new Proxy({},{get:(o,k)=>o[k]??(o[k]=captureEventTarget())});
+ const root=captureEventTarget({querySelector:selector=>element(selector.match(/data-xt="([^"]+)"/)[1]),contains:()=>false,ownerDocument:doc});
+ class PauseUi extends XenoTrialsUiV96 {updateOpponents(){} restorePendingSelection(){} render(){}}
+ const ui=new PauseUi({root,getProgress:()=>({}),onCommit(){},canCommit:()=>true,onReturn(){}});
+ const queue=new Map();let serial=0,time=0;
+ const requestAnimationFrame=fn=>{queue.set(++serial,fn);return serial;};
+ const runtime=createXenoTrialsRuntimeV96({canvas,window:win,document:doc,controlsRoot:root,
+  config:{playerId:'prowler',opponentId:'import-game-dd-wy-commando',stageId:'tantalus-cargo',seed:153,difficulty:'hard',roundSeconds:120},
+  loadImage:async path=>images.get(path)||{naturalWidth:1024,naturalHeight:1024,complete:true},
+  requestAnimationFrame,cancelAnimationFrame:id=>queue.delete(id)});
+ ui.runtime=runtime;
+ const frame=(count=1)=>{for(let i=0;i<count;i++){time+=1000/120;for(const[id,fn]of [...queue])if(queue.delete(id))fn(time);}};
+ return{runtime,canvas,element,requestAnimationFrame,frame,now:()=>time,
+  key(code,type='keydown'){win.emit(type,{target:canvas,code});},
+  async start(){assert.equal(await runtime.start(),true);
+   for(let i=0;i<1200&&runtime.getState().presentation.blocksSimulation;i++)frame();
+   assert.equal(runtime.getState().presentation.blocksSimulation,false);frame(2);}
+ };
+}
+async function nativePlayerCaptureForPause(h){
+ await h.start();let move=null,guard=false;
+ for(let i=0;i<6600;i++){
+  const m=h.runtime.getState();
+  if(m.grappleV153){if(move)h.key(move,'keyup');if(guard)h.key('KeyS','keyup');return m;}
+  assert.notEqual(m.phase,'match-over','The player must earn a capture before the duel ends.');
+  const[a,b]=m.fighters,direction=b.x>=a.x?1:-1,gap=bodyGap(a,b,direction),ab=bodyBounds(a),bb=bodyBounds(b);
+  const contact=(bb.center-ab.center)*direction>=0&&gap>=-8&&gap<=6&&ab.bottom<=bb.top&&bb.bottom<=ab.top;
+  const targetAttack=b.attack?attackSpec(definition(b.id),b.attack.kind,baseAttacks[b.attack.kind]):null;
+  const threat=Boolean(targetAttack&&b.attack.age<targetAttack.startup+targetAttack.active);
+  const recovery=Boolean(targetAttack&&b.attack.age>=targetAttack.startup+targetAttack.active);
+  const desired=gap>6?(direction>0?'ArrowRight':'ArrowLeft'):null;
+  if(desired!==move){if(move)h.key(move,'keyup');move=desired;if(move)h.key(move);}
+  const wantGuard=Boolean(contact&&threat&&!a.attack&&a.stun<=0&&a.y===0&&a.stamina>1);
+  if(wantGuard!==guard){h.key('KeyS',wantGuard?'keydown':'keyup');guard=wantGuard;}
+  const special=attackSpec(definition(a.id),'special',baseAttacks.special);
+  const attack=m.phase==='active'&&!m.paused&&contact&&recovery&&!a.attack&&a.stun<=0
+   &&a.y===0&&b.y===0&&b.vy===0&&a.specialCooldown<=0&&a.stamina>=special.cost;
+  if(attack)h.key('KeyL');h.frame();if(attack)h.key('KeyL','keyup');
+ }
+ assert.fail('The bounded native keyboard policy did not obtain a capture.');
+}
+function captureQaLiteral(name){
+ const source=readFileSync(new URL('./qa-xeno-trials-capture-v163.py',import.meta.url),'utf8');
+ const match=source.match(new RegExp('^'+name+" = r'''([\\s\\S]*?)'''",'m'));
+ assert.ok(match,'The test executes the actual raw JS literal '+name+' from the Python QA.');return match[1];
+}
+function captureQaObserver(h){
+ const copies=[],encodings=[];
+ const context=createContext({performance:{now:h.now},requestAnimationFrame:h.requestAnimationFrame,
+  __ATF_XENO_TRIALS_V96__:{snapshot:()=>({match:h.runtime.getState()})},
+  document:{querySelector:selector=>selector==='[data-xt="canvas"]'?h.canvas:selector==='[data-xt="pause"]'?h.element('pause'):null,
+   createElement(tag){assert.equal(tag,'canvas');return{width:0,height:0,getContext(){return{drawImage(source){
+     assert.equal(source,h.canvas);const m=h.runtime.getState();copies.push({tick:m.tick,paused:m.paused});}};},
+    toDataURL(){const m=h.runtime.getState();encodings.push({tick:m.tick,paused:m.paused});return'data:image/png;base64,declared-bitmap-double';}};}}});
+ const observe=runInContext('('+captureQaLiteral('CAPTURE_OBSERVER')+')',context);
+ const exportFrames=runInContext('('+captureQaLiteral('CAPTURE_EXPORT')+')',context);
+ return{observe,exportFrames,copies,encodings,out:stage=>context.__ATF_CAPTURE_OBSERVER_V163__?.[stage]};
+}
+function captureBinding(m,stage='floor'){
+ const hold=m.grappleV153;
+ return{stage,timeoutMs:stage==='floor'?45000:15000,matchId:m.config.matchId,round:m.round,
+  fighterIds:m.fighters.map(f=>f.id),sides:m.fighters.map(f=>f.side),attackerSide:hold.attacker,
+  targetSide:hold.target,targetId:m.fighters.find(f=>f.side===hold.target).id,
+  holdId:hold.id,sinceTick:hold.bornTick,after:true};
+}
+test('capture QA pauses the real public button before a six-tick transfer delay, then resumes the same CPU escape once',async t=>{
+ const h=captureRuntimeHost();
+ try{
+  const acquired=await nativePlayerCaptureForPause(h);
+  assert.equal(acquired.grappleV153.attacker,'player');assert.equal(acquired.opponentInputSourceV163,'cpu');
+  let before=h.runtime.getState();
+  for(let i=0;i<180&&before.grappleV153?.escapeProgress<66;i++){h.frame();before=h.runtime.getState();}
+  assert.equal(before.grappleV153?.id,acquired.grappleV153.id);assert.equal(before.grappleV153.escapeProgress,66);
+  const qa=captureQaObserver(h),binding=captureBinding(before);
+  assert.ok(qa.observe(binding).armed);h.frame();
+  const floor=qa.out('floor');
+  assert.equal(floor.error,null);assert.equal(floor.ready,true);
+  const recorded=floor.floor.state.match;
+  assert.equal(recorded.grappleV153.escapeProgress,67);assert.equal(qa.encodings.length,0);
+  // This declared six-tick transfer latency reproduces the old external P race:
+  // an unpaused CPU reaches escape=72 on tick five, before P could arrive.
+  h.frame(6);const frozen=h.runtime.getState();
+  t.diagnostic(JSON.stringify({floorTick:recorded.tick,floorEscape:recorded.grappleV153.escapeProgress,
+   delayedReadTick:frozen.tick,paused:frozen.paused,holdId:frozen.grappleV153?.id,
+   ends:frozen.events.filter(e=>e.type==='grapple-end-v153')}));
+  assert.equal(frozen.paused,true);assert.equal(frozen.tick,recorded.tick);
+  assert.deepEqual(frozen.grappleV153,recorded.grappleV153);assert.equal(h.element('pause').clicks,1);
+  assert.deepEqual(clone(floor.pauseAction),{method:'DOM click on production pause button',selector:'[data-xt="pause"]',
+   beforeTick:recorded.tick,beforePaused:false,holdId:recorded.grappleV153.id,
+   afterTick:frozen.tick,afterPaused:true,afterHoldId:frozen.grappleV153.id});
+  const image=qa.exportFrames({stage:'floor',fields:['floor']}).floor;
+  assert.deepEqual(image.state.match,recorded);assert.equal(qa.encodings[0].paused,true);
+  assert.deepEqual(qa.copies[0],{tick:recorded.tick,paused:false});
+  h.frame(240);assert.deepEqual(h.runtime.getState(),frozen,'Native state must remain exactly frozen throughout the pause.');
+  assert.ok(qa.observe({...binding,stage:'post',timeoutMs:15000}).armed);
+  h.key('KeyP');h.key('KeyP','keyup');
+  for(let i=0;i<30&&!qa.out('post').done;i++)h.frame();
+  const post=qa.out('post');assert.equal(post.error,null);assert.ok(post.struggle&&post.release);
+  assert.equal(post.struggle.state.match.grappleV153.id,recorded.grappleV153.id);
+  assert.ok(post.struggle.state.match.grappleV153.escapeProgress>recorded.grappleV153.escapeProgress);
+  const released=post.release.state.match,ends=released.events.filter(e=>e.type==='grapple-end-v153'&&e.grappleId===binding.holdId);
+  assert.equal(ends.length,1);assert.equal(ends[0].reason,'escaped');
+  assert.equal(ends[0].tick,recorded.tick+72-recorded.grappleV153.escapeProgress);
+  assert.equal(released.fighters.find(f=>f.side===binding.targetSide).stats.grappleEscapesV153,1);
+  assert.equal(released.result,null);
+  assert.ok(released.captureViewsV163.some(v=>v.role==='captive'&&v.phase==='recovery'&&v.grappleId===binding.holdId&&v.targetId===binding.targetId));
+  assert.ok(qa.exportFrames({stage:'post',fields:['struggle','release']}).release);
+ }finally{h.runtime.stop();}
+});
+test('capture QA rejects unavailable public pause, changed tick or identity, ended holds and lost floor support',()=>{
+ // Adversarial read/control fixtures are cloned from a real engine hold and
+ // its real rendered receipt. They test rejection, never claim a UI playthrough.
+ const m=native(atlases[0].fighterId);for(let i=0;i<65;i++){step(m,DT,{});view(m,images);}
+ const state=()=>{const v=view(m,images);return{...clone(m),captureViewsV163:[{side:v.target.side,...receipt(v,'captive')}]};};
+ const before=state();assert.ok(before.captureViewsV163[0].pairedContacts);
+ pause(m,true);const after=state(),binding=captureBinding(before);
+ const cases=[
+  ['missing public button',{}, {},'missing'],
+  ['disabled public button',{}, {},'disabled'],
+  ['ignored public handler',{}, {},'ignored'],
+  ['already paused',{paused:true}],
+  ['different match',{config:{...before.config,matchId:'different-native-match'}}],
+  ['different first hold',{grappleV153:{...before.grappleV153,id:before.grappleV153.id+1}}],
+  ['hold ended before pause',{grappleV153:undefined,events:[...before.events,{type:'grapple-end-v153',tick:before.tick,grappleId:binding.holdId,reason:'escaped'}]}],
+  ['tick advances during pause',{}, {tick:after.tick+1}],
+  ['public handler loses hold',{}, {grappleV153:undefined}],
+  ['public handler replaces hold',{}, {grappleV153:{...after.grappleV153,id:after.grappleV153.id+1}}],
+  ['public handler changes participant',{}, {fighters:after.fighters.map((f,i)=>i?f:{...f,id:'warrior'})}],
+  ['public handler loses floor support',{}, {captureViewsV163:after.captureViewsV163.map(v=>({...v,contacts:{...v.contacts,floorSupport:[v.contacts.floorSupport[0],v.floor+1]}}))}]
+ ];
+ for(const[label,beforePatch,afterPatch={},mode]of cases){
+  const initial={...clone(before),...beforePatch},paused={...clone(after),...afterPatch};
+  let current=initial;const queue=[],control={disabled:mode==='disabled',click(){if(mode!=='ignored')current=paused;}};
+  const h={runtime:{getState:()=>clone(current)},canvas:{width:1000,height:560},element:()=>mode==='missing'?null:control,
+   now:()=>0,requestAnimationFrame:fn=>queue.push(fn)};
+  const qa=captureQaObserver(h);qa.observe(binding);for(const fn of queue.splice(0))fn();
+  assert.ok(qa.out('floor').error,label+' must fail');assert.equal(qa.out('floor').ready,false,label+' cannot publish floor success');
+ }
 });

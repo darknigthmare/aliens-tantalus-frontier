@@ -322,3 +322,124 @@ test('the real mission navigator retains an occupied APC as a perceived target w
   engine.player.alive = false;
   assert.equal(engine.enemyTargetPerceivedV130(contact, engine.vehicle), false);
 });
+
+// Regression coverage for shared perception, interrupted investigation and delayed rear entry.
+
+test('combat and navigation keep the visible target when a nearer player is outside the view cone', async () => {
+  const humanSource = ENEMIES.find(entry => entry.biology === 'human'); assert.ok(humanSource);
+  for (const profile of ['enemy-004-drone-big-chap', humanSource.id]) {
+    const subject = await fixture(), { engine } = subject;
+    engine.player.x = 400;
+    Object.assign(engine.coop, { x: 920, y: 838, w: 42, h: 92, alive: true, downed: false, grounded: true });
+    engine.coopEnabled = true;
+    const contact = enemy(subject, profile, 650, { facing: 1 });
+    tick(engine, contact, .5);
+    assert.equal(contact.tacticsV130.mode, 'pursuit', profile);
+    if (profile === 'enemy-004-drone-big-chap') {
+      assert.ok(contact.x > 650, 'The drone must move toward the visible coop, not the nearer leader behind it');
+    }
+    assert.equal(contact.facing, 1);
+    assert.equal(engine.enemyTargetPerceivedV130(contact, engine.player), false);
+    assert.equal(engine.enemyTargetPerceivedV130(contact, engine.coop), true);
+    assert.equal(engine.missionLevelEnemyTarget(contact), engine.coop);
+  }
+});
+
+test('combat perception shares awareness range, stance and near-field rules', async () => {
+  const subject = await fixture(), { engine } = subject;
+  const contact = enemy(subject, 'enemy-004-drone-big-chap', 650, { facing: 1 });
+  engine.player.x = contact.x + 180; tick(engine, contact, .3);
+  assert.equal(contact.tacticsV130.mode, 'pursuit');
+  const range = Number.isFinite(contact.behaviorProfileV119?.perception?.vision)
+    ? contact.behaviorProfileV119.perception.vision : 620;
+  const target = engine.player;
+  const positionAtDistance = distance => {
+    target.x = contact.x + contact.w / 2 + distance - target.w / 2;
+    target.y = contact.y + contact.h * .35 - target.h * .35;
+  };
+  target.crouching = false; target.inCover = false;
+  positionAtDistance(range * 1.1);
+  assert.equal(enemySightClearV130(engine, contact, target), true, 'There is no occluding geometry');
+  assert.equal(engine.enemyTargetPerceivedV130(contact, target), false, 'A clear ray does not extend perception range');
+  positionAtDistance(range * .8);
+  assert.equal(engine.enemyTargetPerceivedV130(contact, target), true);
+  target.crouching = true;
+  assert.equal(engine.enemyTargetPerceivedV130(contact, target), false, 'Crouching reduces detection range during combat too');
+  target.crouching = false; target.inCover = true;
+  assert.equal(engine.enemyTargetPerceivedV130(contact, target), false, 'Cover retains its awareness range');
+  target.inCover = false; positionAtDistance(-80);
+  assert.equal(engine.enemyTargetPerceivedV130(contact, target), true, 'The existing near-field warning still covers nearby actors behind the enemy');
+});
+
+test('bosses and specialized profiles retain their own target perception', async () => {
+  const subject = await fixture(), { engine } = subject;
+  engine.player.x = 5000;
+  for (const [profile, patch] of [
+    ['enemy-008-queen', { isBoss: true }],
+    ['enemy-001-ovomorph', {}],
+    ['enemy-002-facehugger', {}],
+    ['enemy-051-ceto-reef-predator', {}]
+  ]) {
+    const contact = enemy(subject, profile, 650, { facing: -1, ...patch });
+    engine.updateEnemy(contact, .05);
+    assert.equal(contact.tacticsV130, undefined, `${profile} keeps its specialized controller`);
+    assert.equal(engine.enemyTargetPerceivedV130(contact, engine.player), true,
+      `${profile} does not acquire the mobile tactics range or cone filter`);
+  }
+});
+
+test('an investigation without a remembered position searches and resumes patrol after damage or restored state', async () => {
+  for (const origin of ['damage-without-owner', 'damage-with-unknown-owner', 'restored-investigation', 'restored-pursuit']) {
+    const subject = await fixture(), { engine } = subject;
+    engine.player.x = 5000;
+    const contact = enemy(subject); engine.updateEnemy(contact, .1);
+    assert.equal(contact.tacticsV130.mode, 'patrol');
+    assert.equal(contact.tacticsV130.lastKnown, null);
+    if (origin.startsWith('damage-')) {
+      const health = contact.health;
+      engine.applyEnemyDamage(contact, 1, origin === 'damage-with-unknown-owner' ? { owner: 'unknown-owner' } : {});
+      assert.ok(contact.health < health);
+      assert.equal(contact.tacticsV130.mode, 'investigation');
+      assert.equal(contact.tacticsV130.lastKnown, null, 'An unknown attacker cannot reveal a hidden actor');
+    } else {
+      const saved = JSON.parse(JSON.stringify(engine.captureResumeState()));
+      const cursor = saved.enemyTacticsV130.enemies.find(entry => entry.id === contact.id);
+      cursor.tactics.mode = origin === 'restored-pursuit' ? 'pursuit' : 'investigation';
+      delete cursor.tactics.lastKnown;
+      assert.equal(engine.applyResumeState(saved).applied, true);
+    }
+    tick(engine, contact, .8);
+    assert.equal(contact.tacticsV130.mode, 'search', origin);
+    assert.equal(contact.tacticsV130.lastKnown, null, 'The fallback must not invent the hidden player position');
+    tick(engine, contact, 6.5);
+    assert.equal(contact.tacticsV130.mode, 'patrol', origin);
+    assert.equal(contact.alert, false);
+  }
+});
+
+test('rear entry spends its delay before warning and approach across update rates and resume', async () => {
+  for (const rate of [30, 60, 120, 0]) {
+    const subject = await fixture(), { engine, events } = subject;
+    engine.rearEntrancesV130 = [{ id: 'qa-delayed-rear', x: 660, y: 740, w: 110, h: 190, floorY: 930 }];
+    const source = ENEMIES.find(entry => entry.id === 'enemy-004-drone-big-chap');
+    const contact = engine.createEnemy(source, 98, 670, 930);
+    assert.equal(engine.queueRearEntranceV130(contact, 'qa-delayed-rear', { delay: .9 }), true);
+    if (rate) tick(engine, contact, 1, rate); else engine.updateEnemy(contact, 1);
+    assert.equal(contact.rearEntryV130.phase, 'warning', `rate ${rate}`);
+    assert.ok(Math.abs(contact.rearEntryV130.elapsed - .1) < 1e-7, `rate ${rate}: only .1s remains after the .9s delay`);
+    assert.equal(events.filter(event => event.type === 'rear-entrance-warning-v130').length, 1);
+    assert.equal(contact.dormant, true);
+    const saved = JSON.parse(JSON.stringify(engine.captureResumeState()));
+    assert.equal(engine.applyResumeState(saved).applied, true);
+    if (rate) tick(engine, contact, 1.8, rate); else engine.updateEnemy(contact, 1.8);
+    assert.equal(contact.rearEntryV130.phase, 'approach', `rate ${rate}: arrival cannot occur before delay + warning + approach`);
+    assert.ok(Math.abs(contact.rearEntryV130.elapsed - 1.1) < 1e-7);
+    assert.equal(contact.dormant, true);
+    assert.equal(events.filter(event => event.type === 'rear-entrance-warning-v130').length, 1, 'Resume does not replay the warning');
+    engine.updateEnemy(contact, .301);
+    assert.equal(contact.rearEntryV130.phase, 'active');
+    assert.equal(contact.dormant, false);
+    assert.equal(events.filter(event => event.type === 'rear-entrance-arrived-v130').length, 1);
+  }
+});
+

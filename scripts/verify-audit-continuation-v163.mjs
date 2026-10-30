@@ -7,7 +7,15 @@ import { basename, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AUDIT_PRIORITY_IDS_V163,
-  loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163 } from './audit-succession-v163.mjs';
+  loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163,
+  verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS,
+  ARMORY_V169_SUCCESSORS, ARMORY_V169_NEW_SOURCES, ARSENAL_V170_SUCCESSORS,
+  ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
+  ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
+  ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
+  V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174,
+  V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
+  ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -80,10 +88,119 @@ test('the full current bridge validates runtime bytes and older default returns 
   const v161 = JSON.parse(read(prefix + 'progress-v161.json'));
   const v160 = JSON.parse(read(prefix + 'progress-v160.json'));
   assert.deepEqual(resolveAuditSourcesV162(v161), previous.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), current.runtimeSourceSha256);
+  const approvedEffectiveV174 = { ...current.runtimeSourceSha256,
+    ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARSENAL_V171_SUCCESSORS)
+      .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) };
+  assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), current.runtimeSourceSha256);
+  assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
   assert.equal(verifyAuditSuccessionV162(v161, previous).current, 87);
+});
+
+test('the V169 armory app successor is chained, source-pinned and cannot be forged', () => {
+  const app='src/app.js', receipt=ARMORY_V169_SUCCESSORS[app];
+  assert.deepEqual(Object.keys(ARMORY_V169_SUCCESSORS), [app]);
+  assert.equal(receipt.previousSha256, ARSENAL_V167_SUCCESSORS[app].currentSha256);
+  assert.equal(ARSENAL_V170_SUCCESSORS[app].previousSha256, receipt.currentSha256);
+  assert.equal(ARMORY_V174_ECONOMY_SUCCESSORS[app].previousSha256, ARSENAL_V170_SUCCESSORS[app].currentSha256);
+  assert.equal(sha(read(app)), ARMORY_V174_ECONOMY_SUCCESSORS[app].currentSha256);
+  assert.equal(receipt.verifier, 'scripts/verify-hub-armory-v169.mjs');
+  assert.equal(sha(read(receipt.verifier)), receipt.verifierSha256);
+  assert.deepEqual(Object.keys(ARMORY_V169_NEW_SOURCES), ['src/hub-armory-storefront-v169.js']);
+  for (const [path, digest] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
+    assert.equal(sha(read(path)), ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
+    assert.equal(ARSENAL_V171_SUCCESSORS[path].previousSha256, ARMORY_V170_ASSET_SOURCE.currentSha256);
+    assert.equal(ARMORY_V170_ASSET_SOURCE.previousSha256, digest);
+  }
+  for (const changedPath of [app, receipt.verifier, ...Object.keys(ARMORY_V169_NEW_SOURCES)]) {
+    const mutated=path=>path===changedPath ? Buffer.concat([read(path),Buffer.from('\\nUNREVIEWED')]) : read(path);
+    assert.throws(() => verifyAuditSuccessionV163(previous,current,mutated),
+      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V174/, changedPath);
+  }
+});
+
+test('V170 evidence, commerce and source-art successors are byte-pinned, not art-certified', () => {
+  assert.deepEqual(Object.keys(ARSENAL_V170_SUCCESSORS).sort(), ['src/app.js', 'sw.js']);
+  assert.equal(ARSENAL_V170_SUCCESSORS['sw.js'].previousSha256,
+    ARSENAL_V167_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(ARSENAL_V171_SUCCESSORS['sw.js'].previousSha256, ARSENAL_V170_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].previousSha256, ARSENAL_V171_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(sha(read('sw.js')), ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].currentSha256);
+  for (const [path, digest] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
+    const successor=ARSENAL_V171_SUCCESSORS[path];
+    if(successor) assert.equal(successor.previousSha256,digest);
+    assert.equal(sha(read(path)),ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256||successor?.currentSha256||digest,path);
+  }
+  for (const path of Object.keys(ARSENAL_V170_NEW_SOURCES)) {
+    const corrupted = name => name === path
+      ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V173/, path);
+  }
+});
+
+test('V171 historical successors and research/feed/installer inputs are all source-pinned', () => {
+  assert.equal(Object.keys(ARSENAL_V171_SUCCESSORS).length, 5);
+  assert.equal(Object.keys(ARSENAL_V171_NEW_SOURCES).length, 6);
+  for (const [path, receipt] of Object.entries(ARSENAL_V171_SUCCESSORS)) {
+    const current = ARMORY_V174_ECONOMY_SUCCESSORS[path] || ARMORY_V172_RELEASE_SUCCESSORS[path];
+    if (current) assert.equal(current.previousSha256, receipt.currentSha256);
+    assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
+  }
+  for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
+    const v172 = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const v173 = WEAPON_V173_SOURCE_SUCCESSORS[path];
+    if (v172) assert.equal(v172.previousSha256, expected);
+    if (v173) assert.equal(v173.previousSha256, expected);
+    assert.equal(sha(read(path)), v173?.currentSha256 || v172?.currentSha256 || expected, path);
+  }
+  for (const [path, receipt] of Object.entries(ARMORY_V172_RELEASE_SUCCESSORS)) {
+    assert.ok(receipt.previousSha256 && receipt.currentSha256);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+  }
+  for (const [path, receipt] of Object.entries(WEAPON_V173_SOURCE_SUCCESSORS)) {
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+  }
+  for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
+    assert.ok(receipt.previousSha256 && receipt.currentSha256);
+    const revision = V165_VERIFIER_SUCCESSORS_V173[path];
+    const next = V165_VERIFIER_SUCCESSORS_V174[path];
+    const latest = V165_VERIFIER_SUCCESSORS_V176[path];
+    if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
+    if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
+    if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
+    assert.equal(sha(read(path)),
+      latest?.currentSha256 || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+  }
+});
+
+test('V176 distributor and audit verifier successors retain V174 receipts intact', () => {
+  assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V176).sort(),
+    ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
+  for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
+    assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
+    assert.equal(sha(read(path)),revision.currentSha256,path);
+    const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V176 verifier/,path);
+  }
+});
+
+test('V174 armory economy and QA are exact successors without rewriting historical hashes', () => {
+  assert.deepEqual(Object.keys(ARMORY_V174_ECONOMY_SUCCESSORS).sort(), ['src/app.js','sw.js']);
+  assert.deepEqual(Object.keys(ARMORY_V174_ECONOMY_NEW_SOURCES).sort(),
+    ['scripts/verify-armory-resupply-v174.mjs','src/armory-resupply-v174.js']);
+  for (const [path, receipt] of Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS))
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+  for (const [path, hash] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
+    assert.equal(sha(read(path)), hash, path);
+  for (const path of Object.keys(ARMORY_V174_ECONOMY_NEW_SOURCES)) {
+    const changed=name=>name===path ? Buffer.concat([read(name), Buffer.from('\nUNAPPROVED')]) : read(name);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),/Unreviewed V174/,path);
+  }
 });
 
 test('undeclared duplicate unsafe and unverified runtime transitions fail closed', () => {
@@ -154,19 +271,85 @@ test('every roster source plate exists with its observed exact bytes while missi
   assert.throws(() => verifyAuditCoverageV163(previous, bad));
 });
 
-test('all thirty-two Forge modules are deferred and keep their actual source bytes', () => {
+test('all thirty-two historical Forge pins remain exact with only one verified maintenance continuation', () => {
   assert.equal(current.deferredForge.state, 'DEFERRED_BY_USER');
   assert.equal(current.deferredForge.baselineCommit, current.baseCommit);
   assert.equal(current.deferredForge.newForgeRuntime, 0);
   assert.equal(Object.keys(AUDIT_DEFERRED_FORGE_SOURCES_V163).length, 32);
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V163);
+  const corrections = verifyGamedevCorrectionV163(current);
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V163)) {
-    assert.equal(sha(read(path)), expected, path);
+    assert.equal(sha(read(path)), corrections[path] ?? expected, path);
     const modified = p => p === path ? Buffer.concat([read(p), Buffer.from('\nUNREVIEWED')]) : read(p);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, modified), path);
   }
   const invalid = clone(current); invalid.deferredForge.state = 'DONE';
   assert.throws(() => verifyAuditSuccessionV163(previous, invalid));
+});
+
+test('the gamedev correction binds its exact source, behavioral verifier and historical predecessor', () => {
+  const path = 'src/forge-journey-admission-v141.js';
+  const correction = current.followupGamedev20261029.corrections[0];
+  const admitted = verifyGamedevCorrectionV163(current);
+  assert.deepEqual(admitted, { [path]: sha(read(path)) });
+  assert.ok(Object.isFrozen(admitted));
+  assert.equal(correction.previousSha256, previous.runtimeSourceSha256[path]);
+  assert.equal(correction.previousSha256, current.followupV165.runtimeV164SourceSha256[path]);
+  assert.equal(correction.verifier.sha256, sha(read('scripts/verify-forge-admission-v141.mjs')));
+  const without = clone(current); delete without.followupGamedev20261029;
+  assert.deepEqual(verifyGamedevCorrectionV163(without), {});
+  assert.throws(() => verifyAuditSuccessionV163(previous, without), /Deferred Forge module changed/);
+  for (const changedPath of [path, correction.verifier.path]) {
+    const changed = name => name === changedPath ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyGamedevCorrectionV163(current, changed), /Unreviewed Forge correction/);
+  }
+});
+
+test('malformed, broadened and fabricated gamedev correction records fail closed', () => {
+  for (const mutate of [
+    r => { r.schema = 2; },
+    r => { r.id = 'UNREVIEWED'; },
+    r => { r.baselineCommit = '0'.repeat(40); },
+    r => { r.state = 'DONE'; },
+    r => { r.runtimeValidation = 'PASSED'; },
+    r => { r.scope.newForgeRuntimeModules = 1; },
+    r => { r.scope.deferredForgePrioritiesReopened = 2; },
+    r => { r.scope.allowAnyForgeSource = true; },
+    r => { r.unreviewedOverride = true; },
+    r => { r.corrections = []; },
+    r => { r.corrections.push(clone(r.corrections[0])); },
+    r => { r.corrections[0].path = 'src/forge-journey-v141.js'; },
+    r => { r.corrections[0].path = '../unsafe.js'; },
+    r => { r.corrections[0].previousSha256 = '0'.repeat(64); },
+    r => { r.corrections[0].currentSha256 = r.corrections[0].previousSha256; },
+    r => { r.corrections[0].currentSha256 = '0'.repeat(64); },
+    r => { r.corrections[0].currentSha256 = null; },
+    r => { r.corrections[0].reason = 'fix'; },
+    r => { r.corrections[0].verifier.path = 'scripts/verify-forge-journey-v141.mjs'; },
+    r => { r.corrections[0].verifier.sha256 = '0'.repeat(64); },
+    r => { r.corrections[0].verifier.skip = true; },
+    ...['nodeSuite', 'nativeCandidate', 'ci', 'review', 'merge'].map(key => r => { r.releaseEvidence[key] = { status: 'PASSED' }; })
+  ]) {
+    const invalid = clone(current); mutate(invalid.followupGamedev20261029);
+    assert.throws(() => verifyGamedevCorrectionV163(invalid));
+  }
+  for (const value of [null, false, [], {}]) {
+    const invalid = clone(current); invalid.followupGamedev20261029 = value;
+    assert.throws(() => verifyGamedevCorrectionV163(invalid));
+  }
+  for (const select of [r => r.deferredForge.sourceSha256, r => r.followupV165.runtimeV164SourceSha256,
+    r => r.runtimeSourceSha256]) {
+    const invalid = clone(current); select(invalid)['src/forge-journey-admission-v141.js'] = '0'.repeat(64);
+    assert.throws(() => verifyGamedevCorrectionV163(invalid));
+  }
+});
+
+test('the gamedev correction never admits another changed Forge module even with a matching current pin', () => {
+  const path = 'src/forge-journey-v141.js';
+  const changedBytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
+  const invalid = clone(current); invalid.runtimeSourceSha256[path] = sha(changedBytes);
+  const changed = name => name === path ? changedBytes : read(name);
+  assert.throws(() => verifyAuditSuccessionV163(previous, invalid, changed), /Deferred Forge module changed/);
 });
 
 test('declared current recipe cells and generated adaptations make no current pass or canon claim', () => {

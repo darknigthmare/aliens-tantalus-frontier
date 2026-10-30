@@ -184,7 +184,7 @@ function segmentMatrix(part, from, to, width, facing) {
   const sx = part.distal.x-part.proximal.x, sy = part.distal.y-part.proximal.y;
   const sourceLength = Math.hypot(sx,sy), dx = to.x-from.x, dy = to.y-from.y, length = Math.hypot(dx,dy);
   const ux=sx/sourceLength, uy=sy/sourceLength, wx=dx/length, wy=dy/length;
-  const along=length/sourceLength, across=width/part.width*facing;
+  const along=length/sourceLength, across=width/part.width*facing*(part.sourceFacing===-1?-1:1);
   const a=wx*along*ux+wy*across*uy, b=wy*along*ux-wx*across*uy;
   const c=wx*along*uy-wy*across*ux, d=wy*along*uy+wx*across*ux;
   return {a,b,c,d,e:from.x-a*part.proximal.x-c*part.proximal.y,f:from.y-b*part.proximal.x-d*part.proximal.y};
@@ -260,7 +260,11 @@ export function buildPlayerArticulatedLowerLayersV128({waist,hips,legs,scale:s,f
   const definitions={...Object.fromEntries(Object.entries(PLAYER_LEG_PARTS_V128)
     .map(([itemId,parts])=>[itemId,{parts,asset:LEG_ASSET}])),...legDefinitions};
   for(const [itemId,definition] of Object.entries(definitions)) {
-    const {parts,asset}=definition||{};
+    const {asset}=definition||{};
+    // An explicitly supplied left definition must pass the same complete
+    // validation. A malformed variant cannot silently mirror the right art.
+    const parts=facing<0&&definition&&Object.hasOwn(definition,'partsLeft')
+      ?definition.partsLeft:definition?.parts;
     const measured=[parts?.pelvis,...['near','far'].flatMap(side=>
       [parts?.[side]?.upper,parts?.[side]?.lower,parts?.[side]?.boot])];
     if(!asset?.imageKey || ![asset.sourceWidth,asset.sourceHeight].every(n=>Number.isFinite(n)&&n>0)

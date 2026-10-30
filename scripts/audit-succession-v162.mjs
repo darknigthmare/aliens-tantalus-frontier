@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
+import { resolveAuditSourcesV163, ARSENAL_V167_SUCCESSORS, ARMORY_V169_SUCCESSORS, ARSENAL_V170_SUCCESSORS, ARSENAL_V171_SUCCESSORS, ARMORY_V174_ECONOMY_SUCCESSORS } from './audit-succession-v163.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V162 = Object.freeze({
   "docs/forge/xeno-trials/V161-REMAINING-WORKSTREAMS.md": "741f7d28c2373722d208dd80383ae7c4e22142b91177420be7723c41e1053050",
@@ -73,10 +73,11 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
   assert.deepEqual(bridge.predecessorDocuments, AUDIT_PREDECESSOR_DOCUMENTS_V162);
   assert.equal(current.deferredForge?.state, 'DEFERRED_BY_USER');
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V162);
+  // Historical pins stay fixed; only a fully verified successor can supply newer bytes.
+  const effective = resolveAuditSourcesV163(current, readSource, { effective: true });
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V162))
-    assert.equal(sha(readSource(path)), expected, 'Deferred Forge module changed: ' + path);
+    assert.equal(sha(readSource(path)), effective[path] ?? expected, 'Deferred Forge module changed: ' + path);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
-  const effective = resolveAuditSourcesV163(current, readSource);
   assert.equal(keys(before).length, 82);
   assert.ok(after && keys(after).length >= 82);
   for (const path of keys(before)) assert.ok(Object.hasOwn(after, path), 'Inherited V161 source omitted: ' + path);
@@ -85,7 +86,20 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
       || /^[a-zA-Z0-9._-]+\.css$/.test(path) || ['index.html', 'sw.js'].includes(path),
     'Source path outside the reviewed runtime scope: ' + path);
     assert.ok(validHash(expected), 'Invalid source hash: ' + path);
-    assert.equal(sha(readSource(path)), effective[path], 'Current V162 source changed: ' + path);
+    const observedSha = sha(readSource(path));
+    const next = Object.hasOwn(ARSENAL_V167_SUCCESSORS, path) ? ARSENAL_V167_SUCCESSORS[path] : null;
+    if (next) {
+      // V162/V163 records remain frozen: verify both the historical anchor
+      // and the exact reviewed V167 replacement, not an unbounded whitelist.
+      // The V162 and V163 archives can have different historical hashes.
+      // V163 independently attests previousSha256; the V162 bridge and
+      // its immutable transition list authenticate this older expected hash.
+      const currentSha = ARMORY_V174_ECONOMY_SUCCESSORS[path]?.currentSha256 ?? ARSENAL_V171_SUCCESSORS[path]?.currentSha256 ?? ARSENAL_V170_SUCCESSORS[path]?.currentSha256 ?? ARMORY_V169_SUCCESSORS[path]?.currentSha256 ?? next.currentSha256;
+      assert.equal(effective[path], currentSha, 'Incorrect effective successor hash: ' + path);
+      assert.equal(observedSha, currentSha, 'Unexpected reviewed successor: ' + path);
+    } else {
+      assert.equal(observedSha, effective[path], 'Current V162 source changed: ' + path);
+    }
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
@@ -120,7 +134,7 @@ export function resolveAuditSourcesV162(previous, readSource = readRepository, {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV162(previous, current, readSource);
-  return effective ? resolveAuditSourcesV163(current, readSource) : current.runtimeSourceSha256;
+  return effective ? resolveAuditSourcesV163(current, readSource, { effective: true }) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV162(readSource = readRepository) {

@@ -175,3 +175,7 @@ docs/references/V123_*
 docs/references/V123_*/**
 scripts/import-drive-sprites-v123.mjs
 tests/browser-drive-v123.mjs
+
+# Source-only franchise arsenal workbook, references and QA metadata
+docs/arsenal
+docs/arsenal/**
