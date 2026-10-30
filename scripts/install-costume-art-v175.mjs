@@ -8,6 +8,7 @@
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { inflateSync } from 'node:zlib';
 import { copyFileSync, existsSync, lstatSync, mkdirSync, mkdtempSync,
   readFileSync, realpathSync, renameSync, rmSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
@@ -104,6 +105,7 @@ export function auditCostumeReviewPackV175(folder){
 export function stageCostumeReviewPackV175(folder,{repoRoot=
   resolve(fileURLToPath(new URL('..',import.meta.url)))}={}){
   const review=auditCostumeReviewPackV175(folder);
+  auditV175PixelRoundtrip(folder,review);
   const target=resolve(repoRoot,'assets/openai/sprites/player/costume-review-v175');
   assert.ok(!existsSync(target),'Review assets exist; never overwrite them silently');
   const parent=dirname(target);mkdirSync(parent,{recursive:true});
@@ -121,13 +123,126 @@ export function stageCostumeReviewPackV175(folder,{repoRoot=
   return {path:relative(repoRoot,target),pngs:review.files.length,
     status:'STAGED_FOR_MANUAL_RIG_QA_NOT_PUBLICLY_ADMITTED'};
 }
+
+/**
+ * V176 deterministic round-trip QA for the *actual delivered* PNG bytes.
+ * Check each detached crop's RGBA pixels against its original full atlas;
+ * reject missing/altered pixels and neighbor bleed before any staging.
+ * This does not verify film likeness, pivots, animations or rig admission.
+ * PNG decoding uses built-in zlib; no dependency or generated substitute.
+ */
+function decodeNativeRgbaV176(path) {
+  const png=readFileSync(path);
+  const signature=Buffer.from([137,80,78,71,13,10,26,10]);
+  assert.ok(png.subarray(0,8).equals(signature),'Not a PNG: '+path);
+  let cursor=8,width=0,height=0,header=false,complete=false;
+  const blocks=[];
+  while(cursor+12<=png.length) {
+    const length=png.readUInt32BE(cursor);
+    const type=png.toString('ascii',cursor+4,cursor+8);
+    assert.ok(length<=png.length-cursor-12,'Truncated PNG chunk');
+    const bytes=png.subarray(cursor+8,cursor+8+length);
+    if(type==='IHDR') {
+      assert.ok(!header&&length===13,'Malformed native PNG');
+      width=bytes.readUInt32BE(0);height=bytes.readUInt32BE(4);
+      assert.ok(width>=1&&width<=4096&&height>=1&&height<=4096);
+      assert.deepEqual([...bytes.subarray(8,13)],[8,6,0,0,0],
+        'Only un-interlaced 8-bit RGBA PNG is supported');
+      header=true;
+    } else if(type==='IDAT')blocks.push(bytes);
+    else if(type==='IEND'){complete=true;break;}
+    cursor+=12+length;
+  }
+  assert.ok(header&&complete&&blocks.length,'Incomplete PNG');
+  const raw=inflateSync(Buffer.concat(blocks));
+  const stride=width*4;
+  assert.equal(raw.length,height*(stride+1),'Unexpected PNG decompressed length');
+  const rgba=Buffer.alloc(width*height*4);
+  for(let y=0;y<height;y++){
+    const filter=raw[y*(stride+1)];
+    assert.ok(filter<=4,'Invalid PNG filter');
+    const start=y*stride;
+    for(let x=0;x<stride;x++){
+      const left=x>=4?rgba[start+x-4]:0;
+      const above=y?rgba[start-stride+x]:0;
+      const upperLeft=y&&x>=4?rgba[start-stride+x-4]:0;
+      let prediction=0;
+      if(filter===1)prediction=left;
+      else if(filter===2)prediction=above;
+      else if(filter===3)prediction=(left+above)>>>1;
+      else if(filter===4){
+        const p=left+above-upperLeft;
+        const a=Math.abs(p-left),b=Math.abs(p-above),c=Math.abs(p-upperLeft);
+        prediction=a<=b&&a<=c?left:b<=c?above:upperLeft;
+      }
+      rgba[start+x]=(raw[y*(stride+1)+x+1]+prediction)&255;
+    }
+  }
+  return {width,height,rgba};
+}
+export function auditV175PixelRoundtrip(root,verified=null){
+  // The source SHA checks always precede the more expensive raster check.
+  const review=verified||auditCostumeReviewPackV175(root);
+  assert.equal(review.verified,true,'Missing V175 source receipt');
+  const base=resolve(root);
+  const manifest=JSON.parse(readFileSync(join(base,'manifest.json'),'utf8'));
+  const records=[];
+  for(const [slug,outfit] of Object.entries(manifest.outfits)){
+    for(const kind of ['upper','lower']){
+      const group=outfit[kind];
+      const source=decodeNativeRgbaV176(join(base,group.source_file));
+      assert.deepEqual([source.width,source.height],[1254,1254]);
+      const combined=Buffer.alloc(source.rgba.length);
+      let overlaps=0;
+      for(const part of group.parts){
+        const [ox,oy,width,height]=part.source_bbox_px;
+        assert.ok([ox,oy,width,height].every(Number.isInteger)
+          &&ox>=0&&oy>=0&&width>0&&height>0
+          &&ox+width<=source.width&&oy+height<=source.height,
+          'Invalid source rectangle: '+part.id);
+        const piece=decodeNativeRgbaV176(join(base,part.file));
+        assert.deepEqual([piece.width,piece.height],[width,height],
+          'Incorrect crop bounds: '+part.id);
+        for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+          const from=(y*width+x)*4,to=((oy+y)*source.width+(ox+x))*4;
+          if(piece.rgba[from+3]<=40)continue;
+          if(combined[to+3]>40)overlaps++;
+          piece.rgba.copy(combined,to,from,from+4);
+        }
+      }
+      let sourceOpaque=0,uncovered=0,incorrect=0,extra=0;
+      for(let px=0;px<source.rgba.length;px+=4){
+        const srcA=source.rgba[px+3],gotA=combined[px+3];
+        if(srcA>40){
+          sourceOpaque++;
+          if(gotA<=40)uncovered++;
+          else if(srcA!==gotA||source.rgba[px]!==combined[px]
+            ||source.rgba[px+1]!==combined[px+1]
+            ||source.rgba[px+2]!==combined[px+2])incorrect++;
+        } else if(gotA>40)extra++;
+      }
+      assert.ok(sourceOpaque>0,'Empty source outfit');
+      assert.deepEqual({overlaps,uncovered,incorrect,extra},
+        {overlaps:0,uncovered:0,incorrect:0,extra:0},
+        'V175 opaque pixel reconstruction failed: '+slug+'/'+kind);
+      records.push({outfit:slug,kind,sourceOpaque,restoredOpaque:sourceOpaque,
+        opaqueCoveragePercent:100,overlaps,uncovered,incorrect,extra});
+    }
+  }
+  assert.equal(records.length,8,'Exactly eight clothing source atlases required');
+  return {schema:176,status:'OPAQUE_PIXEL_ROUNDTRIP_PASSED',
+    sourceAtlases:8,nativeRigApproved:false,filmOneToOneApproved:false,
+    records};
+}
+
 const invoked=process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url);
 if(invoked){
   try{
     const source=process.argv[2],mode=process.argv[3];
-    if(!source||!['--verify','--stage'].includes(mode))throw new Error(
-      'Usage: node scripts/install-costume-art-v175.mjs <unzipped-pack> --verify|--stage');
+    if(!source||!['--verify','--verify-pixels','--stage'].includes(mode))throw new Error(
+      'Usage: node scripts/install-costume-art-v175.mjs <unzipped-pack> --verify|--verify-pixels|--stage');
     const r=mode==='--verify'?auditCostumeReviewPackV175(source):
+      mode==='--verify-pixels'?auditV175PixelRoundtrip(source):
       stageCostumeReviewPackV175(source);
     process.stdout.write(JSON.stringify(r,null,2)+'\n');
   }catch(e){process.stderr.write(String(e.message)+'\n');process.exitCode=1;}
