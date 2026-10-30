@@ -312,10 +312,11 @@ export const V165_VERIFIER_SUCCESSORS_V178 = Object.freeze({
 export const HUB_V179_SERVICE_SUCCESSOR = Object.freeze({
   path: 'src/hub-room-service-details-v165.js',
   previousSha256: 'b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2',
-  currentSha256: 'a7f876e28a1f369889e00def7167bfe64cd68f5e9ae7b89f32f6776c47579d0f',
+  currentSha256: '3f7a4010e07a407e8082aceba9432476b31851fcf1864dd7c1498cb2b39818f5',
   roomId: 'armory',
   sourceCenterX: 880,
   correctedCenterX: 220,
+  correctedTopY: 360,
   width: 96,
   height: 42,
   sourceWorkStatus: 'original-project-utility-not-licensed-film-1to1'
