@@ -53,33 +53,40 @@ const validHash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(va
  * receipts remain unchanged; arbitrary future changes still fail closed.
  * Baseline hashes refer to the actual V163 sources at 69c13e5.
  */
+/** Pinned V167/V168 successors are verified byte-for-byte; prior V163 hashes are immutable. */
 export const ARSENAL_V167_SUCCESSORS = Object.freeze({
   'src/game-production-runtime.js': Object.freeze({
-    previousSha256: '710e0901b87b7961aa2bb661f138d16eb46d76b100ef2bc9913d7ebfbd143fde',
-    currentSha256: '370507fb523c6a7cf2fb6098ea428ac28fbafe01c9739074dc14c740abb8aa3f'
+    previousSha256: '710e0901b87b7961aa2bb661f138d16eb46d76b100ef2bc9913d7ebfbd143fde', currentSha256: '8e31b01c84ef7af0b810d3aa4d22afc429153f362627b9f31d0b7b6c75ad60fb'
   }),
   'src/weapon-actions-v130.js': Object.freeze({
-    previousSha256: 'bed8071910771e0b017dedb2a842e435a47141c594126558f0eb65d907b22a10',
-    currentSha256: 'f7ba5f603027c6d10fbf5f01eecf40e429f4d34a106c5fe6e5c306f4e6be933c'
+    previousSha256: 'bed8071910771e0b017dedb2a842e435a47141c594126558f0eb65d907b22a10', currentSha256: 'f7ba5f603027c6d10fbf5f01eecf40e429f4d34a106c5fe6e5c306f4e6be933c'
   }),
   'src/weapon-actions-v131.js': Object.freeze({
-    previousSha256: 'de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654',
-    currentSha256: '4ff367efb3c919ba51fcb5595f119d54f462a3453dbd95ca1d6c40110f44172a'
+    previousSha256: 'de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654', currentSha256: '4ff367efb3c919ba51fcb5595f119d54f462a3453dbd95ca1d6c40110f44172a'
   }),
   'src/tactical-reload-v77.js': Object.freeze({
-    previousSha256: '73c3da2d2416a003600d5d54b4180f04f2456189eb5358ec452be6f4683eb982',
-    currentSha256: 'd10c54f84d2efa60c05891a8ca92ba86710be8d0d3b6c9ffa35c826fa014a894'
+    previousSha256: '73c3da2d2416a003600d5d54b4180f04f2456189eb5358ec452be6f4683eb982', currentSha256: 'f792032340ea32b017d3ffcfa935a4cd7fd1ec5eab277902e6c873aa49bb6dc3'
   }),
   'sw.js': Object.freeze({
-    previousSha256: '732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9',
-    currentSha256: '03138622a31b38cf553b849acc5c8790285830355bc7b1efc6198e1ec1bbf5ee'
+    previousSha256: '732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9', currentSha256: '956bb0319a903d5b18f10a76aadef648360e1ca48ead3fbc2a9bc21da889fc27'
+  }),
+  'src/app.js': Object.freeze({
+    previousSha256: '1f0dbf0340728e653b90cb613c8e6676d611e25d0cfedaba15cae2602ac15525', currentSha256: '85294f9e50a75dcbe9bd2be8d1d8b5c57ae1e46f8060a44dbf4544a545f5c022'
+  }),
+  'src/mission-input-v77.js': Object.freeze({
+    previousSha256: 'cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846', currentSha256: 'c564966b27980c6733b7024fa832e6b8dd64e4441b08104a50f4c43e459d49b4'
   })
 });
 
 export const ARSENAL_V167_NEW_SOURCES = Object.freeze({
   'src/weapon-magazine-inventory-v167.js': '2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928',
   'src/weapon-mastery-v167.js': 'efa0d34da1fb3d26491257b9ec9a4b3fb76cc3342c7e4425247abd2d55e83f29',
-  'scripts/verify-weapon-arsenal-v167.mjs': '00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509'
+  'scripts/verify-weapon-arsenal-v167.mjs': '00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509',
+  'src/weapon-magazine-world-v168.js': '6024a584079bf6bac0d83ccc439e810afb4d6aadc33990d51ce72fcae715962a',
+  'src/weapon-magazine-recovery-runtime-v168.js': '4dbf78d2a4aa096125dada27b2b5fff05c1b927777f705eaf7d57f7626b88889',
+  'src/weapon-attachments-v168.js': '08462193b55e18132dbf14b72d1f50dc07a10bd4be6bf0b70cad83ec0338306d',
+  'scripts/verify-weapon-magazine-world-v168.mjs': '3000f9087c459358c2ad59714283075e722c21ab88110c254434830652612a64',
+  'scripts/verify-weapon-attachments-v168.mjs': '9021a0adf8c3037bc29e26812011d8988e0323adddd04e7c645103a8f088e9fe'
 });
 
 
