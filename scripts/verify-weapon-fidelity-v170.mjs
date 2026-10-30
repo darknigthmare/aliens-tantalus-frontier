@@ -94,3 +94,16 @@ test('V170 production armory mounts the evidence panel beside unchanged procurem
   assert.match(app,/procureCatalogItem\(saveSystem\.data/);
   assert.match(app,/getProcurementQuote\(saveSystem\.data/);
 });
+
+test('V170 129 proposed models each remain a research row, not a published catalog entry', () => {
+  const base=local('docs/arsenal/data/tantalus_arsenal_master_v1.csv');
+  const backlog=local('docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv');
+  const original=[...base.matchAll(/(?:^|\n)(proposed-[a-z0-9-]+),/g)].map(x=>x[1]);
+  const tracked=[...backlog.matchAll(/(?:^|\n)(proposed-[a-z0-9-]+),/g)].map(x=>x[1]);
+  assert.equal(original.length,129);
+  assert.deepEqual(tracked,original);
+  assert.equal((backlog.match(/,P0,/g)||[]).length,13);
+  assert.equal((backlog.match(/,P1,/g)||[]).length,28);
+  assert.equal((backlog.match(/,P2,/g)||[]).length,88);
+  assert.equal((backlog.match(/,NOT_ADMITTED,/g)||[]).length,129);
+});
