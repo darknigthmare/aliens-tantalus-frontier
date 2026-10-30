@@ -111,3 +111,41 @@ Le compte de tenues équipables et toutes les preuves d'approbation
 artistique restent donc inchangés. Le contrôle de conformité du projet
 doit refuser toute tentative de rendre ce lot sélectionnable avant
 installation des pièces manquantes et recette à la résolution native.
+
+
+---
+
+## Annexe V174 — contrôle des découpes source des trois armureries
+
+Le fichier local `ALIENS_TANTALUS_ARMURERIE_RASTER_QA_V174.json` compare
+les **96 découpes RGBA** du pack armureries V172 à leurs rectangles
+dans les trois vrais atlas sources. Résultat : 96/96 correspondances
+octet-pixel, aucun crop entièrement vide, empreintes originales inchangées.
+
+Une découpe séparée n'est pas nécessairement une *isolation graphique* :
+neuf paires de rectangles **effectivement rendus par le moteur** se
+chevauchent sur des pixels opaques (5 dans Tantalus, 2 dans la colonie,
+2 dans la station). Leur destination à l'écran est indépendante ; les
+pixels recopiés peuvent donc créer du mobilier doublé.
+
+| Zone source partagée | Source actuelle (x,y,w,h) | Correction minimale proposée |
+| --- | --- | --- |
+| `main-sign` | 5,433,695,112 | largeur 689 |
+| `weapon-rack-a` | 477,715,170,144 | largeur 167 |
+| `weapon-rack-b` | 644,715,174,145 | largeur 170 |
+| `ammo-wall` | 814,716,231,144 | largeur 227 |
+| `glass-counter` | 8,722,361,134 | largeur 357 |
+
+Ces cinq retouches évitent les neuf intersections géométriques entre les
+éléments sélectionnés, sans changer les coordonnées des comptoirs,
+terminaux, portes, vendeurs ou collisions. Elles ne doivent toutefois pas
+être livrées comme un simple changement visuel aveugle : il faut
+**recette de rendu à l'échelle native sur les trois vrais niveaux**,
+vérification de l'alignement du mobilier et nouveau reçu de succession
+SHA-256. Les cinq corrections sont proposées, **pas encore appliquées au
+module runtime** dans cette annexe.
+
+Le contact des pièces avec le sol et leur cohérence architecturale ne
+peuvent pas être certifiés à partir d'un atlas isolé. Cette étape reste
+ouverte pour la fidélité 1:1 et pour la validation des vendeurs des
+colonies/stations, distincts de Sanaa Doyle sur le Tantalus.
