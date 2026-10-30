@@ -257,6 +257,18 @@ export const ARMORY_V174_ECONOMY_NEW_SOURCES = Object.freeze({
   'scripts/verify-armory-resupply-v174.mjs': '43acb1d0397940f76b211d27d91b2e3539a75293b4ab189cab14ebf344730617'
 });
 
+/** V174 authenticated source-only QA / distribution verifiers. */
+export const V165_VERIFIER_SUCCESSORS_V174 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V173['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'f2d3a326ef4f76327ad08ae0941a7095ebe55b691a2cf93151135c98812284a6'
+  }),
+  'scripts/verify-public-release-v86.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V171['scripts/verify-public-release-v86.mjs'].currentSha256,
+    currentSha256: '052283e5e54a28666025da10e4c3d49a349f5f5b653a9079a125851a677574b5'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -511,11 +523,15 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V174 economy source: ' + path);
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
+    const latest = V165_VERIFIER_SUCCESSORS_V174[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
-    assert.equal(sha(readSource(path)), revision?.currentSha256 || receipt.currentSha256,
-      revision ? 'Unreviewed V173 verifier successor: ' + path
-        : 'Unreviewed V171 verification successor: ' + path);
+    if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
+      'Broken V171/V173-to-V174 verifier chain: ' + path);
+    assert.equal(sha(readSource(path)), latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
+      latest ? 'Unreviewed V174 verifier successor: ' + path
+        : revision ? 'Unreviewed V173 verifier successor: ' + path
+          : 'Unreviewed V171 verification successor: ' + path);
   }
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
     assert.ok(Object.hasOwn(ARSENAL_V167_SUCCESSORS, path), 'Missing V167 predecessor: ' + path);
