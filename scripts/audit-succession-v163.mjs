@@ -131,6 +131,41 @@ export const ARSENAL_V170_NEW_SOURCES = Object.freeze({
   'src/hub-port-meridien-v90.js': 'bda67e445bbb428e4e8c204efcb832252e710bc4d80ede5aaf506d3a20d999b5'
 });
 
+/** V171 continuation: these are *new* exact successors, not overwritten old
+ * V163/V167/V169/V170 receipts. A changed source must have this exact hash.
+ * The original 129 proposals remain research-only and all art flags remain off.
+ */
+export const ARSENAL_V171_SUCCESSORS = Object.freeze({
+  'sw.js': Object.freeze({
+    previousSha256: ARSENAL_V170_SUCCESSORS['sw.js'].currentSha256,
+    currentSha256: '28a96943d75e091a0b16a7228d76dabc2458b8f86945e938a4c7f121d92f13f0'
+  }),
+  'src/weapon-fidelity-ledger-v170.js': Object.freeze({
+    previousSha256: ARSENAL_V170_NEW_SOURCES['src/weapon-fidelity-ledger-v170.js'],
+    currentSha256: '83649dcccc939a9a634c1e2ec8e9cde35e6f844ade4c9586cb5f4ebfb3f1f8cd'
+  }),
+  'src/hub-armory-storefront-v169.js': Object.freeze({
+    previousSha256: ARMORY_V170_ASSET_SOURCE.currentSha256,
+    currentSha256: '2f5e0f0dce98e952fd865b0a251afd3d2cfcb34d4ab5be926a68c81ca78a9886'
+  }),
+  'src/hub-armory-scene-v169.js': Object.freeze({
+    previousSha256: ARSENAL_V170_NEW_SOURCES['src/hub-armory-scene-v169.js'],
+    currentSha256: 'cd72fc6ad1ed75a9f60172918932ef9e18e709fb18f24edd878c97fc96841ab2'
+  }),
+  'src/hub-port-meridien-v90.js': Object.freeze({
+    previousSha256: ARSENAL_V170_NEW_SOURCES['src/hub-port-meridien-v90.js'],
+    currentSha256: 'ee6e1088da7e588567e72d909ab4a01a127b2e85021c8785c650ef80113a8f91'
+  })
+});
+export const ARSENAL_V171_NEW_SOURCES = Object.freeze({
+  'src/weapon-research-index-v171.js': '1a2d3f5ea0f3f19311fb8ec2e0d67d23bc5e2a6dd8ec62902d175f144b84de9b',
+  'scripts/verify-weapon-research-v171.mjs': '6e5a03b8cbf5386d6fce50ac602c1fccb17ded1af8b4db54e0bd6d72e0b3e293',
+  'src/weapon-special-feeds-v171.js': 'a4f3c56b1e6143befea8f625c032be0a576ae5c993bbe12e0c63a4d177d8d54e',
+  'scripts/verify-weapon-special-feeds-v171.mjs': 'c6cebada4bfce82e7a2d557e8caa85555f065e9882b81e2eec83640d8d0b5e87',
+  'scripts/install-armory-art-v171.mjs': '5f2311f0a980d770e312b2be2f532ea1e67b12617421fbd66103a12da990f0af',
+  'scripts/verify-armory-art-installer-v171.mjs': '7bc84f3677aaea7afe044741a88d8911793dc0d5d886550894452e6e748d62ef'
+});
+
 /** V171: V165 test runner itself must evolve when runtime sources evolve.
  * The predecessor is still checked against the frozen V165 receipt. This
  * separate exact successor hash is never written into historical progress.
@@ -139,6 +174,15 @@ export const V165_VERIFIER_SUCCESSORS_V171 = Object.freeze({
   'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
     previousSha256: 'c49d78b68bae4f17844320dd73a119f056b97566101e79b8186c60e7026718bb',
     currentSha256: 'cf5c0d1c2a1c346a417930b5a405b461641199310e268647359e209492534939'
+  }),
+  'scripts/verify-public-release-v86.mjs': Object.freeze({
+    previousSha256: '4b432c2bd6d5d30af744ae96103a678d96cf6839bfe76907ab56077d48cb7eb3',
+    currentSha256: '0c124cc8ecd85c67a9aa13b9b09089ebaae58f0024dea5276344d4b699f448f0'
+  }),
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: '0e62c205e45006c9adbf6f58850233b40d79aaaaefabd802fad3c845dc5eaaf1',
+    // Updated after the V171 audit verifier's final source text is committed.
+    currentSha256: '3221fafc37eccbca30769e49fd0c5d4ea14906a892a1e204fb3c108cbfc1c00c'
   })
 });
 
@@ -328,15 +372,19 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       assert.equal(expected, successor.previousSha256, 'Incorrect V163 baseline for V167 successor: ' + path);
       const armory = ARMORY_V169_SUCCESSORS[path];
       const newest = ARSENAL_V170_SUCCESSORS[path];
+      const current = ARSENAL_V171_SUCCESSORS[path];
       if (armory) assert.equal(armory.previousSha256, successor.currentSha256,
         'Broken V167-to-V169 successor chain: ' + path);
       if (newest) assert.equal(newest.previousSha256, (armory || successor).currentSha256,
         'Broken reviewed V169/V167-to-V170 successor chain: ' + path);
+      if (current) assert.equal(current.previousSha256, (newest || armory || successor).currentSha256,
+        'Broken V170-to-V171 successor chain: ' + path);
       assert.equal(sha(readSource(path)),
-        (newest || armory || successor).currentSha256,
-        newest ? 'Unreviewed V170 runtime successor: ' + path
-          : armory ? 'Unreviewed V169 runtime successor: ' + path
-            : 'Unreviewed V167 runtime successor: ' + path);
+        (current || newest || armory || successor).currentSha256,
+        current ? 'Unreviewed V171 runtime successor: ' + path
+          : newest ? 'Unreviewed V170 runtime successor: ' + path
+            : armory ? 'Unreviewed V169 runtime successor: ' + path
+              : 'Unreviewed V167 runtime successor: ' + path);
     } else {
       assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
     }
@@ -347,11 +395,24 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   for (const [path, expected] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
     const extra = path === ARMORY_V170_ASSET_SOURCE.path ? ARMORY_V170_ASSET_SOURCE : null;
     if (extra) assert.equal(extra.previousSha256, expected, 'Invalid V169 authored source history');
-    assert.equal(sha(readSource(path)), extra?.currentSha256 || expected,
-      extra ? 'Unreviewed V170 source correction: ' + path : 'Unreviewed V169 added source: ' + path);
+    const current = ARSENAL_V171_SUCCESSORS[path];
+    if (current) assert.equal(current.previousSha256, extra?.currentSha256 || expected,
+      'Broken V169/V170-to-V171 source chain: ' + path);
+    assert.equal(sha(readSource(path)), current?.currentSha256 || extra?.currentSha256 || expected,
+      current ? 'Unreviewed V171 source correction: ' + path
+        : extra ? 'Unreviewed V170 source correction: ' + path
+          : 'Unreviewed V169 added source: ' + path);
   }
-  for (const [path, expected] of Object.entries(ARSENAL_V170_NEW_SOURCES))
-    assert.equal(sha(readSource(path)), expected, 'Unreviewed V170 added source: ' + path);
+  for (const [path, expected] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
+    const current = ARSENAL_V171_SUCCESSORS[path];
+    if (current) assert.equal(current.previousSha256, expected,
+      'Unreviewed V171 predecessor for V170 source: ' + path);
+    assert.equal(sha(readSource(path)), current?.currentSha256 || expected,
+      current ? 'Unreviewed V171 source successor: ' + path
+        : 'Unreviewed V170 added source: ' + path);
+  }
+  for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES))
+    assert.equal(sha(readSource(path)), expected, 'Unreviewed V171 added source: ' + path);
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171))
     assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V171 verification successor: ' + path);
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
@@ -400,7 +461,10 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
   return effective ? Object.freeze({ ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) })
+    ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARSENAL_V171_SUCCESSORS)
+      .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;
 }
 
