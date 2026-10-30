@@ -200,3 +200,31 @@ et une QA des pivots, animations, dimensions, collisions et variantes
 gauche/droite. Le contrôleur
 `scripts/verify-costume-art-installer-v175.mjs` est déclaré aux
 régressions de costumes, sans dépendance envers l'archive absente en CI.
+
+
+### Critères de comparaison aux costumes originaux
+
+Le dossier suit les références de **costumes de tournage**, en
+séparant attributs attestés et hypothèses visuelles. Aucun lien ci-dessous
+ne constitue une admission de reproduction 1:1 ou un droit d'utilisation
+commerciale.
+
+| Costume | Éléments explicitement attestés | Éléments V175 encore à comparer |
+|---|---|---|
+| Ripley, Fury 161 | Propstore décrit un blouson brun à capuche, poches latérales et oeillets métalliques (sans boutons ni zip); un autre uniforme comporte aussi manteau vert et insignes. | Piquage et usure, taille des oeillets; manteau vert/insignes comme variante séparée; tête et raccords aux animations |
+| Ripley 8 | Julien's confirme veste et pantalon de cuir brun-roux matelassés, débardeur beige, bottes oxblood à nombreux crochets; Propstore atteste une variante utilisée sous l'eau. | Détails du relief biomécanique et crochets, variantes sous l'eau, peau et animation; échelle film du vêtement |
+| Andy, Romulus | Carlos Rosario confirme le sac de ceinture du personnage; il indique que les chaussures d'Andy proviennent de Crafted Society. | Correspondance précise des baskets, sac aux deux orientations, col et écusson, silhouette et palette selon éclairage |
+| Navarro, Romulus | Rosario décrit le motif spécifique de chemise hawaïenne à palmiers, la veste et les autres couches de cuir; les multiples de tournage diffèrent selon les étapes d'acide et de sang. | Motif de tissu **encore approximatif** et non certifié, accessoires de poignet/collier/gants, variants de salissure, coiffure/casque et vue arrière |
+
+Sources primaires ou entretiens avec le chef costumier :
+- Propstore Ripley Fury 161 : https://propstore.com/product/alien-1992/ripleys-sigourney-weaver-jacket/
+- Propstore uniforme complet Fury 161 : https://propstoreauction.com/lot-details/index/catalog/138/lot/28200/ALIEN-3-1992-Ripley-s-Sigourney-Weaver-Prison-Uniform
+- Julien's lot 788 Ripley 8 : https://www.juliensauctions.com/en/items/72008/sigourney-weaver-ripley-screen-used-costume-from-alien-resurrection-with-dvd
+- Propstore Ripley 8 version sous-marine : https://propstore.com/product/alien-resurrection-1997/12-ellen-ripleys-sigourney-weaver-distressed-underwater-ensemble/
+- Carlos Rosario (Dazed) : https://www.dazeddigital.com/fashion/article/64405/1/alien-romulus-costume-designer-carlos-rosario-fede-alvarez-cailee-spaeny
+- Carlos Rosario (CAFTCAD) : https://www.caftcad.com/alien-romulus
+- Carlos Rosario (No Film School) : https://nofilmschool.com/carlos-rosario-alien-romulus
+
+L'absence d'un élément ne doit pas être comblée par un costume générique
+mis en statut « fidèle » : inscrire `A_REPRODUIRE` ou
+`REFERENCES_INSUFFISANTES` avant génération et validation côte à côte.
