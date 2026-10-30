@@ -264,3 +264,30 @@ Le test npm `verify-costume-art-installer-v175.mjs` permet d'exécuter
 le même contrôle avec `TANTALUS_V175_ART_ROOT` lorsque l'archive
 physique décompressée est disponible. L'absence de l'archive en CI
 est un **skip déclaré**, pas un succès du rendu en jeu.
+
+
+## QA topologique V177 — pièces détachées
+
+Un audit hors moteur a réexaminé les octets du pack V176 fourni par
+l'utilisateur (archive SHA-256
+`ad52a6160f3a9dd21f99cdb0dc0f233bcc10123996a90f259c903b09b9a76090`).
+Résultat indépendant de l'ancien aller-retour pixel :
+
+- 8 atlas sources, 114 pièces séparées dont 112 membres et 2 pochettes.
+- **24 torses** contiennent **48 ouvertures transparentes internes**
+  d'au moins 30 pixels (deux par torse, correspondant aux emplacements
+  de cou et d'épaule).
+- Aucun sprite ne touche sa bordure opaque, et chacun conserve une
+  composante visible principale de plus de 100 pixels.
+- **0 défaut critique détecté** de topologie alpha à ce seuil.
+
+L'importateur V175 contrôle maintenant ces contraintes avant
+`--verify-pixels` et `--stage`, en plus des empreintes et de la
+reconstruction des pixels. La réception ne garantit toujours pas le
+**pivot, l'orientation, la position articulaire, l'animation, la
+silhouette 1:1 ni les droits**. Une archive de suivi externe
+`ALIENS_TANTALUS_V177_TOPOLOGY_QA.zip` fournit les résultats par sprite
+et le modèle des coordonnées de rig, avec tous les pivots laissés à
+`null` plutôt que fabriqués. SHA-256 de cette archive :
+`ab3c661c08e764ad44c160558e8098e13295b28995d2961c7e51dfaf52a19461`.
+Aucun des 123 PNG du lot n'a été ajouté à la distribution publique.
