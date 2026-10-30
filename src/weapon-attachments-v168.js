@@ -49,13 +49,16 @@ export function validateWeaponModuleInventoryV168(s) {
   if (!s || s.schema !== 168 || !Array.isArray(s.equips) || s.equips.length > MAX_RECORDS
     || !Array.isArray(s.receipts) || s.receipts.length > MAX_RECEIPTS
     || s.receipts.some(v => !id(v)) || new Set(s.receipts).size !== s.receipts.length) return false;
-  const keys = new Set();
+  const keys = new Set(), identities = new Map();
   for (const e of s.equips) {
     if (!validOwner(e.ownerId) || !weapon(e.weaponDefinitionId) || !id(e.weaponInstanceId)
       || !WEAPON_MODULE_SLOTS_V168.includes(e.slot) || !id(e.moduleId)) return false;
     const module = byId.get(e.moduleId);
     if (!module || module.slot !== e.slot || !module.supported.includes(e.weaponDefinitionId)) return false;
-    const key = [e.ownerId, e.weaponInstanceId, e.slot].join('|');
+    const identityKey = e.ownerId + '|' + e.weaponInstanceId;
+    if (identities.has(identityKey) && identities.get(identityKey) !== e.weaponDefinitionId) return false;
+    identities.set(identityKey, e.weaponDefinitionId);
+    const key = identityKey + '|' + e.slot;
     if (keys.has(key)) return false;
     keys.add(key);
   }
@@ -73,12 +76,13 @@ export function installWeaponModuleV168(s, { ownerId, weaponDefinitionId, weapon
   const old = s.equips.find(e => e.ownerId === ownerId && e.weaponInstanceId === weaponInstanceId && e.slot === module.slot);
   if (old?.moduleId === moduleId) return null;
   if (!old && s.equips.length >= MAX_RECORDS) return null;
+  const previousModuleId = old?.moduleId || null;
   if (old) old.moduleId = moduleId;
   else s.equips.push({ ownerId, weaponDefinitionId, weaponInstanceId, slot: module.slot, moduleId });
   s.receipts.push(receiptId);
   if (s.receipts.length > MAX_RECEIPTS) s.receipts.shift();
   return { ownerId, weaponDefinitionId, weaponInstanceId, moduleId, slot: module.slot,
-    replaced: old?.moduleId || null, cosmeticOnly: true, art: module.art };
+    replaced: previousModuleId, cosmeticOnly: true, art: module.art };
 }
 
 export function uninstallWeaponModuleV168(s, { ownerId, weaponDefinitionId, weaponInstanceId,
