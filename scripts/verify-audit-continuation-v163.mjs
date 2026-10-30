@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AUDIT_PRIORITY_IDS_V163,
   loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163,
-  verifyGamedevCorrectionV163 } from './audit-succession-v163.mjs';
+  verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -81,9 +81,11 @@ test('the full current bridge validates runtime bytes and older default returns 
   const v161 = JSON.parse(read(prefix + 'progress-v161.json'));
   const v160 = JSON.parse(read(prefix + 'progress-v160.json'));
   assert.deepEqual(resolveAuditSourcesV162(v161), previous.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), current.runtimeSourceSha256);
+  const approvedEffectiveV167 = { ...current.runtimeSourceSha256,
+    ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) };
+  assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV167);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), current.runtimeSourceSha256);
+  assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV167);
   assert.equal(verifyAuditSuccessionV162(v161, previous).current, 87);
 });
 
