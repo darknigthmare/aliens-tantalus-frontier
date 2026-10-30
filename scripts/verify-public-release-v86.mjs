@@ -222,6 +222,7 @@ SCRIPT_FILES.add('verify-costume-art-installer-v175.mjs');
 SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
 // Source-tree verifier for the three V169 armory storefront variants; exact path only.
 SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
+SCRIPT_FILES.add('verify-armory-service-raster-v177.mjs');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
