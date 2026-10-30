@@ -7,6 +7,7 @@ export const WEAPON_FIDELITY_SOURCES_V170 = Object.freeze({
   afe2: 'https://www.gamewatcher.com/aliens-fireteam-elite-2/weapons',
   afe2Publisher: 'https://www.daybreakgames.com/press/afe2/article/dbg-afe2-now-live',
   afe2Steam: 'https://store.steampowered.com/app/3448650/Aliens_Fireteam_Elite_2/',
+  afe2Patch: 'https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes',
   afe1: 'https://www.aliensfireteamelite.com/en/releasenotes/',
   isolation: 'https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/'
 });
@@ -36,6 +37,9 @@ const ISOLATION = [
   ['comparison-isolation-revolver','Revolver — Sevastopol','ballistic','cylinder-unverified','weapon-021-357-magnum-revolver'],
   ['comparison-isolation-stun-baton','Stun Baton — Sevastopol','electric','energy-unverified','weapon-033-stun-baton']
 ];
+const AFE2_PATCH = [
+  ['proposed-mondo-heat-9000','Mondo Heat 9000','thermal','heat-and-cryo-augment-unverified',null]
+];
 const AFE1 = [
   ['proposed-m41e4-heavy-pulse-rifle','M41E4 Heavy Pulse Rifle','ballistic','unverified',null]
 ];
@@ -52,6 +56,8 @@ export const WEAPON_FIDELITY_DOSSIERS_V170 = freeze([
   ...AFE2.map(a => sourceDossier(a, 'Aliens: Fireteam Elite 2',
     'secondary-prelaunch-gameplay-screenshots','afe2',
     [WEAPON_FIDELITY_SOURCES_V170.afe2Publisher, WEAPON_FIDELITY_SOURCES_V170.afe2Steam])),
+  ...AFE2_PATCH.map(a => sourceDossier(a, 'Aliens: Fireteam Elite 2 — Patch 2026',
+    'first-party-patch-notes','afe2Patch')),
   ...ISOLATION.map(a => sourceDossier(a, 'Alien: Isolation',
     'first-party-game-manual','isolation')),
   ...AFE1.map(a => sourceDossier(a, 'Aliens: Fireteam Elite',
