@@ -67,7 +67,7 @@ test('V169 renders only authored crop rectangles when full atlas is admitted', (
   const front=drawArmoryStorefrontV169(ctx,image,plan,{originX:1280,phase:'front'});
   assert.equal(back.drawn+front.drawn,plan.assets.length);
   assert.equal(calls.filter(entry=>entry[0]==='draw').length,plan.assets.length);
-  assert.ok(calls.filter(entry=>entry[0]==='draw').every(entry=>entry[5] >= 1280));
+  assert.ok(calls.filter(entry=>entry[0]==='draw').every(entry=>entry[6] >= 1280));
 });
 
 test('V169 colony merchant is gated behind the real rescue mission receipt', () => {
@@ -83,7 +83,7 @@ test('V169 station supply merchant keeps the logistics annex and true floor', ()
   assert.equal(contact?.variant,'station');
   assert.equal(contact?.source,'native-contact-v169');
   assert.equal(contact?.action,'armory:open-shop-v169');
-  assert.equal(getArmoryStoreContactV169({roomId:'logistics',x:528,y:544,alive:true}),null);
+  assert.equal(getArmoryStoreContactV169({roomId:'logistics',x:528,y:400,alive:true}),null);
 });
 
 test('V169 refuses distant, dead and unregistered merchant interaction', () => {
