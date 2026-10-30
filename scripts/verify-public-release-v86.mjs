@@ -207,6 +207,8 @@ for (const file of [
 SCRIPT_FILES.add('verify-weapon-arsenal-v167.mjs');
 SCRIPT_FILES.add('verify-weapon-magazine-world-v168.mjs');
 SCRIPT_FILES.add('verify-weapon-attachments-v168.mjs');
+// Source-tree verifier for the three V169 armory storefront variants; exact path only.
+SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
