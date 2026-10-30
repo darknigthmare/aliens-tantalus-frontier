@@ -288,7 +288,7 @@ export const V165_VERIFIER_SUCCESSORS_V176 = Object.freeze({
  * Never edits predecessor evidence or the historical V163 workbook hashes. */
 export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
   'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
-    previousSha256: V165_VERIFIER_SUCCESSORS_V171['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    previousSha256: V165_VERIFIER_SUCCESSORS_V173['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
     currentSha256: '37a94416414702acc7382579cac02dfed74cae99718d9a138c7c74c2787483f6'
   })
 });
