@@ -97,7 +97,7 @@ export function startTacticalReloadV77(actor, weapon = null, { paused = false } 
     magazineSize, profile, phase: 'reloading', result: 'normal', elapsed: 0,
     completeAt: profile.duration, attemptAt: null, transferred: false, roundsLoaded: 0,
     bonusRemaining: 0, feedbackRemaining: 0, cancelReason: null,
-    weaponReloadIdV167: actor.weaponFeedV167?.reload?.id || null
+    ...(actor.weaponFeedV167?.reload ? { weaponReloadIdV167: actor.weaponFeedV167.reload.id } : {})
   };
   syncActor(actor);
   return true;
