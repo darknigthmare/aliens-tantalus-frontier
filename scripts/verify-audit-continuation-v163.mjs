@@ -14,8 +14,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
   V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174,
-  V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
-  ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
+  V165_VERIFIER_SUCCESSORS_V176, V165_VERIFIER_SUCCESSORS_V177, ARMORY_V178_RENDER_SUCCESSORS,
+  ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -134,12 +134,15 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
   for (const [path, digest] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const successor=ARSENAL_V171_SUCCESSORS[path];
     if(successor) assert.equal(successor.previousSha256,digest);
-    assert.equal(sha(read(path)),ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256||successor?.currentSha256||digest,path);
+    assert.equal(sha(read(path)),
+      ARMORY_V178_RENDER_SUCCESSORS[path]?.currentSha256
+        || ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256
+        || successor?.currentSha256 || digest, path);
   }
   for (const path of Object.keys(ARSENAL_V170_NEW_SOURCES)) {
     const corrupted = name => name === path
       ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
-    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V173/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V173|Unreviewed V178/, path);
   }
 });
 
@@ -149,7 +152,8 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   for (const [path, receipt] of Object.entries(ARSENAL_V171_SUCCESSORS)) {
     const current = ARMORY_V174_ECONOMY_SUCCESSORS[path] || ARMORY_V172_RELEASE_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, receipt.currentSha256);
-    assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
+    assert.equal(sha(read(path)), ARMORY_V178_RENDER_SUCCESSORS[path]?.currentSha256
+      || current?.currentSha256 || receipt.currentSha256, path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
     const v172 = ARMORY_V172_RELEASE_SUCCESSORS[path];
@@ -160,7 +164,8 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   }
   for (const [path, receipt] of Object.entries(ARMORY_V172_RELEASE_SUCCESSORS)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), ARMORY_V178_RENDER_SUCCESSORS[path]?.currentSha256
+      || receipt.currentSha256, path);
   }
   for (const [path, receipt] of Object.entries(WEAPON_V173_SOURCE_SUCCESSORS)) {
     assert.equal(sha(read(path)), receipt.currentSha256, path);
@@ -175,6 +180,21 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
     assert.equal(sha(read(path)),
       latest?.currentSha256 || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+  }
+});
+
+test('V178 restores only the genuinely authored V165 electrical plate above the V169 armory overlay', () => {
+  assert.deepEqual(Object.keys(ARMORY_V178_RENDER_SUCCESSORS), ['src/hub-armory-scene-v169.js']);
+  const [path, receipt] = Object.entries(ARMORY_V178_RENDER_SUCCESSORS)[0];
+  assert.equal(receipt.previousSha256, ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
+  assert.equal(sha(read(path)), receipt.currentSha256);
+  assert.equal(receipt.verifier, 'scripts/verify-armory-service-raster-v177.mjs');
+  assert.equal(sha(read(receipt.verifier)), receipt.verifierSha256);
+  for (const mutatedPath of [path, receipt.verifier]) {
+    const readMutated = target => target === mutatedPath
+      ? Buffer.concat([read(target), Buffer.from('\nTAMPERED')]) : read(target);
+    assert.throws(() => verifyAuditSuccessionV163(previous,current,readMutated),
+      /Unreviewed V178/, mutatedPath);
   }
 });
 
