@@ -133,7 +133,7 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
   for (const path of Object.keys(ARSENAL_V170_NEW_SOURCES)) {
     const corrupted = name => name === path
       ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
-    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V173/, path);
   }
 });
 
