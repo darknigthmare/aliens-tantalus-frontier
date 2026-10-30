@@ -4,6 +4,8 @@ import { HubGame as PlayerRenderer } from './hub-game.js';
 import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js';
 import { PORT_WORLD_V90, PORT_POSTS_V90, normalizePortMeridienV90, portPhysicalContactV90, portTaskSecondsV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
+import { ARMORY_STOREFRONT_SOURCE_V169, getArmoryStorefrontPlanV169,
+  drawArmoryStorefrontV169, getArmoryStoreContactV169 } from './hub-armory-storefront-v169.js';
 
 export const PORT_ASSETS_V90 = Object.freeze({
   far: '/assets/openai/metroidvania/colony-multiroute-far.png',
@@ -42,6 +44,11 @@ export function withPortMeridienV90(Base) {
         && options.onboardingV84?.phase === 'complete' && this.portStateV90 && this.portStateV90.phase !== 'pending');
       if (!this.portActiveV90) return;
       this.portImagesV90 ||= new Map();
+      if (!this.portArmoryImageV169 && typeof Image === 'function') {
+        this.portArmoryImageV169 = new Image();
+        this.portArmoryImageV169.decoding = 'async';
+        this.portArmoryImageV169.src = ARMORY_STOREFRONT_SOURCE_V169.colony;
+      }
       for (const [key, path] of Object.entries(PORT_ASSETS_V90)) if (!this.portImagesV90.has(key)) {
         const image = new Image(); image.decoding = 'async'; image.src = path; this.portImagesV90.set(key, image);
       }
@@ -57,6 +64,16 @@ export function withPortMeridienV90(Base) {
     currentAnnexV71() { return this.isPortMeridienV90() ? portGeometryV90(this.portStateV90) : super.currentAnnexV71(); }
     currentRoom() { return this.isPortMeridienV90() ? { id: 'port-meridien-quay', name: 'Le quai des vivants' } : super.currentRoom(); }
     portContactV90() { return this.isPortMeridienV90() && portPhysicalContactV90(this.portStateV90, this.player); }
+    portArmoryShopContactV169() {
+      if (!this.isPortMeridienV90() || !this.running || this.paused || this.portCommitBlockedV90
+        || this.portTaskV90 || this.portContactV90() || this.portStateV90?.phase !== 'complete'
+        || !this.player?.grounded || this.player.inVehicle) return null;
+      return getArmoryStoreContactV169({
+        roomId: 'port-meridien-quay', x: this.player.x + this.player.w / 2,
+        y: this.player.y + this.player.h, alive: this.player.alive && !this.player.downed,
+        missionPhase: this.portStateV90.phase
+      });
+    }
     nearestInteraction() {
       if (!this.isPortMeridienV90()) return super.nearestInteraction();
       return this.portContactV90() ? { action: `port:${this.portStateV90.phase}`, description: PORT_POSTS_V90[this.portStateV90.phase].label } : null;
@@ -85,6 +102,8 @@ export function withPortMeridienV90(Base) {
         if (!this.submitPortV90('checkpoint')) return false;
         this.portCommitBlockedV90 = false;
       }
+      const armoryShop = this.portArmoryShopContactV169();
+      if (armoryShop) { this.onAction?.(armoryShop); return true; }
       if (this.portStateV90.phase === 'escort' && this.portStateV90.following) {
         if (this.portStateV90.civiliansX.every((x, i) => x >= 2160 + i * 55)) return this.submitPortV90('escort');
         return false;
@@ -138,6 +157,8 @@ export function withPortMeridienV90(Base) {
       if (!this.isPortMeridienV90()) return super.statusPrompt();
       if (this.portCommitBlockedV90) return 'SAUVEGARDE BLOQUÉE · E pour réessayer sans perdre le groupe';
       if (this.portTaskV90) return `IMMOBILE · ${Math.floor(this.portTaskV90.elapsed / portTaskSecondsV90(this.portStateV90) * 100)} % · bouger annule`;
+      const armoryShop = this.portArmoryShopContactV169();
+      if (armoryShop) return armoryShop.prompt;
       const contact = this.nearestInteraction();
       return contact ? `E · ${contact.description}` : 'A/D marcher · W/S échelle · ESPACE franchir · E utiliser';
     }
@@ -196,6 +217,13 @@ export function withPortMeridienV90(Base) {
         }
       }
       ctx.fillStyle = gateClosed(state) ? '#d7a060' : '#87e6be'; ctx.fillRect(1818, 336, 92, 8);
+      // Colony supplier is visual-only, beyond the existing real mission gate.
+      // No replacement of the actual report terminal, actors or colliders.
+      const shopPlan = getArmoryStorefrontPlanV169('port-meridien-quay');
+      if (shopPlan) {
+        drawArmoryStorefrontV169(ctx, this.portArmoryImageV169, shopPlan, { phase: 'back' });
+        drawArmoryStorefrontV169(ctx, this.portArmoryImageV169, shopPlan, { phase: 'front' });
+      }
       const civilians = this.portImagesV90?.get('civilians');
       if (ready(civilians)) state.civiliansX.forEach((x, row) => {
         const column = row === 0 && ['unload', 'carry', 'triage'].includes(state.phase) ? 2
