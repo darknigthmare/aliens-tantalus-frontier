@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { WEAPON_RESEARCH_INDEX_V171, validateWeaponResearchIndexV171,
   getWeaponResearchIndexV171, renderWeaponResearchIndexV171 } from '../src/weapon-research-index-v171.js';
-import { ARMORY_ART_ADMISSIONS_V171, isArmoryArtAdmittedV171 } from '../src/hub-armory-storefront-v169.js';
+import { ARMORY_ART_ADMISSIONS_V171, isArmoryArtAdmittedV171, isArmoryStorefrontImageReadyV172 } from '../src/hub-armory-storefront-v169.js';
 const read = path => readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const keys = ['P0','P1','P2'];
 test('V171 follows exactly 129 source-only proposed weapons in the historical source list',()=>{
@@ -50,18 +50,21 @@ test('V171 refuses forged 1:1 releases, duplicate IDs and invalid URLs in resear
  invalid[2].sourceUrl='javascript:alert(1)';
  assert.equal(validateWeaponResearchIndexV171(invalid).valid,false);
 });
-test('V171 missing V169 PNGs never initiate a browser request or synthesize a seller',()=>{
- assert.deepEqual(Object.values(ARMORY_ART_ADMISSIONS_V171),[false,false,false]);
- assert.equal(isArmoryArtAdmittedV171('tantalus'),false);
- assert.equal(isArmoryArtAdmittedV171('colony'),false);
- assert.equal(isArmoryArtAdmittedV171('station'),false);
+test('V172 shipped storefront art still requires real image readiness before contact',()=>{
+ assert.deepEqual(Object.values(ARMORY_ART_ADMISSIONS_V171),[true,true,true]);
+ for(const variant of ['tantalus','colony','station'])
+  assert.equal(isArmoryArtAdmittedV171(variant),true);
  assert.equal(isArmoryArtAdmittedV171('../unsafe'),false);
+ assert.equal(isArmoryStorefrontImageReadyV172(null),false);
+ assert.equal(isArmoryStorefrontImageReadyV172({complete:false,naturalWidth:1448,naturalHeight:1086}),false);
+ assert.equal(isArmoryStorefrontImageReadyV172({complete:true,naturalWidth:1024,naturalHeight:1024}),false);
+ assert.equal(isArmoryStorefrontImageReadyV172({complete:true,naturalWidth:1448,naturalHeight:1086}),true);
  const scene=read('src/hub-armory-scene-v169.js');
  const port=read('src/hub-port-meridien-v90.js');
  assert.match(scene,/if \(!isArmoryArtAdmittedV171\(variant\)/);
- assert.match(scene,/if \(!isArmoryArtAdmittedV171\('station'\)/);
+ assert.match(scene,/!isArmoryStorefrontImageReadyV172\(this.armoryStorefrontImagesV169/);
  assert.match(port,/if \(isArmoryArtAdmittedV171\('colony'\)/);
- assert.match(port,/if \(!isArmoryArtAdmittedV171\('colony'\)/);
+ assert.match(port,/!isArmoryStorefrontImageReadyV172\(this.portArmoryImageV169\)/);
 });
 test('V171 unified archives are wired into the existing transactional armory',()=>{
  const source=read('src/weapon-fidelity-ledger-v170.js');
