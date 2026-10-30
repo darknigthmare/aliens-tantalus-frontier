@@ -97,3 +97,38 @@ test('V171 fail-closed validations reject unsafe IDs and non-bullet feed swaps',
  assert.equal(createSpecialFeedV171({ownerId:'player',weaponInstanceId:'player:x',
    weaponDefinitionId:'proposed-unknown',loaded:1,reserve:2,capacity:8}),null);
 });
+
+test('V171 corrupted reload receipts cannot mint ammunition or mutate on rejection',()=>{
+ const s=make('tube',2,1),initial=specialFeedTotalV171(s);
+ assert.equal(beginSpecialReloadV171(s,'safe'),true);
+ const forged=structuredClone(s);
+ forged.pending.planned=6;
+ assert.equal(validateSpecialFeedV171(forged),false);
+ assert.equal(restoreSpecialFeedV171(forged,{ownerId:'player',expectedTotal:initial}),null);
+ const before=JSON.stringify(forged);
+ assert.equal(advanceSpecialReloadV171(forged,'safe',1),false);
+ assert.equal(JSON.stringify(forged),before,'rejected reload must be atomic');
+ assert.equal(advanceSpecialReloadV171(s,'safe',1),true);
+ assert.equal(s.loaded,3);
+ assert.equal(s.reserve,0);
+ assert.equal(specialFeedTotalV171(s),initial);
+});
+test('V171 restored special-feed geometry rejects fake chambers and retained cases',()=>{
+ const single=make('single',1,4),cylinder=make('cylinder',6,10),tube=make('tube',2,10);
+ single.capacity=8;
+ cylinder.spentCases=3;
+ tube.needsCycle=true; // cannot be cycling when no shell was fired
+ for(const invalid of [single,cylinder,tube]){
+   assert.equal(validateSpecialFeedV171(invalid),false);
+   assert.equal(restoreSpecialFeedV171(invalid),null);
+   assert.equal(captureSpecialFeedV171(invalid),null);
+ }
+ const interrupted=make('tube',2,6);
+ assert.equal(beginSpecialReloadV171(interrupted,'partial'),true);
+ assert.equal(advanceSpecialReloadV171(interrupted,'partial',.5),true);
+ const state=captureSpecialFeedV171(interrupted);
+ assert.ok(state&&state.pending&&state.pending.inserted>0);
+ assert.deepEqual(restoreSpecialFeedV171(state,{ownerId:'player',expectedTotal:8}),state);
+ assert.equal(cancelSpecialReloadV171(interrupted,'partial'),true);
+ assert.equal(specialFeedTotalV171(interrupted),8);
+});
