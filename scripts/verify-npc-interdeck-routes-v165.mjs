@@ -105,6 +105,29 @@ const runtime = (hour=7,save={},options={}) => {const h=new TestHub();h.start(sa
   h.npcJunClimbArtReadyV165=()=>options.artUnavailable!==true;return h;};
 const context = (h,hour,extra={})=>h.setNpcRoutineContextV62({clock:{day:1,hour},...extra},{persist:false,rebuild:true});
 const tick = (h,seconds,rate=60)=>{for(let i=0;i<seconds*rate;i++)h.update(1/rate);};
+test('V185 a passenger on another deck or in another room cannot indefinitely hold an annex service owner', () => {
+  const h=runtime(9,{deck:3,roomId:'reactor'});
+  const original=h.npcInterdeckStateV165;
+  // Isolate one already-admitted passenger circuit without inventing a new
+  // public route. The authority and physics remain exercised by the other
+  // native interdeck tests in this suite.
+  h.npcInterdeckStateV165={...original,routes:Object.fromEntries(
+    Object.entries(original.routes).map(([id,entry])=>[id,{...entry,actor:null}]))};
+  const inez=h.npcInterdeckStateV165.routes['inez-civil'];
+  inez.actor={deck:2,roomId:'quarantine',stage:'walking-lift'};
+  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),false,
+    'other-deck travel cannot own Idris\'s engine-room door');
+  inez.actor={deck:3,roomId:'dropship-hangar',stage:'walking-lift'};
+  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),false,
+    'same-deck hangar travel does not occupy the reactor');
+  inez.actor={deck:3,roomId:'reactor',stage:'walking-portal'};
+  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),true,
+    'actual shared reactor passage still retains priority');
+  inez.actor={deck:3,roomId:'reactor',stage:'returned'};
+  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),false,
+    'a returned passenger cannot reserve the passage');
+  assert.equal(h.npcInterdeckPassingRequestV165('unknown-route'),false);
+});
 const entry=(h,id)=>h.getSnapshot().npcInterdeckRoutesV165.routes[id];
 const liftActor = () => {const lift=npcLiftSocketV165(0,'hub-midship-lift');return{crewId:'crew-10-david-8r',roomId:lift.roomId,
   x:lift.x-22-96,y:532,w:44,h:92,facing:1,alive:true};};
