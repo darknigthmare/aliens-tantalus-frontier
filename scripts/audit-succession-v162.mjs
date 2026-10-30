@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
+import { resolveAuditSourcesV163, ARSENAL_V167_SUCCESSORS } from './audit-succession-v163.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V162 = Object.freeze({
   "docs/forge/xeno-trials/V161-REMAINING-WORKSTREAMS.md": "741f7d28c2373722d208dd80383ae7c4e22142b91177420be7723c41e1053050",
@@ -86,7 +86,16 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
       || /^[a-zA-Z0-9._-]+\.css$/.test(path) || ['index.html', 'sw.js'].includes(path),
     'Source path outside the reviewed runtime scope: ' + path);
     assert.ok(validHash(expected), 'Invalid source hash: ' + path);
-    assert.equal(sha(readSource(path)), effective[path], 'Current V162 source changed: ' + path);
+    const observedSha = sha(readSource(path));
+    const next = Object.hasOwn(ARSENAL_V167_SUCCESSORS, path) ? ARSENAL_V167_SUCCESSORS[path] : null;
+    if (next) {
+      // V162/V163 records remain frozen: verify both the historical anchor
+      // and the exact reviewed V167 replacement, not an unbounded whitelist.
+      assert.equal(effective[path], next.previousSha256, 'Incorrect historical source anchor: ' + path);
+      assert.equal(observedSha, next.currentSha256, 'Unexpected V167 successor: ' + path);
+    } else {
+      assert.equal(observedSha, effective[path], 'Current V162 source changed: ' + path);
+    }
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
