@@ -249,6 +249,7 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/arsenal/data',
   'docs/arsenal/data/tantalus_arsenal_master_v1.csv',
   'docs/arsenal/data/tantalus_arsenal_qa_v1.csv',
+  'docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv',
   'docs/forge/xeno-trials/V168-DIALOGUE-AND-TANTALUS-BATCH100.md',
   'docs/forge/xeno-trials/batch100-v168.json',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
