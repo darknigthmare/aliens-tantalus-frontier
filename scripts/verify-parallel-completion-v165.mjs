@@ -5,7 +5,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163 } from './audit-succession-v163.mjs';
+import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSourcesV163,
+  V165_VERIFIER_SUCCESSORS_V171 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -49,6 +50,9 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   assert.equal(sha(canonicalMap(followup.runtimeV164SourceSha256)), followup.historicalSource.runtimeMapSha256,
     'The delivered V164 source map is immutable, independent of current source bytes');
   const corrections = verifyGamedevCorrectionV163(record, readSource);
+  // The reviewed modern source hashes are a separate, exact successor chain.
+  // V165's recorded map remains historical and is never rewritten to today's bytes.
+  const effective = resolveAuditSourcesV163(previous, readSource, { effective: true });
   const before = followup.runtimeV164SourceSha256, after = record.runtimeSourceSha256;
   assert.equal(Object.keys(before).length, 105);
   for (const path of Object.keys(before)) assert.ok(Object.hasOwn(after, path), 'Omitted V164 source: ' + path);
@@ -61,7 +65,8 @@ export function verifyParallelCompletionV165(record, readSource = read) {
       'Forge is deferred outside the verified maintenance correction');
     assert.equal(row.previousSha256, before[row.path] ?? null);
     assert.equal(row.currentSha256, after[row.path]);
-    assert.equal(sha(readSource(row.path)), row.currentSha256, 'Stale V165 source: ' + row.path);
+    assert.equal(sha(readSource(row.path)), effective[row.path] ?? row.currentSha256,
+      'Unexpected undeclared source successor: ' + row.path);
     assert.ok(row.reason.startsWith('V165 :') && row.reason.trim().length >= 60);
     assert.ok(row.verifiers.length > 0 && new Set(row.verifiers).size === row.verifiers.length);
     row.verifiers.forEach(verifier => requiredVerifiers.add(verifier));
@@ -78,10 +83,17 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   }
   for (const verifier of requiredVerifiers) {
     assert.match(verifier, /^scripts\/verify-[a-zA-Z0-9._-]+\.mjs$/);
-    assert.equal(sha(readSource(verifier)), record.verifierSourceSha256V165[verifier], 'Unreviewed verifier bytes: ' + verifier);
+    const successor = V165_VERIFIER_SUCCESSORS_V171[verifier];
+    if (successor) assert.equal(record.verifierSourceSha256V165[verifier], successor.previousSha256,
+      'Untrusted V165 original verifier receipt: ' + verifier);
+    assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? record.verifierSourceSha256V165[verifier],
+      'Unreviewed verifier bytes: ' + verifier);
   }
-  for (const [verifier, expected] of Object.entries(record.verifierSourceSha256V165))
-    assert.equal(sha(readSource(verifier)), expected, verifier);
+  for (const [verifier, expected] of Object.entries(record.verifierSourceSha256V165)) {
+    const successor = V165_VERIFIER_SUCCESSORS_V171[verifier];
+    if (successor) assert.equal(successor.previousSha256, expected, 'Incorrect V165 verifier predecessor');
+    assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? expected, verifier);
+  }
   assert.deepEqual(followup.releaseEvidence, { nodeSuite: null, nativeCandidate: null, ci: null, review: null, merge: null });
   assert.deepEqual([followup.artClosed, followup.approved1to1, followup.humanParticipants], [0, 0, 0]);
   assert.equal(followup.forgeState, 'DEFERRED_BY_USER');
