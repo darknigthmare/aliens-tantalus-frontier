@@ -313,7 +313,7 @@ export function withWeaponActionsV130(Base) {
         }
         projectile.hitEnemyIds.add(hit.target.id);
         this.applyEnemyDamage(hit.target, projectile.damage, { owner: projectile.owner, kind: 'smart-disc', family: 'melee',
-          weaponId: projectile.weaponId, x: hit.x, y: hit.y });
+          id: projectile.id, weaponId: projectile.weaponId, x: hit.x, y: hit.y });
       }
       projectile.x += displacement.x; projectile.y += displacement.y;
     }
@@ -335,7 +335,7 @@ export function withWeaponActionsV130(Base) {
         const damage = enemy.alive && activePlane(enemy) && damageAt(enemy);
         if (!damage) continue;
         const applied = this.applyEnemyDamage(enemy, damage, { owner: projectile.owner, kind: 'explosive-splash', family: 'explosive',
-          status: 'blast', weaponId: profile.weaponId, x: origin.x, y: origin.y });
+          status: 'blast', id: projectile.id, weaponId: profile.weaponId, x: origin.x, y: origin.y });
         if (applied > 0) affected++;
       }
       for (const actor of new Set(activeActors(this))) {
