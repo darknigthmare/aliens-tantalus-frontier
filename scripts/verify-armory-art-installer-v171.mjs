@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { EXPECTED_V169_ART, auditArmoryPackV171, installArmoryPackV171 }
@@ -28,7 +28,9 @@ test('V171 rejects any missing, wrong or forged companion manifest before copyin
  } finally {rmSync(root,{recursive:true,force:true})}
 });
 test('V171 installer never silently marks rendered art or 1:1 rights approved',()=>{
- const script='source is independently inspected and gated';
- assert.match(script,/independently/);
+ const scene=readFileSync(new URL('../src/hub-armory-scene-v169.js',import.meta.url),'utf8');
+ assert.match(scene,/!isArmoryArtAdmittedV171/);
+ const port=readFileSync(new URL('../src/hub-port-meridien-v90.js',import.meta.url),'utf8');
+ assert.match(port,/if \(isArmoryArtAdmittedV171\('colony'\)/);
  assert.deepEqual(Object.values(ARMORY_ART_ADMISSIONS_V171),[false,false,false]);
 });
