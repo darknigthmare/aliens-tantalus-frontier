@@ -176,3 +176,27 @@ prochain commit, exiger des contrôles visuels gauche/droite, pivots et
 jointures, mouvement et armement, rendu natif, persistance des sauvegardes
 et état des droits. La présence de PNG indépendants ne vaut pas
 intégration moteur ni validation 1:1.
+
+
+### Importateur V175 à contrôle d’intégrité
+
+Le nouveau script **source-only** `scripts/install-costume-art-v175.mjs` est
+inclus dans la branche. Il n'effectue ni téléchargement ni activation
+automatique des vêtements. Après décompression de l'archive V175 :
+
+```bash
+node scripts/install-costume-art-v175.mjs /chemin/vers/ALIENS_TANTALUS_COSTUME_PARTS_V175 --verify
+node scripts/install-costume-art-v175.mjs /chemin/vers/ALIENS_TANTALUS_COSTUME_PARTS_V175 --stage
+```
+
+Le contrôle fige le manifeste exact, les 8 atlas des costumes, les 114
+sprites distincts et l'atlas source du sac d'Andy (123 PNG au total).
+Il vérifie les SHA-256, les dimensions et la sécurité des chemins.
+`--stage` installe seulement dans
+`assets/openai/sprites/player/costume-review-v175/`, sans réécrire
+les ressources anciennes. Le répertoire n'est **pas** enregistré dans le
+rig ni admis à la publication. Son admission exige un correctif distinct
+et une QA des pivots, animations, dimensions, collisions et variantes
+gauche/droite. Le contrôleur
+`scripts/verify-costume-art-installer-v175.mjs` est déclaré aux
+régressions de costumes, sans dépendance envers l'archive absente en CI.
