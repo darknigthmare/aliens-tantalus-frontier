@@ -131,6 +131,17 @@ export const ARSENAL_V170_NEW_SOURCES = Object.freeze({
   'src/hub-port-meridien-v90.js': 'bda67e445bbb428e4e8c204efcb832252e710bc4d80ede5aaf506d3a20d999b5'
 });
 
+/** V171: V165 test runner itself must evolve when runtime sources evolve.
+ * The predecessor is still checked against the frozen V165 receipt. This
+ * separate exact successor hash is never written into historical progress.
+ */
+export const V165_VERIFIER_SUCCESSORS_V171 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: 'c49d78b68bae4f17844320dd73a119f056b97566101e79b8186c60e7026718bb',
+    currentSha256: 'cf5c0d1c2a1c346a417930b5a405b461641199310e268647359e209492534939'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -341,6 +352,8 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   for (const [path, expected] of Object.entries(ARSENAL_V170_NEW_SOURCES))
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V170 added source: ' + path);
+  for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171))
+    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V171 verification successor: ' + path);
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
     assert.ok(Object.hasOwn(ARSENAL_V167_SUCCESSORS, path), 'Missing V167 predecessor: ' + path);
     assert.equal(receipt.previousSha256, ARSENAL_V167_SUCCESSORS[path].currentSha256,
