@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import {
   ARMORY_ART_CANVAS_V169, ARMORY_SPRITE_CROPS_V169,
   ARMORY_STOREFRONT_VARIANTS_V169, ARMORY_STOREFRONT_SOURCE_V169,
@@ -14,6 +15,18 @@ const fixture = () => {
     drawImage(...args) { calls.push(['draw', ...args]); } };
   return { ctx, calls };
 };
+
+test('V169 release source allowlist is exact, including the active armory verifier', () => {
+  const admitted='scripts/verify-hub-armory-v169.mjs';
+  assert.equal(isPublicDistributionPathV86(admitted),true);
+  for(const forbidden of [
+    'scripts/verify-hub-armory-v169-copy.mjs',
+    'scripts/verify-hub-armory-v169.mjs.bak',
+    'scripts/../scripts/verify-hub-armory-v169.mjs',
+    'scripts/private/verify-hub-armory-v169.mjs',
+    'scripts/verify-hub-armory-v170.mjs'
+  ]) assert.equal(isPublicDistributionPathV86(forbidden),false,forbidden);
+});
 
 test('V169 includes three independent concept variants and 32 distinct source crops', () => {
   assert.deepEqual(Object.keys(ARMORY_STOREFRONT_VARIANTS_V169), ['tantalus','colony','station']);
