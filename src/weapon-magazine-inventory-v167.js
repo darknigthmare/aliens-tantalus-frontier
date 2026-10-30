@@ -27,7 +27,8 @@ export function validateWeaponFeedV167(s) {
     || !id(s.ownerId) || !id(s.ammoTypeId) || !FEEDS.has(s.feed)
     || !int(s.magazineSize) || !s.magazineSize || s.magazineSize > 99999
     || !int(s.chamber) || s.chamber > 1 || !int(s.looseRounds) || s.looseRounds > 99999
-    || !int(s.nextSerial) || s.nextSerial > 10000000 || !Array.isArray(s.magazines)
+    || !int(s.nextSerial) || s.nextSerial > 10000000 || !int(s.nextTransactionSerial)
+    || s.nextTransactionSerial > 10000000 || !Array.isArray(s.magazines)
     || s.magazines.length > MAX_SPARES + 1 || !Array.isArray(s.receipts)
     || s.receipts.length > RECEIPT_LIMIT || !unique(s.receipts) || !s.receipts.every(id)) return false;
   if (!unique(s.magazines.map(m => m.id))) return false;
@@ -64,7 +65,7 @@ export function createLegacyWeaponFeedV167({ weaponId, ownerId, ammoTypeId = 'un
   const state = { schema: 167, weaponDefinitionId: weaponId,
     weaponInstanceId: ownerId + ':' + weaponId + ':legacy:1', ownerId, ammoTypeId, feed,
     magazineSize, chamber: 0, looseRounds: reserve, mountedMagazineId: null,
-    magazines: [], receipts: [], nextSerial: 0, reload: null };
+    magazines: [], receipts: [], nextSerial: 0, nextTransactionSerial: 0, reload: null };
   const make = (location, rounds) => {
     const m = { id: state.weaponInstanceId + ':mag:' + ++state.nextSerial,
       ammoTypeId, capacity: magazineSize, rounds, location, revision: 0 };
@@ -107,10 +108,12 @@ export function spendAcceptedRoundV167(state, receipt) {
   return true;
 }
 
-export function beginWeaponReloadV167(state, receipt, policy = 'tactical', selectedId = null) {
-  if (!validateWeaponFeedV167(state) || state.reload || !id(receipt)
+export function beginWeaponReloadV167(state, receipt = null, policy = 'tactical', selectedId = null) {
+  if (!validateWeaponFeedV167(state) || state.reload || receipt !== null && !id(receipt)
     || !['tactical', 'speed'].includes(policy) || state.receipts.includes('reload:' + receipt)
     || state.receipts.includes('cancel:' + receipt)) return false;
+  const txId = receipt || state.weaponInstanceId + ':reload:' + (state.nextTransactionSerial + 1);
+  if (!id(txId)) return false;
   let replacement = selectedId ? state.magazines.find(m => m.id === selectedId) : state.magazines.find(m => m.location === 'inventory' && m.rounds > 0);
   if (!replacement && !selectedId && state.looseRounds > 0 && state.magazines.length < MAX_SPARES + 1) {
     const count = Math.min(state.magazineSize, state.looseRounds);
@@ -119,7 +122,8 @@ export function beginWeaponReloadV167(state, receipt, policy = 'tactical', selec
     state.magazines.push(replacement); state.looseRounds -= count;
   }
   if (!replacement || replacement.location !== 'inventory' || replacement.rounds <= 0) return false;
-  state.reload = { id: receipt, selectedId: replacement.id, oldId: state.mountedMagazineId,
+  if (receipt === null) state.nextTransactionSerial++;
+  state.reload = { id: txId, selectedId: replacement.id, oldId: state.mountedMagazineId,
     policy, phase: 'started', progress: 0 };
   return true;
 }
