@@ -112,5 +112,12 @@ export function renderWeaponFidelityDossiersV170() {
   return '<section class="panel" id="armory-fidelity-v170" aria-label="Dossiers des armes non authentifiées">'
     + '<details><summary>ARCHIVES ARMEMENT · ' + WEAPON_FIDELITY_DOSSIERS_V170.length
     + ' références à authentifier</summary><p>Dossiers d’identification uniquement : aucune acquisition disponible.</p>'
-    + '<div class="catalog-grid">' + html + '</div></details></section>';
+    + '<div class="catalog-grid">' + html + '</div></details>'
+    + '<details><summary>ACCESSOIRES DOCUMENTÉS · ' + WEAPON_FIDELITY_ATTACHMENT_REFERENCES_V170.length
+    + ' modules à authentifier</summary><p>Les noms proviennent des notes officielles.'
+    + ' Aucune compatibilité, modification de statistiques ou silhouette n’est supposée.</p>'
+    + '<ul>' + WEAPON_FIDELITY_ATTACHMENT_REFERENCES_V170.map(a =>
+      '<li>' + esc(a.name) + ' · <a href="' + esc(a.sourceUrl)
+      + '" target="_blank" rel="noopener noreferrer">Source</a></li>').join('')
+    + '</ul></details></section>';
 }
