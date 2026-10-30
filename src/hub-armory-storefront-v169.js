@@ -108,22 +108,22 @@ export const ARMORY_STOREFRONT_VARIANTS_V169 = freeze({
     ]
   },
   station: {
-    roomId: 'frontier-civil-counter', worldWidth: 1920, floorY: 624,
+    roomId: 'logistics', worldWidth: 1920, floorY: 624,
     vendorIdentity: 'nexus-armorer-concept',
     vendorStatus: 'concept-only-needs-native-NPC-rig',
     sourceStatus: 'project-visual-adaptation-not-1to1',
-    // This is a visual/shop proposal within the existing civil service bay;
-    // no interaction is admitted until the native annex geometry is reviewed.
-    shopContact: null,
+    // This storefront uses the existing logistics annex: the service terminal
+    // at x1286 and the parent doorway remain independent and unchanged.
+    shopContact: rect(480, 522, 96, 102),
     layout: [
-      ['rear-wall', 716, 354, 508, 113],
-      ['main-sign', 722, 308, 512, 71],
-      ['weapon-rack-a', 755, 437, 132, 102],
-      ['ammo-wall', 913, 435, 133, 102],
-      ['locker-cluster', 1094, 424, 127, 136],
-      ['glass-counter', 920, 521, 213, 95],
-      ['checkout-terminal', 1030, 470, 62, 72],
-      ['vendor-standing', 975, 435, 59, 119]
+      ['rear-wall', 270, 354, 508, 113],
+      ['main-sign', 273, 308, 512, 71],
+      ['weapon-rack-a', 306, 437, 132, 102],
+      ['ammo-wall', 463, 435, 133, 102],
+      ['locker-cluster', 647, 424, 127, 136],
+      ['glass-counter', 469, 521, 213, 95],
+      ['checkout-terminal', 581, 470, 62, 72],
+      ['vendor-standing', 527, 435, 59, 119]
     ]
   }
 });
