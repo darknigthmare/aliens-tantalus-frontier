@@ -305,6 +305,22 @@ export const V165_VERIFIER_SUCCESSORS_V178 = Object.freeze({
   })
 });
 
+/** V179: physical armory rear-wall service moved clear of the already
+ * admitted V169 storefront facade. The V165 source receipt remains intact.
+ * This is a positioning correction, not a new item, collision or canon claim.
+ */
+export const HUB_V179_SERVICE_SUCCESSOR = Object.freeze({
+  path: 'src/hub-room-service-details-v165.js',
+  previousSha256: 'b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2',
+  currentSha256: 'a7f876e28a1f369889e00def7167bfe64cd68f5e9ae7b89f32f6776c47579d0f',
+  roomId: 'armory',
+  sourceCenterX: 880,
+  correctedCenterX: 220,
+  width: 96,
+  height: 42,
+  sourceWorkStatus: 'original-project-utility-not-licensed-film-1to1'
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -557,6 +573,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   for (const [path, expected] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V174 economy source: ' + path);
+  assert.equal(sha(readSource(HUB_V179_SERVICE_SUCCESSOR.path)),
+    HUB_V179_SERVICE_SUCCESSOR.currentSha256,
+    'Unreviewed V179 armory service location: ' + HUB_V179_SERVICE_SUCCESSOR.path);
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const latest = V165_VERIFIER_SUCCESSORS_V174[path];
