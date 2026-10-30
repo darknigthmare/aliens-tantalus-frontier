@@ -307,6 +307,22 @@ export const ARMORY_V178_RENDER_SUCCESSORS = Object.freeze({
   })
 });
 
+/** V178/V179: cumulative verifier successors for the V178 authored armory
+ * fix. Historical V165/V176/V177 checksums are preserved, not overwritten.
+ */
+export const V165_VERIFIER_SUCCESSORS_V178 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V176['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '77a7f1c5b74b5ba3a317289c9d718074439b4e5ce296184b3e1298d81a84858c'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V179 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V177['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: '13b4bf177d61e4ae0ef7c89f05f5c84854a5779e97bbf017850961dd07a0da5f'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -574,6 +590,8 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const latest = V165_VERIFIER_SUCCESSORS_V174[path];
     const approvedV176 = V165_VERIFIER_SUCCESSORS_V176[path];
     const approvedV177 = V165_VERIFIER_SUCCESSORS_V177[path];
+    const approvedV178 = V165_VERIFIER_SUCCESSORS_V178[path];
+    const approvedV179 = V165_VERIFIER_SUCCESSORS_V179[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
     if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
@@ -584,14 +602,20 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (approvedV177) assert.equal(approvedV177.previousSha256,
       (approvedV176 || latest || revision || receipt).currentSha256,
       'Broken V176-to-V177 verifier chain: ' + path);
-    assert.equal(sha(readSource(path)),
-      approvedV177?.currentSha256 || approvedV176?.currentSha256
-        || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV177 ? 'Unreviewed V177 verifier successor: ' + path
-        : approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
-        : latest ? 'Unreviewed V174 verifier successor: ' + path
-          : revision ? 'Unreviewed V173 verifier successor: ' + path
-            : 'Unreviewed V171 verification successor: ' + path);
+    if (approvedV178) assert.equal(approvedV178.previousSha256,
+      (approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V176-to-V178 verifier chain: ' + path);
+    if (approvedV179) assert.equal(approvedV179.previousSha256,
+      (approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V177-to-V179 verifier chain: ' + path);
+    const latestAllowed = approvedV179 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt;
+    assert.equal(sha(readSource(path)), latestAllowed.currentSha256,
+      (approvedV179 ? 'Unreviewed V179'
+        : approvedV178 ? 'Unreviewed V178'
+          : approvedV177 ? 'Unreviewed V177'
+            : approvedV176 ? 'Unreviewed V176'
+              : latest ? 'Unreviewed V174' : revision ? 'Unreviewed V173' : 'Unreviewed V171')
+      + ' verifier successor: ' + path);
   }
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
     assert.ok(Object.hasOwn(ARSENAL_V167_SUCCESSORS, path), 'Missing V167 predecessor: ' + path);
