@@ -11,14 +11,15 @@ import {
 const local = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const live = new Set(WEAPONS.map(x => x.id));
 
-test('V170 retains 12 AFE2 screenshot-name dossiers and 6 official-name dossiers', () => {
+test('V170 distinguishes 12 AFE2 screenshot names and 7 official-name dossiers', () => {
   assert.deepEqual(validateWeaponFidelityV170(), {
-    valid:true, errors:[], dossiers:18, secondary:12, firstParty:6,
+    valid:true, errors:[], dossiers:19, secondary:12, firstParty:7,
     attachments:13, approved1to1:0, purchasable:0
   });
   assert.equal(getWeaponFidelityDossiersV170({work:'Aliens: Fireteam Elite 2'}).length,12);
   assert.equal(getWeaponFidelityDossiersV170({work:'Alien: Isolation'}).length,5);
   assert.equal(getWeaponFidelityDossiersV170({work:'Aliens: Fireteam Elite'}).length,1);
+  assert.equal(getWeaponFidelityDossiersV170({work:'Aliens: Fireteam Elite 2 — Patch 2026'}).length,1);
 });
 
 test('V170 unadmitted models link exactly to their original workbook proposal', () => {
@@ -102,8 +103,8 @@ test('V170 129 proposed models each remain a research row, not a published catal
   const tracked=[...backlog.matchAll(/(?:^|\n)(proposed-[a-z0-9-]+),/g)].map(x=>x[1]);
   assert.equal(original.length,129);
   assert.deepEqual(tracked,original);
-  assert.equal((backlog.match(/,P0,/g)||[]).length,13);
-  assert.equal((backlog.match(/,P1,/g)||[]).length,28);
+  assert.equal((backlog.match(/,P0,/g)||[]).length,14);
+  assert.equal((backlog.match(/,P1,/g)||[]).length,27);
   assert.equal((backlog.match(/,P2,/g)||[]).length,88);
   assert.equal((backlog.match(/,NOT_ADMITTED,/g)||[]).length,129);
 });
