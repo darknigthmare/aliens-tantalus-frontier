@@ -3,6 +3,7 @@ import {
   drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171,
   isArmoryStorefrontImageReadyV172
 } from './hub-armory-storefront-v169.js';
+import { drawHubRoomServiceDetailsV165 } from './hub-room-service-details-v165.js';
 
 /** Opt-in visual composition atop original hub physics/rooms. The Tantalus
  * armory keeps the existing S. Doyle native identity and procurement contract.
@@ -43,8 +44,20 @@ export function withHubArmoryStorefrontV169(Base) {
       const result = super.drawRoomModule(ctx, room, farImage);
       // Keep the existing original industrial architecture, real S. Doyle,
       // armory interactions, floor and doors; only enrich its interior wall.
-      if (room?.id === 'armory') {
+      if (room?.id === 'armory' && !this.editorPlaytest) {
         this.armoryStorefrontPaintV169 = this.drawArmoryStorefrontVariantV169(ctx, room.id, room.xStart);
+        // The V169 wall/canopy is cosmetic. Restore the *original* V165
+        // circuit isolator above it: its native authored mount owns this
+        // rear-wall footprint. Otherwise the storefront hides the ARM 01
+        // code plate and the real native raster QA correctly fails.
+        // Repaint only on an actually drawn overlay. The exact V165 plan
+        // (including reservations, coordinates and colours) is reused;
+        // no new fixture, collider, door, or test-only pixel is created.
+        const panel = this.hubRoomLifeRenderedV136?.get(room.id)?.serviceDetailsV165;
+        if (this.armoryStorefrontPaintV169.drawn > 0 && panel?.items?.length) {
+          this.armoryServiceRepaintV177 = drawHubRoomServiceDetailsV165(ctx, panel,
+            { time: this.animationTime, reducedMotion: this.reducedMotion });
+        }
       }
       return result;
     }
