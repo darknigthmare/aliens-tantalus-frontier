@@ -5,7 +5,7 @@ import { CARGO_BRUTAL_SURVIVORS_SHEET_V67 } from './cargo-brutal-visuals-v67.js'
 import { PORT_WORLD_V90, PORT_POSTS_V90, normalizePortMeridienV90, portPhysicalContactV90, portTaskSecondsV90, getPortMeridienObjectiveV90 } from './port-meridien-v90.js';
 import { hubPlayerAppearanceSnapshotV126 } from './player-appearance-hub-v126.js';
 import { ARMORY_STOREFRONT_SOURCE_V169, getArmoryStorefrontPlanV169,
-  drawArmoryStorefrontV169, getArmoryStoreContactV169 } from './hub-armory-storefront-v169.js';
+  drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171 } from './hub-armory-storefront-v169.js';
 
 export const PORT_ASSETS_V90 = Object.freeze({
   far: '/assets/openai/metroidvania/colony-multiroute-far.png',
@@ -44,7 +44,7 @@ export function withPortMeridienV90(Base) {
         && options.onboardingV84?.phase === 'complete' && this.portStateV90 && this.portStateV90.phase !== 'pending');
       if (!this.portActiveV90) return;
       this.portImagesV90 ||= new Map();
-      if (!this.portArmoryImageV169 && typeof Image === 'function') {
+      if (isArmoryArtAdmittedV171('colony') && !this.portArmoryImageV169 && typeof Image === 'function') {
         this.portArmoryImageV169 = new Image();
         this.portArmoryImageV169.decoding = 'async';
         this.portArmoryImageV169.src = ARMORY_STOREFRONT_SOURCE_V169.colony;
@@ -65,7 +65,8 @@ export function withPortMeridienV90(Base) {
     currentRoom() { return this.isPortMeridienV90() ? { id: 'port-meridien-quay', name: 'Le quai des vivants' } : super.currentRoom(); }
     portContactV90() { return this.isPortMeridienV90() && portPhysicalContactV90(this.portStateV90, this.player); }
     portArmoryShopContactV169() {
-      if (!this.isPortMeridienV90() || !this.running || this.paused || this.portCommitBlockedV90
+      if (!isArmoryArtAdmittedV171('colony') || !this.isPortMeridienV90()
+        || !this.running || this.paused || this.portCommitBlockedV90
         || this.portTaskV90 || this.portContactV90() || this.portStateV90?.phase !== 'complete'
         || !this.player?.grounded || this.player.inVehicle) return null;
       return getArmoryStoreContactV169({
