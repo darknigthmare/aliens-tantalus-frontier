@@ -13,7 +13,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
-  V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174, ARMORY_V174_ECONOMY_SUCCESSORS,
+  V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174,
+  V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
   ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
@@ -168,9 +169,23 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const next = V165_VERIFIER_SUCCESSORS_V174[path];
+    const latest = V165_VERIFIER_SUCCESSORS_V176[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
     if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
-    assert.equal(sha(read(path)), next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+    if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
+    assert.equal(sha(read(path)),
+      latest?.currentSha256 || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+  }
+});
+
+test('V176 distributor and audit verifier successors retain V174 receipts intact', () => {
+  assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V176).sort(),
+    ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
+  for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
+    assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
+    assert.equal(sha(read(path)),revision.currentSha256,path);
+    const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V176 verifier/,path);
   }
 });
 
