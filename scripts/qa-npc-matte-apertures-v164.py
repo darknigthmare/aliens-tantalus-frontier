@@ -260,6 +260,8 @@ try:
                 # keeping the original 1024px atlas hidden. The legacy V164
                 # implementation exposed the same atlas with a CSS cell clip.
                 expected_crop = page.evaluate("""async crew=>{
+                  if(!document.querySelector('#hub-dialogue-image')?.parentElement
+                    ?.querySelector('canvas[data-dialogue-avatar-v168]'))return null;
                   const m=await import('/src/npc-dialogue-portraits-v168.js');
                   return m.getNpcDialoguePortraitV168(crew)?.crop||null;
                 }""", config['crew'])
