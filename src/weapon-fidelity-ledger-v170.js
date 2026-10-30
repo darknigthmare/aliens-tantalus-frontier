@@ -1,3 +1,4 @@
+import { renderWeaponResearchIndexV171 } from './weapon-research-index-v171.js';
 /** Evidence-first backlog for weapons absent or not authenticated in Tantalus.
  * This is a documentary layer, never a purchasable content registry.
  * A similarly named native weapon cannot silently certify a sequel revision.
@@ -125,5 +126,5 @@ export function renderWeaponFidelityDossiersV170() {
     + '<ul>' + WEAPON_FIDELITY_ATTACHMENT_REFERENCES_V170.map(a =>
       '<li>' + esc(a.name) + ' · <a href="' + esc(a.sourceUrl)
       + '" target="_blank" rel="noopener noreferrer">Source</a></li>').join('')
-    + '</ul></details></section>';
+    + '</ul></details></section>' + renderWeaponResearchIndexV171();
 }
