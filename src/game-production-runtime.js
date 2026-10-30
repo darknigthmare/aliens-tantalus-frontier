@@ -11,6 +11,11 @@ import { withAlienSurvivalRuntimeV70 } from './alien-survival-runtime-v70.js';
 import { captureGameplaySupportV72, restoreGameplaySupportV72 } from './gameplay-support-v72.js';
 import { captureTacticalReloadV77, restoreTacticalReloadV77, cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
+import { getWeaponPresentationProfileV124 } from './weapon-presentation-profiles-v124.js';
+import { createLegacyWeaponFeedV167, captureWeaponFeedV167, restoreWeaponFeedV167,
+  spendAcceptedRoundV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
+import { createWeaponMasteryV167, awardAcceptedWeaponDamageV167,
+  captureWeaponMasteryV167, restoreWeaponMasteryV167 } from './weapon-mastery-v167.js';
 import { withPlaceablesRuntimeV86 } from './placeables-runtime-v86.js';
 import { withUserCasteCampaignV88 } from './enemy-user-campaign-runtime-v88.js';
 import { withBlackCocoonRuntimeV121 } from './black-cocoon-runtime-v121.js';
@@ -81,16 +86,40 @@ export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentati
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
+    this.weaponMasteryV167 ||= createWeaponMasteryV167();
+    this.experimentalPhysicalMagazinesV167 = options.experimentalPhysicalMagazinesV167 === true;
     const snapshot = super.start(options);
+    // An opt-in pilot only; legacy gameplay and older saves keep numeric ammo.
+    if (this.experimentalPhysicalMagazinesV167) this.initializeWeaponFeedsV167();
     this.canvas.focus?.({ preventScroll: true });
     return snapshot;
+  }
+
+  initializeWeaponFeedsV167() {
+    for (const role of ['player', 'coop']) {
+      const actor = this[role];
+      if (!actor || role === 'coop' && !this.coopEnabled || actor.weaponFeedV167) continue;
+      const descriptor = this.reloadWeaponV77?.(actor);
+      const weaponId = descriptor && typeof descriptor === 'object' ? descriptor.id : null;
+      const presentation = getWeaponPresentationProfileV124(descriptor);
+      const feed = presentation?.reload?.feed;
+      if (!/^weapon-\d{3}-[a-z0-9-]+$/.test(weaponId || '')
+        || !['box', 'drum', 'belt', 'cell', 'tank'].includes(feed)) continue;
+      actor.weaponFeedV167 = createLegacyWeaponFeedV167({ weaponId,
+        ownerId: role, ammoTypeId: presentation.ammunition || 'unspecified',
+        magazineSize: actor.magazineSize, ammo: actor.ammo, reserve: actor.ammoReserve, feed });
+    }
   }
 
   captureResumeState() {
     const state = super.captureResumeState();
     if (state.mission && this.mission?.rewards) state.mission.rewards = structuredClone(this.mission.rewards);
-    for (const role of ['player', 'coop']) if (state[role]) state[role].tacticalReloadV77 = captureTacticalReloadV77(this[role]);
-    return { ...state, gameplaySupportV72: captureGameplaySupportV72(this) };
+    for (const role of ['player', 'coop']) if (state[role]) {
+      state[role].tacticalReloadV77 = captureTacticalReloadV77(this[role]);
+      state[role].weaponFeedV167 = captureWeaponFeedV167(this[role]?.weaponFeedV167);
+    }
+    return { ...state, weaponMasteryV167: captureWeaponMasteryV167(this.weaponMasteryV167),
+      gameplaySupportV72: captureGameplaySupportV72(this) };
   }
 
   applyResumeState(rawState) {
@@ -102,13 +131,21 @@ export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentati
     const result = super.applyResumeState(rawState);
     if (!result?.applied) return result;
     const supportRestoredV72 = restoreGameplaySupportV72(this, rawState?.gameplaySupportV72);
+    this.weaponMasteryV167 = restoreWeaponMasteryV167(rawState?.weaponMasteryV167);
     const tacticalReloadRestoredV77 = {};
+    const weaponFeedRestoredV167 = {};
     for (const role of ['player', 'coop']) {
-      tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(this[role], rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(this[role]));
+      const actor = this[role];
+      const carried = Number(actor?.ammo) + Number(actor?.ammoReserve);
+      actor.weaponFeedV167 = restoreWeaponFeedV167(rawState?.[role]?.weaponFeedV167, {
+        ownerId: role, expectedCarriedRounds: Number.isSafeInteger(carried) && carried >= 0 ? carried : null });
+      weaponFeedRestoredV167[role] = Boolean(actor.weaponFeedV167);
+      tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(actor, rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(actor));
       if (this[role]?.reloading) this[role].actionClock = this[role].reloadClock;
     }
     const placeablesRestoredV86 = this.restorePlaceablesAfterSupportV86(rawState);
-    return { ...result, supportRestoredV72, tacticalReloadRestoredV77, placeablesRestoredV86 };
+    return { ...result, supportRestoredV72, tacticalReloadRestoredV77,
+      weaponFeedRestoredV167, placeablesRestoredV86 };
   }
 
   canPerformGameplayAction(actor = this.player, { allowVent = false, allowSquadTask = false } = {}) {
@@ -125,8 +162,24 @@ export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentati
   }
 
   fire(actor = this.player) {
-    return this.canPerformGameplayAction(actor) && !actor.climbing && !(actor.toolUseClock > 0)
-      && !(actor.interactionClock > 0) && !this.playerWeaponFireBlockedV160?.(actor) ? super.fire(actor) : false;
+    if (!this.canPerformGameplayAction(actor) || actor.climbing || actor.toolUseClock > 0
+      || actor.interactionClock > 0 || this.playerWeaponFireBlockedV160?.(actor)) return false;
+    const beforeShots = Number(actor?.shots) || 0;
+    const fired = super.fire(actor);
+    const feed = actor?.weaponFeedV167;
+    if (feed && Number(actor.shots) > beforeShots) {
+      // V131 burst shots may already have committed their own feed receipts.
+      for (let serial = beforeShots + 1; serial <= Number(actor.shots); serial++) {
+        const receipt = String(serial);
+        if (!feed.receipts.includes('shot:' + receipt) && !spendAcceptedRoundV167(feed, receipt)) {
+          actor.weaponFeedV167 = null;
+          break;
+        }
+      }
+      if (actor.weaponFeedV167 && (weaponFeedLoadedRoundsV167(feed) !== actor.ammo
+        || weaponFeedReserveRoundsV167(feed) !== actor.ammoReserve)) actor.weaponFeedV167 = null;
+    }
+    return fired;
   }
 
   melee(actor = this.player) {
@@ -143,6 +196,22 @@ export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentati
     const accepted = this.performContextualMelee(actor);
     if (accepted) this.refreshStealth?.(actor);
     return accepted;
+  }
+
+  applyEnemyDamage(enemy, amount, source = {}) {
+    const applied = super.applyEnemyDamage(enemy, amount, source);
+    const actor = source?.owner;
+    const ownerId = actor === this.player ? 'player' : actor === this.coop && this.coopEnabled ? 'coop'
+      : actor?.squadMember && actor.crewId ? 'squad:' + actor.crewId : null;
+    if (Number.isFinite(applied) && applied > 0 && ownerId && typeof source?.id === 'string'
+      && typeof source?.weaponId === 'string' && typeof enemy?.id === 'string') {
+      const earned = awardAcceptedWeaponDamageV167(this.weaponMasteryV167,
+        { ownerId, weaponId: source.weaponId, receiptId: source.id,
+          targetId: enemy.id, appliedDamage: applied });
+      if (earned?.levelUp) this.onEvent?.({ type: 'weapon-mastery-level-v167',
+        ownerId, weaponId: earned.weaponId, level: earned.level });
+    }
+    return applied;
   }
 
   enemyMeleePathClearV64(attacker, target) {
