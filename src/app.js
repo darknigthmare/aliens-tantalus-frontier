@@ -71,6 +71,7 @@ import { bindHubControlV133 } from './hub-control-bindings-v133.js';
 import { withHubAuthoredCompositionV133 } from './hub-authored-composition-v133.js';
 import { withHubRoomParallaxV134 } from './hub-room-parallax-v134.js';
 import { withHubRoomDressingV134 } from './hub-room-dressing-v134.js';
+import { withHubArmoryStorefrontV169 } from './hub-armory-scene-v169.js';
 import { withHubNpcLifeV136 } from './npc-life-v136.js';
 import { withHubNpcCirculationV158 } from './npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from './npc-annex-circulation-v159.js';
@@ -282,7 +283,7 @@ const NativeHubGame = [
   withHubCirculationV137, withHubRoomIdentityV137,
   withHubDestinationSignsV138, withHubNpcInterdeckRoutesV165, withHubNpcInterdeckPassageV165, withHubNpcStationRelaysV166, withHubLiftTransitV163
 ].reduce((Game, decorate) => decorate(Game), HubGameV88);
-const HubGame = withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame)));
+const HubGame = withHubArmoryStorefrontV169(withHubMotionTrackerV160(withForgeDecorationV141(withForgeShipRuntimeV141(NativeHubGame))));
 const hubEngine = new HubGame(byId('hub-canvas'), {
   audio,
   onAction: handleHubAction,
@@ -3287,6 +3288,17 @@ function handleHubAction(interaction) {
   }
   if (interaction.action.startsWith('opening:')) return handleOpeningActionV88(interaction);
   if (interaction.action.startsWith('opening-exercise:')) return handleOpeningExerciseV89(interaction);
+  if (interaction.action === 'armory:open-shop-v169') {
+    // Re-read the actual physical contact; an arbitrary scripted event cannot
+    // buy goods or open a remote seller without a traversed native location.
+    const contact = hubEngine.armoryShopContactV169?.()
+      || hubEngine.portArmoryShopContactV169?.();
+    if (standaloneContext || saveSystem.recoveryNeeded || activeView !== 'hub'
+      || !ownsTimelineV84(hubOwnerV84) || !contact
+      || interaction.variant !== contact.variant || interaction.roomId !== contact.roomId
+      || interaction.contactId !== contact.contactId || interaction.source !== contact.source) return false;
+    return openHubStation('armory');
+  }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
   if (interaction.action.startsWith('refuge:')) return refugeControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet', 'ship-animal:observe'].includes(interaction.action))
