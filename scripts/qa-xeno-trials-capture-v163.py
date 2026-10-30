@@ -184,7 +184,7 @@ PREPARATION_CAPTURE_V177 = r'''c => {
       &&a?.stats?.specials>c.specialsBefore
       &&a?.attack?.kind==='special'&&a.attack.age<c.startup){
       const attack=m.events?.findLast(e=>e.type==='attack'&&e.side==='player'
-        &&e.kind==='special'&&e.id===a.attack.id+1&&e.tick===m.tick);
+        &&e.kind==='special'&&e.id===a.attack.id+1&&e.tick<=m.tick);
       const cue=m.rigViewsV154?.find(v=>v.side==='player'
         &&(c.after?v.preparationV163:v.clip==='windup'));
       const canvas=document.querySelector('[data-xt="canvas"]');
