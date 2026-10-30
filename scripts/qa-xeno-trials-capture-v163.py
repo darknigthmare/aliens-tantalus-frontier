@@ -184,7 +184,7 @@ PREPARATION_CAPTURE_V177 = r'''c => {
       &&a?.stats?.specials>c.specialsBefore
       &&a?.attack?.kind==='special'&&a.attack.age<c.startup){
       const attack=m.events?.findLast(e=>e.type==='attack'&&e.side==='player'
-        &&e.kind==='special'&&e.id===a.attack.id);
+        &&e.kind==='special'&&e.id===a.attack.id+1&&e.tick===m.tick);
       const cue=m.rigViewsV154?.find(v=>v.side==='player'
         &&(c.after?v.preparationV163:v.clip==='windup'));
       const canvas=document.querySelector('[data-xt="canvas"]');
@@ -351,7 +351,8 @@ def acquire_player_capture(page, after, trace):
                         # canvas and the accepted key-driven event are identical.
                         inline = page.evaluate(PREPARATION_EXPORT_V177)
                         proof = inline.get('preparationProof') if inline else None
-                        if (proof and event and proof['attackEventId'] == event['id']
+                        if (proof and event and proof['attackId'] + 1 == event['id']
+                                and proof['attackEventId'] == event['id']
                                 and inline['state']['match']['config']['matchId'] == m['config']['matchId']
                                 and inline['state']['match']['round'] == m['round']
                                 and proof['attackAge'] < value['specialStartup']):
