@@ -3674,6 +3674,20 @@ function setupRuntimeControls() {
   });
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
+  // Experimental physical feed only: Shift+R performs an honest speed reload.
+  // Capture before the ordinary canvas R handler so one edge cannot start two reloads.
+  globalThis.addEventListener('keydown', event => {
+    if (event.code !== 'KeyR' || !event.shiftKey || event.repeat || event.defaultPrevented
+      || event.ctrlKey || event.metaKey || event.altKey || event.isComposing
+      || activeView !== 'play' || !engine.running || engine.paused || standaloneContext
+      || event.target?.closest?.('input,select,textarea,[contenteditable],button,a[href],[role="dialog"]')
+      || engine.canRouteGameplayKey?.(event) === false) return;
+    if (engine.speedReloadWeaponV168?.(engine.player)) {
+      event.preventDefault();
+      event.stopImmediatePropagation?.();
+      audio.unlock?.();
+    }
+  }, true);
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
   byId('mission-melee-v124').onclick = () => engine.melee(engine.player);
   byId('mission-neuro-counter').onclick = () => engine.activateNeuroCountermeasure(engine.player);
