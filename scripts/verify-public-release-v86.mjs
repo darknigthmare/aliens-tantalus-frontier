@@ -240,6 +240,7 @@ const FORGE_TOOLING_V140 = new Set([
   'AGENTS.md',
   'docs/development',
   'docs/development/GAMEDEV_GUIDANCE.md',
+  'docs/development/SPRITE_PACK_V170.md',
   // Narrow, source-only admission for the arsenal specification; not shipped.
   'docs/arsenal',
   'docs/arsenal/README.md',
