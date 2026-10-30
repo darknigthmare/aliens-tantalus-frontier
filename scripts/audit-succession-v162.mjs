@@ -74,7 +74,7 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
   assert.equal(current.deferredForge?.state, 'DEFERRED_BY_USER');
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V162);
   // Historical pins stay fixed; only a fully verified successor can supply newer bytes.
-  const effective = resolveAuditSourcesV163(current, readSource);
+  const effective = resolveAuditSourcesV163(current, readSource, { effective: true });
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V162))
     assert.equal(sha(readSource(path)), effective[path] ?? expected, 'Deferred Forge module changed: ' + path);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
@@ -91,7 +91,8 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
     if (next) {
       // V162/V163 records remain frozen: verify both the historical anchor
       // and the exact reviewed V167 replacement, not an unbounded whitelist.
-      assert.equal(effective[path], next.previousSha256, 'Incorrect historical source anchor: ' + path);
+      assert.equal(expected, next.previousSha256, 'Incorrect historical source anchor: ' + path);
+      assert.equal(effective[path], next.currentSha256, 'Incorrect effective successor hash: ' + path);
       assert.equal(observedSha, next.currentSha256, 'Unexpected V167 successor: ' + path);
     } else {
       assert.equal(observedSha, effective[path], 'Current V162 source changed: ' + path);
@@ -130,7 +131,7 @@ export function resolveAuditSourcesV162(previous, readSource = readRepository, {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV162(previous, current, readSource);
-  return effective ? resolveAuditSourcesV163(current, readSource) : current.runtimeSourceSha256;
+  return effective ? resolveAuditSourcesV163(current, readSource, { effective: true }) : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV162(readSource = readRepository) {
