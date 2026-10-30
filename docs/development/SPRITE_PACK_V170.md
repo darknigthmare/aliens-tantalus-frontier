@@ -149,3 +149,30 @@ Le contact des pièces avec le sol et leur cohérence architecturale ne
 peuvent pas être certifiés à partir d'un atlas isolé. Cette étape reste
 ouverte pour la fidélité 1:1 et pour la validation des vendeurs des
 colonies/stations, distincts de Sanaa Doyle sur le Tantalus.
+
+
+## Lot de vérification V175 — extraction séparée (30 octobre 2026)
+
+Le lot V175 a été produit **hors dépôt**, à partir des atlas sources des
+quatre adaptations ci-dessus, sans modifier les 8 atlas originaux.
+
+- Archive conversation : `ALIENS_TANTALUS_COSTUME_PARTS_V175.zip`
+- Taille : 21 950 767 octets
+- SHA-256 : `c965987eadc9c6eb4a7a3fd49065797253fe03b21f8b734aa95179bdaff5195d`
+- Contenu : 4 tenues, 8 atlas source de vêtements, 112 membres/segments
+  indépendants, 2 orientations du sac d'Andy et son atlas de provenance,
+  un manifeste `manifest.json`, le relevé `CHECKS.json`, une galerie HTML
+  et une planche de comparaison des atlas.
+- Contrôle automatique : huit atlas 1 254 × 1 254 en RGBA, chacun avec
+  exactement 14 composantes d'alpha majeures; noms de pièces, coupes et
+  empreintes SHA-256 dans le manifeste. Les éléments sont extraits par
+  masque de composantes plutôt que par cellules rectangulaires uniformes,
+  empêchant la contamination par le sprite voisin.
+
+**Périmètre non attesté :** ces sprites ne sont ni inscrits aux registres de
+sprites du runtime ni importés dans la branche GitHub, et ils ne sont pas
+homologués à l'identique des costumes canoniques. Avant inclusion dans un
+prochain commit, exiger des contrôles visuels gauche/droite, pivots et
+jointures, mouvement et armement, rendu natif, persistance des sauvegardes
+et état des droits. La présence de PNG indépendants ne vaut pas
+intégration moteur ni validation 1:1.
