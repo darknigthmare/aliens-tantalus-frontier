@@ -213,6 +213,7 @@ SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
 // Exact V174 dual-feed source-only QA, not a public asset.
 SCRIPT_FILES.add('verify-weapon-underbarrel-v174.mjs');
 SCRIPT_FILES.add('verify-armory-art-installer-v171.mjs');
+SCRIPT_FILES.add('verify-armory-resupply-v174.mjs');
 SCRIPT_FILES.add('install-armory-art-v171.mjs');
 // Exact specialist-feed QA script: source-only audit without wildcard admission.
 SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
