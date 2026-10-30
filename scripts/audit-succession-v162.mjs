@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { resolveAuditSourcesV163, ARSENAL_V167_SUCCESSORS } from './audit-succession-v163.mjs';
+import { resolveAuditSourcesV163, ARSENAL_V167_SUCCESSORS, ARMORY_V169_SUCCESSORS } from './audit-succession-v163.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V162 = Object.freeze({
   "docs/forge/xeno-trials/V161-REMAINING-WORKSTREAMS.md": "741f7d28c2373722d208dd80383ae7c4e22142b91177420be7723c41e1053050",
@@ -94,8 +94,9 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
       // The V162 and V163 archives can have different historical hashes.
       // V163 independently attests previousSha256; the V162 bridge and
       // its immutable transition list authenticate this older expected hash.
-      assert.equal(effective[path], next.currentSha256, 'Incorrect effective successor hash: ' + path);
-      assert.equal(observedSha, next.currentSha256, 'Unexpected V167 successor: ' + path);
+      const currentSha = ARMORY_V169_SUCCESSORS[path]?.currentSha256 ?? next.currentSha256;
+      assert.equal(effective[path], currentSha, 'Incorrect effective successor hash: ' + path);
+      assert.equal(observedSha, currentSha, 'Unexpected reviewed successor: ' + path);
     } else {
       assert.equal(observedSha, effective[path], 'Current V162 source changed: ' + path);
     }
