@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/docs/gamedev-guidance-20261029/docs/arsenal/weapon_system_contract_v1.json",
+  "title": "Tantalus weapon economy and progression — proposed save v1",
+  "description": "Forward-looking design schema, NOT a currently wired save format.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "weaponDefinitions",
+    "weaponInstances",
+    "magazines",
+    "mastery",
+    "transactionLedger"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "weaponDefinitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/WeaponDefinition"
+      }
+    },
+    "weaponInstances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/WeaponInstance"
+      }
+    },
+    "magazines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/MagazineInstance"
+      }
+    },
+    "mastery": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/WeaponMastery"
+      }
+    },
+    "transactionLedger": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "saveMeta": {
+      "type": "object",
+      "properties": {
+        "migratedFromAmmoReserve": {
+          "type": "boolean"
+        },
+        "migrationId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "WeaponDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "weaponFamily",
+        "feedSlots",
+        "attachmentSlots",
+        "casingPolicy"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 6
+        },
+        "name": {
+          "type": "string"
+        },
+        "weaponFamily": {
+          "enum": [
+            "ballistic",
+            "smart",
+            "flame",
+            "explosive",
+            "energy",
+            "electric",
+            "melee",
+            "mechanical",
+            "silent",
+            "sonic",
+            "acid",
+            "cryo",
+            "chemical",
+            "tool",
+            "sentry",
+            "hybrid"
+          ]
+        },
+        "feedSlots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "slotId",
+              "ammoTypeId",
+              "feedType"
+            ],
+            "properties": {
+              "slotId": {
+                "type": "string"
+              },
+              "ammoTypeId": {
+                "type": "string"
+              },
+              "feedType": {
+                "enum": [
+                  "box",
+                  "belt",
+                  "tube",
+                  "cylinder",
+                  "cell",
+                  "tank",
+                  "single",
+                  "none"
+                ]
+              }
+            }
+          }
+        },
+        "attachmentSlots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "casingPolicy": {
+          "enum": [
+            "no-casing",
+            "shot-eject",
+            "cycle-eject",
+            "reload-eject",
+            "energy-cell",
+            "tank-only",
+            "special"
+          ]
+        },
+        "sourceWork": {
+          "type": "string"
+        },
+        "referenceUrl": {
+          "type": "string"
+        },
+        "referenceConfidence": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "P",
+            "R"
+          ]
+        },
+        "canonicalExact": {
+          "type": "boolean"
+        },
+        "tantalusStatsNotCanon": {
+          "const": true
+        }
+      }
+    },
+    "WeaponInstance": {
+      "type": "object",
+      "required": [
+        "instanceId",
+        "definitionId",
+        "ownerId",
+        "feeds",
+        "attachments",
+        "durability"
+      ],
+      "properties": {
+        "instanceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definitionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "durability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "feeds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "slotId",
+              "chambered",
+              "magazineId"
+            ],
+            "properties": {
+              "slotId": {
+                "type": "string"
+              },
+              "chambered": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "magazineId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "selectedMode": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "attachments": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "heat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reloadTransaction": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/ReloadTransaction"
+            }
+          ]
+        }
+      }
+    },
+    "MagazineInstance": {
+      "type": "object",
+      "required": [
+        "id",
+        "ammoTypeId",
+        "capacity",
+        "rounds",
+        "ownerId",
+        "location",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ammoTypeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rounds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ownerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "enum": [
+            "weapon",
+            "inventory",
+            "hands",
+            "world",
+            "stash",
+            "spent"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "worldDropId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "ReloadTransaction": {
+      "type": "object",
+      "required": [
+        "id",
+        "phase",
+        "oldMagazineId",
+        "newMagazineId",
+        "ejectApplied",
+        "insertApplied",
+        "chamberApplied"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phase": {
+          "enum": [
+            "request",
+            "eject",
+            "insert",
+            "chamber",
+            "complete",
+            "cancelled"
+          ]
+        },
+        "oldMagazineId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "newMagazineId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ejectApplied": {
+          "type": "boolean"
+        },
+        "insertApplied": {
+          "type": "boolean"
+        },
+        "chamberApplied": {
+          "type": "boolean"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "weaponInstanceId": {
+          "type": "string"
+        }
+      }
+    },
+    "WeaponMastery": {
+      "type": "object",
+      "required": [
+        "weaponDefinitionId",
+        "level",
+        "xp",
+        "unlocks",
+        "processedReceipts"
+      ],
+      "properties": {
+        "weaponDefinitionId": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "xp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unlocks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "processedReceipts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "x-tantalus-rules": [
+    "SUM of ammo in chamber, all magazines and world drops may change only on accepted firing/consumption or explicitly authored pickup/reward",
+    "A magazineId has one owner/location at a time",
+    "Transaction flags are idempotent, saved atomically with inventory",
+    "XP credited only once per eligible gameplay receipt",
+    "M41A/M56 caseless profiles must not show a spent brass casing per shot",
+    "All attachments require compatibility and rig visual anchors"
+  ]
+}
