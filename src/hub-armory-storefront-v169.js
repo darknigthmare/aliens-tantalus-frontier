@@ -34,6 +34,19 @@ export const ARMORY_STOREFRONT_SOURCE_SHA256_V169 = freeze({
   station: 'f4b0875daa236dc8d3253e08680cce0eb74be401a980fe3d2f7c3a436809438b'
 });
 
+/** V171 distribution gate. All three source PNGs remain outside this branch.
+ * Never attempt an HTTP request for a missing URL. Set a variant to true
+ * ONLY after the exact hashed PNG has been committed, inspected and built.
+ * This prevents browser 404s and phantom sellers. */
+export const ARMORY_ART_ADMISSIONS_V171 = freeze({
+  tantalus: false,
+  colony: false,
+  station: false
+});
+export const isArmoryArtAdmittedV171 = variant =>
+  Object.hasOwn(ARMORY_ART_ADMISSIONS_V171, variant)
+    && ARMORY_ART_ADMISSIONS_V171[variant] === true;
+
 const crop = (id, group, source) => ({ id, group, source: rect(...source) });
 export const ARMORY_SPRITE_CROPS_V169 = freeze([
   crop('storefront-open-reference', 'reference', [0, 0, 1218, 430]),
