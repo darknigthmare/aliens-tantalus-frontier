@@ -206,6 +206,24 @@ export const ARMORY_V172_RELEASE_SUCCESSORS = Object.freeze({
   })
 });
 
+/** V173 specialist-feed corrections and V172 shop research QA, independent
+ * from frozen V171 receipts. Every successor requires an exact byte match.
+ */
+export const WEAPON_V173_SOURCE_SUCCESSORS = Object.freeze({
+  'src/weapon-special-feeds-v171.js': Object.freeze({
+    previousSha256: ARSENAL_V171_NEW_SOURCES['src/weapon-special-feeds-v171.js'],
+    currentSha256: 'c1cc375650e2c41d7c54550bd798023417f3de3ca8c93dff57aea1c788509f0a'
+  }),
+  'scripts/verify-weapon-special-feeds-v171.mjs': Object.freeze({
+    previousSha256: ARSENAL_V171_NEW_SOURCES['scripts/verify-weapon-special-feeds-v171.mjs'],
+    currentSha256: '43e442b3ff6d4a658214e3fff62a8d968daa90b544b4c27b7e828ae7a18a2d78'
+  }),
+  'scripts/verify-weapon-research-v171.mjs': Object.freeze({
+    previousSha256: ARSENAL_V171_NEW_SOURCES['scripts/verify-weapon-research-v171.mjs'],
+    currentSha256: 'ba6292bbff00232d4f13f8f75b2dad7a016d88f8c20ad6d02bc951d964d070c3'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -441,10 +459,16 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const revision = WEAPON_V173_SOURCE_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256,expected,
       'Incorrect V172 verifier predecessor: ' + path);
-    assert.equal(sha(readSource(path)),release?.currentSha256||expected,
-      release ? 'Unreviewed V172 verifier: ' + path : 'Unreviewed V171 added source: ' + path);
+    if (revision) assert.equal(revision.previousSha256,expected,
+      'Incorrect V173 source predecessor: ' + path);
+    if (release && revision) throw new Error('Ambiguous artifact successor: ' + path);
+    assert.equal(sha(readSource(path)), revision?.currentSha256 || release?.currentSha256 || expected,
+      revision ? 'Unreviewed V173 specialist source: ' + path
+        : release ? 'Unreviewed V172 verifier: ' + path
+          : 'Unreviewed V171 added source: ' + path);
   }
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171))
     assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V171 verification successor: ' + path);
