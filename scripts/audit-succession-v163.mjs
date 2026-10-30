@@ -301,7 +301,7 @@ export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
 export const V165_VERIFIER_SUCCESSORS_V178 = Object.freeze({
   'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
     previousSha256: V165_VERIFIER_SUCCESSORS_V176['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
-    currentSha256: '50ac4caf8ab70199879feb96659d9178147401c6b3571c6201decdb64028c7a7'
+    currentSha256: '476f88b01955e8d406d50ff5dee33e63dd7b7390b22c6fe3746dfbef6479b162'
   })
 });
 
