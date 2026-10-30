@@ -115,6 +115,7 @@ import { TitleSceneControllerV79 } from './title-scene-v79.js';
 import { getTitleSceneShipOptionsV87, sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { renderWeaponFidelityDossiersV170 } from './weapon-fidelity-ledger-v170.js';
+import { renderArmoryResupplyV174, purchaseArmoryResupplyV174 } from './armory-resupply-v174.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
 import { CATALOG_COUNTS_V62, CATALOG_RECORDS_V62 } from './catalog-runtime-v62.js';
@@ -1795,7 +1796,14 @@ function renderArmory() {
   userPanel.hidden = !userPanel.innerHTML;
   // Historical armory procurement remains the only purchase route.
   // Archive dossiers are read-only and never act as catalog weapons.
-  let sourcePanel = byId('armory-fidelity-v170');
+  let resupplyMount = byId('armory-resupply-mount-v174');
+  if (!resupplyMount) {
+    resupplyMount = document.createElement('div');
+    resupplyMount.id = 'armory-resupply-mount-v174';
+    userPanel.insertAdjacentElement('afterend', resupplyMount);
+  }
+  resupplyMount.innerHTML = renderArmoryResupplyV174(saveSystem.data);
+  let sourcePanel = byId('armory-fidelity-mount-v170');
   if (!sourcePanel) {
     const mount = document.createElement('div');
     mount.id = 'armory-fidelity-mount-v170';
@@ -3753,6 +3761,12 @@ function bindDelegatedActions() {
     if (target.dataset.planCampaign) {
       saveSystem.data.strategy.plannedCampaignId = target.dataset.planCampaign;
       saveSystem.commit(); renderCampaigns(); renderCommandMissionsV110(); toast('Campagne ajoutée au plan opérationnel.');
+    }
+    if (target.dataset.armoryResupplyV174 && target.closest('#armory-resupply-mount-v174')) {
+      if (!saveSystem.recoveryNeeded && !standaloneContext && !creatorOwnerV84
+        && (activeView === 'armory' || activeHubStation === 'armory'))
+        runTimedMutation(() => purchaseArmoryResupplyV174(saveSystem.data, target.dataset.armoryResupplyV174),
+          'Lot de munitions reçu et sauvegardé.');
     }
     if (target.dataset.procureId) {
       const kind = target.dataset.procureKind;
