@@ -107,3 +107,44 @@ test('V174 reject forged topologies and do not infer sequel models',()=>{
  x.chamber=2;
  assert.equal(validateUnderbarrelV174(x),false);
 });
+
+test('V174 forged pending receipts and contradictory pump topology fail without mutation',()=>{
+ const state=create(0,0,8);
+ assert.equal(setM41AModeV174(state,'launcher','mode'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(state,'reload1'),true);
+ for(const prior of ['reload:reload1','cancel:reload1']){
+   const forged=structuredClone(state);
+   forged.receipts.push(prior);
+   const before=structuredClone(forged);
+   assert.equal(validateUnderbarrelV174(forged),false,prior);
+   assert.equal(restoreM41AUnderbarrelV174(forged),null,prior);
+   assert.equal(advanceM41AUnderbarrelReloadV174(forged,'reload1',1),false,prior);
+   assert.equal(cancelM41AUnderbarrelReloadV174(forged,'reload1'),false,prior);
+   assert.deepEqual(forged,before,'rejected replay cannot mutate any field');
+ }
+ const progressMismatch=structuredClone(state);
+ progressMismatch.pending.progress=.75; // forged progression without insertion
+ assert.equal(validateUnderbarrelV174(progressMismatch),false);
+ assert.equal(restoreM41AUnderbarrelV174(progressMismatch),null);
+ const chamberForgery=create();
+ chamberForgery.spent=1;chamberForgery.needsPump=true;chamberForgery.chamber=1;
+ assert.equal(validateUnderbarrelV174(chamberForgery),false);
+});
+test('V174 legitimate partial launcher reload still restores and completes exactly',()=>{
+ const s=create(0,0,8);
+ assert.equal(setM41AModeV174(s,'launcher','set'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'tx'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'tx',.5),true);
+ const snapshot=captureM41AUnderbarrelV174(s);
+ assert.equal(snapshot.pending.inserted,2);
+ assert.equal(snapshot.reserve,6);
+ const restored=restoreM41AUnderbarrelV174(snapshot,
+   {ownerId:'player',instanceId:'player:m41a',expectedTotal:8});
+ assert.deepEqual(restored,snapshot);
+ assert.equal(advanceM41AUnderbarrelReloadV174(restored,'tx',1),true);
+ assert.equal(restored.tube,4);
+ assert.equal(restored.reserve,4);
+ assert.equal(restored.pending,null);
+ assert.equal(validateUnderbarrelV174(restored),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(restored,'tx',1),false);
+});
