@@ -215,6 +215,9 @@ SCRIPT_FILES.add('verify-weapon-underbarrel-v174.mjs');
 SCRIPT_FILES.add('verify-armory-art-installer-v171.mjs');
 SCRIPT_FILES.add('verify-armory-resupply-v174.mjs');
 SCRIPT_FILES.add('install-armory-art-v171.mjs');
+// Source-only V175 manual costume import; no artwork is whitelisted by this declaration.
+SCRIPT_FILES.add('install-costume-art-v175.mjs');
+SCRIPT_FILES.add('verify-costume-art-installer-v175.mjs');
 // Exact specialist-feed QA script: source-only audit without wildcard admission.
 SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
 // Source-tree verifier for the three V169 armory storefront variants; exact path only.
