@@ -14,7 +14,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
   V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174,
-  V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
+  V165_VERIFIER_SUCCESSORS_V176, V165_VERIFIER_SUCCESSORS_V177,
+  V165_VERIFIER_SUCCESSORS_V178, ARMORY_V174_ECONOMY_SUCCESSORS,
   ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
@@ -169,12 +170,17 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const next = V165_VERIFIER_SUCCESSORS_V174[path];
-    const latest = V165_VERIFIER_SUCCESSORS_V176[path];
+    const v176 = V165_VERIFIER_SUCCESSORS_V176[path];
+    const v177 = V165_VERIFIER_SUCCESSORS_V177[path];
+    const v178 = V165_VERIFIER_SUCCESSORS_V178[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
     if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
-    if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
+    if (v176) assert.equal(v176.previousSha256, (next || revision || receipt).currentSha256);
+    if (v177) assert.equal(v177.previousSha256, (v176 || next || revision || receipt).currentSha256);
+    if (v178) assert.equal(v178.previousSha256, (v177 || v176 || next || revision || receipt).currentSha256);
     assert.equal(sha(read(path)),
-      latest?.currentSha256 || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+      v178?.currentSha256 || v177?.currentSha256 || v176?.currentSha256
+        || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
   }
 });
 
@@ -183,9 +189,31 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
-    assert.equal(sha(read(path)),revision.currentSha256,path);
+    const newer=V165_VERIFIER_SUCCESSORS_V178[path];
+    if(newer) assert.equal(newer.previousSha256,revision.currentSha256,path);
+    assert.equal(sha(read(path)),newer?.currentSha256 || revision.currentSha256,path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
-    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V176 verifier/,path);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
+      /Unreviewed V178 verifier|Unreviewed V176 verifier/,path);
+  }
+});
+
+test('V177/V178 retain V173/V176 receipts and reject altered cumulative verifier bytes', () => {
+  const parallel='scripts/verify-parallel-completion-v165.mjs';
+  const audit='scripts/verify-audit-continuation-v163.mjs';
+  assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V177),[parallel]);
+  assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V178),[audit]);
+  assert.equal(V165_VERIFIER_SUCCESSORS_V177[parallel].previousSha256,
+    V165_VERIFIER_SUCCESSORS_V173[parallel].currentSha256);
+  assert.equal(V165_VERIFIER_SUCCESSORS_V178[audit].previousSha256,
+    V165_VERIFIER_SUCCESSORS_V176[audit].currentSha256);
+  for(const [path,receipt] of Object.entries({
+    ...V165_VERIFIER_SUCCESSORS_V177,...V165_VERIFIER_SUCCESSORS_V178
+  })) {
+    assert.equal(sha(read(path)),receipt.currentSha256,path);
+    const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('V178-UNREVIEWED')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
+      /Unreviewed V177|Unreviewed V178/,path);
   }
 });
 
