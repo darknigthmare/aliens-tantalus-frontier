@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSourcesV163,
   V165_VERIFIER_SUCCESSORS_V171, V165_VERIFIER_SUCCESSORS_V173,
   V165_VERIFIER_SUCCESSORS_V174, V165_VERIFIER_SUCCESSORS_V176,
-  V165_VERIFIER_SUCCESSORS_V177 } from './audit-succession-v163.mjs';
+  V165_VERIFIER_SUCCESSORS_V177, V165_VERIFIER_SUCCESSORS_V178 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -90,6 +90,7 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     const next = V165_VERIFIER_SUCCESSORS_V174[verifier];
     const v176 = V165_VERIFIER_SUCCESSORS_V176[verifier];
     const v177 = V165_VERIFIER_SUCCESSORS_V177[verifier];
+    const v178 = V165_VERIFIER_SUCCESSORS_V178[verifier];
     if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
       'Invalid V171-to-V173 verifier successor: ' + verifier);
     if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
@@ -99,7 +100,10 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     if (v177) assert.equal(v177.previousSha256,
       (v176 || next || revision || legacy)?.currentSha256,
       'Invalid V173-to-V177 parallel verifier successor: ' + verifier);
-    const successor = v177 || v176 || next || revision || legacy;
+    if (v178) assert.equal(v178.previousSha256,
+      (v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V176-to-V178 audit verifier successor: ' + verifier);
+    const successor = v178 || v177 || v176 || next || revision || legacy;
     if (legacy) assert.equal(record.verifierSourceSha256V165[verifier], legacy.previousSha256,
       'Untrusted V165 original verifier receipt: ' + verifier);
     assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? record.verifierSourceSha256V165[verifier],
@@ -111,6 +115,7 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     const next = V165_VERIFIER_SUCCESSORS_V174[verifier];
     const v176 = V165_VERIFIER_SUCCESSORS_V176[verifier];
     const v177 = V165_VERIFIER_SUCCESSORS_V177[verifier];
+    const v178 = V165_VERIFIER_SUCCESSORS_V178[verifier];
     if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
       'Invalid V171-to-V173 verifier successor: ' + verifier);
     if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
@@ -120,7 +125,10 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     if (v177) assert.equal(v177.previousSha256,
       (v176 || next || revision || legacy)?.currentSha256,
       'Invalid V173-to-V177 parallel verifier successor: ' + verifier);
-    const successor = v177 || v176 || next || revision || legacy;
+    if (v178) assert.equal(v178.previousSha256,
+      (v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V176-to-V178 audit verifier successor: ' + verifier);
+    const successor = v178 || v177 || v176 || next || revision || legacy;
     if (legacy) assert.equal(legacy.previousSha256, expected, 'Incorrect V165 verifier predecessor');
     assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? expected, verifier);
   }
