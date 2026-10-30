@@ -184,9 +184,9 @@ historiques ni les déclarer rétroactivement comme des tests récents.
 
 Cette continuation est volontairement **sans génération d'images**. Elle ne renumérote aucune arme historique ni ne duplique les entrées du marché; elle augmente les preuves disponibles et la lisibilité du reste-à-faire.
 
-- \`src/weapon-fidelity-ledger-v170.js\`: 18 dossiers de référence **non achetables** : 12 identités ou apparitions repérées sur captures de gameplay d'*Aliens: Fireteam Elite 2* (source secondaire), 5 familles d'armes recensées dans le manuel officiel d'*Alien: Isolation*, et le M41E4 nommé dans les notes officielles d'*Aliens: Fireteam Elite*. Le même nom entre deux jeux ne prouve **pas** la même géométrie de modèle.
+- \`src/weapon-fidelity-ledger-v170.js\`: 19 dossiers de référence **non achetables** : 12 identités ou apparitions repérées sur captures de gameplay d'*Aliens: Fireteam Elite 2* (source secondaire), 5 familles d'armes recensées dans le manuel officiel d'*Alien: Isolation*, et le M41E4 nommé dans les notes officielles d'*Aliens: Fireteam Elite*, plus le Mondo Heat 9000 attesté dans la mise à jour officielle AFE2 du 22 octobre 2026. Le même nom entre deux jeux ne prouve **pas** la même géométrie de modèle.
 - Le registre comprend séparément **13 accessoires** nommés dans les notes officielles *Fireteam Elite*, sans inventer leurs compatibilités, leur apparence, leurs statistiques ni des sprites.
-- \`docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv\`: **129 fiches proposées** de la base V1, réconciliées exactement par ID; 13 dossiers d'identification prioritaires P0, 28 P1, 88 P2. Ces niveaux indiquent **l'ordre du travail**, pas une valeur canonique.
+- \`docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv\`: **129 fiches proposées** de la base V1, réconciliées exactement par ID; 14 dossiers d'identification prioritaires P0, 27 P1, 88 P2. Ces niveaux indiquent **l'ordre du travail**, pas une valeur canonique.
 - \`src/app.js\`: volet repliable *Archives d'armement* dans l'armurerie existante. L'interface affiche les noms et liens de preuve, **sans** exposer de \`data-procure-*\`, de munitions supplémentaires ou de fonction d'achat alternative. L'ancien système transactionnel de crédits/stock reste seul compétent.
 - \`scripts/verify-weapon-fidelity-v170.mjs\`: test de l'identité de source, l'isolation des révisions AFE2, la présence des propositions dans le CSV historique, l'absence de statistiques inventées et la fermeture des routes d'achat.
 
@@ -215,3 +215,4 @@ Avant d'autoriser une arme source :
 - https://www.daybreakgames.com/press/afe2/article/dbg-afe2-now-live (sortie officielle, pas preuve des caractéristiques individuelles)
 - https://www.aliensfireteamelite.com/en/releasenotes/ (noms de certaines armes et accessoires du jeu original)
 - https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/ (armes disponibles dans le jeu *Alien: Isolation*)
+- https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes (Mondo Heat 9000 et correctifs précis d'animations/VFX du 22 octobre 2026)
