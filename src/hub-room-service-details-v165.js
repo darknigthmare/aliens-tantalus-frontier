@@ -26,7 +26,11 @@ export const HUB_ROOM_SERVICE_DETAILS_V165 = freeze({
   medical: service('hygiene', 'bedside-clean-gas-isolation-and-service-access', 'MED 01', 1080, 424, 96, 42),
   'science-lab': service('hygiene', 'analysis-clean-gas-isolation-and-extraction', 'LAB 01', 1000),
   quarantine: service('air', 'sealed-room-extraction-and-filter-access', 'ISO 01', 750, 320, 96),
-  armory: service('electrical', 'secure-issue-lighting-and-test-circuit-isolation', 'ARM 01', 880, 320, 96, 42),
+  // V179: the V169 storefront rear wall occupies world x370..900 at y314..429.
+  // Its original x880 panel was partially obscured (the code plate vanished).
+  // Place the isolation label on the genuinely clear entrance-side rear wall,
+  // away from the tool board x280..448 and native door reservations.
+  armory: service('electrical', 'secure-issue-lighting-and-test-circuit-isolation', 'ARM 01', 220, 320, 96, 42),
   workshop: service('electrical', 'bench-power-isolation-and-test-sockets', 'MNT 01', 800, 320, 96, 42),
   'vehicle-bay': service('pipe', 'inspection-bay-compressed-air-service', 'VEH 01', 460),
   'dropship-hangar': keep('Preserve the aircraft, flight-control booth and gantry working envelope.'),
