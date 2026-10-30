@@ -518,8 +518,24 @@ try:
           len(report['families']) >= 7 and not report['pageErrors'] and not report['httpErrors']
           and not [entry for entry in report['requestFailures'] if entry['failure'] != 'net::ERR_ABORTED'])
     if args.stage == 'after':
+        failures = report.get('rasterFailures', [])
+        if failures:
+            # Retain every real render failure, but expose exact served-vs-expected
+            # pixels in GitHub Actions rather than only a generic assertion label.
+            # No test is waived and no production state or canvas is modified.
+            print('RASTER_V165_DIAGNOSTICS ' + json.dumps({
+                'count': len(failures),
+                'scenes': [{'scene': row['scene'], 'roomId': row['roomId'],
+                            'expectedProbeCount': row['expectedProbeCount'],
+                            'probes': [{'kind': p['kind'], 'id': p['id'],
+                                        'x': p['sampleX'], 'y': p['sampleY'],
+                                        'observedRgba': p['rgba'],
+                                        'expectedRgba': p['expectedRgba']}
+                                       for p in row['probes']]}
+                           for row in failures]
+            }, ensure_ascii=False, separators=(',', ':')), flush=True)
         check('Every admitted hardware raster assertion succeeded across all observed scenes',
-              not report.get('rasterFailures', []))
+              not failures)
     report['status'] = 'passed'
 except Exception as error:
     report['status'] = 'failed'
