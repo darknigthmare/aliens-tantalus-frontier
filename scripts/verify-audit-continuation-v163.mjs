@@ -13,7 +13,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
-  V165_VERIFIER_SUCCESSORS_V173 } from './audit-succession-v163.mjs';
+  V165_VERIFIER_SUCCESSORS_V173, ARMORY_V174_ECONOMY_SUCCESSORS,
+  ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -86,16 +87,17 @@ test('the full current bridge validates runtime bytes and older default returns 
   const v161 = JSON.parse(read(prefix + 'progress-v161.json'));
   const v160 = JSON.parse(read(prefix + 'progress-v160.json'));
   assert.deepEqual(resolveAuditSourcesV162(v161), previous.runtimeSourceSha256);
-  const approvedEffectiveV171 = { ...current.runtimeSourceSha256,
+  const approvedEffectiveV174 = { ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V171_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
-      .map(([path, receipt]) => [path, receipt.currentSha256])) };
-  assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV171);
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) };
+  assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
-  assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV171);
+  assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
   assert.equal(verifyAuditSuccessionV162(v161, previous).current, 87);
 });
 
@@ -104,7 +106,8 @@ test('the V169 armory app successor is chained, source-pinned and cannot be forg
   assert.deepEqual(Object.keys(ARMORY_V169_SUCCESSORS), [app]);
   assert.equal(receipt.previousSha256, ARSENAL_V167_SUCCESSORS[app].currentSha256);
   assert.equal(ARSENAL_V170_SUCCESSORS[app].previousSha256, receipt.currentSha256);
-  assert.equal(sha(read(app)), ARSENAL_V170_SUCCESSORS[app].currentSha256);
+  assert.equal(ARMORY_V174_ECONOMY_SUCCESSORS[app].previousSha256, ARSENAL_V170_SUCCESSORS[app].currentSha256);
+  assert.equal(sha(read(app)), ARMORY_V174_ECONOMY_SUCCESSORS[app].currentSha256);
   assert.equal(receipt.verifier, 'scripts/verify-hub-armory-v169.mjs');
   assert.equal(sha(read(receipt.verifier)), receipt.verifierSha256);
   assert.deepEqual(Object.keys(ARMORY_V169_NEW_SOURCES), ['src/hub-armory-storefront-v169.js']);
@@ -116,7 +119,7 @@ test('the V169 armory app successor is chained, source-pinned and cannot be forg
   for (const changedPath of [app, receipt.verifier, ...Object.keys(ARMORY_V169_NEW_SOURCES)]) {
     const mutated=path=>path===changedPath ? Buffer.concat([read(path),Buffer.from('\\nUNREVIEWED')]) : read(path);
     assert.throws(() => verifyAuditSuccessionV163(previous,current,mutated),
-      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172/, changedPath);
+      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V174/, changedPath);
   }
 });
 
@@ -125,7 +128,8 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
   assert.equal(ARSENAL_V170_SUCCESSORS['sw.js'].previousSha256,
     ARSENAL_V167_SUCCESSORS['sw.js'].currentSha256);
   assert.equal(ARSENAL_V171_SUCCESSORS['sw.js'].previousSha256, ARSENAL_V170_SUCCESSORS['sw.js'].currentSha256);
-  assert.equal(sha(read('sw.js')), ARSENAL_V171_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].previousSha256, ARSENAL_V171_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(sha(read('sw.js')), ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].currentSha256);
   for (const [path, digest] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const successor=ARSENAL_V171_SUCCESSORS[path];
     if(successor) assert.equal(successor.previousSha256,digest);
@@ -142,7 +146,7 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   assert.equal(Object.keys(ARSENAL_V171_SUCCESSORS).length, 5);
   assert.equal(Object.keys(ARSENAL_V171_NEW_SOURCES).length, 6);
   for (const [path, receipt] of Object.entries(ARSENAL_V171_SUCCESSORS)) {
-    const current = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const current = ARMORY_V174_ECONOMY_SUCCESSORS[path] || ARMORY_V172_RELEASE_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, receipt.currentSha256);
     assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
   }
@@ -165,6 +169,20 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     const current = V165_VERIFIER_SUCCESSORS_V173[path];
     if (current) assert.equal(current.previousSha256, receipt.currentSha256);
     assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
+  }
+});
+
+test('V174 armory economy and QA are exact successors without rewriting historical hashes', () => {
+  assert.deepEqual(Object.keys(ARMORY_V174_ECONOMY_SUCCESSORS).sort(), ['src/app.js','sw.js']);
+  assert.deepEqual(Object.keys(ARMORY_V174_ECONOMY_NEW_SOURCES).sort(),
+    ['scripts/verify-armory-resupply-v174.mjs','src/armory-resupply-v174.js']);
+  for (const [path, receipt] of Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS))
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+  for (const [path, hash] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
+    assert.equal(sha(read(path)), hash, path);
+  for (const path of Object.keys(ARMORY_V174_ECONOMY_NEW_SOURCES)) {
+    const changed=name=>name===path ? Buffer.concat([read(name), Buffer.from('\nUNAPPROVED')]) : read(name);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),/Unreviewed V174/,path);
   }
 });
 
