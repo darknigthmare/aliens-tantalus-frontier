@@ -293,6 +293,20 @@ export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
   })
 });
 
+/** V178 storefront rendering correction (PR #25). A genuine native V165
+ * electric safety plate is repainted after the decorative V169 layer.
+ * Preserve the reviewed V172 source and record only the new successor.
+ * The behavioral verifier must itself match an independently reviewed hash.
+ */
+export const ARMORY_V178_RENDER_SUCCESSORS = Object.freeze({
+  'src/hub-armory-scene-v169.js': Object.freeze({
+    previousSha256: ARMORY_V172_RELEASE_SUCCESSORS['src/hub-armory-scene-v169.js'].currentSha256,
+    currentSha256: '362f7526ba2826b388e89635acdb9ac3eaf9c9951662072c68b2fe421005f2bb',
+    verifier: 'scripts/verify-armory-service-raster-v177.mjs',
+    verifierSha256: '3787adfc00550cee0781434161e59fd13a5c0aee597b8065ae95fe772f9a894c'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -523,12 +537,22 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (current) assert.equal(current.previousSha256, expected,
       'Unreviewed V171 predecessor for V170 source: ' + path);
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const repaint = ARMORY_V178_RENDER_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256, current?.currentSha256 || expected,
       'Broken V171-to-V172 source chain: ' + path);
-    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || expected,
-      release ? 'Unreviewed V172 art source: ' + path
-        : current ? 'Unreviewed V171 source successor: ' + path
-          : 'Unreviewed V170 added source: ' + path);
+    if (repaint) {
+      assert.ok(release, 'V178 repaint has no reviewed V172 source: ' + path);
+      assert.equal(repaint.previousSha256, release.currentSha256,
+        'Broken V172-to-V178 authored scene chain: ' + path);
+      assert.equal(sha(readSource(repaint.verifier)), repaint.verifierSha256,
+        'Unreviewed V178 native render verifier: ' + repaint.verifier);
+    }
+    assert.equal(sha(readSource(path)),
+      repaint?.currentSha256 || release?.currentSha256 || current?.currentSha256 || expected,
+      repaint ? 'Unreviewed V178 storefront rendering successor: ' + path
+        : release ? 'Unreviewed V172 art source: ' + path
+          : current ? 'Unreviewed V171 source successor: ' + path
+            : 'Unreviewed V170 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
