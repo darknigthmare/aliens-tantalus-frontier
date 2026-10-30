@@ -1,19 +1,35 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { EXPECTED_V169_ART, auditArmoryPackV171, installArmoryPackV171 }
   from './install-armory-art-v171.mjs';
-import { ARMORY_STOREFRONT_SOURCE_SHA256_V169, ARMORY_ART_ADMISSIONS_V171 }
+import { ARMORY_STOREFRONT_SOURCE_SHA256_V169, ARMORY_ORIGINAL_PNG_SHA256_V171,
+  ARMORY_STOREFRONT_SOURCE_V169, ARMORY_STOREFRONT_VARIANTS_V169,
+  isArmoryStorefrontImageReadyV172, ARMORY_ART_ADMISSIONS_V171 }
   from '../src/hub-armory-storefront-v169.js';
 
-test('V171 exact companion source art hashes match the published V169 pack',()=>{
+test('V172 shipped art matches its exact bytes, retained original PNG receipts and native floor',()=>{
  assert.equal(EXPECTED_V169_ART.manifest,
   '5c5b89ef7a7006e46486bacef9a707f4a35a76bb035e7af75c411775898d4a29');
- for(const variant of ['tantalus','colony','station'])
-  assert.equal(EXPECTED_V169_ART.source[variant],ARMORY_STOREFRONT_SOURCE_SHA256_V169[variant]);
- assert.ok(Object.values(ARMORY_ART_ADMISSIONS_V171).every(x=>x===false));
+ assert.deepEqual(ARMORY_ART_ADMISSIONS_V171,{tantalus:true,colony:true,station:true});
+ for(const variant of ['tantalus','colony','station']){
+  assert.equal(EXPECTED_V169_ART.source[variant],ARMORY_ORIGINAL_PNG_SHA256_V171[variant]);
+  const uri=ARMORY_STOREFRONT_SOURCE_V169[variant];
+  const binary=readFileSync(new URL('..'+uri,import.meta.url));
+  const digest=createHash('sha256').update(binary).digest('hex');
+  assert.equal(digest,ARMORY_STOREFRONT_SOURCE_SHA256_V169[variant],variant);
+  assert.ok(binary.length>100_000);
+  if(variant==='colony'){assert.ok(uri.endsWith('.webp'));assert.equal(binary.toString('ascii',0,4),'RIFF');}
+  else{assert.ok(uri.endsWith('.png'));assert.deepEqual([...binary.subarray(0,8)],[137,80,78,71,13,10,26,10]);}
+  assert.equal(ARMORY_STOREFRONT_VARIANTS_V169[variant].floorY,624);
+ }
+ assert.equal(isArmoryStorefrontImageReadyV172(null),false);
+ assert.equal(isArmoryStorefrontImageReadyV172({complete:true,naturalWidth:1024,naturalHeight:1086}),false);
+ assert.equal(isArmoryStorefrontImageReadyV172({complete:false,naturalWidth:1448,naturalHeight:1086}),false);
+ assert.equal(isArmoryStorefrontImageReadyV172({complete:true,naturalWidth:1448,naturalHeight:1086}),true);
 });
 test('V171 rejects any missing, wrong or forged companion manifest before copying files',()=>{
  const root=mkdtempSync(join(tmpdir(),'armory-verify-v171-'));
@@ -32,5 +48,7 @@ test('V171 installer never silently marks rendered art or 1:1 rights approved',(
  assert.match(scene,/!isArmoryArtAdmittedV171/);
  const port=readFileSync(new URL('../src/hub-port-meridien-v90.js',import.meta.url),'utf8');
  assert.match(port,/if \(isArmoryArtAdmittedV171\('colony'\)/);
- assert.deepEqual(Object.values(ARMORY_ART_ADMISSIONS_V171),[false,false,false]);
+ assert.deepEqual(Object.values(ARMORY_ART_ADMISSIONS_V171),[true,true,true]);
+ assert.match(scene,/isArmoryStorefrontImageReadyV172/);
+ assert.match(port,/isArmoryStorefrontImageReadyV172/);
 });

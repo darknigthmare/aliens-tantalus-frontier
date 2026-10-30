@@ -185,6 +185,27 @@ export const V165_VERIFIER_SUCCESSORS_V171 = Object.freeze({
   })
 });
 
+/** V172 release admission: actual media bytes + native floor, staged after V171.
+ * No historical V163/V169/V170/V171 source pin is rewritten. */
+export const ARMORY_V172_RELEASE_SUCCESSORS = Object.freeze({
+  'src/hub-armory-storefront-v169.js': Object.freeze({
+    previousSha256: ARSENAL_V171_SUCCESSORS['src/hub-armory-storefront-v169.js'].currentSha256,
+    currentSha256: '6130f994f84099de1bedc9f071e2b4d57f014dded55f9a8a508b7347d08b8476'
+  }),
+  'src/hub-armory-scene-v169.js': Object.freeze({
+    previousSha256: ARSENAL_V171_SUCCESSORS['src/hub-armory-scene-v169.js'].currentSha256,
+    currentSha256: '036374b5b38dcb0dd43e92ef869eddf9f6e0a2c167a4ddf330261fc92570b5df'
+  }),
+  'src/hub-port-meridien-v90.js': Object.freeze({
+    previousSha256: ARSENAL_V171_SUCCESSORS['src/hub-port-meridien-v90.js'].currentSha256,
+    currentSha256: '9f3f75b8e8a9fbe77deb5afa428a5ba158db05b98ebe2e7af08b844af248eb93'
+  }),
+  'scripts/verify-armory-art-installer-v171.mjs': Object.freeze({
+    previousSha256: ARSENAL_V171_NEW_SOURCES['scripts/verify-armory-art-installer-v171.mjs'],
+    currentSha256: 'bd282cf11014d647a41ac2e2897514d5f2ac0d43ffb6a087e5716b350b78abf5'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -397,21 +418,34 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const current = ARSENAL_V171_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, extra?.currentSha256 || expected,
       'Broken V169/V170-to-V171 source chain: ' + path);
-    assert.equal(sha(readSource(path)), current?.currentSha256 || extra?.currentSha256 || expected,
-      current ? 'Unreviewed V171 source correction: ' + path
-        : extra ? 'Unreviewed V170 source correction: ' + path
-          : 'Unreviewed V169 added source: ' + path);
+    const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    if (release) assert.equal(release.previousSha256, current?.currentSha256 || extra?.currentSha256 || expected,
+      'Broken V171-to-V172 source chain: ' + path);
+    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected,
+      release ? 'Unreviewed V172 art source: ' + path
+        : current ? 'Unreviewed V171 source correction: ' + path
+          : extra ? 'Unreviewed V170 source correction: ' + path
+            : 'Unreviewed V169 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const current = ARSENAL_V171_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, expected,
       'Unreviewed V171 predecessor for V170 source: ' + path);
-    assert.equal(sha(readSource(path)), current?.currentSha256 || expected,
-      current ? 'Unreviewed V171 source successor: ' + path
-        : 'Unreviewed V170 added source: ' + path);
+    const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    if (release) assert.equal(release.previousSha256, current?.currentSha256 || expected,
+      'Broken V171-to-V172 source chain: ' + path);
+    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || expected,
+      release ? 'Unreviewed V172 art source: ' + path
+        : current ? 'Unreviewed V171 source successor: ' + path
+          : 'Unreviewed V170 added source: ' + path);
   }
-  for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES))
-    assert.equal(sha(readSource(path)), expected, 'Unreviewed V171 added source: ' + path);
+  for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
+    const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    if (release) assert.equal(release.previousSha256,expected,
+      'Incorrect V172 verifier predecessor: ' + path);
+    assert.equal(sha(readSource(path)),release?.currentSha256||expected,
+      release ? 'Unreviewed V172 verifier: ' + path : 'Unreviewed V171 added source: ' + path);
+  }
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171))
     assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed V171 verification successor: ' + path);
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {

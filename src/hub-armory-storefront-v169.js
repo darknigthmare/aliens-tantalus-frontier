@@ -7,11 +7,10 @@
  *
  * Source sheets are in the companion art pack:
  *   ARMURERIES_TANTALUS_3_VARIANTES_SPRITES_V169.zip
- * Images are not committed in this branch: the SHA-256 below identifies
- * the companion PNGs from the local V169 art ZIP, not a released game asset.
- * Hashes are informational until the exact files are added and reviewed.
- * and are not canon/film captures. The game falls back to the original native
- * room art if full-resolution, reviewed sheets have not been installed.
+ * The Tantalus and station atlases are the exact original PNG bytes. The
+ * colony atlas uses lossless WebP with byte-identical decoded RGBA pixels.
+ * These are project-original visual adaptations, never canon 1:1 approval.
+ * Native geometry, door, shop owner and equipment contracts remain authoritative.
  */
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -25,27 +24,35 @@ const rect = (x, y, w, h) => freeze({ x, y, w, h });
 export const ARMORY_ART_CANVAS_V169 = freeze({ w: 1448, h: 1086 });
 export const ARMORY_STOREFRONT_SOURCE_V169 = freeze({
   tantalus: '/assets/openai/hub/armory-v169/tantalus_source_1448x1086.png',
-  colony: '/assets/openai/hub/armory-v169/colony_source_1448x1086.png',
+  colony: '/assets/openai/hub/armory-v169/colony_source_1448x1086.webp',
   station: '/assets/openai/hub/armory-v169/station_source_1448x1086.png'
 });
 export const ARMORY_STOREFRONT_SOURCE_SHA256_V169 = freeze({
   tantalus: 'ce5d979dc84c4b8d34c0f8b5403abd6b3ec706e0cd50c819222be9cf323c1767',
-  colony: 'de220600940eec4471ac93e09a5a2d023f8c64f2b40c1fb6c1a8a969010f33c8',
+  colony: '7063cba4cbf2a7f63ee4934da09a7a352c4c322c75a3a8526e2ee276a8839d8a',
   station: '93d3d1c56463f8379ce063fa2721bddf2bba58fe435de4161c25b66d29bbb987'
 });
 
-/** V171 distribution gate. All three source PNGs remain outside this branch.
- * Never attempt an HTTP request for a missing URL. Set a variant to true
- * ONLY after the exact hashed PNG has been committed, inspected and built.
- * This prevents browser 404s and phantom sellers. */
+/** Original PNG provenance, retained even where lossless WebP is shipped. */
+export const ARMORY_ORIGINAL_PNG_SHA256_V171 = freeze({
+  tantalus: 'ce5d979dc84c4b8d34c0f8b5403abd6b3ec706e0cd50c819222be9cf323c1767',
+  colony: 'de220600940eec4471ac93e09a5a2d023f8c64f2b40c1fb6c1a8a969010f33c8',
+  station: '93d3d1c56463f8379ce063fa2721bddf2bba58fe435de4161c25b66d29bbb987'
+});
+/** Exact art files are now in the branch. Visuals are original adaptations;
+ * dimensions and file digests are checked, never claimed canon 1:1. */
 export const ARMORY_ART_ADMISSIONS_V171 = freeze({
-  tantalus: false,
-  colony: false,
-  station: false
+  tantalus: true,
+  colony: true,
+  station: true
 });
 export const isArmoryArtAdmittedV171 = variant =>
   Object.hasOwn(ARMORY_ART_ADMISSIONS_V171, variant)
     && ARMORY_ART_ADMISSIONS_V171[variant] === true;
+/** A missing or wrong-sized image never grants a new seller contact. */
+export const isArmoryStorefrontImageReadyV172 = image =>
+  Boolean(image && image.complete && image.naturalWidth === ARMORY_ART_CANVAS_V169.w
+    && image.naturalHeight === ARMORY_ART_CANVAS_V169.h);
 
 const crop = (id, group, source) => ({ id, group, source: rect(...source) });
 export const ARMORY_SPRITE_CROPS_V169 = freeze([
@@ -87,22 +94,22 @@ export const ARMORY_SPRITE_CROPS_V169 = freeze([
 // remain owned by their respective existing world/annex runtimes.
 export const ARMORY_STOREFRONT_VARIANTS_V169 = freeze({
   tantalus: {
-    roomId: 'armory', worldWidth: 1280, floorY: 930,
+    roomId: 'armory', worldWidth: 1280, floorY: 624,
     vendorIdentity: 'sanaa-doyle-existing-native-npc',
     vendorStatus: 'native-present-no-duplicate-sprite',
     sourceStatus: 'project-visual-adaptation-not-1to1',
     shopContact: null,
     layout: [
-      ['rear-wall', 370, 620, 530, 115],
-      ['main-sign', 365, 486, 570, 94],
-      ['canopy', 918, 492, 180, 94],
-      ['weapon-rack-a', 380, 714, 153, 132],
-      ['weapon-rack-b', 566, 718, 145, 126],
-      ['ammo-wall', 770, 714, 165, 126],
-      ['locker-cluster', 962, 712, 144, 140],
-      ['glass-counter', 590, 825, 286, 98],
-      ['checkout-terminal', 882, 797, 72, 115],
-      ['hanging-light', 592, 670, 152, 38]
+      ['rear-wall', 370, 314, 530, 115],
+      ['main-sign', 365, 180, 570, 94],
+      ['canopy', 918, 186, 180, 94],
+      ['weapon-rack-a', 380, 408, 153, 132],
+      ['weapon-rack-b', 566, 412, 145, 126],
+      ['ammo-wall', 770, 408, 165, 126],
+      ['locker-cluster', 962, 406, 144, 140],
+      ['glass-counter', 590, 519, 286, 98],
+      ['checkout-terminal', 882, 491, 72, 115],
+      ['hanging-light', 592, 364, 152, 38]
     ]
   },
   colony: {
@@ -156,6 +163,7 @@ export function validateArmoryStorefrontV169() {
   for (const c of ARMORY_SPRITE_CROPS_V169) if (!inBounds(c.source, ARMORY_ART_CANVAS_V169))
     failures.push('crop-out-of-bounds:' + c.id);
   for (const [variant, definition] of Object.entries(ARMORY_STOREFRONT_VARIANTS_V169)) {
+    if (definition.floorY !== 624) failures.push('floor-mismatch-native-hub:' + variant);
     if (!ARMORY_STOREFRONT_SOURCE_SHA256_V169[variant] || definition.sourceStatus.includes('1to1-approved'))
       failures.push('unreviewed-source-status:' + variant);
     for (const [id, x, y, width, height] of definition.layout) {

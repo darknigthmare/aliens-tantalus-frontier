@@ -1,6 +1,7 @@
 import {
   ARMORY_STOREFRONT_SOURCE_V169, getArmoryStorefrontPlanV169,
-  drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171
+  drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171,
+  isArmoryStorefrontImageReadyV172
 } from './hub-armory-storefront-v169.js';
 
 /** Opt-in visual composition atop original hub physics/rooms. The Tantalus
@@ -59,7 +60,9 @@ export function withHubArmoryStorefrontV169(Base) {
 
     armoryShopContactV169() {
       const annex = this.currentAnnexV71?.();
-      if (!isArmoryArtAdmittedV171('station') || !this.running || this.paused
+      if (!isArmoryArtAdmittedV171('station')
+        || !isArmoryStorefrontImageReadyV172(this.armoryStorefrontImagesV169?.get('station'))
+        || !this.running || this.paused
         || this.annexTransitionV71 || this.hubDoorClosingV142
         || this.annexStateReadOnlyV87 || this.editorPlaytest || !annex || annex.id !== 'logistics'
         || !this.player || this.player.inVehicle || !this.player.grounded) return null;
@@ -96,7 +99,8 @@ export function withHubArmoryStorefrontV169(Base) {
         lastPaint: this.armoryStorefrontPaintV169 || null,
         shopContact: this.armoryShopContactV169()?.contactId || null,
         physics: 'native-unchanged',
-        graphicsStatus: isArmoryArtAdmittedV171('station') ? 'reviewed-art-installed' : 'optional-art-installation-required'
+        graphicsStatus: isArmoryStorefrontImageReadyV172(this.armoryStorefrontImagesV169?.get('station'))
+          ? 'adapted-art-renderable-not-canon-1to1' : 'art-loading-or-unavailable'
       } };
     }
   };
