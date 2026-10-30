@@ -194,7 +194,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     assert.equal(sha(read(path)),newer?.currentSha256 || revision.currentSha256,path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
-      /Unreviewed V178 verifier|Unreviewed V176 verifier/,path);
+      /Unreviewed V178 audit verifier|Unreviewed V176 verifier/,path);
   }
 });
 
