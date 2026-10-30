@@ -8,7 +8,8 @@ import { fileURLToPath } from 'node:url';
 import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSourcesV163,
   V165_VERIFIER_SUCCESSORS_V171, V165_VERIFIER_SUCCESSORS_V173,
   V165_VERIFIER_SUCCESSORS_V174, V165_VERIFIER_SUCCESSORS_V176,
-  V165_VERIFIER_SUCCESSORS_V177, V165_VERIFIER_SUCCESSORS_V178 } from './audit-succession-v163.mjs';
+  V165_VERIFIER_SUCCESSORS_V177, V165_VERIFIER_SUCCESSORS_V178,
+  HUB_V179_SERVICE_SUCCESSOR } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -67,8 +68,14 @@ export function verifyParallelCompletionV165(record, readSource = read) {
       'Forge is deferred outside the verified maintenance correction');
     assert.equal(row.previousSha256, before[row.path] ?? null);
     assert.equal(row.currentSha256, after[row.path]);
-    assert.equal(sha(readSource(row.path)), effective[row.path] ?? row.currentSha256,
-      'Unexpected undeclared source successor: ' + row.path);
+    const corrected = row.path === HUB_V179_SERVICE_SUCCESSOR.path
+      ? HUB_V179_SERVICE_SUCCESSOR : null;
+    if (corrected) assert.equal(row.currentSha256, corrected.previousSha256,
+      'V179 cannot rewrite the historical V165 service receipt: ' + row.path);
+    assert.equal(sha(readSource(row.path)),
+      corrected?.currentSha256 ?? effective[row.path] ?? row.currentSha256,
+      corrected ? 'Unreviewed V179 service successor: ' + row.path
+        : 'Unexpected undeclared source successor: ' + row.path);
     assert.ok(row.reason.startsWith('V165 :') && row.reason.trim().length >= 60);
     assert.ok(row.verifiers.length > 0 && new Set(row.verifiers).size === row.verifiers.length);
     row.verifiers.forEach(verifier => requiredVerifiers.add(verifier));
@@ -166,6 +173,23 @@ test('V177 parallel verifier is source pinned without changing historical V165/V
   const corrupted=path=>path===name?Buffer.concat([read(path),Buffer.from('UNREVIEWED')]):read(path);
   assert.throws(()=>verifyParallelCompletionV165(current,corrupted),
     /Unreviewed V177 cumulative verifier successor|Unreviewed verifier bytes/);
+});
+
+test('V179 armory wall service remains visible outside the V169 storefront image', () => {
+  const receipt = HUB_V179_SERVICE_SUCCESSOR;
+  assert.equal(receipt.path,'src/hub-room-service-details-v165.js');
+  assert.equal(current.runtimeSourceSha256[receipt.path],receipt.previousSha256);
+  assert.equal(sha(read(receipt.path)),receipt.currentSha256);
+  const box=HUB_ROOM_SERVICE_DETAILS_V165.armory;
+  assert.equal(box.x,receipt.correctedCenterX);
+  assert.equal(box.w,96);
+  assert.equal(box.h,42);
+  assert.ok(box.x-box.w/2>128,'Panel must stay within the authored wall');
+  assert.ok(box.x+box.w/2<280,'Panel must clear existing tool board at x280');
+  assert.ok(box.x+box.w/2<370,'Panel must clear V169 rear-wall facade at x370');
+  const corrupted=path=>path===receipt.path?Buffer.concat([read(path),Buffer.from('V179-UNREVIEWED')]):read(path);
+  assert.throws(()=>verifyParallelCompletionV165(current,corrupted),
+    /Unreviewed V179 armory service location|Unreviewed V179 service successor/);
 });
 
 test('V165 cumulative pins preserve the byte-anchored V162 bridge and the immutable V164 runtime map', () => {
