@@ -95,16 +95,16 @@ export const ARMORY_STOREFRONT_VARIANTS_V169 = freeze({
     vendorStatus: 'concept-only-needs-native-NPC-rig',
     sourceStatus: 'project-visual-adaptation-not-1to1',
     // Plot is beyond the existing port gate. No opening/escort phase override.
-    shopContact: rect(2240, 540, 110, 84),
+    shopContact: rect(2038, 540, 100, 84),
     layout: [
       ['rear-wall', 1995, 352, 510, 114],
       ['main-sign', 1985, 317, 520, 69],
       ['weapon-rack-a', 2030, 427, 130, 101],
       ['ammo-wall', 2159, 425, 130, 104],
       ['locker-cluster', 2394, 413, 102, 137],
-      ['glass-counter', 2240, 523, 210, 94],
-      ['checkout-terminal', 2318, 464, 63, 75],
-      ['vendor-standing', 2262, 432, 60, 125]
+      ['glass-counter', 2072, 523, 210, 94],
+      ['checkout-terminal', 2186, 464, 63, 75],
+      ['vendor-standing', 2128, 432, 60, 125]
     ]
   },
   station: {
