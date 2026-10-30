@@ -115,3 +115,66 @@ npm run check:built
 \`\`\`
 
 La présence de ces commandes dans le projet ne garantit pas leur réussite. Consulter les exécutions GitHub Actions exactes de la tête de PR ; ne pas revendiquer une validation de sortie avant leur conclusion. Un classeur de **suivi V167** distinct, mis à jour dans cette conversation, ajoute quatre feuilles de comparaison, tests et reste-à-faire au classeur V1 conservé dans le dépôt ; ce fichier ne remplace pas le V1 binaire de GitHub tant qu'un commit dédié au binaire n'a pas été attesté.
+
+
+## Continuation V168 — récupération physique, accessoires et HUD
+
+Cette passe continue V167 sur la PR #23. Le socle V1 de 200 fiches et 460 références
+reste conservé dans GitHub. Le classeur **de suivi cumulatif V168 (27 onglets)** est un
+livrable de cette conversation distinct du binaire V1 actuellement versionné.
+
+### Implémentation dans le runtime
+
+- \`src/weapon-magazine-world-v168.js\` : coordonnées, plan, zone, propriétaire,
+  persistence des chargeurs éjectés, récupération à distance courte et ligne
+  de vue vérifiée, refus en cas de monde, propriétaire ou position incompatibles.
+  Le ramassage rend les cartouches déjà présentes dans le chargeur, jamais
+  des munitions de remplacement.
+- \`src/weapon-magazine-recovery-runtime-v168.js\` : couche de monde du
+  \`GameEngine\`, silhouettes de chargeurs tombés, interaction native prioritaire,
+  libellé contextuel et compteurs remis à jour, API speed-reload et maîtrise
+  d'arme visible dans un petit widget HUD uniquement après gain d'XP.
+- \`src/tactical-reload-v77.js\` conserve le chemin numérique et sélectionne
+  la politique physique \`speed\` seulement si explicitement demandée.
+  **Maj+R** sur clavier ; **R3+rechargement** sur une manette standard.
+  Un monde sans chargeurs physiques actifs garde le rechargement historique.
+- \`src/weapon-attachments-v168.js\` : 15 emplacements **typés**, 7
+  prototypes d'accessoires explicitement étiquetés comme adaptations
+  Tantalus pour certains M41A/M41A2/M56/M240, déblocage via maîtrise LV,
+  reçu anti-relecture, séparation propriétaire/instance/arme et sauvegarde.
+  **Aucun de ces sept prototypes ne dispose d'un sprite approuvé ni de
+  modificateurs de dégâts actifs.** La pose des mains et les pivots doivent
+  être approuvés avant visualisation.
+- Trois nouvelles intégrations de QA sont ajoutées à \`npm run test:weapons\` :
+  \`scripts/verify-weapon-arsenal-v167.mjs\` (11 tests),
+  \`scripts/verify-weapon-magazine-world-v168.mjs\` (11 tests),
+  \`scripts/verify-weapon-attachments-v168.mjs\` (7 tests).
+  Les commandes source restent vérifiables sans importer l'Excel dans le jeu.
+- \`sw.js\` précache les modules supplémentaires ; l'admission distribuable
+  reste explicite et \`.vercelignore\` continue à exclure les feuilles et les
+  documents de design de la version publique.
+
+### Limites / P1 à terminer
+
+1. **Activation pilote** : l'état physique est opt-in via
+   \`experimentalPhysicalMagazinesV167: true\`, pas une migration forcée.
+2. **Armes à alimentation différente** : bande M56, fusil à pompe à tube,
+   barillet, flammes, cellules et lanceurs attendent des transactions propres,
+   sans contredire leurs mécanismes canoniques.
+3. **Persistance long terme** : confirmer la propagation des XP/modules
+   au profil durable et au checkpoint, avec transactions serveur/coop
+   anti-duplication et véritable gestion des chargeurs tombés dans
+   plusieurs scènes.
+4. **Modularité visuelle** : produire les sprites/poses validés, puis
+   fixer rig, grips, canons, mains et animations pour chaque variante.
+5. **Art, sons, balistique** : revoir les sprites source, douilles ou absence
+   de douilles, impacts acides, lumière, sons et VFX à chaque arme.
+6. **Exhaustivité de franchise** : les lignes proposées et non sourcées
+   continuent de porter un statut de recherche. L'origine officielle
+   ne donne pas une permission automatique de republier des images.
+
+La CI Forge/Gameplay ne valide pas à elle seule tous les parcours navigateur,
+la présentation ou les PNG. Consulter les conclusions GitHub Actions de la
+tête exacte. Les vérificateurs de succession historique n'acceptent que les
+empreintes **précises** des changements V167/V168, sans réécrire les XLSX
+historiques ni les déclarer rétroactivement comme des tests récents.
