@@ -89,6 +89,21 @@ export const ARSENAL_V167_NEW_SOURCES = Object.freeze({
   'scripts/verify-weapon-attachments-v168.mjs': '9021a0adf8c3037bc29e26812011d8988e0323adddd04e7c645103a8f088e9fe'
 });
 
+/** V169 follows, rather than overwrites, the reviewed V167/V168 app receipt.
+ * Only the existing armory UI integration is admitted; historical pins stay intact.
+ */
+export const ARMORY_V169_SUCCESSORS = Object.freeze({
+  'src/app.js': Object.freeze({
+    previousSha256: ARSENAL_V167_SUCCESSORS['src/app.js'].currentSha256,
+    currentSha256: '07f0c77bc2dfb2c333c5c394045895eb9c7ea4b7a28ab42ee190e0cac8399542',
+    verifier: 'scripts/verify-hub-armory-v169.mjs',
+    verifierSha256: '900a3310329440309e2dc316c06bf91637a4024b376f324999c0801a1de8021e'
+  })
+});
+export const ARMORY_V169_NEW_SOURCES = Object.freeze({
+  'src/hub-armory-storefront-v169.js': '5ed95c5d1d16b5a2870302d41e34aa62b0d395bc66bdb49953baea932fbf47ae'
+});
+
 
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
@@ -274,7 +289,16 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const successor = Object.hasOwn(ARSENAL_V167_SUCCESSORS, path) ? ARSENAL_V167_SUCCESSORS[path] : null;
     if (successor) {
       assert.equal(expected, successor.previousSha256, 'Incorrect V163 baseline for V167 successor: ' + path);
-      assert.equal(sha(readSource(path)), successor.currentSha256, 'Unreviewed V167 runtime successor: ' + path);
+      const armory = ARMORY_V169_SUCCESSORS[path];
+      if (armory) {
+        assert.equal(armory.previousSha256, successor.currentSha256,
+          'Broken V167-to-V169 successor chain: ' + path);
+        assert.equal(sha(readSource(path)), armory.currentSha256,
+          'Unreviewed V169 runtime successor: ' + path);
+      } else {
+        assert.equal(sha(readSource(path)), successor.currentSha256,
+          'Unreviewed V167 runtime successor: ' + path);
+      }
     } else {
       assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
     }
@@ -282,6 +306,15 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   // New V167 modules are not retroactively called historical V163 sources.
   for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES))
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V167 added source: ' + path);
+  for (const [path, expected] of Object.entries(ARMORY_V169_NEW_SOURCES))
+    assert.equal(sha(readSource(path)), expected, 'Unreviewed V169 added source: ' + path);
+  for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
+    assert.ok(Object.hasOwn(ARSENAL_V167_SUCCESSORS, path), 'Missing V167 predecessor: ' + path);
+    assert.equal(receipt.previousSha256, ARSENAL_V167_SUCCESSORS[path].currentSha256,
+      'Incorrect V169 predecessor: ' + path);
+    assert.equal(sha(readSource(receipt.verifier)), receipt.verifierSha256,
+      'Unreviewed V169 behavioral verifier: ' + receipt.verifier);
+  }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
   for (const path of [...changed, ...added]) assert.ok(!path.startsWith('src/forge') || Object.hasOwn(corrections, path),
@@ -319,7 +352,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
   // Never mutate V163 archival hashes. An explicit effective read exports the
   // exact, previously validated successor set to legacy audit callers.
   return effective ? Object.freeze({ ...current.runtimeSourceSha256,
-    ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) })
+    ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;
 }
 
