@@ -211,6 +211,13 @@ PREPARATION_EXPORT_V177 = r'''()=>{
     preparationProof:c.proof}:null;
 }'''
 
+# Only metadata crosses the Python/Playwright boundary during combat.
+# PNG serialization is deferred until the true public pause freezes the hold.
+PREPARATION_METADATA_V185 = r'''()=>{
+  const c=globalThis.__ATF_PREPARATION_CAPTURE_V177__?.current?.capture;
+  return c?{state:c.state,preparationProof:c.proof}:null;
+}'''
+
 def acquire_player_capture(page, after, trace):
     # The Prowler and these humans have different front-biased bodies. Their
     # pivot distance is not the V153 contact test. All imports below only read
@@ -294,7 +301,7 @@ def acquire_player_capture(page, after, trace):
             # Validate the pose and attack in the same atomic state+PNG read.
             # A prior polling snapshot only decides whether a read is useful;
             # it never supplies the identity claimed for the captured image.
-            if (a.get('attack') or {}).get('kind') == 'special' and a['attack']['id'] not in observed_preparation_ids:
+            if not after and (a.get('attack') or {}).get('kind') == 'special' and a['attack']['id'] not in observed_preparation_ids:
                 frame = get_frame(page)
                 frame_match = frame['state']['match']
                 frame_player = frame_match['fighters'][0] if frame_match else None
@@ -349,7 +356,7 @@ def acquire_player_capture(page, after, trace):
                         attempt['attackEventId'] = event['id'] if event else None
                         # Retain genuine native prep only if its detached RAF
                         # canvas and the accepted key-driven event are identical.
-                        inline = page.evaluate(PREPARATION_EXPORT_V177)
+                        inline = page.evaluate(PREPARATION_METADATA_V185)
                         proof = inline.get('preparationProof') if inline else None
                         if (proof and event and proof['attackId'] + 1 == event['id']
                                 and proof['attackEventId'] == event['id']
@@ -518,6 +525,16 @@ def main():
                         'compactDiagnostics': pause_diagnostics})
                     check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
                           failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
+                    if role == 'player-captor':
+                        # The live match is frozen by the real pause button.
+                        # Only now serialize the detached native startup PNG.
+                        # This cannot consume the opponent's last escape ticks.
+                        accepted_proof = acquisition['successfulSpecial']['preparationProof']
+                        sealed_preparation = page.evaluate(PREPARATION_EXPORT_V177)
+                        check(name + ': deferred original startup image belongs to the accepted special',
+                              sealed_preparation is not None and sealed_preparation.get('preparationProof') == accepted_proof
+                              and sealed_preparation['state']['match']['config']['matchId'] == binding['matchId'])
+                        preparation = sealed_preparation
                     hold = page.evaluate(CAPTURE_EXPORT, {'stage': 'floor', 'fields': ['floor']})['floor']
                     check(name + ': actual native Prowler startup is observed', preparation is not None)
                     capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
