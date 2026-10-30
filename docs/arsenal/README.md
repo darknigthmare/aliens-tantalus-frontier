@@ -178,3 +178,40 @@ la présentation ou les PNG. Consulter les conclusions GitHub Actions de la
 tête exacte. Les vérificateurs de succession historique n'acceptent que les
 empreintes **précises** des changements V167/V168, sans réécrire les XLSX
 historiques ni les déclarer rétroactivement comme des tests récents.
+
+
+## V170 — preuves d'armes, catalogue des absents et armureries
+
+Cette continuation est volontairement **sans génération d'images**. Elle ne renumérote aucune arme historique ni ne duplique les entrées du marché; elle augmente les preuves disponibles et la lisibilité du reste-à-faire.
+
+- \`src/weapon-fidelity-ledger-v170.js\`: 18 dossiers de référence **non achetables** : 12 identités ou apparitions repérées sur captures de gameplay d'*Aliens: Fireteam Elite 2* (source secondaire), 5 familles d'armes recensées dans le manuel officiel d'*Alien: Isolation*, et le M41E4 nommé dans les notes officielles d'*Aliens: Fireteam Elite*. Le même nom entre deux jeux ne prouve **pas** la même géométrie de modèle.
+- Le registre comprend séparément **13 accessoires** nommés dans les notes officielles *Fireteam Elite*, sans inventer leurs compatibilités, leur apparence, leurs statistiques ni des sprites.
+- \`docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv\`: **129 fiches proposées** de la base V1, réconciliées exactement par ID; 13 dossiers d'identification prioritaires P0, 28 P1, 88 P2. Ces niveaux indiquent **l'ordre du travail**, pas une valeur canonique.
+- \`src/app.js\`: volet repliable *Archives d'armement* dans l'armurerie existante. L'interface affiche les noms et liens de preuve, **sans** exposer de \`data-procure-*\`, de munitions supplémentaires ou de fonction d'achat alternative. L'ancien système transactionnel de crédits/stock reste seul compétent.
+- \`scripts/verify-weapon-fidelity-v170.mjs\`: test de l'identité de source, l'isolation des révisions AFE2, la présence des propositions dans le CSV historique, l'absence de statistiques inventées et la fermeture des routes d'achat.
+
+### Art V169 : état des trois variantes
+
+Les trois planches et leurs sprites séparés ont été livrés **hors dépôt** dans \`ARMURERIES_TANTALUS_3_VARIANTES_SPRITES_V169.zip\`; les fichiers PNG ne figurent **pas** encore dans la branche de PR. Les chemins image de \`src/hub-armory-storefront-v169.js\` sont des destinations futures. Le moteur retombe sur le décor préexistant si l'image manque.
+
+Les empreintes ci-dessous sont celles des **PNG sources locaux** (1448×1086, pas une preuve de fidélité canonique ni de dépôt GitHub) :
+- Tantalus : \`99f2fdbe5fbcde50a821ddad2da105ae773faa337da9e1754a51bb4f32d6c077\`
+- Colonie : \`8247c0735656fb2c02c7100fb5b23deb004fe64d8e9caf9c32c646dbb0d162c9\`
+- Station : \`f4b0875daa236dc8d3253e08680cce0eb74be401a980fe3d2f7c3a436809438b\`
+
+La pose originale de l'armurière S. Doyle dans le pont industriel est conservée. Les vendeurs coloniaux et de station sont des concepts ; leurs rigs/animations 2D dédiés restent à réaliser. Les armes visibles sur les planches générées ne sont **pas** admises en tant que modèles authentifiés 1:1.
+
+### Définition stricte de « fidélité 1:1 » pour une arme
+
+Avant d'autoriser une arme source :
+1. Modèle exact et révision/jeu/film précisés, au moins deux angles de référence comparables et droit d'utilisation des images établi.
+2. Silhouette, proportions des parties mobiles et prises main/arme, rig latéral, animation idle/viser/tirer/recharger/service validés.
+3. Feed réel (chargeur, bande, tube, barillet, cellule, réservoir), chambre et consommables indépendants ; test d'interruption et de duplication.
+4. Douille *uniquement si éjectée par le mécanisme source*, chambre et gestes correspondants ; impacts, son, flash, fumée et surfaces adaptés.
+5. Contrôle sur 3 scènes (Tantalus, colonie, station) et sur les variantes de tenue, avec rapport QA reproductible. La validation doit provenir des résultats courants, pas d'un classeur historique.
+
+**Références textuelles V170 :** 
+- https://www.gamewatcher.com/aliens-fireteam-elite-2/weapons (noms de captures de gameplay, secondaire)
+- https://www.daybreakgames.com/press/afe2/article/dbg-afe2-now-live (sortie officielle, pas preuve des caractéristiques individuelles)
+- https://www.aliensfireteamelite.com/en/releasenotes/ (noms de certaines armes et accessoires du jeu original)
+- https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/ (armes disponibles dans le jeu *Alien: Isolation*)
