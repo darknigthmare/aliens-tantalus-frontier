@@ -299,7 +299,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
 }
 
 /** A missing successor preserves the anchored record; invalid content never falls back. */
-export function resolveAuditSourcesV163(previous, readSource = readRepository) {
+export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
   let current;
   try {
@@ -309,7 +309,11 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository) {
     return previous.runtimeSourceSha256;
   }
   verifyAuditSuccessionV163(previous, current, readSource);
-  return current.runtimeSourceSha256;
+  // Never mutate V163 archival hashes. An explicit effective read exports the
+  // exact, previously validated successor set to legacy audit callers.
+  return effective ? Object.freeze({ ...current.runtimeSourceSha256,
+    ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) })
+    : current.runtimeSourceSha256;
 }
 
 export function loadAuditSuccessionV163(readSource = readRepository) {
