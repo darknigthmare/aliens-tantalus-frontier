@@ -246,6 +246,14 @@ def inspect_scene(page, config, label, expected_room):
           and row['parallax']['presentationMode'] == ('2.5d' if wanted == 'parallel-oblique' else '2d'))
     if args.stage == 'after':
         details = row['life'].get('serviceDetailsV165')
+        if expected_room == 'armory' and not details.get('items', []) if details else expected_room == 'armory':
+            # Strict diagnosis of a missing V179 fitting. Never count the
+            # omitted assembly as rendered or move the runtime fitting in QA.
+            print('V179_ARMORY_OMISSIONS ' + json.dumps({
+                'scene': label, 'roomId': expected_room,
+                'omitted': (details or {}).get('omitted', []),
+                'drawnCount': len((details or {}).get('paintedIds', []))
+            }, ensure_ascii=False, separators=(',', ':')), flush=True)
         check(label + ': the actual production draw reports its admitted wall assemblies',
               details is not None and details['geometryPreserved'] and not details['collidable']
               and not details['interactive'] and details['paintedIds'] == [item['id'] for item in details['items']]
