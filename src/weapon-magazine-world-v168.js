@@ -1,4 +1,5 @@
-import { validateWeaponFeedV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
+import { validateWeaponFeedV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167,
+  captureWeaponFeedV167, restoreWeaponFeedV167 } from './weapon-magazine-inventory-v167.js';
 
 /** World receipts for actual detachable magazines. These are visual/gameplay
  * instances of rounds that already existed in a V167 feed, never new ammo.
@@ -29,6 +30,16 @@ export function validateMagazineWorldV168(feed, { requirePosition = false } = {}
 /** Ejection position is bound once to the actual scene/actor and survives save.
  * A duplicate observer tick never relocates a previously dropped magazine.
  */
+/** Snapshot boundary: reject world magazines without a physical position.
+ * The V167 numeric fields are still checked by its original validator. */
+export function captureMagazineFeedV168(feed) {
+  return validateMagazineWorldV168(feed, { requirePosition: true }) ? captureWeaponFeedV167(feed) : null;
+}
+export function restoreMagazineFeedV168(snapshot, options = {}) {
+  const feed = restoreWeaponFeedV167(snapshot, options);
+  return feed && validateMagazineWorldV168(feed, { requirePosition: true }) ? feed : null;
+}
+
 export function stampEjectedMagazinesV168(feed, { ownerId, levelId, plane: targetPlane = 'gameplay', x, y } = {}) {
   if (!validateMagazineWorldV168(feed) || ownerId !== feed.ownerId
     || !validId(levelId) || !plane(targetPlane) || !finite(x) || !finite(y)) return 0;
