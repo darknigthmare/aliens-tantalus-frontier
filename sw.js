@@ -552,6 +552,8 @@ const SHELL = Object.freeze([
   '/src/weapon-effects-runtime-v124.js',
   '/src/weapon-effects-v124.js',
   '/src/weapon-image-cache-v125.js',
+  '/src/weapon-magazine-inventory-v167.js',
+  '/src/weapon-mastery-v167.js',
   '/src/weapon-mechanics-weapons-v122.js',
   '/src/weapon-native-extra-v121.js',
   '/src/weapon-native-visuals-v112.js',
