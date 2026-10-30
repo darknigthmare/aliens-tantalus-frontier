@@ -233,6 +233,24 @@ try:
                 if args.stage == 'after':
                     page.wait_for_function("""()=>getComputedStyle(
                       document.querySelector('#hub-dialogue-image')).maskImage!=='none'""")
+                # V168 is a native 384px cropped canvas, replacing the old
+                # CSS clip. Wait for its real load/paint instead of sampling
+                # while the portrait is still asynchronously loading.
+                profile = page.evaluate("""async crew=>{
+                  const { getNpcDialoguePortraitV168 } =
+                    await import('/src/npc-dialogue-portraits-v168.js');
+                  return getNpcDialoguePortraitV168(crew);
+                }""", config['crew'])
+                if profile:
+                    page.wait_for_function("""crew=>{
+                      const image=document.querySelector('#hub-dialogue-image'),
+                        box=image?.parentElement,
+                        canvas=box?.querySelector('canvas[data-dialogue-avatar-v168]');
+                      return box?.dataset.dialoguePortraitCrewV168===crew
+                        &&box.dataset.dialoguePortraitStateV168==='ready'
+                        &&canvas&&!canvas.hidden
+                        &&canvas.dataset.portraitSourceRectV168;
+                    }""", arg=config['crew'])
                 portrait = page.locator('#hub-dialogue-image').evaluate("""i=>{
                   const container=i.parentElement,
                     avatar=container?.querySelector('canvas[data-dialogue-avatar-v168]');
@@ -245,14 +263,6 @@ try:
                     portraitCrew:container?.dataset.dialoguePortraitCrewV168||null,
                     portraitKind:container?.dataset.dialoguePortraitKindV168||null};
                 }""")
-                # V168 uses a bounded 384px head/shoulder canvas instead of
-                # the historical CSS-clipped <img>. The hidden source image
-                # remains the exact unmodified atlas, with its V164 alpha mask.
-                profile = page.evaluate("""async crew=>{
-                  const { getNpcDialoguePortraitV168 } =
-                    await import('/src/npc-dialogue-portraits-v168.js');
-                  return getNpcDialoguePortraitV168(crew);
-                }""", config['crew'])
                 after = observe(page, config['crew'])
                 check(config['id'] + ': real E opens the matching NPC dialogue',
                       config['speaker'] in page.locator('#hub-dialogue-speaker').inner_text()
