@@ -232,3 +232,17 @@ Les notes officielles AFE2 du 22 octobre 2026 décrivent notamment la synchronis
 https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes
 
 L'armurière S. Doyle demeure la PNJ native du Tantalus. Les vendeurs de colonie et station nécessitent encore rigs, dialogues, stocks et animations spécifiques. Les contrôles V171/V172/V173 doivent passer sur le SHA exact de la tête de PR ; les audits historiques V163 ne sont pas réécrits.
+
+## V174 — Boutique de ravitaillement et bilan d’intégration
+
+Le système existant de crédits et de sauvegarde a désormais un comptoir de ravitaillement via `src/armory-resupply-v174.js` et l’interface `src/app.js` : +60 munitions principales pour 120 CR, +24 secondaires pour 90 CR, ou +2 grenades pour 220 CR. Ces tarifs sont des **valeurs originales de gameplay Tantalus**, pas des tarifs canoniques AFE/AFE2.
+
+La recherche `ship-logistics` applique la remise existante de 15 %, arrondie à dix crédits. Les achats sont bloqués pendant une opération, si le joueur manque de crédits ou dépasse le plafond d’inventaire, et lors d’une récupération de sauvegarde. La transaction passe par `runTimedMutation`, qui revient à l’état précédent si le commit échoue. Aucun chargeur physique fictif, nouvelle arme ou bonus de dégâts n’est créé par ces achats.
+
+Le test `scripts/verify-armory-resupply-v174.mjs` couvre 8 scénarios : coût, lot exact, remise, plafonds, refus, répétition explicitement payée, rendu HTML et transaction dans la boutique d’origine. Il est inclus dans `npm run test:weapons`. Le cache offline et la liste strictement autorisée des sources sont actualisés. L’audit V174 utilise ses propres digests au lieu d’effacer les empreintes historiques V163/V165.
+
+**Classeur de suivi** : `ALIENS_TANTALUS_ARSENAL_COMPLET_SUIVI_V174.xlsx` a été exporté dans la conversation (non commité comme fichier binaire GitHub). Il reprend les 22 feuilles V167 et ajoute six feuilles de suivi pour les 129 modèles proposés, les trois armureries, les lots de munitions, les cinq mécanismes spécifiques, les tests et le bilan. Le classeur GitHub V1 demeure inchangé.
+
+**Reste à finaliser pour une fidélité 1:1** : sources multi-angle et droits, variantes d’apparence spécifiques à chaque œuvre, squelette et prise en main latéraux, animations de cycle/rechargement, alimentation spéciale réellement raccordée au moteur, VFX/sons exacts, certification des vendeurs colonie/station, tests sur trois scènes et revue artistique. Le M41A 30 mm sous canon dispose d’un contrat séparé V174, mais pas encore d’une admission 1:1 complète.
+
+**Validation** : ne conclure à la stabilité qu’après réussite des suites Forge, Gameplay, Excel et Full Release sur un seul et même SHA de tête de PR. Un test Node réussi ne constitue pas une vérification de fidélité visuelle canonique.
