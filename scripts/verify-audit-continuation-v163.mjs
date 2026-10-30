@@ -14,7 +14,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
   V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174,
-  V165_VERIFIER_SUCCESSORS_V176, V165_VERIFIER_SUCCESSORS_V177, ARMORY_V178_RENDER_SUCCESSORS,
+  V165_VERIFIER_SUCCESSORS_V176, V165_VERIFIER_SUCCESSORS_V177,
+  V165_VERIFIER_SUCCESSORS_V178, ARMORY_V178_RENDER_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
@@ -175,11 +176,14 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const next = V165_VERIFIER_SUCCESSORS_V174[path];
     const latest = V165_VERIFIER_SUCCESSORS_V176[path];
+    const v177 = V165_VERIFIER_SUCCESSORS_V177[path];
+    const v178 = V165_VERIFIER_SUCCESSORS_V178[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
     if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
     if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
-    assert.equal(sha(read(path)),
-      latest?.currentSha256 || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+    if (v177) assert.equal(v177.previousSha256, (latest || next || revision || receipt).currentSha256);
+    if (v178) assert.equal(v178.previousSha256, (v177 || latest || next || revision || receipt).currentSha256);
+    assert.equal(sha(read(path)), (v178 || v177 || latest || next || revision || receipt).currentSha256, path);
   }
 });
 
@@ -203,9 +207,13 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
-    assert.equal(sha(read(path)),revision.currentSha256,path);
+    const successor = V165_VERIFIER_SUCCESSORS_V178[path];
+    if (successor) assert.equal(successor.previousSha256, revision.currentSha256,
+      'V176-to-V178 audit proof chain broken: '+path);
+    assert.equal(sha(read(path)), successor?.currentSha256 || revision.currentSha256,path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
-    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V176 verifier/,path);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
+      /Unreviewed V178|Unreviewed V176 verifier/,path);
   }
 });
 
