@@ -295,6 +295,16 @@ export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
   })
 });
 
+/** V178: reviewed audit test correctly recognizes the V177 cumulative QA
+ * receipt. Earlier V176/V177 receipts remain immutable, not overwritten.
+ */
+export const V165_VERIFIER_SUCCESSORS_V178 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V176['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '50ac4caf8ab70199879feb96659d9178147401c6b3571c6201decdb64028c7a7'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -552,6 +562,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const latest = V165_VERIFIER_SUCCESSORS_V174[path];
     const approvedV176 = V165_VERIFIER_SUCCESSORS_V176[path];
     const approvedV177 = V165_VERIFIER_SUCCESSORS_V177[path];
+    const approvedV178 = V165_VERIFIER_SUCCESSORS_V178[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
     if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
@@ -562,9 +573,14 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (approvedV177) assert.equal(approvedV177.previousSha256,
       (approvedV176 || latest || revision || receipt).currentSha256,
       'Broken V173-to-V177 cumulative verifier chain: ' + path);
+    if (approvedV178) assert.equal(approvedV178.previousSha256,
+      (approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V176-to-V178 audit verifier chain: ' + path);
     assert.equal(sha(readSource(path)),
-      approvedV177?.currentSha256 || approvedV176?.currentSha256 || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV177 ? 'Unreviewed V177 cumulative verifier successor: ' + path
+      approvedV178?.currentSha256 || approvedV177?.currentSha256 || approvedV176?.currentSha256
+        || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
+      approvedV178 ? 'Unreviewed V178 audit verifier successor: ' + path
+        : approvedV177 ? 'Unreviewed V177 cumulative verifier successor: ' + path
         : approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
           : latest ? 'Unreviewed V174 verifier successor: ' + path
             : revision ? 'Unreviewed V173 verifier successor: ' + path
