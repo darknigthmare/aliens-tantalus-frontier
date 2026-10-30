@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
  COSTUME_V175_REVIEW_RECEIPT,auditCostumeReviewPackV175,
- stageCostumeReviewPackV175
+ auditV175PixelRoundtrip,stageCostumeReviewPackV175
 } from './install-costume-art-v175.mjs';
 const sha=buf=>createHash('sha256').update(buf).digest('hex');
 test('V175 receipt has only four independent outfits and no game approval',()=>{
@@ -47,4 +47,24 @@ test('V175 importer and art remain source-only until independent native pose QA'
  assert.match(code,/renameSync\(tmp,target\)/);
  assert.match(code,/STAGED_FOR_MANUAL_RIG_QA_NOT_PUBLICLY_ADMITTED/);
  assert.doesNotMatch(code,/ARMORY_ART_ADMISSIONS_V171\s*=/);
+});
+
+test('V176 native source round-trip is mandatory before staging or admission',()=>{
+ const code=readFileSync(new URL('./install-costume-art-v175.mjs',import.meta.url),'utf8');
+ assert.match(code,/auditV175PixelRoundtrip\(folder\);/);
+ assert.match(code,/mode==='--verify-pixels'\?auditV175PixelRoundtrip\(source\)/);
+ assert.match(code,/const review=auditCostumeReviewPackV175\(root\)/);
+ assert.match(code,/sourceOpaque>0/);
+ assert.match(code,/overlaps:0,uncovered:0,incorrect:0,extra:0/);
+ assert.match(code,/nativeRigApproved:false,filmOneToOneApproved:false/);
+ assert.doesNotMatch(code,/nativeRigApproved:true|filmOneToOneApproved:true/);
+});
+test('V176 optional physical V175 fixture has exact opaque reconstruction',
+ {skip:!process.env.TANTALUS_V175_ART_ROOT},()=>{
+ const result=auditV175PixelRoundtrip(process.env.TANTALUS_V175_ART_ROOT);
+ assert.equal(result.status,'OPAQUE_PIXEL_ROUNDTRIP_PASSED');
+ assert.equal(result.sourceAtlases,8);
+ assert.equal(result.records.length,8);
+ assert.ok(result.records.every(x=>x.opaqueCoveragePercent===100
+   &&x.overlaps===0&&x.uncovered===0&&x.incorrect===0&&x.extra===0));
 });
