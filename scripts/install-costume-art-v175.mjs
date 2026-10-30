@@ -105,7 +105,7 @@ export function auditCostumeReviewPackV175(folder){
 export function stageCostumeReviewPackV175(folder,{repoRoot=
   resolve(fileURLToPath(new URL('..',import.meta.url)))}={}){
   const review=auditCostumeReviewPackV175(folder);
-  auditV175PixelRoundtrip(folder,review);
+  auditV175PixelRoundtrip(folder);
   const target=resolve(repoRoot,'assets/openai/sprites/player/costume-review-v175');
   assert.ok(!existsSync(target),'Review assets exist; never overwrite them silently');
   const parent=dirname(target);mkdirSync(parent,{recursive:true});
@@ -180,9 +180,9 @@ function decodeNativeRgbaV176(path) {
   }
   return {width,height,rgba};
 }
-export function auditV175PixelRoundtrip(root,verified=null){
-  // The source SHA checks always precede the more expensive raster check.
-  const review=verified||auditCostumeReviewPackV175(root);
+export function auditV175PixelRoundtrip(root){
+  // Source hashes cannot be bypassed with caller-provided review receipts.
+  const review=auditCostumeReviewPackV175(root);
   assert.equal(review.verified,true,'Missing V175 source receipt');
   const base=resolve(root);
   const manifest=JSON.parse(readFileSync(join(base,'manifest.json'),'utf8'));
