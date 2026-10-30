@@ -264,3 +264,39 @@ Le test npm `verify-costume-art-installer-v175.mjs` permet d'exécuter
 le même contrôle avec `TANTALUS_V175_ART_ROOT` lorsque l'archive
 physique décompressée est disponible. L'absence de l'archive en CI
 est un **skip déclaré**, pas un succès du rendu en jeu.
+
+
+### V176 — références de costumes et état des variantes
+
+Les sources de production ont été confrontées aux quatre adaptations V175.
+La présence de vêtements ressemblants ne suffit pas pour attribuer
+`exact: true`, ni à une tenue ni à son personnage (le corps reste Echo9).
+
+| Costume | Preuve documentaire | Différence ou vérification encore ouverte |
+|---|---|---|
+| Ripley Fury 161 | [Propstore — prison uniform](https://propstore.com/product/alien-1992/ripleys-sigourney-weaver-prison-uniform-2/) et [jacket](https://propstore.com/product/alien-1992/ripleys-sigourney-weaver-jacket/) | Ensemble de base brun produit, mais **grand manteau vert**, marques/patchs Fury 161, panneau dorsal du tee-shirt et changement de couches restent absents du pack ; détails de coutures et fermetures à comparer aux photos |
+| Ripley 8 | [Julien's Auctions — tenue écran](https://www.juliensauctions.com/en/items/72008/sigourney-weaver-ripley-screen-used-costume-from-alien-resurrection-with-dvd) | Gilet de cuir rembourré, top beige, pantalon et bottes adaptés ; coupe exacte, nervures, vieillissement, état aquatique et taille native non contrôlés |
+| Andy | [20th Century Studios — Romulus](https://www.20thcenturystudios.com/movies/alien-romulus) et [entretien Carlos Rosario](https://www.dazeddigital.com/fashion/article/64405/1/alien-romulus-costume-designer-carlos-rosario-fede-alvarez-cailee-spaeny) | Sac banane natif séparé, mais sa fixation animée reste à valider ; souliers, finitions et visage ne correspondent pas encore à une restitution 1:1 |
+| Navarro | [CAFTCAD — conception des tenues](https://www.caftcad.com/alien-romulus) et [Motion Picture Association — interview](https://www.motionpictures.org/2024/09/designed-to-shred-how-alien-romulus-costume-designer-carlos-rosario-stylized-horror/) | La chemise à palmiers utilisait un motif créé pour la production ; la peinture actuelle n'est pas une reproduction contrôlée. Variantes d'usure, cuir, accessoires et états de scène à documenter |
+
+#### Livrable V176, hors dépôt
+
+Le pack externe `ALIENS_TANTALUS_COSTUMES_V176_QA.zip` conserve les
+123 PNG du manifeste V175 exact et ajoute un **atelier HTML
+d'inspection locale**, le rapport de reconstruction, deux captures
+d'interface, une planche avec rectangles d'extraction et la checklist
+de validation.
+
+- SHA-256 ZIP : `ad52a6160f3a9dd21f99cdb0dc0f233bcc10123996a90f259c903b09b9a76090`
+- SHA-256 du manifeste conservé : `721df020f2c581e800683c8edad125a917d9e352149c357199bc8968d0cc8733`
+- QA image : huit reconstructions, 100 % des pixels opaques conservés,
+  **0** pixel perdu, ajouté, altéré ou superposé
+- QA interface : quatre gestes d'inspection validés dans Chromium
+  (choix d'atlas, sac, overlays, isolations), aucune erreur de page ;
+  l'export navigateur reste non vérifié à cause de l'origine artificielle
+  du test
+
+Le ZIP externe n'est **pas** envoyé dans GitHub. L'admission au moteur,
+les dialogues, le costume complet et la fidélité canonique sont
+strictement ouverts. Ne pas utiliser les photos de costumes tierces
+comme sprites distribués sans droits appropriés.
