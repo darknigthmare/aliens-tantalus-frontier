@@ -592,7 +592,26 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       const passengers=routeId==='tamsin-proving'?['inez-civil']:['mara-archives','echo-escape'].includes(routeId)?['maksim-cockpit']
         :routeId==='cal-logistics'?['david-durandal']:routeId==='idris-engine'?['inez-civil','maksim-cockpit','jun-sanitary']
           :['asha-refuge','leila-galley'].includes(routeId)?['jun-sanitary']:[];
-      return passengers.some(id=>Boolean(this.npcInterdeckStateV165?.routes[id]?.actor));
+      // The physical owner yields only to a passenger actually approaching
+      // its parent-deck walking circuit. A passenger retained on another deck,
+      // or working in an unrelated room, must not freeze an annex service
+      // worker forever (Idris could never return after the 12h briefing).
+      // These are the real authored parent/approach rooms, not new paths.
+      const circuit={
+        'tamsin-proving':{deck:2,rooms:['armory']},
+        'mara-archives':{deck:0,rooms:['briefing']},
+        'echo-escape':{deck:0,rooms:['briefing','combat-information','cryo-bay']},
+        'cal-logistics':{deck:2,rooms:['vehicle-bay']},
+        'idris-engine':{deck:3,rooms:['reactor']},
+        'asha-refuge':{deck:1,rooms:['crew-quarters']},
+        'leila-galley':{deck:1,rooms:['mess']}
+      }[routeId];
+      if(!circuit)return false;
+      return passengers.some(id=>{
+        const passenger=this.npcInterdeckStateV165?.routes[id]?.actor;
+        return passenger?.deck===circuit.deck && circuit.rooms.includes(passenger.roomId)
+          && passenger.stage!=='returned';
+      });
     }
     getNpcServicePassingDutyV165(routeId,actor) {
       if(this.npcInterdeckPassingRequestV165(routeId))return true;
