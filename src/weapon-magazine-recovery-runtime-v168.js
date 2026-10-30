@@ -1,5 +1,7 @@
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { weaponMasterySummaryV167 } from './weapon-mastery-v167.js';
+import { createWeaponModuleInventoryV168, installWeaponModuleV168, uninstallWeaponModuleV168,
+  equippedWeaponModulesV168, captureWeaponModulesV168, restoreWeaponModulesV168 } from './weapon-attachments-v168.js';
 import { stampEjectedMagazinesV168, visibleDroppedMagazinesV168,
   nearestDroppedMagazineV168, recoverDroppedMagazineV168 } from './weapon-magazine-world-v168.js';
 
@@ -9,6 +11,49 @@ import { stampEjectedMagazinesV168, visibleDroppedMagazinesV168,
  */
 export function withMagazineRecoveryWorldV168(Base) {
   return class MagazineRecoveryWorldV168 extends Base {
+    start(options = {}) {
+      const result = super.start(options);
+      this.weaponModulesV168 = createWeaponModuleInventoryV168();
+      return result;
+    }
+
+    captureWeaponModuleInventoryV168() {
+      return captureWeaponModulesV168(this.weaponModulesV168 || createWeaponModuleInventoryV168());
+    }
+
+    installEquippedWeaponModuleV168(actor, moduleId, receiptId) {
+      const ownerId = this.magazineFeedOwnerV168(actor), feed = actor?.weaponFeedV167;
+      if (!ownerId || !feed || !this.weaponMasteryV167 || !this.canPerformGameplayAction?.(actor)) return null;
+      const mastery = weaponMasterySummaryV167(this.weaponMasteryV167, ownerId, feed.weaponDefinitionId);
+      if (!mastery) return null;
+      this.weaponModulesV168 ||= createWeaponModuleInventoryV168();
+      const result = installWeaponModuleV168(this.weaponModulesV168, {
+        ownerId, weaponDefinitionId: feed.weaponDefinitionId, weaponInstanceId: feed.weaponInstanceId,
+        moduleId, masteryLevel: mastery.level, receiptId
+      });
+      if (result) this.onEvent?.({ type: 'weapon-module-installed-v168', ownerId,
+        weaponId: feed.weaponDefinitionId, moduleId, visualPending: true });
+      return result;
+    }
+
+    uninstallEquippedWeaponModuleV168(actor, slot, receiptId) {
+      const ownerId = this.magazineFeedOwnerV168(actor), feed = actor?.weaponFeedV167;
+      if (!ownerId || !feed || !this.canPerformGameplayAction?.(actor)) return null;
+      const result = uninstallWeaponModuleV168(this.weaponModulesV168, {
+        ownerId, weaponDefinitionId: feed.weaponDefinitionId,
+        weaponInstanceId: feed.weaponInstanceId, slot, receiptId
+      });
+      if (result) this.onEvent?.({ type: 'weapon-module-removed-v168', ownerId,
+        weaponId: feed.weaponDefinitionId, moduleId: result.moduleId, visualPending: true });
+      return result;
+    }
+
+    equippedWeaponModulesV168(actor = this.player) {
+      const ownerId = this.magazineFeedOwnerV168(actor);
+      return ownerId && actor?.weaponFeedV167
+        ? equippedWeaponModulesV168(this.weaponModulesV168, ownerId, actor.weaponFeedV167.weaponInstanceId) : [];
+    }
+
     magazineWorldLevelV168() {
       const candidate = this.missionLevelRuntime?.signature || this.mission?.id || this.mission?.worldId || 'mission';
       return String(candidate).trim().replace(/\s+/g, '-').slice(0, 140) || 'mission';
@@ -44,7 +89,14 @@ export function withMagazineRecoveryWorldV168(Base) {
     captureResumeState() {
       for (const actor of [this.player, this.coopEnabled ? this.coop : null].filter(Boolean))
         this.syncMagazineDropsV168(actor);
-      return super.captureResumeState();
+      return { ...super.captureResumeState(),
+        weaponModulesV168: this.captureWeaponModuleInventoryV168() };
+    }
+
+    applyResumeState(raw) {
+      const result = super.applyResumeState(raw);
+      if (result?.applied) this.weaponModulesV168 = restoreWeaponModulesV168(raw?.weaponModulesV168);
+      return result;
     }
 
     magazinePickupVisibleV168(actor, drop) {
