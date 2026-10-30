@@ -236,11 +236,16 @@ try:
                 # V168 is a native 384px cropped canvas, replacing the old
                 # CSS clip. Wait for its real load/paint instead of sampling
                 # while the portrait is still asynchronously loading.
-                profile = page.evaluate("""async crew=>{
-                  const { getNpcDialoguePortraitV168 } =
-                    await import('/src/npc-dialogue-portraits-v168.js');
-                  return getNpcDialoguePortraitV168(crew);
-                }""", config['crew'])
+                profile = None
+                # Historical V164 baseline files do not have the V168 module.
+                # Only permit the old CSS proof when that source file is truly
+                # absent; a modern build that fails its V168 import must fail.
+                if (repo / 'src/npc-dialogue-portraits-v168.js').is_file():
+                    profile = page.evaluate("""async crew=>{
+                      const { getNpcDialoguePortraitV168 } =
+                        await import('/src/npc-dialogue-portraits-v168.js');
+                      return getNpcDialoguePortraitV168(crew);
+                    }""", config['crew'])
                 if profile:
                     page.wait_for_function("""crew=>{
                       const image=document.querySelector('#hub-dialogue-image'),
