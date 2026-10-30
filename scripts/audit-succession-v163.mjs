@@ -181,8 +181,7 @@ export const V165_VERIFIER_SUCCESSORS_V171 = Object.freeze({
   }),
   'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
     previousSha256: '0e62c205e45006c9adbf6f58850233b40d79aaaaefabd802fad3c845dc5eaaf1',
-    // Updated after the V171 audit verifier's final source text is committed.
-    currentSha256: '3221fafc37eccbca30769e49fd0c5d4ea14906a892a1e204fb3c108cbfc1c00c'
+    currentSha256: '1b9ed6d7456243b1de8f61bd7798a895978ce22d3f0b84971f1895b2fa362593'
   })
 });
 
