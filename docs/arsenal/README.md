@@ -70,3 +70,48 @@ L'Excel fournit le plan en étapes P0–P3 et **57 recettes de tests**, à trans
 - `tantalus_arsenal_qa_v1.csv` SHA-256 `c500389eb71811d543312c60a10bd4199843f7a5dea673de6beb0d140e95f091`
 
 Le classeur a été généré avec `artifact_tool` puis vérifié en lecture XLSX/ZIP, inspection du tableau de bord et de la formule XP. **Les tests de jeu `npm run test:weapons` n'ont pas été lancés** : aucune mécanique JS n'est modifiée par ce commit.
+
+
+## Continuation V167 — gameplay, 30 octobre 2026
+
+Le référentiel V1 reste **un catalogue de conception**, pas une preuve d'intégration de ses 200 fiches à l'écran. Cette passe relie une partie du système à la production JavaScript/Canvas de Tantalus et préserve les sauvegardes historiques.
+
+| Domaine | Existant / réalisation V167 | Limite vérifiable |
+| --- | --- | --- |
+| Chargeurs et chambre | \`src/weapon-magazine-inventory-v167.js\` : instances identifiées, contenance et type, cartouche en chambre, stock séparé, transactions phase par phase, capture/restauration validées | **Optionnel** : pilote déclaré par \`experimentalPhysicalMagazinesV167: true\`; seule l'arme équipée dont l'ID et le feed sont admissibles est migrée |
+| Reload | \`src/tactical-reload-v77.js\` : transfert synchronisé avec l'instance, retrait 35 %, insertion 75 %, chambrage 92 %, interruption sans rendre des munitions inexistantes | V77 historique conservé pour tous les autres flux ; speed-reload existe dans le module physique mais **pas de commande joueur** |
+| Tir | \`src/weapon-actions-v131.js\` : réception des coups autorisés, y compris bursts V131, puis suivi du magasin ; une reprise invalide n'invente pas de munition | Les autres routes de tir et les entités au sol ne sont **pas toutes raccordées** |
+| XP arme | \`src/weapon-mastery-v167.js\` : niveau 1–30, XP sur dégâts appliqués, reçu idempotent par projectile/cible, journal sauvegardable | Ne crédite pas un dégât qui ne porte pas de projectile/source stable ; progression et perks **non présentés à l'écran** |
+| Combat / projectiles | \`src/weapon-actions-v130.js\` et \`src/game-production-runtime.js\` : identifiants de dégâts disc/explosion, capture et reprise de la maîtrise | Ni équilibrage final ni fidélité 1:1 attestés |
+| VFX douilles | \`src/weapon-effects-v124.js\` et \`src/weapon-presentation-profiles-v124.js\` conservés | Aucun nouveau sprite shell, son ou effet de surface produit dans cette passe |
+| Distribution | \`sw.js\` précache les deux modules V167 ; \`scripts/verify-public-release-v86.mjs\` n'admet le classeur et ses CSV **que parmi les sources** ; \`.vercelignore\` les exclut | Les documents sources ne doivent jamais entrer dans \`dist/\` |
+| QA | 11 scénarios Node \`scripts/verify-weapon-arsenal-v167.mjs\` déclarés dans \`test:weapons\` ; essais directs des transitions physiques et du reload historique réussis | Tests navigateur, manette, multi, performances et validation artistique **à faire** |
+
+### Invariants de conservation
+
+- Le tir consomme exactement **une** munition sur **un** événement accepté ; une seconde livraison du même reçu ne consomme rien.
+- Les magazines **montés**, **en inventaire** et **au sol** sont des états exclusifs ; les anciennes cartouches d'un chargeur tombé ne sont pas automatiquement recréditées.
+- Une interruption après éjection ne provoque pas la réapparition artificielle de l'ancien chargeur dans le puits. Les phases sauvegardées sont monotones.
+- \`actor.ammo\` et \`actor.ammoReserve\` restent la représentation numérique **de compatibilité** pour les anciennes armes, avec rapprochement lorsque le pilote physique est actif.
+- Le grand schéma de sauvegarde préexistant (52) ne change pas ; les états optionnels portent leur propre \`schema: 167\`.
+- Les statistiques, XP et temps des phases sont des choix de gameplay Tantalus, **pas** des chiffres officiels des films ou jeux.
+
+### Prochaines intégrations prioritaires
+
+1. Passer tous les rechargements détachables par les **vraies transactions** (joueur, co-op, équipiers, reprise de checkpoint) sans recourir à l'ancien stock numérique.
+2. Ajouter la sélection et récupération de chargeurs réels dans le HUD et dans le monde ; pour les fusils à tube, revolvers, lanceurs, cellules et réservoirs, utiliser **les mécanismes corrects**, pas un chargeur générique.
+3. Attacher les mods de chaque arme au rig, avec compatibilité et positions de mains/visée, puis mapper visuellement les parties de l'arme.
+4. Étendre l'XP aux tirs legacy authentifiés, dégâts de statut, objectifs et perks persistants avec preuves de dégâts et anti-relecture.
+5. Passer arme par arme pour la fidélité des **modèles / sprites / source canon / effets douilles** : 129 fiches V1 restent au niveau proposition ou recherche, pas approuvées comme canoniques 1:1.
+
+### Vérification
+
+\`\`\`bash
+npm run test:weapons
+npm run test:frontier
+npm run check
+npm run build
+npm run check:built
+\`\`\`
+
+La présence de ces commandes dans le projet ne garantit pas leur réussite. Consulter les exécutions GitHub Actions exactes de la tête de PR ; ne pas revendiquer une validation de sortie avant leur conclusion. Un classeur de **suivi V167** distinct, mis à jour dans cette conversation, ajoute quatre feuilles de comparaison, tests et reste-à-faire au classeur V1 conservé dans le dépôt ; ce fichier ne remplace pas le V1 binaire de GitHub tant qu'un commit dédié au binaire n'a pas été attesté.
