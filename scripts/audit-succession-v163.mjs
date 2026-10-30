@@ -284,6 +284,15 @@ export const V165_VERIFIER_SUCCESSORS_V176 = Object.freeze({
   })
 });
 
+/** V177 completion: independently checked update of the V165 release verifier.
+ * Never edits predecessor evidence or the historical V163 workbook hashes. */
+export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V171['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: '37a94416414702acc7382579cac02dfed74cae99718d9a138c7c74c2787483f6'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -540,6 +549,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const latest = V165_VERIFIER_SUCCESSORS_V174[path];
     const approvedV176 = V165_VERIFIER_SUCCESSORS_V176[path];
+    const approvedV177 = V165_VERIFIER_SUCCESSORS_V177[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
     if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
@@ -547,9 +557,14 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (approvedV176) assert.equal(approvedV176.previousSha256,
       (latest || revision || receipt).currentSha256,
       'Broken V174-to-V176 verifier chain: ' + path);
+    if (approvedV177) assert.equal(approvedV177.previousSha256,
+      (approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V176-to-V177 verifier chain: ' + path);
     assert.equal(sha(readSource(path)),
-      approvedV176?.currentSha256 || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
+      approvedV177?.currentSha256 || approvedV176?.currentSha256
+        || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
+      approvedV177 ? 'Unreviewed V177 verifier successor: ' + path
+        : approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
         : latest ? 'Unreviewed V174 verifier successor: ' + path
           : revision ? 'Unreviewed V173 verifier successor: ' + path
             : 'Unreviewed V171 verification successor: ' + path);
