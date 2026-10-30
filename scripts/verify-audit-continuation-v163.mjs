@@ -11,7 +11,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS,
   ARMORY_V169_SUCCESSORS, ARMORY_V169_NEW_SOURCES, ARSENAL_V170_SUCCESSORS,
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
-  ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171 } from './audit-succession-v163.mjs';
+  ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
+  ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -107,14 +108,14 @@ test('the V169 armory app successor is chained, source-pinned and cannot be forg
   assert.equal(sha(read(receipt.verifier)), receipt.verifierSha256);
   assert.deepEqual(Object.keys(ARMORY_V169_NEW_SOURCES), ['src/hub-armory-storefront-v169.js']);
   for (const [path, digest] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
-    assert.equal(sha(read(path)), ARSENAL_V171_SUCCESSORS[path].currentSha256);
+    assert.equal(sha(read(path)), ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
     assert.equal(ARSENAL_V171_SUCCESSORS[path].previousSha256, ARMORY_V170_ASSET_SOURCE.currentSha256);
     assert.equal(ARMORY_V170_ASSET_SOURCE.previousSha256, digest);
   }
   for (const changedPath of [app, receipt.verifier, ...Object.keys(ARMORY_V169_NEW_SOURCES)]) {
     const mutated=path=>path===changedPath ? Buffer.concat([read(path),Buffer.from('\\nUNREVIEWED')]) : read(path);
     assert.throws(() => verifyAuditSuccessionV163(previous,current,mutated),
-      /Unreviewed V169|Unreviewed V170|Unreviewed V171/, changedPath);
+      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172/, changedPath);
   }
 });
 
@@ -127,7 +128,7 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
   for (const [path, digest] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const successor=ARSENAL_V171_SUCCESSORS[path];
     if(successor) assert.equal(successor.previousSha256,digest);
-    assert.equal(sha(read(path)),successor?.currentSha256||digest,path);
+    assert.equal(sha(read(path)),ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256||successor?.currentSha256||digest,path);
   }
   for (const path of Object.keys(ARSENAL_V170_NEW_SOURCES)) {
     const corrupted = name => name === path
@@ -139,10 +140,25 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
 test('V171 historical successors and research/feed/installer inputs are all source-pinned', () => {
   assert.equal(Object.keys(ARSENAL_V171_SUCCESSORS).length, 5);
   assert.equal(Object.keys(ARSENAL_V171_NEW_SOURCES).length, 6);
-  for (const [path, receipt] of Object.entries(ARSENAL_V171_SUCCESSORS))
+  for (const [path, receipt] of Object.entries(ARSENAL_V171_SUCCESSORS)) {
+    const current = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    if (current) assert.equal(current.previousSha256, receipt.currentSha256);
+    assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
+  }
+  for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
+    const v172 = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const v173 = WEAPON_V173_SOURCE_SUCCESSORS[path];
+    if (v172) assert.equal(v172.previousSha256, expected);
+    if (v173) assert.equal(v173.previousSha256, expected);
+    assert.equal(sha(read(path)), v173?.currentSha256 || v172?.currentSha256 || expected, path);
+  }
+  for (const [path, receipt] of Object.entries(ARMORY_V172_RELEASE_SUCCESSORS)) {
+    assert.ok(receipt.previousSha256 && receipt.currentSha256);
     assert.equal(sha(read(path)), receipt.currentSha256, path);
-  for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES))
-    assert.equal(sha(read(path)), expected, path);
+  }
+  for (const [path, receipt] of Object.entries(WEAPON_V173_SOURCE_SUCCESSORS)) {
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+  }
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
     assert.equal(sha(read(path)), receipt.currentSha256, path);
