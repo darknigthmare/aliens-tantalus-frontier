@@ -234,7 +234,7 @@ export const V165_VERIFIER_SUCCESSORS_V173 = Object.freeze({
   }),
   'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
     previousSha256: V165_VERIFIER_SUCCESSORS_V171['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
-    currentSha256: '943af88ac2d94c4d5d094cf697961f41c8dd2bfa1bcc04f62c82288314dd3cac'
+    currentSha256: 'efb67151cd5a3e00434e1889bfd782ae94547f9300f858583e18845a9683e701'
   })
 });
 
