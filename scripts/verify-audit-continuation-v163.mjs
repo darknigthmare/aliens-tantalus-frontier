@@ -13,7 +13,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
-  V165_VERIFIER_SUCCESSORS_V173, ARMORY_V174_ECONOMY_SUCCESSORS,
+  V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174, ARMORY_V174_ECONOMY_SUCCESSORS,
   ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
@@ -166,9 +166,11 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   }
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
-    const current = V165_VERIFIER_SUCCESSORS_V173[path];
-    if (current) assert.equal(current.previousSha256, receipt.currentSha256);
-    assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
+    const revision = V165_VERIFIER_SUCCESSORS_V173[path];
+    const next = V165_VERIFIER_SUCCESSORS_V174[path];
+    if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
+    if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
+    assert.equal(sha(read(path)), next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
   }
 });
 
