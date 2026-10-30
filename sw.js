@@ -345,6 +345,8 @@ const SHELL = Object.freeze([
   '/src/hub-annex-runtime-geometry-v139.js',
   '/src/hub-annex-services-v71.js',
   '/src/hub-annex-station-atlas-v139.js',
+  '/src/hub-armory-scene-v169.js',
+  '/src/hub-armory-storefront-v169.js',
   '/src/hub-art-runtime-v55.js',
   '/src/hub-art-runtime-v56.js',
   '/src/hub-art-runtime-v58.js',
