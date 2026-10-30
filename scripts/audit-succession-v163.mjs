@@ -124,9 +124,9 @@ export const ARMORY_V170_ASSET_SOURCE = Object.freeze({
   reason: 'Replace false image checksums with hashes of actually generated but uncommitted V169 PNGs.'
 });
 export const ARSENAL_V170_NEW_SOURCES = Object.freeze({
-  'src/weapon-fidelity-ledger-v170.js': 'a106a3938f44b7bba2749d4afd9789d879b313440f17f81777e23866af648a1e',
-  'scripts/verify-weapon-fidelity-v170.mjs': '693af647c9674b4d12650c317c37d64242f73c4149ba8eaea3cfa3754e972099',
-  'docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv': 'a2a92548a189db8ce51a664c8fab261a2d2a2fef40f02b7e4695fb0778955b56',
+  'src/weapon-fidelity-ledger-v170.js': '812af20d137f2e61370e2f596024415187fb94e2daff7ab4589b82d3b3438f01',
+  'scripts/verify-weapon-fidelity-v170.mjs': 'e1cb78f40e602021af6fd99c8488a7751e1a2af4322c6bbc6318818f0952653c',
+  'docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv': '5e77f3d790b3f29869ccb3b6a183ef0ed5524fa75400e86dfdbec39db446ae4b',
   'src/hub-armory-scene-v169.js': '8ce4284d8b45dc8c7bbfb53f538a6f88f9ce185a49a4097e134cc9b979862886',
   'src/hub-port-meridien-v90.js': 'bda67e445bbb428e4e8c204efcb832252e710bc4d80ede5aaf506d3a20d999b5'
 });
