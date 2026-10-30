@@ -1,4 +1,5 @@
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
+import { weaponMasterySummaryV167 } from './weapon-mastery-v167.js';
 import { stampEjectedMagazinesV168, visibleDroppedMagazinesV168,
   nearestDroppedMagazineV168, recoverDroppedMagazineV168 } from './weapon-magazine-world-v168.js';
 
@@ -107,6 +108,29 @@ export function withMagazineRecoveryWorldV168(Base) {
         if (previousPolicy === undefined) delete actor.reloadPolicyV168;
         else actor.reloadPolicyV168 = previousPolicy;
       }
+    }
+
+    drawHud(ctx) {
+      const result = super.drawHud(ctx);
+      const actor = this.player, descriptor = actor && this.reloadWeaponV77?.(actor);
+      const weaponId = descriptor && typeof descriptor === 'object' ? descriptor.id : null;
+      if (!ctx?.save || !ctx?.fillRect || !ctx?.fillText || !this.running || !weaponId
+        || !this.weaponMasteryV167) return result;
+      const mastery = weaponMasterySummaryV167(this.weaponMasteryV167, 'player', weaponId);
+      if (!mastery || mastery.xp <= 0) return result;
+      // Compact in-game label rather than a developer overlay.
+      const width = Math.min(228, Math.max(150, (this.canvas?.width || 1280) * .20));
+      const x = (this.canvas?.width || 1280) - width - 16, y = 56, h = 31;
+      const fraction = mastery.level >= 30 ? 1 : mastery.xpNextLevel > 0
+        ? Math.min(1, mastery.xpInLevel / mastery.xpNextLevel) : 0;
+      ctx.save();
+      ctx.fillStyle = 'rgba(5, 18, 18, .82)'; ctx.fillRect(x, y, width, h);
+      ctx.fillStyle = '#b4e4ca'; ctx.font = 'bold 11px monospace';
+      ctx.fillText('MAÎTRISE · LV ' + mastery.level + ' / 30', x + 9, y + 14);
+      ctx.fillStyle = '#263d35'; ctx.fillRect(x + 9, y + 22, width - 18, 4);
+      ctx.fillStyle = '#87bd9e'; ctx.fillRect(x + 9, y + 22, (width - 18) * fraction, 4);
+      ctx.restore();
+      return result;
     }
 
     drawWorld(ctx) {
