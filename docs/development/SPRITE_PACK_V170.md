@@ -71,3 +71,43 @@ dans le registre. Les autres variantes de costumes, morphologies,
 mains/casques/masques, sacs, marques, textures dorsales et les validations
 de licences restent à traiter. Aucun changement de gameplay n'est
 déclaré par le présent document.
+
+
+---
+
+## Annexe V173 — combinaison d'urgence Narcissus
+
+Un lot autonome supplémentaire a été préparé à partir de références d'accessoires
+et de costumes **utilisés pendant le tournage d'Alien (1979)** ; ne pas le confondre
+avec les combinaisons de débarquement lourdes de Kane, Dallas et Lambert.
+
+- Référence de l'ensemble d'urgence du Narcissus :
+  https://propstoreauction.com/lot-details/index/catalog/138/lot/28190/
+  (combinaison claire, conduites cousues, boîtier abdominal, casque à visière
+  et gants caoutchoutés brun/jaune).
+- Référence du costume de Ripley :
+  https://entertainment.ha.com/itm/movie-tv-memorabilia/sigourney-weaver-ellen-ripley-spacesuit-from-alien/a/997049-1859.s
+  (éléments matelassés et structure du casque).
+- Archive locale remise dans la conversation :
+  `ALIENS_TANTALUS_RIPLEY_NARCISSUS_UPPER_V173.zip`
+  (6 182 047 octets, SHA-256
+  `5ab306a3400c659167d2a5fe4887a4bb7c7f953a69c5ba485b0cb911ee4c6d26`).
+- Contenu : **14 fichiers PNG RGBA réellement séparés** (six torses,
+  huit bras/mains), atlas source et atlas corrigé, planche de contrôle et
+  manifeste signé par empreintes de contenu.
+- Correction technique : douze ouvertures cou/épaules délimitées en alpha
+  au lieu de laisser une peinture noire opaque dans les cavités ; les
+  silhouettes source restent identifiables et les quinze autres zones
+  d'art ne sont pas recréées.
+
+**État : PROTOTYPE PARTIEL, NON ÉQUIPABLE.** L'archive est un livrable
+séparé, **pas** un nouvel asset GitHub. Manquent toujours : casque et
+visière modulaires, jambes/cuisses/tibias/chaussures, couplage dorsal des
+conduites, raccordements IK et pivots validés, animation en jeu, collision,
+import et sauvegarde. Le volume des épaules a été adapté par la génération
+et n'est **pas déclaré 1:1** avec les costumes de plateau.
+
+Le compte de tenues équipables et toutes les preuves d'approbation
+artistique restent donc inchangés. Le contrôle de conformité du projet
+doit refuser toute tentative de rendre ce lot sélectionnable avant
+installation des pièces manquantes et recette à la résolution native.
