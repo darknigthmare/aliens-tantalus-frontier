@@ -76,7 +76,8 @@ function interruptionReason(actor, state, weapon) {
   if (actor.inVehicle) return 'vehicle';
   if (text(actor.weaponMode) !== state.weaponMode || rounds(actor.magazineSize) !== state.magazineSize) return 'weapon-changed';
   if (weapon !== null && weapon !== undefined && weaponIdentity(actor, weapon) !== state.weaponKey) return 'weapon-changed';
-  if (state.weaponReloadIdV167 && actor.weaponFeedV167?.reload?.id !== state.weaponReloadIdV167)
+  if (state.phase === 'reloading' && state.weaponReloadIdV167
+    && actor.weaponFeedV167?.reload?.id !== state.weaponReloadIdV167)
     return 'physical-feed-changed';
   return null;
 }
