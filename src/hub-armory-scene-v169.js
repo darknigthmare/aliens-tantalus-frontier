@@ -1,6 +1,6 @@
 import {
   ARMORY_STOREFRONT_SOURCE_V169, getArmoryStorefrontPlanV169,
-  drawArmoryStorefrontV169, getArmoryStoreContactV169
+  drawArmoryStorefrontV169, getArmoryStoreContactV169, isArmoryArtAdmittedV171
 } from './hub-armory-storefront-v169.js';
 
 /** Opt-in visual composition atop original hub physics/rooms. The Tantalus
@@ -19,7 +19,7 @@ export function withHubArmoryStorefrontV169(Base) {
     prepareArmoryStorefrontV169() {
       if (typeof Image !== 'function' || !this.armoryStorefrontImagesV169) return;
       for (const [variant, url] of Object.entries(ARMORY_STOREFRONT_SOURCE_V169)) {
-        if (this.armoryStorefrontImagesV169.has(variant)) continue;
+        if (!isArmoryArtAdmittedV171(variant) || this.armoryStorefrontImagesV169.has(variant)) continue;
         const image = new Image();
         image.decoding = 'async';
         image.src = url;
@@ -30,6 +30,7 @@ export function withHubArmoryStorefrontV169(Base) {
     drawArmoryStorefrontVariantV169(ctx, roomId, originX = 0) {
       const plan = getArmoryStorefrontPlanV169(roomId);
       if (!plan) return { drawn: 0, reason: 'no-variant' };
+      if (!isArmoryArtAdmittedV171(plan.variant)) return { drawn: 0, reason: 'art-not-released' };
       const image = this.armoryStorefrontImagesV169?.get(plan.variant);
       const back = drawArmoryStorefrontV169(ctx, image, plan, { originX, phase: 'back' });
       const front = drawArmoryStorefrontV169(ctx, image, plan, { originX, phase: 'front' });
@@ -58,7 +59,8 @@ export function withHubArmoryStorefrontV169(Base) {
 
     armoryShopContactV169() {
       const annex = this.currentAnnexV71?.();
-      if (!this.running || this.paused || this.annexTransitionV71 || this.hubDoorClosingV142
+      if (!isArmoryArtAdmittedV171('station') || !this.running || this.paused
+        || this.annexTransitionV71 || this.hubDoorClosingV142
         || this.annexStateReadOnlyV87 || this.editorPlaytest || !annex || annex.id !== 'logistics'
         || !this.player || this.player.inVehicle || !this.player.grounded) return null;
       // Native annex exits, existing NPCs and station actions have precedence.
@@ -94,7 +96,7 @@ export function withHubArmoryStorefrontV169(Base) {
         lastPaint: this.armoryStorefrontPaintV169 || null,
         shopContact: this.armoryShopContactV169()?.contactId || null,
         physics: 'native-unchanged',
-        graphicsStatus: 'optional-art-installation-required'
+        graphicsStatus: isArmoryArtAdmittedV171('station') ? 'reviewed-art-installed' : 'optional-art-installation-required'
       } };
     }
   };
