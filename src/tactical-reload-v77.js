@@ -1,4 +1,6 @@
 import { resolveWeaponMechanicsV122 } from './weapon-mechanics-weapons-v122.js';
+import { beginWeaponReloadV167, advanceWeaponReloadV167, cancelWeaponReloadV167,
+  weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
 
 export const TACTICAL_RELOAD_SCHEMA_V77 = 1;
 export const TACTICAL_RELOAD_PRESENTATION_V77 = Object.freeze({
@@ -74,6 +76,8 @@ function interruptionReason(actor, state, weapon) {
   if (actor.inVehicle) return 'vehicle';
   if (text(actor.weaponMode) !== state.weaponMode || rounds(actor.magazineSize) !== state.magazineSize) return 'weapon-changed';
   if (weapon !== null && weapon !== undefined && weaponIdentity(actor, weapon) !== state.weaponKey) return 'weapon-changed';
+  if (state.weaponReloadIdV167 && actor.weaponFeedV167?.reload?.id !== state.weaponReloadIdV167)
+    return 'physical-feed-changed';
   return null;
 }
 
@@ -82,11 +86,18 @@ export function startTacticalReloadV77(actor, weapon = null, { paused = false } 
   const profile = getTacticalReloadProfileV77(weapon ?? actor.weaponMode);
   const magazineSize = rounds(actor.magazineSize);
   if (!profile || magazineSize < 1 || magazineSize > 99999 || rounds(actor.ammo) >= magazineSize || rounds(actor.ammoReserve) < 1) return false;
+  // The physical feed is opt-in; the old numeric save contract remains valid.
+  const feed = actor.weaponFeedV167;
+  if (feed && (weaponFeedLoadedRoundsV167(feed) !== rounds(actor.ammo)
+    || weaponFeedReserveRoundsV167(feed) !== rounds(actor.ammoReserve))) {
+    actor.weaponFeedV167 = null; // Legacy fallback after an outside ammo mutation
+  } else if (feed && !beginWeaponReloadV167(feed, null, 'tactical')) return false;
   actor.tacticalReload = {
     schema: TACTICAL_RELOAD_SCHEMA_V77, weaponKey: weaponIdentity(actor, weapon), weaponMode: text(actor.weaponMode),
     magazineSize, profile, phase: 'reloading', result: 'normal', elapsed: 0,
     completeAt: profile.duration, attemptAt: null, transferred: false, roundsLoaded: 0,
-    bonusRemaining: 0, feedbackRemaining: 0, cancelReason: null
+    bonusRemaining: 0, feedbackRemaining: 0, cancelReason: null,
+    weaponReloadIdV167: actor.weaponFeedV167?.reload?.id || null
   };
   syncActor(actor);
   return true;
@@ -126,6 +137,12 @@ export function cancelTacticalReloadV77(actor, reason = 'interrupted') {
   state.bonusRemaining = 0;
   if (state.phase !== 'reloading') return false;
   state.phase = 'cancelled';
+  if (state.weaponReloadIdV167 && actor.weaponFeedV167) {
+    cancelWeaponReloadV167(actor.weaponFeedV167, state.weaponReloadIdV167);
+    const loaded = weaponFeedLoadedRoundsV167(actor.weaponFeedV167);
+    const reserve = weaponFeedReserveRoundsV167(actor.weaponFeedV167);
+    if (loaded !== null && reserve !== null) { actor.ammo = loaded; actor.ammoReserve = reserve; }
+  }
   state.cancelReason = text(reason) || 'interrupted';
   state.feedbackRemaining = FEEDBACK_SECONDS;
   syncActor(actor);
@@ -147,11 +164,25 @@ export function updateTacticalReloadV77(actor, delta, { paused = false, weapon =
   }
   const next = state.elapsed + delta;
   state.elapsed = Math.min(next, state.completeAt);
-  if (next < state.completeAt) { syncActor(actor); return null; }
-  // Inventory mutation and transfer marker belong to the same synchronous transaction.
-  const loaded = Math.min(Math.max(0, state.magazineSize - rounds(actor.ammo)), rounds(actor.ammoReserve));
-  actor.ammo = rounds(actor.ammo) + loaded;
-  actor.ammoReserve = rounds(actor.ammoReserve) - loaded;
+  let loaded;
+  if (state.weaponReloadIdV167) {
+    const feed = actor.weaponFeedV167;
+    const progress = Math.min(1, next / state.completeAt);
+    if (!feed || !advanceWeaponReloadV167(feed, state.weaponReloadIdV167, progress)) {
+      cancelTacticalReloadV77(actor, 'physical-reload-invalid');
+      return { type: 'cancelled', reason: 'physical-reload-invalid', result: state.result, loaded: 0 };
+    }
+    actor.ammo = weaponFeedLoadedRoundsV167(feed);
+    actor.ammoReserve = weaponFeedReserveRoundsV167(feed);
+    if (next < state.completeAt) { syncActor(actor); return null; }
+    loaded = Math.min(state.magazineSize, actor.ammo);
+  } else {
+    if (next < state.completeAt) { syncActor(actor); return null; }
+    // Numeric legacy path: no new physical magazines are created.
+    loaded = Math.min(Math.max(0, state.magazineSize - rounds(actor.ammo)), rounds(actor.ammoReserve));
+    actor.ammo = rounds(actor.ammo) + loaded;
+    actor.ammoReserve = rounds(actor.ammoReserve) - loaded;
+  }
   state.transferred = true;
   state.roundsLoaded = loaded;
   state.phase = 'complete';
@@ -185,6 +216,8 @@ function validSnapshot(state) {
   if (profile.successFactor !== 0.82 || profile.perfectFactor !== 0.7 || profile.failedDelay !== definition.fail || profile.recovery !== Math.min(0.12, profile.duration * 0.2) || profile.perfectBonusRounds !== 3 || profile.perfectBonusMultiplier !== 1.15) return false;
   if (!['reloading', 'complete', 'cancelled'].includes(state.phase) || !RESULTS.has(state.result)) return false;
   if (!state.weaponKey || state.weaponKey !== text(state.weaponKey) || state.weaponMode !== text(state.weaponMode)) return false;
+  if (state.weaponReloadIdV167 !== null && state.weaponReloadIdV167 !== undefined
+    && (!text(state.weaponReloadIdV167) || text(state.weaponReloadIdV167) !== state.weaponReloadIdV167)) return false;
   if (!Number.isInteger(state.magazineSize) || state.magazineSize < 1 || state.magazineSize > 99999) return false;
   if (!finite(state.elapsed) || !finite(state.completeAt) || state.elapsed < 0 || state.elapsed > state.completeAt) return false;
   if (state.attemptAt !== null && (!finite(state.attemptAt) || state.attemptAt < 0 || state.attemptAt >= profile.duration || state.attemptAt > state.elapsed)) return false;
