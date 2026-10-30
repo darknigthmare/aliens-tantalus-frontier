@@ -17,7 +17,7 @@ const id=x=>typeof x==='string' && x.length>0 && x.length<=90 && /^[A-Za-z0-9:_-
 const rounds=x=>Number.isSafeInteger(x) && x>=0 && x<=10000;
 const deep=x=>JSON.parse(JSON.stringify(x));
 const remember=(s,x)=>{
-  if(s.receipts.includes(x) || x.length>120) return false;
+  if(s.receipts.includes(x) || !id(x)) return false;
   s.receipts.push(x);
   if(s.receipts.length>RECEIPTS)s.receipts.shift();
   return true;
@@ -63,13 +63,14 @@ export function createM41AUnderbarrelV174({ownerId,weaponInstanceId,
 }
 export function setM41AModeV174(s,mode,receipt){
   if(!validateUnderbarrelV174(s)||s.pending||!['primary','launcher'].includes(mode)
-    ||mode===s.mode||!id(receipt)||!remember(s,'mode:'+receipt))return false;
+    ||mode===s.mode||!id(receipt)||!id('mode:'+receipt)
+    ||!remember(s,'mode:'+receipt))return false;
   s.mode=mode;log(s,'mode-switched',receipt);return true;
 }
 export function fireM41AUnderbarrelV174(s,receipt){
   if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
     ||s.needsPump||s.chamber!==1||!id(receipt)
-    ||s.receipts.includes('fire:'+receipt)||('fire:'+receipt).length>120)return null;
+    ||s.receipts.includes('fire:'+receipt)||!id('fire:'+receipt))return null;
   s.chamber=0;s.spent=1;s.needsPump=true;
   remember(s,'fire:'+receipt);log(s,'launcher-projectile-accepted',receipt,1);
   return {type:'launcher-projectile',receipt,caliber:'30mm',roundsRemaining:s.tube,
@@ -77,7 +78,7 @@ export function fireM41AUnderbarrelV174(s,receipt){
 }
 export function pumpM41AUnderbarrelV174(s,receipt){
   if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending||!s.needsPump
-    ||!id(receipt)||s.receipts.includes('pump:'+receipt)||('pump:'+receipt).length>120)return null;
+    ||!id(receipt)||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
   s.needsPump=false;s.spent=0;
   if(s.tube){s.tube--;s.chamber=1;}
   remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,1);
@@ -87,7 +88,7 @@ export function pumpM41AUnderbarrelV174(s,receipt){
 export function beginM41AUnderbarrelReloadV174(s,receipt){
   if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.needsPump||s.pending
     ||!id(receipt)||s.receipts.includes('reload:'+receipt)
-    ||s.receipts.includes('cancel:'+receipt)
+    ||s.receipts.includes('cancel:'+receipt)||!id('reload:'+receipt)
     ||s.tube+s.chamber>=s.capacity||s.reserve===0)return false;
   const idTx=s.weaponInstanceId+':reload:'+receipt;
   if(!id(idTx))return false;
