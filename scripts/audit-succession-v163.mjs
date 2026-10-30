@@ -525,7 +525,16 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
               : armory ? 'Unreviewed V169 runtime successor: ' + path
                 : 'Unreviewed V167 runtime successor: ' + path);
     } else {
-      assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
+      // V179 changes one existing non-arsenal V165 room module. Keep the
+      // historical V163 receipt exact and require the reviewed successor
+      // bytes, not a wildcard or retroactive modification of the archive.
+      const v179 = path === HUB_V179_SERVICE_SUCCESSOR.path
+        ? HUB_V179_SERVICE_SUCCESSOR : null;
+      if (v179) assert.equal(expected, v179.previousSha256,
+        'Incorrect V165-to-V179 service predecessor: ' + path);
+      assert.equal(sha(readSource(path)), v179?.currentSha256 || expected,
+        v179 ? 'Unreviewed V179 armory service location: ' + path
+          : 'Current V163 source changed: ' + path);
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
