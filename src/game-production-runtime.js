@@ -46,6 +46,8 @@ import { isolateForgeMissionOptionsV136 } from './editor-spatial-v136.js';
 import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
 import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 import { withMotionTrackerV160 } from './motion-tracker-v160.js';
+import { withMagazineRecoveryWorldV168 } from './weapon-magazine-recovery-runtime-v168.js';
+import { captureMagazineFeedV168, restoreMagazineFeedV168 } from './weapon-magazine-world-v168.js';
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
 
 export * from './game-production-core.js';
@@ -82,7 +84,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine)))) {
+export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV160(withArchiveRelayPresentationV160(withForgeDecorationV141(withForgeMissionRuntimeV141(V158ProductionEngine))))) {
   start(options = {}) {
     options = isolateForgeMissionOptionsV136(options);
     this.expectedMissionSignatureV130 = options.missionLevel?.signature || null;
@@ -116,7 +118,7 @@ export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentati
     if (state.mission && this.mission?.rewards) state.mission.rewards = structuredClone(this.mission.rewards);
     for (const role of ['player', 'coop']) if (state[role]) {
       state[role].tacticalReloadV77 = captureTacticalReloadV77(this[role]);
-      state[role].weaponFeedV167 = captureWeaponFeedV167(this[role]?.weaponFeedV167);
+      state[role].weaponFeedV167 = captureMagazineFeedV168(this[role]?.weaponFeedV167);
     }
     return { ...state, weaponMasteryV167: captureWeaponMasteryV167(this.weaponMasteryV167),
       gameplaySupportV72: captureGameplaySupportV72(this) };
@@ -137,7 +139,7 @@ export class GameEngine extends withMotionTrackerV160(withArchiveRelayPresentati
     for (const role of ['player', 'coop']) {
       const actor = this[role];
       const carried = Number(actor?.ammo) + Number(actor?.ammoReserve);
-      actor.weaponFeedV167 = restoreWeaponFeedV167(rawState?.[role]?.weaponFeedV167, {
+      actor.weaponFeedV167 = restoreMagazineFeedV168(rawState?.[role]?.weaponFeedV167, {
         ownerId: role, expectedCarriedRounds: Number.isSafeInteger(carried) && carried >= 0 ? carried : null });
       weaponFeedRestoredV167[role] = Boolean(actor.weaponFeedV167);
       tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(actor, rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(actor));
