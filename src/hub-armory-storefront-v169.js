@@ -7,6 +7,9 @@
  *
  * Source sheets are in the companion art pack:
  *   ARMURERIES_TANTALUS_3_VARIANTES_SPRITES_V169.zip
+ * Images are not committed in this branch: the SHA-256 below identifies
+ * the companion PNGs from the local V169 art ZIP, not a released game asset.
+ * Hashes are informational until the exact files are added and reviewed.
  * and are not canon/film captures. The game falls back to the original native
  * room art if full-resolution, reviewed sheets have not been installed.
  */
@@ -26,9 +29,9 @@ export const ARMORY_STOREFRONT_SOURCE_V169 = freeze({
   station: '/assets/openai/hub/armory-v169/station_source_1448x1086.png'
 });
 export const ARMORY_STOREFRONT_SOURCE_SHA256_V169 = freeze({
-  tantalus: 'ce5d979dc84c4b8d34c0f8b5403abd6b3ec706e0cd50c819222be9cf323c1767',
-  colony: 'de220600940eec4471ac93e09a5a2d023f8c64f2b40c1fb6c1a8a969010f33c8',
-  station: '93d3d1c56463f8379ce063fa2721bddf2bba58fe435de4161c25b66d29bbb987'
+  tantalus: '99f2fdbe5fbcde50a821ddad2da105ae773faa337da9e1754a51bb4f32d6c077',
+  colony: '8247c0735656fb2c02c7100fb5b23deb004fe64d8e9caf9c32c646dbb0d162c9',
+  station: 'f4b0875daa236dc8d3253e08680cce0eb74be401a980fe3d2f7c3a436809438b'
 });
 
 const crop = (id, group, source) => ({ id, group, source: rect(...source) });
