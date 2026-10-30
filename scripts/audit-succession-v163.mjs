@@ -230,7 +230,7 @@ export const WEAPON_V173_SOURCE_SUCCESSORS = Object.freeze({
 export const V165_VERIFIER_SUCCESSORS_V173 = Object.freeze({
   'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
     previousSha256: V165_VERIFIER_SUCCESSORS_V171['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
-    currentSha256: '2b2d9b4dc3186c39cd4245295300ceb263e86ce263651b7339673db25514fee1'
+    currentSha256: '2265c8293a835a04149cc4e9123f13f4d6a5ae154141e4324163ed5d7bfb70d7'
   }),
   'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
     previousSha256: V165_VERIFIER_SUCCESSORS_V171['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
