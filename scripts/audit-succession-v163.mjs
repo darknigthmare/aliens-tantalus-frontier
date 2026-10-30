@@ -323,6 +323,29 @@ export const V165_VERIFIER_SUCCESSORS_V179 = Object.freeze({
   })
 });
 
+/** V180–V182: new exact review receipts for the V177/178 development branch.
+ * The V176 distribution verifier included an extra admitted QA script, so its
+ * previously recorded bytes must remain historical, not be overwritten.
+ */
+export const V165_VERIFIER_SUCCESSORS_V180 = Object.freeze({
+  'scripts/verify-public-release-v86.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V176['scripts/verify-public-release-v86.mjs'].currentSha256,
+    currentSha256: '15b024262c0c62bdea40625810478f52db4de89ded0d73ec6905e0e058533e6f'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V181 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V178['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '8eeb2ef6ab10ffee09bf4c0047c4d62b49786dee0cd1c66e1415e7794f64ea89'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V182 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V179['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: '6a6e530226b234be581618e240f591576e26003b61d4229ce3acecc56e9933d0'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -592,6 +615,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const approvedV177 = V165_VERIFIER_SUCCESSORS_V177[path];
     const approvedV178 = V165_VERIFIER_SUCCESSORS_V178[path];
     const approvedV179 = V165_VERIFIER_SUCCESSORS_V179[path];
+    const approvedV180 = V165_VERIFIER_SUCCESSORS_V180[path];
+    const approvedV181 = V165_VERIFIER_SUCCESSORS_V181[path];
+    const approvedV182 = V165_VERIFIER_SUCCESSORS_V182[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
     if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
@@ -608,13 +634,27 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (approvedV179) assert.equal(approvedV179.previousSha256,
       (approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
       'Broken V177-to-V179 verifier chain: ' + path);
-    const latestAllowed = approvedV179 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt;
+    if (approvedV180) assert.equal(approvedV180.previousSha256,
+      (approvedV179 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V176-to-V180 distribution verifier chain: ' + path);
+    if (approvedV181) assert.equal(approvedV181.previousSha256,
+      (approvedV180 || approvedV179 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V178-to-V181 audit verifier chain: ' + path);
+    if (approvedV182) assert.equal(approvedV182.previousSha256,
+      (approvedV181 || approvedV180 || approvedV179 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V179-to-V182 V165 verifier chain: ' + path);
+    const latestAllowed = approvedV182 || approvedV181 || approvedV180 || approvedV179
+      || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt;
     assert.equal(sha(readSource(path)), latestAllowed.currentSha256,
-      (approvedV179 ? 'Unreviewed V179'
-        : approvedV178 ? 'Unreviewed V178'
-          : approvedV177 ? 'Unreviewed V177'
-            : approvedV176 ? 'Unreviewed V176'
-              : latest ? 'Unreviewed V174' : revision ? 'Unreviewed V173' : 'Unreviewed V171')
+      (approvedV182 ? 'Unreviewed V182'
+        : approvedV181 ? 'Unreviewed V181'
+          : approvedV180 ? 'Unreviewed V180'
+            : approvedV179 ? 'Unreviewed V179'
+              : approvedV178 ? 'Unreviewed V178'
+                : approvedV177 ? 'Unreviewed V177'
+                  : approvedV176 ? 'Unreviewed V176'
+                    : latest ? 'Unreviewed V174'
+                      : revision ? 'Unreviewed V173' : 'Unreviewed V171')
       + ' verifier successor: ' + path);
   }
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
