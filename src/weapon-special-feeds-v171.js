@@ -38,12 +38,23 @@ export function validateSpecialFeedV171(s){
  const profile=map.get(s.weaponDefinitionId);
  if(!profile||profile.kind!==s.kind)return false;
  if((s.kind!=='tube'&&s.needsCycle)||(s.kind!=='tube'&&s.kind!=='cylinder'&&s.spentCases!==0))return false;
+ // Fail closed on forged ammo topology before any reload/cycle mutation.
+ // Tube cases remain chambered until pumping; cylinders retain spent cases
+ // in occupied chambers; a disposable single-shot tube cannot grow a box mag.
+ if((s.kind==='single'&&s.capacity!==1)
+   ||(s.kind==='tube'&&(s.spentCases>1||s.needsCycle!==(s.spentCases===1)))
+   ||(s.kind==='cylinder'&&s.loaded+s.spentCases>s.capacity))return false;
  const tx=s.pending;
  if(tx!==null){
   if(!tx||!id(tx.id)||tx.id.indexOf(s.weaponInstanceId+':reload:')!==0
-   ||!qty(tx.planned)||!qty(tx.inserted)||tx.inserted>tx.planned
-   ||!Number.isFinite(tx.progress)||tx.progress<0||tx.progress>1
-   ||!['active','ejected','inserting'].includes(tx.phase))return false;
+   ||!qty(tx.planned)||tx.planned===0||!qty(tx.inserted)||tx.inserted>tx.planned
+   ||!Number.isFinite(tx.progress)||tx.progress<0||tx.progress>=1
+   ||!['active','ejected','inserting'].includes(tx.phase)
+   // Remaining rounds and empty chambers must cover every future insertion.
+   // This is invariant under a legitimate partial reload: inserted rounds
+   // have already been deducted from reserve and added to loaded.
+   ||tx.planned>s.capacity-s.loaded+tx.inserted
+   ||tx.planned>s.reserve+tx.inserted)return false;
  }
  return true;
 }
