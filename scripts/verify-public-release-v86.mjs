@@ -204,6 +204,7 @@ for (const file of [
   'verify-trials-navigation-v163.mjs',
   'verify-xeno-trials-capture-v163.mjs',
 ]) SCRIPT_FILES.add(file);
+SCRIPT_FILES.add('verify-weapon-arsenal-v167.mjs');
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -234,6 +235,14 @@ const FORGE_TOOLING_V140 = new Set([
   'AGENTS.md',
   'docs/development',
   'docs/development/GAMEDEV_GUIDANCE.md',
+  // Narrow, source-only admission for the arsenal specification; not shipped.
+  'docs/arsenal',
+  'docs/arsenal/README.md',
+  'docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx',
+  'docs/arsenal/weapon_system_contract_v1.json',
+  'docs/arsenal/data',
+  'docs/arsenal/data/tantalus_arsenal_master_v1.csv',
+  'docs/arsenal/data/tantalus_arsenal_qa_v1.csv',
   'docs/forge/xeno-trials/V168-DIALOGUE-AND-TANTALUS-BATCH100.md',
   'docs/forge/xeno-trials/batch100-v168.json',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
