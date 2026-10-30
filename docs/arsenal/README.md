@@ -192,12 +192,12 @@ Cette continuation est volontairement **sans génération d'images**. Elle ne re
 
 ### Art V169 : état des trois variantes
 
-Les trois planches et leurs sprites séparés ont été livrés **hors dépôt** dans \`ARMURERIES_TANTALUS_3_VARIANTES_SPRITES_V169.zip\`; les fichiers PNG ne figurent **pas** encore dans la branche de PR. Les chemins image de \`src/hub-armory-storefront-v169.js\` sont des destinations futures. Le moteur retombe sur le décor préexistant si l'image manque.
+**Actualisation V172 (30 octobre 2026).** Les trois planches ont été **commitées dans la PR #23** et ne sont plus de simples chemins prévisionnels :
+- Tantalus : `assets/openai/hub/armory-v169/tantalus_source_1448x1086.png`, SHA-256 `ce5d979dc84c4b8d34c0f8b5403abd6b3ec706e0cd50c819222be9cf323c1767`
+- Colonie : `assets/openai/hub/armory-v169/colony_source_1448x1086.webp`, SHA-256 `7063cba4cbf2a7f63ee4934da09a7a352c4c322c75a3a8526e2ee276a8839d8a` (WebP sans perte, PNG source original `de220600940eec4471ac93e09a5a2d023f8c64f2b40c1fb6c1a8a969010f33c8`)
+- Station hub : `assets/openai/hub/armory-v169/station_source_1448x1086.png`, SHA-256 `93d3d1c56463f8379ce063fa2721bddf2bba58fe435de4161c25b66d29bbb987`
 
-Les empreintes ci-dessous sont celles des **PNG sources locaux** (1448×1086, pas une preuve de fidélité canonique ni de dépôt GitHub) :
-- Tantalus : \`99f2fdbe5fbcde50a821ddad2da105ae773faa337da9e1754a51bb4f32d6c077\`
-- Colonie : \`8247c0735656fb2c02c7100fb5b23deb004fe64d8e9caf9c32c646dbb0d162c9\`
-- Station : \`f4b0875daa236dc8d3253e08680cce0eb74be401a980fe3d2f7c3a436809438b\`
+Le contrôle `scripts/verify-armory-art-installer-v171.mjs` compare les octets réellement présents, le format et les dimensions. Leur présence dans le dépôt **ne vaut pas** validation canonique 1:1, rig PNJ, interaction visuelle réussie ni autorisation de réutiliser des visuels tiers. Les zones de circulation, portes et stations natives restent prioritaires.
 
 La pose originale de l'armurière S. Doyle dans le pont industriel est conservée. Les vendeurs coloniaux et de station sont des concepts ; leurs rigs/animations 2D dédiés restent à réaliser. Les armes visibles sur les planches générées ne sont **pas** admises en tant que modèles authentifiés 1:1.
 
@@ -216,3 +216,19 @@ Avant d'autoriser une arme source :
 - https://www.aliensfireteamelite.com/en/releasenotes/ (noms de certaines armes et accessoires du jeu original)
 - https://www.feralinteractive.com/en/manuals/alienisolation/latest/steam/ (armes disponibles dans le jeu *Alien: Isolation*)
 - https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes (Mondo Heat 9000 et correctifs précis d'animations/VFX du 22 octobre 2026)
+
+
+## V173 — matrice de réception 1:1 et correctifs de CI
+
+Le suivi `ALIENS_TANTALUS_ARSENAL_SUIVI_1TO1_V173.xlsx` est exporté comme pièce jointe de conversation. Il reprend les **200 fiches** V1, les **460 références**, et ajoute : `22_V173_Audit_1to1`, `23_3_Armureries_V172`, `24_Feed_Mécaniques`, `25_QA_Mecanique_Source` et `26_Bilan_V173`. Ce binaire V173 n'a pas été commité dans GitHub (le V1, lui, l'est).
+
+Une arme requiert huit contrôles indépendants : identité de révision, silhouette multi-angle, rig latéral, prise de mains, tir/recul, rechargement, alimentation physique et douilles/VFX. Chaque contrôle nécessite un verdict `VALIDÉ_QA` **étayé**, plus un statut `AUTORISÉ` sur les droits de réutilisation avant toute nouvelle admission dans la boutique. Le classeur ne confond pas présence d'une image de référence avec validation 1:1.
+
+Les **129 dossiers non admis** restent dans `docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv` (14 P0, 27 P1, 88 P2). Les différences de versions (par exemple entre AFE1 et AFE2) ne sont jamais effacées. Les champs de fabricants, dimensions et mécanismes non vérifiés restent à préciser.
+
+`src/weapon-special-feeds-v171.js` est un modèle **non encore activé globalement en production** : tube M37A2, barillet revolver, bande M56 sans étui, réservoir M240 et lanceur M83 à projectile unique. Les changements sont conservés par reçus, testés dans le module, mais ils exigent rig, timing et animations natifs avant d'être considérés comme fidèles.
+
+Les notes officielles AFE2 du 22 octobre 2026 décrivent notamment la synchronisation du F44AA ADS, la main avant du shotgun, la prise du Revolver Rifle, l'état du sous-canon dans le HUD, le flash Cryo du Mondo Heat 9000 et l'expiration des DOT du Type 111. Ces détails sont des exigences de tests, **pas** des valeurs numériques ou sprites à recopier automatiquement :
+https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes
+
+L'armurière S. Doyle demeure la PNJ native du Tantalus. Les vendeurs de colonie et station nécessitent encore rigs, dialogues, stocks et animations spécifiques. Les contrôles V171/V172/V173 doivent passer sur le SHA exact de la tête de PR ; les audits historiques V163 ne sont pas réécrits.
