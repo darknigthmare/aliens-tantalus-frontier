@@ -49,6 +49,40 @@ const readRepository = path => readFileSync(new URL('../' + path, import.meta.ur
 const keys = value => Object.keys(value).sort();
 const validHash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 
+/** V167 arsenal continuation has its own exact byte successor. Historical V163
+ * receipts remain unchanged; arbitrary future changes still fail closed.
+ * Baseline hashes refer to the actual V163 sources at 69c13e5.
+ */
+export const ARSENAL_V167_SUCCESSORS = Object.freeze({
+  'src/game-production-runtime.js': Object.freeze({
+    previousSha256: '710e0901b87b7961aa2bb661f138d16eb46d76b100ef2bc9913d7ebfbd143fde',
+    currentSha256: '370507fb523c6a7cf2fb6098ea428ac28fbafe01c9739074dc14c740abb8aa3f'
+  }),
+  'src/weapon-actions-v130.js': Object.freeze({
+    previousSha256: 'bed8071910771e0b017dedb2a842e435a47141c594126558f0eb65d907b22a10',
+    currentSha256: 'f7ba5f603027c6d10fbf5f01eecf40e429f4d34a106c5fe6e5c306f4e6be933c'
+  }),
+  'src/weapon-actions-v131.js': Object.freeze({
+    previousSha256: 'de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654',
+    currentSha256: '4ff367efb3c919ba51fcb5595f119d54f462a3453dbd95ca1d6c40110f44172a'
+  }),
+  'src/tactical-reload-v77.js': Object.freeze({
+    previousSha256: '73c3da2d2416a003600d5d54b4180f04f2456189eb5358ec452be6f4683eb982',
+    currentSha256: 'd10c54f84d2efa60c05891a8ca92ba86710be8d0d3b6c9ffa35c826fa014a894'
+  }),
+  'sw.js': Object.freeze({
+    previousSha256: '732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9',
+    currentSha256: '03138622a31b38cf553b849acc5c8790285830355bc7b1efc6198e1ec1bbf5ee'
+  })
+});
+
+export const ARSENAL_V167_NEW_SOURCES = Object.freeze({
+  'src/weapon-magazine-inventory-v167.js': '2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928',
+  'src/weapon-mastery-v167.js': 'efa0d34da1fb3d26491257b9ec9a4b3fb76cc3342c7e4425247abd2d55e83f29',
+  'scripts/verify-weapon-arsenal-v167.mjs': '00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509'
+});
+
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -230,8 +264,17 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       || /^[a-zA-Z0-9._-]+\.css$/.test(path) || ['index.html', 'sw.js'].includes(path),
     'Source path outside the reviewed runtime scope: ' + path);
     assert.ok(validHash(expected), 'Invalid source hash: ' + path);
-    assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
+    const successor = Object.hasOwn(ARSENAL_V167_SUCCESSORS, path) ? ARSENAL_V167_SUCCESSORS[path] : null;
+    if (successor) {
+      assert.equal(expected, successor.previousSha256, 'Incorrect V163 baseline for V167 successor: ' + path);
+      assert.equal(sha(readSource(path)), successor.currentSha256, 'Unreviewed V167 runtime successor: ' + path);
+    } else {
+      assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
+    }
   }
+  // New V167 modules are not retroactively called historical V163 sources.
+  for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES))
+    assert.equal(sha(readSource(path)), expected, 'Unreviewed V167 added source: ' + path);
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
   for (const path of [...changed, ...added]) assert.ok(!path.startsWith('src/forge') || Object.hasOwn(corrections, path),
