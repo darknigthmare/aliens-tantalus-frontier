@@ -291,3 +291,78 @@ et le modèle des coordonnées de rig, avec tous les pivots laissés à
 `null` plutôt que fabriqués. SHA-256 de cette archive :
 `ab3c661c08e764ad44c160558e8098e13295b28995d2961c7e51dfaf52a19461`.
 Aucun des 123 PNG du lot n'a été ajouté à la distribution publique.
+
+
+## V180 — matrice exhaustive des 31 tenues du catalogue V119
+
+Cette matrice part des **31 IDs réellement enregistrés** dans
+`src/franchise-costumes-v119.js` et de leurs raccords actifs à
+`src/player-costume-outfits-v165.js` (état GitHub du 30 octobre 2026).
+Elle ne confond pas un portrait de référence, une tenue en atlas séparé
+hors du dépôt, et une combinaison effectivement équipable.
+
+**Résultat source : 13 adaptations équipables, 18 références non équipables.**
+Le premier groupe reste `exact: false`. Parmi les 18, les quatre
+`fury-ripley`, `ripley8`, `andy-coveralls` et `navarro-jacket`
+disposent d'un lot V175/V176 de sprites externes **non liés au rig**.
+Les 14 autres n'ont pas ce lot à admettre. Les éventuelles photos de
+production sont des références, jamais des sprites redistribuables.
+
+### Les 13 adaptations jouables existantes (fidélité 1:1 non certifiée)
+
+`nostromo-crew`, `ripley-bomber`, `hicks-combat`,
+`hudson-combat`, `vasquez-bdu`, `bishop-utility`,
+`amanda-working`, `sevastopol-security`,
+`working-joe-uniform`, `rain-jacket`,
+`fireteam-nostromo-jacket`, `fireteam-flightsuit`,
+`fireteam-seegson-maintenance`.
+
+### Les 18 admissions manquantes (identifiants stables conservés)
+
+| Référence exacte V119 | Priorité | Statut vérifié | Travail concret avant admission |
+|---|---|---|---|
+| `fury-ripley` | P0 | Sprites V176 externes | Calibrer les membres; ajouter la couche grand manteau vert et sa fixation; comparer marques et usure, vue de dos, capuche et tee-shirt |
+| `ripley8` | P0 | Sprites V176 externes | Calibrer gilet et peau des bras; variantes de vieillissement/eau; raccorder les mains, pantalon et bottes |
+| `andy-coveralls` | P0 | Sprites V176 externes | Pivots réels, fermeture/col, fixation 2 orientations du sac banane sans double sac, chaussures et animations |
+| `navarro-jacket` | P0 | Sprites V176 externes | Rechercher motif original de palmiers, cuir et état usé; gants/montre/collier, profil asymétrique et chaussures |
+| `nostromo-dallas-compression` | P1 | Aucun atlas admis | Enveloppe pression, sous-couche, casque complet, col et visière, pack dorsal, tuyaux et bottes propres à Dallas |
+| `nostromo-ripley-compression` | P1 | Aucun atlas admis | Variante Ripley distinguée de Dallas par marquages/accessoires vérifiés, casque, tuyaux, sac et transitions de combinaison |
+| `prometheus-expedition` | P1 | Aucun atlas admis | Casque globe indépendant, col avec électronique, plaques pectorales, pack batterie, gants et bottes; ne pas confondre tenue d'expédition avec EVA |
+| `covenant-expedition` | P1 | Aucun atlas admis | Isoler la tenue ECO survival de l'IVA spatiale : casque, anneau, visières, pack, éclairages et semelles magnétiques suivant le modèle |
+| `rain-pressure` | P1 | Aucun atlas admis | Sous-vêtement, enveloppe spatiale, casque, connexion O₂, pack et couche supérieure; chaque état doit correspondre à la scène |
+| `romulus-hazmat` | P1 | Aucun atlas admis | Protection contaminée, visière/respirateur, protection des mains et des pieds et degré d'usure, à rapprocher du rôle exact |
+| `fury-inmate` | P2 | Aucun atlas admis | Décliner par détenu identifié, sans transférer le uniforme de Ripley à tous; vue de dos et vieillissement |
+| `betty-crew` | P2 | Aucun atlas admis | Séparer Call et autres membres du Betty en costumes individuels, au lieu d'inventer une tenue collective unique |
+| `david8` | P2 | Aucun atlas admis | Uniforme de David 8 selon scène, couches/col/chaussures et silhouettes synthétiques; distinguer tenue du personnage et simple cosmétique Echo9 |
+| `walter` | P2 | Aucun atlas admis | Uniforme de Walter et ses variantes, sans recycler automatiquement la silhouette ou l'identité de David |
+| `fireteam-specialist` | P2 | Aucun atlas admis | Costume Specialist exact selon mise à jour/kit, pièces de protection, accessoires et marquages séparés |
+| `fireteam-ape-mk3` | P2 | Aucun atlas admis | Armure APE Mk.3, casque, joints de pression et silhouette avec équipement, variantes par classe à sourcer |
+| `dark-descent-marine` | P2 | Aucun atlas admis | Armures et dotations de Lethe, séparation visuelle grade/équipement et vérification des accessoires |
+| `dark-descent-technician` | P2 | Aucun atlas admis | Tenue technique de Lethe, protections et outillage distincts des marines de combat |
+
+### Sources primaires et témoins vérifiables
+
+- [Propstore, ensemble Ripley *Alien 3*](https://propstoreauction.com/lot-details/index/catalog/138/lot/28200/ALIEN-3-1992-Ripley-s-Sigourney-Weaver-Prison-Uniform) : manteau vert, veste brune matelassée, tee-shirt et pantalon, insignes Fury 161.
+- [Propstore, combinaison *Prometheus*](https://propstoreauction.com/lot-details/index/catalog/347/lot/113009) : casque globe avec écrans, col, plaques et pack batteries, gants et bottes.
+- [Propstore, combinaison Tennessee *Covenant*](https://propstoreauction.com/lot-details/index/catalog/359/lot/118657/Lot-20-ALIEN-COVENANT-2017-Tennessee-s-Danny-McBride-Screen-matched-Light-up-Hero-Spacesuit-Display) : casques/visières et feux, pack, chaussures à témoin magnétique; **ne pas transférer cette configuration à tous les personnages**.
+- [Entretien Carlos Rosario, *Alien: Romulus*](https://www.motionpictures.org/2024/09/alien-romulus-costume-designer-carlos-rosarios-retro-vision-vintage-style-blends-part-one/) : vêtements industriels d'Andy, chemise de Navarro conçue pour la production, chaussures de Rain.
+- [Entretien complémentaire, *Alien: Romulus*](https://nofilmschool.com/carlos-rosario-alien-romulus) : motif de palmiers imprimé pour Navarro, cuir et veste rouge de Rain.
+
+### Gates qui doivent réussir pour déclarer UNE tenue « 1:1 » en jeu
+
+1. **Provenance par état de scène** : œuvre, personnage, partie de l'histoire, source comparative et pièces visibles attestées; la source doit être accessible pour vérification, sans copie redistribuée non autorisée.
+2. **Parties réellement séparées** : torse, manches, mains, bassin, cuisses, tibias, bottes, casque/masque, dos, accessoires. Aucun fusil ou décor pré-peint sur le vêtement.
+3. **Rig** : pivots mesurés cou/épaules/coudes/poignets/hanche/genoux/chevilles et calage des pieds; aucune valeur `null` restante pour une articulation active.
+4. **Deux orientations** : asymétries conservées, absence de logo inversé, tête et éléments dorsaux compatibles avec les deux profils.
+5. **Animations natives** : idle, marche, course, accroupissement, visée, tir, rechargement, couverture, escalade, actions, dégâts, mort et retour au calme, sans membre flottant.
+6. **Usage réel** : inventaire et changement cosmétique existants, enregistrement et rechargement, refus en opération active, absence de bonus ou déblocages d'armes inventés.
+7. **Régression de publication** : validation des SHA et des médias chargés, captures de hub + mission, contrôle navigateur de tenue complète et variantes, revue humaine visuelle. Les tests de découpe V176/V177 ne peuvent pas valider ce point à eux seuls.
+
+Le registre d'armes `docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv`
+reste **séparé** : ses 129 candidats ne deviennent ni achetables ni
+« 1:1 » parce qu'un nom d'arme ou un lien de référence est connu.
+
+**Droits :** une preuve film ou costume de collection permet la comparaison
+artistique, pas la redistribution commerciale automatique d'un élément
+protégé. Les modèles finaux et les licences nécessaires doivent être
+contrôlés avant toute publication commerciale.
