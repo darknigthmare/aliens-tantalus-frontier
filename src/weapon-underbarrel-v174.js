@@ -33,6 +33,7 @@ export function validateUnderbarrelV174(s) {
     ||!rounds(s.tube)||!rounds(s.chamber)||s.chamber>1
     ||s.tube+s.chamber>s.capacity
     ||!rounds(s.reserve)||!rounds(s.spent)||s.spent>1
+    ||(s.spent===1&&s.chamber!==0)
     ||typeof s.needsPump!=='boolean'||s.needsPump!==(s.spent===1)
     ||!['primary','launcher'].includes(s.mode)
     ||!Array.isArray(s.receipts)||s.receipts.length>RECEIPTS
@@ -42,10 +43,17 @@ export function validateUnderbarrelV174(s) {
     ||!s.events.every(e=>e&&id(e.type)&&id(e.receipt)&&rounds(e.count)))return false;
   if(s.pending!==null){
     const tx=s.pending;
-    if(!tx||!id(tx.id)||!tx.id.startsWith(s.weaponInstanceId+':reload:')
+    const prefix=s.weaponInstanceId+':reload:';
+    const receipt=typeof tx?.id==='string'&&tx.id.startsWith(prefix)
+      ? tx.id.slice(prefix.length):'';
+    if(!tx||!id(tx.id)||!id(receipt)
+      ||!id('reload:'+receipt)||!id('cancel:'+receipt)
+      ||s.receipts.includes('reload:'+receipt)
+      ||s.receipts.includes('cancel:'+receipt)
       ||!rounds(tx.planned)||tx.planned<1||!rounds(tx.inserted)
       ||tx.inserted>tx.planned||!Number.isFinite(tx.progress)
       ||tx.progress<0||tx.progress>=1
+      ||tx.inserted!==Math.floor(tx.progress*tx.planned+1e-9)
       ||tx.planned>s.reserve+tx.inserted
       ||tx.planned>s.capacity-s.tube-s.chamber+tx.inserted
       ||s.needsPump)return false;
