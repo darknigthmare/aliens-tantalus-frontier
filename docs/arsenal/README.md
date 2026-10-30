@@ -246,3 +246,33 @@ Le test `scripts/verify-armory-resupply-v174.mjs` couvre 8 scénarios : coût, l
 **Reste à finaliser pour une fidélité 1:1** : sources multi-angle et droits, variantes d’apparence spécifiques à chaque œuvre, squelette et prise en main latéraux, animations de cycle/rechargement, alimentation spéciale réellement raccordée au moteur, VFX/sons exacts, certification des vendeurs colonie/station, tests sur trois scènes et revue artistique. Le M41A 30 mm sous canon dispose d’un contrat séparé V174, mais pas encore d’une admission 1:1 complète.
 
 **Validation** : ne conclure à la stabilité qu’après réussite des suites Forge, Gameplay, Excel et Full Release sur un seul et même SHA de tête de PR. Un test Node réussi ne constitue pas une vérification de fidélité visuelle canonique.
+
+
+## V177 — état après la fusion de PR #23 (30 octobre 2026)
+
+La nouvelle PR de finition est [#25](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/25), ouverte depuis le main fusionné 4676a787. Le classeur local V177 (30 onglets) est remis dans la conversation : **il n'est pas encore présent comme binaire dans GitHub**. Le V1 historique et le CSV V170 restent les sources versionnées.
+
+| Domaine | Quantité | Statut |
+| --- | ---: | --- |
+| Fiches d'armes Excel | 200 | Catalogue et propositions, non 200 armes 1:1 |
+| Identités du catalogue | 71 | Admission mécanique/visuelle individuelle |
+| Propositions distinctes | 129 | Non achetables, non certifiées |
+| P0 / P1 / P2 | 14 / 27 / 88 | Priorités de recherche |
+| Armureries originales | 3 | PNG Tantalus et station, WebP sans perte colonie |
+| Accessoires à documenter | 13 | Source officielle, pas de compatibilité inventée |
+
+### Ce qui a été corrigé
+
+- Le vérificateur V165 historique n'acceptait pas les octets déjà vérifiés par la succession V176. La PR #25 ajoute un successeur V177 épinglé par SHA256, basé sur le dernier prédécesseur V173 du vérificateur concerné ; les archives historiques ne sont pas réécrites.
+- Le navigateur V164 de portraits de PNJ doit accepter le nouveau rendu V168 en canvas uniquement lorsqu'il montre la source originale et le rectangle de recadrage exact. La voie historique CSS demeure contrôlée quand le canvas est absent.
+- Le test raster des détails de service demeure ouvert : une correction de production fondée sur les pixels de la vraie pièce est requise, pas un contournement du test.
+
+### Conditions fermes de sortie pour le 1:1
+
+Une arme de la franchise demande deux vues sources comparables, la version exacte du média, calibre/alimentation confirmés, géométrie et rig latéral, mains et arme, animations tirer/viser/recharger, VFX/douilles ou absence d'étui, son, apparence des équipements et approbation des droits. Sa QA doit être reproduite sur un commit de jeu donné. Une fiche de proposition, une capture d'inspiration ou un sprite généré ne suffisent pas.
+
+Les 129 fiches proposées doivent être admises progressivement, sans changer les 71 identifiants historiques. Les cinq mécanismes spécialisés V171 (tube, barillet, bande, réservoir, lanceur) et le sous-canon indépendant V174 sont des contrats pur testés : leur raccordement complet au tir/animations/HUD reste à faire. La commande de ravitaillement V174 doit être validée en reprise de sauvegarde et en coopération.
+
+Sources principales : [Royal Armouries M41A](https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle), [correctif officiel AFE2 du 22 octobre 2026](https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes), [liste secondaire AFE2](https://www.gamewatcher.com/aliens-fireteam-elite-2/weapons).
+
+**Statut de PR : brouillon jusqu'à CI de la tête exacte.**
