@@ -71,7 +71,7 @@ export const ARSENAL_V167_SUCCESSORS = Object.freeze({
     previousSha256: '732d8eca7c6a8e4443f5a4d26b6a4cd677f2ad5b3fc1c4e766b452606ce153e9', currentSha256: '956bb0319a903d5b18f10a76aadef648360e1ca48ead3fbc2a9bc21da889fc27'
   }),
   'src/app.js': Object.freeze({
-    previousSha256: 'ac0404430bb38a08b454bcc30a4d85a6af1f0afb57a953552739039cdc8180dd', currentSha256: '85294f9e50a75dcbe9bd2be8d1d8b5c57ae1e46f8060a44dbf4544a545f5c022'
+    previousSha256: '1f0dbf0340728e653b90cb613c8e6676d611e25d0cfedaba15cae2602ac15525', currentSha256: '85294f9e50a75dcbe9bd2be8d1d8b5c57ae1e46f8060a44dbf4544a545f5c022'
   }),
   'src/mission-input-v77.js': Object.freeze({
     previousSha256: 'cb6c9ed206e0e4e13fd4a1f367f6e0b8722932b768c903e9df6ee7e0e5c09846', currentSha256: 'c564966b27980c6733b7024fa832e6b8dd64e4441b08104a50f4c43e459d49b4'
