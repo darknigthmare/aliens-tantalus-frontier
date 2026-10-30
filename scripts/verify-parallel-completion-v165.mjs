@@ -156,7 +156,8 @@ test('V177 parallel verifier is source pinned without changing historical V165/V
   assert.equal(pin.previousSha256,V165_VERIFIER_SUCCESSORS_V173[name].currentSha256);
   assert.equal(sha(read(name)),pin.currentSha256);
   const corrupted=path=>path===name?Buffer.concat([read(path),Buffer.from('UNREVIEWED')]):read(path);
-  assert.throws(()=>verifyParallelCompletionV165(current,corrupted),/Unreviewed verifier bytes/);
+  assert.throws(()=>verifyParallelCompletionV165(current,corrupted),
+    /Unreviewed V177 cumulative verifier successor|Unreviewed verifier bytes/);
 });
 
 test('V165 cumulative pins preserve the byte-anchored V162 bridge and the immutable V164 runtime map', () => {
