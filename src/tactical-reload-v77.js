@@ -92,7 +92,8 @@ export function startTacticalReloadV77(actor, weapon = null, { paused = false } 
   if (feed && (weaponFeedLoadedRoundsV167(feed) !== rounds(actor.ammo)
     || weaponFeedReserveRoundsV167(feed) !== rounds(actor.ammoReserve))) {
     actor.weaponFeedV167 = null; // Legacy fallback after an outside ammo mutation
-  } else if (feed && !beginWeaponReloadV167(feed, null, 'tactical')) return false;
+  } else if (feed && !beginWeaponReloadV167(feed, null,
+    actor.reloadPolicyV168 === 'speed' ? 'speed' : 'tactical')) return false;
   actor.tacticalReload = {
     schema: TACTICAL_RELOAD_SCHEMA_V77, weaponKey: weaponIdentity(actor, weapon), weaponMode: text(actor.weaponMode),
     magazineSize, profile, phase: 'reloading', result: 'normal', elapsed: 0,
