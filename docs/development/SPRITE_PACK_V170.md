@@ -228,3 +228,39 @@ Sources primaires ou entretiens avec le chef costumier :
 L'absence d'un élément ne doit pas être comblée par un costume générique
 mis en statut « fidèle » : inscrire `A_REPRODUIRE` ou
 `REFERENCES_INSUFFISANTES` avant génération et validation côte à côte.
+
+
+### V176 — QA aller-retour pixels des PNG source
+
+L'importateur V175 propose maintenant un second mode **plus strict**, qui
+décode les huit atlas sources et les 112 pièces haut/bas en RGBA 8 bits, puis
+reconstitue chaque atlas à ses coordonnées `source_bbox_px` :
+
+```bash
+node scripts/install-costume-art-v175.mjs /chemin/vers/ALIENS_TANTALUS_COSTUME_PARTS_V175 --verify-pixels
+```
+
+Ce contrôle exige **0 pixel opaque perdu, modifié, ajouté ou superposé**
+(seuil de transparence alpha > 40). `--stage` doit également réussir le
+même aller-retour avant de créer le répertoire de revue. Les métadonnées
+SHA-256 et les 123 PNG restent contrôlés avant tout décodage.
+
+Un contrôle direct sur les fichiers V175 livrés dans la conversation le
+30 octobre 2026 a obtenu les huit reconstructions suivantes sans aucune
+anomalie (nombre de pixels opaques par atlas) :
+
+| Tenue | Haut | Bas |
+|---|---:|---:|
+| Ripley — Fury 161 | 618 536 | 443 559 |
+| Ripley 8 — Resurrection | 516 087 | 482 847 |
+| Andy — Romulus | 630 539 | 525 814 |
+| Navarro — Romulus | 643 305 | 495 870 |
+
+**Ce résultat est une certification de découpe, pas de fidélité film.**
+Il ne vérifie pas les coutures, le placement d'articulations, les pivots,
+les silhouettes de gauche à droite, les interactions d'armes, les
+animations du joueur, la continuité visuelle des niveaux ou les droits.
+Le test npm `verify-costume-art-installer-v175.mjs` permet d'exécuter
+le même contrôle avec `TANTALUS_V175_ART_ROOT` lorsque l'archive
+physique décompressée est disponible. L'absence de l'archive en CI
+est un **skip déclaré**, pas un succès du rendu en jeu.
