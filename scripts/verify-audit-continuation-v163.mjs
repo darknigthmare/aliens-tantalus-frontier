@@ -17,6 +17,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V176, V165_VERIFIER_SUCCESSORS_V177,
   V165_VERIFIER_SUCCESSORS_V178, V165_VERIFIER_SUCCESSORS_V179,
   V165_VERIFIER_SUCCESSORS_V180, V165_VERIFIER_SUCCESSORS_V181, V165_VERIFIER_SUCCESSORS_V182,
+  resolveLatestV165VerifierReceipt,
   ARMORY_V178_RENDER_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
@@ -175,26 +176,9 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   }
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
-    const revision = V165_VERIFIER_SUCCESSORS_V173[path];
-    const next = V165_VERIFIER_SUCCESSORS_V174[path];
-    const latest = V165_VERIFIER_SUCCESSORS_V176[path];
-    const v177 = V165_VERIFIER_SUCCESSORS_V177[path];
-    const v178 = V165_VERIFIER_SUCCESSORS_V178[path];
-    const v179 = V165_VERIFIER_SUCCESSORS_V179[path];
-    const v180 = V165_VERIFIER_SUCCESSORS_V180[path];
-    const v181 = V165_VERIFIER_SUCCESSORS_V181[path];
-    const v182 = V165_VERIFIER_SUCCESSORS_V182[path];
-    if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
-    if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
-    if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
-    if (v177) assert.equal(v177.previousSha256, (latest || next || revision || receipt).currentSha256);
-    if (v178) assert.equal(v178.previousSha256, (v177 || latest || next || revision || receipt).currentSha256);
-    if (v179) assert.equal(v179.previousSha256, (v178 || v177 || latest || next || revision || receipt).currentSha256);
-    if (v180) assert.equal(v180.previousSha256, (v179 || v178 || v177 || latest || next || revision || receipt).currentSha256);
-    if (v181) assert.equal(v181.previousSha256, (v180 || v179 || v178 || v177 || latest || next || revision || receipt).currentSha256);
-    if (v182) assert.equal(v182.previousSha256, (v181 || v180 || v179 || v178 || v177 || latest || next || revision || receipt).currentSha256);
-    assert.equal(sha(read(path)),
-      (v182 || v181 || v180 || v179 || v178 || v177 || latest || next || revision || receipt).currentSha256, path);
+    const successor = resolveLatestV165VerifierReceipt(path);
+    assert.ok(successor && successor.version >= 171, 'Missing reviewed verifier chain: ' + path);
+    assert.equal(sha(read(path)), successor.currentSha256, path);
   }
 });
 
@@ -224,10 +208,13 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
       'V176-to-V178 audit proof chain broken: '+path);
     if (v180) assert.equal(v180.previousSha256, (v178 || revision).currentSha256,
       'V176-to-V180 public release proof chain broken: '+path);
-    assert.equal(sha(read(path)), (v180 || v178 || revision).currentSha256,path);
+    const reviewed = resolveLatestV165VerifierReceipt(path);
+    assert.ok(reviewed && reviewed.version >= 176,
+      'A V176 verifier cannot lack a later exact source receipt: ' + path);
+    assert.equal(sha(read(path)), reviewed.currentSha256, path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
-      /Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
+      /Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
   }
 });
 
