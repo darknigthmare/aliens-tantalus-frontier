@@ -589,36 +589,35 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         ||buildHubObstacleGeometryV87(deck).some(p=>p.collisionMode!=='one-way-top'&&overlap(box,p));
     }
     npcInterdeckPassingRequestV165(routeId) {
+      // Preserve the historical route dependency graph used by leases, relay
+      // arbitration and their native browser waiters. It does not by itself
+      // indicate physical occupation of any particular door.
       const passengers=routeId==='tamsin-proving'?['inez-civil']:['mara-archives','echo-escape'].includes(routeId)?['maksim-cockpit']
         :routeId==='cal-logistics'?['david-durandal']:routeId==='idris-engine'?['inez-civil','maksim-cockpit','jun-sanitary']
           :['asha-refuge','leila-galley'].includes(routeId)?['jun-sanitary']:[];
-      // The physical owner yields only to a passenger actually approaching
-      // its parent-deck walking circuit. A passenger retained on another deck,
-      // or working in an unrelated room, must not freeze an annex service
-      // worker forever (Idris could never return after the 12h briefing).
-      // These are the real authored parent/approach rooms, not new paths.
-      const circuit={
-        'tamsin-proving':{deck:2,rooms:['armory']},
-        'mara-archives':{deck:0,rooms:['briefing']},
-        'echo-escape':{deck:0,rooms:['briefing','combat-information','cryo-bay']},
-        'cal-logistics':{deck:2,rooms:['vehicle-bay']},
-        'idris-engine':{deck:3,rooms:['reactor']},
-        'asha-refuge':{deck:1,rooms:['crew-quarters']},
-        'leila-galley':{deck:1,rooms:['mess']}
-      }[routeId];
-      if(!circuit)return false;
-      return passengers.some(id=>{
-        const passenger=this.npcInterdeckStateV165?.routes[id]?.actor;
-        return passenger?.deck===circuit.deck && circuit.rooms.includes(passenger.roomId)
-          && passenger.stage!=='returned';
+      return passengers.some(id=>Boolean(this.npcInterdeckStateV165?.routes[id]?.actor));
+    }
+    npcInterdeckSharedServiceDoorV185(routeId) {
+      if (routeId!=='idris-engine') return this.npcInterdeckPassingRequestV165(routeId);
+      // Idris owns a *local* rear portal in the reactor. An interdeck
+      // passenger retained on another deck or working at an unrelated post
+      // cannot hold that door forever after a strategy hour advance.
+      // A passenger physically in the reactor still retains priority, and
+      // its existing collision and saved door-phase checks stay authoritative.
+      return ['inez-civil','maksim-cockpit','jun-sanitary'].some(id=>{
+        const a=this.npcInterdeckStateV165?.routes[id]?.actor;
+        return a?.deck===3 && a.roomId==='reactor' && a.stage!=='returned';
       });
     }
     getNpcServicePassingDutyV165(routeId,actor) {
+      if(routeId==='idris-engine'&&this.npcInterdeckPassingRequestV165(routeId))
+        return this.npcInterdeckSharedServiceDoorV185(routeId);
       if(this.npcInterdeckPassingRequestV165(routeId))return true;
       return super.getNpcServicePassingDutyV165?.(routeId,actor);
     }
     shouldHoldNpcServiceOwnerV165(routeId,actor,state) {
-      return this.npcInterdeckPassingRequestV165(routeId)||Boolean(super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
+      return (routeId==='idris-engine'?this.npcInterdeckSharedServiceDoorV185(routeId)
+        :this.npcInterdeckPassingRequestV165(routeId))||Boolean(super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
     }
     getNpcServiceOwnerYieldGoalV165(routeId,actor) {
       if(routeId==='david-durandal') {
