@@ -625,9 +625,18 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       const door=annex?.parentDoorBounds;
       if(!a||!door||a.stage==='returned'||!finite(a.x)||!finite(a.y)
         ||a.deck!==deckOf(annex.parentRoomId)||a.roomId!==annex.parentRoomId)return false;
-      // Door-sized body envelope plus a bounded approach on both sides.
-      // A passenger simply crossing the same large room cannot claim the
-      // entire 1280px corridor or the door on another support level.
+      // Asha's refuge entrance is on the crew-quarters floor. Jun's real
+      // walking-lift return uses that SAME floor corridor; a remote-body-only
+      // door predicate let Asha leave the refuge and physically block Jun at
+      // x505 against Asha at x561 (observed in the exact-head V198 CI).
+      // Reserve the corridor while Jun is actively traversing on its
+      // support level, not for any stationary timetable presence.
+      const sharedCorridor=routeId==='asha-refuge' && Math.abs(a.y-532)<16
+        && ['walking-lift','waiting-lift','walking-portal','walking-home'].includes(a.stage);
+      if(sharedCorridor)return true;
+      // Leila's galley has a local portal, not the long quarters corridor.
+      // Bounded approach only; an actor on another room or support cannot
+      // claim this doorway merely because its route exists.
       return overlap({x:a.x,y:a.y,w:44,h:92},
         {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
     }
