@@ -269,3 +269,43 @@ Le contrat pur de flux spécialisés V171 demeure **hors combat natif**. Le stoc
 Le vérificateur verify-weapon-feed-admission-v193.mjs couvre les refus M56/M240/M37A2/M83/revolver, la compatibilité réelle M41A et les paramètres forgés. Les modules importés sont inscrits explicitement au cache hors ligne. Les nouveaux SHA-256 V193 forment une chaîne de successeurs sans changer les tables d'audit V163–V176.
 
 **Non certifiés :** apparences des armes, joints du rig, animation native de toutes les alimentations, sons, douilles/VFX exacts, achats de magasins individualisés et coop/synchronisation persistante. Un test Node vert n'est jamais une homologation artistique 1:1. Valider les quatre workflows sur le dernier SHA de PR avant fusion.
+
+
+## V196 — classeur cumulatif des manquants inter-domaines (31 octobre 2026)
+
+**Livrable réel, conservé hors GitHub pour ne pas changer les digests des XLSX historiques ni l'allowlist du build :**
+[ALIENS_TANTALUS_EXCEL_MANQUANTS_CUMULATIF_V196_20261031.xlsx](https://docs.google.com/spreadsheets/d/10vecimyx19Lgrs1gWpQbZQpZw1jEA6QG/edit?usp=drivesdk&ouid=102406458049746863092&rtpof=true&sd=true).
+Emplacement Google Drive vérifié : `03_SUIVI_ET_SOURCES`.
+Fichier `.xlsx` non converti, **370 286 octets**, SHA-256 exact
+`6ab69d421d0e03399dc3028f49430a6b2b550797053325cf35e9e2ef49aa213d`.
+Les feuilles anciennes restent dans leurs fichiers d'origine ; le classeur V196 est **un suivi documentaire**, pas une nouvelle admission de runtime.
+
+| Famille contrôlée | Identités ou cas recensés | État réel / distinction |
+| --- | ---: | --- |
+| Arsenal exhaustif | 200 | 71 IDs natifs de catalogue ; 129 `proposed-*` strictement non admis |
+| Propositions P0 / P1 / P2 | 14 / 27 / 88 | Recherche documentaire ; aucune homologation 1:1 |
+| Costumes du catalogue V119 | 31 | 13 adaptations cosmétiques équipables mais non exactes, 4 lots PNG externes non liés au rig, 14 sans lot natif dédié |
+| Tantalus — compartiments | 35 | 16 pièces principales + 19 annexes ; 31 assemblages de service et 4 exemptions délibérées |
+| Armureries | 3 | Tantalus : Sanaa Doyle native ; colonie et station : vendeurs concepts, rigs incomplets |
+| Médias / DLC à recouper | 36 | Périmètres de contrôle, non 36 DLC intégrés ou validés |
+| Héros / variantes, inventaire V194 | 403 | Fiches conservées, non 403 identités finales certifiées |
+| Vilains, source V194 | 33 | Fiches de manquants non fermées artificiellement |
+| Sprites PNG, source V194 | 67 | Revue de présence/transparence, non animation 1:1 certifiée |
+| Pièces de tenue, source V190 | 114 | 112 pivots encore explicitement manquants ; la découpe alpha n'atteste ni animation ni droit |
+| QA de mouvement, source V190 | 288 | Cas à réaliser sur rig et scène réelle, non réussites |
+| THE PIT, source V63 | 205 combattants / 174 stages | Identités et dossiers en suivi, non totalité des mouvements animés |
+| THE PIT, événements natifs à documenter | 136 stages | Pas de registre spécifique V60–V63 trouvé ; cela **n'exclut pas** des effets hérités |
+| Plan d'actions V196 | 1 617 lignes | 808 actions initiales + 809 rapprochements V190/PIT ; les domaines se recoupent, donc pas 1 617 assets distincts |
+| Recettes documentées | 378 | 90 recettes V196 + 288 scénarios de mouvement V190 ; **non exécutées** au titre de la présente publication |
+
+### Provenance et règles d'admission
+
+- Armes : `docs/arsenal/data/tantalus_arsenal_master_v1.csv` (200 identifiants dont 129 propositions) et `tantalus_weapon_evidence_backlog_v170.csv` (129 dossiers, priorités 14/27/88) ; **aucune renumérotation** des ID source.
+- Costumes : `src/franchise-costumes-v119.js`, `src/player-costume-outfits-v165.js`, `docs/development/SPRITE_PACK_V170.md`, et le classeur Google Drive V190 `ALIENS_TANTALUS_FIDELITE_COSTUMES_RIG_V190.xlsx`. Les PNG V175/V176 externes ne sont pas importés par le seul fait d'être décrits dans Excel.
+- Plans et portes : `src/hub-game.js`, `src/hub-annex-registry-v137.js`, `src/hub-ship-layout-v137.js`, `src/hub-room-service-details-v165.js`. La présence d'une fiche de salle ne prouve ni porte franchissable ni parcours sauvegardé.
+- Personnages et THE PIT : les six feuilles source du suivi V194 et le fichier Google Drive `THE_PIT_V63_SUIVI.xlsx` ; les états des tests et les preuves historiques ne sont **pas** transférés à la tête de cette PR.
+- Xeno Trials : le classeur historique `docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V163.xlsx` reste inchangé, avec ses vérificateurs et preuves de branche propres ; cette consolidation n'en remplace pas les cellules originales.
+
+La colonne `VALIDÉ_QA` et le droit d'utilisation `AUTORISÉ` doivent chacun disposer de **preuves réelles** avant qu'une nouvelle arme, texture, tenue, animation, pièce ou DLC soit marqué fidèle 1:1. Une ligne de classeur, une URL de référence, un sprite concept ou un test Node seul ne suffisent pas.
+
+**PR de rattachement :** #26 ; les PR #24 et #25 continuent à porter des modifications d'audit en parallèle. La version V196 n'écrase ni les SHA historiques ni les fichiers sources des autres PR. Les CI doivent être revues sur chaque dernier SHA, puis les conflits de succession résolus avant toute fusion. Le binaire V196 est sur Drive et a été remis dans la conversation, **pas encore dans le Git tree**.
