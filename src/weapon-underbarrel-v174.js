@@ -12,6 +12,24 @@ export const M41A_UNDERBARREL_SCHEMA_V174 = 174;
 export const M41A_UNDERBARREL_HOST_V174 = 'weapon-001-m41a-pulse-rifle';
 export const M41A_UNDERBARREL_SOURCE_V174 =
   'https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle';
+/** Film prop lineage is separate from a game firing-mode ruleset.
+ * Royal Armouries identifies a 1986 M41A prop that was also refurbished
+ * for Alien 3. Not every movie prop had a working internal Remington
+ * launcher or an illuminated counter. A museum photograph of a modified
+ * survivor cannot, by itself, certify the 1986 on-screen paint/attachments.
+ */
+export const M41A_PROP_LINEAGE_V192=Object.freeze({
+  primaryFilm:'Aliens (1986)',
+  laterFilm:'Alien 3 (1992)',
+  evidence:'https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle',
+  laterReusedOrRefurbished:true,
+  internalLauncherOnAllProps:false,
+  ammoCounterOnAllProps:false,
+  filmedRevisionPaintVerified:false,
+  nativeTantalusArt1to1Verified:false,
+  filmPropPhotoBundledInGame:false
+});
+
 const CAP=16, RECEIPTS=1024, EVENTS=48;
 const id=x=>typeof x==='string' && x.length>0 && x.length<=90 && /^[A-Za-z0-9:_-]+$/.test(x);
 const rounds=x=>Number.isSafeInteger(x) && x>=0 && x<=10000;
@@ -75,6 +93,73 @@ export function setM41AModeV174(s,mode,receipt){
     ||!remember(s,'mode:'+receipt))return false;
   s.mode=mode;log(s,'mode-switched',receipt);return true;
 }
+/** 2026-09-17 AFE2 notes specify that switching between primary and
+ * underbarrel fire modes DURING a reload cancels that reload, rather than
+ * rejecting the switch. This is an opt-in game-specific rule. It is not
+ * claimed to describe the film prop, nor is it automatically live in Tantalus.
+ * No extra rounds, fake cases, client events or animation cues are created.
+ * https://www.daybreakgames.com/press/afe2/article/afe2-91726-patchnotes
+ */
+export const AFE2_UNDERBARREL_SWAP_V190=Object.freeze({
+  sourceWork:'Aliens: Fireteam Elite 2 (2026)',
+  sourceUrl:'https://www.daybreakgames.com/press/afe2/article/afe2-91726-patchnotes',
+  behavior:'cancel-current-reload-before-mode-switch',
+  gameplayStatus:'source-grounded-optional-pure-contract',
+  playableInTantalus:false, exactVisuals:false
+});
+/** One accepted mode request owns exactly one cancellation and one mode
+ * change. The old reload's already-inserted rounds remain physically loaded;
+ * unused reserve rounds are not charged or credited back.
+ *
+ * Return null on invalid inputs BEFORE mutation, including forged pending
+ * state, the wrong game policy or a duplicate receipt. Legacy switch behavior
+ * is unchanged: without the explicit AFE2 policy, pending reloads stay locked.
+ */
+export function switchM41AModeV190(s,mode,receipt,{ruleset='tantalus'}={}){
+  if(!validateUnderbarrelV174(s)||!['primary','launcher'].includes(mode)
+    ||mode===s.mode||!id(receipt)||!id('mode:'+receipt)
+    ||s.receipts.includes('mode:'+receipt))return null;
+  const changingReload=s.pending!==null;
+  if(changingReload&&ruleset!=='afe2-2026')return null;
+  let cancelled=null;
+  if(changingReload){
+    const prefix=s.weaponInstanceId+':reload:';
+    if(!s.pending.id.startsWith(prefix))return null;
+    const pendingReceipt=s.pending.id.slice(prefix.length);
+    if(!id(pendingReceipt)||s.receipts.includes('cancel:'+pendingReceipt))return null;
+    cancelled={receipt:pendingReceipt,inserted:s.pending.inserted,
+      remaining:s.pending.planned-s.pending.inserted};
+    if(!cancelM41AUnderbarrelReloadV174(s,pendingReceipt))return null;
+  }
+  if(!setM41AModeV174(s,mode,receipt))return null;
+  return {mode,receipt,previousReloadCancelled:cancelled!==null,
+    interruptedReload:cancelled,loaded:s.chamber+s.tube,reserve:s.reserve,
+    sourceScope:changingReload?'afe2-2026-source-behavior':'standard-mode-change'};
+}
+/** AFE2's September 2026 source says auto firemode-switch is optional and
+ * requires ammunition on the other firemode. This pure reader never changes
+ * the live actor, starts a reload, pumps a chamber or emits a projectile.
+ * An explicit accepted player/system action is still required by the host.
+ */
+export function getAFE2UnderbarrelAutoIntentV191(s,{
+  primaryLoaded,primaryReserve=0,autoSwitchWhenEmpty=false,autoReload=false
+}={}){
+  if(!validateUnderbarrelV174(s)||!rounds(primaryLoaded)||!rounds(primaryReserve)
+    ||typeof autoSwitchWhenEmpty!=='boolean'||typeof autoReload!=='boolean')return null;
+  const readyLauncher=s.chamber===1&&!s.needsPump;
+  const launcherEmpty=s.tube+s.chamber===0;
+  if(s.pending)return {action:'none',reason:'reload-in-progress',mode:s.mode};
+  if(autoSwitchWhenEmpty&&s.mode==='primary'&&primaryLoaded===0&&readyLauncher)
+    return {action:'switch',mode:'launcher',reason:'primary-empty-launcher-chambered'};
+  if(autoSwitchWhenEmpty&&s.mode==='launcher'&&launcherEmpty&&primaryLoaded>0)
+    return {action:'switch',mode:'primary',reason:'launcher-empty-primary-ready'};
+  if(autoReload&&s.mode==='launcher'&&launcherEmpty&&s.reserve>0)
+    return {action:'reload',mode:'launcher',reason:'launcher-reserve-available'};
+  if(autoReload&&s.mode==='primary'&&primaryLoaded===0&&primaryReserve>0)
+    return {action:'reload',mode:'primary',reason:'primary-reserve-available'};
+  return {action:'none',mode:s.mode,reason:s.needsPump||s.mode==='launcher'&&s.chamber===0&&s.tube>0?'manual-pump-required':
+    launcherEmpty&&primaryLoaded===0?'both-feeds-empty':'no-authorized-auto-action'};
+}
 export function fireM41AUnderbarrelV174(s,receipt){
   if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
     ||s.needsPump||s.chamber!==1||!id(receipt)
@@ -85,12 +170,21 @@ export function fireM41AUnderbarrelV174(s,receipt){
     pumpRequired:true,spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'};
 }
 export function pumpM41AUnderbarrelV174(s,receipt){
-  if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending||!s.needsPump
-    ||!id(receipt)||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
+  // A manually cycled pump can chamber a round from a loaded tube even on
+  // the FIRST use. The legacy path only allowed this after a fired grenade,
+  // stranding a valid saved tube with an empty chamber and no spent case.
+  // Cycling an already loaded chamber or an empty clean weapon is rejected.
+  const coldChamber=s?.chamber===0&&s?.tube>0&&!s?.needsPump;
+  if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
+    ||(!s.needsPump&&!coldChamber)||!id(receipt)
+    ||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
+  const spentCleared=s.needsPump;
   s.needsPump=false;s.spent=0;
-  if(s.tube){s.tube--;s.chamber=1;}
-  remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,1);
+  const chambered=s.tube>0?1:0;
+  if(chambered){s.tube--;s.chamber=1;}
+  remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,chambered);
   return {type:'launcher-cycled',chamber:s.chamber,tube:s.tube,
+    spentCleared,roundChambered:chambered,
     spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'};
 }
 export function beginM41AUnderbarrelReloadV174(s,receipt){

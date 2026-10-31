@@ -284,6 +284,267 @@ export const V165_VERIFIER_SUCCESSORS_V176 = Object.freeze({
   })
 });
 
+/** V177 completion: independently checked update of the V165 release verifier.
+ * Never edits predecessor evidence or the historical V163 workbook hashes. */
+export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V173['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: '37a94416414702acc7382579cac02dfed74cae99718d9a138c7c74c2787483f6'
+  })
+});
+
+/** V178 storefront rendering correction (PR #25). A genuine native V165
+ * electric safety plate is repainted after the decorative V169 layer.
+ * Preserve the reviewed V172 source and record only the new successor.
+ * The behavioral verifier must itself match an independently reviewed hash.
+ */
+export const ARMORY_V178_RENDER_SUCCESSORS = Object.freeze({
+  'src/hub-armory-scene-v169.js': Object.freeze({
+    previousSha256: ARMORY_V172_RELEASE_SUCCESSORS['src/hub-armory-scene-v169.js'].currentSha256,
+    currentSha256: '362f7526ba2826b388e89635acdb9ac3eaf9c9951662072c68b2fe421005f2bb',
+    verifier: 'scripts/verify-armory-service-raster-v177.mjs',
+    verifierSha256: '3787adfc00550cee0781434161e59fd13a5c0aee597b8065ae95fe772f9a894c'
+  })
+});
+
+/** V186 storefront source-rectangle correction: five narrowed crops remove
+ * duplicate pixels from the three original atlas render plans. The atlas PNG
+ * and WebP SHA-256 records and shop collision/contact rules are unchanged. */
+export const ARMORY_V186_CROP_SUCCESSORS = Object.freeze({
+  'src/hub-armory-storefront-v169.js': Object.freeze({
+    previousSha256: ARMORY_V172_RELEASE_SUCCESSORS['src/hub-armory-storefront-v169.js'].currentSha256,
+    currentSha256: '42fc7d816054cae326caa750e7608aeabe4d7f7a54378410ad5757019a658ac3'
+  })
+});
+
+/** V178/V179: cumulative verifier successors for the V178 authored armory
+ * fix. Historical V165/V176/V177 checksums are preserved, not overwritten.
+ */
+export const V165_VERIFIER_SUCCESSORS_V178 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V176['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '77a7f1c5b74b5ba3a317289c9d718074439b4e5ce296184b3e1298d81a84858c'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V179 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V177['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: '13b4bf177d61e4ae0ef7c89f05f5c84854a5779e97bbf017850961dd07a0da5f'
+  })
+});
+
+/** V180–V182: new exact review receipts for the V177/178 development branch.
+ * The V176 distribution verifier included an extra admitted QA script, so its
+ * previously recorded bytes must remain historical, not be overwritten.
+ */
+export const V165_VERIFIER_SUCCESSORS_V180 = Object.freeze({
+  'scripts/verify-public-release-v86.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V176['scripts/verify-public-release-v86.mjs'].currentSha256,
+    currentSha256: '15b024262c0c62bdea40625810478f52db4de89ded0d73ec6905e0e058533e6f'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V181 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V178['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '8eeb2ef6ab10ffee09bf4c0047c4d62b49786dee0cd1c66e1415e7794f64ea89'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V182 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V179['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: '6a6e530226b234be581618e240f591576e26003b61d4229ce3acecc56e9933d0'
+  })
+});
+
+/** V183/V184: exact, reviewed follow-ups for the latest audit and V165
+ * verifiers. The original V165/V176/V181/V182 receipts remain immutable.
+ */
+export const V165_VERIFIER_SUCCESSORS_V183 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V181['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '2df4a79529c91dbc8ca2cd717940104d6a86bc02c1498a25b8bd9e418c66c328'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V184 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V182['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256: 'bcd4e805113fdf0b2e1928a0dd2f573284bdc26dc30d9d38d4c3fcce750077a4'
+  })
+});
+
+/** V186 verifier of the V186 visual source isolation, without rewriting
+ * any of the V171–V184 historical audit results. */
+export const V165_VERIFIER_SUCCESSORS_V186 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V183['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '253c073c5433745fb91244306907f67cfedc187ec8c2daa8db7860349282e7b8'
+  })
+});
+
+/** V187 audit verifier: effective V185/V186 runtime source views are
+ * checked against independent approved successor receipts. Historical
+ * V186 source and verifier digests are preserved, not replaced. */
+export const V165_VERIFIER_SUCCESSORS_V187 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V186['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'f58c4d019b0eae07fd4c9b92aae51cf0b8252eda33fead4d56c4b61e5beb7790'
+  })
+});
+
+/** V188 current verifier receipts, without changing historical V165/V187.
+ * The interdeck regression had no earlier V171 successor and is separately
+ * anchored to its actual V165 checksum. No verifier paths are wildcarded. */
+export const V165_VERIFIER_SUCCESSORS_V188 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V187['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '9a085f0378dc628842d76e7b49d6040aba4754e9acfa5d8d3923c471cb078540'
+  })
+});
+export const NPC_INTERDECK_VERIFIER_V188 = Object.freeze({
+  path: 'scripts/verify-npc-interdeck-routes-v165.mjs',
+  previousSha256: '1e0a4abba4be1d18d4d9b6023749246179634035542c4f0f7e6e0deec4d24733',
+  currentSha256: '0a0157a5ee1523379086c0c5a6906bb3ccd23f2a211d36d56b2403b4d81ce40c'
+});
+
+/** V198: test the precise shared physical door rather than broad timetable
+ * dependencies; original V165 and V188 verifier evidence stay immutable. */
+export const NPC_INTERDECK_VERIFIER_V198 = Object.freeze({
+  path: NPC_INTERDECK_VERIFIER_V188.path,
+  previousSha256: NPC_INTERDECK_VERIFIER_V188.currentSha256,
+  currentSha256: '4da3fd3645f7335e27b5ac6770eeaa4622ba0f45f9ab716043183bfe36ff2198'
+});
+/** V201 exact behavior successor: prevent real same-floor Jun/Asha collision
+ * without returning to a permanent remote-route door claim. */
+export const NPC_INTERDECK_VERIFIER_V201 = Object.freeze({
+  path: NPC_INTERDECK_VERIFIER_V198.path,
+  previousSha256: NPC_INTERDECK_VERIFIER_V198.currentSha256,
+  currentSha256: '606766d5b34b111fd6b770e0ad327c875ed0c1cb80c6139bb69fa44f39a2a1c9'
+});
+
+/** V194: source-only magazine transaction anti-replay fix, preserving the
+ * original V167 evidence. A long caller ID must never spend real ammunition
+ * without a durable prefixed receipt; save-phase markers are monotonic. */
+export const ARSENAL_V194_MAGAZINE_SUCCESSORS = Object.freeze({
+  'src/weapon-magazine-inventory-v167.js': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['src/weapon-magazine-inventory-v167.js'],
+    currentSha256: '4fdbfef44f7ad502bf6a75c46fdb08922858c85c35e13e0eae2ce947002833ed'
+  }),
+  'scripts/verify-weapon-arsenal-v167.mjs': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['scripts/verify-weapon-arsenal-v167.mjs'],
+    currentSha256: '95984aa585813f093b619ce90022cfced055833be34fb37757d38579904758ba'
+  })
+});
+
+/** V194 test verifier — exact successor, not an edit to V188 history. */
+export const V165_VERIFIER_SUCCESSORS_V194 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V188['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'afe5fe269c07dff216a4c811dbe9d0f2ef8442de66194c4a114fe170f9e0a0d3'
+  })
+});
+
+/** V195 physical-world recovery safeguards. No V167/V168 source digest is
+ * rewritten. The revision ceiling is checked before a dropped magazine can
+ * be consumed from world state, preventing invalid persisted inventories. */
+export const ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS = Object.freeze({
+  'src/weapon-magazine-world-v168.js': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['src/weapon-magazine-world-v168.js'],
+    currentSha256: 'a845e5a27c33c381fdfe716beb5e42247c25717fc0234eae1b50cb74d3c8c4e8'
+  }),
+  'scripts/verify-weapon-magazine-world-v168.mjs': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['scripts/verify-weapon-magazine-world-v168.mjs'],
+    currentSha256: '430f7382a05d09310ed51a96df76decec317a2987d6985b816e15930905d4725'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V195 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V194['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'e069b6bf59f20cfff033dcc86ee48a313b7d7b84fa5cc778fa543fa6f088221e'
+  })
+});
+
+/** V197 correction of a missing immutable V167 import in the V194/V195
+ * tests. Keep the V195 verifier receipt historical and pin exact new bytes. */
+export const V165_VERIFIER_SUCCESSORS_V197 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V195['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'd240aea5b6b2cc45a53e88984c8ba05a5117fac6068d4d7593e3b42088eca74a'
+  })
+});
+
+/** V199 exact audit-verifier continuation for V198 physical service passage.
+ * This changes no V163/V197 historic receipt. */
+export const V165_VERIFIER_SUCCESSORS_V199 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V197['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '9a5bd009cdfb70b1fbcc79fa6b18313a3581231cc1bc0e446d03e8495cb743ef'
+  })
+});
+
+/** V200 audit test follows exact V199 tests and checks unreviewed digest errors.
+ * Historical V197 and V199 receipts remain intact. */
+export const V165_VERIFIER_SUCCESSORS_V200 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V199['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '56a596eb6f34441d658d35cff5008becc421213dfdbd45fd62cedcdb1a950dd1'
+  })
+});
+
+/** V202 exact audit verifier continuation after corridor native regression.
+ * V197/V199/V200 receipts remain historical and unchanged. */
+export const V165_VERIFIER_SUCCESSORS_V202 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V200['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '6380c43ad52853b62ce24e827819a00c33bdd1a531a277b0377d7dbf172b3c18'
+  })
+});
+
+/** Single, reviewed successor chain. Each hop must match its exact previous
+ * SHA256. This never treats the historical V165 record as contemporary bytes.
+ * No unregistered verifier path is allowed, and a missing successor fails
+ * rather than silently falling back to an older release receipt.
+ */
+export const V165_VERIFIER_STAGES_V184 = Object.freeze([
+  [171,V165_VERIFIER_SUCCESSORS_V171],
+  [173,V165_VERIFIER_SUCCESSORS_V173],
+  [174,V165_VERIFIER_SUCCESSORS_V174],
+  [176,V165_VERIFIER_SUCCESSORS_V176],
+  [177,V165_VERIFIER_SUCCESSORS_V177],
+  [178,V165_VERIFIER_SUCCESSORS_V178],
+  [179,V165_VERIFIER_SUCCESSORS_V179],
+  [180,V165_VERIFIER_SUCCESSORS_V180],
+  [181,V165_VERIFIER_SUCCESSORS_V181],
+  [182,V165_VERIFIER_SUCCESSORS_V182],
+  [183,V165_VERIFIER_SUCCESSORS_V183],
+  [184,V165_VERIFIER_SUCCESSORS_V184],
+  [186,V165_VERIFIER_SUCCESSORS_V186],
+  [187,V165_VERIFIER_SUCCESSORS_V187],
+  [188,V165_VERIFIER_SUCCESSORS_V188],
+  [194,V165_VERIFIER_SUCCESSORS_V194],
+  [195,V165_VERIFIER_SUCCESSORS_V195],
+  [197,V165_VERIFIER_SUCCESSORS_V197],
+  [199,V165_VERIFIER_SUCCESSORS_V199],
+  [200,V165_VERIFIER_SUCCESSORS_V200],
+  [202,V165_VERIFIER_SUCCESSORS_V202]
+].map(([version,receipts]) => Object.freeze({version,receipts})));
+export function resolveLatestV165VerifierReceipt(path) {
+  if (path === NPC_INTERDECK_VERIFIER_V188.path)
+    return Object.freeze({ version: 201, previousSha256: NPC_INTERDECK_VERIFIER_V201.previousSha256,
+      currentSha256: NPC_INTERDECK_VERIFIER_V201.currentSha256 });
+  if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
+  let latest = null;
+  for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
+    const next = receipts[path];
+    if (!next) continue;
+    assert.ok(validHash(next.previousSha256) && validHash(next.currentSha256),
+      'Invalid V'+version+' verifier digest: '+path);
+    if (latest) assert.equal(next.previousSha256,latest.currentSha256,
+      'Broken V'+latest.version+'-to-V'+version+' verifier chain: '+path);
+    latest = {version,previousSha256:next.previousSha256,currentSha256:next.currentSha256};
+  }
+  return latest ? Object.freeze(latest) : null;
+}
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -488,12 +749,38 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
               : armory ? 'Unreviewed V169 runtime successor: ' + path
                 : 'Unreviewed V167 runtime successor: ' + path);
     } else {
-      assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
+      const npcV185 = NPC_INTERDECK_V185_SOURCE_SUCCESSORS[path];
+      if(npcV185){
+        assert.equal(npcV185.previousSha256, expected,
+          'Unreviewed V185 NPC predecessor: ' + path);
+        const localV198=NPC_INTERDECK_V198_LOCAL_SUCCESSORS[path];
+        const corridorV201=NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS[path];
+        if(localV198)assert.equal(localV198.previousSha256,npcV185.currentSha256,
+          'Broken V185-to-V198 interdeck physical door chain: ' + path);
+        if(corridorV201)assert.equal(corridorV201.previousSha256,localV198?.currentSha256,
+          'Broken V198-to-V201 same-floor corridor predecessor: ' + path);
+        assert.equal(sha(readSource(path)), corridorV201?.currentSha256 || localV198?.currentSha256 || npcV185.currentSha256,
+          corridorV201?'Unreviewed V201 local interdeck corridor source: ' + path
+            :localV198?'Unreviewed V198 local interdeck source: ' + path
+              :'Unreviewed V185 NPC successor: ' + path);
+      } else assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
-  for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES))
-    assert.equal(sha(readSource(path)), expected, 'Unreviewed V167 added source: ' + path);
+  // V194 is a narrowly declared correction of two magazine files; retain
+  // the exact V167 SHA as predecessor and fail closed on any other change.
+  for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES)) {
+    const v194=ARSENAL_V194_MAGAZINE_SUCCESSORS[path];
+    const v195=ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS[path];
+    if(v194&&v195)throw new Error('Ambiguous magazine source successor: '+path);
+    if (v194) assert.equal(v194.previousSha256,expected,
+      'Broken V167-to-V194 magazine predecessor: ' + path);
+    if (v195) assert.equal(v195.previousSha256,expected,
+      'Broken V168-to-V195 world-magazine predecessor: ' + path);
+    assert.equal(sha(readSource(path)),v195?.currentSha256||v194?.currentSha256||expected,
+      v195?'Unreviewed V195 world-magazine successor: ' + path
+        :v194?'Unreviewed V194 magazine successor: ' + path:'Unreviewed V167 added source: ' + path);
+  }
   for (const [path, expected] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
     const extra = path === ARMORY_V170_ASSET_SOURCE.path ? ARMORY_V170_ASSET_SOURCE : null;
     if (extra) assert.equal(extra.previousSha256, expected, 'Invalid V169 authored source history');
@@ -501,25 +788,42 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (current) assert.equal(current.previousSha256, extra?.currentSha256 || expected,
       'Broken V169/V170-to-V171 source chain: ' + path);
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const cropFix = ARMORY_V186_CROP_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256, current?.currentSha256 || extra?.currentSha256 || expected,
       'Broken V171-to-V172 source chain: ' + path);
-    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected,
-      release ? 'Unreviewed V172 art source: ' + path
-        : current ? 'Unreviewed V171 source correction: ' + path
-          : extra ? 'Unreviewed V170 source correction: ' + path
-            : 'Unreviewed V169 added source: ' + path);
+    if (cropFix) {
+      assert.ok(release, 'V186 crop source has no approved V172 predecessor: ' + path);
+      assert.equal(cropFix.previousSha256, release.currentSha256,
+        'Broken V172-to-V186 source-rectangle chain: ' + path);
+    }
+    assert.equal(sha(readSource(path)), cropFix?.currentSha256 || release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected,
+      cropFix ? 'Unreviewed V186 source crop successor: ' + path
+        : release ? 'Unreviewed V172 art source: ' + path
+          : current ? 'Unreviewed V171 source correction: ' + path
+            : extra ? 'Unreviewed V170 source correction: ' + path
+              : 'Unreviewed V169 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const current = ARSENAL_V171_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, expected,
       'Unreviewed V171 predecessor for V170 source: ' + path);
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const repaint = ARMORY_V178_RENDER_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256, current?.currentSha256 || expected,
       'Broken V171-to-V172 source chain: ' + path);
-    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || expected,
-      release ? 'Unreviewed V172 art source: ' + path
-        : current ? 'Unreviewed V171 source successor: ' + path
-          : 'Unreviewed V170 added source: ' + path);
+    if (repaint) {
+      assert.ok(release, 'V178 repaint has no reviewed V172 source: ' + path);
+      assert.equal(repaint.previousSha256, release.currentSha256,
+        'Broken V172-to-V178 authored scene chain: ' + path);
+      assert.equal(sha(readSource(repaint.verifier)), repaint.verifierSha256,
+        'Unreviewed V178 native render verifier: ' + repaint.verifier);
+    }
+    assert.equal(sha(readSource(path)),
+      repaint?.currentSha256 || release?.currentSha256 || current?.currentSha256 || expected,
+      repaint ? 'Unreviewed V178 storefront rendering successor: ' + path
+        : release ? 'Unreviewed V172 art source: ' + path
+          : current ? 'Unreviewed V171 source successor: ' + path
+            : 'Unreviewed V170 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
@@ -536,23 +840,32 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   for (const [path, expected] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V174 economy source: ' + path);
-  for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
-    const revision = V165_VERIFIER_SUCCESSORS_V173[path];
-    const latest = V165_VERIFIER_SUCCESSORS_V174[path];
-    const approvedV176 = V165_VERIFIER_SUCCESSORS_V176[path];
-    if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
-      'Broken V171-to-V173 verifier chain: ' + path);
-    if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
-      'Broken V171/V173-to-V174 verifier chain: ' + path);
-    if (approvedV176) assert.equal(approvedV176.previousSha256,
-      (latest || revision || receipt).currentSha256,
-      'Broken V174-to-V176 verifier chain: ' + path);
-    assert.equal(sha(readSource(path)),
-      approvedV176?.currentSha256 || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
-        : latest ? 'Unreviewed V174 verifier successor: ' + path
-          : revision ? 'Unreviewed V173 verifier successor: ' + path
-            : 'Unreviewed V171 verification successor: ' + path);
+  // Source-only successor receipts can never bypass their exact historical
+  // predecessor. A single resolver is shared with cumulative V165 and V163
+  // verifiers, avoiding tests that accidentally accept a stale intermediate SHA.
+  assert.equal(current.verifierSourceSha256V165[NPC_INTERDECK_VERIFIER_V188.path],
+    NPC_INTERDECK_VERIFIER_V188.previousSha256,
+    'Invalid V165-to-V188 interdeck verifier predecessor');
+  assert.equal(NPC_INTERDECK_VERIFIER_V198.previousSha256,
+    NPC_INTERDECK_VERIFIER_V188.currentSha256,
+    'Broken V188-to-V198 interdeck verifier chain');
+  assert.equal(NPC_INTERDECK_VERIFIER_V201.previousSha256,
+    NPC_INTERDECK_VERIFIER_V198.currentSha256,
+    'Broken V198-to-V201 interdeck verifier chain');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+    NPC_INTERDECK_VERIFIER_V201.currentSha256,
+    'Unreviewed V201 interdeck behavior verifier');
+  for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
+    for (const path of Object.keys(receipts)) {
+      assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path),
+        'Unadmitted V'+version+' verifier path: '+path);
+    }
+  }
+  for (const path of Object.keys(V165_VERIFIER_SUCCESSORS_V171)) {
+    const latest = resolveLatestV165VerifierReceipt(path);
+    assert.ok(latest && latest.version >= 171);
+    assert.equal(sha(readSource(path)),latest.currentSha256,
+      'Unreviewed V'+latest.version+' verifier successor: '+path);
   }
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
     assert.ok(Object.hasOwn(ARSENAL_V167_SUCCESSORS, path), 'Missing V167 predecessor: ' + path);
@@ -584,6 +897,38 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     added: added.length, current: keys(after).length });
 }
 
+/** V185 native interdeck correction. The original V163 and V165 runtime
+ * checksums remain immutable; this is one exact successor of the real V165
+ * NPC controller. The associated regression exercises the dependency/door
+ * distinction and requires its own CI receipt on the PR head. */
+export const NPC_INTERDECK_V185_SOURCE_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: '85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1',
+    currentSha256: '2cf709efe7b42baaf1536933700b81a42029a065a6e726bc871a1e12eb6b991f'
+  })
+});
+
+/** V198 local-service passage after the explicitly pinned V185 NPC
+ * controller. Broad route dependencies remain for leases and reports;
+ * only physical occupancy on the parent floor and doorway can retain the
+ * Leila/Asha service post. No historical hash is rewritten. */
+export const NPC_INTERDECK_V198_LOCAL_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: NPC_INTERDECK_V185_SOURCE_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256,
+    currentSha256: 'be20d6d37f4bfd67d62296ac6e82739bc0302e58ff2102cb65c711bf66fe77c8'
+  })
+});
+
+/** V201 same-floor corridor guard follows V198 without rewriting V185/V198.
+ * A walking Jun uses shared crew-quarters, while stationary/remote bodies
+ * cannot claim another room's door. Exact input bytes and verifier are pinned. */
+export const NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: NPC_INTERDECK_V198_LOCAL_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256,
+    currentSha256: '219003a663c684faac10384616b2a2b45da767bbaf715008657f0e4741ee89de'
+  })
+});
+
 /** A missing successor preserves the anchored record; invalid content never falls back. */
 export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
@@ -606,6 +951,14 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V198_LOCAL_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;
 }

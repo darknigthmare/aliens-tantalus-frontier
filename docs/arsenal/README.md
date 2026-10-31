@@ -246,3 +246,78 @@ Le test `scripts/verify-armory-resupply-v174.mjs` couvre 8 scénarios : coût, l
 **Reste à finaliser pour une fidélité 1:1** : sources multi-angle et droits, variantes d’apparence spécifiques à chaque œuvre, squelette et prise en main latéraux, animations de cycle/rechargement, alimentation spéciale réellement raccordée au moteur, VFX/sons exacts, certification des vendeurs colonie/station, tests sur trois scènes et revue artistique. Le M41A 30 mm sous canon dispose d’un contrat séparé V174, mais pas encore d’une admission 1:1 complète.
 
 **Validation** : ne conclure à la stabilité qu’après réussite des suites Forge, Gameplay, Excel et Full Release sur un seul et même SHA de tête de PR. Un test Node réussi ne constitue pas une vérification de fidélité visuelle canonique.
+
+
+## V177 — état après la fusion de PR #23 (30 octobre 2026)
+
+La nouvelle PR de finition est [#25](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/25), ouverte depuis le main fusionné 4676a787. Le classeur local V177 (30 onglets) est remis dans la conversation : **il n'est pas encore présent comme binaire dans GitHub**. Le V1 historique et le CSV V170 restent les sources versionnées.
+
+| Domaine | Quantité | Statut |
+| --- | ---: | --- |
+| Fiches d'armes Excel | 200 | Catalogue et propositions, non 200 armes 1:1 |
+| Identités du catalogue | 71 | Admission mécanique/visuelle individuelle |
+| Propositions distinctes | 129 | Non achetables, non certifiées |
+| P0 / P1 / P2 | 14 / 27 / 88 | Priorités de recherche |
+| Armureries originales | 3 | PNG Tantalus et station, WebP sans perte colonie |
+| Accessoires à documenter | 13 | Source officielle, pas de compatibilité inventée |
+
+### Ce qui a été corrigé
+
+- Le vérificateur V165 historique n'acceptait pas les octets déjà vérifiés par la succession V176. La PR #25 ajoute un successeur V177 épinglé par SHA256, basé sur le dernier prédécesseur V173 du vérificateur concerné ; les archives historiques ne sont pas réécrites.
+- Le navigateur V164 de portraits de PNJ doit accepter le nouveau rendu V168 en canvas uniquement lorsqu'il montre la source originale et le rectangle de recadrage exact. La voie historique CSS demeure contrôlée quand le canvas est absent.
+- Le test raster des détails de service demeure ouvert : une correction de production fondée sur les pixels de la vraie pièce est requise, pas un contournement du test.
+
+### Conditions fermes de sortie pour le 1:1
+
+Une arme de la franchise demande deux vues sources comparables, la version exacte du média, calibre/alimentation confirmés, géométrie et rig latéral, mains et arme, animations tirer/viser/recharger, VFX/douilles ou absence d'étui, son, apparence des équipements et approbation des droits. Sa QA doit être reproduite sur un commit de jeu donné. Une fiche de proposition, une capture d'inspiration ou un sprite généré ne suffisent pas.
+
+Les 129 fiches proposées doivent être admises progressivement, sans changer les 71 identifiants historiques. Les cinq mécanismes spécialisés V171 (tube, barillet, bande, réservoir, lanceur) et le sous-canon indépendant V174 sont des contrats pur testés : leur raccordement complet au tir/animations/HUD reste à faire. La commande de ravitaillement V174 doit être validée en reprise de sauvegarde et en coopération.
+
+Sources principales : [Royal Armouries M41A](https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle), [correctif officiel AFE2 du 22 octobre 2026](https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes), [liste secondaire AFE2](https://www.gamewatcher.com/aliens-fireteam-elite-2/weapons).
+
+**Statut de PR : brouillon jusqu'à CI de la tête exacte.**
+
+## V186 — correction des découpes et revue des trois boutiques (31 octobre 2026)
+
+La PR #25 corrige désormais le défaut de **copie de pixels sources entre accessoires réellement dessinés**, identifié en V174. Les cinq limites de recadrage de `src/hub-armory-storefront-v169.js` ont été resserrées sans modifier le PNG/WebP original, la position écran des objets, le plancher (y=624), la géométrie de collision, les accès, l'économie ou la sauvegarde.
+
+| Source corrigée | Ancienne largeur | Largeur actuelle | Fonction |
+| --- | ---: | ---: | --- |
+| `main-sign` | 695 | 689 | Enseigne / auvent |
+| `weapon-rack-a` | 170 | 167 | Râtelier A / B |
+| `weapon-rack-b` | 174 | 170 | Râtelier B / mur de munitions |
+| `ammo-wall` | 231 | 227 | Mur de munitions / casiers |
+| `glass-counter` | 361 | 357 | Comptoir vitré / terminal |
+
+Le validateur de production vérifie **les paires de sources utilisées par chaque disposition** : toutes les intersections positives deviennent des erreurs `source-crop-overlap:<variante>:<a>:<b>`. La revue géométrique préalable relevait 5 paires sur Tantalus, 2 sur la colonie et 2 sur la station, contre aucune après ces cinq retouches. Il s'agit de *géométrie des rectangles source*, pas d'un essai de rendu réel ni d'une comparaison visuelle côte-à-côte. Le test V169 déjà présent exige `validateArmoryStorefrontV169().valid === true`. Un reçu V186 SHA-256 et son test d'altération empêchent les changements silencieux.
+
+**Parcours natifs à maintenir :**
+
+| Variante | Salle réelle | Autorité de vente | Garde obligatoire | À compléter |
+| --- | --- | --- | --- | --- |
+| Tantalus | `armory` | Sanaa Doyle, PNJ existante | Interaction native actuelle, aucun double vendeur | Lire le panneau électrique V165 après superposition ; QA pixels et mouvement |
+| Colonie | `port-meridien-quay` | Concept de vendeur, pas de rig natif certifié | Mission de secours en phase `complete` | Rig, dialogue et accès physique, stocks spécifiques, contrôle du niveau |
+| Station hub | `logistics` | Concept de vendeur, pas de rig natif certifié | Porte/PNJ/station native prioritaire ; contact uniquement au sol | Rig indépendant et animations, test d'aller-retour annex/parent |
+
+**Critère de sortie :** conserver la PR en brouillon si Forge, Gameplay, Excel ou Full Release échoue sur le **même commit**, si une pièce dépasse le support physique, si une porte devient occultée/inaccessible, si une interaction de vendeur peut créer un duplicata de matériel, ou si le rendu de plaque/service est masqué. Une validation Node des découpes n'homologue ni les PNJ concepts ni les visuels d'armes comme reproductions canoniques 1:1.
+
+### Intégration des DLC — séparation stricte des preuves
+
+Pour chacun des médias annoncés (*Alien* 1–4, *Prometheus*, *Covenant*, *Isolation*, *Blackout*, *Colonial Marines*, *Romulus*, *Alien: Earth*, AVP et adaptations romans/comics), l'import du contenu doit fournir : (1) identifiant de l'œuvre et de la séquence, (2) carte des salles et connexions réciproques réellement traversables, (3) porte/sas posés dans l'architecture avec passage dégagé, (4) roster et costumes propres à l'époque/au lieu, (5) équipements/armes autorisés par cette séquence, (6) IA des castes et objectifs vérifiables, (7) sauvegarde/reprise d'une traversée complète, (8) sources visuelles et état des droits. Une archive autonome locale ou un lien de menu n'est pas une intégration native de ces huit points. L'audit doit signaler `HORS_DEPOT`, `SOURCE_PRESENTE`, `RACCORDE`, `PARCOURS_NATIF_VALIDE` ou `ART_1TO1_VERIFIE` plutôt que de promouvoir un prototype par simple existence d'un zip.
+
+
+## V190 — commutation des modes de tir sans perte de munitions
+
+Le contrat `src/weapon-underbarrel-v174.js` distingue désormais deux politiques. Le **M41A film / Tantalus existant** conserve l'interdiction de changer de mode pendant un rechargement en cours. Une nouvelle fonction pure `switchM41AModeV190` accepte explicitement `{ruleset:'afe2-2026'}` pour reproduire **le comportement d'interface décrit dans les notes officielles AFE2 du 17 septembre 2026** : le changement de mode met fin au rechargement incomplet, sans effacer les cartouches déjà introduites. L'identité du fusil de cinéma, la capacité du tube et ses animations ne sont pas extrapolées à partir de cette règle de jeu.
+
+Source primaire : https://www.daybreakgames.com/press/afe2/article/afe2-91726-patchnotes — corrections du changement de mode au cours d'un rechargement. Le profil précise `playableInTantalus:false` et `exactVisuals:false`. Il est **optionnel et non branché** à l'interface, à la coopération ou au runtime natif.
+
+`scripts/verify-weapon-underbarrel-v174.mjs` teste la conservation exacte du total `tube + chambre + réserve`, la transaction interrompue une seule fois, les accusés de réception non rejouables, la sauvegarde et la reprise, le refus des données forgées et l'absence de modification du comportement historique. Une suite Node ne prouve pas la prise à deux mains, la synchronisation client, l'effet sonore, les animations du tube ou la conformité visuelle à la révision AFE2. Pour homologation : lier la source au modèle et au bon mode de tir, faire constater l'annulation dans le moteur sur une arme équipable, capturer chaque temps de pose et tester une reprise réelle après déconnexion.
+
+Pour toute admission 1:1 de l'arsenal, respecter **la séparation par média et révision** : M41A d'*Aliens* (1986), adaptation « Classic Pulse Rifle » d'AFE2 et familles M41A2/M41A3 restent des dossiers distincts tant que leurs silhouettes, sons et comportements propres n'ont pas été comparés et validés.
+
+### V191 — sélection automatique sans arme fantôme
+
+Les notes AFE2 du 17 septembre 2026 précisent aussi le passage automatique d'un mode à l'autre **si l'option est activée et si l'autre alimentation dispose de munitions**. `getAFE2UnderbarrelAutoIntentV191` est un lecteur pur : il propose `switch`, `reload` ou `none` sans modifier l'arme. La chambre du lanceur doit contenir une véritable cartouche, et un tube nécessitant un pompage conserve son cycle physique au lieu de déclencher un tir fantôme. En cas de rechargement en cours, aucune nouvelle action automatique n'est demandée.
+
+Les tests ajoutés au vérificateur V174 couvrent la chambre réellement remplie, les deux alimentations vides, le pompage obligatoire, les transferts non finalisés et les refus de paramètres invalides. **Aucun déclenchement natif, audio, animation, réglage utilisateur ou synchronisation réseau ne découle automatiquement de ce lecteur** ; tout cela reste à raccorder et tester par œuvre/révision avant une homologation 1:1.

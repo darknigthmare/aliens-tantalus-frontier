@@ -233,10 +233,16 @@ try:
                 if args.stage == 'after':
                     page.wait_for_function("""()=>getComputedStyle(
                       document.querySelector('#hub-dialogue-image')).maskImage!=='none'""")
-                portrait = page.locator('#hub-dialogue-image').evaluate("""i=>({
-                  source:i.currentSrc,width:i.naturalWidth,height:i.naturalHeight,
-                  mask:getComputedStyle(i).maskImage,clip:getComputedStyle(i).clipPath,
-                  bounds:i.getBoundingClientRect().toJSON()})""")
+                portrait = page.locator('#hub-dialogue-image').evaluate("""i=>{
+                  const frame=i.parentElement,canvas=frame?.querySelector('canvas[data-dialogue-avatar-v168]');
+                  return {source:i.currentSrc,width:i.naturalWidth,height:i.naturalHeight,
+                    hidden:i.hidden,mask:getComputedStyle(i).maskImage,
+                    clip:getComputedStyle(i).clipPath,
+                    bounds:i.getBoundingClientRect().toJSON(),
+                    avatar:canvas?{hidden:canvas.hidden,sourceRect:canvas.dataset.portraitSourceRectV168||null,
+                      crew:frame?.dataset.dialoguePortraitCrewV168||'',
+                      state:frame?.dataset.dialoguePortraitStateV168||''}:null};
+                }""")
                 after = observe(page, config['crew'])
                 check(config['id'] + ': real E opens the matching NPC dialogue',
                       config['speaker'] in page.locator('#hub-dialogue-speaker').inner_text()
@@ -250,9 +256,25 @@ try:
                       and after['actor']['y'] == before['actor']['y']
                       and after['clock'] == before['clock']
                       and after['resources'] == before['resources'])
-                check(config['id'] + ': native portrait retains its original atlas and cell crop',
+                # V168 draws the admitted head-and-shoulders crop to a canvas,
+                # keeping the original 1024px atlas hidden. The legacy V164
+                # implementation exposed the same atlas with a CSS cell clip.
+                expected_crop = page.evaluate("""async crew=>{
+                  if(!document.querySelector('#hub-dialogue-image')?.parentElement
+                    ?.querySelector('canvas[data-dialogue-avatar-v168]'))return null;
+                  const m=await import('/src/npc-dialogue-portraits-v168.js');
+                  return m.getNpcDialoguePortraitV168(crew)?.crop||null;
+                }""", config['crew'])
+                avatar = portrait['avatar']
+                native_canvas = bool(avatar and portrait['hidden']
+                  and avatar['hidden'] is False and avatar['state'] == 'ready'
+                  and avatar['crew'] == config['crew'] and expected_crop
+                  and avatar['sourceRect'] and json.loads(avatar['sourceRect']) == expected_crop)
+                legacy_cell = portrait['clip'] != 'none' and not avatar
+                check(config['id'] + ': native portrait retains its original atlas and reviewed crop',
                       portrait['source'].endswith('-locomotion-sheet.png')
-                      and portrait['clip'] != 'none')
+                      and portrait['width'] == 1024 and portrait['height'] == 1024
+                      and (native_canvas or legacy_cell))
                 if args.stage == 'after':
                     check(config['id'] + ': curated portrait mask is actually active',
                           'data:image/svg+xml' in portrait['mask'])

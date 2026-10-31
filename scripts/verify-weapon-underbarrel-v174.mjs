@@ -3,11 +3,13 @@ import assert from 'node:assert/strict';
 import {
  M41A_UNDERBARREL_HOST_V174,M41A_UNDERBARREL_SOURCE_V174,
  validateUnderbarrelV174,createM41AUnderbarrelV174,setM41AModeV174,
+ AFE2_UNDERBARREL_SWAP_V190,switchM41AModeV190,getAFE2UnderbarrelAutoIntentV191,M41A_PROP_LINEAGE_V192,
  fireM41AUnderbarrelV174,pumpM41AUnderbarrelV174,
  beginM41AUnderbarrelReloadV174,advanceM41AUnderbarrelReloadV174,
  cancelM41AUnderbarrelReloadV174,M41AAmmoHudV174,
  captureM41AUnderbarrelV174,restoreM41AUnderbarrelV174
 } from '../src/weapon-underbarrel-v174.js';
+import { M41A_PULSE_RIFLE_PROFILE_V117 } from '../src/weapon-native-visuals-v117.js';
 const create=(tube=3,chamber=1,reserve=8)=>createM41AUnderbarrelV174({
  ownerId:'player',weaponInstanceId:'player:m41a',tube,chamber,reserve,capacity:4
 });
@@ -147,4 +149,202 @@ test('V174 legitimate partial launcher reload still restores and completes exact
  assert.equal(restored.pending,null);
  assert.equal(validateUnderbarrelV174(restored),true);
  assert.equal(advanceM41AUnderbarrelReloadV174(restored,'tx',1),false);
+});
+
+test('V190 AFE2-specific mid-reload mode swap conserves inserted and reserve ammunition',()=>{
+ const s=create(0,0,8);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'load'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'load',.5),true);
+ const before=s.tube+s.chamber+s.reserve;
+ assert.equal(before,8);
+ const receipt=switchM41AModeV190(s,'primary','switch1',{ruleset:'afe2-2026'});
+ assert.deepEqual(receipt,{mode:'primary',receipt:'switch1',previousReloadCancelled:true,
+   interruptedReload:{receipt:'load',inserted:2,remaining:2},loaded:2,reserve:6,
+   sourceScope:'afe2-2026-source-behavior'});
+ assert.equal(s.pending,null);
+ assert.equal(s.tube+s.chamber+s.reserve,before);
+ assert.equal(s.events.filter(e=>e.type==='reload-interrupted'&&e.receipt==='load').length,1);
+ assert.equal(s.events.filter(e=>e.type==='mode-switched'&&e.receipt==='switch1').length,1);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'load',1),false);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'load'),false);
+ assert.equal(validateUnderbarrelV174(s),true);
+ const restored=restoreM41AUnderbarrelV174(captureM41AUnderbarrelV174(s),
+   {ownerId:'player',instanceId:'player:m41a',expectedTotal:8});
+ assert.deepEqual(restored,s);
+ assert.equal(switchM41AModeV190(restored,'launcher','switch2',{ruleset:'afe2-2026'})?.loaded,2);
+ assert.equal(restored.tube+restored.chamber+restored.reserve,8);
+});
+
+test('V190 legacy/film fire-mode rule does not cancel a native pending reload',()=>{
+ const s=create(0,0,6);
+ assert.equal(setM41AModeV174(s,'launcher','selected'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'r1'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'r1',.5),true);
+ const before=structuredClone(s);
+ assert.equal(switchM41AModeV190(s,'primary','swap'),null);
+ assert.deepEqual(s,before,'no cancellation without the explicit AFE2 contract');
+ assert.equal(switchM41AModeV190(s,'primary','swap',{ruleset:'unknown'}),null);
+ assert.deepEqual(s,before);
+ assert.equal(setM41AModeV174(s,'primary','swap'),false);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'r1',1),true);
+ assert.equal(switchM41AModeV190(s,'primary','swap')?.previousReloadCancelled,false);
+ assert.equal(s.pending,null);
+});
+
+test('V190 invalid or replayed mode requests never alter rounds or transactional receipts',()=>{
+ const s=create(0,0,8);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'part'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'part',.25),true);
+ const snapshot=structuredClone(s);
+ for(const [mode,receipt,options] of [
+   ['primary','x'.repeat(88),{ruleset:'afe2-2026'}],
+   ['launcher','wrong',{ruleset:'afe2-2026'}],
+   ['primary','same',{ruleset:'tantalus'}],
+   ['forged','wrong',{ruleset:'afe2-2026'}]
+ ]){assert.equal(switchM41AModeV190(s,mode,receipt,options),null);assert.deepEqual(s,snapshot);}
+ assert.ok(switchM41AModeV190(s,'primary','accepted',{ruleset:'afe2-2026'}));
+ const committed=structuredClone(s);
+ assert.equal(switchM41AModeV190(s,'primary','accepted',{ruleset:'afe2-2026'}),null);
+ assert.deepEqual(s,committed);
+ const forged=structuredClone(snapshot);forged.pending.inserted=4;
+ assert.equal(switchM41AModeV190(forged,'primary','illegal',{ruleset:'afe2-2026'}),null);
+ assert.equal(forged.pending.inserted,4,'invalid forged state was not patched');
+});
+
+test('V190 AFE2 rule carries official source scope but does not assert visual 1:1',()=>{
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.sourceWork,'Aliens: Fireteam Elite 2 (2026)');
+ assert.match(AFE2_UNDERBARREL_SWAP_V190.sourceUrl,/daybreakgames\.com.*91726-patchnotes/);
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.playableInTantalus,false);
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.exactVisuals,false);
+ const state=create();
+ assert.equal(switchM41AModeV190(state,'launcher','ordinary')?.previousReloadCancelled,false);
+});
+
+test('V191 AFE2 automatic selection requires an actually chambered alternate round',()=>{
+ const s=createM41AUnderbarrelV174({ownerId:'p',weaponInstanceId:'p:m41a',
+  tube:0,chamber:1,reserve:0,capacity:4,mode:'primary'});
+ const source=structuredClone(s);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true}),{action:'switch',mode:'launcher',
+   reason:'primary-empty-launcher-chambered'});
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:false}),{action:'none',mode:'primary',reason:'no-authorized-auto-action'});
+ assert.deepEqual(s,source,'decision must not fire or change active fire mode');
+ assert.equal(switchM41AModeV190(s,'launcher','auto-accepted')?.mode,'launcher');
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:8,
+   autoSwitchWhenEmpty:true}).action,'none');
+ assert.ok(fireM41AUnderbarrelV174(s,'one'));
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:8,
+   autoSwitchWhenEmpty:true}),{action:'switch',mode:'primary',
+   reason:'launcher-empty-primary-ready'});
+});
+
+test('V191 unchambered tube demands real pumping, never a phantom automatic shot',()=>{
+ const s=create(2,1,0);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ fireM41AUnderbarrelV174(s,'fire1');
+ assert.equal(s.needsPump,true);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true,autoReload:true}),{action:'none',mode:'launcher',
+   reason:'manual-pump-required'});
+ assert.equal(s.tube,2);
+ assert.ok(pumpM41AUnderbarrelV174(s,'pump1'));
+ assert.equal(s.chamber,1);
+ const before=structuredClone(s);
+ const pending=getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true});
+ assert.equal(pending.action,'none','do not switch away from a ready active launcher');
+ assert.deepEqual(s,before);
+});
+
+test('V191 automatic reload suggestion cannot invent ammunition or skip pending transfer',()=>{
+ const s=create(0,0,3);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoReload:true}),{action:'reload',mode:'launcher',reason:'launcher-reserve-available'});
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'pending'),true);
+ const saved=structuredClone(s);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true,autoReload:true}),{action:'none',reason:'reload-in-progress',mode:'launcher'});
+ assert.deepEqual(s,saved);
+ assert.equal(cancelM41AUnderbarrelReloadV174(s,'pending'),true);
+ assert.equal(s.tube+s.chamber+s.reserve,3);
+ const blank=create(0,0,0);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:0,
+   primaryReserve:0,autoSwitchWhenEmpty:true,autoReload:true}),{
+   action:'none',mode:'primary',reason:'both-feeds-empty'});
+ assert.equal(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:-1}),null);
+ assert.equal(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:0,autoReload:'yes'}),null);
+});
+
+test('V192 film-reference prop lineage is separate from optional AFE2 gameplay and current art',()=>{
+ const p=M41A_PROP_LINEAGE_V192;
+ assert.equal(p.primaryFilm,'Aliens (1986)');
+ assert.equal(p.laterFilm,'Alien 3 (1992)');
+ assert.match(p.evidence,/royalarmouries\.org/);
+ assert.equal(p.laterReusedOrRefurbished,true);
+ assert.equal(p.internalLauncherOnAllProps,false);
+ assert.equal(p.ammoCounterOnAllProps,false);
+ assert.equal(p.filmedRevisionPaintVerified,false);
+ assert.equal(p.nativeTantalusArt1to1Verified,false);
+ const inGame=M41A_PULSE_RIFLE_PROFILE_V117;
+ assert.equal(inGame.catalogId,'weapon-001');
+ assert.equal(inGame.sourceWork,'Aliens (1986)');
+ assert.equal(inGame.visualMode,'static-pose');
+ assert.equal(inGame.animationStatus,'missing');
+ assert.equal(inGame.canonExact,false);
+ assert.equal(inGame.approximate,true);
+ assert.equal(inGame.legacyAnimation.sheetId,'weapon.m41a-pulse-rifle.action');
+ // Checking metadata cannot be substituted for inspecting the real PNG,
+ // comparing primary source views and watching the live rig animate.
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.exactVisuals,false);
+});
+
+test('V193 a cold loaded 30mm tube can be manually chambered exactly once',()=>{
+ const s=create(3,0,0);
+ const original=s.tube+s.chamber+s.reserve;
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ const before=captureM41AUnderbarrelV174(s);
+ assert.equal(before.needsPump,false);
+ assert.equal(before.spent,0);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0}),{
+   action:'none',mode:'launcher',reason:'manual-pump-required'});
+ const cycle=pumpM41AUnderbarrelV174(s,'cold');
+ assert.deepEqual(cycle,{type:'launcher-cycled',chamber:1,tube:2,
+   spentCleared:false,roundChambered:1,
+   spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'});
+ assert.equal(s.tube+s.chamber+s.reserve,original);
+ assert.equal(s.events.some(e=>e.type==='pump-mechanism-cycled'&&e.receipt==='cold'&&e.count===1),true);
+ assert.equal(s.events.some(e=>e.type==='casing-ejected'),false);
+ assert.equal(pumpM41AUnderbarrelV174(s,'cold'),null);
+ assert.equal(pumpM41AUnderbarrelV174(s,'another'),null,'cannot double chamber when already loaded');
+ assert.equal(validateUnderbarrelV174(s),true);
+ const restored=restoreM41AUnderbarrelV174(captureM41AUnderbarrelV174(s),
+   {ownerId:'player',instanceId:'player:m41a',expectedTotal:original});
+ assert.deepEqual(restored,s);
+ assert.equal(pumpM41AUnderbarrelV174(restored,'cold'),null);
+ assert.ok(fireM41AUnderbarrelV174(restored,'shot'));
+ assert.equal(restored.needsPump,true);
+ const firedCycle=pumpM41AUnderbarrelV174(restored,'spent');
+ assert.equal(firedCycle.spentCleared,true);
+ assert.equal(firedCycle.roundChambered,1);
+ assert.equal(restored.tube+restored.chamber+restored.reserve,original-1);
+});
+
+test('V193 no fake pump event for empty, clean or pending chamber states',()=>{
+ const empty=create(0,0,0);
+ assert.equal(setM41AModeV174(empty,'launcher','enter'),true);
+ const emptyBefore=structuredClone(empty);
+ assert.equal(pumpM41AUnderbarrelV174(empty,'fake'),null);
+ assert.deepEqual(empty,emptyBefore);
+ const waiting=create(2,0,4);
+ assert.equal(setM41AModeV174(waiting,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(waiting,'reload'),true);
+ const snapshot=structuredClone(waiting);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'interrupt-bypass'),null);
+ assert.deepEqual(waiting,snapshot);
+ assert.equal(cancelM41AUnderbarrelReloadV174(waiting,'reload'),true);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'cold')?.chamber,1);
 });
