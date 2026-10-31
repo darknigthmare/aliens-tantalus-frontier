@@ -448,6 +448,15 @@ export const V165_VERIFIER_SUCCESSORS_V195 = Object.freeze({
   })
 });
 
+/** V197 correction of a missing immutable V167 import in the V194/V195
+ * tests. Keep the V195 verifier receipt historical and pin exact new bytes. */
+export const V165_VERIFIER_SUCCESSORS_V197 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V195['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'd240aea5b6b2cc45a53e88984c8ba05a5117fac6068d4d7593e3b42088eca74a'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -470,7 +479,8 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [187,V165_VERIFIER_SUCCESSORS_V187],
   [188,V165_VERIFIER_SUCCESSORS_V188],
   [194,V165_VERIFIER_SUCCESSORS_V194],
-  [195,V165_VERIFIER_SUCCESSORS_V195]
+  [195,V165_VERIFIER_SUCCESSORS_V195],
+  [197,V165_VERIFIER_SUCCESSORS_V197]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
