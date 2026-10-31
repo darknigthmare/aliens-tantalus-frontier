@@ -406,6 +406,14 @@ export const NPC_INTERDECK_VERIFIER_V188 = Object.freeze({
   currentSha256: '0a0157a5ee1523379086c0c5a6906bb3ccd23f2a211d36d56b2403b4d81ce40c'
 });
 
+/** V198: test the precise shared physical door rather than broad timetable
+ * dependencies; original V165 and V188 verifier evidence stay immutable. */
+export const NPC_INTERDECK_VERIFIER_V198 = Object.freeze({
+  path: NPC_INTERDECK_VERIFIER_V188.path,
+  previousSha256: NPC_INTERDECK_VERIFIER_V188.currentSha256,
+  currentSha256: '4da3fd3645f7335e27b5ac6770eeaa4622ba0f45f9ab716043183bfe36ff2198'
+});
+
 /** V194: source-only magazine transaction anti-replay fix, preserving the
  * original V167 evidence. A long caller ID must never spend real ammunition
  * without a durable prefixed receipt; save-phase markers are monotonic. */
@@ -457,6 +465,15 @@ export const V165_VERIFIER_SUCCESSORS_V197 = Object.freeze({
   })
 });
 
+/** V199 exact audit-verifier continuation for V198 physical service passage.
+ * This changes no V163/V197 historic receipt. */
+export const V165_VERIFIER_SUCCESSORS_V199 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V197['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '9a5bd009cdfb70b1fbcc79fa6b18313a3581231cc1bc0e446d03e8495cb743ef'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -480,12 +497,13 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [188,V165_VERIFIER_SUCCESSORS_V188],
   [194,V165_VERIFIER_SUCCESSORS_V194],
   [195,V165_VERIFIER_SUCCESSORS_V195],
-  [197,V165_VERIFIER_SUCCESSORS_V197]
+  [197,V165_VERIFIER_SUCCESSORS_V197],
+  [199,V165_VERIFIER_SUCCESSORS_V199]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
-    return Object.freeze({ version: 188, previousSha256: NPC_INTERDECK_VERIFIER_V188.previousSha256,
-      currentSha256: NPC_INTERDECK_VERIFIER_V188.currentSha256 });
+    return Object.freeze({ version: 198, previousSha256: NPC_INTERDECK_VERIFIER_V198.previousSha256,
+      currentSha256: NPC_INTERDECK_VERIFIER_V198.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -708,8 +726,12 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       if(npcV185){
         assert.equal(npcV185.previousSha256, expected,
           'Unreviewed V185 NPC predecessor: ' + path);
-        assert.equal(sha(readSource(path)), npcV185.currentSha256,
-          'Unreviewed V185 NPC successor: ' + path);
+        const localV198=NPC_INTERDECK_V198_LOCAL_SUCCESSORS[path];
+        if(localV198)assert.equal(localV198.previousSha256,npcV185.currentSha256,
+          'Broken V185-to-V198 interdeck physical door chain: ' + path);
+        assert.equal(sha(readSource(path)), localV198?.currentSha256 || npcV185.currentSha256,
+          localV198?'Unreviewed V198 local interdeck source: ' + path
+            :'Unreviewed V185 NPC successor: ' + path);
       } else assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
     }
   }
@@ -793,9 +815,12 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.equal(current.verifierSourceSha256V165[NPC_INTERDECK_VERIFIER_V188.path],
     NPC_INTERDECK_VERIFIER_V188.previousSha256,
     'Invalid V165-to-V188 interdeck verifier predecessor');
-  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+  assert.equal(NPC_INTERDECK_VERIFIER_V198.previousSha256,
     NPC_INTERDECK_VERIFIER_V188.currentSha256,
-    'Unreviewed V188 interdeck behavior verifier');
+    'Broken V188-to-V198 interdeck verifier chain');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+    NPC_INTERDECK_VERIFIER_V198.currentSha256,
+    'Unreviewed V198 interdeck behavior verifier');
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
     for (const path of Object.keys(receipts)) {
       assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path),
@@ -849,6 +874,17 @@ export const NPC_INTERDECK_V185_SOURCE_SUCCESSORS = Object.freeze({
   })
 });
 
+/** V198 local-service passage after the explicitly pinned V185 NPC
+ * controller. Broad route dependencies remain for leases and reports;
+ * only physical occupancy on the parent floor and doorway can retain the
+ * Leila/Asha service post. No historical hash is rewritten. */
+export const NPC_INTERDECK_V198_LOCAL_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: NPC_INTERDECK_V185_SOURCE_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256,
+    currentSha256: 'be20d6d37f4bfd67d62296ac6e82739bc0302e58ff2102cb65c711bf66fe77c8'
+  })
+});
+
 /** A missing successor preserves the anchored record; invalid content never falls back. */
 export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
@@ -873,6 +909,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V198_LOCAL_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
