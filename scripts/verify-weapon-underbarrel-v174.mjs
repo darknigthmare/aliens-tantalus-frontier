@@ -301,3 +301,50 @@ test('V192 film-reference prop lineage is separate from optional AFE2 gameplay a
  // comparing primary source views and watching the live rig animate.
  assert.equal(AFE2_UNDERBARREL_SWAP_V190.exactVisuals,false);
 });
+
+test('V193 a cold loaded 30mm tube can be manually chambered exactly once',()=>{
+ const s=create(3,0,0);
+ const original=s.tube+s.chamber+s.reserve;
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ const before=captureM41AUnderbarrelV174(s);
+ assert.equal(before.needsPump,false);
+ assert.equal(before.spent,0);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0}),{
+   action:'none',mode:'launcher',reason:'manual-pump-required'});
+ const cycle=pumpM41AUnderbarrelV174(s,'cold');
+ assert.deepEqual(cycle,{type:'launcher-cycled',chamber:1,tube:2,
+   spentCleared:false,roundChambered:1,
+   spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'});
+ assert.equal(s.tube+s.chamber+s.reserve,original);
+ assert.equal(s.events.some(e=>e.type==='pump-mechanism-cycled'&&e.receipt==='cold'&&e.count===1),true);
+ assert.equal(s.events.some(e=>e.type==='casing-ejected'),false);
+ assert.equal(pumpM41AUnderbarrelV174(s,'cold'),null);
+ assert.equal(pumpM41AUnderbarrelV174(s,'another'),null,'cannot double chamber when already loaded');
+ assert.equal(validateUnderbarrelV174(s),true);
+ const restored=restoreM41AUnderbarrelV174(captureM41AUnderbarrelV174(s),
+   {ownerId:'player',instanceId:'player:m41a',expectedTotal:original});
+ assert.deepEqual(restored,s);
+ assert.equal(pumpM41AUnderbarrelV174(restored,'cold'),null);
+ assert.ok(fireM41AUnderbarrelV174(restored,'shot'));
+ assert.equal(restored.needsPump,true);
+ const firedCycle=pumpM41AUnderbarrelV174(restored,'spent');
+ assert.equal(firedCycle.spentCleared,true);
+ assert.equal(firedCycle.roundChambered,1);
+ assert.equal(restored.tube+restored.chamber+restored.reserve,original-1);
+});
+
+test('V193 no fake pump event for empty, clean or pending chamber states',()=>{
+ const empty=create(0,0,0);
+ assert.equal(setM41AModeV174(empty,'launcher','enter'),true);
+ const emptyBefore=structuredClone(empty);
+ assert.equal(pumpM41AUnderbarrelV174(empty,'fake'),null);
+ assert.deepEqual(empty,emptyBefore);
+ const waiting=create(2,0,4);
+ assert.equal(setM41AModeV174(waiting,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(waiting,'reload'),true);
+ const snapshot=structuredClone(waiting);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'interrupt-bypass'),null);
+ assert.deepEqual(waiting,snapshot);
+ assert.equal(cancelM41AUnderbarrelReloadV174(waiting,'reload'),true);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'cold')?.chamber,1);
+});
