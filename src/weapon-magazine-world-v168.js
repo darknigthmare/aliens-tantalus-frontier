@@ -79,7 +79,11 @@ export function recoverDroppedMagazineV168(feed, { ownerId, levelId, plane: targ
     plane: targetPlane, x, y, maxDistance, lineOfSight });
   if (!nearby || nearby.id !== magazineId) return null;
   const mag = feed.magazines.find(m => m.id === magazineId && m.location === 'world');
-  if (!mag) return null;
+  // The V167 magazine revision is a durable bounded counter. At the bound,
+  // a successful-looking pickup would increment it into an invalid save and
+  // return null *after* deleting the world's physical magazine. Refuse prior
+  // to any move, receipt or inventory mutation.
+  if (!mag || mag.revision >= 10000000) return null;
   const receipt = 'pickup:' + magazineId + ':' + mag.revision;
   if (!validId(receipt) || feed.receipts.includes(receipt)) return null;
   const rounds = mag.rounds;
