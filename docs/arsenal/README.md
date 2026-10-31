@@ -334,3 +334,43 @@ Au moment de cette consolidation, deux défauts ont été corrigés *dans leurs 
 **Règle d'admission finale :** aucun `VALIDÉ_QA` ni `AUTORISÉ` sans références item-spécifiques, source multi-angle, identité exacte par média, sprites séparés, rig/IK, animation et mécanique native, sauvegarde, parcours de portes/IA, et exécution des tests sur un SHA commun. Les droits de reproduction restent indépendants de la qualité visuelle. La PR reste brouillon tant que les quatre workflows ne sont pas vérifiés sur la tête exacte.
 
 Le nouveau fichier XLSX V197 est conservé sur Drive et remis dans la conversation ; **il n'est pas dans l'arbre GitHub**, pour ne pas modifier implicitement les listes blanches de distribution ni les empreintes des anciens classeurs.
+
+
+## V198 — continuation des 1 905 fiches ouvertes et QA physique (31 octobre 2026)
+
+**Classeur Excel produit, vérifié et sauvegardé sur le dossier Drive `03_SUIVI_ET_SOURCES` :**
+[ALIENS_TANTALUS_EXCEL_OUVERTS_CUMULATIF_V198_20261031.xlsx](https://docs.google.com/spreadsheets/d/1V5W-97ADGhych-8wYewWWvhUGHqbA3YB/edit?usp=drivesdk&ouid=102406458049746863092&rtpof=true&sd=true).
+Format source **XLSX**, 44 onglets, 1 069 182 octets, SHA-256
+`be069649d81398b961d546d54c6dcc2d97ccb832d6e5d000ee36a1870d388b94`.
+Le V197 (36 onglets) reste intact sur Drive. Le binaire V198 **n'est pas dans le Git tree** :
+on évite de modifier sans revue l'allowlist stricte des classeurs et la provenance des livraisons historiques.
+
+**Contenu cumulatif documenté, pas automatiquement implémenté :**
+
+| Indicateur | Total | Interprétation exacte |
+| --- | ---: | --- |
+| Fiches/actions uniques | 1 905 | Obligations de développement de domaines pouvant se recouper ; pas 1 905 nouvelles ressources |
+| Priorité P0 | 204 | Tâches identifiées pour la prochaine passe, sans promesse de fermeture globale |
+| Grilles fidélité 1:1 héritées | 1 490 | Zéro homologation automatique tant que source/rig/art/QA/droits ne sont pas fournis |
+| Recettes historiques et nouvelles | 455 | 378 existantes et 77 supplémentaires ; la création de la recette ne vaut pas son exécution |
+| Incidents CI natifs documentés | 9 | Leila/Idris, Jun/Asha, captures Trials, portraits, services, portes et mouvements |
+| Ressources historiques conservées | 200 armes, 31 tenues, 35 pièces, 189 Xeno | Statuts de catalogue inchangés, aucune arme proposée promue en catalogue ni 1:1 |
+
+### Régression physique V198/V201 suivie séparément en PR #25
+
+Le contrôle *Full release* sur #25 (`41201221791`, ancienne tête `03233bd`)
+a observé **Jun** retour `crew-quarters`, `x=505`, `y=532`, pendant
+qu'**Asha** occupait le même couloir à `x=561`, `y=532`.
+Le premier V198 empêchait correctement un passager distant de monopoliser les
+portes de Leila/Asha mais a découvert une véritable collision de deux corps.
+La suite V201 réserve l'approche du couloir aux vrais trajets partagés sur le
+même pont et au même niveau, sans fabriquer de transit ni désactiver les collisions.
+Son test reproduit `x505/x561` et refuse les fausses réservations distantes.
+Les SHA historiques V185/V188/V198 restent gelés ; les nouveaux successeurs
+V201/V202 doivent réussir **Forge, Gameplay, Excel et Full Release sur le même
+commit** avant approbation. Ne pas fusionner les PR #24/#25/#26 sans réconcilier
+les vérificateurs et les preuves natives.
+
+Les neuf défauts consignés restent **ouverts jusqu'à leurs preuves natives**.
+Ni la publication de l'Excel ni l'existence des contrôles ne certifient
+une fidélité de modèle, costume, DLC, arme, planète, animation ou PNJ 1:1.
