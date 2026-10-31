@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import {
  M41A_UNDERBARREL_HOST_V174,M41A_UNDERBARREL_SOURCE_V174,
  validateUnderbarrelV174,createM41AUnderbarrelV174,setM41AModeV174,
- AFE2_UNDERBARREL_SWAP_V190,switchM41AModeV190,getAFE2UnderbarrelAutoIntentV191,
+ AFE2_UNDERBARREL_SWAP_V190,switchM41AModeV190,getAFE2UnderbarrelAutoIntentV191,M41A_PROP_LINEAGE_V192,
  fireM41AUnderbarrelV174,pumpM41AUnderbarrelV174,
  beginM41AUnderbarrelReloadV174,advanceM41AUnderbarrelReloadV174,
  cancelM41AUnderbarrelReloadV174,M41AAmmoHudV174,
  captureM41AUnderbarrelV174,restoreM41AUnderbarrelV174
 } from '../src/weapon-underbarrel-v174.js';
+import { M41A_PULSE_RIFLE_PROFILE_V117 } from '../src/weapon-native-visuals-v117.js';
 const create=(tube=3,chamber=1,reserve=8)=>createM41AUnderbarrelV174({
  ownerId:'player',weaponInstanceId:'player:m41a',tube,chamber,reserve,capacity:4
 });
@@ -276,4 +277,27 @@ test('V191 automatic reload suggestion cannot invent ammunition or skip pending 
    action:'none',mode:'primary',reason:'both-feeds-empty'});
  assert.equal(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:-1}),null);
  assert.equal(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:0,autoReload:'yes'}),null);
+});
+
+test('V192 film-reference prop lineage is separate from optional AFE2 gameplay and current art',()=>{
+ const p=M41A_PROP_LINEAGE_V192;
+ assert.equal(p.primaryFilm,'Aliens (1986)');
+ assert.equal(p.laterFilm,'Alien 3 (1992)');
+ assert.match(p.evidence,/royalarmouries\.org/);
+ assert.equal(p.laterReusedOrRefurbished,true);
+ assert.equal(p.internalLauncherOnAllProps,false);
+ assert.equal(p.ammoCounterOnAllProps,false);
+ assert.equal(p.filmedRevisionPaintVerified,false);
+ assert.equal(p.nativeTantalusArt1to1Verified,false);
+ const inGame=M41A_PULSE_RIFLE_PROFILE_V117;
+ assert.equal(inGame.catalogId,'weapon-001');
+ assert.equal(inGame.sourceWork,'Aliens (1986)');
+ assert.equal(inGame.visualMode,'static-pose');
+ assert.equal(inGame.animationStatus,'missing');
+ assert.equal(inGame.canonExact,false);
+ assert.equal(inGame.approximate,true);
+ assert.equal(inGame.legacyAnimation.sheetId,'weapon.m41a-pulse-rifle.action');
+ // Checking metadata cannot be substituted for inspecting the real PNG,
+ // comparing primary source views and watching the live rig animate.
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.exactVisuals,false);
 });
