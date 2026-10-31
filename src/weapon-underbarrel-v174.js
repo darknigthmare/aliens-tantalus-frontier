@@ -75,6 +75,49 @@ export function setM41AModeV174(s,mode,receipt){
     ||!remember(s,'mode:'+receipt))return false;
   s.mode=mode;log(s,'mode-switched',receipt);return true;
 }
+/** 2026-09-17 AFE2 notes specify that switching between primary and
+ * underbarrel fire modes DURING a reload cancels that reload, rather than
+ * rejecting the switch. This is an opt-in game-specific rule. It is not
+ * claimed to describe the film prop, nor is it automatically live in Tantalus.
+ * No extra rounds, fake cases, client events or animation cues are created.
+ * https://www.daybreakgames.com/press/afe2/article/afe2-91726-patchnotes
+ */
+export const AFE2_UNDERBARREL_SWAP_V190=Object.freeze({
+  sourceWork:'Aliens: Fireteam Elite 2 (2026)',
+  sourceUrl:'https://www.daybreakgames.com/press/afe2/article/afe2-91726-patchnotes',
+  behavior:'cancel-current-reload-before-mode-switch',
+  gameplayStatus:'source-grounded-optional-pure-contract',
+  playableInTantalus:false, exactVisuals:false
+});
+/** One accepted mode request owns exactly one cancellation and one mode
+ * change. The old reload's already-inserted rounds remain physically loaded;
+ * unused reserve rounds are not charged or credited back.
+ *
+ * Return null on invalid inputs BEFORE mutation, including forged pending
+ * state, the wrong game policy or a duplicate receipt. Legacy switch behavior
+ * is unchanged: without the explicit AFE2 policy, pending reloads stay locked.
+ */
+export function switchM41AModeV190(s,mode,receipt,{ruleset='tantalus'}={}){
+  if(!validateUnderbarrelV174(s)||!['primary','launcher'].includes(mode)
+    ||mode===s.mode||!id(receipt)||!id('mode:'+receipt)
+    ||s.receipts.includes('mode:'+receipt))return null;
+  const changingReload=s.pending!==null;
+  if(changingReload&&ruleset!=='afe2-2026')return null;
+  let cancelled=null;
+  if(changingReload){
+    const prefix=s.weaponInstanceId+':reload:';
+    if(!s.pending.id.startsWith(prefix))return null;
+    const pendingReceipt=s.pending.id.slice(prefix.length);
+    if(!id(pendingReceipt)||s.receipts.includes('cancel:'+pendingReceipt))return null;
+    cancelled={receipt:pendingReceipt,inserted:s.pending.inserted,
+      remaining:s.pending.planned-s.pending.inserted};
+    if(!cancelM41AUnderbarrelReloadV174(s,pendingReceipt))return null;
+  }
+  if(!setM41AModeV174(s,mode,receipt))return null;
+  return {mode,receipt,previousReloadCancelled:cancelled!==null,
+    interruptedReload:cancelled,loaded:s.chamber+s.tube,reserve:s.reserve,
+    sourceScope:changingReload?'afe2-2026-source-behavior':'standard-mode-change'};
+}
 export function fireM41AUnderbarrelV174(s,receipt){
   if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
     ||s.needsPump||s.chamber!==1||!id(receipt)
