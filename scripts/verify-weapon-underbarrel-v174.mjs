@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
  M41A_UNDERBARREL_HOST_V174,M41A_UNDERBARREL_SOURCE_V174,
  validateUnderbarrelV174,createM41AUnderbarrelV174,setM41AModeV174,
+ AFE2_UNDERBARREL_SWAP_V190,switchM41AModeV190,
  fireM41AUnderbarrelV174,pumpM41AUnderbarrelV174,
  beginM41AUnderbarrelReloadV174,advanceM41AUnderbarrelReloadV174,
  cancelM41AUnderbarrelReloadV174,M41AAmmoHudV174,
@@ -147,4 +148,75 @@ test('V174 legitimate partial launcher reload still restores and completes exact
  assert.equal(restored.pending,null);
  assert.equal(validateUnderbarrelV174(restored),true);
  assert.equal(advanceM41AUnderbarrelReloadV174(restored,'tx',1),false);
+});
+
+test('V190 AFE2-specific mid-reload mode swap conserves inserted and reserve ammunition',()=>{
+ const s=create(0,0,8);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'load'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'load',.5),true);
+ const before=s.tube+s.chamber+s.reserve;
+ assert.equal(before,8);
+ const receipt=switchM41AModeV190(s,'primary','switch1',{ruleset:'afe2-2026'});
+ assert.deepEqual(receipt,{mode:'primary',receipt:'switch1',previousReloadCancelled:true,
+   interruptedReload:{receipt:'load',inserted:2,remaining:2},loaded:2,reserve:6,
+   sourceScope:'afe2-2026-source-behavior'});
+ assert.equal(s.pending,null);
+ assert.equal(s.tube+s.chamber+s.reserve,before);
+ assert.equal(s.events.filter(e=>e.type==='reload-interrupted'&&e.receipt==='load').length,1);
+ assert.equal(s.events.filter(e=>e.type==='mode-switched'&&e.receipt==='switch1').length,1);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'load',1),false);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'load'),false);
+ assert.equal(validateUnderbarrelV174(s),true);
+ const restored=restoreM41AUnderbarrelV174(captureM41AUnderbarrelV174(s),
+   {ownerId:'player',instanceId:'player:m41a',expectedTotal:8});
+ assert.deepEqual(restored,s);
+ assert.equal(switchM41AModeV190(restored,'launcher','switch2',{ruleset:'afe2-2026'})?.loaded,2);
+ assert.equal(restored.tube+restored.chamber+restored.reserve,8);
+});
+
+test('V190 legacy/film fire-mode rule does not cancel a native pending reload',()=>{
+ const s=create(0,0,6);
+ assert.equal(setM41AModeV174(s,'launcher','selected'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'r1'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'r1',.5),true);
+ const before=structuredClone(s);
+ assert.equal(switchM41AModeV190(s,'primary','swap'),null);
+ assert.deepEqual(s,before,'no cancellation without the explicit AFE2 contract');
+ assert.equal(switchM41AModeV190(s,'primary','swap',{ruleset:'unknown'}),null);
+ assert.deepEqual(s,before);
+ assert.equal(setM41AModeV174(s,'primary','swap'),false);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'r1',1),true);
+ assert.equal(switchM41AModeV190(s,'primary','swap')?.previousReloadCancelled,false);
+ assert.equal(s.pending,null);
+});
+
+test('V190 invalid or replayed mode requests never alter rounds or transactional receipts',()=>{
+ const s=create(0,0,8);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'part'),true);
+ assert.equal(advanceM41AUnderbarrelReloadV174(s,'part',.25),true);
+ const snapshot=structuredClone(s);
+ for(const [mode,receipt,options] of [
+   ['primary','x'.repeat(88),{ruleset:'afe2-2026'}],
+   ['launcher','wrong',{ruleset:'afe2-2026'}],
+   ['primary','same',{ruleset:'tantalus'}],
+   ['forged','wrong',{ruleset:'afe2-2026'}]
+ ]){assert.equal(switchM41AModeV190(s,mode,receipt,options),null);assert.deepEqual(s,snapshot);}
+ assert.ok(switchM41AModeV190(s,'primary','accepted',{ruleset:'afe2-2026'}));
+ const committed=structuredClone(s);
+ assert.equal(switchM41AModeV190(s,'primary','accepted',{ruleset:'afe2-2026'}),null);
+ assert.deepEqual(s,committed);
+ const forged=structuredClone(snapshot);forged.pending.inserted=4;
+ assert.equal(switchM41AModeV190(forged,'primary','illegal',{ruleset:'afe2-2026'}),null);
+ assert.equal(forged.pending.inserted,4,'invalid forged state was not patched');
+});
+
+test('V190 AFE2 rule carries official source scope but does not assert visual 1:1',()=>{
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.sourceWork,'Aliens: Fireteam Elite 2 (2026)');
+ assert.match(AFE2_UNDERBARREL_SWAP_V190.sourceUrl,/daybreakgames\.com.*91726-patchnotes/);
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.playableInTantalus,false);
+ assert.equal(AFE2_UNDERBARREL_SWAP_V190.exactVisuals,false);
+ const state=create();
+ assert.equal(switchM41AModeV190(state,'launcher','ordinary')?.previousReloadCancelled,false);
 });
