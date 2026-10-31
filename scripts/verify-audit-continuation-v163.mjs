@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AUDIT_PRIORITY_IDS_V163,
   loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163,
-  verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS,
+  verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS, ARSENAL_V194_MAGAZINE_SUCCESSORS,
   ARMORY_V169_SUCCESSORS, ARMORY_V169_NEW_SOURCES, ARSENAL_V170_SUCCESSORS,
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
@@ -108,6 +108,21 @@ test('the full current bridge validates runtime bytes and older default returns 
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
   assert.equal(verifyAuditSuccessionV162(v161, previous).current, 87);
+});
+
+test('V194 physical magazine transactions retain every round and exact anti-replay receipt across save boundaries', () => {
+  const paths=['src/weapon-magazine-inventory-v167.js','scripts/verify-weapon-arsenal-v167.mjs'];
+  assert.deepEqual(Object.keys(ARSENAL_V194_MAGAZINE_SUCCESSORS).sort(),paths.slice().sort());
+  for(const path of paths){
+    const receipt=ARSENAL_V194_MAGAZINE_SUCCESSORS[path];
+    assert.equal(receipt.previousSha256,ARSENAL_V167_NEW_SOURCES[path],
+      'V194 never changes the historical V167 predecessor');
+    assert.equal(sha(read(path)),receipt.currentSha256,
+      'A new ammo mutation or untested source must fail closed');
+    const tampered=name=>name===path?Buffer.concat([read(name),Buffer.from('UNREVIEWED_AMMO_CHANGE')]):read(name);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),
+      /Unreviewed V194 magazine successor/,path);
+  }
 });
 
 test('the V169 armory app successor is chained, source-pinned and cannot be forged', () => {
