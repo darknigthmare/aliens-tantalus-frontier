@@ -118,6 +118,30 @@ export function switchM41AModeV190(s,mode,receipt,{ruleset='tantalus'}={}){
     interruptedReload:cancelled,loaded:s.chamber+s.tube,reserve:s.reserve,
     sourceScope:changingReload?'afe2-2026-source-behavior':'standard-mode-change'};
 }
+/** AFE2's September 2026 source says auto firemode-switch is optional and
+ * requires ammunition on the other firemode. This pure reader never changes
+ * the live actor, starts a reload, pumps a chamber or emits a projectile.
+ * An explicit accepted player/system action is still required by the host.
+ */
+export function getAFE2UnderbarrelAutoIntentV191(s,{
+  primaryLoaded,primaryReserve=0,autoSwitchWhenEmpty=false,autoReload=false
+}={}){
+  if(!validateUnderbarrelV174(s)||!rounds(primaryLoaded)||!rounds(primaryReserve)
+    ||typeof autoSwitchWhenEmpty!=='boolean'||typeof autoReload!=='boolean')return null;
+  const readyLauncher=s.chamber===1&&!s.needsPump;
+  const launcherEmpty=s.tube+s.chamber===0;
+  if(s.pending)return {action:'none',reason:'reload-in-progress',mode:s.mode};
+  if(autoSwitchWhenEmpty&&s.mode==='primary'&&primaryLoaded===0&&readyLauncher)
+    return {action:'switch',mode:'launcher',reason:'primary-empty-launcher-chambered'};
+  if(autoSwitchWhenEmpty&&s.mode==='launcher'&&launcherEmpty&&primaryLoaded>0)
+    return {action:'switch',mode:'primary',reason:'launcher-empty-primary-ready'};
+  if(autoReload&&s.mode==='launcher'&&launcherEmpty&&s.reserve>0)
+    return {action:'reload',mode:'launcher',reason:'launcher-reserve-available'};
+  if(autoReload&&s.mode==='primary'&&primaryLoaded===0&&primaryReserve>0)
+    return {action:'reload',mode:'primary',reason:'primary-reserve-available'};
+  return {action:'none',mode:s.mode,reason:s.needsPump?'manual-pump-required':
+    launcherEmpty&&primaryLoaded===0?'both-feeds-empty':'no-authorized-auto-action'};
+}
 export function fireM41AUnderbarrelV174(s,receipt){
   if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
     ||s.needsPump||s.chamber!==1||!id(receipt)
