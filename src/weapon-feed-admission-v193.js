@@ -25,6 +25,10 @@ export function inspectDetachableFeedV193(weapon,{profile=null}={}){
  if(specialist) return deny(weaponId,'specialized-'+specialist.kind+'-feed-pending-native-bridge');
  const presentation=profile||getWeaponPresentationProfileV124(weapon);
  if(!presentation?.reload) return deny(weaponId,'no-presentation-feed');
+ if(!presentation.evidence?.catalogueMatch
+   || presentation.evidence?.status!=='documented-ammunition'
+   || presentation.weaponId!==weaponId)
+   return deny(weaponId,'feed-mechanism-not-source-reviewed');
  const feed=presentation.reload.feed;
  if(NON_DETACHABLE.includes(feed))return deny(weaponId,'non-detachable-'+feed);
  if(!PORTABLE.includes(feed))return deny(weaponId,'unsupported-feed-'+String(feed));
