@@ -211,6 +211,22 @@ function initialInterdeckActorV165(d,origin,doors) {
     bulkheadProgress:Object.fromEntries(doors.flatMap(ds=>ds.map(door=>[door.id,door.progress||0]))),
     upperLanding:false,parentLevel:0,vertical:null};
 }
+/** V191 pure same-deck courtesy predicate (does not mutate a route).
+ * A remote service, another-deck lift or finished passenger is not an
+ * occupant of this rear portal. Actual same-deck walking / opening / floor
+ * climbing keeps the existing passing rights and physical collision checks.
+ */
+export function isNpcServiceDeckPassingV191(ownerDeck, passengerRouteIds, routeStates){
+  if(!Number.isInteger(ownerDeck)||ownerDeck<0||ownerDeck>=HUB_DECKS.length
+    ||!Array.isArray(passengerRouteIds)||!routeStates)return false;
+  return passengerRouteIds.some(id=>{
+    const actor=routeStates[id]?.actor;
+    return actor?.deck===ownerDeck && actor.stage!=='service'
+      && actor.stage!=='returned'
+      && (!actor.lift||['boarding','exiting'].includes(actor.lift.phase));
+  });
+}
+
 export function withHubNpcInterdeckRoutesV165(Base) {
   return class HubNpcInterdeckRoutesV165 extends Base {
     constructor(...args) {
@@ -592,6 +608,15 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       const passengers=routeId==='tamsin-proving'?['inez-civil']:['mara-archives','echo-escape'].includes(routeId)?['maksim-cockpit']
         :routeId==='cal-logistics'?['david-durandal']:routeId==='idris-engine'?['inez-civil','maksim-cockpit','jun-sanitary']
           :['asha-refuge','leila-galley'].includes(routeId)?['jun-sanitary']:[];
+      // V191: a passenger elsewhere on the ship cannot occupy the reactor
+      // corridor or retain Idris at the engine-room watch indefinitely.
+      // Only a physically travelling body on the very same deck may request
+      // his courtesy window. Native peer sweeps and door occupancy remain
+      // authoritative even after the distant request is released.
+      if(routeId==='idris-engine'){
+        const owner=this.getNpcServiceActorV161?.(routeId);
+        return isNpcServiceDeckPassingV191(owner?.deck,passengers,this.npcInterdeckStateV165?.routes);
+      }
       return passengers.some(id=>Boolean(this.npcInterdeckStateV165?.routes[id]?.actor));
     }
     getNpcServicePassingDutyV165(routeId,actor) {

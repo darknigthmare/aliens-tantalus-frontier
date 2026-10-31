@@ -233,10 +233,41 @@ try:
                 if args.stage == 'after':
                     page.wait_for_function("""()=>getComputedStyle(
                       document.querySelector('#hub-dialogue-image')).maskImage!=='none'""")
-                portrait = page.locator('#hub-dialogue-image').evaluate("""i=>({
-                  source:i.currentSrc,width:i.naturalWidth,height:i.naturalHeight,
-                  mask:getComputedStyle(i).maskImage,clip:getComputedStyle(i).clipPath,
-                  bounds:i.getBoundingClientRect().toJSON()})""")
+                # V168 is a native 384px cropped canvas, replacing the old
+                # CSS clip. Wait for its real load/paint instead of sampling
+                # while the portrait is still asynchronously loading.
+                profile = None
+                # Historical V164 baseline files do not have the V168 module.
+                # Only permit the old CSS proof when that source file is truly
+                # absent; a modern build that fails its V168 import must fail.
+                if (repo / 'src/npc-dialogue-portraits-v168.js').is_file():
+                    profile = page.evaluate("""async crew=>{
+                      const { getNpcDialoguePortraitV168 } =
+                        await import('/src/npc-dialogue-portraits-v168.js');
+                      return getNpcDialoguePortraitV168(crew);
+                    }""", config['crew'])
+                if profile:
+                    page.wait_for_function("""crew=>{
+                      const image=document.querySelector('#hub-dialogue-image'),
+                        box=image?.parentElement,
+                        canvas=box?.querySelector('canvas[data-dialogue-avatar-v168]');
+                      return box?.dataset.dialoguePortraitCrewV168===crew
+                        &&box.dataset.dialoguePortraitStateV168==='ready'
+                        &&canvas&&!canvas.hidden
+                        &&canvas.dataset.portraitSourceRectV168;
+                    }""", arg=config['crew'])
+                portrait = page.locator('#hub-dialogue-image').evaluate("""i=>{
+                  const container=i.parentElement,
+                    avatar=container?.querySelector('canvas[data-dialogue-avatar-v168]');
+                  return {source:i.currentSrc,width:i.naturalWidth,height:i.naturalHeight,
+                    mask:getComputedStyle(i).maskImage,clip:getComputedStyle(i).clipPath,
+                    bounds:i.getBoundingClientRect().toJSON(),imageHidden:i.hidden,
+                    avatar:avatar?{hidden:avatar.hidden,width:avatar.width,height:avatar.height,
+                      sourceRect:avatar.dataset.portraitSourceRectV168||null}:null,
+                    portraitState:container?.dataset.dialoguePortraitStateV168||null,
+                    portraitCrew:container?.dataset.dialoguePortraitCrewV168||null,
+                    portraitKind:container?.dataset.dialoguePortraitKindV168||null};
+                }""")
                 after = observe(page, config['crew'])
                 check(config['id'] + ': real E opens the matching NPC dialogue',
                       config['speaker'] in page.locator('#hub-dialogue-speaker').inner_text()
@@ -250,9 +281,28 @@ try:
                       and after['actor']['y'] == before['actor']['y']
                       and after['clock'] == before['clock']
                       and after['resources'] == before['resources'])
+                source_is_atlas = portrait['source'].split('?', 1)[0].endswith('-locomotion-sheet.png')
+                if profile:
+                    native_crop = json.loads(portrait['avatar']['sourceRect']) if (
+                        portrait['avatar'] and portrait['avatar']['sourceRect']) else None
+                    portrait_cropped = (
+                        portrait['source'].split('?', 1)[0].endswith(profile['source'])
+                        and portrait['width'] == profile['sourceWidth']
+                        and portrait['height'] == profile['sourceHeight']
+                        and portrait['imageHidden'] is True
+                        and portrait['avatar'] is not None
+                        and portrait['avatar']['hidden'] is False
+                        and portrait['avatar']['width'] == 384
+                        and portrait['avatar']['height'] == 384
+                        and portrait['portraitCrew'] == config['crew']
+                        and portrait['portraitState'] == 'ready'
+                        and portrait['portraitKind'] == 'head-and-shoulders'
+                        and native_crop == profile['crop'])
+                else:
+                    # An older build without V168 must still have its CSS crop.
+                    portrait_cropped = portrait['clip'] != 'none'
                 check(config['id'] + ': native portrait retains its original atlas and cell crop',
-                      portrait['source'].endswith('-locomotion-sheet.png')
-                      and portrait['clip'] != 'none')
+                      source_is_atlas and portrait_cropped)
                 if args.stage == 'after':
                     check(config['id'] + ': curated portrait mask is actually active',
                           'data:image/svg+xml' in portrait['mask'])

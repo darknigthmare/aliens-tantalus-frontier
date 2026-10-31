@@ -56,15 +56,19 @@ test('V176 native source round-trip is mandatory before staging or admission',()
  assert.match(code,/const review=auditCostumeReviewPackV175\(root\)/);
  assert.match(code,/sourceOpaque>0/);
  assert.match(code,/overlaps:0,uncovered:0,incorrect:0,extra:0/);
+ assert.match(code,/auditDetachedShapeV177\(piece/);
+ assert.match(code,/transparentSockets:48/);
  assert.match(code,/nativeRigApproved:false,filmOneToOneApproved:false/);
  assert.doesNotMatch(code,/nativeRigApproved:true|filmOneToOneApproved:true/);
 });
 test('V176 optional physical V175 fixture has exact opaque reconstruction',
  {skip:!process.env.TANTALUS_V175_ART_ROOT},()=>{
  const result=auditV175PixelRoundtrip(process.env.TANTALUS_V175_ART_ROOT);
- assert.equal(result.status,'OPAQUE_PIXEL_ROUNDTRIP_PASSED');
+ assert.equal(result.status,'OPAQUE_PIXEL_AND_TORSO_APERTURES_PASSED');
  assert.equal(result.sourceAtlases,8);
  assert.equal(result.records.length,8);
+ assert.deepEqual(result.topology,{detachedParts:112,verifiedTorsos:24,
+   transparentSockets:48,opaqueBorderPixels:0});
  assert.ok(result.records.every(x=>x.opaqueCoveragePercent===100
    &&x.overlaps===0&&x.uncovered===0&&x.incorrect===0&&x.extra===0));
 });

@@ -246,6 +246,14 @@ def inspect_scene(page, config, label, expected_room):
           and row['parallax']['presentationMode'] == ('2.5d' if wanted == 'parallel-oblique' else '2d'))
     if args.stage == 'after':
         details = row['life'].get('serviceDetailsV165')
+        if expected_room == 'armory' and (not details or not details.get('items')):
+            # Strict diagnosis of a missing V179 fitting. Never count the
+            # omitted assembly as rendered or move the runtime fitting in QA.
+            print('V179_ARMORY_OMISSIONS ' + json.dumps({
+                'scene': label, 'roomId': expected_room,
+                'omitted': (details or {}).get('omitted', []),
+                'drawnCount': len((details or {}).get('paintedIds', []))
+            }, ensure_ascii=False, separators=(',', ':')), flush=True)
         check(label + ': the actual production draw reports its admitted wall assemblies',
               details is not None and details['geometryPreserved'] and not details['collidable']
               and not details['interactive'] and details['paintedIds'] == [item['id'] for item in details['items']]
@@ -518,8 +526,24 @@ try:
           len(report['families']) >= 7 and not report['pageErrors'] and not report['httpErrors']
           and not [entry for entry in report['requestFailures'] if entry['failure'] != 'net::ERR_ABORTED'])
     if args.stage == 'after':
+        failures = report.get('rasterFailures', [])
+        if failures:
+            # Retain every real render failure, but expose exact served-vs-expected
+            # pixels in GitHub Actions rather than only a generic assertion label.
+            # No test is waived and no production state or canvas is modified.
+            print('RASTER_V165_DIAGNOSTICS ' + json.dumps({
+                'count': len(failures),
+                'scenes': [{'scene': row['scene'], 'roomId': row['roomId'],
+                            'expectedProbeCount': row['expectedProbeCount'],
+                            'probes': [{'kind': p['kind'], 'id': p['id'],
+                                        'x': p['sampleX'], 'y': p['sampleY'],
+                                        'observedRgba': p['rgba'],
+                                        'expectedRgba': p['expectedRgba']}
+                                       for p in row['probes']]}
+                           for row in failures]
+            }, ensure_ascii=False, separators=(',', ':')), flush=True)
         check('Every admitted hardware raster assertion succeeded across all observed scenes',
-              not report.get('rasterFailures', []))
+              not failures)
     report['status'] = 'passed'
 except Exception as error:
     report['status'] = 'failed'

@@ -180,6 +180,51 @@ function decodeNativeRgbaV176(path) {
   }
   return {width,height,rgba};
 }
+/** Independent V177 alpha topology admission: every review sprite keeps a
+ * truly transparent border; all 24 articulated torsos must retain two open
+ * sockets (neck and shoulder), not painted-on dark rings. Not rig QA.
+ * Four-connected flood fill ignores only tiny anti-aliased flecks.
+ */
+function auditDetachedShapeV177(image,{torso=false}={}){
+  const {width:w,height:h,rgba}=image,n=w*h;
+  const solid=new Uint8Array(n),visited=new Uint8Array(n),queue=new Int32Array(n);
+  let borderOpaque=0;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+    const i=y*w+x;
+    solid[i]=rgba[i*4+3]>40?1:0;
+    if(solid[i]&&(x===0||y===0||x===w-1||y===h-1))borderOpaque++;
+  }
+  const flood=start=>{
+    const mode=solid[start];let head=0,tail=1,area=0,external=false;
+    queue[0]=start;visited[start]=1;
+    while(head<tail){
+      const i=queue[head++],x=i%w,y=Math.floor(i/w);
+      area++;
+      if(x===0||y===0||x===w-1||y===h-1)external=true;
+      const append=j=>{
+        if(!visited[j]&&solid[j]===mode){visited[j]=1;queue[tail++]=j;}
+      };
+      if(x>0)append(i-1);
+      if(x<w-1)append(i+1);
+      if(y>0)append(i-w);
+      if(y<h-1)append(i+w);
+    }
+    return {mode,area,external};
+  };
+  let majorParts=0,openSockets=0;
+  for(let i=0;i<n;i++){
+    if(visited[i])continue;
+    const region=flood(i);
+    if(region.mode&&region.area>=100)majorParts++;
+    if(!region.mode&&!region.external&&region.area>=30)openSockets++;
+  }
+  assert.equal(borderOpaque,0,'Sprite touches crop border');
+  assert.equal(majorParts,1,'Detached piece contains multiple visible bodies');
+  if(torso)assert.equal(openSockets,2,
+    'Torso needs two real transparent neck/shoulder openings');
+  return {majorParts,openSockets,borderOpaque};
+}
+
 export function auditV175PixelRoundtrip(root){
   // Source hashes cannot be bypassed with caller-provided review receipts.
   const review=auditCostumeReviewPackV175(root);
@@ -187,6 +232,7 @@ export function auditV175PixelRoundtrip(root){
   const base=resolve(root);
   const manifest=JSON.parse(readFileSync(join(base,'manifest.json'),'utf8'));
   const records=[];
+  let detachedParts=0,verifiedTorsos=0,transparentSockets=0;
   for(const [slug,outfit] of Object.entries(manifest.outfits)){
     for(const kind of ['upper','lower']){
       const group=outfit[kind];
@@ -203,6 +249,10 @@ export function auditV175PixelRoundtrip(root){
         const piece=decodeNativeRgbaV176(join(base,part.file));
         assert.deepEqual([piece.width,piece.height],[width,height],
           'Incorrect crop bounds: '+part.id);
+        const isTorso=kind==='upper'&&part.id.startsWith('torso_');
+        const shape=auditDetachedShapeV177(piece,{torso:isTorso});
+        detachedParts++;
+        if(isTorso){verifiedTorsos++;transparentSockets+=shape.openSockets;}
         for(let y=0;y<height;y++)for(let x=0;x<width;x++){
           const from=(y*width+x)*4,to=((oy+y)*source.width+(ox+x))*4;
           if(piece.rgba[from+3]<=40)continue;
@@ -230,8 +280,12 @@ export function auditV175PixelRoundtrip(root){
     }
   }
   assert.equal(records.length,8,'Exactly eight clothing source atlases required');
-  return {schema:176,status:'OPAQUE_PIXEL_ROUNDTRIP_PASSED',
+  assert.deepEqual({detachedParts,verifiedTorsos,transparentSockets},
+    {detachedParts:112,verifiedTorsos:24,transparentSockets:48},
+    'V177 source anatomy must retain the admitted forty-eight open neck/arm sockets');
+  return {schema:177,status:'OPAQUE_PIXEL_AND_TORSO_APERTURES_PASSED',
     sourceAtlases:8,nativeRigApproved:false,filmOneToOneApproved:false,
+    topology:{detachedParts,verifiedTorsos,transparentSockets,opaqueBorderPixels:0},
     records};
 }
 

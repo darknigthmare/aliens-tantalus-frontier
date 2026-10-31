@@ -169,6 +169,48 @@ def wait_observation(page, stage, field, timeout):
 def get_frame(page):
     return page.evaluate('''()=>({state:globalThis.__ATF_XENO_TRIALS_V96__.snapshot(),png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')})''')
 
+# A passive RAF observer is armed BEFORE the real keyboard special. It
+# captures the first *painted* native startup at the same tick as the attack
+# event, copying the canvas but never changing the match or its time. This
+# avoids losing short startups to the 40ms Playwright key press or PNG encoding.
+PREPARATION_CAPTURE_V177 = r'''c => {
+  const slot=globalThis.__ATF_PREPARATION_CAPTURE_V177__ ||= {};
+  if(slot.current)slot.current.cancelled=true;
+  const current=slot.current={cancelled:false,samples:0,capture:null,expired:false};
+  const sample=()=>{
+    if(current.cancelled||current.capture||current.expired)return;
+    const state=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot(),m=state?.match,a=m?.fighters?.[0];
+    if(m?.config?.matchId===c.matchId&&m.round===c.round
+      &&a?.stats?.specials>c.specialsBefore
+      &&a?.attack?.kind==='special'&&a.attack.age<c.startup){
+      const attack=m.events?.findLast(e=>e.type==='attack'&&e.side==='player'
+        &&e.kind==='special'&&e.id===a.attack.id+1&&e.tick<=m.tick);
+      const cue=m.rigViewsV154?.find(v=>v.side==='player'
+        &&(c.after?v.preparationV163:v.clip==='windup'));
+      const canvas=document.querySelector('[data-xt="canvas"]');
+      if(attack&&cue&&canvas&&canvas.width>0&&canvas.height>0){
+        const bitmap=document.createElement('canvas');
+        bitmap.width=canvas.width;bitmap.height=canvas.height;
+        bitmap.getContext('2d').drawImage(canvas,0,0);
+        current.capture={state,bitmap,
+          proof:{attackId:a.attack.id,attackEventId:attack.id,
+            attackEventTick:attack.tick,frameTick:m.tick,
+            attackAge:a.attack.age,clip:cue.clip,observedBy:'native RAF after real KeyL'}};
+        return;
+      }
+    }
+    if(++current.samples<32)requestAnimationFrame(sample);
+    else current.expired=true;
+  };
+  requestAnimationFrame(sample);
+  return {armed:true,samplesMax:32};
+}'''
+PREPARATION_EXPORT_V177 = r'''()=>{
+  const c=globalThis.__ATF_PREPARATION_CAPTURE_V177__?.current?.capture;
+  return c?{state:c.state,png:c.bitmap.toDataURL('image/png'),
+    preparationProof:c.proof}:null;
+}'''
+
 def acquire_player_capture(page, after, trace):
     # The Prowler and these humans have different front-biased bodies. Their
     # pivot distance is not the V153 contact test. All imports below only read
@@ -292,6 +334,11 @@ def acquire_player_capture(page, after, trace):
                 attempt = {'number': len(trace['attempts']) + 1, 'before': sample,
                            'elapsedSeconds': time.monotonic() - started}
                 trace['attempts'].append(attempt)
+                armed = page.evaluate(PREPARATION_CAPTURE_V177, {
+                    'matchId': m['config']['matchId'], 'round': m['round'],
+                    'specialsBefore': a['stats']['specials'],
+                    'startup': value['specialStartup'], 'after': after})
+                assert armed['armed'] and armed['samplesMax'] == 32
                 page.keyboard.press('KeyL', delay=40)
                 after_press = page.evaluate(read_contact)
                 if after_press:
@@ -300,6 +347,19 @@ def acquire_player_capture(page, after, trace):
                     if attempt['nativeSpecialAccepted']:
                         event = next((e for e in reversed(after_press['match']['events']) if e['type'] == 'attack' and e['side'] == 'player' and e['kind'] == 'special'), None)
                         attempt['attackEventId'] = event['id'] if event else None
+                        # Retain genuine native prep only if its detached RAF
+                        # canvas and the accepted key-driven event are identical.
+                        inline = page.evaluate(PREPARATION_EXPORT_V177)
+                        proof = inline.get('preparationProof') if inline else None
+                        if (proof and event and proof['attackId'] + 1 == event['id']
+                                and proof['attackEventId'] == event['id']
+                                and inline['state']['match']['config']['matchId'] == m['config']['matchId']
+                                and inline['state']['match']['round'] == m['round']
+                                and proof['attackAge'] < value['specialStartup']):
+                            preparations[event['id']] = inline
+                            observed_preparation_ids.add(proof['attackId'])
+                            trace['preparations'].append(proof)
+                            attempt['inlineNativeRafEvidence'] = proof
             page.wait_for_timeout(20)
         raise AssertionError('Keyboard Prowler did not earn a native capture before the deadline')
     except Exception as e:
