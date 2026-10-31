@@ -135,6 +135,48 @@ test('V185 engine service door uses actual shared reactor occupancy without chan
   assert.equal(door(),false);
   assert.equal(controller.npcInterdeckPassingRequestV165.call(host,'unknown-route'),false);
 });
+test('V198 remote Jun cannot indefinitely retain Leila/Asha service doors; real same-level local passage still wins',()=>{
+  const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
+  const jun={deck:3,roomId:'life-support',x:2200,y:532,stage:'walking-lift'};
+  const host={npcInterdeckStateV165:{routes:{'jun-sanitary':{actor:jun}}}};
+  const real=routeId=>controller.npcInterdeckSharedServiceDoorV198.call({...host,
+    npcInterdeckPassingRequestV165:id=>controller.npcInterdeckPassingRequestV165.call(host,id),
+    npcInterdeckSharedServiceDoorV185:()=>false},routeId);
+  const duty=routeId=>controller.getNpcServicePassingDutyV165.call({...host,
+    npcInterdeckPassingRequestV165:id=>controller.npcInterdeckPassingRequestV165.call(host,id),
+    npcInterdeckSharedServiceDoorV198:real},routeId,null);
+  const hold=routeId=>controller.shouldHoldNpcServiceOwnerV165.call({...host,
+    npcInterdeckPassingRequestV165:id=>controller.npcInterdeckPassingRequestV165.call(host,id),
+    npcInterdeckSharedServiceDoorV198:real},routeId,null,null);
+  for(const route of ['leila-galley','asha-refuge']){
+    assert.equal(controller.npcInterdeckPassingRequestV165.call(host,route),true,
+      'keep the existing historical passenger dependency');
+    assert.equal(real(route),false,'remote Jun cannot occupy a local door');
+    assert.equal(duty(route),undefined,'real timetable must decide native duty');
+    assert.equal(hold(route),false,'unoccupied door cannot hold local owner indefinitely');
+  }
+  jun.deck=1;jun.roomId='mess';jun.x=2400;
+  assert.equal(real('leila-galley'),false,'same room but hundreds of pixels away has no claim');
+  jun.x=1470;jun.y=250;
+  assert.equal(real('leila-galley'),false,'an upper-level actor does not overlap floor-mounted door');
+  jun.y=532;
+  assert.equal(real('leila-galley'),true,'real supported body in the doorway holds its passage');
+  assert.equal(duty('leila-galley'),true);
+  assert.equal(hold('leila-galley'),true);
+  assert.equal(real('asha-refuge'),false,'mess arrival does not occupy the refuge door');
+  jun.roomId='crew-quarters';jun.x=1160;
+  assert.equal(real('asha-refuge'),true);
+  assert.equal(duty('asha-refuge'),true);
+  assert.equal(hold('asha-refuge'),true);
+  jun.x=900;
+  assert.equal(real('asha-refuge'),false,'the rear door is not owned by a distant body');
+  jun.x=1160;jun.stage='returned';
+  assert.equal(real('asha-refuge'),false,'returned passenger releases the service door');
+  host.npcInterdeckStateV165.routes['jun-sanitary'].actor=null;
+  assert.equal(real('leila-galley'),false);
+  assert.equal(real('asha-refuge'),false);
+});
+
 const entry=(h,id)=>h.getSnapshot().npcInterdeckRoutesV165.routes[id];
 const liftActor = () => {const lift=npcLiftSocketV165(0,'hub-midship-lift');return{crewId:'crew-10-david-8r',roomId:lift.roomId,
   x:lift.x-22-96,y:532,w:44,h:92,facing:1,alive:true};};
