@@ -17,7 +17,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V176, V165_VERIFIER_SUCCESSORS_V177,
   V165_VERIFIER_SUCCESSORS_V178, V165_VERIFIER_SUCCESSORS_V179,
   V165_VERIFIER_SUCCESSORS_V180, V165_VERIFIER_SUCCESSORS_V181, V165_VERIFIER_SUCCESSORS_V182,
-  resolveLatestV165VerifierReceipt,
+  resolveLatestV165VerifierReceipt, NPC_INTERDECK_V185_SOURCE_SUCCESSORS,
   ARMORY_V178_RENDER_SUCCESSORS, ARMORY_V186_CROP_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
@@ -99,7 +99,11 @@ test('the full current bridge validates runtime bytes and older default returns 
     ...Object.fromEntries(Object.entries(ARSENAL_V171_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) };
+    ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])) };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
@@ -117,7 +121,8 @@ test('the V169 armory app successor is chained, source-pinned and cannot be forg
   assert.equal(sha(read(receipt.verifier)), receipt.verifierSha256);
   assert.deepEqual(Object.keys(ARMORY_V169_NEW_SOURCES), ['src/hub-armory-storefront-v169.js']);
   for (const [path, digest] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
-    assert.equal(sha(read(path)), ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
+    assert.equal(sha(read(path)), ARMORY_V186_CROP_SUCCESSORS[path]?.currentSha256
+      || ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
     assert.equal(ARSENAL_V171_SUCCESSORS[path].previousSha256, ARMORY_V170_ASSET_SOURCE.currentSha256);
     assert.equal(ARMORY_V170_ASSET_SOURCE.previousSha256, digest);
   }
