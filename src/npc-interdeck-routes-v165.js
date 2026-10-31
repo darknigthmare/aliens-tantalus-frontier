@@ -609,15 +609,46 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         return a?.deck===3 && a.roomId==='reactor' && a.stage!=='returned';
       });
     }
+    /** V198 distinguishes a remote interdeck dependency from an occupied
+     * physical service entrance. Jun's route may be active on an unrelated
+     * deck for hours; that cannot freeze Leila or Asha inside their annex.
+     * Only a real, supported body overlapping the parent door approach
+     * reserves the shared aperture. Actual collisions remain authoritative.
+     * This does NOT alter the historical passenger dependency graph. */
+    npcInterdeckSharedServiceDoorV198(routeId) {
+      if(routeId==='idris-engine')return this.npcInterdeckSharedServiceDoorV185(routeId);
+      const annexId=routeId==='leila-galley'?'galley-service'
+        :routeId==='asha-refuge'?'personal-refuge':null;
+      if(!annexId)return this.npcInterdeckPassingRequestV165(routeId);
+      const annex=HUB_ANNEX_BY_ID_V137[annexId];
+      const a=this.npcInterdeckStateV165?.routes['jun-sanitary']?.actor;
+      const door=annex?.parentDoorBounds;
+      if(!a||!door||a.stage==='returned'||!finite(a.x)||!finite(a.y)
+        ||a.deck!==deckOf(annex.parentRoomId)||a.roomId!==annex.parentRoomId)return false;
+      // Door-sized body envelope plus a bounded approach on both sides.
+      // A passenger simply crossing the same large room cannot claim the
+      // entire 1280px corridor or the door on another support level.
+      return overlap({x:a.x,y:a.y,w:44,h:92},
+        {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
+    }
     getNpcServicePassingDutyV165(routeId,actor) {
       if(routeId==='idris-engine'&&this.npcInterdeckPassingRequestV165(routeId))
         return this.npcInterdeckSharedServiceDoorV185(routeId);
+      if(['leila-galley','asha-refuge'].includes(routeId)) {
+        if(this.npcInterdeckSharedServiceDoorV198(routeId))return true;
+        // Let the authentic V141 schedule own duty when Jun is remote.
+        // Returning false here would incorrectly cancel a legitimate watch.
+        return super.getNpcServicePassingDutyV165?.(routeId,actor);
+      }
       if(this.npcInterdeckPassingRequestV165(routeId))return true;
       return super.getNpcServicePassingDutyV165?.(routeId,actor);
     }
     shouldHoldNpcServiceOwnerV165(routeId,actor,state) {
-      return (routeId==='idris-engine'?this.npcInterdeckSharedServiceDoorV185(routeId)
-        :this.npcInterdeckPassingRequestV165(routeId))||Boolean(super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
+      const passing=['leila-galley','asha-refuge'].includes(routeId)
+        ?this.npcInterdeckSharedServiceDoorV198(routeId)
+        :routeId==='idris-engine'?this.npcInterdeckSharedServiceDoorV185(routeId)
+          :this.npcInterdeckPassingRequestV165(routeId);
+      return Boolean(passing||super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
     }
     getNpcServiceOwnerYieldGoalV165(routeId,actor) {
       if(routeId==='david-durandal') {
