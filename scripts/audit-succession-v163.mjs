@@ -428,6 +428,26 @@ export const V165_VERIFIER_SUCCESSORS_V194 = Object.freeze({
   })
 });
 
+/** V195 physical-world recovery safeguards. No V167/V168 source digest is
+ * rewritten. The revision ceiling is checked before a dropped magazine can
+ * be consumed from world state, preventing invalid persisted inventories. */
+export const ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS = Object.freeze({
+  'src/weapon-magazine-world-v168.js': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['src/weapon-magazine-world-v168.js'],
+    currentSha256: 'a845e5a27c33c381fdfe716beb5e42247c25717fc0234eae1b50cb74d3c8c4e8'
+  }),
+  'scripts/verify-weapon-magazine-world-v168.mjs': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['scripts/verify-weapon-magazine-world-v168.mjs'],
+    currentSha256: '430f7382a05d09310ed51a96df76decec317a2987d6985b816e15930905d4725'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V195 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V194['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'e069b6bf59f20cfff033dcc86ee48a313b7d7b84fa5cc778fa543fa6f088221e'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -449,7 +469,8 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [186,V165_VERIFIER_SUCCESSORS_V186],
   [187,V165_VERIFIER_SUCCESSORS_V187],
   [188,V165_VERIFIER_SUCCESSORS_V188],
-  [194,V165_VERIFIER_SUCCESSORS_V194]
+  [194,V165_VERIFIER_SUCCESSORS_V194],
+  [195,V165_VERIFIER_SUCCESSORS_V195]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
@@ -687,10 +708,15 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   // the exact V167 SHA as predecessor and fail closed on any other change.
   for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES)) {
     const v194=ARSENAL_V194_MAGAZINE_SUCCESSORS[path];
+    const v195=ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS[path];
+    if(v194&&v195)throw new Error('Ambiguous magazine source successor: '+path);
     if (v194) assert.equal(v194.previousSha256,expected,
       'Broken V167-to-V194 magazine predecessor: ' + path);
-    assert.equal(sha(readSource(path)),v194?.currentSha256||expected,
-      v194?'Unreviewed V194 magazine successor: ' + path:'Unreviewed V167 added source: ' + path);
+    if (v195) assert.equal(v195.previousSha256,expected,
+      'Broken V168-to-V195 world-magazine predecessor: ' + path);
+    assert.equal(sha(readSource(path)),v195?.currentSha256||v194?.currentSha256||expected,
+      v195?'Unreviewed V195 world-magazine successor: ' + path
+        :v194?'Unreviewed V194 magazine successor: ' + path:'Unreviewed V167 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
     const extra = path === ARMORY_V170_ASSET_SOURCE.path ? ARMORY_V170_ASSET_SOURCE : null;
