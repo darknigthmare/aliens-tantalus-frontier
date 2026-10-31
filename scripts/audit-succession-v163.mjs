@@ -600,7 +600,13 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
               : armory ? 'Unreviewed V169 runtime successor: ' + path
                 : 'Unreviewed V167 runtime successor: ' + path);
     } else {
-      assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
+      const npcV185 = NPC_INTERDECK_V185_SOURCE_SUCCESSORS[path];
+      if(npcV185){
+        assert.equal(npcV185.previousSha256, expected,
+          'Unreviewed V185 NPC predecessor: ' + path);
+        assert.equal(sha(readSource(path)), npcV185.currentSha256,
+          'Unreviewed V185 NPC successor: ' + path);
+      } else assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
@@ -703,6 +709,17 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     added: added.length, current: keys(after).length });
 }
 
+/** V185 native interdeck correction. The original V163 and V165 runtime
+ * checksums remain immutable; this is one exact successor of the real V165
+ * NPC controller. The associated regression exercises the dependency/door
+ * distinction and requires its own CI receipt on the PR head. */
+export const NPC_INTERDECK_V185_SOURCE_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: '85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1',
+    currentSha256: '2cf709efe7b42baaf1536933700b81a42029a065a6e726bc871a1e12eb6b991f'
+  })
+});
+
 /** A missing successor preserves the anchored record; invalid content never falls back. */
 export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
@@ -725,6 +742,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;
 }
