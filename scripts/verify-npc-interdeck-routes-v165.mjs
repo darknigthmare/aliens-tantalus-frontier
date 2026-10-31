@@ -105,28 +105,35 @@ const runtime = (hour=7,save={},options={}) => {const h=new TestHub();h.start(sa
   h.npcJunClimbArtReadyV165=()=>options.artUnavailable!==true;return h;};
 const context = (h,hour,extra={})=>h.setNpcRoutineContextV62({clock:{day:1,hour},...extra},{persist:false,rebuild:true});
 const tick = (h,seconds,rate=60)=>{for(let i=0;i<seconds*rate;i++)h.update(1/rate);};
-test('V185 a passenger on another deck or in another room cannot indefinitely hold an annex service owner', () => {
-  const h=runtime(9,{deck:3,roomId:'reactor'});
-  const original=h.npcInterdeckStateV165;
-  // Isolate one already-admitted passenger circuit without inventing a new
-  // public route. The authority and physics remain exercised by the other
-  // native interdeck tests in this suite.
-  h.npcInterdeckStateV165={...original,routes:Object.fromEntries(
-    Object.entries(original.routes).map(([id,entry])=>[id,{...entry,actor:null}]))};
-  const inez=h.npcInterdeckStateV165.routes['inez-civil'];
-  inez.actor={deck:2,roomId:'quarantine',stage:'walking-lift'};
-  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),false,
-    'other-deck travel cannot own Idris\'s engine-room door');
-  inez.actor={deck:3,roomId:'dropship-hangar',stage:'walking-lift'};
-  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),false,
-    'same-deck hangar travel does not occupy the reactor');
-  inez.actor={deck:3,roomId:'reactor',stage:'walking-portal'};
-  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),true,
-    'actual shared reactor passage still retains priority');
-  inez.actor={deck:3,roomId:'reactor',stage:'returned'};
-  assert.equal(h.npcInterdeckPassingRequestV165('idris-engine'),false,
-    'a returned passenger cannot reserve the passage');
-  assert.equal(h.npcInterdeckPassingRequestV165('unknown-route'),false);
+test('V185 engine service door uses actual shared reactor occupancy without changing historical passenger dependencies',()=>{
+  const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
+  const inez={deck:2,roomId:'quarantine',stage:'walking-lift'};
+  const host={npcInterdeckStateV165:{routes:{'inez-civil':{actor:inez}}}};
+  const linked=()=>controller.npcInterdeckPassingRequestV165.call(host,'idris-engine');
+  const door=()=>controller.npcInterdeckSharedServiceDoorV185.call({...host,
+    npcInterdeckPassingRequestV165:()=>linked()},'idris-engine');
+  const duty=()=>controller.getNpcServicePassingDutyV165.call({...host,
+    npcInterdeckPassingRequestV165:()=>linked(),
+    npcInterdeckSharedServiceDoorV185:()=>door()},'idris-engine',null);
+  const hold=()=>controller.shouldHoldNpcServiceOwnerV165.call({...host,
+    npcInterdeckPassingRequestV165:()=>linked(),
+    npcInterdeckSharedServiceDoorV185:()=>door()},'idris-engine',null,null);
+  assert.equal(linked(),true,'historical dependency remains declared for QA/leases');
+  assert.equal(door(),false,'other-deck journey has no right to hold the reactor door');
+  assert.equal(duty(),false);
+  assert.equal(hold(),false);
+  inez.deck=3;inez.roomId='dropship-hangar';
+  assert.equal(door(),false,'a passenger on the shared deck but in another room cannot freeze Idris');
+  inez.roomId='reactor';inez.stage='walking-portal';
+  assert.equal(door(),true,'a real reactor occupant retains priority');
+  assert.equal(duty(),true);
+  assert.equal(hold(),true);
+  inez.stage='returned';
+  assert.equal(door(),false,'returned trip releases the door');
+  host.npcInterdeckStateV165.routes['inez-civil'].actor=null;
+  assert.equal(linked(),false);
+  assert.equal(door(),false);
+  assert.equal(controller.npcInterdeckPassingRequestV165.call(host,'unknown-route'),false);
 });
 const entry=(h,id)=>h.getSnapshot().npcInterdeckRoutesV165.routes[id];
 const liftActor = () => {const lift=npcLiftSocketV165(0,'hub-midship-lift');return{crewId:'crew-10-david-8r',roomId:lift.roomId,
