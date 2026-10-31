@@ -12,6 +12,24 @@ export const M41A_UNDERBARREL_SCHEMA_V174 = 174;
 export const M41A_UNDERBARREL_HOST_V174 = 'weapon-001-m41a-pulse-rifle';
 export const M41A_UNDERBARREL_SOURCE_V174 =
   'https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle';
+/** Film prop lineage is separate from a game firing-mode ruleset.
+ * Royal Armouries identifies a 1986 M41A prop that was also refurbished
+ * for Alien 3. Not every movie prop had a working internal Remington
+ * launcher or an illuminated counter. A museum photograph of a modified
+ * survivor cannot, by itself, certify the 1986 on-screen paint/attachments.
+ */
+export const M41A_PROP_LINEAGE_V192=Object.freeze({
+  primaryFilm:'Aliens (1986)',
+  laterFilm:'Alien 3 (1992)',
+  evidence:'https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle',
+  laterReusedOrRefurbished:true,
+  internalLauncherOnAllProps:false,
+  ammoCounterOnAllProps:false,
+  filmedRevisionPaintVerified:false,
+  nativeTantalusArt1to1Verified:false,
+  renderableEvidenceAvailable:false
+});
+
 const CAP=16, RECEIPTS=1024, EVENTS=48;
 const id=x=>typeof x==='string' && x.length>0 && x.length<=90 && /^[A-Za-z0-9:_-]+$/.test(x);
 const rounds=x=>Number.isSafeInteger(x) && x>=0 && x<=10000;
