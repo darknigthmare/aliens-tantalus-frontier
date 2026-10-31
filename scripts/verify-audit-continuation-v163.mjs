@@ -18,7 +18,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V178, V165_VERIFIER_SUCCESSORS_V179,
   V165_VERIFIER_SUCCESSORS_V180, V165_VERIFIER_SUCCESSORS_V181, V165_VERIFIER_SUCCESSORS_V182,
   resolveLatestV165VerifierReceipt,
-  ARMORY_V178_RENDER_SUCCESSORS,
+  ARMORY_V178_RENDER_SUCCESSORS, ARMORY_V186_CROP_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
@@ -124,7 +124,7 @@ test('the V169 armory app successor is chained, source-pinned and cannot be forg
   for (const changedPath of [app, receipt.verifier, ...Object.keys(ARMORY_V169_NEW_SOURCES)]) {
     const mutated=path=>path===changedPath ? Buffer.concat([read(path),Buffer.from('\\nUNREVIEWED')]) : read(path);
     assert.throws(() => verifyAuditSuccessionV163(previous,current,mutated),
-      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V174/, changedPath);
+      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V174|Unreviewed V186/, changedPath);
   }
 });
 
@@ -140,6 +140,7 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
     if(successor) assert.equal(successor.previousSha256,digest);
     assert.equal(sha(read(path)),
       ARMORY_V178_RENDER_SUCCESSORS[path]?.currentSha256
+        || ARMORY_V186_CROP_SUCCESSORS[path]?.currentSha256
         || ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256
         || successor?.currentSha256 || digest, path);
   }
@@ -157,6 +158,7 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     const current = ARMORY_V174_ECONOMY_SUCCESSORS[path] || ARMORY_V172_RELEASE_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, receipt.currentSha256);
     assert.equal(sha(read(path)), ARMORY_V178_RENDER_SUCCESSORS[path]?.currentSha256
+      || ARMORY_V186_CROP_SUCCESSORS[path]?.currentSha256
       || current?.currentSha256 || receipt.currentSha256, path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
@@ -169,6 +171,7 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   for (const [path, receipt] of Object.entries(ARMORY_V172_RELEASE_SUCCESSORS)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
     assert.equal(sha(read(path)), ARMORY_V178_RENDER_SUCCESSORS[path]?.currentSha256
+      || ARMORY_V186_CROP_SUCCESSORS[path]?.currentSha256
       || receipt.currentSha256, path);
   }
   for (const [path, receipt] of Object.entries(WEAPON_V173_SOURCE_SUCCESSORS)) {
@@ -180,6 +183,24 @@ test('V171 historical successors and research/feed/installer inputs are all sour
     assert.ok(successor && successor.version >= 171, 'Missing reviewed verifier chain: ' + path);
     assert.equal(sha(read(path)), successor.currentSha256, path);
   }
+});
+
+test('V186 armory crops preserve frozen atlases while preventing duplicated raster source rectangles', () => {
+  const path='src/hub-armory-storefront-v169.js';
+  const receipt=ARMORY_V186_CROP_SUCCESSORS[path];
+  assert.ok(receipt,'exact authored successor is registered');
+  assert.equal(receipt.previousSha256,ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
+  assert.equal(sha(read(path)),receipt.currentSha256);
+  const mutated=target=>target===path?Buffer.concat([read(target),Buffer.from('OVERLAP_REINTRODUCED')]):read(target);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutated),/Unreviewed V186/);
+  const source=read(path).toString();
+  for(const [id,group,rect] of [
+    ['main-sign','facade','5, 433, 689, 112'],
+    ['weapon-rack-a','fixtures','477, 715, 167, 144'],
+    ['weapon-rack-b','fixtures','644, 715, 170, 145'],
+    ['ammo-wall','fixtures','814, 716, 227, 144'],
+    ['glass-counter','fixtures','8, 722, 357, 134']
+  ]) assert.ok(source.includes("crop('"+id+"', '"+group+"', ["+rect+"])"),id);
 });
 
 test('V178 restores only the genuinely authored V165 electrical plate above the V169 armory overlay', () => {
@@ -214,7 +235,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     assert.equal(sha(read(path)), reviewed.currentSha256, path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
-      /Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
+      /Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
   }
 });
 
