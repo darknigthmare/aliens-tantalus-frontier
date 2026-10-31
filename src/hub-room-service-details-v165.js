@@ -26,12 +26,13 @@ export const HUB_ROOM_SERVICE_DETAILS_V165 = freeze({
   medical: service('hygiene', 'bedside-clean-gas-isolation-and-service-access', 'MED 01', 1080, 424, 96, 42),
   'science-lab': service('hygiene', 'analysis-clean-gas-isolation-and-extraction', 'LAB 01', 1000),
   quarantine: service('air', 'sealed-room-extraction-and-filter-access', 'ISO 01', 750, 320, 96),
-  // V179 candidate x220 at y320 overlapped the native armory viewport
-  // (x116..340, y240..338, reserved with margin8). Keep the clear wall
-  // interval to the left of the V169 storefront x370..900, while moving
-  // the plaque below the actual window and away from the tool board.
-  // This is an authored, static, non-collidable rear-wall service fitting.
-  armory: service('electrical', 'secure-issue-lighting-and-test-circuit-isolation', 'ARM 01', 220, 360, 96, 42),
+  // V187: browser snapshot shows x220/y360 overlaps the native vent, its
+  // approach and the raised deck edge/face/console. The rear wall socket
+  // x1096/y300 clears every actual production reservation, the issue-records
+  // fixture (ends at local x1040), and the east transition (starts x1152).
+  // It lies below V169's canopy and above its locker cluster, outside the
+  // decorative rear wall. No new collider, contact or fake fixture is added.
+  armory: service('electrical', 'secure-issue-lighting-and-test-circuit-isolation', 'ARM 01', 1096, 300, 96, 42),
   workshop: service('electrical', 'bench-power-isolation-and-test-sockets', 'MNT 01', 800, 320, 96, 42),
   'vehicle-bay': service('pipe', 'inspection-bay-compressed-air-service', 'VEH 01', 460),
   'dropship-hangar': keep('Preserve the aircraft, flight-control booth and gantry working envelope.'),
