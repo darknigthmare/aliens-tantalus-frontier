@@ -276,3 +276,32 @@ Les 129 fiches proposées doivent être admises progressivement, sans changer le
 Sources principales : [Royal Armouries M41A](https://royalarmouries.org/objects-and-stories/stories/m-41a-aliens-pulse-rifle), [correctif officiel AFE2 du 22 octobre 2026](https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes), [liste secondaire AFE2](https://www.gamewatcher.com/aliens-fireteam-elite-2/weapons).
 
 **Statut de PR : brouillon jusqu'à CI de la tête exacte.**
+
+## V186 — correction des découpes et revue des trois boutiques (31 octobre 2026)
+
+La PR #25 corrige désormais le défaut de **copie de pixels sources entre accessoires réellement dessinés**, identifié en V174. Les cinq limites de recadrage de `src/hub-armory-storefront-v169.js` ont été resserrées sans modifier le PNG/WebP original, la position écran des objets, le plancher (y=624), la géométrie de collision, les accès, l'économie ou la sauvegarde.
+
+| Source corrigée | Ancienne largeur | Largeur actuelle | Fonction |
+| --- | ---: | ---: | --- |
+| `main-sign` | 695 | 689 | Enseigne / auvent |
+| `weapon-rack-a` | 170 | 167 | Râtelier A / B |
+| `weapon-rack-b` | 174 | 170 | Râtelier B / mur de munitions |
+| `ammo-wall` | 231 | 227 | Mur de munitions / casiers |
+| `glass-counter` | 361 | 357 | Comptoir vitré / terminal |
+
+Le validateur de production vérifie **les paires de sources utilisées par chaque disposition** : toutes les intersections positives deviennent des erreurs `source-crop-overlap:<variante>:<a>:<b>`. La revue géométrique préalable relevait 5 paires sur Tantalus, 2 sur la colonie et 2 sur la station, contre aucune après ces cinq retouches. Il s'agit de *géométrie des rectangles source*, pas d'un essai de rendu réel ni d'une comparaison visuelle côte-à-côte. Le test V169 déjà présent exige `validateArmoryStorefrontV169().valid === true`. Un reçu V186 SHA-256 et son test d'altération empêchent les changements silencieux.
+
+**Parcours natifs à maintenir :**
+
+| Variante | Salle réelle | Autorité de vente | Garde obligatoire | À compléter |
+| --- | --- | --- | --- | --- |
+| Tantalus | `armory` | Sanaa Doyle, PNJ existante | Interaction native actuelle, aucun double vendeur | Lire le panneau électrique V165 après superposition ; QA pixels et mouvement |
+| Colonie | `port-meridien-quay` | Concept de vendeur, pas de rig natif certifié | Mission de secours en phase `complete` | Rig, dialogue et accès physique, stocks spécifiques, contrôle du niveau |
+| Station hub | `logistics` | Concept de vendeur, pas de rig natif certifié | Porte/PNJ/station native prioritaire ; contact uniquement au sol | Rig indépendant et animations, test d'aller-retour annex/parent |
+
+**Critère de sortie :** conserver la PR en brouillon si Forge, Gameplay, Excel ou Full Release échoue sur le **même commit**, si une pièce dépasse le support physique, si une porte devient occultée/inaccessible, si une interaction de vendeur peut créer un duplicata de matériel, ou si le rendu de plaque/service est masqué. Une validation Node des découpes n'homologue ni les PNJ concepts ni les visuels d'armes comme reproductions canoniques 1:1.
+
+### Intégration des DLC — séparation stricte des preuves
+
+Pour chacun des médias annoncés (*Alien* 1–4, *Prometheus*, *Covenant*, *Isolation*, *Blackout*, *Colonial Marines*, *Romulus*, *Alien: Earth*, AVP et adaptations romans/comics), l'import du contenu doit fournir : (1) identifiant de l'œuvre et de la séquence, (2) carte des salles et connexions réciproques réellement traversables, (3) porte/sas posés dans l'architecture avec passage dégagé, (4) roster et costumes propres à l'époque/au lieu, (5) équipements/armes autorisés par cette séquence, (6) IA des castes et objectifs vérifiables, (7) sauvegarde/reprise d'une traversée complète, (8) sources visuelles et état des droits. Une archive autonome locale ou un lien de menu n'est pas une intégration native de ces huit points. L'audit doit signaler `HORS_DEPOT`, `SOURCE_PRESENTE`, `RACCORDE`, `PARCOURS_NATIF_VALIDE` ou `ART_1TO1_VERIFIE` plutôt que de promouvoir un prototype par simple existence d'un zip.
+
