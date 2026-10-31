@@ -77,3 +77,37 @@ test('V193 production gate is used only on opt-in physical magazine initializati
  assert.match(source,/if \(!policy.detachable\) continue/);
  assert.doesNotMatch(source,/\['box', 'drum', 'belt', 'cell', 'tank'\]\.includes\(feed\)/);
 });
+
+test('V193 entire existing catalog is read-only inspected, never promoted to canon 1:1',()=>{
+ const stats={total:0,accepted:0,denied:0,nonDetachable:0};
+ for(const weapon of WEAPONS) {
+   const actor={ammo:Math.min(5,weapon.magazine),ammoReserve:24,magazineSize:weapon.magazine};
+   const result=canInitializeDetachableFeedV193(weapon,actor);
+   stats.total++;
+   assert.equal(result.canonExact,false,weapon.id);
+   assert.equal(result.visualFidelity1to1,false,weapon.id);
+   if(result.detachable){
+     stats.accepted++;
+     assert.ok(['box','drum'].includes(result.feed),weapon.id);
+   }else{
+     stats.denied++;
+     if(/specialized-|non-detachable-/.test(result.reason))stats.nonDetachable++;
+   }
+ }
+ assert.equal(stats.total,WEAPONS.length);
+ assert.ok(stats.total>=146);
+ assert.ok(stats.accepted>=1);
+ assert.ok(stats.denied>=5);
+ assert.ok(stats.nonDetachable>=5);
+ assert.equal(stats.accepted+stats.denied,stats.total);
+});
+test('V193 source work and similar weapon naming never unlock an unadmitted sequel ID',()=>{
+ const source = {id:'weapon-999-l56a3-smartgun',name:'L56A3 Smartgun',magazine:100,
+   family:'smart',provenance:'research-only'};
+ const original=JSON.stringify(source);
+ const guarded=inspectDetachableFeedV193(source,
+   {profile:{ammunition:'caseless',reload:{feed:'belt'}}});
+ assert.equal(guarded.detachable,false);
+ assert.equal(guarded.canonExact,false);
+ assert.equal(JSON.stringify(source),original);
+});
