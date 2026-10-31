@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AUDIT_PRIORITY_IDS_V163,
   loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163,
   verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS, ARSENAL_V194_MAGAZINE_SUCCESSORS,
+  ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS,
   ARMORY_V169_SUCCESSORS, ARMORY_V169_NEW_SOURCES, ARSENAL_V170_SUCCESSORS,
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
@@ -122,6 +123,20 @@ test('V194 physical magazine transactions retain every round and exact anti-repl
     const tampered=name=>name===path?Buffer.concat([read(name),Buffer.from('UNREVIEWED_AMMO_CHANGE')]):read(name);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),
       /Unreviewed V194 magazine successor/,path);
+  }
+});
+
+test('V195 dropped magazine retrieval cannot overflow an inventory revision or forge a saved receipt',()=>{
+  const targets=['src/weapon-magazine-world-v168.js','scripts/verify-weapon-magazine-world-v168.mjs'];
+  assert.deepEqual(Object.keys(ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS).sort(),targets.slice().sort());
+  for(const path of targets){
+    const successor=ARSENAL_V195_MAGAZINE_WORLD_SUCCESSORS[path];
+    assert.equal(successor.previousSha256,ARSENAL_V167_NEW_SOURCES[path],
+      'Historical V168 warehouse source proof must not be overwritten');
+    assert.equal(sha(read(path)),successor.currentSha256);
+    const invalid=x=>x===path?Buffer.concat([read(x),Buffer.from('UNREVIEWED_WORLD_PICKUP')]):read(x);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,invalid),
+      /Unreviewed V195 world-magazine successor/,path);
   }
 });
 
