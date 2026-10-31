@@ -413,6 +413,13 @@ export const NPC_INTERDECK_VERIFIER_V198 = Object.freeze({
   previousSha256: NPC_INTERDECK_VERIFIER_V188.currentSha256,
   currentSha256: '4da3fd3645f7335e27b5ac6770eeaa4622ba0f45f9ab716043183bfe36ff2198'
 });
+/** V201 exact behavior successor: prevent real same-floor Jun/Asha collision
+ * without returning to a permanent remote-route door claim. */
+export const NPC_INTERDECK_VERIFIER_V201 = Object.freeze({
+  path: NPC_INTERDECK_VERIFIER_V198.path,
+  previousSha256: NPC_INTERDECK_VERIFIER_V198.currentSha256,
+  currentSha256: '606766d5b34b111fd6b770e0ad327c875ed0c1cb80c6139bb69fa44f39a2a1c9'
+});
 
 /** V194: source-only magazine transaction anti-replay fix, preserving the
  * original V167 evidence. A long caller ID must never spend real ammunition
@@ -483,6 +490,15 @@ export const V165_VERIFIER_SUCCESSORS_V200 = Object.freeze({
   })
 });
 
+/** V202 exact audit verifier continuation after corridor native regression.
+ * V197/V199/V200 receipts remain historical and unchanged. */
+export const V165_VERIFIER_SUCCESSORS_V202 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V200['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '6380c43ad52853b62ce24e827819a00c33bdd1a531a277b0377d7dbf172b3c18'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -508,12 +524,13 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [195,V165_VERIFIER_SUCCESSORS_V195],
   [197,V165_VERIFIER_SUCCESSORS_V197],
   [199,V165_VERIFIER_SUCCESSORS_V199],
-  [200,V165_VERIFIER_SUCCESSORS_V200]
+  [200,V165_VERIFIER_SUCCESSORS_V200],
+  [202,V165_VERIFIER_SUCCESSORS_V202]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
-    return Object.freeze({ version: 198, previousSha256: NPC_INTERDECK_VERIFIER_V198.previousSha256,
-      currentSha256: NPC_INTERDECK_VERIFIER_V198.currentSha256 });
+    return Object.freeze({ version: 201, previousSha256: NPC_INTERDECK_VERIFIER_V201.previousSha256,
+      currentSha256: NPC_INTERDECK_VERIFIER_V201.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -737,11 +754,15 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
         assert.equal(npcV185.previousSha256, expected,
           'Unreviewed V185 NPC predecessor: ' + path);
         const localV198=NPC_INTERDECK_V198_LOCAL_SUCCESSORS[path];
+        const corridorV201=NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS[path];
         if(localV198)assert.equal(localV198.previousSha256,npcV185.currentSha256,
           'Broken V185-to-V198 interdeck physical door chain: ' + path);
-        assert.equal(sha(readSource(path)), localV198?.currentSha256 || npcV185.currentSha256,
-          localV198?'Unreviewed V198 local interdeck source: ' + path
-            :'Unreviewed V185 NPC successor: ' + path);
+        if(corridorV201)assert.equal(corridorV201.previousSha256,localV198?.currentSha256,
+          'Broken V198-to-V201 same-floor corridor predecessor: ' + path);
+        assert.equal(sha(readSource(path)), corridorV201?.currentSha256 || localV198?.currentSha256 || npcV185.currentSha256,
+          corridorV201?'Unreviewed V201 local interdeck corridor source: ' + path
+            :localV198?'Unreviewed V198 local interdeck source: ' + path
+              :'Unreviewed V185 NPC successor: ' + path);
       } else assert.equal(sha(readSource(path)), expected, 'Current V163 source changed: ' + path);
     }
   }
@@ -828,9 +849,12 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.equal(NPC_INTERDECK_VERIFIER_V198.previousSha256,
     NPC_INTERDECK_VERIFIER_V188.currentSha256,
     'Broken V188-to-V198 interdeck verifier chain');
-  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+  assert.equal(NPC_INTERDECK_VERIFIER_V201.previousSha256,
     NPC_INTERDECK_VERIFIER_V198.currentSha256,
-    'Unreviewed V198 interdeck behavior verifier');
+    'Broken V198-to-V201 interdeck verifier chain');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+    NPC_INTERDECK_VERIFIER_V201.currentSha256,
+    'Unreviewed V201 interdeck behavior verifier');
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
     for (const path of Object.keys(receipts)) {
       assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path),
@@ -895,6 +919,16 @@ export const NPC_INTERDECK_V198_LOCAL_SUCCESSORS = Object.freeze({
   })
 });
 
+/** V201 same-floor corridor guard follows V198 without rewriting V185/V198.
+ * A walking Jun uses shared crew-quarters, while stationary/remote bodies
+ * cannot claim another room's door. Exact input bytes and verifier are pinned. */
+export const NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: NPC_INTERDECK_V198_LOCAL_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256,
+    currentSha256: '219003a663c684faac10384616b2a2b45da767bbaf715008657f0e4741ee89de'
+  })
+});
+
 /** A missing successor preserves the anchored record; invalid content never falls back. */
 export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
@@ -921,6 +955,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V198_LOCAL_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
