@@ -168,9 +168,18 @@ test('V198 remote Jun cannot indefinitely retain Leila/Asha service doors; real 
   assert.equal(real('asha-refuge'),true);
   assert.equal(duty('asha-refuge'),true);
   assert.equal(hold('asha-refuge'),true);
+  jun.x=505;
+  assert.equal(real('asha-refuge'),true,
+    'V198 native regression: returning Jun at x505 must get Asha floor corridor priority over x561');
+  assert.equal(hold('asha-refuge'),true);
   jun.x=900;
-  assert.equal(real('asha-refuge'),false,'the rear door is not owned by a distant body');
-  jun.x=1160;jun.stage='returned';
+  assert.equal(real('asha-refuge'),true,'same-floor walking passenger shares the whole approach corridor');
+  jun.stage='service';
+  assert.equal(real('asha-refuge'),false,
+    'a stationary unrelated timetable post does not reserve the corridor indefinitely');
+  jun.stage='walking-lift';jun.y=280;
+  assert.equal(real('asha-refuge'),false,'upper-level body cannot claim the ground-floor corridor');
+  jun.y=532;jun.x=1160;jun.stage='returned';
   assert.equal(real('asha-refuge'),false,'returned passenger releases the service door');
   host.npcInterdeckStateV165.routes['jun-sanitary'].actor=null;
   assert.equal(real('leila-galley'),false);
