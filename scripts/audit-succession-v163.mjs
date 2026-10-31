@@ -580,14 +580,20 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       const v179 = path === HUB_V179_SERVICE_SUCCESSOR.path
         ? HUB_V179_SERVICE_SUCCESSOR : null;
       const v187 = v179 ? HUB_V187_SERVICE_SUCCESSOR : null;
+      const v191 = path === NPC_V191_PASSING_SUCCESSOR.path
+        ? NPC_V191_PASSING_SUCCESSOR : null;
       if (v179) assert.equal(expected, v179.previousSha256,
         'Incorrect V165-to-V179 service predecessor: ' + path);
       if (v187) assert.equal(v187.previousSha256,v179.currentSha256,
         'Broken V179-to-V187 armory wall mount chain: ' + path);
-      assert.equal(sha(readSource(path)), v187?.currentSha256 || v179?.currentSha256 || expected,
-        v187 ? 'Unreviewed V187 armory service location: ' + path
-          : v179 ? 'Unreviewed V179 armory service location: ' + path
-            : 'Current V163 source changed: ' + path);
+      if (v191) assert.equal(v191.previousSha256,expected,
+        'Broken V165-to-V191 passenger source chain: ' + path);
+      if (v191 && v187) throw new Error('Ambiguous service/route successor: ' + path);
+      assert.equal(sha(readSource(path)), v191?.currentSha256 || v187?.currentSha256 || v179?.currentSha256 || expected,
+        v191 ? 'Unreviewed V191 same-deck passing source: ' + path
+          : v187 ? 'Unreviewed V187 armory service location: ' + path
+            : v179 ? 'Unreviewed V179 armory service location: ' + path
+              : 'Current V163 source changed: ' + path);
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
