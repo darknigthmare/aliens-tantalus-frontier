@@ -9,7 +9,8 @@ import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSou
   V165_VERIFIER_SUCCESSORS_V171, V165_VERIFIER_SUCCESSORS_V173,
   V165_VERIFIER_SUCCESSORS_V174, V165_VERIFIER_SUCCESSORS_V176,
   V165_VERIFIER_SUCCESSORS_V177, V165_VERIFIER_SUCCESSORS_V178,
-  HUB_V179_SERVICE_SUCCESSOR } from './audit-succession-v163.mjs';
+  HUB_V179_SERVICE_SUCCESSOR, HUB_V187_SERVICE_SUCCESSOR,
+  V165_VERIFIER_SUCCESSORS_V188 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -69,12 +70,12 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     assert.equal(row.previousSha256, before[row.path] ?? null);
     assert.equal(row.currentSha256, after[row.path]);
     const corrected = row.path === HUB_V179_SERVICE_SUCCESSOR.path
-      ? HUB_V179_SERVICE_SUCCESSOR : null;
-    if (corrected) assert.equal(row.currentSha256, corrected.previousSha256,
-      'V179 cannot rewrite the historical V165 service receipt: ' + row.path);
+      ? HUB_V187_SERVICE_SUCCESSOR : null;
+    if (corrected) assert.equal(row.currentSha256, HUB_V179_SERVICE_SUCCESSOR.previousSha256,
+      'V187 cannot rewrite the historical V165/V179 service receipts: ' + row.path);
     assert.equal(sha(readSource(row.path)),
       corrected?.currentSha256 ?? effective[row.path] ?? row.currentSha256,
-      corrected ? 'Unreviewed V179 service successor: ' + row.path
+      corrected ? 'Unreviewed V187 service successor: ' + row.path
         : 'Unexpected undeclared source successor: ' + row.path);
     assert.ok(row.reason.startsWith('V165 :') && row.reason.trim().length >= 60);
     assert.ok(row.verifiers.length > 0 && new Set(row.verifiers).size === row.verifiers.length);
@@ -98,6 +99,7 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     const v176 = V165_VERIFIER_SUCCESSORS_V176[verifier];
     const v177 = V165_VERIFIER_SUCCESSORS_V177[verifier];
     const v178 = V165_VERIFIER_SUCCESSORS_V178[verifier];
+    const v188 = V165_VERIFIER_SUCCESSORS_V188[verifier];
     if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
       'Invalid V171-to-V173 verifier successor: ' + verifier);
     if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
@@ -110,7 +112,9 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     if (v178) assert.equal(v178.previousSha256,
       (v177 || v176 || next || revision || legacy)?.currentSha256,
       'Invalid V176-to-V178 audit verifier successor: ' + verifier);
-    const successor = v178 || v177 || v176 || next || revision || legacy;
+    if (v188) assert.equal(v188.previousSha256,(v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V177-to-V188 parallel verifier successor: ' + verifier);
+    const successor = v188 || v178 || v177 || v176 || next || revision || legacy;
     if (legacy) assert.equal(record.verifierSourceSha256V165[verifier], legacy.previousSha256,
       'Untrusted V165 original verifier receipt: ' + verifier);
     assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? record.verifierSourceSha256V165[verifier],
@@ -123,6 +127,7 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     const v176 = V165_VERIFIER_SUCCESSORS_V176[verifier];
     const v177 = V165_VERIFIER_SUCCESSORS_V177[verifier];
     const v178 = V165_VERIFIER_SUCCESSORS_V178[verifier];
+    const v188 = V165_VERIFIER_SUCCESSORS_V188[verifier];
     if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
       'Invalid V171-to-V173 verifier successor: ' + verifier);
     if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
@@ -135,7 +140,9 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     if (v178) assert.equal(v178.previousSha256,
       (v177 || v176 || next || revision || legacy)?.currentSha256,
       'Invalid V176-to-V178 audit verifier successor: ' + verifier);
-    const successor = v178 || v177 || v176 || next || revision || legacy;
+    if (v188) assert.equal(v188.previousSha256,(v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V177-to-V188 parallel verifier successor: ' + verifier);
+    const successor = v188 || v178 || v177 || v176 || next || revision || legacy;
     if (legacy) assert.equal(legacy.previousSha256, expected, 'Incorrect V165 verifier predecessor');
     assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? expected, verifier);
   }
@@ -169,27 +176,32 @@ test('V177 parallel verifier is source pinned without changing historical V165/V
   assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V177),[name]);
   const pin=V165_VERIFIER_SUCCESSORS_V177[name];
   assert.equal(pin.previousSha256,V165_VERIFIER_SUCCESSORS_V173[name].currentSha256);
-  assert.equal(sha(read(name)),pin.currentSha256);
+  const latest=V165_VERIFIER_SUCCESSORS_V188[name];
+  assert.equal(latest.previousSha256,pin.currentSha256);
+  assert.equal(sha(read(name)),latest.currentSha256);
   const corrupted=path=>path===name?Buffer.concat([read(path),Buffer.from('UNREVIEWED')]):read(path);
   assert.throws(()=>verifyParallelCompletionV165(current,corrupted),
     /Unreviewed V177 cumulative verifier successor|Unreviewed verifier bytes/);
 });
 
-test('V179 armory wall service remains visible outside the V169 storefront image', () => {
-  const receipt = HUB_V179_SERVICE_SUCCESSOR;
+test('V187 armory wall service clears native circulation reservations and storefront', () => {
+  const receipt = HUB_V187_SERVICE_SUCCESSOR;
   assert.equal(receipt.path,'src/hub-room-service-details-v165.js');
-  assert.equal(current.runtimeSourceSha256[receipt.path],receipt.previousSha256);
+  assert.equal(receipt.previousSha256,HUB_V179_SERVICE_SUCCESSOR.currentSha256);
+  assert.equal(current.runtimeSourceSha256[receipt.path],HUB_V179_SERVICE_SUCCESSOR.previousSha256);
   assert.equal(sha(read(receipt.path)),receipt.currentSha256);
   const box=HUB_ROOM_SERVICE_DETAILS_V165.armory;
   assert.equal(box.x,receipt.correctedCenterX);
   assert.equal(box.w,96);
   assert.equal(box.h,42);
-  assert.ok(box.x-box.w/2>128,'Panel must stay within the authored wall');
-  assert.ok(box.x+box.w/2<280,'Panel must clear existing tool board at x280');
-  assert.ok(box.x+box.w/2<370,'Panel must clear V169 rear-wall facade at x370');
+  assert.equal(box.y,receipt.correctedTopY);
+  assert.ok(box.x-box.w/2>1040,'Panel left edge must clear native issue records');
+  assert.ok(box.x+box.w/2<1152,'Panel right edge must clear east transition');
+  assert.ok(box.y>280,'Panel must sit below V169 front canopy');
+  assert.ok(box.y+box.h<406,'Panel must sit above V169 storage casiers');
   const corrupted=path=>path===receipt.path?Buffer.concat([read(path),Buffer.from('V179-UNREVIEWED')]):read(path);
   assert.throws(()=>verifyParallelCompletionV165(current,corrupted),
-    /Unreviewed V179 armory service location|Unreviewed V179 service successor/);
+    /Unreviewed V187 armory service location|Unreviewed V187 service successor/);
 });
 
 test('V165 cumulative pins preserve the byte-anchored V162 bridge and the immutable V164 runtime map', () => {
