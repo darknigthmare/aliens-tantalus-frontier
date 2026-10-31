@@ -309,3 +309,28 @@ Les feuilles anciennes restent dans leurs fichiers d'origine ; le classeur V196 
 La colonne `VALIDÉ_QA` et le droit d'utilisation `AUTORISÉ` doivent chacun disposer de **preuves réelles** avant qu'une nouvelle arme, texture, tenue, animation, pièce ou DLC soit marqué fidèle 1:1. Une ligne de classeur, une URL de référence, un sprite concept ou un test Node seul ne suffisent pas.
 
 **PR de rattachement :** #26 ; les PR #24 et #25 continuent à porter des modifications d'audit en parallèle. La version V196 n'écrase ni les SHA historiques ni les fichiers sources des autres PR. Les CI doivent être revues sur chaque dernier SHA, puis les conflits de succession résolus avant toute fusion. Le binaire V196 est sur Drive et a été remis dans la conversation, **pas encore dans le Git tree**.
+
+
+## V197 — Tous les Excel ouverts : registre de continuation (31 octobre 2026)
+
+**Livrable vérifié et publié sur Drive dans `03_SUIVI_ET_SOURCES` :**
+[ALIENS_TANTALUS_TOUT_LES_EXCEL_OUVERTS_V197_20261031.xlsx](https://docs.google.com/spreadsheets/d/1NwfgNhlx6CM1H9jqT_M4FsDTH-J8caYi/edit?usp=drivesdk&ouid=102406458049746863092&rtpof=true&sd=true)
+
+- Binaire `.xlsx` **830 494 octets**, SHA-256 `a13884b21107b53a277254564a6f704229d0a1d419934b63713466a141b5dd08`; 36 feuilles ; archive ZIP et réimport XLSX vérifiés.
+- Les **27 onglets V196 sont préservés** et 9 nouveaux onglets V197 ajoutés (accueil calculé, ensemble des ouverts, priorités P0, matrice 1:1, 378 recettes, 288 entrées Xeno, CI des trois PR, ventilation par domaine et provenance).
+- **1 905 identifiants distincts** dans la consolidation : 1 617 tâches V196, puis 189 IDs roster Xeno, 68 tâches de présentation/art historiques (40+28), 17 priorités V163 et 14 chantiers V163/V165. Les 288 lignes Xeno sont de nouveaux *rapprochements*, pas 288 créations graphiques ni 288 travaux tous non effectués.
+- Priorisation dynamique : **204 P0**, **953 P1**, **748 P2** ; 1 490 objets/pièces à vérifier selon 9 contrôles distincts et autorisation des droits ; **0 verdict 1:1 admis automatiquement**.
+- Les **378 recettes** sont les 90 contrôles V196 et les 288 essais de mouvement V190. Le classeur n'exécute aucun de ces 378 scénarios : l'état `NON TESTÉ` ou `À REJOUER` reste explicite.
+- Les 170 rigs Xeno V165 sont des **rigs de présentation à mouvement limité**, avec 1 020 petites poses, et non 170 identités dénuées de sprites ou 1 020 animations complètes ; l'identité source 189 reste distincte de la validation artistique.
+- Les 31 costumes, 114 pièces, 403 héros, 33 manquants vilains, 67 sprites, 200 armes, 205 combattants et 174 stages PIT demeurent séparés par source, révision, droits et statut d'intégration native. **Aucun contenu n'est promu simplement par sa présence dans une feuille**.
+
+### Contrôle du blocage CI et réconciliation des PR
+
+Au moment de cette consolidation, deux défauts ont été corrigés *dans leurs branches respectives*, sans fusion dans `main` :
+- [PR #24](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/24) — `bf99d1a583e9342308d25237c160619f1b047587` : le registre V191 PNJ doit être admis dans la boucle exhaustive V163, et non uniquement après sa vérification historique.
+- [PR #25](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/25) — `9a6239a4f52fccaa593ab38fd649feea4434fcc7` : import explicite de `ARSENAL_V167_NEW_SOURCES`, puis nouvelle empreinte SHA V197 pour le vérificateur V194/V195, **sans modifier les empreintes V195 historiques**.
+- La [PR #26](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/26) possède ses propres modifications du moteur V193 et peut encore présenter un échec de parcours `ship-v165` à revoir sur son propre SHA. Les succès de Forge ou Gameplay ne valent pas réussite d'Excel/Full Release, et la compatibilité de chaque PR avec `main` ne prouve pas la compatibilité des trois successions entre elles.
+
+**Règle d'admission finale :** aucun `VALIDÉ_QA` ni `AUTORISÉ` sans références item-spécifiques, source multi-angle, identité exacte par média, sprites séparés, rig/IK, animation et mécanique native, sauvegarde, parcours de portes/IA, et exécution des tests sur un SHA commun. Les droits de reproduction restent indépendants de la qualité visuelle. La PR reste brouillon tant que les quatre workflows ne sont pas vérifiés sur la tête exacte.
+
+Le nouveau fichier XLSX V197 est conservé sur Drive et remis dans la conversation ; **il n'est pas dans l'arbre GitHub**, pour ne pas modifier implicitement les listes blanches de distribution ni les empreintes des anciens classeurs.
