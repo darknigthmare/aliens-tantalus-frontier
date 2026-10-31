@@ -284,6 +284,31 @@ export const V165_VERIFIER_SUCCESSORS_V176 = Object.freeze({
   })
 });
 
+/** V193 additive exact review: no historical V163/V167/V174 receipt is altered.
+ * This policy admits only the detachable pilot; it does NOT authorize artwork
+ * or native specialty-feed reload timelines as 1:1 certified.
+ */
+export const WEAPON_V193_SOURCE_SUCCESSORS=Object.freeze({
+  'src/game-production-runtime.js':Object.freeze({
+    previousSha256:ARSENAL_V167_SUCCESSORS['src/game-production-runtime.js'].currentSha256,
+    currentSha256:'71dc96ce0072fedf6199e18590581e534271cd5052a2f47e4b06967a2ae192d5'
+  }),
+  'sw.js':Object.freeze({
+    previousSha256:ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].currentSha256,
+    currentSha256:'fa4890b98a278fe48bde7b39bb27660c0a906f58256606aefea5e238ed81bd16'
+  })
+});
+export const WEAPON_V193_NEW_SOURCES=Object.freeze({
+  'src/weapon-feed-admission-v193.js':'026f11a8951ca0b060d0cdf83f3b21c3c09abd4ddbd10699f62fa97c4c6c4ad9',
+  'scripts/verify-weapon-feed-admission-v193.mjs':'d51652e93a22b3edb3a2f36128db00ef6994a9f2250c4bd1c7c09eb71d22b9a9'
+});
+export const WEAPON_V193_VERIFIER_SUCCESSORS=Object.freeze({
+  'scripts/verify-public-release-v86.mjs':Object.freeze({
+    previousSha256:V165_VERIFIER_SUCCESSORS_V176['scripts/verify-public-release-v86.mjs'].currentSha256,
+    currentSha256:'1b1368bf4fde4eb02d348ff2371f49b28162db949b73d0cd1ae6949a96cab2f1'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -472,6 +497,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       const newest = ARSENAL_V170_SUCCESSORS[path];
       const current = ARSENAL_V171_SUCCESSORS[path];
       const economy = ARMORY_V174_ECONOMY_SUCCESSORS[path];
+      const specialtyV193 = WEAPON_V193_SOURCE_SUCCESSORS[path];
       if (armory) assert.equal(armory.previousSha256, successor.currentSha256,
         'Broken V167-to-V169 successor chain: ' + path);
       if (newest) assert.equal(newest.previousSha256, (armory || successor).currentSha256,
@@ -480,9 +506,13 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
         'Broken V170-to-V171 successor chain: ' + path);
       if (economy) assert.equal(economy.previousSha256, (current || newest || armory || successor).currentSha256,
         'Broken V170/V171-to-V174 economy successor chain: ' + path);
-      assert.equal(sha(readSource(path)),
+      if (specialtyV193) assert.equal(specialtyV193.previousSha256,
         (economy || current || newest || armory || successor).currentSha256,
-        economy ? 'Unreviewed V174 economy successor: ' + path
+        'Broken historical-to-V193 feed admission chain: ' + path);
+      assert.equal(sha(readSource(path)),
+        (specialtyV193 || economy || current || newest || armory || successor).currentSha256,
+        specialtyV193 ? 'Unreviewed V193 runtime successor: ' + path
+          : economy ? 'Unreviewed V174 economy successor: ' + path
           : current ? 'Unreviewed V171 runtime successor: ' + path
             : newest ? 'Unreviewed V170 runtime successor: ' + path
               : armory ? 'Unreviewed V169 runtime successor: ' + path
@@ -536,10 +566,20 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   for (const [path, expected] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V174 economy source: ' + path);
+  for (const [path, expected] of Object.entries(WEAPON_V193_NEW_SOURCES))
+    assert.equal(sha(readSource(path)), expected, 'Unreviewed V193 weapon admission source: ' + path);
+  for (const [path, receipt] of Object.entries(WEAPON_V193_VERIFIER_SUCCESSORS)) {
+    assert.equal(receipt.previousSha256,
+      V165_VERIFIER_SUCCESSORS_V176[path].currentSha256, 'Broken V176-to-V193 verifier predecessor');
+    assert.equal(sha(readSource(path)), receipt.currentSha256,
+      'Unreviewed V193 distribution verifier successor: ' + path);
+  }
+
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const latest = V165_VERIFIER_SUCCESSORS_V174[path];
     const approvedV176 = V165_VERIFIER_SUCCESSORS_V176[path];
+    const approvedV193 = WEAPON_V193_VERIFIER_SUCCESSORS[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
     if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
@@ -547,9 +587,13 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (approvedV176) assert.equal(approvedV176.previousSha256,
       (latest || revision || receipt).currentSha256,
       'Broken V174-to-V176 verifier chain: ' + path);
+    if (approvedV193) assert.equal(approvedV193.previousSha256,
+      (approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V176-to-V193 verifier chain: ' + path);
     assert.equal(sha(readSource(path)),
-      approvedV176?.currentSha256 || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
+      approvedV193?.currentSha256 || approvedV176?.currentSha256 || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
+      approvedV193 ? 'Unreviewed V193 verifier successor: ' + path
+        : approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
         : latest ? 'Unreviewed V174 verifier successor: ' + path
           : revision ? 'Unreviewed V173 verifier successor: ' + path
             : 'Unreviewed V171 verification successor: ' + path);
@@ -605,6 +649,9 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS)
+      .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(WEAPON_V193_SOURCE_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;
