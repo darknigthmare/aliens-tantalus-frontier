@@ -46,11 +46,18 @@ export function validateWeaponFeedV167(s) {
   if (s.mountedMagazineId !== null && !id(s.mountedMagazineId)) return false;
   const tx = s.reload;
   if (tx !== null) {
-    if (!tx || !id(tx.id) || !id(tx.selectedId) || !['tactical', 'speed'].includes(tx.policy)
+    // A transaction must be able to record both terminal outcomes BEFORE
+    // any magazine is moved. Otherwise a long but syntactically valid id
+    // can finish with no anti-replay receipt after save/reload.
+    if (!tx || !id('reload:' + tx.id) || !id('cancel:' + tx.id)
+      || s.receipts.includes('reload:' + tx.id) || s.receipts.includes('cancel:' + tx.id)
+      || !id(tx.id) || !id(tx.selectedId) || !['tactical', 'speed'].includes(tx.policy)
       || !PHASES.has(tx.phase) || !Number.isFinite(tx.progress) || tx.progress < 0 || tx.progress > 1
       || !selected(s) || !id(tx.oldId) && tx.oldId !== null) return false;
     if (tx.phase === 'started' && (tx.progress >= .35 || s.mountedMagazineId !== tx.oldId)) return false;
     if (tx.phase === 'ejected' && (tx.progress < .35 || tx.progress >= .75 || s.mountedMagazineId !== null)) return false;
+    if (tx.phase === 'inserted' && (tx.progress < .75 || tx.progress >= .92)) return false;
+    if (tx.phase === 'chambered' && tx.progress < .92) return false;
     if (['inserted', 'chambered'].includes(tx.phase) && s.mountedMagazineId !== tx.selectedId) return false;
     if (selected(s).location !== (tx.phase === 'started' || tx.phase === 'ejected' ? 'inventory' : 'mounted')) return false;
   }
@@ -96,7 +103,8 @@ export function weaponFeedReserveRoundsV167(state) {
 }
 
 export function spendAcceptedRoundV167(state, receipt) {
-  if (!validateWeaponFeedV167(state) || !id(receipt) || state.reload && state.reload.phase === 'ejected'
+  if (!validateWeaponFeedV167(state) || !id(receipt) || !id('shot:' + receipt)
+    || state.reload && state.reload.phase === 'ejected'
     || state.receipts.includes('shot:' + receipt)) return false;
   const m = mounted(state);
   if (!state.chamber && m?.rounds > 0) { m.rounds--; m.revision++; state.chamber = 1; }
@@ -110,14 +118,22 @@ export function spendAcceptedRoundV167(state, receipt) {
 
 export function beginWeaponReloadV167(state, receipt = null, policy = 'tactical', selectedId = null) {
   if (!validateWeaponFeedV167(state) || state.reload || receipt !== null && !id(receipt)
-    || !['tactical', 'speed'].includes(policy) || state.receipts.includes('reload:' + receipt)
-    || state.receipts.includes('cancel:' + receipt)) return false;
+    || !['tactical', 'speed'].includes(policy)
+    || (receipt === null && state.nextTransactionSerial >= 10000000)) return false;
   const txId = receipt || state.weaponInstanceId + ':reload:' + (state.nextTransactionSerial + 1);
-  if (!id(txId)) return false;
+  // Both completed and cancelled reloads require durable receipts. Check
+  // their full prefixed keys before allocating a magazine from loose ammo.
+  if (!id(txId) || !id('reload:' + txId) || !id('cancel:' + txId)
+    || state.receipts.includes('reload:' + txId)
+    || state.receipts.includes('cancel:' + txId)) return false;
   let replacement = selectedId ? state.magazines.find(m => m.id === selectedId) : state.magazines.find(m => m.location === 'inventory' && m.rounds > 0);
   if (!replacement && !selectedId && state.looseRounds > 0 && state.magazines.length < MAX_SPARES + 1) {
     const count = Math.min(state.magazineSize, state.looseRounds);
-    replacement = { id: state.weaponInstanceId + ':mag:' + ++state.nextSerial, ammoTypeId: state.ammoTypeId,
+    const serial = state.nextSerial + 1;
+    const magId = state.weaponInstanceId + ':mag:' + serial;
+    if (serial > 10000000 || !id(magId)) return false;
+    state.nextSerial = serial;
+    replacement = { id: magId, ammoTypeId: state.ammoTypeId,
       capacity: state.magazineSize, rounds: count, location: 'inventory', revision: 0 };
     state.magazines.push(replacement); state.looseRounds -= count;
   }
@@ -130,6 +146,7 @@ export function beginWeaponReloadV167(state, receipt = null, policy = 'tactical'
 
 export function advanceWeaponReloadV167(state, receipt, progress) {
   if (!validateWeaponFeedV167(state) || !state.reload || state.reload.id !== receipt
+    || !id('reload:' + receipt) || !id('cancel:' + receipt)
     || !Number.isFinite(progress) || progress < state.reload.progress || progress < 0 || progress > 1) return false;
   const tx = state.reload;
   if (progress >= .35 && tx.phase === 'started') {
@@ -153,7 +170,8 @@ export function advanceWeaponReloadV167(state, receipt, progress) {
 }
 
 export function cancelWeaponReloadV167(state, receipt) {
-  if (!validateWeaponFeedV167(state) || !state.reload || state.reload.id !== receipt) return false;
+  if (!validateWeaponFeedV167(state) || !state.reload || state.reload.id !== receipt
+    || !id('cancel:' + receipt)) return false;
   // No rollback of observed magazine moves: a late interruption leaves a
   // truly absent / already mounted magazine absent / mounted.
   state.reload = null;
