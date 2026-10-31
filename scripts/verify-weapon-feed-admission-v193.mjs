@@ -111,3 +111,21 @@ test('V193 source work and similar weapon naming never unlock an unadmitted sequ
  assert.equal(guarded.canonExact,false);
  assert.equal(JSON.stringify(source),original);
 });
+
+test('V193 source identity is required: fabricated box presentation alone never authorizes migration',()=>{
+ const existing=named('weapon-001-m41a-pulse-rifle');
+ assert.equal(inspectDetachableFeedV193(existing, {profile:{
+   weaponId:existing.id,ammunition:'caseless',reload:{feed:'box'}
+ }}).reason,'feed-mechanism-not-source-reviewed');
+ assert.equal(inspectDetachableFeedV193(existing,{profile:{
+   weaponId:'weapon-123-another-model',ammunition:'caseless',reload:{feed:'box'},
+   evidence:{catalogueMatch:true,status:'documented-ammunition'}
+ }}).detachable,false);
+ const inferred=WEAPONS.find(w=>w.name.toLowerCase().includes('pulse rifle')
+   && w.id!==existing.id
+   && getWeaponPresentationProfileV124(w)?.evidence?.status!=='documented-ammunition');
+ assert.ok(inferred,'must have a similar but not source-reviewed pulse family');
+ const denied=inspectDetachableFeedV193(inferred);
+ assert.equal(denied.detachable,false);
+ assert.equal(denied.reason,'feed-mechanism-not-source-reviewed');
+});
