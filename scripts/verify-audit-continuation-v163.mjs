@@ -19,6 +19,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V178, V165_VERIFIER_SUCCESSORS_V179,
   V165_VERIFIER_SUCCESSORS_V180, V165_VERIFIER_SUCCESSORS_V181, V165_VERIFIER_SUCCESSORS_V182,
   resolveLatestV165VerifierReceipt, NPC_INTERDECK_V185_SOURCE_SUCCESSORS,
+  NPC_INTERDECK_V198_LOCAL_SUCCESSORS, NPC_INTERDECK_VERIFIER_V188, NPC_INTERDECK_VERIFIER_V198,
   ARMORY_V178_RENDER_SUCCESSORS, ARMORY_V186_CROP_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
@@ -103,6 +104,8 @@ test('the full current bridge validates runtime bytes and older default returns 
     ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V198_LOCAL_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
@@ -138,6 +141,28 @@ test('V195 dropped magazine retrieval cannot overflow an inventory revision or f
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,invalid),
       /Unreviewed V195 world-magazine successor/,path);
   }
+});
+
+test('V198 physically local Jun passage only: preserve remote dependency graph without retaining another service owner',()=>{
+  const path='src/npc-interdeck-routes-v165.js';
+  const v185=NPC_INTERDECK_V185_SOURCE_SUCCESSORS[path];
+  const v198=NPC_INTERDECK_V198_LOCAL_SUCCESSORS[path];
+  assert.equal(v198.previousSha256,v185.currentSha256,
+    'V198 must not rewrite historical V185 source receipt');
+  assert.equal(sha(read(path)),v198.currentSha256);
+  const verifier=NPC_INTERDECK_VERIFIER_V198;
+  assert.equal(verifier.path,NPC_INTERDECK_VERIFIER_V188.path);
+  assert.equal(verifier.previousSha256,NPC_INTERDECK_VERIFIER_V188.currentSha256,
+    'V198 test must explicitly follow the historic V188 behavioral verifier');
+  assert.equal(sha(read(verifier.path)),verifier.currentSha256);
+  const mutatedPath=target=>target===path
+    ?Buffer.concat([read(target),Buffer.from('UNREVIEWED_DOOR_LEASE')]):read(target);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutatedPath),
+    /Unreviewed V198 local interdeck source/,path);
+  const mutatedTest=target=>target===verifier.path
+    ?Buffer.concat([read(target),Buffer.from('UNREVIEWED_BEHAVIOR')]):read(target);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutatedTest),
+    /Unreviewed V198 interdeck behavior verifier/,verifier.path);
 });
 
 test('the V169 armory app successor is chained, source-pinned and cannot be forged', () => {
