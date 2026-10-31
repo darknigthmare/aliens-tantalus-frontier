@@ -100,6 +100,96 @@ test('P0: corrupt or cross-owner snapshots cannot be restored', () => {
   assert.equal(restoreWeaponFeedV167(forged2), null);
 });
 
+
+test('V194: long accepted-shot identity is rejected BEFORE spending or recording false success', () => {
+  const f = feed(3, 0);
+  const before = structuredClone(f);
+  const tooLong = 's'.repeat(156); // valid as input, invalid after shot: prefix
+  assert.equal(spendAcceptedRoundV167(f, tooLong), false);
+  assert.deepEqual(f, before, 'failed receipt must not consume a physical round');
+  const boundary = 's'.repeat(155);
+  assert.equal(spendAcceptedRoundV167(f, boundary), true);
+  assert.equal(weaponFeedLoadedRoundsV167(f), 2);
+  assert.ok(f.receipts.includes('shot:' + boundary));
+  const restored = restoreWeaponFeedV167(captureWeaponFeedV167(f), {
+    ownerId: 'player', expectedCarriedRounds: 2
+  });
+  assert.deepEqual(restored, f);
+  assert.equal(spendAcceptedRoundV167(restored, boundary), false);
+  assert.equal(weaponFeedLoadedRoundsV167(restored), 2);
+});
+
+test('V194: a reload whose terminal receipt cannot be recorded is rejected atomically', () => {
+  const f = feed();
+  for (const receipt of ['r'.repeat(154), 'r'.repeat(160)]) {
+    const before = structuredClone(f);
+    assert.equal(beginWeaponReloadV167(f, receipt, 'speed'), false);
+    assert.deepEqual(f, before, 'invalid terminal key must not create or move any mag');
+  }
+  const boundary = 'r'.repeat(153);
+  assert.equal(beginWeaponReloadV167(f, boundary, 'tactical'), true);
+  const beforeRounds = allRounds(f);
+  assert.equal(advanceWeaponReloadV167(f, boundary, 1), true);
+  assert.equal(allRounds(f), beforeRounds);
+  assert.ok(f.receipts.includes('reload:' + boundary));
+  assert.equal(beginWeaponReloadV167(f, boundary), false, 'completed reload is idempotent');
+  const restored = restoreWeaponFeedV167(captureWeaponFeedV167(f), {
+    ownerId: 'player', expectedCarriedRounds: beforeRounds
+  });
+  assert.ok(restored);
+  assert.equal(beginWeaponReloadV167(restored, boundary), false);
+});
+
+test('V194: long or exhausted generated IDs cannot turn a reserve into a ghost magazine', () => {
+  const f = feed(12, 0);
+  f.looseRounds = 10;
+  f.nextSerial = 10000000;
+  assert.equal(validateWeaponFeedV167(f), true);
+  const before = structuredClone(f);
+  assert.equal(beginWeaponReloadV167(f, null), false);
+  assert.deepEqual(f, before, 'serial overflow must not convert loose rounds');
+  f.nextSerial = 1;
+  f.weaponInstanceId = 'p'.repeat(158);
+  assert.equal(validateWeaponFeedV167(f), true);
+  const longBefore = structuredClone(f);
+  assert.equal(beginWeaponReloadV167(f, 'short'), false);
+  assert.deepEqual(f, longBefore, 'oversized derived magazine ID must never mutate state');
+
+  const g = feed(12, 38);
+  g.nextTransactionSerial = 10000000;
+  assert.equal(validateWeaponFeedV167(g), true);
+  const original = structuredClone(g);
+  assert.equal(beginWeaponReloadV167(g, null), false);
+  assert.deepEqual(g, original, 'auto transaction serial overflow must reject without changes');
+});
+
+test('V194: impossible saved phase timing and terminal-receipt contradictions cannot be restored', () => {
+  const f = feed();
+  assert.equal(beginWeaponReloadV167(f, 'phase'), true);
+  for (const [progress, phase] of [[0.8, 'inserted'], [0.95, 'chambered']]) {
+    assert.equal(advanceWeaponReloadV167(f, 'phase', progress), true);
+    const bad = structuredClone(f);
+    bad.reload.progress = phase === 'inserted' ? 0.2 : 0.6;
+    assert.equal(validateWeaponFeedV167(bad), false);
+    assert.equal(captureWeaponFeedV167(bad), null);
+    assert.equal(restoreWeaponFeedV167(bad), null);
+    const unchanged = structuredClone(bad);
+    assert.equal(advanceWeaponReloadV167(bad, 'phase', 1), false);
+    assert.deepEqual(bad, unchanged);
+  }
+  const wrongReceipt = structuredClone(f);
+  wrongReceipt.receipts.push('cancel:phase');
+  assert.equal(validateWeaponFeedV167(wrongReceipt), false,
+    'pending transaction cannot already be marked cancelled');
+  const completedReceipt = structuredClone(f);
+  completedReceipt.receipts.push('reload:phase');
+  assert.equal(validateWeaponFeedV167(completedReceipt), false,
+    'pending transaction cannot already be marked completed');
+  assert.equal(cancelWeaponReloadV167(f, 'phase'), true);
+  assert.ok(f.receipts.includes('cancel:phase'));
+  assert.equal(beginWeaponReloadV167(f, 'phase'), false);
+});
+
 test('P0: V77 physical transaction can resume halfway with ammunition conservation', () => {
   const actor = owner();
   actor.weaponFeedV167 = feed();
