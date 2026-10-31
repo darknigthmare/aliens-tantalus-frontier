@@ -59,7 +59,7 @@ export const ARMORY_SPRITE_CROPS_V169 = freeze([
   crop('storefront-open-reference', 'reference', [0, 0, 1218, 430]),
   crop('vendor-standing', 'npc-concept', [1234, 70, 164, 274]),
   crop('vendor-counter', 'npc-concept', [1228, 333, 220, 95]),
-  crop('main-sign', 'facade', [5, 433, 695, 112]),
+  crop('main-sign', 'facade', [5, 433, 689, 112]),
   crop('canopy', 'facade', [694, 433, 426, 116]),
   crop('shutter', 'facade', [721, 503, 377, 157]),
   crop('rear-wall', 'architecture', [16, 546, 582, 101]),
@@ -71,11 +71,11 @@ export const ARMORY_SPRITE_CROPS_V169 = freeze([
   crop('floor-d', 'floor', [626, 653, 198, 69]),
   crop('floor-e', 'floor', [827, 653, 195, 69]),
   crop('floor-f', 'floor', [1025, 653, 170, 69]),
-  crop('glass-counter', 'fixtures', [8, 722, 361, 134]),
+  crop('glass-counter', 'fixtures', [8, 722, 357, 134]),
   crop('checkout-terminal', 'fixtures', [365, 710, 110, 154]),
-  crop('weapon-rack-a', 'fixtures', [477, 715, 170, 144]),
-  crop('weapon-rack-b', 'fixtures', [644, 715, 174, 145]),
-  crop('ammo-wall', 'fixtures', [814, 716, 231, 144]),
+  crop('weapon-rack-a', 'fixtures', [477, 715, 167, 144]),
+  crop('weapon-rack-b', 'fixtures', [644, 715, 170, 145]),
+  crop('ammo-wall', 'fixtures', [814, 716, 227, 144]),
   crop('locker-cluster', 'fixtures', [1041, 715, 397, 156]),
   crop('supply-monitor', 'fixtures', [7, 878, 91, 115]),
   crop('vendor-chair', 'fixtures', [94, 869, 77, 107]),
@@ -170,6 +170,21 @@ export function validateArmoryStorefrontV169() {
       if (!cropById[id]) failures.push('unknown-crop:' + variant + ':' + id);
       if (!inBounds({ x, y, w: width, h: height }, { w: definition.worldWidth, h: definition.floorY }))
         failures.push('layout-out-of-bounds:' + variant + ':' + id);
+    }
+    // V186: each independently drawn fixture must own disjoint original RGBA
+    // source pixels. Source-atlas overlaps can duplicate signs, racks and
+    // counter edges even when their final destination rectangles do not touch.
+    // The original atlas bytes, world coordinates and shop contacts stay fixed.
+    for (let i = 0; i < definition.layout.length; i++) {
+      const first = cropById[definition.layout[i][0]]?.source;
+      if (!first) continue;
+      for (let j = i + 1; j < definition.layout.length; j++) {
+        const second = cropById[definition.layout[j][0]]?.source;
+        if (second && Math.min(first.x + first.w, second.x + second.w) > Math.max(first.x, second.x)
+          && Math.min(first.y + first.h, second.y + second.h) > Math.max(first.y, second.y))
+          failures.push('source-crop-overlap:' + variant + ':' +
+            definition.layout[i][0] + ':' + definition.layout[j][0]);
+      }
     }
     if (variant === 'tantalus' && definition.layout.some(entry => entry[0].startsWith('vendor')))
       failures.push('duplicate-native-vendor');
