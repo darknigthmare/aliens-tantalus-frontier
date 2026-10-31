@@ -295,7 +295,7 @@ export const WEAPON_V193_SOURCE_SUCCESSORS=Object.freeze({
   }),
   'sw.js':Object.freeze({
     previousSha256:ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].currentSha256,
-    currentSha256:'fa4890b98a278fe48bde7b39bb27660c0a906f58256606aefea5e238ed81bd16'
+    currentSha256:'1a977fb7cc5f210604f9d7ea364f6dbc90c1b6fc2b601eaa79e154bbcba09b2b'
   })
 });
 export const WEAPON_V193_NEW_SOURCES=Object.freeze({
