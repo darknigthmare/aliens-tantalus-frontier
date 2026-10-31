@@ -300,7 +300,7 @@ export const WEAPON_V193_SOURCE_SUCCESSORS=Object.freeze({
 });
 export const WEAPON_V193_NEW_SOURCES=Object.freeze({
   'src/weapon-feed-admission-v193.js':'026f11a8951ca0b060d0cdf83f3b21c3c09abd4ddbd10699f62fa97c4c6c4ad9',
-  'scripts/verify-weapon-feed-admission-v193.mjs':'d51652e93a22b3edb3a2f36128db00ef6994a9f2250c4bd1c7c09eb71d22b9a9'
+  'scripts/verify-weapon-feed-admission-v193.mjs':'9a276928153eb1e641a6bf844184b080a72d4bdee1d8cbfd5934aa528ffe3d92'
 });
 export const WEAPON_V193_VERIFIER_SUCCESSORS=Object.freeze({
   'scripts/verify-public-release-v86.mjs':Object.freeze({
