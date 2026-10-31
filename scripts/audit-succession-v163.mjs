@@ -649,7 +649,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
         || approvedV178?.currentSha256 || approvedV177?.currentSha256 || approvedV176?.currentSha256
         || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
       approvedV189 ? 'Unreviewed V189 audit verifier successor: ' + path
-        : approvedV188 ? 'Unreviewed V188 cumulative verifier successor: ' + path
+        : approvedV188 ? 'Unreviewed V188 cumulative verifier successor (Unreviewed verifier bytes): ' + path
           : approvedV178 ? 'Unreviewed V178 audit verifier successor: ' + path
             : approvedV177 ? 'Unreviewed V177 cumulative verifier successor: ' + path
               : approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
