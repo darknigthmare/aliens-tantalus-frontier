@@ -381,6 +381,16 @@ export const V165_VERIFIER_SUCCESSORS_V186 = Object.freeze({
   })
 });
 
+/** V187 audit verifier: effective V185/V186 runtime source views are
+ * checked against independent approved successor receipts. Historical
+ * V186 source and verifier digests are preserved, not replaced. */
+export const V165_VERIFIER_SUCCESSORS_V187 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V186['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'f58c4d019b0eae07fd4c9b92aae51cf0b8252eda33fead4d56c4b61e5beb7790'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -399,7 +409,8 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [182,V165_VERIFIER_SUCCESSORS_V182],
   [183,V165_VERIFIER_SUCCESSORS_V183],
   [184,V165_VERIFIER_SUCCESSORS_V184],
-  [186,V165_VERIFIER_SUCCESSORS_V186]
+  [186,V165_VERIFIER_SUCCESSORS_V186],
+  [187,V165_VERIFIER_SUCCESSORS_V187]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
@@ -771,6 +782,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V185_SOURCE_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;
 }
