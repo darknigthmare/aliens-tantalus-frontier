@@ -391,6 +391,21 @@ export const V165_VERIFIER_SUCCESSORS_V187 = Object.freeze({
   })
 });
 
+/** V188 current verifier receipts, without changing historical V165/V187.
+ * The interdeck regression had no earlier V171 successor and is separately
+ * anchored to its actual V165 checksum. No verifier paths are wildcarded. */
+export const V165_VERIFIER_SUCCESSORS_V188 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V187['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '9a085f0378dc628842d76e7b49d6040aba4754e9acfa5d8d3923c471cb078540'
+  })
+});
+export const NPC_INTERDECK_VERIFIER_V188 = Object.freeze({
+  path: 'scripts/verify-npc-interdeck-routes-v165.mjs',
+  previousSha256: '1e0a4abba4be1d18d4d9b6023749246179634035542c4f0f7e6e0deec4d24733',
+  currentSha256: '0a0157a5ee1523379086c0c5a6906bb3ccd23f2a211d36d56b2403b4d81ce40c'
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -410,9 +425,13 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [183,V165_VERIFIER_SUCCESSORS_V183],
   [184,V165_VERIFIER_SUCCESSORS_V184],
   [186,V165_VERIFIER_SUCCESSORS_V186],
-  [187,V165_VERIFIER_SUCCESSORS_V187]
+  [187,V165_VERIFIER_SUCCESSORS_V187],
+  [188,V165_VERIFIER_SUCCESSORS_V188]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
+  if (path === NPC_INTERDECK_VERIFIER_V188.path)
+    return Object.freeze({ version: 188, previousSha256: NPC_INTERDECK_VERIFIER_V188.previousSha256,
+      currentSha256: NPC_INTERDECK_VERIFIER_V188.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -705,6 +724,12 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   // Source-only successor receipts can never bypass their exact historical
   // predecessor. A single resolver is shared with cumulative V165 and V163
   // verifiers, avoiding tests that accidentally accept a stale intermediate SHA.
+  assert.equal(current.verifierSourceSha256V165[NPC_INTERDECK_VERIFIER_V188.path],
+    NPC_INTERDECK_VERIFIER_V188.previousSha256,
+    'Invalid V165-to-V188 interdeck verifier predecessor');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+    NPC_INTERDECK_VERIFIER_V188.currentSha256,
+    'Unreviewed V188 interdeck behavior verifier');
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
     for (const path of Object.keys(receipts)) {
       assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path),
