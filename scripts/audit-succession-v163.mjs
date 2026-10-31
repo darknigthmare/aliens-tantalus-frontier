@@ -406,6 +406,28 @@ export const NPC_INTERDECK_VERIFIER_V188 = Object.freeze({
   currentSha256: '0a0157a5ee1523379086c0c5a6906bb3ccd23f2a211d36d56b2403b4d81ce40c'
 });
 
+/** V194: source-only magazine transaction anti-replay fix, preserving the
+ * original V167 evidence. A long caller ID must never spend real ammunition
+ * without a durable prefixed receipt; save-phase markers are monotonic. */
+export const ARSENAL_V194_MAGAZINE_SUCCESSORS = Object.freeze({
+  'src/weapon-magazine-inventory-v167.js': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['src/weapon-magazine-inventory-v167.js'],
+    currentSha256: '4fdbfef44f7ad502bf6a75c46fdb08922858c85c35e13e0eae2ce947002833ed'
+  }),
+  'scripts/verify-weapon-arsenal-v167.mjs': Object.freeze({
+    previousSha256: ARSENAL_V167_NEW_SOURCES['scripts/verify-weapon-arsenal-v167.mjs'],
+    currentSha256: '95984aa585813f093b619ce90022cfced055833be34fb37757d38579904758ba'
+  })
+});
+
+/** V194 test verifier — exact successor, not an edit to V188 history. */
+export const V165_VERIFIER_SUCCESSORS_V194 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V188['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'afe5fe269c07dff216a4c811dbe9d0f2ef8442de66194c4a114fe170f9e0a0d3'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -426,7 +448,8 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [184,V165_VERIFIER_SUCCESSORS_V184],
   [186,V165_VERIFIER_SUCCESSORS_V186],
   [187,V165_VERIFIER_SUCCESSORS_V187],
-  [188,V165_VERIFIER_SUCCESSORS_V188]
+  [188,V165_VERIFIER_SUCCESSORS_V188],
+  [194,V165_VERIFIER_SUCCESSORS_V194]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
@@ -660,8 +683,15 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
-  for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES))
-    assert.equal(sha(readSource(path)), expected, 'Unreviewed V167 added source: ' + path);
+  // V194 is a narrowly declared correction of two magazine files; retain
+  // the exact V167 SHA as predecessor and fail closed on any other change.
+  for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES)) {
+    const v194=ARSENAL_V194_MAGAZINE_SUCCESSORS[path];
+    if (v194) assert.equal(v194.previousSha256,expected,
+      'Broken V167-to-V194 magazine predecessor: ' + path);
+    assert.equal(sha(readSource(path)),v194?.currentSha256||expected,
+      v194?'Unreviewed V194 magazine successor: ' + path:'Unreviewed V167 added source: ' + path);
+  }
   for (const [path, expected] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
     const extra = path === ARMORY_V170_ASSET_SOURCE.path ? ARMORY_V170_ASSET_SOURCE : null;
     if (extra) assert.equal(extra.previousSha256, expected, 'Invalid V169 authored source history');
