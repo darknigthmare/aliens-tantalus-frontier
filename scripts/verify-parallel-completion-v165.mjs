@@ -10,7 +10,9 @@ import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSou
   V165_VERIFIER_SUCCESSORS_V174, V165_VERIFIER_SUCCESSORS_V176,
   V165_VERIFIER_SUCCESSORS_V177, V165_VERIFIER_SUCCESSORS_V178,
   HUB_V179_SERVICE_SUCCESSOR, HUB_V187_SERVICE_SUCCESSOR,
-  V165_VERIFIER_SUCCESSORS_V188, V165_VERIFIER_SUCCESSORS_V189 } from './audit-succession-v163.mjs';
+  V165_VERIFIER_SUCCESSORS_V188, V165_VERIFIER_SUCCESSORS_V189,
+  V165_VERIFIER_SUCCESSORS_V192, V165_VERIFIER_SUCCESSORS_V193,
+  NPC_V191_PASSING_SUCCESSOR } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -18,6 +20,7 @@ import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
 import { PLAYER_COSTUME_PART_ASSETS_V165 } from '../src/player-costume-parts-v165.js';
 import { PLAYER_COSTUME_ASSETS_V119, getPlayerCostumeSkinV119 } from '../src/player-costume-skins-v119.js';
 import { HUB_ROOM_SERVICE_DETAILS_V165 } from '../src/hub-room-service-details-v165.js';
+import { isNpcServiceDeckPassingV191 } from '../src/npc-interdeck-routes-v165.js';
 import { isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 
 const prefix = 'docs/forge/xeno-trials/';
@@ -71,12 +74,17 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     assert.equal(row.currentSha256, after[row.path]);
     const corrected = row.path === HUB_V179_SERVICE_SUCCESSOR.path
       ? HUB_V187_SERVICE_SUCCESSOR : null;
+    const passing = row.path === NPC_V191_PASSING_SUCCESSOR.path
+      ? NPC_V191_PASSING_SUCCESSOR : null;
     if (corrected) assert.equal(row.currentSha256, HUB_V179_SERVICE_SUCCESSOR.previousSha256,
       'V187 cannot rewrite the historical V165/V179 service receipts: ' + row.path);
+    if (passing) assert.equal(row.currentSha256, passing.previousSha256,
+      'V191 cannot rewrite historical V165 passenger routing: ' + row.path);
     assert.equal(sha(readSource(row.path)),
-      corrected?.currentSha256 ?? effective[row.path] ?? row.currentSha256,
-      corrected ? 'Unreviewed V187 service successor: ' + row.path
-        : 'Unexpected undeclared source successor: ' + row.path);
+      passing?.currentSha256 ?? corrected?.currentSha256 ?? effective[row.path] ?? row.currentSha256,
+      passing ? 'Unreviewed V191 same-deck passing source: ' + row.path
+        : corrected ? 'Unreviewed V187 service successor: ' + row.path
+          : 'Unexpected undeclared source successor: ' + row.path);
     assert.ok(row.reason.startsWith('V165 :') && row.reason.trim().length >= 60);
     assert.ok(row.verifiers.length > 0 && new Set(row.verifiers).size === row.verifiers.length);
     row.verifiers.forEach(verifier => requiredVerifiers.add(verifier));
@@ -101,6 +109,8 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     const v178 = V165_VERIFIER_SUCCESSORS_V178[verifier];
     const v188 = V165_VERIFIER_SUCCESSORS_V188[verifier];
     const v189 = V165_VERIFIER_SUCCESSORS_V189[verifier];
+    const v192 = V165_VERIFIER_SUCCESSORS_V192[verifier];
+    const v193 = V165_VERIFIER_SUCCESSORS_V193[verifier];
     if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
       'Invalid V171-to-V173 verifier successor: ' + verifier);
     if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
@@ -117,7 +127,11 @@ export function verifyParallelCompletionV165(record, readSource = read) {
       'Invalid V177-to-V188 parallel verifier successor: ' + verifier);
     if (v189) assert.equal(v189.previousSha256,(v188 || v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
       'Invalid V178-to-V189 audit verifier successor: ' + verifier);
-    const successor = v189 || v188 || v178 || v177 || v176 || next || revision || legacy;
+    if (v192) assert.equal(v192.previousSha256,(v189 || v188 || v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V188-to-V192 cumulative verifier chain: ' + verifier);
+    if (v193) assert.equal(v193.previousSha256,(v192 || v189 || v188 || v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V189-to-V193 audit verifier chain: ' + verifier);
+    const successor = v193 || v192 || v189 || v188 || v178 || v177 || v176 || next || revision || legacy;
     if (legacy) assert.equal(record.verifierSourceSha256V165[verifier], legacy.previousSha256,
       'Untrusted V165 original verifier receipt: ' + verifier);
     assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? record.verifierSourceSha256V165[verifier],
@@ -132,6 +146,8 @@ export function verifyParallelCompletionV165(record, readSource = read) {
     const v178 = V165_VERIFIER_SUCCESSORS_V178[verifier];
     const v188 = V165_VERIFIER_SUCCESSORS_V188[verifier];
     const v189 = V165_VERIFIER_SUCCESSORS_V189[verifier];
+    const v192 = V165_VERIFIER_SUCCESSORS_V192[verifier];
+    const v193 = V165_VERIFIER_SUCCESSORS_V193[verifier];
     if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
       'Invalid V171-to-V173 verifier successor: ' + verifier);
     if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
@@ -148,7 +164,11 @@ export function verifyParallelCompletionV165(record, readSource = read) {
       'Invalid V177-to-V188 parallel verifier successor: ' + verifier);
     if (v189) assert.equal(v189.previousSha256,(v188 || v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
       'Invalid V178-to-V189 audit verifier successor: ' + verifier);
-    const successor = v189 || v188 || v178 || v177 || v176 || next || revision || legacy;
+    if (v192) assert.equal(v192.previousSha256,(v189 || v188 || v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V188-to-V192 cumulative verifier chain: ' + verifier);
+    if (v193) assert.equal(v193.previousSha256,(v192 || v189 || v188 || v178 || v177 || v176 || next || revision || legacy)?.currentSha256,
+      'Invalid V189-to-V193 audit verifier chain: ' + verifier);
+    const successor = v193 || v192 || v189 || v188 || v178 || v177 || v176 || next || revision || legacy;
     if (legacy) assert.equal(legacy.previousSha256, expected, 'Incorrect V165 verifier predecessor');
     assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? expected, verifier);
   }
@@ -182,12 +202,39 @@ test('V177 parallel verifier is source pinned without changing historical V165/V
   assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V177),[name]);
   const pin=V165_VERIFIER_SUCCESSORS_V177[name];
   assert.equal(pin.previousSha256,V165_VERIFIER_SUCCESSORS_V173[name].currentSha256);
-  const latest=V165_VERIFIER_SUCCESSORS_V188[name];
-  assert.equal(latest.previousSha256,pin.currentSha256);
+  const v188=V165_VERIFIER_SUCCESSORS_V188[name];
+  assert.equal(v188.previousSha256,pin.currentSha256);
+  const latest=V165_VERIFIER_SUCCESSORS_V192[name];
+  assert.equal(latest.previousSha256,v188.currentSha256);
   assert.equal(sha(read(name)),latest.currentSha256);
   const corrupted=path=>path===name?Buffer.concat([read(path),Buffer.from('UNREVIEWED')]):read(path);
   assert.throws(()=>verifyParallelCompletionV165(current,corrupted),
     /Unreviewed V177 cumulative verifier successor|Unreviewed verifier bytes/);
+});
+
+test('V191 remote interdeck passengers do not freeze Idris at the engine-room service post',()=>{
+  const id='src/npc-interdeck-routes-v165.js',receipt=NPC_V191_PASSING_SUCCESSOR;
+  assert.equal(receipt.path,id);
+  assert.equal(sha(read(id)),receipt.currentSha256);
+  const passengers=['inez-civil','maksim-cockpit','jun-sanitary'];
+  const routes={ 'inez-civil':{actor:{deck:2,stage:'walking-lift'}},
+    'maksim-cockpit':{actor:{deck:0,stage:'service'}},
+    'jun-sanitary':{actor:{deck:1,stage:'walking-portal'}} };
+  assert.equal(isNpcServiceDeckPassingV191(3,passengers,routes),false,
+    'Remote passenger bodies never block the reactor / engine-room exit');
+  routes['inez-civil'].actor={deck:3,stage:'walking-lift'};
+  assert.equal(isNpcServiceDeckPassingV191(3,passengers,routes),true,
+    'A physically travelling body on deck3 still owns its safe passing request');
+  routes['inez-civil'].actor={deck:3,stage:'service'};
+  assert.equal(isNpcServiceDeckPassingV191(3,passengers,routes),false,
+    'An occupant resting elsewhere does not reserve the corridor indefinitely');
+  routes['inez-civil'].actor={deck:3,stage:'lift',lift:{phase:'travel'}};
+  assert.equal(isNpcServiceDeckPassingV191(3,passengers,routes),false,
+    'An enclosed carriage cannot occupy the exposed passage');
+  routes['inez-civil'].actor={deck:3,stage:'lift',lift:{phase:'exiting'}};
+  assert.equal(isNpcServiceDeckPassingV191(3,passengers,routes),true,
+    'An actually exiting passenger retains the native collision clearance');
+  assert.equal(isNpcServiceDeckPassingV191(null,passengers,routes),false);
 });
 
 test('V187 armory wall service clears native circulation reservations and storefront', () => {
