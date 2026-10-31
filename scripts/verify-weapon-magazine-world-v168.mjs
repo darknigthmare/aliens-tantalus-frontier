@@ -87,6 +87,28 @@ test('V168: one pickup transfers exact surviving rounds, no phantom/duplicate', 
   assert.equal(visibleDroppedMagazinesV168(f, 'room-a').length, 0);
 });
 
+test('V195: revision-bound pickup cannot destroy an existing physical magazine',()=>{
+  const f=make(); drop(f); stamp(f);
+  const m=f.magazines.find(row=>row.location==='world');
+  m.revision=10000000;
+  const args={ownerId:'player',levelId:'room-a',x:120,y:260,magazineId:m.id};
+  assert.equal(validateMagazineWorldV168(f,{requirePosition:true}),true);
+  const before=structuredClone(f);
+  assert.equal(recoverDroppedMagazineV168(f,args),null);
+  assert.deepEqual(f,before,'overflow refusal is atomic: no inventory moves or receipt');
+  assert.equal(visibleDroppedMagazinesV168(f,'room-a').length,1);
+  assert.ok(captureMagazineFeedV168(f),'the refused pickup remains a valid save');
+  m.revision=9999999;
+  const success=recoverDroppedMagazineV168(f,args);
+  assert.equal(success?.rounds,12);
+  assert.equal(m.revision,10000000);
+  assert.equal(validateMagazineWorldV168(f,{requirePosition:true}),true);
+  const stored=captureMagazineFeedV168(f);
+  assert.deepEqual(restoreMagazineFeedV168(stored,{ownerId:'player',
+    expectedCarriedRounds:50}),stored);
+  assert.equal(recoverDroppedMagazineV168(f,args),null);
+});
+
 test('V168: speed-reload policy is exercised through native V77, no numeric ammo printing', () => {
   const f = make(), p = actor(f);
   p.reloadPolicyV168 = 'speed';
