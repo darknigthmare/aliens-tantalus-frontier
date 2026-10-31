@@ -196,7 +196,11 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
     const newer=V165_VERIFIER_SUCCESSORS_V189[path] || V165_VERIFIER_SUCCESSORS_V178[path];
-    if(newer) assert.equal(newer.previousSha256,revision.currentSha256,path);
+    if (V165_VERIFIER_SUCCESSORS_V178[path])
+      assert.equal(V165_VERIFIER_SUCCESSORS_V178[path].previousSha256,revision.currentSha256,path);
+    if (V165_VERIFIER_SUCCESSORS_V189[path])
+      assert.equal(V165_VERIFIER_SUCCESSORS_V189[path].previousSha256,
+        V165_VERIFIER_SUCCESSORS_V178[path]?.currentSha256,path);
     assert.equal(sha(read(path)),newer?.currentSha256 || revision.currentSha256,path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
