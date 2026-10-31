@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
  M41A_UNDERBARREL_HOST_V174,M41A_UNDERBARREL_SOURCE_V174,
  validateUnderbarrelV174,createM41AUnderbarrelV174,setM41AModeV174,
- AFE2_UNDERBARREL_SWAP_V190,switchM41AModeV190,
+ AFE2_UNDERBARREL_SWAP_V190,switchM41AModeV190,getAFE2UnderbarrelAutoIntentV191,
  fireM41AUnderbarrelV174,pumpM41AUnderbarrelV174,
  beginM41AUnderbarrelReloadV174,advanceM41AUnderbarrelReloadV174,
  cancelM41AUnderbarrelReloadV174,M41AAmmoHudV174,
@@ -219,4 +219,61 @@ test('V190 AFE2 rule carries official source scope but does not assert visual 1:
  assert.equal(AFE2_UNDERBARREL_SWAP_V190.exactVisuals,false);
  const state=create();
  assert.equal(switchM41AModeV190(state,'launcher','ordinary')?.previousReloadCancelled,false);
+});
+
+test('V191 AFE2 automatic selection requires an actually chambered alternate round',()=>{
+ const s=createM41AUnderbarrelV174({ownerId:'p',weaponInstanceId:'p:m41a',
+  tube:0,chamber:1,reserve:0,capacity:4,mode:'primary'});
+ const source=structuredClone(s);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true}),{action:'switch',mode:'launcher',
+   reason:'primary-empty-launcher-chambered'});
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:false}),{action:'none',mode:'primary',reason:'no-authorized-auto-action'});
+ assert.deepEqual(s,source,'decision must not fire or change active fire mode');
+ assert.equal(switchM41AModeV190(s,'launcher','auto-accepted')?.mode,'launcher');
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:8,
+   autoSwitchWhenEmpty:true}).action,'none');
+ assert.ok(fireM41AUnderbarrelV174(s,'one'));
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:8,
+   autoSwitchWhenEmpty:true}),{action:'switch',mode:'primary',
+   reason:'launcher-empty-primary-ready'});
+});
+
+test('V191 unchambered tube demands real pumping, never a phantom automatic shot',()=>{
+ const s=create(2,1,0);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ fireM41AUnderbarrelV174(s,'fire1');
+ assert.equal(s.needsPump,true);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true,autoReload:true}),{action:'none',mode:'launcher',
+   reason:'manual-pump-required'});
+ assert.equal(s.tube,2);
+ assert.ok(pumpM41AUnderbarrelV174(s,'pump1'));
+ assert.equal(s.chamber,1);
+ const before=structuredClone(s);
+ const pending=getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true});
+ assert.equal(pending.action,'none','do not switch away from a ready active launcher');
+ assert.deepEqual(s,before);
+});
+
+test('V191 automatic reload suggestion cannot invent ammunition or skip pending transfer',()=>{
+ const s=create(0,0,3);
+ assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoReload:true}),{action:'reload',mode:'launcher',reason:'launcher-reserve-available'});
+ assert.equal(beginM41AUnderbarrelReloadV174(s,'pending'),true);
+ const saved=structuredClone(s);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(s,{primaryLoaded:0,
+   autoSwitchWhenEmpty:true,autoReload:true}),{action:'none',reason:'reload-in-progress',mode:'launcher'});
+ assert.deepEqual(s,saved);
+ assert.equal(cancelM41AUnderbarrelReloadV174(s,'pending'),true);
+ assert.equal(s.tube+s.chamber+s.reserve,3);
+ const blank=create(0,0,0);
+ assert.deepEqual(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:0,
+   primaryReserve:0,autoSwitchWhenEmpty:true,autoReload:true}),{
+   action:'none',mode:'primary',reason:'both-feeds-empty'});
+ assert.equal(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:-1}),null);
+ assert.equal(getAFE2UnderbarrelAutoIntentV191(blank,{primaryLoaded:0,autoReload:'yes'}),null);
 });
