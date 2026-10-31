@@ -246,3 +246,26 @@ Le test `scripts/verify-armory-resupply-v174.mjs` couvre 8 scénarios : coût, l
 **Reste à finaliser pour une fidélité 1:1** : sources multi-angle et droits, variantes d’apparence spécifiques à chaque œuvre, squelette et prise en main latéraux, animations de cycle/rechargement, alimentation spéciale réellement raccordée au moteur, VFX/sons exacts, certification des vendeurs colonie/station, tests sur trois scènes et revue artistique. Le M41A 30 mm sous canon dispose d’un contrat séparé V174, mais pas encore d’une admission 1:1 complète.
 
 **Validation** : ne conclure à la stabilité qu’après réussite des suites Forge, Gameplay, Excel et Full Release sur un seul et même SHA de tête de PR. Un test Node réussi ne constitue pas une vérification de fidélité visuelle canonique.
+
+
+## V193 — admission des chargeurs détachables
+
+Cette passe est dans [la PR #26](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/26), isolée des corrections parallèles #24 et #25. Aucune nouvelle arme n'est rendue achetable ni certifiée fidèle 1:1 par cette correction.
+
+**Défaut historique :** le profil de présentation du M56 pouvait se décrire comme un tambour, et le pilote de magazines V167 acceptait aussi les bandes, cellules et réservoirs. La présentation ne décrit pourtant pas automatiquement un magasin d'arme détachable. Le garde source weapon-feed-admission-v193.js restreint désormais l'initialisation physique aux vrais profils box ou drum compatibles, sous activation expérimentale explicite.
+
+| Arme | Mécanisme source / prévu | V167 physique | Reste à valider |
+| --- | --- | --- | --- |
+| M41A Pulse Rifle | Chargeur de fusil sans étui, lanceur 30 mm indépendant | Pilote opt-in admis | Main/arme, chambre, mode secondaire, poses et fidélité des props de film |
+| M56 Smartgun | Bande/harnais sans étui | Refusé | Cycle de bande, rig et FX sans douilles métalliques |
+| M240 Incinerator | Réservoir et ligne carburant | Refusé | Débit carburant, allumage et animations |
+| M37A2 Pump Shotgun | Tube, pompe, cartouches individuelles | Refusé | Insertion, pompe et douille éjectée au bon temps |
+| Revolver .357 | Barillet / extraction manuelle | Refusé | Chambres, étuis conservés, extraction au rechargement |
+| M83 SADAR | Lanceur unitaire | Refusé | Projectile/tube, pas de magazine fictif |
+| Armes à cellules/gel | Selon modèle, médias séparés | Refusé par défaut | Preuve de modèle exacte avant admission |
+
+Le contrat pur de flux spécialisés V171 demeure **hors combat natif**. Le stock numérique V77 persiste pour ces mécanismes jusqu'à une intégration complète. Les sauvegardes historiques restent intactes ; l'arme équipée, sa taille de magasin et sa réserve sont contrôlées avant chaque initialisation de pilote.
+
+Le vérificateur verify-weapon-feed-admission-v193.mjs couvre les refus M56/M240/M37A2/M83/revolver, la compatibilité réelle M41A et les paramètres forgés. Les modules importés sont inscrits explicitement au cache hors ligne. Les nouveaux SHA-256 V193 forment une chaîne de successeurs sans changer les tables d'audit V163–V176.
+
+**Non certifiés :** apparences des armes, joints du rig, animation native de toutes les alimentations, sons, douilles/VFX exacts, achats de magasins individualisés et coop/synchronisation persistante. Un test Node vert n'est jamais une homologation artistique 1:1. Valider les quatre workflows sur le dernier SHA de PR avant fusion.
