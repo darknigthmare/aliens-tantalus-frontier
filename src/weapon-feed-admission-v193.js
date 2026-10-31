@@ -25,14 +25,14 @@ export function inspectDetachableFeedV193(weapon,{profile=null}={}){
  if(specialist) return deny(weaponId,'specialized-'+specialist.kind+'-feed-pending-native-bridge');
  const presentation=profile||getWeaponPresentationProfileV124(weapon);
  if(!presentation?.reload) return deny(weaponId,'no-presentation-feed');
- if(!presentation.evidence?.catalogueMatch
-   || presentation.evidence?.status!=='documented-ammunition'
-   || presentation.weaponId!==weaponId)
-   return deny(weaponId,'feed-mechanism-not-source-reviewed');
  const feed=presentation.reload.feed;
  if(NON_DETACHABLE.includes(feed))return deny(weaponId,'non-detachable-'+feed);
  if(!PORTABLE.includes(feed))return deny(weaponId,'unsupported-feed-'+String(feed));
  if(['sentry','melee','tool'].includes(weapon.family))return deny(weaponId,'not-a-portable-firearm');
+ if(!presentation.evidence?.catalogueMatch
+   || presentation.evidence?.status!=='documented-ammunition'
+   || presentation.weaponId!==weaponId)
+   return deny(weaponId,'feed-mechanism-not-source-reviewed');
  if(!validCount(weapon.magazine)||weapon.magazine<1)
    return deny(weaponId,'invalid-legacy-capacity');
  const ammoType=String(presentation.ammunition||'').trim();
