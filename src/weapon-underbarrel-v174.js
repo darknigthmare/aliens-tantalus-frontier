@@ -157,7 +157,7 @@ export function getAFE2UnderbarrelAutoIntentV191(s,{
     return {action:'reload',mode:'launcher',reason:'launcher-reserve-available'};
   if(autoReload&&s.mode==='primary'&&primaryLoaded===0&&primaryReserve>0)
     return {action:'reload',mode:'primary',reason:'primary-reserve-available'};
-  return {action:'none',mode:s.mode,reason:s.needsPump?'manual-pump-required':
+  return {action:'none',mode:s.mode,reason:s.needsPump||s.mode==='launcher'&&s.chamber===0&&s.tube>0?'manual-pump-required':
     launcherEmpty&&primaryLoaded===0?'both-feeds-empty':'no-authorized-auto-action'};
 }
 export function fireM41AUnderbarrelV174(s,receipt){
@@ -170,12 +170,21 @@ export function fireM41AUnderbarrelV174(s,receipt){
     pumpRequired:true,spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'};
 }
 export function pumpM41AUnderbarrelV174(s,receipt){
-  if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending||!s.needsPump
-    ||!id(receipt)||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
+  // A manually cycled pump can chamber a round from a loaded tube even on
+  // the FIRST use. The legacy path only allowed this after a fired grenade,
+  // stranding a valid saved tube with an empty chamber and no spent case.
+  // Cycling an already loaded chamber or an empty clean weapon is rejected.
+  const coldChamber=s?.chamber===0&&s?.tube>0&&!s?.needsPump;
+  if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
+    ||(!s.needsPump&&!coldChamber)||!id(receipt)
+    ||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
+  const spentCleared=s.needsPump;
   s.needsPump=false;s.spent=0;
-  if(s.tube){s.tube--;s.chamber=1;}
-  remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,1);
+  const chambered=s.tube>0?1:0;
+  if(chambered){s.tube--;s.chamber=1;}
+  remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,chambered);
   return {type:'launcher-cycled',chamber:s.chamber,tube:s.tube,
+    spentCleared,roundChambered:chambered,
     spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'};
 }
 export function beginM41AUnderbarrelReloadV174(s,receipt){
