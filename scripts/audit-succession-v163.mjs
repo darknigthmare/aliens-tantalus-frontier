@@ -306,6 +306,14 @@ export const WEAPON_V193_VERIFIER_SUCCESSORS=Object.freeze({
   'scripts/verify-public-release-v86.mjs':Object.freeze({
     previousSha256:V165_VERIFIER_SUCCESSORS_V176['scripts/verify-public-release-v86.mjs'].currentSha256,
     currentSha256:'1b1368bf4fde4eb02d348ff2371f49b28162db949b73d0cd1ae6949a96cab2f1'
+  }),
+  'scripts/verify-audit-continuation-v163.mjs':Object.freeze({
+    previousSha256:V165_VERIFIER_SUCCESSORS_V176['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256:'e82c5344881882d4670bce9f01d2eb9c30e20aa3cfb54c63f3e61b1e58e41cbb'
+  }),
+  'scripts/verify-parallel-completion-v165.mjs':Object.freeze({
+    previousSha256:V165_VERIFIER_SUCCESSORS_V173['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256:'43acba6ba06e211704b1f707ee4091093ddb3be33046f166ee12ebdd0707270c'
   })
 });
 
@@ -569,8 +577,13 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   for (const [path, expected] of Object.entries(WEAPON_V193_NEW_SOURCES))
     assert.equal(sha(readSource(path)), expected, 'Unreviewed V193 weapon admission source: ' + path);
   for (const [path, receipt] of Object.entries(WEAPON_V193_VERIFIER_SUCCESSORS)) {
-    assert.equal(receipt.previousSha256,
-      V165_VERIFIER_SUCCESSORS_V176[path].currentSha256, 'Broken V176-to-V193 verifier predecessor');
+    const previous=V165_VERIFIER_SUCCESSORS_V176[path]
+      || V165_VERIFIER_SUCCESSORS_V174[path]
+      || V165_VERIFIER_SUCCESSORS_V173[path]
+      || V165_VERIFIER_SUCCESSORS_V171[path];
+    assert.ok(previous,'No prior approved verifier: '+path);
+    assert.equal(receipt.previousSha256, previous.currentSha256,
+      'Broken earlier-to-V193 verifier predecessor: ' + path);
     assert.equal(sha(readSource(path)), receipt.currentSha256,
       'Unreviewed V193 distribution verifier successor: ' + path);
   }
