@@ -27,7 +27,7 @@ export const M41A_PROP_LINEAGE_V192=Object.freeze({
   ammoCounterOnAllProps:false,
   filmedRevisionPaintVerified:false,
   nativeTantalusArt1to1Verified:false,
-  renderableEvidenceAvailable:false
+  filmPropPhotoBundledInGame:false
 });
 
 const CAP=16, RECEIPTS=1024, EVENTS=48;
