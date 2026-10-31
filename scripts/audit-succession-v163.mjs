@@ -474,6 +474,15 @@ export const V165_VERIFIER_SUCCESSORS_V199 = Object.freeze({
   })
 });
 
+/** V200 audit test follows exact V199 tests and checks unreviewed digest errors.
+ * Historical V197 and V199 receipts remain intact. */
+export const V165_VERIFIER_SUCCESSORS_V200 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V199['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '56a596eb6f34441d658d35cff5008becc421213dfdbd45fd62cedcdb1a950dd1'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -498,7 +507,8 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [194,V165_VERIFIER_SUCCESSORS_V194],
   [195,V165_VERIFIER_SUCCESSORS_V195],
   [197,V165_VERIFIER_SUCCESSORS_V197],
-  [199,V165_VERIFIER_SUCCESSORS_V199]
+  [199,V165_VERIFIER_SUCCESSORS_V199],
+  [200,V165_VERIFIER_SUCCESSORS_V200]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
