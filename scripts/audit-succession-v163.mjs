@@ -307,6 +307,16 @@ export const ARMORY_V178_RENDER_SUCCESSORS = Object.freeze({
   })
 });
 
+/** V186 storefront source-rectangle correction: five narrowed crops remove
+ * duplicate pixels from the three original atlas render plans. The atlas PNG
+ * and WebP SHA-256 records and shop collision/contact rules are unchanged. */
+export const ARMORY_V186_CROP_SUCCESSORS = Object.freeze({
+  'src/hub-armory-storefront-v169.js': Object.freeze({
+    previousSha256: ARMORY_V172_RELEASE_SUCCESSORS['src/hub-armory-storefront-v169.js'].currentSha256,
+    currentSha256: '42fc7d816054cae326caa750e7608aeabe4d7f7a54378410ad5757019a658ac3'
+  })
+});
+
 /** V178/V179: cumulative verifier successors for the V178 authored armory
  * fix. Historical V165/V176/V177 checksums are preserved, not overwritten.
  */
@@ -362,6 +372,15 @@ export const V165_VERIFIER_SUCCESSORS_V184 = Object.freeze({
   })
 });
 
+/** V186 verifier of the V186 visual source isolation, without rewriting
+ * any of the V171–V184 historical audit results. */
+export const V165_VERIFIER_SUCCESSORS_V186 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V183['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '253c073c5433745fb91244306907f67cfedc187ec8c2daa8db7860349282e7b8'
+  })
+});
+
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
  * No unregistered verifier path is allowed, and a missing successor fails
@@ -379,7 +398,8 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [181,V165_VERIFIER_SUCCESSORS_V181],
   [182,V165_VERIFIER_SUCCESSORS_V182],
   [183,V165_VERIFIER_SUCCESSORS_V183],
-  [184,V165_VERIFIER_SUCCESSORS_V184]
+  [184,V165_VERIFIER_SUCCESSORS_V184],
+  [186,V165_VERIFIER_SUCCESSORS_V186]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
@@ -619,13 +639,20 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (current) assert.equal(current.previousSha256, extra?.currentSha256 || expected,
       'Broken V169/V170-to-V171 source chain: ' + path);
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
+    const cropFix = ARMORY_V186_CROP_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256, current?.currentSha256 || extra?.currentSha256 || expected,
       'Broken V171-to-V172 source chain: ' + path);
-    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected,
-      release ? 'Unreviewed V172 art source: ' + path
-        : current ? 'Unreviewed V171 source correction: ' + path
-          : extra ? 'Unreviewed V170 source correction: ' + path
-            : 'Unreviewed V169 added source: ' + path);
+    if (cropFix) {
+      assert.ok(release, 'V186 crop source has no approved V172 predecessor: ' + path);
+      assert.equal(cropFix.previousSha256, release.currentSha256,
+        'Broken V172-to-V186 source-rectangle chain: ' + path);
+    }
+    assert.equal(sha(readSource(path)), cropFix?.currentSha256 || release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected,
+      cropFix ? 'Unreviewed V186 source crop successor: ' + path
+        : release ? 'Unreviewed V172 art source: ' + path
+          : current ? 'Unreviewed V171 source correction: ' + path
+            : extra ? 'Unreviewed V170 source correction: ' + path
+              : 'Unreviewed V169 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const current = ARSENAL_V171_SUCCESSORS[path];
