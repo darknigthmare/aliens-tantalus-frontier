@@ -347,6 +347,29 @@ export const V165_VERIFIER_SUCCESSORS_V189 = Object.freeze({
   })
 });
 
+/** V191: a remote interdeck passenger cannot occupy the reactor
+ * service corridor. This is one exact, reviewed gameplay source successor.
+ * No historical V165 source or save receipt is rewritten. */
+export const NPC_V191_PASSING_SUCCESSOR = Object.freeze({
+  path:'src/npc-interdeck-routes-v165.js',
+  previousSha256:'85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1',
+  currentSha256:'7dce84f5f3ed564a9aed0e3a45e27c62219c23c1508c63349f6628fb42c42053',
+  scope:'Idris same-deck physical passing, not new passenger spawns',
+  canon1to1Approved:false
+});
+export const V165_VERIFIER_SUCCESSORS_V192 = Object.freeze({
+  'scripts/verify-parallel-completion-v165.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V188['scripts/verify-parallel-completion-v165.mjs'].currentSha256,
+    currentSha256:'604f3e1742a8441a4b9c9da405bd547b1a2ea1e48c1e312243f242e1aef46f6b'
+  })
+});
+export const V165_VERIFIER_SUCCESSORS_V193 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V189['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256:'10639a5b99c915a2e516fbac048650febd120ea67f3b7e104f44b7b865cc39e7'
+  })
+});
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -617,6 +640,14 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.equal(sha(readSource(HUB_V187_SERVICE_SUCCESSOR.path)),
     HUB_V187_SERVICE_SUCCESSOR.currentSha256,
     'Unreviewed V187 armory service location: ' + HUB_V187_SERVICE_SUCCESSOR.path);
+  // The V165 archive keeps the original source hash. Only this explicit
+  // V191 successor may change Idris' interdeck courtesy condition.
+  const v191 = NPC_V191_PASSING_SUCCESSOR;
+  const v165Source = current.followupV165?.sourceChanges?.find(row => row.path === v191.path);
+  assert.equal(v165Source?.currentSha256,v191.previousSha256,
+    'Untrusted historical V165 passenger source receipt: ' + v191.path);
+  assert.equal(sha(readSource(v191.path)),v191.currentSha256,
+    'Unreviewed V191 same-deck passing source: ' + v191.path);
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     const revision = V165_VERIFIER_SUCCESSORS_V173[path];
     const latest = V165_VERIFIER_SUCCESSORS_V174[path];
@@ -625,6 +656,8 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const approvedV178 = V165_VERIFIER_SUCCESSORS_V178[path];
     const approvedV188 = V165_VERIFIER_SUCCESSORS_V188[path];
     const approvedV189 = V165_VERIFIER_SUCCESSORS_V189[path];
+    const approvedV192 = V165_VERIFIER_SUCCESSORS_V192[path];
+    const approvedV193 = V165_VERIFIER_SUCCESSORS_V193[path];
     if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
       'Broken V171-to-V173 verifier chain: ' + path);
     if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
@@ -644,12 +677,21 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (approvedV189) assert.equal(approvedV189.previousSha256,
       (approvedV188 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
       'Broken V178-to-V189 audit verifier chain: ' + path);
+    if (approvedV192) assert.equal(approvedV192.previousSha256,
+      (approvedV189 || approvedV188 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V188-to-V192 cumulative verifier chain: ' + path);
+    if (approvedV193) assert.equal(approvedV193.previousSha256,
+      (approvedV192 || approvedV189 || approvedV188 || approvedV178 || approvedV177 || approvedV176 || latest || revision || receipt).currentSha256,
+      'Broken V189-to-V193 audit verifier chain: ' + path);
     assert.equal(sha(readSource(path)),
-      approvedV189?.currentSha256 || approvedV188?.currentSha256
+      approvedV193?.currentSha256 || approvedV192?.currentSha256
+        || approvedV189?.currentSha256 || approvedV188?.currentSha256
         || approvedV178?.currentSha256 || approvedV177?.currentSha256 || approvedV176?.currentSha256
         || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV189 ? 'Unreviewed V189 audit verifier successor: ' + path
-        : approvedV188 ? 'Unreviewed V188 cumulative verifier successor (Unreviewed verifier bytes): ' + path
+      approvedV193 ? 'Unreviewed V193 audit verifier successor: ' + path
+        : approvedV192 ? 'Unreviewed V192 cumulative verifier successor (Unreviewed verifier bytes): ' + path
+          : approvedV189 ? 'Unreviewed V189 audit verifier successor: ' + path
+          : approvedV188 ? 'Unreviewed V188 cumulative verifier successor (Unreviewed verifier bytes): ' + path
           : approvedV178 ? 'Unreviewed V178 audit verifier successor: ' + path
             : approvedV177 ? 'Unreviewed V177 cumulative verifier successor: ' + path
               : approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
