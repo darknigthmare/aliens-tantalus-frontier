@@ -198,7 +198,7 @@ function captureRuntimeHost(){
   loadImage:async path=>images.get(path)||{naturalWidth:1024,naturalHeight:1024,complete:true},
   requestAnimationFrame,cancelAnimationFrame:id=>queue.delete(id)});
  ui.runtime=runtime;
- const frame=(count=1)=>{for(let i=0;i<count;i++){time+=1000/120;for(const[id,fn]of [...queue])if(queue.delete(id))fn(time);}};
+ const frame=(count=1,deltaMs=1000/120)=>{for(let i=0;i<count;i++){time+=deltaMs;for(const[id,fn]of [...queue])if(queue.delete(id))fn(time);}};
  return{runtime,canvas,element,requestAnimationFrame,frame,now:()=>time,
   key(code,type='keydown'){win.emit(type,{target:canvas,code});},
   async start(){assert.equal(await runtime.start(),true);
@@ -206,7 +206,7 @@ function captureRuntimeHost(){
    assert.equal(runtime.getState().presentation.blocksSimulation,false);frame(2);}
  };
 }
-async function nativePlayerCaptureForPause(h){
+async function nativePlayerCaptureForPause(h,{onAttempt}={}){
  await h.start();let move=null,guard=false;
  for(let i=0;i<6600;i++){
   const m=h.runtime.getState();
@@ -224,7 +224,7 @@ async function nativePlayerCaptureForPause(h){
   const special=attackSpec(definition(a.id),'special',baseAttacks.special);
   const attack=m.phase==='active'&&!m.paused&&contact&&recovery&&!a.attack&&a.stun<=0
    &&a.y===0&&b.y===0&&b.vy===0&&a.specialCooldown<=0&&a.stamina>=special.cost;
-  if(attack)h.key('KeyL');h.frame();if(attack)h.key('KeyL','keyup');
+  if(attack){onAttempt?.(m,special);h.key('KeyL');}h.frame();if(attack)h.key('KeyL','keyup');
  }
  assert.fail('The bounded native keyboard policy did not obtain a capture.');
 }
@@ -242,8 +242,11 @@ function captureQaObserver(h){
      assert.equal(source,h.canvas);const m=h.runtime.getState();copies.push({tick:m.tick,paused:m.paused});}};},
     toDataURL(){const m=h.runtime.getState();encodings.push({tick:m.tick,paused:m.paused});return'data:image/png;base64,declared-bitmap-double';}};}}});
  const observe=runInContext('('+captureQaLiteral('CAPTURE_OBSERVER')+')',context);
+ context.__ATF_ARM_CAPTURE_FLOOR_V207__=observe;
+ const preparation=runInContext('('+captureQaLiteral('PREPARATION_CAPTURE_V177')+')',context);
  const exportFrames=runInContext('('+captureQaLiteral('CAPTURE_EXPORT')+')',context);
- return{observe,exportFrames,copies,encodings,out:stage=>context.__ATF_CAPTURE_OBSERVER_V163__?.[stage]};
+ return{observe,preparation,exportFrames,copies,encodings,out:stage=>context.__ATF_CAPTURE_OBSERVER_V163__?.[stage],
+  startup:()=>context.__ATF_PREPARATION_CAPTURE_V177__?.current};
 }
 function captureBinding(m,stage='floor'){
  const hold=m.grappleV153;
@@ -265,9 +268,9 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   const floor=qa.out('floor');
   assert.equal(floor.error,null);assert.equal(floor.ready,true);
   const recorded=floor.floor.state.match;
-  assert.equal(recorded.grappleV153.escapeProgress,67);assert.equal(qa.encodings.length,0);
+  assert.equal(recorded.grappleV153.escapeProgress,66);assert.equal(qa.encodings.length,0);
   // This declared six-tick transfer latency reproduces the old external P race:
-  // an unpaused CPU reaches escape=72 on tick five, before P could arrive.
+  // an unpaused CPU reaches escape=72 on tick six, before P could arrive.
   h.frame(6);const frozen=h.runtime.getState();
   t.diagnostic(JSON.stringify({floorTick:recorded.tick,floorEscape:recorded.grappleV153.escapeProgress,
    delayedReadTick:frozen.tick,paused:frozen.paused,holdId:frozen.grappleV153?.id,
@@ -294,6 +297,51 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   assert.equal(released.result,null);
   assert.ok(released.captureViewsV163.some(v=>v.role==='captive'&&v.phase==='recovery'&&v.grappleId===binding.holdId&&v.targetId===binding.targetId));
   assert.ok(qa.exportFrames({stage:'post',fields:['struggle','release']}).release);
+ }finally{h.runtime.stop();}
+});
+test('capture QA consumes an already-painted floor at arm before a grouped RAF can end the same native hold',async()=>{
+ const h=captureRuntimeHost();
+ try{
+  const acquired=await nativePlayerCaptureForPause(h);
+  while(h.runtime.getState().grappleV153?.escapeProgress<67)h.frame();
+  const arm=h.runtime.getState();assert.equal(arm.grappleV153.id,acquired.grappleV153.id);
+  const qa=captureQaObserver(h);assert.ok(qa.observe(captureBinding(arm)).armed);
+  const pausedAtArm=h.runtime.getState().paused;
+  // One delayed native RAF can advance six120Hz engine ticks before sampling.
+  // The floor already painted at arm must be protected synchronously, not lost.
+  h.frame(1,50);
+  assert.equal(pausedAtArm,true);
+  assert.equal(qa.out('floor').floor.state.match.tick,arm.tick);
+  assert.equal(qa.out('floor').error,null);assert.equal(qa.out('floor').ready,true);
+  assert.equal(h.runtime.getState().tick,arm.tick);
+  assert.equal(h.runtime.getState().grappleV153.id,arm.grappleV153.id);
+ }finally{h.runtime.stop();}
+});
+test('accepted keyboard startup arms first-floor capture before a delayed external acquisition return',async()=>{
+ const h=captureRuntimeHost(),qa=captureQaObserver(h);
+ try{
+  const acquired=await nativePlayerCaptureForPause(h,{onAttempt(m,special){
+   const armed=qa.preparation({matchId:m.config.matchId,round:m.round,
+    specialsBefore:m.fighters[0].stats.specials,startup:special.startup,after:true,captureFloor:true});
+   assert.ok(armed.armed);
+  }});
+  const startup=qa.startup().capture;assert.ok(startup);
+  const event=acquired.events.find(e=>e.type==='grapple-start-v153'&&e.grappleId===acquired.grappleV153.id);
+  const attack=acquired.events.findLast(e=>e.type==='attack'&&e.side==='player'&&e.id<event.id);
+  assert.equal(startup.proof.attackEventId,attack.id);assert.equal(startup.proof.attackId+1,attack.id);
+  assert.ok(qa.out('floor'));assert.equal(qa.out('floor').expected.attackEventId,attack.id);
+  // Declared observer-transfer latency, not a runtime input or scheduler change.
+  // The caller does not arm/rearm anything while real native frames continue.
+  h.frame(120);
+  const floor=qa.out('floor'),frozen=h.runtime.getState();
+  assert.equal(floor.error,null);assert.equal(floor.ready,true);assert.equal(frozen.paused,true);
+  assert.equal(floor.floor.state.match.grappleV153.id,acquired.grappleV153.id);
+  assert.equal(frozen.grappleV153.id,acquired.grappleV153.id);
+  assert.equal(frozen.tick,floor.floor.state.match.tick);
+  assert.equal(h.element('pause').clicks,1);assert.equal(qa.encodings.length,0);
+  assert.ok(floor.floor.state.match.captureViewsV163.some(v=>v.fullFloorPin&&v.pairedContacts
+   &&v.targetId===acquired.fighters[1].id&&v.grappleId===acquired.grappleV153.id
+   &&Math.abs(v.contacts.floorSupport[1]-v.floor)<1e-6));
  }finally{h.runtime.stop();}
 });
 test('capture QA rejects unavailable public pause, changed tick or identity, ended holds and lost floor support',()=>{
@@ -325,4 +373,9 @@ test('capture QA rejects unavailable public pause, changed tick or identity, end
   const qa=captureQaObserver(h);qa.observe(binding);for(const fn of queue.splice(0))fn();
   assert.ok(qa.out('floor').error,label+' must fail');assert.equal(qa.out('floor').ready,false,label+' cannot publish floor success');
  }
+ const h={runtime:{getState:()=>clone(before)},canvas:{width:1000,height:560},element:()=>({disabled:false,click(){}}),
+  now:()=>0,requestAnimationFrame(){}};
+ const qa=captureQaObserver(h);qa.observe({...binding,attackEventId:-1});
+ assert.match(qa.out('floor').error,/observed accepted special/);
+ assert.equal(qa.out('floor').ready,false,'a hold from another accepted special cannot be substituted');
 });

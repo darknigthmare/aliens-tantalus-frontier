@@ -111,6 +111,11 @@ CAPTURE_OBSERVER = r'''c=> {
     if(c.stage==='floor'){
       if(m.events.some(e=>e.type==='grapple-end-v153'&&e.tick>=c.sinceTick)){fail('Native hold ended before exact floor observation');return;}
       if(h){floorHoldId??=h.id;if(h.id!==floorHoldId){fail('A later hold cannot replace first floor contact');return;}
+        if(c.attackEventId!==undefined){
+          const contact=m.events.find(e=>e.type==='grapple-start-v153'&&e.grappleId===h.id),
+            attack=contact&&m.events.findLast(e=>e.type==='attack'&&e.side===c.attackerSide&&e.id<contact.id);
+          if(!attack||attack.kind!=='special'||attack.id!==c.attackEventId){
+            fail('First native hold does not belong to the observed accepted special');return;}}
         const r=receipt(m,'capture');
         if(c.after?r?.fullFloorPin&&r.pairedContacts:m.tick-h.bornTick>=55){
           const control=document.querySelector('[data-xt="pause"]');
@@ -142,7 +147,9 @@ CAPTURE_OBSERVER = r'''c=> {
     }
     requestAnimationFrame(sample);
   }
-  requestAnimationFrame(sample);
+  // The already-painted arm state may be the last admissible floor frame.
+  // Do not spend another RAF before activating its real public pause button.
+  sample();
   return{armed:true};
 }
 '''
@@ -169,10 +176,10 @@ def wait_observation(page, stage, field, timeout):
 def get_frame(page):
     return page.evaluate('''()=>({state:globalThis.__ATF_XENO_TRIALS_V96__.snapshot(),png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')})''')
 
-# A passive RAF observer is armed BEFORE the real keyboard special. It
-# captures the first *painted* native startup at the same tick as the attack
-# event, copying the canvas but never changing the match or its time. This
-# avoids losing short startups to the 40ms Playwright key press or PNG encoding.
+# The startup RAF observer is armed BEFORE the real keyboard special. It copies
+# the first painted native startup, then arms the floor observer for that exact
+# accepted attack. That observer clicks the public pause only at real floor
+# contact. No Playwright return or PNG encoding can delay its first-floor arm.
 PREPARATION_CAPTURE_V177 = r'''c => {
   const slot=globalThis.__ATF_PREPARATION_CAPTURE_V177__ ||= {};
   if(slot.current)slot.current.cancelled=true;
@@ -196,6 +203,16 @@ PREPARATION_CAPTURE_V177 = r'''c => {
           proof:{attackId:a.attack.id,attackEventId:attack.id,
             attackEventTick:attack.tick,frameTick:m.tick,
             attackAge:a.attack.age,clip:cue.clip,observedBy:'native RAF after real KeyL'}};
+        if(c.captureFloor){
+          // Arm on this accepted native startup, before Python can receive it.
+          // The first hold/floor stays bound to this event; a later attempt
+          // cannot silently replace it while metadata crosses the browser API.
+          current.floorArm=globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__({
+            stage:'floor',timeoutMs:45000,matchId:m.config.matchId,round:m.round,
+            fighterIds:m.fighters.map(f=>f.id),sides:m.fighters.map(f=>f.side),
+            attackerSide:'player',targetSide:'opponent',targetId:m.fighters[1].id,
+            holdId:null,sinceTick:m.tick,after:c.after,attackEventId:attack.id});
+        }
         return;
       }
     }
@@ -250,6 +267,9 @@ def acquire_player_capture(page, after, trace):
     preparations = {}
     observed_preparation_ids = set()
     last_observation_tick = -120
+    # Install the existing observer as a QA-local callback. The preparation RAF
+    # arms it at the actual accepted startup, before any Python transfer delay.
+    page.evaluate('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__=(' + CAPTURE_OBSERVER + ');}')
 
     def summarize(value):
         m = value['match']
@@ -344,7 +364,7 @@ def acquire_player_capture(page, after, trace):
                 armed = page.evaluate(PREPARATION_CAPTURE_V177, {
                     'matchId': m['config']['matchId'], 'round': m['round'],
                     'specialsBefore': a['stats']['specials'],
-                    'startup': value['specialStartup'], 'after': after})
+                    'startup': value['specialStartup'], 'after': after, 'captureFloor': True})
                 assert armed['armed'] and armed['samplesMax'] == 32
                 page.keyboard.press('KeyL', delay=40)
                 after_press = page.evaluate(read_contact)
@@ -489,7 +509,21 @@ def main():
                                'holdId': acquisition['grapple']['id'] if role == 'player-captor' else None,
                                'sinceTick': pm['tick'], 'after': after}
                     phase(name, 'floor observation with synchronous public button pause')
-                    armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
+                    if role == 'player-captor':
+                        # Reuse the observer armed by the accepted startup RAF.
+                        # Rearming here would discard its first native floor.
+                        armed = page.evaluate('''c=>{
+                          const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor,e=o?.expected;
+                          if(!o||e.matchId!==c.matchId||e.round!==c.round
+                            ||e.targetId!==c.targetId||e.attackerSide!==c.attackerSide||e.targetSide!==c.targetSide
+                            ||e.attackEventId!==c.attackEventId
+                            ||JSON.stringify(e.fighterIds)!==JSON.stringify(c.fighterIds)
+                            ||JSON.stringify(e.sides)!==JSON.stringify(c.sides))
+                            return{error:'Accepted startup did not arm the matching first native floor observer'};
+                          return{armed:true,error:o.error};
+                        }''', dict(binding, attackEventId=acquisition['successfulSpecial']['attackEvent']['id']))
+                    else:
+                        armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
                     assert not armed.get('error'), armed.get('error')
                     wait_observation(page, 'floor', 'ready', 45000)  # Acknowledges the completed native UI pause.
                     frozen = observed(page)['match'] or {}
@@ -497,7 +531,8 @@ def main():
                     # succeeds; the detached bitmap remains browser-local.
                     floor_observation = page.evaluate('''()=>{
                       const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor;
-                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction};
+                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction,
+                        expected:o.expected,armedState:o.armedState};
                     }''')
                     hold = floor_observation['floor']
                     m = hold['state']['match']
@@ -522,6 +557,7 @@ def main():
                     report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
                         'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen,
                         'floorTrace': floor_observation['trace'], 'publicControlAction': floor_observation.get('pauseAction'),
+                        'observerArm': {'expected': floor_observation['expected'], 'state': floor_observation['armedState']},
                         'compactDiagnostics': pause_diagnostics})
                     check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
                           failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
