@@ -7,6 +7,7 @@
 - `src/alien-base-snapshot-v1.js` importe **46 dossiers transversaux** et **200 fiches d'armes** référencées, par IDs immuables ; il n'importe **aucune stat numérique**.
 - `src/alien-base-bridge-v1.js` permet la résolution par ID commun `ab:*` ou ID jeu exact (`weapon-*`, `enemy-*`, etc.). L'absence de référence renvoie `null`, sans fusion de noms approximatifs.
 - `src/content.js` réexporte la consultation documentaire pour les systèmes existants. Aucun ennemi, arme, véhicule, équipement, monde ou personnage n'est automatiquement instancié par cette fonction.
+- `src/catalog-ui-v62.js` affiche désormais les références/traits partagés dans les dossiers du codex pour les IDs reconnus, avec liens HTTPS filtrés et une note explicite sur la fidélité non certifiée. Aucun réglage de combat n'est recopié.
 - Les **129 entrées `proposed-*`** restent documentaires. `runtimePresent` et `researchOnly` sont deux indicateurs séparés. Une référence sur une arme en jeu ne prouve pas une vue/animation fidèle 1:1.
 - Le registre existant des castes et les règles de combat ne sont pas modifiés. Les IDs de sauvegarde restent intacts.
 
