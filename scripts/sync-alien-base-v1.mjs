@@ -6,10 +6,12 @@ import { pathToFileURL } from 'node:url';
 
 const ENTITY_FIELDS = ['id','kind','name','sourceWork','continuity','gameRefs','traits','status','visualFidelity','sourceLinks','note'];
 const WEAPON_FIELDS = ['id','name','work','media','manufacturer','family','role','identityEvidence','gameStatus','admission','visualFidelity','sourceUrl','missing'];
+const MASTER_FIELDS = ['id','type','name','sourceIds','canonScope','statPolicy','review','notes'];
+const LINK_FIELDS = ['dossierId','sharedEntityId','gameRecordIds','relation','status','autoMergeStats'];
 const select = (obj, fields) => Object.fromEntries(fields.map(field => [field, obj[field] ?? null]));
 const unique = items => new Set(items.map(x => x.id)).size === items.length;
 
-export function renderAlienBaseSnapshotV1(entityFile, weaponFile) {
+export function renderAlienBaseSnapshotV1(entityFile, weaponFile, masterFile, linkFile) {
   if (entityFile.schemaVersion !== '1.0.0' || weaponFile.schemaVersion !== '1.0.0') {
     throw new Error('Unsupported Alien_base schema version');
   }
@@ -30,13 +32,33 @@ export function renderAlienBaseSnapshotV1(entityFile, weaponFile) {
       throw new Error('Unsafe weapon admission: ' + weapon.id);
     }
   }
+  if (masterFile?.schemaVersion !== 1 || linkFile?.schemaVersion !== 1 ||
+      !Array.isArray(masterFile.entities) || !Array.isArray(linkFile.links) ||
+      !unique(masterFile.entities) || !unique(linkFile.links.map(x => ({id:x.dossierId})))) {
+    throw new Error('Missing or inconsistent Alien_base master registry');
+  }
+  const known = new Set(entityFile.entries.map(x => x.id));
+  const masters = new Set(masterFile.entities.map(x => x.id));
+  for (const master of masterFile.entities) {
+    if (!/^[a-z0-9_]+[.][a-z0-9_]+$/.test(master.id) ||
+        master.statPolicy !== 'no_universal_gameplay_stats') {
+      throw new Error('Invalid master ID or imported universal combat stats: ' + master.id);
+    }
+  }
+  for (const link of linkFile.links) {
+    if (!known.has(link.dossierId) || !masters.has(link.sharedEntityId) || link.autoMergeStats !== false) {
+      throw new Error('Invalid Alien_base master link: ' + link.dossierId);
+    }
+  }
+  const masterEntities = masterFile.entities.map(item => select(item, MASTER_FIELDS));
+  const masterLinks = linkFile.links.map(item => select(item, LINK_FIELDS));
   const entries = entityFile.entries.map(item => select(item, ENTITY_FIELDS));
   const weapons = weaponFile.entries.map(item => select(item, WEAPON_FIELDS));
   const info = {
     schemaVersion: entityFile.schemaVersion,
     sourceRepo: 'darknigthmare/alien_base',
     sourceCommit: entityFile.sourceRevision,
-    projectedCount: { entities: entries.length, weapons: weapons.length },
+    projectedCount: { entities: entries.length, weapons: weapons.length, masterEntities: masterEntities.length, masterLinks: masterLinks.length },
     description: 'Static approved identity metadata only; not game stats or 1:1 certificate.'
   };
   return [
@@ -46,6 +68,8 @@ export function renderAlienBaseSnapshotV1(entityFile, weaponFile) {
     'export const ALIEN_BASE_SNAPSHOT_INFO_V1 = Object.freeze(' + JSON.stringify(info,null,2) + ');',
     'export const ALIEN_BASE_ENTITIES_V1 = Object.freeze(' + JSON.stringify(entries,null,2) + ');',
     'export const ALIEN_BASE_WEAPONS_V1 = Object.freeze(' + JSON.stringify(weapons,null,2) + ');',
+    'export const ALIEN_BASE_MASTER_ENTITIES_V1 = Object.freeze(' + JSON.stringify(masterEntities,null,2) + ');',
+    'export const ALIEN_BASE_MASTER_LINKS_V1 = Object.freeze(' + JSON.stringify(masterLinks,null,2) + ');',
     ''
   ].join('\n');
 }
@@ -58,7 +82,9 @@ export async function syncAlienBaseV1({
   const dir = resolve(basePath);
   const entities = JSON.parse(await readFile(resolve(dir, 'catalog/entities-v1.json'), 'utf8'));
   const weapons = JSON.parse(await readFile(resolve(dir, 'catalog/weapons-v1.json'), 'utf8'));
-  const desired = renderAlienBaseSnapshotV1(entities, weapons);
+  const master = JSON.parse(await readFile(resolve(dir, 'data/catalog.v1.json'), 'utf8'));
+  const links = JSON.parse(await readFile(resolve(dir, 'links/tantalus-entity-links.v1.json'), 'utf8'));
+  const desired = renderAlienBaseSnapshotV1(entities, weapons, master, links);
   const output = resolve(outputPath);
   if (check) {
     const actual = await readFile(output, 'utf8');
@@ -66,7 +92,7 @@ export async function syncAlienBaseV1({
   } else {
     await writeFile(output, desired, 'utf8');
   }
-  return {entities: entities.entries.length, weapons: weapons.entries.length, check, output};
+  return {entities: entities.entries.length, weapons: weapons.entries.length, master: master.entities.length, links:links.links.length, check, output};
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -80,5 +106,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     outputPath:get('--out') || 'src/alien-base-snapshot-v1.js',
     check:args.includes('--check')
   });
-  console.log((result.check ? 'MATCH' : 'UPDATED') + ': ' + result.entities + ' entities, ' + result.weapons + ' weapon dossiers -> ' + result.output);
+  console.log((result.check ? 'MATCH' : 'UPDATED') + ': ' + result.entities + ' entities, ' + result.weapons + ' weapon dossiers, ' + result.master + ' master IDs, ' + result.links + ' verified links -> ' + result.output);
 }
