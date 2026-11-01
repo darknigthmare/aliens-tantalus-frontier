@@ -3285,10 +3285,10 @@
       "Chantiers V165",
       "C165-ARCHIVES",
       "Archives et conversations manquantes",
-      "SOURCES_STILL_MISSING",
-      "Contenu Drive inconnu, pas absence démontrée. Lecture ChatGPT sans retour exploitable ; le 429 précédent reste historique. Encyclopédie, Blackout/Earth et V10 non récupérés.",
+      "RECHERCHE BORNÉE EFFECTUÉE — SOURCES CIBLES NON RÉCUPÉRÉES",
+      "Quatre dossiers inspectés, treize listings et huit documents lus ; quinze fichiers d’archives V1/V15/V16 et héros V3 identifiés par métadonnées. Aucun ZIP/RAR téléchargé ni manifeste binaire réconcilié. Les sous-dossiers Blackout/Earth inspectés sont vides. Encyclopédie brute 2363 entités et V10 non retrouvés dans ce périmètre. V198 contenu non réconcilié ; aucune absence globale affirmée.",
       "Obtenir les véritables fichiers sources ou exports vérifiables, inventorier leurs membres/hashs et comparer leurs lignes. Contenu Drive actuellement inconnu ; ne pas fabriquer de corpus source.",
-      "26_ChantiersV165!A9",
+      "26_ChantiersV165!A9 ; recherche Drive bornée du 2026-11-01 (détails dans archiveDiscovery du JSON de continuation)",
       0,
       0
     ],
@@ -11307,27 +11307,27 @@
       "Origine et retour du service Idris",
       "21_ChantiersV161!A8 ; 26_ChantiersV165!A8",
       "CORRIGÉ ET VÉRIFIÉ",
-      "Retour natif complet, sauvegarde/rechargement des portes et arrivées au poste effectivement observées.",
-      "3fb2ad87605a8eb57eb765b4985182ca8ace961c ; QA161 complète : 39 contrôles / 24 captures pour les deux routes. Rapport SHA256 8ac40f140dab902d72dcd759e48e1e095ab74239eebc11f8d1267fcf733476f2",
-      "Validation technique bornée à cette recette et ce commit ; aucune nouvelle approbation artistique 1:1."
+      "Origine et retour natifs, sauvegarde/rechargement exact des portes et arrivées au poste effectivement observées.",
+      "68023b0b014e57c26bb4ad2726507902323bf44e ; 39 contrôles / 22 captures (profil commun Idris + Leila). Rapport SHA256 ce526848983572e0421d590fd5f2670019a4ba20eb91e47414cb6bbcd0dbc0d9",
+      "Clôture technique bornée à la recette et au commit indiqués. Les sept services V165, les médias manquants et les approbations artistiques restent distincts."
     ],
     [
       "LEILA-RETURN",
       "Retour du service Leila",
       "21_ChantiersV161!A8 ; 26_ChantiersV165!A8",
       "CORRIGÉ ET VÉRIFIÉ",
-      "Retour natif complet, sauvegarde/rechargement des portes et arrivées au poste effectivement observées.",
-      "3fb2ad87605a8eb57eb765b4985182ca8ace961c ; QA161 complète : 39 contrôles / 24 captures pour les deux routes. Rapport SHA256 8ac40f140dab902d72dcd759e48e1e095ab74239eebc11f8d1267fcf733476f2",
-      "Validation technique bornée à cette recette et ce commit ; aucune nouvelle approbation artistique 1:1."
+      "Origine et retour natifs, sauvegarde/rechargement exact des portes et arrivées au poste effectivement observées.",
+      "68023b0b014e57c26bb4ad2726507902323bf44e ; 39 contrôles / 22 captures (profil commun Idris + Leila). Rapport SHA256 ce526848983572e0421d590fd5f2670019a4ba20eb91e47414cb6bbcd0dbc0d9",
+      "Clôture technique bornée à la recette et au commit indiqués. Les sept services V165, les médias manquants et les approbations artistiques restent distincts."
     ],
     [
       "ASHA-JUN",
       "Retour Jun et sortie du refuge Asha",
       "23_ChantiersV163!A7 ; 26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Compteurs et retour Jun stricts ; retrait physique devant le joueur au seuil à vérifier.",
-      "Recette V163 et tests adversariaux à rejouer.",
-      "Pas de traversée ou téléportation admise ; sortie E réellement observée."
+      "CORRIGÉ ET VÉRIFIÉ",
+      "Retour Jun exact, sortie E du refuge, occupation réelle de l’arrivée et retour d’Asha au domicile observés.",
+      "68023b0b014e57c26bb4ad2726507902323bf44e ; 28 contrôles / 17 captures (profil Asha). Rapport SHA256 9dc781e9c7673d8dc171c71643b58d92686b249cf26a8ab81e05e0e6e0787e58",
+      "Clôture technique bornée à la recette et au commit indiqués. Les sept services V165, les médias manquants et les approbations artistiques restent distincts."
     ],
     [
       "C165-PLAYER",
@@ -11467,8 +11467,16 @@
       "Les classeurs V173/V174/V177 restent absents du checkout. Archives Blackout/Earth, encyclopédie brute et V10 non récupérées dans les sources suivies."
     ],
     [
+      "Recherche documentaire bornée",
+      "Quatre racines Drive, treize listings, huit documents, quinze métadonnées d’archives. Aucune archive cible brute récupérée et aucune validation artistique ajoutée. Dossiers Blackout : https://drive.google.com/drive/folders/1G0jPaS5GTehIqecrEftTAzjb3IvYRVlI ; Earth : https://drive.google.com/drive/folders/1ssQLgJUGKj2cB5kM9RvIoUlcmi4CuD_C"
+    ],
+    [
       "Candidat combiné validé V204",
       "3fb2ad87605a8eb57eb765b4985182ca8ace961c ; 3893 tests réussis, 1 facultatif ignoré ; QA161 deux routes : 39 contrôles, 24 captures. La correction de sortie Asha V205 exige sa propre recette."
+    ],
+    [
+      "Recette finale V206",
+      "68023b0b014e57c26bb4ad2726507902323bf44e ; 3898 tests réussis, 1 facultatif ignoré ; services161 39/22, Asha163 28/17. Sources et distribution figées pendant les parcours."
     ]
   ],
   "evidence": {
@@ -11518,6 +11526,57 @@
           }
         ],
         "reportSha256": "8ac40f140dab902d72dcd759e48e1e095ab74239eebc11f8d1267fcf733476f2"
+      }
+    },
+    "v206": {
+      "sourceCommit": "68023b0b014e57c26bb4ad2726507902323bf44e",
+      "node": {
+        "files": 205,
+        "tests": 3899,
+        "pass": 3898,
+        "fail": 0,
+        "skipped": 1,
+        "logSha256": "08c3f9ced17b3da43d444713f3bcf756411da1393123d48cce057572bf5773e6"
+      },
+      "services": {
+        "status": "passed",
+        "sourceCommit": "68023b0b014e57c26bb4ad2726507902323bf44e",
+        "sourceUnchanged": true,
+        "routes": [
+          {
+            "id": "idris-engine",
+            "status": "passed"
+          },
+          {
+            "id": "leila-galley",
+            "status": "passed"
+          }
+        ],
+        "checks": 39,
+        "captures": 22,
+        "reportSha256": "ce526848983572e0421d590fd5f2670019a4ba20eb91e47414cb6bbcd0dbc0d9"
+      },
+      "asha": {
+        "status": "passed",
+        "sourceCommit": "68023b0b014e57c26bb4ad2726507902323bf44e",
+        "sourceUnchanged": true,
+        "routes": [
+          {
+            "id": "asha-refuge",
+            "status": "passed"
+          }
+        ],
+        "checks": 28,
+        "captures": 17,
+        "reportSha256": "9dc781e9c7673d8dc171c71643b58d92686b249cf26a8ab81e05e0e6e0787e58"
+      },
+      "distribution": {
+        "ok": true,
+        "buildId": "143.0.0+68023b0b014e",
+        "sourceCommit": "68023b0b014e57c26bb4ad2726507902323bf44e",
+        "files": 1976,
+        "shell": 613,
+        "manifestSha256": "f352cf471769c16e930ce51dfd3a9a60fbf469ac4aefcf6bec4b97471af452d4"
       }
     }
   },
@@ -14350,5 +14409,95 @@
       "REQUIRES_PER_ITEM_DESCENDANT_RECONCILIATION_NO_AUTOMATIC_PROMOTION — 48exigences :12CI ciblée,12partielles,24àdévelopper ;32QA :12CI,4partielles,16manuelles ;16prérequisV85 àdévelopper. Ne pas interpréter les184tests de la PR comme48exigences achevées.",
       "https://github.com/darknigthmare/yautja-la-longue-chasse/blob/dfa21d9d6a65d484e61792b201185fd5ea98f288/docs/clan-war-v146/Yautja_Guerres_Clans_Avenants_Production_V144_V146_2026-11-01.xlsx ; SHA256 1c38044d5ea702222336eb65e3378dd87c411918acf315403ebf86de5ef004e5"
     ]
-  ]
+  ],
+  "archiveDiscovery": {
+    "observedAt": "2026-11-01T01:08:19.772628+00:00",
+    "scope": "Bounded, read-only inspection of four supplied folders and directly relevant subfolders/documents; no general Drive audit.",
+    "counts": {
+      "rootFoldersInspected": 4,
+      "folderListings": 13,
+      "documentsRead": 8,
+      "actualArchiveFilesListed": 15,
+      "explicitArchiveMetadataReadbacks": 4,
+      "originalEncyclopediaWorkbookRecovered": 0,
+      "blackoutSourceArchivesRecovered": 0,
+      "earthSourceArchivesRecovered": 0,
+      "v10OriginalArchivesRecovered": 0,
+      "newArtisticallyClosedItems": 0,
+      "new1to1Approvals": 0
+    },
+    "findingStatus": "PARTIAL_SOURCE_LOCATIONS_AND_DOCUMENTS_IDENTIFIED_NO_TARGET_CLOSURE",
+    "findings": [
+      {
+        "workItem": "C165-ARCHIVES",
+        "scope": "DLC Blackout",
+        "state": "FOLDER_IDENTIFIED_NO_SOURCE_ARCHIVE_LISTED",
+        "evidence": [
+          "1G0jPaS5GTehIqecrEftTAzjb3IvYRVlI",
+          "12p6kX7xH-qmb4EbItBFzoAYf4bgG5SNW"
+        ],
+        "finding": "Le dossier Blackout contient uniquement « Archives — versions précédentes » ; ce sous-dossier est vide dans le listing lu. Aucun fichier de DLC, archive source ou code récupéré dans ce périmètre. Ne pas conclure à l’absence globale dans Drive."
+      },
+      {
+        "workItem": "C165-ARCHIVES",
+        "scope": "DLC Earth",
+        "state": "FOLDER_IDENTIFIED_NO_SOURCE_ARCHIVE_LISTED",
+        "evidence": [
+          "1ssQLgJUGKj2cB5kM9RvIoUlcmi4CuD_C",
+          "17GQEUlL-S4HTtsXstWEdRDLhV85l7Adp"
+        ],
+        "finding": "Le dossier Earth contient uniquement « V 12 — Dotations et continuité » ; ce sous-dossier est vide dans le listing lu. Pas de fichier DLC récupéré ici. Nom de dossier et numéro de version ne prouvent pas contenu livré."
+      },
+      {
+        "workItem": "master-encyclopedia-source",
+        "scope": "Classeur brut2363entités",
+        "state": "NOT_LOCATED_IN_BOUNDED_SEARCH",
+        "evidence": [
+          "Search2363",
+          "Searchencyclopédie",
+          "SearchTANTALUS ENCYCLOPEDIE",
+          "Searchencyclopedie alien",
+          "SearchALIEN2363",
+          "Exact-namefilter"
+        ],
+        "finding": "Aucun classeur encyclopédique brut correspondant identifié. Les résultats de recherche pertinents sont surtout des suivis V 196–V 198 et des documents de manquants, non le classeur source faisant autorité. Recherche bornée, pas preuve de non-existence."
+      },
+      {
+        "workItem": "dlc-v10-sources",
+        "scope": "Sprites V10 originaux",
+        "state": "V10_NOT_IDENTIFIED_OTHER_ARCHIVES_LOCATED",
+        "evidence": [
+          "1DiCr-CEeTzid2r2NfHzXasjv0xKwsYAB",
+          "1W55aQfcYXWHaKbzBrAwgvj5c6juojOLt",
+          "1j6FQJN7tQF8SarHiVEidEo7O9nQC0Q1j",
+          "1KH9jQpEsdSOIkKlcuyaacQ29pXV8dpoJ"
+        ],
+        "finding": "Métadonnées de vraies archives V 1, V 15 et V 16 trouvées, mais aucune archive intitulée V 10 ni appartenance V 10 prouvée. Le guide V 14 dit les anciennes V 6/V 8/V 11/V 12 non récupérées et sépare reconstructions et originaux. Ne pas substituer une nouvelle collection à V 10 sans manifestes comparés."
+      },
+      {
+        "workItem": "C165-ARCHIVES",
+        "scope": "Collection vilains V16",
+        "state": "ARCHIVE_METADATA_AND_DOCUMENT_CONTENT_READ",
+        "evidence": [
+          "1EBDy8qg5AiGdKnCiEY3L4qAF4KrsWrvR",
+          "1e9WgrCFKLZ2xc-VBXTeOMD6Nca7isV8i",
+          "1kf9FpeXzHiVmYaSsxGzhx1EbR8EfQMIh",
+          "16ZJkinsbQiHEv9eoSMGXiocXaJE7STx6"
+        ],
+        "finding": "README et rapport de contenu lus :206 PNG annoncés,150 sélections et 56 essais;27 ajouts dont 19 sélections/8 essais.617 membres V 15 annoncés préservés. Ce sont des déclarations historiques des documents lus, pas des hashes d’archives recomputés ici. Le rapport indique certified_1 to 1:false."
+      },
+      {
+        "workItem": "C165-ARCHIVES",
+        "scope": "Collection héros V3",
+        "state": "PARTIAL_ARCHIVE_METADATA_AND_HISTORICAL_REPORT_READ",
+        "evidence": [
+          "12jJDKeEr6Np5eeKVt54xhDkv4Lxmg7C5",
+          "1Tl88qeSWM2DBaigwn69mvBxHxGK2y41-",
+          "1Em-KeYZo9DiKq5a49rOW5CZpXWstgA8X",
+          "1dTy5nvSNiu75QD7iloRx1Qr4PZrK6FDY"
+        ],
+        "finding": "README déclare transfert partiel :complémentRAR 30 522 453 octets,ZIP 40 originaux 23 116 469 octets,galerieHTML 41 377 545 octets. Archive unifiée 188 668 239 octets explicitement non transférée à cette date. Rapport historique mentionne 267 originaux, mais ils ne sont pas tous présents dans ce dossier par cette seule preuve."
+      }
+    ]
+  }
 }

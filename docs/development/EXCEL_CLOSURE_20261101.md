@@ -18,6 +18,8 @@ Le classeur externe costumes V190 a été retrouvé et lu via sa projection CSV 
 
 Une clôture technique décrit le parcours réellement vérifié. Elle ne ferme pas la fidélité artistique, les sources de mouvement ou les limites de contenu. Aucun costume ni aucune arme n’est nouvellement certifié 1:1. Les classeurs externes V173/V174/V177 ne sont pas présents dans ce checkout. Les métadonnées du cumulatif V198 sont retrouvées, mais son contenu reste non réconcilié : lecture textuelle interrompue (`Transport closed`) et transfert binaire HTTP 403. L’inventaire global courant des Excel externes n’est donc pas établi. Les archives Blackout/Earth, l’encyclopédie brute et V10 restent à récupérer dans les sources de travail suivies.
 
+La recherche documentaire du 1er novembre précise ce dernier point : quatre dossiers Drive, treize listings et huit documents ont été inspectés ; quinze vrais fichiers d’archives sont identifiés par leurs métadonnées, principalement V1/V15/V16 et héros V3. Les sous-dossiers Blackout et Earth inspectés sont vides ; le classeur brut de 2 363 entités et V10 ne sont pas retrouvés dans ce périmètre. Aucun ZIP/RAR n’est téléchargé, aucun contenu ou CRC binaire n’est réconcilié. Ces observations bornées ne prouvent pas une absence globale dans Drive et ne substituent pas ces collections aux sources recherchées.
+
 ## Anciennes PR et concepts
 
 La demande de vérification couvre les deux jeux. L’onglet « Anciennes PR » contient les 27 PR Tantalus et les 64 PR Yautja, avec les promesses, les réalisations observées, les limites et les sources. L’ascendance est vérifiée : 23 PR Tantalus sont fusionnées dans `main` `4676a78`, quatre brouillons restent hors `main` ; Yautja compte 28 fusions dans `main` `f1856f6`, 34 PR ouvertes et deux PR fermées sans fusion (#32/#35), consolidées vers #31/#34.
@@ -36,7 +38,22 @@ V205 ajoute une courtoisie ciblée à la véritable factory de route d’Asha : 
 
 V205 publié `b58f0f3883cb1c6ae80a3501e29881dd3684ba0a` passe ensuite 3 896 tests, zéro échec, un test facultatif ignoré, ainsi que sources, build et distribution. Le parcours Asha isolé observe Jun, la vraie sortie E, l’occupation de destination et le retour au domicile avec deux traversées ; son rapport reste **échoué**, car sa dernière assertion exigeait deux arrivées alors qu’une reprise réelle du poste conduit à trois. Ce parcours échoué n’est pas transformé en recette réussie.
 
-V206 modifie seulement l’observateur et ses tests : depuis le compteur réellement observé à l’ouverture occupée, il exige exactement une arrivée supplémentaire au véritable domicile, avec une unique transition de service, appuis et traversée couverte. Le cas historique 1 → 2 reste accepté ; le vrai cas 2 → 3 et les 1 188 observations du run V205 sont vérifiés, tandis que les compteurs et buts inventés sont rejetés. Soixante-six tests ciblés et 37 contrôles audit/cumulatif passent avant la recette finale. Les 59 constantes historiques sont préservées ; le moteur V205 n’est pas modifié. La nouvelle recette complète sur le commit partagé reste à exécuter.
+V206 modifie seulement l’observateur et ses tests : depuis le compteur réellement observé à l’ouverture occupée, il exige exactement une arrivée supplémentaire au véritable domicile, avec une unique transition de service, appuis et traversée couverte. Le cas historique 1 → 2 reste accepté ; le vrai cas 2 → 3 et les 1 188 observations du run V205 sont vérifiés, tandis que les compteurs et buts inventés sont rejetés. Soixante-six tests ciblés et 37 contrôles audit/cumulatif passent avant la recette finale. Les 59 constantes historiques sont préservées ; le moteur V205 n’est pas modifié. Ces contrôles préparatoires sont distincts de la recette suivante.
+
+### Recette finale et clôtures techniques
+
+Le commit figé **`68023b0b014e57c26bb4ad2726507902323bf44e`** passe **3 898 tests dans 205 fichiers**, zéro échec, un test facultatif du pack physique V175 ignoré, puis les contrôles des sources, la construction et la distribution. Les deux processus navigateur se terminent normalement avec code 0 :
+
+| Recette native | Parcours | Contrôles | Captures |
+| --- | --- | ---: | ---: |
+| Services V161 | Idris et Leila | 39 | 22 |
+| Service V163 | Asha avec prérequis Jun, sortie E et arrivée occupée | 28 | 17 |
+
+Les sources, les modules HTTP et l’identité du build restent identiques avant/après chaque recette, avec zéro erreur navigateur, requête ou HTTP. Jun revient réellement à 3158/532 avec deux traversées, deux voyages en ascenseur et 496 unités verticales. Asha sort par E, respecte l’arrivée réellement occupée puis rejoint son domicile 561 avec une seule arrivée supplémentaire 2 → 3. Les retours Idris 1 → 2 et Leila 1 → 3 sont eux aussi observés ; leurs portails et leurs arrivées au poste sont contrôlés séparément.
+
+Les **trois sous-parcours techniques** `IDRIS-WATCH`, `LEILA-RETURN` et `ASHA-JUN` sont donc clos dans l’onglet « Clôture » pour ces recettes et ce commit. Leurs liens remontent à `21_ChantiersV161!A8` et `23_ChantiersV163!A7` ; cela ne ferme pas tous les huit circuits de cette dernière ligne ni le chantier global `C165-ROUTES`. Les sept services complexes, les autres protocoles, les sources non récupérées et la fidélité artistique restent explicitement ouverts. Les recettes sont automatisées avec fixtures initiales déclarées, pas des validations humaines ou artistiques 1:1. Les preuves et empreintes figurent dans `evidence.v206` du JSON.
+
+La mise à jour de clôture qui suit ce commit ne modifie que le classeur, ses données et ce document. Les résultats ci-dessus restent attribués au commit réellement testé ; les CI de publication sont appréciées séparément sur leur tête exacte.
 
 Les dix-neuf classeurs antérieurs sont préservés. Le nouveau classeur dispose de formules recalculées et d’un test de réaction du compteur de régressions à une modification temporaire de statut. Il est inspecté et rendu avant livraison. Les documents de développement et le classeur restent exclus de la distribution jouable.
 
