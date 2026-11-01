@@ -17,7 +17,9 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
   ARMORY_V174_ECONOMY_NEW_SOURCES, V177_SOURCE_SUCCESSORS,
   V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
-  verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS } from './audit-succession-v163.mjs';
+  verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS,
+  V178_RUNTIME_SUCCESSORS, V178_VERIFIER_SUCCESSORS, V178_QA_SUCCESSORS,
+  reviewedLiveDigestV178, verifyFollowupV178 } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -28,7 +30,7 @@ const previous = JSON.parse(read(prefix + 'progress-v162.json'));
 const current = JSON.parse(read(prefix + 'progress-v163.json'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
-const effectiveSource = (path, historical) => V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical;
+const effectiveSource = (path, historical) => reviewedLiveDigestV178(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
 
 test('V163 keeps all original task identities, roster and historical table cells unchanged', () => {
   assert.equal(current.lot, 'V163');
@@ -101,7 +103,8 @@ test('the full current bridge validates runtime bytes and older default returns 
     ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V177_SOURCE_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
-      .map(([path, receipt]) => [path, receipt.currentSha256])) };
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])) };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
@@ -182,9 +185,9 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
-    assert.equal(sha(read(path)),V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256,path);
+    assert.equal(sha(read(path)),reviewedLiveDigestV178(path,V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256),path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
-    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V17[67] verifier/,path);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V17[678] verifier/,path);
   }
 });
 
@@ -222,17 +225,17 @@ test('V177 retains every reviewed V167 through V176 receipt instead of rewriting
       || V165_VERIFIER_SUCCESSORS_V173[path] || V165_VERIFIER_SUCCESSORS_V171[path];
     assert.equal(receipt.previousSha256, previousReceipt.currentSha256, path);
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
-    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), receipt.currentSha256);
+    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), reviewedLiveDigestV178(path,receipt.currentSha256));
     const corrupted = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
-      error => error.message.includes('Unreviewed V177 verifier') && error.message.includes(path), path);
+      error => /Unreviewed V17[78] verifier/.test(error.message) && error.message.includes(path), path);
   }
 });
 
 test('V177 source successors reject unreviewed bytes even when the live JSON pin is forged to match them', () => {
   assert.ok(Object.keys(V177_SOURCE_SUCCESSORS).length >= 5, 'The actual source continuation must be explicit.');
   for (const [path, receipt] of Object.entries(V177_SOURCE_SUCCESSORS)) {
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), reviewedLiveDigestV178(path,receipt.currentSha256), path);
     assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
     const bytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
     const corrupted = name => name === path ? bytes : read(name);
@@ -584,4 +587,141 @@ test('only the reviewed three V163 documentary artifacts are admitted', () => {
   for (const path of ['docs/private-audit-v163.json', 'docs/forge/xeno-trials/unreviewed-v163.json',
     'INVENTAIRE_MANQUES_REPRIS_V163.xlsx', 'reprise-v163/release-index.json'])
     assert.equal(isPublicDistributionPathV86(path), false, path);
+});
+
+test('V178 resolves only exact MainM successors while every V177 witness stays historical', () => {
+  assert.deepEqual(verifyFollowupV178(current),{historicalRuntimeSources:147,runtimeSuccessors:2,
+    verifierSuccessors:3,qaSuccessors:1,documentarySnapshots:3});
+  const effective=resolveAuditSourcesV163(previous,read,{effective:true});
+  assert.deepEqual(Object.keys(effective).filter(path=>Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
+    Object.keys(current.runtimeSourceSha256).sort());
+  assert.deepEqual(Object.keys(effective).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
+    ['src/tactical-reload-v77.js','src/weapon-actions-v130.js'], 'Only the two pre-existing arsenal compatibility exports remain outside the147witness');
+  assert.equal(current.runtimeSourceSha256['src/npc-interdeck-routes-v165.js'],
+    '5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a');
+  assert.equal(effective['src/npc-interdeck-routes-v165.js'],V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256);
+  assert.equal(effective['sw.js'],V178_RUNTIME_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(current.candidateLocalValidationV177.testedCommit,'70adab8e66b8b2ee3fc2a731a182dd20d2a6af31');
+  for(const map of [V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS])
+    for(const [path,receipt] of Object.entries(map)) {
+      assert.equal(sha(read(path)),receipt.currentSha256,path);
+      assert.throws(()=>reviewedLiveDigestV178(path,'0'.repeat(64)),/Incorrect MainM endpoint/);
+      const changed=name=>name===path?Buffer.concat([read(name),Buffer.from('\nUNREVIEWED')]):read(name);
+      assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),undefined,path);
+    }
+  for(const alter of [
+    c=>{delete c.followupV178;},c=>{c.followupV178.runtimeChanges=[];},
+    c=>{c.followupV178.verifierChanges.pop();},c=>{c.followupV178.qaChanges[0].previousSha256='0'.repeat(64);},
+    c=>{c.followupV178.runtimeChanges.push({...c.followupV178.runtimeChanges[0],path:'src/unknown-v178.js'});},
+    c=>{c.runtimeSourceSha256['src/npc-interdeck-routes-v165.js']=V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256;},
+    c=>{c.followupV177.sourceChanges[0].reason+=' unreviewed';},
+    c=>{c.tables['27_RepriseV177'].rows[0][1]='unreviewed';},
+    c=>{c.candidateLocalValidationV177.testedCommit='0'.repeat(40);},
+    c=>{c.followupV178.historicalV177ResultsTransferred=true;},c=>{c.followupV178.releaseEvidence.ci={status:'success'};}
+  ]) {const forged=clone(current);alter(forged);assert.throws(()=>verifyFollowupV178(forged));}
+});
+
+// Append to verify-audit-continuation-v163.mjs; existing test/assert/read/sha/
+// execFileSync imports are sufficient. This tests a dated documentary snapshot,
+// not execution of its cited gameplay, CI, external reports or Excel engine.
+test('the imported PR27 closure snapshot retains exact bytes, dated provenance and all open route/art limits', () => {
+  const folder = 'docs/development/';
+  const pinned = {
+    'CLOTURE_EXCEL_20261101.xlsx': '2a607d9fe749056cb2099cc6776a5ccb227068186eb422b7ab6253b05a6609bd',
+    'EXCEL_CLOSURE_20261101.json': '4f5aaf3a4b7e927d34fd75acc3e096314280323a27d72d368572cf63b9dca1c8',
+    'EXCEL_CLOSURE_20261101.md': '284fae29f99bbf3fb23633510bfd0fb68fdb9350335db144e89b3ac6830e9f47'
+  };
+  for (const [name, digest] of Object.entries(pinned)) assert.equal(sha(read(folder + name)), digest, name);
+  const document = JSON.parse(read(folder + 'EXCEL_CLOSURE_20261101.json'));
+  const markdown = read(folder + 'EXCEL_CLOSURE_20261101.md').toString();
+  const snapshot = document.integrationSnapshotV177;
+  assert.equal(document.date, '2026-11-01');
+  assert.equal(document.repository, 'darknigthmare/aliens-tantalus-frontier');
+  assert.equal(document.baselineHead, 'ec099872d3fc59465c6d17e30b577629b462f139', 'ec099 is a cited historical baseline');
+  assert.equal(snapshot.kind, 'IMPORTED_DOCUMENTARY_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION');
+  assert.equal(snapshot.sourcePullRequest, 27);
+  assert.equal(snapshot.sourceCommit, 'beacabe75b580233d5c205cdfa4911f19c6277f3');
+  assert.equal(snapshot.mainAtImport, '5d9f28f05df732a71a17cec013aa39ebab6d4de1');
+  assert.equal(snapshot.historicalClaimsRetainTheirCitedCommits, true);
+  assert.equal(snapshot.currentRuntimeOrAuditReplaced, false);
+  assert.deepEqual([snapshot.newApprovals1to1, snapshot.newArtClosed], [0, 0]);
+  assert.equal(document.policies.noHistoricalSuccessTransferred, true);
+  assert.equal(document.policies.approved1to1, 0);
+  assert.deepEqual([document.continuation.artClosed, document.continuation.approved1to1], [0, 0]);
+  assert.equal(document.continuation.sevenRoutesRemainPartial, true);
+  assert.equal(document.continuation.noGlobalCurrentExhaustivenessClaim, true);
+  assert.equal(document.rows.length, 1022);
+  assert.equal(new Set(document.rows.map(row => JSON.stringify(row.slice(0, 2)))).size, 1022);
+  assert.ok(document.rows.every(row => row.length === 9 && row[7] === 0 && row[8] === 0));
+  const routes = document.rows.filter(row => row[0] === 'Routes PNJ');
+  assert.equal(routes.length, 7);
+  assert.ok(routes.every(row => row[3].startsWith('PARTIEL')));
+  assert.match(markdown, /Instantané documentaire importé de la PR #27/);
+  assert.match(markdown, /Cet import ne valide aucun parcours sur `main`/);
+  assert.match(markdown, /pas des validations humaines ou artistiques 1:1/);
+  assert.match(markdown, /ces résultats ne sont pas transférés|Ces résultats ne sont pas transférés/);
+  const script = String.raw`
+import base64,collections,io,json,posixpath,sys,xml.etree.ElementTree as E,zipfile
+payload=json.loads(sys.stdin.read()); record=payload['document']
+ns={'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
+with zipfile.ZipFile(io.BytesIO(base64.b64decode(payload['workbook']))) as archive:
+ assert archive.testzip() is None
+ names=archive.namelist()
+ assert len(names)==len(set(names))
+ assert not any('/externalLinks/' in n or n.endswith('vbaProject.bin') for n in names)
+ assert all(not n.startswith('/') and '..' not in n.split('/') for n in names)
+ shared=[]
+ if 'xl/sharedStrings.xml' in names:
+  shared=[''.join(si.itertext()) for si in E.fromstring(archive.read('xl/sharedStrings.xml')).findall('s:si',ns)]
+ rels={r.get('Id'):r.get('Target') for r in E.fromstring(archive.read('xl/_rels/workbook.xml.rels'))}
+ sheets={};formulas={}
+ for sheet in E.fromstring(archive.read('xl/workbook.xml')).findall('s:sheets/s:sheet',ns):
+  target=rels[sheet.get('{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id')]
+  path=target.lstrip('/') if target.startswith('/') else posixpath.normpath('xl/'+target)
+  assert path.startswith('xl/') and '..' not in path.split('/')
+  cells={};fs={}
+  for cell in E.fromstring(archive.read(path)).findall('.//s:c',ns):
+   assert cell.get('t')!='e', (sheet.get('name'),cell.get('r'),'cached formula error')
+   value=cell.find('s:v',ns);inline=cell.find('s:is',ns);formula=cell.find('s:f',ns)
+   cells[cell.get('r')]=''.join(inline.itertext()) if inline is not None else shared[int(value.text)] if cell.get('t')=='s' and value is not None else value.text if value is not None else ''
+   if formula is not None:fs[cell.get('r')]=formula.text
+  sheets[sheet.get('name')]=cells;formulas[sheet.get('name')]=fs
+ assert list(sheets)==['Clôture','Travaux ouverts','Anciennes PR','Repères Excel']
+ assert formulas=={'Clôture':{'B7':'COUNTIFS(D13:D28,"CORRIGÉ ET VÉRIFIÉ")',
+  'B8':"SUM('Travaux ouverts'!I6:I1027)",
+  'B9':'COUNTIFS(D13:D28,"CORRECTIF VALIDÉ (LOCAL)")+COUNTIFS(D13:D28,"CORRECTIF VALIDÉ (CI)")'},
+  'Travaux ouverts':{},'Anciennes PR':{},'Repères Excel':{}}
+ assert [sheets['Clôture'][c] for c in ['B7','B8','B9']]==['3','0','3']
+ assert 'PR27 beacabe75' in sheets['Clôture']['A3'] and 'main5d9f28f0' in sheets['Clôture']['A3']
+ assert 'aucune recette transférée' in sheets['Clôture']['A3']
+ compared=0
+ for key,sheet,start in [('rows','Travaux ouverts',6),('actions','Clôture',13),('prRows','Anciennes PR',6),('excelRows','Repères Excel',6)]:
+  for number,row in enumerate(record[key],start):
+   for col,expected in enumerate(row):
+    assert str(expected)==sheets[sheet].get(chr(65+col)+str(number),''),(key,number,col)
+    compared+=1
+ assert compared==10276
+ for key,sheet in [('headers','Travaux ouverts'),('prHeaders','Anciennes PR'),('excelHeaders','Repères Excel')]:
+  for col,expected in enumerate(record[key]):assert sheets[sheet][chr(65+col)+'5']==expected
+ assert dict(collections.Counter(row[0] for row in record['rows']))==record['counts']
+ assert dict(collections.Counter(row[0] for row in record['prRows']))=={'Tantalus':27,'Yautja':64}
+ assert len(record['excelRows'])==21 and len({row[1] for row in record['excelRows']})==7
+ assert len(record['workbookFiles'])==19
+ actions=record['actions']
+ initial=lambda rows:sum(row[3]=='CORRIGÉ ET VÉRIFIÉ' for row in rows)
+ followup=lambda rows:sum(row[3] in ['CORRECTIF VALIDÉ (LOCAL)','CORRECTIF VALIDÉ (CI)'] for row in rows)
+ assert initial(actions)==followup(actions)==3
+ for counter,status in [(initial,'CORRIGÉ ET VÉRIFIÉ'),(followup,'CORRECTIF VALIDÉ (LOCAL)')]:
+  rows=[list(row) for row in actions];idx=next(i for i,row in enumerate(rows) if row[3]==status)
+  rows[idx][3]='DIAGNOSTIC EN COURS';assert counter(rows)==2
+  rows[idx][3]=status;assert counter(rows)==3
+ assert sum(row[8] for row in record['rows'])==0
+print(json.dumps({'sheets':len(sheets),'formulas':sum(len(v) for v in formulas.values()),
+ 'sourceCells':compared,'records':len(record['rows']),'partialRoutes':7,'formulaErrors':0}))
+`;
+  const result = JSON.parse(execFileSync('python3', ['-B', '-c', script], {
+    input: JSON.stringify({ document, workbook: read(folder + 'CLOTURE_EXCEL_20261101.xlsx').toString('base64') }),
+    encoding: 'utf8', maxBuffer: 1024 * 1024
+  }));
+  assert.deepEqual(result, { sheets: 4, formulas: 3, sourceCells: 10276, records: 1022, partialRoutes: 7, formulaErrors: 0 });
 });

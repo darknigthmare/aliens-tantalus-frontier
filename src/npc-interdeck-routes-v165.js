@@ -725,6 +725,25 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       return Boolean(passing||super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
     }
     getNpcServiceOwnerYieldGoalV165(routeId,actor) {
+      if(routeId==='inez-civil') {
+        const a=this.npcInterdeckStateV165?.routes[routeId]?.actor;
+        const idris=this.getNpcServiceActorV161?.('idris-engine');
+        const watch=this.getNpcServicePhysicalStateV165?.('idris-engine');
+        const door=HUB_ANNEX_BY_ID_V137['engine-room'].parentDoorBounds;
+        // A real eastbound return can meet Idris coming west to this rear
+        // portal. Let the passenger walk into the existing west passing bay
+        // until the actual owner crosses the covered leaf. Both bodies keep
+        // their native controller,12px clearance and measured floor distance.
+        // Merely forcing duty here would send Idris through the passenger;
+        // releasing his duty would leave his parent post across the lift path.
+        if(a?.crewId==='crew-09-inez-harlow'&&actor===this.npcInterdeckBodiesV165?.get(routeId)
+          &&a.deck===3&&a.roomId==='reactor'&&a.direction==='return'&&a.stage==='walking-lift'
+          &&a.y===532&&!a.lift&&idris?.crewId==='crew-03-idris-kwan'&&idris.alive!==false&&!idris.downed
+          &&idris.roomId==='reactor'&&idris.y===532&&idris.w===44&&idris.h===92&&idris.x>a.x
+          &&watch?.targetRoomId==='engine-room'&&['daily-schedule','occupied'].includes(watch.reason)
+          &&overlap({x:a.x,y:a.y,w:44,h:92},{x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20}))
+          return door.x+(door.w-44)/2-44-12;
+      }
       if(routeId==='david-durandal') {
         const a=this.npcInterdeckStateV165?.routes[routeId]?.actor,cal=this.getNpcCalLogisticsActorV165?.();
         if(a?.roomId==='vehicle-bay'&&a.direction==='return'&&a.stage==='walking-lift'&&cal?.roomId==='vehicle-bay'&&a.x<cal.x) {

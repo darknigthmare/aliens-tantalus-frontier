@@ -31592,5 +31592,84 @@
     "ci": null,
     "review": null,
     "merge": null
+  },
+  "followupV178": {
+    "schema": 178,
+    "baselineCommit": "5d9f28f05df732a71a17cec013aa39ebab6d4de1",
+    "baselineProgressSha256": "e6a0feb4df2aa9595c3dca1319f496af69c66d424b19f9d3a5fe401ab2897b80",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "runtimeSourceCount": 147,
+    "scope": "Recover already blocked legacy Inez Saves and retain bounded native QA contracts; import dated PR27 documentary snapshots.",
+    "historicalV177ResultsTransferred": false,
+    "sourceByteIdenticalToV177": false,
+    "runtimeChanges": [
+      {
+        "path": "src/npc-interdeck-routes-v165.js",
+        "previousSha256": "5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a",
+        "currentSha256": "7fc995925c98d1a65fc75538d026320139b9f697f53e7b68d7701bde29bb01a4"
+      },
+      {
+        "path": "sw.js",
+        "previousSha256": "282448609033fdb663983352987cee04c545e4fd4c66d67a227a83df6ec90675",
+        "currentSha256": "cca2f58e7c34952e15d0238edeb9d5606d8766b4bea15da955b61aa3a718bfaf"
+      }
+    ],
+    "verifierChanges": [
+      {
+        "path": "scripts/verify-npc-interdeck-routes-v165.mjs",
+        "previousSha256": "c6046941f7d20be320dec7603ee89d0c6b7c80f8149b89a42efd1c3be7a2e64b",
+        "currentSha256": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080"
+      },
+      {
+        "path": "scripts/verify-audit-continuation-v163.mjs",
+        "previousSha256": "8e64247b3186d36a62352245ea6aadb6c2f6c7d117a8ffc13d4962990ba08dfd",
+        "currentSha256": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291"
+      },
+      {
+        "path": "scripts/verify-public-release-v86.mjs",
+        "previousSha256": "e56b5473e6e3d9e1f45b64cd10489544886229853be1cc75bdf8e1b1a099e705",
+        "currentSha256": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab"
+      }
+    ],
+    "qaChanges": [
+      {
+        "path": "scripts/qa-npc-interdeck-native-v165.py",
+        "previousSha256": "94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3",
+        "currentSha256": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a"
+      }
+    ],
+    "documentarySnapshots": [
+      {
+        "path": "docs/development/CLOTURE_EXCEL_20261101.xlsx",
+        "sha256": "2a607d9fe749056cb2099cc6776a5ccb227068186eb422b7ab6253b05a6609bd",
+        "state": "DATED_IMPORTED_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION"
+      },
+      {
+        "path": "docs/development/EXCEL_CLOSURE_20261101.json",
+        "sha256": "4f5aaf3a4b7e927d34fd75acc3e096314280323a27d72d368572cf63b9dca1c8",
+        "state": "DATED_IMPORTED_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION"
+      },
+      {
+        "path": "docs/development/EXCEL_CLOSURE_20261101.md",
+        "sha256": "284fae29f99bbf3fb23633510bfd0fb68fdb9350335db144e89b3ac6830e9f47",
+        "state": "DATED_IMPORTED_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION"
+      }
+    ],
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "newPngAssets": 0,
+    "approved1to1": 0,
+    "fullArtTasksClosed": 0,
+    "humanParticipants": 0,
+    "primaryArchivesRecovered": 0,
+    "sevenRoutesClosed": false,
+    "allFeedsCertifiedStable": false,
+    "forgeState": "DEFERRED_BY_USER"
   }
 }

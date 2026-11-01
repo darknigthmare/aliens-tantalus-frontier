@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-open-workstreams-v177-r2';
+const CACHE = 'atf-v143-open-workstreams-v178';
 const SHELL = Object.freeze([
   '/src/hub-room-enrichment-v177.js',
   '/src/hub-batch-command-v177.js',
