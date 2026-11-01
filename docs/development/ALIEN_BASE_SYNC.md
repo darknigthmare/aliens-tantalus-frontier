@@ -43,3 +43,7 @@ L'export prend en compte les **catalogues vivants**, au-delà des 218 seeds du r
 ## Contrôles
 
 `npm run test:alien-base` est inclus automatiquement dans `npm run test:all` par `scripts/test-release-v143.mjs`. Les tests vérifient l'intégrité de la projection, sa reproductibilité, les identités exactes, les 129 propositions non admises, l'absence de mutation des registres et la séparation export `identity` / `gameplayTuning`.
+
+## IDs maîtres : compatibilité réelle entre jeux
+
+Le snapshot conserve désormais **84 entités maîtres** de `data/catalog.v1.json` et **45 liaisons exactes** depuis `links/tantalus-entity-links.v1.json`, à côté des 46 dossiers détaillés `ab:*`. Le jeu peut résoudre `enemy-008-queen`, `ab:organism:queen-aliens-1986` et `caste.queen` vers une même identité documentaire, sans changer les IDs existants ni les sauvegardes. La fonction publique `resolveAlienBaseMasterEntityV1()` renvoie la fiche du catalogue maître. Une fiche UPP reste sans correspondance certifiée. Aucune statistique d'équilibrage n'est copiée depuis la base.
