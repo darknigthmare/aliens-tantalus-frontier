@@ -24,7 +24,10 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   NPC_INTERDECK_V203_WATCH_SUCCESSORS, NPC_INTERDECK_VERIFIER_V203, NPC_SERVICE_OBSERVER_V203,
   NPC_INTERDECK_V204_PASSAGE_SUCCESSORS, NPC_INTERDECK_VERIFIER_V204, NPC_SERVICE_OBSERVER_V204,
   NPC_SOURCE_EXIT_V205_SUCCESSORS, NPC_SERVICE_OBSERVER_V205,
-  NPC_SERVICE_OBSERVER_V206,
+  NPC_SERVICE_OBSERVER_V206, NPC_INTERDECK_VERIFIER_V207, TRIALS_CAPTURE_OBSERVER_V207,
+  NPC_INTERDECK_V207_RETURN_SUCCESSORS,
+  NPC_SERVICE_OBSERVER_V207, V165_VERIFIER_SUCCESSORS_V206, V165_VERIFIER_SUCCESSORS_V207,
+  V165_VERIFIER_STAGES_V184, V165_VERIFIER_STAGES_V207,
   ARMORY_V178_RENDER_SUCCESSORS, ARMORY_V186_CROP_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
@@ -118,6 +121,8 @@ test('the full current bridge validates runtime bytes and older default returns 
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V204_PASSAGE_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V207_RETURN_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
@@ -169,7 +174,9 @@ test('V198 physically local Jun passage only: preserve remote dependency graph w
     'The authentic watch correction retains the exact V201 corridor predecessor');
   const v204=NPC_INTERDECK_V204_PASSAGE_SUCCESSORS[path];
   assert.equal(v204.previousSha256,v203.currentSha256);
-  assert.equal(sha(read(path)),v204.currentSha256);
+  const v207=NPC_INTERDECK_V207_RETURN_SUCCESSORS[path];
+  assert.equal(v207.previousSha256,v204.currentSha256);
+  assert.equal(sha(read(path)),v207.currentSha256);
   const oldVerifier=NPC_INTERDECK_VERIFIER_V198;
   const verifier=NPC_INTERDECK_VERIFIER_V201;
   assert.equal(verifier.path,NPC_INTERDECK_VERIFIER_V188.path);
@@ -179,33 +186,94 @@ test('V198 physically local Jun passage only: preserve remote dependency graph w
     'V201 test must explicitly follow historical V198 behavior');
   assert.equal(NPC_INTERDECK_VERIFIER_V203.previousSha256,verifier.currentSha256);
   assert.equal(NPC_INTERDECK_VERIFIER_V204.previousSha256,NPC_INTERDECK_VERIFIER_V203.currentSha256);
-  assert.equal(sha(read(verifier.path)),NPC_INTERDECK_VERIFIER_V204.currentSha256);
+  assert.equal(NPC_INTERDECK_VERIFIER_V207.previousSha256,NPC_INTERDECK_VERIFIER_V204.currentSha256);
+  assert.equal(sha(read(verifier.path)),NPC_INTERDECK_VERIFIER_V207.currentSha256);
   const mutatedPath=target=>target===path
     ?Buffer.concat([read(target),Buffer.from('UNREVIEWED_DOOR_LEASE')]):read(target);
   assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutatedPath),
-    /Unreviewed V204 physical service passage source/,path);
+    /Unreviewed V207 interdeck return source/,path);
   const mutatedTest=target=>target===verifier.path
     ?Buffer.concat([read(target),Buffer.from('UNREVIEWED_BEHAVIOR')]):read(target);
   assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutatedTest),
-    /Unreviewed V204 interdeck behavior verifier/,verifier.path);
+    /Unreviewed V207 interdeck behavior verifier/,verifier.path);
+});
+
+test('V207 pins the native interdeck observer and rejects changed verifier or driver bytes',()=>{
+  const receipt=NPC_INTERDECK_VERIFIER_V207;
+  assert.equal(receipt.path,NPC_INTERDECK_VERIFIER_V204.path);
+  assert.equal(receipt.previousSha256,NPC_INTERDECK_VERIFIER_V204.currentSha256);
+  assert.equal(NPC_INTERDECK_VERIFIER_V204.currentSha256,
+    '485b26f60e985a38295649c6539a705c8599eada4bc3a9d2c258053b4d9dc3c9');
+  assert.equal(receipt.driver,'scripts/qa-npc-interdeck-native-v165.py');
+  assert.equal(receipt.previousDriverSha256,
+    '94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3');
+  assert.equal(sha(read(receipt.path)),receipt.currentSha256);
+  assert.equal(sha(read(receipt.driver)),receipt.driverSha256);
+  assert.deepEqual(resolveLatestV165VerifierReceipt(receipt.path),{
+    version:207,previousSha256:receipt.previousSha256,currentSha256:receipt.currentSha256
+  });
+  for(const [path,label]of [[receipt.path,'interdeck behavior verifier'],[receipt.driver,'native interdeck driver']]){
+    const changed=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_V207_CABIN')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),
+      new RegExp('Unreviewed V207 '+label),path);
+  }
+});
+
+test('V207 Inez reactor return explicitly follows V204 and rejects unreviewed runtime bytes',()=>{
+  const path='src/npc-interdeck-routes-v165.js';
+  const receipt=NPC_INTERDECK_V207_RETURN_SUCCESSORS[path];
+  assert.deepEqual(Object.keys(NPC_INTERDECK_V207_RETURN_SUCCESSORS),[path]);
+  assert.equal(receipt.previousSha256,NPC_INTERDECK_V204_PASSAGE_SUCCESSORS[path].currentSha256);
+  assert.equal(receipt.previousSha256,
+    '7fc049f7d03bf75f7f935de4288639516fd98d7fbd4b133a2332156c594efbb5');
+  assert.equal(sha(read(path)),receipt.currentSha256);
+  const changed=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_V207_RETURN')]):read(target);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),
+    /Unreviewed V207 interdeck return source/,path);
+});
+
+test('V207 captures the first native floor from its accepted startup without rewriting the original verifier receipt',()=>{
+  const receipt=TRIALS_CAPTURE_OBSERVER_V207;
+  assert.equal(receipt.path,'scripts/verify-xeno-trials-capture-v163.mjs');
+  assert.equal(receipt.previousSha256,current.verifierSourceSha256V165[receipt.path]);
+  assert.equal(receipt.previousSha256,
+    'cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28');
+  assert.equal(receipt.driver,'scripts/qa-xeno-trials-capture-v163.py');
+  assert.equal(receipt.previousDriverSha256,
+    '81f9de338110304c9e3ce60f9f3dc11268b9123c2e026b56c38b9b2da3815dc3');
+  assert.equal(sha(read(receipt.path)),receipt.currentSha256);
+  assert.equal(sha(read(receipt.driver)),receipt.driverSha256);
+  assert.deepEqual(resolveLatestV165VerifierReceipt(receipt.path),{
+    version:207,previousSha256:receipt.previousSha256,currentSha256:receipt.currentSha256
+  });
+  assert.equal(resolveLatestV165VerifierReceipt(receipt.driver),null,
+    'The explicit capture verifier cannot admit other paths by resemblance');
+  for(const [path,label]of [[receipt.path,'verifier'],[receipt.driver,'driver']]){
+    const changed=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_V207_FLOOR')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),
+      new RegExp('Unreviewed V207 Trials capture '+label),path);
+  }
 });
 
 test('V203 service observer pins its physical approach regression and real Python driver while retaining frozen V163 evidence', () => {
   const receipt=NPC_SERVICE_OBSERVER_V203;
   assert.equal(current.verifierSourceSha256V165[receipt.path],receipt.previousSha256);
-  const intermediate=NPC_SERVICE_OBSERVER_V204,prior=NPC_SERVICE_OBSERVER_V205,latest=NPC_SERVICE_OBSERVER_V206;
+  const intermediate=NPC_SERVICE_OBSERVER_V204,prior=NPC_SERVICE_OBSERVER_V205,
+    counted=NPC_SERVICE_OBSERVER_V206,latest=NPC_SERVICE_OBSERVER_V207;
   assert.equal(intermediate.previousSha256,receipt.currentSha256);
   assert.equal(intermediate.previousDriverSha256,receipt.driverSha256);
   assert.equal(prior.previousSha256,intermediate.currentSha256);
   assert.equal(prior.previousDriverSha256,intermediate.driverSha256);
-  assert.equal(latest.previousSha256,prior.currentSha256);
-  assert.equal(latest.previousDriverSha256,prior.driverSha256);
+  assert.equal(counted.previousSha256,prior.currentSha256);
+  assert.equal(counted.previousDriverSha256,prior.driverSha256);
+  assert.equal(latest.previousSha256,counted.currentSha256);
+  assert.equal(latest.previousDriverSha256,counted.driverSha256);
   assert.equal(sha(read(receipt.path)),latest.currentSha256);
   assert.equal(sha(read(receipt.driver)),latest.driverSha256);
   for(const [path,label] of [[receipt.path,'verifier'],[receipt.driver,'driver']]){
     const tampered=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_OBSERVER')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),
-      new RegExp('Unreviewed V206 service observer '+label),path);
+      new RegExp('Unreviewed V207 service observer '+label),path);
   }
 });
 
@@ -213,12 +281,57 @@ test('V206 counts an observed home return without rewriting the V205 source exit
   const receipt=NPC_SERVICE_OBSERVER_V206;
   assert.equal(receipt.previousSha256,NPC_SERVICE_OBSERVER_V205.currentSha256);
   assert.equal(receipt.previousDriverSha256,NPC_SERVICE_OBSERVER_V205.driverSha256);
-  assert.equal(sha(read(receipt.path)),receipt.currentSha256);
-  assert.equal(sha(read(receipt.driver)),receipt.driverSha256);
+  assert.equal(NPC_SERVICE_OBSERVER_V207.previousSha256,receipt.currentSha256);
+  assert.equal(NPC_SERVICE_OBSERVER_V207.previousDriverSha256,receipt.driverSha256);
+  assert.equal(sha(read(receipt.path)),NPC_SERVICE_OBSERVER_V207.currentSha256);
+  assert.equal(sha(read(receipt.driver)),NPC_SERVICE_OBSERVER_V207.driverSha256);
   assert.equal(sha(read('src/npc-service-routes-v161.js')),
     NPC_SOURCE_EXIT_V205_SUCCESSORS['src/npc-service-routes-v161.js'].currentSha256);
   const tampered=target=>target===receipt.driver?Buffer.concat([read(target),Buffer.from('UNOBSERVED_HOME_COUNTER')]):read(target);
-  assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),/Unreviewed V206 service observer driver/);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),/Unreviewed V207 service observer driver/);
+});
+
+test('V207 pins only the service diagnostic observer and preserves the exact V206 verifier and driver predecessors',()=>{
+  const receipt=NPC_SERVICE_OBSERVER_V207;
+  assert.equal(receipt.previousSha256,NPC_SERVICE_OBSERVER_V206.currentSha256);
+  assert.equal(receipt.previousSha256,
+    '24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6');
+  assert.equal(receipt.previousDriverSha256,NPC_SERVICE_OBSERVER_V206.driverSha256);
+  assert.equal(receipt.previousDriverSha256,
+    '01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4');
+  assert.equal(sha(read(receipt.path)),receipt.currentSha256);
+  assert.equal(sha(read(receipt.driver)),receipt.driverSha256);
+  assert.deepEqual(resolveLatestV165VerifierReceipt(receipt.path),{
+    version:207,previousSha256:receipt.previousSha256,currentSha256:receipt.currentSha256
+  });
+  assert.equal(resolveLatestV165VerifierReceipt(receipt.driver),null);
+  for(const [path,label]of [[receipt.path,'verifier'],[receipt.driver,'driver']]){
+    const changed=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_V207_ACK')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),
+      new RegExp('Unreviewed V207 service observer '+label),path);
+  }
+});
+
+test('V207 audit continuation extends the frozen stage list and rejects changed audit verifier bytes',()=>{
+  const path='scripts/verify-audit-continuation-v163.mjs';
+  const prior=V165_VERIFIER_SUCCESSORS_V206[path],receipt=V165_VERIFIER_SUCCESSORS_V207[path];
+  assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V207),[path]);
+  assert.equal(prior.currentSha256,
+    '6c56811366facd3fd8898b1afc25152fc71fc3a604b5069055fffce72b640233');
+  assert.equal(receipt.previousSha256,prior.currentSha256);
+  assert.deepEqual(V165_VERIFIER_STAGES_V207.slice(0,-1),V165_VERIFIER_STAGES_V184);
+  assert.equal(V165_VERIFIER_STAGES_V184.at(-1).version,206);
+  assert.deepEqual(V165_VERIFIER_STAGES_V207.at(-1),{
+    version:207,receipts:V165_VERIFIER_SUCCESSORS_V207
+  });
+  assert.equal(sha(read(path)),receipt.currentSha256);
+  assert.deepEqual(resolveLatestV165VerifierReceipt(path),{
+    version:207,previousSha256:receipt.previousSha256,currentSha256:receipt.currentSha256
+  });
+  const changed=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_V207_AUDIT')]):read(target);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),
+    /Unreviewed V207 verifier successor/,path);
+  assert.equal(resolveLatestV165VerifierReceipt('scripts/verify-unregistered-v207.mjs'),null);
 });
 
 test('V205 physical source exit keeps its exact V163 factory predecessor and rejects unreviewed collision or courtesy changes',()=>{
@@ -373,7 +486,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     assert.equal(sha(read(path)), reviewed.currentSha256, path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
-      /Unreviewed V206|Unreviewed V205|Unreviewed V204|Unreviewed V203|Unreviewed V202|Unreviewed V200|Unreviewed V199|Unreviewed V197|Unreviewed V195|Unreviewed V194|Unreviewed V188|Unreviewed V187|Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
+      /Unreviewed V207|Unreviewed V206|Unreviewed V205|Unreviewed V204|Unreviewed V203|Unreviewed V202|Unreviewed V200|Unreviewed V199|Unreviewed V197|Unreviewed V195|Unreviewed V194|Unreviewed V188|Unreviewed V187|Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
   }
 });
 

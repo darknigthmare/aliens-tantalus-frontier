@@ -440,6 +440,28 @@ export const NPC_INTERDECK_VERIFIER_V204 = Object.freeze({
   previousSha256: NPC_INTERDECK_VERIFIER_V203.currentSha256,
   currentSha256: '485b26f60e985a38295649c6539a705c8599eada4bc3a9d2c258053b4d9dc3c9'
 });
+/** V207 follows the exact V204 tests and the native driver used by V206.
+ * Bounded spectator clearance and exact return observations stay separate
+ * from the explicitly chained Inez runtime fix and native validation. */
+export const NPC_INTERDECK_VERIFIER_V207 = Object.freeze({
+  path: NPC_INTERDECK_VERIFIER_V204.path,
+  previousSha256: NPC_INTERDECK_VERIFIER_V204.currentSha256,
+  currentSha256: 'cb615f0a352b685abd76abfe681a2e02a6b073df321c70bf8c538d9901923000',
+  driver: 'scripts/qa-npc-interdeck-native-v165.py',
+  previousDriverSha256: '94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3',
+  driverSha256: '1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a'
+});
+/** V207 arms first-floor observation from the accepted native startup. The
+ * historical V163 verifier and V206-era driver remain explicit predecessors;
+ * source integrity is separate from native, artistic or release validation. */
+export const TRIALS_CAPTURE_OBSERVER_V207 = Object.freeze({
+  path: 'scripts/verify-xeno-trials-capture-v163.mjs',
+  previousSha256: 'cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28',
+  currentSha256: 'd6464fff170b5ce4ff9f7bd30afa9f1e362d3dfcf3900049d6b7c8d4cc33ae91',
+  driver: 'scripts/qa-xeno-trials-capture-v163.py',
+  previousDriverSha256: '81f9de338110304c9e3ce60f9f3dc11268b9123c2e026b56c38b9b2da3815dc3',
+  driverSha256: '048dce8bd87992543acbb38742618e56a4b6d4df0ea6794acd82908388da9674'
+});
 export const NPC_SERVICE_OBSERVER_V204 = Object.freeze({
   path: NPC_SERVICE_OBSERVER_V203.path,
   previousSha256: NPC_SERVICE_OBSERVER_V203.currentSha256,
@@ -476,6 +498,17 @@ export const NPC_SERVICE_OBSERVER_V206 = Object.freeze({
   driver: NPC_SERVICE_OBSERVER_V205.driver,
   previousDriverSha256: NPC_SERVICE_OBSERVER_V205.driverSha256,
   driverSha256: '01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4'
+});
+/** V207 retains failed Jun prerequisite acknowledgements and nearby bodies.
+ * Diagnostics preserve the controls and budgets; this receipt does not claim
+ * the cause of CI760's failure or introduce a service runtime correction. */
+export const NPC_SERVICE_OBSERVER_V207 = Object.freeze({
+  path: NPC_SERVICE_OBSERVER_V206.path,
+  previousSha256: NPC_SERVICE_OBSERVER_V206.currentSha256,
+  currentSha256: 'bbb789b7f32d2cb9dd8e462cdf0d8bcb4d77a98555c43dc786d790f1bb1272a4',
+  driver: NPC_SERVICE_OBSERVER_V206.driver,
+  previousDriverSha256: NPC_SERVICE_OBSERVER_V206.driverSha256,
+  driverSha256: '202c223699c0de342a6d3d843ece5dc6563b5d9c81fecdebc91c1bf32491817a'
 });
 
 /** V194: source-only magazine transaction anti-replay fix, preserving the
@@ -586,6 +619,14 @@ export const V165_VERIFIER_SUCCESSORS_V206 = Object.freeze({
     currentSha256: '6c56811366facd3fd8898b1afc25152fc71fc3a604b5069055fffce72b640233'
   })
 });
+/** V207 exact audit continuation for separately declared runtime and QA
+ * successors. All V206 and earlier evidence remains historical. */
+export const V165_VERIFIER_SUCCESSORS_V207 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V206['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '6d170db153e4600648ae71125e011e98b4a2a81ef14a9e06d23c481adbcd7b95'
+  })
+});
 
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
@@ -619,16 +660,24 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [205,V165_VERIFIER_SUCCESSORS_V205],
   [206,V165_VERIFIER_SUCCESSORS_V206]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
+/** Extend the frozen historical stage list rather than rewriting it. */
+export const V165_VERIFIER_STAGES_V207 = Object.freeze([
+  ...V165_VERIFIER_STAGES_V184,
+  Object.freeze({version:207,receipts:V165_VERIFIER_SUCCESSORS_V207})
+]);
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
-    return Object.freeze({ version: 204, previousSha256: NPC_INTERDECK_VERIFIER_V204.previousSha256,
-      currentSha256: NPC_INTERDECK_VERIFIER_V204.currentSha256 });
+    return Object.freeze({ version: 207, previousSha256: NPC_INTERDECK_VERIFIER_V207.previousSha256,
+      currentSha256: NPC_INTERDECK_VERIFIER_V207.currentSha256 });
   if (path === NPC_SERVICE_OBSERVER_V203.path)
-    return Object.freeze({ version: 206, previousSha256: NPC_SERVICE_OBSERVER_V206.previousSha256,
-      currentSha256: NPC_SERVICE_OBSERVER_V206.currentSha256 });
+    return Object.freeze({ version: 207, previousSha256: NPC_SERVICE_OBSERVER_V207.previousSha256,
+      currentSha256: NPC_SERVICE_OBSERVER_V207.currentSha256 });
+  if (path === TRIALS_CAPTURE_OBSERVER_V207.path)
+    return Object.freeze({ version: 207, previousSha256: TRIALS_CAPTURE_OBSERVER_V207.previousSha256,
+      currentSha256: TRIALS_CAPTURE_OBSERVER_V207.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
-  for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
+  for (const {version,receipts} of V165_VERIFIER_STAGES_V207) {
     const next = receipts[path];
     if (!next) continue;
     assert.ok(validHash(next.previousSha256) && validHash(next.currentSha256),
@@ -856,6 +905,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
         const corridorV201=NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS[path];
         const watchV203=NPC_INTERDECK_V203_WATCH_SUCCESSORS[path];
         const passageV204=NPC_INTERDECK_V204_PASSAGE_SUCCESSORS[path];
+        const returnV207=NPC_INTERDECK_V207_RETURN_SUCCESSORS[path];
         if(localV198)assert.equal(localV198.previousSha256,npcV185.currentSha256,
           'Broken V185-to-V198 interdeck physical door chain: ' + path);
         if(corridorV201)assert.equal(corridorV201.previousSha256,localV198?.currentSha256,
@@ -864,8 +914,11 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
           'Broken V201-to-V203 authentic watch predecessor: ' + path);
         if(passageV204)assert.equal(passageV204.previousSha256,watchV203?.currentSha256,
           'Broken V203-to-V204 physical service passage predecessor: ' + path);
-        assert.equal(sha(readSource(path)), passageV204?.currentSha256 || watchV203?.currentSha256 || corridorV201?.currentSha256 || localV198?.currentSha256 || npcV185.currentSha256,
-          passageV204?'Unreviewed V204 physical service passage source: ' + path
+        if(returnV207)assert.equal(returnV207.previousSha256,passageV204?.currentSha256,
+          'Broken V204-to-V207 interdeck return predecessor: ' + path);
+        assert.equal(sha(readSource(path)), returnV207?.currentSha256 || passageV204?.currentSha256 || watchV203?.currentSha256 || corridorV201?.currentSha256 || localV198?.currentSha256 || npcV185.currentSha256,
+          returnV207?'Unreviewed V207 interdeck return source: ' + path
+            :passageV204?'Unreviewed V204 physical service passage source: ' + path
             :watchV203?'Unreviewed V203 authentic service watch source: ' + path
             :corridorV201?'Unreviewed V201 local interdeck corridor source: ' + path
             :localV198?'Unreviewed V198 local interdeck source: ' + path
@@ -965,9 +1018,30 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.equal(NPC_INTERDECK_VERIFIER_V204.previousSha256,
     NPC_INTERDECK_VERIFIER_V203.currentSha256,
     'Broken V203-to-V204 interdeck verifier chain');
-  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+  assert.equal(NPC_INTERDECK_VERIFIER_V207.previousSha256,
     NPC_INTERDECK_VERIFIER_V204.currentSha256,
-    'Unreviewed V204 interdeck behavior verifier');
+    'Broken V204-to-V207 interdeck verifier chain');
+  assert.equal(NPC_INTERDECK_VERIFIER_V207.previousDriverSha256,
+    '94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3',
+    'Invalid V207 native interdeck driver predecessor');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+    NPC_INTERDECK_VERIFIER_V207.currentSha256,
+    'Unreviewed V207 interdeck behavior verifier');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V207.driver)),
+    NPC_INTERDECK_VERIFIER_V207.driverSha256,
+    'Unreviewed V207 native interdeck driver');
+  assert.equal(current.verifierSourceSha256V165[TRIALS_CAPTURE_OBSERVER_V207.path],
+    TRIALS_CAPTURE_OBSERVER_V207.previousSha256,
+    'Invalid V163-to-V207 Trials capture verifier predecessor');
+  assert.equal(TRIALS_CAPTURE_OBSERVER_V207.previousDriverSha256,
+    '81f9de338110304c9e3ce60f9f3dc11268b9123c2e026b56c38b9b2da3815dc3',
+    'Invalid V207 Trials capture driver predecessor');
+  assert.equal(sha(readSource(TRIALS_CAPTURE_OBSERVER_V207.path)),
+    TRIALS_CAPTURE_OBSERVER_V207.currentSha256,
+    'Unreviewed V207 Trials capture verifier');
+  assert.equal(sha(readSource(TRIALS_CAPTURE_OBSERVER_V207.driver)),
+    TRIALS_CAPTURE_OBSERVER_V207.driverSha256,
+    'Unreviewed V207 Trials capture driver');
   assert.equal(current.verifierSourceSha256V165[NPC_SERVICE_OBSERVER_V203.path],
     NPC_SERVICE_OBSERVER_V203.previousSha256, 'Invalid V163-to-V203 service observer predecessor');
   assert.equal(NPC_SERVICE_OBSERVER_V204.previousSha256,NPC_SERVICE_OBSERVER_V203.currentSha256,
@@ -982,13 +1056,17 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     'Broken V205-to-V206 service observer verifier chain');
   assert.equal(NPC_SERVICE_OBSERVER_V206.previousDriverSha256,NPC_SERVICE_OBSERVER_V205.driverSha256,
     'Broken V205-to-V206 service observer driver chain');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V206.path)),
-    NPC_SERVICE_OBSERVER_V206.currentSha256, 'Unreviewed V206 service observer verifier');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V206.driver)),
-    NPC_SERVICE_OBSERVER_V206.driverSha256, 'Unreviewed V206 service observer driver');
+  assert.equal(NPC_SERVICE_OBSERVER_V207.previousSha256,NPC_SERVICE_OBSERVER_V206.currentSha256,
+    'Broken V206-to-V207 service observer verifier chain');
+  assert.equal(NPC_SERVICE_OBSERVER_V207.previousDriverSha256,NPC_SERVICE_OBSERVER_V206.driverSha256,
+    'Broken V206-to-V207 service observer driver chain');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V207.path)),
+    NPC_SERVICE_OBSERVER_V207.currentSha256, 'Unreviewed V207 service observer verifier');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V207.driver)),
+    NPC_SERVICE_OBSERVER_V207.driverSha256, 'Unreviewed V207 service observer driver');
   assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.serviceDriver)),
     NPC_SERVICE_OBSERVER_V204.serviceDriverSha256, 'Unreviewed V204 service arrival driver');
-  for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
+  for (const {version,receipts} of V165_VERIFIER_STAGES_V207) {
     for (const path of Object.keys(receipts)) {
       assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path),
         'Unadmitted V'+version+' verifier path: '+path);
@@ -1074,6 +1152,15 @@ export const NPC_INTERDECK_V204_PASSAGE_SUCCESSORS = Object.freeze({
   })
 });
 
+/** V207 keeps V204 intact and records only Inez's physical reactor return
+ * passing bay. A source receipt establishes exact bytes, not a native pass. */
+export const NPC_INTERDECK_V207_RETURN_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: NPC_INTERDECK_V204_PASSAGE_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256,
+    currentSha256: '6de1b0e743a448f1dae66884de9b24444e266c8f3cf035d1a55abe57dbd4ea03'
+  })
+});
+
 /** A missing successor preserves the anchored record; invalid content never falls back. */
 export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
   anchoredPredecessor(previous, readSource);
@@ -1107,6 +1194,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V203_WATCH_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V204_PASSAGE_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V207_RETURN_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
