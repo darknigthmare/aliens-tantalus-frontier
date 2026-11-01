@@ -599,14 +599,25 @@ export function withHubNpcInterdeckRoutesV165(Base) {
     }
     npcInterdeckSharedServiceDoorV185(routeId) {
       if (routeId!=='idris-engine') return this.npcInterdeckPassingRequestV165(routeId);
-      // Idris owns a *local* rear portal in the reactor. An interdeck
-      // passenger retained on another deck or working at an unrelated post
-      // cannot hold that door forever after a strategy hour advance.
-      // A passenger physically in the reactor still retains priority, and
-      // its existing collision and saved door-phase checks stay authoritative.
+      // Idris owns a local rear portal, not the entire reactor floor. A
+      // passenger blocked by the player far beyond that socket, or inside
+      // the traveling lift, cannot keep Idris at his annex post forever.
+      // A supported body at the entrance or returning through Idris's floor
+      // corridor can claim courtesy, until it physically clears that passage.
+      // Its controller, physical collisions and door checks stay authoritative.
+      const door=HUB_ANNEX_BY_ID_V137['engine-room'].parentDoorBounds;
       return ['inez-civil','maksim-cockpit','jun-sanitary'].some(id=>{
-        const a=this.npcInterdeckStateV165?.routes[id]?.actor;
-        return a?.deck===3 && a.roomId==='reactor' && a.stage!=='returned';
+        const entry=this.npcInterdeckStateV165?.routes[id],a=entry?.actor;
+        if(a?.deck!==3 || a.roomId!=='reactor' || a.stage==='returned'
+          || !finite(a.x) || !finite(a.y) || Math.abs(a.y-532)>=16)return false;
+        // The actual westbound return to the hangar must also pass Idris's
+        // parent post. Keep that corridor clear until this real floor body
+        // has passed; an outbound walker or remote passenger has no such claim.
+        if(a.direction==='return' && a.stage==='walking-home'
+          && entry.origin?.deck===3 && entry.origin.roomId==='dropship-hangar'
+          && a.x+44>=door.x-70)return true;
+        return overlap({x:a.x,y:a.y,w:44,h:92},
+          {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
       });
     }
     /** V198 distinguishes a remote interdeck dependency from an occupied
@@ -625,18 +636,15 @@ export function withHubNpcInterdeckRoutesV165(Base) {
       const door=annex?.parentDoorBounds;
       if(!a||!door||a.stage==='returned'||!finite(a.x)||!finite(a.y)
         ||a.deck!==deckOf(annex.parentRoomId)||a.roomId!==annex.parentRoomId)return false;
-      // Asha's refuge entrance is on the crew-quarters floor. Jun's real
-      // walking-lift return uses that SAME floor corridor; a remote-body-only
-      // door predicate let Asha leave the refuge and physically block Jun at
-      // x505 against Asha at x561 (observed in the exact-head V198 CI).
-      // Reserve the corridor while Jun is actively traversing on its
-      // support level, not for any stationary timetable presence.
-      const sharedCorridor=routeId==='asha-refuge' && Math.abs(a.y-532)<16
+      // The refuge and galley share their parent floor with Jun's real
+      // journey. A doorway-only test let Leila leave her galley against Jun
+      // crossing the mess in the opposite direction (native x1660/x1716).
+      // Reserve only the matching room and support while Jun actually walks.
+      const sharedCorridor=['asha-refuge','leila-galley'].includes(routeId) && Math.abs(a.y-532)<16
         && ['walking-lift','waiting-lift','walking-portal','walking-home'].includes(a.stage);
       if(sharedCorridor)return true;
-      // Leila's galley has a local portal, not the long quarters corridor.
-      // Bounded approach only; an actor on another room or support cannot
-      // claim this doorway merely because its route exists.
+      // Other phases reserve only the bounded doorway; a remote or elevated
+      // actor cannot claim it merely because its route exists.
       return overlap({x:a.x,y:a.y,w:44,h:92},
         {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
     }

@@ -14,7 +14,7 @@ import { resolveNpcRoutineV62 } from '../src/npc-dialogue-v62.js';
 import { withHubNpcLifeV136 } from '../src/npc-life-v136.js';
 import { withHubNpcCirculationV158 } from '../src/npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from '../src/npc-annex-circulation-v159.js';
-import { withHubNpcServiceRoutesV161 } from '../src/npc-service-routes-v161.js';
+import { withHubNpcServiceRoutesV161, HUB_NPC_SERVICE_ROUTES_V161 } from '../src/npc-service-routes-v161.js';
 import { withHubNpcMedicalRouteV162 } from '../src/npc-medical-route-v162.js';
 import { withHubNpcAnnexServiceRoutesV163 } from '../src/npc-annex-service-routes-v163.js';
 import { withHubNpcAnnexLeasesV163 } from '../src/npc-annex-leases-v163.js';
@@ -124,7 +124,7 @@ test('Idris keeps its actual parent owner and scheduled watch after elapsed hour
 });
 test('V185 engine service door uses actual shared reactor occupancy without changing historical passenger dependencies',()=>{
   const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
-  const inez={deck:2,roomId:'quarantine',stage:'walking-lift'};
+  const inez={deck:2,roomId:'quarantine',x:1678,y:532,stage:'walking-lift'};
   const host={npcInterdeckStateV165:{routes:{'inez-civil':{actor:inez}}}};
   const linked=()=>controller.npcInterdeckPassingRequestV165.call(host,'idris-engine');
   const door=()=>controller.npcInterdeckSharedServiceDoorV185.call({...host,
@@ -162,6 +162,39 @@ test('an unoccupied Idris door preserves the inherited duty decision rather than
   assert.equal(controller.getNpcServicePassingDutyV165.call(host,'idris-engine',actor),true);
   assert.deepEqual(seen,[{routeId:'idris-engine',actor}]);
 });
+test('Idris local door reservation excludes the observed remote reactor walker and its traveling lift',()=>{
+  const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
+  const maksim={deck:3,roomId:'reactor',x:2239,y:532,stage:'walking-lift',direction:'outbound'};
+  const host={npcInterdeckStateV165:{routes:{'maksim-cockpit':{actor:maksim}}}};
+  const linked=()=>controller.npcInterdeckPassingRequestV165.call(host,'idris-engine');
+  const door=()=>controller.npcInterdeckSharedServiceDoorV185.call({...host,
+    npcInterdeckPassingRequestV165:linked},'idris-engine');
+  const hold=()=>controller.shouldHoldNpcServiceOwnerV165.call({...host,
+    npcInterdeckPassingRequestV165:linked,npcInterdeckSharedServiceDoorV185:door},'idris-engine',null,null);
+  assert.equal(linked(),true,'the real journey remains active and owns its collisions');
+  assert.equal(door(),false,'a body blocked by the player at x2295 does not occupy the x1641 service socket');
+  assert.equal(hold(),false,'a distant reactor body cannot freeze Idris inside the engine room');
+  maksim.direction='return';maksim.stage='walking-home';
+  host.npcInterdeckStateV165.routes['maksim-cockpit'].origin={deck:3,roomId:'dropship-hangar',x:365,y:532};
+  assert.equal(door(),true,'a real westbound hangar return still needs Idris parent floor corridor');
+  assert.equal(hold(),true);
+  const cutoff=HUB_ANNEX_BY_ID_V137['engine-room'].parentDoorBounds.x-70-44;
+  maksim.x=cutoff;
+  assert.equal(door(),true,'the trailing edge has not yet cleared the reserved approach');
+  maksim.x=cutoff-.001;
+  assert.equal(door(),false,'a fully passed body cannot keep Idris inside after clearing the doorway');
+  assert.equal(hold(),false);
+  maksim.direction='outbound';
+  maksim.x=2350;maksim.stage='lift';maksim.lift={phase:'travel'};
+  assert.equal(door(),false,'an occluded traveling cabin is not a body at the rear service door');
+  maksim.x=1678;maksim.stage='walking-lift';maksim.lift=null;
+  assert.equal(door(),true,'a supported body inside the actual door approach keeps priority');
+  assert.equal(hold(),true);
+  maksim.y=400;
+  assert.equal(door(),false,'a different support level cannot reserve the floor-mounted entrance');
+  maksim.y=NaN;
+  assert.equal(door(),false);
+});
 test('V198 remote Jun cannot indefinitely retain Leila/Asha service doors; real same-level local passage still wins',()=>{
   const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
   const jun={deck:3,roomId:'life-support',x:2200,y:532,stage:'walking-lift'};
@@ -183,7 +216,10 @@ test('V198 remote Jun cannot indefinitely retain Leila/Asha service doors; real 
     assert.equal(hold(route),false,'unoccupied door cannot hold local owner indefinitely');
   }
   jun.deck=1;jun.roomId='mess';jun.x=2400;
-  assert.equal(real('leila-galley'),false,'same room but hundreds of pixels away has no claim');
+  assert.equal(real('leila-galley'),true,'the real walking passenger owns the shared mess floor until it clears');
+  jun.stage='service';
+  assert.equal(real('leila-galley'),false,'an unrelated stationary post cannot reserve the mess corridor');
+  jun.stage='walking-lift';
   jun.x=1470;jun.y=250;
   assert.equal(real('leila-galley'),false,'an upper-level actor does not overlap floor-mounted door');
   jun.y=532;
@@ -211,6 +247,114 @@ test('V198 remote Jun cannot indefinitely retain Leila/Asha service doors; real 
   host.npcInterdeckStateV165.routes['jun-sanitary'].actor=null;
   assert.equal(real('leila-galley'),false);
   assert.equal(real('asha-refuge'),false);
+});
+
+test('Leila stays at the galley while Jun crosses the real mess floor, then physically returns without opposing-body deadlock',()=>{
+  const h=runtime(5,{deck:1,roomId:'mess'});
+  h.player.x=2520;
+  context(h,17);
+  const leila=h.getNpcServiceActorV161('leila-galley');
+  let ready=false;
+  for(let i=0;i<100*60;i++){
+    h.update(1/60);
+    const a=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'].actor;
+    const jun=entry(h,'jun-sanitary').actor;
+    if(a?.stage==='service'&&a.roomId==='galley-service'&&jun?.roomId==='mess'&&jun.stage==='walking-portal'){
+      ready=true;break;
+    }
+  }
+  assert.ok(ready,'The existing 17h native watches reach the simultaneous galley/mess fixture.');
+  const before=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'].actor;
+  assert.equal(before.crossings,1);assert.equal(before.x,417);
+  context(h,20);
+  let held=0,previous=before;
+  for(let i=0;i<150*60;i++){
+    const jun=entry(h,'jun-sanitary').actor;
+    const sharesFloor=jun?.deck===1&&jun.roomId==='mess'&&Math.abs(jun.y-532)<16
+      &&['walking-lift','waiting-lift','walking-portal','walking-home'].includes(jun.stage);
+    h.update(1/60);
+    const current=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'];
+    if(!current.actor){assert.ok(current.nativeHandoff);break;}
+    const a=current.actor;
+    assert.equal(h.getNpcServiceActorV161('leila-galley'),leila,'The original physical owner remains unique.');
+    assert.equal(a.y,532);
+    if(a.roomId===previous.roomId)assert.ok(Math.abs(a.x-previous.x)<=27*(a.time-previous.time)+.03);
+    else{assert.equal(previous.stage,'covering');assert.equal(a.stage,'revealing');assert.equal(a.crossings,2);}
+    if(sharesFloor&&previous.stage==='service'&&previous.roomId==='galley-service'){
+      assert.equal(a.roomId,'galley-service');assert.equal(a.x,before.x);assert.equal(a.crossings,1);held++;
+    }
+    previous=a;
+  }
+  const final=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'];
+  assert.ok(held>60,'More than a second of actual local passing priority is observed.');
+  assert.equal(final.actor,null,'The owner reaches its original home before timetable handoff.');
+  assert.equal(previous.crossings,2);assert.equal(previous.arrivals,2);
+  assert.ok(Math.abs(previous.x-before.homeX)<.25);
+  assert.equal(final.nativeHandoff.fromRoomId,'mess');assert.equal(final.nativeHandoff.observedTravel,false);
+});
+
+test('Leila courtesy keeps a real player blocking Jun authoritative until the player clears both paths',()=>{
+  const h=runtime(5,{deck:1,roomId:'mess'});h.player.x=2104.4192363061834;
+  context(h,17);
+  for(let i=0;i<100*60;i++){
+    h.update(1/60);
+    const a=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'].actor,jun=entry(h,'jun-sanitary').actor;
+    if(a?.stage==='service'&&a.roomId==='galley-service'&&jun?.roomId==='mess'&&jun.stage==='walking-portal')break;
+  }
+  context(h,20);tick(h,120);
+  const leila=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'].actor,jun=entry(h,'jun-sanitary').actor;
+  assert.equal(leila.roomId,'galley-service');assert.equal(leila.x,417);assert.equal(leila.crossings,1);
+  assert.equal(jun.roomId,'mess');assert.equal(jun.reason,'occupied');assert.equal(jun.velocity,0);
+  assert.ok(Math.abs(jun.x-h.player.x-h.player.w-12)<.3,
+    'The actual 44px player body and native12px gap stop Jun, not a timetable lease.');
+  // Disclosed unit fixture relocation, separate from the real browser's A/D.
+  h.player.x=2520;tick(h,150);
+  const final=h.getSnapshot().npcServiceRoutesV161.routes['leila-galley'];
+  assert.equal(final.actor,null);assert.equal(final.nativeHandoff.fromRoomId,'mess');
+});
+
+test('the real V161 QA counts native duty reentry and home arrival only at observed supported service transitions',()=>{
+  const python="import ast,json,sys\nfrom pathlib import Path\nt=ast.parse(Path(sys.argv[1]).read_text())\nprint(json.dumps(next(ast.literal_eval(n.value) for n in t.body if isinstance(n,ast.Assign) and any(isinstance(x,ast.Name) and x.id=='NATIVE_SERVICE_ARRIVAL_OBSERVER_V161' for x in n.targets))))";
+  const source=JSON.parse(execFileSync('python3',['-c',python,
+    new URL('qa-npc-service-routes-v161.py',import.meta.url).pathname],{encoding:'utf8'}));
+  const create=new Function('return ('+source+')')();
+  const c={id:'leila-galley',crew:'crew-15-leila-s-rensen',deck:1,parent:'mess',annex:'galley-service'};
+  const route=HUB_NPC_SERVICE_ROUTES_V161.find(r=>r.definition.id===c.id);
+  const seed={crewId:c.crew,deck:1,roomId:c.annex,x:417,y:532,homeX:1955,dutyX:417,
+    targetRoomId:c.annex,stage:'service',velocity:0,facing:1,doorProgress:0,time:0,distance:762,
+    crossings:1,arrivals:1,admittedRoomId:'mess',reason:'daily-schedule'};
+  const observer=create(c,seed),samples=[structuredClone(seed)];
+  let a=structuredClone(seed);const body={...a,w:44,h:92,alive:true};
+  function advance(seconds,duty){for(let i=0;i<seconds*60;i++){
+    a=route.advance(a,body,1/60,{duty,resolution:{crewId:c.crew,roomId:'sensor-array',phase:'station'}});
+    Object.assign(body,{x:a.x,y:a.y,roomId:a.roomId});samples.push(structuredClone(a));
+    assert.equal(observer.observe(a),true,JSON.stringify(observer.snapshot()));
+  }}
+  advance(1,false);advance(2,true);advance(60,false);
+  assert.equal(a.roomId,'mess');assert.equal(a.stage,'service');assert.equal(a.crossings,2);assert.equal(a.arrivals,3);
+  assert.equal(observer.observe(null),true);
+  const result=observer.snapshot();assert.equal(result.failed,null);assert.equal(result.done,true);
+  assert.equal(result.events.length,2);assert.equal(result.homeArrivals,1);
+  assert.deepEqual(result.events.map(e=>e.roomId),[c.annex,c.parent]);
+  const arrivedAt=samples.findIndex((s,i)=>i>0&&s.stage==='service'&&samples[i-1].stage==='walking');
+  for(const [name,index,mutate] of [
+    ['initial inflated count',0,s=>{s.arrivals=2;}],
+    ['stationary invented count',1,s=>{s.arrivals=2;}],
+    ['missing real increment',arrivedAt,s=>{s.arrivals--;}],
+    ['double real increment',arrivedAt,s=>{s.arrivals++;}],
+    ['false service goal',arrivedAt,s=>{s.x-=2;}],
+    ['unsupported actor',1,s=>{s.y--;}],
+    ['wrong owner',1,s=>{s.crewId='crew-11-jun-park';}],
+    ['invented floor crossing',1,s=>{s.crossings++;}],
+    ['reversed time',1,s=>{s.time=-1;}],
+    ['invented distance',1,s=>{s.distance+=100;}]
+  ]){
+    const fresh=create(c,seed);
+    for(let i=0;i<index;i++)assert.equal(fresh.observe(samples[i]),true,name);
+    const changed=structuredClone(samples[index]);mutate(changed);
+    assert.equal(fresh.observe(changed),false,name);assert.ok(fresh.snapshot().failed,name);
+  }
+  const lost=create(c,seed);assert.equal(lost.observe(null),false);assert.equal(lost.snapshot().failed,'owner-lost-before-home');
 });
 
 const entry=(h,id)=>h.getSnapshot().npcInterdeckRoutesV165.routes[id];

@@ -435,6 +435,22 @@ export const NPC_SERVICE_OBSERVER_V203 = Object.freeze({
   driver: 'scripts/qa-npc-annex-service-routes-v163.py',
   driverSha256: '55700d5145de48a026d38c235f76da5fb862c9d379d63b7138b7f01d672f8515'
 });
+export const NPC_INTERDECK_VERIFIER_V204 = Object.freeze({
+  path: NPC_INTERDECK_VERIFIER_V203.path,
+  previousSha256: NPC_INTERDECK_VERIFIER_V203.currentSha256,
+  currentSha256: '485b26f60e985a38295649c6539a705c8599eada4bc3a9d2c258053b4d9dc3c9'
+});
+export const NPC_SERVICE_OBSERVER_V204 = Object.freeze({
+  path: NPC_SERVICE_OBSERVER_V203.path,
+  previousSha256: NPC_SERVICE_OBSERVER_V203.currentSha256,
+  currentSha256: '4c29519273f9cc78839e37a7a7c429a90d456ae88a76a5723fe369b0b562e6b1',
+  driver: NPC_SERVICE_OBSERVER_V203.driver,
+  previousDriverSha256: NPC_SERVICE_OBSERVER_V203.driverSha256,
+  driverSha256: 'd1cdafeb4836ec8d25a68af62b599776fdc7f40dd4c855d0e09fd1df2224ef4e',
+  serviceDriver: 'scripts/qa-npc-service-routes-v161.py',
+  previousServiceDriverSha256: '15d51ddde8d37a18e3c4f529401220e03229bdb8fadeac93b4c0c982fe9cb73d',
+  serviceDriverSha256: '5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06'
+});
 
 /** V194: source-only magazine transaction anti-replay fix, preserving the
  * original V167 evidence. A long caller ID must never spend real ammunition
@@ -526,6 +542,12 @@ export const V165_VERIFIER_SUCCESSORS_V203 = Object.freeze({
     currentSha256: '5d4c3de7fe718e1ad73da6c0850f320187318e93bb66a5034f0ce3c34e368bdf'
   })
 });
+export const V165_VERIFIER_SUCCESSORS_V204 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V203['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '7c09502f7082753edf01733de37db5aff4857002d02b1706537d9e3954498440'
+  })
+});
 
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
@@ -554,15 +576,16 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [199,V165_VERIFIER_SUCCESSORS_V199],
   [200,V165_VERIFIER_SUCCESSORS_V200],
   [202,V165_VERIFIER_SUCCESSORS_V202],
-  [203,V165_VERIFIER_SUCCESSORS_V203]
+  [203,V165_VERIFIER_SUCCESSORS_V203],
+  [204,V165_VERIFIER_SUCCESSORS_V204]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
-    return Object.freeze({ version: 203, previousSha256: NPC_INTERDECK_VERIFIER_V203.previousSha256,
-      currentSha256: NPC_INTERDECK_VERIFIER_V203.currentSha256 });
+    return Object.freeze({ version: 204, previousSha256: NPC_INTERDECK_VERIFIER_V204.previousSha256,
+      currentSha256: NPC_INTERDECK_VERIFIER_V204.currentSha256 });
   if (path === NPC_SERVICE_OBSERVER_V203.path)
-    return Object.freeze({ version: 203, previousSha256: NPC_SERVICE_OBSERVER_V203.previousSha256,
-      currentSha256: NPC_SERVICE_OBSERVER_V203.currentSha256 });
+    return Object.freeze({ version: 204, previousSha256: NPC_SERVICE_OBSERVER_V204.previousSha256,
+      currentSha256: NPC_SERVICE_OBSERVER_V204.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -788,14 +811,18 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
         const localV198=NPC_INTERDECK_V198_LOCAL_SUCCESSORS[path];
         const corridorV201=NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS[path];
         const watchV203=NPC_INTERDECK_V203_WATCH_SUCCESSORS[path];
+        const passageV204=NPC_INTERDECK_V204_PASSAGE_SUCCESSORS[path];
         if(localV198)assert.equal(localV198.previousSha256,npcV185.currentSha256,
           'Broken V185-to-V198 interdeck physical door chain: ' + path);
         if(corridorV201)assert.equal(corridorV201.previousSha256,localV198?.currentSha256,
           'Broken V198-to-V201 same-floor corridor predecessor: ' + path);
         if(watchV203)assert.equal(watchV203.previousSha256,corridorV201?.currentSha256,
           'Broken V201-to-V203 authentic watch predecessor: ' + path);
-        assert.equal(sha(readSource(path)), watchV203?.currentSha256 || corridorV201?.currentSha256 || localV198?.currentSha256 || npcV185.currentSha256,
-          watchV203?'Unreviewed V203 authentic service watch source: ' + path
+        if(passageV204)assert.equal(passageV204.previousSha256,watchV203?.currentSha256,
+          'Broken V203-to-V204 physical service passage predecessor: ' + path);
+        assert.equal(sha(readSource(path)), passageV204?.currentSha256 || watchV203?.currentSha256 || corridorV201?.currentSha256 || localV198?.currentSha256 || npcV185.currentSha256,
+          passageV204?'Unreviewed V204 physical service passage source: ' + path
+            :watchV203?'Unreviewed V203 authentic service watch source: ' + path
             :corridorV201?'Unreviewed V201 local interdeck corridor source: ' + path
             :localV198?'Unreviewed V198 local interdeck source: ' + path
               :'Unreviewed V185 NPC successor: ' + path);
@@ -891,15 +918,24 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.equal(NPC_INTERDECK_VERIFIER_V203.previousSha256,
     NPC_INTERDECK_VERIFIER_V201.currentSha256,
     'Broken V201-to-V203 interdeck verifier chain');
-  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+  assert.equal(NPC_INTERDECK_VERIFIER_V204.previousSha256,
     NPC_INTERDECK_VERIFIER_V203.currentSha256,
-    'Unreviewed V203 interdeck behavior verifier');
+    'Broken V203-to-V204 interdeck verifier chain');
+  assert.equal(sha(readSource(NPC_INTERDECK_VERIFIER_V188.path)),
+    NPC_INTERDECK_VERIFIER_V204.currentSha256,
+    'Unreviewed V204 interdeck behavior verifier');
   assert.equal(current.verifierSourceSha256V165[NPC_SERVICE_OBSERVER_V203.path],
     NPC_SERVICE_OBSERVER_V203.previousSha256, 'Invalid V163-to-V203 service observer predecessor');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V203.path)),
-    NPC_SERVICE_OBSERVER_V203.currentSha256, 'Unreviewed V203 service observer verifier');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V203.driver)),
-    NPC_SERVICE_OBSERVER_V203.driverSha256, 'Unreviewed V203 service observer driver');
+  assert.equal(NPC_SERVICE_OBSERVER_V204.previousSha256,NPC_SERVICE_OBSERVER_V203.currentSha256,
+    'Broken V203-to-V204 service observer verifier chain');
+  assert.equal(NPC_SERVICE_OBSERVER_V204.previousDriverSha256,NPC_SERVICE_OBSERVER_V203.driverSha256,
+    'Broken V203-to-V204 service observer driver chain');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.path)),
+    NPC_SERVICE_OBSERVER_V204.currentSha256, 'Unreviewed V204 service observer verifier');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.driver)),
+    NPC_SERVICE_OBSERVER_V204.driverSha256, 'Unreviewed V204 service observer driver');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.serviceDriver)),
+    NPC_SERVICE_OBSERVER_V204.serviceDriverSha256, 'Unreviewed V204 service arrival driver');
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
     for (const path of Object.keys(receipts)) {
       assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path),
@@ -979,6 +1015,12 @@ export const NPC_INTERDECK_V203_WATCH_SUCCESSORS = Object.freeze({
     currentSha256: '9634b686b86c9c6de75d2704155e848e04e0530313f5961fe2456908ddee21a4'
   })
 });
+export const NPC_INTERDECK_V204_PASSAGE_SUCCESSORS = Object.freeze({
+  'src/npc-interdeck-routes-v165.js': Object.freeze({
+    previousSha256: NPC_INTERDECK_V203_WATCH_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256,
+    currentSha256: '7fc049f7d03bf75f7f935de4288639516fd98d7fbd4b133a2332156c594efbb5'
+  })
+});
 
 /** A missing successor preserves the anchored record; invalid content never falls back. */
 export function resolveAuditSourcesV163(previous, readSource = readRepository, { effective = false } = {}) {
@@ -1010,6 +1052,8 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V203_WATCH_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V204_PASSAGE_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) })

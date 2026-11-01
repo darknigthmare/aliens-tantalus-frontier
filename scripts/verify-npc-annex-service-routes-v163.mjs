@@ -522,7 +522,7 @@ const ashaQaConfigV163 = { id: 'asha-refuge', crew: 'crew-12-asha-mbaye', deck: 
   parent: 'crew-quarters', annex: 'personal-refuge', annexDoor: 122 };
 const ashaBlockedServiceV163 = () => ({ actor: { crewId: 'crew-12-asha-mbaye', deck: 1,
   roomId: 'personal-refuge', x: 908.4330357142857, y: 532, stage: 'service', reason: 'occupied',
-  dutyX: 908.4330357142857, distance: 1400,
+  dutyX: 908.4330357142857, targetRoomId: 'personal-refuge', velocity: 0, distance: 1400,
   doorProgress: 0, crossings: 1, arrivals: 1, time: 71.96855600000056 }, nativeHandoff: null,
   sourceFace: { opening: { x: 1168.88, w: 80.24 } } });
 
@@ -592,6 +592,79 @@ test('annex-service QA observes Asha native threshold approach while Jun is remo
   assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
 });
 
+test('annex-service QA counts an actual local rearrival at Asha duty post without inventing a portal crossing', async () => {
+  const source = serviceQaCallbackV163('arm_asha_return_dependency');
+  const h = ashaDependencyHostV163(), route = routes.find(r => r.definition.id === 'asha-refuge');
+  const out = simulate(route, initialActor(route));
+  h.sample.actor = structuredClone(out.state);
+  h.dependency.actor.deck = 3; h.dependency.actor.roomId = 'life-support';
+  const body = { ...out.actor }, player = { ...h.hub.player, roomId: 'personal-refuge' };
+  const resolution = routine(route, 20.5);
+  h.run(source, ashaQaConfigV163);
+  let completed = null;
+  const pending = h.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__.then(value => { completed = value; });
+  await h.frame(0);
+  const arrivals = h.sample.actor.arrivals;
+  let observedRearrival = false;
+  for (let i = 0; i < 28 * 60; i++) {
+    const previous = h.sample.actor;
+    // Native courtesy temporarily asks Asha to resume her actual local duty,
+    // then releases that request. This uses the real route's advance method.
+    h.sample.actor = route.advance(previous, body, 1 / 60, { duty: i >= 10 * 60 && i < 24 * 60, resolution, player });
+    Object.assign(body, { x: h.sample.actor.x, y: h.sample.actor.y, roomId: h.sample.actor.roomId });
+    h.dependency.actor.x += 1 / 60;
+    await h.frame(1000 / 60);
+    assert.equal(completed, null, 'An observed local arrival is not a failed counter or a completed Jun journey.');
+    assert.equal(h.sample.actor.crossings, 1);
+    if (h.sample.actor.arrivals !== previous.arrivals) {
+      observedRearrival = true;
+      assert.equal(previous.stage, 'walking'); assert.equal(h.sample.actor.stage, 'service');
+      assert.ok(Math.abs(h.sample.actor.x - h.sample.actor.dutyX) < .25);
+      assert.equal(h.sample.actor.arrivals, previous.arrivals + 1);
+    }
+  }
+  assert.equal(observedRearrival, true);
+  assert.equal(h.sample.actor.arrivals, arrivals + 1);
+  h.returnJun(); await h.frame(1000 / 60); await pending;
+  assert.equal(completed.status, 'returned'); assert.equal(completed.reason, 'jun-complete-native-return');
+  assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
+});
+
+test('annex-service QA requires the exact counted service arrival rather than a counter jump or omitted receipt', async () => {
+  const source = serviceQaCallbackV163('arm_asha_return_dependency');
+  const route = routes.find(r => r.definition.id === 'asha-refuge');
+  const out = simulate(route, initialActor(route));
+  const body = { ...out.actor }, player = { x: 125, y: 532, w: 44, h: 92, alive: true, roomId: 'personal-refuge' };
+  let state = structuredClone(out.state), before, after;
+  const resolution = routine(route, 20.5);
+  for (let i = 0; i < 25 * 60; i++) {
+    const next = route.advance(state, body, 1 / 60, { duty: i >= 10 * 60, resolution, player });
+    if (next.arrivals !== state.arrivals) { before = state; after = next; break; }
+    state = next;
+    Object.assign(body, { x: state.x, y: state.y, roomId: state.roomId });
+  }
+  assert.ok(before); assert.ok(after);
+  assert.equal(before.stage, 'walking'); assert.equal(after.stage, 'service');
+  for (const [label, patch, expected] of [
+    ['native arrival', {}, 'returned'],
+    ['omitted arrival', { arrivals: before.arrivals }, 'failed'],
+    ['two-count jump', { arrivals: after.arrivals + 1 }, 'failed'],
+    ['wrong service goal', { targetRoomId: 'crew-quarters' }, 'failed'],
+    ['moving service pose', { velocity: .1 }, 'failed']
+  ]) {
+    const h = ashaDependencyHostV163(); h.sample.actor = structuredClone(before);
+    h.run(source, ashaQaConfigV163);
+    let completed = null;
+    const pending = h.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__.then(value => { completed = value; });
+    await h.frame(0);
+    h.sample.actor = { ...after, ...patch }; h.returnJun();
+    await h.frame(1000 / 60); await pending;
+    assert.equal(completed.status, expected, label);
+    assert.equal(completed.reason, expected === 'returned' ? 'jun-complete-native-return' : 'asha-invalid-service-arrival-count', label);
+    assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
+  }
+});
+
 test('annex-service QA accepts only the declared Jun dependency and its complete physical return receipt', async () => {
   const source = serviceQaCallbackV163('arm_asha_return_dependency');
   const controller = withHubNpcInterdeckRoutesV165(class {}).prototype;
@@ -631,6 +704,9 @@ test('annex-service QA accepts only the declared Jun dependency and its complete
     ['Asha unmeasured teleport', x => { x.sample.actor.x -= 15; x.sample.actor.time += 1; }, 'asha-nonphysical-threshold-approach'],
     ['Asha invented distance', x => { x.sample.actor.distance += 28; x.sample.actor.time += 1; }, 'asha-nonphysical-threshold-approach'],
     ['Asha reversed time', x => { x.sample.actor.time -= 1; }, 'asha-nonphysical-threshold-approach'],
+    ['Asha invented arrival at rest', x => { x.sample.actor.arrivals++; }, 'asha-invalid-service-arrival-count'],
+    ['Asha lost arrival count', x => { x.sample.actor.arrivals = 0; }, 'asha-invalid-service-arrival-count'],
+    ['Asha fractional arrival count', x => { x.sample.actor.arrivals += .5; }, 'asha-invalid-service-arrival-count'],
     ['player moves', x => { x.hub.player.x += 1; }, 'player-left-native-refuge-threshold'],
     ['native pause', x => { x.hub.running = false; }, 'player-left-native-refuge-threshold'],
     ['Jun mission', x => { x.hub.npcRoutineResolutionsV62.set('crew-11-jun-park', { missionAssigned: true }); }, 'jun-priority-handoff-is-not-a-return'],

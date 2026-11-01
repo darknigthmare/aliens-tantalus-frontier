@@ -32,6 +32,7 @@ ROUTES = [
     {'id': 'leila-galley', 'crew': 'crew-15-leila-s-rensen', 'speaker': 'Sørensen', 'deck': 1,
      'parent': 'mess', 'annex': 'galley-service', 'home': 1955, 'post': 417,
      'parentDoor': 1488, 'annexDoor': 122, 'hour': 17, 'returnHour': 20,
+     'returnClear': 2520,
      'action': '[data-research-id="xeno-containment"]', 'returnAction': '[data-strategy-action="frontier-recon"]'}]
 report = {'status': 'running', 'checks': [], 'captures': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
           'comparisonStage': args.comparison_stage, 'routes': [],
@@ -74,6 +75,7 @@ OBSERVE = '''c => {
   visibleCount:visible.filter(n=>n.crewId===c.crew).length,
   visibleSingleton:visible.filter(n=>n.crewId===c.crew).every(n=>n===a),
   interaction:structuredClone(h.hubNpcInteractions[c.crew]||null),
+  interdeck:structuredClone(h.npcInterdeckStateV165||null),
   inputGuards:{keys:[...(h.keys||[])],activeElement:document.activeElement?.id||document.activeElement?.tagName,
     transition:Boolean(h.annexTransitionV71),closing:Boolean(h.hubDoorClosingV142),readOnly:Boolean(h.annexStateReadOnlyV87),
     nearestCrew:h.nearestAnnexNpcV141?.()?.crewId||null,playerAlive:h.player.alive,playerVx:h.player.vx,
@@ -145,6 +147,51 @@ def leave_annex(page, config):
     page.wait_for_function('()=>!__ATF_HUB__.currentAnnexV71?.()&&!__ATF_HUB__.annexTransitionV71', timeout=remaining)
 
 
+NATIVE_SERVICE_ARRIVAL_OBSERVER_V161 = '''function createServiceArrivalObserverV161(c,seed){
+  let last=null,first=null,failed=null,done=false;const events=[];
+  function reject(reason){failed=reason;done=true;return false;}
+  function observe(a){
+    if(done)return false;
+    if(!a){if(last?.roomId!==c.parent||last.stage!=='service'||last.crossings!==2
+      ||Math.abs(last.x-last.homeX)>=.25)return reject('owner-lost-before-home');done=true;return true;}
+    if(a.crewId!==c.crew||a.deck!==c.deck||![c.parent,c.annex].includes(a.roomId)||a.y!==532
+      ||![a.x,a.time,a.distance,a.homeX,a.dutyX].every(Number.isFinite)
+      ||!Number.isInteger(a.arrivals)||!Number.isInteger(a.crossings))return reject('invalid-owner');
+    if(!first){if(a.roomId!==c.annex||a.stage!=='service'||a.arrivals!==1||a.crossings!==1
+      ||Math.abs(a.x-a.dutyX)>=.25)return reject('invalid-saved-watch-origin');first=structuredClone(a);}
+    if(last){const dt=a.time-last.time,dx=Math.abs(a.x-last.x),dd=a.distance-last.distance;
+      if(dt<0||dd<0||a.homeX!==first.homeX||a.dutyX!==first.dutyX)return reject('changed-watch-ledger');
+      const portal=a.roomId!==last.roomId;
+      if(portal){if(last.stage!=='covering'||a.stage!=='revealing'||a.doorProgress!==0
+        ||a.crossings!==last.crossings+1||a.crossings!==2||dd!==0)return reject('invalid-covered-portal');}
+      else if(a.crossings!==last.crossings||dx>27*dt+.03||dd>27*dt+.03||dd+.03<dx)
+        return reject('nonphysical-floor-step');
+      const entered=last.stage==='walking'&&a.stage==='service';
+      const goal=a.roomId===c.annex&&a.targetRoomId===c.annex?a.dutyX
+        :a.roomId===c.parent&&a.targetRoomId===c.parent?a.homeX:null;
+      if(entered&&(!Number.isFinite(goal)||Math.abs(a.x-goal)>=.25||a.velocity!==0))return reject('invalid-service-goal');
+      if(a.arrivals-last.arrivals!==(entered?1:0))return reject('unobserved-service-arrival');
+      if(entered)events.push({roomId:a.roomId,x:a.x,time:a.time,arrivals:a.arrivals,crossings:a.crossings});
+    }
+    last=structuredClone(a);return true;
+  }
+  observe(seed);
+  return{observe,snapshot:()=>({first,last,events,failed,done,
+    homeArrivals:events.filter(e=>e.roomId===c.parent).length})};
+}'''
+
+
+def arm_service_arrivals(page, config):
+    page.evaluate('''c=>{const h=__ATF_HUB__,create=(''' + NATIVE_SERVICE_ARRIVAL_OBSERVER_V161 + ''');
+      const observer=create(c,h.getNpcServicePhysicalStateV165(c.id));
+      window.__ATF_SERVICE_ARRIVALS_V161__=observer;
+      function frame(){if(observer.snapshot().done)return;
+        observer.observe(h.getNpcServicePhysicalStateV165(c.id));
+        if(!observer.snapshot().done)requestAnimationFrame(frame);
+      }requestAnimationFrame(frame);
+    }''', config)
+
+
 def collect(page, config, name, stop, move_to=None):
     phase(name)
     page.evaluate('''opts=>{ window.__ATF_V161_COLLECTION__=new Promise((resolve,reject)=>{
@@ -167,7 +214,9 @@ def collect(page, config, name, stop, move_to=None):
       } requestAnimationFrame(frame);
     }); }''', {**config, 'name': name, 'stop': stop})
     if move_to is not None:
+        report.setdefault('returnClearance', {})[name] = {'requestedX': move_to, 'before': observed(page, config)}
         walk_to(page, config, move_to)
+        report['returnClearance'][name]['after'] = observed(page, config)
     result = page.evaluate('()=>window.__ATF_V161_COLLECTION__')
     rows = result['rows']
     (output / (name + '.json')).write_text(json.dumps(rows, indent=2))
@@ -301,6 +350,7 @@ with sync_playwright() as pw:
                 walk_to(page, config, config['parentDoor'])
                 page.locator('#exit-hub').click()
                 open_view(page, 'command')
+                arm_service_arrivals(page, config)
                 page.locator(config['returnAction']).click()
                 page.wait_for_function('hour=>__ATF_V51__.saveSystem.data.clock.hour===hour', arg=config['returnHour'])
                 open_hub(page, config)
@@ -312,12 +362,21 @@ with sync_playwright() as pw:
                       and waiting['route']['actor']['roomId'] == config['annex'] and waiting['route']['actor']['crossings'] == 1
                       and waiting['route']['actor']['x'] == occupied['route']['actor']['x'])
                 capture(page, prefix + '-06-occupied-return-opening.png')
-                rows = collect(page, config, prefix + '-07-return-and-handoff', 'handoff', move_to=config['parentDoor'] + 600)
+                # Stand east of Jun's real mess/lift approach as well as
+                # Leila's home; x2088 can itself trap the westbound passenger.
+                rows = collect(page, config, prefix + '-07-return-and-handoff', 'handoff',
+                               move_to=config.get('returnClear', config['parentDoor'] + 600))
                 last = next(row['actor'] for row in reversed(rows) if row['actor'])
                 handoff = observed(page, config)['route']['nativeHandoff']
+                arrivals = page.evaluate('()=>__ATF_SERVICE_ARRIVALS_V161__.snapshot()')
+                report.setdefault('serviceArrivalObservers', {})[prefix] = arrivals
+                check(prefix + ': every service arrival is observed at its real goal with one exact counter increment',
+                      arrivals['done'] and arrivals['failed'] is None and arrivals['homeArrivals'] == 1
+                      and arrivals['last']['arrivals'] == arrivals['first']['arrivals'] + len(arrivals['events']))
                 check(prefix + ': real floor return reaches parent home before explicit unobserved native handoff',
                       last['roomId'] == config['parent'] and abs(last['x'] - last['homeX']) < .25
-                      and last['crossings'] == 2 and last['arrivals'] == 2 and handoff['observedTravel'] is False)
+                      and last['crossings'] == 2 and last['arrivals'] == arrivals['last']['arrivals']
+                      and handoff['observedTravel'] is False)
                 check(prefix + ': continuous return observes exactly one closed-leaf portal transfer', report['observedPortalTransfers'][prefix + '-07-return-and-handoff'] == 1)
                 capture(page, prefix + '-08-parent-after-native-handoff.png')
             report['routes'].append({'id': prefix, 'status': 'passed'})

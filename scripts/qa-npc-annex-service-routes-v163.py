@@ -202,16 +202,27 @@ NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started)
     // Asha may therefore approach the player inside the refuge threshold.
     // Observe that real walk without admitting a chart change, overlap,
     // unsupported pose, invented distance or faster-than-native movement.
-    if(o.deck!==opts.deck||o.y!==532||o.arrivals!==1
+    if(o.deck!==opts.deck||o.y!==532
       ||![o.x,o.time,o.distance,o.dutyX,o.doorProgress,p.w,p.h].every(Number.isFinite)
       ||p.w!==44||p.h!==92||!['service','walking','opening'].includes(o.stage)
       ||o.doorProgress<0||o.doorProgress>1||o.x<opts.annexDoor-.25||o.x>o.dutyX+.25
       ||o.x<p.x+p.w+12-.26)
       return failed('asha-invalid-supported-threshold-approach');
+    // The route increments arrivals on entering the real service goal,
+    // independently of crossings. A temporary native duty request can walk
+    // Asha back to that post without ever leaving the refuge. Require the
+    // observed walking -> supported service transition for exactly one count.
+    if(!Number.isInteger(o.arrivals)||o.arrivals<1||o.arrivals>1e6
+      ||!lastOwner&&o.arrivals!==1)
+      return failed('asha-invalid-service-arrival-count');
     if(lastOwner){const dt=o.time-lastOwner.time,dx=Math.abs(o.x-lastOwner.x),distance=o.distance-lastOwner.distance;
       if(dt<0||distance<0||dx>27*dt+.03||distance>27*dt+.03||distance+.03<dx)
-        return failed('asha-nonphysical-threshold-approach');}
-    lastOwner={x:o.x,time:o.time,distance:o.distance};
+        return failed('asha-nonphysical-threshold-approach');
+      const arrived=lastOwner.stage==='walking'&&o.stage==='service'
+        &&o.targetRoomId===opts.annex&&Math.abs(o.x-o.dutyX)<.25&&o.velocity===0;
+      if(o.dutyX!==lastOwner.dutyX||o.arrivals-lastOwner.arrivals!==(arrived?1:0))
+        return failed('asha-invalid-service-arrival-count');}
+    lastOwner={x:o.x,time:o.time,distance:o.distance,stage:o.stage,arrivals:o.arrivals,dutyX:o.dutyX};
     if(!originMatches(e.origin)||!originMatches(first.dependency?.origin))return failed('jun-origin-mismatch');
     if(e.nativeHandoff||s.routine?.missionAssigned||s.routine?.needsCare||s.routine?.alert
       ||['medical-recovery','mission-assignment','unavailable','active-crisis','infestation','annex-assignment'].includes(a?.reason))
