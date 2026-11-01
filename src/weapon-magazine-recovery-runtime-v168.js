@@ -1,5 +1,7 @@
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { weaponMasterySummaryV167 } from './weapon-mastery-v167.js';
+import { isDetachableMagazineFeedV177, weaponFeedLoadedRoundsV167,
+  weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
 import { createWeaponModuleInventoryV168, installWeaponModuleV168, uninstallWeaponModuleV168,
   equippedWeaponModulesV168, captureWeaponModulesV168, restoreWeaponModulesV168 } from './weapon-attachments-v168.js';
 import { stampEjectedMagazinesV168, visibleDroppedMagazinesV168,
@@ -144,12 +146,20 @@ export function withMagazineRecoveryWorldV168(Base) {
       const prior = super.getInteractionPrompt(actor);
       const nearby = this.nearestMagazineV168(actor);
       if (!nearby || prior && prior !== 'S  COUVERTURE · F  TIR · R  RECHARGER') return prior;
-      return 'E  RÉCUPÉRER CHARGEUR · ' + nearby.rounds + ' CARTOUCHES';
+      return nearby.rounds === 0 ? 'E  RÉCUPÉRER CHARGEUR VIDE'
+        : 'E  RÉCUPÉRER CHARGEUR · ' + nearby.rounds + ' CARTOUCHES';
     }
 
     speedReloadWeaponV168(actor = this.player) {
-      if (!actor?.weaponFeedV167 || !actor.alive || actor.downed || actor.reloading || actor.inVehicle
+      if (!isDetachableMagazineFeedV177(actor?.weaponFeedV167) || !actor.alive || actor.downed || actor.reloading || actor.inVehicle
         || !this.canPerformGameplayAction?.(actor)) return false;
+      const feed = actor.weaponFeedV167;
+      // A rejected speed request must not silently start the legacy reload
+      // after V77 discards an out-of-sync feed. Normal R retains that explicit
+      // compatibility path for outside ammo pickups and older saves.
+      if (feed.ownerId !== this.magazineFeedOwnerV168(actor)
+        || weaponFeedLoadedRoundsV167(feed) !== actor.ammo
+        || weaponFeedReserveRoundsV167(feed) !== actor.ammoReserve) return false;
       const previousPolicy = actor.reloadPolicyV168;
       actor.reloadPolicyV168 = 'speed';
       try {

@@ -195,7 +195,9 @@ export function getArmoryStorefrontPlanV169(roomId) {
 
 /** Render only reviewed-size artwork. Missing/unready atlases NEVER create a
  * procedural stand-in and the existing room/interaction draws normally. */
-export function drawArmoryStorefrontV169(ctx, image, plan, { originX = 0, phase = 'back' } = {}) {
+export function drawArmoryStorefrontV169(ctx, image, plan, {
+  originX = 0, phase = 'back', layers = null, excludeLayers = []
+} = {}) {
   if (!ctx || !plan || !image || image.naturalWidth !== ARMORY_ART_CANVAS_V169.w
     || image.naturalHeight !== ARMORY_ART_CANVAS_V169.h || !image.complete
     || !valid(originX)) return { drawn: 0, reason: 'unavailable-or-unverified-atlas' };
@@ -204,6 +206,7 @@ export function drawArmoryStorefrontV169(ctx, image, plan, { originX = 0, phase 
   for (const item of plan.assets) {
     if (phase === 'front' && item.layer !== 'facade') continue;
     if (phase !== 'front' && item.layer === 'facade') continue;
+    if ((layers !== null && !layers.includes(item.layer)) || excludeLayers.includes(item.layer)) continue;
     const a = item.src, b = item.dest;
     ctx.drawImage(image, a.x, a.y, a.w, a.h, originX + b.x, b.y, b.w, b.h);
     drawn++;

@@ -355,3 +355,104 @@ test('the actual app renderer atomically selects plans and records readings whil
   assert.deepEqual(selected, expected); assert.equal(launches.length, 0);
   assert.equal(document.activeElement, launch, 'the selected native launch control receives focus without deployment');
 });
+
+// Declared structural legacy-profile fixtures, not additional observed mission
+// journeys. Fresh native QZ-18 and M577 returns are covered in their own suites.
+function preparedLegacyChapter(chapterId, protocolId) {
+  const save = createDefaultSave(), selected = campaign(chapterId === 'relay' ? 'special-archive-relay' : 'special-apc-convoy');
+  const id = `operation-7-${selected.id}`;
+  save.needsPlayerCreationV84 = false;
+  save.strategy.specialOperationResolutionSerialV121 = 7;
+  if (chapterId === 'relay') save.archiveRelayArchivesV122 = {
+    schema: 122,
+    case: { id: 'qz18-last-relay', operationId: id, verdict: 'delayed-distress',
+      documentIds: [...ARCHIVE_RELAY_DOCUMENT_IDS_V122], completedDay: 1, completedHour: 9 },
+    lastReturnV160: { schema: 160, operationId: id, campaignId: selected.id, worldId: selected.worldId,
+      success: true, reason: 'objective', completedDay: 1, completedHour: 9, protocolId,
+      ledger: { schema: 160, operationId: id, receipt: null, readTopics: ['chronology'], activeTopic: 'chronology' } }
+  };
+  else save.convoyReturnHistoryV162 = { schema: 162, entries: [{ schema: 162, operationId: id, serial: 7,
+    campaignId: selected.id, worldId: selected.worldId, success: true, reason: 'objective', operator: null, protocolId,
+    summary: { returnConfirmed: true, distance: 3200, crushersCleared: 2, queenDefeated: true, hull: 247.5 },
+    readTopics: ['vehicle'], activeTopic: 'vehicle',
+    receipt: { kind: 'native-apc-resolution-v162', operationId: id, serial: 7,
+      campaignId: selected.id, worldId: selected.worldId, success: true } }] };
+  return save;
+}
+
+test('all four preparation protocols of archived QZ-18 and M577 returns remain visible after a real save/load', () => {
+  const domSource = readFileSync(new URL('./verify-campaign-story-v160.mjs', import.meta.url), 'utf8');
+  const domStart = domSource.indexOf('function storyDocument() {'), domEnd = domSource.indexOf('\nconst insertion =', domStart);
+  const documentFixture = new Function(`${domSource.slice(domStart, domEnd)};return storyDocument;`)();
+  for (const [chapterId, protocol, label, selectedTopic] of [
+    ['relay', 'technical-audit', 'Audit technique', 'objective'],
+    ['relay', 'crew-prevention', 'Prévention à bord', 'return'],
+    ['convoy', 'hull-review', 'Bilan du blindage', 'conduct'],
+    ['convoy', 'route-review', 'Mémoire du corridor', 'objective']
+  ]) {
+    const save = preparedLegacyChapter(chapterId, protocol), protectedBefore = withoutNotebook(save);
+    assert.equal(preserveLetheContinuityV163(save).changed, true);
+    assert.equal(save.letheContinuityV163.chapters[chapterId].firstSuccess.protocolId, protocol);
+    assert.equal(save.letheContinuityV163.chapters[chapterId].latestReturn.protocolId, protocol);
+    assert.deepEqual(save.letheContinuityV163.chapters[chapterId].latestReturn.readTopics, [],
+      'A different chapter reader must not invent an explicit reading in this common dossier.');
+    assert.deepEqual(withoutNotebook(save), protectedBefore);
+    const values = new Map(), storage = { getItem: k => values.get(k) ?? null,
+      setItem: (k, v) => values.set(k, v), removeItem: k => values.delete(k) };
+    const writer = new SaveSystem(storage); writer.newGame(1); writer.commit(save);
+    const loaded = new SaveSystem(storage).load(1);
+    const entry = letheContinuityModelV163(loaded).chapters.find(c => c.id === chapterId).latestReturn;
+    assert.equal(entry.protocolId, protocol); assert.equal(entry.protocolLabel, label);
+    assert.equal(entry.selectedTopic, selectedTopic);
+    const { root } = documentFixture(); mountLetheContinuityV163(root, { save: loaded });
+    assert.equal(root.querySelector(`[data-lethe-protocol="${protocol}"]`).textContent, `Compte rendu : ${label}`);
+    assert.deepEqual(loaded.galaxy.resources, save.galaxy.resources);
+    assert.deepEqual(loaded.clock, save.clock);
+  }
+});
+
+test('legacy missing dossier choices are enriched without overwriting readings, native facts or conflicting explicit choices', () => {
+  for (const [chapterId, protocol, conflictingProtocol] of [
+    ['relay', 'technical-audit', 'crew-prevention'], ['convoy', 'route-review', 'hull-review']
+  ]) {
+    const save = preparedLegacyChapter(chapterId, protocol);
+    preserveLetheContinuityV163(save);
+    const chapter = save.letheContinuityV163.chapters[chapterId];
+    // This is the actual shape produced by the old V163 projection: the
+    // validated source retains a choice while the shared dossier stores null.
+    chapter.firstSuccess.protocolId = chapter.latestReturn.protocolId = null;
+    chapter.latestReturn.readTopics = ['return']; chapter.latestReturn.activeTopic = 'return';
+    const protectedBefore = withoutNotebook(save), before = clone(chapter);
+    assert.equal(preserveLetheContinuityV163(save).changed, true);
+    assert.deepEqual(save.letheContinuityV163.chapters[chapterId], {
+      firstSuccess: { ...before.firstSuccess, protocolId: protocol },
+      latestReturn: { ...before.latestReturn, protocolId: protocol }
+    });
+    assert.equal(letheContinuityModelV163(save).chapters.find(c => c.id === chapterId).latestReturn.selectedTopic, 'return');
+    assert.deepEqual(withoutNotebook(save), protectedBefore);
+    const normalized = clone(save); assert.equal(preserveLetheContinuityV163(save).changed, false);
+    assert.deepEqual(save, normalized);
+    const source = chapterId === 'relay' ? save.archiveRelayArchivesV122.lastReturnV160 : save.convoyReturnHistoryV162.entries[0];
+    source.protocolId = null;
+    const withoutSourceChoice = clone(save);
+    assert.equal(preserveLetheContinuityV163(save).changed, false);
+    assert.deepEqual(save, withoutSourceChoice, 'Incomplete historical metadata cannot erase an existing explicit choice.');
+    source.protocolId = conflictingProtocol;
+    const conflicted = clone(save);
+    assert.equal(preserveLetheContinuityV163(save).changed, false);
+    assert.deepEqual(save, conflicted, 'Two explicit different choices for one operation must remain a conflict.');
+  }
+});
+
+test('a later QZ-18 return and a foreign chapter protocol cannot lend a preparation to an older dossier', () => {
+  const save = preparedLegacyChapter('relay', 'crew-prevention');
+  const later = save.archiveRelayArchivesV122.lastReturnV160;
+  later.operationId = 'operation-8-special-archive-relay'; later.success = false; later.reason = 'retreat'; later.ledger = null;
+  save.strategy.specialOperationResolutionSerialV121 = 8;
+  preserveLetheContinuityV163(save);
+  assert.equal(save.letheContinuityV163.chapters.relay.latestReturn.operationId, 'operation-7-special-archive-relay');
+  assert.equal(save.letheContinuityV163.chapters.relay.latestReturn.protocolId, null);
+  const foreign = preparedLegacyChapter('convoy', 'technical-audit');
+  assert.equal(preserveLetheContinuityV163(foreign).changed, false);
+  assert.equal(foreign.letheContinuityV163.chapters.convoy.latestReturn, null);
+});

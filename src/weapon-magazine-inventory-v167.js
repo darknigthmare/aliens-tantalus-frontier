@@ -1,3 +1,5 @@
+import { getSpecialFeedProfileV171 } from './weapon-special-feeds-v171.js';
+
 /** Physical detachable feed model: opt-in bridge for the V77 legacy ammo contract.
  * Pure state transitions. No VFX or weapons are produced by this module.
  * The pre-existing M41A/M56 caseless visual profiles remain authoritative.
@@ -11,6 +13,15 @@ const LOCATIONS = new Set(['mounted', 'inventory', 'world']);
 const PHASES = new Set(['started', 'ejected', 'inserted', 'chambered']);
 const RECEIPT_LIMIT = 2048;
 const MAX_SPARES = 128;
+const MAX_SERIAL = 10000000;
+
+// The generic production transaction belongs to detachable boxes and drums.
+// Linked belts, fuel tanks and energy cells retain their specialist admission.
+export const isDetachableMagazineFeedV177 = (value, weaponDefinitionId = value?.weaponDefinitionId) =>
+  ['box', 'drum'].includes(typeof value === 'string' ? value : value?.feed)
+  && !getSpecialFeedProfileV171(weaponDefinitionId);
+export const canAdvanceMagazineRevisionV177 = (magazine, amount = 1) =>
+  int(amount) && int(magazine?.revision) && magazine.revision <= MAX_SERIAL - amount;
 
 const remember = (feed, receipt) => {
   if (!id(receipt) || feed.receipts.includes(receipt)) return false;
@@ -31,7 +42,8 @@ export function validateWeaponFeedV167(s) {
     || s.nextTransactionSerial > 10000000 || !Array.isArray(s.magazines)
     || s.magazines.length > MAX_SPARES + 1 || !Array.isArray(s.receipts)
     || s.receipts.length > RECEIPT_LIMIT || !unique(s.receipts) || !s.receipts.every(id)) return false;
-  if (!unique(s.magazines.map(m => m.id))) return false;
+  if (!s.magazines.every(m => m !== null && typeof m === 'object' && !Array.isArray(m))
+    || !unique(s.magazines.map(m => m.id))) return false;
   let mountedCount = 0;
   for (const m of s.magazines) {
     if (!id(m.id) || m.ammoTypeId !== s.ammoTypeId || !LOCATIONS.has(m.location)
@@ -48,9 +60,13 @@ export function validateWeaponFeedV167(s) {
   if (tx !== null) {
     if (!tx || !id(tx.id) || !id(tx.selectedId) || !['tactical', 'speed'].includes(tx.policy)
       || !PHASES.has(tx.phase) || !Number.isFinite(tx.progress) || tx.progress < 0 || tx.progress > 1
-      || !selected(s) || !id(tx.oldId) && tx.oldId !== null) return false;
+      || !selected(s) || !id(tx.oldId) && tx.oldId !== null
+      || !id('reload:' + tx.id) || !id('cancel:' + tx.id)
+      || s.receipts.includes('reload:' + tx.id) || s.receipts.includes('cancel:' + tx.id)) return false;
     if (tx.phase === 'started' && (tx.progress >= .35 || s.mountedMagazineId !== tx.oldId)) return false;
     if (tx.phase === 'ejected' && (tx.progress < .35 || tx.progress >= .75 || s.mountedMagazineId !== null)) return false;
+    if (tx.phase === 'inserted' && (tx.progress < .75 || tx.progress >= .92)) return false;
+    if (tx.phase === 'chambered' && (tx.progress < .92 || tx.progress >= 1)) return false;
     if (['inserted', 'chambered'].includes(tx.phase) && s.mountedMagazineId !== tx.selectedId) return false;
     if (selected(s).location !== (tx.phase === 'started' || tx.phase === 'ejected' ? 'inventory' : 'mounted')) return false;
   }
@@ -97,8 +113,11 @@ export function weaponFeedReserveRoundsV167(state) {
 
 export function spendAcceptedRoundV167(state, receipt) {
   if (!validateWeaponFeedV167(state) || !id(receipt) || state.reload && state.reload.phase === 'ejected'
-    || state.receipts.includes('shot:' + receipt)) return false;
+    || !id('shot:' + receipt) || state.receipts.includes('shot:' + receipt)) return false;
   const m = mounted(state);
+  if (!state.chamber && !(m?.rounds > 0)) return false;
+  const revisions = state.chamber ? (m?.rounds > 0 ? 1 : 0) : Math.min(m?.rounds || 0, 2);
+  if (revisions && !canAdvanceMagazineRevisionV177(m, revisions)) return false;
   if (!state.chamber && m?.rounds > 0) { m.rounds--; m.revision++; state.chamber = 1; }
   if (!state.chamber) return false;
   state.chamber--;
@@ -110,18 +129,54 @@ export function spendAcceptedRoundV167(state, receipt) {
 
 export function beginWeaponReloadV167(state, receipt = null, policy = 'tactical', selectedId = null) {
   if (!validateWeaponFeedV167(state) || state.reload || receipt !== null && !id(receipt)
+    || selectedId !== null && !id(selectedId)
     || !['tactical', 'speed'].includes(policy) || state.receipts.includes('reload:' + receipt)
     || state.receipts.includes('cancel:' + receipt)) return false;
   const txId = receipt || state.weaponInstanceId + ':reload:' + (state.nextTransactionSerial + 1);
-  if (!id(txId)) return false;
-  let replacement = selectedId ? state.magazines.find(m => m.id === selectedId) : state.magazines.find(m => m.location === 'inventory' && m.rounds > 0);
-  if (!replacement && !selectedId && state.looseRounds > 0 && state.magazines.length < MAX_SPARES + 1) {
-    const count = Math.min(state.magazineSize, state.looseRounds);
-    replacement = { id: state.weaponInstanceId + ':mag:' + ++state.nextSerial, ammoTypeId: state.ammoTypeId,
-      capacity: state.magazineSize, rounds: count, location: 'inventory', revision: 0 };
-    state.magazines.push(replacement); state.looseRounds -= count;
+  if (!id(txId) || !id('reload:' + txId) || !id('cancel:' + txId)
+    || state.receipts.includes('reload:' + txId) || state.receipts.includes('cancel:' + txId)
+    || receipt === null && state.nextTransactionSerial >= MAX_SERIAL) return false;
+  let replacement = selectedId ? state.magazines.find(m => m.id === selectedId)
+    : state.magazines.filter(m => m.location === 'inventory' && m.rounds > 0
+      && canAdvanceMagazineRevisionV177(m, state.chamber ? 1 : 2))
+      .reduce((best, m) => !best || m.rounds > best.rounds ? m : best, null);
+  let packed = 0, created = false, nextSerial = state.nextSerial;
+  if (!selectedId && state.looseRounds > 0) {
+    // Preserve the bounded set of real containers. Creating a new magazine
+    // for every loose-round refill eventually stranded an otherwise usable
+    // reserve behind129 empty magazines. World objects are never teleported.
+    let empty = state.magazines.filter(m => m.location === 'inventory' && m.rounds === 0
+      && canAdvanceMagazineRevisionV177(m, state.chamber ? 2 : 3))
+      .reduce((best, m) => !best || m.capacity > best.capacity ? m : best, null);
+    if (!empty && state.magazines.length < MAX_SPARES + 1
+      && Math.min(state.magazineSize, state.looseRounds) > (replacement?.rounds || 0)) {
+      do { nextSerial++; }
+      while (nextSerial <= MAX_SERIAL && state.magazines.some(m => m.id === state.weaponInstanceId + ':mag:' + nextSerial));
+      const magazineId = state.weaponInstanceId + ':mag:' + nextSerial;
+      if (nextSerial > MAX_SERIAL || !id(magazineId)) return false;
+      empty = { id: magazineId, ammoTypeId: state.ammoTypeId,
+        capacity: state.magazineSize, rounds: 0, location: 'inventory', revision: 0 };
+      created = true;
+    }
+    if (empty && Math.min(empty.capacity, state.looseRounds) > (replacement?.rounds || 0)) {
+      replacement = empty; packed = Math.min(empty.capacity, state.looseRounds);
+    } else created = false;
+  } else if (selectedId && replacement?.location === 'inventory' && replacement.rounds === 0) {
+    packed = Math.min(replacement.capacity, state.looseRounds);
   }
-  if (!replacement || replacement.location !== 'inventory' || replacement.rounds <= 0) return false;
+  if (!replacement || replacement.location !== 'inventory' || replacement.rounds + packed <= 0) return false;
+  const old = mounted(state), insertRevisions = 1 + (!state.chamber ? 1 : 0) + (packed && !created ? 1 : 0);
+  // An automatic reload must not replace a fuller mounted magazine with a
+  // partly used spare. An explicit selection can still request that swap.
+  if (!selectedId && replacement.rounds + packed <= (old?.rounds || 0)) return false;
+  if (old && !canAdvanceMagazineRevisionV177(old)
+    || !canAdvanceMagazineRevisionV177(replacement, insertRevisions)) return false;
+  // All rejection conditions precede packing, ID allocation and actor changes.
+  if (created) { state.magazines.push(replacement); state.nextSerial = nextSerial; }
+  if (packed) {
+    replacement.rounds += packed; state.looseRounds -= packed;
+    if (!created) replacement.revision++;
+  }
   if (receipt === null) state.nextTransactionSerial++;
   state.reload = { id: txId, selectedId: replacement.id, oldId: state.mountedMagazineId,
     policy, phase: 'started', progress: 0 };
@@ -132,6 +187,16 @@ export function advanceWeaponReloadV167(state, receipt, progress) {
   if (!validateWeaponFeedV167(state) || !state.reload || state.reload.id !== receipt
     || !Number.isFinite(progress) || progress < state.reload.progress || progress < 0 || progress > 1) return false;
   const tx = state.reload;
+  // A resumed transaction may contain a bounded but exhausted revision. Check
+  // every marker before the first mutation, including a multi-marker update.
+  const old = mounted(state), replacement = selected(state);
+  const eject = progress >= .35 && tx.phase === 'started';
+  const insert = progress >= .75 && (tx.phase === 'ejected' || eject);
+  const chamber = progress >= .92 && (tx.phase === 'inserted' || insert)
+    && !state.chamber && (insert ? replacement : old)?.rounds > 0;
+  if (eject && old && !canAdvanceMagazineRevisionV177(old)
+    || insert && !canAdvanceMagazineRevisionV177(replacement, 1 + (chamber ? 1 : 0))
+    || chamber && !insert && !canAdvanceMagazineRevisionV177(old)) return false;
   if (progress >= .35 && tx.phase === 'started') {
     const old = mounted(state);
     if (old) { old.location = tx.policy === 'speed' ? 'world' : 'inventory'; old.revision++; }

@@ -156,9 +156,18 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
       feet: { near: observed.gaitTransition.feet.far, far: observed.gaitTransition.feet.near } } : null,
     stopRecoveryV165: observed.stopRecoveryV165 ? { ...observed.stopRecoveryV165,
       side: observed.stopRecoveryV165.side === 'near' ? 'far' : 'near' } : null } : observed;
-  if (prior && now === prior.time && actor.x === prior.x && actor.y === prior.y
-    && !headingChanged && Boolean(actor.crouching) === prior.crouching
-    && (actor.grounded === true) === prior.grounded) return prior;
+  const postureChanged = prior && Boolean(actor.crouching) !== prior.crouching;
+  const headingChangeV165 = headingChanged ? { from: observed.facing, to: facing, at: now,
+    retainedTravel: prior.distance, retainedGroundHistory: prior.grounded && actor.grounded === true && !postureChanged,
+    depthSidesSwapped: true, contact: 'ankle-pivot-not-fixed-toe' } : prior?.headingChangeV165 || null;
+  if (prior && now === prior.time && !postureChanged && (actor.grounded === true) === prior.grounded) {
+    // A correction at an unchanged simulation clock transports the reached
+    // pose, rather than buying a step or starting a stop gesture. Rebase its
+    // coordinates now so the next real tick cannot replay that correction.
+    // An accepted facing change still exchanges only the two depth labels.
+    if (!headingChanged && actor.x === prior.x && actor.y === prior.y) return prior;
+    return { ...prior, x: actor.x, y: actor.y, headingChangeV165 };
+  }
   const desiredGait = activeGait(actor);
   // A stopped run keeps its phase and contacts; merely releasing sprint does
   // not swap to another stride before the remaining boot has met the floor.
@@ -169,14 +178,9 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
     : humanGaitProfileV136(actor, gait);
   const stride = !requested && prior && Boolean(actor.crouching) === prior.crouching
     ? prior.stride : humanGaitStrideV133(actor, gait, scale);
-  const dx = prior ? actor.x - prior.x : 0;
+  const dx = prior && now > prior.time ? actor.x - prior.x : 0;
   const moved = requested && Math.abs(dx) > 1e-7;
-  const relabelSameObservation = headingChanged && now === prior.time && dx === 0
-    && actor.y === prior.y && Boolean(actor.crouching) === prior.crouching
-    && (actor.grounded === true) === prior.grounded;
-  const striding = moved && Math.abs(finite(actor.vx)) > (actor.crouching ? 6 : 8)
-    || Boolean(relabelSameObservation && requested && prior.moving);
-  const postureChanged = prior && Boolean(actor.crouching) !== prior.crouching;
+  const striding = moved && Math.abs(finite(actor.vx)) > (actor.crouching ? 6 : 8);
   // Support occupies [0,duty] in either direction. Keep its centre aligned
   // while acceleration shortens support; otherwise the first left step holds
   // its old boot for an extra half of the removed duty and overextends the
@@ -197,10 +201,7 @@ export function advancePlayerLocomotionStateV129(previous, actor, timeSeconds,
     stopRecoveryV165: null,
     settle, settleProgress: clamp(settle / C.settleDuration),
     source: 'observed-ground-displacement',
-    headingChangeV165: headingChanged ? { from: observed.facing, to: facing, at: now,
-      retainedTravel: prior.distance, retainedGroundHistory: prior.grounded && actor.grounded === true && !postureChanged,
-      depthSidesSwapped: true, contact: 'ankle-pivot-not-fixed-toe' }
-      : prior?.headingChangeV165 || null,
+    headingChangeV165,
     gaitTransition: prior && !postureChanged ? advanceGaitTransition(prior, cycles, moved ? Math.abs(dx) : 0) : null };
   if (prior?.hasWalked && !striding && !postureChanged) {
     // The simulation's exponential braking has a long subpixel tail. Lower

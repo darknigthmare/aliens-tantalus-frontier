@@ -1,4 +1,4 @@
-import { HUB_DECKS, HUB_WORLD } from './hub-game.js';
+import { HUB_DECKS, HUB_WORLD, buildHubObstacleGeometryV87 } from './hub-game.js';
 import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { liftPhaseDurationV163 } from './hub-lift-transit-v163.js';
 
@@ -67,4 +67,75 @@ export function advanceNpcLiftTransitV165(previous, delta, { running = true, sou
   next = { ...next, phase: phases[phases.indexOf(trip.phase) + 1], elapsed: 0,
     facing: trip.phase === 'opening' ? Math.sign(trip.exitX - trip.cabinX) : trip.facing };
   return { trip: next, handoff: trip.phase === 'travel', complete: false, blocked: false, walked };
+}
+
+const queueOverlapV177 = (a,b) => a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y;
+function queuePassengerV177(entry) {
+  const d=entry?.definition,e=entry?.state,a=e?.actor,b=entry?.body;
+  if(entry?.canYield!==true||!d||!e||e.localOwner||!a||!b||a.lift
+    ||!['walking-lift','waiting-lift'].includes(a.stage)||!crewIds.includes(d.crewId)
+    ||typeof d.id!=='string'||!/^[a-z0-9-]{1,80}$/.test(d.id)
+    ||a.crewId!==d.crewId||b.crewId!==d.crewId||b.alive===false||b.downed
+    ||b.w!==44||b.h!==92||a.y!==532||b.y!==532||b.roomId!==a.roomId
+    ||![a.x,a.velocity,b.x,b.vx===undefined?0:b.vx,entry.destinationX].every(finite)
+    ||Math.abs(a.x-b.x)>1e-6||!['outbound','return'].includes(a.direction))return null;
+  const home=e.stationOrigin||e.origin,toDeck=a.direction==='return'?home?.deck:d.deck;
+  if(!Number.isInteger(a.deck)||!Number.isInteger(toDeck)||a.deck===toDeck
+    ||a.deck<0||a.deck>=HUB_DECKS.length||toDeck<0||toDeck>=HUB_DECKS.length)return null;
+  const from=npcLiftSocketV165(a.deck,d.shaftId),to=npcLiftSocketV165(toDeck,d.shaftId);
+  if(!from||!to||a.roomId!==from.roomId||from.x!==to.x)return null;
+  const cabinX=from.x-22;
+  if(Math.abs(a.x-cabinX)>96.000001)return null;
+  return{routeId:d.id,crewId:d.crewId,shaftId:d.shaftId,fromDeck:a.deck,toDeck,
+    cabinX,arrivalX:cabinX+(Math.sign(entry.destinationX-cabinX)||-1)*96,actor:a,body:b};
+}
+
+/** Resolve only a genuine closed departure cycle. The election is derived
+ * from the saved route/direction/deck, never elapsed time or actor insertion
+ * order. It assigns a walking goal; ownership and physical movement stay in
+ * the existing route controller. No queue credit constitutes a lift journey. */
+export function npcLiftQueueCourtesyPlanV177(entries,{shaftId,occupied=false}={}) {
+  if(occupied||!Array.isArray(entries)||typeof shaftId!=='string')return null;
+  const passengers=entries.map(queuePassengerV177).filter(p=>p&&p.shaftId===shaftId)
+    .sort((a,b)=>a.routeId.localeCompare(b.routeId));
+  if(new Set(passengers.map(p=>p.routeId)).size!==passengers.length
+    ||new Set(passengers.map(p=>p.crewId)).size!==passengers.length)return null;
+  const close=(path,start)=>{
+    const last=path.at(-1);
+    if(last.toDeck===start.fromDeck)return path.length>1?path:null;
+    if(path.length>=passengers.length)return null;
+    for(const next of passengers)if(next.fromDeck===last.toDeck&&!path.includes(next)){
+      const cycle=close([...path,next],start);if(cycle)return cycle;
+    }
+    return null;
+  };
+  let cycle=null;
+  for(const first of passengers){cycle=close([first],first);if(cycle)break;}
+  if(!cycle)return null;
+  const winner=cycle[0],yielding=cycle[1],holdingX=winner.cabinX-Math.sign(winner.arrivalX-winner.cabinX)*96;
+  if(yielding.fromDeck!==winner.toDeck||yielding.cabinX!==winner.cabinX)return null;
+  const walk={x:Math.min(yielding.actor.x,holdingX),y:532,w:44+Math.abs(holdingX-yielding.actor.x),h:92};
+  if(buildHubObstacleGeometryV87(yielding.fromDeck)
+    .some(box=>box.collisionMode!=='one-way-top'&&queueOverlapV177(walk,box)))return null;
+  return{schema:177,shaftId,winnerRouteId:winner.routeId,winnerCrewId:winner.crewId,
+    fromDeck:winner.fromDeck,toDeck:winner.toDeck,cabinX:winner.cabinX,arrivalX:winner.arrivalX,
+    yieldRouteId:yielding.routeId,yieldCrewId:yielding.crewId,holdingX,
+    cycle:cycle.map(p=>p.routeId)};
+}
+
+/** Departure priority is relaxed only after its actual sole body is stopped
+ * at the opposite96px waiting mark, outside the complete arrival sweep. The
+ * original occupancy and cabin-reservation checks remain mandatory. */
+export function npcLiftQueueCourtesyClearedV177(plan,entry) {
+  const p=queuePassengerV177(entry);
+  if(plan?.schema!==177||!p||p.routeId!==plan.yieldRouteId||p.crewId!==plan.yieldCrewId
+    ||p.shaftId!==plan.shaftId||p.fromDeck!==plan.toDeck||p.cabinX!==plan.cabinX
+    ||Math.abs(p.actor.x-plan.holdingX)>.01||Math.abs(p.actor.velocity)>.01
+    ||Math.abs(p.body.vx||0)>.1)return false;
+  const side=Math.sign(plan.arrivalX-plan.cabinX);
+  if(![-1,1].includes(side)||plan.arrivalX!==plan.cabinX+side*96
+    ||plan.holdingX!==plan.cabinX-side*96)return false;
+  const arrival={x:Math.min(plan.cabinX,plan.arrivalX)-12,y:532,
+    w:44+Math.abs(plan.arrivalX-plan.cabinX)+24,h:92};
+  return !queueOverlapV177(arrival,p.body);
 }

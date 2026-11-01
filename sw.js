@@ -1,6 +1,12 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-dialogue-tantalus-batch100-v168';
+const CACHE = 'atf-v143-open-workstreams-v177';
 const SHELL = Object.freeze([
+  '/src/hub-room-enrichment-v177.js',
+  '/src/hub-batch-command-v177.js',
+  '/src/hub-batch-habitat-v177.js',
+  '/src/hub-batch-industrial-v177.js',
+  '/src/hub-batch-engineering-v177.js',
+  '/src/weapon-special-feeds-v171.js',
   '/src/npc-dialogue-portraits-v168.js',
   '/src/hub-room-backgrounds-v168.js',
   '/src/hub-room-batch-details-v168.js',

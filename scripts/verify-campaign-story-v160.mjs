@@ -228,6 +228,9 @@ test('the real causal incident notice appears only while unresolved, never befor
 test('both real native QZ-18 terminal results fund only their selected return protocol, once', async () => {
   for (const protocolId of ['technical-audit', 'crew-prevention']) {
     const { save } = await nativeCompletedRun(protocolId);
+    preserveLetheContinuityV163(save);
+    assert.equal(save.letheContinuityV163.chapters.relay.latestReturn.protocolId, protocolId,
+      'The common Lethe dossier must retain the actual QZ-18 preparation selected before this native return.');
     const before = clone({ research: save.galaxy.resources.research, morale: save.hub.systems.morale });
     const applied = applyCampaignConsequence(save, campaign, world, { success: true }).storyReturn;
     assert.equal(applied.applied, true); assert.equal(applied.protocolId, protocolId);

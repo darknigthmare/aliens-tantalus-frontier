@@ -24,6 +24,7 @@ import { getHubAnnexRuntimeGeometryV139 } from '../src/hub-annex-runtime-geometr
 import { createDefaultSave,migrateSave } from '../src/save.js';
 import { npcLiftSocketV165,createNpcLiftTransitV165,advanceNpcLiftTransitV165,
   npcLiftPoseV165,normalizeNpcLiftTransitV165 } from '../src/npc-lift-transit-v165.js';
+import { requestShipPortDockV87,stepShipPortV87,canAccessPortCounterV87 } from '../src/ship-port-state-v87.js';
 import { withHubNpcStationRelaysV166,normalizeNpcStationRelaysV166,
   NPC_STATION_RELAY_DEFINITIONS_V166 as relayDefinitions } from '../src/npc-station-relays-v166.js';
 
@@ -94,6 +95,19 @@ const stationDefinitions=[
 const definition=c=>relayDefinitions.find(d=>d.crewId===c.crewId);
 const body=(h,d)=>h.getNpcStationRelayActorV166(d.id);
 const localState=(h,c)=>h.getNpcServicePhysicalStateV165(c.localRouteId);
+
+function dockedQueueCampaignV177(){
+  let save=createDefaultSave();save.clock={day:1,hour:5};save.scene='hub';save.needsPlayerCreationV84=false;
+  if(save.onboardingV84)save.onboardingV84.phase='complete';save.strategy.currentOperation=null;
+  Object.assign(save.hub.systems,{hull:100,power:100,oxygen:100,quarantine:100});
+  const context={careReady:true,manifestReady:true,physical:{roomId:'dropship-hangar'},
+    authorization:{granted:true,portId:'frontier-civil-relay',sectorId:'current-service-sector',campaignHours:5}};
+  const request=requestShipPortDockV87(save,{transactionId:'v177-queue-declared-docking-fixture'},context);
+  assert.ok(request.ok,request.code);save=request.save;
+  for(let i=1;i<=14;i++){const step=stepShipPortV87(save,{simulationTime:i,dtSeconds:1},context);
+    assert.ok(step.ok,step.code);save=step.save;}
+  assert.ok(canAccessPortCounterV87(save));return save;
+}
 function allBodies(h,c) {
   return new Set([...(h.getNpcServiceOwnedActorsV163?.()||[]),...(h.getNpcStationRelayActorsV166?.()||[]),
     ...(h.getNpcInterdeckActorsV165?.()||[]),...(h.getNpcAnnexWorkpostActorsV165?.()||[]),
@@ -590,4 +604,53 @@ test('both relays and the four V165 passengers share exclusive real cabin reserv
   }
   assert.ok(sawExisting,'a real V165 passenger must use the same coordinator in this watch');
   for(const d of relayDefinitions)assert.ok(seen.has(d.id),d.id+' never boarded a real reserved cabin');
+});
+
+test('a retained real legacy service bookmark preserves Inez through an alternate watch and exact interdeck reload',()=>{
+  const port=dockedQueueCampaignV177(),h=runtime(5,{deck:3,roomId:'dropship-hangar'});
+  // Declared occupancy fixture: the base double does not animate the player's
+  // lift. NPCs still walk with their actual owners and native geometry.
+  h.hubLiftTransitV163={trip:{shaftId:'hub-midship-lift'}};
+  for(const hour of[8,9,20]){context(h,hour,{save:port});tick(h,300);}
+  const id='inez-civil',current=h.npcInterdeckStateV165.routes[id];
+  assert.equal(current.actor.stage,'waiting-lift');assert.equal(current.origin.source,'legacy-physical-owner');
+  h.persist();const saved=structuredClone(h.persisted.at(-1));
+  assert.equal(saved.npcAnnexRoutesV163.routes['inez-bioforge'].actor,null);
+  assert.equal(saved.npcAnnexRoutesV163.routes['inez-bioforge'].nativeHandoff.toRoomId,'morgue');
+  const input=JSON.stringify(saved);
+  const restore=data=>{const hub=new TestHub();hub.start(data,{routineContextV62:{clock:{day:1,hour:20},save:port}});
+    hub.npcJunClimbArtReadyV165=()=>true;return hub;};
+  const restored=restore(saved),actual=restored.npcInterdeckStateV165.routes[id];
+  assert.deepEqual(actual.actor,saved.npcInterdeckRoutesV165.routes[id].actor,'the active transported body cannot disappear at reload');
+  assert.deepEqual(actual.origin,saved.npcInterdeckRoutesV165.routes[id].origin);
+  assert.equal(JSON.stringify(saved),input,'reconstruction must not rewrite the supplied Save');
+  const owned=restored.npcInterdeckBodiesV165.get(id);
+  assert.ok(owned);assert.equal(owned,restored.getNpcServiceActorV161('inez-bioforge'));
+  assert.equal(allBodies(restored,{crewId:owned.crewId}).size,1);
+  assert.equal(owned.x,current.actor.x);assert.equal(owned.y,current.actor.y);
+  assert.equal(actual.actor.distance,current.actor.distance);assert.equal(actual.actor.liftJourneys,0);
+  restored.hubLiftTransitV163={trip:{shaftId:'hub-midship-lift'}};tick(restored,1);
+  assert.equal(restored.npcInterdeckBodiesV165.get(id),owned);
+  restored.persist();const twice=restore(structuredClone(restored.persisted.at(-1)));
+  assert.equal(twice.npcInterdeckStateV165.routes[id].actor.x,owned.x);
+  assert.equal(allBodies(twice,{crewId:owned.crewId}).size,1);
+  for(const patch of[{x:current.origin.x+1},{crewId:'crew-10-david-8r'},{stage:'walking'},{doorProgress:.2}]){
+    const malformed=structuredClone(saved);
+    Object.assign(malformed.npcInterdeckRoutesV165.routes[id].origin.legacyBookmark,patch);
+    assert.equal(restore(malformed).npcInterdeckStateV165.routes[id].actor,null,JSON.stringify(patch));
+  }
+  const incompatible=structuredClone(saved),o=incompatible.npcInterdeckRoutesV165.routes[id].origin;
+  incompatible.npcAnnexRoutesV163.routes['inez-bioforge']={schema:163,actor:{...o.legacyBookmark,x:o.x+1,homeX:o.x+1}};
+  const fresh=restore(incompatible),freshEntry=fresh.npcInterdeckStateV165.routes[id];
+  assert.equal(freshEntry.origin.x,o.x+1,'a different valid source keeps its actual bookmark');
+  assert.equal(freshEntry.actor.x,o.x+1);assert.equal(freshEntry.actor.distance,0);
+  assert.equal(freshEntry.actor.stage,'retained','the rejected older trip cannot donate its travel to a fresh owner');
+  const missing=structuredClone(saved);delete missing.npcInterdeckRoutesV165.routes[id].origin.legacyBookmark;
+  const detached=restore(missing),detachedEntry=detached.npcInterdeckStateV165.routes[id];
+  assert.deepEqual(detachedEntry.actor,missing.npcInterdeckRoutesV165.routes[id].actor,
+    'an older complete interdeck owner survives its explicitly retired local role');
+  assert.equal(detached.getNpcServiceActorV161('inez-bioforge'),null,'no missing old local cycle is invented');
+  assert.equal(allBodies(detached,{crewId:owned.crewId}).size,1);
+  const noHandoff=structuredClone(missing);noHandoff.npcAnnexRoutesV163.routes['inez-bioforge'].nativeHandoff=null;
+  assert.equal(restore(noHandoff).npcInterdeckStateV165.routes[id].actor,null,'an absent source and retirement cannot authorize a restored lease');
 });

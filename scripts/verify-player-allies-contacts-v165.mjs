@@ -37,6 +37,36 @@ function walked(speed, facing, ticks, surface = 'mission') {
   return { subject, state, rig: rig(subject, state, surface) };
 }
 
+test('a frozen simulation clock rebases player corrections without spending or replaying a footstep', () => {
+  for (const surface of ['mission', 'hub', 'bioforge']) for (const facing of [-1, 1])
+    for (const speed of [80, 155, 270]) for (const ticks of [31, 63, 113]) for (const turn of [false, true]) {
+      const before = walked(speed, facing, ticks, surface), dx = 3 * facing, dy = .5;
+      const subject = { ...before.subject, x: before.subject.x + dx, y: before.subject.y + dy,
+        facing: turn ? -facing : facing };
+      const original = JSON.stringify(before.state);
+      const state = advancePlayerLocomotionStateV129(before.state, subject, before.state.time, { surface });
+      close(state.distance, before.state.distance, 'A coordinate correction is not travelled distance');
+      close(state.cycles - before.state.cycles, turn ? .5 : 0, 'Only depth relabelling may change a held phase');
+      assert.equal(state.moving, before.state.moving);
+      assert.equal(state.settle, before.state.settle);
+      assert.equal(state.entrance, before.state.entrance);
+      subject.playerLocomotionStateV129 = state;
+      const cleanTurn = { ...before.subject, facing: subject.facing };
+      const turnState = advancePlayerLocomotionStateV129(before.state, cleanTurn, before.state.time, { surface });
+      cleanTurn.playerLocomotionStateV129 = turnState;
+      const expected = rig(cleanTurn, turnState, surface), corrected = rig(subject, state, surface);
+      for (const side of ['near', 'far']) for (const key of ['hip', 'knee', 'ankle', 'sole']) {
+        close(corrected.legs[side][key].x - expected.legs[side][key].x, dx, 'The same pose follows its corrected frame');
+        close(corrected.legs[side][key].y - expected.legs[side][key].y, dy, 'No frozen-clock knee or pelvis motion');
+      }
+      assert.equal(advancePlayerLocomotionStateV129(state, subject, state.time, { surface }), state);
+      const next = { ...subject, x: subject.x + subject.vx / 120 };
+      const live = advancePlayerLocomotionStateV129(state, next, state.time + 1 / 120, { surface });
+      close(live.distance - before.state.distance, Math.abs(subject.vx) / 120, 'The next tick spends only its own travel');
+      assert.equal(JSON.stringify(before.state), original, 'Observation does not rewrite the previous body');
+    }
+});
+
 test('a grounded profile turn exchanges depth legs and retains reached ankles without inventing travel', t => {
   let contacts = 0, maximumPelvisShift = 0;
   for (const surface of ['mission', 'hub', 'bioforge']) for (const facing of [-1, 1])

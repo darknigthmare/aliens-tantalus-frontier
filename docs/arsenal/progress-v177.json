@@ -1,0 +1,3343 @@
+{
+  "lot": "V177",
+  "schema": 177,
+  "baselineCommit": "4676a78746d8becdb5d6836701e96cc37d7d462f",
+  "baselineTrialProgressSha256": "767f5aab50f0c90d27ace678942d4ca62d5033cfda3c13aa92e441cc6630c86e",
+  "state": "PREPUBLICATION",
+  "scope": "Suivi des correctifs bornés V177 ; le classeur V1 reste une spécification source inchangée.",
+  "workbook": "ARSENAL_SUIVI_V177.xlsx",
+  "historyWorkbooks": [],
+  "sourceInputs": {
+    "docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx": "3f9b5d0bee8bafd95819e7860d1a09a1357fb2bcd92facbe8ed0cc80fb6c4cbb",
+    "docs/arsenal/data/tantalus_arsenal_master_v1.csv": "8f33064087e6025a450876db2068af285bd5251b180a4d8243fd5770aaeaa05a",
+    "docs/arsenal/data/tantalus_arsenal_qa_v1.csv": "c500389eb71811d543312c60a10bd4199843f7a5dea673de6beb0d140e95f091",
+    "docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv": "5e77f3d790b3f29869ccb3b6a183ef0ed5524fa75400e86dfdbec39db446ae4b"
+  },
+  "tables": {
+    "01_Armes_Source_V1": {
+      "headers": [
+        "ID source",
+        "Arme / variante",
+        "Œuvre principale",
+        "État du catalogue source",
+        "Admission 1:1"
+      ],
+      "rows": [
+        [
+          "weapon-001-m41a-pulse-rifle",
+          "M41A Pulse Rifle",
+          "Aliens (1986)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-002-m41a2-pulse-rifle",
+          "M41A2 Pulse Rifle",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-003-m4a3-service-pistol",
+          "M4A3 Service Pistol",
+          "Aliens: Colonial Marines",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-004-vp70-combat-pistol",
+          "VP70 Combat Pistol",
+          "Aliens (1986)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-005-m56-smartgun",
+          "M56 Smartgun",
+          "Aliens (1986)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-006-m240-incinerator-unit",
+          "M240 Incinerator Unit",
+          "Aliens (1986)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-007-m37a2-pump-shotgun",
+          "M37A2 Pump Shotgun",
+          "Aliens: Colonial Marines",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-008-m39-submachine-gun",
+          "M39 Submachine Gun",
+          "Aliens: Colonial Marines",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-009-m42a-scope-rifle",
+          "M42A Scope Rifle",
+          "Alien RPG / Colonial Marines",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-010-m6b-rocket-launcher",
+          "M6B Rocket Launcher",
+          "Aliens versus Predator 2 (2001)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-011-m83-sadar",
+          "M83 SADAR",
+          "Aliens versus Predator: Extinction",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-012-m5-rpg",
+          "M5 RPG",
+          "Aliens: Colonial Marines",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-013-m94-impact-grenade",
+          "M94 Impact Grenade",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-014-m40-hedp-grenade",
+          "M40 HEDP Grenade",
+          "Aliens (1986)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-015-ua-571-c-sentry-gun",
+          "UA 571-C Sentry Gun",
+          "Aliens (1986)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-016-heavy-pulse-rifle",
+          "Heavy Pulse Rifle",
+          "Aliens: Dark Descent",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-017-f44aa-pulse-rifle",
+          "F44AA Pulse Rifle",
+          "Alien: Romulus (2024)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-018-type-88-heavy-assault-rifle",
+          "Type 88 Heavy Assault Rifle",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-019-ak-4047-pulse-rifle",
+          "AK-4047 Pulse Rifle",
+          "Alien RPG / Colonial Marines",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-020-es-4-electroshock-pistol",
+          "ES-4 Electroshock Pistol",
+          "Prometheus (2012)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-021-357-magnum-revolver",
+          ".357 Magnum Revolver",
+          "Alien: Isolation",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-022-bolt-gun",
+          "Bolt Gun",
+          "Alien: Isolation",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-023-compound-bow",
+          "Compound Bow",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-024-harpoon-gun",
+          "Harpoon Gun",
+          "Alien (1979)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-025-plasma-rifle",
+          "Plasma Rifle",
+          "Aliens versus Predator (1999)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-026-combi-stick",
+          "Combi-Stick",
+          "Predator 2 (1990)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-027-smart-disc",
+          "Smart Disc",
+          "Predator 2 (1990)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-028-wrist-blades",
+          "Wrist Blades",
+          "Predator (1987)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-029-cutting-torch",
+          "Cutting Torch",
+          "Alien: Isolation",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-030-maintenance-jack",
+          "Maintenance Jack",
+          "Alien: Isolation",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-031-fire-axe",
+          "Fire Axe",
+          "Alien: Covenant (2017)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-032-combat-knife",
+          "Combat Knife",
+          "Aliens versus Predator 2 (2001)",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-033-stun-baton",
+          "Stun Baton",
+          "Alien: Isolation",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-034-sonic-harpoon",
+          "Sonic Harpoon",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-035-neuro-link-disruptor",
+          "Neuro-Link Disruptor",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-036-ripper-acid-projector",
+          "Ripper Acid Projector",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-037-reef-caster",
+          "Reef Caster",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-038-foundry-nailgun",
+          "Foundry Nailgun",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-039-cryo-lance",
+          "Cryo Lance",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-040-pathogen-containment-projector",
+          "Pathogen Containment Projector",
+          "Tantalus original",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-147-ocap-91-volcan",
+          "OCAP-91 Volcan",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-148-type-76-auto-shotgun",
+          "Type 76 Auto Shotgun",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-149-m12-rpg",
+          "M12 RPG",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-150-l59-minigun",
+          "L59 Minigun",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-151-lem-mp11-stormsurge",
+          "LEM MP11 Stormsurge",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-152-type-99-incinerator",
+          "Type 99 Incinerator",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-153-am-16-gruppa",
+          "AM-16 Gruppa",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-154-microburst",
+          "Microburst",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-155-rapid-responder",
+          "Rapid Responder",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-156-type-21-tactical-shotgun",
+          "Type 21 Tactical Shotgun",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-157-kramer-short-barrel",
+          "Kramer Short-Barrel",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-158-n79-eva-laser",
+          "N79 EVA Laser",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-159-l33-pike",
+          "L33 Pike",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-160-eds-93-zadak",
+          "EDS-93 Zadak Plasma Discharger",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-161-thunderbolt-mk2",
+          "Thunderbolt Mk.2 Autocannon",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-162-x45-bombard",
+          "X45 Bombard",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-163-svat-92-sokol",
+          "SVAT-92 Sokol",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-164-mark-7-mod2-cqb",
+          "Mark 7 Mod 2 CQB Pistol",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-165-m51-breaching-scattergun",
+          "M51 Breaching Scattergun",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-166-p649-hel",
+          "P.649 HEL",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-167-dkt-59-misha",
+          "DKT-59 Misha",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-168-evi-87-zvezda",
+          "EVI-87 Zvezda Plasma Rifle",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-169-ppz-49-vol",
+          "PPZ-49 Vol",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-170-frontier-revolver",
+          "Frontier Revolver",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-171-x1-fireball",
+          "X1 Fireball",
+          "Aliens: Fireteam Elite",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-172-lem-stg24-storm-rifle",
+          "LEM StG24 Storm Rifle",
+          "Aliens: Fireteam Elite — Pathogen",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-173-u1a2-gl-conversion",
+          "U1A2 GL Conversion",
+          "Aliens: Fireteam Elite — Pathogen",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-174-4c2-astra",
+          "4C2 Astra",
+          "Aliens: Fireteam Elite — Pathogen",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-175-2b1-vajra",
+          "2B1 Vajra",
+          "Aliens: Fireteam Elite — Pathogen",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-176-6a-jaipur-smg",
+          "6A Jaipur Submachine Gun",
+          "Aliens: Fireteam Elite — Pathogen",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "weapon-177-8a7-dambulla-machine-pistol",
+          "8A7 Dambulla Machine Pistol",
+          "Aliens: Fireteam Elite — Pathogen",
+          "En catalogue (identité)",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m41a3-burst-rifle",
+          "M41A3 Burst Rifle",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-l36-halberd",
+          "L36 Halberd",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-kramer-assault-rifle",
+          "Kramer Assault Rifle",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m42a2-scout-rifle",
+          "M42A2 Scout Rifle",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-twilight-v-4-dmr",
+          "Twilight V.4 DMR",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m42a3-sniper-rifle",
+          "M42A3 Sniper Rifle",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-x46-ballista-flechette-rifle",
+          "X46 Ballista Flechette Rifle",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-x43-barrage-flechette-smg",
+          "X43 Barrage Flechette SMG",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-dt-57-medved",
+          "DT-57 Medved",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-heirloom-standoff",
+          "Heirloom Standoff",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m37a3-pump-shotgun",
+          "M37A3 Pump Shotgun",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-armat-m10-auto-pistol",
+          "Armat M10 Auto Pistol",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-type-78-burst-pistol",
+          "Type 78 Burst Pistol",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-kramer-50-magnum",
+          "Kramer .50 Magnum",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-hyperdyne-twinhammer",
+          "Hyperdyne Twinhammer",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-type-95-combat-pistol",
+          "Type 95 Combat Pistol",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-l56a3-smartgun",
+          "L56A3 Smartgun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m41e4-heavy-pulse-rifle",
+          "M41E4 Heavy Pulse Rifle",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m12a1-rocket-launcher",
+          "M12A1 Rocket Launcher",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m95-grenade-launcher",
+          "M95 Grenade Launcher",
+          "Aliens: Fireteam Elite",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-u1-grenade-launcher",
+          "U1 Grenade Launcher",
+          "Aliens (1986)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-ripley-improvised-m41a-m240",
+          "Ripley improvised M41A + M240",
+          "Aliens (1986)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-hicks-ithaca-37-shotgun",
+          "Hicks Ithaca 37 shotgun",
+          "Aliens (1986)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-vasquez-service-pistol",
+          "Vasquez service pistol",
+          "Aliens (1986)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m56a2-smartgun",
+          "M56A2 Smartgun",
+          "Alien RPG / Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-vp-70ma6-pistol",
+          "VP-70MA6 Pistol",
+          "Alien RPG / Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-g2-electroshock-grenade",
+          "G2 Electroshock Grenade",
+          "Alien RPG / Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-u4-firebomb",
+          "U4 Firebomb",
+          "Alien RPG / Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-asso-400-harpoon-grappling-gun",
+          "ASSO-400 Harpoon Grappling Gun",
+          "Alien RPG / Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-es-7-supernova-shockgun",
+          "ES-7 Supernova Shockgun",
+          "Prometheus (2012)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-flammenwerfer-3",
+          "Flammenwerfer 3",
+          "Prometheus (2012)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-rmc-f903we-assault-rifle",
+          "RMC F903WE Assault Rifle",
+          "Alien: Covenant (2017)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-cr-553-carbine",
+          "CR-553 Carbine",
+          "Alien: Covenant (2017)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m4-ar-556-45",
+          "M4-AR 556-45",
+          "Alien: Covenant (2017)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-beretta-92fs",
+          "Beretta 92FS",
+          "Alien: Covenant (2017)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-alien-covenant-emergency-axe",
+          "Alien Covenant emergency axe",
+          "Alien: Covenant (2017)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-dv-303-bolt-gun",
+          "DV-303 Bolt Gun",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-model-37-12-gauge-pump-action",
+          "Model 37-12 Gauge Pump Action",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-sevastopol-flamethrower",
+          "Sevastopol Flamethrower",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-molotov-sevastopol",
+          "Molotov (Sevastopol)",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-pipe-bomb-sevastopol",
+          "Pipe Bomb (Sevastopol)",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-emp-mine-sevastopol",
+          "EMP Mine (Sevastopol)",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-flashbang-sevastopol",
+          "Flashbang (Sevastopol)",
+          "Alien: Isolation",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-lacrima-99-shockrifle",
+          "Lacrima 99 Shockrifle",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-draco-double-burner",
+          "Draco Double Burner",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-usm-standard-sidearm",
+          "USM Standard Sidearm",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-call-zip-gun",
+          "Call Zip Gun",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-christie-wrist-mounted-pistols",
+          "Christie wrist-mounted pistols",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-vriess-collapsible-shotgun",
+          "Vriess collapsible shotgun",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-usm-collapsible-grenade-launcher",
+          "USM collapsible grenade launcher",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-okee-doke-corral-cowboy-pistol",
+          "Okee-Doke Corral Cowboy Pistol",
+          "Alien Resurrection (1997)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m41a-2-pulse-rifle-avp2010",
+          "M41A/2 Pulse Rifle (AVP2010)",
+          "Aliens vs Predator (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-vp78-pistol",
+          "VP78 Pistol",
+          "Aliens vs Predator (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-zx-76-shotgun",
+          "ZX-76 Shotgun",
+          "Aliens vs Predator (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m59-b-smartgun",
+          "M59/B Smartgun",
+          "Aliens vs Predator (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m260b-flamethrower",
+          "M260B Flamethrower",
+          "Aliens vs Predator (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m42c-scoped-rifle",
+          "M42C Scoped Rifle",
+          "Aliens vs Predator (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m4a4-pistol",
+          "M4A4 Pistol",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m240a1-flamethrower",
+          "M240A1 Flamethrower",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-wy-102-sniper-rifle",
+          "WY-102 Sniper Rifle",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m92-grenade-launcher",
+          "M92 Grenade Launcher",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m90-minigun",
+          "M90 Minigun",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-speargun-avp2",
+          "Speargun (AVP2)",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-netgun-avp2",
+          "Netgun (AVP2)",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-plasma-pistol-avp2",
+          "Plasma Pistol (AVP2)",
+          "Aliens versus Predator 2 (2001)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-energy-flechette-primal-hunt",
+          "Energy Flechette (Primal Hunt)",
+          "AVP2: Primal Hunt",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-shoulder-plasmacaster",
+          "Shoulder Plasmacaster",
+          "Predator (1987)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-wristgun",
+          "Predator Wristgun",
+          "Predator 2 (1990)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-speargun",
+          "Predator Speargun",
+          "Predator 2 (1990)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-netgun",
+          "Predator Netgun",
+          "Predator 2 (1990)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-shuriken",
+          "Predator Shuriken",
+          "AVP (2004)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-remote-mines",
+          "Predator Remote Mines",
+          "AVP: Requiem (2007)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-plasma-pistol-wolf",
+          "Predator Plasma Pistol (Wolf)",
+          "AVP: Requiem (2007)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-whip-wolf",
+          "Predator Whip (Wolf)",
+          "AVP: Requiem (2007)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-wrist-shield",
+          "Predator Wrist Shield",
+          "Prey (2022)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-bow-bolt-caster",
+          "Predator Bow / Bolt Caster",
+          "Prey (2022)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-laser-discs",
+          "Predator Laser Discs",
+          "Prey (2022)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-sword",
+          "Predator Sword",
+          "Predator 2 (1990)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-axe",
+          "Predator Axe",
+          "Predators (2010)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-kujhad",
+          "Predator Kujhad",
+          "The Predator (2018)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-killer-suit",
+          "Predator Killer Suit",
+          "The Predator (2018)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-plasma-glaive",
+          "Predator Plasma Glaive",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-plasma-scythe",
+          "Predator Plasma Scythe",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-blazer",
+          "Predator Blazer",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-pred-gun",
+          "Predator Pred-Gun",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-aurora-weapon",
+          "Predator AURORA Weapon",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-predator-fireliner",
+          "Predator Fireliner",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-electroshock-missile-battery",
+          "Electroshock Missile Battery",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-mp9-submachine-gun",
+          "MP9 Submachine Gun",
+          "Aliens versus Predator: Extinction",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m41ae3-heavy-pulse-rifle",
+          "M41AE3 Heavy Pulse Rifle",
+          "Aliens: Dark Descent",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m39-u-submachine-gun",
+          "M39-U Submachine Gun",
+          "Aliens: Dark Descent",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-xm99a1-phased-plasma-pulse-rifle",
+          "XM99A1 Phased Plasma Pulse Rifle",
+          "Aliens: Dark Descent",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-lacrima-a20-carbine",
+          "Lacrima A20 Carbine",
+          "Aliens: Dark Descent",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m4ra-battle-rifle",
+          "M4RA Battle Rifle",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-nsg-23-assault-rifle",
+          "NSG 23 Assault Rifle",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-mk221-tactical-shotgun",
+          "MK221 Tactical Shotgun",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-88-mod-4-combat-pistol",
+          "88 Mod 4 Combat Pistol",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-id23-incineration-unit",
+          "ID23 Incineration Unit",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-p9-sonic-harpoon-artillery",
+          "P9 Sonic Harpoon Artillery",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-xm99a-phased-plasma-pulse-rifle",
+          "XM99A Phased Plasma Pulse Rifle",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m20-claymore-mine",
+          "M20 Claymore Mine",
+          "Aliens: Colonial Marines",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-hicks-shotgun-legendary",
+          "Hicks' Shotgun (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-hudson-s-pulse-rifle-legendary",
+          "Hudson's Pulse Rifle (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-vasquez-s-smartgun-legendary",
+          "Vasquez's Smartgun (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-gorman-s-pistol-legendary",
+          "Gorman's Pistol (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-frost-s-flamethrower-legendary",
+          "Frost's Flamethrower (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-ripley-s-m41a-m240-combo-dlc",
+          "Ripley's M41A/M240 combo (DLC)",
+          "Aliens: Colonial Marines — DLC",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m4a5-compact-pistol",
+          "M4A5 Compact Pistol",
+          "AliensRL",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-mk88-combat-pistol",
+          "MK88 Combat Pistol",
+          "AliensRL",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m3a-submachine-gun",
+          "M3A Submachine Gun",
+          "AliensRL",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-m12-beretta-smg",
+          "M12 Beretta SMG",
+          "AliensRL",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-lacrima-99-bayonet-assembly",
+          "Lacrima 99 bayonet assembly",
+          "Alien Resurrection (1997)",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-unknown-security-carbine-alien-earth",
+          "Unknown security carbine — Alien Earth",
+          "Alien: Earth (2025)",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-unidentified-comic-marine-sidearm",
+          "Unidentified comic marine sidearm",
+          "Comics Dark Horse / Marvel",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-unidentified-novel-security-firearm",
+          "Unidentified novel security firearm",
+          "Aliens novels",
+          "Recherche uniquement — ne pas publier",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-db-48-daittyo-heavy-rifle",
+          "DB-48 Daittyo Heavy Rifle",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-hnt-1-el-alamein-revolver-rifle",
+          "HNT-1 El Alamein Revolver Rifle",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-bd-03-djinn-personal-railgun",
+          "BD-03 Djinn Personal Railgun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-type-111-directed-particle-emitter",
+          "Type 111 Directed Particle Emitter",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-eds-93-zadak-plasma-discharger-mk-2",
+          "EDS-93 Zadak Plasma Discharger Mk.2",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-smb-94-zephyr-plasma-emitter",
+          "SMB-94 Zephyr Plasma Emitter",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-type-21-tactical-shotgun-mk-2",
+          "Type 21 Tactical Shotgun Mk.2",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-mondo-heat-9000",
+          "Mondo Heat 9000",
+          "Aliens: Fireteam Elite 2 — Patch 2026",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-bd-55-jokkh-burst-shotgun",
+          "BD-55 Jokkh Burst Shotgun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-type-200-cryo-gun",
+          "Type 200 Cryo Gun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-f44ar-pulse-rifle",
+          "F44AR Pulse Rifle",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-bd-16-begho",
+          "BD-16 Begho",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-ripley-s-hive-exterminator-rifle",
+          "Ripley's Hive Exterminator Rifle",
+          "Aliens: Fireteam Elite 2 — DLC/bonus",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ],
+        [
+          "proposed-rain-s-jackson-s-star-pulse-rifle",
+          "Rain's Jackson's Star Pulse Rifle",
+          "Aliens: Fireteam Elite 2 — DLC/bonus",
+          "À intégrer / rapprocher",
+          "NON_CERTIFIE"
+        ]
+      ]
+    },
+    "02_Recettes_Source_V1": {
+      "headers": [
+        "QA_ID",
+        "Scénario",
+        "Manipulation source",
+        "Résultat attendu source",
+        "Groupe",
+        "Priorité",
+        "Portée V177",
+        "Validation native",
+        "Limite"
+      ],
+      "rows": [
+        [
+          "Q01",
+          "M41A caseless",
+          "tir 99 fois",
+          "zéro douille; flash et recul; exactement 99 consommées",
+          "VFX + ammo",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q02",
+          "M56 caseless",
+          "tir 10 fois",
+          "aucune douille; harnais; suivi cible LOS seulement",
+          "VFX + AI",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q03",
+          "Hicks shotgun",
+          "tir puis pompe",
+          "une douille au cycle, pas double",
+          "VFX + action",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q04",
+          "Revolver",
+          "tir 6 puis recharger",
+          "6 chambres distinctes; étuis lors éjection",
+          "ammo + VFX",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q05",
+          "M41A underbarrel",
+          "tir primaire/secondaire",
+          "mag principal et chargeur grenade indépendants",
+          "ammo",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q06",
+          "Ripley combo",
+          "alterner armes",
+          "deux flux indépendants, pas de recharge commune",
+          "ammo/rig",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q07",
+          "Reload before transfer",
+          "annuler à 25%",
+          "aucune mutation de munitions",
+          "FSM",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q08",
+          "Reload after eject",
+          "annuler à 38%",
+          "chargeur ancien accessible au sol/inventaire; nouvelle id pas dupliquée",
+          "FSM",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q09",
+          "Reload after insert",
+          "annuler à 75%",
+          "nouveau chargeur conservé sur arme",
+          "FSM",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q10",
+          "Save during reload",
+          "checkpoint à toutes phases",
+          "reprise exacte; ammo conserved",
+          "save",
+          "Bloquant",
+          "COUVERTURE_CIBLEE_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Conservation, bornes et reprise des chargeurs ; ne clôt pas toute la recette ni ses visuels."
+        ],
+        [
+          "Q11",
+          "Double insert",
+          "deux inputs même frame",
+          "un seul mag attaché, transaction idempotente",
+          "ammo",
+          "Bloquant",
+          "COUVERTURE_CIBLEE_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Conservation, bornes et reprise des chargeurs ; ne clôt pas toute la recette ni ses visuels."
+        ],
+        [
+          "Q12",
+          "Coop reload",
+          "2 joueurs 1 mag",
+          "1 seul propriétaire par magazine",
+          "coop",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q13",
+          "Magazine partial",
+          "tactical 45/99",
+          "objet 45 conservé et récupérable",
+          "ammo",
+          "Bloquant",
+          "COUVERTURE_CIBLEE_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Conservation, bornes et reprise des chargeurs ; ne clôt pas toute la recette ni ses visuels."
+        ],
+        [
+          "Q14",
+          "Speed reload",
+          "drop 8/30",
+          "état du monde contient 8, peut ramasser",
+          "ammo/VFX",
+          "Bloquant",
+          "COUVERTURE_CIBLEE_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Conservation, bornes et reprise des chargeurs ; ne clôt pas toute la recette ni ses visuels."
+        ],
+        [
+          "Q15",
+          "Tube interruption",
+          "recharger 1 sur 6 puis bouger",
+          "au moins 1 introduite, pas 6 ajoutées",
+          "ammo",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q16",
+          "Cell compatibility",
+          "cell plasma vers arme balistique",
+          "refus explicite sans mutation",
+          "modularité",
+          "Bloquant",
+          "COUVERTURE_CIBLEE_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Conservation, bornes et reprise des chargeurs ; ne clôt pas toute la recette ni ses visuels."
+        ],
+        [
+          "Q17",
+          "Tank leak",
+          "réservoir endommagé",
+          "consommation et fuite distinctes",
+          "ammo",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q18",
+          "Heat save",
+          "sauvegarde energy >0",
+          "température persiste / décroît au tick réel",
+          "save",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q19",
+          "XP duplicate event",
+          "même shotSerial reçu deux fois",
+          "XP accordé une seule fois",
+          "XP",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q20",
+          "XP friendly fire",
+          "tir allié / décor",
+          "aucun farm XP dégâts non hostiles",
+          "XP",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q21",
+          "XP assist coop",
+          "2 joueurs tirent même cible",
+          "anti double comptage + contribution bornée",
+          "XP",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q22",
+          "XP objective",
+          "objectif autorisé",
+          "récompense exactement 1 fois",
+          "XP",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q23",
+          "XP cap",
+          "LV30 max",
+          "paliers et unlocks stables",
+          "XP",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q24",
+          "XP migration",
+          "save legacy V143",
+          "same ammo count mapped without duplication, warning migration",
+          "save",
+          "Bloquant",
+          "COUVERTURE_CIBLEE_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Conservation, bornes et reprise des chargeurs ; ne clôt pas toute la recette ni ses visuels."
+        ],
+        [
+          "Q25",
+          "Attachment invalid",
+          "optique sniper sur lame",
+          "refus, aucune animation cassée",
+          "slots",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q26",
+          "Attachment canonical",
+          "M41A montage iconique",
+          "position cohérente canon film / non modifiée arbitrairement",
+          "art",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q27",
+          "Rig swap",
+          "changement costume",
+          "weapon stays attached hand right/left and transparent",
+          "rig",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q28",
+          "Recoil vs aim",
+          "montée recul",
+          "muzzle/beam/cover coherent",
+          "gameplay",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q29",
+          "Cover projectile",
+          "tir depuis couverture",
+          "impact réel porte/cloison, pas traversée",
+          "gameplay",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q30",
+          "Flash occluder",
+          "tir derrière mur",
+          "lumière respecte obstruction locale",
+          "VFX",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q31",
+          "Effects cap",
+          "horde 300 ennemis",
+          "<=256 douilles et <=12 lumières; aucune croissance infini",
+          "performance",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q32",
+          "Frame independence",
+          "30/60/120 Hz",
+          "mêmes munitions/XP & VFX événements",
+          "simulation",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q33",
+          "Save audio",
+          "reprendre après tir",
+          "aucun replay du son / muzzleflash",
+          "save",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q34",
+          "Burst cancellation",
+          "tir burst interrompu",
+          "seuls projectiles effectivement émis consomment ammo",
+          "gameplay",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q35",
+          "Jam recovery",
+          "interruption durant reset",
+          "état sérialisé, pas de round création",
+          "FSM",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q36",
+          "Grenade blast",
+          "blast près opérateur",
+          "self damage/cover guard/friendly fire settings",
+          "gameplay",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q37",
+          "Fireball projectile",
+          "X1 D17 tir",
+          "projectile impact explosive, jamais stream flammes",
+          "source",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q38",
+          "Visual provenance",
+          "chaque asset à publier",
+          "hash et dimensions vérifiés, statut 1:1 non inventé",
+          "assets",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q39",
+          "Media source",
+          "chaque arme canon",
+          "lien source exploitable et origine distinguée",
+          "data",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "Q40",
+          "Offline release",
+          "build public",
+          "docs restent hors bundle; pas de nouvelle img chargée sans admission",
+          "build",
+          "Bloquant",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-RIFLE",
+          "Animation Rifle",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-SMG",
+          "Animation SMG",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-PISTOL",
+          "Animation Pistol",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-SHOTGUN",
+          "Animation Shotgun",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-SNIPER",
+          "Animation Sniper",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-HEAVY",
+          "Animation Heavy",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-LAUNCHER",
+          "Animation Launcher",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-GRENADE",
+          "Animation Grenade",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-MELEE",
+          "Animation Melee",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-ENERGY",
+          "Animation Energy",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-HARPOON",
+          "Animation Harpoon",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-INDUSTRIA",
+          "Animation Industrial",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-CHEMICAL",
+          "Animation Chemical",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-SENTRY",
+          "Animation Sentry",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-HYBRID",
+          "Animation Hybrid",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-MINE",
+          "Animation Mine",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ],
+        [
+          "QA-FLAMETHRO",
+          "Animation Flamethrower",
+          "idle→aim→fire→reload→holster",
+          "grip/muzzle/recoil/foot alignment and correct shell profile",
+          "art/animation",
+          "Important",
+          "HORS_LOT_V177",
+          "RECETTE_PROPRE_CANDIDAT_ATTENDUE",
+          "Recette source conservée ; pas de nouveau succès déduit de sa présence."
+        ]
+      ]
+    },
+    "03_Correctifs_V177": {
+      "headers": [
+        "Chantier",
+        "Manque concret",
+        "Comportement obtenu",
+        "Sources",
+        "Vérificateurs",
+        "État",
+        "Limites"
+      ],
+      "rows": [
+        [
+          "C177-ARSENAL",
+          "Les limites de révision et la reprise pouvaient perdre une cartouche, un chargeur ou le lien à la bonne arme.",
+          "Conservation des cartouches et contenants, refus atomiques et reprise exacte des flux chargés/réserve.",
+          "src/weapon-magazine-inventory-v167.js ; src/weapon-magazine-world-v168.js ; src/weapon-magazine-recovery-runtime-v168.js ; src/game-production-runtime.js",
+          "scripts/verify-weapon-conservation-v177.mjs ; scripts/verify-weapon-arsenal-v167.mjs ; scripts/verify-weapon-magazine-world-v168.mjs",
+          "IMPLEMENTATION_ET_TESTS_CIBLES",
+          "Couverture ciblée des chargeurs physiques ; les57 recettes et129 propositions ne sont pas toutes closes."
+        ],
+        [
+          "C177-PLAYER",
+          "Un changement de position sans temps physique pouvait produire une foulée ou un impact visuel incohérent.",
+          "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active.",
+          "src/player-locomotion-rig-v129.js ; src/player-appearance-hub-v126.js ; src/player-weapon-runtime-v125.js ; src/player-transit-rig-v128.js",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-appearance-runtime-v126.mjs ; scripts/verify-player-transit-rig-v128.mjs",
+          "IMPLEMENTATION_ET_TESTS_CIBLES",
+          "Aucune nouvelle tenue ou animation canonique ;18 références de costumes et les locomotions complètes restent ouvertes."
+        ],
+        [
+          "C177-SHIP",
+          "Certains équipements admis étaient masqués par le mur de l’armurerie ; l’enrichissement doit respecter les vrais passages.",
+          "Ordre des couches d’armurerie corrigé et lot T177 de100 installations distinctes, adaptées à leurs35 pièces.",
+          "src/hub-batch-command-v177.js ; src/hub-batch-habitat-v177.js ; src/hub-batch-industrial-v177.js ; src/hub-batch-engineering-v177.js ; src/hub-room-enrichment-v177.js ; src/hub-room-life-v136.js ; src/hub-armory-scene-v169.js ; src/hub-armory-storefront-v169.js",
+          "scripts/verify-tantalus-enrichment-v177.mjs ; scripts/verify-hub-armory-layering-v177.mjs",
+          "IMPLEMENTATION_ET_TESTS_CIBLES",
+          "Les100 élémentsV168 ne sont pas recomptés ; pas de nouvelle collision ni de validation artistique globale."
+        ],
+        [
+          "C177-AUDIT",
+          "La garde cumulative ignorait le successeur V176 du vérificateur, bien que sa chaîne soit déjà enregistrée.",
+          "Résolution commune des reçus V171 à V177, anciens reçus immuables et suivi séparé des deux domaines de classeurs.",
+          "",
+          "scripts/verify-audit-continuation-v163.mjs ; scripts/verify-parallel-completion-v165.mjs ; scripts/verify-capture-observation-v177.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-dialogue-portraits-v168.mjs",
+          "IMPLEMENTATION_ET_TESTS_CIBLES",
+          "Forge différée ; encyclopédie, Blackout/Earth et V10 non récupérés, contenu Drive inconnu."
+        ]
+      ]
+    },
+    "04_References_Ouvertes": {
+      "headers": [
+        "ID conservé",
+        "Arme",
+        "Œuvre",
+        "Priorité",
+        "État des références",
+        "Admission gameplay",
+        "Pièce restante"
+      ],
+      "rows": [
+        [
+          "proposed-m41a3-burst-rifle",
+          "M41A3 Burst Rifle",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-l36-halberd",
+          "L36 Halberd",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-kramer-assault-rifle",
+          "Kramer Assault Rifle",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m42a2-scout-rifle",
+          "M42A2 Scout Rifle",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-twilight-v-4-dmr",
+          "Twilight V.4 DMR",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m42a3-sniper-rifle",
+          "M42A3 Sniper Rifle",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-x46-ballista-flechette-rifle",
+          "X46 Ballista Flechette Rifle",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-x43-barrage-flechette-smg",
+          "X43 Barrage Flechette SMG",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-dt-57-medved",
+          "DT-57 Medved",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-heirloom-standoff",
+          "Heirloom Standoff",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m37a3-pump-shotgun",
+          "M37A3 Pump Shotgun",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-armat-m10-auto-pistol",
+          "Armat M10 Auto Pistol",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-type-78-burst-pistol",
+          "Type 78 Burst Pistol",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-kramer-50-magnum",
+          "Kramer .50 Magnum",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-hyperdyne-twinhammer",
+          "Hyperdyne Twinhammer",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-type-95-combat-pistol",
+          "Type 95 Combat Pistol",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-l56a3-smartgun",
+          "L56A3 Smartgun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-m41e4-heavy-pulse-rifle",
+          "M41E4 Heavy Pulse Rifle",
+          "Aliens: Fireteam Elite",
+          "P0",
+          "first-party-patch-notes",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-m12a1-rocket-launcher",
+          "M12A1 Rocket Launcher",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-m95-grenade-launcher",
+          "M95 Grenade Launcher",
+          "Aliens: Fireteam Elite",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-u1-grenade-launcher",
+          "U1 Grenade Launcher",
+          "Aliens (1986)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-ripley-improvised-m41a-m240",
+          "Ripley improvised M41A + M240",
+          "Aliens (1986)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-hicks-ithaca-37-shotgun",
+          "Hicks Ithaca 37 shotgun",
+          "Aliens (1986)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-vasquez-service-pistol",
+          "Vasquez service pistol",
+          "Aliens (1986)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m56a2-smartgun",
+          "M56A2 Smartgun",
+          "Alien RPG / Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-vp-70ma6-pistol",
+          "VP-70MA6 Pistol",
+          "Alien RPG / Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-g2-electroshock-grenade",
+          "G2 Electroshock Grenade",
+          "Alien RPG / Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-u4-firebomb",
+          "U4 Firebomb",
+          "Alien RPG / Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-asso-400-harpoon-grappling-gun",
+          "ASSO-400 Harpoon Grappling Gun",
+          "Alien RPG / Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-es-7-supernova-shockgun",
+          "ES-7 Supernova Shockgun",
+          "Prometheus (2012)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-flammenwerfer-3",
+          "Flammenwerfer 3",
+          "Prometheus (2012)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-rmc-f903we-assault-rifle",
+          "RMC F903WE Assault Rifle",
+          "Alien: Covenant (2017)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-cr-553-carbine",
+          "CR-553 Carbine",
+          "Alien: Covenant (2017)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m4-ar-556-45",
+          "M4-AR 556-45",
+          "Alien: Covenant (2017)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-beretta-92fs",
+          "Beretta 92FS",
+          "Alien: Covenant (2017)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-alien-covenant-emergency-axe",
+          "Alien Covenant emergency axe",
+          "Alien: Covenant (2017)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-dv-303-bolt-gun",
+          "DV-303 Bolt Gun",
+          "Alien: Isolation",
+          "P0",
+          "first-party-game-manual",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-model-37-12-gauge-pump-action",
+          "Model 37-12 Gauge Pump Action",
+          "Alien: Isolation",
+          "P0",
+          "first-party-game-manual",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-sevastopol-flamethrower",
+          "Sevastopol Flamethrower",
+          "Alien: Isolation",
+          "P0",
+          "first-party-game-manual",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-molotov-sevastopol",
+          "Molotov (Sevastopol)",
+          "Alien: Isolation",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-pipe-bomb-sevastopol",
+          "Pipe Bomb (Sevastopol)",
+          "Alien: Isolation",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-emp-mine-sevastopol",
+          "EMP Mine (Sevastopol)",
+          "Alien: Isolation",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-flashbang-sevastopol",
+          "Flashbang (Sevastopol)",
+          "Alien: Isolation",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-lacrima-99-shockrifle",
+          "Lacrima 99 Shockrifle",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-draco-double-burner",
+          "Draco Double Burner",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-usm-standard-sidearm",
+          "USM Standard Sidearm",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-call-zip-gun",
+          "Call Zip Gun",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-christie-wrist-mounted-pistols",
+          "Christie wrist-mounted pistols",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-vriess-collapsible-shotgun",
+          "Vriess collapsible shotgun",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-usm-collapsible-grenade-launcher",
+          "USM collapsible grenade launcher",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-okee-doke-corral-cowboy-pistol",
+          "Okee-Doke Corral Cowboy Pistol",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m41a-2-pulse-rifle-avp2010",
+          "M41A/2 Pulse Rifle (AVP2010)",
+          "Aliens vs Predator (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-vp78-pistol",
+          "VP78 Pistol",
+          "Aliens vs Predator (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-zx-76-shotgun",
+          "ZX-76 Shotgun",
+          "Aliens vs Predator (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m59-b-smartgun",
+          "M59/B Smartgun",
+          "Aliens vs Predator (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m260b-flamethrower",
+          "M260B Flamethrower",
+          "Aliens vs Predator (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m42c-scoped-rifle",
+          "M42C Scoped Rifle",
+          "Aliens vs Predator (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m4a4-pistol",
+          "M4A4 Pistol",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m240a1-flamethrower",
+          "M240A1 Flamethrower",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-wy-102-sniper-rifle",
+          "WY-102 Sniper Rifle",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m92-grenade-launcher",
+          "M92 Grenade Launcher",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m90-minigun",
+          "M90 Minigun",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-speargun-avp2",
+          "Speargun (AVP2)",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-netgun-avp2",
+          "Netgun (AVP2)",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-plasma-pistol-avp2",
+          "Plasma Pistol (AVP2)",
+          "Aliens versus Predator 2 (2001)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-energy-flechette-primal-hunt",
+          "Energy Flechette (Primal Hunt)",
+          "AVP2: Primal Hunt",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-shoulder-plasmacaster",
+          "Shoulder Plasmacaster",
+          "Predator (1987)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-wristgun",
+          "Predator Wristgun",
+          "Predator 2 (1990)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-speargun",
+          "Predator Speargun",
+          "Predator 2 (1990)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-netgun",
+          "Predator Netgun",
+          "Predator 2 (1990)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-shuriken",
+          "Predator Shuriken",
+          "AVP (2004)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-remote-mines",
+          "Predator Remote Mines",
+          "AVP: Requiem (2007)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-plasma-pistol-wolf",
+          "Predator Plasma Pistol (Wolf)",
+          "AVP: Requiem (2007)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-whip-wolf",
+          "Predator Whip (Wolf)",
+          "AVP: Requiem (2007)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-wrist-shield",
+          "Predator Wrist Shield",
+          "Prey (2022)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-bow-bolt-caster",
+          "Predator Bow / Bolt Caster",
+          "Prey (2022)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-laser-discs",
+          "Predator Laser Discs",
+          "Prey (2022)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-sword",
+          "Predator Sword",
+          "Predator 2 (1990)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-axe",
+          "Predator Axe",
+          "Predators (2010)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-kujhad",
+          "Predator Kujhad",
+          "The Predator (2018)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-killer-suit",
+          "Predator Killer Suit",
+          "The Predator (2018)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-plasma-glaive",
+          "Predator Plasma Glaive",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-plasma-scythe",
+          "Predator Plasma Scythe",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-blazer",
+          "Predator Blazer",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-pred-gun",
+          "Predator Pred-Gun",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-aurora-weapon",
+          "Predator AURORA Weapon",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-predator-fireliner",
+          "Predator Fireliner",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-electroshock-missile-battery",
+          "Electroshock Missile Battery",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-mp9-submachine-gun",
+          "MP9 Submachine Gun",
+          "Aliens versus Predator: Extinction",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m41ae3-heavy-pulse-rifle",
+          "M41AE3 Heavy Pulse Rifle",
+          "Aliens: Dark Descent",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m39-u-submachine-gun",
+          "M39-U Submachine Gun",
+          "Aliens: Dark Descent",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-xm99a1-phased-plasma-pulse-rifle",
+          "XM99A1 Phased Plasma Pulse Rifle",
+          "Aliens: Dark Descent",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-lacrima-a20-carbine",
+          "Lacrima A20 Carbine",
+          "Aliens: Dark Descent",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m4ra-battle-rifle",
+          "M4RA Battle Rifle",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-nsg-23-assault-rifle",
+          "NSG 23 Assault Rifle",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-mk221-tactical-shotgun",
+          "MK221 Tactical Shotgun",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-88-mod-4-combat-pistol",
+          "88 Mod 4 Combat Pistol",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-id23-incineration-unit",
+          "ID23 Incineration Unit",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-p9-sonic-harpoon-artillery",
+          "P9 Sonic Harpoon Artillery",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-xm99a-phased-plasma-pulse-rifle",
+          "XM99A Phased Plasma Pulse Rifle",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m20-claymore-mine",
+          "M20 Claymore Mine",
+          "Aliens: Colonial Marines",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-hicks-shotgun-legendary",
+          "Hicks' Shotgun (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-hudson-s-pulse-rifle-legendary",
+          "Hudson's Pulse Rifle (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-vasquez-s-smartgun-legendary",
+          "Vasquez's Smartgun (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-gorman-s-pistol-legendary",
+          "Gorman's Pistol (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-frost-s-flamethrower-legendary",
+          "Frost's Flamethrower (legendary)",
+          "Aliens: Colonial Marines — DLC",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-ripley-s-m41a-m240-combo-dlc",
+          "Ripley's M41A/M240 combo (DLC)",
+          "Aliens: Colonial Marines — DLC",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m4a5-compact-pistol",
+          "M4A5 Compact Pistol",
+          "AliensRL",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-mk88-combat-pistol",
+          "MK88 Combat Pistol",
+          "AliensRL",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m3a-submachine-gun",
+          "M3A Submachine Gun",
+          "AliensRL",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-m12-beretta-smg",
+          "M12 Beretta SMG",
+          "AliensRL",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-lacrima-99-bayonet-assembly",
+          "Lacrima 99 bayonet assembly",
+          "Alien Resurrection (1997)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-unknown-security-carbine-alien-earth",
+          "Unknown security carbine — Alien Earth",
+          "Alien: Earth (2025)",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-unidentified-comic-marine-sidearm",
+          "Unidentified comic marine sidearm",
+          "Comics Dark Horse / Marvel",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-unidentified-novel-security-firearm",
+          "Unidentified novel security firearm",
+          "Aliens novels",
+          "P2",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-db-48-daittyo-heavy-rifle",
+          "DB-48 Daittyo Heavy Rifle",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-hnt-1-el-alamein-revolver-rifle",
+          "HNT-1 El Alamein Revolver Rifle",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-bd-03-djinn-personal-railgun",
+          "BD-03 Djinn Personal Railgun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-type-111-directed-particle-emitter",
+          "Type 111 Directed Particle Emitter",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-eds-93-zadak-plasma-discharger-mk-2",
+          "EDS-93 Zadak Plasma Discharger Mk.2",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-smb-94-zephyr-plasma-emitter",
+          "SMB-94 Zephyr Plasma Emitter",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-type-21-tactical-shotgun-mk-2",
+          "Type 21 Tactical Shotgun Mk.2",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P0",
+          "secondary-prelaunch-gameplay-screenshots",
+          "NOT_ADMITTED",
+          "Review source-frame silhouette, feed, casing, reload, image rights, native rig & QA"
+        ],
+        [
+          "proposed-mondo-heat-9000",
+          "Mondo Heat 9000",
+          "Aliens: Fireteam Elite 2 — Patch 2026",
+          "P0",
+          "first-party-patch-notes",
+          "NOT_ADMITTED",
+          "Official patch names weapon; visual and thermal/cryo muzzle behavior still need exact source frames, native rig and tests"
+        ],
+        [
+          "proposed-bd-55-jokkh-burst-shotgun",
+          "BD-55 Jokkh Burst Shotgun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-type-200-cryo-gun",
+          "Type 200 Cryo Gun",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-f44ar-pulse-rifle",
+          "F44AR Pulse Rifle",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-bd-16-begho",
+          "BD-16 Begho",
+          "Aliens: Fireteam Elite 2 (2026)",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-ripley-s-hive-exterminator-rifle",
+          "Ripley's Hive Exterminator Rifle",
+          "Aliens: Fireteam Elite 2 — DLC/bonus",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ],
+        [
+          "proposed-rain-s-jackson-s-star-pulse-rifle",
+          "Rain's Jackson's Star Pulse Rifle",
+          "Aliens: Fireteam Elite 2 — DLC/bonus",
+          "P1",
+          "item-specific-evidence-not-checked",
+          "NOT_ADMITTED",
+          "Check item-specific primary evidence before model/art claims"
+        ]
+      ]
+    }
+  },
+  "workbookPublicationNoticeV164": "V177 : suivi technique des manquants. V1,200 lignes de catalogue,57 recettes et129 propositions de recherche conservés. Couverture ciblée et preuve native sont distinctes ; aucune nouvelle certification 1:1.",
+  "indicators": [
+    {
+      "id": "master",
+      "label": "Lignes du catalogue source conservées",
+      "cell": "E7",
+      "formula": "=COUNTA('01_Armes_Source_V1'!A6:A205)",
+      "expected": 200
+    },
+    {
+      "id": "recipes",
+      "label": "Recettes source conservées",
+      "cell": "E8",
+      "formula": "=COUNTA('02_Recettes_Source_V1'!A6:A62)",
+      "expected": 57
+    },
+    {
+      "id": "covered",
+      "label": "Recettes touchées par le périmètre borné V177",
+      "cell": "E9",
+      "formula": "=COUNTIF('02_Recettes_Source_V1'!G6:G62,\"COUVERTURE_CIBLEE_V177\")",
+      "expected": 6
+    },
+    {
+      "id": "research",
+      "label": "Propositions de recherche restant distinctes du gameplay",
+      "cell": "E10",
+      "formula": "=COUNTA('04_References_Ouvertes'!A6:A134)",
+      "expected": 129
+    },
+    {
+      "id": "exact",
+      "label": "Nouvelles certifications 1:1",
+      "cell": "E11",
+      "formula": "=0",
+      "expected": 0
+    }
+  ],
+  "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+  "canonical1to1Approved": false,
+  "humanParticipants": 0,
+  "releaseEvidence": {
+    "nodeSuite": null,
+    "nativeCandidate": null,
+    "ci": null,
+    "review": null,
+    "merge": null
+  },
+  "workbookSha256": "12edb0441a48345d24530af7ea416e392b89c05eeb9f464496e3236f2b025b9a"
+}

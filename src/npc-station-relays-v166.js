@@ -8,7 +8,8 @@ import { annexNpcDutiesV141 } from './hub-annex-npc-life-v141.js';
 import { HUB_NPC_ANNEX_WORKPOST_ROUTES_V165 } from './npc-annex-workpost-routes-v165.js';
 import { NPC_INTERDECK_DEFINITIONS_V165, normalizeNpcInterdeckRoutesV165, getNpcInterdeckGeometryV165 } from './npc-interdeck-routes-v165.js';
 import { npcLiftSocketV165, normalizeNpcLiftTransitV165, createNpcLiftTransitV165,
-  advanceNpcLiftTransitV165, npcLiftPoseV165, npcLiftDurationV165, npcLiftDoorProgressV165 } from './npc-lift-transit-v165.js';
+  advanceNpcLiftTransitV165, npcLiftPoseV165, npcLiftDurationV165, npcLiftDoorProgressV165,
+  npcLiftQueueCourtesyPlanV177,npcLiftQueueCourtesyClearedV177 } from './npc-lift-transit-v165.js';
 import { getLiftOcclusionV163 } from './hub-lift-transit-v163.js';
 import { drawHumanAtlasV133 } from './human-visual-contract-v133.js';
 import { HUB_ANNEX_BY_ID_V137 } from './hub-annex-registry-v137.js';
@@ -212,6 +213,19 @@ export function withHubNpcStationRelaysV166(Base){return class HubNpcStationRela
   getNpcStationRelayActorV166(id){return this.npcStationRelayBodiesV166?.get(id)||null;}
   getNpcStationRelayActorsV166(deck=null){return NPC_STATION_RELAY_DEFINITIONS_V166.map(d=>this.getNpcStationRelayActorV166(d.id))
     .filter(a=>a&&(deck==null||deckOf(a.roomId)===deck));}
+  getNpcLiftQueueEntriesV177(){
+    const entries=[...NPC_INTERDECK_DEFINITIONS_V165.map(d=>({definition:d,state:this.npcInterdeckStateV165?.routes[d.id],
+      body:this.npcInterdeckBodiesV165?.get(d.id)})),
+      ...NPC_STATION_RELAY_DEFINITIONS_V166.map(d=>({definition:d,state:this.npcStationRelaysStateV166?.routes[d.id],
+        body:this.getNpcStationRelayActorV166(d.id)}))];
+    return entries.map(entry=>{
+      const{definition:d,state:e,body}=entry,a=e?.actor,r=this.npcRoutineResolutionsV62?.get(d.crewId);
+      return{...entry,destinationX:a?.direction==='return'?(e.stationOrigin||e.origin)?.x
+        :finite(d.workGoalX)?d.workGoalX:getNpcInterdeckGeometryV165(d.id).faces.parent.opening.x,
+        canYield:Boolean(r&&!r.alert&&!r.missionAssigned&&!r.needsCare&&body&&body.alive!==false&&!body.downed
+          &&!body.workClock&&!body.supportClock)};
+    });
+  }
   hubNpcLeaseOwnerV163(crewId){const d=NPC_STATION_RELAY_DEFINITIONS_V166.find(d=>d.crewId===crewId),e=d&&this.npcStationRelaysStateV166?.routes[d.id];
     return e?.actor&&!e.localOwner?d.id:super.hubNpcLeaseOwnerV163?.(crewId)||null;}
   getNpcServiceOwnedActorsV163(){return[...new Map([...(super.getNpcServiceOwnedActorsV163?.()||[]),...this.getNpcStationRelayActorsV166()].map(a=>[a.crewId,a])).values()];}
@@ -258,9 +272,13 @@ export function withHubNpcStationRelaysV166(Base){return class HubNpcStationRela
   npcLiftQueueBlockersV165(d,a){const entries=[...NPC_INTERDECK_DEFINITIONS_V165.map(def=>({d:def,e:this.npcInterdeckStateV165?.routes[def.id]})),
     ...NPC_STATION_RELAY_DEFINITIONS_V166.map(def=>({d:def,e:this.npcStationRelaysStateV166?.routes[def.id]}))];
     const own=entries.find(v=>v.d.id===d.id)?.e,dest=a.direction==='outbound'?d.deck:own?.stationOrigin?.deck??own?.origin?.deck;
+    const views=this.getNpcLiftQueueEntriesV177(),plan=npcLiftQueueCourtesyPlanV177(views,{shaftId:d.shaftId,
+      occupied:Boolean(this.npcLiftCabinReservationV165(d.shaftId)||this.hubLiftTransitV163?.trip?.shaftId===d.shaftId)});
     return entries.filter(v=>v.d.id!==d.id&&v.d.shaftId===d.shaftId).flatMap(({d:def,e})=>{
       const other=e?.actor;if(!other||e.localOwner||other.stage==='returned'||other.stage==='station'||other.deck!==dest)return[];
       const target=other.direction==='return'?(e.stationOrigin?.deck??e.origin?.deck):def.deck;
+      if(plan?.winnerRouteId===d.id&&plan.winnerCrewId===d.crewId&&plan.fromDeck===a.deck&&plan.toDeck===dest
+        &&npcLiftQueueCourtesyClearedV177(plan,views.find(view=>view.definition.id===def.id)))return[];
       return target===other.deck?[]:[{routeId:def.id,crewId:def.crewId,fromDeck:other.deck,toDeck:target,
         roomId:other.roomId,stage:other.stage,reason:'clear-physical-departure-before-arriving-cabin'}];});}
   applyNpcStationRelayPoseV166(body,a){Object.assign(body,{x:a.x,y:532,roomId:a.roomId,facing:a.facing,vx:a.actualVelocity||0,

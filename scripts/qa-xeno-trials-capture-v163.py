@@ -169,6 +169,43 @@ def wait_observation(page, stage, field, timeout):
 def get_frame(page):
     return page.evaluate('''()=>({state:globalThis.__ATF_XENO_TRIALS_V96__.snapshot(),png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')})''')
 
+# Observe the real rendered startup before a Python/PNG round trip can miss
+# it. Only this detached observer is written; combat, clocks and keys stay
+# owned by the native game. Encoding waits until an immutable bitmap exists.
+PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
+ const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
+ if(prior)prior.cancelled=true;
+ const out=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:c,ready:false,done:false,accepted:null,frame:null,error:null};
+ const started=performance.now();
+ function sample(){
+  if(out.cancelled||out.done)return;
+  if(performance.now()-started>c.timeoutMs){out.done=true;out.error='Native startup observation exceeded the remaining original acquisition budget';return;}
+  const state=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot(),m=state?.match;
+  if(!m||m.config.matchId!==c.matchId||m.round!==c.round||m.fighters[0]?.id!==c.playerId||m.fighters[1]?.id!==c.targetId){
+   out.done=true;out.error='Startup observer cannot replace its match, round or participants';return;}
+  const player=m.fighters[0],attack=player.attack;
+  const event=[...m.events].reverse().find(e=>e.type==='attack'&&e.side==='player'&&e.kind==='special'&&e.id>c.lastEventId);
+  if(!out.accepted&&event&&player.stats.specials>c.specialsBefore)
+   out.accepted={attemptNumber:c.attemptNumber,attackEventId:event.id,observedTick:m.tick};
+  const cue=m.rigViewsV154?.find(v=>v.side==='player'&&(c.after?v.preparationV163:v.clip==='windup'));
+  // The native engine allocates attack.id, then immediately emits attack
+  // with the next serial. A different player's old pose is never evidence.
+  if(out.accepted&&event?.id===out.accepted.attackEventId&&event.id===attack?.id+1
+    &&attack?.kind==='special'&&attack.age<c.specialStartup&&cue){
+   const source=document.querySelector('[data-xt="canvas"]'),bitmap=document.createElement('canvas');
+   bitmap.width=source.width;bitmap.height=source.height;bitmap.getContext('2d').drawImage(source,0,0);
+   out.frame={state:structuredClone(state),bitmap,preparationProof:{attackId:attack.id,attackEventId:event.id,
+    attackEventTick:event.tick,frameTick:m.tick,attackAge:attack.age,clip:cue.clip,
+    observation:'read-only-native-raf-bitmap-before-png-encoding'}};
+   out.ready=true;out.done=true;return;
+  }
+  if(m.grappleV153||m.phase==='match-over'){
+   out.done=true;out.error='Native hold or result arrived without an observed startup bitmap';return;}
+  requestAnimationFrame(sample);
+ }
+ requestAnimationFrame(sample);return{armed:true,attemptNumber:c.attemptNumber};
+}'''
+
 def acquire_player_capture(page, after, trace):
     # The Prowler and these humans have different front-biased bodies. Their
     # pivot distance is not the V153 contact test. All imports below only read
@@ -189,7 +226,9 @@ def acquire_player_capture(page, after, trace):
         verticalOverlap:playerBody.bottom<=targetBody.top&&targetBody.bottom<=playerBody.top,
         specialCost:special.cost,specialStartup:special.startup,
         targetThreat:!!targetAttack&&b.attack.age<targetAttack.startup+targetAttack.active,
-        targetRecovery:!!targetAttack&&b.attack.age>=targetAttack.startup+targetAttack.active};
+        targetRecovery:!!targetAttack&&b.attack.age>=targetAttack.startup+targetAttack.active,
+        startupObservation:(()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;return o?{
+          ready:o.ready,accepted:o.accepted,error:o.error,attemptNumber:o.expected.attemptNumber}:null;})()};
     }'''
     started = time.monotonic()
     deadline = started + 55
@@ -220,6 +259,23 @@ def acquire_player_capture(page, after, trace):
             if value is None:
                 raise AssertionError('Native match disappeared during keyboard capture acquisition')
             m = value['match']
+            startup = value.get('startupObservation')
+            if startup and startup.get('accepted'):
+                acceptance = startup['accepted']
+                attempt = next((a for a in trace['attempts'] if a['number'] == acceptance['attemptNumber']), None)
+                if attempt:
+                    attempt['nativeSpecialAccepted'] = True
+                    attempt['attackEventId'] = acceptance['attackEventId']
+                    attempt['acceptanceObservedTick'] = acceptance['observedTick']
+            if startup and startup['ready'] and startup['accepted']['attackEventId'] not in preparations:
+                frame = page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
+                  if(!o?.ready||!o.frame)return null;
+                  return{state:o.frame.state,preparationProof:o.frame.preparationProof,deferredStartupBitmapV177:true};}''')
+                if frame:
+                    proof = frame['preparationProof']
+                    preparations[proof['attackEventId']] = frame
+                    observed_preparation_ids.add(proof['attackId'])
+                    trace['preparations'].append(proof)
             sample = summarize(value)
             trace['lastObservation'] = sample
             if m['tick'] - last_observation_tick >= 12 or m.get('grappleV153'):
@@ -292,6 +348,11 @@ def acquire_player_capture(page, after, trace):
                 attempt = {'number': len(trace['attempts']) + 1, 'before': sample,
                            'elapsedSeconds': time.monotonic() - started}
                 trace['attempts'].append(attempt)
+                page.evaluate(PLAYER_STARTUP_OBSERVER_V177, dict(
+                    matchId=m['config']['matchId'], round=m['round'], playerId=a['id'], targetId=b['id'],
+                    attemptNumber=attempt['number'], lastEventId=max((e['id'] for e in m['events']), default=-1),
+                    specialsBefore=a['stats']['specials'], specialStartup=value['specialStartup'], after=after,
+                    timeoutMs=max(1, (deadline-time.monotonic())*1000)))
                 page.keyboard.press('KeyL', delay=40)
                 after_press = page.evaluate(read_contact)
                 if after_press:
@@ -306,6 +367,7 @@ def acquire_player_capture(page, after, trace):
         trace.update({'status': 'failed', 'error': str(e), 'elapsedSeconds': time.monotonic() - started})
         raise
     finally:
+        page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(o)o.cancelled=true;}''')
         if held:
             page.keyboard.up(held)
         if guarding:
@@ -459,6 +521,10 @@ def main():
                     check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
                           failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
                     hold = page.evaluate(CAPTURE_EXPORT, {'stage': 'floor', 'fields': ['floor']})['floor']
+                    if preparation.get('deferredStartupBitmapV177'):
+                        preparation = page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
+                          if(!o?.ready||!o.frame)return null;
+                          return{state:o.frame.state,png:o.frame.bitmap.toDataURL('image/png'),preparationProof:o.frame.preparationProof};}''')
                     check(name + ': actual native Prowler startup is observed', preparation is not None)
                     capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
                     check(name + ': actual capture event owns the displayed hold', any(e['type'] == 'grapple-start-v153' and e['grappleId'] == hold_id for e in m['events']))

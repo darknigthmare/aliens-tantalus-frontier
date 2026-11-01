@@ -25,6 +25,12 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'verify-capture-observation-v177.mjs',
+  'verify-hub-armory-layering-v177.mjs',
+  'verify-tantalus-enrichment-v177.mjs',
+  'verify-weapon-conservation-v177.mjs',
+  'verify-npc-lift-queue-v177.mjs',
+  'qa-tantalus-enrichment-v177.py',
   'verify-tantalus-batch100-v168.mjs',
   'verify-dialogue-portraits-v168.mjs',
   'verify-hub-backgrounds-v168.mjs',
@@ -256,6 +262,8 @@ const FORGE_TOOLING_V140 = new Set([
   // Narrow, source-only admission for the arsenal specification; not shipped.
   'docs/arsenal',
   'docs/arsenal/README.md',
+  'docs/arsenal/progress-v177.json',
+  'docs/arsenal/ARSENAL_SUIVI_V177.xlsx',
   'docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx',
   'docs/arsenal/weapon_system_contract_v1.json',
   'docs/arsenal/data',
@@ -264,6 +272,7 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv',
   'docs/forge/xeno-trials/V168-DIALOGUE-AND-TANTALUS-BATCH100.md',
   'docs/forge/xeno-trials/batch100-v168.json',
+  'docs/forge/xeno-trials/batch100-v177.json',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
   'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
   'docs/forge/xeno-trials/V165-PARALLEL-COMPLETION.md',

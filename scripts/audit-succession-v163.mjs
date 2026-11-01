@@ -284,6 +284,190 @@ export const V165_VERIFIER_SUCCESSORS_V176 = Object.freeze({
   })
 });
 
+/** V177 continues the exact reviewed V167..V176 source chains. The old
+ * receipts above remain immutable; only these explicitly listed successors
+ * may replace their final bytes. Current gameplay evidence is kept separate. */
+export const V177_SOURCE_SUCCESSORS = Object.freeze({
+  "src/game-production-runtime.js": Object.freeze({ previousSha256: "8e31b01c84ef7af0b810d3aa4d22afc429153f362627b9f31d0b7b6c75ad60fb", currentSha256: "fa3ab990bd5137920a4f804f4e2a001526e19a34e0dfb701a2b510bef92a8a26" }),
+  "src/hub-armory-scene-v169.js": Object.freeze({ previousSha256: "036374b5b38dcb0dd43e92ef869eddf9f6e0a2c167a4ddf330261fc92570b5df", currentSha256: "4d65ab9fb59eb0ad924c3efe21f133ac9e52a0cf77b2410e4251b5d6fca378fc" }),
+  "src/hub-armory-storefront-v169.js": Object.freeze({ previousSha256: "6130f994f84099de1bedc9f071e2b4d57f014dded55f9a8a508b7347d08b8476", currentSha256: "1a106644c0d409f9d5c13921ced4112c1577d6897d9afe4c30530c23c64df290" }),
+  "src/weapon-magazine-inventory-v167.js": Object.freeze({ previousSha256: "2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928", currentSha256: "ad0c2597214ed41b7c91852e7e2cb62c855a2eb366ed79808c042f8300850fbb" }),
+  "src/weapon-magazine-recovery-runtime-v168.js": Object.freeze({ previousSha256: "4dbf78d2a4aa096125dada27b2b5fff05c1b927777f705eaf7d57f7626b88889", currentSha256: "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13" }),
+  "src/weapon-magazine-world-v168.js": Object.freeze({ previousSha256: "6024a584079bf6bac0d83ccc439e810afb4d6aadc33990d51ce72fcae715962a", currentSha256: "acf8396585e068d33569f42537c4420af7501093428e77824981c494491209e2" }),
+  "sw.js": Object.freeze({ previousSha256: "88ba286c6e78add4c054175da085cf56ad93d982749c09ed237e18605ed901f0", currentSha256: "e8bd0617c3a1e25d3b7d01d2ac595cb3eaef241be5c156f0c294b4e0d2769ce5" }),
+});
+
+export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
+  "scripts/verify-audit-continuation-v163.mjs": Object.freeze({ previousSha256: "b37258cad1f33d02fa7c18fffb19449ce8b96e971433b517c806a6550ae9be3a", currentSha256: "6e0e4445a5dbe721e7305cbc9b2ed8125b8c4beeecddcd2fc25258f895855a60" }),
+  "scripts/verify-parallel-completion-v165.mjs": Object.freeze({ previousSha256: "efb67151cd5a3e00434e1889bfd782ae94547f9300f858583e18845a9683e701", currentSha256: "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa" }),
+  "scripts/verify-public-release-v86.mjs": Object.freeze({ previousSha256: "1419dcf0e47abd91288748ac7b222ba0f2b0d354e2997ced49cedc2c44bee77e", currentSha256: "32ba11020523172842ea055dce894b5cb29e94a27fc2436c78fa2047056aa58e" }),
+});
+
+/** Baseline467 source identities for the bounded V177 continuation. This
+ * separate predecessor map prevents deleting its new source-change ledger. */
+export const V177_RUNTIME_PREDECESSORS = Object.freeze({
+  "src/campaign-lethe-continuity-ui-v163.js": "eebe0c5042736c6eeba51b6199946938e6bae7d8483901b78dc8f234c03341e1",
+  "src/campaign-lethe-continuity-v163.js": "fea5be5799000bcea712a78685d5cbd54c5ae9ffbe3d55b05692d8809f4aceb7",
+  "src/game-production-runtime.js": "8e31b01c84ef7af0b810d3aa4d22afc429153f362627b9f31d0b7b6c75ad60fb",
+  "src/hub-armory-scene-v169.js": "036374b5b38dcb0dd43e92ef869eddf9f6e0a2c167a4ddf330261fc92570b5df",
+  "src/hub-armory-storefront-v169.js": "6130f994f84099de1bedc9f071e2b4d57f014dded55f9a8a508b7347d08b8476",
+  "src/hub-batch-command-v177.js": null,
+  "src/hub-batch-engineering-v177.js": null,
+  "src/hub-batch-habitat-v177.js": null,
+  "src/hub-batch-industrial-v177.js": null,
+  "src/hub-room-enrichment-v177.js": null,
+  "src/hub-room-life-v136.js": "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
+  "src/npc-interdeck-routes-v165.js": "85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1",
+  "src/npc-lift-transit-v165.js": "2b492180395b6d78a73414a345a89c109f796daf3e18644b7b8419db223cd55b",
+  "src/npc-service-traffic-v163.js": "50b90764828ab341cabb0d5795addd06092beed00957e6abc2a8310675e8de5d",
+  "src/npc-station-relays-v166.js": "371f5de036111531b79adffea4e6d5ffaf0c1f86f5773b18fed88b129ccaf156",
+  "src/player-appearance-hub-v126.js": "7f056e474636f829e5309b1c52e68e04d3e2844b275fb001b574d6af90fb8b6f",
+  "src/player-locomotion-rig-v129.js": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
+  "src/player-transit-rig-v128.js": "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
+  "src/player-weapon-runtime-v125.js": "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
+  "src/weapon-magazine-inventory-v167.js": "2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928",
+  "src/weapon-magazine-recovery-runtime-v168.js": "4dbf78d2a4aa096125dada27b2b5fff05c1b927777f705eaf7d57f7626b88889",
+  "src/weapon-magazine-world-v168.js": "6024a584079bf6bac0d83ccc439e810afb4d6aadc33990d51ce72fcae715962a",
+  "sw.js": "88ba286c6e78add4c054175da085cf56ad93d982749c09ed237e18605ed901f0",
+});
+
+export const V177_ARSENAL_SOURCE_INPUTS = Object.freeze({
+  'docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx': '3f9b5d0bee8bafd95819e7860d1a09a1357fb2bcd92facbe8ed0cc80fb6c4cbb',
+  'docs/arsenal/data/tantalus_arsenal_master_v1.csv': '8f33064087e6025a450876db2068af285bd5251b180a4d8243fd5770aaeaa05a',
+  'docs/arsenal/data/tantalus_arsenal_qa_v1.csv': 'c500389eb71811d543312c60a10bd4199843f7a5dea673de6beb0d140e95f091',
+  'docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv': '5e77f3d790b3f29869ccb3b6a183ef0ed5524fa75400e86dfdbec39db446ae4b'
+});
+
+function sourceDigestV177(path, previous) {
+  const receipt = V177_SOURCE_SUCCESSORS[path];
+  if (!receipt) return previous;
+  assert.deepEqual(keys(receipt), ['currentSha256', 'previousSha256']);
+  assert.equal(receipt.previousSha256, previous, 'Broken V176-to-V177 source chain: ' + path);
+  assert.ok(validHash(receipt.currentSha256), 'Invalid V177 source digest: ' + path);
+  assert.notEqual(receipt.currentSha256, previous, 'A V177 source successor must identify changed bytes: ' + path);
+  return receipt.currentSha256;
+}
+
+/** One verifier resolver serves the cumulative guard and the source auditor.
+ * This prevents a valid newer receipt being missed by either caller. */
+export function verifyReviewedVerifierV177(path, original, readSource = readRepository) {
+  assert.ok(validHash(original), 'Missing reviewed verifier predecessor: ' + path);
+  let expected = original, version = 'V165';
+  for (const [id, receipts] of [
+    ['V171', V165_VERIFIER_SUCCESSORS_V171], ['V173', V165_VERIFIER_SUCCESSORS_V173],
+    ['V174', V165_VERIFIER_SUCCESSORS_V174], ['V176', V165_VERIFIER_SUCCESSORS_V176],
+    ['V177', V165_VERIFIER_SUCCESSORS_V177]
+  ]) {
+    if (!Object.hasOwn(receipts, path)) continue;
+    const receipt = receipts[path];
+    assert.deepEqual(keys(receipt), ['currentSha256', 'previousSha256']);
+    assert.equal(receipt.previousSha256, expected, 'Broken ' + version + '-to-' + id + ' verifier chain: ' + path);
+    assert.ok(validHash(receipt.currentSha256), 'Invalid ' + id + ' verifier digest: ' + path);
+    assert.notEqual(receipt.currentSha256, expected, 'A verifier successor must identify changed bytes: ' + path);
+    expected = receipt.currentSha256; version = id;
+  }
+  assert.equal(sha(readSource(path)), expected, 'Unreviewed ' + version + ' verifier successor: ' + path);
+  return expected;
+}
+
+/** The new tracker records bounded corrections, not artistic or release
+ * completion. Rebuilding hashes or a workbook cannot manufacture a QA receipt. */
+export function verifyOpenWorkstreamsV177(current, readSource = readRepository) {
+  const followup = current.followupV177;
+  assert.ok(followup && typeof followup === 'object' && !Array.isArray(followup), 'Missing V177 open-work tracker');
+  assert.equal(followup.schema, 177);
+  assert.equal(followup.baselineCommit, '4676a78746d8becdb5d6836701e96cc37d7d462f');
+  assert.equal(followup.baselineProgressSha256, '767f5aab50f0c90d27ace678942d4ca62d5033cfda3c13aa92e441cc6630c86e');
+  assert.equal(followup.state, 'PREPUBLICATION');
+  assert.equal(followup.runtimeValidation, 'REQUIRES_OWN_EXACT_HEAD_RECEIPTS');
+  assert.deepEqual(followup.releaseEvidence, { nodeSuite: null, nativeCandidate: null, ci: null, review: null, merge: null });
+  assert.deepEqual([followup.approved1to1, followup.fullArtTasksClosed, followup.humanParticipants], [0, 0, 0]);
+  assert.deepEqual(followup.remaining, { costumeReferences: 18, fullNativeLocomotionNotCertified: true,
+    newArchivesRecovered: 0, driveContents: 'UNKNOWN', forgeState: 'DEFERRED_BY_USER' });
+  const ids = ['C177-ARSENAL','C177-PLAYER','C177-ROUTES','C177-CAMPAIGN','C177-SHIP','C177-AUDIT'];
+  assert.deepEqual(followup.workstreams?.map(row => row.id), ids);
+  assert.equal(followup.workbookTable, '27_RepriseV177');
+  const table = current.tables?.[followup.workbookTable];
+  assert.equal(table?.headers?.length, 12);
+  assert.deepEqual(table.rows.map(row => row[0]), [...ids, 'H168-DELIVERY']);
+  for (const [index, stream] of followup.workstreams.entries()) {
+    assert.equal(stream.codeState, 'IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED');
+    assert.equal(stream.nativeState, 'REQUIRES_OWN_EXACT_HEAD_RECEIPTS');
+    assert.ok(stream.problem.length >= 24 && stream.implementedScope.length >= 24 && stream.limits.length >= 24);
+    assert.deepEqual([stream.approved1to1, stream.artClosed, stream.humanParticipants], [0, 0, 0]);
+    assert.equal(table.rows[index].length, 12);
+    assert.deepEqual(table.rows[index].slice(-3), [0, 0, 0]);
+    assert.deepEqual(table.rows[index].slice(6, 8), [stream.codeState, stream.nativeState]);
+    for (const path of stream.modules) {
+      assert.match(path, /^src\/[a-zA-Z0-9._-]+\.js$/);
+      assert.ok(!path.startsWith('src/forge'), 'Forge cannot be reopened by V177');
+      assert.ok(readSource(path).length > 0, path);
+    }
+    assert.ok(stream.verifiers.length > 0);
+    for (const verifier of stream.verifiers) {
+      assert.match(verifier, /^scripts\/verify-[a-zA-Z0-9._-]+\.mjs$/);
+      assert.equal(sha(readSource(verifier)), followup.verifierHashes[verifier], 'Unreviewed V177 behavioral verifier: ' + verifier);
+    }
+  }
+  assert.deepEqual(followup.sourceChanges.map(row => row.path), Object.keys(V177_RUNTIME_PREDECESSORS).sort(),
+    'Incomplete V177 source-change ledger');
+  for (const row of followup.sourceChanges) {
+    assert.ok(Object.hasOwn(current.runtimeSourceSha256, row.path) || Object.hasOwn(V177_SOURCE_SUCCESSORS, row.path),
+      'Unregistered V177 runtime source: ' + row.path);
+    assert.equal(row.previousSha256, V177_RUNTIME_PREDECESSORS[row.path], 'Unreviewed V177 runtime predecessor: ' + row.path);
+    assert.ok(validHash(row.currentSha256)); assert.notEqual(row.previousSha256, row.currentSha256);
+    assert.equal(sha(readSource(row.path)), row.currentSha256, 'Unreviewed V177 runtime bytes: ' + row.path);
+    assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
+  }
+  const previousQaDrivers = {
+    'scripts/qa-npc-matte-apertures-v164.py': 'ad16416f864867a27bb189fe6d5f6fda9d456cecb64050c3072831266058d57a',
+    'scripts/qa-xeno-trials-capture-v163.py': 'cfb189f420d1967951faaa50d7a186abf1905b167ab7bd1fef68ead58aa91252',
+    'scripts/qa-tantalus-enrichment-v177.py': null
+  };
+  assert.deepEqual(followup.qaDriverChanges?.map(row => row.path), Object.keys(previousQaDrivers));
+  for (const row of followup.qaDriverChanges) {
+    assert.equal(row.state, 'PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED');
+    assert.equal(row.previousSha256, previousQaDrivers[row.path], 'Unreviewed V177 QA predecessor: ' + row.path);
+    assert.ok(validHash(row.currentSha256)); assert.notEqual(row.previousSha256, row.currentSha256);
+    assert.equal(sha(readSource(row.path)), row.currentSha256, 'Unreviewed V177 QA pilot bytes: ' + row.path);
+    assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
+    for (const verifier of row.verifiers)
+      assert.equal(sha(readSource(verifier)), followup.verifierHashes[verifier], 'Unreviewed V177 QA behavioral verifier: ' + verifier);
+  }
+  const arsenal = followup.arsenalTracking;
+  assert.equal(arsenal?.jsonPath, 'docs/arsenal/progress-v177.json');
+  assert.equal(arsenal?.workbookPath, 'docs/arsenal/ARSENAL_SUIVI_V177.xlsx');
+  assert.equal(sha(readSource(arsenal.jsonPath)), arsenal.jsonSha256, 'V177 arsenal JSON changed');
+  assert.equal(sha(readSource(arsenal.workbookPath)), arsenal.workbookSha256, 'V177 arsenal workbook changed');
+  assert.deepEqual([arsenal.tables, arsenal.sheets, arsenal.cachedFormulas], [4, 5, 5]);
+  assert.deepEqual(arsenal.sourceInputs, V177_ARSENAL_SOURCE_INPUTS);
+  for (const [path, digest] of Object.entries(arsenal.sourceInputs))
+    assert.equal(sha(readSource(path)), digest, 'Original arsenal specification changed: ' + path);
+  const ship = followup.shipTracking;
+  assert.deepEqual(ship, {
+    ledgerPath: 'docs/forge/xeno-trials/batch100-v177.json',
+    ledgerSha256: '2fc2c3229920b3d425f50313270bc88afe1338213253451f6de544b0d3576d3a',
+    batchId: 'T177-BATCH-002', installations: 100, rooms: 35, kinds: 16,
+    newPngAssets: 0, geometryChanged: false, artistic1to1Approved: false,
+    humanParticipants: 0, state: 'IMPLEMENTED_PENDING_NATIVE_QA'
+  });
+  assert.equal(sha(readSource(ship.ledgerPath)), ship.ledgerSha256, 'Unreviewed V177 ship ledger bytes');
+  const shipRow = table.rows.find(row => row[0] === 'C177-SHIP');
+  assert.ok(shipRow[4].includes(ship.ledgerPath) && shipRow[4].includes(ship.ledgerSha256));
+  const delivery = current.historicalDeliveryV168;
+  assert.equal(sha(Buffer.from(JSON.stringify(delivery))),
+    '0a8957b3e9312606039ffa15a2fffd3c45e08554a44ffa694629431b7a869896',
+    'Historical V168 recovered delivery differs from its verified durable archive and merge receipt');
+  const historicalRow = table.rows.at(-1);
+  assert.equal(historicalRow.length, 12);
+  assert.equal(historicalRow[6], 'MERGED_WITH_SCOPED_LOCAL_VALIDATION_AND_OPEN_GLOBAL_CI');
+  assert.equal(historicalRow[7], 'HISTORICAL_RESULTS_NOT_TRANSFERRED');
+  assert.ok(historicalRow[4].includes(delivery.durableArchive.sha256));
+  assert.ok(historicalRow[4].includes(delivery.mergeReceipt.sha256));
+  assert.deepEqual(historicalRow.slice(-3), [0, 0, 0]);
+  return Object.freeze({ streams: ids.length, sources: followup.sourceChanges.length, trialSheets: 28, arsenalSheets: 5 });
+}
+
 /** One maintenance correction follows the frozen Forge scope; it does not reopen that scope. */
 export function verifyGamedevCorrectionV163(current, readSource = readRepository) {
   if (!Object.hasOwn(current, 'followupGamedev20261029')) return Object.freeze({});
@@ -454,6 +638,15 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   assert.equal(current.deferredForge?.state, 'DEFERRED_BY_USER');
   assert.deepEqual(current.deferredForge.sourceSha256, AUDIT_DEFERRED_FORGE_SOURCES_V163);
   const corrections = verifyGamedevCorrectionV163(current, readSource);
+  const protectedSources = new Set([
+    ...keys(ARSENAL_V167_SUCCESSORS), ...keys(ARSENAL_V167_NEW_SOURCES), ...keys(ARMORY_V169_NEW_SOURCES),
+    ...keys(ARSENAL_V170_NEW_SOURCES), ...keys(ARSENAL_V171_NEW_SOURCES), ...keys(ARMORY_V174_ECONOMY_NEW_SOURCES),
+    ...Object.values(ARMORY_V169_SUCCESSORS).map(receipt => receipt.verifier)
+  ]);
+  for (const path of keys(V177_SOURCE_SUCCESSORS))
+    assert.ok(protectedSources.has(path), 'V177 source has no immutable predecessor: ' + path);
+  for (const path of keys(V165_VERIFIER_SUCCESSORS_V177))
+    assert.ok(Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171, path), 'V177 verifier has no immutable predecessor: ' + path);
   for (const [path, expected] of Object.entries(AUDIT_DEFERRED_FORGE_SOURCES_V163))
     assert.equal(sha(readSource(path)), corrections[path] ?? expected, 'Deferred Forge module changed: ' + path);
   const before = previous.runtimeSourceSha256, after = current.runtimeSourceSha256;
@@ -481,8 +674,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       if (economy) assert.equal(economy.previousSha256, (current || newest || armory || successor).currentSha256,
         'Broken V170/V171-to-V174 economy successor chain: ' + path);
       assert.equal(sha(readSource(path)),
-        (economy || current || newest || armory || successor).currentSha256,
-        economy ? 'Unreviewed V174 economy successor: ' + path
+        sourceDigestV177(path, (economy || current || newest || armory || successor).currentSha256),
+        V177_SOURCE_SUCCESSORS[path] ? 'Unreviewed V177 source successor: ' + path
+          : economy ? 'Unreviewed V174 economy successor: ' + path
           : current ? 'Unreviewed V171 runtime successor: ' + path
             : newest ? 'Unreviewed V170 runtime successor: ' + path
               : armory ? 'Unreviewed V169 runtime successor: ' + path
@@ -493,7 +687,8 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   // New V167 modules are not retroactively called historical V163 sources.
   for (const [path, expected] of Object.entries(ARSENAL_V167_NEW_SOURCES))
-    assert.equal(sha(readSource(path)), expected, 'Unreviewed V167 added source: ' + path);
+    assert.equal(sha(readSource(path)), sourceDigestV177(path, expected),
+      V177_SOURCE_SUCCESSORS[path] ? 'Unreviewed V177 source successor: ' + path : 'Unreviewed V167 added source: ' + path);
   for (const [path, expected] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
     const extra = path === ARMORY_V170_ASSET_SOURCE.path ? ARMORY_V170_ASSET_SOURCE : null;
     if (extra) assert.equal(extra.previousSha256, expected, 'Invalid V169 authored source history');
@@ -503,8 +698,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256, current?.currentSha256 || extra?.currentSha256 || expected,
       'Broken V171-to-V172 source chain: ' + path);
-    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected,
-      release ? 'Unreviewed V172 art source: ' + path
+    assert.equal(sha(readSource(path)), sourceDigestV177(path, release?.currentSha256 || current?.currentSha256 || extra?.currentSha256 || expected),
+      V177_SOURCE_SUCCESSORS[path] ? 'Unreviewed V177 source successor: ' + path
+        : release ? 'Unreviewed V172 art source: ' + path
         : current ? 'Unreviewed V171 source correction: ' + path
           : extra ? 'Unreviewed V170 source correction: ' + path
             : 'Unreviewed V169 added source: ' + path);
@@ -516,8 +712,9 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     const release = ARMORY_V172_RELEASE_SUCCESSORS[path];
     if (release) assert.equal(release.previousSha256, current?.currentSha256 || expected,
       'Broken V171-to-V172 source chain: ' + path);
-    assert.equal(sha(readSource(path)), release?.currentSha256 || current?.currentSha256 || expected,
-      release ? 'Unreviewed V172 art source: ' + path
+    assert.equal(sha(readSource(path)), sourceDigestV177(path, release?.currentSha256 || current?.currentSha256 || expected),
+      V177_SOURCE_SUCCESSORS[path] ? 'Unreviewed V177 source successor: ' + path
+        : release ? 'Unreviewed V172 art source: ' + path
         : current ? 'Unreviewed V171 source successor: ' + path
           : 'Unreviewed V170 added source: ' + path);
   }
@@ -529,37 +726,24 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     if (revision) assert.equal(revision.previousSha256,expected,
       'Incorrect V173 source predecessor: ' + path);
     if (release && revision) throw new Error('Ambiguous artifact successor: ' + path);
-    assert.equal(sha(readSource(path)), revision?.currentSha256 || release?.currentSha256 || expected,
-      revision ? 'Unreviewed V173 specialist source: ' + path
+    assert.equal(sha(readSource(path)), sourceDigestV177(path, revision?.currentSha256 || release?.currentSha256 || expected),
+      V177_SOURCE_SUCCESSORS[path] ? 'Unreviewed V177 source successor: ' + path
+        : revision ? 'Unreviewed V173 specialist source: ' + path
         : release ? 'Unreviewed V172 verifier: ' + path
           : 'Unreviewed V171 added source: ' + path);
   }
   for (const [path, expected] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
-    assert.equal(sha(readSource(path)), expected, 'Unreviewed V174 economy source: ' + path);
-  for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
-    const revision = V165_VERIFIER_SUCCESSORS_V173[path];
-    const latest = V165_VERIFIER_SUCCESSORS_V174[path];
-    const approvedV176 = V165_VERIFIER_SUCCESSORS_V176[path];
-    if (revision) assert.equal(revision.previousSha256, receipt.currentSha256,
-      'Broken V171-to-V173 verifier chain: ' + path);
-    if (latest) assert.equal(latest.previousSha256, (revision || receipt).currentSha256,
-      'Broken V171/V173-to-V174 verifier chain: ' + path);
-    if (approvedV176) assert.equal(approvedV176.previousSha256,
-      (latest || revision || receipt).currentSha256,
-      'Broken V174-to-V176 verifier chain: ' + path);
-    assert.equal(sha(readSource(path)),
-      approvedV176?.currentSha256 || latest?.currentSha256 || revision?.currentSha256 || receipt.currentSha256,
-      approvedV176 ? 'Unreviewed V176 verifier successor: ' + path
-        : latest ? 'Unreviewed V174 verifier successor: ' + path
-          : revision ? 'Unreviewed V173 verifier successor: ' + path
-            : 'Unreviewed V171 verification successor: ' + path);
-  }
+    assert.equal(sha(readSource(path)), sourceDigestV177(path, expected),
+      V177_SOURCE_SUCCESSORS[path] ? 'Unreviewed V177 source successor: ' + path : 'Unreviewed V174 economy source: ' + path);
+  for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171))
+    verifyReviewedVerifierV177(path, receipt.previousSha256, readSource);
   for (const [path, receipt] of Object.entries(ARMORY_V169_SUCCESSORS)) {
     assert.ok(Object.hasOwn(ARSENAL_V167_SUCCESSORS, path), 'Missing V167 predecessor: ' + path);
     assert.equal(receipt.previousSha256, ARSENAL_V167_SUCCESSORS[path].currentSha256,
       'Incorrect V169 predecessor: ' + path);
-    assert.equal(sha(readSource(receipt.verifier)), receipt.verifierSha256,
-      'Unreviewed V169 behavioral verifier: ' + receipt.verifier);
+    assert.equal(sha(readSource(receipt.verifier)), sourceDigestV177(receipt.verifier, receipt.verifierSha256),
+      V177_SOURCE_SUCCESSORS[receipt.verifier] ? 'Unreviewed V177 source successor: ' + receipt.verifier
+        : 'Unreviewed V169 behavioral verifier: ' + receipt.verifier);
   }
   const changed = keys(before).filter(path => before[path] !== after[path]);
   const added = keys(after).filter(path => !Object.hasOwn(before, path));
@@ -580,6 +764,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
       assert.ok(readSource(verifier).length > 0, 'Missing behavioral verifier: ' + verifier);
     }
   }
+  verifyOpenWorkstreamsV177(current, readSource);
   return Object.freeze({ inherited: 87, changed: changed.length, unchanged: 87 - changed.length,
     added: added.length, current: keys(after).length });
 }
@@ -605,6 +790,9 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS)
+      .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(V177_SOURCE_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])) })
     : current.runtimeSourceSha256;

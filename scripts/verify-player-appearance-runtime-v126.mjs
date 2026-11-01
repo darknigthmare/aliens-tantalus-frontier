@@ -26,6 +26,7 @@ import { PLAYER_TRANSIT_RIG_ASSETS_V128 } from '../src/player-transit-rig-v128.j
 import { PLAYER_COLONIAL_RIG_ASSETS_V129, PLAYER_COLONIAL_LEG_DEFINITIONS_V129 } from '../src/player-colonial-art-v129.js';
 import { PLAYER_APPEARANCE_IMAGE_LIMIT_V129 } from '../src/player-appearance-runtime-v126.js';
 import { getPlayerColonialTorsoWithVariantsV141 } from '../src/player-colonial-art-v141.js';
+import { advanceHubPlayerAppearanceV126 } from '../src/player-appearance-hub-v126.js';
 
 // Actual production, Bioforge and hub runtimes own all gameplay. The observable
 // host substitutes browser APIs only; dimensions come from shipped PNG headers.
@@ -827,6 +828,38 @@ test('an unarmed coop operator still wears their modular kit with no hidden or d
   assert.equal(subject.engine.resolvePlayerWeaponPoseV125(subject.engine.coop, RIGHT), null);
   assert.equal(subject.drawing.draws.filter(draw => /\/weapons\/|\/user-equipment-v95\//.test(draw.source || '')).length, 0);
   assert.deepEqual(combatState(subject.engine.coop), before);
+});
+
+test('a frozen-clock correction keeps the upper and lower outfit phases together in mission, coop and hub', () => {
+  const subject = fixture();
+  subject.engine.setCoop(true);
+  const exercise = (engine, actor, observe) => {
+    const sample = () => {
+      const before = combatState(actor); observe();
+      assert.deepEqual(combatState(actor), before, 'Cosmetic observation grants no gameplay mutation');
+    };
+    Object.assign(actor, { vx: 155, grounded: true, climbing: false, inVehicle: false });
+    engine.animationTime = 1; sample();
+    actor.x += 15.5; engine.animationTime = 1.1; sample();
+    const upper = structuredClone(actor.weaponRigMotionV125), lower = structuredClone(actor.playerLocomotionStateV129);
+    actor.x += 3; actor.y += .5; sample();
+    near(actor.weaponRigMotionV125.distance, upper.distance, 'An unchanged clock cannot advance the torso');
+    near(actor.playerLocomotionStateV129.distance, lower.distance, 'An unchanged clock cannot advance the legs');
+    near(actor.playerLocomotionStateV129.cycles, lower.cycles, 'The supported phase stays held');
+    near(actor.weaponRigMotionV125.x, actor.x, 'Upper motion rebases its position');
+    near(actor.playerLocomotionStateV129.x, actor.x, 'Lower motion rebases the same position');
+    actor.x += actor.vx / 60; engine.animationTime += 1 / 60; sample();
+    near(actor.weaponRigMotionV125.distance - upper.distance, actor.vx / 60, 'Torso excludes the old correction next tick');
+    near(actor.playerLocomotionStateV129.distance - lower.distance, actor.vx / 60, 'Legs exclude the same old correction');
+  };
+  for (const actor of [subject.engine.player, subject.engine.coop]) {
+    exercise(subject.engine, actor, () => subject.engine.advancePlayerWeaponActorV125(actor));
+  }
+  subject.engine.stop();
+  const host = browserHost(), hub = new HubGame(host.canvas);
+  hub.start();
+  exercise(hub, hub.player, () => advanceHubPlayerAppearanceV126(hub));
+  hub.stop(false);
 });
 
 for (const appearance of [bare(), colonial('hudson')]) test(`the real hub moves ${appearance.slots.torso} only from physical displacement`, async () => {

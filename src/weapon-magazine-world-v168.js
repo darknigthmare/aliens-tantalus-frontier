@@ -1,5 +1,6 @@
 import { validateWeaponFeedV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167,
-  captureWeaponFeedV167, restoreWeaponFeedV167 } from './weapon-magazine-inventory-v167.js';
+  captureWeaponFeedV167, restoreWeaponFeedV167, isDetachableMagazineFeedV177,
+  canAdvanceMagazineRevisionV177 } from './weapon-magazine-inventory-v167.js';
 
 /** World receipts for actual detachable magazines. These are visual/gameplay
  * instances of rounds that already existed in a V167 feed, never new ammo.
@@ -40,6 +41,19 @@ export function restoreMagazineFeedV168(snapshot, options = {}) {
   return feed && validateMagazineWorldV168(feed, { requirePosition: true }) ? feed : null;
 }
 
+/** Bind a checkpoint to the actual restored actor, not just an equal sum of
+ * ammunition. A different weapon or redistribution cannot exchange feeds. */
+export function restoreEquippedMagazineFeedV177(snapshot, { ownerId, weaponId,
+  magazineSize, loaded, reserve, enabled = false } = {}) {
+  if (enabled !== true || !validId(ownerId) || !validId(weaponId) || !Number.isSafeInteger(magazineSize)
+    || magazineSize < 1 || !Number.isSafeInteger(loaded) || loaded < 0
+    || !Number.isSafeInteger(reserve) || reserve < 0) return null;
+  const feed = restoreMagazineFeedV168(snapshot, { ownerId, weaponId,
+    expectedCarriedRounds: loaded + reserve });
+  return feed && isDetachableMagazineFeedV177(feed) && feed.magazineSize === magazineSize
+    && weaponFeedLoadedRoundsV167(feed) === loaded && weaponFeedReserveRoundsV167(feed) === reserve ? feed : null;
+}
+
 export function stampEjectedMagazinesV168(feed, { ownerId, levelId, plane: targetPlane = 'gameplay', x, y } = {}) {
   if (!validateMagazineWorldV168(feed) || ownerId !== feed.ownerId
     || !validId(levelId) || !plane(targetPlane) || !finite(x) || !finite(y)) return 0;
@@ -65,7 +79,6 @@ export function nearestDroppedMagazineV168(feed, { ownerId, levelId, plane: targ
     || !plane(targetPlane) || !finite(x) || !finite(y)
     || !Number.isFinite(maxDistance) || maxDistance <= 0 || maxDistance > 150) return null;
   const possible = visibleDroppedMagazinesV168(feed, levelId, targetPlane)
-    .filter(m => m.rounds > 0)
     .map(m => ({ ...m, distance: Math.hypot(m.x - x, m.y - y) }))
     .filter(m => m.distance <= maxDistance && (typeof lineOfSight !== 'function' || lineOfSight(m)))
     .sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id));
@@ -79,7 +92,7 @@ export function recoverDroppedMagazineV168(feed, { ownerId, levelId, plane: targ
     plane: targetPlane, x, y, maxDistance, lineOfSight });
   if (!nearby || nearby.id !== magazineId) return null;
   const mag = feed.magazines.find(m => m.id === magazineId && m.location === 'world');
-  if (!mag) return null;
+  if (!mag || !canAdvanceMagazineRevisionV177(mag)) return null;
   const receipt = 'pickup:' + magazineId + ':' + mag.revision;
   if (!validId(receipt) || feed.receipts.includes(receipt)) return null;
   const rounds = mag.rounds;

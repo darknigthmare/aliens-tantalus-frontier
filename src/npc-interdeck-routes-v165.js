@@ -3,6 +3,7 @@ import { HubGame as RosterHubV52 } from './hub-v52-runtime.js';
 import { buildHubTraversalGeometryV87 } from './hub-v51-runtime.js';
 import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { createServiceRouteV161 } from './npc-service-routes-v161.js';
+import { HUB_NPC_ANNEX_SERVICE_ROUTES_V163 } from './npc-annex-service-routes-v163.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141 } from './hub-annex-npc-life-v141.js';
 import { HUB_ANNEX_BY_ID_V137 } from './hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
@@ -59,6 +60,13 @@ export function getNpcInterdeckGeometryV165(id) {
 }
 const doorsFor = deck => buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck).filter(d=>!d.lift);
 const allDoorIds = HUB_DECKS.flatMap((_,deck)=>doorsFor(deck).map(d=>d.id));
+const legacyRouteFor=d=>HUB_NPC_ANNEX_SERVICE_ROUTES_V163.find(route=>route.definition.id===d.legacyRouteId);
+function legacyOriginBookmark(d,o) {
+  if(o?.source!=='legacy-physical-owner'||!o.legacyBookmark)return null;
+  const actor=legacyRouteFor(d)?.normalize({schema:163,actor:o.legacyBookmark}).actor;
+  return actor&&actor.crewId===d.crewId&&actor.deck===o.deck&&actor.roomId===o.roomId
+    &&actor.x===o.x&&actor.y===o.y&&actor.stage==='service'&&actor.doorProgress===0?actor:null;
+}
 const normalizeDoors = value => value&&typeof value==='object'&&!Array.isArray(value)
   &&Object.entries(value).every(([id,p])=>allDoorIds.includes(id)&&finite(p)&&p>=0&&p<=1)
   ?Object.fromEntries(allDoorIds.map(id=>[id,value[id]||0])):null;
@@ -66,10 +74,14 @@ function validOrigin(d,o) {
   const room=HUB_DECKS[o?.deck]?.rooms.find(r=>r.id===o.roomId);
   return o?.crewId===d.crewId&&d.origins.includes(o.roomId)&&room&&o.y===532
     &&finite(o.x)&&o.x>=room.xStart+24&&o.x<=room.xEnd-68&&[-1,1].includes(o.facing)
-    &&['native-observed-body','legacy-physical-owner','traffic-physical-owner'].includes(o.source);
+    &&['native-observed-body','legacy-physical-owner','traffic-physical-owner'].includes(o.source)
+    &&(o.legacyBookmark==null||Boolean(legacyOriginBookmark(d,o)));
 }
 function normalizeOrigin(d,o) {
-  return validOrigin(d,o)?{crewId:d.crewId,deck:o.deck,roomId:o.roomId,x:o.x,y:532,facing:o.facing,source:o.source}:null;
+  if(!validOrigin(d,o))return null;
+  const bookmark=legacyOriginBookmark(d,o);
+  return{crewId:d.crewId,deck:o.deck,roomId:o.roomId,x:o.x,y:532,facing:o.facing,source:o.source,
+    ...(bookmark?{legacyBookmark:bookmark}:{})};
 }
 export function normalizeNpcInterdeckRoutesV165(value) {
   const routes={};
@@ -220,10 +232,29 @@ export function withHubNpcInterdeckRoutesV165(Base) {
     start(save={},options={}) {
       this.npcInterdeckSandboxV165=Boolean(options.editorProject||options.forgeJourneyV141||this.forgeSessionV141);
       this.npcInterdeckStateV165=normalizeNpcInterdeckRoutesV165(this.npcInterdeckSandboxV165?null:save.npcInterdeckRoutesV165);
+      this.npcInterdeckRetiredLegacyV177=new Set();
       for(const d of NPC_INTERDECK_DEFINITIONS_V165) {
         const e=this.npcInterdeckStateV165.routes[d.id],origin=e.actor?e.origin:e.retained;if(!origin||origin.source!=='legacy-physical-owner')continue;
-        const bookmark=save.npcAnnexRoutesV163?.routes?.[d.legacyRouteId]?.actor;
-        if(!bookmark||bookmark.roomId!==origin.roomId||bookmark.deck!==origin.deck||bookmark.x!==origin.x||bookmark.y!==origin.y)
+        let bookmark=save.npcAnnexRoutesV163?.routes?.[d.legacyRouteId]?.actor;
+        const observed=legacyOriginBookmark(d,origin),prior=save.npcAnnexRoutesV163?.routes?.[d.legacyRouteId];
+        const handoff=legacyRouteFor(d)?.normalize(prior).nativeHandoff;
+        // A later watch may have retired the old local controller before the
+        // retained body was lent to this interdeck route. Restore only its
+        // actually recorded, closed service bookmark: never a timetable pose
+        // or an invented pre-load trip, and never overwrite a physical owner.
+        if(!bookmark&&observed&&handoff?.reason==='annex-assignment'&&handoff.fromRoomId===origin.roomId){
+          bookmark=observed;
+          save={...save,npcAnnexRoutesV163:{...save.npcAnnexRoutesV163,routes:{...save.npcAnnexRoutesV163.routes,
+            [d.legacyRouteId]:{schema:163,actor:bookmark,nativeHandoff:null}}}};
+        }
+        // Older saves can still own the complete transported body even when
+        // the retired local role no longer owns a bookmark. Its explicit
+        // unobserved handoff permits restoring that active body alone. Do not
+        // invent the old local controller's missing time, distance or cycle.
+        if(!bookmark&&e.actor&&handoff?.reason==='annex-assignment'&&handoff.fromRoomId===origin.roomId)
+          this.npcInterdeckRetiredLegacyV177.add(d.id);
+        if(!this.npcInterdeckRetiredLegacyV177.has(d.id)
+          &&(!bookmark||bookmark.roomId!==origin.roomId||bookmark.deck!==origin.deck||bookmark.x!==origin.x||bookmark.y!==origin.y))
           this.npcInterdeckStateV165.routes[d.id]={actor:null,origin:null,returned:null,nativeHandoff:null,admissionReady:true};
       }
       this.npcInterdeckBodiesV165=new Map();this.npcInterdeckObservedV165=new Map();this.npcInterdeckRestoringV165=true;
@@ -275,7 +306,8 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         if(inheritedOwner)continue;
         const primary=d.legacyRouteId&&this.getNpcServiceActorV161?.(d.legacyRouteId);
         const savedOrigin=entry.actor?entry.origin:entry.retained;
-        if(this.npcInterdeckRestoringV165&&savedOrigin?.source==='legacy-physical-owner'&&!primary) {
+        if(this.npcInterdeckRestoringV165&&savedOrigin?.source==='legacy-physical-owner'&&!primary
+          &&!this.npcInterdeckRetiredLegacyV177?.has(d.id)) {
           const r=this.npcRoutineResolutionsV62?.get(d.crewId);
           if(!entry.actor&&this.npcInterdeckDutyV165(d)&&r&&!r.alert&&!r.missionAssigned&&!r.needsCare) {
             // Reserve the validated saved legacy singleton before nested
@@ -309,9 +341,12 @@ export function withHubNpcInterdeckRoutesV165(Base) {
           this.npcInterdeckObservedV165.set(d.crewId,source);
           const retained={crewId:d.crewId,deck:deckOf(source.roomId),roomId:source.roomId,x:source.x,y:source.y,
             facing:source.facing===-1?-1:1,source:primary?'legacy-physical-owner':traffic?'traffic-physical-owner':entry.retained?.source||'native-observed-body'};
-          if(!this.npcInterdeckDutyV165(d)){entry.retained=validOrigin(d,retained)?retained:null;continue;}
+          if(retained.source==='legacy-physical-owner'&&(primaryState||entry.retained?.legacyBookmark))
+            retained.legacyBookmark=primaryState||entry.retained.legacyBookmark;
+          if(!this.npcInterdeckDutyV165(d)){entry.retained=normalizeOrigin(d,retained);continue;}
           const origin={crewId:d.crewId,deck:deckOf(source.roomId),roomId:source.roomId,x:source.x,y:source.y,
-            facing:source.facing===-1?-1:1,source:primary?'legacy-physical-owner':traffic?'traffic-physical-owner':entry.retained?.source||'native-observed-body'};
+            facing:source.facing===-1?-1:1,source:primary?'legacy-physical-owner':traffic?'traffic-physical-owner':entry.retained?.source||'native-observed-body',
+            ...(retained.source==='legacy-physical-owner'&&legacyOriginBookmark(d,retained)?{legacyBookmark:legacyOriginBookmark(d,retained)}:{})};
           if(!validOrigin(d,origin))continue;
           const a=initialInterdeckActorV165(d,origin,this.npcInterdeckDoorsV165);
           entry=this.npcInterdeckStateV165.routes[d.id]={actor:a,origin,retained:null,returned:null,nativeHandoff:null,admissionReady:false};

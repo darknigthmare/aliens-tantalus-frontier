@@ -10,6 +10,7 @@ import { buildApcConvoyLevelV121 } from '../src/apc-convoy-runtime-v121.js';
 import { createConvoyReturnHistoryV162, normalizeConvoyReturnHistoryV162,
   preserveConvoyReturnHistoryV162, convoyReturnHistoryV162 } from '../src/campaign-convoy-history-v162.js';
 import { mountConvoyReturnHistoryV162 } from '../src/campaign-convoy-history-ui-v162.js';
+import { preserveLetheContinuityV163 } from '../src/campaign-lethe-continuity-v163.js';
 import { validatePlayerIdentityV84 } from '../src/player-onboarding-v84.js';
 import { hostV136 } from './forge-native-host-v136.mjs';
 
@@ -77,6 +78,9 @@ const winningSave = async () => { winner ||= await nativeReturn({ identity: true
 
 test('history capture requires the exact resolved native deployment, terminal result, and frozen reward receipt', async () => {
   const genuine = await winningSave();
+  preserveLetheContinuityV163(genuine);
+  assert.equal(genuine.letheContinuityV163.chapters.convoy.latestReturn.protocolId, 'route-review',
+    'The shared Lethe dossier must keep the briefing choice of this actual M577 return.');
   for (const [label, mutate] of [
     ['bare flag', save => { save.strategy.lastOperation = { id: 'operation-1-special-apc-convoy', campaignId: campaign.id, worldId: world.id, success: true }; }],
     ['no resolved serial', save => { save.strategy.specialOperationResolutionSerialV121 = 0; }],
