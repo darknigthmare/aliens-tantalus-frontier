@@ -729,6 +729,74 @@ test('annex-service QA counts an actual local rearrival at Asha duty post withou
   assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
 });
 
+function nativeHomeReturnCheckV206(cases) {
+  const python = `
+import ast, json, sys
+from pathlib import Path
+tree = ast.parse(Path(sys.argv[1]).read_text())
+phrase = ': real floor return reaches origin before explicit unobserved native handoff'
+calls = [n for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'check'
+         and n.args and any(isinstance(c, ast.Constant) and c.value == phrase for c in ast.walk(n.args[0]))]
+assert len(calls) == 1
+helpers = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'observed_home_arrival_v206']
+expression = compile(ast.Expression(calls[0].args[1]), '<real-native-home-return-check>', 'eval')
+results = []
+for case in json.loads(sys.stdin.read()):
+    namespace = dict(case)
+    namespace['prefix'] = case['config']['id']
+    namespace['last'] = next(row['actor'] for row in reversed(case['rows']) if row['actor'])
+    exec(compile(ast.Module(body=helpers, type_ignores=[]), '<real-home-arrival-observer>', 'exec'), namespace)
+    results.append(bool(eval(expression, namespace)))
+print(json.dumps(results))
+`;
+  return JSON.parse(execFileSync('python3', ['-c', python,
+    new URL('qa-npc-annex-service-routes-v163.py', import.meta.url).pathname],
+  { input: JSON.stringify(cases), encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 }));
+}
+
+test('the actual Python home-return assertion counts one real floor arrival after a prior local service reentry', () => {
+  const route = routes.find(r => r.definition.id === 'asha-refuge');
+  const config = { ...ashaQaConfigV163, origin: 'crew-quarters' };
+  const out = simulate(route, initialActor(route));
+  const away = simulate(route, out.actor, 5, { state: out.state, duty: false, resolution: routine(route, 20.5) });
+  const revisit = simulate(route, away.actor, 10, { state: away.state, duty: true });
+  assert.equal(revisit.state.arrivals, 2); assert.equal(revisit.state.crossings, 1);
+  const player = { x: 1191.5325368043359, y: 532, w: 44, h: 92, alive: true, roomId: 'crew-quarters' };
+  const occupied = simulate(route, revisit.actor, 40, { state: revisit.state, duty: false,
+    resolution: routine(route, 20.5), player });
+  assert.equal(occupied.state.stage, 'opening'); assert.equal(occupied.state.reason, 'occupied');
+  const home = simulate(route, occupied.actor, 40, { state: occupied.state, duty: false,
+    resolution: routine(route, 20.5) });
+  assert.equal(home.state.arrivals, 3); assert.equal(home.state.crossings, 2);
+  const frames = home.frames, selected = new Set([0, frames.length - 1]);
+  frames.forEach((frame, i) => {
+    if (i % 60 === 0) selected.add(i);
+    if (i && ['stage', 'roomId', 'arrivals', 'crossings'].some(key => frame[key] !== frames[i - 1][key])) {
+      selected.add(i - 1); selected.add(i);
+    }
+  });
+  const handoff = { crewId: config.crew, fromRoomId: config.origin, toRoomId: 'bridge', reason: 'daily-schedule', observedTravel: false };
+  const good = { config, occupied: { route: { actor: occupied.state } }, handoff,
+    rows: [...[...selected].sort((a, b) => a - b).map(i => ({ actor: frames[i], handoff: null })), { actor: null, handoff }] };
+  const cases = [good];
+  const mutate = fn => { const value = structuredClone(good); fn(value); cases.push(value); };
+  // A historical direct outbound/return remains admissible as count1→2.
+  mutate(x => { x.occupied.route.actor.arrivals--; for (const row of x.rows) if (row.actor) row.actor.arrivals--; });
+  mutate(x => { x.rows.find(row => row.actor?.stage === 'revealing').actor.arrivals++; });
+  mutate(x => { x.rows.find(row => row.actor?.stage === 'walking' && row.actor.crossings === 2).actor.arrivals++; });
+  mutate(x => { for (const row of x.rows) if (row.actor?.stage === 'service') row.actor.arrivals--; });
+  mutate(x => { for (const row of x.rows) if (row.actor?.stage === 'service') row.actor.arrivals++; });
+  mutate(x => { x.rows.find(row => row.actor?.stage === 'service').actor.x += 1; });
+  mutate(x => { x.rows.find(row => row.actor?.stage === 'service').actor.time -= 2; });
+  mutate(x => { x.rows.find(row => row.actor?.stage === 'walking').actor.crewId = 'foreign-owner'; });
+  mutate(x => { x.rows[0].actor = null; });
+  const results = nativeHomeReturnCheckV206(cases);
+  assert.equal(results[0], true, 'The native floor return increments the measured occupied count2 to3 exactly once.');
+  assert.equal(results[1], true, 'The earlier direct count1 to2 recipe remains valid.');
+  assert.deepEqual(results.slice(2), Array(cases.length - 2).fill(false),
+    'A portal increment, early increment, omitted count, extra count, false goal, reversed time, foreign body or absent owner is rejected.');
+});
+
 test('annex-service QA requires the exact counted service arrival rather than a counter jump or omitted receipt', async () => {
   const source = serviceQaCallbackV163('arm_asha_return_dependency');
   const route = routes.find(r => r.definition.id === 'asha-refuge');

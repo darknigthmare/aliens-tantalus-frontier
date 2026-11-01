@@ -467,6 +467,16 @@ export const NPC_SERVICE_OBSERVER_V205 = Object.freeze({
   previousDriverSha256: NPC_SERVICE_OBSERVER_V204.driverSha256,
   driverSha256: '470fc38f0457885887762018d0a128c00d494433c81c038888dfecd897d220e6'
 });
+/** V206 observes the one real home service transition from the occupied
+ * doorway instead of assuming that earlier local goals never occurred. */
+export const NPC_SERVICE_OBSERVER_V206 = Object.freeze({
+  path: NPC_SERVICE_OBSERVER_V205.path,
+  previousSha256: NPC_SERVICE_OBSERVER_V205.currentSha256,
+  currentSha256: '24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6',
+  driver: NPC_SERVICE_OBSERVER_V205.driver,
+  previousDriverSha256: NPC_SERVICE_OBSERVER_V205.driverSha256,
+  driverSha256: '01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4'
+});
 
 /** V194: source-only magazine transaction anti-replay fix, preserving the
  * original V167 evidence. A long caller ID must never spend real ammunition
@@ -570,6 +580,12 @@ export const V165_VERIFIER_SUCCESSORS_V205 = Object.freeze({
     currentSha256: 'e6a3782011e424fdaae3a7597ad190d55d4f2b1e4705cd56435305213c660148'
   })
 });
+export const V165_VERIFIER_SUCCESSORS_V206 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V205['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: '6c56811366facd3fd8898b1afc25152fc71fc3a604b5069055fffce72b640233'
+  })
+});
 
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
@@ -600,15 +616,16 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [202,V165_VERIFIER_SUCCESSORS_V202],
   [203,V165_VERIFIER_SUCCESSORS_V203],
   [204,V165_VERIFIER_SUCCESSORS_V204],
-  [205,V165_VERIFIER_SUCCESSORS_V205]
+  [205,V165_VERIFIER_SUCCESSORS_V205],
+  [206,V165_VERIFIER_SUCCESSORS_V206]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
     return Object.freeze({ version: 204, previousSha256: NPC_INTERDECK_VERIFIER_V204.previousSha256,
       currentSha256: NPC_INTERDECK_VERIFIER_V204.currentSha256 });
   if (path === NPC_SERVICE_OBSERVER_V203.path)
-    return Object.freeze({ version: 205, previousSha256: NPC_SERVICE_OBSERVER_V205.previousSha256,
-      currentSha256: NPC_SERVICE_OBSERVER_V205.currentSha256 });
+    return Object.freeze({ version: 206, previousSha256: NPC_SERVICE_OBSERVER_V206.previousSha256,
+      currentSha256: NPC_SERVICE_OBSERVER_V206.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -961,10 +978,14 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     'Broken V204-to-V205 service observer verifier chain');
   assert.equal(NPC_SERVICE_OBSERVER_V205.previousDriverSha256,NPC_SERVICE_OBSERVER_V204.driverSha256,
     'Broken V204-to-V205 service observer driver chain');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V205.path)),
-    NPC_SERVICE_OBSERVER_V205.currentSha256, 'Unreviewed V205 service observer verifier');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V205.driver)),
-    NPC_SERVICE_OBSERVER_V205.driverSha256, 'Unreviewed V205 service observer driver');
+  assert.equal(NPC_SERVICE_OBSERVER_V206.previousSha256,NPC_SERVICE_OBSERVER_V205.currentSha256,
+    'Broken V205-to-V206 service observer verifier chain');
+  assert.equal(NPC_SERVICE_OBSERVER_V206.previousDriverSha256,NPC_SERVICE_OBSERVER_V205.driverSha256,
+    'Broken V205-to-V206 service observer driver chain');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V206.path)),
+    NPC_SERVICE_OBSERVER_V206.currentSha256, 'Unreviewed V206 service observer verifier');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V206.driver)),
+    NPC_SERVICE_OBSERVER_V206.driverSha256, 'Unreviewed V206 service observer driver');
   assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.serviceDriver)),
     NPC_SERVICE_OBSERVER_V204.serviceDriverSha256, 'Unreviewed V204 service arrival driver');
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {

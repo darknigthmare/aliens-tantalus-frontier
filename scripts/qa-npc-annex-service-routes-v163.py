@@ -336,6 +336,66 @@ def export_asha_return_dependency(page, config):
     (output / (config['id'] + '-jun-physical-prerequisite.json')).write_text(json.dumps(result, indent=2))
 
 
+def observed_home_arrival_v206(config, occupied, rows):
+    """Validate one counted home arrival from the observed occupied aperture.
+
+    Arrivals count service goals, independently of portal crossings. Earlier
+    local duty reentries are already observed by the Jun prerequisite; this
+    return must add exactly one walking-to-service goal, never a guessed total.
+    """
+    from math import isfinite
+
+    finite = lambda value: type(value) in (int, float) and isfinite(value)
+    previous = occupied['route']['actor']
+    if config['id'] != 'asha-refuge' or not previous or previous['crewId'] != config['crew'] \
+            or previous['roomId'] != config['annex'] or previous['stage'] != 'opening' \
+            or previous['crossings'] != 1 or type(previous['arrivals']) is not int \
+            or not 1 <= previous['arrivals'] < 1000000:
+        return False
+    initial = previous
+    arrivals = 0
+    retired = False
+    for row in rows:
+        current = row['actor']
+        if current is None:
+            handoff = row.get('handoff') or {}
+            if arrivals != 1 or handoff.get('crewId') != config['crew'] \
+                    or handoff.get('fromRoomId') != config['origin'] or handoff.get('observedTravel') is not False:
+                return False
+            retired = True
+            continue
+        if retired or current['crewId'] != config['crew'] or current['deck'] != config['deck'] \
+                or current['y'] != 532 or current['homeX'] != initial['homeX'] or current['dutyX'] != initial['dutyX'] \
+                or type(current['arrivals']) is not int or not 1 <= current['arrivals'] <= 1000000 \
+                or not all(finite(current.get(key)) for key in ('x', 'y', 'time', 'distance', 'homeX', 'dutyX', 'velocity', 'doorProgress')):
+            return False
+        delta_time = current['time'] - previous['time']
+        delta_distance = current['distance'] - previous['distance']
+        delta_arrivals = current['arrivals'] - previous['arrivals']
+        if delta_time < 0 or delta_distance < 0:
+            return False
+        if current['roomId'] != previous['roomId']:
+            if previous['stage'] != 'covering' or current['stage'] != 'revealing' or current['doorProgress'] != 0 \
+                    or current['crossings'] != previous['crossings'] + 1 or delta_distance != 0 or delta_arrivals != 0:
+                return False
+        else:
+            delta_x = abs(current['x'] - previous['x'])
+            if current['crossings'] != previous['crossings'] or delta_x > 27 * delta_time + .03 \
+                    or delta_distance > 27 * delta_time + .03 or delta_distance + .03 < delta_x:
+                return False
+        reached_home = previous['stage'] == 'walking' and current['stage'] == 'service'
+        if reached_home:
+            if delta_arrivals != 1 or delta_time <= 0 or current['roomId'] != config['origin'] \
+                    or previous['roomId'] != config['origin'] or current['targetRoomId'] != config['origin'] \
+                    or current['crossings'] != 2 or abs(current['x'] - current['homeX']) >= .25 or current['velocity'] != 0:
+                return False
+            arrivals += 1
+        elif delta_arrivals != 0:
+            return False
+        previous = current
+    return arrivals == 1 and previous['arrivals'] == initial['arrivals'] + 1
+
+
 def collect(page, config, name, stop, move_to=None, exit_after=False):
     phase(name)
     page.evaluate('''opts=>{ window.__ATF_V163_COLLECTION__=new Promise((resolve,reject)=>{
@@ -657,7 +717,9 @@ with sync_playwright() as pw:
                 else:
                     check(prefix + ': real floor return reaches origin before explicit unobserved native handoff',
                           last['roomId'] == config['origin'] and abs(last['x'] - last['homeX']) < .25
-                          and last['crossings'] == 2 and last['arrivals'] == 2 and handoff['observedTravel'] is False)
+                          and last['crossings'] == 2
+                          and (observed_home_arrival_v206(config, occupied, rows) if prefix == 'asha-refuge' else last['arrivals'] == 2)
+                          and handoff['observedTravel'] is False)
                 check(prefix + ': continuous return observes exactly one closed-leaf portal transfer', report['observedPortalTransfers'][prefix + '-07-return-and-handoff'] == 1)
                 capture(page, prefix + '-08-parent-after-native-return.png')
                 if prefix == 'mara-archives':
