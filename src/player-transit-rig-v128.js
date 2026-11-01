@@ -108,7 +108,7 @@ export function advancePlayerTransitStateV128(previous, actor, timeSeconds, { co
   const alive = actor.alive !== false && !actor.downed;
   const grounded = actor.grounded === true;
   const airborneTravel = prior && prior.kind === rawKind && !prior.grounded
-    ? finite(prior.airborneTravel) + Math.abs(actor.y - prior.y) : 0;
+    ? finite(prior.airborneTravel) + (now > prior.time ? Math.abs(actor.y - prior.y) : 0) : 0;
   let kind = rawKind, elapsed = 0, duration = 0, observed = false;
   if (!rawKind && alive && prior && (prior.downed || prior.kind === 'revive') && !acceptedActivity(actor, prior)) {
     kind = 'revive'; duration = C.reviveDuration; observed = true;

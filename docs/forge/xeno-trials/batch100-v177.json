@@ -1,0 +1,1522 @@
+{
+  "schema": 177,
+  "batchId": "T177-BATCH-002",
+  "state": "IMPLEMENTED_PENDING_NATIVE_QA",
+  "installations": 100,
+  "rooms": 35,
+  "kinds": 16,
+  "firstBatchInstallationsPreserved": 100,
+  "combinedKinds": 52,
+  "sectors": {
+    "command": 25,
+    "habitat": 25,
+    "industrial": 25,
+    "engineering": 25
+  },
+  "newPngAssets": 0,
+  "geometryChanged": false,
+  "artistic1to1Approved": false,
+  "humanParticipants": 0,
+  "entries": [
+    {
+      "id": "T177-C01",
+      "roomId": "bridge",
+      "kind": "intercom",
+      "purpose": "port-watch-voice-panel",
+      "bounds": {
+        "x": 320,
+        "y": 414,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Comms panel beside the port raised watch walkway, clear of the chart window and ladder.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C02",
+      "roomId": "bridge",
+      "kind": "status-beacon",
+      "purpose": "bridge-threshold-circuit-status",
+      "bounds": {
+        "x": 1096,
+        "y": 210,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Small threshold status beacon on the outboard wall, away from the flight instruments.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C03",
+      "roomId": "bridge",
+      "kind": "cable-tray",
+      "purpose": "navigation-backup-signal-tray",
+      "bounds": {
+        "x": 792,
+        "y": 194,
+        "w": 80,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Closed signal tray above the navigation patch bay; its three straps explain the wall attachment.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C04",
+      "roomId": "briefing",
+      "kind": "emergency-lamp",
+      "purpose": "briefing-upper-exit-light",
+      "bounds": {
+        "x": 368,
+        "y": 218,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Caged standby lamp over the upper briefing bay, preserving the display, door signs and rail.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C05",
+      "roomId": "briefing",
+      "kind": "status-beacon",
+      "purpose": "briefing-recording-status-beacon",
+      "bounds": {
+        "x": 704,
+        "y": 258,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A recording-status beacon beside the briefing reference bay; it is readable from the meeting area without an unreachable manual control.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C06",
+      "roomId": "combat-information",
+      "kind": "intercom",
+      "purpose": "cic-side-watch-intercom",
+      "bounds": {
+        "x": 152,
+        "y": 516,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted intercom serving the west combat information service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C07",
+      "roomId": "combat-information",
+      "kind": "sensor-head",
+      "purpose": "cic-secure-threshold-sensor",
+      "bounds": {
+        "x": 1096,
+        "y": 206,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A fixed security head looks toward the east threshold without occupying the tactical display.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C08",
+      "roomId": "combat-information",
+      "kind": "cable-tray",
+      "purpose": "cic-redundant-data-bus",
+      "bounds": {
+        "x": 248,
+        "y": 194,
+        "w": 80,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "A closed upper data bus follows the west ceiling bay and stays separate from the tactical consoles.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C09",
+      "roomId": "cryo-bay",
+      "kind": "oxygen-readout",
+      "purpose": "cryo-return-air-readout",
+      "bounds": {
+        "x": 1048,
+        "y": 298,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Local return-air monitor beside the recovery-pod wall; no new control blocks a capsule.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C10",
+      "roomId": "cryo-bay",
+      "kind": "emergency-lamp",
+      "purpose": "cryo-backup-watch-light",
+      "bounds": {
+        "x": 320,
+        "y": 194,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Caged low-power recovery light over the west pod group, attached to its wall service strip.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C11",
+      "roomId": "cryo-bay",
+      "kind": "cable-tray",
+      "purpose": "cryo-pod-instrument-harness",
+      "bounds": {
+        "x": 1056,
+        "y": 222,
+        "w": 80,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Short closed loom above the east capsule instrumentation, clear of the real circulation steel.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C12",
+      "roomId": "cctv",
+      "kind": "intercom",
+      "purpose": "security-observer-voice-panel",
+      "bounds": {
+        "x": 400,
+        "y": 516,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted intercom serving the west cctv service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C13",
+      "roomId": "cctv",
+      "kind": "inspection-hatch",
+      "purpose": "security-camera-feed-inspection",
+      "bounds": {
+        "x": 1512,
+        "y": 282,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Closed camera-feed inspection cover on the east equipment wall, separate from the display and returns.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C14",
+      "roomId": "cctv",
+      "kind": "status-beacon",
+      "purpose": "security-feed-isolation-status",
+      "bounds": {
+        "x": 1664,
+        "y": 214,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A small feed-isolation beacon finishes the far equipment bay without adding a false usable console.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C15",
+      "roomId": "mire-archives",
+      "kind": "sealed-record",
+      "purpose": "archive-physical-custody-copy",
+      "bounds": {
+        "x": 344,
+        "y": 474,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "A sealed custody-copy case beside the west sorting position, leaving the evidence terminal clear.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C16",
+      "roomId": "mire-archives",
+      "kind": "inspection-hatch",
+      "purpose": "archive-humidity-service-cover",
+      "bounds": {
+        "x": 1304,
+        "y": 262,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Closed climate-service access over the east records bay; the working sorter remains unobstructed.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C17",
+      "roomId": "mire-archives",
+      "kind": "status-beacon",
+      "purpose": "archive-environmental-status",
+      "bounds": {
+        "x": 1736,
+        "y": 214,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A local environmental beacon for the physical archive, clear of the room header and ladder.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C18",
+      "roomId": "synthetic-bay",
+      "kind": "pressure-station",
+      "purpose": "synthetic-cooling-pressure-pair",
+      "bounds": {
+        "x": 392,
+        "y": 286,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Paired coolant gauges above the west maintenance bay, physically mounted beside its service lines.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C19",
+      "roomId": "synthetic-bay",
+      "kind": "power-socket",
+      "purpose": "synthetic-isolated-service-outlets",
+      "bounds": {
+        "x": 1248,
+        "y": 492,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted power socket serving the central synthetic bay service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C20",
+      "roomId": "synthetic-bay",
+      "kind": "status-beacon",
+      "purpose": "synthetic-room-environment-beacon",
+      "bounds": {
+        "x": 1664,
+        "y": 218,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A small environmental beacon on the far technical wall, separated from the diagnostic instrumentation.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C21",
+      "roomId": "durandal",
+      "kind": "cable-tray",
+      "purpose": "computer-west-service-harness",
+      "bounds": {
+        "x": 368,
+        "y": 238,
+        "w": 80,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "A closed power-and-signal tray on the west rack wall; no loose cable crosses the circulation route.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C22",
+      "roomId": "durandal",
+      "kind": "oxygen-readout",
+      "purpose": "computer-cooling-room-monitor",
+      "bounds": {
+        "x": 1512,
+        "y": 350,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Cooling-room environmental readout beside the east rack service bay, outside the workstation footprint.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C23",
+      "roomId": "durandal",
+      "kind": "status-beacon",
+      "purpose": "computer-standby-circuit-beacon",
+      "bounds": {
+        "x": 1664,
+        "y": 218,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Standby circuit beacon at the outer rack bay, preserving the diagnostic station and room signage.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C24",
+      "roomId": "flight-control-cockpit",
+      "kind": "sensor-head",
+      "purpose": "cockpit-starboard-instrument-sensor",
+      "bounds": {
+        "x": 1096,
+        "y": 222,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Fixed instrument-check head on the starboard perimeter wall; the central forward observation cone stays empty.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-C25",
+      "roomId": "flight-control-cockpit",
+      "kind": "emergency-lamp",
+      "purpose": "cockpit-port-standby-light",
+      "bounds": {
+        "x": 160,
+        "y": 214,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Caged standby light on the port perimeter lintel, leaving the forward window and flight instruments open.",
+      "sector": "command"
+    },
+    {
+      "id": "T177-H01",
+      "roomId": "crew-quarters",
+      "kind": "intercom",
+      "purpose": "berth-upper-watch-intercom",
+      "bounds": {
+        "x": 296,
+        "y": 366,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Voice panel for the west upper berth walkway, above its actual deck and clear of the ladder.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H02",
+      "roomId": "crew-quarters",
+      "kind": "emergency-lamp",
+      "purpose": "berth-night-watch-light",
+      "bounds": {
+        "x": 368,
+        "y": 202,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Caged night-watch light above the west berth group, with no fixture over a pillow or doorway.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H03",
+      "roomId": "crew-quarters",
+      "kind": "oxygen-readout",
+      "purpose": "berth-return-air-indicator",
+      "bounds": {
+        "x": 944,
+        "y": 210,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Return-air indicator in the upper east service bay, separate from the linen cabinet and redirected pipes.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H04",
+      "roomId": "mess",
+      "kind": "sanitation-unit",
+      "purpose": "mess-clean-hand-station",
+      "bounds": {
+        "x": 688,
+        "y": 396,
+        "w": 48,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the central mess service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H05",
+      "roomId": "mess",
+      "kind": "vent-return",
+      "purpose": "mess-galley-return-grille",
+      "bounds": {
+        "x": 240,
+        "y": 238,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Bolted extraction grille on the west food-service wall; it is a closed return, never a traversable vent.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H06",
+      "roomId": "mess",
+      "kind": "pressure-station",
+      "purpose": "mess-potable-water-pressure-pair",
+      "bounds": {
+        "x": 672,
+        "y": 290,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Paired potable-water gauges above the galley service circuit, leaving the table, chairs and food worktop visible.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H07",
+      "roomId": "medical",
+      "kind": "vent-return",
+      "purpose": "medical-low-return-air-grille",
+      "bounds": {
+        "x": 960,
+        "y": 466,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Closed low return-air grille beside the clinical service bay. The native handwash already serves the crew; this addition does not create a second unreachable manual dispenser.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H08",
+      "roomId": "medical",
+      "kind": "oxygen-readout",
+      "purpose": "medical-clinical-air-monitor",
+      "bounds": {
+        "x": 480,
+        "y": 258,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Local clinical-air monitor above the west service zone; the treatment table and patient access stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H09",
+      "roomId": "medical",
+      "kind": "emergency-lamp",
+      "purpose": "medical-standby-task-light",
+      "bounds": {
+        "x": 416,
+        "y": 202,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Caged standby light attached to the washable upper wall, away from the room header and clinical display.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H10",
+      "roomId": "morgue",
+      "kind": "sealed-record",
+      "purpose": "morgue-protected-identification-copy",
+      "bounds": {
+        "x": 352,
+        "y": 474,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "A sealed identification-copy case beside the west intake area, leaving the forensic working surfaces clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H11",
+      "roomId": "morgue",
+      "kind": "vent-return",
+      "purpose": "morgue-controlled-air-return",
+      "bounds": {
+        "x": 1464,
+        "y": 246,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Closed return-air grille over the east cold-storage service bay, outside the native refrigeration equipment.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H12",
+      "roomId": "morgue",
+      "kind": "oxygen-readout",
+      "purpose": "morgue-extraction-circuit-readout",
+      "bounds": {
+        "x": 1728,
+        "y": 214,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A compact extraction-circuit readout at the far technical bay, separated from the room signage.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H13",
+      "roomId": "personal-refuge",
+      "kind": "emergency-lamp",
+      "purpose": "refuge-low-power-reading-standby",
+      "bounds": {
+        "x": 304,
+        "y": 342,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Small caged standby light above the west personal-effects shelf and below the real overhead casing, clear of the authored porthole and room sign.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H14",
+      "roomId": "personal-refuge",
+      "kind": "intercom",
+      "purpose": "refuge-private-voice-return",
+      "bounds": {
+        "x": 304,
+        "y": 516,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted intercom serving the west personal refuge service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H15",
+      "roomId": "galley-service",
+      "kind": "sanitation-unit",
+      "purpose": "galley-preparation-clean-hand-unit",
+      "bounds": {
+        "x": 400,
+        "y": 524,
+        "w": 48,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the west galley service service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H16",
+      "roomId": "galley-service",
+      "kind": "vent-return",
+      "purpose": "galley-extraction-return-grille",
+      "bounds": {
+        "x": 928,
+        "y": 238,
+        "w": 80,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A closed extraction return above the east preparation bay, visibly bolted to the washable wall.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H17",
+      "roomId": "galley-service",
+      "kind": "inspection-hatch",
+      "purpose": "galley-cold-circuit-access-cover",
+      "bounds": {
+        "x": 1072,
+        "y": 326,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Closed cold-circuit inspection cover on the east wall pier, preserving cupboards, terminals and return access.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H18",
+      "roomId": "sanitary-bay",
+      "kind": "sanitation-unit",
+      "purpose": "sanitary-clean-hand-dispensing-unit",
+      "bounds": {
+        "x": 280,
+        "y": 524,
+        "w": 48,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the west sanitary bay service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H19",
+      "roomId": "sanitary-bay",
+      "kind": "vent-return",
+      "purpose": "sanitary-humidity-return-grille",
+      "bounds": {
+        "x": 928,
+        "y": 238,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Closed humidity-extraction grille over the east service wall, separate from the existing water-feed pipe.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H20",
+      "roomId": "sanitary-bay",
+      "kind": "pressure-station",
+      "purpose": "sanitary-water-service-gauges",
+      "bounds": {
+        "x": 1072,
+        "y": 290,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Paired water-service gauges in the outer technical bay, leaving the washing fixtures and entrance usable.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H21",
+      "roomId": "animal-care",
+      "kind": "oxygen-readout",
+      "purpose": "animal-care-west-air-readout",
+      "bounds": {
+        "x": 288,
+        "y": 438,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A passive air-quality readout above the west preparation bay, clear of animal pens and the visitor front.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H22",
+      "roomId": "animal-care",
+      "kind": "sanitation-unit",
+      "purpose": "animal-care-clean-hand-station",
+      "bounds": {
+        "x": 1384,
+        "y": 524,
+        "w": 48,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the central animal care service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H23",
+      "roomId": "animal-care",
+      "kind": "vent-return",
+      "purpose": "animal-care-east-climate-return",
+      "bounds": {
+        "x": 2208,
+        "y": 254,
+        "w": 80,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Closed climate-return grille above the east habitat service bay, keeping the welfare records and pens clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H24",
+      "roomId": "frontier-civil-counter",
+      "kind": "intercom",
+      "purpose": "civil-counter-west-visitor-intercom",
+      "bounds": {
+        "x": 352,
+        "y": 516,
+        "w": 48,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted intercom serving the west frontier civil counter service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-H25",
+      "roomId": "frontier-civil-counter",
+      "kind": "status-beacon",
+      "purpose": "civil-counter-service-circuit-status",
+      "bounds": {
+        "x": 2016,
+        "y": 194,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Small service-circuit beacon above the east office bay, with the public counter, display and room header unobscured.",
+      "sector": "habitat"
+    },
+    {
+      "id": "T177-I01",
+      "roomId": "science-lab",
+      "kind": "intercom",
+      "purpose": "laboratory-contained-handling-voice-link",
+      "bounds": {
+        "x": 688,
+        "y": 380,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted intercom serving the central science lab service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I02",
+      "roomId": "science-lab",
+      "kind": "oxygen-readout",
+      "purpose": "laboratory-air-quality-and-extraction-status",
+      "bounds": {
+        "x": 848,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Automatic air-quality display above the east analysis equipment; it monitors extraction without adding an interactive control over the bench.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I03",
+      "roomId": "science-lab",
+      "kind": "sanitation-unit",
+      "purpose": "laboratory-sampling-glove-disposal-unit",
+      "bounds": {
+        "x": 248,
+        "y": 268,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the west science lab service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I04",
+      "roomId": "quarantine",
+      "kind": "pressure-station",
+      "purpose": "quarantine-isolation-differential-readout",
+      "bounds": {
+        "x": 800,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Differential-pressure instruments occupy the clean east observation pier; the negative-pressure plant and vent approach remain distinct.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I05",
+      "roomId": "quarantine",
+      "kind": "intercom",
+      "purpose": "quarantine-clean-dirty-voice-link",
+      "bounds": {
+        "x": 288,
+        "y": 372,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted intercom serving the west quarantine service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I06",
+      "roomId": "quarantine",
+      "kind": "spill-kit",
+      "purpose": "quarantine-sealed-spill-response-pack",
+      "bounds": {
+        "x": 1032,
+        "y": 492,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted spill kit serving the east quarantine service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I07",
+      "roomId": "armory",
+      "kind": "status-beacon",
+      "purpose": "armory-isolation-circuit-status",
+      "bounds": {
+        "x": 144,
+        "y": 450,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Automatic issue-circuit beacon on the west wall pier, outside the new shop facade and storage fixtures. It adds no unreachable manual callpoint.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I08",
+      "roomId": "armory",
+      "kind": "cable-tray",
+      "purpose": "armory-west-service-feed-distribution",
+      "bounds": {
+        "x": 224,
+        "y": 450,
+        "w": 64,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Short enclosed feed tray belongs to the west wall service group beside the callpoint, clear of the canopy, lockers, weapon racks and old observation bay.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I09",
+      "roomId": "armory",
+      "kind": "sealed-record",
+      "purpose": "armory-clearing-and-test-procedure-wallet",
+      "bounds": {
+        "x": 624,
+        "y": 290,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Closed clearing-procedure wallet on the narrow central wall pier above the existing test-power isolation panel, outside the vent route.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I10",
+      "roomId": "workshop",
+      "kind": "tool-shadowboard",
+      "purpose": "workshop-fine-tool-return-board",
+      "bounds": {
+        "x": 312,
+        "y": 368,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted tool shadowboard serving the west workshop service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I11",
+      "roomId": "workshop",
+      "kind": "power-socket",
+      "purpose": "workshop-fixed-service-outlet",
+      "bounds": {
+        "x": 928,
+        "y": 272,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted power socket serving the east workshop service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I12",
+      "roomId": "workshop",
+      "kind": "emergency-lamp",
+      "purpose": "workshop-service-egress-light",
+      "bounds": {
+        "x": 1040,
+        "y": 194,
+        "w": 64,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "A complete caged emergency light sits on the upper east service wall, above the real vent and clear of the room header.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I13",
+      "roomId": "vehicle-bay",
+      "kind": "status-beacon",
+      "purpose": "vehicle-maintenance-clearance-status",
+      "bounds": {
+        "x": 1008,
+        "y": 194,
+        "w": 64,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Automatic clearance beacon on the upper starboard bay above the parked hull and fixed service equipment; vehicle clearances stay untouched.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I14",
+      "roomId": "vehicle-bay",
+      "kind": "inspection-hatch",
+      "purpose": "vehicle-upper-service-connection-inspection",
+      "bounds": {
+        "x": 720,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Closed access cover in the upper service distribution bay, separate from the existing pressure instruments and above the hull envelope.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I15",
+      "roomId": "vehicle-bay",
+      "kind": "sensor-head",
+      "purpose": "vehicle-upper-bay-exhaust-sensor",
+      "bounds": {
+        "x": 400,
+        "y": 226,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Fixed exhaust sensor in the upper west equipment bay, outside the viewport and gantry approach; no manual dispenser is placed over the vehicle.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I16",
+      "roomId": "logistics",
+      "kind": "sealed-record",
+      "purpose": "logistics-handling-seal-and-hazard-record-wallet",
+      "bounds": {
+        "x": 1536,
+        "y": 418,
+        "w": 64,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Sealed handling and hazard records occupy the east freight service pier above the response callpoint, outside the complete storefront facade, vendor and checkout equipment.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I17",
+      "roomId": "logistics",
+      "kind": "safety-callpoint",
+      "purpose": "logistics-east-handling-response-callpoint",
+      "bounds": {
+        "x": 1552,
+        "y": 504,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted safety callpoint serving the east logistics service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I18",
+      "roomId": "logistics",
+      "kind": "status-beacon",
+      "purpose": "logistics-transfer-bay-occupancy-status",
+      "bounds": {
+        "x": 672,
+        "y": 194,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Automatic transfer-status beacon high on the central wall; its fixed bracket occupies no cargo or ladder approach.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I19",
+      "roomId": "logistics",
+      "kind": "cable-tray",
+      "purpose": "logistics-manifest-and-transfer-feed-tray",
+      "bounds": {
+        "x": 1200,
+        "y": 194,
+        "w": 80,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Enclosed upper service distribution links the freight record zone, keeping all runs on the rear wall and away from actual cargo.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I20",
+      "roomId": "bioforge",
+      "kind": "sanitation-unit",
+      "purpose": "bioforge-entry-sampling-waste-unit",
+      "bounds": {
+        "x": 1184,
+        "y": 532,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the central bioforge service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I21",
+      "roomId": "bioforge",
+      "kind": "oxygen-readout",
+      "purpose": "bioforge-entry-airflow-and-oxygen-status",
+      "bounds": {
+        "x": 848,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Entry-airflow readout above the central service stock, separate from the right containment indicator and outside every transfer approach.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I22",
+      "roomId": "bioforge",
+      "kind": "sensor-head",
+      "purpose": "bioforge-contained-transfer-observation-sensor",
+      "bounds": {
+        "x": 336,
+        "y": 290,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Compact fixed sensor on the west entry wall pier, clear of the viewing panel, pipework and clean-transfer doorway.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I23",
+      "roomId": "proving-ground",
+      "kind": "safety-callpoint",
+      "purpose": "range-preparation-emergency-callpoint",
+      "bounds": {
+        "x": 376,
+        "y": 516,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted safety callpoint serving the west proving ground service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I24",
+      "roomId": "proving-ground",
+      "kind": "tool-shadowboard",
+      "purpose": "range-unloaded-service-tool-return",
+      "bounds": {
+        "x": 312,
+        "y": 516,
+        "w": 40,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted tool shadowboard serving the west proving ground service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-I25",
+      "roomId": "proving-ground",
+      "kind": "emergency-lamp",
+      "purpose": "range-preparation-egress-light",
+      "bounds": {
+        "x": 416,
+        "y": 194,
+        "w": 64,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Caged preparation-area escape light sits above the wall equipment, wholly behind the firing line and separate from every target suspension.",
+      "sector": "industrial"
+    },
+    {
+      "id": "T177-E01",
+      "roomId": "dropship-hangar",
+      "kind": "status-beacon",
+      "purpose": "hangar-overhead-bay-clearance-status",
+      "bounds": {
+        "x": 800,
+        "y": 194,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Small automatic bay-clearance beacon occupies the free upper starboard service pier; no manual equipment hangs over the aircraft or access route.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E02",
+      "roomId": "dropship-hangar",
+      "kind": "sensor-head",
+      "purpose": "hangar-upper-exhaust-and-smoke-sensor",
+      "bounds": {
+        "x": 872,
+        "y": 194,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Compact fixed exhaust and smoke sensor shares the upper wall bay at a deliberate separation from the clearance beacon, above all vessel envelopes.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E03",
+      "roomId": "reactor",
+      "kind": "pressure-station",
+      "purpose": "reactor-secondary-loop-isolation-feedback",
+      "bounds": {
+        "x": 640,
+        "y": 258,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Secondary-loop instruments use the upper central distribution wall, distinct from the old primary-loop gauges and outside the viewport and ladder.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E04",
+      "roomId": "reactor",
+      "kind": "vent-return",
+      "purpose": "reactor-electrical-bay-return-air",
+      "bounds": {
+        "x": 896,
+        "y": 226,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Passive return grille in the upper east electrical service wall, leaving the reactor containment bay and native service ducts uncovered.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E05",
+      "roomId": "reactor",
+      "kind": "status-beacon",
+      "purpose": "reactor-west-isolation-interlock-status",
+      "bounds": {
+        "x": 240,
+        "y": 450,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Automatic isolation-status beacon on the lower west service wall above the actual reactor control equipment; this bay adds no unreachable manual callpoint or floor obstruction.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E06",
+      "roomId": "life-support",
+      "kind": "oxygen-readout",
+      "purpose": "life-support-supply-air-composition-readout",
+      "bounds": {
+        "x": 720,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Supply-air composition is read automatically above the central plant equipment, separate from filtration stock and vent access.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E07",
+      "roomId": "life-support",
+      "kind": "inspection-hatch",
+      "purpose": "life-support-west-filter-service-access",
+      "bounds": {
+        "x": 320,
+        "y": 354,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Closed access hatch occupies the west service wall bay beside the actual filter assembly, outside the real support and circulation volumes.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E08",
+      "roomId": "life-support",
+      "kind": "pressure-station",
+      "purpose": "life-support-return-plant-pressure-readout",
+      "bounds": {
+        "x": 848,
+        "y": 450,
+        "w": 40,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Automatic return-plant pressure readout occupies the lower right wall just above the real service equipment; it is not a manual socket suspended over the console.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E09",
+      "roomId": "sensor-array",
+      "kind": "sensor-head",
+      "purpose": "sensor-array-watch-reference-detector",
+      "bounds": {
+        "x": 400,
+        "y": 226,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Fixed reference detector is mounted in the upper west electronics bay, leaving the navigation glass and watchkeeper service route clear.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E10",
+      "roomId": "sensor-array",
+      "kind": "cable-tray",
+      "purpose": "sensor-array-calibration-feed-tray",
+      "bounds": {
+        "x": 720,
+        "y": 258,
+        "w": 80,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Short enclosed calibration feed tray sits on the clear upper central wall, separate from the old instruments and reserved vent approach.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E11",
+      "roomId": "sensor-array",
+      "kind": "sealed-record",
+      "purpose": "sensor-array-watch-reference-docket",
+      "bounds": {
+        "x": 144,
+        "y": 450,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Sealed reference docket is mounted above the lower west watch equipment, separate from the voice link and below the clear navigation service pier.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E12",
+      "roomId": "arrival-airlock",
+      "kind": "sanitation-unit",
+      "purpose": "arrival-vestibule-glove-and-waste-unit",
+      "bounds": {
+        "x": 312,
+        "y": 516,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the west arrival airlock service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E13",
+      "roomId": "arrival-airlock",
+      "kind": "pressure-station",
+      "purpose": "arrival-airlock-equalisation-pressure-readout",
+      "bounds": {
+        "x": 800,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Automatic equalisation instruments sit above the centre service equipment; the paired entry leaves and their labels remain uncovered.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E14",
+      "roomId": "arrival-airlock",
+      "kind": "emergency-lamp",
+      "purpose": "arrival-airlock-aft-egress-light",
+      "bounds": {
+        "x": 1680,
+        "y": 194,
+        "w": 64,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "A complete caged egress light sits high on the aft vestibule wall, distinct from the exit sign and clear of the actual opening.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E15",
+      "roomId": "escape-pods",
+      "kind": "sealed-record",
+      "purpose": "escape-pod-launch-and-muster-procedure-wallet",
+      "bounds": {
+        "x": 1344,
+        "y": 450,
+        "w": 64,
+        "h": 32
+      },
+      "mount": "rear-wall",
+      "note": "Sealed launch and muster procedures are mounted on the lower east service pier, separate from the response locker and actual pod openings.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E16",
+      "roomId": "escape-pods",
+      "kind": "status-beacon",
+      "purpose": "escape-pod-bank-availability-status",
+      "bounds": {
+        "x": 1120,
+        "y": 194,
+        "w": 48,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Fixed pod-bank status beacon belongs to the upper central services, without inventing another pod or hiding an existing release panel.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E17",
+      "roomId": "escape-pods",
+      "kind": "oxygen-readout",
+      "purpose": "escape-pod-reserve-breathing-supply-status",
+      "bounds": {
+        "x": 672,
+        "y": 258,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Reserve breathing-supply readout occupies a free upper bay above the established evacuation stock and away from both exit routes.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E18",
+      "roomId": "engine-room",
+      "kind": "hose-reel",
+      "purpose": "engine-room-restrained-service-air-reel",
+      "bounds": {
+        "x": 240,
+        "y": 508,
+        "w": 48,
+        "h": 40
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted hose reel serving the west engine room service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E19",
+      "roomId": "engine-room",
+      "kind": "pressure-station",
+      "purpose": "engine-room-secondary-cooling-pressure-readout",
+      "bounds": {
+        "x": 672,
+        "y": 290,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Secondary cooling instruments sit on the clear central wall beside the true propulsion service distribution, not over a console worktop.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E20",
+      "roomId": "engine-room",
+      "kind": "emergency-lamp",
+      "purpose": "engine-room-east-service-egress-light",
+      "bounds": {
+        "x": 1648,
+        "y": 194,
+        "w": 64,
+        "h": 24
+      },
+      "mount": "rear-wall",
+      "note": "Caged escape light on the upper east drive-space wall marks the service end without covering a console, pipe or real maintenance entrance.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E21",
+      "roomId": "water-recycling",
+      "kind": "sanitation-unit",
+      "purpose": "water-recycling-sealed-sampling-waste-unit",
+      "bounds": {
+        "x": 1016,
+        "y": 532,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted sanitation unit serving the east water recycling service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E22",
+      "roomId": "water-recycling",
+      "kind": "vent-return",
+      "purpose": "water-recycling-dry-service-return-grille",
+      "bounds": {
+        "x": 832,
+        "y": 226,
+        "w": 64,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A passive return grille serves the dry upper electrical bay above the water plant, preserving tanks, valves and labelled flow routes.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E23",
+      "roomId": "water-recycling",
+      "kind": "pressure-station",
+      "purpose": "water-recycling-clean-return-differential-readout",
+      "bounds": {
+        "x": 672,
+        "y": 322,
+        "w": 64,
+        "h": 36
+      },
+      "mount": "rear-wall",
+      "note": "Clean and return loop instruments fill the clear central service pier, away from the existing isolation valves and maintenance approach.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E24",
+      "roomId": "maintenance-spine",
+      "kind": "power-socket",
+      "purpose": "maintenance-spine-isolated-service-outlet",
+      "bounds": {
+        "x": 1000,
+        "y": 528,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "A wall-mounted power socket serving the central maintenance spine service bay. Its operating face is at the height of the existing floor; the equipment, rail and door silhouettes stay clear.",
+      "sector": "engineering"
+    },
+    {
+      "id": "T177-E25",
+      "roomId": "maintenance-spine",
+      "kind": "inspection-hatch",
+      "purpose": "maintenance-spine-starboard-feed-inspection",
+      "bounds": {
+        "x": 1792,
+        "y": 290,
+        "w": 48,
+        "h": 28
+      },
+      "mount": "rear-wall",
+      "note": "Closed feed-inspection cover sits on the upper starboard service pier and inherits the whole corridor parallel projection, outside every ladder and duct approach.",
+      "sector": "engineering"
+    }
+  ]
+}

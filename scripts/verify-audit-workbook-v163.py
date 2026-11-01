@@ -15,7 +15,8 @@ ns = {'m': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
       'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'}
 package_ns = {'p': 'http://schemas.openxmlformats.org/package/2006/relationships'}
 expected_names = ['00_Synthese'] + list(record['tables'])
-assert expected_names[-3:] == ['23_ChantiersV163', '24_CouvertureV163', '25_RosterEtatV163']
+assert len(expected_names) == 28
+assert expected_names[-4:] == ['23_ChantiersV163', '24_CouvertureV163', '25_RosterEtatV163', '27_RepriseV177']
 formula_count = 0
 cell_count = 0
 with zipfile.ZipFile(workbook) as archive:

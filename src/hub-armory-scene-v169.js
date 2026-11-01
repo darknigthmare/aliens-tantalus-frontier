@@ -28,23 +28,49 @@ export function withHubArmoryStorefrontV169(Base) {
       }
     }
 
-    drawArmoryStorefrontVariantV169(ctx, roomId, originX = 0) {
+    drawArmoryStorefrontVariantV169(ctx, roomId, originX = 0, options = {}) {
       const plan = getArmoryStorefrontPlanV169(roomId);
       if (!plan) return { drawn: 0, reason: 'no-variant' };
       if (!isArmoryArtAdmittedV171(plan.variant)) return { drawn: 0, reason: 'art-not-released' };
       const image = this.armoryStorefrontImagesV169?.get(plan.variant);
-      const back = drawArmoryStorefrontV169(ctx, image, plan, { originX, phase: 'back' });
-      const front = drawArmoryStorefrontV169(ctx, image, plan, { originX, phase: 'front' });
+      const back = drawArmoryStorefrontV169(ctx, image, plan, { ...options, originX, phase: 'back' });
+      const front = drawArmoryStorefrontV169(ctx, image, plan, { ...options, originX, phase: 'front' });
       return { drawn: back.drawn + front.drawn,
         reason: back.reason || front.reason || null, variant: plan.variant };
+    }
+
+    drawHubRoomDressingV136(ctx, room) {
+      // RoomDressing calls the final owner's method dynamically. Insert the
+      // shop wall here, after native room architecture and before RoomLife's
+      // service plates and equipment; painting it after super.drawRoomModule
+      // covered those real, already-admitted fixtures.
+      if (!this.editorPlaytest && (room?.id === 'armory' || room?.id === 'logistics')) {
+        const architecture = this.drawArmoryStorefrontVariantV169(ctx, room.id, room.xStart || 0,
+          { layers: ['architecture'] });
+        this.armoryStorefrontArchitecturePaintV177 ||= new Map();
+        this.armoryStorefrontArchitecturePaintV177.set(room.id, architecture);
+      }
+      return super.drawHubRoomDressingV136?.(ctx, room);
+    }
+
+    drawArmoryStorefrontForegroundV177(ctx, roomId, originX = 0) {
+      const architecture = this.armoryStorefrontArchitecturePaintV177?.get(roomId);
+      this.armoryStorefrontArchitecturePaintV177?.delete(roomId);
+      const foreground = this.drawArmoryStorefrontVariantV169(ctx, roomId, originX,
+        { excludeLayers: ['architecture'] });
+      this.armoryStorefrontPaintV169 = { ...foreground,
+        drawn: (architecture?.drawn || 0) + foreground.drawn,
+        architectureDrawn: architecture?.drawn || 0, foregroundDrawn: foreground.drawn,
+        reason: architecture?.reason || foreground.reason || null };
+      return this.armoryStorefrontPaintV169;
     }
 
     drawRoomModule(ctx, room, farImage) {
       const result = super.drawRoomModule(ctx, room, farImage);
       // Keep the existing original industrial architecture, real S. Doyle,
       // armory interactions, floor and doors; only enrich its interior wall.
-      if (room?.id === 'armory') {
-        this.armoryStorefrontPaintV169 = this.drawArmoryStorefrontVariantV169(ctx, room.id, room.xStart);
+      if (!this.editorPlaytest && room?.id === 'armory') {
+        this.drawArmoryStorefrontForegroundV177(ctx, room.id, room.xStart);
       }
       return result;
     }
@@ -52,8 +78,8 @@ export function withHubArmoryStorefrontV169(Base) {
     drawAnnexNpcsV141(ctx) {
       // The logistics annex is a second shop context, *not* the separate civil
       // records room, and retains its own service NPCs, doors and station.
-      if (this.currentAnnexV71?.()?.id === 'logistics') {
-        this.armoryStorefrontPaintV169 = this.drawArmoryStorefrontVariantV169(ctx, 'logistics');
+      if (!this.editorPlaytest && this.currentAnnexV71?.()?.id === 'logistics') {
+        this.drawArmoryStorefrontForegroundV177(ctx, 'logistics');
       }
       return super.drawAnnexNpcsV141?.(ctx);
     }

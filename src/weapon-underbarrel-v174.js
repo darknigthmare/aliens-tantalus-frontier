@@ -85,12 +85,19 @@ export function fireM41AUnderbarrelV174(s,receipt){
     pumpRequired:true,spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'};
 }
 export function pumpM41AUnderbarrelV174(s,receipt){
-  if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending||!s.needsPump
-    ||!id(receipt)||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
+  // A loaded tube also needs an initial manual cycle before its first shot.
+  // A restored empty chamber is not proof that a spent case exists.
+  const coldChamber=s?.chamber===0&&s?.tube>0&&!s?.needsPump;
+  if(!validateUnderbarrelV174(s)||s.mode!=='launcher'||s.pending
+    ||(!s.needsPump&&!coldChamber)||!id(receipt)
+    ||s.receipts.includes('pump:'+receipt)||!id('pump:'+receipt))return null;
+  const spentCleared=s.needsPump;
   s.needsPump=false;s.spent=0;
-  if(s.tube){s.tube--;s.chamber=1;}
-  remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,1);
+  const chambered=s.tube>0?1:0;
+  if(chambered){s.tube--;s.chamber=1;}
+  remember(s,'pump:'+receipt);log(s,'pump-mechanism-cycled',receipt,chambered);
   return {type:'launcher-cycled',chamber:s.chamber,tube:s.tube,
+    spentCleared,roundChambered:chambered,
     spentCaseEvidence:'UNVERIFIED_NO_CASING_SPAWN'};
 }
 export function beginM41AUnderbarrelReloadV174(s,receipt){

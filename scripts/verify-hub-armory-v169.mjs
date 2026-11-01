@@ -50,6 +50,35 @@ test('V169 does not relabel project concept art as canon 1:1', () => {
   }
 });
 
+test('V177 separately rendered storefront pieces never duplicate a source atlas pixel',()=>{
+ const image={complete:true,naturalWidth:1448,naturalHeight:1086};
+ for(const [variant,definition] of Object.entries(ARMORY_STOREFRONT_VARIANTS_V169)){
+  const {ctx,calls}=fixture(),plan=getArmoryStorefrontPlanV169(definition.roomId);
+  drawArmoryStorefrontV169(ctx,image,plan,{phase:'back'});
+  drawArmoryStorefrontV169(ctx,image,plan,{phase:'front'});
+  const drawn=calls.filter(entry=>entry[0]==='draw');
+  assert.equal(drawn.length,definition.layout.length,'all actual '+variant+' pieces are checked');
+  for(let i=0;i<drawn.length;i++)for(let j=i+1;j<drawn.length;j++){
+   const [ax,ay,aw,ah]=drawn[i].slice(2,6),[bx,by,bw,bh]=drawn[j].slice(2,6);
+   const area=Math.max(0,Math.min(ax+aw,bx+bw)-Math.max(ax,bx))
+     *Math.max(0,Math.min(ay+ah,by+bh)-Math.max(ay,by));
+   assert.equal(area,0,variant+' pieces '+i+' and '+j+' must own distinct source pixels');
+  }
+ }
+});
+
+test('V177 storefront admission detects restored overlapping source edges',async()=>{
+ const source=repo('src/hub-armory-storefront-v169.js');
+ // Reintroduce the original six-pixel sign/canopy overlap, leaving every
+ // world-space destination and all original PNG bytes untouched.
+ const changed=source.replace(/crop\('main-sign', 'facade', \[5, 433, \d+, 112\]\)/,
+   "crop('main-sign', 'facade', [5, 433, 695, 112])");
+ const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+ const validation=module.validateArmoryStorefrontV169();
+ assert.equal(validation.valid,false);
+ assert.ok(validation.failures.includes('source-crop-overlap:tantalus:main-sign:canopy'));
+});
+
 test('V169 keeps the native armorer, rather than duplicating a concept NPC', () => {
   const plan = getArmoryStorefrontPlanV169('armory');
   assert.equal(plan.vendorIdentity, 'sanaa-doyle-existing-native-npc');

@@ -5,6 +5,7 @@ import { spreadNpcStationSpawnsV136, moveNpcAgainstGeometryV136 } from './npc-li
 import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { NPC_IDENTITIES_V62 } from './npc-dialogue-v62.js';
 import { getHubBulkheadColliderV134 } from './hub-bulkhead-depth-v134.js';
+import { npcLiftQueueCourtesyPlanV177 } from './npc-lift-transit-v165.js';
 
 const finite = Number.isFinite, clone = value => JSON.parse(JSON.stringify(value));
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -82,6 +83,18 @@ export function normalizeNpcServiceTrafficV163(value) {
 
 export function withHubNpcServiceTrafficV163(Base) {
   return class HubNpcServiceTrafficV163 extends Base {
+    getNpcServiceOwnerYieldGoalV165(routeId,actor) {
+      const entries=this.getNpcLiftQueueEntriesV177?.()||[];
+      const own=entries.find(e=>e.definition?.id===routeId&&e.body===actor),shaftId=own?.definition?.shaftId;
+      if(shaftId){
+        const occupied=Boolean(this.npcLiftCabinReservationV165?.(shaftId)
+          ||this.hubLiftTransitV163?.trip?.shaftId===shaftId);
+        const plan=npcLiftQueueCourtesyPlanV177(entries,{shaftId,occupied});
+        if(plan?.yieldRouteId===routeId&&plan.yieldCrewId===actor?.crewId)return plan.holdingX;
+      }
+      return super.getNpcServiceOwnerYieldGoalV165?.(routeId,actor)??null;
+    }
+
     start(save = {}, options = {}) {
       this.npcTrafficSandboxV163 = Boolean(options.editorProject || options.forgeJourneyV141 || this.forgeSessionV141);
       this.npcTrafficStateV163 = this.npcTrafficSandboxV163 ? { schema: 163, actors: [] } : normalizeNpcServiceTrafficV163(save.npcServiceTrafficV163);

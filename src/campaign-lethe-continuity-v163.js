@@ -7,6 +7,8 @@ import { normalizeConvoyReturnHistoryV162 } from './campaign-convoy-history-v162
 import { validateApcCourseV131 } from './apc-course-v131.js';
 import { restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { LETHE_STORY_PROTOCOLS_V163, letheStoryProtocolV163 } from './campaign-lethe-story-v163.js';
+import { CAMPAIGN_STORY_PROTOCOLS_V160, campaignStoryProtocolV160 } from './campaign-story-v160.js';
+import { CONVOY_STORY_PROTOCOLS_V161, convoyStoryProtocolV161 } from './campaign-convoy-story-v161.js';
 
 export const LETHE_CONTINUITY_SCHEMA_V163 = 163;
 export const LETHE_CAMPAIGN_CHAPTERS_V163 = Object.freeze([
@@ -21,6 +23,11 @@ export const LETHE_CAMPAIGN_CHAPTERS_V163 = Object.freeze([
 ]);
 const chapters = new Map(LETHE_CAMPAIGN_CHAPTERS_V163.map(c => [c.id, c]));
 const byCampaign = new Map(LETHE_CAMPAIGN_CHAPTERS_V163.map(c => [c.campaign.id, c]));
+const chapterProtocols = new Map([
+  [ARCHIVE_RELAY_CAMPAIGN_V122.id, CAMPAIGN_STORY_PROTOCOLS_V160],
+  [APC_CONVOY_CAMPAIGN_V121.id, CONVOY_STORY_PROTOCOLS_V161],
+  ...Object.entries(LETHE_STORY_PROTOCOLS_V163)
+]);
 const TOPICS = Object.freeze(['objective', 'conduct', 'return']);
 const record = v => Boolean(v && typeof v === 'object' && !Array.isArray(v));
 const finite = v => typeof v === 'number' && Number.isFinite(v);
@@ -89,7 +96,7 @@ function normalizeReturn(raw, chapter, maximumSerial) {
     || receipt.operationId !== raw.operationId || receipt.serial !== serial || receipt.success !== raw.success
     || receipt.campaignId !== campaign.id || receipt.worldId !== campaign.worldId) return null;
   const summary = normalizedFacts(chapter.id, raw.summary, raw.success);
-  const protocols = LETHE_STORY_PROTOCOLS_V163[campaign.id] || [];
+  const protocols = chapterProtocols.get(campaign.id) || [];
   if (!summary || !(raw.protocolId === null || protocols.some(p => p.id === raw.protocolId))) return null;
   return { schema: 163, chapterId: chapter.id, operationId: raw.operationId, serial,
     campaignId: campaign.id, worldId: campaign.worldId, success: raw.success, reason: raw.reason,
@@ -183,7 +190,9 @@ function nativeReturn(save) {
     try { insertion = restoreMissionInsertionV62(operation.insertionState); } catch { return null; }
     if (insertion.operationId !== operation.id || insertion.campaignId !== operation.campaignId
       || insertion.worldId !== operation.worldId || operation.success && (insertion.status !== 'completed' || !insertion.controlGranted)) return null;
-    protocolId = letheStoryProtocolV163(insertion)?.id || null;
+    const selected = chapter.id === 'relay' ? campaignStoryProtocolV160(insertion)
+      : chapter.id === 'convoy' ? convoyStoryProtocolV161(insertion) : letheStoryProtocolV163(insertion);
+    protocolId = selected?.id || null;
   }
   let summary;
   if (chapter.id === 'relay') summary = { returnConfirmed: operation.success, documents: state.readIds.length, verdict: state.verdict };
@@ -203,13 +212,17 @@ function historicalReturns(save) {
   const archive = normalizeArchiveRelayArchiveV122(save?.archiveRelayArchivesV122), dossier = archive.case;
   if (dossier && dossier.verdict === 'delayed-distress' && dossier.documentIds.length === ARCHIVE_RELAY_DOCUMENT_IDS_V122.length
     && ARCHIVE_RELAY_DOCUMENT_IDS_V122.every(id => dossier.documentIds.includes(id))) {
+    // Only an explicit return of this same deployment can supply its briefing
+    // choice. A later replay, even with a valid protocol, owns another choice.
+    const protocol = archive.lastReturnV160?.operationId === dossier.operationId && archive.lastReturnV160.success
+      ? archive.lastReturnV160.protocolId : null;
     const chapter = chapters.get('relay'), entry = compact(chapter, dossier.operationId, true, 'objective',
-      { returnConfirmed: true, documents: 6, verdict: 'delayed-distress' });
+      { returnConfirmed: true, documents: 6, verdict: 'delayed-distress' }, protocol);
     const checked = normalizeReturn(entry, chapter, max); if (checked) out.push(checked);
   }
   for (const source of normalizeConvoyReturnHistoryV162(save?.convoyReturnHistoryV162, { resolvedSerial: max }).entries) {
     const chapter = chapters.get('convoy'), entry = compact(chapter, source.operationId, source.success, source.reason,
-      { ...source.summary, hull: source.summary.hull });
+      { ...source.summary, hull: source.summary.hull }, source.protocolId);
     const checked = normalizeReturn(entry, chapter, max); if (checked) out.push(checked);
   }
   return out;
@@ -220,6 +233,17 @@ function mergedReading(previous, next) {
     activeTopic: next.activeTopic || previous?.activeTopic || null };
 }
 
+function compatibleReturn(previous, next) {
+  const { protocolId: oldProtocol, ...oldFacts } = returnFacts(previous);
+  const { protocolId: nextProtocol, ...nextFacts } = returnFacts(next);
+  if (JSON.stringify(oldFacts) !== JSON.stringify(nextFacts)
+    || oldProtocol && nextProtocol && oldProtocol !== nextProtocol) return null;
+  // V163 initially retained choices only for C12/Cocoon. Enrich the missing
+  // QZ-18/M577 choice from an already validated return without rewriting any
+  // mission fact, receipt or explicit reading. Missing metadata cannot erase it.
+  return { ...next, protocolId: nextProtocol || oldProtocol };
+}
+
 /** Called in the native resolution transaction and before another operation
  * replaces lastOperation. Only this notebook changes; no mission/economic API
  * is called and a failure never removes an earlier confirmed chapter. */
@@ -227,10 +251,15 @@ export function preserveLetheContinuityV163(save) {
   const max = resolvedSerial(save), current = normalizeLetheContinuityV163(save?.letheContinuityV163, { resolvedSerial: max });
   const candidates = [...historicalReturns(save), nativeReturn(save)].filter(Boolean).sort((a, b) => a.serial - b.serial);
   if (!candidates.length) return { changed: false, reason: 'native-return-unavailable' };
-  for (const entry of candidates) {
+  for (let entry of candidates) {
     const target = current.chapters[entry.chapterId];
-    const known = [target.firstSuccess, target.latestReturn].find(r => r?.operationId === entry.operationId);
-    if (known && JSON.stringify(returnFacts(known)) !== JSON.stringify(returnFacts(entry))) continue;
+    for (const known of [target.firstSuccess, target.latestReturn].filter(r => r?.operationId === entry.operationId)) {
+      entry = compatibleReturn(known, entry);
+      if (!entry) break;
+    }
+    if (!entry) continue;
+    if (target.firstSuccess?.operationId === entry.operationId)
+      target.firstSuccess.protocolId = entry.protocolId;
     if (!target.latestReturn || entry.serial > target.latestReturn.serial) target.latestReturn = clone(entry);
     else if (entry.operationId === target.latestReturn.operationId) target.latestReturn = mergedReading(target.latestReturn, entry);
     if (entry.success && (!target.firstSuccess || entry.serial < target.firstSuccess.serial)) target.firstSuccess = clone(entry);
@@ -281,12 +310,15 @@ export function letheContinuityModelV163(save) {
   const rows = LETHE_CAMPAIGN_CHAPTERS_V163.map(chapter => {
     const data = notebook.chapters[chapter.id], entry = data.latestReturn, complete = Boolean(data.firstSuccess);
     const available = Array.isArray(save?.galaxy?.unlockedWorldIds) && save.galaxy.unlockedWorldIds.includes(chapter.campaign.worldId);
-    const selectedTopic = entry?.activeTopic || (entry?.protocolId === 'pressure-review' || entry?.protocolId === 'route-review' ? 'conduct'
-      : entry?.protocolId === 'lift-review' ? 'objective' : 'return');
+    const protocol = (chapterProtocols.get(chapter.campaign.id) || []).find(p => p.id === entry?.protocolId);
+    const selectedTopic = entry?.activeTopic || (chapter.id === 'convoy'
+      ? entry?.protocolId === 'route-review' ? 'objective' : entry?.protocolId === 'hull-review' ? 'conduct' : 'return'
+      : entry?.protocolId === 'pressure-review' || entry?.protocolId === 'route-review' ? 'conduct'
+        : entry?.protocolId === 'lift-review' || entry?.protocolId === 'technical-audit' ? 'objective' : 'return');
     return { id: chapter.id, title: chapter.title, campaignId: chapter.campaign.id, campaignName: chapter.campaign.name,
       objective: chapter.objective, complete, firstSuccessOperationId: data.firstSuccess?.operationId || null,
       available, active: active?.campaignId === chapter.campaign.id, canPlan: !active && available,
-      latestReturn: entry ? { ...clone(entry), selectedTopic, questions: questions(chapter, entry),
+      latestReturn: entry ? { ...clone(entry), protocolLabel: protocol?.label || 'Bilan standard', selectedTopic, questions: questions(chapter, entry),
         canReview: !active, readingComplete: entry.readTopics.length === TOPICS.length } : null };
   });
   const next = rows.find(row => !row.complete), completed = rows.filter(row => row.complete).length;

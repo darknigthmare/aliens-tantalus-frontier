@@ -6,8 +6,7 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSourcesV163,
-  V165_VERIFIER_SUCCESSORS_V171, V165_VERIFIER_SUCCESSORS_V173,
-  V165_VERIFIER_SUCCESSORS_V174 } from './audit-succession-v163.mjs';
+  verifyReviewedVerifierV177 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -84,31 +83,10 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   }
   for (const verifier of requiredVerifiers) {
     assert.match(verifier, /^scripts\/verify-[a-zA-Z0-9._-]+\.mjs$/);
-    const legacy = V165_VERIFIER_SUCCESSORS_V171[verifier];
-    const revision = V165_VERIFIER_SUCCESSORS_V173[verifier];
-    const next = V165_VERIFIER_SUCCESSORS_V174[verifier];
-    if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
-      'Invalid V171-to-V173 verifier successor: ' + verifier);
-    if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
-      'Invalid V173/V171-to-V174 verifier successor: ' + verifier);
-    const successor = next || revision || legacy;
-    if (legacy) assert.equal(record.verifierSourceSha256V165[verifier], legacy.previousSha256,
-      'Untrusted V165 original verifier receipt: ' + verifier);
-    assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? record.verifierSourceSha256V165[verifier],
-      'Unreviewed verifier bytes: ' + verifier);
+    verifyReviewedVerifierV177(verifier, record.verifierSourceSha256V165[verifier], readSource);
   }
-  for (const [verifier, expected] of Object.entries(record.verifierSourceSha256V165)) {
-    const legacy = V165_VERIFIER_SUCCESSORS_V171[verifier];
-    const revision = V165_VERIFIER_SUCCESSORS_V173[verifier];
-    const next = V165_VERIFIER_SUCCESSORS_V174[verifier];
-    if (revision) assert.equal(revision.previousSha256, legacy?.currentSha256,
-      'Invalid V171-to-V173 verifier successor: ' + verifier);
-    if (next) assert.equal(next.previousSha256, (revision || legacy)?.currentSha256,
-      'Invalid V173/V171-to-V174 verifier successor: ' + verifier);
-    const successor = next || revision || legacy;
-    if (legacy) assert.equal(legacy.previousSha256, expected, 'Incorrect V165 verifier predecessor');
-    assert.equal(sha(readSource(verifier)), successor?.currentSha256 ?? expected, verifier);
-  }
+  for (const [verifier, expected] of Object.entries(record.verifierSourceSha256V165))
+    verifyReviewedVerifierV177(verifier, expected, readSource);
   assert.deepEqual(followup.releaseEvidence, { nodeSuite: null, nativeCandidate: null, ci: null, review: null, merge: null });
   assert.deepEqual([followup.artClosed, followup.approved1to1, followup.humanParticipants], [0, 0, 0]);
   assert.equal(followup.forgeState, 'DEFERRED_BY_USER');
@@ -215,7 +193,7 @@ test('new V165 imports reached by the scoped runtime are all pinned, including n
   }
 });
 
-test('the public workbook exposes a visible notice on all 27 tabs without changing cached historical formulas', () => {
+test('the public workbook exposes a visible notice on all 28 tabs without changing cached historical formulas', () => {
   const directory = fileURLToPath(new URL('../' + prefix, import.meta.url));
   const script = String.raw`
 import hashlib,json,sys,zipfile,xml.etree.ElementTree as E
@@ -225,8 +203,8 @@ assert hashlib.sha256(w.read_bytes()).hexdigest()==r['workbookSha256']
 n={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
 with zipfile.ZipFile(w) as z:
  b=E.fromstring(z.read('xl/workbook.xml')); names=[s.get('name') for s in b.find('m:sheets',n)]
- assert len(names)==27 and names==['00_Synthese']+list(r['tables'])
- assert names[-4:]==['26_ChantiersV165','23_ChantiersV163','24_CouvertureV163','25_RosterEtatV163']
+ assert len(names)==28 and names==['00_Synthese']+list(r['tables'])
+ assert names[-5:]==['26_ChantiersV165','23_ChantiersV163','24_CouvertureV163','25_RosterEtatV163','27_RepriseV177']
  formulas=0
  for i,name in enumerate(names,1):
   d=E.fromstring(z.read(f'xl/worksheets/sheet{i}.xml')); c=d.find('.//m:c[@r="A3"]',n)
@@ -240,7 +218,7 @@ with zipfile.ZipFile(w) as z:
 print(json.dumps({'sheets':len(names),'formulas':formulas,'notices':len(names)}))
 `;
   const result = JSON.parse(execFileSync('python3', ['-B', '-c', script, directory], { encoding: 'utf8' }));
-  assert.deepEqual(result, { sheets: 27, formulas: 32, notices: 27 });
+  assert.deepEqual(result, { sheets: 28, formulas: 32, notices: 28 });
   assert.match(current.workbookPublicationNoticeV164, /043bb60.*8a934b7/);
   assert.match(current.workbookPublicationNoticeV164, /21b70e.*ebbdbb6/);
   assert.match(current.workbookPublicationNoticeV164, /V165.*PRÉPUBLICATION/);

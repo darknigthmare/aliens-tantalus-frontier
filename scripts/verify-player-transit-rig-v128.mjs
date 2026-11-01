@@ -138,6 +138,24 @@ test('observation clocks distinguish restored bodies, real impacts, landing, pau
   assert.equal(confirmedSupport.observed,false);
 });
 
+test('a restored casualty correction at a frozen clock cannot invent an impact or replay its descent',()=>{
+  for(const make of [downed,corpse])for(const direction of [-1,1]){
+    const context='resume-confirmation',airborne=make({grounded:false,y:190,facing:direction});
+    const before=advancePlayerTransitStateV128(null,airborne,4,{context});
+    const landed={...airborne,y:200,grounded:true},snapshot=JSON.stringify(landed);
+    const corrected=advancePlayerTransitStateV128(before,landed,4,{context});
+    assert.equal(corrected.airborneTravel,0,'A zero-time relocation is not a witnessed fall.');
+    assert.equal(corrected.observed,false);assert.equal(corrected.phase,'settled');assert.equal(corrected.progress,1);
+    const following=advancePlayerTransitStateV128(corrected,landed,4+1/60,{context});
+    assert.equal(following.observed,false);assert.equal(following.progress,1);
+    assert.equal(following.airborneTravel,0,'The next clock tick must not replay the corrected descent.');
+    assert.equal(JSON.stringify(landed),snapshot);
+    const physical=advancePlayerTransitStateV128(before,landed,4+1/60,{context});
+    assert.equal(physical.airborneTravel,10);assert.equal(physical.observed,true);
+    assert.equal(physical.phase,'settling');assert.equal(physical.progress,0,'A genuine observed descent still starts its impact gesture.');
+  }
+});
+
 test('accepted movement, firing and equipment actions immediately yield the cosmetic revival pose',()=>{
   const previous=advancePlayerTransitStateV128(null,downed(),0);
   const rising=advancePlayerTransitStateV128(previous,actor(),.01);

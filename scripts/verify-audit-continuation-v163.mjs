@@ -8,14 +8,16 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AUDIT_PRIORITY_IDS_V163,
   loadAuditSuccessionV163, resolveAuditSourcesV163, verifyAuditCoverageV163, verifyAuditSuccessionV163,
-  verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS,
+  verifyGamedevCorrectionV163, ARSENAL_V167_SUCCESSORS, ARSENAL_V167_NEW_SOURCES,
   ARMORY_V169_SUCCESSORS, ARMORY_V169_NEW_SOURCES, ARSENAL_V170_SUCCESSORS,
   ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES, ARSENAL_V171_SUCCESSORS,
   ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
   ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS,
   V165_VERIFIER_SUCCESSORS_V173, V165_VERIFIER_SUCCESSORS_V174,
   V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
-  ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
+  ARMORY_V174_ECONOMY_NEW_SOURCES, V177_SOURCE_SUCCESSORS,
+  V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
+  verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -26,6 +28,7 @@ const previous = JSON.parse(read(prefix + 'progress-v162.json'));
 const current = JSON.parse(read(prefix + 'progress-v163.json'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
+const effectiveSource = (path, historical) => V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical;
 
 test('V163 keeps all original task identities, roster and historical table cells unchanged', () => {
   assert.equal(current.lot, 'V163');
@@ -95,7 +98,10 @@ test('the full current bridge validates runtime bytes and older default returns 
     ...Object.fromEntries(Object.entries(ARSENAL_V171_SUCCESSORS)
       .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
       .map(([path, receipt]) => [path, receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])) };
+    ...Object.fromEntries(Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(V177_SOURCE_SUCCESSORS)
+      .filter(([path]) => Object.hasOwn(current.runtimeSourceSha256, path))
+      .map(([path, receipt]) => [path, receipt.currentSha256])) };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
@@ -108,19 +114,19 @@ test('the V169 armory app successor is chained, source-pinned and cannot be forg
   assert.equal(receipt.previousSha256, ARSENAL_V167_SUCCESSORS[app].currentSha256);
   assert.equal(ARSENAL_V170_SUCCESSORS[app].previousSha256, receipt.currentSha256);
   assert.equal(ARMORY_V174_ECONOMY_SUCCESSORS[app].previousSha256, ARSENAL_V170_SUCCESSORS[app].currentSha256);
-  assert.equal(sha(read(app)), ARMORY_V174_ECONOMY_SUCCESSORS[app].currentSha256);
+  assert.equal(sha(read(app)), effectiveSource(app, ARMORY_V174_ECONOMY_SUCCESSORS[app].currentSha256));
   assert.equal(receipt.verifier, 'scripts/verify-hub-armory-v169.mjs');
-  assert.equal(sha(read(receipt.verifier)), receipt.verifierSha256);
+  assert.equal(sha(read(receipt.verifier)), effectiveSource(receipt.verifier, receipt.verifierSha256));
   assert.deepEqual(Object.keys(ARMORY_V169_NEW_SOURCES), ['src/hub-armory-storefront-v169.js']);
   for (const [path, digest] of Object.entries(ARMORY_V169_NEW_SOURCES)) {
-    assert.equal(sha(read(path)), ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256);
+    assert.equal(sha(read(path)), effectiveSource(path, ARMORY_V172_RELEASE_SUCCESSORS[path].currentSha256));
     assert.equal(ARSENAL_V171_SUCCESSORS[path].previousSha256, ARMORY_V170_ASSET_SOURCE.currentSha256);
     assert.equal(ARMORY_V170_ASSET_SOURCE.previousSha256, digest);
   }
   for (const changedPath of [app, receipt.verifier, ...Object.keys(ARMORY_V169_NEW_SOURCES)]) {
     const mutated=path=>path===changedPath ? Buffer.concat([read(path),Buffer.from('\\nUNREVIEWED')]) : read(path);
     assert.throws(() => verifyAuditSuccessionV163(previous,current,mutated),
-      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V174/, changedPath);
+      /Unreviewed V169|Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V174|Unreviewed V177/, changedPath);
   }
 });
 
@@ -130,16 +136,16 @@ test('V170 evidence, commerce and source-art successors are byte-pinned, not art
     ARSENAL_V167_SUCCESSORS['sw.js'].currentSha256);
   assert.equal(ARSENAL_V171_SUCCESSORS['sw.js'].previousSha256, ARSENAL_V170_SUCCESSORS['sw.js'].currentSha256);
   assert.equal(ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].previousSha256, ARSENAL_V171_SUCCESSORS['sw.js'].currentSha256);
-  assert.equal(sha(read('sw.js')), ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].currentSha256);
+  assert.equal(sha(read('sw.js')), effectiveSource('sw.js', ARMORY_V174_ECONOMY_SUCCESSORS['sw.js'].currentSha256));
   for (const [path, digest] of Object.entries(ARSENAL_V170_NEW_SOURCES)) {
     const successor=ARSENAL_V171_SUCCESSORS[path];
     if(successor) assert.equal(successor.previousSha256,digest);
-    assert.equal(sha(read(path)),ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256||successor?.currentSha256||digest,path);
+    assert.equal(sha(read(path)),effectiveSource(path, ARMORY_V172_RELEASE_SUCCESSORS[path]?.currentSha256||successor?.currentSha256||digest),path);
   }
   for (const path of Object.keys(ARSENAL_V170_NEW_SOURCES)) {
     const corrupted = name => name === path
       ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
-    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V173/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted), /Unreviewed V170|Unreviewed V171|Unreviewed V172|Unreviewed V173|Unreviewed V177/, path);
   }
 });
 
@@ -149,32 +155,25 @@ test('V171 historical successors and research/feed/installer inputs are all sour
   for (const [path, receipt] of Object.entries(ARSENAL_V171_SUCCESSORS)) {
     const current = ARMORY_V174_ECONOMY_SUCCESSORS[path] || ARMORY_V172_RELEASE_SUCCESSORS[path];
     if (current) assert.equal(current.previousSha256, receipt.currentSha256);
-    assert.equal(sha(read(path)), current?.currentSha256 || receipt.currentSha256, path);
+    assert.equal(sha(read(path)), effectiveSource(path, current?.currentSha256 || receipt.currentSha256), path);
   }
   for (const [path, expected] of Object.entries(ARSENAL_V171_NEW_SOURCES)) {
     const v172 = ARMORY_V172_RELEASE_SUCCESSORS[path];
     const v173 = WEAPON_V173_SOURCE_SUCCESSORS[path];
     if (v172) assert.equal(v172.previousSha256, expected);
     if (v173) assert.equal(v173.previousSha256, expected);
-    assert.equal(sha(read(path)), v173?.currentSha256 || v172?.currentSha256 || expected, path);
+    assert.equal(sha(read(path)), effectiveSource(path, v173?.currentSha256 || v172?.currentSha256 || expected), path);
   }
   for (const [path, receipt] of Object.entries(ARMORY_V172_RELEASE_SUCCESSORS)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), effectiveSource(path, receipt.currentSha256), path);
   }
   for (const [path, receipt] of Object.entries(WEAPON_V173_SOURCE_SUCCESSORS)) {
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), effectiveSource(path, receipt.currentSha256), path);
   }
   for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V171)) {
     assert.ok(receipt.previousSha256 && receipt.currentSha256);
-    const revision = V165_VERIFIER_SUCCESSORS_V173[path];
-    const next = V165_VERIFIER_SUCCESSORS_V174[path];
-    const latest = V165_VERIFIER_SUCCESSORS_V176[path];
-    if (revision) assert.equal(revision.previousSha256, receipt.currentSha256);
-    if (next) assert.equal(next.previousSha256, (revision || receipt).currentSha256);
-    if (latest) assert.equal(latest.previousSha256, (next || revision || receipt).currentSha256);
-    assert.equal(sha(read(path)),
-      latest?.currentSha256 || next?.currentSha256 || revision?.currentSha256 || receipt.currentSha256, path);
+    verifyReviewedVerifierV177(path, receipt.previousSha256, read);
   }
 });
 
@@ -183,9 +182,9 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
-    assert.equal(sha(read(path)),revision.currentSha256,path);
+    assert.equal(sha(read(path)),V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256,path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
-    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V176 verifier/,path);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V17[67] verifier/,path);
   }
 });
 
@@ -194,13 +193,196 @@ test('V174 armory economy and QA are exact successors without rewriting historic
   assert.deepEqual(Object.keys(ARMORY_V174_ECONOMY_NEW_SOURCES).sort(),
     ['scripts/verify-armory-resupply-v174.mjs','src/armory-resupply-v174.js']);
   for (const [path, receipt] of Object.entries(ARMORY_V174_ECONOMY_SUCCESSORS))
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), effectiveSource(path, receipt.currentSha256), path);
   for (const [path, hash] of Object.entries(ARMORY_V174_ECONOMY_NEW_SOURCES))
-    assert.equal(sha(read(path)), hash, path);
+    assert.equal(sha(read(path)), effectiveSource(path, hash), path);
   for (const path of Object.keys(ARMORY_V174_ECONOMY_NEW_SOURCES)) {
     const changed=name=>name===path ? Buffer.concat([read(name), Buffer.from('\nUNAPPROVED')]) : read(name);
-    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),/Unreviewed V174/,path);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),/Unreviewed V174|Unreviewed V177/,path);
   }
+});
+
+test('V177 retains every reviewed V167 through V176 receipt instead of rewriting a predecessor', () => {
+  const frozenReceipts = {
+    ARSENAL_V167_SUCCESSORS, ARSENAL_V167_NEW_SOURCES, ARMORY_V169_SUCCESSORS, ARMORY_V169_NEW_SOURCES,
+    ARSENAL_V170_SUCCESSORS, ARMORY_V170_ASSET_SOURCE, ARSENAL_V170_NEW_SOURCES,
+    ARSENAL_V171_SUCCESSORS, ARSENAL_V171_NEW_SOURCES, V165_VERIFIER_SUCCESSORS_V171,
+    ARMORY_V172_RELEASE_SUCCESSORS, WEAPON_V173_SOURCE_SUCCESSORS, V165_VERIFIER_SUCCESSORS_V173,
+    ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES,
+    V165_VERIFIER_SUCCESSORS_V174, V165_VERIFIER_SUCCESSORS_V176
+  };
+  assert.equal(sha(JSON.stringify(frozenReceipts)), '9a0cbed89806b89035d878d89f505518fca66f6cfc1bb1f8ce509d1e35e0340e',
+    'Historical source and verifier receipt maps must retain their baseline4676a78 values.');
+  assert.deepEqual(Object.keys(V165_VERIFIER_SUCCESSORS_V177).sort(), [
+    'scripts/verify-audit-continuation-v163.mjs', 'scripts/verify-parallel-completion-v165.mjs',
+    'scripts/verify-public-release-v86.mjs'
+  ]);
+  for (const [path, receipt] of Object.entries(V165_VERIFIER_SUCCESSORS_V177)) {
+    const previousReceipt = V165_VERIFIER_SUCCESSORS_V176[path] || V165_VERIFIER_SUCCESSORS_V174[path]
+      || V165_VERIFIER_SUCCESSORS_V173[path] || V165_VERIFIER_SUCCESSORS_V171[path];
+    assert.equal(receipt.previousSha256, previousReceipt.currentSha256, path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
+    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), receipt.currentSha256);
+    const corrupted = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
+      error => error.message.includes('Unreviewed V177 verifier') && error.message.includes(path), path);
+  }
+});
+
+test('V177 source successors reject unreviewed bytes even when the live JSON pin is forged to match them', () => {
+  assert.ok(Object.keys(V177_SOURCE_SUCCESSORS).length >= 5, 'The actual source continuation must be explicit.');
+  for (const [path, receipt] of Object.entries(V177_SOURCE_SUCCESSORS)) {
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
+    const bytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
+    const corrupted = name => name === path ? bytes : read(name);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
+      error => error.message.includes('Unreviewed V177') && error.message.includes(path), path);
+    const forged = clone(current);
+    if (Object.hasOwn(forged.runtimeSourceSha256, path)) forged.runtimeSourceSha256[path] = sha(bytes);
+    assert.throws(() => verifyAuditSuccessionV163(previous, forged, corrupted), undefined,
+      'Updating a live JSON field must not rewrite this immutable receipt chain: ' + path);
+  }
+});
+
+test('V177 requires the complete baseline467 source-change ledger and rejects invented predecessors', () => {
+  const expected = Object.keys(V177_RUNTIME_PREDECESSORS).sort();
+  assert.ok(expected.length >= 20);
+  assert.deepEqual(current.followupV177.sourceChanges.map(row => row.path), expected);
+  for (const alter of [
+    rows => rows.splice(0), rows => rows.pop(), rows => rows.push(clone(rows[0])),
+    rows => { rows[0].previousSha256 = '0'.repeat(64); },
+    rows => { rows[0].path = 'src/unknown-unreviewed-v177.js'; }
+  ]) {
+    const forged = clone(current); alter(forged.followupV177.sourceChanges);
+    assert.throws(() => verifyOpenWorkstreamsV177(forged), /V177 source-change ledger|V177 runtime predecessor/);
+  }
+});
+
+test('V177 tracks six bounded corrections while media, Forge and candidate release evidence remain open', () => {
+  assert.deepEqual(verifyOpenWorkstreamsV177(current), {
+    streams: 6, sources: current.followupV177.sourceChanges.length, trialSheets: 28, arsenalSheets: 5
+  });
+  for (const mutate of [
+    f => { f.state = 'DONE'; }, f => { f.approved1to1 = 1; }, f => { f.fullArtTasksClosed = 18; },
+    f => { f.humanParticipants = 4; }, f => { f.remaining.newArchivesRecovered = 1; },
+    f => { f.remaining.costumeReferences = 0; }, f => { f.remaining.forgeState = 'DONE'; },
+    f => { f.workstreams[0].nativeState = 'PASSED'; }, f => { f.workstreams[0].artClosed = 1; },
+    f => { f.workstreams[0].modules.push('src/forge-campaign-v161.js'); },
+    f => { f.releaseEvidence.ci = { status: 'SUCCESS' }; },
+    f => { f.shipTracking.installations = 200; },
+    f => { f.shipTracking.ledgerSha256 = '0'.repeat(64); },
+    f => { f.shipTracking.state = 'NATIVE_PASSED'; }
+  ]) {
+    const forged = clone(current); mutate(forged.followupV177);
+    assert.throws(() => verifyOpenWorkstreamsV177(forged));
+  }
+  for (const path of Object.keys(V177_ARSENAL_SOURCE_INPUTS)) {
+    const bytes = Buffer.concat([read(path), Buffer.from('UNREVIEWED')]);
+    const changed = name => name === path ? bytes : read(name);
+    assert.throws(() => verifyOpenWorkstreamsV177(current, changed), undefined, path);
+    const forged = clone(current); forged.followupV177.arsenalTracking.sourceInputs[path] = sha(bytes);
+    assert.throws(() => verifyOpenWorkstreamsV177(forged, changed), undefined,
+      'The original V1 specification/CSV hash cannot be rewritten: ' + path);
+  }
+  for (const row of current.followupV177.developmentToolChanges) {
+    assert.deepEqual([row.previousSha256, row.currentSha256],
+      [V177_TOOL_SUCCESSORS[row.path].previousSha256, V177_TOOL_SUCCESSORS[row.path].currentSha256]);
+    const bytes = Buffer.concat([read(row.path), Buffer.from('UNREVIEWED')]);
+    const changed = path => path === row.path ? bytes : read(path);
+    assert.throws(() => verifyOpenWorkstreamsV177(current, changed),
+      error => error.message.includes(row.path)
+        && /Unreviewed V177 (?:tool bytes|behavioral verifier)/.test(error.message));
+    const forged = clone(current);
+    forged.followupV177.developmentToolChanges.find(r => r.path === row.path).currentSha256 = sha(bytes);
+    assert.throws(() => verifyOpenWorkstreamsV177(forged, changed));
+  }
+  const omittedTools = clone(current); omittedTools.followupV177.developmentToolChanges = [];
+  assert.throws(() => verifyOpenWorkstreamsV177(omittedTools));
+  const ledger = current.followupV177.shipTracking.ledgerPath;
+  const changedLedger = path => path === ledger ? Buffer.concat([read(path), Buffer.from('UNREVIEWED')]) : read(path);
+  assert.throws(() => verifyOpenWorkstreamsV177(current, changedLedger), /Unreviewed V177 ship ledger bytes/);
+});
+
+test('the recovered V168 archive closes only its historical delivery while global CI remains open', () => {
+  const delivery = current.historicalDeliveryV168;
+  assert.equal(delivery.status, 'MERGED_WITH_SCOPED_LOCAL_VALIDATION_AND_OPEN_GLOBAL_CI');
+  assert.equal(delivery.reviewedHead, 'aa10e78b9c51d44efa5904c054e56686776a09f5');
+  assert.equal(delivery.mainMerge, 'c932d0dca69aad67e43e496e7fbeb39e0064ca4c');
+  assert.equal(delivery.validatedTree, '78b0aea8a32d0f457fe174aa37ae4fe5b1436b8e');
+  assert.deepEqual([delivery.nodeTests, delivery.nodeFiles, delivery.nativeRooms,
+    delivery.visibleInstallations, delivery.speakerAvatars], [3686, 193, 35, 100, 16]);
+  assert.equal(current.followupV168.state, 'PREPUBLICATION');
+  assert.equal(delivery.countsAreCurrentV177Results, false);
+  assert.equal(delivery.ciGloballyGreen, false);
+  assert.deepEqual([delivery.humanParticipants, delivery.artClosed, delivery.canonical1to1Approved], [0, 0, false]);
+  for (const alter of [
+    d => { d.ciGloballyGreen = true; }, d => { d.countsAreCurrentV177Results = true; },
+    d => { d.visibleInstallations = 200; }, d => { d.humanParticipants = 4; },
+    d => { d.durableArchive.sha256 = '0'.repeat(64); }, d => { d.mergeReceipt.sha256 = '0'.repeat(64); }
+  ]) {
+    const forged = clone(current); alter(forged.historicalDeliveryV168);
+    assert.throws(() => verifyOpenWorkstreamsV177(forged), /Historical V168 recovered delivery/);
+  }
+});
+
+test('V177 pins the changed observation pilots without turning a script review into a capture receipt', () => {
+  for (const row of current.followupV177.qaDriverChanges) {
+    assert.equal(row.state, 'PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED');
+    assert.equal(sha(read(row.path)), row.currentSha256, row.path);
+    const changed = path => path === row.path ? Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]) : read(path);
+    assert.throws(() => verifyOpenWorkstreamsV177(current, changed), /Unreviewed V177 QA pilot bytes/, row.path);
+    const forged = clone(current); forged.followupV177.qaDriverChanges.find(r => r.path === row.path).state = 'NATIVE_PASSED';
+    assert.throws(() => verifyOpenWorkstreamsV177(forged), undefined, row.path);
+    const predecessor = clone(current);
+    predecessor.followupV177.qaDriverChanges.find(r => r.path === row.path).previousSha256 = '0'.repeat(64);
+    assert.throws(() => verifyOpenWorkstreamsV177(predecessor), /Unreviewed V177 QA predecessor/, row.path);
+  }
+});
+
+test('the separate V177 arsenal tracker retains all source IDs, exact cells and cached counts without certifying art', () => {
+  const script = String.raw`
+import hashlib,json,sys,zipfile,xml.etree.ElementTree as E
+from pathlib import Path
+root=Path(sys.argv[1]);r=json.loads((root/'docs/arsenal/progress-v177.json').read_text());w=root/'docs/arsenal'/r['workbook']
+assert hashlib.sha256(w.read_bytes()).hexdigest()==r['workbookSha256']
+assert r['state']=='PREPUBLICATION' and not r['canonical1to1Approved'] and r['humanParticipants']==0
+assert list(r['tables'])==['01_Armes_Source_V1','02_Recettes_Source_V1','03_Correctifs_V177','04_References_Ouvertes']
+assert [len(r['tables'][k]['rows']) for k in ['01_Armes_Source_V1','02_Recettes_Source_V1','04_References_Ouvertes']]==[200,57,129]
+n={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
+with zipfile.ZipFile(w) as z:
+ assert z.testzip() is None
+ assert not any('/externalLinks/' in p or p.endswith('vbaProject.bin') for p in z.namelist())
+ book=E.fromstring(z.read('xl/workbook.xml'));names=[s.get('name') for s in book.find('m:sheets',n)]
+ assert names==['00_Synthese']+list(r['tables'])
+ def value(c):
+  if c.get('t')=='inlineStr':return ''.join(c.find('m:is',n).itertext())
+  v=c.find('m:v',n)
+  if v is None:return None
+  if c.get('t')=='b':return v.text=='1'
+  return float(v.text)
+ formulas=0;checked=0
+ for index,name in enumerate(names,1):
+  sheet=E.fromstring(z.read(f'xl/worksheets/sheet{index}.xml'));cells={c.get('r'):c for c in sheet.findall('.//m:c',n)}
+  assert not sheet.findall('.//m:c[@t="e"]',n)
+  assert value(cells['A3'])==r['workbookPublicationNoticeV164']
+  formulas+=len(sheet.findall('.//m:f',n))
+  if index==1:
+   for item in r['indicators']:
+    c=cells[item['cell']];assert '='+c.find('m:f',n).text==item['formula'];assert value(c)==item['expected']
+  else:
+   table=r['tables'][name]
+   for row,values in enumerate([table['headers']]+table['rows'],5):
+    for col,expected in enumerate(values,1):
+     assert value(cells[chr(64+col)+str(row)])==expected,(name,row,col)
+     checked+=1
+ assert formulas==len(r['indicators'])==5
+ print(json.dumps({'sheets':len(names),'formulas':formulas,'checkedCells':checked}))
+`;
+  const result = JSON.parse(execFileSync('python3', ['-B', '-c', script,
+    fileURLToPath(new URL('../', import.meta.url))], { encoding: 'utf8' }));
+  assert.deepEqual([result.sheets, result.formulas], [5, 5]);
+  assert.ok(result.checkedCells > 2300);
 });
 
 test('undeclared duplicate unsafe and unverified runtime transitions fail closed', () => {

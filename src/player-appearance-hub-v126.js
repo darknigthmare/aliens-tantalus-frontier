@@ -134,7 +134,7 @@ export function advanceHubPlayerAppearanceV126(hub) {
     actor.weaponRigMotionV125 = motion;
     return;
   }
-  if (actor.grounded && !actor.climbing && !actor.ventTransit && !actor.inVehicle
+  if (time > motion.time && actor.grounded && !actor.climbing && !actor.ventTransit && !actor.inVehicle
     && Math.abs(finite(actor.vx)) > (actor.crouching ? 8 : 12)) motion.distance += Math.abs(x - motion.x);
   Object.assign(motion, { x, y, time });
 }

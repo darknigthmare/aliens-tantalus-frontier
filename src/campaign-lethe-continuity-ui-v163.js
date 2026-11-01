@@ -50,6 +50,9 @@ export function mountLetheContinuityV163(root, { save, onPlan, onReview } = {}) 
       details.dataset.letheReturn = entry.operationId;
       const summary = element(document, 'summary', '', `Dernière sortie · ${entry.success ? 'retour confirmé' : entry.reason === 'retreat' ? 'repli' : 'liaison interrompue'}`);
       details.append(summary);
+      const protocol = element(document, 'p', 'lethe-continuity-v163__notice', `Compte rendu : ${entry.protocolLabel}`);
+      protocol.dataset.letheProtocol = entry.protocolId || 'standard';
+      details.append(protocol);
       if (chapter.complete && !entry.success)
         details.append(element(document, 'p', 'lethe-continuity-v163__notice', 'Un retour antérieur a déjà confirmé cette étape. La dernière sortie garde son propre bilan.'));
       const questions = element(document, 'div', 'lethe-continuity-v163__questions');

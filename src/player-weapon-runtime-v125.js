@@ -84,7 +84,7 @@ export function withPlayerWeaponRigV125(Base) {
         const travelled = Math.abs(x - motion.x);
         // A lift can carry an idle operator. Only genuine ground locomotion
         // advances the legs, including during a real reload transaction.
-        if (actor.grounded && !actor.climbing && !actor.ventTransit && !actor.inVehicle
+        if (now > motion.time && actor.grounded && !actor.climbing && !actor.ventTransit && !actor.inVehicle
           && Math.abs(finite(actor.vx)) > (actor.crouching ? 8 : 12)) motion.distance += travelled;
         Object.assign(motion, { time: now, x, y });
       }

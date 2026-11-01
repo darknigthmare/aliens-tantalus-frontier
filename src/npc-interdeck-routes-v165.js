@@ -3,6 +3,7 @@ import { HubGame as RosterHubV52 } from './hub-v52-runtime.js';
 import { buildHubTraversalGeometryV87 } from './hub-v51-runtime.js';
 import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 import { createServiceRouteV161 } from './npc-service-routes-v161.js';
+import { HUB_NPC_ANNEX_SERVICE_ROUTES_V163 } from './npc-annex-service-routes-v163.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141 } from './hub-annex-npc-life-v141.js';
 import { HUB_ANNEX_BY_ID_V137 } from './hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from './hub-annex-runtime-geometry-v139.js';
@@ -59,6 +60,13 @@ export function getNpcInterdeckGeometryV165(id) {
 }
 const doorsFor = deck => buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck).filter(d=>!d.lift);
 const allDoorIds = HUB_DECKS.flatMap((_,deck)=>doorsFor(deck).map(d=>d.id));
+const legacyRouteFor=d=>HUB_NPC_ANNEX_SERVICE_ROUTES_V163.find(route=>route.definition.id===d.legacyRouteId);
+function legacyOriginBookmark(d,o) {
+  if(o?.source!=='legacy-physical-owner'||!o.legacyBookmark)return null;
+  const actor=legacyRouteFor(d)?.normalize({schema:163,actor:o.legacyBookmark}).actor;
+  return actor&&actor.crewId===d.crewId&&actor.deck===o.deck&&actor.roomId===o.roomId
+    &&actor.x===o.x&&actor.y===o.y&&actor.stage==='service'&&actor.doorProgress===0?actor:null;
+}
 const normalizeDoors = value => value&&typeof value==='object'&&!Array.isArray(value)
   &&Object.entries(value).every(([id,p])=>allDoorIds.includes(id)&&finite(p)&&p>=0&&p<=1)
   ?Object.fromEntries(allDoorIds.map(id=>[id,value[id]||0])):null;
@@ -66,10 +74,14 @@ function validOrigin(d,o) {
   const room=HUB_DECKS[o?.deck]?.rooms.find(r=>r.id===o.roomId);
   return o?.crewId===d.crewId&&d.origins.includes(o.roomId)&&room&&o.y===532
     &&finite(o.x)&&o.x>=room.xStart+24&&o.x<=room.xEnd-68&&[-1,1].includes(o.facing)
-    &&['native-observed-body','legacy-physical-owner','traffic-physical-owner'].includes(o.source);
+    &&['native-observed-body','legacy-physical-owner','traffic-physical-owner'].includes(o.source)
+    &&(o.legacyBookmark==null||Boolean(legacyOriginBookmark(d,o)));
 }
 function normalizeOrigin(d,o) {
-  return validOrigin(d,o)?{crewId:d.crewId,deck:o.deck,roomId:o.roomId,x:o.x,y:532,facing:o.facing,source:o.source}:null;
+  if(!validOrigin(d,o))return null;
+  const bookmark=legacyOriginBookmark(d,o);
+  return{crewId:d.crewId,deck:o.deck,roomId:o.roomId,x:o.x,y:532,facing:o.facing,source:o.source,
+    ...(bookmark?{legacyBookmark:bookmark}:{})};
 }
 export function normalizeNpcInterdeckRoutesV165(value) {
   const routes={};
@@ -220,10 +232,29 @@ export function withHubNpcInterdeckRoutesV165(Base) {
     start(save={},options={}) {
       this.npcInterdeckSandboxV165=Boolean(options.editorProject||options.forgeJourneyV141||this.forgeSessionV141);
       this.npcInterdeckStateV165=normalizeNpcInterdeckRoutesV165(this.npcInterdeckSandboxV165?null:save.npcInterdeckRoutesV165);
+      this.npcInterdeckRetiredLegacyV177=new Set();
       for(const d of NPC_INTERDECK_DEFINITIONS_V165) {
         const e=this.npcInterdeckStateV165.routes[d.id],origin=e.actor?e.origin:e.retained;if(!origin||origin.source!=='legacy-physical-owner')continue;
-        const bookmark=save.npcAnnexRoutesV163?.routes?.[d.legacyRouteId]?.actor;
-        if(!bookmark||bookmark.roomId!==origin.roomId||bookmark.deck!==origin.deck||bookmark.x!==origin.x||bookmark.y!==origin.y)
+        let bookmark=save.npcAnnexRoutesV163?.routes?.[d.legacyRouteId]?.actor;
+        const observed=legacyOriginBookmark(d,origin),prior=save.npcAnnexRoutesV163?.routes?.[d.legacyRouteId];
+        const handoff=legacyRouteFor(d)?.normalize(prior).nativeHandoff;
+        // A later watch may have retired the old local controller before the
+        // retained body was lent to this interdeck route. Restore only its
+        // actually recorded, closed service bookmark: never a timetable pose
+        // or an invented pre-load trip, and never overwrite a physical owner.
+        if(!bookmark&&observed&&handoff?.reason==='annex-assignment'&&handoff.fromRoomId===origin.roomId){
+          bookmark=observed;
+          save={...save,npcAnnexRoutesV163:{...save.npcAnnexRoutesV163,routes:{...save.npcAnnexRoutesV163.routes,
+            [d.legacyRouteId]:{schema:163,actor:bookmark,nativeHandoff:null}}}};
+        }
+        // Older saves can still own the complete transported body even when
+        // the retired local role no longer owns a bookmark. Its explicit
+        // unobserved handoff permits restoring that active body alone. Do not
+        // invent the old local controller's missing time, distance or cycle.
+        if(!bookmark&&e.actor&&handoff?.reason==='annex-assignment'&&handoff.fromRoomId===origin.roomId)
+          this.npcInterdeckRetiredLegacyV177.add(d.id);
+        if(!this.npcInterdeckRetiredLegacyV177.has(d.id)
+          &&(!bookmark||bookmark.roomId!==origin.roomId||bookmark.deck!==origin.deck||bookmark.x!==origin.x||bookmark.y!==origin.y))
           this.npcInterdeckStateV165.routes[d.id]={actor:null,origin:null,returned:null,nativeHandoff:null,admissionReady:true};
       }
       this.npcInterdeckBodiesV165=new Map();this.npcInterdeckObservedV165=new Map();this.npcInterdeckRestoringV165=true;
@@ -275,7 +306,8 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         if(inheritedOwner)continue;
         const primary=d.legacyRouteId&&this.getNpcServiceActorV161?.(d.legacyRouteId);
         const savedOrigin=entry.actor?entry.origin:entry.retained;
-        if(this.npcInterdeckRestoringV165&&savedOrigin?.source==='legacy-physical-owner'&&!primary) {
+        if(this.npcInterdeckRestoringV165&&savedOrigin?.source==='legacy-physical-owner'&&!primary
+          &&!this.npcInterdeckRetiredLegacyV177?.has(d.id)) {
           const r=this.npcRoutineResolutionsV62?.get(d.crewId);
           if(!entry.actor&&this.npcInterdeckDutyV165(d)&&r&&!r.alert&&!r.missionAssigned&&!r.needsCare) {
             // Reserve the validated saved legacy singleton before nested
@@ -309,9 +341,12 @@ export function withHubNpcInterdeckRoutesV165(Base) {
           this.npcInterdeckObservedV165.set(d.crewId,source);
           const retained={crewId:d.crewId,deck:deckOf(source.roomId),roomId:source.roomId,x:source.x,y:source.y,
             facing:source.facing===-1?-1:1,source:primary?'legacy-physical-owner':traffic?'traffic-physical-owner':entry.retained?.source||'native-observed-body'};
-          if(!this.npcInterdeckDutyV165(d)){entry.retained=validOrigin(d,retained)?retained:null;continue;}
+          if(retained.source==='legacy-physical-owner'&&(primaryState||entry.retained?.legacyBookmark))
+            retained.legacyBookmark=primaryState||entry.retained.legacyBookmark;
+          if(!this.npcInterdeckDutyV165(d)){entry.retained=normalizeOrigin(d,retained);continue;}
           const origin={crewId:d.crewId,deck:deckOf(source.roomId),roomId:source.roomId,x:source.x,y:source.y,
-            facing:source.facing===-1?-1:1,source:primary?'legacy-physical-owner':traffic?'traffic-physical-owner':entry.retained?.source||'native-observed-body'};
+            facing:source.facing===-1?-1:1,source:primary?'legacy-physical-owner':traffic?'traffic-physical-owner':entry.retained?.source||'native-observed-body',
+            ...(retained.source==='legacy-physical-owner'&&legacyOriginBookmark(d,retained)?{legacyBookmark:legacyOriginBookmark(d,retained)}:{})};
           if(!validOrigin(d,origin))continue;
           const a=initialInterdeckActorV165(d,origin,this.npcInterdeckDoorsV165);
           entry=this.npcInterdeckStateV165.routes[d.id]={actor:a,origin,retained:null,returned:null,nativeHandoff:null,admissionReady:false};
@@ -589,17 +624,105 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         ||buildHubObstacleGeometryV87(deck).some(p=>p.collisionMode!=='one-way-top'&&overlap(box,p));
     }
     npcInterdeckPassingRequestV165(routeId) {
+      // Preserve the historical route dependency graph used by leases, relay
+      // arbitration and their native browser waiters. It does not by itself
+      // indicate physical occupation of any particular door.
       const passengers=routeId==='tamsin-proving'?['inez-civil']:['mara-archives','echo-escape'].includes(routeId)?['maksim-cockpit']
         :routeId==='cal-logistics'?['david-durandal']:routeId==='idris-engine'?['inez-civil','maksim-cockpit','jun-sanitary']
           :['asha-refuge','leila-galley'].includes(routeId)?['jun-sanitary']:[];
       return passengers.some(id=>Boolean(this.npcInterdeckStateV165?.routes[id]?.actor));
     }
+    npcInterdeckSharedServiceDoorV185(routeId) {
+      if (routeId!=='idris-engine') return this.npcInterdeckPassingRequestV165(routeId);
+      // Idris owns a local rear portal, not the entire reactor floor. A
+      // passenger blocked by the player far beyond that socket, or inside
+      // the traveling lift, cannot keep Idris at his annex post forever.
+      // A supported body at the entrance or returning through Idris's floor
+      // corridor can claim courtesy, until it physically clears that passage.
+      // Its controller, physical collisions and door checks stay authoritative.
+      const door=HUB_ANNEX_BY_ID_V137['engine-room'].parentDoorBounds;
+      const owner=this.getNpcServicePhysicalStateV165?.(routeId);
+      // The retained parent post is part of the real service floor passage.
+      // Reserving only the doorway asks Idris to turn back too late: Inez's
+      // eastbound return and Idris then meet at their native12px clearance.
+      const corridorLeft=Math.min(door.x-70,finite(owner?.homeX)?owner.homeX-12:door.x-70);
+      const corridor={x:corridorLeft,y:door.y-10,
+        w:Math.max(door.x+door.w+70,finite(owner?.homeX)?owner.homeX+44+12:door.x+door.w+70)-corridorLeft,
+        h:door.h+20};
+      return ['inez-civil','maksim-cockpit','jun-sanitary'].some(id=>{
+        const entry=this.npcInterdeckStateV165?.routes[id],a=entry?.actor;
+        if(a?.deck!==3 || a.roomId!=='reactor' || a.stage==='returned'
+          || !finite(a.x) || !finite(a.y) || Math.abs(a.y-532)>=16)return false;
+        const definition=NPC_INTERDECK_DEFINITIONS_V165.find(d=>d.id===id);
+        let goal=null;
+        if(a.direction==='return'&&a.stage==='walking-home')goal=entry.origin?.x;
+        else if(a.direction==='outbound'&&a.stage==='walking-portal'){
+          const face=getNpcInterdeckGeometryV165(id).faces.parent;
+          goal=face.opening.x+(face.opening.w-44)/2;
+        }else if(['walking-lift','waiting-lift'].includes(a.stage)){
+          const cabinX=npcLiftSocketV165(a.deck,definition.shaftId).x-22;
+          goal=cabinX+(Math.sign(a.x-cabinX)||-1)*96;
+        }
+        // Only an authentic current floor journey through the saved service
+        // corridor may reserve it. A remote walker heading to the lift or a
+        // traveling cabin does not gain priority over Idris's own watch.
+        if(finite(goal)&&Math.min(a.x,goal)<=corridor.x+corridor.w
+          &&Math.max(a.x,goal)+44>=corridor.x)return true;
+        return overlap({x:a.x,y:a.y,w:44,h:92},
+          {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
+      });
+    }
+    /** V198 distinguishes a remote interdeck dependency from an occupied
+     * physical service entrance. Jun's route may be active on an unrelated
+     * deck for hours; that cannot freeze Leila or Asha inside their annex.
+     * Only a real, supported body overlapping the parent door approach
+     * reserves the shared aperture. Actual collisions remain authoritative.
+     * This does NOT alter the historical passenger dependency graph. */
+    npcInterdeckSharedServiceDoorV198(routeId) {
+      if(routeId==='idris-engine')return this.npcInterdeckSharedServiceDoorV185(routeId);
+      const annexId=routeId==='leila-galley'?'galley-service'
+        :routeId==='asha-refuge'?'personal-refuge':null;
+      if(!annexId)return this.npcInterdeckPassingRequestV165(routeId);
+      const annex=HUB_ANNEX_BY_ID_V137[annexId];
+      const a=this.npcInterdeckStateV165?.routes['jun-sanitary']?.actor;
+      const door=annex?.parentDoorBounds;
+      if(!a||!door||a.stage==='returned'||!finite(a.x)||!finite(a.y)
+        ||a.deck!==deckOf(annex.parentRoomId)||a.roomId!==annex.parentRoomId)return false;
+      // The refuge and galley share their parent floor with Jun's real
+      // journey. A doorway-only test let Leila leave her galley against Jun
+      // crossing the mess in the opposite direction (native x1660/x1716).
+      // Reserve only the matching room and support while Jun actually walks.
+      const sharedCorridor=['asha-refuge','leila-galley'].includes(routeId) && Math.abs(a.y-532)<16
+        && ['walking-lift','waiting-lift','walking-portal','walking-home'].includes(a.stage);
+      if(sharedCorridor)return true;
+      // Other phases reserve only the bounded doorway; a remote or elevated
+      // actor cannot claim it merely because its route exists.
+      return overlap({x:a.x,y:a.y,w:44,h:92},
+        {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
+    }
     getNpcServicePassingDutyV165(routeId,actor) {
+      if(routeId==='idris-engine') {
+        if(this.npcInterdeckSharedServiceDoorV185(routeId))return true;
+        // A remote passenger has no courtesy request here. Returning false
+        // would cancel Idris's authentic watch, release his parent owner and
+        // re-admit an unobserved annex timetable pose after elapsed hours.
+        return super.getNpcServicePassingDutyV165?.(routeId,actor);
+      }
+      if(['leila-galley','asha-refuge'].includes(routeId)) {
+        if(this.npcInterdeckSharedServiceDoorV198(routeId))return true;
+        // Let the authentic V141 schedule own duty when Jun is remote.
+        // Returning false here would incorrectly cancel a legitimate watch.
+        return super.getNpcServicePassingDutyV165?.(routeId,actor);
+      }
       if(this.npcInterdeckPassingRequestV165(routeId))return true;
       return super.getNpcServicePassingDutyV165?.(routeId,actor);
     }
     shouldHoldNpcServiceOwnerV165(routeId,actor,state) {
-      return this.npcInterdeckPassingRequestV165(routeId)||Boolean(super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
+      const passing=['leila-galley','asha-refuge'].includes(routeId)
+        ?this.npcInterdeckSharedServiceDoorV198(routeId)
+        :routeId==='idris-engine'?this.npcInterdeckSharedServiceDoorV185(routeId)
+          :this.npcInterdeckPassingRequestV165(routeId);
+      return Boolean(passing||super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
     }
     getNpcServiceOwnerYieldGoalV165(routeId,actor) {
       if(routeId==='david-durandal') {

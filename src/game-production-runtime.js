@@ -11,7 +11,7 @@ import { withAlienSurvivalRuntimeV70 } from './alien-survival-runtime-v70.js';
 import { captureGameplaySupportV72, restoreGameplaySupportV72 } from './gameplay-support-v72.js';
 import { captureTacticalReloadV77, restoreTacticalReloadV77, cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
-import { getWeaponPresentationProfileV124 } from './weapon-presentation-profiles-v124.js';
+import { canInitializeDetachableFeedV193 } from './weapon-feed-admission-v193.js';
 import { createLegacyWeaponFeedV167, captureWeaponFeedV167, restoreWeaponFeedV167,
   spendAcceptedRoundV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
 import { createWeaponMasteryV167, awardAcceptedWeaponDamageV167,
@@ -47,7 +47,7 @@ import { withForgeMissionRuntimeV141 } from './forge-mission-runtime-v141.js';
 import { withForgeDecorationV141 } from './forge-decoration-v141.js';
 import { withMotionTrackerV160 } from './motion-tracker-v160.js';
 import { withMagazineRecoveryWorldV168 } from './weapon-magazine-recovery-runtime-v168.js';
-import { captureMagazineFeedV168, restoreMagazineFeedV168 } from './weapon-magazine-world-v168.js';
+import { captureMagazineFeedV168, restoreEquippedMagazineFeedV177 } from './weapon-magazine-world-v168.js';
 import { withArchiveRelayPresentationV160 } from './archive-relay-presentation-v160.js';
 
 export * from './game-production-core.js';
@@ -102,14 +102,11 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
       const actor = this[role];
       if (!actor || role === 'coop' && !this.coopEnabled || actor.weaponFeedV167) continue;
       const descriptor = this.reloadWeaponV77?.(actor);
-      const weaponId = descriptor && typeof descriptor === 'object' ? descriptor.id : null;
-      const presentation = getWeaponPresentationProfileV124(descriptor);
-      const feed = presentation?.reload?.feed;
-      if (!/^weapon-\d{3}-[a-z0-9-]+$/.test(weaponId || '')
-        || !['box', 'drum', 'belt', 'cell', 'tank'].includes(feed)) continue;
-      actor.weaponFeedV167 = createLegacyWeaponFeedV167({ weaponId,
-        ownerId: role, ammoTypeId: presentation.ammunition || 'unspecified',
-        magazineSize: actor.magazineSize, ammo: actor.ammo, reserve: actor.ammoReserve, feed });
+      const policy = canInitializeDetachableFeedV193(descriptor, actor);
+      if (!policy.detachable) continue;
+      actor.weaponFeedV167 = createLegacyWeaponFeedV167({ weaponId: policy.weaponId,
+        ownerId: role, ammoTypeId: policy.ammoType, magazineSize: actor.magazineSize,
+        ammo: actor.ammo, reserve: actor.ammoReserve, feed: policy.feed });
     }
   }
 
@@ -138,9 +135,18 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
     const weaponFeedRestoredV167 = {};
     for (const role of ['player', 'coop']) {
       const actor = this[role];
-      const carried = Number(actor?.ammo) + Number(actor?.ammoReserve);
-      actor.weaponFeedV167 = restoreMagazineFeedV168(rawState?.[role]?.weaponFeedV167, {
-        ownerId: role, expectedCarriedRounds: Number.isSafeInteger(carried) && carried >= 0 ? carried : null });
+      if (!actor) {
+        weaponFeedRestoredV167[role] = false;
+        tacticalReloadRestoredV77[role] = false;
+        continue;
+      }
+      const descriptor = this.reloadWeaponV77(actor);
+      const weaponId = descriptor && typeof descriptor === 'object' ? descriptor.id : null;
+      actor.weaponFeedV167 = restoreEquippedMagazineFeedV177(rawState?.[role]?.weaponFeedV167, {
+        ownerId: role, weaponId, magazineSize: actor.magazineSize,
+        loaded: actor.ammo, reserve: actor.ammoReserve,
+        enabled: this.experimentalPhysicalMagazinesV167
+          && canInitializeDetachableFeedV193(descriptor, actor).detachable });
       weaponFeedRestoredV167[role] = Boolean(actor.weaponFeedV167);
       tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(actor, rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(actor));
       if (this[role]?.reloading) this[role].actionClock = this[role].reloadClock;
