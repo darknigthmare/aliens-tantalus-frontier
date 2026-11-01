@@ -1078,3 +1078,105 @@ test('annex-service QA keeps native prerequisite gates, projected offsets and on
   assert.match(results[5].error, /keeps the real projected arrival/);
   for (const result of results.slice(2)) { assert.ok(result.error); assert.equal(result.passages.length, 0); }
 });
+
+test('annex-service QA retains an exact failed Jun prerequisite before its unchanged blocking assertion', () => {
+  // Execute the actual Python control path with a disclosed fake page. This
+  // proves evidence retention and failure ordering, not a native journey.
+  const python = String.raw`
+import ast,json,tempfile,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+names={'prepare_asha_return_dependency','export_asha_return_dependency'}
+helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names]
+assert len(helpers)==2
+results=[]
+for reason in ['jun-wall-budget-exhausted','jun-no-physical-progress','jun-simulation-budget-exhausted','jun-origin-mismatch']:
+  ack={'status':'failed','reason':reason,'simSeconds':310,'wallMs':900001,'lastProgressAgeMs':16,'returned':None,'observedOrigin':{'crewId':'crew-11-jun-park'}}
+  full={**ack,'frames':9100,'origin':{'nativeTime':2},'latest':{'nativeTime':312},'samples':[{'diagnostic':{'cachedPeers':[{'crewId':'actual-peer','x':1234}]}}]}
+  events=[]
+  class Page:
+    def evaluate(self,code):
+      events.append('evaluate')
+      return ack if code.startswith('async') else full
+  def check(label,condition):
+    events.append('assertion')
+    assert condition,label
+  with tempfile.TemporaryDirectory() as directory:
+    namespace={'json':json,'output':Path(directory),'report':{},'phase':lambda x:events.append('phase'),
+      'pass_asha_dependency_door':lambda *a:events.append('native-door'),
+      'arm_asha_return_dependency':lambda *a:events.append('arm'),
+      'ensure_return_occupant':lambda *a:events.append('occupant'),'check':check,'print':lambda *a,**k:None}
+    exec(compile(ast.Module(body=helpers,type_ignores=[]),'<actual-prerequisite-receipt>','exec'),namespace)
+    try: namespace['prepare_asha_return_dependency'](Page(),{'id':'asha-refuge'})
+    except AssertionError as error: failure=str(error)
+    else: raise AssertionError('A failed native prerequisite was accepted')
+    path=Path(directory)/'asha-refuge-jun-physical-prerequisite.json'
+    assert path.is_file(),'The exact failed dependency must be retained before its blocking assertion'
+    assert json.loads(path.read_text())==full
+    assert namespace['report']['ashaDependencyAcknowledgements']==[ack]
+    assert namespace['report']['ashaDependencyWaits']==[full]
+    assert events==['phase','native-door','arm','evaluate','evaluate','assertion'],events
+    assert failure=='asha-refuge: Jun completes its exact native physical return before Asha occupation'
+    results.append({'reason':reason,'retained':True,'blockingAssertionPreserved':True,'nativeExitAfterFailure':False})
+ack={'status':'returned','reason':'jun-complete-native-return','simSeconds':310,'wallMs':435000,'lastProgressAgeMs':16,'returned':{'observedTravel':True},'observedOrigin':{'crewId':'crew-11-jun-park'}}
+events=[]
+class Page:
+  def evaluate(self,code):
+    events.append('evaluate')
+    assert code.startswith('async'),'A successful acknowledgement must defer its large sample export until after the occupied opening'
+    return ack
+with tempfile.TemporaryDirectory() as directory:
+  namespace={'json':json,'output':Path(directory),'report':{},'phase':lambda x:events.append('phase'),
+    'pass_asha_dependency_door':lambda *a:events.append('native-door'),
+    'arm_asha_return_dependency':lambda *a:events.append('arm'),
+    'ensure_return_occupant':lambda *a:events.append('occupant'),
+    'check':lambda label,condition:events.append('assertion') if condition else (_ for _ in ()).throw(AssertionError(label)),
+    'print':lambda *a,**k:None}
+  exec(compile(ast.Module(body=helpers,type_ignores=[]),'<actual-prerequisite-receipt>','exec'),namespace)
+  namespace['prepare_asha_return_dependency'](Page(),{'id':'asha-refuge'})
+  assert events==['phase','native-door','arm','evaluate','assertion','phase','native-door','occupant'],events
+  assert list(Path(directory).iterdir())==[]
+  assert namespace['report']['ashaDependencyAcknowledgements']==[ack]
+  assert 'ashaDependencyWaits' not in namespace['report']
+results.append({'reason':'jun-complete-native-return','largeExportDeferred':True,'nativeExitContinued':True})
+print(json.dumps(results))`;
+  const path = process.env.ATF_QA_ANNEX_SERVICE_SOURCE || new URL('qa-npc-annex-service-routes-v163.py', import.meta.url).pathname;
+  const results = JSON.parse(execFileSync('python3', ['-B', '-c', python, path], { encoding: 'utf8' }));
+  assert.equal(results.length, 5);
+  for (const result of results.slice(0, 4)) {
+    assert.equal(result.retained, true); assert.equal(result.blockingAssertionPreserved, true);
+    assert.equal(result.nativeExitAfterFailure, false);
+  }
+  assert.equal(results[4].largeExportDeferred, true); assert.equal(results[4].nativeExitContinued, true);
+});
+
+test('annex-service QA logs bounded failed Jun identity and progress without transferring samples on success', async () => {
+  const source = serviceQaCallbackV163('prepare_asha_return_dependency');
+  const origin = { crewId: 'crew-11-jun-park', deck: 3, roomId: 'life-support', x: 3158, y: 532, source: 'legacy-physical-owner' };
+  const actor = { crewId: origin.crewId, deck: 1, roomId: 'mess', stage: 'walking-lift', direction: 'return', x: 2254, y: 532,
+    reason: 'occupied', crossings: 2, liftJourneys: 1, verticalDistance: 496, distance: 8276, time: 300, velocity: 0, lift: { phase: 'boarding' } };
+  const first = { status: 'failed', reason: 'jun-wall-budget-exhausted', simSeconds: 300, wallMs: 900001, lastProgressAgeMs: 10,
+    frames: 8900, observedOrigin: origin, latest: { running: true, nativeTime: 302, deck: 1, annex: 'personal-refuge',
+      player: { x: 125, y: 532, w: 44, h: 92, vx: 0, alive: true }, dependency: { actor, origin, returned: null } },
+    samples: Array(900).fill({ diagnosticSamples: 'not-for-log'.repeat(200) }) };
+  for (const kind of ['failure', 'never-observed', 'success']) {
+    const full = structuredClone(first);
+    if (kind === 'never-observed') { full.latest = null; full.frames = 0; full.observedOrigin = null; }
+    if (kind === 'success') {
+      full.status = 'returned'; full.reason = 'jun-complete-native-return'; full.latest.dependency.actor = null;
+      full.latest.dependency.returned = { ...origin, observedTravel: true, crossings: 2, liftJourneys: 2, verticalDistance: 496 };
+    }
+    const fn = runInContext('(' + source + ')', createContext({ window: { __ATF_ASHA_JUN_DEPENDENCY_V163__: Promise.resolve(full) } }));
+    const ack = JSON.parse(JSON.stringify(await fn()));
+    assert.equal(ack.status, full.status); assert.equal(ack.reason, full.reason);
+    assert.equal('samples' in ack, false); assert.equal(JSON.stringify(ack).includes('not-for-log'), false);
+    assert.ok(JSON.stringify(ack).length < 2500, 'Only compact scalar diagnostics cross before the blocking assertion.');
+    if (kind === 'success') assert.equal('failure' in ack, false, 'A real success keeps the small original acknowledgement.');
+    else {
+      assert.equal(ack.failure.frames, full.frames);
+      assert.deepEqual(ack.failure.actor, kind === 'never-observed' ? null : Object.fromEntries(Object.entries(actor).filter(([k]) => k !== 'lift')));
+      assert.deepEqual(ack.failure.player, full.latest?.player || null); assert.deepEqual(ack.failure.origin, full.latest?.dependency.origin || null);
+      assert.equal(ack.failure.liftPhase, kind === 'never-observed' ? null : 'boarding');
+    }
+  }
+});

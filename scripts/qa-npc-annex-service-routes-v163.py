@@ -291,9 +291,19 @@ def arm_asha_return_dependency(page, config):
     page.evaluate('''opts=>{const createProgress=(''' + NATIVE_ASHA_DEPENDENCY_V163 + ''');
       window.__ATF_ASHA_JUN_DEPENDENCY_V163__=new Promise(resolve=>{
         const h=__ATF_HUB__,started=performance.now(),progress=createProgress(opts,started),samples=[];
-        let done=false,raf,latest=null,origin=null,lastSampleAt=-Infinity,frames=0;
+        let done=false,raf,latest=null,origin=null,lastSampleAt=-Infinity,lastLogAt=started,frames=0;
+        const body=a=>a?Object.fromEntries(['crewId','roomId','x','y','w','h','vx','vy','alive','downed',
+          'workClock','supportClock','alertClock'].map(k=>[k,a[k]])):null;
+        const telemetry=()=>({lastFrameAt:h.last,visibility:document.visibilityState,
+          localBodies:(h.npcs||[]).map(body),
+          cachedPeers:Object.getOwnPropertySymbols(h).filter(k=>k.description?.startsWith('peers:'))
+            .map(k=>({owner:k.description,bodies:Array.isArray(h[k])?h[k].map(body):[]})),
+          interdeck:structuredClone(h.npcInterdeckStateV165||null),
+          traffic:structuredClone(h.npcTrafficStateV163||null),
+          interdeckDoors:structuredClone(h.npcInterdeckDoorsV165||null)});
         function finish(status,reason){if(done)return;done=true;clearInterval(timer);cancelAnimationFrame(raf);
-          resolve({status,reason,frames,...progress.snapshot(performance.now()),origin,latest,samples});}
+          resolve({status,reason,frames,...progress.snapshot(performance.now()),origin,latest,samples,
+            diagnostic:telemetry()});}
         function frame(){if(done)return;frames++;const now=performance.now(),snap=h.getSnapshot(),
           route=snap.npcAnnexRoutesV163.routes[opts.id],p=h.player,r=h.npcRoutineResolutionsV62?.get('crew-11-jun-park');
           latest={nativeTime:h.animationTime,running:h.running,deck:h.state.deck,annex:h.currentAnnexV71?.()?.id||null,
@@ -303,8 +313,13 @@ def arm_asha_return_dependency(page, config):
             passageRequested:h.npcInterdeckPassingRequestV165?.(opts.id)===true,
             routine:r?{missionAssigned:r.missionAssigned,needsCare:r.needsCare,alert:r.alert}:null};
           origin ||= latest;
-          if(now-lastSampleAt>=1000){samples.push(latest);if(samples.length>900)samples.shift();lastSampleAt=now;}
+          if(now-lastSampleAt>=1000){samples.push({...latest,diagnostic:telemetry()});if(samples.length>900)samples.shift();lastSampleAt=now;}
           const result=progress.observe(latest,now);
+          if(now-lastLogAt>=30000){globalThis.console?.log('ATF_ASHA_DEPENDENCY '+JSON.stringify({
+            ...progress.snapshot(now),frames,result,
+            actor:latest.dependency?.actor?Object.fromEntries(['crewId','deck','roomId','stage','direction',
+              'x','y','reason','crossings','liftJourneys','verticalDistance','distance','time','velocity']
+              .map(k=>[k,latest.dependency.actor[k]])):null}));lastLogAt=now;}
           if(result.status!=='waiting')return finish(result.status,result.reason);
           raf=requestAnimationFrame(frame);
         }
@@ -318,10 +333,23 @@ def prepare_asha_return_dependency(page, config):
     pass_asha_dependency_door(page, config, True)
     arm_asha_return_dependency(page, config)
     acknowledgement = page.evaluate('''async()=>{const r=await window.__ATF_ASHA_JUN_DEPENDENCY_V163__;
-      return{status:r.status,reason:r.reason,simSeconds:r.simSeconds,wallMs:r.wallMs,
+      const ack={status:r.status,reason:r.reason,simSeconds:r.simSeconds,wallMs:r.wallMs,
         lastProgressAgeMs:r.lastProgressAgeMs,returned:r.latest?.dependency?.returned||null,
-        observedOrigin:r.observedOrigin};}''')
+        observedOrigin:r.observedOrigin};
+      if(r.status!=='returned'){
+        const s=r.latest,a=s?.dependency?.actor;
+        ack.failure={frames:r.frames,running:s?.running??null,nativeTime:s?.nativeTime??null,
+          deck:s?.deck??null,annex:s?.annex??null,player:s?.player||null,
+          origin:s?.dependency?.origin||null,
+          actor:a?Object.fromEntries(['crewId','deck','roomId','stage','direction','x','y','reason',
+            'crossings','liftJourneys','verticalDistance','distance','time','velocity']
+            .map(k=>[k,a[k]])):null,liftPhase:a?.lift?.phase||null};
+      }
+      return ack;}''')
     report.setdefault('ashaDependencyAcknowledgements', []).append(acknowledgement)
+    print('ASHA_DEPENDENCY_ACK ' + json.dumps(acknowledgement), flush=True)
+    if acknowledgement['status'] != 'returned':
+        export_asha_return_dependency(page, config)
     check(config['id'] + ': Jun completes its exact native physical return before Asha occupation',
           acknowledgement['status'] == 'returned')
     # Avoid transferring the large sample history while Asha starts its29s walk.
@@ -604,6 +632,8 @@ with sync_playwright() as pw:
             page.on('requestfailed', lambda request: report['requestFailures'].append({'url': request.url, 'failure': request.failure}))
             page.on('response', lambda response: report['httpErrors'].append({'url': response.url, 'status': response.status}) if response.status >= 400 else None)
             page.on('dialog', lambda dialog: dialog.accept())
+            page.on('console', lambda message: print(message.text, flush=True)
+                    if message.text.startswith('ATF_ASHA_DEPENDENCY ') else None)
             phase(prefix + ': native05h30 import')
             page.goto(args.base, wait_until='domcontentloaded')
             page.locator('#title-start').click(timeout=45000)
