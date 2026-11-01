@@ -204,6 +204,8 @@ const SHELL = Object.freeze([
   '/src/combat-captions-v84.js',
   '/src/content-core-v50.js',
   '/src/content.js',
+  '/src/alien-base-public-v1.js',
+  '/src/alien-base-registry-v1.js',
   '/src/costume-ui-v119.js',
   '/src/crew-conversation-memory-v135.js',
   '/src/crew-conversations-v120.js',
