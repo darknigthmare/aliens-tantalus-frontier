@@ -1,3 +1,4 @@
+import { resolveAlienBaseIdentityV1 } from './alien-base-bridge-v1.js';
 import { USER_PACK_V100 } from './user-pack-v100.js';
 import { ENEMY_IMPORT_ADMISSIONS_V106 } from './enemy-import-admissions-v106.js';
 
@@ -76,6 +77,7 @@ export function getEnemyCatalogPolicyV105(entry = {}) {
   const automaton = AUTOMATON_IDS.has(entry.id)
     || entry.mechanical === true && /combat.?automaton/i.test(entry.lineage || '');
   return Object.freeze({
+    sharedEntityId: resolveAlienBaseIdentityV1('enemies', entry.id)?.id ?? null,
     biology,
     family: automaton ? 'automaton' : biology,
     faction: text(entry.faction) !== UNKNOWN ? text(entry.faction)

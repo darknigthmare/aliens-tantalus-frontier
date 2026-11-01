@@ -39,3 +39,5 @@ export const RELEASE = Object.freeze({
   subtitle: 'Frontière — archives cohérentes et publication vérifiable',
   sourceVersion: APP_RELEASE_V143.sourceVersion
 });
+
+export { SHARED_ALIEN_BASE_V1, resolveAlienBaseIdentityV1, summarizeAlienBaseCoverageV1 } from './alien-base-bridge-v1.js';
