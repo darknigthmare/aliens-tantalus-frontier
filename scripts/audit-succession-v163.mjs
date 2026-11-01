@@ -451,6 +451,22 @@ export const NPC_SERVICE_OBSERVER_V204 = Object.freeze({
   previousServiceDriverSha256: '15d51ddde8d37a18e3c4f529401220e03229bdb8fadeac93b4c0c982fe9cb73d',
   serviceDriverSha256: '5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06'
 });
+/** V205 adds a physical retreat from Asha's occupied source doorway. The
+ * historical factory, V204 verifier and driver fingerprints stay unchanged. */
+export const NPC_SOURCE_EXIT_V205_SUCCESSORS = Object.freeze({
+  'src/npc-service-routes-v161.js': Object.freeze({
+    previousSha256: 'd3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750',
+    currentSha256: 'a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c'
+  })
+});
+export const NPC_SERVICE_OBSERVER_V205 = Object.freeze({
+  path: NPC_SERVICE_OBSERVER_V204.path,
+  previousSha256: NPC_SERVICE_OBSERVER_V204.currentSha256,
+  currentSha256: '16e03429287a533a74929d0f53441ae74f31ae7559ba610dfebf1cec425fe4be',
+  driver: NPC_SERVICE_OBSERVER_V204.driver,
+  previousDriverSha256: NPC_SERVICE_OBSERVER_V204.driverSha256,
+  driverSha256: '470fc38f0457885887762018d0a128c00d494433c81c038888dfecd897d220e6'
+});
 
 /** V194: source-only magazine transaction anti-replay fix, preserving the
  * original V167 evidence. A long caller ID must never spend real ammunition
@@ -548,6 +564,12 @@ export const V165_VERIFIER_SUCCESSORS_V204 = Object.freeze({
     currentSha256: '7c09502f7082753edf01733de37db5aff4857002d02b1706537d9e3954498440'
   })
 });
+export const V165_VERIFIER_SUCCESSORS_V205 = Object.freeze({
+  'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+    previousSha256: V165_VERIFIER_SUCCESSORS_V204['scripts/verify-audit-continuation-v163.mjs'].currentSha256,
+    currentSha256: 'e6a3782011e424fdaae3a7597ad190d55d4f2b1e4705cd56435305213c660148'
+  })
+});
 
 /** Single, reviewed successor chain. Each hop must match its exact previous
  * SHA256. This never treats the historical V165 record as contemporary bytes.
@@ -577,15 +599,16 @@ export const V165_VERIFIER_STAGES_V184 = Object.freeze([
   [200,V165_VERIFIER_SUCCESSORS_V200],
   [202,V165_VERIFIER_SUCCESSORS_V202],
   [203,V165_VERIFIER_SUCCESSORS_V203],
-  [204,V165_VERIFIER_SUCCESSORS_V204]
+  [204,V165_VERIFIER_SUCCESSORS_V204],
+  [205,V165_VERIFIER_SUCCESSORS_V205]
 ].map(([version,receipts]) => Object.freeze({version,receipts})));
 export function resolveLatestV165VerifierReceipt(path) {
   if (path === NPC_INTERDECK_VERIFIER_V188.path)
     return Object.freeze({ version: 204, previousSha256: NPC_INTERDECK_VERIFIER_V204.previousSha256,
       currentSha256: NPC_INTERDECK_VERIFIER_V204.currentSha256 });
   if (path === NPC_SERVICE_OBSERVER_V203.path)
-    return Object.freeze({ version: 204, previousSha256: NPC_SERVICE_OBSERVER_V204.previousSha256,
-      currentSha256: NPC_SERVICE_OBSERVER_V204.currentSha256 });
+    return Object.freeze({ version: 205, previousSha256: NPC_SERVICE_OBSERVER_V205.previousSha256,
+      currentSha256: NPC_SERVICE_OBSERVER_V205.currentSha256 });
   if (!Object.hasOwn(V165_VERIFIER_SUCCESSORS_V171,path)) return null;
   let latest = null;
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -803,6 +826,10 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
             : newest ? 'Unreviewed V170 runtime successor: ' + path
               : armory ? 'Unreviewed V169 runtime successor: ' + path
                 : 'Unreviewed V167 runtime successor: ' + path);
+    } else if (Object.hasOwn(NPC_SOURCE_EXIT_V205_SUCCESSORS,path)) {
+      const receipt=NPC_SOURCE_EXIT_V205_SUCCESSORS[path];
+      assert.equal(receipt.previousSha256,expected,'Invalid V163-to-V205 source exit predecessor: '+path);
+      assert.equal(sha(readSource(path)),receipt.currentSha256,'Unreviewed V205 physical source exit: '+path);
     } else {
       const npcV185 = NPC_INTERDECK_V185_SOURCE_SUCCESSORS[path];
       if(npcV185){
@@ -930,10 +957,14 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
     'Broken V203-to-V204 service observer verifier chain');
   assert.equal(NPC_SERVICE_OBSERVER_V204.previousDriverSha256,NPC_SERVICE_OBSERVER_V203.driverSha256,
     'Broken V203-to-V204 service observer driver chain');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.path)),
-    NPC_SERVICE_OBSERVER_V204.currentSha256, 'Unreviewed V204 service observer verifier');
-  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.driver)),
-    NPC_SERVICE_OBSERVER_V204.driverSha256, 'Unreviewed V204 service observer driver');
+  assert.equal(NPC_SERVICE_OBSERVER_V205.previousSha256,NPC_SERVICE_OBSERVER_V204.currentSha256,
+    'Broken V204-to-V205 service observer verifier chain');
+  assert.equal(NPC_SERVICE_OBSERVER_V205.previousDriverSha256,NPC_SERVICE_OBSERVER_V204.driverSha256,
+    'Broken V204-to-V205 service observer driver chain');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V205.path)),
+    NPC_SERVICE_OBSERVER_V205.currentSha256, 'Unreviewed V205 service observer verifier');
+  assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V205.driver)),
+    NPC_SERVICE_OBSERVER_V205.driverSha256, 'Unreviewed V205 service observer driver');
   assert.equal(sha(readSource(NPC_SERVICE_OBSERVER_V204.serviceDriver)),
     NPC_SERVICE_OBSERVER_V204.serviceDriverSha256, 'Unreviewed V204 service arrival driver');
   for (const {version,receipts} of V165_VERIFIER_STAGES_V184) {
@@ -1036,6 +1067,7 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
   // Never mutate V163 archival hashes. An explicit effective read exports the
   // exact, previously validated successor set to legacy audit callers.
   return effective ? Object.freeze({ ...current.runtimeSourceSha256,
+    ...Object.fromEntries(Object.entries(NPC_SOURCE_EXIT_V205_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),

@@ -325,6 +325,7 @@ def prepare_asha_return_dependency(page, config):
     check(config['id'] + ': Jun completes its exact native physical return before Asha occupation',
           acknowledgement['status'] == 'returned')
     # Avoid transferring the large sample history while Asha starts its29s walk.
+    phase(config['id'] + ': native refuge exit after the observed Jun physical return')
     pass_asha_dependency_door(page, config, False)
     ensure_return_occupant(page, config, 'after the observed Jun physical return')
 

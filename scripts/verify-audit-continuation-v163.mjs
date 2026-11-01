@@ -23,6 +23,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   NPC_INTERDECK_VERIFIER_V188, NPC_INTERDECK_VERIFIER_V198, NPC_INTERDECK_VERIFIER_V201,
   NPC_INTERDECK_V203_WATCH_SUCCESSORS, NPC_INTERDECK_VERIFIER_V203, NPC_SERVICE_OBSERVER_V203,
   NPC_INTERDECK_V204_PASSAGE_SUCCESSORS, NPC_INTERDECK_VERIFIER_V204, NPC_SERVICE_OBSERVER_V204,
+  NPC_SOURCE_EXIT_V205_SUCCESSORS, NPC_SERVICE_OBSERVER_V205,
   ARMORY_V178_RENDER_SUCCESSORS, ARMORY_V186_CROP_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
@@ -98,6 +99,7 @@ test('the full current bridge validates runtime bytes and older default returns 
   const v160 = JSON.parse(read(prefix + 'progress-v160.json'));
   assert.deepEqual(resolveAuditSourcesV162(v161), previous.runtimeSourceSha256);
   const approvedEffectiveV174 = { ...current.runtimeSourceSha256,
+    ...Object.fromEntries(Object.entries(NPC_SOURCE_EXIT_V205_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
@@ -190,16 +192,31 @@ test('V198 physically local Jun passage only: preserve remote dependency graph w
 test('V203 service observer pins its physical approach regression and real Python driver while retaining frozen V163 evidence', () => {
   const receipt=NPC_SERVICE_OBSERVER_V203;
   assert.equal(current.verifierSourceSha256V165[receipt.path],receipt.previousSha256);
-  const latest=NPC_SERVICE_OBSERVER_V204;
-  assert.equal(latest.previousSha256,receipt.currentSha256);
-  assert.equal(latest.previousDriverSha256,receipt.driverSha256);
+  const intermediate=NPC_SERVICE_OBSERVER_V204,latest=NPC_SERVICE_OBSERVER_V205;
+  assert.equal(intermediate.previousSha256,receipt.currentSha256);
+  assert.equal(intermediate.previousDriverSha256,receipt.driverSha256);
+  assert.equal(latest.previousSha256,intermediate.currentSha256);
+  assert.equal(latest.previousDriverSha256,intermediate.driverSha256);
   assert.equal(sha(read(receipt.path)),latest.currentSha256);
   assert.equal(sha(read(receipt.driver)),latest.driverSha256);
   for(const [path,label] of [[receipt.path,'verifier'],[receipt.driver,'driver']]){
     const tampered=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_OBSERVER')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),
-      new RegExp('Unreviewed V204 service observer '+label),path);
+      new RegExp('Unreviewed V205 service observer '+label),path);
   }
+});
+
+test('V205 physical source exit keeps its exact V163 factory predecessor and rejects unreviewed collision or courtesy changes',()=>{
+  const path='src/npc-service-routes-v161.js',receipt=NPC_SOURCE_EXIT_V205_SUCCESSORS[path];
+  assert.deepEqual(Object.keys(NPC_SOURCE_EXIT_V205_SUCCESSORS),[path]);
+  assert.equal(receipt.previousSha256,current.runtimeSourceSha256[path]);
+  assert.equal(sha(read(path)),receipt.currentSha256);
+  assert.equal(NPC_SERVICE_OBSERVER_V205.previousSha256,NPC_SERVICE_OBSERVER_V204.currentSha256);
+  assert.equal(NPC_SERVICE_OBSERVER_V205.previousDriverSha256,NPC_SERVICE_OBSERVER_V204.driverSha256);
+  const mutated=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_DOOR_CLEARANCE')]):read(target);
+  assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutated),/Unreviewed V205 physical source exit/);
+  const invented=clone(current);invented.runtimeSourceSha256[path]=receipt.currentSha256;
+  assert.throws(()=>verifyAuditSuccessionV163(previous,invented),/Invalid V163-to-V205 source exit predecessor/);
 });
 
 test('V204 pins the native service arrival observer without accepting a changed driver or rewriting its predecessor',()=>{
@@ -341,7 +358,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     assert.equal(sha(read(path)), reviewed.currentSha256, path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
-      /Unreviewed V204|Unreviewed V203|Unreviewed V202|Unreviewed V200|Unreviewed V199|Unreviewed V197|Unreviewed V195|Unreviewed V194|Unreviewed V188|Unreviewed V187|Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
+      /Unreviewed V205|Unreviewed V204|Unreviewed V203|Unreviewed V202|Unreviewed V200|Unreviewed V199|Unreviewed V197|Unreviewed V195|Unreviewed V194|Unreviewed V188|Unreviewed V187|Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
   }
 });
 

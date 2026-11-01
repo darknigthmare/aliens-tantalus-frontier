@@ -11304,39 +11304,48 @@
   "actions": [
     [
       "IDRIS-WATCH",
-      "Origine du service 05h → 09h",
-      "C165-ROUTES / 26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Le duty distant ne doit pas effacer le corps au réacteur.",
-      "Tests de régression avant/après ; recette V161 à rejouer.",
-      "Retour natif complet et suite partagée exigés."
+      "Origine et retour du service Idris",
+      "21_ChantiersV161!A8 ; 26_ChantiersV165!A8",
+      "CORRIGÉ ET VÉRIFIÉ",
+      "Retour natif complet, sauvegarde/rechargement des portes et arrivées au poste effectivement observées.",
+      "3fb2ad87605a8eb57eb765b4985182ca8ace961c ; QA161 complète : 39 contrôles / 24 captures pour les deux routes. Rapport SHA256 8ac40f140dab902d72dcd759e48e1e095ab74239eebc11f8d1267fcf733476f2",
+      "Validation technique bornée à cette recette et ce commit ; aucune nouvelle approbation artistique 1:1."
+    ],
+    [
+      "LEILA-RETURN",
+      "Retour du service Leila",
+      "21_ChantiersV161!A8 ; 26_ChantiersV165!A8",
+      "CORRIGÉ ET VÉRIFIÉ",
+      "Retour natif complet, sauvegarde/rechargement des portes et arrivées au poste effectivement observées.",
+      "3fb2ad87605a8eb57eb765b4985182ca8ace961c ; QA161 complète : 39 contrôles / 24 captures pour les deux routes. Rapport SHA256 8ac40f140dab902d72dcd759e48e1e095ab74239eebc11f8d1267fcf733476f2",
+      "Validation technique bornée à cette recette et ce commit ; aucune nouvelle approbation artistique 1:1."
     ],
     [
       "ASHA-JUN",
-      "Retour de Jun pendant visite Asha",
-      "C165-ROUTES / 26_ChantiersV165!A8",
+      "Retour Jun et sortie du refuge Asha",
+      "23_ChantiersV163!A7 ; 26_ChantiersV165!A8",
       "ATTENTE QA CANDIDAT",
-      "Marche locale autorisée, seuil occupé et retour Jun toujours contrôlés.",
+      "Compteurs et retour Jun stricts ; retrait physique devant le joueur au seuil à vérifier.",
       "Recette V163 et tests adversariaux à rejouer.",
-      "Pas de traversée ou téléportation admise."
+      "Pas de traversée ou téléportation admise ; sortie E réellement observée."
     ],
     [
       "C165-PLAYER",
       "Appuis joueur et alliés",
       "26_ChantiersV165!A10",
-      "QA BASE PASSÉE",
-      "25 contrôles et 43 captures sur baseline.",
-      "Base ec099872d3fc59465c6d17e30b577629b462f139 / QA locale player",
-      "Rerun candidat à produire ; art 1:1 ouvert."
+      "QA NATIVE PASSÉE SUR 13292ca",
+      "25 contrôles / 43 captures ; source et build inchangés durant la recette.",
+      "13292ca6d8284fdab607dbc0cd3c31cb68112441 ; rapports locaux épinglés, recettes distinctes du lot suivant.",
+      "Portée technique mesurée ; finition globale et fidélité artistique restent ouvertes."
     ],
     [
       "C165-SHIP",
       "Services du Tantalus",
       "26_ChantiersV165!A11",
-      "ATTENTE QA CANDIDAT",
-      "118 contrôles de scènes observés ; garde intégrité harness échouée.",
-      "Exploration conservée, jamais comptée comme recette réussie.",
-      "Rejouer sur commit propre et build gelé."
+      "QA NATIVE PASSÉE SUR 13292ca",
+      "121 contrôles / 20 captures ; source et build inchangés durant la recette.",
+      "13292ca6d8284fdab607dbc0cd3c31cb68112441 ; rapports locaux épinglés, recettes distinctes du lot suivant.",
+      "Portée technique mesurée ; finition globale et fidélité artistique restent ouvertes."
     ],
     [
       "rook-cctv",
@@ -11456,6 +11465,10 @@
     [
       "Sources non récupérées",
       "Les classeurs V173/V174/V177 restent absents du checkout. Archives Blackout/Earth, encyclopédie brute et V10 non récupérées dans les sources suivies."
+    ],
+    [
+      "Candidat combiné validé V204",
+      "3fb2ad87605a8eb57eb765b4985182ca8ace961c ; 3893 tests réussis, 1 facultatif ignoré ; QA161 deux routes : 39 contrôles, 24 captures. La correction de sortie Asha V205 exige sa propre recette."
     ]
   ],
   "evidence": {
@@ -11478,6 +11491,34 @@
       "forge": "success",
       "gameplayRun": 41202517351,
       "gameplay": "success"
+    },
+    "v204": {
+      "sourceCommit": "3fb2ad87605a8eb57eb765b4985182ca8ace961c",
+      "node": {
+        "files": 205,
+        "tests": 3894,
+        "pass": 3893,
+        "fail": 0,
+        "skipped": 1,
+        "logSha256": "ff17a6952371276e31301e6f2b106212593e74277949374e0915191814579a59"
+      },
+      "services": {
+        "status": "passed",
+        "checks": 39,
+        "captures": 24,
+        "sourceUnchanged": true,
+        "routes": [
+          {
+            "id": "idris-engine",
+            "status": "passed"
+          },
+          {
+            "id": "leila-galley",
+            "status": "passed"
+          }
+        ],
+        "reportSha256": "8ac40f140dab902d72dcd759e48e1e095ab74239eebc11f8d1267fcf733476f2"
+      }
     }
   },
   "policies": {
@@ -11489,6 +11530,7 @@
   },
   "prAudits": {
     "tantalus": {
+      "observedAt": "2026-11-01T00:39:57.956363+00:00",
       "mainSha": "4676a78746d8becdb5d6836701e96cc37d7d462f",
       "coverage": {
         "pullRequests": 27,
@@ -12503,6 +12545,7 @@
       ]
     },
     "yautja": {
+      "observedAt": "2026-11-01T00:43:30.473Z",
       "mainSha": "f1856f6670fd959ed012c38f84e6d90d6f86a361",
       "summary": {
         "total": 64,

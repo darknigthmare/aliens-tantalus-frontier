@@ -562,6 +562,105 @@ function ashaDependencyHostV163() {
   return h;
 }
 
+function ashaOccupiedSourceDoorV205() {
+  const route = routes.find(r => r.definition.id === 'asha-refuge');
+  const out = simulate(route, initialActor(route));
+  const player = { x: 126.5325368043359, y: 532, w: 44, h: 92, alive: true, vx: 0,
+    roomId: 'personal-refuge' };
+  const blocked = simulate(route, out.actor, 45, { state: out.state, duty: false,
+    resolution: routine(route, 20.5), player });
+  assert.ok(Math.abs(blocked.state.x - player.x - player.w - 12) < .26);
+  const h = new TestHub(); h.local = 'personal-refuge';
+  h.start({ deck: 1, roomId: 'crew-quarters', npcAnnexRoutesV163: { schema: 163,
+    routes: { 'asha-refuge': { schema: 163, actor: blocked.state } } } },
+  { routineContextV62: { clock: { day: 1, hour: 20.5 } } });
+  h.player = { ...player };
+  return { h, route, blocked, player };
+}
+
+test('Asha physically withdraws from a supported source player before releasing the reserved refuge aperture', () => {
+  const { h } = ashaOccupiedSourceDoorV205(), id = 'asha-refuge';
+  const actor = h.getNpcAnnexServiceActorV163(id), initial = snapshot(h, id).actor;
+  assert.ok(actor); assert.equal(h.npcAnnexDoorReservedV159('personal-refuge'), true);
+  const player = structuredClone(h.player);
+  let previous = initial, released = false;
+  for (let i = 0; i < 4 * 60; i++) {
+    h.update(1 / 60);
+    const state = snapshot(h, id).actor;
+    assert.equal(h.getNpcAnnexServiceActorV163(id), actor);
+    assert.equal(state.roomId, 'personal-refuge'); assert.equal(state.crossings, 1);
+    assert.equal(state.y, 532); assert.ok(Math.abs(state.x - previous.x) <= 27 / 60 + 1e-6);
+    assert.ok(Math.abs(state.distance - previous.distance - Math.abs(state.x - previous.x)) < 1e-6);
+    const reserved = h.npcAnnexDoorReservedV159('personal-refuge');
+    if (!reserved) {
+      released = true;
+      const aperture = snapshot(h, id).annexFace.opening;
+      assert.ok(state.x > aperture.x + aperture.w + 12, 'The real whole body cleared the native reservation.');
+    }
+    previous = state;
+  }
+  assert.equal(released, true, 'A short supported withdrawal clears the source portal before the45s player budget.');
+  assert.ok(previous.x > initial.x + 20);
+  assert.ok(previous.x < previous.dutyX, 'The player need not wait for a complete return to the distant service post.');
+  assert.deepEqual(h.player, player);
+
+  // Once the player is in the destination chart, that source priority ends.
+  // This disclosed chart switch tests NPC intention and physical occupancy,
+  // not a claimed player E journey (the browser recipe performs that E).
+  h.local = null; h.player.x = player.x + 1065; h.player.roomId = 'crew-quarters';
+  tick(h, 12);
+  const occupied = snapshot(h, id).actor;
+  assert.equal(occupied.roomId, 'personal-refuge'); assert.equal(occupied.crossings, 1);
+  assert.equal(occupied.stage, 'opening'); assert.equal(occupied.reason, 'occupied');
+  assert.equal(occupied.doorProgress, 0);
+});
+
+test('Asha source exit courtesy preserves exact player admission, pauses, active leaves and medical or mission ownership', () => {
+  const id = 'asha-refuge';
+  for (const [label, change] of [
+    ['player off deck', h => { h.state.deck = 3; }],
+    ['player in parent chart', h => { h.local = null; }],
+    ['player left of opening', h => { h.player.x = 24; }],
+    ['player body outside right opening', h => { h.player.x = 150; }],
+    ['unsupported player', h => { h.player.y = 531; }],
+    ['different player body', h => { h.player.h = 91; }],
+    ['dead player', h => { h.player.alive = false; }],
+    ['downed player', h => { h.player.downed = true; }],
+    ['moving player', h => { h.player.vx = 1; }],
+    ['active player transition', h => { h.annexTransitionV71 = { annexId: 'personal-refuge' }; }],
+    ['closing player leaf', h => { h.hubDoorClosingV142 = { annexId: 'personal-refuge' }; }],
+    ['readonly annex', h => { h.annexStateReadOnlyV87 = true; }],
+    ['pause', h => { h.running = false; }],
+    ['interaction clock', h => { h.getNpcAnnexServiceActorV163(id).workClock = 1; }],
+    ['support clock', h => { h.getNpcAnnexServiceActorV163(id).supportClock = 1; }]
+  ]) {
+    const { h } = ashaOccupiedSourceDoorV205(); const initial = snapshot(h, id).actor;
+    change(h); h.update(1 / 60);
+    const after = snapshot(h, id).actor;
+    assert.ok(after, label);
+    assert.ok(after.x <= initial.x, label + ': no invented source exit retreat');
+    assert.equal(after.targetRoomId, initial.targetRoomId, label);
+    assert.equal(after.crossings, initial.crossings, label);
+  }
+  for (const [key, reason] of [['needsCare', 'medical-recovery'], ['missionAssigned', 'mission-assignment'], ['alert', 'active-crisis']]) {
+    const { h } = ashaOccupiedSourceDoorV205(); const body = h.getNpcAnnexServiceActorV163(id);
+    const resolution = h.npcRoutineResolutionsV62.get(body.crewId);
+    h.npcRoutineResolutionsV62.set(body.crewId, { ...resolution, [key]: true, reason });
+    h.update(1 / 60);
+    const after = snapshot(h, id);
+    if (key === 'alert') {
+      // The existing emergency protocol first withdraws a body already in
+      // the aperture; it must not release a ghost reservation or change chart.
+      assert.equal(h.getNpcAnnexServiceActorV163(id), body);
+      assert.equal(after.actor.reason, reason); assert.equal(after.actor.crossings, 1);
+      assert.equal(after.actor.roomId, 'personal-refuge'); assert.equal(after.nativeHandoff, null);
+    } else {
+      assert.equal(after.actor, null, reason + ': the physical source player cannot seize a preempted service owner');
+      assert.equal(after.nativeHandoff.reason, reason);
+    }
+  }
+});
+
 test('annex-service QA observes Asha native threshold approach while Jun is remote without accepting overlap or a portal transfer', async () => {
   const source = serviceQaCallbackV163('arm_asha_return_dependency');
   const h = ashaDependencyHostV163(), route = routes.find(r => r.definition.id === 'asha-refuge');
