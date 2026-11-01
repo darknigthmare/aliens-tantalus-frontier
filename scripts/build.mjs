@@ -33,6 +33,7 @@ for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-galler
 for (const directory of ['src', 'assets']) {
   await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
 }
+await cp(join(root, 'vendor'), join(output, 'vendor'), { recursive: true });
 await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
 await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
 await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));

@@ -1,7 +1,8 @@
+import { getAlienBaseIdForProfile } from './alien-base.js';
 /** The 35 identities requested for the AFE2 collection, not a claim that the
  * publisher's roster is exhaustive. Shared species never count as dedicated
  * AFE2 visual adaptations. Missing contacts have no invented profile alias. */
-const row = (id, name, family, status, profileId = null, sourceGame = null) => Object.freeze({ id, name, family, status, profileId, sourceGame });
+const row = (id, name, family, status, profileId = null, sourceGame = null) => Object.freeze({ id, name, family, status, profileId, sourceGame, alienBaseId: getAlienBaseIdForProfile(profileId) });
 export const AFE2_ROSTER_STATUS_V110 = Object.freeze({
   'afe2-adaptation': 'Adaptation AFE2 disponible',
   'synth-adaptation': 'Adaptation de synthétique disponible',
