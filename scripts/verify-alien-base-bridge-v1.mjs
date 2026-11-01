@@ -1,0 +1,77 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import {
+  ALIEN_BASE_SNAPSHOT_INFO_V1,
+  ALIEN_BASE_ENTITIES_V1,
+  ALIEN_BASE_WEAPONS_V1,
+  resolveAlienBaseDossierV1,
+  resolveAlienBaseWeaponReferenceV1,
+  resolveAlienBaseGameMappingV1,
+  auditAlienBaseBridgeV1
+} from '../src/alien-base-bridge-v1.js';
+import { WEAPONS, ENEMIES, VEHICLES, EQUIPMENT, CREW } from '../src/content-core-v50.js';
+import { renderAlienBaseSnapshotV1 } from './sync-alien-base-v1.mjs';
+import { exportTantalusInventoryV1 } from './export-alien-base-tantalus-v1.mjs';
+
+test('Alien_base snapshot is deterministic, checked and reference-only', () => {
+  assert.equal(ALIEN_BASE_ENTITIES_V1.length, 46);
+  assert.equal(ALIEN_BASE_WEAPONS_V1.length, 200);
+  const proposed=ALIEN_BASE_WEAPONS_V1.filter(x=>x.admission==='research-only');
+  assert.equal(proposed.length, 129);
+  assert.ok(proposed.every(x=>x.id.startsWith('proposed-')));
+  assert.ok(ALIEN_BASE_WEAPONS_V1.every(x=>x.damage===undefined&&x.fireRate===undefined));
+  assert.ok(ALIEN_BASE_ENTITIES_V1.every(x=>x.visualFidelity==='not-1to1-certified'));
+  const reproduction=renderAlienBaseSnapshotV1(
+    {schemaVersion:'1.0.0',sourceRevision:ALIEN_BASE_SNAPSHOT_INFO_V1.sourceCommit,entries:ALIEN_BASE_ENTITIES_V1},
+    {schemaVersion:'1.0.0',entries:ALIEN_BASE_WEAPONS_V1}
+  );
+  const actual=readFileSync(new URL('../src/alien-base-snapshot-v1.js',import.meta.url),'utf8');
+  assert.equal(reproduction,actual);
+});
+
+test('Exact canonical and local ID mapping; no near-name guessing', () => {
+  const queen=resolveAlienBaseDossierV1('enemy-008-queen');
+  assert.equal(queen?.name,'Queen');
+  assert.equal(resolveAlienBaseDossierV1(queen.id),queen);
+  assert.equal(resolveAlienBaseDossierV1('queen-official-unverified'),null);
+  const loader=resolveAlienBaseDossierV1('vehicle-007-p-5000-powered-work-loader');
+  assert.equal(loader?.kind,'vehicle');
+  assert.ok(loader.traits.includes('piloted-exoskeleton'));
+  assert.equal(resolveAlienBaseDossierV1('enemy-041-working-joe')?.kind,'synthetic');
+  assert.equal(resolveAlienBaseDossierV1('enemy-571-predalien')?.name,'Predalien');
+});
+
+test('A proposed weapon stays documentary, not purchasable or a new game ID', () => {
+  const id='proposed-m41a3-burst-rifle';
+  const note=resolveAlienBaseWeaponReferenceV1(id);
+  assert.equal(note?.admission,'research-only');
+  assert.equal(WEAPONS.some(x=>x.id===id),false);
+  const mapped=resolveAlienBaseGameMappingV1(id);
+  assert.equal(mapped.researchOnly,true);
+  assert.equal(mapped.runtimePresent,false);
+  assert.equal(resolveAlienBaseGameMappingV1('weapon-001-m41a-pulse-rifle')?.runtimePresent,true);
+});
+
+test('Bridge never renumbers or overlays simulation data', () => {
+  const before=WEAPONS.map(x=>[x.id,x.damage,x.magazine]);
+  const original=ENEMIES.map(x=>[x.id,x.health,x.damage]);
+  const count=[WEAPONS.length, ENEMIES.length, VEHICLES.length,EQUIPMENT.length,CREW.length];
+  const report=auditAlienBaseBridgeV1();
+  assert.equal(report.curatedDossiers,46);
+  assert.equal(report.researchOnlyWeapons,129);
+  assert.deepEqual(WEAPONS.map(x=>[x.id,x.damage,x.magazine]),before);
+  assert.deepEqual(ENEMIES.map(x=>[x.id,x.health,x.damage]),original);
+  assert.deepEqual([WEAPONS.length, ENEMIES.length, VEHICLES.length,EQUIPMENT.length,CREW.length],count);
+});
+
+test('Outbound Tantalus audit separates source identity from game tuning', () => {
+  const out=exportTantalusInventoryV1();
+  assert.equal(out.schemaVersion,'1.0.0');
+  assert.equal(out.catalogues.weapons.length,WEAPONS.length);
+  assert.equal(out.catalogues.enemies.length,ENEMIES.length);
+  assert.equal(out.catalogues.afe2Roster.length,35);
+  assert.equal(out.catalogues.weapons[0].identity.id,WEAPONS[0].id);
+  assert.equal(out.catalogues.weapons[0].identity.damage,undefined);
+  assert.equal(out.catalogues.weapons[0].gameplayTuning.damage,WEAPONS[0].damage);
+});
