@@ -105,6 +105,124 @@ const runtime = (hour=7,save={},options={}) => {const h=new TestHub();h.start(sa
   h.npcJunClimbArtReadyV165=()=>options.artUnavailable!==true;return h;};
 const context = (h,hour,extra={})=>h.setNpcRoutineContextV62({clock:{day:1,hour},...extra},{persist:false,rebuild:true});
 const tick = (h,seconds,rate=60)=>{for(let i=0;i<seconds*rate;i++)h.update(1/rate);};
+// Disclosed reconstruction of CI760's supported reactor return: Inez's
+// observed pose/counters, its real legacy bookmark, and Idris's native parent
+// owner at the measured12px head-on clearance. No travel is claimed here.
+function inezIdrisReturnFixtureV207(playerX=1523.3959935638488) {
+  const initial=runtime(5,{deck:2,roomId:'quarantine'});
+  const legacy=initial.getNpcServicePhysicalStateV165('inez-bioforge');
+  const parent=runtime(23,{deck:3,roomId:'reactor'});
+  const idris={...parent.getNpcServicePhysicalStateV165('idris-engine'),
+    x:1736.6354742911658,targetRoomId:'engine-room',stage:'walking',velocity:0};
+  const origin={crewId:'crew-09-inez-harlow',deck:2,roomId:'quarantine',x:643,y:532,
+    facing:1,source:'legacy-physical-owner'};
+  const actor={crewId:origin.crewId,deck:3,roomId:'reactor',x:1680.6354742911658,y:532,
+    velocity:0,facing:1,stage:'walking-lift',direction:'return',reason:'occupied',
+    time:382.6168999999875,distance:6727.035474291067,verticalDistance:0,doorProgress:0,
+    crossings:2,liftJourneys:1,departed:true,returnRequested:true,lift:null,
+    bulkheadProgress:Object.fromEntries(HUB_DECKS.flatMap((_,deck)=>buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck)
+      .filter(d=>!d.lift).map(d=>[d.id,0]))),upperLanding:false,parentLevel:0,vertical:null};
+  return runtime(23,{deck:3,roomId:'reactor',positionX:playerX,
+    npcAnnexRoutesV163:{schema:163,routes:{'inez-bioforge':{schema:163,actor:legacy}}},
+    npcServiceRoutesV161:{schema:161,routes:{'idris-engine':{schema:161,actor:idris}}},
+    npcInterdeckRoutesV165:{schema:165,routes:{'inez-civil':{actor,origin,retained:null,
+      returned:null,nativeHandoff:null,admissionReady:false}}}});
+}
+test('Inez physically yields west of Idris native door, preserves covered handoff and resumes the return lift',()=>{
+  const h=inezIdrisReturnFixtureV207(),id='inez-civil';
+  const body=h.npcInterdeckBodiesV165.get(id),idris=h.getNpcServiceActorV161('idris-engine');
+  const start=structuredClone(h.npcInterdeckStateV165.routes[id].actor);
+  let withdrew=false,covered=false,last=structuredClone(start),previousIdris=h.getNpcServicePhysicalStateV165('idris-engine');
+  for(let n=0;n<65*60;n++) {
+    h.update(1/60);
+    const a=h.npcInterdeckStateV165.routes[id].actor,d=h.getNpcServicePhysicalStateV165('idris-engine');
+    assert.equal(h.npcInterdeckBodiesV165.get(id),body);assert.equal(h.getNpcServiceActorV161('idris-engine'),idris);
+    assert.ok(Math.abs(a.x-last.x)<=27/60+.000001,'withdrawal spends native walking time');
+    assert.ok(Math.abs(a.velocity)<=27.000001);
+    if(a.roomId==='reactor'&&d?.roomId==='reactor') {
+      assert.ok(Math.abs(d.x-a.x)>=56-.000001,'the actual floor bodies keep12px clearance');
+      if(!covered)assert.ok(d.x>a.x,'the floor bodies cannot swap order before the covered annex passage');
+    }
+    withdrew ||= a.x<start.x-1;
+    if(d?.roomId!==previousIdris?.roomId) {
+      assert.equal(previousIdris.stage,'covering');assert.equal(d.doorProgress,0);
+      covered ||= d.roomId==='engine-room';
+    }
+    last=structuredClone(a);previousIdris=d;
+    if(a.lift?.phase==='travel')break;
+  }
+  const done=h.npcInterdeckStateV165.routes[id].actor;
+  assert.ok(withdrew,'the actual Inez body must retreat, not merely wait against Idris');
+  assert.ok(covered,'Idris really enters the existing annex behind its closed native leaf');
+  assert.equal(done.lift?.phase,'travel','the same returning Inez boards the real lift after Idris clears');
+  assert.equal(done.crossings,2);assert.equal(done.liftJourneys,1);
+  assert.ok(done.distance>start.distance);assert.equal(done.verticalDistance,0);
+});
+test('Inez withdrawal preserves a real player occupying the passing bay instead of projecting through it',()=>{
+  const h=inezIdrisReturnFixtureV207(1622),before=structuredClone(h.npcInterdeckStateV165.routes['inez-civil'].actor);
+  const body=h.npcInterdeckBodiesV165.get('inez-civil');
+  tick(h,20);
+  const a=h.npcInterdeckStateV165.routes['inez-civil'].actor,d=h.getNpcServicePhysicalStateV165('idris-engine');
+  assert.ok(a.x>=h.player.x+h.player.w+12-.000001);
+  assert.ok(d.x-a.x>=56-.000001);assert.equal(a.deck,3);assert.equal(a.stage,'walking-lift');
+  assert.equal(a.lift,null);assert.equal(a.liftJourneys,before.liftJourneys);assert.equal(a.crossings,before.crossings);
+  // Disclosed fixture movement of the same supported player body, never a
+  // collision exemption: progressively vacate the bay westward at27px/s.
+  // The browser pilot separately proves actual keyboard controls/bookmark.
+  let resumed=false;
+  for(let n=0;n<70*60;n++) {
+    h.player.x=Math.max(1523.3959935638488,h.player.x-27/60);h.update(1/60);
+    assert.equal(h.npcInterdeckBodiesV165.get('inez-civil'),body);
+    const current=h.npcInterdeckStateV165.routes['inez-civil'].actor;
+    if(current.lift?.phase==='travel'){resumed=true;break;}
+  }
+  assert.ok(resumed,'the same Inez completes the covered passing manoeuvre and resumes its return lift once the player body clears');
+});
+test('Inez passing bay requires the real supported return pair and releases for a free or annexed Idris owner',()=>{
+  const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
+  const a={crewId:'crew-09-inez-harlow',deck:3,roomId:'reactor',x:1680.6354742911658,y:532,
+    direction:'return',stage:'walking-lift',lift:null};
+  const actor={crewId:a.crewId},idris={crewId:'crew-03-idris-kwan',roomId:'reactor',x:a.x+56,y:532,w:44,h:92,alive:true};
+  const watch={targetRoomId:'engine-room',reason:'daily-schedule'};
+  const host={npcInterdeckStateV165:{routes:{'inez-civil':{actor:a}}},npcInterdeckBodiesV165:new Map([['inez-civil',actor]]),
+    getNpcServiceActorV161:()=>idris,getNpcServicePhysicalStateV165:()=>watch};
+  const goal=(body=actor)=>controller.getNpcServiceOwnerYieldGoalV165.call(host,'inez-civil',body);
+  assert.equal(goal(),1622);
+  for(const patch of [{deck:2},{roomId:'dropship-hangar'},{y:284},{direction:'outbound'},
+    {stage:'lift',lift:{phase:'travel'}},{x:1300},{x:1900},{crewId:'invented'}]) {
+    const old={...a};Object.assign(a,patch);assert.equal(goal(),null,JSON.stringify(patch));Object.assign(a,old);
+  }
+  assert.equal(goal({...actor}),null,'a copied or virtual Inez body cannot claim a bay');
+  for(const patch of [{roomId:'engine-room'},{y:284},{alive:false},{downed:true},{crewId:'invented'},{x:a.x-56}]) {
+    const old={...idris};Object.assign(idris,patch);assert.equal(goal(),null,JSON.stringify(patch));
+    for(const key of Object.keys(idris))delete idris[key];Object.assign(idris,old);
+  }
+  watch.targetRoomId='reactor';assert.equal(goal(),null,'an owner at a free native parent watch cannot authorize withdrawal');
+  watch.targetRoomId='engine-room';watch.reason='medical-recovery';assert.equal(goal(),null,'medical priority is not a passing request');
+});
+test('Inez physical passing bay derives the same intent after native route save and reload',()=>{
+  let h=inezIdrisReturnFixtureV207();
+  for(let n=0;n<20*60;n++) {
+    h.update(1/60);
+    const a=h.npcInterdeckStateV165.routes['inez-civil'].actor,d=h.getNpcServicePhysicalStateV165('idris-engine');
+    if(a.x<=1622.1&&d.roomId==='reactor')break;
+  }
+  const waiting=structuredClone(h.npcInterdeckStateV165.routes['inez-civil'].actor);
+  assert.ok(waiting.x<=1622.1,'the body first spends the actual withdrawal distance');
+  const idris=h.getNpcServicePhysicalStateV165('idris-engine');
+  h.persist();h=runtime(23,h.persisted.at(-1));
+  const {actualVelocity:frameVelocity,...durableWaiting}=waiting;
+  assert.deepEqual(h.npcInterdeckStateV165.routes['inez-civil'].actor,durableWaiting,
+    'all durable pose/counters survive; actualVelocity describes only the preceding unsaved frame');
+  assert.deepEqual(h.getNpcServicePhysicalStateV165('idris-engine'),idris);
+  assert.equal(h.getNpcServiceOwnerYieldGoalV165('inez-civil',h.npcInterdeckBodiesV165.get('inez-civil')),1622);
+  let resumed=false;
+  for(let n=0;n<65*60;n++) {
+    h.update(1/60);
+    if(h.npcInterdeckStateV165.routes['inez-civil'].actor.lift?.phase==='travel'){resumed=true;break;}
+  }
+  assert.ok(resumed,'the rehydrated real owners finish their covered passage and return lift');
+});
 test('Idris keeps its actual parent owner and scheduled watch after elapsed hours while passengers are remote',()=>{
   const h=runtime(5,{deck:3,roomId:'reactor'}),id='idris-engine';
   const actor=h.getNpcServiceActorV161(id);
