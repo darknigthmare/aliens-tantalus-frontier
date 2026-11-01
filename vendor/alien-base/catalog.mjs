@@ -1,7 +1,7 @@
-// Generated from alien_base/data/registry.json v0.1.0; do not edit.
+// Generated from alien_base/data/registry.json v0.1.1; do not edit.
 export const ALIEN_BASE_REGISTRY = Object.freeze({
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "updated": "2026-11-01",
   "scope": "Référentiel inter-jeux Alien ; dossiers source-distincts, non exhaustifs.",
   "editorialRules": {
@@ -143,6 +143,27 @@ export const ALIEN_BASE_REGISTRY = Object.freeze({
       "medium": "fan-project",
       "url": "https://github.com/darknigthmare/avp-hunt-hive-tcg",
       "continuity": "fan-project"
+    },
+    {
+      "id": "colonial-marines-tech-manual",
+      "title": "Aliens: Colonial Marines Technical Manual",
+      "medium": "licensed-book",
+      "url": "https://www.penguinrandomhouse.com/books/218640/aliens-colonial-marines-technical-manual-by-lee-brimmicombe-wood/",
+      "continuity": "licensed-book"
+    },
+    {
+      "id": "audi-covenant-rover",
+      "title": "Audi — lunar quattro dans Alien: Covenant",
+      "medium": "manufacturer-production-report",
+      "url": "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+      "continuity": "film-production"
+    },
+    {
+      "id": "tony-drew-covenant-production",
+      "title": "Tony Drew — Alien: Covenant production design",
+      "medium": "production-portfolio",
+      "url": "https://www.tonydrew.com.au/film",
+      "continuity": "production-art"
     }
   ],
   "records": [
@@ -1285,7 +1306,7 @@ export const ALIEN_BASE_REGISTRY = Object.freeze({
       "name": "M579 Daisycutter",
       "description": "Véhicule documenté par le manuel licencié ; stats Tantalus non officielles.",
       "sourceIds": [
-        "alien-rpg"
+        "colonial-marines-tech-manual"
       ],
       "continuity": "licensed-rpg",
       "review": "source-specific-check-required",
@@ -1305,7 +1326,8 @@ export const ALIEN_BASE_REGISTRY = Object.freeze({
       "name": "Audi lunar quattro — Covenant",
       "description": "Rover non habité ; mesures du prototype réel non transposables à la fiction.",
       "sourceIds": [
-        "covenant-2017"
+        "covenant-2017",
+        "audi-covenant-rover"
       ],
       "continuity": "film",
       "review": "source-specific-check-required",
@@ -1325,7 +1347,8 @@ export const ALIEN_BASE_REGISTRY = Object.freeze({
       "name": "Camion de terraformation — concept Covenant",
       "description": "Concept de production, désignation de modèle non établie.",
       "sourceIds": [
-        "covenant-2017"
+        "covenant-2017",
+        "tony-drew-covenant-production"
       ],
       "continuity": "film",
       "review": "source-specific-check-required",

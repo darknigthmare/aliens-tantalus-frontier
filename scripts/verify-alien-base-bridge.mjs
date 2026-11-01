@@ -6,8 +6,8 @@ import { VEHICLE_CATALOG_ADDITIONS_V121 } from '../src/vehicle-catalog-additions
 import { VEHICLE_CATALOG_ADDITIONS_V122 } from '../src/vehicle-catalog-additions-v122.js';
 test('Tantalus uses the same immutable offline Alien_base snapshot',()=>{
   assert.equal(ALIEN_BASE_REGISTRY.records.length,88);
-  assert.equal(ALIEN_BASE_REGISTRY.sources.length,19);
-  assert.equal(ALIEN_BASE_REGISTRY.version,'0.1.0');
+  assert.equal(ALIEN_BASE_REGISTRY.sources.length,22);
+  assert.equal(ALIEN_BASE_REGISTRY.version,'0.1.1');
 });
 test('AFE2 original roster, statuses and profile IDs remain intact',()=>{
   assert.equal(AFE2_ROSTER_V110.length,35);

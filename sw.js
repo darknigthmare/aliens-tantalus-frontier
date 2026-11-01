@@ -1,5 +1,5 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-alien-base-20261101-r1';
+const CACHE = 'atf-v143-alien-base-20261101-r2';
 const SHELL = Object.freeze([
   '/vendor/alien-base/catalog.mjs',
   '/src/alien-base.js',
