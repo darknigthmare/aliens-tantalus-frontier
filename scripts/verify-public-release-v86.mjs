@@ -25,6 +25,7 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'verify-alien-base-v1.mjs',
   'verify-capture-observation-v177.mjs',
   'verify-hub-armory-layering-v177.mjs',
   'verify-tantalus-enrichment-v177.mjs',
