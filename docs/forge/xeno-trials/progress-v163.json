@@ -31592,5 +31592,802 @@
     "ci": null,
     "review": null,
     "merge": null
+  },
+  "followupV178": {
+    "schema": 178,
+    "baselineCommit": "5d9f28f05df732a71a17cec013aa39ebab6d4de1",
+    "baselineProgressSha256": "e6a0feb4df2aa9595c3dca1319f496af69c66d424b19f9d3a5fe401ab2897b80",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "runtimeSourceCount": 147,
+    "scope": "Recover already blocked legacy Inez Saves and retain bounded native QA contracts; import dated PR27 documentary snapshots.",
+    "historicalV177ResultsTransferred": false,
+    "sourceByteIdenticalToV177": false,
+    "runtimeChanges": [
+      {
+        "path": "src/npc-interdeck-routes-v165.js",
+        "previousSha256": "5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a",
+        "currentSha256": "7fc995925c98d1a65fc75538d026320139b9f697f53e7b68d7701bde29bb01a4"
+      },
+      {
+        "path": "sw.js",
+        "previousSha256": "282448609033fdb663983352987cee04c545e4fd4c66d67a227a83df6ec90675",
+        "currentSha256": "cca2f58e7c34952e15d0238edeb9d5606d8766b4bea15da955b61aa3a718bfaf"
+      }
+    ],
+    "verifierChanges": [
+      {
+        "path": "scripts/verify-npc-interdeck-routes-v165.mjs",
+        "previousSha256": "c6046941f7d20be320dec7603ee89d0c6b7c80f8149b89a42efd1c3be7a2e64b",
+        "currentSha256": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080"
+      },
+      {
+        "path": "scripts/verify-audit-continuation-v163.mjs",
+        "previousSha256": "8e64247b3186d36a62352245ea6aadb6c2f6c7d117a8ffc13d4962990ba08dfd",
+        "currentSha256": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291"
+      },
+      {
+        "path": "scripts/verify-public-release-v86.mjs",
+        "previousSha256": "e56b5473e6e3d9e1f45b64cd10489544886229853be1cc75bdf8e1b1a099e705",
+        "currentSha256": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab"
+      }
+    ],
+    "qaChanges": [
+      {
+        "path": "scripts/qa-npc-interdeck-native-v165.py",
+        "previousSha256": "94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3",
+        "currentSha256": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a"
+      }
+    ],
+    "documentarySnapshots": [
+      {
+        "path": "docs/development/CLOTURE_EXCEL_20261101.xlsx",
+        "sha256": "2a607d9fe749056cb2099cc6776a5ccb227068186eb422b7ab6253b05a6609bd",
+        "state": "DATED_IMPORTED_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION"
+      },
+      {
+        "path": "docs/development/EXCEL_CLOSURE_20261101.json",
+        "sha256": "4f5aaf3a4b7e927d34fd75acc3e096314280323a27d72d368572cf63b9dca1c8",
+        "state": "DATED_IMPORTED_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION"
+      },
+      {
+        "path": "docs/development/EXCEL_CLOSURE_20261101.md",
+        "sha256": "284fae29f99bbf3fb23633510bfd0fb68fdb9350335db144e89b3ac6830e9f47",
+        "state": "DATED_IMPORTED_SNAPSHOT_NOT_CURRENT_GAMEPLAY_VALIDATION"
+      }
+    ],
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "newPngAssets": 0,
+    "approved1to1": 0,
+    "fullArtTasksClosed": 0,
+    "humanParticipants": 0,
+    "primaryArchivesRecovered": 0,
+    "sevenRoutesClosed": false,
+    "allFeedsCertifiedStable": false,
+    "forgeState": "DEFERRED_BY_USER",
+    "candidateLocalValidationV178": {
+      "schema": 178,
+      "state": "SCOPED_LOCAL_VALIDATION_RECORDED",
+      "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+      "testedTree": "5c45fc61deb751d280b175e9e9a5d24a70e63aa6",
+      "sourceDigestSha256": "9625169c623f72cf68b732c4f6d16afb76b4b80a8a57f2db3504e12c82cefe69",
+      "anchoredMap": {
+        "runtimeSources": {
+          "campaign-convoy-history-v162.css": "6f92b205b5c1970912e1051be0b6d6c3b2716acf27e767423a8d9c25b93806e2",
+          "campaign-lethe-continuity-v163.css": "adac522847cbed1696f24a64f85d1c9c79cfa76b06088e812cca96e4dd2784ef",
+          "hub-stations-v61.css": "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
+          "index.html": "a4f5bf1470b0b736451ffbb74cc7c07994d2c9a6f9816bb9e81f53016253d6f5",
+          "mission-insertion-v62.css": "049525a19d40f882ce415330a1d467ebd26d7e3e641cffe76e19a61ecfeaffaf",
+          "src/apc-convoy-runtime-v121.js": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
+          "src/apc-course-v131.js": "a9b6fe7fa4ee899497baf590a0ce09c42258ca4bd39d78816a743c1ec145fd03",
+          "src/app.js": "6de0d078732aea1477034d9f67e71a112c57f8cf57b0d9bb2b750b776d8141e0",
+          "src/archive-relay-presentation-v160.js": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
+          "src/archive-relay-runtime-v122.js": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
+          "src/archive-relay-state-v122.js": "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
+          "src/audio.js": "ce43a728dc9cc14a7f0b1b0226163c5434fdf1eb804e349a427abdaeeac0b5c2",
+          "src/black-cocoon-presentation-v158.js": "69169757f789461886aed3788b79e5ba9adcbd8bfa41b5cab81af85ff0be0767",
+          "src/black-cocoon-runtime-v121.js": "d2c40f3a1c5e03468d5a26bf30075f18f94914a0d8b0f7b6caec9fcc01abff05",
+          "src/black-cocoon-state-v121.js": "c794a201f11b84c43be06aa9c3815b43f2da780ca74b724ece1de5228b675631",
+          "src/campaign-consequences.js": "359a55917b4cb2cfa2be07485d202cbfc57ca993dbeaaec5097801bda4504f0e",
+          "src/campaign-convoy-history-ui-v162.js": "e973c53c63ef8b425772ad049cab133b7052532be6956210e149174b3d940619",
+          "src/campaign-convoy-history-v162.js": "30acb584825844a348e37436b74fbb956e76a1ae7d2e4c1bb662587fec3fba31",
+          "src/campaign-convoy-story-ui-v161.js": "e5dad2c548c7cf05584e88330538f0d606d330e99645e5a48fcef51d235e707c",
+          "src/campaign-convoy-story-v161.js": "17e3abceb4554a1223d4a456038d7664d42c44d5b96297285b73814678fc274e",
+          "src/campaign-lethe-continuity-ui-v163.js": "f41cc2542144e3c8132a0b072e6bdb73b374b4be3d949269ca5b252ad5f07ecf",
+          "src/campaign-lethe-continuity-v163.js": "ac3a144a3e830c944c513458fd9c1c7ef7159af9989bc160092868c00aa9aa06",
+          "src/campaign-lethe-story-v163.js": "956cf8bbec54401cce20d8f90ff216c8c6ea951b590cf4d2a2b562f89a1a4d35",
+          "src/campaign-story-ui-v160.js": "94c8dea45e869e308f72e9905530bf0c2a1ab584d7951f906a3747c73a8a96e4",
+          "src/campaign-story-v160.js": "649bb76d681b3d162d9966163becf1e65e9b40f3b3e5c6216dd6cc17acb8cd4c",
+          "src/content.js": "4d98bbdaa3ed2cc297a1d715335b0cfa8edc7105c39ce3031a2db0fd77975d0b",
+          "src/costume-ui-v119.js": "4a113a45cb2dadc48b88a8835249d8078968eac4642514b7599cdedae4b15e4a",
+          "src/forge-authoring-v133.js": "41a3f33249661d32caa841155d9947589ec9c6548068932553fb114c90ac3975",
+          "src/forge-campaign-ui-v161.js": "e9d82bc38f661260687e53affe1fb9c272ec7ec6906d645cb91034d6756ef01b",
+          "src/forge-campaign-v161.js": "a0f7b6cd7f062d6b392d27befa55751a788959dcc00f01fc15c03c61ec967c12",
+          "src/forge-decoration-v141.js": "8df7f9f306e2635547b4488198b1d3f6f815633999516bc5819d28cadff2cbfe",
+          "src/forge-editor-base.js": "bcb438505c136e72d9c97ea05fca38331aac3738e935b2398dedd6ef0a946060",
+          "src/forge-editor-v130.css": "26fbbe3ab81709df35eb90b0f3eca57829297673a935a1a3a95603a23fddedba",
+          "src/forge-journey-admission-v141.js": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+          "src/forge-mission-runtime-v141.js": "1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0",
+          "src/forge-model-v130.js": "9bc39547e1bb1b7add1489efab073d22302a64f6220a701eb6abcd1c084252c7",
+          "src/forge-narrative-ui-v156.js": "766a0a9abf003514425260e361868701117831de3245289d97fae92d109fdaf4",
+          "src/forge-narrative-v156.js": "2770cb180f398399193ea5074a9182fc51c08349029860a70a30a4ee74256ff7",
+          "src/forge-npcs-v158.js": "74866242ffe7d99b6b34771abf739fa639e46dac1b6b27712c3ca27eb68059b8",
+          "src/forge-playtest-checkpoint-ui-v157.js": "85032efba0f8071afc69af9369682ce372c0ca6e718e6898c1ad456259ceafee",
+          "src/forge-playtest-checkpoint-v157.js": "d7930fd9d9056970e63e02d54b6e70a3a4a00de931c26c7551db59ee15b4569c",
+          "src/forge-playtest-v136.js": "71bba96af5b96be472c56a83166643dd1b62744f1a03328a87eb7d9b03d6676f",
+          "src/forge-ship-runtime-v141.js": "20cf6a07e8deefcbdeefa276eb8d307f7abc9b6b55da9602195f43c5968cf32e",
+          "src/forge-ui-v130.js": "d5bd35a344d577b0fce54649912ac71679fb5e09b78f274f77b326db6dd91378",
+          "src/forge-versions-v136.js": "4e4d7a6db216a4d965dc5433272148dfa0792075c8472d69d17541a939c7be87",
+          "src/franchise-costumes-v119.js": "147afb5919da23a0fda98409ef8914484938786e05f78f1936fe4813e52e32ef",
+          "src/game-production-base.js": "95b136fcc0caade82a784522dcedc635d6acb2ad91ba6517c6d07fb36ca89793",
+          "src/game-production-runtime.js": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
+          "src/game-v51-runtime.js": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
+          "src/game-v52-level-runtime.js": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
+          "src/game-v52-runtime.js": "ac0049ef9ba4a732b126d2de85984e78e74a9fbef2ca36b428d0fbcf23fa821f",
+          "src/held-weapon-renderer-v125.js": "7112bc41d7952df2fc4affac5005613d7727041caba8ef5ec5a50e00aec70524",
+          "src/hive-missions-v131.js": "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
+          "src/hub-annex-npc-life-v141.js": "a7ef6f64c02d2a7445a155bf017dbf0624a06d7f20c45cc73b118ba0c0f5c8de",
+          "src/hub-annex-registry-v87.js": "67d74d09b8ffed8f078516bf99259ee3491610947669f8acbb5616da3efbece7",
+          "src/hub-batch-command-v168.js": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
+          "src/hub-batch-command-v177.js": "96d4f8987e57037d1cc87d974821702fd823e1fea6ca26d84076604ede5bff58",
+          "src/hub-batch-engineering-v168.js": "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
+          "src/hub-batch-engineering-v177.js": "068d2d97a45142f620ce510b8af34fbf529b6a73e32acc126955bd8b4dc222f5",
+          "src/hub-batch-habitat-v168.js": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
+          "src/hub-batch-habitat-v177.js": "e466ab0b33efe97bb1886fcf777faa737c2cabe2a6ca1a7fe95e0ab3049a5b38",
+          "src/hub-batch-industrial-v168.js": "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
+          "src/hub-batch-industrial-v177.js": "9355e187a6c83ba6457e983871945101f3654ab17a24c7ee998765bce201c1ab",
+          "src/hub-bulkhead-depth-v134.js": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
+          "src/hub-destination-signage-runtime-v138.js": "f9502b068c8c53932e403b4b512d562ea72c9f145e8bb5c904dc8f7ab9dfd428",
+          "src/hub-furnishing-annex-revisions-v139.js": "8b189a9c9703fadf8ec93d979dfad1f429991237f476a96d068a932170a3e3b5",
+          "src/hub-game.js": "2e6c4101e04579252bc6045e22cb9305921fbe20c931072732d9a9e045e15b3e",
+          "src/hub-lift-transit-v163.js": "05c6efb9553eb7908a633b1c811651efe6c292c4a036c2f8628fa051c1bae824",
+          "src/hub-room-backgrounds-v168.js": "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
+          "src/hub-room-batch-details-v168.js": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
+          "src/hub-room-dressing-v134.js": "c1b5d8364ccf714ea64a540276197744537829d2524c0407c83b51adf822e8fd",
+          "src/hub-room-enrichment-v177.js": "a35d0d0c6b41179ee191090a47791000c8e241be43717c1502a4239ed6a6632e",
+          "src/hub-room-life-v136.js": "69b633122cc853cc8f38edb687101c667e03dea5768b2d4ea78c7d56e26b0fe3",
+          "src/hub-room-parallax-v134.js": "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
+          "src/hub-room-service-details-v165.js": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
+          "src/hub-v51-runtime.js": "1cc35c82a83910dc154305f952118194162cde11382388734529bb5a73a54a4e",
+          "src/hub-v52-runtime.js": "7b67eb2cb7c5281e3ae0acd69adfb252db555a00f879194a553012b8d53efb4c",
+          "src/hub-v62-runtime.js": "6af03c23ec837458b45ce4e1c9d62e7d8b436ac5e54d2037528616730cd21cd9",
+          "src/hub-v71-runtime.js": "289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4",
+          "src/hub-v81-runtime.js": "26a75cc4fe0e7280146b370c9183cd89a52dabddd865f408289439fe824e4067",
+          "src/human-patrol-animation-v133.js": "5c9283b4f848a9a5882809f7b4f3c8c84478ed756f89bdc329cd1b875e8e0fe6",
+          "src/human-visual-contract-v133.js": "f009c9e00a60a06cf0cb9d6ecfce22b59d59cfcb8a28d4a9e224d1163abff4c8",
+          "src/legacy-operations-v131.js": "ab9d4021dde9dcf8609f1a23e43643b0d4f94857836f9df8145641537ce0328d",
+          "src/mission-input-v77.js": "c564966b27980c6733b7024fa832e6b8dd64e4441b08104a50f4c43e459d49b4",
+          "src/mission-insertion-ui-v62.js": "1e8b4c42e6b5115ff75e86c50dbace7d649c8a4b244629c7788b963a6c690dc5",
+          "src/motion-tracker-display-v160.js": "5062de6ccd88582691498bf7c340e9381602937aa1e22f8583efaf308aa60818",
+          "src/motion-tracker-v160.js": "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
+          "src/npc-annex-circulation-v159.js": "30ff9afe4985a2e9db880845521e3fb4e31a38304f97a0a7c12c3c5ba54ef493",
+          "src/npc-annex-leases-v163.js": "e133273662735daeff048498358ea3f56744acb9db2af540f196cd5f7a1bb123",
+          "src/npc-annex-service-routes-v163.js": "25d7efed89dc1134a79cabe8fad259c029c2db8db58f43d1a2fa4be487a0f92f",
+          "src/npc-annex-workpost-routes-v165.js": "b9bf2fca2a46fa79e11fc9f467c1672c11d33e8c4922ee8afbfcc6a48fb5fafe",
+          "src/npc-cal-climb-rig-v165.js": "2ac8b1c472c20689772ddfe35199e49bd2125b6d3e90237f8c6da2d4ccc2813d",
+          "src/npc-cal-logistics-route-v165.js": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
+          "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
+          "src/npc-dialogue-portraits-v168.js": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
+          "src/npc-interdeck-passage-v165.js": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f",
+          "src/npc-interdeck-routes-v165.js": "7fc995925c98d1a65fc75538d026320139b9f697f53e7b68d7701bde29bb01a4",
+          "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0",
+          "src/npc-life-v136.js": "ccd320fd541abf156e59cac8e2af45322b908204e5141849252de487102c66d9",
+          "src/npc-lift-transit-v165.js": "319a8c471d2e42eca8f6be2d3429418d733bcaf1a0fa8e38d7fc91dd7f387d28",
+          "src/npc-matte-aperture-data-v164.js": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+          "src/npc-matte-apertures-v164.js": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
+          "src/npc-medical-route-v162.js": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
+          "src/npc-mission-runtime-v55.js": "d1922839a7e23f9912ae2e38d5e2ae442cf6da67718ae0e97d28d5fc4f5b6390",
+          "src/npc-service-routes-v161.js": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
+          "src/npc-service-traffic-v163.js": "aefa829240d02c4c08b7774217bbe2ff41619c6f2b5ccac1fe09537d5a589527",
+          "src/npc-station-relays-v166.js": "fd685150758ca56974c77df895f2cdd4181d29205a5fdae7a7d5d165fa0dc34b",
+          "src/player-action-rig-v127.js": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
+          "src/player-appearance-hub-v126.js": "5ac92a42bfa418da225a666cadba14299ce49896647498a488b229808bf9b8ea",
+          "src/player-appearance-preview-v126.js": "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
+          "src/player-appearance-runtime-v126.js": "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
+          "src/player-appearance-ui-v126.js": "413261d7c85d408b4e08ccd46bc0d2e6ea4fca7ac64bed5bf73ef6d1c6bf859a",
+          "src/player-appearance-v126.js": "69c62a380a15d2d3b34e950620cd514fa780b531d016071029a17215c5ee59e1",
+          "src/player-arm-constraints-v160.js": "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
+          "src/player-body-rig-v125.js": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
+          "src/player-costume-atlases-v165.js": "4026d6e6b6047a7d868d2b03cea56da3e2dd5de7f099ac730a0166a3b844a8e6",
+          "src/player-costume-outfits-v165.js": "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+          "src/player-costume-parts-v165.js": "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
+          "src/player-gait-v133.js": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
+          "src/player-human-proportions-v160.js": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
+          "src/player-locomotion-rig-v129.js": "4af0bb1aaca511418267e0e5fead565de6ec739263c35ffa84eeb85573416dda",
+          "src/player-modular-rig-v126.js": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
+          "src/player-transit-rig-v128.js": "5aceb439b4d5b5421073e4a9bd0fa0e5a7f8d2673fbbf3e88dbc69ebd98472fd",
+          "src/player-weapon-runtime-v125.js": "a2d11f762b1064be9b888e7d1e9502e161784be9f09012376b11426fe88b2032",
+          "src/refuge-art-v87.js": "958f9c403d5dab828df67781425afe120769b45666f2e2a51732339b5831f053",
+          "src/reload-presentation-v163.js": "1d7611f540bd44b74f4ac9457026a59824fd30b06cf24d2ffb4b6cbc37963bce",
+          "src/save.js": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
+          "src/ship-animal-habitat-v87.js": "23b392916f7d76f89929e4e69e9b17c843cbd3784897893e7b49a33562ae26f4",
+          "src/special-operations-v131.js": "4595ded20b4c7c44a7942039ca3ed8d12bba9f20a44a622ff840caca7a0e4bb5",
+          "src/sprite-animation-runtime.js": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
+          "src/weapon-actions-v131.js": "4ff367efb3c919ba51fcb5595f119d54f462a3453dbd95ca1d6c40110f44172a",
+          "src/weapon-effects-runtime-v124.js": "7a47a03249fc2e45390608bf95f8496846da83cca0714d7f4b9b8657b28d1bfb",
+          "src/weapon-feed-admission-v193.js": "66997b6206d9e23fe4252031741e8afea656b9d12c161ee327b30f79d2fe7355",
+          "src/weapon-underbarrel-v174.js": "41c6bce6216e9622f0dc0172b186f5842387fdf77b3ad745b20770819469d8a6",
+          "src/xeno-trials-capture-data-v163.js": "f73824fd19bb4b26169583e038b9a272051d25cbdb6556c45f560f968866a285",
+          "src/xeno-trials-capture-reception-v158.js": "223b5b41fb00091f78b596866985108e4bced494fa41ad1c81b1054c064fb314",
+          "src/xeno-trials-capture-v163.js": "2c7fb5a5111e6d2ddf5b89baa5232dc613767708ed523fc531a2ea72657cf775",
+          "src/xeno-trials-engine-v96.js": "48e4e6cc8091e2f266f0b6831eb5d08f523a9acc27ba1f23cea3f227aaf0a007",
+          "src/xeno-trials-grapple-v153.js": "a0d85cfeb6cac1b3b97f0334ca7656c324f43a9077cac04b22600fdf6cc6529a",
+          "src/xeno-trials-restraint-pose-v156.js": "d38f61546c00cadd2ed3f9064b1dfe9b178f38e5c78dcc2448667017431a3a22",
+          "src/xeno-trials-rig-data-v163.js": "4f7dfdd9b88c8effd9192899a6af35806b30f96a3a17c6016a09527e6a09f401",
+          "src/xeno-trials-rig-data-v165.js": "396896622c85ff1198c4f61fb0e3a5f5eb131f1d74f315f6cb8aca24d64461d5",
+          "src/xeno-trials-rig-v154.js": "c380d8b4613ef37cb978880050c37a183b4113bfa7e833817810fc95ef1a93a5",
+          "src/xeno-trials-runtime-v96.js": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
+          "src/xeno-trials-sequences-v155.js": "ed140f0788d4d13b91ddd0aaa8a955c7ca50507185f9eee3debd537385ad2321",
+          "src/xeno-trials-ui-v96.js": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
+          "sw.js": "cca2f58e7c34952e15d0238edeb9d5606d8766b4bea15da955b61aa3a718bfaf"
+        },
+        "supplementalRuntimeSources": {
+          "src/hub-armory-scene-v169.js": "4d65ab9fb59eb0ad924c3efe21f133ac9e52a0cf77b2410e4251b5d6fca378fc",
+          "src/hub-armory-storefront-v169.js": "8ef018c182f28e97fceda6aadd688d3678f5addd5eb5ed19129495a9207e01d7",
+          "src/weapon-magazine-inventory-v167.js": "4943b8ba1c16b4b1430e0383220f44a284ed893963281f51a6279eb04c689014",
+          "src/weapon-magazine-recovery-runtime-v168.js": "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13",
+          "src/weapon-magazine-world-v168.js": "acf8396585e068d33569f42537c4420af7501093428e77824981c494491209e2",
+          "src/weapon-actions-v130.js": "f7ba5f603027c6d10fbf5f01eecf40e429f4d34a106c5fe6e5c306f4e6be933c",
+          "src/tactical-reload-v77.js": "f792032340ea32b017d3ffcfa935a4cd7fd1ec5eab277902e6c873aa49bb6dc3"
+        },
+        "verificationSources": {
+          "scripts/verify-allied-patrol-phase-v167.mjs": "68627ad4da93413ac8ad5df8b129e1401ef6fb73b2a9a310b017271cbbefeb55",
+          "scripts/verify-audit-continuation-v162.mjs": "4a0f581c4cd915fbab05351d455b0b9a4d0e3722a659323026b4b021a488d9cc",
+          "scripts/verify-audit-continuation-v163.mjs": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291",
+          "scripts/verify-audit-v143.mjs": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
+          "scripts/verify-campaign-convoy-history-v162.mjs": "b76fc39826c91b02a9bd4edc03010aea7235b09707248d5a0667eb86dc19ca30",
+          "scripts/verify-campaign-lethe-v163.mjs": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
+          "scripts/verify-campaign-story-v160.mjs": "a8f09d16a1e137b36b95c1473910d228289c2515b26bd3704584a2f13cfabcf8",
+          "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
+          "scripts/verify-capture-observation-v177.mjs": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+          "scripts/verify-costume-art-installer-v175.mjs": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6",
+          "scripts/verify-costume-atlases-v165.mjs": "9110d44e1c69721d8ba26eb83b61f2bbd6e709d6db11664db167632068ef1dee",
+          "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
+          "scripts/verify-forge-admission-v141.mjs": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782",
+          "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
+          "scripts/verify-hub-armory-layering-v177.mjs": "87a89d68ddcce1926440c10f013bfe54ca51ac05c4f4acc56c205e279d3a00e1",
+          "scripts/verify-hub-armory-v169.mjs": "7c5f2bfd49c85a314297855e2cabdf29387d21bb21621d656b06118496fab0a1",
+          "scripts/verify-hub-backgrounds-v168.mjs": "20314af3bb3849981646db3a73f65c3cbb22f326385e6c9ea6591e4415801ed3",
+          "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
+          "scripts/verify-hub-lift-transit-v163.mjs": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
+          "scripts/verify-hub-service-details-v165.mjs": "b1e7733d23718fee9ce67c45d2f37f24c06c529a6060d6144b4b33ed38ef9b54",
+          "scripts/verify-legacy-operations-v131.mjs": "950fbaa2c7b92d1b062ac7b933862c52c7787ca00671e1922213686100ec3e28",
+          "scripts/verify-motion-tracker-v160.mjs": "105ce9312dafe96826765fa5fb9c065bc2015b8e91ca441f7467845cd10a40d4",
+          "scripts/verify-native-rig-catalog-v163.mjs": "3264d4009437b84e25979fb7deeb20b1bc401cd2d12d1721b9a1566fde24afe3",
+          "scripts/verify-native-rig-catalog-v165.mjs": "b219e228e9f5e2de0b3dc30f1fbd4ce05aeaa84047a309b404afa75d2edbe7c5",
+          "scripts/verify-native-rig-terminal-v163.mjs": "7e40cc10ae88b20a0e470dc524f55fa46203b8110c278587adff0a66e2c20845",
+          "scripts/verify-native-rig-weapon-rigidity-v163.mjs": "1983607d4e4c0098febd07d2e721d0921df691b7a112fe16b54e95a38f2b8d0e",
+          "scripts/verify-npc-annex-circulation-v159.mjs": "fe2ec8edc0a25708970a76eabcbce140f27c025ebdd5e81752a61ddfc0eaf1c2",
+          "scripts/verify-npc-annex-leases-v163.mjs": "a66fd715db0dc3f08aa9614af687fa699136f958b8d38244d7cfb165129723f0",
+          "scripts/verify-npc-annex-service-routes-v163.mjs": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+          "scripts/verify-npc-annex-workpost-routes-v165.mjs": "53e0d41f012ba7c083214a7e53657dc08e85342c9675cc699660c3bcd3ed5a58",
+          "scripts/verify-npc-cal-climb-rig-v165.mjs": "63e01b44052a65392901ef54a227be24920621e28079f134e632eb2cd71d5006",
+          "scripts/verify-npc-cal-logistics-route-v165.mjs": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
+          "scripts/verify-npc-circulation-v158.mjs": "3feb8b1460764784bff3b002e270189032157ccc7e33b7636fa8806b1ef0e24e",
+          "scripts/verify-npc-interdeck-passage-v165.mjs": "8a92af78cb7a9ee175eed22c4c65d4779645342adf0152948b842476c50f26ef",
+          "scripts/verify-npc-interdeck-routes-v165.mjs": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080",
+          "scripts/verify-npc-jun-climb-rig-v165.mjs": "a2094edcddea1f9e3b3d4333390b793d9661ec760e49151a81008a9ac954e88a",
+          "scripts/verify-npc-life-v136.mjs": "7984aa4dd6e544dcf31bf5a2f32173786c9155e0d359d928e9c80c94f544cac0",
+          "scripts/verify-npc-lift-queue-v177.mjs": "a2d1d73a79492dd97df785b828cb283f77f4b22f06670fb96359562c9ea51c88",
+          "scripts/verify-npc-matte-apertures-v164.mjs": "f9e20a36782bd44d0efac0bbb20b4bcb9ca27a3e539460c272b6f70aed053a50",
+          "scripts/verify-npc-medical-route-v162.mjs": "9a426ed06f6f396fd0eb7989a7135e6ab49834745879dd5eaf3548db183df774",
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs": "52c2b1a55f40b32063e164a2d9d5a4bccb997bd0f62362c3c87f8473446e1e17",
+          "scripts/verify-npc-service-routes-v161.mjs": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
+          "scripts/verify-npc-station-relays-v166.mjs": "94f7163ff4401e4bd254eb3032085896ed3c067dda6b69165de5cd8c6e266db3",
+          "scripts/verify-parallel-completion-v165.mjs": "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa",
+          "scripts/verify-player-allies-contacts-v165.mjs": "f7921f4ead67d315da3894fb3b7cf01e0c531f3d478e6b09780d0594232f39e3",
+          "scripts/verify-player-appearance-runtime-v126.mjs": "0993fff4bdf5a015ea32a5e7127b75c9d332d1c18eda26e72e47a7820ee5c97e",
+          "scripts/verify-player-appearance-v126.mjs": "5eae7584cc69bf96b3ac8f680fa3b96bc62e5ece1f8be3b3b0315fdec54b5ea1",
+          "scripts/verify-player-arm-phase-v167.mjs": "d9f87786c8fa989fe35033e0969dc0631a6fbcb2dee727d820fe7de8048d8a5e",
+          "scripts/verify-player-locomotion-rig-v129.mjs": "542ba6a0da7988ed264cd18db280c6f2da27d0ad6a5928212bc112a7b9581fd6",
+          "scripts/verify-player-transit-rig-v128.mjs": "d56bc8303b7c699875da37c68a3ce0738587e01d88ae8c3fca89329d70b79bde",
+          "scripts/verify-player-weapon-rig-v125.mjs": "2cc74b21db33c540bc2466c444aca7a87f507e012e47d4895f38816bc16da98b",
+          "scripts/verify-public-release-v86.mjs": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab",
+          "scripts/verify-range-crew-interaction-v167.mjs": "9276254ba9f8f28c769df1f53e07b3f2aa79de6f8a0d1fdab61ef374b4954d33",
+          "scripts/verify-release-artifact-v143.mjs": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
+          "scripts/verify-reload-presentation-v163.mjs": "7751841c22a3c8daa104cc9112b6df6406e040f1e385a67ff9561913287c7683",
+          "scripts/verify-ship-placement-v167.mjs": "0e608d9e531b50c03979866cd361a797f11108d7d4b472c715e4c30b37e1721e",
+          "scripts/verify-tantalus-batch100-v168.mjs": "211728e67be9b2ae0a4c7bb8ea2192fc7c4a2a86ea33f22628a8af25bf59abe6",
+          "scripts/verify-tantalus-enrichment-v177.mjs": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c",
+          "scripts/verify-trials-navigation-v163.mjs": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
+          "scripts/verify-weapon-arsenal-v167.mjs": "00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509",
+          "scripts/verify-weapon-conservation-v177.mjs": "b60809c41615a1de71ef0cb57c74725747a36cb722e48e0c196afe72680804b2",
+          "scripts/verify-weapon-effects-v124.mjs": "26cea89893acbea90aa853f80c5795ef08152fe03f7e8d384c51459b3418b220",
+          "scripts/verify-weapon-feed-admission-v193.mjs": "141aabd5d03fa261ab83b6614633032f5ad053dc8ecc6f3a5cf856487a8d015f",
+          "scripts/verify-weapon-magazine-world-v168.mjs": "3000f9087c459358c2ad59714283075e722c21ab88110c254434830652612a64",
+          "scripts/verify-weapon-runtime-v124.mjs": "ff0e57aa0346b960ae87e20eed56af324ffd2ffac6c0e47818eb22b3b5d8a572",
+          "scripts/verify-weapon-underbarrel-v174.mjs": "0319f8e68397e39a74a3a44d7df7a06b184a0c2f948bba1fd1c6dc6ce12fd2d3",
+          "scripts/verify-xeno-trials-capture-reception-v158.mjs": "9b848dfb8dd3c7945a62f7e16bdd91c480d4b33a3355f85088ca63bab5ff1fe6",
+          "scripts/verify-xeno-trials-capture-v163.mjs": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
+          "scripts/verify-xeno-trials-controls-v150.mjs": "532e144f7a337b1ee8b8e9bd420bd23fe2f103970072891a30adf190c153fe76",
+          "scripts/verify-xeno-trials-grapple-v153.mjs": "6cc90d28711d2ac58ac02a3d2443f08b17e788ef8b2cacc543b9232e63556397",
+          "scripts/verify-xeno-trials-presentations-v156.mjs": "acfa6c0e57c6e72f15e56ecabb909248e0b64219622e23643b417040635e1ed9",
+          "scripts/verify-xeno-trials-restraint-pose-v156.mjs": "327048a20ac03a51861ed20935c361ed2a4804219bd70e183d1c413e027d129d",
+          "scripts/verify-xeno-trials-rig-v154.mjs": "27feaf6aaa3ae4b55ed7b5709c82664a6e175b13b78c2728b21f73f409f056bb"
+        },
+        "qaDriverSources": {
+          "scripts/qa-hub-service-details-v165.py": "75c5e0f4483fd62c9729441311aa1da3887f51194ebafe3298415d184b82f1a5",
+          "scripts/qa-npc-annex-service-routes-v163.py": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+          "scripts/qa-npc-matte-apertures-v164.py": "628c438ad682ec5ee1c1576943e9bc68a8b8d5ff1b279b67718b04a3c333bfd9",
+          "scripts/qa-npc-service-routes-v161.py": "5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06",
+          "scripts/qa-tantalus-enrichment-v177.py": "2775d2027c9277e3df39aa38871276dc3ca9b0764d90f1488caca11b942df04a",
+          "scripts/qa-xeno-trials-capture-v163.py": "3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d",
+          "scripts/qa-npc-interdeck-native-v165.py": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a"
+        },
+        "unchangedDocumentaryInputs": {
+          "docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx": "3f9b5d0bee8bafd95819e7860d1a09a1357fb2bcd92facbe8ed0cc80fb6c4cbb",
+          "docs/arsenal/ARSENAL_SUIVI_V177.xlsx": "6181234f2bf36a21b3cc45a60b26b4cc2c7d573b90396914329ec7bb611e0cdf",
+          "docs/arsenal/data/tantalus_arsenal_master_v1.csv": "8f33064087e6025a450876db2068af285bd5251b180a4d8243fd5770aaeaa05a",
+          "docs/arsenal/data/tantalus_arsenal_qa_v1.csv": "c500389eb71811d543312c60a10bd4199843f7a5dea673de6beb0d140e95f091",
+          "docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv": "5e77f3d790b3f29869ccb3b6a183ef0ed5524fa75400e86dfdbec39db446ae4b",
+          "docs/arsenal/progress-v177.json": "5512101613ec4954ee57ce58ec1f028ce05668e7efc85d1801a5db2e60de1b33",
+          "docs/forge/xeno-trials/ALIENS_TANTALUS_XENO_TRIALS_PLAN_V146.xlsx": "86d0d00d7c55b4f22e8cfd5799f276a0c4ebf132b41fbabf211e9f28022023f7",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V147.xlsx": "d271c15a8646bdd402aa25eafb81490c2d7bf8cde61f034590e7177de92254d4",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V148.xlsx": "d748992fb2d061ee629942019e1da90e2792f620e1e7745ccfc08d0a24c72e11",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V149.xlsx": "a9be6889af6bde53963f75b6a03ae001fdd74a3ea8d43f89fcf095e6f6f3f370",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V150.xlsx": "58db1260271b4728ecc9bc575bf28bc349f179ebe6095d9364af1a7a8fcebf93",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V151.xlsx": "b4b4f0c7725687a4a7adb7241a49a170860e231f037f6a15a2019983ac8fdb46",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V152.xlsx": "1b7c4a558e164006306da94559e9a7c0cf6c6687fb84abd88df7fea1edf1587e",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V153.xlsx": "efa0e415ba18abb79ea5ae45b910750cda05d4c165128df6813dd7c20f872ba2",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V154.xlsx": "c85b82147f7d4c9110ca28b1d096a379e7f5c9ad3130aa965d2852a9fee22ff6",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V155.xlsx": "fbd67f00a8bd13a3b6c7c64241a230dbd8a1e732e841379e55270d1743dd5d3a",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V156.xlsx": "aadcf1f4b018150af8a4d183806f41a2c3ddc23847bbe6a19db5020a046b2e5d",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V157.xlsx": "5606550b16ca256531220a1975897ce6eda32b1416a9ae02f7efc97d3acc71ec",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V158.xlsx": "36cc4f42bb0c60707959258950fd550d8bea4221cf901423d0cc848945ebb822",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V159.xlsx": "34108149c61193417f2a1786c37082abe31447d44b33d7234731e62bac085674",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V160.xlsx": "50d6ef55026f6686b5fb360136c68614942d8c6e6f4d4d82f90bea1b581b4a72",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V161.xlsx": "a16933dd541e60e5b69307d300962d3fe9e1994cf31c5669926ef94efc226fd0",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V162.xlsx": "994632af8d436fc1996eeec8b1f9fab20857391286bf81ba1b1f07a718e7ea72",
+          "docs/forge/xeno-trials/batch100-v177.json": "2fc2c3229920b3d425f50313270bc88afe1338213253451f6de544b0d3576d3a",
+          "docs/development/CLOTURE_EXCEL_20261101.xlsx": "2a607d9fe749056cb2099cc6776a5ccb227068186eb422b7ab6253b05a6609bd",
+          "docs/development/EXCEL_CLOSURE_20261101.json": "4f5aaf3a4b7e927d34fd75acc3e096314280323a27d72d368572cf63b9dca1c8",
+          "docs/development/EXCEL_CLOSURE_20261101.md": "284fae29f99bbf3fb23633510bfd0fb68fdb9350335db144e89b3ac6830e9f47",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V163.xlsx": "55fac512962c1b1da719fdaf871e3a6b7cedd52ec1a3601a1709453d20c49f22"
+        },
+        "developmentToolSources": {
+          "scripts/install-costume-art-v175.mjs": "0ffa2b6ed0e651263a2ac9e79f71dc18b16e6849027034705bd04de93605cb71",
+          "scripts/verify-costume-art-installer-v175.mjs": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6"
+        },
+        "auditLibraries": {
+          "scripts/audit-succession-v159.mjs": "e8c4337c7e9f26669425e2b53427bfcb784bfed7d8351f4497c39cad1c8d0763",
+          "scripts/audit-succession-v160.mjs": "ea5c393ea7f5e34effdf908f4e6ed0c77432bf340e921c105dd86d4599c7c40c",
+          "scripts/audit-succession-v161.mjs": "e822634d840af8c575364bcbab6bf6d0fe7dd95b7c45f8645369400cae311835",
+          "scripts/audit-succession-v162.mjs": "6fd7253c4afea86d324de11cdb432772250f222c7e25cdd7df3be618135e0806",
+          "scripts/audit-succession-v163.mjs": "f57a6f4cb1e76cd32d98f4824b26795e0445e5bfbc00aedd687ee18b67cf994c",
+          "scripts/generate-audit-continuation-v159.py": "40ba20f619e8be6cdfbfbbbe62d79877805fd9fec470e200f3fef810e2a6cc83",
+          "scripts/generate-audit-continuation-v163.py": "9491974e84492e952fefb0aae00304d9bb37687417c427a2fe5cf635ebd7b987"
+        }
+      },
+      "prepublicationSnapshotSha256": "14dff333dcc50621d211d9dc87b9a98617754db08ce83d55db608890983c5756",
+      "table27SnapshotSha256": "ac8a9645ab4de1c773cb2315a54926a6bcf8c155fc4d8eeadd8e6fc397fdd250",
+      "validationArchive": {
+        "filename": "tantalus-validation-v178-37af2c3.zip",
+        "sha256": "8f1e61792792489df1446ea1c820b3ca042ad229d2b693b026dd7bf8c38b110d",
+        "bytes": 16031867
+      },
+      "receipts": [
+        {
+          "id": "node-R",
+          "kind": "node-log",
+          "role": "candidate",
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "entry": "full-node-late-v178.log",
+          "sha256": "ddad311178578312db829c28d4edc10cf0091c2234c9c7c10481dab20d15a178",
+          "bytes": 447605,
+          "scopeIds": [
+            "C178-INEZ-LEGACY-RECOVERY",
+            "C178-SOURCE-CACHE",
+            "C178-DOCUMENTARY-SNAPSHOT"
+          ],
+          "coverage": "Full Node contemporain sur la référenceR réellement propre au début et à la fin ; aucun compteur avant sa clôture.",
+          "limitations": [
+            "Le skip éventuel reste distinct des tests réussis."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": {
+            "tests": 3946,
+            "pass": 3945,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1
+          },
+          "driver": null,
+          "countingRole": "primary",
+          "invocation": {
+            "entry": "full-node-late-v178-invocation.json",
+            "sha256": "8e4be06dd10f49e095d8172881bf99773501a06c13991ab295846fbf686a34bb",
+            "command": [
+              "node",
+              "scripts/test-release-v143.mjs"
+            ],
+            "exitCode": 0
+          },
+          "result": "SCOPED_PASS"
+        },
+        {
+          "id": "oldsave-before70",
+          "kind": "native-json",
+          "role": "baseline-comparison",
+          "testedCommit": "70adab8e66b8b2ee3fc2a731a182dd20d2a6af31",
+          "entry": "v178-old-lock-before70-01/report.json",
+          "sha256": "fd0fa215ece53a4b0d5d4d13d3bfafc3a23c0df2f16f3131c9b6d444677550b0",
+          "bytes": 299976,
+          "scopeIds": [
+            "C178-INEZ-LEGACY-RECOVERY"
+          ],
+          "coverage": "Même ancien Save déjà bloqué, servi réellement depuis70sur4211 ; pas un nouveau succès du codeR.",
+          "limitations": [
+            "Le résultat de référence démontre seulement le comportement avant correction."
+          ],
+          "checks": 43,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "v178-old-lock-before70-01/before-native-old-lock.png",
+              "sha256": "5d575de3ebdfedda9ccb88f22e88b9f3983302b202ecc9d0f13666137c9b0628",
+              "bytes": 836096,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-before70-01/before-after20seconds.png",
+              "sha256": "507a818e09d4657c5d9be6817188aa3a32b510e5f057bdc837010b96fea66365",
+              "bytes": 836406,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-before70-01/before-real-reload.png",
+              "sha256": "222ce997bc191f71600622cc75a8a644f5e5612177dfe4e6e5d26951c7133aea",
+              "bytes": 829027,
+              "kind": null,
+              "scope": null
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-v178-old-reactor-lock-private.py",
+            "sha256": "1674f9576e71cbd4468d21daeedc614ba94856bbf424d4e98d73ada56e076e32",
+            "bytes": 25300,
+            "committedSourcePath": null
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "UNSPECIFIED_REPORT_KIND": 3
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "pass",
+          "reportedMethod": "Same disclosed CI760 Node reconstruction, native file picker, actual hub frames, native exit/Save and real page reload; read-only runtime observations. No pose/camera/clock/update API mutation.",
+          "reportedLimitations": [
+            "No recovered user Save or browser travel before import is claimed.",
+            "Before20wall seconds demonstrates this bounded stall only; it is not proof of eternal deadlock.",
+            "After is bounded to180wall seconds from the first native hub resume; it requires the exact physical return if reached within that budget.",
+            "The player stays at the supplied reactor location. Off-screen lift/home phases are actual-controller observations, explicitly labeled; no camera or player teleport.",
+            "Automated controls, zero human participants and no canonical1:1 visual approval.",
+            "Public runtime bytes are checked against git show EXPECTED_BUILD, independently of the current dirty/clean harness checkout."
+          ],
+          "reportedHarnessCommit": null,
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "reportedErrors": {},
+          "result": "SCOPED_PASS"
+        },
+        {
+          "id": "oldsave-after-R",
+          "kind": "native-json",
+          "role": "candidate",
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "entry": "v178-old-lock-after178-01/report.json",
+          "sha256": "4859a1ca604dc2d7a0527ce6aeb7b718a749abaf586fbc0719fb190a6b01b3ef",
+          "bytes": 301426,
+          "scopeIds": [
+            "C178-INEZ-LEGACY-RECOVERY"
+          ],
+          "coverage": "Import réel du même ancien Save, codeR servi sur4210 ; frames, horloges et reprise attribuées au véritable rapport fermé.",
+          "limitations": [
+            "Un correctif de reprise ne ferme pas sept voyages, toutes les animations ou une validation humaine."
+          ],
+          "checks": 47,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "v178-old-lock-after178-01/after-native-old-lock.png",
+              "sha256": "303c0554ea684620ee495efa394ca3b36e36c0cbee3650e50b3530a961b8b2fe",
+              "bytes": 838195,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-after178-01/after-reachedBay.png",
+              "sha256": "728654efe3c066fe9f19ba1801b30d9c1e74ad1e09109c07fe9d80b665add6f8",
+              "bytes": 839872,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-after178-01/after-idrisCovered.png",
+              "sha256": "4cccbaca99bca5b9179964865bb012cb3474f09ebbbf0821670bc714a1ca0ad3",
+              "bytes": 825693,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-after178-01/after-liftTravel.png",
+              "sha256": "32f9871ef4af5074b4b9a2a2c79202b929ffaea318163f7a53d7388bd0a280c4",
+              "bytes": 831924,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-after178-01/after-returned.png",
+              "sha256": "6e25b07b2e5728495d2cdac35c54efc122db346b475916556e4307efeffed5bd",
+              "bytes": 829556,
+              "kind": null,
+              "scope": null
+            },
+            {
+              "entry": "v178-old-lock-after178-01/after-real-reload.png",
+              "sha256": "0058038ce846c1a0534cd8a2664c35a5a4e8d48b3ee08704ceb1cd0b8fd100ed",
+              "bytes": 824081,
+              "kind": null,
+              "scope": null
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-v178-old-reactor-lock-private.py",
+            "sha256": "1674f9576e71cbd4468d21daeedc614ba94856bbf424d4e98d73ada56e076e32",
+            "bytes": 25300,
+            "committedSourcePath": null
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "UNSPECIFIED_REPORT_KIND": 6
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "pass",
+          "reportedMethod": "Same disclosed CI760 Node reconstruction, native file picker, actual hub frames, native exit/Save and real page reload; read-only runtime observations. No pose/camera/clock/update API mutation.",
+          "reportedLimitations": [
+            "No recovered user Save or browser travel before import is claimed.",
+            "Before20wall seconds demonstrates this bounded stall only; it is not proof of eternal deadlock.",
+            "After is bounded to180wall seconds from the first native hub resume; it requires the exact physical return if reached within that budget.",
+            "The player stays at the supplied reactor location. Off-screen lift/home phases are actual-controller observations, explicitly labeled; no camera or player teleport.",
+            "Automated controls, zero human participants and no canonical1:1 visual approval.",
+            "Public runtime bytes are checked against git show EXPECTED_BUILD, independently of the current dirty/clean harness checkout."
+          ],
+          "reportedHarnessCommit": null,
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "reportedErrors": {},
+          "result": "SCOPED_PASS"
+        },
+        {
+          "id": "build-R",
+          "kind": "build-info-json",
+          "role": "candidate",
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "entry": "build-info-R.json",
+          "sha256": "e7c1ef5bc45d40d29bf19dc98d0cc0499f8b4878dfd3b67eb76b6d112bc3da95",
+          "bytes": 383088,
+          "scopeIds": [
+            "C178-SOURCE-CACHE"
+          ],
+          "coverage": "Build réel sourceR et identité du manifeste1982fichiers, sans requalifier les artefacts70.",
+          "limitations": [
+            "Un build valide ne constitue pas une certification de rendu1:1."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": null,
+          "driver": null,
+          "countingRole": "primary",
+          "buildId": "143.0.0+37af2c3a4cea",
+          "distributionManifestSha256": "ee8abd79c149f2b724a08ecd79f0ef8336cc6a0a2175ece67f982aa5b46a3c65",
+          "result": "SCOPED_PASS"
+        }
+      ],
+      "unclassifiedReportEntries": [],
+      "workstreams": [
+        {
+          "id": "C178-INEZ-LEGACY-RECOVERY",
+          "state": "AUTOMATED_NATIVE_SCOPED_PASS",
+          "nativeReceiptIds": [
+            "oldsave-after-R"
+          ],
+          "failureReceiptIds": [],
+          "componentReceiptIds": [],
+          "fullWorkstreamClosed": false,
+          "approved1to1": 0,
+          "humanParticipants": 0
+        },
+        {
+          "id": "C178-SOURCE-CACHE",
+          "state": "NO_NEW_NATIVE_RECEIPT",
+          "nativeReceiptIds": [],
+          "failureReceiptIds": [],
+          "componentReceiptIds": [],
+          "fullWorkstreamClosed": false,
+          "approved1to1": 0,
+          "humanParticipants": 0
+        },
+        {
+          "id": "C178-DOCUMENTARY-SNAPSHOT",
+          "state": "NO_NEW_NATIVE_RECEIPT",
+          "nativeReceiptIds": [],
+          "failureReceiptIds": [],
+          "componentReceiptIds": [],
+          "fullWorkstreamClosed": false,
+          "approved1to1": 0,
+          "humanParticipants": 0
+        }
+      ],
+      "priorCandidateSummaries": [],
+      "scopeLimitations": [
+        {
+          "id": "V178-BOUNDED-RECOVERY-ONLY",
+          "scopeIds": [
+            "C178-INEZ-LEGACY-RECOVERY"
+          ],
+          "state": "OPEN",
+          "text": "Seul le blocage de l’ancien Save et ses contrôles liés sont couverts ; zéro nouvelle admission canonique, humaine, PNG ou archive primaire.",
+          "receiptIds": [
+            "oldsave-after-R"
+          ]
+        }
+      ],
+      "ciContext": {
+        "state": "NOT_REVALIDATED_GLOBALLY",
+        "text": "Les preuves etCI du code70 restent historiques ; aucun nouveau verdictCI surR n’est inféré avant ses propres reçus.",
+        "receiptIds": []
+      },
+      "totals": {
+        "node": {
+          "tests": 3946,
+          "pass": 3945,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 1
+        },
+        "currentBuildReceiptIds": [
+          "build-R"
+        ],
+        "nativePassedReports": 1,
+        "nativePassedChecks": 47,
+        "passedNativeReportCaptures": 6,
+        "componentPassedReports": 0,
+        "componentComparisons": 0,
+        "componentCaptures": 0
+      },
+      "sourceRelationship": "DOCUMENTATION_HEAD_MAY_DIFFER_ALL_TESTED_BYTES_MUST_MATCH",
+      "countsBelongToTestedCommitOnly": true,
+      "notAHumanPlaytest": true,
+      "captureAccounting": "Artifacts in a native report can include detached rendering fixtures; actual declared kinds/scopes remain attached. Report capture counts are not complete journeys or uniformly native screenshots.",
+      "countingPolicy": "Headline native totals include primary completed reports only. Overlapping subsets and diagnostic reruns are retained separately. Counts are reported assertions, not distinct gameplay behaviours.",
+      "approved1to1": 0,
+      "fullArtTasksClosed": 0,
+      "humanParticipants": 0,
+      "remaining": {
+        "costumeReferences": 18,
+        "fullNativeLocomotionNotCertified": true,
+        "newArchivesRecovered": 0,
+        "driveContents": "UNKNOWN",
+        "forgeState": "DEFERRED_BY_USER"
+      },
+      "ci": null,
+      "review": null,
+      "merge": null,
+      "historicalV177ResultsTransferred": false,
+      "sourceByteIdenticalToV177": false,
+      "sameInputContract": {
+        "entry": "v178-old-lock-before70-01/imported-fixture.json",
+        "sha256": "a4db71291723c813072ae196f1dc93304bde53daa611f45591499630c16349fd",
+        "reportIds": [
+          "oldsave-before70",
+          "oldsave-after-R"
+        ],
+        "reportShaPointer": [
+          "fixtureSha256"
+        ],
+        "knownPrefixOnly": "a4db7129",
+        "additionalEntries": [
+          "v178-old-lock-after178-01/imported-fixture.json"
+        ]
+      },
+      "nativeLegacyRecoveryReceipts": [
+        {
+          "receiptId": "oldsave-before70",
+          "sourceCommit": "70adab8e66b8b2ee3fc2a731a182dd20d2a6af31",
+          "mode": "before",
+          "fixtureSha256": "a4db71291723c813072ae196f1dc93304bde53daa611f45591499630c16349fd",
+          "comparedServedFiles": 529,
+          "reportedChecks": 43,
+          "captures": 3,
+          "trace": {
+            "entry": "v178-old-lock-before70-01/actual-frame-trace.json",
+            "sha256": "d565d348f5e77236760f310496ebc2ada1b67972cc408e3e31fd916d786d15f1",
+            "frames": 943,
+            "observedWallMilliseconds": 19963.400000035763,
+            "budgetStableAllFrames": true,
+            "milestones": []
+          },
+          "humanParticipants": 0,
+          "runtimeEngineMutation": false,
+          "preLoadNativeBrowserTravelObserved": false
+        },
+        {
+          "receiptId": "oldsave-after-R",
+          "sourceCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "mode": "after",
+          "fixtureSha256": "a4db71291723c813072ae196f1dc93304bde53daa611f45591499630c16349fd",
+          "comparedServedFiles": 529,
+          "reportedChecks": 47,
+          "captures": 6,
+          "trace": {
+            "entry": "v178-old-lock-after178-01/actual-frame-trace.json",
+            "sha256": "722f1ce69b1ad88e192934f0784f2658b3ae7cd454c60f3c9c1ee48a1eaea581",
+            "frames": 5382,
+            "observedWallMilliseconds": 97741.30000001192,
+            "budgetStableAllFrames": true,
+            "milestones": [
+              "withdrew",
+              "reachedBay",
+              "idrisCovered",
+              "liftTravel",
+              "returned"
+            ]
+          },
+          "humanParticipants": 0,
+          "runtimeEngineMutation": false,
+          "preLoadNativeBrowserTravelObserved": false
+        }
+      ],
+      "nativeObservationScope": {
+        "kind": "POST_IMPORT_RECOVERY_OF_PREEXISTING_RETURN_ONLY",
+        "completeNewRoundTripsCredited": 0,
+        "preImportNativeTravelObserved": false,
+        "savedCumulativeDistanceJourneysOrCrossingsCreditedAsNewTravel": false,
+        "screenshotsAndAdjacentStatesClaimExactFramePairing": false,
+        "currentScope": "Observed post-import withdrawal, Idris coverage, remaining lift/return segment and real reload; not a fresh complete outbound-and-return journey."
+      },
+      "baselineRelation": {
+        "servedBeforeCommit": "70adab8e66b8b2ee3fc2a731a182dd20d2a6af31",
+        "mainAtBranch": "5d9f28f05df732a71a17cec013aa39ebab6d4de1",
+        "scopedRuntimeBytesIdentical": true,
+        "scopedRuntimeCount": 147,
+        "onlyDocumentaryPathsDiffer": [
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V163.xlsx",
+          "docs/forge/xeno-trials/progress-v163.json"
+        ],
+        "currentRByteIdenticalToBefore": false,
+        "actuallyChangedRuntimePathsFromBefore": [
+          "src/npc-interdeck-routes-v165.js",
+          "sw.js"
+        ],
+        "httpPortsAreObservationsNotIdentityProof": {
+          "before": 4211,
+          "after": 4210
+        }
+      },
+      "historicalV177": {
+        "testedCommit": "70adab8e66b8b2ee3fc2a731a182dd20d2a6af31",
+        "countsAreCurrentV178Results": false,
+        "recordSha256": "366958bc4e60f36fcf3848da3289f1f8e3905549bb589b7bfffee3e71fa25574",
+        "archive": {
+          "filename": "tantalus-validation-v177-70adab8.zip",
+          "sha256": "85777b0c8074970ad2a16dbb481c46478915752bcc5fc3a2027b8828a74014e7",
+          "bytes": 491154913
+        }
+      },
+      "primaryArchivesRecovered": 0
+    }
   }
 }

@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { resolveAuditSourcesV163, ARSENAL_V167_SUCCESSORS, ARMORY_V169_SUCCESSORS, ARSENAL_V170_SUCCESSORS, ARSENAL_V171_SUCCESSORS, ARMORY_V174_ECONOMY_SUCCESSORS, V177_SOURCE_SUCCESSORS } from './audit-succession-v163.mjs';
+import { resolveAuditSourcesV163, ARSENAL_V167_SUCCESSORS, ARMORY_V169_SUCCESSORS, ARSENAL_V170_SUCCESSORS, ARSENAL_V171_SUCCESSORS, ARMORY_V174_ECONOMY_SUCCESSORS, V177_SOURCE_SUCCESSORS, reviewedLiveDigestV178 } from './audit-succession-v163.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V162 = Object.freeze({
   "docs/forge/xeno-trials/V161-REMAINING-WORKSTREAMS.md": "741f7d28c2373722d208dd80383ae7c4e22142b91177420be7723c41e1053050",
@@ -97,7 +97,7 @@ export function verifyAuditSuccessionV162(previous, current, readSource = readRe
       const historicalSha = ARMORY_V174_ECONOMY_SUCCESSORS[path]?.currentSha256 ?? ARSENAL_V171_SUCCESSORS[path]?.currentSha256 ?? ARSENAL_V170_SUCCESSORS[path]?.currentSha256 ?? ARMORY_V169_SUCCESSORS[path]?.currentSha256 ?? next.currentSha256;
       const revision = V177_SOURCE_SUCCESSORS[path];
       if (revision) assert.equal(revision.previousSha256, historicalSha, 'Incorrect V177 effective predecessor: ' + path);
-      const currentSha = revision?.currentSha256 ?? historicalSha;
+      const currentSha = reviewedLiveDigestV178(path,revision?.currentSha256 ?? historicalSha);
       assert.equal(effective[path], currentSha, 'Incorrect effective successor hash: ' + path);
       assert.equal(observedSha, currentSha, 'Unexpected reviewed successor: ' + path);
     } else {

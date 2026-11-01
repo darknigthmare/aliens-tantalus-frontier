@@ -105,6 +105,153 @@ const runtime = (hour=7,save={},options={}) => {const h=new TestHub();h.start(sa
   h.npcJunClimbArtReadyV165=()=>options.artUnavailable!==true;return h;};
 const context = (h,hour,extra={})=>h.setNpcRoutineContextV62({clock:{day:1,hour},...extra},{persist:false,rebuild:true});
 const tick = (h,seconds,rate=60)=>{for(let i=0;i<seconds*rate;i++)h.update(1/rate);};
+// Disclosed reconstruction of CI760's supported reactor return: Inez's
+// observed pose/counters, its real legacy bookmark, and Idris's native parent
+// owner at the measured12px head-on clearance. No travel is claimed here.
+function inezIdrisReturnFixtureV207(playerX=1523.3959935638488) {
+  const initial=runtime(5,{deck:2,roomId:'quarantine'});
+  const legacy=initial.getNpcServicePhysicalStateV165('inez-bioforge');
+  const parent=runtime(23,{deck:3,roomId:'reactor'});
+  const idris={...parent.getNpcServicePhysicalStateV165('idris-engine'),
+    x:1736.6354742911658,targetRoomId:'engine-room',stage:'walking',velocity:0};
+  const origin={crewId:'crew-09-inez-harlow',deck:2,roomId:'quarantine',x:643,y:532,
+    facing:1,source:'legacy-physical-owner'};
+  const actor={crewId:origin.crewId,deck:3,roomId:'reactor',x:1680.6354742911658,y:532,
+    velocity:0,facing:1,stage:'walking-lift',direction:'return',reason:'occupied',
+    time:382.6168999999875,distance:6727.035474291067,verticalDistance:0,doorProgress:0,
+    crossings:2,liftJourneys:1,departed:true,returnRequested:true,lift:null,
+    bulkheadProgress:Object.fromEntries(HUB_DECKS.flatMap((_,deck)=>buildHubDoorNetworkV58(HUB_DECKS,HUB_WORLD,deck)
+      .filter(d=>!d.lift).map(d=>[d.id,0]))),upperLanding:false,parentLevel:0,vertical:null};
+  return runtime(23,{deck:3,roomId:'reactor',positionX:playerX,
+    npcAnnexRoutesV163:{schema:163,routes:{'inez-bioforge':{schema:163,actor:legacy}}},
+    npcServiceRoutesV161:{schema:161,routes:{'idris-engine':{schema:161,actor:idris}}},
+    npcInterdeckRoutesV165:{schema:165,routes:{'inez-civil':{actor,origin,retained:null,
+      returned:null,nativeHandoff:null,admissionReady:false}}}});
+}
+test('Inez physically yields west of Idris native door, preserves covered handoff and resumes the return lift',()=>{
+  const h=inezIdrisReturnFixtureV207(),id='inez-civil';
+  const body=h.npcInterdeckBodiesV165.get(id),idris=h.getNpcServiceActorV161('idris-engine');
+  const start=structuredClone(h.npcInterdeckStateV165.routes[id].actor);
+  let withdrew=false,covered=false,last=structuredClone(start),previousIdris=h.getNpcServicePhysicalStateV165('idris-engine');
+  for(let n=0;n<65*60;n++) {
+    h.update(1/60);
+    const a=h.npcInterdeckStateV165.routes[id].actor,d=h.getNpcServicePhysicalStateV165('idris-engine');
+    assert.equal(h.npcInterdeckBodiesV165.get(id),body);assert.equal(h.getNpcServiceActorV161('idris-engine'),idris);
+    assert.ok(Math.abs(a.x-last.x)<=27/60+.000001,'withdrawal spends native walking time');
+    assert.ok(Math.abs(a.velocity)<=27.000001);
+    if(a.roomId==='reactor'&&d?.roomId==='reactor') {
+      assert.ok(Math.abs(d.x-a.x)>=56-.000001,'the actual floor bodies keep12px clearance');
+      if(!covered)assert.ok(d.x>a.x,'the floor bodies cannot swap order before the covered annex passage');
+    }
+    withdrew ||= a.x<start.x-1;
+    if(d?.roomId!==previousIdris?.roomId) {
+      assert.equal(previousIdris.stage,'covering');assert.equal(d.doorProgress,0);
+      covered ||= d.roomId==='engine-room';
+    }
+    last=structuredClone(a);previousIdris=d;
+    if(a.lift?.phase==='travel')break;
+  }
+  const done=h.npcInterdeckStateV165.routes[id].actor;
+  assert.ok(withdrew,'the actual Inez body must retreat, not merely wait against Idris');
+  assert.ok(covered,'Idris really enters the existing annex behind its closed native leaf');
+  assert.equal(done.lift?.phase,'travel','the same returning Inez boards the real lift after Idris clears');
+  assert.equal(done.crossings,2);assert.equal(done.liftJourneys,1);
+  assert.ok(done.distance>start.distance);assert.equal(done.verticalDistance,0);
+});
+test('Inez withdrawal preserves a real player occupying the passing bay instead of projecting through it',()=>{
+  const h=inezIdrisReturnFixtureV207(1622),before=structuredClone(h.npcInterdeckStateV165.routes['inez-civil'].actor);
+  const body=h.npcInterdeckBodiesV165.get('inez-civil');
+  tick(h,20);
+  const a=h.npcInterdeckStateV165.routes['inez-civil'].actor,d=h.getNpcServicePhysicalStateV165('idris-engine');
+  assert.ok(a.x>=h.player.x+h.player.w+12-.000001);
+  assert.ok(d.x-a.x>=56-.000001);assert.equal(a.deck,3);assert.equal(a.stage,'walking-lift');
+  assert.equal(a.lift,null);assert.equal(a.liftJourneys,before.liftJourneys);assert.equal(a.crossings,before.crossings);
+  // Disclosed fixture movement of the same supported player body, never a
+  // collision exemption: progressively vacate the bay westward at27px/s.
+  // The browser pilot separately proves actual keyboard controls/bookmark.
+  let resumed=false;
+  for(let n=0;n<70*60;n++) {
+    h.player.x=Math.max(1523.3959935638488,h.player.x-27/60);h.update(1/60);
+    assert.equal(h.npcInterdeckBodiesV165.get('inez-civil'),body);
+    const current=h.npcInterdeckStateV165.routes['inez-civil'].actor;
+    if(current.lift?.phase==='travel'){resumed=true;break;}
+  }
+  assert.ok(resumed,'the same Inez completes the covered passing manoeuvre and resumes its return lift once the player body clears');
+});
+test('Inez passing bay requires the real supported return pair and releases for a free or annexed Idris owner',()=>{
+  const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
+  const a={crewId:'crew-09-inez-harlow',deck:3,roomId:'reactor',x:1680.6354742911658,y:532,
+    direction:'return',stage:'walking-lift',lift:null};
+  const actor={crewId:a.crewId},idris={crewId:'crew-03-idris-kwan',roomId:'reactor',x:a.x+56,y:532,w:44,h:92,alive:true};
+  const watch={targetRoomId:'engine-room',reason:'daily-schedule'};
+  const host={npcInterdeckStateV165:{routes:{'inez-civil':{actor:a}}},npcInterdeckBodiesV165:new Map([['inez-civil',actor]]),
+    getNpcServiceActorV161:()=>idris,getNpcServicePhysicalStateV165:()=>watch};
+  const goal=(body=actor)=>controller.getNpcServiceOwnerYieldGoalV165.call(host,'inez-civil',body);
+  assert.equal(goal(),1622);
+  for(const patch of [{deck:2},{roomId:'dropship-hangar'},{y:284},{direction:'outbound'},
+    {stage:'lift',lift:{phase:'travel'}},{x:1300},{x:1900},{crewId:'invented'}]) {
+    const old={...a};Object.assign(a,patch);assert.equal(goal(),null,JSON.stringify(patch));Object.assign(a,old);
+  }
+  assert.equal(goal({...actor}),null,'a copied or virtual Inez body cannot claim a bay');
+  for(const patch of [{roomId:'engine-room'},{y:284},{alive:false},{downed:true},{crewId:'invented'},{x:a.x-56}]) {
+    const old={...idris};Object.assign(idris,patch);assert.equal(goal(),null,JSON.stringify(patch));
+    for(const key of Object.keys(idris))delete idris[key];Object.assign(idris,old);
+  }
+  watch.targetRoomId='reactor';assert.equal(goal(),null,'an owner at a free native parent watch cannot authorize withdrawal');
+  watch.targetRoomId='engine-room';watch.reason='medical-recovery';assert.equal(goal(),null,'medical priority is not a passing request');
+});
+test('Inez physical passing bay derives the same intent after native route save and reload',()=>{
+  let h=inezIdrisReturnFixtureV207();
+  for(let n=0;n<20*60;n++) {
+    h.update(1/60);
+    const a=h.npcInterdeckStateV165.routes['inez-civil'].actor,d=h.getNpcServicePhysicalStateV165('idris-engine');
+    if(a.x<=1622.1&&d.roomId==='reactor')break;
+  }
+  const waiting=structuredClone(h.npcInterdeckStateV165.routes['inez-civil'].actor);
+  assert.ok(waiting.x<=1622.1,'the body first spends the actual withdrawal distance');
+  const idris=h.getNpcServicePhysicalStateV165('idris-engine');
+  h.persist();h=runtime(23,h.persisted.at(-1));
+  const {actualVelocity:frameVelocity,...durableWaiting}=waiting;
+  assert.deepEqual(h.npcInterdeckStateV165.routes['inez-civil'].actor,durableWaiting,
+    'all durable pose/counters survive; actualVelocity describes only the preceding unsaved frame');
+  assert.deepEqual(h.getNpcServicePhysicalStateV165('idris-engine'),idris);
+  assert.equal(h.getNpcServiceOwnerYieldGoalV165('inez-civil',h.npcInterdeckBodiesV165.get('inez-civil')),1622);
+  let resumed=false;
+  for(let n=0;n<65*60;n++) {
+    h.update(1/60);
+    if(h.npcInterdeckStateV165.routes['inez-civil'].actor.lift?.phase==='travel'){resumed=true;break;}
+  }
+  assert.ok(resumed,'the rehydrated real owners finish their covered passage and return lift');
+});
+test('Inez recovers an old reactor lock after restoring a retired local owner with or without its retained bookmark',()=>{
+  const id='inez-civil',crewId='crew-09-inez-harlow';
+  const bookmark=runtime(5,{deck:2,roomId:'quarantine'}).getNpcServicePhysicalStateV165('inez-bioforge');
+  for(const withBookmark of[true,false]){
+    let h=inezIdrisReturnFixtureV207();h.persist();
+    const saved=structuredClone(h.persisted.at(-1)),origin=saved.npcInterdeckRoutesV165.routes[id].origin;
+    if(withBookmark)origin.legacyBookmark=structuredClone(bookmark);else delete origin.legacyBookmark;
+    saved.npcAnnexRoutesV163.routes['inez-bioforge']={schema:163,actor:null,nativeHandoff:{crewId,
+      fromRoomId:'quarantine',toRoomId:'morgue',reason:'annex-assignment',observedTravel:false,owner:'native-v141-annex-watch'}};
+    h=runtime(23,{...saved,deck:3,roomId:'reactor',positionX:1523.3959935638488});
+    const body=h.npcInterdeckBodiesV165.get(id),state=h.npcInterdeckStateV165.routes[id];
+    assert.ok(body,'The complete transported body is restored from its declared old Save.');
+    assert.deepEqual(state.origin,origin,'The source bookmark is retained without a timetable replacement.');
+    if(!withBookmark)assert.equal(h.getNpcServiceActorV161('inez-bioforge'),null,'Old-shape recovery cannot invent the retired local controller.');
+    const unique=()=>new Set([...(h.npcs||[]),...h.getNpcServiceOwnedActorsV163(),
+      ...h.npcInterdeckBodiesV165.values(),h.getNpcServiceActorV161('inez-bioforge')].filter(a=>a?.crewId===crewId));
+    assert.equal(unique().size,1);assert.equal(h.getNpcServiceOwnerYieldGoalV165(id,body),1622);
+    let resumed=false,previousX=body.x;
+    for(let n=0;n<65*60;n++){
+      h.update(1/60);const a=h.npcInterdeckStateV165.routes[id].actor;
+      assert.equal(h.npcInterdeckBodiesV165.get(id),body);assert.equal(unique().size,1);
+      assert.ok(Math.abs(a.x-previousX)<=27/60+.000001);previousX=a.x;
+      if(a.lift?.phase==='travel'){resumed=true;break;}
+    }
+    assert.ok(resumed,'Both retained-bookmark and old-shape retired owners physically clear the blocked return.');
+    assert.deepEqual(h.npcInterdeckStateV165.routes[id].origin,origin);
+  }
+});
+
 test('Idris keeps its actual parent owner and scheduled watch after elapsed hours while passengers are remote',()=>{
   const h=runtime(5,{deck:3,roomId:'reactor'}),id='idris-engine';
   const actor=h.getNpcServiceActorV161(id);
@@ -825,7 +972,7 @@ async function nativeQaDriverV165(root) {
   const { getNpcInterdeckGeometryV165 } = await import(new URL('src/npc-interdeck-routes-v165.js', root));
   const { ShipCompanionControllerV87 } = await import(new URL('src/ship-companion-controller-v87.js', root));
   const { createInterface } = await import('node:readline');
-  const options = JSON.parse(process.argv[2]), docking = options.kind === 'dock', host = hostV136();
+  const options = JSON.parse(process.argv[2]), docking = options.kind === 'dock', clearance = options.kind === 'lift-clearance', host = hostV136();
   class NodeDouble extends EventTarget {
     constructor() { super(); this.dataset = {}; this.children = []; this.style = {}; this.open = false; }
     setAttribute() {} append(...nodes) { this.children.push(...nodes); }
@@ -836,8 +983,9 @@ async function nativeQaDriverV165(root) {
   document.createElement = () => new NodeDouble(); document.body = new NodeDouble();
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.clock.hour = 5;
   if (save.onboardingV84) save.onboardingV84.phase = 'complete';
-  Object.assign(save.hub, { deck: docking ? 3 : 1, roomId: docking ? 'dropship-hangar' : 'mess',
-    positionX: docking ? 24 : 2350, positionY: 532 });
+  Object.assign(save.hub, { deck: clearance ? 2 : docking ? 3 : 1,
+    roomId: clearance ? 'vehicle-bay' : docking ? 'dropship-hangar' : 'mess',
+    positionX: clearance ? 4914 : docking ? 24 : 2350, positionY: 532 });
   Object.assign(save.hub.systems, { hull: 100, power: 100, oxygen: 100, quarantine: 100 });
   let controller;
   const hub = new HubGame(host.canvas, { audio: { ui() {}, unlock() {} }, onPersist() {}, onStatus() {},
@@ -848,6 +996,7 @@ async function nativeQaDriverV165(root) {
     this.data = { ...this.data, ...structuredClone(patch) };
   } };
   if (docking) controller = new ShipCompanionControllerV87({ hub, saveSystem: system, isActive: () => true, toast() {} });
+  else if (options.blocked && clearance) hub.v51Walls.push({ x: 4975, y: 532, w: 30, h: 92 });
   else if (options.blocked && options.kind !== 'jun-clearance') hub.v51Ladders = hub.v51Ladders.filter(ladder => ladder.id !== 'quarters-floor');
   globalThis.__ATF_HUB__ = hub; globalThis.__ATF_V51__ = { saveSystem: system };
   const rate = options.rate || 60, releases = [], crouchReleases = [];
@@ -961,7 +1110,10 @@ for case in spec['cases']:
         namespace['walk_to'] = lambda page, c, x: walk_to(page, c, x) if x == 18 else None
     error, waiting_at = None, None
     try:
-        if case['kind'] == 'jun-clearance':
+        if case['kind'] == 'lift-clearance':
+            waiting_at = page.state['elapsed']
+            namespace['walk_to'](page, page.state['config'], case['target'])
+        elif case['kind'] == 'jun-clearance':
             namespace['climb_parent'](page, page.state['config'])
             if case.get('blocked'): page.call(type='clearance-wall')
             waiting_at = page.state['elapsed']
@@ -986,6 +1138,59 @@ Path(spec['output']).write_text(json.dumps(results))
     return JSON.parse(readFileSync(output, 'utf8'));
   } finally { rmSync(directory, { recursive: true, force: true }); }
 }
+
+function nativeQaValidatorV165(name) {
+  const python="import ast,json,sys\nfrom pathlib import Path\nt=ast.parse(Path(sys.argv[1]).read_text())\nprint(json.dumps(next(ast.literal_eval(n.value) for n in t.body if isinstance(n,ast.Assign) and any(isinstance(x,ast.Name) and x.id==sys.argv[2] for x in n.targets))))";
+  const source=JSON.parse(execFileSync('python3',['-B','-c',python,
+    new URL('qa-npc-interdeck-native-v165.py',import.meta.url).pathname,name],{encoding:'utf8'}));
+  return new Function('return ('+source+')')();
+}
+
+test('occupied lift QA uses an attainable native world clearance and still refuses a real wall within120s',()=>{
+  const plan=nativeQaValidatorV165('NATIVE_LIFT_CLEARANCE_V165');
+  const c={cabinX:4914,worldWidth:HUB_WORLD.width,floorY:HUB_WORLD.floorY,nativeDeck:0,deck:2};
+  const p={w:44,h:92,y:532},trip={schema:165,phase:'travel',cabinX:4914,exitX:4818,fromDeck:0,toDeck:2};
+  const goal=plan(c,p,trip);assert.equal(goal.ok,true);assert.equal(goal.nominalX,5074);assert.equal(goal.targetX,5052);
+  assert.ok(goal.targetX-goal.tolerance>=goal.lane.right+goal.margin);
+  const [original,fixed,blocked]=runNativeQaV165([
+    {kind:'lift-clearance',target:5074},{kind:'lift-clearance',target:goal.targetX},
+    {kind:'lift-clearance',target:goal.targetX,blocked:true}
+  ]);
+  assert.match(original.error,/Native walking did not reach 5074/);
+  assert.equal(original.player.x,5052);assert.ok(original.elapsed-original.waitingAt>=120);
+  assert.equal(fixed.error,null);assert.ok(Math.abs(fixed.player.x-goal.targetX)<=7);
+  assert.equal(fixed.player.y+fixed.player.h,624);assert.ok(fixed.player.x<=5052);
+  assert.match(blocked.error,/Native walking did not reach/);assert.ok(blocked.elapsed-blocked.waitingAt>=120);
+  assert.ok(blocked.player.x+blocked.player.w<=4975+.001,'native wall remains authoritative');
+  assert.equal(plan(c,{...p,w:0},trip).ok,false);
+  assert.equal(plan(c,p,{...trip,cabinX:4900}).ok,false);
+  assert.equal(plan(c,p,{...trip,phase:'opening'}).ok,false);
+  assert.equal(plan({...c,worldWidth:100},p,trip).ok,false);
+  const fallback=plan(c,p,{...trip,exitX:5010});
+  assert.equal(fallback.ok,true);assert.equal(fallback.targetX,4754);
+  assert.ok(fallback.targetX+fallback.tolerance+p.w<=fallback.lane.left-fallback.margin);
+});
+
+test('final native return QA validates the measured760 Jun bookmark including deck height and496vertical pixels',()=>{
+  const validate=nativeQaValidatorV165('NATIVE_RETURN_RECEIPT_V165');
+  // Actual Jun760 return receipt, sha25616fc81d49c4cc661dfd9c08fe0390e64946a787b578cca771e341c4af02cfaec.
+  // Replaying this bounded validator is not a new browser journey.
+  const c={id:'jun-sanitary',crewId:'crew-11-jun-park',nativeDeck:3,origin:'life-support',worldWidth:5120,floorY:624};
+  const origin={crewId:c.crewId,deck:3,roomId:'life-support',x:3158,y:532,facing:1,source:'legacy-physical-owner'};
+  const returned={crewId:c.crewId,deck:3,roomId:'life-support',x:3158,y:532,distance:9179.999999999238,
+    verticalDistance:496,liftJourneys:2,crossings:2,observedTravel:true};
+  assert.equal(validate(c,origin,returned).ok,true);
+  for(const [name,patch] of [
+    ['wrong crew',{crewId:'crew-10-david-8r'}],['wrong deck',{deck:2}],['wrong room',{roomId:'reactor'}],
+    ['wrong x',{x:3158.01}],['wrong height',{y:531}],['missing height',{y:undefined}],
+    ['nonfinite height',{y:NaN}],['missing return',{observedTravel:false}],['one lift',{liftJourneys:1}],
+    ['one crossing',{crossings:1}],['unmeasured distance',{distance:0}],['infinite distance',{distance:Infinity}],
+    ['unbounded distance',{distance:1e9+1}],['half vertical loop',{verticalDistance:248}],
+    ['missing vertical distance',{verticalDistance:undefined}],['invented vertical pixels',{verticalDistance:497}]
+  ])assert.equal(validate(c,origin,{...returned,...patch}).ok,false,name);
+  for(const patch of [{source:'timetable-sample'},{deck:2},{x:NaN},{y:NaN}])
+    assert.equal(validate(c,{...origin,...patch},returned).ok,false);
+});
 
 test('native interdeck QA finishes both real ladder landings and still refuses a missing ladder', () => {
   const [arrived, blocked] = runNativeQaV165([{ kind: 'climb' }, { kind: 'climb', blocked: true }]);
