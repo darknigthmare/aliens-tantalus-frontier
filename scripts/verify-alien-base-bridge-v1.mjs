@@ -13,6 +13,7 @@ import {
 import { WEAPONS, ENEMIES, VEHICLES, EQUIPMENT, CREW } from '../src/content-core-v50.js';
 import { renderAlienBaseSnapshotV1 } from './sync-alien-base-v1.mjs';
 import { exportTantalusInventoryV1 } from './export-alien-base-tantalus-v1.mjs';
+import { CatalogWorkbenchV62 } from '../src/catalog-ui-v62.js';
 
 test('Alien_base snapshot is deterministic, checked and reference-only', () => {
   assert.equal(ALIEN_BASE_ENTITIES_V1.length, 46);
@@ -74,4 +75,22 @@ test('Outbound Tantalus audit separates source identity from game tuning', () =>
   assert.equal(out.catalogues.weapons[0].identity.id,WEAPONS[0].id);
   assert.equal(out.catalogues.weapons[0].identity.damage,undefined);
   assert.equal(out.catalogues.weapons[0].gameplayTuning.damage,WEAPONS[0].damage);
+});
+
+test('In-game catalogue displays reference without inventing a canon or a playable item', () => {
+  const rendered = [];
+  const doc = { createElement(tag) {
+    return { tagName:tag, className:'', textContent:'', dataset:{}, children:[],
+      append(...items) { this.children.push(...items); } };
+  } };
+  const context = { document:doc, detail:{append(x){rendered.push(x);}},
+    renderSection:CatalogWorkbenchV62.prototype.renderSection };
+  const render = CatalogWorkbenchV62.prototype.renderAlienBaseReferenceV1;
+  render.call(context,{id:'enemy-008-queen',catalog:'enemies'});
+  assert.equal(rendered.length,1);
+  assert.equal(rendered[0].dataset.sectionKind,'shared-alien-base-v1');
+  assert.ok(rendered[0].children.some(x=>x.textContent.includes('Aliens (1986)')));
+  assert.ok(rendered[0].children.some(x=>x.textContent.includes('1:1')));
+  render.call(context,{id:'no-common-entry',catalog:'enemies'});
+  assert.equal(rendered.length,1, 'unknown references must not show fake canon');
 });
