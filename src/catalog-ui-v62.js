@@ -19,7 +19,7 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
-import { resolveAlienBaseDossierV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
+import { resolveAlienBaseDossierV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 
 const importWalkV107 = id => {
@@ -916,10 +916,12 @@ export class CatalogWorkbenchV62 {
   renderAlienBaseReferenceV1(record) {
     if (!record || typeof record.id !== 'string') return;
     const dossier = resolveAlienBaseDossierV1(record.id);
+    const master = resolveAlienBaseMasterEntityV1(record.id);
     const weapon = record.catalog === 'weapons' ? resolveAlienBaseWeaponReferenceV1(record.id) : null;
-    if (!dossier && !weapon) return;
+    if (!dossier && !master && !weapon) return;
     const section = this.renderSection('ARCHIVES COMMUNES — ALIEN_BASE', 'shared-alien-base-v1');
-    section.dataset.sharedIdentity = dossier?.id || weapon?.id || '';
+    section.dataset.sharedIdentity = master?.id || dossier?.id || weapon?.id || '';
+    if (master) section.append(createElement(this.document,'p','catalog-v62__fact-note','Identité partagée : ' + master.name);
     section.append(createElement(this.document,'p','catalog-v62__fact-note',
       dossier?.sourceWork ? 'Œuvre de référence : ' + dossier.sourceWork
         : weapon?.work ? 'Œuvre de référence : ' + weapon.work : 'Source à documenter'));
