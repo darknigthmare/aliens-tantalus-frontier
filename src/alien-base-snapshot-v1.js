@@ -7,7 +7,9 @@ export const ALIEN_BASE_SNAPSHOT_INFO_V1 = Object.freeze({
   "sourceCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
   "projectedCount": {
     "entities": 46,
-    "weapons": 200
+    "weapons": 200,
+    "masterEntities": 84,
+    "masterLinks": 45
   },
   "description": "Static approved identity metadata only; not game stats or 1:1 certificate."
 });
@@ -3924,5 +3926,1455 @@ export const ALIEN_BASE_WEAPONS_V1 = Object.freeze([
     "visualFidelity": "not-1to1-certified",
     "sourceUrl": "https://www.daybreakgames.com/press/afe2/article/dbg-afe2-now-live",
     "missing": "Rechercher preuve + asset"
+  }
+]);
+export const ALIEN_BASE_MASTER_ENTITIES_V1 = Object.freeze([
+  {
+    "id": "species.xenomorph",
+    "type": "species",
+    "name": "Xénomorphe",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Organisme extraterrestre parasitoïde ; les variantes sont indexées par œuvre et non fusionnées."
+  },
+  {
+    "id": "species.human",
+    "type": "species",
+    "name": "Humain",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Humains militaires, civils, scientifiques et corporatifs : professions distinctes des espèces."
+  },
+  {
+    "id": "species.yautja",
+    "type": "species",
+    "name": "Predator / Yautja",
+    "sourceIds": [
+      "predator1987"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Le terme Yautja est issu de l'univers étendu ; distinguer le chasseur filmique des clans originaux."
+  },
+  {
+    "id": "species.engineer",
+    "type": "species",
+    "name": "Ingénieur",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Espèce présente dans Prometheus."
+  },
+  {
+    "id": "species.neomorph",
+    "type": "species",
+    "name": "Néomorphe",
+    "sourceIds": [
+      "covenant2017"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Créature de Covenant à distinguer du Xénomorphe classique."
+  },
+  {
+    "id": "life.egg",
+    "type": "life_stage",
+    "name": "Œuf / Ovomorphe",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Stade associé au Facehugger ; ne pas l'utiliser comme unité combattante standard."
+  },
+  {
+    "id": "life.facehugger",
+    "type": "life_stage",
+    "name": "Facehugger",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Stade implantant un embryon dans un hôte."
+  },
+  {
+    "id": "life.chestburster",
+    "type": "life_stage",
+    "name": "Chestburster",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Stade d'émergence de l'organisme."
+  },
+  {
+    "id": "caste.drone",
+    "type": "caste",
+    "name": "Drone / adulte à dôme lisse",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Désignation variable selon les œuvres ; rattacher chaque modèle à une adaptation précise."
+  },
+  {
+    "id": "caste.warrior",
+    "type": "caste",
+    "name": "Warrior",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Morphologie à crâne nervuré popularisée par Aliens."
+  },
+  {
+    "id": "caste.queen",
+    "type": "caste",
+    "name": "Reine",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Individu pondeur représenté dans Aliens."
+  },
+  {
+    "id": "caste.runner",
+    "type": "caste",
+    "name": "Runner / quadrupède",
+    "sourceIds": [
+      "alien3"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Forme liée à l'hôte ; chien dans certaines versions, bovin dans l'édition assemblée du film."
+  },
+  {
+    "id": "caste.predalien",
+    "type": "caste",
+    "name": "Predalien",
+    "sourceIds": [
+      "avpr2007"
+    ],
+    "canonScope": "crossover",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Hybride issu d'un hôte Predator dans AVP: Requiem ; références croisées AVP."
+  },
+  {
+    "id": "caste.praetorian",
+    "type": "caste",
+    "name": "Praetorian",
+    "sourceIds": [
+      "avpextinction"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Caste de l'univers étendu ; ne pas la déclarer présente dans chaque film."
+  },
+  {
+    "id": "caste.crusher",
+    "type": "caste",
+    "name": "Crusher",
+    "sourceIds": [
+      "acm2013"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Variante massive d'Aliens: Colonial Marines."
+  },
+  {
+    "id": "caste.spitter",
+    "type": "caste",
+    "name": "Spitter",
+    "sourceIds": [
+      "acm2013"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Variante projetant un jet corrosif dans Aliens: Colonial Marines."
+  },
+  {
+    "id": "caste.boiler",
+    "type": "caste",
+    "name": "Boiler",
+    "sourceIds": [
+      "acm2013"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Variante explosive dans Aliens: Colonial Marines."
+  },
+  {
+    "id": "caste.lurker",
+    "type": "caste",
+    "name": "Lurker",
+    "sourceIds": [
+      "acm2013"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Variante d'embuscade dans Aliens: Colonial Marines."
+  },
+  {
+    "id": "caste.neomorph",
+    "type": "caste",
+    "name": "Néomorphe",
+    "sourceIds": [
+      "covenant2017"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Morphologie distincte de l'adulte classique."
+  },
+  {
+    "id": "creature.trilobite",
+    "type": "creature",
+    "name": "Trilobite",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Créature de Prometheus ; cycle distinct à conserver."
+  },
+  {
+    "id": "creature.deacon",
+    "type": "creature",
+    "name": "Deacon",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Créature de la conclusion de Prometheus."
+  },
+  {
+    "id": "creature.newborn",
+    "type": "creature",
+    "name": "Newborn",
+    "sourceIds": [
+      "alienres"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Créature hybride d'Alien Resurrection."
+  },
+  {
+    "id": "faction.uscm",
+    "type": "faction",
+    "name": "United States Colonial Marine Corps",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Force militaire coloniale, distincte des équipes de sécurité corporatives."
+  },
+  {
+    "id": "faction.weyland_yutani",
+    "type": "corporation",
+    "name": "Weyland-Yutani",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Entreprise de l'univers Alien ; ses divisions et sous-traitants ne sont pas une faction unique universelle."
+  },
+  {
+    "id": "faction.seegson",
+    "type": "corporation",
+    "name": "Seegson",
+    "sourceIds": [
+      "alienisolation"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Société exploitant notamment des systèmes sur Sevastopol."
+  },
+  {
+    "id": "faction.weyland_corp",
+    "type": "corporation",
+    "name": "Weyland Corp.",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Contexte pré-fusion du projet Prometheus."
+  },
+  {
+    "id": "faction.colonists",
+    "type": "faction",
+    "name": "Colons",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Personnel civil, à distinguer des USCM et agents Weyland-Yutani."
+  },
+  {
+    "id": "faction.predator_clans",
+    "type": "faction",
+    "name": "Clans Predator",
+    "sourceIds": [
+      "predator1987"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Organisation et titres variant selon les œuvres ; ne pas imposer de hiérarchie fan-made au canon."
+  },
+  {
+    "id": "character.ripley",
+    "type": "character",
+    "name": "Ellen Ripley",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Personnage de la saga filmique."
+  },
+  {
+    "id": "character.ash",
+    "type": "character",
+    "name": "Ash",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Membre de l'équipage du Nostromo, synthétique révélé dans le film."
+  },
+  {
+    "id": "character.kane",
+    "type": "character",
+    "name": "Gilbert Kane",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Membre de l'équipage du Nostromo."
+  },
+  {
+    "id": "character.hicks",
+    "type": "character",
+    "name": "Dwayne Hicks",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Caporal des Colonial Marines."
+  },
+  {
+    "id": "character.hudson",
+    "type": "character",
+    "name": "William Hudson",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Marine colonial."
+  },
+  {
+    "id": "character.vasquez",
+    "type": "character",
+    "name": "Jenette Vasquez",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Marine spécialisée Smartgun."
+  },
+  {
+    "id": "character.bishop",
+    "type": "character",
+    "name": "Bishop",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Synthétique au service des Marines."
+  },
+  {
+    "id": "character.burke",
+    "type": "character",
+    "name": "Carter J. Burke",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Représentant Weyland-Yutani."
+  },
+  {
+    "id": "character.amanda_ripley",
+    "type": "character",
+    "name": "Amanda Ripley",
+    "sourceIds": [
+      "alienisolation"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Personnage jouable d'Alien: Isolation."
+  },
+  {
+    "id": "character.david",
+    "type": "character",
+    "name": "David 8",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Modèle synthétique apparaissant dans Prometheus."
+  },
+  {
+    "id": "character.walter",
+    "type": "character",
+    "name": "Walter",
+    "sourceIds": [
+      "covenant2017"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Synthétique apparaissant dans Alien: Covenant."
+  },
+  {
+    "id": "character.rain",
+    "type": "character",
+    "name": "Rain Carradine",
+    "sourceIds": [
+      "romulus2024"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Personnage d'Alien: Romulus."
+  },
+  {
+    "id": "character.rook",
+    "type": "character",
+    "name": "Rook",
+    "sourceIds": [
+      "romulus2024"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Synthétique d'Alien: Romulus."
+  },
+  {
+    "id": "weapon.m41a",
+    "type": "weapon",
+    "name": "M41A Pulse Rifle",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Fusil emblématique des Marines, avec lance-grenades sous canon ; chiffres de capacité réservés aux fiches de source validées."
+  },
+  {
+    "id": "weapon.m56",
+    "type": "weapon",
+    "name": "M56 Smartgun",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Arme de soutien montée sur harnais."
+  },
+  {
+    "id": "weapon.m240",
+    "type": "weapon",
+    "name": "M240 Incinerator",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Lance-flammes des Marines."
+  },
+  {
+    "id": "weapon.ua571",
+    "type": "weapon",
+    "name": "Tourelle de sentinelle UA 571",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Système défensif automatisé."
+  },
+  {
+    "id": "weapon.vp78",
+    "type": "weapon",
+    "name": "VP78",
+    "sourceIds": [
+      "alienisolation"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Arme de poing présente dans Alien: Isolation ; ne pas confondre avec l'accessoire film."
+  },
+  {
+    "id": "weapon.flamethrower_isolation",
+    "type": "weapon",
+    "name": "Lance-flammes (Isolation)",
+    "sourceIds": [
+      "alienisolation"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Équipement de survie avec modèle et mécanique propres au jeu."
+  },
+  {
+    "id": "weapon.predator_wristblade",
+    "type": "weapon",
+    "name": "Lames de poignet Predator",
+    "sourceIds": [
+      "predator1987"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Arme de contact de Predator."
+  },
+  {
+    "id": "weapon.predator_plasma",
+    "type": "weapon",
+    "name": "Plasmacaster",
+    "sourceIds": [
+      "predator1987"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Arme énergétique montée à l'épaule ; désignation courante de l'univers étendu."
+  },
+  {
+    "id": "weapon.predator_spear",
+    "type": "weapon",
+    "name": "Lance Predator",
+    "sourceIds": [
+      "predator2"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Arme à allonge représentée dans Predator 2."
+  },
+  {
+    "id": "equipment.motion_tracker",
+    "type": "equipment",
+    "name": "Détecteur de mouvement",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Dispositif portable de repérage."
+  },
+  {
+    "id": "equipment.power_loader",
+    "type": "equipment",
+    "name": "Power Loader",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Exosquelette industriel utilisé par Ripley."
+  },
+  {
+    "id": "equipment.cryo",
+    "type": "equipment",
+    "name": "Caisson d'hypersommeil",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Équipement spatial, modèles différents par navire."
+  },
+  {
+    "id": "equipment.bio_mask",
+    "type": "equipment",
+    "name": "Bio-mask Predator",
+    "sourceIds": [
+      "predator1987"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Masque et capteurs du chasseur."
+  },
+  {
+    "id": "equipment.cloak",
+    "type": "equipment",
+    "name": "Camouflage Predator",
+    "sourceIds": [
+      "predator1987"
+    ],
+    "canonScope": "predator",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Technologie de dissimulation."
+  },
+  {
+    "id": "vehicle.m577",
+    "type": "vehicle",
+    "name": "M577 APC",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Transport blindé utilisé par les Marines."
+  },
+  {
+    "id": "vehicle.ud4",
+    "type": "vehicle",
+    "name": "UD-4 Cheyenne Dropship",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Appareil de largage des Marines."
+  },
+  {
+    "id": "ship.nostromo",
+    "type": "ship",
+    "name": "USCSS Nostromo",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Remorqueur commercial de l'Alien original."
+  },
+  {
+    "id": "ship.narcissus",
+    "type": "ship",
+    "name": "Narcissus",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Navette de sauvetage du Nostromo."
+  },
+  {
+    "id": "ship.sulaco",
+    "type": "ship",
+    "name": "USS Sulaco",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Vaisseau des Colonial Marines."
+  },
+  {
+    "id": "ship.prometheus",
+    "type": "ship",
+    "name": "USCSS Prometheus",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Vaisseau de l'expédition de Prometheus."
+  },
+  {
+    "id": "ship.covenant",
+    "type": "ship",
+    "name": "USCSS Covenant",
+    "sourceIds": [
+      "covenant2017"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Vaisseau colonial du film Covenant."
+  },
+  {
+    "id": "location.lv426",
+    "type": "location",
+    "name": "LV-426 / Acheron",
+    "sourceIds": [
+      "alien1979"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Lune liée aux événements d'Alien et Aliens."
+  },
+  {
+    "id": "location.hadleys_hope",
+    "type": "location",
+    "name": "Hadley's Hope",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Colonie humaine sur LV-426."
+  },
+  {
+    "id": "location.fiorina161",
+    "type": "location",
+    "name": "Fiorina 161",
+    "sourceIds": [
+      "alien3"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Monde-prison d'Alien 3."
+  },
+  {
+    "id": "location.lv223",
+    "type": "location",
+    "name": "LV-223",
+    "sourceIds": [
+      "prometheus2012"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Destination de Prometheus."
+  },
+  {
+    "id": "location.sevastopol",
+    "type": "location",
+    "name": "Sevastopol Station",
+    "sourceIds": [
+      "alienisolation"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Station d'Alien: Isolation."
+  },
+  {
+    "id": "location.renaissance",
+    "type": "location",
+    "name": "Station Renaissance",
+    "sourceIds": [
+      "romulus2024"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Station d'Alien: Romulus."
+  },
+  {
+    "id": "caste.praetorian_afe",
+    "type": "caste",
+    "name": "Praetorian — variante Fireteam Elite",
+    "sourceIds": [
+      "fireteamelite"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Modèle propre à Fireteam Elite, distinct de l'entrée étendue issue d'AVP: Extinction."
+  },
+  {
+    "id": "caste.crusher_afe",
+    "type": "caste",
+    "name": "Crusher — variante Fireteam Elite",
+    "sourceIds": [
+      "fireteamelite"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Modèle Fireteam Elite ; ne pas le fusionner avec les anciens profils Colonial Marines."
+  },
+  {
+    "id": "caste.spitter_afe",
+    "type": "caste",
+    "name": "Spitter — variante Fireteam Elite",
+    "sourceIds": [
+      "fireteamelite"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Modèle Fireteam Elite ; présentation/source à vérifier par version."
+  },
+  {
+    "id": "caste.prowler_afe",
+    "type": "caste",
+    "name": "Prowler — Fireteam Elite",
+    "sourceIds": [
+      "fireteamelite"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Embuscade documentée ; aucun timing numérique universel canonique."
+  },
+  {
+    "id": "caste.burster_afe",
+    "type": "caste",
+    "name": "Burster — Fireteam Elite",
+    "sourceIds": [
+      "fireteamelite"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Explosion acide et silhouette distincte, source exacte à contrôler."
+  },
+  {
+    "id": "creature.protomorph_covenant",
+    "type": "creature",
+    "name": "Protomorph — Covenant",
+    "sourceIds": [
+      "covenant2017"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Nom de référence de production à confirmer ; ne pas amalgamer avec Drone Alien 1979."
+  },
+  {
+    "id": "character.working_joe",
+    "type": "character",
+    "name": "Working Joe — Seegson",
+    "sourceIds": [
+      "alienisolation"
+    ],
+    "canonScope": "expanded",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Synthétique Seegson, distinct du personnel humain et des autres gammes d'androïdes."
+  },
+  {
+    "id": "creature.offspring_romulus",
+    "type": "creature",
+    "name": "Offspring — Romulus",
+    "sourceIds": [
+      "romulus2024"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Hybride issu des événements de Romulus ; traits visuels par phase à contrôler."
+  },
+  {
+    "id": "equipment.m3_armor",
+    "type": "equipment",
+    "name": "M3 Personnel Armor",
+    "sourceIds": [
+      "aliens1986"
+    ],
+    "canonScope": "film",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Tenue de protection des marines coloniaux ; variantes, accessoires et visuels à sourcer."
+  },
+  {
+    "id": "character.wendy_earth",
+    "type": "character",
+    "name": "Wendy — Alien: Earth",
+    "sourceIds": [
+      "alienearth2025"
+    ],
+    "canonScope": "series",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Personnage de la série ; ne pas présumer des capacités numériques d'un jeu."
+  },
+  {
+    "id": "faction.atarax_tantalus",
+    "type": "faction",
+    "name": "ATARAX Directorate",
+    "sourceIds": [
+      "tantalus2026"
+    ],
+    "canonScope": "project_original",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Faction créée pour Tantalus, sans statut canon Alien."
+  },
+  {
+    "id": "character.mara_vega_tantalus",
+    "type": "character",
+    "name": "Mara Vega",
+    "sourceIds": [
+      "tantalus2026"
+    ],
+    "canonScope": "project_original",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Personnage original de Tantalus, exclu du canon franchise."
+  },
+  {
+    "id": "character.bishop9_tantalus",
+    "type": "character",
+    "name": "BISHOP-9",
+    "sourceIds": [
+      "tantalus2026"
+    ],
+    "canonScope": "project_original",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Synthétique spécifique à Tantalus ; distinct de Bishop (Aliens)."
+  },
+  {
+    "id": "character.david8r_tantalus",
+    "type": "character",
+    "name": "DAVID-8R",
+    "sourceIds": [
+      "tantalus2026"
+    ],
+    "canonScope": "project_original",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Synthétique spécifique à Tantalus ; distinct de David 8 (Prometheus)."
+  },
+  {
+    "id": "creature.trilobite_echo_tantalus",
+    "type": "creature",
+    "name": "Trilobite Echo",
+    "sourceIds": [
+      "tantalus2026"
+    ],
+    "canonScope": "project_original",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Reconstruction de Tantalus, non identique sans preuve au Trilobite de Prometheus."
+  },
+  {
+    "id": "creature.deacon_line_tantalus",
+    "type": "creature",
+    "name": "Deacon Line",
+    "sourceIds": [
+      "tantalus2026"
+    ],
+    "canonScope": "project_original",
+    "statPolicy": "no_universal_gameplay_stats",
+    "review": "media_appearance_to_verify_per_variant",
+    "notes": "Variante de Tantalus, non identique sans preuve au Deacon de Prometheus."
+  }
+]);
+export const ALIEN_BASE_MASTER_LINKS_V1 = Object.freeze([
+  {
+    "dossierId": "ab:organism:ovomorph-alien-1979",
+    "sharedEntityId": "life.egg",
+    "gameRecordIds": [
+      "enemy-001-ovomorph"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:facehugger-alien-1979",
+    "sharedEntityId": "life.facehugger",
+    "gameRecordIds": [
+      "enemy-002-facehugger"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:chestburster-alien-1979",
+    "sharedEntityId": "life.chestburster",
+    "gameRecordIds": [
+      "enemy-003-chestburster"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:drone-big-chap-alien-1979",
+    "sharedEntityId": "caste.drone",
+    "gameRecordIds": [
+      "enemy-004-drone-big-chap"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:warrior-aliens-1986",
+    "sharedEntityId": "caste.warrior",
+    "gameRecordIds": [
+      "enemy-005-warrior"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:runner-alien-3-1992",
+    "sharedEntityId": "caste.runner",
+    "gameRecordIds": [
+      "enemy-006-runner"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:praetorian-aliens-fireteam-elite",
+    "sharedEntityId": "caste.praetorian_afe",
+    "gameRecordIds": [
+      "enemy-007-praetorian"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:queen-aliens-1986",
+    "sharedEntityId": "caste.queen",
+    "gameRecordIds": [
+      "enemy-008-queen"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:crusher-aliens-fireteam-elite",
+    "sharedEntityId": "caste.crusher_afe",
+    "gameRecordIds": [
+      "enemy-009-crusher"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:spitter-aliens-fireteam-elite",
+    "sharedEntityId": "caste.spitter_afe",
+    "gameRecordIds": [
+      "enemy-010-spitter"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:boiler-aliens-colonial-marines",
+    "sharedEntityId": "caste.boiler",
+    "gameRecordIds": [
+      "enemy-014-boiler"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:prowler-aliens-fireteam-elite",
+    "sharedEntityId": "caste.prowler_afe",
+    "gameRecordIds": [
+      "enemy-015-prowler"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:burster-aliens-fireteam-elite",
+    "sharedEntityId": "caste.burster_afe",
+    "gameRecordIds": [
+      "enemy-016-burster"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:trilobite-echo-prometheus-2012",
+    "sharedEntityId": "creature.trilobite_echo_tantalus",
+    "gameRecordIds": [
+      "enemy-035-trilobite-echo"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:deacon-line-prometheus-2012",
+    "sharedEntityId": "creature.deacon_line_tantalus",
+    "gameRecordIds": [
+      "enemy-036-deacon-line"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:neomorph-alien-covenant-2017",
+    "sharedEntityId": "species.neomorph",
+    "gameRecordIds": [
+      "enemy-037-neomorph"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:protomorph-alien-covenant-2017",
+    "sharedEntityId": "creature.protomorph_covenant",
+    "gameRecordIds": [
+      "enemy-038-protomorph"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:synthetic:working-joe-alien-isolation",
+    "sharedEntityId": "character.working_joe",
+    "gameRecordIds": [
+      "enemy-041-working-joe"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:vehicle:m577-armored-personnel-carrier-aliens-1986",
+    "sharedEntityId": "vehicle.m577",
+    "gameRecordIds": [
+      "vehicle-001-m577-armored-personnel-carrier"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:vehicle:p-5000-powered-work-loader-aliens-1986",
+    "sharedEntityId": "equipment.power_loader",
+    "gameRecordIds": [
+      "vehicle-007-p-5000-powered-work-loader"
+    ],
+    "relation": "same-object-different-game-classification",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:vehicle:ud-4l-cheyenne-dropship-aliens-1986",
+    "sharedEntityId": "vehicle.ud4",
+    "gameRecordIds": [
+      "vehicle-009-ud-4l-cheyenne-dropship"
+    ],
+    "relation": "specific-variant-of",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:vehicle:narcissus-nostromo-lifeboat-alien-1979",
+    "sharedEntityId": "ship.narcissus",
+    "gameRecordIds": [
+      "vehicle-013-uscss-nostromo-shuttle"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:equipment:motion-tracker-aliens-1986",
+    "sharedEntityId": "equipment.motion_tracker",
+    "gameRecordIds": [
+      "equipment-001-motion-tracker"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:equipment:m3-personnel-armor-aliens-1986",
+    "sharedEntityId": "equipment.m3_armor",
+    "gameRecordIds": [
+      "equipment-009-m3-personnel-armor"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:weapon:m41a-pulse-rifle-aliens-1986",
+    "sharedEntityId": "weapon.m41a",
+    "gameRecordIds": [
+      "weapon-001-m41a-pulse-rifle"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:weapon:m56-smartgun-aliens-1986",
+    "sharedEntityId": "weapon.m56",
+    "gameRecordIds": [
+      "weapon-005-m56-smartgun"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:weapon:m240-incinerator-unit-aliens-1986",
+    "sharedEntityId": "weapon.m240",
+    "gameRecordIds": [
+      "weapon-006-m240-incinerator-unit"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:weapon:ua-571-c-sentry-gun-aliens-1986",
+    "sharedEntityId": "weapon.ua571",
+    "gameRecordIds": [
+      "weapon-015-ua-571-c-sentry-gun"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:faction:weyland-yutani-alien-franchise",
+    "sharedEntityId": "faction.weyland_yutani",
+    "gameRecordIds": [
+      "weyland-yutani"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:faction:seegson-alien-isolation",
+    "sharedEntityId": "faction.seegson",
+    "gameRecordIds": [
+      "seegson"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:faction:united-states-colonial-marine-corps-aliens-1986",
+    "sharedEntityId": "faction.uscm",
+    "gameRecordIds": [
+      "uscm"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:faction:atarax-directorate-aliens-tantalus-frontier",
+    "sharedEntityId": "faction.atarax_tantalus",
+    "gameRecordIds": [
+      "atarax"
+    ],
+    "relation": "project-original-record",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:mara-vega-aliens-tantalus-frontier",
+    "sharedEntityId": "character.mara_vega_tantalus",
+    "gameRecordIds": [
+      "crew-01-mara-vega"
+    ],
+    "relation": "project-original-record",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:bishop-9-aliens-tantalus-frontier",
+    "sharedEntityId": "character.bishop9_tantalus",
+    "gameRecordIds": [
+      "crew-05-bishop-9"
+    ],
+    "relation": "project-original-record",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:david-8r-aliens-tantalus-frontier",
+    "sharedEntityId": "character.david8r_tantalus",
+    "gameRecordIds": [
+      "crew-10-david-8r"
+    ],
+    "relation": "project-original-record",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:newborn-alien-resurrection-1997",
+    "sharedEntityId": "creature.newborn",
+    "gameRecordIds": [
+      "enemy-569-newborn"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:offspring-alien-romulus-2024",
+    "sharedEntityId": "creature.offspring_romulus",
+    "gameRecordIds": [
+      "enemy-570-offspring"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:organism:predalien-aliens-vs-predator-requiem-2007",
+    "sharedEntityId": "caste.predalien",
+    "gameRecordIds": [
+      "enemy-571-predalien"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:ellen-ripley-alien-1979",
+    "sharedEntityId": "character.ripley",
+    "gameRecordIds": [
+      "personnel-archive-ellen-ripley"
+    ],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:amanda-ripley-alien-isolation",
+    "sharedEntityId": "character.amanda_ripley",
+    "gameRecordIds": [],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:dwayne-hicks-aliens-1986",
+    "sharedEntityId": "character.hicks",
+    "gameRecordIds": [],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:bishop-aliens-1986",
+    "sharedEntityId": "character.bishop",
+    "gameRecordIds": [],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:david-8-prometheus-2012",
+    "sharedEntityId": "character.david",
+    "gameRecordIds": [],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:rain-carradine-alien-romulus-2024",
+    "sharedEntityId": "character.rain",
+    "gameRecordIds": [],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
+  },
+  {
+    "dossierId": "ab:character:wendy-alien-earth-2025",
+    "sharedEntityId": "character.wendy_earth",
+    "gameRecordIds": [],
+    "relation": "reviewed-identity-alias",
+    "status": "source-version-review-pending",
+    "autoMergeStats": false
   }
 ]);
