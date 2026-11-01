@@ -6387,10 +6387,10 @@
       "Routes PNJ",
       "rook-cctv",
       "rook-cctv",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "V166 doit observer aussi le départ du poste capteurs réel et le retour ; la seule boucle depuis le pont CCTV ne prouve pas la liaison inter-ponts.",
+      "PARTIEL — PARCOURS LOCAL ET RELAIS STATION VÉRIFIÉS (CI760)",
+      "CI760 LOCAL :25 contrôles Rook, job partagé52 avec Tamsin et 2 globaux ; retour au bookmark physique, handoff natif non observé. CI760 STATION :23 contrôles, départ réel05h du poste capteurs, deux cabines temporisées, deux feuilles locales, dialogue, occupation et retour exact au bookmark station. Limites :Les recettes LOCAL et STATION sont distinctes ; leurs contrôles ne constituent pas un unique parcours combiné. Le handoff LOCAL reste non observé. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246470 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077/job/124714955479 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -6398,10 +6398,10 @@
       "Routes PNJ",
       "tamsin-proving",
       "tamsin-proving",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "V166 doit observer le départ du briefing réel, le partage des cabines et le retour ; interaction range hors qualification active préservée.",
+      "PARTIEL — PARCOURS LOCAL ET RELAIS STATION VÉRIFIÉS (CI760)",
+      "CI760 LOCAL :25 contrôles Tamsin, job partagé52 avec Rook et 2 globaux ; retour au bookmark physique, handoff natif non observé. CI760 STATION :23 contrôles, départ réel05h du briefing, deux cabines temporisées, deux feuilles locales, dialogue, occupation et retour exact au bookmark station. Limites :Les recettes LOCAL et STATION sont distinctes ; leurs contrôles ne constituent pas un unique parcours combiné. Le handoff LOCAL reste non observé ; qualification active et priorités de Tamsin restent à vérifier dans leurs contextes. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246470 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077/job/124714955342 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -6409,10 +6409,10 @@
       "Routes PNJ",
       "cal-logistics",
       "cal-logistics",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "Montée et descente par la vraie échelle jusqu’au catwalk y468, avec animation et appuis ; aucun remplacement du poste par le sol y624.",
+      "PARTIEL — CIRCUIT VERTICAL LOCAL VÉRIFIÉ (CI760 / LOCAL760)",
+      "CI760 :22 contrôles. LOCAL760 séparé :22 contrôles/38 captures, source/build760 inchangés, montée réelle 624→468, reprise durable montée, poste haut supporté, dialogue, descente visible et occupation réelle du retour. Répétitions CI/LOCAL non additionnées en tests uniques. Limites :Circuit vertical local observé ; stationToWorkTravelObserved:false. Cette recette ne prouve pas le trajet depuis le poste station jusqu’au travail. Le catwalk y468 n’est pas remplacé par le sol y624. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246163 ; /tmp/tantalus-excel-20261101/next-cal-receipt.json ; SHA256 b83f0cbe0b916577cd466cb1353a67cfca63ea7e1c3f9a72c993c91ce50a97f9 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -6420,10 +6420,10 @@
       "Routes PNJ",
       "david-durandal",
       "david-durandal",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "Origine cryo/CIC, trajet ascenseur réel vers workshop/Durandal et retour.",
+      "PARTIEL — NOMINAL CI760 ET VARIANTE OCCUPÉE LOCAL207 VÉRIFIÉS",
+      "CI760 nominal :16 contrôles, cabines/pause/reload, singleton, dialogue, occupation parent et retour room/x. Ancienne variante occupied-lift760 :échec QA5074 hors borne5052 conservé. Correctif QA LOCAL207 :runtime/build760 et pilote5895c4b,20 contrôles/16 captures ; rétention réelle puis dégagement natif5052, retour strict cryo-bay/deck0/x4588/y532, deux ascenseurs/deux portails. Limites :La garde finale du pilote CI760 nominal ne vérifiait pas strictement deck/y. La variante locale corrigée emploie le pilote1822cd… ; elle ne transforme pas le job CI760 en recette207. CI distante du correctif et recette globale du candidat combiné non exécutées. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246205 ; /tmp/tantalus-excel-20261101/next-david-occupied/report.json ; SHA256 64276ec8acd1b4087c64f5fb905ce17adc098d6cfabac2a866f7a4c864691d95 ; /tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json ; SHA256 b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -6431,10 +6431,10 @@
       "Routes PNJ",
       "inez-civil",
       "inez-civil",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "Préserver le singleton Bioforge/quarantaine et les priorités de soins et de port.",
+      "PARTIEL — RETOUR LOCAL be3 VÉRIFIÉ ; CI760 EN ÉCHEC CONSERVÉ",
+      "CI760 :18 contrôles d’aller/service passés, retour walking-lift reactor bloqué ; aucun retour home observé. Successeur LOCAL be3d1cdf :22 contrôles/18 captures/4417 frames, source/build identiques avant/après, retour strict quarantine/deck2/x643/y532, deux ascenseurs/deux portails, vertical0 et observedTravel:true. Le natif attend à 1622 pendant 66 frames puis reprend ; il ne prouve pas un recul depuis l’ancien point1680. Limites :Le recul physique depuis le vieux blocage1680 vers1622 est prouvé par une fixture moteur déclarée ; le natif frais prouve le passage préventif et le retour complet. Bookmark final hors carte actuelle du joueur : télémétrie et captures visibles distinguées. Variante occupied-lift-arrival Inez, CI distante du correctif et candidat combiné non exécutés. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246361 ; /tmp/tantalus-excel-20261101/inez-be3-native-receipt.json ; SHA256 bb9e7dd07feff42cc8948e8ba755c47d119510ef1b5155bab851881cf87299ce ; /tmp/tantalus-excel-20261101/inez-be3-implementation-receipt.json ; SHA256 ee367cbb2f4fcc09d4048141feb31d14ee595fda4e36024b089b8db7759fb7ef ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -6442,10 +6442,10 @@
       "Routes PNJ",
       "maksim-cockpit",
       "maksim-cockpit",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "Préserver arrivée/briefing/bridge, les cloisons et le dégagement réel de Tamsin ; aucun acteur fantôme inter-ponts.",
+      "PARTIEL — PARCOURS NOMINAL VÉRIFIÉ (CI760)",
+      "CI760 nominal :15 contrôles, cabine fermée et save/pause/reload, même singleton, dialogue natif, occupation parent réelle, retour room/x observé, deux ascenseurs/deux portails et cinq phases cabine. Le service local V163 maksim-arrival est une recette distincte. Limites :La garde finale du pilote CI760 ne vérifiait pas strictement deck/y. Aucun nouveau trajet Maksim avec le pilote strict207 n’est attribué à ce job. Arrivée/briefing/bridge, partage avec Tamsin et autres interruptions restent à qualifier dans leurs contextes. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246298 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -6453,10 +6453,10 @@
       "Routes PNJ",
       "jun-sanitary",
       "jun-sanitary",
-      "PENDING_CURRENT_EXACT_HEAD_EVIDENCE",
-      "Préserver singleton eau/maintenance, montée et retour cabine ; corridor partagé Asha/Jun doit être réglé par les corps réellement présents au même niveau.",
+      "PARTIEL — NOMINAL CI760 ET VARIANTE OCCUPÉE LOCAL760 VÉRIFIÉS",
+      "CI760 nominal :25 contrôles. LOCAL760 nominal séparé :25 contrôles/17 captures, retour life-support/deck3/x3158/y532, deux ascenseurs/deux portails, vertical496. LOCAL760 occupied-lift séparé :26 contrôles natifs/14 captures ; assertions deck3/y532/496 ajoutées après parcours sur le reçu, sans nouveau trajet. Replay du validateur207 :deux reçus acceptés et20 corruptions rejetées, sans trajet natif ajouté. Limites :Les deux trajets locaux utilisent le pilote760 SHA94cf93… ; le replay n’est pas une nouvelle exécution du pilote207. La garde finale CI760 ne vérifiait pas strictement deck/y/496. Jun-sanitary inter-ponts, Jun-maintenance lease et Jun-water local sont distincts. Le prérequis Jun d’Asha a échoué en CI760 et reste en diagnostic malgré le nominal sanitaire vert. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1.",
       "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes.",
-      "26_ChantiersV165!A8",
+      "26_ChantiersV165!A8 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246254 ; /tmp/tantalus-excel-20261101/next-jun-receipt.json ; SHA256 6328b167b8ad413c799754bca973595fed9de8f1f4ea101ddb823a36b60416ed ; /tmp/tantalus-excel-20261101/next-jun-occupied-receipt.json ; SHA256 ba3c44f6c7b8df272b7d24c2811aaffb3f9fbeeffbd3ee75f60a804becaf93cc ; /tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json ; SHA256 b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246276 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
       0,
       0
     ],
@@ -11351,64 +11351,100 @@
       "rook-cctv",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "V166 doit observer aussi le départ du poste capteurs réel et le retour ; la seule boucle depuis le pont CCTV ne prouve pas la liaison inter-ponts.",
-      "scripts/qa-npc-annex-workpost-routes-v165.py ; scripts/qa-npc-station-relays-v166.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — PARCOURS LOCAL ET RELAIS STATION VÉRIFIÉS (CI760)",
+      "CI760 LOCAL :25 contrôles Rook, job partagé52 avec Tamsin et 2 globaux ; retour au bookmark physique, handoff natif non observé. CI760 STATION :23 contrôles, départ réel05h du poste capteurs, deux cabines temporisées, deux feuilles locales, dialogue, occupation et retour exact au bookmark station.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246470 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077/job/124714955479 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "Les recettes LOCAL et STATION sont distinctes ; leurs contrôles ne constituent pas un unique parcours combiné. Le handoff LOCAL reste non observé. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
     ],
     [
       "tamsin-proving",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "V166 doit observer le départ du briefing réel, le partage des cabines et le retour ; interaction range hors qualification active préservée.",
-      "scripts/qa-npc-annex-workpost-routes-v165.py ; scripts/qa-npc-station-relays-v166.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — PARCOURS LOCAL ET RELAIS STATION VÉRIFIÉS (CI760)",
+      "CI760 LOCAL :25 contrôles Tamsin, job partagé52 avec Rook et 2 globaux ; retour au bookmark physique, handoff natif non observé. CI760 STATION :23 contrôles, départ réel05h du briefing, deux cabines temporisées, deux feuilles locales, dialogue, occupation et retour exact au bookmark station.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246470 ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077/job/124714955342 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "Les recettes LOCAL et STATION sont distinctes ; leurs contrôles ne constituent pas un unique parcours combiné. Le handoff LOCAL reste non observé ; qualification active et priorités de Tamsin restent à vérifier dans leurs contextes. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
     ],
     [
       "cal-logistics",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Montée et descente par la vraie échelle jusqu’au catwalk y468, avec animation et appuis ; aucun remplacement du poste par le sol y624.",
-      "scripts/qa-npc-cal-logistics-route-v165.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — CIRCUIT VERTICAL LOCAL VÉRIFIÉ (CI760 / LOCAL760)",
+      "CI760 :22 contrôles. LOCAL760 séparé :22 contrôles/38 captures, source/build760 inchangés, montée réelle 624→468, reprise durable montée, poste haut supporté, dialogue, descente visible et occupation réelle du retour. Répétitions CI/LOCAL non additionnées en tests uniques.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246163 ; /tmp/tantalus-excel-20261101/next-cal-receipt.json ; SHA256 b83f0cbe0b916577cd466cb1353a67cfca63ea7e1c3f9a72c993c91ce50a97f9 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "Circuit vertical local observé ; stationToWorkTravelObserved:false. Cette recette ne prouve pas le trajet depuis le poste station jusqu’au travail. Le catwalk y468 n’est pas remplacé par le sol y624. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
     ],
     [
       "david-durandal",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Origine cryo/CIC, trajet ascenseur réel vers workshop/Durandal et retour.",
-      "scripts/qa-npc-interdeck-native-v165.py ; scripts/qa-npc-interdeck-routes-v165.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — NOMINAL CI760 ET VARIANTE OCCUPÉE LOCAL207 VÉRIFIÉS",
+      "CI760 nominal :16 contrôles, cabines/pause/reload, singleton, dialogue, occupation parent et retour room/x. Ancienne variante occupied-lift760 :échec QA5074 hors borne5052 conservé. Correctif QA LOCAL207 :runtime/build760 et pilote5895c4b,20 contrôles/16 captures ; rétention réelle puis dégagement natif5052, retour strict cryo-bay/deck0/x4588/y532, deux ascenseurs/deux portails.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246205 ; /tmp/tantalus-excel-20261101/next-david-occupied/report.json ; SHA256 64276ec8acd1b4087c64f5fb905ce17adc098d6cfabac2a866f7a4c864691d95 ; /tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json ; SHA256 b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "La garde finale du pilote CI760 nominal ne vérifiait pas strictement deck/y. La variante locale corrigée emploie le pilote1822cd… ; elle ne transforme pas le job CI760 en recette207. CI distante du correctif et recette globale du candidat combiné non exécutées. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
     ],
     [
       "inez-civil",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Préserver le singleton Bioforge/quarantaine et les priorités de soins et de port.",
-      "scripts/qa-npc-interdeck-native-v165.py ; scripts/qa-npc-interdeck-routes-v165.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — RETOUR LOCAL be3 VÉRIFIÉ ; CI760 EN ÉCHEC CONSERVÉ",
+      "CI760 :18 contrôles d’aller/service passés, retour walking-lift reactor bloqué ; aucun retour home observé. Successeur LOCAL be3d1cdf :22 contrôles/18 captures/4417 frames, source/build identiques avant/après, retour strict quarantine/deck2/x643/y532, deux ascenseurs/deux portails, vertical0 et observedTravel:true. Le natif attend à 1622 pendant 66 frames puis reprend ; il ne prouve pas un recul depuis l’ancien point1680.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246361 ; /tmp/tantalus-excel-20261101/inez-be3-native-receipt.json ; SHA256 bb9e7dd07feff42cc8948e8ba755c47d119510ef1b5155bab851881cf87299ce ; /tmp/tantalus-excel-20261101/inez-be3-implementation-receipt.json ; SHA256 ee367cbb2f4fcc09d4048141feb31d14ee595fda4e36024b089b8db7759fb7ef ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "Le recul physique depuis le vieux blocage1680 vers1622 est prouvé par une fixture moteur déclarée ; le natif frais prouve le passage préventif et le retour complet. Bookmark final hors carte actuelle du joueur : télémétrie et captures visibles distinguées. Variante occupied-lift-arrival Inez, CI distante du correctif et candidat combiné non exécutés. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
     ],
     [
       "maksim-cockpit",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Préserver arrivée/briefing/bridge, les cloisons et le dégagement réel de Tamsin ; aucun acteur fantôme inter-ponts.",
-      "scripts/qa-npc-interdeck-native-v165.py ; scripts/qa-npc-interdeck-routes-v165.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — PARCOURS NOMINAL VÉRIFIÉ (CI760)",
+      "CI760 nominal :15 contrôles, cabine fermée et save/pause/reload, même singleton, dialogue natif, occupation parent réelle, retour room/x observé, deux ascenseurs/deux portails et cinq phases cabine. Le service local V163 maksim-arrival est une recette distincte.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246298 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "La garde finale du pilote CI760 ne vérifiait pas strictement deck/y. Aucun nouveau trajet Maksim avec le pilote strict207 n’est attribué à ce job. Arrivée/briefing/bridge, partage avec Tamsin et autres interruptions restent à qualifier dans leurs contextes. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
     ],
     [
       "jun-sanitary",
       "Départ et retour physique du service",
       "26_ChantiersV165!A8",
-      "ATTENTE QA CANDIDAT",
-      "Préserver singleton eau/maintenance, montée et retour cabine ; corridor partagé Asha/Jun doit être réglé par les corps réellement présents au même niveau.",
-      "scripts/qa-npc-interdeck-native-v165.py ; scripts/qa-npc-interdeck-routes-v165.py",
-      "Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+      "PARTIEL — NOMINAL CI760 ET VARIANTE OCCUPÉE LOCAL760 VÉRIFIÉS",
+      "CI760 nominal :25 contrôles. LOCAL760 nominal séparé :25 contrôles/17 captures, retour life-support/deck3/x3158/y532, deux ascenseurs/deux portails, vertical496. LOCAL760 occupied-lift séparé :26 contrôles natifs/14 captures ; assertions deck3/y532/496 ajoutées après parcours sur le reçu, sans nouveau trajet. Replay du validateur207 :deux reçus acceptés et20 corruptions rejetées, sans trajet natif ajouté.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246254 ; /tmp/tantalus-excel-20261101/next-jun-receipt.json ; SHA256 6328b167b8ad413c799754bca973595fed9de8f1f4ea101ddb823a36b60416ed ; /tmp/tantalus-excel-20261101/next-jun-occupied-receipt.json ; SHA256 ba3c44f6c7b8df272b7d24c2811aaffb3f9fbeeffbd3ee75f60a804becaf93cc ; /tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json ; SHA256 b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246276 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts.",
+      "Les deux trajets locaux utilisent le pilote760 SHA94cf93… ; le replay n’est pas une nouvelle exécution du pilote207. La garde finale CI760 ne vérifiait pas strictement deck/y/496. Jun-sanitary inter-ponts, Jun-maintenance lease et Jun-water local sont distincts. Le prérequis Jun d’Asha a échoué en CI760 et reste en diagnostic malgré le nominal sanitaire vert. Les origines initiales déclarées ne prouvent aucun trajet avant chargement. Les heures stratégiques et changements opaques de carte ne sont pas de la marche ; télémétrie hors écran et captures visibles restent distinctes. Les interruptions alerte/mission/soins et autres contextes doivent être qualifiés sur le candidat concerné. Aucune clôture globale du service ni approbation artistique 1:1. Critère conservé :Sur un seul SHA candidat et le même build gelé : voyage depuis une origine réellement observée, trajet physique vers le poste et retour, portes/cabines et corps unique, occupations réelles, interruption (alerte/mission/soins), pause et reprise durable, aucune téléportation ou objectif injecté présenté comme parcours. Garder les fixtures et handoffs macro observedTravel:false déclarés. Conserver les assertions natives strictes."
+    ],
+    [
+      "DAVID-OCCUPIED-QA-V207",
+      "Dégagement QA de la cabine David occupée",
+      "26_ChantiersV165!A8",
+      "CORRECTIF VALIDÉ (LOCAL)",
+      "Ancien pilote760 :cible5074 hors borne5052 après vraie rétention de cabine. Nouveau pilote :cible praticable5052 et contrôle strict bookmark room/deck/x/y ; aucune modification moteur.",
+      "Runtime/build 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, pilote5895c4b5623126206b27e5074c68c33194cc0edb SHA256 1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a ;20 contrôles/16 captures ; /tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json ; SHA256 b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b ; ancien échec SHA256 64276ec8acd1b4087c64f5fb905ce17adc098d6cfabac2a866f7a4c864691d95",
+      "Correctif QA de cette variante seulement. Le résultat local ne remplace ni l’échec historique du pilote760 ni une CI du successeur ; aucune clôture globale ou certification artistique."
+    ],
+    [
+      "TRIALS-FLOOR-QA-V207",
+      "Armement atomique du premier sol Trials",
+      "scripts/qa-xeno-trials-capture-v163.py ; CI760/trials",
+      "CORRECTIF VALIDÉ (LOCAL)",
+      "CI760 s’arrête sur WY-Commando/player-captor avant Guardian. L’observateur corrigé s’arme dans la RAF du special natif accepté et suspend le premier sol exact par le bouton pause public. Fixture latence native 700 ms rouge avant/verte après ; moteur, évasions et budgets inchangés.",
+      "Commit observateur 5f9bd2295803ecaa4ee2c444df54560ff7340db5 sur runtime/build760 ;six profils/deux rôles,68 contrôles locaux ;contrats capture23/23 et continuation317/317 ; /tmp/tantalus-trials-floor-proof/evidence.json ; SHA256 857245b17d799c1f8ccefa95c0253f8678e073a024272d476b85b350d298d33f ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246243",
+      "Guardian-player-captor reste NOT_REACHED dans le vieux jobCI760. LOCAL seulement :special event20/tick346, startup frame347, premier sol/pause tick447/hold21. CI distante du correctif non exécutée ; aucune clôture globale Trials ou certificationart."
+    ],
+    [
+      "INEZ-REACTOR-RETURN-V207",
+      "Baie physique Inez/Idris au retour reactor",
+      "26_ChantiersV165!A8",
+      "CORRECTIF VALIDÉ (LOCAL)",
+      "Successeur be3d1cdf :retour strict quarantine/deck2/x643/y532, deux ascenseurs/deux portails, vertical0. Natif frais :attente1622 pendant 66 frames puis reprise ; aucun recul natif depuis 1680 affirmé. Le recul depuis ce vieux point est prouvé séparément en fixture moteur déclarée, avec joueur bloquant et save/reload.",
+      "Source/build be3d1cdf6c2a91fee1a00470dddede820f81175a, pilote SHA256 1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a ; source interdeck SHA256 6de1b0e743a448f1dae66884de9b24444e266c8f3cf035d1a55abe57dbd4ea03 ;22 contrôles/18 captures natifs ;suite Node 43 et quatre ciblés distincts, non additionnés ; /tmp/tantalus-excel-20261101/inez-be3-native-receipt.json ; SHA256 bb9e7dd07feff42cc8948e8ba755c47d119510ef1b5155bab851881cf87299ce ; https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246361",
+      "CI760 reste en échec au retour après 18 contrôles d’aller/service. Variante Inez occupied-lift-arrival non exécutée ; bookmark final hors carte joueur, visibilité séparée de la télémétrie. CI distante du successeur/candidat combiné non exécutée ; art 1:1 non approuvé."
+    ],
+    [
+      "JUN-ASHA-CI760-DIAGNOSTIC",
+      "Prérequis de retour Jun avant occupation Asha",
+      "23_ChantiersV163!A7 ; CI760/crew-lifts",
+      "DIAGNOSTIC EN COURS",
+      "CI760 crew-lifts échoue au prérequis Jun après 17 contrôles Asha. Ack détaillé et pose absents du log conservé :cause non déterminée. Les 901,3 s sont compatibles avec le budget 900 s sans prouver la raison. Jun-water, Mara et retour/occupation Asha non atteints ; matrice ascenseurs99 passée ensuite.",
+      "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246276 ; /tmp/tantalus-excel-20261101/ci-760-crew-lifts-failure-evidence.json ; SHA256 9fbdd1b4bc672589d05de0d8b3afdc5d40225834bd96c0138e143bbf54c3ab7a",
+      "Aucune guérison inférée du nominal Jun-sanitary vert ou d’une recette locale isolée. La clôture Asha/Jun680 reste bornée à680 et inchangée. Diagnostic et nouvelle recette exacte nécessaires ; ancien artefact distant non lu, aucun téléchargement contournant le refus."
     ]
   ],
   "externalSources": {
@@ -11477,6 +11513,34 @@
     [
       "Recette finale V206",
       "68023b0b014e57c26bb4ad2726507902323bf44e ; 3898 tests réussis, 1 facultatif ignoré ; services161 39/22, Asha163 28/17. Sources et distribution figées pendant les parcours."
+    ],
+    [
+      "CI760 finale",
+      "/tmp/tantalus-excel-20261101/ci-760-final.json ; SHA256 519e7e2db8ec0c4cb91647f5ac54f5fe22a98cc8d757e253ad16753f6f79aa85 ; CI760 : head demandé 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13, checkout exécuté 9cd715408dc2e709c5303281c0521b55d06269d2, arbre identique 5ba83bce900493f55ff998df1e57f79a1dee7543. Les correctifs locaux ultérieurs ont des commits/pilotes explicitement distincts. Quatre workflows réussis, Excel en échec :12jobs réussis/3échecs."
+    ],
+    [
+      "Cal LOCAL760",
+      "/tmp/tantalus-excel-20261101/next-cal-receipt.json ; SHA256 b83f0cbe0b916577cd466cb1353a67cfca63ea7e1c3f9a72c993c91ce50a97f9 ;circuit vertical observé, stationToWorkTravelObserved:false."
+    ],
+    [
+      "Jun LOCAL760",
+      "/tmp/tantalus-excel-20261101/next-jun-receipt.json ; SHA256 6328b167b8ad413c799754bca973595fed9de8f1f4ea101ddb823a36b60416ed ; /tmp/tantalus-excel-20261101/next-jun-occupied-receipt.json ; SHA256 ba3c44f6c7b8df272b7d24c2811aaffb3f9fbeeffbd3ee75f60a804becaf93cc ;pilote94cf93…, validation après parcours distincte."
+    ],
+    [
+      "David QA LOCAL207",
+      "/tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json ; SHA256 b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b ;runtime760/pilote5895c4b distincts."
+    ],
+    [
+      "Trials QA LOCAL207",
+      "/tmp/tantalus-trials-floor-proof/evidence.json ; SHA256 857245b17d799c1f8ccefa95c0253f8678e073a024272d476b85b350d298d33f ;observateur5f9bd229 sur build760,68contrôles/sixprofils ;CI correctif non exécutée."
+    ],
+    [
+      "Inez LOCAL be3",
+      "/tmp/tantalus-excel-20261101/inez-be3-native-receipt.json ; SHA256 bb9e7dd07feff42cc8948e8ba755c47d119510ef1b5155bab851881cf87299ce ;attente native1622/66frames ;recul1680 prouvé seulement en fixture moteur ;CI correctif non exécutée."
+    ],
+    [
+      "Jun/Asha CI760",
+      "/tmp/tantalus-excel-20261101/ci-760-crew-lifts-failure-evidence.json ; SHA256 9fbdd1b4bc672589d05de0d8b3afdc5d40225834bd96c0138e143bbf54c3ab7a ;cause non déterminée, diagnostic en cours."
     ]
   ],
   "evidence": {
@@ -11578,6 +11642,1569 @@
         "shell": 613,
         "manifestSha256": "f352cf471769c16e930ce51dfd3a9a60fbf469ac4aefcf6bec4b97471af452d4"
       }
+    },
+    "ci760Final": {
+      "source": {
+        "path": "/tmp/tantalus-excel-20261101/ci-760-final.json",
+        "sha256": "519e7e2db8ec0c4cb91647f5ac54f5fe22a98cc8d757e253ad16753f6f79aa85"
+      },
+      "snapshot": {
+        "schema": 1,
+        "requestedHead": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+        "requestedHeadParent": "68023b0b014e57c26bb4ad2726507902323bf44e",
+        "ciCheckout": "9cd715408dc2e709c5303281c0521b55d06269d2",
+        "ciCheckoutParents": [
+          "ec099872d3fc59465c6d17e30b577629b462f139",
+          "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13"
+        ],
+        "requestedTree": "5ba83bce900493f55ff998df1e57f79a1dee7543",
+        "checkoutTree": "5ba83bce900493f55ff998df1e57f79a1dee7543",
+        "treeEquivalent": true,
+        "provenanceMethod": [
+          "GitHub git/commits API exact SHAs and trees",
+          "completed CI checkout log",
+          "local git log exact requested head/tree"
+        ],
+        "assertionsCountingPolicy": "Native checks are per job/profile. Repeated Node commands across the Excel matrix are not summed into a unique test total.",
+        "canonical1to1Approved": false,
+        "sourceMonitor": {
+          "worktree": "/workspace/tantalus-closure",
+          "sourceWrites": 0,
+          "pushes": 0,
+          "jobReruns": 0,
+          "lastObservedClean": "2026-11-01T02:05:41Z"
+        },
+        "routeEvidence": [
+          {
+            "route": "cal-logistics",
+            "scope": "local vertical workpost circuit",
+            "runId": 41261301088,
+            "jobId": 124715246163,
+            "status": "passed",
+            "nativeChecks": 22,
+            "proof": [
+              "624→468 ascent, mounted save/reload",
+              "native dialogue",
+              "visible descent and real destination occupation",
+              "physical bookmark return before explicitly unobserved handoff"
+            ],
+            "stationToWorkTravelObserved": false
+          },
+          {
+            "route": "david-durandal",
+            "scope": "standard interdeck",
+            "runId": 41261301088,
+            "jobId": 124715246205,
+            "status": "passed",
+            "nativeChecks": 16,
+            "proof": [
+              "closed cabin save/pause/reload",
+              "same singleton and native dialogue",
+              "real occupied parent arrival",
+              "room/x bookmark, observedTravel=true, two lift journeys, two portal crossings; all five cabin phases"
+            ],
+            "optionalOccupiedLiftArrival": false,
+            "finalGuardLimit": "V760 pilot final assertion does not itself check deck or y; Jun496 roundtrip is not asserted there. Separate local receipt validation is not this CI job."
+          },
+          {
+            "route": "jun-sanitary",
+            "scope": "standard interdeck",
+            "runId": 41261301088,
+            "jobId": 124715246254,
+            "status": "passed",
+            "nativeChecks": 25,
+            "proof": [
+              "closed cabin save/pause/reload",
+              "two real ladders spend248 outbound vertical pixels",
+              "same singleton and dialogue",
+              "real occupied parent arrival",
+              "room/x bookmark, observedTravel=true, two lift journeys, two portal crossings; all five cabin phases"
+            ],
+            "optionalOccupiedLiftArrival": false,
+            "finalGuardLimit": "V760 pilot final assertion does not itself check deck or y; Jun496 roundtrip is not asserted there. Separate local receipt validation is not this CI job."
+          },
+          {
+            "route": "maksim-cockpit",
+            "scope": "standard interdeck",
+            "runId": 41261301088,
+            "jobId": 124715246298,
+            "status": "passed",
+            "nativeChecks": 15,
+            "proof": [
+              "closed cabin save/pause/reload",
+              "same singleton and native dialogue",
+              "real occupied parent arrival",
+              "room/x bookmark, observedTravel=true, two lift journeys, two portal crossings; all five cabin phases"
+            ],
+            "finalGuardLimit": "V760 pilot final assertion does not itself check deck or y; Jun496 roundtrip is not asserted there. Separate local receipt validation is not this CI job."
+          },
+          {
+            "route": "inez-civil",
+            "scope": "standard interdeck",
+            "runId": 41261301088,
+            "jobId": 124715246361,
+            "status": "failed",
+            "nativeChecksPassed": 18,
+            "proof": [
+              "native docking, cabin save/pause/reload",
+              "same singleton and native dialogue",
+              "real occupied parent arrival"
+            ],
+            "returnHomeObserved": false,
+            "failureEvidence": "ci-760-failure-evidence.json"
+          },
+          {
+            "route": "rook-cctv",
+            "scope": "LOCAL workpost",
+            "runId": 41261301088,
+            "jobId": 124715246470,
+            "status": "passed",
+            "profileNativeChecks": 25,
+            "jobSharedGlobalChecks": 2,
+            "proof": [
+              "floor624, supported body, covered leaves and no overtaking",
+              "exact save/reload and native dialogue",
+              "real occupied parent return",
+              "physical bookmark return"
+            ],
+            "nativeHandoffObserved": false
+          },
+          {
+            "route": "tamsin-proving",
+            "scope": "LOCAL workpost",
+            "runId": 41261301088,
+            "jobId": 124715246470,
+            "status": "passed",
+            "profileNativeChecks": 25,
+            "jobSharedGlobalChecks": 2,
+            "proof": [
+              "floor624, supported body, covered leaves and no overtaking",
+              "exact save/reload and native dialogue",
+              "real occupied parent return",
+              "physical bookmark return"
+            ],
+            "nativeHandoffObserved": false
+          },
+          {
+            "route": "rook-station-relay",
+            "scope": "STATION relay from observed05h origin",
+            "runId": 41261301077,
+            "jobId": 124714955479,
+            "status": "passed",
+            "nativeChecks": 23,
+            "proof": [
+              "two real timed carriages and two local leaves",
+              "closed carriage and local owner save/pause/reload",
+              "same physical identity handed to real local owner",
+              "real occupied parent arrival",
+              "exact05h station bookmark return"
+            ]
+          },
+          {
+            "route": "tamsin-station-relay",
+            "scope": "STATION relay from observed05h origin",
+            "runId": 41261301077,
+            "jobId": 124714955342,
+            "status": "passed",
+            "nativeChecks": 23,
+            "proof": [
+              "two real timed carriages and two local leaves",
+              "closed carriage and local owner save/pause/reload",
+              "same physical identity handed to real local owner",
+              "real occupied parent arrival",
+              "exact05h station bookmark return"
+            ]
+          },
+          {
+            "route": "noor-animal",
+            "scope": "local annex lease",
+            "runId": 41261301088,
+            "jobId": 124715246203,
+            "status": "passed",
+            "profileNativeChecks": 25,
+            "jobSharedGlobalChecks": 2,
+            "proof": [
+              "real floor walking and covered leaf transfers",
+              "exact save/reload",
+              "same singleton and native dialogue",
+              "actual occupied parent return",
+              "same physical owner returns to exact supported origin before lease release"
+            ]
+          },
+          {
+            "route": "echo-escape",
+            "scope": "local annex lease",
+            "runId": 41261301088,
+            "jobId": 124715246203,
+            "status": "passed",
+            "profileNativeChecks": 25,
+            "jobSharedGlobalChecks": 2,
+            "proof": [
+              "real floor walking and covered leaf transfers",
+              "exact save/reload",
+              "same singleton and native dialogue",
+              "actual occupied parent return",
+              "same physical owner returns to exact supported origin before lease release"
+            ]
+          },
+          {
+            "route": "jun-maintenance",
+            "scope": "local annex lease",
+            "runId": 41261301088,
+            "jobId": 124715246203,
+            "status": "passed",
+            "profileNativeChecks": 25,
+            "jobSharedGlobalChecks": 2,
+            "proof": [
+              "real floor walking and covered leaf transfers",
+              "exact save/reload",
+              "same singleton and native dialogue",
+              "actual occupied parent return",
+              "same physical owner returns to exact supported origin before lease release"
+            ]
+          },
+          {
+            "route": "Guardian-player-captor",
+            "scope": "Trials accepted-special startup and floor pin",
+            "runId": 41261301088,
+            "jobId": 124715246243,
+            "status": "NOT_REACHED",
+            "reason": "capture pipeline stopped earlier on WY-Commando native hold before exact floor observation",
+            "guardianSpatialExitSeparate": true,
+            "scriptSha256": "81f9de338110304c9e3ce60f9f3dc11268b9123c2e026b56c38b9b2da3815dc3",
+            "scriptBytesUnchangedFromBaseEc09987": true
+          },
+          {
+            "route": "idris-engine",
+            "scope": "V161 local service",
+            "runId": 41261301086,
+            "jobId": 124714977229,
+            "status": "passed",
+            "profileNativeChecks": 19,
+            "jobSharedGlobalChecks": 1,
+            "proof": [
+              "owned origin retained after real elapsed-time command",
+              "native floor and covered leaf coordinate transitions",
+              "exact save/reload and same singleton dialogue",
+              "actual destination occupation",
+              "each real service arrival increments exactly once",
+              "physical home return and exactly one covered return transfer"
+            ],
+            "nativeHandoffObserved": false
+          },
+          {
+            "route": "leila-galley",
+            "scope": "V161 local service",
+            "runId": 41261301086,
+            "jobId": 124714977229,
+            "status": "passed",
+            "profileNativeChecks": 19,
+            "jobSharedGlobalChecks": 1,
+            "proof": [
+              "owned origin retained after real elapsed-time command",
+              "native floor and covered leaf coordinate transitions",
+              "exact save/reload and same singleton dialogue",
+              "actual destination occupation",
+              "each real service arrival increments exactly once",
+              "physical home return and exactly one covered return transfer"
+            ],
+            "nativeHandoffObserved": false
+          },
+          {
+            "route": "maksim-arrival",
+            "scope": "V163 LOCAL annex service",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "passed",
+            "profileNativeChecks": 22,
+            "proof": [
+              "supported actual origin, retained owner and covered portal transfer",
+              "exact save/reload and same singleton dialogue",
+              "occupied parent destination",
+              "physical origin return before explicitly unobserved handoff"
+            ],
+            "nativeHandoffObserved": false
+          },
+          {
+            "route": "inez-bioforge",
+            "scope": "V163 LOCAL annex service",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "passed",
+            "profileNativeChecks": 22,
+            "proof": [
+              "supported actual origin, retained owner and covered portal transfer",
+              "exact save/reload and same singleton dialogue",
+              "occupied parent destination",
+              "physical origin return before explicitly unobserved handoff"
+            ],
+            "nativeHandoffObserved": false
+          },
+          {
+            "route": "asha-refuge",
+            "scope": "V163 LOCAL annex service",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "failed",
+            "nativeChecksPassed": 17,
+            "proof": [
+              "supported real origin, covered outbound portal",
+              "exact save/reload and same singleton dialogue",
+              "save/resume at actual occupied parent socket",
+              "native prerequisite refuge entry"
+            ],
+            "junPrerequisiteReturnObserved": false,
+            "ashaReturnHomeObserved": false,
+            "failureEvidence": "ci-760-crew-lifts-failure-evidence.json"
+          },
+          {
+            "route": "jun-water",
+            "scope": "V163 LOCAL annex service",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "NOT_REACHED",
+            "reason": "script stopped on preceding Asha Jun prerequisite failure"
+          },
+          {
+            "route": "mara-archives",
+            "scope": "V163 LOCAL annex service",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "NOT_REACHED",
+            "reason": "script stopped on preceding Asha Jun prerequisite failure"
+          },
+          {
+            "route": "native-lift-matrix",
+            "scope": "8 faces, keyboard/touch cancellation and occupied boarding",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "passed",
+            "nativeChecks": 99
+          },
+          {
+            "route": "npc-matte-v164",
+            "scope": "native matte correction",
+            "runId": 41261301088,
+            "jobId": 124715246276,
+            "status": "SKIPPED",
+            "reason": "preceding Native visual journeys step failed"
+          }
+        ],
+        "outsideCiMatrix": [
+          {
+            "route": "Cal local",
+            "status": "passed",
+            "head": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "checks": 22,
+            "captures": 38,
+            "report": "/tmp/tantalus-excel-20261101/next-cal/report.json",
+            "reportSha256": "0a7c0f9ae766db6a7f972594b4ac3f294aba55dec17cad495854711477ffc61c",
+            "receipt": "/tmp/tantalus-excel-20261101/next-cal-receipt.json",
+            "receiptSha256": "b83f0cbe0b916577cd466cb1353a67cfca63ea7e1c3f9a72c993c91ce50a97f9",
+            "sameBuild": true,
+            "sourceUnchanged": true,
+            "stationToWorkTravelObserved": false
+          },
+          {
+            "source": "parent and local receipt",
+            "head": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "status": "passed",
+            "checks": 26,
+            "captures": 14,
+            "report": "/tmp/tantalus-excel-20261101/next-jun-occupied/report.json",
+            "reportSha256": "bdf70c2e32a702561a6d6a040f249ed8a84becb40a3cea844fa10932bb90cf5a",
+            "receipt": "/tmp/tantalus-excel-20261101/next-jun-occupied-receipt.json",
+            "receiptSha256": "ba3c44f6c7b8df272b7d24c2811aaffb3f9fbeeffbd3ee75f60a804becaf93cc",
+            "independentPostRunAssertions": [
+              "deck3",
+              "y532",
+              "verticalDistance496"
+            ],
+            "postRunAssertionsExcludedFromNativeCheckCount": true
+          },
+          {
+            "route": "David optional occupied-lift arrival",
+            "status": "failed",
+            "head": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "failure": "QA requestedx5074 beyond native limit5052",
+            "source": "parent report",
+            "successorHarnessResultExcluded": true
+          }
+        ],
+        "limitations": [
+          "Initial fixture positions are declared; no pre-load travel inferred.",
+          "Strategic hours and chart changes are not physical walking distance.",
+          "Off-screen telemetry and visible canvas evidence are distinct.",
+          "No canonical1:1 artistic approval follows from Node/browser checks."
+        ],
+        "failures": [
+          "/tmp/tantalus-excel-20261101/ci-760-failure-evidence.json",
+          "/tmp/tantalus-excel-20261101/ci-760-crew-lifts-failure-evidence.json"
+        ],
+        "fullReleaseNode": {
+          "tests": 3899,
+          "pass": 3898,
+          "fail": 0,
+          "skip": 1,
+          "uniqueOccurrenceOnly": true
+        },
+        "nativeChecksDetail": "/tmp/tantalus-excel-20261101/ci-760-native-checks.json",
+        "releaseExcerpt": "/tmp/tantalus-excel-20261101/ci-760-release-native-excerpt.log",
+        "releaseExcerptSha256": "e5b14f17b3885291b692e54dba56e71df7c73b5f5cc896502ccc38a81ac90895",
+        "observedAt": "2026-11-01T02:16:38.561527+00:00",
+        "allFiveWorkflowsFinal": true,
+        "workflowConclusions": {
+          "success": 4,
+          "failure": 1
+        },
+        "excelJobConclusions": {
+          "success": 12,
+          "failure": 3
+        },
+        "workflows": [
+          {
+            "id": 41261301086,
+            "name": "Full release regression",
+            "status": "completed",
+            "conclusion": "success",
+            "headSha": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301086",
+            "createdAt": "2026-11-01T01:29:31Z",
+            "startedAt": "2026-11-01T01:29:31Z",
+            "updatedAt": "2026-11-01T02:08:21Z",
+            "jobs": [
+              {
+                "id": 124714977229,
+                "name": "release",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:30:45Z",
+                "completedAt": "2026-11-01T02:08:21Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301086/job/124714977229",
+                "failedSteps": [],
+                "skippedSteps": []
+              }
+            ]
+          },
+          {
+            "id": 41261301081,
+            "name": "Gameplay continuation V162",
+            "status": "completed",
+            "conclusion": "success",
+            "headSha": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301081",
+            "createdAt": "2026-11-01T01:29:31Z",
+            "startedAt": "2026-11-01T01:29:31Z",
+            "updatedAt": "2026-11-01T01:37:22Z",
+            "jobs": [
+              {
+                "id": 124714955373,
+                "name": "continuation-v162",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:29:41Z",
+                "completedAt": "2026-11-01T01:37:21Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301081/job/124714955373",
+                "failedSteps": [],
+                "skippedSteps": []
+              }
+            ]
+          },
+          {
+            "id": 41261301088,
+            "name": "Excel continuation V163",
+            "status": "completed",
+            "conclusion": "failure",
+            "headSha": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088",
+            "createdAt": "2026-11-01T01:29:31Z",
+            "startedAt": "2026-11-01T01:29:31Z",
+            "updatedAt": "2026-11-01T02:15:04Z",
+            "jobs": [
+              {
+                "id": 124715246051,
+                "name": "Native V163 (player-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:40:11Z",
+                "completedAt": "2026-11-01T01:43:00Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246051",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246158,
+                "name": "Native V163 (weapons-title)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:32:28Z",
+                "completedAt": "2026-11-01T01:47:28Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246158",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246163,
+                "name": "Native V163 (cal-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:32:46Z",
+                "completedAt": "2026-11-01T01:38:14Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246163",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246203,
+                "name": "Native V163 (crew-leases)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:40:12Z",
+                "completedAt": "2026-11-01T02:02:05Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246203",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246204,
+                "name": "Native V163 (costumes-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:40:40Z",
+                "completedAt": "2026-11-01T01:50:20Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246204",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246205,
+                "name": "Native V163 (david-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:33:11Z",
+                "completedAt": "2026-11-01T01:40:37Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246205",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246212,
+                "name": "Native V163 (rigs-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:40:35Z",
+                "completedAt": "2026-11-01T01:48:45Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246212",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246243,
+                "name": "Native V163 (trials)",
+                "status": "completed",
+                "conclusion": "failure",
+                "startedAt": "2026-11-01T01:40:31Z",
+                "completedAt": "2026-11-01T01:50:44Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246243",
+                "failedSteps": [
+                  "Native visual journeys"
+                ],
+                "skippedSteps": [
+                  "Native NPC matte correction V164",
+                  "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+                ]
+              },
+              {
+                "id": 124715246254,
+                "name": "Native V163 (jun-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:41:46Z",
+                "completedAt": "2026-11-01T01:52:12Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246254",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246276,
+                "name": "Native V163 (crew-lifts)",
+                "status": "completed",
+                "conclusion": "failure",
+                "startedAt": "2026-11-01T01:47:31Z",
+                "completedAt": "2026-11-01T02:15:04Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246276",
+                "failedSteps": [
+                  "Native visual journeys"
+                ],
+                "skippedSteps": [
+                  "Native NPC matte correction V164",
+                  "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+                ]
+              },
+              {
+                "id": 124715246298,
+                "name": "Native V163 (maksim-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:49:19Z",
+                "completedAt": "2026-11-01T01:57:51Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246298",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246312,
+                "name": "Native V163 (ship-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:43:01Z",
+                "completedAt": "2026-11-01T01:47:46Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246312",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246320,
+                "name": "Native V163 (campaign)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:41:49Z",
+                "completedAt": "2026-11-01T01:46:30Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246320",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              },
+              {
+                "id": 124715246361,
+                "name": "Native V163 (inez-v165)",
+                "status": "completed",
+                "conclusion": "failure",
+                "startedAt": "2026-11-01T01:46:50Z",
+                "completedAt": "2026-11-01T01:57:52Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246361",
+                "failedSteps": [
+                  "Native visual journeys"
+                ],
+                "skippedSteps": [
+                  "Native NPC matte correction V164",
+                  "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+                ]
+              },
+              {
+                "id": 124715246470,
+                "name": "Native V163 (workposts-v165)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:52:21Z",
+                "completedAt": "2026-11-01T01:58:04Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246470",
+                "failedSteps": [],
+                "skippedSteps": [
+                  "Native NPC matte correction V164"
+                ]
+              }
+            ]
+          },
+          {
+            "id": 41261301147,
+            "name": "Frontier Forge regression",
+            "status": "completed",
+            "conclusion": "success",
+            "headSha": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301147",
+            "createdAt": "2026-11-01T01:29:31Z",
+            "startedAt": "2026-11-01T01:29:31Z",
+            "updatedAt": "2026-11-01T01:32:33Z",
+            "jobs": [
+              {
+                "id": 124714955533,
+                "name": "forge",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:31:28Z",
+                "completedAt": "2026-11-01T01:32:32Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301147/job/124714955533",
+                "failedSteps": [],
+                "skippedSteps": []
+              }
+            ]
+          },
+          {
+            "id": 41261301077,
+            "name": "Native station relays V166",
+            "status": "completed",
+            "conclusion": "success",
+            "headSha": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077",
+            "createdAt": "2026-11-01T01:29:31Z",
+            "startedAt": "2026-11-01T01:29:31Z",
+            "updatedAt": "2026-11-01T01:40:10Z",
+            "jobs": [
+              {
+                "id": 124714955342,
+                "name": "Native station relay (tamsin-station-relay)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:30:32Z",
+                "completedAt": "2026-11-01T01:40:09Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077/job/124714955342",
+                "failedSteps": [],
+                "skippedSteps": []
+              },
+              {
+                "id": 124714955479,
+                "name": "Native station relay (rook-station-relay)",
+                "status": "completed",
+                "conclusion": "success",
+                "startedAt": "2026-11-01T01:30:12Z",
+                "completedAt": "2026-11-01T01:37:56Z",
+                "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301077/job/124714955479",
+                "failedSteps": [],
+                "skippedSteps": []
+              }
+            ]
+          }
+        ],
+        "apiRawSnapshot": "/tmp/tantalus-excel-20261101/ci-760-api-final.json",
+        "treeProvenance": "/tmp/tantalus-excel-20261101/ci-760-tree-provenance.json",
+        "evidenceFiles": [
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-api-final.json",
+            "sha256": "a43d3713b601fda6118abc41fb27aabe7ec00ac421646d2438d5c11bf4e2e5ed"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-api-final-compact.json",
+            "sha256": "fd1d45c6da9adfc36f7b1b68cb8d5f31e2e4ffa62d689129754684ab4894516f"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-tree-provenance.json",
+            "sha256": "0e0ae9c82f82a7fcab2ff2283d4a20c4edd9f475ddc90ac538b37da486d8d110"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-native-checks.json",
+            "sha256": "8613cbffc1196dc558cebd391c94918c8c759c1574e1d6d82dc96abcee228b01"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-failure-evidence.json",
+            "sha256": "741a37c6964b5f803253b4a1c9f79907a9539f11b872648351031c3d4b62410f"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-crew-lifts-failure-evidence.json",
+            "sha256": "9fbdd1b4bc672589d05de0d8b3afdc5d40225834bd96c0138e143bbf54c3ab7a"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-trials-job-124715246243.log",
+            "sha256": "bac31e5117e1870c293e6b6ffccef6281b1bf77959fec9ab82764b1aad3971d9"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-inez-job-124715246361.log",
+            "sha256": "0fc1079a3bfc38807e8c753724a03d19d9d3fe895da2089afea45fe69624bd5d"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-crew-lifts-job-124715246276.log",
+            "sha256": "cb1060a71d84e6c23c9ccb45e60c3a4e2834d1537e311ff7af88d0cb0645ea5c"
+          },
+          {
+            "path": "/tmp/tantalus-excel-20261101/ci-760-release-native-excerpt.log",
+            "sha256": "e5b14f17b3885291b692e54dba56e71df7c73b5f5cc896502ccc38a81ac90895"
+          }
+        ]
+      },
+      "separateFromLocalSuccessors": true,
+      "noCombinedSuccessorCiClaim": true
+    },
+    "localFollowup": {
+      "receipts": {
+        "calLocal760": {
+          "source": {
+            "path": "/tmp/tantalus-excel-20261101/next-cal-receipt.json",
+            "sha256": "b83f0cbe0b916577cd466cb1353a67cfca63ea7e1c3f9a72c993c91ce50a97f9"
+          },
+          "receipt": {
+            "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "processExit": 0,
+            "worktreeCleanAfter": true,
+            "command": "ATF_CHROMIUM_EXECUTABLE=/usr/bin/chromium python3 -B scripts/qa-npc-cal-logistics-route-v165.py --base http://127.0.0.1:4186 --expect-build 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13 --expect-harness 760e7aa8eeeceaf2af43d218bbc4b6471b60bc13 --output /tmp/tantalus-excel-20261101/next-cal",
+            "reportPath": "/tmp/tantalus-excel-20261101/next-cal/report.json",
+            "reportSha256": "0a7c0f9ae766db6a7f972594b4ac3f294aba55dec17cad495854711477ffc61c",
+            "status": "passed",
+            "sourceUnchanged": true,
+            "sameBuild": true,
+            "httpIdentity": {
+              "base": "http://127.0.0.1:4186",
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "files": [
+                {
+                  "path": "src/npc-cal-logistics-route-v165.js",
+                  "sourceSha256": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
+                  "httpSha256": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc"
+                },
+                {
+                  "path": "src/npc-cal-climb-rig-v165.js",
+                  "sourceSha256": "2ac8b1c472c20689772ddfe35199e49bd2125b6d3e90237f8c6da2d4ccc2813d",
+                  "httpSha256": "2ac8b1c472c20689772ddfe35199e49bd2125b6d3e90237f8c6da2d4ccc2813d"
+                },
+                {
+                  "path": "src/npc-service-routes-v161.js",
+                  "sourceSha256": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
+                  "httpSha256": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c"
+                },
+                {
+                  "path": "assets/openai/sprites/npcs/rig-v165/cal-mercer-climb-parts-v165.png",
+                  "sourceSha256": "aaa08c3289f2490d31fe1448cca1c0e3197251c28d7bc2077971219f9aaff665",
+                  "httpSha256": "aaa08c3289f2490d31fe1448cca1c0e3197251c28d7bc2077971219f9aaff665"
+                }
+              ],
+              "allMatch": true
+            },
+            "checks": 22,
+            "captures": 38,
+            "errors": {
+              "page": 0,
+              "http": 0,
+              "request": 0
+            },
+            "localVerticalCircuitObserved": true,
+            "stationToWorkTravelObserved": false,
+            "canonicalExact": false,
+            "tooling": {
+              "playwright": "1.62.0",
+              "chromium": "154.0.8037.57"
+            }
+          }
+        },
+        "junStandardLocal760": {
+          "source": {
+            "path": "/tmp/tantalus-excel-20261101/next-jun-receipt.json",
+            "sha256": "6328b167b8ad413c799754bca973595fed9de8f1f4ea101ddb823a36b60416ed"
+          },
+          "receipt": {
+            "status": "passed",
+            "exitCode": 0,
+            "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "identityBefore": {
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "buildInfoSha256": "5072b8d69adf936d2d19b74e4dbc6ba482e45642f98cb2281ce2a9aa199d2ddd"
+            },
+            "identityAfter": {
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "buildInfoSha256": "5072b8d69adf936d2d19b74e4dbc6ba482e45642f98cb2281ce2a9aa199d2ddd"
+            },
+            "sameBuild": true,
+            "sourceUnchanged": true,
+            "sourceManifestBeforeSha256": "ced4467071fc9a9bbeb06af7adef63313f019e924087dbb5be0b1fa96ca0f747",
+            "sourceManifestAfterSha256": "ced4467071fc9a9bbeb06af7adef63313f019e924087dbb5be0b1fa96ca0f747",
+            "sourceSha256": {
+              "scripts/qa-npc-interdeck-native-v165.py": "94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3",
+              "src/npc-interdeck-routes-v165.js": "7fc049f7d03bf75f7f935de4288639516fd98d7fbd4b133a2332156c594efbb5",
+              "src/npc-lift-transit-v165.js": "2b492180395b6d78a73414a345a89c109f796daf3e18644b7b8419db223cd55b",
+              "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0"
+            },
+            "checks": 25,
+            "captures": 17,
+            "traceFrames": 4521,
+            "routes": [
+              {
+                "id": "jun-sanitary",
+                "status": "passed",
+                "nativeRoundTrip": true,
+                "initialOriginDeclared": true,
+                "preLoadTravelObserved": false
+              }
+            ],
+            "initialOriginDeclared": true,
+            "preLoadTravelObserved": false,
+            "origin": {
+              "crewId": "crew-11-jun-park",
+              "deck": 3,
+              "roomId": "life-support",
+              "x": 3158,
+              "y": 532,
+              "facing": 1,
+              "source": "legacy-physical-owner"
+            },
+            "returned": {
+              "crewId": "crew-11-jun-park",
+              "deck": 3,
+              "roomId": "life-support",
+              "x": 3158,
+              "y": 532,
+              "distance": 9179.999999999238,
+              "verticalDistance": 496,
+              "liftJourneys": 2,
+              "crossings": 2,
+              "observedTravel": true
+            },
+            "occupiedLiftArrival": false,
+            "tooling": {
+              "playwright": "1.62.0",
+              "chromium": "154.0.8037.57"
+            },
+            "errors": {
+              "page": [],
+              "http": [],
+              "request": []
+            },
+            "limits": [
+              "Automated native controls; no human participation or canonical1:1 art approval.",
+              "Initial05h positions are declared initial conditions; no pre-load travel is claimed.",
+              "Off-screen actor traces are labeled separately from visible canvas evidence.",
+              "Strategic hours and opaque chart changes are not walking distance."
+            ],
+            "canonical1to1Approved": false,
+            "reportPath": "/tmp/tantalus-excel-20261101/next-jun/report.json",
+            "reportSha256": "291c6aee823a06bc8ee3ac24eefb5b24f7bc921a319b478a5289194e10e43b0f",
+            "logPath": "/tmp/tantalus-excel-20261101/next-jun.log",
+            "logSha256": "c678a04f838bcf9da2da5002bd5ae3aacaa7dc0413c1cff5652532ac55c6ce1d"
+          }
+        },
+        "junOccupiedLocal760": {
+          "source": {
+            "path": "/tmp/tantalus-excel-20261101/next-jun-occupied-receipt.json",
+            "sha256": "ba3c44f6c7b8df272b7d24c2811aaffb3f9fbeeffbd3ee75f60a804becaf93cc"
+          },
+          "receipt": {
+            "status": "passed",
+            "exitCode": 0,
+            "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "identityBefore": {
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "buildInfoSha256": "5072b8d69adf936d2d19b74e4dbc6ba482e45642f98cb2281ce2a9aa199d2ddd"
+            },
+            "identityAfter": {
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "buildInfoSha256": "5072b8d69adf936d2d19b74e4dbc6ba482e45642f98cb2281ce2a9aa199d2ddd"
+            },
+            "sameBuild": true,
+            "sourceUnchanged": true,
+            "sourceManifestBeforeSha256": "ced4467071fc9a9bbeb06af7adef63313f019e924087dbb5be0b1fa96ca0f747",
+            "sourceManifestAfterSha256": "ced4467071fc9a9bbeb06af7adef63313f019e924087dbb5be0b1fa96ca0f747",
+            "sourceSha256": {
+              "scripts/qa-npc-interdeck-native-v165.py": "94cf93ca6257d2a5232b6fc2a5be6c7b3ceb74b6bd72a98f612a36e3fca7e8b3",
+              "src/npc-interdeck-routes-v165.js": "7fc049f7d03bf75f7f935de4288639516fd98d7fbd4b133a2332156c594efbb5",
+              "src/npc-lift-transit-v165.js": "2b492180395b6d78a73414a345a89c109f796daf3e18644b7b8419db223cd55b",
+              "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0"
+            },
+            "pilotChecks": 26,
+            "captures": 14,
+            "traceFrames": 4558,
+            "routes": [
+              {
+                "id": "jun-sanitary",
+                "status": "passed",
+                "nativeRoundTrip": true,
+                "initialOriginDeclared": true,
+                "preLoadTravelObserved": false
+              }
+            ],
+            "origin": {
+              "crewId": "crew-11-jun-park",
+              "deck": 3,
+              "roomId": "life-support",
+              "x": 3158,
+              "y": 532,
+              "facing": 1,
+              "source": "legacy-physical-owner"
+            },
+            "returned": {
+              "crewId": "crew-11-jun-park",
+              "deck": 3,
+              "roomId": "life-support",
+              "x": 3158,
+              "y": 532,
+              "distance": 9179.999999999192,
+              "verticalDistance": 496,
+              "liftJourneys": 2,
+              "crossings": 2,
+              "observedTravel": true
+            },
+            "occupiedLiftArrival": true,
+            "independentPostRunRecordValidation": {
+              "method": "Separate Python assertions against the completed native return receipt; not assertions in the original V165 pilot and not a new gameplay run",
+              "checks": {
+                "deckMatchesObservedOriginAndExpectedDeck3": true,
+                "supportedYMatchesObservedOriginAndExpected532": true,
+                "junExactVerticalRoundtrip496": true
+              },
+              "passed": true
+            },
+            "tooling": {
+              "playwright": "1.62.0",
+              "chromium": "154.0.8037.57"
+            },
+            "errors": {
+              "page": [],
+              "http": [],
+              "request": []
+            },
+            "limits": [
+              "Automated native controls; no human participation or canonical1:1 art approval.",
+              "Initial05h positions are declared initial conditions; no pre-load travel is claimed.",
+              "Off-screen actor traces are labeled separately from visible canvas evidence.",
+              "Strategic hours and opaque chart changes are not walking distance."
+            ],
+            "canonical1to1Approved": false,
+            "reportPath": "/tmp/tantalus-excel-20261101/next-jun-occupied/report.json",
+            "reportSha256": "bdf70c2e32a702561a6d6a040f249ed8a84becb40a3cea844fa10932bb90cf5a",
+            "logPath": "/tmp/tantalus-excel-20261101/next-jun-occupied.log",
+            "logSha256": "ce26cc7c9659d8a8888e767ce2b8debb9de4afde8bd62ad3f14e9ed0de49de54"
+          }
+        },
+        "davidOccupiedLocal207": {
+          "source": {
+            "path": "/tmp/tantalus-excel-20261101/next-david-occupied-v207-receipt.json",
+            "sha256": "b8dd9253a825741a9bb8ae484f9d2133869792f3dc0dbc0d1852be6878be248b"
+          },
+          "receipt": {
+            "runtimeBuildCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "harnessCommit": "5895c4b5623126206b27e5074c68c33194cc0edb",
+            "harnessSha256": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+            "rootHeadAfter": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+            "worktreeCleanAfter": true,
+            "rootCleanAfter": true,
+            "processExit": 0,
+            "status": "passed",
+            "sourceUnchanged": true,
+            "sameBuild": true,
+            "httpIdentity": {
+              "base": "http://127.0.0.1:4186",
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "harnessCommit": "5895c4b5623126206b27e5074c68c33194cc0edb",
+              "harnessSha256": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+              "files": [
+                {
+                  "path": "src/npc-interdeck-routes-v165.js",
+                  "harnessSourceSha256": "7fc049f7d03bf75f7f935de4288639516fd98d7fbd4b133a2332156c594efbb5",
+                  "httpSha256": "7fc049f7d03bf75f7f935de4288639516fd98d7fbd4b133a2332156c594efbb5"
+                },
+                {
+                  "path": "src/npc-lift-transit-v165.js",
+                  "harnessSourceSha256": "2b492180395b6d78a73414a345a89c109f796daf3e18644b7b8419db223cd55b",
+                  "httpSha256": "2b492180395b6d78a73414a345a89c109f796daf3e18644b7b8419db223cd55b"
+                },
+                {
+                  "path": "src/npc-interdeck-passage-v165.js",
+                  "harnessSourceSha256": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f",
+                  "httpSha256": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f"
+                },
+                {
+                  "path": "src/hub-lift-transit-v163.js",
+                  "harnessSourceSha256": "05c6efb9553eb7908a633b1c811651efe6c292c4a036c2f8628fa051c1bae824",
+                  "httpSha256": "05c6efb9553eb7908a633b1c811651efe6c292c4a036c2f8628fa051c1bae824"
+                }
+              ],
+              "allRuntimeFilesMatch": true
+            },
+            "checks": 20,
+            "captures": 16,
+            "routes": [
+              {
+                "id": "david-durandal",
+                "status": "passed",
+                "nativeRoundTrip": true,
+                "initialOriginDeclared": true,
+                "preLoadTravelObserved": false
+              }
+            ],
+            "errors": {
+              "page": 0,
+              "http": 0,
+              "request": 0
+            },
+            "occupiedLiftHold": {
+              "requestedWallWaitMs": 180,
+              "measuredSimulationAdvanceSeconds": 0.21660000000000323,
+              "unchangedTrip": true,
+              "reason": "occupied",
+              "sourceDeck": 0,
+              "playerDeck": 2
+            },
+            "nativeClearance": {
+              "plan": {
+                "ok": true,
+                "targetX": 5052,
+                "nominalX": 5074,
+                "bounds": {
+                  "min": 24,
+                  "max": 5052
+                },
+                "lane": {
+                  "left": 4818,
+                  "right": 4958
+                },
+                "tolerance": 7,
+                "margin": 12
+              },
+              "actualPlayerAfter": {
+                "x": 5052,
+                "y": 532,
+                "w": 44,
+                "h": 92,
+                "vx": 0.4090465945949515,
+                "grounded": true,
+                "climbing": false
+              }
+            },
+            "finalReturnValidation": {
+              "ok": true,
+              "bookmark": {
+                "crewId": "crew-10-david-8r",
+                "deck": 0,
+                "roomId": "cryo-bay",
+                "x": 4588,
+                "y": 532
+              },
+              "liftJourneys": 2,
+              "crossings": 2,
+              "verticalDistance": 0
+            },
+            "reportPath": "/tmp/tantalus-excel-20261101/next-david-occupied-v207/report.json",
+            "reportSha256": "c57abe59d6214941c458acaf03afbe0dcaf7a22756f4fb4e2f9e361b75e65967",
+            "nodeTests": {
+              "log": "/tmp/david-v207-interdeck-all.log",
+              "pass": 39,
+              "fail": 0
+            },
+            "junValidatorReplay": {
+              "path": "/tmp/tantalus-excel-20261101/david-v207-return-helper-replay.json",
+              "nativeJourneysAdded": 0,
+              "realReceiptsAccepted": 2,
+              "corruptionsRejected": 20
+            },
+            "visibleDestinationCaptures": [
+              "david-durandal-outbound-after-reload-00-lift-opening-outbound.png",
+              "david-durandal-outbound-after-reload-01-lift-exiting-outbound.png"
+            ],
+            "visualSpotCheck": "david-durandal-outbound-after-reload-01-lift-exiting-outbound.png",
+            "baselineFailure": "/tmp/tantalus-excel-20261101/next-david-occupied/report.json",
+            "scope": "Supplementary David occupied-lift profile; runtime760 with QA-only harness5895c4b. Not a global service or artistic1:1 certification."
+          }
+        },
+        "inezStandardLocalBe3": {
+          "source": {
+            "path": "/tmp/tantalus-excel-20261101/inez-be3-native-receipt.json",
+            "sha256": "bb9e7dd07feff42cc8948e8ba755c47d119510ef1b5155bab851881cf87299ce"
+          },
+          "receipt": {
+            "schema": 207,
+            "status": "passed",
+            "kind": "unchanged-native-Inez-pilot",
+            "commit": "be3d1cdf6c2a91fee1a00470dddede820f81175a",
+            "baseCommit": "5895c4b5623126206b27e5074c68c33194cc0edb",
+            "exitCode": 0,
+            "checks": 22,
+            "captures": 18,
+            "frames": 4417,
+            "startedAt": "2026-11-01T02:16:31.808935+00:00",
+            "finishedAt": "2026-11-01T02:24:25.520769+00:00",
+            "identityBefore": {
+              "sourceCommit": "be3d1cdf6c2a91fee1a00470dddede820f81175a",
+              "buildId": "143.0.0+be3d1cdf6c2a",
+              "buildInfoSha256": "50f0f2d3aa6aa06cf7cfbbb7ec3c250e41a0bc36461c4fceda6dcb09ad3c2e7f"
+            },
+            "identityAfter": {
+              "sourceCommit": "be3d1cdf6c2a91fee1a00470dddede820f81175a",
+              "buildId": "143.0.0+be3d1cdf6c2a",
+              "buildInfoSha256": "50f0f2d3aa6aa06cf7cfbbb7ec3c250e41a0bc36461c4fceda6dcb09ad3c2e7f"
+            },
+            "sourceUnchanged": true,
+            "worktreeClean": true,
+            "driverSha256": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+            "sourceModuleSha256": "6de1b0e743a448f1dae66884de9b24444e266c8f3cf035d1a55abe57dbd4ea03",
+            "artifactDirectory": "/tmp/tantalus-excel-20261101/inez-be3-native",
+            "artifactSha256": {
+              "report.json": "515335087aa3791ec8369198a7a4282dbfb1087cdfa9d5bdbebe609a821cbf2f",
+              "inez-civil-native-trace.json": "17941a2542f4bcc6e06842170bedf9ede5e9194b8608308e8c16c7f4417fdc9f",
+              "inez-civil-native-return.json": "5f711786e8b2789305355ebee8478c5c58a0e922b28ae226291c5c5cec99f29b",
+              "inez-civil-return-validation.json": "5c52b14c659c837a21e3bec66156beb87449ff1c5d112acd471b731122d38a84",
+              "source-start.json": "fa31e4ee26f6c70eb7c1f8f926cb95d00bfd5d6b8e4f305ce961ac830eaf9fe6",
+              "source-end.json": "fa31e4ee26f6c70eb7c1f8f926cb95d00bfd5d6b8e4f305ce961ac830eaf9fe6"
+            },
+            "checksPassed": [
+              "inez-civil: initial body is real, unique and floor-supported in its station",
+              "inez-civil: real terminal completes the local docking period",
+              "inez-civil: native reconnaissance advances exactly3h",
+              "inez-civil: native reconnaissance advances exactly3h",
+              "inez-civil: native reconnaissance advances exactly3h",
+              "inez-civil: native reconnaissance advances exactly3h",
+              "inez-civil: native reconnaissance advances exactly3h",
+              "inez-civil: strategy Save boundary preserves observed station bookmark",
+              "inez-civil: native exit saves exact closed passenger phase",
+              "inez-civil: paused cabin does not advance",
+              "inez-civil: first resumed native frame preserves exact passenger/chart",
+              "inez-civil: timed real passenger arrives through one paired annex portal",
+              "inez-civil: approach retains the actual visible service singleton",
+              "inez-civil: actual player entry sees the same singleton at the service post",
+              "inez-civil: native E records exactly the requested crew interaction",
+              "inez-civil: native E opens crew dialogue and pauses physical movement",
+              "inez-civil: native reconnaissance advances exactly3h",
+              "inez-civil: real player body holds the occupied parent arrival",
+              "inez-civil: full native roundtrip reaches the exact physical bookmark",
+              "inez-civil: trace includes all five real cabin phases",
+              "browser pages/assets have no runtime, HTTP or request failures",
+              "same served build before and after native observations"
+            ],
+            "returned": {
+              "crewId": "crew-09-inez-harlow",
+              "deck": 2,
+              "roomId": "quarantine",
+              "x": 643,
+              "y": 532,
+              "distance": 9103.399999999081,
+              "verticalDistance": 0,
+              "liftJourneys": 2,
+              "crossings": 2,
+              "observedTravel": true
+            },
+            "nativeBay": {
+              "x": 1622,
+              "frames": 66,
+              "firstMonotonic": 212.64170000000018,
+              "lastMonotonic": 218.06520000000017,
+              "withinCamera": true,
+              "actualNativeWestwardSteps": 0,
+              "description": "The complete fresh native run reaches the physical west bay and resumes eastward; restoration/withdrawal from the old deadlock pose is independently proven by the disclosed Node regression."
+            },
+            "returnValidator": {
+              "ok": true,
+              "bookmark": {
+                "crewId": "crew-09-inez-harlow",
+                "deck": 2,
+                "roomId": "quarantine",
+                "x": 643,
+                "y": 532
+              },
+              "liftJourneys": 2,
+              "crossings": 2,
+              "verticalDistance": 0
+            },
+            "errors": {
+              "pageErrors": [],
+              "requestFailures": [],
+              "httpErrors": []
+            },
+            "limits": [
+              "Automated native controls; no human participation or canonical1:1 art approval.",
+              "Initial05h positions are declared initial conditions; no pre-load travel is claimed.",
+              "Off-screen actor traces are labeled separately from visible canvas evidence.",
+              "Strategic hours and opaque chart changes are not walking distance.",
+              "Only the standard Inez profile was run after the correction; occupied-lift-arrival variant not executed.",
+              "The final bookmark lies off the player current chart, as recorded in the trace; visible screenshots are labeled separately.",
+              "No canonical1:1 artistic certification or historical unobserved macro handoff is claimed.",
+              "Node occupied-bay player clearance is disclosed bounded fixture-body movement, not a second native keyboard journey."
+            ]
+          }
+        }
+      },
+      "trialsObserver207": {
+        "source": {
+          "path": "/tmp/tantalus-trials-floor-proof/evidence.json",
+          "sha256": "857245b17d799c1f8ccefa95c0253f8678e073a024272d476b85b350d298d33f"
+        },
+        "evidence": {
+          "status": "verified_local_observer_correction_pending_remote_ci",
+          "commit": "5f9bd2295803ecaa4ee2c444df54560ff7340db5",
+          "baseCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+          "worktree": "/workspace/tantalus-trials-floor",
+          "branch": "fix/trials-floor-observer-20261101",
+          "filesSha256": {
+            "scripts/qa-xeno-trials-capture-v163.py": "048dce8bd87992543acbb38742618e56a4b6d4df0ea6794acd82908388da9674",
+            "scripts/verify-xeno-trials-capture-v163.mjs": "d6464fff170b5ce4ff9f7bd30afa9f1e362d3dfcf3900049d6b7c8d4cc33ae91"
+          },
+          "changeScope": "QA observer and its existing verifier only. Engine/assets/escape rules/time budgets unchanged. No build, push, merge or deploy.",
+          "ciFailure": {
+            "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41261301088/job/124715246243",
+            "checkoutCommit": "9cd715408dc2e709c5303281c0521b55d06269d2",
+            "log": "/tmp/tantalus-excel-20261101/ci-760-trials-job-124715246243.log",
+            "logSha256": "bac31e5117e1870c293e6b6ffccef6281b1bf77959fec9ab82764b1aad3971d9",
+            "profile": "wy-commando-player-captor",
+            "checksBeforeFailure": 12,
+            "guardianReached": false,
+            "reportAndPngRead": false,
+            "artifactDownload": {
+              "id": 13065299661,
+              "state": "denied",
+              "reason": "Normal gh run download redirect to productionresultssa13.blob.core.windows.net returned Forbidden. No retry or bypass."
+            }
+          },
+          "ordinaryLocalBaseline": {
+            "status": "passed",
+            "checks": 35,
+            "roles": "player-captor",
+            "profiles": 3,
+            "path": "/tmp/tantalus-trials-floor-before-native/report.json",
+            "scope": "Original driver did not reproduce CI failure under ordinary local timing."
+          },
+          "declaredNativeLatencyReproduction": {
+            "milliseconds": 700,
+            "method": "Real external Python observation delay after native acquisition, without changing scheduler/match/inputs.",
+            "fixture": "/tmp/tantalus-trials-floor-repro.py",
+            "before": {
+              "report": "/tmp/tantalus-trials-floor-before-delay/report.json",
+              "sha256": "c7aa22aee47d7eb9b462e504e5f5abce6a2778485de676bca95888b0e398a007",
+              "status": "failed",
+              "sameCiError": true,
+              "holdId": 21,
+              "holdBornTick": 406,
+              "holdEndedTick": 486,
+              "observerArmedTick": 497
+            },
+            "after": {
+              "report": "/tmp/tantalus-trials-floor-after-delay/report.json",
+              "sha256": "9e12d51d443c159405dfbf666bdc6f5b9af2117a7398032480da2852e1705f46",
+              "status": "passed",
+              "checks": 35,
+              "profiles": 3
+            },
+            "sameBuildIdentity": true,
+            "scope": "Chromium latency fixture; does not expose unavailable CI report states."
+          },
+          "finalNative": {
+            "report": "/tmp/tantalus-trials-floor-final-six/report.json",
+            "sha256": "142902717ccf5d6fc987f88a6e4833d9b3f88f8d110653d5c1b50a3cef47fe11",
+            "status": "passed",
+            "checks": 68,
+            "profiles": 6,
+            "roles": "both",
+            "buildIdentity": {
+              "sourceCommit": "760e7aa8eeeceaf2af43d218bbc4b6471b60bc13",
+              "buildId": "143.0.0+760e7aa8eeec",
+              "buildInfoSha256": "5072b8d69adf936d2d19b74e4dbc6ba482e45642f98cb2281ce2a9aa199d2ddd"
+            },
+            "sameBuildBeforeAfter": true,
+            "errors": {
+              "pageErrors": [],
+              "requestFailures": [],
+              "httpErrors": []
+            },
+            "observerHarnessCommit": "5f9bd2295803ecaa4ee2c444df54560ff7340db5",
+            "buildCommitDiffersFromObserverHarness": true,
+            "reason": "No engine/build changes; final observer exercises unchanged frozen760 distribution."
+          },
+          "guardianLocalProof": {
+            "acceptedSpecial": {
+              "attackEvent": {
+                "id": 20,
+                "tick": 346,
+                "type": "attack",
+                "side": "player",
+                "kind": "special",
+                "signatureIdV147": "fte-prowler-ambush-leap"
+              },
+              "grappleStart": {
+                "id": 22,
+                "tick": 399,
+                "type": "grapple-start-v153",
+                "side": "opponent",
+                "attacker": "player",
+                "grappleId": 21
+              },
+              "attemptNumber": 2,
+              "preparationProof": {
+                "attackId": 19,
+                "attackEventId": 20,
+                "attackEventTick": 346,
+                "frameTick": 347,
+                "attackAge": 0.016666666666666666,
+                "clip": "windup",
+                "observedBy": "native RAF after real KeyL"
+              }
+            },
+            "observerArm": {
+              "expected": {
+                "stage": "floor",
+                "timeoutMs": 45000,
+                "matchId": "xt96-1",
+                "round": 1,
+                "fighterIds": [
+                  "prowler",
+                  "import-game-dd-guardian"
+                ],
+                "sides": [
+                  "player",
+                  "opponent"
+                ],
+                "attackerSide": "player",
+                "targetSide": "opponent",
+                "targetId": "import-game-dd-guardian",
+                "holdId": null,
+                "sinceTick": 347,
+                "after": true,
+                "attackEventId": 20
+              },
+              "state": {
+                "tick": 347,
+                "round": 1,
+                "paused": false,
+                "matchId": "xt96-1",
+                "grapple": null,
+                "fighters": [
+                  {
+                    "id": "prowler",
+                    "side": "player",
+                    "hp": 166,
+                    "guard": false,
+                    "escapes": 0
+                  },
+                  {
+                    "id": "import-game-dd-guardian",
+                    "side": "opponent",
+                    "hp": 233,
+                    "guard": false,
+                    "escapes": 0
+                  }
+                ],
+                "receipts": [],
+                "ends": []
+              }
+            },
+            "floorPause": {
+              "paused": true,
+              "floorTick": 447,
+              "pausedTick": 447,
+              "floorHoldId": 21,
+              "pausedHoldId": 21,
+              "publicControlAction": {
+                "method": "DOM click on production pause button",
+                "selector": "[data-xt=\"pause\"]",
+                "beforeTick": 447,
+                "beforePaused": false,
+                "holdId": 21,
+                "afterTick": 447,
+                "afterPaused": true,
+                "afterHoldId": 21
+              },
+              "floorBornTick": 399,
+              "floorEscape": 33,
+              "pausedEscape": 33,
+              "pausedPhase": "active",
+              "floorRound": 1,
+              "pausedRound": 1,
+              "ends": []
+            },
+            "preparationPng": "/tmp/tantalus-trials-floor-final-six/qa-trials-capture-v163-guardian-player-captor-preparation.png",
+            "preparationPngSha256": "d30ffbbc2b6be8700e7472f29c7042640c1e6fc6dcf0c8b9b47fcefddfa2addb",
+            "sameProofInDeferredPng": true,
+            "ciClaim": false
+          },
+          "contracts": {
+            "capture": {
+              "pass": 23,
+              "fail": 0,
+              "log": "/tmp/tantalus-trials-floor-proof/final-capture-contracts.log"
+            },
+            "continuation": {
+              "pass": 317,
+              "fail": 0,
+              "log": "/tmp/tantalus-trials-floor-proof/final-continuation.log"
+            },
+            "sourceCheck": {
+              "ok": true,
+              "log": "/tmp/tantalus-trials-floor-proof/source-check.log"
+            },
+            "regressionsAgainstFrozen760": {
+              "expectedPass": 0,
+              "expectedFail": 2,
+              "expectedExit": 1,
+              "log": "/tmp/tantalus-trials-floor-proof/old-contracts.log",
+              "fixtureType": "Actual production engine/controller and Python literals; declared DOM/image/RAF doubles, no Chromium pixel claim."
+            }
+          },
+          "tooling": {
+            "node": "24.19.0",
+            "playwright": "1.62.0",
+            "chromium": "154.0.8037.57",
+            "ciPinnedPlaywright": "1.57.0"
+          },
+          "notExecuted": [
+            "Remote CI of final correction",
+            "Build/check:built (unchanged760 build used)",
+            "Human playtesting",
+            "Canonical art1:1 approval"
+          ]
+        }
+      },
+      "inezImplementation": {
+        "source": {
+          "path": "/tmp/tantalus-excel-20261101/inez-be3-implementation-receipt.json",
+          "sha256": "ee367cbb2f4fcc09d4048141feb31d14ee595fda4e36024b089b8db7759fb7ef"
+        },
+        "evidence": {
+          "commit": "be3d1cdf6c2a91fee1a00470dddede820f81175a",
+          "base": "5895c4b5623126206b27e5074c68c33194cc0edb",
+          "files": {
+            "src/npc-interdeck-routes-v165.js": "6de1b0e743a448f1dae66884de9b24444e266c8f3cf035d1a55abe57dbd4ea03",
+            "scripts/verify-npc-interdeck-routes-v165.mjs": "cb615f0a352b685abd76abfe681a2e02a6b073df321c70bf8c538d9901923000",
+            "scripts/qa-npc-interdeck-native-v165.py": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a"
+          },
+          "targeted": {
+            "tests": 4,
+            "pass": 4,
+            "fail": 0,
+            "exit": 0,
+            "log": "/tmp/tantalus-excel-20261101/inez-regression-final-with-clearance.log"
+          },
+          "interdeck": {
+            "tests": 43,
+            "pass": 43,
+            "fail": 0,
+            "exit": 0,
+            "log": "/tmp/tantalus-excel-20261101/inez-interdeck-be3-suite.log"
+          },
+          "build": {
+            "exit": 0,
+            "log": "/tmp/tantalus-excel-20261101/inez-be3-build.log"
+          },
+          "checkBuilt": {
+            "exit": 0,
+            "log": "/tmp/tantalus-excel-20261101/inez-be3-check-built.log"
+          },
+          "native": "running; no outcome claimed",
+          "limitations": [
+            "Node player clearance is disclosed fixture movement at27px/s, not native keyboard validation.",
+            "Node passage tests end at the actual return lift travel, not the final bookmark.",
+            "Historical ambiguous duplicate log inez-interdeck-suite.log is excluded; exact commit suite log above is authoritative."
+          ]
+        },
+        "recordedBeforeNativeFinal": true,
+        "authoritativeFinalNativeReceipt": {
+          "path": "/tmp/tantalus-excel-20261101/inez-be3-native-receipt.json",
+          "sha256": "bb9e7dd07feff42cc8948e8ba755c47d119510ef1b5155bab851881cf87299ce"
+        }
+      },
+      "davidOriginalOccupiedFailure": {
+        "path": "/tmp/tantalus-excel-20261101/next-david-occupied/report.json",
+        "sha256": "64276ec8acd1b4087c64f5fb905ce17adc098d6cfabac2a866f7a4c864691d95"
+      },
+      "assertionsCountingPolicy": "Profiles and repeats stay separate. Node tests, replay checks, post-run assertions and native browser checks are not added into a unique completion total."
     }
   },
   "policies": {
@@ -14499,5 +16126,21 @@
         "finding": "README déclare transfert partiel :complémentRAR 30 522 453 octets,ZIP 40 originaux 23 116 469 octets,galerieHTML 41 377 545 octets. Archive unifiée 188 668 239 octets explicitement non transférée à cette date. Rapport historique mentionne 267 originaux, mais ils ne sont pas tous présents dans ce dossier par cette seule preuve."
       }
     ]
+  },
+  "continuation": {
+    "schema": 1,
+    "kind": "READ_ONLY_SOURCE_FOLLOWUP_FOR_PARENT_AUTHORING",
+    "baseline": {
+      "path": "/tmp/tantalus-excel-20261101/closure.json",
+      "sha256": "83d09fdd8854adce8211cc6110e1bb9f701cf1ae662bf06d3bf952bb692133ad"
+    },
+    "scope": "Only seven route status/limit/source cells and their actions updated; four bounded actions and evidence added. Other1015rows,19historicalworkbooks,firstthree680actions,91PRauditrows,21Excelmarkers preserved.",
+    "sevenRoutesRemainPartial": true,
+    "boundedCorrectiveLocalActions": 3,
+    "diagnosticActions": 1,
+    "artClosed": 0,
+    "approved1to1": 0,
+    "noGlobalCurrentExhaustivenessClaim": true,
+    "noWorkbookOrLibraryWritten": true
   }
 }
