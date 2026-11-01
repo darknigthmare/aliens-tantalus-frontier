@@ -63,3 +63,70 @@ jobs:
           path: ${{ runner.temp }}/atf-station-relays-v166
           retention-days: 7
           if-no-files-found: error
+  occupied-lift-arrival:
+    name: Native occupied lift arrival (${{ matrix.route }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        route: [david-durandal, jun-sanitary]
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Prepare source evidence before dependency installation
+        shell: bash
+        env:
+          INTERDECK_ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/atf-occupied-lift-arrival-v165/$INTERDECK_ROUTE"
+          mkdir -p "$evidence"
+          git rev-parse HEAD > "$evidence/source-commit.txt"
+      - name: Install locked application dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Browser tooling outside the release
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Interdeck contracts and actual distribution
+        shell: bash
+        env:
+          INTERDECK_ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/atf-occupied-lift-arrival-v165/$INTERDECK_ROUTE"
+          npm run test:parallel:v165 2>&1 | tee "$evidence/node.log"
+          npm run check 2>&1 | tee "$evidence/source-check.log"
+          npm run build 2>&1 | tee "$evidence/build.log"
+          npm run check:built 2>&1 | tee "$evidence/distribution-check.log"
+      - name: Observe occupied cabin arrival and full native return
+        shell: bash
+        env:
+          INTERDECK_ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/atf-occupied-lift-arrival-v165/$INTERDECK_ROUTE"
+          source_head="$(git rev-parse HEAD)"
+          test "$source_head" = "$(cat "$evidence/source-commit.txt")"
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$evidence/http.log" 2>&1 &
+          occupied_lift_server=$!
+          trap 'kill "$occupied_lift_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          curl --fail --silent http://127.0.0.1:4173/build-info.json > "$evidence/served-build-info.json"
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python -B scripts/qa-npc-interdeck-native-v165.py --base http://127.0.0.1:4173 --route "$INTERDECK_ROUTE" --comparison-stage after --occupied-lift-arrival --expect-build "$source_head" --expect-harness "$source_head" --output "$evidence/journey" 2>&1 | tee "$evidence/journey.log"
+      - name: Retain exact occupied cabin evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: occupied-lift-arrival-v165-${{ matrix.route }}
+          path: ${{ runner.temp }}/atf-occupied-lift-arrival-v165
+          retention-days: 7
+          if-no-files-found: error
