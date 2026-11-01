@@ -259,6 +259,11 @@ const FORGE_TOOLING_V140 = new Set([
   'AGENTS.md',
   'docs/development',
   'docs/development/GAMEDEV_GUIDANCE.md',
+  // Alien_base bridge docs and source-only workflow: never distributed.
+  'docs/development/ALIEN_BASE_SYNC_V1.md',
+  'docs/development/Alien_Base_Import_Status.csv',
+  '.github/workflows/alien-base-bridge.yml',
+  'scripts/verify-alien-base-bridge-v1.mjs',
   'docs/development/SPRITE_PACK_V170.md',
   'docs/development/CLOTURE_EXCEL_20261101.xlsx',
   'docs/development/EXCEL_CLOSURE_20261101.json',
