@@ -624,17 +624,105 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         ||buildHubObstacleGeometryV87(deck).some(p=>p.collisionMode!=='one-way-top'&&overlap(box,p));
     }
     npcInterdeckPassingRequestV165(routeId) {
+      // Preserve the historical route dependency graph used by leases, relay
+      // arbitration and their native browser waiters. It does not by itself
+      // indicate physical occupation of any particular door.
       const passengers=routeId==='tamsin-proving'?['inez-civil']:['mara-archives','echo-escape'].includes(routeId)?['maksim-cockpit']
         :routeId==='cal-logistics'?['david-durandal']:routeId==='idris-engine'?['inez-civil','maksim-cockpit','jun-sanitary']
           :['asha-refuge','leila-galley'].includes(routeId)?['jun-sanitary']:[];
       return passengers.some(id=>Boolean(this.npcInterdeckStateV165?.routes[id]?.actor));
     }
+    npcInterdeckSharedServiceDoorV185(routeId) {
+      if (routeId!=='idris-engine') return this.npcInterdeckPassingRequestV165(routeId);
+      // Idris owns a local rear portal, not the entire reactor floor. A
+      // passenger blocked by the player far beyond that socket, or inside
+      // the traveling lift, cannot keep Idris at his annex post forever.
+      // A supported body at the entrance or returning through Idris's floor
+      // corridor can claim courtesy, until it physically clears that passage.
+      // Its controller, physical collisions and door checks stay authoritative.
+      const door=HUB_ANNEX_BY_ID_V137['engine-room'].parentDoorBounds;
+      const owner=this.getNpcServicePhysicalStateV165?.(routeId);
+      // The retained parent post is part of the real service floor passage.
+      // Reserving only the doorway asks Idris to turn back too late: Inez's
+      // eastbound return and Idris then meet at their native12px clearance.
+      const corridorLeft=Math.min(door.x-70,finite(owner?.homeX)?owner.homeX-12:door.x-70);
+      const corridor={x:corridorLeft,y:door.y-10,
+        w:Math.max(door.x+door.w+70,finite(owner?.homeX)?owner.homeX+44+12:door.x+door.w+70)-corridorLeft,
+        h:door.h+20};
+      return ['inez-civil','maksim-cockpit','jun-sanitary'].some(id=>{
+        const entry=this.npcInterdeckStateV165?.routes[id],a=entry?.actor;
+        if(a?.deck!==3 || a.roomId!=='reactor' || a.stage==='returned'
+          || !finite(a.x) || !finite(a.y) || Math.abs(a.y-532)>=16)return false;
+        const definition=NPC_INTERDECK_DEFINITIONS_V165.find(d=>d.id===id);
+        let goal=null;
+        if(a.direction==='return'&&a.stage==='walking-home')goal=entry.origin?.x;
+        else if(a.direction==='outbound'&&a.stage==='walking-portal'){
+          const face=getNpcInterdeckGeometryV165(id).faces.parent;
+          goal=face.opening.x+(face.opening.w-44)/2;
+        }else if(['walking-lift','waiting-lift'].includes(a.stage)){
+          const cabinX=npcLiftSocketV165(a.deck,definition.shaftId).x-22;
+          goal=cabinX+(Math.sign(a.x-cabinX)||-1)*96;
+        }
+        // Only an authentic current floor journey through the saved service
+        // corridor may reserve it. A remote walker heading to the lift or a
+        // traveling cabin does not gain priority over Idris's own watch.
+        if(finite(goal)&&Math.min(a.x,goal)<=corridor.x+corridor.w
+          &&Math.max(a.x,goal)+44>=corridor.x)return true;
+        return overlap({x:a.x,y:a.y,w:44,h:92},
+          {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
+      });
+    }
+    /** V198 distinguishes a remote interdeck dependency from an occupied
+     * physical service entrance. Jun's route may be active on an unrelated
+     * deck for hours; that cannot freeze Leila or Asha inside their annex.
+     * Only a real, supported body overlapping the parent door approach
+     * reserves the shared aperture. Actual collisions remain authoritative.
+     * This does NOT alter the historical passenger dependency graph. */
+    npcInterdeckSharedServiceDoorV198(routeId) {
+      if(routeId==='idris-engine')return this.npcInterdeckSharedServiceDoorV185(routeId);
+      const annexId=routeId==='leila-galley'?'galley-service'
+        :routeId==='asha-refuge'?'personal-refuge':null;
+      if(!annexId)return this.npcInterdeckPassingRequestV165(routeId);
+      const annex=HUB_ANNEX_BY_ID_V137[annexId];
+      const a=this.npcInterdeckStateV165?.routes['jun-sanitary']?.actor;
+      const door=annex?.parentDoorBounds;
+      if(!a||!door||a.stage==='returned'||!finite(a.x)||!finite(a.y)
+        ||a.deck!==deckOf(annex.parentRoomId)||a.roomId!==annex.parentRoomId)return false;
+      // The refuge and galley share their parent floor with Jun's real
+      // journey. A doorway-only test let Leila leave her galley against Jun
+      // crossing the mess in the opposite direction (native x1660/x1716).
+      // Reserve only the matching room and support while Jun actually walks.
+      const sharedCorridor=['asha-refuge','leila-galley'].includes(routeId) && Math.abs(a.y-532)<16
+        && ['walking-lift','waiting-lift','walking-portal','walking-home'].includes(a.stage);
+      if(sharedCorridor)return true;
+      // Other phases reserve only the bounded doorway; a remote or elevated
+      // actor cannot claim it merely because its route exists.
+      return overlap({x:a.x,y:a.y,w:44,h:92},
+        {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
+    }
     getNpcServicePassingDutyV165(routeId,actor) {
+      if(routeId==='idris-engine') {
+        if(this.npcInterdeckSharedServiceDoorV185(routeId))return true;
+        // A remote passenger has no courtesy request here. Returning false
+        // would cancel Idris's authentic watch, release his parent owner and
+        // re-admit an unobserved annex timetable pose after elapsed hours.
+        return super.getNpcServicePassingDutyV165?.(routeId,actor);
+      }
+      if(['leila-galley','asha-refuge'].includes(routeId)) {
+        if(this.npcInterdeckSharedServiceDoorV198(routeId))return true;
+        // Let the authentic V141 schedule own duty when Jun is remote.
+        // Returning false here would incorrectly cancel a legitimate watch.
+        return super.getNpcServicePassingDutyV165?.(routeId,actor);
+      }
       if(this.npcInterdeckPassingRequestV165(routeId))return true;
       return super.getNpcServicePassingDutyV165?.(routeId,actor);
     }
     shouldHoldNpcServiceOwnerV165(routeId,actor,state) {
-      return this.npcInterdeckPassingRequestV165(routeId)||Boolean(super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
+      const passing=['leila-galley','asha-refuge'].includes(routeId)
+        ?this.npcInterdeckSharedServiceDoorV198(routeId)
+        :routeId==='idris-engine'?this.npcInterdeckSharedServiceDoorV185(routeId)
+          :this.npcInterdeckPassingRequestV165(routeId);
+      return Boolean(passing||super.shouldHoldNpcServiceOwnerV165?.(routeId,actor,state));
     }
     getNpcServiceOwnerYieldGoalV165(routeId,actor) {
       if(routeId==='david-durandal') {

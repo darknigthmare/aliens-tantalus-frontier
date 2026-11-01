@@ -17,7 +17,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V176, ARMORY_V174_ECONOMY_SUCCESSORS,
   ARMORY_V174_ECONOMY_NEW_SOURCES, V177_SOURCE_SUCCESSORS,
   V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
-  verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS } from './audit-succession-v163.mjs';
+  verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -285,6 +285,20 @@ test('V177 tracks six bounded corrections while media, Forge and candidate relea
     assert.throws(() => verifyOpenWorkstreamsV177(forged, changed), undefined,
       'The original V1 specification/CSV hash cannot be rewritten: ' + path);
   }
+  for (const row of current.followupV177.developmentToolChanges) {
+    assert.deepEqual([row.previousSha256, row.currentSha256],
+      [V177_TOOL_SUCCESSORS[row.path].previousSha256, V177_TOOL_SUCCESSORS[row.path].currentSha256]);
+    const bytes = Buffer.concat([read(row.path), Buffer.from('UNREVIEWED')]);
+    const changed = path => path === row.path ? bytes : read(path);
+    assert.throws(() => verifyOpenWorkstreamsV177(current, changed),
+      error => error.message.includes(row.path)
+        && /Unreviewed V177 (?:tool bytes|behavioral verifier)/.test(error.message));
+    const forged = clone(current);
+    forged.followupV177.developmentToolChanges.find(r => r.path === row.path).currentSha256 = sha(bytes);
+    assert.throws(() => verifyOpenWorkstreamsV177(forged, changed));
+  }
+  const omittedTools = clone(current); omittedTools.followupV177.developmentToolChanges = [];
+  assert.throws(() => verifyOpenWorkstreamsV177(omittedTools));
   const ledger = current.followupV177.shipTracking.ledgerPath;
   const changedLedger = path => path === ledger ? Buffer.concat([read(path), Buffer.from('UNREVIEWED')]) : read(path);
   assert.throws(() => verifyOpenWorkstreamsV177(current, changedLedger), /Unreviewed V177 ship ledger bytes/);

@@ -44,6 +44,7 @@ report = dict(schema=177, status='running', stage=args.stage, startedAt=now(), c
                   'Automated Chromium observation, no human participants or canonical1:1 approval.',
                   'Room and camera starting positions are declared fixtures, not observed travel to those positions.',
                   'First views add an actual frame before the same short native walk; transient actor occlusion never credits visibility. Every installation still needs16 matching material pixels in another captured frame.',
+                  'The last CCTV view keeps its console-obscured frame and adds a fixed native KeyA150ms exit from the nearby console in both stages; UI, actor and camera state are never assigned.',
                   'Separate views of a long room are separate Save imports, not a walkthrough or interdeck transport.',
                   'The detached reference never replaces a native image and never mutates an engine, actor or camera.',
                   'Pixel matching establishes visible material signatures within each installation, not whole-room artistic approval.',
@@ -368,6 +369,31 @@ try:
                     row = inspect(page, config)
                     check(config['id'] + ': observing and walking preserve resources and strategic time',
                           before['clock'] == row['clock'] and before['resources'] == row['resources'])
+                    if config['id'] == 'cctv-view-3':
+                        # Fixed in both comparison stages. Keep the initial frame,
+                        # including its uncredited pixel occlusions, before leaving
+                        # the native console range through an actual keyboard walk.
+                        exit_id = config['id'] + '-sortie-pupitre'
+                        contact_before = page.evaluate("()=>Boolean(__ATF_HUB__.hubTrainingContactV132('cctv'))")
+                        check(exit_id + ': the initial native frame is within console range', contact_before)
+                        page.locator('#hub-canvas').focus()
+                        page.keyboard.press('KeyA', delay=150)
+                        settle(page)
+                        moved = observe(page)
+                        delta = moved['player']['x'] - row['player']['x']
+                        contact_after = page.evaluate("()=>Boolean(__ATF_HUB__.hubTrainingContactV132('cctv'))")
+                        check(exit_id + ': a short native left walk leaves console range on supported floor',
+                              moved['roomId'] == row['roomId'] == 'cctv'
+                              and moved['annexId'] == row['annexId'] == 'cctv'
+                              and -60 <= delta <= -3 and moved['player']['grounded']
+                              and abs(moved['player']['y'] + moved['player']['h'] - moved['floorY']) <= 1
+                              and not contact_after)
+                        report.setdefault('nativeMoves', []).append(dict(view=exit_id, fixtureViewId=config['id'], key='KeyA',
+                            delayMs=150, before=row['player'], after=moved['player'],
+                            consoleContactBefore=contact_before, consoleContactAfter=contact_after))
+                        exited = inspect(page, {**config, 'id':exit_id, 'fixtureViewId':config['id']})
+                        check(exit_id + ': observing and walking preserve resources and strategic time',
+                              before['clock'] == exited['clock'] and before['resources'] == exited['resources'])
                 except Exception:
                     try:
                         if page and not page.is_closed() and page.locator('#hub-canvas').is_visible():

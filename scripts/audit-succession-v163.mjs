@@ -288,19 +288,20 @@ export const V165_VERIFIER_SUCCESSORS_V176 = Object.freeze({
  * receipts above remain immutable; only these explicitly listed successors
  * may replace their final bytes. Current gameplay evidence is kept separate. */
 export const V177_SOURCE_SUCCESSORS = Object.freeze({
-  "src/game-production-runtime.js": Object.freeze({ previousSha256: "8e31b01c84ef7af0b810d3aa4d22afc429153f362627b9f31d0b7b6c75ad60fb", currentSha256: "fa3ab990bd5137920a4f804f4e2a001526e19a34e0dfb701a2b510bef92a8a26" }),
+  "scripts/verify-hub-armory-v169.mjs": Object.freeze({ previousSha256: "900a3310329440309e2dc316c06bf91637a4024b376f324999c0801a1de8021e", currentSha256: "7c5f2bfd49c85a314297855e2cabdf29387d21bb21621d656b06118496fab0a1" }),
+  "src/game-production-runtime.js": Object.freeze({ previousSha256: "8e31b01c84ef7af0b810d3aa4d22afc429153f362627b9f31d0b7b6c75ad60fb", currentSha256: "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419" }),
   "src/hub-armory-scene-v169.js": Object.freeze({ previousSha256: "036374b5b38dcb0dd43e92ef869eddf9f6e0a2c167a4ddf330261fc92570b5df", currentSha256: "4d65ab9fb59eb0ad924c3efe21f133ac9e52a0cf77b2410e4251b5d6fca378fc" }),
-  "src/hub-armory-storefront-v169.js": Object.freeze({ previousSha256: "6130f994f84099de1bedc9f071e2b4d57f014dded55f9a8a508b7347d08b8476", currentSha256: "1a106644c0d409f9d5c13921ced4112c1577d6897d9afe4c30530c23c64df290" }),
-  "src/weapon-magazine-inventory-v167.js": Object.freeze({ previousSha256: "2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928", currentSha256: "ad0c2597214ed41b7c91852e7e2cb62c855a2eb366ed79808c042f8300850fbb" }),
+  "src/hub-armory-storefront-v169.js": Object.freeze({ previousSha256: "6130f994f84099de1bedc9f071e2b4d57f014dded55f9a8a508b7347d08b8476", currentSha256: "8ef018c182f28e97fceda6aadd688d3678f5addd5eb5ed19129495a9207e01d7" }),
+  "src/weapon-magazine-inventory-v167.js": Object.freeze({ previousSha256: "2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928", currentSha256: "4943b8ba1c16b4b1430e0383220f44a284ed893963281f51a6279eb04c689014" }),
   "src/weapon-magazine-recovery-runtime-v168.js": Object.freeze({ previousSha256: "4dbf78d2a4aa096125dada27b2b5fff05c1b927777f705eaf7d57f7626b88889", currentSha256: "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13" }),
   "src/weapon-magazine-world-v168.js": Object.freeze({ previousSha256: "6024a584079bf6bac0d83ccc439e810afb4d6aadc33990d51ce72fcae715962a", currentSha256: "acf8396585e068d33569f42537c4420af7501093428e77824981c494491209e2" }),
-  "sw.js": Object.freeze({ previousSha256: "88ba286c6e78add4c054175da085cf56ad93d982749c09ed237e18605ed901f0", currentSha256: "e8bd0617c3a1e25d3b7d01d2ac595cb3eaef241be5c156f0c294b4e0d2769ce5" }),
+  "sw.js": Object.freeze({ previousSha256: "88ba286c6e78add4c054175da085cf56ad93d982749c09ed237e18605ed901f0", currentSha256: "282448609033fdb663983352987cee04c545e4fd4c66d67a227a83df6ec90675" }),
 });
 
 export const V165_VERIFIER_SUCCESSORS_V177 = Object.freeze({
-  "scripts/verify-audit-continuation-v163.mjs": Object.freeze({ previousSha256: "b37258cad1f33d02fa7c18fffb19449ce8b96e971433b517c806a6550ae9be3a", currentSha256: "6e0e4445a5dbe721e7305cbc9b2ed8125b8c4beeecddcd2fc25258f895855a60" }),
+  "scripts/verify-audit-continuation-v163.mjs": Object.freeze({ previousSha256: "b37258cad1f33d02fa7c18fffb19449ce8b96e971433b517c806a6550ae9be3a", currentSha256: "8e64247b3186d36a62352245ea6aadb6c2f6c7d117a8ffc13d4962990ba08dfd" }),
   "scripts/verify-parallel-completion-v165.mjs": Object.freeze({ previousSha256: "efb67151cd5a3e00434e1889bfd782ae94547f9300f858583e18845a9683e701", currentSha256: "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa" }),
-  "scripts/verify-public-release-v86.mjs": Object.freeze({ previousSha256: "1419dcf0e47abd91288748ac7b222ba0f2b0d354e2997ced49cedc2c44bee77e", currentSha256: "32ba11020523172842ea055dce894b5cb29e94a27fc2436c78fa2047056aa58e" }),
+  "scripts/verify-public-release-v86.mjs": Object.freeze({ previousSha256: "1419dcf0e47abd91288748ac7b222ba0f2b0d354e2997ced49cedc2c44bee77e", currentSha256: "e56b5473e6e3d9e1f45b64cd10489544886229853be1cc75bdf8e1b1a099e705" }),
 });
 
 /** Baseline467 source identities for the bounded V177 continuation. This
@@ -319,16 +320,26 @@ export const V177_RUNTIME_PREDECESSORS = Object.freeze({
   "src/hub-room-life-v136.js": "e4d6da6506eec8f9071850079dbf156270895f6fa22395b49dfe8cdf96fb79a2",
   "src/npc-interdeck-routes-v165.js": "85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1",
   "src/npc-lift-transit-v165.js": "2b492180395b6d78a73414a345a89c109f796daf3e18644b7b8419db223cd55b",
+  "src/npc-service-routes-v161.js": "d3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750",
   "src/npc-service-traffic-v163.js": "50b90764828ab341cabb0d5795addd06092beed00957e6abc2a8310675e8de5d",
   "src/npc-station-relays-v166.js": "371f5de036111531b79adffea4e6d5ffaf0c1f86f5773b18fed88b129ccaf156",
   "src/player-appearance-hub-v126.js": "7f056e474636f829e5309b1c52e68e04d3e2844b275fb001b574d6af90fb8b6f",
   "src/player-locomotion-rig-v129.js": "719b3fc6a0e9efa876d640f292794fc1766ceb646b7d74effb6914e4419f2cb0",
   "src/player-transit-rig-v128.js": "62a3b7466b5d851c95d31ef00da7e79d8b65f43c0331e9a9d7acbe960a8f3103",
   "src/player-weapon-runtime-v125.js": "8f18c50f16c5f00f9dae9c3210ef51bbe4671efce1512d5f0f86ae95b9ab6342",
+  "src/weapon-feed-admission-v193.js": null,
   "src/weapon-magazine-inventory-v167.js": "2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928",
   "src/weapon-magazine-recovery-runtime-v168.js": "4dbf78d2a4aa096125dada27b2b5fff05c1b927777f705eaf7d57f7626b88889",
   "src/weapon-magazine-world-v168.js": "6024a584079bf6bac0d83ccc439e810afb4d6aadc33990d51ce72fcae715962a",
+  "src/weapon-underbarrel-v174.js": "eec7229224c2445bca73b7586ca41ac4f4af8b1f19e98881d5161ebed04e81d1",
   "sw.js": "88ba286c6e78add4c054175da085cf56ad93d982749c09ed237e18605ed901f0",
+});
+
+/** Development-only V177 tool successors are anchored to main467 bytes.
+ * V175/V176 art receipts and admission policy remain separate and unchanged. */
+export const V177_TOOL_SUCCESSORS = Object.freeze({
+  "scripts/install-costume-art-v175.mjs": Object.freeze({ previousSha256: "9b6ef01e417485277aa83a6db17a37bb9a34609c1a97c27aa38d0338aaac4705", currentSha256: "0ffa2b6ed0e651263a2ac9e79f71dc18b16e6849027034705bd04de93605cb71" }),
+  "scripts/verify-costume-art-installer-v175.mjs": Object.freeze({ previousSha256: "3dd3614861943c8cc02b5fcd7e39afe6b5bfe80caae5376964bf6706f5cb0435", currentSha256: "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6" }),
 });
 
 export const V177_ARSENAL_SOURCE_INPUTS = Object.freeze({
@@ -422,7 +433,10 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
   const previousQaDrivers = {
     'scripts/qa-npc-matte-apertures-v164.py': 'ad16416f864867a27bb189fe6d5f6fda9d456cecb64050c3072831266058d57a',
     'scripts/qa-xeno-trials-capture-v163.py': 'cfb189f420d1967951faaa50d7a186abf1905b167ab7bd1fef68ead58aa91252',
-    'scripts/qa-tantalus-enrichment-v177.py': null
+    'scripts/qa-tantalus-enrichment-v177.py': null,
+    'scripts/qa-hub-service-details-v165.py': 'e461ba03888a7da7c0f6204cc67f4bfd91f00a83f451cc00b6ea7fabea6c3dd6',
+    'scripts/qa-npc-service-routes-v161.py': '15d51ddde8d37a18e3c4f529401220e03229bdb8fadeac93b4c0c982fe9cb73d',
+    'scripts/qa-npc-annex-service-routes-v163.py': 'bebefcd0e80cc81229ba0008bef8945b653e85fa414343412ba2127594fa8fdc'
   };
   assert.deepEqual(followup.qaDriverChanges?.map(row => row.path), Object.keys(previousQaDrivers));
   for (const row of followup.qaDriverChanges) {
@@ -433,6 +447,22 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
     for (const verifier of row.verifiers)
       assert.equal(sha(readSource(verifier)), followup.verifierHashes[verifier], 'Unreviewed V177 QA behavioral verifier: ' + verifier);
+  }
+  const toolPredecessors = {
+    'scripts/install-costume-art-v175.mjs': '9b6ef01e417485277aa83a6db17a37bb9a34609c1a97c27aa38d0338aaac4705',
+    'scripts/verify-costume-art-installer-v175.mjs': '3dd3614861943c8cc02b5fcd7e39afe6b5bfe80caae5376964bf6706f5cb0435'
+  };
+  assert.deepEqual(Object.keys(V177_TOOL_SUCCESSORS).sort(), Object.keys(toolPredecessors).sort());
+  assert.deepEqual(followup.developmentToolChanges?.map(row => row.path), Object.keys(toolPredecessors).sort());
+  for (const row of followup.developmentToolChanges) {
+    const receipt = V177_TOOL_SUCCESSORS[row.path];
+    assert.equal(receipt.previousSha256, toolPredecessors[row.path], 'Unreviewed V177 tool predecessor: ' + row.path);
+    assert.deepEqual([row.previousSha256, row.currentSha256], [receipt.previousSha256, receipt.currentSha256]);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256);
+    assert.equal(sha(readSource(row.path)), receipt.currentSha256, 'Unreviewed V177 tool bytes: ' + row.path);
+    assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
+    for (const verifier of row.verifiers)
+      assert.equal(sha(readSource(verifier)), followup.verifierHashes[verifier], 'Unreviewed V177 tool verifier: ' + verifier);
   }
   const arsenal = followup.arsenalTracking;
   assert.equal(arsenal?.jsonPath, 'docs/arsenal/progress-v177.json');

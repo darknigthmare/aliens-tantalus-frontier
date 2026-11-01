@@ -264,3 +264,23 @@ Le test npm `verify-costume-art-installer-v175.mjs` permet d'exécuter
 le même contrôle avec `TANTALUS_V175_ART_ROOT` lorsque l'archive
 physique décompressée est disponible. L'absence de l'archive en CI
 est un **skip déclaré**, pas un succès du rendu en jeu.
+
+
+## Contrôle hors moteur de topologie alpha V177
+
+`--verify-pixels` et `--stage` contrôlent aussi les112 pièces des groupes
+`upper`/`lower`, dont24 torses exigeant chacun deux régions transparentes
+internes :48 régions au total. Les deux pochettes accessoires restent hors
+de ce contrôle topologique ; leurs contrôles de source existants restent requis.
+
+Le masque retient alpha>40, les composantes opaques à partir de100 pixels
+et les régions transparentes fermées à partir de30 pixels. Aucune bordure
+solide ni deuxième composante solide de cette taille n'est acceptée. Ces
+seuils ne prouvent pas l'identité anatomique d'une ouverture, un pivot,
+un raccord de rig, une animation native ou une fidélité franchise1:1.
+
+Les tests RGBA synthétiques vérifient ces refus et l'absence de mutation
+des pixels. Ils ne valident pas le pack externe. Le contrôle du pack réel
+reste facultatif via `TANTALUS_V175_ART_ROOT` ; son absence est un skip
+déclaré. Aucune nouvelle réussite sur les PNG ni admission en jeu n'est
+affirmée par cette notice.

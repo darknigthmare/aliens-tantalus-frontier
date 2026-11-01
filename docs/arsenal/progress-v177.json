@@ -2081,18 +2081,18 @@
         [
           "C177-ARSENAL",
           "Les limites de révision et la reprise pouvaient perdre une cartouche, un chargeur ou le lien à la bonne arme.",
-          "Conservation des cartouches et contenants, refus atomiques et reprise exacte des flux chargés/réserve.",
-          "src/weapon-magazine-inventory-v167.js ; src/weapon-magazine-world-v168.js ; src/weapon-magazine-recovery-runtime-v168.js ; src/game-production-runtime.js",
-          "scripts/verify-weapon-conservation-v177.mjs ; scripts/verify-weapon-arsenal-v167.mjs ; scripts/verify-weapon-magazine-world-v168.mjs",
+          "Conservation des cartouches et contenants, refus atomiques et reprise exacte ; garde d’admission du flux193 et cycle mécanique du sous-canon préservés.",
+          "src/weapon-magazine-inventory-v167.js ; src/weapon-magazine-world-v168.js ; src/weapon-magazine-recovery-runtime-v168.js ; src/game-production-runtime.js ; src/weapon-underbarrel-v174.js ; src/weapon-feed-admission-v193.js",
+          "scripts/verify-weapon-conservation-v177.mjs ; scripts/verify-weapon-arsenal-v167.mjs ; scripts/verify-weapon-magazine-world-v168.mjs ; scripts/verify-weapon-underbarrel-v174.mjs ; scripts/verify-weapon-feed-admission-v193.mjs",
           "IMPLEMENTATION_ET_TESTS_CIBLES",
           "Couverture ciblée des chargeurs physiques ; les57 recettes et129 propositions ne sont pas toutes closes."
         ],
         [
           "C177-PLAYER",
           "Un changement de position sans temps physique pouvait produire une foulée ou un impact visuel incohérent.",
-          "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active.",
+          "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active ; les pièces importées sont contrôlées avant staging sans nouvelle admission artistique.",
           "src/player-locomotion-rig-v129.js ; src/player-appearance-hub-v126.js ; src/player-weapon-runtime-v125.js ; src/player-transit-rig-v128.js",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-appearance-runtime-v126.mjs ; scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-appearance-runtime-v126.mjs ; scripts/verify-player-transit-rig-v128.mjs ; scripts/verify-costume-art-installer-v175.mjs",
           "IMPLEMENTATION_ET_TESTS_CIBLES",
           "Aucune nouvelle tenue ou animation canonique ;18 références de costumes et les locomotions complètes restent ouvertes."
         ],
@@ -2101,7 +2101,7 @@
           "Certains équipements admis étaient masqués par le mur de l’armurerie ; l’enrichissement doit respecter les vrais passages.",
           "Ordre des couches d’armurerie corrigé et lot T177 de100 installations distinctes, adaptées à leurs35 pièces.",
           "src/hub-batch-command-v177.js ; src/hub-batch-habitat-v177.js ; src/hub-batch-industrial-v177.js ; src/hub-batch-engineering-v177.js ; src/hub-room-enrichment-v177.js ; src/hub-room-life-v136.js ; src/hub-armory-scene-v169.js ; src/hub-armory-storefront-v169.js",
-          "scripts/verify-tantalus-enrichment-v177.mjs ; scripts/verify-hub-armory-layering-v177.mjs",
+          "scripts/verify-tantalus-enrichment-v177.mjs ; scripts/verify-hub-armory-layering-v177.mjs ; scripts/verify-hub-armory-v169.mjs",
           "IMPLEMENTATION_ET_TESTS_CIBLES",
           "Les100 élémentsV168 ne sont pas recomptés ; pas de nouvelle collision ni de validation artistique globale."
         ],
@@ -2109,10 +2109,10 @@
           "C177-AUDIT",
           "La garde cumulative ignorait le successeur V176 du vérificateur, bien que sa chaîne soit déjà enregistrée.",
           "Résolution commune des reçus V171 à V177, anciens reçus immuables et suivi séparé des deux domaines de classeurs.",
-          "",
-          "scripts/verify-audit-continuation-v163.mjs ; scripts/verify-parallel-completion-v165.mjs ; scripts/verify-capture-observation-v177.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-dialogue-portraits-v168.mjs",
+          "Sources déclarées PR26@cf8bfa0 README L274–372 sha256:ed6f5126ea50387d05d5178df1803fb2dabd023ce6e42c853097c528d7c5b67e ; https://docs.google.com/spreadsheets/d/10vecimyx19Lgrs1gWpQbZQpZw1jEA6QG/edit ; https://docs.google.com/spreadsheets/d/1NwfgNhlx6CM1H9jqT_M4FsDTH-J8caYi/edit ; https://docs.google.com/spreadsheets/d/1V5W-97ADGhych-8wYewWWvhUGHqbA3YB/edit",
+          "scripts/verify-audit-continuation-v163.mjs ; scripts/verify-parallel-completion-v165.mjs ; scripts/verify-capture-observation-v177.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-dialogue-portraits-v168.mjs ; scripts/verify-hub-service-details-v165.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs",
           "IMPLEMENTATION_ET_TESTS_CIBLES",
-          "Forge différée ; encyclopédie, Blackout/Earth et V10 non récupérés, contenu Drive inconnu."
+          "Forge différée ; encyclopédie, Blackout/Earth et V10 non récupérés, contenu Drive inconnu. V196–198 : NETWORK_PROXY_BLOCKED ;0binaire ;1905IDs et378recettes déclarés, non vérifiés."
         ]
       ]
     },
@@ -3291,7 +3291,7 @@
       ]
     }
   },
-  "workbookPublicationNoticeV164": "V177 : suivi technique des manquants. V1,200 lignes de catalogue,57 recettes et129 propositions de recherche conservés. Couverture ciblée et preuve native sont distinctes ; aucune nouvelle certification 1:1.",
+  "workbookPublicationNoticeV164": "V177 :200lignes source,57recettes et129recherches conservées. V196–198 :3liens Drive identifiés (03_Correctifs_V177), proxy bloqué avant Google ;0XLSX récupéré ;1905IDs/378recettes restent des déclarations README non validées. Aucun art1:1/humain clos.",
   "indicators": [
     {
       "id": "master",
@@ -3339,5 +3339,108 @@
     "review": null,
     "merge": null
   },
-  "workbookSha256": "12edb0441a48345d24530af7ea416e392b89c05eeb9f464496e3236f2b025b9a"
+  "workbookSha256": "6181234f2bf36a21b3cc45a60b26b4cc2c7d573b90396914329ec7bb611e0cdf",
+  "sourceDiscoveryV177": {
+    "schema": 177,
+    "state": "NETWORK_PROXY_BLOCKED",
+    "sourcePullRequest": 26,
+    "sourceReadme": {
+      "commit": "cf8bfa008e4a57c7a83266db8e00a2d1fc386369",
+      "path": "docs/arsenal/README.md",
+      "sha256": "ed6f5126ea50387d05d5178df1803fb2dabd023ce6e42c853097c528d7c5b67e",
+      "bytes": 40609,
+      "lineRange": [
+        274,
+        372
+      ]
+    },
+    "accessReceipt": {
+      "filename": "ARCHIVES-V196-V198-ACCESS-V177.json",
+      "sha256": "2bdfd4e35b59166d5c535314229c1f8b90db2a537e88fa8d9bc25cc151602667"
+    },
+    "networkObservation": {
+      "classification": "PROXY_CONNECT_DESTINATION_POLICY_DENIAL_NOT_GOOGLE_AUTH",
+      "httpObservationSha256": "29685d38a036185f350f5aef79e59a81af0e50e5f6e9a1c01c22da4650c1678e",
+      "googleResponseObserved": false,
+      "googleAuthenticationStatus": "UNKNOWN_NOT_REACHED",
+      "proxyBypassed": false
+    },
+    "entries": [
+      {
+        "name": "ALIENS_TANTALUS_EXCEL_MANQUANTS_CUMULATIF_V196_20261031.xlsx",
+        "url": "https://docs.google.com/spreadsheets/d/10vecimyx19Lgrs1gWpQbZQpZw1jEA6QG/edit",
+        "sourceTypeClaimed": "non-converted-XLSX-on-Google-Drive",
+        "claimedBytesInReadme": 370286,
+        "claimedSha256InReadme": "6ab69d421d0e03399dc3028f49430a6b2b550797053325cf35e9e2ef49aa213d",
+        "downloadedFileBytes": 0,
+        "downloadedFileSha256": null,
+        "remoteExistence": "UNKNOWN",
+        "remoteContent": "UNKNOWN",
+        "googleAuthenticationStatus": "UNKNOWN_NOT_REACHED",
+        "zipInspectionPerformed": false,
+        "extractionPerformed": false,
+        "blackoutEarthV10Relationship": "UNKNOWN_NO_CONTENT",
+        "httpAttemptedForThisId": true
+      },
+      {
+        "name": "ALIENS_TANTALUS_TOUT_LES_EXCEL_OUVERTS_V197_20261031.xlsx",
+        "url": "https://docs.google.com/spreadsheets/d/1NwfgNhlx6CM1H9jqT_M4FsDTH-J8caYi/edit",
+        "sourceTypeClaimed": "non-converted-XLSX-on-Google-Drive",
+        "claimedBytesInReadme": 830494,
+        "claimedSha256InReadme": "a13884b21107b53a277254564a6f704229d0a1d419934b63713466a141b5dd08",
+        "downloadedFileBytes": 0,
+        "downloadedFileSha256": null,
+        "remoteExistence": "UNKNOWN",
+        "remoteContent": "UNKNOWN",
+        "googleAuthenticationStatus": "UNKNOWN_NOT_REACHED",
+        "zipInspectionPerformed": false,
+        "extractionPerformed": false,
+        "blackoutEarthV10Relationship": "UNKNOWN_NO_CONTENT",
+        "httpAttemptedForThisId": false
+      },
+      {
+        "name": "ALIENS_TANTALUS_EXCEL_OUVERTS_CUMULATIF_V198_20261031.xlsx",
+        "url": "https://docs.google.com/spreadsheets/d/1V5W-97ADGhych-8wYewWWvhUGHqbA3YB/edit",
+        "sourceTypeClaimed": "non-converted-XLSX-on-Google-Drive",
+        "claimedBytesInReadme": 1069182,
+        "claimedSha256InReadme": "be069649d81398b961d546d54c6dcc2d97ccb832d6e5d000ee36a1870d388b94",
+        "downloadedFileBytes": 0,
+        "downloadedFileSha256": null,
+        "remoteExistence": "UNKNOWN",
+        "remoteContent": "UNKNOWN",
+        "googleAuthenticationStatus": "UNKNOWN_NOT_REACHED",
+        "zipInspectionPerformed": false,
+        "extractionPerformed": false,
+        "blackoutEarthV10Relationship": "UNKNOWN_NO_CONTENT",
+        "httpAttemptedForThisId": false
+      }
+    ],
+    "downloadedFileBytes": 0,
+    "recoveredWorkbooks": 0,
+    "recoveredArchives": 0,
+    "rowContentsIndependentlyVerified": false,
+    "tasksCompletedFromTheseReferences": 0,
+    "readmeClaims": {
+      "state": "CLAIMS_NOT_VALIDATED",
+      "values": {
+        "V196TaskLines": 1617,
+        "V197DistinctConsolidatedIds": 1905,
+        "V197PriorityCounts": {
+          "P0": 204,
+          "P1": 953,
+          "P2": 748
+        },
+        "V197DefinedQaRecipesNotExecuted": 378,
+        "V198SheetCount": 44,
+        "binaryIndependentlyVerified": false,
+        "note": "These counts are claims in the retrieved Git README; the absent workbook binaries and row contents have not been validated."
+      }
+    },
+    "blackoutEarthV10Relationship": "UNKNOWN_NO_CONTENT",
+    "limitations": [
+      "The Git README establishes three documentary references and declared hashes; no XLSX bytes were obtained.",
+      "1905 IDs,204P0,953P1,748P2 and378 recipes remain README claims, not independently read workbook rows.",
+      "Proxy CONNECT failed before Google; remote existence, rights and content remain unknown."
+    ]
+  }
 }

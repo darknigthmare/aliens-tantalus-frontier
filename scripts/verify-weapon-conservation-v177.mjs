@@ -192,9 +192,10 @@ test('V177: generic detachable reload cannot admit tank, cell or linked-belt mec
     assert.equal(engine.speedReloadWeaponV168(engine.player),false,kind);
     assert.deepEqual(engine.player,before,kind);
   }
-  const player=actor(make()),coop={...actor(make()),weaponFeedV167:undefined};
+  const equipped=WEAPONS.find(w=>w.id===rifle.id);
+  const player=actor(make({size:equipped.magazine})),coop={...actor(make()),weaponFeedV167:undefined};
   const smartgun={id:'weapon-005-m56-smartgun',name:'M56 Smartgun',family:'smart'};
-  const engine={player,coop,coopEnabled:true,reloadWeaponV77:p=>p===player?rifle:smartgun};
+  const engine={player,coop,coopEnabled:true,reloadWeaponV77:p=>p===player?equipped:smartgun};
   delete player.weaponFeedV167;
   GameEngine.prototype.initializeWeaponFeedsV167.call(engine);
   assert.equal(player.weaponFeedV167?.feed,'box');

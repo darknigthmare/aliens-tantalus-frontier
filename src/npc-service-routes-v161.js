@@ -624,15 +624,28 @@ function withHubNpcAnnexCirculationV161(Base) {
       const peers = [...physicalPeers, ...cohort];
       const local = this.currentAnnexV71?.();
       const player = !this.ventActorV62 && this.player && { ...this.player, roomId: local?.id || (this.state?.deck === DECK ? this.state.roomId : null) };
+      // The refuge visitor must not pin a real source-side player between
+      // its12px personal clearance and the reserved door. Give that supported
+      // player room to leave by walking Asha back toward her existing post.
+      // The native reservation stays authoritative until her body clears it;
+      // a player in the parent/destination chart still blocks the return.
+      const sourceOpening = faces[ANNEX].opening;
+      const sourceExitCourtesy = definition.id === 'asha-refuge' && local?.id === ANNEX
+        && this.state?.deck === DECK && actor.roomId === ANNEX && !crossing(previous) && previous.doorProgress === 0
+        && actor.alive !== false && !actor.downed && resolution && !resolution.alert && !resolution.needsCare && !resolution.missionAssigned
+        && !this.annexTransitionV71 && !this.hubDoorClosingV142 && !this.annexStateReadOnlyV87
+        && player?.alive !== false && !player?.downed && [player?.x, player?.y, player?.w, player?.h, player?.vx].every(finite)
+        && player.y === 532 && player.w === 44 && player.h === 92 && Math.abs(player.vx) < 1
+        && player.x >= sourceOpening.x && player.x + player.w <= sourceOpening.x + sourceOpening.w;
       const passingDuty = this.getNpcServicePassingDutyV165?.(definition.id, actor);
-      const duty = typeof passingDuty === 'boolean' ? passingDuty
+      const duty = sourceExitCourtesy ? true : typeof passingDuty === 'boolean' ? passingDuty
         : annexNpcDutiesV141(this.npcRoutineResolutionsV62, this).some(d => d.crewId === ID && d.roomId === ANNEX);
       const portalBusy = this.annexTransitionV71?.annexId === ANNEX || this.hubDoorClosingV142?.annexId === ANNEX
         || this.hubTrainingV132?.lockedDoorIds?.some(id => [ANNEX, descriptor.connectionId, descriptor.id].includes(id));
       const heldAtPost = previous.stage === 'service' && previous.roomId === ANNEX && previous.doorProgress === 0
         && !resolution?.alert && !resolution?.needsCare && !resolution?.missionAssigned
         && actor.workClock <= 0 && actor.supportClock <= 0
-        && this.shouldHoldNpcServiceOwnerV165?.(definition.id, actor, previous) === true;
+        && (sourceExitCourtesy || this.shouldHoldNpcServiceOwnerV165?.(definition.id, actor, previous) === true);
       const next = heldAtPost ? { ...previous, time: Math.min(1e9, previous.time + dt),
         velocity: 0, actualVelocity: 0, reason: 'occupied' }
         : advanceNpcAnnexCirculationV161(previous, actor, dt, { resolution,

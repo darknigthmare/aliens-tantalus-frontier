@@ -233,6 +233,21 @@ try:
                 if args.stage == 'after':
                     page.wait_for_function("""()=>getComputedStyle(
                       document.querySelector('#hub-dialogue-image')).maskImage!=='none'""")
+                # V168 paints its cropped canvas asynchronously after source load.
+                # Wait for the expected real speaker canvas without changing its crop.
+                if page.locator('canvas[data-dialogue-avatar-v168]').count():
+                    expected_portrait = page.evaluate("""async crew=>{
+                      const {getNpcDialoguePortraitV168}=await import('/src/npc-dialogue-portraits-v168.js');
+                      return getNpcDialoguePortraitV168(crew);
+                    }""", config['crew'])
+                    if expected_portrait:
+                        page.wait_for_function("""crew=>{
+                          const image=document.querySelector('#hub-dialogue-image'),box=image?.parentElement,
+                            canvas=box?.querySelector('canvas[data-dialogue-avatar-v168]');
+                          return box?.dataset.dialoguePortraitCrewV168===crew
+                            &&box.dataset.dialoguePortraitStateV168==='ready'
+                            &&canvas&&!canvas.hidden&&canvas.dataset.portraitSourceRectV168;
+                        }""", arg=config['crew'])
                 portrait = page.locator('#hub-dialogue-image').evaluate("""async(i,crew)=>{
                   const frame=i.parentElement,canvas=frame.querySelector('canvas[data-dialogue-avatar-v168]');
                   const profile=canvas?(await import('/src/npc-dialogue-portraits-v168.js')).getNpcDialoguePortraitV168(crew):null;

@@ -2797,7 +2797,7 @@
     "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
     "src/npc-dialogue-portraits-v168.js": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
     "src/npc-interdeck-passage-v165.js": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f",
-    "src/npc-interdeck-routes-v165.js": "841932e2aefcf45df3166b2581711b4cb5459c36a3c6ab8b58b4d04262e468c7",
+    "src/npc-interdeck-routes-v165.js": "5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a",
     "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0",
     "src/npc-life-v136.js": "ccd320fd541abf156e59cac8e2af45322b908204e5141849252de487102c66d9",
     "src/npc-lift-transit-v165.js": "319a8c471d2e42eca8f6be2d3429418d733bcaf1a0fa8e38d7fc91dd7f387d28",
@@ -2805,7 +2805,7 @@
     "src/npc-matte-apertures-v164.js": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
     "src/npc-medical-route-v162.js": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
     "src/npc-mission-runtime-v55.js": "d1922839a7e23f9912ae2e38d5e2ae442cf6da67718ae0e97d28d5fc4f5b6390",
-    "src/npc-service-routes-v161.js": "d3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750",
+    "src/npc-service-routes-v161.js": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
     "src/npc-service-traffic-v163.js": "aefa829240d02c4c08b7774217bbe2ff41619c6f2b5ccac1fe09537d5a589527",
     "src/npc-station-relays-v166.js": "fd685150758ca56974c77df895f2cdd4181d29205a5fdae7a7d5d165fa0dc34b",
     "src/player-action-rig-v127.js": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
@@ -2833,6 +2833,8 @@
     "src/sprite-animation-runtime.js": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
     "src/weapon-actions-v131.js": "de53ad1d3e00099415407256fdbd7ff69d41b27a86b97b431e8f7d6e30a9d654",
     "src/weapon-effects-runtime-v124.js": "7a47a03249fc2e45390608bf95f8496846da83cca0714d7f4b9b8657b28d1bfb",
+    "src/weapon-feed-admission-v193.js": "66997b6206d9e23fe4252031741e8afea656b9d12c161ee327b30f79d2fe7355",
+    "src/weapon-underbarrel-v174.js": "41c6bce6216e9622f0dc0172b186f5842387fdf77b3ad745b20770819469d8a6",
     "src/xeno-trials-capture-data-v163.js": "f73824fd19bb4b26169583e038b9a272051d25cbdb6556c45f560f968866a285",
     "src/xeno-trials-capture-reception-v158.js": "223b5b41fb00091f78b596866985108e4bced494fa41ad1c81b1054c064fb314",
     "src/xeno-trials-capture-v163.js": "2c7fb5a5111e6d2ddf5b89baa5232dc613767708ed523fc531a2ea72657cf775",
@@ -15738,9 +15740,9 @@
           "C177-ARSENAL",
           "Chargeurs et reprise",
           "Les limites de révision et la reprise pouvaient perdre une cartouche, un chargeur ou le lien à la bonne arme.",
-          "Conservation des cartouches et contenants, refus atomiques et reprise exacte des flux chargés/réserve.",
-          "src/weapon-magazine-inventory-v167.js ; src/weapon-magazine-world-v168.js ; src/weapon-magazine-recovery-runtime-v168.js ; src/game-production-runtime.js",
-          "scripts/verify-weapon-conservation-v177.mjs ; scripts/verify-weapon-arsenal-v167.mjs ; scripts/verify-weapon-magazine-world-v168.mjs",
+          "Conservation des cartouches et contenants, refus atomiques et reprise exacte ; garde d’admission du flux193 et cycle mécanique du sous-canon préservés.",
+          "src/weapon-magazine-inventory-v167.js ; src/weapon-magazine-world-v168.js ; src/weapon-magazine-recovery-runtime-v168.js ; src/game-production-runtime.js ; src/weapon-underbarrel-v174.js ; src/weapon-feed-admission-v193.js",
+          "scripts/verify-weapon-conservation-v177.mjs ; scripts/verify-weapon-arsenal-v167.mjs ; scripts/verify-weapon-magazine-world-v168.mjs ; scripts/verify-weapon-underbarrel-v174.mjs ; scripts/verify-weapon-feed-admission-v193.mjs",
           "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
           "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
           "Couverture ciblée des chargeurs physiques ; les57 recettes et129 propositions ne sont pas toutes closes.",
@@ -15752,9 +15754,9 @@
           "C177-PLAYER",
           "Appuis du joueur et des alliés",
           "Un changement de position sans temps physique pouvait produire une foulée ou un impact visuel incohérent.",
-          "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active.",
-          "src/player-locomotion-rig-v129.js ; src/player-appearance-hub-v126.js ; src/player-weapon-runtime-v125.js ; src/player-transit-rig-v128.js",
-          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-appearance-runtime-v126.mjs ; scripts/verify-player-transit-rig-v128.mjs",
+          "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active ; les pièces importées sont contrôlées avant staging sans nouvelle admission artistique.",
+          "src/player-locomotion-rig-v129.js ; src/player-appearance-hub-v126.js ; src/player-weapon-runtime-v125.js ; src/player-transit-rig-v128.js ; scripts/install-costume-art-v175.mjs (source-only, admission inchangée)",
+          "scripts/verify-player-allies-contacts-v165.mjs ; scripts/verify-player-appearance-runtime-v126.mjs ; scripts/verify-player-transit-rig-v128.mjs ; scripts/verify-costume-art-installer-v175.mjs",
           "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
           "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
           "Aucune nouvelle tenue ou animation canonique ;18 références de costumes et les locomotions complètes restent ouvertes.",
@@ -15768,7 +15770,7 @@
           "Une attente de cabine ou une reprise de trajet pouvait encombrer une porte ou perdre la cohérence du service.",
           "Attentes et passages aux deux extrémités, propriétaires uniques et reprise des services physiques.",
           "src/npc-interdeck-routes-v165.js ; src/npc-lift-transit-v165.js ; src/npc-station-relays-v166.js ; src/npc-service-traffic-v163.js ; src/npc-service-routes-v161.js ; src/hub-lift-transit-v163.js ; src/npc-annex-leases-v163.js",
-          "scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-interdeck-routes-v165.mjs ; scripts/verify-npc-station-relays-v166.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-hub-lift-transit-v163.mjs ; scripts/verify-npc-annex-leases-v163.mjs ; scripts/verify-npc-lift-queue-v177.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs",
           "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
           "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
           "Les parcours complets doivent être observés sur leur candidat ; le code et les snapshots ne valent pas sept voyages humains.",
@@ -15796,7 +15798,7 @@
           "Certains équipements admis étaient masqués par le mur de l’armurerie ; l’enrichissement doit respecter les vrais passages.",
           "Ordre des couches d’armurerie corrigé et lot T177 de100 installations distinctes, adaptées à leurs35 pièces.",
           "src/hub-batch-command-v177.js ; src/hub-batch-habitat-v177.js ; src/hub-batch-industrial-v177.js ; src/hub-batch-engineering-v177.js ; src/hub-room-enrichment-v177.js ; src/hub-room-life-v136.js ; src/hub-armory-scene-v169.js ; src/hub-armory-storefront-v169.js ; docs/forge/xeno-trials/batch100-v177.json sha256:2fc2c3229920b3d425f50313270bc88afe1338213253451f6de544b0d3576d3a",
-          "scripts/verify-tantalus-enrichment-v177.mjs ; scripts/verify-hub-armory-layering-v177.mjs",
+          "scripts/verify-tantalus-enrichment-v177.mjs ; scripts/verify-hub-armory-layering-v177.mjs ; scripts/verify-hub-armory-v169.mjs",
           "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
           "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
           "Les100 élémentsV168 ne sont pas recomptés ; pas de nouvelle collision ni de validation artistique globale.",
@@ -15810,7 +15812,7 @@
           "La garde cumulative ignorait le successeur V176 du vérificateur, bien que sa chaîne soit déjà enregistrée.",
           "Résolution commune des reçus V171 à V177, anciens reçus immuables et suivi séparé des deux domaines de classeurs.",
           "",
-          "scripts/verify-audit-continuation-v163.mjs ; scripts/verify-parallel-completion-v165.mjs ; scripts/verify-capture-observation-v177.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-dialogue-portraits-v168.mjs",
+          "scripts/verify-audit-continuation-v163.mjs ; scripts/verify-parallel-completion-v165.mjs ; scripts/verify-capture-observation-v177.mjs ; scripts/verify-npc-matte-apertures-v164.mjs ; scripts/verify-dialogue-portraits-v168.mjs ; scripts/verify-hub-service-details-v165.mjs ; scripts/verify-npc-service-routes-v161.mjs ; scripts/verify-npc-annex-service-routes-v163.mjs",
           "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
           "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
           "Forge différée ; encyclopédie, Blackout/Earth et V10 non récupérés, contenu Drive inconnu.",
@@ -16079,7 +16081,7 @@
       "expected": 17
     }
   ],
-  "workbookSha256": "1562f6b9e8058425eec9ffc7b525d574ca5c4a0b4ff3f2c64dc5d90b8f476cda",
+  "workbookSha256": "054890b1c951bf24fcf1bcdc98d3f044c71b650a2d133543384433936c67018b",
   "runtimeSuccession": {
     "schema": 1,
     "from": "V162",
@@ -16258,8 +16260,8 @@
       {
         "path": "src/npc-service-routes-v161.js",
         "previousSha256": "3bfd466c91a0861b1f99c806769a69a144942627c25fe2f1d47dcbd40711bf56",
-        "currentSha256": "d3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750",
-        "reason": "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+        "currentSha256": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
+        "reason": "V162 contained only four physically observed annex circuits; native timetable bodies appeared in other annexes without real observed travel. V163 adds five real bounded circuits and resolves actual native watch lane conflicts. A naive virtual createNpcs peer probe re-admitted lifecycle owners; pure RoutineHub sampling and exact actual-owner replacement preserve historical161/162 invariants. Three additional same-deck annex watches are now physical leases of their existing historical owners, avoiding duplicate crew identities and avoiding invented NPC lift/climb travel. The real05h30 exit →09h30 command-screen routine rebuild →restart of the saved hub also requires retaining the ECHO V158 supported source bookmark until its first native-frame lease admission, before any new annex post can replace that origin. The exact d180 Jun native-annex receipt exposed a physical collision-owner omission: generic route tick suppression also hid Jun from Pablo collision peers, allowing their same-floor bodies to overlap. V163 now gives ordinary annex life the unfiltered exact-singleton physical cohort while retaining its existing filtered movement iteration, and skips the ordinary tick for leased owners so only the lease advances occupation. The QA approach respects the real station-priority72px boundary and physical crew spacing, waits for measured native patrol progress when every approach is occupied, and still requires the exact requested speaker. V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Suite V177 : conserver les attentes de cabine et les passages physiques aux deux extrémités des trajets, sans bloquer la porte du joueur ; garder un seul propriétaire, les replis et la reprise sauvegardée des services réels.",
         "verifiers": [
           "scripts/verify-npc-annex-service-routes-v163.mjs",
           "scripts/verify-npc-service-routes-v161.mjs",
@@ -16275,7 +16277,9 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-hub-lift-transit-v163.mjs",
+          "scripts/verify-npc-lift-queue-v177.mjs"
         ]
       },
       {
@@ -16291,7 +16295,8 @@
           "scripts/verify-allied-patrol-phase-v167.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -16335,7 +16340,8 @@
           "scripts/verify-allied-patrol-phase-v167.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -16362,7 +16368,8 @@
           "scripts/verify-player-transit-rig-v128.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-allies-contacts-v165.mjs",
-          "scripts/verify-player-appearance-runtime-v126.mjs"
+          "scripts/verify-player-appearance-runtime-v126.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -16373,7 +16380,8 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -16935,7 +16943,7 @@
       {
         "path": "src/npc-interdeck-routes-v165.js",
         "previousSha256": null,
-        "currentSha256": "841932e2aefcf45df3166b2581711b4cb5459c36a3c6ab8b58b4d04262e468c7",
+        "currentSha256": "5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a",
         "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Suite V177 : conserver les attentes de cabine et les passages physiques aux deux extrémités des trajets, sans bloquer la porte du joueur ; garder un seul propriétaire, les replis et la reprise sauvegardée des services réels.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
@@ -16949,7 +16957,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -16985,7 +16994,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -17064,7 +17074,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -17177,6 +17188,32 @@
           "scripts/verify-player-weapon-rig-v125.mjs",
           "scripts/verify-weapon-runtime-v124.mjs",
           "scripts/verify-weapon-effects-v124.mjs"
+        ]
+      },
+      {
+        "path": "src/weapon-feed-admission-v193.js",
+        "previousSha256": null,
+        "currentSha256": "66997b6206d9e23fe4252031741e8afea656b9d12c161ee327b30f79d2fe7355",
+        "reason": "V165 : poursuivre les systèmes existants du Tantalus avec un contrat et des vérificateurs explicitement liés.  Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
+        "verifiers": [
+          "scripts/verify-weapon-conservation-v177.mjs",
+          "scripts/verify-weapon-arsenal-v167.mjs",
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
+        ]
+      },
+      {
+        "path": "src/weapon-underbarrel-v174.js",
+        "previousSha256": null,
+        "currentSha256": "41c6bce6216e9622f0dc0172b186f5842387fdf77b3ad745b20770819469d8a6",
+        "reason": "V165 : poursuivre les systèmes existants du Tantalus avec un contrat et des vérificateurs explicitement liés.  Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
+        "verifiers": [
+          "scripts/verify-weapon-conservation-v177.mjs",
+          "scripts/verify-weapon-arsenal-v167.mjs",
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ]
       },
       {
@@ -22155,7 +22192,7 @@
       {
         "path": "src/npc-interdeck-routes-v165.js",
         "previousSha256": null,
-        "currentSha256": "841932e2aefcf45df3166b2581711b4cb5459c36a3c6ab8b58b4d04262e468c7",
+        "currentSha256": "5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a",
         "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Suite V177 : conserver les attentes de cabine et les passages physiques aux deux extrémités des trajets, sans bloquer la porte du joueur ; garder un seul propriétaire, les replis et la reprise sauvegardée des services réels.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
@@ -22169,7 +22206,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -22205,7 +22243,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -22227,8 +22266,8 @@
       {
         "path": "src/npc-service-routes-v161.js",
         "previousSha256": "806952ac6deaf7edb659c6f3c46254be7a569ac9a5b225e5b816a6e832a753cb",
-        "currentSha256": "d3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750",
-        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées.",
+        "currentSha256": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
+        "reason": "V165 : étendre les propriétaires PNJ existants avec deux boucles locales, le trajet vertical logistique de Cal et les contrôleurs de service inter-ponts ; conserver corps unique, appuis, réservation des cabines, fermeture des portes, interruptions et reprise durable sans créditer de trajet non observé. Suite V167 : conserver le corps réellement observé pendant un changement stratégique sans temps physique et réhydrater les propriétaires de la sauvegarde avant tout ancien cohort du moteur réutilisé. Suite V166 : relier physiquement les postes capteurs de Rook et briefing de Tamsin à leurs services locaux, partager les cabines, rendre le même corps et son origine après service ; préserver sauvegardes, courtoisies réelles et portes verrouillées occupées. Suite V177 : conserver les attentes de cabine et les passages physiques aux deux extrémités des trajets, sans bloquer la porte du joueur ; garder un seul propriétaire, les replis et la reprise sauvegardée des services réels.",
         "verifiers": [
           "scripts/verify-npc-annex-workpost-routes-v165.mjs",
           "scripts/verify-npc-cal-climb-rig-v165.mjs",
@@ -22237,7 +22276,12 @@
           "scripts/verify-npc-interdeck-passage-v165.mjs",
           "scripts/verify-npc-jun-climb-rig-v165.mjs",
           "scripts/verify-npc-station-relays-v166.mjs",
-          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs"
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs",
+          "scripts/verify-npc-service-routes-v161.mjs",
+          "scripts/verify-hub-lift-transit-v163.mjs",
+          "scripts/verify-npc-annex-leases-v163.mjs",
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -22278,7 +22322,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -22294,7 +22339,8 @@
           "scripts/verify-allied-patrol-phase-v167.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -22397,7 +22443,8 @@
           "scripts/verify-allied-patrol-phase-v167.mjs",
           "scripts/verify-dialogue-portraits-v168.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -22424,7 +22471,8 @@
           "scripts/verify-player-transit-rig-v128.mjs",
           "scripts/verify-player-locomotion-rig-v129.mjs",
           "scripts/verify-player-allies-contacts-v165.mjs",
-          "scripts/verify-player-appearance-runtime-v126.mjs"
+          "scripts/verify-player-appearance-runtime-v126.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -22435,7 +22483,8 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -22484,6 +22533,32 @@
         ]
       },
       {
+        "path": "src/weapon-feed-admission-v193.js",
+        "previousSha256": null,
+        "currentSha256": "66997b6206d9e23fe4252031741e8afea656b9d12c161ee327b30f79d2fe7355",
+        "reason": "V165 : poursuivre les systèmes existants du Tantalus avec un contrat et des vérificateurs explicitement liés.  Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
+        "verifiers": [
+          "scripts/verify-weapon-conservation-v177.mjs",
+          "scripts/verify-weapon-arsenal-v167.mjs",
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
+        ]
+      },
+      {
+        "path": "src/weapon-underbarrel-v174.js",
+        "previousSha256": null,
+        "currentSha256": "41c6bce6216e9622f0dc0172b186f5842387fdf77b3ad745b20770819469d8a6",
+        "reason": "V165 : poursuivre les systèmes existants du Tantalus avec un contrat et des vérificateurs explicitement liés.  Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
+        "verifiers": [
+          "scripts/verify-weapon-conservation-v177.mjs",
+          "scripts/verify-weapon-arsenal-v167.mjs",
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
+        ]
+      },
+      {
         "path": "src/xeno-trials-rig-data-v165.js",
         "previousSha256": null,
         "currentSha256": "396896622c85ff1198c4f61fb0e3a5f5eb131f1d74f315f6cb8aca24d64461d5",
@@ -22515,7 +22590,7 @@
         ]
       }
     ],
-    "runtimeSourceCount": 145,
+    "runtimeSourceCount": 147,
     "forgeState": "DEFERRED_BY_USER",
     "forgePrioritiesDeferred": 2,
     "newArchivesRecovered": 0,
@@ -22601,11 +22676,13 @@
     "scripts/verify-campaign-story-v160.mjs": "a8f09d16a1e137b36b95c1473910d228289c2515b26bd3704584a2f13cfabcf8",
     "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
     "scripts/verify-capture-observation-v177.mjs": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+    "scripts/verify-costume-art-installer-v175.mjs": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6",
     "scripts/verify-costume-atlases-v165.mjs": "9110d44e1c69721d8ba26eb83b61f2bbd6e709d6db11664db167632068ef1dee",
     "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
     "scripts/verify-forge-admission-v141.mjs": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782",
     "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
     "scripts/verify-hub-armory-layering-v177.mjs": "87a89d68ddcce1926440c10f013bfe54ca51ac05c4f4acc56c205e279d3a00e1",
+    "scripts/verify-hub-armory-v169.mjs": "7c5f2bfd49c85a314297855e2cabdf29387d21bb21621d656b06118496fab0a1",
     "scripts/verify-hub-backgrounds-v168.mjs": "20314af3bb3849981646db3a73f65c3cbb22f326385e6c9ea6591e4415801ed3",
     "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
     "scripts/verify-hub-lift-transit-v163.mjs": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
@@ -22618,13 +22695,13 @@
     "scripts/verify-native-rig-weapon-rigidity-v163.mjs": "1983607d4e4c0098febd07d2e721d0921df691b7a112fe16b54e95a38f2b8d0e",
     "scripts/verify-npc-annex-circulation-v159.mjs": "fe2ec8edc0a25708970a76eabcbce140f27c025ebdd5e81752a61ddfc0eaf1c2",
     "scripts/verify-npc-annex-leases-v163.mjs": "a66fd715db0dc3f08aa9614af687fa699136f958b8d38244d7cfb165129723f0",
-    "scripts/verify-npc-annex-service-routes-v163.mjs": "5cd2986a960aa659f321260eec006e64d56e6a9fb7d9ea897ed0508a2f3a00d0",
+    "scripts/verify-npc-annex-service-routes-v163.mjs": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
     "scripts/verify-npc-annex-workpost-routes-v165.mjs": "53e0d41f012ba7c083214a7e53657dc08e85342c9675cc699660c3bcd3ed5a58",
     "scripts/verify-npc-cal-climb-rig-v165.mjs": "63e01b44052a65392901ef54a227be24920621e28079f134e632eb2cd71d5006",
     "scripts/verify-npc-cal-logistics-route-v165.mjs": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
     "scripts/verify-npc-circulation-v158.mjs": "3feb8b1460764784bff3b002e270189032157ccc7e33b7636fa8806b1ef0e24e",
     "scripts/verify-npc-interdeck-passage-v165.mjs": "8a92af78cb7a9ee175eed22c4c65d4779645342adf0152948b842476c50f26ef",
-    "scripts/verify-npc-interdeck-routes-v165.mjs": "1e0a4abba4be1d18d4d9b6023749246179634035542c4f0f7e6e0deec4d24733",
+    "scripts/verify-npc-interdeck-routes-v165.mjs": "c6046941f7d20be320dec7603ee89d0c6b7c80f8149b89a42efd1c3be7a2e64b",
     "scripts/verify-npc-jun-climb-rig-v165.mjs": "a2094edcddea1f9e3b3d4333390b793d9661ec760e49151a81008a9ac954e88a",
     "scripts/verify-npc-life-v136.mjs": "7984aa4dd6e544dcf31bf5a2f32173786c9155e0d359d928e9c80c94f544cac0",
     "scripts/verify-npc-lift-queue-v177.mjs": "a2d1d73a79492dd97df785b828cb283f77f4b22f06670fb96359562c9ea51c88",
@@ -22650,10 +22727,12 @@
     "scripts/verify-tantalus-enrichment-v177.mjs": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c",
     "scripts/verify-trials-navigation-v163.mjs": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
     "scripts/verify-weapon-arsenal-v167.mjs": "00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509",
-    "scripts/verify-weapon-conservation-v177.mjs": "aec9a705edb7083ce58769ad0693279302e5027713bd01af76b2388875e846af",
+    "scripts/verify-weapon-conservation-v177.mjs": "b60809c41615a1de71ef0cb57c74725747a36cb722e48e0c196afe72680804b2",
     "scripts/verify-weapon-effects-v124.mjs": "26cea89893acbea90aa853f80c5795ef08152fe03f7e8d384c51459b3418b220",
+    "scripts/verify-weapon-feed-admission-v193.mjs": "141aabd5d03fa261ab83b6614633032f5ad053dc8ecc6f3a5cf856487a8d015f",
     "scripts/verify-weapon-magazine-world-v168.mjs": "3000f9087c459358c2ad59714283075e722c21ab88110c254434830652612a64",
     "scripts/verify-weapon-runtime-v124.mjs": "ff0e57aa0346b960ae87e20eed56af324ffd2ffac6c0e47818eb22b3b5d8a572",
+    "scripts/verify-weapon-underbarrel-v174.mjs": "0319f8e68397e39a74a3a44d7df7a06b184a0c2f948bba1fd1c6dc6ce12fd2d3",
     "scripts/verify-xeno-trials-capture-reception-v158.mjs": "9b848dfb8dd3c7945a62f7e16bdd91c480d4b33a3355f85088ca63bab5ff1fe6",
     "scripts/verify-xeno-trials-capture-v163.mjs": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
     "scripts/verify-xeno-trials-controls-v150.mjs": "532e144f7a337b1ee8b8e9bd420bd23fe2f103970072891a30adf190c153fe76",
@@ -24818,17 +24897,21 @@
         "id": "C177-ARSENAL",
         "label": "Chargeurs et reprise",
         "problem": "Les limites de révision et la reprise pouvaient perdre une cartouche, un chargeur ou le lien à la bonne arme.",
-        "implementedScope": "Conservation des cartouches et contenants, refus atomiques et reprise exacte des flux chargés/réserve.",
+        "implementedScope": "Conservation des cartouches et contenants, refus atomiques et reprise exacte ; garde d’admission du flux193 et cycle mécanique du sous-canon préservés.",
         "modules": [
           "src/weapon-magazine-inventory-v167.js",
           "src/weapon-magazine-world-v168.js",
           "src/weapon-magazine-recovery-runtime-v168.js",
-          "src/game-production-runtime.js"
+          "src/game-production-runtime.js",
+          "src/weapon-underbarrel-v174.js",
+          "src/weapon-feed-admission-v193.js"
         ],
         "verifiers": [
           "scripts/verify-weapon-conservation-v177.mjs",
           "scripts/verify-weapon-arsenal-v167.mjs",
-          "scripts/verify-weapon-magazine-world-v168.mjs"
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ],
         "codeState": "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
         "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
@@ -24841,7 +24924,7 @@
         "id": "C177-PLAYER",
         "label": "Appuis du joueur et des alliés",
         "problem": "Un changement de position sans temps physique pouvait produire une foulée ou un impact visuel incohérent.",
-        "implementedScope": "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active.",
+        "implementedScope": "Appuis, thorax et corps tombé suivent leurs vrais propriétaires et leur horloge active ; les pièces importées sont contrôlées avant staging sans nouvelle admission artistique.",
         "modules": [
           "src/player-locomotion-rig-v129.js",
           "src/player-appearance-hub-v126.js",
@@ -24851,7 +24934,8 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ],
         "codeState": "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
         "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
@@ -24880,7 +24964,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ],
         "codeState": "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
         "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
@@ -24927,7 +25012,8 @@
         ],
         "verifiers": [
           "scripts/verify-tantalus-enrichment-v177.mjs",
-          "scripts/verify-hub-armory-layering-v177.mjs"
+          "scripts/verify-hub-armory-layering-v177.mjs",
+          "scripts/verify-hub-armory-v169.mjs"
         ],
         "codeState": "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
         "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
@@ -24947,7 +25033,10 @@
           "scripts/verify-parallel-completion-v165.mjs",
           "scripts/verify-capture-observation-v177.mjs",
           "scripts/verify-npc-matte-apertures-v164.mjs",
-          "scripts/verify-dialogue-portraits-v168.mjs"
+          "scripts/verify-dialogue-portraits-v168.mjs",
+          "scripts/verify-hub-service-details-v165.mjs",
+          "scripts/verify-npc-service-routes-v161.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ],
         "codeState": "IMPLEMENTATION_AND_TARGETED_TESTS_REPORTED",
         "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
@@ -24984,12 +25073,14 @@
       {
         "path": "src/game-production-runtime.js",
         "previousSha256": "8e31b01c84ef7af0b810d3aa4d22afc429153f362627b9f31d0b7b6c75ad60fb",
-        "currentSha256": "fa3ab990bd5137920a4f804f4e2a001526e19a34e0dfb701a2b510bef92a8a26",
+        "currentSha256": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
         "reason": "Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
         "verifiers": [
           "scripts/verify-weapon-conservation-v177.mjs",
           "scripts/verify-weapon-arsenal-v167.mjs",
-          "scripts/verify-weapon-magazine-world-v168.mjs"
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ]
       },
       {
@@ -24998,16 +25089,18 @@
         "currentSha256": "4d65ab9fb59eb0ad924c3efe21f133ac9e52a0cf77b2410e4251b5d6fca378fc",
         "reason": "Suite V177 : dessiner le mur d’armurerie avant les équipements de vie du Tantalus, puis ses façades et accessoires, pour rendre les plaques et le matériel déjà admis visibles sans changer leurs crops, placements ou interactions.",
         "verifiers": [
-          "scripts/verify-hub-armory-layering-v177.mjs"
+          "scripts/verify-hub-armory-layering-v177.mjs",
+          "scripts/verify-hub-armory-v169.mjs"
         ]
       },
       {
         "path": "src/hub-armory-storefront-v169.js",
         "previousSha256": "6130f994f84099de1bedc9f071e2b4d57f014dded55f9a8a508b7347d08b8476",
-        "currentSha256": "1a106644c0d409f9d5c13921ced4112c1577d6897d9afe4c30530c23c64df290",
+        "currentSha256": "8ef018c182f28e97fceda6aadd688d3678f5addd5eb5ed19129495a9207e01d7",
         "reason": "Suite V177 : dessiner le mur d’armurerie avant les équipements de vie du Tantalus, puis ses façades et accessoires, pour rendre les plaques et le matériel déjà admis visibles sans changer leurs crops, placements ou interactions.",
         "verifiers": [
-          "scripts/verify-hub-armory-layering-v177.mjs"
+          "scripts/verify-hub-armory-layering-v177.mjs",
+          "scripts/verify-hub-armory-v169.mjs"
         ]
       },
       {
@@ -25067,7 +25160,7 @@
       {
         "path": "src/npc-interdeck-routes-v165.js",
         "previousSha256": "85a4805f83ddaee04d830a80ca070d3903d7f5933720f859ffd5f7ca489f77c1",
-        "currentSha256": "841932e2aefcf45df3166b2581711b4cb5459c36a3c6ab8b58b4d04262e468c7",
+        "currentSha256": "5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a",
         "reason": "Suite V177 : conserver les attentes de cabine et les passages physiques aux deux extrémités des trajets, sans bloquer la porte du joueur ; garder un seul propriétaire, les replis et la reprise sauvegardée des services réels.",
         "verifiers": [
           "scripts/verify-npc-interdeck-routes-v165.mjs",
@@ -25075,7 +25168,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -25089,7 +25183,23 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
+        ]
+      },
+      {
+        "path": "src/npc-service-routes-v161.js",
+        "previousSha256": "d3a3c9e274dbf5a92d930c39583bb2a056ead0c1c5d0f9162ee6e632ccf70750",
+        "currentSha256": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
+        "reason": "Suite V177 : conserver les attentes de cabine et les passages physiques aux deux extrémités des trajets, sans bloquer la porte du joueur ; garder un seul propriétaire, les replis et la reprise sauvegardée des services réels.",
+        "verifiers": [
+          "scripts/verify-npc-interdeck-routes-v165.mjs",
+          "scripts/verify-npc-station-relays-v166.mjs",
+          "scripts/verify-npc-service-routes-v161.mjs",
+          "scripts/verify-hub-lift-transit-v163.mjs",
+          "scripts/verify-npc-annex-leases-v163.mjs",
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -25103,7 +25213,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -25117,7 +25228,8 @@
           "scripts/verify-npc-service-routes-v161.mjs",
           "scripts/verify-hub-lift-transit-v163.mjs",
           "scripts/verify-npc-annex-leases-v163.mjs",
-          "scripts/verify-npc-lift-queue-v177.mjs"
+          "scripts/verify-npc-lift-queue-v177.mjs",
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
         ]
       },
       {
@@ -25128,7 +25240,8 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -25139,7 +25252,8 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -25150,7 +25264,8 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
         ]
       },
       {
@@ -25161,18 +25276,34 @@
         "verifiers": [
           "scripts/verify-player-allies-contacts-v165.mjs",
           "scripts/verify-player-appearance-runtime-v126.mjs",
-          "scripts/verify-player-transit-rig-v128.mjs"
+          "scripts/verify-player-transit-rig-v128.mjs",
+          "scripts/verify-costume-art-installer-v175.mjs"
+        ]
+      },
+      {
+        "path": "src/weapon-feed-admission-v193.js",
+        "previousSha256": null,
+        "currentSha256": "66997b6206d9e23fe4252031741e8afea656b9d12c161ee327b30f79d2fe7355",
+        "reason": "Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
+        "verifiers": [
+          "scripts/verify-weapon-conservation-v177.mjs",
+          "scripts/verify-weapon-arsenal-v167.mjs",
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ]
       },
       {
         "path": "src/weapon-magazine-inventory-v167.js",
         "previousSha256": "2f9c281f886c93c7640d10a85f1550a1320bdedbd6f63ba57185739acc856928",
-        "currentSha256": "ad0c2597214ed41b7c91852e7e2cb62c855a2eb366ed79808c042f8300850fbb",
+        "currentSha256": "4943b8ba1c16b4b1430e0383220f44a284ed893963281f51a6279eb04c689014",
         "reason": "Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
         "verifiers": [
           "scripts/verify-weapon-conservation-v177.mjs",
           "scripts/verify-weapon-arsenal-v167.mjs",
-          "scripts/verify-weapon-magazine-world-v168.mjs"
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ]
       },
       {
@@ -25183,7 +25314,9 @@
         "verifiers": [
           "scripts/verify-weapon-conservation-v177.mjs",
           "scripts/verify-weapon-arsenal-v167.mjs",
-          "scripts/verify-weapon-magazine-world-v168.mjs"
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ]
       },
       {
@@ -25194,13 +25327,28 @@
         "verifiers": [
           "scripts/verify-weapon-conservation-v177.mjs",
           "scripts/verify-weapon-arsenal-v167.mjs",
-          "scripts/verify-weapon-magazine-world-v168.mjs"
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
+        ]
+      },
+      {
+        "path": "src/weapon-underbarrel-v174.js",
+        "previousSha256": "eec7229224c2445bca73b7586ca41ac4f4af8b1f19e98881d5161ebed04e81d1",
+        "currentSha256": "41c6bce6216e9622f0dc0172b186f5842387fdf77b3ad745b20770819469d8a6",
+        "reason": "Suite V177 : conserver les cartouches et les contenants réels aux limites de révision, après interruption et reprise ; lier le chargeur au bon propriétaire et à son arme, refuser une restitution incompatible et garder les munitions migrées utilisables.",
+        "verifiers": [
+          "scripts/verify-weapon-conservation-v177.mjs",
+          "scripts/verify-weapon-arsenal-v167.mjs",
+          "scripts/verify-weapon-magazine-world-v168.mjs",
+          "scripts/verify-weapon-underbarrel-v174.mjs",
+          "scripts/verify-weapon-feed-admission-v193.mjs"
         ]
       },
       {
         "path": "sw.js",
         "previousSha256": "88ba286c6e78add4c054175da085cf56ad93d982749c09ed237e18605ed901f0",
-        "currentSha256": "e8bd0617c3a1e25d3b7d01d2ac595cb3eaef241be5c156f0c294b4e0d2769ce5",
+        "currentSha256": "282448609033fdb663983352987cee04c545e4fd4c66d67a227a83df6ec90675",
         "reason": "V165 : intégrer les modules V177 réellement raccordés au moteur et renouveler le cache de production ; admettre précisément les documents de suivi et garder tous les classeurs et pilotes de développement hors de la distribution.",
         "verifiers": [
           "scripts/verify-public-release-v86.mjs",
@@ -25208,11 +25356,31 @@
         ]
       }
     ],
+    "developmentToolChanges": [
+      {
+        "path": "scripts/install-costume-art-v175.mjs",
+        "previousSha256": "9b6ef01e417485277aa83a6db17a37bb9a34609c1a97c27aa38d0338aaac4705",
+        "currentSha256": "0ffa2b6ed0e651263a2ac9e79f71dc18b16e6849027034705bd04de93605cb71",
+        "reason": "Suite V177 : rejeter les composants détachés portant une matte transparente trop large ou une forme incohérente avant le staging ; conserver les reçus V175/V176, le contrôle pixel et la non-admission en jeu.",
+        "verifiers": [
+          "scripts/verify-costume-art-installer-v175.mjs"
+        ]
+      },
+      {
+        "path": "scripts/verify-costume-art-installer-v175.mjs",
+        "previousSha256": "3dd3614861943c8cc02b5fcd7e39afe6b5bfe80caae5376964bf6706f5cb0435",
+        "currentSha256": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6",
+        "reason": "Suite V177 : démontrer le rejet avant staging des formes et alphas détachés mal cadrés, sans transformer le contrôle source en certification de costumes jouables.",
+        "verifiers": [
+          "scripts/verify-costume-art-installer-v175.mjs"
+        ]
+      }
+    ],
     "qaDriverChanges": [
       {
         "path": "scripts/qa-npc-matte-apertures-v164.py",
         "previousSha256": "ad16416f864867a27bb189fe6d5f6fda9d456cecb64050c3072831266058d57a",
-        "currentSha256": "8b422ce25a7842fdab0b6fd828e82241f04a8f38d1cdf0e0bd142520e225e219",
+        "currentSha256": "628c438ad682ec5ee1c1576943e9bc68a8b8d5ff1b279b67718b04a3c333bfd9",
         "reason": "Le contrat natif V168 est un avatar de tête et épaules propre au locuteur ; vérifier identité, source, crop, dimensions et masquage de la planche au lieu de réclamer son ancien sprite entier.",
         "verifiers": [
           "scripts/verify-npc-matte-apertures-v164.mjs",
@@ -25233,25 +25401,59 @@
       {
         "path": "scripts/qa-tantalus-enrichment-v177.py",
         "previousSha256": null,
-        "currentSha256": "893c772ecf4e5ebf730efcf3d91faf7273cf29e91b7eca8dc1586fc7cddec7d2",
+        "currentSha256": "2775d2027c9277e3df39aa38871276dc3ca9b0764d90f1488caca11b942df04a",
         "reason": "Observer séparément les cent installations V168 et les cent installations V177 avec leurs vrais rendus et réservations ; ne pas transformer un inventaire ou une fixture en parcours humain.",
         "verifiers": [
           "scripts/verify-tantalus-enrichment-v177.mjs"
         ],
         "state": "PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED"
+      },
+      {
+        "path": "scripts/qa-hub-service-details-v165.py",
+        "previousSha256": "e461ba03888a7da7c0f6204cc67f4bfd91f00a83f451cc00b6ea7fabea6c3dd6",
+        "currentSha256": "75c5e0f4483fd62c9729441311aa1da3887f51194ebafe3298415d184b82f1a5",
+        "reason": "Garder des sondes RGBA et diagnostics sûrs sur les scènes de services réellement observées ; conserver les contrôles natifs, leurs budgets et les captures, sans ajouter de succès par simple diagnostic.",
+        "verifiers": [
+          "scripts/verify-hub-service-details-v165.mjs"
+        ],
+        "state": "PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED"
+      },
+      {
+        "path": "scripts/qa-npc-service-routes-v161.py",
+        "previousSha256": "15d51ddde8d37a18e3c4f529401220e03229bdb8fadeac93b4c0c982fe9cb73d",
+        "currentSha256": "5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06",
+        "reason": "Observer le trajet physique actuel et ses attentes réelles sans conserver une attente obsolète de dialogue ou déduire une distance de déplacement à partir du seul passage du temps stratégique.",
+        "verifiers": [
+          "scripts/verify-npc-service-routes-v161.mjs"
+        ],
+        "state": "PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED"
+      },
+      {
+        "path": "scripts/qa-npc-annex-service-routes-v163.py",
+        "previousSha256": "bebefcd0e80cc81229ba0008bef8945b653e85fa414343412ba2127594fa8fdc",
+        "currentSha256": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+        "reason": "Conserver les observations du propriétaire et du corps réels pendant la traversée de l’annexe ; identifier les attentes et le retour sans confondre un double Node avec un voyage Chromium.",
+        "verifiers": [
+          "scripts/verify-npc-annex-service-routes-v163.mjs"
+        ],
+        "state": "PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED"
       }
     ],
     "verifierHashes": {
-      "scripts/verify-audit-continuation-v163.mjs": "6e0e4445a5dbe721e7305cbc9b2ed8125b8c4beeecddcd2fc25258f895855a60",
+      "scripts/verify-audit-continuation-v163.mjs": "8e64247b3186d36a62352245ea6aadb6c2f6c7d117a8ffc13d4962990ba08dfd",
       "scripts/verify-campaign-convoy-history-v162.mjs": "b76fc39826c91b02a9bd4edc03010aea7235b09707248d5a0667eb86dc19ca30",
       "scripts/verify-campaign-lethe-v163.mjs": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
       "scripts/verify-campaign-story-v160.mjs": "a8f09d16a1e137b36b95c1473910d228289c2515b26bd3704584a2f13cfabcf8",
       "scripts/verify-capture-observation-v177.mjs": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+      "scripts/verify-costume-art-installer-v175.mjs": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6",
       "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
       "scripts/verify-hub-armory-layering-v177.mjs": "87a89d68ddcce1926440c10f013bfe54ca51ac05c4f4acc56c205e279d3a00e1",
+      "scripts/verify-hub-armory-v169.mjs": "7c5f2bfd49c85a314297855e2cabdf29387d21bb21621d656b06118496fab0a1",
       "scripts/verify-hub-lift-transit-v163.mjs": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
+      "scripts/verify-hub-service-details-v165.mjs": "b1e7733d23718fee9ce67c45d2f37f24c06c529a6060d6144b4b33ed38ef9b54",
       "scripts/verify-npc-annex-leases-v163.mjs": "a66fd715db0dc3f08aa9614af687fa699136f958b8d38244d7cfb165129723f0",
-      "scripts/verify-npc-interdeck-routes-v165.mjs": "1e0a4abba4be1d18d4d9b6023749246179634035542c4f0f7e6e0deec4d24733",
+      "scripts/verify-npc-annex-service-routes-v163.mjs": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+      "scripts/verify-npc-interdeck-routes-v165.mjs": "c6046941f7d20be320dec7603ee89d0c6b7c80f8149b89a42efd1c3be7a2e64b",
       "scripts/verify-npc-lift-queue-v177.mjs": "a2d1d73a79492dd97df785b828cb283f77f4b22f06670fb96359562c9ea51c88",
       "scripts/verify-npc-matte-apertures-v164.mjs": "f9e20a36782bd44d0efac0bbb20b4bcb9ca27a3e539460c272b6f70aed053a50",
       "scripts/verify-npc-service-routes-v161.mjs": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
@@ -25262,14 +25464,16 @@
       "scripts/verify-player-transit-rig-v128.mjs": "d56bc8303b7c699875da37c68a3ce0738587e01d88ae8c3fca89329d70b79bde",
       "scripts/verify-tantalus-enrichment-v177.mjs": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c",
       "scripts/verify-weapon-arsenal-v167.mjs": "00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509",
-      "scripts/verify-weapon-conservation-v177.mjs": "aec9a705edb7083ce58769ad0693279302e5027713bd01af76b2388875e846af",
-      "scripts/verify-weapon-magazine-world-v168.mjs": "3000f9087c459358c2ad59714283075e722c21ab88110c254434830652612a64"
+      "scripts/verify-weapon-conservation-v177.mjs": "b60809c41615a1de71ef0cb57c74725747a36cb722e48e0c196afe72680804b2",
+      "scripts/verify-weapon-feed-admission-v193.mjs": "141aabd5d03fa261ab83b6614633032f5ad053dc8ecc6f3a5cf856487a8d015f",
+      "scripts/verify-weapon-magazine-world-v168.mjs": "3000f9087c459358c2ad59714283075e722c21ab88110c254434830652612a64",
+      "scripts/verify-weapon-underbarrel-v174.mjs": "0319f8e68397e39a74a3a44d7df7a06b184a0c2f948bba1fd1c6dc6ce12fd2d3"
     },
     "arsenalTracking": {
       "jsonPath": "docs/arsenal/progress-v177.json",
-      "jsonSha256": "7b2a7b734219dee868fc78ed53c7d4d75717a27ae0165c68c8cd190aa0de1783",
+      "jsonSha256": "5512101613ec4954ee57ce58ec1f028ce05668e7efc85d1801a5db2e60de1b33",
       "workbookPath": "docs/arsenal/ARSENAL_SUIVI_V177.xlsx",
-      "workbookSha256": "12edb0441a48345d24530af7ea416e392b89c05eeb9f464496e3236f2b025b9a",
+      "workbookSha256": "6181234f2bf36a21b3cc45a60b26b4cc2c7d573b90396914329ec7bb611e0cdf",
       "sourceInputs": {
         "docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx": "3f9b5d0bee8bafd95819e7860d1a09a1357fb2bcd92facbe8ed0cc80fb6c4cbb",
         "docs/arsenal/data/tantalus_arsenal_master_v1.csv": "8f33064087e6025a450876db2068af285bd5251b180a4d8243fd5770aaeaa05a",

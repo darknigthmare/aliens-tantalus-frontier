@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
  COSTUME_V175_REVIEW_RECEIPT,auditCostumeReviewPackV175,
- auditV175PixelRoundtrip,stageCostumeReviewPackV175
+ auditV175PixelRoundtrip,stageCostumeReviewPackV175,auditDetachedShapeV177
 } from './install-costume-art-v175.mjs';
 const sha=buf=>createHash('sha256').update(buf).digest('hex');
 test('V175 receipt has only four independent outfits and no game approval',()=>{
@@ -56,15 +56,63 @@ test('V176 native source round-trip is mandatory before staging or admission',()
  assert.match(code,/const review=auditCostumeReviewPackV175\(root\)/);
  assert.match(code,/sourceOpaque>0/);
  assert.match(code,/overlaps:0,uncovered:0,incorrect:0,extra:0/);
+ assert.match(code,/auditDetachedShapeV177\(piece/);
+ assert.match(code,/transparentSockets:48/);
  assert.match(code,/nativeRigApproved:false,filmOneToOneApproved:false/);
  assert.doesNotMatch(code,/nativeRigApproved:true|filmOneToOneApproved:true/);
 });
 test('V176 optional physical V175 fixture has exact opaque reconstruction',
  {skip:!process.env.TANTALUS_V175_ART_ROOT},()=>{
  const result=auditV175PixelRoundtrip(process.env.TANTALUS_V175_ART_ROOT);
- assert.equal(result.status,'OPAQUE_PIXEL_ROUNDTRIP_PASSED');
+ assert.equal(result.status,'OPAQUE_PIXEL_AND_TORSO_APERTURES_PASSED');
  assert.equal(result.sourceAtlases,8);
  assert.equal(result.records.length,8);
+ assert.deepEqual(result.topology,{detachedParts:112,verifiedTorsos:24,
+   transparentSockets:48,opaqueBorderPixels:0});
  assert.ok(result.records.every(x=>x.opaqueCoveragePercent===100
    &&x.overlaps===0&&x.uncovered===0&&x.incorrect===0&&x.extra===0));
+});
+
+// Synthetic RGBA buffers below are topology fixtures, never replacement art.
+function topologyFixtureV177({width=64,height=40,rectangles=[],holes=[]}={}){
+ const rgba=Buffer.alloc(width*height*4);
+ const fill=(box,alpha)=>{for(let y=box.y;y<box.y+box.h;y++)for(let x=box.x;x<box.x+box.w;x++)
+   rgba[(y*width+x)*4+3]=alpha;};
+ for(const box of rectangles)fill(box,box.alpha??255);
+ for(const box of holes)fill(box,0);
+ return{width,height,rgba};
+}
+const outerTorsoV177={x:4,y:4,w:56,h:32};
+const socketsV177=[{x:12,y:12,w:6,h:5},{x:40,y:12,w:6,h:5}];
+test('V177 topology counts a connected synthetic torso with exactly two enclosed transparent regions',()=>{
+ const image=topologyFixtureV177({rectangles:[outerTorsoV177],holes:socketsV177});
+ const original=Buffer.from(image.rgba);
+ assert.deepEqual(auditDetachedShapeV177(image,{torso:true}),{majorParts:1,openSockets:2,borderOpaque:0});
+ assert.deepEqual(image.rgba,original,'Auditing cannot alter source pixels');
+});
+test('V177 topology rejects an opaque crop border and a second substantial detached component',()=>{
+ const edge=topologyFixtureV177({rectangles:[{x:0,y:4,w:12,h:12}]});
+ assert.throws(()=>auditDetachedShapeV177(edge),/Sprite touches crop border/);
+ const detached=topologyFixtureV177({rectangles:[{x:4,y:4,w:10,h:10},{x:35,y:4,w:10,h:10}]});
+ assert.throws(()=>auditDetachedShapeV177(detached),/multiple visible bodies/);
+});
+test('V177 torso topology rejects painted dark marks, missing or excess enclosed regions and open channels',()=>{
+ for(const holes of [[],socketsV177.slice(0,1),[...socketsV177,{x:26,y:23,w:6,h:5}],
+   [...socketsV177,{x:14,y:4,w:2,h:9}]]){
+  const image=topologyFixtureV177({rectangles:[outerTorsoV177],holes});
+  assert.throws(()=>auditDetachedShapeV177(image,{torso:true}),/two real transparent/);
+ }
+ // All RGB bytes are already black: a dark painted patch remains opaque.
+ const painted=topologyFixtureV177({rectangles:[outerTorsoV177]});
+ assert.throws(()=>auditDetachedShapeV177(painted,{torso:true}),/two real transparent/);
+});
+test('V177 topology reports its exact alpha, substantial-region and aperture-area thresholds',()=>{
+ const minor=topologyFixtureV177({rectangles:[{x:4,y:4,w:10,h:10},{x:35,y:4,w:9,h:11}]});
+ assert.equal(auditDetachedShapeV177(minor).majorParts,1,'A99px detached fleck is below the declared100px threshold');
+ const transparentBorder=topologyFixtureV177({rectangles:[{x:0,y:4,w:2,h:2,alpha:40},{x:4,y:4,w:10,h:10}]});
+ assert.equal(auditDetachedShapeV177(transparentBorder).borderOpaque,0,'Alpha40 is excluded');
+ transparentBorder.rgba[(4*transparentBorder.width)*4+3]=41;
+ assert.throws(()=>auditDetachedShapeV177(transparentBorder),/Sprite touches crop border/);
+ const smallHole=topologyFixtureV177({rectangles:[outerTorsoV177],holes:[...socketsV177,{x:26,y:23,w:5,h:5}]});
+ assert.equal(auditDetachedShapeV177(smallHole,{torso:true}).openSockets,2,'A25px inner opening is below the declared30px threshold');
 });

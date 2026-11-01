@@ -29,6 +29,7 @@ const SCRIPT_FILES = new Set([
   'verify-hub-armory-layering-v177.mjs',
   'verify-tantalus-enrichment-v177.mjs',
   'verify-weapon-conservation-v177.mjs',
+  'verify-weapon-feed-admission-v193.mjs',
   'verify-npc-lift-queue-v177.mjs',
   'qa-tantalus-enrichment-v177.py',
   'verify-tantalus-batch100-v168.mjs',

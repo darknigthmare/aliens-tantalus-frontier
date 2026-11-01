@@ -148,3 +148,60 @@ test('V174 legitimate partial launcher reload still restores and completes exact
  assert.equal(validateUnderbarrelV174(restored),true);
  assert.equal(advanceM41AUnderbarrelReloadV174(restored,'tx',1),false);
 });
+
+test('V177 a loaded tube can be manually chambered before the first shot and after real reload',()=>{
+ for(const fromReload of [false,true]){
+  const s=fromReload?create(0,0,3):create(3,0,0);
+  assert.equal(setM41AModeV174(s,'launcher','enter'),true);
+  if(fromReload){
+   assert.equal(beginM41AUnderbarrelReloadV174(s,'load'),true);
+   assert.equal(advanceM41AUnderbarrelReloadV174(s,'load',1),true);
+  }
+  const before=captureM41AUnderbarrelV174(s);
+  assert.equal(before.needsPump,false);
+  assert.equal(before.spent,0);
+  assert.equal(fireM41AUnderbarrelV174(s,'premature'),null);
+  assert.deepEqual(s,before,'a real pump is required before any projectile');
+  const cycle=pumpM41AUnderbarrelV174(s,'cold');
+  assert.ok(cycle,'the first cycle can transfer an existing tube round');
+  assert.equal(cycle.spentCleared,false);
+  assert.equal(cycle.roundChambered,1);
+  assert.equal(cycle.chamber,1);
+  assert.equal(cycle.tube,2);
+  assert.equal(s.tube+s.chamber+s.reserve,3);
+  assert.equal(s.events.some(e=>e.type==='casing-ejected'),false);
+  const restored=restoreM41AUnderbarrelV174(captureM41AUnderbarrelV174(s),
+   {ownerId:'player',instanceId:'player:m41a',expectedTotal:3});
+  assert.deepEqual(restored,s);
+  const ready=structuredClone(restored);
+  assert.equal(pumpM41AUnderbarrelV174(restored,'cold'),null);
+  assert.equal(pumpM41AUnderbarrelV174(restored,'double'),null);
+  assert.deepEqual(restored,ready,'neither a replay nor a second fresh receipt double chambers');
+  assert.ok(fireM41AUnderbarrelV174(restored,'shot'));
+  const afterShot=pumpM41AUnderbarrelV174(restored,'after-shot');
+  assert.equal(afterShot.spentCleared,true);
+  assert.equal(afterShot.roundChambered,1);
+  assert.equal(restored.tube+restored.chamber+restored.reserve,2);
+  assert.equal(validateUnderbarrelV174(restored),true);
+ }
+});
+
+test('V177 cold pumping cannot bypass a pending reload or create rounds in an empty clean launcher',()=>{
+ const empty=create(0,0,0);
+ assert.equal(setM41AModeV174(empty,'launcher','enter'),true);
+ const emptyBefore=structuredClone(empty);
+ assert.equal(pumpM41AUnderbarrelV174(empty,'fake'),null);
+ assert.deepEqual(empty,emptyBefore);
+ const waiting=create(2,0,4);
+ assert.equal(setM41AModeV174(waiting,'launcher','enter'),true);
+ assert.equal(beginM41AUnderbarrelReloadV174(waiting,'reload'),true);
+ const snapshot=structuredClone(waiting);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'interrupt-bypass'),null);
+ assert.deepEqual(waiting,snapshot);
+ assert.equal(cancelM41AUnderbarrelReloadV174(waiting,'reload'),true);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'cold')?.chamber,1);
+ assert.equal(waiting.tube+waiting.chamber+waiting.reserve,6);
+ const ready=structuredClone(waiting);
+ assert.equal(pumpM41AUnderbarrelV174(waiting,'x'.repeat(90)),null);
+ assert.deepEqual(waiting,ready);
+});

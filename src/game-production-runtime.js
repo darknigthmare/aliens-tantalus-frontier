@@ -11,10 +11,9 @@ import { withAlienSurvivalRuntimeV70 } from './alien-survival-runtime-v70.js';
 import { captureGameplaySupportV72, restoreGameplaySupportV72 } from './gameplay-support-v72.js';
 import { captureTacticalReloadV77, restoreTacticalReloadV77, cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
-import { getWeaponPresentationProfileV124 } from './weapon-presentation-profiles-v124.js';
+import { canInitializeDetachableFeedV193 } from './weapon-feed-admission-v193.js';
 import { createLegacyWeaponFeedV167, captureWeaponFeedV167, restoreWeaponFeedV167,
-  spendAcceptedRoundV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167,
-  isDetachableMagazineFeedV177 } from './weapon-magazine-inventory-v167.js';
+  spendAcceptedRoundV167, weaponFeedLoadedRoundsV167, weaponFeedReserveRoundsV167 } from './weapon-magazine-inventory-v167.js';
 import { createWeaponMasteryV167, awardAcceptedWeaponDamageV167,
   captureWeaponMasteryV167, restoreWeaponMasteryV167 } from './weapon-mastery-v167.js';
 import { withPlaceablesRuntimeV86 } from './placeables-runtime-v86.js';
@@ -103,14 +102,11 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
       const actor = this[role];
       if (!actor || role === 'coop' && !this.coopEnabled || actor.weaponFeedV167) continue;
       const descriptor = this.reloadWeaponV77?.(actor);
-      const weaponId = descriptor && typeof descriptor === 'object' ? descriptor.id : null;
-      const presentation = getWeaponPresentationProfileV124(descriptor);
-      const feed = presentation?.reload?.feed;
-      if (!/^weapon-\d{3}-[a-z0-9-]+$/.test(weaponId || '')
-        || !isDetachableMagazineFeedV177(feed, weaponId)) continue;
-      actor.weaponFeedV167 = createLegacyWeaponFeedV167({ weaponId,
-        ownerId: role, ammoTypeId: presentation.ammunition || 'unspecified',
-        magazineSize: actor.magazineSize, ammo: actor.ammo, reserve: actor.ammoReserve, feed });
+      const policy = canInitializeDetachableFeedV193(descriptor, actor);
+      if (!policy.detachable) continue;
+      actor.weaponFeedV167 = createLegacyWeaponFeedV167({ weaponId: policy.weaponId,
+        ownerId: role, ammoTypeId: policy.ammoType, magazineSize: actor.magazineSize,
+        ammo: actor.ammo, reserve: actor.ammoReserve, feed: policy.feed });
     }
   }
 
@@ -149,7 +145,8 @@ export class GameEngine extends withMagazineRecoveryWorldV168(withMotionTrackerV
       actor.weaponFeedV167 = restoreEquippedMagazineFeedV177(rawState?.[role]?.weaponFeedV167, {
         ownerId: role, weaponId, magazineSize: actor.magazineSize,
         loaded: actor.ammo, reserve: actor.ammoReserve,
-        enabled: this.experimentalPhysicalMagazinesV167 });
+        enabled: this.experimentalPhysicalMagazinesV167
+          && canInitializeDetachableFeedV193(descriptor, actor).detachable });
       weaponFeedRestoredV167[role] = Boolean(actor.weaponFeedV167);
       tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(actor, rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(actor));
       if (this[role]?.reloading) this[role].actionClock = this[role].reloadClock;

@@ -1,4 +1,4 @@
-import { getSpecialFeedProfileV171 } from './weapon-special-feeds-v171.js';
+import { getWeaponFeedMechanismV193 } from './weapon-feed-admission-v193.js';
 
 /** Physical detachable feed model: opt-in bridge for the V77 legacy ammo contract.
  * Pure state transitions. No VFX or weapons are produced by this module.
@@ -19,7 +19,7 @@ const MAX_SERIAL = 10000000;
 // Linked belts, fuel tanks and energy cells retain their specialist admission.
 export const isDetachableMagazineFeedV177 = (value, weaponDefinitionId = value?.weaponDefinitionId) =>
   ['box', 'drum'].includes(typeof value === 'string' ? value : value?.feed)
-  && !getSpecialFeedProfileV171(weaponDefinitionId);
+  && getWeaponFeedMechanismV193(weaponDefinitionId)?.detachable !== false;
 export const canAdvanceMagazineRevisionV177 = (magazine, amount = 1) =>
   int(amount) && int(magazine?.revision) && magazine.revision <= MAX_SERIAL - amount;
 
