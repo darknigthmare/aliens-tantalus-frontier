@@ -229,6 +229,8 @@ SCRIPT_FILES.add('verify-costume-art-installer-v175.mjs');
 SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
 // Source-tree verifier for the three V169 armory storefront variants; exact path only.
 SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
+// Explicitly approved local-only Alien_base metadata tooling. Never allow arbitrary scripts.
+for (const path of ['sync-alien-base-v1.mjs', 'export-alien-base-tantalus-v1.mjs', 'verify-alien-base-bridge-v1.mjs']) SCRIPT_FILES.add(path);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -255,6 +257,9 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  // Reviewed metadata-sync documentation and CI: source only, never bundled.
+  'docs/development/ALIEN_BASE_SYNC.md',
+  '.github/workflows/alien-base-bridge.yml',
   // Project gamedev guidance is source-only, never public distribution content.
   'AGENTS.md',
   'docs/development',
