@@ -19,6 +19,7 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
+import { resolveAlienBaseDossierV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 
 const importWalkV107 = id => {
@@ -849,6 +850,8 @@ export class CatalogWorkbenchV62 {
     }
     if (record.catalog === 'weapons') this.renderWeaponReferenceV120(record);
     if (record.catalog === 'vehicles') this.renderVehicleReferenceV122(record);
+    // Shared archive facts are supplementary; they never replace game balance or source QA.
+    this.renderAlienBaseReferenceV1(record);
     if (record.catalog === 'enemies' && !record.documentaryReferenceV105 && this.getDiscoveryV88) {
       const discovery = this.getDiscoveryV88(record.id), section = this.renderSection('DÉCOUVERTE EN CAMPAGNE', 'discovery');
       section.dataset.discoveryStatus = discovery.status;
@@ -908,6 +911,42 @@ export class CatalogWorkbenchV62 {
 
     const actions = normalizeCatalogActionsV62(record.documentaryReferenceV105 ? [] : this.getActions(record));
     if (actions.length) this.detail.append(this.renderActions(record, actions, 'catalog-v62__detail-actions'));
+  }
+
+  renderAlienBaseReferenceV1(record) {
+    if (!record || typeof record.id !== 'string') return;
+    const dossier = resolveAlienBaseDossierV1(record.id);
+    const weapon = record.catalog === 'weapons' ? resolveAlienBaseWeaponReferenceV1(record.id) : null;
+    if (!dossier && !weapon) return;
+    const section = this.renderSection('ARCHIVES COMMUNES — ALIEN_BASE', 'shared-alien-base-v1');
+    section.dataset.sharedIdentity = dossier?.id || weapon?.id || '';
+    section.append(createElement(this.document,'p','catalog-v62__fact-note',
+      dossier?.sourceWork ? 'Œuvre de référence : ' + dossier.sourceWork
+        : weapon?.work ? 'Œuvre de référence : ' + weapon.work : 'Source à documenter'));
+    if (dossier?.traits?.length) {
+      section.append(createElement(this.document,'p','catalog-v62__fact-note',
+        'Traits documentaires : ' + dossier.traits.join(' · ')));
+    }
+    if (weapon?.admission === 'research-only') {
+      section.append(createElement(this.document,'p','catalog-v62__fact-note',
+        'Recherche uniquement : modèle non admis dans les armes jouables.'));
+    }
+    section.append(createElement(this.document,'p','catalog-v62__fact-note',
+      'Fiche commune de référence ; l’animation, la silhouette 1:1 et les valeurs de combat ne sont pas certifiées par cette fiche.'));
+    const sources = [
+      ...(dossier?.sourceLinks || []).map(x => x.url),
+      ...(weapon?.sourceUrl ? [weapon.sourceUrl] : [])
+    ];
+    for (const raw of [...new Set(sources)].slice(0,3)) {
+      let url;
+      try { url = new URL(raw); } catch { continue; }
+      if (url.protocol !== 'https:' || url.username || url.password) continue;
+      const link = createElement(this.document, 'a', 'catalog-v62__reference-link', 'Consulter la référence — ' + url.hostname);
+      link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.referrerPolicy = 'no-referrer';
+      section.append(link);
+    }
+    this.detail.append(section);
   }
 
   renderWeaponReferenceV120(record) {
