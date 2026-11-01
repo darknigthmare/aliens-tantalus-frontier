@@ -1,0 +1,22 @@
+name: Alien_base identity contract
+on:
+  pull_request:
+    paths:
+      - 'src/alien-base-bridge-v1.js'
+      - '.github/alien-base-contract.mjs'
+      - '.github/workflows/alien-base-contract.yml'
+  push:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test .github/alien-base-contract.mjs
