@@ -81,9 +81,9 @@ def png(name, raw, observation=None):
 
 
 CONFIG_SCRIPT = r'''import {NPC_INTERDECK_DEFINITIONS_V165 as defs,getNpcInterdeckGeometryV165} from './src/npc-interdeck-routes-v165.js';
-import {HUB_DECKS} from './src/hub-game.js';import {npcLiftSocketV165} from './src/npc-lift-transit-v165.js';
+import {HUB_DECKS,HUB_WORLD} from './src/hub-game.js';import {npcLiftSocketV165} from './src/npc-lift-transit-v165.js';
 console.log(JSON.stringify(defs.map(d=>{const g=getNpcInterdeckGeometryV165(d.id),origin=d.origins[0],room=HUB_DECKS[d.nativeDeck].rooms.find(r=>r.id===origin),lift=npcLiftSocketV165(d.nativeDeck,d.shaftId);
-return{...d,origin,player:['jun-sanitary','inez-civil'].includes(d.id)?room.xEnd-140:room.xStart+96,cabinX:lift.x-22,sourceLiftRoom:lift.roomId,
+return{...d,origin,worldWidth:HUB_WORLD.width,floorY:HUB_WORLD.floorY,player:['jun-sanitary','inez-civil'].includes(d.id)?room.xEnd-140:room.xStart+96,cabinX:lift.x-22,sourceLiftRoom:lift.roomId,
 parentX:g.faces.parent.opening.x+(g.faces.parent.opening.w-44)/2,annexX:g.faces.local.opening.x+(g.faces.local.opening.w-44)/2,
 post:g.post.x,ladders:g.ladders,watchHour:d.id==='david-durandal'?11:d.id==='inez-civil'?20:d.id==='jun-sanitary'?17:8,
 returnHour:d.id==='david-durandal'?14:d.id==='inez-civil'?23:d.id==='jun-sanitary'?20:11};})));'''
@@ -150,6 +150,61 @@ def walk_to(page, c, x, timeout=120):
         page.keyboard.press(key, delay=max(16, min(160, abs(distance) * 3)))
         page.wait_for_timeout(60)
     raise AssertionError('Native walking did not reach ' + str(x))
+
+
+NATIVE_LIFT_CLEARANCE_V165 = r'''function planOccupiedLiftClearanceV165(c,p,t){
+ const fail=reason=>({ok:false,reason}),finite=Number.isFinite;
+ if(!c||!p||!t||![c.worldWidth,c.floorY,c.cabinX,p.w,p.h,p.y,t.cabinX,t.exitX].every(finite)
+   ||p.w!==44||p.h!==92||p.y+p.h!==c.floorY||t.schema!==165||t.phase!=='travel'
+   ||t.cabinX!==c.cabinX||t.fromDeck!==c.nativeDeck||t.toDeck!==c.deck
+   ||Math.abs(t.exitX-t.cabinX)!==96)return fail('invalid-native-lift-geometry');
+ const bounds={min:24,max:c.worldWidth-p.w-24},tolerance=7,margin=12;
+ if(bounds.max<bounds.min||t.cabinX<bounds.min||t.cabinX>bounds.max
+   ||t.exitX<bounds.min||t.exitX>bounds.max)return fail('invalid-native-lift-geometry');
+ const lane={left:Math.min(t.cabinX,t.exitX),right:Math.max(t.cabinX,t.exitX)+44};
+ const nominalX=c.cabinX+160;
+ const choices=[Math.min(bounds.max,nominalX),Math.max(bounds.min,c.cabinX-160)];
+ const targetX=choices.find(x=>x>=bounds.min&&x<=bounds.max
+   &&(x-tolerance>=lane.right+margin||x+tolerance+p.w<=lane.left-margin));
+ return finite(targetX)?{ok:true,targetX,nominalX,bounds,lane,tolerance,margin}
+   :fail('no-supported-clearance-outside-arrival-lane');
+}'''
+
+
+NATIVE_RETURN_RECEIPT_V165 = r'''function validateNativeReturnReceiptV165(c,origin,done){
+ const fail=reason=>({ok:false,reason}),finite=Number.isFinite;
+ if(!c||!['david-durandal','inez-civil','maksim-cockpit','jun-sanitary'].includes(c.id)
+   ||!Number.isInteger(c.nativeDeck)||c.nativeDeck<0||c.nativeDeck>3
+   ||![c.worldWidth,c.floorY].every(finite))return fail('invalid-route-definition');
+ if(!origin||origin.crewId!==c.crewId||origin.deck!==c.nativeDeck||origin.roomId!==c.origin
+   ||!['native-observed-body','legacy-physical-owner'].includes(origin.source)
+   ||![origin.x,origin.y].every(finite)||origin.x<24||origin.x>c.worldWidth-68
+   ||origin.y!==c.floorY-92)return fail('invalid-observed-origin');
+ if(!done||done.observedTravel!==true||done.crewId!==c.crewId
+   ||done.deck!==origin.deck||done.roomId!==origin.roomId
+   ||done.x!==origin.x||done.y!==origin.y)return fail('physical-bookmark-mismatch');
+ if(done.liftJourneys!==2||done.crossings!==2)return fail('incomplete-roundtrip');
+ if(![done.distance,done.verticalDistance].every(finite)||done.distance<=0||done.distance>1e9
+   ||done.verticalDistance<0||done.verticalDistance>1e9)return fail('invalid-measured-distance');
+ const expectedVertical=c.id==='jun-sanitary'?496:0;
+ if(Math.abs(done.verticalDistance-expectedVertical)>.001)return fail('incorrect-vertical-roundtrip');
+ return{ok:true,bookmark:{crewId:done.crewId,deck:done.deck,roomId:done.roomId,x:done.x,y:done.y},
+   liftJourneys:done.liftJourneys,crossings:done.crossings,verticalDistance:done.verticalDistance};
+}'''
+
+
+def clear_occupied_lift_arrival(page, c, held):
+    plan = page.evaluate('o=>(' + NATIVE_LIFT_CLEARANCE_V165 + ')(o.config,o.player,o.trip)',
+                         {'config': c, 'player': held['player'], 'trip': held['route']['actor']['lift']})
+    check(c['id'] + ': clearance target fits the native world and the whole arrival lane', plan['ok'])
+    walk_to(page, c, plan['targetX'])
+    after = observed(page, c)
+    p, lane = after['player'], plan['lane']
+    check(c['id'] + ': real keyboard clearance leaves the whole destination lane free',
+          abs(p['x'] - plan['targetX']) <= plan['tolerance'] and abs(p['vx']) < 1
+          and p['y'] + p['h'] == c['floorY'] and not after['annex'] and after['deck'] == c['deck']
+          and (p['x'] >= lane['right'] + plan['margin'] or p['x'] + p['w'] <= lane['left'] - plan['margin']))
+    report.setdefault('occupiedLiftClearance', {})[c['id']] = {'plan': plan, 'before': held, 'after': after}
 
 
 NATIVE_SERVICE_SPEAKER_V165 = r'''c=>{const h=__ATF_HUB__,p=h.player,
@@ -423,8 +478,17 @@ with sync_playwright() as pw:
             if args.occupied_lift_arrival:
                 held_lift = observed(page, c)
                 check(c['id'] + ': actual destination player holds the source-chart closed cabin', held_lift['route']['actor']['lift']['phase'] == 'travel' and held_lift['route']['actor']['deck'] == c['nativeDeck'] and held_lift['deck'] == c['deck'])
+                page.wait_for_timeout(180)
+                still_held = observed(page, c)
+                before_actor, after_actor = held_lift['route']['actor'], still_held['route']['actor']
+                check(c['id'] + ': destination occupation holds the unchanged closed trip while simulation advances',
+                      after_actor['reason'] == 'occupied' and after_actor['lift'] == before_actor['lift']
+                      and after_actor['deck'] == c['nativeDeck'] and after_actor['time'] > before_actor['time']
+                      and after_actor['distance'] == before_actor['distance']
+                      and still_held['player']['x'] == held_lift['player']['x'])
+                report.setdefault('occupiedLiftHolds', {})[c['id']] = {'before': held_lift, 'after': still_held}
                 png(c['id'] + '-occupied-lift-arrival.png', page.locator('#hub-canvas').screenshot(), held_lift)
-                walk_to(page, c, c['cabinX'] + 160)
+                clear_occupied_lift_arrival(page, c, still_held)
             else:
                 player_lift_to(page, c, c['deck'])
             if c['id'] == 'jun-sanitary':
@@ -467,7 +531,10 @@ with sync_playwright() as pw:
                 returned = follow_floor_actor(page, c, observe_return)
             collect_observer(page, c, 'return', frames)
             done = returned['route']['returned']
-            check(c['id'] + ': full native roundtrip reaches the exact physical bookmark', done['observedTravel'] is True and done['roomId'] == start['route']['origin']['roomId'] and done['x'] == start['route']['origin']['x'] and done['liftJourneys'] == 2 and done['crossings'] == 2)
+            validation = page.evaluate('o=>(' + NATIVE_RETURN_RECEIPT_V165 + ')(o.config,o.origin,o.returned)',
+                                       {'config': c, 'origin': start['route']['origin'], 'returned': done})
+            artifact(c['id'] + '-return-validation.json', validation)
+            check(c['id'] + ': full native roundtrip reaches the exact physical bookmark', validation['ok'])
             trace = {'schema': 165, 'routeId': c['id'], 'build': report['identityBefore'], 'frames': frames}
             artifact(c['id'] + '-native-trace.json', trace)
             artifact(c['id'] + '-native-return.json', returned)

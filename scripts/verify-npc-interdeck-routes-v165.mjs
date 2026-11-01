@@ -768,7 +768,7 @@ async function nativeQaDriverV165(root) {
   const { getNpcInterdeckGeometryV165 } = await import(new URL('src/npc-interdeck-routes-v165.js', root));
   const { ShipCompanionControllerV87 } = await import(new URL('src/ship-companion-controller-v87.js', root));
   const { createInterface } = await import('node:readline');
-  const options = JSON.parse(process.argv[2]), docking = options.kind === 'dock', host = hostV136();
+  const options = JSON.parse(process.argv[2]), docking = options.kind === 'dock', clearance = options.kind === 'lift-clearance', host = hostV136();
   class NodeDouble extends EventTarget {
     constructor() { super(); this.dataset = {}; this.children = []; this.style = {}; this.open = false; }
     setAttribute() {} append(...nodes) { this.children.push(...nodes); }
@@ -779,8 +779,9 @@ async function nativeQaDriverV165(root) {
   document.createElement = () => new NodeDouble(); document.body = new NodeDouble();
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.clock.hour = 5;
   if (save.onboardingV84) save.onboardingV84.phase = 'complete';
-  Object.assign(save.hub, { deck: docking ? 3 : 1, roomId: docking ? 'dropship-hangar' : 'mess',
-    positionX: docking ? 24 : 2350, positionY: 532 });
+  Object.assign(save.hub, { deck: clearance ? 2 : docking ? 3 : 1,
+    roomId: clearance ? 'vehicle-bay' : docking ? 'dropship-hangar' : 'mess',
+    positionX: clearance ? 4914 : docking ? 24 : 2350, positionY: 532 });
   Object.assign(save.hub.systems, { hull: 100, power: 100, oxygen: 100, quarantine: 100 });
   let controller;
   const hub = new HubGame(host.canvas, { audio: { ui() {}, unlock() {} }, onPersist() {}, onStatus() {},
@@ -791,6 +792,7 @@ async function nativeQaDriverV165(root) {
     this.data = { ...this.data, ...structuredClone(patch) };
   } };
   if (docking) controller = new ShipCompanionControllerV87({ hub, saveSystem: system, isActive: () => true, toast() {} });
+  else if (options.blocked && clearance) hub.v51Walls.push({ x: 4975, y: 532, w: 30, h: 92 });
   else if (options.blocked && options.kind !== 'jun-clearance') hub.v51Ladders = hub.v51Ladders.filter(ladder => ladder.id !== 'quarters-floor');
   globalThis.__ATF_HUB__ = hub; globalThis.__ATF_V51__ = { saveSystem: system };
   const rate = options.rate || 60, releases = [], crouchReleases = [];
@@ -904,7 +906,10 @@ for case in spec['cases']:
         namespace['walk_to'] = lambda page, c, x: walk_to(page, c, x) if x == 18 else None
     error, waiting_at = None, None
     try:
-        if case['kind'] == 'jun-clearance':
+        if case['kind'] == 'lift-clearance':
+            waiting_at = page.state['elapsed']
+            namespace['walk_to'](page, page.state['config'], case['target'])
+        elif case['kind'] == 'jun-clearance':
             namespace['climb_parent'](page, page.state['config'])
             if case.get('blocked'): page.call(type='clearance-wall')
             waiting_at = page.state['elapsed']
@@ -929,6 +934,59 @@ Path(spec['output']).write_text(json.dumps(results))
     return JSON.parse(readFileSync(output, 'utf8'));
   } finally { rmSync(directory, { recursive: true, force: true }); }
 }
+
+function nativeQaValidatorV165(name) {
+  const python="import ast,json,sys\nfrom pathlib import Path\nt=ast.parse(Path(sys.argv[1]).read_text())\nprint(json.dumps(next(ast.literal_eval(n.value) for n in t.body if isinstance(n,ast.Assign) and any(isinstance(x,ast.Name) and x.id==sys.argv[2] for x in n.targets))))";
+  const source=JSON.parse(execFileSync('python3',['-B','-c',python,
+    new URL('qa-npc-interdeck-native-v165.py',import.meta.url).pathname,name],{encoding:'utf8'}));
+  return new Function('return ('+source+')')();
+}
+
+test('occupied lift QA uses an attainable native world clearance and still refuses a real wall within120s',()=>{
+  const plan=nativeQaValidatorV165('NATIVE_LIFT_CLEARANCE_V165');
+  const c={cabinX:4914,worldWidth:HUB_WORLD.width,floorY:HUB_WORLD.floorY,nativeDeck:0,deck:2};
+  const p={w:44,h:92,y:532},trip={schema:165,phase:'travel',cabinX:4914,exitX:4818,fromDeck:0,toDeck:2};
+  const goal=plan(c,p,trip);assert.equal(goal.ok,true);assert.equal(goal.nominalX,5074);assert.equal(goal.targetX,5052);
+  assert.ok(goal.targetX-goal.tolerance>=goal.lane.right+goal.margin);
+  const [original,fixed,blocked]=runNativeQaV165([
+    {kind:'lift-clearance',target:5074},{kind:'lift-clearance',target:goal.targetX},
+    {kind:'lift-clearance',target:goal.targetX,blocked:true}
+  ]);
+  assert.match(original.error,/Native walking did not reach 5074/);
+  assert.equal(original.player.x,5052);assert.ok(original.elapsed-original.waitingAt>=120);
+  assert.equal(fixed.error,null);assert.ok(Math.abs(fixed.player.x-goal.targetX)<=7);
+  assert.equal(fixed.player.y+fixed.player.h,624);assert.ok(fixed.player.x<=5052);
+  assert.match(blocked.error,/Native walking did not reach/);assert.ok(blocked.elapsed-blocked.waitingAt>=120);
+  assert.ok(blocked.player.x+blocked.player.w<=4975+.001,'native wall remains authoritative');
+  assert.equal(plan(c,{...p,w:0},trip).ok,false);
+  assert.equal(plan(c,p,{...trip,cabinX:4900}).ok,false);
+  assert.equal(plan(c,p,{...trip,phase:'opening'}).ok,false);
+  assert.equal(plan({...c,worldWidth:100},p,trip).ok,false);
+  const fallback=plan(c,p,{...trip,exitX:5010});
+  assert.equal(fallback.ok,true);assert.equal(fallback.targetX,4754);
+  assert.ok(fallback.targetX+fallback.tolerance+p.w<=fallback.lane.left-fallback.margin);
+});
+
+test('final native return QA validates the measured760 Jun bookmark including deck height and496vertical pixels',()=>{
+  const validate=nativeQaValidatorV165('NATIVE_RETURN_RECEIPT_V165');
+  // Actual Jun760 return receipt, sha25616fc81d49c4cc661dfd9c08fe0390e64946a787b578cca771e341c4af02cfaec.
+  // Replaying this bounded validator is not a new browser journey.
+  const c={id:'jun-sanitary',crewId:'crew-11-jun-park',nativeDeck:3,origin:'life-support',worldWidth:5120,floorY:624};
+  const origin={crewId:c.crewId,deck:3,roomId:'life-support',x:3158,y:532,facing:1,source:'legacy-physical-owner'};
+  const returned={crewId:c.crewId,deck:3,roomId:'life-support',x:3158,y:532,distance:9179.999999999238,
+    verticalDistance:496,liftJourneys:2,crossings:2,observedTravel:true};
+  assert.equal(validate(c,origin,returned).ok,true);
+  for(const [name,patch] of [
+    ['wrong crew',{crewId:'crew-10-david-8r'}],['wrong deck',{deck:2}],['wrong room',{roomId:'reactor'}],
+    ['wrong x',{x:3158.01}],['wrong height',{y:531}],['missing height',{y:undefined}],
+    ['nonfinite height',{y:NaN}],['missing return',{observedTravel:false}],['one lift',{liftJourneys:1}],
+    ['one crossing',{crossings:1}],['unmeasured distance',{distance:0}],['infinite distance',{distance:Infinity}],
+    ['unbounded distance',{distance:1e9+1}],['half vertical loop',{verticalDistance:248}],
+    ['missing vertical distance',{verticalDistance:undefined}],['invented vertical pixels',{verticalDistance:497}]
+  ])assert.equal(validate(c,origin,{...returned,...patch}).ok,false,name);
+  for(const patch of [{source:'timetable-sample'},{deck:2},{x:NaN},{y:NaN}])
+    assert.equal(validate(c,{...origin,...patch},returned).ok,false);
+});
 
 test('native interdeck QA finishes both real ladder landings and still refuses a missing ladder', () => {
   const [arrived, blocked] = runNativeQaV165([{ kind: 'climb' }, { kind: 'climb', blocked: true }]);
