@@ -105,6 +105,23 @@ const runtime = (hour=7,save={},options={}) => {const h=new TestHub();h.start(sa
   h.npcJunClimbArtReadyV165=()=>options.artUnavailable!==true;return h;};
 const context = (h,hour,extra={})=>h.setNpcRoutineContextV62({clock:{day:1,hour},...extra},{persist:false,rebuild:true});
 const tick = (h,seconds,rate=60)=>{for(let i=0;i<seconds*rate;i++)h.update(1/rate);};
+test('Idris keeps its actual parent owner and scheduled watch after elapsed hours while passengers are remote',()=>{
+  const h=runtime(5,{deck:3,roomId:'reactor'}),id='idris-engine';
+  const actor=h.getNpcServiceActorV161(id);
+  assert.ok(actor);assert.equal(actor.roomId,'reactor');
+  const before=h.getNpcServicePhysicalStateV165(id);
+  context(h,9);
+  assert.ok(h.npcInterdeckPassingRequestV165(id),'native remote passenger dependency is active');
+  assert.equal(h.npcInterdeckSharedServiceDoorV185(id),false,'no actual passenger occupies the reactor');
+  assert.equal(h.getNpcServiceActorV161(id),actor,'hour advance cannot replace the supported parent body');
+  const actual=h.getNpcServicePhysicalStateV165(id);
+  assert.equal(actual.admittedRoomId,'reactor');assert.equal(actual.roomId,'reactor');
+  assert.equal(actual.crossings,0);assert.equal(actual.x,before.x);
+  tick(h,1);
+  assert.equal(h.getNpcServiceActorV161(id),actor);
+  assert.equal(h.getNpcServicePhysicalStateV165(id).targetRoomId,'engine-room','real watch remains due');
+  assert.ok(actor.x<before.x,'native outbound spends floor distance toward its own door');
+});
 test('V185 engine service door uses actual shared reactor occupancy without changing historical passenger dependencies',()=>{
   const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;
   const inez={deck:2,roomId:'quarantine',stage:'walking-lift'};
@@ -120,7 +137,7 @@ test('V185 engine service door uses actual shared reactor occupancy without chan
     npcInterdeckSharedServiceDoorV185:()=>door()},'idris-engine',null,null);
   assert.equal(linked(),true,'historical dependency remains declared for QA/leases');
   assert.equal(door(),false,'other-deck journey has no right to hold the reactor door');
-  assert.equal(duty(),false);
+  assert.equal(duty(),undefined,'no courtesy override: the authentic watch still decides duty');
   assert.equal(hold(),false);
   inez.deck=3;inez.roomId='dropship-hangar';
   assert.equal(door(),false,'a passenger on the shared deck but in another room cannot freeze Idris');
@@ -134,6 +151,16 @@ test('V185 engine service door uses actual shared reactor occupancy without chan
   assert.equal(linked(),false);
   assert.equal(door(),false);
   assert.equal(controller.npcInterdeckPassingRequestV165.call(host,'unknown-route'),false);
+});
+test('an unoccupied Idris door preserves the inherited duty decision rather than forcing the watch off',()=>{
+  const seen=[];
+  const controller=withHubNpcInterdeckRoutesV165(class {
+    getNpcServicePassingDutyV165(routeId,actor) {seen.push({routeId,actor});return true;}
+  }).prototype;
+  const actor={crewId:'crew-03-idris-kwan'};
+  const host={npcInterdeckSharedServiceDoorV185:()=>false};
+  assert.equal(controller.getNpcServicePassingDutyV165.call(host,'idris-engine',actor),true);
+  assert.deepEqual(seen,[{routeId:'idris-engine',actor}]);
 });
 test('V198 remote Jun cannot indefinitely retain Leila/Asha service doors; real same-level local passage still wins',()=>{
   const controller=withHubNpcInterdeckRoutesV165(class{}).prototype;

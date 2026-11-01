@@ -177,7 +177,7 @@ def walk_to(page, config, x, precise=False):
 NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started) {
   const dependencyId='jun-sanitary',crewId='crew-11-jun-park';
   const wallBudgetMs=900000,simBudgetSeconds=360,stallBudgetMs=45000;
-  let first=null,lastPose=null,lastProgressAt=started,simSeconds=0,seen=false;
+  let first=null,lastPose=null,lastOwner=null,lastProgressAt=started,simSeconds=0,seen=false;
   const originMatches=o=>o&&o.crewId===crewId&&o.deck===3&&o.roomId==='life-support'
     &&Math.abs(o.x-3158)<.25&&o.y===532&&o.source==='legacy-physical-owner';
   const check=now=>now-started>=wallBudgetMs?'jun-wall-budget-exhausted'
@@ -198,6 +198,20 @@ NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started)
       return failed('player-left-native-refuge-threshold');
     if(!o||o.crewId!==opts.crew||o.roomId!==opts.annex||o.crossings!==1||s.ownerHandoff)
       return failed('asha-owner-changed-during-jun-return');
+    // V198/V201 reserve Jun's actual shared floor, not every distant route.
+    // Asha may therefore approach the player inside the refuge threshold.
+    // Observe that real walk without admitting a chart change, overlap,
+    // unsupported pose, invented distance or faster-than-native movement.
+    if(o.deck!==opts.deck||o.y!==532||o.arrivals!==1
+      ||![o.x,o.time,o.distance,o.dutyX,o.doorProgress,p.w,p.h].every(Number.isFinite)
+      ||p.w!==44||p.h!==92||!['service','walking','opening'].includes(o.stage)
+      ||o.doorProgress<0||o.doorProgress>1||o.x<opts.annexDoor-.25||o.x>o.dutyX+.25
+      ||o.x<p.x+p.w+12-.26)
+      return failed('asha-invalid-supported-threshold-approach');
+    if(lastOwner){const dt=o.time-lastOwner.time,dx=Math.abs(o.x-lastOwner.x),distance=o.distance-lastOwner.distance;
+      if(dt<0||distance<0||dx>27*dt+.03||distance>27*dt+.03||distance+.03<dx)
+        return failed('asha-nonphysical-threshold-approach');}
+    lastOwner={x:o.x,time:o.time,distance:o.distance};
     if(!originMatches(e.origin)||!originMatches(first.dependency?.origin))return failed('jun-origin-mismatch');
     if(e.nativeHandoff||s.routine?.missionAssigned||s.routine?.needsCare||s.routine?.alert
       ||['medical-recovery','mission-assignment','unavailable','active-crisis','infestation','annex-assignment'].includes(a?.reason))
@@ -206,8 +220,6 @@ NATIVE_ASHA_DEPENDENCY_V163 = '''function createAshaDependencyV163(opts,started)
     if(a){
       if(a.crewId!==crewId)return failed('foreign-jun-physical-owner');
       if(s.passageRequested!==true)return failed('jun-passing-request-not-active');
-      if(o.stage!=='service'||o.reason!=='occupied'||o.doorProgress!==0)
-        return failed('asha-is-not-held-for-jun');
       seen=true;
       const pose={x:a.x,y:a.y,deck:a.deck,roomId:a.roomId,stage:a.stage,doorProgress:a.doorProgress,
         crossings:a.crossings,liftJourneys:a.liftJourneys,liftPhase:a.lift?.phase||null};
@@ -274,7 +286,7 @@ def arm_asha_return_dependency(page, config):
         function frame(){if(done)return;frames++;const now=performance.now(),snap=h.getSnapshot(),
           route=snap.npcAnnexRoutesV163.routes[opts.id],p=h.player,r=h.npcRoutineResolutionsV62?.get('crew-11-jun-park');
           latest={nativeTime:h.animationTime,running:h.running,deck:h.state.deck,annex:h.currentAnnexV71?.()?.id||null,
-            exitAnnex:h.nearestAnnexExitV71?.()?.annexId||null,player:{x:p.x,y:p.y,vx:p.vx,alive:p.alive},
+            exitAnnex:h.nearestAnnexExitV71?.()?.annexId||null,player:{x:p.x,y:p.y,w:p.w,h:p.h,vx:p.vx,alive:p.alive},
             owner:structuredClone(route.actor),ownerHandoff:structuredClone(route.nativeHandoff),
             dependencyId:progress.dependencyId,dependency:structuredClone(h.npcInterdeckStateV165?.routes[progress.dependencyId]||null),
             passageRequested:h.npcInterdeckPassingRequestV165?.(opts.id)===true,

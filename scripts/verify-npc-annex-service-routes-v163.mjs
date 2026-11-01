@@ -522,6 +522,7 @@ const ashaQaConfigV163 = { id: 'asha-refuge', crew: 'crew-12-asha-mbaye', deck: 
   parent: 'crew-quarters', annex: 'personal-refuge', annexDoor: 122 };
 const ashaBlockedServiceV163 = () => ({ actor: { crewId: 'crew-12-asha-mbaye', deck: 1,
   roomId: 'personal-refuge', x: 908.4330357142857, y: 532, stage: 'service', reason: 'occupied',
+  dutyX: 908.4330357142857, distance: 1400,
   doorProgress: 0, crossings: 1, arrivals: 1, time: 71.96855600000056 }, nativeHandoff: null,
   sourceFace: { opening: { x: 1168.88, w: 80.24 } } });
 
@@ -561,6 +562,36 @@ function ashaDependencyHostV163() {
   return h;
 }
 
+test('annex-service QA observes Asha native threshold approach while Jun is remote without accepting overlap or a portal transfer', async () => {
+  const source = serviceQaCallbackV163('arm_asha_return_dependency');
+  const h = ashaDependencyHostV163(), route = routes.find(r => r.definition.id === 'asha-refuge');
+  const out = simulate(route, initialActor(route));
+  h.sample.actor = structuredClone(out.state);
+  h.dependency.actor.deck = 3; h.dependency.actor.roomId = 'life-support';
+  const body = { ...out.actor }, player = { ...h.hub.player, roomId: 'personal-refuge' };
+  const resolution = routine(route, 20.5);
+  h.run(source, ashaQaConfigV163);
+  let completed = null;
+  const pending = h.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__.then(value => { completed = value; });
+  await h.frame(0);
+  const origin = structuredClone(h.sample.actor);
+  for (let i = 0; i < 45 * 60; i++) {
+    h.sample.actor = route.advance(h.sample.actor, body, 1 / 60, { duty: false, resolution, player });
+    Object.assign(body, { x: h.sample.actor.x, y: h.sample.actor.y, roomId: h.sample.actor.roomId });
+    h.dependency.actor.x += 1 / 60;
+    await h.frame(1000 / 60);
+    assert.equal(completed, null, 'A real supported walk remains observable while the remote Jun owner progresses.');
+    assert.equal(h.sample.actor.crossings, 1); assert.equal(h.sample.actor.arrivals, 1);
+    assert.ok(h.sample.actor.x >= player.x + player.w + 12 - .26);
+  }
+  assert.ok(origin.x - body.x > 700, 'The native route really approaches the player.');
+  assert.ok(body.x < player.x + player.w + 13, 'Native collision brakes at the occupied local threshold.');
+  assert.equal(h.hub.player.x, player.x);
+  h.returnJun(); await h.frame(1000 / 60); await pending;
+  assert.equal(completed.status, 'returned'); assert.equal(completed.reason, 'jun-complete-native-return');
+  assert.equal(h.rafs.size, 0); assert.equal(h.timers.size, 0);
+});
+
 test('annex-service QA accepts only the declared Jun dependency and its complete physical return receipt', async () => {
   const source = serviceQaCallbackV163('arm_asha_return_dependency');
   const controller = withHubNpcInterdeckRoutesV165(class {}).prototype;
@@ -593,7 +624,13 @@ test('annex-service QA accepts only the declared Jun dependency and its complete
     ['different origin', x => { x.dependency.origin.x += 10; }, 'jun-origin-mismatch'],
     ['sampled origin', x => { x.dependency.origin.source = 'native-v62-routine'; }, 'jun-origin-mismatch'],
     ['Asha handoff', x => { x.sample.nativeHandoff = { observedTravel: false }; }, 'asha-owner-changed-during-jun-return'],
-    ['Asha no longer held', x => { x.sample.actor.stage = 'walking'; }, 'asha-is-not-held-for-jun'],
+    ['Asha unobserved portal phase', x => { x.sample.actor.stage = 'revealing'; }, 'asha-invalid-supported-threshold-approach'],
+    ['Asha unsupported', x => { x.sample.actor.y -= 1; }, 'asha-invalid-supported-threshold-approach'],
+    ['Asha overlaps threshold player', x => { x.sample.actor.x = x.hub.player.x + 43; }, 'asha-invalid-supported-threshold-approach'],
+    ['Asha travels faster than native', x => { x.sample.actor.x -= 28; x.sample.actor.distance += 28; x.sample.actor.time += 1; }, 'asha-nonphysical-threshold-approach'],
+    ['Asha unmeasured teleport', x => { x.sample.actor.x -= 15; x.sample.actor.time += 1; }, 'asha-nonphysical-threshold-approach'],
+    ['Asha invented distance', x => { x.sample.actor.distance += 28; x.sample.actor.time += 1; }, 'asha-nonphysical-threshold-approach'],
+    ['Asha reversed time', x => { x.sample.actor.time -= 1; }, 'asha-nonphysical-threshold-approach'],
     ['player moves', x => { x.hub.player.x += 1; }, 'player-left-native-refuge-threshold'],
     ['native pause', x => { x.hub.running = false; }, 'player-left-native-refuge-threshold'],
     ['Jun mission', x => { x.hub.npcRoutineResolutionsV62.set('crew-11-jun-park', { missionAssigned: true }); }, 'jun-priority-handoff-is-not-a-return'],

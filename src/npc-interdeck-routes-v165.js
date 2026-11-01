@@ -641,8 +641,13 @@ export function withHubNpcInterdeckRoutesV165(Base) {
         {x:door.x-70,y:door.y-10,w:door.w+140,h:door.h+20});
     }
     getNpcServicePassingDutyV165(routeId,actor) {
-      if(routeId==='idris-engine'&&this.npcInterdeckPassingRequestV165(routeId))
-        return this.npcInterdeckSharedServiceDoorV185(routeId);
+      if(routeId==='idris-engine') {
+        if(this.npcInterdeckSharedServiceDoorV185(routeId))return true;
+        // A remote passenger has no courtesy request here. Returning false
+        // would cancel Idris's authentic watch, release his parent owner and
+        // re-admit an unobserved annex timetable pose after elapsed hours.
+        return super.getNpcServicePassingDutyV165?.(routeId,actor);
+      }
       if(['leila-galley','asha-refuge'].includes(routeId)) {
         if(this.npcInterdeckSharedServiceDoorV198(routeId))return true;
         // Let the authentic V141 schedule own duty when Jun is remote.

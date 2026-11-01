@@ -1,0 +1,65 @@
+name: Native station relays V166
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: station-relays-v166-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  station-relay:
+    name: Native station relay (${{ matrix.route }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        route: [rook-station-relay, tamsin-station-relay]
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install locked application dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Browser tooling outside the release
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Contracts and actual distribution
+        run: |
+          npm run test:npc:station-relays:v166
+          npm run check
+          npm run build
+          npm run check:built
+      - name: Observe exact native station departure and return
+        shell: bash
+        env:
+          RELAY_ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/atf-station-relays-v166/$RELAY_ROUTE"
+          mkdir -p "$evidence"
+          source_head="$(git rev-parse HEAD)"
+          git rev-parse HEAD > "$evidence/source-commit.txt"
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > "$evidence/http.log" 2>&1 &
+          relay_server=$!
+          trap 'kill "$relay_server"' EXIT
+          for i in {1..30}; do curl --fail --silent http://127.0.0.1:4173/build-info.json > /dev/null && break; sleep 1; done
+          export ATF_CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python -B scripts/qa-npc-station-relays-v166.py --base http://127.0.0.1:4173 --route "$RELAY_ROUTE" --comparison-stage after --expect-build "$source_head" --expect-harness "$source_head" --output "$evidence/journey" 2>&1 | tee "$evidence/journey.log"
+      - name: Retain exact native evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: station-relay-v166-${{ matrix.route }}
+          path: ${{ runner.temp }}/atf-station-relays-v166
+          retention-days: 7
+          if-no-files-found: error

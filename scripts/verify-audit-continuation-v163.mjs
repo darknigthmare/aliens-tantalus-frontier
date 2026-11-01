@@ -21,6 +21,7 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   resolveLatestV165VerifierReceipt, NPC_INTERDECK_V185_SOURCE_SUCCESSORS,
   NPC_INTERDECK_V198_LOCAL_SUCCESSORS, NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS,
   NPC_INTERDECK_VERIFIER_V188, NPC_INTERDECK_VERIFIER_V198, NPC_INTERDECK_VERIFIER_V201,
+  NPC_INTERDECK_V203_WATCH_SUCCESSORS, NPC_INTERDECK_VERIFIER_V203, NPC_SERVICE_OBSERVER_V203,
   ARMORY_V178_RENDER_SUCCESSORS, ARMORY_V186_CROP_SUCCESSORS,
   ARMORY_V174_ECONOMY_SUCCESSORS, ARMORY_V174_ECONOMY_NEW_SOURCES } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
@@ -109,6 +110,8 @@ test('the full current bridge validates runtime bytes and older default returns 
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(NPC_INTERDECK_V203_WATCH_SUCCESSORS)
+      .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V186_CROP_SUCCESSORS)
       .map(([path, receipt]) => [path, receipt.currentSha256])) };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
@@ -155,7 +158,10 @@ test('V198 physically local Jun passage only: preserve remote dependency graph w
   const v201=NPC_INTERDECK_V201_CORRIDOR_SUCCESSORS[path];
   assert.equal(v201.previousSha256,v198.currentSha256,
     'V201 authentic corridor cannot rewrite V198 predecessor');
-  assert.equal(sha(read(path)),v201.currentSha256);
+  const v203=NPC_INTERDECK_V203_WATCH_SUCCESSORS[path];
+  assert.equal(v203.previousSha256,v201.currentSha256,
+    'The authentic watch correction retains the exact V201 corridor predecessor');
+  assert.equal(sha(read(path)),v203.currentSha256);
   const oldVerifier=NPC_INTERDECK_VERIFIER_V198;
   const verifier=NPC_INTERDECK_VERIFIER_V201;
   assert.equal(verifier.path,NPC_INTERDECK_VERIFIER_V188.path);
@@ -163,15 +169,28 @@ test('V198 physically local Jun passage only: preserve remote dependency graph w
     'V198 keeps frozen V188 behavior predecessor');
   assert.equal(verifier.previousSha256,oldVerifier.currentSha256,
     'V201 test must explicitly follow historical V198 behavior');
-  assert.equal(sha(read(verifier.path)),verifier.currentSha256);
+  assert.equal(NPC_INTERDECK_VERIFIER_V203.previousSha256,verifier.currentSha256);
+  assert.equal(sha(read(verifier.path)),NPC_INTERDECK_VERIFIER_V203.currentSha256);
   const mutatedPath=target=>target===path
     ?Buffer.concat([read(target),Buffer.from('UNREVIEWED_DOOR_LEASE')]):read(target);
   assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutatedPath),
-    /Unreviewed V201 local interdeck corridor source/,path);
+    /Unreviewed V203 authentic service watch source/,path);
   const mutatedTest=target=>target===verifier.path
     ?Buffer.concat([read(target),Buffer.from('UNREVIEWED_BEHAVIOR')]):read(target);
   assert.throws(()=>verifyAuditSuccessionV163(previous,current,mutatedTest),
-    /Unreviewed V201 interdeck behavior verifier/,verifier.path);
+    /Unreviewed V203 interdeck behavior verifier/,verifier.path);
+});
+
+test('V203 service observer pins its physical approach regression and real Python driver while retaining frozen V163 evidence', () => {
+  const receipt=NPC_SERVICE_OBSERVER_V203;
+  assert.equal(current.verifierSourceSha256V165[receipt.path],receipt.previousSha256);
+  assert.equal(sha(read(receipt.path)),receipt.currentSha256);
+  assert.equal(sha(read(receipt.driver)),receipt.driverSha256);
+  for(const [path,label] of [[receipt.path,'verifier'],[receipt.driver,'driver']]){
+    const tampered=target=>target===path?Buffer.concat([read(target),Buffer.from('UNREVIEWED_OBSERVER')]):read(target);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,tampered),
+      new RegExp('Unreviewed V203 service observer '+label),path);
+  }
 });
 
 test('the V169 armory app successor is chained, source-pinned and cannot be forged', () => {
@@ -304,7 +323,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     assert.equal(sha(read(path)), reviewed.currentSha256, path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),
-      /Unreviewed V202|Unreviewed V200|Unreviewed V199|Unreviewed V197|Unreviewed V195|Unreviewed V194|Unreviewed V188|Unreviewed V187|Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
+      /Unreviewed V203|Unreviewed V202|Unreviewed V200|Unreviewed V199|Unreviewed V197|Unreviewed V195|Unreviewed V194|Unreviewed V188|Unreviewed V187|Unreviewed V186|Unreviewed V183|Unreviewed V184|Unreviewed V181|Unreviewed V180|Unreviewed V178|Unreviewed V176 verifier/,path);
   }
 });
 
