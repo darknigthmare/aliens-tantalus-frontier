@@ -5,6 +5,9 @@ import {
   ALIEN_BASE_SNAPSHOT_INFO_V1,
   ALIEN_BASE_ENTITIES_V1,
   ALIEN_BASE_WEAPONS_V1,
+  ALIEN_BASE_MASTER_ENTITIES_V1,
+  ALIEN_BASE_MASTER_LINKS_V1,
+  resolveAlienBaseMasterEntityV1,
   resolveAlienBaseDossierV1,
   resolveAlienBaseWeaponReferenceV1,
   resolveAlienBaseGameMappingV1,
@@ -18,6 +21,8 @@ import { CatalogWorkbenchV62 } from '../src/catalog-ui-v62.js';
 test('Alien_base snapshot is deterministic, checked and reference-only', () => {
   assert.equal(ALIEN_BASE_ENTITIES_V1.length, 46);
   assert.equal(ALIEN_BASE_WEAPONS_V1.length, 200);
+  assert.equal(ALIEN_BASE_MASTER_ENTITIES_V1.length, 84);
+  assert.equal(ALIEN_BASE_MASTER_LINKS_V1.length, 45);
   const proposed=ALIEN_BASE_WEAPONS_V1.filter(x=>x.admission==='research-only');
   assert.equal(proposed.length, 129);
   assert.ok(proposed.every(x=>x.id.startsWith('proposed-')));
@@ -25,7 +30,9 @@ test('Alien_base snapshot is deterministic, checked and reference-only', () => {
   assert.ok(ALIEN_BASE_ENTITIES_V1.every(x=>x.visualFidelity==='not-1to1-certified'));
   const reproduction=renderAlienBaseSnapshotV1(
     {schemaVersion:'1.0.0',sourceRevision:ALIEN_BASE_SNAPSHOT_INFO_V1.sourceCommit,entries:ALIEN_BASE_ENTITIES_V1},
-    {schemaVersion:'1.0.0',entries:ALIEN_BASE_WEAPONS_V1}
+    {schemaVersion:'1.0.0',entries:ALIEN_BASE_WEAPONS_V1},
+    {schemaVersion:1,entities:ALIEN_BASE_MASTER_ENTITIES_V1},
+    {schemaVersion:1,links:ALIEN_BASE_MASTER_LINKS_V1}
   );
   const actual=readFileSync(new URL('../src/alien-base-snapshot-v1.js',import.meta.url),'utf8');
   assert.equal(reproduction,actual);
@@ -35,6 +42,12 @@ test('Exact canonical and local ID mapping; no near-name guessing', () => {
   const queen=resolveAlienBaseDossierV1('enemy-008-queen');
   assert.equal(queen?.name,'Queen');
   assert.equal(resolveAlienBaseDossierV1(queen.id),queen);
+  assert.equal(resolveAlienBaseDossierV1('caste.queen'),queen);
+  assert.equal(resolveAlienBaseMasterEntityV1('enemy-008-queen')?.id,'caste.queen');
+  assert.equal(resolveAlienBaseMasterEntityV1(queen.id)?.id,'caste.queen');
+  assert.equal(resolveAlienBaseMasterEntityV1('caste.queen')?.name,'Reine');
+  assert.equal(resolveAlienBaseGameMappingV1('enemy-008-queen')?.masterId,'caste.queen');
+  assert.equal(resolveAlienBaseMasterEntityV1('ab:faction:union-of-progressive-peoples-alien-franchise'),null);
   assert.equal(resolveAlienBaseDossierV1('queen-official-unverified'),null);
   const loader=resolveAlienBaseDossierV1('vehicle-007-p-5000-powered-work-loader');
   assert.equal(loader?.kind,'vehicle');
@@ -60,6 +73,9 @@ test('Bridge never renumbers or overlays simulation data', () => {
   const count=[WEAPONS.length, ENEMIES.length, VEHICLES.length,EQUIPMENT.length,CREW.length];
   const report=auditAlienBaseBridgeV1();
   assert.equal(report.curatedDossiers,46);
+  assert.equal(report.masterEntities,84);
+  assert.equal(report.masterLinks,45);
+  assert.equal(report.unlinkedDossiers,1);
   assert.equal(report.researchOnlyWeapons,129);
   assert.deepEqual(WEAPONS.map(x=>[x.id,x.damage,x.magazine]),before);
   assert.deepEqual(ENEMIES.map(x=>[x.id,x.health,x.damage]),original);
