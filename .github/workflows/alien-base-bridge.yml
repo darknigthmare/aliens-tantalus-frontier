@@ -1,0 +1,23 @@
+name: Alien_base Tantalus bridge
+on:
+  push:
+    paths:
+      - 'src/alien-base-*.js'
+      - 'src/content.js'
+      - 'scripts/verify-alien-base-bridge-v1.mjs'
+      - '.github/workflows/alien-base-bridge.yml'
+  pull_request:
+    paths:
+      - 'src/alien-base-*.js'
+      - 'src/content.js'
+      - 'scripts/verify-alien-base-bridge-v1.mjs'
+      - '.github/workflows/alien-base-bridge.yml'
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/verify-alien-base-bridge-v1.mjs

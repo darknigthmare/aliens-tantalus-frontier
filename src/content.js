@@ -16,6 +16,7 @@ import { ARCHIVE_RELAY_CAMPAIGN_V122 } from './archive-relay-state-v122.js';
 import { NEW_SPECIAL_CAMPAIGNS_V131, validateSpecialOperationsV131 } from './special-operations-v131.js';
 
 export * from './content-core-v50.js';
+export { ALIEN_BASE_PUBLIC_VERSION, ALIEN_BASE_REFERENCE_COUNTS, getAlienBaseRecord, getAlienBaseProfile, getAlienBaseWeapon, validateAlienBaseSnapshot } from './alien-base-registry-v1.js';
 
 export const CAMPAIGNS = Object.freeze([...buildCampaignsWithSpecialOperationsV67(buildMireCampaignsV143(CORE_CAMPAIGNS, WORLDS)), BLACK_COCOON_CAMPAIGN_V121, APC_CONVOY_CAMPAIGN_V121, C12_HORDE_CAMPAIGN_V121, ARCHIVE_RELAY_CAMPAIGN_V122, ...NEW_SPECIAL_CAMPAIGNS_V131]);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
