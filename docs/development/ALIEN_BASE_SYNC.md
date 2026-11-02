@@ -55,3 +55,11 @@ L’export reprend les catalogues vivants et le suivi AFE2 en séparant `identit
 `test:alien-base` participe au runner Node dédupliqué `test:all`. Il couvre la reproductibilité, les IDs, les propositions non admises, l’immuabilité profonde, les entrées adversariales, la provenance et la séparation joueur/développeur. Les documents, outils et workflow sont réservés aux sources ; seuls les modules documentaires nécessaires au client et leur cache hors ligne appartiennent à la distribution. Aucun brut privé n’est ajouté au build.
 
 Les correspondances distinctes des PR30/31/33 ne sont pas fusionnées par leur nom. Les preuves de campagne, les sept trajets PNJ, les recettes d’armes, les classeurs V177/V178 et les archives Blackout/Earth/V10 gardent leurs états propres. Aucun résultat navigateur, fidélité artistique 1:1 ou recette humaine n’est affirmé par ces tests Node.
+
+## Revue v2 du 2 novembre 2026 — sans admission automatique
+
+La branche `main` d'Alien_base reste au commit `878da267b12496128faed63bd448ac8cbb19bae8`, tandis que la [PR #21](https://github.com/darknigthmare/alien_base/pull/21) propose **652 identités et 1 217 bindings Tantalus** au commit `d2ff9fef4df40934f35796b9fe361e65315d1ac2`. Les PR #22, #23 et #24 restent non fusionnées et ne remplacent pas `main`.
+
+La [PR Alien_base #9](https://github.com/darknigthmare/alien_base/pull/9) contient le rapport `links/tantalus-registry-v2-review.v1.json` avec les SHA Git des fichiers lus. La jointure exacte des 45 anciens liens produit **38 candidats par identifiant local**, six liens de personnages sans identifiant local et une référence Ripley sans binding v2. Neuf armes et un véhicule, plus trois candidats AFE2, restent à documenter sans les rendre automatiquement jouables.
+
+`resolveAlienBaseRegistryV2CandidateV1(localId)` expose ces 38 candidats **uniquement comme des propositions**. Ils sont affichés dans le codex en **mode développeur** ; le rendu joueur, les stats et les sauvegardes ne changent pas. Pour `enemy-004-drone-big-chap`, `bio.xenomorph.big-chap` ne se confond pas avec l'archétype générique `bio.xenomorph.drone` sans preuve morphologique. La CI `test:alien-base` vérifie les invariants, sans prétendre homologuer la fidélité 1:1.

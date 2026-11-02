@@ -12,6 +12,8 @@ import {
   resolveAlienBaseDossierV1,
   resolveAlienBaseWeaponReferenceV1,
   resolveAlienBaseGameMappingV1,
+  resolveAlienBaseRegistryV2CandidateV1,
+  ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1,
   auditAlienBaseBridgeV1
 } from '../src/alien-base-bridge-v1.js';
 import { WEAPONS, ENEMIES, VEHICLES, EQUIPMENT, CREW } from '../src/content-core-v50.js';
@@ -57,6 +59,34 @@ test('Exact canonical and local ID mapping; no near-name guessing', () => {
   assert.ok(loader.traits.includes('piloted-exoskeleton'));
   assert.equal(resolveAlienBaseDossierV1('enemy-041-working-joe')?.kind,'synthetic');
   assert.equal(resolveAlienBaseDossierV1('enemy-571-predalien')?.name,'Predalien');
+});
+
+test('V2 branch candidates use 38 exact local IDs, no automatic canon or gameplay transfer', () => {
+  assert.equal(ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.prNumber,21);
+  assert.equal(ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.commit,'d2ff9fef4df40934f35796b9fe361e65315d1ac2');
+  assert.equal(ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.status,'unmerged-source-review-pending');
+  assert.equal(ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.approvedCanonicalIdentityMerges,0);
+  const queen=resolveAlienBaseRegistryV2CandidateV1('enemy-008-queen');
+  assert.equal(queen?.registryV2CandidateId,'bio.xenomorph.queen');
+  assert.equal(queen.legacyMasterCandidateId,'caste.queen');
+  assert.equal(queen.approvedCanonicalIdentity,false);
+  assert.equal(queen.autoMergeStats,false);
+  assert.equal(queen.visualFidelityCertified,false);
+  assert.equal(resolveAlienBaseMasterEntityV1('enemy-008-queen'),null);
+  const drone=resolveAlienBaseRegistryV2CandidateV1('enemy-004-drone-big-chap');
+  assert.equal(drone.registryV2CandidateId,'bio.xenomorph.big-chap');
+  assert.equal(drone.legacyMasterCandidateId,'caste.drone');
+  assert.notEqual(drone.registryV2CandidateId,'bio.xenomorph.drone','preserve film phenotype split');
+  for (const local of ['weapon-147-ocap-91-volcan','weapon-190-type-95-combat-pistol','vehicle-282-covenant-terraforming-truck','personnel-archive-ellen-ripley','siren','gasbag','wey-yu-worker']) {
+    assert.equal(resolveAlienBaseRegistryV2CandidateV1(local),null,'never guess missing binding: '+local);
+  }
+  const mapping=resolveAlienBaseGameMappingV1('enemy-008-queen');
+  assert.equal(mapping.candidateRegistryV2Id,'bio.xenomorph.queen');
+  assert.equal(mapping.candidateRegistryV2Status,'unmerged-source-review-pending');
+  assert.equal(mapping.canonicalIdentityApproved,false);
+  assert.equal(auditAlienBaseBridgeV1().registryV2CandidateLocalBindings,38);
+  assert.equal(auditAlienBaseBridgeV1().registryV2ApprovedCanonicalAliases,0);
+  assert.throws(()=>{queen.registryV2CandidateId='bio.xenomorph.drone'},TypeError);
 });
 
 test('A proposed weapon stays documentary, not purchasable or a new game ID', () => {
@@ -113,6 +143,8 @@ test('In-game catalogue displays reference without inventing a canon or a playab
   context.developerModeV110=true; render.call(context,{id:'enemy-008-queen',catalog:'enemies'});
   assert.equal(rendered[1].dataset.identityLinkStatus,'source-version-review-pending');
   assert.ok(rendered[1].children.some(x=>x.textContent.includes('1:1')));
+  assert.equal(rendered[1].dataset.registryV2CandidateId,'bio.xenomorph.queen');
+  assert.ok(rendered[1].children.some(x=>x.textContent.includes('Registre v2 (PR ouverte')));
   render.call(context,{id:'no-common-entry',catalog:'enemies'});
   assert.equal(rendered.length,2, 'unknown references must not show fake canon');
 });

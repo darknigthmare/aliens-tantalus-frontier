@@ -19,7 +19,7 @@ import { getEnemyImportAnimationV107 } from './enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { playerCatalogStatsV110, playerCatalogNameV110 } from './player-surfaces-v110.js';
 import { getVehicleShowroomV119 } from './vehicle-showroom-v119.js';
-import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1 } from './alien-base-bridge-v1.js';
+import { resolveAlienBaseDossierV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseMasterEntityV1, resolveAlienBaseWeaponReferenceV1, resolveAlienBaseRegistryV2CandidateV1 } from './alien-base-bridge-v1.js';
 import { resolveWeaponReferenceCoverageV122 as resolveWeaponReferenceCoverageV120 } from './weapon-reference-coverage-v122.js';
 
 const importWalkV107 = id => {
@@ -918,6 +918,7 @@ export class CatalogWorkbenchV62 {
     const dossier = resolveAlienBaseDossierV1(record.id);
     const master = resolveAlienBaseMasterEntityV1(record.id);
     const proposal = resolveAlienBaseIdentityProposalV1(record.id);
+    const registryV2 = resolveAlienBaseRegistryV2CandidateV1(record.id);
     const weapon = record.catalog === 'weapons' ? resolveAlienBaseWeaponReferenceV1(record.id) : null;
     if (!dossier && !master && !weapon) return;
     const technical = Boolean(this.developerModeV110);
@@ -930,6 +931,11 @@ export class CatalogWorkbenchV62 {
       section.dataset.identityLinkStatus = proposal.status;
       section.append(createElement(this.document,'p','catalog-v62__fact-note',
         'Rapprochement proposé — source et version à revoir : ' + proposal.sharedEntityId + ' (' + proposal.relation + ').'));
+    }
+    if (technical && registryV2) {
+      section.dataset.registryV2CandidateId = registryV2.registryV2CandidateId;
+      section.append(createElement(this.document,'p','catalog-v62__fact-note',
+        'Registre v2 (PR ouverte, identité à vérifier) : ' + registryV2.registryV2CandidateId + '. Aucun transfert de statistiques ou validation 1:1.'));
     }
     if (technical && dossier?.traits?.length) section.append(createElement(this.document,'p','catalog-v62__fact-note',
       'Traits documentaires : ' + dossier.traits.join(' · ')));
