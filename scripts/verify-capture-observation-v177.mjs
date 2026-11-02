@@ -164,7 +164,7 @@ test('pose read arms only evidence atomically without a second transport or a co
  assert.equal(g.arms.length,0);
 });
 
-test('actual Python keys recharge at rest, guard visible threats and release before a grounded resting-target special with one pose RPC',()=>{
+test('actual Python keys recharge at rest, guard visible threats and release only for a grounded recovering-target special with one pose RPC',()=>{
  // Declared pose replay tests the real Python policy and RPC order. It does not
  // claim a second native combat, browser rendering or latency qualification.
  const result=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
@@ -177,35 +177,37 @@ for n in tree.body:
    if isinstance(target,ast.Name):scope[target.id]=n.value.value
 functions=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['acquire_player_capture','get_frame']]
 exec(compile(ast.Module(body=functions,type_ignores=[]),'<actual-python-driver-rpc-and-policy>','exec'),scope)
-def observation(tick,cooldown=0,threat=False,hold=False,stamina=100):
+def observation(tick,cooldown=0,threat=False,hold=False,stamina=100,recovery=False):
  player={'id':'prowler','side':'player','x':419.66,'y':0,'vy':0,'hp':185,'stamina':stamina,'stun':0,'guard':False,'attack':None,'specialCooldown':cooldown,'stats':{'specials':int(hold)}}
- target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':80,'stun':0,'guard':False,'attack':{'kind':'light','age':.06} if threat else None}
+ target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':80,'stun':0,'guard':False,'attack':{'kind':'light','age':.06 if threat else .25} if threat or recovery else None}
  m={'config':{'matchId':'declared-policy-replay'},'tick':tick,'round':1,'phase':'active','paused':False,'presentation':{'blocksSimulation':False},'fighters':[player,target],'events':[]}
  startup={'ready':False,'accepted':None,'matchId':m['config']['matchId'],'round':1,'attemptNumber':1,'frame':None}
  if hold:
   m['grappleV153']={'id':7,'attacker':'player','target':'opponent'}
-  m['events']=[{'id':5,'type':'attack','kind':'special','side':'player','tick':124},{'id':8,'type':'grapple-start-v153','grappleId':7}]
-  startup.update({'ready':True,'accepted':{'attemptNumber':1,'attackEventId':5,'observedTick':126},'frame':{'state':{'match':{'tick':126}},'preparationProof':{'attackId':4,'attackEventId':5},'deferredStartupBitmapV177':True}})
- return {'match':m,'direction':1,'gap':4,'playerBody':{'center':400},'targetBody':{'center':500},'targetAhead':True,'verticalOverlap':True,'specialCost':34,'specialStartup':.32,'targetThreat':threat,'targetRecovery':False,'startupObservation':startup}
+  m['events']=[{'id':5,'type':'attack','kind':'special','side':'player','tick':172},{'id':8,'type':'grapple-start-v153','grappleId':7}]
+  startup.update({'ready':True,'accepted':{'attemptNumber':1,'attackEventId':5,'observedTick':174},'frame':{'state':{'match':{'tick':174}},'preparationProof':{'attackId':4,'attackEventId':5},'deferredStartupBitmapV177':True}})
+ return {'match':m,'direction':1,'gap':4,'playerBody':{'center':400},'targetBody':{'center':500},'targetAhead':True,'verticalOverlap':True,'specialCost':34,'specialStartup':.32,'targetThreat':threat,'targetRecovery':recovery,'startupObservation':startup}
 class Page:
  def __init__(self):self.reads=0;self.events=[];self.keyboard=self
  def evaluate(self,code,arg=None):
   if 'const G=await import(' in code:
    self.reads+=1;self.events.append('read')
-   rows=[observation(100,stamina=2),observation(124,threat=True),observation(148),observation(180,hold=True)]
+   rows=[observation(100,stamina=2),observation(124,threat=True),observation(148),observation(172,recovery=True),observation(204,hold=True)]
    assert self.reads<=len(rows),'A second post-action read or metadata transfer is unnecessary'
    return rows[self.reads-1]
   assert code.startswith('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__=') or 'o.cancelled=true' in code,'No separate evidence or pixel RPC during combat'
   return {'armed':True}
  def up(self,key):self.events.append('up:'+key)
  def down(self,key):self.events.append('down:'+key)
- def press(self,key,delay=0):assert delay==40;self.events.append('press:'+key)
+ def press(self,key,delay=0):
+  assert delay==40 and self.reads==4,'Only the observed recovery may trigger the real special key'
+  self.events.append('press:'+key)
  def wait_for_timeout(self,ms):assert ms==20
 p=Page();trace={};proof=scope['acquire_player_capture'](p,True,trace)
-assert p.reads==4 and p.events==['read','read','down:KeyS','read','up:KeyS','press:KeyL','read'],p.events
+assert p.reads==5 and p.events==['read','read','down:KeyS','read','up:KeyS','read','press:KeyL','read'],p.events
 assert len(trace['attempts'])==1 and trace['attempts'][0]['nativeSpecialAccepted']
-assert trace['attempts'][0]['before']['targetRecovery']==False
-assert trace['attempts'][0]['after']['tick']==180
+assert trace['attempts'][0]['before']['targetRecovery']==True
+assert trace['attempts'][0]['after']['tick']==204
 assert trace['successfulSpecial']['attackEvent']['id']==proof['preparationProof']['attackEventId']==5
 assert trace['timeLimitSeconds']==55 and trace['attemptLimit']==32
 print(json.dumps({'events':p.events,'attempts':len(trace['attempts']),'proof':proof['preparationProof']}))

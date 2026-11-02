@@ -354,7 +354,7 @@ def acquire_player_capture(page, after, trace):
     deadline = started + 55
     trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
                   'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [],
-                  'policy': 'Real Python-driven keys: approach using pure V105 body gap to <=6px (V153 admission <=8px); guard visible startup/active threats at contact and release during rest/recovery so ordinary stamina can recharge; press special during observed target rest/recovery when both grounded, player unstunned, affordable and cooldown zero. Startup evidence is armed within the same pose read, without emitting controls. No match field is assigned.'})
+                  'policy': 'Real Python-driven keys: approach using pure V105 body gap to <=6px (V153 admission <=8px); guard visible startup/active threats at contact and release during rest/recovery so ordinary stamina can recharge; press special during observed target recovery when both grounded, player unstunned, affordable and cooldown zero. Startup evidence is armed within the same pose read, without emitting controls. No match field is assigned.'})
     held = None
     guarding = False
     control_round = None
@@ -474,7 +474,7 @@ def acquire_player_capture(page, after, trace):
                     page.keyboard.up('KeyS')
                 guarding = want_guard
             ready = (m['phase'] == 'active' and not m.get('paused') and contact
-                     and not value['targetThreat'] and can_special)
+                     and value['targetRecovery'] and can_special)
             if ready:
                 if len(trace['attempts']) >= trace['attemptLimit']:
                     raise AssertionError('Native keyboard capture reached its disclosed attempt limit')
