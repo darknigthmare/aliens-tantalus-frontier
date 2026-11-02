@@ -150,7 +150,13 @@ test('all 35 production plans retain their equipment while clearing the 18 actua
       }
     }
   }
-  assert.deepEqual({count,authored,details,hatches},{count:303,authored:161,details:37,hatches:18});
+  // Releasing the former west workshop ladder admits one retained native
+  // maintenance chest. The relocated service group remains fully present.
+  assert.deepEqual({count,authored,details,hatches},{count:304,authored:161,details:37,hatches:18});
+  const workshop = rooms.find(room=>room.id==='workshop');
+  const workshopPlan = getHubRoomLifePlanV136(workshop,optionsFor(workshop));
+  for(const role of ['maintenance-bench','shop-service-chest','shop-fire-safety','workshop-hand-tool-board','workshop-small-fittings-shelf'])
+    assert.ok(workshopPlan.items.some(item=>item.role===role),`workshop:${role} remains admitted after freeing DURANDAL`);
   const cryo=rooms.find(room=>room.id==='cryo-bay');
   const oldSlots=getHubRoomLifePlanV136(cryo,{...optionsFor(cryo),legacySupplyOverrides:{
     'capsule-supplies':{y:300},'stasis-service-kit':{y:300}

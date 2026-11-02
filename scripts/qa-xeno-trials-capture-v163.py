@@ -111,6 +111,11 @@ CAPTURE_OBSERVER = r'''c=> {
     if(c.stage==='floor'){
       if(m.events.some(e=>e.type==='grapple-end-v153'&&e.tick>=c.sinceTick)){fail('Native hold ended before exact floor observation');return;}
       if(h){floorHoldId??=h.id;if(h.id!==floorHoldId){fail('A later hold cannot replace first floor contact');return;}
+        if(c.attackEventId!==undefined){
+          const contact=m.events.find(e=>e.type==='grapple-start-v153'&&e.grappleId===h.id),
+            attack=contact&&[...m.events].reverse().find(e=>e.type==='attack'&&e.side===c.attackerSide&&e.id<contact.id);
+          if(!attack||attack.kind!=='special'||attack.id!==c.attackEventId){
+            fail('First native hold does not belong to the observed accepted special');return;}}
         const r=receipt(m,'capture');
         if(c.after?r?.fullFloorPin&&r.pairedContacts:m.tick-h.bornTick>=55){
           const control=document.querySelector('[data-xt="pause"]');
@@ -142,7 +147,9 @@ CAPTURE_OBSERVER = r'''c=> {
     }
     requestAnimationFrame(sample);
   }
-  requestAnimationFrame(sample);
+  // The current canvas is already painted. Protect an admissible floor now,
+  // before a later native RAF or a Python metadata transfer can consume it.
+  sample();
   return{armed:true};
 }
 '''
@@ -174,7 +181,15 @@ def get_frame(page):
 # owned by the native game. Encoding waits until an immutable bitmap exists.
 PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
- if(prior)prior.cancelled=true;
+ if(prior){
+  const child=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor;
+  if(child?.expected.startupAttemptNumber===prior.expected.attemptNumber
+    &&child.expected.attackEventId===prior.accepted?.attackEventId){
+   if(child.ready)return{error:'A completed first native floor cannot be replaced by a later attempt'};
+   child.cancelled=true;
+  }
+  prior.cancelled=true;
+ }
  const out=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:c,ready:false,done:false,accepted:null,frame:null,error:null};
  const started=performance.now();
  function sample(){
@@ -197,6 +212,15 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
    out.frame={state:structuredClone(state),bitmap,preparationProof:{attackId:attack.id,attackEventId:event.id,
     attackEventTick:event.tick,frameTick:m.tick,attackAge:attack.age,clip:cue.clip,
     observation:'read-only-native-raf-bitmap-before-png-encoding'}};
+   if(c.captureFloor){
+    const armFloor=globalThis.__ATF_ARM_CAPTURE_FLOOR_V179__;
+    if(typeof armFloor!=='function'){out.done=true;out.error='Accepted startup has no installed floor observer';return;}
+    out.floorArm=armFloor({stage:'floor',timeoutMs:45000,matchId:m.config.matchId,round:m.round,
+      fighterIds:m.fighters.map(f=>f.id),sides:m.fighters.map(f=>f.side),
+      attackerSide:'player',targetSide:m.fighters[1].side,targetId:m.fighters[1].id,
+      holdId:null,sinceTick:m.tick,after:c.after,attackEventId:event.id,startupAttemptNumber:c.attemptNumber});
+    if(out.floorArm.error){out.done=true;out.error=out.floorArm.error;return;}
+   }
    out.ready=true;out.done=true;return;
   }
   if(m.grappleV153||m.phase==='match-over'){
@@ -206,7 +230,17 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  requestAnimationFrame(sample);return{armed:true,attemptNumber:c.attemptNumber};
 }'''
 
-def acquire_player_capture(page, after, trace):
+# Cancelling/replacing an attempt also cancels its still-pending QA child.
+# A successful acquisition keeps the same floor observer until its public pause.
+PLAYER_STARTUP_CANCEL_V179 = r'''keepFloor=>{
+ const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(!o)return;
+ o.cancelled=true;
+ const child=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor;
+ if(!keepFloor&&child?.expected.startupAttemptNumber===o.expected.attemptNumber
+   &&child.expected.attackEventId===o.accepted?.attackEventId)child.cancelled=true;
+}'''
+
+def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
     # The Prowler and these humans have different front-biased bodies. Their
     # pivot distance is not the V153 contact test. All imports below only read
     # the public snapshot through the same pure geometry/spec functions used
@@ -240,6 +274,10 @@ def acquire_player_capture(page, after, trace):
     preparations = {}
     observed_preparation_ids = set()
     last_observation_tick = -120
+    trace['declaredStartupReadLatencyMs'] = transfer_delay_ms
+    # Only a QA-local function is installed. The accepted startup RAF arms it
+    # before any external metadata read; combat remains keyboard/engine-owned.
+    page.evaluate('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V179__=(' + CAPTURE_OBSERVER + ');}')
 
     def summarize(value):
         m = value['match']
@@ -305,24 +343,8 @@ def acquire_player_capture(page, after, trace):
                     'winner': result.get('winner'), 'reason': result.get('reason')}
                 raise AssertionError('Native match ended before keyboard capture: ' + json.dumps(trace['terminalBeforeCapture'], separators=(',', ':')))
             a, b = m['fighters']
-            # Validate the pose and attack in the same atomic state+PNG read.
-            # A prior polling snapshot only decides whether a read is useful;
-            # it never supplies the identity claimed for the captured image.
-            if (a.get('attack') or {}).get('kind') == 'special' and a['attack']['id'] not in observed_preparation_ids:
-                frame = get_frame(page)
-                frame_match = frame['state']['match']
-                frame_player = frame_match['fighters'][0] if frame_match else None
-                frame_attack = frame_player.get('attack') if frame_player else None
-                cue = next((v for v in frame_match.get('rigViewsV154', []) if v['side'] == 'player' and (v.get('preparationV163') if after else v.get('clip') == 'windup')), None) if frame_match else None
-                attack_event = next((e for e in reversed(frame_match['events']) if e['type'] == 'attack' and e['side'] == 'player'), None) if frame_match else None
-                if frame_attack and frame_attack['kind'] == 'special' and frame_attack['age'] < value['specialStartup'] and cue and attack_event and attack_event['kind'] == 'special':
-                    proof = {'attackId': frame_attack['id'], 'attackEventId': attack_event['id'],
-                             'attackEventTick': attack_event['tick'], 'frameTick': frame_match['tick'],
-                             'attackAge': frame_attack['age'], 'clip': cue.get('clip')}
-                    frame['preparationProof'] = proof
-                    preparations[attack_event['id']] = frame
-                    observed_preparation_ids.add(frame_attack['id'])
-                    trace['preparations'].append(proof)
+            # The strict startup RAF already owns its detached bitmap. Do not
+            # encode a fallback PNG while live combat can consume this attempt.
             contact = value['targetAhead'] and -8 <= value['gap'] <= 6 and value['verticalOverlap']
             desired = ('ArrowRight' if value['direction'] > 0 else 'ArrowLeft') if value['gap'] > 6 else None
             if desired != held:
@@ -348,12 +370,17 @@ def acquire_player_capture(page, after, trace):
                 attempt = {'number': len(trace['attempts']) + 1, 'before': sample,
                            'elapsedSeconds': time.monotonic() - started}
                 trace['attempts'].append(attempt)
-                page.evaluate(PLAYER_STARTUP_OBSERVER_V177, dict(
+                armed = page.evaluate(PLAYER_STARTUP_OBSERVER_V177, dict(
                     matchId=m['config']['matchId'], round=m['round'], playerId=a['id'], targetId=b['id'],
                     attemptNumber=attempt['number'], lastEventId=max((e['id'] for e in m['events']), default=-1),
                     specialsBefore=a['stats']['specials'], specialStartup=value['specialStartup'], after=after,
-                    timeoutMs=max(1, (deadline-time.monotonic())*1000)))
+                    timeoutMs=max(1, (deadline-time.monotonic())*1000), captureFloor=True))
+                assert not armed.get('error'), armed.get('error')
                 page.keyboard.press('KeyL', delay=40)
+                if transfer_delay_ms:
+                    # Deliberately delay only the external read; native RAF,
+                    # inputs and the original55s acquisition budget continue.
+                    page.wait_for_timeout(transfer_delay_ms)
                 after_press = page.evaluate(read_contact)
                 if after_press:
                     attempt['after'] = summarize(after_press)
@@ -367,7 +394,7 @@ def acquire_player_capture(page, after, trace):
         trace.update({'status': 'failed', 'error': str(e), 'elapsedSeconds': time.monotonic() - started})
         raise
     finally:
-        page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(o)o.cancelled=true;}''')
+        page.evaluate(PLAYER_STARTUP_CANCEL_V179, trace.get('status') == 'captured')
         if held:
             page.keyboard.up(held)
         if guarding:
@@ -413,6 +440,8 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--comparison-stage', choices=['before', 'after'], default='after')
     p.add_argument('--roles', choices=['cpu-captor', 'player-captor', 'both'], default='both')
+    p.add_argument('--startup-read-latency-ms', type=int, choices=[0, 700], default=0,
+                   help='Declared external read delay after each real player special; native RAF and original budgets continue.')
     args = p.parse_args()
     out = args.output.resolve()
     if out == REPO or REPO in out.parents:
@@ -438,6 +467,8 @@ def main():
             raw = response.read()
         info = json.loads(raw)
         return {'sourceCommit': info['sourceCommit'], 'buildId': info['buildId'], 'buildInfoSha256': hashlib.sha256(raw).hexdigest()}
+    report['limits'].append('CPU-captor preparation records an observed native CPU startup in the same duel; it is not necessarily the special that produced the recorded hold. Player-captor startup remains bound to the exact accepted special event and hold.')
+    report['declaredStartupReadLatencyMs'] = args.startup_read_latency_ms
     report['identityBefore'] = identity()
     page = None
     with sync_playwright() as pw:
@@ -471,7 +502,7 @@ def main():
                     else:
                         acquisition = {'profile': name}
                         report.setdefault('playerCaptureAcquisitions', []).append(acquisition)
-                        preparation = acquire_player_capture(page, after, acquisition)
+                        preparation = acquire_player_capture(page, after, acquisition, args.startup_read_latency_ms)
                     # Preparation is already observed; defer its transfer to disk and all
                     # checks until the first observed floor contact has activated the public pause button.
                     pm = preparation['state']['match']
@@ -484,7 +515,22 @@ def main():
                                'holdId': acquisition['grapple']['id'] if role == 'player-captor' else None,
                                'sinceTick': pm['tick'], 'after': after}
                     phase(name, 'floor observation with synchronous public button pause')
-                    armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
+                    if role == 'player-captor':
+                        # Reuse the exact child armed by this accepted startup.
+                        # Rearming after Python returns would discard first-floor evidence.
+                        armed = page.evaluate('''c=>{
+                          const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor,e=o?.expected;
+                          if(!o||o.cancelled||e.matchId!==c.matchId||e.round!==c.round
+                            ||e.targetId!==c.targetId||e.attackerSide!==c.attackerSide||e.targetSide!==c.targetSide
+                            ||e.attackEventId!==c.attackEventId||e.startupAttemptNumber!==c.startupAttemptNumber
+                            ||JSON.stringify(e.fighterIds)!==JSON.stringify(c.fighterIds)
+                            ||JSON.stringify(e.sides)!==JSON.stringify(c.sides))
+                            return{error:'Accepted startup did not arm the matching first native floor observer'};
+                          return{armed:true,error:o.error};
+                        }''', dict(binding, attackEventId=acquisition['successfulSpecial']['attackEvent']['id'],
+                                   startupAttemptNumber=acquisition['successfulSpecial']['attemptNumber']))
+                    else:
+                        armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
                     assert not armed.get('error'), armed.get('error')
                     wait_observation(page, 'floor', 'ready', 45000)  # Acknowledges the completed native UI pause.
                     frozen = observed(page)['match'] or {}
@@ -492,7 +538,7 @@ def main():
                     # succeeds; the detached bitmap remains browser-local.
                     floor_observation = page.evaluate('''()=>{
                       const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor;
-                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction};
+                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction,expected:o.expected,armedState:o.armedState};
                     }''')
                     hold = floor_observation['floor']
                     m = hold['state']['match']
@@ -517,6 +563,7 @@ def main():
                     report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
                         'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen,
                         'floorTrace': floor_observation['trace'], 'publicControlAction': floor_observation.get('pauseAction'),
+                        'observerArm': {'expected': floor_observation['expected'], 'state': floor_observation['armedState']},
                         'compactDiagnostics': pause_diagnostics})
                     check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
                           failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
@@ -525,8 +572,12 @@ def main():
                         preparation = page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
                           if(!o?.ready||!o.frame)return null;
                           return{state:o.frame.state,png:o.frame.bitmap.toDataURL('image/png'),preparationProof:o.frame.preparationProof};}''')
-                    check(name + ': actual native Prowler startup is observed', preparation is not None)
-                    capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
+                    check(name + (': exact player startup for the accepted capture special is observed' if role == 'player-captor'
+                                  else ': a native CPU startup is observed within this duel'), preparation is not None)
+                    capture(name+'-preparation.png', preparation,
+                            'Native startup of the exact accepted keyboard special owning the recorded hold; no attack/capture field injected.'
+                            if role == 'player-captor' else
+                            'Observed native CPU startup in this duel; it may precede the special that wins the recorded hold. No attack/capture field injected.')
                     check(name + ': actual capture event owns the displayed hold', any(e['type'] == 'grapple-start-v153' and e['grappleId'] == hold_id for e in m['events']))
                     if after:
                         receipt = next(v for v in m['captureViewsV163'] if v['role'] == 'captive')

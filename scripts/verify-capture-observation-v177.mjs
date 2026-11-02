@@ -8,7 +8,7 @@ import { runInNewContext } from 'node:vm';
 const python=readFileSync(new URL('./qa-xeno-trials-capture-v163.py',import.meta.url),'utf8');
 const source=python.match(/PLAYER_STARTUP_OBSERVER_V177 = r'''([\s\S]*?)'''/)[1];
 function fixture(){
-  const frames=[],copies=[],encodings=[];let now=0;
+  const frames=[],copies=[],encodings=[],floorArms=[];let now=0;
   const match={config:{matchId:'qa-match'},round:1,tick:10,phase:'active',grappleV153:null,
     fighters:[{id:'prowler',side:'player',stats:{specials:0},attack:null},
       {id:'guardian',side:'cpu',stats:{specials:0},attack:null}],events:[],rigViewsV154:[]};
@@ -17,10 +17,15 @@ function fixture(){
     __ATF_XENO_TRIALS_V96__:{snapshot:()=>state},document:{querySelector:()=>canvas,
       createElement:()=>({getContext:()=>({drawImage:(...a)=>copies.push(a)}),
         toDataURL:()=>{encodings.push(true);return 'recorded-png';}})}};
+  context.__ATF_ARM_CAPTURE_FLOOR_V179__=config=>{
+    floorArms.push(structuredClone(config));
+    context.__ATF_CAPTURE_OBSERVER_V163__={floor:{expected:config,ready:false,cancelled:false}};
+    return{armed:true};
+  };
   const arm=runInNewContext('('+source+')',context);
   const config={matchId:'qa-match',round:1,playerId:'prowler',targetId:'guardian',
     attemptNumber:1,lastEventId:2,specialsBefore:0,specialStartup:.29,after:true,timeoutMs:55000};
-  return{state,match,canvas,context,config,copies,encodings,
+  return{state,match,canvas,context,config,copies,encodings,floorArms,
     arm:extra=>arm({...config,...extra}),step:()=>{const fn=frames.shift();assert.ok(fn);fn();},
     advance:ms=>{now+=ms;},out:()=>context.__ATF_PLAYER_STARTUP_PROOF_V177__};
 }
@@ -70,4 +75,42 @@ test('the original remaining time budget and attempt replacement cancel stale ca
   const g=fixture();g.arm();const first=g.out();g.arm({attemptNumber:2});g.step();
   assert.equal(first.cancelled,true);assert.equal(g.copies.length,0);startup(g);g.step();
   assert.equal(g.out().frame.preparationProof.attackEventId,4);assert.equal(g.out().accepted.attemptNumber,2);
+});
+
+test('accepted startup arms a same-attempt floor child with exact identity before any external read',()=>{
+ const f=fixture();f.arm({captureFloor:true});startup(f);const original=structuredClone(f.state);f.step();
+ assert.equal(f.floorArms.length,1);const binding=f.floorArms[0];
+ assert.equal(binding.matchId,f.config.matchId);assert.equal(binding.round,f.config.round);
+ assert.deepEqual(binding.fighterIds,['prowler','guardian']);assert.deepEqual(binding.sides,['player','cpu']);
+ assert.equal(binding.attackEventId,4);assert.equal(binding.startupAttemptNumber,1);
+ assert.equal(binding.holdId,null);assert.equal(binding.sinceTick,11);assert.equal(binding.timeoutMs,45000);
+ assert.equal(f.out().ready,true);assert.equal(f.encodings.length,0);assert.deepEqual(f.state,original);
+});
+test('foreign or mismatched startup events cannot arm a floor child',()=>{
+ for(const change of [f=>{f.match.fighters[0].attack.id=9;},f=>{f.match.fighters[1].id='other';},
+  f=>{f.match.events[0].side='cpu';}]){
+  const f=fixture();f.arm({captureFloor:true});startup(f);change(f);f.step();
+  assert.equal(f.floorArms.length,0);assert.equal(f.out().ready,false);
+ }
+});
+test('attempt replacement cancels its pending floor child and preserves a completed first floor',()=>{
+ const f=fixture();f.arm({captureFloor:true});startup(f);f.step();
+ const child=f.context.__ATF_CAPTURE_OBSERVER_V163__.floor;
+ f.arm({attemptNumber:2,captureFloor:true});assert.equal(child.cancelled,true);
+ const g=fixture();g.arm({captureFloor:true});startup(g);g.step();
+ const done=g.context.__ATF_CAPTURE_OBSERVER_V163__.floor;done.ready=true;
+ const owner=g.out(),result=g.arm({attemptNumber:2,captureFloor:true});
+ assert.match(result.error,/completed first native floor/);assert.equal(g.out(),owner);assert.equal(done.cancelled,false);
+});
+test('startup cancellation retains a successful child and cancels only a failed child owned by this attempt',()=>{
+ const cancelSource=python.match(/PLAYER_STARTUP_CANCEL_V179 = r'''([\s\S]*?)'''/)[1];
+ for(const keep of [false,true]){
+  const f=fixture();f.arm({captureFloor:true});startup(f);f.step();
+  const child=f.context.__ATF_CAPTURE_OBSERVER_V163__.floor;
+  const cancel=runInNewContext('('+cancelSource+')',f.context);cancel(keep);
+  assert.equal(f.out().cancelled,true);assert.equal(child.cancelled,!keep);
+ }
+ const f=fixture();f.arm({captureFloor:true});startup(f);f.step();
+ const child=f.context.__ATF_CAPTURE_OBSERVER_V163__.floor;child.expected={...child.expected,startupAttemptNumber:7};
+ runInNewContext('('+cancelSource+')',f.context)(false);assert.equal(child.cancelled,false);
 });

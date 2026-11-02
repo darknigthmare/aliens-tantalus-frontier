@@ -1,0 +1,28 @@
+name: Alien_base bridge verification
+on:
+  pull_request:
+    paths:
+      - 'src/alien-base-*.js'
+      - 'src/content.js'
+      - 'src/catalog-ui-v62.js'
+      - 'sw.js'
+      - '.github/workflows/alien-base-bridge.yml'
+      - 'scripts/*alien-base*.mjs'
+      - 'package.json'
+      - 'docs/development/ALIEN_BASE_SYNC.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-bridge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Validate reference bridge
+        run: npm run test:alien-base

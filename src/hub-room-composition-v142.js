@@ -44,7 +44,7 @@ export const HUB_ROOM_COMPOSITION_ADDITIONS_V142 = freeze({
     wall('data-cabinet', 690, 420, 70, 'armory-issue-record-stock')
   ]),
   workshop: group('hand-tools-and-spare-fittings-above-existing-chests', [
-    wall('tool-board', 550, 420, 72, 'workshop-hand-tool-board'),
+    wall('tool-board', 190, 492, 72, 'workshop-hand-tool-board'),
     wall('personal-shelf', 770, 440, 66, 'workshop-small-fittings-shelf')
   ]),
   reactor: group('electrical-isolation-work-and-spares', [

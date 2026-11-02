@@ -909,13 +909,13 @@
       "kind": "tool-shadowboard",
       "purpose": "workshop-fine-tool-return-board",
       "bounds": {
-        "x": 312,
-        "y": 368,
+        "x": 580,
+        "y": 376,
         "w": 40,
         "h": 28
       },
       "mount": "rear-wall",
-      "note": "A wall-mounted tool shadowboard serving the west workshop service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+      "note": "The fine-tool return board is mounted above the relocated workshop service landing, between its floor and tier ladders. Its operating face stays within reach of that real support and outside the complete DURANDAL door bay.",
       "sector": "industrial"
     },
     {

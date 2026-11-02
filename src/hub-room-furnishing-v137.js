@@ -67,7 +67,7 @@ export const HUB_ROOM_FURNISHING_V137 = freeze(extendHubRoomFurnishingsV142({
     equipment('tool-chest',600,70,54,'armorer-service-chest'),wall('emergency-cabinet',950,535,40,'armory-fire-safety')
   ]),
   workshop: group('bench-stock-and-safe-repair',[
-    equipment('tool-chest',575,68,62,'shop-service-chest'),wall('emergency-cabinet',710,535,40,'shop-fire-safety')
+    equipment('tool-chest',620,68,62,'shop-service-chest'),wall('emergency-cabinet',770,535,40,'shop-fire-safety')
   ],['cylinder','cable-spool','parts-bin']),
   'vehicle-bay': group('inspection-supplies-outside-vehicle-bay',[
     wall('emergency-cabinet',820,372,40,'vehicle-fire-safety'),wall('service-conduits',600,250,146,'vehicle-service-feed')

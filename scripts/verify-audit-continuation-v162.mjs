@@ -143,7 +143,7 @@ test('V162 rejects changed Forge bytes without a valid V163 maintenance successo
   assert.throws(() => verifyAuditSuccessionV162(previous, current, absent), /Deferred Forge module changed/);
   const unreviewed = clone(latest); delete unreviewed.followupGamedev20261029;
   const missingCorrection = name => name === prefix + 'progress-v163.json' ? Buffer.from(JSON.stringify(unreviewed)) : read(name);
-  assert.throws(() => verifyAuditSuccessionV162(previous, current, missingCorrection), /Deferred Forge module changed/);
+  assert.throws(() => verifyAuditSuccessionV162(previous, current, missingCorrection), /MainN\/V177\/V178 documentary witness was rewritten/);
   const malformed = name => name === prefix + 'progress-v163.json' ? Buffer.from('{') : read(name);
   assert.throws(() => verifyAuditSuccessionV162(previous, current, malformed));
 });

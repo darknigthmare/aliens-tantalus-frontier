@@ -32389,5 +32389,302 @@
       },
       "primaryArchivesRecovered": 0
     }
+  },
+  "followupV179": {
+    "schema": 179,
+    "baselineCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+    "baselineProgressSha256": "cc61060d14f3e7b5ecceccb7d36f897da8175965e7e15fb71a5de2be0676644a",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "historicalRuntimeWitnessCount": 147,
+    "historicalResultsTransferred": false,
+    "oldWorkbookBytesPreserved": true,
+    "scope": "Continue les chantiers ouverts par une projection documentaire épinglée, une correction de dégagement atelier et des observations Trials sous latence, sans réécrire ni transférer les preuves V177/V178.",
+    "sourceGroups": {
+      "runtimeChanges": [
+        {
+          "path": "src/catalog-ui-v62.js",
+          "previousSha256": "998f8d92d2d32b236c37f9937167747ee7733b69dea45f1cbd97ec289a8060ba",
+          "currentSha256": "97c6e8e1769a87881e125ea4766f0a102621c013f736d5219db7cb477a66b1c4"
+        },
+        {
+          "path": "src/content.js",
+          "previousSha256": "4d98bbdaa3ed2cc297a1d715335b0cfa8edc7105c39ce3031a2db0fd77975d0b",
+          "currentSha256": "916a3ee2c7c05a6a81e9de9eacb68e41ab9dd0aeac9be53e260c1024a369a701"
+        },
+        {
+          "path": "src/hub-batch-industrial-v177.js",
+          "previousSha256": "9355e187a6c83ba6457e983871945101f3654ab17a24c7ee998765bce201c1ab",
+          "currentSha256": "27cfc9084399b77193b0361904d8fc89151dc56bd010e4fe34ec7bc02ba1e0bc"
+        },
+        {
+          "path": "src/hub-room-composition-v142.js",
+          "previousSha256": "64bdf33f28110a655bea4a38bda4035a235590feb0b66be363ffb0b914611907",
+          "currentSha256": "d0fdb04488e49b7be3fe59d5e078742b0190f6c2189d575e5c6f6b9d1bffe029"
+        },
+        {
+          "path": "src/hub-room-furnishing-v137.js",
+          "previousSha256": "8b93181c9cb7662b80a5f8a05205a29abee2b7701e30a331527ed18083374664",
+          "currentSha256": "9997f2c954dfe7b0c32ae3094d2e09cbc958bbc40d1844c52a9696cef0292e45"
+        },
+        {
+          "path": "src/hub-service-geometry-v139.js",
+          "previousSha256": "8f69ddd93564959ff44df15f3e4dcf553a626bc3568306d8ebdbb88985e03e9c",
+          "currentSha256": "cf67fa0507cc064d21799a467fe8a34b2f8e3352ee81abd43466cb762ec3a752"
+        },
+        {
+          "path": "sw.js",
+          "previousSha256": "cca2f58e7c34952e15d0238edeb9d5606d8766b4bea15da955b61aa3a718bfaf",
+          "currentSha256": "c3e1b4a7f3bf10623f3e3962a309f981bd895f7ddb81d5a4dc03a79fa648b8aa"
+        }
+      ],
+      "verifierChanges": [
+        {
+          "path": "scripts/verify-audit-continuation-v162.mjs",
+          "previousSha256": "4a0f581c4cd915fbab05351d455b0b9a4d0e3722a659323026b4b021a488d9cc",
+          "currentSha256": "553567e42de8ea0aa92ab44f98dce85113438a0fd1d931a45bff710f3799eb07"
+        },
+        {
+          "path": "scripts/verify-audit-continuation-v163.mjs",
+          "previousSha256": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291",
+          "currentSha256": "3becc5518175893544c1c7aee7b8fc6cd521d4e3584b6b149a6b1691d4450e8c"
+        },
+        {
+          "path": "scripts/verify-capture-observation-v177.mjs",
+          "previousSha256": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+          "currentSha256": "881f67af9a26ef83b223bea4aa7c185af9e9a2b5c757ae9549d67e3d6f3a4119"
+        },
+        {
+          "path": "scripts/verify-hub-circulation-v137.mjs",
+          "previousSha256": "e7e91327b7ecdf99e93a8ebb95f543b9f1e1b1a7efdef0429c5cfef192e66d24",
+          "currentSha256": "12b3e7df85da93c8d103b7edf466d552842a9a909d647d0c537b4c8d593742ef"
+        },
+        {
+          "path": "scripts/verify-hub-room-furnishing-v137.mjs",
+          "previousSha256": "f4bf5aacfa26279abab6fe089f5d6860d449a8ff48ef0fee602684a3a3e9be1f",
+          "currentSha256": "7122d778c80fb8874cf8116168ebc57f39dadc5883f8a88df9f4e4f291b3bde9"
+        },
+        {
+          "path": "scripts/verify-public-release-v86.mjs",
+          "previousSha256": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab",
+          "currentSha256": "0c2be84858f46b7464b643bec5a05f49cef44b833d8139492b09f90b967a1d80"
+        },
+        {
+          "path": "scripts/verify-xeno-trials-capture-v163.mjs",
+          "previousSha256": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
+          "currentSha256": "9c544d59ef95c88c15c7f4291ddb2ac2ea2e0dbfb1aed5d3a39b1e23f04a66bd"
+        }
+      ],
+      "qaChanges": [
+        {
+          "path": "scripts/qa-xeno-trials-capture-v163.py",
+          "previousSha256": "3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d",
+          "currentSha256": "75fc1ea09b69ef14644769495439288cb247bd5452f9d6bbc080d05573e51fdc"
+        }
+      ],
+      "dataChanges": [
+        {
+          "path": "docs/forge/xeno-trials/batch100-v177.json",
+          "previousSha256": "2fc2c3229920b3d425f50313270bc88afe1338213253451f6de544b0d3576d3a",
+          "currentSha256": "2b1d3bb47423e738b1cf8f4e4844a5d717cdb70c695878bdce18beb6ffa3b734"
+        }
+      ],
+      "supportingChanges": [
+        {
+          "path": "package.json",
+          "previousSha256": "b4a470ef63e5a099aaadf4dac7bcde360a580c385de3b36e4c681acc8780dd7d",
+          "currentSha256": "ff849b03809ae5f0e8bb0949cc76291330425f881d6cd113cca536a20c79cd61"
+        }
+      ],
+      "newRuntimeSources": [
+        {
+          "path": "src/alien-base-bridge-v1.js",
+          "previousSha256": null,
+          "currentSha256": "9f4a07ea2dd944b6e4c75501023303ad1b5e100a1b49060f05d6526db30c9e02"
+        },
+        {
+          "path": "src/alien-base-snapshot-v1.js",
+          "previousSha256": null,
+          "currentSha256": "a5682c47485b2fcc7e68f4a21212038bac9c43861485471439894c263caae9b5"
+        }
+      ],
+      "newVerifiers": [
+        {
+          "path": "scripts/verify-alien-base-bridge-v1.mjs",
+          "previousSha256": null,
+          "currentSha256": "946f0cb8d36047483eb8056e19a51d62d74d839548d139eef71adaf1ae6a20ab"
+        },
+        {
+          "path": "scripts/verify-alien-base-import-contract-v179.mjs",
+          "previousSha256": null,
+          "currentSha256": "09596031ea08e7169a32288a1f88b1a08758d62286f8cd1f3cbd4311995a1ad6"
+        },
+        {
+          "path": "scripts/verify-alien-base-pr7-proposal-v1.mjs",
+          "previousSha256": null,
+          "currentSha256": "c9f90078396d5f75f29a79e8d9b0c662cd59b250c8003a78de110c284af0df8f"
+        },
+        {
+          "path": "scripts/verify-hub-door-bay-v178.mjs",
+          "previousSha256": null,
+          "currentSha256": "775df80d68e5ddd8697e44bed32b82881b6ca288d35fd884efc035a06ba6bb65"
+        }
+      ],
+      "newTools": [
+        {
+          "path": "scripts/alien-base-pr7-proposal-v1.mjs",
+          "previousSha256": null,
+          "currentSha256": "6193d695718e00abb6fadb3f0161ca40f2c15e462cfcf9ef679e8b7393564176"
+        },
+        {
+          "path": "scripts/export-alien-base-tantalus-v1.mjs",
+          "previousSha256": null,
+          "currentSha256": "5cf9d96709d96c53357f11bd59d24da53e58a25c11b5f7bb3ba09507d7869779"
+        },
+        {
+          "path": "scripts/sync-alien-base-v1.mjs",
+          "previousSha256": null,
+          "currentSha256": "39e137a193da5023549a0c01113dbcabff2d9f1d745cb1d77db9ad47a39f1b91"
+        }
+      ],
+      "newDocuments": [
+        {
+          "path": "docs/development/ALIEN_BASE_PR7_PROPOSAL_V1.md",
+          "previousSha256": null,
+          "currentSha256": "495919983786f47d13edd1bcab4d3482ac27a9c0206f092e34c357c9a5f44247"
+        },
+        {
+          "path": "docs/development/ALIEN_BASE_REFERENCE_REVIEW_20261102.md",
+          "previousSha256": null,
+          "currentSha256": "14101044ccd9f75246cf32889e077a737d461002e793f5cd86ce565aed8040fa"
+        },
+        {
+          "path": "docs/development/ALIEN_BASE_SOURCE_SNAPSHOTS_20261102.json",
+          "previousSha256": null,
+          "currentSha256": "38a9b5b3ad87806a806283c991fcb82f31af826581fff796f001eb415e527928"
+        },
+        {
+          "path": "docs/development/ALIEN_BASE_SYNC.md",
+          "previousSha256": null,
+          "currentSha256": "7ea26f4c56ca5430af0e84e378284a03c2b87606b24c43bc97980c7a4cc53150"
+        },
+        {
+          "path": "docs/development/Alien_Base_Current_Mapping_Gaps_20261102.csv",
+          "previousSha256": null,
+          "currentSha256": "55ba485208350c762f444b849ebd36ee042e9e8dc6bd724386d4f52c9d4d62da"
+        },
+        {
+          "path": "docs/development/Alien_Base_Import_Status.csv",
+          "previousSha256": null,
+          "currentSha256": "b1c88d77814da689f8ad8c9fc1464dc155b6b7490c063fe0f034fa2db9e543a3"
+        },
+        {
+          "path": "docs/development/data/ALIEN_BASE_PR7_PROVENANCE_V1.json",
+          "previousSha256": null,
+          "currentSha256": "84d6d4ecf56c5b8797bb589bde1ff066ea768f757bf1832938c16ff8fb99e5ef"
+        },
+        {
+          "path": "docs/development/data/ALIEN_BASE_PR7_REGISTRY_V1.json",
+          "previousSha256": null,
+          "currentSha256": "ce669770c760960a7d3b07be4c4e9531e2656d3967ae435c62fe0f692952c977"
+        },
+        {
+          "path": "docs/forge/xeno-trials/V179-REFERENCE-AND-WORKSHOP-CONTINUATION.md",
+          "previousSha256": null,
+          "currentSha256": "35b6b731c1e393378e25cd9b6e2f8afe6826331ed583263cd4b656a719d38aa5"
+        },
+        {
+          "path": "docs/forge/xeno-trials/tantalus-door-bay-v179.json",
+          "previousSha256": null,
+          "currentSha256": "09d6e2ace1e8748435d49a808aac1754723e0cfb7ab52940779848113d8af27e"
+        }
+      ],
+      "newWorkflows": [
+        {
+          "path": ".github/workflows/alien-base-bridge.yml",
+          "previousSha256": null,
+          "currentSha256": "fdf116ad4bcbb75993449f7bd8474d983562bb6b74a2930dc91525a76b122a06"
+        }
+      ]
+    },
+    "auditLibraries": [
+      {
+        "path": "scripts/audit-succession-v162.mjs",
+        "previousSha256": "6fd7253c4afea86d324de11cdb432772250f222c7e25cdd7df3be618135e0806",
+        "currentSha256": "fef7a42ad1e0548ea08cbf8b5417279abb46f23187f0e2ce0d27875b34f36481"
+      },
+      {
+        "path": "scripts/audit-succession-v163.mjs",
+        "previousSha256": "f57a6f4cb1e76cd32d98f4824b26795e0445e5bfbc00aedd687ee18b67cf994c",
+        "currentSha256": "2bd00f80c78df41beb4172109be8e9dc7096695f375967be1a019241b333aff9"
+      }
+    ],
+    "protectedGameplayBytes": {
+      "src/save.js": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
+      "src/content-core-v50.js": "fc71b52d7dbe8b5ca69beb38cdbc19690fe67534372358b0998004e829cb3555",
+      "src/cloud-sync-v119.js": "a3e41edade62db72897cfcd579c2efb4bd2928dc7136608542e95474ae722a68"
+    },
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "candidateLocalValidationV179": null,
+    "newPngAssets": 0,
+    "approved1to1": 0,
+    "fullArtTasksClosed": 0,
+    "humanParticipants": 0,
+    "primaryArchivesRecovered": 0,
+    "remaining": {
+      "sourceVersionProposals": 45,
+      "inactivePr7Crosswalks": 15,
+      "researchOnlyWeapons": 129,
+      "sevenRoutesClosed": false,
+      "allFeedsCertifiedStable": false,
+      "driveContents": "UNKNOWN"
+    },
+    "forgeState": "DEFERRED_BY_USER",
+    "referenceAdmission": {
+      "activeMasterAliases": 0,
+      "sourceVersionPending": 45,
+      "pr7ProposalsActivated": 0,
+      "newPlayableContent": 0,
+      "upstreamCommit": "284e9da402b5be0da3f561459ea96224e9d59b6c",
+      "gameCatalogBaselineCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5"
+    },
+    "currentWorkstreams": [
+      {
+        "id": "C179-REFERENCES",
+        "codeState": "IMPLEMENTED_WITH_TARGETED_NODE_TESTS",
+        "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+        "scope": "Passerelle unique ; 45 rapprochements PR9 et 15 propositions PR7 conservés en attente, 129 armes de recherche non admises."
+      },
+      {
+        "id": "C179-WORKSHOP",
+        "codeState": "IMPLEMENTED_WITH_TARGETED_NODE_TESTS",
+        "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+        "scope": "Accès atelier et placement T177-I10 révisés, 99 installations historiques restantes intactes ; correction de quatre modules de géométrie/décor."
+      },
+      {
+        "id": "C179-TRIALS-OBSERVATION",
+        "codeState": "IMPLEMENTED_WITH_TARGETED_NODE_TESTS",
+        "nativeState": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+        "scope": "Observation du floor de la prise gagnante sous latence ; anciennes et nouvelles observations réussissent sur37af, sans reproduction du défaut CI ni changement combat."
+      }
+    ],
+    "visualOpenFindings": {
+      "basis": "HISTORICAL_SOURCE70_STATIC_READBACK_5PNGS_NOT_CURRENT_V179",
+      "openP2Areas": [
+        "briefing/Mire",
+        "cryo/pods",
+        "medical/morgue",
+        "quarantine/Bioforge"
+      ],
+      "currentV179VisualClosure": false,
+      "discardedFalsePositive": "hangar bracket: door painted after bracket"
+    },
+    "readableAddendum": "docs/forge/xeno-trials/V179-REFERENCE-AND-WORKSHOP-CONTINUATION.md"
   }
 }
