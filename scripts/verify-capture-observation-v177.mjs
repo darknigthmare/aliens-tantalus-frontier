@@ -128,9 +128,45 @@ print(json.dumps(expressions[0]))
  }
 });
 
-test('the actual Python driver rereads contact after arming instead of attacking the pre-transfer recovery pose',()=>{
- // Replay two disclosed observations from the native client200 regression.
- // This tests call ordering, not a second combat simulation or capture claim.
+test('pose read arms only evidence atomically without a second transport or a control action',async()=>{
+ const modules={};for(const name of ['xeno-trials-geometry-v105.js','xeno-trials-signatures-v147.js','xeno-trials-data-v96.js','xeno-trials-engine-v96.js'])
+  modules[name]=await import(new URL('../src/'+name,import.meta.url));
+ const literal=python.match(/read_contact = r\x27\x27\x27([\s\S]*?)\x27\x27\x27/)[1]
+  .replace(/await import\('\/src\/([^']+)'\)/g,(_all,name)=>'modules['+JSON.stringify(name)+']');
+ const initial=()=>{const m=modules['xeno-trials-engine-v96.js'].createXenoTrialsMatchV96({playerId:'prowler',opponentId:'import-game-dd-wy-commando',introSeconds:0,seed:96001,difficulty:'hard'});
+  m.presentation={blocksSimulation:false};return m;};
+ const make=change=>{const m=initial();change?.(m);const before=structuredClone(m),arms=[];let reads=0;
+  const context={modules,__ATF_XENO_TRIALS_V96__:{snapshot:()=>{reads++;return{match:structuredClone(m)};}},
+   __ATF_ARM_PLAYER_STARTUP_V181__:c=>{arms.push(c);context.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:c,ready:false,accepted:null};},
+   document:new Proxy({},{get(){throw Error('A pose read must not emit controls or compress pixels');}})};
+  return{m,before,arms,context,reads:()=>reads,read:runInNewContext('('+literal+')',context)};};
+ const c={attemptNumber:1,after:true,timeoutMs:54900},f=make();
+ const value=await f.read(c);assert.equal(f.reads(),1);assert.equal(f.arms.length,1);
+ const arm=JSON.parse(JSON.stringify(f.arms[0]));
+ assert.equal(arm.matchId,value.match.config.matchId);assert.equal(arm.round,value.match.round);
+ assert.equal(arm.playerId,value.match.fighters[0].id);assert.equal(arm.targetId,value.match.fighters[1].id);
+ assert.equal(arm.attemptNumber,1);assert.equal(arm.specialsBefore,value.match.fighters[0].stats.specials);
+ assert.equal(arm.captureFloor,true);assert.equal(arm.timeoutMs,54900);
+ assert.equal(value.startupObservation.attemptNumber,1);assert.equal(value.startupObservation.round,value.match.round);
+ await f.read(c);assert.equal(f.arms.length,1,'Repeated poses must not replace an already prepared attempt.');
+ await f.read({...c,attemptNumber:2});assert.equal(f.arms.length,2);
+ assert.deepEqual(f.m,f.before,'Only detached QA evidence may change.');
+ for(const change of [m=>m.phase='round-over',m=>m.paused=true,m=>m.presentation.blocksSimulation=true,
+  m=>m.grappleV153={id:7},m=>m.fighters[0].attack={kind:'light',age:0},m=>m.fighters[0].stun=.1,
+  m=>m.fighters[0].y=1,m=>m.fighters[0].specialCooldown=.1,m=>m.fighters[0].stamina=0]){
+  const g=make(change);await g.read(c);assert.equal(g.arms.length,0);assert.deepEqual(g.m,g.before);
+ }
+ const g=make(),proof={attackId:4,attackEventId:5,attackEventTick:140,frameTick:142,attackAge:.02,clip:'special-windup'};
+ g.context.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:arm,ready:true,accepted:{attemptNumber:1,attackEventId:5},
+  frame:{state:{match:{tick:142}},preparationProof:proof,bitmap:{toDataURL(){throw Error('PNG must wait for the real floor pause');}}}};
+ const metadata=(await g.read(c)).startupObservation;assert.equal(metadata.frame.preparationProof.attackEventId,5);
+ assert.equal(metadata.frame.state.match.tick,142);assert.equal(metadata.frame.deferredStartupBitmapV177,true);
+ assert.equal(g.arms.length,0);
+});
+
+test('actual Python keys guard while unavailable and release before a grounded resting-target special with one pose RPC',()=>{
+ // Declared pose replay tests the real Python policy and RPC order. It does not
+ // claim a second native combat, browser rendering or latency qualification.
  const result=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
 import ast,json,sys,time
 from pathlib import Path
@@ -140,34 +176,145 @@ for n in tree.body:
   for target in n.targets:
    if isinstance(target,ast.Name):scope[target.id]=n.value.value
 functions=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['acquire_player_capture','get_frame']]
-exec(compile(ast.Module(body=functions,type_ignores=[]),'<actual-python-driver-order>','exec'),scope)
-def observation(tick,gap,recovery):
- player={'id':'prowler','side':'player','x':419.66180577449063,'y':0,'vy':0,'hp':185,'stamina':100,'stun':0,'guard':False,'attack':None,'specialCooldown':0,'stats':{'specials':0}}
- target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':80,'stun':0,'guard':False,'attack':{'kind':'light','age':.366666666666667 if recovery else .06666666666666667}}
- return {'match':{'config':{'matchId':'observed-client-transfer'},'tick':tick,'round':1,'phase':'active','paused':False,'presentation':{'blocksSimulation':False},'fighters':[player,target],'events':[]},'direction':1,'gap':gap,'playerBody':{'center':400},'targetBody':{'center':500},'targetAhead':True,'verticalOverlap':True,'specialCost':40,'specialStartup':.29,'targetThreat':not recovery,'targetRecovery':recovery,'startupObservation':None}
+exec(compile(ast.Module(body=functions,type_ignores=[]),'<actual-python-driver-rpc-and-policy>','exec'),scope)
+def observation(tick,cooldown=0,threat=False,hold=False):
+ player={'id':'prowler','side':'player','x':419.66,'y':0,'vy':0,'hp':185,'stamina':100,'stun':0,'guard':False,'attack':None,'specialCooldown':cooldown,'stats':{'specials':int(hold)}}
+ target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':80,'stun':0,'guard':False,'attack':{'kind':'light','age':.06} if threat else None}
+ m={'config':{'matchId':'declared-policy-replay'},'tick':tick,'round':1,'phase':'active','paused':False,'presentation':{'blocksSimulation':False},'fighters':[player,target],'events':[]}
+ startup={'ready':False,'accepted':None,'matchId':m['config']['matchId'],'round':1,'attemptNumber':1,'frame':None}
+ if hold:
+  m['grappleV153']={'id':7,'attacker':'player','target':'opponent'}
+  m['events']=[{'id':5,'type':'attack','kind':'special','side':'player','tick':124},{'id':8,'type':'grapple-start-v153','grappleId':7}]
+  startup.update({'ready':True,'accepted':{'attemptNumber':1,'attackEventId':5,'observedTick':126},'frame':{'state':{'match':{'tick':126}},'preparationProof':{'attackId':4,'attackEventId':5},'deferredStartupBitmapV177':True}})
+ return {'match':m,'direction':1,'gap':4,'playerBody':{'center':400},'targetBody':{'center':500},'targetAhead':True,'verticalOverlap':True,'specialCost':34,'specialStartup':.32,'targetThreat':threat,'targetRecovery':False,'startupObservation':startup}
 class Page:
  def __init__(self):self.reads=0;self.events=[];self.keyboard=self
  def evaluate(self,code,arg=None):
   if 'const G=await import(' in code:
    self.reads+=1;self.events.append('read')
-   if self.reads==1:return observation(205,4,True)
-   if self.reads==2:return observation(261,19,False)
-   raise RuntimeError('probe-complete')
-  if code==scope['PLAYER_STARTUP_OBSERVER_V177']:self.events.append('arm')
+   rows=[observation(100,cooldown=1),observation(124,threat=True),observation(148),observation(180,hold=True)]
+   assert self.reads<=len(rows),'A second post-action read or metadata transfer is unnecessary'
+   return rows[self.reads-1]
+  assert code.startswith('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__=') or 'o.cancelled=true' in code,'No separate evidence or pixel RPC during combat'
   return {'armed':True}
  def up(self,key):self.events.append('up:'+key)
  def down(self,key):self.events.append('down:'+key)
- def press(self,key,delay=0):self.events.append('press:'+key)
+ def press(self,key,delay=0):assert delay==40;self.events.append('press:'+key)
  def wait_for_timeout(self,ms):assert ms==20
-p=Page();trace={}
-try:scope['acquire_player_capture'](p,True,trace)
-except RuntimeError as error:assert str(error)=='probe-complete'
-assert 'press:KeyL' not in p.events, p.events
-assert p.events.index('arm')<p.events.index('read',p.events.index('arm')),p.events
+p=Page();trace={};proof=scope['acquire_player_capture'](p,True,trace)
+assert p.reads==4 and p.events==['read','down:KeyS','read','read','up:KeyS','press:KeyL','read'],p.events
+assert len(trace['attempts'])==1 and trace['attempts'][0]['nativeSpecialAccepted']
+assert trace['attempts'][0]['before']['targetRecovery']==False
+assert trace['attempts'][0]['after']['tick']==180
+assert trace['successfulSpecial']['attackEvent']['id']==proof['preparationProof']['attackEventId']==5
 assert trace['timeLimitSeconds']==55 and trace['attemptLimit']==32
-print(json.dumps({'events':p.events,'attempts':trace['attempts']}))
+print(json.dumps({'events':p.events,'attempts':len(trace['attempts']),'proof':proof['preparationProof']}))
 `,process.env.ATF_CAPTURE_DRIVER_SOURCE||new URL('./qa-xeno-trials-capture-v163.py',import.meta.url).pathname],{encoding:'utf8'}));
- assert.equal(result.attempts.length,0);assert.ok(result.events.includes('arm'));
+ assert.equal(result.attempts,1);assert.equal(result.proof.attackEventId,5);
+});
+
+test('declared client delay defaults to zero and scopes 200ms to evaluate only, including failures',()=>{
+ const out=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
+import argparse,ast,contextlib,io,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+helper=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='delay_client_reads')
+main=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='main')
+option=next(n for n in ast.walk(main) if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and n.value.args and isinstance(n.value.args[0],ast.Constant) and n.value.args[0].value=='--client-read-delay-ms')
+p=argparse.ArgumentParser();exec(compile(ast.Module(body=[option],type_ignores=[]),'<actual-delay-cli>', 'exec'),{'p':p})
+assert p.parse_args([]).client_read_delay_ms==0
+assert p.parse_args(['--client-read-delay-ms','200']).client_read_delay_ms==200
+for invalid in ['-1','1','199','201','400','foo']:
+ with contextlib.redirect_stderr(io.StringIO()):
+  try:p.parse_args(['--client-read-delay-ms',invalid])
+  except SystemExit as e:assert e.code==2
+  else:raise AssertionError('Undeclared latency accepted')
+class Clock:
+ def __init__(self):self.now=0;self.waits=[]
+ def monotonic(self):return self.now
+ def sleep(self,seconds):self.waits.append(seconds);self.now+=seconds
+class Page:
+ def __init__(self):self.calls=[];self.keyboard=object()
+ def evaluate(self,expression,*args,**kwargs):
+  self.calls.append((expression,args,kwargs))
+  if expression=='fail':raise RuntimeError('observed failure')
+  return {'expression':expression,'args':args,'kwargs':kwargs}
+ def wait_for_function(self,*args):return 'native wait unchanged'
+for delay in (0,200):
+ clock=Clock();scope={'time':clock};exec(compile(ast.Module(body=[helper],type_ignores=[]),'<actual-client-delay>','exec'),scope)
+ page=Page();keyboard=page.keyboard;wait=page.wait_for_function.__func__
+ receipt=scope['delay_client_reads'](page,delay)
+ for repeated in (0,200):
+  try:scope['delay_client_reads'](page,repeated)
+  except ValueError as e:assert 'only once' in str(e)
+  else:raise AssertionError('Double installation would conceal an extra delay')
+ assert clock.waits==[] and receipt['evaluateCalls']==0
+ value=page.evaluate('pose',arg={'attemptNumber':3});assert value['kwargs']=={'arg':{'attemptNumber':3}}
+ assert page.keyboard is keyboard and page.wait_for_function.__func__ is wait
+ assert page.wait_for_function('ready')=='native wait unchanged'
+ try:page.evaluate('fail')
+ except RuntimeError as e:assert str(e)=='observed failure'
+ else:raise AssertionError('The wrapper swallowed an evaluate failure')
+ assert receipt['evaluateCalls']==len(page.calls)==2
+ assert receipt['beforeMs']==receipt['afterMs']==delay//2
+ assert receipt['totalRequestedSleepMs']==delay*2
+ assert abs(receipt['measuredSleepSeconds']-delay*2/1000)<1e-12
+ assert clock.waits==([.1]*4 if delay else [])
+ assert not receipt['runtimeFieldsWritten'] and not receipt['schedulerPatched'] and not receipt['injectedController']
+ for invalid in (-1,1,199,201,400,0.0,200.0,True,False,'200'):
+  try:scope['delay_client_reads'](Page(),invalid)
+  except ValueError:pass
+  else:raise AssertionError('Undeclared latency accepted')
+print(json.dumps({'defaultDelayMs':0,'stressDelayMs':200,'onlyPageEvaluate':True,'errorsPreserved':True}))
+`,new URL('./qa-xeno-trials-capture-v163.py',import.meta.url).pathname],{encoding:'utf8'}));
+ assert.equal(out.defaultDelayMs,0);assert.equal(out.stressDelayMs,200);assert.equal(out.onlyPageEvaluate,true);
+});
+
+test('fixture cache reuses exact ordinary Save-picker bytes and rejects all changes except valid root dates',()=>{
+ const out=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
+import ast,json,subprocess,sys,tempfile
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text());helper=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='fixture')
+repo=Path(sys.argv[1]).resolve().parents[1];scope={'Path':Path,'REPO':repo,'json':json,'subprocess':subprocess}
+exec(compile(ast.Module(body=[helper],type_ignores=[]),'<actual-save-fixture-cache>','exec'),scope)
+ids=['import-game-dd-wy-commando','import-game-dd-guardian','dd-darwin-era-cultist','prowler'];name='declared-fixture-cache-test'
+with tempfile.TemporaryDirectory(prefix='atf-capture-fixture-') as tmp:
+ directory=Path(tmp);raw,roster=scope['fixture'](ids,name,directory);path=directory/(name+'.json')
+ assert path.read_bytes()==raw
+ cached,again=scope['fixture'](ids,name,directory);assert cached==raw and again==roster
+ original=json.loads(raw);dated=json.loads(raw);dated['createdAt']-=12345;dated['updatedAt']-=123
+ dated_raw=json.dumps(dated).encode();path.write_bytes(dated_raw)
+ assert scope['fixture'](ids,name,directory)[0]==dated_raw
+ dated['createdAt']=0;dated['updatedAt']=8640000000000000
+ dated_raw=json.dumps(dated).encode();path.write_bytes(dated_raw)
+ assert scope['fixture'](ids,name,directory)[0]==dated_raw
+ changes=[lambda x:x['player'].update(health=1),lambda x:x['player']['weaponIds'].append('unearned-weapon'),
+  lambda x:x['player']['equipmentIds'].append('unearned-equipment'),lambda x:x['player'].update(name='foreign-id'),
+  lambda x:x['xenoTrialsV96'].update(credits=999999),lambda x:x['xenoTrialsV96'].update(serial=1),
+  lambda x:x['xenoTrialsV96'].update(serial=False),lambda x:x['xenoTrialsV96'].update(seed=1),
+  lambda x:x['xenoTrialsV96'].update(hp=1),lambda x:x['xenoTrialsV96']['unlocked'].pop(),
+  lambda x:x['xenoTrialsV96']['ledger'].append({'fake':'reward'}),lambda x:x.update(createdAt='foreign'),
+  lambda x:x.update(updatedAt=True),lambda x:x.update(createdAt=float('nan')),
+  lambda x:x.update(createdAt=9000000000000000),lambda x:x.update(createdAt=1.5),
+  lambda x:x.update(updatedAt=-1)]
+ for change in changes:
+  modified=json.loads(raw);change(modified);path.write_text(json.dumps(modified))
+  try:scope['fixture'](ids,name,directory)
+  except ValueError:pass
+  else:raise AssertionError('Foreign Save-picker state was admitted')
+ path.write_text('[]')
+ try:scope['fixture'](ids,name,directory)
+ except ValueError:pass
+ else:raise AssertionError('Non-object save admitted')
+ try:scope['fixture'](ids,name,repo)
+ except ValueError:pass
+ else:raise AssertionError('Fixture cache inside source was admitted')
+ try:scope['fixture'](ids,'../escape',directory)
+ except ValueError:pass
+ else:raise AssertionError('Fixture cache escaped its directory')
+print(json.dumps({'exactBytesReused':True,'allowedChanges':['createdAt','updatedAt'],'mutationsRejected':len(changes)+3}))
+`,new URL('./qa-xeno-trials-capture-v163.py',import.meta.url).pathname],{encoding:'utf8'}));
+ assert.equal(out.exactBytesReused,true);assert.equal(out.mutationsRejected,20);
 });
 
 test('the actual CI error print preserves bounded acquisition, input reset and terminal diagnostics without image payloads',()=>{
