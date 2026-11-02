@@ -32641,7 +32641,2131 @@
       "review": null,
       "merge": null
     },
-    "candidateLocalValidationV179": null,
+    "candidateLocalValidationV179": {
+      "schema": 179,
+      "state": "SCOPED_LOCAL_VALIDATION_RECORDED",
+      "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+      "testedTree": "13745f9e1385674b4d4dda8bd47f8067dec36165",
+      "sourceDigestSha256": "77873a92a5ee6543c6827fcf317d78de3de8931c6d1d6ff83b74c6a904d127bb",
+      "anchoredMap": {
+        "runtimeSources": {
+          "campaign-convoy-history-v162.css": "6f92b205b5c1970912e1051be0b6d6c3b2716acf27e767423a8d9c25b93806e2",
+          "campaign-lethe-continuity-v163.css": "adac522847cbed1696f24a64f85d1c9c79cfa76b06088e812cca96e4dd2784ef",
+          "hub-stations-v61.css": "eaf2b041ec39337b763d6d919859a7f79276c5eff920049980428b365202dfd5",
+          "index.html": "a4f5bf1470b0b736451ffbb74cc7c07994d2c9a6f9816bb9e81f53016253d6f5",
+          "mission-insertion-v62.css": "049525a19d40f882ce415330a1d467ebd26d7e3e641cffe76e19a61ecfeaffaf",
+          "src/alien-base-bridge-v1.js": "9f4a07ea2dd944b6e4c75501023303ad1b5e100a1b49060f05d6526db30c9e02",
+          "src/alien-base-snapshot-v1.js": "a5682c47485b2fcc7e68f4a21212038bac9c43861485471439894c263caae9b5",
+          "src/apc-convoy-runtime-v121.js": "b1fa0c689763ca94ddb37b99020acedcd176d057b5d26f16ef24f9171c39a4a9",
+          "src/apc-course-v131.js": "a9b6fe7fa4ee899497baf590a0ce09c42258ca4bd39d78816a743c1ec145fd03",
+          "src/app.js": "6de0d078732aea1477034d9f67e71a112c57f8cf57b0d9bb2b750b776d8141e0",
+          "src/archive-relay-presentation-v160.js": "e628ccee6aa0a2ee40eea1fdd3b66b11800c3185c39bbd91c18d662c05749a30",
+          "src/archive-relay-runtime-v122.js": "e77a3eeccb624e501e61d5c883e357a9e5ddfc0ce97a881e1a7ce488319666b2",
+          "src/archive-relay-state-v122.js": "ccfdc9b9de9bfe30270f12018d450f9cfa69c8e614eb2d4df18d872607abac29",
+          "src/audio.js": "ce43a728dc9cc14a7f0b1b0226163c5434fdf1eb804e349a427abdaeeac0b5c2",
+          "src/black-cocoon-presentation-v158.js": "69169757f789461886aed3788b79e5ba9adcbd8bfa41b5cab81af85ff0be0767",
+          "src/black-cocoon-runtime-v121.js": "d2c40f3a1c5e03468d5a26bf30075f18f94914a0d8b0f7b6caec9fcc01abff05",
+          "src/black-cocoon-state-v121.js": "c794a201f11b84c43be06aa9c3815b43f2da780ca74b724ece1de5228b675631",
+          "src/campaign-consequences.js": "359a55917b4cb2cfa2be07485d202cbfc57ca993dbeaaec5097801bda4504f0e",
+          "src/campaign-convoy-history-ui-v162.js": "e973c53c63ef8b425772ad049cab133b7052532be6956210e149174b3d940619",
+          "src/campaign-convoy-history-v162.js": "30acb584825844a348e37436b74fbb956e76a1ae7d2e4c1bb662587fec3fba31",
+          "src/campaign-convoy-story-ui-v161.js": "e5dad2c548c7cf05584e88330538f0d606d330e99645e5a48fcef51d235e707c",
+          "src/campaign-convoy-story-v161.js": "17e3abceb4554a1223d4a456038d7664d42c44d5b96297285b73814678fc274e",
+          "src/campaign-lethe-continuity-ui-v163.js": "f41cc2542144e3c8132a0b072e6bdb73b374b4be3d949269ca5b252ad5f07ecf",
+          "src/campaign-lethe-continuity-v163.js": "ac3a144a3e830c944c513458fd9c1c7ef7159af9989bc160092868c00aa9aa06",
+          "src/campaign-lethe-story-v163.js": "956cf8bbec54401cce20d8f90ff216c8c6ea951b590cf4d2a2b562f89a1a4d35",
+          "src/campaign-story-ui-v160.js": "94c8dea45e869e308f72e9905530bf0c2a1ab584d7951f906a3747c73a8a96e4",
+          "src/campaign-story-v160.js": "649bb76d681b3d162d9966163becf1e65e9b40f3b3e5c6216dd6cc17acb8cd4c",
+          "src/catalog-ui-v62.js": "97c6e8e1769a87881e125ea4766f0a102621c013f736d5219db7cb477a66b1c4",
+          "src/content.js": "916a3ee2c7c05a6a81e9de9eacb68e41ab9dd0aeac9be53e260c1024a369a701",
+          "src/costume-ui-v119.js": "4a113a45cb2dadc48b88a8835249d8078968eac4642514b7599cdedae4b15e4a",
+          "src/forge-authoring-v133.js": "41a3f33249661d32caa841155d9947589ec9c6548068932553fb114c90ac3975",
+          "src/forge-campaign-ui-v161.js": "e9d82bc38f661260687e53affe1fb9c272ec7ec6906d645cb91034d6756ef01b",
+          "src/forge-campaign-v161.js": "a0f7b6cd7f062d6b392d27befa55751a788959dcc00f01fc15c03c61ec967c12",
+          "src/forge-decoration-v141.js": "8df7f9f306e2635547b4488198b1d3f6f815633999516bc5819d28cadff2cbfe",
+          "src/forge-editor-base.js": "bcb438505c136e72d9c97ea05fca38331aac3738e935b2398dedd6ef0a946060",
+          "src/forge-editor-v130.css": "26fbbe3ab81709df35eb90b0f3eca57829297673a935a1a3a95603a23fddedba",
+          "src/forge-journey-admission-v141.js": "9699319fd3c25254e991b1b6f0e71a3edf4d074a7ff7555034a1f00fb8510f8d",
+          "src/forge-mission-runtime-v141.js": "1335114f76ffd164a88bf6e2a8e7ef86d86d37ad36be726a8055cfc10a642cb0",
+          "src/forge-model-v130.js": "9bc39547e1bb1b7add1489efab073d22302a64f6220a701eb6abcd1c084252c7",
+          "src/forge-narrative-ui-v156.js": "766a0a9abf003514425260e361868701117831de3245289d97fae92d109fdaf4",
+          "src/forge-narrative-v156.js": "2770cb180f398399193ea5074a9182fc51c08349029860a70a30a4ee74256ff7",
+          "src/forge-npcs-v158.js": "74866242ffe7d99b6b34771abf739fa639e46dac1b6b27712c3ca27eb68059b8",
+          "src/forge-playtest-checkpoint-ui-v157.js": "85032efba0f8071afc69af9369682ce372c0ca6e718e6898c1ad456259ceafee",
+          "src/forge-playtest-checkpoint-v157.js": "d7930fd9d9056970e63e02d54b6e70a3a4a00de931c26c7551db59ee15b4569c",
+          "src/forge-playtest-v136.js": "71bba96af5b96be472c56a83166643dd1b62744f1a03328a87eb7d9b03d6676f",
+          "src/forge-ship-runtime-v141.js": "20cf6a07e8deefcbdeefa276eb8d307f7abc9b6b55da9602195f43c5968cf32e",
+          "src/forge-ui-v130.js": "d5bd35a344d577b0fce54649912ac71679fb5e09b78f274f77b326db6dd91378",
+          "src/forge-versions-v136.js": "4e4d7a6db216a4d965dc5433272148dfa0792075c8472d69d17541a939c7be87",
+          "src/franchise-costumes-v119.js": "147afb5919da23a0fda98409ef8914484938786e05f78f1936fe4813e52e32ef",
+          "src/game-production-base.js": "95b136fcc0caade82a784522dcedc635d6acb2ad91ba6517c6d07fb36ca89793",
+          "src/game-production-runtime.js": "f0c9ff64ce004cc0dd8d028e3a62a717364fa0c1425eafb16b2ae8f808715419",
+          "src/game-v51-runtime.js": "50551b2f20e6fabd825ab6c6865244f2a47e77aecd337fc0d79386fdd5d4f017",
+          "src/game-v52-level-runtime.js": "f394cdc77d4684846cbfb5552ec950f4ba9948d75a09091177627ae7763112c4",
+          "src/game-v52-runtime.js": "ac0049ef9ba4a732b126d2de85984e78e74a9fbef2ca36b428d0fbcf23fa821f",
+          "src/held-weapon-renderer-v125.js": "7112bc41d7952df2fc4affac5005613d7727041caba8ef5ec5a50e00aec70524",
+          "src/hive-missions-v131.js": "b4538a7e3cd6fa58275a29e8585c52b3788000bbbb61bc39419e5dd6f5756b20",
+          "src/hub-annex-npc-life-v141.js": "a7ef6f64c02d2a7445a155bf017dbf0624a06d7f20c45cc73b118ba0c0f5c8de",
+          "src/hub-annex-registry-v87.js": "67d74d09b8ffed8f078516bf99259ee3491610947669f8acbb5616da3efbece7",
+          "src/hub-batch-command-v168.js": "417014faf4c286174285c16bcb6a4f16f26720ee315dd19e03085bfc73485fd1",
+          "src/hub-batch-command-v177.js": "96d4f8987e57037d1cc87d974821702fd823e1fea6ca26d84076604ede5bff58",
+          "src/hub-batch-engineering-v168.js": "b225caf172d8502f5e82c0b13b0b61d5eae8a05d46a77119e34b9de5e23457b9",
+          "src/hub-batch-engineering-v177.js": "068d2d97a45142f620ce510b8af34fbf529b6a73e32acc126955bd8b4dc222f5",
+          "src/hub-batch-habitat-v168.js": "8553034ff4821accbb8651b868ead51d434458ecda5f9a16a2b8936f0c7dddaa",
+          "src/hub-batch-habitat-v177.js": "e466ab0b33efe97bb1886fcf777faa737c2cabe2a6ca1a7fe95e0ab3049a5b38",
+          "src/hub-batch-industrial-v168.js": "2e8b216d47285646aa46920f584577e2e249e85e8c22734bcb16a65585bb419c",
+          "src/hub-batch-industrial-v177.js": "27cfc9084399b77193b0361904d8fc89151dc56bd010e4fe34ec7bc02ba1e0bc",
+          "src/hub-bulkhead-depth-v134.js": "b330fdbf92aa34f8cfb49b58a9229bdedbf4a17ec11663d9ae6e2146a1eec41b",
+          "src/hub-destination-signage-runtime-v138.js": "f9502b068c8c53932e403b4b512d562ea72c9f145e8bb5c904dc8f7ab9dfd428",
+          "src/hub-furnishing-annex-revisions-v139.js": "8b189a9c9703fadf8ec93d979dfad1f429991237f476a96d068a932170a3e3b5",
+          "src/hub-game.js": "2e6c4101e04579252bc6045e22cb9305921fbe20c931072732d9a9e045e15b3e",
+          "src/hub-lift-transit-v163.js": "05c6efb9553eb7908a633b1c811651efe6c292c4a036c2f8628fa051c1bae824",
+          "src/hub-room-backgrounds-v168.js": "c9ce994af2a7d053790f445c4023492764ffd083836fbad362f34ef32b4862d4",
+          "src/hub-room-batch-details-v168.js": "e5093cef235c0e7531bb20d9f067b99e38e4a32f60f07e6de21761f5022e0a9b",
+          "src/hub-room-composition-v142.js": "d0fdb04488e49b7be3fe59d5e078742b0190f6c2189d575e5c6f6b9d1bffe029",
+          "src/hub-room-dressing-v134.js": "c1b5d8364ccf714ea64a540276197744537829d2524c0407c83b51adf822e8fd",
+          "src/hub-room-enrichment-v177.js": "a35d0d0c6b41179ee191090a47791000c8e241be43717c1502a4239ed6a6632e",
+          "src/hub-room-furnishing-v137.js": "9997f2c954dfe7b0c32ae3094d2e09cbc958bbc40d1844c52a9696cef0292e45",
+          "src/hub-room-life-v136.js": "69b633122cc853cc8f38edb687101c667e03dea5768b2d4ea78c7d56e26b0fe3",
+          "src/hub-room-parallax-v134.js": "0b28d10ce68b581b25d2332570155caff802c6249c30c59297b97dcc79d378d3",
+          "src/hub-room-service-details-v165.js": "b6eb5e20ca9c221399135afa5b5fc48d471df74daf9625c194fefe16099037b2",
+          "src/hub-service-geometry-v139.js": "cf67fa0507cc064d21799a467fe8a34b2f8e3352ee81abd43466cb762ec3a752",
+          "src/hub-v51-runtime.js": "1cc35c82a83910dc154305f952118194162cde11382388734529bb5a73a54a4e",
+          "src/hub-v52-runtime.js": "7b67eb2cb7c5281e3ae0acd69adfb252db555a00f879194a553012b8d53efb4c",
+          "src/hub-v62-runtime.js": "6af03c23ec837458b45ce4e1c9d62e7d8b436ac5e54d2037528616730cd21cd9",
+          "src/hub-v71-runtime.js": "289b6c489f20563b39ac3cebda505dcefc0008d6237948a4d154100c7ad183a4",
+          "src/hub-v81-runtime.js": "26a75cc4fe0e7280146b370c9183cd89a52dabddd865f408289439fe824e4067",
+          "src/human-patrol-animation-v133.js": "5c9283b4f848a9a5882809f7b4f3c8c84478ed756f89bdc329cd1b875e8e0fe6",
+          "src/human-visual-contract-v133.js": "f009c9e00a60a06cf0cb9d6ecfce22b59d59cfcb8a28d4a9e224d1163abff4c8",
+          "src/legacy-operations-v131.js": "ab9d4021dde9dcf8609f1a23e43643b0d4f94857836f9df8145641537ce0328d",
+          "src/mission-input-v77.js": "c564966b27980c6733b7024fa832e6b8dd64e4441b08104a50f4c43e459d49b4",
+          "src/mission-insertion-ui-v62.js": "1e8b4c42e6b5115ff75e86c50dbace7d649c8a4b244629c7788b963a6c690dc5",
+          "src/motion-tracker-display-v160.js": "5062de6ccd88582691498bf7c340e9381602937aa1e22f8583efaf308aa60818",
+          "src/motion-tracker-v160.js": "cbe9be7d43640a9a4f52b8ad34a8cedce7a8cf90f5ff7eda3a477c2cb038216f",
+          "src/npc-annex-circulation-v159.js": "30ff9afe4985a2e9db880845521e3fb4e31a38304f97a0a7c12c3c5ba54ef493",
+          "src/npc-annex-leases-v163.js": "e133273662735daeff048498358ea3f56744acb9db2af540f196cd5f7a1bb123",
+          "src/npc-annex-service-routes-v163.js": "25d7efed89dc1134a79cabe8fad259c029c2db8db58f43d1a2fa4be487a0f92f",
+          "src/npc-annex-workpost-routes-v165.js": "b9bf2fca2a46fa79e11fc9f467c1672c11d33e8c4922ee8afbfcc6a48fb5fafe",
+          "src/npc-cal-climb-rig-v165.js": "2ac8b1c472c20689772ddfe35199e49bd2125b6d3e90237f8c6da2d4ccc2813d",
+          "src/npc-cal-logistics-route-v165.js": "e8206918faeede321fac0b43275da1a62a80e9591c7ff97b86ec8cf9ed7f5acc",
+          "src/npc-circulation-v158.js": "9a113b6f54dc273da215fdb3c03f12b8e9471a9475b4f9eb275b6b56b6ac4a99",
+          "src/npc-dialogue-portraits-v168.js": "04a7f8db4f4bb7bd10b2da6d90b8a0e20f647c3c9d0b6123fee77fd65d1b56c7",
+          "src/npc-interdeck-passage-v165.js": "d2db8cee7f823db24a79f6125dbe06cf872b05344995bcb2d7a14e42e9bcdd9f",
+          "src/npc-interdeck-routes-v165.js": "7fc995925c98d1a65fc75538d026320139b9f697f53e7b68d7701bde29bb01a4",
+          "src/npc-jun-climb-rig-v165.js": "75d5d7a0a8cbf82a3fdf9569713bc921badd40834ee9c43f8f479802174330a0",
+          "src/npc-life-v136.js": "ccd320fd541abf156e59cac8e2af45322b908204e5141849252de487102c66d9",
+          "src/npc-lift-transit-v165.js": "319a8c471d2e42eca8f6be2d3429418d733bcaf1a0fa8e38d7fc91dd7f387d28",
+          "src/npc-matte-aperture-data-v164.js": "d0216d395ee7f861d9ecb89db955833f34cd97bdd9aa6ad5133702819b6195da",
+          "src/npc-matte-apertures-v164.js": "588c9350e2a0936ef11f7287521f98325650fee7f71401543641dad5a234b9fb",
+          "src/npc-medical-route-v162.js": "389b2afae1898c6f6b675d9ebac116c936ce2e90c26fd5d09bbd94e39f00caa6",
+          "src/npc-mission-runtime-v55.js": "d1922839a7e23f9912ae2e38d5e2ae442cf6da67718ae0e97d28d5fc4f5b6390",
+          "src/npc-service-routes-v161.js": "a915ff8b546cc1066881e0ebf1b0e7a86b9fdf1af2748af5aa39e8ee396b9d4c",
+          "src/npc-service-traffic-v163.js": "aefa829240d02c4c08b7774217bbe2ff41619c6f2b5ccac1fe09537d5a589527",
+          "src/npc-station-relays-v166.js": "fd685150758ca56974c77df895f2cdd4181d29205a5fdae7a7d5d165fa0dc34b",
+          "src/player-action-rig-v127.js": "f10520f04b4bdf3e84f53e8b61a8bb970e49e3e4a4597b32af3c6a6d40761195",
+          "src/player-appearance-hub-v126.js": "5ac92a42bfa418da225a666cadba14299ce49896647498a488b229808bf9b8ea",
+          "src/player-appearance-preview-v126.js": "92dd0643f85d4eee5a4daaab6e425b5e4ca68097a6f31e2e792f3e6674da96e0",
+          "src/player-appearance-runtime-v126.js": "cce67f9128241fcf6e8f6932a57ec73b080c7e875acf024e15259450dbd9188b",
+          "src/player-appearance-ui-v126.js": "413261d7c85d408b4e08ccd46bc0d2e6ea4fca7ac64bed5bf73ef6d1c6bf859a",
+          "src/player-appearance-v126.js": "69c62a380a15d2d3b34e950620cd514fa780b531d016071029a17215c5ee59e1",
+          "src/player-arm-constraints-v160.js": "1c502fb559aabc20a603cb7fe220640986409a22c7d00831ff96d4277291922c",
+          "src/player-body-rig-v125.js": "401f81aaf0b2f1ab3b90353486782aa755fb54fd16084a5beda964c5d6c8a1df",
+          "src/player-costume-atlases-v165.js": "4026d6e6b6047a7d868d2b03cea56da3e2dd5de7f099ac730a0166a3b844a8e6",
+          "src/player-costume-outfits-v165.js": "9a28b82d1dabd95c926052d85d7aaccbc25a32abd96e8590d8a7b6d365da7f42",
+          "src/player-costume-parts-v165.js": "7913947158b5ad5431f09f151009069060a49fdbfa94d71598d11caad7eb74b3",
+          "src/player-gait-v133.js": "9e0a9c7a60e95a4a862b2345bae0f2e29f9546f30e9435e1b7538f5a3695a7de",
+          "src/player-human-proportions-v160.js": "e9dda6a8c2a79947eb6ba87461078bcc6be0b907bd7e04492f24927a842341e1",
+          "src/player-locomotion-rig-v129.js": "4af0bb1aaca511418267e0e5fead565de6ec739263c35ffa84eeb85573416dda",
+          "src/player-modular-rig-v126.js": "2fef117a684b16b6c426ed93f932ce91e660648682f50600c799f5cd6126c8f9",
+          "src/player-transit-rig-v128.js": "5aceb439b4d5b5421073e4a9bd0fa0e5a7f8d2673fbbf3e88dbc69ebd98472fd",
+          "src/player-weapon-runtime-v125.js": "a2d11f762b1064be9b888e7d1e9502e161784be9f09012376b11426fe88b2032",
+          "src/refuge-art-v87.js": "958f9c403d5dab828df67781425afe120769b45666f2e2a51732339b5831f053",
+          "src/reload-presentation-v163.js": "1d7611f540bd44b74f4ac9457026a59824fd30b06cf24d2ffb4b6cbc37963bce",
+          "src/save.js": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304",
+          "src/ship-animal-habitat-v87.js": "23b392916f7d76f89929e4e69e9b17c843cbd3784897893e7b49a33562ae26f4",
+          "src/special-operations-v131.js": "4595ded20b4c7c44a7942039ca3ed8d12bba9f20a44a622ff840caca7a0e4bb5",
+          "src/sprite-animation-runtime.js": "33a86ab323c4694b670334a12cc89273c5953bcde8bccb21a0115b8bebe19d01",
+          "src/tactical-reload-v77.js": "f792032340ea32b017d3ffcfa935a4cd7fd1ec5eab277902e6c873aa49bb6dc3",
+          "src/weapon-actions-v130.js": "f7ba5f603027c6d10fbf5f01eecf40e429f4d34a106c5fe6e5c306f4e6be933c",
+          "src/weapon-actions-v131.js": "4ff367efb3c919ba51fcb5595f119d54f462a3453dbd95ca1d6c40110f44172a",
+          "src/weapon-effects-runtime-v124.js": "7a47a03249fc2e45390608bf95f8496846da83cca0714d7f4b9b8657b28d1bfb",
+          "src/weapon-feed-admission-v193.js": "66997b6206d9e23fe4252031741e8afea656b9d12c161ee327b30f79d2fe7355",
+          "src/weapon-underbarrel-v174.js": "41c6bce6216e9622f0dc0172b186f5842387fdf77b3ad745b20770819469d8a6",
+          "src/xeno-trials-capture-data-v163.js": "f73824fd19bb4b26169583e038b9a272051d25cbdb6556c45f560f968866a285",
+          "src/xeno-trials-capture-reception-v158.js": "223b5b41fb00091f78b596866985108e4bced494fa41ad1c81b1054c064fb314",
+          "src/xeno-trials-capture-v163.js": "2c7fb5a5111e6d2ddf5b89baa5232dc613767708ed523fc531a2ea72657cf775",
+          "src/xeno-trials-engine-v96.js": "48e4e6cc8091e2f266f0b6831eb5d08f523a9acc27ba1f23cea3f227aaf0a007",
+          "src/xeno-trials-grapple-v153.js": "a0d85cfeb6cac1b3b97f0334ca7656c324f43a9077cac04b22600fdf6cc6529a",
+          "src/xeno-trials-restraint-pose-v156.js": "d38f61546c00cadd2ed3f9064b1dfe9b178f38e5c78dcc2448667017431a3a22",
+          "src/xeno-trials-rig-data-v163.js": "4f7dfdd9b88c8effd9192899a6af35806b30f96a3a17c6016a09527e6a09f401",
+          "src/xeno-trials-rig-data-v165.js": "396896622c85ff1198c4f61fb0e3a5f5eb131f1d74f315f6cb8aca24d64461d5",
+          "src/xeno-trials-rig-v154.js": "c380d8b4613ef37cb978880050c37a183b4113bfa7e833817810fc95ef1a93a5",
+          "src/xeno-trials-runtime-v96.js": "ef87fa84ba5f085cd0fc973b40dfeb11cf832f88b5168e259c2bc406303a2867",
+          "src/xeno-trials-sequences-v155.js": "ed140f0788d4d13b91ddd0aaa8a955c7ca50507185f9eee3debd537385ad2321",
+          "src/xeno-trials-ui-v96.js": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
+          "sw.js": "c3e1b4a7f3bf10623f3e3962a309f981bd895f7ddb81d5a4dc03a79fa648b8aa"
+        },
+        "supplementalRuntimeSources": {
+          "src/hub-armory-scene-v169.js": "4d65ab9fb59eb0ad924c3efe21f133ac9e52a0cf77b2410e4251b5d6fca378fc",
+          "src/hub-armory-storefront-v169.js": "8ef018c182f28e97fceda6aadd688d3678f5addd5eb5ed19129495a9207e01d7",
+          "src/weapon-magazine-inventory-v167.js": "4943b8ba1c16b4b1430e0383220f44a284ed893963281f51a6279eb04c689014",
+          "src/weapon-magazine-recovery-runtime-v168.js": "73eb796bf6d9159239e8a8c499bc8b73db9975a69016df5b7d9ef2d2d4eccf13",
+          "src/weapon-magazine-world-v168.js": "acf8396585e068d33569f42537c4420af7501093428e77824981c494491209e2"
+        },
+        "verificationSources": {
+          "scripts/verify-alien-base-bridge-v1.mjs": "946f0cb8d36047483eb8056e19a51d62d74d839548d139eef71adaf1ae6a20ab",
+          "scripts/verify-alien-base-import-contract-v179.mjs": "09596031ea08e7169a32288a1f88b1a08758d62286f8cd1f3cbd4311995a1ad6",
+          "scripts/verify-alien-base-pr7-proposal-v1.mjs": "c9f90078396d5f75f29a79e8d9b0c662cd59b250c8003a78de110c284af0df8f",
+          "scripts/verify-allied-patrol-phase-v167.mjs": "68627ad4da93413ac8ad5df8b129e1401ef6fb73b2a9a310b017271cbbefeb55",
+          "scripts/verify-apc-course-v131.mjs": "4f279380cf3e655b6d99ad79fe57912ea43876fbc43ed3828191651d29b195fb",
+          "scripts/verify-archive-relay-presentation-v160.mjs": "aeedf93aa1bdb4b8088e594ccbcbf41c2af6fb2d757faaa177211f415bf27bb4",
+          "scripts/verify-armory-art-installer-v171.mjs": "bd282cf11014d647a41ac2e2897514d5f2ac0d43ffb6a087e5716b350b78abf5",
+          "scripts/verify-armory-resupply-v174.mjs": "43acb1d0397940f76b211d27d91b2e3539a75293b4ab189cab14ebf344730617",
+          "scripts/verify-audio-lifecycle-v162.mjs": "9f430bfb09e7e237920c934363035c6d4140cb51cd6470f2e6b7ee9ae241eeac",
+          "scripts/verify-audio-score-v132.mjs": "28e3e432cc20acc6d4ad7fa4605c1c5b280f372b520aae037c4335074da58021",
+          "scripts/verify-audit-continuation-v156.mjs": "3806aea6670131ca1981878b522392ac2a1094c560e9cb1cbe00916b90675f4d",
+          "scripts/verify-audit-continuation-v157.mjs": "641676a21373c30747555d01f180a8c38f07819091860c6c1924bf6f5c08b5cf",
+          "scripts/verify-audit-continuation-v158.mjs": "87ca45b2c3c48d96e9ae02f4a57241b723372e3e12cd172ef4f978f34ba3eb98",
+          "scripts/verify-audit-continuation-v159.mjs": "2ebf516d1b324e6b89b3b180ff98fc2caa3e1f4d89424afb020b70c0389d90d2",
+          "scripts/verify-audit-continuation-v160.mjs": "6df9ba2e998e5d2d934352013fe180cba7f1fae1e4ff73972ba0aab843c6f9bf",
+          "scripts/verify-audit-continuation-v161.mjs": "77718d24906a5ed06855c183e3c01ef387b0a3b439a77db7c7b6c824d0c5be20",
+          "scripts/verify-audit-continuation-v162.mjs": "553567e42de8ea0aa92ab44f98dce85113438a0fd1d931a45bff710f3799eb07",
+          "scripts/verify-audit-continuation-v163.mjs": "3becc5518175893544c1c7aee7b8fc6cd521d4e3584b6b149a6b1691d4450e8c",
+          "scripts/verify-audit-v143.mjs": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
+          "scripts/verify-bioforge-admissions-v132.mjs": "16198e6cd6b1d92134e2c85d03e4fa453bb5125a46bebd91cb8a65d992897211",
+          "scripts/verify-black-cocoon-presentation-v158.mjs": "96029dc66cb8781bd30bd91482dbfbc7466679020fd22420784e7baaac43bfa5",
+          "scripts/verify-campaign-convoy-history-v162.mjs": "b76fc39826c91b02a9bd4edc03010aea7235b09707248d5a0667eb86dc19ca30",
+          "scripts/verify-campaign-convoy-story-v161.mjs": "ffbfe0bbf1f8ee04926ba129dd3aef7ac59eded8f3176f56646c4f634a1fe9ad",
+          "scripts/verify-campaign-lethe-v163.mjs": "cb3ac8826d4f15bbab86e0c42dcd225aeee341c9b10950046fb14af104473049",
+          "scripts/verify-campaign-story-v160.mjs": "a8f09d16a1e137b36b95c1473910d228289c2515b26bd3704584a2f13cfabcf8",
+          "scripts/verify-capture-admission-v163.mjs": "ccae4e3f359fff2c578fa0cb7251691cd2912150852f5e119aba30731e502030",
+          "scripts/verify-capture-observation-v177.mjs": "881f67af9a26ef83b223bea4aa7c185af9e9a2b5c757ae9549d67e3d6f3a4119",
+          "scripts/verify-costume-art-installer-v175.mjs": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6",
+          "scripts/verify-costume-atlases-v165.mjs": "9110d44e1c69721d8ba26eb83b61f2bbd6e709d6db11664db167632068ef1dee",
+          "scripts/verify-crew-conversation-memory-v135.mjs": "789f61a49a27082c4d911d61119979f491320dee653a8f76e84bc3f86aa739c0",
+          "scripts/verify-destructible-scenery-v130.mjs": "def1505130301ce876f471a308e31e87532dd147071d58b840899960dc0e6fc9",
+          "scripts/verify-dialogue-portraits-v168.mjs": "40e9a01107fff1363c900dfee7101b6788d29a54d2d0ecc5c677d911ea0a0f65",
+          "scripts/verify-ecosystem-missions-v131.mjs": "c716b405a36ef91816d72e8f97a1fd431717e31ac5c98c37e6e02d20e5a26fb4",
+          "scripts/verify-editor-authoring-v135.mjs": "f0ca6170e49ffd47622f9eb9f4a7ede074864d137a58b8aacbb63ffc34c425cf",
+          "scripts/verify-editor-modules-v140.mjs": "d310706530f35df88b4696e4f2b38e2f4989414ec2a36562e3762ae1ba287e7c",
+          "scripts/verify-editor-ship-bounds-v140.mjs": "fcf61b0f73149fd5e9339dd172164bde5539019dc49bb9e39caf6f6a2b1bad96",
+          "scripts/verify-editor-spatial-v136.mjs": "e70a90a65677e0adbc05b67e3000f968c55056b6e6a40c543000d61746bb083d",
+          "scripts/verify-enemy-distance-gait-v141.mjs": "0a6bc43d676069797419bd941a2b4bde060b258f5c6e4ab1ef0e8fd7a2730048",
+          "scripts/verify-enemy-patrol-v140.mjs": "01b10947f18e38b09edf5ba97a35f629c9370ed5abddb11164191fa4d2cfdc74",
+          "scripts/verify-enemy-tactics-v130.mjs": "8fa1f8de291e353563d45d741d3563d71fdb1434101e8cc776123f5c2229c17a",
+          "scripts/verify-field-media-v135.mjs": "129b75d261f254030fd2e44c4559affabd452b8091a4e504ee7f7d4ea5b62e46",
+          "scripts/verify-forge-admission-v141.mjs": "661e5c6fc9401eabc57462066defe4d86355e304282f1125d25d716711852782",
+          "scripts/verify-forge-campaign-v161.mjs": "dfaee09042fc71624507c2982e190db9fa4dbbb06a75a20d7b6bb78f06aadab3",
+          "scripts/verify-forge-conditions-v157.mjs": "44b9fb5918aa068a799b51c5d8ac8c693d1d4bc6af95203c2b91b4a851c00ae7",
+          "scripts/verify-forge-decoration-v141.mjs": "c5a668894e62c00f072bb32756948d6fbe8d1d1ee8c205f02c09ebab03da9486",
+          "scripts/verify-forge-journey-v141.mjs": "cd52f2c55beeee0d31a8cdb06550bdffda532bf8362e54041d9e5ee4b718b85b",
+          "scripts/verify-forge-mission-v141.mjs": "054edcef88550289bb396992819f089666fd64091a77a58092d7af8864e4c1f6",
+          "scripts/verify-forge-narrative-v156.mjs": "4ab4bcb30a9795793d3458a9358dc8f1b0c0882d01816482408788d41ee94196",
+          "scripts/verify-forge-native-v136.mjs": "734c59eba2dc1f0f8188a2a7b08fc985a430adf68b60775f47bb9598513cecc3",
+          "scripts/verify-forge-native-v140.mjs": "eb181a25ce174e5d92558791ab22102753c483b6a150205801f94436773824fd",
+          "scripts/verify-forge-npcs-v158.mjs": "ae3813cbb02f125e450fcf08217c2ffa8512915d98bb983961d1a2810a9ec34d",
+          "scripts/verify-forge-playtest-checkpoint-v157.mjs": "da83ae4924f2cb77f22d26a9b77ffd8190da8395296e1172d6d4343350f8a367",
+          "scripts/verify-forge-release-v140.mjs": "e6a5205699d5fa124bcaeb374c21f4b5cb4ad16301cfc8ae641bc5c771529458",
+          "scripts/verify-forge-sandbox-v140.mjs": "106a86859e0a2f6c77a3f32585160b9998bf664fdbac704cf3cb91806fd2c4f7",
+          "scripts/verify-forge-ship-v141.mjs": "b80a7b1995c5bb1c198fe1e97c6cd1e388b04f39c9111bb2f931f44a7ee2474c",
+          "scripts/verify-forge-v130.mjs": "713fd075e67f514913b12d6959417f54530a3a9f094c4199a53b395f5e528c14",
+          "scripts/verify-forge-v133.mjs": "575a952ee369e1149817a0b6de881845d970b9a5efdec06c5e1282cc3824a8ac",
+          "scripts/verify-forge-v134.mjs": "514e8667a7c0ee7e4453f10dea2f42578a5c29c1a9c7ba14c60f131b34977222",
+          "scripts/verify-forge-v135.mjs": "38ce07e554b2ea19d7311de037e3fb775fff9b6b6140ece5463a9ae8c368a3e5",
+          "scripts/verify-forge-v136.mjs": "4b48da2f0ad4a47cd1e8fc3997aa4f05392faa78256dc0ca490442762ce54158",
+          "scripts/verify-harpoon-unload-v162.mjs": "f536ea7475af1f989cf3555e254b95db46ef024faf48951b849a08bff6379228",
+          "scripts/verify-held-weapon-v125.mjs": "b3aa212f548364ba5558476a09ac1b8eafd99fd0c86fff95dccb6893a9bcec78",
+          "scripts/verify-hive-command-ui-v131.mjs": "1b404bd134dc120bf6a2a525d3129dd97a5528a11de2fea24c31637dd5af8aea",
+          "scripts/verify-hive-missions-v131.mjs": "d2e931961eff5f8e0eed14fec01cbb07dd392f4b00e51b044d74c98e07e9ec15",
+          "scripts/verify-horde-director-v132.mjs": "b24f8b76e5013949684d2dd165ee32dbed7076aa50db58b243b860bb7d20137c",
+          "scripts/verify-hub-annex-fixtures-v138.mjs": "ce0767b72b659eeff9582c87e7d948de5603f57afc2f09a6f5e768d30563292d",
+          "scripts/verify-hub-annex-npc-life-v141.mjs": "7f1351b66705bf4004ad3b742752ab30fada584a6608bcf6aedacff28f7309bc",
+          "scripts/verify-hub-annex-population-v156.mjs": "4e0c58741612c778ff5ee9d1b2ed0ff4a47ab4f925beb1f311754794f249a778",
+          "scripts/verify-hub-annex-runtime-geometry-v139.mjs": "52705347ac599ef1ded360cbb7349acda9dcc1f9b06b860ae7ac16c0295d3b4c",
+          "scripts/verify-hub-annex-service-v157.mjs": "09bf428422ed4819d55f36454d0cf96e917712c6322bbd4d56cac4235b0d7bfd",
+          "scripts/verify-hub-annex-storage-v139.mjs": "fb75bffce28661697587c9a0cacfb0336a18a82a01c46b9d10cad05d86993e6c",
+          "scripts/verify-hub-armory-layering-v177.mjs": "87a89d68ddcce1926440c10f013bfe54ca51ac05c4f4acc56c205e279d3a00e1",
+          "scripts/verify-hub-armory-v169.mjs": "7c5f2bfd49c85a314297855e2cabdf29387d21bb21621d656b06118496fab0a1",
+          "scripts/verify-hub-authored-composition-v133.mjs": "e2b38235488107ff47642fc7c64a340477be8ef64f7a0654206671130956ee0d",
+          "scripts/verify-hub-backgrounds-v168.mjs": "20314af3bb3849981646db3a73f65c3cbb22f326385e6c9ea6591e4415801ed3",
+          "scripts/verify-hub-bulkhead-depth-v134.mjs": "1281b2cf67e5a184259eca938efacf94e47fb801fee27ed9ac88fb0662d973d8",
+          "scripts/verify-hub-circulation-v137.mjs": "12b3e7df85da93c8d103b7edf466d552842a9a909d647d0c537b4c8d593742ef",
+          "scripts/verify-hub-compartment-shell-v138.mjs": "3e2c1f895a11a93a0390020d5e6695b95958bc24c1fe224819cd807dbd5b0a8e",
+          "scripts/verify-hub-console-support-v142.mjs": "33afbabbf843247ebb673a4bf6fc8c1be2d2b5a463184793e492d61c2bd1b536",
+          "scripts/verify-hub-control-bindings-v133.mjs": "81dab6d951b15defff6555dab512fbb91cc0b983e00c6150d8bdf376baa5b873",
+          "scripts/verify-hub-crawl-hint-v138.mjs": "02d4eb7f812bd0ca54692c79d75d24232f21387f581bee68085e56d9b538347c",
+          "scripts/verify-hub-critical-furnishing-v138.mjs": "d60fb7cf080631495f318582625fcd24f60d4aaf2577c80e408b16f415db102b",
+          "scripts/verify-hub-destination-signage-v138.mjs": "34583b1cd043146b41b91f8f8f4167a5160526a774ef6077288214d327b2dd0b",
+          "scripts/verify-hub-door-bay-v178.mjs": "775df80d68e5ddd8697e44bed32b82881b6ca288d35fd884efc035a06ba6bb65",
+          "scripts/verify-hub-door-npc-clearance-v142.mjs": "2361d172f75aae352bf227c61149596cea07318d9cd3b1d61d48b5afb523820d",
+          "scripts/verify-hub-door-passage-v142.mjs": "6107e974a2c99dfdb0c5b145a1a429ad5821d514d0168876cbcdb2cf61a4f34f",
+          "scripts/verify-hub-dropship-hangar-v139.mjs": "7ff02ffe973bbf71dafc788329c12c228803cbedafcf080d8b5f66dd3d7c652f",
+          "scripts/verify-hub-elevator-interior-v142.mjs": "60b0fbc95527370ca88250c22a5b174a1af4a0c3aff18bc973fb7b4db6a9c10d",
+          "scripts/verify-hub-environment-atlas-v134.mjs": "80d9adac8ef71d0c7fb457fd3e73985fbac271760d74192bbee1b91fa3b8b4bf",
+          "scripts/verify-hub-furniture-atlases-v139.mjs": "6d911ab742f59e142017da86acc105f86eaf08a579800216f3a3547b51af5567",
+          "scripts/verify-hub-interaction-input-v165.mjs": "37c1b6fd4cbfb97942a2f330e9f724a6c6b91078ebaed604577035724f44a424",
+          "scripts/verify-hub-interior-wall-atlas-v138.mjs": "788f85f2eab0a940684c577b6022815266103fbff9246eb38f66855c3a7c7608",
+          "scripts/verify-hub-lift-transit-v163.mjs": "91c11a74e3ebdd63beb3147a959bee1e5f2b679de87ea811b3516d515f7a0f0a",
+          "scripts/verify-hub-native-prop-placement-v139.mjs": "2d920b288bea2b0143fa0223742d1e359415ad96c578fa44b535051d8374b11e",
+          "scripts/verify-hub-navigation-v133.mjs": "f2e50b38614289808158bc684c9bb9820341e3cc937aaeac4aea1201beb10b55",
+          "scripts/verify-hub-prop-atlas-v136.mjs": "5b3539db86d38146a9e0ce22886120b4e95924616590973fb937fce9169aadb3",
+          "scripts/verify-hub-room-composition-v142.mjs": "892b7c8d484953212852380822f0c152b5148135b193493053594c0374c15e63",
+          "scripts/verify-hub-room-dressing-v134.mjs": "987cc790bb694260885749ae44d4751adf9d3b409bf8720ab4dbf774aa59e8f4",
+          "scripts/verify-hub-room-furnishing-v137.mjs": "7122d778c80fb8874cf8116168ebc57f39dadc5883f8a88df9f4e4f291b3bde9",
+          "scripts/verify-hub-room-identity-v137.mjs": "685d24634117d15100263912dc77576c345b8c89740329e5239384de2e794a1a",
+          "scripts/verify-hub-room-life-v136.mjs": "b76f0fe9008656bb8b2b6dc4b24b40c0ef061a28c5da234f3b6cf36bbb35eec0",
+          "scripts/verify-hub-room-parallax-v134.mjs": "5abc3a0465e225aa8d5cd8084652ec4a686a168605d10bf6df2f5834ab93bb9e",
+          "scripts/verify-hub-service-details-v165.mjs": "b1e7733d23718fee9ce67c45d2f37f24c06c529a6060d6144b4b33ed38ef9b54",
+          "scripts/verify-hub-service-routes-v138.mjs": "b4929721d0aed65ee7f1cc882ebd43bc7a7a1f825a0ecc9cc9df49780d3035a6",
+          "scripts/verify-hub-ship-layout-v137.mjs": "f0b00a59841bddb2cfbc4d9e519698d2f42f1f9f872f24d0f2a3099a05f58d54",
+          "scripts/verify-hub-spatial-design-v136.mjs": "18faa72bdf5514e7cd07a10c9aa82d7489d978424f7568cc080c7a817a10d54c",
+          "scripts/verify-hub-support-contact-v139.mjs": "a5b50c3698be1e911d4b1a74a6848f86ab4448d82ad9dedc5129a1091c5af91b",
+          "scripts/verify-hub-support-planes-v139.mjs": "55ce21faeebf5e15d2c28555bb399bbb87f690b40948114b38160b2e2880d1e6",
+          "scripts/verify-hub-training-v132.mjs": "15e6c37725b8ca94ef8441fa2095737461de740033e6aba8be8b3d849f84783f",
+          "scripts/verify-hub-vent-scene-v142.mjs": "88b974a67cd5cf0750c0290fc83614b15cc818e41e2a6016f8a8bc7181311d4a",
+          "scripts/verify-hub-whole-room-projection-v139.mjs": "257b0a80103b385d089a4db0abf18e9a713709d8ae0e15cad32b73a1313eea0c",
+          "scripts/verify-hub-workstation-details-v139.mjs": "e25214d6a3e0fcbd0d9d7ac64b031e4898d006e00b4f0a45c0a7cf865669a7c5",
+          "scripts/verify-human-gait-v133.mjs": "467349d5e0e4f2b208a425a65b3cd872a27dc1937559488d86ec2f40b50e8c43",
+          "scripts/verify-human-motion-v136.mjs": "1066c0f3a9768c3a033cc0398797f3f46c0bf04ea6b0a1b5b71eb1b0c4c9b090",
+          "scripts/verify-human-natural-gait-v139.mjs": "b993134c6123a2a57ef4af7b6a91f29cbcf99e7aa3abc14800018bcf71d9ce88",
+          "scripts/verify-human-patrol-animation-v133.mjs": "14151a9baae5ea75212f5c146b6ddde58f347c9504a7f98a9f6c179188f49699",
+          "scripts/verify-human-visual-contract-v133.mjs": "ae1c7f4959600e23841f71a6cb93899155bb0741f7b43f7ef05d14fe7f3ddde8",
+          "scripts/verify-jeri-surface-motion-v135.mjs": "ecd333bc3ec4edfea3034bb7909d482ebe82c6cfb2f7ca63d7827a6b80d74415",
+          "scripts/verify-legacy-operations-v131.mjs": "950fbaa2c7b92d1b062ac7b933862c52c7787ca00671e1922213686100ec3e28",
+          "scripts/verify-mecha-missions-v131.mjs": "50f21ab3680fe7256bbe3afa794a16c910274f32ca7fbaf12dcba3f9bab1d350",
+          "scripts/verify-motion-tracker-v160.mjs": "105ce9312dafe96826765fa5fb9c065bc2015b8e91ca441f7467845cd10a40d4",
+          "scripts/verify-narrative-evidence-v132.mjs": "d83dbd599e68b0f1c2f3f7d9386fa0fe59dd9213340117609981730e9a59b8f8",
+          "scripts/verify-native-rig-catalog-v163.mjs": "3264d4009437b84e25979fb7deeb20b1bc401cd2d12d1721b9a1566fde24afe3",
+          "scripts/verify-native-rig-catalog-v165.mjs": "b219e228e9f5e2de0b3dc30f1fbd4ce05aeaa84047a309b404afa75d2edbe7c5",
+          "scripts/verify-native-rig-terminal-v163.mjs": "7e40cc10ae88b20a0e470dc524f55fa46203b8110c278587adff0a66e2c20845",
+          "scripts/verify-native-rig-weapon-rigidity-v163.mjs": "1983607d4e4c0098febd07d2e721d0921df691b7a112fe16b54e95a38f2b8d0e",
+          "scripts/verify-npc-annex-circulation-v159.mjs": "fe2ec8edc0a25708970a76eabcbce140f27c025ebdd5e81752a61ddfc0eaf1c2",
+          "scripts/verify-npc-annex-leases-v163.mjs": "a66fd715db0dc3f08aa9614af687fa699136f958b8d38244d7cfb165129723f0",
+          "scripts/verify-npc-annex-service-routes-v163.mjs": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+          "scripts/verify-npc-annex-workpost-routes-v165.mjs": "53e0d41f012ba7c083214a7e53657dc08e85342c9675cc699660c3bcd3ed5a58",
+          "scripts/verify-npc-cal-climb-rig-v165.mjs": "63e01b44052a65392901ef54a227be24920621e28079f134e632eb2cd71d5006",
+          "scripts/verify-npc-cal-logistics-route-v165.mjs": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
+          "scripts/verify-npc-circulation-v158.mjs": "3feb8b1460764784bff3b002e270189032157ccc7e33b7636fa8806b1ef0e24e",
+          "scripts/verify-npc-dialogue-causality-v135.mjs": "0565b75f3b08f2c9e1f8fc3a23cd69fb7be38efa944e53cc6ad1095def1f1fc3",
+          "scripts/verify-npc-interdeck-passage-v165.mjs": "8a92af78cb7a9ee175eed22c4c65d4779645342adf0152948b842476c50f26ef",
+          "scripts/verify-npc-interdeck-routes-v165.mjs": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080",
+          "scripts/verify-npc-jun-climb-rig-v165.mjs": "a2094edcddea1f9e3b3d4333390b793d9661ec760e49151a81008a9ac954e88a",
+          "scripts/verify-npc-life-v136.mjs": "7984aa4dd6e544dcf31bf5a2f32173786c9155e0d359d928e9c80c94f544cac0",
+          "scripts/verify-npc-lift-queue-v177.mjs": "a2d1d73a79492dd97df785b828cb283f77f4b22f06670fb96359562c9ea51c88",
+          "scripts/verify-npc-matte-apertures-v164.mjs": "f9e20a36782bd44d0efac0bbb20b4bcb9ca27a3e539460c272b6f70aed053a50",
+          "scripts/verify-npc-medical-route-v162.mjs": "9a426ed06f6f396fd0eb7989a7135e6ab49834745879dd5eaf3548db183df774",
+          "scripts/verify-npc-relay-locked-bulkheads-v166.mjs": "52c2b1a55f40b32063e164a2d9d5a4bccb997bd0f62362c3c87f8473446e1e17",
+          "scripts/verify-npc-service-routes-v161.mjs": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
+          "scripts/verify-npc-spacing-v140.mjs": "1fddada5d0c9ca0aba9bd021422dabfcbd1f94f6d9824cf2fa3f98c9af8f6c91",
+          "scripts/verify-npc-station-relays-v166.mjs": "94f7163ff4401e4bd254eb3032085896ed3c067dda6b69165de5cd8c6e266db3",
+          "scripts/verify-operation-receipts-v131.mjs": "e79efcafd50f530d3ecf6815455cfd655648e5a42b17b7ec5053c336f8096b7f",
+          "scripts/verify-operations-integration-v131.mjs": "c9b95499f14f7fd09eea47276d053fd4b2784183dcb3f1b5c8461f58ea9b28b9",
+          "scripts/verify-parallel-completion-v165.mjs": "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa",
+          "scripts/verify-placeables-extension-v132.mjs": "961f003da975a98262df42df0c0801e27b0cd24ac37062b97676049afb12fc2a",
+          "scripts/verify-player-action-rig-v127.mjs": "f02255118052919cf5ad8c9a314c9610cb21d42841878c0d13a819e7b8b04e7c",
+          "scripts/verify-player-allies-contacts-v165.mjs": "f7921f4ead67d315da3894fb3b7cf01e0c531f3d478e6b09780d0594232f39e3",
+          "scripts/verify-player-appearance-preview-v127.mjs": "0ae41f1bc5b363289f02deb0471804d0fbfcb1e11cb4f9f540d9a4eb4101353c",
+          "scripts/verify-player-appearance-preview-v128.mjs": "d3a618737c5b7f1a9c96bedfa2bd626e04aa4b15553ed327d1e7efc1c3422f61",
+          "scripts/verify-player-appearance-preview-v129.mjs": "bb0c8cb98fa7ceb30d278151ff9264f98b963ad1e33476d83ab316903e075b5e",
+          "scripts/verify-player-appearance-runtime-v126.mjs": "0993fff4bdf5a015ea32a5e7127b75c9d332d1c18eda26e72e47a7820ee5c97e",
+          "scripts/verify-player-appearance-v126.mjs": "5eae7584cc69bf96b3ac8f680fa3b96bc62e5ece1f8be3b3b0315fdec54b5ea1",
+          "scripts/verify-player-arm-phase-v167.mjs": "d9f87786c8fa989fe35033e0969dc0631a6fbcb2dee727d820fe7de8048d8a5e",
+          "scripts/verify-player-body-alignment-v142.mjs": "4307b2a31a08acb73b8a809f81cda40a67097578dc96cdc38f2a697bf7625318",
+          "scripts/verify-player-body-rig-v125.mjs": "a8ca42b873a04467fcd6a741ca76e06b4cdc364fa2e2e6d8b8a692283a88b7e9",
+          "scripts/verify-player-climb-contacts-v139.mjs": "b2ff2118867ee1072d02ea7586f23967e38a956e585bc16b90dea7e55607ccc4",
+          "scripts/verify-player-colonial-art-v129.mjs": "2dc2f19d26f38b8e20ea3194e658c6789e0b3ce94115001ff127419f8c7739a4",
+          "scripts/verify-player-colonial-art-v141.mjs": "d26efae59900cbd001f87151be6fb1db12a77649daa0dbe5743f07715b56ded4",
+          "scripts/verify-player-field-actions-v124.mjs": "0c3d06a427937d0f4328a634df22396e87c2124a68963dd336d8dbb4b0777be2",
+          "scripts/verify-player-human-coherence-v160.mjs": "7a70df6a58d9907536bfa65392fecd187bbd8ab9cb7d7741d09297ef591137df",
+          "scripts/verify-player-incapacitation-v128.mjs": "9e7457a357e310e335831c013a5e82722159509bbc4cb65bc4699f2b9a68bd89",
+          "scripts/verify-player-locomotion-rig-v129.mjs": "542ba6a0da7988ed264cd18db280c6f2da27d0ad6a5928212bc112a7b9581fd6",
+          "scripts/verify-player-modular-rig-v126.mjs": "96d2fb0110dfdbd3444c4df582bf9bd389ac3533329a780cadd1c7e70528a883",
+          "scripts/verify-player-presentation-v124.mjs": "fc26729b86f3288aa4174752f91e37c001f7d8c78ebefc39e2e5fcaf8d50a61e",
+          "scripts/verify-player-qa-observation-v150.mjs": "206b45ab03c63392be1fe32d7fd566677b674d37246b7d9fb8741375a483320c",
+          "scripts/verify-player-runtime-v124.mjs": "a5b65d98907762de2a6836063971bd897cc6c31bab5310f9f0e2257a8db004e2",
+          "scripts/verify-player-transit-rig-v128.mjs": "d56bc8303b7c699875da37c68a3ce0738587e01d88ae8c3fca89329d70b79bde",
+          "scripts/verify-player-wardrobe-parts-v140.mjs": "1efed5ecc4e6bc8a742462efbecf6cf32942b9aef99d735511152465533efc0a",
+          "scripts/verify-player-wardrobe-v135.mjs": "5be64e9069cd20922c3e6bcfed3a9603713316f5b40f39612315e633e8b63d27",
+          "scripts/verify-player-weapon-rig-v125.mjs": "2cc74b21db33c540bc2466c444aca7a87f507e012e47d4895f38816bc16da98b",
+          "scripts/verify-public-release-v86.mjs": "0c2be84858f46b7464b643bec5a05f49cef44b833d8139492b09f90b967a1d80",
+          "scripts/verify-range-crew-interaction-v167.mjs": "9276254ba9f8f28c769df1f53e07b3f2aa79de6f8a0d1fdab61ef374b4954d33",
+          "scripts/verify-release-artifact-v143.mjs": "09254927c58489597131b98f3c0dc26159ec01c8265045299f52bf73819e2e60",
+          "scripts/verify-reload-presentation-v163.mjs": "7751841c22a3c8daa104cc9112b6df6406e040f1e385a67ff9561913287c7683",
+          "scripts/verify-save-lifecycle-v143.mjs": "810e67e01e1c26015ca7c65629c273148c90800bb190aa81405f23af354bdfb0",
+          "scripts/verify-ship-placement-v167.mjs": "0e608d9e531b50c03979866cd361a797f11108d7d4b472c715e4c30b37e1721e",
+          "scripts/verify-sprite-alpha-policy-v134.mjs": "f1fed2100d7f2b1dc3a3d05802ac4ebc8177ba8458e08c760168e7f2df653022",
+          "scripts/verify-squad-doctrine-v132.mjs": "0f43003b1dabdb9f141ea5ab0f1417322891c4eefd037027634754d31e5d8e72",
+          "scripts/verify-tantalus-batch100-v168.mjs": "211728e67be9b2ae0a4c7bb8ea2192fc7c4a2a86ea33f22628a8af25bf59abe6",
+          "scripts/verify-tantalus-enrichment-v177.mjs": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c",
+          "scripts/verify-trials-navigation-v163.mjs": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
+          "scripts/verify-vertical-world-v130.mjs": "e0bdb31d8d91a766a1c45ca2eae8cef8dc9ef7bb7a97b4e1a16c41c2b2405fbb",
+          "scripts/verify-weapon-actions-v130.mjs": "a7de8cc55b701da39001f9889c34ea049f226a62c1f20bf242bc276069a8d659",
+          "scripts/verify-weapon-actions-v131.mjs": "b988a810dcdee691bca24ef8f332b5d0f81f687f670bf18cba8ed28ee1956407",
+          "scripts/verify-weapon-arsenal-v167.mjs": "00ea47ff30bead48a1272689482cfd659a7f9b204343b0956a9a281687dfb509",
+          "scripts/verify-weapon-attachments-v168.mjs": "9021a0adf8c3037bc29e26812011d8988e0323adddd04e7c645103a8f088e9fe",
+          "scripts/verify-weapon-conservation-v177.mjs": "b60809c41615a1de71ef0cb57c74725747a36cb722e48e0c196afe72680804b2",
+          "scripts/verify-weapon-effects-v124.mjs": "26cea89893acbea90aa853f80c5795ef08152fe03f7e8d384c51459b3418b220",
+          "scripts/verify-weapon-feed-admission-v193.mjs": "141aabd5d03fa261ab83b6614633032f5ad053dc8ecc6f3a5cf856487a8d015f",
+          "scripts/verify-weapon-fidelity-v170.mjs": "e1cb78f40e602021af6fd99c8488a7751e1a2af4322c6bbc6318818f0952653c",
+          "scripts/verify-weapon-image-cache-v125.mjs": "512e68b914e3cf17c5663c890beb5e8f8e70a2057a4638fcc8a981f45ef4c21d",
+          "scripts/verify-weapon-magazine-world-v168.mjs": "3000f9087c459358c2ad59714283075e722c21ab88110c254434830652612a64",
+          "scripts/verify-weapon-presentation-profiles-v124.mjs": "25b3f9cdba084cb82cbd3f77f0415a840c3c86b04e2a551227ab9d5f6a7b36e6",
+          "scripts/verify-weapon-research-v171.mjs": "ba6292bbff00232d4f13f8f75b2dad7a016d88f8c20ad6d02bc951d964d070c3",
+          "scripts/verify-weapon-runtime-v124.mjs": "ff0e57aa0346b960ae87e20eed56af324ffd2ffac6c0e47818eb22b3b5d8a572",
+          "scripts/verify-weapon-special-feeds-v171.mjs": "43e442b3ff6d4a658214e3fff62a8d968daa90b544b4c27b7e828ae7a18a2d78",
+          "scripts/verify-weapon-underbarrel-v174.mjs": "0319f8e68397e39a74a3a44d7df7a06b184a0c2f948bba1fd1c6dc6ce12fd2d3",
+          "scripts/verify-xeno-trials-acid-v152.mjs": "9bd1e91d9d7679abbb39579bd9e031e667db3624b52ab4777a7719c59d147308",
+          "scripts/verify-xeno-trials-capture-reception-v158.mjs": "9b848dfb8dd3c7945a62f7e16bdd91c480d4b33a3355f85088ca63bab5ff1fe6",
+          "scripts/verify-xeno-trials-capture-v163.mjs": "9c544d59ef95c88c15c7f4291ddb2ac2ea2e0dbfb1aed5d3a39b1e23f04a66bd",
+          "scripts/verify-xeno-trials-castes-v151.mjs": "2bf512fda34d179c7b0e6b426945ee02bed56baeb6b0e1810bb50904b67cc7e1",
+          "scripts/verify-xeno-trials-controls-v150.mjs": "532e144f7a337b1ee8b8e9bd420bd23fe2f103970072891a30adf190c153fe76",
+          "scripts/verify-xeno-trials-feedback-v149.mjs": "e9b3f36763c67348a50d00b4e21fa3012e6c3554496004d3a14746b684a1e561",
+          "scripts/verify-xeno-trials-grapple-v153.mjs": "6cc90d28711d2ac58ac02a3d2443f08b17e788ef8b2cacc543b9232e63556397",
+          "scripts/verify-xeno-trials-plan-v146.mjs": "62b344b8572fbe7ebdcc733d846c17f356227aa49ee24084527b380902508b6a",
+          "scripts/verify-xeno-trials-presentations-v156.mjs": "acfa6c0e57c6e72f15e56ecabb909248e0b64219622e23643b417040635e1ed9",
+          "scripts/verify-xeno-trials-restraint-pose-v156.mjs": "327048a20ac03a51861ed20935c361ed2a4804219bd70e183d1c413e027d129d",
+          "scripts/verify-xeno-trials-rig-v154.mjs": "27feaf6aaa3ae4b55ed7b5709c82664a6e175b13b78c2728b21f73f409f056bb",
+          "scripts/verify-xeno-trials-sequences-v155.mjs": "bec375e3b26bfbf59f08ce798053105e49b58446f9c732fe366749ac88c06328",
+          "scripts/verify-xeno-trials-signatures-v147.mjs": "87bfad249fd6331e49959f9f02b4f56b34703ba81126cd7f506be731182e4a12",
+          "scripts/verify-xeno-trials-supers-v148.mjs": "1bf875531201c3669f90722e9a890cb86c92dbff7b68bab07a5c5e127915335b",
+          "scripts/verify-xeno-trials-v145.mjs": "51b812939768ca3af6d0ac8cd0875292c2e1085d80ab626983f91a193204135a"
+        },
+        "qaDriverSources": {
+          "scripts/qa-hub-service-details-v165.py": "75c5e0f4483fd62c9729441311aa1da3887f51194ebafe3298415d184b82f1a5",
+          "scripts/qa-npc-annex-service-routes-v163.py": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+          "scripts/qa-npc-interdeck-native-v165.py": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+          "scripts/qa-npc-matte-apertures-v164.py": "628c438ad682ec5ee1c1576943e9bc68a8b8d5ff1b279b67718b04a3c333bfd9",
+          "scripts/qa-npc-service-routes-v161.py": "5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06",
+          "scripts/qa-tantalus-enrichment-v177.py": "2775d2027c9277e3df39aa38871276dc3ca9b0764d90f1488caca11b942df04a",
+          "scripts/qa-xeno-trials-capture-v163.py": "75fc1ea09b69ef14644769495439288cb247bd5452f9d6bbc080d05573e51fdc"
+        },
+        "developmentToolSources": {
+          "scripts/alien-base-pr7-proposal-v1.mjs": "6193d695718e00abb6fadb3f0161ca40f2c15e462cfcf9ef679e8b7393564176",
+          "scripts/export-alien-base-tantalus-v1.mjs": "5cf9d96709d96c53357f11bd59d24da53e58a25c11b5f7bb3ba09507d7869779",
+          "scripts/install-costume-art-v175.mjs": "0ffa2b6ed0e651263a2ac9e79f71dc18b16e6849027034705bd04de93605cb71",
+          "scripts/sync-alien-base-v1.mjs": "39e137a193da5023549a0c01113dbcabff2d9f1d745cb1d77db9ad47a39f1b91",
+          "scripts/verify-costume-art-installer-v175.mjs": "73cce3d4d6e62a43e7fe36fb960d03a0364a70dee8ea1916dbca71957d8d76f6"
+        },
+        "documentarySources": {
+          "docs/arsenal/ALIENS_TANTALUS_ARSENAL_EXHAUSTIF_SYSTEME_V1.xlsx": "3f9b5d0bee8bafd95819e7860d1a09a1357fb2bcd92facbe8ed0cc80fb6c4cbb",
+          "docs/arsenal/ARSENAL_SUIVI_V177.xlsx": "6181234f2bf36a21b3cc45a60b26b4cc2c7d573b90396914329ec7bb611e0cdf",
+          "docs/arsenal/data/tantalus_arsenal_master_v1.csv": "8f33064087e6025a450876db2068af285bd5251b180a4d8243fd5770aaeaa05a",
+          "docs/arsenal/data/tantalus_arsenal_qa_v1.csv": "c500389eb71811d543312c60a10bd4199843f7a5dea673de6beb0d140e95f091",
+          "docs/arsenal/data/tantalus_weapon_evidence_backlog_v170.csv": "5e77f3d790b3f29869ccb3b6a183ef0ed5524fa75400e86dfdbec39db446ae4b",
+          "docs/arsenal/progress-v177.json": "5512101613ec4954ee57ce58ec1f028ce05668e7efc85d1801a5db2e60de1b33",
+          "docs/development/ALIEN_BASE_PR7_PROPOSAL_V1.md": "495919983786f47d13edd1bcab4d3482ac27a9c0206f092e34c357c9a5f44247",
+          "docs/development/ALIEN_BASE_REFERENCE_REVIEW_20261102.md": "14101044ccd9f75246cf32889e077a737d461002e793f5cd86ce565aed8040fa",
+          "docs/development/ALIEN_BASE_SOURCE_SNAPSHOTS_20261102.json": "38a9b5b3ad87806a806283c991fcb82f31af826581fff796f001eb415e527928",
+          "docs/development/ALIEN_BASE_SYNC.md": "7ea26f4c56ca5430af0e84e378284a03c2b87606b24c43bc97980c7a4cc53150",
+          "docs/development/Alien_Base_Current_Mapping_Gaps_20261102.csv": "55ba485208350c762f444b849ebd36ee042e9e8dc6bd724386d4f52c9d4d62da",
+          "docs/development/Alien_Base_Import_Status.csv": "b1c88d77814da689f8ad8c9fc1464dc155b6b7490c063fe0f034fa2db9e543a3",
+          "docs/development/CLOTURE_EXCEL_20261101.xlsx": "2a607d9fe749056cb2099cc6776a5ccb227068186eb422b7ab6253b05a6609bd",
+          "docs/development/EXCEL_CLOSURE_20261101.json": "4f5aaf3a4b7e927d34fd75acc3e096314280323a27d72d368572cf63b9dca1c8",
+          "docs/development/EXCEL_CLOSURE_20261101.md": "284fae29f99bbf3fb23633510bfd0fb68fdb9350335db144e89b3ac6830e9f47",
+          "docs/development/data/ALIEN_BASE_PR7_PROVENANCE_V1.json": "84d6d4ecf56c5b8797bb589bde1ff066ea768f757bf1832938c16ff8fb99e5ef",
+          "docs/development/data/ALIEN_BASE_PR7_REGISTRY_V1.json": "ce669770c760960a7d3b07be4c4e9531e2656d3967ae435c62fe0f692952c977",
+          "docs/forge/xeno-trials/ALIENS_TANTALUS_XENO_TRIALS_PLAN_V146.xlsx": "86d0d00d7c55b4f22e8cfd5799f276a0c4ebf132b41fbabf211e9f28022023f7",
+          "docs/forge/xeno-trials/V179-REFERENCE-AND-WORKSHOP-CONTINUATION.md": "35b6b731c1e393378e25cd9b6e2f8afe6826331ed583263cd4b656a719d38aa5",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V147.xlsx": "d271c15a8646bdd402aa25eafb81490c2d7bf8cde61f034590e7177de92254d4",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V148.xlsx": "d748992fb2d061ee629942019e1da90e2792f620e1e7745ccfc08d0a24c72e11",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V149.xlsx": "a9be6889af6bde53963f75b6a03ae001fdd74a3ea8d43f89fcf095e6f6f3f370",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V150.xlsx": "58db1260271b4728ecc9bc575bf28bc349f179ebe6095d9364af1a7a8fcebf93",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V151.xlsx": "b4b4f0c7725687a4a7adb7241a49a170860e231f037f6a15a2019983ac8fdb46",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V152.xlsx": "1b7c4a558e164006306da94559e9a7c0cf6c6687fb84abd88df7fea1edf1587e",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V153.xlsx": "efa0e415ba18abb79ea5ae45b910750cda05d4c165128df6813dd7c20f872ba2",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V154.xlsx": "c85b82147f7d4c9110ca28b1d096a379e7f5c9ad3130aa965d2852a9fee22ff6",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V155.xlsx": "fbd67f00a8bd13a3b6c7c64241a230dbd8a1e732e841379e55270d1743dd5d3a",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V156.xlsx": "aadcf1f4b018150af8a4d183806f41a2c3ddc23847bbe6a19db5020a046b2e5d",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V157.xlsx": "5606550b16ca256531220a1975897ce6eda32b1416a9ae02f7efc97d3acc71ec",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V158.xlsx": "36cc4f42bb0c60707959258950fd550d8bea4221cf901423d0cc848945ebb822",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V159.xlsx": "34108149c61193417f2a1786c37082abe31447d44b33d7234731e62bac085674",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V160.xlsx": "50d6ef55026f6686b5fb360136c68614942d8c6e6f4d4d82f90bea1b581b4a72",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V161.xlsx": "a16933dd541e60e5b69307d300962d3fe9e1994cf31c5669926ef94efc226fd0",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V162.xlsx": "994632af8d436fc1996eeec8b1f9fab20857391286bf81ba1b1f07a718e7ea72",
+          "docs/forge/xeno-trials/XENO_TRIALS_SUIVI_V163.xlsx": "55fac512962c1b1da719fdaf871e3a6b7cedd52ec1a3601a1709453d20c49f22",
+          "docs/forge/xeno-trials/batch100-v177.json": "2b1d3bb47423e738b1cf8f4e4844a5d717cdb70c695878bdce18beb6ffa3b734",
+          "docs/forge/xeno-trials/tantalus-door-bay-v179.json": "09d6e2ace1e8748435d49a808aac1754723e0cfb7ab52940779848113d8af27e"
+        },
+        "releaseConfigurationSources": {
+          ".github/workflows/alien-base-bridge.yml": "fdf116ad4bcbb75993449f7bd8474d983562bb6b74a2930dc91525a76b122a06",
+          "package.json": "ff849b03809ae5f0e8bb0949cc76291330425f881d6cd113cca536a20c79cd61"
+        },
+        "protectedGameplaySources": {
+          "src/cloud-sync-v119.js": "a3e41edade62db72897cfcd579c2efb4bd2928dc7136608542e95474ae722a68",
+          "src/content-core-v50.js": "fc71b52d7dbe8b5ca69beb38cdbc19690fe67534372358b0998004e829cb3555",
+          "src/save.js": "afd5b289887c3a6be5d704ad9b501d9cd7bfeae4514fdfb4eaf21095e6d42304"
+        },
+        "auditLibraries": {
+          "scripts/audit-succession-v159.mjs": "e8c4337c7e9f26669425e2b53427bfcb784bfed7d8351f4497c39cad1c8d0763",
+          "scripts/audit-succession-v160.mjs": "ea5c393ea7f5e34effdf908f4e6ed0c77432bf340e921c105dd86d4599c7c40c",
+          "scripts/audit-succession-v161.mjs": "e822634d840af8c575364bcbab6bf6d0fe7dd95b7c45f8645369400cae311835",
+          "scripts/audit-succession-v162.mjs": "fef7a42ad1e0548ea08cbf8b5417279abb46f23187f0e2ce0d27875b34f36481",
+          "scripts/audit-succession-v163.mjs": "48d70464bcc15b0e3827cb792fffd2f1d048ddfcab701901212d53d3411693b9",
+          "scripts/generate-audit-continuation-v159.py": "40ba20f619e8be6cdfbfbbbe62d79877805fd9fec470e200f3fef810e2a6cc83",
+          "scripts/generate-audit-continuation-v163.py": "9491974e84492e952fefb0aae00304d9bb37687417c427a2fe5cf635ebd7b987"
+        }
+      },
+      "prepublicationSnapshotSha256": "8102800e942f80f950364674fa2ebad0ef29c7af43d172f54947c2499d8a585b",
+      "table27SnapshotSha256": "ac8a9645ab4de1c773cb2315a54926a6bcf8c155fc4d8eeadd8e6fc397fdd250",
+      "validationArchive": {
+        "filename": "tantalus-validation-v179-ed60b5c.zip",
+        "sha256": "7e61fac66f9cd2f84f158623568252f75a27f6a262be37a6ed3f9fcac22bbc62",
+        "bytes": 100466447
+      },
+      "receipts": [
+        {
+          "id": "node-ed60",
+          "kind": "node-log",
+          "role": "candidate",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "full-node-ed60b5c00789.log",
+          "sha256": "154f6c7960402912a82bad22f09928af14381cefc063b10539689c3155fb334a",
+          "bytes": 453438,
+          "scopeIds": [
+            "C179-REFERENCES",
+            "C179-WORKSHOP",
+            "C179-TRIALS-OBSERVATION"
+          ],
+          "coverage": "Suite Node contemporaine complète sur ed60, source propre aux deux extrémités, skip facultatif séparé.",
+          "limitations": [
+            "Les tests Node ne constituent pas une recette native ou une certification artistique."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": {
+            "tests": 4008,
+            "pass": 4007,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "uniqueFiles": 214
+          },
+          "driver": null,
+          "countingRole": "primary",
+          "invocation": {
+            "entry": "full-node-invocation-ed60b5c00789.json",
+            "sha256": "3c47d122e38baf39a48a0f649d3c97798b0bd0441cc3ab94fb896beed968a4cf",
+            "command": [
+              "node",
+              "scripts/test-release-v143.mjs"
+            ],
+            "exitCode": 0,
+            "format": "ACTUAL_COMMIT_AND_STATUS_RUNNER",
+            "sourceStart": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+            "sourceEnd": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+            "statusBefore": "",
+            "statusAfter": ""
+          },
+          "result": "SCOPED_PASS"
+        },
+        {
+          "id": "build-ed60",
+          "kind": "build-info-json",
+          "role": "candidate",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "build/build-info-ed60b5c.json",
+          "sha256": "8db34537d2eb2a8d89258004bed012e7bbf068ce4fae306beab1f6dd4740e341",
+          "bytes": 383416,
+          "scopeIds": [
+            "C179-REFERENCES",
+            "C179-WORKSHOP",
+            "C179-TRIALS-OBSERVATION"
+          ],
+          "coverage": "Manifeste réel du build ed60 ; journal build/check:built conservé séparément avec1984fichiers et622shell.",
+          "limitations": [
+            "Un build ne prouve pas le rendu ni les parcours de toutes les scènes."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": null,
+          "driver": null,
+          "countingRole": "primary",
+          "buildId": "143.0.0+ed60b5c00789",
+          "distributionManifestSha256": "ee40200eea2d847305bd1ccb714151e708c2668b8779db72e3e701694d7750f4",
+          "result": "SCOPED_PASS"
+        },
+        {
+          "id": "workshop-before",
+          "kind": "native-json",
+          "role": "baseline-comparison",
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "entry": "workshop-before37af-01/report.json",
+          "sha256": "f34db98155d6d11cbbc51c66dbb509579ee8a89ab3886d93db25c8ef533bab97",
+          "bytes": 231664,
+          "scopeIds": [
+            "C179-WORKSHOP"
+          ],
+          "coverage": "Comparaison sur ancienne source37af et même fixture atelier ; résultat exclu des compteurs candidats.",
+          "limitations": [
+            "Fixtures et portée précise conservées depuis le rapport ; zéro humain et aucune certification1:1."
+          ],
+          "checks": 11,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "workshop-before37af-01/workshop-view-1-prewalk-native.png",
+              "sha256": "b93bbe2a697e69c57892bab9918a6bc84601d4c5de62f981c8b3b9a99f230609",
+              "bytes": 841710,
+              "kind": "native-canvas",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-before37af-01/workshop-view-1-native.png",
+              "sha256": "503d76be00e64f676a9b3fd9f4c2c94e73fa7b8e562aea9b663a7f62068732b0",
+              "bytes": 844010,
+              "kind": "native-canvas",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-tantalus-enrichment-v177.py",
+            "sha256": "2775d2027c9277e3df39aa38871276dc3ca9b0764d90f1488caca11b942df04a",
+            "bytes": 30491,
+            "committedSourcePath": "scripts/qa-tantalus-enrichment-v177.py",
+            "committedSourceCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435"
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "native-canvas": 2
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "passed",
+          "reportedMethod": "Declared Save fixtures, native hub entry and selected short A/D controls. Actual canvas pixels are compared with an independent detached component reference.",
+          "reportedLimitations": [
+            "Automated Chromium observation, no human participants or canonical1:1 approval.",
+            "Room and camera starting positions are declared fixtures, not observed travel to those positions.",
+            "First views add an actual frame before the same short native walk; transient actor occlusion never credits visibility. Every installation still needs16 matching material pixels in another captured frame.",
+            "The last CCTV view keeps its console-obscured frame and adds a fixed native KeyA150ms exit from the nearby console in both stages; UI, actor and camera state are never assigned.",
+            "Separate views of a long room are separate Save imports, not a walkthrough or interdeck transport.",
+            "The detached reference never replaces a native image and never mutates an engine, actor or camera.",
+            "Pixel matching establishes visible material signatures within each installation, not whole-room artistic approval.",
+            "The refuge is entered through its real parent door because its Save contract resumes outside."
+          ],
+          "reportedHarnessCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "coverageFacts": {
+            "requestedIds": 6,
+            "requestedRooms": 1,
+            "subset": true,
+            "uniqueVisibleRequiredIds": null,
+            "visibleRequiredByPrefix": null,
+            "unseenRequiredIds": null
+          },
+          "reportedErrors": {},
+          "result": "SCOPED_PASS",
+          "artifactAccounting": {
+            "nativeBrowserArtifacts": 2,
+            "detachedFixtureArtifacts": 0,
+            "unclassifiedArtifacts": 0
+          }
+        },
+        {
+          "id": "workshop-after",
+          "kind": "native-json",
+          "role": "candidate",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "workshop-after179-01/report.json",
+          "sha256": "ead01a6217fa98834d12943f3eec55212f2200389a81f392d08d98899b0b2de8",
+          "bytes": 243505,
+          "scopeIds": [
+            "C179-WORKSHOP"
+          ],
+          "coverage": "Atelier ed60 avec six installations demandées et observées dans deux captures natives.",
+          "limitations": [
+            "Fixtures et portée précise conservées depuis le rapport ; zéro humain et aucune certification1:1."
+          ],
+          "checks": 16,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "workshop-after179-01/workshop-view-1-prewalk-native.png",
+              "sha256": "7e55457245c911a6787c9e9c7cbc61b1beff685863cec5517b613868e1d721ae",
+              "bytes": 854569,
+              "kind": "native-canvas",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-after179-01/workshop-view-1-native.png",
+              "sha256": "700dc53b4b0637d00873f0195a4ed2d9d34c258d738c5d828f0beaff1b404d39",
+              "bytes": 856600,
+              "kind": "native-canvas",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-tantalus-enrichment-v177.py",
+            "sha256": "2775d2027c9277e3df39aa38871276dc3ca9b0764d90f1488caca11b942df04a",
+            "bytes": 30491,
+            "committedSourcePath": "scripts/qa-tantalus-enrichment-v177.py",
+            "committedSourceCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435"
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "native-canvas": 2
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "passed",
+          "reportedMethod": "Declared Save fixtures, native hub entry and selected short A/D controls. Actual canvas pixels are compared with an independent detached component reference.",
+          "reportedLimitations": [
+            "Automated Chromium observation, no human participants or canonical1:1 approval.",
+            "Room and camera starting positions are declared fixtures, not observed travel to those positions.",
+            "First views add an actual frame before the same short native walk; transient actor occlusion never credits visibility. Every installation still needs16 matching material pixels in another captured frame.",
+            "The last CCTV view keeps its console-obscured frame and adds a fixed native KeyA150ms exit from the nearby console in both stages; UI, actor and camera state are never assigned.",
+            "Separate views of a long room are separate Save imports, not a walkthrough or interdeck transport.",
+            "The detached reference never replaces a native image and never mutates an engine, actor or camera.",
+            "Pixel matching establishes visible material signatures within each installation, not whole-room artistic approval.",
+            "The refuge is entered through its real parent door because its Save contract resumes outside."
+          ],
+          "reportedHarnessCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "coverageFacts": {
+            "requestedIds": 6,
+            "requestedRooms": 1,
+            "subset": true,
+            "uniqueVisibleRequiredIds": 6,
+            "visibleRequiredByPrefix": {
+              "T168-": 3,
+              "T177-": 3
+            },
+            "unseenRequiredIds": []
+          },
+          "reportedErrors": {},
+          "result": "SCOPED_PASS",
+          "artifactAccounting": {
+            "nativeBrowserArtifacts": 2,
+            "detachedFixtureArtifacts": 0,
+            "unclassifiedArtifacts": 0
+          }
+        },
+        {
+          "id": "workshop-journey",
+          "kind": "native-json",
+          "role": "candidate",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "workshop-old-save-journey179-01/report.json",
+          "sha256": "4028f9a6231e323448e5c1adcca9dbcc790717d8956cae438fd62c3d36606612",
+          "bytes": 456802,
+          "scopeIds": [
+            "C179-WORKSHOP"
+          ],
+          "coverage": "Deux anciennes poses Save déclarées, reprise observée et deux niveaux avec passageE aller-retour aux commandes natives.",
+          "limitations": [
+            "Fixtures et portée précise conservées depuis le rapport ; zéro humain et aucune certification1:1."
+          ],
+          "checks": 29,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "workshop-old-save-journey179-01/old-low-deck-settled.png",
+              "sha256": "66fef9e40c15e8397cfcdb6f51c90ddbe85a712195e38522c8fc8e63eae281d9",
+              "bytes": 920062,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/workshop-lower-service.png",
+              "sha256": "791abad766ff3ef49c13a90f56235c46ba561f9e0ce35170132024ae60ada044",
+              "bytes": 866544,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/workshop-native-vent-approach.png",
+              "sha256": "7db5956cc5eea1cdb6a81da13620af65ba1bd7f0f6b3c4d2a238346c6a182654",
+              "bytes": 849515,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/durandal-parent-before-entry.png",
+              "sha256": "b338d6116b0d257515d80b73b33ae3a21dbadfb3d311de6a84d42a00a992ef8c",
+              "bytes": 910417,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/durandal-native-arrival.png",
+              "sha256": "b1ae4d583d6b37a9aabe0ea3fd40da70b26def8b4a48fedd018ebbbfa8ee50f5",
+              "bytes": 939765,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/durandal-native-return.png",
+              "sha256": "e0e23770a4067fe0e53ad1ee0f512b1f35e147e5e9534acb482e259a009fcf5c",
+              "bytes": 909477,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/old-floor-ladder-settled.png",
+              "sha256": "bc20effbd3968f3e4ee83ec5c4af075eab67b1e25a33ca09c8c36f4176d5c7cf",
+              "bytes": 915690,
+              "kind": null,
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-workshop-door-bay-v179.py",
+            "sha256": "047ae9bcf9464dc33e7cdcb727c83e2b97b5fb56b9913511d242d29932221eef",
+            "bytes": 18486,
+            "committedSourcePath": null
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "UNSPECIFIED_REPORT_KIND": 7
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "passed",
+          "reportedMethod": "Public Save picker, actual A/D/W/S/E controls, snapshot reads and native canvas screenshots.",
+          "reportedLimitations": [
+            "Two initial positions are synthetic declared old-format Save fixtures, not journeys to those positions.",
+            "The climbing flag is a declared stale Save field; no live actor climbing field is written.",
+            "A test-owned read-only RAF observer records fall/body identity before UI import; it never advances the game.",
+            "The vent check reaches the real standing C crawl-approach, without entering the separate duct level.",
+            "Screenshots require a model or human review; no whole-room raster or franchise1:1 approval is inferred."
+          ],
+          "reportedHarnessCommit": null,
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "reportedErrors": {},
+          "result": "SCOPED_PASS",
+          "artifactAccounting": {
+            "nativeBrowserArtifacts": 7,
+            "detachedFixtureArtifacts": 0,
+            "unclassifiedArtifacts": 0
+          }
+        },
+        {
+          "id": "reference-ui",
+          "kind": "native-json",
+          "role": "candidate",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "reference-ui179-01/report.json",
+          "sha256": "4422a761ae335edb6d365de72b28ef5223bed0f7560c4d6471f8ba67b35889ec",
+          "bytes": 470094,
+          "scopeIds": [
+            "C179-REFERENCES"
+          ],
+          "coverage": "Trois menus consultés via UI native ; références sans labels internes et Save entier préservé horsupdatedAt.",
+          "limitations": [
+            "Fixtures et portée précise conservées depuis le rapport ; zéro humain et aucune certification1:1."
+          ],
+          "checks": 27,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "reference-ui179-01/armory-shared-reference-native.png",
+              "sha256": "12cdf61b8cd08f42fb5ef40a9cf4d5b0b089b4ef53f372469a28ee062a852884",
+              "bytes": 13262,
+              "kind": "native-browser-DOM-section",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "reference-ui179-01/enemies-shared-reference-native.png",
+              "sha256": "40cc2be8fc02d48997a1ed65e3fb2867867784f888b6ef0a099b09521495f326",
+              "bytes": 6969,
+              "kind": "native-browser-DOM-section",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "reference-ui179-01/vehicles-shared-reference-native.png",
+              "sha256": "01d8b3a9d24fce5e33346e0168d6121c27cb511b1e0135f275cd96d3029a35a1",
+              "bytes": 18138,
+              "kind": "native-browser-DOM-section",
+              "scope": null,
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-alien-base-codex-v179.py",
+            "sha256": "2499d1369c0a7c00ff2f26d9c34194cc4b1637268d9df223950a0a0f0b201aaf",
+            "bytes": 13588,
+            "committedSourcePath": null
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "native-browser-DOM-section": 3
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "passed",
+          "reportedMethod": "Native title/options Save picker, command and three navigation buttons, exact-ID searches and entry clicks. Browser evaluations read only Save, reference DOM and documentary APIs.",
+          "reportedLimitations": [
+            "One declared default Save fixture; no mission, journey or prior discovery is claimed.",
+            "Only the new player References sections are checked for internal labels; legacy catalogue sections have their own existing presentation.",
+            "Reference URLs are inspected as DOM links without following external sites or certifying their contents.",
+            "Snapshot pending proposals remain separate from active identity aliases and gameplay admission.",
+            "Entire Save content is compared except updatedAt persistence metadata. No balance or scene exclusion is used.",
+            "Three native DOM section screenshots maximum; automated Chromium observation, no human or artistic1:1 approval."
+          ],
+          "reportedHarnessCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "reportedErrors": {},
+          "result": "SCOPED_PASS",
+          "artifactAccounting": {
+            "nativeBrowserArtifacts": 3,
+            "detachedFixtureArtifacts": 0,
+            "unclassifiedArtifacts": 0
+          }
+        },
+        {
+          "id": "trials-final",
+          "kind": "native-json",
+          "role": "candidate",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "trials-final179-01/report.json",
+          "sha256": "967129cacd48b805c19c0d24cb0149c230c3a64c6fdd237ce1ce09ca65142d9b",
+          "bytes": 1762546,
+          "scopeIds": [
+            "C179-TRIALS-OBSERVATION"
+          ],
+          "coverage": "Six duels natifs ed60 avec pauseDOM explicitement déclarée ;36images natives et6fixtures séparées.",
+          "limitations": [
+            "Fixtures et portée précise conservées depuis le rapport ; zéro humain et aucune certification1:1."
+          ],
+          "checks": 65,
+          "componentComparisons": null,
+          "captures": [
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-start.png",
+              "sha256": "1791ef7fbef7a870843aebaa4611d4f607890b97a1242afcca71588b674611f1",
+              "bytes": 653895,
+              "kind": null,
+              "scope": "Native production menu match before combat; real asset bytes and world dimensions.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-preparation.png",
+              "sha256": "d7dcbd4a95cb86d6ebda9365993b8c9f312e026e9e64ecd07846413466e86d06",
+              "bytes": 664184,
+              "kind": null,
+              "scope": "Observed native CPU startup in this duel; it may precede the special that wins the recorded hold. No attack/capture field injected.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-floor-hold.png",
+              "sha256": "d35de6bcbbacf3f0310aeb55e332ce376867397bd0d6a611daadf40ed2dc3e2d",
+              "bytes": 652407,
+              "kind": null,
+              "scope": "Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-comparison-fixture.png",
+              "sha256": "89cefe591523e57cd8b595d22eaa84f69a8eb88754956076b5dda61d1645b59c",
+              "bytes": 559867,
+              "kind": null,
+              "scope": "Declared clone-only old V158 versus new native art; observed and mirrored direction, same world scale2x. Not a second gameplay event.",
+              "derivedArtifactKind": "detachedFixtureArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-nine-poses-fixture.png",
+              "sha256": "9b59689785c4484515b5fc936fe1bd04946b02ae413c86afec6a8516a35251c4",
+              "bytes": 915209,
+              "kind": null,
+              "scope": "Declared 9-pose art inspection at2x native stature; no live state writes.",
+              "derivedArtifactKind": "detachedFixtureArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-resistance.png",
+              "sha256": "c17242644245134701b916c1b2c72d20b33f658d88511fb3118c3f651e972eff",
+              "bytes": 649636,
+              "kind": null,
+              "scope": "Real guard resistance from keyboard or CPU, never assigned escape progress.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-release.png",
+              "sha256": "370432d250d0362f90e5a0a916b71c7fc15a12b150367211199a8c01dae26521",
+              "bytes": 649761,
+              "kind": null,
+              "scope": "Actual native escape and presentation recovery; engine stun/cost/result unchanged.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "bab5bd891ce78ea6c6d0d5df12dc6aefdb1ca5fff6fbc7f0d3fac05b76b6c413",
+              "bytes": 675885,
+              "kind": null,
+              "scope": "Native continuation after recovery; new combat actions may interrupt presentation.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-player-captor-start.png",
+              "sha256": "441fe72da8a2255af6a8a4806a7113d28636e609ed40e8fd3377cedfdc9910ba",
+              "bytes": 652329,
+              "kind": null,
+              "scope": "Native production menu match before combat; real asset bytes and world dimensions.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-player-captor-preparation.png",
+              "sha256": "0bcc67d0781088da82c2161606107f20c1792733eb42add0144c5f11f7d604b0",
+              "bytes": 662131,
+              "kind": null,
+              "scope": "Native startup of the exact accepted keyboard special owning the recorded hold; no attack/capture field injected.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-player-captor-floor-hold.png",
+              "sha256": "0af52d474bdd15a07e6a7c8ba5984dd1ccbc97c85b82be2bcd2916d31e83c4d3",
+              "bytes": 653942,
+              "kind": null,
+              "scope": "Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-player-captor-resistance.png",
+              "sha256": "99ce7ff299f341e1d10def348c2594546286474c93b222189660c7473da1a2f3",
+              "bytes": 653759,
+              "kind": null,
+              "scope": "Real guard resistance from keyboard or CPU, never assigned escape progress.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-player-captor-release.png",
+              "sha256": "257f4ee5379c32bb8f1a31b0f92174c83c7e232ec7af6a2206f5deae20df27f3",
+              "bytes": 649629,
+              "kind": null,
+              "scope": "Actual native escape and presentation recovery; engine stun/cost/result unchanged.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-wy-commando-player-captor-recovered-or-interrupted.png",
+              "sha256": "7a28afd1c6eca16241c65b3c6c9e4e6320aad3c7e1e49e19481e0f36017bc1a7",
+              "bytes": 675037,
+              "kind": null,
+              "scope": "Native continuation after recovery; new combat actions may interrupt presentation.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-start.png",
+              "sha256": "8e09d4114bd7015aa26fcd5793062096b27c1144b1b79fbe71ea08d0dcb78a83",
+              "bytes": 653267,
+              "kind": null,
+              "scope": "Native production menu match before combat; real asset bytes and world dimensions.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-preparation.png",
+              "sha256": "f038fa95e8c5503e373fcd95a4c8940386636070bea9c1b1ca4c5f5d2ef5a5e9",
+              "bytes": 663522,
+              "kind": null,
+              "scope": "Observed native CPU startup in this duel; it may precede the special that wins the recorded hold. No attack/capture field injected.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-floor-hold.png",
+              "sha256": "c4d95e49493cfbaef86d8187c3e8aed4e86537550848e3701f197974219862dd",
+              "bytes": 652031,
+              "kind": null,
+              "scope": "Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-comparison-fixture.png",
+              "sha256": "d14167d3d6c3fb87742937200717ad17562fc319032b17729200d3318c508aca",
+              "bytes": 585386,
+              "kind": null,
+              "scope": "Declared clone-only old V158 versus new native art; observed and mirrored direction, same world scale2x. Not a second gameplay event.",
+              "derivedArtifactKind": "detachedFixtureArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-nine-poses-fixture.png",
+              "sha256": "a9922131c838c96ffdcb26cb3cc9fcb6a7e16d18bdd01175bf5948f3f8dc8558",
+              "bytes": 989823,
+              "kind": null,
+              "scope": "Declared 9-pose art inspection at2x native stature; no live state writes.",
+              "derivedArtifactKind": "detachedFixtureArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-resistance.png",
+              "sha256": "78b4a81bbb0981d79989e81a85a0b17d5a58249024b0070caccc1941b2f77119",
+              "bytes": 649193,
+              "kind": null,
+              "scope": "Real guard resistance from keyboard or CPU, never assigned escape progress.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-release.png",
+              "sha256": "9e7189e013730f3a14457453f70f2dc00ff050c7ed1b52733152806545da5113",
+              "bytes": 647826,
+              "kind": null,
+              "scope": "Actual native escape and presentation recovery; engine stun/cost/result unchanged.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "22a3abd21dad84cf02d89a31706b48b8952a4e9d0957f68c19b00152fe575a98",
+              "bytes": 670888,
+              "kind": null,
+              "scope": "Native continuation after recovery; new combat actions may interrupt presentation.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-player-captor-start.png",
+              "sha256": "0b2acd2eed81d393eb1347fd1ef0ecf3b4b711824bd537a784e1a7bb822d4b92",
+              "bytes": 653477,
+              "kind": null,
+              "scope": "Native production menu match before combat; real asset bytes and world dimensions.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-player-captor-preparation.png",
+              "sha256": "6cc448781a1e5e0845e40d0175764e083699d9a05556283aa7f752a3addceb30",
+              "bytes": 659681,
+              "kind": null,
+              "scope": "Native startup of the exact accepted keyboard special owning the recorded hold; no attack/capture field injected.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-player-captor-floor-hold.png",
+              "sha256": "b3f915d0d0fba50593a1d271e6b3fd48a1d55e9e8b8a5ac754e94c48fe28dfb7",
+              "bytes": 654224,
+              "kind": null,
+              "scope": "Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-player-captor-resistance.png",
+              "sha256": "6f11350de3e710a62e4274314e8c3a0834d6899567233b84794f49f12d4220f7",
+              "bytes": 654169,
+              "kind": null,
+              "scope": "Real guard resistance from keyboard or CPU, never assigned escape progress.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-player-captor-release.png",
+              "sha256": "510e51d61bb172df1721cde240e9aa1c477e5c31e951cc729c33cac6b14b6934",
+              "bytes": 650623,
+              "kind": null,
+              "scope": "Actual native escape and presentation recovery; engine stun/cost/result unchanged.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-guardian-player-captor-recovered-or-interrupted.png",
+              "sha256": "6e1021ea5efeec7aa8e661e1d8575974b3454293e97a4db6bcd2a0e86c58e5b5",
+              "bytes": 673617,
+              "kind": null,
+              "scope": "Native continuation after recovery; new combat actions may interrupt presentation.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-start.png",
+              "sha256": "234d602b69923dc370eaea0c4b8d7d9fe823372c50823e40943c6d626197b1ca",
+              "bytes": 647376,
+              "kind": null,
+              "scope": "Native production menu match before combat; real asset bytes and world dimensions.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-preparation.png",
+              "sha256": "9a0191f1ad5b9f988f5168c7636a3668a3ea2382af0bc90267feb8b88b0f9932",
+              "bytes": 661825,
+              "kind": null,
+              "scope": "Observed native CPU startup in this duel; it may precede the special that wins the recorded hold. No attack/capture field injected.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-floor-hold.png",
+              "sha256": "e3bd817ea0a8dd2bc5661a62c0cf4512b13bc1070cd359acd39d93fe3cb4e366",
+              "bytes": 652522,
+              "kind": null,
+              "scope": "Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-comparison-fixture.png",
+              "sha256": "459668d18980646d233dc2f889afb852e2972fdb7b1227a5cbb803d5866e423f",
+              "bytes": 557987,
+              "kind": null,
+              "scope": "Declared clone-only old V158 versus new native art; observed and mirrored direction, same world scale2x. Not a second gameplay event.",
+              "derivedArtifactKind": "detachedFixtureArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-nine-poses-fixture.png",
+              "sha256": "046e81986f059b29b1cd42cdeecef4e7df695cec493feb7bda5ea883dc6dd346",
+              "bytes": 881396,
+              "kind": null,
+              "scope": "Declared 9-pose art inspection at2x native stature; no live state writes.",
+              "derivedArtifactKind": "detachedFixtureArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-resistance.png",
+              "sha256": "e57006b9da861f0e1b85ebd08505e823b23f278f82e8a552085e62be5df353a0",
+              "bytes": 648716,
+              "kind": null,
+              "scope": "Real guard resistance from keyboard or CPU, never assigned escape progress.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-release.png",
+              "sha256": "b6b6565317e1a37f8937391bfec63f73e05f28e8e11072c207ca6fe319482403",
+              "bytes": 647334,
+              "kind": null,
+              "scope": "Actual native escape and presentation recovery; engine stun/cost/result unchanged.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "e167b4acdc7c3db96da51ecc119e57879ab907d30198b20abd754296a31a18ad",
+              "bytes": 675818,
+              "kind": null,
+              "scope": "Native continuation after recovery; new combat actions may interrupt presentation.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-player-captor-start.png",
+              "sha256": "530813725631d7f813c02a32d3285139e354af1bd28b888252b59fe015a611c3",
+              "bytes": 647780,
+              "kind": null,
+              "scope": "Native production menu match before combat; real asset bytes and world dimensions.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-player-captor-preparation.png",
+              "sha256": "707df2a631a40ebd58944d94704f2b19a5394e8162429fb588adf45e1c418a41",
+              "bytes": 666152,
+              "kind": null,
+              "scope": "Native startup of the exact accepted keyboard special owning the recorded hold; no attack/capture field injected.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-player-captor-floor-hold.png",
+              "sha256": "73bcf9c041570b310961c53ab486c4459ec8dbff69c6b8d60f1116d478ec869c",
+              "bytes": 652487,
+              "kind": null,
+              "scope": "Actual engine-owned hold, native geometry and real paired pose receipt; no render fixture.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-player-captor-resistance.png",
+              "sha256": "2d2034dabc7e574888fb472894ae9bdb1ac3ca587a5885608938299cab5ff0b1",
+              "bytes": 648823,
+              "kind": null,
+              "scope": "Real guard resistance from keyboard or CPU, never assigned escape progress.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-player-captor-release.png",
+              "sha256": "a503c9105e8d9112444da295473bbf5108c3ee647d8fc16cb991d52f18d41af0",
+              "bytes": 646975,
+              "kind": null,
+              "scope": "Actual native escape and presentation recovery; engine stun/cost/result unchanged.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            },
+            {
+              "entry": "trials-final179-01/qa-trials-capture-v163-cultist-player-captor-recovered-or-interrupted.png",
+              "sha256": "4333ec1c75be6ece5cc7a3902913de81d76bece9cc78895cb4f6934459552226",
+              "bytes": 663173,
+              "kind": null,
+              "scope": "Native continuation after recovery; new combat actions may interrupt presentation.",
+              "derivedArtifactKind": "nativeBrowserArtifacts",
+              "classificationBasis": "ORIGINAL_REPORT_KIND_OR_DECLARED_SCOPE_AND_FILENAME"
+            }
+          ],
+          "node": null,
+          "driver": {
+            "entry": "drivers/qa-xeno-trials-capture-v163.py",
+            "sha256": "75fc1ea09b69ef14644769495439288cb247bd5452f9d6bbc080d05573e51fdc",
+            "bytes": 51921,
+            "committedSourcePath": "scripts/qa-xeno-trials-capture-v163.py",
+            "committedSourceCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435"
+          },
+          "countingRole": "primary",
+          "captureKinds": {
+            "UNSPECIFIED_REPORT_KIND": 42
+          },
+          "declaredRenderingFixtures": 0,
+          "reportedStatus": "passed",
+          "reportedMethod": null,
+          "reportedLimitations": [
+            "Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.",
+            "Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.",
+            "Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.",
+            "Recovery is presentation only and yields immediately to a new target action.",
+            "Automated keyboard/menu scenarios; not human playtesting.",
+            "The first observed floor frame activates the real public pause button with DOM click in the same RAF callback; this is an explicit UI action, not a read-only observation or a trusted physical click. No direct runtime pause API is called; no scheduler or match field is assigned.",
+            "CPU-captor preparation records an observed native CPU startup in the same duel; it is not necessarily the special that produced the recorded hold. Player-captor startup remains bound to the exact accepted special event and hold."
+          ],
+          "reportedHarnessCommit": null,
+          "reportedSourcePins": null,
+          "reportedSourceImagePins": null,
+          "reportedErrors": {},
+          "result": "SCOPED_PASS",
+          "artifactAccounting": {
+            "nativeBrowserArtifacts": 36,
+            "detachedFixtureArtifacts": 6,
+            "unclassifiedArtifacts": 0
+          }
+        },
+        {
+          "id": "workshop-visual-review",
+          "kind": "supporting-json",
+          "role": "context-only",
+          "testedCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "entry": "review/WORKSHOP-VISUAL-REVIEW-C-V179.json",
+          "sha256": "57481cde6b3fa00d0fa54764829bd5468fbab5a463224c54f7444f7cb026f64b",
+          "bytes": 6889,
+          "scopeIds": [
+            "C179-WORKSHOP"
+          ],
+          "coverage": "Revue statique de trois PNG originaux par deux modèles dont un non-auteur ; dégagement Durandal confirmé dans cette portée.",
+          "limitations": [
+            "Zéro humain ; aucun test de mouvement déduit des images, aucune validation des35pièces ou de fidélité1:1."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": null,
+          "driver": null,
+          "countingRole": "primary",
+          "observedSourceIdentities": [],
+          "contextGitCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435",
+          "sourceAttribution": "EXPLICIT_CANDIDATE_SOURCE_IN_MODEL_REVIEW",
+          "reviewedImages": [
+            {
+              "entry": "workshop-before37af-01/workshop-view-1-native.png",
+              "sha256": "503d76be00e64f676a9b3fd9f4c2c94e73fa7b8e562aea9b663a7f62068732b0",
+              "bytes": 844010,
+              "nativeSourceCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231"
+            },
+            {
+              "entry": "workshop-after179-01/workshop-view-1-native.png",
+              "sha256": "700dc53b4b0637d00873f0195a4ed2d9d34c258d738c5d828f0beaff1b404d39",
+              "bytes": 856600,
+              "nativeSourceCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435"
+            },
+            {
+              "entry": "workshop-old-save-journey179-01/workshop-lower-service.png",
+              "sha256": "791abad766ff3ef49c13a90f56235c46ba561f9e0ce35170132024ae60ada044",
+              "bytes": 866544,
+              "nativeSourceCommit": "ed60b5c00789fa9879ce07eb3cfcf28fe9316435"
+            }
+          ],
+          "result": "CONTEXT_NOT_A_QA_PASS"
+        },
+        {
+          "id": "stress700-atomic-37af",
+          "kind": "supporting-json",
+          "role": "context-only",
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/report.json",
+          "sha256": "ef442e6da646bbc52423191c4d4be552908a686bea02f37196e5eff22acd6f78",
+          "bytes": 1706456,
+          "scopeIds": [
+            "C179-TRIALS-OBSERVATION"
+          ],
+          "coverage": "Ancien runtime37af : benchmarkatomicavec700ms de latence,65contrôles/42artefacts ; les deux versions réussissent, aucun défaut CI reproduit.",
+          "limitations": [
+            "Tout compteur et toute image restent historiques et exclus des totaux candidats ed60.",
+            "Les textes de préparation CPU de ces rapports doivent être lus avec le reçu méthodologique correctif joint."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": null,
+          "driver": null,
+          "countingRole": "primary",
+          "observedSourceIdentities": [
+            "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+            "37af2c3a4cead83d1519e642a38ec32d3e18c231"
+          ],
+          "contextGitCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "sourceAttribution": "IDENTITY_PRESENT_IN_REPORT",
+          "reviewedImages": [
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-start.png",
+              "sha256": "1791ef7fbef7a870843aebaa4611d4f607890b97a1242afcca71588b674611f1",
+              "bytes": 653895
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-preparation.png",
+              "sha256": "d4b9bf728842ebedd19210c3e174f8c082c576f38fc74430999a3461465b12ad",
+              "bytes": 664228
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-floor-hold.png",
+              "sha256": "28a2a2a28c50ee1541d4e04c8d22725cebe486371b0fdac8773b2a706d4b0560",
+              "bytes": 652584
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-comparison-fixture.png",
+              "sha256": "89cefe591523e57cd8b595d22eaa84f69a8eb88754956076b5dda61d1645b59c",
+              "bytes": 559867
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-nine-poses-fixture.png",
+              "sha256": "9b59689785c4484515b5fc936fe1bd04946b02ae413c86afec6a8516a35251c4",
+              "bytes": 915209
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-resistance.png",
+              "sha256": "8c6963f798ee4edc5a3a60a1a10c70772e0410d95e320a54607358ecc726064f",
+              "bytes": 649575
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-release.png",
+              "sha256": "dd12b90b4e1d205510ed68a20346847d9672b5e15131398f56b127291df6bfd2",
+              "bytes": 647724
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "436eb910f3ca0a39131a30ad027aa8e9e7bb941673e7750ba65ebc871215d22c",
+              "bytes": 675946
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-start.png",
+              "sha256": "441fe72da8a2255af6a8a4806a7113d28636e609ed40e8fd3377cedfdc9910ba",
+              "bytes": 652329
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-preparation.png",
+              "sha256": "fc05f76a26857be65b449f2f7f0ad4469e56fb8c175347db9f772029117067ec",
+              "bytes": 660534
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-floor-hold.png",
+              "sha256": "8fd98cf8228f45ce4ddf251b4e14591f7ab944de0c093119c96c19ba0c6cc5d0",
+              "bytes": 653692
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-resistance.png",
+              "sha256": "6386536638d56fa73f3170a265dfa7eeededf54d5f385d86739ec137d56f912e",
+              "bytes": 650853
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-release.png",
+              "sha256": "9eaaf04bb5e096b5928afb244d4e5149e71caa4c4f3d1b6bee27b3ed851ff98e",
+              "bytes": 649590
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-recovered-or-interrupted.png",
+              "sha256": "5672c5eae702c45e89059a4b195d9ba656d9c7fc4c4766db1e988b9b384f0339",
+              "bytes": 676913
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-start.png",
+              "sha256": "1375713121b3564a0040b64928ff680b4bfdb9a1158da470e6a7e3309a21e206",
+              "bytes": 652978
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-preparation.png",
+              "sha256": "72a97bbe168d5294118959c0f0b1903f54cedd52e42d834bda76d050bcfcda67",
+              "bytes": 665157
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-floor-hold.png",
+              "sha256": "5d55f55080ec0ef41f07b268e3ffed76ef7763d360408d52dc74795fab1b8de3",
+              "bytes": 652026
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-comparison-fixture.png",
+              "sha256": "d14167d3d6c3fb87742937200717ad17562fc319032b17729200d3318c508aca",
+              "bytes": 585386
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-nine-poses-fixture.png",
+              "sha256": "a9922131c838c96ffdcb26cb3cc9fcb6a7e16d18bdd01175bf5948f3f8dc8558",
+              "bytes": 989823
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-resistance.png",
+              "sha256": "d9f2a44bc1355d11fd588e2de456975a8f3022749058bd62104eeb00e2b2918a",
+              "bytes": 649146
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-release.png",
+              "sha256": "351eb9737685894bf556d4fb46fb28bb80b470c66b8795914d745c4d8bb7f985",
+              "bytes": 648049
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "ba848d5e4a58b49db0ec944e65e53b8a41bd32bc0a03044482c083c0b10dff0d",
+              "bytes": 671076
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-start.png",
+              "sha256": "7afca8cb8a3e849787d0b573d66e8be366d82a3dc1d2df0ae9dd4bfd6c76ff68",
+              "bytes": 653497
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-preparation.png",
+              "sha256": "6d7ce1183d910c46346dc61f896e20d58a1a6278c7d0ecbe6a8d2e8dde599eaa",
+              "bytes": 666889
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-floor-hold.png",
+              "sha256": "4ff8a4b07f89d7b741a31ac474b1f72053612d26102e01ba39647fbeed8829b8",
+              "bytes": 653607
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-resistance.png",
+              "sha256": "4d487637ba9161b9e9b7089db2e14355cbdc9260ea7672f1befa41835c1e9c92",
+              "bytes": 651220
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-release.png",
+              "sha256": "51e8fbfd207627a4a9b844a9c52daa84118c9a7d74a5b436f3864778f8b0c622",
+              "bytes": 650798
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-recovered-or-interrupted.png",
+              "sha256": "96b4a3dec395af277d53cbbebfab6c022e276c2ba2f99dd56918af61c330288c",
+              "bytes": 667009
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-start.png",
+              "sha256": "899a092a494fbed92ac2042d25e75769b41ca90b87ac4894806b84a403a8526b",
+              "bytes": 648559
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-preparation.png",
+              "sha256": "cb8b4b40b253f0557a7b1f4f5d54c63106ae646bdc9d8cac7c135c8240e3c752",
+              "bytes": 662251
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-floor-hold.png",
+              "sha256": "91e450bd2b7d609aa9f790f27fc185692a71a58da86f4157d31d35b8040cd636",
+              "bytes": 652632
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-comparison-fixture.png",
+              "sha256": "f6877fdde29cb28288c0a5ce5301219c9564a649530f2e05cddcda0b46a98c06",
+              "bytes": 557810
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-nine-poses-fixture.png",
+              "sha256": "046e81986f059b29b1cd42cdeecef4e7df695cec493feb7bda5ea883dc6dd346",
+              "bytes": 881396
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-resistance.png",
+              "sha256": "e66091983333078d9735df83759682fcf77d8487a3b122b8d86d08288588ec5b",
+              "bytes": 648806
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-release.png",
+              "sha256": "f4ef646b0279d4f6a483e99b5a04f3346c18bd817101beacfc5abbe3fe2b9a35",
+              "bytes": 647402
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "b3b8b658f3b1b539d0f792a43fbb6e58246bb537eae1329e387293cabd870ea3",
+              "bytes": 671663
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-start.png",
+              "sha256": "799a0c3f82e35f18b8a75cf72c3f65d64ad2312752dea1667dc7bc5d37fcf9d6",
+              "bytes": 647644
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-preparation.png",
+              "sha256": "1bf198a1f3232610fabdd43a294144f80b20481ffbb87c04ca0d7c611799ab68",
+              "bytes": 660212
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-floor-hold.png",
+              "sha256": "f6f4c0e14833d98c113a758370b3ec187356cf650637af940977d33c71ef3f2f",
+              "bytes": 652610
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-resistance.png",
+              "sha256": "ff3470e7b1d4ea0835f4b7d43d176e67c224b5c2e8f0805aa1064c0ccd83c96a",
+              "bytes": 652311
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-release.png",
+              "sha256": "d335b9fa0e4d7e381e9ff93bad589116932599e0ca301d27e4d7cdefcebde306",
+              "bytes": 648519
+            },
+            {
+              "entry": "supporting/trials-atomic-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-recovered-or-interrupted.png",
+              "sha256": "1530d05914ae840f8f111da5c91ca05d9e24b4ebed41cfbf1c73e9b7fce7852f",
+              "bytes": 663322
+            }
+          ],
+          "result": "CONTEXT_NOT_A_QA_PASS",
+          "contextReportedChecks": 65,
+          "contextReportedArtifacts": 42,
+          "transferredToCandidateTotals": false
+        },
+        {
+          "id": "stress700-original-37af",
+          "kind": "supporting-json",
+          "role": "context-only",
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "entry": "supporting/trials-original-harness-baseline-runtime-stress700/report.json",
+          "sha256": "c178a87ae0b0a1be75829d0ea10b835e1f4429846831a6258d40b90db38edfab",
+          "bytes": 1608438,
+          "scopeIds": [
+            "C179-TRIALS-OBSERVATION"
+          ],
+          "coverage": "Ancien runtime37af : benchmarkoriginalavec700ms de latence,65contrôles/42artefacts ; les deux versions réussissent, aucun défaut CI reproduit.",
+          "limitations": [
+            "Tout compteur et toute image restent historiques et exclus des totaux candidats ed60.",
+            "Les textes de préparation CPU de ces rapports doivent être lus avec le reçu méthodologique correctif joint."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": null,
+          "driver": null,
+          "countingRole": "primary",
+          "observedSourceIdentities": [
+            "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+            "37af2c3a4cead83d1519e642a38ec32d3e18c231"
+          ],
+          "contextGitCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "sourceAttribution": "IDENTITY_PRESENT_IN_REPORT",
+          "reviewedImages": [
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-start.png",
+              "sha256": "569a6362f4ae1ba46efc8f9781713b8e0ac77ff41534f6b2177d776dc7ea38b8",
+              "bytes": 652620
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-preparation.png",
+              "sha256": "f708fdfe826a6c265d611daba90351da77a8eee6f7bed01e4ef9b9fd89f0d5fc",
+              "bytes": 662582
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-floor-hold.png",
+              "sha256": "5088d27a778bbbe212117c2659224e7ea4e2efc2afc9223c626bfd6ecfae43af",
+              "bytes": 652259
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-comparison-fixture.png",
+              "sha256": "89cefe591523e57cd8b595d22eaa84f69a8eb88754956076b5dda61d1645b59c",
+              "bytes": 559867
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-nine-poses-fixture.png",
+              "sha256": "9b59689785c4484515b5fc936fe1bd04946b02ae413c86afec6a8516a35251c4",
+              "bytes": 915209
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-resistance.png",
+              "sha256": "468af9eb0b3e9d30049dc2dfac7f42bf358fa64cd5f729f36b5a96b93b35c82c",
+              "bytes": 649638
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-release.png",
+              "sha256": "04d9391e4661d159c2448cec125190f73f9409bc323fe454715339899486ac87",
+              "bytes": 648041
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "d7ebb4f80ecf744aa4bc6fd4a5e91de6357808797cdfc43079c323b142be45e5",
+              "bytes": 674786
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-start.png",
+              "sha256": "441fe72da8a2255af6a8a4806a7113d28636e609ed40e8fd3377cedfdc9910ba",
+              "bytes": 652329
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-preparation.png",
+              "sha256": "0c9b55272e4a4da1b55eb78e5d0832f9327ac3d8a7c6a968afd7beae451b5b07",
+              "bytes": 662244
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-floor-hold.png",
+              "sha256": "1c570907d7c2f82f9311357baeb49f36d3e993e753a6069203ed0938f7b46f6c",
+              "bytes": 653650
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-resistance.png",
+              "sha256": "125316b135c62c8d89ad2edaf95502d95ff1c4eaf66f6179f51361a6c6043c5a",
+              "bytes": 653611
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-release.png",
+              "sha256": "dc3b8b35d5f76e1aec6699d91d555f11d8d467f1cde751f7b85da2be1453926f",
+              "bytes": 652812
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-wy-commando-player-captor-recovered-or-interrupted.png",
+              "sha256": "45ea21f64cfd0f522e37f8b46dfd7acc1f04f7ca223531a24979fd7e553fca49",
+              "bytes": 676223
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-start.png",
+              "sha256": "8e09d4114bd7015aa26fcd5793062096b27c1144b1b79fbe71ea08d0dcb78a83",
+              "bytes": 653267
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-preparation.png",
+              "sha256": "15343922bd18cbf7665ea77b27346e30ea12d1e1ae7094fe308a7e01d3526e2d",
+              "bytes": 665275
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-floor-hold.png",
+              "sha256": "a01785875f825296471adac51b39d831a03fc6c8b9ad9028f7a1422defd69d74",
+              "bytes": 652069
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-comparison-fixture.png",
+              "sha256": "d14167d3d6c3fb87742937200717ad17562fc319032b17729200d3318c508aca",
+              "bytes": 585386
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-nine-poses-fixture.png",
+              "sha256": "a9922131c838c96ffdcb26cb3cc9fcb6a7e16d18bdd01175bf5948f3f8dc8558",
+              "bytes": 989823
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-resistance.png",
+              "sha256": "085bae7b0c5bf97a8e53e558894a369dea7d566d33ccb95e3e152f65aae71f2e",
+              "bytes": 648803
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-release.png",
+              "sha256": "f6dbb4723c980884e255ce7be9ae0cea2abe3dabfb9437116f3b156f067bcc52",
+              "bytes": 647641
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "116c64f70958b7140d01ca3e270fdb2e7c31ac3a2c0d8cb2c4e5f72edbecffce",
+              "bytes": 670518
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-start.png",
+              "sha256": "0b2acd2eed81d393eb1347fd1ef0ecf3b4b711824bd537a784e1a7bb822d4b92",
+              "bytes": 653477
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-preparation.png",
+              "sha256": "dc27caa9cce5e7a0c2e1a104c15289b618c0c3abe8bbbed5bb7ce626dc0f14b0",
+              "bytes": 661390
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-floor-hold.png",
+              "sha256": "3355a8deb24688a7340bd6c587b2e1342b55c2acc7d98cf5ebe2faa45ad8f5e4",
+              "bytes": 650803
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-resistance.png",
+              "sha256": "24e9427a4a18222028638a072fc1d7d2f27cc0852bc670837ca79d5a36725a7e",
+              "bytes": 650553
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-release.png",
+              "sha256": "015f62c0db63d240d24d08bd2a1a4542892855286f4b3e70808b7908714d6af0",
+              "bytes": 651032
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-guardian-player-captor-recovered-or-interrupted.png",
+              "sha256": "d46fcdf238803ad2f39af13cb57a3f4fbd49750fe4b0ff5b0ec4dd366d300193",
+              "bytes": 664921
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-start.png",
+              "sha256": "77285c3e91edf57353960541a0baddddb090e2269d147f18afe0a293c98a340f",
+              "bytes": 647438
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-preparation.png",
+              "sha256": "fa9ea44c6e2d4c61ea779f291e52f3d02a85fce4f0ef0143c9d7547cebfe468b",
+              "bytes": 662120
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-floor-hold.png",
+              "sha256": "1987a4f79b15f830880fa179ead231b64965a2b642c7a48ac24e0a1ab6a26122",
+              "bytes": 652574
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-comparison-fixture.png",
+              "sha256": "459668d18980646d233dc2f889afb852e2972fdb7b1227a5cbb803d5866e423f",
+              "bytes": 557987
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-nine-poses-fixture.png",
+              "sha256": "046e81986f059b29b1cd42cdeecef4e7df695cec493feb7bda5ea883dc6dd346",
+              "bytes": 881396
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-resistance.png",
+              "sha256": "b279fc2ffca7b3bce80dcf8cf0c886fa113cf926b0ff75c4f2bbff6c26963af1",
+              "bytes": 648795
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-release.png",
+              "sha256": "8e21fdcf8163fc37f683080dedbef9e38c9afdde1ee4df46463aa418ffa1bf23",
+              "bytes": 648783
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-cpu-captor-recovered-or-interrupted.png",
+              "sha256": "5af45262de56a6a9b60ffd4c36521f1b9060ac0bebef952ebcb74cd95baf5b16",
+              "bytes": 671758
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-start.png",
+              "sha256": "530813725631d7f813c02a32d3285139e354af1bd28b888252b59fe015a611c3",
+              "bytes": 647780
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-preparation.png",
+              "sha256": "8fb49a2e7df78cbe0973720a28715c48c2847cb00ec0e83a470704e1b8f93672",
+              "bytes": 664439
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-floor-hold.png",
+              "sha256": "b24087dddfed8d46a59033ca7e14c4cd46ec32e7702893c36c07dcb914d1f7bf",
+              "bytes": 650522
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-resistance.png",
+              "sha256": "23815c0ab6d14378a7cd81906907b84889d5fcd90c6e542d8fe8d850db7cd58b",
+              "bytes": 650516
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-release.png",
+              "sha256": "ebe34183ef270a6fa690a48da876c7163618fad9954f6e1e75973ed9cef3d198",
+              "bytes": 650522
+            },
+            {
+              "entry": "supporting/trials-original-harness-baseline-runtime-stress700/qa-trials-capture-v163-cultist-player-captor-recovered-or-interrupted.png",
+              "sha256": "8e778d6a5e6c83c36f0d6469c9c4f1e7ee830d1c79e03e6dd5be2ddc4be36c05",
+              "bytes": 665408
+            }
+          ],
+          "result": "CONTEXT_NOT_A_QA_PASS",
+          "contextReportedChecks": 65,
+          "contextReportedArtifacts": 42,
+          "transferredToCandidateTotals": false
+        },
+        {
+          "id": "node-1cc-failed",
+          "kind": "node-log",
+          "role": "prior-candidate",
+          "testedCommit": "1cc49fb17df8e6ea20d237c5951ad1af444ba56e",
+          "entry": "supporting/full-node-1cc49fb-failed.log",
+          "sha256": "486fe80cf01aafa10b3d435cf2787d4ac4eacc6129c5cf1dfea15f7b27606e1c",
+          "bytes": 455882,
+          "scopeIds": [
+            "C179-WORKSHOP"
+          ],
+          "coverage": "Premier candidat1cc conservé avec4005réussites,2échecs de fixtures historiques et1skip, avant réparation des deux attentes.",
+          "limitations": [
+            "Ce résultat échoué est historique et ne valide pas ed60."
+          ],
+          "checks": null,
+          "componentComparisons": null,
+          "captures": null,
+          "node": {
+            "tests": 4008,
+            "pass": 4005,
+            "fail": 2,
+            "cancelled": 0,
+            "skipped": 1,
+            "uniqueFiles": 214
+          },
+          "driver": null,
+          "countingRole": "primary",
+          "invocation": {
+            "entry": "supporting/full-node-invocation-1cc49fb-failed.json",
+            "sha256": "3ed4d032012bfba75c10b4b324342a3497a50e1d5bfcafd39e668347bcd7415f",
+            "command": [
+              "node",
+              "scripts/test-release-v143.mjs"
+            ],
+            "exitCode": 1,
+            "format": "ACTUAL_COMMIT_AND_STATUS_RUNNER",
+            "sourceStart": "1cc49fb17df8e6ea20d237c5951ad1af444ba56e",
+            "sourceEnd": "1cc49fb17df8e6ea20d237c5951ad1af444ba56e",
+            "statusBefore": "",
+            "statusAfter": ""
+          },
+          "result": "FAILED_NOT_VALIDATED"
+        }
+      ],
+      "unclassifiedReportEntries": [],
+      "workstreams": [
+        {
+          "id": "C179-REFERENCES",
+          "state": "AUTOMATED_NATIVE_SCOPED_PASS",
+          "nativeReceiptIds": [
+            "reference-ui"
+          ],
+          "failureReceiptIds": [],
+          "fullWorkstreamClosed": false,
+          "humanParticipants": 0,
+          "approved1to1": 0
+        },
+        {
+          "id": "C179-WORKSHOP",
+          "state": "AUTOMATED_NATIVE_SCOPED_PASS",
+          "nativeReceiptIds": [
+            "workshop-after",
+            "workshop-journey"
+          ],
+          "failureReceiptIds": [],
+          "fullWorkstreamClosed": false,
+          "humanParticipants": 0,
+          "approved1to1": 0
+        },
+        {
+          "id": "C179-TRIALS-OBSERVATION",
+          "state": "AUTOMATED_NATIVE_SCOPED_PASS",
+          "nativeReceiptIds": [
+            "trials-final"
+          ],
+          "failureReceiptIds": [],
+          "fullWorkstreamClosed": false,
+          "humanParticipants": 0,
+          "approved1to1": 0
+        }
+      ],
+      "priorCandidateSummaries": [
+        {
+          "sourceCommit": "1cc49fb17df8e6ea20d237c5951ad1af444ba56e",
+          "transferredToSelectedCandidate": false,
+          "nodeReceipts": [
+            {
+              "id": "node-1cc-failed",
+              "node": {
+                "tests": 4008,
+                "pass": 4005,
+                "fail": 2,
+                "cancelled": 0,
+                "skipped": 1,
+                "uniqueFiles": 214
+              }
+            }
+          ],
+          "nativePassedChecks": 0,
+          "passedNativeReportCaptures": 0,
+          "componentComparisons": 0,
+          "componentCaptures": 0,
+          "failedReceiptIds": [
+            "node-1cc-failed"
+          ]
+        }
+      ],
+      "scopeLimitations": [
+        {
+          "id": "V179-BOUNDED-LOCAL-ONLY",
+          "scopeIds": [
+            "C179-REFERENCES",
+            "C179-WORKSHOP",
+            "C179-TRIALS-OBSERVATION"
+          ],
+          "state": "OPEN",
+          "text": "Preuves locales bornées uniquement :45rapprochementsPR9,15propositionsPR7,129recherches et4zonesP2 demeurent ouverts.",
+          "receiptIds": [
+            "workshop-after",
+            "workshop-journey",
+            "reference-ui",
+            "trials-final"
+          ]
+        }
+      ],
+      "ciContext": {
+        "state": "NOT_REVALIDATED_GLOBALLY",
+        "text": "La CI du nouveau commit doit fournir son propre état observé ; les résultats des sources70,37af et1cc restent historiques.",
+        "receiptIds": []
+      },
+      "totals": {
+        "node": {
+          "tests": 4008,
+          "pass": 4007,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 1,
+          "uniqueFiles": 214
+        },
+        "currentBuildReceiptIds": [
+          "build-ed60"
+        ],
+        "nativePassedReports": 4,
+        "nativePassedChecks": 137,
+        "passedNativeReportCaptures": 54,
+        "componentPassedReports": 0,
+        "componentComparisons": 0,
+        "componentCaptures": 0,
+        "nativeBrowserArtifacts": 48,
+        "detachedFixtureArtifacts": 6,
+        "unclassifiedArtifacts": 0
+      },
+      "sourceRelationship": "DOCUMENTATION_HEAD_MAY_DIFFER_ALL_TESTED_BYTES_MUST_MATCH",
+      "countsBelongToTestedCommitOnly": true,
+      "notAHumanPlaytest": true,
+      "captureAccounting": "Artifacts in a native report can include detached rendering fixtures; actual declared kinds/scopes remain attached. Report capture counts are not complete journeys or uniformly native screenshots.",
+      "countingPolicy": "Headline native totals include primary completed reports only. Overlapping subsets and diagnostic reruns are retained separately. Counts are reported assertions, not distinct gameplay behaviours.",
+      "approved1to1": 0,
+      "fullArtTasksClosed": 0,
+      "humanParticipants": 0,
+      "remaining": {
+        "sourceVersionProposals": 45,
+        "inactivePr7Crosswalks": 15,
+        "researchOnlyWeapons": 129,
+        "sevenRoutesClosed": false,
+        "allFeedsCertifiedStable": false,
+        "driveContents": "UNKNOWN"
+      },
+      "ci": null,
+      "review": null,
+      "merge": null,
+      "artifactAccounting": {
+        "nativeBrowserArtifacts": 48,
+        "detachedFixtureArtifacts": 6,
+        "unclassifiedArtifacts": 0
+      },
+      "artifactCountingNote": "Primary report artifacts total54:48native Canvas/DOM images and6detached fixtures declared inside Trials. componentComparisons/componentCaptures count standalone component reports only, so their zero does not mean zero fixtures. Baseline and historical stress artifacts are excluded from these current totals.",
+      "diagnosticReceiptIds": [],
+      "supplementalWorkbook": {
+        "entry": "workbook/TANTALUS-SUIVI-V179.xlsx",
+        "filename": "TANTALUS-SUIVI-V179.xlsx",
+        "sha256": "6f8118ed4080aa4d2c3af93259ec5c8aa7494e7dea9329c2f19eafaada16ae1b",
+        "bytes": 58916,
+        "publicRepositoryFile": false,
+        "inclusionDoesNotCloseResearchOrArt": true
+      },
+      "historicalPrepublicationSnapshot": {
+        "state": "PREPUBLICATION",
+        "preserved": true,
+        "meaning": "The original source addendum and its pending states are a retained prepublication snapshot; this separate record contains the current local results for the explicitly tested commit."
+      },
+      "currentLocalValidationStatus": "AUTOMATED_SCOPED_LOCAL_VALIDATION_PASSED",
+      "historicalV177ResultsTransferred": false,
+      "historicalV178ResultsTransferred": false,
+      "visualOpenFindings": {
+        "basis": "HISTORICAL_SOURCE70_STATIC_READBACK_5PNGS_NOT_CURRENT_V179",
+        "openP2Areas": [
+          "briefing/Mire",
+          "cryo/pods",
+          "medical/morgue",
+          "quarantine/Bioforge"
+        ],
+        "currentV179VisualClosure": false,
+        "discardedFalsePositive": "hangar bracket: door painted after bracket"
+      },
+      "sameInputContracts": [
+        {
+          "entry": "workshop-before37af-01/workshop-view-1-disclosed-save.json",
+          "sha256": "5a939285376f32f884106b0dca44e5946bb8a5cebc4b61cbb7fecdebd23cca48",
+          "additionalEntries": [
+            "workshop-after179-01/workshop-view-1-disclosed-save.json"
+          ],
+          "reportIds": [
+            "workshop-before",
+            "workshop-after"
+          ],
+          "reportShaPointer": [
+            "fixtures",
+            0,
+            "sha256"
+          ]
+        },
+        {
+          "entry": "workshop-before37af-01/workshop-view-1-fixture-meta.json",
+          "sha256": "dcf7413af44cf35f99c6f13e89047751887c953c3a60644ac5343486f6c0575e",
+          "additionalEntries": [
+            "workshop-after179-01/workshop-view-1-fixture-meta.json"
+          ],
+          "reportIds": [
+            "workshop-before",
+            "workshop-after"
+          ],
+          "reportShaPointer": [
+            "fixtures",
+            0,
+            "metadataSha256"
+          ]
+        }
+      ],
+      "primaryArchivesRecovered": 0,
+      "historicalLocalRecords": {
+        "V177": {
+          "testedCommit": "70adab8e66b8b2ee3fc2a731a182dd20d2a6af31",
+          "recordSha256": "366958bc4e60f36fcf3848da3289f1f8e3905549bb589b7bfffee3e71fa25574",
+          "countsTransferred": false
+        },
+        "V178": {
+          "testedCommit": "37af2c3a4cead83d1519e642a38ec32d3e18c231",
+          "recordSha256": "332ed0d5bab548347dea91e911030c068271c8c835b2ceeccec710aaac5573c3",
+          "countsTransferred": false
+        }
+      }
+    },
     "newPngAssets": 0,
     "approved1to1": 0,
     "fullArtTasksClosed": 0,
