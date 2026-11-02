@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { execFileSync } from 'node:child_process';
+import { createContext, runInContext } from 'node:vm';
 import { HUB_DECKS,HUB_WORLD,buildHubObstacleGeometryV87 } from '../src/hub-game.js';
 import { HubGame as RosterHub } from '../src/hub-v52-runtime.js';
 import { HubGame as RoutineHub,getNpcRoutineStandingAnchorV158 } from '../src/hub-v62-runtime.js';
@@ -182,6 +184,104 @@ function runtime(hour=5.5,save={}) {
 const context=(hub,hour,extra={})=>hub.setNpcRoutineContextV62({clock:{day:1,hour},...extra},{persist:false,rebuild:true});
 const tick=(hub,seconds)=>{for(let i=0;i<seconds*60;i++)hub.update(1/60);};
 const routeState=hub=>hub.getSnapshot().npcCalLogisticsRouteV165;
+
+function calQaSourceV181(name, callback = false) {
+  const python = `import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text()); scope={}
+for node in tree.body:
+ if isinstance(node,ast.Assign) and isinstance(node.value,ast.Constant) and isinstance(node.value.value,str):
+  for target in node.targets:
+   if isinstance(target,ast.Name): scope[target.id]=node.value.value
+if sys.argv[3]=='literal': result=scope[sys.argv[2]]
+else:
+ owner=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name==sys.argv[2])
+ call=next(n for n in ast.walk(owner) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='evaluate')
+ result=eval(compile(ast.Expression(call.args[0]),'<actual-Cal-QA-observer>','eval'),scope)
+print(json.dumps(result))`;
+  return JSON.parse(execFileSync('python3', ['-c', python,
+    process.env.ATF_QA_CAL_SOURCE || new URL('qa-npc-cal-logistics-route-v165.py', import.meta.url).pathname,
+    name, callback ? 'callback' : 'literal'], { encoding: 'utf8', timeout: 30000 }));
+}
+function calQaChecksV181(cases) {
+  const python = `import ast,json,math,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+names={'observed_station_origin_v181','station_origin_bookmark_v181','observed_station_logistics_return_v181'}
+functions=[node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name in names]
+assert len(functions)==3
+scope={'math':math};exec(compile(ast.Module(body=functions,type_ignores=[]),'<actual-Cal-QA-guards>','exec'),scope)
+print(json.dumps([scope[row['function']](*row['arguments']) for row in json.loads(sys.stdin.read())]))`;
+  return JSON.parse(execFileSync('python3', ['-c', python,
+    process.env.ATF_QA_CAL_SOURCE || new URL('qa-npc-cal-logistics-route-v165.py', import.meta.url).pathname],
+    { input: JSON.stringify(cases), encoding: 'utf8', timeout: 30000 }));
+}
+function actualCalObservationV181(hub) {
+  return runInContext('(' + calQaSourceV181('OBSERVE') + ')()', createContext({ __ATF_HUB__: hub, structuredClone }));
+}
+
+test('the Cal QA station receipt requires the actual pre-watch native owner and rejects an inferred or already traveled origin', () => {
+  const initial=actualCalObservationV181(runtime()), cases=[{function:'observed_station_origin_v181',arguments:[initial]}];
+  for(const mutate of[
+    s=>{s.clock.hour=9.5;}, s=>{s.routine.phase='work';}, s=>{s.routine.roomId='dropship-hangar';},
+    s=>{s.routine.alert=true;}, s=>{s.routine.needsCare=true;}, s=>{s.routine.missionAssigned=true;},
+    s=>{s.route.actor.x+=1;}, s=>{s.route.actor.homeX+=1;}, s=>{s.route.actor.deck=3;},
+    s=>{s.route.actor.admittedRoomId='logistics';}, s=>{s.route.actor.distance=1;},
+    s=>{s.route.actor.crossings=1;}, s=>{s.route.actor.arrivals=1;}, s=>{s.route.actor.stage='walking';},
+    s=>{s.actual.alive=false;}, s=>{s.actual.w=43;}, s=>{s.ownerCount=2;}, s=>{s.visibleSingleton=false;}
+  ]) {const state=structuredClone(initial);mutate(state);cases.push({function:'observed_station_origin_v181',arguments:[state]});}
+  const results=calQaChecksV181(cases), origin=results[0];
+  assert.ok(origin);assert.equal(origin.x,initial.actual.x);assert.equal(origin.y,532);
+  assert.equal(origin.source,'observed-native-station-before-watch');assert.equal(origin.deck,2);
+  assert.deepEqual(results.slice(1),Array(cases.length-1).fill(null));
+});
+
+test('the Cal QA local receipt binds the real catwalk and physical return to the observed station without crediting V62 travel', () => {
+  const h=runtime(), initial=actualCalObservationV181(h);
+  const [origin]=calQaChecksV181([{function:'observed_station_origin_v181',arguments:[initial]}]);
+  context(h,9.5);tick(h,180);h.local='logistics';const arrival=actualCalObservationV181(h);
+  context(h,12.5);const rows=[];let previousPhase=null;
+  for(let i=0;i<180*60;i++) {
+    const s=routeState(h), phase=s.actor?s.actor.roomId+'/'+s.actor.stage:'handoff';
+    if(phase!==previousPhase||i%120===0||s.nativeHandoff)
+      rows.push({route:{actor:s.actor,nativeHandoff:s.nativeHandoff},ownerCount:h.getNpcServiceOwnedActorsV163().filter(a=>a.crewId===D.crewId).length});
+    previousPhase=phase;
+    if(s.nativeHandoff)break;
+    h.update(1/60);
+  }
+  const final=routeState(h), base={origin,arrival,rows,final};
+  assert.equal(final.nativeHandoff.observedTravel,false);
+  const cases=[{function:'observed_station_logistics_return_v181',arguments:[origin,arrival,rows,final]}];
+  for(const mutate of[
+    c=>{c.origin={...c.origin,x:c.origin.x+1};},c=>{c.arrival.route.actor.homeX+=1;},
+    c=>{c.arrival.route.actor.y=532;},c=>{c.arrival.route.actor.crossings=2;},c=>{c.arrival.ownerCount=2;},
+    c=>{c.rows.find(r=>r.route.actor).ownerCount=2;},c=>{c.rows.find(r=>r.route.actor).route.actor.admittedRoomId='logistics';},
+    c=>{c.rows.filter(r=>r.route.actor).at(-1).route.actor.x+=1;},
+    c=>{c.rows.filter(r=>r.route.actor).at(-1).route.actor.arrivals=1;},
+    c=>{c.final.nativeHandoff.observedTravel=true;},c=>{c.final.nativeHandoff.fromRoomId='dropship-hangar';},c=>{c.rows=[];}
+  ]) {
+    const candidate=structuredClone(base);mutate(candidate);
+    cases.push({function:'observed_station_logistics_return_v181',arguments:[candidate.origin,candidate.arrival,candidate.rows,candidate.final]});
+  }
+  const results=calQaChecksV181(cases);assert.equal(results[0],true);
+  assert.deepEqual(results.slice(1),Array(cases.length-1).fill(false));
+});
+
+test('the Cal QA captures native hub entry only through a read-only UI event without replacing RAF or pausing the game', () => {
+  const h=runtime(), before=routeState(h), actor=h.getNpcCalLogisticsActorV165();h.animationTime=1.5;
+  let listener=null, removed=0;
+  const sandbox=createContext({__ATF_HUB__:h,structuredClone,performance:{now:()=>12},
+    document:{addEventListener:(type,fn)=>{assert.equal(type,'click');listener=fn;},
+      removeEventListener:(type,fn)=>{assert.equal(type,'click');assert.equal(fn,listener);removed++;}}});
+  sandbox.window=sandbox;
+  runInContext('('+calQaSourceV181('observe_next_hub_entry_v181',true)+')()',sandbox);
+  listener({target:{closest:()=>({dataset:{view:'command'}})}});assert.equal(sandbox.__ATF_CAL_WATCH_ENTRY_V181__,undefined);
+  listener({target:{closest:()=>({dataset:{view:'hub'}})}});
+  assert.deepEqual(sandbox.__ATF_CAL_WATCH_ENTRY_V181__.state.route.actor,before.actor);
+  assert.equal(sandbox.__ATF_CAL_WATCH_ENTRY_V181__.capturedAt,12);assert.equal(sandbox.__ATF_CAL_WATCH_ENTRY_V181__.nativeTime,1.5);
+  assert.equal(removed,1);assert.equal(h.getNpcCalLogisticsActorV165(),actor);
+  assert.deepEqual(routeState(h),before);assert.equal(h.running,true);
+});
 
 test('the composed owner keeps the same native Cal through the real watch, ladder, dialogue, save and returning floor bookmark',()=>{
   const hub=runtime(),actor=hub.getNpcCalLogisticsActorV165();assert.ok(actor);

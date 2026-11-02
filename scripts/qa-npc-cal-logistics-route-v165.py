@@ -10,6 +10,7 @@ import datetime
 import hashlib
 import importlib.metadata
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -77,10 +78,13 @@ def manifest():
 
 OBSERVE = '''()=>{const h=__ATF_HUB__,whole=h.getSnapshot(),s=whole.npcCalLogisticsRouteV165;
  const a=h.getNpcCalLogisticsActorV165?.(),annex=h.currentAnnexV71?.()?.id||null;
+ const r=h.npcRoutineResolutionsV62?.get('crew-16-cal-mercer');
  const visible=annex?h.activeAnnexNpcsV141():h.npcs;
  return {route:structuredClone(s),running:h.running,deck:h.state.deck,roomId:h.state.roomId,annex,
  clock:structuredClone(h.npcRoutineContextV62.clock),player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,vx:h.player.vx},
- actual:a?{crewId:a.crewId,x:a.x,y:a.y,w:a.w,h:a.h,roomId:a.roomId,facing:a.facing,climbing:a.climbing}:null,
+ actual:a?{crewId:a.crewId,x:a.x,y:a.y,w:a.w,h:a.h,roomId:a.roomId,facing:a.facing,climbing:a.climbing,
+   alive:a.alive,vx:a.vx,workClock:a.workClock,supportClock:a.supportClock}:null,
+ routine:r?{phase:r.phase,roomId:r.roomId,deck:r.deck,reason:r.reason,alert:r.alert,missionAssigned:r.missionAssigned,needsCare:r.needsCare}:null,
  visibleCount:visible.filter(n=>n.crewId==='crew-16-cal-mercer').length,
  visibleSingleton:visible.filter(n=>n.crewId==='crew-16-cal-mercer').every(n=>n===a),
  ownerCount:(h.getNpcServiceOwnedActorsV163?.()||[]).filter(n=>n.crewId==='crew-16-cal-mercer').length,
@@ -90,6 +94,71 @@ OBSERVE = '''()=>{const h=__ATF_HUB__,whole=h.getSnapshot(),s=whole.npcCalLogist
 
 def observed(page):
     return page.evaluate(OBSERVE)
+
+
+def observed_station_origin_v181(state):
+    """Accept only a real pre-watch station body, never an inferred template."""
+    route = state.get('route') or {}
+    actor, actual, routine = route.get('actor') or {}, state.get('actual') or {}, state.get('routine') or {}
+    hour = (state.get('clock') or {}).get('hour')
+    if not (isinstance(hour, (int, float)) and math.isfinite(hour) and 0 <= hour < 6
+            and routine.get('phase') == 'station' and routine.get('roomId') == 'vehicle-bay'
+            and routine.get('deck') == 2 and routine.get('reason') == 'daily-schedule'
+            and not any(routine.get(key) for key in ['alert', 'missionAssigned', 'needsCare'])
+            and state.get('deck') == 2 and state.get('annex') is None
+            and state.get('visibleCount') == 1 and state.get('visibleSingleton') is True and state.get('ownerCount') == 1
+            and route.get('nativeHandoff') is None and route.get('initialCondition') == 'vehicle-bay'
+            and actor.get('crewId') == 'crew-16-cal-mercer' and actor.get('deck') == 2
+            and actor.get('roomId') == actor.get('admittedRoomId') == actor.get('targetRoomId') == 'vehicle-bay'
+            and actor.get('stage') == 'service' and actor.get('reason') == 'daily-schedule'
+            and actor.get('y') == 532 and actor.get('homeX') == actor.get('x')
+            and all(actor.get(key) == 0 for key in ['distance', 'verticalDistance', 'crossings', 'arrivals'])
+            and all(isinstance(actor.get(key), (int, float)) and math.isfinite(actor[key]) for key in ['x', 'time'])
+            and actor.get('time', -1) >= 0
+            and actual.get('crewId') == actor['crewId'] and actual.get('roomId') == actor['roomId']
+            and actual.get('x') == actor['x'] and actual.get('y') == actor['y']
+            and actual.get('w') == 44 and actual.get('h') == 92 and actual.get('alive') is True):
+        return None
+    return {'crewId': actor['crewId'], 'deck': 2, 'roomId': 'vehicle-bay', 'x': actor['x'], 'y': 532,
+            'facing': actor['facing'], 'observedHour': hour, 'observedNativeTime': actor['time'],
+            'source': 'observed-native-station-before-watch'}
+
+
+def station_origin_bookmark_v181(origin, actor):
+    return bool(origin and actor and origin.get('source') == 'observed-native-station-before-watch'
+                and actor.get('crewId') == origin['crewId'] and actor.get('deck') == origin['deck']
+                and actor.get('admittedRoomId') == origin['roomId'] and actor.get('homeX') == origin['x'])
+
+
+def observed_station_logistics_return_v181(origin, arrival, rows, final):
+    """The bounded local receipt never credits the later V62 routine handoff."""
+    post = (arrival.get('route') or {}).get('actor') or {}
+    retained = [(row.get('route') or {}).get('actor') for row in rows if (row.get('route') or {}).get('actor')]
+    if not retained:
+        return False
+    home = retained[-1]
+    handoff = final.get('nativeHandoff') or {}
+    return (station_origin_bookmark_v181(origin, post) and all(station_origin_bookmark_v181(origin, actor) for actor in retained)
+            and all(row.get('ownerCount') == 1 for row in rows if (row.get('route') or {}).get('actor'))
+            and post.get('roomId') == post.get('targetRoomId') == 'logistics' and post.get('stage') == 'service'
+            and post.get('y') == 376 and post.get('crossings') == post.get('arrivals') == 1
+            and abs(post.get('verticalDistance', -1) - 156) < .001
+            and arrival.get('ownerCount') == arrival.get('visibleCount') == 1 and arrival.get('visibleSingleton') is True
+            and home.get('roomId') == home.get('targetRoomId') == origin['roomId'] and home.get('stage') == 'service'
+            and abs(home.get('x', math.inf) - origin['x']) < .26 and home.get('y') == origin['y']
+            and home.get('crossings') == home.get('arrivals') == 2 and abs(home.get('verticalDistance', -1) - 312) < .001
+            and final.get('actor') is None and handoff.get('crewId') == origin['crewId']
+            and handoff.get('fromRoomId') == origin['roomId'] and handoff.get('reason') == 'daily-schedule'
+            and handoff.get('observedTravel') is False)
+
+
+def observe_next_hub_entry_v181(page):
+    # Observe the real UI event after its native target handler. Do not replace
+    # RAF, pause the engine or overwrite an actor to obtain an early snapshot.
+    page.evaluate('''()=>{document.addEventListener('click',function read(event){
+      if(event.target.closest('[data-view]')?.dataset.view!=='hub')return;
+      window.__ATF_CAL_WATCH_ENTRY_V181__={state:(''' + OBSERVE + ''')(),capturedAt:performance.now(),nativeTime:__ATF_HUB__.animationTime};
+      document.removeEventListener('click',read);});}''')
 
 
 def open_view(page, view):
@@ -186,6 +255,8 @@ def collect(page, name, stop, exit_after=False):
             continuous &= a['stage'] == 'covering' and b['stage'] == 'revealing' and b['doorProgress'] == 0
     check(name + ': actual owner motion is bounded and coordinate changes require covered paired leaves', continuous)
     check(name + ': every retained body has one real owner', all(row['ownerCount'] == 1 for row in rows if row['route']['actor']))
+    check(name + ': every retained phase keeps the actually observed station bookmark',
+          all(station_origin_bookmark_v181(report.get('stationOriginV181'), row['route']['actor']) for row in rows if row['route']['actor']))
     for key, frame in result['frames'].items():
         file = name + '-' + key + '.png'
         (output / file).write_bytes(base64.b64decode(frame['png'].split(',')[1]))
@@ -226,14 +297,28 @@ with sync_playwright() as pw:
         check('native05h30 Cal is one44x92 body on the vehicle-bay floor', initial['visibleCount'] == 1
               and initial['visibleSingleton'] and initial['actual']['roomId'] == 'vehicle-bay'
               and initial['actual']['w'] == 44 and initial['actual']['h'] == 92 and initial['actual']['y'] == 532)
+        origin = observed_station_origin_v181(initial)
+        check('the pre-watch station origin is observed on the sole native Cal rather than inferred from a template', origin is not None)
+        report['stationOriginV181'] = origin
+        (output / 'station-origin-v181.json').write_text(json.dumps({'origin': origin, 'observation': initial}, indent=2))
         capture(page, '01-native-Cal-before-watch.png')
         enter_or_leave(page, True)
         walk_to(page, config['floorClear'])
         page.locator('#exit-hub').click()
+        saved_station = page.evaluate('()=>JSON.parse(localStorage.getItem("atf-v47-profile-1")).hub.npcCalLogisticsRouteV165.actor')
+        check('native exit retains the exact observed station position and bookmark before the macro command',
+              station_origin_bookmark_v181(origin, saved_station) and saved_station['roomId'] == origin['roomId']
+              and saved_station['x'] == origin['x'] and saved_station['y'] == origin['y']
+              and saved_station['crossings'] == saved_station['arrivals'] == 0)
         open_view(page, 'command')
         page.locator('[data-strategy-action="colony-relief"]').click()
         page.wait_for_function('()=>__ATF_V51__.saveSystem.data.clock.hour===9.5')
+        observe_next_hub_entry_v181(page)
         open_hub(page)
+        entry = page.evaluate('()=>({...window.__ATF_CAL_WATCH_ENTRY_V181__,observerAgeMs:performance.now()-window.__ATF_CAL_WATCH_ENTRY_V181__.capturedAt,nativeAgeSeconds:__ATF_HUB__.animationTime-window.__ATF_CAL_WATCH_ENTRY_V181__.nativeTime})')
+        report['stationWatchEntryV181'] = entry
+        check('the native hub entry restores the exact saved station body before physical traversal resumes',
+              entry['state']['route']['actor'] == saved_station and entry['state']['ownerCount'] == 1)
         active = observed(page)
         check('actual4h command retains the true native origin with no preloaded arrival', active['route']['actor']['roomId'] == 'vehicle-bay'
               and active['route']['actor']['crossings'] == 0 and active['route']['preLoadTravelObserved'] is False)
@@ -309,6 +394,12 @@ with sync_playwright() as pw:
         check('full loop reaches the original supported bookmark before native unobserved handoff', last['crossings'] == 2
               and last['arrivals'] == 2 and last['y'] == 532 and abs(last['x'] - last['homeX']) < .26
               and final['nativeHandoff']['observedTravel'] is False)
+        station_loop = observed_station_logistics_return_v181(origin, arrived, finished, final)
+        check('the local inspection returns to the actually observed station origin before the unobserved V62 handoff', station_loop)
+        report['stationOriginToLogisticsReceiptV181'] = {'origin': origin, 'post': arrived['route']['actor'],
+            'lastRetained': last, 'handoff': final['nativeHandoff'], 'observed': station_loop,
+            'scope': 'observed-vehicle-bay-station-to-local-logistics-inspection-and-back',
+            'v62DropshipHangarTravelObserved': False}
         check('native game and images have no runtime, request or HTTP errors', not report['pageErrors']
               and not report['requestFailures'] and not report['httpErrors'])
         report['status'] = 'passed'
@@ -331,10 +422,12 @@ with sync_playwright() as pw:
         report['captureSha256'] = {entry['file']: entry['sha256'] for entry in report['captures']}
         report['localVerticalCircuitObserved'] = report['status'] == 'passed'
         report['stationToWorkTravelObserved'] = False
+        report['stationOriginToLogisticsObservedV181'] = report['status'] == 'passed' and bool(report.get('stationOriginToLogisticsReceiptV181', {}).get('observed'))
         report['canonicalExact'] = False
         if not report['sourceUnchanged'] or not report['sameBuild']:
             report['status'] = 'failed'
             report['localVerticalCircuitObserved'] = False
+            report['stationOriginToLogisticsObservedV181'] = False
         report['finishedAt'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
         (output / 'report.json').write_text(json.dumps(report, indent=2, ensure_ascii=False))
 if report['status'] != 'passed':
