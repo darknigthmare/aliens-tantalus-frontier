@@ -1,0 +1,91 @@
+{
+  "schema": 180,
+  "date": "2026-11-02",
+  "scope": "new-campaign-paintings-first-four-settings",
+  "counts": {
+    "newImages": 4,
+    "newBindings": 40,
+    "campaigns": 20
+  },
+  "provider": "OpenAI image_gen",
+  "method": "Four independent image generation calls, each with one viewed existing project image as a visual reference. Original PNGs retained outside the repository; public WebP versions use lossless encoding without resizing.",
+  "fidelity": {
+    "requested": "franchise fidelity",
+    "canonExact": false,
+    "measuredSetGeometry": false,
+    "frameReferenceRecovered": false,
+    "verifiedScope": "Individual atmosphere, palette and architectural motifs checked visually; no pixel-level match to film/game frames or complete campaign art direction certified.",
+    "limitations": [
+      "Reference inputs are project paintings, not primary franchise frames.",
+      "Generated compositions are original interpretations of the named settings.",
+      "The image does not alter level geometry, collisions or insertion transport choice."
+    ]
+  },
+  "publicBytes": 7085980,
+  "images": [
+    {
+      "key": "acheron",
+      "path": "assets/openai/campaign/v180/acheron-colony.webp",
+      "bytes": 1872422,
+      "sourcePngBytes": 2809260,
+      "width": 1672,
+      "height": 941,
+      "sha256": "51c21987bdcc73fb1d7744ba4bd42263cf7a37bb66e311632fa288b7de43729a",
+      "pixelEqual": true,
+      "referencePath": "assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+      "referenceSha256": "5514c2c29edb3f62230a21a49e4a24296cebcda90c1e45ea47cc42271de8efa6",
+      "pixelRgbaSha256": "2bd6151479ee3b9805d43f41488fcb7220cbc6f33063d71e3fe4afaaf54379bf",
+      "sourcePngSha256": "283cfcb50e7f50ad58412b1022d19b9f77db31e7455f11f5cd09b9c15537ac8a",
+      "exactPrompt": "Create one completely finished new cinematic landscape campaign illustration for the browser game Aliens: Tantalus Frontier, replacing the empty plain in the reference. Location: original Frontier-continuity approach to a rain-battered LV-426 industrial colony after Aliens. Draw the identifiable industrial visual vocabulary of Aliens (1986): squat brutal modular prefabricated habitat blocks, ribbed service pipes, skeletal gantries, mesh platforms, a distant enormous atmosphere processor silhouette, sulfurous haze and horizontal rain; charcoal gray basalt ground, cold steel blue light, small amber practical lights, heavy black storm clouds. A readable full-frame 3/4 environmental wide shot, asymmetrical colony mass on the right, open rough approach track at lower left and wet pipes in foreground to establish depth, very high detail analog matte painting realism. Keep the palette and tactile rendering of reference but genuinely new scene with inhabited architecture. No people, creatures, transport vehicles, HUD, collage, text, logo or watermark. Landscape 1536x1024 or wider. Opaque full scene, polished game key art. This is a project atmosphere illustration, not a claim that this layout is the measured film set.",
+      "visualReview": "Inspected actual image generation output, clear full opaque scene, no HUD, logos, text or transport forced; interpretation, not exact reconstruction."
+    },
+    {
+      "key": "lv223",
+      "path": "assets/openai/campaign/v180/lv223-engineer-temple.webp",
+      "bytes": 1722456,
+      "sourcePngBytes": 2654482,
+      "width": 1672,
+      "height": 941,
+      "sha256": "a2ea1f4807157deb2fd9c8d27f70beed1eee0963a7c04a8876ba443e53caed03",
+      "pixelEqual": true,
+      "referencePath": "assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "referenceSha256": "89995971ba409085b1a97be23bee255b139b5fc5bcb744058d77b22cb73822bb",
+      "pixelRgbaSha256": "b1768e598a1c9fdb4de6071d96b87a4052f2093173d430f9c833faddcb11fd8d",
+      "sourcePngSha256": "b48d6ee266680d090d6e99026b09df916b8bf36978fcbcf4e54e85f47eb3e2d9",
+      "exactPrompt": "Create a completely new polished cinematic campaign environment illustration for Aliens: Tantalus Frontier. Location: an original Frontier-continuity survey of LV-223 inspired by the tangible art direction of Prometheus (2012). Replace the distant generic rock ruins with an immense buried Engineer hemispherical temple on the right, smoothly weathered organic ribbed biomechanical stone architecture embedded in black volcanic terrain, a dark elongated keyhole doorway, horizontal banks of mist flowing down the valley and a severe chalk-colored cloud ceiling. Emphasize monumental scale, a curving access cut across foreground basalt, etched rib-like grooves and a tiny warm lamp near the doorway. Muted black slate, pale desaturated khaki and cold blue-gray, subtle directional grazing light. Wide 3/4 establishing view with foreground rocks on lower edges, distant rolling mountains, clear readable silhouette. Reference image supplies only project palette/texture; build a distinct new temple scene. High detail cinematic matte painting with grounded materials. No people, spacecraft, creatures, text, logos, HUD, split panels or watermark. One opaque landscape image, 1536x1024 or wider, full composed scene. Do not claim measured set-exact reconstruction.",
+      "visualReview": "Inspected actual image generation output, clear full opaque scene, no HUD, logos, text or transport forced; interpretation, not exact reconstruction."
+    },
+    {
+      "key": "fiorina",
+      "path": "assets/openai/campaign/v180/fiorina-foundry.webp",
+      "bytes": 1828972,
+      "sourcePngBytes": 2639806,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "45b496e9b36a6485635ed9bf36cd7474c114d8c3bdc591e781a3375d25de2114",
+      "pixelEqual": true,
+      "referencePath": "assets/openai/metroidvania/zones/ship-engineering-far.png",
+      "referenceSha256": "55b426c16864f39647576d4b60f3b33b7545852beaf9a3fd99dba63a320504d7",
+      "pixelRgbaSha256": "abeaf25d37d6c924e338d00e7fef08cf9e0c5df24187ce6da44d8c7343c634a0",
+      "sourcePngSha256": "a9c5582f3099ea470f311ee8c547e4dff4df23949ef4a3d46280a1c99b4c0df3",
+      "exactPrompt": "Create one original finished campaign key art illustration for Aliens: Tantalus Frontier showing a Fiorina 161 foundry interior inspired by Alien 3 (1992). Use the reference as palette/material guidance only; make a new perspective composition rather than a flat wall. An immense disused prison ironworks, gothic barrel vault overhead, corroded cylindrical ductwork, massive vertical furnace body on right, railings and a grated catwalk entering from lower left and extending across middle depth, deep service tunnels disappearing behind it. Furnace apertures emit rusty amber-orange light into sooty brown darkness, pale shaft of dirty daylight at far end, steam hanging above a deep industrial pit, riveted iron beams and rough stained masonry. Strong atmospheric layers and believable scale, bleak analog industrial cinematography, detailed matte painting realism. Warm burnt orange/ochre accents balanced with dark gunmetal gray, not generic neon science fiction. No people, prisoners, aliens, weapons, vehicles, flames across walkable path, HUD, typography, title, logo or watermark. One full opaque scene, wide landscape 1536x1024 or wider. Project interpretation, no unverified exact scene reconstruction.",
+      "visualReview": "Inspected actual image generation output, clear full opaque scene, no HUD, logos, text or transport forced; interpretation, not exact reconstruction."
+    },
+    {
+      "key": "sevastopol",
+      "path": "assets/openai/campaign/v180/sevastopol-transit.webp",
+      "bytes": 1662130,
+      "sourcePngBytes": 2384479,
+      "width": 1672,
+      "height": 941,
+      "sha256": "02dad0a86ad3992e1253f567bb2e8b11018d7a280ea16df71cc51a070a6d50f3",
+      "pixelEqual": true,
+      "referencePath": "assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+      "referenceSha256": "9e11578c01265930a47af57329dfefa413d84bd2fc1457f9ce86f4a6e7faa15a",
+      "pixelRgbaSha256": "a49df66e116c5940da1d95dcde54a2b84f9b954dfb7e1a1fae1ac7765af6ecbb",
+      "sourcePngSha256": "8e315ce4a0584caa2c43b41160f4127ef7863fa5ed78b79340a1685071972d0e",
+      "exactPrompt": "Create one new finished wide cinematic campaign illustration for Aliens: Tantalus Frontier: Sevastopol station corridor with the unmistakable retrofuturist material language of Alien: Isolation. A low, claustrophobic empty transit corridor viewed diagonally from a junction, chunky cream-colored molded wall panels with rounded chamfered corners above dark brown ribbed base panels, yellowed fluorescent ceiling strips, recessed black CRT terminals with tiny pale green screens, bundled exposed cables in a damaged maintenance recess, thick padded hatch at right, dark curved doorway at the far end and an octagonal window at left revealing gas giant amber haze. Floor scuffed dark vinyl and grated service strips; subtle amber emergency practicals, smoke-free soft volumetric shadow. Keep grounded tactile grime and analog production design, coherent cream/industrial brown/teal-black palette; no modern sleek glossy spaceship or neon. Reference supplies project rendering finish but the new perspective and detailed full scene must be unique. No people, xenomorphs, robots, vehicles, HUD, text, brand marks, readable signage, title, watermark or collage. A single opaque 1536x1024 or wider landscape image, cinematic matte painting realism. An original project illustration, not an asserted exact in-game screenshot.",
+      "visualReview": "Inspected actual image generation output, clear full opaque scene, no HUD, logos, text or transport forced; interpretation, not exact reconstruction."
+    }
+  ]
+}

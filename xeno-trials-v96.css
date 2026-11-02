@@ -47,3 +47,97 @@
   .xt-layout[data-step="combat"] .xt-status{font-size:11px;padding:5px 10px;min-height:0;margin-bottom:5px}
 }
 .xt-arena-cards{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.xt-arena-card{min-width:0;padding:0 0 10px;overflow:hidden;text-align:left;background:#0b151d;border:1px solid #39515c;color:#d8e6e8;cursor:pointer}.xt-arena-card[aria-pressed="true"]{border-color:#d9eba9;box-shadow:0 0 0 1px #d9eba9}.xt-arena-card strong,.xt-arena-card small{display:block;padding:6px 10px 0}.xt-arena-card strong{font-size:.78rem}.xt-arena-card small{font-size:.64rem;color:#a4bac3}.xt-arena-card:disabled{cursor:default}.xt-arena-thumbnail{display:flex;align-items:center;justify-content:space-evenly;height:95px;background:linear-gradient(var(--xt-back) 0 75%,var(--xt-floor) 75%);overflow:hidden}.xt-arena-thumbnail i{width:15%;height:60%;border:1px solid var(--xt-accent);opacity:.6}.xt-arena-thumbnail img{width:100%;height:100%;object-fit:cover}.xt-stage-scene>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.xt-stage-scene>span{z-index:1;max-width:calc(100% - 40px);padding:8px;background:#07131cdd;border-left:3px solid var(--xt-accent);font-size:15px}.xt-arena-card:hover:not(:disabled){background:#1a2b35}.xt-roster>[data-xt="reset-filters"]{font-size:.65rem;padding:8px}.xt-arena-matchup{grid-column:1/-1}@media(max-width:650px){.xt-arena-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.xt-arena-thumbnail{height:76px}.xt-arena-card strong{font-size:.7rem}.xt-stage-scene>span{font-size:12px;left:12px;top:12px}}
+
+/* MIRE V180. The terminal is a static instrument panel: no flicker, flashing
+   warning, scan animation, or decorative keyboard interception. */
+#xeno-trials-v96{--xt-crt:#c4e5bb;--xt-dim:#9eb59c;--xt-amber:#e3be79;--xt-line:#405145;--xt-panel:#101812;--xt-ink:#090e0b}
+#xeno-trials-v96 .xt-terminal-header{border-bottom:1px solid var(--xt-line);padding-bottom:18px}
+.xt-terminal-brand{display:flex;align-items:center;gap:18px;min-width:0}
+.xt-terminal-mark{display:flex;align-items:baseline;color:var(--xt-amber);font:900 42px/1 Impact,'Arial Narrow',sans-serif;letter-spacing:-.14em;padding-right:6px}
+.xt-terminal-mark>span{color:var(--xt-crt);font-size:33px}
+#xeno-trials-v96 .xt-terminal-brand h2{font:700 22px/1.2 monospace;letter-spacing:.12em;color:var(--xt-crt)}
+.xt-terminal-brand h2>span{font-size:12px;letter-spacing:.08em;color:var(--xt-dim)}
+#xeno-trials-v96 .xt-terminal-header .eyebrow{display:block;font:9px/1.5 monospace;letter-spacing:.13em;color:var(--xt-dim);margin:0 0 5px}
+.xt-terminal-link{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 20px;padding:12px 0;font:9px/1.4 monospace;letter-spacing:.09em;color:var(--xt-dim);border-bottom:1px solid var(--xt-line)}
+.xt-terminal-link i{display:inline-block;width:5px;height:5px;background:var(--xt-crt);margin:0 8px 1px 0}
+.xt-terminal-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,6vw,90px);align-items:center;padding:34px 0}
+.xt-terminal-intro>.eyebrow{font:10px/1.5 monospace;letter-spacing:.13em;color:var(--xt-amber);margin:0 0 17px}
+#xeno-trials-v96 .xt-terminal-intro h1{font:900 clamp(52px,7vw,104px)/.9 Impact,'Arial Narrow',sans-serif;letter-spacing:.045em;color:var(--xt-crt);margin:0 0 22px}
+.xt-terminal-intro h1>span{color:transparent;-webkit-text-stroke:1px var(--xt-crt)}
+.xt-terminal-intro h1>small{display:block;margin-top:20px;font:10px/1.5 monospace;letter-spacing:.22em;color:var(--xt-dim)}
+.xt-terminal-intro>p:not(.eyebrow){font:13px/1.8 monospace;color:var(--xt-dim);margin:0 0 24px}
+.xt-terminal-spec{display:flex;gap:24px;flex-wrap:wrap;border-top:1px solid var(--xt-line);padding-top:17px;margin:0}
+.xt-terminal-spec dt{font:8px/1.5 monospace;letter-spacing:.08em;color:var(--xt-dim)}
+.xt-terminal-spec dd{font:700 25px/1.4 monospace;color:var(--xt-crt);margin:0}
+.xt-containment-monitor{position:relative;border:1px solid #74816d;background:#101710;box-shadow:0 0 0 6px #151c16,0 0 0 7px #384239,inset 0 0 30px #0007;border-radius:5px;overflow:hidden}
+.xt-monitor-heading,.xt-monitor-caption{position:relative;z-index:1;display:flex;justify-content:space-between;gap:16px;padding:13px 16px;color:var(--xt-dim);font:8px/1.5 monospace;letter-spacing:.08em;border-bottom:1px solid var(--xt-line)}
+.xt-monitor-specimen{position:relative;display:flex;align-items:center;justify-content:center;height:clamp(240px,30vh,350px);padding:20px 36px;background:repeating-linear-gradient(0deg,#95be8a06 0 1px,transparent 1px 4px),radial-gradient(ellipse at center,#253b26,#0c140e 72%)}
+.xt-monitor-specimen>img,.xt-monitor-specimen>svg{display:block;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 15px 14px #0007)}
+.xt-monitor-reticle{position:absolute;inset:15%;border:1px solid #c7dda423;pointer-events:none}
+.xt-monitor-reticle:before,.xt-monitor-reticle:after{content:'';position:absolute;inset:50% -10% auto;height:1px;background:#c7dda426}
+.xt-monitor-reticle:after{inset:-10% auto -10% 50%;width:1px;height:auto}
+.xt-monitor-caption{border:0;border-top:1px solid var(--xt-line);font-size:8px;background:#101710}
+.xt-monitor-caption>span:last-child{text-align:right}.xt-monitor-caption strong{color:var(--xt-crt);font-weight:400}
+.xt-program-heading,.xt-terminal-foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:15px 0;border-block:1px solid var(--xt-line);font:9px/1.5 monospace;letter-spacing:.1em;color:var(--xt-dim)}
+.xt-program-heading>span:first-child{color:var(--xt-crt)}
+.xt-terminal-foot{border-bottom:0;margin-top:22px;font-size:8px;color:#8c9d87}
+#xeno-trials-v96 .xt-branches-v119{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:18px;gap:12px}
+#xeno-trials-v96 .xt-branch-v119{position:relative;min-height:206px;padding:20px;border:1px solid var(--xt-line);border-top:1px solid #738469;background:#111a13;color:var(--xt-crt);justify-content:flex-start;transition:background-color .15s,border-color .15s;transform:none}
+#xeno-trials-v96 .xt-branch-v119:before{content:'';position:absolute;left:-1px;top:20px;width:3px;height:25px;background:var(--xt-crt)}
+#xeno-trials-v96 .xt-branch-v119>span{width:100%;font:9px/1.5 monospace;color:var(--xt-dim);margin:0}
+.xt-branch-code{display:flex;justify-content:space-between;gap:8px}.xt-branch-code i{font-size:8px;font-style:normal;letter-spacing:.04em}
+#xeno-trials-v96 .xt-branch-v119>strong{margin:18px 0 0;font:700 18px/1.2 monospace;letter-spacing:.025em}
+#xeno-trials-v96 .xt-branch-v119 p{font:11px/1.65 monospace;color:var(--xt-dim);margin:12px 0 20px}
+#xeno-trials-v96 .xt-branch-v119>.xt-branch-open{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--xt-line);color:var(--xt-crt);font-size:8px}
+.xt-branch-open b{font-size:20px;font-weight:400;line-height:1}
+#xeno-trials-v96 .xt-branch-v119:hover{background:#1c2a1e;border-color:#a3bc91;transform:none}
+#xeno-trials-v96 .xt-branch-horde{background:#211d13;border-top-color:var(--xt-amber)}
+#xeno-trials-v96 .xt-branch-horde:before{background:var(--xt-amber)}
+#xeno-trials-v96 .xt-branch-horde>strong,#xeno-trials-v96 .xt-branch-horde>.xt-branch-open{color:var(--xt-amber)}
+.xt-series-recovery{padding:15px;border:1px solid var(--xt-amber);background:#242015;margin-bottom:16px}
+.xt-activity-index{padding:10px 0;border-block:1px solid var(--xt-line);font:9px/1.5 monospace;color:var(--xt-dim);letter-spacing:.06em}
+#xeno-trials-v96 .xt-activity-v119{position:relative;padding:22px;border:1px solid var(--xt-line);background:#101912;gap:12px}
+#xeno-trials-v96 .xt-activity-v119 h3{font:700 17px/1.35 monospace;color:var(--xt-crt)}
+#xeno-trials-v96 .xt-activity-v119 p{color:var(--xt-dim);font:11px/1.6 monospace}
+#xeno-trials-v96 .xt-activity-v119>.eyebrow{font-size:8px;letter-spacing:.08em;color:var(--xt-amber)}
+#xeno-trials-v96 .xt-activity-v119>strong{font:10px/1.5 monospace;color:var(--xt-crt)}
+.xt-activity-image{position:relative;align-self:stretch;height:125px;margin:-22px -22px 3px;overflow:hidden;border-bottom:1px solid var(--xt-line);background:#07100a}
+.xt-activity-image img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.xt-activity-image>span{position:absolute;left:10px;right:10px;bottom:8px;color:#e0eacd;font:8px/1.5 monospace;background:#09120bcc;padding:5px 8px}
+.xt-horde-briefing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:100%;margin:6px 0;padding:12px 0;border-block:1px solid var(--xt-line)}
+.xt-horde-briefing-grid dt{font:8px/1.5 monospace;color:var(--xt-dim);overflow-wrap:anywhere}
+.xt-horde-briefing-grid dd{margin:5px 0 0;font:700 22px/1 monospace;color:var(--xt-amber)}
+.xt-activity-v119 .xt-horde-briefing-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.xt-activity-v119 .xt-horde-briefing-grid dd{font-size:22px}
+#xeno-trials-v96 .xt-activity-v119 .xt-activity-reward{font:9px/1.5 monospace;color:var(--xt-amber)}
+#xeno-trials-v96 .xt-briefing-v119{max-width:none;display:grid;grid-template-columns:minmax(200px,.65fr) 1.5fr;gap:26px;padding:24px;background:#111b13;border:1px solid var(--xt-line);border-left:3px solid var(--xt-amber)}
+.xt-briefing-identity{border-right:1px solid var(--xt-line);padding-right:24px}.xt-briefing-identity>span{font:8px/1.5 monospace;color:var(--xt-amber)}
+.xt-briefing-orders{min-width:0}.xt-briefing-orders>strong{font:11px/1.5 monospace;color:var(--xt-crt)}
+.xt-horde-telemetry{grid-column:3;grid-row:1;min-width:0;display:flex;flex-direction:column;gap:5px;text-align:right}
+.xt-horde-link{font:8px/1.5 monospace;letter-spacing:.1em;color:var(--xt-dim)}
+.xt-horde-counter-row{display:flex;justify-content:flex-end;gap:24px}.xt-horde-counter-row>div{display:flex;flex-direction:column;gap:2px}
+.xt-horde-counter-row span{font:8px/1.3 monospace;color:var(--xt-dim)}.xt-horde-counter-row strong{font:700 32px/1 monospace;color:var(--xt-amber)}
+.xt-horde-phase{font:9px/1.4 monospace;color:var(--xt-crt)}.xt-horde-total{font:9px/1.4 monospace;color:var(--xt-dim)}
+.xt-match-hud .xt-horde-progress{height:4px;min-height:4px;accent-color:var(--xt-amber)}
+.xt-match-hud .xt-horde-progress::-webkit-progress-value{background:var(--xt-amber)}.xt-match-hud .xt-horde-progress::-moz-progress-bar{background:var(--xt-amber)}
+@media(max-width:850px){
+  .xt-terminal-hero{gap:28px}.xt-terminal-spec{gap:15px}.xt-terminal-spec dd{font-size:22px}
+  #xeno-trials-v96 .xt-branches-v119{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #xeno-trials-v96 .xt-briefing-v119{grid-template-columns:1fr;gap:12px}.xt-briefing-identity{border-right:0;border-bottom:1px solid var(--xt-line);padding:0 0 12px}
+}
+@media(max-width:580px){
+  .xt-terminal-brand{gap:12px}.xt-terminal-mark{font-size:30px}.xt-terminal-mark>span{font-size:24px}
+  #xeno-trials-v96 .xt-terminal-brand h2{font-size:18px}.xt-terminal-brand h2>span{display:block;font-size:9px;margin-top:4px}
+  #xeno-trials-v96 .xt-terminal-header .eyebrow{display:none}.xt-terminal-header>.button{font-size:9px;padding:10px;min-height:44px}
+  .xt-terminal-link{font-size:8px}.xt-terminal-link>span:nth-child(2){display:none}
+  .xt-terminal-hero{grid-template-columns:1fr;gap:24px;padding:26px 0}.xt-terminal-intro h1>small{margin-top:14px;font-size:8px}
+  .xt-terminal-intro>p:not(.eyebrow){font-size:11px;margin:0 0 18px}.xt-terminal-spec{justify-content:space-between;gap:12px}
+  .xt-containment-monitor{margin:4px 7px}.xt-monitor-specimen{height:220px;padding:15px 30px}
+  .xt-program-heading{font-size:8px}.xt-program-heading>span:last-child{display:none}
+  #xeno-trials-v96 .xt-branches-v119{grid-template-columns:1fr;gap:10px}
+  #xeno-trials-v96 .xt-branch-v119{min-height:180px;padding:18px}#xeno-trials-v96 .xt-branch-v119>strong{font-size:18px;margin-top:14px}
+  #xeno-trials-v96 .xt-branch-v119 p{margin-bottom:16px}#xeno-trials-v96 .xt-briefing-v119{padding:18px}
+  .xt-horde-briefing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.xt-horde-briefing-grid dd{font-size:24px}
+  .xt-horde-counter-row{gap:12px}.xt-horde-counter-row span{font-size:7px}.xt-horde-counter-row strong{font-size:24px}
+  .xt-horde-link{font-size:7px}.xt-horde-phase,.xt-horde-total{font-size:8px}.xt-horde-telemetry{gap:3px}
+}
+@media(prefers-reduced-motion:reduce){#xeno-trials-v96 .xt-branch-v119{transition:none;transform:none}}

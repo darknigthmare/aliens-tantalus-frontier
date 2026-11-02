@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { CAMPAIGNS, WORLDS } from '../src/content.js';
 import { CAMPAIGN_ART_V179, resolveCampaignArtV179 } from '../src/campaign-art-v179.js';
+import { resolveCampaignArtV180 } from '../src/campaign-art-v180.js';
 import { createMissionInsertionV62, applyMissionInsertionActionV62 } from '../src/mission-insertion-v62.js';
 import { getMissionInsertionUiModelV62, normalizeMissionInsertionMediaV62, resolveMissionInsertionMediaV62 } from '../src/mission-insertion-ui-v62.js';
 
@@ -52,7 +53,8 @@ test('the existing insertion transitions resolve all forty images through the pr
       assert.equal(state.phases[state.currentIndex].kind, kind);
       const before = structuredClone(state);
       const model = getMissionInsertionUiModelV62(state, { resolveMedia });
-      const expected = CAMPAIGN_ART_V179.find(entry => entry.campaignId === id && entry.phaseKind === kind);
+      const expected = resolveCampaignArtV180({ state })
+        || CAMPAIGN_ART_V179.find(entry => entry.campaignId === id && entry.phaseKind === kind);
       assert.equal(model.media.source, expected.path); assert.equal(model.media.type, 'image');
       assert.equal(model.media.credit, expected.credit); assert.equal(model.media.alt, expected.alt);
       assert.equal(model.storyScene, null); assert.deepEqual(state, before);
