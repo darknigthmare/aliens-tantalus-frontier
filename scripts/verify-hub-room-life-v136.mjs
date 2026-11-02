@@ -66,7 +66,18 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
   // legacy role, minus four old civilian props concealed by real visitor pens;
   // the two new cockpit items belong to the separate V137 census. V157 adds
   // the adult animal-care counter/records and restores two clear supply slots.
-  assert.equal(total,257,`The 29-room equipment census ${total} differs from its reviewed composition`);
+  // The V178 DURANDAL bay releases the former west ladder footprint. Its
+  // existing rear-floor maintenance chest is now admitted, while all six
+  // previously admitted workshop roles remain. No extra atlas cell is added.
+  const workshop=rooms.find(room=>room.id==='workshop'),workshopPlan=getHubRoomLifePlanV136(workshop,optionsFor(workshop));
+  assert.deepEqual(workshopPlan.items.map(item=>item.role).sort(),[
+    'fabrication-tools','maintenance-bench','shop-fire-safety','shop-service-chest',
+    'shop-services','workshop-hand-tool-board','workshop-small-fittings-shelf'
+  ].sort(),'Only the retained maintenance chest augments the reviewed six-role workshop group');
+  const restoredChest=workshopPlan.items.find(item=>item.role==='maintenance-bench');
+  assert.equal(restoredChest.kind,'tool-chest');assert.equal(restoredChest.support,'rear-floor');
+  assert.equal(total-workshopPlan.items.length,251,'The other28 rooms retain their reviewed equipment census');
+  assert.equal(total,258,`The 29-room equipment census ${total} differs from its reviewed composition`);
   assert.deepEqual([...usedCells].sort(),Object.keys(HUB_PROP_ATLAS_V136.cells).sort());
   assert.deepEqual(rooms,before);
 });

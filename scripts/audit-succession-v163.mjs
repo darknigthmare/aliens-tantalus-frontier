@@ -478,6 +478,14 @@ export const V179_SOURCE_GROUPS = freezeManifestV179({
       "previousSha256": "f4bf5aacfa26279abab6fe089f5d6860d449a8ff48ef0fee602684a3a3e9be1f",
       "currentSha256": "7122d778c80fb8874cf8116168ebc57f39dadc5883f8a88df9f4e4f291b3bde9"
     },
+    "scripts/verify-hub-room-life-v136.mjs": {
+      "previousSha256": "3a4bc2fdb88a38f712b7377c7a054195b0218965bf1c7bcaa6ab0bfbf8fe4d23",
+      "currentSha256": "b76f0fe9008656bb8b2b6dc4b24b40c0ef061a28c5da234f3b6cf36bbb35eec0"
+    },
+    "scripts/verify-hub-service-routes-v138.mjs": {
+      "previousSha256": "6fa381291a721a891f964f86a4e95861bb267eaff5130416a3f1ecd451ed5173",
+      "currentSha256": "b4929721d0aed65ee7f1cc882ebd43bc7a7a1f825a0ecc9cc9df49780d3035a6"
+    },
     "scripts/verify-public-release-v86.mjs": {
       "previousSha256": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab",
       "currentSha256": "0c2be84858f46b7464b643bec5a05f49cef44b833d8139492b09f90b967a1d80"
