@@ -32449,5 +32449,52 @@
     "allFeedsCertifiedStable": false,
     "workbookChanged": false,
     "forgeState": "DEFERRED_BY_USER"
+  },
+  "followupV180": {
+    "schema": 180,
+    "baselineCommit": "86f202143ef3163ede025d668012d83aa0b62830",
+    "baselineProgressSha256": "0b9e02917c3b1f1fa95853ab361d139cfaf8186b6dc0d1e4e5f9ca96a63396c9",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "scope": "Scoped QA observer read and diagnostic correction for Asha dependency. Preserve all production gameplay, the complete dependency guard and its 900s/360s/45s budgets, workbook tables and prior receipts. The historical CI failure cause remains unknown.",
+    "historicalResultsTransferred": false,
+    "runtimeChanges": [],
+    "qaChanges": [
+      {
+        "path": "scripts/qa-npc-annex-service-routes-v163.py",
+        "previousSha256": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+        "currentSha256": "3a57f6bd0760a8930848badea22b66206779a2b89d4feae5e2659b4fde53cc22"
+      }
+    ],
+    "verifierChanges": [
+      {
+        "path": "scripts/verify-npc-annex-service-routes-v163.mjs",
+        "previousSha256": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+        "currentSha256": "ae6cc98ad92ec740b05894f3ca7cad676b627d0c66f454cfb15efd8d0940fa30"
+      },
+      {
+        "path": "scripts/verify-audit-continuation-v163.mjs",
+        "previousSha256": "cca73143317423dac2a2e0c9e97408ce093860a66b3722748b066d2f08e59fda",
+        "currentSha256": "9c6b7b970f18c821d42b28d688c3928c477cffd12d2c9f42b37db18990047e3d"
+      }
+    ],
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "approved1to1": 0,
+    "fullArtTasksClosed": 0,
+    "humanParticipants": 0,
+    "newPngAssets": 0,
+    "primaryArchivesRecovered": 0,
+    "sevenRoutesClosed": false,
+    "allFeedsCertifiedStable": false,
+    "workbookChanged": false,
+    "guardByteIdenticalToBaseline": true,
+    "oldFailureCauseEstablished": false,
+    "forgeState": "DEFERRED_BY_USER"
   }
 }
