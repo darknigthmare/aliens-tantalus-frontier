@@ -124,7 +124,8 @@ import { getEnemyDiscoveryV88, recordEnemyDiscoveryV88 } from './enemy-discovery
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
 import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
-import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
+import { MissionInsertionUiV62, resolveMissionInsertionMediaV62 } from './mission-insertion-ui-v62.js';
+import { resolveCampaignArtV179 } from './campaign-art-v179.js';
 import {
   SPECIAL_OPERATIONS_V131 as SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V131 as SPECIAL_OPERATION_COUNTS_V67,
   getSpecialOperationByCampaignIdV131 as getSpecialOperationByCampaignIdV67, NEW_SPECIAL_CAMPAIGNS_V131, isSoloSpecialOperationV131
@@ -2625,6 +2626,8 @@ function startMissionInsertionV62(context) {
     root,
     state,
     mediaRegistry: MISSION_INSERTION_MEDIA_V62,
+    resolveMedia: ({ state, phase }) => resolveCampaignArtV179({ state, phase })
+      || resolveMissionInsertionMediaV62({ state, phase, mediaRegistry: MISSION_INSERTION_MEDIA_V62 }),
     returnContext: 'command',
     reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
     onPersist: (serialized, metadata) => {

@@ -1,8 +1,13 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-open-workstreams-v179';
+const CACHE = 'atf-v143-xeno-trials-batch40-v179';
 const SHELL = Object.freeze([
   '/src/alien-base-bridge-v1.js',
   '/src/alien-base-snapshot-v1.js',
+  '/src/campaign-art-v179.js',
+  '/src/xeno-trials-boss-stages-v179.js',
+  '/src/xeno-trials-challenge-curriculum-v179.js',
+  '/src/xeno-trials-events-v179.js',
+  '/src/xeno-trials-roster-v179.js',
   '/src/hub-room-enrichment-v177.js',
   '/src/hub-batch-command-v177.js',
   '/src/hub-batch-habitat-v177.js',

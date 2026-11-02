@@ -25,6 +25,7 @@ import { INTEGRATION_SOURCES_V182, INTEGRATION_BASELINE_V182, INTEGRATION_SOURCE
   AI_TOOLING_FOLLOWUP_20261104, QA_BRANCH_CONSTANTS_V181, reviewedIntegrationDigestV182,
   historicalIntegrationViewV182, integratedRuntimeSourcesV182, verifyIntegrationV182,
   verifyQaBranchV181, qaProgressViewV181, reviewedQaBranchDigestV181 } from './audit-pr-integration-v182.mjs';
+import { V179_BASELINE_COMMIT, V179_RUNTIME_SUCCESSORS, V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, V179_NEW_VERIFIERS, reviewedDigestV179, verifyFollowupV179 as verifyTrialsBatchV179 } from './audit-succession-v179.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -36,6 +37,44 @@ const current = JSON.parse(read(prefix + 'progress-v163.json'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
 const effectiveSource = (path, historical) => reviewedCurrentDigestV179(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
+
+test('Trials batch V179 admits only exact changed bytes and new sources after the immutable V178 witness', () => {
+  assert.equal(V179_BASELINE_COMMIT, 'd41b5fc120da2e7a5938308f9d3c852d20e53cc5');
+  assert.deepEqual(verifyTrialsBatchV179(read), {
+    baselineCommit: V179_BASELINE_COMMIT, runtimeSuccessors: 8, verifierSuccessors: 4,
+    bridgeSuccessors: 2, newRuntimeSources: 5, newVerifiers: 6
+  });
+  const historical = Buffer.from(read(prefix + 'progress-v163.json'));
+  const effective = resolveAuditSourcesV163(previous, read, { effective: true });
+  for (const [path, receipt] of Object.entries(V179_RUNTIME_SUCCESSORS)) {
+    assert.equal(effective[path], receipt.currentSha256);
+    assert.throws(() => reviewedDigestV179(path, '0'.repeat(64)), /Incorrect V178 endpoint/);
+    assert.notEqual(receipt.previousSha256, receipt.currentSha256);
+  }
+  for (const [path, hash] of Object.entries(V179_NEW_RUNTIME_SOURCES)) assert.equal(effective[path], hash);
+  for (const map of [V179_RUNTIME_SUCCESSORS, V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS]) {
+    for (const [path, receipt] of Object.entries(map)) {
+      assert.equal(sha(read(path)), receipt.currentSha256, path);
+      assert.equal(reviewedDigestV179(path, receipt.previousSha256), receipt.currentSha256);
+      assert.throws(() => reviewedDigestV179(path, '0'.repeat(64)), /Incorrect V178 endpoint/, path);
+      const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+      assert.throws(() => verifyTrialsBatchV179(changed), /Unreviewed V179/, path);
+      assert.throws(() => verifyAuditSuccessionV163(previous, current, changed), undefined, path);
+    }
+  }
+  for (const [path, hash] of Object.entries({ ...V179_NEW_RUNTIME_SOURCES, ...V179_NEW_VERIFIERS })) {
+    assert.equal(sha(read(path)), hash, path);
+    const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyTrialsBatchV179(changed), /Unreviewed V179/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, changed), undefined, path);
+  }
+  assert.deepEqual(read(prefix + 'progress-v163.json'), historical);
+  assert.deepEqual(resolveAuditSourcesV163(previous), current.runtimeSourceSha256,
+    'The default resolver remains the historical record');
+  for (const [path, receipt] of Object.entries(V178_VERIFIER_SUCCESSORS))
+    assert.equal(reviewedLiveDigestV178(path, receipt.previousSha256), receipt.currentSha256,
+      'V178 still resolves its own historical endpoint: ' + path);
+});
 
 test('V163 keeps all original task identities, roster and historical table cells unchanged', () => {
   assert.equal(current.lot, 'V163');
@@ -111,7 +150,9 @@ test('the full current bridge validates runtime bytes and older default returns 
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.runtimeChanges).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) });
+    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(V179_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
+    ...V179_NEW_RUNTIME_SOURCES });
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);

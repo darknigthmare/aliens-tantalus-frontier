@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { historicalIntegrationViewV182, reviewedIntegrationDigestV182,
   integratedRuntimeSourcesV182, verifyIntegrationV182 } from './audit-pr-integration-v182.mjs';
+import { V179_RUNTIME_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, reviewedDigestV179, verifyFollowupV179 as verifyTrialsBatchV179 } from './audit-succession-v179.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V163 = Object.freeze({
   "docs/forge/xeno-trials/V162-NON-FORGE-CONTINUATION.md": "a67a133e6cf8249cbc832c1ed6ff69eb6da18ecbe9a0993ffaaea015727949c2",
@@ -1183,6 +1184,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   verifyOpenWorkstreamsV177(current, readSource);
   verifyFollowupV178(current, readSource);
+  verifyTrialsBatchV179(readSource);
   return Object.freeze({ inherited: 87, changed: changed.length, unchanged: 87 - changed.length,
     added: added.length, current: keys(after).length });
 }
@@ -1215,7 +1217,9 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.runtimeChanges).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) })
+    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])),
+    ...Object.fromEntries(Object.entries(V179_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
+    ...V179_NEW_RUNTIME_SOURCES })
     : current.runtimeSourceSha256;
 }
 

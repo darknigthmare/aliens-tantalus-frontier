@@ -61,7 +61,13 @@ export function normalizeXenoTrialsProgressV96(value) {
     base.pending = { matchId: ticket.matchId, config: { ...normalizeXenoTrialsConfigV96(ticket.config),
       seed: ticket.config.seed, matchId: ticket.matchId } };
     const activity = ticket.config.activityV119 && resolveXenoTrialsActivityV119(ticket.config.activityV119, base.modesV119);
-    if (ticket.config.activityV119 && (!activity || (activity.opponentId && activity.opponentId !== ticket.config.opponentId)
+    const run = base.modesV119.challengeRun;
+    const runMismatch = run && (!activity || activity.branch !== 'challenges' || activity.id !== run.id || ticket.config.playerId !== run.playerId);
+    // A resumed series belongs to its current authored wave. A stale ticket
+    // must not bring another arena, faction or difficulty into that wave.
+    const settingMismatch = activity && ['opponentId', 'stageId', 'factionId', 'difficulty']
+      .some(key => activity[key] && activity[key] !== ticket.config[key]);
+    if (runMismatch || ticket.config.activityV119 && (!activity || settingMismatch
       || (activity.forcedPlayerId && activity.forcedPlayerId !== ticket.config.playerId)
       || (activity.requiredFamily && XENO_TRIALS_FIGHTERS_V96.find(f => f.id === ticket.config.playerId)?.family !== activity.requiredFamily)
       || (activity.branch === 'challenges' && base.modesV119.challengeRun?.id === activity.id && base.modesV119.challengeRun.playerId !== ticket.config.playerId))) base.pending = null;

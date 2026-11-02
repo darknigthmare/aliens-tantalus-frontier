@@ -25,6 +25,12 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'verify-xeno-trials-curriculum-v179.mjs',
+  'verify-xeno-trials-roster-v179.mjs',
+  'verify-xeno-trials-boss-stages-v179.mjs',
+  'verify-xeno-trials-events-v179.mjs',
+  'verify-xeno-trials-tickets-v179.mjs',
+  'verify-campaign-art-v179.mjs',
   'verify-capture-observation-v177.mjs',
   'verify-hub-armory-layering-v177.mjs',
   'verify-tantalus-enrichment-v177.mjs',
@@ -123,6 +129,7 @@ const SCRIPT_FILES = new Set([
 for (const file of ['build-release-v143.mjs', 'test-release-v143.mjs', 'verify-audit-v143.mjs',
   'verify-save-lifecycle-v143.mjs', 'verify-release-artifact-v143.mjs',
   'qa-service-worker-v143.py', 'qa-save-profiles-v144.py', 'verify-xeno-trials-v145.mjs', 'qa-xeno-trials-v145.py']) SCRIPT_FILES.add(file);
+SCRIPT_FILES.add('audit-succession-v179.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-signatures-v147.mjs');
 SCRIPT_FILES.add('verify-xeno-trials-supers-v148.mjs');
 SCRIPT_FILES.add('qa-xeno-trials-signatures-v147.py');
@@ -321,6 +328,8 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/V168-DIALOGUE-AND-TANTALUS-BATCH100.md',
   'docs/forge/xeno-trials/batch100-v168.json',
   'docs/forge/xeno-trials/batch100-v177.json',
+  'docs/forge/xeno-trials/batch40-v179.json',
+  'docs/forge/xeno-trials/V179-XENO-TRIALS-BATCH40.md',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
   'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
   'docs/forge/xeno-trials/V165-PARALLEL-COMPLETION.md',

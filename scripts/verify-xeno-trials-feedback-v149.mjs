@@ -128,7 +128,9 @@ test('V149 workbook tracks exact current IDs, open art and source-only distribut
  const hash=b=>createHash('sha256').update(b).digest('hex');
  assert.equal(data.schema,149);assert.equal(data.approved1to1,0);assert.equal(data.newCharacterAnimationClips,0);assert.equal(data.newSupers,0);
  assert.deepEqual(data.fighters.map(f=>f.id),roster.map(f=>f.id));assert.equal(data.retainedPilotSupers,5);
- assert.deepEqual(data.stages.map(s=>s.id),stages.map(s=>s.id));
+ // The V149 workbook records its six historical scenes; V179 additions are
+ // tested against the live runtime separately and do not rewrite that snapshot.
+ assert.deepEqual(data.stages.map(s=>s.id),stages.filter(s=>!s.stageRevision||s.stageRevision<=149).map(s=>s.id));
  assert.equal(hash(readFileSync(new URL(data.workbook,dir))),data.workbookSha256);
  assert.equal(hash(readFileSync(new URL('XENO_TRIALS_SUIVI_V148.xlsx',dir))),data.retainedV148WorkbookSha256);
  for(const file of [data.workbook,'progress-v149.json','V149-FEEDBACK.md']){
