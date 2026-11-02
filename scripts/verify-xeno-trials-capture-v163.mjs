@@ -229,7 +229,7 @@ async function nativePlayerCaptureForPause(h){
  assert.fail('The bounded native keyboard policy did not obtain a capture.');
 }
 function captureQaLiteral(name){
- const source=readFileSync(new URL('./qa-xeno-trials-capture-v163.py',import.meta.url),'utf8');
+ const source=readFileSync(process.env.ATF_CAPTURE_DRIVER_SOURCE||new URL('./qa-xeno-trials-capture-v163.py',import.meta.url),'utf8');
  const match=source.match(new RegExp('^'+name+" = r'''([\\s\\S]*?)'''",'m'));
  assert.ok(match,'The test executes the actual raw JS literal '+name+' from the Python QA.');return match[1];
 }
@@ -265,9 +265,10 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   const floor=qa.out('floor');
   assert.equal(floor.error,null);assert.equal(floor.ready,true);
   const recorded=floor.floor.state.match;
-  assert.equal(recorded.grappleV153.escapeProgress,67);assert.equal(qa.encodings.length,0);
+  assert.equal(recorded.tick,before.tick,'The already-painted admissible floor must pause in the arm callback.');
+  assert.equal(recorded.grappleV153.escapeProgress,66);assert.equal(qa.encodings.length,0);
   // This declared six-tick transfer latency reproduces the old external P race:
-  // an unpaused CPU reaches escape=72 on tick five, before P could arrive.
+  // an unpaused CPU reaches escape=72 on tick six, before P could arrive.
   h.frame(6);const frozen=h.runtime.getState();
   t.diagnostic(JSON.stringify({floorTick:recorded.tick,floorEscape:recorded.grappleV153.escapeProgress,
    delayedReadTick:frozen.tick,paused:frozen.paused,holdId:frozen.grappleV153?.id,
@@ -325,4 +326,28 @@ test('capture QA rejects unavailable public pause, changed tick or identity, end
   const qa=captureQaObserver(h);qa.observe(binding);for(const fn of queue.splice(0))fn();
   assert.ok(qa.out('floor').error,label+' must fail');assert.equal(qa.out('floor').ready,false,label+' cannot publish floor success');
  }
+});
+
+test('the first floor observer binds the native hold to its exact accepted special event',async()=>{
+ const h=captureRuntimeHost();
+ try{
+  await nativePlayerCaptureForPause(h);
+  let before=h.runtime.getState();
+  for(let i=0;i<180&&before.grappleV153?.escapeProgress<66;i++){h.frame();before=h.runtime.getState();}
+  assert.equal(before.grappleV153.escapeProgress,66);
+  const contact=before.events.find(e=>e.type==='grapple-start-v153'&&e.grappleId===before.grappleV153.id);
+  const special=before.events.findLast(e=>e.type==='attack'&&e.side==='player'&&e.id<contact.id);
+  assert.equal(special.kind,'special');
+  const binding={...captureBinding(before),attackEventId:special.id};
+  for(const wrongEvent of [special.id-1,special.id+1]){
+   const qa=captureQaObserver(h);qa.observe({...binding,attackEventId:wrongEvent});
+   assert.match(qa.out('floor').error,/does not belong to the observed accepted special/);
+   assert.equal(qa.out('floor').ready,false);assert.equal(h.element('pause').clicks||0,0);
+   assert.deepEqual(h.runtime.getState(),before,'A wrong expected event cannot pause or change the native hold.');
+  }
+  const valid=captureQaObserver(h);valid.observe(binding);
+  assert.equal(valid.out('floor').error,null);assert.equal(valid.out('floor').ready,true);
+  assert.equal(valid.out('floor').floor.state.match.tick,before.tick);
+  assert.equal(h.element('pause').clicks,1);assert.equal(h.runtime.getState().paused,true);
+ }finally{h.runtime.stop();}
 });
