@@ -164,7 +164,7 @@ test('pose read arms only evidence atomically without a second transport or a co
  assert.equal(g.arms.length,0);
 });
 
-test('actual Python keys guard while unavailable and release before a grounded resting-target special with one pose RPC',()=>{
+test('actual Python keys recharge at rest, guard visible threats and release before a grounded resting-target special with one pose RPC',()=>{
  // Declared pose replay tests the real Python policy and RPC order. It does not
  // claim a second native combat, browser rendering or latency qualification.
  const result=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
@@ -177,8 +177,8 @@ for n in tree.body:
    if isinstance(target,ast.Name):scope[target.id]=n.value.value
 functions=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['acquire_player_capture','get_frame']]
 exec(compile(ast.Module(body=functions,type_ignores=[]),'<actual-python-driver-rpc-and-policy>','exec'),scope)
-def observation(tick,cooldown=0,threat=False,hold=False):
- player={'id':'prowler','side':'player','x':419.66,'y':0,'vy':0,'hp':185,'stamina':100,'stun':0,'guard':False,'attack':None,'specialCooldown':cooldown,'stats':{'specials':int(hold)}}
+def observation(tick,cooldown=0,threat=False,hold=False,stamina=100):
+ player={'id':'prowler','side':'player','x':419.66,'y':0,'vy':0,'hp':185,'stamina':stamina,'stun':0,'guard':False,'attack':None,'specialCooldown':cooldown,'stats':{'specials':int(hold)}}
  target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':80,'stun':0,'guard':False,'attack':{'kind':'light','age':.06} if threat else None}
  m={'config':{'matchId':'declared-policy-replay'},'tick':tick,'round':1,'phase':'active','paused':False,'presentation':{'blocksSimulation':False},'fighters':[player,target],'events':[]}
  startup={'ready':False,'accepted':None,'matchId':m['config']['matchId'],'round':1,'attemptNumber':1,'frame':None}
@@ -192,7 +192,7 @@ class Page:
  def evaluate(self,code,arg=None):
   if 'const G=await import(' in code:
    self.reads+=1;self.events.append('read')
-   rows=[observation(100,cooldown=1),observation(124,threat=True),observation(148),observation(180,hold=True)]
+   rows=[observation(100,stamina=2),observation(124,threat=True),observation(148),observation(180,hold=True)]
    assert self.reads<=len(rows),'A second post-action read or metadata transfer is unnecessary'
    return rows[self.reads-1]
   assert code.startswith('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__=') or 'o.cancelled=true' in code,'No separate evidence or pixel RPC during combat'
@@ -202,7 +202,7 @@ class Page:
  def press(self,key,delay=0):assert delay==40;self.events.append('press:'+key)
  def wait_for_timeout(self,ms):assert ms==20
 p=Page();trace={};proof=scope['acquire_player_capture'](p,True,trace)
-assert p.reads==4 and p.events==['read','down:KeyS','read','read','up:KeyS','press:KeyL','read'],p.events
+assert p.reads==4 and p.events==['read','read','down:KeyS','read','up:KeyS','press:KeyL','read'],p.events
 assert len(trace['attempts'])==1 and trace['attempts'][0]['nativeSpecialAccepted']
 assert trace['attempts'][0]['before']['targetRecovery']==False
 assert trace['attempts'][0]['after']['tick']==180

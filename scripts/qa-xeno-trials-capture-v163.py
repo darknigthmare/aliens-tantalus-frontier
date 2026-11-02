@@ -354,7 +354,7 @@ def acquire_player_capture(page, after, trace):
     deadline = started + 55
     trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
                   'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [],
-                  'policy': 'Real Python-driven keys: approach using pure V105 body gap to <=6px (V153 admission <=8px); guard at contact during visible threat or unavailable special; release guard and press special during observed target rest/recovery when both grounded, player unstunned, affordable and cooldown zero. Startup evidence is armed within the same pose read, without emitting controls. No match field is assigned.'})
+                  'policy': 'Real Python-driven keys: approach using pure V105 body gap to <=6px (V153 admission <=8px); guard visible startup/active threats at contact and release during rest/recovery so ordinary stamina can recharge; press special during observed target rest/recovery when both grounded, player unstunned, affordable and cooldown zero. Startup evidence is armed within the same pose read, without emitting controls. No match field is assigned.'})
     held = None
     guarding = False
     control_round = None
@@ -465,7 +465,7 @@ def acquire_player_capture(page, after, trace):
             can_special = (not a.get('attack') and a['stun'] <= 0 and a['y'] == 0
                            and b['y'] == 0 and b['vy'] == 0
                            and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
-            want_guard = bool(contact and (value['targetThreat'] or not can_special)
+            want_guard = bool(contact and value['targetThreat']
                               and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] > 1)
             if want_guard != guarding:
                 if want_guard:
