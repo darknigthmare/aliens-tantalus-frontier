@@ -41,4 +41,4 @@ export const RELEASE = Object.freeze({
 });
 
 // Cross-game identity/reference lookup. Never mutates runtime catalogues or save IDs.
-export { ALIEN_BASE_SNAPSHOT_INFO_V1, ALIEN_BASE_ENTITIES_V1, ALIEN_BASE_WEAPONS_V1, ALIEN_BASE_MASTER_ENTITIES_V1, ALIEN_BASE_MASTER_LINKS_V1, resolveAlienBaseMasterEntityV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseDossierV1, resolveAlienBaseWeaponReferenceV1, resolveAlienBaseGameMappingV1, auditAlienBaseBridgeV1, resolveAlienBaseRegistryV2CandidateV1, ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1 } from './alien-base-bridge-v1.js';
+export { ALIEN_BASE_SNAPSHOT_INFO_V1, ALIEN_BASE_ENTITIES_V1, ALIEN_BASE_WEAPONS_V1, ALIEN_BASE_MASTER_ENTITIES_V1, ALIEN_BASE_MASTER_LINKS_V1, resolveAlienBaseMasterEntityV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseDossierV1, resolveAlienBaseWeaponReferenceV1, resolveAlienBaseGameMappingV1, auditAlienBaseBridgeV1 } from './alien-base-bridge-v1.js';

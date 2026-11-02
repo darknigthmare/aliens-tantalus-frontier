@@ -35,174 +35,6 @@ for (const link of ALIEN_BASE_MASTER_LINKS_V1) {
   proposalForDossier.set(link.dossierId, link);
   proposedMasterIds.add(link.sharedEntityId);
 }
-/** V2 documentary suggestions observed by exact Tantalus local ID; no active identity alias. */
-export const ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1 = Object.freeze({
-  repository: 'darknigthmare/alien_base',
-  prNumber: 21,
-  commit: 'd2ff9fef4df40934f35796b9fe361e65315d1ac2',
-  status: 'unmerged-source-review-pending',
-  suggestedLocalBindings: 38,
-  approvedCanonicalIdentityMerges: 0
-});
-const registryV2ByGameRef = new Map([
-  [
-    "enemy-001-ovomorph",
-    "bio.xenomorph.ovomorph"
-  ],
-  [
-    "enemy-002-facehugger",
-    "bio.xenomorph.facehugger"
-  ],
-  [
-    "enemy-003-chestburster",
-    "bio.xenomorph.chestburster"
-  ],
-  [
-    "enemy-004-drone-big-chap",
-    "bio.xenomorph.big-chap"
-  ],
-  [
-    "enemy-005-warrior",
-    "bio.xenomorph.warrior"
-  ],
-  [
-    "enemy-006-runner",
-    "bio.xenomorph.runner"
-  ],
-  [
-    "enemy-007-praetorian",
-    "bio.xenomorph.praetorian"
-  ],
-  [
-    "enemy-008-queen",
-    "bio.xenomorph.queen"
-  ],
-  [
-    "enemy-009-crusher",
-    "bio.xenomorph.crusher"
-  ],
-  [
-    "enemy-010-spitter",
-    "bio.xenomorph.spitter"
-  ],
-  [
-    "enemy-014-boiler",
-    "bio.xenomorph.boiler"
-  ],
-  [
-    "enemy-015-prowler",
-    "bio.xenomorph.prowler"
-  ],
-  [
-    "enemy-016-burster",
-    "bio.xenomorph.burster"
-  ],
-  [
-    "enemy-035-trilobite-echo",
-    "bio.pathogen.trilobite-echo"
-  ],
-  [
-    "enemy-036-deacon-line",
-    "bio.pathogen.deacon-line"
-  ],
-  [
-    "enemy-037-neomorph",
-    "bio.pathogen.neomorph"
-  ],
-  [
-    "enemy-038-protomorph",
-    "bio.pathogen.protomorph"
-  ],
-  [
-    "enemy-041-working-joe",
-    "bio.synthetic.working-joe"
-  ],
-  [
-    "vehicle-001-m577-armored-personnel-carrier",
-    "vehicle.m577-armored-personnel-carrier"
-  ],
-  [
-    "vehicle-007-p-5000-powered-work-loader",
-    "vehicle.p-5000-powered-work-loader"
-  ],
-  [
-    "vehicle-009-ud-4l-cheyenne-dropship",
-    "vehicle.ud-4l-cheyenne-dropship"
-  ],
-  [
-    "vehicle-013-uscss-nostromo-shuttle",
-    "vehicle.narcissus-nostromo-lifeboat"
-  ],
-  [
-    "equipment-001-motion-tracker",
-    "item.motion-tracker"
-  ],
-  [
-    "equipment-009-m3-personnel-armor",
-    "item.m3-personnel-armor"
-  ],
-  [
-    "weapon-001-m41a-pulse-rifle",
-    "item.m41a-pulse-rifle"
-  ],
-  [
-    "weapon-005-m56-smartgun",
-    "item.m56-smartgun"
-  ],
-  [
-    "weapon-006-m240-incinerator-unit",
-    "item.m240-incinerator-unit"
-  ],
-  [
-    "weapon-015-ua-571-c-sentry-gun",
-    "item.ua-571-c-sentry-gun"
-  ],
-  [
-    "weyland-yutani",
-    "faction.weyland-yutani"
-  ],
-  [
-    "seegson",
-    "faction.seegson"
-  ],
-  [
-    "uscm",
-    "faction.uscm"
-  ],
-  [
-    "atarax",
-    "faction.atarax"
-  ],
-  [
-    "crew-01-mara-vega",
-    "character.tantalus.mara-vega"
-  ],
-  [
-    "crew-05-bishop-9",
-    "character.tantalus.bishop-9"
-  ],
-  [
-    "crew-10-david-8r",
-    "character.tantalus.david-8r"
-  ],
-  [
-    "enemy-569-newborn",
-    "bio.hybrid.newborn"
-  ],
-  [
-    "enemy-570-offspring",
-    "bio.pathogen.offspring"
-  ],
-  [
-    "enemy-571-predalien",
-    "bio.xenomorph.predalien"
-  ]
-]);
-if (registryV2ByGameRef.size !== ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.suggestedLocalBindings
-  || [...registryV2ByGameRef.keys()].some(id => !byGameRef.has(id))) {
-  throw new Error('Alien_base v2 review candidates are ambiguous or lack a reviewed v1 dossier');
-}
-
 const researchById = new Map();
 for (const weapon of ALIEN_BASE_WEAPONS_V1) {
   if (researchById.has(weapon.id)) throw new Error('Duplicate Alien_base weapon: ' + weapon.id);
@@ -244,26 +76,6 @@ export function resolveAlienBaseIdentityProposalV1(value) {
   return proposalForDossier.get(dossier?.id) || null;
 }
 
-/** Observed V2 proposal only. Cannot modify save IDs, NPC admission or combat tuning. */
-export function resolveAlienBaseRegistryV2CandidateV1(value) {
-  const id = idOf(value);
-  if (typeof id !== 'string' || !registryV2ByGameRef.has(id)) return null;
-  const dossier = byGameRef.get(id);
-  const legacyProposal = proposalForDossier.get(dossier?.id);
-  if (!legacyProposal) throw new Error('Alien_base v2 proposal lacks a v1 dossier link for '+id);
-  return Object.freeze({
-    localId: id,
-    dossierId: dossier.id,
-    legacyMasterCandidateId: legacyProposal.sharedEntityId,
-    registryV2CandidateId: registryV2ByGameRef.get(id),
-    status: ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.status,
-    sourceCommit: ALIEN_BASE_REGISTRY_V2_SOURCE_REVIEW_V1.commit,
-    approvedCanonicalIdentity: false,
-    autoMergeStats: false,
-    visualFidelityCertified: false
-  });
-}
-
 /** Includes proposed weapons for documentary use only; never grants inventory access. */
 export function resolveAlienBaseWeaponReferenceV1(value) {
   const id = idOf(value);
@@ -278,7 +90,6 @@ export function resolveAlienBaseGameMappingV1(value) {
   const master = resolveAlienBaseMasterEntityV1(id);
   const weapon = resolveAlienBaseWeaponReferenceV1(id);
   const proposal = resolveAlienBaseIdentityProposalV1(id);
-  const registryV2Candidate = resolveAlienBaseRegistryV2CandidateV1(id);
   const runtime = runtimeById.get(id) || null;
   if (!canonical && !master && !weapon && !runtime) return null;
   return Object.freeze({
@@ -287,8 +98,6 @@ export function resolveAlienBaseGameMappingV1(value) {
     canonicalIdentityApproved: false,
     masterId: master?.id || null,
     candidateMasterId: proposal?.sharedEntityId || null,
-    candidateRegistryV2Id: registryV2Candidate?.registryV2CandidateId || null,
-    candidateRegistryV2Status: registryV2Candidate?.status || null,
     identityLinkStatus: proposal?.status || null,
     identityLinkRelation: proposal?.relation || null,
     identitySource: canonical?.sourceWork || weapon?.work || null,
@@ -313,8 +122,6 @@ export function auditAlienBaseBridgeV1() {
     masterLinks: ALIEN_BASE_MASTER_LINKS_V1.length,
     pendingMasterLinks: proposalForDossier.size,
     activeMasterAliases: 0,
-    registryV2CandidateLocalBindings: registryV2ByGameRef.size,
-    registryV2ApprovedCanonicalAliases: 0,
     unlinkedDossiers: ALIEN_BASE_ENTITIES_V1.length - ALIEN_BASE_MASTER_LINKS_V1.length,
     weaponDossiers: ALIEN_BASE_WEAPONS_V1.length,
     researchOnlyWeapons: proposed.length,
