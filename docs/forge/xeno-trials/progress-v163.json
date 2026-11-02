@@ -32496,5 +32496,88 @@
     "guardByteIdenticalToBaseline": true,
     "oldFailureCauseEstablished": false,
     "forgeState": "DEFERRED_BY_USER"
+  },
+  "followupV181": {
+    "schema": 181,
+    "baselineCommit": "b9886eccb7ea7fa9ea3c29230240965f54eea015",
+    "baselineProgressSha256": "84ae4e27dc77a35d4a8b44a01ed18617f29228bdeece64b049b1f3119908e629",
+    "state": "PREPUBLICATION",
+    "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+    "scope": "QA-only native keyboard Trials policy at declared0/200ms read delay, observed Cal vehicle-bay to logistics and moving interaction, and CI recipes with identical fixtures. Source admission does not certify the integrated candidate or alter gameplay.",
+    "historicalResultsTransferred": false,
+    "runtimeChanges": [],
+    "qaChanges": [
+      {
+        "path": "scripts/qa-xeno-trials-capture-v163.py",
+        "previousSha256": "f7108b5d1da2f06b9abe3dffdb5b8f93d2ebb534e11699e50aff25690498e09d",
+        "currentSha256": "351aafba32f5aedc9f20bd9171da5f8f25ee5421a8b246afe8d1079c3cb8e64e"
+      },
+      {
+        "path": "scripts/qa-npc-cal-logistics-route-v165.py",
+        "previousSha256": "88e74456f97f7c171cfb4363660324a114b9093d3fbe03f6cc43b7e953f3af6a",
+        "currentSha256": "4a7e96f5e76e8221afd26c5fbc6a67b791d724215d0dd6685599ee34089649aa"
+      }
+    ],
+    "verifierChanges": [
+      {
+        "path": "scripts/verify-capture-observation-v177.mjs",
+        "previousSha256": "ca0a7011de8a2f5a2f785263bb5fe3a0e173b20ac842e64e97eb82c2aa76ce6c",
+        "currentSha256": "b68c2c76ed78bdf63247ba3087a2f8b42ba9fc3a42d8b098ef6c5f984c73ef77"
+      },
+      {
+        "path": "scripts/verify-npc-cal-logistics-route-v165.mjs",
+        "previousSha256": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
+        "currentSha256": "8303fb51cf82f200432da621d21f8e80cbcefdc58e03623419a1acb362ed4775"
+      },
+      {
+        "path": "scripts/verify-parallel-completion-v165.mjs",
+        "previousSha256": "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa",
+        "currentSha256": "92d1ce93e1b8b2e79ee53b3ecb9471c27386846ac13608adc5b07c5bcc7f391f"
+      },
+      {
+        "path": "scripts/verify-audit-continuation-v163.mjs",
+        "previousSha256": "9c6b7b970f18c821d42b28d688c3928c477cffd12d2c9f42b37db18990047e3d",
+        "currentSha256": "a5aaa5f2e96589954e7d7f3171715eace937a7d0a92fc7f0a55c874aa6054012"
+      }
+    ],
+    "workflowChanges": [
+      {
+        "path": ".github/workflows/non-forge-regression-v163.yml",
+        "previousSha256": "2981bea5a655a3f9dc7b215bc8be55fd03711d7761297376b533b8d2e4df699f",
+        "currentSha256": "f3b2c2665de69d67cbada9be935e8e34f89a9f9ebf32e48523947b3946a9439e"
+      }
+    ],
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "captureBudgets": {
+      "acquisitionWallSeconds": 55,
+      "attemptLimit": 32,
+      "firstFloorMs": 45000,
+      "resumeMs": 15000
+    },
+    "declaredClientReadDelaysMs": [
+      0,
+      200
+    ],
+    "calStationToWorkTravelObserved": false,
+    "calV62InterdeckTransportImplemented": false,
+    "calGlobalStatus": "PARTIEL",
+    "interactionHoldPersistenceClaim": false,
+    "oldCI143CauseEstablished": false,
+    "generalLatencyCertified": false,
+    "approved1to1": 0,
+    "fullArtTasksClosed": 0,
+    "humanParticipants": 0,
+    "newPngAssets": 0,
+    "primaryArchivesRecovered": 0,
+    "sevenRoutesClosed": false,
+    "allFeedsCertifiedStable": false,
+    "workbookChanged": false,
+    "forgeState": "DEFERRED_BY_USER"
   }
 }

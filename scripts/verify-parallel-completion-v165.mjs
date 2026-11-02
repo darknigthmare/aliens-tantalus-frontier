@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { verifyAuditSuccessionV163, verifyGamedevCorrectionV163, resolveAuditSourcesV163,
-  verifyReviewedVerifierV177 } from './audit-succession-v163.mjs';
+  verifyReviewedVerifierV177, verifyFollowupV181, reviewedLiveDigestV181 } from './audit-succession-v163.mjs';
 import { XENO_TRIALS_RIG_DATA_V165 } from '../src/xeno-trials-rig-data-v165.js';
 import { PLAYER_COSTUME_SKINS_V165 } from '../src/player-costume-atlases-v165.js';
 import { PLAYER_COSTUME_OUTFITS_V165, PLAYER_COSTUME_LINKED_OUTFITS_V165,
@@ -105,7 +105,15 @@ export function verifyParallelCompletionV165(record, readSource = read) {
   assert.equal(ci.workflow, '.github/workflows/non-forge-regression-v163.yml');
   assert.equal(ci.conclusion, null);
   const workflow = readSource(ci.workflow);
-  assert.equal(sha(workflow), ci.workflowSha256, 'CI configuration changed after documentary freeze');
+  assert.equal(ci.workflowSha256, '2981bea5a655a3f9dc7b215bc8be55fd03711d7761297376b533b8d2e4df699f', 'Historical V165 workflow witness changed');
+  let expectedWorkflowSha256 = ci.workflowSha256;
+  if (Object.hasOwn(record, 'followupV181')) {
+    // Validate the caller's record, not only the current JSON read by the
+    // cumulative source resolver. A malformed admission must never fall back.
+    verifyFollowupV181(record, readSource);
+    expectedWorkflowSha256 = reviewedLiveDigestV181(ci.workflow, ci.workflowSha256);
+  }
+  assert.equal(sha(workflow), expectedWorkflowSha256, 'CI configuration changed without an exact documentary successor');
   const matrix = workflow.toString().match(/workstream:\s*\[([^\]]+)\]/);
   assert.ok(matrix);
   assert.deepEqual(matrix[1].split(',').map(value => value.trim()), ciWorkstreams);
@@ -250,4 +258,32 @@ test('invented receipts, omitted source changes, modified verifiers and broadene
     const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyParallelCompletionV165(current, changed), path);
   }
+});
+
+
+test('V165 frozen CI witness accepts only its exact validated V181 successor and rejects forged caller records', () => {
+  const ci=current.followupV165.ciPlan;
+  assert.equal(ci.workflowSha256,'2981bea5a655a3f9dc7b215bc8be55fd03711d7761297376b533b8d2e4df699f');
+  const live=sha(read(ci.workflow));assert.notEqual(live,ci.workflowSha256);
+  assert.equal(reviewedLiveDigestV181(ci.workflow,ci.workflowSha256),live);
+  verifyParallelCompletionV165(current);
+  const missing=structuredClone(current);delete missing.followupV181;
+  assert.throws(()=>verifyParallelCompletionV165(missing),/CI configuration changed without an exact documentary successor/);
+  const malformed=structuredClone(current);malformed.followupV181=null;
+  assert.throws(()=>verifyParallelCompletionV165(malformed),/Missing V181 continuation/);
+  const omitted=structuredClone(current);omitted.followupV181.workflowChanges=[];
+  assert.throws(()=>verifyParallelCompletionV165(omitted),/Incomplete V181 workflowChanges/);
+  for(const alter of[
+    r=>{r.followupV181.workflowChanges[0].previousSha256='0'.repeat(64);},
+    r=>{r.followupV181.workflowChanges[0].currentSha256='0'.repeat(64);},
+    r=>{r.followupV181.workflowChanges[0].path='.github/workflows/unknown.yml';},
+    r=>{r.followupV181.releaseEvidence.ci={status:'success'};},
+    r=>{r.followupV165.ciPlan.workflowSha256=live;},
+    r=>{delete r.followupV181;r.followupV165.ciPlan.workflowSha256=live;},
+    r=>{r.followupV165.ciPlan.totalContinuationJobs+=1;}
+  ]){const bad=structuredClone(current);alter(bad);assert.throws(()=>verifyParallelCompletionV165(bad));}
+  const changed=p=>p===ci.workflow?Buffer.concat([read(p),Buffer.from('\nUNREVIEWED')]):read(p);
+  assert.throws(()=>verifyParallelCompletionV165(current,changed),/Unreviewed V181 workflowChanges/);
+  const forged=structuredClone(current);forged.followupV181.workflowChanges[0].currentSha256=sha(changed(ci.workflow));
+  assert.throws(()=>verifyParallelCompletionV165(forged,changed));
 });

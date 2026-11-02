@@ -76,6 +76,27 @@ jobs:
           print('::error file=' + script + ',title=Native browser QA::' + escape(script + ' pipeline failed; ' + detail), flush=True)
           PYREPORT
           }
+          print_native_receipt() {
+            python - "$1" "$2" <<'PYRECEIPT'
+          import json
+          from pathlib import Path
+          import sys
+          label, report_path = sys.argv[1:]
+          r = json.loads(Path(report_path).read_text())
+          assert r['status'] == 'passed', 'Native report is not successful'
+          assert isinstance(r['identityBefore'], dict) and r['identityBefore'].get('sourceCommit'), 'Missing build identity'
+          assert r['identityBefore'] == r['identityAfter'], 'Native report changed its build identity'
+          out = {'label': label, 'status': r['status'], 'checks': len(r['checks']), 'captures': len(r['captures']),
+                 'identityBefore': r['identityBefore'], 'identityAfter': r['identityAfter']}
+          for key in ['qaDriverSha256', 'clientReadDelay', 'fixtureSha256', 'harnessCommit', 'sourceUnchanged',
+                      'stationOriginV181', 'stationOriginToLogisticsObservedV181', 'stationToWorkTravelObserved',
+                      'walkingInteractionObservedV182', 'walkingInteractionV182']:
+              if key in r: out[key] = r[key]
+          if 'profiles' in r:
+              out['fixtures'] = [{key: item[key] for key in ['name', 'sha256']} for item in r['profiles']]
+          print('QA_RECEIPT ' + json.dumps(out, separators=(',', ':'), allow_nan=False), flush=True)
+          PYRECEIPT
+          }
           status=0
           case "$WORKSTREAM" in
             player-v165)
@@ -96,6 +117,9 @@ jobs:
               ;;
             cal-v165)
               python -B scripts/qa-npc-cal-logistics-route-v165.py --base "$ATF_BASE_URL" --expect-build "$source_head" --expect-harness "$source_head" --output "$RUNNER_TEMP/atf-gameplay-v163/cal-v165" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/cal-v165.log" || { status=1; annotate_failure scripts/qa-npc-cal-logistics-route-v165.py "$RUNNER_TEMP/atf-gameplay-v163/cal-v165/report.json"; }
+              print_native_receipt "cal-normal" "$RUNNER_TEMP/atf-gameplay-v163/cal-v165/report.json" || status=1
+              python -B scripts/qa-npc-cal-logistics-route-v165.py --base "$ATF_BASE_URL" --expect-build "$source_head" --expect-harness "$source_head" --fixture "$RUNNER_TEMP/atf-gameplay-v163/cal-v165/cal-logistics-disclosed-native0530.json" --walking-interaction --output "$RUNNER_TEMP/atf-gameplay-v163/cal-walking-interaction" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/cal-walking-interaction.log" || { status=1; annotate_failure scripts/qa-npc-cal-logistics-route-v165.py "$RUNNER_TEMP/atf-gameplay-v163/cal-walking-interaction/report.json"; }
+              print_native_receipt "cal-walking-interaction" "$RUNNER_TEMP/atf-gameplay-v163/cal-walking-interaction/report.json" || status=1
               ;;
             david-v165|inez-v165|maksim-v165|jun-v165)
               case "$WORKSTREAM" in
@@ -121,7 +145,10 @@ jobs:
               python scripts/qa-title-compositions-v163.py --base "$ATF_BASE_URL" --stage after --output "$RUNNER_TEMP/atf-gameplay-v163/title" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/title.log" || { status=1; annotate_failure scripts/qa-title-compositions-v163.py "$RUNNER_TEMP/atf-gameplay-v163/title/report.json"; }
               ;;
             trials)
-              python scripts/qa-xeno-trials-capture-v163.py --base "$ATF_BASE_URL" --comparison-stage after --output "$RUNNER_TEMP/atf-gameplay-v163/captures" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/captures.log" || { status=1; annotate_failure scripts/qa-xeno-trials-capture-v163.py "$RUNNER_TEMP/atf-gameplay-v163/captures/report.json"; }
+              python scripts/qa-xeno-trials-capture-v163.py --base "$ATF_BASE_URL" --comparison-stage after --client-read-delay-ms 0 --fixture-dir "$RUNNER_TEMP/atf-gameplay-v163/capture-fixtures" --output "$RUNNER_TEMP/atf-gameplay-v163/captures" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/captures.log" || { status=1; annotate_failure scripts/qa-xeno-trials-capture-v163.py "$RUNNER_TEMP/atf-gameplay-v163/captures/report.json"; }
+              print_native_receipt "trials-normal0" "$RUNNER_TEMP/atf-gameplay-v163/captures/report.json" || status=1
+              python scripts/qa-xeno-trials-capture-v163.py --base "$ATF_BASE_URL" --comparison-stage after --client-read-delay-ms 200 --fixture-dir "$RUNNER_TEMP/atf-gameplay-v163/capture-fixtures" --output "$RUNNER_TEMP/atf-gameplay-v163/captures-read200" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/captures-read200.log" || { status=1; annotate_failure scripts/qa-xeno-trials-capture-v163.py "$RUNNER_TEMP/atf-gameplay-v163/captures-read200/report.json"; }
+              print_native_receipt "trials-read200" "$RUNNER_TEMP/atf-gameplay-v163/captures-read200/report.json" || status=1
               python scripts/qa-native-rig-catalog-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/rigs" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/rigs.log" || { status=1; annotate_failure scripts/qa-native-rig-catalog-v163.py "$RUNNER_TEMP/atf-gameplay-v163/rigs/report.json"; }
               python scripts/qa-trials-continuity-v163.py --base "$ATF_BASE_URL" --output "$RUNNER_TEMP/atf-gameplay-v163/continuity" 2>&1 | tee "$RUNNER_TEMP/atf-gameplay-v163/continuity.log" || { status=1; annotate_failure scripts/qa-trials-continuity-v163.py "$RUNNER_TEMP/atf-gameplay-v163/continuity/report.json"; }
               ;;
