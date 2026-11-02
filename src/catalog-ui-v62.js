@@ -921,7 +921,7 @@ export class CatalogWorkbenchV62 {
     if (!dossier && !master && !weapon) return;
     const section = this.renderSection('ARCHIVES COMMUNES — ALIEN_BASE', 'shared-alien-base-v1');
     section.dataset.sharedIdentity = master?.id || dossier?.id || weapon?.id || '';
-    if (master) section.append(createElement(this.document,'p','catalog-v62__fact-note','Identité partagée : ' + master.name);
+    if (master) section.append(createElement(this.document,'p','catalog-v62__fact-note','Identité partagée : ' + master.name));
     section.append(createElement(this.document,'p','catalog-v62__fact-note',
       dossier?.sourceWork ? 'Œuvre de référence : ' + dossier.sourceWork
         : weapon?.work ? 'Œuvre de référence : ' + weapon.work : 'Source à documenter'));
