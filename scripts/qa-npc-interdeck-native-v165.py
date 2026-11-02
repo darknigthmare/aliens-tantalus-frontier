@@ -193,6 +193,62 @@ NATIVE_RETURN_RECEIPT_V165 = r'''function validateNativeReturnReceiptV165(c,orig
 }'''
 
 
+NATIVE_INEZ_DEPARTURE_V165 = r'''function validateInezPriorDepartureV165(c,before,departure){
+ const fail=reason=>({ok:false,reason}),finite=Number.isFinite;
+ if(c?.id!=='inez-civil'||c.nativeDeck!==2||c.deck!==3||c.shaftId!=='hub-midship-lift'
+   ||![c.cabinX,c.floorY].every(finite))return fail('invalid-inez-route');
+ const b=before?.route?.actor,a=departure?.observation?.route?.actor,
+ origin=before?.route?.origin,afterOrigin=departure?.observation?.route?.origin,
+ actual=departure?.observation?.actualActor,t=a?.lift,p=departure?.observation?.player,
+ crew='crew-08-maksim-orlov';
+ if(!b||b.crewId!==crew||b.deck!==3||b.direction!=='outbound'||b.lift
+   ||!['walking-lift','waiting-lift'].includes(b.stage)||!origin||origin.crewId!==crew||origin.deck!==3
+   ||before.actualActor?.crewId!==crew||before.actualActor.x!==b.x||before.actualActor.y!==b.y
+   ||before.actualActor.roomId!==b.roomId)return fail('unobserved-prior-departure');
+ if(!p||departure.observation.deck!==c.deck||departure.observation.annex!==null
+   ||p.w!==44||p.h!==92||p.y+p.h!==c.floorY||!p.grounded||p.climbing||!finite(p.vx)||Math.abs(p.vx)>=1
+   ||!finite(p.x)||p.x<c.cabinX+96+44+12)return fail('observer-still-occupies-departure-bays');
+ if(departure.sameBody!==true||departure.physicalBodyCount!==1||!actual||actual.crewId!==crew
+   ||actual.w!==44||actual.h!==92||actual.x!==a?.x||actual.y!==a?.y||actual.roomId!==a?.roomId)
+   return fail('different-or-missing-physical-passenger');
+ if(!a||a.crewId!==crew||a.deck!==0||a.roomId!=='briefing'||a.stage!=='lift'||a.direction!=='outbound'
+   ||a.y!==c.floorY-92||!t||t.schema!==165||t.crewId!==crew||t.shaftId!==c.shaftId
+   ||t.fromDeck!==3||t.toDeck!==0||!['opening','exiting'].includes(t.phase)||t.cabinX!==c.cabinX
+   ||![t.originX,t.exitX,t.carriageSeconds,a.time,a.distance,b.time,b.distance].every(finite)
+   ||Math.abs(t.originX-t.cabinX)!==96||Math.abs(t.exitX-t.cabinX)!==96||t.carriageSeconds<=0
+   ||a.time<=b.time||a.distance<=b.distance||a.liftJourneys!==b.liftJourneys+1)
+   return fail('no-real-covered-source-to-destination-handoff');
+ if(!afterOrigin||['crewId','deck','roomId','x','y','source'].some(k=>afterOrigin[k]!==origin[k]))
+   return fail('changed-observed-origin');
+ return{ok:true,crewId:crew,fromDeck:3,toDeck:0,phase:t.phase,liftJourneys:a.liftJourneys,
+   distance:a.distance-before.route.actor.distance,playerX:p.x};
+}'''
+
+
+def prepare_inez_occupied_arrival(page, c):
+    # The player must not occupy Cal's real courtesy bays while Maksim walks
+    # out of the destination deck. Observe that actual prior passenger instead
+    # of inferring departure from a queue counter or moving any NPC.
+    phase(c['id'] + ': actual prior departure before occupying the destination cabin')
+    prior = next(value for value in configs if value['id'] == 'maksim-cockpit')
+    before = observed(page, prior)
+    artifact(c['id'] + '-prior-before.json', before)
+    page.evaluate('''()=>{const h=__ATF_HUB__,b=h.getNpcInterdeckActorsV165().filter(a=>a.crewId==='crew-08-maksim-orlov');
+window.__NPC_INEZ_PRIOR_BODY_QA__=b.length===1?b[0]:null;}''')
+    departed = follow_floor_actor(page, prior, lambda r: bool(
+        (r['route'] or {}).get('actor', {}).get('deck') == prior['deck']
+        and (r['route']['actor'].get('lift') or {}).get('phase') in ['opening', 'exiting']))
+    physical = page.evaluate('''()=>{const b=__ATF_HUB__.getNpcInterdeckActorsV165().filter(a=>a.crewId==='crew-08-maksim-orlov');
+return{sameBody:b.length===1&&b[0]===window.__NPC_INEZ_PRIOR_BODY_QA__,physicalBodyCount:b.length};}''')
+    receipt = {'observation': departed, **physical}
+    validation = page.evaluate('o=>(' + NATIVE_INEZ_DEPARTURE_V165 + ')(o.config,o.before,o.departure)',
+                               {'config': c, 'before': before, 'departure': receipt})
+    artifact(c['id'] + '-prior-physical-departure.json', {'before': before, 'departure': receipt, 'validation': validation})
+    check(c['id'] + ': the same prior physical passenger clears deck3 through its real covered carriage', validation['ok'])
+    report.setdefault('priorPhysicalDepartures', {})[c['id']] = validation
+    walk_to(page, c, c['cabinX'])
+
+
 def clear_occupied_lift_arrival(page, c, held):
     plan = page.evaluate('o=>(' + NATIVE_LIFT_CLEARANCE_V165 + ')(o.config,o.player,o.trip)',
                          {'config': c, 'player': held['player'], 'trip': held['route']['actor']['lift']})
@@ -462,7 +518,7 @@ with sync_playwright() as pw:
                 dock_native(page, c)
             if args.occupied_lift_arrival:
                 player_lift_to(page, c, c['deck'])
-                walk_to(page, c, c['cabinX'])
+                walk_to(page, c, c['cabinX'] + 160 if c['id'] == 'inez-civil' else c['cabinX'])
             commands_to(page, c, c['watchHour'])
             if args.comparison_stage == 'before':
                 before = observed(page, c)
@@ -474,6 +530,8 @@ with sync_playwright() as pw:
             start = observed(page, c)
             check(c['id'] + ': strategy Save boundary preserves observed station bookmark', start['route']['origin']['roomId'] == c['origin'] and start['route']['actor']['crossings'] == 0 and start['route']['actor']['liftJourneys'] == 0)
             install_observer(page, c, 'outbound-before-reload')
+            if args.occupied_lift_arrival and c['id'] == 'inez-civil':
+                prepare_inez_occupied_arrival(page, c)
             reload_travel(page, c, frames)
             if args.occupied_lift_arrival:
                 held_lift = observed(page, c)
