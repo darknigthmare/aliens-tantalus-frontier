@@ -1147,7 +1147,8 @@ function nativeQaValidatorV165(name) {
 }
 
 test('Inez occupied-arrival preparation requires the same physical prior passenger and a real covered handoff',()=>{
-  const validate=nativeQaValidatorV165('NATIVE_INEZ_DEPARTURE_V165');
+  const guard=nativeQaValidatorV165('NATIVE_INEZ_DEPARTURE_V165');
+  const validate=(c,b,d)=>guard(c,b,d,normalizeNpcLiftTransitV165,npcLiftPoseV165);
   const c={id:'inez-civil',nativeDeck:2,deck:3,shaftId:'hub-midship-lift',cabinX:2350,floorY:624};
   const crewId='crew-08-maksim-orlov',origin={crewId,deck:3,roomId:'dropship-hangar',x:489,y:532,source:'legacy-physical-owner'};
   const first={crewId,deck:3,roomId:'dropship-hangar',x:489,y:532,stage:'walking-lift',direction:'outbound',
@@ -1182,10 +1183,52 @@ test('Inez occupied-arrival preparation requires the same physical prior passeng
   reject('wrong source deck',d=>d.observation.route.actor.lift.fromDeck=2);
   reject('wrong destination',d=>d.observation.route.actor.lift.toDeck=1);
   reject('unmeasured carriage',d=>d.observation.route.actor.lift.carriageSeconds=0);
+  reject('incomplete timed carriage',d=>d.observation.route.actor.lift.carriageSeconds=.001);
+  reject('missing elapsed time',d=>delete d.observation.route.actor.lift.elapsed);
+  reject('nonfinite elapsed time',d=>d.observation.route.actor.lift.elapsed=NaN);
+  reject('wrong opening position',d=>{d.observation.route.actor.x++;d.observation.actualActor.x++;});
+  reject('nonfinite player velocity',d=>d.observation.player.vx=NaN);
   reject('time only without real distance',d=>d.observation.route.actor.distance=0);
   reject('no actual journey',d=>d.observation.route.actor.liftJourneys=0);
   reject('changed origin',d=>d.observation.route.origin.x=490);
   assert.equal(validate(c,{...before,actualActor:{...before.actualActor,x:500}},departure).ok,false);
+});
+
+test('Inez prior departure and cabin observation consume one shared native journey deadline',()=>{
+  const python=String.raw`import ast,json,sys
+from pathlib import Path
+from types import SimpleNamespace
+tree=ast.parse(Path(sys.argv[1]).read_text())
+module=ast.Module(body=[n for n in tree.body if isinstance(n,ast.FunctionDef)
+    and n.name in ['prepare_inez_occupied_arrival','reload_travel']],type_ignores=[])
+class StopAtCabin(Exception): pass
+def run(deadline):
+    clock=[100.0]; waits=[]
+    def follow(page,c,stop,timeout=None):
+        waits.append(timeout)
+        if len(waits)==2: raise StopAtCabin()
+        clock[0]+=40
+        return {}
+    def evaluate(expression,*args):
+        return {'ok':True} if expression.startswith('async ') else {'sameBody':True,'physicalBodyCount':1}
+    namespace={'time':SimpleNamespace(monotonic=lambda:clock[0]),'configs':[{'id':'maksim-cockpit'}],
+        'observed':lambda *args:{},'artifact':lambda *args:None,'phase':lambda *args:None,
+        'check':lambda label,ok:None,'report':{},'NATIVE_INEZ_DEPARTURE_V165':'function(){}',
+        'follow_floor_actor':follow,'walk_to':lambda *args:clock.__setitem__(0,clock[0]+3),
+        'args':SimpleNamespace(occupied_lift_arrival=True)}
+    exec(compile(module,'<actual-native-interdeck-qa-budget>','exec'),namespace)
+    page=SimpleNamespace(evaluate=evaluate); error=None
+    try:
+        namespace['prepare_inez_occupied_arrival'](page,{'id':'inez-civil','cabinX':2350},deadline)
+        namespace['reload_travel'](page,{'id':'inez-civil'},[],deadline=deadline)
+    except StopAtCabin: pass
+    except AssertionError as failure: error=str(failure)
+    return {'waits':waits,'error':error}
+print(json.dumps([run(150),run(140)]))`;
+  const [shared,expired]=JSON.parse(execFileSync('python3',['-B','-c',python,
+    fileURLToPath(new URL('qa-npc-interdeck-native-v165.py',import.meta.url))],{encoding:'utf8'}));
+  assert.deepEqual(shared.waits,[50,7]);assert.equal(shared.error,null);
+  assert.deepEqual(expired.waits,[40]);assert.equal(expired.error,'Native journey wall budget exhausted');
 });
 
 test('occupied lift QA uses an attainable native world clearance and still refuses a real wall within120s',()=>{
