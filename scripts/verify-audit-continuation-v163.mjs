@@ -19,7 +19,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
   verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS,
   V178_RUNTIME_SUCCESSORS, V178_VERIFIER_SUCCESSORS, V178_QA_SUCCESSORS,
-  reviewedLiveDigestV178, reviewedCurrentDigestV179, verifyFollowupV178 } from './audit-succession-v163.mjs';
+  reviewedLiveDigestV178, reviewedCurrentDigestV180, verifyFollowupV178 } from './audit-succession-v163.mjs';
+import { V180_BASELINE_COMMIT, V180_V179_CONSTANTS_SHA256, V180_PROGRESS_V163_SHA256, V180_RUNTIME_SUCCESSORS, V180_VERIFIER_SUCCESSORS, V180_BRIDGE_SUCCESSORS, V180_NEW_RUNTIME_SOURCES, V180_NEW_VERIFIERS, reviewedDigestV180, verifyFollowupV180 } from './audit-succession-v180.mjs';
 import { V179_BASELINE_COMMIT, V179_RUNTIME_SUCCESSORS, V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, V179_NEW_VERIFIERS, reviewedDigestV179, verifyFollowupV179 } from './audit-succession-v179.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
@@ -31,7 +32,38 @@ const previous = JSON.parse(read(prefix + 'progress-v162.json'));
 const current = JSON.parse(read(prefix + 'progress-v163.json'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
-const effectiveSource = (path, historical) => reviewedCurrentDigestV179(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
+const effectiveSource = (path, historical) => reviewedCurrentDigestV180(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
+
+test('V180 pins the real horde, MIRE terminal and admitted media without rewriting any V179 receipt', () => {
+  assert.equal(V180_BASELINE_COMMIT, 'd516dda1f39d5112d46c638d2d58a06fdd2ecee3');
+  const canonical = value => Array.isArray(value) ? '[' + value.map(canonical).join(',') + ']'
+    : value && typeof value === 'object' ? '{' + Object.keys(value).sort().map(key => JSON.stringify(key) + ':' + canonical(value[key])).join(',') + '}' : JSON.stringify(value);
+  assert.equal(sha(Buffer.from(canonical({ V179_BASELINE_COMMIT, V179_RUNTIME_SUCCESSORS,
+    V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS, V179_NEW_RUNTIME_SOURCES, V179_NEW_VERIFIERS }))), V180_V179_CONSTANTS_SHA256);
+  assert.equal(sha(read(prefix + 'progress-v163.json')), V180_PROGRESS_V163_SHA256);
+  assert.deepEqual(verifyFollowupV180(read), { baselineCommit: V180_BASELINE_COMMIT,
+    runtimeSuccessors: 10, verifierSuccessors: 4, bridgeSuccessors: 3, newRuntimeSources: 5, newVerifiers: 7 });
+  const effective = resolveAuditSourcesV163(previous, read, { effective: true });
+  for (const [path, receipt] of Object.entries(V180_RUNTIME_SUCCESSORS)) assert.equal(effective[path], receipt.currentSha256);
+  for (const [path, digest] of Object.entries(V180_NEW_RUNTIME_SOURCES)) assert.equal(effective[path], digest);
+  assert.ok(Object.hasOwn(V180_NEW_VERIFIERS, 'scripts/public-campaign-art-admissions-v180.mjs'));
+  for (const map of [V180_RUNTIME_SUCCESSORS, V180_VERIFIER_SUCCESSORS, V180_BRIDGE_SUCCESSORS]) {
+    for (const [path, receipt] of Object.entries(map)) {
+      assert.equal(reviewedDigestV180(path, receipt.previousSha256), receipt.currentSha256);
+      assert.equal(sha(read(path)), receipt.currentSha256, path);
+      assert.throws(() => reviewedDigestV180(path, '0'.repeat(64)), /Incorrect V179 endpoint/, path);
+      const corrupt = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+      assert.throws(() => verifyFollowupV180(corrupt), /Unreviewed V180/, path);
+      assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupt), undefined, path);
+    }
+  }
+  for (const [path, digest] of Object.entries({ ...V180_NEW_RUNTIME_SOURCES, ...V180_NEW_VERIFIERS })) {
+    assert.equal(sha(read(path)), digest, path);
+    const corrupt = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyFollowupV180(corrupt), /Unreviewed V180/, path);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupt), undefined, path);
+  }
+});
 
 test('V179 admits only exact changed bytes and new sources after the immutable V178 witness', () => {
   assert.equal(V179_BASELINE_COMMIT, 'd41b5fc120da2e7a5938308f9d3c852d20e53cc5');
@@ -42,14 +74,14 @@ test('V179 admits only exact changed bytes and new sources after the immutable V
   const historical = Buffer.from(read(prefix + 'progress-v163.json'));
   const effective = resolveAuditSourcesV163(previous, read, { effective: true });
   for (const [path, receipt] of Object.entries(V179_RUNTIME_SUCCESSORS)) {
-    assert.equal(effective[path], receipt.currentSha256);
+    assert.equal(effective[path], reviewedDigestV180(path, receipt.currentSha256));
     assert.throws(() => reviewedDigestV179(path, '0'.repeat(64)), /Incorrect V178 endpoint/);
     assert.notEqual(receipt.previousSha256, receipt.currentSha256);
   }
-  for (const [path, hash] of Object.entries(V179_NEW_RUNTIME_SOURCES)) assert.equal(effective[path], hash);
+  for (const [path, hash] of Object.entries(V179_NEW_RUNTIME_SOURCES)) assert.equal(effective[path], reviewedDigestV180(path, hash));
   for (const map of [V179_RUNTIME_SUCCESSORS, V179_VERIFIER_SUCCESSORS, V179_BRIDGE_SUCCESSORS]) {
     for (const [path, receipt] of Object.entries(map)) {
-      assert.equal(sha(read(path)), receipt.currentSha256, path);
+      assert.equal(sha(read(path)), reviewedDigestV180(path, receipt.currentSha256), path);
       assert.equal(reviewedDigestV179(path, receipt.previousSha256), receipt.currentSha256);
       assert.throws(() => reviewedDigestV179(path, '0'.repeat(64)), /Incorrect V178 endpoint/, path);
       const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
@@ -58,7 +90,7 @@ test('V179 admits only exact changed bytes and new sources after the immutable V
     }
   }
   for (const [path, hash] of Object.entries({ ...V179_NEW_RUNTIME_SOURCES, ...V179_NEW_VERIFIERS })) {
-    assert.equal(sha(read(path)), hash, path);
+    assert.equal(sha(read(path)), reviewedDigestV180(path, hash), path);
     const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyFollowupV179(changed), /Unreviewed V179/, path);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, changed), undefined, path);
@@ -145,7 +177,9 @@ test('the full current bridge validates runtime bytes and older default returns 
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
-    ...V179_NEW_RUNTIME_SOURCES };
+    ...V179_NEW_RUNTIME_SOURCES,
+    ...Object.fromEntries(Object.entries(V180_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
+    ...V180_NEW_RUNTIME_SOURCES };
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
@@ -226,7 +260,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
-    assert.equal(sha(read(path)),reviewedCurrentDigestV179(path,V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256),path);
+    assert.equal(sha(read(path)),reviewedCurrentDigestV180(path,V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256),path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V17[678] verifier/,path);
   }
@@ -266,7 +300,7 @@ test('V177 retains every reviewed V167 through V176 receipt instead of rewriting
       || V165_VERIFIER_SUCCESSORS_V173[path] || V165_VERIFIER_SUCCESSORS_V171[path];
     assert.equal(receipt.previousSha256, previousReceipt.currentSha256, path);
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
-    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), reviewedCurrentDigestV179(path,receipt.currentSha256));
+    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), reviewedCurrentDigestV180(path,receipt.currentSha256));
     const corrupted = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
       error => /Unreviewed V17[78] verifier/.test(error.message) && error.message.includes(path), path);
@@ -276,7 +310,7 @@ test('V177 retains every reviewed V167 through V176 receipt instead of rewriting
 test('V177 source successors reject unreviewed bytes even when the live JSON pin is forged to match them', () => {
   assert.ok(Object.keys(V177_SOURCE_SUCCESSORS).length >= 5, 'The actual source continuation must be explicit.');
   for (const [path, receipt] of Object.entries(V177_SOURCE_SUCCESSORS)) {
-    assert.equal(sha(read(path)), reviewedCurrentDigestV179(path,receipt.currentSha256), path);
+    assert.equal(sha(read(path)), reviewedCurrentDigestV180(path,receipt.currentSha256), path);
     assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
     const bytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
     const corrupted = name => name === path ? bytes : read(name);
@@ -637,17 +671,17 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   assert.deepEqual(Object.keys(effective).filter(path=>Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
     Object.keys(current.runtimeSourceSha256).sort());
   assert.deepEqual(Object.keys(effective).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
-    ['src/tactical-reload-v77.js','src/weapon-actions-v130.js',
-      ...Object.keys(V179_RUNTIME_SUCCESSORS).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)),
-      ...Object.keys(V179_NEW_RUNTIME_SOURCES)].sort(), 'V179 sources follow rather than rewrite the147-source witness');
+    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',
+      ...Object.keys({...V179_RUNTIME_SUCCESSORS,...V180_RUNTIME_SUCCESSORS}).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)),
+      ...Object.keys(V179_NEW_RUNTIME_SOURCES),...Object.keys(V180_NEW_RUNTIME_SOURCES)])].sort(), 'V179 sources follow rather than rewrite the147-source witness');
   assert.equal(current.runtimeSourceSha256['src/npc-interdeck-routes-v165.js'],
     '5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a');
   assert.equal(effective['src/npc-interdeck-routes-v165.js'],V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256);
-  assert.equal(effective['sw.js'],reviewedDigestV179('sw.js',V178_RUNTIME_SUCCESSORS['sw.js'].currentSha256));
+  assert.equal(effective['sw.js'],reviewedDigestV180('sw.js',reviewedDigestV179('sw.js',V178_RUNTIME_SUCCESSORS['sw.js'].currentSha256)));
   assert.equal(current.candidateLocalValidationV177.testedCommit,'70adab8e66b8b2ee3fc2a731a182dd20d2a6af31');
   for(const map of [V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS])
     for(const [path,receipt] of Object.entries(map)) {
-      assert.equal(sha(read(path)),reviewedDigestV179(path,receipt.currentSha256),path);
+      assert.equal(sha(read(path)),reviewedDigestV180(path,reviewedDigestV179(path,receipt.currentSha256)),path);
       assert.throws(()=>reviewedLiveDigestV178(path,'0'.repeat(64)),/Incorrect MainM endpoint/);
       const changed=name=>name===path?Buffer.concat([read(name),Buffer.from('\nUNREVIEWED')]):read(name);
       assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),undefined,path);

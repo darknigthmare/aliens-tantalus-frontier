@@ -66,3 +66,66 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-unsaved=
 .xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] .xt-result:not(:empty){top:auto;bottom:max(205px,calc(env(safe-area-inset-bottom) + 205px));transform:translateX(-50%);padding:8px 16px;font-size:12px;max-height:75px;overflow:auto}
 .xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] [data-xt="new-duel"]{bottom:max(125px,calc(env(safe-area-inset-bottom) + 125px))}
 @media(max-height:520px){.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] .xt-result:not(:empty){top:max(90px,env(safe-area-inset-top));bottom:auto;font-size:10px;max-height:48px}.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-outro="true"] [data-xt="new-duel"]{bottom:112px}}
+
+/* V180 MIRE housing. Its texture is static and remains behind the content. */
+html.xt-fullscreen-v119 #xeno-trials-v96.active{
+  background:linear-gradient(90deg,#ffffff02 1px,transparent 1px) 0 0/48px 48px,#0a100d;
+  color:var(--xt-crt);box-shadow:inset 0 0 0 8px #182019,inset 0 0 0 9px #3a4438;
+  padding:24px clamp(20px,4vw,70px) 36px;
+}
+.xt-fullscreen-v119 .xt-home-v119{max-width:1380px;margin:0 auto}
+.xt-fullscreen-v119 .xt-dashboard{background:#121e15;border:1px solid var(--xt-line);border-left:3px solid var(--xt-crt);color:var(--xt-crt);font:10px/1.6 monospace;letter-spacing:.03em;padding:10px 14px;margin:14px 0}
+.xt-fullscreen-v119 .xt-notice{color:var(--xt-dim)}
+.xt-fullscreen-v119 .xt-activity-heading h2{font:700 clamp(17px,2.4vw,27px)/1.2 monospace;color:var(--xt-crt);letter-spacing:.04em}
+.xt-fullscreen-v119 #xeno-trials-v96 .button,.xt-fullscreen-v119 .xt-family-tabs-v119 button,.xt-fullscreen-v119 .xt-controls button{
+  font-family:monospace;border-radius:0;border:1px solid #6b7a62;color:var(--xt-crt);background:#152019;box-shadow:none;
+}
+.xt-fullscreen-v119 #xeno-trials-v96 .button.primary{background:var(--xt-crt);color:#102014;border-color:var(--xt-crt);font-weight:700}
+.xt-fullscreen-v119 #xeno-trials-v96 .button:hover:not(:disabled){background:#283b29;color:#e1f1d7}
+.xt-fullscreen-v119 #xeno-trials-v96 .button.primary:hover:not(:disabled){background:#dfedcc;color:#101c11}
+.xt-fullscreen-v119 #xeno-trials-v96 .button.danger-outline{border-color:#ad8b56;color:#ecc48a;background:#211b12}
+.xt-fullscreen-v119 #xeno-trials-v96 .button:disabled{opacity:.5;cursor:not-allowed}
+.xt-fullscreen-v119 #xeno-trials-v96 :is(button,select,input,summary):focus-visible{outline:3px solid var(--xt-amber);outline-offset:4px}
+.xt-fullscreen-v119 #xeno-trials-v96 :is(input,select){background:#0e1711;border-color:var(--xt-line);color:var(--xt-crt);font-family:monospace}
+.xt-fullscreen-v119 .xt-family-tabs-v119 button[aria-pressed="true"]{background:#c4e5bb;color:#122116;border-color:#c4e5bb}
+.xt-fullscreen-v119 .xt-steps{font:10px/1.4 monospace;color:var(--xt-dim)}
+.xt-fullscreen-v119 .xt-steps [aria-current]{color:var(--xt-crt);border-color:var(--xt-crt)}
+.xt-fullscreen-v119 .xt-roster{padding:18px;border:1px solid var(--xt-line);background:#101813}
+.xt-fullscreen-v119 .xt-roster>nav[aria-label="Lots de 40 spécimens"]{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 0 15px}
+.xt-fullscreen-v119 .xt-roster>nav[aria-label="Lots de 40 spécimens"]>.button{padding:9px;font-size:8px}
+.xt-fullscreen-v119 [data-xt="roster-page"]{font:9px monospace;color:var(--xt-dim)}
+.xt-fullscreen-v119 .xt-fighter{border-color:var(--xt-line);background:#0b130e}.xt-fullscreen-v119 .xt-fighter.selected{border-color:var(--xt-crt);box-shadow:inset 0 0 0 1px var(--xt-crt)}
+.xt-fullscreen-v119 .xt-fighter strong{color:var(--xt-crt);font-family:monospace}.xt-fullscreen-v119 .xt-fighter small{color:var(--xt-dim)}
+.xt-fullscreen-v119 .xt-portraits{padding:20px 10px;border-block:1px solid var(--xt-line);background:radial-gradient(ellipse at center,#20302277,transparent 65%)}
+.xt-fullscreen-v119 .xt-portraits figcaption{color:var(--xt-amber)}
+.xt-fullscreen-v119 .xt-stage-scene>span{background:#111a12e6;color:var(--xt-crt);border-left-color:var(--xt-amber);font-family:monospace}
+.xt-fullscreen-v119 [data-xt-mode="horde"] .xt-arena-cards{grid-template-columns:minmax(0,500px)}
+.xt-fullscreen-v119 [data-xt-mode="horde"] .xt-arena-thumbnail{height:160px}
+.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"]{padding:0;box-shadow:none}
+.xt-fullscreen-v119 [data-xt-step="combat"]>.xt-terminal-link{display:none}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-terminal-brand{display:none}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-terminal-header{border:0;padding:0;margin:0}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-match-hud{background:#0b140ed9;border:1px solid #57704c;box-shadow:0 2px 12px #0005;padding:12px 16px}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-match-hud[data-horde="true"]{grid-template-columns:minmax(0,1fr) 96px minmax(0,1.2fr);gap:18px}
+.xt-fullscreen-v119 .xt-horde-telemetry{padding-left:18px;border-left:1px solid var(--xt-line)}
+.xt-fullscreen-v119 .xt-match-clock [data-xt="round"]{font:9px/1.5 monospace;color:var(--xt-dim)}
+.xt-fullscreen-v119 .xt-match-clock [data-xt="clock"]{color:var(--xt-amber)}
+.xt-fullscreen-v119 .xt-horde-counter-row{gap:clamp(12px,3vw,40px)}
+.xt-fullscreen-v119 .xt-pause-overlay-v119{background:#071009f2;color:var(--xt-crt);border:12px solid #1d291e;box-shadow:inset 0 0 0 1px var(--xt-line)}
+.xt-fullscreen-v119 .xt-pause-overlay-v119 p{font-family:monospace;color:var(--xt-dim);font-size:12px}
+@media(max-width:760px){
+  html.xt-fullscreen-v119 #xeno-trials-v96.active{padding:18px 20px 26px}
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-match-hud[data-horde="true"]{grid-template-columns:minmax(0,1fr) 58px minmax(0,1.1fr);padding:8px;gap:8px}
+  .xt-fullscreen-v119 .xt-horde-telemetry{padding-left:8px}.xt-fullscreen-v119 .xt-horde-link{font-size:6px}
+  .xt-fullscreen-v119 .xt-horde-counter-row{gap:10px}.xt-fullscreen-v119 .xt-horde-counter-row strong{font-size:24px}
+  .xt-fullscreen-v119 .xt-horde-phase{font-size:7px;line-height:1.35}.xt-fullscreen-v119 .xt-horde-counter-row span{font-size:6px}
+  .xt-fullscreen-v119 .xt-roster{padding:12px}.xt-fullscreen-v119 .xt-match-clock [data-xt="round"]{font-size:7px}
+}
+@media(max-height:520px){
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-match-hud[data-horde="true"]{top:max(5px,env(safe-area-inset-top));padding:6px 10px;gap:10px}
+  .xt-fullscreen-v119 .xt-horde-counter-row strong{font-size:22px}.xt-fullscreen-v119 .xt-horde-link{display:none}
+  .xt-fullscreen-v119 .xt-horde-phase,.xt-fullscreen-v119 .xt-horde-total{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  #xeno-trials-v96 *,#xeno-trials-v96 *:before,#xeno-trials-v96 *:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}

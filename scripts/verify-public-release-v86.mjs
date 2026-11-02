@@ -12,6 +12,7 @@ import { publicReleasePathAdmissionV121, verifyPublicAdmissionsV121 } from './pu
 import { publicReleasePathAdmissionV122, verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs';
 import { publicReleasePathAdmissionV123, verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 import { publicCostumePathAdmissionV165, verifyPublicCostumeAdmissionsV165 } from './public-costume-admissions-v165.mjs';
+import { publicCampaignArtPathAdmissionV180, verifyCampaignArtAdmissionsV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const ROOT_FILES = new Set([
   'campaign-lethe-continuity-v163.css',
@@ -25,6 +26,14 @@ const ROOT_FILES = new Set([
   'xeno-trials-v96.css', 'xeno-trials-fullscreen-v119.css', 'user-reference-library-v100.css', 'specimen-bench-v106.css'
 ]);
 const SCRIPT_FILES = new Set([
+  'public-campaign-art-admissions-v180.mjs',
+  'audit-succession-v180.mjs',
+  'verify-campaign-art-v180.mjs',
+  'verify-xeno-trials-horde-v180.mjs',
+  'verify-xeno-trials-horde-runtime-v180.mjs',
+  'verify-xeno-trials-horde-ui-v180.mjs',
+  'verify-xeno-trials-stage-depth-v180.mjs',
+  'verify-xeno-trials-swarm-sprites-v180.mjs',
   'verify-xeno-trials-curriculum-v179.mjs',
   'verify-xeno-trials-roster-v179.mjs',
   'verify-xeno-trials-boss-stages-v179.mjs',
@@ -285,6 +294,9 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/forge/xeno-trials/batch100-v168.json',
   'docs/forge/xeno-trials/batch100-v177.json',
   'docs/forge/xeno-trials/batch40-v179.json',
+  'docs/forge/xeno-trials/campaign-art-v180.json',
+  'docs/forge/xeno-trials/V180-SIMULTANEOUS-HORDE.md',
+  'docs/forge/xeno-trials/batch40-v180.json',
   'docs/forge/xeno-trials/V179-XENO-TRIALS-BATCH40.md',
   'docs/forge/xeno-trials/V167-HUMAN-MOVEMENT-AND-DOOR-SIGNS.md',
   'docs/forge/xeno-trials/V166-STATION-RELAYS.md',
@@ -514,6 +526,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (segments.some(part => !part || part === '.' || part === '..' || PRIVATE_SEGMENT.test(part))) return false;
   const costumeAdmissionV165 = publicCostumePathAdmissionV165(path, { directory });
   if (costumeAdmissionV165 !== null) return costumeAdmissionV165;
+  const campaignAdmissionV180 = publicCampaignArtPathAdmissionV180(path, { directory });
+  if (campaignAdmissionV180 !== null) return campaignAdmissionV180;
   const v163Admission = publicReleasePathAdmissionV163(path, { directory });
   if (v163Admission !== null) return v163Admission;
   const v123Admission = publicReleasePathAdmissionV123(path, { directory });
@@ -582,6 +596,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyPublicAdmissionsV123(root, { strict: true });
   await verifyPublicAdmissionsV163(root);
   await verifyPublicCostumeAdmissionsV165(root, { strict: true, built });
+  await verifyCampaignArtAdmissionsV180(root);
   return { ok: true, version: RELEASE.version, files, assets, privateDocuments: 0 };
 }
 

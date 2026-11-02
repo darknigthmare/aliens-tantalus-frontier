@@ -1,6 +1,7 @@
 import { XENO_TRIALS_FIGHTERS_V96 as FIGHTERS } from './xeno-trials-data-v96.js';
 import { XENO_TRIALS_CHALLENGE_CURRICULUM_V179 } from './xeno-trials-challenge-curriculum-v179.js';
 import { XENO_TRIALS_EVENTS_V179, getXenoTrialsEventWaveV179 } from './xeno-trials-events-v179.js';
+import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 
 // Authored simulation curriculum: these incidents belong to Tantalus, not film canon.
 export const XENO_TRIALS_BRANCHES_V119 = Object.freeze([
@@ -8,7 +9,8 @@ export const XENO_TRIALS_BRANCHES_V119 = Object.freeze([
   { id: 'contracts', label: 'CONTRATS', description: 'Cibles et conditions connues avant le choix du spécimen.' },
   { id: 'on-demand', label: 'CONTRATS À LA DEMANDE', description: 'Demandez une famille, un adversaire et vos règles.' },
   { id: 'challenges', label: 'DÉFIS', description: 'Épreuves fixes, contraintes physiques et séries de combats.' },
-  { id: 'events', label: 'ÉVÉNEMENTS', description: 'Alertes de horde, survie et protocoles MIRE : vagues de duels successifs.' }
+  { id: 'events', label: 'ÉVÉNEMENTS', description: 'Alertes, survie et protocoles MIRE : vagues de duels successifs.' },
+  { id: 'horde', label: 'HORDE', description: 'Contacts simultanés à faibles PV. Repousser toutes les vagues sans récupération entre les contacts.' }
 ]);
 const known = new Set(FIGHTERS.map(f => f.id));
 const stages = ['containment-deck', 'reactor-ring', 'planet-surface', 'tantalus-cargo', 'hive-vault', 'tantalus-bridge'];
@@ -52,7 +54,7 @@ export const XENO_TRIALS_CHALLENGES_V119 = Object.freeze([
 
 const cleanInteger = (n, max = 1000000) => Number.isInteger(n) && n >= 0 ? Math.min(max, n) : 0;
 export function createXenoTrialsModesProgressV119() {
-  return { schema: 119, campaignCleared: [], challengesCleared: [], dossiers: [], contractCycle: 0, claimedContracts: [], challengeRun: null };
+  return { schema: 119, campaignCleared: [], challengesCleared: [], hordeCleared: [], dossiers: [], contractCycle: 0, claimedContracts: [], challengeRun: null };
 }
 export function normalizeXenoTrialsModesProgressV119(value) {
   const base = createXenoTrialsModesProgressV119();
@@ -60,6 +62,7 @@ export function normalizeXenoTrialsModesProgressV119(value) {
   const ids = key => Array.isArray(value[key]) ? [...new Set(value[key].filter(x => typeof x === 'string'))] : [];
   base.campaignCleared = ids('campaignCleared').filter(id => XENO_TRIALS_CAMPAIGN_V119.some(m => m.id === id));
   base.challengesCleared = ids('challengesCleared').filter(id => XENO_TRIALS_CHALLENGES_V119.some(c => c.id === id));
+  base.hordeCleared = ids('hordeCleared').filter(id => getXenoTrialsHordeProtocolV180(id));
   base.dossiers = ids('dossiers').filter(id => known.has(id));
   base.contractCycle = cleanInteger(value.contractCycle);
   base.claimedContracts = ids('claimedContracts').filter(id => /^xtc119-\d+-[0-4]$/.test(id)).slice(-128);
@@ -105,6 +108,17 @@ export function getXenoTrialsRuleTextV119(rules = {}) {
 export function resolveXenoTrialsActivityV119(activity, modesValue) {
   const modes = normalizeXenoTrialsModesProgressV119(modesValue);
   if (!activity || activity.branch === 'on-demand') return { branch: 'on-demand', id: 'on-demand', title: 'CONTRAT À LA DEMANDE', rules: normalizeXenoTrialsRulesV119(activity?.rules) };
+  if (activity.branch === 'horde') {
+    const protocol = getXenoTrialsHordeProtocolV180(activity.id);
+    if (!protocol) return null;
+    const opponentIds = [...new Set(protocol.waves.flatMap(wave => wave.opponentIds))];
+    return { ...protocol, branch: 'horde', hordeV180: true, protocolId: protocol.id, hordeId: protocol.id,
+      opponentIds, opponentId: opponentIds[0], factionId: protocol.factionId || 'hive',
+      waveCount: protocol.waves.length, totalEnemies: protocol.waves.reduce((n, wave) => n + wave.total, 0),
+      enemyHpMin: Math.min(...protocol.waves.map(wave => wave.hp)),
+      enemyHpMax: Math.max(...protocol.waves.map(wave => wave.hp)), maxConcurrent: Math.max(...protocol.waves.map(wave => wave.concurrent)),
+      reward: protocol.reward ?? 600, rules: normalizeXenoTrialsRulesV119() };
+  }
   if (activity.branch === 'campaign') {
     const entry = XENO_TRIALS_CAMPAIGN_V119.find(m => m.id === activity.id);
     return entry && isXenoTrialsMissionOpenV119(entry.id, modes) ? { ...entry, branch: 'campaign' } : null;
@@ -143,6 +157,12 @@ export function settleXenoTrialsActivityV119(modesValue, config, result) {
   const modes = normalizeXenoTrialsModesProgressV119(modesValue), activity = resolveXenoTrialsActivityV119(config.activityV119, modes);
   const receipt = { bonus: 0, secondary: false, dossierId: null, unlockId: null, continuing: false };
   if (!activity || activity.branch === 'on-demand') return { modes, receipt };
+  if (activity.branch === 'horde') {
+    if (result.winner === 'player' && !modes.hordeCleared.includes(activity.id)) {
+      modes.hordeCleared.push(activity.id); receipt.bonus = activity.reward;
+    }
+    return { modes, receipt };
+  }
   if (result.winner !== 'player') { if (activity.branch === 'challenges') modes.challengeRun = null; return { modes, receipt }; }
   receipt.secondary = getXenoTrialsSecondaryCompleteV119(activity.secondary, result);
   if (activity.branch === 'campaign' && !modes.campaignCleared.includes(activity.id)) {

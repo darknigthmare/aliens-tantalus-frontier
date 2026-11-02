@@ -1,6 +1,7 @@
 import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { createXenoTrialsModesProgressV119, normalizeXenoTrialsModesProgressV119, normalizeXenoTrialsRulesV119,
   resolveXenoTrialsActivityV119, settleXenoTrialsActivityV119 } from './xeno-trials-modes-v119.js';
+import { getXenoTrialsHordeProtocolV180 } from './xeno-trials-horde-v180.js';
 
 const fighterIds = new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id));
 const factionIds = new Set(XENO_TRIALS_FACTIONS_V96.map(f => f.id));
@@ -16,6 +17,7 @@ export function createXenoTrialsProgressV96() {
 }
 
 export function normalizeXenoTrialsConfigV96(value = {}) {
+  const horde = value.activityV119?.branch === 'horde' && getXenoTrialsHordeProtocolV180(value.activityV119.id);
   return {
     playerId: fighterIds.has(value.playerId) ? value.playerId : 'warrior',
     opponentId: fighterIds.has(value.opponentId) ? value.opponentId : 'runner',
@@ -24,9 +26,10 @@ export function normalizeXenoTrialsConfigV96(value = {}) {
     factionId: factionIds.has(value.factionId) ? value.factionId : 'containment',
     stageId: stageIds.has(value.stageId) ? value.stageId : 'containment-deck',
     difficulty: ['easy', 'normal', 'hard'].includes(value.difficulty) ? value.difficulty : 'normal',
-    roundsToWin: 2, roundSeconds: [30, 60, 75, 99, 120].includes(Number(value.roundSeconds)) ? Number(value.roundSeconds) : 99,
+    roundsToWin: horde ? 1 : 2, roundSeconds: horde ? horde.roundSeconds : [30, 60, 75, 99, 120].includes(Number(value.roundSeconds)) ? Number(value.roundSeconds) : 99,
+    ...(horde ? { hordeV180: { protocolId: horde.id } } : {}),
     ...(record(value.activityV119) ? { activityV119: {
-      branch: ['campaign', 'contracts', 'challenges', 'on-demand'].includes(value.activityV119.branch) ? value.activityV119.branch : 'on-demand',
+      branch: ['campaign', 'contracts', 'challenges', 'on-demand', 'horde'].includes(value.activityV119.branch) ? value.activityV119.branch : 'on-demand',
       id: typeof value.activityV119.id === 'string' ? value.activityV119.id.slice(0, 64) : 'on-demand',
       ...(value.activityV119.branch === 'on-demand' ? { rules: normalizeXenoTrialsRulesV119(value.activityV119.rules) } : {})
     }, rulesV119: normalizeXenoTrialsRulesV119(value.rulesV119) } : {})
@@ -139,9 +142,31 @@ export function abandonXenoTrialsV96(value) {
   return { applied: true, state };
 }
 
+function validHordeResultV180(config, result) {
+  const protocol = getXenoTrialsHordeProtocolV180(config.activityV119?.id), receipt = result.hordeV180;
+  if (!protocol || !record(receipt) || receipt.protocolId !== protocol.id
+    || receipt.totalEnemies !== protocol.totalEnemies || result.rounds !== 1
+    || !record(result.wins) || !['player', 'opponent'].includes(result.winner)
+    || !Number.isInteger(receipt.wavesCleared) || receipt.wavesCleared < 0 || receipt.wavesCleared > protocol.waves.length
+    || !Number.isInteger(receipt.kills) || receipt.kills < 0 || receipt.kills > protocol.totalEnemies) return false;
+  if (result.winner === 'player') return result.reason === 'horde-cleared'
+    && receipt.wavesCleared === protocol.waves.length && receipt.kills === protocol.totalEnemies
+    && result.wins.player === 1 && result.wins.opponent === 0;
+  return ['horde-ko', 'horde-time'].includes(result.reason) && result.wins.player === 0 && result.wins.opponent === 1;
+}
+
 /** Consume the saved ticket once, only for a finished matching engine result. */
 export function settleXenoTrialsV96(value, result) {
   const state = normalizeXenoTrialsProgressV96(value), ticket = state.pending;
+  const horde = ticket?.config.activityV119?.branch === 'horde';
+  const outcomeValid = horde ? result && validHordeResultV180(ticket.config, result)
+    : result && !result.hordeV180 && Number.isInteger(result.rounds) && result.rounds >= 2 && result.rounds <= 5
+      && ['ko', 'double-ko', 'time'].includes(result.reason)
+      && record(result.wins) && ['player', 'opponent'].every(k => Number.isInteger(result.wins[k]) && result.wins[k] >= 0 && result.wins[k] <= 2)
+      && result.wins.player + result.wins.opponent <= result.rounds
+      && (result.winner === 'draw' ? result.rounds === 5 && result.wins.player === result.wins.opponent && result.wins.player < 2
+        : result.wins[result.winner] > result.wins[result.winner === 'player' ? 'opponent' : 'player']
+          && (result.wins[result.winner] === 2 || result.rounds === 5));
   const modeMatches = !ticket?.config.activityV119 || result?.activityV119?.branch === ticket.config.activityV119.branch
     && result?.activityV119?.id === ticket.config.activityV119.id
     && record(result?.rulesV119) && JSON.stringify(normalizeXenoTrialsRulesV119(result.rulesV119)) === JSON.stringify(ticket.config.rulesV119)
@@ -152,13 +177,7 @@ export function settleXenoTrialsV96(value, result) {
     || !['playerId', 'opponentId', 'factionId', 'stageId', 'difficulty', 'seed'].every(k => result[k] === ticket.config[k])
     || !['player', 'opponent'].every(side => result[`${side}Variant`] === (ticket.config[`${side}Id`] === 'arachnoid' ? ticket.config[`${side}Variant`] : null))
     || !Number.isInteger(result.durationTicks) || result.durationTicks <= 0
-    || !Number.isInteger(result.rounds) || result.rounds < 2 || result.rounds > 5
-    || !['ko', 'double-ko', 'time'].includes(result.reason)
-    || !record(result.wins) || !['player', 'opponent'].every(k => Number.isInteger(result.wins[k]) && result.wins[k] >= 0 && result.wins[k] <= 2)
-    || result.wins.player + result.wins.opponent > result.rounds
-    || (result.winner === 'draw' ? result.rounds !== 5 || result.wins.player !== result.wins.opponent || result.wins.player >= 2
-      : result.wins[result.winner] <= result.wins[result.winner === 'player' ? 'opponent' : 'player']
-        || (result.wins[result.winner] !== 2 && result.rounds !== 5)))
+    || !outcomeValid)
     return { applied: false, state, reason: 'invalid-or-replayed-result' };
   const won = result.winner === 'player', draw = result.winner === 'draw';
   const bonus = { easy: 0, normal: 20, hard: 50 }[ticket.config.difficulty];

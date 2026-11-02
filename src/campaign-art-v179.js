@@ -1,3 +1,5 @@
+import { resolveCampaignArtV180 } from './campaign-art-v180.js';
+
 /** First campaign illustration batch: forty presentation bindings, twenty
  * Frontier campaigns and two insertion phases each. These are existing OpenAI
  * project paintings, selected for atmosphere; they do not reconstruct franchise
@@ -67,6 +69,8 @@ const byCampaignAndPhase = new Map(CAMPAIGN_ART_V179.map(entry => [`${entry.camp
 /** The host retains its existing resolver for phases outside this explicit lot.
  * Resolving a visual is read-only and never writes a progression receipt. */
 export function resolveCampaignArtV179({ state, phase } = {}) {
+  const newPainting = resolveCampaignArtV180({ state, phase });
+  if (newPainting) return newPainting;
   if (!state || typeof state !== 'object' || !Array.isArray(state.phases)
     || !Number.isInteger(state.currentIndex)) return null;
   const activePhase = state.phases[state.currentIndex];

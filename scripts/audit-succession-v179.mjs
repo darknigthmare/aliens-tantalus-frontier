@@ -6,6 +6,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedDigestV180 } from './audit-succession-v180.mjs';
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -115,14 +116,14 @@ export function verifyFollowupV179(readSource = readRepository) {
   for (const map of successorMaps) for (const [path, receipt] of Object.entries(map)) {
     assert.ok(path === 'sw.js' || /^(?:src\/[a-zA-Z0-9._-]+\.js|scripts\/[a-zA-Z0-9._-]+\.mjs)$/.test(path), 'Invalid V179 successor path: ' + path);
     allPaths.push(path);
-    const digest = reviewedDigestV179(path, receipt.previousSha256);
+    const digest = reviewedDigestV180(path, reviewedDigestV179(path, receipt.previousSha256));
     assert.equal(sha(readSource(path)), digest, 'Unreviewed V179 successor bytes: ' + path);
   }
   for (const map of [V179_NEW_RUNTIME_SOURCES, V179_NEW_VERIFIERS]) for (const [path, digest] of Object.entries(map)) {
     assert.match(path, /^(?:src\/[a-zA-Z0-9._-]+\.js|scripts\/verify-[a-zA-Z0-9._-]+\.mjs)$/);
     allPaths.push(path);
     assert.ok(validHash(digest), 'Invalid V179 added-source digest: ' + path);
-    assert.equal(sha(readSource(path)), digest, 'Unreviewed V179 added-source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedDigestV180(path, digest), 'Unreviewed V179 added-source bytes: ' + path);
   }
   assert.equal(new Set(allPaths).size, allPaths.length, 'Duplicate V179 source admission');
   return Object.freeze({ baselineCommit: V179_BASELINE_COMMIT,
