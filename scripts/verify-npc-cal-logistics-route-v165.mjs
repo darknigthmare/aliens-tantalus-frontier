@@ -185,7 +185,10 @@ const context=(hub,hour,extra={})=>hub.setNpcRoutineContextV62({clock:{day:1,hou
 const tick=(hub,seconds)=>{for(let i=0;i<seconds*60;i++)hub.update(1/60);};
 const routeState=hub=>hub.getSnapshot().npcCalLogisticsRouteV165;
 
+const calQaSourcesV181=new Map();
 function calQaSourceV181(name, callback = false) {
+  const key=name+':'+callback;
+  if(calQaSourcesV181.has(key))return calQaSourcesV181.get(key);
   const python = `import ast,json,sys
 from pathlib import Path
 tree=ast.parse(Path(sys.argv[1]).read_text()); scope={}
@@ -199,9 +202,10 @@ else:
  call=next(n for n in ast.walk(owner) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='evaluate')
  result=eval(compile(ast.Expression(call.args[0]),'<actual-Cal-QA-observer>','eval'),scope)
 print(json.dumps(result))`;
-  return JSON.parse(execFileSync('python3', ['-c', python,
+  const source=JSON.parse(execFileSync('python3', ['-c', python,
     process.env.ATF_QA_CAL_SOURCE || new URL('qa-npc-cal-logistics-route-v165.py', import.meta.url).pathname,
     name, callback ? 'callback' : 'literal'], { encoding: 'utf8', timeout: 30000 }));
+  calQaSourcesV181.set(key,source);return source;
 }
 function calQaChecksV181(cases) {
   const python = `import ast,json,math,sys
@@ -281,6 +285,82 @@ test('the Cal QA captures native hub entry only through a read-only UI event wit
   assert.equal(sandbox.__ATF_CAL_WATCH_ENTRY_V181__.capturedAt,12);assert.equal(sandbox.__ATF_CAL_WATCH_ENTRY_V181__.nativeTime,1.5);
   assert.equal(removed,1);assert.equal(h.getNpcCalLogisticsActorV165(),actor);
   assert.deepEqual(routeState(h),before);assert.equal(h.running,true);
+});
+
+function nativeCalInteractionSamplesV182(){
+  const h=runtime();h.local='logistics';context(h,9.5);
+  const owner=h.getNpcCalLogisticsActorV165(),identities=new WeakMap([[owner,1]]);
+  const sample=(options={})=>{const state=actualCalObservationV181(h);return{...state,nativeTime:state.route.actor.time,
+    ownerStamp:identities.get(h.getNpcCalLogisticsActorV165())||null,dialogOpen:false,...options};};
+  let previous=null,before=null;
+  for(let i=0;i<180*60;i++){
+    const current=sample(),a=current.route.actor;
+    if(previous?.route.actor.roomId==='logistics'&&previous.route.actor.stage==='walking'&&a.roomId==='logistics'
+      &&a.stage==='walking'&&a.y===376&&a.velocity>0&&a.x>previous.route.actor.x){
+      before={...current,walkingEvidence:{previous:previous.route.actor,current:a}};break;
+    }
+    previous=current;h.update(1/60);
+  }
+  assert.ok(before,'A real mounted controller reaches a moving catwalk phase.');
+  // The native interaction owns workClock/count. These two DTO flags model
+  // the app dialogue boundary; the engine itself remains available to tick.
+  h.interactWithAnnexNpcV141(owner);
+  const accepted=sample({running:false,dialogOpen:true}),rows=[];
+  for(let i=0;i<3*60;i++){h.update(1/60);rows.push(sample());}
+  assert.equal(h.getNpcCalLogisticsActorV165(),owner);
+  return{before,accepted,rows};
+}
+
+test('Cal walking interaction observation requires real E, active native hold and physical resumption of the externally identified owner',()=>{
+  const create=runInContext('('+calQaSourceV181('CAL_INTERACTION_PROGRESS_V182')+')',createContext({}));
+  const {before,accepted,rows}=nativeCalInteractionSamplesV182(),progress=create(before,accepted,0);
+  let result=progress.observe(accepted,5000);
+  assert.equal(result.status,'waiting');assert.equal(progress.snapshot(5000).heldFrames,0,'Dialogue wall time cannot count as active hold.');
+  for(const row of rows){result=progress.observe(row,5000+(row.nativeTime-accepted.nativeTime)*1000);if(result.status!=='waiting')break;}
+  assert.equal(result.status,'resumed',JSON.stringify(result));
+  const receipt=progress.snapshot(9000);
+  assert.ok(receipt.heldFrames>100);assert.ok(receipt.heldNativeSeconds>2.3&&receipt.heldNativeSeconds<2.4);
+  assert.ok(receipt.resumedDistance>=1);assert.equal(receipt.logicalOwnerStamp,1);
+});
+
+test('Cal interaction guards reject another owner, pause, occupancy, cabin, injected motion, false walking and missing resumption',()=>{
+  const create=runInContext('('+calQaSourceV181('CAL_INTERACTION_PROGRESS_V182')+')',createContext({}));
+  const {before,accepted,rows}=nativeCalInteractionSamplesV182();
+  for(const [label,mutate] of[
+    ['new equal-looking body',s=>{s.ownerStamp=null;}],['paused game',s=>{s.running=false;}],
+    ['occupied instead of interaction',s=>{s.route.actor.reason='occupied';}],
+    ['cabin',s=>{s.route.actor.lift={phase:'travel'};}],['foreign deck',s=>{s.route.actor.deck=3;}],
+    ['distance grows while pose stays',s=>{s.route.actor.distance+=.2;}],
+    ['pose and distance injected during hold',s=>{s.route.actor.x+=.2;s.actual.x+=.2;s.route.actor.distance+=.2;}],
+    ['clock rearmed',s=>{s.actual.workClock=2.4;}],['clock reversed',s=>{s.nativeTime-=1;}]
+  ]){
+    const progress=create(before,accepted,0);assert.equal(progress.observe(rows[0],20).status,'waiting');
+    const bad=structuredClone(rows[1]);mutate(bad);
+    assert.equal(progress.observe(bad,40).status,'failed',label);
+  }
+  for(const mutate of[
+    s=>{s.walkingEvidence.current.distance=s.walkingEvidence.previous.distance;},
+    s=>{s.route.actor.reason='occupied';},s=>{s.actual.vx=0;}
+  ]){const bad=structuredClone(before);mutate(bad);assert.equal(create(bad,accepted,0).observe(rows[0],20).status,'failed');}
+  const noResume=create(before,accepted,0);
+  for(const row of rows.filter(s=>s.actual.workClock>0))assert.equal(noResume.observe(row,2000).status,'waiting');
+  const waiting=structuredClone(rows.at(-1));waiting.route.actor={...accepted.route.actor,time:accepted.route.actor.time+8.01,
+    velocity:0,reason:'daily-schedule'};waiting.actual={...accepted.actual,workClock:0};waiting.nativeTime=accepted.nativeTime+8.01;
+  assert.equal(noResume.observe(waiting,10000).reason,'cal-interaction-no-physical-resumption');
+  assert.equal(create(before,accepted,0).check(90001),'cal-interaction-wall-budget');
+});
+
+test('the actual Cal QA WeakMap rejects a replacement object with equal body fields without assigning an actor stamp',()=>{
+  const h=runtime(),actor=h.getNpcCalLogisticsActorV165();let selected=actor;
+  const host=Object.create(h);host.getNpcCalLogisticsActorV165=()=>selected;
+  const before=JSON.stringify(actor);
+  const sandbox=createContext({__ATF_HUB__:host,structuredClone,document:{querySelector:()=>({hidden:true})}});sandbox.window=sandbox;
+  runInContext('('+calQaSourceV181('exercise_walking_interaction_v182',true)+')()',sandbox);
+  assert.equal(sandbox.__ATF_CAL_INTERACTION_REFERENCE_V182__.read().ownerStamp,1);
+  selected={...actor};
+  assert.equal(sandbox.__ATF_CAL_INTERACTION_REFERENCE_V182__.read().ownerStamp,null);
+  assert.equal(JSON.stringify(actor),before,'The external reference map never assigns metadata to the actual actor.');
+  assert.equal(h.getNpcCalLogisticsActorV165(),actor);
 });
 
 test('the composed owner keeps the same native Cal through the real watch, ladder, dialogue, save and returning floor bookmark',()=>{
