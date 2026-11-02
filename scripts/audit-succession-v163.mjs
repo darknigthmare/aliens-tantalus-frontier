@@ -407,6 +407,89 @@ export function reviewedLiveDigestV178(path, endpointMainM) {
   return receipt.currentSha256;
 }
 
+
+/** QA-only continuation from exact d41b; no runtime or workbook cells change. */
+export const V179_BASELINE_WITNESS = Object.freeze({
+  "mainCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+  "baselineProgressSha256": "cc61060d14f3e7b5ecceccb7d36f897da8175965e7e15fb71a5de2be0676644a",
+  "documentCanonicalSha256": "d361f5fd827297f8eac2bf924fb34c65440d7b93456a7e600208f9a259fc5200",
+  "workbookSha256": "55fac512962c1b1da719fdaf871e3a6b7cedd52ec1a3601a1709453d20c49f22",
+  "historicalConstantsSha256": "9257e54ec41400fdcfad687efdb69f910a2028854b971f4c209f6b0fa0e26bc4"
+});
+export const V179_MAIN_PREDECESSORS = Object.freeze({
+  "scripts/qa-npc-interdeck-native-v165.py": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+  "scripts/qa-xeno-trials-capture-v163.py": "3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d",
+  "scripts/verify-npc-interdeck-routes-v165.mjs": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080",
+  "scripts/verify-capture-observation-v177.mjs": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+  "scripts/verify-xeno-trials-capture-v163.mjs": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
+  "scripts/verify-audit-continuation-v163.mjs": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291"
+});
+export const V179_QA_SUCCESSORS = Object.freeze({
+  "scripts/qa-npc-interdeck-native-v165.py": Object.freeze({"previousSha256":"1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a","currentSha256":"a614f03fe889c62ca5b481a1079df000a598d34a1c5be65e420ee4d9475d51ec"}),
+  "scripts/qa-xeno-trials-capture-v163.py": Object.freeze({"previousSha256":"3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d","currentSha256":"f7108b5d1da2f06b9abe3dffdb5b8f93d2ebb534e11699e50aff25690498e09d"}),
+});
+export const V179_VERIFIER_SUCCESSORS = Object.freeze({
+  "scripts/verify-npc-interdeck-routes-v165.mjs": Object.freeze({"previousSha256":"331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080","currentSha256":"66b1f6cc8a2a018b2ddacecfb73c77eb52bb7784a51bc7addb43c8ec46832f8a"}),
+  "scripts/verify-capture-observation-v177.mjs": Object.freeze({"previousSha256":"e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f","currentSha256":"ca0a7011de8a2f5a2f785263bb5fe3a0e173b20ac842e64e97eb82c2aa76ce6c"}),
+  "scripts/verify-xeno-trials-capture-v163.mjs": Object.freeze({"previousSha256":"cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28","currentSha256":"ab217ec8de87d3f6dbf497805bf3ab449b831f8b7c8e891bbf080b4e41b85d53"}),
+  "scripts/verify-audit-continuation-v163.mjs": Object.freeze({"previousSha256":"da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291","currentSha256":"cca73143317423dac2a2e0c9e97408ce093860a66b3722748b066d2f08e59fda"}),
+});
+
+export function reviewedLiveDigestV179(path, endpointV178) {
+  const receipts=[V179_QA_SUCCESSORS,V179_VERIFIER_SUCCESSORS].filter(map=>Object.hasOwn(map,path)).map(map=>map[path]);
+  assert.ok(receipts.length<=1,'Ambiguous V179 successor: '+path);
+  if(!receipts.length)return endpointV178;
+  const receipt=receipts[0];
+  assert.deepEqual(keys(receipt),['currentSha256','previousSha256']);
+  assert.equal(endpointV178,V179_MAIN_PREDECESSORS[path],'Incorrect V178 endpoint for V179: '+path);
+  assert.equal(receipt.previousSha256,endpointV178,'Broken V178-to-V179 predecessor: '+path);
+  assert.ok(validHash(receipt.currentSha256));assert.notEqual(receipt.currentSha256,endpointV178);
+  return receipt.currentSha256;
+}
+
+export const reviewedCurrentDigestV179=(path,endpointMainM)=>reviewedLiveDigestV179(path,reviewedLiveDigestV178(path,endpointMainM));
+
+export function verifyFollowupV179(current,readSource=readRepository) {
+  const record=current.followupV179;
+  assert.ok(record&&typeof record==='object','Missing V179 continuation');
+  assert.deepEqual(keys(record),['allFeedsCertifiedStable','approved1to1','baselineCommit','baselineProgressSha256',
+    'forgeState','fullArtTasksClosed','historicalResultsTransferred','humanParticipants','newPngAssets',
+    'primaryArchivesRecovered','qaChanges','releaseEvidence','runtimeChanges','runtimeValidation','schema',
+    'scope','sevenRoutesClosed','state','verifierChanges','workbookChanged'],'Unreviewed V179 field');
+  assert.equal(record.schema,179);assert.equal(record.baselineCommit,V179_BASELINE_WITNESS.mainCommit);
+  assert.equal(record.baselineProgressSha256,V179_BASELINE_WITNESS.baselineProgressSha256);
+  assert.equal(record.state,'PREPUBLICATION');
+  assert.equal(record.runtimeValidation,'REQUIRES_OWN_EXACT_HEAD_RECEIPTS');
+  assert.equal(record.historicalResultsTransferred,false);
+  assert.deepEqual(record.runtimeChanges,[]);
+  assert.deepEqual(record.releaseEvidence,{nodeSuite:null,nativeCandidate:null,ci:null,review:null,merge:null});
+  assert.deepEqual([record.approved1to1,record.fullArtTasksClosed,record.humanParticipants,record.newPngAssets,record.primaryArchivesRecovered],[0,0,0,0,0]);
+  assert.deepEqual([record.sevenRoutesClosed,record.allFeedsCertifiedStable,record.workbookChanged],[false,false,false]);
+  assert.equal(record.forgeState,'DEFERRED_BY_USER');assert.ok(record.scope.length>=60);
+  const historical={...current};delete historical.followupV179;
+  assert.equal(canonicalHashV178(historical),V179_BASELINE_WITNESS.documentCanonicalSha256,'The d41b documentary witness was rewritten');
+  assert.equal(current.workbookSha256,V179_BASELINE_WITNESS.workbookSha256);
+  assert.equal(sha(readSource('docs/forge/xeno-trials/'+current.workbook)),V179_BASELINE_WITNESS.workbookSha256,'V179 workbook bytes changed');
+  assert.equal(canonicalHashV178({V178_BASELINE_WITNESS,V178_MAIN_PREDECESSORS,V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS,V178_NEW_DOCUMENTS}),V179_BASELINE_WITNESS.historicalConstantsSha256,'V178 receipt constants were rewritten');
+  assert.deepEqual(keys(V179_MAIN_PREDECESSORS),[...keys(V179_QA_SUCCESSORS),...keys(V179_VERIFIER_SUCCESSORS)].sort());
+  for(const [field,map,allowed]of [
+    ['qaChanges',V179_QA_SUCCESSORS,["scripts/qa-npc-interdeck-native-v165.py","scripts/qa-xeno-trials-capture-v163.py"]],
+    ['verifierChanges',V179_VERIFIER_SUCCESSORS,["scripts/verify-npc-interdeck-routes-v165.mjs","scripts/verify-capture-observation-v177.mjs","scripts/verify-xeno-trials-capture-v163.mjs","scripts/verify-audit-continuation-v163.mjs"]]
+  ]){
+    assert.ok(keys(map).length>0);for(const p of keys(map))assert.ok(allowed.includes(p),'Unknown V179 successor: '+p);
+    assert.deepEqual(record[field]?.map(row=>row.path).sort(),keys(map),'Incomplete V179 '+field);
+    assert.equal(new Set(record[field].map(row=>row.path)).size,record[field].length);
+    for(const row of record[field]){
+      assert.deepEqual(keys(row),['currentSha256','path','previousSha256']);
+      const receipt=map[row.path];
+      assert.deepEqual([row.previousSha256,row.currentSha256],[receipt.previousSha256,receipt.currentSha256]);
+      assert.equal(reviewedLiveDigestV179(row.path,V179_MAIN_PREDECESSORS[row.path]),receipt.currentSha256);
+      assert.equal(sha(readSource(row.path)),receipt.currentSha256,'Unreviewed V179 '+field+': '+row.path);
+    }
+  }
+  return Object.freeze({runtimeSuccessors:0,qaSuccessors:keys(V179_QA_SUCCESSORS).length,verifierSuccessors:keys(V179_VERIFIER_SUCCESSORS).length,workbookChanged:false});
+}
+
 export function verifyFollowupV178(current, readSource = readRepository) {
   const record = current.followupV178;
   assert.ok(record && typeof record === 'object', 'Missing V178 continuation');
@@ -423,7 +506,7 @@ export function verifyFollowupV178(current, readSource = readRepository) {
   assert.deepEqual([record.sevenRoutesClosed,record.allFeedsCertifiedStable],[false,false]);
   assert.equal(record.forgeState,'DEFERRED_BY_USER');
   assert.ok(record.scope.length >= 60);
-  const old = { ...current }; delete old.followupV178;
+  const old = { ...current }; delete old.followupV178; delete old.followupV179;
   assert.equal(canonicalHashV178(old),V178_BASELINE_WITNESS.documentCanonicalSha256,
     'MainM/V177 documentary witness was rewritten');
   assert.equal(canonicalHashV178(current.runtimeSourceSha256),V178_BASELINE_WITNESS.runtimeMapSha256);
@@ -447,7 +530,7 @@ export function verifyFollowupV178(current, readSource = readRepository) {
       const receipt=map[row.path];
       assert.deepEqual([row.previousSha256,row.currentSha256],[receipt.previousSha256,receipt.currentSha256]);
       assert.equal(reviewedLiveDigestV178(row.path,V178_MAIN_PREDECESSORS[row.path]),receipt.currentSha256);
-      assert.equal(sha(readSource(row.path)),receipt.currentSha256,'Unreviewed V178 '+field+': '+row.path);
+      assert.equal(sha(readSource(row.path)),reviewedLiveDigestV179(row.path,receipt.currentSha256),'Unreviewed V178 '+field+': '+row.path);
       if(field==='runtimeChanges') assert.ok(Object.hasOwn(current.runtimeSourceSha256,row.path));
     }
   }
@@ -463,12 +546,12 @@ export function verifyFollowupV178(current, readSource = readRepository) {
 
 function sourceDigestV177(path, previous) {
   const receipt = V177_SOURCE_SUCCESSORS[path];
-  if (!receipt) return reviewedLiveDigestV178(path, previous);
+  if (!receipt) return reviewedCurrentDigestV179(path, previous);
   assert.deepEqual(keys(receipt), ['currentSha256', 'previousSha256']);
   assert.equal(receipt.previousSha256, previous, 'Broken V176-to-V177 source chain: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid V177 source digest: ' + path);
   assert.notEqual(receipt.currentSha256, previous, 'A V177 source successor must identify changed bytes: ' + path);
-  return reviewedLiveDigestV178(path, receipt.currentSha256);
+  return reviewedCurrentDigestV179(path, receipt.currentSha256);
 }
 
 /** One verifier resolver serves the cumulative guard and the source auditor.
@@ -489,7 +572,7 @@ export function verifyReviewedVerifierV177(path, original, readSource = readRepo
     assert.notEqual(receipt.currentSha256, expected, 'A verifier successor must identify changed bytes: ' + path);
     expected = receipt.currentSha256; version = id;
   }
-  const live = reviewedLiveDigestV178(path, expected);
+  const live = reviewedCurrentDigestV179(path, expected);
   if (live !== expected) version = 'V178';
   assert.equal(sha(readSource(path)), live, 'Unreviewed ' + version + ' verifier successor: ' + path);
   return live;
@@ -531,7 +614,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.ok(stream.verifiers.length > 0);
     for (const verifier of stream.verifiers) {
       assert.match(verifier, /^scripts\/verify-[a-zA-Z0-9._-]+\.mjs$/);
-      assert.equal(sha(readSource(verifier)), reviewedLiveDigestV178(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 behavioral verifier: ' + verifier);
+      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV179(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 behavioral verifier: ' + verifier);
     }
   }
   assert.deepEqual(followup.sourceChanges.map(row => row.path), Object.keys(V177_RUNTIME_PREDECESSORS).sort(),
@@ -541,7 +624,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
       'Unregistered V177 runtime source: ' + row.path);
     assert.equal(row.previousSha256, V177_RUNTIME_PREDECESSORS[row.path], 'Unreviewed V177 runtime predecessor: ' + row.path);
     assert.ok(validHash(row.currentSha256)); assert.notEqual(row.previousSha256, row.currentSha256);
-    assert.equal(sha(readSource(row.path)), reviewedLiveDigestV178(row.path, row.currentSha256), 'Unreviewed V177 runtime bytes: ' + row.path);
+    assert.equal(sha(readSource(row.path)), reviewedCurrentDigestV179(row.path, row.currentSha256), 'Unreviewed V177 runtime bytes: ' + row.path);
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
   }
   const previousQaDrivers = {
@@ -557,10 +640,10 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.equal(row.state, 'PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED');
     assert.equal(row.previousSha256, previousQaDrivers[row.path], 'Unreviewed V177 QA predecessor: ' + row.path);
     assert.ok(validHash(row.currentSha256)); assert.notEqual(row.previousSha256, row.currentSha256);
-    assert.equal(sha(readSource(row.path)), reviewedLiveDigestV178(row.path, row.currentSha256), 'Unreviewed V177 QA pilot bytes: ' + row.path);
+    assert.equal(sha(readSource(row.path)), reviewedCurrentDigestV179(row.path, row.currentSha256), 'Unreviewed V177 QA pilot bytes: ' + row.path);
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
     for (const verifier of row.verifiers)
-      assert.equal(sha(readSource(verifier)), reviewedLiveDigestV178(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 QA behavioral verifier: ' + verifier);
+      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV179(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 QA behavioral verifier: ' + verifier);
   }
   const toolPredecessors = {
     'scripts/install-costume-art-v175.mjs': '9b6ef01e417485277aa83a6db17a37bb9a34609c1a97c27aa38d0338aaac4705',
@@ -576,7 +659,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     assert.equal(sha(readSource(row.path)), receipt.currentSha256, 'Unreviewed V177 tool bytes: ' + row.path);
     assert.ok(row.reason.length >= 60 && row.verifiers.length > 0);
     for (const verifier of row.verifiers)
-      assert.equal(sha(readSource(verifier)), reviewedLiveDigestV178(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 tool verifier: ' + verifier);
+      assert.equal(sha(readSource(verifier)), reviewedCurrentDigestV179(verifier, followup.verifierHashes[verifier]), 'Unreviewed V177 tool verifier: ' + verifier);
   }
   const arsenal = followup.arsenalTracking;
   assert.equal(arsenal?.jsonPath, 'docs/arsenal/progress-v177.json');
@@ -826,7 +909,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
               : armory ? 'Unreviewed V169 runtime successor: ' + path
                 : 'Unreviewed V167 runtime successor: ' + path);
     } else {
-      assert.equal(sha(readSource(path)), reviewedLiveDigestV178(path,expected), 'Current V163 source changed: ' + path);
+      assert.equal(sha(readSource(path)), reviewedCurrentDigestV179(path,expected), 'Current V163 source changed: ' + path);
     }
   }
   // New V167 modules are not retroactively called historical V163 sources.
@@ -910,6 +993,7 @@ export function verifyAuditSuccessionV163(previous, current, readSource = readRe
   }
   verifyOpenWorkstreamsV177(current, readSource);
   verifyFollowupV178(current, readSource);
+  verifyFollowupV179(current, readSource);
   return Object.freeze({ inherited: 87, changed: changed.length, unchanged: 87 - changed.length,
     added: added.length, current: keys(after).length });
 }

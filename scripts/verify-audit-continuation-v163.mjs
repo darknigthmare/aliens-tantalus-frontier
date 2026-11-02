@@ -19,7 +19,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
   verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS,
   V178_RUNTIME_SUCCESSORS, V178_VERIFIER_SUCCESSORS, V178_QA_SUCCESSORS,
-  reviewedLiveDigestV178, verifyFollowupV178 } from './audit-succession-v163.mjs';
+  reviewedLiveDigestV178, verifyFollowupV178, V179_BASELINE_WITNESS, V179_QA_SUCCESSORS,
+  V179_VERIFIER_SUCCESSORS, reviewedLiveDigestV179, reviewedCurrentDigestV179, verifyFollowupV179 } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -30,7 +31,7 @@ const previous = JSON.parse(read(prefix + 'progress-v162.json'));
 const current = JSON.parse(read(prefix + 'progress-v163.json'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const clone = value => structuredClone(value);
-const effectiveSource = (path, historical) => reviewedLiveDigestV178(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
+const effectiveSource = (path, historical) => reviewedCurrentDigestV179(path, V177_SOURCE_SUCCESSORS[path]?.currentSha256 || historical);
 
 test('V163 keeps all original task identities, roster and historical table cells unchanged', () => {
   assert.equal(current.lot, 'V163');
@@ -185,7 +186,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     ['scripts/verify-audit-continuation-v163.mjs','scripts/verify-public-release-v86.mjs']);
   for (const [path, revision] of Object.entries(V165_VERIFIER_SUCCESSORS_V176)) {
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
-    assert.equal(sha(read(path)),reviewedLiveDigestV178(path,V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256),path);
+    assert.equal(sha(read(path)),reviewedCurrentDigestV179(path,V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256),path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
     assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V17[678] verifier/,path);
   }
@@ -225,7 +226,7 @@ test('V177 retains every reviewed V167 through V176 receipt instead of rewriting
       || V165_VERIFIER_SUCCESSORS_V173[path] || V165_VERIFIER_SUCCESSORS_V171[path];
     assert.equal(receipt.previousSha256, previousReceipt.currentSha256, path);
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
-    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), reviewedLiveDigestV178(path,receipt.currentSha256));
+    assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), reviewedCurrentDigestV179(path,receipt.currentSha256));
     const corrupted = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
       error => /Unreviewed V17[78] verifier/.test(error.message) && error.message.includes(path), path);
@@ -235,7 +236,7 @@ test('V177 retains every reviewed V167 through V176 receipt instead of rewriting
 test('V177 source successors reject unreviewed bytes even when the live JSON pin is forged to match them', () => {
   assert.ok(Object.keys(V177_SOURCE_SUCCESSORS).length >= 5, 'The actual source continuation must be explicit.');
   for (const [path, receipt] of Object.entries(V177_SOURCE_SUCCESSORS)) {
-    assert.equal(sha(read(path)), reviewedLiveDigestV178(path,receipt.currentSha256), path);
+    assert.equal(sha(read(path)), reviewedCurrentDigestV179(path,receipt.currentSha256), path);
     assert.notEqual(receipt.previousSha256, receipt.currentSha256, path);
     const bytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
     const corrupted = name => name === path ? bytes : read(name);
@@ -332,7 +333,7 @@ test('the recovered V168 archive closes only its historical delivery while globa
 test('V177 pins the changed observation pilots without turning a script review into a capture receipt', () => {
   for (const row of current.followupV177.qaDriverChanges) {
     assert.equal(row.state, 'PILOT_SOURCE_REVIEWED_NO_RUN_RESULT_INFERRED');
-    assert.equal(sha(read(row.path)), row.currentSha256, row.path);
+    assert.equal(sha(read(row.path)), reviewedCurrentDigestV179(row.path,row.currentSha256), row.path);
     const changed = path => path === row.path ? Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]) : read(path);
     assert.throws(() => verifyOpenWorkstreamsV177(current, changed), /Unreviewed V177 QA pilot bytes/, row.path);
     const forged = clone(current); forged.followupV177.qaDriverChanges.find(r => r.path === row.path).state = 'NATIVE_PASSED';
@@ -604,7 +605,7 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   assert.equal(current.candidateLocalValidationV177.testedCommit,'70adab8e66b8b2ee3fc2a731a182dd20d2a6af31');
   for(const map of [V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS])
     for(const [path,receipt] of Object.entries(map)) {
-      assert.equal(sha(read(path)),receipt.currentSha256,path);
+      assert.equal(sha(read(path)),reviewedLiveDigestV179(path,receipt.currentSha256),path);
       assert.throws(()=>reviewedLiveDigestV178(path,'0'.repeat(64)),/Incorrect MainM endpoint/);
       const changed=name=>name===path?Buffer.concat([read(name),Buffer.from('\nUNREVIEWED')]):read(name);
       assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),undefined,path);
@@ -724,4 +725,43 @@ print(json.dumps({'sheets':len(sheets),'formulas':sum(len(v) for v in formulas.v
     encoding: 'utf8', maxBuffer: 1024 * 1024
   }));
   assert.deepEqual(result, { sheets: 4, formulas: 3, sourceCells: 10276, records: 1022, partialRoutes: 7, formulaErrors: 0 });
+});
+
+
+test('V179 admits only reviewed QA successors while preserving every d41b witness and workbook cell', () => {
+  const result=verifyFollowupV179(current);
+  assert.deepEqual(result,{runtimeSuccessors:0,qaSuccessors:Object.keys(V179_QA_SUCCESSORS).length,
+    verifierSuccessors:Object.keys(V179_VERIFIER_SUCCESSORS).length,workbookChanged:false});
+  assert.equal(current.followupV179.baselineCommit,'d41b5fc120da2e7a5938308f9d3c852d20e53cc5');
+  assert.equal(sha(read(prefix+current.workbook)),V179_BASELINE_WITNESS.workbookSha256);
+  assert.equal(current.workbookSha256,V179_BASELINE_WITNESS.workbookSha256);
+  assert.deepEqual(current.followupV179.runtimeChanges,[]);
+  for(const map of [V179_QA_SUCCESSORS,V179_VERIFIER_SUCCESSORS])for(const [path,receipt]of Object.entries(map)){
+    assert.equal(reviewedLiveDigestV179(path,receipt.previousSha256),receipt.currentSha256);
+    assert.equal(sha(read(path)),receipt.currentSha256,path);
+    assert.throws(()=>reviewedLiveDigestV179(path,'0'.repeat(64)),/Incorrect V178 endpoint/);
+    const changed=name=>name===path?Buffer.concat([read(name),Buffer.from('\nUNREVIEWED')]):read(name);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),undefined,path);
+  }
+  for(const alter of [
+    c=>{delete c.followupV179;},
+    c=>{c.followupV179.qaChanges.pop();},
+    c=>{c.followupV179.verifierChanges.pop();},
+    c=>{c.followupV179.qaChanges.push({...c.followupV179.qaChanges[0]});},
+    c=>{c.followupV179.qaChanges[0].previousSha256='0'.repeat(64);},
+    c=>{c.followupV179.qaChanges[0].currentSha256='0'.repeat(64);},
+    c=>{c.followupV179.qaChanges[0].path='scripts/qa-unknown.py';},
+    c=>{c.followupV179.runtimeChanges.push({path:'src/unknown.js',previousSha256:null,currentSha256:'0'.repeat(64)});},
+    c=>{c.followupV179.baselineCommit='0'.repeat(40);},
+    c=>{c.followupV179.historicalResultsTransferred=true;},
+    c=>{c.followupV179.releaseEvidence.ci={status:'success'};},
+    c=>{c.followupV179.unreviewedEvidence={ci:{status:'success'}};},
+    c=>{c.followupV179.sevenRoutesClosed=true;},
+    c=>{c.followupV179.approved1to1=1;},
+    c=>{c.followupV178.qaChanges[0].currentSha256='0'.repeat(64);},
+    c=>{c.followupV178.candidateLocalValidationV178.testedCommit='0'.repeat(40);},
+    c=>{c.tables['27_RepriseV177'].rows[0][1]='unreviewed';},
+    c=>{c.workbookSha256='0'.repeat(64);},
+    c=>{c.runtimeSourceSha256['src/npc-interdeck-routes-v165.js']='0'.repeat(64);}
+  ]){const forged=clone(current);alter(forged);assert.throws(()=>verifyFollowupV179(forged));}
 });
