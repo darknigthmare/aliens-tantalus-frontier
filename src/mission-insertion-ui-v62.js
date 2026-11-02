@@ -84,7 +84,7 @@ function clamp(value) {
 function safeMediaSource(value) {
   const source = nonEmptyString(value, 1200);
   if (!source) return null;
-  if (/^(?:javascript|data:text\/html):/iu.test(source)) return null;
+  if (/^(?:javascript:|data:text\/html(?:[;,:]|$))/iu.test(source)) return null;
   return source;
 }
 
@@ -95,7 +95,9 @@ function safeMediaSource(value) {
 export function normalizeMissionInsertionMediaV62(candidate) {
   if (!isRecord(candidate)) return null;
   const id = nonEmptyString(candidate.id || candidate.key, 180);
-  const source = safeMediaSource(candidate.src || candidate.file || candidate.path);
+  // A host may compose this resolver with a campaign-specific one. Accept our
+  // own normalized source field so falling back does not erase valid media.
+  const source = safeMediaSource(candidate.src || candidate.file || candidate.path || candidate.source);
   if (!id || !source) return null;
   const mediaType = String(candidate.mediaType || candidate.type || candidate.kind || '').toLowerCase();
   const type = mediaType === 'video' || /\.(?:mp4|webm|ogv)(?:[?#].*)?$/iu.test(source)

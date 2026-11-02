@@ -45,6 +45,7 @@
     "test:all": "node scripts/test-release-v143.mjs",
     "check:built": "node scripts/verify-release-artifact-v143.mjs",
     "test:trials": "node --test scripts/verify-xeno-trials-v145.mjs",
+    "test:trials:batch40:v179": "node --test scripts/verify-xeno-trials-curriculum-v179.mjs scripts/verify-xeno-trials-roster-v179.mjs scripts/verify-xeno-trials-boss-stages-v179.mjs scripts/verify-xeno-trials-events-v179.mjs scripts/verify-xeno-trials-tickets-v179.mjs scripts/verify-campaign-art-v179.mjs",
     "test:trials:plan": "node --test scripts/verify-xeno-trials-plan-v146.mjs",
     "test:trials:controls": "node --test scripts/verify-xeno-trials-controls-v150.mjs",
     "test:trials:feedback": "node --test scripts/verify-xeno-trials-feedback-v149.mjs",

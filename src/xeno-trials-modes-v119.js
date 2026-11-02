@@ -1,11 +1,14 @@
 import { XENO_TRIALS_FIGHTERS_V96 as FIGHTERS } from './xeno-trials-data-v96.js';
+import { XENO_TRIALS_CHALLENGE_CURRICULUM_V179 } from './xeno-trials-challenge-curriculum-v179.js';
+import { XENO_TRIALS_EVENTS_V179, getXenoTrialsEventWaveV179 } from './xeno-trials-events-v179.js';
 
 // Authored simulation curriculum: these incidents belong to Tantalus, not film canon.
 export const XENO_TRIALS_BRANCHES_V119 = Object.freeze([
   { id: 'campaign', label: 'CAMPAGNE', description: 'Certification, confinement, poursuite, adaptation, ruche et apex.' },
   { id: 'contracts', label: 'CONTRATS', description: 'Cibles et conditions connues avant le choix du spécimen.' },
   { id: 'on-demand', label: 'CONTRATS À LA DEMANDE', description: 'Demandez une famille, un adversaire et vos règles.' },
-  { id: 'challenges', label: 'DÉFIS', description: 'Épreuves fixes, contraintes physiques et séries de combats.' }
+  { id: 'challenges', label: 'DÉFIS', description: 'Épreuves fixes, contraintes physiques et séries de combats.' },
+  { id: 'events', label: 'ÉVÉNEMENTS', description: 'Alertes de horde, survie et protocoles MIRE : vagues de duels successifs.' }
 ]);
 const known = new Set(FIGHTERS.map(f => f.id));
 const stages = ['containment-deck', 'reactor-ring', 'planet-surface', 'tantalus-cargo', 'hive-vault', 'tantalus-bridge'];
@@ -42,8 +45,10 @@ export const XENO_TRIALS_CHALLENGES_V119 = Object.freeze([
   { id: 'one-hp', title: '1 PV', opponentIds: ['arachnoid'], rules: { initialHp: 1 }, description: 'Les deux adversaires débutent chaque manche avec 1 PV.' },
   { id: 'thirty-seconds', title: 'CHRONO 30 SECONDES', opponentIds: ['warrior'], rules: { timeLimitSeconds: 30 }, description: 'Deux manches gagnantes, chacune limitée à 30 secondes.' },
   { id: 'boss-rush', title: 'BOSS RUSH', opponentIds: ['crusher-acm', 'royal-guard', 'queen'], rules: {}, description: 'Crusher, Royal Guard, Reine : trois duels réels consécutifs.' },
-  { id: 'gauntlet', title: 'GANTELET', opponentIds: ['arachnoid', 'prowler', 'synth-enforcer', 'ravager', 'royal-guard'], rules: {}, description: 'Cinq duels successifs. Une défaite ou un abandon réinitialise la série.' }
-].map(c => Object.freeze({ ...c, opponentIds: Object.freeze(c.opponentIds), rules: Object.freeze(c.rules), reward: 350 + (c.opponentIds.length - 1) * 100, canonStatus: 'original-tantalus-simulation' })));
+  { id: 'gauntlet', title: 'GANTELET', opponentIds: ['arachnoid', 'prowler', 'synth-enforcer', 'ravager', 'royal-guard'], rules: {}, description: 'Cinq duels successifs. Une défaite ou un abandon réinitialise la série.' },
+  ...XENO_TRIALS_CHALLENGE_CURRICULUM_V179,
+  ...XENO_TRIALS_EVENTS_V179
+].map(c => Object.freeze({ ...c, opponentIds: Object.freeze(c.opponentIds), rules: Object.freeze(c.rules), reward: c.reward ?? 350 + (c.opponentIds.length - 1) * 100, canonStatus: 'original-tantalus-simulation' })));
 
 const cleanInteger = (n, max = 1000000) => Number.isInteger(n) && n >= 0 ? Math.min(max, n) : 0;
 export function createXenoTrialsModesProgressV119() {
@@ -117,8 +122,12 @@ export function resolveXenoTrialsActivityV119(activity, modesValue) {
     const entry = XENO_TRIALS_CHALLENGES_V119.find(c => c.id === activity.id);
     if (!entry) return null;
     const bout = modes.challengeRun?.id === entry.id ? modes.challengeRun.bout : 0;
+    const wave = entry.eventV179 ? getXenoTrialsEventWaveV179(entry.id, bout) : null;
+    if (entry.eventV179 && !wave) return null;
     return { ...entry, branch: 'challenges', bout, opponentId: entry.opponentIds[bout],
-      factionId: 'hive', stageId: bout % 2 ? 'planet-surface' : 'containment-deck', difficulty: 'normal' };
+      factionId: wave?.factionId || entry.factionId || 'hive', stageId: wave?.stageId || entry.stageId || (bout % 2 ? 'planet-surface' : 'containment-deck'),
+      difficulty: wave?.difficulty || entry.difficulty || 'normal', rules: wave?.rules || entry.rules,
+      ...(wave ? { briefing: wave.briefing, waveLabel: wave.label } : {}) };
   }
   return null;
 }

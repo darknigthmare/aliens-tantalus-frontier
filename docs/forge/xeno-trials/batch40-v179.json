@@ -1,0 +1,4678 @@
+{
+  "lot": "V179",
+  "baseCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+  "publicationState": "LOCAL_WORKSPACE",
+  "approved1to1": 0,
+  "fullArtTasksClosed": 0,
+  "newImages": 0,
+  "roster": {
+    "count": 189,
+    "pageSize": 40,
+    "pages": [
+      [
+        "warrior",
+        "runner",
+        "arachnoid",
+        "defender",
+        "grid",
+        "spitter",
+        "prowler",
+        "razor-claws",
+        "chrysalis",
+        "smasher",
+        "predalien",
+        "xenoborg",
+        "royal-guard",
+        "queen",
+        "ravager",
+        "crusher-acm",
+        "boiler",
+        "burster",
+        "stalker-arcade",
+        "gorilla",
+        "rhino",
+        "panther",
+        "mantis",
+        "ultramorph",
+        "synth-trooper",
+        "synth-guard",
+        "synth-sniper",
+        "synth-heavy",
+        "armored-joe",
+        "combat-synth",
+        "mecha",
+        "mecha-2",
+        "mechanoid",
+        "albino-joe",
+        "albino-combat-synth",
+        "albino-runner",
+        "albino-crusher",
+        "albino-ravager",
+        "albino-burster",
+        "albino-six"
+      ],
+      [
+        "albino-ripper",
+        "armored-runner",
+        "armored-ravager",
+        "armored-red",
+        "armored-k-series",
+        "armored-ripper",
+        "armored-ripper-queen",
+        "acid-runner",
+        "acid-lurker",
+        "acid-ravager",
+        "acid-boiler",
+        "acid-joe",
+        "acid-combat-synth",
+        "user-antilope",
+        "user-brute",
+        "user-carrier",
+        "user-spiker",
+        "user-warrior-red",
+        "user-phantera-black",
+        "user-rhino",
+        "user-chameleon",
+        "user-chameleon-2",
+        "user-trex-king",
+        "user-trex-queen",
+        "user-big-xeno",
+        "user-pale-spined",
+        "user-tiger-biped",
+        "user-raised-crest",
+        "user-bulbous-quadruped",
+        "user-black-bone-raptor",
+        "user-blue-violet-biped",
+        "user-skeletal-quadruped",
+        "user-red-horned",
+        "cryo-runner",
+        "cryo-crusher",
+        "cryo-lurker",
+        "cryo-ravager",
+        "cryo-boiler",
+        "cryo-burster",
+        "cryo-monica"
+      ],
+      [
+        "cryo-ripper",
+        "cryo-ripper-queen",
+        "cryo-foundry-crusher",
+        "cryo-reef-stalker",
+        "cryo-pale-hunter",
+        "cryo-dust-runner",
+        "cryo-salvage-brute",
+        "cryo-caravan-stalker",
+        "cryo-joe",
+        "cryo-combat-synth",
+        "armored-foundry-crusher",
+        "armored-reef-stalker",
+        "armored-pale-hunter",
+        "armored-dust-runner",
+        "armored-salvage-brute",
+        "armored-caravan-stalker",
+        "acid-queen",
+        "acid-crusher",
+        "acid-burster",
+        "acid-k-series",
+        "acid-ripper",
+        "acid-ripper-queen",
+        "acid-foundry-crusher",
+        "import-joe-classic",
+        "import-joe-battle",
+        "import-joe-hazmat",
+        "import-joe-tactical",
+        "import-blue-drone",
+        "import-blue-queen",
+        "user-open-crest",
+        "user-green-dome",
+        "user-violet-lobes",
+        "user-green-vesicles",
+        "user-black-dome",
+        "user-black-fin",
+        "user-orange-biped",
+        "user-unclassified-multiarm",
+        "user-flesh-experiment",
+        "user-renaissance",
+        "import-engineer-armorsuit"
+      ],
+      [
+        "import-engineer-battlesuit",
+        "import-engineer-behemotsuit",
+        "import-engineer-ceremonialsuit",
+        "import-engineer-mala-kak",
+        "import-engineer-original-space-jokey-variant",
+        "import-engineer-respirator",
+        "import-engineer-spacejokey",
+        "import-engineer-suit-open",
+        "import-engineer-wararmor",
+        "import-engineer-woman",
+        "import-synth-eloise",
+        "import-synth-jerri-1",
+        "import-synth-jerri-2",
+        "import-wy-apesuit",
+        "import-wy-covenant-david",
+        "import-alien-king-from-alien-extemrination",
+        "import-green-alien-king",
+        "import-xeno-gorillaxeno",
+        "import-xeno-kingrogue",
+        "import-xeno-spacejokeygiant",
+        "import-game-afe-synth-warden",
+        "import-game-afe2-warden",
+        "import-game-afe2-bulwark",
+        "import-game-dd-wy-commando",
+        "import-game-afe2-exploder",
+        "import-game-afe2-harbinger",
+        "import-game-dd-synthetic",
+        "import-game-dd-guardian",
+        "synth-incinerator",
+        "synth-detonator",
+        "synth-containment",
+        "synth-enforcer",
+        "afe2-engineer-hybrid",
+        "synth-peacekeeper",
+        "afe2-spider",
+        "afe2-igniter",
+        "afe2-bombardier",
+        "afe2-huntsman",
+        "import-xeno-titan-queen-nolegs",
+        "synth-good-boy"
+      ],
+      [
+        "synth-tecsek",
+        "synth-automated-powerloader",
+        "dd-darwin-era-cultist",
+        "drive-v123-acm-boiler",
+        "drive-v123-acm-crusher",
+        "drive-v123-afe-burster",
+        "drive-v123-afe-prowler",
+        "drive-v123-afe-runner",
+        "drive-v123-afe-spitter",
+        "drive-v123-comic-rogue-king",
+        "drive-v123-creature-alien3-runner",
+        "drive-v123-creature-aliens-queen-mobile",
+        "drive-v123-creature-prometheus-engineer-biosuit",
+        "drive-v123-creature-resurrection-newborn-v2",
+        "drive-v123-creature-romulus-offspring",
+        "drive-v123-fte-pathogen-brute-profile-v13",
+        "drive-v123-fte-pathogen-popper-profile-v13",
+        "drive-v123-fte-pathogen-queen-right-v13",
+        "drive-v123-fte-pathogen-runner-nodules-v13",
+        "drive-v123-fte-pathogen-stalker-profile-v13",
+        "drive-v123-kenner-gorilla",
+        "drive-v123-neca-panther-kenner-tribute-v14",
+        "drive-v123-neca-rhino-kenner-orange-v14",
+        "drive-v123-neca-rhino-kenner-version2-blue-v14",
+        "drive-v123-neca-snake-series13-v14",
+        "drive-v123-game-working-joe-hazard",
+        "drive-v123-game-working-joe-standard",
+        "drive-v123-prometheus-engineer-chair-suit-v16",
+        "drive-v123-game-combat-synthetic-avp2"
+      ]
+    ]
+  },
+  "challenges": [
+    {
+      "id": "xt179-pursuit-contact",
+      "title": "PISTES DE CHASSE · CONTACT CONTRÔLÉ",
+      "trackId": "pursuit",
+      "formatId": "contact",
+      "stageId": "xt179-ship-habitation",
+      "factionId": "pursuit",
+      "difficulty": "normal",
+      "opponentIds": [
+        "runner",
+        "prowler"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Intercepter les chasseurs mobiles et garder une distance de riposte. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-pursuit-interception",
+      "title": "PISTES DE CHASSE · INTERCEPTION 60",
+      "trackId": "pursuit",
+      "formatId": "interception",
+      "stageId": "xt179-ship-extraction",
+      "factionId": "pursuit",
+      "difficulty": "normal",
+      "opponentIds": [
+        "prowler",
+        "grid"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Intercepter les chasseurs mobiles et garder une distance de riposte. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-pursuit-precision",
+      "title": "PISTES DE CHASSE · POINT DE RUPTURE",
+      "trackId": "pursuit",
+      "formatId": "precision",
+      "stageId": "xt179-ship-engineering",
+      "factionId": "pursuit",
+      "difficulty": "normal",
+      "opponentIds": [
+        "grid"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Intercepter les chasseurs mobiles et garder une distance de riposte. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-pursuit-survival",
+      "title": "PISTES DE CHASSE · TENIR LA LIGNE",
+      "trackId": "pursuit",
+      "formatId": "survival",
+      "stageId": "xt179-ship-docking",
+      "factionId": "pursuit",
+      "difficulty": "normal",
+      "opponentIds": [
+        "panther"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Intercepter les chasseurs mobiles et garder une distance de riposte. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-pursuit-gauntlet",
+      "title": "PISTES DE CHASSE · PARCOURS COMPLET",
+      "trackId": "pursuit",
+      "formatId": "gauntlet",
+      "stageId": "xt179-planet-surface",
+      "factionId": "pursuit",
+      "difficulty": "normal",
+      "opponentIds": [
+        "runner",
+        "prowler",
+        "grid",
+        "stalker-arcade",
+        "panther"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Intercepter les chasseurs mobiles et garder une distance de riposte. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-containment-contact",
+      "title": "VERROUS DE CONFINEMENT · CONTACT CONTRÔLÉ",
+      "trackId": "containment",
+      "formatId": "contact",
+      "stageId": "xt179-planet-ruins",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "defender",
+        "chrysalis"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Lire les charges des spécimens lourds avant de s’engager au contact. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-containment-interception",
+      "title": "VERROUS DE CONFINEMENT · INTERCEPTION 60",
+      "trackId": "containment",
+      "formatId": "interception",
+      "stageId": "xt179-planet-ridge",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "chrysalis",
+        "smasher"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Lire les charges des spécimens lourds avant de s’engager au contact. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-containment-precision",
+      "title": "VERROUS DE CONFINEMENT · POINT DE RUPTURE",
+      "trackId": "containment",
+      "formatId": "precision",
+      "stageId": "xt179-planet-evac",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "smasher"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Lire les charges des spécimens lourds avant de s’engager au contact. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-containment-survival",
+      "title": "VERROUS DE CONFINEMENT · TENIR LA LIGNE",
+      "trackId": "containment",
+      "formatId": "survival",
+      "stageId": "xt179-planet-caves",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "armored-ravager"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Lire les charges des spécimens lourds avant de s’engager au contact. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-containment-gauntlet",
+      "title": "VERROUS DE CONFINEMENT · PARCOURS COMPLET",
+      "trackId": "containment",
+      "formatId": "gauntlet",
+      "stageId": "xt179-planet-approach",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "defender",
+        "chrysalis",
+        "smasher",
+        "crusher-acm",
+        "armored-ravager"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Lire les charges des spécimens lourds avant de s’engager au contact. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-acid-contact",
+      "title": "PRESSION ACIDE · CONTACT CONTRÔLÉ",
+      "trackId": "acid",
+      "formatId": "contact",
+      "stageId": "xt179-colony-utility",
+      "factionId": "hive",
+      "difficulty": "normal",
+      "opponentIds": [
+        "spitter",
+        "boiler"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Rejoindre les tireurs sans perdre la maîtrise des distances. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-acid-interception",
+      "title": "PRESSION ACIDE · INTERCEPTION 60",
+      "trackId": "acid",
+      "formatId": "interception",
+      "stageId": "xt179-colony-security",
+      "factionId": "hive",
+      "difficulty": "normal",
+      "opponentIds": [
+        "boiler",
+        "burster"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Rejoindre les tireurs sans perdre la maîtrise des distances. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-acid-precision",
+      "title": "PRESSION ACIDE · POINT DE RUPTURE",
+      "trackId": "acid",
+      "formatId": "precision",
+      "stageId": "xt179-colony-landing",
+      "factionId": "hive",
+      "difficulty": "normal",
+      "opponentIds": [
+        "burster"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Rejoindre les tireurs sans perdre la maîtrise des distances. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-acid-survival",
+      "title": "PRESSION ACIDE · TENIR LA LIGNE",
+      "trackId": "acid",
+      "formatId": "survival",
+      "stageId": "xt179-colony-habitat",
+      "factionId": "hive",
+      "difficulty": "normal",
+      "opponentIds": [
+        "acid-queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Rejoindre les tireurs sans perdre la maîtrise des distances. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-acid-gauntlet",
+      "title": "PRESSION ACIDE · PARCOURS COMPLET",
+      "trackId": "acid",
+      "formatId": "gauntlet",
+      "stageId": "xt179-colony-civic",
+      "factionId": "hive",
+      "difficulty": "normal",
+      "opponentIds": [
+        "spitter",
+        "boiler",
+        "burster",
+        "acid-lurker",
+        "acid-queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Rejoindre les tireurs sans perdre la maîtrise des distances. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-synthetic-contact",
+      "title": "DOCTRINES SYNTHÉTIQUES · CONTACT CONTRÔLÉ",
+      "trackId": "synthetic",
+      "formatId": "contact",
+      "stageId": "xt179-colony-approach",
+      "factionId": "rival-lab",
+      "difficulty": "normal",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Comparer les doctrines de tir, de zone et de maintien de ligne. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-synthetic-interception",
+      "title": "DOCTRINES SYNTHÉTIQUES · INTERCEPTION 60",
+      "trackId": "synthetic",
+      "formatId": "interception",
+      "stageId": "xt179-workshop",
+      "factionId": "rival-lab",
+      "difficulty": "normal",
+      "opponentIds": [
+        "synth-sniper",
+        "synth-heavy"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Comparer les doctrines de tir, de zone et de maintien de ligne. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-synthetic-precision",
+      "title": "DOCTRINES SYNTHÉTIQUES · POINT DE RUPTURE",
+      "trackId": "synthetic",
+      "formatId": "precision",
+      "stageId": "xt179-vehicle-bay",
+      "factionId": "rival-lab",
+      "difficulty": "normal",
+      "opponentIds": [
+        "synth-heavy"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Comparer les doctrines de tir, de zone et de maintien de ligne. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-synthetic-survival",
+      "title": "DOCTRINES SYNTHÉTIQUES · TENIR LA LIGNE",
+      "trackId": "synthetic",
+      "formatId": "survival",
+      "stageId": "xt179-quarantine",
+      "factionId": "rival-lab",
+      "difficulty": "normal",
+      "opponentIds": [
+        "synth-enforcer"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Comparer les doctrines de tir, de zone et de maintien de ligne. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-synthetic-gauntlet",
+      "title": "DOCTRINES SYNTHÉTIQUES · PARCOURS COMPLET",
+      "trackId": "synthetic",
+      "formatId": "gauntlet",
+      "stageId": "xt179-armory",
+      "factionId": "rival-lab",
+      "difficulty": "normal",
+      "opponentIds": [
+        "synth-trooper",
+        "synth-sniper",
+        "synth-heavy",
+        "synth-incinerator",
+        "synth-enforcer"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Comparer les doctrines de tir, de zone et de maintien de ligne. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-reconstruction-contact",
+      "title": "FORMES RECONSTRUITES · CONTACT CONTRÔLÉ",
+      "trackId": "reconstruction",
+      "formatId": "contact",
+      "stageId": "xt179-quarters",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "user-antilope",
+        "user-chameleon"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Évaluer les gabarits des reconstructions admises au programme. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-reconstruction-interception",
+      "title": "FORMES RECONSTRUITES · INTERCEPTION 60",
+      "trackId": "reconstruction",
+      "formatId": "interception",
+      "stageId": "xt179-mess",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "user-chameleon",
+        "user-spiker"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Évaluer les gabarits des reconstructions admises au programme. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-reconstruction-precision",
+      "title": "FORMES RECONSTRUITES · POINT DE RUPTURE",
+      "trackId": "reconstruction",
+      "formatId": "precision",
+      "stageId": "xt179-medical",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "user-spiker"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Évaluer les gabarits des reconstructions admises au programme. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-reconstruction-survival",
+      "title": "FORMES RECONSTRUITES · TENIR LA LIGNE",
+      "trackId": "reconstruction",
+      "formatId": "survival",
+      "stageId": "xt179-laboratory",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "user-big-xeno"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Évaluer les gabarits des reconstructions admises au programme. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-reconstruction-gauntlet",
+      "title": "FORMES RECONSTRUITES · PARCOURS COMPLET",
+      "trackId": "reconstruction",
+      "formatId": "gauntlet",
+      "stageId": "xt179-sensors",
+      "factionId": "containment",
+      "difficulty": "normal",
+      "opponentIds": [
+        "user-antilope",
+        "user-chameleon",
+        "user-spiker",
+        "user-brute",
+        "user-big-xeno"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Évaluer les gabarits des reconstructions admises au programme. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-cryo-contact",
+      "title": "LIGNÉES CRYOGÉNIQUES · CONTACT CONTRÔLÉ",
+      "trackId": "cryo",
+      "formatId": "contact",
+      "stageId": "xt179-reactor",
+      "factionId": "containment",
+      "difficulty": "hard",
+      "opponentIds": [
+        "cryo-runner",
+        "cryo-lurker"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Adapter la riposte aux variantes cryogéniques de la simulation. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-cryo-interception",
+      "title": "LIGNÉES CRYOGÉNIQUES · INTERCEPTION 60",
+      "trackId": "cryo",
+      "formatId": "interception",
+      "stageId": "xt179-life-support",
+      "factionId": "containment",
+      "difficulty": "hard",
+      "opponentIds": [
+        "cryo-lurker",
+        "cryo-boiler"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Adapter la riposte aux variantes cryogéniques de la simulation. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-cryo-precision",
+      "title": "LIGNÉES CRYOGÉNIQUES · POINT DE RUPTURE",
+      "trackId": "cryo",
+      "formatId": "precision",
+      "stageId": "xt179-hangar",
+      "factionId": "containment",
+      "difficulty": "hard",
+      "opponentIds": [
+        "cryo-boiler"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Adapter la riposte aux variantes cryogéniques de la simulation. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-cryo-survival",
+      "title": "LIGNÉES CRYOGÉNIQUES · TENIR LA LIGNE",
+      "trackId": "cryo",
+      "formatId": "survival",
+      "stageId": "xt179-cryo",
+      "factionId": "containment",
+      "difficulty": "hard",
+      "opponentIds": [
+        "cryo-ripper-queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Adapter la riposte aux variantes cryogéniques de la simulation. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-cryo-gauntlet",
+      "title": "LIGNÉES CRYOGÉNIQUES · PARCOURS COMPLET",
+      "trackId": "cryo",
+      "formatId": "gauntlet",
+      "stageId": "xt179-cic",
+      "factionId": "containment",
+      "difficulty": "hard",
+      "opponentIds": [
+        "cryo-runner",
+        "cryo-lurker",
+        "cryo-boiler",
+        "cryo-ravager",
+        "cryo-ripper-queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Adapter la riposte aux variantes cryogéniques de la simulation. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-hybrid-contact",
+      "title": "ANATOMIES ATYPIQUES · CONTACT CONTRÔLÉ",
+      "trackId": "hybrid",
+      "formatId": "contact",
+      "stageId": "xt179-briefing",
+      "factionId": "rival-lab",
+      "difficulty": "hard",
+      "opponentIds": [
+        "predalien",
+        "afe2-engineer-hybrid"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Observer les portées et les changements de rythme des profils atypiques. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-hybrid-interception",
+      "title": "ANATOMIES ATYPIQUES · INTERCEPTION 60",
+      "trackId": "hybrid",
+      "formatId": "interception",
+      "stageId": "xt179-bridge",
+      "factionId": "rival-lab",
+      "difficulty": "hard",
+      "opponentIds": [
+        "afe2-engineer-hybrid",
+        "afe2-spider"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Observer les portées et les changements de rythme des profils atypiques. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-hybrid-precision",
+      "title": "ANATOMIES ATYPIQUES · POINT DE RUPTURE",
+      "trackId": "hybrid",
+      "formatId": "precision",
+      "stageId": "xt179-synthetic-bay",
+      "factionId": "rival-lab",
+      "difficulty": "hard",
+      "opponentIds": [
+        "afe2-spider"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Observer les portées et les changements de rythme des profils atypiques. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-hybrid-survival",
+      "title": "ANATOMIES ATYPIQUES · TENIR LA LIGNE",
+      "trackId": "hybrid",
+      "formatId": "survival",
+      "stageId": "xt179-proving-ground",
+      "factionId": "rival-lab",
+      "difficulty": "hard",
+      "opponentIds": [
+        "afe2-bombardier"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Observer les portées et les changements de rythme des profils atypiques. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-hybrid-gauntlet",
+      "title": "ANATOMIES ATYPIQUES · PARCOURS COMPLET",
+      "trackId": "hybrid",
+      "formatId": "gauntlet",
+      "stageId": "xt179-morgue",
+      "factionId": "rival-lab",
+      "difficulty": "hard",
+      "opponentIds": [
+        "predalien",
+        "afe2-engineer-hybrid",
+        "afe2-spider",
+        "afe2-huntsman",
+        "afe2-bombardier"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Observer les portées et les changements de rythme des profils atypiques. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-royal-contact",
+      "title": "SEUIL ROYAL · CONTACT CONTRÔLÉ",
+      "trackId": "royal",
+      "formatId": "contact",
+      "stageId": "xt179-archives",
+      "factionId": "hive",
+      "difficulty": "hard",
+      "opponentIds": [
+        "royal-guard",
+        "ultramorph"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "noSpecial": true
+      },
+      "description": "Conserver des fenêtres de dégagement face aux gabarits royaux. Deux duels successifs sans spécial. Une défaite ou un abandon interrompt la série.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-royal-interception",
+      "title": "SEUIL ROYAL · INTERCEPTION 60",
+      "trackId": "royal",
+      "formatId": "interception",
+      "stageId": "xt179-logistics",
+      "factionId": "hive",
+      "difficulty": "hard",
+      "opponentIds": [
+        "ultramorph",
+        "import-xeno-kingrogue"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "description": "Conserver des fenêtres de dégagement face aux gabarits royaux. Deux duels successifs, avec 60 secondes par manche. Au terme du chrono, la règle normale des PV départage les combattants.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-royal-precision",
+      "title": "SEUIL ROYAL · POINT DE RUPTURE",
+      "trackId": "royal",
+      "formatId": "precision",
+      "stageId": "xt179-escape-pods",
+      "factionId": "hive",
+      "difficulty": "hard",
+      "opponentIds": [
+        "import-xeno-kingrogue"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99,
+        "initialHp": 1
+      },
+      "description": "Conserver des fenêtres de dégagement face aux gabarits royaux. Les deux combattants commencent chaque manche à 1 PV. Remporter deux manches.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-royal-survival",
+      "title": "SEUIL ROYAL · TENIR LA LIGNE",
+      "trackId": "royal",
+      "formatId": "survival",
+      "stageId": "xt179-arrival",
+      "factionId": "hive",
+      "difficulty": "hard",
+      "opponentIds": [
+        "queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30,
+        "goal": "survive"
+      },
+      "description": "Conserver des fenêtres de dégagement face aux gabarits royaux. Rester en vie pendant 30 secondes, deux manches. Une élimination de l’adversaire valide aussi la manche.",
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xt179-royal-gauntlet",
+      "title": "SEUIL ROYAL · PARCOURS COMPLET",
+      "trackId": "royal",
+      "formatId": "gauntlet",
+      "stageId": "xt179-bioforge",
+      "factionId": "hive",
+      "difficulty": "hard",
+      "opponentIds": [
+        "royal-guard",
+        "ultramorph",
+        "import-xeno-kingrogue",
+        "armored-ripper-queen",
+        "queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 99
+      },
+      "description": "Conserver des fenêtres de dégagement face aux gabarits royaux. Cinq duels successifs avec le même spécimen. La prime du parcours est accordée une seule fois, après le dernier duel.",
+      "canonStatus": "original-tantalus-simulation"
+    }
+  ],
+  "stages": [
+    {
+      "id": "xt179-ship-habitation",
+      "label": "Coursive habitée / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/metroidvania/zones/ship-habitation-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-ship-extraction",
+      "label": "Sas d’extraction / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/metroidvania/zones/ship-extraction-far.png",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-ship-engineering",
+      "label": "Passage des machines / Simulation",
+      "background": "#241a18",
+      "accent": "#d69058",
+      "floor": "#42302c",
+      "backdrop": "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+      "motionBaseStageId": "reactor-ring",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-ship-docking",
+      "label": "Amarrage extérieur / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-planet-surface",
+      "label": "Plaine balayée / Simulation",
+      "background": "#1b2425",
+      "accent": "#b3d39b",
+      "floor": "#2d3431",
+      "backdrop": "/assets/openai/metroidvania/zones/planet-exterior/planet-surface-far.png",
+      "motionBaseStageId": "planet-surface",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-planet-ruins",
+      "label": "Ruines du plateau / Simulation",
+      "background": "#1b2425",
+      "accent": "#b3d39b",
+      "floor": "#2d3431",
+      "backdrop": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "motionBaseStageId": "planet-surface",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-planet-ridge",
+      "label": "Crête rocheuse / Simulation",
+      "background": "#1b2425",
+      "accent": "#b3d39b",
+      "floor": "#2d3431",
+      "backdrop": "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-far.png",
+      "motionBaseStageId": "planet-surface",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-planet-evac",
+      "label": "Périmètre d’évacuation / Simulation",
+      "background": "#1b2425",
+      "accent": "#b3d39b",
+      "floor": "#2d3431",
+      "backdrop": "/assets/openai/metroidvania/zones/planet-exterior/planet-evac-far.png",
+      "motionBaseStageId": "planet-surface",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-planet-caves",
+      "label": "Cavernes profondes / Simulation",
+      "background": "#191b23",
+      "accent": "#aa8bbd",
+      "floor": "#302b38",
+      "backdrop": "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-far.png",
+      "motionBaseStageId": "hive-vault",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-planet-approach",
+      "label": "Approche des falaises / Simulation",
+      "background": "#1b2425",
+      "accent": "#b3d39b",
+      "floor": "#2d3431",
+      "backdrop": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+      "motionBaseStageId": "planet-surface",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-colony-utility",
+      "label": "Conduits de la colonie / Simulation",
+      "background": "#241a18",
+      "accent": "#d69058",
+      "floor": "#42302c",
+      "backdrop": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+      "motionBaseStageId": "reactor-ring",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-colony-security",
+      "label": "Poste de sécurité / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-colony-landing",
+      "label": "Aire d’atterrissage / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-colony-habitat",
+      "label": "Habitat abandonné / Simulation",
+      "background": "#191b23",
+      "accent": "#aa8bbd",
+      "floor": "#302b38",
+      "backdrop": "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-far.png",
+      "motionBaseStageId": "hive-vault",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-colony-civic",
+      "label": "Centre de la colonie / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-colony-approach",
+      "label": "Route de la colonie / Simulation",
+      "background": "#1b2425",
+      "accent": "#b3d39b",
+      "floor": "#2d3431",
+      "backdrop": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png",
+      "motionBaseStageId": "planet-surface",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-workshop",
+      "label": "Atelier industriel / Simulation",
+      "background": "#241a18",
+      "accent": "#d69058",
+      "floor": "#42302c",
+      "backdrop": "/assets/openai/hub/layers/industrial-workshop-far.png",
+      "motionBaseStageId": "reactor-ring",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-vehicle-bay",
+      "label": "Baie des véhicules / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/hub/layers/industrial-vehicle-bay-far.png",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-quarantine",
+      "label": "Cellule de quarantaine / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/industrial-quarantine-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-armory",
+      "label": "Réserve d’armement / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/industrial-armory-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-quarters",
+      "label": "Quartiers isolés / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/habitat-quarters-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-mess",
+      "label": "Réfectoire évacué / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/hub/layers/habitat-mess-far.png",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-medical",
+      "label": "Bloc médical / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/habitat-medical-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-laboratory",
+      "label": "Laboratoire sous scellés / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/habitat-lab-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-sensors",
+      "label": "Salle des capteurs / Simulation",
+      "background": "#101d24",
+      "accent": "#74d9e7",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/engineering-sensors-far.png",
+      "motionBaseStageId": "tantalus-bridge",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-reactor",
+      "label": "Cœur des machines / Simulation",
+      "background": "#241a18",
+      "accent": "#d69058",
+      "floor": "#42302c",
+      "backdrop": "/assets/openai/hub/layers/engineering-reactor-far.png",
+      "motionBaseStageId": "reactor-ring",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-life-support",
+      "label": "Circuits de survie / Simulation",
+      "background": "#241a18",
+      "accent": "#d69058",
+      "floor": "#42302c",
+      "backdrop": "/assets/openai/hub/layers/engineering-life-support-far.png",
+      "motionBaseStageId": "reactor-ring",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-hangar",
+      "label": "Hangar de maintenance / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/hub/layers/engineering-hangar-far.png",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-cryo",
+      "label": "Chambre cryogénique / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/command-cryo-far.png",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-cic",
+      "label": "Centre des opérations / Simulation",
+      "background": "#101d24",
+      "accent": "#74d9e7",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/command-cic-far.png",
+      "motionBaseStageId": "tantalus-bridge",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-briefing",
+      "label": "Salle de préparation / Simulation",
+      "background": "#101d24",
+      "accent": "#74d9e7",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/command-briefing-far.png",
+      "motionBaseStageId": "tantalus-bridge",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-bridge",
+      "label": "Poste de commandement / Simulation",
+      "background": "#101d24",
+      "accent": "#74d9e7",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/layers/command-bridge-far.png",
+      "motionBaseStageId": "tantalus-bridge",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-synthetic-bay",
+      "label": "Baie des synthétiques / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/annexes/v71/synthetic-bay/far.webp",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-proving-ground",
+      "label": "Champ d’évaluation / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/annexes/v71/proving-ground/far.webp",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-morgue",
+      "label": "Morgue sous confinement / Simulation",
+      "background": "#191b23",
+      "accent": "#aa8bbd",
+      "floor": "#302b38",
+      "backdrop": "/assets/openai/hub/annexes/v71/morgue/far.webp",
+      "motionBaseStageId": "hive-vault",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-archives",
+      "label": "Archives MIRE / Simulation",
+      "background": "#101d24",
+      "accent": "#74d9e7",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/annexes/v71/mire-archives/far.webp",
+      "motionBaseStageId": "tantalus-bridge",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-logistics",
+      "label": "Annexe logistique / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/hub/annexes/v71/logistics/far.webp",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-escape-pods",
+      "label": "Baie des capsules / Simulation",
+      "background": "#241d18",
+      "accent": "#e2b56b",
+      "floor": "#352d25",
+      "backdrop": "/assets/openai/hub/annexes/v71/escape-pods/far.webp",
+      "motionBaseStageId": "tantalus-cargo",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-arrival",
+      "label": "Sas d’arrivée / Simulation",
+      "background": "#101d24",
+      "accent": "#72b8bd",
+      "floor": "#23343c",
+      "backdrop": "/assets/openai/hub/annexes/v71/arrival-airlock/far.webp",
+      "motionBaseStageId": "containment-deck",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    },
+    {
+      "id": "xt179-bioforge",
+      "label": "Anneau Bioforge / Simulation",
+      "background": "#191b23",
+      "accent": "#aa8bbd",
+      "floor": "#302b38",
+      "backdrop": "/assets/openai/hub/annexes/v71/bioforge/far.webp",
+      "motionBaseStageId": "hive-vault",
+      "stageRevision": 179,
+      "assetStatus": "existing-project-backdrop",
+      "canonStatus": "original-tantalus-simulation",
+      "canonExact": false,
+      "affectsCombat": false
+    }
+  ],
+  "events": [
+    {
+      "id": "xte179-incoming-1",
+      "title": "HORDE WAVE INCOMING · 01",
+      "act": "ÉVÉNEMENT · CONTACTS EN APPROCHE",
+      "eventV179": true,
+      "eventFamily": "incoming",
+      "description": "Intercepter les éclaireurs, les renforts puis la caste de commandement. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "easy",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 1/2",
+          "briefing": "Intercepter le premier contact avant la fin du chrono."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "easy",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 2/2",
+          "briefing": "Stopper le renfort au contact."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "warrior"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-incoming-2",
+      "title": "HORDE WAVE INCOMING · 02",
+      "act": "ÉVÉNEMENT · CONTACTS EN APPROCHE",
+      "eventV179": true,
+      "eventFamily": "incoming",
+      "description": "Intercepter les éclaireurs, les renforts puis la caste de commandement. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 1/3",
+          "briefing": "Intercepter le premier contact avant la fin du chrono."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 2/3",
+          "briefing": "Stopper le renfort au contact."
+        },
+        {
+          "opponentId": "prowler",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 3/3",
+          "briefing": "Tenir vingt secondes sans spécial avant de contre-attaquer."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-incoming-3",
+      "title": "HORDE WAVE INCOMING · 03",
+      "act": "ÉVÉNEMENT · CONTACTS EN APPROCHE",
+      "eventV179": true,
+      "eventFamily": "incoming",
+      "description": "Intercepter les éclaireurs, les renforts puis la caste de commandement. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 1/4",
+          "briefing": "Intercepter le premier contact avant la fin du chrono."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 2/4",
+          "briefing": "Stopper le renfort au contact."
+        },
+        {
+          "opponentId": "prowler",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 3/4",
+          "briefing": "Tenir vingt secondes sans spécial avant de contre-attaquer."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 4/4",
+          "briefing": "Garder ses distances avec la caste explosive."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "burster"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-incoming-4",
+      "title": "HORDE WAVE INCOMING · 04",
+      "act": "ÉVÉNEMENT · CONTACTS EN APPROCHE",
+      "eventV179": true,
+      "eventFamily": "incoming",
+      "description": "Intercepter les éclaireurs, les renforts puis la caste de commandement. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 1/5",
+          "briefing": "Intercepter le premier contact avant la fin du chrono."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 2/5",
+          "briefing": "Stopper le renfort au contact."
+        },
+        {
+          "opponentId": "prowler",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 3/5",
+          "briefing": "Tenir vingt secondes sans spécial avant de contre-attaquer."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 4/5",
+          "briefing": "Garder ses distances avec la caste explosive."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 5/5",
+          "briefing": "Briser la charge dans le temps imparti."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "burster",
+        "crusher-acm"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-incoming-5",
+      "title": "HORDE WAVE INCOMING · 05",
+      "act": "ÉVÉNEMENT · CONTACTS EN APPROCHE",
+      "eventV179": true,
+      "eventFamily": "incoming",
+      "description": "Intercepter les éclaireurs, les renforts puis la caste de commandement. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 1/6",
+          "briefing": "Intercepter le premier contact avant la fin du chrono."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 2/6",
+          "briefing": "Stopper le renfort au contact."
+        },
+        {
+          "opponentId": "prowler",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 3/6",
+          "briefing": "Tenir vingt secondes sans spécial avant de contre-attaquer."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 4/6",
+          "briefing": "Garder ses distances avec la caste explosive."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "CONTACTS EN APPROCHE · VAGUE 5/6",
+          "briefing": "Briser la charge dans le temps imparti."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {},
+          "label": "CONTACTS EN APPROCHE · VAGUE 6/6",
+          "briefing": "Neutraliser le commandement royal."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "warrior",
+        "prowler",
+        "burster",
+        "crusher-acm",
+        "queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-quarantine-1",
+      "title": "VERROUS DE QUARANTAINE · 01",
+      "act": "ÉVÉNEMENT · CONFINEMENT DÉGRADÉ",
+      "eventV179": true,
+      "eventFamily": "quarantine",
+      "description": "Reprendre les cellules par le contact : aucun spécial pendant tout le protocole. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "defender",
+          "stageId": "containment-deck",
+          "difficulty": "easy",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 60
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 1/2",
+          "briefing": "Fermer le premier verrou sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "easy",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 2/2",
+          "briefing": "Éprouver les ouvertures de la carapace au contact."
+        }
+      ],
+      "opponentIds": [
+        "defender",
+        "chrysalis"
+      ],
+      "rules": {
+        "noSpecial": true,
+        "timeLimitSeconds": 60
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-quarantine-2",
+      "title": "VERROUS DE QUARANTAINE · 02",
+      "act": "ÉVÉNEMENT · CONFINEMENT DÉGRADÉ",
+      "eventV179": true,
+      "eventFamily": "quarantine",
+      "description": "Reprendre les cellules par le contact : aucun spécial pendant tout le protocole. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "defender",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 60
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 1/3",
+          "briefing": "Fermer le premier verrou sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 2/3",
+          "briefing": "Éprouver les ouvertures de la carapace au contact."
+        },
+        {
+          "opponentId": "smasher",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 3/3",
+          "briefing": "Punir la récupération du gardien lourd."
+        }
+      ],
+      "opponentIds": [
+        "defender",
+        "chrysalis",
+        "smasher"
+      ],
+      "rules": {
+        "noSpecial": true,
+        "timeLimitSeconds": 60
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-quarantine-3",
+      "title": "VERROUS DE QUARANTAINE · 03",
+      "act": "ÉVÉNEMENT · CONFINEMENT DÉGRADÉ",
+      "eventV179": true,
+      "eventFamily": "quarantine",
+      "description": "Reprendre les cellules par le contact : aucun spécial pendant tout le protocole. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "defender",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 60
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 1/4",
+          "briefing": "Fermer le premier verrou sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 2/4",
+          "briefing": "Éprouver les ouvertures de la carapace au contact."
+        },
+        {
+          "opponentId": "smasher",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 3/4",
+          "briefing": "Punir la récupération du gardien lourd."
+        },
+        {
+          "opponentId": "synth-containment",
+          "stageId": "reactor-ring",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 75
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 4/4",
+          "briefing": "Réduire la menace synthétique avant expiration."
+        }
+      ],
+      "opponentIds": [
+        "defender",
+        "chrysalis",
+        "smasher",
+        "synth-containment"
+      ],
+      "rules": {
+        "noSpecial": true,
+        "timeLimitSeconds": 60
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-quarantine-4",
+      "title": "VERROUS DE QUARANTAINE · 04",
+      "act": "ÉVÉNEMENT · CONFINEMENT DÉGRADÉ",
+      "eventV179": true,
+      "eventFamily": "quarantine",
+      "description": "Reprendre les cellules par le contact : aucun spécial pendant tout le protocole. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "defender",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 60
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 1/5",
+          "briefing": "Fermer le premier verrou sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 2/5",
+          "briefing": "Éprouver les ouvertures de la carapace au contact."
+        },
+        {
+          "opponentId": "smasher",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 3/5",
+          "briefing": "Punir la récupération du gardien lourd."
+        },
+        {
+          "opponentId": "synth-containment",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 75
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 4/5",
+          "briefing": "Réduire la menace synthétique avant expiration."
+        },
+        {
+          "opponentId": "royal-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 5/5",
+          "briefing": "Franchir le dernier cordon de garde."
+        }
+      ],
+      "opponentIds": [
+        "defender",
+        "chrysalis",
+        "smasher",
+        "synth-containment",
+        "royal-guard"
+      ],
+      "rules": {
+        "noSpecial": true,
+        "timeLimitSeconds": 60
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-quarantine-5",
+      "title": "VERROUS DE QUARANTAINE · 05",
+      "act": "ÉVÉNEMENT · CONFINEMENT DÉGRADÉ",
+      "eventV179": true,
+      "eventFamily": "quarantine",
+      "description": "Reprendre les cellules par le contact : aucun spécial pendant tout le protocole. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "defender",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 60
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 1/6",
+          "briefing": "Fermer le premier verrou sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 2/6",
+          "briefing": "Éprouver les ouvertures de la carapace au contact."
+        },
+        {
+          "opponentId": "smasher",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 3/6",
+          "briefing": "Punir la récupération du gardien lourd."
+        },
+        {
+          "opponentId": "synth-containment",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 75
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 4/6",
+          "briefing": "Réduire la menace synthétique avant expiration."
+        },
+        {
+          "opponentId": "royal-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 5/6",
+          "briefing": "Franchir le dernier cordon de garde."
+        },
+        {
+          "opponentId": "armored-ripper-queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true,
+            "timeLimitSeconds": 120
+          },
+          "label": "CONFINEMENT DÉGRADÉ · VAGUE 6/6",
+          "briefing": "Rétablir le confinement royal sans spécial."
+        }
+      ],
+      "opponentIds": [
+        "defender",
+        "chrysalis",
+        "smasher",
+        "synth-containment",
+        "royal-guard",
+        "armored-ripper-queen"
+      ],
+      "rules": {
+        "noSpecial": true,
+        "timeLimitSeconds": 60
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-extraction-1",
+      "title": "FENÊTRE D’EXTRACTION · 01",
+      "act": "ÉVÉNEMENT · BALISE EN ATTENTE",
+      "eventV179": true,
+      "eventFamily": "extraction",
+      "description": "Rester en vie jusqu’au signal de chaque manche. Le chrono de survie prime sur les PV comparés. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "prowler",
+          "stageId": "tantalus-cargo",
+          "difficulty": "easy",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 1/2",
+          "briefing": "Survivre aux interceptions jusqu’à la première balise."
+        },
+        {
+          "opponentId": "spitter",
+          "stageId": "planet-surface",
+          "difficulty": "easy",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 2/2",
+          "briefing": "Éviter les trajectoires acides jusqu’au signal."
+        }
+      ],
+      "opponentIds": [
+        "prowler",
+        "spitter"
+      ],
+      "rules": {
+        "goal": "survive",
+        "timeLimitSeconds": 30
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-extraction-2",
+      "title": "FENÊTRE D’EXTRACTION · 02",
+      "act": "ÉVÉNEMENT · BALISE EN ATTENTE",
+      "eventV179": true,
+      "eventFamily": "extraction",
+      "description": "Rester en vie jusqu’au signal de chaque manche. Le chrono de survie prime sur les PV comparés. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "prowler",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 1/3",
+          "briefing": "Survivre aux interceptions jusqu’à la première balise."
+        },
+        {
+          "opponentId": "spitter",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 2/3",
+          "briefing": "Éviter les trajectoires acides jusqu’au signal."
+        },
+        {
+          "opponentId": "ravager",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 3/3",
+          "briefing": "Conserver ses appuis pendant une minute."
+        }
+      ],
+      "opponentIds": [
+        "prowler",
+        "spitter",
+        "ravager"
+      ],
+      "rules": {
+        "goal": "survive",
+        "timeLimitSeconds": 30
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-extraction-3",
+      "title": "FENÊTRE D’EXTRACTION · 03",
+      "act": "ÉVÉNEMENT · BALISE EN ATTENTE",
+      "eventV179": true,
+      "eventFamily": "extraction",
+      "description": "Rester en vie jusqu’au signal de chaque manche. Le chrono de survie prime sur les PV comparés. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "prowler",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 1/4",
+          "briefing": "Survivre aux interceptions jusqu’à la première balise."
+        },
+        {
+          "opponentId": "spitter",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 2/4",
+          "briefing": "Éviter les trajectoires acides jusqu’au signal."
+        },
+        {
+          "opponentId": "ravager",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 3/4",
+          "briefing": "Conserver ses appuis pendant une minute."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 4/4",
+          "briefing": "Attendre la libération des spéciaux en tenant la ligne."
+        }
+      ],
+      "opponentIds": [
+        "prowler",
+        "spitter",
+        "ravager",
+        "crusher-acm"
+      ],
+      "rules": {
+        "goal": "survive",
+        "timeLimitSeconds": 30
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-extraction-4",
+      "title": "FENÊTRE D’EXTRACTION · 04",
+      "act": "ÉVÉNEMENT · BALISE EN ATTENTE",
+      "eventV179": true,
+      "eventFamily": "extraction",
+      "description": "Rester en vie jusqu’au signal de chaque manche. Le chrono de survie prime sur les PV comparés. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "prowler",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 1/5",
+          "briefing": "Survivre aux interceptions jusqu’à la première balise."
+        },
+        {
+          "opponentId": "spitter",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 2/5",
+          "briefing": "Éviter les trajectoires acides jusqu’au signal."
+        },
+        {
+          "opponentId": "ravager",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 3/5",
+          "briefing": "Conserver ses appuis pendant une minute."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 4/5",
+          "briefing": "Attendre la libération des spéciaux en tenant la ligne."
+        },
+        {
+          "opponentId": "royal-guard",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 5/5",
+          "briefing": "Temporiser face à la garde royale."
+        }
+      ],
+      "opponentIds": [
+        "prowler",
+        "spitter",
+        "ravager",
+        "crusher-acm",
+        "royal-guard"
+      ],
+      "rules": {
+        "goal": "survive",
+        "timeLimitSeconds": 30
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-extraction-5",
+      "title": "FENÊTRE D’EXTRACTION · 05",
+      "act": "ÉVÉNEMENT · BALISE EN ATTENTE",
+      "eventV179": true,
+      "eventFamily": "extraction",
+      "description": "Rester en vie jusqu’au signal de chaque manche. Le chrono de survie prime sur les PV comparés. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "prowler",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 1/6",
+          "briefing": "Survivre aux interceptions jusqu’à la première balise."
+        },
+        {
+          "opponentId": "spitter",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 2/6",
+          "briefing": "Éviter les trajectoires acides jusqu’au signal."
+        },
+        {
+          "opponentId": "ravager",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 3/6",
+          "briefing": "Conserver ses appuis pendant une minute."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 4/6",
+          "briefing": "Attendre la libération des spéciaux en tenant la ligne."
+        },
+        {
+          "opponentId": "royal-guard",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 5/6",
+          "briefing": "Temporiser face à la garde royale."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60,
+            "noSpecial": true
+          },
+          "label": "BALISE EN ATTENTE · VAGUE 6/6",
+          "briefing": "Tenir une minute face à la Reine sans spécial."
+        }
+      ],
+      "opponentIds": [
+        "prowler",
+        "spitter",
+        "ravager",
+        "crusher-acm",
+        "royal-guard",
+        "queen"
+      ],
+      "rules": {
+        "goal": "survive",
+        "timeLimitSeconds": 30
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-pursuit-1",
+      "title": "PISTE À CHRONOMÈTRE · 01",
+      "act": "ÉVÉNEMENT · CONTACT FUGITIF",
+      "eventV179": true,
+      "eventFamily": "pursuit",
+      "description": "Des cibles mobiles et trente secondes par manche : toute égalité brise la série. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "easy",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 1/2",
+          "briefing": "Prendre l’avantage avant le signal."
+        },
+        {
+          "opponentId": "panther",
+          "stageId": "tantalus-cargo",
+          "difficulty": "easy",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 2/2",
+          "briefing": "Intercepter les changements de distance."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "panther"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-pursuit-2",
+      "title": "PISTE À CHRONOMÈTRE · 02",
+      "act": "ÉVÉNEMENT · CONTACT FUGITIF",
+      "eventV179": true,
+      "eventFamily": "pursuit",
+      "description": "Des cibles mobiles et trente secondes par manche : toute égalité brise la série. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 1/3",
+          "briefing": "Prendre l’avantage avant le signal."
+        },
+        {
+          "opponentId": "panther",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 2/3",
+          "briefing": "Intercepter les changements de distance."
+        },
+        {
+          "opponentId": "grid",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACT FUGITIF · VAGUE 3/3",
+          "briefing": "Ouvrir au contact avant de récupérer ses spéciaux."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-pursuit-3",
+      "title": "PISTE À CHRONOMÈTRE · 03",
+      "act": "ÉVÉNEMENT · CONTACT FUGITIF",
+      "eventV179": true,
+      "eventFamily": "pursuit",
+      "description": "Des cibles mobiles et trente secondes par manche : toute égalité brise la série. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 1/4",
+          "briefing": "Prendre l’avantage avant le signal."
+        },
+        {
+          "opponentId": "panther",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 2/4",
+          "briefing": "Intercepter les changements de distance."
+        },
+        {
+          "opponentId": "grid",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACT FUGITIF · VAGUE 3/4",
+          "briefing": "Ouvrir au contact avant de récupérer ses spéciaux."
+        },
+        {
+          "opponentId": "stalker-arcade",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 4/4",
+          "briefing": "Fermer la piste du traqueur."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-pursuit-4",
+      "title": "PISTE À CHRONOMÈTRE · 04",
+      "act": "ÉVÉNEMENT · CONTACT FUGITIF",
+      "eventV179": true,
+      "eventFamily": "pursuit",
+      "description": "Des cibles mobiles et trente secondes par manche : toute égalité brise la série. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 1/5",
+          "briefing": "Prendre l’avantage avant le signal."
+        },
+        {
+          "opponentId": "panther",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 2/5",
+          "briefing": "Intercepter les changements de distance."
+        },
+        {
+          "opponentId": "grid",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACT FUGITIF · VAGUE 3/5",
+          "briefing": "Ouvrir au contact avant de récupérer ses spéciaux."
+        },
+        {
+          "opponentId": "stalker-arcade",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 4/5",
+          "briefing": "Fermer la piste du traqueur."
+        },
+        {
+          "opponentId": "predalien",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30,
+            "noSpecial": true
+          },
+          "label": "CONTACT FUGITIF · VAGUE 5/5",
+          "briefing": "Punir le prédateur hybride sans spécial."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "predalien"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-pursuit-5",
+      "title": "PISTE À CHRONOMÈTRE · 05",
+      "act": "ÉVÉNEMENT · CONTACT FUGITIF",
+      "eventV179": true,
+      "eventFamily": "pursuit",
+      "description": "Des cibles mobiles et trente secondes par manche : toute égalité brise la série. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 1/6",
+          "briefing": "Prendre l’avantage avant le signal."
+        },
+        {
+          "opponentId": "panther",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 2/6",
+          "briefing": "Intercepter les changements de distance."
+        },
+        {
+          "opponentId": "grid",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30,
+            "specialLockSeconds": 20
+          },
+          "label": "CONTACT FUGITIF · VAGUE 3/6",
+          "briefing": "Ouvrir au contact avant de récupérer ses spéciaux."
+        },
+        {
+          "opponentId": "stalker-arcade",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 4/6",
+          "briefing": "Fermer la piste du traqueur."
+        },
+        {
+          "opponentId": "predalien",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30,
+            "noSpecial": true
+          },
+          "label": "CONTACT FUGITIF · VAGUE 5/6",
+          "briefing": "Punir le prédateur hybride sans spécial."
+        },
+        {
+          "opponentId": "ultramorph",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 30
+          },
+          "label": "CONTACT FUGITIF · VAGUE 6/6",
+          "briefing": "Garder l’avantage malgré le gabarit extrême."
+        }
+      ],
+      "opponentIds": [
+        "runner",
+        "panther",
+        "grid",
+        "stalker-arcade",
+        "predalien",
+        "ultramorph"
+      ],
+      "rules": {
+        "timeLimitSeconds": 30
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-blackout-1",
+      "title": "BLACKOUT SYNTHÉTIQUE · 01",
+      "act": "ÉVÉNEMENT · CANAL ARMEMENT VERROUILLÉ",
+      "eventV179": true,
+      "eventFamily": "blackout",
+      "description": "Vingt secondes de verrouillage des spéciaux à chaque manche, puis riposte contre les unités armées. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "synth-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "easy",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 1/2",
+          "briefing": "Ouvrir le contrôle de sécurité au contact."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-cargo",
+          "difficulty": "easy",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 2/2",
+          "briefing": "Approcher l’unité de tir pendant le verrouillage."
+        }
+      ],
+      "opponentIds": [
+        "synth-guard",
+        "synth-trooper"
+      ],
+      "rules": {
+        "specialLockSeconds": 20,
+        "timeLimitSeconds": 60
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-blackout-2",
+      "title": "BLACKOUT SYNTHÉTIQUE · 02",
+      "act": "ÉVÉNEMENT · CANAL ARMEMENT VERROUILLÉ",
+      "eventV179": true,
+      "eventFamily": "blackout",
+      "description": "Vingt secondes de verrouillage des spéciaux à chaque manche, puis riposte contre les unités armées. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "synth-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 1/3",
+          "briefing": "Ouvrir le contrôle de sécurité au contact."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 2/3",
+          "briefing": "Approcher l’unité de tir pendant le verrouillage."
+        },
+        {
+          "opponentId": "synth-sniper",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 3/3",
+          "briefing": "Réduire la distance avant la réactivation des armes."
+        }
+      ],
+      "opponentIds": [
+        "synth-guard",
+        "synth-trooper",
+        "synth-sniper"
+      ],
+      "rules": {
+        "specialLockSeconds": 20,
+        "timeLimitSeconds": 60
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-blackout-3",
+      "title": "BLACKOUT SYNTHÉTIQUE · 03",
+      "act": "ÉVÉNEMENT · CANAL ARMEMENT VERROUILLÉ",
+      "eventV179": true,
+      "eventFamily": "blackout",
+      "description": "Vingt secondes de verrouillage des spéciaux à chaque manche, puis riposte contre les unités armées. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "synth-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 1/4",
+          "briefing": "Ouvrir le contrôle de sécurité au contact."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 2/4",
+          "briefing": "Approcher l’unité de tir pendant le verrouillage."
+        },
+        {
+          "opponentId": "synth-sniper",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 3/4",
+          "briefing": "Réduire la distance avant la réactivation des armes."
+        },
+        {
+          "opponentId": "synth-incinerator",
+          "stageId": "reactor-ring",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 4/4",
+          "briefing": "Éviter le cône d’incinération après déverrouillage."
+        }
+      ],
+      "opponentIds": [
+        "synth-guard",
+        "synth-trooper",
+        "synth-sniper",
+        "synth-incinerator"
+      ],
+      "rules": {
+        "specialLockSeconds": 20,
+        "timeLimitSeconds": 60
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-blackout-4",
+      "title": "BLACKOUT SYNTHÉTIQUE · 04",
+      "act": "ÉVÉNEMENT · CANAL ARMEMENT VERROUILLÉ",
+      "eventV179": true,
+      "eventFamily": "blackout",
+      "description": "Vingt secondes de verrouillage des spéciaux à chaque manche, puis riposte contre les unités armées. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "synth-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 1/5",
+          "briefing": "Ouvrir le contrôle de sécurité au contact."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 2/5",
+          "briefing": "Approcher l’unité de tir pendant le verrouillage."
+        },
+        {
+          "opponentId": "synth-sniper",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 3/5",
+          "briefing": "Réduire la distance avant la réactivation des armes."
+        },
+        {
+          "opponentId": "synth-incinerator",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 4/5",
+          "briefing": "Éviter le cône d’incinération après déverrouillage."
+        },
+        {
+          "opponentId": "synth-heavy",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 75
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 5/5",
+          "briefing": "Briser la ligne de l’unité lourde."
+        }
+      ],
+      "opponentIds": [
+        "synth-guard",
+        "synth-trooper",
+        "synth-sniper",
+        "synth-incinerator",
+        "synth-heavy"
+      ],
+      "rules": {
+        "specialLockSeconds": 20,
+        "timeLimitSeconds": 60
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-blackout-5",
+      "title": "BLACKOUT SYNTHÉTIQUE · 05",
+      "act": "ÉVÉNEMENT · CANAL ARMEMENT VERROUILLÉ",
+      "eventV179": true,
+      "eventFamily": "blackout",
+      "description": "Vingt secondes de verrouillage des spéciaux à chaque manche, puis riposte contre les unités armées. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "synth-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 1/6",
+          "briefing": "Ouvrir le contrôle de sécurité au contact."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 2/6",
+          "briefing": "Approcher l’unité de tir pendant le verrouillage."
+        },
+        {
+          "opponentId": "synth-sniper",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 60
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 3/6",
+          "briefing": "Réduire la distance avant la réactivation des armes."
+        },
+        {
+          "opponentId": "synth-incinerator",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 4/6",
+          "briefing": "Éviter le cône d’incinération après déverrouillage."
+        },
+        {
+          "opponentId": "synth-heavy",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 75
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 5/6",
+          "briefing": "Briser la ligne de l’unité lourde."
+        },
+        {
+          "opponentId": "synth-enforcer",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 120
+          },
+          "label": "CANAL ARMEMENT VERROUILLÉ · VAGUE 6/6",
+          "briefing": "Terminer la reprise du réseau face à l’Enforcer."
+        }
+      ],
+      "opponentIds": [
+        "synth-guard",
+        "synth-trooper",
+        "synth-sniper",
+        "synth-incinerator",
+        "synth-heavy",
+        "synth-enforcer"
+      ],
+      "rules": {
+        "specialLockSeconds": 20,
+        "timeLimitSeconds": 60
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-acid-1",
+      "title": "INCIDENT CORROSIF · 01",
+      "act": "ÉVÉNEMENT · RISQUE ACIDE",
+      "eventV179": true,
+      "eventFamily": "acid",
+      "description": "Alterner neutralisation et attente face aux castes acides. Les résidus existants restent actifs. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "spitter",
+          "stageId": "containment-deck",
+          "difficulty": "easy",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "RISQUE ACIDE · VAGUE 1/2",
+          "briefing": "Neutraliser le cracheur en conservant une sortie."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "easy",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 2/2",
+          "briefing": "Survivre à la caste explosive jusqu’au signal."
+        }
+      ],
+      "opponentIds": [
+        "spitter",
+        "burster"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-acid-2",
+      "title": "INCIDENT CORROSIF · 02",
+      "act": "ÉVÉNEMENT · RISQUE ACIDE",
+      "eventV179": true,
+      "eventFamily": "acid",
+      "description": "Alterner neutralisation et attente face aux castes acides. Les résidus existants restent actifs. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "spitter",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "RISQUE ACIDE · VAGUE 1/3",
+          "briefing": "Neutraliser le cracheur en conservant une sortie."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 2/3",
+          "briefing": "Survivre à la caste explosive jusqu’au signal."
+        },
+        {
+          "opponentId": "boiler",
+          "stageId": "reactor-ring",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "RISQUE ACIDE · VAGUE 3/3",
+          "briefing": "Éloigner le Boiler de ses propres résidus."
+        }
+      ],
+      "opponentIds": [
+        "spitter",
+        "burster",
+        "boiler"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-acid-3",
+      "title": "INCIDENT CORROSIF · 03",
+      "act": "ÉVÉNEMENT · RISQUE ACIDE",
+      "eventV179": true,
+      "eventFamily": "acid",
+      "description": "Alterner neutralisation et attente face aux castes acides. Les résidus existants restent actifs. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "spitter",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "RISQUE ACIDE · VAGUE 1/4",
+          "briefing": "Neutraliser le cracheur en conservant une sortie."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 2/4",
+          "briefing": "Survivre à la caste explosive jusqu’au signal."
+        },
+        {
+          "opponentId": "boiler",
+          "stageId": "reactor-ring",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "RISQUE ACIDE · VAGUE 3/4",
+          "briefing": "Éloigner le Boiler de ses propres résidus."
+        },
+        {
+          "opponentId": "acid-lurker",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 4/4",
+          "briefing": "Tenir la zone pendant le relevé de contamination."
+        }
+      ],
+      "opponentIds": [
+        "spitter",
+        "burster",
+        "boiler",
+        "acid-lurker"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-acid-4",
+      "title": "INCIDENT CORROSIF · 04",
+      "act": "ÉVÉNEMENT · RISQUE ACIDE",
+      "eventV179": true,
+      "eventFamily": "acid",
+      "description": "Alterner neutralisation et attente face aux castes acides. Les résidus existants restent actifs. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "spitter",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "RISQUE ACIDE · VAGUE 1/5",
+          "briefing": "Neutraliser le cracheur en conservant une sortie."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 2/5",
+          "briefing": "Survivre à la caste explosive jusqu’au signal."
+        },
+        {
+          "opponentId": "boiler",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "RISQUE ACIDE · VAGUE 3/5",
+          "briefing": "Éloigner le Boiler de ses propres résidus."
+        },
+        {
+          "opponentId": "acid-lurker",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 4/5",
+          "briefing": "Tenir la zone pendant le relevé de contamination."
+        },
+        {
+          "opponentId": "acid-ravager",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "RISQUE ACIDE · VAGUE 5/5",
+          "briefing": "Passer le verrouillage initial puis contre-attaquer."
+        }
+      ],
+      "opponentIds": [
+        "spitter",
+        "burster",
+        "boiler",
+        "acid-lurker",
+        "acid-ravager"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-acid-5",
+      "title": "INCIDENT CORROSIF · 05",
+      "act": "ÉVÉNEMENT · RISQUE ACIDE",
+      "eventV179": true,
+      "eventFamily": "acid",
+      "description": "Alterner neutralisation et attente face aux castes acides. Les résidus existants restent actifs. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "spitter",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "RISQUE ACIDE · VAGUE 1/6",
+          "briefing": "Neutraliser le cracheur en conservant une sortie."
+        },
+        {
+          "opponentId": "burster",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 2/6",
+          "briefing": "Survivre à la caste explosive jusqu’au signal."
+        },
+        {
+          "opponentId": "boiler",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "RISQUE ACIDE · VAGUE 3/6",
+          "briefing": "Éloigner le Boiler de ses propres résidus."
+        },
+        {
+          "opponentId": "acid-lurker",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 30
+          },
+          "label": "RISQUE ACIDE · VAGUE 4/6",
+          "briefing": "Tenir la zone pendant le relevé de contamination."
+        },
+        {
+          "opponentId": "acid-ravager",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "RISQUE ACIDE · VAGUE 5/6",
+          "briefing": "Passer le verrouillage initial puis contre-attaquer."
+        },
+        {
+          "opponentId": "acid-queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "goal": "survive",
+            "timeLimitSeconds": 60
+          },
+          "label": "RISQUE ACIDE · VAGUE 6/6",
+          "briefing": "Maintenir une issue face à la Reine acide pendant une minute."
+        }
+      ],
+      "opponentIds": [
+        "spitter",
+        "burster",
+        "boiler",
+        "acid-lurker",
+        "acid-ravager",
+        "acid-queen"
+      ],
+      "rules": {
+        "timeLimitSeconds": 60
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-sudden-death-1",
+      "title": "SIGNAL ROUGE · 1 PV · 01",
+      "act": "ÉVÉNEMENT · INTÉGRITÉ CRITIQUE",
+      "eventV179": true,
+      "eventFamily": "sudden-death",
+      "description": "Un seul PV par combattant à chaque manche. Trouver le premier contact décisif. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "arachnoid",
+          "stageId": "containment-deck",
+          "difficulty": "easy",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 1/2",
+          "briefing": "Placer un contact ordinaire sans être touché."
+        },
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "easy",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 2/2",
+          "briefing": "Intercepter le coureur sans échanger les coups."
+        }
+      ],
+      "opponentIds": [
+        "arachnoid",
+        "runner"
+      ],
+      "rules": {
+        "initialHp": 1,
+        "noSpecial": true,
+        "timeLimitSeconds": 30
+      },
+      "reward": 400,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-sudden-death-2",
+      "title": "SIGNAL ROUGE · 1 PV · 02",
+      "act": "ÉVÉNEMENT · INTÉGRITÉ CRITIQUE",
+      "eventV179": true,
+      "eventFamily": "sudden-death",
+      "description": "Un seul PV par combattant à chaque manche. Trouver le premier contact décisif. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "arachnoid",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 1/3",
+          "briefing": "Placer un contact ordinaire sans être touché."
+        },
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 2/3",
+          "briefing": "Intercepter le coureur sans échanger les coups."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 3/3",
+          "briefing": "Lire la portée du Warrior sans spécial."
+        }
+      ],
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior"
+      ],
+      "rules": {
+        "initialHp": 1,
+        "noSpecial": true,
+        "timeLimitSeconds": 30
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-sudden-death-3",
+      "title": "SIGNAL ROUGE · 1 PV · 03",
+      "act": "ÉVÉNEMENT · INTÉGRITÉ CRITIQUE",
+      "eventV179": true,
+      "eventFamily": "sudden-death",
+      "description": "Un seul PV par combattant à chaque manche. Trouver le premier contact décisif. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "arachnoid",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 1/4",
+          "briefing": "Placer un contact ordinaire sans être touché."
+        },
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 2/4",
+          "briefing": "Intercepter le coureur sans échanger les coups."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 3/4",
+          "briefing": "Lire la portée du Warrior sans spécial."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-bridge",
+          "difficulty": "normal",
+          "rules": {
+            "initialHp": 1,
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 4/4",
+          "briefing": "Atteindre le synthétique avant la remise en service."
+        }
+      ],
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "synth-trooper"
+      ],
+      "rules": {
+        "initialHp": 1,
+        "noSpecial": true,
+        "timeLimitSeconds": 30
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-sudden-death-4",
+      "title": "SIGNAL ROUGE · 1 PV · 04",
+      "act": "ÉVÉNEMENT · INTÉGRITÉ CRITIQUE",
+      "eventV179": true,
+      "eventFamily": "sudden-death",
+      "description": "Un seul PV par combattant à chaque manche. Trouver le premier contact décisif. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "arachnoid",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 1/5",
+          "briefing": "Placer un contact ordinaire sans être touché."
+        },
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 2/5",
+          "briefing": "Intercepter le coureur sans échanger les coups."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 3/5",
+          "briefing": "Lire la portée du Warrior sans spécial."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 4/5",
+          "briefing": "Atteindre le synthétique avant la remise en service."
+        },
+        {
+          "opponentId": "prowler",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 5/5",
+          "briefing": "Éviter le bond puis riposter."
+        }
+      ],
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "synth-trooper",
+        "prowler"
+      ],
+      "rules": {
+        "initialHp": 1,
+        "noSpecial": true,
+        "timeLimitSeconds": 30
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-sudden-death-5",
+      "title": "SIGNAL ROUGE · 1 PV · 05",
+      "act": "ÉVÉNEMENT · INTÉGRITÉ CRITIQUE",
+      "eventV179": true,
+      "eventFamily": "sudden-death",
+      "description": "Un seul PV par combattant à chaque manche. Trouver le premier contact décisif. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "arachnoid",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 1/6",
+          "briefing": "Placer un contact ordinaire sans être touché."
+        },
+        {
+          "opponentId": "runner",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 2/6",
+          "briefing": "Intercepter le coureur sans échanger les coups."
+        },
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 3/6",
+          "briefing": "Lire la portée du Warrior sans spécial."
+        },
+        {
+          "opponentId": "synth-trooper",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "specialLockSeconds": 20,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 4/6",
+          "briefing": "Atteindre le synthétique avant la remise en service."
+        },
+        {
+          "opponentId": "prowler",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 5/6",
+          "briefing": "Éviter le bond puis riposter."
+        },
+        {
+          "opponentId": "royal-guard",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "initialHp": 1,
+            "noSpecial": true,
+            "timeLimitSeconds": 30
+          },
+          "label": "INTÉGRITÉ CRITIQUE · VAGUE 6/6",
+          "briefing": "Trouver l’ouverture de la garde royale au contact."
+        }
+      ],
+      "opponentIds": [
+        "arachnoid",
+        "runner",
+        "warrior",
+        "synth-trooper",
+        "prowler",
+        "royal-guard"
+      ],
+      "rules": {
+        "initialHp": 1,
+        "noSpecial": true,
+        "timeLimitSeconds": 30
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-royal-1",
+      "title": "ALERTE ROYALE · 01",
+      "act": "ÉVÉNEMENT · PRIORITÉ APEX",
+      "eventV179": true,
+      "eventFamily": "royal",
+      "description": "Une ligne de défense croissante se termine toujours par un duel royal. Préserver la série jusqu’au boss. 2 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "easy",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 1/2",
+          "briefing": "Ouvrir le cordon extérieur sans spécial."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "easy",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "PRIORITÉ APEX · VAGUE 2/2",
+          "briefing": "Conclure face à la Reine mobile."
+        }
+      ],
+      "opponentIds": [
+        "warrior",
+        "queen"
+      ],
+      "rules": {
+        "noSpecial": true
+      },
+      "reward": 500,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-royal-2",
+      "title": "ALERTE ROYALE · 02",
+      "act": "ÉVÉNEMENT · PRIORITÉ APEX",
+      "eventV179": true,
+      "eventFamily": "royal",
+      "description": "Une ligne de défense croissante se termine toujours par un duel royal. Préserver la série jusqu’au boss. 3 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 1/3",
+          "briefing": "Ouvrir le cordon extérieur sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "PRIORITÉ APEX · VAGUE 2/3",
+          "briefing": "Percer la carapace pendant la restauration du canal."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "PRIORITÉ APEX · VAGUE 3/3",
+          "briefing": "Conclure face à la Reine mobile."
+        }
+      ],
+      "opponentIds": [
+        "warrior",
+        "chrysalis",
+        "queen"
+      ],
+      "rules": {
+        "noSpecial": true
+      },
+      "reward": 600,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-royal-3",
+      "title": "ALERTE ROYALE · 03",
+      "act": "ÉVÉNEMENT · PRIORITÉ APEX",
+      "eventV179": true,
+      "eventFamily": "royal",
+      "description": "Une ligne de défense croissante se termine toujours par un duel royal. Préserver la série jusqu’au boss. 4 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "normal",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 1/4",
+          "briefing": "Ouvrir le cordon extérieur sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "normal",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "PRIORITÉ APEX · VAGUE 2/4",
+          "briefing": "Percer la carapace pendant la restauration du canal."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "normal",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "PRIORITÉ APEX · VAGUE 3/4",
+          "briefing": "Interrompre la charge avant expiration."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "PRIORITÉ APEX · VAGUE 4/4",
+          "briefing": "Conclure face à la Reine mobile."
+        }
+      ],
+      "opponentIds": [
+        "warrior",
+        "chrysalis",
+        "crusher-acm",
+        "queen"
+      ],
+      "rules": {
+        "noSpecial": true
+      },
+      "reward": 700,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-royal-4",
+      "title": "ALERTE ROYALE · 04",
+      "act": "ÉVÉNEMENT · PRIORITÉ APEX",
+      "eventV179": true,
+      "eventFamily": "royal",
+      "description": "Une ligne de défense croissante se termine toujours par un duel royal. Préserver la série jusqu’au boss. 5 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 1/5",
+          "briefing": "Ouvrir le cordon extérieur sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "PRIORITÉ APEX · VAGUE 2/5",
+          "briefing": "Percer la carapace pendant la restauration du canal."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "PRIORITÉ APEX · VAGUE 3/5",
+          "briefing": "Interrompre la charge avant expiration."
+        },
+        {
+          "opponentId": "ravager",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 4/5",
+          "briefing": "Gagner le contact face au Ravager."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "PRIORITÉ APEX · VAGUE 5/5",
+          "briefing": "Conclure face à la Reine mobile."
+        }
+      ],
+      "opponentIds": [
+        "warrior",
+        "chrysalis",
+        "crusher-acm",
+        "ravager",
+        "queen"
+      ],
+      "rules": {
+        "noSpecial": true
+      },
+      "reward": 800,
+      "canonStatus": "original-tantalus-simulation"
+    },
+    {
+      "id": "xte179-royal-5",
+      "title": "ALERTE ROYALE · 05",
+      "act": "ÉVÉNEMENT · PRIORITÉ APEX",
+      "eventV179": true,
+      "eventFamily": "royal",
+      "description": "Une ligne de défense croissante se termine toujours par un duel royal. Préserver la série jusqu’au boss. 6 vagues successives, chacune un duel en deux manches gagnantes. Récupération complète entre les duels ; une défaite, une égalité ou un abandon réinitialise la série.",
+      "waves": [
+        {
+          "opponentId": "warrior",
+          "stageId": "tantalus-cargo",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 1/6",
+          "briefing": "Ouvrir le cordon extérieur sans spécial."
+        },
+        {
+          "opponentId": "chrysalis",
+          "stageId": "containment-deck",
+          "difficulty": "hard",
+          "rules": {
+            "specialLockSeconds": 20
+          },
+          "label": "PRIORITÉ APEX · VAGUE 2/6",
+          "briefing": "Percer la carapace pendant la restauration du canal."
+        },
+        {
+          "opponentId": "crusher-acm",
+          "stageId": "reactor-ring",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 75
+          },
+          "label": "PRIORITÉ APEX · VAGUE 3/6",
+          "briefing": "Interrompre la charge avant expiration."
+        },
+        {
+          "opponentId": "ravager",
+          "stageId": "planet-surface",
+          "difficulty": "hard",
+          "rules": {
+            "noSpecial": true
+          },
+          "label": "PRIORITÉ APEX · VAGUE 4/6",
+          "briefing": "Gagner le contact face au Ravager."
+        },
+        {
+          "opponentId": "royal-guard",
+          "stageId": "tantalus-bridge",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 60
+          },
+          "label": "PRIORITÉ APEX · VAGUE 5/6",
+          "briefing": "Renverser la garde du trône dans le temps imparti."
+        },
+        {
+          "opponentId": "queen",
+          "stageId": "hive-vault",
+          "difficulty": "hard",
+          "rules": {
+            "timeLimitSeconds": 120
+          },
+          "label": "PRIORITÉ APEX · VAGUE 6/6",
+          "briefing": "Conclure face à la Reine mobile."
+        }
+      ],
+      "opponentIds": [
+        "warrior",
+        "chrysalis",
+        "crusher-acm",
+        "ravager",
+        "royal-guard",
+        "queen"
+      ],
+      "rules": {
+        "noSpecial": true
+      },
+      "reward": 900,
+      "canonStatus": "original-tantalus-simulation"
+    }
+  ],
+  "illustrations": [
+    {
+      "id": "campaign-art-v179-001-approach",
+      "campaignId": "pair-001-frontier",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+      "type": "image",
+      "alt": "Acheron / LV-426 · illustration d’ambiance : Plaine rocheuse sous un ciel orageux.",
+      "credit": "Acheron / LV-426 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-001-deployment",
+      "campaignId": "pair-001-frontier",
+      "worldId": "world-01-acheron-lv-426",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-far.png",
+      "type": "image",
+      "alt": "Acheron / LV-426 · illustration d’ambiance : Coursive habitée d’une colonie industrielle.",
+      "credit": "Acheron / LV-426 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-002-approach",
+      "campaignId": "pair-002-frontier",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-far.png",
+      "type": "image",
+      "alt": "LV-223 · illustration d’ambiance : Crêtes minérales et horizon désertique.",
+      "credit": "LV-223 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-002-deployment",
+      "campaignId": "pair-002-frontier",
+      "worldId": "world-02-lv-223",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "type": "image",
+      "alt": "LV-223 · illustration d’ambiance : Vestiges monumentaux sur une plaine obscure.",
+      "credit": "LV-223 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-003-approach",
+      "campaignId": "pair-003-frontier",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-caves-far.png",
+      "type": "image",
+      "alt": "Fiorina 161 · illustration d’ambiance : Accès rocheux d’un réseau souterrain.",
+      "credit": "Fiorina 161 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-003-deployment",
+      "campaignId": "pair-003-frontier",
+      "worldId": "world-03-fiorina-161",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+      "type": "image",
+      "alt": "Fiorina 161 · illustration d’ambiance : Volumes industriels et équipements techniques.",
+      "credit": "Fiorina 161 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-004-approach",
+      "campaignId": "pair-004-frontier",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "type": "image",
+      "alt": "Sevastopol · illustration d’ambiance : Paroi d’amarrage orbitale.",
+      "credit": "Sevastopol · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-004-deployment",
+      "campaignId": "pair-004-frontier",
+      "worldId": "world-04-sevastopol",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-habitation-far.png",
+      "type": "image",
+      "alt": "Sevastopol · illustration d’ambiance : Coursive de vie dans une station isolée.",
+      "credit": "Sevastopol · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-005-approach",
+      "campaignId": "pair-005-frontier",
+      "worldId": "world-05-lethe",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png",
+      "type": "image",
+      "alt": "Lethe · illustration d’ambiance : Sas d’accès d’une colonie frontière.",
+      "credit": "Lethe · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-005-deployment",
+      "campaignId": "pair-005-frontier",
+      "worldId": "world-05-lethe",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png",
+      "type": "image",
+      "alt": "Lethe · illustration d’ambiance : Zone industrielle de débarquement.",
+      "credit": "Lethe · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-006-approach",
+      "campaignId": "pair-006-frontier",
+      "worldId": "world-06-lv-895",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "type": "image",
+      "alt": "LV-895 · illustration d’ambiance : Vestiges dispersés dans un paysage rocheux.",
+      "credit": "LV-895 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-006-deployment",
+      "campaignId": "pair-006-frontier",
+      "worldId": "world-06-lv-895",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+      "type": "image",
+      "alt": "LV-895 · illustration d’ambiance : Installations de service d’une colonie.",
+      "credit": "LV-895 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-007-approach",
+      "campaignId": "pair-007-frontier",
+      "worldId": "world-07-katanga",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "type": "image",
+      "alt": "Katanga · illustration d’ambiance : Infrastructure orbitale d’amarrage.",
+      "credit": "Katanga · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-007-deployment",
+      "campaignId": "pair-007-frontier",
+      "worldId": "world-07-katanga",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+      "type": "image",
+      "alt": "Katanga · illustration d’ambiance : Espace de maintenance d’un vaisseau industriel.",
+      "credit": "Katanga · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-008-approach",
+      "campaignId": "pair-008-frontier",
+      "worldId": "world-08-pioneer-station",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-command-far.png",
+      "type": "image",
+      "alt": "Pioneer Station · illustration d’ambiance : Vue spatiale encadrée par la structure d’une passerelle.",
+      "credit": "Pioneer Station · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-008-deployment",
+      "campaignId": "pair-008-frontier",
+      "worldId": "world-08-pioneer-station",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-extraction-far.png",
+      "type": "image",
+      "alt": "Pioneer Station · illustration d’ambiance : Vue orbitale au bord d’une structure de vaisseau.",
+      "credit": "Pioneer Station · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-009-approach",
+      "campaignId": "pair-009-frontier",
+      "worldId": "world-09-purdan",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-far.png",
+      "type": "image",
+      "alt": "Purdan · illustration d’ambiance : Horizon accidenté d’un monde colonial.",
+      "credit": "Purdan · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-009-deployment",
+      "campaignId": "pair-009-frontier",
+      "worldId": "world-09-purdan",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "type": "image",
+      "alt": "Purdan · illustration d’ambiance : Reliefs et vestiges en terrain découvert.",
+      "credit": "Purdan · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-010-approach",
+      "campaignId": "pair-010-frontier",
+      "worldId": "world-10-ceto",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png",
+      "type": "image",
+      "alt": "Ceto · illustration d’ambiance : Accès clos d’une installation coloniale.",
+      "credit": "Ceto · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-010-deployment",
+      "campaignId": "pair-010-frontier",
+      "worldId": "world-10-ceto",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+      "type": "image",
+      "alt": "Ceto · illustration d’ambiance : Galerie de service d’une installation minière.",
+      "credit": "Ceto · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-011-approach",
+      "campaignId": "pair-011-frontier",
+      "worldId": "world-11-freya-s-prospect",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png",
+      "type": "image",
+      "alt": "Freya’s Prospect · illustration d’ambiance : Infrastructure industrielle de débarquement.",
+      "credit": "Freya’s Prospect · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-011-deployment",
+      "campaignId": "pair-011-frontier",
+      "worldId": "world-11-freya-s-prospect",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+      "type": "image",
+      "alt": "Freya’s Prospect · illustration d’ambiance : Galerie technique d’une colonie minière.",
+      "credit": "Freya’s Prospect · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-012-approach",
+      "campaignId": "pair-012-frontier",
+      "worldId": "world-12-jackson-s-star",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png",
+      "type": "image",
+      "alt": "Jackson’s Star · illustration d’ambiance : Plaine sombre sous une tempête.",
+      "credit": "Jackson’s Star · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-012-deployment",
+      "campaignId": "pair-012-frontier",
+      "worldId": "world-12-jackson-s-star",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png",
+      "type": "image",
+      "alt": "Jackson’s Star · illustration d’ambiance : Infrastructure civile d’une colonie industrielle.",
+      "credit": "Jackson’s Star · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-013-approach",
+      "campaignId": "pair-013-frontier",
+      "worldId": "world-13-renaissance-station",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "type": "image",
+      "alt": "Renaissance Station · illustration d’ambiance : Anneau d’amarrage d’une station orbitale.",
+      "credit": "Renaissance Station · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-013-deployment",
+      "campaignId": "pair-013-frontier",
+      "worldId": "world-13-renaissance-station",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+      "type": "image",
+      "alt": "Renaissance Station · illustration d’ambiance : Poste sécurisé et éclairages d’alarme.",
+      "credit": "Renaissance Station · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-014-approach",
+      "campaignId": "pair-014-frontier",
+      "worldId": "world-14-usm-auriga",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-command-far.png",
+      "type": "image",
+      "alt": "USM Auriga · illustration d’ambiance : Vue spatiale depuis une structure de passerelle.",
+      "credit": "USM Auriga · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-014-deployment",
+      "campaignId": "pair-014-frontier",
+      "worldId": "world-14-usm-auriga",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-engineering-far.png",
+      "type": "image",
+      "alt": "USM Auriga · illustration d’ambiance : Coursive technique d’un vaisseau-laboratoire.",
+      "credit": "USM Auriga · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-015-approach",
+      "campaignId": "pair-015-frontier",
+      "worldId": "world-15-uscss-nostromo",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "type": "image",
+      "alt": "USCSS Nostromo · illustration d’ambiance : Masse d’un quai orbital dans le vide.",
+      "credit": "USCSS Nostromo · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-015-deployment",
+      "campaignId": "pair-015-frontier",
+      "worldId": "world-15-uscss-nostromo",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-cargo-far.png",
+      "type": "image",
+      "alt": "USCSS Nostromo · illustration d’ambiance : Volumes de fret d’un remorqueur industriel.",
+      "credit": "USCSS Nostromo · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-016-approach",
+      "campaignId": "pair-016-frontier",
+      "worldId": "world-16-sulaco-drift",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-extraction-far.png",
+      "type": "image",
+      "alt": "Sulaco Drift · illustration d’ambiance : Horizon orbital vu depuis une structure de vaisseau.",
+      "credit": "Sulaco Drift · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-016-deployment",
+      "campaignId": "pair-016-frontier",
+      "worldId": "world-16-sulaco-drift",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-cargo-far.png",
+      "type": "image",
+      "alt": "Sulaco Drift · illustration d’ambiance : Panneaux et volumes d’une soute technique.",
+      "credit": "Sulaco Drift · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-017-approach",
+      "campaignId": "pair-017-frontier",
+      "worldId": "world-17-gateway-station",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/ship-docking-far.png",
+      "type": "image",
+      "alt": "Gateway Station · illustration d’ambiance : Quais d’un complexe orbital.",
+      "credit": "Gateway Station · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-017-deployment",
+      "campaignId": "pair-017-frontier",
+      "worldId": "world-17-gateway-station",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/ship-command-far.png",
+      "type": "image",
+      "alt": "Gateway Station · illustration d’ambiance : Vue spatiale encadrée par une structure de passerelle.",
+      "credit": "Gateway Station · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-018-approach",
+      "campaignId": "pair-018-frontier",
+      "worldId": "world-18-new-galveston",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png",
+      "type": "image",
+      "alt": "New Galveston · illustration d’ambiance : Accès industriel d’une ville-colonie.",
+      "credit": "New Galveston · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-018-deployment",
+      "campaignId": "pair-018-frontier",
+      "worldId": "world-18-new-galveston",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png",
+      "type": "image",
+      "alt": "New Galveston · illustration d’ambiance : Secteur civil et infrastructures coloniales.",
+      "credit": "New Galveston · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-019-approach",
+      "campaignId": "pair-019-frontier",
+      "worldId": "world-19-new-albion",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png",
+      "type": "image",
+      "alt": "New Albion · illustration d’ambiance : Volumes d’une colonie densément bâtie.",
+      "credit": "New Albion · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-019-deployment",
+      "campaignId": "pair-019-frontier",
+      "worldId": "world-19-new-albion",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png",
+      "type": "image",
+      "alt": "New Albion · illustration d’ambiance : Galerie de service d’un réseau souterrain.",
+      "credit": "New Albion · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-020-approach",
+      "campaignId": "pair-020-frontier",
+      "worldId": "world-20-lv-1201",
+      "phaseKind": "approach",
+      "path": "/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png",
+      "type": "image",
+      "alt": "LV-1201 · illustration d’ambiance : Vestiges monumentaux dans la pénombre.",
+      "credit": "LV-1201 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    },
+    {
+      "id": "campaign-art-v179-020-deployment",
+      "campaignId": "pair-020-frontier",
+      "worldId": "world-20-lv-1201",
+      "phaseKind": "deployment",
+      "path": "/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png",
+      "type": "image",
+      "alt": "LV-1201 · illustration d’ambiance : Poste sécurisé d’une installation corporative.",
+      "credit": "LV-1201 · illustration d’ambiance du projet",
+      "provenance": "existing-openai-project-art",
+      "canonExact": false,
+      "newImage": false
+    }
+  ],
+  "validation": {
+    "state": "VERIFIED_LOCAL",
+    "evidenceDirectory": "/workspace/tantalus-inventory/reprise-v179",
+    "nodeFixtures": "Authored settlement results for exhaustive event progression; two additional real engine scenarios.",
+    "canvasFixtures": "DOM/RAF/image-loading doubles for exhaustive stages; real file signatures and hashes checked separately.",
+    "browser": {
+      "checks": 24,
+      "captures": 7,
+      "errors": 0,
+      "native": true,
+      "progressOrResultInjected": false,
+      "report": "/workspace/tantalus-inventory/reprise-v179/native-final/report.json",
+      "sourceReceipt": "/workspace/tantalus-inventory/reprise-v179/native-final/source-receipt.json",
+      "note": "552 source files identical during this run; the subsequent offline-shell-only addition in sw.js has its own build verification."
+    },
+    "batch40": {
+      "command": "npm run test:trials:batch40:v179",
+      "tests": 117,
+      "passed": 117,
+      "failed": 0,
+      "skipped": 0,
+      "log": "/workspace/tantalus-inventory/reprise-v179/batch40-tests.log"
+    },
+    "assetProbe": {
+      "arenaImages": 40,
+      "campaignBindings": 40,
+      "campaignImages": 16,
+      "report": "/workspace/tantalus-inventory/reprise-v179/assets-http-decode-final.json",
+      "scope": "Image HTTP/decode/hash checks, not forty campaign or arena playthroughs."
+    },
+    "build": {
+      "command": "npm run build",
+      "success": true,
+      "log": "/workspace/tantalus-inventory/reprise-v179/build-final.log"
+    },
+    "distribution": {
+      "command": "npm run check:built",
+      "success": true,
+      "files": 1987,
+      "shell": 625,
+      "manifestSha256": "b2a6506c6b47c27fd5d83a2fc0f672040ca21a1ac0374706d05916683b8e3c79",
+      "log": "/workspace/tantalus-inventory/reprise-v179/check-built-final.log"
+    },
+    "fullSuite": {
+      "state": "PASSED",
+      "collector": "collectReleaseTestsV143",
+      "files": 216,
+      "concurrency": 6,
+      "log": "/workspace/tantalus-inventory/reprise-v179/test-all-final.log",
+      "tests": 4184,
+      "passed": 4183,
+      "failed": 0,
+      "skipped": 1,
+      "durationMs": 299562.061056,
+      "scope": "All 216 test files from the official release collector, no suite aliases counted twice."
+    },
+    "sourceAdmission": {
+      "command": "npm run check",
+      "success": true,
+      "files": 2437,
+      "assets": 1426,
+      "privateDocuments": 0,
+      "log": "/workspace/tantalus-inventory/reprise-v179/check-successor-v179.log"
+    },
+    "sourceReceipt": "/workspace/tantalus-inventory/reprise-v179/working-source-receipt.json",
+    "exploratory": {
+      "fullSuite": {
+        "log": "/workspace/tantalus-inventory/reprise-v179/test-all-initial.log",
+        "frozen": false,
+        "state": "FAILED_BEFORE_SOURCE_SUCCESSION_RECONCILIATION",
+        "retained": true
+      },
+      "browser": {
+        "report": "/workspace/tantalus-inventory/reprise-v179/native-first/report.json",
+        "state": "FAILED_BEFORE_PROGRAMME_NAVIGATION_FIX",
+        "retained": true
+      }
+    }
+  },
+  "limitations": [
+    "Existing images reused; no newly generated art.",
+    "Forty arena/evaluation pairs, not forty newly drawn bosses.",
+    "Sequential duel waves with full recovery; no simultaneous horde or standalone mini-game.",
+    "Full animated movesets and franchise visual fidelity remain open."
+  ]
+}
