@@ -3,7 +3,7 @@
   "version": "V182",
   "title": "Four complete paired service door bays",
   "baseCommit": "e4ea86d54602e9ea08b169d4053a86565548386f",
-  "status": "native-node-regression-verified; browser-and-pixel-review-pending",
+  "status": "node-regression-evidence-snapshot",
   "scope": "Continue the four P2 service-deck overlaps recorded in V179. Geometry changes move actual support and its drawing together; no mask, player resize, door crop, save rewrite or new art is used.",
   "coordinateSystem": "Room-local pixels; player body 44x92; floor y=624. Surface and ladder heights remain unchanged.",
   "doorBayChanges": [
@@ -228,6 +228,14 @@
     "All 100 first-batch and 100 second-batch placements clear native geometry. The historical second-batch ledger remains byte-for-byte intact and the active view applies only the declared T177-I05 successor."
   ],
   "evidence": {
+    "recordedScope": "This receipt records the Node evidence obtained while preparing the exact sourceChanges bytes. It is an immutable source and Node evidence snapshot, not the current browser execution verdict for later commits.",
+    "localPixelReviewPerformed": false,
+    "historicalPassesTransferred": false,
+    "resultSources": {
+      "actions": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions",
+      "integrationReport": "docs/development/PR_INTEGRATION_20261104.md",
+      "match": "Read the browser reports and sourceCommit/harnessCommit for the explicitly tested commit. A later browser result does not retroactively change this snapshot or any historical witness."
+    },
     "positive": {
       "command": "node --test scripts/verify-hub-door-bay-v178.mjs scripts/verify-hub-service-routes-v138.mjs scripts/verify-hub-circulation-v137.mjs",
       "tests": 43,
@@ -242,7 +250,7 @@
       "failed": 4
     },
     "harness": "Production Hub module, physics and input listeners; declared Save fixtures; native image dimensions read from actual asset headers. Canvas is a command double, so these are not browser pixels.",
-    "browser": "Pending independent CI recipe on built distribution; no local visual inspection is asserted.",
+    "browser": "Execution outcomes for the independent recipe on the built distribution are reported separately in GitHub Actions for the tested commit. This snapshot asserts neither a browser pass nor a local visual inspection.",
     "compositionAndTraversal": {
       "command": "node --test scripts/verify-hub-door-bay-v178.mjs scripts/verify-hub-service-routes-v138.mjs scripts/verify-hub-circulation-v137.mjs scripts/verify-hub-room-furnishing-v137.mjs scripts/verify-hub-room-composition-v142.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-tantalus-enrichment-v177.mjs scripts/verify-tantalus-batch100-v168.mjs",
       "tests": 83,
@@ -260,7 +268,7 @@
   "limits": [
     "No art, lore or 1:1 approval is granted.",
     "The hangar/arrival-airlock paint-order false positive is excluded.",
-    "Browser rendering and real distribution traversal require the separate CI evidence."
+    "Browser rendering and real distribution traversal are assessed from the separate CI reports for the tested commit; no current verdict is inferred from this source snapshot."
   ],
   "compositionCensus": {
     "previousTotal": 304,

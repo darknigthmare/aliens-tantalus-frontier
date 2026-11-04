@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { historicalIntegrationViewV182, reviewedIntegrationDigestV182,
+  integratedRuntimeSourcesV182, verifyIntegrationV182 } from './audit-pr-integration-v182.mjs';
 
 export const AUDIT_PREDECESSOR_DOCUMENTS_V163 = Object.freeze({
   "docs/forge/xeno-trials/V162-NON-FORGE-CONTINUATION.md": "a67a133e6cf8249cbc832c1ed6ff69eb6da18ecbe9a0993ffaaea015727949c2",
@@ -608,6 +610,7 @@ export const V179_SOURCE_GROUPS = freezeManifestV179({
 
 /** An additive V179 view can never rewrite any field delivered on MainN. */
 export function historicalProgressViewV179(current) {
+  current = historicalIntegrationViewV182(current);
   if (!Object.hasOwn(current, 'followupV179')) return current;
   const previous = { ...current }; delete previous.followupV179;
   assert.equal(canonicalHashV178(previous),V179_BASELINE_WITNESS.progressCanonicalSha256,
@@ -629,7 +632,7 @@ export function reviewedMainNDigestV179(path, predecessorMainN) {
 
 /** The V178 resolver remains unchanged; only its fully resolved endpoint gets a new tail. */
 export function reviewedCurrentDigestV179(path, endpointMainM) {
-  return reviewedMainNDigestV179(path,reviewedLiveDigestV178(path,endpointMainM));
+  return reviewedIntegrationDigestV182(path, reviewedMainNDigestV179(path,reviewedLiveDigestV178(path,endpointMainM)));
 }
 
 export function verifyFollowupV179(current, readSource = readRepository) {
@@ -655,12 +658,12 @@ export function verifyFollowupV179(current, readSource = readRepository) {
     for(const row of rows) {
       assert.deepEqual(Object.keys(row).sort(),['currentSha256','path','previousSha256']);
       assert.deepEqual([row.previousSha256,row.currentSha256],[map[row.path].previousSha256,map[row.path].currentSha256]);
-      assert.equal(sha(readSource(row.path)),row.currentSha256,'Unreviewed V179 '+group+': '+row.path);
+      assert.equal(sha(readSource(row.path)),reviewedIntegrationDigestV182(row.path,row.currentSha256),'Unreviewed V179 '+group+': '+row.path);
       if(row.previousSha256!==null)assert.equal(reviewedMainNDigestV179(row.path,row.previousSha256),row.currentSha256);
     }
   }
   assert.deepEqual(record.auditLibraries.map(row=>row.path).sort(),Object.keys(V179_BASELINE_WITNESS.auditLibraryPredecessors).sort());
-  for(const row of record.auditLibraries){assert.equal(row.previousSha256,V179_BASELINE_WITNESS.auditLibraryPredecessors[row.path]);assert.equal(sha(readSource(row.path)),row.currentSha256,'Unreviewed V179 audit library: '+row.path);}
+  for(const row of record.auditLibraries){assert.equal(row.previousSha256,V179_BASELINE_WITNESS.auditLibraryPredecessors[row.path]);assert.equal(sha(readSource(row.path)),reviewedIntegrationDigestV182(row.path,row.currentSha256),'Unreviewed V179 audit library: '+row.path);}
   assert.deepEqual(record.protectedGameplayBytes,V179_BASELINE_WITNESS.protectedGameplayBytes);
   for(const[path,expected]of Object.entries(record.protectedGameplayBytes))assert.equal(sha(readSource(path)),expected,'MainN Save/catalogue/cloud contract changed: '+path);
   assert.deepEqual(record.visualOpenFindings,{basis:'HISTORICAL_SOURCE70_STATIC_READBACK_5PNGS_NOT_CURRENT_V179',openP2Areas:['briefing/Mire','cryo/pods','medical/morgue','quarantine/Bioforge'],currentV179VisualClosure:false,discardedFalsePositive:'hangar bracket: door painted after bracket'});
@@ -712,7 +715,7 @@ export function verifyFollowupV178(current, readSource = readRepository) {
       const receipt=map[row.path];
       assert.deepEqual([row.previousSha256,row.currentSha256],[receipt.previousSha256,receipt.currentSha256]);
       assert.equal(reviewedLiveDigestV178(row.path,V178_MAIN_PREDECESSORS[row.path]),receipt.currentSha256);
-      assert.equal(sha(readSource(row.path)),reviewedMainNDigestV179(row.path,receipt.currentSha256),'Unreviewed V178 '+field+': '+row.path);
+      assert.equal(sha(readSource(row.path)),reviewedIntegrationDigestV182(row.path,reviewedMainNDigestV179(row.path,receipt.currentSha256)),'Unreviewed V178 '+field+': '+row.path);
       if(field==='runtimeChanges') assert.ok(Object.hasOwn(current.runtimeSourceSha256,row.path));
     }
   }
@@ -860,7 +863,7 @@ export function verifyOpenWorkstreamsV177(current, readSource = readRepository) 
     newPngAssets: 0, geometryChanged: false, artistic1to1Approved: false,
     humanParticipants: 0, state: 'IMPLEMENTED_PENDING_NATIVE_QA'
   });
-  assert.equal(sha(readSource(ship.ledgerPath)), reviewedMainNDigestV179(ship.ledgerPath,ship.ledgerSha256), 'Unreviewed V177 ship ledger bytes');
+  assert.equal(sha(readSource(ship.ledgerPath)), reviewedIntegrationDigestV182(ship.ledgerPath,reviewedMainNDigestV179(ship.ledgerPath,ship.ledgerSha256)), 'Unreviewed V177 ship ledger bytes');
   const shipRow = table.rows.find(row => row[0] === 'C177-SHIP');
   assert.ok(shipRow[4].includes(ship.ledgerPath) && shipRow[4].includes(ship.ledgerSha256));
   const delivery = current.historicalDeliveryV168;
@@ -1034,6 +1037,7 @@ export function verifyAuditCoverageV163(previous, current) {
 }
 
 export function verifyAuditSuccessionV163(previous, current, readSource = readRepository) {
+  verifyIntegrationV182(current, readSource);
   verifyFollowupV179(current, readSource);
   current = historicalProgressViewV179(current);
   anchoredPredecessor(previous, readSource);
@@ -1194,7 +1198,7 @@ export function resolveAuditSourcesV163(previous, readSource = readRepository, {
   verifyAuditSuccessionV163(previous, current, readSource);
   // Never mutate V163 archival hashes. An explicit effective read exports the
   // exact, previously validated successor set to legacy audit callers.
-  return effective ? Object.freeze({ ...current.runtimeSourceSha256,
+  return effective ? integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),

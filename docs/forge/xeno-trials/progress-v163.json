@@ -34820,5 +34820,657 @@
       "discardedFalsePositive": "hangar bracket: door painted after bracket"
     },
     "readableAddendum": "docs/forge/xeno-trials/V179-REFERENCE-AND-WORKSHOP-CONTINUATION.md"
+  },
+  "followupV182": {
+    "schema": 182,
+    "state": "SOURCE_ADMISSION_ONLY",
+    "scope": "Merge the independent PR36 catalogue/workshop, PR34/37 native-QA and main AI-tooling branches with explicit byte joins; retain all historical records and qualify the new integrated candidate separately.",
+    "baselineCommits": {
+      "catalogue": "e4ea86d54602e9ea08b169d4053a86565548386f",
+      "qa": "01c764a61e6ce7481acc3910685756b35141ee14",
+      "main": "fbaa8ec4b2f3248bd1fd0206cc709641657b66db"
+    },
+    "runtimeValidation": "REPORTED_SEPARATELY_FOR_TESTED_COMMIT",
+    "historicalEvidenceTransferred": false,
+    "oldWorkbookBytesPreserved": true,
+    "approved1to1": 0,
+    "newArtTasksClosed": 0,
+    "releaseEvidence": {
+      "nodeSuite": null,
+      "nativeCandidate": null,
+      "ci": null,
+      "review": null,
+      "merge": null
+    },
+    "resultSources": {
+      "actions": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions",
+      "integrationReport": "docs/development/PR_INTEGRATION_20261104.md",
+      "scope": "These immutable source admissions do not record execution outcomes. Read the report and GitHub Actions for the explicitly tested commit."
+    },
+    "qaBranch": {
+      "baselineCommit": "01c764a61e6ce7481acc3910685756b35141ee14",
+      "progressSha256": "2f2af182c139dd395a6d19d4b7cc08e31b31a91abb2e0b31b6fce3fa56f8f841",
+      "documentCanonicalSha256": "8da70a654b4e6e7045a8ff7f5ec748efb59b42e37a9c23493d7938d6676bf3e7",
+      "followups": {
+        "followupV179": {
+          "schema": 179,
+          "baselineCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+          "baselineProgressSha256": "cc61060d14f3e7b5ecceccb7d36f897da8175965e7e15fb71a5de2be0676644a",
+          "state": "PREPUBLICATION",
+          "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+          "scope": "Bounded QA preparation and native capture pilot corrections. Preserve all current gameplay, runtime, workbook tables, historical receipts and unqualified route/art limits.",
+          "historicalResultsTransferred": false,
+          "runtimeChanges": [],
+          "qaChanges": [
+            {
+              "path": "scripts/qa-npc-interdeck-native-v165.py",
+              "previousSha256": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+              "currentSha256": "a614f03fe889c62ca5b481a1079df000a598d34a1c5be65e420ee4d9475d51ec"
+            },
+            {
+              "path": "scripts/qa-xeno-trials-capture-v163.py",
+              "previousSha256": "3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d",
+              "currentSha256": "f7108b5d1da2f06b9abe3dffdb5b8f93d2ebb534e11699e50aff25690498e09d"
+            }
+          ],
+          "verifierChanges": [
+            {
+              "path": "scripts/verify-npc-interdeck-routes-v165.mjs",
+              "previousSha256": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080",
+              "currentSha256": "66b1f6cc8a2a018b2ddacecfb73c77eb52bb7784a51bc7addb43c8ec46832f8a"
+            },
+            {
+              "path": "scripts/verify-capture-observation-v177.mjs",
+              "previousSha256": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+              "currentSha256": "ca0a7011de8a2f5a2f785263bb5fe3a0e173b20ac842e64e97eb82c2aa76ce6c"
+            },
+            {
+              "path": "scripts/verify-xeno-trials-capture-v163.mjs",
+              "previousSha256": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
+              "currentSha256": "ab217ec8de87d3f6dbf497805bf3ab449b831f8b7c8e891bbf080b4e41b85d53"
+            },
+            {
+              "path": "scripts/verify-audit-continuation-v163.mjs",
+              "previousSha256": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291",
+              "currentSha256": "cca73143317423dac2a2e0c9e97408ce093860a66b3722748b066d2f08e59fda"
+            }
+          ],
+          "releaseEvidence": {
+            "nodeSuite": null,
+            "nativeCandidate": null,
+            "ci": null,
+            "review": null,
+            "merge": null
+          },
+          "approved1to1": 0,
+          "fullArtTasksClosed": 0,
+          "humanParticipants": 0,
+          "newPngAssets": 0,
+          "primaryArchivesRecovered": 0,
+          "sevenRoutesClosed": false,
+          "allFeedsCertifiedStable": false,
+          "workbookChanged": false,
+          "forgeState": "DEFERRED_BY_USER"
+        },
+        "followupV180": {
+          "schema": 180,
+          "baselineCommit": "86f202143ef3163ede025d668012d83aa0b62830",
+          "baselineProgressSha256": "0b9e02917c3b1f1fa95853ab361d139cfaf8186b6dc0d1e4e5f9ca96a63396c9",
+          "state": "PREPUBLICATION",
+          "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+          "scope": "Scoped QA observer read and diagnostic correction for Asha dependency. Preserve all production gameplay, the complete dependency guard and its 900s/360s/45s budgets, workbook tables and prior receipts. The historical CI failure cause remains unknown.",
+          "historicalResultsTransferred": false,
+          "runtimeChanges": [],
+          "qaChanges": [
+            {
+              "path": "scripts/qa-npc-annex-service-routes-v163.py",
+              "previousSha256": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+              "currentSha256": "3a57f6bd0760a8930848badea22b66206779a2b89d4feae5e2659b4fde53cc22"
+            }
+          ],
+          "verifierChanges": [
+            {
+              "path": "scripts/verify-npc-annex-service-routes-v163.mjs",
+              "previousSha256": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+              "currentSha256": "ae6cc98ad92ec740b05894f3ca7cad676b627d0c66f454cfb15efd8d0940fa30"
+            },
+            {
+              "path": "scripts/verify-audit-continuation-v163.mjs",
+              "previousSha256": "cca73143317423dac2a2e0c9e97408ce093860a66b3722748b066d2f08e59fda",
+              "currentSha256": "9c6b7b970f18c821d42b28d688c3928c477cffd12d2c9f42b37db18990047e3d"
+            }
+          ],
+          "releaseEvidence": {
+            "nodeSuite": null,
+            "nativeCandidate": null,
+            "ci": null,
+            "review": null,
+            "merge": null
+          },
+          "approved1to1": 0,
+          "fullArtTasksClosed": 0,
+          "humanParticipants": 0,
+          "newPngAssets": 0,
+          "primaryArchivesRecovered": 0,
+          "sevenRoutesClosed": false,
+          "allFeedsCertifiedStable": false,
+          "workbookChanged": false,
+          "guardByteIdenticalToBaseline": true,
+          "oldFailureCauseEstablished": false,
+          "forgeState": "DEFERRED_BY_USER"
+        },
+        "followupV181": {
+          "schema": 181,
+          "baselineCommit": "b9886eccb7ea7fa9ea3c29230240965f54eea015",
+          "baselineProgressSha256": "84ae4e27dc77a35d4a8b44a01ed18617f29228bdeece64b049b1f3119908e629",
+          "state": "PREPUBLICATION",
+          "runtimeValidation": "REQUIRES_OWN_EXACT_HEAD_RECEIPTS",
+          "scope": "QA-only native keyboard Trials policy at declared0/200ms read delay, observed Cal vehicle-bay to logistics and moving interaction, and CI recipes with identical fixtures. Source admission does not certify the integrated candidate or alter gameplay.",
+          "historicalResultsTransferred": false,
+          "runtimeChanges": [],
+          "qaChanges": [
+            {
+              "path": "scripts/qa-xeno-trials-capture-v163.py",
+              "previousSha256": "f7108b5d1da2f06b9abe3dffdb5b8f93d2ebb534e11699e50aff25690498e09d",
+              "currentSha256": "351aafba32f5aedc9f20bd9171da5f8f25ee5421a8b246afe8d1079c3cb8e64e"
+            },
+            {
+              "path": "scripts/qa-npc-cal-logistics-route-v165.py",
+              "previousSha256": "88e74456f97f7c171cfb4363660324a114b9093d3fbe03f6cc43b7e953f3af6a",
+              "currentSha256": "4a7e96f5e76e8221afd26c5fbc6a67b791d724215d0dd6685599ee34089649aa"
+            }
+          ],
+          "verifierChanges": [
+            {
+              "path": "scripts/verify-capture-observation-v177.mjs",
+              "previousSha256": "ca0a7011de8a2f5a2f785263bb5fe3a0e173b20ac842e64e97eb82c2aa76ce6c",
+              "currentSha256": "b68c2c76ed78bdf63247ba3087a2f8b42ba9fc3a42d8b098ef6c5f984c73ef77"
+            },
+            {
+              "path": "scripts/verify-npc-cal-logistics-route-v165.mjs",
+              "previousSha256": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
+              "currentSha256": "8303fb51cf82f200432da621d21f8e80cbcefdc58e03623419a1acb362ed4775"
+            },
+            {
+              "path": "scripts/verify-parallel-completion-v165.mjs",
+              "previousSha256": "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa",
+              "currentSha256": "92d1ce93e1b8b2e79ee53b3ecb9471c27386846ac13608adc5b07c5bcc7f391f"
+            },
+            {
+              "path": "scripts/verify-audit-continuation-v163.mjs",
+              "previousSha256": "9c6b7b970f18c821d42b28d688c3928c477cffd12d2c9f42b37db18990047e3d",
+              "currentSha256": "a5aaa5f2e96589954e7d7f3171715eace937a7d0a92fc7f0a55c874aa6054012"
+            }
+          ],
+          "workflowChanges": [
+            {
+              "path": ".github/workflows/non-forge-regression-v163.yml",
+              "previousSha256": "2981bea5a655a3f9dc7b215bc8be55fd03711d7761297376b533b8d2e4df699f",
+              "currentSha256": "f3b2c2665de69d67cbada9be935e8e34f89a9f9ebf32e48523947b3946a9439e"
+            }
+          ],
+          "releaseEvidence": {
+            "nodeSuite": null,
+            "nativeCandidate": null,
+            "ci": null,
+            "review": null,
+            "merge": null
+          },
+          "captureBudgets": {
+            "acquisitionWallSeconds": 55,
+            "attemptLimit": 32,
+            "firstFloorMs": 45000,
+            "resumeMs": 15000
+          },
+          "declaredClientReadDelaysMs": [
+            0,
+            200
+          ],
+          "calStationToWorkTravelObserved": false,
+          "calV62InterdeckTransportImplemented": false,
+          "calGlobalStatus": "PARTIEL",
+          "interactionHoldPersistenceClaim": false,
+          "oldCI143CauseEstablished": false,
+          "generalLatencyCertified": false,
+          "approved1to1": 0,
+          "fullArtTasksClosed": 0,
+          "humanParticipants": 0,
+          "newPngAssets": 0,
+          "primaryArchivesRecovered": 0,
+          "sevenRoutesClosed": false,
+          "allFeedsCertifiedStable": false,
+          "workbookChanged": false,
+          "forgeState": "DEFERRED_BY_USER"
+        }
+      }
+    },
+    "aiTooling": {
+      "baselineCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+      "scope": "Optional Spec Kit, Superpowers and Claude Game Studios tooling; source-only admission.",
+      "runtimeChanged": false,
+      "historicalEvidenceTransferred": false,
+      "verifierChanges": {
+        "scripts/verify-audit-continuation-v163.mjs": {
+          "previousSha256": "da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291",
+          "currentSha256": "47317f937706b8b34fcd8862cb0e942dc365fc87c82747f5072c632f1b66480e"
+        },
+        "scripts/verify-public-release-v86.mjs": {
+          "previousSha256": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab",
+          "currentSha256": "4c3010a97ee506088a198c9693f8196c96f22a701a2723a40b367d43a9b7e122"
+        }
+      }
+    },
+    "sourceChanges": [
+      {
+        "path": ".ai-tools/.gitignore",
+        "predecessors": {
+          "catalogue": null,
+          "main": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+          "qa": null
+        },
+        "currentSha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+        "kind": "tooling"
+      },
+      {
+        "path": ".ai-tools/README.md",
+        "predecessors": {
+          "catalogue": null,
+          "main": "518ee93aab27bb8c9ad58478a14ff5db6b24bfbcf0c1346dbd7e5b4fefd0176e",
+          "qa": null
+        },
+        "currentSha256": "518ee93aab27bb8c9ad58478a14ff5db6b24bfbcf0c1346dbd7e5b4fefd0176e",
+        "kind": "tooling"
+      },
+      {
+        "path": ".ai-tools/setup.py",
+        "predecessors": {
+          "catalogue": null,
+          "main": "968ba2b95144071ec237eb1cf1253ea14292bf47255f506ef28083cd737eb2ca",
+          "qa": null
+        },
+        "currentSha256": "968ba2b95144071ec237eb1cf1253ea14292bf47255f506ef28083cd737eb2ca",
+        "kind": "tooling"
+      },
+      {
+        "path": ".ai-tools/sources.json",
+        "predecessors": {
+          "catalogue": null,
+          "main": "1ec97f618019ad4d9fdc655ae647817d22466c35ade391ff3f5681331f86ccb5",
+          "qa": null
+        },
+        "currentSha256": "1ec97f618019ad4d9fdc655ae647817d22466c35ade391ff3f5681331f86ccb5",
+        "kind": "tooling"
+      },
+      {
+        "path": ".ai-tools/tests/test_setup.py",
+        "predecessors": {
+          "catalogue": null,
+          "main": "fae354f034e04c63747eff525376fdd6e174e87851e73f6ad2101367c7037b75",
+          "qa": null
+        },
+        "currentSha256": "fae354f034e04c63747eff525376fdd6e174e87851e73f6ad2101367c7037b75",
+        "kind": "tooling"
+      },
+      {
+        "path": ".github/workflows/non-forge-regression-v163.yml",
+        "predecessors": {
+          "catalogue": "2981bea5a655a3f9dc7b215bc8be55fd03711d7761297376b533b8d2e4df699f",
+          "main": "2981bea5a655a3f9dc7b215bc8be55fd03711d7761297376b533b8d2e4df699f",
+          "qa": "f3b2c2665de69d67cbada9be935e8e34f89a9f9ebf32e48523947b3946a9439e"
+        },
+        "currentSha256": "dc4f45648f7850d58c52d8b89b28d5c87a53ac0d70e599d89c1c262a7a0d63f3",
+        "kind": "workflow"
+      },
+      {
+        "path": "AGENTS.md",
+        "predecessors": {
+          "catalogue": "ae56da6de251f2af7d4c8d1626fad4259a020f7888f1b57bdde03c9e09124830",
+          "main": "d8d93d1031a497ab88c3c17cff4828572d0a3f9029f5e62b983f295c769ca583",
+          "qa": "ae56da6de251f2af7d4c8d1626fad4259a020f7888f1b57bdde03c9e09124830"
+        },
+        "currentSha256": "d8d93d1031a497ab88c3c17cff4828572d0a3f9029f5e62b983f295c769ca583",
+        "kind": "tooling"
+      },
+      {
+        "path": "CLAUDE.md",
+        "predecessors": {
+          "catalogue": null,
+          "main": "7b05a38d786af6850a14a1c768a2b2665726f0ab7503a40830e6c5c792202987",
+          "qa": null
+        },
+        "currentSha256": "7b05a38d786af6850a14a1c768a2b2665726f0ab7503a40830e6c5c792202987",
+        "kind": "tooling"
+      },
+      {
+        "path": "docs/forge/xeno-trials/door-bay-continuation-v182.json",
+        "predecessors": {
+          "catalogue": null,
+          "main": null,
+          "qa": null
+        },
+        "currentSha256": "b247fd91508111b8c3ba586e44022abd9a32aa1dd1d3b2c7b737c12591ece205",
+        "kind": "document"
+      },
+      {
+        "path": "scripts/audit-succession-v163.mjs",
+        "predecessors": {
+          "catalogue": "48d70464bcc15b0e3827cb792fffd2f1d048ddfcab701901212d53d3411693b9",
+          "main": "d337d609c748c83f20870d0091a2c27417cd591171e7a465b4ee31a2ea3fc675",
+          "qa": "21108d8af17ea9fff5fe1263244d17050d563f58ccf8ec9eb6eaf935a1a977e0"
+        },
+        "currentSha256": "467983aef6f72cfd208130b7671a36f6f06067d0d91b7baac85c64ff5cc6644f",
+        "kind": "tooling"
+      },
+      {
+        "path": "scripts/export-alien-base-tantalus-v1.mjs",
+        "predecessors": {
+          "catalogue": "5cf9d96709d96c53357f11bd59d24da53e58a25c11b5f7bb3ba09507d7869779",
+          "main": null,
+          "qa": null
+        },
+        "currentSha256": "1192580800ae6d790afaa42a7094089ae3067bcc698a744d381528c2b317950f",
+        "kind": "tooling"
+      },
+      {
+        "path": "scripts/qa-hub-door-bays-v182.py",
+        "predecessors": {
+          "catalogue": null,
+          "main": null,
+          "qa": null
+        },
+        "currentSha256": "dfe1032bb06a800ca4eb4159659b83a2c1839a0b0cbdd05842261c67471e773b",
+        "kind": "qa"
+      },
+      {
+        "path": "scripts/qa-npc-annex-service-routes-v163.py",
+        "predecessors": {
+          "catalogue": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+          "main": "01c60a654a5ed9126e1e62d17d2ddb352bff6ef437acbdec63f0b5ec879cd8e4",
+          "qa": "3a57f6bd0760a8930848badea22b66206779a2b89d4feae5e2659b4fde53cc22"
+        },
+        "currentSha256": "3a57f6bd0760a8930848badea22b66206779a2b89d4feae5e2659b4fde53cc22",
+        "kind": "qa"
+      },
+      {
+        "path": "scripts/qa-npc-cal-logistics-route-v165.py",
+        "predecessors": {
+          "catalogue": "88e74456f97f7c171cfb4363660324a114b9093d3fbe03f6cc43b7e953f3af6a",
+          "main": "88e74456f97f7c171cfb4363660324a114b9093d3fbe03f6cc43b7e953f3af6a",
+          "qa": "4a7e96f5e76e8221afd26c5fbc6a67b791d724215d0dd6685599ee34089649aa"
+        },
+        "currentSha256": "4a7e96f5e76e8221afd26c5fbc6a67b791d724215d0dd6685599ee34089649aa",
+        "kind": "qa"
+      },
+      {
+        "path": "scripts/qa-npc-interdeck-native-v165.py",
+        "predecessors": {
+          "catalogue": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+          "main": "1822cd7fa39ecb1d9ad6f692d8c9dea37993a1a0cdbb446963a3a544ea0f206a",
+          "qa": "a614f03fe889c62ca5b481a1079df000a598d34a1c5be65e420ee4d9475d51ec"
+        },
+        "currentSha256": "a614f03fe889c62ca5b481a1079df000a598d34a1c5be65e420ee4d9475d51ec",
+        "kind": "qa"
+      },
+      {
+        "path": "scripts/qa-xeno-trials-capture-v163.py",
+        "predecessors": {
+          "catalogue": "75fc1ea09b69ef14644769495439288cb247bd5452f9d6bbc080d05573e51fdc",
+          "main": "3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d",
+          "qa": "351aafba32f5aedc9f20bd9171da5f8f25ee5421a8b246afe8d1079c3cb8e64e"
+        },
+        "currentSha256": "ca1c86eb77b5622ff83d7a6b3bb60829a6d8c4039a78131c4171cd40d85935c9",
+        "kind": "qa"
+      },
+      {
+        "path": "scripts/verify-alien-base-bridge-v1.mjs",
+        "predecessors": {
+          "catalogue": "946f0cb8d36047483eb8056e19a51d62d74d839548d139eef71adaf1ae6a20ab",
+          "main": null,
+          "qa": null
+        },
+        "currentSha256": "b23993cf0521c5db063ba09217b0c229e57bac71f8b472fa415837c4927c0a53",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-audit-continuation-v163.mjs",
+        "predecessors": {
+          "catalogue": "3becc5518175893544c1c7aee7b8fc6cd521d4e3584b6b149a6b1691d4450e8c",
+          "main": "47317f937706b8b34fcd8862cb0e942dc365fc87c82747f5072c632f1b66480e",
+          "qa": "a5aaa5f2e96589954e7d7f3171715eace937a7d0a92fc7f0a55c874aa6054012"
+        },
+        "currentSha256": "a2e5a4036d4adcb7d66798652b7944b4898a6c55331b617ab98c993a8c383aa5",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-capture-observation-v177.mjs",
+        "predecessors": {
+          "catalogue": "881f67af9a26ef83b223bea4aa7c185af9e9a2b5c757ae9549d67e3d6f3a4119",
+          "main": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
+          "qa": "b68c2c76ed78bdf63247ba3087a2f8b42ba9fc3a42d8b098ef6c5f984c73ef77"
+        },
+        "currentSha256": "d307f75378594ca082baf0fffdc46a3e8302d77217581c669e18526f6b8b2872",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-hub-circulation-v137.mjs",
+        "predecessors": {
+          "catalogue": "12b3e7df85da93c8d103b7edf466d552842a9a909d647d0c537b4c8d593742ef",
+          "main": "e7e91327b7ecdf99e93a8ebb95f543b9f1e1b1a7efdef0429c5cfef192e66d24",
+          "qa": "e7e91327b7ecdf99e93a8ebb95f543b9f1e1b1a7efdef0429c5cfef192e66d24"
+        },
+        "currentSha256": "55bee56949dee8bd7cea297f7da23d163b9b08833ff76442e8af01e37e5b9386",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-hub-door-bay-v178.mjs",
+        "predecessors": {
+          "catalogue": "775df80d68e5ddd8697e44bed32b82881b6ca288d35fd884efc035a06ba6bb65",
+          "main": null,
+          "qa": null
+        },
+        "currentSha256": "f717c6819e9b57c94f999bce30a4572c4e586c42846d180d3dae9de7e4dff84e",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-hub-room-furnishing-v137.mjs",
+        "predecessors": {
+          "catalogue": "7122d778c80fb8874cf8116168ebc57f39dadc5883f8a88df9f4e4f291b3bde9",
+          "main": "f4bf5aacfa26279abab6fe089f5d6860d449a8ff48ef0fee602684a3a3e9be1f",
+          "qa": "f4bf5aacfa26279abab6fe089f5d6860d449a8ff48ef0fee602684a3a3e9be1f"
+        },
+        "currentSha256": "7a86388e5663923bd89912916812e04539396d658ab2a7b9ebb508c1c9880306",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-hub-room-life-v136.mjs",
+        "predecessors": {
+          "catalogue": "b76f0fe9008656bb8b2b6dc4b24b40c0ef061a28c5da234f3b6cf36bbb35eec0",
+          "main": "3a4bc2fdb88a38f712b7377c7a054195b0218965bf1c7bcaa6ab0bfbf8fe4d23",
+          "qa": "3a4bc2fdb88a38f712b7377c7a054195b0218965bf1c7bcaa6ab0bfbf8fe4d23"
+        },
+        "currentSha256": "2937cc012873635317745972285e7ac369b25861cb32ab910f6a7f6861be7b34",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-hub-service-routes-v138.mjs",
+        "predecessors": {
+          "catalogue": "b4929721d0aed65ee7f1cc882ebd43bc7a7a1f825a0ecc9cc9df49780d3035a6",
+          "main": "6fa381291a721a891f964f86a4e95861bb267eaff5130416a3f1ecd451ed5173",
+          "qa": "6fa381291a721a891f964f86a4e95861bb267eaff5130416a3f1ecd451ed5173"
+        },
+        "currentSha256": "671a520355b26e6098c386db451a2bd6a6706883d43b3b7291017bd2d5978d2e",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-npc-annex-service-routes-v163.mjs",
+        "predecessors": {
+          "catalogue": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+          "main": "24941d5d4f417864cdbfc4b7d13ec822b03f79207283fde56e3d507a8bf065a6",
+          "qa": "ae6cc98ad92ec740b05894f3ca7cad676b627d0c66f454cfb15efd8d0940fa30"
+        },
+        "currentSha256": "ae6cc98ad92ec740b05894f3ca7cad676b627d0c66f454cfb15efd8d0940fa30",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-npc-cal-logistics-route-v165.mjs",
+        "predecessors": {
+          "catalogue": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
+          "main": "603cfed41ba98b20900eb70fda0f15428cc8a3dafc8284c1a979d67fcad54744",
+          "qa": "8303fb51cf82f200432da621d21f8e80cbcefdc58e03623419a1acb362ed4775"
+        },
+        "currentSha256": "8303fb51cf82f200432da621d21f8e80cbcefdc58e03623419a1acb362ed4775",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-npc-interdeck-routes-v165.mjs",
+        "predecessors": {
+          "catalogue": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080",
+          "main": "331b36f0b73a7c8bc8bc2792400216c832cd7a9355c16b211ec7619d051f2080",
+          "qa": "66b1f6cc8a2a018b2ddacecfb73c77eb52bb7784a51bc7addb43c8ec46832f8a"
+        },
+        "currentSha256": "66b1f6cc8a2a018b2ddacecfb73c77eb52bb7784a51bc7addb43c8ec46832f8a",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-parallel-completion-v165.mjs",
+        "predecessors": {
+          "catalogue": "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa",
+          "main": "7101cd9415b2455ce935beba92f062c4f86d08874d2ff19852cc162d093da0aa",
+          "qa": "92d1ce93e1b8b2e79ee53b3ecb9471c27386846ac13608adc5b07c5bcc7f391f"
+        },
+        "currentSha256": "af8b37199a2ba3d8557b78df3cb2db1062992d6c84b6de610249fb8e10fa3355",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-public-release-v86.mjs",
+        "predecessors": {
+          "catalogue": "0c2be84858f46b7464b643bec5a05f49cef44b833d8139492b09f90b967a1d80",
+          "main": "4c3010a97ee506088a198c9693f8196c96f22a701a2723a40b367d43a9b7e122",
+          "qa": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab"
+        },
+        "currentSha256": "1b310c3aa6912702e5169847e963732065155d506f022852a60f321c2483d208",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-tantalus-enrichment-v177.mjs",
+        "predecessors": {
+          "catalogue": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c",
+          "main": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c",
+          "qa": "7c7b6c66ef1baa7916f9d7000683a8857c80940d84d8d7c3b4c1fed240f18d5c"
+        },
+        "currentSha256": "d8bdfd85b801213a0b4fe7d66efeb8a0eda96c685d2dfa50377feb382932519a",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-trials-navigation-v163.mjs",
+        "predecessors": {
+          "catalogue": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
+          "main": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78",
+          "qa": "80929bd7a61393ee456a1623ccdb84c26e2b00dc83c7f733e2d0bad725e64d78"
+        },
+        "currentSha256": "2f87256ada6f134c20c83af4cac5bb432e1a6a3baf6e66fa4f6027985fa21c6a",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-xeno-trials-capture-v163.mjs",
+        "predecessors": {
+          "catalogue": "9c544d59ef95c88c15c7f4291ddb2ac2ea2e0dbfb1aed5d3a39b1e23f04a66bd",
+          "main": "cd7674a94db3f8ce0c8166f5f1e38848d43b587a0be3c36323452c80e7ef4b28",
+          "qa": "ab217ec8de87d3f6dbf497805bf3ab449b831f8b7c8e891bbf080b4e41b85d53"
+        },
+        "currentSha256": "ecc2d9c63da4b3c85f0175bd4b2bd3b71ff19c0bed0497ef54d8be2d9f49fa0e",
+        "kind": "verifier"
+      },
+      {
+        "path": "scripts/verify-xeno-trials-supers-v148.mjs",
+        "predecessors": {
+          "catalogue": "1bf875531201c3669f90722e9a890cb86c92dbff7b68bab07a5c5e127915335b",
+          "main": "1bf875531201c3669f90722e9a890cb86c92dbff7b68bab07a5c5e127915335b",
+          "qa": "1bf875531201c3669f90722e9a890cb86c92dbff7b68bab07a5c5e127915335b"
+        },
+        "currentSha256": "f9391f04e54787882823afb4201d5611c48ddad1ab72678a5926ae283a93e4b3",
+        "kind": "verifier"
+      },
+      {
+        "path": "src/hub-batch-industrial-v177.js",
+        "predecessors": {
+          "catalogue": "27cfc9084399b77193b0361904d8fc89151dc56bd010e4fe34ec7bc02ba1e0bc",
+          "main": "9355e187a6c83ba6457e983871945101f3654ab17a24c7ee998765bce201c1ab",
+          "qa": "9355e187a6c83ba6457e983871945101f3654ab17a24c7ee998765bce201c1ab"
+        },
+        "currentSha256": "331616b92765ac25946dc563501e0b06b12f43069b28320c744058d899287522",
+        "kind": "runtime"
+      },
+      {
+        "path": "src/hub-furnishing-critical-v138.js",
+        "predecessors": {
+          "catalogue": "bc3457cc5f77ba42363699a9d5dcb474dfcb9fca510d7f3ddc9687a980f1538d",
+          "main": "bc3457cc5f77ba42363699a9d5dcb474dfcb9fca510d7f3ddc9687a980f1538d",
+          "qa": "bc3457cc5f77ba42363699a9d5dcb474dfcb9fca510d7f3ddc9687a980f1538d"
+        },
+        "currentSha256": "43464c686f9ef9aada3549e4f3c16d2ee2da34386c55719849e5e8e62927d18a",
+        "kind": "runtime"
+      },
+      {
+        "path": "src/hub-room-composition-v142.js",
+        "predecessors": {
+          "catalogue": "d0fdb04488e49b7be3fe59d5e078742b0190f6c2189d575e5c6f6b9d1bffe029",
+          "main": "64bdf33f28110a655bea4a38bda4035a235590feb0b66be363ffb0b914611907",
+          "qa": "64bdf33f28110a655bea4a38bda4035a235590feb0b66be363ffb0b914611907"
+        },
+        "currentSha256": "17759dc162da7e4c098d766734453e6c59c6e8417c355c0572529243dacb1c16",
+        "kind": "runtime"
+      },
+      {
+        "path": "src/hub-room-furnishing-v137.js",
+        "predecessors": {
+          "catalogue": "9997f2c954dfe7b0c32ae3094d2e09cbc958bbc40d1844c52a9696cef0292e45",
+          "main": "8b93181c9cb7662b80a5f8a05205a29abee2b7701e30a331527ed18083374664",
+          "qa": "8b93181c9cb7662b80a5f8a05205a29abee2b7701e30a331527ed18083374664"
+        },
+        "currentSha256": "d76f0322f9bb55bf1ab845742bd1a20d0434ec01f53bacaffb2600b55ea2d4e8",
+        "kind": "runtime"
+      },
+      {
+        "path": "src/hub-service-geometry-v139.js",
+        "predecessors": {
+          "catalogue": "cf67fa0507cc064d21799a467fe8a34b2f8e3352ee81abd43466cb762ec3a752",
+          "main": "8f69ddd93564959ff44df15f3e4dcf553a626bc3568306d8ebdbb88985e03e9c",
+          "qa": "8f69ddd93564959ff44df15f3e4dcf553a626bc3568306d8ebdbb88985e03e9c"
+        },
+        "currentSha256": "1f5ea8cec644fcd04a253bf9b04807721bd2d57eefecb83d824c60327fb97b27",
+        "kind": "runtime"
+      },
+      {
+        "path": "src/xeno-trials-ui-v96.js",
+        "predecessors": {
+          "catalogue": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
+          "main": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a",
+          "qa": "afcbe460f875f5f03285a4b2b509bbdebdbba081dd7d18447a33f97a0231568a"
+        },
+        "currentSha256": "205e7446f0f0ca4a92e33ed200fd2eedd9b0dfeeb4c61529a1e679dab1a000a1",
+        "kind": "runtime"
+      }
+    ],
+    "sourceOnlyPaths": [
+      "scripts/audit-pr-integration-v182.mjs",
+      "scripts/qa-hub-door-bays-v182.py",
+      "docs/development/PR_INTEGRATION_20261104.md",
+      "docs/forge/xeno-trials/door-bay-continuation-v182.json",
+      "CLAUDE.md",
+      ".ai-tools",
+      ".ai-tools/README.md",
+      ".ai-tools/sources.json",
+      ".ai-tools/setup.py",
+      ".ai-tools/.gitignore",
+      ".ai-tools/tests",
+      ".ai-tools/tests/test_setup.py"
+    ],
+    "auditLibraries": [
+      {
+        "path": "scripts/audit-pr-integration-v182.mjs",
+        "sha256": "c2f3cd6acad1f031a1e8c785ae0b3b724b661e85a334834b25a13695a96bb28b"
+      }
+    ]
   }
 }

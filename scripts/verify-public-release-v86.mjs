@@ -257,6 +257,13 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  // Exact PR integration and optional developer tooling stay source-only.
+  'scripts/audit-pr-integration-v182.mjs',
+  'scripts/qa-hub-door-bays-v182.py',
+  'docs/development/PR_INTEGRATION_20261104.md',
+  'docs/forge/xeno-trials/door-bay-continuation-v182.json',
+  'CLAUDE.md', '.ai-tools', '.ai-tools/README.md', '.ai-tools/sources.json',
+  '.ai-tools/setup.py', '.ai-tools/.gitignore', '.ai-tools/tests', '.ai-tools/tests/test_setup.py',
   "docs/development/ALIEN_BASE_REFERENCE_REVIEW_20261102.md",
   "docs/development/ALIEN_BASE_SOURCE_SNAPSHOTS_20261102.json",
   "docs/development/Alien_Base_Current_Mapping_Gaps_20261102.csv",

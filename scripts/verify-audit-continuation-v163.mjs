@@ -20,6 +20,10 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS,
   V178_RUNTIME_SUCCESSORS, V178_VERIFIER_SUCCESSORS, V178_QA_SUCCESSORS,
   reviewedLiveDigestV178, reviewedCurrentDigestV179, reviewedMainNDigestV179, V179_SOURCE_GROUPS, verifyFollowupV179, historicalProgressViewV179, verifyFollowupV178 } from './audit-succession-v163.mjs';
+import { INTEGRATION_SOURCES_V182, INTEGRATION_BASELINE_V182, INTEGRATION_SOURCE_ONLY_PATHS_V182,
+  AI_TOOLING_FOLLOWUP_20261104, QA_BRANCH_CONSTANTS_V181, reviewedIntegrationDigestV182,
+  historicalIntegrationViewV182, integratedRuntimeSourcesV182, verifyIntegrationV182,
+  verifyQaBranchV181, qaProgressViewV181, reviewedQaBranchDigestV181 } from './audit-pr-integration-v182.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -93,7 +97,7 @@ test('the full current bridge validates runtime bytes and older default returns 
   const v161 = JSON.parse(read(prefix + 'progress-v161.json'));
   const v160 = JSON.parse(read(prefix + 'progress-v160.json'));
   assert.deepEqual(resolveAuditSourcesV162(v161), previous.runtimeSourceSha256);
-  const approvedEffectiveV174 = { ...current.runtimeSourceSha256,
+  const approvedEffectiveV174 = integratedRuntimeSourcesV182({ ...current.runtimeSourceSha256,
     ...Object.fromEntries(Object.entries(ARSENAL_V167_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARMORY_V169_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(ARSENAL_V170_SUCCESSORS).map(([path, receipt]) => [path, receipt.currentSha256])),
@@ -106,7 +110,7 @@ test('the full current bridge validates runtime bytes and older default returns 
       .map(([path, receipt]) => [path, receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V178_RUNTIME_SUCCESSORS).map(([path,receipt]) => [path,receipt.currentSha256])),
     ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.runtimeChanges).map(([path,receipt])=>[path,receipt.currentSha256])),
-    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) };
+    ...Object.fromEntries(Object.entries(V179_SOURCE_GROUPS.newRuntimeSources).map(([path,receipt])=>[path,receipt.currentSha256])) });
   assert.deepEqual(resolveAuditSourcesV162(v161, read, { effective: true }), approvedEffectiveV174);
   assert.deepEqual(resolveAuditSourcesV161(v160), v161.runtimeSourceSha256);
   assert.deepEqual(resolveAuditSourcesV161(v160, read, { effective: true }), approvedEffectiveV174);
@@ -189,7 +193,7 @@ test('V176 distributor and audit verifier successors retain V174 receipts intact
     assert.equal(revision.previousSha256,V165_VERIFIER_SUCCESSORS_V174[path].currentSha256,path);
     assert.equal(sha(read(path)),reviewedCurrentDigestV179(path,V165_VERIFIER_SUCCESSORS_V177[path]?.currentSha256 || revision.currentSha256),path);
     const modified=target=>target===path?Buffer.concat([read(target),Buffer.from('unreviewed')]):read(target);
-    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V179 verifierChanges/,path);
+    assert.throws(()=>verifyAuditSuccessionV163(previous,current,modified),/Unreviewed V182 source bytes|Unreviewed V179 verifierChanges/,path);
   }
 });
 
@@ -230,7 +234,7 @@ test('V177 retains every reviewed V167 through V176 receipt instead of rewriting
     assert.equal(verifyReviewedVerifierV177(path, V165_VERIFIER_SUCCESSORS_V171[path].previousSha256, read), reviewedCurrentDigestV179(path,receipt.currentSha256));
     const corrupted = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
-      error => (Object.hasOwn(V179_SOURCE_GROUPS.verifierChanges,path) ? error.message.includes('Unreviewed V179 verifierChanges:') : /Unreviewed V17[78] verifier/.test(error.message)) && error.message.includes(path), path);
+      error => (error.message.includes('Unreviewed V182 source bytes:') || (Object.hasOwn(V179_SOURCE_GROUPS.verifierChanges,path) ? error.message.includes('Unreviewed V179 verifierChanges:') : /Unreviewed V17[78] verifier/.test(error.message))) && error.message.includes(path), path);
   }
 });
 
@@ -242,7 +246,7 @@ test('V177 source successors reject unreviewed bytes even when the live JSON pin
     const bytes = Buffer.concat([read(path), Buffer.from('\nUNREVIEWED')]);
     const corrupted = name => name === path ? bytes : read(name);
     assert.throws(() => verifyAuditSuccessionV163(previous, current, corrupted),
-      error => error.message.includes(Object.hasOwn(V179_SOURCE_GROUPS.runtimeChanges,path) ? 'Unreviewed V179 runtimeChanges:' : 'Unreviewed V177') && error.message.includes(path), path);
+      error => (error.message.includes('Unreviewed V182 source bytes:') || error.message.includes(Object.hasOwn(V179_SOURCE_GROUPS.runtimeChanges,path) ? 'Unreviewed V179 runtimeChanges:' : 'Unreviewed V177')) && error.message.includes(path), path);
     const forged = clone(current);
     if (Object.hasOwn(forged.runtimeSourceSha256, path)) forged.runtimeSourceSha256[path] = sha(bytes);
     assert.throws(() => verifyAuditSuccessionV163(previous, forged, corrupted), undefined,
@@ -598,15 +602,15 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   assert.deepEqual(Object.keys(effective).filter(path=>Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
     Object.keys(current.runtimeSourceSha256).sort());
   assert.deepEqual(Object.keys(effective).filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)).sort(),
-    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed V179 additions and two historic compatibility exports extend the147witness');
+    [...new Set(['src/tactical-reload-v77.js','src/weapon-actions-v130.js',...Object.keys(V179_SOURCE_GROUPS.runtimeChanges),...Object.keys(V179_SOURCE_GROUPS.newRuntimeSources),...Object.entries(INTEGRATION_SOURCES_V182).filter(([,r])=>r.kind==='runtime').map(([path])=>path)].filter(path=>!Object.hasOwn(current.runtimeSourceSha256,path)))].sort(), 'Only explicitly reviewed V179 additions and two historic compatibility exports extend the147witness');
   assert.equal(current.runtimeSourceSha256['src/npc-interdeck-routes-v165.js'],
     '5330095a1f6d277e71e473c6b741c671fe02c4d4fc44133b3f5a37ccfebb103a');
   assert.equal(effective['src/npc-interdeck-routes-v165.js'],V178_RUNTIME_SUCCESSORS['src/npc-interdeck-routes-v165.js'].currentSha256);
-  assert.equal(effective['sw.js'],reviewedMainNDigestV179('sw.js',V178_RUNTIME_SUCCESSORS['sw.js'].currentSha256));
+  assert.equal(effective['sw.js'],reviewedIntegrationDigestV182('sw.js',reviewedMainNDigestV179('sw.js',V178_RUNTIME_SUCCESSORS['sw.js'].currentSha256)));
   assert.equal(current.candidateLocalValidationV177.testedCommit,'70adab8e66b8b2ee3fc2a731a182dd20d2a6af31');
   for(const map of [V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS])
     for(const [path,receipt] of Object.entries(map)) {
-      assert.equal(sha(read(path)),reviewedMainNDigestV179(path,receipt.currentSha256),path);
+      assert.equal(sha(read(path)),reviewedIntegrationDigestV182(path,reviewedMainNDigestV179(path,receipt.currentSha256)),path);
       assert.throws(()=>reviewedLiveDigestV178(path,'0'.repeat(64)),/Incorrect MainM endpoint/);
       const changed=name=>name===path?Buffer.concat([read(name),Buffer.from('\nUNREVIEWED')]):read(name);
       assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),undefined,path);
@@ -733,7 +737,7 @@ test('V179 preserves the complete MainN document and applies only reviewed endpo
   const historical=historicalProgressViewV179(current);assert.equal(Object.hasOwn(historical,'followupV179'),false);
   assert.deepEqual(historical.followupV178,current.followupV178);assert.deepEqual(historical.runtimeSourceSha256,current.runtimeSourceSha256);
   const effective=resolveAuditSourcesV163(previous,read,{effective:true});
-  for(const group of ['runtimeChanges','newRuntimeSources'])for(const[path,row]of Object.entries(V179_SOURCE_GROUPS[group]))assert.equal(effective[path],row.currentSha256);
+  for(const group of ['runtimeChanges','newRuntimeSources'])for(const[path,row]of Object.entries(V179_SOURCE_GROUPS[group]))assert.equal(effective[path],reviewedIntegrationDigestV182(path,row.currentSha256));
   assert.ok(Object.hasOwn(current.followupV179,'candidateLocalValidationV179'));
   if(current.followupV179.candidateLocalValidationV179!==null)assert.match(current.followupV179.candidateLocalValidationV179.testedCommit,/^[a-f0-9]{40}$/);
   assert.equal(current.followupV178.candidateLocalValidationV178.testedCommit,'37af2c3a4cead83d1519e642a38ec32d3e18c231');
@@ -764,4 +768,136 @@ test('V179 rejects forged predecessors, omissions, changed bytes and transferred
     c=>c.followupV177.sourceChanges[0].reason+=' rewritten',c=>c.tables['27_RepriseV177'].rows[0][1]='rewritten',
     c=>c.runtimeSourceSha256['src/content.js']='0'.repeat(64)
   ]){const forged=clone(current);alter(forged);assert.throws(()=>verifyAuditSuccessionV163(previous,forged));}
+});
+
+test('V182 joins the three exact branch endpoints and keeps their documentary histories distinct', () => {
+  const result = verifyIntegrationV182(current);
+  assert.equal(result.historicalQaStages, 3);
+  assert.equal(result.workbookChanged, false);
+  assert.equal(result.approved1to1, 0);
+  assert.equal(Object.hasOwn(historicalIntegrationViewV182(current), 'followupV182'), false);
+  assert.deepEqual(historicalIntegrationViewV182(current).followupV179, current.followupV179);
+  const qa = qaProgressViewV181(current);
+  assert.deepEqual(qa.followupV179, current.followupV182.qaBranch.followups.followupV179);
+  assert.notDeepEqual(qa.followupV179, current.followupV179);
+  assert.deepEqual(qa.runtimeSourceSha256, current.runtimeSourceSha256);
+  assert.deepEqual(qa.tables, current.tables);
+  assert.equal(current.followupV182.baselineCommits.catalogue, INTEGRATION_BASELINE_V182.catalogue.commit);
+  assert.deepEqual(verifyQaBranchV181(current), { runtimeSuccessors: 0, qaSuccessors: 2,
+    verifierSuccessors: 4, workflowSuccessors: 1, workbookChanged: false, sevenRoutesClosed: false, approved1to1: 0 });
+  assert.deepEqual(qa.followupV181.captureBudgets,
+    { acquisitionWallSeconds: 55, attemptLimit: 32, firstFloorMs: 45000, resumeMs: 15000 });
+  assert.deepEqual(qa.followupV181.declaredClientReadDelaysMs, [0, 200]);
+  for (const field of ['calStationToWorkTravelObserved', 'calV62InterdeckTransportImplemented',
+    'interactionHoldPersistenceClaim', 'oldCI143CauseEstablished', 'generalLatencyCertified'])
+    assert.equal(qa.followupV181[field], false, 'A historical QA limit was rewritten: ' + field);
+});
+
+test('V182 refuses unreviewed bytes even when the caller forges its source manifest to match', () => {
+  for (const [path, receipt] of Object.entries(INTEGRATION_SOURCES_V182)) {
+    assert.equal(Object.isFrozen(receipt), true);
+    assert.equal(Object.isFrozen(receipt.predecessors), true);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    for (const predecessor of Object.values(receipt.predecessors).filter(Boolean))
+      assert.equal(reviewedIntegrationDigestV182(path, predecessor), receipt.currentSha256, path);
+    assert.throws(() => reviewedIntegrationDigestV182(path, '0'.repeat(64)), /Incorrect V182 branch endpoint/, path);
+    const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyAuditSuccessionV163(previous, current, changed),
+      error => error.message.includes(path), path);
+    const forged = clone(current);
+    forged.followupV182.sourceChanges.find(row => row.path === path).currentSha256 = sha(changed(path));
+    assert.throws(() => verifyIntegrationV182(forged, changed), /Unreviewed V182 source manifest/, path);
+  }
+  const absent = clone(current); delete absent.followupV182;
+  assert.throws(() => verifyAuditSuccessionV163(previous, absent), /Missing V182 integration admission/);
+});
+
+test('V182 preserves all QA179 to QA181 admissions, rejection cases and original first-floor budgets', () => {
+  const qa = current.followupV182.qaBranch.followups;
+  for (const version of [179, 180, 181]) {
+    const followup = qa['followupV' + version];
+    for (const field of ['qaChanges', 'verifierChanges', 'workflowChanges'].filter(field => followup[field])) {
+      for (const row of followup[field]) {
+        const later = [179, 180, 181].filter(value => value < version).flatMap(value => {
+          const record = qa['followupV' + value];
+          return [...record.qaChanges, ...record.verifierChanges, ...(record.workflowChanges || [])];
+        }).filter(previous => previous.path === row.path);
+        const original = later.length ? later[0].previousSha256 : row.previousSha256;
+        const endpoint = reviewedQaBranchDigestV181(row.path, original);
+        assert.equal(sha(read(row.path)), reviewedIntegrationDigestV182(row.path, endpoint), row.path);
+        for (const value of ['previousSha256', 'currentSha256']) {
+          const forged = clone(current);
+          forged.followupV182.qaBranch.followups['followupV' + version][field]
+            .find(item => item.path === row.path)[value] = '0'.repeat(64);
+          assert.throws(() => verifyQaBranchV181(forged), undefined, row.path + ' ' + value);
+        }
+      }
+      const omitted = clone(current); omitted.followupV182.qaBranch.followups['followupV' + version][field].pop();
+      assert.throws(() => verifyQaBranchV181(omitted));
+    }
+    for (const alter of [
+      r => { r.baselineCommit = '0'.repeat(40); }, r => { r.baselineProgressSha256 = '0'.repeat(64); },
+      r => { r.runtimeChanges.push({ path: 'src/unreviewed.js' }); },
+      r => { r.historicalResultsTransferred = true; }, r => { r.releaseEvidence.ci = { status: 'success' }; },
+      r => { r.sevenRoutesClosed = true; }, r => { r.approved1to1 = 1; },
+      r => { r.workbookChanged = true; }, r => { r.unreviewedField = true; }
+    ]) {
+      const forged = clone(current); alter(forged.followupV182.qaBranch.followups['followupV' + version]);
+      assert.throws(() => verifyQaBranchV181(forged));
+    }
+    const missing = clone(current); delete missing.followupV182.qaBranch.followups['followupV' + version];
+    assert.throws(() => verifyQaBranchV181(missing));
+  }
+  for (const alter of [
+    r => { r.calStationToWorkTravelObserved = true; }, r => { r.calV62InterdeckTransportImplemented = true; },
+    r => { r.interactionHoldPersistenceClaim = true; }, r => { r.oldCI143CauseEstablished = true; },
+    r => { r.generalLatencyCertified = true; }, r => { r.captureBudgets.acquisitionWallSeconds = 56; },
+    r => { r.captureBudgets.attemptLimit = 33; }, r => { r.captureBudgets.firstFloorMs = 46000; },
+    r => { r.captureBudgets.resumeMs = 16000; }, r => { r.declaredClientReadDelaysMs = [0, 199]; }
+  ]) {
+    const forged = clone(current); alter(forged.followupV182.qaBranch.followups.followupV181);
+    assert.throws(() => verifyQaBranchV181(forged));
+  }
+  assert.equal(QA_BRANCH_CONSTANTS_V181.V181_BASELINE_WITNESS.baseCommit,
+    'b9886eccb7ea7fa9ea3c29230240965f54eea015');
+});
+
+test('V182 rejects omitted branches, arbitrary roots and inherited release or art claims', () => {
+  for (const alter of [
+    c => { c.unreviewedRoot = true; }, c => { c.followupV182.unreviewedField = true; },
+    c => { delete c.followupV182.qaBranch; }, c => { c.followupV182.sourceChanges.pop(); },
+    c => { c.followupV182.sourceChanges[0].predecessors.main = '0'.repeat(64); },
+    c => { c.followupV182.baselineCommits.catalogue = '0'.repeat(40); },
+    c => { c.followupV182.aiTooling.runtimeChanged = true; },
+    c => { c.followupV182.historicalEvidenceTransferred = true; },
+    c => { c.followupV182.approved1to1 = 1; }, c => { c.followupV182.newArtTasksClosed = 1; },
+    c => { c.followupV182.oldWorkbookBytesPreserved = false; },
+    c => { c.followupV182.releaseEvidence.ci = { status: 'success' }; },
+    c => { c.followupV182.resultSources.integrationReport = 'docs/unreviewed.md'; },
+    c => { c.followupV179.referenceAdmission.activeMasterAliases = 45; },
+    c => { c.followupV178.candidateLocalValidationV178.testedCommit = '0'.repeat(40); },
+    c => { c.tables['27_RepriseV177'].rows[0][1] = 'unreviewed'; },
+    c => { c.indicators[0].expected += 1; }, c => { c.workbookSha256 = '0'.repeat(64); },
+    c => { c.historyWorkbooks.pop(); }, c => { c.runtimeSourceSha256['src/content.js'] = '0'.repeat(64); }
+  ]) { const forged = clone(current); alter(forged); assert.throws(() => verifyIntegrationV182(forged)); }
+});
+
+test('AI tooling history and integration documentation retain exact source-only admission', () => {
+  assert.deepEqual(current.followupV182.aiTooling, AI_TOOLING_FOLLOWUP_20261104);
+  assert.equal(AI_TOOLING_FOLLOWUP_20261104.runtimeChanged, false);
+  assert.equal(AI_TOOLING_FOLLOWUP_20261104.historicalEvidenceTransferred, false);
+  for (const [path, receipt] of Object.entries(AI_TOOLING_FOLLOWUP_20261104.verifierChanges)) {
+    assert.equal(receipt.previousSha256, V178_VERIFIER_SUCCESSORS[path].currentSha256, path);
+    assert.equal(current.followupV178.verifierChanges.find(row => row.path === path).currentSha256,
+      receipt.previousSha256, 'Historical V178 receipt was rewritten: ' + path);
+    assert.equal(sha(read(path)), reviewedIntegrationDigestV182(path, receipt.currentSha256), path);
+  }
+  for (const path of INTEGRATION_SOURCE_ONLY_PATHS_V182) {
+    const directory = path === '.ai-tools' || path === '.ai-tools/tests';
+    assert.equal(isPublicDistributionPathV86(path, { directory }), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory, built: true }), false, path);
+  }
+  for (const path of ['.ai-tools/unreviewed.py', '.ai-tools/tests/unreviewed.py', '.ai-tools/private.json',
+    'scripts/audit-unreviewed-v182.mjs', 'docs/development/PR_UNREVIEWED.md'])
+    assert.equal(isPublicDistributionPathV86(path), false, path);
 });
