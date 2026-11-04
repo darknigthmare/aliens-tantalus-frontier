@@ -9,7 +9,7 @@ import { HUB_TRAVERSAL_PROFILES_V60, buildHubTraversalGeometryV87 } from '../src
 import { HUB_SHIP_SPACES_V137, HUB_SHIP_PARENT_LANDINGS_V137, getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { HUB_SERVICE_STANDARD_V137, resolveHubServiceProfileV137 } from '../src/hub-service-geometry-v137.js';
 import { HUB_RETIRED_SERVICE_LANDINGS_V138, HUB_MEDICAL_SERVICE_APPROACH_V138 as medicalApproach } from '../src/hub-service-geometry-v138.js';
-import { HUB_SERVICE_APPROACHES_V139 } from '../src/hub-service-geometry-v139.js';
+import { HUB_SERVICE_APPROACHES_V139, HUB_WORKSHOP_DOOR_BAY_V178, HUB_SERVICE_DOOR_BAYS_V182 } from '../src/hub-service-geometry-v139.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { HUB_CIRCULATION_STANDARD_V137, getHubCirculationPlanV137,
   drawHubCirculationV137, withHubCirculationV137, getHubServiceConduitPlanV137,
@@ -88,11 +88,14 @@ test('service re-spacing preserves historical profiles, retained supports and al
           ? entry.platformId === original.id : bucket === 'ladders' && entry.ladderId === original.id);
         if (retired) { assert.equal(actual, undefined, original.id + ' must be retired with its access'); continue; }
         const medicalSurface = bucket === 'platforms' && medicalApproach.surfaces[original.id];
+        const workshopSurface = bucket === 'platforms' && original.id === HUB_WORKSHOP_DOOR_BAY_V178.platformId
+          ? HUB_WORKSHOP_DOOR_BAY_V178.surface : null;
+        const doorBaySurface = bucket === 'platforms' && HUB_SERVICE_DOOR_BAYS_V182.find(entry => entry.platformId === original.id)?.surface;
         const medicalLadder = bucket === 'ladders' && original.id === medicalApproach.ladderId;
-        const rearAccess = bucket === 'ladders' && HUB_SERVICE_APPROACHES_V139.find(entry => entry.ladderId === original.id);
+        const rearAccess = bucket === 'ladders' && [...HUB_SERVICE_APPROACHES_V139,...HUB_SERVICE_DOOR_BAYS_V182].find(entry => entry.ladderId === original.id);
         assert.ok(actual, original.id);
-        assert.equal(actual.x, (medicalLadder ? medicalApproach.ladderX : rearAccess ? rearAccess.ladderX : medicalSurface?.x ?? original.x) + room.xStart);
-        assert.equal(actual.w, medicalSurface?.w ?? original.w);
+        assert.equal(actual.x, (medicalLadder ? medicalApproach.ladderX : rearAccess ? rearAccess.ladderX : doorBaySurface?.x ?? medicalSurface?.x ?? workshopSurface?.x ?? original.x) + room.xStart);
+        assert.equal(actual.w, doorBaySurface?.w ?? medicalSurface?.w ?? workshopSurface?.w ?? original.w);
         if (bucket === 'platforms') assert.equal(actual.h, original.h);
         if (bucket === 'vents') assert.equal(actual.h, original.h);
       }

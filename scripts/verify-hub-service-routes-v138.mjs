@@ -5,7 +5,7 @@ import { HUB_TRAVERSAL_PROFILES_V60, buildHubTraversalGeometryV87 } from '../src
 import { HUB_RETIRED_SERVICE_LANDINGS_V138, HUB_MEDICAL_SERVICE_APPROACH_V138 as medicalApproach,
   resolveHubServiceProfileV138 } from '../src/hub-service-geometry-v138.js';
 import { HUB_SERVICE_STANDARD_V137, resolveHubServiceProfileV137 } from '../src/hub-service-geometry-v137.js';
-import { HUB_SERVICE_APPROACHES_V139, resolveHubServiceProfileV139 } from '../src/hub-service-geometry-v139.js';
+import { HUB_SERVICE_APPROACHES_V139, HUB_SERVICE_DOOR_BAYS_V182, resolveHubServiceProfileV139 } from '../src/hub-service-geometry-v139.js';
 import { HUB_MAINTENANCE_EAST_LANDING_V138 as landing } from '../src/hub-maintenance-landing-v138.js';
 import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { getHubCirculationPlanV137, drawHubCirculationV137, getHubCirculationSolidReservationsV138,
@@ -168,13 +168,24 @@ test('saved V137 positions on all three retired platforms fall onto native suppo
   }
 });
 
-test('V139 moves only the two named workbench access ladders, preserves their supports and accepts old mid-climb saves through native gravity', async () => {
+test('the two V139 workbench ladders and explicit V178 DURANDAL bay preserve other supports and recover old mid-climb saves through native gravity', async () => {
+  assert.deepEqual(HUB_SERVICE_APPROACHES_V139.map(({roomId,ladderId,ladderX,legacyLadderX})=>({roomId,ladderId,ladderX,legacyLadderX})),[
+    {roomId:'science-lab',ladderId:'lab-floor',ladderX:800,legacyLadderX:850},
+    {roomId:'sensor-array',ladderId:'sensor-floor',ladderX:800,legacyLadderX:850},
+    {roomId:'workshop',ladderId:'workshop-floor',ladderX:520,legacyLadderX:250}
+  ]);
   for (const historical of Object.values(HUB_TRAVERSAL_PROFILES_V60)) {
     const previous=resolveHubServiceProfileV138(historical),before=structuredClone(previous);
     const current=resolveHubServiceProfileV139(historical);
-    assert.deepEqual(current.platforms,previous.platforms);assert.deepEqual(current.vents,previous.vents);
+    // The explicit V178/V182 low-doorway continuations are the only added
+    // horizontal deltas; every height, thickness, identity and hatch stays exact.
+    assert.deepEqual(current.platforms,previous.platforms.map(platform=>{
+      const bay=HUB_SERVICE_DOOR_BAYS_V182.find(entry=>entry.platformId===platform.id);
+      return platform.id==='workshop-low'?{...platform,x:480,w:280}:bay?{...platform,...bay.surface}:platform;
+    }));
+    assert.deepEqual(current.vents,previous.vents);
     assert.deepEqual(current.ladders,previous.ladders.map(ladder=>{
-      const approach=HUB_SERVICE_APPROACHES_V139.find(entry=>entry.ladderId===ladder.id);
+      const approach=[...HUB_SERVICE_APPROACHES_V139,...HUB_SERVICE_DOOR_BAYS_V182].find(entry=>entry.ladderId===ladder.id);
       return approach?{...ladder,x:approach.ladderX}:ladder;
     }));
     assert.deepEqual(previous,before);
@@ -184,11 +195,23 @@ test('V139 moves only the two named workbench access ladders, preserves their su
     const room=HUB_DECKS[deck].rooms.find(room=>room.id===approach.roomId);
     const subject=nativeFixture(deck,room.id,room.xStart+approach.legacyLadderX-22,472,{climbing:true});
     for(let index=0;index<8;index++)await Promise.resolve();
+    near(subject.hub.player.x,room.xStart+approach.legacyLadderX-22);
     assert.equal(subject.hub.player.climbing,false,'Native start must not retain an unsupported ladder state');
     subject.advance(1);
     assert.equal(subject.hub.player.health,100);assert.equal(subject.hub.player.shockHits,0);
     assert.equal(subject.hub.player.grounded,true);
-    subject.key('keydown','KeyA');subject.advance(.22);subject.key('keyup','KeyA');subject.advance(.12);
+    if(approach.roomId==='workshop'){
+      // The replaced ladder is270px east of its legacy position. Recover
+      // through real floor walking, rather than reusing the old50px A step
+      // or snapping the restored actor to the replacement support.
+      const from=subject.hub.player.x,target=room.xStart+520-22;
+      subject.key('keydown','KeyD');
+      for(let frame=0;frame<240&&Math.abs(subject.hub.player.x-target)>7;frame++)subject.hub.update(1/60);
+      subject.key('keyup','KeyD');subject.advance(.12);
+      assert.ok(subject.hub.player.x>from+220&&Math.abs(subject.hub.player.x-target)<30,'The old workshop pose must physically reach the actual new ladder');
+    }else{
+      subject.key('keydown','KeyA');subject.advance(.22);subject.key('keyup','KeyA');subject.advance(.12);
+    }
     const ladder=subject.hub.nearestTraversalLadder();assert.equal(ladder?.id,approach.ladderId);
     subject.key('keydown','KeyW');subject.advance(1.4);subject.key('keyup','KeyW');
     near(subject.hub.player.y+subject.hub.player.h,ladder.top);

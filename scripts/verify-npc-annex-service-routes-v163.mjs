@@ -14,7 +14,7 @@ import { resolveNpcRoutineV62, NPC_IDENTITIES_V62 } from '../src/npc-dialogue-v6
 import { withHubNpcLifeV136, spreadNpcStationSpawnsV136 } from '../src/npc-life-v136.js';
 import { withHubNpcCirculationV158 } from '../src/npc-circulation-v158.js';
 import { withHubNpcAnnexCirculationV159 } from '../src/npc-annex-circulation-v159.js';
-import { withHubNpcServiceRoutesV161, normalizeNpcServiceRoutesV161 } from '../src/npc-service-routes-v161.js';
+import { withHubNpcServiceRoutesV161, normalizeNpcServiceRoutesV161, createServiceRouteV161 } from '../src/npc-service-routes-v161.js';
 import { annexNpcDutiesV141, createAnnexNpcsV141, getAnnexNpcPlacementV141 } from '../src/hub-annex-npc-life-v141.js';
 import { HUB_ANNEX_BY_ID_V137 } from '../src/hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from '../src/hub-annex-runtime-geometry-v139.js';
@@ -497,12 +497,90 @@ Path(sys.argv[3]).write_text(json.dumps(eval(compile(expression, '<actual-servic
     return JSON.parse(readFileSync(output, 'utf8'));
   } finally { rmSync(directory, { recursive: true, force: true }); }
 }
+function serviceQaLiteralV180(name) {
+  const path = process.env.ATF_QA_ANNEX_SERVICE_SOURCE || new URL('qa-npc-annex-service-routes-v163.py', import.meta.url).pathname;
+  const python = `import ast,json,sys
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+values=[node.value.value for node in tree.body if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id==sys.argv[2] for t in node.targets) and isinstance(node.value,ast.Constant)]
+assert len(values)==1
+print(json.dumps(values[0]))`;
+  return JSON.parse(execFileSync('python3', ['-c', python, path, name], { encoding: 'utf8', timeout: 30000 }));
+}
+
+test('the focused QA reader reuses the exact production route projection across native phases without reading the global snapshot', () => {
+  const createReader = runInContext('(' + serviceQaLiteralV180('NATIVE_ASHA_ENTRY_READER_V180') + ')', createContext({}));
+  let checked = 0;
+  for (const r of routes) {
+    const c = r.definition, out = simulate(r, initialActor(r));
+    const states = [...new Map(out.frames.map(s => [s.stage, s])).values()];
+    assert.ok(states.some(s => s.stage === 'service'));
+    for (const state of states) {
+      const h = runtime(watchHour(r), { deck: c.deck, roomId: c.parentRoomId,
+        npcAnnexRoutesV163: { schema: 163, routes: { [c.id]: { schema: 163, actor: state } } } });
+      const expected = structuredClone(snapshot(h, c.id)), reader = createReader(routes, c.id);
+      assert.ok(expected.actor, c.id + '/' + state.stage);
+      const saved = JSON.stringify({ player: h.player, state: h.state, clock: h.npcRoutineContextV62.clock, persisted: h.persisted });
+      const prototypes = []; for (let p = Object.getPrototypeOf(h); p; p = Object.getPrototypeOf(p)) prototypes.push(p);
+      const bodies = h.getNpcAnnexServiceActorsV163();
+      h.getSnapshot = () => { throw new Error('global snapshot must not run inside the focused observation'); };
+      for (const name of ['update', 'draw', 'persist', 'createNpcs', 'initializeNpcRoutinesV62', 'ensureAnnexNpcCohortV141'])
+        h[name] = () => { throw new Error(name + ' must not run inside the focused observation'); };
+      const actual = reader(h); assert.deepEqual(actual, expected, c.id + '/' + state.stage);
+      assert.equal(JSON.stringify({ player: h.player, state: h.state, clock: h.npcRoutineContextV62.clock, persisted: h.persisted }), saved);
+      assert.deepEqual(h.getNpcAnnexServiceActorsV163(), bodies);
+      const after = []; for (let p = Object.getPrototypeOf(h); p; p = Object.getPrototypeOf(p)) after.push(p);
+      assert.deepEqual(after, prototypes);
+      actual.actor.x += 100;
+      if (actual.actor.bulkheadProgress) actual.actor.bulkheadProgress['command:hub-west-bulkhead'] = 0;
+      assert.deepEqual(reader(h), expected, 'The returned projection must not expose mutable native state.');
+      checked++;
+    }
+  }
+  assert.ok(checked >= 25, 'All five native routes contribute their real supported transit and service phases.');
+  assert.throws(() => createReader(routes, 'foreign-route'), /exactly one/);
+  assert.throws(() => createReader([...routes, routes[0]], routes[0].definition.id), /exactly one/);
+});
+
+test('focused service observation preserves real handoffs, lease masking, sandbox exclusion and original private owner symbols', () => {
+  const createReader = runInContext('(' + serviceQaLiteralV180('NATIVE_ASHA_ENTRY_READER_V180') + ')', createContext({}));
+  const asha = routes.find(r => r.definition.id === 'asha-refuge'), jun = routes.find(r => r.definition.id === 'jun-water');
+  for (const reason of ['medical', 'mission', 'unavailable']) {
+    const h = runtime(), body = h.getNpcAnnexServiceActorV163(asha.definition.id);
+    if (reason === 'unavailable') body.downed = true;
+    else context(h, 5.5, reason === 'medical' ? { crew: [{ id: asha.definition.crewId, health: 20, injuries: [] }] }
+      : { operation: { crewIds: [asha.definition.crewId] } }, false);
+    h.update(1 / 60);
+    const expected = snapshot(h, asha.definition.id), read = createReader(routes, asha.definition.id);
+    assert.equal(expected.actor, null); assert.equal(expected.nativeHandoff.observedTravel, false);
+    assert.deepEqual(read(h), expected);
+    read(h).nativeHandoff.reason = 'forged'; assert.deepEqual(read(h), expected);
+  }
+  for (const options of [{ editorProject: {} }, { forgeJourneyV141: true }]) {
+    const h = runtime(10.5, {}, options);
+    assert.deepEqual(createReader(routes, asha.definition.id)(h), snapshot(h, asha.definition.id));
+    assert.equal(createReader(routes, asha.definition.id)(h).actor, null);
+  }
+  const h = runtime(10.5), physical = h.getNpcServicePhysicalStateV165(jun.definition.id);
+  assert.ok(physical);
+  h.npcInterdeckStateV165 = { routes: { 'jun-sanitary': { actor: { crewId: jun.definition.crewId } } } };
+  h.hubNpcLeaseOwnerV163 = withHubNpcInterdeckRoutesV165(class {}).prototype.hubNpcLeaseOwnerV163;
+  const expected = snapshot(h, jun.definition.id), reader = createReader(routes, jun.definition.id);
+  assert.equal(expected.actor, null); assert.equal(expected.leasedToV163, 'jun-sanitary'); assert.ok(expected.leaseOriginBookmarkV163);
+  assert.deepEqual(reader(h), expected); reader(h).leaseOriginBookmarkV163.x += 100;
+  assert.deepEqual(reader(h), expected);
+  assert.deepEqual(h.getNpcServicePhysicalStateV165(jun.definition.id), physical, 'The old physical-state accessor keeps its distinct semantics.');
+  const foreign = createServiceRouteV161(asha.definition, { schema: 163, stateField: 'npcAnnexRoutesV163' });
+  const owned = runtime(17.5), wrong = createReader([foreign], asha.definition.id)(owned);
+  assert.equal(wrong.actor, null, 'Recreating the route factory does not inherit the production private Symbols.');
+  assert.notDeepEqual(wrong, snapshot(owned, asha.definition.id));
+});
 function serviceObserverHostV163(sample) {
-  let now = 0, serial = 0; const rafs = new Map(), timers = new Map();
+  let now = 0, serial = 0, globalSnapshotCalls = 0; const rafs = new Map(), timers = new Map();
   const hub = { running: true, state: { deck: 1, roomId: 'crew-quarters' },
     player: { x: 1187, y: 532, w: 44, h: 92, vx: 0, alive: true }, animationTime: 0,
     npcRoutineResolutionsV62: new Map(), npcRoutineContextV62: { clock: { day: 1, hour: 20.5 } },
-    getSnapshot: () => ({ npcAnnexRoutesV163: { routes: { 'asha-refuge': structuredClone(sample) } } }),
+    getSnapshot: () => { globalSnapshotCalls++; return { npcAnnexRoutesV163: { routes: { 'asha-refuge': structuredClone(sample) } } }; },
     currentAnnexV71: () => null };
   const sandbox = createContext({ __ATF_HUB__: hub, structuredClone, performance: { now: () => now },
     requestAnimationFrame: fn => { rafs.set(++serial, fn); return serial; }, cancelAnimationFrame: id => rafs.delete(id),
@@ -510,7 +588,15 @@ function serviceObserverHostV163(sample) {
     clearInterval: id => timers.delete(id),
     document: { querySelector: () => ({ toDataURL: () => 'data:image/png;base64,' }) } });
   sandbox.window = sandbox;
-  return { hub, sandbox, rafs, timers, run: (source, config) => runInContext('(' + source + ')', sandbox)(config),
+  // The native import is a declared module double for these adversarial
+  // observation samples. The production factory is tested on real owners
+  // separately below; no guard or sampled value is replaced here.
+  sandbox.__ASHA_QA_ROUTE_COMPONENTS_V180__ = [{ definition: { id: 'asha-refuge' }, withHub: Base => class extends Base {
+    getSnapshot() { return { ...super.getSnapshot(), npcAnnexRoutesV163: { routes: { 'asha-refuge': structuredClone(sample) } } }; }
+  } }];
+  return { hub, sandbox, rafs, timers, globalSnapshotCalls: () => globalSnapshotCalls,
+    run: (source, config) => runInContext('(' + source.replace("await import('/src/npc-annex-service-routes-v163.js')",
+      '({HUB_NPC_ANNEX_SERVICE_ROUTES_V163:globalThis.__ASHA_QA_ROUTE_COMPONENTS_V180__})') + ')', sandbox)(config),
     async frame(ms = 1000 / 60, nativeSeconds = ms / 1000) {
       now += ms; hub.animationTime += nativeSeconds;
       for (const timer of [...timers.values()]) if (now >= timer.next) { timer.next = now + timer.period; timer.fn(); }
@@ -561,6 +647,96 @@ function ashaDependencyHostV163() {
   };
   return h;
 }
+
+test('annex-service QA binds the complete native owner once and rejects a different global projection before observation', async () => {
+  const source = serviceQaCallbackV163('arm_asha_return_dependency');
+  const h = ashaDependencyHostV163(), binding = await h.run(source, ashaQaConfigV163);
+  assert.equal(h.globalSnapshotCalls(), 1);
+  for (let frame = 0; frame < 120; frame++) {
+    h.dependency.actor.x -= 1;
+    await h.frame();
+  }
+  h.returnJun(); await h.frame();
+  assert.equal((await h.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__).status, 'returned');
+  assert.equal(h.globalSnapshotCalls(), 1, 'Each RAF reads the complete service entry without traversing unrelated snapshot wrappers.');
+  assert.equal(binding.completeEntryMatchesSnapshot, true);
+  const wrong = ashaDependencyHostV163();
+  wrong.hub.getSnapshot = () => ({ npcAnnexRoutesV163: { routes: { 'asha-refuge': { ...wrong.sample, actor: null } } } });
+  await assert.rejects(wrong.run(source, ashaQaConfigV163), /differs from the complete hub snapshot/);
+  assert.equal(wrong.rafs.size, 0); assert.equal(wrong.timers.size, 0);
+  assert.equal(wrong.sandbox.__ATF_ASHA_JUN_DEPENDENCY_V163__, undefined);
+});
+
+test('annex-service QA writes actual failed dependency evidence and bounded stdout before asserting while success stays small', () => {
+  const path = process.env.ATF_QA_ANNEX_SERVICE_SOURCE || new URL('qa-npc-annex-service-routes-v163.py', import.meta.url).pathname;
+  const python = `import ast,contextlib,io,json,math,sys,tempfile
+from pathlib import Path
+tree=ast.parse(Path(sys.argv[1]).read_text())
+functions=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['prepare_asha_return_dependency','check']]
+assert len(functions)==2
+module=ast.Module(body=functions,type_ignores=[])
+for case in ['normal','large','nan','inf','-inf']:
+ large=case=='large'
+ nonfinite=case in ['nan','inf','-inf']
+ with tempfile.TemporaryDirectory() as directory:
+  acknowledgement={'status':'failed','reason':'jun-no-physical-progress','simSeconds':81,'wallMs':63000,'lastProgressAgeMs':45001,
+    'observedOrigin':{'crewId':'crew-11-jun-park','deck':3,'roomId':'life-support','x':3158,'y':532,'source':'legacy-physical-owner'}}
+  detail={'status':'failed','reason':acknowledgement['reason'],'samples':[{'nativeTime':81}]*900,
+    'latest':{'nativeTime':81,'running':True,'deck':1,'annex':'personal-refuge','player':{'x':125,'y':532},
+      'owner':{'crewId':'crew-12-asha-mbaye','x':181,'y':532,'stage':'walking-home'},
+      'dependency':{'actor':{'crewId':'crew-11-jun-park','deck':1,'roomId':'crew-quarters','x':1234,'y':532,'stage':'walking-home'},'returned':None}}}
+  if large:
+   acknowledgement['observedOrigin']['source']='x'*10000
+   detail['latest']['player']['extra']='x'*10000
+  if nonfinite:
+   acknowledgement['reason']='native-simulation-clock-missing'
+   acknowledgement['simSeconds']=float(case)
+   detail['reason']=acknowledgement['reason']
+   detail['latest']['nativeTime']=float(case)
+  calls=[]
+  class Page:
+   def evaluate(self,expression):
+    calls.append(expression)
+    return acknowledgement if len(calls)==1 else detail
+  report={'checks':[]}; output=Path(directory)
+  scope={'json':json,'math':math,'report':report,'output':output,'phase':lambda _:None,
+    'pass_asha_dependency_door':lambda p,c,enter:None if enter else (_ for _ in ()).throw(AssertionError('failure must not leave refuge')),
+    'arm_asha_return_dependency':lambda p,c:None,
+    'ensure_return_occupant':lambda *args:(_ for _ in ()).throw(AssertionError('failure must not certify occupation'))}
+  exec(compile(module,'<actual-service-qa-functions>','exec'),scope)
+  stream=io.StringIO()
+  with contextlib.redirect_stdout(stream):
+   try: scope['prepare_asha_return_dependency'](Page(),{'id':'asha-refuge'})
+   except AssertionError as error: assert str(error)=='asha-refuge: Jun completes its exact native physical return before Asha occupation'
+   else: raise AssertionError('The failed physical prerequisite must fail the original assertion')
+  assert report['ashaDependencyAcknowledgements']==[acknowledgement]
+  assert report['ashaDependencyWaits']==[detail]
+  assert json.dumps(json.loads((output/'asha-refuge-jun-physical-prerequisite-failed.json').read_text()),sort_keys=True)==json.dumps(detail,sort_keys=True)
+  line=stream.getvalue().strip(); assert line.startswith('ASHA_DEPENDENCY_ACK ')
+  encoded=line.removeprefix('ASHA_DEPENDENCY_ACK '); assert len(encoded)<=4000
+  diagnostic=json.loads(encoded,parse_constant=lambda token:(_ for _ in ()).throw(AssertionError(token)))
+  assert diagnostic['reason']==acknowledgement['reason'] and diagnostic['lastProgressAgeMs']==45001
+  assert 'samples' not in diagnostic
+  if not large:
+   assert diagnostic['latest']['jun']['x']==1234 and diagnostic['latest']['asha']['x']==181
+  if nonfinite: assert diagnostic['latest']['nativeTime'] is None and diagnostic['simSeconds'] is None
+  print(encoded)
+  assert report['checks']==[] and len(calls)==2
+ with tempfile.TemporaryDirectory() as directory:
+  acknowledgement={'status':'returned','reason':'jun-complete-native-return'}
+  calls=[]; actions=[]
+  scope.update(report={'checks':[]},output=Path(directory),
+    pass_asha_dependency_door=lambda p,c,enter:actions.append(enter),ensure_return_occupant=lambda *args:actions.append('occupied'))
+  stream=io.StringIO()
+  with contextlib.redirect_stdout(stream): scope['prepare_asha_return_dependency'](Page(),{'id':'asha-refuge'})
+  assert len(calls)==1 and actions==[True,False,'occupied']
+  assert 'ASHA_DEPENDENCY_ACK' not in stream.getvalue() and not list(Path(directory).iterdir())
+print('actual Python failure and success paths verified')`;
+  const stdout = execFileSync('python3', ['-c', python, path], { encoding: 'utf8', timeout: 30000 });
+  assert.match(stdout, /paths verified/);
+  const diagnostics = stdout.split('\n').filter(line => line.startsWith('{')).map(line => JSON.parse(line));
+  assert.equal(diagnostics.length, 5, 'The actual stdout is standard JSON even when the native clock is NaN or infinite.');
+});
 
 function ashaOccupiedSourceDoorV205() {
   const route = routes.find(r => r.definition.id === 'asha-refuge');

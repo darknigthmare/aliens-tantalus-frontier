@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { XENO_TRIALS_RIGS_V154 } from '../src/xeno-trials-rig-v154.js';
+import { createXenoTrialsProgressV96, beginXenoTrialsV96 } from '../src/xeno-trials-progress-v96.js';
 
 function target(props = {}) {
   const handlers = new Map();
@@ -20,14 +21,20 @@ async function nativeExitHost({ exit = true } = {}) {
     closest: () => null, focus() { document.activeElement = this; document.emit('focusin', { target: this }); } });
   const queue = new Map(), results = [];
   let serial = 0, time = 0, ui, returned = 0;
+  // Declared roster unlock and1HP runtime fixture; the ticket, settlement and
+  // button transactions use the production progress/UI functions.
+  let progress = createXenoTrialsProgressV96();
+  progress.unlocked.push('import-game-dd-wy-commando');
+  const started = beginXenoTrialsV96(progress, { playerId: 'import-game-dd-wy-commando', opponentId: 'prowler',
+    difficulty: 'hard', roundSeconds: 30 });
+  assert.equal(started.applied, true); progress = started.state;
   const runtime = createXenoTrialsRuntimeV96({ canvas, window, document,
-    config: { playerId: 'import-game-dd-wy-commando', opponentId: 'prowler', matchId: 'xt96-1', seed: 96001,
-      difficulty: 'hard', roundsToWin: 2, roundSeconds: 30, rulesV119: { initialHp: 1 } },
+    config: { ...started.config, rulesV119: { initialHp: 1 } },
     loadImage: async path => {
       const rig = XENO_TRIALS_RIGS_V154.find(r => r.path === path);
       return { naturalWidth: rig?.sourceWidth || 1000, naturalHeight: rig?.sourceHeight || 560, complete: true };
     }, requestAnimationFrame: fn => { queue.set(++serial, fn); return serial; }, cancelAnimationFrame: id => queue.delete(id),
-    onState: s => ui?.updateMatch(s), onResult: r => results.push(structuredClone(r)) });
+    onState: s => ui?.updateMatch(s), onResult: r => { results.push(structuredClone(r)); assert.equal(ui.finish(r), true); } });
   const elements = new Map([['canvas', canvas]]), attributes = new Map();
   const element = key => {
     if (!elements.has(key)) elements.set(key, target({ tagName: 'BUTTON', hidden: false, disabled: false, dataset: { xt: key },
@@ -42,7 +49,8 @@ async function nativeExitHost({ exit = true } = {}) {
     querySelector: selector => element(selector.match(/data-xt="([^"]+)"/)?.[1] || 'super-control') });
   document.documentElement = { classList: { remove() {} } };
   class MinimalUi extends XenoTrialsUiV96 { updateOpponents() {} restorePendingSelection() {} render() {} }
-  ui = new MinimalUi({ root, getProgress: () => ({}), canCommit: () => true, onCommit() {}, onReturn() { returned++; } });
+  ui = new MinimalUi({ root, getProgress: () => progress, canCommit: () => true,
+    onCommit(next) { progress = next; }, onReturn() { returned++; } });
   ui.active = true; ui.runtime = runtime;
   assert.equal(await runtime.start(), true); canvas.focus();
   const frames = (count = 1) => { for (let n = 0; n < count; n++) {
@@ -55,7 +63,8 @@ async function nativeExitHost({ exit = true } = {}) {
   }
   if (exit) assert.equal(runtime.getState().exitV157?.phase, 'playing');
   else assert.equal(runtime.getState().phase, 'active');
-  return { runtime, document, window, canvas, element, results, ui, frames, returned: () => returned };
+  return { runtime, document, window, canvas, element, results, ui, frames, returned: () => returned,
+    progress: () => structuredClone(progress) };
 }
 
 test('keyboard focus preserves the native return action so Enter can close an actual exit without a modal stealing focus', async () => {
@@ -107,4 +116,44 @@ test('focusing return releases held combat movement and requires a real key rele
   h.window.emit('keyup', { target: h.canvas, code: 'ArrowRight' });
   h.window.emit('keydown', { target: h.canvas, code: 'ArrowRight', repeat: false }); h.frames();
   assert.equal(h.runtime.getState().fighters[0].previousInput.right, true); h.ui.close();
+});
+
+test('a paused unfinished ticket keeps its real abandonment action and both modal focus boundaries', async () => {
+  const h = await nativeExitHost({ exit: false }), initial = h.progress();
+  h.runtime.pause();
+  const overlay = h.element('pause-overlay'), resume = h.element('resume-overlay'), abandon = h.element('abandon-overlay');
+  assert.equal(abandon.hidden, false); assert.equal(abandon.disabled, false);
+  assert.equal(h.document.activeElement, resume);
+  let prevented = 0;
+  overlay.emit('keydown', { code: 'Tab', shiftKey: true, preventDefault() { prevented++; } });
+  assert.equal(h.document.activeElement, abandon);
+  overlay.emit('keydown', { code: 'Tab', shiftKey: false, preventDefault() { prevented++; } });
+  assert.equal(h.document.activeElement, resume); assert.equal(prevented, 2);
+  abandon.onclick();
+  assert.equal(h.ui.runtime, null); assert.equal(h.progress().pending, null);
+  assert.equal(h.progress().credits, initial.credits); assert.equal(h.progress().xp, initial.xp);
+  assert.equal(h.progress().ledger.at(-1).winner, 'abandoned'); assert.equal(h.results.length, 0);
+  h.ui.close();
+});
+
+test('a paused completed outro offers no impossible abandonment and keeps Tab on the remaining resume action', async () => {
+  const h = await nativeExitHost(), settled = h.progress(), result = structuredClone(h.results);
+  assert.equal(settled.pending, null); assert.equal(settled.ledger.length, 1);
+  assert.notEqual(settled.ledger[0].winner, 'abandoned');
+  h.runtime.pause();
+  const overlay = h.element('pause-overlay'), resume = h.element('resume-overlay'), abandon = h.element('abandon-overlay');
+  assert.equal(overlay.hidden, false); assert.equal(abandon.hidden, true); assert.equal(abandon.disabled, true);
+  const frozen = h.runtime.getState();
+  for (const shiftKey of [false, true]) {
+    let prevented = false;
+    overlay.emit('keydown', { code: 'Tab', shiftKey, preventDefault() { prevented = true; } });
+    assert.equal(prevented, true); assert.equal(h.document.activeElement, resume);
+  }
+  // A previously queued handler cannot overwrite the completed result either.
+  abandon.onclick();
+  assert.equal(h.ui.runtime, h.runtime); assert.deepEqual(h.progress(), settled);
+  h.frames(5); assert.deepEqual(h.runtime.getState(), frozen);
+  resume.onclick(); h.frames(2);
+  assert.equal(h.runtime.getState().paused, false); assert.deepEqual(h.progress(), settled);
+  assert.deepEqual(h.results, result); h.ui.close();
 });

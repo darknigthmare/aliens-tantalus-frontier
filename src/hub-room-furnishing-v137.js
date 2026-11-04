@@ -34,14 +34,14 @@ export const HUB_ROOM_FURNISHING_V137 = freeze(extendHubRoomFurnishingsV142({
     furnishing('seat-side',1027,40,'watch-officer-seat',{atlas:139}),wall('emergency-cabinet',1110,535,44,'bridge-fire-safety')
   ],['chair','chart-cart','case']),
   briefing: group('meeting-material-and-seating',[
-    equipment('bench',660,88,36,'meeting-waiting-bench'),wall('emergency-cabinet',900,535,40,'briefing-fire-safety')
+    equipment('bench',930,88,36,'meeting-waiting-bench'),wall('emergency-cabinet',900,535,40,'briefing-fire-safety')
   ],['chair']),
   'combat-information': group('signal-service-and-watch-safety',[
     equipment('radio-rack',850,58,80,'signal-spare-receiver'),wall('emergency-cabinet',1120,535,40,'signal-fire-safety'),
     furnishing('seat-side',650,40,'tactical-watch-seat',{atlas:139})
   ],['handset','cable-spool']),
   'cryo-bay': group('stasis-service-and-emergency-oxygen',[
-    equipment('cylinder',550,22,76,'stasis-oxygen-reserve'),wall('emergency-cabinet',650,535,40,'stasis-emergency-kit'),
+    equipment('cylinder',610,22,76,'stasis-oxygen-reserve'),wall('emergency-cabinet',650,535,40,'stasis-emergency-kit'),
     equipment('work-counter',715,56,46,'stasis-clean-linen-cart')
   ],['cable-run']), // The existing stasis manifold and reachable kit replace the loose line fragment.
   'crew-quarters': group('bolted-berth-and-personal-storage',[
@@ -67,7 +67,7 @@ export const HUB_ROOM_FURNISHING_V137 = freeze(extendHubRoomFurnishingsV142({
     equipment('tool-chest',600,70,54,'armorer-service-chest'),wall('emergency-cabinet',950,535,40,'armory-fire-safety')
   ]),
   workshop: group('bench-stock-and-safe-repair',[
-    equipment('tool-chest',575,68,62,'shop-service-chest'),wall('emergency-cabinet',710,535,40,'shop-fire-safety')
+    equipment('tool-chest',620,68,62,'shop-service-chest'),wall('emergency-cabinet',770,535,40,'shop-fire-safety')
   ],['cylinder','cable-spool','parts-bin']),
   'vehicle-bay': group('inspection-supplies-outside-vehicle-bay',[
     wall('emergency-cabinet',820,372,40,'vehicle-fire-safety'),wall('service-conduits',600,250,146,'vehicle-service-feed')

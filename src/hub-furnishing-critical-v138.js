@@ -64,13 +64,13 @@ export const HUB_FURNISHING_CRITICAL_OVERRIDES_V138 = freeze({
     task: 'reachable-decontamination-and-sealed-service',
     replaceKinds: ['medical-cabinet', 'bitmap'],
     items: [
-      { kind: 'medical-cabinet', x: 700, width: 58, height: 106,
+      { kind: 'medical-cabinet', x: 200, width: 58, height: 106,
         role: 'sealed-clean-storage', support: 'rear-floor' },
       { cell: 'emergency-cabinet', x: 1050, width: 40, y: 535, atlas: 137,
         role: 'containment-emergency-kit', support: 'rear-wall' },
       { kind: 'valves', x: 995, width: 50, height: 72, y: 522,
         role: 'decontamination-flow-controls', support: 'rear-wall' },
-      { cell: 'wall-handwash', x: 640, width: 40, atlas: 139, workSurfaceHeightV139: 52,
+      { cell: 'wall-handwash', x: 590, width: 40, atlas: 139, workSurfaceHeightV139: 52,
         role: 'containment-handwash', support: 'rear-wall' },
       { kind: 'work-counter', x: 480, width: 90, height: 46,
         role: 'containment-clean-preparation', support: 'rear-floor' }

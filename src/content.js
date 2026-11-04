@@ -39,3 +39,6 @@ export const RELEASE = Object.freeze({
   subtitle: 'Frontière — archives cohérentes et publication vérifiable',
   sourceVersion: APP_RELEASE_V143.sourceVersion
 });
+
+// Cross-game identity/reference lookup. Never mutates runtime catalogues or save IDs.
+export { ALIEN_BASE_SNAPSHOT_INFO_V1, ALIEN_BASE_ENTITIES_V1, ALIEN_BASE_WEAPONS_V1, ALIEN_BASE_MASTER_ENTITIES_V1, ALIEN_BASE_MASTER_LINKS_V1, resolveAlienBaseMasterEntityV1, resolveAlienBaseIdentityProposalV1, resolveAlienBaseDossierV1, resolveAlienBaseWeaponReferenceV1, resolveAlienBaseGameMappingV1, auditAlienBaseBridgeV1 } from './alien-base-bridge-v1.js';

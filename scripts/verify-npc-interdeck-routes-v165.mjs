@@ -1146,6 +1146,91 @@ function nativeQaValidatorV165(name) {
   return new Function('return ('+source+')')();
 }
 
+test('Inez occupied-arrival preparation requires the same physical prior passenger and a real covered handoff',()=>{
+  const guard=nativeQaValidatorV165('NATIVE_INEZ_DEPARTURE_V165');
+  const validate=(c,b,d)=>guard(c,b,d,normalizeNpcLiftTransitV165,npcLiftPoseV165);
+  const c={id:'inez-civil',nativeDeck:2,deck:3,shaftId:'hub-midship-lift',cabinX:2350,floorY:624};
+  const crewId='crew-08-maksim-orlov',origin={crewId,deck:3,roomId:'dropship-hangar',x:489,y:532,source:'legacy-physical-owner'};
+  const first={crewId,deck:3,roomId:'dropship-hangar',x:489,y:532,stage:'walking-lift',direction:'outbound',
+    time:1,distance:0,liftJourneys:0,lift:null};
+  const body=a=>({crewId:a.crewId,x:a.x,y:a.y,w:44,h:92,roomId:a.roomId});
+  const before={route:{origin,actor:first},actualActor:body(first)};
+  let trip=createNpcLiftTransitV165({crewId,x:2254,y:532,w:44,h:92,roomId:'reactor'},
+    {fromDeck:3,toDeck:0,shaftId:c.shaftId,exitDirection:1});
+  for(let i=0;i<1000&&trip.phase!=='opening';i++)trip=advanceNpcLiftTransitV165(trip,1/60).trip;
+  assert.equal(trip.phase,'opening');
+  const last={...first,...npcLiftPoseV165(trip),roomId:'briefing',stage:'lift',time:90,distance:1861,liftJourneys:1,lift:trip};
+  const departure={sameBody:true,physicalBodyCount:1,observation:{route:{origin:structuredClone(origin),actor:last},
+    actualActor:body(last),deck:3,annex:null,player:{x:2510,y:532,w:44,h:92,vx:0,grounded:true,climbing:false}}};
+  assert.equal(validate(c,before,departure).ok,true);
+  const reject=(label,mutate)=>{const copy=structuredClone(departure);mutate(copy);assert.equal(validate(c,before,copy).ok,false,label);};
+  reject('wrong body identity',d=>d.sameBody=false);
+  reject('missing physical body',d=>d.physicalBodyCount=0);
+  reject('duplicate physical body',d=>d.physicalBodyCount=2);
+  reject('wrong physical crew',d=>d.observation.actualActor.crewId='crew-09-inez-harlow');
+  reject('pose counter without physical travel',d=>d.observation.actualActor.x=489);
+  reject('wrong physical chart',d=>d.observation.actualActor.roomId='reactor');
+  reject('player still in the cabin',d=>d.observation.player.x=2350);
+  reject('player still in the courtesy bay',d=>d.observation.player.x=2418);
+  reject('player airborne',d=>d.observation.player.grounded=false);
+  reject('player is on another deck',d=>d.observation.deck=2);
+  reject('wrong destination deck',d=>d.observation.route.actor.deck=3);
+  reject('wrong direction',d=>d.observation.route.actor.direction='return');
+  reject('counter only without cabin',d=>d.observation.route.actor.lift=null);
+  reject('source travel is not a completed handoff',d=>d.observation.route.actor.lift.phase='travel');
+  reject('another crew owns the trip',d=>d.observation.route.actor.lift.crewId='crew-11-jun-park');
+  reject('wrong shaft',d=>d.observation.route.actor.lift.shaftId='hub-aft-lift');
+  reject('wrong source deck',d=>d.observation.route.actor.lift.fromDeck=2);
+  reject('wrong destination',d=>d.observation.route.actor.lift.toDeck=1);
+  reject('unmeasured carriage',d=>d.observation.route.actor.lift.carriageSeconds=0);
+  reject('incomplete timed carriage',d=>d.observation.route.actor.lift.carriageSeconds=.001);
+  reject('missing elapsed time',d=>delete d.observation.route.actor.lift.elapsed);
+  reject('nonfinite elapsed time',d=>d.observation.route.actor.lift.elapsed=NaN);
+  reject('wrong opening position',d=>{d.observation.route.actor.x++;d.observation.actualActor.x++;});
+  reject('nonfinite player velocity',d=>d.observation.player.vx=NaN);
+  reject('time only without real distance',d=>d.observation.route.actor.distance=0);
+  reject('no actual journey',d=>d.observation.route.actor.liftJourneys=0);
+  reject('changed origin',d=>d.observation.route.origin.x=490);
+  assert.equal(validate(c,{...before,actualActor:{...before.actualActor,x:500}},departure).ok,false);
+});
+
+test('Inez prior departure and cabin observation consume one shared native journey deadline',()=>{
+  const python=String.raw`import ast,json,sys
+from pathlib import Path
+from types import SimpleNamespace
+tree=ast.parse(Path(sys.argv[1]).read_text())
+module=ast.Module(body=[n for n in tree.body if isinstance(n,ast.FunctionDef)
+    and n.name in ['prepare_inez_occupied_arrival','reload_travel']],type_ignores=[])
+class StopAtCabin(Exception): pass
+def run(deadline):
+    clock=[100.0]; waits=[]
+    def follow(page,c,stop,timeout=None):
+        waits.append(timeout)
+        if len(waits)==2: raise StopAtCabin()
+        clock[0]+=40
+        return {}
+    def evaluate(expression,*args):
+        return {'ok':True} if expression.startswith('async ') else {'sameBody':True,'physicalBodyCount':1}
+    namespace={'time':SimpleNamespace(monotonic=lambda:clock[0]),'configs':[{'id':'maksim-cockpit'}],
+        'observed':lambda *args:{},'artifact':lambda *args:None,'phase':lambda *args:None,
+        'check':lambda label,ok:None,'report':{},'NATIVE_INEZ_DEPARTURE_V165':'function(){}',
+        'follow_floor_actor':follow,'walk_to':lambda *args:clock.__setitem__(0,clock[0]+3),
+        'args':SimpleNamespace(occupied_lift_arrival=True)}
+    exec(compile(module,'<actual-native-interdeck-qa-budget>','exec'),namespace)
+    page=SimpleNamespace(evaluate=evaluate); error=None
+    try:
+        namespace['prepare_inez_occupied_arrival'](page,{'id':'inez-civil','cabinX':2350},deadline)
+        namespace['reload_travel'](page,{'id':'inez-civil'},[],deadline=deadline)
+    except StopAtCabin: pass
+    except AssertionError as failure: error=str(failure)
+    return {'waits':waits,'error':error}
+print(json.dumps([run(150),run(140)]))`;
+  const [shared,expired]=JSON.parse(execFileSync('python3',['-B','-c',python,
+    fileURLToPath(new URL('qa-npc-interdeck-native-v165.py',import.meta.url))],{encoding:'utf8'}));
+  assert.deepEqual(shared.waits,[50,7]);assert.equal(shared.error,null);
+  assert.deepEqual(expired.waits,[40]);assert.equal(expired.error,'Native journey wall budget exhausted');
+});
+
 test('occupied lift QA uses an attainable native world clearance and still refuses a real wall within120s',()=>{
   const plan=nativeQaValidatorV165('NATIVE_LIFT_CLEARANCE_V165');
   const c={cabinX:4914,worldWidth:HUB_WORLD.width,floorY:HUB_WORLD.floorY,nativeDeck:0,deck:2};

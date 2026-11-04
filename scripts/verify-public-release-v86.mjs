@@ -229,6 +229,8 @@ SCRIPT_FILES.add('verify-costume-art-installer-v175.mjs');
 SCRIPT_FILES.add('verify-weapon-special-feeds-v171.mjs');
 // Source-tree verifier for the three V169 armory storefront variants; exact path only.
 SCRIPT_FILES.add('verify-hub-armory-v169.mjs');
+// Exact V179 tooling stays source-only, independently of older script policy.
+const V179_SOURCE_ONLY_SCRIPTS = new Set(["scripts/sync-alien-base-v1.mjs", "scripts/export-alien-base-tantalus-v1.mjs", "scripts/alien-base-pr7-proposal-v1.mjs", "scripts/verify-alien-base-bridge-v1.mjs", "scripts/verify-alien-base-import-contract-v179.mjs", "scripts/verify-alien-base-pr7-proposal-v1.mjs", "scripts/verify-hub-door-bay-v178.mjs"]);
 const ROOT_IGNORES = new Set(['.git', 'dist', 'node_modules', '.vercel']);
 for (const file of [
   'audit-succession-v162.mjs', 'generate-audit-continuation-v162.py',
@@ -255,15 +257,26 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
-  // Optional AI tooling is source-only; these exact paths never ship in builds.
-  'CLAUDE.md',
-  '.ai-tools',
-  '.ai-tools/README.md',
-  '.ai-tools/sources.json',
-  '.ai-tools/setup.py',
-  '.ai-tools/.gitignore',
-  '.ai-tools/tests',
-  '.ai-tools/tests/test_setup.py',
+  // Exact PR integration and optional developer tooling stay source-only.
+  'scripts/audit-pr-integration-v182.mjs',
+  'scripts/qa-hub-door-bays-v182.py',
+  'docs/development/PR_INTEGRATION_20261104.md',
+  'docs/forge/xeno-trials/door-bay-continuation-v182.json',
+  'CLAUDE.md', '.ai-tools', '.ai-tools/README.md', '.ai-tools/sources.json',
+  '.ai-tools/setup.py', '.ai-tools/.gitignore', '.ai-tools/tests', '.ai-tools/tests/test_setup.py',
+  "docs/development/ALIEN_BASE_REFERENCE_REVIEW_20261102.md",
+  "docs/development/ALIEN_BASE_SOURCE_SNAPSHOTS_20261102.json",
+  "docs/development/Alien_Base_Current_Mapping_Gaps_20261102.csv",
+  "docs/development/Alien_Base_Import_Status.csv",
+  "docs/development/ALIEN_BASE_PR7_PROPOSAL_V1.md",
+  "docs/development/data/ALIEN_BASE_PR7_PROVENANCE_V1.json",
+  "docs/development/data/ALIEN_BASE_PR7_REGISTRY_V1.json",
+  "docs/development/ALIEN_BASE_SYNC.md",
+  "docs/forge/xeno-trials/tantalus-door-bay-v179.json",
+  "docs/forge/xeno-trials/V179-REFERENCE-AND-WORKSHOP-CONTINUATION.md",
+  ".github/workflows/alien-base-bridge.yml",
+  "docs/development/data",
+
   // Project gamedev guidance is source-only, never public distribution content.
   'AGENTS.md',
   'docs/development',
@@ -272,6 +285,9 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/development/CLOTURE_EXCEL_20261101.xlsx',
   'docs/development/EXCEL_CLOSURE_20261101.json',
   'docs/development/EXCEL_CLOSURE_20261101.md',
+  // Source-only narrative design bible; never shipped in a built distribution.
+  'docs/narrative',
+  'docs/narrative/CAMPAGNE_PRINCIPALE.md',
   // Narrow, source-only admission for the arsenal specification; not shipped.
   'docs/arsenal',
   'docs/arsenal/README.md',
@@ -508,6 +524,7 @@ const PRIVATE_TEXT = [
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
   const segments = path.split('/');

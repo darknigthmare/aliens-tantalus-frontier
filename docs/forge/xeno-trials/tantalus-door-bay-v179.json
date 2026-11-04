@@ -1,0 +1,219 @@
+{
+  "schema": 179,
+  "id": "tantalus-durandal-door-bay-v179",
+  "state": "NODE_VALIDATED_NATIVE_BROWSER_AND_VISUAL_REVIEW_PENDING",
+  "baseCommit": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+  "purpose": "Keep the full paired DURANDAL door visible by relocating its real low service landing, preserving native collision/render correspondence and accessible workshop equipment.",
+  "documentarySuccessors": [
+    {
+      "path": "docs/forge/xeno-trials/batch100-v177.json",
+      "previousSha256": "2fc2c3229920b3d425f50313270bc88afe1338213253451f6de544b0d3576d3a",
+      "sha256": "2b1d3bb47423e738b1cf8f4e4844a5d717cdb70c695878bdce18beb6ffa3b734",
+      "previousReceiptStatus": "V177/V178 historical receipt values are retained; this is an explicit V179 successor.",
+      "entryDeltas": [
+        {
+          "id": "T177-I10",
+          "previous": {
+            "id": "T177-I10",
+            "roomId": "workshop",
+            "kind": "tool-shadowboard",
+            "purpose": "workshop-fine-tool-return-board",
+            "bounds": {
+              "x": 312,
+              "y": 368,
+              "w": 40,
+              "h": 28
+            },
+            "mount": "rear-wall",
+            "note": "A wall-mounted tool shadowboard serving the west workshop service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+            "sector": "industrial"
+          },
+          "current": {
+            "id": "T177-I10",
+            "roomId": "workshop",
+            "kind": "tool-shadowboard",
+            "purpose": "workshop-fine-tool-return-board",
+            "bounds": {
+              "x": 580,
+              "y": 376,
+              "w": 40,
+              "h": 28
+            },
+            "mount": "rear-wall",
+            "note": "The fine-tool return board is mounted above the relocated workshop service landing, between its floor and tier ladders. Its operating face stays within reach of that real support and outside the complete DURANDAL door bay.",
+            "sector": "industrial"
+          }
+        }
+      ],
+      "unchangedEntryCount": 99,
+      "unchangedTopLevelMetadata": true
+    }
+  ],
+  "runtimeChanges": [
+    {
+      "path": "src/hub-service-geometry-v139.js",
+      "previousSha256": "8f69ddd93564959ff44df15f3e4dcf553a626bc3568306d8ebdbb88985e03e9c",
+      "sha256": "cf67fa0507cc064d21799a467fe8a34b2f8e3352ee81abd43466cb762ec3a752"
+    },
+    {
+      "path": "src/hub-batch-industrial-v177.js",
+      "previousSha256": "9355e187a6c83ba6457e983871945101f3654ab17a24c7ee998765bce201c1ab",
+      "sha256": "27cfc9084399b77193b0361904d8fc89151dc56bd010e4fe34ec7bc02ba1e0bc"
+    },
+    {
+      "path": "src/hub-room-furnishing-v137.js",
+      "previousSha256": "8b93181c9cb7662b80a5f8a05205a29abee2b7701e30a331527ed18083374664",
+      "sha256": "9997f2c954dfe7b0c32ae3094d2e09cbc958bbc40d1844c52a9696cef0292e45"
+    },
+    {
+      "path": "src/hub-room-composition-v142.js",
+      "previousSha256": "64bdf33f28110a655bea4a38bda4035a235590feb0b66be363ffb0b914611907",
+      "sha256": "d0fdb04488e49b7be3fe59d5e078742b0190f6c2189d575e5c6f6b9d1bffe029"
+    }
+  ],
+  "geometryDelta": {
+    "roomId": "workshop",
+    "surface": {
+      "id": "workshop-low",
+      "previous": {
+        "x": 160,
+        "y": 500,
+        "w": 530,
+        "h": 20
+      },
+      "current": {
+        "x": 480,
+        "y": 500,
+        "w": 280,
+        "h": 20
+      }
+    },
+    "floorLadder": {
+      "id": "workshop-floor",
+      "previousX": 250,
+      "currentX": 520,
+      "top": 500,
+      "bottom": 624
+    },
+    "unchanged": [
+      "upper deck at y376",
+      "tier ladder at x680",
+      "vent aperture and its native crawl approach",
+      "DURANDAL socket191x192 and both source-cropped faces",
+      "floor y624 and whole-room orthographic projection"
+    ],
+    "clearanceBelowDeck": 104,
+    "actorWidth": 44,
+    "actorHeight": 92
+  },
+  "equipmentDelta": [
+    {
+      "role": "shop-service-chest",
+      "previousCenterX": 575,
+      "currentCenterX": 620,
+      "reason": "Actual floor storage below the service landing, clear of both ladder approaches."
+    },
+    {
+      "role": "shop-fire-safety",
+      "previousCenterX": 710,
+      "currentCenterX": 770,
+      "reason": "Emergency cabinet on the free wall bay beyond the tier landing and its bracket."
+    },
+    {
+      "role": "workshop-hand-tool-board",
+      "previous": {
+        "centerX": 550,
+        "y": 420
+      },
+      "current": {
+        "centerX": 190,
+        "y": 492
+      },
+      "reason": "Hand tools above the retained west chest, reachable from the floor and clear of the DURANDAL bay."
+    }
+  ],
+  "nodeValidation": {
+    "passed": 95,
+    "failed": 0,
+    "skipped": 0,
+    "testFiles": 10,
+    "newCases": 5,
+    "negativeExactOriginalRuntime": {
+      "passed": 2,
+      "failed": 3,
+      "runtimeFilesRestoredToBase": 4,
+      "fixtureShim": false
+    },
+    "method": "Production Hub composition and native update/control methods with declared EventTarget, image-header, RAF, Canvas and save fixtures; no Chromium or native pixel claim.",
+    "saveCoverage": [
+      "Legacy standing pose x200/y408 retains x/y on restore, releases unsupported grounding and falls continuously to the floor.",
+      "Legacy climbing pose centered at x250 resumes at the same x/y with stale climbing cleared; no instant move to the new ladder.",
+      "A pose above the former portal-crossing support falls through the removed deck region without a ghost collider."
+    ],
+    "journeyCoverage": "Native W/D/A/S climbs both connected levels, reaches the actual C crawl-approach of the retained vent, returns to the floor and uses real E to traverse DURANDAL in both directions with the same paired-face offset and unchanged resources."
+  },
+  "compositionValidation": {
+    "roomCount": 35,
+    "allOtherRoomPlansUnchanged": true,
+    "allOtherParentPortalDescriptorsUnchanged": true,
+    "nativeItemsBefore": 303,
+    "nativeItemsAfter": 304,
+    "authoredFurnishingsBefore": 161,
+    "authoredFurnishingsAfter": 161,
+    "firstBatchBefore": 100,
+    "firstBatchAfter": 100,
+    "secondBatchBefore": 100,
+    "secondBatchAfter": 100,
+    "workshopNativeItemsBefore": 6,
+    "workshopNativeItemsAfter": 7,
+    "newOrRemainingFurnishingRejections": 0,
+    "doorBayCrossingsBefore": 6,
+    "doorBayCrossingsAfter": 5,
+    "remainingVisualDoorBayCandidates": [
+      {
+        "roomId": "briefing",
+        "annexId": "mire-archives",
+        "sourceIds": [
+          "briefing-low"
+        ]
+      },
+      {
+        "roomId": "cryo-bay",
+        "annexId": "escape-pods",
+        "sourceIds": [
+          "cryo-low"
+        ]
+      },
+      {
+        "roomId": "medical",
+        "annexId": "morgue",
+        "sourceIds": [
+          "medical-low"
+        ]
+      },
+      {
+        "roomId": "quarantine",
+        "annexId": "bioforge",
+        "sourceIds": [
+          "quarantine-low"
+        ]
+      },
+      {
+        "roomId": "dropship-hangar",
+        "annexId": "arrival-airlock",
+        "sourceIds": [
+          "hangar-maintenance-alcove-v133"
+        ]
+      }
+    ],
+    "remainingScope": "These unchanged geometric silhouette crossings need separate native visual/route review; the scan does not establish physical blockage."
+  },
+  "evidenceStatus": {
+    "browserExecuted": false,
+    "newPngAssets": 0,
+    "humanParticipants": 0,
+    "canonicalExactApprovals": 0,
+    "historicalReceiptsRewritten": false,
+    "forgeChanges": false
+  }
+}

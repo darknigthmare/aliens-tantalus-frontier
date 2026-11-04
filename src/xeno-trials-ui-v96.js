@@ -140,10 +140,13 @@ export class XenoTrialsUiV96 {
     this.el('abandon-overlay').onclick = () => this.el('abandon').onclick();
     this.el('pause-overlay').addEventListener('keydown', event => {
       if (event.code !== 'Tab' || this.el('pause-overlay').hidden) return;
-      const resume = this.el('resume-overlay'), abandon = this.el('abandon-overlay');
+      const actions = [this.el('resume-overlay'), this.el('abandon-overlay')]
+        .filter(button => !button.hidden && !button.disabled);
+      if (!actions.length) return;
+      const first = actions[0], last = actions.at(-1);
       const focused = this.root.ownerDocument?.activeElement || event.target;
-      if (event.shiftKey && focused === resume || !event.shiftKey && focused === abandon) {
-        event.preventDefault(); (event.shiftKey ? abandon : resume).focus({ preventScroll: true });
+      if (event.shiftKey && focused === first || !event.shiftKey && focused === last) {
+        event.preventDefault(); (event.shiftKey ? last : first).focus({ preventScroll: true });
       }
     });
     for (const key of ['family', 'role', 'ownership', 'sort', 'faction-filter']) this.el(key).addEventListener('change', () => this.render());
@@ -413,6 +416,11 @@ export class XenoTrialsUiV96 {
     this.el('pause').disabled = snapshot.phase === 'match-over' && !outroPlaying || Boolean(this.unsavedResult);
     this.el('pause').textContent = snapshot.paused ? 'REPRENDRE' : 'PAUSE';
     this.el('pause-overlay').hidden = !snapshot.paused || snapshot.phase === 'match-over' && !outroPlaying;
+    // A completed result has already settled its ticket. Its presentation can
+    // pause, but offering abandonment here would be an impossible no-op.
+    const canAbandon = snapshot.phase !== 'match-over' && Boolean(this.state().pending) && !this.unsavedResult;
+    this.el('abandon-overlay').hidden = !canAbandon;
+    this.el('abandon-overlay').disabled = !canAbandon;
     // A newly visible modal must own keyboard focus. Background/visibility
     // pauses wait for the next explicit interaction instead of stealing focus.
     if (!this.el('pause-overlay').hidden && !wasPaused && !this.root.ownerDocument?.hidden

@@ -1,0 +1,225 @@
+{
+  "schema": "tantalus-alien-base-pr7-proposal-v1",
+  "proposalId": "alien-base-pr7-311f7a367825fc115ad45b3772255cdfb7cc056c",
+  "tantalusBase": "d41b5fc120da2e7a5938308f9d3c852d20e53cc5",
+  "sourceRepository": "darknigthmare/alien_base",
+  "sourceCommit": "311f7a367825fc115ad45b3772255cdfb7cc056c",
+  "sourcePullRequest": 7,
+  "sourceState": "unmerged-conflicting",
+  "sourceRegistryPath": "docs/development/data/ALIEN_BASE_PR7_REGISTRY_V1.json",
+  "sourcePins": {
+    "data/registry.json": {
+      "sha256": "ce669770c760960a7d3b07be4c4e9531e2656d3967ae435c62fe0f692952c977",
+      "gitBlobSha": "d5ce5b00c02b0ea128724664f158dfcd5140984e",
+      "bytes": 51784
+    },
+    "dist/catalog.mjs": {
+      "sha256": "9657d224c711cb6ecb7c66c9a823c0bbea6120067dd54111a66a11a7c3a85592",
+      "gitBlobSha": "1ced2c32a54bb03a247fb50fb184e4ad0e1b2a77",
+      "bytes": 51904
+    },
+    "schema/registry.schema.json": {
+      "sha256": "d120efaa02dbd554dfd10d79b134b62a468c74fd9a345ccf500153e7318133f3",
+      "gitBlobSha": "0771bfc2842ce0db9a1ae6343a22698f75341417",
+      "bytes": 2568
+    },
+    "integrations/aliens-tantalus-frontier.json": {
+      "sha256": "fd9ac11915681f9c9f569140bc38261ea0733ebfbb6c37141f37c578408ba8a0",
+      "gitBlobSha": "9187f063f9451dd6332a7fcad95617c94d9417b1",
+      "bytes": 576
+    }
+  },
+  "snapshotVersion": "0.1.1",
+  "expectedRecords": 88,
+  "expectedSources": 22,
+  "active": false,
+  "gameplayAdmission": false,
+  "canonExact": false,
+  "visualFidelity1to1": false,
+  "newProposedWeaponsClosed": 0,
+  "newQaRecipesClosed": 0,
+  "bindings": [
+    {
+      "localId": "castes-film_ovomorphe_aliens_1986",
+      "proposedSourceId": "ab:organism:ovomorph",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-work-specific-proof",
+      "sourceIds": [
+        "alien-1979"
+      ],
+      "reason": "The local 1986 appearance is not established by the generic record citing only the 1979 film."
+    },
+    {
+      "localId": "castes-film_facehugger_alien_1979",
+      "proposedSourceId": "ab:organism:facehugger",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "alien-1979"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-film_warrior_aliens_1986",
+      "proposedSourceId": "ab:organism:warrior-1986",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "aliens-1986"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-film_queen_aliens_1986",
+      "proposedSourceId": "ab:organism:queen-1986",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "aliens-1986"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-film_runner_alien3_1992",
+      "proposedSourceId": "ab:organism:runner-alien3",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "alien3-1992"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_afe_crusher",
+      "proposedSourceId": "ab:organism:crusher-afe",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "afe-2021"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_afe_burster",
+      "proposedSourceId": "ab:organism:burster-afe",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "afe-2021"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_afe_prowler",
+      "proposedSourceId": "ab:organism:prowler-afe",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "afe-2021"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_acm_spitter",
+      "proposedSourceId": "ab:organism:spitter-acm",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "acm-2013"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_pathogen_runner",
+      "proposedSourceId": "ab:organism:runner-pathogen",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "pathogen-2022"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_pathogen_brute",
+      "proposedSourceId": "ab:organism:brute-pathogen",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "pathogen-2022"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "castes-game_pathogen_blight",
+      "proposedSourceId": "ab:organism:blight-pathogen",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "pathogen-2022"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "vehicle-280-m579-daisycutter",
+      "proposedSourceId": "ab:vehicle:m579",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "colonial-marines-tech-manual"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "vehicle-281-audi-lunar-quattro",
+      "proposedSourceId": "ab:vehicle:audi-rover",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "covenant-2017",
+        "audi-covenant-rover"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    },
+    {
+      "localId": "vehicle-282-covenant-terraforming-truck",
+      "proposedSourceId": "ab:vehicle:terraformer-truck",
+      "canonicalTargetId": null,
+      "relation": "proposed-reference-only",
+      "state": "pending-authority-and-crosswalk",
+      "sourceIds": [
+        "covenant-2017",
+        "tony-drew-covenant-production"
+      ],
+      "reason": "Upstream PR7 is unmerged/conflicting; no approved crosswalk to the chosen canonical resolver."
+    }
+  ],
+  "classificationProposals": [
+    {
+      "sourceId": "ab:vehicle:m579",
+      "field": "continuity",
+      "original": "licensed-rpg",
+      "proposed": "licensed-book",
+      "reason": "The exact upstream sourceId colonial-marines-tech-manual is declared medium licensed-book; source is the Technical Manual, not the RPG Operations Manual. This is a documentary classification, not a gameplay or visual admission."
+    }
+  ],
+  "continuityNotes": [
+    "No relation is activated in the Tantalus client.",
+    "No unknown local/shared ID is inferred from a translated name, prefix or numeric modulo.",
+    "The 129 weapon research entries remain circular Tantalus exports, not new individual evidence.",
+    "Source game statistics remain source data and never supply Tantalus simulation values."
+  ]
+}

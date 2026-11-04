@@ -7,6 +7,7 @@ import base64
 import hashlib
 import importlib.metadata
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -284,18 +285,39 @@ def pass_asha_dependency_door(page, config, entering):
         'projection': projection, 'player': state['player'], 'annex': state['annex']})
 
 
+NATIVE_ASHA_ENTRY_READER_V180 = '''function createAshaEntryReaderV180(components,routeId) {
+  const matches=components.filter(route=>route.definition.id===routeId);
+  if(matches.length!==1)throw new Error('The native service route must have exactly one exported component');
+  // Reuse the production component and its original private Symbols. This
+  // defines a projection class, never a second hub or a replacement method.
+  const Component=matches[0].withHub(class {getSnapshot(){return {};}});
+  return hub=>{
+    const entry=Component.prototype.getSnapshot.call(hub).npcAnnexRoutesV163?.routes?.[routeId];
+    if(!entry||!Object.hasOwn(entry,'actor')||!Object.hasOwn(entry,'nativeHandoff'))
+      throw new Error('The native service component did not expose its complete owner entry');
+    return entry;
+  };
+}'''
+
+
 def arm_asha_return_dependency(page, config):
     # The promise stays in the page. Only a small completion acknowledgement
     # crosses to Python before E leaves the refuge; detailed samples wait until
     # Asha's actual occupied opening has been secured by the player.
-    page.evaluate('''opts=>{const createProgress=(''' + NATIVE_ASHA_DEPENDENCY_V163 + ''');
+    binding = page.evaluate('''async opts=>{const started=performance.now(),
+      {HUB_NPC_ANNEX_SERVICE_ROUTES_V163:components}=await import('/src/npc-annex-service-routes-v163.js'),
+      readEntry=(''' + NATIVE_ASHA_ENTRY_READER_V180 + ''')(components,opts.id),
+      createProgress=(''' + NATIVE_ASHA_DEPENDENCY_V163 + ''');
+      const h=__ATF_HUB__,full=h.getSnapshot().npcAnnexRoutesV163.routes[opts.id],focused=readEntry(h);
+      if(JSON.stringify(full)!==JSON.stringify(focused))
+        throw new Error('The focused native service entry differs from the complete hub snapshot');
       window.__ATF_ASHA_JUN_DEPENDENCY_V163__=new Promise(resolve=>{
-        const h=__ATF_HUB__,started=performance.now(),progress=createProgress(opts,started),samples=[];
+        const progress=createProgress(opts,started),samples=[];
         let done=false,raf,latest=null,origin=null,lastSampleAt=-Infinity,frames=0;
         function finish(status,reason){if(done)return;done=true;clearInterval(timer);cancelAnimationFrame(raf);
           resolve({status,reason,frames,...progress.snapshot(performance.now()),origin,latest,samples});}
-        function frame(){if(done)return;frames++;const now=performance.now(),snap=h.getSnapshot(),
-          route=snap.npcAnnexRoutesV163.routes[opts.id],p=h.player,r=h.npcRoutineResolutionsV62?.get('crew-11-jun-park');
+        function frame(){if(done)return;frames++;const now=performance.now(),
+          route=readEntry(h),p=h.player,r=h.npcRoutineResolutionsV62?.get('crew-11-jun-park');
           latest={nativeTime:h.animationTime,running:h.running,deck:h.state.deck,annex:h.currentAnnexV71?.()?.id||null,
             exitAnnex:h.nearestAnnexExitV71?.()?.annexId||null,player:{x:p.x,y:p.y,w:p.w,h:p.h,vx:p.vx,alive:p.alive},
             owner:structuredClone(route.actor),ownerHandoff:structuredClone(route.nativeHandoff),
@@ -310,7 +332,8 @@ def arm_asha_return_dependency(page, config):
         }
         const timer=setInterval(()=>{const failure=progress.check(performance.now());if(failure)finish('failed',failure);},1000);
         raf=requestAnimationFrame(frame);
-      });}''', config)
+      });return{routeId:opts.id,mode:'same-exported-native-component',completeEntryMatchesSnapshot:true};}''', config)
+    report.setdefault('ashaDependencyBindings', []).append(binding)
 
 
 def prepare_asha_return_dependency(page, config):
@@ -322,6 +345,44 @@ def prepare_asha_return_dependency(page, config):
         lastProgressAgeMs:r.lastProgressAgeMs,returned:r.latest?.dependency?.returned||null,
         observedOrigin:r.observedOrigin};}''')
     report.setdefault('ashaDependencyAcknowledgements', []).append(acknowledgement)
+    if acknowledgement['status'] != 'returned':
+        # Preserve the actual failed acknowledgement before the assertion.
+        # Success still avoids transferring the large sample history while
+        # Asha begins her short native walk toward the player's arrival.
+        result = page.evaluate('()=>window.__ATF_ASHA_JUN_DEPENDENCY_V163__')
+        report.setdefault('ashaDependencyWaits', []).append(result)
+        (output / (config['id'] + '-jun-physical-prerequisite-failed.json')).write_text(json.dumps(result, indent=2))
+        latest = result.get('latest') or {}
+        dependency = latest.get('dependency') or {}
+        actor = dependency.get('actor') or {}
+        owner = latest.get('owner') or {}
+        origin = acknowledgement.get('observedOrigin') or {}
+        diagnostic = {key: acknowledgement.get(key) for key in ['status', 'reason', 'simSeconds', 'wallMs', 'lastProgressAgeMs']}
+        diagnostic['observedOrigin'] = {key: origin.get(key) for key in ['crewId', 'deck', 'roomId', 'x', 'y', 'source']}
+        diagnostic['latest'] = {'nativeTime': latest.get('nativeTime'), 'running': latest.get('running'),
+            'deck': latest.get('deck'), 'annex': latest.get('annex'), 'player': latest.get('player'),
+            'passageRequested': latest.get('passageRequested'), 'ownerHandoff': latest.get('ownerHandoff'),
+            'asha': {key: owner.get(key) for key in ['crewId', 'deck', 'roomId', 'x', 'y', 'stage', 'reason', 'distance', 'arrivals', 'crossings']},
+            'jun': {key: actor.get(key) for key in ['crewId', 'deck', 'roomId', 'x', 'y', 'stage', 'reason', 'distance', 'crossings', 'liftJourneys', 'lift']},
+            'junHandoff': dependency.get('nativeHandoff'), 'returned': dependency.get('returned')}
+        def finite_json(value):
+            if isinstance(value, float) and not math.isfinite(value):
+                return None
+            if isinstance(value, dict):
+                return {key: finite_json(item) for key, item in value.items()}
+            if isinstance(value, list):
+                return [finite_json(item) for item in value]
+            return value
+        diagnostic = finite_json(diagnostic)
+        encoded = json.dumps(diagnostic, allow_nan=False, ensure_ascii=True, separators=(',', ':'))
+        if len(encoded) > 4000:
+            diagnostic.pop('latest')
+            encoded = json.dumps(diagnostic, allow_nan=False, ensure_ascii=True, separators=(',', ':'))
+        if len(encoded) > 4000:
+            diagnostic = {key: value[:256] if isinstance(value, str) else value
+                          for key, value in diagnostic.items() if key != 'observedOrigin'}
+            encoded = json.dumps(diagnostic, allow_nan=False, ensure_ascii=True, separators=(',', ':'))
+        print('ASHA_DEPENDENCY_ACK ' + encoded, flush=True)
     check(config['id'] + ': Jun completes its exact native physical return before Asha occupation',
           acknowledgement['status'] == 'returned')
     # Avoid transferring the large sample history while Asha starts its29s walk.
