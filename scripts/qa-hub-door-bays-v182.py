@@ -83,11 +83,18 @@ import {HUB_DECKS,HUB_WORLD,buildHubObstacleGeometryV87} from './src/hub-game.js
 import {buildHubTraversalGeometryV87,HUB_TRAVERSAL_PROFILES_V60} from './src/hub-v51-runtime.js';
 import {resolveHubServiceProfileV138} from './src/hub-service-geometry-v138.js';
 import {HUB_ANNEX_BY_ID_V137} from './src/hub-annex-registry-v137.js';
-import {HUB_ANNEX_ENTRANCES_V133} from './src/hub-navigation-layout-v133.js';
-import {getHubDoorFaceV142} from './src/hub-door-passage-v142.js';
+import {HubGame as NativeHub} from './src/hub-opening-v88.js';
+import {withHubNpcServiceRoutesV161} from './src/npc-service-routes-v161.js';
+import {withHubNpcAnnexLeasesV163} from './src/npc-annex-leases-v163.js';
+import {withHubNpcCalLogisticsRouteV165} from './src/npc-cal-logistics-route-v165.js';
+import {withHubNpcInterdeckRoutesV165} from './src/npc-interdeck-routes-v165.js';
 import {getHubCirculationSolidReservationsV138} from './src/hub-circulation-v137.js';
 const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const W=44,H=92,F=HUB_WORLD.floorY;
+// All production door-pair overrides, in app.js order. This inactive Node
+// geometry context never starts an engine or changes the browser's runtime.
+const DoorGeometryHub=[withHubNpcServiceRoutesV161,withHubNpcAnnexLeasesV163,
+ withHubNpcCalLogisticsRouteV165,withHubNpcInterdeckRoutesV165].reduce((Hub,decorate)=>decorate(Hub),NativeHub);
 const pairs=[
  ['workshop','durandal','workshop'],['briefing','mire-archives','briefing'],
  ['cryo-bay','escape-pods','cryo'],['medical','morgue','medical'],
@@ -97,7 +104,7 @@ const configs=pairs.map(([roomId,annexId,prefix])=>{
  const deck=HUB_DECKS.findIndex(d=>d.rooms.some(r=>r.id===roomId));
  const room=HUB_DECKS[deck].rooms.find(r=>r.id===roomId),annex=HUB_ANNEX_BY_ID_V137[annexId];
  assert.equal(annex.parentRoomId,roomId);assert.equal(annex.parentDeck,HUB_DECKS[deck].id);
- const geometry=buildHubTraversalGeometryV87(deck),entry=HUB_ANNEX_ENTRANCES_V133[annexId];
+ const geometry=buildHubTraversalGeometryV87(deck);
  const platforms=geometry.platforms.filter(p=>p.roomId===roomId);
  const ladders=geometry.ladders.filter(p=>p.roomId===roomId),vents=geometry.vents.filter(p=>p.roomId===roomId);
  const low=platforms.find(p=>p.id===prefix+'-low'),high=platforms.find(p=>p.id===prefix+'-high');
@@ -105,12 +112,12 @@ const configs=pairs.map(([roomId,annexId,prefix])=>{
  assert.ok(low&&high&&floor&&tier,roomId+' lacks its production route');
  assert.equal(floor.bottom,F);assert.equal(floor.top,low.y);
  assert.equal(tier.bottom,low.y);assert.equal(tier.top,high.y);
- const parentDoor={x:room.xStart+entry.centerX-annex.entrance.w/2,y:entry.bottom-annex.entrance.h,
-  w:annex.entrance.w,h:annex.entrance.h};
- const annexDoor={x:annex.entranceLocalX-annex.entrance.w/2,y:annex.entrance.y,
-  w:annex.entrance.w,h:annex.entrance.h};
- const parentFace=getHubDoorFaceV142(parentDoor,annexDoor,annex.art.alphaBounds.door);
- const annexFace=getHubDoorFaceV142(annexDoor,parentDoor,annex.art.alphaBounds.door);
+ const doorContext=Object.assign(Object.create(DoorGeometryHub.prototype),{
+  state:{deck,roomId},player:{x:room.xStart,w:W},v51Platforms:geometry.platforms});
+ const before=JSON.stringify(doorContext);
+ const {parent:parentFace,local:annexFace}=doorContext.hubDoorPairV142(annex);
+ assert.equal(JSON.stringify(doorContext),before,'Door geometry observations must not mutate their source');
+ const parentDoor=parentFace.socket,annexDoor=annexFace.socket;
  assert.deepEqual(parentFace.pairedSize,annexFace.pairedSize);
  assert.ok(parentFace.opening.w>W&&parentFace.opening.h>=H);
  const bay={x:parentFace.target.x-7,y:parentFace.target.y-7,w:parentFace.target.w+14,h:parentFace.target.h+14};
@@ -475,7 +482,9 @@ try:
     compared = ['src/hub-game.js', 'src/hub-v51-runtime.js', 'src/hub-service-geometry-v137.js',
                 'src/hub-service-geometry-v138.js', 'src/hub-service-geometry-v139.js',
                 'src/hub-circulation-v137.js', 'src/hub-door-passage-v142.js',
-                'src/hub-navigation-layout-v133.js', 'src/hub-opening-v88.js']
+                'src/hub-navigation-layout-v133.js', 'src/hub-opening-v88.js', 'src/hub-v71-runtime.js',
+                'src/npc-service-routes-v161.js', 'src/npc-annex-leases-v163.js',
+                'src/npc-cal-logistics-route-v165.js', 'src/npc-interdeck-routes-v165.js', 'src/app.js']
     report['servedGeometrySources'] = {}
     for name in compared:
         with urllib.request.urlopen(args.base.rstrip('/') + '/' + name, timeout=30) as response:
