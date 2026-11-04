@@ -224,17 +224,33 @@ test('native workshop controls climb both connected service decks, approach the 
 // method or integration step is replaced after the declared Save fixture starts.
 async function nativeWalkQaDriverV182(root) {
   const assert = (await import('node:assert/strict')).default;
-  const { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
+  let { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
   const { createDefaultSave } = await import(new URL('src/save.js', root));
   const { hostV136 } = await import(new URL('scripts/forge-native-host-v136.mjs', root));
   const { createInterface } = await import('node:readline');
   const options = JSON.parse(process.argv[2]), host = hostV136();
+  if (options.production) {
+    const { readFileSync } = await import('node:fs');
+    const app = readFileSync(new URL('src/app.js', root), 'utf8');
+    const imports = [...app.matchAll(/import\s*\{([^}]+)\}\s*from\s*'([^']+)'/g)];
+    const names = app.match(/const NativeHubGame = \[([\s\S]*?)\]\.reduce/)[1].split(',').map(s => s.trim()).filter(Boolean);
+    const outer = ['withForgeShipRuntimeV141', 'withForgeDecorationV141', 'withHubMotionTrackerV160', 'withHubArmoryStorefrontV169'];
+    for (const name of [...names, ...outer]) {
+      const declaration = imports.find(m => m[1].split(',').map(s => s.trim()).includes(name));
+      assert.ok(declaration, name + ' must be a real app.js import');
+      HubGame = (await import(new URL('src/' + declaration[2], root)))[name](HubGame);
+    }
+  }
   document.createElement = () => ({ ...host.canvas, style: {}, getContext: () => host.canvas.getContext('2d') });
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false;
   Object.assign(save.hub, { deck: options.deck, roomId: options.roomId,
     positionX: options.x, positionY: options.standingY - 92 });
-  const hub = new HubGame(host.canvas, { onAction() {}, onPersist() {}, onStatus() {} });
-  hub.start(save.hub, { routineContextV62: { clock: save.clock, save }, onboardingV84: save.onboardingV84 });
+  const hub = new HubGame(host.canvas, { audio: new Proxy({}, { get: () => () => {} }), onAction() {}, onPersist() {}, onStatus() {} });
+  if (options.production) hub.start(save.hub, { routineContextV62: { save, crew: save.crew, clock: save.clock,
+    operation: save.strategy?.currentOperation || null, crisis: save.hub?.activeCrisis || null,
+    infestation: save.hub?.infestationChain || null }, onboardingV84: save.onboardingV84,
+    openingV88: save.openingV88, openingExerciseV89: save.openingExerciseV89, portMeridienV90: save.portMeridienV90 });
+  else hub.start(save.hub, { routineContextV62: { clock: save.clock, save }, onboardingV84: save.onboardingV84 });
   globalThis.__ATF_HUB__ = hub; globalThis.__ATF_V51__ = { saveSystem: { data: save } };
   host.canvas.focus(); hub.update(1 / 60);
   assert.equal(hub.player.x, options.x); assert.equal(hub.player.y + hub.player.h, options.standingY);
@@ -274,6 +290,10 @@ async function nativeWalkQaDriverV182(root) {
   console.log(JSON.stringify(snapshot()));
   for await (const line of createInterface({ input: process.stdin })) {
     const request = JSON.parse(line); let error = null, value = null;
+    // A page operation has a declared outbound and return transport. RAF
+    // keeps advancing during both; a snapshot value is copied before its
+    // return delay. keyboard.press still delivers its down/up in one request.
+    advanceWall((options.rpcLatencyMs || 0) / 2);
     try {
       if (request.type === 'focus') host.canvas.focus();
       else if (request.type === 'key') {
@@ -291,11 +311,21 @@ async function nativeWalkQaDriverV182(root) {
         value = await Function('return (' + request.expression + ')')()(request.arg);
       } else if (request.type === 'stop') break;
     } catch (failure) { error = failure.message; }
+    advanceWall((options.rpcLatencyMs || 0) / 2);
     console.log(JSON.stringify({ ...snapshot(), value: value ?? null, error }));
   }
 }
 
 function runNativeWalkQaV182(cases) {
+  // Keep the existing per-process watchdog while retaining every independent
+  // fixture. Large matrices must not spend that entire guard on Hub startup.
+  if (cases.length > 8) {
+    const results = [];
+    for (let start = 0; start < cases.length; start += 8)
+      results.push(...runNativeWalkQaV182(cases.slice(start, start + 8)));
+    if (process.env.ATF_QA_DOOR_EVIDENCE) writeFileSync(process.env.ATF_QA_DOOR_EVIDENCE, JSON.stringify(results, null, 2) + '\n');
+    return results;
+  }
   const directory = mkdtempSync(join(tmpdir(), 'door-bay-native-walk-'));
   const root = new URL('../', import.meta.url).href, driver = join(directory, 'driver.mjs');
   const input = join(directory, 'input.json'), output = join(directory, 'output.json');
@@ -411,6 +441,57 @@ test('V182 actual QA walker retains precise supported landings at slow native RA
     assert.deepEqual(result.resources, result.baseline.resources); assert.deepEqual(result.clock, result.baseline.clock);
     assert.equal(result.qaReport.checks.length, 2);
   }
+});
+
+function assertBoundedNativeWalkV182(results) {
+  for (const result of results) {
+    assert.equal(result.error, null, JSON.stringify(result));
+    const move = result.qaReport.nativeMoves[0];
+    assert.ok(move.corrections.length > 0 && move.corrections.length <= 24);
+    assert.ok(Math.abs(result.player.x - result.case.target) <= result.case.tolerance);
+    assert.equal(result.player.y + result.player.h, result.case.standingY);
+    assert.equal(result.player.grounded, true); assert.equal(result.player.climbing, false);
+    assert.equal(result.player.crouching, false); assert.deepEqual(result.heldKeys, []);
+    assert.ok(result.maxSpeed > 0 && result.maxSpeed <= (result.case.requireCoarse ? 270 : 105));
+    assert.deepEqual(result.resources, result.baseline.resources); assert.deepEqual(result.clock, result.baseline.clock);
+    const fine = move.corrections.filter(c => c.control === 'native crouch approach');
+    assert.equal(result.pulses.length, fine.length);
+    if (result.case.requireCoarse) assert.equal(move.corrections[0].control, 'held approach');
+    for (const correction of move.corrections) {
+      if (correction.control === 'native crouch approach') assert.ok(correction.requestedMs >= 1 && correction.requestedMs <= 100);
+      near(correction.observedTravel, Math.abs(correction.afterX - correction.beforeX));
+      assert.equal(correction.zeroTap, correction.observedTravel <= 1e-6);
+    }
+    if (result.case.requireZeroTap) {
+      const firstZero = move.corrections.findIndex(c => c.zeroTap);
+      assert.ok(firstZero >= 0 && firstZero + 1 < move.corrections.length);
+      assert.ok(move.corrections[firstZero + 1].requestedMs > move.corrections[firstZero].requestedMs);
+    }
+  }
+}
+
+test('V182 actual QA walker uses bounded native taps despite slow page transport', () => {
+  const cases = [3053.3384352696985, 3062.6615647303015].flatMap(x => [40, 80, 120].map(rpcLatencyMs => ({
+    id: 'workshop-floor-rpc-' + x + '-' + rpcLatencyMs, roomId: 'workshop', deck: 2,
+    x, target: 3058, standingY: 624, frameMs: 1000 / 60, phaseMs: 1,
+    keyLatencyMs: 8, rpcLatencyMs, tolerance: 3, production: true
+  })));
+  assertBoundedNativeWalkV182(runNativeWalkQaV182(cases));
+});
+
+test('V182 actual QA walker observes missed RAF taps and completes the disclosed full floor approach', () => {
+  const cases = [];
+  for (const x of [3284.8186193088154, 3295.1813806911846]) cases.push({
+    id: 'workshop-upper-zero-' + x, roomId: 'workshop', deck: 2, x, target: 3290,
+    standingY: 376, frameMs: 100, phaseMs: 65, keyLatencyMs: 8,
+    rpcLatencyMs: 0, tolerance: 2.5, production: true, requireZeroTap: true
+  });
+  for (const rpcLatencyMs of [40, 120]) cases.push({
+    id: 'workshop-full-floor-rpc-' + rpcLatencyMs, roomId: 'workshop', deck: 2, x: 2814, target: 3058,
+    standingY: 624, frameMs: 1000 / 60, phaseMs: 1, keyLatencyMs: 8,
+    rpcLatencyMs, tolerance: 3, production: true, requireCoarse: true
+  });
+  assertBoundedNativeWalkV182(runNativeWalkQaV182(cases));
 });
 
 // Actual Python exit controls against the full app.js Hub composition. DOM,

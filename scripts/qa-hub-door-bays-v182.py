@@ -256,7 +256,7 @@ def ready(page, config, room_id):
 def walk_to(page, target, label, room_id, standing_y, tolerance=3):
     before = observe(page)
     page.locator('#hub-canvas').focus()
-    corrections, previous_distance, fine_gain = [], None, .5
+    corrections, previous_distance, fine_gain, zero_taps = [], None, .5, 0
     for attempt in range(24):
         current = observe(page)['player']['x']
         distance = target - current
@@ -276,27 +276,25 @@ def walk_to(page, target, label, room_id, standing_y, tolerance=3):
             finally:
                 page.keyboard.up(key)
         else:
-            # Even a 1ms pulse can occupy a whole slow native frame and coast
-            # about 9px at walking speed. The existing C control provides the
-            # native 105px/s approach, with the same 44x92 physical body.
-            # Wait for actual progress before releasing A/D: a sub-frame tap
-            # can otherwise be missed at every repeated RAF phase.
-            travel = max(.001, min(2, abs(distance) * fine_gain))
+            # Keep the A/D down-up pair inside one real Playwright command.
+            # A separate wait_for_function can keep movement held throughout
+            # its client round trip. C retains the native 105px/s approach.
+            # A tap may cross no RAF at all: record that zero and lengthen
+            # the next bounded tap, without counting it as movement.
+            nominal_ms = max(1, min(32, abs(distance) / 105 * 1000 * fine_gain))
+            pulse_ms = min(100, nominal_ms * 2 ** min(zero_taps, 7))
             correction.update(control='native crouch approach', crouchKey='KeyC',
-                              minimumObservedTravel=travel, gain=fine_gain)
+                              requestedMs=pulse_ms, precedingZeroTaps=zero_taps, gain=fine_gain)
             page.keyboard.down('KeyC')
             try:
-                page.keyboard.down(key)
-                try:
-                    page.wait_for_function("""c=>c.right?__ATF_HUB__.player.x>=c.origin+c.travel:
-                      __ATF_HUB__.player.x<=c.origin-c.travel""",
-                                           arg=dict(right=distance > 0, origin=current, travel=travel), timeout=45000)
-                finally:
-                    page.keyboard.up(key)
+                page.keyboard.press(key, delay=pulse_ms)
             finally:
                 page.keyboard.up('KeyC')
         settle(page)
         correction['afterX'] = observe(page)['player']['x']
+        correction['observedTravel'] = abs(correction['afterX'] - current)
+        correction['zeroTap'] = correction['observedTravel'] <= 1e-6
+        zero_taps = zero_taps + 1 if correction['zeroTap'] else 0
         corrections.append(correction)
         previous_distance = distance
     after = observe(page)
