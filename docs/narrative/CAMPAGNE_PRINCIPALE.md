@@ -55,7 +55,7 @@ La campagne a trois fronts qui avancent ensemble :
 
 Le nom *Asphodèle* suit la logique mythologique déjà présente (Lethe, Tantalus) sans emprunter de lieu existant de la franchise.
 
-**[À DÉCIDER]** Dans `content-core-v50.js`, la description générée de Lethe et l'entrée « Pioneer Station » reprennent des noms d'un jeu existant. Elles ne sont utilisées par aucun texte de mission ; les remplacer par des descriptions originales garderait le catalogue cohérent avec cette bible. Ce document ne s'appuie pas dessus.
+**[À DÉCIDER]** Le catalogue reprend des noms d'un jeu existant : la description générée de Lethe et l'entrée « Pioneer Station » (`content-core-v50.js`), des ennemis et personnels de référence (`enemy-source-adaptations-v118.js`, `enemy-coverage-v117.js`, `enemy-import-admissions-v106.js`, `premium-personnel-v119.js`, `xeno-trials-ui-v96.js`). Aucun texte de mission de la campagne ne s'y appuie, et ce document non plus. Décider s'ils restent comme références de catalogue ou s'ils sont remplacés par des éléments originaux.
 
 ### 1.3 Règles de l'univers à respecter
 
@@ -612,7 +612,7 @@ Mire Archive 001 **[PARTIEL]** ; Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le
 
 | # | Question | Section |
 | --- | --- | --- |
-| 1 | Remplacer, dans `content-core-v50.js`, la description générée de Lethe et l'entrée « Pioneer Station », qui reprennent des noms d'un jeu existant ? | §1.2 |
+| 1 | Garder ou remplacer les noms d'un jeu existant présents dans le catalogue (description de Lethe, « Pioneer Station », ennemis et personnels de référence) ? | §1.2 |
 | 2 | Identité du signataire du badge : jamais (A) ou sous condition (B) ? | §5.7 |
 | 3 | Mara Voss liée à I. Voss, ou homonymie ? | §8.3 |
 | 4 | Opérations hors ton : archives MIRE ou seconde campagne ? | §9.2 |
