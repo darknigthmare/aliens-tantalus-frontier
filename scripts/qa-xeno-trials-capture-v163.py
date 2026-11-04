@@ -460,7 +460,7 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
     deadline = started + 55
     trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
                   'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [], 'decisions': [],
-                  'policy': 'Real Python-driven keys: approach using pure V105 body gap toward <=6px; guard before entering native light/heavy reach plus relative travel during the measured pose-read duration when a native block is affordable and the target retains pressure stamina or has an active threat. Release guard when the target is fatigued without an active threat so real movement and stamina can recover. For an otherwise guarded recovery, briefly release during its remaining time after estimated return latency, then rearm before the next delayed read. Launch special only in observed target recovery, when both grounded, player unstunned, affordable at its own native cost and cooldown zero, and the target is fatigued or still recovering through startup. Departure range is derived from native leap speed/active duration and possible target retreat; the engine still admits only a real <=8px hold. All reads retain their declared client delay; no alternate read channel, pause or runtime mutation is used. Startup evidence is armed within the same pose read, without emitting controls.'})
+                  'policy': 'Real Python-driven keys: approach using pure V105 body gap toward <=6px; guard before entering native light/heavy reach plus relative travel during the measured pose-read duration when a native block is affordable and the target retains pressure stamina or has an active threat. Release guard when the target is fatigued without an active threat so real movement and stamina can recover. For an otherwise guarded recovery, briefly release during its remaining time after estimated return latency, then rearm before the next delayed read. Launch special only in observed target recovery, when both grounded, player unstunned, affordable at its own native cost and cooldown zero, and the target remains below its pressure reserve at the estimated contact against a stationary target or still recovers until then. This contact-time filter uses the native 24/s stamina regeneration after recovery; it does not predict target movement or discrete simulation steps, and it does not guarantee a hold. Departure range is derived from native leap speed/active duration and possible target retreat; the engine still admits only a real <=8px hold. All reads retain their declared client delay; no alternate read channel, pause or runtime mutation is used. Startup evidence is armed within the same pose read, without emitting controls.'})
     held = None
     guarding = False
     control_round = None
@@ -588,9 +588,16 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                              - value['targetSpeed'] * max(0, value['specialStartup'] - recovery_remaining))
             in_launch_range = value['targetAhead'] and -8 <= value['gap'] <= launch_gap and value['verticalOverlap']
             target_can_press = b['stamina'] >= value['targetPressureReserve']
+            # Estimate contact against a stationary target after native startup.
+            # This filters recovery/fatigue windows without predicting target
+            # movement or discrete steps; the engine still owns the actual hold.
+            contact_seconds = value['specialStartup'] + max(0, value['gap'] - 8) / value['specialLeapSpeed']
+            projected_target_stamina = b['stamina'] + 24 * max(0, contact_seconds - recovery_remaining)
+            recovery_covers_contact = recovery_remaining >= contact_seconds
+            fatigue_covers_contact = projected_target_stamina < value['targetPressureReserve']
             ready = (m['phase'] == 'active' and not m.get('paused') and in_launch_range
                      and value['targetRecovery'] and can_special
-                     and (not target_can_press or recovery_remaining >= value['specialStartup']))
+                     and (fatigue_covers_contact or recovery_covers_contact))
             desired = ('ArrowRight' if value['direction'] > 0 else 'ArrowLeft') if value['gap'] > 6 else None
             if desired != held:
                 if held:
@@ -628,7 +635,10 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                 'stamina': a['stamina'], 'guardReserve': value['guardReserve'],
                 'reserve': reserve, 'targetStamina': b['stamina'], 'targetPressureReserve': value['targetPressureReserve'],
                 'targetCanPress': target_can_press,
-                'launchGap': launch_gap, 'recoveryRemaining': recovery_remaining, 'recoveryPulseSeconds': pulse_seconds,
+                'launchGap': launch_gap, 'contactSeconds': contact_seconds,
+                'projectedTargetStamina': projected_target_stamina,
+                'targetRecoveryCoversContact': recovery_covers_contact, 'targetFatigueCoversContact': fatigue_covers_contact,
+                'recoveryRemaining': recovery_remaining, 'recoveryPulseSeconds': pulse_seconds,
                 'targetThreat': value['targetThreat'], 'targetRecovery': value['targetRecovery']})
             if len(trace['decisions']) > trace['observationLimit']:
                 trace['decisions'].pop(0)
