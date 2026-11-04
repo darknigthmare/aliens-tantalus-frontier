@@ -84,6 +84,48 @@ Le nouveau pilote observe la réponse synchrone du moteur après chaque vrai key
 
 La suite V161 complète passe 21/21 après correction. Le nouveau cas de course échoue avec l'ancien pilote ; le passant immobile et la transition acceptée dont le host cesse de délivrer des frames restent des échecs à 45 secondes. Les doubles DOM/Canvas/RAF du harnais Node sont déclarés ; aucune méthode du moteur n'est remplacée. Ces contrôles ne requalifient pas rétroactivement le premier run GitHub.
 
+## Compléments après la deuxième exécution GitHub
+
+La deuxième tête publiée est `651c4e0c960d474558b3f6e07695039271a5a014`. Actions a exécuté le candidat `b828d89b41138db58c476661b3f830622fb598fa`, dont l'arbre `3e57e4d9d418dd725c8d23591079fc6051faf2da` est identique à cette tête. Les inventaires de sources, les informations de build et les empreintes des artefacts contrôlés lient les résultats suivants à ces octets :
+
+| Workflow | Exécution | Résultat constaté |
+| --- | --- | --- |
+| Forge | [41831456358](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41831456358) | Réussi ; suites Node 358 + 277 + 90 contrôles, six rapports natifs et 249 contrôles. |
+| Alien_base | [41831456180](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41831456180) | Réussi ; 49/49 contrôles. |
+| Gameplay | [41831456150](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41831456150) | Réussi ; 63 tests Node, cinq rapports natifs, 144 contrôles et 80 PNG présents. |
+| Release | [41831456219](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41831456219) | Réussi ; 4 049 tests Node réussis, aucun échec, une fixture physique V175 facultative ignorée, 214 fichiers uniques ; 26/26 rapports natifs, 756 contrôles et 378 PNG. |
+| Excel | [41831456403](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41831456403) | Échec conservé : 12/15 jobs réussis. Les trois échecs concernent Trials avec lectures à 200 ms, deux approches au clavier dans ship et le prérequis de retour de Jun dans crew-lifts. |
+
+Les deux sorties V161 passent avec les vrais reçus de transition. Dans le scénario Idris, le joueur reçoit un refus natif documenté, puis une acceptation après le départ de l'occupant ; il rejoint le réacteur en 3,801 s dans le budget global inchangé de 45 s. Dans le scénario Leila, le joueur rejoint le mess après une seule demande acceptée, en 0,600 s. Ces durées mesurent le passage du joueur, pas le retour physique des PNJ eux-mêmes. Aucune touche E supplémentaire n'est envoyée après acceptation. Les images de retour et de service ont été inspectées.
+
+Les deux parcours de Cal réussissent 31 contrôles/38 PNG et 34 contrôles/31 PNG. Leurs 69 PNG correspondent aux empreintes déclarées ; l'interruption conserve le même propriétaire d'observation et reprend le déplacement natif. La propriété `stationToWorkTravelObserved` reste fausse dans ces rapports : cette couverture n'est pas inventée.
+
+### Acquisition Trials avec lectures retardées
+
+Le mode 0 ms réussit encore 77 contrôles et 42 captures. Dans le mode 200 ms, le joueur perd réellement contre le commando WY avant d'obtenir la prise : trois specials acceptés, aucun hold admis, puis KO au tick 2746, à 26,108 s dans le budget de 55 s. Les six duels de ce mode ne sont donc pas qualifiés par ce run. Les six Save reprennent le même contenu de jeu que dans la première exécution ; seuls leurs horodatages `createdAt` et `updatedAt` changent entre les deux runs. Dans chaque exécution, les modes 0/200 ms réutilisent les mêmes octets. Les paramètres du combat et le pilote sont identiques ; la phase des observations change les décisions de garde et les fenêtres de départ.
+
+Le pont de régression exécute les helpers Python réels, les commandes clavier, le runtime et le CPU de production. Il reproduit l'échec de l'ancien pilote dans plusieurs phases voisines avec des lectures à 200 ms. Le nouveau pilote mesure la durée de ses lectures, garde une réserve native pour le special, maintient la garde entre les lectures exposées et avance pendant les fenêtres de récupération réellement observées. La portée de départ est calculée depuis le saut et le déplacement natifs ; l'admission du contact reste à 8 px et chaque succès exige encore la préparation et le hold de la bonne attaque.
+
+La suite complète du vérificateur réussit 19/19, sans exclusion. Dix acquisitions natives couvrent six configurations WY à 200 ms, dans plusieurs phases RAF voisines, et Guardian/Cultist chacun à 0 et 200 ms : de 2,124 à 18,310 s, avec un à trois specials acceptés. Le cas négatif reçoit un véritable hold après l'échéance et doit échouer explicitement à 61,850 s. La limite de 55 s et celle de 32 essais restent inchangées. Le changement de round relâche puis réémet les vraies touches et le mouvement reprend.
+
+Le seed, le choix d'adversaire et la durée du round sont des paramètres de fixture fixés avant la construction du runtime ; aucun état de combat n'est écrit pendant le parcours. Les doubles DOM/Canvas/RAF et les transports symétriques du pont sont déclarés. Le pont ne simule pas un surcoût réseau distinct pour le dispatch clavier et ne constitue pas une qualification Chromium. Seule la prochaine recette navigateur peut confirmer les six duels avec chacun des deux délais.
+
+### Approche précise des portes au clavier
+
+Le second run de ship réussit toujours V165 (121 contrôles/20 PNG) et V177 (497 contrôles/98 PNG, 200/200 ajouts visibles). V182 conserve 13/15 scénarios, 197 contrôles et 43 PNG. L'égalité complète des sockets des capsules et leur retour passent désormais. Les dix anciennes poses passent aussi. Les deux nouveaux échecs précèdent la demande de passage : approche du palier haut de Durandal et de l'échelle médicale. Le joueur reste vivant, au sol, sans collision bloquante ; les dernières corrections dépassent alternativement la cible.
+
+La reproduction utilise la vraie fonction Python `walk_to`, le Hub et ses touches A/D. Une impulsion minimale de 18 ms, le retard des touches et le freinage natif peuvent déplacer le joueur de 8,975 px, davantage que la fenêtre de précision finale. Le mouvement alterne alors de part et d'autre de la cible jusqu'à la limite des 24 corrections. Le correctif réduit les impulsions d'approche et divise le gain après un dépassement ; il conserve la physique, les tolérances de 3/2,5 px et les 24 corrections maximales. Chaque correction est consignée.
+
+La matrice de 24 approches réussit en une à trois corrections avec le nouveau pilote ; dix de ces mêmes cas échouent avec l'ancien. La suite V178 complète réussit 18/18. La comparaison AST confirme que seule `walk_to` change dans le pilote de portes. Les 15 scénarios et les 50 images attendues restent à produire dans la prochaine exécution navigateur.
+
+### Retour de Jun dans le prérequis crew-lifts
+
+Le retour utilisé avant le parcours d'Asha expire à 900,048 s, après 307,258 s de simulation native. Jun est encore en mouvement vers son origine : deux traversées et deux trajets d'ascenseur attestés, 77,953 px restant à parcourir. Le ralentissement CDP n'est pas appliqué dans ce prérequis. L'observateur reçoit 9 039 RAF, soit environ 10,043 images/s ; la progression native par RAF est proche du plafond de 34 ms.
+
+Les 552 sources et le pilote sont identiques entre les deux runs, ainsi que les versions de Chromium et Playwright. La fixture Asha ne diffère que par ses horodatages. Le premier run vert effectue le même parcours natif de 9 180 px en 710,949 s murales, avec 9 110 RAF et 309,706 s natives, soit 12,814 images/s. Les phases précédentes de Maksim et Inez sont également plus lentes lors du second run, et les mêmes 334 tests Node passent de 84,07 à 103,97 s. Ces données étayent une exécution globalement plus lente ; elles ne mesurent ni le CPU de Chrome ni une défaillance précise de l'hôte. Le budget de 900 s et l'exigence d'un retour natif complet restent inchangés.
+
+Une mesure locale ciblée du lecteur réel et de ses trois clones, sur les quatre états initial/final des deux runs, obtient des médianes de 0,044 à 0,082 ms par lecture. Les états restitués sont égaux aux fixtures et le host déclaré n'est pas modifié. Cette mesure Node avec un host de test ne profile pas Chrome ou le moteur complet ; elle n'établit pas que le lecteur provoque la cadence observée. Aucun correctif spéculatif ni changement de budget n'est ajouté. La prochaine exécution complète du nouveau candidat doit constater le retour natif de Jun dans les mêmes conditions d'admission ; le précédent échec reste enregistré.
+
 ## Travaux encore distincts
 
 L'intégration ne transforme pas les 129 propositions d'armes en équipements admis, ni les 18 tenues sans visuel équipable en tenues terminées. Les trois profils AFE2 inconnus, les rapprochements à documenter, les archives primaires manquantes et les validations artistiques restent ouverts. Aucun statut de fidélité canonique ou artistique 1:1 n'est accordé par une fusion de code.
