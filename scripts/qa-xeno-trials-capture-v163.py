@@ -2,8 +2,9 @@
 
 Only the Save picker imports an explicitly unearned roster-unlock profile.
 Keyboard/menu actions obtain every gameplay contact, hold, escape and recovery.
-The first observed floor frame synchronously clicks the production pause button;
-that declared public UI action is the observer's only game-control action.
+The first observed floor and the bounded post-release continuation synchronously
+click the production pause button; these declared UI pauses are the observers'
+only game-control actions. PNG exports happen while the game is paused.
 The additional atlas/mirrored comparisons are labelled render fixtures: clones
 of an observed hold are used only by pure render functions, never by runtime.
 No scheduler, simulation body, HP, result, RNG or live match field is rewritten.
@@ -115,13 +116,13 @@ def wait_frame(page, predicate, timeout=45000):
       if(!m)return false;if(PREDICATE)return{state:s,png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')};return false;}'''.replace('PREDICATE', predicate), polling='raf', timeout=timeout).json_value()
 
 # RAF evidence copies pixels locally, then synchronously activates the production
-# pause button through its DOM click handler. This floor callback is not read-only;
-# it never calls a runtime setter or assigns a match field. PNG compression waits
-# until that public UI pause, or both post-resume observations are complete.
+# pause button through its DOM click handler. These callbacks are not read-only;
+# they never call a runtime setter or assign a match field. PNG compression waits
+# until the public floor pause or the bounded post-release recovery pause.
 CAPTURE_OBSERVER = r'''c=> {
   const slots=globalThis.__ATF_CAPTURE_OBSERVER_V163__ ||= {};
   if(slots[c.stage])slots[c.stage].cancelled=true;
-  const out=slots[c.stage]={expected:c,ready:false,done:false,error:null,trace:[],floor:null,struggle:null,release:null};
+  const out=slots[c.stage]={expected:c,ready:false,done:false,error:null,trace:[],floor:null,struggle:null,release:null,recovered:null};
   const read=()=>globalThis.__ATF_XENO_TRIALS_V96__?.snapshot();
   const compact=s=>{const m=s?.match,h=m?.grappleV153;return m?{tick:m.tick,round:m.round,paused:m.paused,
     matchId:m.config.matchId,grapple:h?{id:h.id,attacker:h.attacker,target:h.target,escapeProgress:h.escapeProgress}:null,
@@ -156,6 +157,8 @@ CAPTURE_OBSERVER = r'''c=> {
     if(!out.trace.length||row.tick!==out.trace.at(-1).tick||row.paused!==out.trace.at(-1).paused){out.trace.push(row);if(out.trace.length>240)out.trace.shift();}
     if(performance.now()-start>c.timeoutMs){fail('Native '+c.stage+' observer exceeded original '+c.timeoutMs+'ms budget');return;}
     if(!sameMatch(m)||m.tick<armed.match.tick){fail('Match, round, participants or monotonic tick changed');return;}
+    if(c.stage==='post'&&(m.phase==='match-over'||m.result)){
+      fail('Native match completed before recovery pause: '+JSON.stringify({tick:m.tick,winner:m.result?.winner,reason:m.result?.reason}));return;}
     if(c.stage==='post'&&m.paused){requestAnimationFrame(sample);return;}
     const h=m.grappleV153;
     if(h&&!sameHold(h)){fail('Different native hold cannot replace expected capture');return;}
@@ -191,10 +194,31 @@ CAPTURE_OBSERVER = r'''c=> {
       if(!out.struggle&&m.tick>armed.match.tick&&h.escapeProgress>0&&(!c.after||r?.escapeProgress>0&&r.pairedContacts))out.struggle=frame(s);
     }else{
       const end=m.events.find(e=>e.type==='grapple-end-v153'&&e.grappleId===c.holdId);
-      if(end){out.release=frame(s);out.done=true;
-        if(!out.struggle)fail('Expected hold ended before a real post-resume resistance frame');
-        else if(c.after&&!receipt(m,'recovery'))fail('First native release has no recovery painted for the same captive and hold');
-        return;}
+      if(end&&!out.release){
+        if(!out.struggle){fail('Expected hold ended before a real post-resume resistance frame');return;}
+        if(c.after&&!receipt(m,'recovery')){fail('First native release has no recovery painted for the same captive and hold');return;}
+        out.release=frame(s);
+      }
+      // Observe the former450ms continuation in actual120Hz simulation ticks.
+      // Slow PNG encoding or client transport must not add unbounded combat.
+      if(out.release&&m.tick-out.release.state.match.tick>=54){
+        const control=document.querySelector('[data-xt="pause"]');
+        if(m.phase!=='active'||m.paused||!control||control.disabled||typeof control.click!=='function'){
+          fail('Recovery continuation requires an enabled public pause button and a running unfinished match');return;}
+        out.recovered=frame(s);
+        out.pauseAction={method:'DOM click on production pause button',selector:'[data-xt="pause"]',
+          beforeTick:m.tick,beforePaused:m.paused,releaseTick:out.release.state.match.tick,
+          requiredNativeTicks:54,observedNativeTicks:m.tick-out.release.state.match.tick,holdId:c.holdId};
+        control.click();
+        const paused=read()?.match;
+        Object.assign(out.pauseAction,{afterTick:paused?.tick,afterPaused:paused?.paused});
+        if(!sameMatch(paused)||paused.paused!==true||paused.tick!==m.tick||paused.phase!=='active'
+          ||paused.result||paused.grappleV153
+          ||JSON.stringify(paused.fighters)!==JSON.stringify(m.fighters)
+          ||JSON.stringify(paused.events)!==JSON.stringify(m.events)){
+          fail('Public recovery pause did not retain the exact unfinished match, participants and release');return;}
+        out.ready=true;out.done=true;return;
+      }
     }
     requestAnimationFrame(sample);
   }
@@ -210,8 +234,16 @@ CAPTURE_EXPORT = r'''c=> {
     const current=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match,recorded=out.floor?.state?.match;
     if(!current?.paused||!recorded?.grappleV153||current.grappleV153?.id!==recorded.grappleV153.id)
       throw Error('Floor PNG requires the public pause on the same native hold');
-  }else if(c.stage!=='post'||!out.struggle||!out.release){
-    throw Error('Post PNGs require both same-hold resistance and release observations');
+  }else if(c.stage==='post'){
+    const current=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match,recorded=out.recovered?.state?.match;
+    if(!out.ready||!out.struggle||!out.release||!recorded||!current?.paused
+      ||current.tick!==recorded.tick||current.config.matchId!==recorded.config.matchId||current.round!==recorded.round
+      ||current.result||current.grappleV153||current.phase!=='active'
+      ||JSON.stringify(current.fighters)!==JSON.stringify(recorded.fighters)
+      ||JSON.stringify(current.events)!==JSON.stringify(recorded.events))
+      throw Error('Post PNGs require the exact public recovery pause and all same-hold observations');
+  }else{
+    throw Error('Unknown capture observation stage');
   }
   return Object.fromEntries(c.fields.map(field=>{
     const frame=out[field];if(!frame?.bitmap)throw Error('Missing copied native frame: '+field);
@@ -230,7 +262,15 @@ def get_frame(page):
 # pause click at real floor contact. Combat, clocks and keys stay native.
 PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
- if(prior)prior.cancelled=true;
+ if(prior){
+  const child=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor;
+  if(child?.expected.startupAttemptNumber===prior.expected.attemptNumber
+    &&child.expected.attackEventId===prior.accepted?.attackEventId){
+   if(child.ready)return{error:'A completed first native floor cannot be replaced by a later attempt'};
+   child.cancelled=true;
+  }
+  prior.cancelled=true;
+ }
  const out=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:c,ready:false,done:false,accepted:null,frame:null,error:null};
  const started=performance.now();
  function sample(){
@@ -259,7 +299,7 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
     out.floorArm=arm({stage:'floor',timeoutMs:45000,matchId:m.config.matchId,round:m.round,
      fighterIds:m.fighters.map(f=>f.id),sides:m.fighters.map(f=>f.side),
      attackerSide:'player',targetSide:m.fighters[1].side,targetId:m.fighters[1].id,
-     holdId:null,sinceTick:m.tick,after:c.after,attackEventId:event.id});
+     holdId:null,sinceTick:m.tick,after:c.after,attackEventId:event.id,startupAttemptNumber:c.attemptNumber});
     if(out.floorArm.error){out.done=true;out.error=out.floorArm.error;return;}
    }
    out.ready=true;out.done=true;return;
@@ -278,6 +318,16 @@ PLAYER_STARTUP_EXPORT_V179 = r'''expected=>{
    ||['attackId','attackEventId','attackEventTick','frameTick','attackAge','clip']
      .some(k=>p[k]!==expected.proof[k])||o.accepted?.attackEventId!==p.attackEventId)return null;
  return{state:f.state,png:f.bitmap.toDataURL('image/png'),preparationProof:p};
+}'''
+
+# Preserve the successful first-floor observer, and cancel only a failed child
+# owned by this exact startup attempt (the complementary PR36 ownership guard).
+PLAYER_STARTUP_CANCEL_V179 = r'''keepFloor=>{
+ const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(!o)return;
+ o.cancelled=true;
+ const child=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor;
+ if(!keepFloor&&child?.expected.startupAttemptNumber===o.expected.attemptNumber
+   &&child.expected.attackEventId===o.accepted?.attackEventId)child.cancelled=true;
 }'''
 
 def capture_acquisition_diagnostic(trace, limit=3000):
@@ -312,7 +362,7 @@ def capture_acquisition_diagnostic(trace, limit=3000):
         return json.dumps({'profile': data['profile'], 'status': data['status'], 'diagnosticTruncated': True})
     return encoded
 
-def acquire_player_capture(page, after, trace):
+def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
     # The Prowler and these humans have different front-biased bodies. Their
     # pivot distance is not the V153 contact test. All imports below only read
     # the public snapshot through the same pure geometry/spec functions used
@@ -362,6 +412,7 @@ def acquire_player_capture(page, after, trace):
     prepared_round = None
     preparations = {}
     last_observation_tick = -120
+    trace['declaredStartupReadLatencyMs'] = transfer_delay_ms
     page.evaluate('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__=(' + CAPTURE_OBSERVER
                   + ');globalThis.__ATF_ARM_PLAYER_STARTUP_V181__=(' + PLAYER_STARTUP_OBSERVER_V177 + ');}')
 
@@ -483,13 +534,15 @@ def acquire_player_capture(page, after, trace):
                 trace['attempts'].append(attempt)
                 assert prepared_attempt == attempt['number'] and prepared_round == m['round']
                 page.keyboard.press('KeyL', delay=40)
+                if transfer_delay_ms:
+                    page.wait_for_timeout(transfer_delay_ms)
             page.wait_for_timeout(20)
         raise AssertionError('Keyboard Prowler did not earn a native capture before the deadline')
     except Exception as e:
         trace.update({'status': 'failed', 'error': str(e), 'elapsedSeconds': time.monotonic() - started})
         raise
     finally:
-        page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(o)o.cancelled=true;}''')
+        page.evaluate(PLAYER_STARTUP_CANCEL_V179, trace.get('status') == 'captured')
         if held:
             page.keyboard.up(held)
         if guarding:
@@ -537,6 +590,8 @@ def main():
     p.add_argument('--roles', choices=['cpu-captor', 'player-captor', 'both'], default='both')
     p.add_argument('--client-read-delay-ms', type=int, choices=[0, 200], default=0,
                    help='Declared Python delay around Page.evaluate only, split equally before/after; native keys are unchanged')
+    p.add_argument('--startup-read-latency-ms', type=int, choices=[0, 700], default=0,
+                   help='Declared external read delay after each real player special; native RAF and original budgets continue')
     p.add_argument('--fixture-dir', type=Path, help='Reuse exact generated Save-picker fixtures outside the repository')
     args = p.parse_args()
     out = args.output.resolve()
@@ -547,9 +602,10 @@ def main():
     report = {'status': 'running', 'comparisonStage': args.comparison_stage, 'taskIds': TASKS, 'checks': [], 'captures': [], 'profiles': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
               'qaDriverSha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'clientReadDelay': {'delayMsPerEvaluate': args.client_read_delay_ms, 'profiles': []},
+              'startupReadLatencyMs': args.startup_read_latency_ms,
               'fixtureDirectory': str(args.fixture_dir.resolve()) if args.fixture_dir else None,
-              'scope': 'Six production menu duels on real browser RAF: three original target identities, both captor roles/directions, actual native startup/contact/floor hold/guard resistance/escape/recovery, a synchronized DOM click on the production pause button, keyboard resume and public abandonment. Additional art/geometry comparisons are declared fixtures.',
-              'limits': ['Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.', 'Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.', 'Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.', 'Recovery is presentation only and yields immediately to a new target action.', 'Automated keyboard/menu scenarios; not human playtesting.', 'The first observed floor frame activates the real public pause button with DOM click in the same RAF callback; this is an explicit UI action, not a read-only observation or a trusted physical click. No direct runtime pause API is called; no scheduler or match field is assigned.']}
+              'scope': 'Six production menu duels on real browser RAF: three original target identities, both captor roles/directions, actual native startup/contact/floor hold/guard resistance/escape/recovery, synchronized DOM clicks on the production pause button at first floor and after54 native recovery ticks, keyboard resume and public abandonment. Additional art/geometry comparisons are declared fixtures.',
+              'limits': ['Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.', 'Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.', 'Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.', 'Recovery is presentation only and yields immediately to a new target action.', 'Automated keyboard/menu scenarios; not human playtesting.', 'The first observed floor frame and the continuation after54 native recovery ticks activate the real public pause button with DOM click in the same RAF callback; this is an explicit UI action, not a read-only observation or a trusted physical click. No direct runtime pause API is called; no scheduler or match field is assigned.']}
     def check(label, passed, evidence=None, failure_detail=None):
         assert passed, label + ('; ' + failure_detail[:1000] if failure_detail else '')
         report['checks'].append({'label': label, 'evidence': evidence, 'status': 'passed'})
@@ -604,7 +660,7 @@ def main():
                     else:
                         acquisition = {'profile': name}
                         report.setdefault('playerCaptureAcquisitions', []).append(acquisition)
-                        preparation = acquire_player_capture(page, after, acquisition)
+                        preparation = acquire_player_capture(page, after, acquisition, args.startup_read_latency_ms)
                     # Preparation is already observed; defer its transfer to disk and all
                     # checks until the first observed floor contact has activated the public pause button.
                     pm = preparation['state']['match']
@@ -699,7 +755,10 @@ def main():
                     wait_observation(page, 'post', 'release', 15000)
                     if role == 'cpu-captor':
                         page.keyboard.up('KeyS')
-                    frames = page.evaluate(CAPTURE_EXPORT, {'stage': 'post', 'fields': ['struggle', 'release']})
+                    phase(name, 'native recovery continuation with synchronous public button pause')
+                    wait_observation(page, 'post', 'ready', 15000)
+                    recovery_pause = observed(page)
+                    frames = page.evaluate(CAPTURE_EXPORT, {'stage': 'post', 'fields': ['struggle', 'release', 'recovered']})
                     struggle, release = frames['struggle'], frames['release']
                     capture(name+'-resistance.png', struggle, 'Real guard resistance from keyboard or CPU, never assigned escape progress.')
                     rm = release['state']['match']
@@ -709,12 +768,24 @@ def main():
                     if after:
                         check(name + ': release selects a separate recovery pose', any(v['phase'] == 'recovery' and v['role'] == 'captive' and v['side'] == target_side and v['targetId'] == target_id and v['grappleId'] == hold_id for v in rm['captureViewsV163']))
                     capture(name+'-release.png', release, 'Actual native escape and presentation recovery; engine stun/cost/result unchanged.')
-                    page.wait_for_timeout(450)
-                    capture(name+'-recovered-or-interrupted.png', get_frame(page), 'Native continuation after recovery; new combat actions may interrupt presentation.')
+                    recovered_match = frames['recovered']['state']['match']
+                    recovery_receipt = page.evaluate('()=>globalThis.__ATF_CAPTURE_OBSERVER_V163__.post.pauseAction')
+                    report.setdefault('recoveryPauseObservations', []).append({'profile': name, **recovery_receipt})
+                    check(name + ': at least450ms native recovery precedes an exact public pause before PNG export',
+                          recovered_match['tick'] - rm['tick'] >= 54
+                          and recovery_pause['match']['paused'] is True
+                          and recovery_pause['match']['tick'] == recovered_match['tick']
+                          and recovery_pause['match']['config']['matchId'] == binding['matchId']
+                          and recovery_pause['match']['round'] == binding['round']
+                          and recovery_pause['match']['result'] is None
+                          and observed(page) == recovery_pause, recovery_receipt)
+                    capture(name+'-recovered-or-interrupted.png', frames['recovered'], 'Native continuation for at least54 ticks (450ms) after recovery, then public pause; new combat actions may interrupt presentation.')
                     phase(name, 'public abandonment and exact reward check')
-                    page.keyboard.press('KeyP')
-                    if not observed(page)['match']['paused']:
-                        page.keyboard.press('KeyP')
+                    pending = recovery_pause['progress'].get('pending')
+                    check(name + ': abandonment still owns the unfinished ticket and cannot erase a native result',
+                          recovery_pause['match']['phase'] == 'active' and pending is not None
+                          and pending['matchId'] == binding['matchId']
+                          and recovery_pause['progress']['credits'] == original['credits'])
                     page.locator('[data-xt="abandon-overlay"]').click()
                     page.wait_for_function('()=>globalThis.__ATF_XENO_TRIALS_V96__.snapshot().match===null')
                     ended = observed(page)

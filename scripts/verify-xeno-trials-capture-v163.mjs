@@ -198,7 +198,7 @@ function captureRuntimeHost(){
   loadImage:async path=>images.get(path)||{naturalWidth:1024,naturalHeight:1024,complete:true},
   requestAnimationFrame,cancelAnimationFrame:id=>queue.delete(id)});
  ui.runtime=runtime;
- const frame=(count=1)=>{for(let i=0;i<count;i++){time+=1000/120;for(const[id,fn]of [...queue])if(queue.delete(id))fn(time);}};
+ const frame=(count=1,deltaMs=1000/120)=>{for(let i=0;i<count;i++){time+=deltaMs;for(const[id,fn]of [...queue])if(queue.delete(id))fn(time);}};
  return{runtime,canvas,element,requestAnimationFrame,frame,now:()=>time,
   key(code,type='keydown'){win.emit(type,{target:canvas,code});},
   async start(){assert.equal(await runtime.start(),true);
@@ -206,7 +206,7 @@ function captureRuntimeHost(){
    assert.equal(runtime.getState().presentation.blocksSimulation,false);frame(2);}
  };
 }
-async function nativePlayerCaptureForPause(h){
+async function nativePlayerCaptureForPause(h,{onAttempt}={}){
  await h.start();let move=null,guard=false;
  for(let i=0;i<6600;i++){
   const m=h.runtime.getState();
@@ -224,7 +224,7 @@ async function nativePlayerCaptureForPause(h){
   const special=attackSpec(definition(a.id),'special',baseAttacks.special);
   const attack=m.phase==='active'&&!m.paused&&contact&&recovery&&!a.attack&&a.stun<=0
    &&a.y===0&&b.y===0&&b.vy===0&&a.specialCooldown<=0&&a.stamina>=special.cost;
-  if(attack)h.key('KeyL');h.frame();if(attack)h.key('KeyL','keyup');
+  if(attack){onAttempt?.(m,special);h.key('KeyL');}h.frame();if(attack)h.key('KeyL','keyup');
  }
  assert.fail('The bounded native keyboard policy did not obtain a capture.');
 }
@@ -235,15 +235,18 @@ function captureQaLiteral(name){
 }
 function captureQaObserver(h){
  const copies=[],encodings=[];
- const context=createContext({performance:{now:h.now},requestAnimationFrame:h.requestAnimationFrame,
+ const context=createContext({structuredClone,performance:{now:h.now},requestAnimationFrame:h.requestAnimationFrame,
   __ATF_XENO_TRIALS_V96__:{snapshot:()=>({match:h.runtime.getState()})},
   document:{querySelector:selector=>selector==='[data-xt="canvas"]'?h.canvas:selector==='[data-xt="pause"]'?h.element('pause'):null,
    createElement(tag){assert.equal(tag,'canvas');return{width:0,height:0,getContext(){return{drawImage(source){
      assert.equal(source,h.canvas);const m=h.runtime.getState();copies.push({tick:m.tick,paused:m.paused});}};},
     toDataURL(){const m=h.runtime.getState();encodings.push({tick:m.tick,paused:m.paused});return'data:image/png;base64,declared-bitmap-double';}};}}});
  const observe=runInContext('('+captureQaLiteral('CAPTURE_OBSERVER')+')',context);
+ context.__ATF_ARM_CAPTURE_FLOOR_V207__=observe;
+ const startup=runInContext('('+captureQaLiteral('PLAYER_STARTUP_OBSERVER_V177')+')',context);
  const exportFrames=runInContext('('+captureQaLiteral('CAPTURE_EXPORT')+')',context);
- return{observe,exportFrames,copies,encodings,out:stage=>context.__ATF_CAPTURE_OBSERVER_V163__?.[stage]};
+ return{observe,startup,exportFrames,copies,encodings,out:stage=>context.__ATF_CAPTURE_OBSERVER_V163__?.[stage],
+  startupState:()=>context.__ATF_PLAYER_STARTUP_PROOF_V177__};
 }
 function captureBinding(m,stage='floor'){
  const hold=m.grappleV153;
@@ -284,7 +287,7 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   h.frame(240);assert.deepEqual(h.runtime.getState(),frozen,'Native state must remain exactly frozen throughout the pause.');
   assert.ok(qa.observe({...binding,stage:'post',timeoutMs:15000}).armed);
   h.key('KeyP');h.key('KeyP','keyup');
-  for(let i=0;i<30&&!qa.out('post').done;i++)h.frame();
+  for(let i=0;i<120&&!qa.out('post').done;i++)h.frame();
   const post=qa.out('post');assert.equal(post.error,null);assert.ok(post.struggle&&post.release);
   assert.equal(post.struggle.state.match.grappleV153.id,recorded.grappleV153.id);
   assert.ok(post.struggle.state.match.grappleV153.escapeProgress>recorded.grappleV153.escapeProgress);
@@ -294,7 +297,40 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   assert.equal(released.fighters.find(f=>f.side===binding.targetSide).stats.grappleEscapesV153,1);
   assert.equal(released.result,null);
   assert.ok(released.captureViewsV163.some(v=>v.role==='captive'&&v.phase==='recovery'&&v.grappleId===binding.holdId&&v.targetId===binding.targetId));
-  assert.ok(qa.exportFrames({stage:'post',fields:['struggle','release']}).release);
+  assert.equal(post.ready,true);assert.ok(post.recovered);
+  assert.equal(post.recovered.state.match.tick-released.tick,54);
+  const recoveryFrozen=h.runtime.getState();assert.equal(recoveryFrozen.paused,true);
+  assert.equal(recoveryFrozen.tick,post.recovered.state.match.tick);assert.equal(recoveryFrozen.result,null);
+  assert.equal(h.element('pause').clicks,2);assert.equal(post.pauseAction.observedNativeTicks,54);
+  h.frame(240);assert.deepEqual(h.runtime.getState(),recoveryFrozen,'Slow evidence transfer cannot add combat after the bounded recovery.');
+  const exported=qa.exportFrames({stage:'post',fields:['struggle','release','recovered']});
+  assert.ok(exported.release);assert.ok(exported.recovered);
+  assert.ok(qa.encodings.every(frame=>frame.paused),'All native PNG encoding must occur while publicly paused.');
+  // Declared corrupted read fixtures test export rejection; the real engine
+  // and the genuine recovery receipt remain untouched.
+  const runtime=h.runtime;
+  try{
+    for(const patch of [{paused:false},{tick:recoveryFrozen.tick+1},{round:recoveryFrozen.round+1},
+      {config:{...recoveryFrozen.config,matchId:'other'}},{result:{winner:'opponent'}},
+      {fighters:recoveryFrozen.fighters.map((f,i)=>i?f:{...f,hp:f.hp-1})}]){
+      h.runtime={getState:()=>({...clone(recoveryFrozen),...patch})};
+      assert.throws(()=>qa.exportFrames({stage:'post',fields:['release']}),/exact public recovery pause/);
+    }
+  }finally{h.runtime=runtime;}
+  for(const paused of [false,true]){
+    const queue=[];let current=clone(frozen);
+    const fixture={runtime:{getState:()=>clone(current)},canvas:h.canvas,
+      element(){assert.fail('A completed result must never reach the recovery pause control.');},
+      now:()=>0,requestAnimationFrame:fn=>queue.push(fn)};
+    const rejected=captureQaObserver(fixture);rejected.observe({...binding,stage:'post',timeoutMs:15000});
+    // This adversarial result-read fixture checks rejection, not another duel.
+    current={...clone(released),paused,phase:'match-over',result:{winner:'opponent',reason:'ko'}};
+    queue.shift()();
+    assert.match(rejected.out('post').error,/Native match completed before recovery pause/);
+    assert.equal(rejected.out('post').ready,false);
+    assert.equal(current.result.winner,'opponent');
+    assert.throws(()=>rejected.exportFrames({stage:'post',fields:['release']}),/Native match completed/);
+  }
  }finally{h.runtime.stop();}
 });
 test('capture QA rejects unavailable public pause, changed tick or identity, ended holds and lost floor support',()=>{
@@ -349,5 +385,48 @@ test('the first floor observer binds the native hold to its exact accepted speci
   assert.equal(valid.out('floor').error,null);assert.equal(valid.out('floor').ready,true);
   assert.equal(valid.out('floor').floor.state.match.tick,before.tick);
   assert.equal(h.element('pause').clicks,1);assert.equal(h.runtime.getState().paused,true);
+ }finally{h.runtime.stop();}
+});
+
+// Both original PR36 observation-window regressions remain native.
+test('atomic floor protects an already-painted native floor before a grouped RAF can release it',async()=>{
+ const h=captureRuntimeHost();
+ try{
+  const acquired=await nativePlayerCaptureForPause(h);
+  while(h.runtime.getState().grappleV153?.escapeProgress<67)h.frame();
+  const arm=h.runtime.getState();assert.equal(arm.grappleV153.id,acquired.grappleV153.id);
+  const qa=captureQaObserver(h);qa.observe(captureBinding(arm));
+  const pausedAtArm=h.runtime.getState().paused;
+  h.frame(1,50);
+  assert.equal(pausedAtArm,true,'Already-painted floor must pause synchronously before the next grouped native frame');
+  assert.equal(qa.out('floor').error,null);assert.equal(qa.out('floor').ready,true);
+  assert.equal(qa.out('floor').floor.state.match.tick,arm.tick);assert.equal(h.runtime.getState().tick,arm.tick);
+  assert.equal(h.runtime.getState().grappleV153.id,arm.grappleV153.id);
+ }finally{h.runtime.stop();}
+});
+test('atomic startup arms same-hold floor before a declared700ms external read latency',async()=>{
+ const h=captureRuntimeHost(),qa=captureQaObserver(h);let attempt=0;
+ try{
+  const acquired=await nativePlayerCaptureForPause(h,{onAttempt(m,special){
+   qa.startup({matchId:m.config.matchId,round:m.round,playerId:m.fighters[0].id,targetId:m.fighters[1].id,
+    attemptNumber:++attempt,lastEventId:Math.max(...m.events.map(e=>e.id)),specialsBefore:m.fighters[0].stats.specials,
+    specialStartup:special.startup,after:true,timeoutMs:55000,captureFloor:true});
+  }});
+  const initial=qa.startupState();assert.ok(initial.ready);const proof=initial.frame.preparationProof;
+  const start=acquired.events.find(e=>e.type==='grapple-start-v153'&&e.grappleId===acquired.grappleV153.id);
+  const attack=acquired.events.findLast(e=>e.type==='attack'&&e.side==='player'&&e.id<start.id);
+  assert.equal(proof.attackEventId,attack.id);assert.equal(proof.attackId+1,attack.id);
+  // Ordinary120Hz host frames continue while the external caller does no work.
+  // No simulation clock, scheduler callback or native match field is replaced.
+  h.frame(84);
+  const floor=qa.out('floor'),frozen=h.runtime.getState();
+  assert.ok(floor,'Accepted startup must have armed its floor before the caller returns');
+  assert.equal(floor.error,null);assert.equal(floor.ready,true);assert.equal(frozen.paused,true);
+  assert.equal(floor.expected.attackEventId,attack.id);assert.equal(floor.expected.startupAttemptNumber,attempt);
+  assert.equal(floor.floor.state.match.grappleV153.id,acquired.grappleV153.id);
+  assert.equal(frozen.grappleV153.id,acquired.grappleV153.id);assert.equal(frozen.tick,floor.floor.state.match.tick);
+  assert.equal(h.element('pause').clicks,1);assert.equal(qa.encodings.length,0);
+  assert.ok(frozen.captureViewsV163.some(v=>v.fullFloorPin&&v.pairedContacts&&v.targetId===acquired.fighters[1].id
+   &&v.grappleId===acquired.grappleV153.id&&Math.abs(v.contacts.floorSupport[1]-v.floor)<1e-6));
  }finally{h.runtime.stop();}
 });

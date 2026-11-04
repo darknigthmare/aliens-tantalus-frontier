@@ -9,7 +9,7 @@ import { execFileSync } from 'node:child_process';
 const python=readFileSync(process.env.ATF_CAPTURE_DRIVER_SOURCE||new URL('./qa-xeno-trials-capture-v163.py',import.meta.url),'utf8');
 const source=python.match(/PLAYER_STARTUP_OBSERVER_V177 = r'''([\s\S]*?)'''/)[1];
 function fixture(){
-  const frames=[],copies=[],encodings=[];let now=0;
+  const frames=[],copies=[],encodings=[],floorArms=[];let now=0;
   const match={config:{matchId:'qa-match'},round:1,tick:10,phase:'active',grappleV153:null,
     fighters:[{id:'prowler',side:'player',stats:{specials:0},attack:null},
       {id:'guardian',side:'cpu',stats:{specials:0},attack:null}],events:[],rigViewsV154:[]};
@@ -18,10 +18,15 @@ function fixture(){
     __ATF_XENO_TRIALS_V96__:{snapshot:()=>state},document:{querySelector:()=>canvas,
       createElement:()=>({getContext:()=>({drawImage:(...a)=>copies.push(a)}),
         toDataURL:()=>{encodings.push(true);return 'recorded-png';}})}};
+  context.__ATF_ARM_CAPTURE_FLOOR_V207__=config=>{
+    floorArms.push(structuredClone(config));
+    context.__ATF_CAPTURE_OBSERVER_V163__={floor:{expected:config,ready:false,cancelled:false}};
+    return{armed:true};
+  };
   const arm=runInNewContext('('+source+')',context);
   const config={matchId:'qa-match',round:1,playerId:'prowler',targetId:'guardian',
     attemptNumber:1,lastEventId:2,specialsBefore:0,specialStartup:.29,after:true,timeoutMs:55000};
-  return{state,match,canvas,context,config,copies,encodings,
+  return{state,match,canvas,context,config,copies,encodings,floorArms,
     arm:extra=>arm({...config,...extra}),step:()=>{const fn=frames.shift();assert.ok(fn);fn();},
     advance:ms=>{now+=ms;},out:()=>context.__ATF_PLAYER_STARTUP_PROOF_V177__};
 }
@@ -81,12 +86,13 @@ test('accepted startup arms exactly its first floor before returning to a delaye
  const binding=JSON.parse(JSON.stringify(calls[0]));
  assert.deepEqual(binding,{stage:'floor',timeoutMs:45000,matchId:'qa-match',round:1,
   fighterIds:['prowler','guardian'],sides:['player','cpu'],attackerSide:'player',targetSide:'cpu',
-  targetId:'guardian',holdId:null,sinceTick:11,after:true,attackEventId:4});
+  targetId:'guardian',holdId:null,sinceTick:11,after:true,attackEventId:4,startupAttemptNumber:1});
  f.advance(200);f.match.tick=35;f.match.grappleV153={id:'later-hold'};
  assert.equal(calls.length,1,'A delayed client cannot replace the observer for the first accepted special.');
  assert.equal(f.out().frame.state.match.tick,11);
  for(const mode of ['missing','rejected']){
-  const g=fixture();if(mode==='rejected')g.context.__ATF_ARM_CAPTURE_FLOOR_V207__=()=>({error:'wrong-first-floor'});
+  const g=fixture();delete g.context.__ATF_ARM_CAPTURE_FLOOR_V207__;
+  if(mode==='rejected')g.context.__ATF_ARM_CAPTURE_FLOOR_V207__=()=>({error:'wrong-first-floor'});
   g.arm({captureFloor:true});startup(g);g.step();
   assert.equal(g.out().ready,false);assert.ok(g.out().error);assert.equal(g.encodings.length,0);
  }
@@ -448,4 +454,34 @@ assert.equal(moved,true,'The actual Python helper must release the old native ke
 assert.ok(keyEvents.some(e=>e.key==='ArrowRight'&&e.type==='keyup'&&e.round===2&&e.blocked));
 assert.ok(keyEvents.some(e=>e.key==='ArrowRight'&&e.type==='keydown'&&e.round===2&&!e.blocked));
 }finally{clearTimeout(timer);if(child.exitCode===null)child.kill('SIGKILL');h.runtime.stop();}
+});
+
+// Complementary PR36 ownership regressions retained during consolidation.
+test('foreign or mismatched startup events cannot arm a floor child',()=>{
+ for(const change of [f=>{f.match.fighters[0].attack.id=9;},f=>{f.match.fighters[1].id='other';},
+  f=>{f.match.events[0].side='cpu';}]){
+  const f=fixture();f.arm({captureFloor:true});startup(f);change(f);f.step();
+  assert.equal(f.floorArms.length,0);assert.equal(f.out().ready,false);
+ }
+});
+test('attempt replacement cancels its pending floor child and preserves a completed first floor',()=>{
+ const f=fixture();f.arm({captureFloor:true});startup(f);f.step();
+ const child=f.context.__ATF_CAPTURE_OBSERVER_V163__.floor;
+ f.arm({attemptNumber:2,captureFloor:true});assert.equal(child.cancelled,true);
+ const g=fixture();g.arm({captureFloor:true});startup(g);g.step();
+ const done=g.context.__ATF_CAPTURE_OBSERVER_V163__.floor;done.ready=true;
+ const owner=g.out(),result=g.arm({attemptNumber:2,captureFloor:true});
+ assert.match(result.error,/completed first native floor/);assert.equal(g.out(),owner);assert.equal(done.cancelled,false);
+});
+test('startup cancellation retains a successful child and cancels only a failed child owned by this attempt',()=>{
+ const cancelSource=python.match(/PLAYER_STARTUP_CANCEL_V179 = r'''([\s\S]*?)'''/)[1];
+ for(const keep of [false,true]){
+  const f=fixture();f.arm({captureFloor:true});startup(f);f.step();
+  const child=f.context.__ATF_CAPTURE_OBSERVER_V163__.floor;
+  const cancel=runInNewContext('('+cancelSource+')',f.context);cancel(keep);
+  assert.equal(f.out().cancelled,true);assert.equal(child.cancelled,!keep);
+ }
+ const f=fixture();f.arm({captureFloor:true});startup(f);f.step();
+ const child=f.context.__ATF_CAPTURE_OBSERVER_V163__.floor;child.expected={...child.expected,startupAttemptNumber:7};
+ runInNewContext('('+cancelSource+')',f.context)(false);assert.equal(child.cancelled,false);
 });
