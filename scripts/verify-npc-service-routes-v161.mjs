@@ -317,7 +317,10 @@ test('native context factories do not immediately re-admit a lifecycle handoff o
 // The production Python controls run against the real V88 player/door owner
 // and V136 parent-deck walking. DOM/images/RAF are host doubles; the disclosed
 // fixture gives one native crew body a short patrol across the return aperture.
-// No actor is moved or removed by the driver after fixture initialization.
+// No actor is moved or removed by the driver after fixture initialization. The
+// racing case advances real native frames during a disclosed client input gap;
+// the stalled case withholds host frames after acceptance, without replacing
+// any runtime method, to prove that an incomplete transition remains a failure.
 async function nativeExitQaDriverV161(root) {
   const assert = (await import('node:assert/strict')).default;
   const { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
@@ -325,7 +328,7 @@ async function nativeExitQaDriverV161(root) {
   const { createDefaultSave } = await import(new URL('src/save.js', root));
   const { hostV136 } = await import(new URL('scripts/forge-native-host-v136.mjs', root));
   const { createInterface } = await import('node:readline');
-  const options = JSON.parse(process.argv[2]), host = hostV136(), events = [], attempts = [];
+  const options = JSON.parse(process.argv[2]), host = hostV136(), events = [], attempts = [], inputGaps = [];
   document.createElement = () => ({ ...host.canvas, style: {}, getContext: () => host.canvas.getContext('2d') });
   const save = createDefaultSave(); save.needsPlayerCreationV84 = false; save.clock.hour = 5;
   Object.assign(save.hub, { deck: 3, roomId: 'reactor', positionX: 1678, positionY: 532 });
@@ -334,11 +337,12 @@ async function nativeExitQaDriverV161(root) {
     onAction: event => events.push(structuredClone(event)) });
   hub.start(save.hub, { routineContextV62: { clock: save.clock, save }, onboardingV84: save.onboardingV84 });
   globalThis.__ATF_HUB__ = hub;
-  const rate = options.rate || 60; let elapsed = 0, blocker = null, maxBlockerSpeed = 0;
+  const rate = options.rate || 60; let elapsed = 0, blocker = null, maxBlockerSpeed = 0, raced = false;
   const advance = ms => {
     for (let left = ms / 1000; left > 1e-9;) {
       const dt = Math.min(1 / rate, left), before = blocker?.x;
-      if (hub.running) hub.update(dt);
+      const stalled = options.stalledTransition && attempts.some(attempt => attempt.accepted);
+      if (hub.running && !stalled) hub.update(dt);
       if (blocker) {
         assert.equal(hub.npcs.find(npc => npc.crewId === blocker.crewId), blocker);
         assert.equal(blocker.y + blocker.h, 624);
@@ -360,27 +364,37 @@ async function nativeExitQaDriverV161(root) {
     return annex && exit && hub.prepareHubDoorPassageV142(annex, 'exit', exit.endpointId);
   };
   const key = (type, code) => {
-    if (blocker && type === 'keydown' && code === 'KeyE')
-      attempts.push({ elapsed, passageReady: Boolean(passage()), blockerX: blocker.x });
+    if (blocker && type === 'keydown' && code === 'KeyE' && options.racing && !raced) {
+      const before = { elapsed, passageReady: Boolean(passage()), blockerX: blocker.x };
+      advance(100); raced = true;
+      inputGaps.push({ before, after: { elapsed, passageReady: Boolean(passage()), blockerX: blocker.x } });
+    }
+    const attempt = blocker && type === 'keydown' && code === 'KeyE'
+      ? { elapsed, passageReady: Boolean(passage()), blockerX: blocker.x } : null;
     host.events.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), { code, repeat: false }));
+    if (attempt) attempts.push({ ...attempt, accepted: hub.annexTransitionV71?.direction === 'exit',
+      blocked: structuredClone(hub.hubDoorBlockedV142 || null) });
   };
   // Reach the annex through its actual interaction and covered-leaf handoff.
   host.canvas.focus(); key('keydown', 'KeyE'); key('keyup', 'KeyE');
   until(() => hub.currentAnnexV71()?.id === 'engine-room' && !hub.annexTransitionV71 && !hub.hubDoorClosingV142, 45000);
   blocker = hub.npcs.find(npc => npc.crewId === 'crew-08-maksim-orlov'); assert.ok(blocker);
-  Object.assign(blocker, { x: 1661.7375, y: 532, min: 1661.7375, max: 1800, roomId: 'reactor',
+  const fixtureX = options.racing ? passage().arrival.x - blocker.w - .1 : 1661.7375;
+  Object.assign(blocker, { x: fixtureX, y: 532, min: fixtureX, max: 1800, roomId: 'reactor',
     mobile: !options.blocked, resumeVx: 27, vx: 0, facing: 1, lifeV136: null,
     workClock: 0, supportClock: 0, alertClock: 0, alerted: false, routinePhaseV62: 'idle' });
-  assert.equal(blocker.w, 44); assert.equal(blocker.h, 92); assert.equal(passage(), null);
+  assert.equal(blocker.w, 44); assert.equal(blocker.h, 92);
+  assert.equal(Boolean(passage()), Boolean(options.racing));
   elapsed = 0; events.length = 0;
   const snapshot = () => ({ elapsed, player: { x: hub.player.x, y: hub.player.y, w: hub.player.w, h: hub.player.h, vx: hub.player.vx },
     annex: hub.currentAnnexV71()?.id || null, transition: Boolean(hub.annexTransitionV71), heldKeys: [...hub.keys],
     blocker: { crewId: blocker.crewId, x: blocker.x, y: blocker.y, w: blocker.w, h: blocker.h },
-    maxBlockerSpeed, attempts, events, passageReady: Boolean(passage()),
+    maxBlockerSpeed, attempts, events, inputGaps, passageReady: Boolean(passage()),
+    observerInstalled: Boolean(globalThis.__ATF_SERVICE_EXIT_V182__),
     config: { id: 'idris-engine', annex: 'engine-room', annexDoor: 122 } });
   console.log(JSON.stringify(snapshot()));
   for await (const line of createInterface({ input: process.stdin })) {
-    const request = JSON.parse(line); let error = null;
+    const request = JSON.parse(line); let error = null, value = null;
     try {
       if (request.type === 'focus') host.canvas.focus();
       else if (request.type === 'wait') advance(request.ms);
@@ -390,9 +404,11 @@ async function nativeExitQaDriverV161(root) {
       } else if (request.type === 'predicate') {
         const predicate = Function('return (' + request.expression + ')')();
         until(() => predicate(request.arg), request.timeout);
+      } else if (request.type === 'evaluate') {
+        value = await Function('return (' + request.expression + ')')()(request.arg);
       } else if (request.type === 'stop') break;
     } catch (failure) { error = failure.message; }
-    console.log(JSON.stringify({ ...snapshot(), error }));
+    console.log(JSON.stringify({ ...snapshot(), value: value ?? null, error }));
   }
 }
 
@@ -446,9 +462,11 @@ class Page:
         return self.state
     def locator(self, selector):
         assert selector == '#hub-canvas'
-        return SimpleNamespace(focus=lambda: self.call(type='focus'))
+        return SimpleNamespace(focus=lambda **kwargs: self.call(type='focus'))
     def wait_for_function(self, expression, arg=None, timeout=30000):
         self.call(type='predicate', expression=expression, arg=arg, timeout=timeout)
+    def evaluate(self, expression, arg=None):
+        return self.call(type='evaluate', expression=expression, arg=arg)['value']
     def close(self):
         self.proc.stdin.write('{"type":"stop"}\n'); self.proc.stdin.flush()
         self.proc.stdin.close(); self.proc.wait(timeout=5)
@@ -456,13 +474,13 @@ class Page:
 results = []
 for case in spec['cases']:
     page = Page(case)
-    namespace = {'time': SimpleNamespace(monotonic=lambda: page.state['elapsed']),
+    namespace = {'time': SimpleNamespace(monotonic=lambda: page.state['elapsed']), 'report': {},
                  'observed': lambda page, config: page.call(type='read')}
     exec(compile(module, '<actual-native-service-exit-qa>', 'exec'), namespace)
     error = None
     try: namespace['leave_annex'](page, page.state['config'])
     except AssertionError as failure: error = str(failure)
-    results.append({'case': case, **page.state, 'error': error})
+    results.append({'case': case, **page.state, 'error': error, 'qaReport': namespace['report']})
     page.close()
 Path(spec['output']).write_text(json.dumps(results))
 `;
@@ -490,5 +508,50 @@ test('native service QA still refuses a stationary return occupant within the sa
   assert.ok(Math.abs(result.elapsed - 45) < 1e-6); assert.equal(result.player.y, 532);
   assert.equal(result.blocker.x, 1661.7375); assert.equal(result.passageReady, false);
   assert.equal(result.events.length, 0); assert.ok(!result.heldKeys.includes('KeyE'));
+  assert.equal(result.observerInstalled, false);
+});
+
+test('native service QA retries an actual E refusal after a readiness race and physical departure', () => {
+  const [result] = runNativeExitQaV161([{ racing: true }]);
+  assert.equal(result.error, null, JSON.stringify(result));
+  assert.equal(result.annex, null); assert.equal(result.transition, false);
+  assert.equal(result.player.y + result.player.h, 624); assert.equal(result.player.x, 1678);
+  assert.equal(result.player.w, 44); assert.equal(result.player.h, 92);
+  assert.ok(result.elapsed > 3 && result.elapsed < 45);
+  assert.equal(result.inputGaps.length, 1);
+  const gap = result.inputGaps[0];
+  assert.equal(gap.before.passageReady, true); assert.equal(gap.after.passageReady, false);
+  assert.ok(Math.abs(gap.after.elapsed - gap.before.elapsed - .1) < 1e-9);
+  assert.ok(gap.after.blockerX > gap.before.blockerX);
+  assert.equal(result.attempts.length, 2);
+  const [refused, accepted] = result.attempts;
+  assert.equal(refused.passageReady, false); assert.equal(refused.accepted, false);
+  assert.equal(refused.blocked.annexId, 'engine-room'); assert.equal(refused.blocked.direction, 'exit');
+  assert.equal(accepted.passageReady, true); assert.equal(accepted.accepted, true);
+  assert.equal(accepted.blocked, null); assert.ok(accepted.blockerX > refused.blockerX);
+  assert.ok(result.maxBlockerSpeed > 26 && result.maxBlockerSpeed <= 27 + 1e-6);
+  assert.deepEqual(result.events.map(event => event.action), ['hub:annex-exit-start', 'hub:annex-exit-complete']);
+  assert.equal(result.observerInstalled, false); assert.ok(!result.heldKeys.includes('KeyE'));
+  const [receipt] = result.qaReport.exitPassages;
+  assert.equal(receipt.status, 'passed'); assert.equal(receipt.budgetSeconds, 45);
+  assert.deepEqual(receipt.attempts.map(attempt => attempt.outcome), ['native-refusal', 'accepted']);
+  assert.equal(receipt.attempts[0].before.projectionAvailable, true);
+  assert.equal(receipt.attempts[0].after.projectionAvailable, false);
+  assert.equal(receipt.attempts[0].after.transition, null);
+  assert.equal(receipt.arrival.arrival.annexId, 'engine-room'); assert.equal(receipt.arrival.arrival.direction, 'exit');
+});
+
+test('native service QA fails an accepted exit whose host frame stream stalls within the same45s budget', () => {
+  const [result] = runNativeExitQaV161([{ stalledTransition: true }]);
+  assert.match(result.error, /Native wait timed out/);
+  assert.equal(result.annex, 'engine-room'); assert.equal(result.transition, true);
+  assert.ok(Math.abs(result.elapsed - 45) < 1e-6);
+  assert.equal(result.player.y, 532); assert.equal(result.player.w, 44); assert.equal(result.player.h, 92);
+  assert.equal(result.attempts.length, 1); assert.equal(result.attempts[0].accepted, true);
+  assert.deepEqual(result.events.map(event => event.action), ['hub:annex-exit-start']);
+  assert.equal(result.observerInstalled, false); assert.ok(!result.heldKeys.includes('KeyE'));
+  const [receipt] = result.qaReport.exitPassages;
+  assert.equal(receipt.status, 'failed'); assert.equal(receipt.budgetSeconds, 45);
+  assert.deepEqual(receipt.attempts.map(attempt => attempt.outcome), ['accepted']);
 });
 
