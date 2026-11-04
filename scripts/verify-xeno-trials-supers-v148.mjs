@@ -13,6 +13,7 @@ import { XENO_TRIALS_SUPERS_V148 as supers, getXenoTrialsSuperV148 as profile,
   getXenoTrialsSuperStatusV148 as label } from '../src/xeno-trials-supers-v148.js';
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
+import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 
 // Pure-engine boundary fixtures can set position, HP or meter to isolate a
 // contract. They are not represented as ordinary browser-playthrough evidence.
@@ -229,11 +230,17 @@ test('snapshots and native canvas expose the correct meter without changing its 
 test('HTML meter and control are pilot-specific and rendering performs no resource transaction',()=>{
  const els=new Map(),makeEl=()=>({hidden:false,value:0,max:0,textContent:'',attrs:{},setAttribute(k,v){this.attrs[k]=v;},focus(){}});
  const el=k=>{if(!els.has(k))els.set(k,makeEl());return els.get(k);};const button=makeEl();
+ const progress=createXenoTrialsProgressV96(),progressBefore=structuredClone(progress);
  const ui=Object.create(XenoTrialsUiV96.prototype);ui.el=el;ui.message=()=>{};ui.unsavedResult=null;
+ // Match the constructor's read contract, including the actual pending ticket.
+ ui.getProgress=()=>progress;
+ ui.commit=ui.onCommit=()=>assert.fail('Meter rendering must not create a resource transaction');
  ui.root={getAttribute:()=> 'false',setAttribute(){},querySelector:()=>button,ownerDocument:{hidden:false,hasFocus:()=>true}};
  for(const id of [WARDEN,'warrior']){const m=make(id),before=snapshot(m);ui.updateMatch(m);assert.equal(el('player-super').hidden,id==='warrior');assert.equal(button.hidden,id==='warrior');assert.deepEqual(snapshot(m),before);}
  const m=full(make());ui.updateMatch(m);assert.equal(el('player-super').value,100);assert.equal(button.attrs['aria-disabled'],'false');
  m.paused=true;ui.updateMatch(m);assert.equal(button.attrs['aria-disabled'],'true');assert.equal(meter(m.fighters[0]),100);
+ assert.deepEqual(progress,progressBefore);
+ assert.equal(el('abandon-overlay').hidden,true);assert.equal(el('abandon-overlay').disabled,true);
 });
 test('readiness labels distinguish cooldown, disabled rules, endurance and missing meter',()=>{
  const m=make(),a=m.fighters[0],d=definition(a.id);assert.match(label(ready(m,a,d)),/Jauge insuffisante/);
