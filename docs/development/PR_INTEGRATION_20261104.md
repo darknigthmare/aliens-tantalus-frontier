@@ -2,7 +2,7 @@
 
 ## Périmètre
 
-Cette intégration reprend les huit PR ouvertes de `darknigthmare/aliens-tantalus-frontier` et le `main` observé au commit `fbaa8ec4b2f3248bd1fd0206cc709641657b66db`. Les merges locaux conservent les huit têtes comme ancêtres. La publication et les résultats de validation du nouvel assemblage doivent être constatés séparément.
+Cette intégration reprend les huit PR initialement ouvertes de `darknigthmare/aliens-tantalus-frontier`, puis la PR #40 apparue pendant le travail, et le `main` observé au commit `fbaa8ec4b2f3248bd1fd0206cc709641657b66db`. Les merges locaux conservent les neuf têtes de travail comme ancêtres. La publication et les résultats de validation de chaque assemblage doivent être constatés séparément.
 
 | PR | Tête reprise | Apport conservé |
 | --- | --- | --- |
@@ -14,6 +14,7 @@ Cette intégration reprend les huit PR ouvertes de `darknigthmare/aliens-tantalu
 | #35 | `0ef85cc54b90d0196bdd6f6d0909de694e74c19c` | Correction syntaxique du codex, déjà présente dans la façade revue #36. |
 | #36 | `e4ea86d54602e9ea08b169d4053a86565548386f` | Façade documentaire commune, contrats d'import/export, consultation des sources et accès physique Durandal. |
 | #37 | `01c764a61e6ce7481acc3910685756b35141ee14` | Parcours Trials à 0/200 ms, fixtures vérifiées, interruption de Cal et preuves de parcours. |
+| #40 | `92f5969e44948d409b2a98b320037e0ecab5d67a` | Bible de campagne conservée comme document de conception, avec correction de ses statuts et références au runtime courant ; exclusion du jeu distribué. |
 
 ## Choix de résolution
 
@@ -216,6 +217,24 @@ La suite V178 passe 23/23, sans exclusion, en 208,65 s : 58 cas de marche, la co
 
 Le déploiement Vercel `dpl_H3QK23j42Qm7Komwpgn9EDEXWPBi` est `READY` et référence exactement `efba9de725ae917a3f3cff887466d0188f4cbd22`. Ce constat porte sur ses métadonnées. Aucun contenu HTTP servi ni contrôle visuel de ce preview n'est revendiqué.
 
+## Intégration complémentaire de la PR #40
+
+La cinquième tête publiée, `fe7bc78588c0d8189372fe6a4728ba1d5aec5255`, s'exécute sous le candidat `ddce4ce7be6b818784af48049583a274bc19e283`, avec l'arbre commun `8eceb5d36f8c3c5f85a11e40ff03524333ff0367`. Au moment de la préparation de cette extension, Forge est qualifié à 725 tests Node, six rapports natifs, 249 contrôles et 26 PNG ; Alien_base réussit 49/49. L'artefact Gameplay contient 63 tests Node réussis, cinq rapports passés, 144 contrôles et 80 PNG, avec ses quatre inventaires de sources vérifiés. Cal produit deux rapports passés, 65 contrôles et 69 PNG, quatre inventaires de 529 sources exacts et le même Save pour ses deux recettes. Les autres résultats en cours ne sont pas présumés réussis. Ces preuves restent attachées à la cinquième tête ; elles ne qualifient pas à elles seules l'extension suivante.
+
+La PR #40 ajoute `docs/narrative/CAMPAGNE_PRINCIPALE.md` et trois lignes d'admission de ce chemin dans `verify-public-release-v86.mjs`. Elle est reprise par un véritable merge de sa tête `92f5969e44948d409b2a98b320037e0ecab5d67a` dans la consolidation, sans conflit de texte. Son contrôle Release [41858697023](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41858697023) avait 3 928 tests réussis, 18 échecs et un skip : 16 refus explicites du successeur V86 et deux négatifs masqués par ce refus. Son workflow Excel [41858696808](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41858696808) échouait dans chacun de ses quinze jobs sur les mêmes huit contrôles de provenance, avec 311 tests réussis sur 319. Aucun de leurs parcours navigateur n'avait été exécuté.
+
+Le V86 de cette PR a pour empreinte `0cb188a57dff9e75a1adbcfd0dc2f4e54b9b359b6b47d670840c20406d901b0e`, alors que le prédécesseur main exigeait `4c3010a97ee506088a198c9693f8196c96f22a701a2723a40b367d43a9b7e122`. La résolution conserve les trois prédécesseurs historiques de la jonction V182 et admet uniquement les octets réellement fusionnés du vérificateur, d'empreinte `9204eed81123bc26eed9a517f1727733a36879e9963ca0202b8b8ceda2a1404a`. Le nombre de jonctions reste 41. Le chemin exact de la bible est admis dans les sources, refusé dans une distribution construite ; un fichier frère inconnu et une traversée de chemin restent refusés.
+
+La revue du document corrige les affirmations vérifiables contre le code courant :
+
+- Abysse Noir est le chapitre aquatique HADAL/MANTA ; Broodstorm est le chapitre aérien Cheyenne. Leurs accroches étaient inversées.
+- Le registre actif est `special-operations-v131.js`, chargé par `app.js`. Les neuf opérations rangées dans les archives ont des chapitres jouables mais partiels ; les anciens statuts `missing` de V67 ne décrivent pas leur état courant. Cargo Brutal conserve également sa limite d'art dédié de la Matriarche.
+- `last-course-tantalus` renvoie déjà à `special-apc-convoy`, utilisé à l'acte III. La Reine actuelle est un barrage final ; un acte V distinct et sa poursuite restent proposés.
+- La séquence du Quai des vivants possède déjà son reçu V90. Le nouvel identifiant `colony-intro-quai` et son raccordement au front colonie restent proposés.
+- La provenance originale de l'intrigue est distinguée des noms et lieux du catalogue. Lethe conserve son identité et son secteur `Cerberus` dans le code ; son rattachement proposé au Tantalus Reach reste une décision de conception.
+
+Les 26 chemins de modules et documents cités ont été vérifiés. Les six décisions de conception restent ouvertes dans la bible. Les quêtes, cinématiques, reconstructions et le second hub proposés ne sont pas déclarés livrés par cette fusion. La correction documentaire conserve 620 lignes et a pour empreinte `fc488a7725f75e8031528a80c84407ad76e4f3db6729132ca01dbff1bd1deae2`. Les quatre sources QA Trials/portes de la cinquième publication sont inchangées. Les résultats de l'admission, du build et de la nouvelle CI doivent être liés à la tête publiée contenant cette extension.
+
 ## Travaux encore distincts
 
-L'intégration ne transforme pas les 129 propositions d'armes en équipements admis, ni les 18 tenues sans visuel équipable en tenues terminées. Les trois profils AFE2 inconnus, les rapprochements à documenter, les archives primaires manquantes et les validations artistiques restent ouverts. Aucun statut de fidélité canonique ou artistique 1:1 n'est accordé par une fusion de code.
+L'intégration ne transforme pas les 129 propositions d'armes en équipements admis : elles ont des références documentaires, mais leurs preuves et ressources restent à produire et à admettre. Les 18 tenues sans visuel équipable nécessitent encore de l'art modulaire, son intégration, ses animations et sa validation en sauvegarde ; neuf ont une référence URL et neuf restent sans référence admise. Les trois profils AFE2 inconnus conservent un `profileId` nul. Les 45 rapprochements de versions restent en attente de revue, avec `autoMergeStats=false`. Dix rattachements documentaires manquent pour neuf armes et un véhicule déjà jouables ; ce ne sont pas dix contenus de jeu absents. Les archives primaires manquantes, validations artistiques et fonctionnalités proposées par la bible restent ouvertes. Aucun statut de fidélité canonique ou artistique 1:1 n'est accordé par une fusion de code.

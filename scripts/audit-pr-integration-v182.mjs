@@ -507,7 +507,7 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "main": "4c3010a97ee506088a198c9693f8196c96f22a701a2723a40b367d43a9b7e122",
       "qa": "bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab"
     },
-    "currentSha256": "1b310c3aa6912702e5169847e963732065155d506f022852a60f321c2483d208",
+    "currentSha256": "9204eed81123bc26eed9a517f1727733a36879e9963ca0202b8b8ceda2a1404a",
     "kind": "verifier"
   },
   "scripts/verify-tantalus-enrichment-v177.mjs": {

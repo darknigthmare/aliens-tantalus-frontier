@@ -1,15 +1,15 @@
 # Aliens: Tantalus Frontier — Bible de campagne
 
 > **Document de conception narrative, source uniquement.** Il n'est pas copié dans le build public.
-> **Histoire originale du projet** (`provenance: tantalus-project-original`, `canonExact: false`). Elle n'adapte aucun film ni aucun jeu existant : ni scène, ni personnage, ni lieu, ni intrigue.
+> **Intrigue originale du projet** (`provenance: tantalus-project-original`, `canonExact: false`). Les scènes nouvelles proposées ici ne reconstituent pas un film ou un jeu existant. Elles réutilisent toutefois des noms et lieux déjà référencés dans le catalogue, dont Lethe ; leur provenance reste distincte de celle de l'intrigue (voir §1.2).
 > Elle respecte en revanche les règles de l'univers *Alien* (voir §1.3). Les noms de la franchise restent la propriété de leurs ayants droit (`LICENSE_NOTICE.md`).
 
 ## 0. Comment lire ce document
 
 | Statut | Signification |
 | --- | --- |
-| **[EXISTANT]** | Jouable aujourd'hui ; le module source est cité. Le texte du code fait foi. |
-| **[PARTIEL]** | Système ou opération avec `implementationStatus: 'partial'` dans `src/special-operations-v67.js`. |
+| **[EXISTANT]** | Élément jouable aujourd'hui ; le module source est cité. Ce statut ne signifie pas que toute la promesse d'une opération est achevée. Le texte du code fait foi. |
+| **[PARTIEL]** | Système ou opération avec `implementationStatus: 'partial'` dans le registre courant `src/special-operations-v131.js`, chargé par `src/app.js`. Un chapitre peut être jouable tout en restant partiel, notamment pour son art ou les actes supplémentaires. |
 | **[PROPOSÉ]** | Conception à valider, puis à raccorder au contenu, au chargement, au jeu, à l'interface et à la sauvegarde. |
 | **[À DÉCIDER]** | Point ouvert à trancher par le propriétaire. |
 
@@ -42,12 +42,12 @@ La campagne a trois fronts qui avancent ensemble :
 2. **La colonie** : sauver Port-Méridien, puis la reconstruire.
 3. **La station perdue** : reprendre la **station Asphodèle**, silencieuse depuis des mois, et en faire un second hub.
 
-### 1.2 Lieux originaux du projet
+### 1.2 Lieux de la campagne et provenance
 
 | Lieu | Nature | Statut |
 | --- | --- | --- |
 | **USS Tantalus** | Vaisseau des Marines coloniaux, hub mobile : 4 ponts, 16 salles d'équipage, annexes (`npc-dialogue-v62.js`, `hub-v52-runtime.js`). | **[EXISTANT]** |
-| **Lethe** | Monde colonial du Tantalus Reach (`world-05-lethe`), réseau de relais de quarantaine « QZ », galeries colonisées, complexe C-12. | **[EXISTANT]** dans les missions |
+| **Lethe** | Monde repris du catalogue (`world-05-lethe`, provenance `licensed-continuity`, secteur `Cerberus`). Les relais « QZ », galeries et C-12 portent les missions originales du projet. Son rattachement proposé au Tantalus Reach reste à décider. | **[EXISTANT]** dans les missions / **[À DÉCIDER]** pour le rattachement géographique proposé |
 | **Port-Méridien** | Colonie portuaire et « quai des vivants » : triage, sas, civils (`port-meridien-v90.js`). Ici, c'est **la colonie à sauver et reconstruire**. | **[EXISTANT]** (intro) / **[PROPOSÉ]** (reconstruction) |
 | **Relais QZ-17 et QZ-18** | Postes du réseau de quarantaine de Lethe ; quais, fret, archives locales. | **[EXISTANT]** / **[PARTIEL]** |
 | **Corridor du convoi et ascenseur C-12** | Axe terrestre vers le complexe, galerie à trois voies. | **[EXISTANT]** |
@@ -55,7 +55,7 @@ La campagne a trois fronts qui avancent ensemble :
 
 Le nom *Asphodèle* suit la logique mythologique déjà présente (Lethe, Tantalus) sans emprunter de lieu existant de la franchise.
 
-**[À DÉCIDER]** Le catalogue reprend des noms d'un jeu existant : la description générée de Lethe et l'entrée « Pioneer Station » (`content-core-v50.js`), des ennemis et personnels de référence (`enemy-source-adaptations-v118.js`, `enemy-coverage-v117.js`, `enemy-import-admissions-v106.js`, `premium-personnel-v119.js`, `xeno-trials-ui-v96.js`). Aucun texte de mission de la campagne ne s'y appuie, et ce document non plus. Décider s'ils restent comme références de catalogue ou s'ils sont remplacés par des éléments originaux.
+**[À DÉCIDER]** Le catalogue reprend des noms et lieux d'un jeu existant : Lethe, sa description et l'entrée « Pioneer Station » (`content-core-v50.js`), ainsi que des ennemis et personnels de référence (`enemy-source-adaptations-v118.js`, `enemy-coverage-v117.js`, `enemy-import-admissions-v106.js`, `premium-personnel-v119.js`, `xeno-trials-ui-v96.js`). Les missions citées utilisent bien l'identité de Lethe, sans reprendre ici l'intrigue de ce jeu. Décider si ces références sont conservées ou remplacées par des éléments originaux, et résoudre l'écart entre le secteur `Cerberus` du catalogue et le Tantalus Reach proposé dans cette bible. Aucun identifiant ni secteur du jeu n'est modifié par ce document.
 
 ### 1.3 Règles de l'univers à respecter
 
@@ -274,7 +274,7 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 ### 5.5 Acte IV — « Cocon noir »
 
-**Statut :** **[EXISTANT]** — `special-black-cocoon`. L'opérateur reprend conscience dans la résine, sans témoin de sa capture ; sac, relais, sortie industrielle ou circuit de refroidissement, transport Kappa, 90 secondes, contrôle biologique à bord.
+**Statut :** **[EXISTANT]** pour le chapitre jouable `special-black-cocoon` (`black-cocoon-state-v121.js`, `campaign-lethe-story-v163.js`) ; promesse globale **[PARTIEL]** dans `special-operations-v131.js`. L'opérateur reprend conscience dans la résine, sans témoin de sa capture ; sac, relais, sortie industrielle ou circuit de refroidissement, transport Kappa, 90 secondes, contrôle biologique à bord.
 
 **Tissage [PROPOSÉ] :**
 
@@ -285,16 +285,16 @@ Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-m
 
 ### 5.6 Acte V — « La dernière course de Tantalus »
 
-**Statut :** **[PARTIEL]** — `last-course-tantalus` : course APC, voies, hordes continues, Crushers, poursuite de Reine, score.
+**Statut :** **[PARTIEL]** — le registre `special-operations-v131.js` rattache déjà `last-course-tantalus` au chapitre jouable `special-apc-convoy`, utilisé à l'Acte III (§5.3). Ce chapitre comporte des hordes, deux Crushers et une Reine en barrage final (`apc-convoy-state-v121.js`). Un Acte V distinct, la poursuite de Reine et son score restent **[PROPOSÉ]** ; ce ne sont pas un second chapitre ni une poursuite déjà raccordés.
 
 **Situation [PROPOSÉ] :** la ruche du dépôt s'étend vers la surface. Halloran annonce la clôture du réseau QZ et la « suspension des engagements envers Port-Méridien ». Le dernier convoi doit ramener les colons isolés du complexe vers le port avant que la ruche coupe la route.
 
 1. **Conseil de guerre** : chaque membre d'équipage dont la confiance est *solide* propose un avantage (tourelle de Sanaa, blindage de Cal, fenêtre d'Orlov, route de Leila).
 2. **Choix de Mara Vega** selon les preuves réunies : obéir à la compagnie (récupérer le dépôt) ou protéger la colonie.
 3. **CIN-60 « Dernier départ »** : le M577 quitte le complexe sous la pluie.
-4. Course APC **[PARTIEL]**.
+4. Nouvelle course APC **[PROPOSÉ]**, à construire à partir du chapitre partiel existant.
 5. Point médian **[PROPOSÉ]** : un pont cède ; lâcher la remorque de fret ou celle des colons en retard.
-6. Poursuite de Reine **[PARTIEL]** : la Reine du dépôt, nourrie par les livraisons QZ17.
+6. Poursuite de Reine **[PROPOSÉ]** : la Reine du dépôt, nourrie par les livraisons QZ17.
 7. Arrivée aux murs de Port-Méridien : la course se termine dans la mission C5 du front colonie (§6.2), si elle est débloquée.
 
 **CIN-61 « Les portes du port »** : Rook fait l'appel des colons arrivés. Le nombre affiché est la somme réelle des sauvetages de toute la campagne.
@@ -343,7 +343,7 @@ Port-Méridien est le seul port civil de Lethe encore habité. Son « quai des v
 
 | ID | Titre | Statut | Résumé |
 | --- | --- | --- | --- |
-| `colony-intro-quai` | **Le quai des vivants** | **[EXISTANT]** | Triage, blessé, sas, trois civils (`port-meridien-v90.js`). Rencontre de Tomas Wren et Lucia Ferro **[PROPOSÉ]**. |
+| `colony-intro-quai` (ID proposé) | **Le quai des vivants** | Séquence **[EXISTANT]** / raccordement colonie **[PROPOSÉ]** | Triage, blessé, sas, trois civils (`port-meridien-v90.js`, reçu existant `port-meridien:quai-des-vivants:v90`). Le nouvel ID et la rencontre de Tomas Wren et Lucia Ferro restent **[PROPOSÉ]**. |
 | `colony-intro-doyenne` | **La doyenne** | **[PROPOSÉ]** | Asha Mbaye présente Echo-9 à Adèle Sarrazin dans la salle commune. Visite guidée du port : quais, infirmerie, processeur, mur nord. Elle refuse toute aide « de la compagnie » ; Asha doit prouver que le Tantalus n'en fait pas partie. |
 
 **Principales**
@@ -547,23 +547,23 @@ Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confia
 
 ## 9. Opérations secondaires
 
-Classement des opérations de `special-operations-v67.js` (statuts du code).
+Classement d'après le registre courant `special-operations-v131.js`, utilisé par `app.js`. Il complète le registre historique `special-operations-v67.js` : les anciens statuts `missing` de ce dernier ne décrivent pas les chapitres V131 aujourd'hui raccordés. Les placements narratifs ci-dessous restent proposés.
 
 ### 9.1 Liées à Lethe
 
 | Opération | Statut | Place | Accroche [PROPOSÉ] |
 | --- | --- | --- | --- |
-| **Cargo Brutal** | **[EXISTANT]** effective | Avant Acte I | Escorter un cargo civil vers Port-Méridien ; premier contact avec la priorité de fret. |
+| **Cargo Brutal** | Chapitre **[EXISTANT]** / promesse **[PARTIEL]** | Avant Acte I | Escorter un cargo civil vers Port-Méridien ; premier contact avec la priorité de fret. Art dédié de la Matriarche encore manquant dans le registre courant. |
 | **Systèmes de survie Alien** | **[EXISTANT]** effective | Entre Actes I et II | Évasion d'un poste médical en quarantaine près du port ; mécaniques réutilisées dans l'interlude et S3. |
 | **Doctrine Alpha / Bravo** | **[PARTIEL]** | Avant C1 ou C5 | Défense de colonie à cinq routes, quatre membres minimum : idéale pour tenir Port-Méridien. |
-| **Opération Abysse Noir** | **[PARTIEL]** | Avant Acte V | Dropship modulaire et escortes : couvrir les navettes entre Asphodèle et le port. |
-| **Broodstorm** | **[PARTIEL]** | Annexe | Exploration sous-marine : les berceaux QZ17 arrivaient-ils aussi par les réservoirs du port ? |
+| **Opération Abysse Noir** | Chapitre jouable **[PARTIEL]** | Annexe | Exploration sous-marine : les berceaux QZ17 arrivaient-ils aussi par les réservoirs du port ? Le chapitre actuel utilise HADAL et MANTA (`legacy-operation-state-v131.js`). |
+| **Broodstorm** | Chapitre jouable **[PARTIEL]** | Avant Acte V | Vol et escortes : couvrir les navettes entre Asphodèle et le port. Le chapitre actuel utilise le Cheyenne ; la modularité complète reste manquante (`legacy-operation-state-v131.js`). |
 
 ### 9.2 Archives MIRE (continuité séparée)
 
 Le contenu du projet évoque des « archives MIRE et anomalies temporelles » (monde Palimpste). **[PROPOSÉ]** Les opérations éloignées du ton de Lethe sont des archives MIRE consultées depuis le laboratoire du Tantalus ou celui d'Asphodèle : reconstitutions et dossiers isolés, sans effet sur le dossier ni sur la colonie.
 
-Mire Archive 001 **[PARTIEL]** ; Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le chant de la Reine-Mère, Talos contre le Titan, LV-XENO, Pangaea : `missing`.
+Mire Archive 001, Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le chant de la Reine-Mère, Talos contre le Titan, LV-XENO et Pangaea sont tous **[PARTIEL]** et `playable: true` dans `special-operations-v131.js`. Leurs chapitres sont raccordés par `content.js`, avec des limites d'art dédié ou de campagne étendue. Leur classement narratif comme archives MIRE dans cette bible reste **[PROPOSÉ]** ; il ne change pas leur mode ou leur monde actuel.
 
 **[À DÉCIDER]** Archives MIRE, ou seconde campagne.
 
@@ -612,7 +612,7 @@ Mire Archive 001 **[PARTIEL]** ; Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le
 
 | # | Question | Section |
 | --- | --- | --- |
-| 1 | Garder ou remplacer les noms d'un jeu existant présents dans le catalogue (description de Lethe, « Pioneer Station », ennemis et personnels de référence) ? | §1.2 |
+| 1 | Garder ou remplacer les noms et lieux d'un jeu existant présents dans le catalogue (Lethe, « Pioneer Station », ennemis et personnels de référence) ? Conserver le secteur `Cerberus` de Lethe ou proposer son rattachement au Tantalus Reach ? | §1.2 |
 | 2 | Identité du signataire du badge : jamais (A) ou sous condition (B) ? | §5.7 |
 | 3 | Mara Voss liée à I. Voss, ou homonymie ? | §8.3 |
 | 4 | Opérations hors ton : archives MIRE ou seconde campagne ? | §9.2 |
