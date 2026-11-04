@@ -170,7 +170,7 @@ test('pose read arms only evidence atomically without a second transport or a co
  assert.equal(g.arms.length,0);
 });
 
-test('actual Python keys recharge at rest, guard visible threats and release only for a grounded recovering-target special with one pose RPC',()=>{
+test('actual Python keys preserve their special reserve, anticipate threats and release for a fatigued recovering target with one pose RPC',()=>{
  // Declared pose replay tests the real Python policy and RPC order. It does not
  // claim a second native combat, browser rendering or latency qualification.
  const result=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
@@ -185,14 +185,14 @@ functions=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in [
 exec(compile(ast.Module(body=functions,type_ignores=[]),'<actual-python-driver-rpc-and-policy>','exec'),scope)
 def observation(tick,cooldown=0,threat=False,hold=False,stamina=100,recovery=False):
  player={'id':'prowler','side':'player','x':419.66,'y':0,'vy':0,'hp':185,'stamina':stamina,'stun':0,'guard':False,'attack':None,'specialCooldown':cooldown,'stats':{'specials':int(hold)}}
- target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':80,'stun':0,'guard':False,'attack':{'kind':'light','age':.06 if threat else .25} if threat or recovery else None}
+ target={'id':'import-game-dd-wy-commando','side':'opponent','x':574.5,'y':0,'vy':0,'hp':220,'stamina':20 if recovery else 80,'stun':0,'guard':False,'attack':{'kind':'light','age':.06 if threat else .25} if threat or recovery else None}
  m={'config':{'matchId':'declared-policy-replay'},'tick':tick,'round':1,'phase':'active','paused':False,'presentation':{'blocksSimulation':False},'fighters':[player,target],'events':[]}
  startup={'ready':False,'accepted':None,'matchId':m['config']['matchId'],'round':1,'attemptNumber':1,'frame':None}
  if hold:
   m['grappleV153']={'id':7,'attacker':'player','target':'opponent'}
   m['events']=[{'id':5,'type':'attack','kind':'special','side':'player','tick':172},{'id':8,'type':'grapple-start-v153','grappleId':7}]
   startup.update({'ready':True,'accepted':{'attemptNumber':1,'attackEventId':5,'observedTick':174},'frame':{'state':{'match':{'tick':174}},'preparationProof':{'attackId':4,'attackEventId':5},'deferredStartupBitmapV177':True}})
- return {'match':m,'direction':1,'gap':4,'playerBody':{'center':400},'targetBody':{'center':500},'targetAhead':True,'verticalOverlap':True,'specialCost':34,'specialStartup':.32,'targetThreat':threat,'targetRecovery':recovery,'startupObservation':startup}
+ return {'match':m,'direction':1,'gap':4,'playerBody':{'center':400},'targetBody':{'center':500},'targetAhead':True,'verticalOverlap':True,'specialCost':34,'specialStartup':.32,'specialLeapSpeed':360,'specialActive':.44,'targetRecoveryRemaining':.12 if recovery else 0,'targetMeleeReach':81.7,'guardReserve':22.96,'targetPressureReserve':25,'playerStaminaMaximum':100,'playerSpeed':300,'targetSpeed':210,'targetThreat':threat,'targetRecovery':recovery,'startupObservation':startup}
 class Page:
  def __init__(self):self.reads=0;self.events=[];self.keyboard=self
  def evaluate(self,code,arg=None):
@@ -210,7 +210,7 @@ class Page:
   self.events.append('press:'+key)
  def wait_for_timeout(self,ms):assert ms==20
 p=Page();trace={};proof=scope['acquire_player_capture'](p,True,trace)
-assert p.reads==5 and p.events==['read','read','down:KeyS','read','up:KeyS','read','press:KeyL','read'],p.events
+assert p.reads==5 and p.events==['read','read','down:KeyS','read','read','up:KeyS','press:KeyL','read'],p.events
 assert len(trace['attempts'])==1 and trace['attempts'][0]['nativeSpecialAccepted']
 assert trace['attempts'][0]['before']['targetRecovery']==True
 assert trace['attempts'][0]['after']['tick']==204
@@ -431,7 +431,9 @@ for await(const line of createInterface({input:child.stdout})){
   if(isRead){reads++;
    if(reads===2){for(let i=0;i<7200&&h.runtime.getState().round===1;i++)h.frame();assert.equal(h.runtime.getState().round,2,'The round must end through native CPU combat.');}
    if(reads===3){for(let i=0;i<1800;i++){const s=h.runtime.getState();if(s.phase==='active'&&!s.presentation.blocksSimulation)break;h.frame();}}
-   if(reads===4){advance(20);atProbe=h.runtime.getState();value='probe-complete';}
+   // The countdown read is deliberately long. Permit one fresh pose to retire
+   // the latency-aware defensive guard before measuring native movement.
+   if(reads===5){advance(20);atProbe=h.runtime.getState();value='probe-complete';}
   }
   if(value!=='probe-complete'){
    const expression=request.expression.replace(/await import\('\/src\/([^']+)'\)/g,(_all,name)=>'modules['+JSON.stringify(name)+']');
@@ -454,6 +456,157 @@ assert.equal(moved,true,'The actual Python helper must release the old native ke
 assert.ok(keyEvents.some(e=>e.key==='ArrowRight'&&e.type==='keyup'&&e.round===2&&e.blocked));
 assert.ok(keyEvents.some(e=>e.key==='ArrowRight'&&e.type==='keydown'&&e.round===2&&!e.blocked));
 }finally{clearTimeout(timer);if(child.exitCode===null)child.kill('SIGKILL');h.runtime.stop();}
+});
+
+// Run the actual Python controls and its actual 0/200ms delay wrapper against
+// native CPU combat. Only DOM, image pixels, transport and RAF are declared
+// doubles. A transport delay advances real runtime frames; it never pauses,
+// edits a fighter, replaces the CPU or manufactures an accepted attack.
+async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,opponentId='import-game-dd-wy-commando',transportOverheadMs=0,lateCaptureDeliveryMs=0}={}){
+ const {spawn}=await import('node:child_process');
+ const {createInterface}=await import('node:readline');
+ const {createContext,runInContext}=await import('node:vm');
+ const {pathToFileURL,fileURLToPath}=await import('node:url');
+ const repo=fileURLToPath(new URL('../',import.meta.url)).replace(/\/$/,'');
+ const driver=process.env.ATF_CAPTURE_DRIVER_SOURCE||repo+'/scripts/qa-xeno-trials-capture-v163.py';
+ const runtime=await import(pathToFileURL(repo+'/src/xeno-trials-runtime-v96.js'));
+ const ui=await import(pathToFileURL(repo+'/src/xeno-trials-ui-v96.js'));
+ const atlases=(await import(pathToFileURL(repo+'/src/xeno-trials-capture-data-v163.js'))).XENO_TRIALS_CAPTURE_ATLASES_V163;
+ const rigs=(await import(pathToFileURL(repo+'/src/xeno-trials-rig-v154.js'))).XENO_TRIALS_RIGS_V154;
+ const images=new Map([...atlases,...rigs].map(a=>[a.path,{naturalWidth:a.sourceWidth,naturalHeight:a.sourceHeight,complete:true}]));
+ const verifier=readFileSync(repo+'/scripts/verify-xeno-trials-capture-v163.mjs','utf8');
+ let fixtureSource=verifier.slice(verifier.indexOf('function captureEventTarget('),verifier.indexOf('async function nativePlayerCaptureForPause('));
+ assert.match(fixtureSource,/seed:153/);assert.match(fixtureSource,/roundSeconds:120/);
+ fixtureSource=fixtureSource.replace('seed:153','seed:96001').replace('roundSeconds:120','roundSeconds:99')
+  .replace("opponentId:'import-game-dd-wy-commando'","opponentId:"+JSON.stringify(opponentId));
+ const fixtureContext=createContext({assert,images,XenoTrialsUiV96:ui.XenoTrialsUiV96,createXenoTrialsRuntimeV96:runtime.createXenoTrialsRuntimeV96});
+ const h=runInContext('(()=>{'+fixtureSource+';return captureRuntimeHost;})()',fixtureContext)();
+ await h.start();h.frame(55+phaseTicks);
+ const initial=h.runtime.getState();
+ assert.equal(initial.config.seed,96001);assert.equal(initial.config.roundSeconds,99);
+ assert.equal(initial.fighters[0].id,'prowler');assert.equal(initial.fighters[1].id,opponentId);
+ const modules={};
+ for(const name of ['xeno-trials-geometry-v105.js','xeno-trials-signatures-v147.js','xeno-trials-data-v96.js','xeno-trials-engine-v96.js'])
+  modules[name]=await import(pathToFileURL(repo+'/src/'+name));
+ let wallTime=h.now(),nextFrame=wallTime+1000/60;
+ const advance=ms=>{
+  assert.ok(Number.isFinite(ms)&&ms>=0);
+  const target=wallTime+ms;
+  while(nextFrame<=target+1e-7){wallTime=nextFrame;h.frame(1,1000/60);nextFrame+=1000/60;}
+  wallTime=target;
+ };
+ const context=createContext({structuredClone,modules,performance:{now:()=>wallTime},requestAnimationFrame:h.requestAnimationFrame,
+  __ATF_XENO_TRIALS_V96__:{snapshot:()=>({match:h.runtime.getState()})},
+  document:{querySelector:s=>s==='[data-xt="canvas"]'?h.canvas:h.element('pause'),
+   createElement:()=>({getContext:()=>({drawImage(){}}),toDataURL:()=> 'data:image/png;base64,declared-dom-image-double'})}});
+ context.globalThis=context;h.canvas.toDataURL=()=> 'data:image/png;base64,declared-dom-image-double';
+ const worker=[
+  'import ast,json,sys',
+  'from pathlib import Path',
+  'tree=ast.parse(Path(sys.argv[1]).read_text());scope={"json":json}',
+  'for n in tree.body:',
+  ' if isinstance(n,ast.Assign) and isinstance(n.value,ast.Constant) and isinstance(n.value.value,str):',
+  '  for target in n.targets:',
+  '   if isinstance(target,ast.Name):scope[target.id]=n.value.value',
+  'now=0',
+  'def rpc(method,**data):',
+  ' global now',
+  ' print(json.dumps({"method":method,**data}),flush=True)',
+  ' response=json.loads(sys.stdin.readline());now=response["now"]',
+  ' return response.get("value")',
+  'class Clock:',
+  ' def monotonic(self):return now/1000',
+  ' def sleep(self,seconds):rpc("advance",ms=seconds*1000)',
+  'class Keyboard:',
+  ' def down(self,key):return rpc("key",key=key,type="keydown")',
+  ' def up(self,key):return rpc("key",key=key,type="keyup")',
+  ' def press(self,key,delay=0):self.down(key);rpc("advance",ms=delay);self.up(key)',
+  'class Page:',
+  ' keyboard=Keyboard()',
+  ' def evaluate(self,expression,arg=None):return rpc("evaluate",expression=expression,arg=arg)',
+  ' def wait_for_timeout(self,ms):return rpc("advance",ms=ms)',
+  'page=Page();scope["time"]=Clock()',
+  'helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ["get_frame","acquire_player_capture","delay_client_reads"]]',
+  'assert len(helpers)==3',
+  'exec(compile(ast.Module(body=helpers,type_ignores=[]),"<actual-python-delayed-acquisition>","exec"),scope)',
+  'rpc("ready");trace={};error=None',
+  'receipt=scope["delay_client_reads"](page,int(sys.argv[2]))',
+  'try:scope["acquire_player_capture"](page,True,trace)',
+  'except Exception as exc:error=type(exc).__name__+": "+str(exc)',
+  'print(json.dumps({"method":"complete","trace":trace,"error":error,"delay":receipt}),flush=True)'
+ ].join('\n');
+ const child=spawn('python3',['-B','-c',worker,driver,String(readDelayMs)],{stdio:['pipe','pipe','pipe']});
+ let stderr='',outcome,delayedCapture=null;const keyEvents=[];
+ child.stderr.on('data',c=>stderr+=c);
+ const done=new Promise(resolve=>child.on('exit',(code,signal)=>resolve({code,signal})));
+ const timer=setTimeout(()=>child.kill('SIGKILL'),30000);
+ try{
+  for await(const line of createInterface({input:child.stdout})){
+   const request=JSON.parse(line);let value=null;
+   if(request.method==='complete'){outcome=request;continue;}
+   if(request.method==='evaluate'){
+    advance(transportOverheadMs/2);
+    const expression=request.expression.replace(/await import\('\/src\/([^']+)'\)/g,(_all,name)=>'modules['+JSON.stringify(name)+']');
+    value=await runInContext('('+expression+')',context)(request.arg);
+    advance(transportOverheadMs/2);
+    if(lateCaptureDeliveryMs&&!delayedCapture&&value?.match?.grappleV153){
+     delayedCapture={tick:value.match.tick,holdId:value.match.grappleV153.id,wallTime};
+     advance(lateCaptureDeliveryMs);
+    }
+   }else if(request.method==='key'){
+    const m=h.runtime.getState();
+    keyEvents.push({key:request.key,type:request.type,tick:m.tick,round:m.round,phase:m.phase,wallTime});
+    h.key(request.key,request.type);
+   }else if(request.method==='advance')advance(request.ms);
+   child.stdin.write(JSON.stringify({now:wallTime,value})+'\n');
+  }
+  const exit=await done;assert.equal(exit.code,0,stderr);assert.ok(outcome);
+  return{...outcome,initial,final:h.runtime.getState(),keyEvents,phaseTicks,transportOverheadMs,delayedCapture,
+   floor:context.__ATF_CAPTURE_OBSERVER_V163__?.floor,
+   method:'Actual Python acquisition/delay wrapper and native CPU/UI/runtime; declared 60Hz RAF/DOM/transport doubles, no Chromium or pixel claim.'};
+ }finally{
+  clearTimeout(timer);if(child.exitCode===null)child.kill('SIGKILL');h.runtime.stop();
+ }
+}
+
+test('native player acquisition survives 200ms client reads across nearby RAF phases',{timeout:120000},async t=>{
+ for(const options of [
+  {phaseTicks:3,transportOverheadMs:4},
+  {phaseTicks:3,transportOverheadMs:12},
+  {phaseTicks:1,transportOverheadMs:16},
+  {phaseTicks:2,transportOverheadMs:16},
+  {phaseTicks:0,transportOverheadMs:4},
+  {phaseTicks:0,transportOverheadMs:0},
+  {opponentId:'import-game-dd-guardian',readDelayMs:0,phaseTicks:3,transportOverheadMs:4},
+  {opponentId:'import-game-dd-guardian',readDelayMs:200,phaseTicks:3,transportOverheadMs:4},
+  {opponentId:'dd-darwin-era-cultist',readDelayMs:0,phaseTicks:3,transportOverheadMs:4},
+  {opponentId:'dd-darwin-era-cultist',readDelayMs:200,phaseTicks:3,transportOverheadMs:4}
+ ]){
+  const out=await delayedNativeAcquisitionV182(options);
+  t.diagnostic(JSON.stringify({...options,status:out.trace.status,error:out.error,elapsedSeconds:out.trace.elapsedSeconds,
+   firstTick:out.trace.observations?.[0]?.tick,attempts:out.trace.attempts?.map(a=>({tick:a.before.tick,accepted:a.nativeSpecialAccepted})),
+   finalTick:out.final.tick,hp:out.final.fighters.map(f=>f.hp),delay:out.delay}));
+  assert.equal(out.error,null,'The actual delayed keyboard policy must earn its capture for '+JSON.stringify(options)+'.');
+  assert.equal(out.trace.status,'captured');assert.equal(out.trace.timeLimitSeconds,55);assert.equal(out.trace.attemptLimit,32);
+  assert.ok(out.trace.elapsedSeconds<=55);
+  assert.equal(out.trace.grapple.attacker,'player');assert.equal(out.final.opponentInputSourceV163,'cpu');
+  assert.ok(out.trace.successfulSpecial.preparationProof);
+  assert.equal(out.delay.delayMsPerEvaluate,options.readDelayMs??200);
+  assert.equal(out.delay.totalRequestedSleepMs,(options.readDelayMs??200)*out.delay.evaluateCalls);
+  assert.ok(out.delay.measuredSleepSeconds>=out.delay.totalRequestedSleepMs/1000-1e-6);
+ }
+});
+
+test('a native capture delivered after the unchanged acquisition deadline remains an explicit failure',{timeout:30000},async t=>{
+ const out=await delayedNativeAcquisitionV182({phaseTicks:3,transportOverheadMs:4,lateCaptureDeliveryMs:56000});
+ assert.ok(out.delayedCapture,'The delayed response must contain a real CPU-earned hold.');
+ assert.equal(out.trace.timeLimitSeconds,55);assert.equal(out.trace.attemptLimit,32);
+ assert.equal(out.trace.status,'failed');assert.match(out.error,/deadline|budget/i);
+ assert.equal(out.trace.successfulSpecial,undefined);
+ assert.ok(out.keyEvents.filter(e=>e.wallTime>out.delayedCapture.wallTime+55000)
+  .every(e=>e.type==='keyup'),'Only input cleanup is allowed after the transport overruns the budget.');
+ t.diagnostic(JSON.stringify({status:out.trace.status,error:out.error,delayedCapture:out.delayedCapture,
+  elapsedSeconds:out.trace.elapsedSeconds,terminal:out.trace.terminalBeforeCapture||null}));
 });
 
 // Complementary PR36 ownership regressions retained during consolidation.
