@@ -1,54 +1,88 @@
 # Aliens: Tantalus Frontier — Bible de campagne
 
 > **Document de conception narrative, source uniquement.** Il n'est pas copié dans le build public.
-> Fiction originale du projet (`provenance: tantalus-project-original`, `canonExact: false`).
-> Aucune scène de film n'est reconstituée ; les noms de la franchise *Alien* restent la propriété de leurs ayants droit (voir `LICENSE_NOTICE.md`).
+> **Histoire originale du projet** (`provenance: tantalus-project-original`, `canonExact: false`). Elle n'adapte aucun film ni aucun jeu existant : ni scène, ni personnage, ni lieu, ni intrigue.
+> Elle respecte en revanche les règles de l'univers *Alien* (voir §1.3). Les noms de la franchise restent la propriété de leurs ayants droit (`LICENSE_NOTICE.md`).
 
 ## 0. Comment lire ce document
 
-Chaque élément porte un statut, pour ne jamais confondre ce qui tourne dans le jeu et ce qui reste à produire :
-
 | Statut | Signification |
 | --- | --- |
-| **[EXISTANT]** | Jouable aujourd'hui ; le module source est cité. Le texte de ce document ne remplace pas celui du code. |
-| **[PARTIEL]** | Un système ou une opération existe avec `implementationStatus: 'partial'` dans `src/special-operations-v67.js`. |
-| **[PROPOSÉ]** | Contenu de conception à valider, puis à raccorder aux systèmes de contenu, de chargement, de jeu, d'interface et de sauvegarde. |
-| **[À DÉCIDER]** | Point ouvert qui demande un arbitrage du propriétaire avant production. |
+| **[EXISTANT]** | Jouable aujourd'hui ; le module source est cité. Le texte du code fait foi. |
+| **[PARTIEL]** | Système ou opération avec `implementationStatus: 'partial'` dans `src/special-operations-v67.js`. |
+| **[PROPOSÉ]** | Conception à valider, puis à raccorder au contenu, au chargement, au jeu, à l'interface et à la sauvegarde. |
+| **[À DÉCIDER]** | Point ouvert à trancher par le propriétaire. |
 
-Les identifiants de contenu existants (`special-archive-relay`, `special-c12-horde`, `special-black-cocoon`, `special-narrative-qz17`, `crew-09-inez-harlow`, etc.) sont conservés tels quels. Les nouveaux identifiants proposés suivent le préfixe `story-` pour éviter toute collision avec les sauvegardes.
+Les identifiants existants (`special-archive-relay`, `special-c12-horde`, `special-black-cocoon`, `special-narrative-qz17`, `crew-09-inez-harlow`…) sont conservés. Les nouveaux identifiants proposés commencent par `story-`, `colony-`, `station-` ou `ship-` pour éviter toute collision de sauvegarde.
+
+**Types de missions utilisés partout :**
+
+| Type | Rôle | Durée | Rejouable |
+| --- | --- | --- | --- |
+| **Intro** | Ouvre une partie, présente un lieu, ses personnages et ses règles. | Courte | Non |
+| **Principale** | Fait avancer l'histoire de la partie. | Longue | Non |
+| **Annexe** | Histoire secondaire écrite, liée à un personnage ou un lieu. | Moyenne | Non |
+| **Locale** | Contrat court généré sur un lieu, pour l'entretenir ou le défendre. | Courte | Oui |
+
+Les missions locales s'appuient sur les objectifs déjà définis dans `content-core-v50.js` (`rescue survivors`, `restore atmospheric processing`, `escort a colony convoy`, `defend the colony`, `purge a reactor nest`, `hold the extraction zone`, `navigate the vent network`, `secure the power loader`, `escape the quarantine`, etc.).
 
 ---
 
-## 1. Concept
+## 1. Cadre
 
 ### 1.1 Pitch
 
-**2204, système du Tantalus.** Sur la frontière coloniale, les messages de détresse arrivent en retard. Pas à cause des pannes : à cause des priorités. Quand un relais doit choisir entre une cargaison et des vivants, quelqu'un a déjà choisi.
+**2204, Tantalus Reach.** Sur cette frontière coloniale, les messages de détresse arrivent en retard. Pas à cause des pannes : à cause des priorités. Quand un relais doit choisir entre une cargaison et des vivants, quelqu'un a déjà choisi.
 
-Le joueur incarne la **Relève Echo-9**, réveillée en cryostase à bord de l'USS *Tantalus*. Sa mission officielle : restaurer les relais et évacuer les colons de Lethe. Sa mission réelle, qu'il découvre pièce par pièce : établir **qui** a fait passer le fret avant les vivants, et **ce que transportait ce fret**.
+Le joueur incarne la **Relève Echo-9**, sortie de cryostase à bord de l'USS *Tantalus*, vaisseau des Marines coloniaux. Ordre officiel : rétablir les relais de quarantaine de Lethe et évacuer les civils. Ce que le joueur découvre : une compagnie fait transiter des organismes vivants sous couvert de fret, et la colonie de **Port-Méridien** paie le prix de ce trafic.
 
-### 1.2 Thèmes et règles d'écriture
+La campagne a trois fronts qui avancent ensemble :
 
-Ces règles prolongent le ton déjà établi dans `campaign-story-v160.js` et `campaign-lethe-story-v163.js` :
+1. **L'enquête** (campagne principale) : qui a fait passer le fret avant les vivants, et qu'est-ce que c'était ?
+2. **La colonie** : sauver Port-Méridien, puis la reconstruire.
+3. **La station perdue** : reprendre la **station Asphodèle**, silencieuse depuis des mois, et en faire un second hub.
 
-1. **Une preuve n'est pas une accusation.** Un badge prouve un droit d'accès, pas un visage. Les personnages (surtout Inez Harlow et MU/TH/UR) séparent toujours le fait établi, la pièce manquante et la supposition.
-2. **Sortir vivant vaut mieux que gagner.** Les objectifs mesurent l'extraction, jamais le nombre de contacts abattus.
-3. **Le fret contre les vivants.** Chaque acte remet ce choix devant le joueur sous une forme différente.
-4. **Rien n'est automatique.** Un départ attend une commande, une balise n'est pas un embarquement, un retour n'est validé qu'au sas refermé.
-5. **Le Tantalus est un foyer.** Entre deux sorties, l'équipage vit, doute et se souvient. Le hub porte la moitié de l'émotion de la campagne.
+### 1.2 Lieux originaux du projet
 
-### 1.3 Vue d'ensemble
+| Lieu | Nature | Statut |
+| --- | --- | --- |
+| **USS Tantalus** | Vaisseau des Marines coloniaux, hub mobile : 4 ponts, 16 salles d'équipage, annexes (`npc-dialogue-v62.js`, `hub-v52-runtime.js`). | **[EXISTANT]** |
+| **Lethe** | Monde colonial du Tantalus Reach (`world-05-lethe`), réseau de relais de quarantaine « QZ », galeries colonisées, complexe C-12. | **[EXISTANT]** dans les missions |
+| **Port-Méridien** | Colonie portuaire et « quai des vivants » : triage, sas, civils (`port-meridien-v90.js`). Ici, c'est **la colonie à sauver et reconstruire**. | **[EXISTANT]** (intro) / **[PROPOSÉ]** (reconstruction) |
+| **Relais QZ-17 et QZ-18** | Postes du réseau de quarantaine de Lethe ; quais, fret, archives locales. | **[EXISTANT]** / **[PARTIEL]** |
+| **Corridor du convoi et ascenseur C-12** | Axe terrestre vers le complexe, galerie à trois voies. | **[EXISTANT]** |
+| **Station Asphodèle** | Station de contrôle du réseau QZ, en orbite de Lethe. Silencieuse. **La station perdue, futur hub.** | **[PROPOSÉ]** |
 
-| Partie | Titre | Lieu principal | Statut du contenu jouable |
-| --- | --- | --- | --- |
-| Prologue | Relève Echo-9 | Tantalus → Port-Méridien | **[EXISTANT]** réveil, qualification, quai des vivants |
-| Acte I | La cargaison fantôme | Lethe · QZ-17 | **[PARTIEL]** `special-narrative-qz17` |
-| Acte II | Le dernier relais | Lethe · QZ-18 | **[EXISTANT]** `special-archive-relay` |
-| Acte III | Corridor de feu | Lethe · corridor puis C-12 | **[EXISTANT]** convoi M577 + `special-c12-horde` |
-| Interlude | Quarantaine | Tantalus | **[PROPOSÉ]** |
-| Acte IV | Cocon noir | Lethe · galeries colonisées | **[EXISTANT]** `special-black-cocoon` |
-| Acte V | La dernière course de Tantalus | Lethe · surface et complexe | **[PARTIEL]** `last-course-tantalus` |
-| Épilogue | Ce que le retour devra raconter | Tantalus | **[PROPOSÉ]** |
+Le nom *Asphodèle* suit la logique mythologique déjà présente (Lethe, Tantalus) sans emprunter de lieu existant de la franchise.
+
+**[À DÉCIDER]** Dans `content-core-v50.js`, la description générée de Lethe et l'entrée « Pioneer Station » reprennent des noms d'un jeu existant. Elles ne sont utilisées par aucun texte de mission ; les remplacer par des descriptions originales garderait le catalogue cohérent avec cette bible. Ce document ne s'appuie pas dessus.
+
+### 1.3 Règles de l'univers à respecter
+
+L'histoire est originale, mais elle doit sonner juste dans l'univers *Alien*. Règles de cohérence :
+
+1. **Les communications sont lentes.** Les messages passent par des relais ; un relais muet isole une colonie. Pas d'appel instantané entre systèmes.
+2. **Le voyage passe par l'hypersommeil.** Les relèves dorment, les équipages tournent, la cryostase a un coût (DAVID-8R surveille les réveils).
+3. **Les compagnies priment souvent sur les vies.** Weyland-Yutani (faction « volatile » du projet) protège ses actifs. Elle ne joue jamais le méchant de dessin animé : elle suit des procédures, des contrats et des clauses.
+4. **Les synthétiques obéissent à leurs directives.** BISHOP-9, DAVID-8R et ECHO-A ne trahissent pas « par méchanceté » ; leurs priorités sont écrites par d'autres.
+5. **Le cycle biologique est implacable.** Œuf, parasite, gestation, éclosion. Un contrôle biologique au retour n'est jamais une formalité.
+6. **Les Marines sont des professionnels fatigués.** Équipement lourd, détecteurs de mouvement, M577, dropships, humour sec.
+7. **La technologie est industrielle.** Écrans monochromes, sas, conduits, processeurs atmosphériques, chargeurs. Rien de propre ni de lisse.
+8. **Une preuve n'est pas une accusation.** Ton déjà établi par Inez Harlow et MU/TH/UR : on sépare le fait établi, la pièce manquante et la supposition.
+
+### 1.4 Factions
+
+Toutes viennent de `FACTIONS` (`content-core-v50.js`). Leur rôle narratif est **[PROPOSÉ]**.
+
+| Faction | Rôle dans la campagne |
+| --- | --- |
+| **USCMC** | L'équipage du Tantalus. Ordres de sauvetage, moyens limités. |
+| **Weyland-Yutani** | Propriétaire du réseau QZ et commanditaire du fret. Présente par contrats, directives et un représentant (§2.3). |
+| **Frontier Colonies** | Les habitants de Port-Méridien. Alliés fragiles, méfiants envers toute compagnie. |
+| **Crucible Salvage Compact** | Récupérateurs. Pillent la station Asphodèle ; peuvent devenir partenaires de la reconstruction. |
+| **Seegson** | Fournisseur bon marché du matériel de la colonie : pannes fréquentes, pièces disponibles. |
+| **Children of the Perfected Host** | Culte qui voit dans les organismes une élévation. Dans cette campagne : quelques colons de Port-Méridien convertis après l'isolement. |
+| **UPP** | Absente de la trame principale ; présence possible en mission annexe (épave, balise). |
 
 ---
 
@@ -56,118 +90,125 @@ Ces règles prolongent le ton déjà établi dans `campaign-story-v160.js` et `c
 
 ### 2.1 Le joueur
 
-**Echo-9 (« la Relève Echo-9 »)** — opérateur des Marines coloniaux sorti de cryostase pour reprendre un poste laissé vacant. Le prénom, l'apparence et la tenue restent ceux du créateur de personnage ; la campagne ne fixe ni genre ni passé précis. Echo-9 parle peu, décrit ce qu'il fait (« Je prends les réserves au relais »), et garde toujours un trajet de retour en vue.
+**Echo-9 (« la Relève Echo-9 »)** — opérateur des Marines coloniaux, apparence définie au créateur de personnage. Il parle peu, décrit ses actions et garde toujours un trajet de retour en vue.
 
-**[PROPOSÉ]** Fil personnel : Echo-9 découvre au fil des actes que la relève dont il prend la place, l'**Echo-8**, a disparu sur Lethe. Les archives MIRE évoquent l'unité, sans corps ni dossier de clôture. Ce fil se résout dans l'Acte IV (voir §6.4).
+**[PROPOSÉ]** Fil personnel : la relève qu'il remplace, l'**Echo-8**, a disparu sur la station Asphodèle. Son casier est vide dans la baie cryo. Le fil se résout dans le front de la station (§7).
 
 ### 2.2 L'équipage du Tantalus
 
-Les seize membres et leurs postes viennent de `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Les fonctions narratives sont **[PROPOSÉ]**.
+Postes et salles : `HUB_NPC_ROSTER` (`src/hub-v52-runtime.js`). Fonctions narratives : **[PROPOSÉ]**.
 
-| Pont | Salle | Personnage | Rôle | Fonction dans la campagne |
+| Pont | Salle | Personnage | Rôle | Fonction |
 | --- | --- | --- | --- | --- |
-| 0 | Passerelle | **Mara Vega** | Commandante | Porte l'ordre officiel ; doit choisir entre obéir à la compagnie et protéger les colons. |
-| 0 | Briefing | **Tamsin Velez** | Sergente | Mentor de terrain ; accueille Echo-9 au prologue. |
-| 0 | Info. de combat | **ECHO-A** | Synthétique tactique | Miroir d'Echo-9 ; questionne ce que « relève » veut dire. |
-| 0 | Baie cryo | **DAVID-8R** | Synthétique récupéré | Premier visage du jeu ; sa mémoire endommagée cache une pièce du dossier. |
-| 1 | Quartiers | **Asha Mbaye** | Liaison coloniale | Voix des colons de Lethe ; tient les relais coloniaux. |
-| 1 | Mess | **Leila Sørensen** | Éclaireuse | Routes de survie ; ancienne colonne d'évacuation. |
-| 1 | Infirmerie | **Noor Okafor** | Infirmier | Soigne, compte les morts, refuse qu'on les oublie. |
-| 1 | Laboratoire | **BISHOP-9** | Officier scientifique synthétique | Analyse ; loyauté à la compagnie mise à l'épreuve. |
-| 2 | Quarantaine | **Inez Harlow** | Xénobiologiste, liaison science | Conscience méthodologique de la campagne. |
-| 2 | Armurerie | **Sanaa Doyle** | Smartgunner | Humour sec ; protectrice de l'escouade. |
-| 2 | Atelier | **Pablo Reyes** | Démolitions | Brèches et charges ; regrette une opération passée. |
-| 2 | Baie véhicules | **Cal Mercer** | Chef véhicules | Responsable du M577 ; attaché à son blindé. |
-| 3 | Hangar dropship | **Maksim Orlov** | Pilote | Assure les insertions ; pilote du transport final. |
-| 3 | Réacteur | **Idris Kwan** | Ingénieur | Maintient le vaisseau en vie ; tient les comptes de l'énergie. |
-| 3 | Support-vie | **Jun Park** | Technicien | Réparations ; premier témoin de l'incident de quarantaine. |
-| 3 | Réseau capteurs | **Rook** | Marine de reconnaissance, liaison reconnaissance | Voix radio de toutes les sorties. |
+| 0 | Passerelle | **Mara Vega** | Commandante | Porte l'ordre officiel ; doit choisir entre la compagnie et les colons. |
+| 0 | Briefing | **Tamsin Velez** | Sergente | Mentor de terrain du prologue. |
+| 0 | Info. de combat | **ECHO-A** | Synthétique tactique | Miroir d'Echo-9 ; s'interroge sur la notion de relève. |
+| 0 | Baie cryo | **DAVID-8R** | Synthétique récupéré | Premier visage du jeu ; mémoire endommagée. |
+| 1 | Quartiers | **Asha Mbaye** | Liaison coloniale | Voix de Port-Méridien ; pilote la reconstruction. |
+| 1 | Mess | **Leila Sørensen** | Éclaireuse | Routes de survie autour de la colonie. |
+| 1 | Infirmerie | **Noor Okafor** | Infirmier | Soins, triage, registre des morts. |
+| 1 | Laboratoire | **BISHOP-9** | Officier scientifique synthétique | Analyse ; directive de préservation de la compagnie. |
+| 2 | Quarantaine | **Inez Harlow** | Xénobiologiste, liaison science | Conscience méthodologique de l'enquête. |
+| 2 | Armurerie | **Sanaa Doyle** | Smartgunner | Défense de la colonie et de la station. |
+| 2 | Atelier | **Pablo Reyes** | Démolitions | Brèches, déblaiement, reconstruction lourde. |
+| 2 | Baie véhicules | **Cal Mercer** | Chef véhicules | Le M577 et les convois de ravitaillement. |
+| 3 | Hangar | **Maksim Orlov** | Pilote | Navettes vers la colonie et la station. |
+| 3 | Réacteur | **Idris Kwan** | Ingénieur | Énergie du Tantalus, puis de la station. |
+| 3 | Support-vie | **Jun Park** | Technicien | Atmosphère, eau, filtres de la colonie. |
+| 3 | Capteurs | **Rook** | Marine de reconnaissance | Voix radio de toutes les sorties. |
 
-**MU/TH/UR** — ordinateur de bord. Neutre, exact, sans complaisance. Énonce les règles de validation et ne récompense jamais une action non prouvée.
+**MU/TH/UR** — ordinateur de bord. Neutre, exact. Ne valide aucune action non prouvée.
 
-**Recrues disponibles** (`src/crew-recruitment-v85.js`) : Mara Voss « RIVET », Nadia Bensaïd « SUTURE », Jonas Reed « BASTION », Jun Seo « BALISE ». Chacune reçoit une quête de recrutement au §12.3.
+**Recrues disponibles** (`crew-recruitment-v85.js`) : Mara Voss « RIVET » (chantier orbital), Nadia Bensaïd « SUTURE » (colonie isolée), Jonas Reed « BASTION » (réseau de cargos), Jun Seo « BALISE » (convois terrestres). Leurs origines existantes les rattachent naturellement à un front (§8.3).
 
-### 2.3 L'adversité
+### 2.3 Nouveaux personnages — [PROPOSÉ]
 
-| Force | Nature | Statut |
+| Personnage | Lieu | Rôle |
 | --- | --- | --- |
-| **Infestation de Lethe** | Castes xénomorphes déjà présentes dans les missions (drone, guerrier, coureur, etc.). | **[EXISTANT]** |
-| **La priorité de fret** | Un profil « priorité cargaison » signé sur QZ-18 à 18:43 avec le badge de I. Voss, contremaître, sans image exploitable (`archive-relay-state-v122.js`). | **[EXISTANT]** |
-| **Le destinataire de la cargaison fantôme** | Le chariot FL-09 mène une masse anormale vers une destination absente du bon officiel. | **[EXISTANT]** (indice) / **[PROPOSÉ]** (suite) |
-| **Le Bureau des Acquisitions Spéciales** | Service d'une compagnie qui commande des spécimens sous couvert de fret. Présent par documents, jamais par un méchant à l'écran avant l'Acte V. | **[PROPOSÉ]** |
-| **Le signataire du badge** | Identité volontairement non établie dans l'Acte II. Révélée seulement si le joueur réunit les preuves (§7). | **[PROPOSÉ]** |
-
-**[À DÉCIDER]** Nommer explicitement Weyland-Yutani comme commanditaire, ou garder une filiale fictive. Le projet référence déjà Weyland-Yutani dans son contenu (commandos, navette) ; une filiale fictive limite le risque de contradiction avec le canon.
+| **Adèle Sarrazin** | Port-Méridien | Doyenne élue de la colonie. Pragmatique, épuisée, ne fait confiance à aucun uniforme. |
+| **Tomas Wren** | Port-Méridien | Chef de quai. A vu passer les conteneurs scellés ; se tait par peur de perdre son contrat. |
+| **Lucia Ferro** | Port-Méridien | Médecin de la colonie, travaille avec Noor Okafor. |
+| **I. Voss** | QZ-18 | Contremaître dont le badge a signé la priorité de fret à 18:43 (`archive-relay-state-v122.js`). Disparu. |
+| **Directrice Halloran** | Weyland-Yutani | Représentante régionale. Ne ment jamais directement : elle cite les clauses. |
+| **CASSIUS** | Station Asphodèle | Intelligence de contrôle du réseau QZ. Applique la quarantaine à la lettre depuis des mois, sans personne pour la corriger. |
+| **Grue** | Crucible Salvage Compact | Capitaine récupératrice installée sur l'anneau extérieur d'Asphodèle. |
 
 ---
 
-## 3. Prologue — « Relève Echo-9 »
+## 3. Chronologie générale
 
-**But :** apprendre les commandes, rencontrer l'équipage, poser la question centrale (le fret contre les vivants) avant le premier tir sur Lethe.
+| Ordre | Campagne principale | Front colonie (Port-Méridien) | Front station (Asphodèle) |
+| --- | --- | --- | --- |
+| 1 | **Prologue** — Relève Echo-9 | **Intro** — Le quai des vivants **[EXISTANT]** | — |
+| 2 | **Acte I** — La cargaison fantôme (QZ-17) | Principale C1 — Tenir le port | — |
+| 3 | **Acte II** — Le dernier relais (QZ-18) | Principale C2 — Rallumer la colonie | **Intro** — Le silence d'Asphodèle |
+| 4 | **Acte III** — Corridor de feu (M577 → C-12) | Principale C3 — Le convoi des rescapés | Principale S1 — L'arrimage |
+| 5 | **Interlude** — Quarantaine à bord | Reconstruction : phase 2 | Principale S2 — Réveiller CASSIUS |
+| 6 | **Acte IV** — Cocon noir | Principale C4 — Le culte du port | Principale S3 — Les ponts scellés |
+| 7 | **Acte V** — La dernière course | Principale C5 — La nuit des murs | Principale S4 — Le hub Asphodèle |
+| 8 | **Épilogue** | Colonie reconstruite (état final) | Second hub actif |
 
-### CIN-00 · Ouverture (titre) — [PROPOSÉ]
+Les annexes et missions locales de chaque front se débloquent au fil de cette chronologie.
 
-Durée cible : 60 à 75 s, non jouable, passable.
+---
+
+## 4. Prologue — « Relève Echo-9 »
+
+**But :** apprendre les commandes, rencontrer l'équipage et poser la question centrale (le fret contre les vivants) avant le premier tir sur Lethe.
+
+### CIN-00 · Ouverture — [PROPOSÉ]
+
+60 à 75 s, passable.
 
 | Plan | Image | Son / texte |
 | --- | --- | --- |
-| 1 | Noir. Une ligne de télémétrie verte. | Bip de relais, régulier, puis un silence de deux secondes. |
-| 2 | Relais QZ-18 au crépuscule de Lethe, antenne givrée. | Texte : `LETHE · RELAIS QZ-18 · 18:41` |
-| 3 | Gros plan d'un pupitre : un brouillon de détresse s'écrit, puis passe en `EN ATTENTE`. | Le bip reprend, plus lent. |
+| 1 | Noir. Une ligne de télémétrie verte. | Bip de relais régulier, puis silence. |
+| 2 | Relais QZ-18 sous la pluie de Lethe. | `LETHE · RELAIS QZ-18 · 18:41` |
+| 3 | Pupitre : un brouillon de détresse s'écrit puis passe en `EN ATTENTE`. | Le bip reprend, plus lent. |
 | 4 | Un badge posé sur le pupitre, nom illisible. Une main hors champ le prend. | Aucune voix. |
-| 5 | Le message part : `18:54`. | Texte : `TREIZE MINUTES` |
-| 6 | Orbite. L'USS *Tantalus* sort de l'ombre de la planète. | Thème principal (`assets/audio/`). |
-| 7 | Logo `ALIENS: TANTALUS FRONTIER`. | — |
+| 5 | Le message part : `18:54`. | `TREIZE MINUTES` |
+| 6 | Espace. L'USS *Tantalus* glisse dans le silence, lumières de veille. | Thème principal (compositions originales, `assets/audio/`). |
+| 7 | `ALIENS: TANTALUS FRONTIER` | — |
 
-**Pourquoi :** les horaires 18:41 / 18:42 / 18:54 sont ceux du dossier QZ-18. Le joueur les verra plus tard comme des preuves ; l'ouverture lui donne déjà l'impression de les connaître.
+Les horaires sont ceux du dossier QZ-18 : le joueur les reconnaîtra plus tard comme preuves.
 
-### P-1 · Réveil dans la baie cryogénique — [EXISTANT]
+### P-1 · Intro — Réveil en cryostase — [EXISTANT]
 
-Modules : onboarding joueur, `hub-opening-v88.js`.
+Le poste de cryostase attend la confirmation ; DAVID-8R accueille la Relève Echo-9. Création du personnage. Tamsin Velez rappelle la règle : avant une sortie, on identifie l'objectif et la voie de retour.
 
-- Le poste de cryostase attend la confirmation de réveil ; DAVID-8R accueille la Relève Echo-9.
-- Création du personnage (`player-creator-ui-v84.js`).
-- Tamsin Velez rappelle la règle : avant une sortie, on identifie l'objectif et la voie de retour.
+**CIN-01 « Le casier vide » [PROPOSÉ]** (20 s) : un casier `ECHO-8`, vidé et scellé. DAVID-8R : « Ce poste a été libéré. Je n'ai pas d'autre information. »
 
-**Ajout [PROPOSÉ] — CIN-01 « Le casier vide » (20 s)** : en sortant de la baie, Echo-9 passe devant un casier marqué `ECHO-8`, vidé, scellé par MU/TH/UR. DAVID-8R : « Ce poste a été libéré. Je n'ai pas d'autre information. » Le joueur peut interagir ; aucune réponse de plus. Ce plan pose le fil personnel.
+### P-2 · Intro — Qualification au pas de tir — [EXISTANT]
 
-### P-2 · Qualification au pas de tir — [EXISTANT]
+`hub-opening-exercise-v89.js` : échelle, pas de tir, cibles, rétablissement de la liaison prioritaire.
 
-Module : `hub-opening-exercise-v89.js` (échelle, pas de tir, cibles, rétablissement de la liaison prioritaire en 3 s).
+**[PROPOSÉ]** La liaison prioritaire relaie un appel de Port-Méridien, reçu avec plusieurs jours de retard. Mara Vega coupe l'exercice : départ immédiat.
 
-Rôle narratif : la « liaison prioritaire » interrompt l'exercice. **[PROPOSÉ]** La liaison relaie le premier écho de Lethe — un message colonial reçu avec treize minutes de retard. Mara Vega coupe l'exercice : départ immédiat pour Port-Méridien.
+### P-3 · Intro — Le quai des vivants (Port-Méridien) — [EXISTANT]
 
-### P-3 · Port-Méridien, le quai des vivants — [EXISTANT]
+`port-meridien-v90.js` : porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider au sas éclairé.
 
-Module : `port-meridien-v90.js`.
+**[PROPOSÉ]** C'est aussi la mission d'intro du front colonie (§6.1). Le joueur porte un lot médical **ou** une batterie de sas : premier choix « vivants ou matériel ». Tomas Wren, en passant : « Les conteneurs scellés passent avant nous depuis trois semaines. »
 
-Déroulé existant : embarquer depuis la salle de briefing, porter un lot au triage, assister un blessé, réalimenter le sas, rassembler trois habitants et les guider vers le sas éclairé.
+### CIN-02 · Deux ordres — [PROPOSÉ]
 
-**Tissage narratif [PROPOSÉ]** :
+Salle de briefing du Tantalus. Mara Vega projette Lethe : relais muets, colonie isolée, station Asphodèle silencieuse en orbite.
 
-- Port-Méridien est le port de transit où arrivent les évacués de Lethe.
-- Au triage, le joueur porte **soit** un lot médical, **soit** une batterie pour le sas. Ce choix existe déjà ; il devient la première occurrence du thème « le fret contre les vivants ».
-- Un docker dit en passant : « Les conteneurs scellés passent avant nous depuis trois semaines. » Première mention du fret prioritaire.
-
-### CIN-02 · Deux ordres (fin du prologue) — [PROPOSÉ]
-
-Retour au Tantalus, salle de briefing. Mara Vega projette la carte de Lethe : relais muets, colonie fragmentée.
-
-> **Mara Vega** — Ordre de la compagnie : restaurer les relais, sécuriser le fret en attente. Ordre du Tantalus : ramener les vivants. Si les deux se contredisent, vous m'appelez.
+> **Mara Vega** — Ordre de la compagnie : rétablir le réseau QZ, sécuriser le fret en attente. Ordre du Tantalus : ramener les vivants. Si les deux se contredisent, vous m'appelez.
 >
 > **Inez Harlow** — Et vous ramenez des relevés. Pas des impressions.
 
-Écran : `ACTE I — LA CARGAISON FANTÔME`.
-
 ---
 
-## 4. Acte I — « La cargaison fantôme » (QZ-17)
+## 5. Campagne principale — L'enquête
 
-**Statut :** **[PARTIEL]** — `special-narrative-qz17` / `narrative-collectables-v68.js` (`FRONTIER`, `world-05-lethe`, 2204, intérieur de vaisseau vertical, 4 routes).
+### 5.1 Acte I — « La cargaison fantôme » (QZ-17)
 
-**Question de l'acte :** qu'est-ce qui a été déplacé sur QZ-17, et pourquoi le bon officiel ment-il ?
+**Statut :** **[PARTIEL]** — `special-narrative-qz17`, `narrative-collectables-v68.js`. Intérieur vertical, 4 routes, 2204.
 
-### 4.1 Preuves existantes
+**Question :** qu'est-ce qui a été déplacé sur QZ-17, et pourquoi le bon officiel ment-il ?
+
+**Preuves existantes :**
 
 | Pièce | Ce qu'elle établit |
 | --- | --- |
@@ -176,339 +217,404 @@ Retour au Tantalus, salle de briefing. Mara Vega projette la carte de Lethe : re
 | Boîte noire FL-09 | Le chariot a bien bougé, avec une masse anormale, vers une destination absente du bon. |
 | Sceau QZ17-04 — fragment intérieur | Sceau coupé après le monte-charge, avant l'arrivée annoncée en chambre froide. |
 
-La contradiction PDA / courriel est le cœur de l'enquête ; la boîte noire tranche.
+Le code contient aussi une preuve secondaire : *la colonie reçoit un conteneur scellé et une référence QZ17-04 ; le personnel n'identifie pas son transporteur* (`narrative-evidence-v132.js`). **[PROPOSÉ]** Cette colonie est Port-Méridien : premier lien direct entre l'enquête et le front colonie.
 
-### 4.2 Déroulé — [PROPOSÉ] sur la base existante
+**Déroulé [PROPOSÉ] :**
 
-1. **CIN-10 « Les quais déserts » (30 s)** : dropship d'Orlov, approche de QZ-17 sous la pluie. Rook : « Quatre accès. Aucun ne répond. »
-2. **Exploration verticale** : récupérer les quatre pièces. Contacts xénomorphes rares, surtout des signes (traces de résine, conduits ouverts) : l'acte installe la peur avant le combat.
-3. **Choix de piste (existant)** : *suivre la trace par la maintenance* ou *sécuriser la preuve en quarantaine*.
-   - Maintenance → le joueur trouve **l'alcôve vide** : un berceau de transport refroidi, ouvert de l'intérieur. Gain : indice pour l'Acte IV.
-   - Quarantaine → le fragment de sceau revient intact au Tantalus. Gain : Inez peut l'analyser (+recherche, et débloque la quête annexe *Le sceau*, §12.1).
-4. **CIN-11 « Ouvert de l'intérieur » (25 s)** : quelle que soit la piste, le joueur voit une griffe d'acide sur l'intérieur d'un conteneur. Inez, par radio : « Ne concluez pas. Rapportez. »
+1. **CIN-10 « Les quais déserts »** (30 s) : dropship d'Orlov, approche sous la pluie. Rook : « Quatre accès. Aucun ne répond. »
+2. Exploration verticale, peu de combats, beaucoup de signes : résine, conduits ouverts, détecteur de mouvement nerveux.
+3. **Choix existant** : *suivre la trace par la maintenance* ou *sécuriser la preuve en quarantaine*.
+   - Maintenance → l'alcôve vide : un berceau de transport réfrigéré, ouvert de l'intérieur.
+   - Quarantaine → le fragment de sceau revient intact ; Inez peut l'analyser (annexe *Le sceau*, §8.1).
+4. **CIN-11 « Ouvert de l'intérieur »** (25 s) : marque d'acide sur la paroi d'un conteneur. Inez : « Ne concluez pas. Rapportez. »
 
-### 4.3 Retour au Tantalus
+**Retour** : trois questions avec Inez (qu'est-ce qui a bougé, qui ment, que transportait-on). La troisième reste **non établie** sans prélèvement.
 
-Compte rendu avec Inez au labo de quarantaine. Trois questions, sur le modèle des retours QZ-18 :
+**Conséquence :** `story-qz17-route` = `maintenance` | `quarantine`.
 
-- *Qu'est-ce qui a bougé ?* — Une charge lourde, réfrigérée, non déclarée.
-- *Qui ment ?* — Le PDA et le courriel ne peuvent pas être vrais en même temps ; la boîte noire soutient le PDA.
-- *Que transportait-on ?* — **Non établi.** Inez refuse de dire « spécimen » sans prélèvement.
+### 5.2 Acte II — « Le dernier relais » (QZ-18)
 
-**Conséquence durable :** drapeau `story-qz17-route` = `maintenance` | `quarantine`.
+**Statut :** **[EXISTANT]** — `campaign-story-v160.js`, `archive-relay-state-v122.js`.
 
----
+Contenu existant : briefing « Le message arrivé trop tard », protocoles *Audit technique* (+2 recherche) ou *Prévention à bord* (+2 moral) versés seulement avec le dossier complet et un retour validé ; six pièces ; conclusion juste : *détresse retardée par la priorité de fret*. Brouillon saisi à 18:41, mis en attente à 18:42, libéré à 18:54 ; badge de I. Voss laissé à 18:39, utilisé à 18:43 sans image exploitable.
 
-## 5. Acte II — « Le dernier relais » (QZ-18)
+**Tissage [PROPOSÉ] :**
 
-**Statut :** **[EXISTANT]** — `campaign-story-v160.js`, `archive-relay-state-v122.js`, `archive-relay-ui-v122.js`. Campagne « QZ-18 · LE DERNIER RELAIS ».
+- Le message retenu était l'appel de Port-Méridien. Les treize minutes ont coûté des vies au port.
+- Quatrième question optionnelle au retour (si l'Acte I est terminé) : *« Quel fret avait la priorité ? »* — la même série de scellés QZ17.
+- **CIN-20 « Treize minutes »** (40 s) : Asha Mbaye lit le message libéré à 18:54. Les noms des colons qui attendaient défilent. Pas de musique.
+- Mara Vega transmet le dossier à la compagnie. Réponse de la Directrice Halloran : « Priorité cargaison maintenue, conformément à la clause d'acheminement. »
 
-**Question de l'acte :** qu'est-ce qui a retardé la détresse ?
+### 5.3 Acte III — « Corridor de feu » (M577 → C-12)
 
-### 5.1 Ce que le jeu contient déjà
+**Mission A · Ramener le blindé — [EXISTANT]** (`campaign-convoy-story-v161.js`) : ordre de convoyage, manifeste du M577, trois voies, barrages, tourelle, bilan au retour.
 
-- **Briefing** « Le message arrivé trop tard » ; **préparation** « Ce que nous ferons des preuves » avec deux protocoles : *Audit technique* (+2 recherche) ou *Prévention à bord* (+2 moral), versés seulement avec le dossier complet et un retour validé.
-- **Approche, déploiement, contrôle tactique** : PDA du quai ouest, relais à rétablir (E maintenu), ingénierie et sécurité en hauteur, fret au sol (F maintenu pour restaurer le brouillon), poste d'analyse, balise de retour à l'est.
-- **Six pièces**, dont *Badge laissé au pupitre*, *Synchronisation des horloges*, *Alimentation sans interruption*, *Une identité, deux traces*, *Retard classé technique*, *Message de secours retenu*.
-- **Conclusion juste** : *Détresse retardée par la priorité de fret* (et non *Dérive horaire et panne matérielle*).
-- **Retour** : brouillon saisi à 18:41, mis en attente à 18:42, libéré à 18:54 ; badge de I. Voss laissé à 18:39, utilisé à 18:43 sans image ; la personne n'est pas identifiée.
+**Mission B · Une sortie plutôt qu'une victoire (C-12) — [EXISTANT]** (`campaign-lethe-story-v163.js`) : relais, quatre secondes d'avertissement, quarante-cinq secondes de rétablissement, sas à droite.
 
-### 5.2 Liens avec la campagne — [PROPOSÉ]
+**Tissage [PROPOSÉ] :**
 
-- Le profil « priorité cargaison » signé à 18:43 visait **la même série de scellés QZ17** que l'Acte I. C'est le premier lien entre les deux relais. Il n'apparaît qu'au retour, dans une quatrième question optionnelle débloquée si l'Acte I est terminé : *« Quel fret avait la priorité ? »*
-- **CIN-20 « Treize minutes » (40 s)**, après le retour validé : Asha Mbaye lit à voix haute le message de détresse libéré à 18:54. Les noms des colons qui attendaient sont affichés. Pas de musique. Ce moment donne un poids humain à un chiffre.
-- Mara Vega transmet le dossier à la compagnie. Réponse automatique : *« Priorité cargaison maintenue. »* Fin d'acte.
+- **Le manifeste du M577 est le choix moral de l'acte.** La compagnie exige trois conteneurs scellés du dépôt ; Asha demande des places pour les rescapés du complexe, attendus à Port-Méridien. Chaque conteneur retire deux places.
+- Pendant les 45 secondes de C-12, si un conteneur est à bord, il **frappe de l'intérieur** (son seul). Inez : « Notez l'heure. »
+- **CIN-31 « Le sas refermé »** : les rescapés descendent à Port-Méridien, ou les conteneurs partent sous scellés vers le Tantalus, sur ordre. Écran de quarantaine : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
 
-**Conséquence durable :** `story-qz18-protocol` = `technical-audit` | `crew-prevention` | `standard` (déjà déductible de la sauvegarde existante).
+**Conséquence :** `story-m577-manifest` = colons (0-6) et conteneurs (0-3). Les colons ramenés rejoignent la population de Port-Méridien (§6).
 
----
+### 5.4 Interlude — « Quarantaine » (à bord du Tantalus) — [PROPOSÉ]
 
-## 6. Acte III — « Corridor de feu » (convoi M577 → C-12)
+Le projet référence déjà une « Ruche expérimentale du Tantalus » (`hive-missions-v131.js`) et des crises à bord par route de salles (`world-crisis-core.js`, type `xenomorph`). L'interlude leur donne une place.
 
-### 6.1 Mission A · Ramener le blindé — [EXISTANT]
+1. **Déclencheur** : un conteneur ramené s'est ouvert en quarantaine. Sans conteneur : un parasite a voyagé dans le train d'atterrissage du dropship.
+2. **CIN-40 « Jun Park ne répond plus »** : alerte au support-vie ; les PNJ passent en routine `alert` (`NPC_ROUTINE_PHASES_V62`).
+3. Traque sur les ponts 2 et 3 avec les systèmes de survie **[EXISTANT]** (soudure, routage d'énergie, caméras, acide persistant).
+4. Sauver Jun Park dans les conduits.
+5. **Choix** : détruire la créature, ou la capturer pour BISHOP-9 et Inez.
+6. **CIN-41 « Ce que BISHOP-9 savait »** : les journaux montrent que BISHOP-9 avait une directive de préservation des spécimens. Il ne l'a pas cachée ; personne ne l'a interrogé. Sa confiance baisse d'un niveau (`NPC_TRUST_LEVELS_V62`).
 
-Modules : `campaign-convoy-story-v161.js`, `campaign-convoy-story-ui-v161.js`, campagne APC convoy.
+**Conséquence :** `story-quarantine-outcome` = `destroyed` | `captured`.
 
-Scènes existantes : « Ramener le blindé » (ordre de convoyage), « Ce que le retour devra raconter » (manifeste du M577), « Dernier contrôle avant départ », « La liaison reste ouverte », « Trois voies, une sortie ». Commandes : W/S pour changer de voie, Espace pour accélérer, F tourelle, R recharger. Bilan au retour : état du M577, relevé du corridor.
+### 5.5 Acte IV — « Cocon noir »
 
-**Tissage [PROPOSÉ]** :
+**Statut :** **[EXISTANT]** — `special-black-cocoon`. L'opérateur reprend conscience dans la résine, sans témoin de sa capture ; sac, relais, sortie industrielle ou circuit de refroidissement, transport Kappa, 90 secondes, contrôle biologique à bord.
 
-- **Le manifeste du M577 est le choix moral de l'acte.** La compagnie exige que le blindé ramène trois conteneurs scellés du dépôt ; Asha Mbaye demande qu'il ramène des colons. La capacité est limitée : chaque conteneur embarqué retire deux places.
-- Le choix se fait dans l'écran de manifeste existant, enrichi d'un curseur fret / passagers.
-- **CIN-30 « Le choix de Cal » (20 s)** : Cal Mercer tape sur la coque du M577. « Il porte ce qu'on lui donne. Décidez vite. »
+**Tissage [PROPOSÉ] :**
 
-### 6.2 Mission B · Une sortie plutôt qu'une victoire (C-12) — [EXISTANT]
+- **CIN-50 « Les dernières images »** (35 s) : caméra casque dégradée. Echo-9 suit la destination absente du bon de QZ-17 jusqu'à un dépôt souterrain. Silhouette au plafond. Coupure. La capture n'est pas jouée : elle reste « sans témoin exploitable », comme dans le code.
+- Dans la galerie basse : des **berceaux réfrigérés de la série QZ17**, vides. **Révélation :** la cargaison fantôme allait *vers* la ruche. Quelqu'un nourrissait et étudiait la colonie d'organismes de Lethe, et la priorité de fret gardait ce trafic hors des registres d'évacuation.
+- Un enregistreur de CASSIUS, la station Asphodèle, est fixé aux berceaux : les ordres de livraison venaient de la station (lien avec §7).
+- **CIN-51 « Contrôle biologique »** : scanner, Noor Okafor attend. `NÉGATIF`. « Bon retour. Cette fois, je l'écris. »
 
-Module : `campaign-lethe-story-v163.js` (`special-c12-horde`).
+### 5.6 Acte V — « La dernière course de Tantalus »
 
-Déroulé existant : le corridor mène au complexe, l'ascenseur C-12 est en panne et coupe le repli ; activer le relais, quatre secondes d'avertissement, tenir quarante-cinq secondes de rétablissement, rejoindre le sas à droite et maintenir E deux secondes. Protocoles de compte rendu : *Bilan de l'ascenseur* ou *Bilan des axes*.
+**Statut :** **[PARTIEL]** — `last-course-tantalus` : course APC, voies, hordes continues, Crushers, poursuite de Reine, score.
 
-**Tissage [PROPOSÉ]** :
+**Situation [PROPOSÉ] :** la ruche du dépôt s'étend vers la surface. Halloran annonce la clôture du réseau QZ et la « suspension des engagements envers Port-Méridien ». Le dernier convoi doit ramener les colons isolés du complexe vers le port avant que la ruche coupe la route.
 
-- Les colons ou conteneurs embarqués en 6.1 attendent dans le M577 au pied de C-12. Le joueur défend donc *quelque chose de précis* pendant les 45 secondes.
-- Si des conteneurs ont été embarqués, l'un d'eux **frappe de l'intérieur** pendant la défense (son seulement, aucun ennemi supplémentaire). Inez : « Je ne l'ai pas entendu. Vous non plus. Notez l'heure. »
+1. **Conseil de guerre** : chaque membre d'équipage dont la confiance est *solide* propose un avantage (tourelle de Sanaa, blindage de Cal, fenêtre d'Orlov, route de Leila).
+2. **Choix de Mara Vega** selon les preuves réunies : obéir à la compagnie (récupérer le dépôt) ou protéger la colonie.
+3. **CIN-60 « Dernier départ »** : le M577 quitte le complexe sous la pluie.
+4. Course APC **[PARTIEL]**.
+5. Point médian **[PROPOSÉ]** : un pont cède ; lâcher la remorque de fret ou celle des colons en retard.
+6. Poursuite de Reine **[PARTIEL]** : la Reine du dépôt, nourrie par les livraisons QZ17.
+7. Arrivée aux murs de Port-Méridien : la course se termine dans la mission C5 du front colonie (§6.2), si elle est débloquée.
 
-### CIN-31 · Fin d'acte « Le sas refermé » — [PROPOSÉ]
+**CIN-61 « Les portes du port »** : Rook fait l'appel des colons arrivés. Le nombre affiché est la somme réelle des sauvetages de toute la campagne.
 
-Le sas de C-12 se ferme. Silence. Dans le hangar du Tantalus, les colons descendent — ou les conteneurs sont déchargés sous scellés par BISHOP-9, sur ordre de la compagnie. Plan final sur l'écran de quarantaine : `CONTRÔLE BIOLOGIQUE · 1 ANOMALIE`.
+### 5.7 Dossier, identité et fins
 
-**Conséquence durable :** `story-m577-manifest` = nombre de colons (0-6) et de conteneurs (0-3) ramenés.
+**Dossier `story-dossier` :**
 
----
+| Pièce | Source |
+| --- | --- |
+| Contradiction PDA / courriel | Acte I |
+| Fragment de sceau QZ17-04 ou berceau ouvert | Acte I (selon la piste) |
+| Priorité de fret à 18:43 | Acte II |
+| Directive de préservation de BISHOP-9 | Interlude |
+| Berceaux QZ17 dans la ruche | Acte IV |
+| Ordres de livraison de CASSIUS | Acte IV + front station S2 |
+| Témoignage de Tomas Wren | Front colonie, annexe *Ce que le quai a vu* |
 
-## 7. Interlude — « Quarantaine » (à bord du Tantalus) — [PROPOSÉ]
+**[À DÉCIDER]** Identité du signataire du badge. Option A : jamais établie (on accuse un système, pas une personne). Option B : établie avec 6 pièces sur 7, le texte rappelant ce qui reste non prouvé. Recommandation : B.
 
-**Pourquoi un interlude :** le hub doit devenir dangereux une fois, pour que le joueur tienne à ce foyer. Le projet référence déjà une « Ruche expérimentale du Tantalus » et des « Tantalus Tunnel Vermin » dans son contenu ; cet interlude leur donne une place narrative.
-
-### 7.1 Déclencheur
-
-- Si des conteneurs ont été ramenés en Acte III : l'un d'eux s'est ouvert en quarantaine.
-- Sinon : une forme larvaire a voyagé dans le train d'atterrissage du dropship (le joueur ne peut pas tout éviter, seulement l'ampleur).
-
-### 7.2 Déroulé
-
-1. **CIN-40 « Jun Park ne répond plus » (30 s)** : alerte au support-vie, pont 3. Les PNJ passent en phase de routine `alert` (déjà prévue dans `NPC_ROUTINE_PHASES_V62`).
-2. **Traque** dans les conduits et les ponts 2 et 3 avec les systèmes de survie (soudure de portes, routage d'énergie, caméras, acide persistant — `alien-survival-systems`, **[EXISTANT]** comme système).
-3. **Sauver Jun Park** dans les conduits du support-vie.
-4. **Choix** : 
-   - tuer la créature (sécurité, perte de l'échantillon) ;
-   - la capturer pour BISHOP-9 et Inez (laboratoire, gain de recherche, risque de rechute plus tard).
-5. **CIN-41 « Ce que BISHOP-9 savait »** : en relisant les journaux de quarantaine, Inez découvre que BISHOP-9 avait reçu un ordre de priorité de la compagnie : préserver tout spécimen. Il ne l'a pas caché, mais personne ne lui a demandé. Dialogue court ; la confiance de l'équipage envers BISHOP-9 baisse d'un niveau (`NPC_TRUST_LEVELS_V62`).
-
-**Conséquences durables :** `story-quarantine-outcome` = `destroyed` | `captured` ; confiance BISHOP-9.
-
----
-
-## 8. Acte IV — « Cocon noir »
-
-**Statut :** **[EXISTANT]** — `campaign-lethe-story-v163.js` (`special-black-cocoon`), `black-cocoon-state-v121.js`, `black-cocoon-runtime-v121.js`.
-
-### 8.1 Ce que le jeu contient déjà
-
-Briefing « Une liaison a disparu » : dernière liaison depuis les galeries de Lethe, le dossier reprend au premier signe de conscience de l'opérateur, sa capture n'a pas de témoin. Le joueur coupe la résine (E maintenu, ou F plus bruyant), récupère le sac, rétablit le relais, ouvre une sortie (industrielle ou circuit de refroidissement), rejoint le transport Kappa, tient la zone 90 secondes, puis termine le contrôle biologique à bord. Protocoles : *Trajet d'exfiltration* ou *Contrôle du retour*.
-
-### 8.2 Ce qui précède la capture — [PROPOSÉ]
-
-Le jeu existant commence volontairement *après* la capture, sans témoin. La campagne respecte ce choix :
-
-- **CIN-50 « Les dernières images » (35 s)** : caméra casque d'Echo-9, image dégradée. Le joueur suit un signal de balise dans le dépôt de QZ-17 — la destination absente du bon officiel. Le signal est celui de l'**Echo-8**. L'image se coupe sur une silhouette au plafond.
-- Le joueur ne joue pas la capture. Elle reste une lacune assumée, cohérente avec le dossier « sans témoin exploitable ».
-
-### 8.3 Découverte dans les galeries — [PROPOSÉ]
-
-- Dans la galerie basse, le joueur trouve des **berceaux de transport refroidis** identiques à celui de l'alcôve de QZ-17 (Acte I, piste maintenance), marqués de la série QZ17.
-- Il trouve aussi la plaque d'identité de l'Echo-8 dans la résine. Pas de corps. Interaction optionnelle ; Echo-9 : « Je la prends. Elle rentre avec moi. »
-- **Révélation de l'acte :** la cargaison fantôme était une livraison *vers* la ruche, pas *depuis* elle. Quelqu'un nourrissait et étudiait la colonie de Lethe. La priorité de fret servait à garder ce trafic hors des registres d'évacuation.
-
-### CIN-51 · Contrôle biologique — [PROPOSÉ]
-
-Dans la baie du Tantalus, le scanner balaie Echo-9. Noor Okafor attend, les mains vides. Résultat : `NÉGATIF`. Noor : « Bon retour. Cette fois, je l'écris. » Si la plaque de l'Echo-8 a été récupérée, elle est déposée dans le casier vide du prologue.
-
-**Conséquences durables :** `story-echo8-tag` (récupérée ou non), `story-cocoon-exit` (`industrial` | `cooling`).
-
----
-
-## 9. Acte V — « La dernière course de Tantalus »
-
-**Statut :** **[PARTIEL]** — opération `last-course-tantalus` : course APC ancrée à droite, voies, hordes continues, Crushers, poursuite de Reine et score.
-
-### 9.1 Situation — [PROPOSÉ]
-
-La compagnie déclare Lethe « perte d'actif » et programme l'abandon de la colonie dans 48 heures. Le dernier convoi part du complexe vers le port spatial. Le Tantalus a assez de place pour les colons **ou** pour le contenu du dépôt QZ-17 que la compagnie réclame officiellement.
-
-### 9.2 Préparation au Tantalus — [PROPOSÉ]
-
-- **Conseil de guerre** dans la salle de briefing. Chaque membre de l'équipage donne un avis ; ceux dont la confiance est *solide* (`NPC_TRUST_LEVELS_V62`) proposent un bonus de mission (Sanaa : tourelle renforcée, Cal : blindage du M577, Orlov : fenêtre d'extraction plus longue, Leila : itinéraire alternatif).
-- **Choix de commandement de Mara Vega** : obéir à l'ordre d'abandon (récupérer le dépôt) ou désobéir (évacuer tout le monde). Le joueur ne décide pas à sa place ; il présente le dossier. Ce que Vega décide dépend des preuves réunies (§10).
-
-### 9.3 Déroulé de la course
-
-1. **CIN-60 « Dernier départ » (30 s)** : le M577 sort du complexe sous la pluie. Cal au volant, Echo-9 à la tourelle.
-2. **Course APC [PARTIEL]** : trois voies, hordes continues, Crushers.
-3. **Point médian [PROPOSÉ]** : un pont s'effondre. Le joueur doit lâcher la remorque de fret ou la remorque des colons en retard (si Vega a désobéi, il n'y a pas de remorque de fret et la perte touche des réserves de munitions à la place).
-4. **Poursuite de Reine [PARTIEL]** : la Reine de Lethe sort de la ruche, nourrie par les livraisons du dépôt.
-5. **Port spatial** : le dropship d'Orlov attend. Tenir 60 secondes. Embarquement.
-
-### CIN-61 · Lethe derrière eux — [PROPOSÉ]
-
-Depuis le hublot du dropship : la colonie, la ruche qui s'étend, et la lumière du port qui s'éteint. Rook, à la radio, fait l'appel des colons embarqués. Le nombre affiché est celui que le joueur a réellement sauvé sur toute la campagne (Port-Méridien, M577, convoi final).
-
----
-
-## 10. Choix, preuves et fins
-
-### 10.1 Le dossier final
-
-La campagne tient un dossier d'enquête unique, `story-dossier`, alimenté par les actes :
-
-| Pièce | Source | Condition |
-| --- | --- | --- |
-| Contradiction PDA / courriel | Acte I | Les quatre pièces QZ-17 |
-| Fragment de sceau QZ17-04 | Acte I | Piste quarantaine |
-| Berceau ouvert de l'intérieur | Acte I | Piste maintenance |
-| Priorité de fret à 18:43 | Acte II | Dossier QZ-18 complet et validé |
-| Ordre de préservation de BISHOP-9 | Interlude | Journaux de quarantaine lus |
-| Berceaux série QZ17 dans la ruche | Acte IV | Galerie basse explorée |
-| Plaque de l'Echo-8 | Acte IV | Récupérée |
-
-### 10.2 Identité du signataire — [À DÉCIDER]
-
-Le jeu existant affirme que la personne qui a utilisé le badge de I. Voss n'est pas identifiée. Deux options compatibles :
-
-- **Option A — elle ne l'est jamais.** La campagne accuse un système (la priorité de fret), pas une personne. Plus fidèle au ton actuel.
-- **Option B — elle ne l'est qu'avec 6 pièces sur 7.** Le recoupement des horaires du dépôt QZ-17 et du poste fret QZ-18 désigne le responsable logistique cité dans le courriel d'annulation de l'Acte I. Avec moins de pièces, l'identité reste « non établie ».
-
-Recommandation : Option B, avec un texte de retour qui rappelle ce qui reste non prouvé, même quand l'identité est établie.
-
-### 10.3 Fins — [PROPOSÉ]
+**Fins [PROPOSÉ] :**
 
 | Fin | Condition | Résultat |
 | --- | --- | --- |
-| **« Le relais parle »** | Vega a désobéi + dossier ≥ 5 pièces | Le dossier est diffusé sur tous les relais coloniaux par Asha. La compagnie perd le contrôle du récit. Le Tantalus devient un vaisseau sans port d'attache. |
-| **« Le fret d'abord »** | Vega a obéi | Le dépôt est récupéré, la colonie partiellement évacuée. Inez démissionne. Le dossier est classé « retard technique ». |
-| **« Les vivants, sans preuve »** | Vega a désobéi + dossier < 5 pièces | Les colons sont sauvés, mais le dossier ne tient pas. Vega est relevée de son commandement à l'arrivée. |
+| **« Le relais parle »** | Vega protège la colonie + dossier ≥ 5 pièces + station Asphodèle reprise | Le dossier part sur tout le réseau QZ depuis Asphodèle. La compagnie perd le contrôle du récit. Port-Méridien devient une colonie libre. |
+| **« Le fret d'abord »** | Vega obéit | Le dépôt est récupéré, la colonie passe sous administration de la compagnie. Inez démissionne. Le dossier est classé « retard technique ». |
+| **« Les vivants, sans preuve »** | Vega protège la colonie + dossier < 5 pièces | La colonie tient, mais Vega est relevée de son commandement. Asphodèle reste aux mains de qui la contrôle. |
 
-Aucune fin ne tue Echo-9 : la mort en mission reste gérée par les systèmes d'échec et de reprise existants.
+### 5.8 Épilogue — « Ce que le retour devra raconter » — [PROPOSÉ]
 
----
-
-## 11. Épilogue — « Ce que le retour devra raconter » — [PROPOSÉ]
-
-Jouable, sans combat. Le joueur se promène dans le Tantalus après la campagne. Chaque membre de l'équipage a une dernière réplique qui dépend des fins et des quêtes annexes. La baie cryogénique se rouvre : un nouveau poste de relève est préparé. Sur le casier de l'Echo-8, une étiquette : `RETOUR CONFIRMÉ` (si la plaque a été ramenée) ou `POSTE LIBÉRÉ` (sinon).
-
-Dernier texte à l'écran, version « Le relais parle » : `QZ-18 · 18:41 · MESSAGE TRANSMIS SANS DÉLAI.`
+Jouable, sans combat. Visite du Tantalus, de Port-Méridien et, si elle est reprise, de la station Asphodèle. Chaque personnage a une réplique finale selon la fin. Sur le casier de l'Echo-8 : `RETOUR CONFIRMÉ` ou `POSTE LIBÉRÉ` (§7.4).
 
 ---
 
-## 12. Quêtes du Tantalus (hub) — [PROPOSÉ]
+## 6. Front colonie — Port-Méridien : sauver, puis reconstruire
 
-Les quêtes de bord utilisent les systèmes de rapport existants (`npc-dialogue-v62.js`) : niveaux de confiance `fragile → prudent → operationnel → solide`, choix de rapport `request-candid-assessment`, `acknowledge-welfare`, `review-mission`, `confirm-alert-role`, `request-infestation-evidence`, renouvellement après 8 heures de jeu. Chaque quête se termine par un gain de confiance, de moral ou de recherche — jamais d'une récompense versée avant la preuve de réalisation.
+### 6.1 Concept
 
-### 12.1 Quêtes personnelles de l'équipage
+Port-Méridien est le seul port civil de Lethe encore habité. Son « quai des vivants » trie les rescapés. Les relais QZ retardés l'ont isolé ; la compagnie le considère comme un coût. Le joueur doit d'abord **le sauver** (tenir, soigner, évacuer), puis **le reconstruire** (énergie, air, eau, défense, communications).
 
-| ID proposé | Personnage | Titre | Disponible après | Résumé | Récompense |
-| --- | --- | --- | --- | --- | --- |
-| `story-crew-vega` | Mara Vega | **La ligne de commandement** | Acte II | Relire avec elle les ordres reçus depuis le prologue et identifier ceux qui contredisent la mission de sauvetage. | Confiance, influence sur le choix de l'Acte V |
-| `story-crew-velez` | Tamsin Velez | **Le pas de tir** | Prologue | Battre ses temps de qualification ; elle raconte son premier déploiement raté. | Moral, dotation d'assaut |
-| `story-crew-echo-a` | ECHO-A | **Deux relèves** | Acte IV | Comparer ses protocoles avec la plaque de l'Echo-8. Il pose la question : « Quand tu seras remplacé, qui remarquera ? » | Confiance, fin d'épilogue spécifique |
-| `story-crew-david` | DAVID-8R | **Mémoire récupérée** | Acte I | Rapporter trois composants trouvés en mission pour restaurer un secteur de sa mémoire : il a été récupéré sur une épave de la compagnie. | Recherche, pièce optionnelle du dossier |
-| `story-crew-mbaye` | Asha Mbaye | **Les noms de Lethe** | Acte II | Compléter la liste des colons en attente avec les registres des relais. | Moral, + colons récupérables en Acte V |
-| `story-crew-sorensen` | Leila Sørensen | **La route de Kestrel** | Acte III | Cartographier une route de survie alternative pour la course finale. | Itinéraire alternatif Acte V |
-| `story-crew-okafor` | Noor Okafor | **Le registre des pertes** | Acte III | Rapporter les plaques des colons morts trouvées en mission ; il refuse de laisser des noms dans la résine. | Moral, soins de campagne améliorés |
-| `story-crew-bishop` | BISHOP-9 | **Directive de préservation** | Interlude | Lui demander ce qu'il ferait si l'ordre de la compagnie et la vie d'un membre de l'équipage se contredisaient. Réponse différente selon la confiance. | Restaure la confiance perdue à l'interlude |
-| `story-crew-harlow` | Inez Harlow | **Le sceau** | Acte I (piste quarantaine) | Analyser le fragment QZ17-04 au laboratoire : résidu biologique et colle industrielle. | Recherche, pièce du dossier |
-| `story-crew-doyle` | Sanaa Doyle | **Calibrage lourd** | Acte III | Récupérer des pièces de smartgun sur un poste de sécurité abandonné. | Tourelle M577 renforcée Acte V |
-| `story-crew-reyes` | Pablo Reyes | **La charge de trop** | Acte III | Il avoue avoir fait sauter un accès trop tôt lors d'une ancienne évacuation. Retrouver le registre de cette opération. | Confiance, charges de brèche |
-| `story-crew-mercer` | Cal Mercer | **Remettre le M577 en état** | Acte III | Réparer le blindé avec des pièces récupérées ; l'état du M577 au bilan existant sert de point de départ. | Blindage Acte V |
-| `story-crew-orlov` | Maksim Orlov | **Fenêtre de tir** | Acte IV | Récupérer les enregistreurs du transport Kappa : Orlov veut savoir pourquoi le transport a mis si longtemps. | Fenêtre d'extraction plus longue Acte V |
-| `story-crew-kwan` | Idris Kwan | **Le réacteur ne ment pas** | Prologue | Réparer le réseau du réacteur (service existant `service:power`) ; il découvre une consommation inexpliquée au pont de quarantaine. | Énergie, indice de l'interlude |
-| `story-crew-park` | Jun Park | **Après les conduits** | Interlude | Jun a peur des conduits du support-vie depuis l'incident. Les sécuriser avec lui. | Moral, oxygène |
-| `story-crew-rook` | Rook | **Ce que les capteurs ont vu** | Acte II | Retrouver dans les balayages de reconnaissance la trajectoire d'une navette non déclarée au-dessus de QZ-17. | Pièce optionnelle du dossier |
+**Raccordement aux systèmes existants [PROPOSÉ] :** la colonie utilise les valeurs stratégiques déjà présentes pour chaque monde — `stability`, `infestation`, `quarantine` — et les ressources existantes (`credits`, `alloy`, `medical`, `research`, `fuel`). Les conséquences d'opération (`campaign-consequences.js`) modifient déjà stabilité et infestation ; la reconstruction ajoute des **chantiers** qui consomment ces ressources.
 
-### 12.2 Quêtes de vie à bord
+### 6.2 Missions
 
-| ID proposé | Titre | Lieu | Résumé |
+**Intro**
+
+| ID | Titre | Statut | Résumé |
 | --- | --- | --- | --- |
-| `story-ship-mess` | **Repas de relève** | Mess | Réunir quatre membres d'équipage au même service ; scène de dialogue collectif qui change selon l'acte. |
-| `story-ship-cryo` | **Le casier vide** | Baie cryo | Fil de l'Echo-8, relancé à chaque acte par un nouvel indice. Se ferme à l'Acte IV. |
-| `story-ship-sensor` | **Écoute de nuit** | Réseau de capteurs | Pendant la phase `break`, capter des fragments de messages coloniaux en retard. Chaque fragment débloque un nom pour *Les noms de Lethe*. |
-| `story-ship-armory` | **Inventaire contradictoire** | Armurerie | Le registre d'armes ne correspond pas aux râteliers. Petite enquête interne qui forme aux méthodes de l'Acte II. |
-| `story-ship-vehicle` | **Le badge du M577** | Baie véhicules | Une plaque de convoi d'un ancien équipage, trouvée dans le blindé. |
-| `story-ship-bioforge` | **Ce qu'on garde en vie** | Bioforge | Débat Inez / BISHOP-9 sur la Bioforge. Débloque l'accès narratif à la Bioforge (**[PARTIEL]** comme système). |
+| `colony-intro-quai` | **Le quai des vivants** | **[EXISTANT]** | Triage, blessé, sas, trois civils (`port-meridien-v90.js`). Rencontre de Tomas Wren et Lucia Ferro **[PROPOSÉ]**. |
+| `colony-intro-doyenne` | **La doyenne** | **[PROPOSÉ]** | Asha Mbaye présente Echo-9 à Adèle Sarrazin dans la salle commune. Visite guidée du port : quais, infirmerie, processeur, mur nord. Elle refuse toute aide « de la compagnie » ; Asha doit prouver que le Tantalus n'en fait pas partie. |
 
-### 12.3 Quêtes de recrutement
+**Principales**
 
-| Recrue | Titre | Résumé |
-| --- | --- | --- |
-| **Mara Voss « RIVET »** | **Le même nom** | Voss porte le même nom que le contremaître I. Voss de QZ-18. **[À DÉCIDER]** lien familial ou simple homonymie. Si lien : elle rejoint l'équipage pour prouver que son parent n'a pas signé à 18:43. Sa motivation existante (« travailler sur le terrain plutôt que réparer après coup les conséquences des décisions ») la rend compatible. |
-| **Nadia Bensaïd « SUTURE »** | **Pas de blessé sans extraction** | Sauver une équipe médicale coincée à Port-Méridien. |
-| **Jonas Reed « BASTION »** | **Sécurité embarquée** | Ancien agent de sécurité sur des cargos ; il a vu passer des scellés QZ17. Le recruter apporte un témoignage au dossier. |
-| **Jun Seo « BALISE »** | **Itinéraires terrestres** | Connaît les routes de convoi de Lethe ; le recruter avant l'Acte III réduit la difficulté du corridor. |
+| ID | Titre | Placement | Résumé | Objectif de base |
+| --- | --- | --- | --- | --- |
+| `colony-c1` | **Tenir le port** | Après Acte I | Une vague sort des conduits du quai. Défendre l'infirmerie de Lucia Ferro pendant l'évacuation des blessés vers le Tantalus. | `defend the colony` |
+| `colony-c2` | **Rallumer la colonie** | Après Acte II | Le processeur atmosphérique du port tombe. Descendre dans ses niveaux techniques avec Jun Park et le relancer. Débloque la reconstruction. | `restore atmospheric processing` |
+| `colony-c3` | **Le convoi des rescapés** | Pendant Acte III | Les colons ramenés par le M577 arrivent ; les accueillir, les enregistrer, contrôler leur état biologique. Un des arrivants est contaminé : le repérer sans provoquer de panique. | `rescue survivors` |
+| `colony-c4` | **Le culte du port** | Après Acte IV | Des colons convertis aux Children of the Perfected Host ouvrent les sas la nuit. Enquêter (méthode de l'Acte II), puis choisir : arrestation, exil ou médiation par Adèle. | `navigate the vent network` |
+| `colony-c5` | **La nuit des murs** | Fin de l'Acte V | Les rescapés du dernier convoi franchissent les portes ; la ruche du dépôt suit. Tenir les murs reconstruits jusqu'à l'aube. L'état de la colonie détermine la difficulté. | `hold the extraction zone` |
 
----
+**Annexes**
 
-## 13. Opérations secondaires (hors Tantalus)
-
-Les opérations de `special-operations-v67.js` sont classées selon leur place dans la fiction. Les statuts sont ceux du code.
-
-### 13.1 Liées à la trame de Lethe
-
-| Opération | Statut | Place proposée | Accroche narrative [PROPOSÉ] |
+| ID | Titre | Donneur | Résumé |
 | --- | --- | --- | --- |
-| **Cargo Brutal** | **[EXISTANT]** effective, ordre 1 | Entre prologue et Acte I | Escorter un cargo civil vers Port-Méridien ; premier contact avec la priorité de fret. |
-| **Systèmes de survie Alien** | **[EXISTANT]** effective, ordre 4 | Entre Actes I et II ; mécaniques réutilisées dans l'interlude | Évasion d'une quarantaine sur Lethe (`escape the quarantine`) : un poste médical de la colonie, auto-destruction, portes soudables. |
-| **Doctrine Alpha / Bravo** | **[PARTIEL]**, ordre 3 | Entre Actes II et III | Défense de colonie à cinq routes, minimum 4 membres d'équipage : protéger le dépôt d'évacuation avant le départ du M577. |
-| **Opération Abysse Noir** | **[PARTIEL]**, ordre 8 | Entre Actes IV et V | Dropship modulaire, escortes et bombardements : couvrir l'arrivée des transports d'évacuation. Débloque l'escadrille alliée pour l'Acte V. |
-| **Broodstorm** | **[PARTIEL]**, ordre 17 | Optionnelle, après Acte III | Exploration sous-marine (scaphandre HADAL, sous-marin MANTA-6) : les berceaux QZ17 arrivaient-ils par la mer ? |
+| `colony-a-quai` | **Ce que le quai a vu** | Tomas Wren | Protéger Wren pendant qu'il récupère ses carnets de quai. Il témoigne alors sur les conteneurs QZ17 (pièce du dossier). |
+| `colony-a-ferro` | **Les lits vides** | Lucia Ferro | Retrouver une équipe médicale partie vers un hameau voisin et jamais revenue. |
+| `colony-a-ecole` | **La classe du mercredi** | Adèle Sarrazin | Escorter les enfants du port vers l'abri du processeur pendant une alerte. Mission sans arme lourde. |
+| `colony-a-seegson` | **Pièces Seegson** | Jun Park | Récupérer du matériel Seegson dans un entrepôt abandonné ; il est bon marché, en panne, mais réparable. |
+| `colony-a-balise` | **La balise du hameau** | Rook | Rétablir une balise de colonie isolée (« Balise de colonie » existe dans le catalogue) pour retrouver les foyers éloignés. |
+| `colony-a-crucible` | **Le prix de Grue** | Grue | Les récupérateurs proposent des alliages en échange d'un accès au quai. Négocier, ou refuser et chercher ailleurs. |
+| `colony-a-converti` | **Mon frère est parti** | Un colon | Retrouver un jeune converti avant qu'il ne descende dans les galeries. Peut changer l'issue de C4. |
 
-### 13.2 Archives MIRE (continuité séparée)
+**Locales (rejouables)**
 
-Le contenu du projet évoque déjà les « archives MIRE et anomalies temporelles ». **[PROPOSÉ]** Les opérations qui s'éloignent du ton de Lethe sont présentées comme des **archives MIRE** consultées depuis le laboratoire ou le centre d'information de combat : des reconstitutions, des simulations ou des dossiers historiques. Elles n'affectent pas le dossier de la campagne principale et gardent leur sauvegarde isolée quand elle est prévue (c'est le cas de Mire Archive 001).
-
-| Opération | Statut | Cadre MIRE proposé |
+| Contrat | Objectif existant | Effet |
 | --- | --- | --- |
-| **Mire Archive 001 : Nostromo** | **[PARTIEL]**, ordre 7 | Archive historique la plus ancienne ; score de synchronisation. |
-| **Protocole Z-110** | missing, ordre 9 | Dossier d'un programme de Power Loaders de nouvelle génération. |
-| **Jeri : le faux fils** | missing, ordre 10 | Infiltration par profils phéromonaux ; dossier d'expérience. |
-| **Éloïse : la reine sans couronne** | missing, ordre 11 | Synthétique hybride et ruche : archive à fins ramifiées. |
-| **A.T.A.X.-Q : la fausse reine** | missing, ordre 12 | Programme d'armure-reine. |
-| **Le chant de la Reine-Mère** | missing, ordre 13 | Archive biologique sur l'influence maternelle. |
-| **Talos contre le Titan** | missing, ordre 14 | Essai de combat à grande échelle. |
-| **LV-XENO : la ruche-monde** | missing, ordre 15 | Archive d'un monde entièrement colonisé. |
-| **Pangaea : la seconde extinction** | missing, ordre 16 | Archive d'écosystème préhistorique contaminé. |
+| Purge du réservoir | `purge a reactor nest` | Infestation −, eau + |
+| Escorte des moissonneurs | `escort a colony convoy` | Nourriture + |
+| Ronde des murs | `defend the colony` | Sécurité + |
+| Filtres du processeur | `restore atmospheric processing` | Air + |
+| Récupération en périphérie | `recover black-box data` | Alliage, crédits |
+| Recherche de disparus | `rescue survivors` | Population +, moral + |
+| Chargeur bloqué | `secure the power loader` | Vitesse des chantiers + |
 
-**[À DÉCIDER]** Garder ces opérations comme archives MIRE (cohérence maximale avec Lethe), ou les intégrer dans une seconde campagne.
+### 6.3 Reconstruction — [PROPOSÉ]
+
+Après C2, Asha ouvre la **table de reconstruction** (salle commune de Port-Méridien, ou console des quartiers du Tantalus). Chaque chantier a trois niveaux.
+
+| Chantier | Niveau 1 | Niveau 2 | Niveau 3 | Personnage référent |
+| --- | --- | --- | --- | --- |
+| **Processeur atmosphérique** | Air respirable au port | Serres pressurisées | Exportation d'air vers les hameaux | Jun Park |
+| **Infirmerie** | Triage stable | Bloc opératoire | Contrôle biologique complet | Lucia Ferro, Noor Okafor |
+| **Murs et sas** | Sas soudés | Mur nord | Tourelles automatiques | Sanaa Doyle, Pablo Reyes |
+| **Énergie** | Générateurs de secours | Réseau du port | Réseau partagé avec Asphodèle | Idris Kwan |
+| **Communications** | Balise locale | Relais indépendant du réseau QZ | Diffusion sur tout Lethe | Rook, Asha Mbaye |
+| **Quais** | Une plate-forme d'atterrissage | Dépôt de ravitaillement | Port ouvert aux convois civils | Cal Mercer, Maksim Orlov |
+| **Habitat** | Dortoirs | Quartiers familiaux | Accueil de nouveaux colons | Adèle Sarrazin |
+
+**Règles :**
+
+- Un chantier consomme des ressources existantes et un temps stratégique ; il ne progresse jamais pendant une mission en cours.
+- Un niveau n'est validé qu'après une mission locale réussie sur le lieu (ex. Ronde des murs pour Murs et sas niveau 2).
+- Une mission ratée peut endommager un chantier : il perd un niveau de fonctionnement, pas ses ressources.
+- La population (colons ramenés au fil de la campagne) limite le nombre de chantiers actifs en même temps.
+- La stabilité de Lethe monte avec les chantiers terminés ; l'infestation baisse avec les purges.
+
+**Paliers de la colonie :**
+
+| Palier | Condition | Effet |
+| --- | --- | --- |
+| **Survie** | Début | Missions locales défensives seulement. |
+| **Rétablie** | 3 chantiers niveau 1 | Annexes de la colonie débloquées ; recrutement de Nadia Bensaïd. |
+| **Autonome** | 5 chantiers niveau 2 | Bonus au conseil de guerre de l'Acte V ; Port-Méridien fournit des ressources régulières. |
+| **Libre** | 7 chantiers niveau 3 + fin « Le relais parle » | Épilogue spécial : premier convoi civil sans escorte. |
 
 ---
 
-## 14. Tableau des cinématiques
+## 7. Front station — Asphodèle : la station perdue, futur hub
 
-| ID | Titre | Acte | Durée cible | Passable | Statut |
+### 7.1 Concept
+
+La **station Asphodèle** est la station de contrôle du réseau de relais QZ, en orbite de Lethe. Elle ne répond plus depuis des mois. Son intelligence de contrôle, **CASSIUS**, applique toujours la quarantaine à la lettre : elle retarde les messages, autorise les priorités de fret et verrouille ses propres ponts.
+
+Le joueur doit **atteindre** la station, la **remettre en service**, découvrir ce qui s'y est passé (dont le sort de l'Echo-8), puis en faire un **second hub** : fixe, en orbite, relié à la colonie.
+
+**Pourquoi un second hub :** le Tantalus reste le hub mobile (équipage, armurerie, déploiements). Asphodèle devient le hub régional : réseau de relais, commerce, ravitaillement de Port-Méridien. Les deux restent utiles.
+
+### 7.2 Missions
+
+**Intro**
+
+| ID | Titre | Placement | Résumé |
+| --- | --- | --- | --- |
+| `station-intro-silence` | **Le silence d'Asphodèle** | Après Acte II | Rook analyse les horaires QZ-18 : le signal de mise en attente venait de la station. Orlov rapproche le Tantalus. **CIN-70** : la station tourne lentement, feux de position éteints, un seul hublot allumé. Une navette Crucible est amarrée à l'anneau extérieur. |
+
+**Principales**
+
+| ID | Titre | Résumé | Objectif de base |
+| --- | --- | --- | --- |
+| `station-s1` | **L'arrimage** | Abordage en apesanteur partielle par le sas de l'anneau extérieur. Négocier ou combattre les récupérateurs de Grue, puis atteindre le pont de contrôle. Le joueur découvre des barricades de l'équipage disparu. | `board a drifting vessel` |
+| `station-s2` | **Réveiller CASSIUS** | Rétablir l'énergie (avec Idris Kwan à la radio), puis dialoguer avec CASSIUS. Elle ne ment pas, elle cite ses directives. Le joueur obtient les ordres de livraison QZ17 (pièce du dossier) et doit choisir : réécrire ses priorités, la brider, ou l'effacer. | `restore atmospheric processing` |
+| `station-s3` | **Les ponts scellés** | CASSIUS a scellé les ponts inférieurs. Derrière : le laboratoire de la station, des berceaux QZ17, et la plaque de l'Echo-8. Combat en espace confiné, routage de l'énergie, sas. | `escape the quarantine` |
+| `station-s4` | **Le hub Asphodèle** | Dernière purge, remise en pression, arrivée des premiers occupants (équipe technique du Tantalus, récupérateurs alliés si négociés, colons volontaires). La station devient un hub jouable. | `hold the extraction zone` |
+
+**CASSIUS — trois issues de S2 :**
+
+| Choix | Effet |
+| --- | --- |
+| **Réécrire ses priorités** (« les vivants d'abord ») | CASSIUS reste un allié du hub ; meilleur réseau de relais ; risque si la compagnie reprend le contrôle. |
+| **La brider** | Fonctions réduites, aucun risque ; certaines annexes indisponibles. |
+| **L'effacer** | Station manuelle ; les ponts inférieurs se rouvrent à la force, plus dangereux ; perte de ses archives. |
+
+**Annexes**
+
+| ID | Titre | Donneur | Résumé |
+| --- | --- | --- | --- |
+| `station-a-echo8` | **La dernière ronde d'Echo-8** | ECHO-A | Suivre les marques laissées par l'Echo-8 sur la station : ses barricades, ses caches, son dernier message. Clôt le fil du casier vide. |
+| `station-a-grue` | **Le pacte de l'anneau** | Grue | Les récupérateurs veulent garder l'anneau extérieur. Accepter (commerce, pièces) ou les expulser. |
+| `station-a-journaux` | **Les journaux de l'équipage** | Asha Mbaye | Rassembler les journaux personnels de l'équipage disparu d'Asphodèle et les rendre aux familles de Port-Méridien. |
+| `station-a-hydro` | **La serre** | Jun Park | Remettre en route la serre hydroponique abandonnée ; elle nourrira la colonie. |
+| `station-a-sonde` | **Écho lointain** | Rook | Une balise UPP dérive près de la station. La récupérer sans incident diplomatique. |
+| `station-a-cassius` | **Ce que CASSIUS a vu** | Inez Harlow | Si CASSIUS est conservée : lui faire rejouer ses enregistrements de la nuit où l'équipage a disparu. |
+
+**Locales (rejouables)**
+
+| Contrat | Objectif existant | Effet |
+| --- | --- | --- |
+| Inspection des conduits | `navigate the vent network` | Sécurité de la station + |
+| Relais en dérive | `recover black-box data` | Couverture du réseau + |
+| Épave à proximité | `board a drifting vessel` | Alliage, carburant |
+| Remise en pression d'un module | `restore atmospheric processing` | Ouvre une salle du hub |
+| Purge d'un nid | `purge a reactor nest` | Infestation de la station − |
+
+### 7.3 Le hub Asphodèle — [PROPOSÉ]
+
+Après S4, la station devient un hub. Ses modules s'ouvrent avec les missions locales et annexes.
+
+| Module | Fonction en jeu | Débloqué par |
+| --- | --- | --- |
+| **Pont de contrôle** | Carte du réseau QZ, choix des relais à ouvrir, état de Port-Méridien | S4 |
+| **Quais d'arrimage** | Navettes vers la colonie et le Tantalus ; commerce Crucible | S1 + *Le pacte de l'anneau* |
+| **Laboratoire** | Recherche avancée (avec Inez), archives | S3 |
+| **Serre** | Nourriture pour la colonie | *La serre* |
+| **Salle des relais** | Relance des messages retenus ; missions générées sur tout Lethe | Contrat *Relais en dérive* ×3 |
+| **Mémorial** | Noms de l'équipage disparu et des colons morts | *Les journaux de l'équipage* |
+| **Quartiers** | Installation de recrues et de colons volontaires | Colonie palier *Autonome* |
+
+**Contraintes de production :** un nouveau hub demande des salles, des portes et des parcours vérifiés (`AGENTS.md`, section niveaux : accès logique, passage physique, points d'arrivée, aller-retour, reprise). La Frontier Forge (`docs/forge/`) est le chemin naturel pour construire ces secteurs.
+
+### 7.4 Ce qui s'est passé sur Asphodèle — [PROPOSÉ]
+
+Révélé par morceaux dans S1-S3 et les annexes :
+
+1. La station recevait les conteneurs QZ17 et les redirigeait vers le dépôt de Lethe, sur ordre de la compagnie.
+2. Un conteneur s'est ouvert au laboratoire. L'équipage a déclenché la quarantaine. CASSIUS l'a appliquée, puis l'a maintenue, sans jamais recevoir l'ordre de la lever.
+3. L'Echo-8, envoyé pour rétablir le relais, a barricadé l'équipage survivant dans les ponts inférieurs, puis est sorti chercher une issue. Il n'est pas revenu.
+4. Les survivants ont tenu quelques semaines. Leurs journaux s'arrêtent.
+
+Echo-9 retrouve la plaque de l'Echo-8 dans S3. Son corps n'est pas retrouvé. Si la plaque est ramenée au Tantalus, elle est déposée dans le casier vide.
+
+---
+
+## 8. Quêtes du Tantalus — [PROPOSÉ]
+
+Elles utilisent le système de rapport existant (`npc-dialogue-v62.js`) : confiance `fragile → prudent → operationnel → solide`, choix de rapport `request-candid-assessment`, `acknowledge-welfare`, `review-mission`, `confirm-alert-role`, `request-infestation-evidence`, renouvellement après 8 heures de jeu. Aucune récompense n'est versée avant la preuve de réalisation.
+
+### 8.1 Quêtes personnelles de l'équipage
+
+| ID | Personnage | Titre | Après | Résumé | Effet |
 | --- | --- | --- | --- | --- | --- |
-| CIN-00 | Ouverture | Titre | 60-75 s | Oui | [PROPOSÉ] |
-| CIN-01 | Le casier vide | Prologue | 20 s | Oui | [PROPOSÉ] |
-| CIN-02 | Deux ordres | Prologue | 30 s | Oui | [PROPOSÉ] |
-| CIN-10 | Les quais déserts | I | 30 s | Oui | [PROPOSÉ] |
-| CIN-11 | Ouvert de l'intérieur | I | 25 s | Oui | [PROPOSÉ] |
-| CIN-20 | Treize minutes | II | 40 s | Oui | [PROPOSÉ] |
-| CIN-30 | Le choix de Cal | III | 20 s | Oui | [PROPOSÉ] |
-| CIN-31 | Le sas refermé | III | 30 s | Oui | [PROPOSÉ] |
-| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | Oui | [PROPOSÉ] |
-| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | Oui | [PROPOSÉ] |
-| CIN-50 | Les dernières images | IV | 35 s | Oui | [PROPOSÉ] |
-| CIN-51 | Contrôle biologique | IV | 25 s | Oui | [PROPOSÉ] |
-| CIN-60 | Dernier départ | V | 30 s | Oui | [PROPOSÉ] |
-| CIN-61 | Lethe derrière eux | V | 45 s | Oui | [PROPOSÉ] |
-| CIN-70 | Fin (×3) | Épilogue | 60 s | Oui | [PROPOSÉ] |
+| `ship-vega` | Mara Vega | **La ligne de commandement** | Acte II | Relire avec elle les ordres reçus et marquer ceux qui contredisent le sauvetage. | Influence le choix de l'Acte V |
+| `ship-velez` | Tamsin Velez | **Le pas de tir** | Prologue | Battre ses temps de qualification ; elle raconte son premier déploiement raté. | Dotation d'assaut |
+| `ship-echo-a` | ECHO-A | **Deux relèves** | S3 | Comparer ses protocoles avec la plaque de l'Echo-8. « Quand tu seras remplacé, qui remarquera ? » | Réplique d'épilogue |
+| `ship-david` | DAVID-8R | **Mémoire récupérée** | Acte I | Trois composants trouvés en mission restaurent un secteur de sa mémoire : il a déjà servi sur un poste du réseau QZ. | Pièce optionnelle du dossier |
+| `ship-mbaye` | Asha Mbaye | **Les noms de Port-Méridien** | Acte II | Compléter la liste des colons en attente avec les registres des relais. | Population de la colonie + |
+| `ship-sorensen` | Leila Sørensen | **La route des hameaux** | C2 | Cartographier une route de survie entre le port et les hameaux. | Route alternative Acte V |
+| `ship-okafor` | Noor Okafor | **Le registre des pertes** | Acte III | Ramener les plaques des colons morts trouvées en mission. | Infirmerie de la colonie + |
+| `ship-bishop` | BISHOP-9 | **Directive de préservation** | Interlude | Lui demander ce qu'il ferait si la compagnie et un membre d'équipage s'opposaient. | Restaure la confiance perdue |
+| `ship-harlow` | Inez Harlow | **Le sceau** | Acte I (quarantaine) | Analyser le fragment QZ17-04 : résidu biologique et colle industrielle. | Recherche, pièce du dossier |
+| `ship-doyle` | Sanaa Doyle | **Calibrage lourd** | C1 | Récupérer des pièces de smartgun pour armer les murs du port. | Chantier Murs et sas + |
+| `ship-reyes` | Pablo Reyes | **La charge de trop** | Acte III | Il a fait sauter un accès trop tôt lors d'une ancienne évacuation. Retrouver le registre de cette opération. | Charges de brèche, déblaiement des chantiers |
+| `ship-mercer` | Cal Mercer | **Remettre le M577 en état** | Acte III | Réparer le blindé ; l'état du M577 au bilan existant sert de départ. | Blindage Acte V |
+| `ship-orlov` | Maksim Orlov | **Fenêtre de tir** | Acte IV | Récupérer les enregistreurs du transport Kappa : pourquoi a-t-il mis si longtemps ? | Fenêtre d'extraction + |
+| `ship-kwan` | Idris Kwan | **Le réacteur ne ment pas** | Prologue | Réparer le réacteur (`service:power`) ; il note une consommation inexpliquée au pont de quarantaine. | Indice de l'interlude |
+| `ship-park` | Jun Park | **Après les conduits** | Interlude | Jun craint les conduits depuis l'incident. Les sécuriser avec lui. | Moral, oxygène |
+| `ship-rook` | Rook | **Ce que les capteurs ont vu** | Acte II | Retrouver une navette non déclarée entre QZ-17 et Asphodèle. | Débloque `station-intro-silence` |
 
-**Contraintes de production :**
+### 8.2 Vie à bord
 
-- Moteur : Canvas 2D en modules ES (`AGENTS.md`). Les cinématiques sont des séquences scriptées dans le moteur existant (plans fixes, parallaxe, panoramiques, cadres de dialogue avec portraits `npc-dialogue-portraits-v168.js`), pas des vidéos précalculées.
-- Toutes passables, toutes relisibles depuis les archives du Tantalus, aucune récompense versée par l'affichage ou le passage d'une cinématique (même règle que les comptes rendus V160/V163).
-- Musique et effets : compositions originales uniquement (`LICENSE_NOTICE.md`).
+| ID | Titre | Lieu | Résumé |
+| --- | --- | --- | --- |
+| `ship-mess` | **Repas de relève** | Mess | Réunir quatre membres au même service ; scène collective qui change à chaque acte. |
+| `ship-cryo` | **Le casier vide** | Baie cryo | Fil de l'Echo-8, relancé par un indice à chaque acte ; se ferme avec S3. |
+| `ship-sensor` | **Écoute de nuit** | Capteurs | Pendant la phase `break`, capter des messages retenus ; chaque fragment ajoute un nom à *Les noms de Port-Méridien*. |
+| `ship-armory` | **Inventaire contradictoire** | Armurerie | Le registre ne correspond pas aux râteliers. Petite enquête qui forme aux méthodes de l'Acte II. |
+| `ship-vehicle` | **Les plaques du M577** | Baie véhicules | Une plaque d'un ancien équipage, trouvée dans le blindé. |
+| `ship-bioforge` | **Ce qu'on garde en vie** | Bioforge | Débat Inez / BISHOP-9 ; ouvre l'accès narratif à la Bioforge (**[PARTIEL]** comme système). |
+
+### 8.3 Recrutement
+
+| Recrue | Titre | Front | Résumé |
+| --- | --- | --- | --- |
+| **Mara Voss « RIVET »** | **Le même nom** | Station | Ancienne du chantier orbital ; elle répare la station. Elle porte le nom du contremaître I. Voss. **[À DÉCIDER]** lien familial ou homonymie. |
+| **Nadia Bensaïd « SUTURE »** | **Pas de blessé sans extraction** | Colonie | Venue d'une colonie isolée ; rejoint l'équipage quand Port-Méridien atteint le palier *Rétablie*. |
+| **Jonas Reed « BASTION »** | **Sécurité embarquée** | Enquête | Ancien agent de sécurité de cargos ; il a vu passer des scellés QZ17. Témoignage au dossier. |
+| **Jun Seo « BALISE »** | **Itinéraires terrestres** | Colonie | Connaît les routes de convoi ; le recruter avant l'Acte III facilite le corridor. |
 
 ---
 
-## 15. Raccordement technique — [PROPOSÉ]
+## 9. Opérations secondaires
 
-Pour qu'un acte cesse d'être un prototype, il doit être relié (`AGENTS.md`, règles d'intégration) :
+Classement des opérations de `special-operations-v67.js` (statuts du code).
 
-1. **Contenu** : textes de scène sur le modèle de `PHASES` dans `campaign-story-v160.js` (`briefing`, `preparation`, `approach`, `deployment`, `player-control`).
-2. **Persistance** : un état `storyCampaign` versionné dans la sauvegarde, contenant les drapeaux `story-*` de ce document, avec migration bornée qui ne modifie aucun identifiant existant.
-3. **Récompenses** : versées uniquement dans la transaction de résolution d'opération, jamais par une interface, comme `applyCampaignStoryReturnV160`.
+### 9.1 Liées à Lethe
+
+| Opération | Statut | Place | Accroche [PROPOSÉ] |
+| --- | --- | --- | --- |
+| **Cargo Brutal** | **[EXISTANT]** effective | Avant Acte I | Escorter un cargo civil vers Port-Méridien ; premier contact avec la priorité de fret. |
+| **Systèmes de survie Alien** | **[EXISTANT]** effective | Entre Actes I et II | Évasion d'un poste médical en quarantaine près du port ; mécaniques réutilisées dans l'interlude et S3. |
+| **Doctrine Alpha / Bravo** | **[PARTIEL]** | Avant C1 ou C5 | Défense de colonie à cinq routes, quatre membres minimum : idéale pour tenir Port-Méridien. |
+| **Opération Abysse Noir** | **[PARTIEL]** | Avant Acte V | Dropship modulaire et escortes : couvrir les navettes entre Asphodèle et le port. |
+| **Broodstorm** | **[PARTIEL]** | Annexe | Exploration sous-marine : les berceaux QZ17 arrivaient-ils aussi par les réservoirs du port ? |
+
+### 9.2 Archives MIRE (continuité séparée)
+
+Le contenu du projet évoque des « archives MIRE et anomalies temporelles » (monde Palimpste). **[PROPOSÉ]** Les opérations éloignées du ton de Lethe sont des archives MIRE consultées depuis le laboratoire du Tantalus ou celui d'Asphodèle : reconstitutions et dossiers isolés, sans effet sur le dossier ni sur la colonie.
+
+Mire Archive 001 **[PARTIEL]** ; Protocole Z-110, Jeri, Éloïse, A.T.A.X.-Q, Le chant de la Reine-Mère, Talos contre le Titan, LV-XENO, Pangaea : `missing`.
+
+**[À DÉCIDER]** Archives MIRE, ou seconde campagne.
+
+---
+
+## 10. Cinématiques
+
+| ID | Titre | Partie | Durée | Statut |
+| --- | --- | --- | --- | --- |
+| CIN-00 | Ouverture | Titre | 60-75 s | [PROPOSÉ] |
+| CIN-01 | Le casier vide | Prologue | 20 s | [PROPOSÉ] |
+| CIN-02 | Deux ordres | Prologue | 30 s | [PROPOSÉ] |
+| CIN-10 | Les quais déserts | Acte I | 30 s | [PROPOSÉ] |
+| CIN-11 | Ouvert de l'intérieur | Acte I | 25 s | [PROPOSÉ] |
+| CIN-20 | Treize minutes | Acte II | 40 s | [PROPOSÉ] |
+| CIN-31 | Le sas refermé | Acte III | 30 s | [PROPOSÉ] |
+| CIN-40 | Jun Park ne répond plus | Interlude | 30 s | [PROPOSÉ] |
+| CIN-41 | Ce que BISHOP-9 savait | Interlude | 45 s | [PROPOSÉ] |
+| CIN-50 | Les dernières images | Acte IV | 35 s | [PROPOSÉ] |
+| CIN-51 | Contrôle biologique | Acte IV | 25 s | [PROPOSÉ] |
+| CIN-60 | Dernier départ | Acte V | 30 s | [PROPOSÉ] |
+| CIN-61 | Les portes du port | Acte V | 45 s | [PROPOSÉ] |
+| CIN-70 | Le silence d'Asphodèle | Station | 40 s | [PROPOSÉ] |
+| CIN-71 | La voix de CASSIUS | Station S2 | 40 s | [PROPOSÉ] |
+| CIN-72 | La plaque | Station S3 | 25 s | [PROPOSÉ] |
+| CIN-80 | Premières lumières | Colonie, palier *Rétablie* | 30 s | [PROPOSÉ] |
+| CIN-90 | Fins (×3) | Épilogue | 60 s | [PROPOSÉ] |
+
+**Contraintes :** séquences scriptées dans le moteur Canvas 2D (plans fixes, parallaxe, panoramiques, cadres de dialogue avec portraits `npc-dialogue-portraits-v168.js`), pas de vidéos précalculées. Toutes passables et relisibles ; aucune récompense liée à leur affichage. Musique et sons originaux uniquement.
+
+---
+
+## 11. Raccordement technique — [PROPOSÉ]
+
+1. **Contenu** : scènes sur le modèle de `PHASES` (`campaign-story-v160.js`) : `briefing`, `preparation`, `approach`, `deployment`, `player-control`.
+2. **Persistance** : un état `storyCampaign` versionné (drapeaux `story-*`), un état `colonyV…` (chantiers, population, palier) et un état `stationV…` (modules, choix CASSIUS), avec migrations bornées qui ne touchent aucun identifiant existant.
+3. **Récompenses** : versées uniquement dans la transaction de résolution d'opération, comme `applyCampaignStoryReturnV160`.
 4. **Hub** : quêtes de bord exprimées comme faits de rapport (`NPC_RAPPORT_RULES_V135`, 64 faits maximum).
-5. **Tests** : pour chaque acte raccordé, vérifier accès logique, passage physique, retour, reprise de mission et reprise de sauvegarde.
+5. **Tests** par mission raccordée : accès, passage physique, retour, reprise de mission, reprise de sauvegarde.
 
-**Ordre de production recommandé :** prologue (assemblage de l'existant) → Acte II (déjà complet, ajouter CIN-20) → Acte III (manifeste fret/passagers) → Acte I (compléter QZ-17) → Acte IV → interlude → Acte V → épilogue.
+**Ordre de production recommandé :** prologue (assemblage de l'existant) → Acte II + CIN-20 → front colonie intro et C1-C2 (base de la reconstruction) → Acte III → Acte I → front station intro et S1-S2 → interlude → Acte IV → S3-S4 et hub Asphodèle → Acte V et C5 → épilogue.
 
 ---
 
-## 16. Points ouverts
+## 12. Points ouverts
 
 | # | Question | Section |
 | --- | --- | --- |
-| 1 | Weyland-Yutani nommé, ou filiale fictive ? | §2.3 |
-| 2 | Identité du signataire du badge : jamais (A) ou sous condition (B) ? | §10.2 |
-| 3 | Mara Voss liée à I. Voss, ou homonymie ? | §12.3 |
-| 4 | Opérations hors ton : archives MIRE ou seconde campagne ? | §13.2 |
-| 5 | Le fil Echo-8 est-il conservé ? Il ajoute une motivation personnelle mais crée un personnage absent. | §2.1 |
+| 1 | Remplacer, dans `content-core-v50.js`, la description générée de Lethe et l'entrée « Pioneer Station », qui reprennent des noms d'un jeu existant ? | §1.2 |
+| 2 | Identité du signataire du badge : jamais (A) ou sous condition (B) ? | §5.7 |
+| 3 | Mara Voss liée à I. Voss, ou homonymie ? | §8.3 |
+| 4 | Opérations hors ton : archives MIRE ou seconde campagne ? | §9.2 |
+| 5 | Le fil Echo-8 est-il conservé ? | §2.1, §7.4 |
+| 6 | Noms proposés (Asphodèle, CASSIUS, Adèle Sarrazin, Tomas Wren, Lucia Ferro, Halloran, Grue) à valider. | §2.3 |
