@@ -374,9 +374,14 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
         E=await import('/src/xeno-trials-engine-v96.js');
       const m=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match;if(!m)return null;
       const[a,b]=m.fighters,direction=b.x>=a.x?1:-1,
+        playerDefinition=D.getXenoTrialsFighterV96(a.id),targetDefinition=D.getXenoTrialsFighterV96(b.id),
         playerBody=G.getXenoTrialsBodyBoundsV105(a),targetBody=G.getXenoTrialsBodyBoundsV105(b),
-        special=A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(a.id),'special',E.XENO_TRIALS_ATTACKS_V96.special),
-        targetAttack=b.attack?A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(b.id),b.attack.kind,E.XENO_TRIALS_ATTACKS_V96[b.attack.kind]):null;
+        special=A.getXenoTrialsAttackV147(playerDefinition,'special',E.XENO_TRIALS_ATTACKS_V96.special),
+        targetAttack=b.attack?A.getXenoTrialsAttackV147(targetDefinition,b.attack.kind,E.XENO_TRIALS_ATTACKS_V96[b.attack.kind]):null,
+        targetMelee=['light','heavy'].map(kind=>A.getXenoTrialsAttackV147(targetDefinition,kind,E.XENO_TRIALS_ATTACKS_V96[kind])),
+        targetMeleeReach=Math.max(...targetMelee.map(attack=>attack.reach*targetDefinition.reach)),
+        // Prowler uses the engine's ordinary .82 guard cost, without a shield.
+        guardReserve=Math.max(...targetMelee.map(attack=>attack.damage*.82));
       const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__,p=prior?.expected;
       // Prepare evidence in the same synchronous callback as this pose read.
       // This installs only observers: every combat decision and key stays in Python.
@@ -392,6 +397,12 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
         targetAhead:(targetBody.center-playerBody.center)*direction>=0,
         verticalOverlap:playerBody.bottom<=targetBody.top&&targetBody.bottom<=playerBody.top,
         specialCost:special.cost,specialStartup:special.startup,
+        specialLeapSpeed:special.leapSpeed,specialActive:special.active,
+        targetRecoveryRemaining:targetAttack?Math.max(0,targetAttack.startup+targetAttack.active+targetAttack.recovery-b.attack.age):0,
+        // The V119 CPU treats this visible stamina reserve before defending.
+        targetMeleeReach,guardReserve,targetPressureReserve:Math.max(targetMelee[0].cost*1.5,25),
+        playerStaminaMaximum:playerDefinition.stamina,
+        playerSpeed:playerDefinition.speed,targetSpeed:targetDefinition.speed,
         targetThreat:!!targetAttack&&b.attack.age<targetAttack.startup+targetAttack.active,
         targetRecovery:!!targetAttack&&b.attack.age>=targetAttack.startup+targetAttack.active,
         startupObservation:(()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;return o?{
@@ -403,8 +414,8 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
     started = time.monotonic()
     deadline = started + 55
     trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
-                  'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [],
-                  'policy': 'Real Python-driven keys: approach using pure V105 body gap to <=6px (V153 admission <=8px); guard visible startup/active threats at contact and release during rest/recovery so ordinary stamina can recharge; press special during observed target recovery when both grounded, player unstunned, affordable and cooldown zero. Startup evidence is armed within the same pose read, without emitting controls. No match field is assigned.'})
+                  'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [], 'decisions': [],
+                  'policy': 'Real Python-driven keys: approach using pure V105 body gap toward <=6px; guard before entering native light/heavy reach plus relative travel during the measured pose-read duration, keeping one special and one native guard cost in reserve. Briefly release guard for real movement and stamina recovery during the observed recovery remaining after estimated return latency, then rearm it before the next delayed read. Launch special only in observed target recovery, when both grounded, player unstunned, affordable and cooldown zero, and the target is fatigued or still recovering through startup. Departure range is derived from native leap speed/active duration and possible target retreat; the engine still admits only a real <=8px hold. All reads retain their declared client delay; no alternate read channel, pause or runtime mutation is used. Startup evidence is armed within the same pose read, without emitting controls.'})
     held = None
     guarding = False
     control_round = None
@@ -428,10 +439,22 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                 'target': {k: b.get(k) for k in ['x', 'y', 'vy', 'hp', 'stamina', 'stun', 'guard', 'attack']},
                 'grappleId': (m.get('grappleV153') or {}).get('id')}
 
+    def remaining_budget(stage):
+        now = time.monotonic()
+        if now >= deadline:
+            trace['deadlineExceeded'] = {'stage': stage, 'elapsedSeconds': now - started}
+            raise AssertionError('Keyboard Prowler did not earn a native capture before the deadline')
+        return deadline - now
+
     try:
         while time.monotonic() < deadline:
+            read_started = time.monotonic()
             value = page.evaluate(read_contact, {'attemptNumber': len(trace['attempts']) + 1,
                 'after': after, 'timeoutMs': max(1, (deadline-time.monotonic())*1000)})
+            read_seconds = time.monotonic() - read_started
+            # A real hold delivered after the wall deadline is still a failure.
+            # The original transport delay is part of this same 55s budget.
+            remaining_budget('pose-return')
             if value is None:
                 raise AssertionError('Native match disappeared during keyboard capture acquisition')
             m = value['match']
@@ -505,7 +528,24 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
             # The read-only RAF observer already copied the exact startup bitmap.
             # Transfer its metadata with this pose read; encode pixels only after
             # the matching first-floor callback has used the real pause button.
-            contact = value['targetAhead'] and -8 <= value['gap'] <= 6 and value['verticalOverlap']
+            reserve = min(value['playerStaminaMaximum'], value['specialCost'] + value['guardReserve'])
+            can_special = (not a.get('attack') and a['stun'] <= 0 and a['y'] == 0
+                           and b['y'] == 0 and b['vy'] == 0
+                           and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
+            # The declared read delay is symmetric. Half the measured call is
+            # an estimate of snapshot return latency, not a new observation.
+            recovery_remaining = max(0, value['targetRecoveryRemaining'] - read_seconds / 2)
+            # Range of departure is distinct from the engine's <=8px contact
+            # admission. Budget for possible retreat during startup and flight;
+            # retain the original <=6px starting contact if that worst-case
+            # estimate is smaller (not a promise that every leap will connect).
+            launch_gap = max(6, 8 + (value['specialLeapSpeed'] - value['targetSpeed']) * value['specialActive']
+                             - value['targetSpeed'] * max(0, value['specialStartup'] - recovery_remaining))
+            in_launch_range = value['targetAhead'] and -8 <= value['gap'] <= launch_gap and value['verticalOverlap']
+            target_can_press = b['stamina'] >= value['targetPressureReserve']
+            ready = (m['phase'] == 'active' and not m.get('paused') and in_launch_range
+                     and value['targetRecovery'] and can_special
+                     and (not target_can_press or recovery_remaining >= value['specialStartup']))
             desired = ('ArrowRight' if value['direction'] > 0 else 'ArrowLeft') if value['gap'] > 6 else None
             if desired != held:
                 if held:
@@ -513,20 +553,42 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                 held = desired
                 if held:
                     page.keyboard.down(held)
-            can_special = (not a.get('attack') and a['stun'] <= 0 and a['y'] == 0
-                           and b['y'] == 0 and b['vy'] == 0
-                           and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
-            want_guard = bool(contact and value['targetThreat']
-                              and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] > 1)
+            guard_range = value['targetMeleeReach'] + (value['playerSpeed'] + value['targetSpeed']) * read_seconds
+            exposed = value['targetAhead'] and value['verticalOverlap'] and -8 <= value['gap'] <= guard_range
+            want_guard = bool(not ready and exposed
+                              and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] >= reserve)
+            # Guard prevents native movement and regeneration. Use only the
+            # remaining observed recovery for a brief real-key approach, then
+            # restore guard before the next delayed read. Native RAF continues.
+            pulse_seconds = max(0, recovery_remaining - 1 / 120) if want_guard and value['targetRecovery'] else 0
+            if pulse_seconds and guarding:
+                page.keyboard.up('KeyS')
+                guarding = False
+            if pulse_seconds:
+                pulse_seconds = min(pulse_seconds, remaining_budget('recovery-pulse'))
+                page.wait_for_timeout(pulse_seconds * 1000)
+                remaining_budget('recovery-pulse-return')
             if want_guard != guarding:
                 if want_guard:
                     page.keyboard.down('KeyS')
                 else:
                     page.keyboard.up('KeyS')
                 guarding = want_guard
-            ready = (m['phase'] == 'active' and not m.get('paused') and contact
-                     and value['targetRecovery'] and can_special)
+            # These ticks identify the received pose, not the later key dispatch.
+            trace['decisions'].append({'observedTick': m['tick'], 'round': m['round'],
+                'elapsedSeconds': time.monotonic() - started, 'readSeconds': read_seconds,
+                'gap': value['gap'], 'targetMeleeReach': value['targetMeleeReach'], 'guardRange': guard_range,
+                'move': desired, 'guard': want_guard, 'special': bool(ready),
+                'stamina': a['stamina'], 'guardReserve': value['guardReserve'],
+                'reserve': reserve, 'targetStamina': b['stamina'], 'targetPressureReserve': value['targetPressureReserve'],
+                'targetCanPress': target_can_press,
+                'launchGap': launch_gap, 'recoveryRemaining': recovery_remaining, 'recoveryPulseSeconds': pulse_seconds,
+                'targetThreat': value['targetThreat'], 'targetRecovery': value['targetRecovery']})
+            if len(trace['decisions']) > trace['observationLimit']:
+                trace['decisions'].pop(0)
+                trace['discardedOldDecisions'] = trace.get('discardedOldDecisions', 0) + 1
             if ready:
+                remaining_budget('special-key')
                 if len(trace['attempts']) >= trace['attemptLimit']:
                     raise AssertionError('Native keyboard capture reached its disclosed attempt limit')
                 attempt = {'number': len(trace['attempts']) + 1, 'before': sample,
