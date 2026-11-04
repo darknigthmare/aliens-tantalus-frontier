@@ -336,7 +336,7 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "main": null,
       "qa": null
     },
-    "currentSha256": "2de0352a4cce306189a36c68ad32e7dc04c5ad64dcd4d57007a8e14720d263a3",
+    "currentSha256": "c985f1263157a6ed3852a86188aab5410f645d6f7a3dfa7ddbf28a03abae4c3d",
     "kind": "qa"
   },
   "scripts/qa-npc-annex-service-routes-v163.py": {
@@ -381,7 +381,7 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "main": "3681d567ee38d7acc00a5df59340ef3ee3c0423acd226694d041bca86881855d",
       "qa": "351aafba32f5aedc9f20bd9171da5f8f25ee5421a8b246afe8d1079c3cb8e64e"
     },
-    "currentSha256": "ca1c86eb77b5622ff83d7a6b3bb60829a6d8c4039a78131c4171cd40d85935c9",
+    "currentSha256": "72aa32aa80fe37be2ae5d4103fd92d894ddd6613ea8d05046f75c135e27ec684",
     "kind": "qa"
   },
   "scripts/verify-alien-base-bridge-v1.mjs": {
@@ -408,7 +408,7 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "main": "e07b131c2f0189592a87672d02d35a98308dc8034787bee55b64907b3dd26f4f",
       "qa": "b68c2c76ed78bdf63247ba3087a2f8b42ba9fc3a42d8b098ef6c5f984c73ef77"
     },
-    "currentSha256": "d307f75378594ca082baf0fffdc46a3e8302d77217581c669e18526f6b8b2872",
+    "currentSha256": "2256503ad09ba22375d23cf205b92f637442d3478426d300bf3f371c6f39cbec",
     "kind": "verifier"
   },
   "scripts/verify-hub-circulation-v137.mjs": {
@@ -426,7 +426,7 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "main": null,
       "qa": null
     },
-    "currentSha256": "f717c6819e9b57c94f999bce30a4572c4e586c42846d180d3dae9de7e4dff84e",
+    "currentSha256": "ba56f8c619896b09f8b2f1241ce464a504517ca03eccdd71d65394768ba7abb1",
     "kind": "verifier"
   },
   "scripts/verify-hub-room-furnishing-v137.mjs": {
