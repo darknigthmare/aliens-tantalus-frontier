@@ -129,22 +129,83 @@ def walk_to(page, config, x):
 
 def leave_annex(page, config):
     walk_to(page, config, config['annexDoor'])
-    # A parent-deck walker can briefly occupy the return aperture. E is an
-    # immediate native attempt, not a queued request; wait for the real exit
-    # projection before pressing it. Readiness and passage share the old45s
-    # budget, so a stationary occupant or a broken transition still fails.
+    # Readiness may change while the client sends E. Observe its synchronous
+    # native outcome after the production keydown listener; retry only a newly
+    # reported refusal, never an accepted or silently ignored interaction.
     deadline = time.monotonic() + 45
-    page.wait_for_function('''c=>{const h=__ATF_HUB__,a=h.currentAnnexV71?.(),exit=h.nearestAnnexExitV71?.();
-      return a?.id===c.annex&&exit&&h.running&&h.player.alive&&Math.abs(h.player.vx)<1
-        &&!h.annexTransitionV71&&!h.hubDoorClosingV142&&!h.annexStateReadOnlyV87
-        &&!h.npcAnnexDoorReservedV159?.(a.id)&&Boolean(h.prepareHubDoorPassageV142(a,'exit',exit.endpointId));
-    }''', arg=config, timeout=45000)
-    page.locator('#hub-canvas').focus()
-    assert time.monotonic() < deadline, 'Native annex exit exceeded45s before interaction'
-    page.keyboard.press('KeyE')
-    remaining = (deadline - time.monotonic()) * 1000
-    assert remaining > 0, 'Native annex exit exceeded45s before passage'
-    page.wait_for_function('()=>!__ATF_HUB__.currentAnnexV71?.()&&!__ATF_HUB__.annexTransitionV71', timeout=remaining)
+    receipt = {'route': config['id'], 'budgetSeconds': 45, 'status': 'running', 'attempts': []}
+    report.setdefault('exitPassages', []).append(receipt)
+
+    def remaining():
+        value = (deadline - time.monotonic()) * 1000
+        assert value > 0, 'Native annex exit exceeded45s'
+        return value
+
+    page.evaluate('''c=>{
+      if(globalThis.__ATF_SERVICE_EXIT_V182__)throw Error('An earlier exit observer was not disposed');
+      const h=__ATF_HUB__,attempts=[];let armed=null;
+      const read=()=>{const a=h.currentAnnexV71?.(),exit=h.nearestAnnexExitV71?.();return {
+        sameOwner:__ATF_HUB__===h,running:h.running,alive:h.player.alive,time:h.animationTime,
+        annex:a?.id||null,roomId:a?.id||h.currentRoom()?.id,focusCanvas:document.activeElement===h.canvas,
+        player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,vx:h.player.vx},
+        dialogueOpen:Boolean(document.querySelector?.('#hub-dialogue')?.getClientRects?.().length),
+        transition:structuredClone(h.annexTransitionV71||null),closing:Boolean(h.hubDoorClosingV142),
+        readOnly:Boolean(h.annexStateReadOnlyV87),blocked:structuredClone(h.hubDoorBlockedV142||null),
+        arrival:structuredClone(h.hubDoorLastArrivalV142||null),exitAnnex:exit?.annexId||null,
+        reserved:Boolean(a&&h.npcAnnexDoorReservedV159?.(a.id)),
+        projectionAvailable:Boolean(a&&exit&&h.prepareHubDoorPassageV142(a,'exit',exit.endpointId))};};
+      const listener=event=>{if(event.code!=='KeyE'||event.repeat||!armed)return;
+        attempts.push({before:armed,after:read(),key:event.code,trusted:event.isTrusted});armed=null;};
+      globalThis.addEventListener('keydown',listener);
+      globalThis.__ATF_SERVICE_EXIT_V182__={read,arm(){if(armed)throw Error('An earlier E was not observed');
+        armed=read();return attempts.length;},snapshot:()=>({attempts:structuredClone(attempts),current:read()}),
+        dispose(){globalThis.removeEventListener('keydown',listener);delete globalThis.__ATF_SERVICE_EXIT_V182__;}};
+    }''', config)
+    try:
+        while True:
+            page.wait_for_function('''c=>{const s=__ATF_SERVICE_EXIT_V182__.read();
+              if(!s.sameOwner||!s.running||!s.alive||s.dialogueOpen)throw Error('Native exit owner stopped or dialogue opened');
+              if(s.annex!==c.annex||s.transition)throw Error('Unexpected room or transition before exit E');
+              return s.exitAnnex===c.annex&&Math.abs(s.player.vx)<1&&!s.closing&&!s.readOnly
+                &&!s.reserved&&s.projectionAvailable;}''', arg=config, timeout=remaining())
+            page.locator('#hub-canvas').focus(timeout=remaining())
+            index = page.evaluate('()=>__ATF_SERVICE_EXIT_V182__.arm()')
+            remaining()
+            page.keyboard.press('KeyE')
+            result = page.evaluate('()=>__ATF_SERVICE_EXIT_V182__.snapshot()')
+            assert len(result['attempts']) == index + 1, 'Native exit E was not observed after the production listener'
+            attempt = result['attempts'][-1]
+            receipt['attempts'].append(attempt)
+            before, after = attempt['before'], attempt['after']
+            assert all(row['sameOwner'] and row['running'] and row['alive'] and row['focusCanvas']
+                       and not row['dialogueOpen'] for row in [before, after]), 'Native exit input lost its living owner or canvas'
+            transition = after['transition']
+            if transition:
+                assert transition['annexId'] == config['annex'] and transition['direction'] == 'exit', 'E accepted a foreign transition'
+                attempt['outcome'] = 'accepted'
+                break
+            blocked, previous = after['blocked'], before['blocked']
+            assert blocked and blocked['annexId'] == config['annex'] and blocked['direction'] == 'exit' \
+                and blocked['remaining'] == 1.2 and blocked != previous \
+                and after['annex'] == config['annex'], 'E produced neither an accepted exit nor a new native refusal'
+            attempt['outcome'] = 'native-refusal'
+        # Once accepted, the same transition must complete; it receives no more E.
+        page.wait_for_function('''c=>{const s=__ATF_SERVICE_EXIT_V182__.read();
+          if(!s.sameOwner||!s.running||!s.alive||s.dialogueOpen)throw Error('Accepted exit lost its native owner');
+          if(s.transition){if(s.transition.annexId!==c.annex||s.transition.direction!=='exit')
+            throw Error('Accepted exit changed transition');return false;}
+          if(s.annex!==null||s.arrival?.annexId!==c.annex||s.arrival?.direction!=='exit')
+            throw Error('Accepted exit ended without its real parent arrival');return true;
+        }''', arg=config, timeout=remaining())
+        arrival = page.evaluate('()=>__ATF_SERVICE_EXIT_V182__.read()')
+        remaining()
+        receipt.update(status='passed', arrival=arrival)
+    except Exception as error:
+        receipt.update(status='failed', error=str(error))
+        raise
+    finally:
+        receipt['elapsedSeconds'] = time.monotonic() - (deadline - 45)
+        page.evaluate('()=>__ATF_SERVICE_EXIT_V182__.dispose()')
 
 
 NATIVE_SERVICE_ARRIVAL_OBSERVER_V161 = '''function createServiceArrivalObserverV161(c,seed){
