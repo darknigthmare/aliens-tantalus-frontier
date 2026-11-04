@@ -76,8 +76,15 @@ test('all 29 rooms have deterministic task-specific, human-scale equipment on cl
   ].sort(),'Only the retained maintenance chest augments the reviewed six-role workshop group');
   const restoredChest=workshopPlan.items.find(item=>item.role==='maintenance-bench');
   assert.equal(restoredChest.kind,'tool-chest');assert.equal(restoredChest.support,'rear-floor');
-  assert.equal(total-workshopPlan.items.length,251,'The other28 rooms retain their reviewed equipment census');
-  assert.equal(total,258,`The 29-room equipment census ${total} differs from its reviewed composition`);
+  const cryo=rooms.find(room=>room.id==='cryo-bay'),cryoPlan=getHubRoomLifePlanV136(cryo,optionsFor(cryo));
+  assert.deepEqual(cryoPlan.items.map(item=>item.role).sort(),[
+    'capsule-supplies','stasis-service-kit','stasis-supplies','oxygen-lines','stasis-oxygen-reserve',
+    'stasis-emergency-kit','stasis-clean-linen-cart','stasis-used-linen-return','stasis-clean-linen-stock'
+  ].sort(),'Only the retained supply trolley augments the reviewed eight-role cryo group');
+  const restoredTrolley=cryoPlan.items.find(item=>item.role==='stasis-supplies');
+  assert.equal(restoredTrolley.cell,'medical-trolley');assert.equal(restoredTrolley.support,'rear-floor');
+  assert.equal(total-workshopPlan.items.length-cryoPlan.items.length,243,'The other27 rooms retain their reviewed equipment census');
+  assert.equal(total,259,`The 29-room equipment census ${total} differs from its reviewed composition`);
   assert.deepEqual([...usedCells].sort(),Object.keys(HUB_PROP_ATLAS_V136.cells).sort());
   assert.deepEqual(rooms,before);
 });

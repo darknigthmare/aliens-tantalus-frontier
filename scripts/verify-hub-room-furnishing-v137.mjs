@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { auditWeaponPngV120 } from './audit-weapon-png-v120.mjs';
 import { HUB_DECKS,HUB_WORLD } from '../src/hub-game.js';
 import { HUB_ANNEXES_V87 } from '../src/hub-annex-registry-v87.js';
@@ -127,6 +129,10 @@ test('all 35 compartments accept their authored functional groups with no hidden
 });
 
 test('all 35 production plans retain their equipment while clearing the 18 actual hatches and native crawl approaches',()=>{
+  const census=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/door-bay-continuation-v182.json',import.meta.url))).compositionCensus;
+  assert.equal(census.rooms.length,35);assert.equal(census.previousTotal,304);assert.equal(census.currentTotal,305);
+  assert.deepEqual(census.added,[{roomId:'cryo-bay',role:'stasis-supplies'}]);assert.deepEqual(census.removed,[]);
+  const signature=roles=>createHash('sha256').update(JSON.stringify([...roles].sort())).digest('hex');
   const retained={
     'combat-information':['tactical-reference'],
     'cryo-bay':['capsule-supplies','stasis-service-kit'],
@@ -137,6 +143,12 @@ test('all 35 production plans retain their equipment while clearing the 18 actua
   let count=0,authored=0,details=0,hatches=0;
   for(const room of rooms){
     const options=optionsFor(room),plan=getHubRoomLifePlanV136(room,options);
+    const witness=census.rooms.find(entry=>entry.roomId===room.id),roles=plan.items.map(item=>item.role);
+    assert.ok(witness,room.id);assert.equal(roles.length,witness.currentCount);
+    assert.equal(signature(roles),witness.currentRolesSha256,room.id+' current equipment roles match the explicit successor');
+    const previousRoles=room.id==='cryo-bay'?roles.filter(role=>role!=='stasis-supplies'):roles;
+    assert.equal(previousRoles.length,witness.previousCount);
+    assert.equal(signature(previousRoles),witness.previousRolesSha256,room.id+' loses no previously admitted equipment and gains only the witnessed legacy role');
     count+=plan.items.length;authored+=plan.furnishingV137.added.length;details+=plan.workstationDetailsV139.items.length;
     assert.deepEqual(plan.furnishingV137.rejected,[],room.id);
     assert.deepEqual(plan.workstationDetailsV139.omitted,[],room.id);
@@ -151,13 +163,17 @@ test('all 35 production plans retain their equipment while clearing the 18 actua
     }
   }
   // Releasing the former west workshop ladder admits one retained native
-  // maintenance chest. The relocated service group remains fully present.
-  assert.deepEqual({count,authored,details,hatches},{count:304,authored:161,details:37,hatches:18});
+  // maintenance chest. V182 similarly releases the existing cryo supply trolley.
+  // Every other admitted role is compared with the immutable baseline above.
+  assert.deepEqual({count,authored,details,hatches},{count:305,authored:161,details:37,hatches:18});
   const workshop = rooms.find(room=>room.id==='workshop');
   const workshopPlan = getHubRoomLifePlanV136(workshop,optionsFor(workshop));
   for(const role of ['maintenance-bench','shop-service-chest','shop-fire-safety','workshop-hand-tool-board','workshop-small-fittings-shelf'])
     assert.ok(workshopPlan.items.some(item=>item.role===role),`workshop:${role} remains admitted after freeing DURANDAL`);
   const cryo=rooms.find(room=>room.id==='cryo-bay');
+  const restoredTrolley=getHubRoomLifePlanV136(cryo,optionsFor(cryo)).items.find(item=>item.role==='stasis-supplies');
+  assert.ok(restoredTrolley);assert.equal(restoredTrolley.cell,'medical-trolley');
+  assert.equal(restoredTrolley.support,'rear-floor');near(restoredTrolley.x-cryo.xStart,167);assert.equal(restoredTrolley.w,48);
   const oldSlots=getHubRoomLifePlanV136(cryo,{...optionsFor(cryo),legacySupplyOverrides:{
     'capsule-supplies':{y:300},'stasis-service-kit':{y:300}
   }});

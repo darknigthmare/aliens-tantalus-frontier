@@ -5,7 +5,7 @@ import { HUB_TRAVERSAL_PROFILES_V60, buildHubTraversalGeometryV87 } from '../src
 import { HUB_RETIRED_SERVICE_LANDINGS_V138, HUB_MEDICAL_SERVICE_APPROACH_V138 as medicalApproach,
   resolveHubServiceProfileV138 } from '../src/hub-service-geometry-v138.js';
 import { HUB_SERVICE_STANDARD_V137, resolveHubServiceProfileV137 } from '../src/hub-service-geometry-v137.js';
-import { HUB_SERVICE_APPROACHES_V139, resolveHubServiceProfileV139 } from '../src/hub-service-geometry-v139.js';
+import { HUB_SERVICE_APPROACHES_V139, HUB_SERVICE_DOOR_BAYS_V182, resolveHubServiceProfileV139 } from '../src/hub-service-geometry-v139.js';
 import { HUB_MAINTENANCE_EAST_LANDING_V138 as landing } from '../src/hub-maintenance-landing-v138.js';
 import { HUB_SHIP_SPACE_BY_ID_V137, getHubShipConnectionsForSpaceV137 } from '../src/hub-ship-layout-v137.js';
 import { getHubCirculationPlanV137, drawHubCirculationV137, getHubCirculationSolidReservationsV138,
@@ -177,13 +177,15 @@ test('the two V139 workbench ladders and explicit V178 DURANDAL bay preserve oth
   for (const historical of Object.values(HUB_TRAVERSAL_PROFILES_V60)) {
     const previous=resolveHubServiceProfileV138(historical),before=structuredClone(previous);
     const current=resolveHubServiceProfileV139(historical);
-    // Only the reviewed low workshop support changes horizontal extent.
-    // Every other coordinate, height, thickness, identity and hatch stays exact.
-    assert.deepEqual(current.platforms,previous.platforms.map(platform=>platform.id==='workshop-low'
-      ?{...platform,x:480,w:280}:platform));
+    // The explicit V178/V182 low-doorway continuations are the only added
+    // horizontal deltas; every height, thickness, identity and hatch stays exact.
+    assert.deepEqual(current.platforms,previous.platforms.map(platform=>{
+      const bay=HUB_SERVICE_DOOR_BAYS_V182.find(entry=>entry.platformId===platform.id);
+      return platform.id==='workshop-low'?{...platform,x:480,w:280}:bay?{...platform,...bay.surface}:platform;
+    }));
     assert.deepEqual(current.vents,previous.vents);
     assert.deepEqual(current.ladders,previous.ladders.map(ladder=>{
-      const approach=HUB_SERVICE_APPROACHES_V139.find(entry=>entry.ladderId===ladder.id);
+      const approach=[...HUB_SERVICE_APPROACHES_V139,...HUB_SERVICE_DOOR_BAYS_V182].find(entry=>entry.ladderId===ladder.id);
       return approach?{...ladder,x:approach.ladderX}:ladder;
     }));
     assert.deepEqual(previous,before);

@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "version": "V182",
+  "title": "Four complete paired service door bays",
+  "baseCommit": "e4ea86d54602e9ea08b169d4053a86565548386f",
+  "status": "native-node-regression-verified; browser-and-pixel-review-pending",
+  "scope": "Continue the four P2 service-deck overlaps recorded in V179. Geometry changes move actual support and its drawing together; no mask, player resize, door crop, save rewrite or new art is used.",
+  "coordinateSystem": "Room-local pixels; player body 44x92; floor y=624. Surface and ladder heights remain unchanged.",
+  "doorBayChanges": [
+    {
+      "roomId": "briefing",
+      "annexId": "mire-archives",
+      "platformId": "briefing-low",
+      "previous": {
+        "x": 250,
+        "w": 510,
+        "y": 496,
+        "ladderX": 330
+      },
+      "current": {
+        "x": 400,
+        "w": 360,
+        "y": 496,
+        "ladderX": 625
+      },
+      "floorLadderId": "briefing-floor",
+      "tierLadderId": "briefing-tier"
+    },
+    {
+      "roomId": "cryo-bay",
+      "annexId": "escape-pods",
+      "platformId": "cryo-low",
+      "previous": {
+        "x": 160,
+        "w": 480,
+        "y": 500,
+        "ladderX": 260
+      },
+      "current": {
+        "x": 460,
+        "w": 250,
+        "y": 500,
+        "ladderX": 500
+      },
+      "floorLadderId": "cryo-floor",
+      "tierLadderId": "cryo-tier"
+    },
+    {
+      "roomId": "medical",
+      "annexId": "morgue",
+      "platformId": "medical-low",
+      "previous": {
+        "x": 160,
+        "w": 560,
+        "y": 500,
+        "ladderX": 260
+      },
+      "current": {
+        "x": 440,
+        "w": 280,
+        "y": 500,
+        "ladderX": 480
+      },
+      "floorLadderId": "medical-floor",
+      "tierLadderId": "medical-tier"
+    },
+    {
+      "roomId": "quarantine",
+      "annexId": "bioforge",
+      "platformId": "quarantine-low",
+      "previous": {
+        "x": 120,
+        "w": 520,
+        "y": 500,
+        "ladderX": 220
+      },
+      "current": {
+        "x": 420,
+        "w": 340,
+        "y": 500,
+        "ladderX": 670
+      },
+      "floorLadderId": "quarantine-floor",
+      "tierLadderId": "quarantine-tier"
+    }
+  ],
+  "furnishingChanges": [
+    {
+      "roomId": "briefing",
+      "role": "meeting-waiting-bench",
+      "previous": {
+        "x": 660
+      },
+      "current": {
+        "x": 930
+      }
+    },
+    {
+      "roomId": "cryo-bay",
+      "role": "stasis-oxygen-reserve",
+      "previous": {
+        "x": 550
+      },
+      "current": {
+        "x": 610
+      }
+    },
+    {
+      "roomId": "cryo-bay",
+      "role": "stasis-used-linen-return",
+      "previous": {
+        "x": 500
+      },
+      "current": {
+        "x": 575
+      }
+    },
+    {
+      "roomId": "cryo-bay",
+      "role": "stasis-clean-linen-stock",
+      "previous": {
+        "x": 530,
+        "y": 430
+      },
+      "current": {
+        "x": 190,
+        "y": 480
+      }
+    },
+    {
+      "roomId": "quarantine",
+      "role": "sealed-clean-storage",
+      "previous": {
+        "x": 700
+      },
+      "current": {
+        "x": 200
+      }
+    },
+    {
+      "roomId": "quarantine",
+      "role": "containment-handwash",
+      "previous": {
+        "x": 640
+      },
+      "current": {
+        "x": 590
+      }
+    }
+  ],
+  "enrichmentSuccessor": {
+    "sourceLedger": {
+      "path": "docs/forge/xeno-trials/batch100-v177.json",
+      "sha256": "2b1d3bb47423e738b1cf8f4e4844a5d717cdb70c695878bdce18beb6ffa3b734"
+    },
+    "placements": [
+      {
+        "id": "T177-I05",
+        "previous": {
+          "id": "T177-I05",
+          "roomId": "quarantine",
+          "kind": "intercom",
+          "purpose": "quarantine-clean-dirty-voice-link",
+          "bounds": {
+            "x": 288,
+            "y": 372,
+            "w": 40,
+            "h": 24
+          },
+          "mount": "rear-wall",
+          "note": "A wall-mounted intercom serving the west quarantine service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear.",
+          "sector": "industrial"
+        },
+        "current": {
+          "id": "T177-I05",
+          "roomId": "quarantine",
+          "kind": "intercom",
+          "purpose": "quarantine-clean-dirty-voice-link",
+          "bounds": {
+            "x": 475,
+            "y": 368,
+            "w": 40,
+            "h": 24
+          },
+          "mount": "rear-wall",
+          "note": "The wall-mounted intercom follows the relocated quarantine service landing, above the retained oxygen locker and west of both ladder approaches. Its operating face remains reachable from that real support and outside the complete BIOFORGE door bay.",
+          "sector": "industrial"
+        }
+      }
+    ],
+    "unchangedSecondBatchEntries": 99,
+    "firstBatchEntriesPreserved": 100,
+    "reason": "The intercom follows the relocated quarantine landing. Its operating face remains 120 pixels above the true support, while its bounds clear BIOFORGE, both ladder approaches and the retained oxygen locker."
+  },
+  "sourceChanges": [
+    {
+      "path": "src/hub-service-geometry-v139.js",
+      "previousSha256": "cf67fa0507cc064d21799a467fe8a34b2f8e3352ee81abd43466cb762ec3a752",
+      "currentSha256": "1f5ea8cec644fcd04a253bf9b04807721bd2d57eefecb83d824c60327fb97b27"
+    },
+    {
+      "path": "src/hub-room-furnishing-v137.js",
+      "previousSha256": "9997f2c954dfe7b0c32ae3094d2e09cbc958bbc40d1844c52a9696cef0292e45",
+      "currentSha256": "d76f0322f9bb55bf1ab845742bd1a20d0434ec01f53bacaffb2600b55ea2d4e8"
+    },
+    {
+      "path": "src/hub-room-composition-v142.js",
+      "previousSha256": "d0fdb04488e49b7be3fe59d5e078742b0190f6c2189d575e5c6f6b9d1bffe029",
+      "currentSha256": "17759dc162da7e4c098d766734453e6c59c6e8417c355c0572529243dacb1c16"
+    },
+    {
+      "path": "src/hub-furnishing-critical-v138.js",
+      "previousSha256": "bc3457cc5f77ba42363699a9d5dcb474dfcb9fca510d7f3ddc9687a980f1538d",
+      "currentSha256": "43464c686f9ef9aada3549e4f3c16d2ee2da34386c55719849e5e8e62927d18a"
+    },
+    {
+      "path": "src/hub-batch-industrial-v177.js",
+      "previousSha256": "27cfc9084399b77193b0361904d8fc89151dc56bd010e4fe34ec7bc02ba1e0bc",
+      "currentSha256": "331616b92765ac25946dc563501e0b06b12f43069b28320c744058d899287522"
+    }
+  ],
+  "verified": [
+    "Four full cropped paired faces and 7px margins clear actual collision surfaces and native circulation steel with depth enabled and disabled.",
+    "Native keyboard input reaches floor, low deck, high deck, low deck and floor, then traverses each paired door with E in both directions; resources, clock, health and player dimensions remain unchanged.",
+    "Eight historical landing/climbing save poses retain their coordinates at restore, release stale climbing and fall continuously under native gravity without teleportation.",
+    "Existing DURANDAL checks and V138 medical 70px tier landing margins remain green.",
+    "Comparison of the 35 production room compositions before/after retains every previously admitted role. Only the pre-existing cryo stasis-supplies medical trolley is newly admitted after its old ladder footprint is released; the total changes from 304 to 305.",
+    "All 100 first-batch and 100 second-batch placements clear native geometry. The historical second-batch ledger remains byte-for-byte intact and the active view applies only the declared T177-I05 successor."
+  ],
+  "evidence": {
+    "positive": {
+      "command": "node --test scripts/verify-hub-door-bay-v178.mjs scripts/verify-hub-service-routes-v138.mjs scripts/verify-hub-circulation-v137.mjs",
+      "tests": 43,
+      "passed": 43,
+      "failed": 0
+    },
+    "negative": {
+      "command": "node --test --test-name-pattern='V182 .*complete paired door bay' scripts/verify-hub-door-bay-v178.mjs",
+      "substitution": "Only src/hub-service-geometry-v139.js reverted temporarily to the base revision in an isolated worktree, then restored.",
+      "tests": 4,
+      "passed": 0,
+      "failed": 4
+    },
+    "harness": "Production Hub module, physics and input listeners; declared Save fixtures; native image dimensions read from actual asset headers. Canvas is a command double, so these are not browser pixels.",
+    "browser": "Pending independent CI recipe on built distribution; no local visual inspection is asserted.",
+    "compositionAndTraversal": {
+      "command": "node --test scripts/verify-hub-door-bay-v178.mjs scripts/verify-hub-service-routes-v138.mjs scripts/verify-hub-circulation-v137.mjs scripts/verify-hub-room-furnishing-v137.mjs scripts/verify-hub-room-composition-v142.mjs scripts/verify-hub-room-life-v136.mjs scripts/verify-tantalus-enrichment-v177.mjs scripts/verify-tantalus-batch100-v168.mjs",
+      "tests": 83,
+      "passed": 83,
+      "failed": 0
+    }
+  },
+  "unchanged": [
+    "All upper service supports, tier ladders, vents and original historical traversal profiles.",
+    "Door descriptors, paired crop sizes, sockets and aperture clamping.",
+    "All 100 first-batch placements and 99 unaffected second-batch placements.",
+    "Historical batch100-v177.json and tantalus-door-bay-v179.json witnesses.",
+    "Save schema, NPC routes, pixel assets, resource and clock behavior."
+  ],
+  "limits": [
+    "No art, lore or 1:1 approval is granted.",
+    "The hangar/arrival-airlock paint-order false positive is excluded.",
+    "Browser rendering and real distribution traversal require the separate CI evidence."
+  ],
+  "compositionCensus": {
+    "previousTotal": 304,
+    "currentTotal": 305,
+    "added": [
+      {
+        "roomId": "cryo-bay",
+        "role": "stasis-supplies"
+      }
+    ],
+    "removed": [],
+    "signature": "SHA256 of UTF-8 JSON.stringify(sorted role names) from actual production composition with native geometry. Previous snapshot uses unchanged source files at baseCommit.",
+    "rooms": [
+      {
+        "roomId": "bridge",
+        "previousCount": 10,
+        "previousRolesSha256": "a3459c1077e0f53bf8e8092a2e1837266c808610ca304fcc3bf8bdfc457716a3",
+        "currentCount": 10,
+        "currentRolesSha256": "a3459c1077e0f53bf8e8092a2e1837266c808610ca304fcc3bf8bdfc457716a3"
+      },
+      {
+        "roomId": "briefing",
+        "previousCount": 9,
+        "previousRolesSha256": "fec42761a070cba8f304aa10b0bde933764c301b7d64851cf205ed1c96853ec5",
+        "currentCount": 9,
+        "currentRolesSha256": "fec42761a070cba8f304aa10b0bde933764c301b7d64851cf205ed1c96853ec5"
+      },
+      {
+        "roomId": "combat-information",
+        "previousCount": 8,
+        "previousRolesSha256": "fd772409532e2059f6bf25eee22d705d62c8b323d37a75cb7c1b23e69caeced0",
+        "currentCount": 8,
+        "currentRolesSha256": "fd772409532e2059f6bf25eee22d705d62c8b323d37a75cb7c1b23e69caeced0"
+      },
+      {
+        "roomId": "cryo-bay",
+        "previousCount": 8,
+        "previousRolesSha256": "17ad02032909c69e645c869ff272ef1f864ec8fcbe463ef2d440d47ea119a829",
+        "currentCount": 9,
+        "currentRolesSha256": "b148deaa80547a3f17f2283c67d64c88ebc7ac1eaee1ec60bc1f9245be4b933b"
+      },
+      {
+        "roomId": "crew-quarters",
+        "previousCount": 7,
+        "previousRolesSha256": "ac4819af2eca986a011df1722afcf09fc76fccf949c63023362758d28e2902fe",
+        "currentCount": 7,
+        "currentRolesSha256": "ac4819af2eca986a011df1722afcf09fc76fccf949c63023362758d28e2902fe"
+      },
+      {
+        "roomId": "mess",
+        "previousCount": 9,
+        "previousRolesSha256": "28a92c2ac4e0850f0d360653b5fd97aaef9595114819a5576d289f511ab349a7",
+        "currentCount": 9,
+        "currentRolesSha256": "28a92c2ac4e0850f0d360653b5fd97aaef9595114819a5576d289f511ab349a7"
+      },
+      {
+        "roomId": "medical",
+        "previousCount": 8,
+        "previousRolesSha256": "cd2de177d284be28bb1a3e64207f86b76fb447b84c175c3d46b3262ea5ae4be7",
+        "currentCount": 8,
+        "currentRolesSha256": "cd2de177d284be28bb1a3e64207f86b76fb447b84c175c3d46b3262ea5ae4be7"
+      },
+      {
+        "roomId": "science-lab",
+        "previousCount": 7,
+        "previousRolesSha256": "c027cf5b20123bf03f89cc1e90979b6f1f709b07711704f6e63fb2fb73b804ef",
+        "currentCount": 7,
+        "currentRolesSha256": "c027cf5b20123bf03f89cc1e90979b6f1f709b07711704f6e63fb2fb73b804ef"
+      },
+      {
+        "roomId": "quarantine",
+        "previousCount": 7,
+        "previousRolesSha256": "1b71c5d894845594973e052926864c81612b7bd882bdfc5dd6b5ae220dc55d3f",
+        "currentCount": 7,
+        "currentRolesSha256": "1b71c5d894845594973e052926864c81612b7bd882bdfc5dd6b5ae220dc55d3f"
+      },
+      {
+        "roomId": "armory",
+        "previousCount": 8,
+        "previousRolesSha256": "5c2187b3a651b21ada6319925d31f6a42f8c5f0538fd820eeb23b042597f9f94",
+        "currentCount": 8,
+        "currentRolesSha256": "5c2187b3a651b21ada6319925d31f6a42f8c5f0538fd820eeb23b042597f9f94"
+      },
+      {
+        "roomId": "workshop",
+        "previousCount": 7,
+        "previousRolesSha256": "31aa1d51c295c64dec61ceda61d5754798c85264d4c0ac1fb98b99b740dafc74",
+        "currentCount": 7,
+        "currentRolesSha256": "31aa1d51c295c64dec61ceda61d5754798c85264d4c0ac1fb98b99b740dafc74"
+      },
+      {
+        "roomId": "vehicle-bay",
+        "previousCount": 6,
+        "previousRolesSha256": "9261dacdfffacd094c5ab75487adcf18f1e22416874ff0d79b0f3a6d2d89f2af",
+        "currentCount": 6,
+        "currentRolesSha256": "9261dacdfffacd094c5ab75487adcf18f1e22416874ff0d79b0f3a6d2d89f2af"
+      },
+      {
+        "roomId": "dropship-hangar",
+        "previousCount": 4,
+        "previousRolesSha256": "1a167a84e5caa77594ea0846ba4f3caa1577bdbbaabc0f2e876803a908419bfc",
+        "currentCount": 4,
+        "currentRolesSha256": "1a167a84e5caa77594ea0846ba4f3caa1577bdbbaabc0f2e876803a908419bfc"
+      },
+      {
+        "roomId": "reactor",
+        "previousCount": 7,
+        "previousRolesSha256": "41aa3497c9549a7080be27808e45fbca5b85f673223783b6d5226e572ece1b6d",
+        "currentCount": 7,
+        "currentRolesSha256": "41aa3497c9549a7080be27808e45fbca5b85f673223783b6d5226e572ece1b6d"
+      },
+      {
+        "roomId": "life-support",
+        "previousCount": 7,
+        "previousRolesSha256": "ddbb501554b2329face47b2185e8ed86c5e666b46b51c35efaf99931485423f9",
+        "currentCount": 7,
+        "currentRolesSha256": "ddbb501554b2329face47b2185e8ed86c5e666b46b51c35efaf99931485423f9"
+      },
+      {
+        "roomId": "sensor-array",
+        "previousCount": 7,
+        "previousRolesSha256": "e9d7ea3c1f2b32ab32efde168433d459b887970c9859ef0ea4263264825511e9",
+        "currentCount": 7,
+        "currentRolesSha256": "e9d7ea3c1f2b32ab32efde168433d459b887970c9859ef0ea4263264825511e9"
+      },
+      {
+        "roomId": "arrival-airlock",
+        "previousCount": 11,
+        "previousRolesSha256": "d9f37078f1de01c3ab6accf0a8aac7342a697f411f19c2d5547f782363f906e0",
+        "currentCount": 11,
+        "currentRolesSha256": "d9f37078f1de01c3ab6accf0a8aac7342a697f411f19c2d5547f782363f906e0"
+      },
+      {
+        "roomId": "logistics",
+        "previousCount": 13,
+        "previousRolesSha256": "4deace7de504cccc598988a4217cf413c9c59d02022add75b0d2768f00e29246",
+        "currentCount": 13,
+        "currentRolesSha256": "4deace7de504cccc598988a4217cf413c9c59d02022add75b0d2768f00e29246"
+      },
+      {
+        "roomId": "mire-archives",
+        "previousCount": 9,
+        "previousRolesSha256": "86e72c86be1b25c0bc5257c9f51a4ea6d869324a385c0dbd863bb9f6574014de",
+        "currentCount": 9,
+        "currentRolesSha256": "86e72c86be1b25c0bc5257c9f51a4ea6d869324a385c0dbd863bb9f6574014de"
+      },
+      {
+        "roomId": "synthetic-bay",
+        "previousCount": 12,
+        "previousRolesSha256": "1b63b4f0a322f6278c5670a6ac4430905c64839064e41ec30b3e760bfa63385b",
+        "currentCount": 12,
+        "currentRolesSha256": "1b63b4f0a322f6278c5670a6ac4430905c64839064e41ec30b3e760bfa63385b"
+      },
+      {
+        "roomId": "cctv",
+        "previousCount": 12,
+        "previousRolesSha256": "d8ebc364b620672369e80fe05b0917921f23711c80d88221e909063cbd4bb12c",
+        "currentCount": 12,
+        "currentRolesSha256": "d8ebc364b620672369e80fe05b0917921f23711c80d88221e909063cbd4bb12c"
+      },
+      {
+        "roomId": "proving-ground",
+        "previousCount": 9,
+        "previousRolesSha256": "675447c6f422e34c2ec61b86125d09495f01ad21dd5a8e04af7d60ddc9cf6e00",
+        "currentCount": 9,
+        "currentRolesSha256": "675447c6f422e34c2ec61b86125d09495f01ad21dd5a8e04af7d60ddc9cf6e00"
+      },
+      {
+        "roomId": "morgue",
+        "previousCount": 9,
+        "previousRolesSha256": "bb4dcceb9ba31682c860eca2c1f98fe21d7440114b2e291017ce2266095fee17",
+        "currentCount": 9,
+        "currentRolesSha256": "bb4dcceb9ba31682c860eca2c1f98fe21d7440114b2e291017ce2266095fee17"
+      },
+      {
+        "roomId": "escape-pods",
+        "previousCount": 9,
+        "previousRolesSha256": "8b8819515844ade5e8eb651f1571147c254e29e53566b6eb180e1cf4909706cc",
+        "currentCount": 9,
+        "currentRolesSha256": "8b8819515844ade5e8eb651f1571147c254e29e53566b6eb180e1cf4909706cc"
+      },
+      {
+        "roomId": "durandal",
+        "previousCount": 13,
+        "previousRolesSha256": "7496a46d79f670f3911d07fc18cbb4a355b4bbc1e85d7b78b679bfe23bd13d64",
+        "currentCount": 13,
+        "currentRolesSha256": "7496a46d79f670f3911d07fc18cbb4a355b4bbc1e85d7b78b679bfe23bd13d64"
+      },
+      {
+        "roomId": "bioforge",
+        "previousCount": 10,
+        "previousRolesSha256": "3862320828b973ece424899749f2bc286e476ef3dc0c248d264acffb68b583f4",
+        "currentCount": 10,
+        "currentRolesSha256": "3862320828b973ece424899749f2bc286e476ef3dc0c248d264acffb68b583f4"
+      },
+      {
+        "roomId": "animal-care",
+        "previousCount": 12,
+        "previousRolesSha256": "e3246392751e644772b532704b7ed499c8f8a3944fc5c21b1b27ca4ba6f9cadb",
+        "currentCount": 12,
+        "currentRolesSha256": "e3246392751e644772b532704b7ed499c8f8a3944fc5c21b1b27ca4ba6f9cadb"
+      },
+      {
+        "roomId": "frontier-civil-counter",
+        "previousCount": 9,
+        "previousRolesSha256": "159851e9accf5bd436025554d37f42d8ff30e5e3842ef97139e2fd149dec9ef3",
+        "currentCount": 9,
+        "currentRolesSha256": "159851e9accf5bd436025554d37f42d8ff30e5e3842ef97139e2fd149dec9ef3"
+      },
+      {
+        "roomId": "personal-refuge",
+        "previousCount": 11,
+        "previousRolesSha256": "d987533680392588539b1e0cc841b42de82ee06a0b995c7a3b94109fa24b7f7c",
+        "currentCount": 11,
+        "currentRolesSha256": "d987533680392588539b1e0cc841b42de82ee06a0b995c7a3b94109fa24b7f7c"
+      },
+      {
+        "roomId": "flight-control-cockpit",
+        "previousCount": 8,
+        "previousRolesSha256": "dc31414be6688289e2500f6874de17090db8b20fb22a898fc8b00a6b5e95c682",
+        "currentCount": 8,
+        "currentRolesSha256": "dc31414be6688289e2500f6874de17090db8b20fb22a898fc8b00a6b5e95c682"
+      },
+      {
+        "roomId": "galley-service",
+        "previousCount": 7,
+        "previousRolesSha256": "196a3800e9cca0ff68d8a9f1301870f178c57531e84b30fc3bbdd33002502193",
+        "currentCount": 7,
+        "currentRolesSha256": "196a3800e9cca0ff68d8a9f1301870f178c57531e84b30fc3bbdd33002502193"
+      },
+      {
+        "roomId": "sanitary-bay",
+        "previousCount": 7,
+        "previousRolesSha256": "e6811ba1d32482303cfbb8d5cc80fbc2cb9e59af0d02c69b0d2fdab361ce9e49",
+        "currentCount": 7,
+        "currentRolesSha256": "e6811ba1d32482303cfbb8d5cc80fbc2cb9e59af0d02c69b0d2fdab361ce9e49"
+      },
+      {
+        "roomId": "engine-room",
+        "previousCount": 8,
+        "previousRolesSha256": "989dd83c28190f863f1f93c610c7beca96215262961b3218119956533814112e",
+        "currentCount": 8,
+        "currentRolesSha256": "989dd83c28190f863f1f93c610c7beca96215262961b3218119956533814112e"
+      },
+      {
+        "roomId": "water-recycling",
+        "previousCount": 6,
+        "previousRolesSha256": "798a8fd724deb05417eb286891c14f2403e3dd1cc6c1e84b45ac45335cff71ba",
+        "currentCount": 6,
+        "currentRolesSha256": "798a8fd724deb05417eb286891c14f2403e3dd1cc6c1e84b45ac45335cff71ba"
+      },
+      {
+        "roomId": "maintenance-spine",
+        "previousCount": 10,
+        "previousRolesSha256": "13e5792916534ab6b9405615f5e3b5765e84f26d05f161b817d30f5bdda01046",
+        "currentCount": 10,
+        "currentRolesSha256": "13e5792916534ab6b9405615f5e3b5765e84f26d05f161b817d30f5bdda01046"
+      }
+    ]
+  }
+}

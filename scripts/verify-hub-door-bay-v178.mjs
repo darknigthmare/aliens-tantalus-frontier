@@ -54,9 +54,11 @@ function nativeHost() {
 }
 
 
-async function fixture(localX, y=532, resumedClimbing=false) {
+async function fixture(localX, y=532, resumedClimbing=false, roomId='workshop') {
   const browser=nativeHost(),raw=createDefaultSave();raw.needsPlayerCreationV84=false;
-  Object.assign(raw.hub,{deck:2,roomId:'workshop',positionX:workshop.xStart+localX,positionY:y,climbing:resumedClimbing});
+  const deck=HUB_DECKS.findIndex(entry=>entry.rooms.some(room=>room.id===roomId));
+  const room=HUB_DECKS[deck].rooms.find(entry=>entry.id===roomId);
+  Object.assign(raw.hub,{deck,roomId,positionX:room.xStart+localX,positionY:y,climbing:resumedClimbing});
   const save=migrateSave(raw);
   const hub=new ProductionHub(browser.canvas,{onAction(){},onPersist(){},onStatus(){}});
   hub.start(save.hub,{routineContextV62:{save}});
@@ -70,6 +72,81 @@ function walk(subject,target){
   subject.key('keyup',code);advance(subject.hub,.2);assert.ok(Math.abs(target-subject.hub.player.x)<30,`walk stopped at ${subject.hub.player.x}, target ${target}`);
 }
 function landing(hub,y){near(hub.player.y+hub.player.h,y);assert.equal(hub.player.climbing,false);assert.equal(hub.player.grounded,true);}
+function climbTo(subject,code,y){
+  subject.key('keydown',code);
+  for(let step=0;step<300&&(Math.abs(subject.hub.player.y+subject.hub.player.h-y)>1e-6
+    ||subject.hub.player.climbing||!subject.hub.player.grounded);step++)subject.hub.update(1/60);
+  subject.key('keyup',code);advance(subject.hub,.1);landing(subject.hub,y);
+}
+
+const doorBayCasesV182 = [
+  {roomId:'briefing',annexId:'mire-archives',lowId:'briefing-low',highId:'briefing-high',floorId:'briefing-floor',tierId:'briefing-tier',legacyX:330,lowY:496},
+  {roomId:'cryo-bay',annexId:'escape-pods',lowId:'cryo-low',highId:'cryo-high',floorId:'cryo-floor',tierId:'cryo-tier',legacyX:260,lowY:500},
+  {roomId:'medical',annexId:'morgue',lowId:'medical-low',highId:'medical-high',floorId:'medical-floor',tierId:'medical-tier',legacyX:260,lowY:500},
+  {roomId:'quarantine',annexId:'bioforge',lowId:'quarantine-low',highId:'quarantine-high',floorId:'quarantine-floor',tierId:'quarantine-tier',legacyX:220,lowY:500}
+];
+for(const config of doorBayCasesV182){
+  const deck=HUB_DECKS.findIndex(entry=>entry.rooms.some(room=>room.id===config.roomId));
+  const room=HUB_DECKS[deck].rooms.find(entry=>entry.id===config.roomId);
+  test(`V182 ${config.annexId}: complete paired door bay clears native supports and their drawn steel`,()=>{
+    const annex=HUB_ANNEX_BY_ID_V137[config.annexId],entry=HUB_ANNEX_ENTRANCES_V133[config.annexId];
+    const bounds={x:room.xStart+entry.centerX-annex.entrance.w/2,y:entry.bottom-annex.entrance.h,w:annex.entrance.w,h:annex.entrance.h};
+    const local={x:annex.entranceLocalX-annex.entrance.w/2,y:annex.entrance.y,w:annex.entrance.w,h:annex.entrance.h};
+    const before=structuredClone({annex,entry}),face=getHubDoorFaceV142(bounds,local,annex.art.alphaBounds.door);
+    const paired=getHubDoorFaceV142(local,bounds,annex.art.alphaBounds.door),bay={x:face.target.x-7,y:face.target.y-7,w:face.target.w+14,h:face.target.h+14};
+    near(face.target.h,156);near(face.target.y+face.target.h,624);assert.deepEqual(face.pairedSize,paired.pairedSize);
+    assert.ok(face.opening.w>=44&&face.opening.h>=92);
+    const geometry=buildHubTraversalGeometryV87(deck);
+    for(const platform of geometry.platforms.filter(surface=>surface.roomId===room.id)){
+      assert.equal(overlap(platform,bay),false,platform.id+' collision crosses the complete door bay');
+      for(const depthEnabled of [true,false])for(const steel of getHubCirculationSolidReservationsV138(platform,{...geometry,room,depthEnabled}))
+        assert.equal(overlap(steel,bay),false,platform.id+' '+steel.role+' crosses the paired face');
+    }
+    const low=geometry.platforms.find(entry=>entry.id===config.lowId),floor=geometry.ladders.find(entry=>entry.id===config.floorId);
+    assert.ok(floor.x-low.x>=40&&low.x+low.w-floor.x>=40,'Both landing margins keep the complete standing body supported');
+    assert.deepEqual({annex,entry},before);
+  });
+  test(`V182 ${config.annexId}: historical landing and climbing saves retain position then fall under native gravity`,async()=>{
+    for(const pose of [{y:config.lowY-92,climbing:false},{y:460,climbing:true}]){
+      const subject=await fixture(config.legacyX-22,pose.y,pose.climbing,room.id),hub=subject.hub;
+      try{
+        near(hub.player.x,room.xStart+config.legacyX-22);near(hub.player.y,pose.y);assert.equal(hub.player.climbing,false);
+        const original={x:hub.player.x,resources:structuredClone(subject.save.galaxy.resources),clock:structuredClone(subject.save.clock)};
+        let last=hub.player.y,maxStep=0;
+        advance(hub,1,player=>{near(player.x,original.x);assert.ok(player.y>=last-1e-6);maxStep=Math.max(maxStep,player.y-last);last=player.y;});
+        landing(hub,624);assert.ok(maxStep<20,'No teleport to the new support is allowed');
+        assert.equal(hub.player.health,100);assert.deepEqual(subject.save.galaxy.resources,original.resources);assert.deepEqual(subject.save.clock,original.clock);
+      }finally{hub.stop();}
+    }
+  });
+  test(`V182 ${config.annexId}: native keys climb both service decks and traverse the paired doorway in both directions`,async()=>{
+    const entry=HUB_ANNEX_ENTRANCES_V133[config.annexId],subject=await fixture(entry.centerX-22,532,false,room.id),hub=subject.hub;
+    const geometry=buildHubTraversalGeometryV87(deck),low=geometry.platforms.find(p=>p.id===config.lowId),high=geometry.platforms.find(p=>p.id===config.highId);
+    const floor=geometry.ladders.find(l=>l.id===config.floorId),tier=geometry.ladders.find(l=>l.id===config.tierId);
+    const before={resources:structuredClone(subject.save.galaxy.resources),clock:structuredClone(subject.save.clock)};
+    try{
+      walk(subject,floor.x-22);climbTo(subject,'KeyW',low.y);
+      walk(subject,tier.x-22);climbTo(subject,'KeyW',high.y);
+      climbTo(subject,'KeyS',low.y);walk(subject,floor.x-22);climbTo(subject,'KeyS',624);
+      walk(subject,room.xStart+entry.centerX-22);assert.equal(hub.nearestParentAnnexDoorV71()?.annexId,config.annexId);
+      const pair=hub.hubDoorPairV142(HUB_ANNEX_BY_ID_V137[config.annexId]);
+      const openingCenter=pair.parent.opening.x+pair.parent.opening.w/2,halfSpan=(pair.parent.opening.w-hub.player.w)/2;
+      // Braking can leave a body just outside the narrower BIOFORGE aperture.
+      // Approach through real key taps before asserting an unclamped round trip.
+      for(let step=0;step<12&&Math.abs(hub.player.x+22-openingCenter)>halfSpan-2;step++){
+        hold(subject,hub.player.x+22<openingCenter?'KeyD':'KeyA',.04);advance(hub,.2);
+      }
+      assert.ok(Math.abs(hub.player.x+22-openingCenter)<=halfSpan-2,'The entire source body fits the paired opening');
+      const origin={x:hub.player.x,y:hub.player.y};
+      const offset=origin.x+22-(pair.parent.opening.x+pair.parent.opening.w/2);
+      subject.key('keydown','KeyE');subject.key('keyup','KeyE');advance(hub,1.2);assert.equal(hub.currentAnnexV71()?.id,config.annexId);landing(hub,624);
+      near(hub.player.x+22-(pair.local.opening.x+pair.local.opening.w/2),offset);
+      subject.key('keydown','KeyE');subject.key('keyup','KeyE');advance(hub,1.2);assert.equal(hub.currentAnnexV71(),null);landing(hub,624);
+      near(hub.player.x,origin.x);near(hub.player.y,origin.y);assert.equal(hub.player.w,44);assert.equal(hub.player.h,92);assert.equal(hub.player.health,100);
+      assert.deepEqual(subject.save.galaxy.resources,before.resources);assert.deepEqual(subject.save.clock,before.clock);
+    }finally{hub.stop();}
+  });
+}
 
 test('the complete paired DURANDAL doorway clears actual workshop deck collision, front steel and brackets',()=>{
   const annex=HUB_ANNEX_BY_ID_V137.durandal,entry=HUB_ANNEX_ENTRANCES_V133.durandal;

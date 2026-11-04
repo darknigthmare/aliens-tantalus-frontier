@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { HUB_DECKS, HUB_WORLD } from '../src/hub-game.js';
 import { HUB_ANNEXES_V137 } from '../src/hub-annex-registry-v137.js';
 import { getHubAnnexRuntimeGeometryV139 } from '../src/hub-annex-runtime-geometry-v139.js';
@@ -36,9 +37,23 @@ function recorder() {
 }
 
 test('the second100 batch contains four25-installation sectors,16 functional kinds and every ship compartment', () => {
-  const ledger=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/batch100-v177.json',import.meta.url)));
+  const ledgerBytes=readFileSync(new URL('../docs/forge/xeno-trials/batch100-v177.json',import.meta.url));
+  const ledger=JSON.parse(ledgerBytes);
+  const successor=JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/door-bay-continuation-v182.json',import.meta.url))).enrichmentSuccessor;
+  assert.deepEqual(successor.sourceLedger,{path:'docs/forge/xeno-trials/batch100-v177.json',sha256:'2b1d3bb47423e738b1cf8f4e4844a5d717cdb70c695878bdce18beb6ffa3b734'});
+  assert.equal(createHash('sha256').update(ledgerBytes).digest('hex'),successor.sourceLedger.sha256,'The V179 placement witness stays byte-for-byte intact');
+  assert.equal(successor.placements.length,1);
+  const delta=successor.placements[0];
+  assert.equal(delta.id,'T177-I05');assert.equal(delta.previous.id,delta.id);
+  assert.deepEqual(delta.previous,ledger.entries.find(item=>item.id===delta.id));
+  assert.deepEqual(delta.previous.bounds,{x:288,y:372,w:40,h:24});
+  assert.deepEqual(delta.current,{...delta.previous,bounds:{x:475,y:368,w:40,h:24},
+    note:'The wall-mounted intercom follows the relocated quarantine service landing, above the retained oxygen locker and west of both ladder approaches. Its operating face remains reachable from that real support and outside the complete BIOFORGE door bay.'});
+  const currentLedger=ledger.entries.map(item=>item.id===delta.id?delta.current:item);
+  assert.equal(successor.unchangedSecondBatchEntries,99);assert.equal(successor.firstBatchEntriesPreserved,100);
+  assert.equal(ledger.entries.filter(item=>item.id!==delta.id).length,99);
   assert.equal(ledger.installations,100);assert.equal(ledger.firstBatchInstallationsPreserved,100);
-  assert.deepEqual(ledger.entries,HUB_ROOM_ENRICHMENT_V177);
+  assert.deepEqual(currentLedger,HUB_ROOM_ENRICHMENT_V177,'Only the explicitly witnessed V182 intercom transition changes the active batch');
   assert.equal(HUB_ROOM_ENRICHMENT_V177.length, 100);
   assert.equal(new Set(HUB_ROOM_ENRICHMENT_V177.map(item => item.id)).size, 100);
   assert.equal(new Set(HUB_ROOM_ENRICHMENT_V177.map(item => item.kind)).size, 16);

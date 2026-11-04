@@ -32,8 +32,8 @@ export const HUB_ROOM_COMPOSITION_ADDITIONS_V142 = freeze({
     wall('data-cabinet', 850, 440, 68, 'signal-catwalk-reference-stock')
   ]),
   'cryo-bay': group('clean-linen-return-and-stasis-service', [
-    { kind: 'bin', x: 500, width: 34, height: 42, role: 'stasis-used-linen-return', support: 'rear-floor' },
-    wall('sterile-cabinet', 530, 430, 60, 'stasis-clean-linen-stock')
+    { kind: 'bin', x: 575, width: 34, height: 42, role: 'stasis-used-linen-return', support: 'rear-floor' },
+    wall('sterile-cabinet', 190, 480, 60, 'stasis-clean-linen-stock')
   ]),
   'crew-quarters': group('shared-berth-personal-storage', [
     { kind: 'locker', x: 310, width: 70, height: 62, role: 'shared-crew-effects-locker', support: 'rear-floor' },

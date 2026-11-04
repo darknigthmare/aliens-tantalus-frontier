@@ -72,13 +72,13 @@ export const HUB_INDUSTRIAL_DETAILS_V177 = freeze([
     "kind": "intercom",
     "purpose": "quarantine-clean-dirty-voice-link",
     "bounds": {
-      "x": 288,
-      "y": 372,
+      "x": 475,
+      "y": 368,
       "w": 40,
       "h": 24
     },
     "mount": "rear-wall",
-    "note": "A wall-mounted intercom serving the west quarantine service bay. Its operating face is at the height of the actual raised service walkway; the equipment, rail and door silhouettes stay clear."
+    "note": "The wall-mounted intercom follows the relocated quarantine service landing, above the retained oxygen locker and west of both ladder approaches. Its operating face remains reachable from that real support and outside the complete BIOFORGE door bay."
   },
   {
     "id": "T177-I06",
