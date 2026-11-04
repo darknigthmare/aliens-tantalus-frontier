@@ -391,9 +391,41 @@ const canonicalV178 = value => Array.isArray(value) ? '[' + value.map(canonicalV
     : JSON.stringify(value);
 const canonicalHashV178 = value => sha(Buffer.from(canonicalV178(value)));
 
+/** Developer tooling continuation of the exact d41b5fc source snapshot.
+ * Only the source distribution allowlist and its verifier tests change. The
+ * V178 ledger, runtime hashes and dated validation receipts remain historical. */
+export const AI_TOOLING_FOLLOWUP_20261104 = Object.freeze({
+  baselineCommit: 'd41b5fc120da2e7a5938308f9d3c852d20e53cc5',
+  scope: 'Optional Spec Kit, Superpowers and Claude Game Studios tooling; source-only admission.',
+  runtimeChanged: false,
+  historicalEvidenceTransferred: false,
+  verifierChanges: Object.freeze({
+    'scripts/verify-audit-continuation-v163.mjs': Object.freeze({
+      previousSha256: 'da597b00722760cf102956851cbd14423a66d77a4fc04ff0a1f6bb000a441291',
+      currentSha256: '47317f937706b8b34fcd8862cb0e942dc365fc87c82747f5072c632f1b66480e'
+    }),
+    'scripts/verify-public-release-v86.mjs': Object.freeze({
+      previousSha256: 'bc913fdd26cd4af6eb67889002559e88e6e98f4952b2712c9186f006376222ab',
+      currentSha256: '4c3010a97ee506088a198c9693f8196c96f22a701a2723a40b367d43a9b7e122'
+    })
+  })
+});
+
+export function reviewedAiToolingDigest20261104(path, endpointV178) {
+  const receipt = AI_TOOLING_FOLLOWUP_20261104.verifierChanges[path];
+  if (!receipt) return endpointV178;
+  assert.deepEqual(keys(receipt), ['currentSha256', 'previousSha256']);
+  assert.equal(endpointV178, V178_VERIFIER_SUCCESSORS[path]?.currentSha256,
+    'Incorrect V178 endpoint for AI tooling: ' + path);
+  assert.equal(receipt.previousSha256, endpointV178, 'Broken AI tooling predecessor: ' + path);
+  assert.ok(validHash(receipt.currentSha256));
+  assert.notEqual(receipt.currentSha256, endpointV178);
+  return receipt.currentSha256;
+}
+
 /** Resolve only an explicitly reviewed tail from the exact MainM endpoint.
  * Callers with a V165 digest must first complete their V171..V177 chain. */
-export function reviewedLiveDigestV178(path, endpointMainM) {
+function reviewedHistoricalDigestV178(path, endpointMainM) {
   const receipts = [V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS]
     .filter(map => Object.hasOwn(map,path)).map(map => map[path]);
   assert.ok(receipts.length <= 1, 'Ambiguous V178 successor: ' + path);
@@ -405,6 +437,10 @@ export function reviewedLiveDigestV178(path, endpointMainM) {
   assert.ok(validHash(receipt.currentSha256));
   assert.notEqual(receipt.currentSha256,endpointMainM);
   return receipt.currentSha256;
+}
+
+export function reviewedLiveDigestV178(path, endpointMainM) {
+  return reviewedAiToolingDigest20261104(path, reviewedHistoricalDigestV178(path, endpointMainM));
 }
 
 export function verifyFollowupV178(current, readSource = readRepository) {
@@ -446,8 +482,9 @@ export function verifyFollowupV178(current, readSource = readRepository) {
       assert.deepEqual(keys(row),['currentSha256','path','previousSha256']);
       const receipt=map[row.path];
       assert.deepEqual([row.previousSha256,row.currentSha256],[receipt.previousSha256,receipt.currentSha256]);
-      assert.equal(reviewedLiveDigestV178(row.path,V178_MAIN_PREDECESSORS[row.path]),receipt.currentSha256);
-      assert.equal(sha(readSource(row.path)),receipt.currentSha256,'Unreviewed V178 '+field+': '+row.path);
+      assert.equal(reviewedHistoricalDigestV178(row.path,V178_MAIN_PREDECESSORS[row.path]),receipt.currentSha256);
+      assert.equal(sha(readSource(row.path)),reviewedAiToolingDigest20261104(row.path,receipt.currentSha256),
+        'Unreviewed V178 '+field+': '+row.path);
       if(field==='runtimeChanges') assert.ok(Object.hasOwn(current.runtimeSourceSha256,row.path));
     }
   }

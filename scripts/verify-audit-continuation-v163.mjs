@@ -19,7 +19,8 @@ import { AUDIT_DEFERRED_FORGE_SOURCES_V163, AUDIT_PREDECESSOR_DOCUMENTS_V163, AU
   V165_VERIFIER_SUCCESSORS_V177, verifyReviewedVerifierV177,
   verifyOpenWorkstreamsV177, V177_ARSENAL_SOURCE_INPUTS, V177_RUNTIME_PREDECESSORS, V177_TOOL_SUCCESSORS,
   V178_RUNTIME_SUCCESSORS, V178_VERIFIER_SUCCESSORS, V178_QA_SUCCESSORS,
-  reviewedLiveDigestV178, verifyFollowupV178 } from './audit-succession-v163.mjs';
+  reviewedLiveDigestV178, verifyFollowupV178, AI_TOOLING_FOLLOWUP_20261104,
+  reviewedAiToolingDigest20261104 } from './audit-succession-v163.mjs';
 import { resolveAuditSourcesV162, verifyAuditSuccessionV162 } from './audit-succession-v162.mjs';
 import { resolveAuditSourcesV161 } from './audit-succession-v161.mjs';
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
@@ -604,7 +605,7 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
   assert.equal(current.candidateLocalValidationV177.testedCommit,'70adab8e66b8b2ee3fc2a731a182dd20d2a6af31');
   for(const map of [V178_RUNTIME_SUCCESSORS,V178_VERIFIER_SUCCESSORS,V178_QA_SUCCESSORS])
     for(const [path,receipt] of Object.entries(map)) {
-      assert.equal(sha(read(path)),receipt.currentSha256,path);
+      assert.equal(sha(read(path)),reviewedAiToolingDigest20261104(path,receipt.currentSha256),path);
       assert.throws(()=>reviewedLiveDigestV178(path,'0'.repeat(64)),/Incorrect MainM endpoint/);
       const changed=name=>name===path?Buffer.concat([read(name),Buffer.from('\nUNREVIEWED')]):read(name);
       assert.throws(()=>verifyAuditSuccessionV163(previous,current,changed),undefined,path);
@@ -619,6 +620,35 @@ test('V178 resolves only exact MainM successors while every V177 witness stays h
     c=>{c.candidateLocalValidationV177.testedCommit='0'.repeat(40);},
     c=>{c.followupV178.historicalV177ResultsTransferred=true;},c=>{c.followupV178.releaseEvidence.ci={status:'success'};}
   ]) {const forged=clone(current);alter(forged);assert.throws(()=>verifyFollowupV178(forged));}
+});
+
+test('optional AI tooling has exact source-only admission and preserves historical V178 receipts', () => {
+  const followup = AI_TOOLING_FOLLOWUP_20261104;
+  assert.equal(followup.baselineCommit, 'd41b5fc120da2e7a5938308f9d3c852d20e53cc5');
+  assert.equal(followup.runtimeChanged, false);
+  assert.equal(followup.historicalEvidenceTransferred, false);
+  assert.deepEqual(Object.keys(followup.verifierChanges).sort(), [
+    'scripts/verify-audit-continuation-v163.mjs', 'scripts/verify-public-release-v86.mjs'
+  ]);
+  for (const [path, receipt] of Object.entries(followup.verifierChanges)) {
+    assert.equal(receipt.previousSha256, V178_VERIFIER_SUCCESSORS[path].currentSha256, path);
+    assert.equal(current.followupV178.verifierChanges.find(row => row.path === path).currentSha256,
+      receipt.previousSha256, 'Historical V178 receipt was rewritten: ' + path);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(reviewedAiToolingDigest20261104(path, receipt.previousSha256), receipt.currentSha256);
+    assert.throws(() => reviewedAiToolingDigest20261104(path, '0'.repeat(64)), /Incorrect V178 endpoint/);
+    const changed = name => name === path ? Buffer.concat([read(name), Buffer.from('\nUNREVIEWED')]) : read(name);
+    assert.throws(() => verifyReviewedVerifierV177(path, current.verifierSourceSha256V165[path], changed),
+      /Unreviewed V178 verifier/, path);
+  }
+  for (const path of ['CLAUDE.md', '.ai-tools', '.ai-tools/README.md', '.ai-tools/sources.json',
+    '.ai-tools/setup.py', '.ai-tools/.gitignore', '.ai-tools/tests', '.ai-tools/tests/test_setup.py']) {
+    const directory = path === '.ai-tools' || path === '.ai-tools/tests';
+    assert.equal(isPublicDistributionPathV86(path, { directory }), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory, built: true }), false, path);
+  }
+  for (const path of ['.ai-tools/unreviewed.py', '.ai-tools/tests/unreviewed.py', '.ai-tools/private.json'])
+    assert.equal(isPublicDistributionPathV86(path), false, path);
 });
 
 // Append to verify-audit-continuation-v163.mjs; existing test/assert/read/sha/
