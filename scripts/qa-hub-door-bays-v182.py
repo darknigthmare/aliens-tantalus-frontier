@@ -255,13 +255,18 @@ def ready(page, config, room_id):
 def walk_to(page, target, label, room_id, standing_y, tolerance=3):
     before = observe(page)
     page.locator('#hub-canvas').focus()
+    corrections, previous_distance, fine_gain = [], None, .5
     for attempt in range(24):
         current = observe(page)['player']['x']
         distance = target - current
         if abs(distance) <= tolerance:
             break
+        if previous_distance is not None and distance * previous_distance < 0:
+            fine_gain *= .5
         key = 'KeyD' if distance > 0 else 'KeyA'
+        correction = dict(attempt=attempt + 1, beforeX=current, distance=distance, key=key)
         if abs(distance) > 32:
+            correction['control'] = 'held approach'
             page.keyboard.down(key)
             try:
                 page.wait_for_function("""c=>c.right?__ATF_HUB__.player.x>=c.target-18:
@@ -270,11 +275,20 @@ def walk_to(page, target, label, room_id, standing_y, tolerance=3):
             finally:
                 page.keyboard.up(key)
         else:
-            page.keyboard.press(key, delay=max(18, min(70, abs(distance) / 270 * 1000)))
+            # An 18ms minimum can span two native frames and coast about 9px,
+            # repeatedly crossing a 3px target. Shorten real key pulses after
+            # an overshoot; retain the same attempts, tolerances and physics.
+            delay = max(1, min(70, abs(distance) / 270 * 1000 * fine_gain))
+            correction.update(control='fine pulse', requestedMs=delay, gain=fine_gain)
+            page.keyboard.press(key, delay=delay)
         settle(page)
+        correction['afterX'] = observe(page)['player']['x']
+        corrections.append(correction)
+        previous_distance = distance
     after = observe(page)
     report['nativeMoves'].append(dict(label=label, controls='A/D', targetX=target,
-        before=before['player'], after=after['player'], roomBefore=before['roomId'], roomAfter=after['roomId']))
+        before=before['player'], after=after['player'], roomBefore=before['roomId'], roomAfter=after['roomId'],
+        corrections=corrections))
     check(label + ': bounded real A/D walking reaches the calculated coordinate',
           before['roomId'] == after['roomId'] == room_id
           and abs(after['player']['x'] - target) <= tolerance

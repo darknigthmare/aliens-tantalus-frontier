@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { openSync, readSync, closeSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { openSync, readSync, closeSync, mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { HUB_DECKS } from '../src/hub-game.js';
 import { HUB_ANNEX_BY_ID_V137 } from '../src/hub-annex-registry-v137.js';
@@ -215,4 +217,170 @@ test('native workshop controls climb both connected service decks, approach the 
     subject.key('keydown','KeyE');subject.key('keyup','KeyE');advance(hub,1.2);assert.equal(hub.currentAnnexV71(),null);landing(hub,624);
     near(hub.player.x,origin.x);near(hub.player.y,origin.y);assert.deepEqual(subject.save.galaxy.resources,resources);assert.equal(hub.player.health,100);
   }finally{hub.stop();}
+});
+
+// Run the actual Python walker against production Hub physics. The host owns
+// a declared RAF schedule and input transport delay; no player field, collision
+// method or integration step is replaced after the declared Save fixture starts.
+async function nativeWalkQaDriverV182(root) {
+  const assert = (await import('node:assert/strict')).default;
+  const { HubGame } = await import(new URL('src/hub-opening-v88.js', root));
+  const { createDefaultSave } = await import(new URL('src/save.js', root));
+  const { hostV136 } = await import(new URL('scripts/forge-native-host-v136.mjs', root));
+  const { createInterface } = await import('node:readline');
+  const options = JSON.parse(process.argv[2]), host = hostV136();
+  document.createElement = () => ({ ...host.canvas, style: {}, getContext: () => host.canvas.getContext('2d') });
+  const save = createDefaultSave(); save.needsPlayerCreationV84 = false;
+  Object.assign(save.hub, { deck: options.deck, roomId: options.roomId,
+    positionX: options.x, positionY: options.standingY - 92 });
+  const hub = new HubGame(host.canvas, { onAction() {}, onPersist() {}, onStatus() {} });
+  hub.start(save.hub, { routineContextV62: { clock: save.clock, save }, onboardingV84: save.onboardingV84 });
+  globalThis.__ATF_HUB__ = hub; globalThis.__ATF_V51__ = { saveSystem: { data: save } };
+  host.canvas.focus(); hub.update(1 / 60);
+  assert.equal(hub.player.x, options.x); assert.equal(hub.player.y + hub.player.h, options.standingY);
+  const baseline = { resources: structuredClone(save.galaxy.resources), clock: structuredClone(save.clock) };
+  const frameMs = options.frameMs || 1000 / 60, pulses = [], settledPositions = [];
+  let elapsed = 0, nextFrame = options.phaseMs, frames = 0, maxSpeed = 0;
+  const advanceWall = ms => {
+    const end = elapsed + ms;
+    while (nextFrame <= end + 1e-9) {
+      const before = hub.player.x, moving = hub.player.vx !== 0;
+      hub.update(Math.min(.034, frameMs / 1000)); frames++;
+      assert.ok(Math.abs(hub.player.x - before) <= 270 * frameMs / 1000 + 1e-6);
+      assert.equal(hub.player.w, 44); assert.equal(hub.player.h, 92); assert.equal(hub.player.health, 100);
+      maxSpeed = Math.max(maxSpeed, Math.abs(hub.player.vx));
+      if (moving && hub.player.vx === 0 && !hub.keys.has('KeyA') && !hub.keys.has('KeyD'))
+        settledPositions.push({ x: hub.player.x, time: nextFrame });
+      nextFrame += frameMs;
+    }
+    elapsed = end;
+  };
+  const until = (predicate, timeout) => {
+    const deadline = elapsed + timeout;
+    while (!predicate()) {
+      if (elapsed >= deadline - 1e-9) throw Error('Native wait timed out');
+      advanceWall(Math.min(Math.max(.01, nextFrame - elapsed), deadline - elapsed));
+    }
+  };
+  const key = (type, code) => {
+    assert.ok(['KeyA', 'KeyD'].includes(code), 'Only the real A/D controls may drive this fixture');
+    advanceWall(options.keyLatencyMs || 0);
+    host.events.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), { code, repeat: false }));
+  };
+  const snapshot = () => ({ elapsed, frames, maxSpeed, pulses, settledPositions,
+    heldKeys: [...hub.keys], player: structuredClone(hub.player), baseline,
+    resources: structuredClone(save.galaxy.resources), clock: structuredClone(save.clock) });
+  console.log(JSON.stringify(snapshot()));
+  for await (const line of createInterface({ input: process.stdin })) {
+    const request = JSON.parse(line); let error = null, value = null;
+    try {
+      if (request.type === 'focus') host.canvas.focus();
+      else if (request.type === 'key') {
+        const start = { x: hub.player.x, frames, elapsed };
+        key(request.down ? 'keydown' : 'keyup', request.key);
+        if (request.press) {
+          advanceWall(request.ms || 0); key('keyup', request.key);
+          pulses.push({ key: request.key, requestedMs: request.ms, start,
+            end: { x: hub.player.x, frames, elapsed } });
+        }
+      } else if (request.type === 'predicate') {
+        const predicate = Function('return (' + request.expression + ')')();
+        until(() => predicate(request.arg), request.timeout);
+      } else if (request.type === 'evaluate') {
+        value = await Function('return (' + request.expression + ')')()(request.arg);
+      } else if (request.type === 'stop') break;
+    } catch (failure) { error = failure.message; }
+    console.log(JSON.stringify({ ...snapshot(), value: value ?? null, error }));
+  }
+}
+
+function runNativeWalkQaV182(cases) {
+  const directory = mkdtempSync(join(tmpdir(), 'door-bay-native-walk-'));
+  const root = new URL('../', import.meta.url).href, driver = join(directory, 'driver.mjs');
+  const input = join(directory, 'input.json'), output = join(directory, 'output.json');
+  const qa = process.env.ATF_QA_DOOR_SOURCE || fileURLToPath(new URL('qa-hub-door-bays-v182.py', import.meta.url));
+  writeFileSync(driver, `(${nativeWalkQaDriverV182.toString()})(${JSON.stringify(root)});\n`);
+  writeFileSync(input, JSON.stringify({ driver, qa, cases, node: process.execPath, output }));
+  const python = String.raw`import ast, json, math, subprocess, sys
+from pathlib import Path
+from types import SimpleNamespace
+spec = json.loads(Path(sys.argv[1]).read_text())
+tree = ast.parse(Path(spec['qa']).read_text())
+functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in ['walk_to', 'settle', 'observe', 'supported']]
+observe = next(n for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'OBSERVE' for t in n.targets))
+module = ast.fix_missing_locations(ast.Module(body=[observe, *functions], type_ignores=[]))
+class Page:
+    def __init__(self, case):
+        self.proc = subprocess.Popen([spec['node'], spec['driver'], json.dumps(case)],
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        line = self.proc.stdout.readline()
+        if not line: raise RuntimeError(self.proc.stderr.read())
+        self.state = json.loads(line)
+        self.keyboard = SimpleNamespace(
+            press=lambda key, delay=0: self.call(type='key', key=key, down=True, press=True, ms=delay),
+            down=lambda key: self.call(type='key', key=key, down=True),
+            up=lambda key: self.call(type='key', key=key, down=False))
+    def call(self, **request):
+        self.proc.stdin.write(json.dumps(request) + '\n'); self.proc.stdin.flush()
+        line = self.proc.stdout.readline()
+        if not line: raise RuntimeError(self.proc.stderr.read())
+        self.state = json.loads(line)
+        if self.state.get('error'): raise AssertionError(self.state['error'])
+        return self.state
+    def locator(self, selector):
+        assert selector == '#hub-canvas'
+        return SimpleNamespace(focus=lambda: self.call(type='focus'))
+    def evaluate(self, expression, arg=None):
+        return self.call(type='evaluate', expression=expression, arg=arg)['value']
+    def wait_for_function(self, expression, arg=None, timeout=30000):
+        self.call(type='predicate', expression=expression, arg=arg, timeout=timeout)
+    def close(self):
+        self.proc.stdin.write('{"type":"stop"}\n'); self.proc.stdin.flush()
+        self.proc.stdin.close(); self.proc.wait(timeout=5)
+        self.proc.stdout.close(); self.proc.stderr.close()
+results = []
+for case in spec['cases']:
+    page = Page(case)
+    report = {'nativeMoves': [], 'checks': []}
+    def check(label, condition):
+        assert condition, label
+        report['checks'].append(label)
+    namespace = {'math': math, 'report': report, 'check': check}
+    exec(compile(module, '<actual-native-door-bay-walker>', 'exec'), namespace)
+    error = None
+    try: namespace['walk_to'](page, case['target'], case['id'], case['roomId'], case['standingY'], case.get('tolerance', 3))
+    except AssertionError as failure: error = str(failure)
+    results.append({'case': case, **page.state, 'error': error, 'qaReport': report})
+    page.close()
+Path(spec['output']).write_text(json.dumps(results))
+`;
+  try {
+    execFileSync('python3', ['-c', python, input], { stdio: 'inherit', timeout: 60000 });
+    const results = JSON.parse(readFileSync(output, 'utf8'));
+    if (process.env.ATF_QA_DOOR_EVIDENCE) writeFileSync(process.env.ATF_QA_DOOR_EVIDENCE, JSON.stringify(results, null, 2) + '\n');
+    return results;
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+}
+
+test('V182 actual QA walker converges on floor and upper platform in both directions across RAF phases', () => {
+  const cases = [
+    { id: 'workshop-upper-east', roomId: 'workshop', deck: 2, x: 3283.771920433868, target: 3290, standingY: 376 },
+    { id: 'workshop-upper-west', roomId: 'workshop', deck: 2, x: 3296.228079566132, target: 3290, standingY: 376 },
+    { id: 'medical-floor-east', roomId: 'medical', deck: 1, x: 3013.0951604272054, target: 3018, standingY: 624 },
+    { id: 'medical-floor-west', roomId: 'medical', deck: 1, x: 3022.9048395727946, target: 3018, standingY: 624 }
+  ].flatMap(config => [8, 15].flatMap(keyLatencyMs => [1, 8, 15].map(phaseMs => ({
+    ...config, phaseMs, keyLatencyMs, tolerance: phaseMs === 1 ? 2.5 : 3 }))));
+  const results = runNativeWalkQaV182(cases);
+  for (const result of results) {
+    const detail = JSON.stringify({ case: result.case, error: result.error, finalX: result.player.x,
+      pulses: result.pulses, settledPositions: result.settledPositions });
+    assert.equal(result.error, null, detail);
+    assert.ok(Math.abs(result.player.x - result.case.target) <= result.case.tolerance, detail);
+    assert.equal(result.player.y + result.player.h, result.case.standingY);
+    assert.equal(result.player.grounded, true); assert.equal(result.player.climbing, false);
+    assert.ok(result.pulses.length <= 24); assert.deepEqual(result.heldKeys, []);
+    assert.ok(result.maxSpeed > 0 && result.maxSpeed <= 270);
+    assert.deepEqual(result.resources, result.baseline.resources); assert.deepEqual(result.clock, result.baseline.clock);
+    assert.equal(result.qaReport.checks.length, 2);
+  }
 });
