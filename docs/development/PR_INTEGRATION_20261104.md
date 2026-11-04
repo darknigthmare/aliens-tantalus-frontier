@@ -170,6 +170,52 @@ Le pilote enregistre désormais cette réponse synchrone à E. Il ne retente qu'
 
 Le déploiement Vercel de cette troisième tête est `READY` et référence exactement `acdbe014418a6f5619042a43133a619b7adeb2fe`. Les échecs de quota des deux premières publications ne décrivent donc plus ce preview. L'outil de lecture HTTP du déploiement répond toutefois que la connexion ne permet pas de le résoudre ou d'y accéder ; aucun contenu de `build-info.json` servi par ce preview n'a pu être vérifié. Aucune configuration d'accès n'est modifiée et aucune validation visuelle de ce déploiement n'est revendiquée.
 
+## Compléments après la quatrième exécution GitHub
+
+La quatrième tête est `efba9de725ae917a3f3cff887466d0188f4cbd22`. Actions a exécuté le candidat de fusion `1156d04469d56026a120416ac34d6e32ab4b2af3`, avec l'arbre commun `477dd57b7affa5a92c90b05ee8dc5c783232638e`. Les archives contrôlées, leurs inventaires de sources et leurs informations de build correspondent à ces octets. Les deux échecs de cette exécution sont conservés ; ils ne sont pas requalifiés par les corrections suivantes.
+
+| Workflow | Exécution | Résultat constaté |
+| --- | --- | --- |
+| Forge | [41851887626](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41851887626) | Réussi ; 725 tests Node, six rapports natifs, 249 contrôles et 26 PNG. Les 938 sources archivées correspondent à la tête publiée. |
+| Alien_base | [41851887809](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41851887809) | Réussi ; 49/49 contrôles. |
+| Gameplay | [41851887685](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41851887685) | Réussi ; 63 tests Node, cinq rapports natifs, 144 contrôles et 80 PNG. Les quatre inventaires de 550/550/552/552 sources sont inchangés avant/après et égaux à la tête publiée. |
+| Release | [41851887695](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41851887695) | Réussi ; 4 058 tests Node réussis sur 4 059, zéro échec et une fixture V175 facultative ignorée par V176 ; 26/26 rapports natifs, 756 contrôles et 378 PNG, plus 12 contrôles séparés du worker. Les six inventaires de 552 sources correspondent à la tête publiée. |
+| Excel | [41851887748](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/41851887748) | Échec conservé : 13/15 jobs réussis. Trials échoue sur la dernière acquisition Cultist à 0 ms ; ship échoue sur l'approche au sol de Durandal. |
+
+Les sorties V161 passent après une seule touche E native, `trusted=true` et acceptée, par route : le joueur rejoint le réacteur en 3,682 s et le mess en 0,644 s, dans le budget de 45 s. Aucune seconde tentative après refus n'est exercée par ce run. Les images de retour et de service sont inspectées. Les 12 contrôles worker utilisent leur shell synthétique déclaré ; ils ne constituent pas une preuve de disponibilité hors ligne de toutes les ressources du jeu.
+
+Les deux parcours de Cal réussissent 31 contrôles/37 PNG et 34 contrôles/31 PNG, soit 65 contrôles et 68 PNG. Les quatre inventaires de 529 sources et les empreintes des images sont vérifiés ; les deux recettes utilisent exactement le même Save. Chaque retour réel atteint `vehicle-bay`, deck 2, `(4296, 532)`, avec deux passages et deux arrivées attestés. L'interruption dure 96 frames et 2,374 s natives ; le déplacement reprend avec le même propriétaire d'observation. `stationToWorkTravelObserved` et `canonicalExact` restent faux.
+
+Le job crew-lifts réussit 335 contrats Node, neuf contrôles matte et trois rapports natifs, soit 279 contrôles et 212 PNG. Jun termine son retour natif à `life-support`, deck 3, `(3158, 532)`, après deux passages et deux ascenseurs. Il utilise 875,695 s sur le budget inchangé de 900 s, soit seulement 24,305 s de marge ; 9 126 RAF correspondent à environ 10,421 images/s et 310,25 s natives. Le prérequis n'applique aucun ralentissement CDP et son pilote est inchangé. Cette réussite proche de la limite ne démontre toujours pas la cause du timeout de la deuxième exécution.
+
+### Acquisition précoce du Cultist
+
+Trials à 200 ms réussit les six duels, avec 77 contrôles et 42 captures. À 0 ms, les cinq premiers profils passent ; la dernière acquisition player-captor du Cultist dépasse l'échéance, laissant 64 contrôles et 37 captures. Les 79 PNG déclarés et les 12 empreintes de Save sont vérifiés ; les deux modes utilisent les mêmes six fichiers de fixture. Les onze récupérations terminées correspondent à leur oracle sur clone. Les trois récupérations player-captor à 200 ms prennent exactement 54 ticks, avec 89, 85 et 101 PV respectivement.
+
+Le dernier duel à 0 ms est observé dès le tick 7, alors que le modèle de régression précédent commençait après 55 frames natives, au tick 57. Le premier special part avant le tick 111 à un écart de 58,468 px : le CPU récupère avant le contact et bloque le coup. Deux nouvelles tentatives précèdent les ticks 3077 et 6527. La troisième obtient réellement le hold 195 au tick 6566, puis la pause au tick 6611, avec 67 PV ; toutefois, la réponse d'acquisition revient après 55,132 s. Cette vraie prise tardive reste correctement refusée. Les décisions anciennes ayant été évincées de la trace bornée, aucun délai de lecture historique précis n'est attribué au premier départ.
+
+Le correctif suivant vérifie que la récupération ou la fatigue adverse couvre le contact estimé contre une cible immobile : préparation du special, puis trajet du saut jusqu'à la portée native de 8 px. Il projette la récupération de stamina à partir de la règle native de 24 unités/s hors attaque, garde ou stun. Cette estimation ne prédit ni le mouvement adverse, ni la discrétisation des frames, ni les délais de livraison des commandes. Elle sert uniquement à choisir le moment d'une vraie touche ; la préparation, l'événement d'attaque et le hold natif de cette même attaque restent obligatoires.
+
+Six nouveaux cas commencent après cinq frames réellement livrées au runtime. Le cas proche du départ CI passe de trois specials et 54,701 s avec l'ancien pilote à un seul special et 1,984 s avec le correctif. Les six variantes obtiennent leur hold avec le premier special accepté ; cinq prennent entre 1,968 et 2,009 s, et le voisin à 42,376 s reste explicitement conservé. Le test rouge porte sur les trois specials réellement dépensés par l'ancien pilote ; le modèle ancien obtenait sa prise avant 55 s et n'est donc pas présenté comme une reproduction exacte du dépassement navigateur.
+
+Les douze acquisitions de la matrice précédente passent aussi. Les deux continuations complètes conservent leur pause publique à exactement 54 ticks, avec 22 et 47 PV. Le KO natif sous transport variable et la prise reçue après échéance restent des échecs explicites. La suite V177 complète passe 22/22 sans exclusion, en 109,337 s. Les budgets de 55 s et 32 essais, les 600 décisions retenues, le seed, les adversaires, le runtime et les observateurs ne changent pas. Seule la prochaine exécution Chromium peut qualifier le candidat publié.
+
+### Approche au sol de Durandal avec échanges de commande lents
+
+Ship conserve V165 à 121 contrôles/20 PNG et V177 à 497 contrôles/98 PNG. V182 réussit 14 scénarios sur 15, avec 222 contrôles, 46 PNG, huit passages et les dix reprises historiques. Les quatre autres routes réussissent leur aller-retour ; chacune de leurs sorties utilise un E `trusted=true` accepté, sans nouvelle tentative après refus. Les 164 PNG de l'archive et 174 fichiers de fixtures ou métadonnées sont vérifiés, et quinze images distinctes sont inspectées.
+
+L'unique échec V182 concerne l'approche au sol de l'atelier : départ à `x=2814`, cible `x=3058`, première approche terminée à `x=3062,662`. Les corrections fines suivantes se déplacent de 8,4 à 10,9 px et oscillent autour de la cible. Le joueur reste vivant, debout, de taille 44 × 92, sans obstacle ni transition bloquante ; sa dernière erreur de 3,761 px dépasse la tolérance de 3 px.
+
+Le pont natif couvre maintenant le transport d'un appel de page et continue de délivrer les vrais frames pendant l'aller et le retour. Avec un transport déclaré de 40 ms, le pilote publié tient A/D pendant l'échange de `wait_for_function` et reproduit 24 oscillations de 8,727 px, y compris avec la composition complète de `app.js`. Les six cas de transport à 40/80/120 ms, dans les deux directions, échouent avec l'ancien pilote. Ce modèle démontre un mécanisme cohérent avec la trace ; il ne mesure pas rétrospectivement le transport Chromium.
+
+Le nouveau pilote maintient C et envoie l'appui puis le relâchement de A/D dans une seule commande Playwright `keyboard.press`. Il attend ensuite l'arrêt réel, mesure le déplacement et consigne une impulsion sans effet comme telle. Si aucun frame n'a consommé la touche, l'impulsion suivante s'allonge dans une borne de 100 ms. Cette borne concerne une commande clavier ; les budgets de parcours ne sont pas modifiés. Les six cas de transport passent en une correction. Deux cas à 10 images/s vérifient les impulsions manquées puis le déplacement réel, et deux cas reprennent l'approche complète depuis `x=2814`.
+
+La suite V178 passe 23/23, sans exclusion, en 208,65 s : 58 cas de marche, la course à la sortie cryo et les trois cas négatifs. Les grandes matrices sont exécutées par lots de huit pour conserver le watchdog de 60 s par processus ; tous leurs cas et assertions restent présents. Les tolérances de 2,5/3 px, la limite de 24 corrections, les ressources, l'horloge, la taille du joueur et les budgets de 45/90 s sont conservés. Les quinze parcours et leurs cinquante captures attendues restent à constater dans la prochaine recette Chromium.
+
+### État du preview de la quatrième tête
+
+Le déploiement Vercel `dpl_H3QK23j42Qm7Komwpgn9EDEXWPBi` est `READY` et référence exactement `efba9de725ae917a3f3cff887466d0188f4cbd22`. Ce constat porte sur ses métadonnées. Aucun contenu HTTP servi ni contrôle visuel de ce preview n'est revendiqué.
+
 ## Travaux encore distincts
 
 L'intégration ne transforme pas les 129 propositions d'armes en équipements admis, ni les 18 tenues sans visuel équipable en tenues terminées. Les trois profils AFE2 inconnus, les rapprochements à documenter, les archives primaires manquantes et les validations artistiques restent ouverts. Aucun statut de fidélité canonique ou artistique 1:1 n'est accordé par une fusion de code.
