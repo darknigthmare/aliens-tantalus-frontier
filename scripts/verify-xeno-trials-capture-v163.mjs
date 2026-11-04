@@ -181,7 +181,7 @@ function captureEventTarget(extra={}){
   emit(type,event={}){for(const fn of [...(listeners.get(type)||[])])fn({preventDefault(){},stopPropagation(){},...event});},
   closest(){return null;},click(){if(!this.disabled){this.clicks=(this.clicks||0)+1;this.onclick?.();}}},extra);
 }
-function captureRuntimeHost(){
+function captureRuntimeHost(config={}){
  const win=captureEventTarget(),doc=captureEventTarget({hidden:false,hasFocus:()=>true});
  const context=new Proxy({measureText:s=>({width:String(s).length*8}),createLinearGradient:()=>({addColorStop(){}}),
   createRadialGradient:()=>({addColorStop(){}})},{get:(o,k)=>o[k]??(()=>{})});
@@ -195,7 +195,7 @@ function captureRuntimeHost(){
  const queue=new Map();let serial=0,time=0;
  const requestAnimationFrame=fn=>{queue.set(++serial,fn);return serial;};
  const runtime=createXenoTrialsRuntimeV96({canvas,window:win,document:doc,controlsRoot:root,
-  config:{playerId:'prowler',opponentId:'import-game-dd-wy-commando',stageId:'tantalus-cargo',seed:153,difficulty:'hard',roundSeconds:120},
+  config:{playerId:'prowler',opponentId:'import-game-dd-wy-commando',stageId:'tantalus-cargo',seed:153,difficulty:'hard',roundSeconds:120,...config},
   loadImage:async path=>images.get(path)||{naturalWidth:1024,naturalHeight:1024,complete:true},
   requestAnimationFrame,cancelAnimationFrame:id=>queue.delete(id)});
  ui.runtime=runtime;
@@ -346,6 +346,186 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   }
  }finally{h.runtime.stop();}
 });
+test('recorded native keys earn a four-HP hold and only real post-release guard survives the exact recovery pause',async t=>{
+ // Fixed commands recorded from the native Python/Node bridge, not Chromium
+ // input or a saved combat state. Original file trials-low-hp-16-8.json SHA256:
+ // df4650ae5c2f69e524fdeb1e68ecfd93b249563e9cf6488d0c0ec4fccbcd28f0
+ // Recording parameters: read delay200ms, evaluate transport16ms, key8ms,
+ // phase0, seed96001 and round99s; all CPU combat and keyboard handlers native.
+ // wallTime is the bridge's declared host clock in ms. Tick/round/phase are
+ // checks, never scheduling instructions or values assigned to the engine.
+ const commands=[
+  {"key":"ArrowRight","type":"keydown","tick":109,"round":1,"phase":"active","wallTime":6335.9999999999645},
+  {"key":"KeyS","type":"keydown","tick":109,"round":1,"phase":"active","wallTime":6343.9999999999645},
+  {"key":"KeyS","type":"keyup","tick":223,"round":1,"phase":"active","wallTime":7295.9999999999645},
+  {"key":"KeyS","type":"keydown","tick":227,"round":1,"phase":"active","wallTime":7332.6666666666315},
+  {"key":"KeyS","type":"keyup","tick":313,"round":1,"phase":"active","wallTime":8048.6666666666315},
+  {"key":"ArrowRight","type":"keyup","tick":343,"round":1,"phase":"active","wallTime":8292.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":373,"round":1,"phase":"active","wallTime":8536.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":431,"round":1,"phase":"active","wallTime":9016.666666666631},
+  {"key":"KeyS","type":"keydown","tick":431,"round":1,"phase":"active","wallTime":9024.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":461,"round":1,"phase":"active","wallTime":9268.666666666631},
+  {"key":"KeyS","type":"keyup","tick":603,"round":1,"phase":"active","wallTime":10456.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":661,"round":1,"phase":"active","wallTime":10936.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":689,"round":1,"phase":"active","wallTime":11180.666666666631},
+  {"key":"KeyS","type":"keydown","tick":719,"round":1,"phase":"active","wallTime":11424.666666666631},
+  {"key":"KeyS","type":"keyup","tick":749,"round":1,"phase":"active","wallTime":11668.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":777,"round":1,"phase":"active","wallTime":11912.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":807,"round":1,"phase":"active","wallTime":12156.666666666631},
+  {"key":"KeyS","type":"keydown","tick":807,"round":1,"phase":"active","wallTime":12164.666666666631},
+  {"key":"KeyS","type":"keyup","tick":837,"round":1,"phase":"active","wallTime":12408.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":895,"round":1,"phase":"active","wallTime":12888.666666666631},
+  {"key":"KeyS","type":"keydown","tick":895,"round":1,"phase":"active","wallTime":12896.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":925,"round":1,"phase":"active","wallTime":13140.666666666631},
+  {"key":"KeyS","type":"keyup","tick":955,"round":1,"phase":"active","wallTime":13384.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":1011,"round":1,"phase":"active","wallTime":13864.666666666631},
+  {"key":"KeyS","type":"keydown","tick":1013,"round":1,"phase":"active","wallTime":13872.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":1043,"round":1,"phase":"active","wallTime":14116.666666666631},
+  {"key":"KeyS","type":"keyup","tick":1071,"round":1,"phase":"active","wallTime":14360.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":1129,"round":1,"phase":"active","wallTime":14840.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":1159,"round":1,"phase":"active","wallTime":15084.666666666631},
+  {"key":"ArrowRight","type":"keyup","tick":1187,"round":1,"phase":"active","wallTime":15328.666666666631},
+  {"key":"KeyS","type":"keydown","tick":1189,"round":1,"phase":"active","wallTime":15336.666666666631},
+  {"key":"ArrowRight","type":"keydown","tick":1217,"round":1,"phase":"active","wallTime":15580.666666666631},
+  {"key":"KeyS","type":"keyup","tick":1331,"round":1,"phase":"active","wallTime":16532.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":1389,"round":1,"phase":"active","wallTime":17012.66666666663},
+  {"key":"KeyL","type":"keydown","tick":1391,"round":1,"phase":"active","wallTime":17020.66666666663},
+  {"key":"KeyL","type":"keyup","tick":1397,"round":1,"phase":"active","wallTime":17068.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":1425,"round":1,"phase":"active","wallTime":17312.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":1483,"round":1,"phase":"active","wallTime":17792.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":1513,"round":1,"phase":"active","wallTime":18036.66666666663},
+  {"key":"KeyL","type":"keydown","tick":1655,"round":1,"phase":"active","wallTime":19224.66666666663},
+  {"key":"KeyL","type":"keyup","tick":1661,"round":1,"phase":"active","wallTime":19272.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":1747,"round":1,"phase":"active","wallTime":19988.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":1775,"round":1,"phase":"active","wallTime":20232.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":1919,"round":1,"phase":"active","wallTime":21420.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":1947,"round":1,"phase":"active","wallTime":21664.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":1977,"round":1,"phase":"active","wallTime":21908.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":2007,"round":1,"phase":"active","wallTime":22152.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":2035,"round":1,"phase":"active","wallTime":22396.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":2093,"round":1,"phase":"active","wallTime":22876.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":2123,"round":1,"phase":"active","wallTime":23120.66666666663},
+  {"key":"KeyS","type":"keydown","tick":2151,"round":1,"phase":"active","wallTime":23364.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":2209,"round":1,"phase":"active","wallTime":23844.66666666663},
+  {"key":"KeyS","type":"keyup","tick":2211,"round":1,"phase":"active","wallTime":23852.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":2239,"round":1,"phase":"active","wallTime":24096.66666666663},
+  {"key":"KeyS","type":"keydown","tick":2269,"round":1,"phase":"active","wallTime":24340.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":2299,"round":1,"phase":"active","wallTime":24584.66666666663},
+  {"key":"KeyS","type":"keyup","tick":2413,"round":1,"phase":"active","wallTime":25536.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":2441,"round":1,"phase":"active","wallTime":25780.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":2499,"round":1,"phase":"active","wallTime":26260.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":2529,"round":1,"phase":"active","wallTime":26504.66666666663},
+  {"key":"KeyS","type":"keydown","tick":2529,"round":1,"phase":"active","wallTime":26512.66666666663},
+  {"key":"ArrowRight","type":"keydown","tick":2615,"round":1,"phase":"active","wallTime":27228.66666666663},
+  {"key":"KeyS","type":"keyup","tick":2617,"round":1,"phase":"active","wallTime":27236.66666666663},
+  {"key":"KeyL","type":"keydown","tick":2617,"round":1,"phase":"active","wallTime":27244.66666666663},
+  {"key":"KeyL","type":"keyup","tick":2623,"round":1,"phase":"active","wallTime":27292.66666666663},
+  {"key":"ArrowRight","type":"keyup","tick":2653,"round":1,"phase":"active","wallTime":27536.66666666663}
+ ];
+ assert.equal(commands.length,66);
+ const results={};let firstFloor=null;
+ for(const guard of [false,true]){
+  const h=captureRuntimeHost({seed:96001,roundSeconds:99});
+  try{
+   await h.start();h.frame(55);
+   const initial=h.runtime.getState();
+   assert.equal(initial.tick,57);assert.equal(initial.round,1);assert.equal(initial.phase,'active');
+   assert.equal(initial.config.seed,96001);assert.equal(initial.config.roundSeconds,99);
+   assert.equal(initial.fighters[0].hp,185);assert.equal(initial.fighters[1].hp,220);
+   assert.equal(initial.opponentInputSourceV163,'cpu');
+   const qa=captureQaObserver(h),binding={stage:'floor',timeoutMs:45000,matchId:initial.config.matchId,
+    round:initial.round,fighterIds:initial.fighters.map(f=>f.id),sides:initial.fighters.map(f=>f.side),
+    attackerSide:'player',targetSide:'opponent',targetId:'import-game-dd-wy-commando',
+    holdId:null,sinceTick:initial.tick,after:true};
+   // Match the bridge's 60Hz frame delivery from its ordinary post-start clock.
+   // No tick alignment, HP/pose edit, artificial opponent input or runtime patch.
+   let wallTime=h.now(),nextFrame=wallTime+1000/60;
+   const advanceTo=target=>{
+    assert.ok(Number.isFinite(target)&&target>=wallTime);
+    while(nextFrame<=target+1e-7){wallTime=nextFrame;h.frame(1,1000/60);nextFrame+=1000/60;}
+    wallTime=target;
+   };
+   const waitFor=(predicate,budgetMs)=>{
+    const deadline=wallTime+budgetMs;
+    while(!predicate()&&wallTime<deadline)advanceTo(Math.min(nextFrame,deadline));
+    assert.ok(predicate(),'The declared native replay wait exceeded '+budgetMs+'ms');
+   };
+   assert.ok(qa.observe(binding).armed);
+   for(const [index,command] of commands.entries()){
+    advanceTo(command.wallTime);
+    const before=h.runtime.getState();
+    assert.deepEqual([before.tick,before.round,before.phase],[command.tick,command.round,command.phase],
+     'Recorded command '+index+' must reach its native tick without state adjustment');
+    assert.equal(before.config.matchId,initial.config.matchId);
+    h.key(command.key,command.type);
+   }
+   waitFor(()=>qa.out('floor').done,45000);
+   const floor=qa.out('floor');assert.equal(floor.error,null);assert.equal(floor.ready,true);
+   const held=h.runtime.getState();
+   assert.equal(held.paused,true);assert.equal(held.tick,2701);assert.equal(held.round,1);
+   assert.equal(held.fighters[0].hp,4);assert.equal(held.fighters[1].hp,187);
+   assert.equal(held.grappleV153.id,84);assert.equal(held.grappleV153.bornTick,2656);
+   assert.equal(held.grappleV153.attacker,'player');assert.equal(held.grappleV153.target,'opponent');
+   assert.equal(held.grappleV153.escapeProgress,33);assert.equal(held.result,null);
+   assert.equal(h.element('pause').clicks,1);assert.equal(qa.encodings.length,0);
+   assert.equal(floor.floor.state.match.tick,held.tick);
+   assert.equal(held.captureViewsV163.length,2);
+   assert.ok(held.captureViewsV163.every(v=>v.fullFloorPin&&v.pairedContacts));
+   if(firstFloor)assert.deepEqual(held,firstFloor,'Both continuations must start from the same natively earned state');
+   else firstFloor=clone(held);
+   assert.ok((await qa.observe({...captureBinding(held),stage:'post',timeoutMs:15000})).armed);
+   // Continuation input transport is the same declared 8ms per key as the
+   // recording. It advances real RAF on both paths and never changes a fighter.
+   const key=(code,type)=>{
+    advanceTo(wallTime+4);h.key(code,type);advanceTo(wallTime+4);
+   };
+   key('KeyP','keydown');key('KeyP','keyup');
+   waitFor(()=>qa.out('post').release||qa.out('post').done,15000);
+   const post=qa.out('post');assert.equal(post.error,null);assert.ok(post.struggle&&post.release);
+   const release=post.release.state.match;
+   assert.equal(release.tick,2741);
+   assert.equal(release.grappleV153,undefined);assert.equal(release.fighters[0].hp,4);
+   const ends=release.events.filter(e=>e.type==='grapple-end-v153'&&e.grappleId===held.grappleV153.id);
+   assert.equal(ends.length,1);assert.equal(ends[0].reason,'escaped');
+   if(guard)key('KeyS','keydown');
+   try{
+    waitFor(()=>post.done,15000);
+   }finally{if(guard)key('KeyS','keyup');}
+   const final=h.runtime.getState(),afterRelease=final.events.filter(e=>e.tick>=release.tick);
+   results[guard?'guarded':'unguarded']={floorTick:held.tick,releaseTick:release.tick,
+    finalTick:final.tick,hp:final.fighters[0].hp,phase:final.phase,paused:final.paused,
+    blocks:afterRelease.filter(e=>e.type==='block'&&e.side==='player'),
+    hits:afterRelease.filter(e=>e.type==='hit'&&e.side==='player'),error:post.error};
+   if(guard){
+    assert.equal(post.error,null);assert.equal(post.ready,true);
+    assert.equal(final.paused,true);assert.equal(final.phase,'active');assert.equal(final.result,null);
+    assert.equal(final.fighters[0].hp,3);assert.equal(final.grappleV153,undefined);
+    assert.equal(final.tick-release.tick,54);assert.equal(post.pauseAction.observedNativeTicks,54);
+    assert.equal(results.guarded.blocks.length,1);assert.equal(results.guarded.blocks[0].damage,1);
+    assert.equal(results.guarded.blocks[0].tick,2794);
+    assert.equal(results.guarded.hits.length,0);
+    assert.equal(post.recovered.state.match.fighters[0].previousInput.guard,true);
+    assert.equal(final.fighters[0].previousInput.guard,false);assert.equal(final.fighters[0].rearmControls.guard,false);
+    const exported=qa.exportFrames({stage:'post',fields:['struggle','release','recovered']});
+    assert.equal(exported.recovered.state.match.tick,final.tick);assert.equal(exported.recovered.state.match.fighters[0].hp,3);
+    assert.ok(qa.encodings.every(frame=>frame.paused));
+    h.frame(120,1000/60);assert.deepEqual(h.runtime.getState(),final,'Exports and delayed reads cannot advance the paused combat');
+   }else{
+    assert.equal(final.fighters[0].hp,0);assert.equal(final.phase,'round-over');
+    assert.equal(final.tick,2797);
+    assert.equal(final.roundWinner,'opponent');assert.equal(final.roundReason,'ko');
+    assert.equal(post.ready,false);assert.match(post.error,/Recovery continuation requires/);
+    assert.equal(post.pauseAction,undefined);assert.equal(h.element('pause').clicks,1);
+    assert.equal(results.unguarded.blocks.length,0);assert.ok(results.unguarded.hits.some(e=>e.damage===4));
+    assert.throws(()=>qa.exportFrames({stage:'post',fields:['recovered']}),/Recovery continuation requires/);
+    assert.equal(qa.encodings.length,0);
+   }
+  }finally{h.runtime.stop();}
+ }
+ assert.equal(results.guarded.releaseTick,results.unguarded.releaseTick);
+ t.diagnostic(JSON.stringify({method:'Recorded native command fixture; declared RAF/DOM/input transport, no Chromium or acquisition-policy guarantee.',...results}));
+});
+
 test('capture QA rejects unavailable public pause, changed tick or identity, ended holds and lost floor support',()=>{
  // Adversarial read/control fixtures are cloned from a real engine hold and
  // its real rendered receipt. They test rejection, never claim a UI playthrough.
