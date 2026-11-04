@@ -25,10 +25,61 @@ READ = '() => globalThis.__ATF_XENO_TRIALS_V96__?.snapshot()'
 TASKS = ['ART153-03', 'ART153-04', 'ART153-05', 'ART153-11', 'ART153-12', 'ART153-18', 'ART153-19', 'ART153-25', 'ART153-26']
 TARGETS = ['import-game-dd-wy-commando', 'import-game-dd-guardian', 'dd-darwin-era-cultist']
 
-def fixture(ids, name):
+def fixture(ids, name, directory=None):
     code = """import{createDefaultSave}from'./src/save.js';import{XENO_TRIALS_FIGHTERS_V96 as roster}from'./src/xeno-trials-data-v96.js';const s=createDefaultSave();s.needsPlayerCreationV84=false;s.player.name=process.argv[1];s.scene='command';s.settings.reducedMotion=false;s.xenoTrialsV96.unlocked=[...new Set([...s.xenoTrialsV96.unlocked,...JSON.parse(process.argv[2])])];console.log(JSON.stringify({save:s,roster:roster.map(f=>({id:f.id,label:f.label,family:f.family}))}));"""
     result = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', code, name, json.dumps(ids)], cwd=REPO))
-    return json.dumps(result['save']).encode(), result['roster']
+    raw = json.dumps(result['save']).encode()
+    if directory is not None:
+        directory = Path(directory).resolve()
+        if directory == REPO or REPO in directory.parents:
+            raise ValueError('Save fixtures must remain outside the repository')
+        directory.mkdir(parents=True, exist_ok=True)
+        path = (directory / (name + '.json')).resolve()
+        if path.parent != directory:
+            raise ValueError('A fixture name cannot leave its directory')
+        if path.exists():
+            cached = path.read_bytes()
+            expected, actual = json.loads(raw), json.loads(cached)
+            if not isinstance(actual, dict) or any(type(actual.get(k)) is not int
+                    or not 0 <= actual[k] <= 8640000000000000 for k in ('createdAt', 'updatedAt')):
+                raise ValueError('Reused fixture requires an ordinary save object and valid root dates')
+            # These are the only nondeterministic fields of createDefaultSave.
+            # Compare everything else, including credits, progress, roster and IDs.
+            for key in ('createdAt', 'updatedAt'):
+                expected[key] = actual[key] = None
+            if json.dumps(actual, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
+                raise ValueError('Reused fixture differs from the generated ordinary save beyond root dates')
+            raw = cached
+        else:
+            path.write_bytes(raw)
+    return raw, result['roster']
+
+def delay_client_reads(page, delay_ms):
+    if type(delay_ms) is not int or delay_ms not in (0, 200):
+        raise ValueError('Client read delay must be exactly 0 or 200ms')
+    if getattr(page, '_atf_client_read_delay_v181', None) is not None:
+        raise ValueError('Client read delay can be installed only once per Page')
+    receipt = {'method': 'Python wait before and after Page.evaluate only; keyboard, locators, wait_for_function and browser scheduler unchanged.',
+               'delayMsPerEvaluate': delay_ms, 'beforeMs': delay_ms // 2, 'afterMs': delay_ms // 2,
+               'evaluateCalls': 0, 'totalRequestedSleepMs': 0, 'measuredSleepSeconds': 0,
+               'runtimeFieldsWritten': False, 'schedulerPatched': False, 'injectedController': False}
+    original = page.evaluate
+    def wait_half():
+        if delay_ms:
+            started = time.monotonic()
+            time.sleep(delay_ms / 2000)
+            receipt['measuredSleepSeconds'] += time.monotonic() - started
+            receipt['totalRequestedSleepMs'] += delay_ms // 2
+    def evaluate(expression, *args, **kwargs):
+        receipt['evaluateCalls'] += 1
+        wait_half()
+        try:
+            return original(expression, *args, **kwargs)
+        finally:
+            wait_half()
+    page.evaluate = evaluate
+    page._atf_client_read_delay_v181 = receipt
+    return receipt
 
 def observed(page):
     return page.evaluate(READ)
@@ -113,7 +164,7 @@ CAPTURE_OBSERVER = r'''c=> {
       if(h){floorHoldId??=h.id;if(h.id!==floorHoldId){fail('A later hold cannot replace first floor contact');return;}
         if(c.attackEventId!==undefined){
           const contact=m.events.find(e=>e.type==='grapple-start-v153'&&e.grappleId===h.id),
-            attack=contact&&[...m.events].reverse().find(e=>e.type==='attack'&&e.side===c.attackerSide&&e.id<contact.id);
+            attack=contact&&m.events.findLast(e=>e.type==='attack'&&e.side===c.attackerSide&&e.id<contact.id);
           if(!attack||attack.kind!=='special'||attack.id!==c.attackEventId){
             fail('First native hold does not belong to the observed accepted special');return;}}
         const r=receipt(m,'capture');
@@ -147,8 +198,6 @@ CAPTURE_OBSERVER = r'''c=> {
     }
     requestAnimationFrame(sample);
   }
-  // The current canvas is already painted. Protect an admissible floor now,
-  // before a later native RAF or a Python metadata transfer can consume it.
   sample();
   return{armed:true};
 }
@@ -176,20 +225,12 @@ def wait_observation(page, stage, field, timeout):
 def get_frame(page):
     return page.evaluate('''()=>({state:globalThis.__ATF_XENO_TRIALS_V96__.snapshot(),png:document.querySelector('[data-xt="canvas"]').toDataURL('image/png')})''')
 
-# Observe the real rendered startup before a Python/PNG round trip can miss
-# it. Only this detached observer is written; combat, clocks and keys stay
-# owned by the native game. Encoding waits until an immutable bitmap exists.
+# Observe startup before Python receives it and arm the same special's first
+# floor observer here. Its only control action remains the declared public
+# pause click at real floor contact. Combat, clocks and keys stay native.
 PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
- if(prior){
-  const child=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor;
-  if(child?.expected.startupAttemptNumber===prior.expected.attemptNumber
-    &&child.expected.attackEventId===prior.accepted?.attackEventId){
-   if(child.ready)return{error:'A completed first native floor cannot be replaced by a later attempt'};
-   child.cancelled=true;
-  }
-  prior.cancelled=true;
- }
+ if(prior)prior.cancelled=true;
  const out=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__={expected:c,ready:false,done:false,accepted:null,frame:null,error:null};
  const started=performance.now();
  function sample(){
@@ -213,12 +254,12 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
     attackEventTick:event.tick,frameTick:m.tick,attackAge:attack.age,clip:cue.clip,
     observation:'read-only-native-raf-bitmap-before-png-encoding'}};
    if(c.captureFloor){
-    const armFloor=globalThis.__ATF_ARM_CAPTURE_FLOOR_V179__;
-    if(typeof armFloor!=='function'){out.done=true;out.error='Accepted startup has no installed floor observer';return;}
-    out.floorArm=armFloor({stage:'floor',timeoutMs:45000,matchId:m.config.matchId,round:m.round,
-      fighterIds:m.fighters.map(f=>f.id),sides:m.fighters.map(f=>f.side),
-      attackerSide:'player',targetSide:m.fighters[1].side,targetId:m.fighters[1].id,
-      holdId:null,sinceTick:m.tick,after:c.after,attackEventId:event.id,startupAttemptNumber:c.attemptNumber});
+    const arm=globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__;
+    if(typeof arm!=='function'){out.done=true;out.error='Startup has no installed first-floor observer';return;}
+    out.floorArm=arm({stage:'floor',timeoutMs:45000,matchId:m.config.matchId,round:m.round,
+     fighterIds:m.fighters.map(f=>f.id),sides:m.fighters.map(f=>f.side),
+     attackerSide:'player',targetSide:m.fighters[1].side,targetId:m.fighters[1].id,
+     holdId:null,sinceTick:m.tick,after:c.after,attackEventId:event.id});
     if(out.floorArm.error){out.done=true;out.error=out.floorArm.error;return;}
    }
    out.ready=true;out.done=true;return;
@@ -230,22 +271,53 @@ PLAYER_STARTUP_OBSERVER_V177 = r'''c=>{
  requestAnimationFrame(sample);return{armed:true,attemptNumber:c.attemptNumber};
 }'''
 
-# Cancelling/replacing an attempt also cancels its still-pending QA child.
-# A successful acquisition keeps the same floor observer until its public pause.
-PLAYER_STARTUP_CANCEL_V179 = r'''keepFloor=>{
- const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(!o)return;
- o.cancelled=true;
- const child=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor;
- if(!keepFloor&&child?.expected.startupAttemptNumber===o.expected.attemptNumber
-   &&child.expected.attackEventId===o.accepted?.attackEventId)child.cancelled=true;
+PLAYER_STARTUP_EXPORT_V179 = r'''expected=>{
+ const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__,f=o?.frame,m=f?.state?.match,p=f?.preparationProof;
+ if(!o?.ready||!m||!p||m.config.matchId!==expected.matchId||m.round!==expected.round
+   ||JSON.stringify(m.fighters.map(f=>[f.id,f.side]))!==JSON.stringify(expected.participants)
+   ||['attackId','attackEventId','attackEventTick','frameTick','attackAge','clip']
+     .some(k=>p[k]!==expected.proof[k])||o.accepted?.attackEventId!==p.attackEventId)return null;
+ return{state:f.state,png:f.bitmap.toDataURL('image/png'),preparationProof:p};
 }'''
 
-def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
+def capture_acquisition_diagnostic(trace, limit=3000):
+    """Bounded CI evidence; never serialize full matches, events or pixels."""
+    def actor(value):
+        value = value or {}
+        attack = value.get('attack') or {}
+        return {**{k: value.get(k) for k in ('x', 'y', 'hp', 'stamina', 'stun', 'guard', 'specialCooldown')},
+                'attack': {k: attack.get(k) for k in ('kind', 'age')},
+                'specials': (value.get('stats') or {}).get('specials')}
+    observations = [{**{k: row.get(k) for k in ('tick', 'round', 'phase', 'gap', 'targetThreat', 'targetRecovery')},
+                     'player': actor(row.get('player')), 'target': actor(row.get('target'))}
+                    for row in trace.get('observations', [])[-3:]]
+    attempts = [{**{k: row.get(k) for k in ('number', 'nativeSpecialAccepted', 'attackEventId')},
+                 'before': {k: row.get('before', {}).get(k) for k in ('tick', 'round', 'gap')},
+                 'after': {k: (row.get('after') or {}).get(k) for k in ('tick', 'round', 'gap')}}
+                for row in trace.get('attempts', [])[-2:]]
+    data = {'profile': str(trace.get('profile', ''))[:80], 'status': str(trace.get('status', ''))[:16],
+            'elapsedSeconds': trace.get('elapsedSeconds'), 'timeLimitSeconds': trace.get('timeLimitSeconds'),
+            'attemptLimit': trace.get('attemptLimit'), 'attemptsTotal': len(trace.get('attempts', [])),
+            'observations': observations, 'attempts': attempts,
+            'inputResets': [{k: row.get(k) for k in ('tick', 'round', 'phase', 'presentationBlocked', 'releasedMove', 'releasedGuard')}
+                            for row in trace.get('inputResets', [])[-3:]],
+            'terminal': {k: (trace.get('terminalBeforeCapture') or {}).get(k) for k in ('tick', 'round', 'winner', 'reason')}}
+    encode = lambda: json.dumps(data, separators=(',', ':'), ensure_ascii=True)
+    for key in ('observations', 'attempts', 'inputResets'):
+        while len(encode()) > limit and data[key]:
+            data[key].pop(0)
+            data['diagnosticTruncated'] = True
+    encoded = encode()
+    if len(encoded) > limit:
+        return json.dumps({'profile': data['profile'], 'status': data['status'], 'diagnosticTruncated': True})
+    return encoded
+
+def acquire_player_capture(page, after, trace):
     # The Prowler and these humans have different front-biased bodies. Their
     # pivot distance is not the V153 contact test. All imports below only read
     # the public snapshot through the same pure geometry/spec functions used
     # by combat; movement, guard and every special still use actual keys.
-    read_contact = r'''async()=>{
+    read_contact = r'''async c=>{
       const G=await import('/src/xeno-trials-geometry-v105.js'),
         A=await import('/src/xeno-trials-signatures-v147.js'),
         D=await import('/src/xeno-trials-data-v96.js'),
@@ -255,6 +327,17 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
         playerBody=G.getXenoTrialsBodyBoundsV105(a),targetBody=G.getXenoTrialsBodyBoundsV105(b),
         special=A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(a.id),'special',E.XENO_TRIALS_ATTACKS_V96.special),
         targetAttack=b.attack?A.getXenoTrialsAttackV147(D.getXenoTrialsFighterV96(b.id),b.attack.kind,E.XENO_TRIALS_ATTACKS_V96[b.attack.kind]):null;
+      const prior=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__,p=prior?.expected;
+      // Prepare evidence in the same synchronous callback as this pose read.
+      // This installs only observers: every combat decision and key stays in Python.
+      if(c&&m.phase==='active'&&!m.paused&&!m.presentation?.blocksSimulation&&!m.grappleV153
+        &&!a.attack&&a.stun<=0&&a.y===0&&a.specialCooldown<=0&&a.stamina>=special.cost
+        &&(!p||p.matchId!==m.config.matchId||p.round!==m.round||p.attemptNumber!==c.attemptNumber)){
+        globalThis.__ATF_ARM_PLAYER_STARTUP_V181__({matchId:m.config.matchId,round:m.round,
+          playerId:a.id,targetId:b.id,attemptNumber:c.attemptNumber,
+          lastEventId:Math.max(-1,...m.events.map(e=>e.id)),specialsBefore:a.stats.specials,
+          specialStartup:special.startup,after:c.after,captureFloor:true,timeoutMs:c.timeoutMs});
+      }
       return{match:m,direction,gap:G.getXenoTrialsBodyGapV105(a,b,direction),playerBody,targetBody,
         targetAhead:(targetBody.center-playerBody.center)*direction>=0,
         verticalOverlap:playerBody.bottom<=targetBody.top&&targetBody.bottom<=playerBody.top,
@@ -262,22 +345,25 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
         targetThreat:!!targetAttack&&b.attack.age<targetAttack.startup+targetAttack.active,
         targetRecovery:!!targetAttack&&b.attack.age>=targetAttack.startup+targetAttack.active,
         startupObservation:(()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;return o?{
-          ready:o.ready,accepted:o.accepted,error:o.error,attemptNumber:o.expected.attemptNumber}:null;})()};
+          ready:o.ready,accepted:o.accepted,error:o.error,attemptNumber:o.expected.attemptNumber,
+          matchId:o.expected.matchId,round:o.expected.round,
+          frame:o.ready&&o.frame?{state:o.frame.state,preparationProof:o.frame.preparationProof,
+            deferredStartupBitmapV177:true}:null}:null;})()};
     }'''
     started = time.monotonic()
     deadline = started + 55
     trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
                   'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [],
-                  'policy': 'Real keys: approach using pure V105 body gap to <=6px (V153 admission <=8px), guard visible attack startup/active at contact, then special during observed target recovery when grounded, unstunned, affordable and cooldown zero. No match field is assigned.'})
+                  'policy': 'Real Python-driven keys: approach using pure V105 body gap to <=6px (V153 admission <=8px); guard visible startup/active threats at contact and release during rest/recovery so ordinary stamina can recharge; press special during observed target recovery when both grounded, player unstunned, affordable and cooldown zero. Startup evidence is armed within the same pose read, without emitting controls. No match field is assigned.'})
     held = None
     guarding = False
+    control_round = None
+    prepared_attempt = None
+    prepared_round = None
     preparations = {}
-    observed_preparation_ids = set()
     last_observation_tick = -120
-    trace['declaredStartupReadLatencyMs'] = transfer_delay_ms
-    # Only a QA-local function is installed. The accepted startup RAF arms it
-    # before any external metadata read; combat remains keyboard/engine-owned.
-    page.evaluate('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V179__=(' + CAPTURE_OBSERVER + ');}')
+    page.evaluate('()=>{globalThis.__ATF_ARM_CAPTURE_FLOOR_V207__=(' + CAPTURE_OBSERVER
+                  + ');globalThis.__ATF_ARM_PLAYER_STARTUP_V181__=(' + PLAYER_STARTUP_OBSERVER_V177 + ');}')
 
     def summarize(value):
         m = value['match']
@@ -293,11 +379,20 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
 
     try:
         while time.monotonic() < deadline:
-            value = page.evaluate(read_contact)
+            value = page.evaluate(read_contact, {'attemptNumber': len(trace['attempts']) + 1,
+                'after': after, 'timeoutMs': max(1, (deadline-time.monotonic())*1000)})
             if value is None:
                 raise AssertionError('Native match disappeared during keyboard capture acquisition')
             m = value['match']
+            if trace['attempts'] and 'after' not in trace['attempts'][-1]:
+                # First post-key pose, received with the next normal loop read.
+                trace['attempts'][-1]['after'] = summarize(value)
             startup = value.get('startupObservation')
+            if startup and startup.get('matchId') == m['config']['matchId'] and startup.get('round') == m['round'] \
+                    and (prepared_attempt != startup['attemptNumber'] or prepared_round != m['round']):
+                prepared_attempt = startup['attemptNumber']
+                prepared_round = m['round']
+                trace.setdefault('prearmedAttempts', []).append({'number': prepared_attempt, 'round': prepared_round, 'tick': m['tick']})
             if startup and startup.get('accepted'):
                 acceptance = startup['accepted']
                 attempt = next((a for a in trace['attempts'] if a['number'] == acceptance['attemptNumber']), None)
@@ -306,13 +401,10 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                     attempt['attackEventId'] = acceptance['attackEventId']
                     attempt['acceptanceObservedTick'] = acceptance['observedTick']
             if startup and startup['ready'] and startup['accepted']['attackEventId'] not in preparations:
-                frame = page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
-                  if(!o?.ready||!o.frame)return null;
-                  return{state:o.frame.state,preparationProof:o.frame.preparationProof,deferredStartupBitmapV177:true};}''')
+                frame = startup.get('frame')
                 if frame:
                     proof = frame['preparationProof']
                     preparations[proof['attackEventId']] = frame
-                    observed_preparation_ids.add(proof['attackId'])
                     trace['preparations'].append(proof)
             sample = summarize(value)
             trace['lastObservation'] = sample
@@ -342,9 +434,26 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                 trace['terminalBeforeCapture'] = {'tick': m['tick'], 'round': m['round'],
                     'winner': result.get('winner'), 'reason': result.get('reason')}
                 raise AssertionError('Native match ended before keyboard capture: ' + json.dumps(trace['terminalBeforeCapture'], separators=(',', ':')))
+            blocked = m['phase'] != 'active' or m.get('paused') or m.get('presentation', {}).get('blocksSimulation')
+            if m['round'] != control_round or blocked:
+                if held:
+                    page.keyboard.up(held)
+                if guarding:
+                    page.keyboard.up('KeyS')
+                if held or guarding or m['round'] != control_round:
+                    trace.setdefault('inputResets', []).append({'tick': m['tick'], 'round': m['round'],
+                        'phase': m['phase'], 'presentationBlocked': bool(m.get('presentation', {}).get('blocksSimulation')),
+                        'releasedMove': held, 'releasedGuard': guarding})
+                held = None
+                guarding = False
+                control_round = m['round']
+                if blocked:
+                    page.wait_for_timeout(20)
+                    continue
             a, b = m['fighters']
-            # The strict startup RAF already owns its detached bitmap. Do not
-            # encode a fallback PNG while live combat can consume this attempt.
+            # The read-only RAF observer already copied the exact startup bitmap.
+            # Transfer its metadata with this pose read; encode pixels only after
+            # the matching first-floor callback has used the real pause button.
             contact = value['targetAhead'] and -8 <= value['gap'] <= 6 and value['verticalOverlap']
             desired = ('ArrowRight' if value['direction'] > 0 else 'ArrowLeft') if value['gap'] > 6 else None
             if desired != held:
@@ -353,7 +462,11 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                 held = desired
                 if held:
                     page.keyboard.down(held)
-            want_guard = bool(contact and value['targetThreat'] and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] > 1)
+            can_special = (not a.get('attack') and a['stun'] <= 0 and a['y'] == 0
+                           and b['y'] == 0 and b['vy'] == 0
+                           and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
+            want_guard = bool(contact and value['targetThreat']
+                              and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] > 1)
             if want_guard != guarding:
                 if want_guard:
                     page.keyboard.down('KeyS')
@@ -361,40 +474,22 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
                     page.keyboard.up('KeyS')
                 guarding = want_guard
             ready = (m['phase'] == 'active' and not m.get('paused') and contact
-                     and value['targetRecovery'] and not a.get('attack')
-                     and a['stun'] <= 0 and a['y'] == 0 and b['y'] == 0 and b['vy'] == 0
-                     and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
+                     and value['targetRecovery'] and can_special)
             if ready:
                 if len(trace['attempts']) >= trace['attemptLimit']:
                     raise AssertionError('Native keyboard capture reached its disclosed attempt limit')
                 attempt = {'number': len(trace['attempts']) + 1, 'before': sample,
                            'elapsedSeconds': time.monotonic() - started}
                 trace['attempts'].append(attempt)
-                armed = page.evaluate(PLAYER_STARTUP_OBSERVER_V177, dict(
-                    matchId=m['config']['matchId'], round=m['round'], playerId=a['id'], targetId=b['id'],
-                    attemptNumber=attempt['number'], lastEventId=max((e['id'] for e in m['events']), default=-1),
-                    specialsBefore=a['stats']['specials'], specialStartup=value['specialStartup'], after=after,
-                    timeoutMs=max(1, (deadline-time.monotonic())*1000), captureFloor=True))
-                assert not armed.get('error'), armed.get('error')
+                assert prepared_attempt == attempt['number'] and prepared_round == m['round']
                 page.keyboard.press('KeyL', delay=40)
-                if transfer_delay_ms:
-                    # Deliberately delay only the external read; native RAF,
-                    # inputs and the original55s acquisition budget continue.
-                    page.wait_for_timeout(transfer_delay_ms)
-                after_press = page.evaluate(read_contact)
-                if after_press:
-                    attempt['after'] = summarize(after_press)
-                    attempt['nativeSpecialAccepted'] = after_press['match']['fighters'][0]['stats']['specials'] > a['stats']['specials']
-                    if attempt['nativeSpecialAccepted']:
-                        event = next((e for e in reversed(after_press['match']['events']) if e['type'] == 'attack' and e['side'] == 'player' and e['kind'] == 'special'), None)
-                        attempt['attackEventId'] = event['id'] if event else None
             page.wait_for_timeout(20)
         raise AssertionError('Keyboard Prowler did not earn a native capture before the deadline')
     except Exception as e:
         trace.update({'status': 'failed', 'error': str(e), 'elapsedSeconds': time.monotonic() - started})
         raise
     finally:
-        page.evaluate(PLAYER_STARTUP_CANCEL_V179, trace.get('status') == 'captured')
+        page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;if(o)o.cancelled=true;}''')
         if held:
             page.keyboard.up(held)
         if guarding:
@@ -440,8 +535,9 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--comparison-stage', choices=['before', 'after'], default='after')
     p.add_argument('--roles', choices=['cpu-captor', 'player-captor', 'both'], default='both')
-    p.add_argument('--startup-read-latency-ms', type=int, choices=[0, 700], default=0,
-                   help='Declared external read delay after each real player special; native RAF and original budgets continue.')
+    p.add_argument('--client-read-delay-ms', type=int, choices=[0, 200], default=0,
+                   help='Declared Python delay around Page.evaluate only, split equally before/after; native keys are unchanged')
+    p.add_argument('--fixture-dir', type=Path, help='Reuse exact generated Save-picker fixtures outside the repository')
     args = p.parse_args()
     out = args.output.resolve()
     if out == REPO or REPO in out.parents:
@@ -449,6 +545,9 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     after = args.comparison_stage == 'after'
     report = {'status': 'running', 'comparisonStage': args.comparison_stage, 'taskIds': TASKS, 'checks': [], 'captures': [], 'profiles': [], 'pageErrors': [], 'requestFailures': [], 'httpErrors': [],
+              'qaDriverSha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'clientReadDelay': {'delayMsPerEvaluate': args.client_read_delay_ms, 'profiles': []},
+              'fixtureDirectory': str(args.fixture_dir.resolve()) if args.fixture_dir else None,
               'scope': 'Six production menu duels on real browser RAF: three original target identities, both captor roles/directions, actual native startup/contact/floor hold/guard resistance/escape/recovery, a synchronized DOM click on the production pause button, keyboard resume and public abandonment. Additional art/geometry comparisons are declared fixtures.',
               'limits': ['Save fixture unlocks four historical pilots without earning those unlocks; no credits/HP/positions/results/clock are fabricated.', 'Original native art and estimated body-length normalization, not canonical choreography or franchise 1:1 certification.', 'Authoritative standing collision bodies remain V153; visible floor pose/root offset is disclosed in receipts.', 'Recovery is presentation only and yields immediately to a new target action.', 'Automated keyboard/menu scenarios; not human playtesting.', 'The first observed floor frame activates the real public pause button with DOM click in the same RAF callback; this is an explicit UI action, not a read-only observation or a trusted physical click. No direct runtime pause API is called; no scheduler or match field is assigned.']}
     def check(label, passed, evidence=None, failure_detail=None):
@@ -467,8 +566,6 @@ def main():
             raw = response.read()
         info = json.loads(raw)
         return {'sourceCommit': info['sourceCommit'], 'buildId': info['buildId'], 'buildInfoSha256': hashlib.sha256(raw).hexdigest()}
-    report['limits'].append('CPU-captor preparation records an observed native CPU startup in the same duel; it is not necessarily the special that produced the recorded hold. Player-captor startup remains bound to the exact accepted special event and hold.')
-    report['declaredStartupReadLatencyMs'] = args.startup_read_latency_ms
     report['identityBefore'] = identity()
     page = None
     with sync_playwright() as pw:
@@ -479,11 +576,16 @@ def main():
                 for role in roles:
                     slug = target_id.replace('import-game-dd-', '').replace('dd-darwin-era-', '')
                     name = 'qa-trials-capture-v163-' + slug + '-' + role
-                    raw, roster = fixture([*TARGETS, 'prowler'], name)
+                    reused = args.fixture_dir is not None and (args.fixture_dir / (name + '.json')).exists()
+                    raw, roster = fixture([*TARGETS, 'prowler'], name, args.fixture_dir)
                     (out/(name+'.json')).write_bytes(raw)
-                    report['profiles'].append({'name': name, 'path': name+'.json', 'sha256': hashlib.sha256(raw).hexdigest(), 'declaredChanges': ['name', 'scene=command', 'onboarding complete identity', 'four historical Trials pilots initially unlocked'], 'unearnedUnlocks': [*TARGETS, 'prowler']})
+                    report['profiles'].append({'name': name, 'path': name+'.json', 'sha256': hashlib.sha256(raw).hexdigest(),
+                                              'fixtureSource': 'reused exact bytes, generated template verified except root dates' if reused else 'generated ordinary save with declared roster unlocks',
+                                              'declaredChanges': ['name', 'scene=command', 'onboarding complete identity', 'four historical Trials pilots initially unlocked'], 'unearnedUnlocks': [*TARGETS, 'prowler']})
                     context = browser.new_context(viewport={'width': 1600, 'height': 1000}, service_workers='block', reduced_motion='no-preference')
                     page = context.new_page()
+                    read_delay = delay_client_reads(page, args.client_read_delay_ms)
+                    report['clientReadDelay']['profiles'].append({'profile': name, 'receipt': read_delay})
                     page.set_default_timeout(30000)
                     page.on('pageerror', lambda e: report['pageErrors'].append(str(e)))
                     page.on('requestfailed', lambda r: report['requestFailures'].append({'url': r.url, 'failure': r.failure}))
@@ -502,7 +604,7 @@ def main():
                     else:
                         acquisition = {'profile': name}
                         report.setdefault('playerCaptureAcquisitions', []).append(acquisition)
-                        preparation = acquire_player_capture(page, after, acquisition, args.startup_read_latency_ms)
+                        preparation = acquire_player_capture(page, after, acquisition)
                     # Preparation is already observed; defer its transfer to disk and all
                     # checks until the first observed floor contact has activated the public pause button.
                     pm = preparation['state']['match']
@@ -516,19 +618,16 @@ def main():
                                'sinceTick': pm['tick'], 'after': after}
                     phase(name, 'floor observation with synchronous public button pause')
                     if role == 'player-captor':
-                        # Reuse the exact child armed by this accepted startup.
-                        # Rearming after Python returns would discard first-floor evidence.
                         armed = page.evaluate('''c=>{
                           const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__?.floor,e=o?.expected;
-                          if(!o||o.cancelled||e.matchId!==c.matchId||e.round!==c.round
+                          if(!o||e.matchId!==c.matchId||e.round!==c.round
                             ||e.targetId!==c.targetId||e.attackerSide!==c.attackerSide||e.targetSide!==c.targetSide
-                            ||e.attackEventId!==c.attackEventId||e.startupAttemptNumber!==c.startupAttemptNumber
+                            ||e.attackEventId!==c.attackEventId
                             ||JSON.stringify(e.fighterIds)!==JSON.stringify(c.fighterIds)
                             ||JSON.stringify(e.sides)!==JSON.stringify(c.sides))
                             return{error:'Accepted startup did not arm the matching first native floor observer'};
                           return{armed:true,error:o.error};
-                        }''', dict(binding, attackEventId=acquisition['successfulSpecial']['attackEvent']['id'],
-                                   startupAttemptNumber=acquisition['successfulSpecial']['attemptNumber']))
+                        }''', dict(binding, attackEventId=acquisition['successfulSpecial']['attackEvent']['id']))
                     else:
                         armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='floor', timeoutMs=45000))
                     assert not armed.get('error'), armed.get('error')
@@ -538,7 +637,7 @@ def main():
                     # succeeds; the detached bitmap remains browser-local.
                     floor_observation = page.evaluate('''()=>{
                       const o=globalThis.__ATF_CAPTURE_OBSERVER_V163__.floor;
-                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction,expected:o.expected,armedState:o.armedState};
+                      return{floor:{state:o.floor.state,bitmapCopy:o.floor.bitmapCopy},trace:o.trace,pauseAction:o.pauseAction};
                     }''')
                     hold = floor_observation['floor']
                     m = hold['state']['match']
@@ -563,21 +662,17 @@ def main():
                     report.setdefault('pauseObservations', []).append({'profile': name, 'sameNativeHold': same_pause,
                         'floorTick': m['tick'], 'holdId': hold_id, 'pausedMatch': frozen,
                         'floorTrace': floor_observation['trace'], 'publicControlAction': floor_observation.get('pauseAction'),
-                        'observerArm': {'expected': floor_observation['expected'], 'state': floor_observation['armedState']},
                         'compactDiagnostics': pause_diagnostics})
                     check(name + ': public pause retains native hold ownership, participants and floor support', same_pause,
                           failure_detail=json.dumps(pause_diagnostics, separators=(',', ':')))
                     hold = page.evaluate(CAPTURE_EXPORT, {'stage': 'floor', 'fields': ['floor']})['floor']
                     if preparation.get('deferredStartupBitmapV177'):
-                        preparation = page.evaluate('''()=>{const o=globalThis.__ATF_PLAYER_STARTUP_PROOF_V177__;
-                          if(!o?.ready||!o.frame)return null;
-                          return{state:o.frame.state,png:o.frame.bitmap.toDataURL('image/png'),preparationProof:o.frame.preparationProof};}''')
-                    check(name + (': exact player startup for the accepted capture special is observed' if role == 'player-captor'
-                                  else ': a native CPU startup is observed within this duel'), preparation is not None)
-                    capture(name+'-preparation.png', preparation,
-                            'Native startup of the exact accepted keyboard special owning the recorded hold; no attack/capture field injected.'
-                            if role == 'player-captor' else
-                            'Observed native CPU startup in this duel; it may precede the special that wins the recorded hold. No attack/capture field injected.')
+                        preparation = page.evaluate(PLAYER_STARTUP_EXPORT_V179, {
+                            'matchId': pm['config']['matchId'], 'round': pm['round'],
+                            'participants': [[f['id'], f['side']] for f in pm['fighters']],
+                            'proof': acquisition['successfulSpecial']['preparationProof']})
+                    check(name + ': actual native Prowler startup is observed', preparation is not None)
+                    capture(name+'-preparation.png', preparation, 'Real CPU or keyboard-owned special startup; no attack/capture field injected.')
                     check(name + ': actual capture event owns the displayed hold', any(e['type'] == 'grapple-start-v153' and e['grappleId'] == hold_id for e in m['events']))
                     if after:
                         receipt = next(v for v in m['captureViewsV163'] if v['role'] == 'captive')
@@ -633,6 +728,11 @@ def main():
             report['status'] = 'failed'
             report['error'] = str(e)
             report['failureStack'] = traceback.format_exc(limit=6)[-4000:]
+            current_name = locals().get('name')
+            acquisition = next((row for row in reversed(report.get('playerCaptureAcquisitions', []))
+                                if row.get('profile') == current_name), None)
+            if acquisition:
+                print('CAPTURE_ACQUISITION_DIAGNOSTIC ' + capture_acquisition_diagnostic(acquisition), flush=True)
             details = 'capture pipeline failed; phase=' + str(report.get('phase')) + '; lastPassedCheck=' + str(report.get('lastPassedCheck')) + '; error=' + str(e)
             print('::error::' + details[:1800].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'), flush=True)
             if page:
@@ -643,8 +743,14 @@ def main():
                 except Exception:
                     pass
         finally:
+            delays = [row['receipt'] for row in report['clientReadDelay']['profiles']]
+            report['clientReadDelay'].update({key: sum(row[key] for row in delays)
+                for key in ('evaluateCalls', 'totalRequestedSleepMs', 'measuredSleepSeconds')})
             (out/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
             browser.close()
+    print('CLIENT_READ_DELAY ' + json.dumps({'qaDriverSha256': report['qaDriverSha256'],
+        **{key: value for key, value in report['clientReadDelay'].items() if key != 'profiles'},
+        'scope': 'Page.evaluate only; split equally before/after, keys and browser scheduler unchanged'}, separators=(',', ':')), flush=True)
     print(json.dumps({'status': report['status'], 'checks': len(report['checks']), 'report': str(out/'report.json')}))
     raise SystemExit(0 if report['status'] == 'passed' else 1)
 
