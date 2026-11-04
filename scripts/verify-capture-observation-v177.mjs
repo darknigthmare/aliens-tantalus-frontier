@@ -462,7 +462,7 @@ assert.ok(keyEvents.some(e=>e.key==='ArrowRight'&&e.type==='keydown'&&e.round===
 // native CPU combat. Only DOM, image pixels, transport and RAF are declared
 // doubles. A transport delay advances real runtime frames; it never pauses,
 // edits a fighter, replaces the CPU or manufactures an accepted attack.
-async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,opponentId='import-game-dd-wy-commando',transportOverheadMs=0,contactReadOverheadsMs=null,lateCaptureDeliveryMs=0,keyboardTransportMs=0,continueRecovery=false}={}){
+async function delayedNativeAcquisitionV182({phaseTicks=0,warmupFrames=55,readDelayMs=200,opponentId='import-game-dd-wy-commando',transportOverheadMs=0,contactReadOverheadsMs=null,lateCaptureDeliveryMs=0,keyboardTransportMs=0,continueRecovery=false}={}){
  const {spawn}=await import('node:child_process');
  const {createInterface}=await import('node:readline');
  const {createContext,runInContext}=await import('node:vm');
@@ -481,7 +481,8 @@ async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,oppone
   .replace("opponentId:'import-game-dd-wy-commando'","opponentId:"+JSON.stringify(opponentId));
  const fixtureContext=createContext({assert,images,XenoTrialsUiV96:ui.XenoTrialsUiV96,createXenoTrialsRuntimeV96:runtime.createXenoTrialsRuntimeV96});
  const h=runInContext('(()=>{'+fixtureSource+';return captureRuntimeHost;})()',fixtureContext)();
- await h.start();h.frame(55+phaseTicks);
+ assert.ok(Number.isInteger(warmupFrames)&&warmupFrames>=0);
+ await h.start();h.frame(warmupFrames+phaseTicks);
  const initial=h.runtime.getState();
  assert.equal(initial.config.seed,96001);assert.equal(initial.config.roundSeconds,99);
  assert.equal(initial.fighters[0].id,'prowler');assert.equal(initial.fighters[1].id,opponentId);
@@ -588,7 +589,7 @@ async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,oppone
    child.stdin.write(JSON.stringify({now:wallTime,value,error})+'\n');
   }
   const exit=await done;assert.equal(exit.code,0,stderr);assert.ok(outcome);
-  return{...outcome,initial,final:h.runtime.getState(),keyEvents,phaseTicks,transportOverheadMs,keyboardTransportMs,contactReadIndex,delayedCapture,
+  return{...outcome,initial,final:h.runtime.getState(),keyEvents,warmupFrames,phaseTicks,transportOverheadMs,keyboardTransportMs,contactReadIndex,delayedCapture,
    floor:context.__ATF_CAPTURE_OBSERVER_V163__?.floor,
    post:context.__ATF_CAPTURE_OBSERVER_V163__?.post,
    method:'Actual Python acquisition/delay/recovery helpers and native CPU/UI/runtime; declared 60Hz RAF/DOM/transport doubles, no Chromium or pixel claim.'};
@@ -624,6 +625,40 @@ test('native player acquisition survives 200ms client reads across nearby RAF ph
   assert.equal(out.delay.delayMsPerEvaluate,options.readDelayMs??200);
   assert.equal(out.delay.totalRequestedSleepMs,(options.readDelayMs??200)*out.delay.evaluateCalls);
   assert.ok(out.delay.measuredSleepSeconds>=out.delay.totalRequestedSleepMs/1000-1e-6);
+ }
+});
+
+test('early native Cultist acquisition earns its hold with the first accepted special',{timeout:120000},async t=>{
+ // Actions run 41851887748 first observed this duel at tick 7, not the tick 57
+ // used by the previous delayed-read fixtures. Deliver five ordinary frames
+ // after the native menu start; no saved fight, tick alignment or actor edit.
+ // The old policy spends three specials and 54.7 s in the 4/8 ms case. The test
+ // requires an actual first-special hold, not the policy's timing formula.
+ for(const options of [
+  {phaseTicks:0,transportOverheadMs:4,keyboardTransportMs:8},
+  {phaseTicks:0,transportOverheadMs:10,keyboardTransportMs:8},
+  {phaseTicks:3,transportOverheadMs:16,keyboardTransportMs:8},
+  {phaseTicks:0,transportOverheadMs:16,keyboardTransportMs:16},
+  {phaseTicks:1,transportOverheadMs:12,keyboardTransportMs:4},
+  {phaseTicks:2,transportOverheadMs:4,keyboardTransportMs:8}
+ ]){
+  const out=await delayedNativeAcquisitionV182({...options,warmupFrames:5,readDelayMs:0,opponentId:'dd-darwin-era-cultist'});
+  const detail=JSON.stringify({options,status:out.trace.status,error:out.error,elapsed:out.trace.elapsedSeconds,
+   firstObservedTick:out.trace.observations?.[0]?.tick,attempts:out.trace.attempts.map(a=>({tick:a.before.tick,accepted:a.nativeSpecialAccepted}))});
+  assert.equal(out.initial.tick,7+options.phaseTicks);assert.equal(out.initial.fighters[0].x,310);
+  assert.equal(out.initial.fighters[0].hp,185);assert.equal(out.initial.fighters[1].hp,180);
+  assert.equal(out.error,null,detail);assert.equal(out.trace.status,'captured',detail);
+  assert.equal(out.trace.timeLimitSeconds,55);assert.equal(out.trace.attemptLimit,32);
+  assert.ok(out.trace.elapsedSeconds<55,detail);assert.equal(out.final.opponentInputSourceV163,'cpu');
+  assert.equal(out.trace.attempts.length,1,detail);assert.equal(out.trace.attempts[0].nativeSpecialAccepted,true);
+  assert.equal(out.final.fighters[0].stats.specials,1);assert.equal(out.trace.successfulSpecial.attemptNumber,1);
+  assert.equal(out.trace.successfulSpecial.attackEvent.id,out.trace.attempts[0].attackEventId);
+  assert.equal(out.trace.successfulSpecial.preparationProof.attackEventId,out.trace.attempts[0].attackEventId);
+  assert.equal(out.trace.successfulSpecial.grappleStart.grappleId,out.trace.grapple.id);
+  assert.equal(out.trace.grapple.attacker,'player');assert.equal(out.final.phase,'active');assert.equal(out.final.result,null);
+  assert.equal(out.delay.delayMsPerEvaluate,0);assert.equal(out.delay.totalRequestedSleepMs,0);
+  assert.equal(out.delay.measuredSleepSeconds,0);
+  t.diagnostic(detail);
  }
 });
 
