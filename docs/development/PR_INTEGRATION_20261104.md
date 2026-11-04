@@ -64,6 +64,26 @@ Le tableau constate les vérifications locales effectuées avant publication. Le
 | Parcours navigateur concernés | Rapports natifs du commit publié ; aucune exécution navigateur locale revendiquée |
 | Workflows GitHub de la consolidation | Verdicts effectifs disponibles après publication ; chaque résultat reste lié à son commit |
 
+## Compléments après la première exécution GitHub
+
+La première publication de la PR #39 utilise la tête `12637ec3684b48cfda68a06f018b16a931b0b17b`. Actions a exécuté le candidat de fusion `beb32ba348e63c8bf82ab6a7a83def78005afac1`, dont l'arbre `1d401c7dba00b943c7c2cb375ba857ccd5d4cd98` est identique à celui de cette tête. Les trois workflows Forge, Gameplay et Alien_base réussissent. Les deux autres conservent leurs échecs réels :
+
+- Release : 4 047 tests Node réussis, zéro échec et une fixture physique V175 facultative ignorée, sur 214 fichiers uniques. Sources, build, distribution, service worker et isolation des comptes passent. Parmi les 26 rapports navigateur, 25 réussissent ; la sortie d'annexe d'Idris échoue dans `qa-npc-service-routes-v161.py`. La suite n'a donc pas encore qualifié son retour ni les cas suivants de Leila.
+- Excel : 14 jobs sur 15 réussissent. Dans ship, V165 passe 121 contrôles/20 captures et V177 passe 497 contrôles/98 captures, avec 200/200 ajouts visibles. V182 réussit 13 scénarios sur 15 et conserve 233 contrôles/48 captures ; deux comparaisons de données interrompent les retours de Durandal et des capsules. Les 48 PNG sont vérifiés par empreinte et inspectés. Les dix reprises historiques réussissent.
+- Trials : les deux modes 0 ms et 200 ms passent chacun 77 contrôles sur six duels avec les mêmes six Save. Chaque mode comprend 36 images de jeu et six planches de comparaison déclarées. Les pauses de récupération conservent leurs ticks après au moins 54 ticks natifs observés. Les deux parcours de Cal et les parcours physiques des autres PNJ restent associés à leurs rapports propres.
+
+### Attendu complet des portes appariées
+
+L'oracle V182 reconstruisait les sockets sans les métadonnées `id` et `bidirectional` ajoutées par les décorateurs du Hub. Les deux entrées natives réussissaient, avec des faces, dimensions et positions correctes, mais l'égalité complète des objets échouait. L'attendu est désormais obtenu depuis les quatre décorateurs de production, dans l'ordre de `app.js`. La comparaison reste intégrale et les 20 fonctions Python de parcours et d'assertion sont conservées. Les huit reçus de passage déjà disponibles correspondent après correction ; une nouvelle exécution navigateur doit encore réaliser les deux retours manquants.
+
+### Réponse native à chaque demande de sortie V161
+
+La trace du premier échec relève une vérification de disponibilité réussie, une seule touche E et une attente de 45 secondes sans sortie. L'état final ne permet pas d'attribuer avec certitude la cause à l'instant de la touche. Une fenêtre de course est néanmoins reproduite avec le véritable Hub et un PNJ natif : en 100 ms entre lecture et E, le passant entre dans la projection de retour, puis le moteur refuse normalement la demande. L'ancien pilote ne retente pas la sortie après le départ physique du passant.
+
+Le nouveau pilote observe la réponse synchrone du moteur après chaque vrai keydown. Il n'autorise une nouvelle tentative qu'après un nouveau refus natif explicite, conserve cette tentative dans le rapport et ne renvoie aucune touche après acceptation. L'arrivée dans la pièce parente doit être attestée par le reçu natif. Disponibilité, tentatives et passage partagent toujours le même budget total de 45 secondes.
+
+La suite V161 complète passe 21/21 après correction. Le nouveau cas de course échoue avec l'ancien pilote ; le passant immobile et la transition acceptée dont le host cesse de délivrer des frames restent des échecs à 45 secondes. Les doubles DOM/Canvas/RAF du harnais Node sont déclarés ; aucune méthode du moteur n'est remplacée. Ces contrôles ne requalifient pas rétroactivement le premier run GitHub.
+
 ## Travaux encore distincts
 
 L'intégration ne transforme pas les 129 propositions d'armes en équipements admis, ni les 18 tenues sans visuel équipable en tenues terminées. Les trois profils AFE2 inconnus, les rapprochements à documenter, les archives primaires manquantes et les validations artistiques restent ouverts. Aucun statut de fidélité canonique ou artistique 1:1 n'est accordé par une fusion de code.

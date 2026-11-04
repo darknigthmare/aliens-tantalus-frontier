@@ -336,7 +336,7 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "main": null,
       "qa": null
     },
-    "currentSha256": "dfe1032bb06a800ca4eb4159659b83a2c1839a0b0cbdd05842261c67471e773b",
+    "currentSha256": "2de0352a4cce306189a36c68ad32e7dc04c5ad64dcd4d57007a8e14720d263a3",
     "kind": "qa"
   },
   "scripts/qa-npc-annex-service-routes-v163.py": {
@@ -364,6 +364,15 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "qa": "a614f03fe889c62ca5b481a1079df000a598d34a1c5be65e420ee4d9475d51ec"
     },
     "currentSha256": "a614f03fe889c62ca5b481a1079df000a598d34a1c5be65e420ee4d9475d51ec",
+    "kind": "qa"
+  },
+  "scripts/qa-npc-service-routes-v161.py": {
+    "predecessors": {
+      "catalogue": "5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06",
+      "main": "5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06",
+      "qa": "5ee9795a6132ac6fad3724f7dfa7a9c5edcd75103390746f0708e30dd6a97e06"
+    },
+    "currentSha256": "684fbe2af2c766747ab9423ca5bc9cc1fabdfa6132b7331c10b39fd2cdc38f32",
     "kind": "qa"
   },
   "scripts/qa-xeno-trials-capture-v163.py": {
@@ -472,6 +481,15 @@ export const INTEGRATION_SOURCES_V182 = freeze({
       "qa": "66b1f6cc8a2a018b2ddacecfb73c77eb52bb7784a51bc7addb43c8ec46832f8a"
     },
     "currentSha256": "66b1f6cc8a2a018b2ddacecfb73c77eb52bb7784a51bc7addb43c8ec46832f8a",
+    "kind": "verifier"
+  },
+  "scripts/verify-npc-service-routes-v161.mjs": {
+    "predecessors": {
+      "catalogue": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
+      "main": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb",
+      "qa": "f7f37ecd2a87fb2b2363260a2884b0a4394f8355260559483920e99a7193f4bb"
+    },
+    "currentSha256": "fe7f0ed6faa0e3427678b39b38b3e5e109be86a9693e48101b9fd1cc18c808c9",
     "kind": "verifier"
   },
   "scripts/verify-parallel-completion-v165.mjs": {
