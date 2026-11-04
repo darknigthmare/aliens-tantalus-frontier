@@ -15,6 +15,7 @@ import {
   auditAlienBaseBridgeV1
 } from '../src/alien-base-bridge-v1.js';
 import { WEAPONS, ENEMIES, VEHICLES, EQUIPMENT, CREW } from '../src/content-core-v50.js';
+import { AFE2_ROSTER_V110 } from '../src/afe2-roster-v110.js';
 import { renderAlienBaseSnapshotV1 } from './sync-alien-base-v1.mjs';
 import { exportTantalusInventoryV1 } from './export-alien-base-tantalus-v1.mjs';
 import { CatalogWorkbenchV62 } from '../src/catalog-ui-v62.js';
@@ -94,6 +95,25 @@ test('Outbound Tantalus audit separates source identity from game tuning', () =>
   assert.equal(out.catalogues.weapons[0].identity.id,WEAPONS[0].id);
   assert.equal(out.catalogues.weapons[0].identity.damage,undefined);
   assert.equal(out.catalogues.weapons[0].gameplayTuning.damage,WEAPONS[0].damage);
+});
+
+test('Outbound AFE2 roster preserves every source work and unresolved provenance', () => {
+  const before=structuredClone(AFE2_ROSTER_V110);
+  const out=exportTantalusInventoryV1();
+  const exported=out.catalogues.afe2Roster;
+  assert.equal(out.game,'aliens-tantalus-frontier');
+  assert.equal(exported.length,35);
+  assert.deepEqual(exported.map(({exportedFromGame,...entry})=>entry),before,
+    'The exporting game must not replace the 35 source-work identities or their admission states');
+  for(const [i,entry]of exported.entries()) {
+    assert.equal(entry.exportedFromGame,out.game);
+    assert.notEqual(entry,AFE2_ROSTER_V110[i]);
+  }
+  assert.deepEqual(exported.filter(entry=>entry.sourceGame===null).map(entry=>entry.id),
+    ['siren','gasbag','wey-yu-worker']);
+  exported[0].sourceGame='export-only-change';
+  assert.deepEqual(AFE2_ROSTER_V110,before);
+  assert.deepEqual(exportTantalusInventoryV1().catalogues.afe2Roster.map(({exportedFromGame,...entry})=>entry),before);
 });
 
 test('In-game catalogue displays reference without inventing a canon or a playable item', () => {

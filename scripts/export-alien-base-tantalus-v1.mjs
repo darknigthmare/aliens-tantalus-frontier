@@ -31,7 +31,8 @@ export function exportTantalusInventoryV1() {
       characters: entries(CREW,'character',['health','stress','fatigue','loyalty','status']),
       factions: entries(FACTIONS,'faction',['stance']),
       locations: entries(WORLDS,'location',['danger','biomes','atmosphere','infestation']),
-      afe2Roster: AFE2_ROSTER_V110.map(x => ({...structuredClone(x), sourceGame:'aliens-tantalus-frontier'}))
+      // sourceGame records the referenced work (or null), not the consumer exporting it.
+      afe2Roster: AFE2_ROSTER_V110.map(x => ({...structuredClone(x), exportedFromGame:'aliens-tantalus-frontier'}))
     }
   };
 }
