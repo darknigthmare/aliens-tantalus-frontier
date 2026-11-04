@@ -1,7 +1,7 @@
 """Native walking, climbing and paired-door checks for the five repaired bays.
 
 Every starting position is a disclosed Save fixture imported through the public
-UI. Subsequent movement uses A/D/W/S and E. Browser evaluation only observes the
+UI. Subsequent movement uses A/D/C/W/S and E. Browser evaluation only observes the
 production hub, its original canvas and a separate read-only frame recorder.
 """
 import argparse
@@ -13,6 +13,7 @@ import math
 import os
 from pathlib import Path
 import subprocess
+import time
 import urllib.request
 
 from playwright.sync_api import sync_playwright
@@ -41,7 +42,7 @@ report = dict(
     status='running', startedAt=now(), checks=[], fixtures=[], scenarios=[],
     captures=[], nativeMoves=[], nativePassages=[], legacyResumes=[],
     pageErrors=[], requests=[], requestFailures=[], httpErrors=[], failures=[],
-    method='Public Save import; real A/D/W/S traversal and E passages; original #hub-canvas captures; read-only observations.',
+    method='Public Save import; real A/D/W/S traversal, native C crouch for fine approaches, and E passages; original #hub-canvas captures; read-only observations.',
     limitations=[
         'Each initial floor, retired platform or retired ladder pose is a disclosed fixture, not an observed journey.',
         'A native doorway changes room coordinates; it is not interdeck travel or walking distance.',
@@ -168,7 +169,7 @@ OBSERVE = r"""() => {
  const visible=a?(h.activeAnnexNpcsV141?.()||[]):h.npcs||[],ids=visible.map(n=>n.crewId).filter(Boolean);
  return {running:h.running,roomId:a?.id||h.currentRoom()?.id,annexId:a?.id||null,deck:h.state.deck,
   nativeTime:h.animationTime,player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,
-   vx:h.player.vx,vy:h.player.vy,grounded:h.player.grounded,climbing:!!h.player.climbing,
+   vx:h.player.vx,vy:h.player.vy,grounded:h.player.grounded,climbing:!!h.player.climbing,crouching:!!h.player.crouching,
    alive:h.player.alive,health:h.player.health},
   floorY:a?.world.floorY||h.floorY,cameraX:a?h.annexCameraV71.x:h.camera.x,
   authoritativePlayerReferences:[h.player,...visible].filter(n=>n===h.player).length,
@@ -212,7 +213,7 @@ def open_hub(page):
 def settle(page):
     page.wait_for_function("""()=>{const h=__ATF_HUB__;return h?.running&&!h.annexTransitionV71
       &&!h.hubDoorClosingV142&&Math.abs(h.player.vx)<.4&&Math.abs(h.player.vy)<.4
-      &&h.player.grounded&&!h.player.climbing;}""", timeout=45000)
+      &&h.player.grounded&&!h.player.climbing&&!h.player.crouching;}""", timeout=45000)
 
 
 def supported(label, row, room_id, standing_y):
@@ -222,7 +223,7 @@ def supported(label, row, room_id, standing_y):
           and not row['duplicateCrew'] and body['alive'] and body['health'] == 100
           and body['w'] == 44 and body['h'] == 92
           and all(math.isfinite(body[key]) for key in ['x', 'y', 'vx', 'vy'])
-          and body['grounded'] and not body['climbing']
+          and body['grounded'] and not body['climbing'] and not body['crouching']
           and abs(body['y'] + body['h'] - standing_y) <= .01)
 
 
@@ -275,18 +276,31 @@ def walk_to(page, target, label, room_id, standing_y, tolerance=3):
             finally:
                 page.keyboard.up(key)
         else:
-            # An 18ms minimum can span two native frames and coast about 9px,
-            # repeatedly crossing a 3px target. Shorten real key pulses after
-            # an overshoot; retain the same attempts, tolerances and physics.
-            delay = max(1, min(70, abs(distance) / 270 * 1000 * fine_gain))
-            correction.update(control='fine pulse', requestedMs=delay, gain=fine_gain)
-            page.keyboard.press(key, delay=delay)
+            # Even a 1ms pulse can occupy a whole slow native frame and coast
+            # about 9px at walking speed. The existing C control provides the
+            # native 105px/s approach, with the same 44x92 physical body.
+            # Wait for actual progress before releasing A/D: a sub-frame tap
+            # can otherwise be missed at every repeated RAF phase.
+            travel = max(.001, min(2, abs(distance) * fine_gain))
+            correction.update(control='native crouch approach', crouchKey='KeyC',
+                              minimumObservedTravel=travel, gain=fine_gain)
+            page.keyboard.down('KeyC')
+            try:
+                page.keyboard.down(key)
+                try:
+                    page.wait_for_function("""c=>c.right?__ATF_HUB__.player.x>=c.origin+c.travel:
+                      __ATF_HUB__.player.x<=c.origin-c.travel""",
+                                           arg=dict(right=distance > 0, origin=current, travel=travel), timeout=45000)
+                finally:
+                    page.keyboard.up(key)
+            finally:
+                page.keyboard.up('KeyC')
         settle(page)
         correction['afterX'] = observe(page)['player']['x']
         corrections.append(correction)
         previous_distance = distance
     after = observe(page)
-    report['nativeMoves'].append(dict(label=label, controls='A/D', targetX=target,
+    report['nativeMoves'].append(dict(label=label, controls='A/D; native C during fine approaches', targetX=target,
         before=before['player'], after=after['player'], roomBefore=before['roomId'], roomAfter=after['roomId'],
         corrections=corrections))
     check(label + ': bounded real A/D walking reaches the calculated coordinate',
@@ -334,6 +348,87 @@ def geometry(page, config):
     report.setdefault('liveGeometry', []).append(dict(id=config['id'], geometry=actual))
 
 
+def native_exit_passage(page, config):
+    config = dict(config, annex=config['annexId'], parent=config['roomId'])
+    # Readiness may change while the client sends E. Observe its synchronous
+    # native outcome after the production keydown listener; retry only a newly
+    # reported refusal, never an accepted or silently ignored interaction.
+    deadline = time.monotonic() + 90
+    receipt = {'route': config['id'], 'budgetSeconds': 90, 'status': 'running', 'attempts': []}
+    report.setdefault('exitDoorInputs', []).append(receipt)
+
+    def remaining():
+        value = (deadline - time.monotonic()) * 1000
+        assert value > 0, 'Native annex exit exceeded 90 s'
+        return value
+
+    page.evaluate('''c=>{
+      if(globalThis.__ATF_DOOR_EXIT_V182__)throw Error('An earlier exit observer was not disposed');
+      const h=__ATF_HUB__,attempts=[];let armed=null;
+      const read=()=>{const a=h.currentAnnexV71?.(),exit=h.nearestAnnexExitV71?.();return {
+        sameOwner:__ATF_HUB__===h,running:h.running,alive:h.player.alive,time:h.animationTime,
+        annex:a?.id||null,roomId:a?.id||h.currentRoom()?.id,focusCanvas:document.activeElement===h.canvas,
+        player:{x:h.player.x,y:h.player.y,w:h.player.w,h:h.player.h,vx:h.player.vx},
+        dialogueOpen:Boolean(document.querySelector?.('#hub-dialogue')?.getClientRects?.().length),
+        transition:structuredClone(h.annexTransitionV71||null),closing:Boolean(h.hubDoorClosingV142),
+        readOnly:Boolean(h.annexStateReadOnlyV87),blocked:structuredClone(h.hubDoorBlockedV142||null),
+        arrival:structuredClone(h.hubDoorLastArrivalV142||null),exitAnnex:exit?.annexId||null,
+        reserved:Boolean(a&&h.npcAnnexDoorReservedV159?.(a.id)),
+        projectionAvailable:Boolean(a&&exit&&h.prepareHubDoorPassageV142(a,'exit',exit.endpointId))};};
+      const listener=event=>{if(event.code!=='KeyE'||event.repeat||!armed)return;
+        attempts.push({before:armed,after:read(),key:event.code,trusted:event.isTrusted});armed=null;};
+      globalThis.addEventListener('keydown',listener);
+      globalThis.__ATF_DOOR_EXIT_V182__={read,arm(){if(armed)throw Error('An earlier E was not observed');
+        armed=read();return attempts.length;},snapshot:()=>({attempts:structuredClone(attempts),current:read()}),
+        dispose(){globalThis.removeEventListener('keydown',listener);delete globalThis.__ATF_DOOR_EXIT_V182__;}};
+    }''', config)
+    try:
+        while True:
+            page.wait_for_function('''c=>{const s=__ATF_DOOR_EXIT_V182__.read();
+              if(!s.sameOwner||!s.running||!s.alive||s.dialogueOpen)throw Error('Native exit owner stopped or dialogue opened');
+              if(s.annex!==c.annex||s.transition)throw Error('Unexpected room or transition before exit E');
+              return s.exitAnnex===c.annex&&Math.abs(s.player.vx)<1&&!s.closing&&!s.readOnly
+                &&!s.reserved&&s.projectionAvailable;}''', arg=config, timeout=remaining())
+            page.locator('#hub-canvas').focus(timeout=remaining())
+            index = page.evaluate('()=>__ATF_DOOR_EXIT_V182__.arm()')
+            remaining()
+            page.keyboard.press('KeyE', delay=80)
+            result = page.evaluate('()=>__ATF_DOOR_EXIT_V182__.snapshot()')
+            assert len(result['attempts']) == index + 1, 'Native exit E was not observed after the production listener'
+            attempt = result['attempts'][-1]
+            receipt['attempts'].append(attempt)
+            before, after = attempt['before'], attempt['after']
+            assert all(row['sameOwner'] and row['running'] and row['alive'] and row['focusCanvas']
+                       and not row['dialogueOpen'] for row in [before, after]), 'Native exit input lost its living owner or canvas'
+            transition = after['transition']
+            if transition:
+                assert transition['annexId'] == config['annex'] and transition['direction'] == 'exit', 'E accepted a foreign transition'
+                attempt['outcome'] = 'accepted'
+                break
+            blocked, previous = after['blocked'], before['blocked']
+            assert blocked and blocked['annexId'] == config['annex'] and blocked['direction'] == 'exit' \
+                and blocked['remaining'] == 1.2 and blocked != previous \
+                and after['annex'] == config['annex'], 'E produced neither an accepted exit nor a new native refusal'
+            attempt['outcome'] = 'native-refusal'
+        # Once accepted, the same transition must complete; it receives no more E.
+        page.wait_for_function('''c=>{const s=__ATF_DOOR_EXIT_V182__.read();
+          if(!s.sameOwner||!s.running||!s.alive||s.dialogueOpen)throw Error('Accepted exit lost its native owner');
+          if(s.transition){if(s.transition.annexId!==c.annex||s.transition.direction!=='exit')
+            throw Error('Accepted exit changed transition');return false;}
+          if(s.annex!==null||s.roomId!==c.parent||s.arrival?.annexId!==c.annex||s.arrival?.direction!=='exit')
+            throw Error('Accepted exit ended without its real parent arrival');return !s.closing;
+        }''', arg=config, timeout=remaining())
+        arrival = page.evaluate('()=>__ATF_DOOR_EXIT_V182__.read()')
+        remaining()
+        receipt.update(status='passed', arrival=arrival)
+    except Exception as error:
+        receipt.update(status='failed', error=str(error))
+        raise
+    finally:
+        receipt['elapsedSeconds'] = time.monotonic() - (deadline - 90)
+        page.evaluate('()=>__ATF_DOOR_EXIT_V182__.dispose()')
+
+
 def passage(page, config, direction, baseline):
     before = observe(page)
     entering = direction == 'enter'
@@ -342,14 +437,17 @@ def passage(page, config, direction, baseline):
     destination = config['annexFace'] if entering else config['parentFace']
     source_offset = before['player']['x'] + 22 - (source['opening']['x'] + source['opening']['w'] / 2)
     expected_offset = max(-config['halfSpan'], min(config['halfSpan'], source_offset))
-    page.wait_for_function("""c=>{const h=__ATF_HUB__;return c.entering?
-      h.prioritizedParentAnnexDoorV133?.()?.annexId===c.annex:h.nearestAnnexExitV71?.()?.annexId===c.annex;}""",
-                           arg=dict(entering=entering, annex=config['annexId']))
-    page.locator('#hub-canvas').focus()
-    page.keyboard.press('KeyE', delay=80)
-    page.wait_for_function("""c=>{const h=__ATF_HUB__;return h?.running
-      &&(h.currentAnnexV71?.()?.id||h.currentRoom()?.id)===c.room
-      &&!h.annexTransitionV71&&!h.hubDoorClosingV142;}""", arg=dict(room=expected_room), timeout=90000)
+    if entering:
+        page.wait_for_function("""c=>{const h=__ATF_HUB__;return c.entering?
+          h.prioritizedParentAnnexDoorV133?.()?.annexId===c.annex:h.nearestAnnexExitV71?.()?.annexId===c.annex;}""",
+                               arg=dict(entering=entering, annex=config['annexId']))
+        page.locator('#hub-canvas').focus()
+        page.keyboard.press('KeyE', delay=80)
+        page.wait_for_function("""c=>{const h=__ATF_HUB__;return h?.running
+          &&(h.currentAnnexV71?.()?.id||h.currentRoom()?.id)===c.room
+          &&!h.annexTransitionV71&&!h.hubDoorClosingV142;}""", arg=dict(room=expected_room), timeout=90000)
+    else:
+        native_exit_passage(page, config)
     settle(page)
     ready(page, config, expected_room)
     after = observe(page)
