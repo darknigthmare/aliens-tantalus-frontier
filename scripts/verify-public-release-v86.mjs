@@ -255,6 +255,15 @@ for (const file of [
 // Development tools recovered from the published Forge branch stay in Git.
 // They are never admitted in a built distribution, nor copied by the builder.
 const FORGE_TOOLING_V140 = new Set([
+  // Optional AI tooling is source-only; these exact paths never ship in builds.
+  'CLAUDE.md',
+  '.ai-tools',
+  '.ai-tools/README.md',
+  '.ai-tools/sources.json',
+  '.ai-tools/setup.py',
+  '.ai-tools/.gitignore',
+  '.ai-tools/tests',
+  '.ai-tools/tests/test_setup.py',
   // Project gamedev guidance is source-only, never public distribution content.
   'AGENTS.md',
   'docs/development',
