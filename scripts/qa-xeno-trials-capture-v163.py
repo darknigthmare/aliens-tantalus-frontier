@@ -123,6 +123,7 @@ CAPTURE_OBSERVER = r'''c=> {
   const slots=globalThis.__ATF_CAPTURE_OBSERVER_V163__ ||= {};
   if(slots[c.stage])slots[c.stage].cancelled=true;
   const out=slots[c.stage]={expected:c,ready:false,done:false,error:null,trace:[],floor:null,struggle:null,release:null,recovered:null};
+  let nativeInputEngine=null;
   const read=()=>globalThis.__ATF_XENO_TRIALS_V96__?.snapshot();
   const compact=s=>{const m=s?.match,h=m?.grappleV153;return m?{tick:m.tick,round:m.round,paused:m.paused,
     matchId:m.config.matchId,grapple:h?{id:h.id,attacker:h.attacker,target:h.target,escapeProgress:h.escapeProgress}:null,
@@ -144,6 +145,30 @@ CAPTURE_OBSERVER = r'''c=> {
     bitmap.width=source.width;bitmap.height=source.height;
     const startedMs=performance.now();bitmap.getContext('2d').drawImage(source,0,0);
     return{state:s,bitmap,bitmapCopy:{width:bitmap.width,height:bitmap.height,startedMs,finishedMs:performance.now()}};
+  };
+  const inputs=m=>m.fighters.map(f=>({side:f.side,previousInput:structuredClone(f.previousInput),
+    rearmControls:structuredClone(f.rearmControls)}));
+  const modelRecoveryPause=m=>{
+    // The public runtime clears held sources before pausing. These production
+    // helpers receive detached snapshots only, never the live match or its refs.
+    const afterPause=structuredClone(m);
+    if(!nativeInputEngine.releaseXenoTrialsControlsV150(afterPause,'player',{})
+      ||!nativeInputEngine.setXenoTrialsPausedV96(afterPause,true))throw Error('Native clone pause was rejected');
+    const afterKeyup=structuredClone(afterPause);
+    if(!nativeInputEngine.releaseXenoTrialsControlsV150(afterKeyup,'player',{}))throw Error('Native clone key release was rejected');
+    // Also constrain the oracle: restoring precisely the declared input/pause
+    // fields must recover the entire original snapshot, including HP/resources,
+    // pose, timers and events. No field is omitted from either comparison.
+    for(const expected of [afterPause,afterKeyup]){
+      const protectedState=structuredClone(expected);
+      protectedState.paused=m.paused;protectedState.accumulator=m.accumulator;
+      protectedState.fighters.forEach((f,i)=>{
+        f.previousInput=structuredClone(m.fighters[i].previousInput);
+        f.rearmControls=structuredClone(m.fighters[i].rearmControls);
+      });
+      if(JSON.stringify(protectedState)!==JSON.stringify(m))throw Error('Native clone input transition changed protected combat state');
+    }
+    return{afterPause,afterKeyup};
   };
   const armed=read(),start=performance.now();out.armedState=compact(armed);
   if(!sameMatch(armed?.match)){fail('Different match, round or participants at observer arm');return{error:out.error};}
@@ -212,16 +237,32 @@ CAPTURE_OBSERVER = r'''c=> {
         control.click();
         const paused=read()?.match;
         Object.assign(out.pauseAction,{afterTick:paused?.tick,afterPaused:paused?.paused});
+        try{out.pauseModel=modelRecoveryPause(m);}
+        catch(error){fail('Recovery pause input oracle failed: '+error.message);return;}
+        const expected=out.pauseModel.afterPause;
+        out.pauseAction.inputTransition={method:'Production helpers on detached snapshot clones only',
+          module:'/src/xeno-trials-engine-v96.js',
+          steps:['releaseXenoTrialsControlsV150(player,{})','setXenoTrialsPausedV96(true)','releaseXenoTrialsControlsV150(player,{})'],
+          before:inputs(m),afterPauseExpected:inputs(expected),afterPauseObserved:paused?inputs(paused):null,
+          afterKeyupExpected:inputs(out.pauseModel.afterKeyup)};
         if(!sameMatch(paused)||paused.paused!==true||paused.tick!==m.tick||paused.phase!=='active'
           ||paused.result||paused.grappleV153
-          ||JSON.stringify(paused.fighters)!==JSON.stringify(m.fighters)
-          ||JSON.stringify(paused.events)!==JSON.stringify(m.events)){
+          ||paused.accumulator!==expected.accumulator
+          ||JSON.stringify(paused.fighters)!==JSON.stringify(expected.fighters)
+          ||JSON.stringify(paused.events)!==JSON.stringify(expected.events)){
           fail('Public recovery pause did not retain the exact unfinished match, participants and release');return;}
         out.ready=true;out.done=true;return;
       }
     }
     requestAnimationFrame(sample);
   }
+  // Only post is armed while already paused. Await the real engine module here,
+  // so neither the atomic startup/floor arm nor the recovery bitmap/click yields.
+  if(c.stage==='post')return(async()=>{
+    try{nativeInputEngine=await import('/src/xeno-trials-engine-v96.js');}
+    catch(error){fail('Native recovery input oracle could not load: '+error.message);return{error:out.error};}
+    sample();return out.error?{error:out.error}:{armed:true};
+  })();
   sample();
   return{armed:true};
 }
@@ -235,13 +276,17 @@ CAPTURE_EXPORT = r'''c=> {
     if(!current?.paused||!recorded?.grappleV153||current.grappleV153?.id!==recorded.grappleV153.id)
       throw Error('Floor PNG requires the public pause on the same native hold');
   }else if(c.stage==='post'){
-    const current=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match,recorded=out.recovered?.state?.match;
-    if(!out.ready||!out.struggle||!out.release||!recorded||!current?.paused
+    const current=globalThis.__ATF_XENO_TRIALS_V96__?.snapshot().match,recorded=out.recovered?.state?.match,
+      expected=out.pauseModel?.afterKeyup;
+    if(!out.ready||!out.struggle||!out.release||!recorded||!expected||!current?.paused
       ||current.tick!==recorded.tick||current.config.matchId!==recorded.config.matchId||current.round!==recorded.round
       ||current.result||current.grappleV153||current.phase!=='active'
-      ||JSON.stringify(current.fighters)!==JSON.stringify(recorded.fighters)
-      ||JSON.stringify(current.events)!==JSON.stringify(recorded.events))
+      ||current.accumulator!==expected.accumulator
+      ||JSON.stringify(current.fighters)!==JSON.stringify(expected.fighters)
+      ||JSON.stringify(current.events)!==JSON.stringify(expected.events))
       throw Error('Post PNGs require the exact public recovery pause and all same-hold observations');
+    out.pauseAction.inputTransition.afterKeyupObserved=current.fighters.map(f=>({side:f.side,
+      previousInput:structuredClone(f.previousInput),rearmControls:structuredClone(f.rearmControls)}));
   }else{
     throw Error('Unknown capture observation stage');
   }
@@ -415,7 +460,7 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
     deadline = started + 55
     trace.update({'status': 'running', 'timeLimitSeconds': 55, 'attemptLimit': 32,
                   'observationLimit': 600, 'observations': [], 'attempts': [], 'preparations': [], 'decisions': [],
-                  'policy': 'Real Python-driven keys: approach using pure V105 body gap toward <=6px; guard before entering native light/heavy reach plus relative travel during the measured pose-read duration, keeping one special and one native guard cost in reserve. Briefly release guard for real movement and stamina recovery during the observed recovery remaining after estimated return latency, then rearm it before the next delayed read. Launch special only in observed target recovery, when both grounded, player unstunned, affordable and cooldown zero, and the target is fatigued or still recovering through startup. Departure range is derived from native leap speed/active duration and possible target retreat; the engine still admits only a real <=8px hold. All reads retain their declared client delay; no alternate read channel, pause or runtime mutation is used. Startup evidence is armed within the same pose read, without emitting controls.'})
+                  'policy': 'Real Python-driven keys: approach using pure V105 body gap toward <=6px; guard before entering native light/heavy reach plus relative travel during the measured pose-read duration when a native block is affordable and the target retains pressure stamina or has an active threat. Release guard when the target is fatigued without an active threat so real movement and stamina can recover. For an otherwise guarded recovery, briefly release during its remaining time after estimated return latency, then rearm before the next delayed read. Launch special only in observed target recovery, when both grounded, player unstunned, affordable at its own native cost and cooldown zero, and the target is fatigued or still recovering through startup. Departure range is derived from native leap speed/active duration and possible target retreat; the engine still admits only a real <=8px hold. All reads retain their declared client delay; no alternate read channel, pause or runtime mutation is used. Startup evidence is armed within the same pose read, without emitting controls.'})
     held = None
     guarding = False
     control_round = None
@@ -528,7 +573,7 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
             # The read-only RAF observer already copied the exact startup bitmap.
             # Transfer its metadata with this pose read; encode pixels only after
             # the matching first-floor callback has used the real pause button.
-            reserve = min(value['playerStaminaMaximum'], value['specialCost'] + value['guardReserve'])
+            reserve = value['guardReserve']
             can_special = (not a.get('attack') and a['stun'] <= 0 and a['y'] == 0
                            and b['y'] == 0 and b['vy'] == 0
                            and a['specialCooldown'] <= 0 and a['stamina'] >= value['specialCost'])
@@ -556,7 +601,8 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
             guard_range = value['targetMeleeReach'] + (value['playerSpeed'] + value['targetSpeed']) * read_seconds
             exposed = value['targetAhead'] and value['verticalOverlap'] and -8 <= value['gap'] <= guard_range
             want_guard = bool(not ready and exposed
-                              and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] >= reserve)
+                              and not a.get('attack') and a['stun'] <= 0 and a['y'] == 0 and a['stamina'] >= reserve
+                              and (target_can_press or value['targetThreat']))
             # Guard prevents native movement and regeneration. Use only the
             # remaining observed recovery for a brief real-key approach, then
             # restore guard before the next delayed read. Native RAF continues.
@@ -609,6 +655,58 @@ def acquire_player_capture(page, after, trace, transfer_delay_ms=0):
             page.keyboard.up(held)
         if guarding:
             page.keyboard.up('KeyS')
+
+def resume_capture_to_recovery_pause(page, role, set_phase, trace):
+    """Continue the already-observed hold with native keys and existing waits."""
+    if role not in ('cpu-captor', 'player-captor'):
+        raise ValueError('Unknown native capture role')
+    started = time.monotonic()
+    trace.update({'status': 'running', 'role': role, 'waitTimeoutMs': 15000,
+                  'method': 'Python keyboard commands and existing native observer receipts; no extra state read or runtime write.',
+                  'commands': [], 'observed': []})
+    guarding = False
+
+    def record(key, action):
+        trace['commands'].append({'key': key, 'action': action,
+                                  'elapsedSeconds': time.monotonic() - started})
+
+    try:
+        page.keyboard.press('KeyP')
+        record('KeyP', 'press')
+        page.locator('[data-xt="canvas"]').focus()
+        if role == 'cpu-captor':
+            page.keyboard.down('KeyS')
+            guarding = True
+            record('KeyS', 'down-for-native-escape')
+        set_phase('post-resume resistance of the same native hold')
+        wait_observation(page, 'post', 'struggle', 15000)
+        trace['observed'].append('struggle')
+        set_phase('first native release and recovery of the same hold')
+        wait_observation(page, 'post', 'release', 15000)
+        trace['observed'].append('release')
+        if role == 'cpu-captor':
+            page.keyboard.up('KeyS')
+            guarding = False
+            record('KeyS', 'up-after-native-escape')
+        else:
+            # Starting guard after the actual release avoids the engine's
+            # held-control rearm lock. The former captor still faces ordinary
+            # CPU attacks during the unchanged 54-tick continuation.
+            page.keyboard.down('KeyS')
+            guarding = True
+            record('KeyS', 'down-after-native-release')
+        set_phase('native recovery continuation with synchronous public button pause')
+        wait_observation(page, 'post', 'ready', 15000)
+        trace['observed'].append('ready')
+        trace['status'] = 'passed'
+    except Exception as e:
+        trace.update({'status': 'failed', 'error': str(e)})
+        raise
+    finally:
+        if guarding:
+            page.keyboard.up('KeyS')
+            record('KeyS', 'up-on-completion-or-failure')
+        trace['elapsedSeconds'] = time.monotonic() - started
 
 # Clone-only fixtures. No evaluated function can access a runtime setter.
 COMPARISON = r'''async native=>{
@@ -807,18 +905,9 @@ def main():
                     phase(name, 'arm same-hold resistance and release observations while paused')
                     armed = page.evaluate(CAPTURE_OBSERVER, dict(binding, stage='post', timeoutMs=15000))
                     assert not armed.get('error'), armed.get('error')
-                    page.keyboard.press('KeyP')
-                    page.locator('[data-xt="canvas"]').focus()
-                    if role == 'cpu-captor':
-                        page.keyboard.down('KeyS')
-                    phase(name, 'post-resume resistance of the same native hold')
-                    wait_observation(page, 'post', 'struggle', 15000)
-                    phase(name, 'first native release and recovery of the same hold')
-                    wait_observation(page, 'post', 'release', 15000)
-                    if role == 'cpu-captor':
-                        page.keyboard.up('KeyS')
-                    phase(name, 'native recovery continuation with synchronous public button pause')
-                    wait_observation(page, 'post', 'ready', 15000)
+                    continuation = {'profile': name}
+                    report.setdefault('postCaptureContinuations', []).append(continuation)
+                    resume_capture_to_recovery_pause(page, role, lambda step: phase(name, step), continuation)
                     recovery_pause = observed(page)
                     frames = page.evaluate(CAPTURE_EXPORT, {'stage': 'post', 'fields': ['struggle', 'release', 'recovered']})
                     struggle, release = frames['struggle'], frames['release']

@@ -4,6 +4,7 @@ import {XenoTrialsUiV96} from '../src/xeno-trials-ui-v96.js';
 import {getXenoTrialsBodyBoundsV105 as bodyBounds,getXenoTrialsBodyGapV105 as bodyGap} from '../src/xeno-trials-geometry-v105.js';
 import {getXenoTrialsAttackV147 as attackSpec} from '../src/xeno-trials-signatures-v147.js';
 import {XENO_TRIALS_ATTACKS_V96 as baseAttacks} from '../src/xeno-trials-engine-v96.js';
+import * as captureInputEngine from '../src/xeno-trials-engine-v96.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -235,13 +236,17 @@ function captureQaLiteral(name){
 }
 function captureQaObserver(h){
  const copies=[],encodings=[];
- const context=createContext({structuredClone,performance:{now:h.now},requestAnimationFrame:h.requestAnimationFrame,
+ const context=createContext({structuredClone,captureInputEngine,performance:{now:h.now},requestAnimationFrame:h.requestAnimationFrame,
   __ATF_XENO_TRIALS_V96__:{snapshot:()=>({match:h.runtime.getState()})},
   document:{querySelector:selector=>selector==='[data-xt="canvas"]'?h.canvas:selector==='[data-xt="pause"]'?h.element('pause'):null,
    createElement(tag){assert.equal(tag,'canvas');return{width:0,height:0,getContext(){return{drawImage(source){
      assert.equal(source,h.canvas);const m=h.runtime.getState();copies.push({tick:m.tick,paused:m.paused});}};},
     toDataURL(){const m=h.runtime.getState();encodings.push({tick:m.tick,paused:m.paused});return'data:image/png;base64,declared-bitmap-double';}};}}});
- const observe=runInContext('('+captureQaLiteral('CAPTURE_OBSERVER')+')',context);
+ // Resolve only the browser module URL into the actual production namespace.
+ // The native clone pause/release functions are neither replaced nor mocked.
+ const observerSource=captureQaLiteral('CAPTURE_OBSERVER')
+  .replace("await import('/src/xeno-trials-engine-v96.js')",'captureInputEngine');
+ const observe=runInContext('('+observerSource+')',context);
  context.__ATF_ARM_CAPTURE_FLOOR_V207__=observe;
  const startup=runInContext('('+captureQaLiteral('PLAYER_STARTUP_OBSERVER_V177')+')',context);
  const exportFrames=runInContext('('+captureQaLiteral('CAPTURE_EXPORT')+')',context);
@@ -285,7 +290,7 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   assert.deepEqual(image.state.match,recorded);assert.equal(qa.encodings[0].paused,true);
   assert.deepEqual(qa.copies[0],{tick:recorded.tick,paused:false});
   h.frame(240);assert.deepEqual(h.runtime.getState(),frozen,'Native state must remain exactly frozen throughout the pause.');
-  assert.ok(qa.observe({...binding,stage:'post',timeoutMs:15000}).armed);
+  assert.ok((await qa.observe({...binding,stage:'post',timeoutMs:15000})).armed);
   h.key('KeyP');h.key('KeyP','keyup');
   for(let i=0;i<120&&!qa.out('post').done;i++)h.frame();
   const post=qa.out('post');assert.equal(post.error,null);assert.ok(post.struggle&&post.release);
@@ -302,9 +307,13 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   const recoveryFrozen=h.runtime.getState();assert.equal(recoveryFrozen.paused,true);
   assert.equal(recoveryFrozen.tick,post.recovered.state.match.tick);assert.equal(recoveryFrozen.result,null);
   assert.equal(h.element('pause').clicks,2);assert.equal(post.pauseAction.observedNativeTicks,54);
+  assert.deepEqual(clone(post.pauseModel.afterPause.fighters),recoveryFrozen.fighters);
+  assert.deepEqual(clone(post.pauseModel.afterPause.events),post.recovered.state.match.events);
+  assert.deepEqual(clone(post.pauseAction.inputTransition.afterPauseExpected),clone(post.pauseAction.inputTransition.afterPauseObserved));
   h.frame(240);assert.deepEqual(h.runtime.getState(),recoveryFrozen,'Slow evidence transfer cannot add combat after the bounded recovery.');
   const exported=qa.exportFrames({stage:'post',fields:['struggle','release','recovered']});
   assert.ok(exported.release);assert.ok(exported.recovered);
+  assert.deepEqual(clone(post.pauseAction.inputTransition.afterKeyupExpected),clone(post.pauseAction.inputTransition.afterKeyupObserved));
   assert.ok(qa.encodings.every(frame=>frame.paused),'All native PNG encoding must occur while publicly paused.');
   // Declared corrupted read fixtures test export rejection; the real engine
   // and the genuine recovery receipt remain untouched.
@@ -312,7 +321,11 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
   try{
     for(const patch of [{paused:false},{tick:recoveryFrozen.tick+1},{round:recoveryFrozen.round+1},
       {config:{...recoveryFrozen.config,matchId:'other'}},{result:{winner:'opponent'}},
-      {fighters:recoveryFrozen.fighters.map((f,i)=>i?f:{...f,hp:f.hp-1})}]){
+      {fighters:recoveryFrozen.fighters.map((f,i)=>i?f:{...f,hp:f.hp-1})},
+      {fighters:recoveryFrozen.fighters.map((f,i)=>i?f:{...f,stamina:f.stamina-1})},
+      {fighters:recoveryFrozen.fighters.map((f,i)=>i?f:{...f,previousInput:{...f.previousInput,guard:!f.previousInput.guard}})},
+      {fighters:recoveryFrozen.fighters.map((f,i)=>i?f:{...f,rearmControls:{...f.rearmControls,guard:!f.rearmControls.guard}})},
+      {events:[...recoveryFrozen.events,{type:'unobserved-event',tick:recoveryFrozen.tick}]}]){
       h.runtime={getState:()=>({...clone(recoveryFrozen),...patch})};
       assert.throws(()=>qa.exportFrames({stage:'post',fields:['release']}),/exact public recovery pause/);
     }
@@ -322,7 +335,7 @@ test('capture QA pauses the real public button before a six-tick transfer delay,
     const fixture={runtime:{getState:()=>clone(current)},canvas:h.canvas,
       element(){assert.fail('A completed result must never reach the recovery pause control.');},
       now:()=>0,requestAnimationFrame:fn=>queue.push(fn)};
-    const rejected=captureQaObserver(fixture);rejected.observe({...binding,stage:'post',timeoutMs:15000});
+    const rejected=captureQaObserver(fixture);await rejected.observe({...binding,stage:'post',timeoutMs:15000});
     // This adversarial result-read fixture checks rejection, not another duel.
     current={...clone(released),paused,phase:'match-over',result:{winner:'opponent',reason:'ko'}};
     queue.shift()();
