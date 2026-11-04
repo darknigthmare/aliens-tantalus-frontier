@@ -170,7 +170,7 @@ test('pose read arms only evidence atomically without a second transport or a co
  assert.equal(g.arms.length,0);
 });
 
-test('actual Python keys preserve their special reserve, anticipate threats and release for a fatigued recovering target with one pose RPC',()=>{
+test('actual Python keys use affordable native guard and release for a fatigued recovering target with one pose RPC',()=>{
  // Declared pose replay tests the real Python policy and RPC order. It does not
  // claim a second native combat, browser rendering or latency qualification.
  const result=JSON.parse(execFileSync('python3',['-B','-c',String.raw`
@@ -462,7 +462,7 @@ assert.ok(keyEvents.some(e=>e.key==='ArrowRight'&&e.type==='keydown'&&e.round===
 // native CPU combat. Only DOM, image pixels, transport and RAF are declared
 // doubles. A transport delay advances real runtime frames; it never pauses,
 // edits a fighter, replaces the CPU or manufactures an accepted attack.
-async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,opponentId='import-game-dd-wy-commando',transportOverheadMs=0,lateCaptureDeliveryMs=0}={}){
+async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,opponentId='import-game-dd-wy-commando',transportOverheadMs=0,contactReadOverheadsMs=null,lateCaptureDeliveryMs=0,keyboardTransportMs=0,continueRecovery=false}={}){
  const {spawn}=await import('node:child_process');
  const {createInterface}=await import('node:readline');
  const {createContext,runInContext}=await import('node:vm');
@@ -513,6 +513,7 @@ async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,oppone
   ' global now',
   ' print(json.dumps({"method":method,**data}),flush=True)',
   ' response=json.loads(sys.stdin.readline());now=response["now"]',
+  ' if response.get("error"):raise RuntimeError(response["error"])',
   ' return response.get("value")',
   'class Clock:',
   ' def monotonic(self):return now/1000',
@@ -521,49 +522,76 @@ async function delayedNativeAcquisitionV182({phaseTicks=0,readDelayMs=200,oppone
   ' def down(self,key):return rpc("key",key=key,type="keydown")',
   ' def up(self,key):return rpc("key",key=key,type="keyup")',
   ' def press(self,key,delay=0):self.down(key);rpc("advance",ms=delay);self.up(key)',
+  'class Locator:',
+  ' def focus(self):return rpc("focus")',
   'class Page:',
   ' keyboard=Keyboard()',
   ' def evaluate(self,expression,arg=None):return rpc("evaluate",expression=expression,arg=arg)',
   ' def wait_for_timeout(self,ms):return rpc("advance",ms=ms)',
+  ' def locator(self,selector):',
+  '  assert selector==\'[data-xt="canvas"]\';return Locator()',
+  ' def wait_for_function(self,expression,*,arg=None,polling=None,timeout=30000):',
+  '  assert polling=="raf";return rpc("wait_function",expression=expression,arg=arg,timeout=timeout)',
   'page=Page();scope["time"]=Clock()',
-  'helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ["get_frame","acquire_player_capture","delay_client_reads"]]',
-  'assert len(helpers)==3',
+  'names=["get_frame","acquire_player_capture","delay_client_reads"]',
+  'if sys.argv[3]=="yes":names += ["wait_observation","resume_capture_to_recovery_pause"]',
+  'helpers=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names]',
+  'assert len(helpers)==len(names)',
   'exec(compile(ast.Module(body=helpers,type_ignores=[]),"<actual-python-delayed-acquisition>","exec"),scope)',
-  'rpc("ready");trace={};error=None',
+  'rpc("ready");trace={};continuation={};phases=[];exports=None;error=None',
   'receipt=scope["delay_client_reads"](page,int(sys.argv[2]))',
-  'try:scope["acquire_player_capture"](page,True,trace)',
+  'try:',
+  ' prep=scope["acquire_player_capture"](page,True,trace)',
+  ' if sys.argv[3]=="yes":',
+  '  pm=prep["state"]["match"]',
+  '  binding={"matchId":pm["config"]["matchId"],"round":pm["round"],"fighterIds":[f["id"] for f in pm["fighters"]],"sides":[f["side"] for f in pm["fighters"]],"attackerSide":"player","targetSide":"opponent","targetId":pm["fighters"][1]["id"],"holdId":trace["grapple"]["id"],"sinceTick":pm["tick"],"after":True,"stage":"post","timeoutMs":15000}',
+  '  armed=page.evaluate(scope["CAPTURE_OBSERVER"],binding);assert not armed.get("error"),armed.get("error")',
+  '  scope["resume_capture_to_recovery_pause"](page,"player-captor",phases.append,continuation)',
+  '  exports=page.evaluate(scope["CAPTURE_EXPORT"],{"stage":"post","fields":["struggle","release","recovered"]})',
   'except Exception as exc:error=type(exc).__name__+": "+str(exc)',
-  'print(json.dumps({"method":"complete","trace":trace,"error":error,"delay":receipt}),flush=True)'
+  'print(json.dumps({"method":"complete","trace":trace,"error":error,"delay":receipt,"continuation":continuation,"phases":phases,"exports":exports}),flush=True)'
  ].join('\n');
- const child=spawn('python3',['-B','-c',worker,driver,String(readDelayMs)],{stdio:['pipe','pipe','pipe']});
- let stderr='',outcome,delayedCapture=null;const keyEvents=[];
+ const child=spawn('python3',['-B','-c',worker,driver,String(readDelayMs),continueRecovery?'yes':'no'],{stdio:['pipe','pipe','pipe']});
+ let stderr='',outcome,delayedCapture=null,contactReadIndex=0;const keyEvents=[];
  child.stderr.on('data',c=>stderr+=c);
  const done=new Promise(resolve=>child.on('exit',(code,signal)=>resolve({code,signal})));
  const timer=setTimeout(()=>child.kill('SIGKILL'),30000);
  try{
   for await(const line of createInterface({input:child.stdout})){
-   const request=JSON.parse(line);let value=null;
+   const request=JSON.parse(line);let value=null,error=null;
    if(request.method==='complete'){outcome=request;continue;}
-   if(request.method==='evaluate'){
-    advance(transportOverheadMs/2);
+   try{if(request.method==='evaluate'){
+    const overhead=contactReadOverheadsMs&&request.expression.includes('targetPressureReserve')
+     ?contactReadOverheadsMs[Math.min(contactReadIndex++,contactReadOverheadsMs.length-1)]:transportOverheadMs;
+    advance(overhead/2);
     const expression=request.expression.replace(/await import\('\/src\/([^']+)'\)/g,(_all,name)=>'modules['+JSON.stringify(name)+']');
     value=await runInContext('('+expression+')',context)(request.arg);
-    advance(transportOverheadMs/2);
+    advance(overhead/2);
     if(lateCaptureDeliveryMs&&!delayedCapture&&value?.match?.grappleV153){
      delayedCapture={tick:value.match.tick,holdId:value.match.grappleV153.id,wallTime};
      advance(lateCaptureDeliveryMs);
     }
    }else if(request.method==='key'){
+    advance(keyboardTransportMs/2);
     const m=h.runtime.getState();
     keyEvents.push({key:request.key,type:request.type,tick:m.tick,round:m.round,phase:m.phase,wallTime});
     h.key(request.key,request.type);
+    advance(keyboardTransportMs/2);
    }else if(request.method==='advance')advance(request.ms);
-   child.stdin.write(JSON.stringify({now:wallTime,value})+'\n');
+   else if(request.method==='focus')h.canvas.focus();
+   else if(request.method==='wait_function'){
+    const predicate=runInContext('('+request.expression+')',context),deadline=wallTime+request.timeout;
+    value=predicate(request.arg);
+    while(!value&&wallTime<deadline){advance(Math.min(1000/60,deadline-wallTime));value=predicate(request.arg);}
+    if(!value)throw Error('Declared native RAF wait exceeded '+request.timeout+'ms');
+   }}catch(e){error=String(e.message||e);}
+   child.stdin.write(JSON.stringify({now:wallTime,value,error})+'\n');
   }
   const exit=await done;assert.equal(exit.code,0,stderr);assert.ok(outcome);
-  return{...outcome,initial,final:h.runtime.getState(),keyEvents,phaseTicks,transportOverheadMs,delayedCapture,
+  return{...outcome,initial,final:h.runtime.getState(),keyEvents,phaseTicks,transportOverheadMs,keyboardTransportMs,contactReadIndex,delayedCapture,
    floor:context.__ATF_CAPTURE_OBSERVER_V163__?.floor,
-   method:'Actual Python acquisition/delay wrapper and native CPU/UI/runtime; declared 60Hz RAF/DOM/transport doubles, no Chromium or pixel claim.'};
+   post:context.__ATF_CAPTURE_OBSERVER_V163__?.post,
+   method:'Actual Python acquisition/delay/recovery helpers and native CPU/UI/runtime; declared 60Hz RAF/DOM/transport doubles, no Chromium or pixel claim.'};
  }finally{
   clearTimeout(timer);if(child.exitCode===null)child.kill('SIGKILL');h.runtime.stop();
  }
@@ -577,6 +605,8 @@ test('native player acquisition survives 200ms client reads across nearby RAF ph
   {phaseTicks:2,transportOverheadMs:16},
   {phaseTicks:0,transportOverheadMs:4},
   {phaseTicks:0,transportOverheadMs:0},
+  {phaseTicks:0,transportOverheadMs:10,keyboardTransportMs:8},
+  {phaseTicks:0,transportOverheadMs:16,keyboardTransportMs:8},
   {opponentId:'import-game-dd-guardian',readDelayMs:0,phaseTicks:3,transportOverheadMs:4},
   {opponentId:'import-game-dd-guardian',readDelayMs:200,phaseTicks:3,transportOverheadMs:4},
   {opponentId:'dd-darwin-era-cultist',readDelayMs:0,phaseTicks:3,transportOverheadMs:4},
@@ -595,6 +625,65 @@ test('native player acquisition survives 200ms client reads across nearby RAF ph
   assert.equal(out.delay.totalRequestedSleepMs,(options.readDelayMs??200)*out.delay.evaluateCalls);
   assert.ok(out.delay.measuredSleepSeconds>=out.delay.totalRequestedSleepMs/1000-1e-6);
  }
+});
+
+test('actual Python recovery guards after native release and preserves the exact public pause',{timeout:60000},async t=>{
+ const plain=value=>JSON.parse(JSON.stringify(value));
+ for(const transportOverheadMs of [16,10]){
+  const out=await delayedNativeAcquisitionV182({phaseTicks:0,transportOverheadMs,keyboardTransportMs:8,continueRecovery:true});
+  assert.equal(out.error,null);assert.equal(out.trace.status,'captured');
+  assert.equal(out.continuation.status,'passed');assert.equal(out.continuation.waitTimeoutMs,15000);
+  assert.deepEqual(out.continuation.observed,['struggle','release','ready']);
+  const release=out.post.release.state.match,recovered=out.post.recovered.state.match;
+  assert.equal(out.post.expected.timeoutMs,15000);assert.equal(out.post.error,null);
+  assert.ok(recovered.tick-release.tick>=54);assert.equal(out.final.tick,recovered.tick);
+  assert.equal(out.final.paused,true);assert.equal(out.final.phase,'active');assert.equal(out.final.result,null);
+  assert.equal(out.final.opponentInputSourceV163,'cpu');assert.equal(Object.hasOwn(out.final,'grappleV153'),false);
+  assert.equal(out.final.round,release.round);assert.equal(out.final.config.matchId,release.config.matchId);
+  const ends=release.events.filter(e=>e.type==='grapple-end-v153'&&e.grappleId===out.trace.grapple.id);
+  assert.equal(ends.length,1);assert.equal(ends[0].reason,'escaped');
+  const guard=out.keyEvents.filter(e=>e.key==='KeyS'&&e.tick>=release.tick);
+  assert.deepEqual(guard.map(e=>e.type),['keydown','keyup']);
+  assert.ok(guard[0].tick>=release.tick&&guard[0].tick<recovered.tick);
+  assert.equal(guard[1].tick,recovered.tick,'Cleanup must not advance combat after the public pause.');
+  const transition=out.post.pauseAction.inputTransition;
+  assert.deepEqual(plain(transition.afterPauseObserved),plain(transition.afterPauseExpected));
+  assert.deepEqual(plain(transition.afterKeyupObserved),plain(transition.afterKeyupExpected));
+  assert.deepEqual(out.final.fighters,plain(out.post.pauseModel.afterKeyup.fighters));
+  assert.deepEqual(out.final.events,plain(out.post.pauseModel.afterKeyup.events));
+  assert.equal(out.exports.recovered.state.match.tick,recovered.tick);
+  assert.equal(out.exports.release.state.match.tick,release.tick);
+  t.diagnostic(JSON.stringify({transportOverheadMs,keyboardTransportMs:8,captureHp:out.floor.floor.state.match.fighters[0].hp,
+   releaseTick:release.tick,recoveredTick:recovered.tick,finalHp:out.final.fighters[0].hp,
+   guardedAfterRelease:true,paused:out.final.paused,cloneInputTransitionsMatched:true}));
+ }
+});
+
+test('a genuine native defeat under declared variable transport remains an explicit failure',{timeout:30000},async t=>{
+ // The 71 measured acquisition read durations come from the failed read200
+ // report in Actions run 41841202682, less its declared 200ms wrapper. This
+ // fixture rounds the extra time to 0.1us and models it symmetrically while
+ // RAF keeps running; its final value repeats after the observed sequence.
+ // It is deliberately NOT a reconstruction of Chromium's main-thread work.
+ // A loss under this pessimistic transport model cannot qualify a capture.
+ const contactReadOverheadsMs=[
+  15.5491,13.3278,9.1409,12.6687,10.9065,10.636,12.0641,10.328,11.9532,12.1371,
+  8.2099,9.2215,8.681,177.0896,14.7122,18.7464,15.2013,17.6904,13.3611,13.3382,
+  15.5743,10.2146,12.8388,10.3566,10.6479,11.3192,9.0665,8.2519,53.3023,15.4896,
+  17.6507,16.2212,15.3705,15.5031,14.7642,16.5721,46.7557,8.8244,25.5937,19.1361,
+  17.3589,13.3592,16.5155,21.1582,17.6781,15.8712,12.2767,9.1821,9.6872,14.9667,
+  10.4236,8.0829,13.7906,10.3756,159.9799,14.3126,17.8718,17.9711,14.3683,17.7946,
+  18.7401,14.4753,11.6777,10.7297,8.9902,9.1809,9.5073,9.9846,12.5868,13.1706,118.8324
+ ];
+ const out=await delayedNativeAcquisitionV182({phaseTicks:0,transportOverheadMs:12,contactReadOverheadsMs,keyboardTransportMs:8});
+ assert.equal(out.trace.status,'failed');assert.match(out.error,/Native match ended before keyboard capture/);
+ assert.equal(out.trace.successfulSpecial,undefined);assert.notEqual(out.floor?.ready,true);
+ assert.equal(out.trace.timeLimitSeconds,55);assert.equal(out.trace.attemptLimit,32);
+ assert.ok(out.trace.elapsedSeconds<55);assert.equal(out.final.opponentInputSourceV163,'cpu');
+ assert.equal(out.final.phase,'match-over');assert.equal(out.final.fighters[0].hp,0);
+ assert.equal(out.final.result.winner,'opponent');assert.equal(out.trace.terminalBeforeCapture.reason,'ko');
+ t.diagnostic(JSON.stringify({status:out.trace.status,elapsedSeconds:out.trace.elapsedSeconds,
+  contactReads:out.contactReadIndex,terminal:out.trace.terminalBeforeCapture,model:'declared symmetric transport, not a Chromium replay'}));
 });
 
 test('a native capture delivered after the unchanged acquisition deadline remains an explicit failure',{timeout:30000},async t=>{
